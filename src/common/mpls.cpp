@@ -20,7 +20,7 @@
 #include "common/mpls.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace mpls {
+namespace mtx { namespace bluray { namespace mpls {
 
 static timestamp_c
 mpls_time_to_timecode(uint64_t value) {
@@ -200,7 +200,7 @@ parser_c::parse(mm_io_c *file) {
     int64_t file_size = file->get_size();
 
     if ((4 * 5 > file_size) || (10 * 1024 * 1024 < file_size))
-      throw mtx::mpls::exception(boost::format("File too small or too big: %1%") % file_size);
+      throw mtx::bluray::mpls::exception(boost::format("File too small or too big: %1%") % file_size);
 
     auto content = file->read(4 * 5);
     m_bc         = std::make_shared<bit_reader_c>(content->get_buffer(), 4 * 5);
@@ -218,7 +218,7 @@ parser_c::parse(mm_io_c *file) {
 
     m_ok = true;
 
-  } catch (mtx::mpls::exception &ex) {
+  } catch (mtx::bluray::mpls::exception &ex) {
     mxdebug_if(m_debug, boost::format("MPLS exception: %1%\n") % ex.what());
   } catch (mtx::mm_io::exception &ex) {
     mxdebug_if(m_debug, boost::format("I/O exception: %1%\n") % ex.what());
@@ -240,9 +240,9 @@ parser_c::parse_header() {
   m_header.chapter_pos     = m_bc->get_bits(32);
   m_header.ext_pos         = m_bc->get_bits(32);
 
-  if (   (m_header.type_indicator1 != MPLS_FILE_MAGIC)
-      || (   (m_header.type_indicator2 != MPLS_FILE_MAGIC2A)
-          && (m_header.type_indicator2 != MPLS_FILE_MAGIC2B)))
+  if (   (m_header.type_indicator1 != fourcc_c{"MPLS"})
+      || (   (m_header.type_indicator2 != fourcc_c{"0100"})
+          && (m_header.type_indicator2 != fourcc_c{"0200"})))
     throw exception{boost::format("Wrong type indicator 1 (%1%) or 2 (%2%)") % m_header.type_indicator1 % m_header.type_indicator2};
 }
 
@@ -500,4 +500,4 @@ parser_c::dump()
   m_playlist.dump();
 }
 
-}}
+}}}

@@ -57,7 +57,7 @@ parse_args(std::vector<std::string> &args) {
 static void
 parse_file(const std::string &file_name) {
   auto in     = mm_file_io_c{file_name};
-  auto parser = mtx::mpls::parser_c{};
+  auto parser = mtx::bluray::mpls::parser_c{};
 
   if (!parser.parse(&in))
     mxerror("MPLS file could not be parsed.\n");

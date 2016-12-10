@@ -22,11 +22,7 @@
 #include "common/fourcc.h"
 #include "common/timestamp.h"
 
-#define MPLS_FILE_MAGIC   fourcc_c("MPLS")
-#define MPLS_FILE_MAGIC2A fourcc_c("0100")
-#define MPLS_FILE_MAGIC2B fourcc_c("0200")
-
-namespace mtx { namespace mpls {
+namespace mtx { namespace bluray { namespace mpls {
 
 // Blu-ray specs 5.3.4.5.2.1 table 5-8
 enum class stream_type_e {
@@ -192,5 +188,6 @@ protected:
 };
 using parser_cptr = std::shared_ptr<parser_c>;
 
-}}
+}}}
+
 #endif // MTX_COMMON_MPLS_COMMON_H

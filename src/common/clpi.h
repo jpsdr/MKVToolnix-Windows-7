@@ -24,7 +24,7 @@
 #define CLPI_FILE_MAGIC2A FOURCC('0', '2', '0', '0')
 #define CLPI_FILE_MAGIC2B FOURCC('0', '1', '0', '0')
 
-namespace clpi {
+namespace mtx { namespace bluray { namespace clpi {
   struct program_stream_t {
     uint16_t pid;
     unsigned char coding_type;
@@ -83,5 +83,6 @@ namespace clpi {
   };
   using parser_cptr = std::shared_ptr<parser_c>;
 
-};
+}}}                             // namespace mtx::bluray::clpi
+
 #endif // MTX_COMMON_CLPI_COMMON_H

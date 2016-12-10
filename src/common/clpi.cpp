@@ -15,7 +15,9 @@
 
 #include "common/clpi.h"
 
-clpi::program_t::program_t()
+namespace mtx { namespace bluray { namespace clpi {
+
+program_t::program_t()
   : spn_program_sequence_start(0)
   , program_map_pid(0)
   , num_streams(0)
@@ -24,7 +26,7 @@ clpi::program_t::program_t()
 }
 
 void
-clpi::program_t::dump() {
+program_t::dump() {
   mxinfo(boost::format("Program dump:\n"
                        "  spn_program_sequence_start: %1%\n"
                        "  program_map_pid:            %2%\n"
@@ -36,7 +38,7 @@ clpi::program_t::dump() {
     program_stream->dump();
 }
 
-clpi::program_stream_t::program_stream_t()
+program_stream_t::program_stream_t()
   : pid(0)
   , coding_type(0)
   , format(0)
@@ -48,7 +50,7 @@ clpi::program_stream_t::program_stream_t()
 }
 
 void
-clpi::program_stream_t::dump() {
+program_stream_t::dump() {
   mxinfo(boost::format("Program stream dump:\n"
                        "  pid:         %1%\n"
                        "  coding_type: %2%\n"
@@ -68,18 +70,18 @@ clpi::program_stream_t::dump() {
          % language);
 }
 
-clpi::parser_c::parser_c(const std::string &file_name)
+parser_c::parser_c(const std::string &file_name)
   : m_file_name(file_name)
   , m_ok(false)
   , m_debug{"clpi|clpi_parser"}
 {
 }
 
-clpi::parser_c::~parser_c() {
+parser_c::~parser_c() {
 }
 
 void
-clpi::parser_c::dump() {
+parser_c::dump() {
   mxinfo(boost::format("Parser dump:\n"
                        "  sequence_info_start: %1%\n"
                        "  program_info_start:  %2%\n")
@@ -90,7 +92,7 @@ clpi::parser_c::dump() {
 }
 
 bool
-clpi::parser_c::parse() {
+parser_c::parse() {
   try {
     mm_file_io_c m_file(m_file_name, MODE_READ);
 
@@ -119,7 +121,7 @@ clpi::parser_c::parse() {
 }
 
 void
-clpi::parser_c::parse_header(bit_reader_cptr &bc) {
+parser_c::parse_header(bit_reader_cptr &bc) {
   bc->set_bit_position(0);
 
   uint32_t magic = bc->get_bits(32);
@@ -137,7 +139,7 @@ clpi::parser_c::parse_header(bit_reader_cptr &bc) {
 }
 
 void
-clpi::parser_c::parse_program_info(bit_reader_cptr &bc) {
+parser_c::parse_program_info(bit_reader_cptr &bc) {
   bc->set_bit_position(m_program_info_start * 8);
 
   bc->skip_bits(40);            // 32 bits length, 8 bits reserved
@@ -160,8 +162,8 @@ clpi::parser_c::parse_program_info(bit_reader_cptr &bc) {
 }
 
 void
-clpi::parser_c::parse_program_stream(bit_reader_cptr &bc,
-                                     clpi::program_cptr &program) {
+parser_c::parse_program_stream(bit_reader_cptr &bc,
+                               program_cptr &program) {
   program_stream_cptr stream(new program_stream_t);
   program->program_streams.push_back(stream);
 
@@ -221,8 +223,7 @@ clpi::parser_c::parse_program_stream(bit_reader_cptr &bc,
       break;
 
     default:
-      if (m_debug)
-        mxinfo(boost::format("clpi::parser_c::parse_program_stream: Unknown coding type %1%\n") % static_cast<unsigned int>(stream->coding_type));
+      mxdebug_if(m_debug, boost::format("mtx::bluray::clpi::parser_c::parse_program_stream: Unknown coding type %1%\n") % static_cast<unsigned int>(stream->coding_type));
       break;
   }
 
@@ -230,3 +231,5 @@ clpi::parser_c::parse_program_stream(bit_reader_cptr &bc,
 
   bc->set_bit_position(position_in_bits + length_in_bytes * 8);
 }
+
+}}}

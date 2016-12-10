@@ -24,14 +24,14 @@ class mm_mpls_multi_file_io_c: public mm_file_io_c {
 protected:
   std::vector<bfs::path> m_files;
   std::string m_display_file_name;
-  mtx::mpls::parser_cptr m_mpls_parser;
+  mtx::bluray::mpls::parser_cptr m_mpls_parser;
   uint64_t m_total_size;
 
 protected:
   static debugging_option_c ms_debug;
 
 public:
-  mm_mpls_multi_file_io_c(std::vector<bfs::path> const &file_names, std::string const &display_file_name, mtx::mpls::parser_cptr const &mpls_parser);
+  mm_mpls_multi_file_io_c(std::vector<bfs::path> const &file_names, std::string const &display_file_name, mtx::bluray::mpls::parser_cptr const &mpls_parser);
   virtual ~mm_mpls_multi_file_io_c();
 
   virtual std::string get_file_name() const {
@@ -42,7 +42,7 @@ public:
     return m_files;
   }
 
-  mtx::mpls::parser_c const &get_mpls_parser() const {
+  mtx::bluray::mpls::parser_c const &get_mpls_parser() const {
     return *m_mpls_parser;
   }
 

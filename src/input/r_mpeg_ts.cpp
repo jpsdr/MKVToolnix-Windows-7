@@ -1927,7 +1927,7 @@ reader_c::parse_clip_info_file() {
   if (clpi_file.empty())
     return;
 
-  clpi::parser_c parser(clpi_file.string());
+  mtx::bluray::clpi::parser_c parser(clpi_file.string());
   if (!parser.parse())
     return;
 
