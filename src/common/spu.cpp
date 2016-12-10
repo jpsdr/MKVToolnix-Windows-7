@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   helper functions for SPU data (SubPicture Unist — subtitles on DVDs)
+   helper functions for SPU data (SubPicture Units — subtitles on DVDs)
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
