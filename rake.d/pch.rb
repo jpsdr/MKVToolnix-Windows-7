@@ -383,6 +383,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
     input = indirect ? indirect : user
     File.open(input) do |f|
       f.each_line do |line|
+        line.force_encoding("UTF-8")
         next if !@scan_include_re.match(line)
         @scan_candidates.each do |pair|
           (dir,header) = *pair
