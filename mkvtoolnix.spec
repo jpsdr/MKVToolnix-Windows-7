@@ -14,7 +14,13 @@ BuildRequires: fdupes, file-devel, flac, flac-devel, libcurl-devel, libogg-devel
 %if 0%{?centos} && 0%{?centos} < 7
 BuildRequires: devtoolset-1.1-gcc-c++ >= 4.6.3
 %else
-BuildRequires: boost-devel >= 1.46.0, gcc-c++ >= 4.6.3, ruby >= 1.9
+BuildRequires: boost-devel >= 1.46.0, ruby >= 1.9
+%endif
+
+%if 0%{?suse_version}
+BuildRequires: gcc5-c++
+%else
+BuildRequires: gcc-c++ >= 4.6.3
 %endif
 
 %if 0%{?suse_version}
@@ -54,6 +60,11 @@ export CXXFLAGS="%{optflags}"
 export CC=/opt/centos/devtoolset-1.1/root/usr/bin/gcc
 export CXX=/opt/centos/devtoolset-1.1/root/usr/bin/g++
 export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
+%endif
+
+%if 0%{?suse_version}
+export CC=/usr/bin/gcc-5
+export CXX=/usr/bin/g++-5
 %endif
 
 %configure --enable-debug --enable-optimization $EXTRA_CONFIGURE_ARGS
