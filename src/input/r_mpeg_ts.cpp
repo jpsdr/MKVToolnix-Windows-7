@@ -1860,7 +1860,12 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
     return flush_packetizers();
 
   auto &requested_ptzr_track = m_ptzr_to_track_map[requested_ptzr];
-  auto num_queued_bytes      = get_queued_bytes();
+  if (!requested_ptzr_track)
+    return flush_packetizers();
+
+  m_current_file        = requested_ptzr_track->m_file_num;
+  auto &f               = file();
+  auto num_queued_bytes = get_queued_bytes();
 
   if (!force && (20 * 1024 * 1024 < num_queued_bytes)) {
     if (   !requested_ptzr_track
