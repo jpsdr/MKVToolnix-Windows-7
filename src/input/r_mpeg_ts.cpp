@@ -151,8 +151,8 @@ track_c::send_to_packetizer() {
   }
 
   clear_pes_payload();
-  processed                     = false;
-  m_previous_timestamp          = m_timestamp;
+  processed            = false;
+  m_previous_timestamp = m_timestamp;
   m_timestamp.reset();
 }
 
