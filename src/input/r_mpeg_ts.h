@@ -361,6 +361,8 @@ public:
 struct file_t {
   mm_io_cptr m_in;
 
+  std::vector<generic_packetizer_c *> m_packetizers;
+
   bool m_pat_found, m_pmt_found;
   int m_es_to_process;
   timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp;
@@ -374,6 +376,7 @@ struct file_t {
   bool m_validate_pat_crc, m_validate_pmt_crc;
 
   file_t(mm_io_cptr const &in);
+  int64_t get_queued_bytes() const;
 };
 using file_cptr = std::shared_ptr<file_t>;
 

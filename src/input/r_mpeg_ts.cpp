@@ -755,6 +755,17 @@ file_t::file_t(mm_io_cptr const &in)
 {
 }
 
+int64_t
+file_t::get_queued_bytes()
+  const {
+  int64_t bytes{};
+
+  for (auto ptzr : m_packetizers)
+    bytes += ptzr->get_queued_bytes();
+
+  return bytes;
+}
+
 // ------------------------------------------------------------
 
 bool
@@ -1708,8 +1719,12 @@ reader_c::create_packetizer(int64_t id) {
     create_srt_subtitles_packetizer(track);
 
   if (-1 != track->ptzr) {
-    m_ptzr_to_track_map[PTZR(track->ptzr)] = track;
-    show_packetizer_info(id, PTZR(track->ptzr));
+    auto ptzr                 = PTZR(track->ptzr);
+    m_ptzr_to_track_map[ptzr] = track;
+
+    m_files[track->m_file_num]->m_packetizers.push_back(ptzr);
+
+    show_packetizer_info(id, ptzr);
   }
 }
 
@@ -1865,7 +1880,7 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
 
   m_current_file        = requested_ptzr_track->m_file_num;
   auto &f               = file();
-  auto num_queued_bytes = get_queued_bytes();
+  auto num_queued_bytes = f.get_queued_bytes();
 
   if (!force && (20 * 1024 * 1024 < num_queued_bytes)) {
     if (   !requested_ptzr_track
