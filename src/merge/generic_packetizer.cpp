@@ -1190,8 +1190,6 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
 
   pack->source = this;
 
-  m_enqueued_bytes += pack->data->get_size();
-
   if ((0 > pack->bref) && (0 <= pack->fref))
     std::swap(pack->bref, pack->fref);
 
@@ -1273,14 +1271,18 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
 
   after_packet_timestamped(*pack);
 
-  if (!m_compressor)
+  if (!m_compressor) {
+    m_enqueued_bytes += pack->data->get_size();
     return;
+  }
 
   try {
     pack->data = m_compressor->compress(pack->data);
     size_t i;
     for (i = 0; pack->data_adds.size() > i; ++i)
       pack->data_adds[i] = m_compressor->compress(pack->data_adds[i]);
+
+    m_enqueued_bytes += pack->data->get_size();
 
   } catch (mtx::compression_x &e) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Compression failed: %1%\n")) % e.error());
@@ -1522,6 +1524,7 @@ generic_packetizer_c::is_compatible_with(output_compatibility_e compatibility) {
 void
 generic_packetizer_c::discard_queued_packets() {
   m_packet_queue.clear();
+  m_enqueued_bytes = 0;
 }
 
 bool
