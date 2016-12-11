@@ -460,7 +460,6 @@ private:
   uint32_t calculate_crc(void const *buffer, size_t size) const;
 
   file_t &file();
-  mm_io_c &in();
 
   friend class track_c;
 };
