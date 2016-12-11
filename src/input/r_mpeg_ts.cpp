@@ -146,11 +146,12 @@ track_c::send_to_packetizer() {
   if (use_packet) {
     auto bytes_to_skip = std::min<size_t>(pes_payload_read->get_size(), skip_packet_data_bytes);
     process(std::make_shared<packet_t>(memory_c::clone(pes_payload_read->get_buffer() + bytes_to_skip, pes_payload_read->get_size() - bytes_to_skip), timestamp_to_use.to_ns(-1)));
+
+    f.m_packet_sent_to_packetizer = true;
   }
 
   clear_pes_payload();
   processed                     = false;
-  f.m_packet_sent_to_packetizer = true;
   m_previous_timestamp          = m_timestamp;
   m_timestamp.reset();
 }
@@ -1868,12 +1869,11 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
       return FILE_STATUS_HOLDING;
   }
 
-  m_current_file = requested_ptzr_track->m_file_num;
-  auto &f        = file();
+  f.m_packet_sent_to_packetizer = false;
 
   unsigned char buf[TS_MAX_PACKET_SIZE + 1];
 
-  while (true) {
+  while (!f.m_packet_sent_to_packetizer) {
     if (f.m_in->read(buf, f.m_detected_packet_size) != static_cast<unsigned int>(f.m_detected_packet_size))
       return finish();
 
@@ -1884,10 +1884,9 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
     }
 
     parse_packet(buf);
-
-    if (f.m_packet_sent_to_packetizer)
-      return FILE_STATUS_MOREDATA;
   }
+
+  return FILE_STATUS_MOREDATA;
 }
 
 bfs::path
