@@ -2017,7 +2017,8 @@ reader_c::find_track_for_pid(uint16_t pid)
   auto &f = *m_files[m_current_file];
 
   for (auto const &track : m_tracks)
-    if (   (track->pid == pid)
+    if (   (track->m_file_num == m_current_file)
+        && (track->pid        == pid)
         && (   mtx::included_in(f.m_state, processing_state_e::probing, processing_state_e::determining_timestamp_offset)
             || track->has_packetizer()))
       return track;
