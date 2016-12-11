@@ -450,8 +450,8 @@ private:
 
   void determine_global_timestamp_offset();
 
-  bfs::path find_clip_info_file();
-  void parse_clip_info_file();
+  bfs::path find_file(bfs::path const &source_file, std::string const &sub_directory, std::string const &extension) const;
+  void parse_clip_info_file(std::size_t file_idx);
 
   void process_chapter_entries();
 
