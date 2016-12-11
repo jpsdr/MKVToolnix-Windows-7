@@ -1657,7 +1657,7 @@ reader_c::create_packetizer(int64_t id) {
   auto &track = m_tracks[id];
   auto type   = track->type == pid_type_e::audio ? 'a'
               : track->type == pid_type_e::video ? 'v'
-              :                                            's';
+              :                                    's';
 
   if (!track->probed_ok || (0 == track->ptzr) || !demuxing_requested(type, id, track->language))
     return;
@@ -1854,7 +1854,7 @@ reader_c::finish() {
 
 file_status_e
 reader_c::read(generic_packetizer_c *requested_ptzr,
-                       bool force) {
+               bool force) {
   if (all_files_done())
     return flush_packetizers();
 
