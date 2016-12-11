@@ -117,8 +117,8 @@ track_c::send_to_packetizer() {
                           :                                                                      std::max(m_timestamp, f.m_global_timestamp_offset);
 
   auto timestamp_to_check = timestamp_to_use.valid() ? timestamp_to_use : f.m_stream_timestamp;
-  auto const &min         = reader.get_timecode_restriction_min();
-  auto const &max         = reader.get_timecode_restriction_max();
+  auto const &min         = f.m_timestamp_restriction_min;
+  auto const &max         = f.m_timestamp_restriction_max;
   auto use_packet         = ptzr != -1;
 
   if (   (min.valid() && (timestamp_to_check < min))
@@ -734,6 +734,32 @@ track_c::remaining_payload_size_to_read()
   return pes_payload_size_to_read - std::min(pes_payload_size_to_read, pes_payload_read->get_size());
 }
 
+timestamp_c
+track_c::derive_pts_from_content() {
+  if (codec.is(codec_c::type_e::S_HDMV_TEXTST))
+    return derive_hdmv_textst_pts_from_content();
+
+  return {};
+}
+
+timestamp_c
+track_c::derive_hdmv_textst_pts_from_content() {
+  if (pes_payload_read->get_size() < 8)
+    return {};
+
+  auto &file = reader.m_files[m_file_num];
+  auto buf   = pes_payload_read->get_buffer();
+
+  if (static_cast<mtx::hdmv_textst::segment_type_e>(buf[0]) != mtx::hdmv_textst::dialog_presentation_segment)
+    return file->m_timestamp_mpls_sync;
+
+  auto stream_timestamp = timestamp_c::mpeg((static_cast<int64_t>(buf[3] & 1) << 32) | get_uint32_be(&buf[4]));
+  auto diff             = file->m_timestamp_mpls_sync.value_or_zero() - reader.m_files[0]->m_timestamp_restriction_min.value_or_zero();
+  auto timestamp        = stream_timestamp + diff;
+
+  return timestamp;
+}
+
 // ------------------------------------------------------------
 
 file_t::file_t(mm_io_cptr const &in)
@@ -743,6 +769,7 @@ file_t::file_t(mm_io_cptr const &in)
   , m_es_to_process{}
   , m_global_timestamp_offset{}
   , m_stream_timestamp{timestamp_c::ns(0)}
+  , m_timestamp_mpls_sync{timestamp_c::ns(0)}
   , m_state{processing_state_e::probing}
   , m_probe_range{}
   , m_file_done{}
@@ -841,13 +868,17 @@ reader_c::reader_c(const track_info_c &ti,
   , m_debug_packet{            "mpeg_ts|packet"}
   , m_debug_aac{               "mpeg_ts|mpeg_aac"}
   , m_debug_timestamp_wrapping{"mpeg_ts|timestamp_wrapping"}
-  , m_debug_clpi{              "clpi"}
+  , m_debug_clpi{              "mpeg_ts|mpeg_ts_clpi|clpi"}
+  , m_debug_mpls{              "mpeg_ts|mpeg_ts_mpls|mpls"}
 {
   m_files.emplace_back(std::make_shared<file_t>(in));
 
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
-  if (mpls_in)
-    m_chapter_timestamps = mpls_in->get_chapters();
+  if (!mpls_in)
+    return;
+
+  m_chapter_timestamps = mpls_in->get_chapters();
+  add_external_files_from_mpls(*mpls_in);
 }
 
 void
@@ -1413,6 +1444,9 @@ reader_c::parse_pes(track_c &track) {
     to_skip = 6;
     track.pes_payload_read->remove(to_skip);
 
+    pts = track.derive_pts_from_content();
+    dts = pts;
+
   } else {
     if (pes_size < sizeof(pes_header_t)) {
       mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small for PES header structure itself (%2%)\n") % pes_size % sizeof(pes_header_t));
@@ -1449,6 +1483,7 @@ reader_c::parse_pes(track_c &track) {
 
   if (processing_state_e::determining_timestamp_offset == f.m_state) {
     if (   dts.valid()
+        && (track.type != pid_type_e::subtitles)
         && (   !f.m_global_timestamp_offset.valid()
             || (dts < f.m_global_timestamp_offset)))
       f.m_global_timestamp_offset = dts;
@@ -1456,7 +1491,7 @@ reader_c::parse_pes(track_c &track) {
   }
 
   if (m_debug_packet) {
-    mxdebug(boost::format("parse_pes: PES info at file position %1%:\n") % (f.m_in->getFilePointer() - f.m_detected_packet_size));
+    mxdebug(boost::format("parse_pes: PES info at file position %1% (file num %2%):\n") % (f.m_in->getFilePointer() - f.m_detected_packet_size) % track.m_file_num);
     mxdebug(boost::format("parse_pes:    stream_id = %1% PID = %2%\n") % static_cast<unsigned int>(pes_header->stream_id) % track.pid);
     mxdebug(boost::format("parse_pes:    PES_packet_length = %1%, PES_header_data_length = %2%, data starts at %3%\n") % pes_size % static_cast<unsigned int>(pes_header->pes_header_data_length) % to_skip);
     mxdebug(boost::format("parse_pes:    PTS? %1% (%5% processed %6%) DTS? (%7% processed %8%) %2% ESCR = %3% ES_rate = %4%\n")
@@ -1469,7 +1504,9 @@ reader_c::parse_pes(track_c &track) {
   if (pts.valid()) {
     track.m_previous_valid_timestamp = pts;
 
-    if (!f.m_global_timestamp_offset.valid() || (dts < f.m_global_timestamp_offset)) {
+    if (   (track.type != pid_type_e::subtitles)
+        && (   !f.m_global_timestamp_offset.valid()
+            || (dts < f.m_global_timestamp_offset))) {
       mxdebug_if(m_debug_headers, boost::format("new global timestamp offset %1% prior %2% file position afterwards %3%\n") % dts % f.m_global_timestamp_offset % f.m_in->getFilePointer());
       f.m_global_timestamp_offset = dts;
     }
@@ -2057,6 +2094,54 @@ reader_c::determine_ts_payload_start(packet_header_t *hdr)
 file_t &
 reader_c::file() {
   return *m_files[m_current_file];
+}
+
+void
+reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
+  auto source_file  = mpls_in.get_file_names()[0];
+  auto parser       = mpls_in.get_mpls_parser();
+  auto &playlist    = parser.get_playlist();
+  auto sub_path_idx = 0u;
+
+  if (!playlist.items.empty()) {
+    auto &item                        = playlist.items.front();
+    auto &file                        = m_files.front();
+
+    file->m_timestamp_restriction_min = item.in_time;
+    file->m_timestamp_restriction_max = item.out_time;
+  }
+
+  if (playlist.sub_paths.empty())
+    return;
+
+  for (auto const &sub_path : playlist.sub_paths) {
+    ++sub_path_idx;
+
+    if ((mtx::bluray::mpls::sub_path_type_e::text_subtitle_presentation != sub_path.type) || sub_path.items.empty())
+      continue;
+
+    auto &item = sub_path.items.front();
+    auto m2ts  = find_file(source_file.parent_path() / (boost::format("%1%.m2ts") % item.clpi_file_name).str(), "STREAM", ".m2ts");
+
+    mxdebug_if(m_debug_mpls, boost::format("add_external_files_from_mpls: M2TS for sub_path %1%: %2%\n") % (sub_path_idx - 1) % (!m2ts.empty() ? m2ts.string() : "not found"));
+
+    if (m2ts.empty())
+      continue;
+
+    try {
+      auto in                           = std::make_shared<mm_file_io_c>(m2ts.string(), MODE_READ);
+      auto file                         = std::make_shared<file_t>(std::static_pointer_cast<mm_io_c>(in));
+
+      file->m_timestamp_restriction_min = item.in_time;
+      file->m_timestamp_restriction_max = item.out_time;
+      file->m_timestamp_mpls_sync       = item.sync_start_pts_of_playitem;
+
+      m_files.push_back(file);
+
+    } catch (mtx::mm_io::exception &ex) {
+      mxdebug_if(m_debug_mpls, boost::format("add_external_files_from_mpls: could not open %1%: %2%\n") % m2ts.string() % ex.error());
+    }
+  }
 }
 
 }}

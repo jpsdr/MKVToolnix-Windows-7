@@ -353,6 +353,9 @@ public:
   bool detect_timestamp_wrap(timestamp_c &timestamp);
   void adjust_timestamp_for_wrap(timestamp_c &timestamp);
 
+  timestamp_c derive_pts_from_content();
+  timestamp_c derive_hdmv_textst_pts_from_content();
+
   void process(packet_cptr const &packet);
 
   void parse_iso639_language_from(void const *buffer);
@@ -361,11 +364,12 @@ public:
 struct file_t {
   mm_io_cptr m_in;
 
+  std::unordered_map<uint16_t, track_ptr> m_pid_to_track_map;
   std::vector<generic_packetizer_c *> m_packetizers;
 
   bool m_pat_found, m_pmt_found;
   int m_es_to_process;
-  timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp;
+  timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp, m_timestamp_restriction_min, m_timestamp_restriction_max, m_timestamp_mpls_sync;
 
   processing_state_e m_state;
   uint64_t m_probe_range;
@@ -390,7 +394,7 @@ protected:
 
   std::vector<timestamp_c> m_chapter_timestamps;
 
-  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi;
+  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi, m_debug_mpls;
 
 protected:
   static int potential_packet_sizes[];
@@ -452,6 +456,8 @@ private:
 
   bfs::path find_file(bfs::path const &source_file, std::string const &sub_directory, std::string const &extension) const;
   void parse_clip_info_file(std::size_t file_idx);
+
+  void add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in);
 
   void process_chapter_entries();
 
