@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-12-05 20:10+0100\n"
-"PO-Revision-Date: 2016-12-12 20:36+0100\n"
+"POT-Creation-Date: 2016-12-12 20:37+0100\n"
+"PO-Revision-Date: 2016-12-12 20:38+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -3816,7 +3816,7 @@ msgstr "Erfolgreich beendet"
 msgid "Completed with warnings"
 msgstr "Mit Warnungen beendet"
 
-#: src/merge/generic_packetizer.cpp:1286
+#: src/merge/generic_packetizer.cpp:1288
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Die Kompression schlug fehl: %1%\n"
@@ -7217,7 +7217,7 @@ msgstr "Beachten Sie, dass in diesem Testlauf die meisten <MTX_…>-Variablen le
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Beachten Sie, dass auch unter Windows in Pfadnamen Vorwärtsschrägstriche anstelle von umgekehrten Schrägstrichen verwendet werden können."
 
-#: src/merge/generic_packetizer.cpp:1540
+#: src/merge/generic_packetizer.cpp:1543
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Beachten Sie, dass die Matroska-Spezifikationen für die Speicherung von »%1%« noch nicht abschließend festgelegt wurden. Änderungen in Mkvmerges Unterstützung dafür bleiben daher vorbehalten und Mkvmerge nutzt derweil die CodecID »%2%/EXPERIMENTAL« anstelle von »%2%«. Diese Warnung wird entfernt, sobald die Spezifikationen fertiggestellt und Mkvmerge entsprechend aktualisiert worden sein wird.\n"
@@ -8158,8 +8158,8 @@ msgstr "Rechts"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:425
 #, no-c-format
-msgid "Right-click for actions for all tracks"
-msgstr "Rechts-klicken für Aktionen für alle Spuren"
+msgid "Right-click for actions for all items"
+msgstr "Rechts-klicken für Aktionen für alle Einträge"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:392
 #, no-c-format
@@ -9394,7 +9394,7 @@ msgstr "Der aktuelle Modus kann mit --multiplex, --edit-chapters oder --edit-hea
 msgid "The current multiplex settings will be closed."
 msgstr "Die aktuellen Multiplexeinstellungen werden geschlossen werden."
 
-#: src/merge/generic_packetizer.cpp:1248
+#: src/merge/generic_packetizer.cpp:1246
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Der Zeitstempel des aktuellen Paketes ist kleiner als der Zeitstempel des vorhergehenden Paketes. Dieses bedeutet normalerweise, dass die Quelldatei eine nicht 100%% korrekte Matroska-Datei ist. Die Zeitstempel aller folgenden Pakete werden um %1% ms angepasst, um keine Daten zu verlieren. Dies kann jedoch zum Verlust der Audio-/Video-Synchronisation führen, was eventuell mit Mkvmerges Option »--sync« wieder ausgeglichen werden kann. Verwenden Sie in so einem Fall bereits die Option »--sync« und bekommen Sie noch immer diese Warnung, dann ist das normal und kein Grund zur Sorge. Bekommen Sie diese Warnung mehrfach für ein und dieselbe Spur dann wurde entweder die Quelldatei falsch erstellt, oder aber Sie haben einen Fehler in Mkvmerge gefunden. In letzterem Fall wenden Sie sich bitte an den Autor Moritz Bunkus <moritz@bunkus.org>.\n"
@@ -11861,7 +11861,7 @@ msgstr "spaltenversetzt (rechts zuerst)"
 msgid "compression"
 msgstr "Komprimierung"
 
-#: src/merge/generic_packetizer.cpp:1559
+#: src/merge/generic_packetizer.cpp:1562
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: »file_num« nicht gefunden. %1%\n"

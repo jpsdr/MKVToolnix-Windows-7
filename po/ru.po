@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-12-05 20:10+0100\n"
+"POT-Creation-Date: 2016-12-12 20:37+0100\n"
 "PO-Revision-Date: 2016-12-09 06:53+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -3645,7 +3645,7 @@ msgstr "Завершено успешно"
 msgid "Completed with warnings"
 msgstr "Завершено с предупреждениями"
 
-#: src/merge/generic_packetizer.cpp:1286
+#: src/merge/generic_packetizer.cpp:1288
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Сжатие не удалось: %1%\n"
@@ -7050,7 +7050,7 @@ msgstr "Обратите внимание, что большинство пер�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Обратите внимание, что в Windows обычная косая черта может быть использована вместо обратной в путях и именах файлов."
 
-#: src/merge/generic_packetizer.cpp:1540
+#: src/merge/generic_packetizer.cpp:1543
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Обратите внимание, что спецификации формата Matroska касательно хранения '%1%' ещё не завершены. Соответственно, поддержка этого формата mkvmerge может измениться и используется идентификатор кодека '%2%/EXPERIMENTAL' вместо '%2%'. Это предупреждение будет убрано, когда спецификация будет завершена, а mkvmerge - обновлён в соответствии с ней.\n"
@@ -8005,8 +8005,8 @@ msgid "Right"
 msgstr "Справа"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:425
-#, no-c-format
-msgid "Right-click for actions for all tracks"
+#, fuzzy, no-c-format
+msgid "Right-click for actions for all items"
 msgstr "Щёлкните правой кнопкой мыши для выбора действия над всеми дорожками"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:392
@@ -9247,7 +9247,7 @@ msgstr "Текущий режим может быть изменён при по
 msgid "The current multiplex settings will be closed."
 msgstr "Текущие настройки слияния будут закрыты."
 
-#: src/merge/generic_packetizer.cpp:1248
+#: src/merge/generic_packetizer.cpp:1246
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Таймкод текущего пакета меньше, чем у предыдущего пакета. Это обычно означает, что исходный файл представляет собой файл Matroska, созданный не на 100%% правильно. Таймкоды всех пакетов будут скорректированы на %1%ms, чтобы избежать потерь данных. Это может сбить синхронизацию аудио/видео, что может быть исправлено с помощью параметра mkvmerge \"--sync\". Если вы уже используете \"--sync\" и все равно получаете это предупреждение, не беспокойтесь — это нормально. Если эта ошибка происходит несколько раз, и вы получаете это сообщение более одного раза для некоторой дорожки, то либо это исходный файл плохо собран, либо mkvmerge содержит ошибку. В этом случае вам следует связаться с автором Moritz Bunkus <moritz@bunkus.org>.\n"
@@ -11723,7 +11723,7 @@ msgstr "чередование столбцов (правый ракурс пе�
 msgid "compression"
 msgstr "сжатие"
 
-#: src/merge/generic_packetizer.cpp:1559
+#: src/merge/generic_packetizer.cpp:1562
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num не найден. %1%\n"

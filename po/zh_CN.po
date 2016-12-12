@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-12-05 20:10+0100\n"
+"POT-Creation-Date: 2016-12-12 20:37+0100\n"
 "PO-Revision-Date: 2016-10-23 21:42+0000\n"
 "Last-Translator: Frank Waiichou <frankwaiichou@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -3740,7 +3740,7 @@ msgstr "完成，成功"
 msgid "Completed with warnings"
 msgstr "完成，有警告"
 
-#: src/merge/generic_packetizer.cpp:1286
+#: src/merge/generic_packetizer.cpp:1288
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "压缩失败：%1%\n"
@@ -7169,7 +7169,7 @@ msgstr "注意，大多 <MTX_…> 变量为空，在本次试跑中将移除这�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "注意，在 Windows 平台，路径名称中的反斜杠 (\\) 也可以用正斜杠 (/) 代替。"
 
-#: src/merge/generic_packetizer.cpp:1540
+#: src/merge/generic_packetizer.cpp:1543
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "注意，与 '%1%' 存储相关的 Matroska 规范尚未定稿。因此 mkvmerge 对它的支持可能发生变动，在此采用 CodecID '%2%/EXPERIMENTAL' 代替 '%2%'。本警告消息将在规范定稿且 mkvmerge 随之更新后取消。\n"
@@ -8108,8 +8108,8 @@ msgid "Right"
 msgstr "右侧"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:425
-#, no-c-format
-msgid "Right-click for actions for all tracks"
+#, fuzzy, no-c-format
+msgid "Right-click for actions for all items"
 msgstr "右键单击打开所有轨道的操作选项"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:392
@@ -9330,7 +9330,7 @@ msgstr "当前模式可以使用 --merge、--edit-chapters 或 --edit-headers �
 msgid "The current multiplex settings will be closed."
 msgstr "当前合并配置将会被关闭。"
 
-#: src/merge/generic_packetizer.cpp:1248
+#: src/merge/generic_packetizer.cpp:1246
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "当前封包的时间码比前一封包的小。这通常表明源文件不是 100%% 正确创建的 Matroska 文件。所有封包的时间码将调整 %1% 毫秒以避免丢失任何数据。这可能导致音频/视频不同步，但可以通过 mkvmerge 的 '--sync' 选项修正。如果您使用了 '--sync' 而仍然收到本警告，请不必担心 -- 这是正常的。如果对于一条特定轨道出现一次以上本错误且您收到一次以上本消息，则可能源文件制作存在严重问题，也可能 mkvmerge 存在 bug。如果是这样，请联系作者 Moritz Bunkus <moritz@bunkus.org>。\n"
@@ -11785,7 +11785,7 @@ msgstr "列交错 (右先)"
 msgid "compression"
 msgstr "压缩"
 
-#: src/merge/generic_packetizer.cpp:1559
+#: src/merge/generic_packetizer.cpp:1562
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number：file_num 未找到。 %1%\n"
