@@ -422,7 +422,7 @@ Tab::setupInputControls() {
 void
 Tab::setupInputToolTips() {
   Util::setToolTip(ui->files,     QY("Right-click to add, append and remove files"));
-  Util::setToolTip(ui->tracks,    QY("Right-click for actions for all tracks"));
+  Util::setToolTip(ui->tracks,    QY("Right-click for actions for all items"));
 
   Util::setToolTip(ui->muxThis,   QY("If set to 'no' then the selected tracks will not be copied to the destination file."));
   Util::setToolTip(ui->trackName, QY("A name for this track that players can display helping the user chose the right track to play, e.g. \"director's comments\"."));
