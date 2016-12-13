@@ -56,10 +56,9 @@ Authors:
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 
-%if 0%{?centos} && 0%{?centos} < 7
-export CC=/opt/centos/devtoolset-1.1/root/usr/bin/gcc
-export CXX=/opt/centos/devtoolset-1.1/root/usr/bin/g++
-export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
+%if 0%{?centos}
+export CC=/opt/rh/devtoolset-4/root/bin/gcc
+export CXX=/opt/rh/devtoolset-4/root/bin/g++
 %endif
 
 %if 0%{?suse_version}
@@ -67,7 +66,7 @@ export CC=/usr/bin/gcc-5
 export CXX=/usr/bin/g++-5
 %endif
 
-%configure --enable-debug --enable-optimization $EXTRA_CONFIGURE_ARGS
+%configure --enable-debug --enable-optimization
 
 %build
 ./drake
