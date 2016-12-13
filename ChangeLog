@@ -1,3 +1,11 @@
+2016-12-13  Moritz Bunkus  <moritz@bunkus.org>
+
+        * build system: MKVToolNix now requires a compiler that supports
+        the following features of the C++14 standard:
+        "std::make_unique()", "digit separators", "binary literals" and
+        "generic lambdas". For the GNU Compiler Collection (gcc) this
+        means v4.9.x or newer; for clang it means v3.4 or newer.
+
 2016-12-11  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: MPEG TS/MPLS reader improvements: added support for

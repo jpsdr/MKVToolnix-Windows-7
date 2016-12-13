@@ -9,9 +9,9 @@ that's not supported officially as I don't have such a setup myself.
 Earlier versions could still be built with Microsoft's Visual Studio /
 Visual C++ programs, and those steps were described here as
 well. However, current MKVToolNix versions require many features of
-the new C++11 standard which haven't been supported by Microsoft's
-compilers for a long time. Additionally the author doesn't use Visual
-C++ himself and couldn't provide project files for it.
+the C++11 and C++14 standards which Microsoft's compilers have had
+spotty support for for a long time. Additionally the author doesn't
+use Visual C++ himself and couldn't provide project files for it.
 
 # 1. Building with a mingw cross compiler
 

@@ -91,7 +91,6 @@ namespace brng  = boost::range;
 
 #include "common/debugging.h"
 #include "common/error.h"
-#include "common/make_unique.h"
 #include "common/memory.h"
 #include "common/mm_io.h"
 #include "common/output.h"

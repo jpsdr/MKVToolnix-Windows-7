@@ -51,7 +51,7 @@ AC_DEFUN([AX_CXX11_INITIALIZER_LISTS],[
   ])
 
   if ! test x"$ax_cv_cxx11_initializer_lists" = xyes ; then
-    missing_cxx_features="$missing_cxx_features\n  * initializer lists"
+    missing_cxx_features="$missing_cxx_features\n  * initializer lists (C++11)"
   fi
 ])
 
@@ -81,7 +81,7 @@ for (std::string &s : listy)
   ])
 
   if ! test x"$ax_cv_cxx11_range_based_for" = xyes ; then
-    missing_cxx_features="$missing_cxx_features\n  * range-based 'for'"
+    missing_cxx_features="$missing_cxx_features\n  * range-based 'for' (C++11)"
   fi
 ])
 
@@ -109,7 +109,7 @@ typedef std::map<int, std::vector<int>> unicorn;
   ])
 
   if ! test x"$ax_cv_cxx11_right_angle_brackets" = xyes ; then
-    missing_cxx_features="$missing_cxx_features\n  * right angle brackets"
+    missing_cxx_features="$missing_cxx_features\n  * right angle brackets (C++11)"
   fi
 ])
 
@@ -138,7 +138,7 @@ AC_DEFUN([AX_CXX11_AUTO_KEYWORD],[
   ])
 
   if ! test x"$ax_cv_cxx11_auto_keyword" = xyes ; then
-    missing_cxx_features="$missing_cxx_features\n  * 'auto' keyword"
+    missing_cxx_features="$missing_cxx_features\n  * 'auto' keyword (C++11)"
   fi
 ])
 
@@ -168,7 +168,7 @@ std::for_each(listy.begin(), listy.end(), [&](unsigned int i) { sum += i; });
   ])
 
   if ! test x"$ax_cv_cxx11_lambda_functions" = xyes ; then
-    missing_cxx_features="$missing_cxx_features\n  * lambda functions"
+    missing_cxx_features="$missing_cxx_features\n  * lambda functions (C++11)"
   fi
 ])
 
@@ -191,7 +191,7 @@ AC_DEFUN([AX_CXX11_NULLPTR],[
   ])
 
   if ! test x"$ax_cv_cxx11_nullptr" = xyes ; then
-    missing_cxx_features="$missing_cxx_features\n  * nullptr"
+    missing_cxx_features="$missing_cxx_features\n  * nullptr (C++11)"
   fi
 ])
 
@@ -217,7 +217,7 @@ AC_DEFUN([AX_CXX11_TUPLES],[
   ])
 
   if ! test x"$ax_cv_cxx11_tuples" = xyes ; then
-    missing_cxx_features="$missing_cxx_features\n  * tuples"
+    missing_cxx_features="$missing_cxx_features\n  * tuples (C++11)"
   fi
 ])
 
@@ -245,7 +245,7 @@ using thingy = std::vector<int>;
   ])
 
   if ! test x"$ax_cv_cxx11_alias_declarations" = xyes ; then
-    missing_cxx_features="$missing_cxx_features\n  * alias declarations"
+    missing_cxx_features="$missing_cxx_features\n  * alias declarations (C++11)"
   fi
 ])
 
@@ -267,13 +267,90 @@ AC_DEFUN([AX_CXX14_MAKE_UNIQUE],[
     CXXFLAGS="$CXXFLAGS_SAVED"
   ])
 
-  if test x"$ax_cv_cxx14_make_unique" = xyes ; then
-    AC_DEFINE(HAVE_STD_MAKE_UNIQUE, 1, [Define if std::make_unique exists])
+  if ! test x"$ax_cv_cxx14_make_unique" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * std::make_unique function (C++14)"
   fi
 ])
 
-dnl AC_DEFUN([AX_CXX11_DEF_NAME],[
-dnl   AC_CACHE_CHECK([for support for C++11 feature "human"], [ax_cv_cxx11_def_name],[
+AC_DEFUN([AX_CXX14_DIGIT_SEPARATORS],[
+  AC_CACHE_CHECK([for support for C++14 feature "digit separators"], [ax_cv_cxx14_digit_separators],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [],
+      [auto num = 10'000'000'000ll;],
+      [ax_cv_cxx14_digit_separators="yes"],
+      [ax_cv_cxx14_digit_separators="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx14_digit_separators" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * digit separators (C++14)"
+  fi
+])
+
+AC_DEFUN([AX_CXX14_BINARY_LITERALS],[
+  AC_CACHE_CHECK([for support for C++14 feature "binary literals"], [ax_cv_cxx14_binary_literals],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [],
+      [auto num1 = 0b00101010;
+       auto num2 = 0B00101010;
+       auto num3 = 0b0010'1010;],
+      [ax_cv_cxx14_binary_literals="yes"],
+      [ax_cv_cxx14_binary_literals="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx14_binary_literals" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * binary literals (C++14)"
+  fi
+])
+
+AC_DEFUN([AX_CXX14_GENERIC_LAMBDAS],[
+  AC_CACHE_CHECK([for support for C++14 feature "generic lambdas"], [ax_cv_cxx14_generic_lambdas],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [
+        #include <algorithm>
+        #include <vector>
+      ],
+      [
+        std::vector<int> vv;
+        std::sort(vv.begin(), vv.end(), [](auto &a, auto &b) { return b < a; });
+      ],
+      [ax_cv_cxx14_generic_lambdas="yes"],
+      [ax_cv_cxx14_generic_lambdas="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx14_generic_lambdas" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * generic lambdas (C++14)"
+  fi
+])
+
+dnl AC_DEFUN([AX_CXX14_DEF_NAME],[
+dnl   AC_CACHE_CHECK([for support for C++14 feature "human"], [ax_cv_cxx14_def_name],[
 dnl
 dnl     CXXFLAGS_SAVED=$CXXFLAGS
 dnl     CXXFLAGS="$CXXFLAGS $STD_CXX"
@@ -283,15 +360,15 @@ dnl     AC_LANG_PUSH(C++)
 dnl     AC_TRY_COMPILE(
 dnl       [],
 dnl       [],
-dnl       [ax_cv_cxx11_def_name="yes"],
-dnl       [ax_cv_cxx11_def_name="no"])
+dnl       [ax_cv_cxx14_def_name="yes"],
+dnl       [ax_cv_cxx14_def_name="no"])
 dnl     AC_LANG_POP
 dnl
 dnl     CXXFLAGS="$CXXFLAGS_SAVED"
 dnl   ])
 dnl
-dnl   if ! test x"$ax_cv_cxx11_def_name" = xyes ; then
-dnl     missing_cxx_features="$missing_cxx_features\n  * human"
+dnl   if ! test x"$ax_cv_cxx14_def_name" = xyes ; then
+dnl     missing_cxx_features="$missing_cxx_features\n  * human (C++14)"
 dnl   fi
 dnl ])
 
@@ -305,10 +382,13 @@ AX_CXX11_NULLPTR
 AX_CXX11_TUPLES
 AX_CXX11_ALIAS_DECLARATIONS
 AX_CXX14_MAKE_UNIQUE
+AX_CXX14_DIGIT_SEPARATORS
+AX_CXX14_BINARY_LITERALS
+AX_CXX14_GENERIC_LAMBDAS
 
 if test x"$missing_cxx_features" != x ; then
-  printf "The following features of the C++11 standard are not supported by $CXX:$missing_cxx_features\n"
+  printf "The following features of the C++11/C++14 standards are not supported by $CXX:$missing_cxx_features\n"
   printf "If you are using the GNU C compiler collection (gcc) then you need\n"
-  printf "at least v4.6.\n"
-  AC_MSG_ERROR([support for required C++11 features incomplete])
+  printf "at least v4.9.x.\n"
+  AC_MSG_ERROR([support for required C++11/C++14 features incomplete])
 fi
