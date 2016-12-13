@@ -67,7 +67,7 @@
     </property>
     <widget class="QMenu" name="menuMergeAll">
      <property name="title">
-      <string>Actions for &amp;all settings</string>
+      <string>Actions for &amp;all tabs</string>
      </property>
      <addaction name="actionMergeSaveAll"/>
      <addaction name="separator"/>
@@ -111,6 +111,14 @@
     <property name="title">
      <string notr="true">&amp;Chapter editor</string>
     </property>
+    <widget class="QMenu" name="menuChapterEditorAll">
+     <property name="title">
+      <string>Actions for &amp;all tabs</string>
+     </property>
+     <addaction name="actionChapterEditorSaveAll"/>
+     <addaction name="separator"/>
+     <addaction name="actionChapterEditorCloseAll"/>
+    </widget>
     <addaction name="actionChapterEditorNew"/>
     <addaction name="separator"/>
     <addaction name="actionChapterEditorOpen"/>
@@ -121,6 +129,8 @@
     <addaction name="actionChapterEditorSaveToMatroska"/>
     <addaction name="separator"/>
     <addaction name="actionChapterEditorClose"/>
+    <addaction name="separator"/>
+    <addaction name="menuChapterEditorAll"/>
     <addaction name="separator"/>
     <addaction name="actionChapterEditorRemoveFromMatroska"/>
    </widget>
@@ -694,6 +704,24 @@
   <action name="actionChapterEditorRemoveFromMatroska">
    <property name="text">
     <string>Remo&amp;ve chapters from existing Matroska file</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorCloseAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorSaveAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
    </property>
   </action>
   <action name="actionMergeCloseAll">

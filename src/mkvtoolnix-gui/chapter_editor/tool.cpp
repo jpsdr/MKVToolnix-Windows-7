@@ -61,8 +61,10 @@ Tool::setupActions() {
   connect(mwUi->actionChapterEditorSave,               &QAction::triggered,             this, &Tool::save);
   connect(mwUi->actionChapterEditorSaveAsXml,          &QAction::triggered,             this, &Tool::saveAsXml);
   connect(mwUi->actionChapterEditorSaveToMatroska,     &QAction::triggered,             this, &Tool::saveToMatroska);
+  connect(mwUi->actionChapterEditorSaveAll,            &QAction::triggered,             this, &Tool::saveAllTabs);
   connect(mwUi->actionChapterEditorReload,             &QAction::triggered,             this, &Tool::reload);
   connect(mwUi->actionChapterEditorClose,              &QAction::triggered,             this, &Tool::closeCurrentTab);
+  connect(mwUi->actionChapterEditorCloseAll,           &QAction::triggered,             this, &Tool::closeAllTabs);
   connect(mwUi->actionChapterEditorRemoveFromMatroska, &QAction::triggered,             this, &Tool::removeChaptersFromExistingMatroskaFile);
 
   connect(ui->newFileButton,                           &QPushButton::clicked,           this, &Tool::newFile);
@@ -95,6 +97,9 @@ Tool::enableMenuActions() {
   mwUi->actionChapterEditorSaveToMatroska->setEnabled(tabEnabled);
   mwUi->actionChapterEditorReload->setEnabled(        tabEnabled                                 && hasFileName);
   mwUi->actionChapterEditorClose->setEnabled(         !!tab);
+  mwUi->menuChapterEditorAll->setEnabled(             !!tab);
+  mwUi->actionChapterEditorSaveAll->setEnabled(       !!tab);
+  mwUi->actionChapterEditorCloseAll->setEnabled(      !!tab);
 }
 
 void
@@ -191,6 +196,11 @@ Tool::save() {
   auto tab = currentTab();
   if (tab)
     tab->save();
+}
+
+void
+Tool::saveAllTabs() {
+  forEachTab([](auto &tab) { tab.save(); });
 }
 
 void
@@ -355,6 +365,18 @@ Tool::removeChaptersFromExistingMatroskaFile() {
 
   } else
     Util::MessageBox::information(this)->title(QY("Removing chapters from existing Matroska file")).text(QY("All chapters have been removed from the file '%1'.").arg(fileName)).exec();
+}
+
+void
+Tool::forEachTab(std::function<void(Tab &)> const &worker) {
+  auto currentIndex = ui->editors->currentIndex();
+
+  for (auto index = 0, numTabs = ui->editors->count(); index < numTabs; ++index) {
+    ui->editors->setCurrentIndex(index);
+    worker(dynamic_cast<Tab &>(*ui->editors->widget(index)));
+  }
+
+  ui->editors->setCurrentIndex(currentIndex);
 }
 
 }}}
