@@ -185,7 +185,7 @@ usf_reader_c::create_packetizers() {
 file_status_e
 usf_reader_c::read(generic_packetizer_c *ptzr,
                    bool) {
-  auto track_itr = brng::find_if(m_tracks, [&](usf_track_cptr &tr) { return (-1 != tr->m_ptzr) && (PTZR(tr->m_ptzr) == ptzr); });
+  auto track_itr = brng::find_if(m_tracks, [this, ptzr](auto &tr) { return (-1 != tr->m_ptzr) && (PTZR(tr->m_ptzr) == ptzr); });
   if (track_itr == m_tracks.end())
     return FILE_STATUS_DONE;
 

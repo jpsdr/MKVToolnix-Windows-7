@@ -324,14 +324,14 @@ kax_reader_c::packets_available() {
 kax_track_t *
 kax_reader_c::find_track_by_num(uint64_t n,
                                 kax_track_t *c) {
-  auto itr = brng::find_if(m_tracks, [&](kax_track_cptr &track) { return (track->track_number == n) && (track.get() != c); });
+  auto itr = brng::find_if(m_tracks, [n, c](auto &track) { return (track->track_number == n) && (track.get() != c); });
   return itr == m_tracks.end() ? nullptr : itr->get();
 }
 
 kax_track_t *
 kax_reader_c::find_track_by_uid(uint64_t uid,
                                 kax_track_t *c) {
-  auto itr = brng::find_if(m_tracks, [&](kax_track_cptr &track) { return (track->track_uid == uid) && (track.get() != c); });
+  auto itr = brng::find_if(m_tracks, [uid, c](auto &track) { return (track->track_uid == uid) && (track.get() != c); });
   return itr == m_tracks.end() ? nullptr : itr->get();
 }
 
@@ -784,7 +784,7 @@ kax_reader_c::handle_attachments(mm_io_c *io,
     return;
 
   io->save_pos(pos);
-  at_scope_exit_c restore([&]() { io->restore_pos(); });
+  at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
   std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
@@ -840,7 +840,7 @@ kax_reader_c::handle_chapters(mm_io_c *io,
     return;
 
   io->save_pos(pos);
-  at_scope_exit_c restore([&]() { io->restore_pos(); });
+  at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
   std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
@@ -872,7 +872,7 @@ kax_reader_c::handle_tags(mm_io_c *io,
     return;
 
   io->save_pos(pos);
-  at_scope_exit_c restore([&]() { io->restore_pos(); });
+  at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
   std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
@@ -953,7 +953,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
     return;
 
   io->save_pos(pos);
-  at_scope_exit_c restore([&]() { io->restore_pos(); });
+  at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
   std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
@@ -1270,7 +1270,7 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
     return;
 
   std::vector<int64_t> next_seek_head_positions;
-  at_scope_exit_c restore([&]() { io->restore_pos(); });
+  at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   try {
     io->save_pos(pos);

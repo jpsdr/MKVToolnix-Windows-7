@@ -217,7 +217,7 @@ get_latest_release_version() {
 
   if (debug) {
     std::stringstream urls;
-    brng::for_each(release.urls, [&](std::pair<std::string, std::string> const &kv) { urls << " " << kv.first << ":" << kv.second; });
+    brng::for_each(release.urls, [&urls](auto const &kv) { urls << " " << kv.first << ":" << kv.second; });
     mxdebug(boost::format("update check: current %1% latest source %2% latest winpre %3% URLs%4%\n")
             % release.current_version.to_string() % release.latest_source.to_string() % release.latest_windows_build.to_string() % urls.str());
   }

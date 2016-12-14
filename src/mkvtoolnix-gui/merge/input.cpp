@@ -669,14 +669,14 @@ Tab::setInputControlValues(Track *track) {
     return;
   }
 
-  Util::setComboBoxIndexIf(ui->muxThis,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);          });
-  Util::setComboBoxIndexIf(ui->defaultTrackFlag, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag); });
-  Util::setComboBoxIndexIf(ui->forcedTrackFlag,  [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);  });
-  Util::setComboBoxIndexIf(ui->compression,      [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_compression);      });
-  Util::setComboBoxIndexIf(ui->cues,             [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_cues);             });
-  Util::setComboBoxIndexIf(ui->stereoscopy,      [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);      });
-  Util::setComboBoxIndexIf(ui->naluSizeLength,   [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);   });
-  Util::setComboBoxIndexIf(ui->aacIsSBR,         [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);         });
+  Util::setComboBoxIndexIf(ui->muxThis,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);          });
+  Util::setComboBoxIndexIf(ui->defaultTrackFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag); });
+  Util::setComboBoxIndexIf(ui->forcedTrackFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);  });
+  Util::setComboBoxIndexIf(ui->compression,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_compression);      });
+  Util::setComboBoxIndexIf(ui->cues,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);             });
+  Util::setComboBoxIndexIf(ui->stereoscopy,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);      });
+  Util::setComboBoxIndexIf(ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);   });
+  Util::setComboBoxIndexIf(ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);         });
 
   ui->trackLanguage->setCurrentByData(track->m_language);
   ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
@@ -728,7 +728,7 @@ Tab::selectedTracks()
 }
 
 void
-Tab::withSelectedTracks(std::function<void(Track *)> code,
+Tab::withSelectedTracks(std::function<void(Track &)> code,
                         bool notIfAppending,
                         QWidget *widget) {
   if (m_currentlySettingInputControlValues)
@@ -756,7 +756,7 @@ Tab::withSelectedTracks(std::function<void(Track *)> code,
         || (track->isVideo()     && withVideo)
         || (track->isSubtitles() && withSubtitles)
         || (track->isChapters()  && withChapters)) {
-      code(track);
+      code(*track);
       m_tracksModel->trackUpdated(track);
     }
   }
@@ -764,7 +764,7 @@ Tab::withSelectedTracks(std::function<void(Track *)> code,
 
 void
 Tab::onTrackNameChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_name = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_name = newValue; }, true);
 }
 
 void
@@ -803,7 +803,7 @@ Tab::onMuxThisChanged(int selected) {
     return;
   auto muxThis = data.toBool();
 
-  withSelectedTracks([&](Track *track) { track->m_muxThis = muxThis; });
+  withSelectedTracks([muxThis](auto &track) { track.m_muxThis = muxThis; });
 
   setOutputFileNameMaybe();
 
@@ -815,10 +815,10 @@ Tab::toggleMuxThisForSelectedTracks() {
   auto allEnabled     = true;
   auto tracksSelected = false;
 
-  withSelectedTracks([&allEnabled, &tracksSelected](Track *track) {
+  withSelectedTracks([&allEnabled, &tracksSelected](auto &track) {
     tracksSelected = true;
 
-    if (!track->m_muxThis)
+    if (!track.m_muxThis)
       allEnabled = false;
   }, false, ui->muxThis);
 
@@ -829,9 +829,9 @@ Tab::toggleMuxThisForSelectedTracks() {
 
   auto newEnabled = !allEnabled;
 
-  withSelectedTracks([newEnabled](Track *track) { track->m_muxThis = newEnabled; }, false, ui->muxThis);
+  withSelectedTracks([newEnabled](auto &track) { track.m_muxThis = newEnabled; }, false, ui->muxThis);
 
-  Util::setComboBoxIndexIf(ui->muxThis, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newEnabled); });
+  Util::setComboBoxIndexIf(ui->muxThis, [newEnabled](auto const &, auto const &data) { return data.isValid() && (data.toBool() == newEnabled); });
 
   m_tracksModel->updateEffectiveDefaultTrackFlags();
 }
@@ -842,7 +842,7 @@ Tab::onTrackLanguageChanged(int newValue) {
   if (code.isEmpty())
     return;
 
-  withSelectedTracks([&](Track *track) { track->m_language = code; }, true);
+  withSelectedTracks([&code](auto &track) { track.m_language = code; }, true);
 }
 
 void
@@ -852,10 +852,10 @@ Tab::onDefaultTrackFlagChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  withSelectedTracks([&](Track *track) {
-    track->m_defaultTrackFlag = newValue;
+  withSelectedTracks([this, newValue](auto &track) {
+    track.m_defaultTrackFlag = newValue;
     if (1 == newValue)
-      ensureOneDefaultFlagOnly(track);
+      ensureOneDefaultFlagOnly(&track);
   }, true);
 
   m_tracksModel->updateEffectiveDefaultTrackFlags();
@@ -868,7 +868,7 @@ Tab::onForcedTrackFlagChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  withSelectedTracks([&](Track *track) { track->m_forcedTrackFlag = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_forcedTrackFlag = newValue; }, true);
 }
 
 void
@@ -878,82 +878,80 @@ Tab::onCompressionChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  Track::Compression compression;
-  if (3 > newValue)
-    compression = 0 == newValue ? Track::CompDefault
-                : 1 == newValue ? Track::CompNone
-                :                 Track::CompZlib;
+  auto compression = 1 == newValue ? Track::CompNone
+                   : 2 == newValue ? Track::CompZlib
+                   :                 Track::CompDefault;
 
-  withSelectedTracks([&](Track *track) { track->m_compression = compression; }, true);
+  withSelectedTracks([compression](auto &track) { track.m_compression = compression; }, true);
 }
 
 void
 Tab::onTrackTagsChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_tags = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_tags = newValue; }, true);
 }
 
 void
 Tab::onDelayChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_delay = newValue; });
+  withSelectedTracks([&newValue](auto &track) { track.m_delay = newValue; });
 }
 
 void
 Tab::onStretchByChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_stretchBy = newValue; });
+  withSelectedTracks([&newValue](auto &track) { track.m_stretchBy = newValue; });
 }
 
 void
 Tab::onDefaultDurationChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_defaultDuration = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_defaultDuration = newValue; }, true);
 }
 
 void
 Tab::onTimecodesChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_timecodes = newValue; });
+  withSelectedTracks([&newValue](auto &track) { track.m_timecodes = newValue; });
 }
 
 void
 Tab::onBrowseTimecodes() {
   auto fileName = getOpenFileName(QY("Select timecode file"), QY("Text files") + Q(" (*.txt)"), ui->timecodes);
   if (!fileName.isEmpty())
-    withSelectedTracks([&](Track *track) { track->m_timecodes = fileName; });
+    withSelectedTracks([&fileName](auto &track) { track.m_timecodes = fileName; });
 }
 
 void
 Tab::onFixBitstreamTimingInfoChanged(bool newValue) {
-  withSelectedTracks([&](Track *track) { track->m_fixBitstreamTimingInfo = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_fixBitstreamTimingInfo = newValue; }, true);
 }
 
 void
 Tab::onBrowseTrackTags() {
   auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + Q(" (*.xml)"), ui->trackTags);
   if (!fileName.isEmpty())
-    withSelectedTracks([&](Track *track) { track->m_tags = fileName; }, true);
+    withSelectedTracks([&fileName](auto &track) { track.m_tags = fileName; }, true);
 }
 
 void
 Tab::onSetAspectRatio() {
-  withSelectedTracks([&](Track *track) { track->m_setAspectRatio = true; }, true);
+  withSelectedTracks([](auto &track) { track.m_setAspectRatio = true; }, true);
 }
 
 void
 Tab::onSetDisplayDimensions() {
-  withSelectedTracks([&](Track *track) { track->m_setAspectRatio = false; }, true);
+  withSelectedTracks([](auto &track) { track.m_setAspectRatio = false; }, true);
 }
 
 void
 Tab::onAspectRatioChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_aspectRatio = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_aspectRatio = newValue; }, true);
 }
 
 void
 Tab::onDisplayWidthChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_displayWidth = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_displayWidth = newValue; }, true);
 }
 
 void
 Tab::onDisplayHeightChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_displayHeight = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_displayHeight = newValue; }, true);
 }
 
 void
@@ -963,7 +961,7 @@ Tab::onStereoscopyChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  withSelectedTracks([&](Track *track) { track->m_stereoscopy = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_stereoscopy = newValue; }, true);
 }
 
 void
@@ -973,12 +971,12 @@ Tab::onNaluSizeLengthChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  withSelectedTracks([&](Track *track) { track->m_naluSizeLength = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_naluSizeLength = newValue; }, true);
 }
 
 void
 Tab::onCroppingChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_cropping = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_cropping = newValue; }, true);
 }
 
 void
@@ -988,12 +986,12 @@ Tab::onAacIsSBRChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  withSelectedTracks([&](Track *track) { track->m_aacIsSBR = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_aacIsSBR = newValue; }, true);
 }
 
 void
 Tab::onReduceAudioToCoreChanged(bool newValue) {
-  withSelectedTracks([&](Track *track) { track->m_reduceAudioToCore = newValue; });
+  withSelectedTracks([&newValue](auto &track) { track.m_reduceAudioToCore = newValue; });
 }
 
 void
@@ -1002,9 +1000,9 @@ Tab::onSubtitleCharacterSetChanged(int newValue) {
   if (characterSet.isEmpty())
     return;
 
-  withSelectedTracks([&](Track *track) {
-    if (track->m_file->m_type != FILE_TYPE_MATROSKA)
-      track->m_characterSet = characterSet;
+  withSelectedTracks([characterSet](auto &track) {
+    if (track.m_file->m_type != FILE_TYPE_MATROSKA)
+      track.m_characterSet = characterSet;
   }, true);
 }
 
@@ -1015,12 +1013,12 @@ Tab::onCuesChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  withSelectedTracks([&](Track *track) { track->m_cues = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_cues = newValue; }, true);
 }
 
 void
 Tab::onAdditionalTrackOptionsChanged(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_additionalOptions = newValue; }, true);
+  withSelectedTracks([&newValue](auto &track) { track.m_additionalOptions = newValue; }, true);
 }
 
 void

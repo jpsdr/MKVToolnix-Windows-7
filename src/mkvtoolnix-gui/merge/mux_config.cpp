@@ -463,7 +463,7 @@ MuxConfig::buildMkvmergeOptions()
       options << Q("--link");
   }
 
-  auto add = [&](QString const &arg, QString const &value, boost::logic::tribool predicate = boost::indeterminate) {
+  auto add = [&options](auto const &arg, auto const &value, boost::logic::tribool predicate = boost::indeterminate) {
     if (boost::logic::indeterminate(predicate))
       predicate = !value.isEmpty();
     if (predicate)

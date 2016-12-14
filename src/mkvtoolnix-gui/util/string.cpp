@@ -78,7 +78,7 @@ unescapeSplitShellUnix(QString const &source) {
   auto escapeNext       = false;
   auto singleQuoted     = false;
   auto doubleQuoted     = false;
-  auto appendChar       = [&](QChar const &c) {
+  auto appendChar       = [&currentArgument, &arguments](QChar const &c) {
     if (!currentArgument) {
       arguments << Q("");
       currentArgument = &arguments.last();

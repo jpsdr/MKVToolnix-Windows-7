@@ -1658,7 +1658,7 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
 
   auto names = QSet<QString>{};
 
-  std::function<void(QStandardItem *)> collector = [&](QStandardItem *currentItem) {
+  std::function<void(QStandardItem *)> collector = [this, &collector, &names](auto *currentItem) {
     if (!currentItem)
       return;
 
@@ -1689,7 +1689,7 @@ Tab::usedNameCountryCodes(QStandardItem *rootItem) {
 
   auto countryCodes = QSet<QString>{};
 
-  std::function<void(QStandardItem *)> collector = [&](QStandardItem *currentItem) {
+  std::function<void(QStandardItem *)> collector = [this, &collector, &countryCodes](auto *currentItem) {
     if (!currentItem)
       return;
 

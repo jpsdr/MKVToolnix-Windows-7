@@ -156,7 +156,7 @@ xtr_alac_c::finish_file() {
   unsigned int const table_header_size = 24;
   uint64_t const outsize               = 4 + 8 + 8 + 8 + 4 + 4 + m_pkt_sizes.size();
   auto tdiff                           = static_cast<int64_t>(m_data_chunk_offset) - static_cast<int64_t>(m_free_chunk_offset + outsize);
-  auto write_pakt                      = [&]() {
+  auto write_pakt                      = [this]() {
     m_out->write(std::string{"pakt"});
     m_out->write_uint64_be(table_header_size + m_pkt_sizes.size());
     m_out->write_uint64_be(m_packets_written);

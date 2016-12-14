@@ -943,10 +943,10 @@ check_append_mapping() {
   // available (in which case we fill in default ones) or if there are fewer
   // mappings than tracks that are to be copied (which is an error).
   for (auto &src_file : g_files) {
-    if (!src_file-> appending)
+    if (!src_file->appending)
       continue;
 
-    size_t count = boost::count_if(g_append_mapping, [&](const append_spec_t &e) { return e.src_file_id == src_file-> id; });
+    size_t count = boost::count_if(g_append_mapping, [&src_file](auto const &e) { return e.src_file_id == src_file->id; });
 
     if ((0 < count) && (src_file-> reader->m_used_track_ids.size() > count))
       mxerror(boost::format(Y("Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the "
@@ -1055,7 +1055,7 @@ check_append_mapping() {
   // concatenated files. This is needed for displaying the progress.
   for (auto amap = g_append_mapping.begin(), amap_end = g_append_mapping.end(); amap != amap_end; ++amap) {
     // Is this the first in a chain?
-    auto cmp_amap = boost::find_if(g_append_mapping, [&](const append_spec_t &e) {
+    auto cmp_amap = boost::find_if(g_append_mapping, [&amap](auto const &e) {
       return (*amap              != e)
           && (amap->dst_file_id  == e.src_file_id)
           && (amap->dst_track_id == e.src_track_id);

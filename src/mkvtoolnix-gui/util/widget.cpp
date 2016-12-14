@@ -93,7 +93,7 @@ QPushButton *
 buttonForRole(QDialogButtonBox *box,
               QDialogButtonBox::ButtonRole role) {
   auto buttons = box->buttons();
-  auto button  = boost::find_if(buttons, [&](QAbstractButton *b) { return box->buttonRole(b) == role; });
+  auto button  = boost::find_if(buttons, [box, role](auto *b) { return box->buttonRole(b) == role; });
   return button == buttons.end() ? nullptr : static_cast<QPushButton *>(*button);
 }
 

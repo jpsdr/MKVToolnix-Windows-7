@@ -521,7 +521,7 @@ std::vector<std::string> const g_popular_language_codes{ "chi", "dut", "eng", "f
 
 bool
 is_valid_iso639_2_code(std::string const &iso639_2_code) {
-  return brng::find_if(g_iso639_languages, [&](iso639_language_t const &lang) { return lang.iso639_2_code == iso639_2_code; }) != g_iso639_languages.end();
+  return brng::find_if(g_iso639_languages, [&iso639_2_code](auto const &lang) { return lang.iso639_2_code == iso639_2_code; }) != g_iso639_languages.end();
 }
 
 #define FILL(s, idx) s + std::wstring(longest[idx] - get_width_in_em(s), L' ')
@@ -553,7 +553,7 @@ list_iso639_languages() {
 
 std::string const &
 map_iso639_2_to_iso639_1(std::string const &iso639_2_code) {
-  auto lang = brng::find_if(g_iso639_languages, [&](iso639_language_t const &lang) { return lang.iso639_2_code == iso639_2_code; });
+  auto lang = brng::find_if(g_iso639_languages, [&iso639_2_code](auto const &lang) { return lang.iso639_2_code == iso639_2_code; });
   return (lang != g_iso639_languages.end()) ? lang->iso639_1_code : empty_string;
 }
 
@@ -587,7 +587,7 @@ map_to_iso639_2_code(std::string const &s,
   if (deprecated_code != s_deprecated_1_and_2_codes.end())
     source = deprecated_code->second;
 
-  auto lang = brng::find_if(g_iso639_languages, [&](iso639_language_t const &lang) { return (lang.iso639_2_code == source) || (lang.terminology_abbrev == source) || (lang.iso639_1_code == source); });
+  auto lang = brng::find_if(g_iso639_languages, [&source](auto const &lang) { return (lang.iso639_2_code == source) || (lang.terminology_abbrev == source) || (lang.iso639_1_code == source); });
   if (lang != g_iso639_languages.end())
     return std::distance(g_iso639_languages.begin(), lang);
 
@@ -622,7 +622,7 @@ map_to_iso639_2_code(std::string const &s,
 
     auto names = split(english_name, ";");
     strip(names);
-    if (names.end() != brng::find_if(names, [&](std::string const &name) { return balg::istarts_with(name, source); }))
+    if (names.end() != brng::find_if(names, [&source](auto const &name) { return balg::istarts_with(name, source); }))
       return index;
   }
 

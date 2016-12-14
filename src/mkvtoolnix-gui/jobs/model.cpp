@@ -76,8 +76,8 @@ Model::selectedJobs(QAbstractItemView *view) {
   QMutexLocker locked{&m_mutex};
 
   QList<Job *> jobs;
-  Util::withSelectedIndexes(view, [&](QModelIndex const &idx) {
-    jobs << m_jobsById[ data(idx, Util::JobIdRole).value<uint64_t>() ].get();
+  Util::withSelectedIndexes(view, [this, &jobs](auto const &idx) {
+    jobs << m_jobsById[ data(idx, Util::JobIdRole).template value<uint64_t>() ].get();
   });
 
   return jobs;

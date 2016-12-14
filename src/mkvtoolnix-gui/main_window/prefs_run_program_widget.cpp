@@ -234,7 +234,7 @@ PrefsRunProgramWidget::selectVariableToAdd() {
 
 void
 PrefsRunProgramWidget::addVariable(QString const &variable) {
-  changeArguments([&](QStringList &arguments) {
+  changeArguments([&variable](QStringList &arguments) {
     arguments << variable;
   });
 }
@@ -270,7 +270,7 @@ PrefsRunProgramWidget::changeExecutable() {
   if (newExecutable.isEmpty() || (newExecutable == d->executable))
     return;
 
-  changeArguments([&](QStringList &arguments) {
+  changeArguments([&newExecutable](QStringList &arguments) {
     if (arguments.isEmpty())
       arguments << newExecutable;
     else

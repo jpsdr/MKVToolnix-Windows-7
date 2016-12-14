@@ -1950,7 +1950,7 @@ qtmp4_reader_c::recode_chapter_entries(std::vector<qtmp4_chapter_entry_t> &entri
 void
 qtmp4_reader_c::detect_interleaving() {
   std::list<qtmp4_demuxer_cptr> demuxers_to_read;
-  boost::remove_copy_if(m_demuxers, std::back_inserter(demuxers_to_read), [&](const qtmp4_demuxer_cptr &dmx) {
+  boost::remove_copy_if(m_demuxers, std::back_inserter(demuxers_to_read), [this](auto const &dmx) {
     return !(dmx->ok && (dmx->is_audio() || dmx->is_video()) && demuxing_requested(dmx->type, dmx->id, dmx->language) && (dmx->sample_table.size() > 1));
   });
 
@@ -1991,7 +1991,7 @@ qtmp4_demuxer_c::calculate_fps() {
   } else if (!sample_table.empty()) {
     std::map<int64_t, int> duration_map;
 
-    std::accumulate(sample_table.begin() + 1, sample_table.end(), sample_table[0], [&](qt_sample_t &previous_sample, qt_sample_t &current_sample) -> qt_sample_t {
+    std::accumulate(sample_table.begin() + 1, sample_table.end(), sample_table[0], [&duration_map](auto const &previous_sample, auto const &current_sample) -> auto {
       duration_map[current_sample.pts - previous_sample.pts]++;
       return current_sample;
     });

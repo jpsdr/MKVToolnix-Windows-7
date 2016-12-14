@@ -112,12 +112,12 @@ Tab::withSelectedAttachedFiles(std::function<void(Track &)> code) {
 }
 
 void
-Tab::withSelectedAttachments(std::function<void(Attachment *)> code) {
+Tab::withSelectedAttachments(std::function<void(Attachment &)> code) {
   if (m_currentlySettingInputControlValues)
     return;
 
   for (auto const &attachment : selectedAttachments()) {
-    code(attachment);
+    code(*attachment);
     m_attachmentsModel->attachmentUpdated(*attachment);
   }
 }
@@ -184,17 +184,17 @@ Tab::enableDisableAllAttachedFiles(bool enable) {
 
 void
 Tab::onAttachmentNameChanged(QString newValue) {
-  withSelectedAttachments([&](Attachment *attachment) { attachment->m_name = newValue; });
+  withSelectedAttachments([&newValue](auto &attachment) { attachment.m_name = newValue; });
 }
 
 void
 Tab::onAttachmentDescriptionChanged(QString newValue) {
-  withSelectedAttachments([&](Attachment *attachment) { attachment->m_description = newValue; });
+  withSelectedAttachments([&newValue](auto &attachment) { attachment.m_description = newValue; });
 }
 
 void
 Tab::onAttachmentMIMETypeChanged(QString newValue) {
-  withSelectedAttachments([&](Attachment *attachment) { attachment->m_MIMEType = newValue; });
+  withSelectedAttachments([&newValue](auto &attachment) { attachment.m_MIMEType = newValue; });
 }
 
 void
@@ -204,7 +204,7 @@ Tab::onAttachmentStyleChanged(int newValue) {
     return;
 
   auto style = data.toInt() == Attachment::ToAllFiles ? Attachment::ToAllFiles : Attachment::ToFirstFile;
-  withSelectedAttachments([&](Attachment *attachment) { attachment->m_style = style; });
+  withSelectedAttachments([style](auto &attachment) { attachment.m_style = style; });
 }
 
 void
@@ -388,7 +388,7 @@ Tab::setAttachmentControlValues(Attachment *attachment) {
     ui->attachmentDescription->setText( attachment->m_description);
     ui->attachmentMIMEType->setEditText(attachment->m_MIMEType);
 
-    Util::setComboBoxIndexIf(ui->attachmentStyle, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toInt() == static_cast<int>(attachment->m_style)); });
+    Util::setComboBoxIndexIf(ui->attachmentStyle, [&attachment](auto const &, auto const &data) { return data.isValid() && (data.toInt() == static_cast<int>(attachment->m_style)); });
   }
 
   m_currentlySettingInputControlValues = false;

@@ -286,9 +286,9 @@ protected:
   virtual void clearInputControlValues();
   virtual void setControlValuesFromConfig();
   virtual MuxConfig &updateConfigFromControlValues();
-  virtual void withSelectedTracks(std::function<void(Track *)> code, bool notIfAppending = false, QWidget *widget = nullptr);
+  virtual void withSelectedTracks(std::function<void(Track &)> code, bool notIfAppending = false, QWidget *widget = nullptr);
   virtual void withSelectedAttachedFiles(std::function<void(Track &)> code);
-  virtual void withSelectedAttachments(std::function<void(Attachment *)> code);
+  virtual void withSelectedAttachments(std::function<void(Attachment &)> code);
   virtual void addOrRemoveEmptyComboBoxItem(bool add);
   virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit, InitialDirMode intialDirMode = InitialDirMode::ContentLastOpenDir);
   virtual QString getSaveFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);

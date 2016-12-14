@@ -221,7 +221,7 @@ Tab::onStatusChanged(uint64_t id,
     return;
   }
 
-  job->action([&]() {
+  job->action([this, d, job, newStatus]() {
     d->m_currentJobStatus = job->status();
 
     d->ui->abortButton->setEnabled(Jobs::Job::Running == d->m_currentJobStatus);
