@@ -855,7 +855,7 @@ Tab::onDefaultTrackFlagChanged(int newValue) {
   withSelectedTracks([this, newValue](auto &track) {
     track.m_defaultTrackFlag = newValue;
     if (1 == newValue)
-      ensureOneDefaultFlagOnly(&track);
+      this->ensureOneDefaultFlagOnly(&track);
   }, true);
 
   m_tracksModel->updateEffectiveDefaultTrackFlags();

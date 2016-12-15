@@ -1951,7 +1951,7 @@ void
 qtmp4_reader_c::detect_interleaving() {
   std::list<qtmp4_demuxer_cptr> demuxers_to_read;
   boost::remove_copy_if(m_demuxers, std::back_inserter(demuxers_to_read), [this](auto const &dmx) {
-    return !(dmx->ok && (dmx->is_audio() || dmx->is_video()) && demuxing_requested(dmx->type, dmx->id, dmx->language) && (dmx->sample_table.size() > 1));
+    return !(dmx->ok && (dmx->is_audio() || dmx->is_video()) && this->demuxing_requested(dmx->type, dmx->id, dmx->language) && (dmx->sample_table.size() > 1));
   });
 
   if (demuxers_to_read.size() < 2) {

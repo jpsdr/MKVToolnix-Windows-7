@@ -77,7 +77,7 @@ Model::selectedJobs(QAbstractItemView *view) {
 
   QList<Job *> jobs;
   Util::withSelectedIndexes(view, [this, &jobs](auto const &idx) {
-    jobs << m_jobsById[ data(idx, Util::JobIdRole).template value<uint64_t>() ].get();
+    jobs << m_jobsById[ this->data(idx, Util::JobIdRole).template value<uint64_t>() ].get();
   });
 
   return jobs;
