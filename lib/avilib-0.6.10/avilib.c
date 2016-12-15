@@ -66,7 +66,7 @@
 /* #define NEW_RIFF_THRES (10*1024*1024) */
 
 // Maximum number of indices per stream
-#define NR_IXNN_CHUNKS 32
+#define NR_IXNN_CHUNKS 1024
 
 
 #define DEBUG_ODML
@@ -315,7 +315,7 @@ static int avi_init_super_index(avi_t *AVI, char *idxtag, avisuperindex_chunk **
     memcpy (sil->dwChunkId, idxtag, 4);
     memset (sil->dwReserved, 0, sizeof (sil->dwReserved));
 
-    // NR_IXNN_CHUNKS == allow 32 indices which means 32 GB files -- arbitrary
+    // NR_IXNN_CHUNKS == allow 1024 indices which means 1024 GB files -- arbitrary
     sil->aIndex = malloc (sil->wLongsPerEntry * NR_IXNN_CHUNKS * sizeof (uint32_t));
     if (!sil->aIndex) {
 	AVI_errno = AVI_ERR_NO_MEM;
