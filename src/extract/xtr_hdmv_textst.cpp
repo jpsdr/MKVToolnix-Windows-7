@@ -59,7 +59,7 @@ xtr_hdmv_textst_c::create_file(xtr_base_c *master,
   auto style_segment_start = old_style ? 1 : 0;
   auto style_segment_size  = get_uint16_be(&buf[style_segment_start + 1]);
 
-  if (mpriv->get_size() < (3 + style_segment_size + (old_style ? 1 + 2 : 0)))
+  if (mpriv->get_size() < static_cast<uint64_t>(3 + style_segment_size + (old_style ? 1 + 2 : 0)))
     mxerror(boost::format(Y("Track %1% CodecPrivate is too small.\n")) % m_tid);
 
   m_out->write(std::string{"TextST"});
