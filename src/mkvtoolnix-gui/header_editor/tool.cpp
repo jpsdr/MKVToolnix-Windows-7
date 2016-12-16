@@ -58,12 +58,15 @@ Tool::setupActions() {
 
   connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,             this, &Tool::selectFileToOpen);
   connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,             this, &Tool::save);
+  connect(mwUi->actionHeaderEditorSaveAll,  &QAction::triggered,             this, &Tool::saveAllTabs);
   connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,             this, &Tool::validate);
   connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,             this, &Tool::reload);
   connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,             this, &Tool::closeCurrentTab);
+  connect(mwUi->actionHeaderEditorCloseAll, &QAction::triggered,             this, &Tool::closeAllTabs);
 
   connect(ui->openFileButton,               &QPushButton::clicked,           this, &Tool::selectFileToOpen);
 
+  connect(m_headerEditorMenu,               &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
   connect(mw,                               &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
   connect(mw,                               &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
@@ -73,14 +76,27 @@ Tool::setupActions() {
 void
 Tool::showHeaderEditorsWidget() {
   auto hasTabs = !!ui->editors->count();
-  auto mwUi    = MainWindow::getUi();
 
   ui->stack->setCurrentWidget(hasTabs ? ui->editorsPage : ui->noFilesPage);
+
+  enableMenuActions();
+}
+
+void
+Tool::enableMenuActions() {
+  auto hasTabs = !!ui->editors->count();
+  auto mwUi    = MainWindow::getUi();
 
   mwUi->actionHeaderEditorSave->setEnabled(hasTabs);
   mwUi->actionHeaderEditorReload->setEnabled(hasTabs);
   mwUi->actionHeaderEditorValidate->setEnabled(hasTabs);
   mwUi->actionHeaderEditorClose->setEnabled(hasTabs);
+  mwUi->menuHeaderEditorAll->setEnabled(hasTabs);
+  mwUi->actionHeaderEditorSaveAll->setEnabled(hasTabs);
+  mwUi->actionHeaderEditorCloseAll->setEnabled(hasTabs);
+  mwUi->menuHeaderEditorAll->setEnabled(hasTabs);
+  mwUi->actionHeaderEditorSaveAll->setEnabled(hasTabs);
+  mwUi->actionHeaderEditorCloseAll->setEnabled(hasTabs);
 }
 
 void
@@ -234,6 +250,11 @@ Tool::closeSendingTab() {
   }
 }
 
+void
+Tool::saveAllTabs() {
+  forEachTab([](auto &tab) { tab.save(); });
+}
+
 bool
 Tool::closeAllTabs() {
   for (auto index = ui->editors->count(); index > 0; --index)
@@ -251,6 +272,18 @@ Tool::currentTab() {
 void
 Tool::setupTabPositions() {
   ui->editors->setTabPosition(Util::Settings::get().m_tabPosition);
+}
+
+void
+Tool::forEachTab(std::function<void(Tab &)> const &worker) {
+  auto currentIndex = ui->editors->currentIndex();
+
+  for (auto index = 0, numTabs = ui->editors->count(); index < numTabs; ++index) {
+    ui->editors->setCurrentIndex(index);
+    worker(dynamic_cast<Tab &>(*ui->editors->widget(index)));
+  }
+
+  ui->editors->setCurrentIndex(currentIndex);
 }
 
 }}}

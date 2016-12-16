@@ -51,12 +51,15 @@ Tool::setupActions() {
   auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionJobOutputSave,  &QAction::triggered,             this, &Tool::saveCurrentTabOutput);
-  connect(mwUi->actionJobOutputClose, &QAction::triggered,             this, &Tool::closeCurrentTab);
-  connect(ui->widgets,                &QTabWidget::tabCloseRequested,  this, &Tool::closeTab);
-  connect(ui->widgets,                &QTabWidget::currentChanged,     this, &Tool::enableMenuActions);
-  connect(mw,                         &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
-  connect(mw,                         &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
+  connect(mwUi->actionJobOutputSave,     &QAction::triggered,             this, &Tool::saveCurrentTabOutput);
+  connect(mwUi->actionJobOutputClose,    &QAction::triggered,             this, &Tool::closeCurrentTab);
+  connect(mwUi->actionJobOutputSaveAll,  &QAction::triggered,             this, &Tool::saveAllTabs);
+  connect(mwUi->actionJobOutputCloseAll, &QAction::triggered,             this, &Tool::closeAllTabs);
+  connect(ui->widgets,                   &QTabWidget::tabCloseRequested,  this, &Tool::closeTab);
+  connect(ui->widgets,                   &QTabWidget::currentChanged,     this, &Tool::enableMenuActions);
+  connect(m_jobOutputMenu,               &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
+  connect(mw,                            &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
+  connect(mw,                            &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 }
 
 void
@@ -137,10 +140,21 @@ Tool::saveCurrentTabOutput() {
 
 void
 Tool::enableMenuActions() {
-  auto mwUi = MainWindow::getUi();
+  auto mwUi    = MainWindow::getUi();
+  auto numTabs = ui->widgets->count();
+  auto canSave = false;
+
+  for (auto index = 0; index < numTabs; ++index)
+    if (dynamic_cast<Tab &>(*ui->widgets->widget(index)).isSaveOutputEnabled()) {
+      canSave = true;
+      break;
+    }
 
   mwUi->actionJobOutputSave->setEnabled(currentTab()->isSaveOutputEnabled());
   mwUi->actionJobOutputClose->setEnabled(ui->widgets->currentIndex() > 0);
+  mwUi->menuJobOutputAll->setEnabled(canSave || (numTabs > 1));
+  mwUi->actionJobOutputSaveAll->setEnabled(canSave);
+  mwUi->actionJobOutputCloseAll->setEnabled(numTabs > 1);
 }
 
 void
@@ -151,6 +165,32 @@ Tool::setupTabPositions() {
 void
 Tool::switchToCurrentJobTab() {
   ui->widgets->setCurrentIndex(0);
+}
+
+void
+Tool::closeAllTabs() {
+  for (auto index = ui->widgets->count(); index > 1; --index)
+    closeTab(index - 1);
+}
+
+void
+Tool::saveAllTabs() {
+  forEachTab([](auto &tab) {
+    if (tab.isSaveOutputEnabled())
+      tab.onSaveOutput();
+  });
+}
+
+void
+Tool::forEachTab(std::function<void(Tab &)> const &worker) {
+  auto currentIndex = ui->widgets->currentIndex();
+
+  for (auto index = 0, numTabs = ui->widgets->count(); index < numTabs; ++index) {
+    ui->widgets->setCurrentIndex(index);
+    worker(dynamic_cast<Tab &>(*ui->widgets->widget(index)));
+  }
+
+  ui->widgets->setCurrentIndex(currentIndex);
 }
 
 }}}

@@ -99,6 +99,14 @@
     <property name="title">
      <string notr="true">&amp;Header editor</string>
     </property>
+    <widget class="QMenu" name="menuHeaderEditorAll">
+     <property name="title">
+      <string>Actions for &amp;all tabs</string>
+     </property>
+     <addaction name="actionHeaderEditorSaveAll"/>
+     <addaction name="separator"/>
+     <addaction name="actionHeaderEditorCloseAll"/>
+    </widget>
     <addaction name="actionHeaderEditorOpen"/>
     <addaction name="actionHeaderEditorReload"/>
     <addaction name="separator"/>
@@ -106,6 +114,8 @@
     <addaction name="actionHeaderEditorSave"/>
     <addaction name="separator"/>
     <addaction name="actionHeaderEditorClose"/>
+    <addaction name="separator"/>
+    <addaction name="menuHeaderEditorAll"/>
    </widget>
    <widget class="QMenu" name="menuChapterEditor">
     <property name="title">
@@ -138,9 +148,19 @@
     <property name="title">
      <string notr="true">Job o&amp;utput</string>
     </property>
+    <widget class="QMenu" name="menuJobOutputAll">
+     <property name="title">
+      <string>Actions for &amp;all tabs</string>
+     </property>
+     <addaction name="actionJobOutputSaveAll"/>
+     <addaction name="separator"/>
+     <addaction name="actionJobOutputCloseAll"/>
+    </widget>
     <addaction name="actionJobOutputSave"/>
     <addaction name="separator"/>
     <addaction name="actionJobOutputClose"/>
+    <addaction name="separator"/>
+    <addaction name="menuJobOutputAll"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -724,6 +744,24 @@
     <string>&amp;Save</string>
    </property>
   </action>
+  <action name="actionHeaderEditorCloseAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+  </action>
+  <action name="actionHeaderEditorSaveAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+  </action>
   <action name="actionMergeCloseAll">
    <property name="icon">
     <iconset resource="../../qt_resources.qrc">
@@ -758,6 +796,24 @@
    </property>
    <property name="text">
     <string>Add to job &amp;queue</string>
+   </property>
+  </action>
+  <action name="actionJobOutputCloseAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+  </action>
+  <action name="actionJobOutputSaveAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
    </property>
   </action>
  </widget>

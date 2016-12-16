@@ -23,7 +23,6 @@ class Tab;
 
 class Tool : public ToolBase {
   Q_OBJECT;
-
 protected:
   // UI stuff:
   std::unique_ptr<Ui::Tool> ui;
@@ -48,11 +47,16 @@ public slots:
   virtual void toolShown() override;
   virtual void closeTab(int idx);
   virtual void closeCurrentTab();
+  virtual void closeAllTabs();
   virtual void saveCurrentTabOutput();
+  virtual void saveAllTabs();
   virtual void enableMenuActions();
   virtual void setupTabPositions();
   virtual void retranslateUi();
   virtual void switchToCurrentJobTab();
+
+protected:
+  virtual void forEachTab(std::function<void(Tab &)> const &worker);
 };
 
 }}}
