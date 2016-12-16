@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # coding: utf-8
 
 if Signal.list.key?('ALRM')
@@ -563,14 +562,10 @@ EOT
     desc "Fetch and merge all translations from Transifex"
     task "pull" => transifex_pull_targets.values.flatten
 
-    desc "Push program translations to Transifex"
-    task "push-programs" => transifex_push_targets["programs"]
-
-    desc "Push man page translations to Transifex"
-    task "push-man-pages" => transifex_push_targets["man-pages"]
-
-    desc "Push all translations to Transifex"
-    task "push" => transifex_push_targets.values.flatten
+    desc "Push program translation source file to Transifex"
+    task "push-programs-source" => "po/mkvtoolnix.pot" do
+      runq "tx push", "po/mkvtoolnix.pot", "tx push -s -r mkvtoolnix.programs > /dev/null"
+    end
   end
 
   [ :stats, :statistics ].each_with_index do |task_name, idx|
