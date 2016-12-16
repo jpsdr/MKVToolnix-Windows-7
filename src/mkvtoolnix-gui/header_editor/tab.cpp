@@ -287,12 +287,19 @@ Tab::retranslateUi() {
   m_saveAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-save.png")});
   m_replaceAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-open.png")});
 
+  setupToolTips();
+
   for (auto const &page : m_model->pages())
     page->retranslateUi();
 
   m_model->retranslateUi();
 
   Util::resizeViewColumnsToContents(ui->elements);
+}
+
+void
+Tab::setupToolTips() {
+  Util::setToolTip(ui->elements, QY("Right-click for actions for header elements and attachments"));
 }
 
 void

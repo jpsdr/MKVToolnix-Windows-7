@@ -176,7 +176,7 @@ Tab::retranslateUi() {
   m_generateSubChaptersAction->setText(QY("&Generate sub-chapters"));
   m_renumberSubChaptersAction->setText(QY("Re&number sub-chapters"));
 
-  Util::setToolTip(ui->pbBrowseSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
+  setupToolTips();
 
   m_chapterModel->retranslateUi();
   m_nameModel->retranslateUi();
@@ -184,6 +184,12 @@ Tab::retranslateUi() {
   resizeChapterColumnsToContents();
 
   emit titleChanged();
+}
+
+void
+Tab::setupToolTips() {
+  Util::setToolTip(ui->elements, QY("Right-click for actions for editions and chapters"));
+  Util::setToolTip(ui->pbBrowseSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
 }
 
 void

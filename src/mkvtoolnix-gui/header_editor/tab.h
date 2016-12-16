@@ -74,6 +74,7 @@ public slots:
 
 protected:
   void setupUi();
+  void setupToolTips();
   void handleSegmentInfo(kax_analyzer_data_c const &data);
   void handleTracks(kax_analyzer_data_c const &data);
   void handleAttachments();

@@ -166,6 +166,8 @@ protected:
   void setCountries(QStandardItem *item, QString const &country);
 
 protected:
+  void setupToolTips();
+
   void chaptersLoaded(ChaptersPtr const &chapters, bool canBeWritten);
 
   QString currentState() const;
