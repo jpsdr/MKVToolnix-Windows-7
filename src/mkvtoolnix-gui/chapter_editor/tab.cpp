@@ -1673,7 +1673,7 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
         names << (kLanguage ? Q(*kLanguage) : Q("eng"));
       }
 
-    for (auto row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
+    for (std::size_t row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
       collector(currentItem->child(row));
   };
 
@@ -1705,7 +1705,7 @@ Tab::usedNameCountryCodes(QStandardItem *rootItem) {
           countryCodes << Q(*kCountry);
       }
 
-    for (auto row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
+    for (std::size_t row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
       collector(currentItem->child(row));
   };
 
