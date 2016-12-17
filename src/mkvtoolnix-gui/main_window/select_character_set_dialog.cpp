@@ -43,9 +43,7 @@ SelectCharacterSetDialog::SelectCharacterSetDialog(QWidget *parent,
 
   d->m_ui->characterSet->setAdditionalItems(characterSets).setup().setCurrentByData(characterSetToSelect);
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
   d->m_ui->content->setPlaceholderText(QY("File not found"));
-#endif
 
   connect(MainWindow::get(),     &MainWindow::preferencesChanged,                                        this, &SelectCharacterSetDialog::retranslateUi);
   connect(d->m_ui->characterSet, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SelectCharacterSetDialog::updatePreview);

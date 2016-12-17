@@ -137,11 +137,9 @@ Tab::retranslateUi() {
   d->m_clearOutputAction->setText(QY("&Clear output and reset progress"));
   d->m_openFolderAction->setText(QY("&Open folder"));
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
   d->ui->output->setPlaceholderText(QY("No output yet"));
   d->ui->warnings->setPlaceholderText(QY("No warnings yet"));
   d->ui->errors->setPlaceholderText(QY("No errors yet"));
-#endif
 }
 
 void

@@ -2,6 +2,8 @@ dnl
 dnl Check for Qt 5
 dnl
 
+qt_min_ver=5.3.0
+
 AC_ARG_ENABLE([qt],
   AC_HELP_STRING([--enable-qt],[compile the Qt version of the GUIs (yes)]),
   [],[enable_qt=yes])
@@ -12,8 +14,6 @@ AC_ARG_WITH([qt_pkg_config_modules],
 AC_ARG_WITH([qt_pkg_config],
   AC_HELP_STRING([--without-qt-pkg-config], [do not use pkg-config for detecting Qt; instead rely on QT_CFLAGS/QT_LIBS being set correctly already]),
   [ with_qt_pkg_config=${withval} ], [ with_qt_pkg_config=yes ])
-
-qt_min_ver=5.2.0
 
 if test x"$enable_qt" = "xyes" -a \
   '(' x"$enable_gui" = x"yes" -o x"$enable_gui" = "x" ')'; then
