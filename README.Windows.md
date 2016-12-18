@@ -27,8 +27,8 @@ Luckily there's the [M cross environment project]
 of setting up the cross-compiler and all required libraries.
 
 mxe is a fast-changing project. In order to provide a stable basis for
-compilation author maintains his own fork. That fork also includes a
-couple of changes that cause libraries to be compiled only with the
+compilation the author maintains his own fork. That fork also includes
+a couple of changes that cause libraries to be compiled only with the
 features required by MKVToolNix saving compilation time and deployment
 space. In order to retrieve that fork you need `git`. Then to the
 following:
