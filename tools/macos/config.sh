@@ -8,9 +8,9 @@ export CPP="clang -E"
 export CXX="clang++"
 export CXXCPP="clang++ -E"
 # export LDFLAGS="-stdlib=libc++"
-export CXXFLAGS="-std=c++11"
-export CXXFLAGS="-std=c++11 -fvisibility=hidden -fvisibility-inlines-hidden"
+export CXXFLAGS="-std=c++14"
+export CXXFLAGS="-std=c++14 -fvisibility=hidden -fvisibility-inlines-hidden"
 export MAKEFLAGS="-j 4"
 export DRAKETHREADS=4
 export SHARED_QT=1
-export QTVER=${QTVER:-5.5.1}
+export QTVER=${QTVER:-5.7.1}

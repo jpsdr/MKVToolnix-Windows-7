@@ -24,11 +24,11 @@ function build_package {
   local DIR=${DIR:-$PACKAGE}
 
   case ${FILE##*.} in
-    xz)  COMPRESSION=J ;;
-    bz2) COMPRESSION=j ;;
-    gz)  COMPRESSION=z ;;
-    tar) COMPRESSION=  ;;
-    *)   echo Unknown compression for ${FILE} ; exit 1 ;;
+    xz|lzma) COMPRESSION=J ;;
+    bz2)     COMPRESSION=j ;;
+    gz)      COMPRESSION=z ;;
+    tar)     COMPRESSION=  ;;
+    *)       echo Unknown compression for ${FILE} ; exit 1 ;;
   esac
 
   cd $CMPL
@@ -71,7 +71,7 @@ function build_ogg {
 }
 
 function build_vorbis {
-  build_package libvorbis-1.3.4.tar.gz --prefix=${TARGET} \
+  build_package libvorbis-1.3.5.tar.gz --prefix=${TARGET} \
     --with-ogg-libraries=${TARGET}/lib --with-ogg-includes=${TARGET}/include/ \
     --enable-static --disable-shared
 }
@@ -88,7 +88,7 @@ function build_zlib {
 }
 
 function build_gettext {
-  NO_MAKE=1 build_package gettext-0.19.3.tar.gz --prefix=${TARGET} \
+  NO_MAKE=1 build_package gettext-0.19.8.1.tar.gz --prefix=${TARGET} \
     --without-libexpat-prefix \
     --without-libxml2-prefix \
     --without-emacs \
@@ -104,20 +104,31 @@ function build_ruby {
 }
 
 function build_boost {
-  local -a args
+  local -a args properties
 
-  args=(--reconfigure toolset=clang link=static -sICONV_PATH=/usr --prefix=${TARGET} -j$DRAKETHREADS)
-  if [[ -n $CXXFLAGS ]] args+=(cxxflags=$CXXFLAGS)
-  if [[ -n $LDFLAGS  ]] args+=(linkflags=$LDFLAGS)
+  args=(--reconfigure -sICONV_PATH=/usr -j$DRAKETHREADS --prefix=TMPDIR/${TARGET} --libdir=TMPDIR/${TARGET}/lib)
+  properties=(toolset=clang link=static variant=release)
+  if [[ -n $CXXFLAGS ]] properties+=(cxxflags="${(q)CXXFLAGS}")
+  if [[ -n $LDFLAGS  ]] properties+=(linkflags="${(q)LDFLAGS}")
 
-  NO_MAKE=1 CONFIGURE=./bootstrap.sh build_package boost_1_57_0.tar.bz2 \
-    --with-toolset=clang --prefix=${TARGET} --libdir=${TARGET}/lib
-  ./b2 ${args} install
+  NO_MAKE=1 CONFIGURE=./bootstrap.sh build_package boost_1_60_0.tar.bz2 \
+    --with-toolset=clang
+  build_tarball command "./b2 ${args} ${properties} install"
+}
+
+function build_curl {
+  build_package curl-7.40.0.tar.xz --prefix=${TARGET} \
+    --disable-shared --enable-static \
+    --disable-ldap --disable-ldaps --disable-rtsp \
+    --disable-dict --disable-telnet --disable-gopher \
+    --disable-imap --disable-imaps --disable-pop3 --disable-pop3s \
+    --disable-smb --disable-smbs --disable-smtp --disable-smtps --disable-tftp
 }
 
 function build_qtbase {
   local -a args
   args=(--prefix=${TARGET} -opensource -confirm-license -release
+        -c++std c++14
         -force-pkg-config -nomake examples -nomake tests
         -no-glib -no-dbus  -no-sql-mysql -no-sql-sqlite -no-sql-odbc -no-sql-psql -no-sql-tds
         -no-openssl -no-cups -no-feature-cups -no-feature-printer
@@ -126,7 +137,14 @@ function build_qtbase {
   if [[ -z $SHARED_QT ]] args+=(-static)
 
   local package=qtbase-opensource-src-${QTVER}
-  NO_MAKE=1 build_package ${package}.tar.xz $args
+  local saved_CXXFLAGS=$CXXFLAGS
+  export CXXFLAGS="-stdlib=libc++"
+  export QMAKE_CXXFLAGS="${CXXFLAGS}"
+
+  NO_CONFIGURE=1 build_package ${package}.tar.xz
+
+  if [[ $QTVER == 5.7.0 ]] patch -p2 < ${SCRIPT_PATH}/qt-patches/002-xcrun-xcode-8.patch
+  $DEBUG ./configure ${args}
 
   # find . -name Makefile| xargs perl -pi -e 's{-fvisibility=hidden|-fvisibility-inlines-hidden}{}g'
 
@@ -134,6 +152,8 @@ function build_qtbase {
 
   # cd ${CMPL}/${package}
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
+
+  CXXFLAGS=$saved_CXXFLAGS
 }
 
 function build_qttools {
@@ -142,6 +162,10 @@ function build_qttools {
   to_install=()
 
   local package=qttools-opensource-src-${QTVER}
+  local saved_CXXFLAGS=$CXXFLAGS
+  export CXXFLAGS="-stdlib=libc++"
+  export QMAKE_CXXFLAGS="${CXXFLAGS}"
+
   CONFIGURE=qmake NO_MAKE=1 build_package ${package}.tar.xz
 
   for tool ($tools) {
@@ -154,27 +178,32 @@ function build_qttools {
 
   # cd ${CMPL}/${package}
   build_tarball command "mkdir -p TMPDIR/${TARGET}/bin && cp -v $to_install TMPDIR/${TARGET}/bin/"
+
+  CXXFLAGS=$saved_CXXFLAGS
 }
 
 function build_qttranslations {
+  local saved_CXXFLAGS=$CXXFLAGS
+  export CXXFLAGS="-stdlib=libc++"
+  export QMAKE_CXXFLAGS="${CXXFLAGS}"
+
   CONFIGURE=qmake NO_MAKE=1 build_package qttranslations-opensource-src-${QTVER}.tar.xz
   $DEBUG make
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
+
+  CXXFLAGS=$saved_CXXFLAGS
 }
 
 function build_qtmacextras {
+  local saved_CXXFLAGS=$CXXFLAGS
+  export CXXFLAGS="-stdlib=libc++"
+  export QMAKE_CXXFLAGS="${CXXFLAGS}"
+
   CONFIGURE=qmake NO_MAKE=1 build_package qtmacextras-opensource-src-${QTVER}.tar.xz
   $DEBUG make
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
-}
 
-function build_curl {
-  build_package curl-7.40.0.tar.xz --prefix=${TARGET} \
-    --disable-shared --enable-static \
-    --disable-ldap --disable-ldaps --disable-rtsp \
-    --disable-dict --disable-telnet --disable-gopher \
-    --disable-imap --disable-imaps --disable-pop3 --disable-pop3s \
-    --disable-smb --disable-smbs --disable-smtp --disable-smtps --disable-tftp
+  CXXFLAGS=$saved_CXXFLAGS
 }
 
 function build_configured_mkvtoolnix {
