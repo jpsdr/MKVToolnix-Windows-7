@@ -566,6 +566,11 @@ EOT
     task "push-programs-source" => "po/mkvtoolnix.pot" do
       runq "tx push", "po/mkvtoolnix.pot", "tx push -s -r mkvtoolnix.programs > /dev/null"
     end
+
+    desc "Push man page translation source file to Transifex"
+    task "push-man-pages-source" => "doc/man/po4a/po/mkvtoolnix.pot" do
+      runq "tx push", "doc/man/po4a/po/mkvtoolnix.pot", "tx push -s -r mkvtoolnix.man-pages > /dev/null"
+    end
   end
 
   [ :stats, :statistics ].each_with_index do |task_name, idx|
