@@ -7,9 +7,11 @@
 #include <QStringList>
 
 #include "common/extern_data.h"
+#include "common/json.h"
 #include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
+#include "mkvtoolnix-gui/util/json.h"
 #include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -202,6 +204,9 @@ unescape(QString const &source,
 QStringList
 escape(QStringList const &source,
        EscapeMode mode) {
+  if (EscapeJSON == mode)
+    return { Q(mtx::json::dump(variantToNlohmannJson(source), 2)) };
+
   auto escaped = QStringList{};
   auto first   = true;
 
