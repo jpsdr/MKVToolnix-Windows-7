@@ -57,7 +57,7 @@
     <arg>options2</arg>
     <arg choice="req">file2</arg>
    </arg>
-   <arg>@optionsfile</arg>
+   <arg>@options-file.json</arg>
   </cmdsynopsis>
  </refsynopsisdiv>
 
@@ -2057,7 +2057,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
     </varlistentry>
 
     <varlistentry>
-     <term><option>@</option><parameter>options-file</parameter></term>
+     <term><option>@</option><parameter>options-file.json</parameter></term>
      <listitem>
       <para>
        Reads additional command line arguments from the file <parameter>options-file</parameter>. See the section about <link
@@ -2537,30 +2537,67 @@ Track ID 1: audio (A_MPEG/L3)</screen>
   </para>
 
   <para>
-   There are several rules regarding option files. Lines whose first non-whitespace character is a hash mark ('<literal>#</literal>') are
-   treated as comments and ignored. White spaces at the start and end of a line will be stripped. Each line must contain exactly one
-   option.
+   There are two formats for option files: a JSON format and a proprietary legacy format. The legacy format is deprecated, and support for
+   it will likely be removed in 2017.
   </para>
 
-  <para>
-   A line not containing anything is also ignored. An empty argument is represented by the line '<literal>#EMPTY#</literal>'.
-  </para>
+  <refsect2 id="mkvmerge.option_files.json_format">
+   <title>The JSON format</title>
 
-  <para>
-   Several chars can be escaped, e.g. if you need to start a non-comment line with '#'. The rules are described in <link
-   linkend="mkvmerge.escaping">the section about escaping text</link>.
-  </para>
+   <para>
+    A JSON option file's name must end in '<filename>.json</filename>'. Its content must be a valid JSON array consisting solely of JSON
+    strings. The file's encoding must be UTF-8. The file should not start with a <foreignphrase>byte order marker</foreignphrase>
+    (<abbrev>BOM</abbrev>), but if one exists, it will be skipped.
+   </para>
 
-  <para>
-   Note that backslashes must always be escaped. Hash marks ('#') must be escaped if they should not start a comment.
-  </para>
+   <para>
+    The rules for escaping special characters inside JSON are the ones in the official JSON specification, <ulink url="https://tools.ietf.org/html/rfc7159">RFC 7159</ulink>.
+   </para>
 
-  <para>
-   The command line '<command>mkvmerge -o "my file.mkv" -A "a movie.avi" sound.ogg</command>' could be converted into the following
-   option file:
-  </para>
+   <para>
+    The command line '<command>mkvmerge -o "my file.mkv" -A "a movie.avi" sound.ogg</command>' could be converted into the following
+    JSON option file called e.g. '<filename>options.json</filename>':
+   </para>
 
-  <programlisting># Write to the file "c:\Matroska\my file.mkv" on Windows.
+   <programlisting>[
+  "-o",
+  "c:\\Matroska\\my file.mkv",
+  "--title",
+  "#65",
+  "-A",
+  "a movie.avi",
+  "sound.ogg"
+]</programlisting>
+  </refsect2>
+
+  <refsect2 id="mkvmerge.option_files.legacy_format">
+   <title>The legacy format</title>
+
+   <para>
+    There are several rules regarding option files. Lines whose first non-whitespace character is a hash mark ('<literal>#</literal>') are
+    treated as comments and ignored. White spaces at the start and end of a line will be stripped. Each line must contain exactly one
+    option.
+   </para>
+
+   <para>
+    A line not containing anything is also ignored. An empty argument is represented by the line '<literal>#EMPTY#</literal>'.
+   </para>
+
+   <para>
+    Several chars can be escaped, e.g. if you need to start a non-comment line with '#'. The rules are described in <link
+    linkend="mkvmerge.escaping">the section about escaping text</link>.
+   </para>
+
+   <para>
+    Note that backslashes must always be escaped. Hash marks ('#') must be escaped if they should not start a comment.
+   </para>
+
+   <para>
+    The command line '<command>mkvmerge -o "my file.mkv" -A "a movie.avi" sound.ogg</command>' could be converted into the following
+    legacy option file called e.g. '<filename>options.txt</filename>':
+   </para>
+
+   <programlisting># Write to the file "c:\Matroska\my file.mkv" on Windows.
 -o
 c:\\Matroska\\my file.mkv
 # Set the title to '#65'.
@@ -2570,6 +2607,7 @@ c:\\Matroska\\my file.mkv
 -A
 a movie.avi
 sound.ogg</programlisting>
+  </refsect2>
 
  </refsect1>
 
