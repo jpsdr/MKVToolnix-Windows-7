@@ -47,7 +47,7 @@ MuxJob::abort() {
 void
 MuxJob::start() {
   m_aborted      = false;
-  m_settingsFile = Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob-XXXXXX", m_config->buildMkvmergeOptions());
+  m_settingsFile = Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob", m_config->buildMkvmergeOptions());
 
   setStatus(Job::Running);
   setProgress(0);

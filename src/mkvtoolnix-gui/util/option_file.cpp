@@ -8,6 +8,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/option_file.h"
+#include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -24,9 +25,13 @@ OptionFile::create(QString const &fileName,
 std::unique_ptr<QTemporaryFile>
 OptionFile::createTemporary(QString const &prefix,
                             QStringList const &options) {
-  auto file = std::make_unique<QTemporaryFile>(QDir::temp().filePath(prefix));
-  Q_ASSERT(file->open());
+  auto file = std::make_unique<QTemporaryFile>(QDir::temp().filePath(Q("%1-XXXXXX.json").arg(prefix)));
+
+  if (!file->open())
+    throw ProcessX{ to_utf8(QY("Error creating a temporary file (reason: %1).").arg(file->errorString())) };
+
   write(*file, options);
+
   file->close();
 
   return file;
@@ -35,13 +40,9 @@ OptionFile::createTemporary(QString const &prefix,
 void
 OptionFile::write(QFile &file,
                   QStringList const &options) {
-  auto escapedOptions = Util::escape(options, Util::EscapeMkvtoolnix);
+  auto serialized = to_utf8(escape(options, EscapeJSON)[0]);
 
-  static const unsigned char utf8_bom[3] = {0xef, 0xbb, 0xbf};
-
-  file.write(reinterpret_cast<char const *>(utf8_bom), 3);
-  for (auto &option : escapedOptions)
-    file.write(Q("%1\n").arg(option).toUtf8());
+  file.write(serialized.c_str());
 }
 
 }}}
