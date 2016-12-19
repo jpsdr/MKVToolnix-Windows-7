@@ -21,6 +21,7 @@
 
 #include "common/command_line.h"
 #include "common/hacks.h"
+#include "common/json.h"
 #include "common/mm_io_x.h"
 #include "common/mm_write_buffer_io.h"
 #include "common/strings/editing.h"
@@ -37,15 +38,14 @@ bool g_gui_mode = false;
    \c args.
 */
 static void
-read_args_from_file(std::vector<std::string> &args,
-                    const std::string &filename) {
-  mm_text_io_c *mm_io;
+read_args_from_old_option_file(std::vector<std::string> &args,
+                               std::string const &filename) {
+  mm_text_io_cptr mm_io;
   std::string buffer;
   bool skip_next;
 
-  mm_io = nullptr;
   try {
-    mm_io = new mm_text_io_c(new mm_file_io_c(filename));
+    mm_io = std::make_shared<mm_text_io_c>(new mm_file_io_c(filename));
   } catch (mtx::mm_io::exception &ex) {
     mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % filename % ex);
   }
@@ -72,8 +72,59 @@ read_args_from_file(std::vector<std::string> &args,
     }
     args.push_back(unescape(buffer));
   }
+}
 
-  delete mm_io;
+static void
+read_args_from_json_file(std::vector<std::string> &args,
+                         std::string const &filename) {
+  std::string buffer;
+
+  try {
+    auto io = std::make_shared<mm_text_io_c>(new mm_file_io_c(filename));
+    io->read(buffer, io->get_size());
+
+  } catch (mtx::mm_io::exception &ex) {
+    mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % filename % ex);
+  }
+
+  try {
+    auto doc       = mtx::json::parse(buffer);
+    auto skip_next = false;
+
+    if (!doc.is_array())
+      throw std::domain_error{Y("JSON option files must contain a JSON array consisting solely of JSON strings")};
+
+    for (auto const &val : doc) {
+      if (!val.is_string())
+        throw std::domain_error{Y("JSON option files must contain a JSON array consisting solely of JSON strings")};
+
+      if (skip_next) {
+        skip_next = false;
+        continue;
+      }
+
+      auto string = val.get<std::string>();
+      if (string == "--command-line-charset")
+        skip_next = true;
+
+      else
+        args.push_back(string);
+    }
+
+  } catch (std::exception const &ex) {
+    mxerror(boost::format("The JSON option file '%1%' contains an error: %2%.\n") % filename % ex.what());
+  }
+}
+
+static void
+read_args_from_file(std::vector<std::string> &args,
+                    std::string const &filename) {
+  auto path = bfs::path{filename};
+  if (balg::to_lower_copy(path.extension().string()) == ".json")
+    read_args_from_json_file(args, filename);
+
+  else
+    read_args_from_old_option_file(args, filename);
 }
 
 static std::vector<std::string>
