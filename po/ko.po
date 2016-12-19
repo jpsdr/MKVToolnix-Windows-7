@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-12-16 15:48+0100\n"
+"POT-Creation-Date: 2016-12-19 23:56+0100\n"
 "PO-Revision-Date: 2016-12-16 16:52+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1237,7 +1237,7 @@ msgid "%s – seconds"
 msgstr "%s – 초"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:298
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:193
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:191
 #, no-c-format
 msgid "&Abort job"
 msgstr "작업 취소(&A)"
@@ -1337,7 +1337,7 @@ msgstr "출력을 지우고 진행 상황 초기화(&C)"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:593
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:595
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:599
-#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
+#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:128
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:75
 #, no-c-format
 msgid "&Close"
@@ -1784,7 +1784,7 @@ msgstr "'%1%'는 --compression 인수로 지원되지 않습니다. 사용 가�
 msgid "'%1%' is an unsupported argument for --cues.\n"
 msgstr "'%1%'는 --cues 인수로 지원되지 않습니다.\n"
 
-#: src/common/command_line.cpp:233
+#: src/common/command_line.cpp:284
 #, boost-format
 msgid "'%1%' is missing the file name.\n"
 msgstr "'%1%'는 파일 이름이 누락되어 있습니다.\n"
@@ -2081,7 +2081,7 @@ msgstr "'--chapters'에 파일 이름이 지정되어 있지 않습니다.\n"
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length'에 길이가 지정되어 있지 않습니다.\n"
 
-#: src/common/command_line.cpp:128
+#: src/common/command_line.cpp:179
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset'는 인수가 누락되어 있습니다.\n"
 
@@ -2101,7 +2101,7 @@ msgstr "'--cue-chapter-name-format'는 '--chapters' 앞에 한 번만 지정할 
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions'에 해상도가 지정되어 있지 않습니다.\n"
 
-#: src/common/command_line.cpp:201
+#: src/common/command_line.cpp:252
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage'에 인수가 지정되어 있지 않습니다.\n"
 
@@ -2226,17 +2226,17 @@ msgstr ", 파일명 '%1%'"
 msgid ", position %1%"
 msgstr ", 위치: %1%"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:326
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:324
 #, no-c-format
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr "--- '%1' 작업 중 오류가 %2 에서 시작되었습니다 ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:345
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:343
 #, no-c-format
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr "--- '%1' 작업의 출력을 %2 에 시작했습니다 ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:325
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:323
 #, no-c-format
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr "--- '%1' 작업 중 경고가 %2 에서 시작되었습니다 ---"
@@ -2510,7 +2510,7 @@ msgstr "AVI [오디오/비디오 인터리브](Audio/Video Interleaved)"
 msgid "Abort all running jobs and stop &immediately"
 msgstr "실행 중인 모든 작업 취소하고 즉시 정지(&I)"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:191
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:189
 #, no-c-format
 msgid "Abort running job"
 msgstr "실행 중인 작업 취소"
@@ -2814,7 +2814,7 @@ msgstr "모든 항목"
 #: src/mkvtoolnix-gui/merge/tool.cpp:169
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/widget.cpp:174
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:394
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:392
 #, no-c-format
 msgid "All files"
 msgstr "모든 파일"
@@ -3195,7 +3195,7 @@ msgstr "소스 파일에서 파일 제목을 자동으로 정하기(&T)"
 msgid "Automatically set track &delays from source file name"
 msgstr "소스 파일명에서 트랙 지연 시간을 자동으로 정하기(&D)"
 
-#: src/common/command_line.cpp:256
+#: src/common/command_line.cpp:307
 msgid "Available translations:\n"
 msgstr "사용 가능한 번역:\n"
 
@@ -3344,7 +3344,7 @@ msgstr "활성 설정(&O)"
 msgid "C&onstrict or expand timecodes"
 msgstr "타임코드 축소 또는 확장(&O)"
 
-#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:126
+#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
 msgid "C&opy to clipboard"
 msgstr "클립보드로 복사(&O)"
 
@@ -3388,7 +3388,7 @@ msgstr "모든 트랙의 통계를 계산하고, 새로운 태그를 추가하�
 #: src/mkvtoolnix-gui/merge/tab.cpp:394
 #: src/mkvtoolnix-gui/merge/tab.cpp:420
 #: src/mkvtoolnix-gui/merge/tool.cpp:216
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:194
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:192
 #, no-c-format
 msgid "Cancel"
 msgstr "취소"
@@ -3889,7 +3889,7 @@ msgstr "'%1%'를 읽을(열) 수 없습니다.\n"
 msgid "Could not open the corresponding correction file '%1%c'.\n"
 msgstr "관련된 수정 파일 '%1%c'를 열 수 없습니다.\n"
 
-#: src/common/command_line.cpp:242
+#: src/common/command_line.cpp:293
 #, boost-format
 msgid "Could not open the file '%1%' for directing the output.\n"
 msgstr "파일 '%1%'을 출력 (Directing) 하기 위해 열 수 없습니다.\n"
@@ -4502,7 +4502,7 @@ msgstr "메타 탐색(Meta seek) 요소를 전혀 기록하지 않습니다."
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "현재 실행 중인 모든 작업을 정말 취소할까요?"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:192
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:190
 #, no-c-format
 msgid "Do you really want to abort this job?"
 msgstr "이 작업을 정말 취소할까요?"
@@ -4542,7 +4542,7 @@ msgstr "Dolby TrueHD [돌비 트루HD]"
 msgid "Don't change"
 msgstr "변경 않기"
 
-#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
+#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:125
 msgid "Don't escape"
 msgstr "이스케이프 않기"
 
@@ -4779,7 +4779,7 @@ msgstr "오류"
 msgid "Error %1%\n"
 msgstr "오류 %1%\n"
 
-#: src/mkvtoolnix-gui/util/process.cpp:77
+#: src/mkvtoolnix-gui/util/option_file.cpp:31
 #, no-c-format
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "임시 파일 생성 오류 (원인: %1)."
@@ -4855,7 +4855,7 @@ msgstr "Matroska 파일을 기록하는 동안 오류 발생"
 #: src/common/output.cpp:119
 #: src/common/output.cpp:120
 #: src/mkvtoolnix-gui/jobs/job.cpp:220
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:317
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:315
 #, no-c-format
 msgid "Error:"
 msgstr "오류:"
@@ -5143,7 +5143,7 @@ msgstr "파일명:"
 msgid "File name: %1%"
 msgstr "파일 이름: %1%"
 
-#: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:47
+#: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:46
 #, no-c-format
 msgid "File not found"
 msgstr "파일이 없습니다"
@@ -6252,6 +6252,11 @@ msgstr "제작자는 Moritz Bunkus <moritz@bunkus.org> 입니다."
 msgid "Its installation location could not be determined automatically."
 msgstr "그 설치 위치를 자동으로 알아낼 수 없습니다."
 
+#: src/common/command_line.cpp:95
+#: src/common/command_line.cpp:99
+msgid "JSON option files must contain a JSON array consisting solely of JSON strings"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:557
 msgid "Job &output"
 msgstr "작업 출력(&O)"
@@ -6455,7 +6460,14 @@ msgid "MKVToolNix GUI preferences"
 msgstr "MKVToolNix GUI 환경설정"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:123
-msgid "MKVToolNix option files"
+#: src/mkvtoolnix-gui/merge/tab.cpp:197
+#, fuzzy, no-c-format
+msgid "MKVToolNix option files (JSON-formatted)"
+msgstr "MKVToolNix 옵션 파일"
+
+#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
+#, fuzzy
+msgid "MKVToolNix option files (old format)"
 msgstr "MKVToolNix 옵션 파일"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:211
@@ -6672,11 +6684,11 @@ msgstr "최소 캐시"
 msgid "Miscellaneous"
 msgstr "기타"
 
-#: src/common/command_line.cpp:219
+#: src/common/command_line.cpp:270
 msgid "Missing argument for '--output-charset'.\n"
 msgstr "'--output-charset'에 대한 인수가 누락되어 있습니다.\n"
 
-#: src/common/command_line.cpp:253
+#: src/common/command_line.cpp:304
 msgid "Missing argument for '--ui-language'.\n"
 msgstr "'--ui-language'에 대한 인수가 누락되어 있습니다.\n"
 
@@ -6944,7 +6956,7 @@ msgstr "큐를 찾을 수 없습니다.\n"
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr "대상 파일 이름이 지정되지 않았기 때문에, 대신 첨부 파일 이름을 사용합니다.\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:143
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:142
 #, no-c-format
 msgid "No errors yet"
 msgstr "아직 오류 없음"
@@ -6984,13 +6996,13 @@ msgid "No information is transmitted to the server."
 msgstr "서버에 전송한 정보가 없습니다."
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:456
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:454
 #, no-c-format
 msgid "No job has been started yet."
 msgstr "아직 시작한 작업이 없습니다."
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:455
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:453
 #, no-c-format
 msgid "No job started yet"
 msgstr "아직 시작한 작업이 없습니다"
@@ -7003,7 +7015,7 @@ msgstr "메타 데이터 블록을 찾지 못했습니다. 이 파일은 손상�
 msgid "No multiplex job has been opened yet."
 msgstr "아직 합치기 작업을 열지 않았습니다."
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:141
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:140
 #, no-c-format
 msgid "No output yet"
 msgstr "아직 출력 없음"
@@ -7061,7 +7073,7 @@ msgstr "소스 파일에서 ID %1% 트랙을 찾지 못했습니다.\n"
 msgid "No version number found.\n"
 msgstr "버전 번호를 찾지 못했습니다.\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:142
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:141
 #, no-c-format
 msgid "No warnings yet"
 msgstr "아직 경고 없음"
@@ -7127,8 +7139,8 @@ msgid "Not a valid number or not positive."
 msgstr "유효한 숫자가 아니거나 양수가 아닙니다."
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:370
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:458
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:368
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:456
 #, no-c-format
 msgid "Not finished yet"
 msgstr "아직 끝나지 않음"
@@ -7139,8 +7151,8 @@ msgid "Not needed for AAC tracks read from other container formats like MP4 or M
 msgstr "MP4나 Matroska 파일 같은 다른 컨테이너 형식에서 읽은 AAC 트랙에 대해서는 필요하지 않습니다."
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:369
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:457
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:367
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:455
 #, no-c-format
 msgid "Not started yet"
 msgstr "아직 시작 안 됨"
@@ -8227,7 +8239,7 @@ msgstr "챕터를 Matroska 파일로 저장"
 msgid "Save information as"
 msgstr "다른 이름으로 정보 저장"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:394
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:392
 #, no-c-format
 msgid "Save job output"
 msgstr "작업 출력 저장"
@@ -9018,7 +9030,7 @@ msgstr "mkvmerge가 각 클러스터에 대부분의 'n' 데이터 블럭을 넣
 
 #: src/info/qt_ui.cpp:106
 #: src/mkvtoolnix-gui/merge/input.cpp:915
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:394
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:392
 #, no-c-format
 msgid "Text files"
 msgstr "텍스트 파일"
@@ -9473,6 +9485,7 @@ msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "'%1%' 파일을 읽기 위해 열 수 없습니다: %2%."
 
 #: src/common/command_line.cpp:50
+#: src/common/command_line.cpp:87
 #: src/extract/mkvextract.cpp:57
 #: src/extract/mkvextract.cpp:61
 #: src/extract/timecodes_v2.cpp:193
@@ -10315,7 +10328,7 @@ msgstr "트랙 매개변수가 일치하지 않습니다."
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
 msgstr "\"입력\" 탭의 트랙 속성은 다른 작업 흐름을 제공하기 위해 세 가지 다른 방법으로 배치할 수 있습니다."
 
-#: src/common/command_line.cpp:300
+#: src/common/command_line.cpp:351
 #, boost-format
 msgid "The update information could not be retrieved from %1%.\n"
 msgstr "업데이트 정보를 %1%에서 읽을 수 없습니다.\n"
@@ -10374,7 +10387,7 @@ msgstr "현재 실행 중인 작업이 있습니다."
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "'%1%' ID를 가진 파일은 없습니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
-#: src/common/command_line.cpp:266
+#: src/common/command_line.cpp:317
 #, boost-format
 msgid "There is no translation available for '%1%'.\n"
 msgstr "'%1%'의 이용 가능한 번역이 없습니다.\n"
@@ -11395,7 +11408,7 @@ msgstr "%1%번째 경고: 시작 시간 타임코드가 이전 항목의 타임�
 
 #: src/common/output.cpp:123
 #: src/mkvtoolnix-gui/jobs/job.cpp:219
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:316
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:314
 #, no-c-format
 msgid "Warning:"
 msgstr "경고:"

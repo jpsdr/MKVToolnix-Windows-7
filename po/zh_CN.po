@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-12-16 15:48+0100\n"
+"POT-Creation-Date: 2016-12-19 23:56+0100\n"
 "PO-Revision-Date: 2016-10-23 21:42+0000\n"
 "Last-Translator: Frank Waiichou <frankwaiichou@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -1201,7 +1201,7 @@ msgid "%s – seconds"
 msgstr "%s – 秒"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:298
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:193
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:191
 #, no-c-format
 msgid "&Abort job"
 msgstr "中止任务(&A)"
@@ -1302,7 +1302,7 @@ msgstr "清空输出消息并重置进度(&C)"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:593
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:595
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:599
-#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
+#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:128
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:75
 #, no-c-format
 msgid "&Close"
@@ -1751,7 +1751,7 @@ msgstr "--compression 不支持参数 '%1%'。可用的压缩方式有：%2%\n"
 msgid "'%1%' is an unsupported argument for --cues.\n"
 msgstr "--cues 不支持参数 '%1%'。\n"
 
-#: src/common/command_line.cpp:233
+#: src/common/command_line.cpp:284
 #, boost-format
 msgid "'%1%' is missing the file name.\n"
 msgstr "'%1%' 缺少文件名。\n"
@@ -2048,7 +2048,7 @@ msgstr "'--chapters' 缺少文件名。\n"
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' 缺少长度。\n"
 
-#: src/common/command_line.cpp:128
+#: src/common/command_line.cpp:179
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' 缺少参数。\n"
 
@@ -2068,7 +2068,7 @@ msgstr "'--cue-chapter-name-format' 必须使用在 '--chapters' 之前。\n"
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' 缺少尺寸。\n"
 
-#: src/common/command_line.cpp:201
+#: src/common/command_line.cpp:252
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' 缺少参数。\n"
 
@@ -2193,17 +2193,17 @@ msgstr "，文件名 '%1%'"
 msgid ", position %1%"
 msgstr "，位置 %1%"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:326
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:324
 #, no-c-format
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr "--- 任务 %1 (开始时间 %2) 的错误消息 ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:345
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:343
 #, no-c-format
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr "--- 任务 %1 (开始时间 %2) 的输出消息 ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:325
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:323
 #, no-c-format
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr "--- 任务 %1 (开始时间 %2) 的警告消息 ---"
@@ -2474,7 +2474,7 @@ msgstr "AVI (音视频交错文件)"
 msgid "Abort all running jobs and stop &immediately"
 msgstr "中止所有正在运行的任务并立即停止队列(&I)"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:191
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:189
 #, no-c-format
 msgid "Abort running job"
 msgstr "中止正在运行的任务"
@@ -2783,7 +2783,7 @@ msgstr "所有条目"
 #: src/mkvtoolnix-gui/merge/tool.cpp:169
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/widget.cpp:174
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:394
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:392
 #, no-c-format
 msgid "All files"
 msgstr "所有文件"
@@ -3174,7 +3174,7 @@ msgstr "自动从源文件读取并设定文件标题(&T)"
 msgid "Automatically set track &delays from source file name"
 msgstr "自动根据源文件名设定轨道延迟(&D)"
 
-#: src/common/command_line.cpp:256
+#: src/common/command_line.cpp:307
 msgid "Available translations:\n"
 msgstr "可用翻译：\n"
 
@@ -3323,7 +3323,7 @@ msgstr "配置已启用(&O)"
 msgid "C&onstrict or expand timecodes"
 msgstr "收缩或扩展时间码(&O)"
 
-#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:126
+#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
 msgid "C&opy to clipboard"
 msgstr "复制到剪贴板(&O)"
 
@@ -3367,7 +3367,7 @@ msgstr "计算所有轨道的统计信息，并为其添加新的／更新现有
 #: src/mkvtoolnix-gui/merge/tab.cpp:394
 #: src/mkvtoolnix-gui/merge/tab.cpp:420
 #: src/mkvtoolnix-gui/merge/tool.cpp:216
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:194
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:192
 #, no-c-format
 msgid "Cancel"
 msgstr "取消"
@@ -3874,7 +3874,7 @@ msgstr "无法以读取模式打开 '%1%'。\n"
 msgid "Could not open the corresponding correction file '%1%c'.\n"
 msgstr "无法打开相应的校正文件 '%1%c'。\n"
 
-#: src/common/command_line.cpp:242
+#: src/common/command_line.cpp:293
 #, boost-format
 msgid "Could not open the file '%1%' for directing the output.\n"
 msgstr "无法打开文件 '%1%' 以重定向输出消息。\n"
@@ -4498,7 +4498,7 @@ msgstr "不写入任何元定位元素。"
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "确定要中止所有正在运行的任务吗？"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:192
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:190
 #, no-c-format
 msgid "Do you really want to abort this job?"
 msgstr "确定要中止该任务吗？"
@@ -4538,7 +4538,7 @@ msgstr "Dolby TrueHD"
 msgid "Don't change"
 msgstr "不更改"
 
-#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
+#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:125
 msgid "Don't escape"
 msgstr "不转义"
 
@@ -4777,7 +4777,7 @@ msgstr "错误"
 msgid "Error %1%\n"
 msgstr "错误 %1%\n"
 
-#: src/mkvtoolnix-gui/util/process.cpp:77
+#: src/mkvtoolnix-gui/util/option_file.cpp:31
 #, no-c-format
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "创建临时文件出错 (原因：%1)。"
@@ -4853,7 +4853,7 @@ msgstr "写入 Matroska 文件出错"
 #: src/common/output.cpp:119
 #: src/common/output.cpp:120
 #: src/mkvtoolnix-gui/jobs/job.cpp:220
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:317
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:315
 #, no-c-format
 msgid "Error:"
 msgstr "错误："
@@ -5143,7 +5143,7 @@ msgstr "文件名："
 msgid "File name: %1%"
 msgstr "文件名：%1%"
 
-#: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:47
+#: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:46
 #, fuzzy, no-c-format
 msgid "File not found"
 msgstr "找不到文件"
@@ -6259,6 +6259,11 @@ msgstr "作者 Moritz Bunkus <moritz@bunkus.org>。"
 msgid "Its installation location could not be determined automatically."
 msgstr "其安装位置无法自动检测。"
 
+#: src/common/command_line.cpp:95
+#: src/common/command_line.cpp:99
+msgid "JSON option files must contain a JSON array consisting solely of JSON strings"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:557
 msgid "Job &output"
 msgstr "任务输出消息(&O)"
@@ -6462,7 +6467,14 @@ msgid "MKVToolNix GUI preferences"
 msgstr "MKVToolNix GUI 首选项"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:123
-msgid "MKVToolNix option files"
+#: src/mkvtoolnix-gui/merge/tab.cpp:197
+#, fuzzy, no-c-format
+msgid "MKVToolNix option files (JSON-formatted)"
+msgstr "MKVToolNix 选项文件"
+
+#: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
+#, fuzzy
+msgid "MKVToolNix option files (old format)"
 msgstr "MKVToolNix 选项文件"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:211
@@ -6679,11 +6691,11 @@ msgstr "最小缓存"
 msgid "Miscellaneous"
 msgstr "其他"
 
-#: src/common/command_line.cpp:219
+#: src/common/command_line.cpp:270
 msgid "Missing argument for '--output-charset'.\n"
 msgstr "'--output-charset' 缺少参数。\n"
 
-#: src/common/command_line.cpp:253
+#: src/common/command_line.cpp:304
 msgid "Missing argument for '--ui-language'.\n"
 msgstr "'--ui-language' 缺少参数。\n"
 
@@ -6953,7 +6965,7 @@ msgstr "没有找到 cue 索引。\n"
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr "未指定输出文件名，将使用附件名。\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:143
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:142
 #, fuzzy, no-c-format
 msgid "No errors yet"
 msgstr "尚无错误消息"
@@ -6993,13 +7005,13 @@ msgid "No information is transmitted to the server."
 msgstr "不会向服务器发送任何信息。"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:456
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:454
 #, no-c-format
 msgid "No job has been started yet."
 msgstr "尚无任务开始。"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:455
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:453
 #, fuzzy, no-c-format
 msgid "No job started yet"
 msgstr "尚无任务开始"
@@ -7013,7 +7025,7 @@ msgstr "未发现元数据区块。文件已损坏。\n"
 msgid "No multiplex job has been opened yet."
 msgstr "尚未打开合并任务。"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:141
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:140
 #, fuzzy, no-c-format
 msgid "No output yet"
 msgstr "尚无输出消息"
@@ -7072,7 +7084,7 @@ msgstr "源文件中不存在 ID 为 %1% 的轨道。\n"
 msgid "No version number found.\n"
 msgstr "没有找到版本号。\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:142
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:141
 #, fuzzy, no-c-format
 msgid "No warnings yet"
 msgstr "尚无警告消息"
@@ -7138,8 +7150,8 @@ msgid "Not a valid number or not positive."
 msgstr "编号无效或非正。"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:370
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:458
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:368
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:456
 #, fuzzy, no-c-format
 msgid "Not finished yet"
 msgstr "尚未完成"
@@ -7150,8 +7162,8 @@ msgid "Not needed for AAC tracks read from other container formats like MP4 or M
 msgstr "从 MP4 或 Matroska 文件等其他容器格式中读取的 AAC 轨道不需要此选项。"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:369
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:457
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:367
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:455
 #, fuzzy, no-c-format
 msgid "Not started yet"
 msgstr "尚未开始"
@@ -8243,7 +8255,7 @@ msgstr "保存章节到 Matroska 文件"
 msgid "Save information as"
 msgstr "信息另存为"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:394
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:392
 #, no-c-format
 msgid "Save job output"
 msgstr "保存任务输出消息"
@@ -9027,7 +9039,7 @@ msgstr "使 mkvmerge 在每个簇中最多置入 n 个数据区块。"
 
 #: src/info/qt_ui.cpp:106
 #: src/mkvtoolnix-gui/merge/input.cpp:915
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:394
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:392
 #, no-c-format
 msgid "Text files"
 msgstr "文本文件"
@@ -9486,6 +9498,7 @@ msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "文件 '%1%' 无法以读取模式打开：%2%。"
 
 #: src/common/command_line.cpp:50
+#: src/common/command_line.cpp:87
 #: src/extract/mkvextract.cpp:57
 #: src/extract/mkvextract.cpp:61
 #: src/extract/timecodes_v2.cpp:193
@@ -10330,7 +10343,7 @@ msgstr "轨道参数不匹配。"
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
 msgstr "“输入”选项卡的轨道属性控件，可以以三种不同的方式排列，以适应不同的工作流程。"
 
-#: src/common/command_line.cpp:300
+#: src/common/command_line.cpp:351
 #, boost-format
 msgid "The update information could not be retrieved from %1%.\n"
 msgstr "无法从 %1% 获取更新信息。\n"
@@ -10389,7 +10402,7 @@ msgstr "当前有一个任务正在运行。"
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "没有文件的 ID 为 '%1%'。'--append-to' 的参数无效。\n"
 
-#: src/common/command_line.cpp:266
+#: src/common/command_line.cpp:317
 #, boost-format
 msgid "There is no translation available for '%1%'.\n"
 msgstr "尚无 '%1%' 的翻译。\n"
@@ -11409,7 +11422,7 @@ msgstr "第 %1% 行：起始时间早于前一条的起始时间。此文件中�
 
 #: src/common/output.cpp:123
 #: src/mkvtoolnix-gui/jobs/job.cpp:219
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:316
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:314
 #, no-c-format
 msgid "Warning:"
 msgstr "警告："
