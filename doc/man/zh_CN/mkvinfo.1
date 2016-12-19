@@ -161,32 +161,12 @@ download_url）。
 此选项仅当程序附带 libcurl 支持编译时可用。
 .RE
 .PP
-\fB@\fR\fI选项文件\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-从文件
-\fI选项文件\fR
-中读取额外的命令行参数。首个非空白字符为井号 (\*(Aq#\*(Aq) 的行将被当作注释对待，在处理过程中将被忽略。各行开头与结尾的空白将被除去。各行必须恰好仅含一个选项。
-.sp
-有些字符可以转义，如当您需要使用 \*(Aq#\*(Aq 作为一个不是评论的行的开头。规则在关于转义文本的段落有描述。
-.sp
-命令行 \*(Aq\fBmkvinfo \-v \-v 输入\&.mkv \-\-redirect\-output 信息\&.txt\fR\*(Aq 可以转换为下面所示的选项文件:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# 更为详尽
-\-v
-\-v
-# 解析 输入\&.mkv
-输入\&.mkv
-# 并将输出信息写入 信息\&.txt
-\-\-redirect\-output
-信息\&.txt
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SH "\(lq详细\(rq程度"
 .PP

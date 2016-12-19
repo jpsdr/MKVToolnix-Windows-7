@@ -135,30 +135,12 @@ Afterwards the program exists with an exit code of 0 if no newer release is avai
 This option is only available if the program was built with support for libcurl\&.
 .RE
 .PP
-\fB@\fR\fIplik\-opcji\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
 Reads additional command line arguments from the file
-\fIoptions\-file\fR\&. Lines whose first non\-whitespace character is a hash mark (\*(Aq#\*(Aq) are treated as comments and ignored\&. White spaces at the start and end of a line will be stripped\&. Each line must contain exactly one option\&.
-.sp
-Several chars can be escaped, e\&.g\&. if you need to start a non\-comment line with \*(Aq#\*(Aq\&. The rules are described in
-the section about escaping text\&.
-.sp
-The command line \*(Aq\fBmkvextract tracks source\&.mkv \-\-raw 1:destination\&.raw\fR\*(Aq could be converted into the following option file:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Wyodrębnij ścieżkę z źr\('od\(/lo\&.mkv
-tracks
-źr\('od\(/lo\&.mkv
-# Zapisz ścieżkę jako surowe dane\&.
-\-\-raw
-1:docelowyplik\&.raw
-.fi
-.if n \{\
-.RE
-.\}
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SS "Tryb wyodrębniania ścieżek"
 .PP

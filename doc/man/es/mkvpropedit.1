@@ -359,32 +359,12 @@ Despu\('es el programa sale con un c\('odigo de salida 0 si ninguna versi\('on n
 Esta opci\('on s\('olo est\('a disponible si el programa fue creado con compatibilidad para libcurl\&.
 .RE
 .PP
-\fB@\fR\fIarchivo\-opciones\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-Lee argumentos adicionales de la l\('inea de comandos desde el archivo
-\fIarchivo\-opciones\fR\&. Las l\('ineas que tengan en el primer car\('acter una almohadilla (\*(Aq#\*(Aq) ser\('an tratados como comentarios y se ignorar\('an\&. Espacios en blanco al inicio y final de la l\('inea ser\('an descartados\&. Cada l\('inea debe contener exactamente una opci\('on\&.
-.sp
-Diversos caracteres pueden ser interpretados como de escape, p\&.e\&. si necesitas que una l\('inea, que comience con una almohadilla \*(Aq#\*(Aq, no sea interpretada como un comentario\&. Las normas est\('an descritas en
-la secci\('on sobre caracteres de escape en texto\&.
-.sp
-La l\('inea de comandos \*(Aq\fBmkvpropedit archivo\&.mkv \-\-edit track:a2 \-\-set name=Comentarios\fR\*(Aq puede ser convertida en un archivo de opciones del modo que se indica a continuaci\('on:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Modifica nombre\&.mkv
-nombre\&.mkv
-# Edita la segunda pista de audio
-\-\-edit
-track:a2
-# y establece el t\('itulo como \*(AqComentarios\*(Aq 
-\-\-set
-name=Comments
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SH "SELECTORES DE EDICI\('ON"
 .PP

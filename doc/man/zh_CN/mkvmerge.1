@@ -31,7 +31,7 @@
 mkvmerge \- 将多媒体流合并到 Matroska(TM) 文件中
 .SH "概要"
 .HP \w'\fBmkvmerge\fR\ 'u
-\fBmkvmerge\fR [全局选项] {\-o\ 输出文件} [选项1] {文件1} [[选项2]\ {文件2}] [@选项文件]
+\fBmkvmerge\fR [global\ options] {\-o\ out} [options1] {file1} [[options2]\ {file2}] [@options\-file\&.json]
 .SH "说明"
 .PP
 本程序可读取多个媒体文件并将它们的数据流（全部或部分）合并到
@@ -2005,7 +2005,7 @@ json
 打开 GUI 模式。该模式下，将输出特殊格式的行，告知目前受控的 GUI 的行为。这些消息遵从格式「#GUI#消息」。消息可能包括键值对，如「#GUI#消息#键1=值1#键2=值2\&...」。消息内容及键的内容不作翻译，总是以英语输出。
 .RE
 .PP
-\fB@\fR\fI选项文件\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
 从文件
 \fI选项文件\fR
@@ -2668,6 +2668,37 @@ mkvinfo file\&.mkv > info\&.txt。
 \fBmkvmerge\fR(1)
 可从选项文件中读取额外的命令行参数。这样可以规避 shell 或操作系统在执行外部程序时的特定限制，如命令行长度的限制。
 .PP
+There are two formats for option files: a JSON format and a proprietary legacy format\&. The legacy format is deprecated, and support for it will likely be removed in 2017\&.
+.SS "The JSON format"
+.PP
+A JSON option file\*(Aqs name must end in \*(Aq\&.json\*(Aq\&. Its content must be a valid JSON array consisting solely of JSON strings\&. The file\*(Aqs encoding must be UTF\-8\&. The file should not start with a
+byte order marker
+(BOM), but if one exists, it will be skipped\&.
+.PP
+The rules for escaping special characters inside JSON are the ones in the official JSON specification,
+\m[blue]\fBRFC 7159\fR\m[]\&\s-2\u[4]\d\s+2\&.
+.PP
+The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following JSON option file called e\&.g\&. \*(Aqoptions\&.json\*(Aq:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+[
+  "\-o",
+  "c:\e\eMatroska\e\emy file\&.mkv",
+  "\-\-title",
+  "#65",
+  "\-A",
+  "a movie\&.avi",
+  "sound\&.ogg"
+]
+.fi
+.if n \{\
+.RE
+.\}
+.SS "The legacy format"
+.PP
 选项文件的处理有一些规则。首个非空白字符为井号 (\*(Aq#\*(Aq) 的行将被当作注释对待，在处理过程中将被忽略。各行开头与结尾的空白将被除去。各行必须恰好仅含一个选项。
 .PP
 不包含任何内容的行也会被忽略。空参数用
@@ -2678,7 +2709,7 @@ mkvinfo file\&.mkv > info\&.txt。
 .PP
 注意反斜杠必须转义。井号 (\*(Aq#\*(Aq) 如果不作为注释标记，也必须转义。
 .PP
-命令行 \*(Aq\fBmkvmerge \-o "我的文件\&.mkv" \-A "一部影片\&.avi" 声音\&.ogg\fR\*(Aq 可以转换为下述选项文件:
+The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following legacy option file called e\&.g\&. \*(Aqoptions\&.txt\*(Aq:
 .sp
 .if n \{\
 .RS 4
@@ -3093,7 +3124,7 @@ example\-tags\-2\&.xml
 .SS "标签细述"
 .PP
 Matroska(TM)
-标签不会自动应用到整个文件上。它们可以应用到整个文件，还可以应用到文件的不同部分: 一个或多个轨道, 一个或多个章节, 甚至是两者的组合。\m[blue]\fBMatroska(TM) 规范\fR\m[]\&\s-2\u[4]\d\s+2
+标签不会自动应用到整个文件上。它们可以应用到整个文件，还可以应用到文件的不同部分: 一个或多个轨道, 一个或多个章节, 甚至是两者的组合。\m[blue]\fBMatroska(TM) 规范\fR\m[]\&\s-2\u[5]\d\s+2
 有这方面的更多详情。
 .PP
 重要的一点是标签通过
@@ -3153,7 +3184,7 @@ $ mkvmerge \-o 文件\&.mkv \-\-tags 0:标签\&.xml 文件\&.avi
 支持基于
 XML
 的标签文件格式。此格式是以
-\m[blue]\fBMatroska(TM) 规范\fR\m[]\&\s-2\u[4]\d\s+2
+\m[blue]\fBMatroska(TM) 规范\fR\m[]\&\s-2\u[5]\d\s+2
 为依据严格制定的。MKVToolNix 的程序以及源码分发包都含有名为
 example\-tags\-2\&.xml
 的示例文件，该文件已简明地列出了所有已知的可用作实际处理的基本标签。
@@ -3509,7 +3540,7 @@ gap, 10\&.050
 .SH "网络"
 .PP
 最新版本总可以在
-\m[blue]\fBMKVToolNix 主页\fR\m[]\&\s-2\u[5]\d\s+2
+\m[blue]\fBMKVToolNix 主页\fR\m[]\&\s-2\u[6]\d\s+2
 找到。
 .SH "作者"
 .PP
@@ -3534,11 +3565,16 @@ mkvmerge-identification-output-schema.json
 \%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
 .RE
 .IP " 4." 4
+RFC 7159
+.RS 4
+\%https://tools.ietf.org/html/rfc7159
+.RE
+.IP " 5." 4
 Matroska(TM) 规范
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 5." 4
+.IP " 6." 4
 MKVToolNix 主页
 .RS 4
 \%https://mkvtoolnix.download/

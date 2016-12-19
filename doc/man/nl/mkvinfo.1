@@ -162,32 +162,12 @@ Nadien sluit het programma af met een afsluitwaarde van 0 als er geen nieuwere v
 Deze optie is alleen beschikbaar indien het gebouwd is met ondersteuning voor libcurl\&.
 .RE
 .PP
-\fB@\fR\fIoptions\-file\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-Leest extra commandoregel argumenten in van een bestand
-\fIoptions\-file\fR\&. Regels met een spatie (lege ruimte) als eerste karakter, zijn gemarkeerd als een hash (waarde) (\*(Aq#\*(Aq) worden behandeld als commentaar en genegeerd\&. Een spatie aan het begin en einde van een regel worden verwijderd\&. Elke regel mag exact \('e\('en waarde bevatten
-.sp
-Verschillende karakters kunnen worden overgeslagen, b\&.v\&. als het nodig is een niet commentaar regel te starten met \*(Aq#\*(Aq\&. Deze regels worden beschreven in de sectie over:
-Overslaan van speciale karakter(s) in tekst\&.
-.sp
-De commandoregel \*(Aq\fBmkvinfo \-v \-v input\&.mkv \-\-redirect\-output info\&.txt\fR\*(Aq kon worden geconverteerd naar het volgende optie bestand:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Be more verbose
-\-v
-\-v
-# Parse input\&.mkv
-input\&.mkv
-# and write the output to info\&.txt
-\-\-redirect\-output
-info\&.txt
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SH "UITGEBREIDE NIVEAUS"
 .PP

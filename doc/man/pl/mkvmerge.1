@@ -31,7 +31,7 @@
 mkvmerge \- \(/Lączy ścieżki multimedialne do pliku Matroska(TM)
 .SH "SZABLON LINII KOMEND"
 .HP \w'\fBmkvmerge\fR\ 'u
-\fBmkvmerge\fR [opcje\ globalne] {\-o\ plik\-wyjściowy} [opcje1] {plik1} [[opcje2]\ {plik2}] [@plikopcji]
+\fBmkvmerge\fR [global\ options] {\-o\ out} [options1] {file1} [[options2]\ {file2}] [@options\-file\&.json]
 .SH "OPIS"
 .PP
 This program takes the input from several media files and joins their streams (all of them or just a selection) into a
@@ -2014,7 +2014,7 @@ W\(/lącza eksperymentalne funkcjonalności\&. Lista dostepnych funkcjonalności
 Turns on GUI mode\&. In this mode specially\-formatted lines may be output that can tell a controlling GUI what\*(Aqs happening\&. These messages follow the format \*(Aq#GUI#message\*(Aq\&. The message may be followed by key/value pairs as in \*(Aq#GUI#message#key1=value1#key2=value2\&...\*(Aq\&. Neither the messages nor the keys are ever translated and always output in English\&.
 .RE
 .PP
-\fB@\fR\fIplik\-opcji\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
 Reads additional command line arguments from the file
 \fIoptions\-file\fR\&. See the section about
@@ -2681,6 +2681,37 @@ An option file is a file
 \fBmkvmerge\fR(1)
 can read additional command line arguments from\&. This can be used in order to circumvent certain limitations of the shell or the operating system when executing external programs like a limited command line length\&.
 .PP
+There are two formats for option files: a JSON format and a proprietary legacy format\&. The legacy format is deprecated, and support for it will likely be removed in 2017\&.
+.SS "The JSON format"
+.PP
+A JSON option file\*(Aqs name must end in \*(Aq\&.json\*(Aq\&. Its content must be a valid JSON array consisting solely of JSON strings\&. The file\*(Aqs encoding must be UTF\-8\&. The file should not start with a
+byte order marker
+(BOM), but if one exists, it will be skipped\&.
+.PP
+The rules for escaping special characters inside JSON are the ones in the official JSON specification,
+\m[blue]\fBRFC 7159\fR\m[]\&\s-2\u[4]\d\s+2\&.
+.PP
+The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following JSON option file called e\&.g\&. \*(Aqoptions\&.json\*(Aq:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+[
+  "\-o",
+  "c:\e\eMatroska\e\emy file\&.mkv",
+  "\-\-title",
+  "#65",
+  "\-A",
+  "a movie\&.avi",
+  "sound\&.ogg"
+]
+.fi
+.if n \{\
+.RE
+.\}
+.SS "The legacy format"
+.PP
 There are several rules regarding option files\&. Lines whose first non\-whitespace character is a hash mark (\*(Aq#\*(Aq) are treated as comments and ignored\&. White spaces at the start and end of a line will be stripped\&. Each line must contain exactly one option\&.
 .PP
 Linia nie zawierająca niczego jest r\('ownież ignorowana\&. Pusty parametr jest prezentowany poprzez linię "#EMPTY#"\&.
@@ -2690,7 +2721,7 @@ the section about escaping text\&.
 .PP
 Note that backslashes must always be escaped\&. Hash marks (\*(Aq#\*(Aq) must be escaped if they should not start a comment\&.
 .PP
-The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following option file:
+The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following legacy option file called e\&.g\&. \*(Aqoptions\&.txt\*(Aq:
 .sp
 .if n \{\
 .RS 4
@@ -3106,7 +3137,7 @@ pokazuje jak używać nowego systemu\&.
 tagi
 Matroska(TM)
 nie odnoszą się z automatu do ca\(/lego pliku\&. Mogą określać ca\(/ly plik, ale mogą r\('ownież określać r\('ożne części sk\(/ladowe pliku: jedną lub kilka ściezek, jeden lub kilka rozdzia\(/l\('ow, a nawet kombinację obydwu\&. Odnośnik do
-\m[blue]\fBspecyfikacji Matroska(TM)\fR\m[]\&\s-2\u[4]\d\s+2
+\m[blue]\fBspecyfikacji Matroska(TM)\fR\m[]\&\s-2\u[5]\d\s+2
 dostarczy więcej informacji\&.
 .PP
 One important fact is that tags are linked to tracks or chapters with the
@@ -3167,7 +3198,7 @@ $ mkvmerge \-o plik\&.mkv \-\-tags 0:tagi\&.xml plik\&.avi
 supports a
 XML
 based tag file format\&. The format is very closely modeled after
-\m[blue]\fBthe Matroska(TM) specification\fR\m[]\&\s-2\u[4]\d\s+2\&. Both the binary and the source distributions of MKVToolNix come with a sample file called
+\m[blue]\fBthe Matroska(TM) specification\fR\m[]\&\s-2\u[5]\d\s+2\&. Both the binary and the source distributions of MKVToolNix come with a sample file called
 example\-tags\-2\&.xml
 which simply lists all known tags and which can be used as a basis for real life tag files\&.
 .PP
@@ -3529,7 +3560,7 @@ the section about escaping special characters in text)\&.
 .SH "STRONA WWW"
 .PP
 The latest version can always be found at
-\m[blue]\fBthe MKVToolNix homepage\fR\m[]\&\s-2\u[5]\d\s+2\&.
+\m[blue]\fBthe MKVToolNix homepage\fR\m[]\&\s-2\u[6]\d\s+2\&.
 .SH "AUTOR"
 .PP
 \fBMoritz Bunkus\fR <\&moritz@bunkus\&.org\&>
@@ -3553,12 +3584,17 @@ mkvmerge-identification-output-schema.json
 \%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
 .RE
 .IP " 4." 4
+RFC 7159
+.RS 4
+\%https://tools.ietf.org/html/rfc7159
+.RE
+.IP " 5." 4
 specyfikacji
 Matroska(TM)
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 5." 4
+.IP " 6." 4
 the MKVToolNix homepage
 .RS 4
 \%https://mkvtoolnix.download/

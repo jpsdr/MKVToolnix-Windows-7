@@ -133,30 +133,12 @@ download_url）。
 此选项仅当程序附带 libcurl 支持编译时可用。
 .RE
 .PP
-\fB@\fR\fI选项文件\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-从文件
-\fI选项文件\fR
-中读取额外的命令行参数。首个非空白字符为井号 (\*(Aq#\*(Aq) 的行将被当作注释对待，在处理过程中将被忽略。各行开头与结尾的空白将被除去。各行必须恰好仅含一个选项。
-.sp
-有些字符可以转义，如当您需要使用 \*(Aq#\*(Aq 作为一个不是评论的行的开头。规则在关于转义文本的段落有描述。
-.sp
-命令行 \*(Aq\fBmkvextract tracks 源\&.mkv \-\-raw 1:目标\&.raw\fR\*(Aq 可以转换为下面所示选项文件:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# 从 源\&.mkv 提取轨道
-tracks
-源\&.mkv
-# 将轨道以原始数据的形式输出。
-\-\-raw
-1:目标\&.raw
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SS "轨道提取模式"
 .PP

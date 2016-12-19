@@ -146,30 +146,12 @@ download_url)\&.
 このオプションは、プログラムがlibcurlのサポートつきでビルドされた場合のみ使用できます。
 .RE
 .PP
-\fB@\fR\fIoptions\-file\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-\fIoptions\-file\fRで指定されたファイルから追加のコマンドラインオプションを読み込みます。行で最初の空白文字でない文字がハッシュマーク(\*(Aq#\*(Aq)である行はコメントとして扱われ、無視されます。行頭、及び行末の空白文字は取り除かれます。各行には一つずつしかオプションを指定できません。
-.sp
-エスケープすることのできる文字もあります。例えば、コメントではない行を\*(Aq#\*(Aqで始める必要のある場合です。そのルールは、エスケープ文字についてのセクションで説明されています。
-.sp
-\*(Aq\fBmkvinfo \-v \-v input\&.mkv \-\-redirect\-output info\&.txt\fRというコマンドラインと同じことは、次のようなオプションファイルで指定できます。
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# 冗長モード
-\-v
-\-v
-# input\&.mkvを解析する
-input\&.mkv
-# info\&.txtに出力を書き込む
-\-\-redirect\-output
-info\&.txt     
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SH "冗長レベル"
 .PP

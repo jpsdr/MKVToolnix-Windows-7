@@ -363,32 +363,12 @@ download_url)\&.
 이 옵션은 libcurl을 지원하도록 프로그램을 만든 경우에만 이용 가능합니다\&.
 .RE
 .PP
-\fB@\fR\fI옵션 파일\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-\fIoptions\-file\fR
-파일에서 추가적인 명령행 인수를 읽습니다\&. 공백이 아닌 첫번째 문자가 해쉬 표시(\*(Aq#\*(Aq)인 줄은 주석으로 간주하여 무시합니다\&. 줄의 앞과 끝의 공백은 제거될 것입니다\&. 각 줄에는 반드시 한 개의 옵션을 포함해야 합니다\&.
-.sp
-Several chars can be escaped, e\&.g\&. if you need to start a non\-comment line with \*(Aq#\*(Aq\&. The rules are described in
-the section about escaping text\&.
-.sp
-The command line \*(Aq\fBmkvpropedit source\&.mkv \-\-edit track:a2 \-\-set name=Comments\fR\*(Aq could be converted into the following option file:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Modify source\&.mkv
-source\&.mkv
-# Edit the second audio track
-\-\-edit
-track:a2
-# and set the title to \*(AqComments\*(Aq
-\-\-set
-name=Comments
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SH "선택기 편집"
 .PP

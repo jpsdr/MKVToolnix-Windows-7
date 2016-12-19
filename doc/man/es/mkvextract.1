@@ -134,30 +134,12 @@ Despu\('es el programa sale con un c\('odigo de salida 0 si ninguna versi\('on n
 Esta opci\('on s\('olo est\('a disponible si el programa fue creado con compatibilidad para libcurl\&.
 .RE
 .PP
-\fB@\fR\fIarchivo\-opciones\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-Lee argumentos adicionales de la l\('inea de comandos desde el archivo
-\fIarchivo\-opciones\fR\&. Las l\('ineas que tengan en el primer car\('acter una almohadilla (\*(Aq#\*(Aq) ser\('an tratados como comentarios y se ignorar\('an\&. Espacios en blanco al inicio y final de la l\('inea ser\('an descartados\&. Cada l\('inea debe contener exactamente una opci\('on\&.
-.sp
-Diversos caracteres pueden ser interpretados como de escape, p\&.e\&. si necesitas que una l\('inea, que comience con una almohadilla \*(Aq#\*(Aq, no sea interpretada como un comentario\&. Las normas se describen en
-la secci\('on sobre caracteres de escape en texto\&.
-.sp
-La l\('inea de comandos \*(Aq\fBmkvextract tracks archivo\&.mkv \-\-raw 1:destino\&.raw\fR\*(Aq se puede convertir a un archivo de opciones del modo que se indica a continuaci\('on:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Extrae una pista del archivo\&.mkv
-tracks
-archivo\&.mkv
-# Genera la pista del tipo raw
-\-\-raw
-1:destino\&.raw
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SS "Modo de extracci\('on de pista"
 .PP

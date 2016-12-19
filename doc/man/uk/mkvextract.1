@@ -135,30 +135,12 @@ download_url)\&.
 Дана опція наявна лише тоді, коли додаток компілювався з підтримкою libcurl\&.
 .RE
 .PP
-\fB@\fR\fIoptions\-file\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-Зчитує додаткові параметри командного рядка з файла
-\fIoptions\-file\fR\&. Рядки, які містять зразу після символу переносу рядка мітку хеша (\*(Aq#\*(Aq) сприймаються як коментарі і ігноруються\&. Символи переносу на початку і в кінці рядка опускаються\&. Кожний рядок має містити лише один параметр\&.
-.sp
-Дозволяється використовувати спеціальні символи при умові їх виокремлення, наприклад, якщо треба розпочати рядок (не коментар) з \*(Aq#\*(Aq\&. Правила описані в
-the section about escaping text\&.
-.sp
-Командний рядок \*(Aq\fBmkvextract tracks source\&.mkv \-\-raw 1:destination\&.raw\fR\*(Aq може бути перетворений на наступний конфігураційний файл:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Витягнути доріжку з файла source\&.mkv
-tracks
-source\&.mkv
-# На виході \- доріжка як "сирі" дані\&.
-\-\-raw
-1:destination\&.raw
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SS "Режим витягнення доріжок"
 .PP

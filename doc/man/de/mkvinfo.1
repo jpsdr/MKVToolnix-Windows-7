@@ -162,34 +162,11 @@ Anschlie\(ssend beendet sich das Programm mit einem R\(:uckgabewert von 0, falls
 Diese Option ist nur verf\(:ugbar, falls das Programm mit Unterst\(:utzung f\(:ur Libcurl gebaut wurde\&.
 .RE
 .PP
-\fB@\fR\fIOptionsdatei\fR
+\fB@\fR\fIOptionsdatei\&.json\fR
 .RS 4
-liest zus\(:atzliche Befehlszeilenargumente aus der Datei
-\fIOptionsdatei\fR\&. Zeilen, deren erstes Nichtleerraumzeichen ein Rautenzeichen (\(Fc#\(Fo) ist, werden als Kommentare betrachtet und ignoriert\&. Leerr\(:aume am Anfang und Ende einer Zeile werden abgeschnitten\&. Jede Zeile darf genau eine Option enthalten\&.
-.sp
-Verschiedene Zeichen k\(:onnen maskiert werden, z\&.B\&. falls Sie m\(:ochten, dass eine Nichtkommentarzeile mit einem \(Fc#\(Fo beginnt\&. Die Regeln werden im
-Abschnitt \(:uber Maskieren von Text
-beschrieben\&.
-.sp
-Die Befehlszeile \(Fc\fBmkvinfo \-v \-v Eingabe\&.mkv \-\-redirect\-output Info\&.txt\fR
-kann in die folgende Optionsdatei umgewandelt werden:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Detailstufe erh\(:ohen
-\-v
-\-v
-# Eingabe\&.mkv auswerten
-Eingabe\&.mkv
-# und die Ausgabe in Info\&.txt schreiben
-\-\-redirect\-output
-Info\&.txt
-.fi
-.if n \{\
-.RE
-.\}
+Liest zus\(:atzliche Befehlszeilenargumente aus der Datei
+\fIOptionsdatei\fR\&. Eine ausf\(:uhrliche Erl\(:auterunge \(:uber die unterst\(:utzten Formate finden Sie im Abschnitt "Optionsdateien" in der Handbuchseite zu
+\fBmkvmerge\fR(1)\&.
 .RE
 .SH "DETAILSTUFEN"
 .PP

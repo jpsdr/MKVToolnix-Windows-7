@@ -137,30 +137,12 @@ download_url)\&.
 이 옵션은 libcurl을 지원하도록 프로그램을 만든 경우에만 이용 가능합니다\&.
 .RE
 .PP
-\fB@\fR\fI옵션 파일\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-\fIoptions\-file\fR
-파일에서 추가적인 명령행 인수를 읽습니다\&. 공백이 아닌 첫번째 문자가 해쉬 표시(\*(Aq#\*(Aq)인 줄은 주석으로 간주하여 무시합니다\&. 줄의 앞과 끝의 공백은 제거될 것입니다\&. 각 줄에는 반드시 한 개의 옵션을 포함해야 합니다\&.
-.sp
-예를 들어 \*(Aq#\*(Aq이 붙은 비주석 줄을 시작할 필요가 있는 경우에는 몇몇 확장 문자를 사용할 수 있습니다\&. 규칙은
-확장 텍스트에 대한 부분에 기술되어 있습니다\&.
-.sp
-명령행 \*(Aq\fBmkvextract tracks 소스\&.mkv \-\-raw 1:대상\&.raw\fR\*(Aq은 다음 옵션 파일로 변환될 수 있습니다:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# 소스\&.mkv에서 트랙 추출
-tracks
-소스\&.mkv
-# 트랙을 원시 데이터로 출력
-\-\-raw
-1:대상\&.raw
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SS "트랙 추출 모드"
 .PP

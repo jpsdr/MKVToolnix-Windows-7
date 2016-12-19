@@ -369,33 +369,11 @@ Anschlie\(ssend beendet sich das Programm mit einem R\(:uckgabewert von 0, falls
 Diese Option ist nur verf\(:ugbar, falls das Programm mit Unterst\(:utzung f\(:ur Libcurl gebaut wurde\&.
 .RE
 .PP
-\fB@\fR\fIOptionsdatei\fR
+\fB@\fR\fIOptionsdatei\&.json\fR
 .RS 4
-liest zus\(:atzliche Befehlszeilenargumente aus der Datei
-\fIOptionsdatei\fR\&. Zeilen, deren erstes Nichtleerraumzeichen ein Rautenzeichen (\(Fc#\(Fo) ist, werden als Kommentare betrachtet und ignoriert\&. Leerr\(:aume am Anfang und Ende einer Zeile werden abgeschnitten\&. Jede Zeile darf genau eine Option enthalten\&.
-.sp
-Verschiedene Zeichen k\(:onnen maskiert werden, z\&.B\&. falls Sie m\(:ochten, dass eine Nichtkommentarzeile mit einem \(Fc#\(Fo beginnt\&. Die Regeln werden im
-Abschnitt \(:uber Maskieren von Text
-beschrieben\&.
-.sp
-Die Befehlszeile \(Fc\fBmkvpropedit Quelle\&.mkv \-\-edit track:a2 \-\-set name=Kommentare\fR\(Fo kann in die folgende Optionsdatei umgewandelt werden:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Quelle\&.mkv \(:andern
-Quelle\&.mkv
-# die zweite Tonspur bearbeiten
-\-\-edit
-track:a2
-# und den Titel auf \(FcKommentare\(Fo setzen
-\-\-set
-name=Kommentare
-.fi
-.if n \{\
-.RE
-.\}
+Liest zus\(:atzliche Befehlszeilenargumente aus der Datei
+\fIOptionsdatei\fR\&. Eine ausf\(:uhrliche Erl\(:auterunge \(:uber die unterst\(:utzten Formate finden Sie im Abschnitt "Optionsdateien" in der Handbuchseite zu
+\fBmkvmerge\fR(1)\&.
 .RE
 .SH "SELEKTOREN ZUR BEARBEITUNG"
 .PP

@@ -31,7 +31,7 @@
 mkvmerge \- マルチメディアストリームをMatroska(TM)ファイルに格納します。
 .SH "書式"
 .HP \w'\fBmkvmerge\fR\ 'u
-\fBmkvmerge\fR [global\ options] {\-o\ out} [options1] {file1} [[options2]\ {file2}] [@optionsfile]
+\fBmkvmerge\fR [global\ options] {\-o\ out} [options1] {file1} [[options2]\ {file2}] [@options\-file\&.json]
 .SH "説明"
 .PP
 このプログラムはいくつかのメディアファイルを入力とし、それらに格納されたストリームのうち全て、もしくは選択されたものをMatroska(TM)ファイルに書き込みます。\m[blue]\fBMatroska(TM)\fR\m[]\&\s-2\u[1]\d\s+2のウェブサイトも参照してください。
@@ -1647,7 +1647,7 @@ will cause the program to output a list of available translations\&.
 Turns on GUI mode\&. In this mode specially\-formatted lines may be output that can tell a controlling GUI what\*(Aqs happening\&. These messages follow the format \*(Aq#GUI#message\*(Aq\&. The message may be followed by key/value pairs as in \*(Aq#GUI#message#key1=value1#key2=value2\&...\*(Aq\&. Neither the messages nor the keys are ever translated and always output in English\&.
 .RE
 .PP
-\fB@\fR\fIoptions\-file\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
 ファイル\fIoptions\-file\fRから追加のコマンドライン引数を読み込みます。詳細はオプションファイルのセクションを参照してください。
 .RE
@@ -2205,6 +2205,37 @@ mkvinfo file\&.mkv > info\&.txt\&.
 .PP
 オプションファイルとは、\fBmkvmerge\fR(1)が追加のコマンドラインの引数をそれから読み込むことができるものです。これは、コマンドラインの長さ制限等の、外部プログラムを実行する際のシェルやオペレーティングシステムの特定の制限を回避するために使用することができます。
 .PP
+There are two formats for option files: a JSON format and a proprietary legacy format\&. The legacy format is deprecated, and support for it will likely be removed in 2017\&.
+.SS "The JSON format"
+.PP
+A JSON option file\*(Aqs name must end in \*(Aq\&.json\*(Aq\&. Its content must be a valid JSON array consisting solely of JSON strings\&. The file\*(Aqs encoding must be UTF\-8\&. The file should not start with a
+byte order marker
+(BOM), but if one exists, it will be skipped\&.
+.PP
+The rules for escaping special characters inside JSON are the ones in the official JSON specification,
+\m[blue]\fBRFC 7159\fR\m[]\&\s-2\u[4]\d\s+2\&.
+.PP
+The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following JSON option file called e\&.g\&. \*(Aqoptions\&.json\*(Aq:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+[
+  "\-o",
+  "c:\e\eMatroska\e\emy file\&.mkv",
+  "\-\-title",
+  "#65",
+  "\-A",
+  "a movie\&.avi",
+  "sound\&.ogg"
+]
+.fi
+.if n \{\
+.RE
+.\}
+.SS "The legacy format"
+.PP
 オプションファイルに関していくつか規則があります。行で最初の空白文字でない文字がハッシュマーク(\*(Aq#\*(Aq)である行はコメントとして扱われ、無視されます。行頭、及び行末の空白文字は取り除かれます。各行には一つずつしかオプションを指定できません。
 .PP
 何も書かれていない行も無視されます。空の引数は、\*(Aq#EMPTY#\*(Aqという行によって表すことができます。
@@ -2213,7 +2244,7 @@ mkvinfo file\&.mkv > info\&.txt\&.
 .PP
 バックスラッシュ（Windows上の日本語フォントでは\e記号）は、必ずエスケープされなければなりません。ハッシュマーク（#）は、それがコメントの始まりでなければエスケープされなければなりません。
 .PP
-\*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aqというコマンドラインと同じことは、次のようなオプションファイルによって指定できます。
+The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following legacy option file called e\&.g\&. \*(Aqoptions\&.txt\*(Aq:
 .sp
 .if n \{\
 .RS 4
@@ -2348,7 +2379,7 @@ $ mkvmerge \-o output\&.mkv \-A video\&.avi sound\&.ogg \e
 添付ファイルつきのMatroska(TM)ファイルが入力ファイルとして使われた場合、\fBmkvmerge\fR(1)はその添付ファイルを新しいファイルにコピーします。添付ファイルのコピーの有無は、\fB\-\-attachments\fR及び\fB\-\-no\-attachments\fRオプションを使って切り替えることができます。
 .SH "チャプタ"
 .PP
-Matroska(TM)チャプタシステムは、OGMファイルで使用されていた従来のシステムより強力です。その仕様の全ては、\m[blue]\fBMatroska(TM)のウェブサイト\fR\m[]\&\s-2\u[4]\d\s+2に記されています。
+Matroska(TM)チャプタシステムは、OGMファイルで使用されていた従来のシステムより強力です。その仕様の全ては、\m[blue]\fBMatroska(TM)のウェブサイト\fR\m[]\&\s-2\u[5]\d\s+2に記されています。
 .PP
 \fBmkvmerge\fR(1)は2種類のチャプタファイルを入力としてサポートしています。一つ目は\*(Aqシンプルチャプタファイル\*(Aqと呼ばれるもので、OGM
 toolsが想定しているものと同じフォーマットです。二つ目はXMLベースのチャプタフォーマットで、Matroska(TM)のチャプタ機能の全てをサポートしています。
@@ -2495,7 +2526,7 @@ Chapters (master)
 Matroska(TM)は廃止予定の拡張可能なタグのセットと、新しい、他のよくあるコンテナで採用されているようなより単純な、\fIKEY=VALUE\fRというシステムをサポートします。しかし、Matroska(TM)では、これらのタグはネストすることも可能で、さらに\fIKEY\fRと\fIVALUE\fRは両方がそれ自信のエレメントです。サンプルファイルexample\-tags\-2\&.xmlがこの新しいシステムの使い方の例を示しています。
 .SS "タグのスコープ"
 .PP
-Matroska(TM)タグは自動的にはファイル全体に適用はされません。適用することもできますが、ファイルの異る部分々々に適用することもできます。一つ、もしくは複数のトラック、一つ、もしくは複数のチャプタ、さらにはその組み合わせにも適用することが可能です。\m[blue]\fBMatroska(TM)の仕様\fR\m[]\&\s-2\u[5]\d\s+2に、このことの詳細が記述されています。
+Matroska(TM)タグは自動的にはファイル全体に適用はされません。適用することもできますが、ファイルの異る部分々々に適用することもできます。一つ、もしくは複数のトラック、一つ、もしくは複数のチャプタ、さらにはその組み合わせにも適用することが可能です。\m[blue]\fBMatroska(TM)の仕様\fR\m[]\&\s-2\u[6]\d\s+2に、このことの詳細が記述されています。
 .PP
 重要なことは、タグはTargetsMatroska(TM)タグエレメントによってトラック及びチャプタにリンクされますが、このリンクの際に使用されるUIDは\fBmkvmerge\fR(1)が色々な所で使用するトラックID\fIではない\fRことです。その代わりに、\fBmkvmerge\fR(1)は自動的に計算したUID(トラックがMatroska(TM)以外のファイルフォーマットから取り出される場合)か、トラックのソースファイルがMatroska(TM)ファイルの場合ソースファイルからコピーされた数字が使用されます。よって、タグファイルが\fBmkvmerge\fR(1)に渡される前に、使用されるUIDを知ることは困難です。
 .PP
@@ -2516,7 +2547,7 @@ $ mkvmerge \-o file\&.mkv \-\-tags 0:tags\&.xml file\&.avi
 .\}
 .SS "タグファイルフォーマット"
 .PP
-\fBmkvmerge\fR(1)はXMLベースのタグファイルフォーマットをサポートします。このフォーマットは\m[blue]\fBMatroska(TM)の仕様\fR\m[]\&\s-2\u[5]\d\s+2に非常に近いデザインになっています。MKVToolNixのバイナリ、及びソースディストリビューションはどちらも、既知のタグをただリストしただけの、実際のタグファイルのテンプレートとして使用できるexample\-tags\-2\&.xmlというサンプルファイルを含んでいます。
+\fBmkvmerge\fR(1)はXMLベースのタグファイルフォーマットをサポートします。このフォーマットは\m[blue]\fBMatroska(TM)の仕様\fR\m[]\&\s-2\u[6]\d\s+2に非常に近いデザインになっています。MKVToolNixのバイナリ、及びソースディストリビューションはどちらも、既知のタグをただリストしただけの、実際のタグファイルのテンプレートとして使用できるexample\-tags\-2\&.xmlというサンプルファイルを含んでいます。
 .PP
 基本的には、以下の様な構成です。
 .sp
@@ -2795,7 +2826,7 @@ gap, 10\&.050
 \fBmkvtoolnix-gui\fR(1)
 .SH "ウェブ"
 .PP
-最新のバージョンは、常時\m[blue]\fBMKVToolNixのホームページ\fR\m[]\&\s-2\u[6]\d\s+2から取得できます。
+最新のバージョンは、常時\m[blue]\fBMKVToolNixのホームページ\fR\m[]\&\s-2\u[7]\d\s+2から取得できます。
 .SH "著者"
 .PP
 \fBBunkus Moritz[FAMILY Given]\fR <\&moritz@bunkus\&.org\&>
@@ -2819,16 +2850,21 @@ mkvmerge-identification-output-schema.json
 \%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
 .RE
 .IP " 4." 4
+RFC 7159
+.RS 4
+\%https://tools.ietf.org/html/rfc7159
+.RE
+.IP " 5." 4
 Matroska(TM)のウェブサイト
 .RS 4
 \%http://www.matroska.org
 .RE
-.IP " 5." 4
+.IP " 6." 4
 Matroska(TM)の仕様
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 6." 4
+.IP " 7." 4
 MKVToolNixのホームページ
 .RS 4
 \%https://mkvtoolnix.download/

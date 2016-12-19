@@ -130,28 +130,12 @@ download_url)\&.
 このオプションは、プログラムがlibcurlのサポートつきでビルドされた場合のみ使用できます。
 .RE
 .PP
-\fB@\fR\fIoptions\-file\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-\fIoptions\-file\fRで指定されたファイルから追加のコマンドラインオプションを読み込みます。行で最初の空白文字でない文字がハッシュマーク(\*(Aq#\*(Aq)である行はコメントとして扱われ、無視されます。行頭、及び行末の空白文字は取り除かれます。各行には一つずつしかオプションを指定できません。
-.sp
-エスケープすることができる文字もあります。例えば、コメントではない行を\*(Aq#\*(Aqで始める必要がある場合です。そのルールは、エスケープ文字についてのセクションで説明されています。
-.sp
-\*(Aq\fBmkvextract tracks source\&.mkv \-\-raw 1:destination\&.raw\fR\*(Aqというコマンドラインと同じことは、次のようなオプションファイルによって指定できます。
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# source\&.mkv からトラックを抽出
-tracks
-source\&.mkv
-# トラックをrawデータとして出力
-\-\-raw 
-1:destination\&.raw      
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SS "トラック抽出モード"
 .PP

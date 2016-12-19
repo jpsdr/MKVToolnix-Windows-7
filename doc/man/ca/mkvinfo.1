@@ -156,32 +156,12 @@ Despr\('es el programa sortir\(`a amb un codi de sortida de 0 si no hi ha cap ll
 Aquesta opci\('o nom\('es estar\(`a disponible si el programa va ser constru\(:it amb la implementaci\('o per a \(Folibcurl\(Fc\&.
 .RE
 .PP
-\fB@\fR\fIfitxer_opcions\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
-Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del
-\fIfitxer_opcions\fR\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
-.sp
-Es poden escapar diversos car\(`acters, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
-la secci\('o sobre escapar en el text\&.
-.sp
-La l\('inia d\*(Aqordres \(Fo\fBmkvinfo \-v \-v entrada\&.mkv \-\-redirect\-output informaci\('o\&.txt\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-# Ser m\('es loqua\(,c
-\-v
-\-v
-# Analitza entrada\&.mkv
-entrada\&.mkv
-# i escriu la sortida a informaci\('o\&.txt
-\-\-redirect\-output
-informaci\('o\&.txt
-.fi
-.if n \{\
-.RE
-.\}
+Reads additional command line arguments from the file
+\fIoptions\-file\fR\&. For a full explanation on the supported formats for such files see the section called "Option files" in the
+\fBmkvmerge\fR(1)
+man page\&.
 .RE
 .SH "NIVELLS DE LOQUACITAT"
 .PP

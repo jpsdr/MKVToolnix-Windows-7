@@ -31,7 +31,7 @@
 mkvmerge \- Multiplexa secuencias multimedia en un archivo Matroska(TM)
 .SH "SINOPSIS"
 .HP \w'\fBmkvmerge\fR\ 'u
-\fBmkvmerge\fR [opciones\ globales] {\-o\ salida} [opciones1] {archivo1} [[opciones2]\ {archivo2}] [@archivo\-opciones]
+\fBmkvmerge\fR [global\ options] {\-o\ out} [options1] {file1} [[options2]\ {file2}] [@options\-file\&.json]
 .SH "DESCRIPCI\('ON"
 .PP
 Esto programa toma los archivos multimedia de entrada y une sus secuencias (todas ellas o s\('olo las seleccionadas) en un archivo
@@ -1986,7 +1986,7 @@ Habilita caracter\('isticas experimentales\&. Una lista de caracter\('isticas di
 Habilita el modo GUI\&. En este modo las l\('ineas especialmente formateadas pueden ser generadas para decirle a un control de la GUI lo que est\('a pasando\&. Estos mensajes se rigen bajo el formato \*(Aq#GUI#mensaje\*(Aq\&. El mensaje puede ser continuado por pares de valores/claves como en \*(Aq#GUI#mensaje#clave1=valor1#clave2=valor2\&...\*(Aq\&. Ni los mensajes ni las claves pueden ser traducidas y siempre se generan en ingl\('es\&.
 .RE
 .PP
-\fB@\fR\fIarchivo\-opciones\fR
+\fB@\fR\fIoptions\-file\&.json\fR
 .RS 4
 Lee argumentos adicionales de la l\('inea de comandos desde el archivo
 \fIarchivo\-opciones\fR\&. Mire la secci\('on acerca de
@@ -2646,6 +2646,37 @@ Un archivo de opciones es un archivo que
 \fBmkvmerge\fR(1)
 puede leer argumentos adicionales de la l\('inea de comandos\&. Esto se puede utilizar para eludir ciertas limitaciones en el shell (entorno) o el sistema operativo como una longitud limitada de la l\('inea de comandos cuando se ejecutan programas externos\&.
 .PP
+There are two formats for option files: a JSON format and a proprietary legacy format\&. The legacy format is deprecated, and support for it will likely be removed in 2017\&.
+.SS "The JSON format"
+.PP
+A JSON option file\*(Aqs name must end in \*(Aq\&.json\*(Aq\&. Its content must be a valid JSON array consisting solely of JSON strings\&. The file\*(Aqs encoding must be UTF\-8\&. The file should not start with a
+byte order marker
+(BOM), but if one exists, it will be skipped\&.
+.PP
+The rules for escaping special characters inside JSON are the ones in the official JSON specification,
+\m[blue]\fBRFC 7159\fR\m[]\&\s-2\u[4]\d\s+2\&.
+.PP
+The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following JSON option file called e\&.g\&. \*(Aqoptions\&.json\*(Aq:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+[
+  "\-o",
+  "c:\e\eMatroska\e\emy file\&.mkv",
+  "\-\-title",
+  "#65",
+  "\-A",
+  "a movie\&.avi",
+  "sound\&.ogg"
+]
+.fi
+.if n \{\
+.RE
+.\}
+.SS "The legacy format"
+.PP
 Hay diversas reglas respecto a los archivos de opciones\&. Las l\('ineas cuyo primer car\('acter es una almohadilla (\*(Aq#\*(Aq) son tratadas como comentarios e ignorados\&. Los espacios en blanco al principio y final ser\('an eliminados\&. Cada l\('inea debe contener s\('olo una opci\('on\&.
 .PP
 Una l\('inea que no contiene nada es ignorada\&. Un argumento vac\('io se representa con la l\('inea \*(Aq#EMPTY#\*(Aq\&.
@@ -2655,7 +2686,7 @@ la secci\('on acerca de texto escapado\&.
 .PP
 Las barras invertidas deben ser siempre escapadas\&. Las almohadillas deben ser escapadas si no inicia ning\('un comentario\&.
 .PP
-La l\('inea de comandos \*(Aq\fBmkvmerge \-o "mi archivo\&.mkv" \-A "una pel\('icula\&.avi" audio\&.ogg\fR\*(Aq podr\('ia ser convertida al siguiente archivo de opciones:
+The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following legacy option file called e\&.g\&. \*(Aqoptions\&.txt\*(Aq:
 .sp
 .if n \{\
 .RS 4
@@ -3060,7 +3091,7 @@ muestra c\('omo usar este nuevo sistema\&.
 Las etiquetas
 Matroska(TM)
 no se aplican autom\('aticamente al archivo entero\&. Es posible hacerlo, y tambi\('en a partes diferentes del archivo: a una o m\('as pistas, a una o m\('as cap\('itulos, o incluso a una combinaci\('on de ambas\&.
-\m[blue]\fBLa especificaci\('on de Matroska\fR\m[]\&\s-2\u[4]\d\s+2
+\m[blue]\fBLa especificaci\('on de Matroska\fR\m[]\&\s-2\u[5]\d\s+2
 proporciona m\('as detalles sobre esto\&.
 .PP
 Una cosa importante es que las etiquetas est\('an vinculadas a pistas o cap\('itulos con el elemento de etiquetas
@@ -3117,7 +3148,7 @@ mkvmerge \-o archivo\&.mkv \-\-tags 0:etiquetas\&.xml archivo\&.avi
 \fBmkvmerge\fR(1)
 admite el formato de archivos de etiquetas basadas en
 XML\&. El formato es muy similar al modelo de
-\m[blue]\fBla especificaci\('on Matroska\fR\m[]\&\s-2\u[4]\d\s+2\&. Tanto la distribuci\('on binaria como la fuente de MKVToolNix vienen acompa\(~nadas de un archivo de ejemplo llamado
+\m[blue]\fBla especificaci\('on Matroska\fR\m[]\&\s-2\u[5]\d\s+2\&. Tanto la distribuci\('on binaria como la fuente de MKVToolNix vienen acompa\(~nadas de un archivo de ejemplo llamado
 example\-tags\-2\&.xml
 que enumera simplemente todas las etiquetas conocidas y que se puede usar como base para las etiquetas de la vida real\&.
 .PP
@@ -3462,7 +3493,7 @@ la secci\('on caracteres especiales de escape en el texto)\&.
 .SH "WWW"
 .PP
 La \('ultima versi\('on se puede encontrar siempre en
-\m[blue]\fBla p\('agina de MKVToolNix\fR\m[]\&\s-2\u[5]\d\s+2\&.
+\m[blue]\fBla p\('agina de MKVToolNix\fR\m[]\&\s-2\u[6]\d\s+2\&.
 .SH "AUTOR"
 .PP
 \fBMoritz Bunkus\fR <\&moritz@bunkus\&.org\&>
@@ -3486,11 +3517,16 @@ mkvmerge-identification-output-schema.json
 \%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
 .RE
 .IP " 4." 4
+RFC 7159
+.RS 4
+\%https://tools.ietf.org/html/rfc7159
+.RE
+.IP " 5." 4
 La especificaci\('on de Matroska
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 5." 4
+.IP " 6." 4
 la p\('agina de MKVToolNix
 .RS 4
 \%https://mkvtoolnix.download/

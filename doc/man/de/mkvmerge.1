@@ -31,7 +31,7 @@
 mkvmerge \- f\(:ugt Multimedia\-Datenstr\(:ome in eine Matroska(TM)\-Datei zusammen\&.
 .SH "\(:UBERSICHT"
 .HP \w'\fBmkvmerge\fR\ 'u
-\fBmkvmerge\fR [globale\ Optionen] {\-o\ Ausgabe} [Optionen1] {Datei1} [[Optionen2]\ {Datei2}] [@Optionendatei]
+\fBmkvmerge\fR [globale\ Optionen] {\-o\ Ausgabe} [Optionen1] {Datei1} [[Optionen2]\ {Datei2}] [@Optionendatei\&.json]
 .SH "BESCHREIBUNG"
 .PP
 Dieses Programm nimmt die Eingabe von mehreren Mediendateien und vereinigt ihre Datenstr\(:ome (alle oder nur eine Auswahl) in eine
@@ -1997,7 +1997,7 @@ Schaltet den Modus f\(:ur graphische Benutzeroberfl\(:achen an\&. In diesem Modu
 gerade tut\&. Diese Nachrichten haben das folgende Format: \*(Aq#GUI#Nachricht\*(Aq\&. Der Nachricht folgen potenziell Schl\(:ussel/Wert\-Paare wie z\&.B\&. \*(Aq#GUI#Nachricht#schluessel1=wert1#schluessel2=wert2\&...\*(Aq\&. Weder die Nachricht selber noch die Schl\(:ussel werden jemals \(:ubersetzt sondern immer in Englisch ausgegeben\&.
 .RE
 .PP
-\fB@\fR\fIOptionsdatei\fR
+\fB@\fR\fIOptionsdatei\&.json\fR
 .RS 4
 liest zus\(:atzliche Befehlszeilenargumente aus der Datei
 \fIOptionsdatei\fR\&. Weitere Informationen finden Sie im Abschnitt \(:uber
@@ -2662,6 +2662,36 @@ Ein Optionsdatei ist eine Datei aus der
 \fBmkvmerge\fR(1)
 zus\(:atzliche Befehlszeilenargumente lesen kann\&. Diese kann benutzt werden, um bestimmte Beschr\(:ankungen der Shell oder des Betriebssystems wie eine begrenzte L\(:ange der Befehlszeile zu umgehen, wenn externe Programme ausgef\(:uhrt werden\&.
 .PP
+Es gibt zwei Formate f\(:ur Optionsdateien: ein JSON\-Format sowie ein propriet\(:ares Altformat\&. Das Altformat ist \(:uberholt, und seine Unterst\(:utzung wird voraussichtlich in 2017 entfernt werden\&.
+.SS "Das JSON\-Format"
+.PP
+Der Name einer JSON\-Options\-Datei muss in \*(Aq\&.json\*(Aq enden\&. Der Inhalt muss aus einem g\(:ultigen JSON\-Array bestehen, das ausschlie\(sslich JSON\-Zeichenketten enth\(:alt\&. Der Kodierung der Datei muss UTF\-8 sein\&. Die Datei sollte nicht mit einer
+Byte\-Reihenfolgemarkierung
+(BOM) beginnen; tut sie es aber doch, so wird die Markierung \(:ubersprungen\&.
+.PP
+Die Regeln f\(:ur das Maskieren spezieller Zeichen innerhalb der JSON\-Daten sind diejenigen, die in der offiziellen JSON\-Spezifikation (\m[blue]\fBRFC 7159\fR\m[]\&\s-2\u[4]\d\s+2) genannt werden\&.
+.PP
+Die Befehlszeile \(Fc\fBmkvmerge \-o "Meine Datei\&.mkv" \-A "ein Film\&.avi" Ton\&.ogg\fR\(Fo kann in die folgende JSON\-Optionsdatei mit z\&.B\&. dem Namen \*(AqOptionen\&.json\*(Aq umgewandelt werden:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+[
+  "\-o",
+  "c:\e\eMatroska\e\emeine Datei\&.mkv",
+  "\-\-title",
+  "#65",
+  "\-A",
+  "ein Film\&.avi",
+  "Ton\&.ogg"
+]
+.fi
+.if n \{\
+.RE
+.\}
+.SS "Das Altformat"
+.PP
 Es gibt mehrere Regeln bez\(:uglich Optionsdateien\&. Zeilen, deren erstes Nichtleerraumzeichen ein Rautenzeichen (\(Fc#\(Fo) ist, werden als Kommentare betrachtet und ignoriert\&. Leerr\(:aume am Anfang und Ende einer Zeile werden entfernt\&. Jede Zeile muss genau eine Option enthalten\&.
 .PP
 Eine Zeile, die sonst nichts enth\(:alt, wird auch ignoriert\&. Ein leeres Argument wird durch die Zeile \(Fc#EMPTY#\(Fo dargestellt\&.
@@ -2672,7 +2702,7 @@ beschrieben\&.
 .PP
 Beachten Sie, dass R\(:uckw\(:artsschr\(:agstriche immer maskiert werden m\(:ussen\&. Rautenzeichen (\(Fc#\(Fo) m\(:ussen maskiert werden, falls sie keine Kommentarzeile einleiten\&.
 .PP
-Die Befehlszeile \(Fc\fBmkvmerge \-o "Meine Datei\&.mkv" \-A "ein Film\&.avi" Ton\&.ogg\fR\(Fo kann in die folgende Optionsdatei umgewandelt werden:
+Die Befehlszeile \(Fc\fBmkvmerge \-o "Meine Datei\&.mkv" \-A "ein Film\&.avi" Ton\&.ogg\fR\(Fo kann in die folgende Altdaten\-Optionsdatei z\&.B\&. mit dem Namen \*(AqOptionen\&.txt\*(Aq umgewandelt werden:
 .sp
 .if n \{\
 .RS 4
@@ -3069,7 +3099,7 @@ zeigt, wie dieses neue System benutzt wird\&.
 .SS "Geltungsbereich der Tags"
 .PP
 Matroska(TM)\-Tags gelten nicht automatisch f\(:ur die gesamte Datei\&. Sie k\(:onnen, aber sie k\(:onnen auch f\(:ur unterschiedliche Teile der Datei gelten: f\(:ur eine oder mehrere Spuren, f\(:ur ein oder mehrere Kapitel oder sogar f\(:ur eine Kombination von beiden\&.
-\m[blue]\fBDie Matroska(TM)\-Spezifikation\fR\m[]\&\s-2\u[4]\d\s+2
+\m[blue]\fBDie Matroska(TM)\-Spezifikation\fR\m[]\&\s-2\u[5]\d\s+2
 liefert weitere Einzelheiten zu diesem Umstand\&.
 .PP
 Eine wichtige Tatsache ist, dass Tags mit Spuren oder Kapiteln anhand des Tag\-Elements
@@ -3126,7 +3156,7 @@ $ mkvmerge \-o Datei\&.mkv \-\-tags 0:Tags\&.xml Datei\&.avi
 \fBmkvmerge\fR(1)
 unterst\(:utzt ein
 XML\-basiertes Tag\-Dateifomat\&. Das Format ist sehr eng an
-\m[blue]\fBdie Matroska(TM)\-Spezifikation\fR\m[]\&\s-2\u[4]\d\s+2
+\m[blue]\fBdie Matroska(TM)\-Spezifikation\fR\m[]\&\s-2\u[5]\d\s+2
 angelehnt\&. Sowohl die Bin\(:ar\- als auch die Quelldistribution von MKVToolNix bringen eine Musterdatei namens
 example\-tags\-2\&.xml
 mit, die einfach alle bekannten Tags auff\(:uhrt und als Basis f\(:ur Tag\-Dateien in der Praxis benutzt werden kann\&.
@@ -3474,7 +3504,7 @@ den Abschnitt \(:uber Maskieren von Sonderzeichen in Text)\&.
 .SH "WWW"
 .PP
 Die neuste Version kann immer auf
-\m[blue]\fBder MKVToolNix\-Homepage\fR\m[]\&\s-2\u[5]\d\s+2
+\m[blue]\fBder MKVToolNix\-Homepage\fR\m[]\&\s-2\u[6]\d\s+2
 gefunden werden\&.
 .SH "AUTOR"
 .PP
@@ -3500,12 +3530,17 @@ mkvmerge-identification-output-schema.json
 \%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
 .RE
 .IP " 4." 4
+RFC 7159
+.RS 4
+\%https://tools.ietf.org/html/rfc7159
+.RE
+.IP " 5." 4
 Die
 Matroska(TM)-Spezifikation
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 5." 4
+.IP " 6." 4
 der MKVToolNix-Homepage
 .RS 4
 \%https://mkvtoolnix.download/
