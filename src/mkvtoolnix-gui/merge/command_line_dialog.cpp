@@ -50,7 +50,8 @@ void
 CommandLineDialog::onEscapeModeChanged(int index) {
   auto mode = 0 == index ? Util::EscapeShellCmdExeArgument
             : 1 == index ? Util::EscapeShellUnix
-            : 2 == index ? Util::EscapeMkvtoolnix
+            : 2 == index ? Util::EscapeJSON
+            : 3 == index ? Util::EscapeMkvtoolnix
             :              Util::DontEscape;
 
   auto sep  = Util::EscapeMkvtoolnix == mode ? "\n" : " ";
