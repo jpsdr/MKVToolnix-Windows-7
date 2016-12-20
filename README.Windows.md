@@ -88,9 +88,10 @@ Next, build the required libraries (change `MXE_TARGETS` to
 one, and increase `JOBS` if you have more than one core):
 
     cd $HOME/mxe
-    make MXE_TARGETS=x86_64-w64-mingw32.static JOBS=2 \
-      gettext libiconv zlib boost curl file flac lzo ogg pthreads \
-      vorbis qtbase qttranslations qtwinextras
+    make MXE_TARGETS=x86_64-w64-mingw32.static MXE_PLUGIN_DIRS=plugins/gcc6 \
+      JOBS=2 \
+      gettext libiconv zlib boost curl file flac lzo ogg pthreads vorbis \
+      qtbase qttranslations qtwinextras
 
 Append the installation directory to your `PATH` variable:
 

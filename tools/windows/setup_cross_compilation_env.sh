@@ -19,7 +19,7 @@ ARCHITECTURE=64
 INSTALL_DIR=${INSTALL_DIR:-$HOME/mxe}
 # Leave PARALLEL empty if you want the script to use all of your CPU
 # cores.
-PARALLEL=${PARALLEL:-$(( $(awk '/^core id/ { print $4 }' /proc/cpuinfo | sort | tail -n 1) + 2 ))}
+PARALLEL=${PARALLEL:-$(nproc --all)}
 
 #
 # END OF SETUP -- usually no need to change anything else
@@ -46,11 +46,14 @@ function update_mingw_cross_env {
 
   cd ${INSTALL_DIR}
   cat > settings.mk <<EOF
-MXE_TARGETS=${HOST}
-JOBS=${PARALLEL}
+MXE_TARGETS = ${HOST}
+MXE_PLUGIN_DIRS += plugins/gcc6
+JOBS = ${PARALLEL}
 
-mkvtoolnix-deps:
-	+make gettext libiconv zlib boost curl file flac lzo ogg pthreads vorbis qtbase qttranslations qtwinextras
+MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost curl file flac lzo ogg pthreads vorbis
+MKVTOOLNIX_DEPENDENCIES+=qtbase qttranslations qtwinextras
+
+mkvtoolnix-deps: \$(MKVTOOLNIX_DEPENDENCIES)
 EOF
 }
 
