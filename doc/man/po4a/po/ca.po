@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2016-12-19 23:42+0100\n"
-"PO-Revision-Date: 2016-11-07 18:12+0000\n"
+"PO-Revision-Date: 2016-12-20 16:48+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
@@ -38,10 +38,8 @@ msgstr "9.6.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2016-09-11"
 msgid "2016-11-29"
-msgstr "2016-09-11"
+msgstr "2016-11-29"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -473,19 +471,15 @@ msgstr "Aquesta opció només estarà disponible si el programa va ser construï
 #: doc/man/mkvinfo.xml:255
 #: doc/man/mkvmerge.xml:2060
 #: doc/man/mkvpropedit.xml:489
-#, fuzzy
-#| msgid "<option>@</option><parameter>options-file</parameter>"
 msgid "<option>@</option><parameter>options-file.json</parameter>"
-msgstr "<option>@</option><parameter>fitxer_opcions</parameter>"
+msgstr "<option>@</option><parameter>fitxer_d_opcions.json</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:218
 #: doc/man/mkvinfo.xml:258
 #: doc/man/mkvpropedit.xml:492
-#, fuzzy
-#| msgid "Reads additional command line arguments from the file <parameter>options-file</parameter>. See the section about <link linkend=\"mkvmerge.option_files\">option files</link> for further information."
 msgid "Reads additional command line arguments from the file <parameter>options-file</parameter>. For a full explanation on the supported formats for such files see the section called \"Option files\" in the &mkvmerge; man page."
-msgstr "Llegeix els arguments addicionals per a la línia d'ordres des del fitxer <parameter>fitxer_d_opcions</parameter>. Per a més informació, vegeu la secció sobre <link linkend=\"mkvmerge.option_files\">els fitxers d'opcions</link>."
+msgstr "Llegeix els arguments addicionals per a la línia d'ordres des del fitxer <parameter>fitxer_d_opcions</parameter>. Per a més informació sobre els formats admesos, vegeu la secció anomenada «Fitxers d'opcions» a la pàgina man del &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:227
@@ -1452,10 +1446,8 @@ msgstr "Fusiona fluxos multimèdia dins d'un fitxer &matroska;"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvmerge.xml:51
-#, fuzzy
-#| msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@optionsfile</arg>"
 msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@options-file.json</arg>"
-msgstr "<command>mkvmerge</command> <arg>opcions_globals</arg> <arg choice=\"req\">-o sortida</arg> <arg>opcions_1</arg> <arg choice=\"req\">fitxer_1</arg> <arg> <arg>opcions_2</arg> <arg choice=\"req\">fitxer_2</arg> </arg> <arg>@fitxer_opcions</arg>"
+msgstr "<command>mkvmerge</command> <arg>opcions_globals</arg> <arg choice=\"req\">-o sortida</arg> <arg>opcions_1</arg> <arg choice=\"req\">fitxer_1</arg> <arg> <arg>opcions_2</arg> <arg choice=\"req\">fitxer_2</arg> </arg> <arg>@fitxer_d_opcions.json</arg>"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:67
@@ -3759,31 +3751,27 @@ msgstr "Un fitxer d'opcions és un fitxer des d'on el &mkvmerge; pot llegir argu
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2540
 msgid "There are two formats for option files: a JSON format and a proprietary legacy format. The legacy format is deprecated, and support for it will likely be removed in 2018."
-msgstr ""
+msgstr "Hi ha dos formats pels fitxers d'opcions: el format JSON i un format heretat propietari. El format heretat està en desús, i està implementat pel fet que és probable que es retiri en 2018."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2545
-#, fuzzy
-#| msgid "Tag file format"
 msgid "The JSON format"
-msgstr "Format del fitxer d'etiquetes"
+msgstr "El format JSON"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2548
 msgid "A JSON option file's name must end in '<filename>.json</filename>'. Its content must be a valid JSON array consisting solely of JSON strings. The file's encoding must be UTF-8. The file should not start with a <foreignphrase>byte order marker</foreignphrase> (<abbrev>BOM</abbrev>), but if one exists, it will be skipped."
-msgstr ""
+msgstr "Un nom pel fitxer d'opcions JSON haurà d'acabar en «<filename>.json</filename>». El seu contingut haurà de ser una matriu JSON vàlida que consisteixi únicament de cadenes JSON. La codificació del fitxer haurà de ser en UTF-8. El fitxer no podrà començar amb un <foreignphrase>marcador d'ordre de bytes</foreignphrase> (<abbrev>BOM</abbrev>), però si hi és, serà omès."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2554
 msgid "The rules for escaping special characters inside JSON are the ones in the official JSON specification, <ulink url=\"https://tools.ietf.org/html/rfc7159\">RFC 7159</ulink>."
-msgstr ""
+msgstr "Les regles per escapar caràcters especials dins del JSON són les mateixes que hi ha a l'especificació oficial del JSON, <ulink url=\"https://tools.ietf.org/html/rfc7159\">RFC 7159</ulink>."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2558
-#, fuzzy
-#| msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following option file:"
 msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following JSON option file called e.g. '<filename>options.json</filename>':"
-msgstr "La línia d'ordres «<command>mkvmerge -o \"meu_fitxer.mkv\" -A \"una_peli.avi\" so.ogg</command>» es pot convertir en el següent fitxer d'opcions:"
+msgstr "La línia d'ordres «<command>mkvmerge -o \"meu_fitxer.mkv\" -A \"una_peli.avi\" so.ogg</command>» es pot convertir en el següent fitxer d'opcions JSON anomenat, p. ex., «<filename>opcions.json</filename>»:"
 
 #. type: Content of: <refentry><refsect1><refsect2><programlisting>
 #: doc/man/mkvmerge.xml:2562
@@ -3799,13 +3787,20 @@ msgid ""
 "  \"sound.ogg\"\n"
 "]"
 msgstr ""
+"[\n"
+"  \"-o\",\n"
+"  \"c:\\\\Matroska\\\\fitxer_meu.mkv\",\n"
+"  \"--title\",\n"
+"  \"#65\",\n"
+"  \"-A\",\n"
+"  \"una_peli.avi\",\n"
+"  \"so.ogg\"\n"
+"]"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2574
-#, fuzzy
-#| msgid "Tag file format"
 msgid "The legacy format"
-msgstr "Format del fitxer d'etiquetes"
+msgstr "El format heretat"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2577
@@ -3829,10 +3824,8 @@ msgstr "Tingueu en compte que les barres invertides sempre s'hauran d'escapar. E
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2596
-#, fuzzy
-#| msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following option file:"
 msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following legacy option file called e.g. '<filename>options.txt</filename>':"
-msgstr "La línia d'ordres «<command>mkvmerge -o \"meu_fitxer.mkv\" -A \"una_peli.avi\" so.ogg</command>» es pot convertir en el següent fitxer d'opcions:"
+msgstr "La línia d'ordres «<command>mkvmerge -o \"meu_fitxer.mkv\" -A \"una_peli.avi\" so.ogg</command>» es pot convertir en el següent fitxer d'opcions heretat anomenat, p. ex., «<filename>opcions.txt</filename>»:"
 
 #. type: Content of: <refentry><refsect1><refsect2><programlisting>
 #: doc/man/mkvmerge.xml:2600
