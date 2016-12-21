@@ -1836,10 +1836,33 @@ Das f\(:ur die Ergebnisse benutze Ausgabeformat kann mit der Option
 ge\(:andert werden\&.
 .RE
 .PP
+\fB\-J\fR \fIDateiname\fR
+.RS 4
+Dies ist ein bequemer Alias f\(:ur "\-\-identification\-format json \-\-identify Dateiname"\&.
+.RE
+.PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fIDateiname\fR
 .RS 4
-Diese Option ist veraltet\&. Benutzen Sie statt dessen
-\-\-identification\-format verbose \-\-identify \&...\&.
+wird
+\fBmkvmerge\fR(1)
+veranlassen, die einzelne Datei eingehend zu untersuchen und ihren Typ, die in der Datei enthaltenen Spuren und ihre Spur\-IDs zu melden\&. Falls diese Option benutzt wird, ist der Dateiname die einzige weitere erlaubte Option\&.
+.sp
+Die Ausgabe wird ebenfalls die Eigenschaften aller gefundenen Elemente enthalten, z\&.B\&. den Dateititel oder die Spursprache\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBAnmerkung\fR
+.ps -1
+.br
+Diese Option ist \(:uberholt\&. Sie wird in 2018 entfernt werden\&.
+.sp .5v
+.RE
 .RE
 .PP
 \fB\-F\fR, \fB\-\-identification\-format\fR \fIFormat\fR
@@ -1893,6 +1916,21 @@ Dieses Format wurde nicht daf\(:ur entworfen, geparset zu werden\&. Die Ausgabe 
 \fBmkvmerge\fR(1)
 benutzte Sprache \(:ubersetzt (siehe auch
 \-\-ui\-language)\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBAnmerkung\fR
+.ps -1
+.br
+Diese Option ist \(:uberholt\&. Sie wird in 2018 entfernt werden\&.
+.sp .5v
+.RE
 .RE
 .sp
 .RS 4

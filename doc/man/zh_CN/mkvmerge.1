@@ -1851,11 +1851,33 @@ Matroska(TM)
 选项修改。
 .RE
 .PP
+\fB\-J\fR \fIfile\-name\fR
+.RS 4
+This is a convenient alias for "\-\-identification\-format json \-\-identify file\-name"\&.
+.RE
+.PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fI文件名\fR
 .RS 4
-该选项已废弃。请使用
-\-\-identification\-format verbose\-text \-\-identify \&...
-替代之。
+将使
+\fBmkvmerge\fR(1)
+探查单个文件并报告其类型、文件中包含的轨道及其轨道 ID。如果使用了本选项，唯一可用的其他选项就是文件名。
+.sp
+The output will also contain properties for all items found, e\&.g\&. the file title or the track language\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fB注意\fR
+.ps -1
+.br
+This option is deprecated\&. It will be removed in 2018\&.
+.sp .5v
+.RE
 .RE
 .PP
 \fB\-F\fR, \fB\-\-identification\-format\fR \fI格式\fR
@@ -1906,6 +1928,21 @@ text
 \fBmkvmerge\fR(1)
 所使用的语言 (参见
 \-\-ui\-language)。
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fB注意\fR
+.ps -1
+.br
+This option is deprecated\&. It will be removed in 2018\&.
+.sp .5v
+.RE
 .RE
 .sp
 .RS 4

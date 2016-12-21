@@ -1833,10 +1833,33 @@ El formato de salida usado para el resultado se puede cambiar con la opci\('on
 \-\-identification\-format\&.
 .RE
 .PP
+\fB\-J\fR \fIfile\-name\fR
+.RS 4
+This is a convenient alias for "\-\-identification\-format json \-\-identify file\-name"\&.
+.RE
+.PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fInombre\-archivo\fR
 .RS 4
-Esta opci\('on est\('a en desuso\&. Utiliza, en su lugar,
-\-\-identification\-format verbose\-text \-\-identify \&...\&.
+Le permitir\('a a
+\fBmkvmerge\fR(1)
+analizar el archivo e informar de qu\('e tipo es, las pistas que contiene y los IDs de pista\&. Si se usa esta opci\('on entonces la unica opci\('on permitida es el nombre\-archivo\&.
+.sp
+The output will also contain properties for all items found, e\&.g\&. the file title or the track language\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBNota\fR
+.ps -1
+.br
+This option is deprecated\&. It will be removed in 2018\&.
+.sp .5v
+.RE
 .RE
 .PP
 \fB\-F\fR, \fB\-\-identification\-format\fR \fIformato\fR
@@ -1888,6 +1911,21 @@ Este formato no est\('a pensado para ser analizado\&. La salida se traducir\('a 
 \fBmkvmerge\fR(1)
 utiliza (mire tambi\('en
 \-\-ui\-language)\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBNota\fR
+.ps -1
+.br
+This option is deprecated\&. It will be removed in 2018\&.
+.sp .5v
+.RE
 .RE
 .sp
 .RS 4

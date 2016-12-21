@@ -1509,11 +1509,31 @@ The output format used for the result can be changed with the option
 \-\-identification\-format\&.
 .RE
 .PP
+\fB\-J\fR \fIfile\-name\fR
+.RS 4
+This is a convenient alias for "\-\-identification\-format json \-\-identify file\-name"\&.
+.RE
+.PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fIfile\-name\fR
 .RS 4
-This option is deprecated\&. Use
-\-\-identification\-format verbose\-text \-\-identify \&...
-instead\&.
+\fBmkvmerge\fR(1)に、単一のファイルを探査してその種類と、ファイルに含まれるトラック及びそのトラックIDを表示させます。このオプションを指定した場合、他に指定できるのはファイル名のみです。
+.sp
+The output will also contain properties for all items found, e\&.g\&. the file title or the track language\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fB注記\fR
+.ps -1
+.br
+This option is deprecated\&. It will be removed in 2018\&.
+.sp .5v
+.RE
 .RE
 .PP
 \fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
@@ -1564,6 +1584,21 @@ This format is not meant to be parsed\&. The output will be translated into the 
 \fBmkvmerge\fR(1)
 uses (see also
 \-\-ui\-language)\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fB注記\fR
+.ps -1
+.br
+This option is deprecated\&. It will be removed in 2018\&.
+.sp .5v
+.RE
 .RE
 .sp
 .RS 4

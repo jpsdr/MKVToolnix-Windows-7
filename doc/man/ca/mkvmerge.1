@@ -1809,11 +1809,33 @@ El format emprat a la sortida es pot canviar amb l\*(Aqopci\('o
 \-\-identification\-format\&.
 .RE
 .PP
+\fB\-J\fR \fIfile\-name\fR
+.RS 4
+This is a convenient alias for "\-\-identification\-format json \-\-identify file\-name"\&.
+.RE
+.PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fInom_fitxer\fR
 .RS 4
-Aquesta opci\('o \('es obsoleta\&. Empreu la combinaci\('o
-\-\-identification\-format verbose\-text \-\-identify \&...
-en el seu lloc\&.
+Li permet al
+\fBmkvmerge\fR(1)
+sondejar el fitxer i informar del seu tipus, les pistes que cont\('e i els ID de les pistes\&. Si s\*(Aqempra aquesta opci\('o, llavors l\*(Aq\('unica opci\('o permesa ser\(`a el nom_fitxer\&.
+.sp
+The output will also contain properties for all items found, e\&.g\&. the file title or the track language\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBNota\fR
+.ps -1
+.br
+This option is deprecated\&. It will be removed in 2018\&.
+.sp .5v
+.RE
 .RE
 .PP
 \fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
@@ -1865,6 +1887,21 @@ Aquest format no est\(`a destinat a ser analitzat\&. La sortida ser\(`a tradu\(:
 \fBmkvmerge\fR(1)
 (vegeu tamb\('e l\*(Aqopci\('o
 \-\-ui\-language)\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBNota\fR
+.ps -1
+.br
+This option is deprecated\&. It will be removed in 2018\&.
+.sp .5v
+.RE
 .RE
 .sp
 .RS 4
