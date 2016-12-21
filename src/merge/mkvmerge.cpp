@@ -77,7 +77,7 @@ static void
 set_usage() {
   auto nl     = S("\n");
   usage_text  =   "";
-  usage_text += Y("mkvmerge -o out [global options] [options1] <file1> [@optionsfile ...]\n");
+  usage_text += Y("mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n");
   usage_text +=   "\n";
   usage_text += Y(" Global options:\n");
   usage_text += S("  -v, --verbose            ") + Y("Increase verbosity.") + nl;
@@ -339,8 +339,8 @@ set_usage() {
                   "                           Redirects all messages into this file.\n");
   usage_text += Y("  --debug <topic>          Turns on debugging output for 'topic'.\n");
   usage_text += Y("  --engage <feature>       Turns on experimental feature 'feature'.\n");
-  usage_text += Y("  @optionsfile             Reads additional command line options from\n"
-                  "                           the specified file (see man page).\n");
+  usage_text += Y("  @option-file.json        Reads additional command line options from\n"
+                  "                           the specified JSON file (see man page).\n");
   usage_text += Y("  -h, --help               Show this help.\n");
   usage_text += Y("  -V, --version            Show version information.\n");
 #if defined(HAVE_CURL_EASY_H)
