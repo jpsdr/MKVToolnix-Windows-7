@@ -1880,7 +1880,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <term><option>-J</option> <parameter>file-name</parameter></term>
      <listitem>
       <para>
-       This is a convenient alias for <option>--identification-format json --identify file-name</option>.
+       This is a convenient alias for "<literal>--identification-format json --identify file-name</literal>".
       </para>
      </listitem>
     </varlistentry>
@@ -1889,8 +1889,17 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <term><option>-I</option>, <option>--identify-verbose</option> <parameter>file-name</parameter></term>
      <listitem>
       <para>
-       This option is deprecated. Use <link linkend="mkvmerge.description.identification_format"><literal>--identification-format verbose-text --identify …</literal></link> instead.
+       Will let &mkvmerge; probe the single file and report its type, the tracks contained in the file and their track IDs. If this option is
+       used then the only other option allowed is the filename.
       </para>
+
+      <para>
+       The output will also contain properties for all items found, e.g. the file title or the track language.
+      </para>
+
+      <note>
+       <para>This option is deprecated. It will be removed in 2018.</para>
+      </note>
      </listitem>
     </varlistentry>
 
@@ -1925,6 +1934,10 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
 
         <para>This format is not meant to be parsed. The output will be translated into the language &mkvmerge; uses (see also <link
         linkend="mkvmerge.description.ui_language">--ui-language</link>).</para>
+
+        <note>
+         <para>This option is deprecated. It will be removed in 2018.</para>
+        </note>
        </listitem>
 
        <listitem>
