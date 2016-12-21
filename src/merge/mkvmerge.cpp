@@ -319,6 +319,8 @@ set_usage() {
   usage_text +=   "\n\n";
   usage_text += Y(" Other options:\n");
   usage_text += Y("  -i, --identify <file>    Print information about the source file.\n");
+  usage_text += Y("  -J <file>                This is a convenient alias for\n"
+                  "                           \"--identification-format json --identify file\".\n");
   usage_text += Y("  -F, --identification-format <format>\n"
                   "                           Set the identification results format\n"
                   "                           ('text', 'verbose-text', 'json').\n");
