@@ -31,7 +31,7 @@
 mkvmerge \- Fusiona fluxos multim\(`edia dins d\*(Aqun fitxer Matroska(TM)
 .SH "SINOPSIS"
 .HP \w'\fBmkvmerge\fR\ 'u
-\fBmkvmerge\fR [global\ options] {\-o\ out} [options1] {file1} [[options2]\ {file2}] [@options\-file\&.json]
+\fBmkvmerge\fR [opcions_globals] {\-o\ sortida} [opcions_1] {fitxer_1} [[opcions_2]\ {fitxer_2}] [@fitxer_d_opcions\&.json]
 .SH "DESCRIPCI\('O"
 .PP
 Aquest programa pren l\*(Aqentrada des de diversos fitxers multim\(`edia d\*(Aqentrada i uneix els seus fluxos (tots o nom\('es els seleccionats) en un fitxer
@@ -1960,7 +1960,7 @@ Activa les caracter\('istiques experimentals\&. Es pot sol\(mdlicitar una llista
 Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#IGU#missatge\(Fc\&. El missatge pot estar seguit per parells clau/valor com \(Fo#IGU#missatge#clau1=valor1#clau2=valor2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:ides, sempre sortiran en angl\(`es\&.
 .RE
 .PP
-\fB@\fR\fIoptions\-file\&.json\fR
+\fB@\fR\fIfitxer_d_opcions\&.json\fR
 .RS 4
 Llegeix els arguments addicionals per a la l\('inia d\*(Aqordres des del fitxer
 \fIfitxer_d_opcions\fR\&. Per a m\('es informaci\('o, vegeu la secci\('o sobre
@@ -2618,17 +2618,17 @@ Un fitxer d\*(Aqopcions \('es un fitxer des d\*(Aqon el
 \fBmkvmerge\fR(1)
 pot llegir arguments addicionals de la l\('inia d\*(Aqordres\&. Aix\(`o es pot emprar per eludir certes limitacions de l\*(Aqint\(`erpret d\*(Aqordres (shell) o del sistema operatiu, com una longitud limitada de la l\('inia d\*(Aqordres quan s\*(Aqexecuten programes externs\&.
 .PP
-There are two formats for option files: a JSON format and a proprietary legacy format\&. The legacy format is deprecated, and support for it will likely be removed in 2018\&.
-.SS "The JSON format"
+Hi ha dos formats pels fitxers d\*(Aqopcions: el format JSON i un format heretat propietari\&. El format heretat est\(`a en des\('us, i est\(`a implementat pel fet que \('es probable que es retiri en 2018\&.
+.SS "El format JSON"
 .PP
-A JSON option file\*(Aqs name must end in \*(Aq\&.json\*(Aq\&. Its content must be a valid JSON array consisting solely of JSON strings\&. The file\*(Aqs encoding must be UTF\-8\&. The file should not start with a
-byte order marker
-(BOM), but if one exists, it will be skipped\&.
+Un nom pel fitxer d\*(Aqopcions JSON haur\(`a d\*(Aqacabar en \(Fo\&.json\(Fc\&. El seu contingut haur\(`a de ser una matriu JSON v\(`alida que consisteixi \('unicament de cadenes JSON\&. La codificaci\('o del fitxer haur\(`a de ser en UTF\-8\&. El fitxer no podr\(`a comen\(,car amb un
+marcador d\*(Aqordre de bytes
+(BOM), per\(`o si hi \('es, ser\(`a om\(`es\&.
 .PP
-The rules for escaping special characters inside JSON are the ones in the official JSON specification,
+Les regles per escapar car\(`acters especials dins del JSON s\('on les mateixes que hi ha a l\*(Aqespecificaci\('o oficial del JSON,
 \m[blue]\fBRFC 7159\fR\m[]\&\s-2\u[4]\d\s+2\&.
 .PP
-The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following JSON option file called e\&.g\&. \*(Aqoptions\&.json\*(Aq:
+La l\('inia d\*(Aqordres \(Fo\fBmkvmerge \-o "meu_fitxer\&.mkv" \-A "una_peli\&.avi" so\&.ogg\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions JSON anomenat, p\&. ex\&., \(Foopcions\&.json\(Fc:
 .sp
 .if n \{\
 .RS 4
@@ -2636,18 +2636,18 @@ The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\
 .nf
 [
   "\-o",
-  "c:\e\eMatroska\e\emy file\&.mkv",
+  "c:\e\eMatroska\e\efitxer_meu\&.mkv",
   "\-\-title",
   "#65",
   "\-A",
-  "a movie\&.avi",
-  "sound\&.ogg"
+  "una_peli\&.avi",
+  "so\&.ogg"
 ]
 .fi
 .if n \{\
 .RE
 .\}
-.SS "The legacy format"
+.SS "El format heretat"
 .PP
 Hi ha diverses regles relatives als fitxers d\*(Aqopcions\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
 .PP
@@ -2658,7 +2658,7 @@ la secci\('o sobre escapar en el text\&.
 .PP
 Tingueu en compte que les barres invertides sempre s\*(Aqhauran d\*(Aqescapar\&. Els coixinets s\*(Aqhauran d\*(Aqescapar si no inicien cap comentari\&.
 .PP
-The command line \*(Aq\fBmkvmerge \-o "my file\&.mkv" \-A "a movie\&.avi" sound\&.ogg\fR\*(Aq could be converted into the following legacy option file called e\&.g\&. \*(Aqoptions\&.txt\*(Aq:
+La l\('inia d\*(Aqordres \(Fo\fBmkvmerge \-o "meu_fitxer\&.mkv" \-A "una_peli\&.avi" so\&.ogg\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions heretat anomenat, p\&. ex\&., \(Foopcions\&.txt\(Fc:
 .sp
 .if n \{\
 .RS 4
