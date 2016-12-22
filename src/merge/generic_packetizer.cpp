@@ -53,8 +53,7 @@
 static std::unordered_map<std::string, bool> s_experimental_status_warning_shown;
 std::vector<generic_packetizer_c *> ptzrs_in_header_order;
 
-// Specs say that track numbers should start at 1.
-int generic_packetizer_c::ms_track_number = 1;
+int generic_packetizer_c::ms_track_number = 0;
 
 generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
                                            track_info_c &ti)
@@ -1548,42 +1547,40 @@ generic_packetizer_c::show_experimental_status_version(std::string const &codec_
 
 int64_t
 generic_packetizer_c::create_track_number() {
-  bool found   = false;
   int file_num = -1;
   size_t i;
+
+  // Determine current file's file number regarding --track-order.
   for (i = 0; i < g_files.size(); i++)
     if (g_files[i]->reader.get() == this->m_reader) {
-      found = true;
       file_num = i;
       break;
     }
 
-  if (!found)
+  if (file_num == -1)
     mxerror(boost::format(Y("create_track_number: file_num not found. %1%\n")) % BUGMSG);
 
-  int64_t tnum = -1;
-  found        = false;
+  // Determine current track's track number regarding --track-order
+  // and look up the pair in g_track_order.
+  int tnum = -1;
   for (i = 0; i < g_track_order.size(); i++)
-    if ((g_track_order[i].file_id == file_num) &&
-        (g_track_order[i].track_id == m_ti.m_id)) {
-      found = true;
+    if (   (g_track_order[i].file_id  == file_num)
+        && (g_track_order[i].track_id == m_ti.m_id)) {
       tnum = i + 1;
       break;
     }
-  if (found) {
-    found = false;
-    for (i = 0; i < g_packetizers.size(); i++)
-      if (g_packetizers[i].packetizer && (g_packetizers[i].packetizer->get_track_num() == tnum)) {
-        tnum = ms_track_number;
-        break;
-      }
-  } else
-    tnum = ms_track_number;
 
-  if (tnum >= ms_track_number)
-    ms_track_number = tnum + 1;
+  // If the track's file/track number pair was found in g_track_order,
+  // use the resulting track number unconditionally.
+  if (tnum > 0)
+    return tnum;
 
-  return tnum;
+  // The file/track number pair wasn't found. Create a new track
+  // number. Don't use numbers that might be assigned by
+  // --track-order.
+
+  ++ms_track_number;
+  return ms_track_number + g_track_order.size();
 }
 
 file_status_e

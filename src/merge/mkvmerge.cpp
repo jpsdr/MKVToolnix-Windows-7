@@ -1416,7 +1416,8 @@ parse_arg_track_order(const std::string &s) {
     if (!parse_number(pair[1], to.track_id))
       mxerror(boost::format(Y("'%1%' is not a valid file ID in '--track-order %2%'.\n")) % pair[1] % s);
 
-    g_track_order.push_back(to);
+    if (brng::find_if(g_track_order, [&to](auto const &ref) { return (ref.file_id == to.file_id) && (ref.track_id == to.track_id); }) == g_track_order.end())
+      g_track_order.push_back(to);
   }
 }
 

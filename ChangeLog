@@ -1,5 +1,12 @@
 2016-12-22  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: when using --track-order without specifying
+        all tracks, the track numbers could end up in a way the user did
+        not expect. Now mkvmerge will always assign track numbers for
+        those tracks that are listed in --track-order first. The other
+        tracks are assigned numbers afterwards. Fixes the second part of
+        #1832.
+
         * mkvmerge: bug fix: when reading Matroska files the movie title
         was always taken from the first Matroska source file, even if that
         file didn't have a title set. Fixes one part of #1832.
