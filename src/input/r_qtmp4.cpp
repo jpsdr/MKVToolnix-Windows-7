@@ -60,10 +60,10 @@ namespace mtx {
 
 class atom_chunk_size_x: public exception {
 private:
-  std::size_t m_size, m_pos;
+  uint64_t m_size, m_pos;
 
 public:
-  atom_chunk_size_x(std::size_t size, std::size_t pos)
+  atom_chunk_size_x(uint64_t size, uint64_t pos)
     : mtx::exception()
     , m_size{size}
     , m_pos{pos}
