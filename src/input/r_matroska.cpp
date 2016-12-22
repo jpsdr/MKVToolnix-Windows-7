@@ -1979,7 +1979,7 @@ kax_reader_c::create_packetizers() {
   for (auto &track : m_tracks)
     create_packetizer(track->tnum);
 
-  if (!g_segment_title_set) {
+  if (!g_segment_title_set && !m_title.empty()) {
     g_segment_title     = m_title;
     g_segment_title_set = true;
   }
