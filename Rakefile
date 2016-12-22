@@ -571,6 +571,14 @@ EOT
     task "push-man-pages-source" => "doc/man/po4a/po/mkvtoolnix.pot" do
       runq "tx push", "doc/man/po4a/po/mkvtoolnix.pot", "tx push -s -r mkvtoolnix.man-pages > /dev/null"
     end
+    desc "Push program translations to Transifex"
+    task "push-programs" => transifex_push_targets["programs"]
+
+    desc "Push man page translations to Transifex"
+    task "push-man-pages" => transifex_push_targets["man-pages"]
+
+    desc "Push all translations to Transifex"
+    task "push" => transifex_push_targets.values.flatten
   end
 
   [ :stats, :statistics ].each_with_index do |task_name, idx|
