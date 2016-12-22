@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QAtomicInt>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -27,7 +28,7 @@ class FileIdentificationWorkerPrivate {
 
   QList<IdentificationPack> m_toIdentify;
   QMutex m_mutex;
-  bool m_abortPlaylistScan;
+  QAtomicInteger<bool> m_abortPlaylistScan;
   boost::regex m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
 
   explicit FileIdentificationWorkerPrivate()
