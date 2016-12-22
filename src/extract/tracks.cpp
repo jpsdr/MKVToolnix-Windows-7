@@ -32,6 +32,7 @@
 #include <matroska/KaxTrackAudio.h>
 #include <matroska/KaxTrackVideo.h>
 
+#include "common/command_line.h"
 #include "common/ebml.h"
 #include "common/kax_file.h"
 #include "common/mm_io_x.h"
@@ -436,8 +437,14 @@ extract_tracks(const std::string &file_name,
         show_element(l1, 1, Y("Cluster"));
         KaxCluster *cluster = static_cast<KaxCluster *>(l1);
 
-        if (0 == verbose)
-          mxinfo(boost::format(Y("Progress: %1%%%%2%")) % (int)(in->getFilePointer() * 100 / file_size) % "\r");
+        if (0 == verbose) {
+          auto current_percentage = in->getFilePointer() * 100 / file_size;
+
+          if (g_gui_mode)
+            mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
+          else
+            mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
+        }
 
         KaxClusterTimecode *ctc = FindChild<KaxClusterTimecode>(l1);
         if (ctc) {
@@ -507,6 +514,13 @@ extract_tracks(const std::string &file_name,
     // lullaby. Just close your eyes, listen to her sweet voice, singing,
     // singing, fading... fad... ing...
     close_extractors();
+
+    if (0 == verbose) {
+      if (g_gui_mode)
+        mxinfo(boost::format("#GUI#progress %1%%%\n") % 100);
+      else
+        mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 100 % "\n");
+    }
 
     return true;
   } catch (...) {

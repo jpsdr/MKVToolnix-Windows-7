@@ -31,6 +31,7 @@
 #include <matroska/KaxTracks.h>
 #include <matroska/KaxTrackEntryData.h>
 
+#include "common/command_line.h"
 #include "common/ebml.h"
 #include "common/mm_io_x.h"
 #include "common/mm_write_buffer_io.h"
@@ -285,8 +286,14 @@ extract_timecodes(const std::string &file_name,
         KaxCluster *cluster = (KaxCluster *)l1;
         uint64_t cluster_tc = 0;
 
-        if (0 == verbose)
-          mxinfo(boost::format(Y("Progress: %1%%%%2%")) % (int)(in->getFilePointer() * 100 / file_size) % "\r");
+        if (0 == verbose) {
+          auto current_percentage = in->getFilePointer() * 100 / file_size;
+
+          if (g_gui_mode)
+            mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
+          else
+            mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
+        }
 
         upper_lvl_el = 0;
         l2           = es->FindNextElement(EBML_CONTEXT(l1), upper_lvl_el, 0xFFFFFFFFL, true, 1);
@@ -375,8 +382,12 @@ extract_timecodes(const std::string &file_name,
 
     close_timecode_files();
 
-    if (0 == verbose)
-      mxinfo(Y("Progress: 100%\n"));
+    if (0 == verbose) {
+      if (g_gui_mode)
+        mxinfo(boost::format("#GUI#progress %1%%%\n") % 100);
+      else
+        mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 100 % "\n");
+    }
 
   } catch (...) {
     show_error(Y("Caught exception"));
