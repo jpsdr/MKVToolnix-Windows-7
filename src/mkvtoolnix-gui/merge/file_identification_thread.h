@@ -87,11 +87,11 @@ public:
 
   FileIdentificationWorker &worker();
 
+  void continueByScanningPlaylists(QFileInfoList const &files);
+  void continueIdentification();
 
 public slots:
   void abortPlaylistScan();
-  void continueIdentification();
-  void continueByScanningPlaylists(QFileInfoList const &files);
 };
 
 }}}
