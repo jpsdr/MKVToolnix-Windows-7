@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-12-21 12:45+0100\n"
-"PO-Revision-Date: 2016-12-17 15:48+0100\n"
+"PO-Revision-Date: 2016-12-22 20:35+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -856,8 +856,8 @@ msgid ""
 "  @option-file.json        Reads additional command line options from\n"
 "                           the specified JSON file (see man page).\n"
 msgstr ""
-"  @plikopcji                Wczytuje dodatkowe opcje linii komend\n"
-"                                  z podanego pliku (patrz instrukcja).\n"
+"  @plikopcji.json           Wczytuje dodatkowe opcje linii komend z\n"
+"                            określonego pliku JSON (patrz instrukcja).\n"
 
 #: src/propedit/propedit_cli_parser.cpp:162
 msgid "  B:  boolean (0 or 1)\n"
@@ -2449,11 +2449,11 @@ msgid ""
 "segment (128 bits)."
 msgstr ""
 "Unikalne (128 bitowe) ID identyfikujące następny,\n"
-"powiązany z obecnym segment."
+"powiązany z obecnym, segment."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:382
 msgid "A unique ID to identify the next chained segment (128 bits)."
-msgstr "Unikalne (128 bitowe) ID identyfikujące następny, powiązany z obecnym segment."
+msgstr "Unikalne (128 bitowe) ID identyfikujące następny, powiązany z obecnym, segment."
 
 #: src/common/property_element.cpp:107
 msgid ""
@@ -2461,11 +2461,11 @@ msgid ""
 "segment (128 bits)."
 msgstr ""
 "Unikalne (128 bitowe) ID identyfikujące poprzedni,\n"
-"powiązany z obecnym segment."
+"powiązany z obecnym, segment."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:381
 msgid "A unique ID to identify the previous chained segment (128 bits)."
-msgstr "Unikalne (128 bitowe) ID identyfikujące poprzedni, powiązany z obecnym segment."
+msgstr "Unikalne (128 bitowe) ID identyfikujące poprzedni, powiązany z obecnym, segment."
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:52
 #, no-c-format
@@ -4352,7 +4352,7 @@ msgstr "Opóźnienie (w milisekundach):"
 #: src/common/property_element.cpp:133
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:454
 msgid "Delay built into the codec during decoding in ns."
-msgstr "Opóźnienie w dekodowaniu, jakie zakłada dany format kodeka, wyrażone w ns."
+msgstr "Opóźnienie w dekodowaniu, jakie zakłada dany format kodeka, wyrażone w nanosekundach."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 #, no-c-format
@@ -5115,16 +5115,13 @@ msgstr "Tytuł p&liku:"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:491
-#, fuzzy
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
-msgstr ""
-"Tryb stereo-3D\n"
-"(0-11, patrz dokumentacja)."
+msgstr "Kolejność pól (0, 1, 2, 6, 9 lub 14, patrz dokumentacja)."
 
 #: src/info/mkvinfo.cpp:751
-#, fuzzy, boost-format
+#, boost-format
 msgid "Field order: %1% (%2%)"
-msgstr "Tryb stereo: %1% (%2%)"
+msgstr "Kolejność pól: %1% (%2%)"
 
 #: src/merge/mkvmerge.cpp:445
 #, boost-format
@@ -6512,14 +6509,13 @@ msgstr "Ustawienia MKVToolNix GUI"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:123
 #: src/mkvtoolnix-gui/merge/tab.cpp:197
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "MKVToolNix option files (JSON-formatted)"
-msgstr "Pliki opcji MKVToolNix"
+msgstr "Pliki opcji MKVToolNix (format JSON)"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
-#, fuzzy
 msgid "MKVToolNix option files (old format)"
-msgstr "Pliki opcji MKVToolNix"
+msgstr "Pliki opcji MKVToolNix (stary format)"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:211
 #: src/mkvtoolnix-gui/merge/tool.cpp:169
@@ -7210,7 +7206,7 @@ msgstr "Jeszcze nie rozpoczęto"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:489
 msgid "Note also that there are not a lot of players that support the cropping parameters."
-msgstr "Zauważ również, że nie ma wielu odtwarzaczy, obsługujących parametry obcinania obrazu."
+msgstr "Zauważ również, że nie ma wielu odtwarzaczy obsługujących parametry obcinania obrazu."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:231
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
@@ -8789,7 +8785,7 @@ msgstr ""
 
 #: src/extract/tracks.cpp:462
 msgid "SimpleBlock"
-msgstr ""
+msgstr "SimpleBlock"
 
 #: src/info/mkvinfo.cpp:203
 #, boost-format
@@ -11343,7 +11339,7 @@ msgstr "Wideo"
 #: src/common/property_element.cpp:147
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:487
 msgid "Video aspect ratio type"
-msgstr "Typ proporcji wideo"
+msgstr "Typ proporcji obrazu"
 
 #: src/info/mkvinfo.cpp:610
 #, fuzzy
@@ -11391,9 +11387,8 @@ msgstr "Szerokość wyświetlanego obrazu"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:491
-#, fuzzy
 msgid "Video field order"
-msgstr "Szerokość pikseli obrazu"
+msgstr "Kolejność pól obrazu"
 
 #: src/common/property_element.cpp:137
 msgid "Video interlaced flag"
@@ -12245,9 +12240,8 @@ msgid "mkvinfo [options] <inname>"
 msgstr "mkvinfo [opcje] <nazwa pliku>"
 
 #: src/merge/mkvmerge.cpp:80
-#, fuzzy
 msgid "mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n"
-msgstr "mkvmerge -o nazwa [globalne opcje] [opcje1] <plik1> [@plikopcji ...]\n"
+msgstr "mkvmerge -o out [opcje globalne] [opcje1] <plik1> [@plikopcji.json] ...\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:212
 msgid "mkvmerge also turns this on if the destination file name's extension is \"webm\"."
@@ -12431,9 +12425,8 @@ msgid "pixel width: %1%"
 msgstr "szerokość w pikselach: %1%"
 
 #: src/info/mkvinfo.cpp:753
-#, fuzzy
 msgid "progressive"
-msgstr "Postęp"
+msgstr "progresywny"
 
 #: src/extract/xtr_base.cpp:52
 msgid "raw data"
