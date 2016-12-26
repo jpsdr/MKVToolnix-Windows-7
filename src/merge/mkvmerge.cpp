@@ -63,7 +63,6 @@
 #include "merge/cluster_helper.h"
 #include "merge/filelist.h"
 #include "merge/generic_reader.h"
-#include "merge/id_result.h"
 #include "merge/output_control.h"
 #include "merge/reader_detection_and_creation.h"
 #include "merge/track_info.h"
