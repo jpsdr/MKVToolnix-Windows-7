@@ -443,9 +443,7 @@ display_unsupported_file_type(filelist_t const &file) {
   if (identification_output_format_e::json == g_identification_output_format)
     display_unsupported_file_type_json(file);
 
-  mxerror(boost::format(Y("File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and "
-                          "contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"))
-          % file.name);
+  mxerror(boost::format(Y("The type of file '%1%' is not supported.\n")) % file.name);
 }
 
 /** \brief Identify a file type and its contents
@@ -1977,8 +1975,7 @@ handle_file_name_arg(const std::string &this_arg,
   get_file_type(file);
 
   if (FILE_TYPE_IS_UNKNOWN == file.type)
-    mxerror(boost::format(Y("The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and "
-                            "contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n")) % file.name);
+    mxerror(boost::format(Y("The type of file '%1%' could not be recognized.\n")) % file.name);
 
   if (file.is_playlist) {
     file.name   = file.playlist_mpls_in->get_file_name();
@@ -2823,8 +2820,7 @@ create_filelist_for_playlist(bfs::path const &file_name,
   get_file_type(new_filelist);
 
   if (FILE_TYPE_IS_UNKNOWN == new_filelist.type)
-    mxerror(boost::format(Y("The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and "
-                            "contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n")) % new_filelist.name);
+    mxerror(boost::format(Y("The type of file '%1%' could not be recognized.\n")) % new_filelist.name);
 
   new_filelist.ti                       = std::make_unique<track_info_c>();
   new_filelist.ti->m_fname              = new_filelist.name;
