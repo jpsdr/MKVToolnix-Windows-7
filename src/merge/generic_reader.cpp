@@ -23,6 +23,39 @@
 
 static int64_rational_c s_probe_range_percentage{3, 10}; // 0.3%
 
+static std::string
+format_json_value(nlohmann::json const &value) {
+  return value.is_number()  ? to_string(value.get<uint64_t>())
+       : value.is_boolean() ? std::string{value.get<bool>() ? "1" : "0"}
+       :                      value.get<std::string>();
+}
+
+static std::string
+format_key_and_json_value(std::string const &key,
+                          nlohmann::json const &value) {
+  return (boost::format{"%1%:%2%"} % escape(key) % escape(format_json_value(value))).str();
+}
+
+static std::string
+format_verbose_info(mtx::id::verbose_info_t const &info) {
+  auto formatted = std::vector<std::string>{};
+
+  for (auto const &pair : info) {
+    if (pair.second.is_array()) {
+      for (auto it = pair.second.begin(), end = pair.second.end(); it != end; ++it)
+        formatted.emplace_back(format_key_and_json_value(pair.first, *it));
+
+    } else
+      formatted.emplace_back(format_key_and_json_value(pair.first, pair.second));
+  }
+
+  brng::sort(formatted);
+
+  return boost::join(formatted, " ");
+}
+
+// ----------------------------------------------------------------------
+
 template<typename T>
 void
 add_all_requested_track_ids(generic_reader_c &reader,
@@ -316,30 +349,6 @@ void
 generic_reader_c::display_identification_results_as_text() {
   auto identify_verbose    = mtx::included_in(g_identification_output_format, identification_output_format_e::verbose_text, identification_output_format_e::gui);
   auto identify_for_gui    = identification_output_format_e::gui == g_identification_output_format;
-
-  auto format_verbose_info = [this](mtx::id::verbose_info_t const &info) -> std::string {
-    auto formatted = std::vector<std::string>{};
-    auto formatter = boost::format{"%1%:%2%"};
-
-    for (auto const &pair : info) {
-      if (pair.second.is_array()) {
-        for (auto it = pair.second.begin(), end = pair.second.end(); it != end; ++it)
-          formatted.emplace_back((formatter % escape(pair.first) % escape(it->get<std::string>())).str());
-
-        continue;
-      }
-
-      auto value = pair.second.is_number()  ? to_string(pair.second.get<uint64_t>())
-                 : pair.second.is_boolean() ? std::string{pair.second.get<bool>() ? "1" : "0"}
-                 :                            pair.second.get<std::string>();
-
-      formatted.emplace_back((formatter % escape(pair.first) % escape(value)).str());
-    }
-
-    brng::sort(formatted);
-
-    return boost::join(formatted, " ");
-  };
 
   std::string format_file, format_track, format_attachment, format_att_description, format_att_file_name;
 
