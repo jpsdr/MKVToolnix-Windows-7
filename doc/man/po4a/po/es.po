@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2016-12-21 14:03+0100\n"
-"PO-Revision-Date: 2016-10-12 22:00+0000\n"
+"PO-Revision-Date: 2016-12-22 21:37+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
@@ -37,10 +37,8 @@ msgstr "9.6.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2015-11-29"
 msgid "2016-11-29"
-msgstr "2015-06-19"
+msgstr "2016-11-29"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -475,19 +473,15 @@ msgstr "Esta opción sólo está disponible si el programa fue creado con compat
 #: doc/man/mkvinfo.xml:255
 #: doc/man/mkvmerge.xml:2082
 #: doc/man/mkvpropedit.xml:489
-#, fuzzy
-#| msgid "<option>@</option><parameter>options-file</parameter>"
 msgid "<option>@</option><parameter>options-file.json</parameter>"
-msgstr "<option>@</option><parameter>archivo-opciones</parameter>"
+msgstr "<option>@</option><parameter>options-file.json</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:218
 #: doc/man/mkvinfo.xml:258
 #: doc/man/mkvpropedit.xml:492
-#, fuzzy
-#| msgid "Reads additional command line arguments from the file <parameter>options-file</parameter>. See the section about <link linkend=\"mkvmerge.option_files\">option files</link> for further information."
 msgid "Reads additional command line arguments from the file <parameter>options-file</parameter>. For a full explanation on the supported formats for such files see the section called \"Option files\" in the &mkvmerge; man page."
-msgstr "Lee argumentos adicionales de la línea de comandos desde el archivo <parameter>archivo-opciones</parameter>. Mire la sección acerca de <link linkend=\"mkvmerge.option_files\">archivos de opciones</link> para más información. "
+msgstr "Lee argumentos adicionales de la línea de comandos desde el archivo <parameter>archivo-opciones</parameter>. Para más información sobre los formatos admitidos para esos archivos mire la sección acerca de \"archivos de opciones\" en la página del manual de &mkvmerge;"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:227
@@ -1457,10 +1451,8 @@ msgstr "Multiplexa secuencias multimedia en un archivo &matroska;"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvmerge.xml:51
-#, fuzzy
-#| msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@optionsfile</arg>"
 msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@options-file.json</arg>"
-msgstr "<command>mkvmerge</command> <arg>opciones globales</arg> <arg choice=\"req\">-o salida</arg> <arg>opciones1</arg> <arg choice=\"req\">archivo1</arg> <arg> <arg>opciones2</arg> <arg choice=\"req\">archivo2</arg> </arg> <arg>@archivo-opciones</arg>"
+msgstr "<command>mkvmerge</command> <arg>opciones globales</arg> <arg choice=\"req\">-o salida</arg> <arg>opciones1</arg> <arg choice=\"req\">archivo1</arg> <arg> <arg>opciones2</arg> <arg choice=\"req\">archivo2</arg> </arg> <arg>@archivo-opciones.json</arg>"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:67
@@ -3178,15 +3170,13 @@ msgstr "El formato de salida usado para el resultado se puede cambiar con la opc
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1880
-#, fuzzy
-#| msgid "<option>--chapters</option> <parameter>file-name</parameter>"
 msgid "<option>-J</option> <parameter>file-name</parameter>"
 msgstr "<option>--chapters</option> <parameter>nombre-archivo</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1883
 msgid "This is a convenient alias for \"<literal>--identification-format json --identify file-name</literal>\"."
-msgstr ""
+msgstr "Este es un alias apropiado para \"<literal>--identification-format json --identify file-name</literal>\"."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1889
@@ -3196,13 +3186,13 @@ msgstr "<option>-I</option>, <option>--identify-verbose</option> <parameter>nomb
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1897
 msgid "The output will also contain properties for all items found, e.g. the file title or the track language."
-msgstr ""
+msgstr "El resultado también contendrá las propiedades para todos los elementos encontrados, p.e. el título del archivo o el idioma de la pista."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:1901
 #: doc/man/mkvmerge.xml:1939
 msgid "This option is deprecated. It will be removed in 2018."
-msgstr ""
+msgstr "Esta opción es obsoleta. Será eliminada en 2018."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1907
@@ -3792,31 +3782,27 @@ msgstr "Un archivo de opciones es un archivo que &mkvmerge; puede leer argumento
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2562
 msgid "There are two formats for option files: a JSON format and a proprietary legacy format. The legacy format is deprecated, and support for it will likely be removed in 2018."
-msgstr ""
+msgstr "Hay dos formatos para archivos de opciones: un formato JSON y una formato heredado patentado. El formato heredado es obsoleto, y su compatiblidad será eliminada en 2018."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2567
-#, fuzzy
-#| msgid "Tag file format"
 msgid "The JSON format"
-msgstr "Formato del archivo de etiquetas"
+msgstr "El formato JSON"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2570
 msgid "A JSON option file's name must end in '<filename>.json</filename>'. Its content must be a valid JSON array consisting solely of JSON strings. The file's encoding must be UTF-8. The file should not start with a <foreignphrase>byte order marker</foreignphrase> (<abbrev>BOM</abbrev>), but if one exists, it will be skipped."
-msgstr ""
+msgstr "El nombre del archivo de formato JSON debe finalizar en '<filename>.json</filename>'. El contenido debe ser un vector compuesto únicamente de cadenas de caracteres JSON. El archivo debe estar codificado en formato UTF-8. El archivo no debe comenzar con un <foreignphrase>marcador de orden de bits</foreignphrase>  (<abbrev>BOM</abbrev>), pero si lo hiciese, será omitido."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2576
 msgid "The rules for escaping special characters inside JSON are the ones in the official JSON specification, <ulink url=\"https://tools.ietf.org/html/rfc7159\">RFC 7159</ulink>."
-msgstr ""
+msgstr "Las reglas de los caracteres especiales de escape dentro de JSON son las unicas que existen en la especificación oficial JSON, <ulink url=\"https://tools.ietf.org/html/rfc7159\">RFC 7159</ulink>."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2580
-#, fuzzy
-#| msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following option file:"
 msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following JSON option file called e.g. '<filename>options.json</filename>':"
-msgstr "La línea de comandos '<command>mkvmerge -o \"mi archivo.mkv\" -A \"una película.avi\" audio.ogg</command>' podría ser convertida al siguiente archivo de opciones: "
+msgstr "La línea de comandos '<command>mkvmerge -o \"mi archivo.mkv\" -A \"una película.avi\" audio.ogg</command>' se podría convertir al siguiente archivo de opciones JSON llamado p.e. '<filename>opciones.json</filename>':"
 
 #. type: Content of: <refentry><refsect1><refsect2><programlisting>
 #: doc/man/mkvmerge.xml:2584
@@ -3832,13 +3818,20 @@ msgid ""
 "  \"sound.ogg\"\n"
 "]"
 msgstr ""
+"[\n"
+"  \"-o\",\n"
+"  \"c:\\\\Matroska\\\\mi archivo.mkv\",\n"
+"  \"--title\",\n"
+"  \"#65\",\n"
+"  \"-A\",\n"
+"  \"una película.avi\",\n"
+"  \"audio.ogg\"\n"
+"]"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2596
-#, fuzzy
-#| msgid "Tag file format"
 msgid "The legacy format"
-msgstr "Formato del archivo de etiquetas"
+msgstr "Formato heredado"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2599
@@ -3862,10 +3855,8 @@ msgstr "Las barras invertidas deben ser siempre escapadas. Las almohadillas debe
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2618
-#, fuzzy
-#| msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following option file:"
 msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following legacy option file called e.g. '<filename>options.txt</filename>':"
-msgstr "La línea de comandos '<command>mkvmerge -o \"mi archivo.mkv\" -A \"una película.avi\" audio.ogg</command>' podría ser convertida al siguiente archivo de opciones: "
+msgstr "La línea de comandos  '<command>mkvmerge -o \"mi archivo.mkv\" -A \"una película.avi\" audio.ogg</command>' se podría convertir al siguiente archivo de opciones en formato heredado denominado p.e. '<filename>opciones.txt</filename>':"
 
 #. type: Content of: <refentry><refsect1><refsect2><programlisting>
 #: doc/man/mkvmerge.xml:2622
