@@ -271,6 +271,7 @@ class track_c {
 public:
   reader_c &reader;
   std::size_t m_file_num;
+  uint64_t m_id;
 
   bool processed;
   pid_type_e type;
@@ -298,6 +299,7 @@ public:
 
   bool m_apply_dts_timestamp_fix, m_use_dts, m_timestamps_wrapped, m_truehd_found_truehd, m_truehd_found_ac3;
   std::vector<track_ptr> m_coupled_tracks;
+  track_c *m_master;
 
   // general track parameters
   std::string language;

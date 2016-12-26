@@ -70,6 +70,7 @@ track_c::track_c(reader_c &p_reader,
                  pid_type_e p_type)
   : reader(p_reader)            // no brace-initializer-list syntax here due to gcc bug 50025`
   , m_file_num{p_reader.m_current_file}
+  , m_id{}
   , processed{}
   , type{p_type}
   , pid{}
@@ -95,6 +96,7 @@ track_c::track_c(reader_c &p_reader,
   , m_timestamps_wrapped{}
   , m_truehd_found_truehd{}
   , m_truehd_found_ac3{}
+  , m_master{}
   , skip_packet_data_bytes{}
   , m_debug_delivery{}
   , m_debug_timestamp_wrapping{}
@@ -649,7 +651,8 @@ track_c::parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
       to_set_up = this;
 
     } else {
-      auto new_track = std::make_shared<track_c>(reader);
+      auto new_track      = std::make_shared<track_c>(reader);
+      new_track->m_master = this;
       m_coupled_tracks.emplace_back(new_track);
 
       to_set_up            = new_track.get();
@@ -967,9 +970,11 @@ reader_c::read_headers() {
 
   process_chapter_entries();
 
+  auto track_id = uint64_t{};
   for (auto &track : m_tracks) {
     track->clear_pes_payload();
     track->processed        = false;
+    track->m_id             = track_id++;
     // track->timestamp_offset = -1;
 
     for (auto const &coupled_track : track->m_coupled_tracks)
@@ -1083,10 +1088,7 @@ reader_c::identify() {
 
   id_result_container(info.get());
 
-  size_t i;
-  for (i = 0; i < m_tracks.size(); i++) {
-    track_ptr &track = m_tracks[i];
-
+  for (auto const &track : m_tracks) {
     if (!track->probed_ok || !track->codec)
       continue;
 
@@ -1113,7 +1115,7 @@ reader_c::identify() {
                      : pid_type_e::video == track->type ? ID_RESULT_TRACK_VIDEO
                      :                                    ID_RESULT_TRACK_SUBTITLES;
 
-    id_result_track(i, type, track->codec.get_name(), info.get());
+    id_result_track(track->m_id, type, track->codec.get_name(), info.get());
   }
 
   if (!m_chapter_timestamps.empty())
@@ -1317,6 +1319,7 @@ reader_c::parse_pmt(track_c &track) {
         ac3_track->type        = pid_type_e::audio;
         ac3_track->codec       = codec_c::look_up(codec_c::type_e::A_AC3);
         ac3_track->converter   = std::make_shared<truehd_ac3_splitting_packet_converter_c>();
+        ac3_track->m_master    = track.get();
         ac3_track->set_pid(pmt_pid_info->get_pid());
 
         track->type            = pid_type_e::audio;
