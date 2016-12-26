@@ -16,6 +16,9 @@ files = %w{
   data/webm/yt3.webm
   data/wp/with-correction.wv
   data/wp/with-correction.wvc
+
+  data/truehd/truehd-atmos+ac3.m2ts
+  data/ts/two-teletext-pages-in-single-ts-track.ts
 }
 
 describe "mkvmerge / JSON identification format"

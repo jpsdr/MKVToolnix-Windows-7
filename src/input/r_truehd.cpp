@@ -165,6 +165,8 @@ truehd_reader_c::identify() {
   auto info = mtx::id::info_c{};
   info.add(mtx::id::audio_channels,           m_header->m_channels);
   info.add(mtx::id::audio_sampling_frequency, m_header->m_sampling_rate);
+  if (m_ac3_header.m_valid)
+    info.set(mtx::id::multiplexed_tracks, std::vector<uint64_t>{{0, 1}});
 
   id_result_track(0, ID_RESULT_TRACK_AUDIO, m_header->codec().get_name(), info.get());
 
@@ -174,6 +176,7 @@ truehd_reader_c::identify() {
   info = mtx::id::info_c{};
   info.add(mtx::id::audio_channels,           m_ac3_header.m_channels);
   info.add(mtx::id::audio_sampling_frequency, m_ac3_header.m_sample_rate);
+  info.set(mtx::id::multiplexed_tracks,       std::vector<uint64_t>{{0, 1}});
 
   id_result_track(1, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AC3, "AC-3"), info.get());
 }

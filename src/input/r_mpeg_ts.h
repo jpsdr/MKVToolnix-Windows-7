@@ -469,6 +469,8 @@ private:
 
   file_t &file();
 
+  void add_multiplexed_ids(std::vector<uint64_t> &multiplexed_ids, track_c &track);
+
   friend class track_c;
 };
 

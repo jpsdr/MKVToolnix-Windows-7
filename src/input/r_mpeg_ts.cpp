@@ -1080,6 +1080,15 @@ reader_c::calculate_crc(void const *buffer,
 }
 
 void
+reader_c::add_multiplexed_ids(std::vector<uint64_t> &multiplexed_ids,
+                              track_c &track) {
+  multiplexed_ids.push_back(track.m_id);
+  for (auto const &coupled_track : track.m_coupled_tracks)
+    if (coupled_track->probed_ok)
+      multiplexed_ids.push_back(coupled_track->m_id);
+}
+
+void
 reader_c::identify() {
   auto info    = mtx::id::info_c{};
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
@@ -1109,6 +1118,18 @@ reader_c::identify() {
       info.set(mtx::id::text_subtitles, track->codec.is(codec_c::type_e::S_SRT));
       if (track->m_ttx_wanted_page)
         info.set(mtx::id::teletext_page, *track->m_ttx_wanted_page);
+    }
+
+    auto multiplexed_track_ids = std::vector<uint64_t>{};
+    if (!track->m_coupled_tracks.empty())
+      add_multiplexed_ids(multiplexed_track_ids, *track);
+
+    else if (track->m_master)
+      add_multiplexed_ids(multiplexed_track_ids, *track->m_master);
+
+    if (!multiplexed_track_ids.empty()) {
+      brng::sort(multiplexed_track_ids);
+      info.set(mtx::id::multiplexed_tracks, multiplexed_track_ids);
     }
 
     std::string type = pid_type_e::audio == track->type ? ID_RESULT_TRACK_AUDIO

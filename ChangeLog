@@ -1,3 +1,12 @@
+2016-12-26  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: enhancement: added a new track property in
+        JSON/verbose identification mode called "multiplexed_tracks". It's
+        an array of track IDs that describe which of the tracks mkvmerge
+        reports as separate ones were originally part of the same source
+        track (e.g. TrueHD+AC-3 in a single track in MPEG transport
+        streams). Implements #1835.
+
 2016-12-23  James Almer  <jamrial@gmail.com>
 
         * mkvmerge: added support for skipping APE(v2) tags in TTA files.

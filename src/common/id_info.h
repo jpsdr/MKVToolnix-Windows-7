@@ -44,6 +44,7 @@ char const * const mpeg4_p10_video                 = "mpeg4_p10_video";         
 char const * const mpegh_p2_es_video               = "mpegh_p2_es_video";               // track boolean
 char const * const mpegh_p2_video                  = "mpegh_p2_video";                  // track boolean
 char const * const muxing_application              = "muxing_application";              // container unicode-string
+char const * const multiplexed_tracks              = "multiplexed_tracks";              // track [ unsigned-integer ]
 char const * const next_segment_uid                = "next_segment_uid";                // container ascii-string format:^[0-9A-F]{32}$
 char const * const number                          = "number";                          // container unsigned-integer
 char const * const other_file                      = "other_file";                      // container unicoode-string
