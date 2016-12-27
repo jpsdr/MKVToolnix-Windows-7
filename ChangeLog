@@ -1,3 +1,29 @@
+2016-12-27  Moritz Bunkus  <moritz@bunkus.org>
+
+        * Deprecation warning: Several options and features are now
+        deprecated and will be removed at the start of 2018. These are:
+
+        - mkvmerge: the options "--identify-verbose", "--identify-for-gui",
+          "--identify-for-mmg" and "--identification-format verbose". Please
+          convert existing users of these interfaces to use mkvmerge's JSON
+          identification output which can be invoked with
+          "--identification-format json --identify …".
+
+        - all command line tools: the old, proprietary format used for
+          option files. Please convert users of this interface to the new
+          JSON option file format introduced in this release.
+
+        - all command line tools: the option "--check-for-updates" (the
+          GUI will keep its online check for updates, though). There is and
+          will be no equivalent interface in the tools themselves. Users of
+          this interface can switch to retrieving the information about
+          available updates directly from the MKVToolNix website. The
+          information is available as JSON and XML files at the following
+          URLs:
+
+          https://mkvtoolnix.download/latest-release.json.gz
+          https://mkvtoolnix.download/latest-release.xml.gz
+
 2016-12-26  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: enhancement: added a new track property in
@@ -26,32 +52,6 @@
         * mkvmerge: bug fix: when reading Matroska files the movie title
         was always taken from the first Matroska source file, even if that
         file didn't have a title set. Fixes one part of #1832.
-
-2016-12-21  Moritz Bunkus  <moritz@bunkus.org>
-
-        * Deprecation warning: Several options and features are now
-        deprecated and will be removed at the start of 2018. These are:
-
-        - mkvmerge: the options "--identify-verbose", "--identify-for-gui",
-          "--identify-for-mmg" and "--identification-format verbose". Please
-          convert existing users of these interfaces to use mkvmerge's JSON
-          identification output which can be invoked with
-          "--identification-format json --identify …".
-
-        - all command line tools: the old, proprietary format used for
-          option files. Please convert users of this interface to the new
-          JSON option file format introduced in this release.
-
-        - all command line tools: the option "--check-for-updates" (the
-          GUI will keep its online check for updates, though). There is and
-          will be no equivalent interface in the tools themselves. Users of
-          this interface can switch to retrieving the information about
-          available updates directly from the MKVToolNix website. The
-          information is available as JSON and XML files at the following
-          URLs:
-
-          https://mkvtoolnix.download/latest-release.json.gz
-          https://mkvtoolnix.download/latest-release.xml.gz
 
 2016-12-19  Moritz Bunkus  <moritz@bunkus.org>
 
