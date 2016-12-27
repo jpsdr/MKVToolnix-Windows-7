@@ -56,8 +56,7 @@ needs:
 
 The architecture (64bit vs 32bit) that the binaries will be built
 for. The majority of users to day run a 64bit Windows, therefore 64 is
-the default. If you run a 32bit version of Windows, then change this to
-32.
+the default. If you run a 32bit version of Windows, change this to 32.
 
     INSTALL_DIR=$HOME/mxe
 
@@ -110,7 +109,7 @@ Finally, configure MKVToolNix (the `host=…` spec must match the
       --with-moc=${qtbin}/moc --with-uic=${qtbin}/uic --with-rcc=${qtbin}/rcc \
       --with-boost=$HOME/mxe/usr/${host}
 
-If everything works, then build it:
+If everything works, build it:
 
     ./drake
 
