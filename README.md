@@ -53,7 +53,7 @@ Moritz Bunkus <moritz@bunkus.org>
 
 # 2. Installation
 
-If you want to compile the tools yourself, then you must first decide
+If you want to compile the tools yourself, you must first decide
 if you want to use a 'proper' release version or the current
 development version. As both Matroska and MKVToolNix are under heavy
 development, there might be features available in the git repository
@@ -177,10 +177,10 @@ library files are:
       --with-extra-libs=/where/i/put/libebml/make/linux\;/where/i/put/libmatroska/make/linux
 
 Now run `rake` and, as "root", `rake install`. If you don't have
-"rake" installed yourself, then use the version bundled with
+"rake" installed yourself, use the version bundled with
 MKVToolNix: `./drake` and `./drake install`.
 
-If you want to use all available CPU cores for building, then you have
+If you want to use all available CPU cores for building, you have
 to use `drake` instead of `rake`. `drake` knows the parameter `-j`
 much like `make` does. You can also set the environment variable
 DRAKETHREADS to a number and the build process will automatically use
@@ -207,7 +207,7 @@ additional options for `configure`:
 ## 2.6. Unit tests
 
 Building and running unit tests is completely optional. If you want to
-do this, then you have to follow these steps:
+do this, you have to follow these steps:
 
 1. Download the "googletest" framework from
    http://code.google.com/p/googletest/ (at the time of writing the
@@ -239,11 +239,11 @@ of the original data, then by all means submit a bug report.
 
 I use [GitHub's issue system](https://github.com/mbunkus/mkvtoolnix/issues)
 as my bug database. You can submit your bug reports there. Please be as
-verbose as possible — e.g. include the command line if you use Windows
+verbose as possible — e.g. include the command line, if you use Windows
 or Linux etc.pp.
 
 If at all possible, please include sample files as well so that I can
-reproduce the issue. If they are larger than 1 MB, then please upload
+reproduce the issue. If they are larger than 1 MB, please upload
 them somewhere and post a link in the issue. You can also upload them
 to my FTP server. Details on how to connect can be found in the
 [MKVToolNix FAQ](https://github.com/mbunkus/mkvtoolnix/wiki/FTP-server).
