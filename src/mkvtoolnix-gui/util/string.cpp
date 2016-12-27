@@ -201,11 +201,25 @@ unescape(QString const &source,
        :                                   unescapeMkvtoolnix(source);
 }
 
+static QStringList
+escapeJson(QStringList source) {
+  // QStrings can be null in addition to being empty. A NULL string
+  // converts to a null QVariant, which in turn converts to null JSON
+  // object. mkvmerge expects strings, though, so replace all null
+  // strings with empty ones instead.
+
+  for (auto &string : source)
+    if (string.isNull())
+      string = Q("");
+
+  return { Q(mtx::json::dump(variantToNlohmannJson(source), 2)) };
+}
+
 QStringList
 escape(QStringList const &source,
        EscapeMode mode) {
   if (EscapeJSON == mode)
-    return { Q(mtx::json::dump(variantToNlohmannJson(source), 2)) };
+    return escapeJson(source);
 
   auto escaped = QStringList{};
   auto first   = true;
