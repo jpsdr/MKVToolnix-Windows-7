@@ -27,10 +27,10 @@ Luckily there's the [M cross environment project]
 of setting up the cross-compiler and all required libraries.
 
 mxe is a fast-changing project. In order to provide a stable basis for
-compilation the author maintains his own fork. That fork also includes
+compilation, the author maintains his own fork. That fork also includes
 a couple of changes that cause libraries to be compiled only with the
 features required by MKVToolNix saving compilation time and deployment
-space. In order to retrieve that fork you need `git`. Then to the
+space. In order to retrieve that fork, you need `git`. Then to the
 following:
 
     git clone https://github.com/mbunkus/mxe $HOME/mxe
@@ -43,7 +43,7 @@ into the directory `$HOME/mxe`.
 MKVToolNix contains a script that can download, compile and install
 all required libraries into the directory `$HOME/mxe`.
 
-If the script does not work or you want to do everything yourself
+If the script does not work or you want to do everything yourself,
 you'll find instructions for manual compilation in section 1.3.
 
 ### 1.2.1. Script configuration
@@ -56,7 +56,7 @@ needs:
 
 The architecture (64bit vs 32bit) that the binaries will be built
 for. The majority of users to day run a 64bit Windows, therefore 64 is
-the default. If you run a 32bit version of Windows then change this to
+the default. If you run a 32bit version of Windows, then change this to
 32.
 
     INSTALL_DIR=$HOME/mxe
@@ -74,7 +74,7 @@ From the MKVToolNix source directory run:
 
     ./tools/windows/setup_cross_compilation_env.sh
 
-If everything works fine you'll end up with a configured MKVToolNix
+If everything works fine, you'll end up with a configured MKVToolNix
 source tree. You just have to run `drake` afterwards.
 
 ## 1.3. Manual installation
@@ -110,7 +110,7 @@ Finally, configure MKVToolNix (the `host=…` spec must match the
       --with-moc=${qtbin}/moc --with-uic=${qtbin}/uic --with-rcc=${qtbin}/rcc \
       --with-boost=$HOME/mxe/usr/${host}
 
-If everything works then build it:
+If everything works, then build it:
 
     ./drake
 
