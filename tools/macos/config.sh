@@ -7,9 +7,9 @@ export CC="clang"
 export CPP="clang -E"
 export CXX="clang++"
 export CXXCPP="clang++ -E"
-# export LDFLAGS="-stdlib=libc++"
-export CXXFLAGS="-std=c++14"
-export CXXFLAGS="-std=c++14 -fvisibility=hidden -fvisibility-inlines-hidden"
+export CFLAGS="-mmacosx-version-min=10.9"
+export CXXFLAGS="-std=c++14 -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.9"
+export QT_CXXFLAGS="-stdlib=libc++ -mmacosx-version-min=10.9"
 export MAKEFLAGS="-j 4"
 export DRAKETHREADS=4
 export SHARED_QT=1

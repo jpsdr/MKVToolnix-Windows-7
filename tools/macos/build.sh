@@ -138,7 +138,7 @@ function build_qtbase {
 
   local package=qtbase-opensource-src-${QTVER}
   local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="-stdlib=libc++"
+  export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
   NO_CONFIGURE=1 build_package ${package}.tar.xz
@@ -163,7 +163,7 @@ function build_qttools {
 
   local package=qttools-opensource-src-${QTVER}
   local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="-stdlib=libc++"
+  export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
   CONFIGURE=qmake NO_MAKE=1 build_package ${package}.tar.xz
@@ -184,7 +184,7 @@ function build_qttools {
 
 function build_qttranslations {
   local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="-stdlib=libc++"
+  export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
   CONFIGURE=qmake NO_MAKE=1 build_package qttranslations-opensource-src-${QTVER}.tar.xz
@@ -196,7 +196,7 @@ function build_qttranslations {
 
 function build_qtmacextras {
   local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="-stdlib=libc++"
+  export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
   CONFIGURE=qmake NO_MAKE=1 build_package qtmacextras-opensource-src-${QTVER}.tar.xz
@@ -225,12 +225,10 @@ function build_configured_mkvtoolnix {
 
   ./configure \
     LDFLAGS="$LDFLAGS -framework CoreFoundation -headerpad_max_install_names" \
-    CXXFLAGS="-fvisibility=hidden -fvisibility-inlines-hidden" \
+    CXXFLAGS="-fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.9" \
     ${args}
 
   grep -q 'USE_QT.*yes' build-config
-
-  # sed -i '' -e 's/^\(QT_LIBS.*\)$/\1 -lcups/' build-config
 }
 
 function build_mkvtoolnix {
@@ -388,17 +386,15 @@ if [[ -z $@ ]]; then
   build_ogg
   build_vorbis
   build_flac
-  # build_zlib
+  build_zlib
   build_gettext
-  build_ruby
   build_boost
   build_curl
   build_qtbase
   build_qttools
   build_qttranslations
+  build_ruby
   build_configured_mkvtoolnix
-
-  # autoconf automake pkgconfig ogg vorbis flac gettext ruby boost curl qtbase qttools qttranslations configured_mkvtoolnix1
 
 else
   while [[ -n $1 ]]; do
