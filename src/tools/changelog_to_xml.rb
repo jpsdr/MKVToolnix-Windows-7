@@ -12,20 +12,25 @@ def parse_changelog
   info         = nil
   version      = 'HEAD'
 
+  flush        = lambda do
+    if !current_line.empty?
+      version = $1.gsub(/\.+$/, '') if / ^ released? \s+ v? ( [\d\.]+ )/ix.match(current_line[0])
+
+      changelog << info.dup.merge({ :content => current_line.join(' '), :version => version })
+      current_line = []
+    end
+  end
+
   IO.readlines($opts[:changelog]).each do |line|
     line = line.chomp.gsub(/^\s+/, '').gsub(/\s+/, ' ')
 
-    if line.empty?
-      if !current_line.empty?
-        version = $1.gsub(/\.+$/, '') if / ^ released? \s+ v? ( [\d\.]+ )/ix.match(current_line[0])
+    if / ^ (\d+)-(\d+)-(\d+) \s+ (.+) /x.match(line)
+      y, m, d, author = $1, $2, $3, $4
 
-        changelog << info.dup.merge({ :content => current_line.join(' '), :version => version })
-        current_line = []
-      end
+      flush.call
 
-    elsif / ^ (\d+)-(\d+)-(\d+) \s+ (.+) /x.match(line)
-      info   = { :date => sprintf("%04d-%02d-%02d", $1.to_i, $2.to_i, $3.to_i) }
-      author = $4.gsub(/\s+/, ' ')
+      info = { :date => sprintf("%04d-%02d-%02d", y.to_i, m.to_i, d.to_i) }
+      author.gsub!(/\s+/, ' ')
       if /(.+?) \s+ < (.+) >$/x.match(author)
         info[:author_name]  = $1
         info[:author_email] = $2
@@ -34,7 +39,8 @@ def parse_changelog
       end
 
     else
-      current_line << line.gsub(/^\*\s*/, '')
+      flush.call                              if     /^\*/.match(line)
+      current_line << line.gsub(/^\*\s*/, '') unless line.empty?
 
     end
   end
