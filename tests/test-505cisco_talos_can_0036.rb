@@ -6,6 +6,6 @@ describe "mkvmerge, mkvinfo / invalid memory access reported as Cisco TALOS-CAN-
 files = Dir.glob("data/segfaults-assertions/cisco-talos-can-0036/*").sort
 
 files.each do |file|
-  test_merge file
-  test_info  file
+  test_merge file, :exit_code => :warning
+  test_info  file, :exit_code => :warning
 end

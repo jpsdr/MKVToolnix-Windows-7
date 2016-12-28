@@ -350,11 +350,11 @@ kax_file_c::enable_reporting(bool enable) {
 void
 kax_file_c::report(boost::format const &message) {
   if (m_reporting_enabled)
-    mxinfo(message);
+    mxwarn(message);
 }
 
 void
 kax_file_c::report(std::string const &message) {
   if (m_reporting_enabled)
-    mxinfo(message);
+    mxwarn(message);
 }
