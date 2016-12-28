@@ -343,7 +343,7 @@ EOF
 EOF
 
   mkdir -p ${dmgcnt}/plugins/platforms ${dmgmac}/libs
-  cp -v -a ${TARGET}/lib/libQt5{Core*.dylib,Gui*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
+  cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
   cp -v -R ${TARGET}/plugins/platforms ${dmgmac}/
 
   for LIB (${dmgmac}/libs/libQt*.5.dylib) echo install_name_tool -id @executable_path/libs/${LIB:t} ${LIB}
