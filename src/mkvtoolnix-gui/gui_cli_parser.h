@@ -33,6 +33,8 @@ protected:
   void setHeadersMode();
   void setMergeMode();
   void raiseAndActivate();
+  void enableDebugging();
+  void enableHack();
 };
 
 }}

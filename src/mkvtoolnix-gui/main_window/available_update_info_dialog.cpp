@@ -87,9 +87,9 @@ AvailableUpdateInfoDialog::updateCheckFinished(UpdateCheckStatus status,
   auto html              = QStringList{};
   auto numReleasesOutput = 0;
   auto releases          = m_releasesInfo->select_nodes("/mkvtoolnix-releases/release[not(@version='HEAD')]");
-  auto re_released       = boost::regex{"^released\\s+v?[\\d\\.]+", boost::regex::perl | boost::regex::icase};
-  auto re_bug            = boost::regex{"(#\\d+)", boost::regex::perl | boost::regex::icase};
-  auto bug_formatter     = [](boost::smatch const &matches) -> std::string {
+  auto reReleased        = boost::regex{"^released\\s+v?[\\d\\.]+", boost::regex::perl | boost::regex::icase};
+  auto reBug             = boost::regex{"(#\\d+)", boost::regex::perl | boost::regex::icase};
+  auto bugFormatter      = [](boost::smatch const &matches) -> std::string {
     auto number_str = matches[1].str().substr(1);
     return (boost::format("<a href=\"https://github.com/mbunkus/mkvtoolnix/issues/%1%\">#%1%</a>") % number_str).str();
   };
@@ -97,27 +97,46 @@ AvailableUpdateInfoDialog::updateCheckFinished(UpdateCheckStatus status,
   releases.sort();
 
   for (auto &release : releases) {
-    auto version_str   = std::string{release.node().attribute("version").value()};
-    auto version_str_q = to_qs(version_str).toHtmlEscaped();
-    auto codename_q    = to_qs(release.node().attribute("codename").value()).toHtmlEscaped();
-    auto heading       = !codename_q.isEmpty() ? QY("Version %1 \"%2\"").arg(version_str_q).arg(codename_q) : QY("Version %1").arg(version_str_q);
+    auto versionStr    = std::string{release.node().attribute("version").value()};
+    auto versionStrQ   = Q(versionStr).toHtmlEscaped();
+    auto codenameQ     = Q(release.node().attribute("codename").value()).toHtmlEscaped();
+    auto heading       = !codenameQ.isEmpty() ? QY("Version %1 \"%2\"").arg(versionStrQ).arg(codenameQ) : QY("Version %1").arg(versionStrQ);
+    auto currentTypeQ  = QString{};
+    auto inList        = false;
 
-    html << Q("<h2>%1</h2>").arg(heading)
-         << Q("<p><ul>");
+    html << Q("<h2>%1</h2>").arg(heading);
 
     for (auto change = release.node().child("changes").first_child() ; change ; change = change.next_sibling()) {
       if (   (std::string{change.name()} != "change")
-          || boost::regex_search(change.child_value(), re_released))
+          || boost::regex_search(change.child_value(), reReleased))
         continue;
 
-      auto text = boost::regex_replace(to_utf8(to_qs(change.child_value()).toHtmlEscaped()), re_bug, bug_formatter);
-      html     << Q("<li>%1</li>").arg(to_qs(text));
+      auto typeQ = Q(change.attribute("type").value()).toHtmlEscaped();
+      if (typeQ != currentTypeQ) {
+        currentTypeQ = typeQ;
+
+        if (inList) {
+          inList = false;
+          html << Q("</ul></p>");
+        }
+
+        html << Q("<h3>%1</h3>").arg(typeQ);
+      }
+
+      if (!inList) {
+        inList = true;
+        html << Q("<p><ul>");
+      }
+
+      auto text = boost::regex_replace(to_utf8(Q(change.child_value()).toHtmlEscaped()), reBug, bugFormatter);
+      html     << Q("<li>%1</li>").arg(Q(text));
     }
 
-    html << Q("</ul></p>");
+    if (inList)
+      html << Q("</ul></p>");
 
     numReleasesOutput++;
-    if ((10 < numReleasesOutput) && (version_number_t{version_str} < releaseVersion.current_version))
+    if ((10 < numReleasesOutput) && (version_number_t{versionStr} < releaseVersion.current_version))
       break;
   }
 
