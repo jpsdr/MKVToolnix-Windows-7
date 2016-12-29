@@ -198,9 +198,11 @@ Section "Program files" SEC01
   Delete "$INSTDIR\doc\mkvmerge-gui.*"
 
   Delete "$INSTDIR\doc\README.Windows.txt"
+  Delete "$INSTDIR\doc\ChangeLog.txt"
 
   Delete "$SMPROGRAMS\$ICONS_GROUP\mkvmerge GUI.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI preview.lnk"
+  Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\ChangeLog - What is new.lnk"
 
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\App Paths\AppMainExe.exe"
 
@@ -230,7 +232,7 @@ Section "Program files" SEC01
   SetOutPath "$INSTDIR\Doc"
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP\Documentation"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line references.lnk" "$INSTDIR\doc\command_line_references.html"
-  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Documentation\ChangeLog - What is new.lnk" "$INSTDIR\doc\ChangeLog.txt"
+  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Documentation\NEWS.txt - What is new, what has changed.lnk" "$INSTDIR\doc\NEWS.txt"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Documentation\README.lnk" "$INSTDIR\doc\README.txt"
   !insertmacro MUI_STARTMENU_WRITE_END
 

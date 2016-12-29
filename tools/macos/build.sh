@@ -265,7 +265,7 @@ function build_dmg {
 
   cp README.md $dmgbase/README.txt
   cp COPYING $dmgbase/COPYING.txt
-  cp ChangeLog $dmgbase/ChangeLog.txt
+  cp NEWS.md $dmgbase/NEWS.txt
 
   cat > $dmgbase/README.MacOS.txt <<EOF
 MKVToolNix – Mac OS specific notes

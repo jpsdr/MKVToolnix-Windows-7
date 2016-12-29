@@ -82,7 +82,7 @@ strip ${RPM_BUILD_ROOT}/usr/bin/*
 
 %files
 %defattr (-,root,root)
-%doc AUTHORS COPYING README.md ChangeLog
+%doc AUTHORS COPYING README.md NEWS.md
 %{_bindir}/*
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/*/*.png

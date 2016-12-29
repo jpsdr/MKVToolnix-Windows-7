@@ -306,7 +306,7 @@ This is a TODO list for adding a new translation (a .po file) to MKVToolNix:
 * Add installation and removal entries in installer/mkvtoolnix.nsi
 * Add new language file to installer/translations/
 * Include translation's author in AUTHORS
-* Include message in ChangeLog
+* Include message in NEWS.md
 * Either re-run configure or add the new translation in build-config
   to TRANSLATIONS; afterwards verify the format strings with »drake
   translations:verify-format-strings«

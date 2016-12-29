@@ -52,7 +52,7 @@ override_dh_strip:
 	dh_strip -pmkvtoolnix-gui --dbg-package=mkvtoolnix-gui-dbg
 
 override_dh_installchangelogs:
-	dh_installchangelogs ChangeLog
+	dh_installchangelogs NEWS.md
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

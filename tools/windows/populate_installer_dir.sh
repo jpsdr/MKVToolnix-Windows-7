@@ -72,7 +72,7 @@ function copy_files {
 
   cp README.md ${tgt_dir}/doc/README.txt
   cp COPYING ${tgt_dir}/doc/COPYING.txt
-  cp ChangeLog ${tgt_dir}/doc/ChangeLog.txt
+  cp NEWS.md ${tgt_dir}/doc/NEWS.txt
   cp doc/command_line_references.html ${tgt_dir}/doc/
 
   for mo in po/*.mo ; do
