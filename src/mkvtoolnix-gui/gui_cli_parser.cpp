@@ -5,6 +5,7 @@
 #include <QStringList>
 
 #include "common/command_line.h"
+#include "common/hacks.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/gui_cli_parser.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -45,6 +46,8 @@ GuiCliParser::initParser() {
 
   OPT("h|help",        displayHelp,     YT("Show this help."));
   OPT("V|version",     displayVersion,  YT("Show version information."));
+  OPT("debug=option",  enableDebugging, {});
+  OPT("engage=hack",   enableHack,      {});
 
   add_hook(cli_parser_c::ht_unknown_option, std::bind(&GuiCliParser::handleFileNameArg, this));
 }
@@ -123,6 +126,16 @@ GuiCliParser::rebuildCommandLine()
     args << Q("--edit-headers") << m_editHeaders;
 
   return args;
+}
+
+void
+GuiCliParser::enableDebugging() {
+  debugging_c::request(m_next_arg);
+}
+
+void
+GuiCliParser::enableHack() {
+  engage_hacks(m_next_arg);
 }
 
 }}
