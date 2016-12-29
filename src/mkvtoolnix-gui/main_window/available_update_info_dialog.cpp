@@ -50,7 +50,7 @@ AvailableUpdateInfoDialog::setChangeLogContent(QString const &content) {
             "</style>"
             "</head><body>");
 
-  html << Q("<h1><a href=\"%1\">MKVToolNix ChangeLog</a></h1>").arg(to_qs(MTX_CHANGELOG_URL).toHtmlEscaped());
+  html << Q("<h1><a href=\"%1\">MKVToolNix news &amp; changes</a></h1>").arg(to_qs(MTX_NEWS_URL).toHtmlEscaped());
 
   html << content;
 
@@ -140,7 +140,7 @@ AvailableUpdateInfoDialog::updateCheckFinished(UpdateCheckStatus status,
       break;
   }
 
-  html << Q("<p><a href=\"%1\">%2</a></h1>").arg(MTX_CHANGELOG_URL).arg(QY("Read full ChangeLog online"));
+  html << Q("<p><a href=\"%1\">%2</a></h1>").arg(MTX_NEWS_URL).arg(QY("Read full NEWS.md file online"));
 
   setChangeLogContent(html.join(Q("\n")));
 }
