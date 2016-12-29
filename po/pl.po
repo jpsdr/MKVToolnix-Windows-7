@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-12-26 20:46+0100\n"
-"PO-Revision-Date: 2016-12-22 20:35+0100\n"
+"PO-Revision-Date: 2016-12-29 16:57+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -713,6 +713,8 @@ msgid ""
 "  -J <file>                This is a convenient alias for\n"
 "                           \"--identification-format json --identify file\".\n"
 msgstr ""
+"  -J <plik>                To jest dogodny alias dla\n"
+"                           \"--identification-format json --identify file\".\n"
 
 #: src/merge/mkvmerge.cpp:202
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
@@ -857,13 +859,13 @@ msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<plik>                  Tak samo, jak \"= <plik>\".\n"
 
 #: src/merge/mkvmerge.cpp:343
-#, fuzzy
 msgid ""
 "  @option-file.json        Reads additional command line options from\n"
 "                           the specified JSON file (see man page).\n"
 msgstr ""
-"  @plikopcji.json           Wczytuje dodatkowe opcje linii komend z\n"
-"                            określonego pliku JSON (patrz instrukcja).\n"
+"  @option-file.json        Wczytuje dodatkowe opcje linii komend z\n"
+"                           określonego pliku JSON (patrz dokumentacja).\n"
+"\n"
 
 #: src/propedit/propedit_cli_parser.cpp:162
 msgid "  B:  boolean (0 or 1)\n"
@@ -2554,18 +2556,18 @@ msgstr "AVI (Audio/Video Interleaved)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:583
 msgid "Abort all running jobs and stop &immediately"
-msgstr "Przerwij wszystkie uruchomione zadania &i zatrzymaj natychmiast "
+msgstr "Przerwij wszystkie trwające zadania &i zatrzymaj natychmiast"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:189
 #, no-c-format
 msgid "Abort running job"
-msgstr "Przerwij uruchomione zadanie"
+msgstr "Przerwij trwające zadanie"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:489
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:332
 #, no-c-format
 msgid "Abort running jobs"
-msgstr "Przerwij uruchomione zadania"
+msgstr "Przerwij trwające zadania"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:239
 #, no-c-format
@@ -2706,11 +2708,11 @@ msgstr "Dodaj nową edy&cję jako następną"
 
 #: src/propedit/propedit_cli_parser.cpp:222
 msgid "Add or replace chapters in the file with the ones from 'filename' or remove them if 'filename' is empty"
-msgstr "Dodaj lub zamień rozdziały w pliku na te z \"nazwapliku\" albo usuń je kompletnie, jeśli \"nazwapliku\" jest pusty"
+msgstr "Dodaj lub zamień rozdziały w pliku na te z \"nazwa pliku\" albo usuń je kompletnie, jeśli \"nazwa pliku\" jest pusty"
 
 #: src/propedit/propedit_cli_parser.cpp:219
 msgid "Add or replace tags in the file with the ones from 'filename' or remove them if 'filename' is empty (see below and man page for syntax)"
-msgstr "Dodaj lub zamień tagi w pliku na te z \"nazwapliku\" albo usuń je kompletnie, jeśli \"nazwapliku\" jest pusty (patrz poniżej i na stronie głównej za opcjami)"
+msgstr "Dodaj lub zamień tagi w pliku na te z \"nazwa pliku\" albo usuń je kompletnie, jeśli \"nazwa pliku\" jest pusty (patrz poniżej i na stronie z dokumentacją)"
 
 #: src/propedit/propedit_cli_parser.cpp:228
 msgid "Add the file 'filename' as a new attachment"
@@ -4552,7 +4554,7 @@ msgstr "Nie zapisuj żadnych elementów indeksu wyszukiwania."
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:333
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
-msgstr "Czy na pewno chcesz przerwać wszystkie obecnie uruchomione zadania?"
+msgstr "Czy na pewno chcesz przerwać wszystkie obecnie trwające zadania?"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:190
 #, no-c-format
@@ -5637,7 +5639,7 @@ msgstr "Gdy zaznaczone, program upewnia się, że sugerowana nazwa pliku docelow
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:196
 #, no-c-format
 msgid "If checked the program will ask for confirmation before aborting a running job."
-msgstr "Po zaznaczeniu program będzie pytał o potwierdzenie przerwania zadania."
+msgstr "Po zaznaczeniu program będzie pytał o potwierdzenie przed przerwaniem trwającego zadania."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:192
 #, no-c-format
@@ -7660,10 +7662,10 @@ msgid ""
 "explains several details in great length which are not obvious from\n"
 "this listing.\n"
 msgstr ""
-" \n"
 "Proszę przeczytać instrukcję/dokumentację mkvmerge w wersji HTML, która\n"
 "wyjaśnia wyczerpująco wiele zagadnień mogących nie być oczywistymi\n"
 "po przeczytaniu powyższej listy opcji.\n"
+"\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1812
 msgid "Please select its location below."
@@ -7982,9 +7984,8 @@ msgid "Reading the segment UID failed"
 msgstr "Wczytywanie UID segmentu zakończone niepowodzeniem"
 
 #: src/common/cli_parser.cpp:183
-#, fuzzy
 msgid "Reads additional command line options from the specified JSON file (see man page)."
-msgstr "Wczytuje dodatkowe opcje linii komend zawarte w danym pliku (patrz strona główna)."
+msgstr "Wczytuje dodatkowe opcje linii komend z określonego pliku JSON (patrz dokumentacja)."
 
 #: src/info/qt_ui.cpp:193
 #, no-c-format
@@ -8642,7 +8643,7 @@ msgstr "Zmienia wartość właściwości, jeśli jakakolwiek istnieje, lub tworz
 
 #: src/propedit/propedit_cli_parser.cpp:211
 msgid "Sets the Matroska file section that all following add/set/delete actions operate on (see below and man page for syntax)"
-msgstr "Ustala zakres pliku Matroski, na którym to zakresie będą prowadzone działania add/set/delete, czyli dodanie/ustawienie/usunięcie (patrz poniżej i na stronie głównej za opcjami)"
+msgstr "Ustala zakres pliku Matroski, na którym to zakresie będą prowadzone działania add/set/delete, czyli dodanie/ustawienie/usunięcie (patrz poniżej i na stronie z dokumentacją)"
 
 #: src/propedit/propedit_cli_parser.cpp:208
 msgid "Sets the Matroska parser mode to 'fast' (default) or 'full'"
@@ -8973,9 +8974,7 @@ msgstr "Tryb stereo: %1% (%2%)"
 #: src/common/property_element.cpp:150
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:494
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
-msgstr ""
-"Tryb stereo-3D\n"
-"(0-11, patrz dokumentacja)."
+msgstr "Tryb stereo-3D (0-11, patrz dokumentacja)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1697
 msgid "Stereoscopy:"
@@ -8983,7 +8982,7 @@ msgstr "Stereoskopia:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:582
 msgid "Stop &after all running jobs have finished"
-msgstr "Z&atrzymaj po zakończeniu wszystkich uruchomionych zadań "
+msgstr "Z&atrzymaj po zakończeniu wszystkich trwających zadań"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1684
 msgid "Stretch by:"
@@ -10400,14 +10399,14 @@ msgstr "Panel z właściwościami ścieżek, znajdujący się na zakładce \"Wej
 
 #: src/merge/mkvmerge.cpp:1978
 #: src/merge/mkvmerge.cpp:2823
-#, fuzzy, boost-format
+#, boost-format
 msgid "The type of file '%1%' could not be recognized.\n"
-msgstr "Plik tagów XML \"%1%\" nie może zostać wczytany.\n"
+msgstr "Ten typ pliku \"%1%\" nie mógł zostać rozpoznany.\n"
 
 #: src/merge/mkvmerge.cpp:446
-#, fuzzy, boost-format
+#, boost-format
 msgid "The type of file '%1%' is not supported.\n"
-msgstr "Plik \"%1%\" nie jest obsługiwanym typem plików (%2%).\n"
+msgstr "Ten typ pliku \"%1%\" nie jest obsługiwany.\n"
 
 #: src/common/command_line.cpp:351
 #, boost-format
@@ -10460,7 +10459,7 @@ msgstr "Dostępna jest nowa wersja programu."
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:333
 #, no-c-format
 msgid "There is currently a job running."
-msgstr "Obecnie istnieje co najmniej jedno uruchomione zadanie."
+msgstr "Obecnie istnieje co najmniej jedno trwające zadanie."
 
 #: src/merge/output_control.cpp:925
 #: src/merge/output_control.cpp:935
@@ -11475,7 +11474,7 @@ msgstr "WAVPACK4"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1278
 msgid "Warn before &aborting running jobs"
-msgstr "Ostrzegaj przed przerw&aniem uruchomionych zadań"
+msgstr "Ostrzegaj przed przerw&aniem trwających zadań"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1277
 msgid "Warn before &closing modified tabs"
@@ -12244,7 +12243,7 @@ msgstr "mkvinfo [opcje] <nazwa pliku>"
 
 #: src/merge/mkvmerge.cpp:79
 msgid "mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n"
-msgstr "mkvmerge -o out [opcje globalne] [opcje1] <plik1> [@plikopcji.json] ...\n"
+msgstr "mkvmerge -o out [opcje globalne] [opcje1] <plik1> [@option-file.json] ...\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:212
 msgid "mkvmerge also turns this on if the destination file name's extension is \"webm\"."
