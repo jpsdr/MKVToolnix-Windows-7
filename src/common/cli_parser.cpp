@@ -183,9 +183,6 @@ cli_parser_c::add_common_options() {
   OPT("@option-file.json",              YT("Reads additional command line options from the specified JSON file (see man page)."));
   OPT("h|help",                         YT("Show this help."));
   OPT("V|version",                      YT("Show version information."));
-#if defined(HAVE_CURL_EASY_H)
-  OPT("check-for-updates",              YT("Check online for the latest release."));
-#endif  // defined(HAVE_CURL_EASY_H)
 }
 
 #undef OPT

@@ -116,15 +116,6 @@ function build_boost {
   build_tarball command "./b2 ${args} ${properties} install"
 }
 
-function build_curl {
-  build_package curl-7.40.0.tar.xz --prefix=${TARGET} \
-    --disable-shared --enable-static \
-    --disable-ldap --disable-ldaps --disable-rtsp \
-    --disable-dict --disable-telnet --disable-gopher \
-    --disable-imap --disable-imaps --disable-pop3 --disable-pop3s \
-    --disable-smb --disable-smbs --disable-smtp --disable-smtps --disable-tftp
-}
-
 function build_qtbase {
   local -a args
   args=(--prefix=${TARGET} -opensource -confirm-license -release
@@ -389,7 +380,6 @@ if [[ -z $@ ]]; then
   build_zlib
   build_gettext
   build_boost
-  build_curl
   build_qtbase
   build_qttools
   build_qttranslations

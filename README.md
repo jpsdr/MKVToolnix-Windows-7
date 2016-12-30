@@ -121,8 +121,6 @@ built. These include:
 - [libMagic](http://www.darwinsys.com/file/) from the "file" package
   for automatic content type detection
 
-- [libcurl](http://curl.haxx.se/) for online update checks
-
 ## 2.3. Building libEBML and libMatroska
 
 This is optional as MKVToolNix comes with its own set of the

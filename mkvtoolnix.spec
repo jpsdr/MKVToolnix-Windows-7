@@ -9,7 +9,7 @@ Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
 
-BuildRequires: fdupes, file-devel, flac, flac-devel, libcurl-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel
+BuildRequires: fdupes, file-devel, flac, flac-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel
 
 %if 0%{?centos} && 0%{?centos} < 7
 BuildRequires: devtoolset-1.1-gcc-c++ >= 4.6.3

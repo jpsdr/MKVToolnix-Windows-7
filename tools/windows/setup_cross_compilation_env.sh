@@ -50,7 +50,7 @@ MXE_TARGETS = ${HOST}
 MXE_PLUGIN_DIRS += plugins/gcc6
 JOBS = ${PARALLEL}
 
-MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost curl file flac lzo ogg pthreads vorbis
+MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost file flac lzo ogg pthreads vorbis
 MKVTOOLNIX_DEPENDENCIES+=qtbase qttranslations qtwinextras
 
 mkvtoolnix-deps: \$(MKVTOOLNIX_DEPENDENCIES)

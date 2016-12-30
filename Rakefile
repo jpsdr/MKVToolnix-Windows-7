@@ -128,7 +128,7 @@ def setup_globals
 
   cxxflags                 = "#{cflags_common} #{c(:STD_CXX)}"
   cxxflags                += " -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-missing-field-initializers #{c(:WNO_MAYBE_UNINITIALIZED)}"
-  cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:CURL_CFLAGS)} #{c(:USER_CXXFLAGS)}"
+  cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)}"
 
   ldflags                  = ""
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
@@ -866,7 +866,6 @@ $common_libs = [
   :pugixml,
   :intl,
   :iconv,
-  :curl,
   :boost_regex,
   :boost_filesystem,
   :boost_system,

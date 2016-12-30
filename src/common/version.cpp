@@ -13,13 +13,6 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_CURL_EASY_H)
-# include <sstream>
-
-# include "common/compression.h"
-# include "common/curl.h"
-#endif  // defined(HAVE_CURL_EASY_H)
-
 #include "common/debugging.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -173,7 +166,7 @@ parse_latest_release_version(mtx::xml::document_cptr const &doc) {
     for (auto package : std::vector<std::string>{ "installer", "portable" })
       release.urls[std::string{"windows_"} + arch + "_" + package] = doc->select_single_node((std::string{"/mkvtoolnix-releases/latest-windows-binary/"} + package + "-url/" + arch).c_str()).node().child_value();
 
-  if (debugging_c::requested("version_check|curl")) {
+  if (debugging_c::requested("version_check")) {
     std::stringstream urls;
     brng::for_each(release.urls, [&urls](auto const &kv) { urls << " " << kv.first << ":" << kv.second; });
     mxdebug(boost::format("update check: current %1% latest source %2% latest winpre %3% URLs%4%\n")
@@ -182,63 +175,3 @@ parse_latest_release_version(mtx::xml::document_cptr const &doc) {
 
   return release;
 }
-
-#if defined(HAVE_CURL_EASY_H)
-static mtx::xml::document_cptr
-retrieve_and_parse_xml(std::string const &url) {
-  bool debug = debugging_c::requested("version_check|releases_info|curl");
-
-  std::string data;
-  auto result = url_retriever_c().set_timeout(10, 20).retrieve(url, data);
-
-  if (0 != result) {
-    mxdebug_if(debug, boost::format("CURL error for %2%: %1%\n") % static_cast<unsigned int>(result) % url);
-    return mtx::xml::document_cptr();
-  }
-
-  try {
-    data = compressor_c::create_from_file_name(url)->decompress(data);
-
-    mtx::xml::document_cptr doc(new pugi::xml_document);
-    std::stringstream sdata(data);
-    auto xml_result = doc->load(sdata);
-
-    if (xml_result) {
-      mxdebug_if(debug, boost::format("Doc loaded fine from %1%\n") % url);
-      return doc;
-
-    } else
-      mxdebug_if(debug, boost::format("Doc load error for %1%: %1% at %2%\n") % url % xml_result.description() % xml_result.offset);
-
-  } catch (mtx::compression_x &ex) {
-    mxdebug_if(debug, boost::format("Decompression exception for %2%: %1%\n") % ex.what() % url);
-  }
-
-  return mtx::xml::document_cptr();
-}
-
-mtx_release_version_t
-get_latest_release_version() {
-  bool debug      = debugging_c::requested("version_check|curl");
-  std::string url = MTX_VERSION_CHECK_URL;
-  debugging_c::requested("version_check_url", &url);
-
-  mxdebug_if(debug, boost::format("Update check started with URL %1%\n") % url);
-
-  auto doc = retrieve_and_parse_xml(url + ".gz");
-  if (!doc)
-    doc = retrieve_and_parse_xml(url);
-  if (!doc)
-    return {};
-
-  return parse_latest_release_version(doc);
-}
-
-mtx::xml::document_cptr
-get_releases_info() {
-  std::string url = MTX_RELEASES_INFO_URL;
-  debugging_c::requested("releases_info_url", &url);
-
-  return retrieve_and_parse_xml(url + ".gz");
-}
-#endif  // defined(HAVE_CURL_EASY_H)

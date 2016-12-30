@@ -344,26 +344,6 @@ handle_common_cli_args(std::vector<std::string> &args,
     } else if ((args[i] == "-h") || (args[i] == "-?") || (args[i] == "--help"))
       usage();
 
-#if defined(HAVE_CURL_EASY_H)
-    else if (args[i] == "--check-for-updates") {
-      mtx_release_version_t rel = get_latest_release_version();
-      if (!rel.latest_source.valid)
-        mxerror(boost::format(Y("The update information could not be retrieved from %1%.\n")) % MTX_VERSION_CHECK_URL);
-
-      std::vector<std::string> keys;
-      brng::push_back(keys, rel.urls | badap::map_keys | badap::filtered(+[](std::string const &key) { return key != "general"; }));
-      brng::sort(keys);
-
-      std::string urls;
-      for (auto &key : keys)
-        urls += key + "_download_url=" + rel.urls[key] + "\n";
-
-      mxinfo(boost::format("version_check_url=%1%\nrunning_version=%2%\navailable_version=%3%\ndownload_url=%4%\n%5%")
-             % MTX_VERSION_CHECK_URL % rel.current_version.to_string() % rel.latest_source.to_string() % rel.urls["general"] % urls);
-      mxexit(rel.current_version < rel.latest_source ? 1 : 0);
-    }
-#endif  // defined(HAVE_CURL_EASY_H)
-
     else
       ++i;
   }
