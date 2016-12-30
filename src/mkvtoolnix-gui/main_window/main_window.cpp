@@ -385,7 +385,7 @@ MainWindow::checkForUpdates() {
 
 void
 MainWindow::silentlyCheckForUpdates() {
-  auto forceUpdateCheck = mtx::sys::get_environment_variable("FORCE_UPDATE_CHECK") == "1";
+  auto forceUpdateCheck = true; // mtx::sys::get_environment_variable("FORCE_UPDATE_CHECK") == "1";
 
   if (!forceUpdateCheck && !Util::Settings::get().m_checkForUpdates)
     return;
@@ -394,11 +394,13 @@ MainWindow::silentlyCheckForUpdates() {
   if (!forceUpdateCheck && lastCheck.isValid() && (lastCheck.addDays(1) >= QDateTime::currentDateTime()))
     return;
 
+  qDebug() << "Creating checker";
+
   auto checker = new UpdateChecker{this};
 
   connect(checker, &UpdateChecker::checkFinished, this, &MainWindow::updateCheckFinished);
 
-  checker->start(false);
+  QTimer::singleShot(0, checker, SLOT(start()));
 }
 
 QString

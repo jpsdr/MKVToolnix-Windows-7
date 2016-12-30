@@ -5,13 +5,17 @@
 
 #include <QApplication>
 #include <QStringList>
-#include <QTranslator>
 
 #include "mkvtoolnix-gui/gui_cli_parser.h"
 
 class QLocalServer;
+class QThread;
 
 namespace mtx { namespace gui {
+
+namespace Util {
+class NetworkAccessManager;
+}
 
 using Iso639Language                = std::pair<QString, QString>;
 using Iso639LanguageList            = std::vector<Iso639Language>;
@@ -19,8 +23,16 @@ using TopLevelDomainCountryCode     = std::pair<QString, QString>;
 using TopLevelDomainCountryCodeList = std::vector<TopLevelDomainCountryCode>;
 using CharacterSetList              = std::vector<QString>;
 
+class AppPrivate;
 class App : public QApplication {
   Q_OBJECT;
+
+protected:
+  Q_DECLARE_PRIVATE(App);
+
+  QScopedPointer<AppPrivate> const d_ptr;
+
+  explicit App(AppPrivate &d, QWidget *parent);
 
 protected:
   enum class CliCommand {
@@ -29,12 +41,6 @@ protected:
     EditChapters,
     EditHeaders,
   };
-
-protected:
-  std::unique_ptr<QTranslator> m_currentTranslator;
-  std::unique_ptr<GuiCliParser> m_cliParser;
-  std::unique_ptr<QLocalServer> m_instanceCommunicator;
-  bool m_otherInstanceRunning;
 
 public:
   App(int &argc, char **argv);
@@ -53,6 +59,8 @@ public:
 
   void run();
 
+  Util::NetworkAccessManager &networkAccessManager();
+
 signals:
   void addingFilesToMergeRequested(QStringList const &fileNames);
   void editingChaptersRequested(QStringList const &fileNames);
@@ -65,6 +73,7 @@ public slots:
 
 protected:
   void setupInstanceCommunicator();
+  void setupNetworkAccessManager();
 
 public:
   static App *instance();

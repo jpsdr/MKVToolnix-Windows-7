@@ -1,24 +1,26 @@
 #include "common/common_pch.h"
 
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
+#include <QDebug>
 #include <QUrl>
+#include <QVector>
 
 #include "common/compression.h"
 #include "common/qt.h"
 #include "common/version.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/update_checker.h"
+#include "mkvtoolnix-gui/util/network_access_manager.h"
 
 namespace mtx { namespace gui {
 
 class UpdateCheckerPrivate {
   friend class UpdateChecker;
 
-  QNetworkAccessManager m_manager;
-  std::vector<std::shared_ptr<QNetworkReply>> m_replies;
-  unsigned int m_numFinished{};
+  QVector<quint64> m_tokens;
+  int m_numFinished{};
   mtx_release_version_t m_release;
   mtx::xml::document_cptr m_updateInfo;
+  bool m_retrieveReleasesInfo{};
 
   explicit UpdateCheckerPrivate()
   {
@@ -36,43 +38,58 @@ UpdateChecker::UpdateChecker(QObject *parent)
 UpdateChecker::~UpdateChecker() {
 }
 
+UpdateChecker &
+UpdateChecker::setRetrieveReleasesInfo(bool enable) {
+  Q_D(UpdateChecker);
+
+  d->m_retrieveReleasesInfo = enable;
+
+  return *this;
+}
+
 void
-UpdateChecker::start(bool retrieveReleasesInfo) {
+UpdateChecker::start() {
   Q_D(UpdateChecker);
 
   qDebug() << "UpdateChecker::start: initiating requests";
 
   emit checkStarted();
+  qDebug() << "UpdateChecker::start: checkStarted emitted";
 
-  auto urls = std::vector<std::string>{ MTX_VERSION_CHECK_URL };
-  if (retrieveReleasesInfo)
-    urls.emplace_back(MTX_RELEASES_INFO_URL);
+  auto &manager = App::instance()->networkAccessManager();
+  auto urls     = QVector<std::string>{ MTX_VERSION_CHECK_URL };
 
-  for (auto const &url : urls) {
-    d->m_replies.emplace_back(d->m_manager.get(QNetworkRequest{QUrl{Q("%1.gz").arg(Q(url))}}));
-    connect(d->m_replies.back().get(), &QNetworkReply::finished, this, &UpdateChecker::httpFinished);
-  }
+  if (d->m_retrieveReleasesInfo)
+    urls << MTX_RELEASES_INFO_URL;
+
+  connect(&manager, &Util::NetworkAccessManager::downloadFinished, this, &UpdateChecker::handleDownloadedContent);
+
+  qDebug() << "UpdateChecker::start: URL list built";
+
+  for (auto const &url : urls)
+    d->m_tokens.push_back(manager.download(QUrl{Q("%1.gz").arg(Q(url))}));
+
+  qDebug() << "UpdateChecker::start: startup done";
 }
 
 void
-UpdateChecker::httpFinished() {
+UpdateChecker::handleDownloadedContent(quint64 token,
+                                       QByteArray const &content) {
   Q_D(UpdateChecker);
 
-  qDebug() << "UpdateChecker::httpFinished()";
+  qDebug() << "UpdateChecker::handleDownloadedContent: token" << token;
 
-  auto itr = brng::find_if(d->m_replies, [this](auto const &reply) { return this->sender() == reply.get(); });
-  if (itr == d->m_replies.end()) {
-    qDebug() << "UpdateChecker::httpFinished: for unknown reply object!?";
+  auto idx = d->m_tokens.indexOf(token);
+  if (idx < 0) {
+    qDebug() << "UpdateChecker::handleDownloadedContent: token unknown";
     return;
   }
 
-  auto &reply = *itr;
-  auto idx    = std::distance(d->m_replies.begin(), itr);
-  auto doc    = parseXml(reply->readAll());
+  auto doc = parseXml(content);
 
   ++d->m_numFinished;
 
-  qDebug() << "UpdateChecker::httpFinished: for" << idx << "numFinished" << d->m_numFinished;
+  qDebug() << "UpdateChecker::handleDownloadedContent: for" << idx << "numFinished" << d->m_numFinished;
 
   if (idx == 0) {
     d->m_release = parse_latest_release_version(doc);
@@ -81,19 +98,19 @@ UpdateChecker::httpFinished() {
                 : d->m_release.current_version < d->m_release.latest_source ? UpdateCheckStatus::NewReleaseAvailable
                 :                                                             UpdateCheckStatus::NoNewReleaseAvailable;
 
-    qDebug() << "UpdateChecker::httpFinished: latest version info retrieved; status:" << static_cast<int>(status);
+    qDebug() << "UpdateChecker::handleDownloadedContent: latest version info retrieved; status:" << static_cast<int>(status);
 
     emit checkFinished(status, d->m_release);
 
   } else {
-    qDebug() << "UpdateChecker::httpFinished: releases info retrieved";
+    qDebug() << "UpdateChecker::handleDownloadedContent: releases info retrieved";
     emit releaseInformationRetrieved(doc);
   }
 
-  if (d->m_numFinished < d->m_replies.size())
+  if (d->m_numFinished < d->m_tokens.size())
     return;
 
-  qDebug() << "UpdateChecker::httpFinished: done, deleting object";
+  qDebug() << "UpdateChecker::handleDownloadedContent: done, deleting object";
   deleteLater();
 }
 

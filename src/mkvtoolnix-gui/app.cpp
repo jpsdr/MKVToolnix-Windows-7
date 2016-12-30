@@ -4,6 +4,8 @@
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
+#include <QThread>
+#include <QTranslator>
 
 #include <boost/optional.hpp>
 
@@ -18,6 +20,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/container.h"
+#include "mkvtoolnix-gui/util/network_access_manager.h"
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -30,10 +33,25 @@ static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_topLevelDo
 
 static boost::optional<bool> s_is_installed;
 
+class AppPrivate {
+  friend class App;
+
+  std::unique_ptr<QTranslator> m_currentTranslator;
+  std::unique_ptr<GuiCliParser> m_cliParser;
+  std::unique_ptr<QLocalServer> m_instanceCommunicator;
+  Util::NetworkAccessManager *m_networkAccessManager{new Util::NetworkAccessManager{}};
+  QThread m_networkAccessManagerThread;
+  bool m_otherInstanceRunning{};
+
+  explicit AppPrivate()
+  {
+  }
+};
+
 App::App(int &argc,
          char **argv)
   : QApplication{argc, argv}
-  , m_otherInstanceRunning{}
+  , d_ptr{new AppPrivate{}}
 {
   mtx_common_init("mkvtoolnix-gui", argv[0]);
   version_info = get_version_info("mkvtoolnix-gui", vif_full);
@@ -56,6 +74,7 @@ App::App(int &argc,
   Util::Settings::get().load();
 
   setupInstanceCommunicator();
+  setupNetworkAccessManager();
 
   QObject::connect(this, &App::aboutToQuit, this, &App::saveSettings);
 
@@ -64,6 +83,28 @@ App::App(int &argc,
 }
 
 App::~App() {
+  Q_D(App);
+
+  d->m_networkAccessManagerThread.quit();
+  d->m_networkAccessManagerThread.wait();
+}
+
+Util::NetworkAccessManager &
+App::networkAccessManager() {
+  Q_D(App);
+
+  return *d->m_networkAccessManager;
+}
+
+void
+App::setupNetworkAccessManager() {
+  Q_D(App);
+
+  d->m_networkAccessManager->moveToThread(&d->m_networkAccessManagerThread);
+
+  connect(&d->m_networkAccessManagerThread, &QThread::finished, d->m_networkAccessManager, &QObject::deleteLater);
+
+  d->m_networkAccessManagerThread.start();
 }
 
 void
@@ -84,7 +125,9 @@ App::communicatorSocketName() {
 
 void
 App::setupInstanceCommunicator() {
- auto socketName = communicatorSocketName();
+  Q_D(App);
+
+  auto socketName = communicatorSocketName();
   auto socket     = std::make_unique<QLocalSocket>(this);
 
   socket->connectToServer(socketName);
@@ -92,20 +135,20 @@ App::setupInstanceCommunicator() {
   if (socket->state() == QLocalSocket::ConnectedState) {
     socket->disconnect();
 
-    m_otherInstanceRunning = true;
+    d->m_otherInstanceRunning = true;
 
     return;
   }
 
   QLocalServer::removeServer(socketName);
 
-  m_instanceCommunicator = std::make_unique<QLocalServer>(this);
+  d->m_instanceCommunicator = std::make_unique<QLocalServer>(this);
 
-  if (m_instanceCommunicator->listen(socketName))
-    connect(m_instanceCommunicator.get(), &QLocalServer::newConnection, this, &App::receiveInstanceCommunication);
+  if (d->m_instanceCommunicator->listen(socketName))
+    connect(d->m_instanceCommunicator.get(), &QLocalServer::newConnection, this, &App::receiveInstanceCommunication);
 
   else
-    m_instanceCommunicator.reset(nullptr);
+    d->m_instanceCommunicator.reset(nullptr);
 }
 
 void
@@ -271,13 +314,15 @@ App::isInstalled() {
 
 void
 App::initializeLocale(QString const &requestedLocale) {
+  Q_D(App);
+
   auto locale = Util::Settings::get().localeToUse(requestedLocale);
 
 #if defined(HAVE_LIBINTL_H)
   if (!locale.isEmpty()) {
-    if (m_currentTranslator)
-      removeTranslator(m_currentTranslator.get());
-    m_currentTranslator.reset();
+    if (d->m_currentTranslator)
+      removeTranslator(d->m_currentTranslator.get());
+    d->m_currentTranslator.reset();
 
     auto translator = std::make_unique<QTranslator>();
     auto paths      = QStringList{} << Q("%1/locale/libqt").arg(applicationDirPath())
@@ -289,7 +334,7 @@ App::initializeLocale(QString const &requestedLocale) {
 
     installTranslator(translator.get());
 
-    m_currentTranslator              = std::move(translator);
+    d->m_currentTranslator           = std::move(translator);
     Util::Settings::get().m_uiLocale = locale;
   }
 
@@ -303,12 +348,16 @@ App::initializeLocale(QString const &requestedLocale) {
 bool
 App::isOtherInstanceRunning()
   const {
-  return m_otherInstanceRunning;
+  Q_D(const App);
+
+  return d->m_otherInstanceRunning;
 }
 
 void
 App::sendCommandLineArgumentsToRunningInstance() {
-  auto args = m_cliParser->rebuildCommandLine();
+  Q_D(App);
+
+  auto args = d->m_cliParser->rebuildCommandLine();
   if (!args.isEmpty())
     sendArgumentsToRunningInstance(args);
 }
@@ -351,15 +400,17 @@ App::sendArgumentsToRunningInstance(QStringList const &args) {
 
 bool
 App::parseCommandLineArguments(QStringList const &args) {
+  Q_D(App);
+
   if (args.isEmpty()) {
     raiseAndActivateRunningInstance();
     return true;
   }
 
-  m_cliParser.reset(new GuiCliParser{Util::toStdStringVector(args, 1)});
-  m_cliParser->run();
+  d->m_cliParser.reset(new GuiCliParser{Util::toStdStringVector(args, 1)});
+  d->m_cliParser->run();
 
-  if (m_cliParser->exitAfterParsing())
+  if (d->m_cliParser->exitAfterParsing())
     return false;
 
   if (!isOtherInstanceRunning())
@@ -373,22 +424,26 @@ App::parseCommandLineArguments(QStringList const &args) {
 
 void
 App::handleCommandLineArgumentsLocally() {
-  if (!m_cliParser->m_configFiles.isEmpty())
-    emit openConfigFilesRequested(m_cliParser->m_configFiles);
+  Q_D(App);
 
-  if (!m_cliParser->m_addToMerge.isEmpty())
-    emit addingFilesToMergeRequested(m_cliParser->m_addToMerge);
+  if (!d->m_cliParser->m_configFiles.isEmpty())
+    emit openConfigFilesRequested(d->m_cliParser->m_configFiles);
 
-  if (!m_cliParser->m_editChapters.isEmpty())
-    emit editingChaptersRequested(m_cliParser->m_editChapters);
+  if (!d->m_cliParser->m_addToMerge.isEmpty())
+    emit addingFilesToMergeRequested(d->m_cliParser->m_addToMerge);
 
-  if (!m_cliParser->m_editHeaders.isEmpty())
-    emit editingHeadersRequested(m_cliParser->m_editHeaders);
+  if (!d->m_cliParser->m_editChapters.isEmpty())
+    emit editingChaptersRequested(d->m_cliParser->m_editChapters);
+
+  if (!d->m_cliParser->m_editHeaders.isEmpty())
+    emit editingHeadersRequested(d->m_cliParser->m_editHeaders);
 }
 
 void
 App::receiveInstanceCommunication() {
-  auto socket = m_instanceCommunicator->nextPendingConnection();
+  Q_D(App);
+
+  auto socket = d->m_instanceCommunicator->nextPendingConnection();
   connect(socket, &QLocalSocket::disconnected, socket, &QLocalSocket::deleteLater);
 
   QDataStream in{socket};
@@ -425,8 +480,8 @@ App::receiveInstanceCommunication() {
   socket->write(reinterpret_cast<char *>(&ok), sizeof(bool));
   socket->flush();
 
-  m_cliParser.reset(new GuiCliParser{Util::toStdStringVector(args)});
-  m_cliParser->run();
+  d->m_cliParser.reset(new GuiCliParser{Util::toStdStringVector(args)});
+  d->m_cliParser->run();
   handleCommandLineArgumentsLocally();
 }
 

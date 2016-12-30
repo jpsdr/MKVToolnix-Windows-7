@@ -27,10 +27,10 @@ class UpdateChecker : public QObject {
   explicit UpdateChecker(UpdateCheckerPrivate &d);
 
 public:
-  UpdateChecker(QObject *parent);
+  UpdateChecker(QObject *parent = nullptr);
   virtual ~UpdateChecker();
 
-  void start(bool retrieveReleasesInfo);
+  UpdateChecker &setRetrieveReleasesInfo(bool enable);
 
 signals:
   void checkStarted();
@@ -38,7 +38,8 @@ signals:
   void releaseInformationRetrieved(std::shared_ptr<pugi::xml_document> releasesInfo);
 
 public slots:
-  void httpFinished();
+  void handleDownloadedContent(quint64 token, QByteArray const &content);
+  void start();
 
 protected:
   mtx::xml::document_cptr parseXml(QByteArray const &content);

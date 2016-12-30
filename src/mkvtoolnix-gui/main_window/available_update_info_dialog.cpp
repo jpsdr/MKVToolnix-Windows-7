@@ -11,13 +11,14 @@ namespace mtx { namespace gui {
 AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::AvailableUpdateInfoDialog}
+  , m_statusRetrieved{}
+  , m_status{UpdateCheckStatus::Failed}
 {
   // Setup UI controls.
   ui->setupUi(this);
 
   setWindowTitle(QY("Online check for updates"));
-  setChangeLogContent(Q(""));
-  ui->status->setText(QY("Downloading release information"));
+  updateDisplay();
 
   connect(ui->close,    &QPushButton::clicked, this, &AvailableUpdateInfoDialog::accept);
   connect(ui->download, &QPushButton::clicked, this, &AvailableUpdateInfoDialog::visitDownloadLocation);
@@ -27,7 +28,7 @@ AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
   connect(checker, &UpdateChecker::checkFinished,               this, &AvailableUpdateInfoDialog::updateCheckFinished);
   connect(checker, &UpdateChecker::releaseInformationRetrieved, this, &AvailableUpdateInfoDialog::setReleaseInformation);
 
-  checker->start(true);
+  checker->setRetrieveReleasesInfo(true).start();
 }
 
 AvailableUpdateInfoDialog::~AvailableUpdateInfoDialog() {
@@ -36,6 +37,8 @@ AvailableUpdateInfoDialog::~AvailableUpdateInfoDialog() {
 void
 AvailableUpdateInfoDialog::setReleaseInformation(std::shared_ptr<pugi::xml_document> releasesInfo) {
   m_releasesInfo = releasesInfo;
+
+  updateDisplay();
 }
 
 void
@@ -60,26 +63,50 @@ AvailableUpdateInfoDialog::setChangeLogContent(QString const &content) {
 void
 AvailableUpdateInfoDialog::updateCheckFinished(UpdateCheckStatus status,
                                                mtx_release_version_t releaseVersion) {
-  auto statusStr = UpdateCheckStatus::NoNewReleaseAvailable == status ? QY("Currently no newer version is available online.")
-                 : UpdateCheckStatus::NewReleaseAvailable   == status ? QY("There is a new version available online.")
-                 :                                                      QY("There was an error querying the update status.");
+  m_statusRetrieved = true;
+  m_status          = status;
+  m_releaseVersion  = releaseVersion;
+
+  updateDisplay();
+}
+
+void
+AvailableUpdateInfoDialog::updateDisplay() {
+  updateStatusDisplay();
+  updateReleasesInfoDisplay();
+}
+
+void
+AvailableUpdateInfoDialog::updateStatusDisplay() {
+  auto statusStr = !m_statusRetrieved                                   ? QY("Downloading release information")
+                 : UpdateCheckStatus::NoNewReleaseAvailable == m_status ? QY("Currently no newer version is available online.")
+                 : UpdateCheckStatus::NewReleaseAvailable   == m_status ? QY("There is a new version available online.")
+                 :                                                        QY("There was an error querying the update status.");
   ui->status->setText(statusStr);
 
-  if (UpdateCheckStatus::Failed == status)
+  if (!m_statusRetrieved || (UpdateCheckStatus::Failed == m_status))
     return;
 
-  ui->currentVersion->setText(to_qs(releaseVersion.current_version.to_string()));
-  ui->availableVersion->setText(to_qs(releaseVersion.latest_source.to_string()));
+  ui->currentVersion->setText(to_qs(m_releaseVersion.current_version.to_string()));
+  ui->availableVersion->setText(to_qs(m_releaseVersion.latest_source.to_string()));
   ui->close->setText(QY("&Close"));
 
-  auto url = releaseVersion.urls.find("general");
-  if ((url != releaseVersion.urls.end()) && !url->second.empty()) {
+  auto url = m_releaseVersion.urls.find("general");
+  if ((url != m_releaseVersion.urls.end()) && !url->second.empty()) {
     m_downloadURL = to_qs(url->second);
     ui->downloadURL->setText(Q("<html><body><a href=\"%1\">%1</a></body></html>").arg(m_downloadURL.toHtmlEscaped()));
     ui->download->setEnabled(true);
   }
+}
 
-  if (!m_releasesInfo)
+void
+AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
+  if (!m_releasesInfo) {
+    setChangeLogContent(Q(""));
+    return;
+  }
+
+  if (!m_statusRetrieved || (UpdateCheckStatus::Failed == m_status))
     return;
 
   auto html              = QStringList{};
@@ -134,7 +161,7 @@ AvailableUpdateInfoDialog::updateCheckFinished(UpdateCheckStatus status,
       html << Q("</ul></p>");
 
     numReleasesOutput++;
-    if ((10 < numReleasesOutput) && (version_number_t{versionStr} < releaseVersion.current_version))
+    if ((10 < numReleasesOutput) && (version_number_t{versionStr} < m_releaseVersion.current_version))
       break;
   }
 

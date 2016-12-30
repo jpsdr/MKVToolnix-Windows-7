@@ -5,6 +5,7 @@
 
 #include <QDialog>
 
+#include "common/version.h"
 #include "common/xml/xml.h"
 #include "mkvtoolnix-gui/main_window/update_checker.h"
 
@@ -23,6 +24,10 @@ protected:
   std::shared_ptr<pugi::xml_document> m_releasesInfo;
   QString m_downloadURL;
 
+  bool m_statusRetrieved;
+  UpdateCheckStatus m_status;
+  mtx_release_version_t m_releaseVersion;
+
 public:
   explicit AvailableUpdateInfoDialog(QWidget *parent);
   ~AvailableUpdateInfoDialog();
@@ -33,6 +38,11 @@ public slots:
   void setReleaseInformation(std::shared_ptr<pugi::xml_document> releasesInfo);
   void updateCheckFinished(mtx::gui::UpdateCheckStatus status, mtx_release_version_t releaseVersion);
   void visitDownloadLocation();
+
+protected:
+  void updateDisplay();
+  void updateStatusDisplay();
+  void updateReleasesInfoDisplay();
 };
 
 }}
