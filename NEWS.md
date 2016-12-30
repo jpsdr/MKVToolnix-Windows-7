@@ -1,3 +1,18 @@
+# Version ?
+
+## Build system changes
+
+* CURL is no longer used by MKVToolNix and is therefore not required
+  for building anymore.
+
+## Other changes
+
+* GUI: the update check now uses Qt's networking classes instead of CURL.
+* The command line option "--check-for-updates" has been removed, even
+  though the deprecation warning in release 9.7.0 stated that it would
+  be removed in 2018.
+
+
 # Version 9.7.1 "Pandemonium" 2016-12-27
 
 ## Bug fixes
