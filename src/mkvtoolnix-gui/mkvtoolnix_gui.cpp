@@ -5,9 +5,7 @@
 #include <QProcess>
 
 #include "common/fs_sys_helpers.h"
-#if defined(HAVE_CURL_EASY_H)
-# include "common/version.h"
-#endif  // HAVE_CURL_EASY_H
+#include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/main_window/update_check_thread.h"
@@ -37,11 +35,9 @@ registerMetaTypes() {
   qRegisterMetaType<std::shared_ptr<Merge::SourceFile>>("std::shared_ptr<SourceFile>");
   qRegisterMetaType<QList<std::shared_ptr<Merge::SourceFile>>>("QList<std::shared_ptr<SourceFile>>");
   qRegisterMetaType<QFileInfoList>("QFileInfoList");
-#if defined(HAVE_CURL_EASY_H)
   qRegisterMetaType<mtx_release_version_t>("mtx_release_version_t");
   qRegisterMetaType<std::shared_ptr<pugi::xml_document>>("std::shared_ptr<pugi::xml_document>");
   qRegisterMetaType<UpdateCheckStatus>("UpdateCheckStatus");
-#endif  // HAVE_CURL_EASY_H
 }
 
 int

@@ -3,12 +3,10 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_CURL_EASY_H)
-# include "mkvtoolnix-gui/main_window/update_check_thread.h"
-#endif  // HAVE_CURL_EASY_H
-
 #include <QAction>
 #include <QMainWindow>
+
+#include "mkvtoolnix-gui/main_window/update_check_thread.h"
 
 class QEvent;
 class QResizeEvent;
@@ -95,10 +93,8 @@ public slots:
   virtual void setToolSelectorVisibility();
   virtual void raiseAndActivate();
 
-#if defined(HAVE_CURL_EASY_H)
   virtual void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);
   virtual void checkForUpdates();
-#endif  // HAVE_CURL_EASY_H
 
 public:                         // static
   static MainWindow *get();
@@ -109,9 +105,7 @@ public:                         // static
   static Jobs::Tool *jobTool();
   static WatchJobs::Tab *watchCurrentJobTab();
   static WatchJobs::Tool *watchJobTool();
-#if defined(HAVE_CURL_EASY_H)
   static QString versionStringForSettings(version_number_t const &version);
-#endif  // HAVE_CURL_EASY_H
 
   static QIcon const & yesIcon();
   static QIcon const & noIcon();
@@ -128,9 +122,7 @@ protected:
 
   virtual boost::optional<bool> filterWheelEventForStrongFocus(QObject *watched, QEvent *event);
 
-#if defined(HAVE_CURL_EASY_H)
   virtual void silentlyCheckForUpdates();
-#endif  // HAVE_CURL_EASY_H
 };
 
 }}

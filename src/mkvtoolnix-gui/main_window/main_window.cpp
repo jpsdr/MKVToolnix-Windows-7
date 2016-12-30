@@ -19,6 +19,7 @@
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
+#include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
@@ -34,10 +35,6 @@
 #include "mkvtoolnix-gui/util/widget.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
-
-#if defined(HAVE_CURL_EASY_H)
-# include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
-#endif  // HAVE_CURL_EASY_H
 
 namespace mtx { namespace gui {
 
@@ -71,9 +68,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   jobTool()->loadAndStart();
 
-#if defined(HAVE_CURL_EASY_H)
   silentlyCheckForUpdates();
-#endif  // HAVE_CURL_EASY_H
 
 #if defined(SYS_WINDOWS)
   new TaskbarProgress{this};
@@ -129,11 +124,7 @@ MainWindow::setupMenu() {
 
   connect(this,                                &MainWindow::preferencesChanged, this, &MainWindow::setToolSelectorVisibility);
 
-#if defined(HAVE_CURL_EASY_H)
   connect(ui->actionHelpCheckForUpdates,       &QAction::triggered,             this, &MainWindow::checkForUpdates);
-#else
-  ui->actionHelpCheckForUpdates->setVisible(false);
-#endif  // HAVE_CURL_EASY_H
 }
 
 void
@@ -386,7 +377,6 @@ MainWindow::editPreferences() {
   emit preferencesChanged();
 }
 
-#if defined(HAVE_CURL_EASY_H)
 void
 MainWindow::checkForUpdates() {
   AvailableUpdateInfoDialog dlg{this};
@@ -408,7 +398,7 @@ MainWindow::silentlyCheckForUpdates() {
 
   connect(thread, &UpdateCheckThread::checkFinished, this, &MainWindow::updateCheckFinished);
 
-  thread->start();
+  thread->start(false);
 }
 
 QString
@@ -440,7 +430,6 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
   AvailableUpdateInfoDialog dlg{this};
   dlg.exec();
 }
-#endif  // HAVE_CURL_EASY_H
 
 void
 MainWindow::showIconMovingToTool(QString const &pixmapName,

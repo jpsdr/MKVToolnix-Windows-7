@@ -396,9 +396,7 @@ PreferencesDialog::setupConnections() {
 void
 PreferencesDialog::setupOnlineCheck() {
   ui->cbGuiCheckForUpdates->setChecked(m_cfg.m_checkForUpdates);
-#if !defined(HAVE_CURL_EASY_H)
   ui->cbGuiCheckForUpdates->setVisible(false);
-#endif  // HAVE_CURL_EASY_H
 }
 
 void

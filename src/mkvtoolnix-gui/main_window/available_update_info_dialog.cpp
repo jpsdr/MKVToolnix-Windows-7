@@ -1,7 +1,5 @@
 #include "common/common_pch.h"
 
-#if defined(HAVE_CURL_EASY_H)
-
 #include <QDesktopServices>
 
 #include "common/qt.h"
@@ -29,7 +27,7 @@ AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
   connect(thread, &UpdateCheckThread::checkFinished,               this, &AvailableUpdateInfoDialog::updateCheckFinished);
   connect(thread, &UpdateCheckThread::releaseInformationRetrieved, this, &AvailableUpdateInfoDialog::setReleaseInformation);
 
-  thread->start();
+  thread->start(true);
 }
 
 AvailableUpdateInfoDialog::~AvailableUpdateInfoDialog() {
@@ -151,5 +149,3 @@ AvailableUpdateInfoDialog::visitDownloadLocation() {
 }
 
 }}
-
-#endif  // HAVE_CURL_EASY_H

@@ -3,12 +3,10 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_CURL_EASY_H)
+#include <QDialog>
 
-# include <QDialog>
-
-# include "common/xml/xml.h"
-# include "mkvtoolnix-gui/main_window/update_check_thread.h"
+#include "common/xml/xml.h"
+#include "mkvtoolnix-gui/main_window/update_check_thread.h"
 
 namespace mtx { namespace gui {
 
@@ -39,5 +37,4 @@ public slots:
 
 }}
 
-#endif  // HAVE_CURL_EASY_H
 #endif  // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_AVAILABLE_UPDATE_INFO_DIALOG_H
