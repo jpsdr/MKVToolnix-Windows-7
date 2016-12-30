@@ -8,7 +8,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/job.h"
-#include "mkvtoolnix-gui/main_window/update_check_thread.h"
+#include "mkvtoolnix-gui/main_window/update_checker.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 
 #if defined(HAVE_STATIC_QT)
