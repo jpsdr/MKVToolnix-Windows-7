@@ -22,12 +22,12 @@ AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
   connect(ui->close,    &QPushButton::clicked, this, &AvailableUpdateInfoDialog::accept);
   connect(ui->download, &QPushButton::clicked, this, &AvailableUpdateInfoDialog::visitDownloadLocation);
 
-  auto thread = new UpdateCheckThread(parent);
+  auto checker = new UpdateChecker{parent};
 
-  connect(thread, &UpdateCheckThread::checkFinished,               this, &AvailableUpdateInfoDialog::updateCheckFinished);
-  connect(thread, &UpdateCheckThread::releaseInformationRetrieved, this, &AvailableUpdateInfoDialog::setReleaseInformation);
+  connect(checker, &UpdateChecker::checkFinished,               this, &AvailableUpdateInfoDialog::updateCheckFinished);
+  connect(checker, &UpdateChecker::releaseInformationRetrieved, this, &AvailableUpdateInfoDialog::setReleaseInformation);
 
-  thread->start(true);
+  checker->start(true);
 }
 
 AvailableUpdateInfoDialog::~AvailableUpdateInfoDialog() {

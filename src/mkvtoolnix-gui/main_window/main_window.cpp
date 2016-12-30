@@ -394,11 +394,11 @@ MainWindow::silentlyCheckForUpdates() {
   if (!forceUpdateCheck && lastCheck.isValid() && (lastCheck.addDays(1) >= QDateTime::currentDateTime()))
     return;
 
-  auto thread = new UpdateCheckThread(this);
+  auto checker = new UpdateChecker{this};
 
-  connect(thread, &UpdateCheckThread::checkFinished, this, &MainWindow::updateCheckFinished);
+  connect(checker, &UpdateChecker::checkFinished, this, &MainWindow::updateCheckFinished);
 
-  thread->start(false);
+  checker->start(false);
 }
 
 QString

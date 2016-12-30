@@ -6,7 +6,7 @@
 #include <QDialog>
 
 #include "common/xml/xml.h"
-#include "mkvtoolnix-gui/main_window/update_check_thread.h"
+#include "mkvtoolnix-gui/main_window/update_checker.h"
 
 namespace mtx { namespace gui {
 

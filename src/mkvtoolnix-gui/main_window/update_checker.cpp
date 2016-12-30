@@ -7,12 +7,12 @@
 #include "common/compression.h"
 #include "common/qt.h"
 #include "common/version.h"
-#include "mkvtoolnix-gui/main_window/update_check_thread.h"
+#include "mkvtoolnix-gui/main_window/update_checker.h"
 
 namespace mtx { namespace gui {
 
-class UpdateCheckThreadPrivate {
-  friend class UpdateCheckThread;
+class UpdateCheckerPrivate {
+  friend class UpdateChecker;
 
   QNetworkAccessManager m_manager;
   std::vector<std::shared_ptr<QNetworkReply>> m_replies;
@@ -20,27 +20,27 @@ class UpdateCheckThreadPrivate {
   mtx_release_version_t m_release;
   mtx::xml::document_cptr m_updateInfo;
 
-  explicit UpdateCheckThreadPrivate()
+  explicit UpdateCheckerPrivate()
   {
   }
 };
 
 using namespace mtx::gui;
 
-UpdateCheckThread::UpdateCheckThread(QObject *parent)
+UpdateChecker::UpdateChecker(QObject *parent)
   : QObject{parent}
-  , d_ptr{new UpdateCheckThreadPrivate{}}
+  , d_ptr{new UpdateCheckerPrivate{}}
 {
 }
 
-UpdateCheckThread::~UpdateCheckThread() {
+UpdateChecker::~UpdateChecker() {
 }
 
 void
-UpdateCheckThread::start(bool retrieveReleasesInfo) {
-  Q_D(UpdateCheckThread);
+UpdateChecker::start(bool retrieveReleasesInfo) {
+  Q_D(UpdateChecker);
 
-  qDebug() << "UpdateCheckThread::start: initiating requests";
+  qDebug() << "UpdateChecker::start: initiating requests";
 
   emit checkStarted();
 
@@ -50,19 +50,19 @@ UpdateCheckThread::start(bool retrieveReleasesInfo) {
 
   for (auto const &url : urls) {
     d->m_replies.emplace_back(d->m_manager.get(QNetworkRequest{QUrl{Q("%1.gz").arg(Q(url))}}));
-    connect(d->m_replies.back().get(), &QNetworkReply::finished, this, &UpdateCheckThread::httpFinished);
+    connect(d->m_replies.back().get(), &QNetworkReply::finished, this, &UpdateChecker::httpFinished);
   }
 }
 
 void
-UpdateCheckThread::httpFinished() {
-  Q_D(UpdateCheckThread);
+UpdateChecker::httpFinished() {
+  Q_D(UpdateChecker);
 
-  qDebug() << "UpdateCheckThread::httpFinished()";
+  qDebug() << "UpdateChecker::httpFinished()";
 
   auto itr = brng::find_if(d->m_replies, [this](auto const &reply) { return this->sender() == reply.get(); });
   if (itr == d->m_replies.end()) {
-    qDebug() << "UpdateCheckThread::httpFinished: for unknown reply object!?";
+    qDebug() << "UpdateChecker::httpFinished: for unknown reply object!?";
     return;
   }
 
@@ -72,7 +72,7 @@ UpdateCheckThread::httpFinished() {
 
   ++d->m_numFinished;
 
-  qDebug() << "UpdateCheckThread::httpFinished: for" << idx << "numFinished" << d->m_numFinished;
+  qDebug() << "UpdateChecker::httpFinished: for" << idx << "numFinished" << d->m_numFinished;
 
   if (idx == 0) {
     d->m_release = parse_latest_release_version(doc);
@@ -81,24 +81,24 @@ UpdateCheckThread::httpFinished() {
                 : d->m_release.current_version < d->m_release.latest_source ? UpdateCheckStatus::NewReleaseAvailable
                 :                                                             UpdateCheckStatus::NoNewReleaseAvailable;
 
-    qDebug() << "UpdateCheckThread::httpFinished: latest version info retrieved; status:" << static_cast<int>(status);
+    qDebug() << "UpdateChecker::httpFinished: latest version info retrieved; status:" << static_cast<int>(status);
 
     emit checkFinished(status, d->m_release);
 
   } else {
-    qDebug() << "UpdateCheckThread::httpFinished: releases info retrieved";
+    qDebug() << "UpdateChecker::httpFinished: releases info retrieved";
     emit releaseInformationRetrieved(doc);
   }
 
   if (d->m_numFinished < d->m_replies.size())
     return;
 
-  qDebug() << "UpdateCheckThread::httpFinished: done, deleting object";
+  qDebug() << "UpdateChecker::httpFinished: done, deleting object";
   deleteLater();
 }
 
 mtx::xml::document_cptr
-UpdateCheckThread::parseXml(QByteArray const &content) {
+UpdateChecker::parseXml(QByteArray const &content) {
   try {
     auto data       = std::string{ content.data(), static_cast<std::string::size_type>(content.size()) };
     data            = compressor_c::create_from_file_name("dummy.gz")->decompress(data);
@@ -107,14 +107,14 @@ UpdateCheckThread::parseXml(QByteArray const &content) {
     auto xml_result = doc->load(sdata);
 
     if (xml_result) {
-      qDebug() << "UpdateCheckThread::parseXml: of" << content.size() << "bytes was OK";
+      qDebug() << "UpdateChecker::parseXml: of" << content.size() << "bytes was OK";
       return doc;
     }
 
-    qDebug() << "UpdateCheckThread::parseXml: of" << content.size() << "bytes failed:" << Q(xml_result.description()) << "at" << Q(xml_result.offset);
+    qDebug() << "UpdateChecker::parseXml: of" << content.size() << "bytes failed:" << Q(xml_result.description()) << "at" << Q(xml_result.offset);
 
   } catch (mtx::compression_x &ex) {
-    qDebug() << "UpdateCheckThread::parseXml: decompression exception:" << Q(ex.what());
+    qDebug() << "UpdateChecker::parseXml: decompression exception:" << Q(ex.what());
   }
 
   return {};

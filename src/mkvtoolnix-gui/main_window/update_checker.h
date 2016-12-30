@@ -1,5 +1,5 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECK_THREAD_H
-#define MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECK_THREAD_H
+#ifndef MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECKER_H
+#define MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECKER_H
 
 #include "common/common_pch.h"
 
@@ -16,19 +16,19 @@ enum class UpdateCheckStatus {
   NoNewReleaseAvailable,
 };
 
-class UpdateCheckThreadPrivate;
-class UpdateCheckThread : public QObject {
+class UpdateCheckerPrivate;
+class UpdateChecker : public QObject {
   Q_OBJECT;
 
-  Q_DECLARE_PRIVATE(UpdateCheckThread);
+  Q_DECLARE_PRIVATE(UpdateChecker);
 
-  QScopedPointer<UpdateCheckThreadPrivate> const d_ptr;
+  QScopedPointer<UpdateCheckerPrivate> const d_ptr;
 
-  explicit UpdateCheckThread(UpdateCheckThreadPrivate &d);
+  explicit UpdateChecker(UpdateCheckerPrivate &d);
 
 public:
-  UpdateCheckThread(QObject *parent);
-  virtual ~UpdateCheckThread();
+  UpdateChecker(QObject *parent);
+  virtual ~UpdateChecker();
 
   void start(bool retrieveReleasesInfo);
 
@@ -50,4 +50,4 @@ Q_DECLARE_METATYPE(mtx::gui::UpdateCheckStatus);
 Q_DECLARE_METATYPE(mtx_release_version_t);
 Q_DECLARE_METATYPE(std::shared_ptr<pugi::xml_document>);
 
-#endif  // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECK_THREAD_H
+#endif  // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECKER_H

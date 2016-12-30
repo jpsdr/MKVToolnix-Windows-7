@@ -6,7 +6,7 @@
 #include <QAction>
 #include <QMainWindow>
 
-#include "mkvtoolnix-gui/main_window/update_check_thread.h"
+#include "mkvtoolnix-gui/main_window/update_checker.h"
 
 class QEvent;
 class QResizeEvent;
