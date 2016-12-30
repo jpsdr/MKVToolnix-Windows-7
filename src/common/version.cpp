@@ -153,6 +153,36 @@ get_current_version() {
   return version_number_t(PACKAGE_VERSION);
 }
 
+mtx_release_version_t
+parse_latest_release_version(mtx::xml::document_cptr const &doc) {
+  if (!doc)
+    return {};
+
+  mtx_release_version_t release;
+
+  release.latest_source             = version_number_t{doc->select_single_node("/mkvtoolnix-releases/latest-source/version").node().child_value()};
+  release.latest_windows_build      = version_number_t{(boost::format("%1% build %2%")
+                                                        % doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/version").node().child_value()
+                                                        % doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/build").node().child_value()).str()};
+  release.valid                     = release.latest_source.valid;
+  release.urls["general"]           = doc->select_single_node("/mkvtoolnix-releases/latest-source/url").node().child_value();
+  release.urls["source_code"]       = doc->select_single_node("/mkvtoolnix-releases/latest-source/source-code-url").node().child_value();
+  release.urls["windows_pre_build"] = doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/url").node().child_value();
+
+  for (auto arch : std::vector<std::string>{ "x86", "amd64" })
+    for (auto package : std::vector<std::string>{ "installer", "portable" })
+      release.urls[std::string{"windows_"} + arch + "_" + package] = doc->select_single_node((std::string{"/mkvtoolnix-releases/latest-windows-binary/"} + package + "-url/" + arch).c_str()).node().child_value();
+
+  if (debugging_c::requested("version_check|curl")) {
+    std::stringstream urls;
+    brng::for_each(release.urls, [&urls](auto const &kv) { urls << " " << kv.first << ":" << kv.second; });
+    mxdebug(boost::format("update check: current %1% latest source %2% latest winpre %3% URLs%4%\n")
+            % release.current_version.to_string() % release.latest_source.to_string() % release.latest_windows_build.to_string() % urls.str());
+  }
+
+  return release;
+}
+
 #if defined(HAVE_CURL_EASY_H)
 static mtx::xml::document_cptr
 retrieve_and_parse_xml(std::string const &url) {
@@ -195,34 +225,13 @@ get_latest_release_version() {
 
   mxdebug_if(debug, boost::format("Update check started with URL %1%\n") % url);
 
-  mtx_release_version_t release;
-
   auto doc = retrieve_and_parse_xml(url + ".gz");
   if (!doc)
     doc = retrieve_and_parse_xml(url);
   if (!doc)
-    return release;
+    return {};
 
-  release.latest_source                   = version_number_t(doc->select_single_node("/mkvtoolnix-releases/latest-source/version").node().child_value());
-  release.latest_windows_build            = version_number_t((boost::format("%1% build %2%")
-                                                             % doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/version").node().child_value()
-                                                             % doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/build").node().child_value()).str());
-  release.valid                           = release.latest_source.valid;
-  release.urls["general"]                 = doc->select_single_node("/mkvtoolnix-releases/latest-source/url").node().child_value();
-  release.urls["source_code"]             = doc->select_single_node("/mkvtoolnix-releases/latest-source/source-code-url").node().child_value();
-  release.urls["windows_pre_build"]       = doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/url").node().child_value();
-  for (auto arch : std::vector<std::string>{ "x86", "amd64" })
-    for (auto package : std::vector<std::string>{ "installer", "portable" })
-      release.urls[std::string{"windows_"} + arch + "_" + package] = doc->select_single_node((std::string{"/mkvtoolnix-releases/latest-windows-binary/"} + package + "-url/" + arch).c_str()).node().child_value();
-
-  if (debug) {
-    std::stringstream urls;
-    brng::for_each(release.urls, [&urls](auto const &kv) { urls << " " << kv.first << ":" << kv.second; });
-    mxdebug(boost::format("update check: current %1% latest source %2% latest winpre %3% URLs%4%\n")
-            % release.current_version.to_string() % release.latest_source.to_string() % release.latest_windows_build.to_string() % urls.str());
-  }
-
-  return release;
+  return parse_latest_release_version(doc);
 }
 
 mtx::xml::document_cptr

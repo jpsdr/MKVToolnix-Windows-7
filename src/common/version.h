@@ -57,6 +57,7 @@ enum version_info_flags_e {
 std::string get_version_info(const std::string &program, version_info_flags_e flags = vif_default);
 int compare_current_version_to(const std::string &other_version_str);
 version_number_t get_current_version();
+mtx_release_version_t parse_latest_release_version(mtx::xml::document_cptr const &doc);
 
 # if defined(HAVE_CURL_EASY_H)
 mtx_release_version_t get_latest_release_version();
