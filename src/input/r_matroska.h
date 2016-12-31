@@ -275,6 +275,7 @@ protected:
   virtual bool verify_mscomp_video_track(kax_track_t *t);
   virtual bool verify_theora_video_track(kax_track_t *t);
   virtual void verify_video_track(kax_track_t *t);
+  virtual bool verify_dvb_subtitle_track(kax_track_t *t);
   virtual bool verify_hdmv_textst_subtitle_track(kax_track_t *t);
   virtual bool verify_kate_subtitle_track(kax_track_t *t);
   virtual bool verify_vobsub_subtitle_track(kax_track_t *t);

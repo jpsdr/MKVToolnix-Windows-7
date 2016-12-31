@@ -70,6 +70,7 @@
 #include "output/p_avc.h"
 #include "output/p_dirac.h"
 #include "output/p_dts.h"
+#include "output/p_dvbsub.h"
 #if defined(HAVE_FLAC_FORMAT_H)
 # include "output/p_flac.h"
 #endif
@@ -639,6 +640,16 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 }
 
 bool
+kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
+  if (!t->private_data || (t->private_size != 5)) {
+    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
+    return false;
+  }
+
+  return true;
+}
+
+bool
 kax_reader_c::verify_hdmv_textst_subtitle_track(kax_track_t *t) {
   if (!t->private_data || (t->private_size < 4)) {
     mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
@@ -702,6 +713,9 @@ kax_reader_c::verify_subtitle_track(kax_track_t *t) {
 
   if (t->codec.is(codec_c::type_e::S_VOBSUB))
     is_ok = verify_vobsub_subtitle_track(t);
+
+  else if (t->codec.is(codec_c::type_e::S_DVBSUB))
+    is_ok = verify_dvb_subtitle_track(t);
 
   else if (t->codec.is(codec_c::type_e::S_KATE))
     is_ok = verify_kate_subtitle_track(t);
@@ -1871,6 +1885,11 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
     show_packetizer_info(t->tnum, t->ptzr_ptr);
 
     t->sub_type = 'v';
+
+  } else if (t->codec.is(codec_c::type_e::S_DVBSUB)) {
+    set_track_packetizer(t, new dvbsub_packetizer_c(this, nti, memory_c::clone(t->private_data, t->private_size)));
+    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    t->sub_type = 'p';
 
   } else if (t->codec.is(codec_c::type_e::S_WEBVTT)) {
     set_track_packetizer(t, new webvtt_packetizer_c(this, nti));
