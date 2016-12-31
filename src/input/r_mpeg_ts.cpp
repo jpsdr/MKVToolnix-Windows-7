@@ -36,6 +36,7 @@
 #include "common/strings/formatting.h"
 #include "input/aac_framing_packet_converter.h"
 #include "input/bluray_pcm_channel_removal_packet_converter.h"
+#include "input/dvbsub_pes_framing_removal_packet_converter.h"
 #include "input/r_mpeg_ts.h"
 #include "input/teletext_to_srt_packet_converter.h"
 #include "input/truehd_ac3_splitting_packet_converter.h"
@@ -43,6 +44,7 @@
 #include "output/p_ac3.h"
 #include "output/p_avc.h"
 #include "output/p_dts.h"
+#include "output/p_dvbsub.h"
 #include "output/p_hdmv_pgs.h"
 #include "output/p_hdmv_textst.h"
 #include "output/p_hevc_es.h"
@@ -497,6 +499,14 @@ track_c::new_stream_s_hdmv_textst() {
   return 0;
 }
 
+int
+track_c::new_stream_s_dvbsub() {
+  if (!m_codec_private_data || (5 != m_codec_private_data->get_size()))
+      return FILE_STATUS_DONE;
+
+  return 0;
+}
+
 bool
 track_c::has_packetizer()
   const {
@@ -704,21 +714,29 @@ track_c::parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descripto
 }
 
 bool
-track_c::parse_vobsub_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
-                                     pmt_pid_info_t const &pmt_pid_info) {
-  if (pmt_pid_info.stream_type != stream_type_e::iso_13818_pes_private)
+track_c::parse_subtitling_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
+                                         pmt_pid_info_t const &pmt_pid_info) {
+  // Bits:
+  // 24: ISO 639 language code
+  //  8: subtitling type
+  // 16: composition page ID
+  // 16: ancillary page ID
+
+  if (   (pmt_pid_info.stream_type != stream_type_e::iso_13818_pes_private)
+      || (pmt_descriptor.length     < 8))
     return false;
 
-  type  = pid_type_e::subtitles;
-  codec = codec_c::look_up(codec_c::type_e::S_VOBSUB);
+  type                 = pid_type_e::subtitles;
+  codec                = codec_c::look_up(codec_c::type_e::S_DVBSUB);
+  m_codec_private_data = memory_c::alloc(5);
+  auto codec_private   = m_codec_private_data->get_buffer();
+  auto descriptor      = reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1);
 
-  if (pmt_descriptor.length >= 8)
-    // Bits:
-    //  0–23: ISO 639 language code
-    // 24–31: subtitling type
-    // 32–47: composition page ID
-    // 48–63: ancillary page ID
-    parse_iso639_language_from(&pmt_descriptor + 1);
+  parse_iso639_language_from(descriptor);
+
+  put_uint16_be(&codec_private[0], get_uint16_be(&descriptor[4])); // composition page ID
+  put_uint16_be(&codec_private[2], get_uint16_be(&descriptor[6])); // ancillary page ID
+  codec_private[4] = descriptor[3];                                // subtitling type
 
   return true;
 }
@@ -1402,7 +1420,7 @@ reader_c::parse_pmt(track_c &track) {
           track->parse_srt_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x59: // Subtitles descriptor
-          track->parse_vobsub_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+          track->parse_subtitling_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x6A: // AC-3 descriptor
         case 0x7A: // E-AC-3 descriptor
@@ -1674,6 +1692,9 @@ reader_c::determine_track_parameters(track_c &track) {
     if (track.codec.is(codec_c::type_e::S_HDMV_TEXTST))
       return track.new_stream_s_hdmv_textst();
 
+    else if (track.codec.is(codec_c::type_e::S_DVBSUB))
+      return track.new_stream_s_dvbsub();
+
   } else if (track.type != pid_type_e::audio)
     return -1;
 
@@ -1782,6 +1803,9 @@ reader_c::create_packetizer(int64_t id) {
   else if (track->codec.is(codec_c::type_e::S_SRT))
     create_srt_subtitles_packetizer(track);
 
+  else if (track->codec.is(codec_c::type_e::S_DVBSUB))
+    create_dvbsub_subtitles_packetizer(track);
+
   if (-1 != track->ptzr) {
     auto ptzr                 = PTZR(track->ptzr);
     m_ptzr_to_track_map[ptzr] = track;
@@ -1875,6 +1899,12 @@ reader_c::create_srt_subtitles_packetizer(track_ptr const &track) {
 
   converter.demux_page(*track->m_ttx_wanted_page, PTZR(track->ptzr));
   converter.override_encoding(*track->m_ttx_wanted_page, track->language);
+}
+
+void
+reader_c::create_dvbsub_subtitles_packetizer(track_ptr const &track) {
+  track->ptzr = add_packetizer(new dvbsub_packetizer_c{this, m_ti, track->m_codec_private_data});
+  track->converter.reset(new dvbsub_pes_framing_removal_packet_converter_c{PTZR(track->ptzr)});
 }
 
 void

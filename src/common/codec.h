@@ -85,6 +85,7 @@
 #define MKV_S_KATE       "S_KATE"
 #define MKV_S_HDMV_PGS   "S_HDMV/PGS"
 #define MKV_S_HDMV_TEXTST "S_HDMV/TEXTST"
+#define MKV_S_DVBSUB      "S_DVBSUB"
 
 #define MKV_B_VOBBTN     "B_VOBBTN"
 
@@ -133,7 +134,8 @@ public:
     , A_VSELP
     , A_WAVPACK4
 
-    , S_HDMV_PGS = 0x3000
+    , S_DVBSUB = 0x3000
+    , S_HDMV_PGS
     , S_HDMV_TEXTST
     , S_KATE
     , S_SRT

@@ -340,12 +340,13 @@ public:
   int new_stream_a_pcm();
   int new_stream_a_truehd();
   int new_stream_s_hdmv_textst();
+  int new_stream_s_dvbsub();
 
   bool parse_ac3_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_dts_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
-  bool parse_vobsub_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
+  bool parse_subtitling_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
 
   bool has_packetizer() const;
 
@@ -453,6 +454,7 @@ private:
   void create_hdmv_pgs_subtitles_packetizer(track_ptr &track);
   void create_hdmv_textst_subtitles_packetizer(track_ptr const &track);
   void create_srt_subtitles_packetizer(track_ptr const &track);
+  void create_dvbsub_subtitles_packetizer(track_ptr const &track);
 
   void determine_global_timestamp_offset();
 

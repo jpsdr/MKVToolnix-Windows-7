@@ -64,6 +64,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("Vorbis",                  type_e::A_VORBIS,       track_audio,    "vor[1b]|A_VORBIS",                      std::vector<uint16_t>{ 0x566fu, 0xfffeu });
   ms_codecs.emplace_back("WavPack4",                type_e::A_WAVPACK4,     track_audio,    "wvpk|A_WAVPACK4");
 
+  ms_codecs.emplace_back("DVBSUB",                  type_e::S_DVBSUB,       track_subtitle, MKV_S_DVBSUB);
   ms_codecs.emplace_back("HDMV PGS",                type_e::S_HDMV_PGS,     track_subtitle, MKV_S_HDMV_PGS);
   ms_codecs.emplace_back("HDMV TextST",             type_e::S_HDMV_TEXTST,  track_subtitle, MKV_S_HDMV_TEXTST);
   ms_codecs.emplace_back("Kate",                    type_e::S_KATE,         track_subtitle, "kate|S_KATE");
