@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: added support for Digital Video Broadcasting (DVB) subtitles
+  (CodecID `S_DVBSUB`). They can be read from MPEG transport streams and from
+  Matroska files. Implements #1843.
+
 ## Build system changes
 
 * CURL is no longer used by MKVToolNix and is therefore not required
@@ -6676,3 +6682,6 @@
 * Support for KaxTrackLanguage and ISO639 languages.
 
 
+<!-- Local Variables: -->
+<!-- fill-column: 78 -->
+<!-- End: -->
