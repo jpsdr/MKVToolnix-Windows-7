@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QNetworkAccessManager>
+#include <QNetworkProxyFactory>
 #include <QNetworkReply>
 #include <QUrl>
 
@@ -39,6 +40,7 @@ NetworkAccessManager::manager() {
 
   if (!d->m_manager) {
     qDebug() << "NetworkAccessManager::manager: creating QNetworkAccessManager";
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
     d->m_manager = new QNetworkAccessManager{this};
   }
 
