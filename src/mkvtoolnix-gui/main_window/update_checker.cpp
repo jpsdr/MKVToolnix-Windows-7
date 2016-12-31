@@ -59,8 +59,12 @@ UpdateChecker::start() {
   auto &manager = App::instance()->networkAccessManager();
   auto urls     = QVector<std::string>{ MTX_VERSION_CHECK_URL };
 
-  if (d->m_retrieveReleasesInfo)
+  debugging_c::requested("version_check_url", &urls[0]);
+
+  if (d->m_retrieveReleasesInfo) {
     urls << MTX_RELEASES_INFO_URL;
+    debugging_c::requested("releases_info_url", &urls[1]);
+  }
 
   connect(&manager, &Util::NetworkAccessManager::downloadFinished, this, &UpdateChecker::handleDownloadedContent);
 
