@@ -90,7 +90,7 @@ public:
   static void invalidate_cache();
 };
 
-#define mxdebug(msg) debugging_c::output((boost::format("Debug> %1%:%2%: %3%") % __FILE__ % __LINE__ % (msg)).str())
+#define mxdebug(msg) debugging_c::output((boost::format("Debug> %1%:%|2$04d|: %3%") % __FILE__ % __LINE__ % (msg)).str())
 
 #define mxdebug_if(condition, msg) \
   if (condition) {                 \
