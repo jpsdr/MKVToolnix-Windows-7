@@ -339,6 +339,8 @@ struct qtmp4_demuxer_c {
   void parse_video_header_priv_atoms(uint64_t atom_size, int level);
   void parse_subtitles_header_priv_atoms(uint64_t atom_size, int level);
 
+  void parse_aac_esds_decoder_config();
+
   bool verify_audio_parameters();
   bool verify_alac_audio_parameters();
   bool verify_dts_audio_parameters();
