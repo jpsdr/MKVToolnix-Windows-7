@@ -6,6 +6,12 @@
   (CodecID `S_DVBSUB`). They can be read from MPEG transport streams and from
   Matroska files. Implements #1843.
 
+## Bug fixes
+
+* mkvmerge, MP4: fixed detection of MP3 audio when the object type ID in the
+  ESDS signals MP2 and the track headers have invalid values for number of
+  channels or sampling frequency. Fixes #1844.
+
 ## Build system changes
 
 * CURL is no longer used by MKVToolNix and is therefore not required

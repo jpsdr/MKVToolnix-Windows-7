@@ -2935,7 +2935,7 @@ qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
 
 bool
 qtmp4_demuxer_c::verify_audio_parameters() {
-  if (codec.is(codec_c::type_e::A_MP3))
+  if (codec.is(codec_c::type_e::A_MP2) || codec.is(codec_c::type_e::A_MP3))
     derive_track_params_from_mp3_audio_bitstream();
 
   else if (codec.is(codec_c::type_e::A_AC3))
