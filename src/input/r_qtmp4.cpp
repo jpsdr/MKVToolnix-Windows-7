@@ -1462,6 +1462,7 @@ qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_cptr &new_dmx,
   }
 
   new_dmx->determine_codec();
+  mxdebug_if(m_debug_headers, boost::format("%1%Codec determination result: %2%\n") % space(level * 2 + 1) % new_dmx->codec);
 }
 
 file_status_e
