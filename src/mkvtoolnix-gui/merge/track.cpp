@@ -114,16 +114,16 @@ Track::setDefaults() {
   if (isAudio() && settings.m_setAudioDelayFromFileName)
     m_delay = extractAudioDelayFromFileName();
 
-  m_forcedTrackFlag        = m_properties.value("forced_track").toBool() ? 1 : 0;
-  m_forcedTrackFlagWasSet  = m_forcedTrackFlag == 1;
-  m_defaultTrackFlagWasSet = m_properties.value("default_track").toBool();
+  m_forcedTrackFlag            = m_properties.value("forced_track").toBool() ? 1 : 0;
+  m_forcedTrackFlagWasSet      = m_forcedTrackFlag == 1;
+  m_defaultTrackFlagWasSet     = m_properties.value("default_track").toBool();
   m_defaultTrackFlagWasPresent = m_properties.contains("default_track");
-  m_name                   = m_properties.value("track_name").toString();
-  m_nameWasPresent         = !m_name.isEmpty();
-  m_cropping               = m_properties.value("cropping").toString();
-  m_aacSbrWasDetected      = m_properties.value("aac_is_sbr").toString().contains(QRegExp{"1|true"});
-  m_stereoscopy            = m_properties.contains("stereo_mode") ? m_properties.value("stereo_mode").toUInt() + 1 : 0;
-  m_characterSet           = m_properties.value("text_subtitles").toBool() && m_file && (m_file->m_type != FILE_TYPE_MATROSKA) ? settings.m_defaultSubtitleCharset : Q("");
+  m_name                       = m_properties.value("track_name").toString();
+  m_nameWasPresent             = !m_name.isEmpty();
+  m_cropping                   = m_properties.value("cropping").toString();
+  m_aacSbrWasDetected          = m_properties.value("aac_is_sbr").toString().contains(QRegExp{"1|true"});
+  m_stereoscopy                = m_properties.contains("stereo_mode") ? m_properties.value("stereo_mode").toUInt() + 1 : 0;
+  m_characterSet               = m_properties.value("text_subtitles").toBool() && m_file && (m_file->m_type != FILE_TYPE_MATROSKA) ? settings.m_defaultSubtitleCharset : Q("");
 
   auto language = m_properties.value("language").toString();
   if (   language.isEmpty()
