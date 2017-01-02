@@ -56,8 +56,10 @@ FileIdentifier::identify() {
   if (d->m_fileName.isEmpty())
     return false;
 
-  if (retrieveResultFromCache())
+  if (retrieveResultFromCache()) {
+    setDefaults();
     return d->m_succeeded;
+  }
 
   auto &cfg = Settings::get();
 
@@ -80,6 +82,8 @@ FileIdentifier::identify() {
   d->m_succeeded = parseOutput();
 
   storeResultInCache();
+
+  setDefaults();
 
   return d->m_succeeded;
 }
@@ -313,8 +317,6 @@ FileIdentifier::parseTrack(QVariantMap const &obj) {
   track->m_properties = obj.value("properties").toMap();
 
   d->m_file->m_tracks << track;
-
-  track->setDefaults();
 }
 
 void
@@ -445,6 +447,14 @@ FileIdentifier::cleanAllCacheFiles() {
 QString
 FileIdentifier::cacheCategory() {
   return Q("fileIdentifier");
+}
+
+void
+FileIdentifier::setDefaults() {
+  Q_D(FileIdentifier);
+
+  if (d->m_file)
+    d->m_file->setDefaults();
 }
 
 }}}

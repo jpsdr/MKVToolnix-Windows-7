@@ -8,6 +8,9 @@
 
 ## Bug fixes
 
+* GUI: multiplexer: changing default values in the prerefences (e.g. the
+  default track language to set) did not affect files whose identification
+  results had already been cached.
 * mkvmerge, MP4: fixed detection of MP3 audio when the object type ID in the
   ESDS signals MP2 and the track headers have invalid values for number of
   channels or sampling frequency. Fixes #1844.

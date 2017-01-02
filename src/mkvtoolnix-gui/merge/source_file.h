@@ -53,6 +53,7 @@ public:
   virtual void saveSettings(Util::ConfigFile &settings) const;
   virtual void loadSettings(MuxConfig::Loader &l);
   virtual void fixAssociations(MuxConfig::Loader &l);
+  virtual void setDefaults();
 
   virtual Track *findNthOrLastTrackOfType(Track::Type type, int nth) const;
 

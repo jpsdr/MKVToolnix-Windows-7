@@ -307,4 +307,13 @@ SourceFile::buildMkvmergeOptions(QStringList &options)
     appendedFile->buildMkvmergeOptions(options);
 }
 
+void
+SourceFile::setDefaults() {
+  for (auto const &track : m_tracks)
+    track->setDefaults();
+
+  for (auto const &appendedFile : m_appendedFiles)
+    appendedFile->setDefaults();
+}
+
 }}}

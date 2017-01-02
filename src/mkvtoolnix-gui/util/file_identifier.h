@@ -51,6 +51,8 @@ protected:
   virtual void parseTrackTags(QVariantMap const &obj);
   virtual void parseTrack(QVariantMap const &obj);
 
+  virtual void setDefaults();
+
   virtual void setError(QString const &errorTitle, QString const &errorText);
 
   virtual QString cacheKey() const;
