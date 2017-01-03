@@ -109,6 +109,9 @@ Track::isPropertySet(QString const &property)
 
 void
 Track::setDefaults() {
+  if (!isRegular())
+    return;
+
   auto &settings = Util::Settings::get();
 
   if (isAudio() && settings.m_setAudioDelayFromFileName)
