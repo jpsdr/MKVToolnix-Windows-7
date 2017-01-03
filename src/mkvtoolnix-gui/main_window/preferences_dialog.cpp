@@ -39,6 +39,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   Util::restoreWidgetGeometry(this);
 
   // GUI page
+  ui->cbGuiCheckForUpdates->setChecked(m_cfg.m_checkForUpdates);
   ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
   ui->cbGuiShowToolSelector->setChecked(m_cfg.m_showToolSelector);
   ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
@@ -46,7 +47,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiWarnBeforeOverwriting->setChecked(m_cfg.m_warnBeforeOverwriting);
   ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
   setupFont();
-  setupOnlineCheck();
   setupInterfaceLanguage();
   setupTabPositions();
   setupWhenToSetDefaultLanguage();
@@ -391,12 +391,6 @@ PreferencesDialog::setupConnections() {
   connect(ui->tbOftenUsedLanguages,                       &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedLanguagesOnly);
   connect(ui->tbOftenUsedCountries,                       &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCountriesOnly);
   connect(ui->tbOftenUsedCharacterSets,                   &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCharacterSetsOnly);
-}
-
-void
-PreferencesDialog::setupOnlineCheck() {
-  ui->cbGuiCheckForUpdates->setChecked(m_cfg.m_checkForUpdates);
-  ui->cbGuiCheckForUpdates->setVisible(false);
 }
 
 void
