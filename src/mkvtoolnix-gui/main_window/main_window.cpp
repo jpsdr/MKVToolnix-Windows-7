@@ -385,7 +385,7 @@ MainWindow::checkForUpdates() {
 
 void
 MainWindow::silentlyCheckForUpdates() {
-  auto forceUpdateCheck = true; // mtx::sys::get_environment_variable("FORCE_UPDATE_CHECK") == "1";
+  auto forceUpdateCheck = mtx::sys::get_environment_variable("FORCE_UPDATE_CHECK") == "1";
 
   if (!forceUpdateCheck && !Util::Settings::get().m_checkForUpdates)
     return;
