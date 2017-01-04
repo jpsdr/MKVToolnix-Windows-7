@@ -1555,7 +1555,7 @@ reader_c::parse_pes(track_c &track) {
 
     track.m_timestamp = dts;
 
-    mxdebug_if(m_debug_packet, boost::format("parse_pes: PID %1% PTS found: %1% DTS: %3%\n") % track.pid % pts % dts);
+    mxdebug_if(m_debug_packet, boost::format("parse_pes: PID %1% PTS found: %2% DTS: %3%\n") % track.pid % pts % dts);
   }
 
   if (processing_state_e::probing == f.m_state)
