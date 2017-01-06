@@ -82,6 +82,11 @@ enum class stream_type_e : unsigned char {
   stream_subtitles_hdmv_textst = 0x92, // HDMV TextST subtitles
 };
 
+enum class drop_decision_e {
+  keep,
+  drop,
+};
+
 #if defined(COMP_MSC)
 #pragma pack(push,1)
 #endif
@@ -352,6 +357,7 @@ public:
 
   void set_pid(uint16_t new_pid);
 
+  drop_decision_e handle_bogus_subtitle_timestamps(timestamp_c &pts, timestamp_c &dts);
   void handle_timestamp_wrap(timestamp_c &pts, timestamp_c &dts);
   bool detect_timestamp_wrap(timestamp_c const &timestamp) const;
   void adjust_timestamp_for_wrap(timestamp_c &timestamp);
@@ -362,6 +368,8 @@ public:
   void process(packet_cptr const &packet);
 
   void parse_iso639_language_from(void const *buffer);
+
+  void reset_processing_state();
 };
 
 struct file_t {
@@ -372,7 +380,7 @@ struct file_t {
 
   bool m_pat_found, m_pmt_found;
   int m_es_to_process;
-  timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp, m_timestamp_restriction_min, m_timestamp_restriction_max, m_timestamp_mpls_sync;
+  timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_timestamp_restriction_min, m_timestamp_restriction_max, m_timestamp_mpls_sync, m_last_non_subtitle_pts, m_last_non_subtitle_dts;
 
   processing_state_e m_state;
   uint64_t m_probe_range;
@@ -380,10 +388,12 @@ struct file_t {
   bool m_file_done, m_packet_sent_to_packetizer;
 
   unsigned int m_detected_packet_size, m_num_pat_crc_errors, m_num_pmt_crc_errors;
-  bool m_validate_pat_crc, m_validate_pmt_crc;
+  bool m_validate_pat_crc, m_validate_pmt_crc, m_has_audio_or_video_track;
 
   file_t(mm_io_cptr const &in);
+
   int64_t get_queued_bytes() const;
+  void reset_processing_state(processing_state_e new_state);
 };
 using file_cptr = std::shared_ptr<file_t>;
 
@@ -456,6 +466,7 @@ private:
   void create_srt_subtitles_packetizer(track_ptr const &track);
   void create_dvbsub_subtitles_packetizer(track_ptr const &track);
 
+  void reset_processing_state(processing_state_e new_state);
   void determine_global_timestamp_offset();
 
   bfs::path find_file(bfs::path const &source_file, std::string const &sub_directory, std::string const &extension) const;

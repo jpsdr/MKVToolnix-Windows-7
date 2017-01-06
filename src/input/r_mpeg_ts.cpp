@@ -134,16 +134,6 @@ track_c::send_to_packetizer() {
     timestamp_to_use     -= std::max(f.m_global_timestamp_offset, min.valid() ? min : timestamp_c::ns(0));
   }
 
-  if (timestamp_to_use.valid()) {
-    if (mtx::included_in(type, pid_type_e::video, pid_type_e::audio))
-      f.m_last_non_subtitle_timestamp = timestamp_to_use;
-
-    else if (   (type == pid_type_e::subtitles)
-             && f.m_last_non_subtitle_timestamp.valid()
-             && ((timestamp_to_use - f.m_last_non_subtitle_timestamp).abs() >= timestamp_c::s(5)))
-      timestamp_to_use = f.m_last_non_subtitle_timestamp;
-  }
-
   mxdebug_if(m_debug_delivery, boost::format("send_to_packetizer: PID %1% expected %2% actual %3% timestamp_to_use %4% m_previous_timestamp %5%\n")
              % pid % pes_payload_size_to_read % pes_payload_read->get_size() % timestamp_to_use % m_previous_timestamp);
 
@@ -588,6 +578,41 @@ track_c::handle_timestamp_wrap(timestamp_c &pts,
   // mxinfo(boost::format("pid %5% PTS before %1% now %2% wrapped %3% reset prevvalid %4% diff %6%\n") % before % pts % m_timestamps_wrapped % m_previous_valid_timestamp % pid % (pts - m_previous_valid_timestamp));
 }
 
+drop_decision_e
+track_c::handle_bogus_subtitle_timestamps(timestamp_c &pts,
+                                          timestamp_c &dts) {
+  auto &f = reader.file();
+
+  if (processing_state_e::muxing != f.m_state)
+    return drop_decision_e::keep;
+
+  // Sometimes the subtitle timestamps aren't valid, they can be off
+  // from the audio/video timestamps by hours. In such a case replace
+  // the subtitle's timestamps with last valid one from audio/video
+  // packets.
+  if (   mtx::included_in(type, pid_type_e::audio, pid_type_e::video)
+      && pts.valid()) {
+    f.m_last_non_subtitle_pts = pts;
+    f.m_last_non_subtitle_dts = dts;
+    return drop_decision_e::keep;
+
+  }
+
+  if (pid_type_e::subtitles != type)
+    return drop_decision_e::keep;
+
+  if (!f.m_last_non_subtitle_pts.valid())
+    return f.m_has_audio_or_video_track ? drop_decision_e::drop : drop_decision_e::keep;
+
+  if (   !pts.valid()
+      || ((pts - f.m_last_non_subtitle_pts).abs() >= timestamp_c::s(5))) {
+    pts = f.m_last_non_subtitle_pts;
+    dts = f.m_last_non_subtitle_dts;
+  }
+
+  return drop_decision_e::keep;
+}
+
 bool
 track_c::parse_ac3_pmt_descriptor(pmt_descriptor_t const &,
                                   pmt_pid_info_t const &pmt_pid_info) {
@@ -782,6 +807,18 @@ track_c::derive_hdmv_textst_pts_from_content() {
   return timestamp;
 }
 
+void
+track_c::reset_processing_state() {
+  m_timestamp.reset();
+  m_previous_timestamp.reset();
+  m_previous_valid_timestamp.reset();
+
+  clear_pes_payload();
+  processed            = false;
+  m_timestamps_wrapped = false;
+  m_timestamp_wrap_add = timestamp_c::ns(0);
+}
+
 // ------------------------------------------------------------
 
 file_t::file_t(mm_io_cptr const &in)
@@ -789,7 +826,6 @@ file_t::file_t(mm_io_cptr const &in)
   , m_pat_found{}
   , m_pmt_found{}
   , m_es_to_process{}
-  , m_global_timestamp_offset{}
   , m_stream_timestamp{timestamp_c::ns(0)}
   , m_timestamp_mpls_sync{timestamp_c::ns(0)}
   , m_state{processing_state_e::probing}
@@ -801,6 +837,7 @@ file_t::file_t(mm_io_cptr const &in)
   , m_num_pmt_crc_errors{}
   , m_validate_pat_crc{true}
   , m_validate_pmt_crc{true}
+  , m_has_audio_or_video_track{}
 {
 }
 
@@ -813,6 +850,13 @@ file_t::get_queued_bytes()
     bytes += ptzr->get_queued_bytes();
 
   return bytes;
+}
+
+void
+file_t::reset_processing_state(processing_state_e new_state) {
+  m_state = new_state;
+  m_last_non_subtitle_pts.reset();
+  m_last_non_subtitle_dts.reset();
 }
 
 // ------------------------------------------------------------
@@ -1014,9 +1058,19 @@ reader_c::read_headers() {
 }
 
 void
+reader_c::reset_processing_state(processing_state_e new_state) {
+  for (auto const &file : m_files)
+    file->reset_processing_state(new_state);
+
+  for (auto const &track : m_tracks)
+    track->reset_processing_state();
+}
+
+void
 reader_c::determine_global_timestamp_offset() {
-  auto &f   = file();
-  f.m_state = processing_state_e::determining_timestamp_offset;
+  reset_processing_state(processing_state_e::determining_timestamp_offset);
+
+  auto &f = file();
 
   f.m_in->setFilePointer(0);
   f.m_in->clear_eof();
@@ -1047,12 +1101,7 @@ reader_c::determine_global_timestamp_offset() {
   f.m_in->setFilePointer(0);
   f.m_in->clear_eof();
 
-  for (auto const &track : m_tracks) {
-    track->clear_pes_payload();
-    track->processed            = false;
-    track->m_timestamps_wrapped = false;
-    track->m_timestamp_wrap_add = timestamp_c::ns(0);
-  }
+  reset_processing_state(processing_state_e::muxing);
 }
 
 void
@@ -1522,6 +1571,10 @@ reader_c::parse_pes(track_c &track) {
   auto orig_pts = pts;
   auto orig_dts = dts;
 
+  auto result = track.handle_bogus_subtitle_timestamps(pts, dts);
+
+  if (drop_decision_e::drop == result)
+    return;
 
   track.handle_timestamp_wrap(pts, dts);
 
@@ -1744,6 +1797,10 @@ reader_c::probe_packet_complete(track_c &track) {
     track.processed = true;
     track.probed_ok = true;
     --f.m_es_to_process;
+
+    if (mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video))
+      f.m_has_audio_or_video_track = true;
+
     mxdebug_if(m_debug_headers, boost::format("probe_packet_complete: ES to process: %1%\n") % f.m_es_to_process);
   }
 }
@@ -1912,9 +1969,6 @@ reader_c::create_dvbsub_subtitles_packetizer(track_ptr const &track) {
 void
 reader_c::create_packetizers() {
   determine_global_timestamp_offset();
-
-  for (auto const &file : m_files)
-    file->m_state = processing_state_e::muxing;
 
   mxdebug_if(m_debug_headers, boost::format("create_packetizers: create packetizers...\n"));
   for (std::size_t i = 0u, end = m_tracks.size(); i < end; ++i)
@@ -2121,12 +2175,20 @@ reader_c::find_track_for_pid(uint16_t pid)
   const {
   auto &f = *m_files[m_current_file];
 
-  for (auto const &track : m_tracks)
-    if (   (track->m_file_num == m_current_file)
-        && (track->pid        == pid)
-        && (   mtx::included_in(f.m_state, processing_state_e::probing, processing_state_e::determining_timestamp_offset)
-            || track->has_packetizer()))
+  for (auto const &track : m_tracks) {
+    if (   (track->m_file_num != m_current_file)
+        || (track->pid        != pid))
+      continue;
+
+    if (track->has_packetizer() || mtx::included_in(f.m_state, processing_state_e::probing, processing_state_e::determining_timestamp_offset))
       return track;
+
+    for (auto const &coupled_track : track->m_coupled_tracks)
+      if (coupled_track->has_packetizer())
+        return coupled_track;
+
+    return track;
+  }
 
   return {};
 }

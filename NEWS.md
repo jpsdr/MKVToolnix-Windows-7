@@ -2,6 +2,9 @@
 
 ## New features and enhancements
 
+* mkvmerge: MPEG TS: added a workaround for files where the subtitle packets
+  are mulitplexed properly, but where their timestamps are way off from the
+  audio and video timestamps. Implements #1841.
 * mkvmerge: added support for Digital Video Broadcasting (DVB) subtitles
   (CodecID `S_DVBSUB`). They can be read from MPEG transport streams and from
   Matroska files. Implements #1843.
