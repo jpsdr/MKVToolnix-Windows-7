@@ -208,19 +208,12 @@ Building and running unit tests is completely optional. If you want to
 do this, you have to follow these steps:
 
 1. Download the "googletest" framework from
-   http://code.google.com/p/googletest/ (at the time of writing the
-   file to download was "gtest-1.6.0.zip")
+   https://github.com/google/googletest/ (at the time of writing the
+   file to download was "googletest-release-1.8.0.tar.gz")
 
-2. Make `gtest` usable:
-
-  1. Either extract the framework inside the "lib" sub-folder and
-     rename the resulting folder "gtest-1.6.0" to "gtest"
-
-     or…
-
-  2. Extract the archive somewhere and create a symbolic link to it
-     inside the "lib" folder called or create a symbolic link called
-     "gtest".
+2. Extract the archive somewhere and create a symbolic link to its
+   `googletest-release-1.8.0/googletest/include/gtest` sub-directory
+   inside MKVToolNix' "lib" directory.
 
 3. Configure MKVToolNix normally.
 
