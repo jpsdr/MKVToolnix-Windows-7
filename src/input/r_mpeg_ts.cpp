@@ -528,7 +528,8 @@ track_c::set_pid(uint16_t new_pid) {
 }
 
 bool
-track_c::detect_timestamp_wrap(timestamp_c &timestamp) {
+track_c::detect_timestamp_wrap(timestamp_c const &timestamp)
+  const {
   static auto const s_wrap_limit = timestamp_c::mpeg(1 << 30);
 
   if (   !timestamp.valid()
@@ -1477,7 +1478,7 @@ reader_c::parse_pes(track_c &track) {
     return;
   }
 
-  timestamp_c pts, dts, orig_pts, orig_dts;
+  timestamp_c pts, dts;
   auto has_pts = false;
   auto has_dts = false;
   auto to_skip = 0u;
@@ -1518,8 +1519,9 @@ reader_c::parse_pes(track_c &track) {
   if (!track.m_use_dts)
     dts = pts;
 
-  orig_pts = pts;
-  orig_dts = dts;
+  auto orig_pts = pts;
+  auto orig_dts = dts;
+
 
   track.handle_timestamp_wrap(pts, dts);
 

@@ -353,7 +353,7 @@ public:
   void set_pid(uint16_t new_pid);
 
   void handle_timestamp_wrap(timestamp_c &pts, timestamp_c &dts);
-  bool detect_timestamp_wrap(timestamp_c &timestamp);
+  bool detect_timestamp_wrap(timestamp_c const &timestamp) const;
   void adjust_timestamp_for_wrap(timestamp_c &timestamp);
 
   timestamp_c derive_pts_from_content();
