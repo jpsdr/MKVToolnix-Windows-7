@@ -264,6 +264,10 @@ sighandler(int /* signum */) {
 
   mxinfo(Y(" done\n"));
 
+  // Manually close s_out because cleanup() will discard any remaining
+  // write buffer content in s_out.
+  s_out->close();
+
   cleanup();
 
   mxerror(Y("mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"));
@@ -2090,7 +2094,18 @@ destroy_readers() {
 */
 void
 cleanup() {
-  s_out.reset();
+  if (s_out) {
+    // If cleanup was called as a result of an exception during
+    // writing due to the file system being full, the destructor would
+    // normally write remaining buffered before closing the file. This
+    // would lead to another exception and another error
+    // message. However, the regular paths all close the file
+    // manually. Therefore any buffered content remaining at this
+    // point can only be due to an error having occurred. The content
+    // can therefore be discarded.
+    dynamic_cast<mm_write_buffer_io_c &>(*s_out).discard_buffer();
+    s_out.reset();
+  }
 
   g_cluster_helper.reset();
 

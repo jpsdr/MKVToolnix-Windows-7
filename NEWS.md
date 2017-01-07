@@ -14,6 +14,8 @@
 
 ## Bug fixes
 
+* mkvmerge: fixed that the error message "not enough space on disk" was shown
+  twice on some operating systems. Fixes #1850.
 * mkvmerge, Matroska: if a codec delay is set for a track in the input file,
   it is kept. Fixes #1849.
 * GUI: multiplexer: changing default values in the prerefences (e.g. the
