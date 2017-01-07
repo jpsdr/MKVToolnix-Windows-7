@@ -81,6 +81,7 @@ track_c::track_c(reader_c &p_reader,
   , probed_ok{}
   , ptzr{-1}
   , m_timestamp_wrap_add{timestamp_c::ns(0)}
+  , m_subtitle_timestamp_correction{timestamp_c::ns(0)}
   , v_interlaced{}
   , v_version{}
   , v_width{}
@@ -601,13 +602,22 @@ track_c::handle_bogus_subtitle_timestamps(timestamp_c &pts,
   if (pid_type_e::subtitles != type)
     return drop_decision_e::keep;
 
+  if (pts.valid())
+    pts += m_subtitle_timestamp_correction;
+  if (dts.valid())
+    dts += m_subtitle_timestamp_correction;
+
   if (!f.m_last_non_subtitle_pts.valid())
     return f.m_has_audio_or_video_track ? drop_decision_e::drop : drop_decision_e::keep;
 
   if (   !pts.valid()
       || ((pts - f.m_last_non_subtitle_pts).abs() >= timestamp_c::s(5))) {
-    pts = f.m_last_non_subtitle_pts;
-    dts = f.m_last_non_subtitle_dts;
+    auto additional_correction       = f.m_last_non_subtitle_pts - pts;
+    m_subtitle_timestamp_correction += additional_correction;
+    pts                              = f.m_last_non_subtitle_pts;
+    dts                              = f.m_last_non_subtitle_dts;
+
+    mxdebug_if(m_debug_timestamp_wrapping, boost::format("additional subtitle correction %1% total %2%\n") % additional_correction % m_subtitle_timestamp_correction);
   }
 
   return drop_decision_e::keep;

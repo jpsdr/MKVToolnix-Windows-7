@@ -289,7 +289,7 @@ public:
   bool probed_ok;
   int ptzr;                         // the actual packetizer instance
 
-  timestamp_c m_timestamp, m_previous_timestamp, m_previous_valid_timestamp, m_timestamp_wrap_add;
+  timestamp_c m_timestamp, m_previous_timestamp, m_previous_valid_timestamp, m_timestamp_wrap_add, m_subtitle_timestamp_correction;
 
   // video related parameters
   bool v_interlaced;
