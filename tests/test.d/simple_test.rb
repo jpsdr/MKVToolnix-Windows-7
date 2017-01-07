@@ -329,7 +329,7 @@ class SimpleTest
     json_store = JsonSchema::DocumentStore.new
     parser     = JsonSchema::Parser.new
     expander   = JsonSchema::ReferenceExpander.new
-    schema     = parser.parse JSON.load(File.read("../doc/json-schema/mkvmerge-identification-output-schema-v5.json"))
+    schema     = parser.parse JSON.load(File.read("../doc/json-schema/mkvmerge-identification-output-schema-v6.json"))
 
     expander.expand(schema, store: json_store)
     json_store.add_schema schema

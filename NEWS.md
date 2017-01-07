@@ -2,6 +2,9 @@
 
 ## New features and enhancements
 
+* mkvmerge: the JSON identification result now includes a track's codec delay
+  if set (only for Matroska source files). The JSON schema version has been
+  bumped to 6.
 * mkvmerge: MPEG TS: added a workaround for files where the subtitle packets
   are mulitplexed properly, but where their timestamps are way off from the
   audio and video timestamps. Implements #1841.
