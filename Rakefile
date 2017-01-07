@@ -231,7 +231,9 @@ namespace :apps do
 end
 
 # Store compiler block for re-use
-cxx_compiler = lambda do |t|
+cxx_compiler = lambda do |*args|
+  t = args.first
+
   create_dependency_dirs
 
   source = t.source ? t.source : t.prerequisites.first
