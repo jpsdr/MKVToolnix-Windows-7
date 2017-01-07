@@ -92,4 +92,10 @@ public:
   }
 };
 
+class kax_cues_with_cleanup_c: public KaxCues {
+public:
+  kax_cues_with_cleanup_c();
+  virtual ~kax_cues_with_cleanup_c();
+};
+
 #endif // MTX_LIBMATROSKA_EXTENSIONS

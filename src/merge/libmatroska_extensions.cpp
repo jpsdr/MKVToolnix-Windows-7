@@ -156,3 +156,15 @@ kax_cluster_c::delete_non_blocks() {
 
   RemoveAll();
 }
+
+kax_cues_with_cleanup_c::kax_cues_with_cleanup_c()
+  : KaxCues{}
+{
+}
+
+kax_cues_with_cleanup_c::~kax_cues_with_cleanup_c() {
+  // If rendering fails e.g. due to the file system being full,
+  // libmatroska may assert() due to myTempReferences being
+  // non-eempty. We don't care about that assertion.
+  myTempReferences.clear();
+}
