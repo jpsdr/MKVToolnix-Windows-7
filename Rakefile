@@ -18,9 +18,16 @@ if FileUtils.pwd != File.dirname(__FILE__)
 end
 
 # Set number of threads to use if it is unset and we're running with
-# drake
+# drake.
 if Rake.application.options.respond_to?(:threads) && [nil, 0, 1].include?(Rake.application.options.threads) && !ENV['DRAKETHREADS'].nil?
   Rake.application.options.threads = ENV['DRAKETHREADS'].to_i
+end
+
+# For newer rake turn on parallel processing, too. Newer rake versions
+# use an OpenStruct, though, so testing with responds_to? won't work.
+version = Rake::VERSION.gsub(%r{[^0-9\.]+}, "").split(%r{\.}).map(&:to_i)
+if (version[0] > 10) || ((version[0] == 10) && (version[1] >= 1))
+  Rake.application.options.always_multitask = true
 end
 
 require "pp"
