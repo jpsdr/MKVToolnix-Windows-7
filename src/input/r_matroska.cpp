@@ -202,6 +202,12 @@ kax_track_t::handle_packetizer_output_sampling_freq() {
     ptzr_ptr->set_audio_output_sampling_freq(a_osfreq);
 }
 
+void
+kax_track_t::handle_packetizer_codec_delay() {
+  if (codec_delay.valid() && (codec_delay.to_ns() > 0))
+    ptzr_ptr->set_codec_delay(codec_delay);
+}
+
 /* Fix display dimension parameters
 
    Certain Matroska muxers abuse the DisplayWidth/DisplayHeight
@@ -1646,6 +1652,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
   t->handle_packetizer_colour();
   t->handle_packetizer_field_order();
   t->handle_packetizer_stereo_mode();
+  t->handle_packetizer_codec_delay();
 }
 
 void
@@ -1878,6 +1885,7 @@ kax_reader_c::create_audio_packetizer(kax_track_t *t,
     init_passthrough_packetizer(t, nti);
 
   t->handle_packetizer_output_sampling_freq();
+  t->handle_packetizer_codec_delay();
 }
 
 void

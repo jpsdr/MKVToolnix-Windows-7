@@ -14,6 +14,8 @@
 
 ## Bug fixes
 
+* mkvmerge, Matroska: if a codec delay is set for a track in the input file,
+  it is kept. Fixes #1849.
 * GUI: multiplexer: changing default values in the prerefences (e.g. the
   default track language to set) did not affect files whose identification
   results had already been cached.
