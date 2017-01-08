@@ -2,6 +2,9 @@
 
 ## New features and enhancements
 
+* mkvmerge: added the ISO 639-2 language codes "qaa" and "qad" (both are
+  titled "reserved for local use") as both are used often in France. See #1848
+  for more information.
 * mkvmerge: the JSON identification result now includes a track's codec delay
   if set (only for Matroska source files). The JSON schema version has been
   bumped to 6.

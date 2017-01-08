@@ -379,6 +379,8 @@ std::vector<iso639_language_t> const g_iso639_languages{
   { "Rajasthani",                                                                       "raj", std::string{}, std::string{}  },
   { "Rapanui",                                                                          "rap", std::string{}, std::string{}  },
   { "Rarotongan; Cook Islands Maori",                                                   "rar", std::string{}, std::string{}  },
+  { "Reserved for local use: qaa",                                                      "qaa", std::string{}, std::string{}  },
+  { "Reserved for local use: qad",                                                      "qad", std::string{}, std::string{}  },
   { "Romance languages",                                                                "roa", std::string{}, std::string{}  },
   { "Romanian; Moldavian; Moldovan",                                                    "rum", "ro",          "ron"          },
   { "Romansh",                                                                          "roh", "rm",          std::string{}  },
