@@ -27,4 +27,4 @@ end
 
 puts "Updating Qt resources"
 Dir.chdir $base_dir
-system "./drake dev:update-qt-resources"
+system "rake dev:update-qt-resources"

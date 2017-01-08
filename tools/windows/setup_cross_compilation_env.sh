@@ -96,11 +96,11 @@ function configure_mkvtoolnix {
 
   echo
   if [ $result -eq 0 ]; then
-    echo 'Configuration went well. Congratulations. You can now run "drake"'
+    echo 'Configuration went well. Congratulations. You can now run "rake"'
     echo 'after adding the mingw cross compiler installation directory to your PATH:'
     echo '  export PATH='${INSTALL_DIR}'/usr/bin:$PATH'
     echo '  hash -r'
-    echo '  ./drake'
+    echo '  rake'
   else
     echo "Configuration failed. Look at ${LOGFILE} as well as"
     echo "at ./config.log for hints as to why."
