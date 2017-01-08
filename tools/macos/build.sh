@@ -216,7 +216,7 @@ function build_configured_mkvtoolnix {
 
   ./configure \
     LDFLAGS="$LDFLAGS -framework CoreFoundation -headerpad_max_install_names" \
-    CXXFLAGS="-fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.9" \
+    CXXFLAGS="-fvisibility=hidden -fvisibility-inlines-hidden" \
     ${args}
 
   grep -q 'USE_QT.*yes' build-config
@@ -310,7 +310,7 @@ EOF
     <key>CFBundleVersion</key>               <string>MKVToolNix-${MTX_VER}</string>
     <key>CFBundleShortVersionString</key>    <string>${MTX_VER}</string>
     <key>NSPrincipalClass</key>              <string>NSApplication</string>
-    <key>LSMinimumSystemVersion</key>        <string>10.8.0</string>
+    <key>LSMinimumSystemVersion</key>        <string>${MACOSX_DEPLOYMENT_TARGET}</string>
     <key>CFBundleName</key>                  <string>MKVToolNix</string>
     <key>CFBundleIconFile</key>              <string>MKVToolNix.icns</string>
     <key>CFBundleDocumentTypes</key>
@@ -369,6 +369,10 @@ EOF
 
   ln -s ${dmgbuildname} ${latest_link}
 }
+
+if [[ -z $MTX_VER ]]; then
+  MTX_VER=$(awk -F, '/AC_INIT/ { gsub("[][]", "", $2); print $2 }' < ${SCRIPT_PATH}/../../configure.ac)
+fi
 
 if [[ -z $@ ]]; then
   build_autoconf
