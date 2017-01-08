@@ -9,35 +9,32 @@ Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
 
-BuildRequires: fdupes, file-devel, flac, flac-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel
+BuildRequires: fdupes, file-devel, flac, flac-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0
 
-%if 0%{?centos} && 0%{?centos} < 7
-BuildRequires: devtoolset-1.1-gcc-c++ >= 4.6.3
+%if 0%{?centos}
+BuildRequires: devtoolset-4-gcc-c++ >= 5.0.0, rubygem-drake
+%endif
+
+%if 0%{?suse_version}
+BuildRequires: gettext-tools libqt5-qtbase-devel, ruby2.1-rubygem-rake
 %else
-BuildRequires: boost-devel >= 1.46.0, ruby >= 1.9
+BuildRequires: gettext-devel, qt5-qtbase-devel
 %endif
 
 %if 0%{?suse_version}
 BuildRequires: gcc5-c++
-%else
-BuildRequires: gcc-c++ >= 4.6.3
+%endif
+
+%if 0%{?fedora}
+BuildRequires: gcc-c++ >= 4.9.0, rubypick, pugixml-devel, rubygem-rake
 %endif
 
 %if 0%{?suse_version}
 Group: Productivity/Multimedia/Other
 License: GPL-2.0
-BuildRequires: gettext-tools libqt5-qtbase-devel
-%endif
-
-%if 0%{?fedora} || 0%{?rhel} || 0%{?centos}
+%else
 Group: Applications/Multimedia
 License: GPLv2
-BuildRequires: qt5-qtbase-devel, gettext-devel
-
-%if 0%{?fedora}
-BuildRequires: rubypick, pugixml-devel
-%endif
-
 %endif
 
 %description
@@ -55,6 +52,11 @@ Authors:
 
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
+%if 0%{?centos}
+BUILD_TOOL=drake
+%else
+BUILD_TOOL=rake
+%endif
 
 %if 0%{?centos}
 export CC=/opt/rh/devtoolset-4/root/bin/gcc
@@ -69,10 +71,18 @@ export CXX=/usr/bin/g++-5
 %configure --enable-debug --enable-optimization
 
 %build
-./drake
+%if 0%{?centos}
+drake
+%else
+rake
+%endif
 
 %install
-./drake DESTDIR=$RPM_BUILD_ROOT install
+%if 0%{?centos}
+drake DESTDIR=$RPM_BUILD_ROOT install
+%else
+rake DESTDIR=$RPM_BUILD_ROOT install
+%endif
 %if 0%{?suse_version}
 strip ${RPM_BUILD_ROOT}/usr/bin/*
 %endif

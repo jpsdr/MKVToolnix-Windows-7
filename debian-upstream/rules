@@ -12,7 +12,7 @@ LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 	dh $@ --parallel
 
 override_dh_clean:
-	[ ! -f build-config ] || ./drake clean:dist
+	[ ! -f build-config ] || rake clean:dist
 
 	dh_clean src/mkvinfo-gui config.status config.log \
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
@@ -22,7 +22,7 @@ override_dh_auto_configure:
 	  --enable-debug --enable-optimization
 
 override_dh_auto_build:
-	./drake
+	rake
 
 	mv src/mkvinfo src/mkvinfo-gui
 	rm src/info/*.o src/info/*.a src/info/qt_resources.cpp
@@ -33,12 +33,12 @@ override_dh_auto_build:
 	touch -r config.h.ref config.h
 	rm config.h.ref
 
-	./drake apps:mkvinfo USE_QT=no QT_LIBS=' ' QT_INCLUDES=' '
+	rake apps:mkvinfo USE_QT=no QT_LIBS=' ' QT_INCLUDES=' '
 
 	touch src/info/qt_ui.o src/info/qt_resources.cpp src/info/qt_resources.o src/info/libmtxinfo.a src/mkvinfo
 
 override_dh_install:
-	./drake install DESTDIR=$(CURDIR)/debian/tmp
+	rake install DESTDIR=$(CURDIR)/debian/tmp
 
 	dh_install --list-missing -Xmkvtoolnix.xml
 
