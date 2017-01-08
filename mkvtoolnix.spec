@@ -52,11 +52,6 @@ Authors:
 
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
-%if 0%{?centos}
-BUILD_TOOL=drake
-%else
-BUILD_TOOL=rake
-%endif
 
 %if 0%{?centos}
 export CC=/opt/rh/devtoolset-4/root/bin/gcc
