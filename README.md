@@ -90,16 +90,10 @@ programs and libraries you absolutely need are:
   used: "format", "RegEx", "filesystem", "system", "math",
   "Range", "rational", "variant". At least v1.46.0 is required.
 
-You also need the `rake` or `drake` build program or at least the
-programming language Ruby and the "rubygems" package. MKVToolNix comes
-bundled with its own copy of "drake" in case you cannot install it
-yourself. If you want to install it yourself, I suggest you use the
-"drake" version because it will be able to use all available CPU cores
-for parallel builds.
-
-Installing "drake" is simple. As root run the following command:
-
-    gem install drake
+You also need the `rake` or `drake` build program. I suggest `rake`
+v10.0.0 or newer (this is included with Ruby 2.1) as it offers
+parallel builds out of the box. If you only have an earlier version of
+rake, you can install and use the `drake` gem for the same gain.
 
 ## 2.2. Optional components
 
@@ -175,22 +169,7 @@ library files are:
       --with-extra-includes=/where/i/put/libebml\;/where/i/put/libmatroska \
       --with-extra-libs=/where/i/put/libebml/make/linux\;/where/i/put/libmatroska/make/linux
 
-Now run `rake` and, as "root", `rake install`. If you don't have
-"rake" installed yourself, use the version bundled with
-MKVToolNix: `./drake` and `./drake install`.
-
-If you want to use all available CPU cores for building, you have
-to use `drake` instead of `rake`. `drake` knows the parameter `-j`
-much like `make` does. You can also set the environment variable
-DRAKETHREADS to a number and the build process will automatically use
-that number of threads for a parallel build:
-
-    ./drake -j4
-
-or
-
-    export DRAKETHREADS=4
-    ./drake
+Now run `rake` and, as "root", `rake install`.
 
 ## 2.5. Notes for compilation on (Open)Solaris
 
@@ -220,7 +199,7 @@ do this, you have to follow these steps:
 
 4. Build the unit test executable and run it with
 
-        ./drake tests:unit
+        rake tests:unit
 
 
 # 3. Reporting bugs

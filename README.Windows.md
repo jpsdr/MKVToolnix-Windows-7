@@ -74,7 +74,7 @@ From the MKVToolNix source directory run:
     ./tools/windows/setup_cross_compilation_env.sh
 
 If everything works fine, you'll end up with a configured MKVToolNix
-source tree. You just have to run `drake` afterwards.
+source tree. You just have to run `rake` afterwards.
 
 ## 1.3. Manual installation
 
@@ -111,6 +111,6 @@ Finally, configure MKVToolNix (the `host=…` spec must match the
 
 If everything works, build it:
 
-    ./drake
+    rake
 
 You're done.
