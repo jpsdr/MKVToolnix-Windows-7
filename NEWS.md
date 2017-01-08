@@ -9,7 +9,7 @@
   if set (only for Matroska source files). The JSON schema version has been
   bumped to 6.
 * mkvmerge: MPEG TS: added a workaround for files where the subtitle packets
-  are mulitplexed properly, but where their timestamps are way off from the
+  are multiplexed properly, but where their timestamps are way off from the
   audio and video timestamps. Implements #1841.
 * mkvmerge: added support for Digital Video Broadcasting (DVB) subtitles
   (CodecID `S_DVBSUB`). They can be read from MPEG transport streams and from
@@ -21,7 +21,7 @@
   twice on some operating systems. Fixes #1850.
 * mkvmerge, Matroska: if a codec delay is set for a track in the input file,
   it is kept. Fixes #1849.
-* GUI: multiplexer: changing default values in the prerefences (e.g. the
+* GUI: multiplexer: changing default values in the preferences (e.g. the
   default track language to set) did not affect files whose identification
   results had already been cached.
 * mkvmerge, MP4: fixed detection of MP3 audio when the object type ID in the
