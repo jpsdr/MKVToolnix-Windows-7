@@ -1,5 +1,12 @@
 # Version ?
 
+## Important notes
+
+* build system: the included version of the "drake" build tool has been
+  removed. Since Ruby 2.1 rake has supported parallel builds, too. The
+  MKVToolNix build system has been adjusted to enable parallel builds by
+  default.
+
 ## New features and enhancements
 
 * mkvmerge: added the ISO 639-2 language codes "qaa" and "qad" (both are
@@ -30,6 +37,8 @@
 
 ## Build system changes
 
+* If MKVToolNix is built with rake v10.0.0 or newer, its "multitask" feature
+  will be turned on allowing automatic parallel builds.
 * CURL is no longer used by MKVToolNix and is therefore not required
   for building anymore.
 
