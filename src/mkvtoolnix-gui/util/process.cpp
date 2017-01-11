@@ -28,6 +28,7 @@ void
 Process::run() {
   m_process.start(m_command, m_args);
   m_process.waitForFinished(-1);
+  dataAvailable();
 }
 
 QStringList
@@ -55,7 +56,7 @@ Process::onError() {
 
 void
 Process::dataAvailable() {
-  QByteArray output = m_process.readAllStandardOutput();
+  auto output = m_process.readAllStandardOutput();
   m_output += QString::fromUtf8(output);
 }
 
