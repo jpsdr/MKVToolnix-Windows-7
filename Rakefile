@@ -124,6 +124,7 @@ def setup_globals
   cflags_common           += " -DMTX_LOCALE_DIR=\\\"#{c(:localedir)}\\\" -DMTX_PKG_DATA_DIR=\\\"#{c(:pkgdatadir)}\\\" -DMTX_DOC_DIR=\\\"#{c(:docdir)}\\\""
   cflags_common           += " #{c(:FSTACK_PROTECTOR)}"
   cflags_common           += " -fsanitize=undefined"                                     if c?(:UBSAN)
+  cflags_common           += " -fsanitize=address -fno-omit-frame-pointer"               if c?(:ADDRSAN)
   cflags_common           += " -Ilib/libebml -Ilib/libmatroska"                          if c?(:EBML_MATROSKA_INTERNAL)
   cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:DEBUG_CFLAGS)} #{c(:PROFILING_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 " if c?(:MINGW)
@@ -140,8 +141,9 @@ def setup_globals
   ldflags                  = ""
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
   ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
-  ldflags                 += " -Wl,--dynamicbase,--nxcompat" if c?(:MINGW)
-  ldflags                 += " -fsanitize=undefined"         if c?(:UBSAN)
+  ldflags                 += " -Wl,--dynamicbase,--nxcompat"               if c?(:MINGW)
+  ldflags                 += " -fsanitize=undefined"                       if c?(:UBSAN)
+  ldflags                 += " -fsanitize=address -fno-omit-frame-pointer" if c?(:ADDRSAN)
   ldflags                 += " #{c(:FSTACK_PROTECTOR)}"
 
   windres                  = ""
