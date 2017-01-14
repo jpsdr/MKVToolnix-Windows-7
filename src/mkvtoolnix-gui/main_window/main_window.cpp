@@ -75,6 +75,8 @@ MainWindow::MainWindow(QWidget *parent)
 #endif
 
   QtConcurrent::run(Util::Cache::cleanOldCacheFiles);
+
+  Util::InstallationChecker::checkInstallation();
 }
 
 MainWindow::~MainWindow() {
@@ -556,6 +558,54 @@ MainWindow::noIcon() {
     s_noIcon.reset(new QIcon{":/icons/16x16/dialog-cancel.png"});
 
   return *s_noIcon;
+}
+
+void
+MainWindow::displayInstallationProblems(Util::InstallationChecker::Problems const &problems) {
+  if (problems.isEmpty())
+    return;
+
+  auto numProblems    = problems.size();
+  auto problemsString = QString{};
+
+  for (auto const &problem : problems) {
+    auto description = QString{};
+
+    switch (problem.first) {
+      case Util::InstallationChecker::ProblemType::FileNotFound:
+        description = QY("The file '%1' could not be found in the installation folder.").arg(problem.second);
+        break;
+
+      case Util::InstallationChecker::ProblemType::MkvmergeNotFound:
+        description = QY("The mkvmerge executable was not found.");
+        break;
+
+      case Util::InstallationChecker::ProblemType::MkvmergeCannotBeExecuted:
+        description = QY("The mkvmerge executable was found, but it couldn't be executed.");
+        break;
+
+      case Util::InstallationChecker::ProblemType::MkvmergeVersionNotRecognized:
+        description = QY("The version line reported by mkvmerge ('%1') could not be recognized.").arg(problem.second);
+        break;
+
+      case Util::InstallationChecker::ProblemType::MkvmergeVersionDiffers:
+        description = QY("The versions of mkvmerge (%1) and the GUI (%2) differ.").arg(problem.second).arg(Q(get_current_version().to_string()));
+        break;
+    }
+
+    problemsString += Q("<li>%1</li>").arg(description.toHtmlEscaped());
+  }
+
+  Util::MessageBox::critical(this)
+    ->title(QNY("Problem with MKVToolNix installation", "Problems with MKVToolNix installation", numProblems))
+    .text(Q("<p>%1</p>"
+            "<ul>%2</ul>"
+            "<p>%3 %4</p>")
+          .arg(QNY("A problem has been detected with this installation of MKVToolNix:", "Several problems have been detected with this installation of MKVToolNix:", numProblems).toHtmlEscaped())
+          .arg(problemsString)
+          .arg(QY("Certain functions won't work correctly in this situation.").toHtmlEscaped())
+          .arg(QNY("Please re-install MKVToolNix or fix the problem manually.", "Please re-install MKVToolNix or fix the problems manually.", numProblems).toHtmlEscaped()))
+    .exec();
 }
 
 }}

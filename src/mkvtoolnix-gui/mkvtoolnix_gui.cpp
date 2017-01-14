@@ -10,6 +10,7 @@
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/main_window/update_checker.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
+#include "mkvtoolnix-gui/util/installation_checker.h"
 
 #if defined(HAVE_STATIC_QT)
 # if defined(SYS_APPLE)
@@ -38,6 +39,7 @@ registerMetaTypes() {
   qRegisterMetaType<mtx_release_version_t>("mtx_release_version_t");
   qRegisterMetaType<std::shared_ptr<pugi::xml_document>>("std::shared_ptr<pugi::xml_document>");
   qRegisterMetaType<UpdateCheckStatus>("UpdateCheckStatus");
+  qRegisterMetaType<Util::InstallationChecker::Problems>("Util::InstallationChecker::Problems");
 }
 
 int

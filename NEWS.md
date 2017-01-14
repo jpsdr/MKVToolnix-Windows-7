@@ -9,6 +9,9 @@
 
 ## New features and enhancements
 
+* GUI: added checks for several common problems with the installation. These
+  checks will be executed when the GUI starts, and any problems will be
+  reported to the user.
 * mkvmerge: added the ISO 639-2 language codes "qaa" and "qad" (both are
   titled "reserved for local use") as both are used often in France. See #1848
   for more information.

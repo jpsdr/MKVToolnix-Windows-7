@@ -7,6 +7,7 @@
 #include <QMainWindow>
 
 #include "mkvtoolnix-gui/main_window/update_checker.h"
+#include "mkvtoolnix-gui/util/installation_checker.h"
 
 class QEvent;
 class QResizeEvent;
@@ -95,6 +96,8 @@ public slots:
 
   virtual void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);
   virtual void checkForUpdates();
+
+  virtual void displayInstallationProblems(Util::InstallationChecker::Problems const &problems);
 
 public:                         // static
   static MainWindow *get();
