@@ -27,6 +27,11 @@
 
 ## Bug fixes
 
+* GUI: certain failures during file identification that can be traced to
+  broken installations (e.g. mkvmerge being too old) won't be stored in the
+  cache anymore. Without this fix the GUI would still use the cached failed
+  identification result even though the underlying might have already been
+  fixed.
 * mkvmerge: fixed that the error message "not enough space on disk" was shown
   twice on some operating systems. Fixes #1850.
 * mkvmerge, Matroska: if a codec delay is set for a track in the input file,
