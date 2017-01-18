@@ -10,7 +10,7 @@ MKVToolNix 9.7.1
   3. [Building libEBML and libMatroska](#23-building-libebml-and-libmatroska)
   4. [Building MKVToolNix](#24-building-mkvtoolnix)
     1. [Getting and building a development snapshot](#241-getting-and-building-a-development-snapshot)
-        2. [Configuration and compilation](#242-configuration-and-compilation)
+    2. [Configuration and compilation](#242-configuration-and-compilation)
   5. [Notes for compilation on (Open)Solaris](#25-notes-for-compilation-on-opensolaris)
   6. [Unit tests](#26-unit-tests)
 3. [Reporting bugs](#3-reporting-bugs)
