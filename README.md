@@ -3,25 +3,27 @@ MKVToolNix 9.7.1
 
 # Table of contents
 
-1. Introduction
-2. Installation
-  1. Requirements
-  2. Optional components
-  3. Building libEBML and libMatroska
-  4. Building MKVToolNix
-  5. Notes for compilation on (Open)Solaris
-  6. Unit tests
-3. Reporting bugs
-4. Test suite and continuous integration tests
-5. Included libraries and their licenses
-  1. avilib
-  2. Boost's utf8_codecvt_facet
-  3. libEBML
-  4. libMatroska
-  5. librmff
-  6. nlohmann's JSON
-  7. pugixml
-  8. utf8-cpp
+1. [Introduction](#1-introduction)
+2. [Installation](#2-installation)
+  1. [Requirements](#21-requirements)
+  2. [Optional components](#22-optional-components)
+  3. [Building libEBML and libMatroska](#23-building-libebml-and-libmatroska)
+  4. [Building MKVToolNix](#24-building-mkvtoolnix)
+    1. [Getting and building a development snapshot](#241-getting-and-building-a-development-snapshot)
+    2. [Configuration and compilation](#242-configuration-and-compilation)
+  5. [Notes for compilation on (Open)Solaris](#25-notes-for-compilation-on-opensolaris)
+  6. [Unit tests](#26-unit-tests)
+3. [Reporting bugs](#3-reporting-bugs)
+4. [Test suite and continuous integration tests](#4-test-suite-and-continuous-integration-tests)
+5. [Included libraries and their licenses](#5-included-libraries-and-their-licenses)
+  1. [avilib](#51-avilib)
+  2. [Boost's utf8_codecvt_facet](#52-boosts-utf8_codecvt_facet)
+  3. [libEBML](#53-libebml)
+  4. [libMatroska](#54-libmatroska)
+  5. [librmff](#55-librmff)
+  6. [nlohmann's JSON](#56-nlohmanns-json)
+  7. [pugixml](#57-pugixml)
+  8. [utf8-cpp](#58-utf8-cpp)
 
 -----------------
 
