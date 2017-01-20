@@ -188,6 +188,8 @@ public:
   static void change(std::function<void(Settings &)> worker);
   static std::unique_ptr<QSettings> registry();
 
+  static void runOncePerVersion(QString const &topic, std::function<void()> worker);
+
   static QString exeWithPath(QString const &exe);
 
   static void migrateFromRegistry();

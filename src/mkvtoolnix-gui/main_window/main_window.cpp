@@ -74,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
   new TaskbarProgress{this};
 #endif
 
-  QtConcurrent::run(Util::Cache::cleanOldCacheFiles);
+  runCacheCleanupOncePerVersion();
 
   Util::InstallationChecker::checkInstallation();
 }
@@ -606,6 +606,14 @@ MainWindow::displayInstallationProblems(Util::InstallationChecker::Problems cons
           .arg(QY("Certain functions won't work correctly in this situation.").toHtmlEscaped())
           .arg(QNY("Please re-install MKVToolNix or fix the problem manually.", "Please re-install MKVToolNix or fix the problems manually.", numProblems).toHtmlEscaped()))
     .exec();
+}
+
+void
+MainWindow::runCacheCleanupOncePerVersion()
+  const {
+  Util::Settings::runOncePerVersion(Q("cacheCleanup"), []() {
+    QtConcurrent::run(Util::Cache::cleanOldCacheFiles);
+  });
 }
 
 }}

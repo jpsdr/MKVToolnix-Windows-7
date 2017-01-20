@@ -126,6 +126,7 @@ protected:
   virtual boost::optional<bool> filterWheelEventForStrongFocus(QObject *watched, QEvent *event);
 
   virtual void silentlyCheckForUpdates();
+  virtual void runCacheCleanupOncePerVersion() const;
 };
 
 }}

@@ -619,4 +619,23 @@ Settings::lastOpenDirPath()
   return Util::dirPath(m_lastOpenDir);
 }
 
+void
+Settings::runOncePerVersion(QString const &topic,
+                            std::function<void()> worker) {
+  auto reg = registry();
+  auto key = Q("runOncePerVersion/%1").arg(topic);
+
+  auto lastRunInVersion       = reg->value(key).toString();
+  auto lastRunInVersionNumber = version_number_t{to_utf8(lastRunInVersion)};
+  auto currentVersionNumber   = get_current_version();
+
+  if (   lastRunInVersionNumber.valid
+      && !(lastRunInVersionNumber < currentVersionNumber))
+    return;
+
+  reg->setValue(key, Q(currentVersionNumber.to_string()));
+
+  worker();
+}
+
 }}}
