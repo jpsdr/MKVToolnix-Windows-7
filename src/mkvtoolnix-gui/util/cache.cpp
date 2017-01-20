@@ -126,14 +126,14 @@ Cache::remove(QString const &category,
 
 void
 Cache::cleanOldCacheFilesForCategory(QString const &category) {
-  QMutexLocker lock{&cacheDirMutex()};
-
   auto currentVersion  = currentVersionString();
   auto const &uiLocale = Settings::get().m_uiLocale;
   auto cacheDir        = QDir{cacheDirLocation(category)};
   auto cacheFiles      = cacheDir.entryList(QDir::Files);
 
   for (auto fileName : cacheFiles) {
+    QMutexLocker lock{&cacheDirMutex()};
+
     fileName  = cacheDir.filePath(fileName);
     auto keep = false;
 
@@ -152,8 +152,6 @@ Cache::cleanOldCacheFilesForCategory(QString const &category) {
 
 void
 Cache::cleanOldCacheFiles() {
-  QMutexLocker lock{&cacheDirMutex()};
-
   auto cacheDir        = QDir{cacheDirLocation(Q(""))};
   auto cacheCategories = cacheDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
@@ -174,8 +172,6 @@ Cache::cleanAllCacheFilesForCategory(QString const &category) {
 
 void
 Cache::cleanAllCacheFiles() {
-  QMutexLocker lock{&cacheDirMutex()};
-
   auto cacheDir        = QDir{cacheDirLocation(Q(""))};
   auto cacheCategories = cacheDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 

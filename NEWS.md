@@ -27,6 +27,8 @@
 
 ## Bug fixes
 
+* GUI: the cache cleanup process that's run automatically when the GUI starts
+  no longer blocks file identification until it is finished. Fixes #1860.
 * GUI: certain failures during file identification that can be traced to
   broken installations (e.g. mkvmerge being too old) won't be stored in the
   cache anymore. Without this fix the GUI would still use the cached failed
