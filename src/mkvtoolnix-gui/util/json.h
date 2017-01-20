@@ -3,7 +3,7 @@
 
 #include "common/common_pch.h"
 
-#include "nlohmann-json/src/json.hpp"
+#include "common/json.h"
 
 class QVariant;
 

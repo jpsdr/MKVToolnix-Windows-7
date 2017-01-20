@@ -26,7 +26,7 @@ BuildRequires: gcc5-c++
 %endif
 
 %if 0%{?fedora}
-BuildRequires: gcc-c++ >= 4.9.0, rubypick, pugixml-devel, rubygem-rake
+BuildRequires: gcc-c++ >= 4.9.0, rubypick, pugixml-devel, rubygem-rake, json-devel >= 2
 %endif
 
 %if 0%{?suse_version}

@@ -16,7 +16,11 @@
 
 #include "common/common_pch.h"
 
-#include "nlohmann-json/src/json.hpp"
+#if defined(HAVE_NLOHMANN_JSONCPP)
+# include <json.hpp>
+#else
+# include "nlohmann-json/src/json.hpp"
+#endif // HAVE_NLOHMANN_JSONCPP
 
 namespace mtx { namespace json {
 

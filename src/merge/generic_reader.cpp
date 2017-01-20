@@ -19,7 +19,6 @@
 #include "merge/generic_reader.h"
 #include "merge/input_x.h"
 #include "merge/output_control.h"
-#include "nlohmann-json/src/json.hpp"
 
 static int64_rational_c s_probe_range_percentage{3, 10}; // 0.3%
 

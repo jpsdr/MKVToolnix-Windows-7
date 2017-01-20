@@ -20,9 +20,9 @@
 
 #include <ebml/EbmlElement.h>
 
+#include "common/json.h"
 #include "common/locale.h"
 #include "common/mm_io.h"
-#include "nlohmann-json/src/json.hpp"
 
 using namespace libebml;
 

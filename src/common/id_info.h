@@ -14,8 +14,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/json.h"
 #include "common/strings/editing.h"
-#include "nlohmann-json/src/json.hpp"
 
 namespace mtx { namespace id {
 

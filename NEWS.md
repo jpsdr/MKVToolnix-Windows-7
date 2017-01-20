@@ -48,6 +48,9 @@
 
 ## Build system changes
 
+* nlohman json-cpp: configure now looks for a system-wide installed version of
+  the nlohmann json-cpp header-only library. If one is found, it is used;
+  otherwise the included version will be used. Implements #1858.
 * If MKVToolNix is built with rake v10.0.0 or newer, its "multitask" feature
   will be turned on allowing automatic parallel builds.
 * CURL is no longer used by MKVToolNix and is therefore not required
