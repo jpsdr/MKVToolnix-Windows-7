@@ -27,6 +27,11 @@
 
 ## Bug fixes
 
+* mkvmerge: MP4 reader: when an MP4 file contained fewer entries for
+  timestamps than frames (which they never should), mkvmerge would use 0 as
+  the timestamp for all the other frames. This resulted in effects such as the
+  last frame of an output file having a timestamp of 0 and in split files
+  having a much longer duration than they should have. Fixes #1847.
 * GUI: the cache cleanup process that's run automatically when the GUI starts
   no longer blocks file identification until it is finished. Additionally the
   process will only be run once per release of MKVToolNix. Fixes #1860.

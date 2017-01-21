@@ -2227,6 +2227,12 @@ qtmp4_demuxer_c::update_tables() {
     }
   }
 
+  if (s < num_samples) {
+    mxdebug_if(m_debug_headers, boost::format("Track %1%: fewer timestamps assigned than entries in the sample table: %2% < %3%; dropping the excessive items\n") % id % s % num_samples);
+    sample_table.resize(s);
+    num_samples = s;
+  }
+
   // calc sample offsets
   s = 0;
   for (j = 0; (j < chunk_table.size()) && (s < num_samples); ++j) {
