@@ -173,6 +173,7 @@ size_t s_mkvmerge_track_id = 0;
 #define BF_AT                                BF_DO(31)
 #define BF_SIZE                              BF_DO(32)
 #define BF_BLOCK_GROUP_DISCARD_PADDING       BF_DO(33)
+#define BF_AT_HEX                            BF_DO(34)
 
 void
 init_common_boost_formats() {
@@ -211,6 +212,7 @@ init_common_boost_formats() {
   BF_ADD(Y(" at %1%"));                                                                                         // 31 -- BF_AT
   BF_ADD(Y(" size %1%"));                                                                                       // 32 -- BF_SIZE
   BF_ADD(Y("Discard padding: %|1$.3f|ms (%2%ns)"));                                                             // 33 -- BF_BLOCK_GROUP_DISCARD_PADDING
+  BF_ADD(Y(" at 0x%|1$x|"));                                                                                    // 34 -- BF_AT_HEX
 }
 
 std::string
@@ -220,7 +222,7 @@ create_element_text(const std::string &text,
   std::string additional_text;
 
   if ((1 < g_options.m_verbose) && (0 <= position))
-    additional_text += (BF_AT % position).str();
+    additional_text += ((g_options.m_hex_positions ? BF_AT_HEX : BF_AT) % position).str();
 
   if (g_options.m_show_size && (-1 != size)) {
     if (-2 != size)

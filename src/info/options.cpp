@@ -20,6 +20,7 @@ options_c::options_c()
   , m_show_hexdump(false)
   , m_show_size(false)
   , m_show_track_info(false)
+  , m_hex_positions{}
   , m_hexdump_max_size(16)
   , m_verbose(0)
 {
