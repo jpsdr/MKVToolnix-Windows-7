@@ -26,6 +26,7 @@
 #include "common/chapters/chapters.h"
 #include "common/codec.h"
 #include "common/endian.h"
+#include "common/frame_timing.h"
 #include "common/hacks.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
@@ -1518,7 +1519,8 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
     return flush_packetizers();
   }
 
-  PTZR(dmx->ptzr)->process(new packet_t(buffer, index.timecode, index.duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+  auto duration = dmx->m_use_frame_rate_for_duration ? *dmx->m_use_frame_rate_for_duration : index.duration;
+  PTZR(dmx->ptzr)->process(new packet_t(buffer, index.timecode, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
   ++dmx->pos;
 
   if (dmx->pos < dmx->m_index.size())
@@ -1987,21 +1989,53 @@ qtmp4_demuxer_c::calculate_frame_rate() {
     frame_rate.assign(time_scale, durmap_table[0].duration);
     mxdebug_if(m_debug_frame_rate, boost::format("calculate_frame_rate: case 1: %1%/%2%\n") % frame_rate.numerator() % frame_rate.denominator());
 
-  } else if (!sample_table.empty()) {
-    std::map<int64_t, int> duration_map;
-
-    std::accumulate(sample_table.begin() + 1, sample_table.end(), sample_table[0], [&duration_map](auto const &previous_sample, auto const &current_sample) -> auto {
-      duration_map[current_sample.pts - previous_sample.pts]++;
-      return current_sample;
-    });
-
-    auto most_common = std::accumulate(duration_map.begin(), duration_map.end(), std::pair<int64_t, int>(*duration_map.begin()),
-                                       [](std::pair<int64_t, int> &a, std::pair<int64_t, int> e) { return e.second > a.second ? e : a; });
-    if (most_common.first)
-      frame_rate.assign(1000000000ll, to_nsecs(most_common.first));
-
-    mxdebug_if(m_debug_frame_rate, boost::format("calculate_frame_rate: case 2: most_common %1% = %2%, frame_rate %3%/%4%\n") % most_common.first % most_common.second % frame_rate.numerator() % frame_rate.denominator());
+    return;
   }
+
+  if (sample_table.size() < 2) {
+    mxdebug_if(m_debug_frame_rate, boost::format("calculate_frame_rate: case 2: sample table too small\n"));
+    return;
+  }
+
+  auto max_pts = sample_table[0].pts;
+  auto min_pts = max_pts;
+
+  for (auto const &sample : sample_table) {
+    max_pts = std::max(max_pts, sample.pts);
+    min_pts = std::min(min_pts, sample.pts);
+  }
+
+  auto duration   = to_nsecs(max_pts - min_pts);
+  auto num_frames = sample_table.size() - 1;
+  frame_rate      = mtx::frame_timing::determine_frame_rate(duration / num_frames);
+
+  if (frame_rate) {
+    if ('v' == type)
+      m_use_frame_rate_for_duration.reset(boost::rational_cast<int64_t>(int64_rational_c{1'000'000'000ll} / frame_rate));
+
+    mxdebug_if(m_debug_frame_rate,
+               boost::format("calculate_frame_rate: case 3: duration %1% num_frames %2% frame_duration %3% frame_rate %4%/%5% use_frame_rate_for_duration %6%\n")
+               % duration % num_frames % (duration / num_frames) % frame_rate.numerator() % frame_rate.denominator() % (m_use_frame_rate_for_duration ? *m_use_frame_rate_for_duration : -1));
+
+    return;
+  }
+
+  std::map<int64_t, int> duration_map;
+
+  std::accumulate(sample_table.begin() + 1, sample_table.end(), sample_table[0], [&duration_map](auto const &previous_sample, auto const &current_sample) -> auto {
+    duration_map[current_sample.pts - previous_sample.pts]++;
+    return current_sample;
+  });
+
+  auto most_common = std::accumulate(duration_map.begin(), duration_map.end(), std::pair<int64_t, int>(*duration_map.begin()),
+                                     [](auto const &winner, std::pair<int64_t, int> const &current) { return current.second > winner.second ? current : winner; });
+
+  if (most_common.first)
+    frame_rate.assign(1000000000ll, to_nsecs(most_common.first));
+
+  mxdebug_if(m_debug_frame_rate,
+             boost::format("calculate_frame_rate: case 4: duration %1% num_frames %2% frame_duration %3% most_common.num_occurances %4% most_common.duration %5% frame_rate %6%/%7%\n")
+             % duration % num_frames % (duration / num_frames) % most_common.second % to_nsecs(most_common.first) % frame_rate.numerator() % frame_rate.denominator());
 }
 
 int64_t

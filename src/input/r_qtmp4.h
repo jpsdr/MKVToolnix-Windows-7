@@ -248,6 +248,7 @@ struct qtmp4_demuxer_c {
   std::vector<qt_fragment_t> m_fragments;
 
   int64_rational_c frame_rate;
+  boost::optional<int64_t> m_use_frame_rate_for_duration;
 
   esds_t esds;
   bool esds_parsed;
