@@ -21,6 +21,7 @@
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
 #include "common/endian.h"
+#include "common/frame_timing.h"
 #include "common/hacks.h"
 #include "common/mm_io.h"
 #include "common/mpeg.h"
@@ -258,49 +259,6 @@ slcopy(bit_reader_c &r,
   }
 }
 
-struct common_default_duration_t {
-  int64_t duration;
-  int num_units_in_tick, time_scale;
-};
-
-std::vector<common_default_duration_t> s_common_default_durations{
-  { 1000000000ll / 120,             1,    120 }, // 120 fps
-  { 1000000000ll / 100,             1,    100 }, // 100 fps
-  { 1000000000ll /  50,             1,     50 }, //  50 fps
-  { 1000000000ll /  48,             1,     48 }, //  48 fps
-  { 1000000000ll /  24,             1,     24 }, //  24 fps
-  { 1000000000ll /  25,             1,     25 }, //  25 fps
-  { 1000000000ll /  60,             1,     60 }, //  60 fps
-  { 1000000000ll /  30,             1,     30 }, //  30 fps
-  { 1000000000ll * 1001 / 48000, 1001,  48000 }, //  47.952 fps
-  { 1000000000ll * 1001 / 24000, 1001,  24000 }, //  23.976 fps
-  { 1000000000ll * 1001 / 50000, 1001,  50000 }, //  24.975 frames per second telecined PAL
-  { 1000000000ll * 1001 / 60000, 1001,  60000 }, //  59.94 fps
-  { 1000000000ll * 1001 / 30000, 1001,  30000 }, //  29.97 fps
-};
-
-static std::pair<int, int>
-find_timing_info(int64_t duration) {
-  // search in the common FPS list
-  using common_default_duration_diff_t = std::pair<int64_t, common_default_duration_t>;
-  auto potentials = std::vector<common_default_duration_diff_t>{};
-
-  for (auto const &common_default_duration : s_common_default_durations) {
-    auto difference = std::abs(duration - common_default_duration.duration);
-    if (difference < 20000)
-      potentials.emplace_back(difference, common_default_duration);
-  }
-
-  if (potentials.empty())
-    return std::make_pair((duration * 0x80000000) / 1000000000ll, 0x80000000);
-
-  brng::sort(potentials, [](common_default_duration_diff_t const &a, common_default_duration_diff_t const &b) {
-      return a.first < b.first;
-    });
-
-  return std::make_pair(potentials[0].second.num_units_in_tick, potentials[0].second.time_scale);
-}
-
 int64_t
 mpeg4::p10::timing_info_t::default_duration()
   const {
@@ -453,9 +411,12 @@ mpeg4::p10::parse_sps(memory_cptr const &buffer,
     fix_bitstream_frame_rate = false;
 
   else {
-    auto timing_info  = find_timing_info(duration);
-    num_units_in_tick = timing_info.first;
-    time_scale        = timing_info.second;
+    auto frame_rate = mtx::frame_timing::determine_frame_rate(duration);
+    if (!frame_rate)
+      frame_rate.assign(0x80000000, (duration * 0x80000000) / 1000000000ll);
+
+    num_units_in_tick = frame_rate.denominator();
+    time_scale        = frame_rate.numerator();
   }
 
   mxdebug_if(s_debug_fix_bistream_timing_info, boost::format("fix_bitstream_timing_info: duration %1%: units/tick: %2% time_scale: %3%\n") % duration % num_units_in_tick % time_scale);
