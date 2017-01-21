@@ -247,7 +247,7 @@ struct qtmp4_demuxer_c {
   std::vector<qt_index_t> m_index;
   std::vector<qt_fragment_t> m_fragments;
 
-  double fps;
+  int64_rational_c fps;
 
   esds_t esds;
   bool esds_parsed;
@@ -286,7 +286,6 @@ struct qtmp4_demuxer_c {
     , constant_editlist_offset_ns{0}
     , num_frames_from_trun{}
     , sample_size{0}
-    , fps{0.0}
     , esds_parsed{false}
     , stsd_non_priv_struct_size{}
     , v_width{0}

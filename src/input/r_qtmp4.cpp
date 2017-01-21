@@ -1612,7 +1612,7 @@ qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_cptr &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_mpeg4_p10(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = dmx->priv;
-  dmx->ptzr           = add_packetizer(new mpeg4_p10_video_packetizer_c(this, m_ti, dmx->fps, dmx->v_width, dmx->v_height));
+  dmx->ptzr           = add_packetizer(new mpeg4_p10_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx->fps), dmx->v_width, dmx->v_height));
 
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
@@ -1620,7 +1620,7 @@ qtmp4_reader_c::create_video_packetizer_mpeg4_p10(qtmp4_demuxer_cptr &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = dmx->priv;
-  dmx->ptzr           = add_packetizer(new hevc_video_packetizer_c(this, m_ti, dmx->fps, dmx->v_width, dmx->v_height));
+  dmx->ptzr           = add_packetizer(new hevc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx->fps), dmx->v_width, dmx->v_height));
 
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
@@ -1628,7 +1628,7 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_prores(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = memory_c::clone(dmx->fourcc.str());
-  dmx->ptzr           = add_packetizer(new generic_video_packetizer_c(this, m_ti, MKV_V_PRORES, dmx->fps, dmx->v_width, dmx->v_height));
+  dmx->ptzr           = add_packetizer(new generic_video_packetizer_c(this, m_ti, MKV_V_PRORES, boost::rational_cast<double>(dmx->fps), dmx->v_width, dmx->v_height));
 
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
@@ -1982,12 +1982,10 @@ qtmp4_reader_c::detect_interleaving() {
 
 void
 qtmp4_demuxer_c::calculate_fps() {
-  fps = 0.0;
-
   if ((1 == durmap_table.size()) && (0 != durmap_table[0].duration) && ((0 != sample_size) || (0 == frame_offset_table.size()))) {
     // Constant FPS. Let's set the default duration.
-    fps = static_cast<double>(time_scale) / static_cast<double>(durmap_table[0].duration);
-    mxdebug_if(m_debug_fps, boost::format("calculate_fps: case 1: %1%\n") % fps);
+    fps.assign(time_scale, durmap_table[0].duration);
+    mxdebug_if(m_debug_fps, boost::format("calculate_fps: case 1: %1%/%2%\n") % fps.numerator() % fps.denominator());
 
   } else if (!sample_table.empty()) {
     std::map<int64_t, int> duration_map;
@@ -2000,9 +1998,9 @@ qtmp4_demuxer_c::calculate_fps() {
     auto most_common = std::accumulate(duration_map.begin(), duration_map.end(), std::pair<int64_t, int>(*duration_map.begin()),
                                        [](std::pair<int64_t, int> &a, std::pair<int64_t, int> e) { return e.second > a.second ? e : a; });
     if (most_common.first)
-      fps = 1000000000.0 / static_cast<double>(to_nsecs(most_common.first));
+      fps.assign(1000000000ll, to_nsecs(most_common.first));
 
-    mxdebug_if(m_debug_fps, boost::format("calculate_fps: case 2: most_common %1% = %2%, fps %3%\n") % most_common.first % most_common.second % fps);
+    mxdebug_if(m_debug_fps, boost::format("calculate_fps: case 2: most_common %1% = %2%, fps %3%/%4%\n") % most_common.first % most_common.second % fps.numerator() % fps.denominator());
   }
 }
 
