@@ -247,7 +247,7 @@ struct qtmp4_demuxer_c {
   std::vector<qt_index_t> m_index;
   std::vector<qt_fragment_t> m_fragments;
 
-  int64_rational_c fps;
+  int64_rational_c frame_rate;
 
   esds_t esds;
   bool esds_parsed;
@@ -271,7 +271,7 @@ struct qtmp4_demuxer_c {
 
   std::string language;
 
-  debugging_option_c m_debug_tables, m_debug_fps, m_debug_headers, m_debug_editlists;
+  debugging_option_c m_debug_tables, m_debug_frame_rate, m_debug_headers, m_debug_editlists;
 
   qtmp4_demuxer_c(qtmp4_reader_c &reader)
     : m_reader(reader)
@@ -300,10 +300,10 @@ struct qtmp4_demuxer_c {
     , a_aac_config_parsed{false}
     , warning_printed{false}
     , ptzr{-1}
-    , m_debug_tables{         "qtmp4_full|qtmp4_tables"}
-    , m_debug_fps{      "qtmp4|qtmp4_full|qtmp4_fps"}
-    , m_debug_headers{  "qtmp4|qtmp4_full|qtmp4_headers"}
-    , m_debug_editlists{"qtmp4|qtmp4_full|qtmp4_editlists"}
+    , m_debug_tables{          "qtmp4_full|qtmp4_tables"}
+    , m_debug_frame_rate{"qtmp4|qtmp4_full|qtmp4_frame_rate"}
+    , m_debug_headers{   "qtmp4|qtmp4_full|qtmp4_headers"}
+    , m_debug_editlists{ "qtmp4|qtmp4_full|qtmp4_editlists"}
   {
     memset(&esds, 0, sizeof(esds_t));
   }
@@ -311,7 +311,7 @@ struct qtmp4_demuxer_c {
   ~qtmp4_demuxer_c() {
   }
 
-  void calculate_fps();
+  void calculate_frame_rate();
   int64_t to_nsecs(int64_t value);
   void calculate_timecodes();
   void adjust_timecodes(int64_t delta);
