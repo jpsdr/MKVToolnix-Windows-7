@@ -1,4 +1,4 @@
-# Version ?
+# Version 9.8.0 "Kuglblids" 2017-01-22
 
 ## Important notes
 
