@@ -135,13 +135,17 @@ class SimpleTest
 
   def test_identify file, *args
     options             = args.extract_options!
-    options[:verbose]   = true if options[:verbose].nil?
-    full_command_line   = [ options[:verbose] ? "--identify-verbose" : "--identify", options[:args], file ].flatten.join(' ')
+    options[:format]    = :json if options[:format].nil?
+    full_command_line   = [ "--identification-format", options[:format].to_s, "--identify", options[:args], file ].flatten.join(' ')
     options[:name]    ||= full_command_line
     @blocks[:tests] << {
       :name  => full_command_line,
       :block => lambda {
         sys "../src/mkvmerge #{full_command_line} > #{tmp}", :exit_code => options[:exit_code]
+
+        text = IO.readlines(tmp).reject { |line| %r{^\s*"identification_format_version":\s*\d+}.match(line) }.join('')
+        File.open(tmp, 'w') { |tmp_file| tmp_file.puts text }
+
         if options[:filter]
           text = options[:filter].call(IO.readlines(tmp).join(''))
           File.open(tmp, 'w') { |tmp_file| tmp_file.puts text }
