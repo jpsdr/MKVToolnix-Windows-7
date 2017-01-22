@@ -233,7 +233,7 @@ function build_mkvtoolnix {
   build_configured_mkvtoolnix
 
   rake clean
-  rake
+  rake -j ${DRAKETHREADS}
 }
 
 function build_dmg {
