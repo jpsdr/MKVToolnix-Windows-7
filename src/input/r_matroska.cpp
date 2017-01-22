@@ -60,6 +60,7 @@
 #include "common/strings/utf8.h"
 #include "common/tags/tags.h"
 #include "common/id_info.h"
+#include "common/vobsub.h"
 #include "input/r_matroska.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
@@ -712,10 +713,17 @@ kax_reader_c::verify_vobsub_subtitle_track(kax_track_t *t) {
   if (t->private_data)
     return true;
 
-  if (verbose)
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n")) % t->tnum % t->codec_id);
+  if (!g_identifying && verbose)
+    mxwarn_fn(m_ti.m_fname,
+              boost::format("%1% %2%\n")
+              % (boost::format(Y("The VobSub subtitle track %1% does not contain its index in the CodecPrivate element.")) % t->tnum)
+              % Y("A default index and with it default settings for the width, height and color palette will be used instead."));
 
-  return false;
+  auto index      = mtx::vobsub::create_default_index(720, 576, {});
+  t->private_data = safememdup(&index[0], index.size());
+  t->private_size = index.size();
+
+  return true;
 }
 
 void

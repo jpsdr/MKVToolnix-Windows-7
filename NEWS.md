@@ -9,6 +9,9 @@
 
 ## New features and enhancements
 
+* mkvmerge: VobSub in Matroska: mkvmerge will now create and use a default
+  index for VobSub tracks read from Matroska files that are missing their
+  CodecPrivate element (which normally contains said index). Implements #1854.
 * GUI: added checks for several common problems with the installation. These
   checks will be executed when the GUI starts, and any problems will be
   reported to the user.
