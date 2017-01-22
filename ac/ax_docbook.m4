@@ -2,8 +2,10 @@
 XSLTPROC_FLAGS=--nonet
 DOCBOOK_ROOT=
 for i in /usr/share/xml/docbook/stylesheet/xsl/nwalsh /usr/share/xml/docbook/stylesheet/nwalsh `ls -d /usr/share/{sg,x}ml/docbook/xsl-stylesheets* 2> /dev/null`; do
-  if test -d "$i" && test -d "$i/manpages"; then
+  if test -d "$i/manpages"; then
     DOCBOOK_ROOT="$i/manpages"
+  elif test -d "$i/current/manpages"; then
+    DOCBOOK_ROOT="$i/current/manpages"
   fi
 done
 
