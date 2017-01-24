@@ -6,6 +6,9 @@ dnl
 AC_CACHE_CHECK([nlohmann's json-cpp],[ac_cv_nlohmann_jsoncpp],[
   AC_LANG_PUSH(C++)
 
+  ac_save_CXXFLAGS="$CXXFLAGS"
+  CXXFLAGS="$STD_CXX $CXXFLAGS"
+
   AC_TRY_COMPILE([
     #include <cstdint>
     #include <iostream>
@@ -20,6 +23,8 @@ AC_CACHE_CHECK([nlohmann's json-cpp],[ac_cv_nlohmann_jsoncpp],[
 
     std::cout << json.dump();
   ],[ac_cv_nlohmann_jsoncpp=yes],[ac_cv_nlohmann_jsoncpp=no])
+
+  CXXFLAGS="$ac_save_CXXFLAGS"
 
   AC_LANG_POP
 ])
