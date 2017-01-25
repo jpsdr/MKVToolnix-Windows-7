@@ -9,16 +9,16 @@ Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
 
-BuildRequires: fdupes, file-devel, flac, flac-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0
+BuildRequires: fdupes, file-devel, flac, flac-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0, po4a
 
 %if 0%{?centos}
 BuildRequires: devtoolset-4-gcc-c++ >= 5.0.0, rubygem-drake
 %endif
 
 %if 0%{?suse_version}
-BuildRequires: gettext-tools libqt5-qtbase-devel, ruby2.1-rubygem-rake
+BuildRequires: gettext-tools libqt5-qtbase-devel, ruby2.1-rubygem-rake, libxslt-tools, docbook-xsl-stylesheets
 %else
-BuildRequires: gettext-devel, qt5-qtbase-devel
+BuildRequires: gettext-devel, qt5-qtbase-devel, libxslt, docbook-style-xsl
 %endif
 
 %if 0%{?suse_version}
