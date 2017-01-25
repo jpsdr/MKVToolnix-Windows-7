@@ -92,6 +92,10 @@ programs and libraries you absolutely need are:
   used: "format", "RegEx", "filesystem", "system", "math",
   "Range", "rational", "variant". At least v1.46.0 is required.
 
+- [libxslt's xsltproc binary](http://xmlsoft.org/libxslt/) and
+  [DocBook XSL stylesheets](https://sourceforge.net/projects/docbook/files/docbook-xsl/)
+  — for creating man pages from XML documents
+
 You also need the `rake` or `drake` build program. I suggest `rake`
 v10.0.0 or newer (this is included with Ruby 2.1) as it offers
 parallel builds out of the box. If you only have an earlier version of
@@ -117,6 +121,9 @@ built. These include:
 
 - [libMagic](http://www.darwinsys.com/file/) from the "file" package
   for automatic content type detection
+
+- [po4a](https://po4a.alioth.debian.org/) for building the translated
+  man pages
 
 ## 2.3. Building libEBML and libMatroska
 

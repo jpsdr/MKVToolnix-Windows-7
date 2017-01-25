@@ -1,3 +1,19 @@
+# Version ?
+
+## Build system changes
+
+* Up to and including release 9.8.0 the man pages and their translations came
+  pre-built and bundled with the source code. Those pre-built files have now
+  been removed and must be built during the build process. Therefore the tool
+  "xsltproc" and the DocBook XSL stylesheets for man pages are now required
+  dependencies. Additionally the tool "po4a" must be installed for the
+  translated man pages to be built and installed, though this is optional.
+
+  In order to facilitate finding the new requirements new options have been
+  added to confiure: "--with-xsltproc=prog", "--with-docbook-xsl=dir",
+  "--with-po4a=prog" and "--with-po4a-translate=prog.
+
+
 # Version 9.8.0 "Kuglblids" 2017-01-22
 
 ## Important notes
