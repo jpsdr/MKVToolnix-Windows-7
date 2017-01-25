@@ -190,7 +190,8 @@ def define_default_task
   targets << "doc/development.html" if !c(:PANDOC).empty?
 
   # Build man pages and translations?
-  targets += [ "manpages", "translations:manpages" ] if c?(:XSLTPROC_WORKS)
+  targets << "manpages"
+  targets << "translations:manpages" if c?(:PO4A_WORKS)
 
   # Build translations for the programs
   targets << "translations:programs"
@@ -303,27 +304,28 @@ if !c(:LCONVERT).blank?
 end
 
 # man pages from DocBook XML
-if c?(:XSLTPROC_WORKS)
-  rule '.1' => '.xml' do |t|
-    filter = lambda do |code, lines|
-      puts lines.join('')
-      if (0 == code) && lines.any? { |line| /^error/i.match(line) }
-        File.unlink(t.name) if File.exists?(t.name)
-        1
-      else
-        0
-      end
+rule '.1' => '.xml' do |t|
+  filter = lambda do |code, lines|
+    if (0 == code) && lines.any? { |line| /^error/i.match(line) }
+      File.unlink(t.name) if File.exists?(t.name)
+      result = 1
+    else
+      result = 0
     end
 
-    runq "xsltproc", t.source, "#{c(:XSLTPROC)} #{c(:XSLTPROC_FLAGS)} -o #{t.name} #{c(:DOCBOOK_MANPAGES_STYLESHEET)} #{t.sources.join(" ")}", :filter_output => filter
+    puts lines.join('') if $verbose
+
+    result
   end
 
-  $manpages.each do |manpage|
-    file manpage => manpage.ext('xml')
-    $available_languages[:manpages].each do |language|
-      localized_manpage = manpage.gsub(/.*\//, "doc/man/#{language}/")
-      file localized_manpage => localized_manpage.ext('xml')
-    end
+  runq "xsltproc", t.source, "#{c(:XSLTPROC)} #{c(:XSLTPROC_FLAGS)} -o #{t.name} #{c(:DOCBOOK_ROOT)}/manpages/docbook.xsl #{t.sources.join(" ")}", :filter_output => filter
+end
+
+$manpages.each do |manpage|
+  file manpage => manpage.ext('xml')
+  $available_languages[:manpages].each do |language|
+    localized_manpage = manpage.gsub(/.*\//, "doc/man/#{language}/")
+    file localized_manpage => localized_manpage.ext('xml')
   end
 end
 
@@ -486,12 +488,14 @@ EOT
 
   task :qt => FileList[ "#{$top_srcdir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
-  $available_languages[:manpages].each do |language|
-    $manpages.each do |manpage|
-      name = manpage.gsub(/man\//, "man/#{language}/")
-      file name            => [ name.ext('xml'),     "doc/man/po4a/po/#{language}.po" ]
-      file name.ext('xml') => [ manpage.ext('.xml'), "doc/man/po4a/po/#{language}.po" ] do |t|
-        runq "po4a", "#{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}"
+  if c?(:PO4A_WORKS)
+    $available_languages[:manpages].each do |language|
+      $manpages.each do |manpage|
+        name = manpage.gsub(/man\//, "man/#{language}/")
+        file name            => [ name.ext('xml'),     "doc/man/po4a/po/#{language}.po" ]
+        file name.ext('xml') => [ manpage.ext('.xml'), "doc/man/po4a/po/#{language}.po" ] do |t|
+          runq "po4a", "#{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}"
+        end
       end
     end
   end
@@ -524,11 +528,13 @@ EOT
       end
     end
 
-    desc "Update the man pages' translation files"
-    task :manpages do
-      runq "po4a", "doc/man/po4a/po4a.cfg", "#{c(:PO4A)} #{c(:PO4A_FLAGS)} --msgmerge-opt=--no-wrap doc/man/po4a/po4a.cfg"
-      $all_man_po_files.each do |po_file|
-        normalize_po po_file
+    if c?(:PO4A_WORKS)
+      desc "Update the man pages' translation files"
+      task :manpages do
+        runq "po4a", "doc/man/po4a/po4a.cfg", "#{c(:PO4A)} #{c(:PO4A_FLAGS)} --msgmerge-opt=--no-wrap doc/man/po4a/po4a.cfg"
+        $all_man_po_files.each do |po_file|
+          normalize_po po_file
+        end
       end
     end
   end
@@ -711,8 +717,9 @@ end
 
 # Installation tasks
 desc "Install all applications and support files"
-targets  = [ "install:programs", "install:manpages", "install:translations:manpages", "install:translations:programs" ]
-targets += [ "install:shared" ] if c?(:USE_QT)
+targets  = [ "install:programs", "install:manpages", "install:translations:programs" ]
+targets += [ "install:translations:manpages" ] if c?(:PO4A_WORKS)
+targets += [ "install:shared" ]                if c?(:USE_QT)
 task :install => targets
 
 namespace :install do
@@ -752,17 +759,19 @@ namespace :install do
   end
 
   namespace :translations do
-    task :programs do
+    task :programs => $translations[:programs] do
       install_dir $languages[:programs].collect { |language| "#{c(:localedir)}/#{language}/LC_MESSAGES" }
       $languages[:programs].each do |language|
         install_data "#{c(:localedir)}/#{language}/LC_MESSAGES/mkvtoolnix.mo", "po/#{language}.mo"
       end
     end
 
-    task :manpages do
-      install_dir $languages[:manpages].collect { |language| "#{c(:mandir)}/#{language}/man1" }
-      $languages[:manpages].each do |language|
-        $manpages.each { |manpage| install_data "#{c(:mandir)}/#{language}/man1/#{man_page_name_mapper[manpage]}", manpage.sub(/man\//, "man/#{language}/") }
+    if c?(:PO4A_WORKS)
+      task :manpages => $translations[:manpages] do
+        install_dir $languages[:manpages].collect { |language| "#{c(:mandir)}/#{language}/man1" }
+        $languages[:manpages].each do |language|
+          $manpages.each { |manpage| install_data "#{c(:mandir)}/#{language}/man1/#{man_page_name_mapper[manpage]}", manpage.sub(/man\//, "man/#{language}/") }
+        end
       end
     end
   end
@@ -786,7 +795,9 @@ task :clean do
     **/*.o
     **/*.pot
     **/*.qm
+    doc/man/*.1
     doc/man/*.html
+    doc/man/*/*.1
     doc/man/*/*.html
     doc/man/*/*.xml
     src/*/qt_resources.cpp
