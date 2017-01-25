@@ -26,7 +26,7 @@ dvbsub_packetizer_c::dvbsub_packetizer_c(generic_reader_c *reader,
   : generic_packetizer_c(reader, ti)
 {
   set_track_type(track_subtitle);
-
+  set_default_compression_method(COMPRESSION_ZLIB);
   m_ti.m_private_data = private_data->clone();
 }
 
