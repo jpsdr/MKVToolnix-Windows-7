@@ -50,6 +50,7 @@ TrackModel::retranslateUi() {
     { QY("ID"),                      Q("id")               },
     { QY("Default track in output"), Q("defaultTrackFlag") },
     { QY("Forced track"),            Q("forcedTrackFlag")  },
+    { QY("Character set"),           Q("characterSet")     },
     { QY("Properties"),              Q("properties")       },
     { QY("Source file"),             Q("sourceFile")       },
     { QY("Source file's directory"), Q("sourceFileDir")    },
@@ -109,6 +110,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[IDColumn]              ->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
   items[DefaultTrackFlagColumn]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("Yes") : QY("No"));
   items[ForcedTrackFlagColumn] ->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("Yes") : QY("No"));
+  items[CharacterSetColumn]    ->setText(!track->m_file->isTextSubtitleContainer() ? QString{} : track->m_characterSet);
   items[PropertiesColumn]      ->setText(summarizeProperties(*track));
   items[SourceFileColumn]      ->setText(fileInfo.fileName());
   items[SourceFileDirColumn]   ->setText(QDir::toNativeSeparators(fileInfo.path()));

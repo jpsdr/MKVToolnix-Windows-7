@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* GUI: multiplexer: added a column "character set" to the "tracks, chapters
+  and tags" list view showing the currently selected character set for that
+  track. Implements #1873.
+
 ## Build system changes
 
 * Up to and including release 9.8.0 the man pages and their translations came

@@ -29,9 +29,10 @@ protected:
   static int const IDColumn               =  5;
   static int const DefaultTrackFlagColumn =  6;
   static int const ForcedTrackFlagColumn  =  7;
-  static int const PropertiesColumn       =  8;
-  static int const SourceFileColumn       =  9;
-  static int const SourceFileDirColumn    = 10;
+  static int const CharacterSetColumn     =  8;
+  static int const PropertiesColumn       =  9;
+  static int const SourceFileColumn       = 10;
+  static int const SourceFileDirColumn    = 11;
 
 protected:
   QList<Track *> *m_tracks;
