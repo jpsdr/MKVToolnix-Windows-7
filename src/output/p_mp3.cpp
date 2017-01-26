@@ -179,7 +179,7 @@ mp3_packetizer_c::set_headers() {
 
 int
 mp3_packetizer_c::process(packet_cptr packet) {
-  m_timestamp_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timestamp(packet);
 
   unsigned char *mp3_packet;
   mp3_header_t mp3header;
@@ -187,7 +187,7 @@ mp3_packetizer_c::process(packet_cptr packet) {
   m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   while ((mp3_packet = get_mp3_packet(&mp3header))) {
-    auto new_timecode = m_timestamp_calculator.get_next_timecode(m_samples_per_frame);
+    auto new_timecode = m_timestamp_calculator.get_next_timestamp(m_samples_per_frame);
     auto packet       = std::make_shared<packet_t>(memory_c::clone(mp3_packet, mp3header.framesize), new_timecode.to_ns(), m_packet_duration);
 
     packet->add_extensions(m_packet_extensions);

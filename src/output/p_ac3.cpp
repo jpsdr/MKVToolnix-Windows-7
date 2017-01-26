@@ -109,7 +109,7 @@ ac3_packetizer_c::process(packet_cptr packet) {
   //   mxinfo(boost::format("tc %1% %2% %3% %4%\n") % format_timestamp(packet->timecode) % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
   //          % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
 
-  m_timestamp_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timestamp(packet);
 
   if (m_framed)
     return process_framed(packet);
@@ -140,7 +140,7 @@ ac3_packetizer_c::set_timecode_and_add_packet(packet_cptr const &packet) {
   // mxinfo(boost::format(" →                    %1% %2% %3%\n") % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
   //        % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
 
-  packet->timecode = m_timestamp_calculator.get_next_timecode(m_samples_per_packet).to_ns();
+  packet->timecode = m_timestamp_calculator.get_next_timestamp(m_samples_per_packet).to_ns();
   packet->duration = m_packet_duration;
 
   add_packet(packet);

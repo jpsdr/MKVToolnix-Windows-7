@@ -65,7 +65,7 @@ aac_packetizer_c::set_headers() {
 
 int
 aac_packetizer_c::process_headerless(packet_cptr packet) {
-  packet->timecode = m_timestamp_calculator.get_next_timecode(ms_samples_per_packet).to_ns();
+  packet->timecode = m_timestamp_calculator.get_next_timestamp(ms_samples_per_packet).to_ns();
   packet->duration = m_packet_duration;
 
   add_packet(packet);
@@ -75,7 +75,7 @@ aac_packetizer_c::process_headerless(packet_cptr packet) {
 
 int
 aac_packetizer_c::process(packet_cptr packet) {
-  m_timestamp_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timestamp(packet);
 
   if (m_headerless)
     return process_headerless(packet);

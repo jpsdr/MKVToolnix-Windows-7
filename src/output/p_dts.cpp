@@ -118,7 +118,7 @@ dts_packetizer_c::set_headers() {
 
 int
 dts_packetizer_c::process(packet_cptr packet) {
-  m_timestamp_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timestamp(packet);
 
   m_packet_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
@@ -154,7 +154,7 @@ dts_packetizer_c::process_available_packets() {
 
   for (auto const &header_and_packet : m_queued_packets) {
     auto samples_in_packet = header_and_packet.first.get_packet_length_in_core_samples();
-    auto new_timecode      = m_timestamp_calculator.get_next_timecode(samples_in_packet);
+    auto new_timecode      = m_timestamp_calculator.get_next_timestamp(samples_in_packet);
 
     add_packet(std::make_shared<packet_t>(header_and_packet.second, new_timecode.to_ns(), header_and_packet.first.get_packet_length_in_nanoseconds().to_ns()));
   }
