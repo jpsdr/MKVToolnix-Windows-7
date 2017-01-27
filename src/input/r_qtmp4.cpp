@@ -2312,6 +2312,15 @@ qtmp4_demuxer_c::build_index() {
     build_index_chunk_mode();
 
   mark_open_gop_random_access_points_as_key_frames();
+
+  if (!m_debug_indexes)
+    return;
+
+  mxdebug(boost::format("Index for track ID %1%: %2% entries\n") % container_id % m_index.size());
+  auto fmt = boost::format("  file_pos %1% size %2% timecode %3% duration %4% is_key %5%\n");
+  for (auto const &idx : m_index)
+    mxdebug(fmt % idx.file_pos % idx.size % format_timestamp(idx.timecode) % format_timestamp(idx.duration) % idx.is_keyframe);
+
 }
 
 void

@@ -272,7 +272,7 @@ struct qtmp4_demuxer_c {
 
   std::string language;
 
-  debugging_option_c m_debug_tables, m_debug_frame_rate, m_debug_headers, m_debug_editlists;
+  debugging_option_c m_debug_tables, m_debug_frame_rate, m_debug_headers, m_debug_editlists, m_debug_indexes;
 
   qtmp4_demuxer_c(qtmp4_reader_c &reader)
     : m_reader(reader)
@@ -305,6 +305,7 @@ struct qtmp4_demuxer_c {
     , m_debug_frame_rate{"qtmp4|qtmp4_full|qtmp4_frame_rate"}
     , m_debug_headers{   "qtmp4|qtmp4_full|qtmp4_headers"}
     , m_debug_editlists{ "qtmp4|qtmp4_full|qtmp4_editlists"}
+    , m_debug_indexes{   "      qtmp4_full|qtmp4_indexes"}
   {
     memset(&esds, 0, sizeof(esds_t));
   }
