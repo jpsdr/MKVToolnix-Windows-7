@@ -754,6 +754,11 @@ qtmp4_reader_c::handle_traf_atom(qt_atom_t parent,
     else if (atom.fourcc == "trun")
       handle_trun_atom(atom.to_parent(), level + 1);
 
+    else if (atom.fourcc == "edts") {
+      if (m_track_for_fragment)
+        handle_edts_atom(*m_track_for_fragment, atom.to_parent(), level + 1);
+    }
+
     skip_atom();
     parent.size -= atom.size;
   }

@@ -19,6 +19,10 @@
 * mkvmerge: MP4 reader: mkvmerge was only reading a small part of MP4 DASH
   files where the first "moov" "mdat" atoms occur before the first "moof"
   atom. This is part of the fix for #1867.
+* mkvmerge: MP4 reader: edit list ("edts" atoms) that are part of the "moof"
+  atoms used in MP4 DASH files weren't parsed. Instead the edit lists from the
+  main track headers inside the "moov" atom were used. This is part of the fix
+  for #1867.
 
 ## Build system changes
 
