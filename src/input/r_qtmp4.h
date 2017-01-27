@@ -368,6 +368,7 @@ struct qtmp4_demuxer_c {
 private:
   void build_index_chunk_mode();
   void build_index_constant_sample_size_mode();
+  void mark_key_frames_from_key_frame_table();
   void mark_open_gop_random_access_points_as_key_frames();
 
   void calculate_timecodes_constant_sample_size();

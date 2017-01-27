@@ -29,6 +29,12 @@
   chunk" count greater than 1 and DASH "trun" atoms, then mkvmerge was
   calculating wrong positions the frame content. This is part of the fix for
   #1867.
+* mkvmerge: MP4 reader: mkvmerge couldn't deal with the key frame index table
+  having duplicate entries. The result was that only key frames up to and
+  including the first duplicate entry were marked as key frames in the output
+  file. All other frames weren't, even though some of them were referenced
+  from the key frame table after the first duplicate entry. This is part of
+  the fix for #1867.
 
 ## Build system changes
 

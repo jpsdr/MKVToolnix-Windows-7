@@ -2323,6 +2323,7 @@ qtmp4_demuxer_c::build_index() {
   else
     build_index_chunk_mode();
 
+  mark_key_frames_from_key_frame_table();
   mark_open_gop_random_access_points_as_key_frames();
 
   if (!m_debug_indexes)
@@ -2337,9 +2338,6 @@ qtmp4_demuxer_c::build_index() {
 
 void
 qtmp4_demuxer_c::build_index_constant_sample_size_mode() {
-  size_t keyframe_table_idx  = 0;
-  size_t keyframe_table_size = keyframe_table.size();
-
   auto is_audio              = 'a' == type;
   auto sound_stsd_atom       = reinterpret_cast<sound_v1_stsd_atom_t *>(is_audio && stsd ? stsd->get_buffer() : nullptr);
   auto v0_sample_size        = sound_stsd_atom       ? get_uint16_be(&sound_stsd_atom->v0.sample_size)        : 0;
@@ -2366,37 +2364,33 @@ qtmp4_demuxer_c::build_index_constant_sample_size_mode() {
       }
     }
 
-    bool is_keyframe = false;
-    if (keyframe_table.empty())
-      is_keyframe = true;
-    else if ((keyframe_table_idx < keyframe_table_size) && ((frame_idx + 1) == keyframe_table[keyframe_table_idx])) {
-      is_keyframe = true;
-      ++keyframe_table_idx;
-    }
-
-    m_index.push_back(qt_index_t(chunk_table[frame_idx].pos, frame_size, timecodes[frame_idx], durations[frame_idx], is_keyframe));
+    m_index.emplace_back(chunk_table[frame_idx].pos, frame_size, timecodes[frame_idx], durations[frame_idx], false);
   }
 }
 
 void
 qtmp4_demuxer_c::build_index_chunk_mode() {
-  size_t keyframe_table_idx  = 0;
-  size_t keyframe_table_size = keyframe_table.size();
+  for (std::size_t frame_idx = 0, num_frames = frame_indices.size(); frame_idx < num_frames; ++frame_idx) {
+    auto act_frame_idx = frame_indices[frame_idx];
+    auto &sample       = sample_table[act_frame_idx];
 
-  size_t frame_idx;
-  for (frame_idx = 0; frame_idx < frame_indices.size(); ++frame_idx) {
-    int act_frame_idx = frame_indices[frame_idx];
-
-    bool is_keyframe  = false;
-    if (keyframe_table.empty())
-      is_keyframe = true;
-    else if ((keyframe_table_idx < keyframe_table_size) && ((frame_idx + 1) == keyframe_table[keyframe_table_idx])) {
-      is_keyframe = true;
-      ++keyframe_table_idx;
-    }
-
-    m_index.push_back(qt_index_t(sample_table[act_frame_idx].pos, sample_table[act_frame_idx].size, timecodes[frame_idx], durations[frame_idx], is_keyframe));
+    m_index.emplace_back(sample.pos, sample.size, timecodes[frame_idx], durations[frame_idx], false);
   }
+}
+
+void
+qtmp4_demuxer_c::mark_key_frames_from_key_frame_table() {
+  if (keyframe_table.empty()) {
+    for (auto &index : m_index)
+      index.is_keyframe = true;
+    return;
+  }
+
+  auto num_index_entries = m_index.size();
+
+  for (auto const &keyframe_number : keyframe_table)
+    if ((keyframe_number > 0) && (keyframe_number <= num_index_entries))
+      m_index[keyframe_number - 1].is_keyframe = true;
 }
 
 void
