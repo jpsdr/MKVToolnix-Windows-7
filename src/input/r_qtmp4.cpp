@@ -2127,8 +2127,15 @@ qtmp4_demuxer_c::update_tables() {
   while (i > 0) {
     --i;
     for (j = chunkmap_table[i].first_chunk; j < last; ++j) {
-      chunk_table[j].desc = chunkmap_table[i].sample_description_id;
-      chunk_table[j].size = chunkmap_table[i].samples_per_chunk;
+      auto &chunk = chunk_table[j];
+      // Don't update chunks that were added by parsing moof atoms
+      // (DASH). Those have their "size" field already set. Only
+      // update chunks from the "moov" atom's "stco"/"co64" atoms.
+      if (chunk.size != 0)
+        continue;
+
+      chunk.desc = chunkmap_table[i].sample_description_id;
+      chunk.size = chunkmap_table[i].samples_per_chunk;
     }
 
     last = chunkmap_table[i].first_chunk;

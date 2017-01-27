@@ -23,6 +23,12 @@
   atoms used in MP4 DASH files weren't parsed. Instead the edit lists from the
   main track headers inside the "moov" atom were used. This is part of the fix
   for #1867.
+* mkvmerge: MP4 reader: when an MP4 DASH file contained both normal chunk
+  offset table ("stco"/"co64" atoms) in their regular "moov" atoms, a
+  sample-to-chunk table ("stsc" atom) whose last entry had a "samples per
+  chunk" count greater than 1 and DASH "trun" atoms, then mkvmerge was
+  calculating wrong positions the frame content. This is part of the fix for
+  #1867.
 
 ## Build system changes
 
