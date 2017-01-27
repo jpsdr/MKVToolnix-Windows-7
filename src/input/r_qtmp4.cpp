@@ -832,6 +832,9 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
   auto first_sample_flags = flags & QTMP4_TRUN_FIRST_SAMPLE_FLAGS ? m_in->read_uint32_be() : m_fragment->sample_flags;
   auto offset             = m_fragment->base_data_offset + data_offset;
 
+  std::vector<uint32_t> all_sample_flags;
+  std::vector<bool> all_keyframe_flags;
+
   for (auto idx = 0u; idx < entries; ++idx) {
     auto sample_duration = flags & QTMP4_TRUN_SAMPLE_DURATION   ? m_in->read_uint32_be() : m_fragment->sample_duration;
     auto sample_size     = flags & QTMP4_TRUN_SAMPLE_SIZE       ? m_in->read_uint32_be() : m_fragment->sample_size;
@@ -850,6 +853,9 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
     offset += sample_size;
 
     track.num_frames_from_trun++;
+
+    all_sample_flags.emplace_back(sample_flags);
+    all_keyframe_flags.push_back(keyframe);
   }
 
   m_fragment->implicit_offset = offset;
@@ -865,13 +871,15 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
     auto frame_offset_start = track.raw_frame_offset_table.size() - entries;
 
     for (auto idx = 0u; idx < entries; ++idx)
-      mxdebug(boost::format("%1%%2%: duration %3% size %4% data start %5% end %6% pts offset %7%\n")
+      mxdebug(boost::format("%1%%2%: duration %3% size %4% data start %5% end %6% pts offset %7% key? %8% raw flags 0x%|9$08x|\n")
               % spc % idx
               % track.durmap_table[durmap_start + idx].duration
               % track.sample_table[sample_start + idx].size
               % track.chunk_table[chunk_start + idx].pos
               % (track.sample_table[sample_start + idx].size + track.chunk_table[chunk_start + idx].pos)
-              % track.raw_frame_offset_table[frame_offset_start + idx].offset);
+              % track.raw_frame_offset_table[frame_offset_start + idx].offset
+              % all_keyframe_flags[idx]
+              % all_sample_flags[idx]);
   }
 }
 
