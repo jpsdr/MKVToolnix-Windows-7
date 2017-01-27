@@ -479,14 +479,14 @@ protected:
 
   virtual void handle_cmov_atom(qt_atom_t parent, int level);
   virtual void handle_cmvd_atom(qt_atom_t parent, int level);
-  virtual void handle_ctts_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_sgpd_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_sbgp_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_ctts_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_sgpd_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_sbgp_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_dcom_atom(qt_atom_t parent, int level);
-  virtual void handle_hdlr_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_mdhd_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_mdia_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_minf_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_hdlr_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_mdhd_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_mdia_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_minf_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_moov_atom(qt_atom_t parent, int level);
   virtual void handle_mvhd_atom(qt_atom_t parent, int level);
   virtual void handle_udta_atom(qt_atom_t parent, int level);
@@ -500,42 +500,42 @@ protected:
   virtual void handle_traf_atom(qt_atom_t parent, int level);
   virtual void handle_tfhd_atom(qt_atom_t parent, int level);
   virtual void handle_trun_atom(qt_atom_t parent, int level);
-  virtual void handle_stbl_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_stco_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_co64_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_stsc_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_stsd_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_stss_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_stsz_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_sttd_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_stts_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_tkhd_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_trak_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_edts_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_elst_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
-  virtual void handle_tref_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_stbl_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_stco_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_co64_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_stsc_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_stsd_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_stss_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_stsz_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_sttd_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_stts_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_tkhd_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_trak_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_edts_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_elst_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_tref_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
 
-  virtual memory_cptr create_bitmap_info_header(qtmp4_demuxer_cptr &dmx, const char *fourcc, size_t extra_size = 0, const void *extra_data = nullptr);
+  virtual memory_cptr create_bitmap_info_header(qtmp4_demuxer_c &dmx, const char *fourcc, size_t extra_size = 0, const void *extra_data = nullptr);
 
-  virtual void create_audio_packetizer_aac(qtmp4_demuxer_cptr &dmx);
-  virtual bool create_audio_packetizer_ac3(qtmp4_demuxer_cptr &dmx);
-  virtual bool create_audio_packetizer_alac(qtmp4_demuxer_cptr &dmx);
-  virtual bool create_audio_packetizer_dts(qtmp4_demuxer_cptr &dmx);
-  virtual void create_audio_packetizer_mp3(qtmp4_demuxer_cptr &dmx);
-  virtual void create_audio_packetizer_passthrough(qtmp4_demuxer_cptr &dmx);
-  virtual void create_audio_packetizer_pcm(qtmp4_demuxer_cptr &dmx);
+  virtual void create_audio_packetizer_aac(qtmp4_demuxer_c &dmx);
+  virtual bool create_audio_packetizer_ac3(qtmp4_demuxer_c &dmx);
+  virtual bool create_audio_packetizer_alac(qtmp4_demuxer_c &dmx);
+  virtual bool create_audio_packetizer_dts(qtmp4_demuxer_c &dmx);
+  virtual void create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx);
+  virtual void create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx);
+  virtual void create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx);
 
-  virtual void create_video_packetizer_mpeg1_2(qtmp4_demuxer_cptr &dmx);
-  virtual void create_video_packetizer_mpeg4_p10(qtmp4_demuxer_cptr &dmx);
-  virtual void create_video_packetizer_mpeg4_p2(qtmp4_demuxer_cptr &dmx);
-  virtual void create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx);
-  virtual void create_video_packetizer_standard(qtmp4_demuxer_cptr &dmx);
-  virtual void create_video_packetizer_svq1(qtmp4_demuxer_cptr &dmx);
-  virtual void create_video_packetizer_prores(qtmp4_demuxer_cptr &dmx);
+  virtual void create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx);
+  virtual void create_video_packetizer_mpeg4_p10(qtmp4_demuxer_c &dmx);
+  virtual void create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx);
+  virtual void create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx);
+  virtual void create_video_packetizer_standard(qtmp4_demuxer_c &dmx);
+  virtual void create_video_packetizer_svq1(qtmp4_demuxer_c &dmx);
+  virtual void create_video_packetizer_prores(qtmp4_demuxer_c &dmx);
 
-  virtual void create_subtitles_packetizer_vobsub(qtmp4_demuxer_cptr &dmx);
+  virtual void create_subtitles_packetizer_vobsub(qtmp4_demuxer_c &dmx);
 
-  virtual void handle_audio_encoder_delay(qtmp4_demuxer_cptr &dmx);
+  virtual void handle_audio_encoder_delay(qtmp4_demuxer_c &dmx);
 
   virtual std::string decode_and_verify_language(uint16_t coded_language);
   virtual void read_chapter_track();

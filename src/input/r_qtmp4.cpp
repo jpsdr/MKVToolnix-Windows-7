@@ -353,12 +353,12 @@ qtmp4_reader_c::calculate_timecodes() {
 }
 
 void
-qtmp4_reader_c::handle_audio_encoder_delay(qtmp4_demuxer_cptr &dmx) {
-  if ((0 == m_audio_encoder_delay_samples) || (0 == dmx->a_samplerate) || (-1 == dmx->ptzr))
+qtmp4_reader_c::handle_audio_encoder_delay(qtmp4_demuxer_c &dmx) {
+  if ((0 == m_audio_encoder_delay_samples) || (0 == dmx.a_samplerate) || (-1 == dmx.ptzr))
     return;
 
-  PTZR(dmx->ptzr)->m_ti.m_tcsync.displacement -= (m_audio_encoder_delay_samples * 1000000000ll) / dmx->a_samplerate;
-  m_audio_encoder_delay_samples                = 0;
+  PTZR(dmx.ptzr)->m_ti.m_tcsync.displacement -= (m_audio_encoder_delay_samples * 1000000000ll) / dmx.a_samplerate;
+  m_audio_encoder_delay_samples               = 0;
 }
 
 #define print_basic_atom_info() \
@@ -449,7 +449,7 @@ qtmp4_reader_c::handle_cmvd_atom(qt_atom_t atom,
 }
 
 void
-qtmp4_reader_c::handle_ctts_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_ctts_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -462,18 +462,18 @@ qtmp4_reader_c::handle_ctts_atom(qtmp4_demuxer_cptr &new_dmx,
 
     frame_offset.count  = m_in->read_uint32_be();
     frame_offset.offset = m_in->read_uint32_be();
-    new_dmx->raw_frame_offset_table.push_back(frame_offset);
+    dmx.raw_frame_offset_table.push_back(frame_offset);
   }
 
   if (m_debug_tables) {
     i = 0;
-    for (auto const &frame_offset : new_dmx->raw_frame_offset_table)
+    for (auto const &frame_offset : dmx.raw_frame_offset_table)
       mxdebug(boost::format("%1%%2%: count %3% offset %4%\n") % space((level + 1) * 2 + 1) % i++ % frame_offset.count % frame_offset.offset);
   }
 }
 
 void
-qtmp4_reader_c::handle_sgpd_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_sgpd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   auto version = m_in->read_uint8();
@@ -500,18 +500,18 @@ qtmp4_reader_c::handle_sgpd_atom(qtmp4_demuxer_cptr &new_dmx,
     auto num_leading_samples_known = (byte & 0x80) == 0x80;
     auto num_leading_samples       = static_cast<unsigned int>(byte & 0x7f);
 
-    new_dmx->random_access_point_table.emplace_back(num_leading_samples_known, num_leading_samples);
+    dmx.random_access_point_table.emplace_back(num_leading_samples_known, num_leading_samples);
   }
 
   if (m_debug_tables) {
     auto idx = 0;
-    for (auto const &rap : new_dmx->random_access_point_table)
+    for (auto const &rap : dmx.random_access_point_table)
       mxdebug(boost::format("%1%%2%: leading samples known %3% num %4%\n") % space((level + 1) * 2 + 2) % idx++ % rap.num_leading_samples_known % rap.num_leading_samples);
   }
 }
 
 void
-qtmp4_reader_c::handle_sbgp_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_sbgp_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   auto version = m_in->read_uint8();
@@ -526,7 +526,7 @@ qtmp4_reader_c::handle_sbgp_atom(qtmp4_demuxer_cptr &new_dmx,
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sample to group table: version %2%, type '%3%', %4% raw entries\n") % space(level * 2 + 2) % static_cast<unsigned int>(version) % grouping_type % count);
 
-  auto &table = new_dmx->sample_to_group_tables[grouping_type.value()];
+  auto &table = dmx.sample_to_group_tables[grouping_type.value()];
 
   for (auto idx = 0u; idx < count; ++idx) {
     auto sample_count            = m_in->read_uint32_be();
@@ -550,7 +550,7 @@ qtmp4_reader_c::handle_dcom_atom(qt_atom_t,
 }
 
 void
-qtmp4_reader_c::handle_hdlr_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_hdlr_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t atom,
                                  int level) {
   hdlr_atom_t hdlr;
@@ -565,17 +565,17 @@ qtmp4_reader_c::handle_hdlr_atom(qtmp4_demuxer_cptr &new_dmx,
 
   auto subtype = fourcc_c{&hdlr.subtype};
   if (subtype == "soun")
-    new_dmx->type = 'a';
+    dmx.type = 'a';
 
   else if (subtype == "vide")
-    new_dmx->type = 'v';
+    dmx.type = 'v';
 
   else if ((subtype == "text") || (subtype == "subp"))
-    new_dmx->type = 's';
+    dmx.type = 's';
 }
 
 void
-qtmp4_reader_c::handle_mdhd_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_mdhd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t atom,
                                  int level) {
   if (1 > atom.size)
@@ -591,9 +591,9 @@ qtmp4_reader_c::handle_mdhd_atom(qtmp4_demuxer_cptr &new_dmx,
     if (m_in->read(&mdhd.flags, sizeof(mdhd_atom_t) - 1) != (sizeof(mdhd_atom_t) - 1))
       throw mtx::input::header_parsing_x();
 
-    new_dmx->time_scale      = get_uint32_be(&mdhd.time_scale);
-    new_dmx->global_duration = get_uint32_be(&mdhd.duration);
-    new_dmx->language        = decode_and_verify_language(get_uint16_be(&mdhd.language));
+    dmx.time_scale      = get_uint32_be(&mdhd.time_scale);
+    dmx.global_duration = get_uint32_be(&mdhd.duration);
+    dmx.language        = decode_and_verify_language(get_uint16_be(&mdhd.language));
 
   } else if (1 == version) {
     mdhd64_atom_t mdhd;
@@ -603,21 +603,21 @@ qtmp4_reader_c::handle_mdhd_atom(qtmp4_demuxer_cptr &new_dmx,
     if (m_in->read(&mdhd.flags, sizeof(mdhd64_atom_t) - 1) != (sizeof(mdhd64_atom_t) - 1))
       throw mtx::input::header_parsing_x();
 
-    new_dmx->time_scale      = get_uint32_be(&mdhd.time_scale);
-    new_dmx->global_duration = get_uint64_be(&mdhd.duration);
-    new_dmx->language        = decode_and_verify_language(get_uint16_be(&mdhd.language));
+    dmx.time_scale      = get_uint32_be(&mdhd.time_scale);
+    dmx.global_duration = get_uint64_be(&mdhd.duration);
+    dmx.language        = decode_and_verify_language(get_uint16_be(&mdhd.language));
 
   } else
     mxerror(boost::format(Y("Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version %1%.\n")) % version);
 
-  mxdebug_if(m_debug_headers, boost::format("%1%Time scale: %2%, duration: %3%, language: %4%\n") % space(level * 2 + 1) % new_dmx->time_scale % new_dmx->global_duration % new_dmx->language);
+  mxdebug_if(m_debug_headers, boost::format("%1%Time scale: %2%, duration: %3%, language: %4%\n") % space(level * 2 + 1) % dmx.time_scale % dmx.global_duration % dmx.language);
 
-  if (0 == new_dmx->time_scale)
+  if (0 == dmx.time_scale)
     mxerror(Y("Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"));
 }
 
 void
-qtmp4_reader_c::handle_mdia_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_mdia_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
   while (parent.size > 0) {
@@ -625,13 +625,13 @@ qtmp4_reader_c::handle_mdia_atom(qtmp4_demuxer_cptr &new_dmx,
     print_basic_atom_info();
 
     if (atom.fourcc == "mdhd")
-      handle_mdhd_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_mdhd_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "hdlr")
-      handle_hdlr_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_hdlr_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "minf")
-      handle_minf_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_minf_atom(dmx, atom.to_parent(), level + 1);
 
     skip_atom();
     parent.size -= atom.size;
@@ -639,7 +639,7 @@ qtmp4_reader_c::handle_mdia_atom(qtmp4_demuxer_cptr &new_dmx,
 }
 
 void
-qtmp4_reader_c::handle_minf_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_minf_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
   while (0 < parent.size) {
@@ -647,10 +647,10 @@ qtmp4_reader_c::handle_minf_atom(qtmp4_demuxer_cptr &new_dmx,
     print_basic_atom_info();
 
     if (atom.fourcc == "hdlr")
-      handle_hdlr_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_hdlr_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "stbl")
-      handle_stbl_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_stbl_atom(dmx, atom.to_parent(), level + 1);
 
     skip_atom();
     parent.size -= atom.size;
@@ -677,12 +677,13 @@ qtmp4_reader_c::handle_moov_atom(qt_atom_t parent,
       handle_mvex_atom(atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "trak") {
-      auto new_dmx = std::make_shared<qtmp4_demuxer_c>(*this);
-      new_dmx->id = m_demuxers.size();
+      auto dmx = std::make_shared<qtmp4_demuxer_c>(*this);
+      dmx->id  = m_demuxers.size();
 
-      handle_trak_atom(new_dmx, atom.to_parent(), level + 1);
-      if ((!new_dmx->is_unknown() && new_dmx->codec) || new_dmx->is_subtitles() || new_dmx->is_video() || new_dmx->is_audio())
-        m_demuxers.push_back(new_dmx);
+      handle_trak_atom(*dmx, atom.to_parent(), level + 1);
+
+      if ((!dmx->is_unknown() && dmx->codec) || dmx->is_subtitles() || dmx->is_video() || dmx->is_audio())
+        m_demuxers.push_back(dmx);
     }
 
     skip_atom();
@@ -1105,7 +1106,7 @@ qtmp4_reader_c::process_chapter_entries(int level,
 }
 
 void
-qtmp4_reader_c::handle_stbl_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_stbl_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
   while (0 < parent.size) {
@@ -1113,34 +1114,34 @@ qtmp4_reader_c::handle_stbl_atom(qtmp4_demuxer_cptr &new_dmx,
     print_basic_atom_info();
 
     if (atom.fourcc == "stts")
-      handle_stts_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_stts_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "stsd")
-      handle_stsd_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_stsd_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "stss")
-      handle_stss_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_stss_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "stsc")
-      handle_stsc_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_stsc_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "stsz")
-      handle_stsz_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_stsz_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "stco")
-      handle_stco_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_stco_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "co64")
-      handle_co64_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_co64_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "ctts")
-      handle_ctts_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_ctts_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "sgpd")
-      handle_sgpd_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_sgpd_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "sbgp")
-      handle_sbgp_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_sbgp_atom(dmx, atom.to_parent(), level + 1);
 
     skip_atom();
     parent.size -= atom.size;
@@ -1148,7 +1149,7 @@ qtmp4_reader_c::handle_stbl_atom(qtmp4_demuxer_cptr &new_dmx,
 }
 
 void
-qtmp4_reader_c::handle_stco_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_stco_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -1157,15 +1158,15 @@ qtmp4_reader_c::handle_stco_atom(qtmp4_demuxer_cptr &new_dmx,
   mxdebug_if(m_debug_headers, boost::format("%1%Chunk offset table: %2% entries\n") % space(level * 2 + 1) % count);
 
   for (auto i = 0u; i < count; ++i)
-    new_dmx->chunk_table.emplace_back(0, m_in->read_uint32_be());
+    dmx.chunk_table.emplace_back(0, m_in->read_uint32_be());
 
   if (m_debug_tables)
-    for (auto const &chunk : new_dmx->chunk_table)
+    for (auto const &chunk : dmx.chunk_table)
       mxdebug(boost::format("%1%  %2%\n") % space(level * 2 + 1) % chunk.pos);
 }
 
 void
-qtmp4_reader_c::handle_co64_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_co64_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -1174,15 +1175,15 @@ qtmp4_reader_c::handle_co64_atom(qtmp4_demuxer_cptr &new_dmx,
   mxdebug_if(m_debug_headers, boost::format("%1%64bit chunk offset table: %2% entries\n") % space(level * 2 + 1) % count);
 
   for (auto i = 0u; i < count; ++i)
-    new_dmx->chunk_table.emplace_back(0, m_in->read_uint64_be());
+    dmx.chunk_table.emplace_back(0, m_in->read_uint64_be());
 
   if (m_debug_tables)
-    for (auto const &chunk : new_dmx->chunk_table)
+    for (auto const &chunk : dmx.chunk_table)
       mxdebug(boost::format("%1%  %2%\n") % space(level * 2 + 1) % chunk.pos);
 }
 
 void
-qtmp4_reader_c::handle_stsc_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_stsc_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -1194,19 +1195,19 @@ qtmp4_reader_c::handle_stsc_atom(qtmp4_demuxer_cptr &new_dmx,
     chunkmap.first_chunk           = m_in->read_uint32_be() - 1;
     chunkmap.samples_per_chunk     = m_in->read_uint32_be();
     chunkmap.sample_description_id = m_in->read_uint32_be();
-    new_dmx->chunkmap_table.push_back(chunkmap);
+    dmx.chunkmap_table.push_back(chunkmap);
   }
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sample to chunk/chunkmap table: %2% entries\n") % space(level * 2 + 1) % count);
   if (m_debug_tables) {
     i = 0;
-    for (auto const &chunkmap : new_dmx->chunkmap_table)
+    for (auto const &chunkmap : dmx.chunkmap_table)
       mxdebug(boost::format("%1%%2%: first_chunk %3% samples_per_chunk %4% sample_description_id %5%\n") % space((level + 1) * 2 + 1) % i++ % chunkmap.first_chunk % chunkmap.samples_per_chunk % chunkmap.sample_description_id);
   }
 }
 
 void
-qtmp4_reader_c::handle_stsd_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_stsd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -1218,23 +1219,23 @@ qtmp4_reader_c::handle_stsd_atom(qtmp4_demuxer_cptr &new_dmx,
     uint32_t size = m_in->read_uint32_be();
 
     if (4 > size)
-      mxerror(boost::format(Y("Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID %1%.\n")) % new_dmx->id);
+      mxerror(boost::format(Y("Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID %1%.\n")) % dmx.id);
 
-    new_dmx->stsd = memory_c::alloc(size);
-    auto priv     = new_dmx->stsd->get_buffer();
+    dmx.stsd = memory_c::alloc(size);
+    auto priv     = dmx.stsd->get_buffer();
 
     put_uint32_be(priv, size);
     if (m_in->read(priv + sizeof(uint32_t), size - sizeof(uint32_t)) != (size - sizeof(uint32_t)))
-      mxerror(boost::format(Y("Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n")) % new_dmx->id);
+      mxerror(boost::format(Y("Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n")) % dmx.id);
 
-    new_dmx->handle_stsd_atom(size, level);
+    dmx.handle_stsd_atom(size, level);
 
     m_in->setFilePointer(pos + size);
   }
 }
 
 void
-qtmp4_reader_c::handle_stss_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_stss_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -1242,18 +1243,18 @@ qtmp4_reader_c::handle_stss_atom(qtmp4_demuxer_cptr &new_dmx,
 
   size_t i;
   for (i = 0; i < count; ++i)
-    new_dmx->keyframe_table.push_back(m_in->read_uint32_be());
+    dmx.keyframe_table.push_back(m_in->read_uint32_be());
 
-  std::sort(new_dmx->keyframe_table.begin(), new_dmx->keyframe_table.end());
+  std::sort(dmx.keyframe_table.begin(), dmx.keyframe_table.end());
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sync/keyframe table: %2% entries\n") % space(level * 2 + 1) % count);
   if (m_debug_tables)
-    for (auto const &keyframe : new_dmx->keyframe_table)
+    for (auto const &keyframe : dmx.keyframe_table)
       mxdebug(boost::format("%1%keyframe at %2%\n") % space((level + 1) * 2 + 1) % keyframe);
 }
 
 void
-qtmp4_reader_c::handle_stsz_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_stsz_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -1272,24 +1273,24 @@ qtmp4_reader_c::handle_stsz_atom(qtmp4_demuxer_cptr &new_dmx,
       if (sample.size >= 100 * 1024 * 1024)
         sample.size = 0;
 
-      new_dmx->sample_table.push_back(sample);
+      dmx.sample_table.push_back(sample);
     }
 
     mxdebug_if(m_debug_headers, boost::format("%1%Sample size table: %2% entries\n") % space(level * 2 + 1) % count);
     if (m_debug_tables) {
       auto i = 0u;
-      for (auto const &sample : new_dmx->sample_table)
+      for (auto const &sample : dmx.sample_table)
         mxdebug(boost::format("%1%%2%: size %3%\n") % space((level + 1) * 2 + 1) % i++ % sample.size);
     }
 
   } else {
-    new_dmx->sample_size = sample_size;
+    dmx.sample_size = sample_size;
     mxdebug_if(m_debug_headers, boost::format("%1%Sample size table; global sample size: %2%\n") % space(level * 2 + 1) % sample_size);
   }
 }
 
 void
-qtmp4_reader_c::handle_sttd_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_sttd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -1301,19 +1302,19 @@ qtmp4_reader_c::handle_sttd_atom(qtmp4_demuxer_cptr &new_dmx,
 
     durmap.number   = m_in->read_uint32_be();
     durmap.duration = m_in->read_uint32_be();
-    new_dmx->durmap_table.push_back(durmap);
+    dmx.durmap_table.push_back(durmap);
   }
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sample duration table: %2% entries\n") % space(level * 2 + 1) % count);
   if (m_debug_tables) {
     i = 0;
-    for (auto const &durmap : new_dmx->durmap_table)
+    for (auto const &durmap : dmx.durmap_table)
       mxdebug(boost::format("%1%%2%: number %3% duration %4%\n") % space((level + 1) * 2 + 1) % i++ % durmap.number % durmap.duration);
   }
 }
 
 void
-qtmp4_reader_c::handle_stts_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_stts_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
@@ -1325,19 +1326,19 @@ qtmp4_reader_c::handle_stts_atom(qtmp4_demuxer_cptr &new_dmx,
 
     durmap.number   = m_in->read_uint32_be();
     durmap.duration = m_in->read_uint32_be();
-    new_dmx->durmap_table.push_back(durmap);
+    dmx.durmap_table.push_back(durmap);
   }
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sample duration table: %2% entries\n") % space(level * 2 + 1) % count);
   if (m_debug_tables) {
     i = 0;
-    for (auto const &durmap : new_dmx->durmap_table)
+    for (auto const &durmap : dmx.durmap_table)
       mxdebug(boost::format("%1%%2%: number %3% duration %4%\n") % space((level + 1) * 2 + 1) % i++ % durmap.number % durmap.duration);
   }
 }
 
 void
-qtmp4_reader_c::handle_edts_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_edts_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
   while (0 < parent.size) {
@@ -1345,7 +1346,7 @@ qtmp4_reader_c::handle_edts_atom(qtmp4_demuxer_cptr &new_dmx,
     print_basic_atom_info();
 
     if (atom.fourcc == "elst")
-      handle_elst_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_elst_atom(dmx, atom.to_parent(), level + 1);
 
     skip_atom();
     parent.size -= atom.size;
@@ -1353,17 +1354,17 @@ qtmp4_reader_c::handle_edts_atom(qtmp4_demuxer_cptr &new_dmx,
 }
 
 void
-qtmp4_reader_c::handle_elst_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_elst_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
   uint8_t version = m_in->read_uint8();
   m_in->skip(3);                // flags
   uint32_t count  = m_in->read_uint32_be();
-  new_dmx->editlist_table.resize(count);
+  dmx.editlist_table.resize(count);
 
   size_t i;
   for (i = 0; i < count; ++i) {
-    auto &editlist = new_dmx->editlist_table[i];
+    auto &editlist = dmx.editlist_table[i];
 
     if (1 == version) {
       editlist.segment_duration = m_in->read_uint64_be();
@@ -1381,13 +1382,13 @@ qtmp4_reader_c::handle_elst_atom(qtmp4_demuxer_cptr &new_dmx,
     return;
 
   i = 0;
-  for (auto const &editlist : new_dmx->editlist_table)
+  for (auto const &editlist : dmx.editlist_table)
     mxdebug_if(m_debug_tables, boost::format("%1%%2%: segment duration %3% media time %4% media rate %5%.%6%\n")
                % space((level + 1) * 2 + 1) % i++ % editlist.segment_duration % editlist.media_time % editlist.media_rate_integer % editlist.media_rate_fraction);
 }
 
 void
-qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t atom,
                                  int level) {
   tkhd_atom_t tkhd;
@@ -1398,19 +1399,19 @@ qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_cptr &new_dmx,
   if (m_in->read(&tkhd, sizeof(tkhd_atom_t)) != sizeof(tkhd_atom_t))
     throw mtx::input::header_parsing_x();
 
-  new_dmx->container_id         = get_uint32_be(&tkhd.track_id);
-  new_dmx->v_display_width_flt  = get_uint32_be(&tkhd.track_width);
-  new_dmx->v_display_height_flt = get_uint32_be(&tkhd.track_height);
-  new_dmx->v_width              = new_dmx->v_display_width_flt  >> 16;
-  new_dmx->v_height             = new_dmx->v_display_height_flt >> 16;
+  dmx.container_id         = get_uint32_be(&tkhd.track_id);
+  dmx.v_display_width_flt  = get_uint32_be(&tkhd.track_width);
+  dmx.v_display_height_flt = get_uint32_be(&tkhd.track_height);
+  dmx.v_width              = dmx.v_display_width_flt  >> 16;
+  dmx.v_height             = dmx.v_display_height_flt >> 16;
 
   mxdebug_if(m_debug_headers,
              boost::format("%1%Track ID: %2% display width × height %3%.%4% × %5%.%6%\n")
-             % space(level * 2 + 1) % new_dmx->container_id % (new_dmx->v_display_width_flt >> 16) % (new_dmx->v_display_width_flt & 0xffff) % (new_dmx->v_display_height_flt >> 16) % (new_dmx->v_display_height_flt & 0xffff));
+             % space(level * 2 + 1) % dmx.container_id % (dmx.v_display_width_flt >> 16) % (dmx.v_display_width_flt & 0xffff) % (dmx.v_display_height_flt >> 16) % (dmx.v_display_height_flt & 0xffff));
 }
 
 void
-qtmp4_reader_c::handle_tref_atom(qtmp4_demuxer_cptr &/* new_dmx */,
+qtmp4_reader_c::handle_tref_atom(qtmp4_demuxer_c &/* dmx */,
                                  qt_atom_t parent,
                                  int level) {
   while (parent.size > 0) {
@@ -1439,7 +1440,7 @@ qtmp4_reader_c::handle_tref_atom(qtmp4_demuxer_cptr &/* new_dmx */,
 }
 
 void
-qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_cptr &new_dmx,
+qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
   while (parent.size > 0) {
@@ -1447,23 +1448,23 @@ qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_cptr &new_dmx,
     print_basic_atom_info();
 
     if (atom.fourcc == "tkhd")
-      handle_tkhd_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_tkhd_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "mdia")
-      handle_mdia_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_mdia_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "edts")
-      handle_edts_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_edts_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "tref")
-      handle_tref_atom(new_dmx, atom.to_parent(), level + 1);
+      handle_tref_atom(dmx, atom.to_parent(), level + 1);
 
     skip_atom();
     parent.size -= atom.size;
   }
 
-  new_dmx->determine_codec();
-  mxdebug_if(m_debug_headers, boost::format("%1%Codec determination result: %2%\n") % space(level * 2 + 1) % new_dmx->codec);
+  dmx.determine_codec();
+  mxdebug_if(m_debug_headers, boost::format("%1%Codec determination result: %2%\n") % space(level * 2 + 1) % dmx.codec);
 }
 
 file_status_e
@@ -1472,38 +1473,38 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
   size_t dmx_idx;
 
   for (dmx_idx = 0; dmx_idx < m_demuxers.size(); ++dmx_idx) {
-    qtmp4_demuxer_cptr &dmx = m_demuxers[dmx_idx];
+    auto &dmx = *m_demuxers[dmx_idx];
 
-    if ((-1 == dmx->ptzr) || (PTZR(dmx->ptzr) != ptzr))
+    if ((-1 == dmx.ptzr) || (PTZR(dmx.ptzr) != ptzr))
       continue;
 
-    if (dmx->pos < dmx->m_index.size())
+    if (dmx.pos < dmx.m_index.size())
       break;
   }
 
   if (m_demuxers.size() == dmx_idx)
     return flush_packetizers();
 
-  qtmp4_demuxer_cptr &dmx = m_demuxers[dmx_idx];
-  qt_index_t &index       = dmx->m_index[dmx->pos];
+ auto &dmx   = *m_demuxers[dmx_idx];
+ auto &index = dmx.m_index[dmx.pos];
 
   m_in->setFilePointer(index.file_pos);
 
   int buffer_offset = 0;
   memory_cptr buffer;
 
-  if (   dmx->is_video()
-      && !dmx->pos
-      && dmx->codec.is(codec_c::type_e::V_MPEG4_P2)
-      && dmx->esds_parsed
-      && (dmx->esds.decoder_config)) {
-    buffer        = memory_c::alloc(index.size + dmx->esds.decoder_config->get_size());
-    buffer_offset = dmx->esds.decoder_config->get_size();
+  if (   dmx.is_video()
+      && !dmx.pos
+      && dmx.codec.is(codec_c::type_e::V_MPEG4_P2)
+      && dmx.esds_parsed
+      && (dmx.esds.decoder_config)) {
+    buffer        = memory_c::alloc(index.size + dmx.esds.decoder_config->get_size());
+    buffer_offset = dmx.esds.decoder_config->get_size();
 
-    memcpy(buffer->get_buffer(), dmx->esds.decoder_config->get_buffer(), dmx->esds.decoder_config->get_size());
+    memcpy(buffer->get_buffer(), dmx.esds.decoder_config->get_buffer(), dmx.esds.decoder_config->get_size());
 
-  } else if (   dmx->is_video()
-             && dmx->codec.is(codec_c::type_e::V_PRORES)
+  } else if (   dmx.is_video()
+             && dmx.codec.is(codec_c::type_e::V_PRORES)
              && (index.size >= 8)) {
     m_in->skip(8);
     index.size -= 8;
@@ -1515,22 +1516,22 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
 
   if (m_in->read(buffer->get_buffer() + buffer_offset, index.size) != index.size) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"))
-           % dmx->pos % dmx->m_index.size() % index.size % index.file_pos);
+           % dmx.pos % dmx.m_index.size() % index.size % index.file_pos);
     return flush_packetizers();
   }
 
-  auto duration = dmx->m_use_frame_rate_for_duration ? *dmx->m_use_frame_rate_for_duration : index.duration;
-  PTZR(dmx->ptzr)->process(new packet_t(buffer, index.timecode, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
-  ++dmx->pos;
+  auto duration = dmx.m_use_frame_rate_for_duration ? *dmx.m_use_frame_rate_for_duration : index.duration;
+  PTZR(dmx.ptzr)->process(new packet_t(buffer, index.timecode, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+  ++dmx.pos;
 
-  if (dmx->pos < dmx->m_index.size())
+  if (dmx.pos < dmx.m_index.size())
     return FILE_STATUS_MOREDATA;
 
   return flush_packetizers();
 }
 
 memory_cptr
-qtmp4_reader_c::create_bitmap_info_header(qtmp4_demuxer_cptr &dmx,
+qtmp4_reader_c::create_bitmap_info_header(qtmp4_demuxer_c &dmx,
                                           const char *fourcc,
                                           size_t extra_size,
                                           const void *extra_data) {
@@ -1540,11 +1541,11 @@ qtmp4_reader_c::create_bitmap_info_header(qtmp4_demuxer_cptr &dmx,
 
   memset(bih, 0, full_size);
   put_uint32_le(&bih->bi_size,       full_size);
-  put_uint32_le(&bih->bi_width,      dmx->v_width);
-  put_uint32_le(&bih->bi_height,     dmx->v_height);
+  put_uint32_le(&bih->bi_width,      dmx.v_width);
+  put_uint32_le(&bih->bi_height,     dmx.v_height);
   put_uint16_le(&bih->bi_planes,     1);
-  put_uint16_le(&bih->bi_bit_count,  dmx->v_bitdepth);
-  put_uint32_le(&bih->bi_size_image, dmx->v_width * dmx->v_height * 3);
+  put_uint16_le(&bih->bi_bit_count,  dmx.v_bitdepth);
+  put_uint32_le(&bih->bi_size_image, dmx.v_width * dmx.v_height * 3);
   memcpy(&bih->bi_compression, fourcc, 4);
 
   if (0 != extra_size)
@@ -1554,138 +1555,138 @@ qtmp4_reader_c::create_bitmap_info_header(qtmp4_demuxer_cptr &dmx,
 }
 
 bool
-qtmp4_reader_c::create_audio_packetizer_ac3(qtmp4_demuxer_cptr &dmx) {
-  auto buf = dmx->read_first_bytes(64);
+qtmp4_reader_c::create_audio_packetizer_ac3(qtmp4_demuxer_c &dmx) {
+  auto buf = dmx.read_first_bytes(64);
 
-  if (!buf || (-1 == dmx->m_ac3_header.find_in(buf))) {
-    mxwarn_tid(m_ti.m_fname, dmx->id, Y("No AC-3 header found in first frame; track will be skipped.\n"));
-    dmx->ok = false;
+  if (!buf || (-1 == dmx.m_ac3_header.find_in(buf))) {
+    mxwarn_tid(m_ti.m_fname, dmx.id, Y("No AC-3 header found in first frame; track will be skipped.\n"));
+    dmx.ok = false;
 
     return false;
   }
 
-  dmx->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, dmx->m_ac3_header.m_sample_rate, dmx->m_ac3_header.m_channels, dmx->m_ac3_header.m_bs_id, true));
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  dmx.ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, dmx.m_ac3_header.m_sample_rate, dmx.m_ac3_header.m_channels, dmx.m_ac3_header.m_bs_id, true));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 
   return true;
 }
 
 bool
-qtmp4_reader_c::create_audio_packetizer_alac(qtmp4_demuxer_cptr &dmx) {
-  auto magic_cookie = memory_c::clone(dmx->stsd->get_buffer() + dmx->stsd_non_priv_struct_size + 12, dmx->stsd->get_size() - dmx->stsd_non_priv_struct_size - 12);
-  dmx->ptzr         = add_packetizer(new alac_packetizer_c(this, m_ti, magic_cookie, dmx->a_samplerate, dmx->a_channels));
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+qtmp4_reader_c::create_audio_packetizer_alac(qtmp4_demuxer_c &dmx) {
+  auto magic_cookie = memory_c::clone(dmx.stsd->get_buffer() + dmx.stsd_non_priv_struct_size + 12, dmx.stsd->get_size() - dmx.stsd_non_priv_struct_size - 12);
+  dmx.ptzr          = add_packetizer(new alac_packetizer_c(this, m_ti, magic_cookie, dmx.a_samplerate, dmx.a_channels));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 
   return true;
 }
 
 bool
-qtmp4_reader_c::create_audio_packetizer_dts(qtmp4_demuxer_cptr &dmx) {
-  dmx->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, dmx->m_dts_header));
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+qtmp4_reader_c::create_audio_packetizer_dts(qtmp4_demuxer_c &dmx) {
+  dmx.ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, dmx.m_dts_header));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 
   return true;
 }
 
 void
-qtmp4_reader_c::create_video_packetizer_svq1(qtmp4_demuxer_cptr &dmx) {
+qtmp4_reader_c::create_video_packetizer_svq1(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = create_bitmap_info_header(dmx, "SVQ1");
-  dmx->ptzr           = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, 0.0, dmx->v_width, dmx->v_height));
+  dmx.ptzr            = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_video_packetizer_mpeg4_p2(qtmp4_demuxer_cptr &dmx) {
+qtmp4_reader_c::create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = create_bitmap_info_header(dmx, "DIVX");
-  dmx->ptzr           = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, 0.0, dmx->v_width, dmx->v_height, false));
+  dmx.ptzr            = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height, false));
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_cptr &dmx) {
-  int version = (dmx->fourcc.value() & 0xff) - '0';
-  dmx->ptzr   = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, version, -1.0, dmx->v_width, dmx->v_height, 0, 0, false));
+qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
+  int version = (dmx.fourcc.value() & 0xff) - '0';
+  dmx.ptzr    = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, version, -1.0, dmx.v_width, dmx.v_height, 0, 0, false));
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_video_packetizer_mpeg4_p10(qtmp4_demuxer_cptr &dmx) {
-  m_ti.m_private_data = dmx->priv;
-  dmx->ptzr           = add_packetizer(new mpeg4_p10_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx->frame_rate), dmx->v_width, dmx->v_height));
+qtmp4_reader_c::create_video_packetizer_mpeg4_p10(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = dmx.priv;
+  dmx.ptzr            = add_packetizer(new mpeg4_p10_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx) {
-  m_ti.m_private_data = dmx->priv;
-  dmx->ptzr           = add_packetizer(new hevc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx->frame_rate), dmx->v_width, dmx->v_height));
+qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = dmx.priv;
+  dmx.ptzr            = add_packetizer(new hevc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_video_packetizer_prores(qtmp4_demuxer_cptr &dmx) {
-  m_ti.m_private_data = memory_c::clone(dmx->fourcc.str());
-  dmx->ptzr           = add_packetizer(new generic_video_packetizer_c(this, m_ti, MKV_V_PRORES, boost::rational_cast<double>(dmx->frame_rate), dmx->v_width, dmx->v_height));
+qtmp4_reader_c::create_video_packetizer_prores(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = memory_c::clone(dmx.fourcc.str());
+  dmx.ptzr            = add_packetizer(new generic_video_packetizer_c(this, m_ti, MKV_V_PRORES, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_cptr &dmx) {
-  m_ti.m_private_data = dmx->stsd;
-  dmx->ptzr           = add_packetizer(new quicktime_video_packetizer_c(this, m_ti, dmx->v_width, dmx->v_height));
+qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = dmx.stsd;
+  dmx.ptzr            = add_packetizer(new quicktime_video_packetizer_c(this, m_ti, dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_cptr &dmx) {
-  m_ti.m_private_data = dmx->esds.decoder_config;
-  dmx->ptzr           = add_packetizer(new aac_packetizer_c(this, m_ti, dmx->a_aac_profile, dmx->a_samplerate, dmx->a_channels, true));
+qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = dmx.esds.decoder_config;
+  dmx.ptzr            = add_packetizer(new aac_packetizer_c(this, m_ti, dmx.a_aac_profile, dmx.a_samplerate, dmx.a_channels, true));
 
-  if (dmx->a_aac_is_sbr)
-    PTZR(dmx->ptzr)->set_audio_output_sampling_freq(dmx->a_aac_output_sample_rate);
+  if (dmx.a_aac_is_sbr)
+    PTZR(dmx.ptzr)->set_audio_output_sampling_freq(dmx.a_aac_output_sample_rate);
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_audio_packetizer_mp3(qtmp4_demuxer_cptr &dmx) {
-  dmx->ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, dmx->a_samplerate, dmx->a_channels, true));
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+qtmp4_reader_c::create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx) {
+  dmx.ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, dmx.a_samplerate, dmx.a_channels, true));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_audio_packetizer_pcm(qtmp4_demuxer_cptr &dmx) {
-  dmx->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, static_cast<int32_t>(dmx->a_samplerate), dmx->a_channels, dmx->a_bitdepth, dmx->m_pcm_format));
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+qtmp4_reader_c::create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx) {
+  dmx.ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, static_cast<int32_t>(dmx.a_samplerate), dmx.a_channels, dmx.a_bitdepth, dmx.m_pcm_format));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_audio_packetizer_passthrough(qtmp4_demuxer_cptr &dmx) {
+qtmp4_reader_c::create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx) {
   passthrough_packetizer_c *ptzr = new passthrough_packetizer_c(this, m_ti);
-  dmx->ptzr                      = add_packetizer(ptzr);
+  dmx.ptzr                      = add_packetizer(ptzr);
 
   ptzr->set_track_type(track_audio);
   ptzr->set_codec_id(MKV_A_QUICKTIME);
-  ptzr->set_codec_private(dmx->stsd);
-  ptzr->set_audio_sampling_freq(dmx->a_samplerate);
-  ptzr->set_audio_channels(dmx->a_channels);
+  ptzr->set_codec_private(dmx.stsd);
+  ptzr->set_audio_sampling_freq(dmx.a_samplerate);
+  ptzr->set_audio_channels(dmx.a_channels);
   ptzr->prevent_lacing();
 
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
-qtmp4_reader_c::create_subtitles_packetizer_vobsub(qtmp4_demuxer_cptr &dmx) {
+qtmp4_reader_c::create_subtitles_packetizer_vobsub(qtmp4_demuxer_c &dmx) {
   std::string palette;
   auto format = [](int v) { return (boost::format("%|1$02x|") % std::min(std::max(v, 0), 255)).str(); };
-  auto buf    = dmx->esds.decoder_config->get_buffer();
+  auto buf    = dmx.esds.decoder_config->get_buffer();
   for (auto i = 0; i < 16; ++i) {
 		int y = static_cast<int>(buf[(i << 2) + 1]) - 0x10;
 		int u = static_cast<int>(buf[(i << 2) + 3]) - 0x80;
@@ -1700,76 +1701,79 @@ qtmp4_reader_c::create_subtitles_packetizer_vobsub(qtmp4_demuxer_cptr &dmx) {
     palette += format(r) + format(g) + format(b);
   }
 
-  auto idx_str = mtx::vobsub::create_default_index(dmx->v_width, dmx->v_height, palette);
+  auto idx_str = mtx::vobsub::create_default_index(dmx.v_width, dmx.v_height, palette);
 
   mxdebug_if(m_debug_headers, boost::format("VobSub IDX str:\n%1%") % idx_str);
 
   m_ti.m_private_data = memory_c::clone(idx_str);
-  dmx->ptzr = add_packetizer(new vobsub_packetizer_c(this, m_ti));
-  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+  dmx.ptzr = add_packetizer(new vobsub_packetizer_c(this, m_ti));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 
 void
 qtmp4_reader_c::create_packetizer(int64_t tid) {
   unsigned int i;
-  qtmp4_demuxer_cptr dmx;
+  qtmp4_demuxer_cptr dmx_ptr;
 
   for (i = 0; i < m_demuxers.size(); ++i)
     if (m_demuxers[i]->id == tid) {
-      dmx = m_demuxers[i];
+      dmx_ptr = m_demuxers[i];
       break;
     }
 
-  if (!dmx || !dmx->ok || !demuxing_requested(dmx->type, dmx->id, dmx->language) || (-1 != dmx->ptzr))
+  if (!dmx_ptr)
     return;
 
-  m_ti.m_id          = dmx->id;
-  m_ti.m_language    = dmx->language;
+  auto &dmx = *dmx_ptr;
+  if (!dmx.ok || !demuxing_requested(dmx.type, dmx.id, dmx.language) || (-1 != dmx.ptzr))
+
+  m_ti.m_id       = dmx.id;
+  m_ti.m_language = dmx.language;
   m_ti.m_private_data.reset();
 
   bool packetizer_ok = true;
 
-  if (dmx->is_video()) {
-    if (dmx->codec.is(codec_c::type_e::V_MPEG12))
+  if (dmx.is_video()) {
+    if (dmx.codec.is(codec_c::type_e::V_MPEG12))
       create_video_packetizer_mpeg1_2(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::V_MPEG4_P2))
+    else if (dmx.codec.is(codec_c::type_e::V_MPEG4_P2))
       create_video_packetizer_mpeg4_p2(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::V_MPEG4_P10))
+    else if (dmx.codec.is(codec_c::type_e::V_MPEG4_P10))
       create_video_packetizer_mpeg4_p10(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::V_MPEGH_P2))
+    else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2))
       create_video_packetizer_mpegh_p2(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::V_SVQ1))
+    else if (dmx.codec.is(codec_c::type_e::V_SVQ1))
       create_video_packetizer_svq1(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::V_PRORES))
+    else if (dmx.codec.is(codec_c::type_e::V_PRORES))
       create_video_packetizer_prores(dmx);
 
     else
       create_video_packetizer_standard(dmx);
 
-    dmx->set_packetizer_display_dimensions();
+    dmx.set_packetizer_display_dimensions();
 
-  } else if (dmx->is_audio()) {
-    if (dmx->codec.is(codec_c::type_e::A_AAC))
+  } else if (dmx.is_audio()) {
+    if (dmx.codec.is(codec_c::type_e::A_AAC))
       create_audio_packetizer_aac(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::A_MP2) || dmx->codec.is(codec_c::type_e::A_MP3))
+    else if (dmx.codec.is(codec_c::type_e::A_MP2) || dmx.codec.is(codec_c::type_e::A_MP3))
       create_audio_packetizer_mp3(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::A_PCM))
+    else if (dmx.codec.is(codec_c::type_e::A_PCM))
       create_audio_packetizer_pcm(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::A_AC3))
+    else if (dmx.codec.is(codec_c::type_e::A_AC3))
       packetizer_ok = create_audio_packetizer_ac3(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::A_ALAC))
+    else if (dmx.codec.is(codec_c::type_e::A_ALAC))
       packetizer_ok = create_audio_packetizer_alac(dmx);
 
-    else if (dmx->codec.is(codec_c::type_e::A_DTS))
+    else if (dmx.codec.is(codec_c::type_e::A_DTS))
       packetizer_ok = create_audio_packetizer_dts(dmx);
 
     else
@@ -1778,7 +1782,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
     handle_audio_encoder_delay(dmx);
 
   } else {
-    if (dmx->codec.is(codec_c::type_e::S_VOBSUB))
+    if (dmx.codec.is(codec_c::type_e::S_VOBSUB))
       create_subtitles_packetizer_vobsub(dmx);
   }
 
@@ -1801,10 +1805,10 @@ qtmp4_reader_c::get_progress() {
   if (-1 == m_main_dmx)
     return 100;
 
-  qtmp4_demuxer_cptr &dmx = m_demuxers[m_main_dmx];
-  unsigned int max_chunks = (0 == dmx->sample_size) ? dmx->sample_table.size() : dmx->chunk_table.size();
+  auto &dmx       = *m_demuxers[m_main_dmx];
+  auto max_chunks = (0 == dmx.sample_size) ? dmx.sample_table.size() : dmx.chunk_table.size();
 
-  return 100 * dmx->pos / max_chunks;
+  return 100 * dmx.pos / max_chunks;
 }
 
 void
@@ -1814,31 +1818,31 @@ qtmp4_reader_c::identify() {
   id_result_container();
 
   for (i = 0; i < m_demuxers.size(); ++i) {
-    qtmp4_demuxer_cptr &dmx = m_demuxers[i];
-    auto info               = mtx::id::info_c{};
+    auto &dmx = *m_demuxers[i];
+    auto info = mtx::id::info_c{};
 
-    info.set(mtx::id::number, dmx->container_id);
+    info.set(mtx::id::number, dmx.container_id);
 
-    if (dmx->codec.is(codec_c::type_e::V_MPEG4_P10))
+    if (dmx.codec.is(codec_c::type_e::V_MPEG4_P10))
       info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_video);
 
-    else if (dmx->codec.is(codec_c::type_e::V_MPEGH_P2))
+    else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2))
       info.add(mtx::id::packetizer, mtx::id::mpegh_p2_video);
 
-    info.add(mtx::id::language, dmx->language);
+    info.add(mtx::id::language, dmx.language);
 
-    if (dmx->is_video())
-      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % dmx->v_width % dmx->v_height);
+    if (dmx.is_video())
+      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % dmx.v_width % dmx.v_height);
 
-    else if (dmx->is_audio()) {
-      info.add(mtx::id::audio_channels,           dmx->a_channels);
-      info.add(mtx::id::audio_sampling_frequency, static_cast<uint64_t>(dmx->a_samplerate));
-      info.add(mtx::id::audio_bits_per_sample,    dmx->a_bitdepth);
+    else if (dmx.is_audio()) {
+      info.add(mtx::id::audio_channels,           dmx.a_channels);
+      info.add(mtx::id::audio_sampling_frequency, static_cast<uint64_t>(dmx.a_samplerate));
+      info.add(mtx::id::audio_bits_per_sample,    dmx.a_bitdepth);
     }
 
-    id_result_track(dmx->id,
-                    dmx->is_video() ? ID_RESULT_TRACK_VIDEO : dmx->is_audio() ? ID_RESULT_TRACK_AUDIO : dmx->is_subtitles() ? ID_RESULT_TRACK_SUBTITLES : ID_RESULT_TRACK_UNKNOWN,
-                    dmx->codec.get_name(dmx->fourcc.description()),
+    id_result_track(dmx.id,
+                    dmx.is_video() ? ID_RESULT_TRACK_VIDEO : dmx.is_audio() ? ID_RESULT_TRACK_AUDIO : dmx.is_subtitles() ? ID_RESULT_TRACK_SUBTITLES : ID_RESULT_TRACK_UNKNOWN,
+                    dmx.codec.get_name(dmx.fourcc.description()),
                     info.get());
   }
 
