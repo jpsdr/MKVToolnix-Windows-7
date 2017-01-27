@@ -34,6 +34,7 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
   , m_timestamp_calculator{samples_per_sec}
   , m_samples_per_packet{1536}
   , m_packet_duration{m_timestamp_calculator.get_duration(m_samples_per_packet).to_ns()}
+  , m_stream_position{}
   , m_framed{framed}
   , m_first_packet{true}
 {
@@ -105,11 +106,10 @@ ac3_packetizer_c::set_headers() {
 
 int
 ac3_packetizer_c::process(packet_cptr packet) {
-  // if (packet->has_timecode())
-  //   mxinfo(boost::format("tc %1% %2% %3% %4%\n") % format_timestamp(packet->timecode) % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
-  //          % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
+  // mxinfo(boost::format("tc %1% size %2%\n") % format_timestamp(packet->timecode) % packet->data->get_size());
 
-  m_timestamp_calculator.add_timestamp(packet);
+  m_timestamp_calculator.add_timestamp(packet, m_stream_position);
+  m_stream_position += packet->data->get_size();
 
   if (m_framed)
     return process_framed(packet);
@@ -136,12 +136,13 @@ ac3_packetizer_c::process_framed(packet_cptr const &packet) {
 }
 
 void
-ac3_packetizer_c::set_timecode_and_add_packet(packet_cptr const &packet) {
-  // mxinfo(boost::format(" →                    %1% %2% %3%\n") % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
-  //        % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
-
-  packet->timecode = m_timestamp_calculator.get_next_timestamp(m_samples_per_packet).to_ns();
+ac3_packetizer_c::set_timecode_and_add_packet(packet_cptr const &packet,
+                                              boost::optional<uint64_t> packet_stream_position) {
+  packet->timecode = m_timestamp_calculator.get_next_timestamp(m_samples_per_packet, packet_stream_position).to_ns();
   packet->duration = m_packet_duration;
+
+  // if (packet_stream_position)
+  //   mxinfo(boost::format("  ts %1% position in %2% out %3%\n") % format_timestamp(packet->timecode) % format_number(m_stream_position) % format_number(*packet_stream_position));
 
   add_packet(packet);
 
@@ -172,7 +173,7 @@ ac3_packetizer_c::flush_packets() {
     auto packet = std::make_shared<packet_t>(frame.m_data);
     packet->add_extensions(m_packet_extensions);
 
-    set_timecode_and_add_packet(packet);
+    set_timecode_and_add_packet(packet, frame.m_stream_position);
 
     m_packet_extensions.clear();
   }

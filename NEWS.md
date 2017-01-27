@@ -9,6 +9,14 @@
   and tags" list view showing the currently selected character set for that
   track. Implements #1873.
 
+## Bug fixes
+
+* mkvmerge: AC-3 handling: some source files provide timestamps for audio
+  tracks only once every n audio frames. In such situations mkvmerge was
+  buffering too much data resulting in a single gap in the timestamps of one
+  frame duration after frame number n - 1 (the second audio timestamp read
+  from the source file was used one output frame too early). Fixes #1864.
+
 ## Build system changes
 
 * Up to and including release 9.8.0 the man pages and their translations came

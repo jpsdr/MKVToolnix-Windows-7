@@ -26,6 +26,7 @@ protected:
   ac3::parser_c m_parser;
   timestamp_calculator_c m_timestamp_calculator;
   int64_t m_samples_per_packet, m_packet_duration;
+  uint64_t m_stream_position;
   bool m_framed, m_first_packet;
   std::vector<packet_extension_cptr> m_packet_extensions;
 
@@ -49,7 +50,7 @@ protected:
   virtual ac3::frame_c get_frame();
   virtual void flush_impl();
   virtual int process_framed(packet_cptr const &packet);
-  virtual void set_timecode_and_add_packet(packet_cptr const &packet);
+  virtual void set_timecode_and_add_packet(packet_cptr const &packet, boost::optional<uint64_t> packet_stream_position = boost::none);
 };
 
 class ac3_bs_packetizer_c: public ac3_packetizer_c {

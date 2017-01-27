@@ -27,45 +27,61 @@ timestamp_calculator_c::timestamp_calculator_c(int64_t samples_per_second)
 }
 
 void
-timestamp_calculator_c::add_timestamp(timestamp_c const &timestamp) {
+timestamp_calculator_c::add_timestamp(timestamp_c const &timestamp,
+                                      boost::optional<uint64_t> stream_position) {
   if (!timestamp.valid())
     return;
 
   if (   (!m_last_timestamp_returned.valid() || (timestamp > m_last_timestamp_returned))
-      && (m_available_timestamps.empty()     || (timestamp > m_available_timestamps.back()))) {
+      && (m_available_timestamps.empty()     || (timestamp > m_available_timestamps.back().first))) {
     mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timestamp: adding %1%\n") % format_timestamp(timestamp));
-    m_available_timestamps.push_back(timestamp);
+    m_available_timestamps.emplace_back(timestamp, stream_position);
 
   } else
     mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timestamp: dropping %1%\n") % format_timestamp(timestamp));
 }
 
 void
-timestamp_calculator_c::add_timestamp(int64_t timestamp) {
+timestamp_calculator_c::add_timestamp(int64_t timestamp,
+                                      boost::optional<uint64_t> stream_position) {
   if (-1 != timestamp)
-    add_timestamp(timestamp_c::ns(timestamp));
+    add_timestamp(timestamp_c::ns(timestamp), stream_position);
 }
 
 void
-timestamp_calculator_c::add_timestamp(packet_cptr const &packet) {
+timestamp_calculator_c::add_timestamp(packet_cptr const &packet,
+                                      boost::optional<uint64_t> stream_position) {
   if (packet->has_timecode())
-    add_timestamp(timestamp_c::ns(packet->timecode));
+    add_timestamp(timestamp_c::ns(packet->timecode), stream_position);
 }
 
 timestamp_c
-timestamp_calculator_c::get_next_timestamp(int64_t samples_in_frame) {
-  if (!m_available_timestamps.empty()) {
-    m_last_timestamp_returned           = m_available_timestamps.front();
-    m_reference_timestamp               = m_last_timestamp_returned;
-    m_samples_since_reference_timestamp = samples_in_frame;
+timestamp_calculator_c::get_next_timestamp(int64_t samples_in_frame,
+                                           boost::optional<uint64_t> stream_position) {
+  if (   !m_available_timestamps.empty()
+      && (   !stream_position
+          || !m_available_timestamps.front().second
+          || (*m_available_timestamps.front().second <= *stream_position)))
+    return fetch_next_available_timestamp(samples_in_frame);
 
-    m_available_timestamps.pop_front();
+  return calculate_next_timestamp(samples_in_frame);
+}
 
-    mxdebug_if(m_debug, boost::format("timestamp_calculator_c::get_next_timestamp: returning available %1%\n") % format_timestamp(m_last_timestamp_returned));
+timestamp_c
+timestamp_calculator_c::fetch_next_available_timestamp(int64_t samples_in_frame) {
+  m_last_timestamp_returned           = m_available_timestamps.front().first;
+  m_reference_timestamp               = m_last_timestamp_returned;
+  m_samples_since_reference_timestamp = samples_in_frame;
 
-    return m_last_timestamp_returned;
-  }
+  m_available_timestamps.pop_front();
 
+  mxdebug_if(m_debug, boost::format("timestamp_calculator_c::get_next_timestamp: returning available %1%\n") % format_timestamp(m_last_timestamp_returned));
+
+  return m_last_timestamp_returned;
+}
+
+timestamp_c
+timestamp_calculator_c::calculate_next_timestamp(int64_t samples_in_frame) {
   if (!m_samples_per_second)
     throw std::invalid_argument{"samples per second must not be 0"};
 
