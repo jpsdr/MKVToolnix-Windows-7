@@ -67,4 +67,28 @@ TEST(StringsFormatting, FormatTimecodeWithFormat) {
   EXPECT_EQ("01:02:34.567890000", format_timestamp(value, "%H:%M:%S.%n"));
 }
 
+TEST(StringFormatting, FormatUnsignedInteger) {
+  EXPECT_EQ("0",             format_number(static_cast<uint64_t>(0ull)));
+  EXPECT_EQ("12",            format_number(static_cast<uint64_t>(12ull)));
+  EXPECT_EQ("123",           format_number(static_cast<uint64_t>(123ull)));
+  EXPECT_EQ("1.234",         format_number(static_cast<uint64_t>(1234ull)));
+  EXPECT_EQ("1.234.567.890", format_number(static_cast<uint64_t>(1234567890ull)));
+}
+
+TEST(StringFormatting, FormatPositiveSignedInteger) {
+  EXPECT_EQ("0",             format_number(static_cast<int64_t>(0ll)));
+  EXPECT_EQ("12",            format_number(static_cast<int64_t>(12ll)));
+  EXPECT_EQ("123",           format_number(static_cast<int64_t>(123ll)));
+  EXPECT_EQ("1.234",         format_number(static_cast<int64_t>(1234ll)));
+  EXPECT_EQ("1.234.567.890", format_number(static_cast<int64_t>(1234567890ll)));
+}
+
+TEST(StringFormatting, FormatNegativeSignedInteger) {
+  EXPECT_EQ("0",              format_number(static_cast<int64_t>(-0ll)));
+  EXPECT_EQ("-12",            format_number(static_cast<int64_t>(-12ll)));
+  EXPECT_EQ("-123",           format_number(static_cast<int64_t>(-123ll)));
+  EXPECT_EQ("-1.234",         format_number(static_cast<int64_t>(-1234ll)));
+  EXPECT_EQ("-1.234.567.890", format_number(static_cast<int64_t>(-1234567890ll)));
+}
+
 }

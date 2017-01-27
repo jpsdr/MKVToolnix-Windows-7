@@ -81,6 +81,8 @@ to_string(std::string const &value) {
 
 std::string to_string(double value, unsigned int precision);
 std::string to_string(int64_t numerator, int64_t denominator, unsigned int precision);
+std::string format_number(int64_t number);
+std::string format_number(uint64_t number);
 
 template<typename T>
 std::string

@@ -322,3 +322,29 @@ format_file_size(int64_t size) {
 
   return result.str();
 }
+
+std::string
+format_number(uint64_t number) {
+  std::string output;
+
+  if (number == 0)
+    return "0";
+
+  while (number != 0) {
+    if (((output.size() + 1) % 4) == 0)
+      output += '.';
+
+    output += ('0' + (number % 10));
+    number /= 10;
+  }
+
+  boost::reverse(output);
+
+  return output;
+}
+
+std::string
+format_number(int64_t n) {
+  auto sign = std::string{ n < 0 ? "-" : "" };
+  return sign + format_number(static_cast<uint64_t>(std::abs(n)));
+}
