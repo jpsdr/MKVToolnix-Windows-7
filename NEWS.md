@@ -2,6 +2,9 @@
 
 ## New features and enhancements
 
+* GUI: chapter editor: added a character set selection in the preferences for
+  text files. If a character set is selected there, it will be used instead of
+  asking the user when opening text chapter files. Implements #1874.
 * GUI: multiplexer: added a column "character set" to the "tracks, chapters
   and tags" list view showing the currently selected character set for that
   track. Implements #1873.

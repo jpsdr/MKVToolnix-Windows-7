@@ -251,6 +251,7 @@ Settings::load() {
 
   m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM:2>")).toString();
   m_dropLastChapterFromBlurayPlaylist  = reg.value("dropLastChapterFromBlurayPlaylist", true).toBool();
+  m_ceTextFileCharacterSet             = reg.value("ceTextFileCharacterSet").toString();
 
   m_mediaInfoExe                       = reg.value("mediaInfoExe", Q("mediainfo-gui")).toString();
 
@@ -418,6 +419,7 @@ Settings::save()
 
   reg.setValue("chapterNameTemplate",                m_chapterNameTemplate);
   reg.setValue("dropLastChapterFromBlurayPlaylist",  m_dropLastChapterFromBlurayPlaylist);
+  reg.setValue("ceTextFileCharacterSet",             m_ceTextFileCharacterSet);
 
   reg.setValue("uiLocale",                           m_uiLocale);
   reg.setValue("uiFontFamily",                       m_uiFontFamily);

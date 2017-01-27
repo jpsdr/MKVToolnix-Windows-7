@@ -106,7 +106,7 @@ public:
 
   QString m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage;
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
-  QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
+  QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   bool m_oftenUsedLanguagesOnly, m_oftenUsedCountriesOnly, m_oftenUsedCharacterSetsOnly;
   ProcessPriority m_priority;

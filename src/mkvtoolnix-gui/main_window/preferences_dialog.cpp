@@ -87,8 +87,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupTrackPropertiesLayout();
 
   // Chapter editor page
-  ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
+  ui->cbCETextFileCharacterSet->setAdditionalItems(m_cfg.m_ceTextFileCharacterSet).setup(true, QY("Always ask the user")).setCurrentByData(m_cfg.m_ceTextFileCharacterSet);
+  ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->cbCEDefaultLanguage->setAdditionalItems(m_cfg.m_defaultChapterLanguage).setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
   ui->cbCEDefaultCountry->setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
@@ -222,6 +223,11 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."))
                    .arg(QY("If enabled the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie.")));
+  Util::setToolTip(ui->cbCETextFileCharacterSet,
+                   Q("%1 %2 %3")
+                   .arg(QY("The chapter editor needs to know the character set a text chapter file uses in order to display all characters properly."))
+                   .arg(QY("By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."))
+                   .arg(QY("If a character set is selected here, it will be used instead of asking the user.")));
 
   // Merge page
   Util::setToolTip(ui->cbMAutoSetFileTitle,
@@ -620,6 +626,7 @@ PreferencesDialog::save() {
   m_cfg.m_removeOldJobsDays                  = ui->sbGuiRemoveOldJobsDays->value();
 
   m_cfg.m_chapterNameTemplate                = ui->leCENameTemplate->text();
+  m_cfg.m_ceTextFileCharacterSet             = ui->cbCETextFileCharacterSet->currentData().toString();
   m_cfg.m_defaultChapterLanguage             = ui->cbCEDefaultLanguage->currentData().toString();
   m_cfg.m_defaultChapterCountry              = ui->cbCEDefaultCountry->currentData().toString();
   m_cfg.m_dropLastChapterFromBlurayPlaylist  = ui->cbCEDropLastFromBlurayPlaylist->isChecked();

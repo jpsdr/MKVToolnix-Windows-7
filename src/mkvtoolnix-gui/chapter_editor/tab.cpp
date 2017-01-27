@@ -281,7 +281,10 @@ Tab::loadFromMatroskaFile() {
 Tab::LoadResult
 Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters) {
   auto result = Util::checkForBomAndNonAscii(m_fileName);
-  if ((BO_NONE != result.byteOrder) || !result.containsNonAscii)
+
+  if (   (BO_NONE != result.byteOrder)
+      || !result.containsNonAscii
+      || !Util::Settings::get().m_ceTextFileCharacterSet.isEmpty())
     return { chapters, false };
 
   Util::enableChildren(this, false);
@@ -304,7 +307,7 @@ Tab::loadFromChapterFile() {
   auto error          = QString{};
 
   try {
-    chapters = parse_chapters(to_utf8(m_fileName), 0, -1, 0, "", "", true, &isSimpleFormat);
+    chapters = parse_chapters(to_utf8(m_fileName), 0, -1, 0, "", to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &isSimpleFormat);
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());
