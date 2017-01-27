@@ -249,11 +249,10 @@ qtmp4_reader_c::parse_headers() {
   m_in->setFilePointer(0);
 
   bool headers_parsed = false;
-  bool moof_found     = false;
   bool mdat_found     = false;
 
   try {
-    while (true) {
+    while (!m_in->eof()) {
       qt_atom_t atom = read_atom();
       mxdebug_if(m_debug_headers, boost::format("'%1%' atom, size %2%, at %3%–%4%, human readable? %5%\n") % atom.fourcc % atom.size % atom.pos % (atom.pos + atom.size) % atom.fourcc.human_readable());
 
@@ -278,20 +277,12 @@ qtmp4_reader_c::parse_headers() {
 
       } else if (atom.fourcc == "moof") {
         handle_moof_atom(atom.to_parent(), 0, atom);
-        moof_found = true;
 
       } else if (atom.fourcc.human_readable())
         skip_atom();
 
       else if (!resync_to_top_level_atom(atom.pos))
         break;
-
-      if (m_in->eof())
-        break;
-
-      if (headers_parsed && mdat_found && !moof_found)
-        break;
-
     }
   } catch (mtx::mm_io::exception &) {
   }

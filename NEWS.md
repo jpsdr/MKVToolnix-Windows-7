@@ -16,6 +16,9 @@
   buffering too much data resulting in a single gap in the timestamps of one
   frame duration after frame number n - 1 (the second audio timestamp read
   from the source file was used one output frame too early). Fixes #1864.
+* mkvmerge: MP4 reader: mkvmerge was only reading a small part of MP4 DASH
+  files where the first "moov" "mdat" atoms occur before the first "moof"
+  atom. This is part of the fix for #1867.
 
 ## Build system changes
 
