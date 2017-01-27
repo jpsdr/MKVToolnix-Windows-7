@@ -511,7 +511,7 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
 
 void
 PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Ask the user"),                                                  static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Always ask the user"),                                           static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
   ui->cbMAddingAppendingFilesPolicy->addItem(QY("Add all files to the current multiplex settings"),               static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Add));
   ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new multiplex settings tab and add all files there"), static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew));
   ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new multiplex settings tab for each file"),           static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew));
@@ -525,7 +525,7 @@ PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
 
 void
 PreferencesDialog::setupHeaderEditorDroppedFilesPolicy() {
-  ui->cbHEDroppedFilesPolicy->addItem(QY("Ask the user"),                                        static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Ask));
+  ui->cbHEDroppedFilesPolicy->addItem(QY("Always ask the user"),                                 static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Ask));
   ui->cbHEDroppedFilesPolicy->addItem(QY("Open all files as tabs in the header editor"),         static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Open));
   ui->cbHEDroppedFilesPolicy->addItem(QY("Add all files as new attachments to the current tab"), static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::AddAttachments));
 
