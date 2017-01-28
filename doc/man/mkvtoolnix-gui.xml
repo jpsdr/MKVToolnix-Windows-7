@@ -68,13 +68,13 @@
 
   <para>
    Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in
-   the appropriate tool. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor
+   the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor
    depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or
-   <option>--edit-headers</option>. The default mode is adding files for merging.
+   <option>--edit-headers</option>. The default mode is adding files for multiplexing.
   </para>
 
   <para>
-   Note that if an instance of the application is already running when the application is started a second time all file names given on the
+   Note that if an instance of the application is already running when the application is started a second time, all file names given on the
    command line are handled by the already-running instance.
   </para>
 
@@ -82,7 +82,7 @@
    <varlistentry>
     <term><option>--merge</option></term>
     <listitem>
-     <para>All following file names will be added as input files to the current merge job. This is the default mode.</para>
+     <para>All following file names will be added as source files to the current multiplex job. This is the default mode.</para>
     </listitem>
    </varlistentry>
 
