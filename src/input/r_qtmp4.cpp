@@ -268,7 +268,10 @@ qtmp4_reader_c::parse_headers() {
         }
 
       } else if (atom.fourcc == "moov") {
-        handle_moov_atom(atom.to_parent(), 0);
+        if (!headers_parsed)
+          handle_moov_atom(atom.to_parent(), 0);
+        else
+          skip_atom();
         headers_parsed = true;
 
       } else if (atom.fourcc == "mdat") {

@@ -35,6 +35,9 @@
   file. All other frames weren't, even though some of them were referenced
   from the key frame table after the first duplicate entry. This is part of
   the fix for #1867.
+* mkvmerge: MP4 reader: when an MP4 file contained more than one copy of the
+  "moov" atom (the track headers etc.), mkvmerge was parsing them all adding
+  tracks multiple times. Fix for #1877.
 
 ## Build system changes
 
