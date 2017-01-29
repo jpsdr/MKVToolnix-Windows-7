@@ -42,6 +42,7 @@ static const struct {
   { ENGAGE_NO_DELAY_FOR_GARBAGE_IN_AVI,  "no_delay_for_garbage_in_avi"  },
   { ENGAGE_KEEP_LAST_CHAPTER_IN_MPLS,    "keep_last_chapter_in_mpls"    },
   { ENGAGE_KEEP_TRACK_STATISTICS_TAGS,   "keep_track_statistics_tags"   },
+  { ENGAGE_ALL_I_SLICES_ARE_KEY_FRAMES,  "all_i_slices_are_key_frames"  },
   { 0,                                   nullptr },
 };
 static std::vector<bool> s_engaged_hacks(ENGAGE_MAX_IDX + 1, false);

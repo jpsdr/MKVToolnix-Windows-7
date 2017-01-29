@@ -79,6 +79,9 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
       { QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."),
         QY("mkvmerge normally removes that last entry if it's timecode is within five seconds of the total duration."),
         QY("Enabling this option causes mkvmerge to keep that last entry.") });
+  add(Q("--engage all_i_slices_are_key_frames"),  false, hacks,
+      { QY("Some h.264/AVC tracks contain I slices but lack real key frames."),
+        QY("This option forces mkvmerge to treat all of those I slices as key frames.") });
   add(Q("--engage cow"),                          false, hacks, { QY("No help available.") });
 
   m_ui->gbGlobalOutputControl->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));

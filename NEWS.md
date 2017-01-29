@@ -8,6 +8,9 @@
 * GUI: multiplexer: added a column "character set" to the "tracks, chapters
   and tags" list view showing the currently selected character set for that
   track. Implements #1873.
+* mkvmerge: added an --engage option "all_i_slices_are_key_frames" for
+  treating all I slices of an h.264/AVC stream as key frames in pathological
+  streams that lack real key frames. Implements #1876.
 
 ## Bug fixes
 
