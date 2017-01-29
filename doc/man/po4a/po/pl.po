@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.5.0\n"
-"POT-Creation-Date: 2016-12-21 14:03+0100\n"
+"POT-Creation-Date: 2017-01-29 11:52+0100\n"
 "PO-Revision-Date: 2016-01-30 13:32+0100\n"
 "Last-Translator: Daniel Kluz <sir.daniel.k@gmail.com>\n"
 "Language-Team: none\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-msgid "2016-11-29"
+msgid "2017-01-22"
 msgstr ""
 
 #. type: Content of the mkvmerge entity
@@ -5264,12 +5264,16 @@ msgstr "&mkvtoolnix-gui; jest opartym o <productname>biblioteki Qt</productname>
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:70
-msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for merging."
+#, fuzzy
+#| msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for merging."
+msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
 msgstr "Użycie pliku konfiguracyjnego z rozszerzeniem <literal>.mtxcfg</literal> powoduje, że interfejs graficzny otwiera plik konfiguracyjny w odpowiednim narzędziu. Jakikolwiek plik z innym rozszerzeniem jest traktowany jako plik wejściowy, jest otwierany w edytorze rozdziałów lub edytorze nagłówków zależnie od ustawionego trybu. Tryb może być zmieniony opcją <option>--merge</option>, <option>--edit-chapters</option> lub <option>--edit-headers</option>. Domyślny tryb to dodawanie plików celem muksowania."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:77
-msgid "Note that if an instance of the application is already running when the application is started a second time all file names given on the command line are handled by the already-running instance."
+#, fuzzy
+#| msgid "Note that if an instance of the application is already running when the application is started a second time all file names given on the command line are handled by the already-running instance."
+msgid "Note that if an instance of the application is already running when the application is started a second time, all file names given on the command line are handled by the already-running instance."
 msgstr "Zauważ, że jeśli już program działa, a będzie on jeszcze raz ponownie uruchomiony, to wszystkie nazwy plików w linii komend zostaną przejęte przez już działającą instancję programu."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
@@ -5279,7 +5283,9 @@ msgstr "<option>--merge</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:85
-msgid "All following file names will be added as input files to the current merge job. This is the default mode."
+#, fuzzy
+#| msgid "All following file names will be added as input files to the current merge job. This is the default mode."
+msgid "All following file names will be added as source files to the current multiplex job. This is the default mode."
 msgstr "Wszystkie następujące nazwy plików zostaną dodane jako pliki wejściowe to obecnego zadania muksowania. To jest tryb domyślny."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>

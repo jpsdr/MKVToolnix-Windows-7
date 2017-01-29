@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
-"POT-Creation-Date: 2016-12-21 14:03+0100\n"
+"POT-Creation-Date: 2017-01-29 11:52+0100\n"
 "PO-Revision-Date: 2016-10-20 11:34+0000\n"
 "Last-Translator: Dean Lee <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -36,10 +36,8 @@ msgstr "9.8.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2016-09-11"
-msgid "2016-11-29"
-msgstr "2016-09-11"
+msgid "2017-01-22"
+msgstr ""
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -5236,12 +5234,16 @@ msgstr "&mkvtoolnix-gui; 是基于 <productname>Qt</productname> 的 &mkvmerge; 
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:70
-msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for merging."
+#, fuzzy
+#| msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for merging."
+msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
 msgstr "列出扩展名为 <literal>.mtxcfg</literal> 的配置文件名，可让 GUI 在对应工具中加载这些配置文件。其他文件名将根据当前模式，添加为待合并的输入文件、在章节编辑器或头部编辑器中打开。当前模式可通过 <option>--merge</option>、<option>--edit-chapters</option> 或 <option>--edit-headers</option> 修改。默认模式为添加文件用于合并。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:77
-msgid "Note that if an instance of the application is already running when the application is started a second time all file names given on the command line are handled by the already-running instance."
+#, fuzzy
+#| msgid "Note that if an instance of the application is already running when the application is started a second time all file names given on the command line are handled by the already-running instance."
+msgid "Note that if an instance of the application is already running when the application is started a second time, all file names given on the command line are handled by the already-running instance."
 msgstr "注意，若再次启动应用程序时，已经有一个该应用程序的实例在运行，则命令行给出的所有文件都将由已在运行的实例处理。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
@@ -5251,7 +5253,9 @@ msgstr "<option>--merge</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:85
-msgid "All following file names will be added as input files to the current merge job. This is the default mode."
+#, fuzzy
+#| msgid "All following file names will be added as input files to the current merge job. This is the default mode."
+msgid "All following file names will be added as source files to the current multiplex job. This is the default mode."
 msgstr "后面的所有文件名都将作为输入文件添加到当前合并任务。这是默认模式。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
@@ -5278,6 +5282,10 @@ msgstr "后面的所有文件名都将在头部编辑器中打开。"
 #: doc/man/mkvtoolnix-gui.xml:126
 msgid "&mkvmerge;, &mkvextract;, &mkvinfo;, &mkvpropedit;"
 msgstr "&mkvmerge;, &mkvextract;, &mkvinfo;, &mkvpropedit;"
+
+#~| msgid "2016-09-11"
+#~ msgid "2016-11-29"
+#~ msgstr "2016-09-11"
 
 #~ msgid "This option is deprecated. Use <link linkend=\"mkvmerge.description.identification_format\"><literal>--identification-format verbose-text --identify …</literal></link> instead."
 #~ msgstr "该选项已废弃。请使用 <link linkend=\"mkvmerge.description.identification_format\"><literal>--identification-format verbose-text --identify …</literal></link> 替代之。"
