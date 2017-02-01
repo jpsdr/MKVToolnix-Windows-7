@@ -4,10 +4,10 @@
 # This file is distributed under the same license as the mkvtoolnix package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MKVToolNix Italian translation 16.01.2017\n"
+"Project-Id-Version: MKVToolNix Italian translation 30.01.2017\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-01-29 11:44+0100\n"
-"PO-Revision-Date: 2017-01-16 09:58+0100\n"
+"PO-Revision-Date: 2017-01-30 14:11+0100\n"
 "Last-Translator: bovirus <@bovirus@gmail.com>\n"
 "Language-Team: bovirus <bovirus@gmail.com>\n"
 "Language: it\n"
@@ -1018,9 +1018,9 @@ msgid " at %1%"
 msgstr " in %1%"
 
 #: src/info/mkvinfo.cpp:215
-#, fuzzy, boost-format
+#, boost-format
 msgid " at 0x%|1$x|"
-msgstr " (adler: 0x%|1$08x|)"
+msgstr " a 0x%|1$x|"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:790
 #, no-c-format
@@ -1357,9 +1357,8 @@ msgid "&Chapter number of first created entry:"
 msgstr "Numero &capitolo del primo elemento creato:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1371
-#, fuzzy
 msgid "&Character set for text files:"
-msgstr "Set &caratteri:"
+msgstr "Set &caratteri per i file di testo:"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 msgid "&Character set:"
@@ -2399,7 +2398,7 @@ msgstr "Una lista separata da virgole di intervalli timecode da mantenere."
 
 #: src/input/r_matroska.cpp:720
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
-msgstr ""
+msgstr "Verrà invece usato un indice predefinito, e le impostazioni predefinite per larghezza, altezza e palette colori."
 
 #: src/common/property_element.cpp:132
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:451
@@ -3397,7 +3396,7 @@ msgstr "Pulsanti"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:229
 #, no-c-format
 msgid "By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."
-msgstr ""
+msgstr "Quando si apre un file che non viene riconosciuto in modo automatico, come opzione predefinita viene chiesto all'utente quale set caratteri usare. "
 
 #: src/mkvtoolnix-gui/merge/output.cpp:144
 #, no-c-format
@@ -3652,9 +3651,9 @@ msgstr[0] "Capitoli: %1% elemento"
 msgstr[1] "Capitoli: %1% elementi"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:53
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Character set"
-msgstr "Set caratteri:"
+msgstr "Set caratteri"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1702
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1738
@@ -5620,7 +5619,7 @@ msgstr "Se scegli qui un set caratteri il programma imposterà automaticamente i
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:230
 #, no-c-format
 msgid "If a character set is selected here, it will be used instead of asking the user."
-msgstr ""
+msgstr "Se qui è impostato un set caratteri, verrà usato questo invece di chiederlo all'utente."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:395
 #, no-c-format
@@ -8752,7 +8751,7 @@ msgstr "Visualizza coda lavori"
 
 #: src/info/info_cli_parser.cpp:47
 msgid "Show positions in hexadecimal."
-msgstr ""
+msgstr "Visualizza posizione in esadecimale."
 
 #: src/info/info_cli_parser.cpp:44
 msgid "Show statistics for each track in verbose mode."
@@ -8873,7 +8872,7 @@ msgstr "Fette"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:83
 #, no-c-format
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
-msgstr ""
+msgstr "Alcune tracce H.264/AVC contengono segmenti I ma hanno perso i frame chiave reali."
 
 #: src/merge/output_control.cpp:1324
 #, boost-format
@@ -9276,7 +9275,7 @@ msgstr "L'UID non deve essere alsciato vuoto."
 #: src/input/r_matroska.cpp:719
 #, boost-format
 msgid "The VobSub subtitle track %1% does not contain its index in the CodecPrivate element."
-msgstr ""
+msgstr "La traccia sottotitoli VobSub %1% non contiene il suo indice nell'elemento CodecPrivate."
 
 #: src/output/p_vorbis.cpp:141
 msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding."
@@ -9397,7 +9396,7 @@ msgstr "La UID capitolo se fornito deve essere un numero."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:228
 #, no-c-format
 msgid "The chapter editor needs to know the character set a text chapter file uses in order to display all characters properly."
-msgstr ""
+msgstr "L'editor capitoli deve conoscere il set caratteri usato da un file testo capitolo per visualizzare correttamente tutti caratteri."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:356
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:357
@@ -10765,9 +10764,9 @@ msgid "This option controls how the chapter names are created."
 msgstr "Questa opzione controlla come viene creato il nome capitolo."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:84
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "This option forces mkvmerge to treat all of those I slices as key frames."
-msgstr "Questa opzione causa che mkvmerge rimuoverà l'informazione del rapporto di aspetto dal bitstream. "
+msgstr "Questa opzione forza mkvmerge a trattare tutti i segmenti I come frame chiave."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:30
 #, no-c-format
