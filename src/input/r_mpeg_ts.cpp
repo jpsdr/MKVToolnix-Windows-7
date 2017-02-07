@@ -1028,6 +1028,14 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
   f.m_in->setFilePointer(0, seek_beginning); // rewind file for later remux
 
+  // Run probe_packet_complete() for track-type detection once for
+  // each track. This way tracks that don't actually need their
+  // content to be found during probing will be set to OK, too.
+  for (auto const &track : m_tracks) {
+    track->clear_pes_payload();
+    probe_packet_complete(*track);
+  }
+
   brng::copy(m_tracks, std::back_inserter(m_all_probed_tracks));
 }
 

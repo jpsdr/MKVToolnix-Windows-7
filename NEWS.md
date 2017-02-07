@@ -41,6 +41,8 @@
 * mkvmerge: MP4 reader: when an MP4 file contained more than one copy of the
   "moov" atom (the track headers etc.), mkvmerge was parsing them all adding
   tracks multiple times. Fix for #1877.
+* mkvmerge: MPEG TS reader: if the PMT lists a DVBSUB track, mkvmerge will now
+  recognize it without having to find a packet for it within the probed range.
 
 ## Build system changes
 
