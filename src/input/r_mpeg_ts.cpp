@@ -1789,6 +1789,11 @@ reader_c::determine_track_parameters(track_c &track) {
 
 void
 reader_c::probe_packet_complete(track_c &track) {
+  if (track.probed_ok) {
+    track.clear_pes_payload();
+    return;
+  }
+
   int result = -1;
 
   try {
