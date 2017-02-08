@@ -198,6 +198,7 @@ PrefsRunProgramWidget::setupMenu() {
 
     { QY("General variables"),                                           Q("")                           },
     { QY("Current date && time in ISO 8601 format"),                     Q("CURRENT_TIME")               },
+    { QY("MKVToolNix GUI's installation directory"),                     Q("INSTALLATION_DIRECTORY")     },
   };
 
   d->variableMenu.reset(new QMenu{this});

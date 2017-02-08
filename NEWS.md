@@ -11,6 +11,9 @@
 * mkvmerge: added an --engage option "all_i_slices_are_key_frames" for
   treating all I slices of an h.264/AVC stream as key frames in pathological
   streams that lack real key frames. Implements #1876.
+* GUI: running programs after jobs: added a new variable
+  <MTX_INSTALLATION_DIRECTORY> for the directory the MKVToolNix GUI executable
+  is located in.
 
 ## Bug fixes
 

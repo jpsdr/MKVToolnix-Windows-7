@@ -1,9 +1,11 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QProcess>
 #include <QRegularExpression>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 #include "mkvtoolnix-gui/util/message_box.h"
@@ -85,6 +87,7 @@ ProgramRunner::replaceVariables(QStringList const &commandLine,
 void
 ProgramRunner::setupGeneralVariables(QMap<QString, QStringList> &variables) {
   variables[Q("CURRENT_TIME")] << QDateTime::currentDateTime().toString(Qt::ISODate);
+  variables[Q("INSTALLATION_DIRECTORY")] << QDir::toNativeSeparators(App::applicationDirPath());
 }
 
 }}}
