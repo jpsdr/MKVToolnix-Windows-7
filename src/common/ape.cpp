@@ -19,15 +19,15 @@
 #include "common/mm_io.h"
 
 int
-apev2_tag_present_at_end(mm_io_c &io) {
-  unsigned char buffer[16];
+ape_tag_present_at_end(mm_io_c &io) {
+  unsigned char buffer[24];
 
   io.save_pos();
   at_scope_exit_c restore([&io]() { io.restore_pos(); });
 
   if (io.setFilePointer2(-32, seek_end) == false)
     return 0;
-  if (io.read(buffer, 16) != 16)
+  if (io.read(buffer, 24) != 24)
     return 0;
 
   if (   strncmp((char *)buffer, "APETAGEX", 8)
@@ -36,12 +36,9 @@ apev2_tag_present_at_end(mm_io_c &io) {
   }
 
   auto tag_size = get_uint32_le(buffer + 12);
-  tag_size     += 32;          // tag footer
+  auto flags    = get_uint32_le(buffer + 20);
+  if (flags & (1U << 31))
+      tag_size += 32;          // tag header
 
   return tag_size;
-}
-
-int
-ape_tag_present_at_end(mm_io_c &io) {
-  return apev2_tag_present_at_end(io);
 }

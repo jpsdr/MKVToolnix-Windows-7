@@ -17,7 +17,6 @@
 
 #include "common/common_pch.h"
 
-int apev2_tag_present_at_end(mm_io_c &io);
 int ape_tag_present_at_end(mm_io_c &io);
 
 #endif // MTX_COMMON_APE_COMMON_H
