@@ -535,7 +535,7 @@ cluster_helper_c::render() {
 
     pack->group = new_block_group;
 
-    pack->account(m->track_statistics[ source->get_uid() ]);
+    pack->account(m->track_statistics[ source->get_uid() ], timecode_offset);
 
     source->after_packet_rendered(*pack);
   }

@@ -43,6 +43,11 @@
   tracks multiple times. Fix for #1877.
 * mkvmerge: MPEG TS reader: if the PMT lists a DVBSUB track, mkvmerge will now
   recognize it without having to find a packet for it within the probed range.
+* mkvmerge: splitting by parts (both the "timestamps" and the "frames"
+  variants): fixed the calculation of track statistics tags. When calculating
+  the duration the skipped portions weren't taken into account leading to a
+  too-high duration. As a consequence the BPS tag (bits per second) was wrong,
+  too. Fixes #1885.
 
 ## Build system changes
 

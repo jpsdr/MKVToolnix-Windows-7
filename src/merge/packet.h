@@ -222,7 +222,7 @@ struct packet_t {
 
   void normalize_timecodes();
 
-  void account(track_statistics_c &statistics) const;
+  void account(track_statistics_c &statistics, int64_t timestamp_offset) const;
 };
 using packet_cptr = std::shared_ptr<packet_t>;
 
