@@ -1733,7 +1733,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
     return;
 
   auto &dmx = *dmx_ptr;
-  if (!dmx.ok || !demuxing_requested(dmx.type, dmx.id, dmx.language) || (-1 != dmx.ptzr))
+  if (!dmx.ok || !demuxing_requested(dmx.type, dmx.id, dmx.language) || (-1 != dmx.ptzr)) {
+    return;
+  }
 
   m_ti.m_id       = dmx.id;
   m_ti.m_language = dmx.language;
