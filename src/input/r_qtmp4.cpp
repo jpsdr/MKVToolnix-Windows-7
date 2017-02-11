@@ -1998,17 +1998,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
 
 int64_t
 qtmp4_demuxer_c::to_nsecs(int64_t value) {
-  int i;
-
-  for (i = 1; i <= 100000000ll; i *= 10) {
-    int64_t factor   = 1000000000ll / i;
-    int64_t value_up = value * factor;
-
-    if ((value_up / factor) == value)
-      return value_up / (time_scale / (1000000000ll / factor));
-  }
-
-  return value / (time_scale / 1000000000ll);
+  return boost::rational_cast<int64_t>(int64_rational_c{value, time_scale} * int64_rational_c{1'000'000'000ll, 1});
 }
 
 void

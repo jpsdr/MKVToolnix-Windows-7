@@ -44,6 +44,9 @@
 * mkvmerge: MP4 reader: when an MP4 file contained more than one copy of the
   "moov" atom (the track headers etc.), mkvmerge was parsing them all adding
   tracks multiple times. Fix for #1877.
+* mkvmerge: MP4 reader: fixed an integer overflow during the timestamp
+  calculation leading to files with wrong timestamps. Such files could not be
+  played back properly by most players. Fixes #1883.
 * mkvmerge: MPEG TS reader: if the PMT lists a DVBSUB track, mkvmerge will now
   recognize it without having to find a packet for it within the probed range.
 * mkvmerge: splitting by parts (both the "timestamps" and the "frames"
