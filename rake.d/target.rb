@@ -131,6 +131,7 @@ class Target
       when :boost_regex      then c(:BOOST_REGEX_LIB)
       when :boost_filesystem then c(:BOOST_FILESYSTEM_LIB)
       when :boost_system     then c(:BOOST_SYSTEM_LIB)
+      when :pugixml          then c(:PUGIXML_LIBS)
       when :qt               then c(:QT_LIBS)
       when :static           then c(:LINK_STATICALLY)
       when :mpegparser       then [ '-Lsrc/mpegparser', '-lmpegparser'  ]

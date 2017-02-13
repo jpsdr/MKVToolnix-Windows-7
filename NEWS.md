@@ -67,6 +67,10 @@
   In order to facilitate finding the new requirements new options have been
   added to confiure: "--with-xsltproc=prog", "--with-docbook-xsl=dir",
   "--with-po4a=prog" and "--with-po4a-translate=prog.
+* pugixml detection will be attempted via "pkg-config" first. If that fails,
+  "configure" will fall back to the previous method of trying just to compile
+  and link a test program with the standard include and library locations.
+  Implements #1891.
 
 
 # Version 9.8.0 "Kuglblids" 2017-01-22
