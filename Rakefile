@@ -73,17 +73,9 @@ def setup_globals
   $manpages                << "doc/man/mkvtoolnix-gui.1" if $build_mkvtoolnix_gui
 
   $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Isrc"
+  $system_includes        += " -Ilib/utf8-cpp/source" if c?(:UTF8CPP_INTERNAL)
+  $system_includes        += " -Ilib/pugixml/src"     if c?(:PUGIXML_INTERNAL)
   $system_libdirs          = "-Llib/avilib-0.6.10 -Llib/librmff -Lsrc/common"
-
-  if c?(:UTF8CPP_INTERNAL)
-    $system_includes      += " -Ilib/utf8-cpp/source"
-  end
-
-  if c?(:PUGIXML_INTERNAL)
-    $system_includes      += " -Ilib/pugixml/src"
-    $system_libdirs       += " -Llib/pugixml/src"
-  end
-
 
   $source_directories      =  %w{lib/avilib-0.6.10 lib/librmff src/common src/extract src/info src/input src/merge src/mkvtoolnix-gui src/mpegparser src/output src/propedit}
   $all_sources             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.c", "#{dir}/**/*.cpp" ].to_a }.flatten.sort

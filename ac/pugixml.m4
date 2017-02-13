@@ -9,19 +9,18 @@ if test x"$pugixml_found" = xyes; then
 fi
 
 if test x"$pugixml_found" = xno; then
-   AC_LANG_PUSH(C++)
+  AC_LANG_PUSH(C++)
 
   AC_CHECK_HEADERS([pugixml.hpp])
 
   if test x"$ac_cv_header_pugixml_hpp" = xyes; then
-    AC_CHECK_LIB([pugixml], [main], [PUGIXML_LIBS=-lpugixml])
+    AC_CHECK_LIB([pugixml], [main], [
+      PUGIXML_LIBS=-lpugixml
+      pugixml_found=yes
+    ])
   fi
 
   AC_LANG_POP
-
-  if test x"$ac_cv_header_pugixml_hpp" = xyes -a x"$ac_cv_lib_pugixml_main" = xyes ; then
-    pugixml_found=yes
-  fi
 fi
 
 if test $pugixml_found = yes; then
@@ -29,7 +28,9 @@ if test $pugixml_found = yes; then
   PUGIXML_INTERNAL=no
 else
   AC_MSG_NOTICE([Using the internal version of the pugixml library])
+  PUGIXML_CFLAGS=
   PUGIXML_INTERNAL=yes
+  PUGIXML_LIBS=
 fi
 
 AC_SUBST(PUGIXML_INTERNAL)
