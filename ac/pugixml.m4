@@ -14,7 +14,7 @@ if test x"$pugixml_found" = xno; then
   AC_CHECK_HEADERS([pugixml.hpp])
 
   if test x"$ac_cv_header_pugixml_hpp" = xyes; then
-    AC_CHECK_LIB([pugixml], [main])
+    AC_CHECK_LIB([pugixml], [main], [PUGIXML_LIBS=-lpugixml])
   fi
 
   AC_LANG_POP
