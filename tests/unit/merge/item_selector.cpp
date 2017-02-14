@@ -11,7 +11,7 @@ TEST(ItemSelector, NoneEmpty) {
   is.set_none();
 
   EXPECT_FALSE(is.selected(42));
-  EXPECT_FALSE(is.selected(42, "eng"));
+  EXPECT_FALSE(is.selected(42, std::string{"eng"}));
 }
 
 TEST(ItemSelector, NoneIDsOnly) {
@@ -22,7 +22,7 @@ TEST(ItemSelector, NoneIDsOnly) {
   is.add(42);
 
   EXPECT_FALSE(is.selected(42));
-  EXPECT_FALSE(is.selected(42, "eng"));
+  EXPECT_FALSE(is.selected(42, std::string{"eng"}));
 }
 
 TEST(ItemSelector, NoneLanguagesOnly) {
@@ -33,7 +33,7 @@ TEST(ItemSelector, NoneLanguagesOnly) {
   is.add("eng");
 
   EXPECT_FALSE(is.selected(42));
-  EXPECT_FALSE(is.selected(42, "eng"));
+  EXPECT_FALSE(is.selected(42, std::string{"eng"}));
 }
 
 TEST(ItemSelector, NoneIDsAndLanguages) {
@@ -46,17 +46,17 @@ TEST(ItemSelector, NoneIDsAndLanguages) {
   is.add("eng");
 
   EXPECT_FALSE(is.selected(42));
-  EXPECT_FALSE(is.selected(42, "eng"));
+  EXPECT_FALSE(is.selected(42, std::string{"eng"}));
 }
 
 TEST(ItemSelector, Empty) {
   auto is = item_selector_c<bool>{};
 
   EXPECT_TRUE(is.selected(42));
-  EXPECT_TRUE(is.selected(42, "eng"));
+  EXPECT_TRUE(is.selected(42, std::string{"eng"}));
 
   EXPECT_TRUE(is.selected(54));
-  EXPECT_TRUE(is.selected(54, "eng"));
+  EXPECT_TRUE(is.selected(54, std::string{"eng"}));
 }
 
 TEST(ItemSelector, IDsOnly) {
@@ -66,10 +66,10 @@ TEST(ItemSelector, IDsOnly) {
   is.add(42);
 
   EXPECT_TRUE(is.selected(42));
-  EXPECT_TRUE(is.selected(42, "eng"));
+  EXPECT_TRUE(is.selected(42, std::string{"eng"}));
 
   EXPECT_FALSE(is.selected(54));
-  EXPECT_FALSE(is.selected(54, "eng"));
+  EXPECT_FALSE(is.selected(54, std::string{"eng"}));
 }
 
 TEST(ItemSelector, LanguagesOnly) {
@@ -79,10 +79,10 @@ TEST(ItemSelector, LanguagesOnly) {
   is.add("eng");
 
   EXPECT_FALSE(is.selected(42));
-  EXPECT_TRUE(is.selected(42, "eng"));
+  EXPECT_TRUE(is.selected(42, std::string{"eng"}));
 
   EXPECT_FALSE(is.selected(54));
-  EXPECT_TRUE(is.selected(54, "eng"));
+  EXPECT_TRUE(is.selected(54, std::string{"eng"}));
 }
 
 TEST(ItemSelector, IDsAndLanguages) {
@@ -94,12 +94,12 @@ TEST(ItemSelector, IDsAndLanguages) {
   is.add("eng");
 
   EXPECT_TRUE(is.selected(42));
-  EXPECT_TRUE(is.selected(42, "fre"));
-  EXPECT_TRUE(is.selected(42, "eng"));
+  EXPECT_TRUE(is.selected(42, std::string{"fre"}));
+  EXPECT_TRUE(is.selected(42, std::string{"eng"}));
 
   EXPECT_FALSE(is.selected(54));
-  EXPECT_FALSE(is.selected(54, "fre"));
-  EXPECT_TRUE(is.selected(54, "eng"));
+  EXPECT_FALSE(is.selected(54, std::string{"fre"}));
+  EXPECT_TRUE(is.selected(54, std::string{"eng"}));
 }
 
 TEST(ItemSelector, ReversedEmpty) {
@@ -107,12 +107,12 @@ TEST(ItemSelector, ReversedEmpty) {
   is.set_reversed();
 
   EXPECT_FALSE(is.selected(42));
-  EXPECT_FALSE(is.selected(42, "fre"));
-  EXPECT_FALSE(is.selected(42, "eng"));
+  EXPECT_FALSE(is.selected(42, std::string{"fre"}));
+  EXPECT_FALSE(is.selected(42, std::string{"eng"}));
 
   EXPECT_FALSE(is.selected(54));
-  EXPECT_FALSE(is.selected(54, "fre"));
-  EXPECT_FALSE(is.selected(54, "eng"));
+  EXPECT_FALSE(is.selected(54, std::string{"fre"}));
+  EXPECT_FALSE(is.selected(54, std::string{"eng"}));
 }
 
 TEST(ItemSelector, ReversedIDsOnly) {
@@ -123,12 +123,12 @@ TEST(ItemSelector, ReversedIDsOnly) {
   is.add(42);
 
   EXPECT_FALSE(is.selected(42));
-  EXPECT_FALSE(is.selected(42, "fre"));
-  EXPECT_FALSE(is.selected(42, "eng"));
+  EXPECT_FALSE(is.selected(42, std::string{"fre"}));
+  EXPECT_FALSE(is.selected(42, std::string{"eng"}));
 
   EXPECT_TRUE(is.selected(54));
-  EXPECT_TRUE(is.selected(54, "fre"));
-  EXPECT_TRUE(is.selected(54, "eng"));
+  EXPECT_TRUE(is.selected(54, std::string{"fre"}));
+  EXPECT_TRUE(is.selected(54, std::string{"eng"}));
 }
 
 TEST(ItemSelector, ReversedLanguagesOnly) {
@@ -139,12 +139,12 @@ TEST(ItemSelector, ReversedLanguagesOnly) {
   is.add("eng");
 
   EXPECT_TRUE(is.selected(42));
-  EXPECT_TRUE(is.selected(42, "fre"));
-  EXPECT_FALSE(is.selected(42, "eng"));
+  EXPECT_TRUE(is.selected(42, std::string{"fre"}));
+  EXPECT_FALSE(is.selected(42, std::string{"eng"}));
 
   EXPECT_TRUE(is.selected(54));
-  EXPECT_TRUE(is.selected(54, "fre"));
-  EXPECT_FALSE(is.selected(54, "eng"));
+  EXPECT_TRUE(is.selected(54, std::string{"fre"}));
+  EXPECT_FALSE(is.selected(54, std::string{"eng"}));
 }
 
 TEST(ItemSelector, ReversedIDsAndLanguages) {
@@ -157,12 +157,12 @@ TEST(ItemSelector, ReversedIDsAndLanguages) {
   is.add("eng");
 
   EXPECT_FALSE(is.selected(42));
-  EXPECT_FALSE(is.selected(42, "fre"));
-  EXPECT_FALSE(is.selected(42, "eng"));
+  EXPECT_FALSE(is.selected(42, std::string{"fre"}));
+  EXPECT_FALSE(is.selected(42, std::string{"eng"}));
 
   EXPECT_TRUE(is.selected(54));
-  EXPECT_TRUE(is.selected(54, "fre"));
-  EXPECT_FALSE(is.selected(54, "eng"));
+  EXPECT_TRUE(is.selected(54, std::string{"fre"}));
+  EXPECT_FALSE(is.selected(54, std::string{"eng"}));
 }
 
 }

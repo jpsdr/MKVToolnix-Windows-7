@@ -131,7 +131,7 @@ public:
   static void set_probe_range_percentage(int64_rational_c const &probe_range_percentage);
 
 protected:
-  virtual bool demuxing_requested(char type, int64_t id, std::string const &language = "");
+  virtual bool demuxing_requested(char type, int64_t id, boost::optional<std::string> const &language = boost::none) const;
 
   virtual void id_result_container(mtx::id::verbose_info_t const &verbose_info = mtx::id::verbose_info_t{});
   virtual void id_result_track(int64_t track_id, const std::string &type, const std::string &info, mtx::id::verbose_info_t const &verbose_info = mtx::id::verbose_info_t{});

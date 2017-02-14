@@ -32,26 +32,30 @@ public:
   {
   }
 
-  bool selected(int64_t item,
-                std::string const &string_item = "") const {
+  bool
+  selected(int64_t item,
+           boost::optional<std::string> const &string_item = boost::none)
+    const {
     if (m_none)
       return false;
 
     if (m_items.empty() && m_string_items.empty())
       return !m_reversed;
 
-    auto included = (                        !m_items.empty()        && mtx::includes(m_items, item))
-                 || (!string_item.empty() && !m_string_items.empty() && mtx::includes(m_string_items, string_item));
+    auto included = (               !m_items.empty()        && mtx::includes(m_items, item))
+                 || (string_item && !m_string_items.empty() && mtx::includes(m_string_items, *string_item));
     return m_reversed ? !included : included;
   }
 
-  T get(int64_t item,
-        std::string const &string_item = "") const {
+  T
+  get(int64_t item,
+      boost::optional<std::string> const &string_item = boost::none)
+    const {
     if (!selected(item, string_item))
       return m_default_value;
 
     if (!m_string_items.empty())
-      return mtx::includes(m_string_items, string_item) ? m_string_items.at(string_item) : m_default_value;
+      return string_item && mtx::includes(m_string_items, *string_item) ? m_string_items.at(*string_item) : m_default_value;
 
     return mtx::includes(m_items, item) ? m_items.at(item) : m_default_value;
   }
