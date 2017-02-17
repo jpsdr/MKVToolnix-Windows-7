@@ -373,7 +373,7 @@ kax_reader_c::unlace_vorbis_private_data(kax_track_t *t,
 
 bool
 kax_reader_c::verify_acm_audio_track(kax_track_t *t) {
-  if (!t->private_data || (sizeof(alWAVEFORMATEX) > t->private_size)) {
+  if (!t->private_data || (sizeof(alWAVEFORMATEX) > t->private_data->get_size())) {
     if (verbose)
       mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. "
                              "Therefore we don't have a format ID to identify the audio codec used.\n")) % t->tnum % MKV_A_ACM);
@@ -381,11 +381,11 @@ kax_reader_c::verify_acm_audio_track(kax_track_t *t) {
 
   }
 
-  auto wfe       = reinterpret_cast<alWAVEFORMATEX *>(t->private_data);
+  auto wfe       = reinterpret_cast<alWAVEFORMATEX *>(t->private_data->get_buffer());
   t->a_formattag = get_uint16_le(&wfe->w_format_tag);
   t->codec       = codec_c::look_up_audio_format(t->a_formattag);
 
-  if (t->codec.is(codec_c::type_e::A_VORBIS) && (!unlace_vorbis_private_data(t, static_cast<unsigned char *>(t->private_data) + sizeof(alWAVEFORMATEX), t->private_size - sizeof(alWAVEFORMATEX)))) {
+  if (t->codec.is(codec_c::type_e::A_VORBIS) && (!unlace_vorbis_private_data(t, t->private_data->get_buffer() + sizeof(alWAVEFORMATEX), t->private_data->get_size() - sizeof(alWAVEFORMATEX)))) {
     // Force the passthrough packetizer to be used if the data behind
     // the WAVEFORMATEX does not contain valid laced Vorbis headers.
     t->codec = codec_c{};
@@ -426,7 +426,7 @@ kax_reader_c::verify_acm_audio_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_alac_audio_track(kax_track_t *t) {
-  if (t->private_data && (sizeof(alac::codec_config_t) <= t->private_size))
+  if (t->private_data && (sizeof(alac::codec_config_t) <= t->private_data->get_size()))
     return true;
 
   if (verbose)
@@ -473,7 +473,7 @@ kax_reader_c::verify_flac_audio_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_vorbis_audio_track(kax_track_t *t) {
-  if (!t->private_data || !unlace_vorbis_private_data(t, static_cast<unsigned char *>(t->private_data), t->private_size)) {
+  if (!t->private_data || !unlace_vorbis_private_data(t, t->private_data->get_buffer(), t->private_data->get_size())) {
     if (verbose)
       mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % MKV_A_VORBIS);
     return false;
@@ -494,7 +494,7 @@ kax_reader_c::verify_vorbis_audio_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_opus_audio_track(kax_track_t *t) {
-  if (!t->private_data || !t->private_size) {
+  if (!t->private_data || !t->private_data->get_size()) {
     if (verbose)
       mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % MKV_A_OPUS);
     return false;
@@ -570,7 +570,7 @@ kax_reader_c::verify_audio_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_mscomp_video_track(kax_track_t *t) {
-  if (!t->private_data || (sizeof(alBITMAPINFOHEADER) > t->private_size)) {
+  if (!t->private_data || (sizeof(alBITMAPINFOHEADER) > t->private_data->get_size())) {
     if (verbose)
       mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. "
                              "Therefore we don't have a FourCC to identify the video codec used.\n"))
@@ -579,7 +579,7 @@ kax_reader_c::verify_mscomp_video_track(kax_track_t *t) {
   }
 
   t->ms_compat = 1;
-  auto bih     = reinterpret_cast<alBITMAPINFOHEADER *>(t->private_data);
+  auto bih     = reinterpret_cast<alBITMAPINFOHEADER *>(t->private_data->get_buffer());
   auto u       = get_uint32_le(&bih->bi_width);
 
   if (t->v_width != u) {
@@ -654,7 +654,7 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
-  if (!t->private_data || (t->private_size != 5)) {
+  if (!t->private_data || (t->private_data->get_size() != 5)) {
     mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % t->codec_id);
     return false;
   }
@@ -664,7 +664,7 @@ kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_hdmv_textst_subtitle_track(kax_track_t *t) {
-  if (!t->private_data || (t->private_size < 4)) {
+  if (!t->private_data || (t->private_data->get_size() < 4)) {
     mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % t->codec_id);
     return false;
   }
@@ -680,19 +680,20 @@ kax_reader_c::verify_hdmv_textst_subtitle_track(kax_track_t *t) {
   // Newer files will only contain the dialog style segment's
   // descriptor and data
 
-  auto buf                 = static_cast<unsigned char *>(t->private_data);
+  auto buf                 = t->private_data->get_buffer();
   auto old_style           = buf[0] && (buf[0] < 0x10);
   auto style_segment_start = old_style ? 1 : 0;
   auto style_segment_size  = get_uint16_be(&buf[style_segment_start + 1]);
 
-  if (t->private_size < static_cast<unsigned int>(3 + style_segment_size + (old_style ? 1 + 2 : 0))) {
+  if (t->private_data->get_size() < static_cast<unsigned int>(3 + style_segment_size + (old_style ? 1 + 2 : 0))) {
     mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
     return false;
   }
 
-  t->private_size = style_segment_size + 3;
   if (0 < style_segment_start)
-    std::memmove(&buf[0], &buf[style_segment_start], t->private_size);
+    std::memmove(&buf[0], &buf[style_segment_start], style_segment_size);
+
+  t->private_data->resize(style_segment_size + 3);
 
   return true;
 }
@@ -719,9 +720,7 @@ kax_reader_c::verify_vobsub_subtitle_track(kax_track_t *t) {
               % (boost::format(Y("The VobSub subtitle track %1% does not contain its index in the CodecPrivate element.")) % t->tnum)
               % Y("A default index and with it default settings for the width, height and color palette will be used instead."));
 
-  auto index      = mtx::vobsub::create_default_index(720, 576, {});
-  t->private_data = safememdup(&index[0], index.size());
-  t->private_size = index.size();
+  t->private_data = memory_c::clone(mtx::vobsub::create_default_index(720, 576, {}));
 
   return true;
 }
@@ -774,11 +773,7 @@ kax_reader_c::verify_tracks() {
     t->ok = 0;
 
     if (t->private_data) {
-      memory_cptr private_data(new memory_c(t->private_data, t->private_size, true));
-      t->content_decoder.reverse(private_data, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
-      private_data->lock();
-      t->private_data = private_data->get_buffer();
-      t->private_size = private_data->get_size();
+      t->content_decoder.reverse(t->private_data, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
     }
 
     switch (t->type) {
@@ -1246,9 +1241,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
 
     auto kcodecpriv = FindChild<KaxCodecPrivate>(ktentry);
     if (kcodecpriv) {
-      track->private_size = kcodecpriv->GetSize();
-      if (0 < track->private_size)
-        track->private_data = safememdup(kcodecpriv->GetBuffer(), track->private_size);
+      track->private_data = memory_c::clone(kcodecpriv->GetBuffer(), kcodecpriv->GetSize());
     }
 
     track->codec_id         = FindChildValue<KaxCodecID>(ktentry);
@@ -1548,7 +1541,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
 
   ptzr->set_track_type(MAP_TRACK_TYPE(t->type));
   ptzr->set_codec_id(t->codec_id);
-  ptzr->set_codec_private(memory_c::clone(t->private_data, t->private_size));
+  ptzr->set_codec_private(t->private_data);
 
   if (0.0 < t->v_frate)
     ptzr->set_track_default_duration(1000000000.0 / t->v_frate);
@@ -1673,11 +1666,11 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
   int detected_profile = AAC_PROFILE_MAIN;
 
   if (!t->ms_compat) {
-    if (t->private_data && (2 <= t->private_size)) {
+    if (t->private_data && (2 <= t->private_data->get_size())) {
       int channels, sfreq, osfreq;
       bool sbr;
 
-      if (!aac::parse_audio_specific_config(static_cast<const unsigned char *>(t->private_data), t->private_size, profile, channels, sfreq, osfreq, sbr))
+      if (!aac::parse_audio_specific_config(t->private_data->get_buffer(), t->private_data->get_size(), profile, channels, sfreq, osfreq, sbr))
         mxerror_tid(m_ti.m_fname, t->tnum, Y("Malformed AAC codec initialization data found.\n"));
 
       detected_profile = profile;
@@ -1692,7 +1685,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
     int channels, sfreq, osfreq;
     bool sbr;
 
-    if (!aac::parse_audio_specific_config(static_cast<const unsigned char *>(t->private_data) + sizeof(alWAVEFORMATEX), t->private_size - sizeof(alWAVEFORMATEX), profile, channels, sfreq, osfreq, sbr))
+    if (!aac::parse_audio_specific_config(t->private_data->get_buffer() + sizeof(alWAVEFORMATEX), t->private_data->get_size() - sizeof(alWAVEFORMATEX), profile, channels, sfreq, osfreq, sbr))
       mxerror_tid(m_ti.m_fname, t->tnum, Y("Malformed AAC codec initialization data found.\n"));
 
     detected_profile = profile;
@@ -1726,7 +1719,7 @@ kax_reader_c::create_ac3_audio_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_alac_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
-  set_track_packetizer(t, new alac_packetizer_c(this, nti, memory_c::clone(t->private_data, t->private_size), t->a_sfreq, t->a_channels));
+  set_track_packetizer(t, new alac_packetizer_c(this, nti, t->private_data, t->a_sfreq, t->a_channels));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 
@@ -1744,7 +1737,7 @@ kax_reader_c::create_flac_audio_packetizer(kax_track_t *t,
   nti.m_private_data.reset();
 
   unsigned int offset = t->ms_compat ? sizeof(alWAVEFORMATEX) : 0u;
-  set_track_packetizer(t, new flac_packetizer_c(this, nti, static_cast<unsigned char *>(t->private_data) + offset, t->private_size - offset));
+  set_track_packetizer(t, new flac_packetizer_c(this, nti, t->private_data->get_buffer() + offset, t->private_data->get_size() - offset));
 
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
@@ -1906,7 +1899,7 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
     t->sub_type = 'v';
 
   } else if (t->codec.is(codec_c::type_e::S_DVBSUB)) {
-    set_track_packetizer(t, new dvbsub_packetizer_c(this, nti, memory_c::clone(t->private_data, t->private_size)));
+    set_track_packetizer(t, new dvbsub_packetizer_c(this, nti, t->private_data));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
     t->sub_type = 'p';
 
@@ -1935,7 +1928,7 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
     t->sub_type = 'p';
 
   } else if (t->codec.is(codec_c::type_e::S_HDMV_TEXTST)) {
-    set_track_packetizer(t, new hdmv_textst_packetizer_c(this, nti, memory_c::clone(t->private_data, t->private_size)));
+    set_track_packetizer(t, new hdmv_textst_packetizer_c(this, nti, t->private_data));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
     t->sub_type = 'p';
 
@@ -1967,7 +1960,7 @@ kax_reader_c::create_packetizer(int64_t tid) {
     return;
 
   track_info_c nti(m_ti);
-  nti.m_private_data = memory_c::clone(t->private_data, t->private_size);
+  nti.m_private_data = t->private_data ? t->private_data->clone() : memory_cptr{};
   nti.m_id           = t->tnum; // ID for this track.
 
   if (nti.m_language == "")
@@ -2063,8 +2056,8 @@ kax_reader_c::create_vc1_video_packetizer(kax_track_t *t,
   set_track_packetizer(t, new vc1_video_packetizer_c(this, nti));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 
-  if (t->private_data && (sizeof(alBITMAPINFOHEADER) < t->private_size))
-    t->ptzr_ptr->process(new packet_t(new memory_c(reinterpret_cast<unsigned char *>(t->private_data) + sizeof(alBITMAPINFOHEADER), t->private_size - sizeof(alBITMAPINFOHEADER), false)));
+  if (t->private_data && (sizeof(alBITMAPINFOHEADER) < t->private_data->get_size()))
+    t->ptzr_ptr->process(new packet_t(new memory_c(t->private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), t->private_data->get_size() - sizeof(alBITMAPINFOHEADER), false)));
 }
 
 void
@@ -2569,7 +2562,7 @@ kax_reader_c::identify() {
     info.add(mtx::id::number,               track->track_number);
     info.add(mtx::id::uid,                  track->track_uid);
     info.add(mtx::id::codec_id,             track->codec_id);
-    info.set(mtx::id::codec_private_length, track->private_size);
+    info.set(mtx::id::codec_private_length, track->private_data ? track->private_data->get_size() : 0u);
     info.add(mtx::id::codec_delay,          track->codec_delay.to_ns(0));
     info.add(mtx::id::language,             track->language);
     info.add(mtx::id::track_name,           track->track_name);
@@ -2579,8 +2572,8 @@ kax_reader_c::identify() {
     info.set(mtx::id::forced_track,         track->forced_track  ? true : false);
     info.set(mtx::id::enabled_track,        track->enabled_track ? true : false);
 
-    if ((0 != track->private_size) && track->private_data)
-      info.add(mtx::id::codec_private_data, to_hex(static_cast<const unsigned char *>(track->private_data), track->private_size, true));
+    if (track->private_data && (0 != track->private_data->get_size()))
+      info.add(mtx::id::codec_private_data, to_hex(track->private_data->get_buffer(), track->private_data->get_size(), true));
 
     if ((0 != track->v_width) && (0 != track->v_height))
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);

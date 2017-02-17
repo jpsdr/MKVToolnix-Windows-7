@@ -80,8 +80,7 @@ struct kax_track_t {
   uint64_t a_channels, a_bps, a_formattag;
   double a_sfreq, a_osfreq;
 
-  void *private_data;
-  unsigned int private_size;
+  memory_cptr private_data;
 
   unsigned char *headers[3];
   uint32_t header_sizes[3];
@@ -156,8 +155,6 @@ struct kax_track_t {
     , a_formattag(0)
     , a_sfreq(8000.0)
     , a_osfreq(0.0)
-    , private_data(nullptr)
-    , private_size(0)
     , default_track(true)
     , forced_track(boost::logic::indeterminate)
     , enabled_track(true)
@@ -177,7 +174,6 @@ struct kax_track_t {
   }
 
   ~kax_track_t() {
-    safefree(private_data);
     if (tags)
       delete tags;
   }

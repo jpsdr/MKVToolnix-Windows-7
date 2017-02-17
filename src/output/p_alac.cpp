@@ -27,7 +27,7 @@ alac_packetizer_c::alac_packetizer_c(generic_reader_c *p_reader,
                                      unsigned int sample_rate,
                                      unsigned int channels)
   : generic_packetizer_c{p_reader, p_ti}
-  , m_magic_cookie{magic_cookie}
+  , m_magic_cookie{magic_cookie->clone()}
   , m_sample_rate{sample_rate}
   , m_channels{channels}
 {
