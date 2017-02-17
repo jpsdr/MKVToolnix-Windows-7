@@ -654,9 +654,19 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
-  if (!t->private_data || (t->private_data->get_size() != 5)) {
+  if (   !t->private_data
+      || (t->private_data->get_size() < 4)
+      || (t->private_data->get_size() > 5)) {
     mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % t->codec_id);
     return false;
+  }
+
+  if (t->private_data->get_size() == 4) {
+    // The subtitling type byte is missing. Add it. From ETSI EN 300 468 table 26:
+    // 0x10 = DVB subtitles (normal) with no monitor aspect ratio criticality
+
+    t->private_data->resize(5);
+    t->private_data->get_buffer()[4] = 0x10;
   }
 
   return true;

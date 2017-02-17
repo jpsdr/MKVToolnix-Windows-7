@@ -14,6 +14,9 @@
 * GUI: running programs after jobs: added a new variable
   <MTX_INSTALLATION_DIRECTORY> for the directory the MKVToolNix GUI executable
   is located in.
+* mkvmerge: DVB subtitle tracks whose CodecPrivate data is only four bytes
+  long will now be fixed up to the proper five bytes by adding the subtitling
+  type byte.
 
 ## Bug fixes
 
