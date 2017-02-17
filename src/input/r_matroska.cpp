@@ -655,7 +655,7 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 bool
 kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
   if (!t->private_data || (t->private_size != 5)) {
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
+    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % t->codec_id);
     return false;
   }
 
@@ -665,7 +665,7 @@ kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
 bool
 kax_reader_c::verify_hdmv_textst_subtitle_track(kax_track_t *t) {
   if (!t->private_data || (t->private_size < 4)) {
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
+    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % t->codec_id);
     return false;
   }
 

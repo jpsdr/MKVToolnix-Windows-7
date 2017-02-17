@@ -54,6 +54,9 @@
   the duration the skipped portions weren't taken into account leading to a
   too-high duration. As a consequence the BPS tag (bits per second) was wrong,
   too. Fixes #1885.
+* mkvmerge: reading files with DVB/HDMV TextSV subtitle tracks with invalid
+  CodecPrivate caused mkvmerge to abort with an error from boost::format about
+  the format string not having enough arguments. Fixes #1894.
 
 ## Build system changes
 
