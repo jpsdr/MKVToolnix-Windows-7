@@ -220,6 +220,15 @@ get_file_type_internal(filelist_t &file) {
   if (do_probe<mpeg_ps_reader_c>(io, size))
     return { FILE_TYPE_MPEG_PS, size };
 
+  // Try raw audio formats and require eight consecutive frames at the
+  // start of the file.
+  if (do_probe<mp3_reader_c>(io, size, 128 * 1024, 8, true))
+    return { FILE_TYPE_MP3, size };
+  if (do_probe<ac3_reader_c>(io, size, 128 * 1024, 8, true))
+    return { FILE_TYPE_AC3, size };
+  if (do_probe<aac_reader_c>(io, size, 128 * 1024, 8, true))
+    return { FILE_TYPE_AAC, size };
+
   // File types which are the same in raw format and in other container formats.
   // Detection requires 20 or more consecutive packets.
   static std::vector<int> s_probe_sizes1{ { 128 * 1024, 256 * 1024, 512 * 1024, 1024 * 1024, 0 } };

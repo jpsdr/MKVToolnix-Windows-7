@@ -60,6 +60,8 @@
 * mkvmerge: reading files with DVB/HDMV TextSV subtitle tracks with invalid
   CodecPrivate caused mkvmerge to abort with an error from boost::format about
   the format string not having enough arguments. Fixes #1894.
+* mkvmerge: fixed misdetection of certain AC-3 files as MP3 files which led to
+  an error message that "the demultiplexer could not be initialized".
 
 ## Build system changes
 
