@@ -124,8 +124,8 @@ struct qt_sample_t {
 };
 
 struct qt_frame_offset_t {
-  uint32_t count;
-  uint32_t offset;
+  unsigned int count;
+  int64_t offset;
 
   qt_frame_offset_t()
     : count{}
@@ -133,7 +133,7 @@ struct qt_frame_offset_t {
   {
   }
 
-  qt_frame_offset_t(uint32_t p_count, uint32_t p_offset)
+  qt_frame_offset_t(unsigned int p_count, int64_t p_offset)
     : count{p_count}
     , offset{p_offset}
   {

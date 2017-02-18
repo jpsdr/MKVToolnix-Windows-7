@@ -455,8 +455,10 @@ void
 qtmp4_reader_c::handle_ctts_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t,
                                  int level) {
-  m_in->skip(1 + 3);        // version & flags
-  uint32_t count = m_in->read_uint32_be();
+  auto version = m_in->read_uint8();
+  m_in->skip(3);                // version & flags
+
+  auto count = m_in->read_uint32_be();
   mxdebug_if(m_debug_headers, boost::format("%1%Frame offset table: %2% raw entries\n") % space(level * 2 + 1) % count);
 
   size_t i;
@@ -464,14 +466,15 @@ qtmp4_reader_c::handle_ctts_atom(qtmp4_demuxer_c &dmx,
     qt_frame_offset_t frame_offset;
 
     frame_offset.count  = m_in->read_uint32_be();
-    frame_offset.offset = m_in->read_uint32_be();
+    frame_offset.offset = version == 1 ? mtx::math::to_signed(m_in->read_uint32_be()) : m_in->read_uint32_be();
     dmx.raw_frame_offset_table.push_back(frame_offset);
   }
 
   if (m_debug_tables) {
-    i = 0;
+    auto fmt = boost::format("%1%%2%: count %3% offset %4%\n");
+    i        = 0;
     for (auto const &frame_offset : dmx.raw_frame_offset_table)
-      mxdebug(boost::format("%1%%2%: count %3% offset %4%\n") % space((level + 1) * 2 + 1) % i++ % frame_offset.count % frame_offset.offset);
+      mxdebug(fmt % space((level + 1) * 2 + 1) % i++ % frame_offset.count % frame_offset.offset);
   }
 }
 
