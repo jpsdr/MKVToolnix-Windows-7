@@ -2045,9 +2045,7 @@ void
 qtmp4_demuxer_c::calculate_timecodes_variable_sample_size() {
   auto const num_edits         = editlist_table.size();
   auto const num_frame_offsets = frame_offset_table.size();
-  bool is_avc                  = codec.is(codec_c::type_e::V_MPEG4_P10);
-  bool is_hevc                 = codec.is(codec_c::type_e::V_MPEGH_P2);
-  int64_t v_dts_offset         = (is_avc || is_hevc) && num_frame_offsets ? to_nsecs(frame_offset_table[0]) : 0;
+  auto dts_offset              = num_frame_offsets ? to_nsecs(frame_offset_table[0]) : 0ll;
 
   std::vector<int64_t> timecodes_before_offsets;
 
@@ -2075,8 +2073,8 @@ qtmp4_demuxer_c::calculate_timecodes_variable_sample_size() {
 
     timecodes_before_offsets.push_back(timecode);
 
-    if ((is_avc || is_hevc) && (num_frame_offsets > real_frame))
-       timecode += to_nsecs(frame_offset_table[real_frame]) - v_dts_offset;
+    if (num_frame_offsets > real_frame)
+       timecode += to_nsecs(frame_offset_table[real_frame]) - dts_offset;
 
     timecodes.push_back(timecode + constant_editlist_offset_ns);
   }
