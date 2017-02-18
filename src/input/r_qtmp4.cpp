@@ -2026,8 +2026,9 @@ qtmp4_demuxer_c::calculate_frame_rate() {
 }
 
 int64_t
-qtmp4_demuxer_c::to_nsecs(int64_t value) {
-  return boost::rational_cast<int64_t>(int64_rational_c{value, time_scale} * int64_rational_c{1'000'000'000ll, 1});
+qtmp4_demuxer_c::to_nsecs(int64_t value,
+                          boost::optional<int64_t> time_scale_to_use) {
+  return boost::rational_cast<int64_t>(int64_rational_c{value, time_scale_to_use.value_or(time_scale)} * int64_rational_c{1'000'000'000ll, 1});
 }
 
 void
@@ -2272,13 +2273,13 @@ qtmp4_demuxer_c::update_editlist_table() {
                % id % (frame_offset_table.empty() ? "no frame offset table" : frame_offset_table[0] == editlist_table[0].media_time ? "same as first frame offset" : "different from first frame offset"));
     simple_editlist_type        = 2;
     raw_offset                  = editlist_table[0].media_time;
-    constant_editlist_offset_ns = (-editlist_table[0].media_time + (frame_offset_table.empty() ? 0 : frame_offset_table[0])) * 1000000000ll / time_scale;
+    constant_editlist_offset_ns = to_nsecs(-editlist_table[0].media_time + (frame_offset_table.empty() ? 0 : frame_offset_table[0]));
 
   } else if ((editlist_table.size() == 2) && (-1 == editlist_table[0].media_time)) {
     mxdebug_if(m_debug_editlists, boost::format("Track ID %1%: Edit list analysis: type 3: two entries; first with time == -1\n") % id);
     simple_editlist_type        = 3;
     raw_offset                  = editlist_table[0].segment_duration;
-    constant_editlist_offset_ns = (editlist_table[0].segment_duration * 1000000000ll / global_time_scale)  - ((frame_offset_table.empty() ? 0 : frame_offset_table[0]) * 1000000000ll / time_scale);
+    constant_editlist_offset_ns = to_nsecs(editlist_table[0].segment_duration, global_time_scale)  - to_nsecs(frame_offset_table.empty() ? 0 : frame_offset_table[0]);
     offset_in_global_time_scale = true;
 
   } else if (m_debug_editlists) {

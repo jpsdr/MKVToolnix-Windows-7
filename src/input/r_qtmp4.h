@@ -314,7 +314,7 @@ struct qtmp4_demuxer_c {
   }
 
   void calculate_frame_rate();
-  int64_t to_nsecs(int64_t value);
+  int64_t to_nsecs(int64_t value, boost::optional<int64_t> time_scale_to_use = boost::none);
   void calculate_timecodes();
   void adjust_timecodes(int64_t delta);
 
