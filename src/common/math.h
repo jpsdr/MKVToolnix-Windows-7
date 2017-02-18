@@ -35,6 +35,33 @@ uint64_t round_to_nearest_pow2(uint64_t value);
 int int_log2(uint64_t value);
 double int_to_double(int64_t value);
 
+// Converting unsigned int types to signed ints assuming the
+// underlying bits in memory should represent the 2's complement of a
+// signed integer. See https://stackoverflow.com/a/13208789/507077
+
+template<typename Tunsigned>
+typename std::enable_if<
+  std::is_unsigned<Tunsigned>::value,
+  typename std::make_signed<Tunsigned>::type
+>::type
+to_signed(Tunsigned const &u) {
+  using Tsigned = typename std::make_signed<Tunsigned>::type;
+
+  if (u <= std::numeric_limits<Tsigned>::max())
+    return static_cast<Tsigned>(u);
+
+  return static_cast<Tsigned>(u - std::numeric_limits<Tsigned>::min()) + std::numeric_limits<Tsigned>::min();
+}
+
+template<typename Tsigned>
+typename std::enable_if<
+  std::is_signed<Tsigned>::value,
+  Tsigned
+>::type
+to_signed(Tsigned const &s) {
+  return s;
+}
+
 }}
 
 using int64_rational_c = boost::rational<int64_t>;
