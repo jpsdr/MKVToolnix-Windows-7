@@ -1973,7 +1973,7 @@ void
 qtmp4_demuxer_c::calculate_frame_rate() {
   if ((1 == durmap_table.size()) && (0 != durmap_table[0].duration) && ((0 != sample_size) || (0 == frame_offset_table.size()))) {
     // Constant frame_rate. Let's set the default duration.
-    frame_rate.assign(time_scale, durmap_table[0].duration);
+    frame_rate.assign(time_scale, static_cast<int64_t>(durmap_table[0].duration));
     mxdebug_if(m_debug_frame_rate, boost::format("calculate_frame_rate: case 1: %1%/%2%\n") % frame_rate.numerator() % frame_rate.denominator());
 
     return;
@@ -2018,7 +2018,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
                                      [](auto const &winner, std::pair<int64_t, int> const &current) { return current.second > winner.second ? current : winner; });
 
   if (most_common.first)
-    frame_rate.assign(1000000000ll, to_nsecs(most_common.first));
+    frame_rate.assign(static_cast<int64_t>(1000000000ll), to_nsecs(most_common.first));
 
   mxdebug_if(m_debug_frame_rate,
              boost::format("calculate_frame_rate: case 4: duration %1% num_frames %2% frame_duration %3% most_common.num_occurances %4% most_common.duration %5% frame_rate %6%/%7%\n")

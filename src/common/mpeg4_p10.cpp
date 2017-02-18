@@ -413,7 +413,7 @@ mpeg4::p10::parse_sps(memory_cptr const &buffer,
   else {
     auto frame_rate = mtx::frame_timing::determine_frame_rate(duration);
     if (!frame_rate)
-      frame_rate.assign(0x80000000, (duration * 0x80000000) / 1000000000ll);
+      frame_rate.assign(static_cast<int64_t>(0x80000000), static_cast<int64_t>((duration * 0x80000000) / 1000000000ll));
 
     num_units_in_tick = frame_rate.denominator();
     time_scale        = frame_rate.numerator();
