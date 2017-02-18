@@ -361,7 +361,7 @@ struct qtmp4_demuxer_c {
 
   void set_packetizer_display_dimensions();
 
-  int64_t min_timecode() const;
+  boost::optional<int64_t> min_timecode() const;
 
   void determine_codec();
 
@@ -475,6 +475,7 @@ protected:
   virtual void parse_headers();
   virtual void verify_track_parameters_and_update_indexes();
   virtual void calculate_timecodes();
+  virtual boost::optional<int64_t> calculate_global_min_timecode() const;
   virtual qt_atom_t read_atom(mm_io_c *read_from = nullptr, bool exit_on_error = true);
   virtual bool resync_to_top_level_atom(uint64_t start_pos);
   virtual void parse_itunsmpb(std::string data);

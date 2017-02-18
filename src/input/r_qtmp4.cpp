@@ -335,22 +335,46 @@ qtmp4_reader_c::verify_track_parameters_and_update_indexes() {
   }
 }
 
+boost::optional<int64_t>
+qtmp4_reader_c::calculate_global_min_timecode()
+  const {
+  boost::optional<int64_t> global_min_timecode;
+
+  for (auto const &dmx : m_demuxers) {
+    if (!demuxing_requested(dmx->type, dmx->id, dmx->language)) {
+      continue;
+    }
+
+    auto dmx_min_timecode = dmx->min_timecode();
+    if (dmx_min_timecode && (!global_min_timecode || (dmx_min_timecode < *global_min_timecode))) {
+      global_min_timecode.reset(*dmx_min_timecode);
+    }
+
+    mxdebug_if(m_debug_headers, boost::format("Minimum timecode of track %1%: %2%\n") % dmx->id % (dmx_min_timecode ? format_timestamp(*dmx_min_timecode) : "none"));
+  }
+
+  mxdebug_if(m_debug_headers, boost::format("Minimum global timecode: %1%\n") % (global_min_timecode ? format_timestamp(*global_min_timecode) : "none"));
+
+  return global_min_timecode;
+}
+
 void
 qtmp4_reader_c::calculate_timecodes() {
   if (m_timecodes_calculated)
     return;
 
-  int64_t min_timecode = 0;
-
   for (auto &dmx : m_demuxers) {
     dmx->calculate_frame_rate();
     dmx->calculate_timecodes();
-    min_timecode = std::min(min_timecode, dmx->min_timecode());
   }
 
-  if (0 > min_timecode)
-    for (auto &dmx : m_demuxers)
-      dmx->adjust_timecodes(-min_timecode);
+  auto min_timecode = calculate_global_min_timecode();
+
+  if (min_timecode && (0 != *min_timecode)) {
+    for (auto &dmx : m_demuxers) {
+      dmx->adjust_timecodes(-*min_timecode);
+    }
+  }
 
   m_timecodes_calculated = true;
 }
@@ -2104,10 +2128,10 @@ qtmp4_demuxer_c::adjust_timecodes(int64_t delta) {
     index.timecode += delta;
 }
 
-int64_t
+boost::optional<int64_t>
 qtmp4_demuxer_c::min_timecode()
   const {
-  return timecodes.empty() ? 0 : *brng::min_element(timecodes);
+  return !timecodes.empty() ? boost::optional<int64_t>{*brng::min_element(timecodes)} : boost::optional<int64_t>{boost::none};
 }
 
 bool
