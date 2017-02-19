@@ -905,7 +905,7 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
               % track.chunk_table[chunk_start + idx].pos
               % (track.sample_table[sample_start + idx].size + track.chunk_table[chunk_start + idx].pos)
               % track.raw_frame_offset_table[frame_offset_start + idx].offset
-              % all_keyframe_flags[idx]
+              % static_cast<unsigned int>(all_keyframe_flags[idx])
               % all_sample_flags[idx]);
   }
 }
