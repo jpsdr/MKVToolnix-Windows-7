@@ -17,6 +17,7 @@
 * mkvmerge: DVB subtitle tracks whose CodecPrivate data is only four bytes
   long will now be fixed up to the proper five bytes by adding the subtitling
   type byte.
+* mkvmerge: MP4 reader: "ctts" version 1 atoms are now supported.
 
 ## Bug fixes
 
@@ -62,6 +63,14 @@
   the format string not having enough arguments. Fixes #1894.
 * mkvmerge: fixed misdetection of certain AC-3 files as MP3 files which led to
   an error message that "the demultiplexer could not be initialized".
+* mkvmerge: fixed huge memory consumption when appending big Matroska files
+  with sparse tracks (e.g. forced subtitle tracks). The Matroska reader will
+  now queue at most 128 MB of data. Fixes #1893.
+* mkvmerge: MP4 reader: the timestamps of all multiplexed tracks will now be
+  0-based properly.
+* mkvmerge: MP4 reader: the DTS-to-PTS offsets given by the "ctts" atoms are
+  now applied for all tracks containing a "ctts" atom, not just h.264 & h.265
+  tracks.
 
 ## Build system changes
 
