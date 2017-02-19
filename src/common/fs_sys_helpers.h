@@ -25,6 +25,7 @@ void determine_path_to_current_executable(std::string const &argv0);
 bfs::path get_current_exe_path(std::string const &argv0);
 bfs::path get_application_data_folder();
 bfs::path get_installation_path();
+uint64_t get_memory_usage();
 
 bool is_installed();
 

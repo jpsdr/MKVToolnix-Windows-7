@@ -25,6 +25,7 @@
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
 #include "common/strings/editing.h"
+#include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 
 namespace mtx { namespace sys {
@@ -111,6 +112,26 @@ get_current_exe_path(std::string const &argv0) {
 bool
 is_installed() {
   return true;
+}
+
+uint64_t
+get_memory_usage() {
+  // This only works on Linux and other systems that implement a
+  // Linux-compatible procfs on /proc. Not implemented for other
+  // systems yet, as it's a debugging tool.
+
+  try {
+    auto content = mm_file_io_c::slurp("/proc/self/statm");
+    if (!content) {
+      return 0;
+    }
+
+    uint64_t value{};
+    return parse_number(split(content->to_string(), " ", 2)[0], value) ? value * 4096 : 0;
+
+  } catch (...) {
+    return 0;
+  }
 }
 
 }}

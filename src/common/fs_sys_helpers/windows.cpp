@@ -144,6 +144,15 @@ is_installed() {
   return !bfs::exists(file_to_test);
 }
 
+uint64_t
+get_memory_usage() {
+  // This only works on Linux and other systems that implement a
+  // Linux-compatible procfs on /proc. Not implemented for other
+  // systems yet, as it's a debugging tool.
+
+  return 0;
+}
+
 }}
 
 #endif  // SYS_WINDOWS

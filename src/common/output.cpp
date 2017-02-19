@@ -13,11 +13,15 @@
 
 #include "common/common_pch.h"
 
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <sstream>
 
 #include "common/command_line.h"
+#include "common/date_time.h"
+#include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/endian.h"
+#include "common/fs_sys_helpers.h"
 #include "common/json.h"
 #include "common/locale.h"
 #include "common/logger.h"
@@ -101,6 +105,8 @@ set_mxmsg_handler(unsigned int level,
 void
 mxmsg(unsigned int level,
       std::string message) {
+  static debugging_option_c s_timestamped_messages{"timestamped_messages"};
+  static debugging_option_c s_memory_usage_in_messages{"memory_usage_in_messages"};
   static bool s_saw_cr_after_nl = false;
 
   if (g_suppress_info && (MXMSG_INFO == level))
@@ -112,15 +118,23 @@ mxmsg(unsigned int level,
     s_saw_cr_after_nl = false;
   }
 
+  std::string prefix;
+  if (s_timestamped_messages) {
+    prefix += mtx::date_time::to_string(boost::posix_time::microsec_clock::local_time(), "%Y-%m-%d %H:%M:%S.%f ");
+  }
+  if (s_memory_usage_in_messages) {
+    prefix += (boost::format("%1% kB ") % (mtx::sys::get_memory_usage() / 1024)).str();
+  }
+
   if (level == MXMSG_ERROR) {
     if (s_saw_cr_after_nl)
       g_mm_stdio->puts("\n");
     if (balg::starts_with(message, Y("Error:")))
       message.erase(0, std::string{Y("Error:")}.length());
-    g_mm_stdio->puts(g_gui_mode ? "#GUI#error " : (boost::format("%1% ") % Y("Error:")).str());
+    g_mm_stdio->puts(g_gui_mode ? "#GUI#error " : (boost::format("%1%%2% ") % prefix % Y("Error:")).str());
 
   } else if (level == MXMSG_WARNING)
-    g_mm_stdio->puts(g_gui_mode ? "#GUI#warning " : (boost::format("%1% ") % Y("Warning:")).str());
+    g_mm_stdio->puts(g_gui_mode ? "#GUI#warning " : (boost::format("%1%%2% ") % prefix % Y("Warning:")).str());
 
   else if (level == MXMSG_DEBUG)
     g_mm_stdio->puts(Y("Debug> "));
@@ -132,7 +146,7 @@ mxmsg(unsigned int level,
       s_saw_cr_after_nl = true;
   }
 
-  g_mm_stdio->puts(message);
+  g_mm_stdio->puts(prefix.empty() ? message : (prefix + message));
   g_mm_stdio->flush();
 }
 
