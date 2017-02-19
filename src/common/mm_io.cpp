@@ -158,9 +158,24 @@ mm_file_io_c::prepare_path(const std::string &path) {
 memory_cptr
 mm_file_io_c::slurp(std::string const &file_name) {
   mm_file_io_c in(file_name, MODE_READ);
-  auto content = memory_c::alloc(in.get_size());
-  if (in.get_size() != in.read(content, in.get_size()))
-    throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
+
+  // Don't try to retrieve the file size in order to enable reading
+  // from pseudo file systems such as /proc on Linux.
+  auto const chunk_size = 10 * 1024;
+  auto content          = memory_c::alloc(chunk_size);
+  auto total_size_read  = 0;
+
+  while (true) {
+    auto num_read    = in.read(content->get_buffer() + total_size_read, chunk_size);
+    total_size_read += num_read;
+
+    if (num_read != chunk_size) {
+      content->resize(total_size_read);
+      break;
+    }
+
+    content->resize(content->get_size() + chunk_size);
+  }
 
   return content;
 }
