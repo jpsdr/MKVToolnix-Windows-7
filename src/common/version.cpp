@@ -18,7 +18,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Kuglblids"
+#define VERSIONNAME "Pick Up"
 
 version_number_t::version_number_t()
   : valid(false)
