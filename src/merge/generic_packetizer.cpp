@@ -1215,6 +1215,8 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
   if ((0 > pack->bref) && (0 <= pack->fref))
     std::swap(pack->bref, pack->fref);
 
+  account_enqueued_bytes(*pack, +1);
+
   if (1 != m_connected_to)
     add_packet2(pack);
   else
@@ -1294,7 +1296,6 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
   after_packet_timestamped(*pack);
 
   compress_packet(*pack);
-  account_enqueued_bytes(*pack, +1);
 }
 
 void
