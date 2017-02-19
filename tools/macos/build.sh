@@ -206,9 +206,10 @@ function build_configured_mkvtoolnix {
 
   local -a args
   args=(
-    --prefix=$dmgmac --bindir=$dmgmac --datarootdir=$dmgmac \
-    --with-extra-libs=${TARGET}/lib --with-extra-includes=${TARGET}/include \
-    --with-boost-libdir=${TARGET}/lib \
+    --prefix=$dmgmac --bindir=$dmgmac --datarootdir=$dmgmac
+    --with-extra-libs=${TARGET}/lib --with-extra-includes=${TARGET}/include
+    --with-boost-libdir=${TARGET}/lib
+    --with-docbook-xsl-root=${DOCBOOK_XSL_ROOT_DIR}
     --disable-debug
   )
 
