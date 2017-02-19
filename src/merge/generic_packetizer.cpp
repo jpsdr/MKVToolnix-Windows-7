@@ -1169,6 +1169,29 @@ generic_packetizer_c::fix_headers() {
 }
 
 void
+generic_packetizer_c::compress_packet(packet_t &packet) {
+  if (!m_compressor) {
+    return;
+  }
+
+  try {
+    packet.data = m_compressor->compress(packet.data);
+    size_t i;
+    for (i = 0; packet.data_adds.size() > i; ++i)
+      packet.data_adds[i] = m_compressor->compress(packet.data_adds[i]);
+
+  } catch (mtx::compression_x &e) {
+    mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Compression failed: %1%\n")) % e.error());
+  }
+}
+
+void
+generic_packetizer_c::account_enqueued_bytes(packet_t &packet,
+                                             int64_t factor) {
+  m_enqueued_bytes += packet.calculate_uncompressed_size() * factor;
+}
+
+void
 generic_packetizer_c::add_packet(packet_cptr pack) {
   if ((0 == m_num_packets) && m_ti.m_reset_timecodes)
     m_ti.m_tcsync.displacement = -pack->timecode;
@@ -1270,22 +1293,8 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
 
   after_packet_timestamped(*pack);
 
-  if (!m_compressor) {
-    m_enqueued_bytes += pack->data->get_size();
-    return;
-  }
-
-  try {
-    pack->data = m_compressor->compress(pack->data);
-    size_t i;
-    for (i = 0; pack->data_adds.size() > i; ++i)
-      pack->data_adds[i] = m_compressor->compress(pack->data_adds[i]);
-
-    m_enqueued_bytes += pack->data->get_size();
-
-  } catch (mtx::compression_x &e) {
-    mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Compression failed: %1%\n")) % e.error());
-  }
+  compress_packet(*pack);
+  account_enqueued_bytes(*pack, +1);
 }
 
 void
@@ -1305,7 +1314,7 @@ generic_packetizer_c::get_packet() {
 
   pack->output_order_timecode = timestamp_c::ns(pack->assigned_timecode - std::max(m_codec_delay.to_ns(0), m_seek_pre_roll.to_ns(0)));
 
-  m_enqueued_bytes -= pack->data->get_size();
+  account_enqueued_bytes(*pack, -1);
 
   --m_next_packet_wo_assigned_timecode;
   if (0 > m_next_packet_wo_assigned_timecode)

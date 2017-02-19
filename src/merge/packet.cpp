@@ -45,3 +45,12 @@ packet_t::account(track_statistics_c &statistics,
   const {
   statistics.account(assigned_timecode - timestamp_offset, get_duration(), data->get_size());
 }
+
+uint64_t
+packet_t::calculate_uncompressed_size() {
+  if (!uncompressed_size) {
+    uncompressed_size = data->get_size() + boost::accumulate(data_adds, 0ull, [](auto const &sum, auto const &data_add) { return sum + data_add->get_size(); });
+  }
+
+  return *uncompressed_size;
+}

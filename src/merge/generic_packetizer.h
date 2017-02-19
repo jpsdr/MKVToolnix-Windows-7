@@ -281,6 +281,9 @@ protected:
   };
 
   virtual void show_experimental_status_version(std::string const &codec_id);
+
+  virtual void compress_packet(packet_t &packet);
+  virtual void account_enqueued_bytes(packet_t &packet, int64_t factor);
 };
 
 extern std::vector<generic_packetizer_c *> ptzrs_in_header_order;

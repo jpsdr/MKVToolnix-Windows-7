@@ -60,6 +60,7 @@ struct packet_t {
   int64_t timecode, bref, fref, duration, assigned_timecode;
   int64_t timecode_before_factory;
   int64_t unmodified_assigned_timecode, unmodified_duration;
+  boost::optional<uint64_t> uncompressed_size;
   timestamp_c discard_padding, output_order_timecode;
   bool duration_mandatory, superseeded, gap_following, factory_applied;
   generic_packetizer_c *source;
@@ -223,6 +224,7 @@ struct packet_t {
   void normalize_timecodes();
 
   void account(track_statistics_c &statistics, int64_t timestamp_offset) const;
+  uint64_t calculate_uncompressed_size();
 };
 using packet_cptr = std::shared_ptr<packet_t>;
 
