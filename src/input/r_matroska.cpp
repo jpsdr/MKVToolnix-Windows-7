@@ -2151,13 +2151,14 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
   if (m_tracks.empty() || (FILE_STATUS_DONE == m_file_status))
     return FILE_STATUS_DONE;
 
-  if (!force) {
-    auto num_queued_bytes = get_queued_bytes();
-    if (20 * 1024 * 1024 < num_queued_bytes) {
-      kax_track_t *requested_ptzr_track = m_ptzr_to_track_map[requested_ptzr];
-      if (!requested_ptzr_track || (('a' != requested_ptzr_track->type) && ('v' != requested_ptzr_track->type)) || (512 * 1024 * 1024 < num_queued_bytes))
-        return FILE_STATUS_HOLDING;
-    }
+  auto num_queued_bytes = get_queued_bytes();
+
+  if (20 * 1024 * 1024 < num_queued_bytes) {
+    auto requested_ptzr_track = m_ptzr_to_track_map[requested_ptzr];
+    if (   !requested_ptzr_track
+        || (!force && ('a' != requested_ptzr_track->type) && ('v' != requested_ptzr_track->type))
+        || ( force && (128 * 1024 * 1024 >= num_queued_bytes)))
+      return FILE_STATUS_HOLDING;
   }
 
   try {
