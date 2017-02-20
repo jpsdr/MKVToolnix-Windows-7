@@ -82,7 +82,7 @@
   translated man pages to be built and installed, though this is optional.
 
   In order to facilitate finding the new requirements new options have been
-  added to confiure: "--with-xsltproc=prog", "--with-docbook-xsl=dir",
+  added to confiure: "--with-xsltproc=prog", "--with-docbook-xsl-root=dir",
   "--with-po4a=prog" and "--with-po4a-translate=prog.
 * pugixml detection will be attempted via "pkg-config" first. If that fails,
   "configure" will fall back to the previous method of trying just to compile
