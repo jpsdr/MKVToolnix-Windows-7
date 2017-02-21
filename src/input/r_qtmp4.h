@@ -100,7 +100,6 @@ struct qt_chunkmap_t {
 struct qt_editlist_t {
   int64_t  segment_duration{}, media_time{};
   uint16_t media_rate_integer{}, media_rate_fraction{};
-  int64_t  frames{}, start_sample{}, start_frame{}, pts_offset{};
 };
 
 struct qt_sample_t {
@@ -228,7 +227,7 @@ struct qtmp4_demuxer_c {
   codec_c codec;
   pcm_packetizer_c::pcm_format_e m_pcm_format;
 
-  int64_t time_scale, duration, global_duration, constant_editlist_offset_ns, num_frames_from_trun;
+  int64_t time_scale, duration, global_duration, num_frames_from_trun;
   uint32_t sample_size;
 
   std::vector<qt_sample_t> sample_table;
@@ -284,7 +283,6 @@ struct qtmp4_demuxer_c {
     , time_scale{1}
     , duration{0}
     , global_duration{0}
-    , constant_editlist_offset_ns{0}
     , num_frames_from_trun{}
     , sample_size{0}
     , esds_parsed{false}
@@ -321,7 +319,7 @@ struct qtmp4_demuxer_c {
   void adjust_timecodes(int64_t delta);
 
   bool update_tables();
-  void update_editlist_table();
+  void apply_edit_list();
 
   void build_index();
 
@@ -370,6 +368,7 @@ struct qtmp4_demuxer_c {
 private:
   void build_index_chunk_mode();
   void build_index_constant_sample_size_mode();
+  void dump_index_entries(std::string const &message) const;
   void mark_key_frames_from_key_frame_table();
   void mark_open_gop_random_access_points_as_key_frames();
 

@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: MP4 reader: fixed track offsets being wrong in certain situations
+  regarding the presence or absence of edit lists ('elst' atoms) & composition
+  timestamps ('ctts' atoms). Fixes #1889.
+* mkvmerge: MP4 reader: offsets in "ctts" are now always treated as signed
+  integers, even with version 0 atoms.
+
+
 # Version 9.9.0 "Pick Up" 2017-02-19
 
 ## New features and enhancements
