@@ -163,7 +163,8 @@ qtmp4_reader_c::qtmp4_reader_c(const track_info_c &ti,
   , m_timecodes_calculated{}
   , m_debug_chapters{    "qtmp4|qtmp4_full|qtmp4_chapters"}
   , m_debug_headers{     "qtmp4|qtmp4_full|qtmp4_headers"}
-  , m_debug_tables{            "qtmp4_full|qtmp4_tables"}
+  , m_debug_tables{            "qtmp4_full|qtmp4_tables|qtmp4_tables_full"}
+  , m_debug_tables_full{                               "qtmp4_tables_full"}
   , m_debug_interleaving{"qtmp4|qtmp4_full|qtmp4_interleaving"}
   , m_debug_resync{      "qtmp4|qtmp4_full|qtmp4_resync"}
 {
@@ -494,12 +495,14 @@ qtmp4_reader_c::handle_ctts_atom(qtmp4_demuxer_c &dmx,
     dmx.raw_frame_offset_table.push_back(frame_offset);
   }
 
-  if (m_debug_tables) {
-    auto fmt = boost::format("%1%%2%: count %3% offset %4%\n");
-    i        = 0;
-    for (auto const &frame_offset : dmx.raw_frame_offset_table)
-      mxdebug(fmt % space((level + 1) * 2 + 1) % i++ % frame_offset.count % frame_offset.offset);
-  }
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%%2%: count %3% offset %4%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.raw_frame_offset_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space((level + 1) * 2 + 1) % idx % dmx.raw_frame_offset_table[idx].count % dmx.raw_frame_offset_table[idx].offset);
 }
 
 void
@@ -533,11 +536,14 @@ qtmp4_reader_c::handle_sgpd_atom(qtmp4_demuxer_c &dmx,
     dmx.random_access_point_table.emplace_back(num_leading_samples_known, num_leading_samples);
   }
 
-  if (m_debug_tables) {
-    auto idx = 0;
-    for (auto const &rap : dmx.random_access_point_table)
-      mxdebug(boost::format("%1%%2%: leading samples known %3% num %4%\n") % space((level + 1) * 2 + 2) % idx++ % rap.num_leading_samples_known % rap.num_leading_samples);
-  }
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%%2%: leading samples known %3% num %4%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.random_access_point_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space((level + 1) * 2 + 2) % idx % dmx.random_access_point_table[idx].num_leading_samples_known % dmx.random_access_point_table[idx].num_leading_samples);
 }
 
 void
@@ -565,11 +571,14 @@ qtmp4_reader_c::handle_sbgp_atom(qtmp4_demuxer_c &dmx,
     table.emplace_back(sample_count, group_description_index);
   }
 
-  if (m_debug_tables) {
-    auto idx = 0;
-    for (auto const &s2g : table)
-      mxdebug(boost::format("%1%%2%: sample count %3% group description %4%\n") % space((level + 1) * 2 + 2) % idx++ % s2g.sample_count % s2g.group_description_index);
-  }
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%%2%: sample count %3% group description %4%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space((level + 1) * 2 + 2) % idx % table[idx].sample_count % table[idx].group_description_index);
 }
 
 void
@@ -890,24 +899,27 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
 
   mxdebug_if(m_debug_headers, boost::format("%1%Number of entries: %2%\n") % space((level + 1) * 2 + 1) % entries);
 
-  if (m_debug_tables) {
-    auto spc                = space((level + 2) * 2 + 1);
-    auto durmap_start       = track.durmap_table.size()           - entries;
-    auto sample_start       = track.sample_table.size()           - entries;
-    auto chunk_start        = track.chunk_table.size()            - entries;
-    auto frame_offset_start = track.raw_frame_offset_table.size() - entries;
+  if (!m_debug_tables)
+    return;
 
-    for (auto idx = 0u; idx < entries; ++idx)
-      mxdebug(boost::format("%1%%2%: duration %3% size %4% data start %5% end %6% pts offset %7% key? %8% raw flags 0x%|9$08x|\n")
-              % spc % idx
-              % track.durmap_table[durmap_start + idx].duration
-              % track.sample_table[sample_start + idx].size
-              % track.chunk_table[chunk_start + idx].pos
-              % (track.sample_table[sample_start + idx].size + track.chunk_table[chunk_start + idx].pos)
-              % track.raw_frame_offset_table[frame_offset_start + idx].offset
-              % static_cast<unsigned int>(all_keyframe_flags[idx])
-              % all_sample_flags[idx]);
-  }
+  auto fmt                = boost::format("%1%%2%: duration %3% size %4% data start %5% end %6% pts offset %7% key? %8% raw flags 0x%|9$08x|\n");
+  auto spc                = space((level + 2) * 2 + 1);
+  auto durmap_start       = track.durmap_table.size()           - entries;
+  auto sample_start       = track.sample_table.size()           - entries;
+  auto chunk_start        = track.chunk_table.size()            - entries;
+  auto frame_offset_start = track.raw_frame_offset_table.size() - entries;
+  auto end                = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), entries);
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt
+            % spc % idx
+            % track.durmap_table[durmap_start + idx].duration
+            % track.sample_table[sample_start + idx].size
+            % track.chunk_table[chunk_start + idx].pos
+            % (track.sample_table[sample_start + idx].size + track.chunk_table[chunk_start + idx].pos)
+            % track.raw_frame_offset_table[frame_offset_start + idx].offset
+            % static_cast<unsigned int>(all_keyframe_flags[idx])
+            % all_sample_flags[idx]);
 }
 
 void
@@ -1195,9 +1207,14 @@ qtmp4_reader_c::handle_stco_atom(qtmp4_demuxer_c &dmx,
   for (auto i = 0u; i < count; ++i)
     dmx.chunk_table.emplace_back(0, m_in->read_uint32_be());
 
-  if (m_debug_tables)
-    for (auto const &chunk : dmx.chunk_table)
-      mxdebug(boost::format("%1%  %2%\n") % space(level * 2 + 1) % chunk.pos);
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%  %2%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.chunk_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space(level * 2 + 1) % dmx.chunk_table[idx].pos);
 }
 
 void
@@ -1212,9 +1229,14 @@ qtmp4_reader_c::handle_co64_atom(qtmp4_demuxer_c &dmx,
   for (auto i = 0u; i < count; ++i)
     dmx.chunk_table.emplace_back(0, m_in->read_uint64_be());
 
-  if (m_debug_tables)
-    for (auto const &chunk : dmx.chunk_table)
-      mxdebug(boost::format("%1%  %2%\n") % space(level * 2 + 1) % chunk.pos);
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%  %2%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.chunk_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space(level * 2 + 1) % dmx.chunk_table[idx].pos);
 }
 
 void
@@ -1234,11 +1256,14 @@ qtmp4_reader_c::handle_stsc_atom(qtmp4_demuxer_c &dmx,
   }
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sample to chunk/chunkmap table: %2% entries\n") % space(level * 2 + 1) % count);
-  if (m_debug_tables) {
-    i = 0;
-    for (auto const &chunkmap : dmx.chunkmap_table)
-      mxdebug(boost::format("%1%%2%: first_chunk %3% samples_per_chunk %4% sample_description_id %5%\n") % space((level + 1) * 2 + 1) % i++ % chunkmap.first_chunk % chunkmap.samples_per_chunk % chunkmap.sample_description_id);
-  }
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%%2%: first_chunk %3% samples_per_chunk %4% sample_description_id %5%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.chunkmap_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space((level + 1) * 2 + 1) % idx % dmx.chunkmap_table[idx].first_chunk % dmx.chunkmap_table[idx].samples_per_chunk % dmx.chunkmap_table[idx].sample_description_id);
 }
 
 void
@@ -1283,9 +1308,14 @@ qtmp4_reader_c::handle_stss_atom(qtmp4_demuxer_c &dmx,
   std::sort(dmx.keyframe_table.begin(), dmx.keyframe_table.end());
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sync/keyframe table: %2% entries\n") % space(level * 2 + 1) % count);
-  if (m_debug_tables)
-    for (auto const &keyframe : dmx.keyframe_table)
-      mxdebug(boost::format("%1%keyframe at %2%\n") % space((level + 1) * 2 + 1) % keyframe);
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%keyframe at %2%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.keyframe_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space((level + 1) * 2 + 1) % dmx.keyframe_table[idx]);
 }
 
 void
@@ -1313,9 +1343,11 @@ qtmp4_reader_c::handle_stsz_atom(qtmp4_demuxer_c &dmx,
 
     mxdebug_if(m_debug_headers, boost::format("%1%Sample size table: %2% entries\n") % space(level * 2 + 1) % count);
     if (m_debug_tables) {
-      auto i = 0u;
-      for (auto const &sample : dmx.sample_table)
-        mxdebug(boost::format("%1%%2%: size %3%\n") % space((level + 1) * 2 + 1) % i++ % sample.size);
+      auto fmt = boost::format("%1%%2%: size %3%\n");
+      auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.sample_table.size());
+
+      for (auto idx = 0u; idx < end; ++idx)
+        mxdebug(fmt % space((level + 1) * 2 + 1) % idx % dmx.sample_table[idx].size);
     }
 
   } else {
@@ -1341,11 +1373,14 @@ qtmp4_reader_c::handle_sttd_atom(qtmp4_demuxer_c &dmx,
   }
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sample duration table: %2% entries\n") % space(level * 2 + 1) % count);
-  if (m_debug_tables) {
-    i = 0;
-    for (auto const &durmap : dmx.durmap_table)
-      mxdebug(boost::format("%1%%2%: number %3% duration %4%\n") % space((level + 1) * 2 + 1) % i++ % durmap.number % durmap.duration);
-  }
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%%2%: number %3% duration %4%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.durmap_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space((level + 1) * 2 + 1) % idx % dmx.durmap_table[idx].number % dmx.durmap_table[idx].duration);
 }
 
 void
@@ -1365,11 +1400,14 @@ qtmp4_reader_c::handle_stts_atom(qtmp4_demuxer_c &dmx,
   }
 
   mxdebug_if(m_debug_headers, boost::format("%1%Sample duration table: %2% entries\n") % space(level * 2 + 1) % count);
-  if (m_debug_tables) {
-    i = 0;
-    for (auto const &durmap : dmx.durmap_table)
-      mxdebug(boost::format("%1%%2%: number %3% duration %4%\n") % space((level + 1) * 2 + 1) % i++ % durmap.number % durmap.duration);
-  }
+  if (!m_debug_tables)
+    return;
+
+  auto fmt = boost::format("%1%%2%: number %3% duration %4%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.durmap_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space((level + 1) * 2 + 1) % idx % dmx.durmap_table[idx].number % dmx.durmap_table[idx].duration);
 }
 
 void
@@ -1416,10 +1454,11 @@ qtmp4_reader_c::handle_elst_atom(qtmp4_demuxer_c &dmx,
   if (!m_debug_tables)
     return;
 
-  i = 0;
-  for (auto const &editlist : dmx.editlist_table)
-    mxdebug_if(m_debug_tables, boost::format("%1%%2%: segment duration %3% media time %4% media rate %5%.%6%\n")
-               % space((level + 1) * 2 + 1) % i++ % editlist.segment_duration % editlist.media_time % editlist.media_rate_integer % editlist.media_rate_fraction);
+  auto fmt = boost::format("%1%%2%: segment duration %3% media time %4% media rate %5%.%6%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), dmx.editlist_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % space((level + 1) * 2 + 1) % idx % dmx.editlist_table[idx].segment_duration % dmx.editlist_table[idx].media_time % dmx.editlist_table[idx].media_rate_integer % dmx.editlist_table[idx].media_rate_fraction);
 }
 
 void
@@ -1442,7 +1481,7 @@ qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_c &dmx,
 
   mxdebug_if(m_debug_headers,
              boost::format("%1%Track ID: %2% display width × height %3%.%4% × %5%.%6%\n")
-             % space(level * 2 + 1) % dmx.container_id % (dmx.v_display_width_flt >> 16) % (dmx.v_display_width_flt & 0xffff) % (dmx.v_display_height_flt >> 16) % (dmx.v_display_height_flt & 0xffff));
+             % space(level * 2 + 1) % dmx.id % (dmx.v_display_width_flt >> 16) % (dmx.v_display_width_flt & 0xffff) % (dmx.v_display_height_flt >> 16) % (dmx.v_display_height_flt & 0xffff));
 }
 
 void
@@ -2113,6 +2152,15 @@ qtmp4_demuxer_c::calculate_timecodes() {
   else
     calculate_timecodes_variable_sample_size();
 
+  if (m_debug_tables) {
+    mxdebug(boost::format("Timecodes for track ID %1%:\n") % id);
+    auto fmt = boost::format("  %1%: pts %2%\n");
+    auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), timecodes.size());
+
+    for (auto idx = 0u; idx < end; ++idx)
+      mxdebug(fmt % idx % format_timestamp(timecodes[idx]));
+  }
+
   build_index();
 
   m_timecodes_calculated = true;
@@ -2236,17 +2284,21 @@ qtmp4_demuxer_c::update_tables() {
       frame_offset_table.push_back(raw_frame_offset_table[j].offset);
   }
 
-  if (m_debug_tables) {
-    mxdebug(boost::format(" Frame offset table: %1% entries\n")    % frame_offset_table.size());
-    mxdebug(boost::format(" Sample table contents: %1% entries\n") % sample_table.size());
-    i = 0;
-    for (auto const &sample : sample_table)
-      mxdebug(boost::format("   %1%: pts %2% size %3% pos %4%\n") % i++ % sample.pts % sample.size % sample.pos);
-  }
+  m_tables_updated = true;
 
   update_editlist_table();
 
-  m_tables_updated = true;
+  if (!m_debug_tables)
+    return true;
+
+  mxdebug(boost::format(" Frame offset table for track ID %1%: %2% entries\n")    % id % frame_offset_table.size());
+  mxdebug(boost::format(" Sample table contents for track ID %1%: %2% entries\n") % id % sample_table.size());
+
+  auto fmt = boost::format("   %1%: pts %2% size %3% pos %4%\n");
+  auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), sample_table.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % idx % sample_table[idx].pts % sample_table[idx].size % sample_table[idx].pos);
 
   return true;
 }
@@ -2350,10 +2402,13 @@ qtmp4_demuxer_c::build_index() {
   if (!m_debug_indexes)
     return;
 
-  mxdebug(boost::format("Index for track ID %1%: %2% entries\n") % container_id % m_index.size());
+  mxdebug(boost::format("Index for track ID %1%: %2% entries\n") % id % m_index.size());
+
   auto fmt = boost::format("  file_pos %1% size %2% timecode %3% duration %4% is_key %5%\n");
-  for (auto const &idx : m_index)
-    mxdebug(fmt % idx.file_pos % idx.size % format_timestamp(idx.timecode) % format_timestamp(idx.duration) % idx.is_keyframe);
+  auto end = std::min<std::size_t>(!m_debug_indexes_full ? 20 : std::numeric_limits<std::size_t>::max(), m_index.size());
+
+  for (auto idx = 0u; idx < end; ++idx)
+    mxdebug(fmt % m_index[idx].file_pos % m_index[idx].size % format_timestamp(m_index[idx].timecode) % format_timestamp(m_index[idx].duration) % m_index[idx].is_keyframe);
 
 }
 

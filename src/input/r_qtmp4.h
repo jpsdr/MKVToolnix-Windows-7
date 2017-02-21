@@ -272,7 +272,7 @@ struct qtmp4_demuxer_c {
 
   std::string language;
 
-  debugging_option_c m_debug_tables, m_debug_frame_rate, m_debug_headers, m_debug_editlists, m_debug_indexes;
+  debugging_option_c m_debug_tables, m_debug_tables_full, m_debug_frame_rate, m_debug_headers, m_debug_editlists, m_debug_indexes, m_debug_indexes_full;
 
   qtmp4_demuxer_c(qtmp4_reader_c &reader)
     : m_reader(reader)
@@ -301,11 +301,13 @@ struct qtmp4_demuxer_c {
     , a_aac_config_parsed{false}
     , warning_printed{false}
     , ptzr{-1}
-    , m_debug_tables{          "qtmp4_full|qtmp4_tables"}
+    , m_debug_tables{            "qtmp4_full|qtmp4_tables|qtmp4_tables_full"}
+    , m_debug_tables_full{                               "qtmp4_tables_full"}
     , m_debug_frame_rate{"qtmp4|qtmp4_full|qtmp4_frame_rate"}
     , m_debug_headers{   "qtmp4|qtmp4_full|qtmp4_headers"}
     , m_debug_editlists{ "qtmp4|qtmp4_full|qtmp4_editlists"}
-    , m_debug_indexes{   "      qtmp4_full|qtmp4_indexes"}
+    , m_debug_indexes{         "qtmp4_full|qtmp4_indexes|qtmp4_indexes_full"}
+    , m_debug_indexes_full{                             "qtmp4_indexes_full"}
   {
     memset(&esds, 0, sizeof(esds_t));
   }
@@ -449,7 +451,7 @@ private:
 
   bool m_timecodes_calculated;
 
-  debugging_option_c m_debug_chapters, m_debug_headers, m_debug_tables, m_debug_interleaving, m_debug_resync;
+  debugging_option_c m_debug_chapters, m_debug_headers, m_debug_tables, m_debug_tables_full, m_debug_interleaving, m_debug_resync;
 
   friend class qtmp4_demuxer_c;
 
