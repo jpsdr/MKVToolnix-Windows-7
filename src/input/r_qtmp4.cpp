@@ -2073,13 +2073,16 @@ qtmp4_demuxer_c::to_nsecs(int64_t value,
 void
 qtmp4_demuxer_c::calculate_timecodes_constant_sample_size() {
   int const num_frame_offsets = frame_offset_table.size();
+  auto chunk_index            = 0;
 
-  for (auto const &chunk : chunk_table | boost::adaptors::indexed()) {
-    auto frame_offset = chunk.index() < num_frame_offsets ? frame_offset_table[chunk.index()] : 0;
+  for (auto const &chunk : chunk_table) {
+    auto frame_offset = chunk_index < num_frame_offsets ? frame_offset_table[chunk_index] : 0;
 
-    timecodes.push_back(to_nsecs(static_cast<uint64_t>(chunk.value().samples) * duration + frame_offset));
-    durations.push_back(to_nsecs(static_cast<uint64_t>(chunk.value().size)    * duration));
-    frame_indices.push_back(chunk.index());
+    timecodes.push_back(to_nsecs(static_cast<uint64_t>(chunk.samples) * duration + frame_offset));
+    durations.push_back(to_nsecs(static_cast<uint64_t>(chunk.size)    * duration));
+    frame_indices.push_back(chunk_index);
+
+    ++chunk_index;
   }
 }
 
@@ -2309,10 +2312,11 @@ qtmp4_demuxer_c::apply_edit_list() {
   auto const global_time_scale = m_reader.m_time_scale;
   auto timeline_cts            = int64_t{};
   auto info_fmt                = boost::format("%1% [segment_duration %2% media_time %3% media_rate %4%/%5%]");
+  auto entry_index             = 0;
 
-  for (auto const &entry : editlist_table | boost::adaptors::indexed()) {
-    auto &edit = entry.value();
-    auto info  = (info_fmt % entry.index() % edit.segment_duration % edit.media_time % edit.media_rate_integer % edit.media_rate_fraction).str();
+  for (auto &edit : editlist_table) {
+    auto info = (info_fmt % entry_index % edit.segment_duration % edit.media_time % edit.media_rate_integer % edit.media_rate_fraction).str();
+    ++entry_index;
 
     if ((edit.media_rate_integer == 0) && (edit.media_rate_fraction == 0)) {
       mxdebug_if(m_debug_editlists, boost::format("  %1%: dwell at timeline CTS %2%; such entries are not supported yet\n") % info % format_timestamp(timeline_cts));
