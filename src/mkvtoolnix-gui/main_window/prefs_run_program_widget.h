@@ -28,12 +28,13 @@ public:
   Util::Settings::RunProgramConfigPtr config() const;
 
 signals:
-  void executableChanged(QString const &newExecutable);
+  void nameOrExecutableChanged(QString const &name, QString const &newExecutable);
 
 protected slots:
   void selectVariableToAdd();
   void changeExecutable();
   void commandLineEdited(QString const &commandLine);
+  void nameEdited(QString const &name);
   void executeNow();
   void enableControls();
 

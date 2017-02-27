@@ -95,10 +95,12 @@ public:
   class RunProgramConfig {
   public:
     bool m_active{true};
+    QString m_name;
     QStringList m_commandLine;
     RunProgramForEvents m_forEvents{};
 
     bool isValid() const;
+    QString name() const;
   };
 
   using RunProgramConfigPtr  = std::shared_ptr<RunProgramConfig>;

@@ -583,9 +583,9 @@ PreferencesDialog::setupJobsRunPrograms() {
     auto widget = new PrefsRunProgramWidget{ui->twJobsPrograms, *runProgramConfig};
     ui->twJobsPrograms->addTab(widget, {});
 
-    setTabTitleForRunProgramExecutable(ui->twJobsPrograms->count() - 1, runProgramConfig->m_commandLine.value(0));
+    setTabTitleForRunProgramWidget(ui->twJobsPrograms->count() - 1, runProgramConfig->name());
 
-    connect(widget, &PrefsRunProgramWidget::executableChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramExecutable);
+    connect(widget, &PrefsRunProgramWidget::nameOrExecutableChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramWidget);
   }
 
   if (!m_cfg.m_runProgramConfigurations.isEmpty())
@@ -740,12 +740,12 @@ PreferencesDialog::editDefaultAdditionalCommandLineOptions() {
 void
 PreferencesDialog::addProgramToExecute() {
   auto programWidget = new PrefsRunProgramWidget{this, {}};
-  ui->twJobsPrograms->addTab(programWidget, QY("<No program selected yet>"));
+  ui->twJobsPrograms->addTab(programWidget, programWidget->config()->name());
   ui->twJobsPrograms->setCurrentIndex(ui->twJobsPrograms->count() - 1);
 
   ui->swJobsPrograms->setCurrentIndex(1);
 
-  connect(programWidget, &PrefsRunProgramWidget::executableChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramExecutable);
+  connect(programWidget, &PrefsRunProgramWidget::nameOrExecutableChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramWidget);
 }
 
 void
@@ -765,18 +765,20 @@ PreferencesDialog::removeProgramToExecute(int index) {
 }
 
 void
-PreferencesDialog::setSendersTabTitleForRunProgramExecutable(QString const &executable) {
-  setTabTitleForRunProgramExecutable(ui->twJobsPrograms->indexOf(qobject_cast<PrefsRunProgramWidget *>(sender())), executable);
+PreferencesDialog::setSendersTabTitleForRunProgramWidget() {
+  auto widget = qobject_cast<PrefsRunProgramWidget *>(sender());
+  auto title  = widget->config()->name();
+
+  setTabTitleForRunProgramWidget(ui->twJobsPrograms->indexOf(widget), title);
 }
 
 void
-PreferencesDialog::setTabTitleForRunProgramExecutable(int tabIdx,
-                                                      QString const &executable) {
+PreferencesDialog::setTabTitleForRunProgramWidget(int tabIdx,
+                                                  QString const &title) {
   if ((tabIdx < 0) || (tabIdx >= ui->twJobsPrograms->count()))
     return;
 
-  auto name = executable.isEmpty() ? QY("<No program selected yet>") : QFileInfo{executable}.fileName();
-  ui->twJobsPrograms->setTabText(tabIdx, name);
+  ui->twJobsPrograms->setTabText(tabIdx, title);
 }
 
 void

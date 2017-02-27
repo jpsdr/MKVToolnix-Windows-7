@@ -20,7 +20,7 @@ class PrefsRunProgramWidgetPrivate {
 
   std::unique_ptr<Ui::PrefsRunProgramWidget> ui;
   std::unique_ptr<QMenu> variableMenu;
-  QString executable;
+  QString name, executable;
   QMap<QCheckBox *, Util::Settings::RunProgramForEvent> flagsByCheckbox;
 
   explicit PrefsRunProgramWidgetPrivate()
@@ -72,6 +72,7 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   d->ui->cbConfigurationActive->setChecked(cfg.m_active);
 
   d->executable = Util::replaceApplicationDirectoryWithMtxVariable(cfg.m_commandLine.value(0));
+  d->ui->leName->setText(cfg.m_name);
   d->ui->leCommandLine->setText(Util::escape(cfg.m_commandLine, Util::EscapeShellUnix).join(" "));
 
   for (auto const &checkBox : d->flagsByCheckbox.keys())
@@ -176,8 +177,16 @@ void
 PrefsRunProgramWidget::setupToolTips() {
   Q_D(PrefsRunProgramWidget);
 
+  auto conditionsToolTip = Q("%1 %2")
+    .arg(QY("If any of these checkboxes is checked, the program will be executed when the corresponding condition is met."))
+    .arg(QY("Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."));
+
+  Util::setToolTip(d->ui->leName, QY("This is an arbitrary name the GUI can use to refer to this particular configuration."));
   Util::setToolTip(d->ui->cbConfigurationActive, QY("Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."));
   Util::setToolTip(d->ui->pbExecuteNow, Q("%1 %2").arg(QY("Executes the program now as a test run.")).arg(QY("Note that most <MTX_…> variables are empty and will be removed for this test run.")));
+  Util::setToolTip(d->ui->cbAfterJobQueueStopped, conditionsToolTip);
+  Util::setToolTip(d->ui->cbAfterJobSuccessful,   conditionsToolTip);
+  Util::setToolTip(d->ui->cbAfterJobError,        conditionsToolTip);
 }
 
 void
@@ -219,6 +228,7 @@ void
 PrefsRunProgramWidget::setupConnections() {
   Q_D(PrefsRunProgramWidget);
 
+  connect(d->ui->leName,                &QLineEdit::textEdited, this, &PrefsRunProgramWidget::nameEdited);
   connect(d->ui->leCommandLine,         &QLineEdit::textEdited, this, &PrefsRunProgramWidget::commandLineEdited);
   connect(d->ui->pbBrowseExecutable,    &QPushButton::clicked,  this, &PrefsRunProgramWidget::changeExecutable);
   connect(d->ui->pbAddVariable,         &QPushButton::clicked,  this, &PrefsRunProgramWidget::selectVariableToAdd);
@@ -284,7 +294,7 @@ PrefsRunProgramWidget::changeExecutable() {
 
   enableControls();
 
-  emit executableChanged(newExecutable);
+  emit nameOrExecutableChanged(d->name, d->executable);
 }
 
 void
@@ -301,7 +311,16 @@ PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
 
   d->executable = newExecutable;
 
-  emit executableChanged(newExecutable);
+  emit nameOrExecutableChanged(d->name, d->executable);
+}
+
+void
+PrefsRunProgramWidget::nameEdited(QString const &name) {
+  Q_D(PrefsRunProgramWidget);
+
+  d->name = name;
+
+  emit nameOrExecutableChanged(d->name, d->executable);
 }
 
 void
@@ -322,6 +341,7 @@ PrefsRunProgramWidget::config()
 
   auto cfg           = std::make_shared<Util::Settings::RunProgramConfig>();
   auto cmdLine       = d->ui->leCommandLine->text().replace(QRegularExpression{"^\\s+"}, Q(""));
+  cfg->m_name        = d->ui->leName->text();
   cfg->m_commandLine = Util::unescapeSplit(cmdLine, Util::EscapeShellUnix);
   cfg->m_active      = d->ui->cbConfigurationActive->isChecked();
 

@@ -42,6 +42,21 @@ Settings::RunProgramConfig::isValid()
   return !m_commandLine.value(0).isEmpty();
 }
 
+QString
+Settings::RunProgramConfig::name()
+  const {
+  if (!m_name.isEmpty())
+    return m_name;
+
+  if (m_commandLine.isEmpty())
+    return QY("Execute a program");
+
+  auto program = m_commandLine.value(0);
+  program.replace(QRegularExpression{Q(".*[/\\\\]")}, Q(""));
+
+  return QY("Execute program '%1'").arg(program);
+}
+
 Settings Settings::s_settings;
 
 Settings::Settings() {
@@ -333,6 +348,7 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
 
     reg.beginGroup(group);
     cfg->m_active      = reg.value("active", true).toBool();
+    cfg->m_name        = reg.value("name").toString();
     cfg->m_commandLine = reg.value("commandLine").toStringList();
     cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value("forEvents").value<int>());
     reg.endGroup();
@@ -477,6 +493,7 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
   for (auto const &cfg : m_runProgramConfigurations) {
     reg.beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
     reg.setValue("active",      cfg->m_active);
+    reg.setValue("name",        cfg->m_name);
     reg.setValue("commandLine", cfg->m_commandLine);
     reg.setValue("forEvents",   static_cast<int>(cfg->m_forEvents));
     reg.endGroup();

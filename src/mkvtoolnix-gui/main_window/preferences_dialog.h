@@ -41,7 +41,7 @@ public slots:
   void pageSelectionChanged(QModelIndex const &current);
   void addProgramToExecute();
   void removeProgramToExecute(int index);
-  void setSendersTabTitleForRunProgramExecutable(QString const &executable);
+  void setSendersTabTitleForRunProgramWidget();
   void adjustPlaylistControls();
   void adjustRemoveOldJobsControls();
 
@@ -71,7 +71,7 @@ protected:
   void setupJobsRunPrograms();
   void setupFont();
 
-  void setTabTitleForRunProgramExecutable(int tabIdx, QString const &executable);
+  void setTabTitleForRunProgramWidget(int tabIdx, QString const &title);
 };
 
 }}
