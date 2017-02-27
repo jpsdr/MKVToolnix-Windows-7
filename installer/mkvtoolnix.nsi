@@ -70,11 +70,13 @@ Page custom showExternalLinks
   !insertmacro LANG_STRING "un.${NAME}" "${VALUE}"
 !macroend
 
+# Put English first so that it'll be chosen on Windows versions whose
+# language isn't supported.
+!insertmacro LANG_LOAD "English"
 !insertmacro LANG_LOAD "Basque"
 !insertmacro LANG_LOAD "Catalan"
 !insertmacro LANG_LOAD "Czech"
 !insertmacro LANG_LOAD "Dutch"
-!insertmacro LANG_LOAD "English"
 !insertmacro LANG_LOAD "French"
 !insertmacro LANG_LOAD "German"
 !insertmacro LANG_LOAD "Italian"
