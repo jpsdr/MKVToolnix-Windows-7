@@ -9,6 +9,8 @@
   integers, even with version 0 atoms.
 * mkvinfo: the timestamps of SimpleBlocks with negative timestamps are now
   shown correctly.
+* mkvmerge: Matroska reader: fixed handling BlockGroups and SimpleBlocks with
+  negative timestamps.
 
 
 # Version 9.9.0 "Pick Up" 2017-02-19

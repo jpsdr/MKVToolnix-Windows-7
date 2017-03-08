@@ -304,6 +304,7 @@ kax_reader_c::kax_reader_c(const track_info_c &ti,
   , m_segment_duration(0)
   , m_last_timecode(0)
   , m_first_timecode(-1)
+  , m_global_timestamp_offset{}
   , m_writing_app_ver(-1)
   , m_attachment_id(0)
   , m_file_status(FILE_STATUS_MOREDATA)
@@ -1371,6 +1372,10 @@ void
 kax_reader_c::read_headers() {
   if (!read_headers_internal())
     throw mtx::input::header_parsing_x();
+
+  determine_minimum_timestamps();
+  determine_global_timestamp_offset_to_apply();
+
   show_demuxer_info();
 }
 
@@ -2214,12 +2219,13 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
   int64_t block_fref     = VFT_NOBFRAME;
 
   block_simple->SetParent(*cluster);
-  kax_track_t *block_track = find_track_by_num(block_simple->TrackNum());
+  auto block_track     = find_track_by_num(block_simple->TrackNum());
+  auto block_timestamp = mtx::math::to_signed(block_simple->GlobalTimecode()) + m_global_timestamp_offset;
 
   if (!block_track) {
     mxwarn_fn(m_ti.m_fname,
               boost::format(Y("A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. "
-                              "The block will be skipped.\n")) % format_timestamp(block_simple->GlobalTimecode()) % block_simple->TrackNum());
+                              "The block will be skipped.\n")) % format_timestamp(block_timestamp) % block_simple->TrackNum());
     return;
   }
 
@@ -2243,7 +2249,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
       block_bref = block_track->previous_timecode;
   }
 
-  m_last_timecode = block_simple->GlobalTimecode();
+  m_last_timecode = block_timestamp;
   if (0 < block_simple->NumberFrames())
     m_in_file->set_last_timecode(m_last_timecode + (block_simple->NumberFrames() - 1) * frame_duration);
 
@@ -2327,12 +2333,13 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
     return;
 
   block->SetParent(*cluster);
-  auto block_track = find_track_by_num(block->TrackNum());
+  auto block_track     = find_track_by_num(block->TrackNum());
+  auto block_timestamp = mtx::math::to_signed(block->GlobalTimecode()) + m_global_timestamp_offset;
 
   if (!block_track) {
     mxwarn_fn(m_ti.m_fname,
               boost::format(Y("A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. "
-                              "The block will be skipped.\n")) % format_timestamp(block->GlobalTimecode()) % block->TrackNum());
+                              "The block will be skipped.\n")) % format_timestamp(block_timestamp) % block->TrackNum());
     return;
   }
 
@@ -2341,7 +2348,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
                       : block_track->v_frate ? static_cast<int64_t>(1000000000.0 / block_track->v_frate)
                       :                        int64_t{-1};
   auto frame_duration = -1 == block_duration ? int64_t{0} : block_duration;
-  m_last_timecode     = block->GlobalTimecode();
+  m_last_timecode     = block_timestamp;
 
   if (0 < block->NumberFrames())
     m_in_file->set_last_timecode(m_last_timecode + (block->NumberFrames() - 1) * frame_duration);
@@ -2459,12 +2466,13 @@ kax_reader_c::set_headers() {
       PTZR(track->ptzr)->get_track_entry()->EnableLacing(track->lacing_flag);
 }
 
-std::unordered_map<uint64_t, timestamp_c>
+void
 kax_reader_c::determine_minimum_timestamps() {
-  std::unordered_map<uint64_t, timestamp_c> timestamps_by_number;
-
   if (m_tracks.empty())
-    return timestamps_by_number;
+    return;
+
+  m_in->save_pos();
+  at_scope_exit_c restore{[this]() { m_in->restore_pos(); }};
 
   std::unordered_map<uint64_t, kax_track_cptr> tracks_by_number;
 
@@ -2479,7 +2487,7 @@ kax_reader_c::determine_minimum_timestamps() {
     try {
       auto cluster = std::shared_ptr<KaxCluster>(m_in_file->read_next_cluster());
       if (!cluster)
-        return timestamps_by_number;
+        return;
 
       auto cluster_tc = FindChildValue<KaxClusterTimecode>(*cluster);
       cluster->InitTimecode(cluster_tc, m_tc_scale);
@@ -2491,7 +2499,7 @@ kax_reader_c::determine_minimum_timestamps() {
           auto block = static_cast<KaxSimpleBlock *>(element);
           block->SetParent(*cluster);
 
-          last_timestamp = timestamp_c::ns(block->GlobalTimecode());
+          last_timestamp = timestamp_c::ns(mtx::math::to_signed(block->GlobalTimecode()));
           track_number   = block->TrackNum();
 
         } else if (Is<KaxBlockGroup>(element)) {
@@ -2501,7 +2509,7 @@ kax_reader_c::determine_minimum_timestamps() {
 
           block->SetParent(*cluster);
 
-          last_timestamp = timestamp_c::ns(block->GlobalTimecode());
+          last_timestamp = timestamp_c::ns(mtx::math::to_signed(block->GlobalTimecode()));
           track_number   = block->TrackNum();
 
         } else
@@ -2511,13 +2519,13 @@ kax_reader_c::determine_minimum_timestamps() {
           first_timestamp = last_timestamp;
 
         if ((last_timestamp - first_timestamp) >= probe_time_limit)
-          return timestamps_by_number;
+          return;
 
         auto &track = tracks_by_number[track_number];
         if (!track)
           continue;
 
-        auto &recorded_timestamp = timestamps_by_number[track_number];
+        auto &recorded_timestamp = m_minimum_timestamps_by_track_number[track_number];
         if (!recorded_timestamp.valid() || (last_timestamp < recorded_timestamp))
           recorded_timestamp = last_timestamp;
 
@@ -2527,21 +2535,33 @@ kax_reader_c::determine_minimum_timestamps() {
 
         tracks_by_number.erase(track_number);
         if (tracks_by_number.empty())
-          return timestamps_by_number;
+          return;
       }
 
     } catch (...) {
       break;
     }
   }
+}
 
-  return timestamps_by_number;
+void
+kax_reader_c::determine_global_timestamp_offset_to_apply() {
+  timestamp_c global_minimum_timestamp;
+
+  for (auto const &pair : m_minimum_timestamps_by_track_number) {
+    if (!pair.second.valid())
+      continue;
+
+    if (!global_minimum_timestamp.valid() || (pair.second < global_minimum_timestamp))
+      global_minimum_timestamp = pair.second;
+  }
+
+  if (global_minimum_timestamp.valid() && (global_minimum_timestamp < timestamp_c::ns(0)))
+    m_global_timestamp_offset = global_minimum_timestamp.abs().to_ns();
 }
 
 void
 kax_reader_c::identify() {
-  auto minimum_timestamps_by_number = determine_minimum_timestamps();
-
   auto info = mtx::id::info_c{};
 
   if (!m_title.empty())
@@ -2632,7 +2652,7 @@ kax_reader_c::identify() {
 
     track->add_track_tags_to_identification(info);
 
-    auto &minimum_timestamp = minimum_timestamps_by_number[track->track_number];
+    auto &minimum_timestamp = m_minimum_timestamps_by_track_number[track->track_number];
     if (minimum_timestamp.valid())
       info.set(mtx::id::minimum_timestamp, minimum_timestamp.to_ns());
 

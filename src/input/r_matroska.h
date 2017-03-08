@@ -207,6 +207,7 @@ private:
 
   std::vector<kax_track_cptr> m_tracks;
   std::map<generic_packetizer_c *, kax_track_t *> m_ptzr_to_track_map;
+  std::unordered_map<uint64_t, timestamp_c> m_minimum_timestamps_by_track_number;
 
   int64_t m_tc_scale;
 
@@ -214,7 +215,7 @@ private:
 
   std::shared_ptr<EbmlStream> m_es;
 
-  int64_t m_segment_duration, m_last_timecode, m_first_timecode;
+  int64_t m_segment_duration, m_last_timecode, m_first_timecode, m_global_timestamp_offset;
   std::string m_title;
 
   using deferred_positions_t = std::map<deferred_l1_type_e, std::vector<int64_t> >;
@@ -333,7 +334,8 @@ protected:
   void init_l1_position_storage(deferred_positions_t &storage);
   virtual bool has_deferred_element_been_processed(deferred_l1_type_e type, int64_t position);
 
-  virtual std::unordered_map<uint64_t, timestamp_c> determine_minimum_timestamps();
+  virtual void determine_minimum_timestamps();
+  virtual void determine_global_timestamp_offset_to_apply();
 };
 
 #endif  // MTX_INPUT_R_MATROSKA_H
