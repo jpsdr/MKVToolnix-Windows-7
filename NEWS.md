@@ -7,6 +7,8 @@
   timestamps ('ctts' atoms). Fixes #1889.
 * mkvmerge: MP4 reader: offsets in "ctts" are now always treated as signed
   integers, even with version 0 atoms.
+* mkvinfo: the timestamps of SimpleBlocks with negative timestamps are now
+  shown correctly.
 
 
 # Version 9.9.0 "Pick Up" 2017-02-19

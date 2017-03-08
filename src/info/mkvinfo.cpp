@@ -64,6 +64,7 @@
 #include "common/fourcc.h"
 #include "common/hevc.h"
 #include "common/kax_file.h"
+#include "common/math.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
 #include "common/mpeg4_p10.h"
@@ -1468,7 +1469,7 @@ handle_simple_block(EbmlStream *&es,
   block.SetParent(*cluster);
 
   int64_t frame_pos   = block.GetElementPosition() + block.ElementSize();
-  auto timecode_ns    = block.GlobalTimecode();
+  auto timecode_ns    = mtx::math::to_signed(block.GlobalTimecode());
   auto timecode_ms    = std::llround(static_cast<double>(timecode_ns) / 1000000.0);
   track_info_t &tinfo = s_track_info[block.TrackNum()];
 
