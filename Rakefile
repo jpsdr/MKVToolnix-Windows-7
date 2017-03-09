@@ -813,7 +813,7 @@ end
 namespace :clean do
   desc "Remove all compiled and generated files ('tarball' clean)"
   task :dist => :clean do
-    run "rm -f config.h config.log config.cache build-config TAGS", :allow_failure => true
+    run "rm -f config.h config.log config.cache build-config TAGS src/info/static_plugins.cpp src/mkvtoolnix-gui/static_plugins.cpp", :allow_failure => true
   end
 
   desc "Remove all compiled and generated files ('git' clean)"
@@ -856,7 +856,7 @@ end
   { :name => 'mtxinput',    :dir => 'src/input'                                                                      },
   { :name => 'mtxoutput',   :dir => 'src/output'                                                                     },
   { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                   },
-  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp  mkvinfo.cpp mkvinfo-gui.cpp},           },
+  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp  mkvinfo.cpp mkvinfo-gui.cpp static_plugins.cpp}, },
   { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                 },
   { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                },
   { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                },
@@ -923,6 +923,7 @@ Application.new("src/mkvinfo").
   sources("src/info/sys_windows.o", :if => c?(:MINGW)).
   sources("src/info/qt_ui.cpp", "src/info/qt_ui.moc", "src/info/rightclick_tree_widget.moc", $mkvinfo_ui_files).
   sources('src/info/qt_resources.cpp').
+  sources('src/info/static_plugins.cpp', :if => File.exist?('src/info/static_plugins.cpp')).
   libraries(:qt).
   end_if.
   libraries($custom_libs).
@@ -934,6 +935,7 @@ if $build_mkvinfo_gui
     aliases("mkvinfo-gui").
     sources("src/info/mkvinfo-gui.cpp").
     sources("src/info/resources.o", :if => c?(:MINGW)).
+    sources('src/info/static_plugins.cpp', :if => File.exist?('src/info/static_plugins.cpp')).
     libraries(:qt, $custom_libs).
     libraries("-mwindows", :if => c?(:MINGW)).
     create

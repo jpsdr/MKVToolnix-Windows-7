@@ -12,17 +12,6 @@
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
 
-#if defined(HAVE_STATIC_QT)
-# if defined(SYS_APPLE)
-#  include <QtPlugin>
-Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
-
-# elif defined(SYS_WINDOWS)
-#  include <QtPlugin>
-Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
-
-# endif  // SYS_APPLE, SYS_WINDOWS
-#endif   // HAVE_STATIC_QT
 using namespace mtx::gui;
 
 Q_DECLARE_METATYPE(std::shared_ptr<Merge::SourceFile>);

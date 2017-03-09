@@ -33,18 +33,6 @@
 #include <QMouseEvent>
 #include <QFileDialog>
 
-#if defined(HAVE_STATIC_QT)
-# if defined(SYS_APPLE)
-#  include <QtPlugin>
-Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
-
-# elif defined(SYS_WINDOWS)
-#  include <QtPlugin>
-Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
-
-# endif  // SYS_APPLE, SYS_WINDOWS
-#endif   // HAVE_STATIC_QT
-
 using namespace libebml;
 using namespace libmatroska;
 

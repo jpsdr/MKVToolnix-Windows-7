@@ -114,6 +114,36 @@ if test x"$enable_qt" = "xyes" -a \
     fi
   fi
 
+  AC_ARG_WITH(qmake,
+    AC_HELP_STRING([--with-qmake=prog],[use prog instead of looking for qmake]),
+    [ QMAKE="$with_qmake" ],)
+
+  if ! test -z "$QMAKE"; then
+    AC_MSG_CHECKING(for qmake)
+    AC_MSG_RESULT(using supplied $QMAKE)
+  else
+    AC_PATH_TOOL(QMAKE, qmake-qt5,, $PATH)
+    if test -z "$QMAKE"; then
+      AC_PATH_TOOL(QMAKE, qmake,, $PATH)
+    fi
+  fi
+
+  if test -n "$QMAKE" -a -x "$QMAKE"; then
+    dnl Check its version.
+    AC_MSG_CHECKING(for the Qt version $QMAKE uses)
+    qmake_ver=`LC_ALL=C "$QMAKE" -v 2>&1 | grep 'Using Qt' | sed -e 's:.*version ::' -e 's: .*::'`
+    if test -z "qmake_ver"; then
+      AC_MSG_RESULT(unknown; please contact the author)
+      exit 1
+    elif ! check_version $qt_min_ver $qmake_ver; then
+      AC_MSG_RESULT(too old: $qmake_ver)
+      exit 1
+    else
+      AC_MSG_RESULT($qmake_ver)
+      qmake_found=1
+    fi
+  fi
+
   ok=0
   AC_MSG_CHECKING(for Qt $qt_min_ver or newer)
   if test x"$moc_found" != "x1"; then
@@ -122,6 +152,8 @@ if test x"$enable_qt" = "xyes" -a \
     AC_MSG_RESULT(no: uic not found)
   elif test x"$rcc_found" != "x1"; then
     AC_MSG_RESULT(no: rcc not found)
+  elif test x"$qmake_found" != "x1"; then
+    AC_MSG_RESULT(no: qmake not found)
   else
     ok=1
   fi
@@ -197,41 +229,30 @@ return 0;
       ])
     AC_LANG_POP()
 
+    rm -f src/info/static_plugins.cpp src/mkvtoolnix-gui/static_plugins.cpp
+
     if test x"$QT_PKG_CONFIG_STATIC" != x; then
-      platform_support_lib=Qt5PlatformSupport
+      plugins_dir="`$QMAKE -query QT_INSTALL_PLUGINS`"
 
       case "$host" in
-        *mingw*)  wanted_plugin=windows ;;
-        *apple*)  wanted_plugin=cocoa   ;;
-        *darwin*) wanted_plugin=cocoa   ;;
-        *)        wanted_plugin=        ;;
+        *mingw*)          wanted_include=Windows ;;
+        *apple*|*darwin*) wanted_include=Cocoa   ;;
+        *)                wanted_include=Xcb     ;;
       esac
 
-      if test x"$wanted_plugin" != x; then
-        plugins_dir=
-        for dir in `echo " $QT_LIBS " | sed -e 's/ -l[^ ]*//g' -e 's/-L//g'` ; do
-          if test -f "$dir/../plugins/platforms/libq${wanted_plugin}.a"; then
-            plugins_dir="$dir/../plugins"
-            break
-          fi
-        done
+      wanted_plugin=`echo $wanted_include | tr '[A-Z]' '[a-z]'`
 
-        if test x"$plugins_dir" = x; then
-          AC_MSG_RESULT(no: the platform plugins directory could not be found)
-          have_qt=no
-        else
-          QT_LIBS="-L$plugins_dir/platforms -lq$wanted_plugin $QT_LIBS"
-        fi
-      fi
+      QT_LIBS="-L$plugins_dir/platforms -lq$wanted_plugin $QT_LIBS -lQt5PlatformSupport"
 
-      if test x"$platform_support_lib" != x; then
-        for dir in `echo " $QT_LIBS " | sed -e 's/ -l[^ ]*//g' -e 's/-L//g'` ; do
-          if test -f "$dir/lib${platform_support_lib}.a"; then
-            QT_LIBS="$QT_LIBS -l${platform_support_lib}"
-            break
-          fi
-        done
-      fi
+      wanted_include=Q"$wanted_include"IntegrationPlugin
+
+      cat > src/mkvtoolnix-gui/static_plugins.cpp <<EOF
+#include <QtPlugin>
+
+Q_IMPORT_PLUGIN($wanted_include);
+EOF
+
+      cp src/mkvtoolnix-gui/static_plugins.cpp src/info/static_plugins.cpp
     fi
 
     if test x"$am_cv_qt_compilation" = x1; then
