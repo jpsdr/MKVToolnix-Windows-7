@@ -349,6 +349,7 @@ memory_cptr hevcc_to_nalus(const unsigned char *buffer, size_t size);
 struct frame_t {
   memory_cptr m_data;
   int64_t m_start, m_end, m_ref1, m_ref2;
+  uint64_t m_position;
   bool m_keyframe, m_has_provided_timecode;
   slice_info_t m_si;
   int m_presentation_order, m_decode_order;
@@ -362,6 +363,7 @@ struct frame_t {
     m_end                   = 0;
     m_ref1                  = 0;
     m_ref2                  = 0;
+    m_position              = 0;
     m_keyframe              = false;
     m_has_provided_timecode = false;
     m_presentation_order    = 0;
@@ -438,8 +440,7 @@ protected:
   int64_rational_c m_par;
 
   std::deque<frame_t> m_frames, m_frames_out;
-  std::deque<int64_t> m_provided_timecodes;
-  std::deque<uint64_t> m_provided_stream_positions;
+  std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
   int64_t m_max_timecode;
   std::map<int64_t, int64_t> m_duration_frequency;
 
@@ -458,9 +459,9 @@ protected:
 
   frame_t m_incomplete_frame;
   bool m_have_incomplete_frame;
-  std::deque<memory_cptr> m_unhandled_nalus;
+  std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
-  bool m_ignore_nalu_size_length_errors, m_discard_actual_frames;
+  bool m_simple_picture_order, m_ignore_nalu_size_length_errors, m_discard_actual_frames;
 
   bool m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timecode_statistics, m_debug_timecodes, m_debug_sps_info;
   static std::unordered_map<int, std::string> ms_nalu_names_by_type;
@@ -534,7 +535,7 @@ public:
     return m_sps_info_list.begin()->height;
   }
 
-  void handle_nalu(memory_cptr const &nalu);
+  void handle_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
 
   void add_timecode(int64_t timecode);
 
@@ -586,11 +587,15 @@ protected:
   void handle_sps_nalu(memory_cptr const &nalu);
   void handle_pps_nalu(memory_cptr const &nalu);
   void handle_sei_nalu(memory_cptr const &nalu);
-  void handle_slice_nalu(memory_cptr const &nalu);
+  void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void cleanup();
   void flush_incomplete_frame();
   void flush_unhandled_nalus();
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
+  std::vector<int64_t> calculate_provided_timestamps_to_use();
+  void calculate_frame_order();
+  void calculate_frame_timestamps();
+  void calculate_frame_references_and_update_stats();
   static void init_nalu_names();
 };
 using es_parser_cptr = std::shared_ptr<es_parser_c>;

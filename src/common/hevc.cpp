@@ -1421,6 +1421,7 @@ es_parser_c::es_parser_c()
   , m_stream_position(0)
   , m_parsed_position(0)
   , m_have_incomplete_frame(false)
+  , m_simple_picture_order{}
   , m_ignore_nalu_size_length_errors(false)
   , m_discard_actual_frames(false)
   , m_debug_keyframe_detection(debugging_c::requested("hevc_parser|hevc_keyframe_detection"))
@@ -1497,7 +1498,7 @@ es_parser_c::add_bytes(unsigned char *buffer,
           auto nalu     = memory_c::alloc(new_size);
           cursor.copy(nalu->get_buffer(), previous_pos + previous_marker_size, new_size);
           m_parsed_position = previous_parsed_pos + previous_pos;
-          handle_nalu(nalu);
+          handle_nalu(nalu, m_parsed_position);
         }
         previous_pos         = cursor.get_position() - marker_size;
         previous_marker_size = marker_size;
@@ -1531,8 +1532,9 @@ void
 es_parser_c::flush() {
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
-    int marker_size = get_uint32_be(m_unparsed_buffer->get_buffer()) == NALU_START_CODE ? 4 : 3;
-    handle_nalu(memory_c::clone(m_unparsed_buffer->get_buffer() + marker_size, m_unparsed_buffer->get_size() - marker_size));
+    auto marker_size   = get_uint32_be(m_unparsed_buffer->get_buffer()) == NALU_START_CODE ? 4 : 3;
+    auto nalu_size     = m_unparsed_buffer->get_size() - marker_size;
+    handle_nalu(memory_c::clone(m_unparsed_buffer->get_buffer() + marker_size, nalu_size), m_parsed_position - nalu_size);
   }
 
   m_unparsed_buffer.reset();
@@ -1546,8 +1548,7 @@ es_parser_c::flush() {
 
 void
 es_parser_c::add_timecode(int64_t timecode) {
-  m_provided_timecodes.push_back(timecode);
-  m_provided_stream_positions.push_back(m_stream_position);
+  m_provided_timestamps.emplace_back(timecode, m_stream_position);
   ++m_stats.num_timecodes_in;
 }
 
@@ -1563,20 +1564,17 @@ es_parser_c::flush_incomplete_frame() {
 
 void
 es_parser_c::flush_unhandled_nalus() {
-  std::deque<memory_cptr>::iterator nalu = m_unhandled_nalus.begin();
-
-  while (m_unhandled_nalus.end() != nalu) {
-    handle_nalu(*nalu);
-    nalu++;
-  }
+  for (auto const &nalu_with_pos : m_unhandled_nalus)
+    handle_nalu(nalu_with_pos.first, nalu_with_pos.second);
 
   m_unhandled_nalus.clear();
 }
 
 void
-es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
+                               uint64_t nalu_pos) {
   if (!m_hevcc_ready) {
-    m_unhandled_nalus.push_back(nalu);
+    m_unhandled_nalus.emplace_back(nalu, nalu_pos);
     return;
   }
 
@@ -1607,7 +1605,8 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
                                         || (HEVC_NALU_TYPE_IDR_W_RADL == si.nalu_type)
                                         || (HEVC_NALU_TYPE_IDR_N_LP   == si.nalu_type)
                                         || (HEVC_NALU_TYPE_CRA_NUT    == si.nalu_type)));
-  m_recovery_point_valid        =  false;
+  m_incomplete_frame.m_position = nalu_pos;
+  m_recovery_point_valid        = false;
 
   if (m_incomplete_frame.m_keyframe) {
     m_first_keyframe_found    = true;
@@ -1619,11 +1618,6 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
 
   m_incomplete_frame.m_data = create_nalu_with_size(nalu, true);
   m_have_incomplete_frame   = true;
-
-  if (!m_provided_stream_positions.empty() && (m_parsed_position >= m_provided_stream_positions.front())) {
-    m_incomplete_frame.m_has_provided_timecode = true;
-    m_provided_stream_positions.pop_front();
-  }
 
   ++m_frame_number;
 }
@@ -1792,7 +1786,8 @@ es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
 }
 
 void
-es_parser_c::handle_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_nalu(memory_cptr const &nalu,
+                         uint64_t nalu_pos) {
   if (1 > nalu->get_size())
     return;
 
@@ -1851,7 +1846,7 @@ es_parser_c::handle_nalu(memory_cptr const &nalu) {
         m_hevcc_ready = true;
         flush_unhandled_nalus();
       }
-      handle_slice_nalu(nalu);
+      handle_slice_nalu(nalu, nalu_pos);
       break;
 
     default:
@@ -2005,42 +2000,25 @@ es_parser_c::get_most_often_used_duration()
 }
 
 void
-es_parser_c::cleanup() {
-  if (m_frames.empty())
-    return;
+es_parser_c::calculate_frame_order() {
+  auto frames_begin           = m_frames.begin();
+  auto frames_end             = m_frames.end();
+  auto frame_itr              = frames_begin;
 
-  if (m_discard_actual_frames) {
-    m_stats.num_frames_discarded    += m_frames.size();
-    m_stats.num_timecodes_discarded += m_provided_timecodes.size();
+  auto &idr                   = frame_itr->m_si;
+  auto &sps                   = m_sps_info_list[idr.sps];
 
-    m_frames.clear();
-    m_provided_timecodes.clear();
-    m_provided_stream_positions.clear();
+  auto idx                    = 0u;
+  auto prev_pic_order_cnt_msb = 0u;
+  auto prev_pic_order_cnt_lsb = 0u;
 
-    return;
-  }
-
-  auto frames_begin = m_frames.begin();
-  auto frames_end   = m_frames.end();
-  auto frame_itr    = frames_begin;
-
-  // This may be wrong but is needed for mkvmerge to work correctly
-  // (cluster_helper etc).
-  frame_itr->m_keyframe = true;
-
-  slice_info_t &idr         = frame_itr->m_si;
-  sps_info_t &sps           = m_sps_info_list[idr.sps];
-  bool simple_picture_order = false;
-
-  unsigned int idx                    = 0;
-  unsigned int prev_pic_order_cnt_msb = 0;
-  unsigned int prev_pic_order_cnt_lsb = 0;
+  m_simple_picture_order      = false;
 
   while (frames_end != frame_itr) {
-    slice_info_t &si = frame_itr->m_si;
+    auto &si = frame_itr->m_si;
 
     if (si.sps != idr.sps) {
-      simple_picture_order = true;
+      m_simple_picture_order = true;
       break;
     }
 
@@ -2049,8 +2027,8 @@ es_parser_c::cleanup() {
       prev_pic_order_cnt_lsb = prev_pic_order_cnt_msb = 0;
     } else {
       unsigned int poc_msb;
-      unsigned int max_poc_lsb = 1 << (sps.log2_max_pic_order_cnt_lsb);
-      unsigned int poc_lsb = si.pic_order_cnt_lsb;
+      auto max_poc_lsb = 1u << (sps.log2_max_pic_order_cnt_lsb);
+      auto poc_lsb     = si.pic_order_cnt_lsb;
 
       if (poc_lsb < prev_pic_order_cnt_lsb && (prev_pic_order_cnt_lsb - poc_lsb) >= (max_poc_lsb / 2))
         poc_msb = prev_pic_order_cnt_msb + max_poc_lsb;
@@ -2067,22 +2045,73 @@ es_parser_c::cleanup() {
       }
     }
 
-    frame_itr->m_decode_order       = idx;
+    frame_itr->m_decode_order = idx;
 
     ++frame_itr;
     ++idx;
   }
+}
 
-  if (!simple_picture_order)
+std::vector<int64_t>
+es_parser_c::calculate_provided_timestamps_to_use() {
+  auto frame_idx                     = 0u;
+  auto provided_timestamps_idx       = 0u;
+  auto const num_frames              = m_frames.size();
+  auto const num_provided_timestamps = m_provided_timestamps.size();
+
+  std::vector<int64_t> provided_timestamps_to_use;
+  provided_timestamps_to_use.reserve(num_frames);
+
+  while (   (frame_idx               < num_frames)
+         && (provided_timestamps_idx < num_provided_timestamps)) {
+    auto &frame                    = m_frames[frame_idx];
+    auto const &provided_timestamp = m_provided_timestamps[provided_timestamps_idx];
+
+    if (frame.m_position >= provided_timestamp.second) {
+      frame.m_has_provided_timecode = true;
+      provided_timestamps_to_use.emplace_back(provided_timestamp.first);
+      ++provided_timestamps_idx;
+    }
+
+    ++frame_idx;
+  }
+
+  mxdebug_if(m_debug_timecodes,
+             boost::format("cleanup; num frames %1% num provided timestamps available %2% num provided timestamps to use %3%\n"
+                           "  frames:\n%4%"
+                           "  provided timestamps (available):\n%5%"
+                           "  provided timestamps (to use):\n%6%")
+             % num_frames % num_provided_timestamps % provided_timestamps_to_use.size()
+             % boost::accumulate(m_frames, std::string{}, [](auto const &str, auto const &frame) {
+                 return str + (boost::format("    pos %1% size %2% key? %3%\n") % frame.m_position % frame.m_data->get_size() % frame.m_keyframe).str();
+               })
+             % boost::accumulate(m_provided_timestamps, std::string{}, [](auto const &str, auto const &provided_timestamp) {
+                 return str + (boost::format("    pos %1% timestamp %2%\n") % provided_timestamp.second % format_timestamp(provided_timestamp.first)).str();
+               })
+             % boost::accumulate(provided_timestamps_to_use, std::string{}, [](auto const &str, auto const &provided_timestamp) {
+                 return str + (boost::format("    timestamp %1%\n") % format_timestamp(provided_timestamp)).str();
+               }));
+
+  m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_to_use.size());
+
+  brng::sort(provided_timestamps_to_use);
+
+  return provided_timestamps_to_use;
+}
+
+void
+es_parser_c::calculate_frame_timestamps() {
+  auto provided_timestamps_to_use = calculate_provided_timestamps_to_use();
+
+  if (!m_simple_picture_order)
     brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
 
-  brng::sort(m_provided_timecodes);
-
-  frames_begin               = m_frames.begin();
-  frames_end                 = m_frames.end();
+  auto frames_begin          = m_frames.begin();
+  auto frames_end            = m_frames.end();
   auto previous_frame_itr    = frames_begin;
-  auto provided_timecode_itr = m_provided_timecodes.begin();
-  for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
+  auto provided_timecode_itr = provided_timestamps_to_use.begin();
+
+  for (auto frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
     if (frame_itr->m_has_provided_timecode) {
       frame_itr->m_start = *provided_timecode_itr;
       ++provided_timecode_itr;
@@ -2101,21 +2130,23 @@ es_parser_c::cleanup() {
   }
 
   m_max_timecode = m_frames.back().m_end;
-  m_provided_timecodes.erase(m_provided_timecodes.begin(), provided_timecode_itr);
 
   mxdebug_if(m_debug_timecodes, boost::format("CLEANUP frames <pres_ord dec_ord has_prov_tc tc dur>: %1%\n")
              % boost::accumulate(m_frames, std::string(""), [](std::string const &accu, frame_t const &frame) {
                  return accu + (boost::format(" <%1% %2% %3% %4% %5%>") % frame.m_presentation_order % frame.m_decode_order % frame.m_has_provided_timecode % frame.m_start % (frame.m_end - frame.m_start)).str();
                }));
 
-
-  if (!simple_picture_order)
+  if (!m_simple_picture_order)
     brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
+}
 
-  frames_begin       = m_frames.begin();
-  frames_end         = m_frames.end();
-  previous_frame_itr = frames_begin;
-  for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
+void
+es_parser_c::calculate_frame_references_and_update_stats() {
+  auto frames_begin       = m_frames.begin();
+  auto frames_end         = m_frames.end();
+  auto previous_frame_itr = frames_begin;
+
+  for (auto frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
     if (frames_begin != frame_itr)
       frame_itr->m_ref1 = previous_frame_itr->m_start - frame_itr->m_start;
 
@@ -2124,9 +2155,33 @@ es_parser_c::cleanup() {
 
     ++m_stats.num_field_slices;
   }
+}
+
+void
+es_parser_c::cleanup() {
+  if (m_frames.empty())
+    return;
+
+  if (m_discard_actual_frames) {
+    m_stats.num_frames_discarded    += m_frames.size();
+    m_stats.num_timecodes_discarded += m_provided_timestamps.size();
+
+    m_frames.clear();
+    m_provided_timestamps.clear();
+
+    return;
+  }
+
+  calculate_frame_order();
+  calculate_frame_timestamps();
+  calculate_frame_references_and_update_stats();
+
+  // This may be wrong but is needed for mkvmerge to work correctly
+  // (cluster_helper etc).
+  m_frames.front().m_keyframe = true;
 
   m_stats.num_frames_out += m_frames.size();
-  m_frames_out.insert(m_frames_out.end(), frames_begin, frames_end);
+  m_frames_out.insert(m_frames_out.end(), m_frames.begin(), m_frames.end());
   m_frames.clear();
 }
 
