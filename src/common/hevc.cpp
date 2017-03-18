@@ -2064,13 +2064,18 @@ es_parser_c::calculate_provided_timestamps_to_use() {
 
   while (   (frame_idx               < num_frames)
          && (provided_timestamps_idx < num_provided_timestamps)) {
-    auto &frame                    = m_frames[frame_idx];
-    auto const &provided_timestamp = m_provided_timestamps[provided_timestamps_idx];
+    timestamp_c timestamp_to_use;
+    auto &frame = m_frames[frame_idx];
 
-    if (frame.m_position >= provided_timestamp.second) {
-      frame.m_has_provided_timecode = true;
-      provided_timestamps_to_use.emplace_back(provided_timestamp.first);
+    while (   (provided_timestamps_idx < num_provided_timestamps)
+           && (frame.m_position >= m_provided_timestamps[provided_timestamps_idx].second)) {
+      timestamp_to_use = timestamp_c::ns(m_provided_timestamps[provided_timestamps_idx].first);
       ++provided_timestamps_idx;
+    }
+
+    if (timestamp_to_use.valid()) {
+      provided_timestamps_to_use.emplace_back(timestamp_to_use.to_ns());
+      frame.m_has_provided_timecode = true;
     }
 
     ++frame_idx;
@@ -2092,7 +2097,7 @@ es_parser_c::calculate_provided_timestamps_to_use() {
                  return str + (boost::format("    timestamp %1%\n") % format_timestamp(provided_timestamp)).str();
                }));
 
-  m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_to_use.size());
+  m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_idx);
 
   brng::sort(provided_timestamps_to_use);
 

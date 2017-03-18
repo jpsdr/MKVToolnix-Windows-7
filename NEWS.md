@@ -22,6 +22,9 @@
   monotonic increasing. Fixes #1909.
 * mkvmerge: AVC/h.264 parser: mkvmerge will now drop timestamps from the
   source container if no frame is emitted for that timestamp. Fixes #1908.
+* mkvmerge: HEVC/h.265 parser: mkvmerge will now drop timestamps from the
+  source container if no frame is emitted for that timestamp. Fixes the HEVC
+  equivalent of the problem with AVC described in #1908.
 
 
 # Version 9.9.0 "Pick Up" 2017-02-19
