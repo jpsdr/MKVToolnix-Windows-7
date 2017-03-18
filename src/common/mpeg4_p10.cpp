@@ -1687,13 +1687,16 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
   calculate_frame_timestamps();
   calculate_frame_references_and_update_stats();
 
-  // This may be wrong but is needed for mkvmerge to work correctly
-  // (cluster_helper etc).
-  if (m_first_cleanup) {
-    m_frames.front().m_keyframe = true;
-    m_first_cleanup             = false;
+  if (m_first_cleanup && !m_frames.front().m_keyframe) {
+    // Drop all frames before the first key frames as they cannot be
+    // decoded anyway.
+    m_stats.num_frames_discarded += m_frames.size();
+    m_frames.clear();
+
+    return;
   }
 
+  m_first_cleanup         = false;
   m_stats.num_frames_out += m_frames.size();
   m_frames_out.insert(m_frames_out.end(), m_frames.begin(), m_frames.end());
   m_frames.clear();

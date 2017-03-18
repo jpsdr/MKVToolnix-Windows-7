@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: AVC/h.264 parser: mkvmerge will now drop all frames before the
+  first key frame as they cannot be decoded properly anyway. See #1908.
+
 ## Bug fixes
 
 * mkvmerge: MP4 reader: fixed track offsets being wrong in certain situations
