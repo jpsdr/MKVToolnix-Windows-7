@@ -155,6 +155,7 @@ memory_cptr avcc_to_nalus(const unsigned char *buffer, size_t size);
 struct avc_frame_t {
   memory_cptr m_data;
   int64_t m_start, m_end, m_ref1, m_ref2;
+  uint64_t m_position;
   bool m_keyframe, m_has_provided_timecode;
   slice_info_t m_si;
   int m_presentation_order, m_decode_order;
@@ -174,6 +175,7 @@ struct avc_frame_t {
     m_end                   = 0;
     m_ref1                  = 0;
     m_ref2                  = 0;
+    m_position              = 0;
     m_keyframe              = false;
     m_has_provided_timecode = false;
     m_presentation_order    = 0;
@@ -235,8 +237,7 @@ protected:
   int64_rational_c m_par;
 
   std::deque<avc_frame_t> m_frames, m_frames_out;
-  std::deque<int64_t> m_provided_timecodes;
-  std::deque<uint64_t> m_provided_stream_positions;
+  std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
   int64_t m_max_timecode, m_previous_frame_start_in_display_order;
   std::map<int64_t, int64_t> m_duration_frequency;
 
@@ -249,7 +250,7 @@ protected:
 
   avc_frame_t m_incomplete_frame;
   bool m_have_incomplete_frame;
-  std::deque<memory_cptr> m_unhandled_nalus;
+  std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
   bool m_ignore_nalu_size_length_errors, m_discard_actual_frames, m_simple_picture_order, m_first_cleanup, m_all_i_slices_are_key_frames;
 
@@ -335,7 +336,7 @@ public:
     return m_sps_info_list.begin()->height;
   }
 
-  void handle_nalu(memory_cptr const &nalu);
+  void handle_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
 
   void add_timecode(int64_t timecode);
 
@@ -389,7 +390,7 @@ protected:
   void handle_sps_nalu(memory_cptr const &nalu);
   void handle_pps_nalu(memory_cptr const &nalu);
   void handle_sei_nalu(memory_cptr const &nalu);
-  void handle_slice_nalu(memory_cptr const &nalu);
+  void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void cleanup();
   bool flush_decision(slice_info_t &si, slice_info_t &ref);
   void flush_incomplete_frame();
@@ -399,6 +400,9 @@ protected:
   void remove_trailing_zero_bytes(memory_c &memory);
   void init_nalu_names();
   void calculate_frame_order();
+  std::vector<int64_t> calculate_provided_timestamps_to_use();
+  void calculate_frame_timestamps();
+  void calculate_frame_references_and_update_stats();
 };
 using avc_es_parser_cptr = std::shared_ptr<avc_es_parser_c>;
 
