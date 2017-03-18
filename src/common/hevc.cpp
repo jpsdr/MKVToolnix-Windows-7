@@ -229,45 +229,45 @@ The CodecPrivate format is flexible and allows storage of arbitrary NAL units.
 However it is restricted by MP4 to VPS, SPS and PPS headers and SEI messages that apply to the
 whole stream as for example user data. The table below specifies the format:
 
-Value                               Bits  Description
------                               ----  -----------
-configuration_version               8   The value should be 0 until the format has been finalized. Thereafter is should have the specified value (probably 1). This allows us to recognize (and ignore) non-standard CodecPrivate
-general_profile_space               2     Specifies the context for the interpretation of general_profile_idc and  general_profile_compatibility_flag
-general_tier_flag                   1     Specifies the context for the interpretation of general_level_idc
-general_profile_idc                 5     Defines the profile of the bitstream
-general_profile_compatibility_flag  32    Defines profile compatibility, see [2] for interpretation
-general_progressive_source_flag     1     Source is progressive, see [2] for interpretation.
-general_interlace_source_flag       1     Source is interlaced, see [2] for interpretation.
-general_nonpacked_constraint_flag   1     If 1 then no frame packing arrangement SEI messages, see [2] for more information
-general_frame_only_constraint_flag  1     If 1 then no fields, see [2] for interpretation
-reserved                            44    Reserved field, value TBD 0
-general_level_idc                   8     Defines the level of the bitstream
-reserved                            4     Reserved Field, value '1111'b
-min_spatial_segmentation_idc        12    Maximum possible size of distinct coded spatial segmentation regions in the pictures of the CVS
-reserved                            6     Reserved Field, value '111111'b
-parallelism_type                    2     0=unknown, 1=slices, 2=tiles, 3=WPP
-reserved                            6     Reserved field, value '111111'b
-chroma_format_idc                   2     See table 6-1, HEVC
-reserved                            5     Reserved Field, value '11111'b
-bit_depth_luma_minus8               3     Bit depth luma minus 8
-reserved                            5     Reserved Field, value '11111'b
-bit_depth_chroma_minus8             3     Bit depth chroma minus 8
-reserved                            16    Reserved Field, value 0
-reserved                            2     Reserved Field, value 0
-max_sub_layers                      3     maximum number of temporal sub-layers
-temporal_id_nesting_flag            1     Specifies whether inter prediction is additionally restricted. see [2] for interpretation.
-size_nalu_minus_one                 2     Size of field NALU Length – 1
-num_parameter_sets                  8     Number of parameter sets
+Value                               Bits   Pos  Description
+-----                               ----  ----  -----------
+configuration_version                  8   0.0  The value should be 0 until the format has been finalized. Thereafter is should have the specified value (probably 1). This allows us to recognize (and ignore) non-standard CodecPrivate
+general_profile_space                  2   1.0  Specifies the context for the interpretation of general_profile_idc and  general_profile_compatibility_flag
+general_tier_flag                      1   1.2  Specifies the context for the interpretation of general_level_idc
+general_profile_idc                    5   1.3  Defines the profile of the bitstream
+general_profile_compatibility_flag    32   2.0  Defines profile compatibility, see [2] for interpretation
+general_progressive_source_flag        1   6.0  Source is progressive, see [2] for interpretation.
+general_interlace_source_flag          1   6.1  Source is interlaced, see [2] for interpretation.
+general_nonpacked_constraint_flag      1   6.2  If 1 then no frame packing arrangement SEI messages, see [2] for more information
+general_frame_only_constraint_flag     1   6.3  If 1 then no fields, see [2] for interpretation
+reserved                              44   6.4  Reserved field, value TBD 0
+general_level_idc                      8  12.0  Defines the level of the bitstream
+reserved                               4  13.0  Reserved Field, value '1111'b
+min_spatial_segmentation_idc          12  13.4  Maximum possible size of distinct coded spatial segmentation regions in the pictures of the CVS
+reserved                               6  15.0  Reserved Field, value '111111'b
+parallelism_type                       2  15.6  0=unknown, 1=slices, 2=tiles, 3=WPP
+reserved                               6  16.0  Reserved field, value '111111'b
+chroma_format_idc                      2  16.6  See table 6-1, HEVC
+reserved                               5  17.0  Reserved Field, value '11111'b
+bit_depth_luma_minus8                  3  17.5  Bit depth luma minus 8
+reserved                               5  18.0  Reserved Field, value '11111'b
+bit_depth_chroma_minus8                3  18.5  Bit depth chroma minus 8
+reserved                              16  19.0  Reserved Field, value 0
+reserved                               2  21.0  Reserved Field, value 0
+max_sub_layers                         3  21.2  maximum number of temporal sub-layers
+temporal_id_nesting_flag               1  21.5  Specifies whether inter prediction is additionally restricted. see [2] for interpretation.
+size_nalu_minus_one                    2  21.6  Size of field NALU Length – 1
+num_parameter_sets                     8  22.0  Number of parameter sets
 
 for (i=0;i<num_parameter_sets;i++) {
-  array_completeness                1     1 when there is no duplicate parameter set with same id in the stream, 0 otherwise or unknown
-  reserved                          1     Value '1'b
-  nal_unit_type                     6     Nal unit type, restricted to VPS, SPS, PPS and SEI, SEI must be of declarative nature which applies to the whole stream such as user data sei.
-  nal_unit_count                    16    Number of nal units
+  array_completeness                   1   0.0  1 when there is no duplicate parameter set with same id in the stream, 0 otherwise or unknown
+  reserved                             1   0.1  Value '1'b
+  nal_unit_type                        6   0.2  Nal unit type, restricted to VPS, SPS, PPS and SEI, SEI must be of declarative nature which applies to the whole stream such as user data sei.
+  nal_unit_count                      16   1.0  Number of nal units
   for (j=0;j<nalu_unit_count;j+) {
-    size                            16    Size of nal unit
+    size                              16   3.0  Size of nal unit
     for(k=0;k<size;k++) {
-      data[k]                       8     Nalu data+
+      data[k]                          8   5.0  Nalu data
     }
   }
 }
