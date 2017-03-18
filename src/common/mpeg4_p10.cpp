@@ -1503,6 +1503,18 @@ mpeg4::p10::avc_es_parser_c::calculate_frame_order() {
   auto prev_pic_order_cnt_lsb = 0u;
   auto pic_order_cnt_msb      = 0u;
 
+  m_simple_picture_order      = false;
+
+  if (   (   (AVC_SLICE_TYPE_I   != idr.type)
+          && (AVC_SLICE_TYPE_SI  != idr.type)
+          && (AVC_SLICE_TYPE2_I  != idr.type)
+          && (AVC_SLICE_TYPE2_SI != idr.type))
+      || (0 == idr.nal_ref_idc)
+      || (0 != sps.pic_order_cnt_type)) {
+    m_simple_picture_order = true;
+    // return;
+  }
+
   while (frames_end != frame_itr) {
     auto const &si = frame_itr->m_si;
 
@@ -1667,20 +1679,6 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
     m_provided_timestamps.clear();
 
     return;
-  }
-
-  auto const &idr        = m_frames.begin()->m_si;
-  auto const &sps        = m_sps_info_list[idr.sps];
-  m_simple_picture_order = false;
-
-  if (   (   (AVC_SLICE_TYPE_I   != idr.type)
-          && (AVC_SLICE_TYPE_SI  != idr.type)
-          && (AVC_SLICE_TYPE2_I  != idr.type)
-          && (AVC_SLICE_TYPE2_SI != idr.type))
-      || (0 == idr.nal_ref_idc)
-      || (0 != sps.pic_order_cnt_type)) {
-    m_simple_picture_order = true;
-    // return;
   }
 
   calculate_frame_order();
