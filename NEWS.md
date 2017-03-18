@@ -4,6 +4,8 @@
 
 * mkvmerge: AVC/h.264 parser: mkvmerge will now drop all frames before the
   first key frame as they cannot be decoded properly anyway. See #1908.
+* mkvmerge: HEVC/h.265 parser: mkvmerge will now drop all frames before the
+  first key frame as they cannot be decoded properly anyway. See #1908.
 
 ## Bug fixes
 

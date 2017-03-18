@@ -1416,6 +1416,7 @@ es_parser_c::es_parser_c()
   , m_first_keyframe_found(false)
   , m_recovery_point_valid(false)
   , m_b_frames_since_keyframe(false)
+  , m_first_cleanup{true}
   , m_par_found(false)
   , m_max_timecode(0)
   , m_stream_position(0)
@@ -2181,9 +2182,16 @@ es_parser_c::cleanup() {
   calculate_frame_timestamps();
   calculate_frame_references_and_update_stats();
 
-  // This may be wrong but is needed for mkvmerge to work correctly
-  // (cluster_helper etc).
-  m_frames.front().m_keyframe = true;
+  if (m_first_cleanup && !m_frames.front().m_keyframe) {
+    // Drop all frames before the first key frames as they cannot be
+    // decoded anyway.
+    m_stats.num_frames_discarded += m_frames.size();
+    m_frames.clear();
+
+    return;
+  }
+
+  m_first_cleanup = false;
 
   m_stats.num_frames_out += m_frames.size();
   m_frames_out.insert(m_frames_out.end(), m_frames.begin(), m_frames.end());
