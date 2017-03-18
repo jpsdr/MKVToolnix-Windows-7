@@ -11,6 +11,10 @@
   shown correctly.
 * mkvmerge: Matroska reader: fixed handling BlockGroups and SimpleBlocks with
   negative timestamps.
+* mkvmerge: MP3 packetizer: the MP3 packetizer will no longer drop timestamps
+  from source containers if they go backwards. This keeps A/V in sync for
+  files where the source was in sync even though their timestamps aren't
+  monotonic increasing. Fixes #1909.
 
 
 # Version 9.9.0 "Pick Up" 2017-02-19

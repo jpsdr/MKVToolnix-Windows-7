@@ -42,6 +42,7 @@ mp3_packetizer_c::mp3_packetizer_c(generic_reader_c *p_reader,
 {
   set_track_type(track_audio);
   set_track_default_duration(m_packet_duration);
+  m_timestamp_calculator.set_allow_smaller_timestamps(true);
 }
 
 mp3_packetizer_c::~mp3_packetizer_c() {

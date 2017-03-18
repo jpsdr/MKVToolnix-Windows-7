@@ -22,6 +22,7 @@ timestamp_calculator_c::timestamp_calculator_c(int64_t samples_per_second)
   , m_samples_per_second{samples_per_second}
   , m_samples_since_reference_timestamp{}
   , m_samples_to_timestamp{1000000000, static_cast<int64_t>(samples_per_second)}
+  , m_allow_smaller_timestamps{}
   , m_debug{"timestamp_calculator"}
 {
 }
@@ -32,8 +33,8 @@ timestamp_calculator_c::add_timestamp(timestamp_c const &timestamp,
   if (!timestamp.valid())
     return;
 
-  if (   (!m_last_timestamp_returned.valid() || (timestamp > m_last_timestamp_returned))
-      && (m_available_timestamps.empty()     || (timestamp > m_available_timestamps.back().first))) {
+  if (   (!m_last_timestamp_returned.valid() || (timestamp > m_last_timestamp_returned)           || (m_allow_smaller_timestamps && (timestamp < m_last_timestamp_returned)))
+      && (m_available_timestamps.empty()     || (timestamp > m_available_timestamps.back().first) || (m_allow_smaller_timestamps && (timestamp < m_available_timestamps.back().first)))) {
     mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timestamp: adding %1%\n") % format_timestamp(timestamp));
     m_available_timestamps.emplace_back(timestamp, stream_position);
 
@@ -109,4 +110,9 @@ timestamp_calculator_c::set_samples_per_second(int64_t samples_per_second) {
   m_reference_timestamp               += get_duration(m_samples_since_reference_timestamp);
   m_samples_since_reference_timestamp  = 0;
   m_samples_to_timestamp.set(1000000000, samples_per_second);
+}
+
+void
+timestamp_calculator_c::set_allow_smaller_timestamps(bool allow) {
+  m_allow_smaller_timestamps = allow;
 }

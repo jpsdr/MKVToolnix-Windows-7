@@ -29,6 +29,7 @@ private:
   timestamp_c m_reference_timestamp, m_last_timestamp_returned;
   int64_t m_samples_per_second, m_samples_since_reference_timestamp;
   samples_to_timestamp_converter_c m_samples_to_timestamp;
+  bool m_allow_smaller_timestamps;
   debugging_option_c m_debug;
 
 public:
@@ -42,6 +43,7 @@ public:
   timestamp_c get_duration(int64_t samples);
 
   void set_samples_per_second(int64_t samples_per_second);
+  void set_allow_smaller_timestamps(bool allow);
 
 protected:
   timestamp_c fetch_next_available_timestamp(int64_t samples_in_frame);
