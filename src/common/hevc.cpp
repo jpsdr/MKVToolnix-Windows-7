@@ -1056,8 +1056,8 @@ parse_sps(memory_cptr const &buffer,
   w.copy_bits(6, r);            // nuh_reserved_zero_6bits
   w.copy_bits(3, r);            // nuh_temporal_id_plus1
 
-  sps.vps_id = w.copy_bits(4, r);                   // sps_video_parameter_set_id
-  sps.max_sub_layers_minus1 = w.copy_bits(3, r);    // sps_max_sub_layers_minus1
+  sps.vps_id                   = w.copy_bits(4, r); // sps_video_parameter_set_id
+  sps.max_sub_layers_minus1    = w.copy_bits(3, r); // sps_max_sub_layers_minus1
   sps.temporal_id_nesting_flag = w.copy_bits(1, r); // sps_temporal_id_nesting_flag
 
   size_t vps_idx;
@@ -1069,7 +1069,7 @@ parse_sps(memory_cptr const &buffer,
 
   sps.vps = vps_idx;
 
-  vps_info_t &vps = m_vps_info_list[vps_idx];
+  auto &vps = m_vps_info_list[vps_idx];
 
   profile_tier_copy(r, w, vps, sps.max_sub_layers_minus1);  // profile_tier_level(sps_max_sub_layers_minus1)
 
@@ -1078,10 +1078,10 @@ parse_sps(memory_cptr const &buffer,
   if ((sps.chroma_format_idc = w.copy_unsigned_golomb(r)) == 3) // chroma_format_idc
     sps.separate_colour_plane_flag = w.copy_bits(1, r);    // separate_colour_plane_flag
 
-  sps.width = w.copy_unsigned_golomb(r); // pic_width_in_luma_samples
-  sps.height = w.copy_unsigned_golomb(r); // pic_height_in_luma_samples
-
+  sps.width                   = w.copy_unsigned_golomb(r); // pic_width_in_luma_samples
+  sps.height                  = w.copy_unsigned_golomb(r); // pic_height_in_luma_samples
   sps.conformance_window_flag = w.copy_bits(1, r);
+
   if (sps.conformance_window_flag) {
     sps.conf_win_left_offset   = w.copy_unsigned_golomb(r); // conf_win_left_offset
     sps.conf_win_right_offset  = w.copy_unsigned_golomb(r); // conf_win_right_offset
@@ -1089,19 +1089,20 @@ parse_sps(memory_cptr const &buffer,
     sps.conf_win_bottom_offset = w.copy_unsigned_golomb(r); // conf_win_bottom_offset
   }
 
-  sps.bit_depth_luma_minus8 = w.copy_unsigned_golomb(r); // bit_depth_luma_minus8
-  sps.bit_depth_chroma_minus8 = w.copy_unsigned_golomb(r); // bit_depth_chroma_minus8
-  sps.log2_max_pic_order_cnt_lsb = w.copy_unsigned_golomb(r) + 4; // log2_max_pic_order_cnt_lsb_minus4
+  sps.bit_depth_luma_minus8                     = w.copy_unsigned_golomb(r);     // bit_depth_luma_minus8
+  sps.bit_depth_chroma_minus8                   = w.copy_unsigned_golomb(r);     // bit_depth_chroma_minus8
+  sps.log2_max_pic_order_cnt_lsb                = w.copy_unsigned_golomb(r) + 4; // log2_max_pic_order_cnt_lsb_minus4
+  auto sps_sub_layer_ordering_info_present_flag = w.copy_bits(1, r);             // sps_sub_layer_ordering_info_present_flag
 
-  bool sps_sub_layer_ordering_info_present_flag = w.copy_bits(1, r);  // sps_sub_layer_ordering_info_present_flag
   for (i = (sps_sub_layer_ordering_info_present_flag ? 0 : sps.max_sub_layers_minus1); i <= sps.max_sub_layers_minus1; i++) {
     w.copy_unsigned_golomb(r); // sps_max_dec_pic_buffering_minus1[i]
     w.copy_unsigned_golomb(r); // sps_max_num_reorder_pics[i]
     w.copy_unsigned_golomb(r); // sps_max_latency_increase[i]
   }
 
-  sps.log2_min_luma_coding_block_size_minus3 = w.copy_unsigned_golomb(r); // log2_min_luma_coding_block_size_minus3
+  sps.log2_min_luma_coding_block_size_minus3   = w.copy_unsigned_golomb(r); // log2_min_luma_coding_block_size_minus3
   sps.log2_diff_max_min_luma_coding_block_size = w.copy_unsigned_golomb(r); // log2_diff_max_min_luma_coding_block_size
+
   w.copy_unsigned_golomb(r); // log2_min_transform_block_size_minus2
   w.copy_unsigned_golomb(r); // log2_diff_max_min_transform_block_size
   w.copy_unsigned_golomb(r); // max_transform_hierarchy_depth_inter
@@ -1115,30 +1116,32 @@ parse_sps(memory_cptr const &buffer,
   w.copy_bits(1, r);  // sample_adaptive_offset_enabled_flag
 
   if (w.copy_bits(1, r) == 1) { // pcm_enabled_flag
-    w.copy_bits(4, r);  // pcm_sample_bit_depth_luma_minus1
-    w.copy_bits(4, r);  // pcm_sample_bit_depth_chroma_minus1
-    w.copy_unsigned_golomb(r); // log2_min_pcm_luma_coding_block_size_minus3
-    w.copy_unsigned_golomb(r); // log2_diff_max_min_pcm_luma_coding_block_size
-    w.copy_bits(1, r);  // pcm_loop_filter_disable_flag
+    w.copy_bits(4, r);          // pcm_sample_bit_depth_luma_minus1
+    w.copy_bits(4, r);          // pcm_sample_bit_depth_chroma_minus1
+    w.copy_unsigned_golomb(r);  // log2_min_pcm_luma_coding_block_size_minus3
+    w.copy_unsigned_golomb(r);  // log2_diff_max_min_pcm_luma_coding_block_size
+    w.copy_bits(1, r);          // pcm_loop_filter_disable_flag
   }
 
-  unsigned int num_short_term_ref_pic_sets = w.copy_unsigned_golomb(r);  // num_short_term_ref_pic_sets
+  auto num_short_term_ref_pic_sets = w.copy_unsigned_golomb(r);  // num_short_term_ref_pic_sets
+
   for (i = 0; i < num_short_term_ref_pic_sets; i++) {
     short_term_ref_pic_set_copy(r, w, sps.short_term_ref_pic_sets, i, num_short_term_ref_pic_sets); // short_term_ref_pic_set(i)
   }
 
   if (w.copy_bits(1, r) == 1) { // long_term_ref_pics_present_flag
-    unsigned int num_long_term_ref_pic_sets = w.copy_unsigned_golomb(r); // num_long_term_ref_pic_sets
+    auto num_long_term_ref_pic_sets = w.copy_unsigned_golomb(r); // num_long_term_ref_pic_sets
+
     for (i = 0; i < num_long_term_ref_pic_sets; i++) {
       w.copy_bits(sps.log2_max_pic_order_cnt_lsb, r);  // lt_ref_pic_poc_lsb_sps[i]
-      w.copy_bits(1, r);  // used_by_curr_pic_lt_sps_flag[i]
+      w.copy_bits(1, r);                               // used_by_curr_pic_lt_sps_flag[i]
     }
   }
 
-  w.copy_bits(1, r);  // sps_temporal_mvp_enabled_flag
-  w.copy_bits(1, r);  // strong_intra_smoothing_enabled_flag
-
+  w.copy_bits(1, r);                   // sps_temporal_mvp_enabled_flag
+  w.copy_bits(1, r);                   // strong_intra_smoothing_enabled_flag
   sps.vui_present = w.copy_bits(1, r); // vui_parameters_present_flag
+
   if (sps.vui_present == 1) {
     vui_parameters_copy(r, w, sps, keep_ar_info, sps.max_sub_layers_minus1);  //vui_parameters()
   }
@@ -1177,19 +1180,19 @@ parse_pps(memory_cptr const &buffer,
 
     memset(&pps, 0, sizeof(pps));
 
-    r.skip_bits(1);             // forbidden_zero_bit
-    if (r.get_bits(6) != HEVC_NALU_TYPE_PIC_PARAM)    // nal_unit_type
+    r.skip_bits(1);                                // forbidden_zero_bit
+    if (r.get_bits(6) != HEVC_NALU_TYPE_PIC_PARAM) // nal_unit_type
       return false;
     r.skip_bits(6);             // nuh_reserved_zero_6bits
     r.skip_bits(3);             // nuh_temporal_id_plus1
 
-    pps.id     = r.get_unsigned_golomb();     // pps_pic_parameter_set_id
-    pps.sps_id = r.get_unsigned_golomb();     // pps_seq_parameter_set_id
-    pps.dependent_slice_segments_enabled_flag = r.get_bits(1);  // dependent_slice_segments_enabled_flag
-    pps.output_flag_present_flag = r.get_bits(1);  // output_flag_present_flag
-    pps.num_extra_slice_header_bits = r.get_bits(3);  // num_extra_slice_header_bits
+    pps.id                                    = r.get_unsigned_golomb(); // pps_pic_parameter_set_id
+    pps.sps_id                                = r.get_unsigned_golomb(); // pps_seq_parameter_set_id
+    pps.dependent_slice_segments_enabled_flag = r.get_bits(1);           // dependent_slice_segments_enabled_flag
+    pps.output_flag_present_flag              = r.get_bits(1);           // output_flag_present_flag
+    pps.num_extra_slice_header_bits           = r.get_bits(3);           // num_extra_slice_header_bits
 
-    pps.checksum          = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
+    pps.checksum                              = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
 
     return true;
   } catch (...) {
@@ -1205,22 +1208,21 @@ parse_sei(memory_cptr const &buffer,
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
     mm_mem_io_c byte_reader{*buffer};
 
-    unsigned int bytes_read = 0;
-    unsigned int buffer_size = buffer->get_size();
+    unsigned int bytes_read   = 0;
+    unsigned int buffer_size  = buffer->get_size();
     unsigned int payload_type = 0;
     unsigned int payload_size = 0;
 
     unsigned char *p = buffer->get_buffer();
-    p = p;
 
-    r.skip_bits(1);             // forbidden_zero_bit
-    if (r.get_bits(6) != HEVC_NALU_TYPE_PREFIX_SEI)    // nal_unit_type
+    r.skip_bits(1);                                 // forbidden_zero_bit
+    if (r.get_bits(6) != HEVC_NALU_TYPE_PREFIX_SEI) // nal_unit_type
       return false;
     r.skip_bits(6);             // nuh_reserved_zero_6bits
     r.skip_bits(3);             // nuh_temporal_id_plus1
 
-    byte_reader.skip(2); // skip the nalu header
-    bytes_read+=2;
+    byte_reader.skip(2);        // skip the nalu header
+    bytes_read += 2;
 
     while(bytes_read < buffer_size-2) {
       payload_type = 0;
@@ -1229,19 +1231,19 @@ parse_sei(memory_cptr const &buffer,
       bytes_read++;
 
       while(payload_type_byte == 0xFF) {
-        payload_type += 255;
+        payload_type     += 255;
         payload_type_byte = byte_reader.read_uint8();
         bytes_read++;
       }
-      payload_type += payload_type_byte;
 
-      payload_size = 0;
+      payload_type += payload_type_byte;
+      payload_size  = 0;
 
       unsigned int payload_size_byte = byte_reader.read_uint8();
       bytes_read++;
 
       while(payload_size_byte == 0xFF) {
-        payload_size += 255;
+        payload_size     += 255;
         payload_size_byte = byte_reader.read_uint8();
         bytes_read++;
       }
