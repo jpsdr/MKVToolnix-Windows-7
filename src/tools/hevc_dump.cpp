@@ -16,7 +16,7 @@
 
 static void
 show_help() {
-  mxinfo("mpls_dump [options] input_file_name\n"
+  mxinfo("hevc_dump [options] input_file_name\n"
          "\n"
          "General options:\n"
          "\n"
