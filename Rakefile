@@ -65,7 +65,7 @@ def setup_globals
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
   $programs                << "mkvinfo-gui"    if $build_mkvinfo_gui
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
-  $tools                   =  %w{ac3parser base64tool checksum diracparser ebml_validator hevc_dump mpls_dump vc1parser}
+  $tools                   =  %w{ac3parser base64tool checksum diracparser ebml_validator hevc_dump hevcc_dump mpls_dump vc1parser}
 
   $application_subdirs     =  { "mkvtoolnix-gui" => "mkvtoolnix-gui/" }
   $applications            =  $programs.collect { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
@@ -1068,6 +1068,16 @@ Application.new("src/tools/hevc_dump").
   description("Build the hevc_dump executable").
   aliases("tools:hevc_dump").
   sources("src/tools/hevc_dump.cpp").
+  libraries($common_libs).
+  create
+
+#
+# tools: hevcs_dump
+#
+Application.new("src/tools/hevcc_dump").
+  description("Build the hevcc_dump executable").
+  aliases("tools:hevcc_dump").
+  sources("src/tools/hevcc_dump.cpp").
   libraries($common_libs).
   create
 
