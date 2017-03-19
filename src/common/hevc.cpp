@@ -857,7 +857,11 @@ vui_parameters_copy(bit_reader_c &r,
     w.copy_unsigned_golomb(r);               // chroma_sample_loc_type_bottom_field
   }
   w.copy_bits(3, r);            // neutral_chroma_indication_flag, field_seq_flag, frame_field_info_present_flag
-  if (w.copy_bits(1, r) == 1) { // default_display_window_flag
+
+  if (   (r.get_remaining_bits() >= 68)
+      && (r.peek_bits(21) == 0x100000))
+    w.put_bit(0);                    // invalid default display window, signal no default_display_window_flag
+  else if (w.copy_bits(1, r) == 1) { // default_display_window_flag
     w.copy_unsigned_golomb(r);               // def_disp_win_left_offset
     w.copy_unsigned_golomb(r);               // def_disp_win_right_offset
     w.copy_unsigned_golomb(r);               // def_disp_win_top_offset

@@ -6,6 +6,9 @@
   first key frame as they cannot be decoded properly anyway. See #1908.
 * mkvmerge: HEVC/h.265 parser: mkvmerge will now drop all frames before the
   first key frame as they cannot be decoded properly anyway. See #1908.
+* mkvmerge: HEVC/h.265 parser: added a workaround for invalid values for the
+  "default display window" in the VUI parameters of sequence parameter
+  sets. Fixes #1907.
 
 ## Bug fixes
 
