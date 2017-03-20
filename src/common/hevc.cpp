@@ -1217,8 +1217,6 @@ parse_sei(memory_cptr const &buffer,
     unsigned int payload_type = 0;
     unsigned int payload_size = 0;
 
-    unsigned char *p = buffer->get_buffer();
-
     r.skip_bits(1);                                 // forbidden_zero_bit
     if (r.get_bits(6) != HEVC_NALU_TYPE_PREFIX_SEI) // nal_unit_type
       return false;
