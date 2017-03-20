@@ -96,19 +96,19 @@ public:
     return get_bits(1) + 1;
   }
 
-  inline int get_unsigned_golomb() {
-    int n = 0, bit;
+  inline uint64_t get_unsigned_golomb() {
+    int n = 0;
 
-    while ((bit = get_bit()) == 0)
+    while (get_bit() == 0)
       ++n;
 
-    bit = get_bits(n);
+    auto bits = get_bits(n);
 
-    return (1 << n) - 1 + bit;
+    return (1u << n) - 1 + bits;
   }
 
-  inline int get_signed_golomb() {
-    int v = get_unsigned_golomb();
+  inline int64_t get_signed_golomb() {
+    int64_t v = get_unsigned_golomb();
     return v & 1 ? (v + 1) / 2 : -(v / 2);
   }
 
@@ -234,23 +234,23 @@ public:
     return value;
   }
 
-  inline int copy_unsigned_golomb(bit_reader_c &r) {
-    int n = 0, bit;
+  inline uint64_t copy_unsigned_golomb(bit_reader_c &r) {
+    int n = 0;
 
-    while ((bit = r.get_bit()) == 0) {
+    while (r.get_bit() == 0) {
       put_bit(0);
       ++n;
     }
 
     put_bit(1);
 
-    bit = copy_bits(n, r);
+    auto bits = copy_bits(n, r);
 
-    return (1 << n) - 1 + bit;
+    return (1 << n) - 1 + bits;
   }
 
-  inline int copy_signed_golomb(bit_reader_c &r) {
-    int v = copy_unsigned_golomb(r);
+  inline int64_t copy_signed_golomb(bit_reader_c &r) {
+    int64_t v = copy_unsigned_golomb(r);
     return v & 1 ? (v + 1) / 2 : -(v / 2);
   }
 
