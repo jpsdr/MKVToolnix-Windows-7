@@ -57,8 +57,7 @@ public:
   std::string m_sub_charset, m_priv_post_events;
   charset_converter_cptr m_conv;
   bool m_warning_printed;
-
-  static const char *ms_kax_ssa_fields[10];
+  unsigned int m_num_fields;
 
 public:
   xtr_ssa_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);

@@ -30,6 +30,9 @@
 * mkvmerge: HEVC/h.265 parser: mkvmerge will now drop timestamps from the
   source container if no frame is emitted for that timestamp. Fixes the HEVC
   equivalent of the problem with AVC described in #1908.
+* mkvextract: SSA/ASS: fixed extraction when the "Format" line in the
+  "[Events]" section contains less fields than the default for SSA/ASS would
+  indicate. Fixes #1913.
 
 
 # Version 9.9.0 "Pick Up" 2017-02-19

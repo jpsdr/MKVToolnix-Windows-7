@@ -71,12 +71,6 @@ xtr_srt_c::handle_frame(xtr_frame_t &f) {
 
 // ------------------------------------------------------------------------
 
-const char *xtr_ssa_c::ms_kax_ssa_fields[10] = {
-  "readorder", "layer",   "style",   "name",
-  "marginl",   "marginr", "marginv",
-  "effect",    "text",    nullptr
-};
-
 xtr_ssa_c::xtr_ssa_c(const std::string &codec_id,
                      int64_t tid,
                      track_spec_t &tspec)
@@ -84,6 +78,7 @@ xtr_ssa_c::xtr_ssa_c(const std::string &codec_id,
   , m_sub_charset(tspec.sub_charset)
   , m_conv(charset_converter_c::init(tspec.sub_charset))
   , m_warning_printed(false)
+  , m_num_fields{}
 {
 }
 
@@ -150,6 +145,11 @@ xtr_ssa_c::create_file(xtr_base_c *master,
   m_ssa_format = split(format_line, ",");
   strip(m_ssa_format, true);
 
+  m_num_fields = 1;             // ReadOrder
+  for (auto const &field : m_ssa_format)
+    if ((field != "start") && (field != "end"))
+      ++m_num_fields;
+
   auto section_after_events_pos = sconv.find("\n[", sconv.find("[Events]"));
   if (std::string::npos != section_after_events_pos) {
     m_priv_post_events = sconv.substr(section_after_events_pos);
@@ -178,18 +178,10 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   s[f.frame->get_size()] = 0;
 
   // Split the line into the fields.
-  // Specs say that the following fields are to put into the block:
-  // 0: ReadOrder, 1: Layer, 2: Style, 3: Name, 4: MarginL, 5: MarginR,
-  // 6: MarginV, 7: Effect, 8: Text
-  std::vector<std::string> fields = split(s, ",", 9);
-  if (9 < fields.size()) {
-    mxwarn(boost::format(Y("Invalid format for a SSA line ('%1%') at timecode %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"))
-           % s % format_timestamp(f.timecode * 1000000, 3) % fields.size());
-    return;
-  }
+  auto fields = split(s, ",", m_num_fields);
 
-  while (9 != fields.size())
-    fields.push_back("");
+  while (m_num_fields != fields.size())
+    fields.emplace_back("");
 
   // Convert the ReadOrder entry so that we can re-order the entries later.
   int num;
@@ -208,20 +200,19 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   // that defines a different layout. So let's account for that.
 
   std::string line = "Dialogue: ";
-  size_t i;
-  for (i = 0; i < m_ssa_format.size(); i++) {
-    std::string format = m_ssa_format[i];
+  auto field_idx   = 1u;
 
-    if (balg::iequals(format, "actor"))
-      format = "name";
+  for (auto i = 0u; i < m_ssa_format.size(); i++) {
+    auto format = m_ssa_format[i];
 
     if (0 < i)
       line += ",";
 
-    if (format == "marked")
-      line += "Marked=0";
+    if (format == "marked") {
+      line += (boost::format("Marked=%1%") % ((field_idx < m_num_fields) && !fields[field_idx].empty() ? fields[field_idx] : "0")).str();
+      ++field_idx;
 
-    else if (format == "start")
+    } else if (format == "start")
       line += (boost::format("%1%:%|2$02d|:%|3$02d|.%|4$02d|")
                % (start / 1000 / 60 / 60) % ((start / 1000 / 60) % 60) % ((start / 1000) % 60) % ((start % 1000) / 10)).str();
 
@@ -229,14 +220,8 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
       line += (boost::format("%1%:%|2$02d|:%|3$02d|.%|4$02d|")
                % (end   / 1000 / 60 / 60) % ((end   / 1000 / 60) % 60) % ((end   / 1000) % 60) % ((end   % 1000) / 10)).str();
 
-    else {
-      int k;
-      for (k = 0; ms_kax_ssa_fields[k]; ++k)
-        if (format == ms_kax_ssa_fields[k]) {
-          line += fields[k];
-          break;
-        }
-    }
+    else if (field_idx < m_num_fields)
+      line += fields[field_idx++];
   }
 
   // Do the charset conversion.
