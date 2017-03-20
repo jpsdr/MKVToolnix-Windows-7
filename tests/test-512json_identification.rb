@@ -3,7 +3,7 @@
 files = %w{
   data/aac/v.aac
   data/ac3/v.ac3
-  data/ssa-ass/fonts.ass
+  data/subtitles/ssa-ass/fonts.ass
   data/vobsub/ally1-short.idx
   data/ts/timecode-overflow.m2ts
   data/mp4/aac_encoder_delay_sample.m4a

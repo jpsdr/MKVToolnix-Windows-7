@@ -24,7 +24,7 @@ class T_217file_identification < Test
       "data/simple/v.flac",
       "data/simple/v.mp3",
       "data/wav/v.wav",
-      "data/ssa-ass/fe.ssa",
+      "data/subtitles/ssa-ass/fe.ssa",
       "data/subtitles/srt/vde.srt",
       "data/vobsub/ally1-short.sub",
       "data/wp/with-correction.wv",
