@@ -455,9 +455,11 @@ Tab::setupInputToolTips() {
                    .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
                    .arg(QYH("This works well for video and subtitle tracks but should not be used with audio tracks.")));
   Util::setToolTip(ui->defaultDuration,
-                   Q("%1 %2")
+                   Q("%1 %2 %3 %4")
                    .arg(QY("Forces the default duration or number of frames per second for a track."))
-                   .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
+                   .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
+                   .arg(QY("You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."))
+                   .arg(QY("If no unit is given, 'fps' will be used.")));
   Util::setToolTip(ui->fixBitstreamTimingInfo,
                    Q("%1 %2 %3")
                    .arg(QY("Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."))
