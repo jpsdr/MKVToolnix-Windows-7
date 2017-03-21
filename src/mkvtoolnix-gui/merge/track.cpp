@@ -378,7 +378,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
   }
 
   if (!m_defaultDuration.isEmpty()) {
-    auto unit = m_defaultDuration.contains(QRegExp{"[ip]$"}) ? Q("") : Q("fps");
+    auto unit = m_defaultDuration.contains(QRegExp{"\\d$"}) ? Q("fps") : Q("");
     opt.options << Q("--default-duration") << Q("%1:%2%3").arg(sid).arg(m_defaultDuration).arg(unit);
   }
 
