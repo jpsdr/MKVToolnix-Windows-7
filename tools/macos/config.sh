@@ -12,7 +12,7 @@ export CFLAGS=""
 export CXXFLAGS="-std=c++14 -fvisibility=hidden -fvisibility-inlines-hidden"
 export QT_CXXFLAGS="-stdlib=libc++"
 export MACOSX_DEPLOYMENT_TARGET="10.9"
-export MAKEFLAGS="-j 4"
-export DRAKETHREADS=4
+export DRAKETHREADS=${DRAKETHREADS:-4}
+export MAKEFLAGS="-j ${DRAKETHREADS}"
 export SHARED_QT=1
 export QTVER=${QTVER:-5.7.1}
