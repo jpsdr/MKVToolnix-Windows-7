@@ -6,6 +6,12 @@ set -x
 export SCRIPT_PATH=${0:a:h}
 source ${SCRIPT_PATH}/config.sh
 
+if type -p drake &> /dev/null; then
+  RAKE=drake
+else
+  RAKE=rake
+fi
+
 function fail {
   echo $@
   exit 1
@@ -233,8 +239,8 @@ function build_mkvtoolnix {
   NO_MAKE=1 NO_CONFIGURE=1 build_package mkvtoolnix-${MTX_VER}.tar.xz
   build_configured_mkvtoolnix
 
-  rake clean
-  rake -j ${DRAKETHREADS}
+  ${RAKE} clean
+  ${RAKE} -j ${DRAKETHREADS}
 }
 
 function build_dmg {
@@ -250,7 +256,7 @@ function build_dmg {
   if [[ -z $DMG_NO_CD ]] cd ${CMPL}/mkvtoolnix-${MTX_VER}
 
   rm -rf $dmgbase
-  rake install prefix=${dmgcnt}
+  ${RAKE} install prefix=${dmgcnt}
   test -f ${dmgmac}/mkvtoolnix-gui
 
   strip ${dmgcnt}/MacOS/mkv{merge,info,info-gui,extract,propedit,toolnix-gui}
