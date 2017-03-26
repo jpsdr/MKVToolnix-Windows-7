@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-03-21 10:56+0100\n"
-"PO-Revision-Date: 2017-01-02 20:14+0100\n"
+"PO-Revision-Date: 2017-03-25 17:10+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
 "Language: uk\n"
@@ -48,7 +48,7 @@ msgid ""
 "  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
 "                           or not. The value ':1' can be omitted.\n"
 msgstr ""
-"  --aac-is-sbr <TID[:0|1]> Трек з ID є HE-AAC/AAC+/SBR-AAC\n"
+"  --aac-is-sbr <TID[:0|1]> Доріжка з ID є HE-AAC/AAC+/SBR-AAC\n"
 "                           чи ні. Значення ': 1' може бути опущене.\n"
 
 #: src/merge/mkvmerge.cpp:156
@@ -1026,9 +1026,9 @@ msgid " at %1%"
 msgstr " в %1%"
 
 #: src/info/mkvinfo.cpp:216
-#, fuzzy, boost-format
+#, boost-format
 msgid " at 0x%|1$x|"
-msgstr " (хеш: 0x%|1$08x|)"
+msgstr " позиція 0x%|1$x|"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:790
 #, no-c-format
@@ -1358,9 +1358,8 @@ msgid "&Audio tracks:"
 msgstr "&Аудіодоріжки:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1344
-#, fuzzy
 msgid "&Automatically set the destination file name"
-msgstr "&Автоматичне встановлення назви вихідного файлу"
+msgstr "&Автоматично встановлювати назву вихідного файлу"
 
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:171
 msgid "&Cancel"
@@ -1377,9 +1376,8 @@ msgid "&Chapter number of first created entry:"
 msgstr "&Номер розділу першого створеного запису:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1371
-#, fuzzy
 msgid "&Character set for text files:"
-msgstr "&Набір символів:"
+msgstr "&Набір символів для текстових файлів:"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 msgid "&Character set:"
@@ -1447,12 +1445,12 @@ msgid "&Description:"
 msgstr "&Опис:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1354
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Disable all items"
 msgstr "&Заборонити усі доріжки"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Disable selected attachment"
 msgid_plural "&Disable selected attachments"
 msgstr[0] "&Вимкнути відмічений вкладений файл"
@@ -1473,12 +1471,12 @@ msgid "&Duration of each entry in seconds:"
 msgstr "&Тривалість кожного запису в секундах:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1353
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Enable all items"
 msgstr "&Дозволити усі доріжки"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Enable selected attachment"
 msgid_plural "&Enable selected attachments"
 msgstr[0] "&Ввімкнути відмічений вкладений файл"
@@ -1613,16 +1611,14 @@ msgid "&Number of entries to renumber:"
 msgstr "&Кількість записів для зміни нумерації:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1353
-#, fuzzy
 msgid "&Only enable copying of tracks with specific languages by default"
-msgstr "&Увімкнути обробку доріжок з конкретними мовами за замовчуванням"
+msgstr "&Увімкнути копіювання лише доріжок з конкретними мовами за замовчуванням"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1305
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1307
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1309
-#, fuzzy
 msgid "&Only include often used entries in selections"
-msgstr "Часто вживаний вибір"
+msgstr "&Відображати лише часто вживані елементи при виборі"
 
 #: src/info/ui/mainwindow.h:107
 msgid "&Open"
@@ -2100,9 +2096,9 @@ msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Обробка наступних файлів, а також: %2%\n"
 
 #: src/input/r_matroska.cpp:1799
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
-msgstr "'%1%': Ви повторно мультиплексуєте доріжку Opus, що була мультиплекована в експериментальному режимі. Результуючий файл буде записано у фіналізованому режимі, але одна деталь не може бути відновлена з доріжки, мультиплекованої в експериментальному режимі: кінцева обрізка. Це означає, що декодер може давати на виході на кілька семплів більше, ніж оригінально задано. Вам необхідно робити повторне мультиплексування на основі оригінального файла Opus, якщо можливо.\n"
+msgstr "'%1%': Ви копіюєте доріжку Opus, що була мультиплекована в експериментальному режимі. Результуючий файл буде записано у фіналізованому режимі, але одна деталь не може бути відновлена з доріжки, мультиплекованої в експериментальному режимі: кінцева обрізка. Це означає, що декодер може давати на виході на кілька семплів більше, ніж оригінально задано. Вам необхідно робити повторне мультиплексування на основі оригінального файла Opus, якщо можливо.\n"
 
 #: src/merge/mkvmerge.cpp:2483
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
@@ -2861,9 +2857,9 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1362
 #: src/mkvtoolnix-gui/merge/input.cpp:1366
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Afterwards &remove all source files."
-msgstr "видалити вхідні файли"
+msgstr "Після завершення &видалити вхідні файли"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1361
 #: src/mkvtoolnix-gui/merge/input.cpp:1365
@@ -3385,15 +3381,15 @@ msgstr "Blu-Ray список відтворення"
 
 #: src/info/mkvinfo.cpp:578
 #: src/info/mkvinfo.cpp:579
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate x: %1%"
-msgstr "ref стан кодека Cue: %1%"
+msgstr "Координата 'x' синього кольору: %1%"
 
 #: src/info/mkvinfo.cpp:583
 #: src/info/mkvinfo.cpp:584
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate y: %1%"
-msgstr "ref стан кодека Cue: %1%"
+msgstr "Координата 'y' синього кольору: %1%"
 
 #: src/input/r_vobsub.cpp:552
 #, boost-format
@@ -3673,9 +3669,8 @@ msgid "Chapters"
 msgstr "Розділи"
 
 #: src/merge/output_control.cpp:1289
-#, fuzzy
 msgid "Chapters are not allowed in WebM compliant files. No chapters will be written to the destination file.\n"
-msgstr "Розділи не допускаються в сумісних WebM файлах. Жодного розділу не буде записано до будь-якого вихідного файлу.\n"
+msgstr "Розділи не допускаються в сумісних WebM файлах. Жодного розділу не буде записано до вихідного файлу.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1746
 msgid "Chapters in fixed intervals"
@@ -3690,9 +3685,9 @@ msgstr[1] "Розділи: %1% записи"
 msgstr[2] "Розділи: %1% записів"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:53
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Character set"
-msgstr "Набір символів:"
+msgstr "Набір символів"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1702
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1738
@@ -3876,9 +3871,9 @@ msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "Зібраний з libebml %1 + libmatroska %2."
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:236
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Completed OK"
-msgstr "Завершено без помилок і попереджень"
+msgstr "Завершено успішно"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:237
 #, no-c-format
@@ -4049,32 +4044,28 @@ msgid "Create a WebM compliant file."
 msgstr "Створити сумісний WebM файл."
 
 #: src/mkvtoolnix-gui/forms/merge/tool.h:218
-#, fuzzy
 msgid "Create a new one or open an existing one via the \"multiplexer\" menu, the buttons below or drag & drop one here."
-msgstr "Створіть новий файл або відкрийте існуючий через меню \"Мультиплексування\", кнопку нижче або перетягніть файл сюди."
+msgstr "Створіть новий файл або відкрийте існуючий через меню \"Мультиплексування\", кнопки, розташовані нижче, або перетягніть файл сюди."
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:156
-#, fuzzy
 msgid "Create new &multiplex settings and add to those"
 msgstr "Створити нові налаштування &мультиплексування і додати до існуючих"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:157
-#, fuzzy
 msgid "Create new multiplex settings for &each file"
 msgstr "Створити нові налаштування мультиплексування для &кожного файла"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1316
-#, fuzzy
 msgid "Create new settings"
-msgstr "створювати нові параметри"
+msgstr "Створювати нові налаштування"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:522
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Create one new multiplex settings tab and add all files there"
 msgstr "Створити одну нову вкладку налаштувань мультиплексування і додати усі файли туди"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:523
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Create one new multiplex settings tab for each file"
 msgstr "Створити одну нову вкладку налаштувань мультиплексування для кожного файла"
 
@@ -4329,9 +4320,8 @@ msgid "DV video format"
 msgstr "Формат відео DV"
 
 #: src/output/p_dvbsub.h:30
-#, fuzzy
 msgid "DVB subtitles"
-msgstr "HD-DVD субтитри"
+msgstr "DVB субтитри"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:54
 #, no-c-format
@@ -5522,13 +5512,13 @@ msgstr[2] "Глобальні теги: %1% записів"
 #: src/info/mkvinfo.cpp:569
 #, boost-format
 msgid "Green colour coordinate x: %1%"
-msgstr ""
+msgstr "Координата 'x' зеленого кольору: %1%"
 
 #: src/info/mkvinfo.cpp:573
 #: src/info/mkvinfo.cpp:574
 #, boost-format
 msgid "Green colour coordinate y: %1%"
-msgstr ""
+msgstr "Координата 'y' зеленого кольору: %1%"
 
 #: src/common/file_types.cpp:84
 msgid "HD-DVD subtitles"
@@ -6369,7 +6359,7 @@ msgstr "Типово встановлюється у 4 байти, але є ф�
 
 #: src/merge/mkvmerge.cpp:888
 msgid "It does not consist of a track ID and a value separated by a colon."
-msgstr ""
+msgstr "Не складається з ID доріжки і значення, виділеного двокрапкою."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:183
 #: src/mkvtoolnix-gui/merge/output.cpp:189
@@ -6389,7 +6379,7 @@ msgstr ""
 #: src/common/command_line.cpp:95
 #: src/common/command_line.cpp:99
 msgid "JSON option files must contain a JSON array consisting solely of JSON strings"
-msgstr ""
+msgstr "Файл налаштувань JSON має містити масив JSON, що складається лише з рядків JSON"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:557
 msgid "Job &output"
@@ -6600,9 +6590,9 @@ msgid "MKVToolNix GUI preferences"
 msgstr "Уподобання MKVToolNix GUI"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:201
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "MKVToolNix GUI's installation directory"
-msgstr "MKVToolNix GUI файл конфігурації"
+msgstr "Директорія, куди інстальовано MKVToolNix GUI"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:123
 #: src/mkvtoolnix-gui/merge/tab.cpp:197
@@ -6919,7 +6909,7 @@ msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "мультиплексування у файл \"%1\" в каталог \"%2\""
 
 #: src/merge/mkvmerge.cpp:2992
-#, fuzzy, boost-format
+#, boost-format
 msgid "Multiplexing took %1%.\n"
 msgstr "Мультиплексування тривало %1%.\n"
 
@@ -7082,9 +7072,9 @@ msgid "No chapters in source files or chapter files found to split by.\n"
 msgstr "Жодних розділів у вхідних файлах або файлів розділів не знайдено щоб мати можливість виконати розбиття.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1382
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "No cues"
-msgstr "без cues"
+msgstr "Без списків cues"
 
 #: src/extract/cues.cpp:116
 msgid "No cues were found.\n"
@@ -7096,9 +7086,9 @@ msgid "No destination file name specified, will use attachment name.\n"
 msgstr "Не вказано назву результуючого файлу, тому буде використовуватися назва вкладення.\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:142
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "No errors yet"
-msgstr "без помилок"
+msgstr "Без помилок"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1381
 #, no-c-format
@@ -7151,7 +7141,6 @@ msgid "No metadata block found. This file is broken.\n"
 msgstr "Не знайдено блоку метаданих. Цей файл пошкоджений.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tool.h:217
-#, fuzzy
 msgid "No multiplex job has been opened yet."
 msgstr "Не було відкрито жодного завдання мультиплексування."
 
@@ -7415,9 +7404,9 @@ msgid "Only if the source doesn't contain a language"
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:505
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Only needed for AAC source files as SBR AAC cannot be detected automatically for these files."
-msgstr "Це необхідно тільки для вхідних файлів AAC, тому що SBR в AAC не може бути виявлений автоматично для цих файлів."
+msgstr "Це необхідно тільки для вхідних файлів AAC, тому що SBR AAC не може бути виявлений автоматично для цих файлів."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:514
 msgid "Only needed in certain situations:"
@@ -7429,9 +7418,8 @@ msgid "Only one chapter file allowed in '%1% %2%'.\n"
 msgstr "Дозволено лише один файл розділу в '%1% %2%'.\n"
 
 #: src/merge/mkvmerge.cpp:2164
-#, fuzzy
 msgid "Only one destination file allowed.\n"
-msgstr "Дозволено лише один вхідний файл.\n"
+msgstr "Дозволено лише один вихідний файл.\n"
 
 #: src/common/xml/xml.h:92
 msgid "Only one instance of <%1%> is allowed beneath <%2%> at position %3%."
@@ -7447,7 +7435,6 @@ msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "Лише один файл інформації сегмента дозволено в '%1% %2%'.\n"
 
 #: src/info/info_cli_parser.cpp:117
-#, fuzzy
 msgid "Only one source file is allowed.\n"
 msgstr "Дозволено лише один вхідний файл.\n"
 
@@ -7498,12 +7485,12 @@ msgid "Open all files as tabs in the header editor"
 msgstr "Відкривати всі файли як вкладки у Редакторі заголовків"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1331
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Open corresponding file in &MediaInfo"
 msgid_plural "Open corresponding files in &MediaInfo"
-msgstr[0] "Відкрити файл в &MediaInfo"
-msgstr[1] "Відкрити файли в &MediaInfo"
-msgstr[2] "Відкрити файлів в &MediaInfo"
+msgstr[0] "Відкрити відповідний файл в &MediaInfo"
+msgstr[1] "Відкрити відповідні файли в &MediaInfo"
+msgstr[2] "Відкрити відповідних файлів в &MediaInfo"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1311
 #, no-c-format
@@ -7529,9 +7516,8 @@ msgid "Open settings file"
 msgstr "Відкрити файл налаштувань"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
-#, fuzzy
 msgid "Open the multiplexed file with a player:"
-msgstr "Відкрити створений файл у плеєрі:"
+msgstr "Відкрити змультиплексований файл у плеєрі:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:188
 #, no-c-format
@@ -7753,9 +7739,9 @@ msgstr "Будь ласка, введіть опис для нового зав�
 #, no-c-format
 msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Будь ласка, повторно встановіть MKVToolNix або виправте проблему самостійно."
+msgstr[1] "Будь ласка, повторно встановіть MKVToolNix або виправте проблеми самостійно."
+msgstr[2] "Будь ласка, повторно встановіть MKVToolNix або виправте проблем самостійно."
 
 #: src/merge/mkvmerge.cpp:348
 msgid ""
@@ -7851,9 +7837,9 @@ msgstr ""
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Проблема з встановленням MKVToolNix"
+msgstr[1] "Проблеми з встановленням MKVToolNix"
+msgstr[2] "Проблем з встановленням MKVToolNix"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1312
 msgid "Process &priority:"
@@ -8072,9 +8058,9 @@ msgid "Re&place attachment with a new file"
 msgstr "Зам&інити вкладення новим файлом"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:168
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Read full NEWS.md file online"
-msgstr "Читати онлайн повний текст змін"
+msgstr "Читати онлайн повний текст змін NEWS.md"
 
 #: src/input/r_mpeg_ps.cpp:363
 msgid "Reading encrypted VOBs is not supported.\n"
@@ -8093,9 +8079,8 @@ msgid "Reading the segment UID failed"
 msgstr "Збій зчитування UID сегмента"
 
 #: src/common/cli_parser.cpp:183
-#, fuzzy
 msgid "Reads additional command line options from the specified JSON file (see man page)."
-msgstr "Читати додаткові опції командного рядка із зазначеного файлу (див. сторінку довідки)."
+msgstr "Читати додаткові опції командного рядка із зазначеного файлу JSON (див. сторінку довідки)."
 
 #: src/info/qt_ui.cpp:181
 #, no-c-format
@@ -8123,13 +8108,13 @@ msgstr "RealMedia аудіо/відео файли"
 #: src/info/mkvinfo.cpp:559
 #, boost-format
 msgid "Red colour coordinate x: %1%"
-msgstr ""
+msgstr "Координата 'x' червоного кольору: %1%"
 
 #: src/info/mkvinfo.cpp:563
 #: src/info/mkvinfo.cpp:564
 #, boost-format
 msgid "Red colour coordinate y: %1%"
-msgstr ""
+msgstr "Координата 'y' червоного кольору: %1%"
 
 #: src/common/cli_parser.cpp:182
 msgid "Redirects all messages into this file."
@@ -8209,9 +8194,8 @@ msgid "Remove element"
 msgstr "Видалити елемент"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1317
-#, fuzzy
 msgid "Remove source files"
-msgstr "&Додати вхідні файли"
+msgstr "Видалити вхідні файли"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:339
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:357
@@ -8626,12 +8610,12 @@ msgid "Select character set"
 msgstr "Оберіть набір символів"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:727
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select destination directory"
-msgstr "Оберіть назву вихідного файла"
+msgstr "Оберіть директорію вихідного файла"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:278
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select destination file name"
 msgstr "Оберіть назву вихідного файла"
 
@@ -8952,7 +8936,7 @@ msgstr "Шари (Сектори)"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:83
 #, no-c-format
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
-msgstr ""
+msgstr "Деякі доріжки h.264/AVC містять шари I, але не містять справжніх ключових кадрів."
 
 #: src/merge/output_control.cpp:1324
 #, boost-format
@@ -8980,9 +8964,9 @@ msgid "Source file names"
 msgstr "Назва вхідного файлу"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:56
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Source file's directory"
-msgstr "Тека вихідного файла"
+msgstr "Тека вхідних файлів"
 
 #: src/common/property_element.cpp:130
 msgid ""
@@ -9028,9 +9012,8 @@ msgid "Sta&rt all pending jobs"
 msgstr "Поч&ати всі заплановані завдання"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1767
-#, fuzzy
 msgid "Sta&rt multiplexing"
-msgstr "&Почати мультиплексування"
+msgstr "Поч&ати мультиплексування"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:31
 #, no-c-format
@@ -9039,7 +9022,6 @@ msgstr "Початок"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:517
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:597
-#, fuzzy
 msgid "Start &multiplexing"
 msgstr "Почати &мультиплексування"
 
@@ -9295,9 +9277,9 @@ msgid "The GUI will enter the dropped file's file name into that control replaci
 msgstr "GUI буде використовувати ім'я файла, що перетягнутий на вікно GUI, для того елемента, замінюючи будь-яку назву файла, що могла бути задана раніше."
 
 #: src/extract/extract_cli_parser.cpp:261
-#, fuzzy, boost-format
+#, boost-format
 msgid "The ID '%1%' has already been used for another destination file.\n"
-msgstr "ID '%1%' вже був використаний для іншого файла на виході.\n"
+msgstr "ID '%1%' вже був використаний для іншого вихідного файла.\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:167
 #, no-c-format
@@ -9363,7 +9345,7 @@ msgstr "UID не може бути пустим."
 #: src/input/r_matroska.cpp:731
 #, boost-format
 msgid "The VobSub subtitle track %1% does not contain its index in the CodecPrivate element."
-msgstr ""
+msgstr "Доріжка субтитрів VobSub %1% не містить її індексу у елементі CodecPrivate."
 
 #: src/output/p_vorbis.cpp:141
 msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding."
@@ -9560,7 +9542,6 @@ msgid "The current mode can be changed with --multiplex, --edit-chapters or --ed
 msgstr "Поточний режим може бути змінений з --merge, --правка розділів або --правка-заголовків."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:276
-#, fuzzy
 msgid "The current multiplex settings will be closed."
 msgstr "Поточні налаштування мультиплексування будуть закриті."
 
@@ -9570,9 +9551,9 @@ msgid "The current packet's timecode is smaller than that of the previous packet
 msgstr "Тайм-код поточного пакету є меншим ніж для попереднього пакета. Це зазвичай означає, що вхідний файл являє собою файл Matroska, який не було створено на 100%% корректно. Тайм-коди всіх пакетів будуть скореговані на %1% мс, щоб не втратити дані. Даний крок може призвести до розсинхронізації аудіо і відео, але це може бути виправлено за допомогою опції mkvmerge \"--sync\". Якщо ви вже використовуєте опцію \"--sync\" і все одно отримуєте це попередження, то не хвилюйтеся - це нормально. Якщо ж дана помилка виникає кілька разів, і ви отримаєте це повідомлення більше одного разу для конкретної доріжки, тоді або  вхідний файл некорректно створений, або це помилка mkvmerge. У цьому випадку вам слід зв'язатися з автором Moritz Bunkus <moritz@bunkus.org>.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:283
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The default is to always add all the files to the current multiplex settings."
-msgstr "Типово, усі файли завжди додаються до поточних налаштувань мультиплексування."
+msgstr "Типово усі файли завжди додаються до поточних налаштувань мультиплексування."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:367
 #, no-c-format
@@ -10000,9 +9981,9 @@ msgid "The fourth mode extracts the chapters and converts them to XML. The outpu
 msgstr "Четвертий режим дозволяє витягувати розділи і конвертувати їх у XML. Вихідна інформація записується до стандартного потоку виводу. Дані на виході можуть слугувати як вхідний потік для mkvmerge."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:321
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file."
-msgstr "Згенерована назва файла містить ту саму основу що й назва вхідного файла, але з вказанням типу на основі типу доріжки, присутньої у файлі."
+msgstr "Згенерована назва вихідного файла містить ту саму основу, що й назва вхідного файла, але з вказанням типу на основі типу доріжки, присутньої у файлі."
 
 #: src/merge/mkvmerge.cpp:1823
 msgid "The given timecode scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
@@ -10137,9 +10118,9 @@ msgstr ""
 "не використовуватиметься."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:584
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
-msgstr "Шлях до mkvmerge.exe не знайдений"
+msgstr "Виконуваний файл mkvmerge було знайдено, проте він не може бути запущений на виконання."
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:580
@@ -10727,7 +10708,7 @@ msgstr "Даний файл Ogg/OGM містить розділи, але вон
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:255
 #, no-c-format, no-boost-format
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
-msgstr ""
+msgstr "Це значення є 0.3% від розміру вхідного файла або 10 МБ, відповідного до того, яке значення більше."
 
 #: src/output/p_ac3.cpp:80
 #: src/output/p_mp3.cpp:71
@@ -11184,9 +11165,9 @@ msgid "Track type: %1%"
 msgstr "Тип доріжки: %1%"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:338
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tracks with a language in this list will be set not to be copied by default."
-msgstr "Треки з мовою в цьому списку будуть заборонені для обробки за замовчуванням."
+msgstr "Доріжки з мовою з цього списку будуть заборонені для обробки за замовчуванням."
 
 #: src/extract/xtr_base.cpp:124
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
@@ -11777,13 +11758,13 @@ msgstr "Щоразу, коли користувач додає список ві
 #: src/info/mkvinfo.cpp:589
 #, boost-format
 msgid "White colour coordinate x: %1%"
-msgstr ""
+msgstr "Координата 'x' білого кольору: %1%"
 
 #: src/info/mkvinfo.cpp:593
 #: src/info/mkvinfo.cpp:594
 #, boost-format
 msgid "White colour coordinate y: %1%"
-msgstr ""
+msgstr "Координата 'y' білого кольору: %1%"
 
 #: src/common/property_element.cpp:138
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:460
@@ -11858,7 +11839,7 @@ msgstr "Неправильна версія Theora: %1%.%2%.%3% != 3.2.x"
 
 #: src/merge/mkvmerge.cpp:2241
 msgid "Wrong argument to '--split-max-files'.\n"
-msgstr "Неправильний аргумент '--split-max-files'.\n"
+msgstr "Неправильний аргумент для '--split-max-files'.\n"
 
 #: src/common/kate.cpp:44
 #: src/common/theora.cpp:34
@@ -11961,7 +11942,7 @@ msgstr "Ви можете вказати мінімальну кількість
 #: src/mkvtoolnix-gui/merge/input.cpp:461
 #, no-c-format
 msgid "You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."
-msgstr ""
+msgstr "Ви можете вказати одну з одиниць 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:365
 #, no-c-format
