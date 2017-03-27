@@ -35,11 +35,11 @@ EOF
           if ${CC-cc} -c conftest.c -o conftest.o >>config.log 2>&1 \
               && test -f conftest.o
           then
-            if test "`strings conftest.o | grep BIGenDianSyS`"
+            if test "`"$STRINGS" conftest.o | grep BIGenDianSyS`"
             then
               ac_cv_c_bigendian="yes"
             fi
-            if test "`strings conftest.o | grep LiTTleEnDian`"
+            if test "`"$STRINGS" conftest.o | grep LiTTleEnDian`"
             then
               ac_cv_c_bigendian="no"
             fi

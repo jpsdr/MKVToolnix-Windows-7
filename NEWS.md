@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* biuld system: configure now looks for the `strings` binary by using the
+  `AC_CHECK_TOOL()` autoconf macro. That way it will be found in multiarch
+  setups, too. Fixes #1923.
+
+
 # Version 10.0.0 "To Drown In You" 2017-03-25
 
 ## New features and enhancements
