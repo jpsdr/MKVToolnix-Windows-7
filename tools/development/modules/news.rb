@@ -1,9 +1,11 @@
+# coding: utf-8
 def parse_news file_name
   news         = []
   current_line = []
   version      = 'HEAD'
   date         = 'unknown'
   type         = 'Other changes'
+  ignore       = true
 
   flush        = lambda do
     if !current_line.empty?
@@ -32,6 +34,13 @@ def parse_news file_name
       version = match[:version]
       date    = sprintf("%04d-%02d-%02d", match[:year].to_i, match[:month].to_i, match[:day].to_i)
       type    = 'Other changes'
+      ignore  = false
+
+    elsif match = %r{ ^\# \s+ Version \s+ \? }x.match(line)
+      ignore = true
+
+    elsif ignore
+      next
 
     elsif %r{ ^\#\# \s+ (.+) }x.match(line)
       type = $1
