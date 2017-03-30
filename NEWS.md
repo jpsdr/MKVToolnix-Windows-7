@@ -2,7 +2,7 @@
 
 ## Bug fixes
 
-* biuld system: configure now looks for the `strings` binary by using the
+* build system: configure now looks for the `strings` binary by using the
   `AC_CHECK_TOOL()` autoconf macro. That way it will be found in multiarch
   setups, too. Fixes #1923.
 
