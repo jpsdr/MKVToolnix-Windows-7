@@ -886,6 +886,15 @@ vui_parameters_copy(bit_reader_c &r,
       w.copy_unsigned_golomb(r); // log2_max_mv_length_vertical
     }
   }
+
+  if (w.copy_bits(1, r) == 1) { // bitstream_restriction_flag
+    w.copy_bits(3, r);          // tiles_fixed_structure_flag, motion_vectors_over_pic_boundaries_flag, restricted_ref_pic_lists_flag
+    w.copy_unsigned_golomb(r);  // min_spatial_segmentation_idc
+    w.copy_unsigned_golomb(r);  // max_bytes_per_pic_denom
+    w.copy_unsigned_golomb(r);  // max_bits_per_min_cu_denom
+    w.copy_unsigned_golomb(r);  // log2_max_mv_length_horizontal
+    w.copy_unsigned_golomb(r);  // log2_max_mv_length_vertical
+  }
 }
 
 void
