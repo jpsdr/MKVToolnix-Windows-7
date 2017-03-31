@@ -214,10 +214,10 @@ avi_reader_c::create_video_packetizer() {
     m_divx_type = DIVX_TYPE_MPEG4;
 
   if (mtx::includes(m_ti.m_default_durations, 0))
-    m_fps = 1000000000.0 / m_ti.m_default_durations[0];
+    m_fps = 1000000000.0 / m_ti.m_default_durations[0].first;
 
   else if (mtx::includes(m_ti.m_default_durations, -1))
-    m_fps = 1000000000.0 / m_ti.m_default_durations[-1];
+    m_fps = 1000000000.0 / m_ti.m_default_durations[-1].first;
 
   m_ti.m_id = 0;                 // ID for the video track.
   if (DIVX_TYPE_MPEG4 == m_divx_type)

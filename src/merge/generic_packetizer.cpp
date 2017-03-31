@@ -70,6 +70,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_htrack_min_cache{}
   , m_htrack_max_cache{-1}
   , m_htrack_default_duration{-1}
+  , m_htrack_default_duration_indicates_fields{}
   , m_default_duration_forced{true}
   , m_default_track_warning_printed{}
   , m_huid{}
@@ -290,11 +291,15 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     set_video_stereo_mode(m_ti.m_stereo_mode_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified a default duration for this track.
-  if (mtx::includes(m_ti.m_default_durations, m_ti.m_id))
-    m_htrack_default_duration = m_ti.m_default_durations[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_default_durations, -1))
-    m_htrack_default_duration = m_ti.m_default_durations[-1];
-  else
+  if (mtx::includes(m_ti.m_default_durations, m_ti.m_id)) {
+    m_htrack_default_duration                  = m_ti.m_default_durations[m_ti.m_id].first;
+    m_htrack_default_duration_indicates_fields = m_ti.m_default_durations[m_ti.m_id].second;
+
+  } else if (mtx::includes(m_ti.m_default_durations, -1)) {
+    m_htrack_default_duration                  = m_ti.m_default_durations[-1].first;
+    m_htrack_default_duration_indicates_fields = m_ti.m_default_durations[-1].second;
+
+  } else
     m_default_duration_forced = false;
 
   // Let's see if the user has set a max_block_add_id
@@ -324,8 +329,10 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   // If no external timecode file but a default duration has been
   // given then create a simple timecode factory that generates the
   // timecodes for the given FPS.
-  if (!m_timestamp_factory && (-1 != m_htrack_default_duration))
-    m_timestamp_factory = timestamp_factory_c::create_fps_factory(m_htrack_default_duration, m_ti.m_tcsync);
+  if (!m_timestamp_factory && (-1 != m_htrack_default_duration)) {
+    auto divisor        = m_htrack_default_duration_indicates_fields ? 2 : 1;
+    m_timestamp_factory = timestamp_factory_c::create_fps_factory(m_htrack_default_duration / divisor, m_ti.m_tcsync);
+  }
 }
 
 generic_packetizer_c::~generic_packetizer_c() {
@@ -444,8 +451,9 @@ generic_packetizer_c::set_track_max_cache(int max_cache) {
 }
 
 void
-generic_packetizer_c::set_track_default_duration(int64_t def_dur) {
-  if (m_default_duration_forced)
+generic_packetizer_c::set_track_default_duration(int64_t def_dur,
+                                                 bool force) {
+  if (!force && m_default_duration_forced)
     return;
 
   m_htrack_default_duration = (int64_t)(def_dur * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator);

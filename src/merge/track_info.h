@@ -341,7 +341,7 @@ public:
   std::map<int64_t, float> m_min_luminance_list; // As given on the command line
   option_with_source_c<float> m_min_luminance; // For this very track
 
-  std::map<int64_t, int64_t> m_default_durations; // As given on the command line
+  std::map<int64_t, std::pair<int64_t, bool>> m_default_durations; // As given on the command line
   std::map<int64_t, int> m_max_blockadd_ids; // As given on the command line
 
   std::map<int64_t, int> m_nalu_size_lengths;

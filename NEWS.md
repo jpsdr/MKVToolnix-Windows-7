@@ -8,6 +8,10 @@
 * mkvmerge: HEVC/h.265 parser: fixed copying the `bitstream_restriction_flag`
   and all dependent fields in the VUI parameters of the sequence parameter
   sets. Fixes #1924.
+* mkvmerge: AVC/h.264 packetizer: when reading a framed track (e.g. from
+  Matroska or MP4 files), specifying a default duration as fields (e.g. `50i`)
+  would result in double the actual duration for each frame and the track's
+  default duration header field. Fixes #1916.
 
 ## Build system changes
 

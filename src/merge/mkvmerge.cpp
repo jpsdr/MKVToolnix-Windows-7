@@ -1483,9 +1483,13 @@ parse_arg_default_duration(const std::string &s,
   if (!parse_number(parts[0], id))
     mxerror(boost::format(Y("'%1%' is not a valid track ID in '--default-duration %2%'.\n")) % parts[0] % s);
 
-  if (!parse_duration_number_with_unit(parts[1], ti.m_default_durations[id]))
+  int64_t default_duration{};
+  if (!parse_duration_number_with_unit(parts[1], default_duration))
     mxerror(boost::format(Y("'%1%' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n"))
             % parts[1] % (boost::format("--default-duration %1%") % s));
+
+  ti.m_default_durations[id].first  = default_duration;
+  ti.m_default_durations[id].second = boost::regex_match(parts[1], boost::regex{".*i$"});
 }
 
 /** \brief Parse the argument for \c --nalu-size-length
