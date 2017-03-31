@@ -9,6 +9,11 @@
   and all dependent fields in the VUI parameters of the sequence parameter
   sets. Fixes #1924.
 
+## Build system changes
+
+* bug fix: the environment variable USER_CXXFLAGS was accidentally removed
+  from the compiler flags in release 9.8.0. It's been re-added. Fixes #1925.
+
 
 # Version 10.0.0 "To Drown In You" 2017-03-25
 
