@@ -110,11 +110,12 @@ public:
   int numUnacknowledgedWarnings() const;
   int numUnacknowledgedErrors() const;
 
+  virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables) const;
+
 protected:
   virtual void saveJobInternal(Util::ConfigFile &settings) const = 0;
   virtual void loadJobBasis(Util::ConfigFile &settings);
   virtual void runProgramsAfterCompletion();
-  virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables);
 
 public slots:
   virtual void setStatus(Job::Status status);

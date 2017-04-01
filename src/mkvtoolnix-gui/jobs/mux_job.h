@@ -46,6 +46,8 @@ public:
 
   virtual Merge::MuxConfig const &config() const;
 
+  virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables) const override;
+
 public slots:
   virtual void readAvailable();
   virtual void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
@@ -56,7 +58,6 @@ protected:
   void processBytesRead();
   void processLine(QString const &rawLine);
   virtual void saveJobInternal(Util::ConfigFile &settings) const;
-  virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables) override;
 
 signals:
   void startedScanningPlaylists();

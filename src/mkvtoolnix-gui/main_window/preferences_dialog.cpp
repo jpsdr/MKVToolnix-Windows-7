@@ -18,21 +18,24 @@
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/side_by_side_multi_select.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui {
 
-PreferencesDialog::PreferencesDialog(QWidget *parent)
+PreferencesDialog::PreferencesDialog(QWidget *parent,
+                                     Page pageToShow)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::PreferencesDialog}
   , m_cfg(Util::Settings::get())
   , m_previousUiLocale{m_cfg.m_uiLocale}
   , m_previousProbeRangePercentage{m_cfg.m_probeRangePercentage}
+  , m_ignoreNextCurrentChange{}
 {
   ui->setupUi(this);
 
-  setupPageSelector();
+  setupPageSelector(pageToShow);
 
   ui->tbOftenUsedXYZ->setTabPosition(m_cfg.m_tabPosition);
 
@@ -125,6 +128,11 @@ PreferencesDialog::pageSelectionChanged(QModelIndex const &current) {
   if (!current.isValid())
     return;
 
+  if (m_ignoreNextCurrentChange) {
+    m_ignoreNextCurrentChange = false;
+    return;
+  }
+
   auto page = qobject_cast<QStandardItemModel *>(ui->pageSelector->model())
     ->itemFromIndex(current.sibling(current.row(), 0))
     ->data()
@@ -132,17 +140,30 @@ PreferencesDialog::pageSelectionChanged(QModelIndex const &current) {
   ui->pages->setCurrentIndex(page);
 }
 
+QModelIndex
+PreferencesDialog::modelIndexForPage(int page) {
+  auto &model  = *qobject_cast<QStandardItemModel *>(ui->pageSelector->model());
+  auto pageIdx = Util::findIndex(model, [page, &model](QModelIndex const &idxToTest) {
+    return model.itemFromIndex(idxToTest)->data().value<int>() == page;
+  });
+
+  return pageIdx;
+}
+
 void
-PreferencesDialog::setupPageSelector() {
+PreferencesDialog::setupPageSelector(Page pageToShow) {
   m_cfg.handleSplitterSizes(ui->pagesSplitter);
 
-  auto model = new QStandardItemModel{};
+  auto pageIndex = 0;
+  auto model     = new QStandardItemModel{};
   ui->pageSelector->setModel(model);
 
-  auto addItem = [model](int page, QStandardItem *parent, QString const &text, QString const &icon = QString{}) -> QStandardItem * {
+  auto addItem = [this, model, &pageIndex](Page pageType, QStandardItem *parent, QString const &text, QString const &icon = QString{}) -> QStandardItem * {
     auto item = new QStandardItem{text};
 
-    item->setData(page);
+    item->setData(pageIndex);
+    m_pageIndexes[pageType] = pageIndex++;
+
     if (!icon.isEmpty())
       item->setIcon(QIcon{Q(":/icons/16x16/%1.png").arg(icon)});
 
@@ -154,26 +175,24 @@ PreferencesDialog::setupPageSelector() {
     return item;
   };
 
-  auto page      = 0;
-  auto pGui      = addItem(page++, nullptr, QY("GUI"),               "mkvtoolnix-gui");
-                   addItem(page++, pGui,    QY("Often used selections"));
-  auto pMerge    = addItem(page++, nullptr, QY("Multiplexer"),       "merge");
-                   addItem(page++, pMerge,  QY("Default values"));
-                   addItem(page++, pMerge,  QY("Output"));
-                   addItem(page++, pMerge,  QY("Enabling tracks"));
-                   addItem(page++, pMerge,  QY("Playlists"));
-                   addItem(page++, nullptr, QY("Header editor"),     "document-edit");
-                   addItem(page++, nullptr, QY("Chapter editor"),    "story-editor");
-  auto pJobs     = addItem(page++, nullptr, QY("Jobs & job queue"),  "view-task");
-                   addItem(page++, pJobs,   QY("Executing programs"));
+  auto pGui      = addItem(Page::Gui,                 nullptr, QY("GUI"),                   "mkvtoolnix-gui");
+                   addItem(Page::OftenUsedSelections, pGui,    QY("Often used selections"));
+  auto pMerge    = addItem(Page::Merge,               nullptr, QY("Multiplexer"),           "merge");
+                   addItem(Page::DefaultValues,       pMerge,  QY("Default values"));
+                   addItem(Page::Output,              pMerge,  QY("Output"));
+                   addItem(Page::EnablingTracks,      pMerge,  QY("Enabling tracks"));
+                   addItem(Page::Playlists,           pMerge,  QY("Playlists"));
+                   addItem(Page::HeaderEditor,        nullptr, QY("Header editor"),         "document-edit");
+                   addItem(Page::ChapterEditor,       nullptr, QY("Chapter editor"),        "story-editor");
+  auto pJobs     = addItem(Page::Jobs,                nullptr, QY("Jobs & job queue"),      "view-task");
+                   addItem(Page::RunPrograms,         pJobs,   QY("Executing programs"));
 
   for (auto row = 0, numRows = model->rowCount(); row < numRows; ++row)
     ui->pageSelector->setExpanded(model->index(row, 0), true);
 
   ui->pageSelector->setMinimumSize(ui->pageSelector->minimumSizeHint());
 
-  auto selection = QItemSelection{model->index(0, 0), model->index(0, 0)};
-  ui->pageSelector->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+  showPage(pageToShow);
 
   connect(ui->pageSelector->selectionModel(), &QItemSelectionModel::currentChanged, this, &PreferencesDialog::pageSelectionChanged);
 }
@@ -790,6 +809,21 @@ void
 PreferencesDialog::adjustRemoveOldJobsControls() {
   ui->sbGuiRemoveOldJobsDays->setEnabled(ui->cbGuiRemoveOldJobs->isChecked());
   ui->sbGuiRemoveOldJobsDays->setSuffix(QNY(" day", " days", ui->sbGuiRemoveOldJobsDays->value()));
+}
+
+void
+PreferencesDialog::showPage(Page page) {
+  auto pageIndex      = m_pageIndexes[page];
+  auto pageModelIndex = modelIndexForPage(pageIndex);
+
+  if (!pageModelIndex.isValid())
+    return;
+
+  m_ignoreNextCurrentChange = true;
+  auto selection            = QItemSelection{pageModelIndex, pageModelIndex};
+
+  ui->pageSelector->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+  ui->pages->setCurrentIndex(pageIndex);
 }
 
 }}

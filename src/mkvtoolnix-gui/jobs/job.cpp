@@ -10,6 +10,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/file.h"
@@ -416,10 +417,13 @@ Job::runProgramsAfterCompletion() {
   ProgramRunner::run(event, [this](ProgramRunner::VariableMap &variables) {
     runProgramSetupVariables(variables);
   });
+
+  MainWindow::programRunner()->executeActionsAfterJobFinishes(*this);
 }
 
 void
-Job::runProgramSetupVariables(ProgramRunner::VariableMap &variables) {
+Job::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
+  const{
   variables[Q("JOB_START_TIME")]  << m_dateStarted.toString(Qt::ISODate);
   variables[Q("JOB_END_TIME")]    << m_dateFinished.toString(Qt::ISODate);
   variables[Q("JOB_DESCRIPTION")] << m_description;

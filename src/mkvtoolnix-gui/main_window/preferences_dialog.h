@@ -19,15 +19,34 @@ class PreferencesDialog;
 class PreferencesDialog : public QDialog {
   Q_OBJECT;
 
+public:
+  enum class Page {
+    Gui,
+    OftenUsedSelections,
+    Merge,
+    DefaultValues,
+    Output,
+    EnablingTracks,
+    Playlists,
+    HeaderEditor,
+    ChapterEditor,
+    Jobs,
+    RunPrograms,
+
+    Default = Gui,
+  };
+
 protected:
   // UI stuff:
   std::unique_ptr<Ui::PreferencesDialog> ui;
   Util::Settings &m_cfg;
   QString const m_previousUiLocale;
   double m_previousProbeRangePercentage;
+  QMap<Page, int> m_pageIndexes;
+  bool m_ignoreNextCurrentChange;
 
 public:
-  explicit PreferencesDialog(QWidget *parent);
+  explicit PreferencesDialog(QWidget *parent, Page pageToShow);
   ~PreferencesDialog();
 
   void save();
@@ -50,7 +69,7 @@ public slots:
   void enableOftendUsedCharacterSetsOnly();
 
 protected:
-  void setupPageSelector();
+  void setupPageSelector(Page pageToShow);
   void setupToolTips();
   void setupConnections();
 
@@ -71,7 +90,11 @@ protected:
   void setupJobsRunPrograms();
   void setupFont();
 
+  void showPage(Page page);
+
   void setTabTitleForRunProgramWidget(int tabIdx, QString const &title);
+
+  QModelIndex modelIndexForPage(int pageIndex);
 };
 
 }}

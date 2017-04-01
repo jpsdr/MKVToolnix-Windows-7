@@ -65,6 +65,9 @@ public slots:
   void updateRemainingTime();
 
   void enableMoreActionsActions();
+  void setupWhenFinishedActions();
+
+  void toggleActionToExecute();
 
 protected:
   void setupUi();

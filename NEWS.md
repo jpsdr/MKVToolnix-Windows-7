@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: watch jobs: the user can now have the GUI execute an action
+  once as soon as the current job or the whole queue finishes. The actions are
+  the same ones that can be configured to be run automatically after job or
+  queue completion.
+
 ## Bug fixes
 
 * build system: configure now looks for the `strings` binary by using the

@@ -22,6 +22,9 @@
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
+#define MTX_RUN_PROGRAM_CONFIGURATION_ADDRESS   "mtxRunProgramConfigurationAddress"
+#define MTX_RUN_PROGRAM_CONFIGURATION_CONDITION "mtxRunProgramConfigurationCondition"
+
 using namespace mtx::gui;
 
 namespace mtx { namespace gui { namespace WatchJobs {
@@ -37,7 +40,7 @@ class TabPrivate {
   Jobs::Job::Status m_currentJobStatus;
   QDateTime m_currentJobStartTime;
   QString m_currentJobDescription;
-  QMenu *m_moreActions;
+  QMenu *m_whenFinished, *m_moreActions;
   bool m_forCurrentJob;
 
   // Only use this variable for determining whether or not to ignore
@@ -52,6 +55,7 @@ class TabPrivate {
     , m_currentJobProgress{}
     , m_queueProgress{}
     , m_currentJobStatus{Jobs::Job::PendingManual}
+    , m_whenFinished{new QMenu{tab}}
     , m_moreActions{new QMenu{tab}}
     , m_forCurrentJob{forCurrentJob}
     , m_currentlyConnectedJob{}
@@ -101,6 +105,7 @@ Tab::setupUi() {
   connect(d->ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,                                  this, &Tab::acknowledgeWarningsAndErrors);
   connect(model,                                     &Jobs::Model::progressChanged,                          this, &Tab::onQueueProgressChanged);
   connect(model,                                     &Jobs::Model::queueStatusChanged,                       this, &Tab::updateRemainingTime);
+  connect(d->m_whenFinished,                         &QMenu::aboutToShow,                                    this, &Tab::setupWhenFinishedActions);
   connect(d->m_moreActions,                          &QMenu::aboutToShow,                                    this, &Tab::enableMoreActionsActions);
   connect(d->m_saveOutputAction,                     &QAction::triggered,                                    this, &Tab::onSaveOutput);
   connect(d->m_clearOutputAction,                    &QAction::triggered,                                    this, &Tab::clearOutput);
@@ -111,6 +116,8 @@ Tab::setupUi() {
 void
 Tab::setupMoreActionsMenu() {
   Q_D(Tab);
+
+  d->ui->whenFinishedButton->setMenu(d->m_whenFinished);
 
   // Setup the "more actions" menu.
   d->m_moreActions->addAction(d->m_openFolderAction);
@@ -473,6 +480,60 @@ Tab::enableMoreActionsActions() {
 
   auto hasJob = std::numeric_limits<uint64_t>::max() != d->m_id;
   d->m_openFolderAction->setEnabled(hasJob);
+}
+
+void
+Tab::setupWhenFinishedActions() {
+  Q_D(Tab);
+
+  d->m_whenFinished->clear();
+
+  auto afterCurrentJobMenu                = new QMenu{QY("Execute action after next &job completion")};
+  auto afterJobQueueMenu                  = new QMenu{QY("Execute action when the &queue completes")};
+  auto editRunProgramConfigurationsAction = new QAction{QY("&Edit available actions to execute")};
+  auto menus                              = QVector<QMenu *>{} << afterCurrentJobMenu << afterJobQueueMenu;
+  auto programRunner                      = MainWindow::programRunner();
+
+  d->m_whenFinished->addMenu(afterCurrentJobMenu);
+  d->m_whenFinished->addMenu(afterJobQueueMenu);
+  d->m_whenFinished->addSeparator();
+  d->m_whenFinished->addAction(editRunProgramConfigurationsAction);
+
+  connect(editRunProgramConfigurationsAction, &QAction::triggered, MainWindow::get(), &MainWindow::editRunProgramConfigurations);
+
+  for (auto const &config : Util::Settings::get().m_runProgramConfigurations) {
+    if (!config->m_active)
+      continue;
+
+    for (auto const &menu : menus) {
+      auto action    = menu->addAction(config->name());
+      auto forQueue  = menu == afterJobQueueMenu;
+      auto condition = forQueue ? Jobs::ProgramRunner::ExecuteActionCondition::AfterQueueFinishes : Jobs::ProgramRunner::ExecuteActionCondition::AfterJobFinishes;
+
+      action->setProperty(MTX_RUN_PROGRAM_CONFIGURATION_ADDRESS,   reinterpret_cast<quint64>(config.get()));
+      action->setProperty(MTX_RUN_PROGRAM_CONFIGURATION_CONDITION, static_cast<int>(condition));
+
+      action->setCheckable(true);
+      action->setChecked(programRunner->isActionToExecuteEnabled(config.get(), condition));
+
+      connect(action, &QAction::triggered, this, &Tab::toggleActionToExecute);
+    }
+  }
+
+  afterCurrentJobMenu->setEnabled(!afterCurrentJobMenu->isEmpty());
+  afterJobQueueMenu->setEnabled(!afterJobQueueMenu->isEmpty());
+}
+
+void
+Tab::toggleActionToExecute() {
+  auto &action      = *qobject_cast<QAction *>(sender());
+  auto config       = reinterpret_cast<Util::Settings::RunProgramConfig *>(action.property(MTX_RUN_PROGRAM_CONFIGURATION_ADDRESS).value<quint64>());
+  auto conditionIdx = action.property(MTX_RUN_PROGRAM_CONFIGURATION_CONDITION).value<int>();
+  auto condition    = conditionIdx == static_cast<int>(Jobs::ProgramRunner::ExecuteActionCondition::AfterQueueFinishes) ? Jobs::ProgramRunner::ExecuteActionCondition::AfterQueueFinishes
+                    :                                                                                                     Jobs::ProgramRunner::ExecuteActionCondition::AfterJobFinishes;
+  auto enable       = action.isChecked();
+
+  MainWindow::programRunner()->enableActionToExecute(config, condition, enable);
 }
 
 }}}

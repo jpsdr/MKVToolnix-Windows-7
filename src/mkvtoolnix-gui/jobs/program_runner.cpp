@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QProcess>
 #include <QRegularExpression>
@@ -7,10 +8,67 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 
 namespace mtx { namespace gui { namespace Jobs {
+
+ProgramRunner::ProgramRunner()
+  : QObject{}
+{
+}
+
+ProgramRunner::~ProgramRunner() {
+}
+
+void
+ProgramRunner::enableActionToExecute(Util::Settings::RunProgramConfig *config,
+                                     ExecuteActionCondition condition,
+                                     bool enable) {
+  if (enable)
+    m_actionsToExecute[condition] << config;
+  else
+    m_actionsToExecute[condition].remove(config);
+}
+
+bool
+ProgramRunner::isActionToExecuteEnabled(Util::Settings::RunProgramConfig *config,
+                                        ExecuteActionCondition condition) {
+  return m_actionsToExecute[condition].contains(config);
+}
+
+void
+ProgramRunner::setup() {
+  connect(MainWindow::jobTool()->model(), &Jobs::Model::queueStatusChanged, this, &ProgramRunner::executeActionsAfterQueueFinishes);
+}
+
+void
+ProgramRunner::executeActionsAfterJobFinishes(Job const &job) {
+  executeActions(ExecuteActionCondition::AfterJobFinishes, &job);
+}
+
+void
+ProgramRunner::executeActionsAfterQueueFinishes(QueueStatus status) {
+  if (Jobs::QueueStatus::Stopped == status)
+    executeActions(ExecuteActionCondition::AfterQueueFinishes);
+}
+
+void
+ProgramRunner::executeActions(ExecuteActionCondition condition,
+                              Job const *job) {
+  for (auto const &config : Util::Settings::get().m_runProgramConfigurations)
+    if (isActionToExecuteEnabled(config.get(), condition)) {
+      // The event doesn't really matter as we're forcing a specific configuration to run.
+      run(Util::Settings::RunAfterJobQueueFinishes, [job](VariableMap &variables) {
+        if (job)
+          job->runProgramSetupVariables(variables);
+      }, config);
+    }
+
+  m_actionsToExecute[condition].clear();
+}
 
 void
 ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,

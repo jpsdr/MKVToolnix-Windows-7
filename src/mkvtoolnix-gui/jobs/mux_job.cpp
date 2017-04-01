@@ -198,7 +198,8 @@ MuxJob::config()
 }
 
 void
-MuxJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables) {
+MuxJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
+  const{
   Job::runProgramSetupVariables(variables);
 
   // OUTPUT_… are kept for backwards compatibility.

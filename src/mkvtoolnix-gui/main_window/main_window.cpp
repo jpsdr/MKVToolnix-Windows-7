@@ -58,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
   setupMenu();
   setupToolSelector();
   setupHelpURLs();
+  setupProgramRunner();
 
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvtoolnix-gui.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
@@ -184,6 +185,13 @@ MainWindow::setupToolSelector() {
 }
 
 void
+MainWindow::setupProgramRunner() {
+  m_programRunner.reset(new Jobs::ProgramRunner);
+
+  m_programRunner->setup();
+}
+
+void
 MainWindow::setupHelpURLs() {
   m_helpURLs[ui->actionHelpFAQ]                   = "https://github.com/mbunkus/mkvtoolnix/wiki";
   m_helpURLs[ui->actionHelpKnownProblems]         = "https://github.com/mbunkus/mkvtoolnix/wiki/Troubleshooting";
@@ -278,6 +286,11 @@ MainWindow::watchJobTool() {
   return get()->m_watchJobTool;
 }
 
+Jobs::ProgramRunner *
+MainWindow::programRunner() {
+  return get()->m_programRunner.get();
+}
+
 void
 MainWindow::retranslateUi() {
   ui->retranslateUi(this);
@@ -361,7 +374,17 @@ MainWindow::closeEvent(QCloseEvent *event) {
 
 void
 MainWindow::editPreferences() {
-  PreferencesDialog dlg{this};
+  editPreferencesAndShowPage(PreferencesDialog::Page::Default);
+}
+
+void
+MainWindow::editRunProgramConfigurations() {
+  editPreferencesAndShowPage(PreferencesDialog::Page::RunPrograms);
+}
+
+void
+MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
+  PreferencesDialog dlg{this, page};
   if (!dlg.exec())
     return;
 

@@ -6,6 +6,7 @@
 #include <QAction>
 #include <QMainWindow>
 
+#include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/update_checker.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
 
@@ -25,6 +26,7 @@ namespace HeaderEditor {
 class Tool;
 }
 namespace Jobs {
+class ProgramRunner;
 class Tool;
 }
 namespace Merge {
@@ -56,6 +58,7 @@ protected:
   WatchJobs::Tool *m_watchJobTool{};
   QList<QAction *> m_toolSelectionActions;
   std::unique_ptr<Util::MovingPixmapOverlay> m_movingPixmapOverlay;
+  std::unique_ptr<Jobs::ProgramRunner> m_programRunner;
 
   QHash<QObject *, QString> m_helpURLs;
 
@@ -80,6 +83,8 @@ public:
 
   virtual bool eventFilter(QObject *watched, QEvent *event) override;
 
+  virtual void editPreferencesAndShowPage(PreferencesDialog::Page page);
+
 signals:
   void windowShown();
   void preferencesChanged();
@@ -89,6 +94,7 @@ public slots:
   virtual void changeToolToSender();
   virtual void toolChanged(int index);
   virtual void editPreferences();
+  virtual void editRunProgramConfigurations();
   virtual void visitHelpURL();
   virtual void visitMkvmergeDocumentation();
   virtual void setToolSelectorVisibility();
@@ -108,6 +114,7 @@ public:                         // static
   static Jobs::Tool *jobTool();
   static WatchJobs::Tab *watchCurrentJobTab();
   static WatchJobs::Tool *watchJobTool();
+  static Jobs::ProgramRunner *programRunner();
   static QString versionStringForSettings(version_number_t const &version);
 
   static QIcon const & yesIcon();
@@ -117,6 +124,7 @@ protected:
   virtual void setupMenu();
   virtual void setupToolSelector();
   virtual void setupHelpURLs();
+  virtual void setupProgramRunner();
   virtual QWidget *createNotImplementedWidget();
 
   virtual void showEvent(QShowEvent *event);
