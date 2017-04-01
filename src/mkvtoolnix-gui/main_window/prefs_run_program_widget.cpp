@@ -71,7 +71,7 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
 
   d->ui->cbConfigurationActive->setChecked(cfg.m_active);
 
-  d->executable = cfg.m_commandLine.value(0);
+  d->executable = Util::replaceApplicationDirectoryWithMtxVariable(cfg.m_commandLine.value(0));
   d->ui->leCommandLine->setText(Util::escape(cfg.m_commandLine, Util::EscapeShellUnix).join(" "));
 
   for (auto const &checkBox : d->flagsByCheckbox.keys())
@@ -266,8 +266,10 @@ PrefsRunProgramWidget::changeExecutable() {
 #endif
   filters << QY("All files") + Q(" (*)");
 
-  auto newExecutable = Util::getOpenFileName(this, QY("Select executable"), d->executable, filters.join(Q(";;")));
-  newExecutable      = QDir::toNativeSeparators(newExecutable);
+  auto realExecutable = Util::replaceMtxVariableWithApplicationDirectory(d->executable);
+  auto newExecutable  = Util::getOpenFileName(this, QY("Select executable"), realExecutable, filters.join(Q(";;")));
+  newExecutable       = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(newExecutable));
+
   if (newExecutable.isEmpty() || (newExecutable == d->executable))
     return;
 

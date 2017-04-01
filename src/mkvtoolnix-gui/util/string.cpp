@@ -2,6 +2,7 @@
 
 #include <QDateTime>
 #include <QDebug>
+#include <QDir>
 #include <QRegularExpression>
 #include <QString>
 #include <QStringList>
@@ -11,6 +12,7 @@
 #include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/json.h"
 #include "mkvtoolnix-gui/util/string.h"
 
@@ -282,6 +284,20 @@ QString
 mapToTopLevelCountryCode(QString const &countryCode) {
   auto ccTLD = map_to_cctld(to_utf8(countryCode));
   return ccTLD ? Q(*ccTLD) : countryCode;
+}
+
+QString
+replaceApplicationDirectoryWithMtxVariable(QString string) {
+  auto applicationDirectory = App::applicationDirPath().replace(Q("\\"), Q("/"));
+
+  return string.replace(Q("\\"), Q("/")).replace(applicationDirectory, Q("<MTX_INSTALLATION_DIRECTORY>"), Qt::CaseInsensitive);
+}
+
+QString
+replaceMtxVariableWithApplicationDirectory(QString string) {
+  auto applicationDirectory = QDir::toNativeSeparators(App::applicationDirPath());
+
+  return string.replace(Q("<MTX_INSTALLATION_DIRECTORY>"), applicationDirectory);
 }
 
 }}}
