@@ -491,7 +491,7 @@ Tab::setupWhenFinishedActions() {
 
   auto afterCurrentJobMenu                = new QMenu{QY("Execute action after next &job completion")};
   auto afterJobQueueMenu                  = new QMenu{QY("Execute action when the &queue completes")};
-  auto editRunProgramConfigurationsAction = new QAction{QY("&Edit available actions to execute")};
+  auto editRunProgramConfigurationsAction = new QAction{QY("&Edit available actions to execute"), d->m_whenFinished};
   auto menus                              = QVector<QMenu *>{} << afterCurrentJobMenu << afterJobQueueMenu;
   auto &programRunner                     = App::programRunner();
 
