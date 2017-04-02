@@ -40,4 +40,15 @@ class Array
 
     return Hash[ *elements.flatten ]
   end
+
+  def for_target!
+    self.flatten!
+
+    self.reject! { |f| %r{(?:/|^)linux[_.]}.match f }   unless $building_for[:linux]
+    self.reject! { |f| %r{(?:/|^)macos[_.]}.match f }   unless $building_for[:macos]
+    self.reject! { |f| %r{(?:/|^)unix[_.]}.match f }    if     $building_for[:windows]
+    self.reject! { |f| %r{(?:/|^)windows[_.]}.match f } unless $building_for[:windows]
+
+    return self
+  end
 end

@@ -54,8 +54,9 @@ require_relative 'rake.d/gtest' if $have_gtest
 
 def setup_globals
   $building_for = {
-    macos:   %r{darwin}i.match(RbConfig::CONFIG['host_os']),
-    windows: c?(:MINGW)
+    :linux   => %r{linux}i.match(c(:host)),
+    :macos   => %r{darwin}i.match(c(:host)),
+    :windows => %r{mingw}i.match(c(:host)),
   }
 
   $build_mkvtoolnix_gui  ||=  c?(:USE_QT)
@@ -119,10 +120,10 @@ def setup_globals
   cflags_common           += " -fsanitize=address -fno-omit-frame-pointer"               if c?(:ADDRSAN)
   cflags_common           += " -Ilib/libebml -Ilib/libmatroska"                          if c?(:EBML_MATROSKA_INTERNAL)
   cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:DEBUG_CFLAGS)} #{c(:PROFILING_CFLAGS)} #{c(:USER_CPPFLAGS)}"
-  cflags_common           += " -mno-ms-bitfields -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 " if c?(:MINGW)
-  cflags_common           += " -march=i686"                                              if c?(:MINGW) && /i686/.match(c(:host))
-  cflags_common           += " -fPIC "                                                   if c?(:USE_QT) && !c?(:MINGW)
-  cflags_common           += " -DQT_STATICPLUGIN"                                        if c?(:USE_QT) &&  c?(:MINGW)
+  cflags_common           += " -mno-ms-bitfields -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 " if $building_for[:windows]
+  cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
+  cflags_common           += " -fPIC "                                                   if c?(:USE_QT) && !$building_for[:windows]
+  cflags_common           += " -DQT_STATICPLUGIN"                                        if c?(:USE_QT) &&  $building_for[:windows]
 
   cflags                   = "#{cflags_common} #{c(:USER_CFLAGS)}"
 
@@ -133,7 +134,7 @@ def setup_globals
   ldflags                  = ""
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
   ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
-  ldflags                 += " -Wl,--dynamicbase,--nxcompat"               if c?(:MINGW)
+  ldflags                 += " -Wl,--dynamicbase,--nxcompat"               if $building_for[:windows]
   ldflags                 += " -fsanitize=undefined"                       if c?(:UBSAN)
   ldflags                 += " -fsanitize=address -fno-omit-frame-pointer" if c?(:ADDRSAN)
   ldflags                 += " #{c(:FSTACK_PROTECTOR)}"
@@ -141,7 +142,7 @@ def setup_globals
   windres                  = ""
   windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH) == 'amd64'
 
-  mocflags                 = c?(:MINGW) ? "-DSYS_WINDOWS" : ""
+  mocflags                 = $building_for[:windows] ? "-DSYS_WINDOWS" : ""
 
   $flags                   = {
     :cflags                => cflags,
@@ -189,7 +190,7 @@ def define_default_task
   targets << "translations:programs"
 
   # The Qt translation files: only for Windows
-  targets << "translations:qt" if c?(:MINGW) && !c(:LCONVERT).blank?
+  targets << "translations:qt" if $building_for[:windows] && !c(:LCONVERT).blank?
 
   # Build ebml_validator by default when not cross-compiling as it is
   # needed for running the tests.
@@ -277,7 +278,7 @@ rule '.o' => '.rc' do |t|
 end
 
 # Resources depend on the manifest.xml file for Windows builds.
-if c?(:MINGW)
+if $building_for[:windows]
   $programs.each do |program|
     path = program.gsub(/^mkv/, '')
     icon = program == 'mkvinfo' ? 'share/icons/windows/mkvinfo.ico' : 'share/icons/windows/mkvtoolnix-gui.ico'
@@ -898,7 +899,7 @@ Application.new("src/mkvmerge").
   description("Build the mkvmerge executable").
   aliases(:mkvmerge).
   sources("src/merge/mkvmerge.cpp").
-  sources("src/merge/resources.o", :if => c?(:MINGW)).
+  sources("src/merge/resources.o", :if => $building_for[:windows]).
   libraries(:mtxmerge, :mtxinput, :mtxoutput, :mtxmerge, $common_libs, :avi, :rmff, :mpegparser, :flac, :vorbis, :ogg, $custom_libs).
   create
 
@@ -917,10 +918,10 @@ Application.new("src/mkvinfo").
   description("Build the mkvinfo executable").
   aliases(:mkvinfo).
   sources("src/info/mkvinfo.cpp").
-  sources("src/info/resources.o", :if => c?(:MINGW)).
+  sources("src/info/resources.o", :if => $building_for[:windows]).
   libraries(:mtxinfo, $common_libs).
   only_if(c?(:USE_QT)).
-  sources("src/info/sys_windows.o", :if => c?(:MINGW)).
+  sources("src/info/sys_windows.o", :if => $building_for[:windows]).
   sources("src/info/qt_ui.cpp", "src/info/qt_ui.moc", "src/info/rightclick_tree_widget.moc", $mkvinfo_ui_files).
   sources('src/info/qt_resources.cpp').
   sources('src/info/static_plugins.cpp', :if => File.exist?('src/info/static_plugins.cpp')).
@@ -934,10 +935,10 @@ if $build_mkvinfo_gui
     description("Build the mkvinfo-gui executable").
     aliases("mkvinfo-gui").
     sources("src/info/mkvinfo-gui.cpp").
-    sources("src/info/resources.o", :if => c?(:MINGW)).
+    sources("src/info/resources.o", :if => $building_for[:windows]).
     sources('src/info/static_plugins.cpp', :if => File.exist?('src/info/static_plugins.cpp')).
     libraries(:qt, $custom_libs).
-    libraries("-mwindows", :if => c?(:MINGW)).
+    libraries("-mwindows", :if => $building_for[:windows]).
     create
 end
 
@@ -949,7 +950,7 @@ Application.new("src/mkvextract").
   description("Build the mkvextract executable").
   aliases(:mkvextract).
   sources("src/extract/mkvextract.cpp").
-  sources("src/extract/resources.o", :if => c?(:MINGW)).
+  sources("src/extract/resources.o", :if => $building_for[:windows]).
   libraries(:mtxextract, $common_libs, :avi, :rmff, :vorbis, :ogg, $custom_libs).
   create
 
@@ -961,7 +962,7 @@ Application.new("src/mkvpropedit").
   description("Build the mkvpropedit executable").
   aliases(:mkvpropedit).
   sources("src/propedit/propedit.cpp").
-  sources("src/propedit/resources.o", :if => c?(:MINGW)).
+  sources("src/propedit/resources.o", :if => $building_for[:windows]).
   libraries(:mtxpropedit, $common_libs, $custom_libs).
   create
 
@@ -971,8 +972,8 @@ Application.new("src/mkvpropedit").
 
 if $build_mkvtoolnix_gui
   ui_h_files      = $gui_ui_files.collect { |ui| ui.ext 'h' }
-  cpp_files       = FileList['src/mkvtoolnix-gui/**/*.cpp'].to_a
-  h_files         = FileList['src/mkvtoolnix-gui/**/*.h'].to_a - ui_h_files
+  cpp_files       = FileList['src/mkvtoolnix-gui/**/*.cpp'].to_a.for_target!
+  h_files         = FileList['src/mkvtoolnix-gui/**/*.h'].to_a.for_target! - ui_h_files
   cpp_content     = read_files cpp_files
   h_content       = read_files h_files
 
@@ -997,9 +998,9 @@ if $build_mkvtoolnix_gui
     aliases("mkvtoolnix-gui").
     sources(qobject_h_files.collect { |h| h.ext 'moc' }).
     sources(cpp_files, $gui_ui_files, 'src/mkvtoolnix-gui/qt_resources.cpp').
-    sources("src/mkvtoolnix-gui/resources.o", :if => c?(:MINGW)).
+    sources("src/mkvtoolnix-gui/resources.o", :if => $building_for[:windows]).
     libraries($common_libs, :qt).
-    libraries("-mwindows", :powrprof, :if => c?(:MINGW)).
+    libraries("-mwindows", :powrprof, :if => $building_for[:windows]).
     libraries($custom_libs).
     create
 end
