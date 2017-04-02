@@ -152,8 +152,6 @@ ProgramRunner::create() {
   if (!runner)
     runner.reset(new ProgramRunner{});
 
-  runner->setup();
-
   return runner;
 }
 

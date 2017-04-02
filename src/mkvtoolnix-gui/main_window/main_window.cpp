@@ -59,14 +59,14 @@ MainWindow::MainWindow(QWidget *parent)
   setupToolSelector();
   setupHelpURLs();
 
-  m_programRunner = std::move(Jobs::ProgramRunner::create());
-
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvtoolnix-gui.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
 
   retranslateUi();
 
   Util::restoreWidgetGeometry(this);
+
+  App::programRunner().setup();
 
   jobTool()->loadAndStart();
 
@@ -278,11 +278,6 @@ MainWindow::watchCurrentJobTab() {
 WatchJobs::Tool *
 MainWindow::watchJobTool() {
   return get()->m_watchJobTool;
-}
-
-Jobs::ProgramRunner *
-MainWindow::programRunner() {
-  return get()->m_programRunner.get();
 }
 
 void

@@ -10,6 +10,7 @@
 #include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
@@ -492,7 +493,7 @@ Tab::setupWhenFinishedActions() {
   auto afterJobQueueMenu                  = new QMenu{QY("Execute action when the &queue completes")};
   auto editRunProgramConfigurationsAction = new QAction{QY("&Edit available actions to execute")};
   auto menus                              = QVector<QMenu *>{} << afterCurrentJobMenu << afterJobQueueMenu;
-  auto programRunner                      = MainWindow::programRunner();
+  auto &programRunner                     = App::programRunner();
 
   d->m_whenFinished->addMenu(afterCurrentJobMenu);
   d->m_whenFinished->addMenu(afterJobQueueMenu);
@@ -514,7 +515,7 @@ Tab::setupWhenFinishedActions() {
       action->setProperty(MTX_RUN_PROGRAM_CONFIGURATION_CONDITION, static_cast<int>(condition));
 
       action->setCheckable(true);
-      action->setChecked(programRunner->isActionToExecuteEnabled(*config, condition));
+      action->setChecked(programRunner.isActionToExecuteEnabled(*config, condition));
 
       connect(action, &QAction::triggered, this, &Tab::toggleActionToExecute);
     }
@@ -533,7 +534,7 @@ Tab::toggleActionToExecute() {
                     :                                                                                                     Jobs::ProgramRunner::ExecuteActionCondition::AfterJobFinishes;
   auto enable       = action.isChecked();
 
-  MainWindow::programRunner()->enableActionToExecute(*config, condition, enable);
+  App::programRunner().enableActionToExecute(*config, condition, enable);
 }
 
 }}}

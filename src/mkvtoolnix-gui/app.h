@@ -17,6 +17,10 @@ namespace Util {
 class NetworkAccessManager;
 }
 
+namespace Jobs {
+class ProgramRunner;
+}
+
 using Iso639Language                = std::pair<QString, QString>;
 using Iso639LanguageList            = std::vector<Iso639Language>;
 using TopLevelDomainCountryCode     = std::pair<QString, QString>;
@@ -77,6 +81,7 @@ protected:
 
 public:
   static App *instance();
+  static Jobs::ProgramRunner &programRunner();
 
   static Iso639LanguageList const &iso639Languages();
   static Iso639LanguageList const &commonIso639Languages();

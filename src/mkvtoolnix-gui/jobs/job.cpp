@@ -8,9 +8,9 @@
 #include "common/list_utils.h"
 #include "common/logger.h"
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
-#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/file.h"
@@ -414,11 +414,11 @@ Job::runProgramsAfterCompletion() {
 
   auto event = m_status == Failed ? Util::Settings::RunAfterJobCompletesWithErrors : Util::Settings::RunAfterJobCompletesSuccessfully;
 
-  MainWindow::programRunner()->run(event, [this](ProgramRunner::VariableMap &variables) {
+  App::programRunner().run(event, [this](ProgramRunner::VariableMap &variables) {
     runProgramSetupVariables(variables);
   });
 
-  MainWindow::programRunner()->executeActionsAfterJobFinishes(*this);
+  App::programRunner().executeActionsAfterJobFinishes(*this);
 }
 
 void

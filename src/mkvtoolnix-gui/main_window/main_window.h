@@ -26,7 +26,6 @@ namespace HeaderEditor {
 class Tool;
 }
 namespace Jobs {
-class ProgramRunner;
 class Tool;
 }
 namespace Merge {
@@ -58,7 +57,6 @@ protected:
   WatchJobs::Tool *m_watchJobTool{};
   QList<QAction *> m_toolSelectionActions;
   std::unique_ptr<Util::MovingPixmapOverlay> m_movingPixmapOverlay;
-  std::unique_ptr<Jobs::ProgramRunner> m_programRunner;
 
   QHash<QObject *, QString> m_helpURLs;
 
@@ -114,7 +112,6 @@ public:                         // static
   static Jobs::Tool *jobTool();
   static WatchJobs::Tab *watchCurrentJobTab();
   static WatchJobs::Tool *watchJobTool();
-  static Jobs::ProgramRunner *programRunner();
   static QString versionStringForSettings(version_number_t const &version);
 
   static QIcon const & yesIcon();

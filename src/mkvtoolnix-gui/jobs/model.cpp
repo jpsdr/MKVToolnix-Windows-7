@@ -9,6 +9,7 @@
 #include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/sorting.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
@@ -683,7 +684,7 @@ Model::runProgramOnQueueStop(QueueStatus status) {
   if (QueueStatus::Stopped != status)
     return;
 
-  MainWindow::programRunner()->run(Util::Settings::RunAfterJobQueueFinishes, [](ProgramRunner::VariableMap &) {
+  App::programRunner().run(Util::Settings::RunAfterJobQueueFinishes, [](ProgramRunner::VariableMap &) {
     // Nothing to do in this case.
   });
 }

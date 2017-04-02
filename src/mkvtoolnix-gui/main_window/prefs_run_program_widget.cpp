@@ -6,9 +6,9 @@
 #include <QMenu>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
-#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -182,7 +182,7 @@ PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &
   Q_D(PrefsRunProgramWidget);
 
   auto addItemIfSupported = [this, d, &cfg](QString const &title, Util::Settings::RunProgramType type) {
-    if (MainWindow::programRunner()->isRunProgramTypeSupported(type)) {
+    if (App::programRunner().isRunProgramTypeSupported(type)) {
       d->ui->cbType->addItem(title, static_cast<int>(type));
 
       if (cfg.m_type == type)
@@ -298,7 +298,7 @@ PrefsRunProgramWidget::isValid()
 void
 PrefsRunProgramWidget::executeNow() {
   if (isValid())
-    MainWindow::programRunner()->run(Util::Settings::RunNever, [](Jobs::ProgramRunner::VariableMap &) {}, config());
+    App::programRunner().run(Util::Settings::RunNever, [](Jobs::ProgramRunner::VariableMap &) {}, config());
 }
 
 void
