@@ -21,6 +21,16 @@ class Settings: public QObject {
   Q_ENUMS(RunProgramForEvent);
 
 public:
+  enum RunProgramType {
+    Min,
+    ExecuteProgram,
+    PlayAudioFile,
+    ShutDownComputer,
+    SuspendComputer,
+    Max,
+    Default = ExecuteProgram,
+  };
+
   enum RunProgramForEvent {
     RunNever                         = 0x00,
     RunAfterJobQueueFinishes         = 0x01,
@@ -94,13 +104,18 @@ public:
 
   class RunProgramConfig {
   public:
+    RunProgramType m_type{RunProgramType::ExecuteProgram};
     bool m_active{true};
-    QString m_name;
+    QString m_name, m_audioFile;
     QStringList m_commandLine;
     RunProgramForEvents m_forEvents{};
 
     bool isValid() const;
     QString name() const;
+
+  private:
+    QString nameForExternalProgram() const;
+    QString nameForPlayAudioFile() const;
   };
 
   using RunProgramConfigPtr  = std::shared_ptr<RunProgramConfig>;

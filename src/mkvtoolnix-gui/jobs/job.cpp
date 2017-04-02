@@ -414,7 +414,7 @@ Job::runProgramsAfterCompletion() {
 
   auto event = m_status == Failed ? Util::Settings::RunAfterJobCompletesWithErrors : Util::Settings::RunAfterJobCompletesSuccessfully;
 
-  ProgramRunner::run(event, [this](ProgramRunner::VariableMap &variables) {
+  MainWindow::programRunner()->run(event, [this](ProgramRunner::VariableMap &variables) {
     runProgramSetupVariables(variables);
   });
 

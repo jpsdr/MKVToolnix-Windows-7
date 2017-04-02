@@ -8,6 +8,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -20,8 +21,9 @@ class PrefsRunProgramWidgetPrivate {
 
   std::unique_ptr<Ui::PrefsRunProgramWidget> ui;
   std::unique_ptr<QMenu> variableMenu;
-  QString name, executable;
+  QString name, executable, audioFile;
   QMap<QCheckBox *, Util::Settings::RunProgramForEvent> flagsByCheckbox;
+  QMap<Util::Settings::RunProgramType, QWidget *> pagesByType;
 
   explicit PrefsRunProgramWidgetPrivate()
     : ui{new Ui::PrefsRunProgramWidget}
@@ -64,6 +66,8 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
 
   // Setup UI controls.
   d->ui->setupUi(this);
+
+  setupTypeControl(cfg);
 
   d->flagsByCheckbox[d->ui->cbAfterJobQueueStopped] = Util::Settings::RunAfterJobQueueFinishes;
   d->flagsByCheckbox[d->ui->cbAfterJobSuccessful]   = Util::Settings::RunAfterJobCompletesSuccessfully;
@@ -174,6 +178,38 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
 }
 
 void
+PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &cfg) {
+  Q_D(PrefsRunProgramWidget);
+
+  auto addItemIfSupported = [this, d, &cfg](QString const &title, Util::Settings::RunProgramType type) {
+    if (MainWindow::programRunner()->isRunProgramTypeSupported(type)) {
+      d->ui->cbType->addItem(title, static_cast<int>(type));
+
+      if (cfg.m_type == type)
+        d->ui->cbType->setCurrentIndex(d->ui->cbType->count() - 1);
+    }
+  };
+
+  addItemIfSupported(QY("Execute a program"),      Util::Settings::RunProgramType::ExecuteProgram);
+  addItemIfSupported(QY("Play an audio file"),     Util::Settings::RunProgramType::PlayAudioFile);
+  addItemIfSupported(QY("Shut down the computer"), Util::Settings::RunProgramType::ShutDownComputer);
+  addItemIfSupported(QY("Suspend the computer"),   Util::Settings::RunProgramType::SuspendComputer);
+
+  d->pagesByType[Util::Settings::RunProgramType::ExecuteProgram]   = d->ui->executeProgramTypePage;
+  d->pagesByType[Util::Settings::RunProgramType::PlayAudioFile]    = d->ui->playAudioFileTypePage;
+  d->pagesByType[Util::Settings::RunProgramType::ShutDownComputer] = d->ui->emptyTypePage;
+  d->pagesByType[Util::Settings::RunProgramType::SuspendComputer]  = d->ui->emptyTypePage;
+
+  showPageForType(cfg.m_type);
+
+  if (d->ui->cbType->count() > 1)
+    return;
+
+  d->ui->lType->setVisible(false);
+  d->ui->cbType->setVisible(false);
+}
+
+void
 PrefsRunProgramWidget::setupToolTips() {
   Q_D(PrefsRunProgramWidget);
 
@@ -228,12 +264,15 @@ void
 PrefsRunProgramWidget::setupConnections() {
   Q_D(PrefsRunProgramWidget);
 
-  connect(d->ui->leName,                &QLineEdit::textEdited, this, &PrefsRunProgramWidget::nameEdited);
-  connect(d->ui->leCommandLine,         &QLineEdit::textEdited, this, &PrefsRunProgramWidget::commandLineEdited);
-  connect(d->ui->pbBrowseExecutable,    &QPushButton::clicked,  this, &PrefsRunProgramWidget::changeExecutable);
-  connect(d->ui->pbAddVariable,         &QPushButton::clicked,  this, &PrefsRunProgramWidget::selectVariableToAdd);
-  connect(d->ui->pbExecuteNow,          &QPushButton::clicked,  this, &PrefsRunProgramWidget::executeNow);
-  connect(d->ui->cbConfigurationActive, &QCheckBox::toggled,    this, &PrefsRunProgramWidget::enableControls);
+  connect(d->ui->cbConfigurationActive, &QCheckBox::toggled,                                                    this, &PrefsRunProgramWidget::enableControls);
+  connect(d->ui->leName,                &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::nameEdited);
+  connect(d->ui->cbType,                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &PrefsRunProgramWidget::typeChanged);
+  connect(d->ui->leCommandLine,         &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::commandLineEdited);
+  connect(d->ui->pbBrowseExecutable,    &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeExecutable);
+  connect(d->ui->pbAddVariable,         &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::selectVariableToAdd);
+  connect(d->ui->pbExecuteNow,          &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::executeNow);
+  connect(d->ui->leAudioFile,           &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::audioFileEdited);
+  connect(d->ui->pbBrowseAudioFile,     &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeAudioFile);
 }
 
 void
@@ -253,16 +292,13 @@ PrefsRunProgramWidget::addVariable(QString const &variable) {
 bool
 PrefsRunProgramWidget::isValid()
   const {
-  Q_D(const PrefsRunProgramWidget);
-
-  auto arguments = Util::unescapeSplit(d->ui->leCommandLine->text(), Util::EscapeShellUnix);
-  return !arguments.value(0).isEmpty();
+  return config()->isValid();
 }
 
 void
 PrefsRunProgramWidget::executeNow() {
   if (isValid())
-    Jobs::ProgramRunner::run(Util::Settings::RunNever, [](Jobs::ProgramRunner::VariableMap &) {}, config());
+    MainWindow::programRunner()->run(Util::Settings::RunNever, [](Jobs::ProgramRunner::VariableMap &) {}, config());
 }
 
 void
@@ -294,7 +330,7 @@ PrefsRunProgramWidget::changeExecutable() {
 
   enableControls();
 
-  emit nameOrExecutableChanged(d->name, d->executable);
+  emit titleChanged();
 }
 
 void
@@ -311,7 +347,7 @@ PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
 
   d->executable = newExecutable;
 
-  emit nameOrExecutableChanged(d->name, d->executable);
+  emit titleChanged();
 }
 
 void
@@ -320,7 +356,7 @@ PrefsRunProgramWidget::nameEdited(QString const &name) {
 
   d->name = name;
 
-  emit nameOrExecutableChanged(d->name, d->executable);
+  emit titleChanged();
 }
 
 void
@@ -342,14 +378,63 @@ PrefsRunProgramWidget::config()
   auto cfg           = std::make_shared<Util::Settings::RunProgramConfig>();
   auto cmdLine       = d->ui->leCommandLine->text().replace(QRegularExpression{"^\\s+"}, Q(""));
   cfg->m_name        = d->ui->leName->text();
+  cfg->m_type        = static_cast<Util::Settings::RunProgramType>(d->ui->cbType->currentData().value<int>());
   cfg->m_commandLine = Util::unescapeSplit(cmdLine, Util::EscapeShellUnix);
   cfg->m_active      = d->ui->cbConfigurationActive->isChecked();
+  cfg->m_audioFile   = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(d->ui->leAudioFile->text()));
 
   for (auto const &checkBox : d->flagsByCheckbox.keys())
     if (checkBox->isChecked())
       cfg->m_forEvents |= d->flagsByCheckbox[checkBox];
 
   return cfg;
+}
+
+void
+PrefsRunProgramWidget::changeAudioFile() {
+  Q_D(PrefsRunProgramWidget);
+
+  auto filters = QStringList{} << QY("Audio files") + Q(" (*.aac *.flac *.m4a *.mp3 *.ogg *.opus *.wav)")
+                               << QY("All files")   + Q(" (*)");
+
+  auto realAudioFile = Util::replaceMtxVariableWithApplicationDirectory(d->audioFile);
+  auto newAudioFile  = Util::getOpenFileName(this, QY("Select audio file"), realAudioFile, filters.join(Q(";;")));
+  newAudioFile       = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(newAudioFile));
+
+  if (newAudioFile.isEmpty() || (newAudioFile == d->audioFile))
+    return;
+
+  d->audioFile = newAudioFile;
+
+  enableControls();
+
+  emit titleChanged();
+}
+
+void
+PrefsRunProgramWidget::audioFileEdited(QString const &audioFile) {
+  Q_D(PrefsRunProgramWidget);
+
+  d->audioFile = audioFile;
+
+  emit titleChanged();
+}
+
+void
+PrefsRunProgramWidget::typeChanged(int index) {
+  Q_D(PrefsRunProgramWidget);
+
+  auto type = static_cast<Util::Settings::RunProgramType>(d->ui->cbType->itemData(index).value<int>());
+  showPageForType(type);
+
+  emit titleChanged();
+}
+
+void
+PrefsRunProgramWidget::showPageForType(Util::Settings::RunProgramType type) {
+  Q_D(PrefsRunProgramWidget);
+
+  d->ui->typeWidgets->setCurrentWidget(d->pagesByType[type]);
 }
 
 }}

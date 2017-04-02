@@ -683,7 +683,7 @@ Model::runProgramOnQueueStop(QueueStatus status) {
   if (QueueStatus::Stopped != status)
     return;
 
-  ProgramRunner::run(Util::Settings::RunAfterJobQueueFinishes, [](ProgramRunner::VariableMap &) {
+  MainWindow::programRunner()->run(Util::Settings::RunAfterJobQueueFinishes, [](ProgramRunner::VariableMap &) {
     // Nothing to do in this case.
   });
 }

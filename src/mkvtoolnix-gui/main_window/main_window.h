@@ -124,7 +124,6 @@ protected:
   virtual void setupMenu();
   virtual void setupToolSelector();
   virtual void setupHelpURLs();
-  virtual void setupProgramRunner();
   virtual QWidget *createNotImplementedWidget();
 
   virtual void showEvent(QShowEvent *event);

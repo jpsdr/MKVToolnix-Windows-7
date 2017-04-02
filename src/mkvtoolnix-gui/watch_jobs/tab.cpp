@@ -514,7 +514,7 @@ Tab::setupWhenFinishedActions() {
       action->setProperty(MTX_RUN_PROGRAM_CONFIGURATION_CONDITION, static_cast<int>(condition));
 
       action->setCheckable(true);
-      action->setChecked(programRunner->isActionToExecuteEnabled(config.get(), condition));
+      action->setChecked(programRunner->isActionToExecuteEnabled(*config, condition));
 
       connect(action, &QAction::triggered, this, &Tab::toggleActionToExecute);
     }
@@ -533,7 +533,7 @@ Tab::toggleActionToExecute() {
                     :                                                                                                     Jobs::ProgramRunner::ExecuteActionCondition::AfterJobFinishes;
   auto enable       = action.isChecked();
 
-  MainWindow::programRunner()->enableActionToExecute(config, condition, enable);
+  MainWindow::programRunner()->enableActionToExecute(*config, condition, enable);
 }
 
 }}}

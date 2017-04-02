@@ -39,7 +39,9 @@ defaultUiFont() {
 bool
 Settings::RunProgramConfig::isValid()
   const {
-  return !m_commandLine.value(0).isEmpty();
+  return m_type == RunProgramType::ExecuteProgram ? !m_commandLine.value(0).isEmpty()
+       : m_type == RunProgramType::PlayAudioFile  ? !m_audioFile.isEmpty()
+       :                                            true;
 }
 
 QString
@@ -48,6 +50,16 @@ Settings::RunProgramConfig::name()
   if (!m_name.isEmpty())
     return m_name;
 
+  return m_type == RunProgramType::ExecuteProgram   ? nameForExternalProgram()
+       : m_type == RunProgramType::PlayAudioFile    ? nameForPlayAudioFile()
+       : m_type == RunProgramType::ShutDownComputer ? QY("Shut down the computer")
+       : m_type == RunProgramType::SuspendComputer  ? QY("Suspend the computer")
+       :                                              Q("unknown");
+}
+
+QString
+Settings::RunProgramConfig::nameForExternalProgram()
+  const {
   if (m_commandLine.isEmpty())
     return QY("Execute a program");
 
@@ -55,6 +67,18 @@ Settings::RunProgramConfig::name()
   program.replace(QRegularExpression{Q(".*[/\\\\]")}, Q(""));
 
   return QY("Execute program '%1'").arg(program);
+}
+
+QString
+Settings::RunProgramConfig::nameForPlayAudioFile()
+  const {
+  if (m_audioFile.isEmpty())
+    return QY("Play an audio file");
+
+  auto audioFile = m_audioFile;
+  audioFile.replace(QRegularExpression{Q(".*[/\\\\]")}, Q(""));
+
+  return QY("Play audio file '%1'").arg(audioFile);
 }
 
 Settings Settings::s_settings;
@@ -349,8 +373,11 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
     reg.beginGroup(group);
     cfg->m_active      = reg.value("active", true).toBool();
     cfg->m_name        = reg.value("name").toString();
-    cfg->m_commandLine = reg.value("commandLine").toStringList();
+    auto type          = reg.value("type", static_cast<int>(RunProgramType::ExecuteProgram)).value<int>();
+    cfg->m_type        = (type > static_cast<int>(RunProgramType::Min)) && (type < static_cast<int>(RunProgramType::Max)) ? static_cast<RunProgramType>(type) : RunProgramType::Default;
     cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value("forEvents").value<int>());
+    cfg->m_commandLine = reg.value("commandLine").toStringList();
+    cfg->m_audioFile   = reg.value("audioFile").toString();
     reg.endGroup();
 
     if (cfg->isValid())
@@ -489,13 +516,16 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
   const {
   reg.remove("runProgramConfigurations");
   reg.beginGroup("runProgramConfigurations");
+
   auto idx = 0;
   for (auto const &cfg : m_runProgramConfigurations) {
     reg.beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
     reg.setValue("active",      cfg->m_active);
     reg.setValue("name",        cfg->m_name);
-    reg.setValue("commandLine", cfg->m_commandLine);
+    reg.setValue("type",        static_cast<int>(cfg->m_type));
     reg.setValue("forEvents",   static_cast<int>(cfg->m_forEvents));
+    reg.setValue("commandLine", cfg->m_commandLine);
+    reg.setValue("audioFile",   cfg->m_audioFile);
     reg.endGroup();
   }
 

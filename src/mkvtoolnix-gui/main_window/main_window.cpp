@@ -58,7 +58,8 @@ MainWindow::MainWindow(QWidget *parent)
   setupMenu();
   setupToolSelector();
   setupHelpURLs();
-  setupProgramRunner();
+
+  m_programRunner = std::move(Jobs::ProgramRunner::create());
 
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvtoolnix-gui.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
@@ -182,13 +183,6 @@ MainWindow::setupToolSelector() {
   connect(m_toolJobs->model(),         &Jobs::Model::jobStatsChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setJobStats);
   connect(m_toolJobs->model(),         &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, m_statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
   connect(currentJobTab,               &WatchJobs::Tab::watchCurrentJobTabCleared,             m_statusBarProgress, &StatusBarProgressWidget::reset);
-}
-
-void
-MainWindow::setupProgramRunner() {
-  m_programRunner.reset(new Jobs::ProgramRunner);
-
-  m_programRunner->setup();
 }
 
 void

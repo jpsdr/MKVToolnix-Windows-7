@@ -604,7 +604,7 @@ PreferencesDialog::setupJobsRunPrograms() {
 
     setTabTitleForRunProgramWidget(ui->twJobsPrograms->count() - 1, runProgramConfig->name());
 
-    connect(widget, &PrefsRunProgramWidget::nameOrExecutableChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramWidget);
+    connect(widget, &PrefsRunProgramWidget::titleChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramWidget);
   }
 
   if (!m_cfg.m_runProgramConfigurations.isEmpty())
@@ -764,7 +764,7 @@ PreferencesDialog::addProgramToExecute() {
 
   ui->swJobsPrograms->setCurrentIndex(1);
 
-  connect(programWidget, &PrefsRunProgramWidget::nameOrExecutableChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramWidget);
+  connect(programWidget, &PrefsRunProgramWidget::titleChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramWidget);
 }
 
 void
