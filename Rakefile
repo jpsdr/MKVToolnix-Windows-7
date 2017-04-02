@@ -999,7 +999,7 @@ if $build_mkvtoolnix_gui
     sources(cpp_files, $gui_ui_files, 'src/mkvtoolnix-gui/qt_resources.cpp').
     sources("src/mkvtoolnix-gui/resources.o", :if => c?(:MINGW)).
     libraries($common_libs, :qt).
-    libraries("-mwindows", :if => c?(:MINGW)).
+    libraries("-mwindows", :powrprof, :if => c?(:MINGW)).
     libraries($custom_libs).
     create
 end

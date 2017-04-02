@@ -11,6 +11,9 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
+#if defined(SYS_WINDOWS)
+#include "mkvtoolnix-gui/jobs/program_runner/windows_program_runner.h"
+#endif // SYS_WINDOWS
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 
@@ -141,6 +144,10 @@ ProgramRunner::setupGeneralVariables(QMap<QString, QStringList> &variables) {
 std::unique_ptr<ProgramRunner>
 ProgramRunner::create() {
   std::unique_ptr<ProgramRunner> runner;
+
+#if defined(SYS_WINDOWS)
+  runner.reset(new WindowsProgramRunner{});
+#endif // SYS_WINDOWS
 
   if (!runner)
     runner.reset(new ProgramRunner{});
