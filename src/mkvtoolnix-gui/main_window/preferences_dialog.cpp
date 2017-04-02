@@ -185,7 +185,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
                    addItem(Page::HeaderEditor,        nullptr, QY("Header editor"),         "document-edit");
                    addItem(Page::ChapterEditor,       nullptr, QY("Chapter editor"),        "story-editor");
   auto pJobs     = addItem(Page::Jobs,                nullptr, QY("Jobs & job queue"),      "view-task");
-                   addItem(Page::RunPrograms,         pJobs,   QY("Executing programs"));
+                   addItem(Page::RunPrograms,         pJobs,   QY("Executing actions"));
 
   for (auto row = 0, numRows = model->rowCount(); row < numRows; ++row)
     ui->pageSelector->setExpanded(model->index(row, 0), true);

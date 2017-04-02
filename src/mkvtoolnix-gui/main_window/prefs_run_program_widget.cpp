@@ -214,7 +214,7 @@ PrefsRunProgramWidget::setupToolTips() {
   Q_D(PrefsRunProgramWidget);
 
   auto conditionsToolTip = Q("%1 %2")
-    .arg(QY("If any of these checkboxes is checked, the program will be executed when the corresponding condition is met."))
+    .arg(QY("If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."))
     .arg(QY("Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."));
 
   Util::setToolTip(d->ui->leName, QY("This is an arbitrary name the GUI can use to refer to this particular configuration."));
