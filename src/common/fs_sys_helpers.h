@@ -45,6 +45,7 @@ void set_environment_variable(const std::string &key, const std::string &value);
 #define WINDOWS_VERSION_7            0x00060001
 
 unsigned int get_windows_version();
+std::string format_windows_message(uint64_t message_id);
 
 #endif
 

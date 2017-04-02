@@ -142,28 +142,9 @@ mm_file_io_c::_write(const void *buffer,
     bytes_written = 0;
 
   if (bytes_written != size) {
-    std::string error_msg_utf8;
-
-    DWORD error     = GetLastError();
-    char *error_msg = nullptr;
-    FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&error_msg, 0, nullptr);
-
-    if (error_msg) {
-      int idx = strlen(error_msg) - 1;
-
-      while ((0 <= idx) && ((error_msg[idx] == '\n') || (error_msg[idx] == '\r'))) {
-        error_msg[idx] = 0;
-        idx--;
-      }
-
-      error_msg_utf8 = g_cc_local_utf8->utf8(error_msg);
-    } else
-      error_msg_utf8 = Y("unknown");
-
+    auto error          = GetLastError();
+    auto error_msg_utf8 = mtx::sys::format_windows_message(error);
     mxerror(boost::format(Y("Could not write to the destination file: %1% (%2%)\n")) % error % error_msg_utf8);
-
-    if (error_msg)
-      LocalFree(error_msg);
   }
 
   m_current_position += bytes_written;

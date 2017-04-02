@@ -153,6 +153,22 @@ get_memory_usage() {
   return 0;
 }
 
+std::string
+format_windows_message(uint64_t message_id) {
+  char *buffer = nullptr;
+
+  FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, message_id, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&buffer, 0, nullptr);
+
+  if (!buffer)
+    return Y("unknown");
+
+  auto message = g_cc_local_utf8->utf8(buffer);
+
+  LocalFree(buffer);
+
+  return chomp(message);
+}
+
 }}
 
 #endif  // SYS_WINDOWS
