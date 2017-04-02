@@ -11,7 +11,9 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
-#if defined(SYS_WINDOWS)
+#if defined(SYS_LINUX)
+#include "mkvtoolnix-gui/jobs/program_runner/linux_program_runner.h"
+#elif defined(SYS_WINDOWS)
 #include "mkvtoolnix-gui/jobs/program_runner/windows_program_runner.h"
 #endif // SYS_WINDOWS
 #include "mkvtoolnix-gui/jobs/tool.h"
@@ -145,7 +147,9 @@ std::unique_ptr<ProgramRunner>
 ProgramRunner::create() {
   std::unique_ptr<ProgramRunner> runner;
 
-#if defined(SYS_WINDOWS)
+#if defined(SYS_LINUX)
+  runner.reset(new LinuxProgramRunner{});
+#elif defined(SYS_WINDOWS)
   runner.reset(new WindowsProgramRunner{});
 #endif // SYS_WINDOWS
 
