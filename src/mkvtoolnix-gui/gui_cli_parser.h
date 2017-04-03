@@ -7,21 +7,28 @@
 
 namespace mtx { namespace gui {
 
+class GuiCliParserPrivate;
 class GuiCliParser: public cli_parser_c {
-public:
-  QStringList m_configFiles, m_addToMerge, m_editChapters, m_editHeaders;
-
 protected:
-  QStringList *m_toProcess{};
-  bool m_exitAfterParsing{};
+  Q_DECLARE_PRIVATE(GuiCliParser);
+
+  QScopedPointer<GuiCliParserPrivate> const d_ptr;
+
+  explicit GuiCliParser(GuiCliParserPrivate &d, QWidget *parent);
 
 public:
   GuiCliParser(std::vector<std::string> const &args);
+  virtual ~GuiCliParser();
 
   void run();
   bool exitAfterParsing() const;
 
   QStringList rebuildCommandLine() const;
+
+  QStringList const &configFiles() const;
+  QStringList const &addToMerge() const;
+  QStringList const &editChapters() const;
+  QStringList const &editHeaders() const;
 
 protected:
   void initParser();

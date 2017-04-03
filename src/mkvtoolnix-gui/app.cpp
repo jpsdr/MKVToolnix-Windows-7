@@ -437,17 +437,17 @@ void
 App::handleCommandLineArgumentsLocally() {
   Q_D(App);
 
-  if (!d->m_cliParser->m_configFiles.isEmpty())
-    emit openConfigFilesRequested(d->m_cliParser->m_configFiles);
+  if (!d->m_cliParser->configFiles().isEmpty())
+    emit openConfigFilesRequested(d->m_cliParser->configFiles());
 
-  if (!d->m_cliParser->m_addToMerge.isEmpty())
-    emit addingFilesToMergeRequested(d->m_cliParser->m_addToMerge);
+  if (!d->m_cliParser->addToMerge().isEmpty())
+    emit addingFilesToMergeRequested(d->m_cliParser->addToMerge());
 
-  if (!d->m_cliParser->m_editChapters.isEmpty())
-    emit editingChaptersRequested(d->m_cliParser->m_editChapters);
+  if (!d->m_cliParser->editChapters().isEmpty())
+    emit editingChaptersRequested(d->m_cliParser->editChapters());
 
-  if (!d->m_cliParser->m_editHeaders.isEmpty())
-    emit editingHeadersRequested(d->m_cliParser->m_editHeaders);
+  if (!d->m_cliParser->editHeaders().isEmpty())
+    emit editingHeadersRequested(d->m_cliParser->editHeaders());
 }
 
 void
