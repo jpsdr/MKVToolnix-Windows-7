@@ -3,7 +3,6 @@
 
 #include "common/common_pch.h"
 
-#include <QAction>
 #include <QMainWindow>
 
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
@@ -16,7 +15,6 @@ class QShowEvent;
 
 namespace mtx { namespace gui {
 
-class StatusBarProgressWidget;
 class ToolBase;
 
 namespace ChapterEditor {
@@ -31,6 +29,9 @@ class Tool;
 namespace Merge {
 class Tool;
 }
+namespace Ui {
+class MainWindow;
+}
 namespace Util {
 class MovingPixmapOverlay;
 }
@@ -39,33 +40,20 @@ class Tab;
 class Tool;
 }
 
-namespace Ui {
-class MainWindow;
-}
-
+class MainWindowPrivate;
 class MainWindow : public QMainWindow {
   Q_OBJECT;
 
 protected:
-  // UI stuff:
-  std::unique_ptr<Ui::MainWindow> ui;
-  StatusBarProgressWidget *m_statusBarProgress{};
-  Merge::Tool *m_toolMerge{};
-  Jobs::Tool *m_toolJobs{};
-  HeaderEditor::Tool *m_toolHeaderEditor{};
-  ChapterEditor::Tool *m_toolChapterEditor{};
-  WatchJobs::Tool *m_watchJobTool{};
-  QList<QAction *> m_toolSelectionActions;
-  std::unique_ptr<Util::MovingPixmapOverlay> m_movingPixmapOverlay;
+  Q_DECLARE_PRIVATE(MainWindow);
 
-  QHash<QObject *, QString> m_helpURLs;
+  QScopedPointer<MainWindowPrivate> const d_ptr;
 
-protected:                      // static
-  static MainWindow *ms_mainWindow;
+  explicit MainWindow(MainWindowPrivate &d, QWidget *parent);
 
 public:
   explicit MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
+  virtual ~MainWindow();
 
   virtual void setStatusBarMessage(QString const &message);
 
