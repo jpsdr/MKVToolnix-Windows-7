@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/container.h"
+#include "mkvtoolnix-gui/util/media_player.h"
 #include "mkvtoolnix-gui/util/network_access_manager.h"
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -41,6 +42,7 @@ class AppPrivate {
   std::unique_ptr<GuiCliParser> m_cliParser;
   std::unique_ptr<QLocalServer> m_instanceCommunicator;
   std::unique_ptr<Jobs::ProgramRunner> m_programRunner;
+  std::unique_ptr<Util::MediaPlayer> m_mediaPlayer;
   Util::NetworkAccessManager *m_networkAccessManager{new Util::NetworkAccessManager{}};
   QThread m_networkAccessManagerThread;
   bool m_otherInstanceRunning{};
@@ -55,8 +57,6 @@ App::App(int &argc,
   : QApplication{argc, argv}
   , d_ptr{new AppPrivate{}}
 {
-  Q_D(App);
-
   mtx_common_init("mkvtoolnix-gui", argv[0]);
   version_info = get_version_info("mkvtoolnix-gui", vif_full);
 
@@ -73,8 +73,6 @@ App::App(int &argc,
 #ifdef SYS_WINDOWS
   QApplication::setStyle(Q("windowsvista"));
 #endif
-
-  d->m_programRunner = std::move(Jobs::ProgramRunner::create());
 
   Util::Settings::migrateFromRegistry();
   Util::Settings::get().load();
@@ -169,8 +167,31 @@ App::instance() {
 }
 
 Jobs::ProgramRunner &
+App::setupProgramRunner() {
+  Q_D(App);
+
+  if (!d->m_programRunner)
+    d->m_programRunner = std::move(Jobs::ProgramRunner::create());
+  return *d->m_programRunner;
+}
+
+Jobs::ProgramRunner &
 App::programRunner() {
-  return *static_cast<AppPrivate &>(*instance()->d_ptr.data()).m_programRunner;
+  return instance()->setupProgramRunner();
+}
+
+Util::MediaPlayer &
+App::setupMediaPlayer() {
+  Q_D(App);
+
+  if (!d->m_mediaPlayer)
+    d->m_mediaPlayer.reset(new Util::MediaPlayer);
+  return *d->m_mediaPlayer;
+}
+
+Util::MediaPlayer &
+App::mediaPlayer() {
+  return instance()->setupMediaPlayer();
 }
 
 void

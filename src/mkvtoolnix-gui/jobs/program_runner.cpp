@@ -17,7 +17,9 @@
 #include "mkvtoolnix-gui/jobs/program_runner/windows_program_runner.h"
 #endif // SYS_WINDOWS
 #include "mkvtoolnix-gui/jobs/tool.h"
+#include "mkvtoolnix-gui/util/media_player.h"
 #include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Jobs {
 
@@ -161,7 +163,7 @@ ProgramRunner::create() {
 
 bool
 ProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType type) {
-  return mtx::included_in(type, Util::Settings::RunProgramType::ExecuteProgram);
+  return mtx::included_in(type, Util::Settings::RunProgramType::ExecuteProgram, Util::Settings::RunProgramType::PlayAudioFile);
 }
 
 void
@@ -193,8 +195,8 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
 }
 
 void
-ProgramRunner::playAudioFile(Util::Settings::RunProgramConfig &/* config */) {
-  // Not supported yet.
+ProgramRunner::playAudioFile(Util::Settings::RunProgramConfig &config) {
+  App::mediaPlayer().playFile(Util::replaceMtxVariableWithApplicationDirectory(config.m_audioFile), config.m_volume);
 }
 
 void

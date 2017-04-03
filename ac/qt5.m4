@@ -164,7 +164,7 @@ if test x"$enable_qt" = "xyes" -a \
       with_qt_pkg_config_modules="$with_qt_pkg_config_modules,"
     fi
 
-    with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Core,Qt5Gui,Qt5Widgets,Qt5Network,Qt5Concurrent"
+    with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Core,Qt5Gui,Qt5Widgets,Qt5Multimedia,Qt5Network,Qt5Concurrent"
 
     if test x"$MINGW" = x1; then
       with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5WinExtras"
@@ -229,41 +229,70 @@ return 0;
       ])
     AC_LANG_POP()
 
-    rm -f src/info/static_plugins.cpp src/mkvtoolnix-gui/static_plugins.cpp
-
-    if test x"$QT_PKG_CONFIG_STATIC" != x; then
-      plugins_dir="`$QMAKE -query QT_INSTALL_PLUGINS`"
-
-      case "$host" in
-        *mingw*)          wanted_include=Windows ;;
-        *apple*|*darwin*) wanted_include=Cocoa   ;;
-        *)                wanted_include=Xcb     ;;
-      esac
-
-      wanted_plugin=`echo $wanted_include | tr '[A-Z]' '[a-z]'`
-
-      QT_LIBS="-L$plugins_dir/platforms -lq$wanted_plugin $QT_LIBS -lQt5PlatformSupport"
-
-      wanted_include=Q"$wanted_include"IntegrationPlugin
-
-      cat > src/mkvtoolnix-gui/static_plugins.cpp <<EOF
-#include <QtPlugin>
-
-Q_IMPORT_PLUGIN($wanted_include);
-EOF
-
-      cp src/mkvtoolnix-gui/static_plugins.cpp src/info/static_plugins.cpp
+    problem=""
+    if ! test x"$am_cv_qt_compilation" = x1; then
+      problem="test program could not be compiled"
     fi
 
-    if test x"$am_cv_qt_compilation" = x1; then
+    rm -f src/info/static_plugins.cpp src/mkvtoolnix-gui/static_plugins.cpp
+
+    if test x"$problem" = x && test x"$QT_PKG_CONFIG_STATIC" != x; then
+      qmake_dir="`mktemp -d`"
+
+      touch "$qmake_dir/empty.cpp"
+      cat > "$qmake_dir/dummy.pro" <<EOF
+QT += core multimedia
+CONFIG += release static
+TARGET = console
+TEMPLATE = app
+SOURCES += empty.cpp
+EOF
+
+      old_wd="$PWD"
+      cd "$qmake_dir"
+
+      "$QMAKE" -makefile -nocache dummy.pro > /dev/null
+
+      cd "$old_wd"
+
+      makefile=""
+      if ! test -f "$qmake_dir/console_plugin_import.cpp"; then
+        problem="static plugin list could not be generated via $QMAKE"
+
+      elif test -f "$qmake_dir/Makefile.Release"; then
+        makefile="$qmake_dir/Makefile.Release"
+
+      elif test -f "$qmake_dir/Makefile"; then
+        makefile="$qmake_dir/Makefile"
+
+      else
+        problem="the Makefile created by $QMAKE could not be found"
+      fi
+
+      if test x"$problem" = x; then
+        qmake_libs="`grep '^LIBS' "$makefile" | sed -Ee 's/^LIBS[[ \t]]*=[[ \t]]*//'`"
+        QT_LIBS="$qmake_libs $QT_LIBS"
+
+        cp "$qmake_dir/console_plugin_import.cpp" src/info/static_plugins.cpp
+        cp "$qmake_dir/console_plugin_import.cpp" src/mkvtoolnix-gui/static_plugins.cpp
+      fi
+
+      rm -rf "$qmake_dir"
+
+      unset makefile qmake_libs qmake_dir
+    fi
+
+    if test x"$problem" = x; then
      AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
      have_qt=yes
      USE_QT=yes
      opt_features_yes="$opt_features_yes\n   * GUIs"
      AC_MSG_RESULT(yes)
     else
-      AC_MSG_RESULT(no: test program could not be compiled)
+      AC_MSG_RESULT(no: $problem)
     fi
+
+    unset problem
   fi
 
   AC_PATH_PROG(LCONVERT, lconvert)

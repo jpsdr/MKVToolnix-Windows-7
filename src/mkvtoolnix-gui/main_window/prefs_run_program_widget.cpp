@@ -330,6 +330,8 @@ PrefsRunProgramWidget::changeExecutable() {
 
   d->executable = newExecutable;
 
+  enableControls();
+
   emit titleChanged();
 }
 
@@ -344,6 +346,8 @@ PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
     return;
 
   d->executable = newExecutable;
+
+  enableControls();
 
   emit titleChanged();
 }
@@ -398,11 +402,15 @@ PrefsRunProgramWidget::changeAudioFile() {
 
   d->ui->leAudioFile->setText(newAudioFile);
 
+  enableControls();
+
   emit titleChanged();
 }
 
 void
 PrefsRunProgramWidget::audioFileEdited() {
+  enableControls();
+
   emit titleChanged();
 }
 

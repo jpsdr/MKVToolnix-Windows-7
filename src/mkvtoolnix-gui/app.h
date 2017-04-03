@@ -14,6 +14,7 @@ class QThread;
 namespace mtx { namespace gui {
 
 namespace Util {
+class MediaPlayer;
 class NetworkAccessManager;
 }
 
@@ -78,9 +79,12 @@ public slots:
 protected:
   void setupInstanceCommunicator();
   void setupNetworkAccessManager();
+  Util::MediaPlayer &setupMediaPlayer();
+  Jobs::ProgramRunner &setupProgramRunner();
 
 public:
   static App *instance();
+  static Util::MediaPlayer &mediaPlayer();
   static Jobs::ProgramRunner &programRunner();
 
   static Iso639LanguageList const &iso639Languages();
