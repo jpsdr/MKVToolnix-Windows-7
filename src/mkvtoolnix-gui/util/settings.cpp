@@ -373,9 +373,9 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
     reg.beginGroup(group);
     cfg->m_active      = reg.value("active", true).toBool();
     cfg->m_name        = reg.value("name").toString();
-    auto type          = reg.value("type", static_cast<int>(RunProgramType::ExecuteProgram)).value<int>();
+    auto type          = reg.value("type", static_cast<int>(RunProgramType::ExecuteProgram)).toInt();
     cfg->m_type        = (type > static_cast<int>(RunProgramType::Min)) && (type < static_cast<int>(RunProgramType::Max)) ? static_cast<RunProgramType>(type) : RunProgramType::Default;
-    cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value("forEvents").value<int>());
+    cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value("forEvents").toInt());
     cfg->m_commandLine = reg.value("commandLine").toStringList();
     cfg->m_audioFile   = reg.value("audioFile").toString();
     cfg->m_volume      = std::min(reg.value("volume", 50).toUInt(), 100u);
