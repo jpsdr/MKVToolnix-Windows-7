@@ -328,16 +328,12 @@ PrefsRunProgramWidget::changeExecutable() {
 
   d->executable = newExecutable;
 
-  enableControls();
-
   emit titleChanged();
 }
 
 void
 PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
   Q_D(PrefsRunProgramWidget);
-
-  enableControls();
 
   auto arguments     = Util::unescapeSplit(commandLine, Util::EscapeShellUnix);
   auto newExecutable = arguments.value(0);
