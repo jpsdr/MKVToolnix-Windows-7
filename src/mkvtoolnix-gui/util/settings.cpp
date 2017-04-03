@@ -378,6 +378,7 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
     cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value("forEvents").value<int>());
     cfg->m_commandLine = reg.value("commandLine").toStringList();
     cfg->m_audioFile   = reg.value("audioFile").toString();
+    cfg->m_volume      = std::min(reg.value("volume", 50).toUInt(), 100u);
     reg.endGroup();
 
     if (cfg->isValid())
@@ -526,6 +527,7 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
     reg.setValue("forEvents",   static_cast<int>(cfg->m_forEvents));
     reg.setValue("commandLine", cfg->m_commandLine);
     reg.setValue("audioFile",   cfg->m_audioFile);
+    reg.setValue("volume",      cfg->m_volume);
     reg.endGroup();
   }
 

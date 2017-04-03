@@ -106,9 +106,11 @@ public:
   public:
     RunProgramType m_type{RunProgramType::ExecuteProgram};
     bool m_active{true};
-    QString m_name, m_audioFile;
-    QStringList m_commandLine;
+    QString m_name;
     RunProgramForEvents m_forEvents{};
+    QStringList m_commandLine;
+    QString m_audioFile;
+    unsigned int m_volume{50};
 
     bool isValid() const;
     QString name() const;

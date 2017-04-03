@@ -79,6 +79,7 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   d->ui->leName->setText(cfg.m_name);
   d->ui->leCommandLine->setText(Util::escape(cfg.m_commandLine, Util::EscapeShellUnix).join(" "));
   d->ui->leAudioFile->setText(QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(cfg.m_audioFile)));
+  d->ui->sbVolume->setValue(cfg.m_volume);
 
   for (auto const &checkBox : d->flagsByCheckbox.keys())
     if (cfg.m_forEvents & d->flagsByCheckbox[checkBox])
@@ -375,6 +376,7 @@ PrefsRunProgramWidget::config()
   cfg->m_commandLine = Util::unescapeSplit(cmdLine, Util::EscapeShellUnix);
   cfg->m_active      = d->ui->cbConfigurationActive->isChecked();
   cfg->m_audioFile   = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(d->ui->leAudioFile->text()));
+  cfg->m_volume      = d->ui->sbVolume->value();
 
   for (auto const &checkBox : d->flagsByCheckbox.keys())
     if (checkBox->isChecked())
