@@ -21,7 +21,7 @@ class PrefsRunProgramWidgetPrivate {
 
   std::unique_ptr<Ui::PrefsRunProgramWidget> ui;
   std::unique_ptr<QMenu> variableMenu;
-  QString name, executable, audioFile;
+  QString executable;
   QMap<QCheckBox *, Util::Settings::RunProgramForEvent> flagsByCheckbox;
   QMap<Util::Settings::RunProgramType, QWidget *> pagesByType;
 
@@ -351,11 +351,7 @@ PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
 }
 
 void
-PrefsRunProgramWidget::nameEdited(QString const &name) {
-  Q_D(PrefsRunProgramWidget);
-
-  d->name = name;
-
+PrefsRunProgramWidget::nameEdited() {
   emit titleChanged();
 }
 
@@ -397,26 +393,17 @@ PrefsRunProgramWidget::changeAudioFile() {
   auto filters = QStringList{} << QY("Audio files") + Q(" (*.aac *.flac *.m4a *.mp3 *.ogg *.opus *.wav)")
                                << QY("All files")   + Q(" (*)");
 
-  auto realAudioFile = Util::replaceMtxVariableWithApplicationDirectory(d->audioFile);
+  auto realAudioFile = Util::replaceMtxVariableWithApplicationDirectory(d->ui->leAudioFile->text());
   auto newAudioFile  = Util::getOpenFileName(this, QY("Select audio file"), realAudioFile, filters.join(Q(";;")));
   newAudioFile       = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(newAudioFile));
 
-  if (newAudioFile.isEmpty() || (newAudioFile == d->audioFile))
-    return;
-
-  d->audioFile = newAudioFile;
-
-  enableControls();
+  d->ui->leAudioFile->setText(newAudioFile);
 
   emit titleChanged();
 }
 
 void
-PrefsRunProgramWidget::audioFileEdited(QString const &audioFile) {
-  Q_D(PrefsRunProgramWidget);
-
-  d->audioFile = audioFile;
-
+PrefsRunProgramWidget::audioFileEdited() {
   emit titleChanged();
 }
 

@@ -36,12 +36,12 @@ protected slots:
   void selectVariableToAdd();
   void changeExecutable();
   void commandLineEdited(QString const &commandLine);
-  void nameEdited(QString const &name);
+  void nameEdited();
   void executeNow();
   void enableControls();
 
   void changeAudioFile();
-  void audioFileEdited(QString const &name);
+  void audioFileEdited();
 
 protected:
   void changeArguments(std::function<void(QStringList &)> const &worker);
