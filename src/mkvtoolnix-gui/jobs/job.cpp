@@ -10,6 +10,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/job.h"
+#include "mkvtoolnix-gui/jobs/job_p.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/config_file.h"
@@ -18,212 +19,269 @@
 
 namespace mtx { namespace gui { namespace Jobs {
 
-uint64_t Job::ms_next_id = 0;
+static uint64_t s_next_id = 0;
+
+JobPrivate::JobPrivate(Job::Status pStatus)
+  : id{s_next_id++}
+  , status{pStatus}
+{
+}
 
 Job::Job(Status status)
-  : m_id{ms_next_id++}
-  , m_status{status}
-  , m_progress{}
-  , m_exitCode{std::numeric_limits<unsigned int>::max()}
-  , m_warningsAcknowledged{}
-  , m_errorsAcknowledged{}
-  , m_quitAfterFinished{}
-  , m_modified{true}
-  , m_mutex{QMutex::Recursive}
+  : d_ptr{new JobPrivate{status}}
 {
-  connect(this, &Job::lineRead, this, &Job::addLineToInternalLogs);
+  setupJobConnections();
+}
+
+Job::Job(JobPrivate &d)
+  : d_ptr{&d}
+{
+  setupJobConnections();
 }
 
 Job::~Job() {
 }
 
+void
+Job::setupJobConnections() {
+  connect(this, &Job::lineRead, this, &Job::addLineToInternalLogs);
+}
+
 uint64_t
 Job::id()
   const {
-  return m_id;
+  Q_D(const Job);
+
+  return d->id;
 }
 
 QUuid
 Job::uuid()
   const {
-  return m_uuid;
+  Q_D(const Job);
+
+  return d->uuid;
 }
 
 Job::Status
 Job::status()
   const {
-  return m_status;
+  Q_D(const Job);
+
+  return d->status;
 }
 
 QString
 Job::description()
   const {
-  return m_description;
+  Q_D(const Job);
+
+  return d->description;
 }
 
 unsigned int
 Job::progress()
   const {
-  return m_progress;
+  Q_D(const Job);
+
+  return d->progress;
 }
 
 QStringList const &
 Job::output()
   const {
-  return m_output;
+  Q_D(const Job);
+
+  return d->output;
 }
 
 QStringList const &
 Job::warnings()
   const {
-  return m_warnings;
+  Q_D(const Job);
+
+  return d->warnings;
 }
 
 QStringList const &
 Job::errors()
   const {
-  return m_errors;
+  Q_D(const Job);
+
+  return d->errors;
 }
 
 QStringList const &
 Job::fullOutput()
   const {
-  return m_fullOutput;
+  Q_D(const Job);
+
+  return d->fullOutput;
 }
 
 QDateTime
 Job::dateAdded()
   const {
-  return m_dateAdded;
+  Q_D(const Job);
+
+  return d->dateAdded;
 }
 
 QDateTime
 Job::dateStarted()
   const {
-  return m_dateStarted;
+  Q_D(const Job);
+
+  return d->dateStarted;
 }
 
 QDateTime
 Job::dateFinished()
   const {
-  return m_dateFinished;
+  Q_D(const Job);
+
+  return d->dateFinished;
 }
 
 bool
 Job::isModified()
   const {
-  return m_modified;
+  Q_D(const Job);
+
+  return d->modified;
 }
 
 void
 Job::setDescription(QString const &pDescription) {
-  m_description = pDescription;
-  m_modified    = true;
+  Q_D(Job);
+
+  d->description = pDescription;
+  d->modified    = true;
 }
 
 void
 Job::setDateAdded(QDateTime const &pDateAdded) {
-  m_dateAdded = pDateAdded;
-  m_modified  = true;
+  Q_D(Job);
+
+  d->dateAdded = pDateAdded;
+  d->modified  = true;
 }
 
 void
 Job::setDateFinished(QDateTime const &pDateFinished) {
-  m_dateFinished = pDateFinished;
-  m_modified     = true;
+  Q_D(Job);
+
+  d->dateFinished = pDateFinished;
+  d->modified     = true;
 }
 
 void
 Job::setQuitAfterFinished(bool pQuitAfterFinished) {
-  m_quitAfterFinished = pQuitAfterFinished;
-  m_modified          = true;
+  Q_D(Job);
+
+  d->quitAfterFinished = pQuitAfterFinished;
+  d->modified          = true;
 }
 
 void
 Job::action(std::function<void()> code) {
-  QMutexLocker locked{&m_mutex};
+  Q_D(Job);
+
+  QMutexLocker locked{&d->mutex};
 
   code();
 }
 
 void
 Job::setStatus(Status status) {
-  QMutexLocker locked{&m_mutex};
+  Q_D(Job);
 
-  if (status == m_status)
+  QMutexLocker locked{&d->mutex};
+
+  if (status == d->status)
     return;
 
-  auto oldStatus = m_status;
-  m_status       = status;
-  m_modified     = true;
+  auto oldStatus = d->status;
+  d->status       = status;
+  d->modified     = true;
 
   if (Running == status) {
-    m_dateStarted = QDateTime::currentDateTime();
-    m_fullOutput.clear();
-    m_output.clear();
-    m_warnings.clear();
-    m_errors.clear();
-    m_warningsAcknowledged = 0;
-    m_errorsAcknowledged   = 0;
+    d->dateStarted = QDateTime::currentDateTime();
+    d->fullOutput.clear();
+    d->output.clear();
+    d->warnings.clear();
+    d->errors.clear();
+    d->warningsAcknowledged = 0;
+    d->errorsAcknowledged   = 0;
 
   } else if ((DoneOk == status) || (DoneWarnings == status) || (Failed == status) || (Aborted == status))
-    m_dateFinished = QDateTime::currentDateTime();
+    d->dateFinished = QDateTime::currentDateTime();
 
   if (oldStatus == Running)
     runProgramsAfterCompletion();
 
-  emit statusChanged(m_id, oldStatus, status);
+  emit statusChanged(d->id, oldStatus, status);
 }
 
 bool
 Job::isToBeProcessed()
   const {
-  return (Running == m_status) || (PendingAuto == m_status);
+  Q_D(const Job);
+
+  return (Running == d->status) || (PendingAuto == d->status);
 }
 
 void
 Job::setProgress(unsigned int progress) {
-  QMutexLocker locked{&m_mutex};
+  Q_D(Job);
 
-  if (progress == m_progress)
+  QMutexLocker locked{&d->mutex};
+
+  if (progress == d->progress)
     return;
 
-  m_progress = progress;
-  m_modified = true;
-  emit progressChanged(m_id, m_progress);
+  d->progress = progress;
+  d->modified = true;
+  emit progressChanged(d->id, d->progress);
 }
 
 void
 Job::setPendingAuto() {
-  QMutexLocker locked{&m_mutex};
+  Q_D(Job);
 
-  if ((PendingAuto != m_status) && (Running != m_status))
+  QMutexLocker locked{&d->mutex};
+
+  if ((PendingAuto != d->status) && (Running != d->status))
     setStatus(PendingAuto);
 }
 
 void
 Job::setPendingManual() {
-  QMutexLocker locked{&m_mutex};
+  Q_D(Job);
 
-  if ((PendingManual != m_status) && (Running != m_status))
+  QMutexLocker locked{&d->mutex};
+
+  if ((PendingManual != d->status) && (Running != d->status))
     setStatus(PendingManual);
 }
 
 void
 Job::addLineToInternalLogs(QString const &line,
                            LineType type) {
-  auto &storage = InfoLine    == type ? m_output
-                : WarningLine == type ? m_warnings
-                :                       m_errors;
+  Q_D(Job);
+
+  auto &storage = InfoLine    == type ? d->output
+                : WarningLine == type ? d->warnings
+                :                       d->errors;
 
   auto prefix   = InfoLine    == type ? Q("")
                 : WarningLine == type ? Q("%1 ").arg(QY("Warning:"))
                 :                       Q("%1 ").arg(QY("Error:"));
 
-  m_fullOutput << Q("%1%2").arg(prefix).arg(line);
-  storage      << line;
+  d->fullOutput << Q("%1%2").arg(prefix).arg(line);
+  storage       << line;
 
-  m_modified    = true;
+  d->modified    = true;
 
   if ((WarningLine == type) || (ErrorLine == type))
     updateUnacknowledgedWarningsAndErrors();
@@ -265,7 +323,9 @@ Job::queueLocation() {
 QString
 Job::queueFileName()
   const {
-  return Q("%1/%2.mtxcfg").arg(queueLocation()).arg(m_uuid.toString());
+  Q_D(const Job);
+
+  return Q("%1/%2.mtxcfg").arg(queueLocation()).arg(d->uuid.toString());
 }
 
 void
@@ -276,8 +336,10 @@ Job::removeQueueFile()
 
 void
 Job::saveQueueFile() {
-  if (m_uuid.isNull())
-    m_uuid = QUuid::createUuid();
+  Q_D(Job);
+
+  if (d->uuid.isNull())
+    d->uuid = QUuid::createUuid();
 
   auto fileName = queueFileName();
   if (!isModified() && QFileInfo{ fileName }.exists())
@@ -290,55 +352,59 @@ Job::saveQueueFile() {
 
 void
 Job::saveJob(Util::ConfigFile &settings) {
+  Q_D(Job);
+
   auto resetCounters = Util::Settings::get().m_resetJobWarningErrorCountersOnExit;
 
-  settings.setValue("uuid",                 m_uuid);
-  settings.setValue("status",               static_cast<unsigned int>(m_status));
-  settings.setValue("description",          m_description);
-  settings.setValue("output",               m_output);
-  settings.setValue("warnings",             m_warnings);
-  settings.setValue("errors",               m_errors);
-  settings.setValue("fullOutput",           m_fullOutput);
-  settings.setValue("progress",             m_progress);
-  settings.setValue("exitCode",             m_exitCode);
-  settings.setValue("warningsAcknowledged", resetCounters ? m_warnings.count() : m_warningsAcknowledged);
-  settings.setValue("errorsAcknowledged",   resetCounters ? m_errors.count()   : m_errorsAcknowledged);
-  settings.setValue("dateAdded",            m_dateAdded);
-  settings.setValue("dateStarted",          m_dateStarted);
-  settings.setValue("dateFinished",         m_dateFinished);
+  settings.setValue("uuid",                 d->uuid);
+  settings.setValue("status",               static_cast<unsigned int>(d->status));
+  settings.setValue("description",          d->description);
+  settings.setValue("output",               d->output);
+  settings.setValue("warnings",             d->warnings);
+  settings.setValue("errors",               d->errors);
+  settings.setValue("fullOutput",           d->fullOutput);
+  settings.setValue("progress",             d->progress);
+  settings.setValue("exitCode",             d->exitCode);
+  settings.setValue("warningsAcknowledged", resetCounters ? d->warnings.count() : d->warningsAcknowledged);
+  settings.setValue("errorsAcknowledged",   resetCounters ? d->errors.count()   : d->errorsAcknowledged);
+  settings.setValue("dateAdded",            d->dateAdded);
+  settings.setValue("dateStarted",          d->dateStarted);
+  settings.setValue("dateFinished",         d->dateFinished);
 
   saveJobInternal(settings);
 
-  m_modified = false;
+  d->modified = false;
 }
 
 void
 Job::loadJobBasis(Util::ConfigFile &settings) {
-  m_modified             = false;
-  m_uuid                 = settings.value("uuid").toUuid();
-  m_status               = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
-  m_description          = settings.value("description").toString();
-  m_output               = settings.value("output").toStringList();
-  m_warnings             = settings.value("warnings").toStringList();
-  m_errors               = settings.value("errors").toStringList();
-  m_fullOutput           = settings.value("fullOutput").toStringList();
-  m_progress             = settings.value("progress").toUInt();
-  m_exitCode             = settings.value("exitCode").toUInt();
-  m_warningsAcknowledged = settings.value("warningsAcknowledged", 0).toUInt();
-  m_errorsAcknowledged   = settings.value("errorsAcknowledged",   0).toUInt();
-  m_dateAdded            = settings.value("dateAdded").toDateTime();
-  m_dateStarted          = settings.value("dateStarted").toDateTime();
-  m_dateFinished         = settings.value("dateFinished").toDateTime();
+  Q_D(Job);
 
-  if (m_uuid.isNull())
-    m_uuid = QUuid::createUuid();
+  d->modified             = false;
+  d->uuid                 = settings.value("uuid").toUuid();
+  d->status               = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
+  d->description          = settings.value("description").toString();
+  d->output               = settings.value("output").toStringList();
+  d->warnings             = settings.value("warnings").toStringList();
+  d->errors               = settings.value("errors").toStringList();
+  d->fullOutput           = settings.value("fullOutput").toStringList();
+  d->progress             = settings.value("progress").toUInt();
+  d->exitCode             = settings.value("exitCode").toUInt();
+  d->warningsAcknowledged = settings.value("warningsAcknowledged", 0).toUInt();
+  d->errorsAcknowledged   = settings.value("errorsAcknowledged",   0).toUInt();
+  d->dateAdded            = settings.value("dateAdded").toDateTime();
+  d->dateStarted          = settings.value("dateStarted").toDateTime();
+  d->dateFinished         = settings.value("dateFinished").toDateTime();
 
-  if (Running == m_status)
-    m_status = Aborted;
+  if (d->uuid.isNull())
+    d->uuid = QUuid::createUuid();
+
+  if (Running == d->status)
+    d->status = Aborted;
 
   if (Util::Settings::get().m_resetJobWarningErrorCountersOnExit) {
-    m_warningsAcknowledged = m_warnings.count();
-    m_errorsAcknowledged   = m_errors.count();
+    d->warningsAcknowledged = d->warnings.count();
+    d->errorsAcknowledged   = d->errors.count();
   }
 }
 
@@ -372,47 +438,59 @@ Job::loadJob(Util::ConfigFile &settings) {
 
 void
 Job::acknowledgeWarnings() {
-  if (m_warnings.count() == m_warningsAcknowledged)
+  Q_D(Job);
+
+  if (d->warnings.count() == d->warningsAcknowledged)
     return;
 
-  m_warningsAcknowledged = m_warnings.count();
-  m_modified             = true;
+  d->warningsAcknowledged = d->warnings.count();
+  d->modified             = true;
   updateUnacknowledgedWarningsAndErrors();
 }
 
 void
 Job::acknowledgeErrors() {
-  if (m_errors.count() == m_errorsAcknowledged)
+  Q_D(Job);
+
+  if (d->errors.count() == d->errorsAcknowledged)
     return;
 
-  m_errorsAcknowledged = m_errors.count();
-  m_modified           = true;
+  d->errorsAcknowledged = d->errors.count();
+  d->modified           = true;
   updateUnacknowledgedWarningsAndErrors();
 }
 
 void
 Job::updateUnacknowledgedWarningsAndErrors() {
-  emit numUnacknowledgedWarningsOrErrorsChanged(m_id, numUnacknowledgedWarnings(), numUnacknowledgedErrors());
+  Q_D(Job);
+
+  emit numUnacknowledgedWarningsOrErrorsChanged(d->id, numUnacknowledgedWarnings(), numUnacknowledgedErrors());
 }
 
 int
 Job::numUnacknowledgedWarnings()
   const {
-  return m_warnings.count() - m_warningsAcknowledged;
+  Q_D(const Job);
+
+  return d->warnings.count() - d->warningsAcknowledged;
 }
 
 int
 Job::numUnacknowledgedErrors()
   const {
-  return m_errors.count() - m_errorsAcknowledged;
+  Q_D(const Job);
+
+  return d->errors.count() - d->errorsAcknowledged;
 }
 
 void
 Job::runProgramsAfterCompletion() {
-  if (!mtx::included_in(m_status, DoneOk, DoneWarnings, Failed))
+  Q_D(Job);
+
+  if (!mtx::included_in(d->status, DoneOk, DoneWarnings, Failed))
     return;
 
-  auto event = m_status == Failed ? Util::Settings::RunAfterJobCompletesWithErrors : Util::Settings::RunAfterJobCompletesSuccessfully;
+  auto event = d->status == Failed ? Util::Settings::RunAfterJobCompletesWithErrors : Util::Settings::RunAfterJobCompletesSuccessfully;
 
   App::programRunner().run(event, [this](ProgramRunner::VariableMap &variables) {
     runProgramSetupVariables(variables);
@@ -424,10 +502,12 @@ Job::runProgramsAfterCompletion() {
 void
 Job::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
   const{
-  variables[Q("JOB_START_TIME")]  << m_dateStarted.toString(Qt::ISODate);
-  variables[Q("JOB_END_TIME")]    << m_dateFinished.toString(Qt::ISODate);
-  variables[Q("JOB_DESCRIPTION")] << m_description;
-  variables[Q("JOB_EXIT_CODE")]   << QString::number(m_exitCode);
+  Q_D(const Job);
+
+  variables[Q("JOB_START_TIME")]  << d->dateStarted.toString(Qt::ISODate);
+  variables[Q("JOB_END_TIME")]    << d->dateFinished.toString(Qt::ISODate);
+  variables[Q("JOB_DESCRIPTION")] << d->description;
+  variables[Q("JOB_EXIT_CODE")]   << QString::number(d->exitCode);
 }
 
 }}}

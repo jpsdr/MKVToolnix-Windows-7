@@ -10,6 +10,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/jobs/mux_job_p.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
@@ -21,57 +22,81 @@ namespace mtx { namespace gui { namespace Jobs {
 
 using namespace mtx::gui;
 
+MuxJobPrivate::MuxJobPrivate(Job::Status pStatus,
+                             mtx::gui::Merge::MuxConfigPtr const &pConfig)
+  : JobPrivate{pStatus}
+  , config{pConfig}
+{
+}
+
 MuxJob::MuxJob(Status status,
                Merge::MuxConfigPtr const &config)
-  : Job{status}
-  , m_config{config}
-  , m_aborted{}
+  : Job{*new MuxJobPrivate{status, config}}
 {
- connect(&m_process, &QProcess::readyReadStandardOutput,                                              this, &MuxJob::readAvailable);
- connect(&m_process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &MuxJob::processFinished);
- connect(&m_process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error),       this, &MuxJob::processError);
+  setupMuxJobConnections();
+}
+
+MuxJob::MuxJob(MuxJobPrivate &d)
+  : Job{d}
+{
+  setupMuxJobConnections();
 }
 
 MuxJob::~MuxJob() {
 }
 
 void
+MuxJob::setupMuxJobConnections() {
+  Q_D(MuxJob);
+
+  connect(&d->process, &QProcess::readyReadStandardOutput,                                              this, &MuxJob::readAvailable);
+  connect(&d->process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &MuxJob::processFinished);
+  connect(&d->process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error),       this, &MuxJob::processError);
+}
+
+void
 MuxJob::abort() {
-  if (m_aborted || (QProcess::NotRunning == m_process.state()))
+  Q_D(MuxJob);
+
+  if (d->aborted || (QProcess::NotRunning == d->process.state()))
     return;
 
-  m_aborted = true;
-  m_process.close();
+  d->aborted = true;
+  d->process.close();
 }
 
 void
 MuxJob::start() {
-  m_aborted      = false;
-  m_settingsFile = Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob", m_config->buildMkvmergeOptions());
+  Q_D(MuxJob);
+
+  d->aborted      = false;
+  d->settingsFile = Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob", d->config->buildMkvmergeOptions());
 
   setStatus(Job::Running);
   setProgress(0);
 
-  m_process.start(Util::Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
+  d->process.start(Util::Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(d->settingsFile->fileName()), QIODevice::ReadOnly);
 }
 
 void
 MuxJob::processBytesRead() {
-  m_bytesRead.replace("\r\n", "\n").replace('\r', '\n');
+  Q_D(MuxJob);
 
-  auto start = 0, numRead = m_bytesRead.size();
+  d->bytesRead.replace("\r\n", "\n").replace('\r', '\n');
+
+  auto start = 0, numRead = d->bytesRead.size();
 
   while (start < numRead) {
-    auto pos = m_bytesRead.indexOf('\n', start);
+    auto pos = d->bytesRead.indexOf('\n', start);
     if (-1 == pos)
       break;
 
-    processLine(QString::fromUtf8(m_bytesRead.mid(start, pos - start)));
+    processLine(QString::fromUtf8(d->bytesRead.mid(start, pos - start)));
 
     start = pos + 1;
   }
 
-  m_bytesRead.remove(0, start);
+  d->bytesRead.remove(0, start);
 }
 
 void
@@ -113,18 +138,22 @@ MuxJob::processLine(QString const &rawLine) {
 
 void
 MuxJob::readAvailable() {
-  m_bytesRead += m_process.readAllStandardOutput();
+  Q_D(MuxJob);
+
+  d->bytesRead += d->process.readAllStandardOutput();
   processBytesRead();
 }
 
 void
 MuxJob::processFinished(int exitCode,
                         QProcess::ExitStatus exitStatus) {
-  if (!m_bytesRead.isEmpty())
-    processLine(QString::fromUtf8(m_bytesRead));
+  Q_D(MuxJob);
 
-  m_exitCode  = exitCode;
-  auto status = m_aborted                          ? Job::Aborted
+  if (!d->bytesRead.isEmpty())
+    processLine(QString::fromUtf8(d->bytesRead));
+
+  d->exitCode = exitCode;
+  auto status = d->aborted                         ? Job::Aborted
               : QProcess::NormalExit != exitStatus ? Job::Failed
               : 0 == exitCode                      ? Job::DoneOk
               : 1 == exitCode                      ? Job::DoneWarnings
@@ -132,7 +161,7 @@ MuxJob::processFinished(int exitCode,
 
   setStatus(status);
 
-  if (m_quitAfterFinished)
+  if (d->quitAfterFinished)
     QTimer::singleShot(0, MainWindow::get(), SLOT(close()));
 }
 
@@ -153,25 +182,31 @@ MuxJob::displayableType()
 QString
 MuxJob::displayableDescription()
   const {
-  QFileInfo info{m_config->m_destination};
+  Q_D(const MuxJob);
+
+  QFileInfo info{d->config->m_destination};
   return QY("Multiplexing to file \"%1\" in directory \"%2\"").arg(info.fileName()).arg(QDir::toNativeSeparators(info.dir().path()));
 }
 
 QString
 MuxJob::outputFolder()
   const {
-  QFileInfo info{m_config->m_destination};
+  Q_D(const MuxJob);
+
+  QFileInfo info{d->config->m_destination};
   return info.dir().path();
 }
 
 void
 MuxJob::saveJobInternal(Util::ConfigFile &settings)
   const {
+  Q_D(const MuxJob);
+
   settings.setValue("jobType", "MuxJob");
-  settings.setValue("aborted", m_aborted);
+  settings.setValue("aborted", d->aborted);
 
   settings.beginGroup("muxConfig");
-  m_config->save(settings);
+  d->config->save(settings);
   settings.endGroup();
 }
 
@@ -183,18 +218,20 @@ MuxJob::loadMuxJob(Util::ConfigFile &settings) {
   config->load(settings);
   settings.endGroup();
 
-  auto job       = new MuxJob{PendingManual, config};
-  job->m_aborted = settings.value("aborted", false).toBool();
+  auto job                                                 = std::make_shared<MuxJob>(PendingManual, config);
+  static_cast<MuxJobPrivate *>(job->d_ptr.data())->aborted = settings.value("aborted", false).toBool();
   job->loadJobBasis(settings);
 
-  return JobPtr{ job };
+  return std::static_pointer_cast<Job>(job);
 }
 
 Merge::MuxConfig const &
 MuxJob::config()
   const {
-  Q_ASSERT(!!m_config);
-  return *m_config;
+  Q_D(const MuxJob);
+
+  Q_ASSERT(!!d->config);
+  return *d->config;
 }
 
 void

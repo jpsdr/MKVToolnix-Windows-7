@@ -8,15 +8,11 @@
 
 #include "mkvtoolnix-gui/jobs/job.h"
 
-class QTemporaryFile;
-
 namespace mtx { namespace gui {
 
 namespace Merge {
-
 class MuxConfig;
 using MuxConfigPtr = std::shared_ptr<MuxConfig>;
-
 }
 
 namespace Util {
@@ -25,14 +21,14 @@ class ConfigFile;
 
 namespace Jobs {
 
+class MuxJobPrivate;
 class MuxJob: public Job {
   Q_OBJECT;
+
 protected:
-  mtx::gui::Merge::MuxConfigPtr m_config;
-  QProcess m_process;
-  bool m_aborted;
-  QByteArray m_bytesRead;
-  std::unique_ptr<QTemporaryFile> m_settingsFile;
+  Q_DECLARE_PRIVATE(MuxJob);
+
+  explicit MuxJob(MuxJobPrivate &d);
 
 public:
   MuxJob(Status status, mtx::gui::Merge::MuxConfigPtr const &config);
@@ -55,6 +51,7 @@ public slots:
   virtual void abort() override;
 
 protected:
+  void setupMuxJobConnections();
   void processBytesRead();
   void processLine(QString const &rawLine);
   virtual void saveJobInternal(Util::ConfigFile &settings) const;
