@@ -14,6 +14,9 @@
   default duration header field. Fixes #1916.
 * mkvmerge: Matroska input: invalid track language elements are now treated as
   if they were set to `und` = "undetermined". See #1929 for context.
+* MKVToolNix GUI, header editor: empty track language elements are now treated
+  the same as those set to invalid ISO 639-2 codes: as if they were set to
+  `und` = "undetermined". See #1929 for context.
 
 ## Build system changes
 

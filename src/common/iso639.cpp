@@ -584,6 +584,9 @@ is_popular_language_code(std::string const &code) {
 int
 map_to_iso639_2_code(std::string const &s,
                      bool allow_short_english_name) {
+  if (s.empty())
+    return -1;
+
   auto source          = s;
   auto deprecated_code = s_deprecated_1_and_2_codes.find(source);
   if (deprecated_code != s_deprecated_1_and_2_codes.end())
