@@ -1287,6 +1287,18 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
         track->language.clear();
     }
 
+    // The variable can be empty in two cases, both of which are a
+    // violation of the specification:
+    //
+    // 1. The element is present but set to a string of length 0.
+    // 2. The element is present and set to a value that isn't a valid
+    //    ISO 639-2 language code.
+    //
+    // The closest code that's semantically the closest to such a
+    // situation is probably "und" = "undetermined".
+    if (track->language.empty())
+      track->language = "und";
+
     if (0 != track->default_duration)
       track->v_frate = 1000000000.0 / track->default_duration;
 

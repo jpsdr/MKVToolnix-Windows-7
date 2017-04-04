@@ -12,6 +12,8 @@
   Matroska or MP4 files), specifying a default duration as fields (e.g. `50i`)
   would result in double the actual duration for each frame and the track's
   default duration header field. Fixes #1916.
+* mkvmerge: Matroska input: invalid track language elements are now treated as
+  if they were set to `und` = "undetermined". See #1929 for context.
 
 ## Build system changes
 
