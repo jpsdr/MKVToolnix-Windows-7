@@ -336,8 +336,9 @@ safe for those whose name starts with `mkv`.
 
 The preferred form of modification are the SVG icons. These are not
 part of the binary distribution of MKVToolNix, but they are contained
-in the source code in the `icons/svg` sub-directory. You can obtain
-the source code from [the MKVToolNix website](https://mkvtoolnix.download/).
+in the source code in the `icons/scalable` sub-directory. You can
+obtain the source code from the
+[MKVToolNix website](https://mkvtoolnix.download/).
 
   * License: GNU Lesser General Public License v3 (see `doc/licenses/LGPL-3.0.txt`)
   * URL: https://techbase.kde.org/Projects/Oxygen
