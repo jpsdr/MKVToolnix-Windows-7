@@ -203,6 +203,18 @@ function build_qtmacextras {
   CXXFLAGS=$saved_CXXFLAGS
 }
 
+function build_qtmultimedia {
+  local saved_CXXFLAGS=$CXXFLAGS
+  export CXXFLAGS="${QT_CXXFLAGS}"
+  export QMAKE_CXXFLAGS="${CXXFLAGS}"
+
+  CONFIGURE=qmake NO_MAKE=1 build_package qtmultimedia-opensource-src-${QTVER}.tar.xz
+  $DEBUG make
+  build_tarball command "make INSTALL_ROOT=TMPDIR install"
+
+  CXXFLAGS=$saved_CXXFLAGS
+}
+
 function build_configured_mkvtoolnix {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
@@ -396,6 +408,7 @@ if [[ -z $@ ]]; then
   build_gettext
   build_boost
   build_qtbase
+  build_qtmultimedia
   build_qttools
   build_qttranslations
   build_ruby
