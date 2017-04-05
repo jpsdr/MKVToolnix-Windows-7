@@ -13,6 +13,8 @@
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 #if defined(SYS_LINUX)
 #include "mkvtoolnix-gui/jobs/program_runner/linux_program_runner.h"
+#elif defined(SYS_APPLE)
+#include "mkvtoolnix-gui/jobs/program_runner/macos_program_runner.h"
 #elif defined(SYS_WINDOWS)
 #include "mkvtoolnix-gui/jobs/program_runner/windows_program_runner.h"
 #endif // SYS_WINDOWS
@@ -151,6 +153,8 @@ ProgramRunner::create() {
 
 #if defined(SYS_LINUX)
   runner.reset(new LinuxProgramRunner{});
+#elif defined(SYS_APPLE)
+  runner.reset(new MacOSProgramRunner{});
 #elif defined(SYS_WINDOWS)
   runner.reset(new WindowsProgramRunner{});
 #endif // SYS_WINDOWS
@@ -197,6 +201,12 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
 void
 ProgramRunner::playAudioFile(Util::Settings::RunProgramConfig &config) {
   App::mediaPlayer().playFile(Util::replaceMtxVariableWithApplicationDirectory(config.m_audioFile), config.m_volume);
+}
+
+QString
+ProgramRunner::defaultAudioFileName()
+  const {
+  return Q("%1/sounds/finished-1.ogg").arg(Q(MTX_PKG_DATA_DIR));
 }
 
 void

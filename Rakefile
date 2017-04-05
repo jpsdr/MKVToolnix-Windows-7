@@ -142,7 +142,7 @@ def setup_globals
   windres                  = ""
   windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH) == 'amd64'
 
-  mocflags                 = $building_for[:windows] ? "-DSYS_WINDOWS" : ""
+  mocflags                 = $building_for[:macos] ? "-DSYS_APPLE" : $building_for[:windows] ? "-DSYS_WINDOWS" : ""
 
   $flags                   = {
     :cflags                => cflags,

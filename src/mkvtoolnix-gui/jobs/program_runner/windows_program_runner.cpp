@@ -86,6 +86,12 @@ WindowsProgramRunner::suspendComputer(Util::Settings::RunProgramConfig &) {
   qDebug() << "WindowsProgramRunner::suspendComputer: sleep failed, too. Not trying anything else. Error:" << error << Q(mtx::sys::format_windows_message(error));
 }
 
+QString
+WindowsProgramRunner::defaultAudioFileName()
+  const {
+  return Q("<MTX_INSTALLATION_DIRECTORY>\\sounds\\finished-1.ogg");
+}
+
 }}}
 
 #endif  // SYS_WINDOWS

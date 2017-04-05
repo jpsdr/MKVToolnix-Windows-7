@@ -197,6 +197,9 @@ protected:
   void saveSplitterSizes(QSettings &reg) const;
   void saveRunProgramConfigurations(QSettings &reg) const;
 
+  void addDefaultRunProgramConfigurations(QSettings &reg);
+  void addDefaultRunProgramConfigurationForType(QSettings &reg, RunProgramType type, std::function<void(RunProgramConfig &)> const &modifier = nullptr);
+
 protected:
   static Settings s_settings;
 

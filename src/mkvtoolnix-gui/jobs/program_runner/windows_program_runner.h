@@ -18,6 +18,8 @@ public:
 
   virtual bool isRunProgramTypeSupported(Util::Settings::RunProgramType type) override;
 
+  virtual QString defaultAudioFileName() const override;
+
 protected:
   virtual void shutDownComputer(Util::Settings::RunProgramConfig &config) override;
   virtual void suspendComputer(Util::Settings::RunProgramConfig &config) override;

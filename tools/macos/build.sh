@@ -336,12 +336,13 @@ EOF
 EOF
 
   mkdir -p ${dmgcnt}/plugins/platforms ${dmgmac}/libs
-  cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
-  cp -v -R ${TARGET}/plugins/platforms ${dmgmac}/
+  cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
 
-  for LIB (${dmgmac}/libs/libQt*.5.dylib) echo install_name_tool -id @executable_path/libs/${LIB:t} ${LIB}
+  for plugin (audio mediaservice platforms playlistformats) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
 
-  for FILE (${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui} ${dmgmac}/libs/libQt*.5.dylib ${dmgmac}/platforms/*.dylib) {
+  for LIB (${dmgmac}/**/*.dylib(.)) echo install_name_tool -id @executable_path/${LIB#${dmgmac}/} ${LIB}
+
+  for FILE (${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui} ${dmgmac}/**/*.dylib) {
     otool -L ${FILE} | \
       grep -v : | \
       grep -v @executable_path | \

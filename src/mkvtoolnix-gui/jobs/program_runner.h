@@ -38,6 +38,8 @@ public:
 
   virtual void run(Util::Settings::RunProgramForEvent forEvent, std::function<void(VariableMap &)> const &setupVariables, Util::Settings::RunProgramConfigPtr const &forceRunThis = Util::Settings::RunProgramConfigPtr{});
 
+  virtual QString defaultAudioFileName() const;
+
 public slots:
   virtual void executeActionsAfterJobFinishes(Job const &job);
   virtual void executeActionsAfterQueueFinishes(Jobs::QueueStatus status);

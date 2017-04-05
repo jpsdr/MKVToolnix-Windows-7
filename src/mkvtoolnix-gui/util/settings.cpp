@@ -11,6 +11,7 @@
 #include "common/qt.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/jobs/program_runner.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -309,6 +310,7 @@ Settings::load() {
   loadDefaults(reg, guiVersion);
   loadSplitterSizes(reg);
   loadRunProgramConfigurations(reg);
+  addDefaultRunProgramConfigurations(reg);
 }
 
 void
@@ -384,6 +386,45 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
     if (cfg->isValid())
       m_runProgramConfigurations << cfg;
   }
+
+  reg.endGroup();               // runProgramConfigurations
+}
+
+void
+Settings::addDefaultRunProgramConfigurationForType(QSettings &reg,
+                                                   RunProgramType type,
+                                                   std::function<void(RunProgramConfig &)> const &modifier) {
+  auto guard = Q("addedDefaultConfigurationType%1").arg(static_cast<int>(type));
+
+  if (reg.value(guard).toBool() || !App::programRunner().isRunProgramTypeSupported(type))
+    return;
+
+  auto cfg      = std::make_shared<RunProgramConfig>();
+
+  cfg->m_active = true;
+  cfg->m_type   = type;
+
+  if (modifier)
+    modifier(*cfg);
+
+  if (cfg->isValid()) {
+    m_runProgramConfigurations << cfg;
+    reg.setValue(guard, true);
+  }
+}
+
+void
+Settings::addDefaultRunProgramConfigurations(QSettings &reg) {
+  reg.beginGroup("runProgramConfigurations");
+
+  auto numConfigurationsBefore = m_runProgramConfigurations.count();
+
+  addDefaultRunProgramConfigurationForType(reg, RunProgramType::PlayAudioFile, [](RunProgramConfig &cfg) { cfg.m_audioFile = App::programRunner().defaultAudioFileName(); });
+  addDefaultRunProgramConfigurationForType(reg, RunProgramType::SuspendComputer);
+  addDefaultRunProgramConfigurationForType(reg, RunProgramType::ShutDownComputer);
+
+  if (numConfigurationsBefore != m_runProgramConfigurations.count())
+    saveRunProgramConfigurations(reg);
 
   reg.endGroup();               // runProgramConfigurations
 }
@@ -515,8 +556,13 @@ Settings::saveSplitterSizes(QSettings &reg)
 void
 Settings::saveRunProgramConfigurations(QSettings &reg)
   const {
-  reg.remove("runProgramConfigurations");
   reg.beginGroup("runProgramConfigurations");
+
+  auto groups = reg.childGroups();
+  groups.sort();
+
+  for (auto const &group : groups)
+    reg.remove(group);
 
   auto idx = 0;
   for (auto const &cfg : m_runProgramConfigurations) {
