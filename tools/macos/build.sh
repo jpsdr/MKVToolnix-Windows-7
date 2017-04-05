@@ -255,6 +255,9 @@ function build_dmg {
 
   strip ${dmgcnt}/MacOS/mkv{merge,info,info-gui,extract,propedit,toolnix-gui}
 
+  mv ${dmgmac}/mkvtoolnix/sounds ${dmgmac}/sounds
+  rmdir ${dmgmac}/mkvtoolnix
+
   cp README.md $dmgbase/README.txt
   cp COPYING $dmgbase/COPYING.txt
   cp NEWS.md $dmgbase/NEWS.txt

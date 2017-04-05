@@ -740,6 +740,13 @@ namespace :install do
       install_dir dest_dir
       install_data "#{dest_dir}/", FileList[ "#{dir}/*" ].to_a.select { |file| wanted_apps[ file.gsub(/.*\//, '') ] }
     end
+
+    if c?(:USE_QT)
+      sounds_dir ="#{c(:pkgdatadir)}/sounds"
+
+      install_dir  sounds_dir
+      install_data sounds_dir, FileList["#{$top_srcdir}/share/sounds/*"]
+    end
   end
 
   man_page_name_mapper = lambda do |name|

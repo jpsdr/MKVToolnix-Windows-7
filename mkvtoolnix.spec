@@ -124,6 +124,7 @@ strip ${RPM_BUILD_ROOT}/usr/bin/*
 %{_datadir}/man/pl
 %{_datadir}/man/uk
 %{_datadir}/man/zh_CN
+%{_datadir}/mkvtoolnix
 
 %changelog -n mkvtoolnix
 * Sat Mar 25 2017 Moritz Bunkus <moritz@bunkus.org> 10.0.0-1

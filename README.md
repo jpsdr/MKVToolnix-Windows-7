@@ -328,7 +328,7 @@ UTF-8 with C++ in a Portable Way
   * License: custom (see `doc/licenses/utf8-cpp-custom.txt`)
   * URL: http://utfcpp.sourceforge.net/
 
-## 5.9. Oxygen icons
+## 5.9. Oxygen icons and sound files
 
 Most of the icons included in this package originate from the Oxygen
 Project. These include all files in the `share/icons` sub-directory
@@ -339,6 +339,9 @@ part of the binary distribution of MKVToolNix, but they are contained
 in the source code in the `icons/scalable` sub-directory. You can
 obtain the source code from the
 [MKVToolNix website](https://mkvtoolnix.download/).
+
+All of the sound files in the `share/sounds` sub-directory originate
+from the Oxygen project.
 
   * License: GNU Lesser General Public License v3 (see `doc/licenses/LGPL-3.0.txt`)
   * URL: https://techbase.kde.org/Projects/Oxygen
