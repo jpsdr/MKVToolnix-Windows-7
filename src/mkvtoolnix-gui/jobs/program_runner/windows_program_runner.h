@@ -7,9 +7,7 @@
 
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 
-namespace mtx { namespace gui {
-
-namespace Jobs {
+namespace mtx { namespace gui { namespace Jobs {
 
 class WindowsProgramRunner: public ProgramRunner {
   Q_OBJECT;
