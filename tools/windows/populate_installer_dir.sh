@@ -51,7 +51,7 @@ function create_directories {
 
   cd ${tgt_dir}
   rm -rf *
-  mkdir -p examples data doc locale/libqt
+  mkdir -p examples data doc/licenses locale/libqt
 
   print -- " done"
 }
@@ -74,6 +74,7 @@ function copy_files {
   cp COPYING ${tgt_dir}/doc/COPYING.txt
   cp NEWS.md ${tgt_dir}/doc/NEWS.txt
   cp doc/command_line_references.html ${tgt_dir}/doc/
+  cp doc/licenses/*.txt ${tgt_dir}/doc/licenses/
 
   for mo in po/*.mo ; do
     language=${${mo:t}:r}
