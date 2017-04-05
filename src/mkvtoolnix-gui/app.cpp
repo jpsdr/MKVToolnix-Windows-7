@@ -171,7 +171,7 @@ App::setupProgramRunner() {
   Q_D(App);
 
   if (!d->m_programRunner)
-    d->m_programRunner = std::move(Jobs::ProgramRunner::create());
+    d->m_programRunner = Jobs::ProgramRunner::create();
   return *d->m_programRunner;
 }
 
