@@ -110,7 +110,7 @@ public:
     RunProgramForEvents m_forEvents{};
     QStringList m_commandLine;
     QString m_audioFile;
-    unsigned int m_volume{50};
+    unsigned int m_volume{75};
 
     bool isValid() const;
     QString name() const;
