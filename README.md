@@ -261,9 +261,9 @@ commit made to the git repository. The tests include:
   * building and running the test file test suite
   * building with all optional features disabled
 
-# 5. Included libraries and their licenses
+# 5. Included third-party components and their licenses
 
-MKVToolNix includes and uses the following libraries:
+MKVToolNix includes and uses the following libraries & artwork:
 
 ## 5.1. avilib
 
@@ -272,31 +272,31 @@ Reading and writing avi files.
 Copyright (C) 1999 Rainer Johanni <Rainer@Johanni.de>, originally part
 of the transcode package.
 
-License: GNU General Public License v2
-URL: http://www.transcoding.org/
+  * License: GNU General Public License v2
+  * URL: http://www.transcoding.org/
 
 ## 5.2. Boost's utf8_codecvt_facet
 
-A class utf8_codecvt_facet, derived from std::codecvt<wchar_t, char>,
-which can be used to convert utf8 data in files into wchar_t strings
+A class, `utf8_codecvt_facet`, derived from `std::codecvt<wchar_t, char>`,
+which can be used to convert utf8 data in files into `wchar_t` strings
 in the application.
 
-License: Boost Software License - Version 1.0
-URL: http://www.boost.org
+  * License: Boost Software License - Version 1.0 (see `doc/licenses/Boost-1.0.txt`)
+  * URL: http://www.boost.org
 
 ## 5.3. libEBML
 
 A C++ library to parse EBML files
 
-License: GNU Lesser General Public License v2.1
-URL: http://www.matroska.org/
+  * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
+  * URL: http://www.matroska.org/
 
 ## 5.4. libMatroska
 
 A C++ library to parse Matroska files
 
-License: GNU Lesser General Public License v2.1
-URL: http://www.matroska.org/
+  * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
+  * URL: http://www.matroska.org/
 
 ## 5.5. librmff
 
@@ -304,26 +304,40 @@ librmff is short for 'RealMedia file format access library'. It aims
 at providing the programmer an easy way to read and write RealMedia
 files.
 
-License: GNU Lesser General Public License v2.1
-URL: https://www.bunkus.org/videotools/librmff/index.html
+  * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
+  * URL: https://www.bunkus.org/videotools/librmff/index.html
 
 ## 5.6. nlohmann's JSON
 
 JSON for Modern C++
 
-License: MIT
-URL: https://github.com/nlohmann/json
+  * License: MIT (see `doc/licenses/nlohmann-json-MIT.txt`)
+  * URL: https://github.com/nlohmann/json
 
 ## 5.7. pugixml
 
 An XML processing library
 
-License: MIT
-URL: http://pugixml.org/
+  * License: MIT (see `doc/licenses/pugixml-MIT.txt`)
+  * URL: http://pugixml.org/
 
 ## 5.8. utf8-cpp
 
 UTF-8 with C++ in a Portable Way
 
-License: custom (see lib/utf8-cpp/source/utf8.hpp)
-URL: http://utfcpp.sourceforge.net/
+  * License: custom (see `doc/licenses/utf8-cpp-custom.txt`)
+  * URL: http://utfcpp.sourceforge.net/
+
+## 5.9. Oxygen icons
+
+Most of the icons included in this package originate from the Oxygen
+Project. These include all files in the `share/icons` sub-directory
+safe for those whose name starts with `mkv`.
+
+The preferred form of modification are the SVG icons. These are not
+part of the binary distribution of MKVToolNix, but they are contained
+in the source code in the `icons/svg` sub-directory. You can obtain
+the source code from [the MKVToolNix website](https://mkvtoolnix.download/).
+
+  * License: GNU Lesser General Public License v3 (see `doc/licenses/LGPL-3.0.txt`)
+  * URL: https://techbase.kde.org/Projects/Oxygen
