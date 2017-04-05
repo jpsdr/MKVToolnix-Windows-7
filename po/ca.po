@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-04-04 16:07+0200\n"
+"POT-Creation-Date: 2017-04-05 22:18+0200\n"
 "PO-Revision-Date: 2017-03-23 10:42+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1266,8 +1266,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: s'ha produït una excepció (missatge: %2%; tipus: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1519
-#: src/input/r_matroska.cpp:2205
+#: src/input/r_matroska.cpp:1531
+#: src/input/r_matroska.cpp:2217
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: s'ha produït una excepció desconeguda."
@@ -2158,7 +2158,7 @@ msgstr "«%1%»: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "«%1%»: està processant els següents fitxers com a bons: %2%\n"
 
-#: src/input/r_matroska.cpp:1799
+#: src/input/r_matroska.cpp:1811
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "«%1%»: Esteu tornant a copiar una pista Opus que fou escrita en el mode experimental. La pista resultant s'escriurà seguint el mode final, però no es podrà recuperar el detall a partir d'una pista escrita en el mode experimental: el tall final. Això significa que un descodificador podria generar unes quantes mostres més del que tenia inicialment previst. Si és possible, hauríeu de tornar a multiplexar partint del fitxer Opus original.\n"
@@ -2452,8 +2452,8 @@ msgstr "<Sense nom>"
 msgid "<Unsaved file>"
 msgstr "<Fitxer sense desar>"
 
-#: src/input/r_matroska.cpp:2227
-#: src/input/r_matroska.cpp:2341
+#: src/input/r_matroska.cpp:2239
+#: src/input/r_matroska.cpp:2353
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "S'ha trobat un bloc a la marca de temps %1% pel número de pista %2%. No obstant això, no s'ha trobat cap capçalera per aquest número de pista. El bloc serà omès.\n"
@@ -3657,7 +3657,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "El &número del capítol de la primera entrada creada:"
 
 #: src/merge/private/cluster_helper.h:55
-#: src/mkvtoolnix-gui/util/settings.cpp:291
+#: src/mkvtoolnix-gui/util/settings.cpp:292
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Capítol <NUM:2>"
@@ -5114,7 +5114,7 @@ msgid "Executable not found"
 msgstr "No s'ha trobat l'executable"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:64
+#: src/mkvtoolnix-gui/util/settings.cpp:65
 #, fuzzy, no-c-format
 msgid "Execute a program"
 msgstr "Programes a executar"
@@ -5129,7 +5129,7 @@ msgstr ""
 msgid "Execute action when the &queue completes"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:69
+#: src/mkvtoolnix-gui/util/settings.cpp:70
 #, fuzzy, no-c-format
 msgid "Execute program '%1'"
 msgstr "Programes a executar"
@@ -6750,12 +6750,12 @@ msgstr "Llista de reproducció Blu-ray en MPLS"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Converteix aquesta pista en la predefinida per a cadascun dels seus tipus (àudio, vídeo, subtítols)."
 
-#: src/input/r_matroska.cpp:1689
-#: src/input/r_matroska.cpp:1704
+#: src/input/r_matroska.cpp:1701
+#: src/input/r_matroska.cpp:1716
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "S'han trobat dades d'inicialització del còdec AAC mal formades.\n"
 
-#: src/input/r_matroska.cpp:1697
+#: src/input/r_matroska.cpp:1709
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "ID del còdec amb format incorrecte «%1%».\n"
@@ -7789,12 +7789,12 @@ msgid "Play a WAV file with the default application:"
 msgstr "Reprodueix un fitxer WAV amb l'aplicació predeterminada:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:76
+#: src/mkvtoolnix-gui/util/settings.cpp:77
 #, fuzzy, no-c-format
 msgid "Play an audio file"
 msgstr "Fitxers d'àudio MPEG"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:81
+#: src/mkvtoolnix-gui/util/settings.cpp:82
 #, fuzzy, no-c-format
 msgid "Play audio file '%1'"
 msgstr "Fitxers d'àudio MPEG"
@@ -7869,7 +7869,7 @@ msgstr "Seleccioneu el joc de caràcters en el que està codificat el següent f
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "Posició de les propietats de la pista a la pestanya «Entrada»:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:193
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:197
 #, no-c-format
 msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
 msgstr "Les possibles causes són que el programa no existeix o que no esteu autoritzat a accedir-hi o al seu directori."
@@ -7937,7 +7937,7 @@ msgstr[1] "Problemes amb la instal·lació del MKVToolNix"
 msgid "Process &priority:"
 msgstr "&Prioritat del procés:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:190
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:194
 #, no-c-format
 msgid "Program execution failed"
 msgstr "L'execució del programa ha fallat"
@@ -8934,7 +8934,7 @@ msgid "Show version information."
 msgstr "Mostra informació sobre la versió."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:55
+#: src/mkvtoolnix-gui/util/settings.cpp:56
 #, fuzzy, no-c-format
 msgid "Shut down the computer"
 msgstr "Apaga el sistema en un minut:"
@@ -9236,7 +9236,7 @@ msgid "Suppress status output."
 msgstr "Suprimeix la sortida de l'estat."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:56
+#: src/mkvtoolnix-gui/util/settings.cpp:57
 #, no-c-format
 msgid "Suspend the computer"
 msgstr ""
@@ -9984,8 +9984,8 @@ msgstr "El fitxer no ha estat reconegut com un format admès (codi de sortida: %
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "The file will not be processed further."
 msgstr "Aquest fitxer no es processarà més."
 
@@ -10041,7 +10041,7 @@ msgstr "La primera paraula li indica al «mkvextract» el que ha d'extreure. La 
 msgid "The following modes are supported:"
 msgstr "S'accepten els següents modes:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:192
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:196
 #, no-c-format
 msgid "The following program could not be executed: %1"
 msgstr "El següent programa no s'ha pogut executar: %1"
@@ -11011,8 +11011,8 @@ msgstr "Aquesta pista conté dades AAC/HE-AAC/AAC+ en SBR."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "This usually indicates a damaged file structure."
 msgstr "Això normalment significa una estructura de fitxers malmesa."
 
@@ -11443,7 +11443,7 @@ msgstr "mpeg_version de MPEG no admesa: 0x%|1$02x| en el paquet %2% pel codi de 
 msgid "Unsupported file format"
 msgstr "Format de fitxer no implementat"
 
-#: src/input/r_matroska.cpp:2013
+#: src/input/r_matroska.cpp:2025
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipus de pista no admès per aquesta pista.\n"
 
@@ -11505,7 +11505,7 @@ msgstr "Emprar una longitud de mida NALU de 3 bytes hauria de donar lloc a piste
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Emprant el demultiplexador pel format «%1%».\n"
 
-#: src/input/r_matroska.cpp:1549
+#: src/input/r_matroska.cpp:1561
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Emprant el mòdul de sortida genèric pel tipus de pista «%1%».\n"
@@ -12306,13 +12306,13 @@ msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: A una pista li manca el seu número de pista.\n"
 
-#: src/input/r_matroska.cpp:1615
+#: src/input/r_matroska.cpp:1627
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: No ha pogut mantenir l'UID de la pista %1% perquè ja està assignat al fitxer nou.\n"
 
-#: src/input/r_matroska.cpp:1459
-#: src/input/r_matroska.cpp:1464
+#: src/input/r_matroska.cpp:1471
+#: src/input/r_matroska.cpp:1476
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: No s'ha trobat cap segment.\n"
 
@@ -12387,7 +12387,7 @@ msgstr "matroska_reader: No s'ha trobat el tipus de la pista.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: El «mkvmerge» no ha estat compilat amb la implementació per a fitxers FLAC. La pista %1% serà ignorada.\n"
 
-#: src/input/r_matroska.cpp:1446
+#: src/input/r_matroska.cpp:1458
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: No s'ha trobat la capçalera EBML.\n"
 
@@ -12784,11 +12784,11 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. %1%\n"
 #: src/info/mkvinfo.cpp:887
 #: src/info/mkvinfo.cpp:1073
 #: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2664
+#: src/input/r_matroska.cpp:2676
 msgid "unknown"
 msgstr "Desconegut"
 
-#: src/input/r_matroska.cpp:2648
+#: src/input/r_matroska.cpp:2660
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "Desconegut, format de l'etiqueta 0x%|1$04x|"

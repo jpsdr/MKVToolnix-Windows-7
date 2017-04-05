@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-04-04 16:07+0200\n"
+"POT-Creation-Date: 2017-04-05 22:18+0200\n"
 "PO-Revision-Date: 2016-10-09 10:56+0900\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -1197,8 +1197,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: 例外が発生しました (メッセージ: %2%; タイプ: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1519
-#: src/input/r_matroska.cpp:2205
+#: src/input/r_matroska.cpp:1531
+#: src/input/r_matroska.cpp:2217
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: 未知の例外が発生しました。"
@@ -2087,7 +2087,7 @@ msgstr "'%1%'：%2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%'：後続のファイルを同様に処理しています：%2%\n"
 
-#: src/input/r_matroska.cpp:1799
+#: src/input/r_matroska.cpp:1811
 #, fuzzy, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%'：実験的モードでMUXされたOpusのトラックを再MUXしようとしています。出力されるトラックは最終的なモードで上書きされますが、実験的モードでMUXされたトラックからは詳細情報が1つ回復不能になります。エンドトリミングがそれです。これは、デコーダーの出力が元々意図されていたよりも数サンプル多くなる可能性があるということを意味します。もし可能であれば、オリジナルのOpusファイルから再MUXしてください。\n"
@@ -2381,8 +2381,8 @@ msgstr "<名前をつけてください>"
 msgid "<Unsaved file>"
 msgstr "<未保存のファイル>"
 
-#: src/input/r_matroska.cpp:2227
-#: src/input/r_matroska.cpp:2341
+#: src/input/r_matroska.cpp:2239
+#: src/input/r_matroska.cpp:2353
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "トラック番号%2%のタイムスタンプ%1%でブロックが見つかりましが、そのトラック番号のヘッダが見つかりませんでした。このブロックはスキップされます。\n"
@@ -3588,7 +3588,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "最初に作成されるエントリのチャプタ番号：(&N)"
 
 #: src/merge/private/cluster_helper.h:55
-#: src/mkvtoolnix-gui/util/settings.cpp:291
+#: src/mkvtoolnix-gui/util/settings.cpp:292
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Chapter <NUM:2>"
@@ -5059,7 +5059,7 @@ msgid "Executable not found"
 msgstr "実行ファイルが見つかりません"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:64
+#: src/mkvtoolnix-gui/util/settings.cpp:65
 #, fuzzy, no-c-format
 msgid "Execute a program"
 msgstr "プログラム実行"
@@ -5074,7 +5074,7 @@ msgstr ""
 msgid "Execute action when the &queue completes"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:69
+#: src/mkvtoolnix-gui/util/settings.cpp:70
 #, fuzzy, no-c-format
 msgid "Execute program '%1'"
 msgstr "プログラム実行"
@@ -6703,12 +6703,12 @@ msgstr "MPLS Blu-ray プレイリスト"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "このトラックをそのタイプ（オーディオ、ビデオ、字幕）のデフォルトトラックに設定します。"
 
-#: src/input/r_matroska.cpp:1689
-#: src/input/r_matroska.cpp:1704
+#: src/input/r_matroska.cpp:1701
+#: src/input/r_matroska.cpp:1716
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "無効な形式のAACコーデック初期化データが見つかりました。\n"
 
-#: src/input/r_matroska.cpp:1697
+#: src/input/r_matroska.cpp:1709
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "無効な形式のコーデックID '%1%'です。\n"
@@ -7744,12 +7744,12 @@ msgid "Play a WAV file with the default application:"
 msgstr "WAVファイルをデフォルトのアプリケーションで再生する："
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:76
+#: src/mkvtoolnix-gui/util/settings.cpp:77
 #, fuzzy, no-c-format
 msgid "Play an audio file"
 msgstr "MPEGオーディオファイル"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:81
+#: src/mkvtoolnix-gui/util/settings.cpp:82
 #, fuzzy, no-c-format
 msgid "Play audio file '%1'"
 msgstr "MPEGオーディオファイル"
@@ -7821,7 +7821,7 @@ msgstr "以下のファイルがエンコードされている文字セットを
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "「入力」タブにおけるトラックのプロパティの位置："
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:193
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:197
 #, no-c-format
 msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
 msgstr "プログラムが存在しないか、プログラムまたはそのディレクトリへのアクセスが許可されていない可能性があります。"
@@ -7889,7 +7889,7 @@ msgstr[0] ""
 msgid "Process &priority:"
 msgstr "プロセスの優先度：(&P)"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:190
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:194
 #, no-c-format
 msgid "Program execution failed"
 msgstr "プログラム実行失敗"
@@ -8886,7 +8886,7 @@ msgid "Show version information."
 msgstr "プログラムのバージョン情報を表示します。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:55
+#: src/mkvtoolnix-gui/util/settings.cpp:56
 #, fuzzy, no-c-format
 msgid "Shut down the computer"
 msgstr "システムを1分後にシャットダウン："
@@ -9185,7 +9185,7 @@ msgid "Suppress status output."
 msgstr "ステータス情報を出力しません。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:56
+#: src/mkvtoolnix-gui/util/settings.cpp:57
 #, no-c-format
 msgid "Suspend the computer"
 msgstr ""
@@ -9935,8 +9935,8 @@ msgstr "このファイルはサポートされていないフォーマットで
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "The file will not be processed further."
 msgstr "ファイルはこれ以上処理されません。"
 
@@ -9993,7 +9993,7 @@ msgstr "1つ目の単語でmkvextractが何を抽出するのかを指定しま�
 msgid "The following modes are supported:"
 msgstr "以下のモードがサポートされています："
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:192
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:196
 #, no-c-format
 msgid "The following program could not be executed: %1"
 msgstr "次のプログラムを実行することができませんでした：%1"
@@ -10951,8 +10951,8 @@ msgstr "このトラックにはSBR AAC/HE-AAC/AAC+が含まれています。"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "This usually indicates a damaged file structure."
 msgstr "これは通常ファイル構造が損傷していることを意味します。"
 
@@ -11384,7 +11384,7 @@ msgstr "サポートされていないMPEGバージョンです：0x%|1$02x|（�
 msgid "Unsupported file format"
 msgstr "サポートされていないフォーマット"
 
-#: src/input/r_matroska.cpp:2013
+#: src/input/r_matroska.cpp:2025
 msgid "Unsupported track type for this track.\n"
 msgstr "このトラックはサポートされているトラックタイプではありません。\n"
 
@@ -11446,7 +11446,7 @@ msgstr "NALUサイズを3バイトにすると、特定のAVC/h.264コーデッ�
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "フォーマット'%1%'のデマルチプレクサを使用しています。\n"
 
-#: src/input/r_matroska.cpp:1549
+#: src/input/r_matroska.cpp:1561
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "トラックタイプ'%1%'の一般的出力モジュールを使用しています。\n"
@@ -12253,13 +12253,13 @@ msgstr "matroska_reader：（トラック%1%、MS互換モード）Matroskaに�
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader：トラックにトラック番号がありません。\n"
 
-#: src/input/r_matroska.cpp:1615
+#: src/input/r_matroska.cpp:1627
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reade：新しいファイルに既に割り当てられているため、トラックUID %1%を保持することができませんでした。\n"
 
-#: src/input/r_matroska.cpp:1459
-#: src/input/r_matroska.cpp:1464
+#: src/input/r_matroska.cpp:1471
+#: src/input/r_matroska.cpp:1476
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader：セグメントが見つかりませんでした。\n"
 
@@ -12334,7 +12334,7 @@ msgstr "matroska_reader：トラックタイプが見つかりませんでした
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader：mkvmergeはFLACをサポートしてコンパイルされていません。トラック%1%を無視します。\n"
 
-#: src/input/r_matroska.cpp:1446
+#: src/input/r_matroska.cpp:1458
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader：EBMLヘッドが見つかりませんでした。\n"
 
@@ -12735,11 +12735,11 @@ msgstr "tta_reader：c'tor内でtag_sizeが負になりました。 %1%\n"
 #: src/info/mkvinfo.cpp:887
 #: src/info/mkvinfo.cpp:1073
 #: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2664
+#: src/input/r_matroska.cpp:2676
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2648
+#: src/input/r_matroska.cpp:2660
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "未知、フォーマットタグ 0x%|1$04x|"

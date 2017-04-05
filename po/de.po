@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-04-04 16:07+0200\n"
+"POT-Creation-Date: 2017-04-05 22:18+0200\n"
 "PO-Revision-Date: 2017-04-04 16:27+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
@@ -1218,8 +1218,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: Eine Ausnahme ist aufgetreten (Nachricht: %2%; Typ: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1519
-#: src/input/r_matroska.cpp:2205
+#: src/input/r_matroska.cpp:1531
+#: src/input/r_matroska.cpp:2217
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: Eine unbekannte Ausnahme ist aufgetreten."
@@ -2106,7 +2106,7 @@ msgstr "»%1%«: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "»%1%«: Auch die folgenden Dateien werden verarbeitet: %2%\n"
 
-#: src/input/r_matroska.cpp:1799
+#: src/input/r_matroska.cpp:1811
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "»%1%«: Sie kopieren eine ursprünglich im experimentellen Modus geschriebene Opus-Spur. Die entstehende Spur wird im finalen Modus geschrieben, allerdings kann ein Detail nicht aus einer im experimentellen Modus geschriebenen Spur rekonstruiert werden: die Anzahl der am Ende zu entfernenden Samples. Das bedeutet, dass ein Decoder einige Samples mehr ausgeben könnte, als ursprünglich beabsichtigt war. Sie sollten statt dessen, falls möglich, die Original-Opus-Datei erneut multiplexen.\n"
@@ -2400,8 +2400,8 @@ msgstr "<Unbenannt>"
 msgid "<Unsaved file>"
 msgstr "<Nicht gespeicherte Datei>"
 
-#: src/input/r_matroska.cpp:2227
-#: src/input/r_matroska.cpp:2341
+#: src/input/r_matroska.cpp:2239
+#: src/input/r_matroska.cpp:2353
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Es wurde ein Block für Spur Nummer %2% bei Zeitstempel %1% gefunden. Allerdings wurden bisher noch keine Spurkopfdaten gefunden. Der Block wird ausgelassen.\n"
@@ -3605,7 +3605,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "Kapitel&nummer des ersten erzeugten Eintrags:"
 
 #: src/merge/private/cluster_helper.h:55
-#: src/mkvtoolnix-gui/util/settings.cpp:291
+#: src/mkvtoolnix-gui/util/settings.cpp:292
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Kapitel <NUM:2>"
@@ -5053,7 +5053,7 @@ msgid "Executable not found"
 msgstr "Programmdatei nicht gefunden"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:64
+#: src/mkvtoolnix-gui/util/settings.cpp:65
 #, no-c-format
 msgid "Execute a program"
 msgstr "Ein Programm ausführen"
@@ -5068,7 +5068,7 @@ msgstr "Aktion nach nächster &Jobfertigstellung ausführen"
 msgid "Execute action when the &queue completes"
 msgstr "Aktion ausführen, wenn die &Warteschlange fertig ist"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:69
+#: src/mkvtoolnix-gui/util/settings.cpp:70
 #, no-c-format
 msgid "Execute program '%1'"
 msgstr "Programm »%1« ausführen"
@@ -6688,12 +6688,12 @@ msgstr "MPLS Blu-ray-Abspielliste"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Macht diese Spur zur Standardspur für ihren Typ (Audio, Video und Untertitel)."
 
-#: src/input/r_matroska.cpp:1689
-#: src/input/r_matroska.cpp:1704
+#: src/input/r_matroska.cpp:1701
+#: src/input/r_matroska.cpp:1716
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Ungültige AAC-Codec-Initialisierungsdaten gefunden\n"
 
-#: src/input/r_matroska.cpp:1697
+#: src/input/r_matroska.cpp:1709
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Ungültige CodecID »%1%«\n"
@@ -7725,12 +7725,12 @@ msgid "Play a WAV file with the default application:"
 msgstr "Eine WAV-Datei mit der Standardanwendung abspielen:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:76
+#: src/mkvtoolnix-gui/util/settings.cpp:77
 #, no-c-format
 msgid "Play an audio file"
 msgstr "Eine Audiodatei abspielen"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:81
+#: src/mkvtoolnix-gui/util/settings.cpp:82
 #, no-c-format
 msgid "Play audio file '%1'"
 msgstr "Audiodatei »%1« abspielen"
@@ -7805,7 +7805,7 @@ msgstr "Bitte wählen Sie den Zeichensatz aus, in dem die folgende Datei encodie
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "Position der Spureigenschaften auf dem »Quellen«-Tab:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:193
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:197
 #, no-c-format
 msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
 msgstr "Mögliche Ursachen sind, dass das Programm nicht existiert, oder dass Sie nicht über die erforderlichen Zugriffsrechte daranf oder auf seinen Ordner verfügen."
@@ -7873,7 +7873,7 @@ msgstr[1] "Probleme mit MKVToolNix-Installation"
 msgid "Process &priority:"
 msgstr "Prozess&priorität:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:190
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:194
 #, no-c-format
 msgid "Program execution failed"
 msgstr "Programmausführung schlug fehl"
@@ -8873,7 +8873,7 @@ msgid "Show version information."
 msgstr "Versionsinformationen anzeigen"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:55
+#: src/mkvtoolnix-gui/util/settings.cpp:56
 #, no-c-format
 msgid "Shut down the computer"
 msgstr "Den Computer herunterfahren"
@@ -9175,7 +9175,7 @@ msgid "Suppress status output."
 msgstr "Statusausgaben unterdrücken"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:56
+#: src/mkvtoolnix-gui/util/settings.cpp:57
 #, no-c-format
 msgid "Suspend the computer"
 msgstr "Den Computer in den Energiesparmodus versetzen"
@@ -9926,8 +9926,8 @@ msgstr "Die Datei wurde nicht als ein unterstütztes Format erkannt (Rückgabewe
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "The file will not be processed further."
 msgstr "Die Datei wird nicht weiter verarbeitet."
 
@@ -9983,7 +9983,7 @@ msgstr "Das erste Wort ist der Modus und teilt Mkvextract mit, was extrahiert we
 msgid "The following modes are supported:"
 msgstr "Die folgenden Modi werden unterstützt:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:192
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:196
 #, no-c-format
 msgid "The following program could not be executed: %1"
 msgstr "Das folgende Programm konnte nicht gestartet werden: %1"
@@ -10953,8 +10953,8 @@ msgstr "Diese Spur enthält SBR-AAC-/HE-AAC-/AAC+-Daten."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "This usually indicates a damaged file structure."
 msgstr "Dies deutet normalerweise auf eine beschädigte Dateistruktur hin."
 
@@ -11384,7 +11384,7 @@ msgstr "Nicht unterstützte MPEG-Version: 0x%|1$02x| in Paket %2% bei Zeitstempe
 msgid "Unsupported file format"
 msgstr "Nicht untersütztes Dateiformat"
 
-#: src/input/r_matroska.cpp:2013
+#: src/input/r_matroska.cpp:2025
 msgid "Unsupported track type for this track.\n"
 msgstr "Nicht unterstützter Spurtyp\n"
 
@@ -11446,7 +11446,7 @@ msgstr "Das NALU-Längenfeld drei Byte lang zu machen kann dazu führen, dass es
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Der Demultiplexer für das folgende Format wird benutzt: »%1%«.\n"
 
-#: src/input/r_matroska.cpp:1549
+#: src/input/r_matroska.cpp:1561
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Das allgemeine Ausgabemodul wird für den folgenden Spurtyp benutzt: »%1%«.\n"
@@ -12246,13 +12246,13 @@ msgstr "matroska_reader: (MS-Kompatibilitätsmodus für Spur %1%) Laut Matroska-
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: Einer Spur fehlt ihr Spurnummer.\n"
 
-#: src/input/r_matroska.cpp:1615
+#: src/input/r_matroska.cpp:1627
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: Die Spur-UID %1% kann nicht beibehalten werden, da sie schon für eine andere Spur benutzt wird.\n"
 
-#: src/input/r_matroska.cpp:1459
-#: src/input/r_matroska.cpp:1464
+#: src/input/r_matroska.cpp:1471
+#: src/input/r_matroska.cpp:1476
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Es wurde kein Segment gefunden.\n"
 
@@ -12327,7 +12327,7 @@ msgstr "matroska_reader: Der Spurtyp wurde nicht gefunden.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: Mkvmerge wurde ohne FLAC-Unterstützung kompiliert. Spur %1% wird ausgelassen.\n"
 
-#: src/input/r_matroska.cpp:1446
+#: src/input/r_matroska.cpp:1458
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: kein EBML-Kopf gefunden\n"
 
@@ -12724,11 +12724,11 @@ msgstr "tta_reader: tag_size < 0 im Konstruktor. %1%\n"
 #: src/info/mkvinfo.cpp:887
 #: src/info/mkvinfo.cpp:1073
 #: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2664
+#: src/input/r_matroska.cpp:2676
 msgid "unknown"
 msgstr "unbekannt"
 
-#: src/input/r_matroska.cpp:2648
+#: src/input/r_matroska.cpp:2660
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "unbekannt, Formatidentifikator 0x%|1$04x|"

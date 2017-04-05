@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-04-04 16:07+0200\n"
+"POT-Creation-Date: 2017-04-05 22:18+0200\n"
 "PO-Revision-Date: 2016-11-06 07:32+0000\n"
 "Last-Translator: HULEN\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -1172,8 +1172,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: 異常狀況發生 (message: %2%; type: %3%)。"
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1519
-#: src/input/r_matroska.cpp:2205
+#: src/input/r_matroska.cpp:1531
+#: src/input/r_matroska.cpp:2217
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: 不明的異常狀況發生。"
@@ -2064,7 +2064,7 @@ msgstr "「%1%」: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "「%1%」: 正在處理下列檔案: %2%\n"
 
-#: src/input/r_matroska.cpp:1799
+#: src/input/r_matroska.cpp:1811
 #, fuzzy, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "「%1%」: 您正在重新合成於實驗模式中合成的 Opus 軌道。最後結果會用最終模式寫入，但是有一項詳細資訊無法從實驗模式合成的軌道中還原：末端裁剪。這表示解碼器可能會輸出比原本預期還少的取樣數。如果可以的話，您應該用原始的 Opus 檔案重新合成。\n"
@@ -2358,8 +2358,8 @@ msgstr "<未命名>"
 msgid "<Unsaved file>"
 msgstr "<未儲存的檔案>"
 
-#: src/input/r_matroska.cpp:2227
-#: src/input/r_matroska.cpp:2341
+#: src/input/r_matroska.cpp:2239
+#: src/input/r_matroska.cpp:2353
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "在時間戳記 %1% 處找到了軌道編號為 %2% 的區塊。然而，沒有找到符合該軌道編號的表頭資訊。此區塊將被跳過。\n"
@@ -3564,7 +3564,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "第一個新增項目的章節編號(&N)："
 
 #: src/merge/private/cluster_helper.h:55
-#: src/mkvtoolnix-gui/util/settings.cpp:291
+#: src/mkvtoolnix-gui/util/settings.cpp:292
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "第 <NUM:2> 章"
@@ -5036,7 +5036,7 @@ msgid "Executable not found"
 msgstr "找不到可執行檔案"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:64
+#: src/mkvtoolnix-gui/util/settings.cpp:65
 #, fuzzy, no-c-format
 msgid "Execute a program"
 msgstr "執行程式"
@@ -5051,7 +5051,7 @@ msgstr ""
 msgid "Execute action when the &queue completes"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:69
+#: src/mkvtoolnix-gui/util/settings.cpp:70
 #, fuzzy, no-c-format
 msgid "Execute program '%1'"
 msgstr "執行程式"
@@ -6680,12 +6680,12 @@ msgstr "MPLS 藍光播放清單"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "將此軌道作為本身類型 (音訊、視訊、字幕) 的預設軌。"
 
-#: src/input/r_matroska.cpp:1689
-#: src/input/r_matroska.cpp:1704
+#: src/input/r_matroska.cpp:1701
+#: src/input/r_matroska.cpp:1716
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "發現不正常的 AAC 編解碼器初始化資料。\n"
 
-#: src/input/r_matroska.cpp:1697
+#: src/input/r_matroska.cpp:1709
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "不正常的編解碼器 id「%1%」。\n"
@@ -7721,12 +7721,12 @@ msgid "Play a WAV file with the default application:"
 msgstr "用預設應用程式播放 WAV 檔案:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:76
+#: src/mkvtoolnix-gui/util/settings.cpp:77
 #, fuzzy, no-c-format
 msgid "Play an audio file"
 msgstr "MPEG 音訊檔"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:81
+#: src/mkvtoolnix-gui/util/settings.cpp:82
 #, fuzzy, no-c-format
 msgid "Play audio file '%1'"
 msgstr "MPEG 音訊檔"
@@ -7798,7 +7798,7 @@ msgstr "請選擇以下檔案的字元集。"
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "「輸入」頁籤中軌道屬性控制項的位置:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:193
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:197
 #, no-c-format
 msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
 msgstr "可能的原因包括：程式不存在，或您無權存取它或其目錄。"
@@ -7866,7 +7866,7 @@ msgstr[0] ""
 msgid "Process &priority:"
 msgstr "處理程優先權(&P):"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:190
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:194
 #, no-c-format
 msgid "Program execution failed"
 msgstr "程式執行失敗"
@@ -8862,7 +8862,7 @@ msgid "Show version information."
 msgstr "顯示版本資訊。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:55
+#: src/mkvtoolnix-gui/util/settings.cpp:56
 #, fuzzy, no-c-format
 msgid "Shut down the computer"
 msgstr "在一分鍾內關閉系統:"
@@ -9161,7 +9161,7 @@ msgid "Suppress status output."
 msgstr "停用狀態輸出。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:56
+#: src/mkvtoolnix-gui/util/settings.cpp:57
 #, no-c-format
 msgid "Suspend the computer"
 msgstr ""
@@ -9911,8 +9911,8 @@ msgstr "此檔案無法辨識為支援的格式 (離開碼: %1)。"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "The file will not be processed further."
 msgstr "無法更進一步處理檔案。"
 
@@ -9969,7 +9969,7 @@ msgstr "第一個單字可告訴 mkvextract 提取什麼。第二個必須是來
 msgid "The following modes are supported:"
 msgstr "支援以下模式:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:192
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:196
 #, no-c-format
 msgid "The following program could not be executed: %1"
 msgstr "無法執行該程式: %1"
@@ -10927,8 +10927,8 @@ msgstr "此軌道包含 SBR AAC/HE-AAC/AAC+ 資料。"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "This usually indicates a damaged file structure."
 msgstr "這通常用以表示損壞的檔案結構。"
 
@@ -11360,7 +11360,7 @@ msgstr "不支援 MPEG mpeg_version: 0x%|1$02x| 於資料套件 %2% 時間碼 %3
 msgid "Unsupported file format"
 msgstr "不支援的檔案格式"
 
-#: src/input/r_matroska.cpp:2013
+#: src/input/r_matroska.cpp:2025
 msgid "Unsupported track type for this track.\n"
 msgstr "不支援此軌道的軌道類型。\n"
 
@@ -11422,7 +11422,7 @@ msgstr "使用 3 位元組的 NALU 長可能會導致某些 AVC/h.264 編解碼�
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "此格式「%1%」使用多工解訊器。\n"
 
-#: src/input/r_matroska.cpp:1549
+#: src/input/r_matroska.cpp:1561
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "軌道類型「%1%」使用一般輸出模組。\n"
@@ -12225,13 +12225,13 @@ msgstr "matroska_reader: (微軟相容模式, 軌道 %1%) Matrosa 視訊寬度�
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: 有一個軌道缺少軌道編號。\n"
 
-#: src/input/r_matroska.cpp:1615
+#: src/input/r_matroska.cpp:1627
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: 無法保留軌道 UID %1%，因為它已被指派給了新檔案。\n"
 
-#: src/input/r_matroska.cpp:1459
-#: src/input/r_matroska.cpp:1464
+#: src/input/r_matroska.cpp:1471
+#: src/input/r_matroska.cpp:1476
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: 未發現剪輯。\n"
 
@@ -12306,7 +12306,7 @@ msgstr "matroska_reader: 軌道類型未找到。\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge 編譯時沒有附加 FLAC 支援。已忽略軌道 %1%。\n"
 
-#: src/input/r_matroska.cpp:1446
+#: src/input/r_matroska.cpp:1458
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: 未發現 EBML 表頭。\n"
 
@@ -12706,11 +12706,11 @@ msgstr "tta_reader: c'tor 中 tag_size < 0。 %1%\n"
 #: src/info/mkvinfo.cpp:887
 #: src/info/mkvinfo.cpp:1073
 #: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2664
+#: src/input/r_matroska.cpp:2676
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2648
+#: src/input/r_matroska.cpp:2660
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "不明的格式標識 0x%|1$04x|"

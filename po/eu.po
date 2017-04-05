@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-04-04 16:07+0200\n"
+"POT-Creation-Date: 2017-04-05 22:18+0200\n"
 "PO-Revision-Date: 2017-03-29 18:21+0000\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1206,8 +1206,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: salbuespen bat gertatu da (mezua: %2%; mota: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1519
-#: src/input/r_matroska.cpp:2205
+#: src/input/r_matroska.cpp:1531
+#: src/input/r_matroska.cpp:2217
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: salbuespen ezezagun bat gertatu da."
@@ -2098,7 +2098,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Hurrengo agiriak on bezala prozesatzen: %2%\n"
 
-#: src/input/r_matroska.cpp:1799
+#: src/input/r_matroska.cpp:1811
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%': Modu esperimentalean multiplexatu den Opus bide bat kopiatzen ari zara. Emaitza bidea azken moduan idatziko da, baina xehetasun bat ezin da berreskuratu modu esperimentalean idatzitako bide batetik: apaingarri amaiera. Honek esanahi du dekodeatzaileak jatorrian nahi baino lagin gutxi batzuk gehiago izan ditzakeela irteeran. Ahal bada jatorrizko Opus agiritik ber-multiplexatu behar duzu.\n"
@@ -2392,8 +2392,8 @@ msgstr "<Izengabea>"
 msgid "<Unsaved file>"
 msgstr "<Gordegabeko agiria>"
 
-#: src/input/r_matroska.cpp:2227
-#: src/input/r_matroska.cpp:2341
+#: src/input/r_matroska.cpp:2239
+#: src/input/r_matroska.cpp:2353
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Bloke bat aurkitu da %1% denbora-irarketan %2% bide zenbakiarentzat. Horrela ere, ez da idazbururik aurkitu bide zenbaki horretarako. Blokea jauzi egingo da.\n"
@@ -3594,7 +3594,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "&Lehenik sortutako sarreraren atal zenbakia:"
 
 #: src/merge/private/cluster_helper.h:55
-#: src/mkvtoolnix-gui/util/settings.cpp:291
+#: src/mkvtoolnix-gui/util/settings.cpp:292
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Atala <ZBK:2>"
@@ -5042,7 +5042,7 @@ msgid "Executable not found"
 msgstr "Exekutagarria ez da aurkitu"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:64
+#: src/mkvtoolnix-gui/util/settings.cpp:65
 #, fuzzy, no-c-format
 msgid "Execute a program"
 msgstr "Programak exekutatzen"
@@ -5057,7 +5057,7 @@ msgstr ""
 msgid "Execute action when the &queue completes"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:69
+#: src/mkvtoolnix-gui/util/settings.cpp:70
 #, fuzzy, no-c-format
 msgid "Execute program '%1'"
 msgstr "Programak exekutatzen"
@@ -6678,12 +6678,12 @@ msgstr "MPLS Bluray iraku-zerrenda"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Bide hau berezko bide egiten du bere motentzat (audioa, bideoa, azpidatziak)."
 
-#: src/input/r_matroska.cpp:1689
-#: src/input/r_matroska.cpp:1704
+#: src/input/r_matroska.cpp:1701
+#: src/input/r_matroska.cpp:1716
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "AAC kodek abiarazpen datu hondatuak aurkitu dira.\n"
 
-#: src/input/r_matroska.cpp:1697
+#: src/input/r_matroska.cpp:1709
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Kodek id hondatua: '%1%'.\n"
@@ -7716,12 +7716,12 @@ msgid "Play a WAV file with the default application:"
 msgstr "Irakurri WAV agiri bat berezko aplikazioarekin:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:76
+#: src/mkvtoolnix-gui/util/settings.cpp:77
 #, fuzzy, no-c-format
 msgid "Play an audio file"
 msgstr "MPEG audio agiriak"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:81
+#: src/mkvtoolnix-gui/util/settings.cpp:82
 #, fuzzy, no-c-format
 msgid "Play audio file '%1'"
 msgstr "MPEG audio agiriak"
@@ -7796,7 +7796,7 @@ msgstr "Mesedez hautatu hurrengo agiriaren kodeaketarako hizkikodea."
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "Bide ezaugarrientzako kokapena \"sarrera\" hegatsean:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:193
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:197
 #, no-c-format
 msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
 msgstr "Ahalezko zergaitiak dira programa ez egotea edo zuk sarbiderik ez izatea bertara edo bere zuzenbidera."
@@ -7864,7 +7864,7 @@ msgstr[1] "Arazoak MKVToolNix ezarpenarekin"
 msgid "Process &priority:"
 msgstr "Garapen &lehentasuna:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:190
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:194
 #, no-c-format
 msgid "Program execution failed"
 msgstr "Programaren exekuzioa hutsegitea"
@@ -8859,7 +8859,7 @@ msgid "Show version information."
 msgstr "Erakutsi bertsio argibideak."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:55
+#: src/mkvtoolnix-gui/util/settings.cpp:56
 #, fuzzy, no-c-format
 msgid "Shut down the computer"
 msgstr "Itzali sistema minutu batean:"
@@ -9160,7 +9160,7 @@ msgid "Suppress status output."
 msgstr "Ezeztatu egoera irteera."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:56
+#: src/mkvtoolnix-gui/util/settings.cpp:57
 #, no-c-format
 msgid "Suspend the computer"
 msgstr ""
@@ -9908,8 +9908,8 @@ msgstr "Agiria ez da ezagutu sostengatutako heuskarri bezala (irteera kodea: %1.
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "The file will not be processed further."
 msgstr "Agiria ez da gehiago prozesatuko."
 
@@ -9965,7 +9965,7 @@ msgstr "Lehen hitzak mkvextract-eri esaten dio zer atera. Bigarrena iturburu agi
 msgid "The following modes are supported:"
 msgstr "Hurrengo moduak sostengatzen dira:"
 
-#: src/mkvtoolnix-gui/jobs/program_runner.cpp:192
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:196
 #, no-c-format
 msgid "The following program could not be executed: %1"
 msgstr "Hurrengo programa ezin da exekutatu: %1"
@@ -10935,8 +10935,8 @@ msgstr "Bide honek SBR AAC/HE-AAC/AAC+ datuak ditu."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1520
-#: src/input/r_matroska.cpp:2206
+#: src/input/r_matroska.cpp:1532
+#: src/input/r_matroska.cpp:2218
 msgid "This usually indicates a damaged file structure."
 msgstr "Honek arrunt agiri egitura hondatua adierazten du."
 
@@ -11367,7 +11367,7 @@ msgstr "Sostengugabeko MPEG mpeg_version: 0x%|1$02x| %2% paketean %3% denbora-ko
 msgid "Unsupported file format"
 msgstr "Agiri heuskarri sostengu gabea"
 
-#: src/input/r_matroska.cpp:2013
+#: src/input/r_matroska.cpp:2025
 msgid "Unsupported track type for this track.\n"
 msgstr "Bide mota sostengatu gabea bide honentzat.\n"
 
@@ -11429,7 +11429,7 @@ msgstr "3 byteko NALU neurri luzera erabiltzeak zenbait AVC/h.264 kodek-rekin de
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Demultiplexatzailea erabiltzen '%1%' heuskarrirako.\n"
 
-#: src/input/r_matroska.cpp:1549
+#: src/input/r_matroska.cpp:1561
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Irteera modulo generikoa erabiltzen '%1%' bide motarako.\n"
@@ -12229,13 +12229,13 @@ msgstr "matroska_reader: (MS bateragarritasun modua, %1% bidea) Matroskak dio bi
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: Bide batek ez du bere bide zenbakia.\n"
 
-#: src/input/r_matroska.cpp:1615
+#: src/input/r_matroska.cpp:1627
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: Ezin izan zaio %1% bide UID-ari heutsi jadanik agiri berriari esleiturik dagoelako.\n"
 
-#: src/input/r_matroska.cpp:1459
-#: src/input/r_matroska.cpp:1464
+#: src/input/r_matroska.cpp:1471
+#: src/input/r_matroska.cpp:1476
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Ez da zatirik aurkitu.\n"
 
@@ -12310,7 +12310,7 @@ msgstr "matroska_reader: Bide mota ez da aurkitu.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge ez da FLAC sostenguarekin bildua izan. %1% bide ezikusten.\n"
 
-#: src/input/r_matroska.cpp:1446
+#: src/input/r_matroska.cpp:1458
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: Ez da EBML idazburua aurkitu.\n"
 
@@ -12707,11 +12707,11 @@ msgstr "tta_reader: neurria_etiketa < 0 c'tor. %1%\n"
 #: src/info/mkvinfo.cpp:887
 #: src/info/mkvinfo.cpp:1073
 #: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2664
+#: src/input/r_matroska.cpp:2676
 msgid "unknown"
 msgstr "ezezaguna"
 
-#: src/input/r_matroska.cpp:2648
+#: src/input/r_matroska.cpp:2660
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "ezezaguna, heuskarri etiketa 0x%|1$04x|"
