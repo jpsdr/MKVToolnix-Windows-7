@@ -6,6 +6,11 @@
   once as soon as the current job or the whole queue finishes. The actions are
   the same ones that can be configured to be run automatically after job or
   queue completion.
+* MKVToolNix GUI: implemented several built-in actions that can be executed
+  either on special events or once via the "watch jobs" tool. These are:
+  playing an audio file (implemented for all operating systems); suspending
+  and shutting down the computer (only implemented for Windows and for Linux
+  systems using systemd).
 
 ## Bug fixes
 
