@@ -16,9 +16,9 @@ BuildRequires: devtoolset-4-gcc-c++ >= 5.0.0, rubygem-drake
 %endif
 
 %if 0%{?suse_version}
-BuildRequires: gettext-tools libqt5-qtbase-devel, ruby2.1-rubygem-rake, libxslt-tools, docbook-xsl-stylesheets
+BuildRequires: gettext-tools libqt5-qtbase-devel, libqt5-qtmultimedia-devel, ruby2.1-rubygem-rake, libxslt-tools, docbook-xsl-stylesheets
 %else
-BuildRequires: gettext-devel, qt5-qtbase-devel, libxslt, docbook-style-xsl
+BuildRequires: gettext-devel, qt5-qtbase-devel, qt5-qtmultimedia-devel, libxslt, docbook-style-xsl
 %endif
 
 %if 0%{?suse_version}
