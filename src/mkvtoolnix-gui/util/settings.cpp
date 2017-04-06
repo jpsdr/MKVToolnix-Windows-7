@@ -51,11 +51,12 @@ Settings::RunProgramConfig::name()
   if (!m_name.isEmpty())
     return m_name;
 
-  return m_type == RunProgramType::ExecuteProgram   ? nameForExternalProgram()
-       : m_type == RunProgramType::PlayAudioFile    ? nameForPlayAudioFile()
-       : m_type == RunProgramType::ShutDownComputer ? QY("Shut down the computer")
-       : m_type == RunProgramType::SuspendComputer  ? QY("Suspend the computer")
-       :                                              Q("unknown");
+  return m_type == RunProgramType::ExecuteProgram    ? nameForExternalProgram()
+       : m_type == RunProgramType::PlayAudioFile     ? nameForPlayAudioFile()
+       : m_type == RunProgramType::ShutDownComputer  ? QY("Shut down the computer")
+       : m_type == RunProgramType::HibernateComputer ? QY("Hibernate the computer")
+       : m_type == RunProgramType::SleepComputer     ? QY("Sleep the computer")
+       :                                               Q("unknown");
 }
 
 QString
@@ -420,7 +421,8 @@ Settings::addDefaultRunProgramConfigurations(QSettings &reg) {
   auto numConfigurationsBefore = m_runProgramConfigurations.count();
 
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::PlayAudioFile, [](RunProgramConfig &cfg) { cfg.m_audioFile = App::programRunner().defaultAudioFileName(); });
-  addDefaultRunProgramConfigurationForType(reg, RunProgramType::SuspendComputer);
+  addDefaultRunProgramConfigurationForType(reg, RunProgramType::SleepComputer);
+  addDefaultRunProgramConfigurationForType(reg, RunProgramType::HibernateComputer);
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::ShutDownComputer);
 
   if (numConfigurationsBefore != m_runProgramConfigurations.count())

@@ -8,9 +8,9 @@
   queue completion.
 * MKVToolNix GUI: implemented several built-in actions that can be executed
   either on special events or once via the "watch jobs" tool. These are:
-  playing an audio file (implemented for all operating systems); suspending
-  and shutting down the computer (only implemented for Windows and for Linux
-  systems using systemd).
+  playing an audio file (implemented for all operating systems); hibernating,
+  sleeping and shutting down the computer (only implemented for Windows and
+  for Linux systems using systemd).
 
 ## Bug fixes
 

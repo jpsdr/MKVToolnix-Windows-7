@@ -28,7 +28,7 @@ WindowsProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType t
   if (ProgramRunner::isRunProgramTypeSupported(type))
     return true;
 
-  return mtx::included_in(type, Util::Settings::RunProgramType::ShutDownComputer, Util::Settings::RunProgramType::SuspendComputer);
+  return mtx::included_in(type, Util::Settings::RunProgramType::ShutDownComputer, Util::Settings::RunProgramType::HibernateComputer, Util::Settings::RunProgramType::SleepComputer);
 }
 
 void
@@ -68,22 +68,27 @@ WindowsProgramRunner::shutDownComputer(Util::Settings::RunProgramConfig &) {
 }
 
 void
-WindowsProgramRunner::suspendComputer(Util::Settings::RunProgramConfig &) {
-  qDebug() << "WindowsProgramRunner::suspendComputer: about to hibernate";
+WindowsProgramRunner::hibernateOrSleepComputer(bool hibernate) {
+  auto action = Q(hibernate ? "hibernate" : "sleep");
+  qDebug() << "WindowsProgramRunner::hibernateOrSleepComputer: about to" << action;
 
   addShutdownNamePrivilege();
 
-  if (SetSuspendState(true, false, false))
+  if (SetSuspendState(hibernate, false, false))
     return;
 
   auto error = GetLastError();
-  qDebug() << "WindowsProgramRunner::suspendComputer: hibernate failed, about to sleep; error:" << error << Q(mtx::sys::format_windows_message(error));
+  qDebug() << "WindowsProgramRunner::hibernateOrSleepComputer:" << action << "failed; error:" << error << Q(mtx::sys::format_windows_message(error));
+}
 
-  if (SetSuspendState(false, false, false))
-    return;
+void
+WindowsProgramRunner::hibernateComputer(Util::Settings::RunProgramConfig &) {
+  hibernateOrSleepComputer(true);
+}
 
-  error = GetLastError();
-  qDebug() << "WindowsProgramRunner::suspendComputer: sleep failed, too. Not trying anything else. Error:" << error << Q(mtx::sys::format_windows_message(error));
+void
+WindowsProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &) {
+  hibernateOrSleepComputer(false);
 }
 
 QString

@@ -49,7 +49,8 @@ protected:
   virtual void executeProgram(Util::Settings::RunProgramConfig &config, std::function<void(VariableMap &)> const &setupVariables, VariableMap const &generalVariables);
   virtual void playAudioFile(Util::Settings::RunProgramConfig &config);
   virtual void shutDownComputer(Util::Settings::RunProgramConfig &config);
-  virtual void suspendComputer(Util::Settings::RunProgramConfig &config);
+  virtual void hibernateComputer(Util::Settings::RunProgramConfig &config);
+  virtual void sleepComputer(Util::Settings::RunProgramConfig &config);
 
 public:
   static std::unique_ptr<ProgramRunner> create();

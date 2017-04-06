@@ -104,8 +104,11 @@ ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
     else if (runConfig->m_type == Util::Settings::RunProgramType::ShutDownComputer)
       shutDownComputer(*runConfig);
 
-    else if (runConfig->m_type == Util::Settings::RunProgramType::SuspendComputer)
-      suspendComputer(*runConfig);
+    else if (runConfig->m_type == Util::Settings::RunProgramType::HibernateComputer)
+      hibernateComputer(*runConfig);
+
+    else if (runConfig->m_type == Util::Settings::RunProgramType::SleepComputer)
+      sleepComputer(*runConfig);
   }
 }
 
@@ -215,7 +218,12 @@ ProgramRunner::shutDownComputer(Util::Settings::RunProgramConfig &/* config */) 
 }
 
 void
-ProgramRunner::suspendComputer(Util::Settings::RunProgramConfig &/* config */) {
+ProgramRunner::hibernateComputer(Util::Settings::RunProgramConfig &/* config */) {
+  // Not supported in an OS-agnostic way.
+}
+
+void
+ProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &/* config */) {
   // Not supported in an OS-agnostic way.
 }
 

@@ -195,12 +195,14 @@ PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &
   addItemIfSupported(QY("Execute a program"),      Util::Settings::RunProgramType::ExecuteProgram);
   addItemIfSupported(QY("Play an audio file"),     Util::Settings::RunProgramType::PlayAudioFile);
   addItemIfSupported(QY("Shut down the computer"), Util::Settings::RunProgramType::ShutDownComputer);
-  addItemIfSupported(QY("Suspend the computer"),   Util::Settings::RunProgramType::SuspendComputer);
+  addItemIfSupported(QY("Hibernate the computer"), Util::Settings::RunProgramType::HibernateComputer);
+  addItemIfSupported(QY("Sleep the computer"),     Util::Settings::RunProgramType::SleepComputer);
 
-  d->pagesByType[Util::Settings::RunProgramType::ExecuteProgram]   = d->ui->executeProgramTypePage;
-  d->pagesByType[Util::Settings::RunProgramType::PlayAudioFile]    = d->ui->playAudioFileTypePage;
-  d->pagesByType[Util::Settings::RunProgramType::ShutDownComputer] = d->ui->emptyTypePage;
-  d->pagesByType[Util::Settings::RunProgramType::SuspendComputer]  = d->ui->emptyTypePage;
+  d->pagesByType[Util::Settings::RunProgramType::ExecuteProgram]    = d->ui->executeProgramTypePage;
+  d->pagesByType[Util::Settings::RunProgramType::PlayAudioFile]     = d->ui->playAudioFileTypePage;
+  d->pagesByType[Util::Settings::RunProgramType::ShutDownComputer]  = d->ui->emptyTypePage;
+  d->pagesByType[Util::Settings::RunProgramType::HibernateComputer] = d->ui->emptyTypePage;
+  d->pagesByType[Util::Settings::RunProgramType::SleepComputer]     = d->ui->emptyTypePage;
 
   showPageForType(cfg.m_type);
 

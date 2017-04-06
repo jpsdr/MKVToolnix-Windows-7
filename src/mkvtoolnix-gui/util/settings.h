@@ -26,7 +26,8 @@ public:
     ExecuteProgram,
     PlayAudioFile,
     ShutDownComputer,
-    SuspendComputer,
+    HibernateComputer,
+    SleepComputer,
     Max,
     Default = ExecuteProgram,
   };
