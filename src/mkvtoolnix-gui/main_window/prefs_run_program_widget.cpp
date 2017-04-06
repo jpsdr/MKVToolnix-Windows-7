@@ -422,6 +422,8 @@ PrefsRunProgramWidget::typeChanged(int index) {
   showPageForType(type);
 
   emit titleChanged();
+
+  enableControls();
 }
 
 void
