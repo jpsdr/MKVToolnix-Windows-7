@@ -26,6 +26,7 @@ public:
 
   bool isValid() const;
   Util::Settings::RunProgramConfigPtr config() const;
+  QString validate() const;
 
 signals:
   void titleChanged();

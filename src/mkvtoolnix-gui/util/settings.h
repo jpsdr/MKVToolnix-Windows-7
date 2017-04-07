@@ -114,6 +114,7 @@ public:
     unsigned int m_volume{75};
 
     bool isValid() const;
+    QString validate() const;
     QString name() const;
 
   private:

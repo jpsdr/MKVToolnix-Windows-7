@@ -37,12 +37,18 @@ defaultUiFont() {
 
 }
 
+QString
+Settings::RunProgramConfig::validate()
+  const {
+  return (m_type == RunProgramType::ExecuteProgram) && (m_commandLine.isEmpty() || m_commandLine.value(0).isEmpty()) ? QY("The program to execute hasn't been set yet.")
+       : (m_type == RunProgramType::PlayAudioFile)  && m_audioFile.isEmpty()                                         ? QY("The audio file to play hasn't been set yet.")
+       :                                                                                                               QString{};
+}
+
 bool
 Settings::RunProgramConfig::isValid()
   const {
-  return m_type == RunProgramType::ExecuteProgram ? !m_commandLine.value(0).isEmpty()
-       : m_type == RunProgramType::PlayAudioFile  ? !m_audioFile.isEmpty()
-       :                                            true;
+  return validate().isEmpty();
 }
 
 QString

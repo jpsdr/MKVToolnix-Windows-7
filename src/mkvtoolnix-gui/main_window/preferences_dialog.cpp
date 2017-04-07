@@ -18,6 +18,7 @@
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/side_by_side_multi_select.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -824,6 +825,33 @@ PreferencesDialog::showPage(Page page) {
 
   ui->pageSelector->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
   ui->pages->setCurrentIndex(pageIndex);
+}
+
+void
+PreferencesDialog::accept() {
+  for (auto tabIdx = 0, numTabs = ui->twJobsPrograms->count(); tabIdx < numTabs; ++tabIdx) {
+    auto tab   = qobject_cast<PrefsRunProgramWidget *>(ui->twJobsPrograms->widget(tabIdx));
+    auto error = tab->validate();
+
+    if (error.isEmpty())
+      continue;
+
+    showPage(Page::RunPrograms);
+    ui->twJobsPrograms->setCurrentIndex(tabIdx);
+
+    Util::MessageBox::critical(this)
+      ->title(QY("Invalid settings"))
+      .text(Q("<p>%1 %2</p>"
+              "<p>%3</p>")
+            .arg(QY("This configuration is currently invalid.").toHtmlEscaped())
+            .arg(error.toHtmlEscaped())
+            .arg(QY("Either fix the error or remove the configuration before closing the preferences dialog.").toHtmlEscaped()))
+      .exec();
+
+    return;
+  }
+
+  QDialog::accept();
 }
 
 }}

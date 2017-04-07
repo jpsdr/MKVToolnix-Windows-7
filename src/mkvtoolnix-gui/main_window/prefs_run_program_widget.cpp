@@ -436,4 +436,10 @@ PrefsRunProgramWidget::showPageForType(Util::Settings::RunProgramType type) {
   d->ui->gbTypeSpecificSettings->setVisible(d->pagesByType[type] != d->ui->emptyTypePage);
 }
 
+QString
+PrefsRunProgramWidget::validate()
+  const {
+  return config()->validate();
+}
+
 }}

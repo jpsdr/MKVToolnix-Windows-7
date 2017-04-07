@@ -68,6 +68,8 @@ public slots:
   void enableOftendUsedCountriesOnly();
   void enableOftendUsedCharacterSetsOnly();
 
+  virtual void accept() override;
+
 protected:
   void setupPageSelector(Page pageToShow);
   void setupToolTips();
