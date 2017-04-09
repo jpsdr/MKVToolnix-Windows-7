@@ -223,7 +223,7 @@ PrefsRunProgramWidget::setupToolTips() {
 
   Util::setToolTip(d->ui->leName, QY("This is an arbitrary name the GUI can use to refer to this particular configuration."));
   Util::setToolTip(d->ui->cbConfigurationActive, QY("Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."));
-  Util::setToolTip(d->ui->pbExecuteNow, Q("%1 %2").arg(QY("Executes the program now as a test run.")).arg(QY("Note that most <MTX_…> variables are empty and will be removed for this test run.")));
+  Util::setToolTip(d->ui->pbExecuteNow, Q("%1 %2").arg(QY("Executes the action immeditately.")).arg(QY("Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments.")));
   Util::setToolTip(d->ui->cbAfterJobQueueStopped, conditionsToolTip);
   Util::setToolTip(d->ui->cbAfterJobSuccessful,   conditionsToolTip);
   Util::setToolTip(d->ui->cbAfterJobError,        conditionsToolTip);
