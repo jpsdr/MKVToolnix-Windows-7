@@ -117,10 +117,10 @@ show_version() {
   mxexit();
 }
 
-static std::pair<std::string, uint64_t>
+static std::tuple<std::string, uint64_t, uint64_t>
 parse_args(std::vector<std::string> &args) {
   std::string file_name;
-  uint64_t file_pos = 0;
+  uint64_t file_pos = 0, size = 0;
 
   for (auto const &arg: args) {
     if ((arg == "-h") || (arg == "--help"))
@@ -132,11 +132,17 @@ parse_args(std::vector<std::string> &args) {
     else if (file_name.empty())
       file_name = arg;
 
-    else if (file_pos != 0)
+    else if (size != 0)
       mxerror("Superfluous arguments given.\n");
 
-    else if (!parse_number(arg, file_pos))
-      mxerror("The file position is not a valid number.\n");
+    else if (!file_pos) {
+      if (!parse_number(arg, file_pos))
+        mxerror("The file position is not a valid number.\n");
+
+    } else if (!size) {
+      if (!parse_number(arg, size))
+        mxerror("The size is not a valid number.\n");
+    }
   }
 
   if (file_name.empty())
@@ -145,7 +151,10 @@ parse_args(std::vector<std::string> &args) {
   if (!file_pos)
     mxerror("No file position given\n");
 
-  return { file_name, file_pos };
+  if (!size)
+    mxerror("No size given\n");
+
+  return std::make_tuple(file_name, file_pos, size);
 }
 
 static void
@@ -327,9 +336,9 @@ parse_short_term_reference_picture_set(std::size_t indent,
 
 static void
 parse_hrd_parameters(std::size_t indent,
-                     bit_reader_c &r,
-                     bool stuff,
-                     unsigned int sps_max_sub_layers_minus1) {
+                     bit_reader_c &/* r */,
+                     bool /* stuff */,
+                     unsigned int /* sps_max_sub_layers_minus1 */) {
   v(indent, "HRD parameters");
   indent += 2;
 
@@ -475,12 +484,10 @@ parse_sps_extension_4bits(std::size_t indent,
 }
 
 static void
-parse_sps(memory_cptr const &data) {
+parse_sps(bit_reader_c &r) {
   unsigned int sps_max_sub_layers_minus1, chroma_format_idc, conformance_window_flag, sps_sub_layer_ordering_info_present_flag, scaling_list_enabled_flag, pcm_enabled_flag, num_short_term_ref_pic_sets, long_term_ref_pics_present_flag;
   unsigned int vui_parameters_present_flag, sps_extension_present_flag, log2_max_pic_order_cnt_lsb_minus4;
   unsigned int sps_range_extension_flag{}, sps_multilayer_extension_flag{}, sps_3d_extension_flag{}, sps_scc_extension_flag{}, sps_extension_4bits{};
-
-  auto r = bit_reader_c{data->get_buffer(), data->get_size()};
 
   v(4, "sequence parameter set");
   v(6, "forbidden_zero_bit",           r.get_bits(1));
@@ -593,13 +600,7 @@ parse_sps(memory_cptr const &data) {
 }
 
 static void
-parse_hevcc(std::string const &file_name,
-            uint64_t file_pos) {
-  mm_file_io_c in{file_name};
-
-  in.setFilePointer(file_pos);
-  auto data = in.read(23);
-  auto r    = bit_reader_c{data->get_buffer(), data->get_size()};
+parse_hevcc(bit_reader_c &r) {
   unsigned int num_arrays;
 
   v(0, "configuration_version",              r.get_bits(8));
@@ -631,14 +632,14 @@ parse_hevcc(std::string const &file_name,
   v(0, "num_arrays",                         num_arrays = r.get_bits(8));
 
   for (auto array_idx = 0u; array_idx < num_arrays; ++array_idx) {
-    auto byte           = in.read_uint8();
+    auto byte           = r.get_bits(8);
     auto type           = byte & 0x3f;
     auto type_name      = type == HEVC_NALU_TYPE_VIDEO_PARAM ? "video parameter set"
                         : type == HEVC_NALU_TYPE_SEQ_PARAM   ? "sequence parameter set"
                         : type == HEVC_NALU_TYPE_PIC_PARAM   ? "picture parameter set"
                         : type == HEVC_NALU_TYPE_PREFIX_SEI  ? "supplemental enhancement information"
                         :                                      "unknown";
-    auto nal_unit_count = in.read_uint16_be();
+    auto nal_unit_count = r.get_bits(16);
 
     v(0, (boost::format("parameter set array %1%") % array_idx).str());
     v(2, "array_completeness", (byte & 0x80) >> 7);
@@ -647,17 +648,37 @@ parse_hevcc(std::string const &file_name,
     v(2, "nal_unit_count",     nal_unit_count);
 
     for (auto nal_unit_idx = 0u; nal_unit_idx < nal_unit_count; ++nal_unit_idx) {
-      auto nal_unit_size = in.read_uint16_be();
-      data               = in.read(nal_unit_size);
-      data               = mtx::mpeg::nalu_to_rbsp(data);
+      auto nal_unit_size = r.get_bits(16);
+      auto data          = memory_c::alloc(nal_unit_size);
+
+      r.get_bytes(data->get_buffer(), nal_unit_size);
+
+      data = mtx::mpeg::nalu_to_rbsp(data);
 
       v(2, (boost::format("NAL unit %1%") % nal_unit_idx).str());
       v(4, "nal_unit_size", (boost::format("%1% (RBSP size: %2%)") % nal_unit_size % data->get_size()).str());
 
+      bit_reader_c nalu_r{data->get_buffer(), data->get_size()};
+
       if (type == HEVC_NALU_TYPE_SEQ_PARAM)
-        parse_sps(data);
+        parse_sps(nalu_r);
     }
   }
+
+  v(0, (boost::format("Remaining bits: %1%") % r.get_remaining_bits()).str());
+}
+
+static void
+read_and_parse_hevcc(std::string const &file_name,
+                     uint64_t file_pos,
+                     uint64_t size) {
+  mm_file_io_c in{file_name};
+
+  in.setFilePointer(file_pos);
+  auto data = in.read(size);
+  auto r    = bit_reader_c{data->get_buffer(), data->get_size()};
+
+  parse_hevcc(r);
 }
 
 int
@@ -672,7 +693,7 @@ main(int argc,
   auto file_spec = parse_args(args);
 
   try {
-    parse_hevcc(file_spec.first, file_spec.second);
+    read_and_parse_hevcc(std::get<0>(file_spec), std::get<1>(file_spec), std::get<2>(file_spec));
   } catch (mtx::mm_io::open_x &) {
     mxerror("File not found\n");
   }
