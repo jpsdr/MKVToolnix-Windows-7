@@ -332,8 +332,12 @@ int
 track_c::new_stream_a_aac() {
   add_pes_payload_to_probe_data();
 
+  auto pos = aac::parser_c::find_consecutive_frames(m_probe_data->get_buffer(), m_probe_data->get_size(), 5);
+  if (pos == -1)
+    return FILE_STATUS_MOREDATA;
+
   auto parser = aac::parser_c{};
-  parser.add_bytes(m_probe_data->get_buffer(), m_probe_data->get_size());
+  parser.add_bytes(m_probe_data->get_buffer() + pos, m_probe_data->get_size() - pos);
   if (!parser.frames_available() || !parser.headers_parsed())
     return FILE_STATUS_MOREDATA;
 

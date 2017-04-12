@@ -41,6 +41,10 @@
   only the arrays actually present are parsed, and they can be in any order.
   This fixes mkvinfo's output for Matroska files created from files such as
   the one from #1938.
+* mkvmerge: MPEG TS reader, AAC: mkvmerge will now require five consecutive
+  AAC headers with identical parameters before track type determination is
+  considered valid. This avoids false positives and consequently wrong track
+  parameters. Fixes the audio-related part of #1938.
 
 ## Build system changes
 
