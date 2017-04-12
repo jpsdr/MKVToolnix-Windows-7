@@ -1832,6 +1832,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
       create_video_packetizer_standard(dmx);
 
     dmx.set_packetizer_display_dimensions();
+    dmx.set_packetizer_colour_properties();
 
   } else if (dmx.is_audio()) {
     if (dmx.codec.is(codec_c::type_e::A_AAC))
@@ -2563,6 +2564,21 @@ qtmp4_demuxer_c::set_packetizer_display_dimensions() {
 }
 
 void
+qtmp4_demuxer_c::set_packetizer_colour_properties() {
+  if (v_colour_primaries != 2) {
+    m_reader.m_reader_packetizers[ptzr]->set_video_colour_primaries(v_colour_primaries, OPTION_SOURCE_CONTAINER);
+  }
+  if (v_colour_transfer_characteristics != 2) {
+    m_reader.m_reader_packetizers[ptzr]->set_video_colour_transfer_character(v_colour_transfer_characteristics, OPTION_SOURCE_CONTAINER);
+  }
+  if (v_colour_matrix_coefficients != 2) {
+    m_reader.m_reader_packetizers[ptzr]->set_video_colour_matrix(v_colour_matrix_coefficients, OPTION_SOURCE_CONTAINER);
+  }
+}
+
+
+
+void
 qtmp4_demuxer_c::handle_stsd_atom(uint64_t atom_size,
                                   int level) {
   if (is_audio()) {
@@ -2694,6 +2710,38 @@ qtmp4_demuxer_c::handle_video_stsd_atom(uint64_t atom_size,
   v_width    = get_uint16_be(&v_stsd.width);
   v_height   = get_uint16_be(&v_stsd.height);
   v_bitdepth = get_uint16_be(&v_stsd.depth);
+
+  // Handle Extensions
+  if ((stsd_non_priv_struct_size + 8) < atom_size) {
+    auto offset   = stsd_non_priv_struct_size;
+    auto atom_ptr = priv + offset;
+    uint32_t size = get_uint32_be(atom_ptr);
+    fourcc_c ext_fourcc{atom_ptr + sizeof(uint32_t)};
+    if (ext_fourcc == "colr") {
+      if (size > atom_size) {
+        mxerror(boost::format(Y("Quicktime/MP4 reader: Failed parsing colour atom for track ID %1%.\n")) % id);
+      }
+      handle_colr_atom(offset, size);
+    }
+  }
+}
+
+void
+qtmp4_demuxer_c::handle_colr_atom(uint64_t offset,
+                                  uint64_t size) {
+  colr_atom_t colr_atom;
+  size_t color_atom_size = sizeof(colr_atom_t);
+  if (sizeof(color_atom_size) > size) {
+    mxwarn(boost::format(Y("Quicktime/MP4 reader: Could not read the colour atom for track ID %1%.\n")) % id);
+    return;
+  }
+  memcpy(&colr_atom, stsd->get_buffer() + offset, color_atom_size);
+  fourcc_c colour_type{&colr_atom.colour_type};
+  if (colour_type == "nclc") {
+    v_colour_primaries                = get_uint16_be(&colr_atom.colour_primaries);
+    v_colour_transfer_characteristics = get_uint16_be(&colr_atom.transfer_characteristics);
+    v_colour_matrix_coefficients      = get_uint16_be(&colr_atom.matrix_coefficients);
+  }
 }
 
 void

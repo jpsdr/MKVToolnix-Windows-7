@@ -161,6 +161,16 @@ struct PACKED_STRUCTURE video_stsd_atom_t {
   uint16_t         color_table_id;
 };
 
+// 'colour information' atom
+struct PACKED_STRUCTURE colr_atom_t {
+  uint32_t size;
+  uint32_t fourcc;
+  uint32_t colour_type;
+  uint16_t colour_primaries;
+  uint16_t transfer_characteristics;
+  uint16_t matrix_coefficients;
+};
+
 struct PACKED_STRUCTURE qt_image_description_t {
   uint32_t size;
   video_stsd_atom_t id;
