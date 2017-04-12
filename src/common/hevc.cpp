@@ -281,99 +281,80 @@ hevcc_c::pack() {
   parse_sei_list();
 
   if (!*this)
-    return memory_cptr{};
+    return {};
 
-  unsigned int total_size = 23;
-
-  for (auto &mem : m_vps_list)
-    total_size += mem->get_size() + 1 + 2 + 2; // NALU bytes + (array_comp|reserved|nal_unit_type) + nal_unit_count + NALU size
-  for (auto &mem : m_sps_list)
-    total_size += mem->get_size() + 1 + 2 + 2; // NALU bytes + (array_comp|reserved|nal_unit_type) + nal_unit_count + NALU size
-  for (auto &mem : m_pps_list)
-    total_size += mem->get_size() + 1 + 2 + 2; // NALU bytes + (array_comp|reserved|nal_unit_type) + nal_unit_count + NALU size
-  for (auto &mem : m_sei_list)
-    total_size += mem->get_size() + 1 + 2 + 2; // NALU bytes + (array_comp|reserved|nal_unit_type) + nal_unit_count + NALU size
-
-  auto destination = memory_c::alloc(total_size);
-  auto buffer      = destination->get_buffer();
+  mm_mem_io_c buffer{nullptr, 1024, 1024};
 
   auto write_list = [&buffer](std::vector<memory_cptr> const &list, uint8 nal_unit_type) {
-    *buffer++ = (0 << 7) | (0 << 6) | (nal_unit_type & 0x3F);
-    put_uint16_be(buffer, list.size());
-    buffer += 2;
+    buffer.write_uint8((0 << 7) | (0 << 6) | (nal_unit_type & 0x3F));
+    buffer.write_uint16_be(list.size());
 
     for (auto &mem : list) {
-      auto size = mem->get_size();
-      put_uint16_be(buffer, size);
-      memcpy(buffer + 2, mem->get_buffer(), size);
-      buffer += 2 + size;
+      buffer.write_uint16_be(mem->get_size());
+      buffer.write(mem);
     }
   };
 
   // configuration version
-  *buffer++ = 1;
+  buffer.write_uint8(1);
   // general parameters block
   // general_profile_space               2     Specifies the context for the interpretation of general_profile_idc and
   //                                           general_profile_compatibility_flag
   // general_tier_flag                   1     Specifies the context for the interpretation of general_level_idc
   // general_profile_idc                 5     Defines the profile of the bitstream
-  *buffer++ = ((m_codec_private.profile_space & 0x03) << 6)
-            | ((m_codec_private.tier_flag     & 0x01) << 5)
-            |  (m_codec_private.profile_idc   & 0x1F);
+  buffer.write_uint8((   (m_codec_private.profile_space & 0x03) << 6)
+                      | ((m_codec_private.tier_flag     & 0x01) << 5)
+                      |  (m_codec_private.profile_idc   & 0x1F));
   // general_profile_compatibility_flag  32    Defines profile compatibility
-  *buffer++ = (m_codec_private.profile_compatibility_flag & 0xFF000000) >> 24;
-  *buffer++ = (m_codec_private.profile_compatibility_flag & 0x00FF0000) >> 16;
-  *buffer++ = (m_codec_private.profile_compatibility_flag & 0x0000FF00) >> 8;
-  *buffer++ =  m_codec_private.profile_compatibility_flag & 0x000000FF;
+  buffer.write_uint32_be(m_codec_private.profile_compatibility_flag);
   // general_progressive_source_flag     1     Source is progressive, see [2] for interpretation.
   // general_interlace_source_flag       1     Source is interlaced, see [2] for interpretation.
   // general_non-packed_constraint_flag  1     If 1 then no frame packing arrangement SEI messages, see [2] for more information
   // general_frame_only_constraint_flag  1     If 1 then no fields, see [2] for interpretation
   // reserved                            44    Reserved field, value TBD 0
-  *buffer = 0;
-  *buffer++ |= ((m_codec_private.progressive_source_flag    & 0x01) << 7)
-            |  ((m_codec_private.interlaced_source_flag     & 0x01) << 6)
-            |  ((m_codec_private.non_packed_constraint_flag & 0x01) << 5)
-            |  ((m_codec_private.frame_only_constraint_flag & 0x01) << 4);
-  *buffer++ = 0;
-  *buffer++ = 0;
-  *buffer++ = 0;
-  *buffer++ = 0;
-  *buffer++ = 0;
+  buffer.write_uint8(  ((m_codec_private.progressive_source_flag    & 0x01) << 7)
+                     | ((m_codec_private.interlaced_source_flag     & 0x01) << 6)
+                     | ((m_codec_private.non_packed_constraint_flag & 0x01) << 5)
+                     | ((m_codec_private.frame_only_constraint_flag & 0x01) << 4));
+  buffer.write_uint8(0);
+  buffer.write_uint8(0);
+  buffer.write_uint8(0);
+  buffer.write_uint8(0);
+  buffer.write_uint8(0);
   // general_level_idc                   8     Defines the level of the bitstream
-  *buffer++ = m_codec_private.level_idc & 0xFF;
+  buffer.write_uint8(m_codec_private.level_idc & 0xFF);
   // reserved                            4     Reserved Field, value '1111'b
   // min_spatial_segmentation_idc        12    Maximum possible size of distinct coded spatial segmentation regions in the pictures of the CVS
-  *buffer++ = 0xF0 | ((m_codec_private.min_spatial_segmentation_idc >> 8) & 0x0F);
-  *buffer++ = m_codec_private.min_spatial_segmentation_idc & 0XFF;
+  buffer.write_uint8(0xF0 | ((m_codec_private.min_spatial_segmentation_idc >> 8) & 0x0F));
+  buffer.write_uint8(m_codec_private.min_spatial_segmentation_idc & 0XFF);
   // reserved                            6     Reserved Field, value '111111'b
   // parallelism_type                    2     0=unknown, 1=slices, 2=tiles, 3=WPP
-  *buffer++ = 0xFC | m_codec_private.parallelism_type; //0x00 - unknown
+  buffer.write_uint8(0xFC | m_codec_private.parallelism_type); //0x00 - unknown
   // reserved                            6     Reserved field, value '111111'b
   // chroma_format_idc                   2     See table 6-1, HEVC
-  *buffer++ = 0xFC | (m_codec_private.chroma_format_idc & 0x03);
+  buffer.write_uint8(0xFC | (m_codec_private.chroma_format_idc & 0x03));
   // reserved                            5     Reserved Field, value '11111'b
   // bit_depth_luma_minus8               3     Bit depth luma minus 8
-  *buffer++ = 0xF8 | ((m_codec_private.bit_depth_luma_minus8) & 0x07);
+  buffer.write_uint8(0xF8 | ((m_codec_private.bit_depth_luma_minus8) & 0x07));
   // reserved                            5     Reserved Field, value '11111'b
   // bit_depth_chroma_minus8             3     Bit depth chroma minus 8
-  *buffer++ = 0xF8 | ((m_codec_private.bit_depth_chroma_minus8) & 0x07);
+  buffer.write_uint8(0xF8 | ((m_codec_private.bit_depth_chroma_minus8) & 0x07));
   // reserved                            16    Reserved Field, value 0
-  *buffer++ = 0;
-  *buffer++ = 0;
+  buffer.write_uint8(0);
+  buffer.write_uint8(0);
   // reserved                            2     Reserved Field, value 0
   // max_sub_layers                      3     maximum number of temporal sub-layers
   // temporal_id_nesting_flag            1     Specifies whether inter prediction is additionally restricted. see [2] for interpretation.
   // size_nalu_minus_one                 2     Size of field NALU Length – 1
-  *buffer++ = (((m_codec_private.max_sub_layers_minus1 + 1) & 0x03) << 6)
-            | ((m_codec_private.temporal_id_nesting_flag    & 0x01) << 2)
-            | ((m_nalu_size_length - 1)                     & 0x03);
+  buffer.write_uint8(  (((m_codec_private.max_sub_layers_minus1 + 1) & 0x03) << 6)
+                     | ((m_codec_private.temporal_id_nesting_flag    & 0x01) << 2)
+                     | ((m_nalu_size_length - 1)                     & 0x03));
   // num_arrays                          8     Number of arrays of parameter sets
   auto num_arrays = (m_vps_list.empty() ? 0 : 1)
                   + (m_sps_list.empty() ? 0 : 1)
                   + (m_pps_list.empty() ? 0 : 1)
                   + (m_sei_list.empty() ? 0 : 1);
-  *buffer++ = num_arrays;
+  buffer.write_uint8(num_arrays);
 
   if (m_vps_list.size())
     write_list(m_vps_list, HEVC_NALU_TYPE_VIDEO_PARAM);
@@ -384,7 +365,7 @@ hevcc_c::pack() {
   if (m_sei_list.size())
     write_list(m_sei_list, HEVC_NALU_TYPE_PREFIX_SEI);
 
-  return destination;
+  return std::make_shared<memory_c>(buffer.get_and_lock_buffer(), buffer.getFilePointer());
 }
 
 hevcc_c

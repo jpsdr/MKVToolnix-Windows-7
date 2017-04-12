@@ -32,6 +32,9 @@
 * mkvmerge: HEVC/h.265 parser: fixed the calculation of the number of
   parameter set arrays in the HEVCC data structure stored in
   CodecPrivate. Fixes the video-related part of #1938.
+* mkvmerge: HEVC/h.265 parser: fixed writing superfluous and uninitialized
+  bytes at the end of the HEVCC data structure stored in CodecPrivate. Another
+  fix for the video-related part of #1938.
 
 ## Build system changes
 
