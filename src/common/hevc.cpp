@@ -368,9 +368,12 @@ hevcc_c::pack() {
   *buffer++ = (((m_codec_private.max_sub_layers_minus1 + 1) & 0x03) << 6)
             | ((m_codec_private.temporal_id_nesting_flag    & 0x01) << 2)
             | ((m_nalu_size_length - 1)                     & 0x03);
-  // num_parameter_sets                  8     Number of parameter sets
-  unsigned int num_parameter_sets = m_vps_list.size() + m_sps_list.size() + m_pps_list.size() + m_sei_list.size();
-  *buffer++ = num_parameter_sets;
+  // num_arrays                          8     Number of arrays of parameter sets
+  auto num_arrays = (m_vps_list.empty() ? 0 : 1)
+                  + (m_sps_list.empty() ? 0 : 1)
+                  + (m_pps_list.empty() ? 0 : 1)
+                  + (m_sei_list.empty() ? 0 : 1);
+  *buffer++ = num_arrays;
 
   if (m_vps_list.size())
     write_list(m_vps_list, HEVC_NALU_TYPE_VIDEO_PARAM);

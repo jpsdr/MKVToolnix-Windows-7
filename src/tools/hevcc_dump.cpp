@@ -600,7 +600,7 @@ parse_hevcc(std::string const &file_name,
   in.setFilePointer(file_pos);
   auto data = in.read(23);
   auto r    = bit_reader_c{data->get_buffer(), data->get_size()};
-  unsigned int num_parameter_sets;
+  unsigned int num_arrays;
 
   v(0, "configuration_version",              r.get_bits(8));
   v(0, "general_profile_space",              r.get_bits(2));
@@ -628,9 +628,9 @@ parse_hevcc(std::string const &file_name,
   v(0, "max_sub_layers",                     r.get_bits(3));
   v(0, "temporal_id_nesting_flag",           r.get_bits(1));
   v(0, "size_nalu_minus_one",                r.get_bits(2));
-  v(0, "num_parameter_sets",                 num_parameter_sets = r.get_bits(8));
+  v(0, "num_arrays",                         num_arrays = r.get_bits(8));
 
-  for (auto parameter_set_idx = 0u; parameter_set_idx < num_parameter_sets; ++parameter_set_idx) {
+  for (auto array_idx = 0u; array_idx < num_arrays; ++array_idx) {
     auto byte           = in.read_uint8();
     auto type           = byte & 0x3f;
     auto type_name      = type == HEVC_NALU_TYPE_VIDEO_PARAM ? "video parameter set"
@@ -640,7 +640,7 @@ parse_hevcc(std::string const &file_name,
                         :                                      "unknown";
     auto nal_unit_count = in.read_uint16_be();
 
-    v(0, (boost::format("parameter set %1%") % parameter_set_idx).str());
+    v(0, (boost::format("parameter set array %1%") % array_idx).str());
     v(2, "array_completeness", (byte & 0x80) >> 7);
     v(2, "reserved",           (byte & 0x40) >> 6);
     v(2, "nal_unit_type",      (boost::format("%1% (%2%)") % type % type_name).str());

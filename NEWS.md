@@ -29,6 +29,9 @@
 * MKVToolNix GUI, header editor: empty track language elements are now treated
   the same as those set to invalid ISO 639-2 codes: as if they were set to
   `und` = "undetermined". See #1929 for context.
+* mkvmerge: HEVC/h.265 parser: fixed the calculation of the number of
+  parameter set arrays in the HEVCC data structure stored in
+  CodecPrivate. Fixes the video-related part of #1938.
 
 ## Build system changes
 
