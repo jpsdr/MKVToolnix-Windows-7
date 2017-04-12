@@ -35,6 +35,12 @@
 * mkvmerge: HEVC/h.265 parser: fixed writing superfluous and uninitialized
   bytes at the end of the HEVCC data structure stored in CodecPrivate. Another
   fix for the video-related part of #1938.
+* mkvmerge: HEVC/h.265 parser: fixed the assumption that the HEVCC data
+  structure always includes arrays for all parameter set types (VPS, SPS, PPS
+  and SEI), and that the order is always VPS → SPS → PPS → SEI. Instead now
+  only the arrays actually present are parsed, and they can be in any order.
+  This fixes mkvinfo's output for Matroska files created from files such as
+  the one from #1938.
 
 ## Build system changes
 
