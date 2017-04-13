@@ -390,7 +390,7 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
     cfg->m_volume      = std::min(reg.value("volume", 50).toUInt(), 100u);
     reg.endGroup();
 
-    if (cfg->isValid())
+    if (!cfg->m_active || cfg->isValid())
       m_runProgramConfigurations << cfg;
   }
 

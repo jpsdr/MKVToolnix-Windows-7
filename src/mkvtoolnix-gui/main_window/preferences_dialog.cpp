@@ -709,7 +709,7 @@ PreferencesDialog::save() {
     auto widget = static_cast<PrefsRunProgramWidget *>(ui->twJobsPrograms->widget(idx));
     auto cfg    = widget->config();
 
-    if (cfg->isValid())
+    if (!cfg->m_active || cfg->isValid())
       m_cfg.m_runProgramConfigurations << cfg;
   }
 

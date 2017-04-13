@@ -439,7 +439,8 @@ PrefsRunProgramWidget::showPageForType(Util::Settings::RunProgramType type) {
 QString
 PrefsRunProgramWidget::validate()
   const {
-  return config()->validate();
+  auto cfg = config();
+  return cfg->m_active ? cfg->validate() : QString{};
 }
 
 }}
