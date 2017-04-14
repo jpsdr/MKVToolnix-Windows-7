@@ -45,6 +45,8 @@
   AAC headers with identical parameters before track type determination is
   considered valid. This avoids false positives and consequently wrong track
   parameters. Fixes the audio-related part of #1938.
+* mkvmerge: AAC parser: fixed mis-detection of certain data as valid ADTS AAC
+  headers resulting in memory allocation failures. Fixes #1941.
 
 ## Build system changes
 

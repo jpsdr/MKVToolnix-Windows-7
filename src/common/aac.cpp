@@ -529,6 +529,9 @@ parser_c::decode_adts_header(unsigned char const *buffer,
     frame.m_header.data_byte_size   = frame.m_header.bytes - frame.m_header.header_byte_size;
     frame.m_header.is_valid         = true;
 
+    if (frame.m_header.bytes <= frame.m_header.header_byte_size)
+      return { failure, 1 };
+
     if (m_copy_data) {
       frame.m_data = memory_c::alloc(frame.m_header.data_byte_size);
       bc.get_bytes(frame.m_data->get_buffer(), frame.m_header.data_byte_size);
