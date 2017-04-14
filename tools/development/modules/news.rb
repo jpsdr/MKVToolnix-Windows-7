@@ -19,7 +19,10 @@ def parse_news file_name
     end
   end
 
-  IO.readlines(file_name).each do |line|
+  IO.read(file_name).
+    gsub(%r{<!--.*?-->}, '').
+    split(%r{\n}).
+    each do |line|
     is_continuation = %r{^\s}.match(line)
     line            = line.chomp.gsub(%r{^\s+}, '').gsub(%r{\s+}, ' ')
 
