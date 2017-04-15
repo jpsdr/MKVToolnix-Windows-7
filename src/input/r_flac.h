@@ -45,6 +45,7 @@ private:
   std::vector<flac_block_t> blocks;
   std::vector<flac_block_t>::iterator current_block;
   FLAC__StreamMetadata_StreamInfo stream_info;
+  unsigned int m_attachment_id{};
   debugging_option_c m_debug{"flac_reader|flac"};
 
 public:
@@ -75,7 +76,9 @@ public:
 
 protected:
   virtual bool parse_file(bool for_identification_only);
+  virtual void handle_picture_metadata(FLAC__StreamMetadata const *metadata);
   virtual void handle_stream_info_metadata(FLAC__StreamMetadata const *metadata);
+  virtual std::string attachment_name_from_metadata(FLAC__StreamMetadata_Picture const &picture) const;
 };
 
 #else  // HAVE_FLAC_FORMAT_H

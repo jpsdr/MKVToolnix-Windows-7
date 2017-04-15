@@ -17,6 +17,7 @@
 #include <vorbis/codec.h>
 
 #include "common/codec.h"
+#include "common/extern_data.h"
 #include "common/flac.h"
 #include "common/id_info.h"
 #include "input/r_flac.h"
@@ -222,11 +223,88 @@ flac_reader_c::handle_stream_info_metadata(FLAC__StreamMetadata const *metadata)
   mxdebug_if(m_debug, boost::format("flac_reader:   bits_per_sample: %1%\n")        % metadata->data.stream_info.bits_per_sample);
 }
 
+std::string
+flac_reader_c::attachment_name_from_metadata(FLAC__StreamMetadata_Picture const &picture)
+  const {
+  std::string mime_type = picture.mime_type;
+  std::string name      = picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_OTHER                ? "other"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_FILE_ICON_STANDARD   ? "icon"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_FILE_ICON            ? "other icon"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_FRONT_COVER          ? "cover"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_BACK_COVER           ? "cover (back)"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_LEAFLET_PAGE         ? "leaflet page"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_MEDIA                ? "media"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_LEAD_ARTIST          ? "lead artist - lead performer - soloist"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_ARTIST               ? "artist - performer"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_CONDUCTOR            ? "conductor"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_BAND                 ? "band - orchestra"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_COMPOSER             ? "composer"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_LYRICIST             ? "lyricist - text writer"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_RECORDING_LOCATION   ? "recording location"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_DURING_RECORDING     ? "during recording"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_DURING_PERFORMANCE   ? "during performance"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_VIDEO_SCREEN_CAPTURE ? "movie - video screen capture"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_FISH                 ? "a bright coloured fish"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_ILLUSTRATION         ? "illustration"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_BAND_LOGOTYPE        ? "band - artist logotype"
+                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_PUBLISHER_LOGOTYPE   ? "publisher - Studio logotype"
+                        :                                                                           "unknown";
+
+  auto extension = primary_file_extension_for_mime_type(mime_type);
+
+  if (!extension.empty())
+    name += std::string{"."} + extension;
+
+  return name;
+}
+
+void
+flac_reader_c::handle_picture_metadata(FLAC__StreamMetadata const *metadata) {
+  auto &picture = metadata->data.picture;
+
+  if (!picture.data || !picture.data_length || !picture.mime_type)
+    return;
+
+  auto attachment         = std::make_shared<attachment_t>();
+  attachment->description = std::string{ picture.description ? reinterpret_cast<char const *>(picture.description) : "" };
+  attachment->mime_type   = picture.mime_type;
+  attachment->name        = attachment_name_from_metadata(picture);
+  attachment->data        = memory_c::clone(picture.data, picture.data_length);
+  attachment->ui_id       = m_attachment_id;
+
+  auto attach_mode        = attachment_requested(m_attachment_id);
+
+  mxdebug_if(m_debug, boost::format("flac_reader: PICTURE block\n"));
+  mxdebug_if(m_debug, boost::format("flac_reader:   description: %1%\n") % attachment->description);
+  mxdebug_if(m_debug, boost::format("flac_reader:   name:        %1%\n") % attachment->name);
+  mxdebug_if(m_debug, boost::format("flac_reader:   MIME type:   %1%\n") % attachment->mime_type);
+  mxdebug_if(m_debug, boost::format("flac_reader:   data length: %1%\n") % picture.data_length);
+  mxdebug_if(m_debug, boost::format("flac_reader:   ID:          %1%\n") % m_attachment_id);
+  mxdebug_if(m_debug, boost::format("flac_reader:   mode:        %1%\n") % attach_mode);
+
+  if (attachment->mime_type.empty() || attachment->name.empty())
+    return;
+
+  ++m_attachment_id;
+
+  if (ATTACH_MODE_SKIP == attach_mode)
+    return;
+
+  attachment->to_all_files   = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+  attachment->source_file    = m_ti.m_fname;
+
+  add_attachment(attachment);
+}
+
 void
 flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
   switch (metadata->type) {
     case FLAC__METADATA_TYPE_STREAMINFO:
       handle_stream_info_metadata(metadata);
+      break;
+
+    case FLAC__METADATA_TYPE_PICTURE:
+      handle_picture_metadata(metadata);
       break;
 
     default:
@@ -282,6 +360,8 @@ flac_reader_c::identify() {
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_AUDIO, "FLAC", info.get());
+  for (auto &attachment : g_attachments)
+    id_result_attachment(attachment->ui_id, attachment->mime_type, attachment->data->get_size(), attachment->name, attachment->description, attachment->id);
 }
 
 #else  // HAVE_FLAC_FORMAT_H

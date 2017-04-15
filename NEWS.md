@@ -11,6 +11,8 @@
   playing an audio file (implemented for all operating systems); hibernating,
   sleeping and shutting down the computer (only implemented for Windows and
   for Linux systems using systemd).
+* mkvmerge: FLAC reader: added support for handling embedded pictures as
+  attachments. Implements #1942.
 
 ## Bug fixes
 
