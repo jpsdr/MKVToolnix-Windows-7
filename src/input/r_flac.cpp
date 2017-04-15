@@ -114,7 +114,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
   init_flac_decoder();
   result = FLAC__stream_decoder_process_until_end_of_metadata(m_flac_decoder.get());
 
-  mxverb(2, boost::format("flac_reader: extract->metadata, result: %1%, mdp: %2%, num blocks: %3%\n") % result % metadata_parsed % blocks.size());
+  mxdebug_if(m_debug, boost::format("flac_reader: extract->metadata, result: %1%, mdp: %2%, num blocks: %3%\n") % result % metadata_parsed % blocks.size());
 
   if (!metadata_parsed)
     mxerror_fn(m_ti.m_fname, Y("No metadata block found. This file is broken.\n"));
@@ -131,7 +131,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
 
   blocks.push_back(block);
 
-  mxverb(2, boost::format("flac_reader: headers: block at %1% with size %2%\n") % block.filepos % block.len);
+  mxdebug_if(m_debug, boost::format("flac_reader: headers: block at %1% with size %2%\n") % block.filepos % block.len);
 
   old_progress = -5;
   ok = FLAC__stream_decoder_skip_single_frame(m_flac_decoder.get());
@@ -151,7 +151,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
       old_pos       = u;
       blocks.push_back(block);
 
-      mxverb(2, boost::format("flac_reader: skip/decode frame, block at %1% with size %2%\n") % block.filepos % block.len);
+      mxdebug_if(m_debug, boost::format("flac_reader: skip/decode frame, block at %1% with size %2%\n") % block.filepos % block.len);
     }
 
     if (state > FLAC__STREAM_DECODER_READ_FRAME)
@@ -218,22 +218,22 @@ flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
       bits_per_sample = metadata->data.stream_info.bits_per_sample;
       metadata_parsed = true;
 
-      mxverb(2, boost::format("flac_reader: STREAMINFO block (%1% bytes):\n") % metadata->length);
-      mxverb(2, boost::format("flac_reader:   sample_rate: %1% Hz\n")         % metadata->data.stream_info.sample_rate);
-      mxverb(2, boost::format("flac_reader:   channels: %1%\n")               % metadata->data.stream_info.channels);
-      mxverb(2, boost::format("flac_reader:   bits_per_sample: %1%\n")        % metadata->data.stream_info.bits_per_sample);
+      mxdebug_if(m_debug, boost::format("flac_reader: STREAMINFO block (%1% bytes):\n") % metadata->length);
+      mxdebug_if(m_debug, boost::format("flac_reader:   sample_rate: %1% Hz\n")         % metadata->data.stream_info.sample_rate);
+      mxdebug_if(m_debug, boost::format("flac_reader:   channels: %1%\n")               % metadata->data.stream_info.channels);
+      mxdebug_if(m_debug, boost::format("flac_reader:   bits_per_sample: %1%\n")        % metadata->data.stream_info.bits_per_sample);
 
       break;
     default:
-      mxverb(2,
-             boost::format("%1% (%2%) block (%3% bytes)\n")
-             % (  metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
-                : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
-                : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
-                : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
-                : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
-                :                                                        "UNDEFINED")
-             % metadata->type % metadata->length);
+      mxdebug_if(m_debug,
+                 boost::format("%1% (%2%) block (%3% bytes)\n")
+                 % (  metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
+                    : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
+                    : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
+                    : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
+                    : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
+                    :                                                        "UNDEFINED")
+                 % metadata->type % metadata->length);
       break;
   }
 }

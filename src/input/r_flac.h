@@ -16,6 +16,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/debugging.h"
 #include "common/mm_io.h"
 #include "merge/generic_reader.h"
 
@@ -44,6 +45,7 @@ private:
   std::vector<flac_block_t> blocks;
   std::vector<flac_block_t>::iterator current_block;
   FLAC__StreamMetadata_StreamInfo stream_info;
+  debugging_option_c m_debug{"flac_reader|flac"};
 
 public:
   flac_reader_c(const track_info_c &ti, const mm_io_cptr &in);
