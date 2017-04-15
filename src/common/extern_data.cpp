@@ -2636,6 +2636,13 @@ guess_mime_type_by_ext(std::string ext) {
   return "";
 }
 
+std::string
+primary_file_extension_for_mime_type(std::string const &mime_type) {
+  auto itr = brng::find_if(mime_types, [&mime_type](auto const &m) { return m.name == mime_type; });
+
+  return (itr != mime_types.end()) && !itr->extensions.empty() ? itr->extensions[0] : std::string{};
+}
+
 #if HAVE_MAGIC_H
 static std::string
 guess_mime_type_by_content(magic_t &m,

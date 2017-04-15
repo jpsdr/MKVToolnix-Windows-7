@@ -37,6 +37,7 @@ extern std::vector<std::string> const g_popular_country_codes;
 extern std::vector<mime_type_t> const mime_types;
 
 std::string guess_mime_type(std::string ext, bool is_file);
+std::string primary_file_extension_for_mime_type(std::string const &mime_type);
 boost::optional<std::string> map_to_cctld(std::string const &s);
 
 #endif // MTX_COMMON_EXTERN_DATA_H
