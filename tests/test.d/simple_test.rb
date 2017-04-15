@@ -141,7 +141,7 @@ class SimpleTest
     @blocks[:tests] << {
       :name  => full_command_line,
       :block => lambda {
-        sys "../src/mkvmerge #{full_command_line} > #{tmp}", :exit_code => options[:exit_code]
+        sys "../src/mkvmerge #{full_command_line} --engage no_variable_data > #{tmp}", :exit_code => options[:exit_code]
 
         text = IO.readlines(tmp).reject { |line| %r{^\s*"identification_format_version":\s*\d+}.match(line) }.join('')
         File.open(tmp, 'w') { |tmp_file| tmp_file.puts text }
