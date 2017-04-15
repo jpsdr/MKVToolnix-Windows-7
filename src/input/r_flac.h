@@ -75,6 +75,7 @@ public:
 
 protected:
   virtual bool parse_file(bool for_identification_only);
+  virtual void handle_stream_info_metadata(FLAC__StreamMetadata const *metadata);
 };
 
 #else  // HAVE_FLAC_FORMAT_H

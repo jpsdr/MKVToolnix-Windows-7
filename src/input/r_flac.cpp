@@ -209,21 +209,26 @@ flac_reader_c::flac_read_cb(FLAC__byte buffer[],
 }
 
 void
+flac_reader_c::handle_stream_info_metadata(FLAC__StreamMetadata const *metadata) {
+  memcpy(&stream_info, &metadata->data.stream_info, sizeof(FLAC__StreamMetadata_StreamInfo));
+  sample_rate     = metadata->data.stream_info.sample_rate;
+  channels        = metadata->data.stream_info.channels;
+  bits_per_sample = metadata->data.stream_info.bits_per_sample;
+  metadata_parsed = true;
+
+  mxdebug_if(m_debug, boost::format("flac_reader: STREAMINFO block (%1% bytes):\n") % metadata->length);
+  mxdebug_if(m_debug, boost::format("flac_reader:   sample_rate: %1% Hz\n")         % metadata->data.stream_info.sample_rate);
+  mxdebug_if(m_debug, boost::format("flac_reader:   channels: %1%\n")               % metadata->data.stream_info.channels);
+  mxdebug_if(m_debug, boost::format("flac_reader:   bits_per_sample: %1%\n")        % metadata->data.stream_info.bits_per_sample);
+}
+
+void
 flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
   switch (metadata->type) {
     case FLAC__METADATA_TYPE_STREAMINFO:
-      memcpy(&stream_info, &metadata->data.stream_info, sizeof(FLAC__StreamMetadata_StreamInfo));
-      sample_rate     = metadata->data.stream_info.sample_rate;
-      channels        = metadata->data.stream_info.channels;
-      bits_per_sample = metadata->data.stream_info.bits_per_sample;
-      metadata_parsed = true;
-
-      mxdebug_if(m_debug, boost::format("flac_reader: STREAMINFO block (%1% bytes):\n") % metadata->length);
-      mxdebug_if(m_debug, boost::format("flac_reader:   sample_rate: %1% Hz\n")         % metadata->data.stream_info.sample_rate);
-      mxdebug_if(m_debug, boost::format("flac_reader:   channels: %1%\n")               % metadata->data.stream_info.channels);
-      mxdebug_if(m_debug, boost::format("flac_reader:   bits_per_sample: %1%\n")        % metadata->data.stream_info.bits_per_sample);
-
+      handle_stream_info_metadata(metadata);
       break;
+
     default:
       mxdebug_if(m_debug,
                  boost::format("%1% (%2%) block (%3% bytes)\n")
