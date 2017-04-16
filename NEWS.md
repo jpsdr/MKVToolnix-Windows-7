@@ -49,6 +49,9 @@
   parameters. Fixes the audio-related part of #1938.
 * mkvmerge: AAC parser: fixed mis-detection of certain data as valid ADTS AAC
   headers resulting in memory allocation failures. Fixes #1941.
+* mkvmerge: fixed an endless loop in certain circumstances when splitting by
+  `parts` or `parts-frames` and the start of the file is discarded. Fixes
+  #1944.
 
 ## Build system changes
 

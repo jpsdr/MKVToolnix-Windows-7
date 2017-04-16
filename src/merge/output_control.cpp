@@ -725,6 +725,9 @@ adjust_cue_and_seekhead_positions(uint64_t data_start_pos,
 static void
 relocate_written_data(uint64_t data_start_pos,
                       uint64_t delta) {
+  if (g_cluster_helper->discarding())
+    return;
+
   auto rel_pos_from_end = s_out->get_size() - s_out->getFilePointer();
   auto const block_size = 1024llu * 1024;
   auto to_relocate      = s_out->get_size() - data_start_pos;
