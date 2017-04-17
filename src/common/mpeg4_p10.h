@@ -56,6 +56,7 @@ struct timing_info_t {
   bool is_present, fixed_frame_rate;
 
   int64_t default_duration() const;
+  bool is_valid() const;
 };
 
 struct sps_info_t {

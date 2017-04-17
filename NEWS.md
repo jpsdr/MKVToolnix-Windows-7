@@ -52,6 +52,9 @@
 * mkvmerge: fixed an endless loop in certain circumstances when splitting by
   `parts` or `parts-frames` and the start of the file is discarded. Fixes
   #1944.
+* mkvmerge: AVC/h.264 parser: mkvmerge will now ignore bogus timing
+  information in the sequence parameter sets (values indicating more than
+  100000 progressive frames per second). Fixes #1946.
 
 ## Build system changes
 

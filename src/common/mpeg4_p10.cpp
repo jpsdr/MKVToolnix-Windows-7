@@ -265,6 +265,14 @@ mpeg4::p10::timing_info_t::default_duration()
   return 1000000000ll * num_units_in_tick / time_scale;
 }
 
+bool
+mpeg4::p10::timing_info_t::is_valid()
+  const {
+  return is_present
+      && (0 != num_units_in_tick)
+      && (0 != time_scale);
+}
+
 void
 mpeg4::p10::sps_info_t::dump() {
   mxinfo(boost::format("sps_info dump:\n"
@@ -327,9 +335,7 @@ mpeg4::p10::sps_info_t::dump() {
 bool
 mpeg4::p10::sps_info_t::timing_info_valid()
   const {
-  return timing_info.is_present
-      && (0 != timing_info.num_units_in_tick)
-      && (0 != timing_info.time_scale);
+  return timing_info.is_valid();
 }
 
 void
@@ -563,6 +569,15 @@ mpeg4::p10::parse_sps(memory_cptr const &buffer,
       sps.timing_info.num_units_in_tick = r.get_bits(32);
       sps.timing_info.time_scale        = r.get_bits(32);
       sps.timing_info.fixed_frame_rate  = r.get_bit();
+
+      if (   sps.timing_info.is_valid()
+          && (sps.timing_info.default_duration() < 5'000ll)) {
+        mxdebug_if(s_debug_fix_bistream_timing_info,
+                   boost::format("timing info present && bogus values detected (#units %2% time_scale %3%); defaulting to 25 FPS (default duration 20'000'000)\n")
+                   % sps.timing_info.is_present % sps.timing_info.num_units_in_tick % sps.timing_info.time_scale);
+        sps.timing_info.num_units_in_tick = 1;
+        sps.timing_info.time_scale        = 50;
+      }
     }
 
     mxdebug_if(s_debug_fix_bistream_timing_info,
@@ -1307,7 +1322,7 @@ mpeg4::p10::avc_es_parser_c::handle_nalu(memory_cptr const &nalu,
 
   int type = *(nalu->get_buffer()) & 0x1f;
 
-  mxdebug_if(m_debug_nalu_types, boost::format("NALU type 0x%|1$02x| (%2%) size %3%\n") % type % get_nalu_type_name(type) % nalu->get_size());
+  mxdebug_if(m_debug_nalu_types, boost::format("NALU type 0x%|1$02x| (%2%) at %3% size %4%\n") % type % get_nalu_type_name(type) % nalu_pos % nalu->get_size());
 
   switch (type) {
     case NALU_TYPE_SEQ_PARAM:
