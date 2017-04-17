@@ -31,8 +31,8 @@
 namespace mpeg4 {
 namespace p10 {
 
-static auto s_debug_fix_bistream_timing_info = debugging_option_c{"fix_bitstream_timing_info"};
-static auto s_debug_remove_bistream_ar_info  = debugging_option_c{"remove_bitstream_ar_info"};
+static auto s_debug_fix_bistream_timing_info = debugging_option_c{"avc_parser|fix_bitstream_timing_info"};
+static auto s_debug_remove_bistream_ar_info  = debugging_option_c{"avc_parser|remove_bitstream_ar_info"};
 
 avcc_c::avcc_c()
   : m_profile_idc{}
