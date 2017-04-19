@@ -330,6 +330,15 @@ ui_run(int argc,
 #endif
 
   QApplication app(argc, argv);
+
+  QCoreApplication::setOrganizationName("bunkus.org");
+  QCoreApplication::setOrganizationDomain("bunkus.org");
+  QCoreApplication::setApplicationName("mkvinfo");
+
+#ifdef SYS_WINDOWS
+  QApplication::setStyle(Q("windowsvista"));
+#endif
+
   main_window_c main_window;
   gui = &main_window;
   main_window.show();

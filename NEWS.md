@@ -60,6 +60,10 @@
 
 * bug fix: the environment variable USER_CXXFLAGS was accidentally removed
   from the compiler flags in release 9.8.0. It's been re-added. Fixes #1925.
+* The `.desktop` files have been renamed to
+  `org.bunkus.mkvtoolnix-gui.desktop` and `org.bunkus.mkvinfo.desktop`. This
+  allows Wayland compositors to associate the correct icons with running
+  applications for e.g. task switchers. Fixes #1948.
 
 
 # Version 10.0.0 "To Drown In You" 2017-03-25

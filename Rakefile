@@ -728,8 +728,10 @@ namespace :install do
   task :shared do
     install_dir :desktopdir, :mimepackagesdir
     install_data :mimepackagesdir, FileList[ "#{$top_srcdir}/share/mime/*.xml" ]
-    install_data :desktopdir, "#{$top_srcdir}/share/desktop/mkvinfo.desktop"
-    install_data :desktopdir, "#{$top_srcdir}/share/desktop/mkvtoolnix-gui.desktop" if c?(:USE_QT)
+    if c?(:USE_QT)
+      install_data :desktopdir, "#{$top_srcdir}/share/desktop/org.bunkus.mkvinfo.desktop"
+      install_data :desktopdir, "#{$top_srcdir}/share/desktop/org.bunkus.mkvtoolnix-gui.desktop"
+    end
 
     wanted_apps     = %w{mkvmerge mkvtoolnix-gui mkvinfo mkvextract mkvpropedit}.collect { |e| "#{e}.png" }.to_hash_by
     wanted_dirs     = %w{16x16 24x24 32x32 48x48 64x64 96x96 128x128 256x256}.to_hash_by
