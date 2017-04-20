@@ -8,6 +8,7 @@ Version: 10.0.0
 Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
+Requires: hicolor-icon-theme
 
 BuildRequires: fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0, po4a
 
@@ -95,6 +96,24 @@ done
 
 %fdupes -s %buildroot/%_mandir
 %fdupes -s %buildroot/%_prefix
+
+%post
+update-desktop-database                     &> /dev/null || true
+touch --no-create %{_datadir}/icons/hicolor &> /dev/null || true
+touch --no-create %{_datadir}/mime/packages &> /dev/null || true
+
+%postun
+update-desktop-database &>/dev/null || true
+if [ $1 -eq 0 ]; then
+  touch --no-create %{_datadir}/icons/hicolor         &> /dev/null || true
+  gtk-update-icon-cache %{_datadir}/icons/hicolor     &> /dev/null || true
+  touch --no-create %{_datadir}/mime/packages         &> /dev/null || true
+  update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
+fi
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor     &> /dev/null || true
+update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 
 %files
 %defattr (-,root,root)
