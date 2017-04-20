@@ -26,7 +26,7 @@ BuildRequires: gcc5-c++
 %endif
 
 %if 0%{?fedora}
-BuildRequires: gcc-c++ >= 4.9.0, rubypick, pugixml-devel, rubygem-rake, json-devel >= 2
+BuildRequires: gcc-c++ >= 4.9.0, rubypick, pugixml-devel, rubygem-drake, json-devel >= 2
 %endif
 
 %if 0%{?suse_version}
@@ -66,20 +66,18 @@ export CXX=/usr/bin/g++-5
 %configure --enable-debug --enable-optimization
 
 %build
-%if 0%{?centos}
-drake
-%else
+%if 0%{?suse_version}
 rake
+%else
+drake
 %endif
 
 %install
-%if 0%{?centos}
-drake DESTDIR=$RPM_BUILD_ROOT install
-%else
-rake DESTDIR=$RPM_BUILD_ROOT install
-%endif
 %if 0%{?suse_version}
+rake DESTDIR=$RPM_BUILD_ROOT install
 strip ${RPM_BUILD_ROOT}/usr/bin/*
+%else
+drake DESTDIR=$RPM_BUILD_ROOT install
 %endif
 
 %fdupes -s %buildroot/%_mandir
