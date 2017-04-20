@@ -82,6 +82,10 @@ strip ${RPM_BUILD_ROOT}/usr/bin/*
 drake DESTDIR=$RPM_BUILD_ROOT install
 %endif
 
+for f in mkvtoolnix-gui mkvinfo; do
+  desktop-file-validate %{buildroot}%{_datadir}/applications/org.bunkus.$f.desktop
+done
+
 %fdupes -s %buildroot/%_mandir
 %fdupes -s %buildroot/%_prefix
 
