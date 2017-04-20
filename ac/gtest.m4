@@ -1,16 +1,13 @@
 AC_DEFUN([AX_GTEST],[
-  GTEST_TYPE=no
+  GTEST_TYPE=system
 
-  AC_LANG_PUSH(C++)
   CPPFLAGS_SAVED="$CPPFLAGS"
+  AC_LANG_PUSH(C++)
 
-  AC_CHECK_LIB(gtest_main,main)
-  AC_CHECK_HEADERS(gtest/gtest.h)
+  AC_CHECK_LIB([gtest_main],[main],[true],[GTEST_TYPE=no],[-lpthread])
+  AC_CHECK_HEADERS([gtest/gtest.h],[true],[GTEST_TYPE=no])
 
-  if test x$ac_cv_header_gtest_gtest_h = xyes && test x$ac_cv_lib_gtest_main_main = xyes; then
-    GTEST_TYPE=system
-
-  elif test -d lib/gtest/include && test -d lib/gtest/src ; then
+  if test $GTEST_TYPE = no && test -d lib/gtest/include && test -d lib/gtest/src ; then
     AC_MSG_CHECKING(for internal gtest)
     AC_CACHE_VAL(ax_cv_gtest_internal,[
       CPPFLAGS="$CPPFLAGS_SAVED -Ilib/gtest/include"
