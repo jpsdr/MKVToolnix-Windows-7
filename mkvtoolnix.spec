@@ -63,7 +63,9 @@ export CC=/usr/bin/gcc-5
 export CXX=/usr/bin/g++-5
 %endif
 
-%configure --enable-debug --enable-optimization
+%configure \
+  --enable-debug \
+  --disable-optimization
 
 %build
 %if 0%{?suse_version}
