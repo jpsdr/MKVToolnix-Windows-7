@@ -9,10 +9,10 @@ Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
 
-BuildRequires: fdupes, file-devel, flac, flac-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0, po4a
+BuildRequires: fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0, po4a
 
 %if 0%{?centos}
-BuildRequires: devtoolset-4-gcc-c++ >= 5.0.0, rubygem-drake
+BuildRequires: devtoolset-6-gcc-c++, rubygem-drake
 %endif
 
 %if 0%{?suse_version}
@@ -54,8 +54,8 @@ export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 
 %if 0%{?centos}
-export CC=/opt/rh/devtoolset-4/root/bin/gcc
-export CXX=/opt/rh/devtoolset-4/root/bin/g++
+export CC=/opt/rh/devtoolset-6/root/bin/gcc
+export CXX=/opt/rh/devtoolset-6/root/bin/g++
 %endif
 
 %if 0%{?suse_version}
