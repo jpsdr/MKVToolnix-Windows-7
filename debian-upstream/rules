@@ -17,11 +17,26 @@ override_dh_clean:
 	dh_clean src/mkvinfo-gui config.status config.log \
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
 
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	rm -rf lib/gtest
+endif
+
 override_dh_auto_configure:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	mkdir -p lib/gtest
+	cp -R /usr/include/gtest lib/gtest/
+	mv lib/gtest/gtest lib/gtest/include
+	cp -R /usr/src/gtest/src lib/gtest/
+endif
+
 	dh_auto_configure -- --docdir='$${datarootdir}/doc/mkvtoolnix-gui' \
 	  --enable-debug --enable-optimization
 
 override_dh_auto_build:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	rake tests:run_unit
+endif
+
 	rake
 
 	mv src/mkvinfo src/mkvinfo-gui
