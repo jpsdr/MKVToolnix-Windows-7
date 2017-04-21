@@ -64,9 +64,11 @@ Tab::Tab(QWidget *parent)
   , m_disableSelectedAttachedFilesAction{new QAction{this}}
   , m_startMuxingLeaveAsIs{new QAction{this}}
   , m_startMuxingCreateNewSettings{new QAction{this}}
+  , m_startMuxingCloseSettings{new QAction{this}}
   , m_startMuxingRemoveInputFiles{new QAction{this}}
   , m_addToJobQueueLeaveAsIs{new QAction{this}}
   , m_addToJobQueueCreateNewSettings{new QAction{this}}
+  , m_addToJobQueueCloseSettings{new QAction{this}}
   , m_addToJobQueueRemoveInputFiles{new QAction{this}}
   , m_filesMenu{new QMenu{this}}
   , m_tracksMenu{new QMenu{this}}
@@ -479,6 +481,11 @@ Tab::handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action
 
   if (Util::Settings::ClearMergeSettingsAction::RemoveInputFiles == action) {
     onRemoveAllFiles();
+    return;
+  }
+
+  if (Util::Settings::ClearMergeSettingsAction::CloseSettings == action) {
+    QTimer::singleShot(0, this, SLOT(signalRemovalOfThisTab()));
     return;
   }
 

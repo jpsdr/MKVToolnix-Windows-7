@@ -55,8 +55,8 @@ protected:
   QAction *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
   QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction, *m_selectTracksFromFilesAction;
   QAction *m_enableAllAttachedFilesAction, *m_disableAllAttachedFilesAction, *m_enableSelectedAttachedFilesAction, *m_disableSelectedAttachedFilesAction;
-  QAction *m_startMuxingLeaveAsIs, *m_startMuxingCreateNewSettings, *m_startMuxingRemoveInputFiles;
-  QAction *m_addToJobQueueLeaveAsIs, *m_addToJobQueueCreateNewSettings, *m_addToJobQueueRemoveInputFiles;
+  QAction *m_startMuxingLeaveAsIs, *m_startMuxingCreateNewSettings, *m_startMuxingCloseSettings, *m_startMuxingRemoveInputFiles;
+  QAction *m_addToJobQueueLeaveAsIs, *m_addToJobQueueCreateNewSettings, *m_addToJobQueueCloseSettings, *m_addToJobQueueRemoveInputFiles;
   QMenu *m_filesMenu, *m_tracksMenu, *m_attachedFilesMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu, *m_addFilesMenu, *m_startMuxingMenu, *m_addToJobQueueMenu;
 
   // "Attachments" tab:

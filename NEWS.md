@@ -13,6 +13,9 @@
   for Linux systems using systemd).
 * mkvmerge: FLAC reader: added support for handling embedded pictures as
   attachments. Implements #1942.
+* MKVToolNix GUI: multiplex tool: added a new option for what to do after
+  starting to multiplex/adding to the job queue: "close current settings" will
+  close the current multiplex settings without opening new ones.
 
 ## Bug fixes
 

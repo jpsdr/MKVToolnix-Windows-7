@@ -80,6 +80,7 @@ public:
     None,
     NewSettings,
     RemoveInputFiles,
+    CloseSettings,
   };
 
   enum class MergeAddingAppendingFilesPolicy {

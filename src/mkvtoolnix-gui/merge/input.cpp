@@ -302,12 +302,14 @@ Tab::setupInputControls() {
   m_startMuxingMenu->addAction(m_startMuxingLeaveAsIs);
   m_startMuxingMenu->addAction(m_startMuxingCreateNewSettings);
   m_startMuxingMenu->addAction(m_startMuxingRemoveInputFiles);
+  m_startMuxingMenu->addAction(m_startMuxingCloseSettings);
   ui->startMuxing->setMenu(m_startMuxingMenu);
 
   // "add to job queue" menu
   m_addToJobQueueMenu->addAction(m_addToJobQueueLeaveAsIs);
   m_addToJobQueueMenu->addAction(m_addToJobQueueCreateNewSettings);
   m_addToJobQueueMenu->addAction(m_addToJobQueueRemoveInputFiles);
+  m_addToJobQueueMenu->addAction(m_addToJobQueueCloseSettings);
   ui->addToJobQueue->setMenu(m_addToJobQueueMenu);
 
   m_addFilesAction2->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
@@ -393,10 +395,12 @@ Tab::setupInputControls() {
 
   connect(m_startMuxingLeaveAsIs,           &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::None); });
   connect(m_startMuxingCreateNewSettings,   &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::NewSettings); });
+  connect(m_startMuxingCloseSettings,       &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::CloseSettings); });
   connect(m_startMuxingRemoveInputFiles,    &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::RemoveInputFiles); });
 
   connect(m_addToJobQueueLeaveAsIs,         &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::None); });
   connect(m_addToJobQueueCreateNewSettings, &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::NewSettings); });
+  connect(m_addToJobQueueCloseSettings,     &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::CloseSettings); });
   connect(m_addToJobQueueRemoveInputFiles,  &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::RemoveInputFiles); });
 
   connect(m_addFilesMenu,                   &QMenu::aboutToShow,                                                                              this,                     &Tab::enableFilesActions);
@@ -1359,10 +1363,12 @@ Tab::retranslateInputUI() {
 
   m_startMuxingLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
   m_startMuxingCreateNewSettings->setText(QY("Afterwards create &new multiplex settings and close the current ones."));
+  m_startMuxingCloseSettings->setText(QY("Afterwards &close the current multiplex settings."));
   m_startMuxingRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
 
   m_addToJobQueueLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
   m_addToJobQueueCreateNewSettings->setText(QY("Afterwards create &new multiplex settings and close the current ones."));
+  m_addToJobQueueCloseSettings->setText(QY("Afterwards &close the current multiplex settings."));
   m_addToJobQueueRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
 
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)

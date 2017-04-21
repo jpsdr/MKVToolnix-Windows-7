@@ -290,12 +290,13 @@ PreferencesDialog::setupToolTips() {
                      .arg(QYH("The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window.")));
 
   Util::setToolTip(ui->cbMClearMergeSettings,
-                   Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li></ol>")
+                   Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li><li>%6</li></ol>")
                    .arg(QYH("The GUI can help you start your next multiplex settings after having started a job or having added a one to the job queue."))
                    .arg(QYH("With \"create new settings\" a new set of multiplex settings will be added."))
                    .arg(QYH("The current multiplex settings will be closed."))
                    .arg(QYH("With \"remove source files\" all source files will be removed."))
-                   .arg(QYH("Most of the other settings on the output tab will be kept intact, though.")));
+                   .arg(QYH("Most of the other settings on the output tab will be kept intact, though."))
+                   .arg(QYH("With \"close current settings\" the current multiplex settings will be closed without opening new ones.")));
 
   Util::setToolTip(ui->cbMAddingAppendingFilesPolicy,
                    Q("%1 %2 %3")
