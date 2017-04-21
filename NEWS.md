@@ -55,6 +55,9 @@
 * mkvmerge: AVC/h.264 parser: mkvmerge will now ignore bogus timing
   information in the sequence parameter sets (values indicating more than
   100000 progressive frames per second). Fixes #1946.
+* MKVToolNix GUI: multiplexer tool: the "show command line" dialog will no
+  longer include the mkvmerge executable's location as the first argument for
+  the two "MKVToolNix option files" escape modes. Fixes #1949.
 
 ## Build system changes
 

@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QClipboard>
 
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
@@ -55,8 +56,12 @@ CommandLineDialog::onEscapeModeChanged(int index) {
             :              Util::DontEscape;
 
   auto sep  = Util::EscapeMkvtoolnix == mode ? "\n" : " ";
+  auto opts = m_options;
 
-  ui->commandLine->setPlainText(Util::escape(m_options, mode).join(Q(sep)));
+  if (mtx::included_in(mode, Util::EscapeJSON, Util::EscapeMkvtoolnix))
+    opts.removeFirst();
+
+  ui->commandLine->setPlainText(Util::escape(opts, mode).join(Q(sep)));
 }
 
 void
