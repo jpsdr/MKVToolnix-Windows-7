@@ -24,12 +24,12 @@
 #define MTX_NEWS_URL          "https://mkvtoolnix.download/doc/NEWS.md"
 
 struct version_number_t {
-  unsigned int parts[5];
-  bool valid;
+  std::vector<unsigned int> parts;
+  unsigned int build{};
+  bool valid{};
 
   version_number_t();
   version_number_t(const std::string &s);
-  version_number_t(const version_number_t &v);
 
   bool operator <(const version_number_t &cmp) const;
   int compare(const version_number_t &cmp) const;

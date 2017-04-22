@@ -21,16 +21,12 @@
 #define VERSIONNAME "To Drown In You"
 
 version_number_t::version_number_t()
-  : valid(false)
 {
-  memset(parts, 0, 5 * sizeof(unsigned int));
 }
 
 version_number_t::version_number_t(const std::string &s)
-  : valid(false)
+  : valid{}
 {
-  memset(parts, 0, 5 * sizeof(unsigned int));
-
   if (debugging_c::requested("version_check"))
     mxinfo(boost::format("version check: Parsing %1%\n") % s);
 
@@ -40,52 +36,62 @@ version_number_t::version_number_t(const std::string &s)
   // 4.4.0-build20101201-123
   // mkvmerge v4.4.0
   // * Optional prefix "mkvmerge v"
-  // * At least three digits separated by dots
-  // * Optional fourth digit separated by a dot
+  // * An arbitrary number of digits separated by dots
   // * Optional build number that can have two forms:
   //   - " build nnn"
   //   - "-buildYYYYMMDD-nnn" (date is ignored)
-  static boost::regex s_version_number_re("^ (?: mkv[a-z]+ \\s+ v)?"     // Optional prefix mkv... v
-                                          "(\\d+) \\. (\\d+) \\. (\\d+)" // Three digitss separated by dots; $1 - $3
-                                          "(?: \\. (\\d+) )?"            // Optional fourth digit separated by a dot; $4
+  static boost::regex s_version_number_re("(?: mkv[a-z]+ \\s+ v)?"    // Optional prefix mkv... v
+                                          "( (?: \\d+\\. )* ) (\\d+)"    // An arbitrary number of digitss separated by dots; $1 & $2
                                           "(?:"                          // Optional build number including its prefix
                                           " (?: \\s* build \\s*"         //   Build number prefix: either " build " or...
                                           "  |  - build \\d{8} - )"      //   ... "-buildYYYYMMDD-"
-                                          " (\\d+)"                      //   The build number itself; $5
+                                          " (\\d+)"                      //   The build number itself; $3
                                           ")?",
                                           boost::regex::perl | boost::regex::mod_x);
 
   boost::smatch matches;
-  if (!boost::regex_search(s, matches, s_version_number_re))
+  if (!boost::regex_match(s, matches, s_version_number_re))
     return;
 
-  size_t idx;
-  for (idx = 1; 5 >= idx; ++idx)
-    if (!matches[idx].str().empty())
-      parse_number(matches[idx].str(), parts[idx - 1]);
+  valid          = true;
+  auto str_parts = split(matches[1].str() + matches[2].str(), ".");
 
-  valid = true;
+  for (auto const &str_part : str_parts) {
+    parts.push_back(0);
+    if (!parse_number(str_part, parts.back())) {
+      valid = false;
+      break;
+    }
+  }
+
+  if (matches[3].length() && !parse_number(matches[3].str(), build))
+    valid = false;
+
+  if (parts.empty())
+    valid = false;
 
   if (debugging_c::requested("version_check"))
     mxinfo(boost::format("version check: parse OK; result: %1%\n") % to_string());
-}
-
-version_number_t::version_number_t(const version_number_t &v) {
-  memcpy(parts, v.parts, 5 * sizeof(unsigned int));
-  valid = v.valid;
 }
 
 int
 version_number_t::compare(const version_number_t &cmp)
   const
 {
-  size_t idx;
-  for (idx = 0; 5 > idx; ++idx)
-    if (parts[idx] < cmp.parts[idx])
+  for (std::size_t idx = 0, num_parts = std::max(parts.size(), cmp.parts.size()); idx < num_parts; ++idx) {
+    auto this_num = idx < parts.size()     ? parts[idx]     : 0;
+    auto cmp_num  = idx < cmp.parts.size() ? cmp.parts[idx] : 0;
+
+    if (this_num < cmp_num)
       return -1;
-    else if (parts[idx] > cmp.parts[idx])
+
+    if (this_num > cmp_num)
       return 1;
-  return 0;
+  }
+
+  return build < cmp.build ? -1
+       : build > cmp.build ?  1
+       :                      0;
 }
 
 bool
@@ -102,11 +108,16 @@ version_number_t::to_string()
   if (!valid)
     return "<invalid>";
 
-  std::string v = ::to_string(parts[0]) + "." + ::to_string(parts[1]) + "." + ::to_string(parts[2]);
-  if (0 != parts[3])
-    v += "." + ::to_string(parts[3]);
-  if (0 != parts[4])
-    v += " build " + ::to_string(parts[4]);
+  std::string v;
+
+  for (auto idx = 0u; idx < parts.size(); ++idx) {
+    if (!v.empty())
+      v += ".";
+    v += ::to_string(parts[idx]);
+  }
+
+  if (0 != build)
+    v += " build " + ::to_string(build);
 
   return v;
 }
