@@ -2,6 +2,8 @@
 
 ## New features and enhancements
 
+* mkvmerge: FLAC reader: added support for handling embedded pictures as
+  attachments. Implements #1942.
 * MKVToolNix GUI: watch jobs: the user can now have the GUI execute an action
   once as soon as the current job or the whole queue finishes. The actions are
   the same ones that can be configured to be run automatically after job or
@@ -11,29 +13,22 @@
   playing an audio file (implemented for all operating systems); hibernating,
   sleeping and shutting down the computer (only implemented for Windows and
   for Linux systems using systemd).
-* mkvmerge: FLAC reader: added support for handling embedded pictures as
-  attachments. Implements #1942.
 * MKVToolNix GUI: multiplex tool: added a new option for what to do after
   starting to multiplex/adding to the job queue: "close current settings" will
   close the current multiplex settings without opening new ones.
 
 ## Bug fixes
 
-* build system: configure now looks for the `strings` binary by using the
-  `AC_CHECK_TOOL()` autoconf macro. That way it will be found in multiarch
-  setups, too. Fixes #1923.
+* mkvmerge: AAC parser: fixed mis-detection of certain data as valid ADTS AAC
+  headers resulting in memory allocation failures. Fixes #1941.
+* mkvmerge: AVC/h.264 parser: mkvmerge will now ignore bogus timing
+  information in the sequence parameter sets (values indicating more than
+  100000 progressive frames per second). Fixes #1946.
+* mkvmerge: AVC/h.264 & HEVC/h.265 parsers: all trailing zero bytes will now
+  be removed from NALUs. Fixes #1952.
 * mkvmerge: HEVC/h.265 parser: fixed copying the `bitstream_restriction_flag`
   and all dependent fields in the VUI parameters of the sequence parameter
   sets. Fixes #1924.
-* mkvmerge: AVC/h.264 packetizer: when reading a framed track (e.g. from
-  Matroska or MP4 files), specifying a default duration as fields (e.g. `50i`)
-  would result in double the actual duration for each frame and the track's
-  default duration header field. Fixes #1916.
-* mkvmerge: Matroska input: invalid track language elements are now treated as
-  if they were set to `und` = "undetermined". See #1929 for context.
-* MKVToolNix GUI, header editor: empty track language elements are now treated
-  the same as those set to invalid ISO 639-2 codes: as if they were set to
-  `und` = "undetermined". See #1929 for context.
 * mkvmerge: HEVC/h.265 parser: fixed the calculation of the number of
   parameter set arrays in the HEVCC data structure stored in
   CodecPrivate. Fixes the video-related part of #1938.
@@ -46,26 +41,31 @@
   only the arrays actually present are parsed, and they can be in any order.
   This fixes mkvinfo's output for Matroska files created from files such as
   the one from #1938.
+* mkvmerge: AVC/h.264 packetizer: when reading a framed track (e.g. from
+  Matroska or MP4 files), specifying a default duration as fields (e.g. `50i`)
+  would result in double the actual duration for each frame and the track's
+  default duration header field. Fixes #1916.
+* mkvmerge: Matroska reader: invalid track language elements are now treated as
+  if they were set to `und` = "undetermined". See #1929 for context.
 * mkvmerge: MPEG TS reader, AAC: mkvmerge will now require five consecutive
   AAC headers with identical parameters before track type determination is
   considered valid. This avoids false positives and consequently wrong track
   parameters. Fixes the audio-related part of #1938.
-* mkvmerge: AAC parser: fixed mis-detection of certain data as valid ADTS AAC
-  headers resulting in memory allocation failures. Fixes #1941.
 * mkvmerge: fixed an endless loop in certain circumstances when splitting by
   `parts` or `parts-frames` and the start of the file is discarded. Fixes
   #1944.
-* mkvmerge: AVC/h.264 parser: mkvmerge will now ignore bogus timing
-  information in the sequence parameter sets (values indicating more than
-  100000 progressive frames per second). Fixes #1946.
 * MKVToolNix GUI: multiplexer tool: the "show command line" dialog will no
   longer include the mkvmerge executable's location as the first argument for
   the two "MKVToolNix option files" escape modes. Fixes #1949.
-* mkvmerge: AVC/h.264 & HEVC/h.265 parsers: all trailing zero bytes will now
-  be removed from NALUs. Fixes #1952.
+* MKVToolNix GUI, header editor: empty track language elements are now treated
+  the same as those set to invalid ISO 639-2 codes: as if they were set to
+  `und` = "undetermined". See #1929 for context.
 
 ## Build system changes
 
+* bug fix: configure now looks for the `strings` binary by using the
+  `AC_CHECK_TOOL()` autoconf macro. That way it will be found in multiarch
+  setups, too. Fixes #1923.
 * bug fix: the environment variable USER_CXXFLAGS was accidentally removed
   from the compiler flags in release 9.8.0. It's been re-added. Fixes #1925.
 * The `.desktop` files have been renamed to
