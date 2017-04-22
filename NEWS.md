@@ -4,6 +4,8 @@
 
 * mkvmerge: FLAC reader: added support for handling embedded pictures as
   attachments. Implements #1942.
+* mkvmerge: MP4 reader: merged pull request #1804 adding support for parsing
+  the "COLR" atom and including its values as track headers.
 * MKVToolNix GUI: watch jobs: the user can now have the GUI execute an action
   once as soon as the current job or the whole queue finishes. The actions are
   the same ones that can be configured to be run automatically after job or
