@@ -18,7 +18,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "To Drown In You"
+#define VERSIONNAME "Alive"
 
 version_number_t::version_number_t()
 {
