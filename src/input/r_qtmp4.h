@@ -255,6 +255,7 @@ struct qtmp4_demuxer_c {
   memory_cptr stsd;
   unsigned int stsd_non_priv_struct_size;
   uint32_t v_width, v_height, v_bitdepth, v_display_width_flt{}, v_display_height_flt{};
+  uint16_t v_colour_primaries, v_colour_transfer_characteristics, v_colour_matrix_coefficients;
   std::deque<int64_t> references;
   uint32_t a_channels, a_bitdepth;
   float a_samplerate;
@@ -290,6 +291,9 @@ struct qtmp4_demuxer_c {
     , v_width{0}
     , v_height{0}
     , v_bitdepth{0}
+    , v_colour_primaries{2}
+    , v_colour_transfer_characteristics{2}
+    , v_colour_matrix_coefficients{2}
     , a_channels{0}
     , a_bitdepth{0}
     , a_samplerate{0.0}
@@ -335,6 +339,7 @@ struct qtmp4_demuxer_c {
   void handle_audio_stsd_atom(uint64_t atom_size, int level);
   void handle_video_stsd_atom(uint64_t atom_size, int level);
   void handle_subtitles_stsd_atom(uint64_t atom_size, int level);
+  void handle_colr_atom(uint64_t offset, uint64_t size);
 
   void parse_audio_header_priv_atoms(uint64_t atom_size, int level);
   void parse_video_header_priv_atoms(uint64_t atom_size, int level);
@@ -360,6 +365,7 @@ struct qtmp4_demuxer_c {
   void derive_track_params_from_mp3_audio_bitstream();
 
   void set_packetizer_display_dimensions();
+  void set_packetizer_colour_properties();
 
   boost::optional<int64_t> min_timecode() const;
 
