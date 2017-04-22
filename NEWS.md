@@ -75,7 +75,7 @@
   allows Wayland compositors to associate the correct icons with running
   applications for e.g. task switchers. Fixes #1948.
 * Qt's multimedia component is required for compilation of the GUIs since
-  version 11.
+  version 11.0.0.
 
 
 # Version 10.0.0 "To Drown In You" 2017-03-25
