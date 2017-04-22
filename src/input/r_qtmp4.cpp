@@ -2576,8 +2576,6 @@ qtmp4_demuxer_c::set_packetizer_colour_properties() {
   }
 }
 
-
-
 void
 qtmp4_demuxer_c::handle_stsd_atom(uint64_t atom_size,
                                   int level) {
@@ -2715,27 +2713,22 @@ qtmp4_demuxer_c::handle_video_stsd_atom(uint64_t atom_size,
   if ((stsd_non_priv_struct_size + 8) < atom_size) {
     auto offset   = stsd_non_priv_struct_size;
     auto atom_ptr = priv + offset;
-    uint32_t size = get_uint32_be(atom_ptr);
+    auto size     = get_uint32_be(atom_ptr);
     fourcc_c ext_fourcc{atom_ptr + sizeof(uint32_t)};
-    if (ext_fourcc == "colr") {
-      if (size > atom_size) {
-        mxerror(boost::format(Y("Quicktime/MP4 reader: Failed parsing colour atom for track ID %1%.\n")) % id);
-      }
+
+    if ((ext_fourcc == "colr") && (size <= atom_size))
       handle_colr_atom(offset, size);
-    }
   }
 }
 
 void
 qtmp4_demuxer_c::handle_colr_atom(uint64_t offset,
                                   uint64_t size) {
-  colr_atom_t colr_atom;
-  size_t color_atom_size = sizeof(colr_atom_t);
-  if (sizeof(color_atom_size) > size) {
-    mxwarn(boost::format(Y("Quicktime/MP4 reader: Could not read the colour atom for track ID %1%.\n")) % id);
+  if (sizeof(colr_atom_t) > size)
     return;
-  }
-  memcpy(&colr_atom, stsd->get_buffer() + offset, color_atom_size);
+
+  colr_atom_t colr_atom;
+  memcpy(&colr_atom, stsd->get_buffer() + offset, sizeof(colr_atom_t));
   fourcc_c colour_type{&colr_atom.colour_type};
   if (colour_type == "nclc") {
     v_colour_primaries                = get_uint16_be(&colr_atom.colour_primaries);
