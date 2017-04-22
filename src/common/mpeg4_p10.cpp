@@ -960,7 +960,8 @@ mpeg4::p10::avc_es_parser_c::add_bytes(unsigned char *buffer,
           m_parsed_position = previous_parsed_pos + previous_pos;
 
           mtx::mpeg::remove_trailing_zero_bytes(*nalu);
-          handle_nalu(nalu, m_parsed_position);
+          if (nalu->get_size())
+            handle_nalu(nalu, m_parsed_position);
         }
         previous_pos         = cursor.get_position() - marker_size;
         previous_marker_size = marker_size;
