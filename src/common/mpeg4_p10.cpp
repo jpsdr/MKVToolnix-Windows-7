@@ -883,8 +883,7 @@ mpeg4::p10::avc_es_parser_c::avc_es_parser_c()
   , m_debug_nalu_types{        "avc_parser|avc_nalu_types"}
   , m_debug_timecodes{         "avc_parser|avc_timecodes"}
   , m_debug_sps_info{          "avc_parser|avc_sps|avc_sps_info"}
-  , m_debug_trailing_zero_byte_removal{"avc_parser|avc_trailing_zero_byte_removal"}
-  , m_debug_sps_pps_changes{           "avc_parser|avc_sps_pps_changes"}
+  , m_debug_sps_pps_changes{   "avc_parser|avc_sps_pps_changes"}
 {
   if (m_debug_nalu_types)
     init_nalu_names();
@@ -929,30 +928,6 @@ mpeg4::p10::avc_es_parser_c::discard_actual_frames(bool discard) {
 }
 
 void
-mpeg4::p10::avc_es_parser_c::remove_trailing_zero_bytes(memory_c &memory) {
-  auto size = memory.get_size();
-
-  if (size < 3)
-    return;
-
-  auto start = memory.get_buffer();
-  auto end   = start + size - 3;
-
-  if (get_uint24_be(end) != 0x000000)
-    return;
-
-  --end;
-
-  while ((end > start) && (!*end))
-    --end;
-
-  auto new_size = end - start + 1;
-  memory.set_size(new_size);
-
-  mxdebug_if(m_debug_trailing_zero_byte_removal, boost::format("Removing trailing zero bytes from old size %1% down to new size %2%, removed %3%\n") % size % new_size % (size - new_size));
-}
-
-void
 mpeg4::p10::avc_es_parser_c::add_bytes(unsigned char *buffer,
                                        size_t size) {
   memory_slice_cursor_c cursor;
@@ -983,7 +958,8 @@ mpeg4::p10::avc_es_parser_c::add_bytes(unsigned char *buffer,
           auto nalu = memory_c::alloc(new_size);
           cursor.copy(nalu->get_buffer(), previous_pos + previous_marker_size, new_size);
           m_parsed_position = previous_parsed_pos + previous_pos;
-          remove_trailing_zero_bytes(*nalu);
+
+          mtx::mpeg::remove_trailing_zero_bytes(*nalu);
           handle_nalu(nalu, m_parsed_position);
         }
         previous_pos         = cursor.get_position() - marker_size;

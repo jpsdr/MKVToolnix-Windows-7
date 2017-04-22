@@ -12,6 +12,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/debugging.h"
 #include "common/endian.h"
 #include "common/mpeg.h"
 
@@ -100,6 +101,32 @@ create_nalu_with_size(memory_cptr const &src,
   memcpy(dest + nalu_size_length, src->get_buffer(), nalu_size);
 
   return buffer;
+}
+
+void
+remove_trailing_zero_bytes(memory_c &buffer) {
+  static debugging_option_c s_debug_trailing_zero_byte_removal{"avc_parser|avc_trailing_zero_byte_removal"};
+
+  auto size = buffer.get_size();
+
+  if (size < 3)
+    return;
+
+  auto start = buffer.get_buffer();
+  auto end   = start + size - 3;
+
+  if (get_uint24_be(end) != 0x000000)
+    return;
+
+  --end;
+
+  while ((end > start) && (!*end))
+    --end;
+
+  auto new_size = end - start + 1;
+  buffer.set_size(new_size);
+
+  mxdebug_if(s_debug_trailing_zero_byte_removal, boost::format("Removing trailing zero bytes from old size %1% down to new size %2%, removed %3%\n") % size % new_size % (size - new_size));
 }
 
 }}
