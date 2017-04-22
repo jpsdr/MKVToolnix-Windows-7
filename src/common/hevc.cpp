@@ -1478,7 +1478,10 @@ es_parser_c::add_bytes(unsigned char *buffer,
           auto nalu     = memory_c::alloc(new_size);
           cursor.copy(nalu->get_buffer(), previous_pos + previous_marker_size, new_size);
           m_parsed_position = previous_parsed_pos + previous_pos;
-          handle_nalu(nalu, m_parsed_position);
+
+          mtx::mpeg::remove_trailing_zero_bytes(*nalu);
+          if (nalu->get_size())
+            handle_nalu(nalu, m_parsed_position);
         }
         previous_pos         = cursor.get_position() - marker_size;
         previous_marker_size = marker_size;

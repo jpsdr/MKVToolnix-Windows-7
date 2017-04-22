@@ -61,8 +61,8 @@
 * MKVToolNix GUI: multiplexer tool: the "show command line" dialog will no
   longer include the mkvmerge executable's location as the first argument for
   the two "MKVToolNix option files" escape modes. Fixes #1949.
-* mkvmerge: AVC/h.264 parser: all trailing zero bytes will now be removed from
-  NALUs. Fixes the AVC-specific part of #1952.
+* mkvmerge: AVC/h.264 & HEVC/h.265 parsers: all trailing zero bytes will now
+  be removed from NALUs. Fixes #1952.
 
 ## Build system changes
 
