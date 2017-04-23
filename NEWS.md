@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: preferences → job actions, type "play audio file": the GUI
+  will no longer clear the audio file name input if the user aborts the audio
+  file selection dialog.
+
+
 # Version 11.0.0 "Alive" 2017-04-22
 
 ## New features and enhancements

@@ -402,6 +402,9 @@ PrefsRunProgramWidget::changeAudioFile() {
   auto newAudioFile  = Util::getOpenFileName(this, QY("Select audio file"), realAudioFile, filters.join(Q(";;")));
   newAudioFile       = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(newAudioFile));
 
+  if (newAudioFile.isEmpty())
+    return;
+
   d->ui->leAudioFile->setText(newAudioFile);
 
   enableControls();
