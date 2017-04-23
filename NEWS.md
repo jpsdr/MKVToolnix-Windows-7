@@ -5,6 +5,10 @@
 * MKVToolNix GUI: preferences → job actions, type "play audio file": the GUI
   will no longer clear the audio file name input if the user aborts the audio
   file selection dialog.
+* MKVToolNix GUI: preferences → job actions, type "play audio file", on
+  Windows: the default "play audio" action was pointing to the wrong
+  directory. Existing configurations with such a wrong path will be fixed
+  automatically upon starting the GUI. Fixes #1956.
 
 
 # Version 11.0.0 "Alive" 2017-04-22

@@ -202,6 +202,7 @@ protected:
 
   void addDefaultRunProgramConfigurations(QSettings &reg);
   void addDefaultRunProgramConfigurationForType(QSettings &reg, RunProgramType type, std::function<void(RunProgramConfig &)> const &modifier = nullptr);
+  bool fixDefaultAudioFileNameBug();
 
 protected:
   static Settings s_settings;

@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QDebug>
+#include <QRegularExpression>
 #include <QScreen>
 #include <QSettings>
 #include <QSplitter>
@@ -431,10 +432,39 @@ Settings::addDefaultRunProgramConfigurations(QSettings &reg) {
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::HibernateComputer);
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::ShutDownComputer);
 
-  if (numConfigurationsBefore != m_runProgramConfigurations.count())
+  auto changed = fixDefaultAudioFileNameBug();
+
+  if ((numConfigurationsBefore != m_runProgramConfigurations.count()) || changed)
     saveRunProgramConfigurations(reg);
 
   reg.endGroup();               // runProgramConfigurations
+}
+
+bool
+Settings::fixDefaultAudioFileNameBug() {
+#if defined(SYS_WINDOWS)
+  // In version v11.0.0 the default audio file name is wrong:
+  // <MTX_INSTALLATION_DIRECTORY>\sounds\… instead of
+  // <MTX_INSTALLATION_DIRECTORY>\data\sounds\… where the default
+  // sound files are actually installed. As each configuration is only
+  // added once, update an existing configuration to the actual path.
+  QRegularExpression wrongFileNameRE{"<MTX_INSTALLATION_DIRECTORY>[/\\\\]sounds[/\\\\]finished-1\\.ogg"};
+  auto changed = false;
+
+  for (auto const &config : m_runProgramConfigurations) {
+    if (   (config->m_type != RunProgramType::PlayAudioFile)
+        || !config->m_audioFile.contains(wrongFileNameRE))
+      continue;
+
+    config->m_audioFile = App::programRunner().defaultAudioFileName();
+    changed             = true;
+  }
+
+  return changed;
+
+#else
+  return false;
+#endif
 }
 
 QString
