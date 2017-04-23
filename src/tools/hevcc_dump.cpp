@@ -120,7 +120,8 @@ show_version() {
 static std::tuple<std::string, uint64_t, uint64_t>
 parse_args(std::vector<std::string> &args) {
   std::string file_name;
-  uint64_t file_pos = 0, size = 0;
+  int64_t file_pos = 0;
+  uint64_t size    = 0;
 
   for (auto const &arg: args) {
     if ((arg == "-h") || (arg == "--help"))
@@ -154,7 +155,10 @@ parse_args(std::vector<std::string> &args) {
   if (!size)
     mxerror("No size given\n");
 
-  return std::make_tuple(file_name, file_pos, size);
+  if (file_pos < 0)
+    file_pos = file_pos * -1 - size;
+
+  return std::make_tuple(file_name, static_cast<uint64_t>(file_pos), size);
 }
 
 static void
