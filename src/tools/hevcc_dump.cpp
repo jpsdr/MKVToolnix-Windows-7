@@ -597,6 +597,9 @@ parse_sps(bit_reader_c &r) {
     parse_sps_scc_extension(6, r);
   if (sps_extension_4bits)
     parse_sps_extension_4bits(6, r);
+
+  v(6, "rbsp_stop_one_bit", r.get_bits(1));
+  v(4, (boost::format("Remaining bits: %1%") % r.get_remaining_bits()).str());
 }
 
 static void
