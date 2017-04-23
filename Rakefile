@@ -169,6 +169,7 @@ def define_default_task
   targets = $applications.clone
 
   targets << "apps:tools" if $build_tools
+  targets += (c(:ADDITIONAL_TARGETS) || '').split(%r{ +})
 
   # Build the unit tests only if requested
   targets << ($run_unit_tests ? 'tests:run_unit' : 'tests:unit') if $have_gtest
