@@ -9,6 +9,10 @@
   Windows: the default "play audio" action was pointing to the wrong
   directory. Existing configurations with such a wrong path will be fixed
   automatically upon starting the GUI. Fixes #1956.
+* mkvmerge: HEVC/h.265 parser: fixed the superfluous copying of the
+  `bitstream_restriction_flag` and its dependent flags in the VUI parameters
+  of the sequence parameter sets if the timing information is present,
+  too. This fixes #1924 properly, and it also fixes #1958.
 
 
 # Version 11.0.0 "Alive" 2017-04-22

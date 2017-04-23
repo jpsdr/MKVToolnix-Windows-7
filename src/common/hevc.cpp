@@ -843,14 +843,6 @@ vui_parameters_copy(bit_reader_c &r,
     if (w.copy_bits(1, r) == 1) { // vui_hrd_parameters_present_flag
       hrd_parameters_copy(r, w, 1, max_sub_layers_minus1); // hrd_parameters
     }
-    if (w.copy_bits(1, r) == 1) { // bitstream_restriction_flag
-      w.copy_bits(3, r);  // tiles_fixed_structure_flag, motion_vectors_over_pic_boundaries_flag, restricted_ref_pic_lists_flag
-      sps.min_spatial_segmentation_idc = w.copy_unsigned_golomb(r); // min_spatial_segmentation_idc
-      w.copy_unsigned_golomb(r); // max_bytes_per_pic_denom
-      w.copy_unsigned_golomb(r); // max_bits_per_mincu_denom
-      w.copy_unsigned_golomb(r); // log2_max_mv_length_horizontal
-      w.copy_unsigned_golomb(r); // log2_max_mv_length_vertical
-    }
   }
 
   if (w.copy_bits(1, r) == 1) { // bitstream_restriction_flag
