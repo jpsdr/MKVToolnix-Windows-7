@@ -22,9 +22,9 @@ You will need:
 - a mingw cross compiler
 - roughly 4 GB of free space available
 
-Luckily there's the [M cross environment project]
-(http://mxe.cc/) that provides an easy-to-use way
-of setting up the cross-compiler and all required libraries.
+Luckily there's the [M cross environment project](http://mxe.cc/)
+that provides an easy-to-use way of setting up the cross-compiler
+and all required libraries.
 
 mxe is a fast-changing project. In order to provide a stable basis for
 compilation, the author maintains his own fork. That fork also includes
