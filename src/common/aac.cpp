@@ -460,6 +460,17 @@ parser_c::frames_available()
   return m_frames.size();
 }
 
+parser_c::multiplex_type_e
+parser_c::get_multiplex_type()
+  const {
+  return m_multiplex_type;
+}
+
+void
+parser_c::set_multiplex_type(multiplex_type_e multiplex_type) {
+  m_multiplex_type = multiplex_type;
+}
+
 frame_c
 parser_c::get_frame() {
   auto frame = m_frames.front();
@@ -703,6 +714,14 @@ parser_c::parse() {
 
   if (!m_fixed_buffer)
     m_buffer.remove(position);
+}
+
+std::string
+parser_c::get_multiplex_type_name(multiplex_type_e multiplex_type) {
+  return multiplex_type == adts_multiplex      ? "ADTS"
+       : multiplex_type == adts_multiplex      ? "ADIF"
+       : multiplex_type == loas_latm_multiplex ? "LOAS/LATM"
+       :                                         "unknown";
 }
 
 int

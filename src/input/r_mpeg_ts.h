@@ -301,6 +301,7 @@ public:
   int a_channels, a_sample_rate, a_bits_per_sample, a_bsid;
   mtx::dts::header_t a_dts_header;
   aac::frame_c m_aac_frame;
+  aac::parser_c::multiplex_type_e m_aac_multiplex_type;
 
   bool m_apply_dts_timestamp_fix, m_use_dts, m_timestamps_wrapped, m_truehd_found_truehd, m_truehd_found_ac3;
   std::vector<track_ptr> m_coupled_tracks;

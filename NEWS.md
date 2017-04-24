@@ -13,6 +13,10 @@
   `bitstream_restriction_flag` and its dependent flags in the VUI parameters
   of the sequence parameter sets if the timing information is present,
   too. This fixes #1924 properly, and it also fixes #1958.
+* mkvmerge: MPEG TS reader, AAC parser: the MPEG TS reader will now force the
+  AAC parser to use the multiplex mode that the MPEG TS reader has detected
+  (e.g. LOAS/LATM). This prevents the AAC packetizer from mis-detecting it in
+  its own attempt to identify the mode. Fixes #1957.
 
 
 # Version 11.0.0 "Alive" 2017-04-22

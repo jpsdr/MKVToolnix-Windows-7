@@ -174,6 +174,9 @@ public:
 
   void flush();
 
+  multiplex_type_e get_multiplex_type() const;
+  void set_multiplex_type(multiplex_type_e multiplex_type);
+
   size_t frames_available() const;
   bool headers_parsed() const;
 
@@ -187,6 +190,7 @@ public:
 
 public:                         // static functions
   static int find_consecutive_frames(unsigned char const *buffer, size_t buffer_size, size_t num_required_frames);
+  static std::string get_multiplex_type_name(multiplex_type_e multiplex_type);
 
 protected:
   void parse();

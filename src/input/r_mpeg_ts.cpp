@@ -94,6 +94,7 @@ track_c::track_c(reader_c &p_reader,
   , a_sample_rate{}
   , a_bits_per_sample{}
   , a_bsid{}
+  , m_aac_multiplex_type{aac::parser_c::unknown_multiplex}
   , m_apply_dts_timestamp_fix{}
   , m_use_dts{}
   , m_timestamps_wrapped{}
@@ -341,11 +342,14 @@ track_c::new_stream_a_aac() {
   if (!parser.frames_available() || !parser.headers_parsed())
     return FILE_STATUS_MOREDATA;
 
-  m_aac_frame   = parser.get_frame();
-  a_channels    = m_aac_frame.m_header.channels;
-  a_sample_rate = m_aac_frame.m_header.sample_rate;
+  m_aac_frame          = parser.get_frame();
+  m_aac_multiplex_type = parser.get_multiplex_type();
+  a_channels           = m_aac_frame.m_header.channels;
+  a_sample_rate        = m_aac_frame.m_header.sample_rate;
 
-  mxdebug_if(reader.m_debug_aac, boost::format("new_stream_a_aac: first AAC header: %1%\n") % m_aac_frame.to_string());
+  mxdebug_if(reader.m_debug_aac,
+             boost::format("new_stream_a_aac: found headers at %1% multiplex type %2% first header: %3%\n")
+             % pos % aac::parser_c::get_multiplex_type_name(m_aac_multiplex_type) % m_aac_frame.to_string());
 
   return 0;
 }
@@ -1906,7 +1910,7 @@ void
 reader_c::create_aac_audio_packetizer(track_ptr const &track) {
   auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_header.profile, track->m_aac_frame.m_header.sample_rate, track->m_aac_frame.m_header.channels, true);
   track->ptzr         = add_packetizer(aac_packetizer);
-  track->converter.reset(new aac_framing_packet_converter_c{PTZR(track->ptzr)});
+  track->converter    = std::make_shared<aac_framing_packet_converter_c>(PTZR(track->ptzr), track->m_aac_multiplex_type);
 
   if (AAC_PROFILE_SBR == track->m_aac_frame.m_header.profile)
     aac_packetizer->set_audio_output_sampling_freq(track->m_aac_frame.m_header.sample_rate * 2);
