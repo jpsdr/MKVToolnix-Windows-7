@@ -247,7 +247,7 @@ copyrighted material that I cannot distribute. Therefore you cannot
 run them yourself.
 
 A third pillar of the testing effort is the
-[continuous integration tests](https://mkvtoolnix.download/buildbot/grid)
+[continuous integration tests](https://buildbot.mkvtoolnix.download/)
 run on a Buildbot instance. These are run automatically for each
 commit made to the git repository. The tests include:
 
