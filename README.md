@@ -70,9 +70,9 @@ them should be available pre-compiled for your distribution. The
 programs and libraries you absolutely need are:
 
 - A C++ compiler that supports several features of the C++11 and C++14
-  standards: initializer lists, range-based "for" loops, right angle
-  brackets, the "auto" keyword, lambda functions, the "nullptr" key
-  word, tuples, alias declarations, std::make_unique(), digit
+  standards: initializer lists, range-based `for` loops, right angle
+  brackets, the `auto` keyword, lambda functions, the `nullptr` keyword, 
+  tuples, alias declarations, `std::make_unique()`, digit
   separators, binary literals and generic lambdas. Others may be
   needed, too. For GCC this means at least v4.9.x; for clang v3.4 or
   later.
@@ -89,8 +89,8 @@ programs and libraries you absolutely need are:
 - [zlib](http://www.zlib.net/) — a compression library
 
 - [Boost](http://www.boost.org/) — Several of Boost's libraries are
-  used: "format", "RegEx", "filesystem", "system", "math",
-  "Range", "rational", "variant". At least v1.46.0 is required.
+  used: `format`, `RegEx`, `filesystem`, `system`, `math`,
+  `Range`, `rational`, `variant`. At least v1.46.0 is required.
 
 - [libxslt's xsltproc binary](http://xmlsoft.org/libxslt/) and
   [DocBook XSL stylesheets](https://sourceforge.net/projects/docbook/files/docbook-xsl/)
@@ -99,7 +99,7 @@ programs and libraries you absolutely need are:
 You also need the `rake` or `drake` build program. I suggest `rake`
 v10.0.0 or newer (this is included with Ruby 2.1) as it offers
 parallel builds out of the box. If you only have an earlier version of
-rake, you can install and use the `drake` gem for the same gain.
+`rake`, you can install and use the `drake` gem for the same gain.
 
 ## 2.2. Optional components
 
@@ -252,10 +252,10 @@ run on a Buildbot instance. These are run automatically for each
 commit made to the git repository. The tests include:
 
   * building of all the packages for Linux distributions that I
-    normally provide for download myself in both 32bit and 64bit
+    normally provide for download myself in both 32-bit and 64-bit
     variants
   * building of the Windows installer and portable packages in both
-    32bit and 64bit variants
+    32-bit and 64-bit variants
   * building with both g++ and clang++
   * building and running the unit tests
   * building and running the test file test suite
