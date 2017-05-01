@@ -39,6 +39,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
         QY("Use this only for testing purposes.") });
 
   add(Q("--clusters-in-meta-seek"),         false, global, { QY("Tells mkvmerge to create a meta seek element at the end of the file containing all clusters.") });
+  add(Q("--no-date"),                       false, global, { QY("Tells mkvmerge not to write the 'date' field in the segment information headers."),
+                                                             QY("This field is normally set to the date the file is created.") });
   add(Q("--disable-lacing"),                false, global, { QY("Disables lacing for all tracks."), QY("This will increase the file's size, especially if there are many audio tracks."), QY("Use only for testing.") });
   add(Q("--enable-durations"),              false, global, { QY("Write durations for all blocks."), QY("This will increase file size and does not offer any additional value for players at the moment.") });
   add(Q("--disable-track-statistics-tags"), false, global, { QY("Tells mkvmerge not to write tags with statistics for each track.") });

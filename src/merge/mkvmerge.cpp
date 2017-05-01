@@ -118,6 +118,8 @@ set_usage() {
                   "                           cluster.\n");
   usage_text += Y("  --no-cues                Do not write the cue data (the index).\n");
   usage_text += Y("  --clusters-in-meta-seek  Write meta seek data for clusters.\n");
+  usage_text += Y("  --no-date                Do not write the 'date' field in the segment\n"
+                  "                           information headers.\n");
   usage_text += Y("  --disable-lacing         Do not use lacing.\n");
   usage_text += Y("  --enable-durations       Enable block durations for all blocks.\n");
   usage_text += Y("  --timecode-scale <n>     Force the timecode scale factor to n.\n");
@@ -2290,6 +2292,9 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--no-cues")
       g_write_cues = false;
+
+    else if (this_arg == "--no-date")
+      g_write_date = false;
 
     else if (this_arg == "--clusters-in-meta-seek")
       g_write_meta_seek_for_clusters = true;

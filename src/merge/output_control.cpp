@@ -109,6 +109,7 @@ bool g_no_lacing                            = false;
 bool g_no_linking                           = true;
 bool g_use_durations                        = false;
 bool g_no_track_statistics_tags             = false;
+bool g_write_date                           = true;
 
 double g_timecode_scale                     = TIMECODE_SCALE;
 timecode_scale_mode_e g_timecode_scale_mode = TIMECODE_SCALE_MODE_NORMAL;
@@ -573,7 +574,11 @@ render_headers(mm_io_c *out) {
 
     GetChild<KaxMuxingApp >(*s_kax_infos).SetValueUTF8(s_muxing_app);
     GetChild<KaxWritingApp>(*s_kax_infos).SetValueUTF8(s_writing_app);
-    GetChild<KaxDateUTC   >(*s_kax_infos).SetEpochDate(s_writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(s_writing_date));
+
+    if (g_write_date)
+      GetChild<KaxDateUTC>(*s_kax_infos).SetEpochDate(s_writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(s_writing_date));
+    else
+      DeleteChildren<KaxDateUTC>(*s_kax_infos);
 
     if (!g_segment_title.empty())
       GetChild<KaxTitle>(*s_kax_infos).SetValueUTF8(g_segment_title.c_str());

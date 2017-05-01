@@ -10,6 +10,9 @@
 * mkvmerge: cue sheet parser: if the cue sheet contains a non-empty `TITLE`
   entry and if no other segment title has been set yet, then the segment title
   will be set to the cue sheet's `TITLE` value. Implements #1977.
+* mkvmerge, MKVToolNix GUI (multiplexer): added an option `--no-date` that
+  prevents the "date" field from being written to the segment information
+  headers. Implements one half of #1964.
 
 ## Bug fixes
 
