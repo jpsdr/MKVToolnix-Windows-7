@@ -602,7 +602,7 @@ qtmp4_reader_c::handle_hdlr_atom(qtmp4_demuxer_c &dmx,
 
   mxdebug_if(m_debug_headers, boost::format("%1%Component type: %|2$.4s| subtype: %|3$.4s|\n") % space(level * 2 + 1) % (char *)&hdlr.type % (char *)&hdlr.subtype);
 
-  auto subtype = fourcc_c{&hdlr.subtype};
+  auto subtype = fourcc_c{reinterpret_cast<unsigned char const *>(&hdlr) + offsetof(hdlr_atom_t, subtype)};
   if (subtype == "soun")
     dmx.type = 'a';
 
@@ -2729,7 +2729,7 @@ qtmp4_demuxer_c::handle_colr_atom(uint64_t offset,
 
   colr_atom_t colr_atom;
   memcpy(&colr_atom, stsd->get_buffer() + offset, sizeof(colr_atom_t));
-  fourcc_c colour_type{&colr_atom.colour_type};
+  fourcc_c colour_type{reinterpret_cast<unsigned char const *>(&colr_atom) + offsetof(colr_atom_t, colour_type)};
   if (colour_type == "nclc") {
     v_colour_primaries                = get_uint16_be(&colr_atom.colour_primaries);
     v_colour_transfer_characteristics = get_uint16_be(&colr_atom.transfer_characteristics);
