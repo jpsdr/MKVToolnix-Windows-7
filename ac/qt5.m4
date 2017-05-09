@@ -44,10 +44,8 @@ if test x"$enable_qt" = "xyes" -a \
     moc_ver=`"$MOC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
     if test -z "moc_ver"; then
       AC_MSG_RESULT(unknown; please contact the author)
-      exit 1
     elif ! check_version $qt_min_ver $moc_ver; then
       AC_MSG_RESULT(too old: $moc_ver)
-      exit 1
     else
       AC_MSG_RESULT($moc_ver)
       moc_found=1
@@ -74,10 +72,8 @@ if test x"$enable_qt" = "xyes" -a \
     uic_ver=`"$UIC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
     if test -z "uic_ver"; then
       AC_MSG_RESULT(unknown; please contact the author)
-      exit 1
     elif ! check_version $qt_min_ver $uic_ver; then
       AC_MSG_RESULT(too old: $uic_ver)
-      exit 1
     else
       AC_MSG_RESULT($uic_ver)
       uic_found=1
@@ -104,10 +100,8 @@ if test x"$enable_qt" = "xyes" -a \
     rcc_ver=`"$RCC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
     if test -z "rcc_ver"; then
       AC_MSG_RESULT(unknown; please contact the author)
-      exit 1
     elif ! check_version $qt_min_ver $rcc_ver; then
       AC_MSG_RESULT(too old: $rcc_ver)
-      exit 1
     else
       AC_MSG_RESULT($rcc_ver)
       rcc_found=1
@@ -134,10 +128,8 @@ if test x"$enable_qt" = "xyes" -a \
     qmake_ver=`LC_ALL=C "$QMAKE" -v 2>&1 | grep 'Using Qt' | sed -e 's:.*version ::' -e 's: .*::'`
     if test -z "qmake_ver"; then
       AC_MSG_RESULT(unknown; please contact the author)
-      exit 1
     elif ! check_version $qt_min_ver $qmake_ver; then
       AC_MSG_RESULT(too old: $qmake_ver)
-      exit 1
     else
       AC_MSG_RESULT($qmake_ver)
       qmake_found=1
@@ -147,13 +139,13 @@ if test x"$enable_qt" = "xyes" -a \
   ok=0
   AC_MSG_CHECKING(for Qt $qt_min_ver or newer)
   if test x"$moc_found" != "x1"; then
-    AC_MSG_RESULT(no: moc not found)
+    AC_MSG_RESULT(no: moc not found or too old)
   elif test x"$uic_found" != "x1"; then
-    AC_MSG_RESULT(no: uic not found)
+    AC_MSG_RESULT(no: uic not found or too old)
   elif test x"$rcc_found" != "x1"; then
-    AC_MSG_RESULT(no: rcc not found)
+    AC_MSG_RESULT(no: rcc not found or too old)
   elif test x"$qmake_found" != "x1"; then
-    AC_MSG_RESULT(no: qmake not found)
+    AC_MSG_RESULT(no: qmake not found or too old)
   else
     ok=1
   fi
