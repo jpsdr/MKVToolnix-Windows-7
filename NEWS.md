@@ -19,8 +19,8 @@
   its own attempt to identify the mode. Fixes #1957.
 * configure: fixed configure aborting if a `moc`, `uic`, `rcc` or `qmake`
   binary is found, but the binary's version is too old. Fixes #1979.
-* mkvmerge: MPEG TS reader: valid MPEG transport streams that start with with
-  an h.264/h.265 start code (e.g. a file created by cutting at an arbitrary
+* mkvmerge: MPEG TS reader: valid MPEG transport streams that start with an
+  h.264/h.265 start code (e.g. a file created by cutting at an arbitrary
   position) were not recognized as a supported file type.
 
 
