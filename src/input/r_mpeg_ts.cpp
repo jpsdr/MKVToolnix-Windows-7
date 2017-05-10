@@ -57,10 +57,8 @@
 
 // This is ISO/IEC 13818-1.
 
-#define TS_CONSECUTIVE_PACKETS 16
-#define TS_PROBE_SIZE          (2 * TS_CONSECUTIVE_PACKETS * 204)
-#define TS_PACKET_SIZE         188
-#define TS_MAX_PACKET_SIZE     204
+#define TS_PACKET_SIZE     188
+#define TS_MAX_PACKET_SIZE 204
 
 namespace mtx { namespace mpeg_ts {
 
@@ -890,27 +888,21 @@ reader_c::probe_file(mm_io_c *in,
 
   auto packet_size = detect_packet_size(in_to_use, in_to_use->get_size());
 
-  if (packet_size == -1)
-    return false;
-
-  // Check for a h.264/h.265 start code right at the beginning in
-  // order to avoid false positives.
-  in_to_use->setFilePointer(0);
-  auto marker = in_to_use->read_uint32_be();
-
-  if ((marker == 0x00000001u) || ((marker >> 8) == 0x00000001u))
-    return false;
-
-  return true;
+  return packet_size > 0;
 }
 
 int
 reader_c::detect_packet_size(mm_io_c *in,
                              uint64_t size) {
+  debugging_option_c debug{"mpeg_ts|mpeg_ts_packet_size"};
+
   try {
-    size        = std::min(static_cast<uint64_t>(TS_PROBE_SIZE), size);
-    auto buffer = memory_c::alloc(size);
-    auto mem    = buffer->get_buffer();
+    size                         = std::min<uint64_t>(1024 * 1024, size);
+    auto num_startcodes_required = std::max<uint64_t>(size / 3 / TS_MAX_PACKET_SIZE, 32);
+    auto buffer                  = memory_c::alloc(size);
+    auto mem                     = buffer->get_buffer();
+
+    mxdebug_if(debug, boost::format("mpeg_ts::detect_packet_size: size to probe %1% num required startcodes %2%\n") % size % num_startcodes_required);
 
     in->setFilePointer(0, seek_beginning);
     size = in->read(mem, size);
@@ -926,17 +918,21 @@ reader_c::detect_packet_size(mm_io_c *in,
         unsigned int packet_size    = potential_packet_sizes[k];
         unsigned int num_startcodes = 1;
 
-        while ((TS_CONSECUTIVE_PACKETS > num_startcodes) && (pos < size) && (0x47 == mem[pos])) {
+        while ((num_startcodes_required > num_startcodes) && (pos < size) && (0x47 == mem[pos])) {
           pos += packet_size;
           ++num_startcodes;
         }
 
-        if (TS_CONSECUTIVE_PACKETS <= num_startcodes)
+        if (num_startcodes_required <= num_startcodes) {
+          mxdebug_if(debug, boost::format("mpeg_ts::detect_packet_size: detected packet size %1% at offset %2%\n") % packet_size % positions[i]);
           return packet_size;
+        }
       }
     }
   } catch (...) {
   }
+
+  mxdebug_if(debug, "mpeg_ts::detect_packet_size: packet size could not be determined\n");
 
   return -1;
 }
