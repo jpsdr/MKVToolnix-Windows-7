@@ -902,7 +902,7 @@ reader_c::detect_packet_size(mm_io_c *in,
     auto buffer                  = memory_c::alloc(size);
     auto mem                     = buffer->get_buffer();
 
-    mxdebug_if(debug, boost::format("mpeg_ts::detect_packet_size: size to probe %1% num required startcodes %2%\n") % size % num_startcodes_required);
+    mxdebug_if(debug, boost::format("detect_packet_size: size to probe %1% num required startcodes %2%\n") % size % num_startcodes_required);
 
     in->setFilePointer(0, seek_beginning);
     size = in->read(mem, size);
@@ -924,7 +924,7 @@ reader_c::detect_packet_size(mm_io_c *in,
         }
 
         if (num_startcodes_required <= num_startcodes) {
-          mxdebug_if(debug, boost::format("mpeg_ts::detect_packet_size: detected packet size %1% at offset %2%\n") % packet_size % positions[i]);
+          mxdebug_if(debug, boost::format("detect_packet_size: detected packet size %1% at offset %2%\n") % packet_size % positions[i]);
           return packet_size;
         }
       }
@@ -932,7 +932,7 @@ reader_c::detect_packet_size(mm_io_c *in,
   } catch (...) {
   }
 
-  mxdebug_if(debug, "mpeg_ts::detect_packet_size: packet size could not be determined\n");
+  mxdebug_if(debug, "detect_packet_size: packet size could not be determined\n");
 
   return -1;
 }
