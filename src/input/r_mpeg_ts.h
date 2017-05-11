@@ -366,6 +366,8 @@ public:
   timestamp_c derive_pts_from_content();
   timestamp_c derive_hdmv_textst_pts_from_content();
 
+  void determine_codec_from_stream_type(stream_type_e stream_type);
+
   void process(packet_cptr const &packet);
 
   void parse_iso639_language_from(void const *buffer);
@@ -447,6 +449,7 @@ private:
 
   bool parse_pat(track_c &track);
   bool parse_pmt(track_c &track);
+  bool parse_pmt_pid_info(mm_mem_io_c &mem);
   void parse_pes(track_c &track);
   void probe_packet_complete(track_c &track);
   int determine_track_parameters(track_c &track);
@@ -484,6 +487,8 @@ private:
   file_t &file();
 
   void add_multiplexed_ids(std::vector<uint64_t> &multiplexed_ids, track_c &track);
+
+  static memory_cptr read_pmt_descriptor(mm_io_c &io);
 
   friend class track_c;
 };

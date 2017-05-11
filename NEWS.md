@@ -22,6 +22,8 @@
 * mkvmerge: MPEG TS reader: valid MPEG transport streams that start with an
   h.264/h.265 start code (e.g. a file created by cutting at an arbitrary
   position) were not recognized as a supported file type.
+* mkvmerge: MPEG TS reader: fixed a potential read access from invalid memory
+  addresses in the code parsing the program map table (PMT).
 
 
 # Version 11.0.0 "Alive" 2017-04-22

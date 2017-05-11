@@ -824,6 +824,93 @@ track_c::derive_hdmv_textst_pts_from_content() {
 }
 
 void
+track_c::determine_codec_from_stream_type(stream_type_e stream_type) {
+  switch (stream_type) {
+    case stream_type_e::iso_11172_video:
+    case stream_type_e::iso_13818_video:
+      type  = pid_type_e::video;
+      codec = codec_c::look_up(codec_c::type_e::V_MPEG12);
+      break;
+    case stream_type_e::iso_14496_part2_video:
+      type  = pid_type_e::video;
+      codec = codec_c::look_up(codec_c::type_e::V_MPEG4_P2);
+      break;
+    case stream_type_e::iso_14496_part10_video:
+      type  = pid_type_e::video;
+      codec = codec_c::look_up(codec_c::type_e::V_MPEG4_P10);
+      break;
+    case stream_type_e::iso_23008_part2_video:
+      type  = pid_type_e::video;
+      codec = codec_c::look_up(codec_c::type_e::V_MPEGH_P2);
+      break;
+    case stream_type_e::stream_video_vc1:
+      type  = pid_type_e::video;
+      codec = codec_c::look_up(codec_c::type_e::V_VC1);
+      break;
+    case stream_type_e::iso_11172_audio:
+    case stream_type_e::iso_13818_audio:
+      type  = pid_type_e::audio;
+      codec = codec_c::look_up(codec_c::type_e::A_MP3);
+      break;
+    case stream_type_e::iso_13818_part7_audio:
+    case stream_type_e::iso_14496_part3_audio:
+      type  = pid_type_e::audio;
+      codec = codec_c::look_up(codec_c::type_e::A_AAC);
+      break;
+    case stream_type_e::stream_audio_pcm:
+      type  = pid_type_e::audio;
+      codec = codec_c::look_up(codec_c::type_e::A_PCM);
+      break;
+
+    case stream_type_e::stream_audio_ac3_lossless: {
+      auto ac3_track       = std::make_shared<track_c>(*this);
+      ac3_track->type      = pid_type_e::audio;
+      ac3_track->codec     = codec_c::look_up(codec_c::type_e::A_AC3);
+      ac3_track->converter = std::make_shared<truehd_ac3_splitting_packet_converter_c>();
+      ac3_track->m_master  = this;
+      ac3_track->set_pid(pid);
+
+      type                 = pid_type_e::audio;
+      codec                = codec_c::look_up(codec_c::type_e::A_TRUEHD);
+      converter            = ac3_track->converter;
+      m_coupled_tracks.push_back(ac3_track);
+
+      break;
+    }
+
+    case stream_type_e::stream_audio_ac3:
+    case stream_type_e::stream_audio_eac3:      // E-AC-3
+    case stream_type_e::stream_audio_eac3_2:    // E-AC-3 secondary stream
+    case stream_type_e::stream_audio_eac3_atsc: // E-AC-3 as defined in ATSC A/52:2012 Annex G
+      type      = pid_type_e::audio;
+      codec     = codec_c::look_up(codec_c::type_e::A_AC3);
+      break;
+    case stream_type_e::stream_audio_dts:
+    case stream_type_e::stream_audio_dts_hd:
+    case stream_type_e::stream_audio_dts_hd_ma:
+    case stream_type_e::stream_audio_dts_hd2:
+      type      = pid_type_e::audio;
+      codec     = codec_c::look_up(codec_c::type_e::A_DTS);
+      break;
+    case stream_type_e::stream_subtitles_hdmv_pgs:
+      type      = pid_type_e::subtitles;
+      codec     = codec_c::look_up(codec_c::type_e::S_HDMV_PGS);
+      probed_ok = true;
+      break;
+    case stream_type_e::stream_subtitles_hdmv_textst:
+      type      = pid_type_e::subtitles;
+      codec     = codec_c::look_up(codec_c::type_e::S_HDMV_TEXTST);
+      break;
+    case stream_type_e::iso_13818_pes_private:
+      break;
+    default:
+      mxdebug_if(reader.m_debug_pat_pmt, boost::format("parse_pmt: Unknown stream type: %1%\n") % static_cast<int>(stream_type));
+      type      = pid_type_e::unknown;
+      break;
+  }
+}
+
+void
 track_c::reset_processing_state() {
   m_timestamp.reset();
   m_previous_timestamp.reset();
@@ -1313,15 +1400,108 @@ reader_c::parse_pat(track_c &track) {
   return true;
 }
 
+memory_cptr
+reader_c::read_pmt_descriptor(mm_io_c &io) {
+  auto buffer = io.read(sizeof(pmt_descriptor_t));
+  auto length = buffer->get_buffer()[1];
+
+  buffer->resize(sizeof(pmt_descriptor_t) + length);
+  if (io.read(buffer->get_buffer() + sizeof(pmt_descriptor_t), length) != length)
+    throw mtx::mm_io::end_of_file_x{};
+
+  return buffer;
+}
+
+bool
+reader_c::parse_pmt_pid_info(mm_mem_io_c &mem) {
+  auto &f                  = file();
+  auto missing_tag         = true;
+
+  auto pmt_pid_info_buffer = mem.read(sizeof(pmt_pid_info_t));
+  auto pmt_pid_info        = reinterpret_cast<pmt_pid_info_t *>(pmt_pid_info_buffer->get_buffer());
+  auto es_info_length      = pmt_pid_info->get_es_info_length();
+
+  auto track               = std::make_shared<track_c>(*this);
+  track->type              = pid_type_e::unknown;
+
+  track->set_pid(pmt_pid_info->get_pid());
+  track->determine_codec_from_stream_type(pmt_pid_info->stream_type);
+
+  while (es_info_length >= sizeof(pmt_descriptor_t)) {
+    auto pmt_descriptor_buffer = read_pmt_descriptor(mem);
+    auto pmt_descriptor        = reinterpret_cast<pmt_descriptor_t *>(pmt_descriptor_buffer->get_buffer());
+
+    mxdebug_if(m_debug_pat_pmt, boost::format("parse_pmt: PMT descriptor tag 0x%|1$02x| length %2%\n") % static_cast<unsigned int>(pmt_descriptor->tag) % static_cast<unsigned int>(pmt_descriptor->length));
+
+    if (pmt_descriptor_buffer->get_size() > es_info_length)
+      break;
+
+    es_info_length -= pmt_descriptor_buffer->get_size();
+
+    if (0x0a != pmt_descriptor->tag)
+      missing_tag = false;
+
+    switch (pmt_descriptor->tag) {
+      case 0x05: // registration descriptor
+        track->parse_registration_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+        break;
+      case 0x0a: // ISO 639 language descriptor
+        track->parse_iso639_language_from(pmt_descriptor + 1);
+        break;
+      case 0x56: // Teletext descriptor
+        track->parse_srt_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+        break;
+      case 0x59: // Subtitles descriptor
+        track->parse_subtitling_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+        break;
+      case 0x6A: // AC-3 descriptor
+      case 0x7A: // E-AC-3 descriptor
+        track->parse_ac3_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+        break;
+      case 0x7b: // DTS descriptor
+        track->parse_dts_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+        break;
+    }
+  }
+
+  // Default to AC-3 if it's a PES private stream type that's missing
+  // a known/more concrete descriptor tag.
+  if ((pmt_pid_info->stream_type == stream_type_e::iso_13818_pes_private) && missing_tag) {
+    track->type  = pid_type_e::audio;
+    track->codec = codec_c::look_up(codec_c::type_e::A_AC3);
+  }
+
+  if (track->type != pid_type_e::unknown) {
+    f.m_pmt_found    = true;
+    track->processed = false;
+    m_tracks.push_back(track);
+    ++f.m_es_to_process;
+
+    brng::copy(track->m_coupled_tracks, std::back_inserter(m_tracks));
+    f.m_es_to_process += track->m_coupled_tracks.size();
+  }
+
+  mxdebug_if(m_debug_pat_pmt,
+             boost::format("parse_pmt: PID %1% stream type %|2$02x| has type: %3%\n")
+             % track->pid
+             % static_cast<unsigned int>(pmt_pid_info->stream_type)
+             % (track->type != pid_type_e::unknown ? track->codec.get_name() : "<unknown>"));
+
+  return true;
+}
+
 bool
 reader_c::parse_pmt(track_c &track) {
-  if (track.pes_payload_read->get_size() < sizeof(pmt_t)) {
-    mxdebug_if(m_debug_pat_pmt, "Invalid parameters!\n");
+  auto payload_size = track.pes_payload_read->get_size();
+  auto pmt_start    = track.pes_payload_read->get_buffer();
+  auto pmt_end      = pmt_start + payload_size;
+
+  if (payload_size < sizeof(pmt_t)) {
+    mxdebug_if(m_debug_pat_pmt, boost::format("Actual PMT size %1% less than PMT structure size %2%!\n") % payload_size % sizeof(pmt_t));
     return false;
   }
 
-  auto pmt        = track.pes_payload_read->get_buffer();
-  auto pmt_header = reinterpret_cast<pmt_t *>(pmt);
+  auto pmt_header = reinterpret_cast<pmt_t *>(pmt_start);
 
   if (pmt_header->table_id != 0x02) {
     mxdebug_if(m_debug_pat_pmt, "Invalid PMT table_id!\n");
@@ -1338,10 +1518,31 @@ reader_c::parse_pmt(track_c &track) {
     return false;
   }
 
-  auto &f                           = file();
-  unsigned short pmt_section_length = pmt_header->get_section_length();
-  uint32_t elapsed_CRC              = calculate_crc(pmt, 3 + pmt_section_length - 4/*CRC32*/);
-  uint32_t read_CRC                 = get_uint32_be(pmt + 3 + pmt_section_length - 4);
+  auto &f                  = file();
+  auto pmt_section_length  = pmt_header->get_section_length();
+  auto pmt_section_start   = pmt_start         + offsetof(pmt_t, program_number);
+  auto pmt_section_end     = pmt_section_start + pmt_section_length;
+  auto program_info_length = pmt_header->get_program_info_length();
+  auto program_info_start  = pmt_start + sizeof(pmt_t);
+  auto program_info_end    = program_info_start + program_info_length;
+
+  if (program_info_end > pmt_end) {
+    mxdebug_if(m_debug_pat_pmt, boost::format("Actual PMT size %1% less than PMT program info size + program info offset %2%!\n") % payload_size % (pmt_end - pmt_start));
+    return false;
+  }
+
+  if (pmt_section_end > pmt_end) {
+    mxdebug_if(m_debug_pat_pmt, boost::format("Actual PMT size %1% less than PMT section size + section offset %2%!\n") % payload_size % (pmt_end - pmt_start));
+    return false;
+  }
+
+  if ((pmt_section_length < 13) || (pmt_section_length > 1021)) {
+    mxdebug_if(m_debug_pat_pmt, boost::format("parse_pmt: Wrong PMT section_length %1%\n") % pmt_section_length);
+    return false;
+  }
+
+  uint32_t elapsed_CRC = calculate_crc(pmt_start, 3 + pmt_section_length - 4/*CRC32*/);
+  uint32_t read_CRC    = get_uint32_be(pmt_section_end - 4);
 
   if (elapsed_CRC != read_CRC) {
     mxdebug_if(m_debug_pat_pmt, boost::format("parse_pmt: Wrong PMT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|, validate PMT CRC? %3%\n") % elapsed_CRC % read_CRC % f.m_validate_pmt_crc);
@@ -1350,186 +1551,18 @@ reader_c::parse_pmt(track_c &track) {
       return false;
   }
 
-  if (pmt_section_length < 13 || pmt_section_length > 1021) {
-    mxdebug_if(m_debug_pat_pmt, boost::format("parse_pmt: Wrong PMT section_length (=%1%)\n") % pmt_section_length);
-    return false;
-  }
+  mxdebug_if(m_debug_pat_pmt,
+             boost::format("parse_pmt: program number: %1% PCR PID: %2% program info length: %3%\n")
+             % pmt_header->get_program_number() % pmt_header->get_pcr_pid() % program_info_length);
 
-  auto pmt_descriptor      = reinterpret_cast<pmt_descriptor_t *>(pmt + sizeof(pmt_t));
-  auto program_info_length = pmt_header->get_program_info_length();
+  mm_mem_io_c mem{program_info_end, static_cast<uint64_t>(pmt_section_end - 4 - program_info_end)};
 
-  while (pmt_descriptor < (pmt_descriptor_t *)(pmt + sizeof(pmt_t) + program_info_length))
-    pmt_descriptor = (pmt_descriptor_t *)((unsigned char *)pmt_descriptor + sizeof(pmt_descriptor_t) + pmt_descriptor->length);
+  try {
+    bool ok = true;
+    while (ok)
+      ok = parse_pmt_pid_info(mem);
 
-  pmt_pid_info_t *pmt_pid_info = (pmt_pid_info_t *)pmt_descriptor;
-
-  // Calculate pids_count
-  size_t pids_found = 0;
-  while (pmt_pid_info < (pmt_pid_info_t *)(pmt + 3 + pmt_section_length - 4/*CRC32*/)) {
-    pids_found++;
-    pmt_pid_info = (pmt_pid_info_t *)((unsigned char *)pmt_pid_info + sizeof(pmt_pid_info_t) + pmt_pid_info->get_es_info_length());
-  }
-
-  mxdebug_if(m_debug_pat_pmt, boost::format("parse_pmt: program number     (%1%)\n") % pmt_header->get_program_number());
-  mxdebug_if(m_debug_pat_pmt, boost::format("parse_pmt: pcr pid            (%1%)\n") % pmt_header->get_pcr_pid());
-
-  if (pids_found == 0) {
-    mxdebug_if(m_debug_pat_pmt, "There's no information about elementary PIDs\n");
-    return 0;
-  }
-
-  pmt_pid_info = (pmt_pid_info_t *)pmt_descriptor;
-
-  // Extract pid_info
-  while (pmt_pid_info < (pmt_pid_info_t *)(pmt + 3 + pmt_section_length - 4/*CRC32*/)) {
-    track_ptr track(new track_c(*this));
-    unsigned short es_info_length = pmt_pid_info->get_es_info_length();
-    track->type                   = pid_type_e::unknown;
-
-    track->set_pid(pmt_pid_info->get_pid());
-
-    switch(pmt_pid_info->stream_type) {
-      case stream_type_e::iso_11172_video:
-      case stream_type_e::iso_13818_video:
-        track->type      = pid_type_e::video;
-        track->codec     = codec_c::look_up(codec_c::type_e::V_MPEG12);
-        break;
-      case stream_type_e::iso_14496_part2_video:
-        track->type      = pid_type_e::video;
-        track->codec     = codec_c::look_up(codec_c::type_e::V_MPEG4_P2);
-        break;
-      case stream_type_e::iso_14496_part10_video:
-        track->type      = pid_type_e::video;
-        track->codec     = codec_c::look_up(codec_c::type_e::V_MPEG4_P10);
-        break;
-      case stream_type_e::iso_23008_part2_video:
-        track->type      = pid_type_e::video;
-        track->codec     = codec_c::look_up(codec_c::type_e::V_MPEGH_P2);
-        break;
-      case stream_type_e::stream_video_vc1:
-        track->type      = pid_type_e::video;
-        track->codec     = codec_c::look_up(codec_c::type_e::V_VC1);
-        break;
-      case stream_type_e::iso_11172_audio:
-      case stream_type_e::iso_13818_audio:
-        track->type      = pid_type_e::audio;
-        track->codec     = codec_c::look_up(codec_c::type_e::A_MP3);
-        break;
-      case stream_type_e::iso_13818_part7_audio:
-      case stream_type_e::iso_14496_part3_audio:
-        track->type      = pid_type_e::audio;
-        track->codec     = codec_c::look_up(codec_c::type_e::A_AAC);
-        break;
-      case stream_type_e::stream_audio_pcm:
-        track->type      = pid_type_e::audio;
-        track->codec     = codec_c::look_up(codec_c::type_e::A_PCM);
-        break;
-
-      case stream_type_e::stream_audio_ac3_lossless: {
-        auto ac3_track         = std::make_shared<track_c>(*this);
-        ac3_track->type        = pid_type_e::audio;
-        ac3_track->codec       = codec_c::look_up(codec_c::type_e::A_AC3);
-        ac3_track->converter   = std::make_shared<truehd_ac3_splitting_packet_converter_c>();
-        ac3_track->m_master    = track.get();
-        ac3_track->set_pid(pmt_pid_info->get_pid());
-
-        track->type            = pid_type_e::audio;
-        track->codec           = codec_c::look_up(codec_c::type_e::A_TRUEHD);
-        track->converter       = ac3_track->converter;
-        track->m_coupled_tracks.push_back(ac3_track);
-
-        break;
-      }
-
-      case stream_type_e::stream_audio_ac3:
-      case stream_type_e::stream_audio_eac3:      // E-AC-3
-      case stream_type_e::stream_audio_eac3_2:    // E-AC-3 secondary stream
-      case stream_type_e::stream_audio_eac3_atsc: // E-AC-3 as defined in ATSC A/52:2012 Annex G
-        track->type      = pid_type_e::audio;
-        track->codec     = codec_c::look_up(codec_c::type_e::A_AC3);
-        break;
-      case stream_type_e::stream_audio_dts:
-      case stream_type_e::stream_audio_dts_hd:
-      case stream_type_e::stream_audio_dts_hd_ma:
-      case stream_type_e::stream_audio_dts_hd2:
-        track->type      = pid_type_e::audio;
-        track->codec     = codec_c::look_up(codec_c::type_e::A_DTS);
-        break;
-      case stream_type_e::stream_subtitles_hdmv_pgs:
-        track->type      = pid_type_e::subtitles;
-        track->codec     = codec_c::look_up(codec_c::type_e::S_HDMV_PGS);
-        track->probed_ok = true;
-        break;
-      case stream_type_e::stream_subtitles_hdmv_textst:
-        track->type      = pid_type_e::subtitles;
-        track->codec     = codec_c::look_up(codec_c::type_e::S_HDMV_TEXTST);
-        break;
-      case stream_type_e::iso_13818_pes_private:
-        break;
-      default:
-        mxdebug_if(m_debug_pat_pmt, boost::format("parse_pmt: Unknown stream type: %1%\n") % (int)pmt_pid_info->stream_type);
-        track->type      = pid_type_e::unknown;
-        break;
-    }
-
-    pmt_descriptor   = (pmt_descriptor_t *)((unsigned char *)pmt_pid_info + sizeof(pmt_pid_info_t));
-    bool missing_tag = true;
-
-    while (pmt_descriptor < (pmt_descriptor_t *)((unsigned char *)pmt_pid_info + sizeof(pmt_pid_info_t) + es_info_length)) {
-      mxdebug_if(m_debug_pat_pmt, boost::format("parse_pmt: PMT descriptor tag 0x%|1$02x| length %2%\n") % static_cast<unsigned int>(pmt_descriptor->tag) % static_cast<unsigned int>(pmt_descriptor->length));
-
-      if (0x0a != pmt_descriptor->tag)
-        missing_tag = false;
-
-      switch (pmt_descriptor->tag) {
-        case 0x05: // registration descriptor
-          track->parse_registration_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
-          break;
-        case 0x0a: // ISO 639 language descriptor
-          track->parse_iso639_language_from(pmt_descriptor + 1);
-          break;
-        case 0x56: // Teletext descriptor
-          track->parse_srt_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
-          break;
-        case 0x59: // Subtitles descriptor
-          track->parse_subtitling_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
-          break;
-        case 0x6A: // AC-3 descriptor
-        case 0x7A: // E-AC-3 descriptor
-          track->parse_ac3_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
-          break;
-        case 0x7b: // DTS descriptor
-          track->parse_dts_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
-          break;
-      }
-
-      pmt_descriptor = (pmt_descriptor_t *)((unsigned char *)pmt_descriptor + sizeof(pmt_descriptor_t) + pmt_descriptor->length);
-    }
-
-    // Default to AC-3 if it's a PES private stream type that's missing
-    // a known/more concrete descriptor tag.
-    if ((pmt_pid_info->stream_type == stream_type_e::iso_13818_pes_private) && missing_tag) {
-      track->type  = pid_type_e::audio;
-      track->codec = codec_c::look_up(codec_c::type_e::A_AC3);
-    }
-
-    if (track->type != pid_type_e::unknown) {
-      f.m_pmt_found    = true;
-      track->processed = false;
-      m_tracks.push_back(track);
-      ++f.m_es_to_process;
-
-      brng::copy(track->m_coupled_tracks, std::back_inserter(m_tracks));
-      f.m_es_to_process += track->m_coupled_tracks.size();
-    }
-
-    mxdebug_if(m_debug_pat_pmt,
-               boost::format("parse_pmt: PID %1% stream type %|2$02x| has type: %3%\n")
-               % track->pid
-               % static_cast<unsigned int>(pmt_pid_info->stream_type)
-               % (track->type != pid_type_e::unknown ? track->codec.get_name() : "<unknown>"));
-
-    pmt_pid_info = (pmt_pid_info_t *)((unsigned char *)pmt_pid_info + sizeof(pmt_pid_info_t) + es_info_length);
+  } catch (mtx::mm_io::exception &) {
   }
 
   return true;
