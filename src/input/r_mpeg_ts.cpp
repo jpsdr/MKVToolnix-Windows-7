@@ -1058,8 +1058,10 @@ reader_c::read_headers_for_file(std::size_t file_num) {
   try {
     auto file_size           = f.m_in->get_size();
     f.m_probe_range          = calculate_probe_range(file_size, 10 * 1024 * 1024);
-    size_t size_to_probe     = std::min<int64_t>(file_size, f.m_probe_range);
+    auto size_to_probe       = std::min<uint64_t>(file_size,     f.m_probe_range);
+    auto min_size_to_probe   = std::min<uint64_t>(size_to_probe, 5 * 1024 * 1024);
     f.m_detected_packet_size = detect_packet_size(f.m_in.get(), size_to_probe);
+    f.m_ignored_pids[0]      = true; // PAT
 
     f.m_in->setFilePointer(0);
 
@@ -1081,7 +1083,10 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
       parse_packet(buf);
 
-      if (f.m_pat_found && f.m_pmt_found && (0 == f.m_es_to_process))
+      if (   f.m_pat_found
+          && f.m_pmt_found
+          && (0 == f.m_es_to_process)
+          && (f.m_in->getFilePointer() >= min_size_to_probe))
         break;
 
       auto eof = f.m_in->eof() || (f.m_in->getFilePointer() >= size_to_probe);
@@ -1388,8 +1393,9 @@ reader_c::parse_pat(track_c &track) {
       if (skip == true)
         continue;
 
-      auto pmt          = std::make_shared<track_c>(*this, pid_type_e::pmt);
-      f.m_es_to_process = 0;
+      auto pmt                  = std::make_shared<track_c>(*this, pid_type_e::pmt);
+      f.m_es_to_process         = 0;
+      f.m_ignored_pids[tmp_pid] = true;
 
       pmt->set_pid(tmp_pid);
 
@@ -1565,6 +1571,8 @@ reader_c::parse_pmt(track_c &track) {
   } catch (mtx::mm_io::exception &) {
   }
 
+  f.m_ignored_pids[track.pid] = true;
+
   return true;
 }
 
@@ -1635,7 +1643,7 @@ reader_c::parse_pes(track_c &track) {
 
   if (processing_state_e::determining_timestamp_offset == f.m_state) {
     if (   dts.valid()
-        && (track.type != pid_type_e::subtitles)
+        && (mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video))
         && (   !f.m_global_timestamp_offset.valid()
             || (dts < f.m_global_timestamp_offset)))
       f.m_global_timestamp_offset = dts;
@@ -1656,7 +1664,7 @@ reader_c::parse_pes(track_c &track) {
   if (pts.valid()) {
     track.m_previous_valid_timestamp = pts;
 
-    if (   (track.type != pid_type_e::subtitles)
+    if (   mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video)
         && (   !f.m_global_timestamp_offset.valid()
             || (dts < f.m_global_timestamp_offset))) {
       mxdebug_if(m_debug_headers, boost::format("new global timestamp offset %1% prior %2% file position afterwards %3%\n") % dts % f.m_global_timestamp_offset % f.m_in->getFilePointer());
@@ -1684,10 +1692,34 @@ reader_c::read_timestamp(unsigned char *p) {
   return timestamp_c::mpeg(mpeg_timestamp);
 }
 
+track_ptr
+reader_c::handle_packet_for_pid_not_listed_in_pmt(uint16_t pid) {
+  auto &f = file();
+
+  if (   (f.m_state != processing_state_e::probing)
+      || f.m_ignored_pids[pid]
+      || !f.m_pat_found
+      || !f.m_pmt_found)
+    return {};
+
+  mxdebug_if(m_debug_pat_pmt, boost::format("found packet for track PID %1% not listed in PMT, attempting type detection by content\n") % pid);
+
+  auto track = std::make_shared<track_c>(*this);
+  track->set_pid(pid);
+
+  m_tracks.push_back(track);
+  ++f.m_es_to_process;
+
+  return track;
+}
+
 void
 reader_c::parse_packet(unsigned char *buf) {
   auto hdr   = reinterpret_cast<packet_header_t *>(buf);
   auto track = find_track_for_pid(hdr->get_pid());
+
+  if (!track)
+    track = handle_packet_for_pid_not_listed_in_pmt(hdr->get_pid());
 
   if (   hdr->has_transport_error() // corrupted packet
       || !hdr->has_payload()        // no ts_payload
@@ -1709,7 +1741,7 @@ reader_c::handle_ts_payload(track_c &track,
   if (mtx::included_in(track.type, pid_type_e::pat, pid_type_e::pmt))
     handle_pat_pmt_payload(track, ts_header, ts_payload, ts_payload_size);
 
-  else if (mtx::included_in(track.type, pid_type_e::video, pid_type_e::audio, pid_type_e::subtitles))
+  else if (mtx::included_in(track.type, pid_type_e::video, pid_type_e::audio, pid_type_e::subtitles, pid_type_e::unknown))
     handle_pes_payload(track, ts_header, ts_payload, ts_payload_size);
 
   else {
@@ -1778,6 +1810,31 @@ reader_c::handle_pes_payload(track_c &track,
     parse_pes(track);
 }
 
+void
+reader_c::determine_track_type_by_pes_content(track_c &track) {
+  auto buffer = track.pes_payload_read->get_buffer();
+  auto size   = track.pes_payload_read->get_size();
+
+  if (!size)
+    return;
+
+  if (m_debug_pat_pmt) {
+    auto data = to_hex(buffer, std::min<unsigned int>(size, 4));
+    mxdebug(boost::format("PID %1%: attempting type detection from content for with size %2%; first four bytes: %3%\n") % track.pid % size % data);
+  }
+
+  if ((size >= 3) && ((get_uint24_be(buffer) & AAC_ADTS_SYNC_WORD_MASK) == AAC_ADTS_SYNC_WORD)) {
+    track.type  = pid_type_e::audio;
+    track.codec = codec_c::look_up(codec_c::type_e::A_AAC);
+
+  } else if ((size >= 2) && (get_uint16_be(buffer) == AC3_SYNC_WORD)) {
+    track.type  = pid_type_e::audio;
+    track.codec = codec_c::look_up(codec_c::type_e::A_AC3);
+  }
+
+  mxdebug_if(m_debug_pat_pmt, boost::format("Detected type: %1% codec: %2%\n") % static_cast<unsigned int>(track.type) % track.codec);
+}
+
 int
 reader_c::determine_track_parameters(track_c &track) {
   if (track.type == pid_type_e::pat)
@@ -1786,7 +1843,10 @@ reader_c::determine_track_parameters(track_c &track) {
   else if (track.type == pid_type_e::pmt)
     return parse_pmt(track) ? 0 : -1;
 
-  else if (track.type == pid_type_e::video) {
+  else if (track.type == pid_type_e::unknown)
+    determine_track_type_by_pes_content(track);
+
+  if (track.type == pid_type_e::video) {
     if (track.codec.is(codec_c::type_e::V_MPEG12))
       return track.new_stream_v_mpeg_1_2();
     else if (track.codec.is(codec_c::type_e::V_MPEG4_P10))

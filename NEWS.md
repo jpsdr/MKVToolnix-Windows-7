@@ -24,6 +24,10 @@
   position) were not recognized as a supported file type.
 * mkvmerge: MPEG TS reader: fixed a potential read access from invalid memory
   addresses in the code parsing the program map table (PMT).
+* mkvmerge: MPEG TS reader: if packets are encountered that belong to a PID
+  not listed in the program map table (PMT), mkvmerge will attempt to
+  determine their type and codec from the content. This supported content
+  types are AAC (ADTS only) and AC-3. Fixes #1980.
 
 
 # Version 11.0.0 "Alive" 2017-04-22

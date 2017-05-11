@@ -379,6 +379,7 @@ struct file_t {
   mm_io_cptr m_in;
 
   std::unordered_map<uint16_t, track_ptr> m_pid_to_track_map;
+  std::unordered_map<uint16_t, bool> m_ignored_pids;
   std::vector<generic_packetizer_c *> m_packetizers;
 
   bool m_pat_found, m_pmt_found;
@@ -446,6 +447,7 @@ private:
   void handle_ts_payload(track_c &track, packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
   void handle_pat_pmt_payload(track_c &track, packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
   void handle_pes_payload(track_c &track, packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
+  track_ptr handle_packet_for_pid_not_listed_in_pmt(uint16_t pid);
 
   bool parse_pat(track_c &track);
   bool parse_pmt(track_c &track);
@@ -453,6 +455,7 @@ private:
   void parse_pes(track_c &track);
   void probe_packet_complete(track_c &track);
   int determine_track_parameters(track_c &track);
+  void determine_track_type_by_pes_content(track_c &track);
 
   file_status_e finish();
   bool all_files_done() const;
