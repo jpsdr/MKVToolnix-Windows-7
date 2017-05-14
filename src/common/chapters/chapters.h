@@ -54,13 +54,19 @@ class mm_text_io_c;
 
 using kax_chapters_cptr = std::shared_ptr<KaxChapters>;
 
+enum class chapter_format_e {
+  xml,
+  ogg,
+  cue,
+};
+
 kax_chapters_cptr
 parse_chapters(const std::string &file_name, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
-               bool exception_on_error = false, bool *is_simple_format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
+               bool exception_on_error = false, chapter_format_e *format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
 
 kax_chapters_cptr
 parse_chapters(mm_text_io_c *io, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
-               bool exception_on_error = false, bool *is_simple_format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
+               bool exception_on_error = false, chapter_format_e *format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
 
 bool probe_simple_chapters(mm_text_io_c *in);
 kax_chapters_cptr parse_simple_chapters(mm_text_io_c *in, int64_t min_tc, int64_t max_tc, int64_t offset, const std::string &language, const std::string &charset);

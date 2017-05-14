@@ -302,12 +302,12 @@ Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters) {
 
 Tab::LoadResult
 Tab::loadFromChapterFile() {
-  auto isSimpleFormat = false;
-  auto chapters       = ChaptersPtr{};
-  auto error          = QString{};
+  auto format   = chapter_format_e::xml;
+  auto chapters = ChaptersPtr{};
+  auto error    = QString{};
 
   try {
-    chapters = parse_chapters(to_utf8(m_fileName), 0, -1, 0, "", to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &isSimpleFormat);
+    chapters = parse_chapters(to_utf8(m_fileName), 0, -1, 0, "", to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &format);
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());
@@ -324,7 +324,7 @@ Tab::loadFromChapterFile() {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
     emit removeThisTab();
 
-  } else if (isSimpleFormat) {
+  } else if (format != chapter_format_e::xml) {
     auto result = checkSimpleFormatForBomAndNonAscii(chapters);
 
     m_fileName.clear();
@@ -333,7 +333,7 @@ Tab::loadFromChapterFile() {
     return result;
   }
 
-  return { chapters, !isSimpleFormat };
+  return { chapters, format == chapter_format_e::xml };
 }
 
 void

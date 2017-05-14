@@ -262,15 +262,14 @@ parse_simple_chapters(mm_text_io_c *in,
      chapter files.
    \param exception_on_error If set to \c true then an exception is thrown
      if an error occurs. Otherwise \c nullptr will be returned.
-   \param is_simple_format This boolean will be set to \c true if the chapter
-     format is either the OGM style format or a CUE sheet. May be \c nullptr if
-     the caller is not interested in the result.
+   \param format If given, this parameter will be set to the recognized chapter
+     format. May be \c nullptr if the caller is not interested in the result.
    \param tags When parsing a CUE sheet tags will be created along with the
      chapter entries. These tags will be stored in this parameter.
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
 
-   \see ::parse_chapters(mm_text_io_c *in,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,bool *is_simple_format,KaxTags **tags)
+   \see ::parse_chapters(mm_text_io_c *in,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,chapter_format_e *format,KaxTags **tags)
 */
 kax_chapters_cptr
 parse_chapters(const std::string &file_name,
@@ -280,11 +279,11 @@ parse_chapters(const std::string &file_name,
                const std::string &language,
                const std::string &charset,
                bool exception_on_error,
-               bool *is_simple_format,
+               chapter_format_e *format,
                std::unique_ptr<KaxTags> *tags) {
   try {
     mm_text_io_c in(new mm_file_io_c(file_name));
-    return parse_chapters(&in, min_tc, max_tc, offset, language, charset, exception_on_error, is_simple_format, tags);
+    return parse_chapters(&in, min_tc, max_tc, offset, language, charset, exception_on_error, format, tags);
 
   } catch (mtx::chapter_parser_x &e) {
     if (exception_on_error)
@@ -325,15 +324,14 @@ parse_chapters(const std::string &file_name,
      chapter files.
    \param exception_on_error If set to \c true then an exception is thrown
      if an error occurs. Otherwise \c nullptr will be returned.
-   \param is_simple_format This boolean will be set to \c true if the chapter
-     format is either the OGM style format or a CUE sheet. May be \c nullptr if
-     the caller is not interested in the result.
+   \param format If given, this parameter will be set to the recognized chapter
+     format. May be \c nullptr if the caller is not interested in the result.
    \param tags When parsing a CUE sheet tags will be created along with the
      chapter entries. These tags will be stored in this parameter.
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
 
-   \see ::parse_chapters(const std::string &file_name,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,bool *is_simple_format,std::unique_ptr<KaxTags> *tags)
+   \see ::parse_chapters(const std::string &file_name,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,chapter_format_e *format,std::unique_ptr<KaxTags> *tags)
 */
 kax_chapters_cptr
 parse_chapters(mm_text_io_c *in,
@@ -343,7 +341,7 @@ parse_chapters(mm_text_io_c *in,
                const std::string &language,
                const std::string &charset,
                bool exception_on_error,
-               bool *is_simple_format,
+               chapter_format_e *format,
                std::unique_ptr<KaxTags> *tags) {
   assert(in);
 
@@ -351,17 +349,17 @@ parse_chapters(mm_text_io_c *in,
 
   try {
     if (probe_simple_chapters(in)) {
-      if (is_simple_format)
-        *is_simple_format = true;
+      if (format)
+        *format = chapter_format_e::ogg;
       return parse_simple_chapters(in, min_tc, max_tc, offset, language, charset);
 
     } else if (probe_cue_chapters(in)) {
-      if (is_simple_format)
-        *is_simple_format = true;
+      if (format)
+        *format = chapter_format_e::cue;
       return parse_cue_chapters(in, min_tc, max_tc, offset, language, charset, tags);
 
-    } else if (is_simple_format)
-      *is_simple_format = false;
+    } else if (format)
+      *format = chapter_format_e::xml;
 
     if (mtx::xml::ebml_chapters_converter_c::probe_file(in->get_file_name())) {
       auto chapters = mtx::xml::ebml_chapters_converter_c::parse_file(in->get_file_name(), true);
