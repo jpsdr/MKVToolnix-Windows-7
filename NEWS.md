@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: the key combination Ctrl+Shift+Space will now toggle the
+  selection of the current item in all tree views where multiple selections
+  are allowed. Implements #1983.
+
 ## Bug fixes
 
 * MKVToolNix GUI: preferences → job actions, type "play audio file": the GUI

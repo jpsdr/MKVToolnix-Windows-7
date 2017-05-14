@@ -36,6 +36,9 @@ signals:
   void ctrlUpPressed();
   void ctrlDownPressed();
 
+public slots:
+  void toggleSelectionOfCurrentItem();
+
 protected:
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dragMoveEvent(QDragMoveEvent *event) override;

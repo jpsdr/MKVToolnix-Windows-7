@@ -58,6 +58,14 @@ BasicTreeView::dropEvent(QDropEvent *event) {
 }
 
 void
+BasicTreeView::toggleSelectionOfCurrentItem() {
+  if (   mtx::included_in(selectionMode(), QAbstractItemView::ExtendedSelection, QAbstractItemView::MultiSelection)
+      && currentIndex().isValid()
+      && selectionModel())
+    selectionModel()->select(currentIndex(), QItemSelectionModel::Toggle | QItemSelectionModel::Rows);
+}
+
+void
 BasicTreeView::keyPressEvent(QKeyEvent *event) {
   if (   m_enterActivatesAllSelected
       && (event->modifiers() == Qt::NoModifier)
@@ -80,6 +88,10 @@ BasicTreeView::keyPressEvent(QKeyEvent *event) {
   else if (   (event->modifiers() == Qt::ControlModifier)
            && (event->key()       == Qt::Key_Down))
     emit ctrlDownPressed();
+
+  else if (   (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier))
+           && (event->key()       == Qt::Key_Space))
+    toggleSelectionOfCurrentItem();
 
   else
     QTreeView::keyPressEvent(event);
