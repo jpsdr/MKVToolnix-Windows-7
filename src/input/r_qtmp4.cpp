@@ -30,6 +30,7 @@
 #include "common/hacks.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
+#include "common/list_utils.h"
 #include "common/math.h"
 #include "common/mp3.h"
 #include "common/strings/formatting.h"
@@ -2719,7 +2720,7 @@ qtmp4_demuxer_c::handle_colr_atom(memory_cptr const &atom_content,
   auto &colr_atom = *reinterpret_cast<colr_atom_t *>(atom_content->get_buffer());
   fourcc_c colour_type{reinterpret_cast<unsigned char const *>(&colr_atom) + offsetof(colr_atom_t, colour_type)};
 
-  if (colour_type != "nclc")
+  if (!mtx::included_in(colour_type, "nclc", "nclx"))
     return;
 
   v_colour_primaries                = get_uint16_be(&colr_atom.colour_primaries);

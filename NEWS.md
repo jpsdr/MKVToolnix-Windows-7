@@ -42,6 +42,8 @@
 * mkvmerge: MP4 reader: fixed finding and parsing the `colr` atom if there are
   more than one video extension atoms and the `colr` atom is not the first
   one.
+* mkvmerge: MP4 reader: the `nclx` colour type of the `colr` atom is now
+  recognized, too (as defined by ISO/IEC 14496-12, "ISO base media format").
 
 
 # Version 11.0.0 "Alive" 2017-04-22
