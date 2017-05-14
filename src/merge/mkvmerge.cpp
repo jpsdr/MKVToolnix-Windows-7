@@ -1770,8 +1770,19 @@ parse_arg_chapters(const std::string &param,
   if (g_chapter_file_name != "")
     mxerror(boost::format(Y("Only one chapter file allowed in '%1% %2%'.\n")) % param % arg);
 
+  auto format         = chapter_format_e::xml;
   g_chapter_file_name = arg;
-  g_kax_chapters      = parse_chapters(g_chapter_file_name, 0, -1, 0, g_chapter_language.c_str(), g_chapter_charset.c_str(), false, nullptr, &g_tags_from_cue_chapters);
+  g_kax_chapters      = parse_chapters(g_chapter_file_name, 0, -1, 0, g_chapter_language.c_str(), g_chapter_charset.c_str(), false, &format, &g_tags_from_cue_chapters);
+
+  if (g_segment_title_set || !g_tags_from_cue_chapters || (chapter_format_e::cue != format))
+    return;
+
+  auto cue_title = mtx::tags::get_simple_value("TITLE", *g_tags_from_cue_chapters);
+
+  if (!cue_title.empty()) {
+    g_segment_title     = cue_title;
+    g_segment_title_set = true;
+  }
 }
 
 static void

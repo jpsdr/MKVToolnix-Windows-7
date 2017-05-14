@@ -7,6 +7,9 @@
   are allowed. Implements #1983.
 * MKVToolNix GUI: chapter editor: added the extension `*.cue` (for cue sheet
   files) to the "open chapter file" dialog.
+* mkvmerge: cue sheet parser: if the cue sheet contains a non-empty `TITLE`
+  entry and if no other segment title has been set yet, then the segment title
+  will be set to the cue sheet's `TITLE` value. Implements #1977.
 
 ## Bug fixes
 
