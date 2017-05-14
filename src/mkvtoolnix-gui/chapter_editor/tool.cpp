@@ -176,11 +176,12 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 void
 Tool::selectFileToOpen() {
   auto fileNames = Util::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().lastOpenDirPath(),
-                                          QY("Supported file types")           + Q(" (*.mpls *.mkv *.mka *.mks *.mk3d *.txt *.xml);;") +
+                                          QY("Supported file types")           + Q(" (*.cue *.mpls *.mkv *.mka *.mks *.mk3d *.txt *.xml);;") +
                                           QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
                                           QY("Blu-ray playlist files")         + Q(" (*.mpls);;") +
                                           QY("XML chapter files")              + Q(" (*.xml);;") +
                                           QY("Simple OGM-style chapter files") + Q(" (*.txt);;") +
+                                          QY("Cue sheet files")                + Q(" (*.cue);;") +
                                           QY("All files")                      + Q(" (*)"));
   if (fileNames.isEmpty())
     return;

@@ -5,6 +5,8 @@
 * MKVToolNix GUI: the key combination Ctrl+Shift+Space will now toggle the
   selection of the current item in all tree views where multiple selections
   are allowed. Implements #1983.
+* MKVToolNix GUI: chapter editor: added the extension `*.cue` (for cue sheet
+  files) to the "open chapter file" dialog.
 
 ## Bug fixes
 
