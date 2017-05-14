@@ -339,7 +339,7 @@ struct qtmp4_demuxer_c {
   void handle_audio_stsd_atom(uint64_t atom_size, int level);
   void handle_video_stsd_atom(uint64_t atom_size, int level);
   void handle_subtitles_stsd_atom(uint64_t atom_size, int level);
-  void handle_colr_atom(uint64_t offset, uint64_t size);
+  void handle_colr_atom(memory_cptr const &atom_content, int level);
 
   void parse_audio_header_priv_atoms(uint64_t atom_size, int level);
   void parse_video_header_priv_atoms(uint64_t atom_size, int level);

@@ -2708,33 +2708,27 @@ qtmp4_demuxer_c::handle_video_stsd_atom(uint64_t atom_size,
   v_width    = get_uint16_be(&v_stsd.width);
   v_height   = get_uint16_be(&v_stsd.height);
   v_bitdepth = get_uint16_be(&v_stsd.depth);
-
-  // Handle Extensions
-  if ((stsd_non_priv_struct_size + 8) < atom_size) {
-    auto offset   = stsd_non_priv_struct_size;
-    auto atom_ptr = priv + offset;
-    auto size     = get_uint32_be(atom_ptr);
-    fourcc_c ext_fourcc{atom_ptr + sizeof(uint32_t)};
-
-    if ((ext_fourcc == "colr") && (size <= atom_size))
-      handle_colr_atom(offset, size);
-  }
 }
 
 void
-qtmp4_demuxer_c::handle_colr_atom(uint64_t offset,
-                                  uint64_t size) {
-  if (sizeof(colr_atom_t) > size)
+qtmp4_demuxer_c::handle_colr_atom(memory_cptr const &atom_content,
+                                  int level) {
+  if (sizeof(colr_atom_t) > atom_content->get_size())
     return;
 
-  colr_atom_t colr_atom;
-  memcpy(&colr_atom, stsd->get_buffer() + offset, sizeof(colr_atom_t));
+  auto &colr_atom = *reinterpret_cast<colr_atom_t *>(atom_content->get_buffer());
   fourcc_c colour_type{reinterpret_cast<unsigned char const *>(&colr_atom) + offsetof(colr_atom_t, colour_type)};
-  if (colour_type == "nclc") {
-    v_colour_primaries                = get_uint16_be(&colr_atom.colour_primaries);
-    v_colour_transfer_characteristics = get_uint16_be(&colr_atom.transfer_characteristics);
-    v_colour_matrix_coefficients      = get_uint16_be(&colr_atom.matrix_coefficients);
-  }
+
+  if (colour_type != "nclc")
+    return;
+
+  v_colour_primaries                = get_uint16_be(&colr_atom.colour_primaries);
+  v_colour_transfer_characteristics = get_uint16_be(&colr_atom.transfer_characteristics);
+  v_colour_matrix_coefficients      = get_uint16_be(&colr_atom.matrix_coefficients);
+
+  mxdebug_if(m_debug_headers,
+             boost::format("%1%colour primaries: %2%, transfer characteristics: %3%, matrix coefficients: %4%\n")
+             % space(level * 2 + 1) % v_colour_primaries % v_colour_transfer_characteristics % v_colour_matrix_coefficients);
 }
 
 void
@@ -2863,7 +2857,9 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
           mm_mem_io_c memio(priv->get_buffer(), priv->get_size());
           esds_parsed = parse_esds_atom(memio, level + 1);
         }
-      }
+
+      } else if (atom.fourcc == "colr")
+        handle_colr_atom(mio.read(atom.size - atom.hsize), level + 2);
 
       mio.setFilePointer(atom.pos + atom.size);
     }

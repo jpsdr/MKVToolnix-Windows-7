@@ -39,6 +39,9 @@
   not listed in the program map table (PMT), mkvmerge will attempt to
   determine their type and codec from the content. This supported content
   types are AAC (ADTS only) and AC-3. Fixes #1980.
+* mkvmerge: MP4 reader: fixed finding and parsing the `colr` atom if there are
+  more than one video extension atoms and the `colr` atom is not the first
+  one.
 
 
 # Version 11.0.0 "Alive" 2017-04-22
