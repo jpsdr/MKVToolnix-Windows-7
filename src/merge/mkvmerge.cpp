@@ -91,7 +91,7 @@ set_usage() {
   usage_text += Y("  --chapter-language <lng> Set the 'language' element in chapter entries.\n");
   usage_text += Y("  --chapter-charset <cset> Charset for a simple chapter file.\n");
   usage_text += Y("  --cue-chapter-name-format <format>\n"
-                  "                           Pattern for the conversion from CUE sheet\n"
+                  "                           Pattern for the conversion from cue sheet\n"
                   "                           entries to chapter names.\n");
   usage_text += Y("  --default-language <lng> Use this language for all tracks unless\n"
                   "                           overridden with the --language option.\n");

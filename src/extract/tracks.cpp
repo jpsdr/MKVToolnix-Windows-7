@@ -293,7 +293,7 @@ write_all_cuesheets(KaxChapters &chapters,
 
       try {
         mm_io_cptr out = mm_write_buffer_io_c::open(cue_file_name, 128 * 1024);
-        mxinfo(boost::format(Y("The CUE sheet for track %1% will be written to '%2%'.\n")) % tspecs[i].tid % cue_file_name);
+        mxinfo(boost::format(Y("The cue sheet for track %1% will be written to '%2%'.\n")) % tspecs[i].tid % cue_file_name);
         write_cuesheet(file_name, chapters, tags, tspecs[i].tuid, *out);
 
       } catch(mtx::mm_io::open_x &ex) {

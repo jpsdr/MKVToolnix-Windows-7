@@ -189,7 +189,7 @@ Tab::setupOutputToolTips() {
                    .arg(QY("It is ignored for XML chapter files.")));
   Util::setToolTip(ui->chapterCueNameFormat,
                    Q("<p>%1 %2 %3 %4</p><p>%5</p>")
-                   .arg(QYH("mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."))
+                   .arg(QYH("mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."))
                    .arg(QYH("This option controls how the chapter names are created."))
                    .arg(QYH("The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."))
                    .arg(QYH("The rest is copied as is."))

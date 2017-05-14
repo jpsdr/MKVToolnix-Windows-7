@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   chapter parser for CUE sheets
+   chapter parser for cue sheets
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
    Patches by Nicolas Le Guen <nleguen@pepper-prod.com> and

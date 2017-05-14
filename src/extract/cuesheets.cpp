@@ -5,7 +5,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   extracts chapters and tags as CUE sheets from Matroska files
+   extracts chapters and tags as cue sheets from Matroska files
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */

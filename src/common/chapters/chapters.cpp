@@ -241,7 +241,7 @@ parse_simple_chapters(mm_text_io_c *in,
 /** \brief Probe a file for different chapter formats and parse the file.
 
    The file \a file_name is opened and checked for supported chapter formats.
-   These include simple OGM style chapters, CUE sheets and mkvtoolnix' own
+   These include simple OGM style chapters, cue sheets and mkvtoolnix' own
    XML chapter format.
 
    Its parameters don't have to be checked for validity.
@@ -264,7 +264,7 @@ parse_simple_chapters(mm_text_io_c *in,
      if an error occurs. Otherwise \c nullptr will be returned.
    \param format If given, this parameter will be set to the recognized chapter
      format. May be \c nullptr if the caller is not interested in the result.
-   \param tags When parsing a CUE sheet tags will be created along with the
+   \param tags When parsing a cue sheet tags will be created along with the
      chapter entries. These tags will be stored in this parameter.
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
@@ -303,7 +303,7 @@ parse_chapters(const std::string &file_name,
 /** \brief Probe a file for different chapter formats and parse the file.
 
    The file \a in is checked for supported chapter formats. These include
-   simple OGM style chapters, CUE sheets and mkvtoolnix' own XML chapter
+   simple OGM style chapters, cue sheets and mkvtoolnix' own XML chapter
    format.
 
    The parameters are checked for validity.
@@ -326,7 +326,7 @@ parse_chapters(const std::string &file_name,
      if an error occurs. Otherwise \c nullptr will be returned.
    \param format If given, this parameter will be set to the recognized chapter
      format. May be \c nullptr if the caller is not interested in the result.
-   \param tags When parsing a CUE sheet tags will be created along with the
+   \param tags When parsing a cue sheet tags will be created along with the
      chapter entries. These tags will be stored in this parameter.
 
    \return The chapters parsed from the file or \c nullptr if an error occured.

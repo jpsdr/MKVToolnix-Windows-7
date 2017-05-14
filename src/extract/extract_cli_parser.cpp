@@ -66,7 +66,7 @@ extract_cli_parser_c::init_parser() {
   add_section_header(YT("Track extraction"));
   add_information(YT("The first mode extracts some tracks to external files."));
   OPT("c=charset",      set_charset,  YT("Convert text subtitles to this charset (default: UTF-8)."));
-  OPT("cuesheet",       set_cuesheet, YT("Also try to extract the CUE sheet from the chapter information and tags for this track."));
+  OPT("cuesheet",       set_cuesheet, YT("Also try to extract the cue sheet from the chapter information and tags for this track."));
   OPT("blockadd=level", set_blockadd, YT("Keep only the BlockAdditions up to this level (default: keep all levels)"));
   OPT("raw",            set_raw,      YT("Extract the data to a raw file."));
   OPT("fullraw",        set_fullraw,  YT("Extract the data to a raw file including the CodecPrivate as a header."));
@@ -102,9 +102,9 @@ extract_cli_parser_c::init_parser() {
 
   add_information(YT("mkvextract chapters \"a movie.mkv\" > movie_chapters.xml"));
 
-  add_section_header(YT("CUE sheet extraction"));
+  add_section_header(YT("Cue sheet extraction"));
 
-  add_information(YT("The fifth mode tries to extract chapter information and tags and outputs them as a CUE sheet. This is the reverse of using a CUE sheet with "
+  add_information(YT("The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a CUE sheet with "
                      "mkvmerge's '--chapters' option."));
 
   add_section_header(YT("Example"));
