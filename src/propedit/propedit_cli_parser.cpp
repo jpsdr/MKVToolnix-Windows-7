@@ -143,6 +143,7 @@ propedit_cli_parser_c::get_ebml_type_abbrev_map() {
     s_ebml_type_abbrevs[property_element_c::EBMLT_USTRING] = "US";
     s_ebml_type_abbrevs[property_element_c::EBMLT_BINARY]  = "X";
     s_ebml_type_abbrevs[property_element_c::EBMLT_FLOAT]   = "FP";
+    s_ebml_type_abbrevs[property_element_c::EBMLT_DATE]    = "DT";
   }
 
   return s_ebml_type_abbrevs;
@@ -164,6 +165,7 @@ propedit_cli_parser_c::list_property_names() {
   mxinfo(Y("  US: Unicode string\n"));
   mxinfo(Y("  X:  binary in hex\n"));
   mxinfo(Y("  FP: floating point number\n"));
+  mxinfo(Y("  DT: date & time\n"));
 
   mxexit();
 }

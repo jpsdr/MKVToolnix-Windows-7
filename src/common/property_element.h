@@ -30,7 +30,7 @@
 
 class property_element_c {
 public:
-  enum ebml_type_e { EBMLT_SKIP, EBMLT_BOOL, EBMLT_BINARY, EBMLT_FLOAT, EBMLT_INT, EBMLT_UINT, EBMLT_STRING, EBMLT_USTRING };
+  enum ebml_type_e { EBMLT_SKIP, EBMLT_BOOL, EBMLT_BINARY, EBMLT_FLOAT, EBMLT_INT, EBMLT_UINT, EBMLT_STRING, EBMLT_USTRING, EBMLT_DATE };
 
   std::string m_name;
   translatable_string_c m_title, m_description;

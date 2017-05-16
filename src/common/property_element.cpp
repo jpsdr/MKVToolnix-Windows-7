@@ -75,6 +75,7 @@ property_element_c::derive_type() {
          : dynamic_cast<EbmlString *>(e)        ? EBMLT_STRING
          : dynamic_cast<EbmlUInteger *>(e)      ? EBMLT_UINT
          : dynamic_cast<EbmlUnicodeString *>(e) ? EBMLT_USTRING
+         : dynamic_cast<EbmlDate *>(e)          ? EBMLT_DATE
          :                                        EBMLT_SKIP;
 
   if (EBMLT_SKIP == m_type)

@@ -60,6 +60,7 @@ protected:
   void parse_ascii_string();
   void parse_binary();
   void parse_boolean();
+  void parse_date_time();
   void parse_floating_point_number();
   void parse_signed_integer();
   void parse_unicode_string();

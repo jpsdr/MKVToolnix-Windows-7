@@ -10,6 +10,7 @@
 
 #include "common/common_pch.h"
 
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <ebml/EbmlBinary.h>
 #include <ebml/EbmlFloat.h>
 #include <ebml/EbmlSInteger.h>
@@ -19,6 +20,7 @@
 #include <matroska/KaxSegment.h>
 
 #include "common/common_pch.h"
+#include "common/date_time.h"
 #include "common/ebml.h"
 #include "common/iso639.h"
 #include "common/list_utils.h"
@@ -103,6 +105,7 @@ change_c::parse_value() {
     case property_element_c::EBMLT_BOOL:    parse_boolean();               break;
     case property_element_c::EBMLT_BINARY:  parse_binary();                break;
     case property_element_c::EBMLT_FLOAT:   parse_floating_point_number(); break;
+    case property_element_c::EBMLT_DATE:    parse_date_time();             break;
     default:                                assert(false);
   }
 }
@@ -156,6 +159,72 @@ change_c::parse_binary() {
   } catch (...) {
     mxerror(boost::format(Y("The property value is not a valid binary spec or it is not exactly 128 bits long in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
   }
+}
+
+void
+change_c::parse_date_time() {
+  //                 1          2          3                     4          5          6             7     8      9          10
+  boost::regex re{"^ (\\d{4}) - (\\d{2}) - (\\d{2}) (?: T | \\h) (\\d{2}) : (\\d{2}) : (\\d{2}) \\h* ( Z | ([+-]) (\\d{2}) : (\\d{2}) ) $", boost::regex::perl | boost::regex::mod_x};
+  boost::smatch matches;
+  int64_t year, month, day, hours, minutes, seconds;
+  int64_t offset_hours = 0, offset_minutes = 0, offset_mult = 1;
+
+  auto valid = boost::regex_match(m_value, matches, re);
+
+  if (valid)
+    valid = parse_number(matches[1].str(), year)
+         && parse_number(matches[2].str(), month)
+         && parse_number(matches[3].str(), day)
+         && parse_number(matches[4].str(), hours)
+         && parse_number(matches[5].str(), minutes)
+         && parse_number(matches[6].str(), seconds);
+
+  if (valid && (matches[7].str() != "Z")) {
+    valid = parse_number(matches[9].str(),  offset_hours)
+         && parse_number(matches[10].str(), offset_minutes);
+
+    if (matches[8].str() == "-")
+      offset_mult = -1;
+  }
+
+  valid = valid
+    && (year           >= 1900)
+    && (month          >=   1)
+    && (month          <=  12)
+    && (day            >=   1)
+    && (day            <=  31)
+    && (hours          >=   0)
+    && (hours          <=  23)
+    && (minutes        >=   0)
+    && (minutes        <=  59)
+    && (offset_hours   >=   0)
+    && (offset_hours   <=  23)
+    && (offset_minutes >=   0)
+    && (offset_minutes <=  59);
+
+  if (valid) {
+    try {
+      auto date_time = boost::posix_time::ptime{ boost::gregorian::date(year, month, day), boost::posix_time::time_duration(hours, minutes, seconds) };
+
+      if (!date_time.is_not_a_date_time()) {
+        auto tz_offset  = (offset_hours * 60 + offset_minutes) * offset_mult;
+        date_time      -= boost::posix_time::minutes(tz_offset);
+      }
+
+      if (!date_time.is_not_a_date_time())
+        m_ui_value = mtx::date_time::to_time_t(date_time);
+
+      return;
+
+    } catch (std::out_of_range &) {
+    }
+  }
+
+  mxerror(boost::format("%1% %2% %3% %4%\n")
+          % (boost::format(Y("The property value is not a valid date & time string in '%1%'.")) % get_spec()).str()
+          % Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00.")
+          % Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time.")
+          % FILE_NOT_MODIFIED);
 }
 
 void
@@ -243,6 +312,7 @@ change_c::set_element_at(int idx) {
     case property_element_c::EBMLT_BOOL:    static_cast<EbmlUInteger      *>(e)->SetValue(m_b_value ? 1 : 0);                         break;
     case property_element_c::EBMLT_FLOAT:   static_cast<EbmlFloat         *>(e)->SetValue(m_fp_value);                                break;
     case property_element_c::EBMLT_BINARY:  static_cast<EbmlBinary        *>(e)->CopyBuffer(m_x_value.data(), m_x_value.byte_size()); break;
+    case property_element_c::EBMLT_DATE:    static_cast<EbmlDate          *>(e)->SetEpochDate(m_ui_value);                            break;
     default:                                assert(false);
   }
 }
