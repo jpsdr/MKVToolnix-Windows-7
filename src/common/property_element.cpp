@@ -99,6 +99,7 @@ property_element_c::init_tables() {
   uint32_t current_index                             = KaxInfo::ClassInfos.GlobalId.Value;
 
   ELE("title",                KaxTitle::ClassInfos,           Y("Title"),                        Y("The title for the whole movie."));
+  ELE("date",                 KaxDateUTC::ClassInfos,         Y("Date"),                         Y("The date the file was created."));
   ELE("segment-filename",     KaxSegmentFilename::ClassInfos, Y("Segment filename"),             Y("The file name for this segment."));
   ELE("prev-filename",        KaxPrevFilename::ClassInfos,    Y("Previous filename"),            Y("An escaped filename corresponding to\nthe previous segment."));
   ELE("next-filename",        KaxNextFilename::ClassInfos,    Y("Next filename"),                Y("An escaped filename corresponding to\nthe next segment."));

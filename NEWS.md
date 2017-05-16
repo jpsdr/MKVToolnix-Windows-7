@@ -13,6 +13,8 @@
 * mkvmerge, MKVToolNix GUI (multiplexer): added an option `--no-date` that
   prevents the "date" field from being written to the segment information
   headers. Implements one half of #1964.
+* MKVToolNix GUI: header editor: added support for editing the "date" segment
+  information field. Implements another part of #1964.
 
 ## Bug fixes
 

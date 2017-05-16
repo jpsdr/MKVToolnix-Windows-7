@@ -31,6 +31,7 @@
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/header_editor/string_value_page.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
+#include "mkvtoolnix-gui/header_editor/time_value_page.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
@@ -374,6 +375,7 @@ Tab::handleSegmentInfo(kax_analyzer_data_c const &data) {
   page->init();
 
   (new StringValuePage{*this, *page, info, KaxTitle::ClassInfos,           YT("Title"),                        YT("The title for the whole movie.")})->init();
+  (new TimeValuePage{  *this, *page, info, KaxDateUTC::ClassInfos,         YT("Date"),                         YT("The date the file was created.")})->init();
   (new StringValuePage{*this, *page, info, KaxSegmentFilename::ClassInfos, YT("Segment file name"),            YT("The file name for this segment.")})->init();
   (new StringValuePage{*this, *page, info, KaxPrevFilename::ClassInfos,    YT("Previous file name"),           YT("An escaped file name corresponding to the previous segment.")})->init();
   (new StringValuePage{*this, *page, info, KaxNextFilename::ClassInfos,    YT("Next filename"),                YT("An escaped file name corresponding to the next segment.")})->init();
