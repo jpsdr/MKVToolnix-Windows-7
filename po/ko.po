@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-05-14 21:16+0200\n"
-"PO-Revision-Date: 2017-04-23 10:20+0000\n"
+"PO-Revision-Date: 2017-05-14 21:45+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -289,7 +289,7 @@ msgid ""
 "                           entries to chapter names.\n"
 msgstr ""
 "  --cue-chapter-name-format <format>\n"
-"                           CUE 시트 항목을 챕터 이름으로 변환하는 규칙을\n"
+"                           큐 시트 항목을 챕터 이름으로 변환하는 규칙을\n"
 "                           지정합니다.\n"
 
 #: src/merge/mkvmerge.cpp:225
@@ -2925,7 +2925,7 @@ msgstr "언어가 '미정의' ('und') 상태인 경우에도"
 
 #: src/extract/extract_cli_parser.cpp:69
 msgid "Also try to extract the cue sheet from the chapter information and tags for this track."
-msgstr "이 트랙의 챕터 정보와 태그에서 CUE 시트 추출을 시도합니다."
+msgstr "이 트랙의 챕터 정보와 태그에서 큐 시트 추출을 시도합니다."
 
 #: src/input/r_wavpack.cpp:89
 #, boost-format
@@ -4169,27 +4169,27 @@ msgstr "CUE 상대 위치: %1%"
 
 #: src/extract/extract_cli_parser.cpp:105
 msgid "Cue sheet extraction"
-msgstr "CUE 시트 추출"
+msgstr "큐 시트 추출"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:184
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Cue sheet files"
-msgstr "텍스트 파일"
+msgstr "큐 시트 파일"
 
 #: src/common/chapters/cue_parser.cpp:392
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX entry in line %1%.\n"
-msgstr "CUE 시트 분석: %1%번째 행의 인덱스 항목이 잘못되었습니다.\n"
+msgstr "큐 시트 분석: %1%번째 행의 인덱스 항목이 잘못되었습니다.\n"
 
 #: src/common/chapters/cue_parser.cpp:411
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%.\n"
-msgstr "큐시트 분석기: %3% 줄에서 무효한 인덱스 번호 (%1% 취득, %2% 예상).\n"
+msgstr "큐 시트 분석: %3% 줄에서 무효한 인덱스 번호 (%1% 취득, %2% 예상).\n"
 
 #: src/common/chapters/cue_parser.cpp:273
 #, boost-format
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
-msgstr "CUE 시트 분석: 이전 트랙 항목에 대한 인덱스 항목을 찾지 못했습니다. (현재 행: %1%)\n"
+msgstr "큐 시트 분석: 이전 트랙 항목에 대한 인덱스 항목을 찾지 못했습니다. (현재 행: %1%)\n"
 
 #: src/info/mkvinfo.cpp:1153
 #, boost-format
@@ -9519,7 +9519,7 @@ msgstr "큐(CUE) 항목(인덱스)을 쓰는 중입니다...\n"
 #: src/extract/tracks.cpp:296
 #, boost-format
 msgid "The cue sheet for track %1% will be written to '%2%'.\n"
-msgstr "트랙 %1%의 CUE 시트는 '%2%'에 기록되었습니다.\n"
+msgstr "트랙 %1%의 큐 시트는 '%2%'에 기록되었습니다.\n"
 
 #: src/extract/cues.cpp:58
 #, boost-format
@@ -9636,9 +9636,8 @@ msgid "The extracted values for video width and height from the MPEG4 layer 2 vi
 msgstr "MPEG4 layer 2 비디오 데이터 비트스트림에서 추출된 해상도 값이 소스 컨테이너 값과 다릅니다. 비디오 데이터 비트스트림 값 (%1%x%2%)이 사용됩니다.\n"
 
 #: src/extract/extract_cli_parser.cpp:107
-#, fuzzy
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a CUE sheet with mkvmerge's '--chapters' option."
-msgstr "다섯 번째 모드에서는 챕터 정보와 태그를 추출하고, CUE 시트로 출력하는 것을 시도합니다. 이것은 mkvmerge의 '--chapters'옵션에 CUE 시트 사용의 반대입니다."
+msgstr "다섯 번째 모드는 챕터 정보와 태그를 추출해서 큐 시트로 출력을 시도합니다. 이것은 큐 시트를 mkvmerge의 '--chapters' 옵션을 정반대로 사용하는 것입니다."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:257
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:219
@@ -12406,7 +12405,7 @@ msgstr "mkvmerge는 챕터를 자동으로 만들 수 있습니다."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:192
 msgid "mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."
-msgstr "mkvmerge는 오디오 CD용 큐시트를 읽어서 챕터로 변환하는 것을 자동으로 할 수 있습니다."
+msgstr "mkvmerge는 오디오 CD용 큐 시트를 읽어서 챕터로 변환하는 것을 자동으로 할 수 있습니다."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:140
 #, no-c-format
