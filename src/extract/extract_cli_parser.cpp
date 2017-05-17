@@ -104,7 +104,7 @@ extract_cli_parser_c::init_parser() {
 
   add_section_header(YT("Cue sheet extraction"));
 
-  add_information(YT("The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a CUE sheet with "
+  add_information(YT("The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a cue sheet with "
                      "mkvmerge's '--chapters' option."));
 
   add_section_header(YT("Example"));
