@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2017-01-29 11:52+0100\n"
-"PO-Revision-Date: 2016-10-20 11:34+0000\n"
+"PO-Revision-Date: 2017-05-17 10:56+0000\n"
 "Last-Translator: Dean Lee <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -37,7 +37,7 @@ msgstr "11.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2017-01-22"
-msgstr ""
+msgstr "2017-01-22"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -469,19 +469,15 @@ msgstr "此选项仅当程序附带 libcurl 支持编译时可用。"
 #: doc/man/mkvinfo.xml:255
 #: doc/man/mkvmerge.xml:2082
 #: doc/man/mkvpropedit.xml:489
-#, fuzzy
-#| msgid "<option>@</option><parameter>options-file</parameter>"
 msgid "<option>@</option><parameter>options-file.json</parameter>"
-msgstr "<option>@</option><parameter>选项文件</parameter>"
+msgstr "<option>@</option><parameter>选项文件.json</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:218
 #: doc/man/mkvinfo.xml:258
 #: doc/man/mkvpropedit.xml:492
-#, fuzzy
-#| msgid "Reads additional command line arguments from the file <parameter>options-file</parameter>. See the section about <link linkend=\"mkvmerge.option_files\">option files</link> for further information."
 msgid "Reads additional command line arguments from the file <parameter>options-file</parameter>. For a full explanation on the supported formats for such files see the section called \"Option files\" in the &mkvmerge; man page."
-msgstr "从文件 <parameter>选项文件</parameter> 读取其他命令行参数。更多信息请参见关于 <link linkend=\"mkvmerge.option_files\">选项文件</link> 的段落。"
+msgstr "从文件 <parameter>选项文件</parameter> 读取其他命令行参数。关于支持的选项文件格式的详细说明，请参见 &mkvmerge; 手册的“选项文件”段落。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:227
@@ -732,7 +728,7 @@ msgstr "可用的关键词包括："
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:471
 msgid "timecode"
-msgstr "timecode"
+msgstr "时间码"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:473
@@ -1448,10 +1444,8 @@ msgstr "将多媒体流合并到 &matroska; 文件中"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvmerge.xml:51
-#, fuzzy
-#| msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@optionsfile</arg>"
 msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@options-file.json</arg>"
-msgstr "<command>mkvmerge</command> <arg>全局选项</arg> <arg choice=\"req\">-o 输出文件</arg> <arg>选项1</arg> <arg choice=\"req\">文件1</arg> <arg> <arg>选项2</arg> <arg choice=\"req\">文件2</arg> </arg> <arg>@选项文件</arg>"
+msgstr "<command>mkvmerge</command> <arg>全局选项</arg> <arg choice=\"req\">-o 输出文件</arg> <arg>选项1</arg> <arg choice=\"req\">文件1</arg> <arg> <arg>选项2</arg> <arg choice=\"req\">文件2</arg> </arg> <arg>@选项文件.json</arg>"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:67
@@ -3160,15 +3154,13 @@ msgstr "结果的输出格式可以通过 <link linkend=\"mkvmerge.description.i
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1880
-#, fuzzy
-#| msgid "<option>--chapters</option> <parameter>file-name</parameter>"
 msgid "<option>-J</option> <parameter>file-name</parameter>"
-msgstr "<option>--chapters</option> <parameter>文件名</parameter>"
+msgstr "<option>-J</option> <parameter>文件名</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1883
 msgid "This is a convenient alias for \"<literal>--identification-format json --identify file-name</literal>\"."
-msgstr ""
+msgstr "等同于“<literal>--identification-format json --identify 文件名</literal>”的简便写法。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1889
@@ -3178,13 +3170,13 @@ msgstr "<option>-I</option>, <option>--identify-verbose</option> <parameter>文�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1897
 msgid "The output will also contain properties for all items found, e.g. the file title or the track language."
-msgstr ""
+msgstr "输出信息还会包含已发现所有项目的属性，例如文件标题或轨道语言。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:1901
 #: doc/man/mkvmerge.xml:1939
 msgid "This option is deprecated. It will be removed in 2018."
-msgstr ""
+msgstr "该选项已废弃。将在 2018 年移除。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1907
@@ -3774,31 +3766,27 @@ msgstr "&mkvmerge; 可从选项文件中读取额外的命令行参数。这样�
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2562
 msgid "There are two formats for option files: a JSON format and a proprietary legacy format. The legacy format is deprecated, and support for it will likely be removed in 2018."
-msgstr ""
+msgstr "选项文件有两种格式: JSON 格式以及专用的传统格式。传统格式已废弃，对传统格式的支持大约在 2018 年移除。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2567
-#, fuzzy
-#| msgid "Tag file format"
 msgid "The JSON format"
-msgstr "标签文件格式"
+msgstr "JSON 格式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2570
 msgid "A JSON option file's name must end in '<filename>.json</filename>'. Its content must be a valid JSON array consisting solely of JSON strings. The file's encoding must be UTF-8. The file should not start with a <foreignphrase>byte order marker</foreignphrase> (<abbrev>BOM</abbrev>), but if one exists, it will be skipped."
-msgstr ""
+msgstr "JSON 选项文件的名称必须以“<filename>.json</filename>”结尾。其内容必须是有效的 JSON 数组，该数组只能由 JSON 字符串组成。文件编码应为 UTF-8。文件开头不应存在字节序标志（<foreignphrase>byte order marker</foreignphrase>，<abbrev>BOM</abbrev>），但如果存在也不会报错，读取时会跳过它。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2576
 msgid "The rules for escaping special characters inside JSON are the ones in the official JSON specification, <ulink url=\"https://tools.ietf.org/html/rfc7159\">RFC 7159</ulink>."
-msgstr ""
+msgstr "在 JSON 内部转义特殊字符的规则请见官方 JSON 规范 <ulink url=\"https://tools.ietf.org/html/rfc7159\">RFC 7159</ulink>。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2580
-#, fuzzy
-#| msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following option file:"
 msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following JSON option file called e.g. '<filename>options.json</filename>':"
-msgstr "命令行 '<command>mkvmerge -o \"我的文件.mkv\" -A \"一部影片.avi\" 声音.ogg</command>' 可以转换为下述选项文件:"
+msgstr "命令行“<command>mkvmerge -o \"我的文件.mkv\" -A \"一部影片.avi\" 声音.ogg</command>”可以转换为下述 JSON 选项文件，文件可以命名为“<filename>选项.json</filename>”:"
 
 #. type: Content of: <refentry><refsect1><refsect2><programlisting>
 #: doc/man/mkvmerge.xml:2584
@@ -3814,13 +3802,20 @@ msgid ""
 "  \"sound.ogg\"\n"
 "]"
 msgstr ""
+"[\n"
+"  \"-o\",\n"
+"  \"c:\\\\Matroska\\\\我的文件.mkv\",\n"
+"  \"--title\",\n"
+"  \"#65\",\n"
+"  \"-A\",\n"
+"  \"一部影片.avi\",\n"
+"  \"声音.ogg\"\n"
+"]"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2596
-#, fuzzy
-#| msgid "Tag file format"
 msgid "The legacy format"
-msgstr "标签文件格式"
+msgstr "传统格式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2599
@@ -3844,10 +3839,8 @@ msgstr "注意反斜杠必须转义。井号 ('#') 如果不作为注释标记�
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2618
-#, fuzzy
-#| msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following option file:"
 msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following legacy option file called e.g. '<filename>options.txt</filename>':"
-msgstr "命令行 '<command>mkvmerge -o \"我的文件.mkv\" -A \"一部影片.avi\" 声音.ogg</command>' 可以转换为下述选项文件:"
+msgstr "命令行“<command>mkvmerge -o \"我的文件.mkv\" -A \"一部影片.avi\" 声音.ogg</command>”可以转换为下述传统选项文件，文件可以命名为“<filename>选项.txt</filename>”:"
 
 #. type: Content of: <refentry><refsect1><refsect2><programlisting>
 #: doc/man/mkvmerge.xml:2622
@@ -5234,15 +5227,11 @@ msgstr "&mkvtoolnix-gui; 是基于 <productname>Qt</productname> 的 &mkvmerge; 
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:70
-#, fuzzy
-#| msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for merging."
 msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
-msgstr "列出扩展名为 <literal>.mtxcfg</literal> 的配置文件名，可让 GUI 在对应工具中加载这些配置文件。其他文件名将根据当前模式，添加为待合并的输入文件、在章节编辑器或头部编辑器中打开。当前模式可通过 <option>--merge</option>、<option>--edit-chapters</option> 或 <option>--edit-headers</option> 修改。默认模式为添加文件用于合并。"
+msgstr "给出扩展名为 <literal>.mtxcfg</literal> 的配置文件名，可让 GUI 在对应工具中加载这些配置文件。其他文件名将根据当前模式，添加为待混流的输入文件、在章节编辑器或头部编辑器中打开。当前模式可通过 <option>--merge</option>、<option>--edit-chapters</option> 或 <option>--edit-headers</option> 修改。默认模式为添加文件用于混流。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:77
-#, fuzzy
-#| msgid "Note that if an instance of the application is already running when the application is started a second time all file names given on the command line are handled by the already-running instance."
 msgid "Note that if an instance of the application is already running when the application is started a second time, all file names given on the command line are handled by the already-running instance."
 msgstr "注意，若再次启动应用程序时，已经有一个该应用程序的实例在运行，则命令行给出的所有文件都将由已在运行的实例处理。"
 
@@ -5253,10 +5242,8 @@ msgstr "<option>--merge</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:85
-#, fuzzy
-#| msgid "All following file names will be added as input files to the current merge job. This is the default mode."
 msgid "All following file names will be added as source files to the current multiplex job. This is the default mode."
-msgstr "后面的所有文件名都将作为输入文件添加到当前合并任务。这是默认模式。"
+msgstr "后面的所有文件名都将作为输入文件添加到当前混流任务。这是默认模式。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:90
