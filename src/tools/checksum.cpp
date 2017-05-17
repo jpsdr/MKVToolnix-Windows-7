@@ -16,6 +16,7 @@
 #include "common/endian.h"
 #include "common/mm_io_x.h"
 #include "common/strings/parsing.h"
+#include "common/version.h"
 
 class cli_options_c {
 public:
@@ -27,8 +28,9 @@ public:
 };
 
 static void
-show_help() {
-  mxinfo("checksum [options] file_name\n"
+setup_help_and_version_info() {
+  version_info = get_version_info("checksum", vif_full);
+  usage_text   = "checksum [options] file_name\n"
          "\n"
          "Calculates a checksum of a file. Used for testing MKVToolNix' checksumming\n"
          "algorithms. The defaults are:\n"
@@ -61,14 +63,7 @@ show_help() {
          "General options:\n"
          "\n"
          "  -h, --help             This help text\n"
-         "  -V, --version          Print version information\n");
-  mxexit();
-}
-
-static void
-show_version() {
-  mxinfo("checksum v" PACKAGE_VERSION "\n");
-  mxexit();
+         "  -V, --version          Print version information\n";
 }
 
 static cli_options_c
@@ -80,13 +75,7 @@ parse_args(std::vector<std::string> &args) {
     auto next     = current + 1;
     auto next_arg = next != end ? *next : "";
 
-    if ((arg == "-h") || (arg == "--help"))
-      show_help();
-
-    else if ((arg == "-V") || (arg == "--version"))
-      show_version();
-
-    else if ((arg == "-a") || (arg == "--adler32"))
+    if ((arg == "-a") || (arg == "--adler32"))
       options.m_algorithm = mtx::checksum::algorithm_e::adler32;
 
     else if (arg == "--crc8-atm")
@@ -201,6 +190,7 @@ int
 main(int argc,
      char **argv) {
   mtx_common_init("checksum", argv[0]);
+  setup_help_and_version_info();
 
   auto args = command_line_utf8(argc, argv);
   while (handle_common_cli_args(args, "-r"))
