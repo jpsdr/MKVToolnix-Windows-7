@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-05-16 21:03+0200\n"
-"PO-Revision-Date: 2017-05-14 21:45+0000\n"
+"PO-Revision-Date: 2017-05-17 02:11+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -498,13 +498,10 @@ msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                큐 데이터(인덱스)를 기록하지 않습니다.\n"
 
 #: src/merge/mkvmerge.cpp:121
-#, fuzzy
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
-msgstr ""
-"  = <file>                 동일한 기본 이름을 가지지만, 일련번호가 다른 파일을\n"
-"                           찾고 연결하지는 않습니다.\n"
+msgstr "--no-date 세그먼트 정보 헤더에 '날짜' 필드를 쓰지 않습니다.\n"
 
 #: src/merge/mkvmerge.cpp:209
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -878,7 +875,7 @@ msgstr "  B:  불 방식 (0 또는 1)\n"
 
 #: src/propedit/propedit_cli_parser.cpp:168
 msgid "  DT: date & time\n"
-msgstr ""
+msgstr "  DT: 날짜 & 시간\n"
 
 #: src/propedit/propedit_cli_parser.cpp:167
 msgid "  FP: floating point number\n"
@@ -4297,7 +4294,7 @@ msgstr "DVB 자막"
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Date"
-msgstr ""
+msgstr "날짜"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:55
 #, no-c-format
@@ -9206,9 +9203,9 @@ msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "mkvmerge가 각 트랙의 통계를 태그에 기록하지 않도록 합니다."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
-msgstr "mkvmerge가 큐에 'CueDuration' 요소를 기록하지 않도록 합니다."
+msgstr "mkvmerge가 세그먼트 정보 헤더에 '날짜' 필드를 쓰지 않도록 합니다."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
@@ -9564,9 +9561,8 @@ msgstr "현재 패킷의 타임코드는 이전 패킷의 타임코드보다 작
 
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
-#, fuzzy
 msgid "The date the file was created."
-msgstr "옵션 파일을 만들었습니다."
+msgstr "파일이 만들어진 날짜입니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 #, no-c-format
@@ -10064,7 +10060,7 @@ msgstr "오류를 만나기 전에 처리한 마지막 타임코드는 %1%입니
 
 #: src/propedit/change.cpp:226
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
-msgstr ""
+msgstr "글자 'Z'는 줄루 시각(그리니치 표준시)이라고 알려진 UTC를 나타내기 위해 UTC로부터 표준 시간대의 오프셋 대신 사용할 수 있습니다."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:332
 #, no-c-format
@@ -10299,9 +10295,9 @@ msgid "The property value is not a valid boolean in '%1%'. %2%\n"
 msgstr "'%1%'에서 이 속성값은 유효한 논리값(boolean)이 아닙니다. %2%\n"
 
 #: src/propedit/change.cpp:224
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid date & time string in '%1%'."
-msgstr "'%1%'에서 이 속성값은 유부호 정수가 아닙니다. %2%\n"
+msgstr "'%1%'에서 이 속성값은 유효한 날짜 & 시간 문자열이 아닙니다."
 
 #: src/propedit/change.cpp:152
 #, boost-format
@@ -10324,7 +10320,7 @@ msgstr "이유는 알 수 없습니다."
 
 #: src/propedit/change.cpp:225
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
-msgstr ""
+msgstr "알려진 형식은 'YYYY-mm-ddTHH:MM:SS+zz:zz'입니다: 년, 월, 일, 글자 'T', 시, 분, 초와 UTC로부터 표준 시간대의 오프셋; 예: 2017-03-28T17:28-02:00."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "The rest is copied as is."
@@ -10753,7 +10749,7 @@ msgstr "이 요소는 현재 파일에 없습니다."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
-msgstr ""
+msgstr "이 필드는 보통 파일이 만들어진 날짜로 설정됩니다."
 
 #: src/input/subtitles.cpp:167
 msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
