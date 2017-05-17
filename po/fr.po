@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-05-16 21:03+0200\n"
-"PO-Revision-Date: 2017-05-15 20:16+0000\n"
+"PO-Revision-Date: 2017-05-16 22:32+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -506,13 +506,10 @@ msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                N'écrit pas les données (l'index) CUE.\n"
 
 #: src/merge/mkvmerge.cpp:121
-#, fuzzy
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
-msgstr ""
-"  = <fichier>                 Ne recherche pas et concaténe les fichiers de\n"
-"                           même nom de base mais de suffixe numérique différent.\n"
+msgstr "  --no-date                N'écrit pas le champ « date » dans les entêtes d'informations de segment.\n"
 
 #: src/merge/mkvmerge.cpp:209
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -898,7 +895,7 @@ msgstr "  B :  booléen (0 ou 1)\n"
 
 #: src/propedit/propedit_cli_parser.cpp:168
 msgid "  DT: date & time\n"
-msgstr ""
+msgstr "  DT : date et temps\n"
 
 #: src/propedit/propedit_cli_parser.cpp:167
 msgid "  FP: floating point number\n"
@@ -4339,7 +4336,7 @@ msgstr "Sous-titres DVB"
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:55
 #, no-c-format
@@ -9272,9 +9269,9 @@ msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "Demande à mkvmerge de ne pas écrire de balises avec des statistiques pour chaque piste."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
-msgstr "Conduit mkvmerge à ne pas écrire les éléments « CueDuration » dans les données CUE."
+msgstr "Informe mkvmerge de ne pas écrire le champ « date » dans les entêtes d'informations de segment."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
@@ -9630,9 +9627,8 @@ msgstr "Le code temporel du paquet actuel est inférieur à celui du précédent
 
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
-#, fuzzy
 msgid "The date the file was created."
-msgstr "Le fichier d'options a été créé."
+msgstr "La date à laquelle le fichier a été créé."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 #, no-c-format
@@ -10137,7 +10133,7 @@ msgstr "Le dernier code temporel traité avant l'erreur était %1%.\n"
 
 #: src/propedit/change.cpp:226
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
-msgstr ""
+msgstr "La lettre « Z » peut être utilisée en lieu du décalage de fuseau horaire depuis UTC pour indiquer UTC, soit le temps Zoulou."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:332
 #, no-c-format
@@ -10384,9 +10380,9 @@ msgid "The property value is not a valid boolean in '%1%'. %2%\n"
 msgstr "La valeur de la propriété n'est pas un booléen correct dans « %1% ». %2%\n"
 
 #: src/propedit/change.cpp:224
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid date & time string in '%1%'."
-msgstr "La valeur de la propriété n'est pas un nombre entier signé dans « %1% ». %2%\n"
+msgstr "La valeur de la propriété n'est pas une chaîne de date et de temps valide dans « %1% »."
 
 #: src/propedit/change.cpp:152
 #, boost-format
@@ -10409,7 +10405,7 @@ msgstr "La raison est inconnue."
 
 #: src/propedit/change.cpp:225
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
-msgstr ""
+msgstr "Le format reconnu est « AAAA-mm-jjTHH:MM:SS+zz:zz » : année, mois, jour, lettre « T », heures,  minutes, secondes, et le décalage de fuseau horaire depuis UTC ; exemple : 2017-03-28T17:28-02:00."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "The rest is copied as is."
@@ -10839,7 +10835,7 @@ msgstr "Cet élément n'est actuellement pas présent dans le fichier."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
-msgstr ""
+msgstr "Ce champs est normalement défini à la date à laquelle le fichier a été créé."
 
 #: src/input/subtitles.cpp:167
 msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
