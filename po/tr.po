@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-05-16 21:03+0200\n"
-"PO-Revision-Date: 2017-05-15 12:18+0000\n"
+"PO-Revision-Date: 2017-05-17 09:26+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -239,17 +239,16 @@ msgid ""
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:290
-#, fuzzy
 msgid ""
 "  --colour-primaries <TID:n>\n"
 "                           The colour primaries of the video.\n"
 msgstr ""
-"  --command-line-charset <charset>\n"
-"                           Komut satırındaki dizgiler için karakter kümesi\n"
+"  --colour-primaries <TID:n>\n"
+"                           Görüntünün renk birincilleri.\n"
 
 #: src/merge/mkvmerge.cpp:287
 msgid "  --colour-range <TID:n>   Clipping of the color ranges.\n"
-msgstr ""
+msgstr "  --colour-range <TID:n>   Renk paletlerinin kırpılması.\n"
 
 #: src/merge/mkvmerge.cpp:288
 msgid ""
@@ -508,13 +507,12 @@ msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                Cue verisini (indeksi) yazma.\n"
 
 #: src/merge/mkvmerge.cpp:121
-#, fuzzy
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
 msgstr ""
-"  = <file>                 Aynı temel ad ile ama farklı izleme numaralı dosyaları\n"
-"                           aramayın ve bitiştirmeyin\n"
+"  --no-date                Parça bilgisi başlıklarındaki 'date' alanına\n"
+"                           yazma.\n"
 
 #: src/merge/mkvmerge.cpp:209
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -727,6 +725,8 @@ msgid ""
 "  -J <file>                This is a convenient alias for\n"
 "                           \"--identification-format json --identify file\".\n"
 msgstr ""
+"  -J <dosya>                \"--identification-format json --identify file\"\n"
+"                           için bu uygun bir kod adıdır.\n"
 
 #: src/merge/mkvmerge.cpp:204
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
@@ -888,7 +888,7 @@ msgstr "  B:  boolean (0 veya 1)\n"
 
 #: src/propedit/propedit_cli_parser.cpp:168
 msgid "  DT: date & time\n"
-msgstr ""
+msgstr "  TS: tarih ve saat\n"
 
 #: src/propedit/propedit_cli_parser.cpp:167
 msgid "  FP: floating point number\n"
@@ -4334,7 +4334,7 @@ msgstr "DVB altyazıları"
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Date"
-msgstr ""
+msgstr "Tarih"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:55
 #, no-c-format
@@ -9256,9 +9256,9 @@ msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "mkvmerge'e her iz için istatistikler ile etiketleri yazmamasını söyler."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
-msgstr "mkvmerge'ün cue'ların içine 'CueDuration' öğelerini yazmamasına neden olur."
+msgstr "mkvmerge'e parça bilgisi başlıklarındaki 'date' alanına yazmamasını söyler."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
@@ -9614,9 +9614,8 @@ msgstr ""
 
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
-#, fuzzy
 msgid "The date the file was created."
-msgstr "Seçenek dosyası oluşturuldu."
+msgstr "Tarih dosya oluşturuldu."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 #, no-c-format
@@ -9716,9 +9715,8 @@ msgid "The extracted values for video width and height from the MPEG4 layer 2 vi
 msgstr "MPEG4 katman 2 götüntü verisi bit akışından gelen görüntü genişliği ve yüksekliği için çıkartılan değerler kaynak kalıpta olan değerlerden farklı. Götüntü verisi bit akışından (%1%x%2%) biri kullanılacaktır.\n"
 
 #: src/extract/extract_cli_parser.cpp:107
-#, fuzzy
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a CUE sheet with mkvmerge's '--chapters' option."
-msgstr "Beşinci kip bölüm bilgilerini ve etiketleri çıkartmaya çalışır ve bunların bir cue sheet olarak çıktısını verir. Bu, mkvmerge'ün '--chapters' seçeneği ile bir cue sheet kullanımının tersidir."
+msgstr "Beşinci kip bölüm bilgilerini ve etiketleri çıkartmaya çalışır ve bunların bir cue sheet olarak çıktısını verir. Bu, mkvmerge'ün '--chapters' seçeneği ile bir CUE sheet kullanımının tersidir."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:257
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:219
@@ -10116,7 +10114,7 @@ msgstr "Hata ile karşılaşılmadan önce işlenen son zaman kodu %1%.\n"
 
 #: src/propedit/change.cpp:226
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
-msgstr ""
+msgstr "'Z' harfi, UTC'yi diğer bir deyişle Zulu saatini göstermek için UTC'den gelen saat diliminin karşılığının yerine kullanılabilir."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:332
 #, no-c-format
@@ -10363,9 +10361,9 @@ msgid "The property value is not a valid boolean in '%1%'. %2%\n"
 msgstr "Özellik değeri, '%1%' içinde geçerli bir boolean değil. %2%\n"
 
 #: src/propedit/change.cpp:224
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid date & time string in '%1%'."
-msgstr "Özellik değeri, '%1%' içinde geçerli bir imzalı tam sayı değil. %2%\n"
+msgstr "Özellik değeri, '%1%' içinde geçerli bir tarih ve saat dizgisi değil."
 
 #: src/propedit/change.cpp:152
 #, boost-format
@@ -10388,7 +10386,7 @@ msgstr "Sebep bilinmiyor."
 
 #: src/propedit/change.cpp:225
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
-msgstr ""
+msgstr "Tanınan biçim 'YYYY-mm-ddTHH:MM:SS+zz:zz': yıl, ay, gün, 'T' harfi, saat, dakika, saniye ve UTC'den gelen saat dilimi karşılığı; örnek: 2017-03-28T17:28-02:00."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "The rest is copied as is."
@@ -10815,7 +10813,7 @@ msgstr "Bu öğe şu anda dosyada mevcut değil."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
-msgstr ""
+msgstr "Bu alan normalde, oluşturulan tarihe dosyaya ayarlanır."
 
 #: src/input/subtitles.cpp:167
 msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
