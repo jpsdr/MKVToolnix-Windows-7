@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-05-16 21:03+0200\n"
-"PO-Revision-Date: 2017-05-17 11:22+0000\n"
+"PO-Revision-Date: 2017-05-18 06:03+0000\n"
 "Last-Translator: Dean Lee <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -477,7 +477,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:210
 msgid "  --no-chapters            Don't keep chapters from the source file.\n"
-msgstr "  --no-chapters            不保留源文件中的章节。\n"
+msgstr "  --no-chapters            不保留输入文件中的章节。\n"
 
 #: src/merge/mkvmerge.cpp:119
 msgid "  --no-cues                Do not write the cue data (the index).\n"
@@ -491,7 +491,7 @@ msgstr "  --no-date               剪辑信息头部字段不要写入日期（'
 
 #: src/merge/mkvmerge.cpp:209
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
-msgstr "  --no-global-tags         不保留源文件中的全局标签。\n"
+msgstr "  --no-global-tags         不保留输入文件中的全局标签。\n"
 
 #: src/merge/mkvmerge.cpp:340
 msgid "  --output-charset <cset>  Output messages in this charset\n"
@@ -624,7 +624,7 @@ msgstr "  --timecodes <TID:file>   从指定文件中读取需要的时间码。
 
 #: src/merge/mkvmerge.cpp:86
 msgid "  --title <title>          Title for this destination file.\n"
-msgstr "  --title <title>          目标文件的标题。\n"
+msgstr "  --title <标题>          输出文件的标题。\n"
 
 #: src/merge/mkvmerge.cpp:226
 msgid "  --track-name <TID:name>  Sets the name for a track.\n"
@@ -639,7 +639,7 @@ msgid ""
 msgstr ""
 "  --track-order <文件ID1:TID1,文件ID2:TID2,文件ID3:TID3,...>\n"
 "                           逗号分隔的列表，内容为文件 ID 与轨道 ID，\n"
-"                           控制目标文件中轨道的顺序。\n"
+"                           控制输出文件中轨道的顺序。\n"
 
 #: src/merge/mkvmerge.cpp:206
 msgid ""
@@ -745,7 +745,7 @@ msgstr "  -h, --help               显示本帮助。\n"
 
 #: src/merge/mkvmerge.cpp:322
 msgid "  -i, --identify <file>    Print information about the source file.\n"
-msgstr "  -i, --identify <file>    输出源文件的信息。\n"
+msgstr "  -i, --identify <文件>    输出输入文件的信息。\n"
 
 #: src/merge/mkvmerge.cpp:332
 msgid "  -l, --list-types         Lists supported source file types.\n"
@@ -804,7 +804,7 @@ msgid ""
 msgstr ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
 "                           将轨道 TID 的时间码平移 d 毫秒以同步。\n"
-"                           o/p:将时间码与 o/p 相乘以修复线性偏移。\n"
+"                           o/p: 将时间码与 o/p 相乘以修复线性偏移。\n"
 "                           p 若省略则默认为 1。o 和 p 均可为浮点数。\n"
 
 #: src/merge/mkvmerge.cpp:161
@@ -1271,7 +1271,7 @@ msgstr "添加文件(&A)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1766
 msgid "&Add source files"
-msgstr "添加源文件(&A)"
+msgstr "添加输入文件(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1357
 #: src/mkvtoolnix-gui/merge/input.cpp:1361
@@ -1711,7 +1711,7 @@ msgstr "起止时间(&S):"
 #, no-c-format
 msgid "&Start job automatically"
 msgid_plural "&Start jobs automatically"
-msgstr[0] "自动开始任务(&S)"
+msgstr[0] "自动启动任务(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
 msgid "&Start timecode of first created entry:"
@@ -1770,7 +1770,7 @@ msgstr "音量(&V):"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:306
 msgid "&When finished…"
-msgstr "完成时的操作(&W)…"
+msgstr "完成时(&W)…"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1343
 msgid "&When to set the language:"
@@ -2166,19 +2166,19 @@ msgstr "'--track-order' 只能使用一次。\n"
 
 #: src/merge/mkvmerge.cpp:1951
 msgid "'-A' and '-a' used on the same source file.\n"
-msgstr "在一个源文件上同时使用了 '-A' 和 '-a'。\n"
+msgstr "对同一个输入文件使用了“-A”与“-a”。\n"
 
 #: src/merge/mkvmerge.cpp:1960
 msgid "'-B' and '-b' used on the same source file.\n"
-msgstr "在一个源文件上同时使用了 '-B' 和 '-b'。\n"
+msgstr "对同一个输入文件使用了“-B”与“-b”。\n"
 
 #: src/merge/mkvmerge.cpp:1954
 msgid "'-D' and '-d' used on the same source file.\n"
-msgstr "在一个源文件上同时使用了 '-D' 和 '-d'。\n"
+msgstr "对同一个输入文件使用了“-D”与“-d”。\n"
 
 #: src/merge/mkvmerge.cpp:1957
 msgid "'-S' and '-s' used on the same source file.\n"
-msgstr "在一个源文件上同时使用了 '-S' 和 '-s'。\n"
+msgstr "对同一个输入文件使用了“-S”与“-s”。\n"
 
 #: src/common/property_element.cpp:119
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:419
@@ -2236,17 +2236,17 @@ msgstr "，位置 %1%"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:332
 #, no-c-format
 msgid "--- Errors emitted by job '%1' started on %2 ---"
-msgstr "--- 任务 %1 (开始时间 %2) 的错误消息 ---"
+msgstr "--- 任务“%1”(启动时间 %2) 的错误消息 ---"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:351
 #, no-c-format
 msgid "--- Output of job '%1' started on %2 ---"
-msgstr "--- 任务 %1 (开始时间 %2) 的输出消息 ---"
+msgstr "--- 任务“%1”(启动时间 %2) 的输出消息 ---"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:331
 #, no-c-format
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
-msgstr "--- 任务 %1 (开始时间 %2) 的警告消息 ---"
+msgstr "--- 任务“%1”(启动时间 %2) 的警告消息 ---"
 
 #: src/propedit/propedit_cli_parser.cpp:263
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify-verbose'. These are usually simply numbered starting from 0 (e.g. '2')."
@@ -2258,7 +2258,7 @@ msgstr "1: 所有帧"
 
 #: src/propedit/propedit_cli_parser.cpp:264
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify-verbose'. These are usually random-looking numbers (e.g. '128975986723')."
-msgstr "2. 一个前缀为 '=' 的数字，表示附件的 UID ('mkvmerge --identify-verbose' 所列出的)。通常是看起来随机的数字 (如 '128975986723')。"
+msgstr "2. 数字，以“=”为前缀，表示附件的唯一 ID（UID，即“mkvmerge --identify-verbose”所列出的 ID）。通常是看起来随机的数字 (如“128975986723”)。"
 
 #: src/info/mkvinfo.cpp:814
 msgid "2: codec private data"
@@ -2266,7 +2266,7 @@ msgstr "2: 编码格式私有数据"
 
 #: src/propedit/propedit_cli_parser.cpp:265
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
-msgstr "3. 'name:<value>' 或 'mime-type:<值>'，这两种情况下，选择器将对应所有名称或 MIME 类型为 <值> 的附件。"
+msgstr "3. “name:<值>”或“mime-type:<值>”，此类选择器将匹配所有名称或 MIME 类型为 <值> 的附件。"
 
 #: src/common/xml/xml.h:73
 msgid "<%1%> is not a valid child element of <%2%> at position %3%."
@@ -2754,12 +2754,12 @@ msgstr "在帧/场序号之后"
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
 msgid "After output duration"
-msgstr "在输出一定时长之后"
+msgstr "在输出一定时长后"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
 msgid "After output size"
-msgstr "在输出一定大小之后"
+msgstr "在输出一定大小后"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -2942,7 +2942,7 @@ msgstr "总是使用所选操作并不再询问(&Y)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1378
 msgid "Always &switch to the job output tool after starting one immediately"
-msgstr "在开始任务后立刻切换到“任务输出”工具(&S)"
+msgstr "启动任务后立刻切换到“任务输出”工具(&S)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1363
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
@@ -3148,7 +3148,7 @@ msgstr "附件"
 # TLNote: any better translation for 'selector'?
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1750
 msgid "Attachments from &source files:"
-msgstr "源文件中的附件(&S):"
+msgstr "输入文件中的附件(&S):"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:47
 #: src/mkvtoolnix-gui/merge/track.cpp:399
@@ -3213,7 +3213,7 @@ msgstr "根据输出文件扩展名自动启用 WebM 兼容模式。\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1333
 msgid "Automatically set the file &title from source files"
-msgstr "自动从源文件读取并设定文件标题(&T)"
+msgstr "自动从输入文件读取文件标题并填入(&T)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1335
 msgid "Automatically set track &delays from source file name"
@@ -4272,7 +4272,7 @@ msgstr "完成时间"
 #: src/mkvtoolnix-gui/jobs/model.cpp:56
 #, no-c-format
 msgid "Date started"
-msgstr "开始时间"
+msgstr "启动时间"
 
 #: src/info/mkvinfo.cpp:481
 #, boost-format
@@ -4386,7 +4386,7 @@ msgstr "删除一个或多个附件"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
-msgstr "根据下面的设置，可以在源文件中的语言为“未指定”('und') 时使用此处设置的语言。"
+msgstr "根据下面的设置，可以在输入文件中的语言为“未指定”(“und”) 时使用此处设置的语言。"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4680,7 +4680,7 @@ msgstr "退出(&X)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 msgid "E&xpand chapter's start and end timecodes to include the minimum/maximum timecodes of all their sub-chapters"
-msgstr "扩展章节的开始和结束时间码以涵盖其子章节的最小/最大时间码(&X)"
+msgstr "将章节的起止时间码扩展到包含其子章节的最小/最大时间码(&X)"
 
 #: src/info/mkvinfo.cpp:1658
 msgid "EBML head"
@@ -4806,7 +4806,7 @@ msgstr "加密算法: %1% (%2%)"
 #: src/info/mkvinfo.cpp:868
 #, boost-format
 msgid "Encryption key ID: %1%"
-msgstr "密匙 ID: %1%"
+msgstr "加密密钥 ID: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
 #, no-c-format
@@ -5264,7 +5264,7 @@ msgstr "完成时间:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1688
 msgid "Fix bitstream timing info"
-msgstr "修正码流时长信息"
+msgstr "修正码流计时信息"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, no-c-format
@@ -5788,7 +5788,7 @@ msgstr "若此处留空，则使用 '%p - %t'。"
 #: src/mkvtoolnix-gui/merge/input.cpp:441
 #, no-c-format
 msgid "If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks."
-msgstr "如果设为“自动决定”，则程序将根据源文件中的信息和轨道顺序在每类轨道中选择一条设置该标记。"
+msgstr "如果设为“自动决定”，则程序将根据输入文件中的信息和轨道顺序在每类轨道中选择一条设置该标记。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 #, no-c-format
@@ -5828,7 +5828,7 @@ msgstr "若启用本项，GUI 将在最后一个输入文件被移除时自动�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:258
 #, no-c-format
 msgid "If this option is enabled the GUI will always clear the \"file title\" input box whenever the last source file is removed."
-msgstr "若启用本项，GUI 将在最后一个源文件被移除时自动清除“文件标题”输入框。"
+msgstr "若启用本项，GUI 将在最后一个输入文件被移除时自动清空“文件标题”输入框。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:353
 msgid "If this option is enabled then only those tracks will be set to be copied whose language is selected below."
@@ -5895,7 +5895,7 @@ msgstr "最精简的布局下，轨道属性控件位于文件及轨道列表的
 #: src/input/r_real.cpp:564
 #, boost-format
 msgid "Inconsistent AAC audio packet (length: %1% != %2%)\n"
-msgstr "不相容的 AAC 音频包 (长度: %1% != %2%)\n"
+msgstr "不一致的 AAC 音频数据包 (长度: %1% != %2%)\n"
 
 #: src/common/cli_parser.cpp:177
 #: src/merge/mkvmerge.cpp:82
@@ -6005,7 +6005,7 @@ msgstr "'--default-track %1%' 中指定的布尔值无效。\n"
 #: src/merge/mkvmerge.cpp:1548
 #, boost-format
 msgid "Invalid boolean option specified in '--fix-bitstream-timing-information %1%'.\n"
-msgstr "'--fix-bitstream-timing-information %1%' 中指定的布尔值无效。\n"
+msgstr "“--fix-bitstream-timing-information %1%”中指定的布尔值无效。\n"
 
 #: src/merge/mkvmerge.cpp:1196
 #, boost-format
@@ -6301,7 +6301,7 @@ msgstr "'--default-track %1%' 中指定的轨道 ID 无效。\n"
 #: src/merge/mkvmerge.cpp:1542
 #, boost-format
 msgid "Invalid track ID specified in '--fix-bitstream-timing-information %1%'.\n"
-msgstr "'--fix-bitstream-timing-information %1%' 中指定的轨道 ID 无效。\n"
+msgstr "“--fix-bitstream-timing-information %1%”中指定的轨道 ID 无效。\n"
 
 #: src/merge/mkvmerge.cpp:1190
 #, boost-format
@@ -6386,7 +6386,7 @@ msgstr "任务队列"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
 #, no-c-format
 msgid "Job start date && time in ISO 8601 format"
-msgstr "任务开始日期与时间 (ISO 8601 格式)"
+msgstr "任务启动日期与时间 (ISO 8601 格式)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:188
 #, no-c-format
@@ -7048,7 +7048,7 @@ msgstr "'--split %1%' 后未列出章节编号。\n"
 #: src/merge/mkvmerge.cpp:992
 #: src/merge/mkvmerge.cpp:1018
 msgid "No chapters in source files or chapter files found to split by.\n"
-msgstr "源文件或章节文件中未找到可用于分割的章节。\n"
+msgstr "输入文件或章节文件中未找到可用于分割的章节。\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1388
 #, no-c-format
@@ -7106,7 +7106,7 @@ msgstr "不会向服务器发送任何信息。"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:462
 #, no-c-format
 msgid "No job has been started yet."
-msgstr "尚无任务开始。"
+msgstr "尚未启动任务。"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:293
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:461
@@ -7170,7 +7170,7 @@ msgstr "未找到可以计算统计信息的轨道头。\n"
 #: src/extract/tracks.cpp:330
 #, boost-format
 msgid "No track with the ID %1% was found in the source file.\n"
-msgstr "源文件中不存在 ID 为 %1% 的轨道。\n"
+msgstr "输入文件中不存在 ID 为 %1% 的轨道。\n"
 
 #: src/input/r_vobsub.cpp:98
 msgid "No version number found.\n"
@@ -7202,7 +7202,7 @@ msgstr "通常情况下，除非用户手动清除，已完成的任务将留在
 #: src/mkvtoolnix-gui/merge/input.cpp:469
 #, no-c-format
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
-msgstr "通常 mkvmerge 不会更改存储在视频码流中的时间信息 (帧/场速率)。"
+msgstr "通常 mkvmerge 不会更改存储在视频码流中的计时信息 (帧/场速率)。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
 #, no-c-format
@@ -7266,7 +7266,7 @@ msgstr "注意，支持裁剪参数的播放器并不多。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:257
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
-msgstr "注意，即使不勾选该选项，除非用户手动指定标题，mkvmerge 依然会复制源文件的标题属性。"
+msgstr "注意，即使不勾选该选项，除非用户手动指定标题，mkvmerge 依然会复制输入文件的标题属性。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:477
 #: src/mkvtoolnix-gui/merge/input.cpp:483
@@ -7352,7 +7352,7 @@ msgstr "联机检查更新"
 #, boost-format
 msgid "Only %1% chapter found in source files & chapter files."
 msgid_plural "Only %1% chapters found in source files & chapter files."
-msgstr[0] "源文件及章节文件中只有 %1% 个章节。"
+msgstr[0] "输入文件及章节文件中只有 %1% 个章节。"
 
 #: src/merge/mkvmerge.cpp:1710
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:672
@@ -8820,7 +8820,7 @@ msgstr "签名散列算法: %1% (%2%)"
 #: src/info/mkvinfo.cpp:890
 #, boost-format
 msgid "Signature key ID: %1%"
-msgstr "签名密匙 ID: %1%"
+msgstr "签名密钥 ID: %1%"
 
 #: src/info/mkvinfo.cpp:893
 #, boost-format
@@ -8911,12 +8911,12 @@ msgstr "缺少某些标签元素 (不该发生此错误 - 另一个类似的错�
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1661
 msgid "Source &files:"
-msgstr "源文件(&F):"
+msgstr "输入文件(&F):"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:55
 #, no-c-format
 msgid "Source file"
-msgstr "源文件"
+msgstr "输入文件"
 
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
@@ -8969,7 +8969,7 @@ msgstr "将在时间码等于或大于此处所列章节的起始时间码的首
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:580
 msgid "Sta&rt all pending jobs"
-msgstr "开始所有待处理任务(&R)"
+msgstr "启动所有待处理任务(&R)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1767
 msgid "Sta&rt multiplexing"
@@ -8997,13 +8997,13 @@ msgstr "通过 xdg-open 启动非可执行文件。"
 #, no-c-format
 msgid "Start job &immediately"
 msgid_plural "Start jobs &immediately"
-msgstr[0] "立即开始任务(&I)"
+msgstr[0] "立即启动任务(&I)"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:195
 #, no-c-format
 msgid "Start job &manually"
 msgid_plural "Start jobs &manually"
-msgstr[0] "手动开始任务(&M)"
+msgstr[0] "手动启动任务(&M)"
 
 #: src/info/info_cli_parser.cpp:39
 msgid "Start the GUI (and open inname if it was given)."
@@ -9011,7 +9011,7 @@ msgstr "启动图形界面 (如果同时指定文件“输入文件名”则将�
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:294
 msgid "Started at:"
-msgstr "开始时间:"
+msgstr "启动时间:"
 
 #: src/info/mkvinfo.cpp:1775
 #, boost-format
@@ -9510,7 +9510,7 @@ msgstr "当前混流设置页面将被关闭。"
 #: src/merge/generic_packetizer.cpp:1278
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
-msgstr "当前封包的时间码比前一封包的小。这通常表明源文件不是 100%% 正确创建的 Matroska 文件。所有封包的时间码将调整 %1% 毫秒以避免丢失任何数据。这可能导致音频/视频不同步，但可以通过 mkvmerge 的 '--sync' 选项修正。如果您使用了 '--sync' 而仍然收到本警告，请不必担心 -- 这是正常的。如果对于一条特定轨道出现一次以上本错误且您收到一次以上本消息，则可能源文件制作存在严重问题，也可能 mkvmerge 存在 bug。如果是这样，请联系作者 Moritz Bunkus <moritz@bunkus.org>。\n"
+msgstr "当前封包的时间码比前一封包的小。这通常表明输入文件不是 100%% 正确创建的 Matroska 文件。所有封包的时间码将调整 %1% 毫秒以避免丢失任何数据。这可能导致音频/视频不同步，但可以通过 mkvmerge 的“--sync”选项修正。如果您已经使用了“--sync”却仍然收到本警告，请 *不必担心* -- 这是正常的。如果反复发生或某条特定轨道多次出现本警告，则可能输入文件制作存在严重问题，也可能 mkvmerge 存在 bug。如果是这样，请联系作者 Moritz Bunkus <moritz@bunkus.org>。\n"
 
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
@@ -9905,7 +9905,7 @@ msgstr "第一种模式用于将指定轨道提取到外部文件。"
 
 #: src/extract/extract_cli_parser.cpp:57
 msgid "The first word tells mkvextract what to extract. The second must be the source file. There are few global options that can be used with all modes. All other options depend on the mode."
-msgstr "第一个参数指定 mkvextract 的提取模式。第二个参数指定源文件。全局选项可以在所有模式下使用，其余选项取决于模式。"
+msgstr "第一个参数指定 mkvextract 的提取模式。第二个参数指定输入文件。全局选项可以在所有模式下使用，其余选项因模式而异。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:200
 msgid "The following modes are supported:"
@@ -9941,7 +9941,7 @@ msgstr "格式不匹配。"
 
 #: src/extract/extract_cli_parser.cpp:97
 msgid "The fourth mode extracts the chapters and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."
-msgstr "第四种模式用于提取章节，并将其转换为 XML。输出内容将被写入到标准输出。输出内容可以被用作 mkvmerge 的源文件。"
+msgstr "第四种模式用于提取章节，并将其转换为 XML。输出内容将写入标准输出。输出内容可以用作 mkvmerge 的输入文件。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 #, no-c-format
@@ -9986,15 +9986,15 @@ msgstr "该轨道的语言，播放器可以用来进行自动轨道选择，及
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:311
 msgid "The language selected here is used for audio tracks for which their source file contains no such property."
-msgstr "此处选择的语言用于源文件不包含该属性的音频轨道。"
+msgstr "此处选择的语言用于输入文件不含该属性的音频轨道。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property."
-msgstr "此处选择的语言用于源文件不包含该属性的字幕轨道。"
+msgstr "此处选择的语言用于输入文件不含该属性的字幕轨道。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
 msgid "The language selected here is used for video tracks for which their source file contains no such property."
-msgstr "此处选择的语言用于源文件不包含该属性的视频轨道。"
+msgstr "此处选择的语言用于输入文件不含该属性的视频轨道。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:184
 msgid "The language set here is also used when chapters are generated."
@@ -10209,7 +10209,7 @@ msgstr "不必在意各选项的顺序。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:289
 msgid "The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."
-msgstr "另外还有两种布局可选:文件及轨道列表右侧固定两列，或位于下方的选项卡面板。"
+msgstr "另外还有两种布局可选: 文件及轨道列表右侧固定两列，或位于下方的选项卡面板。"
 
 #: src/merge/mkvmerge.cpp:1644
 #, boost-format
@@ -10294,7 +10294,7 @@ msgstr "两条音频轨道的采样率不同: %1% 与 %2%"
 
 #: src/extract/extract_cli_parser.cpp:81
 msgid "The second mode extracts the tags and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."
-msgstr "第二种模式用于提取标签，并将其转换为 XML。输出内容将被写入到标准输出。输出内容可以被用作 mkvmerge 的源文件。"
+msgstr "第二种模式用于提取标签，并将其转换为 XML。输出内容将写入标准输出。输出内容可以用作 mkvmerge 的输入文件。"
 
 #: src/input/r_tta.cpp:92
 msgid "The seek table in this TTA file seems to be broken.\n"
@@ -10337,12 +10337,12 @@ msgstr "附件 '%1%' 的大小为 0。\n"
 #: src/merge/reader_detection_and_creation.cpp:144
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
-msgstr "源文件 '%1%' 无法成功打开，或者无法定位至末端以获取大小。\n"
+msgstr "输入文件“%1%”无法成功打开，或者无法定位至末端以获取其大小。\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:471
 #, no-c-format
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
-msgstr "容器的时长信息可能有多种来源:命令行 '--defualt-duration' 参数给出的数值、源容器或视频码流。"
+msgstr "容器的计时信息可能有多种来源: 命令行“--defualt-duration”参数给出的数值、输入文件容器或视频码流。"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:670
 #, no-c-format
@@ -10409,7 +10409,7 @@ msgstr "临时文件 '%1%' 无法以读取模式打开: %2%。\n"
 
 #: src/extract/extract_cli_parser.cpp:89
 msgid "The third mode extracts attachments from the source file."
-msgstr "第三种模式用于从源文件中提取附件。"
+msgstr "第三种模式用于从输入文件中提取附件。"
 
 #: src/merge/timestamp_factory.cpp:53
 #, boost-format
@@ -10641,7 +10641,7 @@ msgstr "该 AVC/h.264 轨道的起始帧不是关键帧。已跳过最初 %1% �
 
 #: src/output/p_avc.cpp:130
 msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timecode file has been provided for it, nor does the source container provide timecodes. The resulting timecodes may not be useful.\n"
-msgstr "该 AVC/h.264 轨道的时长信息表明，它采用了可变帧率。但您没有指定默认帧时长或外部时间码文件，源容器也没有提供时间码。最终生成的时间码可能会无法使用。\n"
+msgstr "该 AVC/h.264 轨道的计时信息表明，它采用了可变帧率。但您没有指定默认帧时长或外部时间码文件，源容器也没有提供时间码。最终生成的时间码可能会无法使用。\n"
 
 #: src/output/p_hevc_es.cpp:97
 #, boost-format
@@ -10669,7 +10669,7 @@ msgstr "该 Ogg/OGM 文件包含章节但无法解析。这可能是由于没有
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:275
 #, no-c-format, no-boost-format
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
-msgstr "探测数据量为源文件大小的 0.3% 或 10 MB，取其中较高者。"
+msgstr "探测数据量为输入文件大小的 0.3% 或 10 MB，取其中较高者。"
 
 #: src/output/p_ac3.cpp:80
 #: src/output/p_mp3.cpp:71
@@ -11706,7 +11706,7 @@ msgstr "如果勾选该选项，当用户添加包含该属性的文件时，程
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:316
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:322
 msgid "When the user adds such a file the track's language input is set to the language property from the source file."
-msgstr "当用户添加此类文件时，轨道语言将从源文件的语言属性中获取。"
+msgstr "用户添加此类文件时，轨道语言信息将从输入文件的语言属性中获取。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:387
 #, no-c-format
@@ -11771,7 +11771,7 @@ msgstr "若设为“移除输入文件”，所有输入文件将会被移除。
 #: src/mkvtoolnix-gui/merge/input.cpp:470
 #, no-c-format
 msgid "With this option that information is adjusted to match the container's timing information."
-msgstr "使用该选项后，以上信息将被调整以匹配容器中的时长信息。"
+msgstr "使用该选项后，以上信息将被调整以匹配容器中的计时信息。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
@@ -11941,7 +11941,7 @@ msgstr "请输入 1000 到 10000000 之间的数值，或特殊数值 -1。"
 #: src/mkvtoolnix-gui/merge/tab.cpp:343
 #, no-c-format
 msgid "You have to set the destination file name before you can start multiplexing or add a job to the job queue."
-msgstr "要开始混流或添加任务到队列，必须设置输出文件名称。"
+msgstr "开始混流或添加任务到队列之前，必须设置输出文件名称。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:349
 #, no-c-format
