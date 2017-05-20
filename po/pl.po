@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-05-16 21:03+0200\n"
-"PO-Revision-Date: 2017-04-21 20:51+0200\n"
+"PO-Revision-Date: 2017-05-20 15:08+0200\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -293,7 +293,7 @@ msgid ""
 msgstr ""
 "  --cue-chapter-name-format <format>\n"
 "                           Wzór dla konwersji nazw z arkusza\n"
-"                           CUE do nazw rozdziałów.\n"
+"                           cue do nazw rozdziałów.\n"
 
 #: src/merge/mkvmerge.cpp:227
 msgid ""
@@ -302,7 +302,7 @@ msgid ""
 "                           None at all, only for I frames, for all.\n"
 msgstr ""
 "  --cues <TID:none|iframes|all>\n"
-"                           Tworzy cue (indeks) dla tej ścieżki:\n"
+"                           Tworzy wpisy cue (indeks) dla tej ścieżki:\n"
 "                           wcale/tylko klatek I/dla wszystkich.\n"
 
 #: src/merge/mkvmerge.cpp:343
@@ -507,13 +507,13 @@ msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                Nie zapisuje danych cue (indeks).\n"
 
 #: src/merge/mkvmerge.cpp:121
-#, fuzzy
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
 msgstr ""
-"  = <plik>                 Nie wyszukuje i nie łączy plików z tą samą nazwą bazową,\n"
-"                                 tylko z innym numerem przyrostkowym.\n"
+"  --no-date                Nie zapisuje pola \"data\" w nagłówkach\n"
+"                           informacji o segmencie.\n"
+"\n"
 
 #: src/merge/mkvmerge.cpp:209
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -697,7 +697,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:187
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
-msgstr "  -A, --no-audio           Nie kopiuje żadnej ścieżki dźwiękowej z tego pliku.\n"
+msgstr "  -A, --no-audio           Nie kopiuje żadnej ścieżki audio z tego pliku.\n"
 
 #: src/merge/mkvmerge.cpp:199
 msgid "  -B, --no-buttons         Don't copy any buttons track from this file.\n"
@@ -882,7 +882,7 @@ msgstr "  B:  wartość logiczna (0 lub 1)\n"
 
 #: src/propedit/propedit_cli_parser.cpp:168
 msgid "  DT: date & time\n"
-msgstr ""
+msgstr "  DT: data i czas\n"
 
 #: src/propedit/propedit_cli_parser.cpp:167
 msgid "  FP: floating point number\n"
@@ -2982,7 +2982,7 @@ msgstr "Również wtedy, gdy język jest nieokreślony (\"undetermined\" → \"u
 
 #: src/extract/extract_cli_parser.cpp:69
 msgid "Also try to extract the cue sheet from the chapter information and tags for this track."
-msgstr "Również próbuje wyekstrahować do tej ścieżki arkusz CUE z rozdziałów i tagów."
+msgstr "Również próbuje wyodrębnić do tej ścieżki arkusz cue z rozdziałów i tagów."
 
 #: src/input/r_wavpack.cpp:89
 #, boost-format
@@ -4187,7 +4187,7 @@ msgstr ""
 #: src/info/mkvinfo.cpp:1169
 #, boost-format
 msgid "Cue duration: %1%"
-msgstr "Czas trwania Cue: %1%"
+msgstr "Czas trwania cue: %1%"
 
 #: src/extract/extract_cli_parser.cpp:122
 msgid "Cue extraction"
@@ -4232,17 +4232,17 @@ msgstr ""
 
 #: src/extract/extract_cli_parser.cpp:105
 msgid "Cue sheet extraction"
-msgstr "Wyodrębnianie arkusza CUE"
+msgstr "Wyodrębnianie arkusza cue"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:184
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Cue sheet files"
-msgstr "Pliki tekstowe"
+msgstr "Pliki arkuszy cue"
 
 #: src/common/chapters/cue_parser.cpp:392
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX entry in line %1%.\n"
-msgstr "Analizator arkusza Cue: Nieprawidłowy wpis INDEX w linii %1%.\n"
+msgstr "Analizator arkusza cue: Nieprawidłowy wpis INDEX w linii %1%.\n"
 
 #: src/common/chapters/cue_parser.cpp:411
 #, boost-format
@@ -4257,7 +4257,7 @@ msgstr "Analizator arkusza cue: Nie znaleziono żadnego wpisu INDEX dla poprzedn
 #: src/info/mkvinfo.cpp:1153
 #, boost-format
 msgid "Cue time: %|1$.3f|s"
-msgstr "Czas Cue: %|1$.3f|s"
+msgstr "Czas cue: %|1$.3f|s"
 
 #: src/info/mkvinfo.cpp:1156
 msgid "Cue track positions"
@@ -4266,11 +4266,11 @@ msgstr ""
 #: src/info/mkvinfo.cpp:1160
 #, boost-format
 msgid "Cue track: %1%"
-msgstr "Ścieżka Cue: %1%"
+msgstr "Ścieżka cue: %1%"
 
 #: src/info/mkvinfo.cpp:1136
 msgid "Cues (subentries will be skipped)"
-msgstr "Znaczniki Cue (podzespoły są pomijane)"
+msgstr "Znaczniki cue (podzespoły są pomijane)"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:117
 msgid "Current command line"
@@ -4347,7 +4347,7 @@ msgstr "Napisy DVB"
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:55
 #, no-c-format
@@ -4372,7 +4372,7 @@ msgstr "Data: %1% UTC"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:225
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
-msgstr "Dezaktywacja tego przycisku to sposób na tymczasowe wyłączenie konfiguracji bez konieczności zmiany jej parametrów."
+msgstr "Dezaktywacja tego pola wyboru to sposób na tymczasowe wyłączenie konfiguracji bez konieczności zmiany jej parametrów."
 
 #: src/common/output.cpp:140
 msgid "Debug> "
@@ -5789,7 +5789,7 @@ msgstr "Włączenie tej opcji spowoduje ustawienie flagi \"Domyślna ścieżka\"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:229
 #, no-c-format
 msgid "If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."
-msgstr "Włączenie tej opcji spowoduje automatyczne przełączanie do narzędzia \"Postęp zadań\" za każdym razem, gdy rozpoczniesz zadanie (np. naciskając przycisk \"Rozpocznij multipleksowanie\")."
+msgstr "Włączenie tej opcji spowoduje automatyczne przełączanie do sekcji \"Postęp zadań\" za każdym razem, gdy rozpoczniesz zadanie (np. naciskając przycisk \"Rozpocznij multipleksowanie\")."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:231
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:232
@@ -5805,7 +5805,7 @@ msgstr "Po zaznaczeniu, pole edycyjne pliku docelowego zawsze będzie widoczne p
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:228
 #, no-c-format
 msgid "If enabled the first tab in the \"job output\" tool will not be cleared when a new job starts."
-msgstr "Włączenie tej opcji spowoduje, że pierwsza karta w narzędziu \"Postęp zadań\" nie będzie czyszczona przy starcie nowego zadania."
+msgstr "Włączenie tej opcji spowoduje, że pierwsza karta w sekcji \"Postęp zadań\" nie będzie czyszczona przy starcie nowego zadania."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:245
 #, no-c-format
@@ -6078,7 +6078,7 @@ msgstr "Nieprawidłowy znak UTF-8. Pierwszy bajt: 0x%|1$02x|"
 #: src/input/r_avi.cpp:591
 #: src/input/r_avi.cpp:608
 msgid "Invalid Vorbis headers in AVI audio track."
-msgstr "Nieprawidłowe nagłowki Vorbis w ścieżce dźwiękowej w AVI."
+msgstr "Nieprawidłowe nagłówki Vorbis w ścieżce audio w AVI."
 
 #: src/extract/extract_cli_parser.cpp:251
 #, boost-format
@@ -9286,9 +9286,9 @@ msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "Ta opcja mówi mkvmerge, aby nie zapisywać tagów ze statystykami dla każdej ze ścieżek."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
-msgstr "Powoduje, że mkvmerge nie zapisuje elementów \"CueDuration\" w indeksie cue."
+msgstr "Mówi mkvmerge, aby nie zapisywać pola \"data\" w nagłówkach informacji o segmencie."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
@@ -9622,12 +9622,12 @@ msgstr "Wpisy cue (indeks) są obecnie zapisywane...\n"
 #: src/extract/tracks.cpp:296
 #, boost-format
 msgid "The cue sheet for track %1% will be written to '%2%'.\n"
-msgstr "Arkusz CUE dla ścieżki %1% zostanie zapisany do \"%2%\".\n"
+msgstr "Arkusz cue dla ścieżki %1% zostanie zapisany do \"%2%\".\n"
 
 #: src/extract/cues.cpp:58
 #, boost-format
 msgid "The cues for track %1% are written to '%2%'.\n"
-msgstr "Indeks CUE ścieżki %1% zostanie zapisany do \"%2%\".\n"
+msgstr "Indeks cue dla ścieżki %1% zostanie zapisany do \"%2%\".\n"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:50
 msgid "The current mode can be changed with --multiplex, --edit-chapters or --edit-headers."
@@ -9644,9 +9644,8 @@ msgstr "Obecny pakiet kodów czasowych jest mniejszy od poprzedniego. To przewa�
 
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
-#, fuzzy
 msgid "The date the file was created."
-msgstr "Plik z opcjami multipleksowania został utworzony."
+msgstr "Data utworzenia pliku."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 #, no-c-format
@@ -10147,7 +10146,7 @@ msgstr "Ostatnim kodem czasowym, zanim napotkano błąd, był %1%.\n"
 
 #: src/propedit/change.cpp:226
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
-msgstr ""
+msgstr "Litera \"Z\" może być użyta zamiast przesunięcia strefy czasowej od UTC do oznaczenia UTC, znanego również jako czas Zulu."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:332
 #, no-c-format
@@ -10386,9 +10385,9 @@ msgid "The property value is not a valid boolean in '%1%'. %2%\n"
 msgstr "Wartość właściwości nie jest prawidłową wartością logiczną w \"%1%\". %2%\n"
 
 #: src/propedit/change.cpp:224
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid date & time string in '%1%'."
-msgstr "Wartość właściwości nie jest prawidłową liczbą o dowolnym znaku w \"%1%\". %2%\n"
+msgstr "Wartość właściwości nie jest prawidłowym ciągiem daty i czasu w \"%1%\"."
 
 #: src/propedit/change.cpp:152
 #, boost-format
@@ -10411,7 +10410,7 @@ msgstr "Przyczyna jest nieznana."
 
 #: src/propedit/change.cpp:225
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
-msgstr ""
+msgstr "Rozpoznawany format to \"RRRR-mm-ddTGG:MM:SS+zz:zz\": rok, miesiąc, dzień, litera \"T\", godziny, minuty, sekundy i przesunięcie strefy czasowej od UTC; przykład: 2017-03-28T17:28-02:00."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "The rest is copied as is."
@@ -10842,7 +10841,7 @@ msgstr "Ten element nie jest obecny w pliku."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
-msgstr ""
+msgstr "To pole jest standardowo ustawione dla daty utworzenia pliku."
 
 #: src/input/subtitles.cpp:167
 msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
@@ -11382,7 +11381,7 @@ msgstr "Nieznany"
 #: src/input/r_ogm.cpp:553
 #, boost-format
 msgid "Unknown audio stream type 0x%|1$04x|. Stream ID %2% will be ignored.\n"
-msgstr "Nieznany rodzaj ścieżki dźwiękowej 0x%|1$04x|. Ścieżka o ID %2% zostanie pominięta.\n"
+msgstr "Nieznany rodzaj ścieżki audio 0x%|1$04x|. Ścieżka o ID %2% zostanie pominięta.\n"
 
 #: src/common/chapters/chapters.cpp:369
 #, boost-format
@@ -12115,7 +12114,7 @@ msgstr "[%1% klatka ścieżki %2%, kod czasowy %3%]"
 
 #: src/output/p_ac3.cpp:242
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
-msgstr "ac3_bs_packetizer::add_to_buffer(): Nietestowany kod (\"size\" jest nieparzysty). Jeśli mkvmerge ulegnie awarii lub plik wynikowy nie będzie zawierał kompletnej i prawidłowej ścieżki dźwiękowej, proszę skontaktuj się z autorem: Moritz Bunkus at moritz@bunkus.org.\n"
+msgstr "ac3_bs_packetizer::add_to_buffer(): Nietestowany kod (\"size\" jest nieparzysty). Jeśli mkvmerge ulegnie awarii lub plik wynikowy nie będzie zawierał kompletnej i prawidłowej ścieżki audio, proszę skontaktować się z autorem: Moritz Bunkus at moritz@bunkus.org.\n"
 
 #: src/common/stereo_mode.cpp:59
 msgid "anaglyph (cyan/red)"
@@ -12547,7 +12546,7 @@ msgstr "mkvmerge potrafi tworzyć rozdziały automatycznie."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:192
 msgid "mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."
-msgstr "mkvmerge potrafi czytać arkusze CUE dla AudioCD i automatycznie konwertować je do rozdziałów."
+msgstr "mkvmerge potrafi czytać arkusze cue dla AudioCD i automatycznie konwertować je do rozdziałów."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:140
 #, no-c-format
