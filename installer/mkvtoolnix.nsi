@@ -241,9 +241,6 @@ Section "Program files" SEC01
   ${registerExtension} "$INSTDIR\mkvtoolnix-gui.exe" ".mtxcfg" "MKVToolNix GUI Settings"
 
   SetOutPath "$INSTDIR"
-  IfSilent +3 0
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(STRING_SHORTCUT_ON_DESKTOP)" IDNO +2
-  CreateShortCut "$DESKTOP\MKVToolNix GUI.lnk" "$INSTDIR\mkvtoolnix-gui.exe" "" "$INSTDIR\mkvtoolnix-gui.exe"
 SectionEnd
 
 Section -AdditionalIcons
