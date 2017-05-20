@@ -1,6 +1,8 @@
 !define LANG "Dutch"
 
 # The next entry needs translations:
+!insertmacro LANG_STRING STRING_EXT_LINKS_INTRO "If you need a GUI for mkvextract then give these projects a try:"
+# The next entry needs translations:
 !insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Continue with installation anyway"
 # The next entry needs translations:
 !insertmacro LANG_STRING STRING_MFF_MORE_INFORMATION "More information"
