@@ -1,4 +1,4 @@
-!define LANG "English"
+!define LANG "Korean"
 
 # The next entry needs translations:
 !insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Continue with installation anyway"
