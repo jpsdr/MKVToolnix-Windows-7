@@ -52,7 +52,7 @@ function update_news {
     exit 1
   fi
 
-  perl -pi -e "s{^# Version \\?\$}{\\Q${message}\\E}" NEWS.md
+  perl -pi -e "s{^# Version \\?\$}{${message}}" NEWS.md
 }
 
 function update_spec {
@@ -76,7 +76,7 @@ function update_files {
   perl -pi -e 's/^MKVToolNix '$FROM'$/MKVToolNix '$TO'/' README.md
   perl -pi -e 's/^Building MKVToolNix [0-9.]+/Building MKVToolNix '$TO'/i' README.Windows.md
   perl -pi -e 's/define PRODUCT_VERSION \"'$FROM'\"/define PRODUCT_VERSION \"'$TO_NSI'\"/' installer/mkvtoolnix.nsi
-  perl -pi -e 's{#define VERSIONNAME.*}{#define VERSIONNAME "\Q'${CODENAME}'\E"}' src/common/version.cpp
+  perl -pi -e "s{#define VERSIONNAME.*}{#define VERSIONNAME \"${CODENAME}\"}" src/common/version.cpp
 }
 
 function update_docs {
