@@ -16,6 +16,7 @@ SetCompressorDictSize 64
 
 !include "MUI2.nsh"
 !include "file_association.nsh"
+!include "nsDialogs.nsh"
 
 # MUI Settings
 !define MUI_ABORTWARNING
@@ -45,7 +46,16 @@ var ICONS_GROUP
 !define MUI_WELCOMEFINISHPAGE_BITMAP "welcome_finish_page.bmp"
 !define MUI_WELCOMEPAGE_TITLE_3LINES
 
+# Variables for custom dialogs
+Var Dialog
+Var Label1
+Var Link1
+Var Link2
+Var CheckBox1
+Var CheckBox1_State
+
 !insertmacro MUI_PAGE_WELCOME
+Page custom mediaFoundationFrameworkCheck mediaFoundationFrameworkCheckLeave
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_STARTMENU Application $ICONS_GROUP
 !insertmacro MUI_PAGE_INSTFILES
@@ -261,6 +271,47 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
+
+Function mediaFoundationFrameworkCheck
+  IfFileExists $SYSDIR\evr.dll 0 +2
+  Return
+
+  IfSilent 0 +2
+  Quit
+
+  nsDialogs::Create 1018
+  Pop $Dialog
+
+  ${If} $Dialog == error
+    Abort
+  ${EndIf}
+
+  ${NSD_CreateLabel} 0 0 100% 32u "$(STRING_MFF_NOT_FOUND)"
+  Pop $Label1
+
+  ${NSD_CreateLink} 0 32u 100% 16u "$(STRING_MFF_MORE_INFORMATION)"
+  Pop $Link1
+
+  ${NSD_CreateCheckBox} 0 48u 100% 16u "$(STRING_MFF_CONTINUE_ANYWAY)"
+  Pop $CheckBox1
+
+  ${NSD_OnClick} $Link1 onClickMediaFoundationMoreInformation
+
+  nsDialogs::Show
+FunctionEnd
+
+Function mediaFoundationFrameworkCheckLeave
+  ${NSD_GetState} $CheckBox1 $CheckBox1_State
+
+  ${If} $CheckBox1_State == ${BST_UNCHECKED}
+    Quit
+  ${EndIf}
+FunctionEnd
+
+Function onClickMediaFoundationMoreInformation
+  Pop $0
+  ExecShell "open" "https://github.com/mbunkus/mkvtoolnix/wiki/DLLs-not-found"
+FunctionEnd
 
 Function showExternalLinks
   IfSilent +4 0
