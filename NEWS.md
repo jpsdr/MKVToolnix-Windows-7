@@ -33,8 +33,6 @@
   AAC parser to use the multiplex mode that the MPEG TS reader has detected
   (e.g. LOAS/LATM). This prevents the AAC packetizer from mis-detecting it in
   its own attempt to identify the mode. Fixes #1957.
-* configure: fixed configure aborting if a `moc`, `uic`, `rcc` or `qmake`
-  binary is found, but the binary's version is too old. Fixes #1979.
 * mkvmerge: MPEG TS reader: valid MPEG transport streams that start with an
   h.264/h.265 start code (e.g. a file created by cutting at an arbitrary
   position) were not recognized as a supported file type.
@@ -49,6 +47,8 @@
   one.
 * mkvmerge: MP4 reader: the `nclx` colour type of the `colr` atom is now
   recognized, too (as defined by ISO/IEC 14496-12, "ISO base media format").
+* configure: fixed configure aborting if a `moc`, `uic`, `rcc` or `qmake`
+  binary is found, but the binary's version is too old. Fixes #1979.
 
 
 # Version 11.0.0 "Alive" 2017-04-22
