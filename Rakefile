@@ -537,7 +537,9 @@ EOT
     end
 
     desc "Update the Windows installer's translation files"
-    task :installer { |t| Mtx::Installer.update_all_translation_files }
+    task :installer do |t|
+      Mtx::Installer.update_all_translation_files
+    end
   end
 
   namespace :transifex do
