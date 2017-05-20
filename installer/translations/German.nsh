@@ -4,6 +4,6 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Sollen die durch das GUI erstellten Job-Dateien ebenfalls gelöscht werden?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # coding: windows-1252-unix
 # End:

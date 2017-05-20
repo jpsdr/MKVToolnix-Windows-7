@@ -7,5 +7,5 @@
 !insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Continue with installation anyway"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # End:

@@ -4,5 +4,5 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "GKA tarafýndan oluþturulan iþ dosyalarý da silinsin mi?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # End:

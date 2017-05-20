@@ -4,6 +4,6 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "També s'han de suprimir els fitxers de tasca creats per la IGU?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # coding: windows-1252-unix
 # End:

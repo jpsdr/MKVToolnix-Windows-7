@@ -4,5 +4,5 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Também deseja remover os arquivos de trabalho criados pela interface?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # End:

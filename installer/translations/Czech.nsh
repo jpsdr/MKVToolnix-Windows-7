@@ -4,6 +4,6 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Odstranit také soubory úloh vytvoøené uživatelským rozhraním?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # coding: windows-1250-unix
 # End:

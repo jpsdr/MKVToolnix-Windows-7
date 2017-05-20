@@ -4,6 +4,6 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Should job files created by the GUI be deleted as well?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # coding: windows-1251
 # End:

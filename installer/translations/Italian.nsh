@@ -4,6 +4,6 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Eliminare anche i file attività creati dalla GUI?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # coding: windows-1252-unix
 # End:

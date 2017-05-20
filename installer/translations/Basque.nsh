@@ -4,6 +4,6 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "EIG-k sortutako lan agiriak ere ezabatu behar dira?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # coding: windows-1252-unix
 # End:

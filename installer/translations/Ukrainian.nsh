@@ -4,6 +4,6 @@
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Чи повинні файли завдань, створені за допомогою GUI, також бути видалені?"
 
 # Local Variables:
-# mode: nsi
+# mode: nsis
 # coding: windows-1251
 # End:
