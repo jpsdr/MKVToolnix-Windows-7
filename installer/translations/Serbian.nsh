@@ -1,7 +1,15 @@
 !define LANG "Serbian"
-!insertmacro LANG_STRING STRING_UNINSTALLED_OK "„$(^Name)“ је успешно уклоњен."
-!insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "Да ли заиста желите да уклоните „$(^Name)“ и све његове компоненте?"
+
+# The next entry needs translations:
+!insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Continue with installation anyway"
+# The next entry needs translations:
+!insertmacro LANG_STRING STRING_MFF_MORE_INFORMATION "More information"
+# The next entry needs translations:
+!insertmacro LANG_STRING STRING_MFF_NOT_FOUND "Your Windows installation seems to lack Microsoft's 'Media Foundation' framework. This framework is required by MKVToolNix. Please install it and run the MKVToolNix installer again."
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Да ли да уклоним и датотеке са радњама створеним у граф. програмском сучељу?"
+!insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "Да ли заиста желите да уклоните „$(^Name)“ и све његове компоненте?"
+!insertmacro LANG_STRING STRING_UNINSTALLED_OK "„$(^Name)“ је успешно уклоњен."
+
 # Local Variables:
 # mode: nsis
 # coding: windows-1251-unix
