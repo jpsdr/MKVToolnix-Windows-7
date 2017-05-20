@@ -18,7 +18,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Alive"
+#define VERSIONNAME "Trust / Lust"
 
 version_number_t::version_number_t()
 {

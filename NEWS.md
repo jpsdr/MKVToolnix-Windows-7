@@ -1,4 +1,4 @@
-# Version ?
+# Version 12.0.0 "Trust / Lust" 2017-05-20
 
 ## New features and enhancements
 
