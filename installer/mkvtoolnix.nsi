@@ -144,9 +144,6 @@ RequestExecutionLevel none
 
 Function .onInit
   !insertmacro MUI_LANGDLL_DISPLAY
-
-  InitPluginsDir
-  File /oname=$PLUGINSDIR\external_links.ini "external_links.ini"
 FunctionEnd
 
 Section "Program files" SEC01
@@ -314,10 +311,39 @@ Function onClickMediaFoundationMoreInformation
 FunctionEnd
 
 Function showExternalLinks
-  IfSilent +4 0
-  Push $R0
-  InstallOptions::dialog $PLUGINSDIR\external_links.ini
-  Pop $R0
+  IfSilent 0 +2
+  Return
+
+  nsDialogs::Create 1018
+  Pop $Dialog
+
+  ${If} $Dialog == error
+    Abort
+  ${EndIf}
+
+  ${NSD_CreateLabel} 0 0 100% 32u "$(STRING_EXT_LINKS_INTRO)"
+  Pop $Label1
+
+  ${NSD_CreateLink} 0 32u 100% 16u "gMKVExtractGUI"
+  Pop $Link1
+
+  ${NSD_CreateLink} 0 48u 100% 16u "MKVcleaver"
+  Pop $Link2
+
+  ${NSD_OnClick} $Link1 onClickExternalLinkgMKVExtractGUI
+  ${NSD_OnClick} $Link2 onClickExternalLinkMKVcleaver
+
+  nsDialogs::Show
+FunctionEnd
+
+Function onClickExternalLinkgMKVExtractGUI
+  Pop $0
+  ExecShell "open" "https://sourceforge.net/projects/gmkvextractgui/"
+FunctionEnd
+
+Function onClickExternalLinkMKVcleaver
+  Pop $0
+  ExecShell "open" "https://blogs.sapib.ca/apps/mkvcleaver/"
 FunctionEnd
 
 var unRemoveJobs

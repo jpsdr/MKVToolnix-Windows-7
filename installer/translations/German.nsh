@@ -1,5 +1,6 @@
 !define LANG "German"
 
+!insertmacro LANG_STRING STRING_EXT_LINKS_INTRO "Wenn Sie eine GUI für mkvextract benötigen, so probieren Sie doch die folgenden Projekte aus:"
 !insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Trotzdem mit Installation fortfahren"
 !insertmacro LANG_STRING STRING_MFF_MORE_INFORMATION "Mehr Informationen"
 !insertmacro LANG_STRING STRING_MFF_NOT_FOUND "Ihrer Windows-Installation scheint Microsofts 'Media Foundation'-Framework zu fehlen. MKVToolNix benötigt dieses Framework. Bitte installieren Sie es, und führen Sie anschließend die MKVToolNix-Installation erneut aus."
