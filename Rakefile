@@ -32,6 +32,9 @@ end
 
 require "pp"
 
+module Mtx
+end
+
 require_relative "rake.d/extensions"
 require_relative "rake.d/config"
 
@@ -45,6 +48,7 @@ $gtest_apps           = []
 require_relative "rake.d/helpers"
 require_relative "rake.d/target"
 require_relative "rake.d/application"
+require_relative "rake.d/installer"
 require_relative "rake.d/library"
 require_relative "rake.d/format_string_verifier"
 require_relative "rake.d/pch"
@@ -495,7 +499,7 @@ EOT
   end
 
   desc "Update all translation files"
-  task :update => [ "translations:update:programs", "translations:update:manpages" ]
+  task :update => [ "translations:update:programs", "translations:update:manpages", "translations:update:translations" ]
 
   namespace :update do
     desc "Update the program's translation files"
@@ -531,6 +535,9 @@ EOT
         end
       end
     end
+
+    desc "Update the Windows installer's translation files"
+    task :installer { |t| Mtx::Installer.update_all_translation_files }
   end
 
   namespace :transifex do
