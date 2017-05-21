@@ -57,6 +57,7 @@ char const * const playlist_duration               = "playlist_duration";       
 char const * const playlist_file                   = "playlist_file";                   // container uinstr
 char const * const playlist_size                   = "playlist_size";                   // container unsigned-integer
 char const * const previous_segment_uid            = "previous_segment_uid";            // container ascii-string format:^[0-9A-F]{32}$
+char const * const program_number                  = "program_number";                  // track unsigned-integer
 char const * const segment_uid                     = "segment_uid";                     // container ascii-string format:^[0-9A-F]{32}$
 char const * const stereo_mode                     = "stereo_mode";                     // track unsigned-integer
 char const * const stream_id                       = "stream_id";                       // track unsigned-integer
