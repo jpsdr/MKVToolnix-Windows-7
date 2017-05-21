@@ -1147,8 +1147,22 @@ reader_c::read_headers() {
 
   process_chapter_entries();
 
+  std::vector<track_ptr> identified_tracks;
+
   auto track_id = uint64_t{};
   for (auto &track : m_tracks) {
+    // For TrueHD tracks detection for embedded AC-3 frames is
+    // done. However, "probed_ok" is only set on the TrueHD track if
+    // both types have been found. If only TrueHD is found then
+    // "probed_ok" must be set to true after detection has exhausted
+    // the search space; otherwise a TrueHD-only track would never be
+    // considered OK.
+    if (track->codec.is(codec_c::type_e::A_TRUEHD) && track->m_truehd_found_truehd)
+      track->probed_ok = true;
+
+    if (!track->probed_ok || !track->codec)
+      continue;
+
     track->clear_pes_payload();
     track->processed        = false;
     track->m_id             = track_id++;
@@ -1158,15 +1172,10 @@ reader_c::read_headers() {
       if (coupled_track->language.empty())
         coupled_track->language = track->language;
 
-    // For TrueHD tracks detection for embedded AC-3 frames is
-    // done. However, "probed_ok" is only set on the TrueHD track if
-    // both types have been found. If only TrueHD is found then
-    // "probed_ok" must be set to true after detection has exhausted
-    // the search space; otherwise a TrueHD-only track would never be
-    // considered OK.
-    if (track->codec.is(codec_c::type_e::A_TRUEHD) && track->m_truehd_found_truehd)
-      track->probed_ok = true;
+    identified_tracks.push_back(track);
   }
+
+  m_tracks = std::move(identified_tracks);
 
   show_demuxer_info();
 }
@@ -1280,9 +1289,6 @@ reader_c::identify() {
   id_result_container(info.get());
 
   for (auto const &track : m_tracks) {
-    if (!track->probed_ok || !track->codec)
-      continue;
-
     info = mtx::id::info_c{};
     info.add(mtx::id::language, track->language);
     info.set(mtx::id::ts_pid,   track->pid);
@@ -2097,11 +2103,7 @@ reader_c::create_packetizers() {
 
 void
 reader_c::add_available_track_ids() {
-  size_t i;
-
-  for (i = 0; i < m_tracks.size(); i++)
-    if (m_tracks[i]->probed_ok)
-      add_available_track_id(i);
+  add_available_track_id_range(0, m_tracks.size() - 1);
 }
 
 bool
