@@ -74,6 +74,7 @@ track_c::track_c(reader_c &p_reader,
   , processed{}
   , type{p_type}
   , pid{}
+  , program_number{}
   , pes_payload_size_to_read{}
   , pes_payload_read{new byte_buffer_c}
   , probed_ok{}
@@ -1294,6 +1295,9 @@ reader_c::identify() {
     info.set(mtx::id::ts_pid,   track->pid);
     info.set(mtx::id::number,   track->pid);
 
+    if (track->program_number)
+      info.set(mtx::id::program_number, track->program_number.get());
+
     if (pid_type_e::audio == track->type) {
       info.add(mtx::id::audio_channels,           track->a_channels);
       info.add(mtx::id::audio_sampling_frequency, track->a_sample_rate);
@@ -1425,7 +1429,8 @@ reader_c::read_pmt_descriptor(mm_io_c &io) {
 }
 
 bool
-reader_c::parse_pmt_pid_info(mm_mem_io_c &mem) {
+reader_c::parse_pmt_pid_info(mm_mem_io_c &mem,
+                             uint16_t program_number) {
   auto &f                  = file();
   auto missing_tag         = true;
 
@@ -1435,6 +1440,7 @@ reader_c::parse_pmt_pid_info(mm_mem_io_c &mem) {
 
   auto track               = std::make_shared<track_c>(*this);
   track->type              = pid_type_e::unknown;
+  track->program_number    = program_number;
 
   track->set_pid(pmt_pid_info->get_pid());
   track->determine_codec_from_stream_type(pmt_pid_info->stream_type);
@@ -1513,7 +1519,8 @@ reader_c::parse_pmt(track_c &track) {
     return false;
   }
 
-  auto pmt_header = reinterpret_cast<pmt_t *>(pmt_start);
+  auto pmt_header     = reinterpret_cast<pmt_t *>(pmt_start);
+  auto program_number = get_uint16_be(&pmt_header->program_number);
 
   if (pmt_header->table_id != 0x02) {
     mxdebug_if(m_debug_pat_pmt, "Invalid PMT table_id!\n");
@@ -1572,7 +1579,7 @@ reader_c::parse_pmt(track_c &track) {
   try {
     bool ok = true;
     while (ok)
-      ok = parse_pmt_pid_info(mem);
+      ok = parse_pmt_pid_info(mem, program_number);
 
   } catch (mtx::mm_io::exception &) {
   }

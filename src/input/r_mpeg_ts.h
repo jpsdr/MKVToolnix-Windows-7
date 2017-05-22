@@ -282,6 +282,7 @@ public:
   pid_type_e type;
   codec_c codec;
   uint16_t pid;
+  boost::optional<uint16_t> program_number;
   boost::optional<int> m_ttx_wanted_page;
   std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
   byte_buffer_cptr pes_payload_read;    // buffer with the current PID payload
@@ -451,7 +452,7 @@ private:
 
   bool parse_pat(track_c &track);
   bool parse_pmt(track_c &track);
-  bool parse_pmt_pid_info(mm_mem_io_c &mem);
+  bool parse_pmt_pid_info(mm_mem_io_c &mem, uint16_t program_number);
   void parse_pes(track_c &track);
   void probe_packet_complete(track_c &track);
   int determine_track_parameters(track_c &track);
