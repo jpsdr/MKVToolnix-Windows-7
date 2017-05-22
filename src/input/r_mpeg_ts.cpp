@@ -928,7 +928,8 @@ track_c::reset_processing_state() {
 file_t::file_t(mm_io_cptr const &in)
   : m_in{in}
   , m_pat_found{}
-  , m_pmt_found{}
+  , m_num_pmts_found{}
+  , m_num_pmts_to_find{}
   , m_es_to_process{}
   , m_stream_timestamp{timestamp_c::ns(0)}
   , m_timestamp_mpls_sync{timestamp_c::ns(0)}
@@ -961,6 +962,12 @@ file_t::reset_processing_state(processing_state_e new_state) {
   m_state = new_state;
   m_last_non_subtitle_pts.reset();
   m_last_non_subtitle_dts.reset();
+}
+
+bool
+file_t::all_pmts_found()
+  const {
+  return (0 != m_num_pmts_to_find) && (m_num_pmts_found >= m_num_pmts_to_find);
 }
 
 // ------------------------------------------------------------
@@ -1085,7 +1092,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
       parse_packet(buf);
 
       if (   f.m_pat_found
-          && f.m_pmt_found
+          && f.all_pmts_found()
           && (0 == f.m_es_to_process)
           && (f.m_in->getFilePointer() >= min_size_to_probe))
         break;
@@ -1099,13 +1106,13 @@ reader_c::read_headers_for_file(std::size_t file_num) {
       // we should read from the start again, this time ignoring the
       // errors for the specific type.
       mxdebug_if(m_debug_headers,
-                 boost::format("read_headers: EOF during detection. #tracks %1% #PAT CRC errors %2% #PMT CRC errors %3% PAT found %4% PMT found %5%\n")
-                 % m_tracks.size() % f.m_num_pat_crc_errors % f.m_num_pmt_crc_errors % f.m_pat_found % f.m_pmt_found);
+                 boost::format("read_headers: EOF during detection. #tracks %1% #PAT CRC errors %2% #PMT CRC errors %3% PAT found %4% PMT found %5%/%6%\n")
+                 % m_tracks.size() % f.m_num_pat_crc_errors % f.m_num_pmt_crc_errors % f.m_pat_found % f.m_num_pmts_found % f.m_num_pmts_to_find);
 
       if (!f.m_pat_found && f.m_validate_pat_crc)
         f.m_validate_pat_crc = false;
 
-      else if (f.m_pat_found && !f.m_pmt_found && f.m_validate_pmt_crc) {
+      else if (f.m_pat_found && !f.all_pmts_found() && f.m_validate_pmt_crc) {
         f.m_validate_pmt_crc = false;
         f.m_pmt_pid_seen.clear();
 
@@ -1398,11 +1405,14 @@ reader_c::parse_pat(track_c &track) {
     f.m_ignored_pids[tmp_pid] = true;
     f.m_pmt_pid_seen[tmp_pid] = true;
     f.m_pat_found             = true;
+    ++f.m_num_pmts_to_find;
 
     pmt->set_pid(tmp_pid);
 
     m_tracks.push_back(pmt);
   }
+
+  mxdebug_if(m_debug_pat_pmt, boost::format("parse_pat: number of PMTs to find: %1%\n") % f.m_num_pmts_to_find);
 
   return true;
 }
@@ -1481,7 +1491,6 @@ reader_c::parse_pmt_pid_info(mm_mem_io_c &mem,
   }
 
   if (track->type != pid_type_e::unknown) {
-    f.m_pmt_found    = true;
     track->processed = false;
     m_tracks.push_back(track);
     ++f.m_es_to_process;
@@ -1576,6 +1585,15 @@ reader_c::parse_pmt(track_c &track) {
   }
 
   f.m_ignored_pids[track.pid] = true;
+
+  ++f.m_num_pmts_found;
+
+  mxdebug_if(m_debug_pat_pmt,
+             boost::format("parse_pmt: %1% num PMTs found %2% vs. to find %3%\n")
+             % (  f.m_num_pmts_found  < f.m_num_pmts_to_find ? "find_ongoing"
+                : f.m_num_pmts_found == f.m_num_pmts_to_find ? "find_done"
+                :                                              "find_error")
+             % f.m_num_pmts_found % f.m_num_pmts_to_find);
 
   return true;
 }
@@ -1703,7 +1721,7 @@ reader_c::handle_packet_for_pid_not_listed_in_pmt(uint16_t pid) {
   if (   (f.m_state != processing_state_e::probing)
       || f.m_ignored_pids[pid]
       || !f.m_pat_found
-      || !f.m_pmt_found)
+      || !f.all_pmts_found())
     return {};
 
   mxdebug_if(m_debug_pat_pmt, boost::format("found packet for track PID %1% not listed in PMT, attempting type detection by content\n") % pid);

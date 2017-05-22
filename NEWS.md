@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: MPEG TS reader: fixed mkvmerge not detecting all tracks in MPEG
+  transport streams containing multiple programs. Fixes one part of #1990.
+* mkvmerge: MPEG TS reader: fixed track content being broken for some tracks
+  read from MPEG transport streams containing multiple programs. Fixes another
+  part of #1990.
+
+
 # Version 12.0.0 "Trust / Lust" 2017-05-20
 
 ## New features and enhancements

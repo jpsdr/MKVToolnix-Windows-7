@@ -383,7 +383,8 @@ struct file_t {
   std::unordered_map<uint16_t, bool> m_ignored_pids, m_pmt_pid_seen;
   std::vector<generic_packetizer_c *> m_packetizers;
 
-  bool m_pat_found, m_pmt_found;
+  bool m_pat_found;
+  unsigned int m_num_pmts_found, m_num_pmts_to_find;
   int m_es_to_process;
   timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_timestamp_restriction_min, m_timestamp_restriction_max, m_timestamp_mpls_sync, m_last_non_subtitle_pts, m_last_non_subtitle_dts;
 
@@ -399,6 +400,7 @@ struct file_t {
 
   int64_t get_queued_bytes() const;
   void reset_processing_state(processing_state_e new_state);
+  bool all_pmts_found() const;
 };
 using file_cptr = std::shared_ptr<file_t>;
 
