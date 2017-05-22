@@ -380,7 +380,7 @@ struct file_t {
   mm_io_cptr m_in;
 
   std::unordered_map<uint16_t, track_ptr> m_pid_to_track_map;
-  std::unordered_map<uint16_t, bool> m_ignored_pids;
+  std::unordered_map<uint16_t, bool> m_ignored_pids, m_pmt_pid_seen;
   std::vector<generic_packetizer_c *> m_packetizers;
 
   bool m_pat_found, m_pmt_found;

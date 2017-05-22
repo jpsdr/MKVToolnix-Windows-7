@@ -1105,10 +1105,11 @@ reader_c::read_headers_for_file(std::size_t file_num) {
       if (!f.m_pat_found && f.m_validate_pat_crc)
         f.m_validate_pat_crc = false;
 
-      else if (f.m_pat_found && !f.m_pmt_found && f.m_validate_pmt_crc)
+      else if (f.m_pat_found && !f.m_pmt_found && f.m_validate_pmt_crc) {
         f.m_validate_pmt_crc = false;
+        f.m_pmt_pid_seen.clear();
 
-      else
+      } else
         break;
 
       f.m_in->setFilePointer(0);
@@ -1389,28 +1390,18 @@ reader_c::parse_pat(track_c &track) {
                % (0 == local_program_number ? "nit" : "pmt")
                % tmp_pid);
 
-    if (0 != local_program_number) {
-      f.m_pat_found = true;
+    if (!local_program_number || f.m_pmt_pid_seen[tmp_pid])
+      continue;
 
-      bool skip = false;
-      for (uint16_t i = 0; i < m_tracks.size(); i++) {
-        if (m_tracks[i]->pid == tmp_pid) {
-          skip = true;
-          break;
-        }
-      }
+    auto pmt                  = std::make_shared<track_c>(*this, pid_type_e::pmt);
+    f.m_es_to_process         = 0;
+    f.m_ignored_pids[tmp_pid] = true;
+    f.m_pmt_pid_seen[tmp_pid] = true;
+    f.m_pat_found             = true;
 
-      if (skip == true)
-        continue;
+    pmt->set_pid(tmp_pid);
 
-      auto pmt                  = std::make_shared<track_c>(*this, pid_type_e::pmt);
-      f.m_es_to_process         = 0;
-      f.m_ignored_pids[tmp_pid] = true;
-
-      pmt->set_pid(tmp_pid);
-
-      m_tracks.push_back(pmt);
-    }
+    m_tracks.push_back(pmt);
   }
 
   return true;
