@@ -3,12 +3,14 @@
   "id": "https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v7.json",
   "title": "mkvmerge identification output",
   "description": "The JSON output produced by mkvmerge's file identification mode",
+  "additionalProperties": false,
   "type": "object",
   "properties": {
     "attachments": {
       "description": "an array describing the attachments found if any",
       "type": "array",
       "items": {
+        "additionalProperties": false,
         "type": "object",
         "properties": {
           "content_type": {
@@ -30,6 +32,7 @@
             "minimum": 0
           },
           "properties": {
+            "additionalProperties": false,
             "type": "object",
             "properties": {
               "uid": {
@@ -55,6 +58,7 @@
     "chapters": {
       "type": "array",
       "items": {
+        "additionalProperties": false,
         "type": "object",
         "properties": {
           "num_entries": {
@@ -68,10 +72,12 @@
       }
     },
     "container": {
+      "additionalProperties": false,
       "description": "information about the identified container",
       "type": "object",
       "properties": {
         "properties": {
+          "additionalProperties": false,
           "description": "additional properties for the container varying by container format",
           "type": "object",
           "properties": {
@@ -222,6 +228,7 @@
     "global_tags": {
       "type": "array",
       "items": {
+        "additionalProperties": false,
         "type": "object",
         "properties": {
           "num_entries": {
@@ -243,6 +250,7 @@
     "track_tags": {
       "type": "array",
       "items": {
+        "additionalProperties": false,
         "type": "object",
         "properties": {
           "num_entries": {
@@ -262,6 +270,7 @@
     "tracks": {
       "type": "array",
       "items": {
+        "additionalProperties": false,
         "type": "object",
         "properties": {
           "codec": {
@@ -276,6 +285,7 @@
             "type": "string"
           },
           "properties": {
+            "additionalProperties": false,
             "type": "object",
             "properties": {
               "aac_is_sbr": {
