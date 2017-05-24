@@ -148,6 +148,30 @@
               "minLength": 32,
               "maxLength": 32
             },
+            "programs": {
+              "description": "A container describing multiple programs multiplexed into the source file, e.g. multiple programs in one DVB transport stream",
+              "type": "array",
+              "items": {
+                "additionalProperties": false,
+                "description": "Properties describing a single program",
+                "type": "object",
+                "properties": {
+                  "program_number": {
+                    "description": "A unique number identifying a set of tracks that belong together; used e.g. in DVB for multiplexing multiple stations within a single transport stream",
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "service_name": {
+                    "description": "The name of a service provided by this program, e.g. a TV channel name such as 'arte HD'",
+                    "type": "string"
+                  },
+                  "service_provider": {
+                    "description": "The name of the provider of the service provided by this program, e.g. a TV station name such as 'ARD'",
+                    "type": "string"
+                  }
+                }
+              }
+            },
             "segment_uid": {
               "description": "A hexadecimal string of the segment's UID (only for Matroska files)",
               "type": "string",
@@ -337,6 +361,7 @@
                 "pattern": "^[0-9]+x[0-9]+$"
               },
               "program_number": {
+                "description": "A unique number identifying a set of tracks that belong together; used e.g. in DVB for multiplexing multiple stations within a single transport stream",
                 "type": "integer",
                 "minimum": 0
               },
