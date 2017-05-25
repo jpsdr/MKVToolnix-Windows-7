@@ -60,6 +60,11 @@
 #define TS_PACKET_SIZE     188
 #define TS_MAX_PACKET_SIZE 204
 
+#define TS_PAT_PID         0x0000
+#define TS_SDT_PID         0x0011
+
+#define TS_SDT_TID         0x42
+
 namespace mtx { namespace mpeg_ts {
 
 int reader_c::potential_packet_sizes[] = { 188, 192, 204, 0 };
@@ -1039,6 +1044,7 @@ reader_c::reader_c(const track_info_c &ti,
   , m_dont_use_audio_pts{      "mpeg_ts|dont_use_audio_pts"}
   , m_debug_resync{            "mpeg_ts|resync"}
   , m_debug_pat_pmt{           "mpeg_ts|pat|pmt|headers"}
+  , m_debug_sdt{               "mpeg_ts|sdt|headers"}
   , m_debug_headers{           "mpeg_ts|headers"}
   , m_debug_packet{            "mpeg_ts|packet"}
   , m_debug_aac{               "mpeg_ts|mpeg_aac"}
@@ -1057,11 +1063,24 @@ reader_c::reader_c(const track_info_c &ti,
 }
 
 void
+reader_c::setup_initial_tracks() {
+  m_tracks.clear();
+
+  m_tracks.push_back(std::make_shared<track_c>(*this, pid_type_e::pat));
+  m_tracks.push_back(std::make_shared<track_c>(*this, pid_type_e::sdt));
+  m_tracks.back()->set_pid(TS_SDT_PID);
+
+  auto &f                      = file();
+  f.m_ignored_pids[TS_PAT_PID] = true;
+  f.m_ignored_pids[TS_SDT_PID] = true;
+}
+
+void
 reader_c::read_headers_for_file(std::size_t file_num) {
   m_current_file = file_num;
   auto &f        = file();
 
-  m_tracks.clear();
+  setup_initial_tracks();
 
   try {
     auto file_size           = f.m_in->get_size();
@@ -1069,13 +1088,10 @@ reader_c::read_headers_for_file(std::size_t file_num) {
     auto size_to_probe       = std::min<uint64_t>(file_size,     f.m_probe_range);
     auto min_size_to_probe   = std::min<uint64_t>(size_to_probe, 5 * 1024 * 1024);
     f.m_detected_packet_size = detect_packet_size(f.m_in.get(), size_to_probe);
-    f.m_ignored_pids[0]      = true; // PAT
 
     f.m_in->setFilePointer(0);
 
     mxdebug_if(m_debug_headers, boost::format("read_headers: Starting to build PID list. (packet size: %1%)\n") % f.m_detected_packet_size);
-
-    m_tracks.push_back(std::make_shared<track_c>(*this, pid_type_e::pat));
 
     unsigned char buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
 
@@ -1122,8 +1138,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
       f.m_in->setFilePointer(0);
       f.m_in->clear_eof();
 
-      m_tracks.clear();
-      m_tracks.push_back(std::make_shared<track_c>(*this, pid_type_e::pat));
+      setup_initial_tracks();
     }
   } catch (...) {
     mxdebug_if(m_debug_headers, boost::format("read_headers: caught exception\n"));
@@ -1289,11 +1304,35 @@ reader_c::add_multiplexed_ids(std::vector<uint64_t> &multiplexed_ids,
 }
 
 void
+reader_c::add_programs_to_identification_info(mtx::id::info_c &info) {
+  if (m_files[0]->m_programs.empty())
+    return;
+
+  brng::sort(m_files[0]->m_programs);
+
+  auto programs_json = nlohmann::json::array();
+
+  for (auto &program : m_files[0]->m_programs) {
+    auto program_json = nlohmann::json{
+      { mtx::id::program_number,   program.program_number },
+      { mtx::id::service_provider, program.service_provider },
+      { mtx::id::service_name,     program.service_name },
+    };
+
+    programs_json.push_back(program_json);
+  }
+
+  info.add(mtx::id::programs, programs_json);
+}
+
+void
 reader_c::identify() {
   auto info    = mtx::id::info_c{};
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
   if (mpls_in)
     mpls_in->create_verbose_identification_info(info);
+
+  add_programs_to_identification_info(info);
 
   id_result_container(info.get());
 
@@ -1598,6 +1637,147 @@ reader_c::parse_pmt(track_c &track) {
   return true;
 }
 
+charset_converter_cptr
+reader_c::get_charset_converter_for_coding_type(unsigned int coding) {
+  static std::unordered_map<unsigned int, std::string> coding_names;
+
+  if (coding_names.empty()) {
+    coding_names[0x00]     = "ISO6937";
+    coding_names[0x01]     = "ISO8859-5";
+    coding_names[0x02]     = "ISO8859-6";
+    coding_names[0x03]     = "ISO8859-7";
+    coding_names[0x04]     = "ISO8859-8";
+    coding_names[0x05]     = "ISO8859-9";
+    coding_names[0x06]     = "ISO8859-10";
+    coding_names[0x07]     = "ISO8859-11";
+    coding_names[0x09]     = "ISO8859-13";
+    coding_names[0x0a]     = "ISO8859-14";
+    coding_names[0x0b]     = "ISO8859-15";
+    coding_names[0x10]     = "ISO8859";
+    coding_names[0x13]     = "GB2312";
+    coding_names[0x14]     = "BIG5";
+    coding_names[0x100001] = "ISO8859-1";
+    coding_names[0x100002] = "ISO8859-2";
+    coding_names[0x100003] = "ISO8859-3";
+    coding_names[0x100004] = "ISO8859-4";
+    coding_names[0x100005] = "ISO8859-5";
+    coding_names[0x100006] = "ISO8859-6";
+    coding_names[0x100007] = "ISO8859-7";
+    coding_names[0x100008] = "ISO8859-8";
+    coding_names[0x100009] = "ISO8859-9";
+    coding_names[0x10000a] = "ISO8859-10";
+    coding_names[0x10000b] = "ISO8859-11";
+    coding_names[0x10000d] = "ISO8859-13";
+    coding_names[0x10000e] = "ISO8859-14";
+    coding_names[0x10000f] = "ISO8859-15";
+  }
+
+  auto coding_name = coding_names[coding];
+  if (coding_name.empty())
+    coding_name = "UTF-8";
+
+  auto converter = charset_converter_c::init(coding_name);
+  return converter ? converter : charset_converter_c::init("UTF-8");
+}
+
+std::string
+reader_c::read_descriptor_string(bit_reader_c &r) {
+  auto str_length = r.get_bits(8);
+  if (!str_length)
+    return {};
+
+  std::string content(str_length, ' ');
+
+  r.get_bytes(reinterpret_cast<unsigned char *>(&content[0]), str_length);
+
+  auto coding = static_cast<unsigned int>(content[0]);
+
+  if (coding >= 0x20)
+    coding = 0x00;
+
+  else if (coding == 0x10) {
+    if (str_length < 4)
+      return {};
+
+    coding = 0x100000 | get_uint16_be(&content[1]);
+    content.erase(0, 3);
+
+  } else if (coding == 0x1f) {
+    if (str_length < 3)
+      return {};
+
+    coding = 0x1f00 | static_cast<unsigned char>(content[1]);
+    content.erase(0, 2);
+
+  } else
+    content.erase(0, 1);
+
+  return get_charset_converter_for_coding_type(coding)->utf8(content);
+}
+
+void
+reader_c::parse_sdt_service_desciptor(bit_reader_c &r,
+                                      uint16_t program_number) {
+  r.skip_bits(8);               // service_type
+
+  auto service_provider = read_descriptor_string(r);
+  auto service_name     = read_descriptor_string(r);
+
+  mxdebug_if(m_debug_sdt, boost::format("parse_sdt: program_number %1% service_provider %2% service_name %3%\n") % program_number % service_provider % service_name);
+
+  file().m_programs.push_back({ program_number, service_provider, service_name });
+}
+
+bool
+reader_c::parse_sdt(track_c &track) {
+  if (!track.pes_payload_read->get_size())
+    return false;
+
+  at_scope_exit_c finally{[&track]() { track.clear_pes_payload(); }};
+
+  try {
+    bit_reader_c r{track.pes_payload_read->get_buffer(), track.pes_payload_read->get_size()};
+
+    if (r.get_bits(8) != TS_SDT_TID)
+      return false;
+
+    r.skip_bits(1 + 1 + 2       // section_syntax_indicator, reserved_for_future_use, reserved
+                + 12 + 16       // section_length, transport_stream_id
+                + 2 + 5 + 1     // reserved, version_number, current_next_indicator
+                + 8 + 8         // section_number, last_section_number
+                + 16 + 8);      // original_network_id, reserved_future_use
+
+    while (r.get_remaining_bits() > 32) { // only CRC_32
+      auto program_number = r.get_bits(16);
+
+      r.skip_bits(6 + 1 + 1     // reserved_future_use, EIT_schedule_flag, EIT_Present_following_flag
+                  + 3 + 1);     // running_status, free_CA_mode
+
+      auto descriptors_loop_end_bits = r.get_bit_position() + 12 + r.get_bits(12) * 8;
+
+      while ((r.get_bit_position() + 16u) < descriptors_loop_end_bits) {
+        auto start   = r.get_bit_position();
+        auto tag     = r.get_bits(8);
+        auto length  = r.get_bits(8);
+
+        if ((start + 8 * (2 + length)) > descriptors_loop_end_bits)
+          break;
+
+        if (tag == 0x48)
+          parse_sdt_service_desciptor(r, program_number);
+
+        r.set_bit_position(start + 8 * (2 + length));
+      }
+    }
+
+  } catch (mtx::mm_io::exception &) {
+    mxdebug_if(m_debug_sdt, boost::format("parse_sdt: exception during SDT parsing\n"));
+    return false;
+  }
+
+  return true;
+}
+
 void
 reader_c::parse_pes(track_c &track) {
   at_scope_exit_c finally{[&track]() { track.clear_pes_payload(); }};
@@ -1760,7 +1940,7 @@ reader_c::handle_ts_payload(track_c &track,
                             packet_header_t &ts_header,
                             unsigned char *ts_payload,
                             std::size_t ts_payload_size) {
-  if (mtx::included_in(track.type, pid_type_e::pat, pid_type_e::pmt))
+  if (mtx::included_in(track.type, pid_type_e::pat, pid_type_e::pmt, pid_type_e::sdt))
     handle_pat_pmt_payload(track, ts_header, ts_payload, ts_payload_size);
 
   else if (mtx::included_in(track.type, pid_type_e::video, pid_type_e::audio, pid_type_e::subtitles, pid_type_e::unknown))
@@ -1864,6 +2044,9 @@ reader_c::determine_track_parameters(track_c &track) {
 
   else if (track.type == pid_type_e::pmt)
     return parse_pmt(track) ? 0 : -1;
+
+  else if (track.type == pid_type_e::sdt)
+    return parse_sdt(track) ? 0 : -1;
 
   else if (track.type == pid_type_e::unknown)
     determine_track_type_by_pes_content(track);

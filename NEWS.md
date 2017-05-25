@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: MPEG TS reader: information about multiple programs will be output
+  as container properties during verbose/JSON identification. See #1990 for
+  the use case.
+
 ## Bug fixes
 
 * mkvmerge: MPEG TS reader: fixed mkvmerge not detecting all tracks in MPEG

@@ -40,12 +40,13 @@ enum class processing_state_e {
 };
 
 enum class pid_type_e {
-  pat       = 0,
-  pmt       = 1,
-  video     = 2,
-  audio     = 3,
-  subtitles = 4,
-  unknown   = 5,
+  pat,
+  pmt,
+  sdt,
+  video,
+  audio,
+  subtitles,
+  unknown,
 };
 
 enum class stream_type_e : unsigned char {
@@ -267,6 +268,15 @@ struct PACKED_STRUCTURE pes_header_t {
 #pragma pack(pop)
 #endif
 
+struct program_t {
+  uint16_t program_number;
+  std::string service_provider, service_name;
+
+  bool operator<(program_t &other) const {
+    return program_number < other.program_number;
+  };
+};
+
 class reader_c;
 
 class track_c;
@@ -382,6 +392,7 @@ struct file_t {
   std::unordered_map<uint16_t, track_ptr> m_pid_to_track_map;
   std::unordered_map<uint16_t, bool> m_ignored_pids, m_pmt_pid_seen;
   std::vector<generic_packetizer_c *> m_packetizers;
+  std::vector<program_t> m_programs;
 
   bool m_pat_found;
   unsigned int m_num_pmts_found, m_num_pmts_to_find;
@@ -414,7 +425,7 @@ protected:
 
   std::vector<timestamp_c> m_chapter_timestamps;
 
-  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi, m_debug_mpls;
+  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_sdt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi, m_debug_mpls;
 
 protected:
   static int potential_packet_sizes[];
@@ -446,6 +457,7 @@ private:
 
   track_ptr find_track_for_pid(uint16_t pid) const;
   std::pair<unsigned char *, std::size_t> determine_ts_payload_start(packet_header_t *hdr) const;
+  void setup_initial_tracks();
 
   void handle_ts_payload(track_c &track, packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
   void handle_pat_pmt_payload(track_c &track, packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
@@ -455,6 +467,8 @@ private:
   bool parse_pat(track_c &track);
   bool parse_pmt(track_c &track);
   bool parse_pmt_pid_info(mm_mem_io_c &mem, uint16_t program_number);
+  bool parse_sdt(track_c &track);
+  void parse_sdt_service_desciptor(bit_reader_c &r, uint16_t program_number);
   void parse_pes(track_c &track);
   void probe_packet_complete(track_c &track);
   int determine_track_parameters(track_c &track);
@@ -483,6 +497,7 @@ private:
   void parse_clip_info_file(std::size_t file_idx);
 
   void add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in);
+  void add_programs_to_identification_info(mtx::id::info_c &info);
 
   void process_chapter_entries();
 
@@ -495,6 +510,8 @@ private:
   void add_multiplexed_ids(std::vector<uint64_t> &multiplexed_ids, track_c &track);
 
   static memory_cptr read_pmt_descriptor(mm_io_c &io);
+  static std::string read_descriptor_string(bit_reader_c &r);
+  static charset_converter_cptr get_charset_converter_for_coding_type(unsigned int coding);
 
   friend class track_c;
 };
