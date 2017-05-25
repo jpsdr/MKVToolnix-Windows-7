@@ -38,11 +38,22 @@ format_key_and_json_value(std::string const &key,
 static std::string
 format_verbose_info(mtx::id::verbose_info_t const &info) {
   auto formatted = std::vector<std::string>{};
+  auto sub_fmt   = boost::format("%1%.%2%.%3%");
 
   for (auto const &pair : info) {
     if (pair.second.is_array()) {
-      for (auto it = pair.second.begin(), end = pair.second.end(); it != end; ++it)
-        formatted.emplace_back(format_key_and_json_value(pair.first, *it));
+      auto idx = 0u;
+
+      for (auto it = pair.second.begin(), end = pair.second.end(); it != end; ++it) {
+        if (it->is_object()) {
+          for (auto sub_it = it->begin(), sub_end = it->end(); sub_it != sub_end; ++sub_it)
+            formatted.emplace_back(format_key_and_json_value((sub_fmt % pair.first % idx % sub_it.key()).str(), sub_it.value()));
+
+          ++idx;
+
+        } else
+          formatted.emplace_back(format_key_and_json_value(pair.first, *it));
+      }
 
     } else
       formatted.emplace_back(format_key_and_json_value(pair.first, pair.second));
