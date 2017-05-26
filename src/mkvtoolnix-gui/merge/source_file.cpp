@@ -208,6 +208,8 @@ SourceFile::loadSettings(MuxConfig::Loader &l) {
   loadSettingsGroup<SourceFile>("additionalParts", m_additionalParts, l);
   loadSettingsGroup<SourceFile>("appendedFiles",   m_appendedFiles,   l);
 
+  setupProgramMapFromProperties();
+
   // Compatibility with older settings: there attached files were
   // stored together with the other tracks.
   int idx = 0;
@@ -314,6 +316,20 @@ SourceFile::setDefaults() {
 
   for (auto const &appendedFile : m_appendedFiles)
     appendedFile->setDefaults();
+}
+
+void
+SourceFile::setupProgramMapFromProperties() {
+  m_programMap.clear();
+
+  if (!m_properties.contains(Q("programs")))
+    return;
+
+  for (auto const &program : m_properties[Q("programs")].toList()) {
+    auto programProps = program.toMap();
+    if (programProps.contains(Q("program_number")))
+      m_programMap.insert(programProps[Q("program_number")].toUInt(), { programProps[Q("service_provider")].toString(), programProps[Q("service_name")].toString() });
+  }
 }
 
 }}}

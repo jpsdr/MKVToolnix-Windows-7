@@ -20,7 +20,13 @@ using SourceFilePtr = std::shared_ptr<SourceFile>;
 
 class SourceFile {
 public:
+  struct Program {
+    QString m_serviceProvider, m_serviceName;
+  };
+
+public:
   QVariantMap m_properties;
+  QHash<unsigned int, Program> m_programMap;
   QString m_fileName;
   QList<TrackPtr> m_tracks, m_attachedFiles;
   QList<SourceFilePtr> m_additionalParts, m_appendedFiles;
@@ -54,6 +60,7 @@ public:
   virtual void loadSettings(MuxConfig::Loader &l);
   virtual void fixAssociations(MuxConfig::Loader &l);
   virtual void setDefaults();
+  virtual void setupProgramMapFromProperties();
 
   virtual Track *findNthOrLastTrackOfType(Track::Type type, int nth) const;
 

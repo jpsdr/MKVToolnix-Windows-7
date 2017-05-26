@@ -457,8 +457,11 @@ void
 FileIdentifier::setDefaults() {
   Q_D(FileIdentifier);
 
-  if (d->m_file)
-    d->m_file->setDefaults();
+  if (!d->m_file)
+    return;
+
+  d->m_file->setDefaults();
+  d->m_file->setupProgramMapFromProperties();
 }
 
 }}}
