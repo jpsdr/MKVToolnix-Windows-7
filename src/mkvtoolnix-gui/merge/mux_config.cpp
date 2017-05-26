@@ -159,7 +159,7 @@ MuxConfig::loadProperties(Util::ConfigFile &settings,
 
   settings.beginGroup("properties");
   for (auto &key : settings.childKeys())
-    properties[key] = settings.value(key).toString();
+    properties[key] = settings.value(key);
   settings.endGroup();
 }
 
