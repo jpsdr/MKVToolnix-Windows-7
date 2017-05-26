@@ -13,6 +13,7 @@
 * mkvmerge: MPEG TS reader: fixed track content being broken for some tracks
   read from MPEG transport streams containing multiple programs. Fixes another
   part of #1990.
+* mkvpropedit: fixed a crash when the selector used for `--tags` is invalid.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20

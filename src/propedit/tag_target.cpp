@@ -72,6 +72,10 @@ void
 tag_target_c::parse_tags_spec(const std::string &spec) {
   m_spec                         = spec;
   std::vector<std::string> parts = split(spec, ":", 2);
+
+  if ((2 != parts.size()) || parts[1].empty())
+    throw std::runtime_error("missing file name");
+
   balg::to_lower(parts[0]);
 
   if (parts[0] == "all")
