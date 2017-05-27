@@ -54,6 +54,7 @@ TrackModel::retranslateUi() {
     { QY("Properties"),              Q("properties")       },
     { QY("Source file"),             Q("sourceFile")       },
     { QY("Source file's directory"), Q("sourceFileDir")    },
+    { QY("Program"),                 Q("program")          },
   });
 
   horizontalHeaderItem(IDColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -114,6 +115,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[PropertiesColumn]      ->setText(summarizeProperties(*track));
   items[SourceFileColumn]      ->setText(fileInfo.fileName());
   items[SourceFileDirColumn]   ->setText(QDir::toNativeSeparators(fileInfo.path()));
+  items[ProgramColumn]         ->setText(programInfoFor(*track));
 
   items[CodecColumn]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
   items[CodecColumn]->setCheckable(true);
@@ -716,6 +718,19 @@ TrackModel::summarizeProperties(Track const &track) {
   }
 
   return properties.join(Q(", "));
+}
+
+QString
+TrackModel::programInfoFor(Track const &track) {
+  if (!track.m_properties.contains(Q("program_number")))
+    return {};
+
+  auto programNumber = track.m_properties[Q("program_number")].toUInt();
+
+  if (track.m_file->m_programMap.contains(programNumber))
+    return track.m_file->m_programMap[programNumber].m_serviceName;
+
+  return QString::number(programNumber);
 }
 
 }}}

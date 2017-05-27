@@ -5,6 +5,11 @@
 * mkvmerge: MPEG TS reader: information about multiple programs will be output
   as container properties during verbose/JSON identification. See #1990 for
   the use case.
+* MKVToolNix GUI: multiplex tool: added a column "program" to the tracks
+  list. Certain container types such as MPEG transport streams can contain
+  multiple programs. The new column will contain the service name (think TV
+  station names such as "arte HD") for such streams. Implements the GUI part
+  of #1990.
 
 ## Bug fixes
 

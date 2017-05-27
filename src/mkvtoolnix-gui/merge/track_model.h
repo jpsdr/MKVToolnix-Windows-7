@@ -33,6 +33,7 @@ protected:
   static int const PropertiesColumn       =  9;
   static int const SourceFileColumn       = 10;
   static int const SourceFileDirColumn    = 11;
+  static int const ProgramColumn          = 12;
 
 protected:
   QList<Track *> *m_tracks;
@@ -85,6 +86,7 @@ protected:
   void sortTracks(QList<Track *> &tracks, bool reverse = false);
 
   static QString summarizeProperties(Track const &track);
+  static QString programInfoFor(Track const &track);
 };
 
 }}}
