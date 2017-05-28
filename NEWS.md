@@ -10,6 +10,8 @@
   multiple programs. The new column will contain the service name (think TV
   station names such as "arte HD") for such streams. Implements the GUI part
   of #1990.
+* MKVToolNix GUI: tabs can now be closed by pressing the middle mouse
+  button. Implements #1998.
 
 ## Bug fixes
 
