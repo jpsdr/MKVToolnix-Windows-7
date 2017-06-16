@@ -34,7 +34,7 @@ endif
 
 override_dh_auto_build:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
-	rake tests:run_unit
+	LC_ALL=C rake tests:run_unit
 endif
 
 	rake

@@ -23,6 +23,9 @@
 * mkvpropedit: fixed a crash when the selector used for `--tags` is invalid.
 * MKVToolNix GUI: fixed computation of value of total progress bar for multiple
   jobs running. Fixes #2005.
+* Debian/Ubuntu packaging: during a `dpkg-buildpackage` run the test suite was
+  failing when a non-English locale was active and MKVToolNix packages had
+  already been installed. Fixes #2011.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20
