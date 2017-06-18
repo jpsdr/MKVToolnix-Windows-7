@@ -500,7 +500,7 @@ Tab::findExistingAttachmentFileName(QString const &fileName) {
   for (int row = 0, numRows = m_attachedFilesModel->rowCount(); row < numRows; ++row) {
     auto attachedFile = m_attachedFilesModel->attachedFileForRow(row);
 
-    if (!attachedFile)
+    if (!attachedFile || !attachedFile->m_muxThis)
       continue;
 
     auto existingFileName = QFileInfo{attachedFile->m_name}.fileName();

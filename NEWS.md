@@ -26,6 +26,9 @@
 * Debian/Ubuntu packaging: during a `dpkg-buildpackage` run the test suite was
   failing when a non-English locale was active and MKVToolNix packages had
   already been installed. Fixes #2011.
+* MKVToolNix GUI: multiplexer, adding new attachments: when the GUI checks if
+  there's an attachment with the same name it will now disregard disabled
+  attached files. Fixes #2001.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20
