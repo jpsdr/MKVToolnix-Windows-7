@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-05-16 21:03+0200\n"
-"PO-Revision-Date: 2017-05-15 18:15+0000\n"
+"PO-Revision-Date: 2017-05-26 17:53+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -396,11 +396,10 @@ msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues - Не писать данные cue (индекс).\n"
 
 #: src/merge/mkvmerge.cpp:121
-#, fuzzy
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
-msgstr "  = <file> - Не искать, а сразу соединять файлы с одинаковым именем и следующим по счёту номером.\n"
+msgstr "  --no-date - Не записывать поле 'дата' в заголовках информации о сегментах.\n"
 
 #: src/merge/mkvmerge.cpp:209
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -696,7 +695,7 @@ msgstr "  B:  логический (0 или 1)\n"
 
 #: src/propedit/propedit_cli_parser.cpp:168
 msgid "  DT: date & time\n"
-msgstr ""
+msgstr "DT: дата и время\n"
 
 #: src/propedit/propedit_cli_parser.cpp:167
 msgid "  FP: floating point number\n"
@@ -3100,7 +3099,7 @@ msgstr "Выходная частота дискретизации звука"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1698
 msgid "Audio properties"
-msgstr "Свойства аудиодорожек"
+msgstr "Свойства аудио"
 
 #: src/common/property_element.cpp:156
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:502
@@ -4141,7 +4140,7 @@ msgstr "На данный момент нет новой версии."
 #: src/mkvtoolnix-gui/merge/input.cpp:450
 #, no-c-format
 msgid "Currently only certain subtitle formats are compressed with the zlib algorithm."
-msgstr "В настоящее время только определённые форматы субтитров сжимается по алгоритму zlib."
+msgstr "В настоящее время только определённые форматы субтитров сжимаются по алгоритму zlib."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:174
 #, no-c-format
@@ -4184,7 +4183,7 @@ msgstr "Субтитры DVB"
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:55
 #, no-c-format
@@ -9143,9 +9142,9 @@ msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "Указывает mkvmerge не создавать теги со статистикой для каждой дорожки."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
-msgstr "Указывает mkvmerge не записывать элементы 'CueDuration' в cue."
+msgstr "Указывает mkvmerge не записывать поле 'дата' в заголовках информации о сегментах."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
@@ -9501,9 +9500,8 @@ msgstr "Таймкод текущего пакета меньше, чем у п�
 
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
-#, fuzzy
 msgid "The date the file was created."
-msgstr "Файл настроек создан."
+msgstr "Дата, когда был создан файл."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 #, no-c-format
@@ -10004,7 +10002,7 @@ msgstr "Последний таймкод, обработанный перед �
 
 #: src/propedit/change.cpp:226
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
-msgstr ""
+msgstr "Букву 'Z' можно использовать вместо смещения часового пояса от UTC, чтобы указать UTC, также известное как время Зулу."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:332
 #, no-c-format
@@ -10259,9 +10257,9 @@ msgid "The property value is not a valid boolean in '%1%'. %2%\n"
 msgstr "Значение свойства не является правильной логической переменной в '%1%'. %2%\n"
 
 #: src/propedit/change.cpp:224
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid date & time string in '%1%'."
-msgstr "Значение свойства не является правильным целым числом со знаком в '%1%'. %2%\n"
+msgstr "Значение в строке '%1%' не является допустимым датой и временем."
 
 #: src/propedit/change.cpp:152
 #, boost-format
@@ -10284,7 +10282,7 @@ msgstr "Причина неизвестна."
 
 #: src/propedit/change.cpp:225
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
-msgstr ""
+msgstr "Распознаваемый формат 'YYYY-mm-ddTHH:MM:SS+zz:zz': год, месяц, день, буква 'T', часы, минуты, секунды и смещение часового пояса от UTC; например: 2017-03-28T17:28-02:00."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "The rest is copied as is."
@@ -10716,7 +10714,7 @@ msgstr "Этого элемента нет в файле."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
-msgstr ""
+msgstr "Обычно в этом поле указывается дата создания файла."
 
 #: src/input/subtitles.cpp:167
 msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
@@ -11570,7 +11568,7 @@ msgstr "Ширина изображения в пикселях"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1669
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1689
 msgid "Video properties"
-msgstr "Видео свойства"
+msgstr "Свойства видео"
 
 #: src/common/property_element.cpp:152
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:496
