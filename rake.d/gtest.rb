@@ -9,7 +9,7 @@ namespace :tests do
 
   desc "Build and run the unit tests"
   task :run_unit => 'tests:unit' do
-    $gtest_apps.each { |app| run "./tests/unit/#{app}/#{app}" }
+    $gtest_apps.each { |app| run "LC_ALL=C ./tests/unit/#{app}/#{app}" }
   end
 end
 
