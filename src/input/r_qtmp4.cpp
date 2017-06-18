@@ -33,6 +33,7 @@
 #include "common/list_utils.h"
 #include "common/math.h"
 #include "common/mp3.h"
+#include "common/mp4.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/vobsub.h"
@@ -1681,7 +1682,9 @@ qtmp4_reader_c::create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx) {
 
 void
 qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
-  int version = (dmx.fourcc.value() & 0xff) - '0';
+  int version = !dmx.esds_parsed                              ? (dmx.fourcc.value() & 0xff) - '0'
+              : dmx.esds.object_type_id == MP4OTI_MPEG1Visual ? 1
+              :                                                 2;
   dmx.ptzr    = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, version, -1.0, dmx.v_width, dmx.v_height, 0, 0, false));
 
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));

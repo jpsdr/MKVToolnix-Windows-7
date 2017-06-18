@@ -29,6 +29,8 @@
 * MKVToolNix GUI: multiplexer, adding new attachments: when the GUI checks if
   there's an attachment with the same name it will now disregard disabled
   attached files. Fixes #2001.
+* mkvmerge: MP4 reader: MPEG-1/2 video read from MP4 files was written with an
+  invalid codec ID (e.g. `V_MPEG7`) in certain cases. Fixes #1995.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20
