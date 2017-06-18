@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-05-16 21:03+0200\n"
-"PO-Revision-Date: 2017-03-29 18:21+0000\n"
+"PO-Revision-Date: 2017-06-18 11:39+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/eu/)\n"
@@ -511,13 +511,12 @@ msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                Ez idatzi ohar datuak (aurkibidea).\n"
 
 #: src/merge/mkvmerge.cpp:121
-#, fuzzy
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
 msgstr ""
-"  = <agiria>               Ez bilatu eta kateaduratu izen ohinarri bereko baina\n"
-"                           amaiera zenbaki ezberdineko agiriak.\n"
+"  --no-date                Ez idatzi 'date' eremua zatiaren\n"
+"                           argibide idazburuetan.\n"
 
 #: src/merge/mkvmerge.cpp:209
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -898,7 +897,7 @@ msgstr "  B:  boolean (0 edo 1)\n"
 
 #: src/propedit/propedit_cli_parser.cpp:168
 msgid "  DT: date & time\n"
-msgstr ""
+msgstr "  DT: eguna eta ordua\n"
 
 #: src/propedit/propedit_cli_parser.cpp:167
 msgid "  FP: floating point number\n"
@@ -1318,9 +1317,8 @@ msgid "&Add"
 msgstr "&Gehitu"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1391
-#, fuzzy
 msgid "&Add action"
-msgstr "Gehigarriak"
+msgstr "&Gehitu ekintza"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:232
 #, no-c-format
@@ -1469,7 +1467,7 @@ msgstr "&Sarrera bakoitzaren iraupena segundutan:"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:498
 #, no-c-format
 msgid "&Edit available actions to execute"
-msgstr ""
+msgstr "&Editatu exekutatzeko ekintza eskuaragarriak"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1357
 #, no-c-format
@@ -1813,9 +1811,8 @@ msgid "&Tracks, chapters and tags:"
 msgstr "Bi&deak, atalak, etiketak:"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:324
-#, fuzzy
 msgid "&Type:"
-msgstr "Mota:"
+msgstr "&Mota:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:516
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:521
@@ -1844,12 +1841,11 @@ msgstr "&Ikusi irteera"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:330
 msgid "&Volume:"
-msgstr ""
+msgstr "&Bolumena:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:306
-#, fuzzy
 msgid "&When finished…"
-msgstr "Amaitze eguna"
+msgstr "&Amaitutakoan..."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1343
 msgid "&When to set the language:"
@@ -2536,9 +2532,8 @@ msgid "A&ppend files"
 msgstr "&Erantsi agiriak"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:329
-#, fuzzy
 msgid "A&udio file:"
-msgstr "&Gehitu agiriak"
+msgstr "A&udio agiria:"
 
 #: src/common/file_types.cpp:25
 msgid "A/52 (aka AC-3)"
@@ -2858,9 +2853,9 @@ msgstr "Lan lerroa gelditu &ondoren"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1366
 #: src/mkvtoolnix-gui/merge/input.cpp:1371
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Afterwards &close the current multiplex settings."
-msgstr "Gehitu agiri guztiak oraingo multiplexatze ezarpenetara"
+msgstr "Ondoren it&xi oraingo multiplexaketa ezarpenak."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1364
 #: src/mkvtoolnix-gui/merge/input.cpp:1369
@@ -3255,9 +3250,9 @@ msgid "Audio channels"
 msgstr "Audio bideak"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:398
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio files"
-msgstr "&Gehitu agiriak"
+msgstr "Audio agiriak"
 
 #: src/common/property_element.cpp:157
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:505
@@ -3727,9 +3722,8 @@ msgid "Clearing settings auto&matically:"
 msgstr "Ezarpenak &berezgaitasunez garbitzen:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1318
-#, fuzzy
 msgid "Close current settings"
-msgstr "Itxi oraingo agiria aldaketak gorde gabe"
+msgstr "Itxi oraingo ezarpenak"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:256
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:218
@@ -4235,9 +4229,9 @@ msgid "Cue sheet extraction"
 msgstr "CUE orri aterapena"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:184
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Cue sheet files"
-msgstr "Idazki agiriak"
+msgstr "Cue orri agiriak"
 
 #: src/common/chapters/cue_parser.cpp:392
 #, boost-format
@@ -4347,7 +4341,7 @@ msgstr "DVB azpidatziak"
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Date"
-msgstr ""
+msgstr "Eguna"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:55
 #, no-c-format
@@ -5082,39 +5076,38 @@ msgstr "Exekutagarria ez da aurkitu"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
 #: src/mkvtoolnix-gui/util/settings.cpp:73
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Execute a program"
-msgstr "Programak exekutatzen"
+msgstr "Exekutatu programa bat"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:492
 #, no-c-format
 msgid "Execute action after next &job completion"
-msgstr ""
+msgstr "Exekutatu ekintza hurrengo &lana osatu ondoren"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:493
 #, no-c-format
 msgid "Execute action when the &queue completes"
-msgstr ""
+msgstr "Exekutatu ekintza &lerroa osatu ondoren"
 
 #: src/mkvtoolnix-gui/util/settings.cpp:78
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Execute program '%1'"
-msgstr "Programak exekutatzen"
+msgstr "Exekutatu '%1' programa"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
 #, no-c-format
 msgid "Executes the action immediately."
-msgstr ""
+msgstr "Exekutatu ekintza berehala."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:189
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Executing actions"
-msgstr "Programak exekutatzen"
+msgstr "Ekintzak exekutatzen"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1390
-#, fuzzy
 msgid "Executing actions after certain events"
-msgstr "Programen exekutatzea zenbait gertakariren ondoren"
+msgstr "Ekintza exekutatzea zenbait gertaeraren ondoen"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
 #, no-c-format
@@ -5644,9 +5637,9 @@ msgstr "Erakuspenerako bideo framen garaiera."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
 #: src/mkvtoolnix-gui/util/settings.cpp:64
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Hibernate the computer"
-msgstr "Itzali sistema minutu batean:"
+msgstr "Neguratu ordenagailua"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:110
@@ -6265,9 +6258,9 @@ msgid "Invalid selector in '%1% %2%'.\n"
 msgstr "Hautatzaile baliogabea hemen: '%1% %2%'.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:844
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Invalid settings"
-msgstr "Eragiketa baliogabea"
+msgstr "Ezarpen baliogabeak"
 
 #: src/merge/mkvmerge.cpp:1053
 #, boost-format
@@ -7114,9 +7107,8 @@ msgid "No MIME type has been set for the attachment '%1%', and it could not be g
 msgstr "Ez da MIME motarik ezarri '%1%' eranspenarentzat, eta badaiteke ez asmatzea.\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1392
-#, fuzzy
 msgid "No actions have been added yet."
-msgstr "Ez da programarik gehitu oraindik."
+msgstr "Ez da ekintzarik gehitu oraindik."
 
 #: src/merge/output_control.cpp:983
 #, boost-format
@@ -7767,14 +7759,14 @@ msgstr "Irakurri WAV agiri bat berezko aplikazioarekin:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
 #: src/mkvtoolnix-gui/util/settings.cpp:85
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Play an audio file"
-msgstr "MPEG audio agiriak"
+msgstr "Irakurri audio agiri bat"
 
 #: src/mkvtoolnix-gui/util/settings.cpp:90
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Play audio file '%1'"
-msgstr "MPEG audio agiriak"
+msgstr "Irakurri '%1' audio agiria"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:445
 #, no-c-format
@@ -8667,9 +8659,9 @@ msgid "Select an existing Matroska or WebM file and the GUI will add its segment
 msgstr "Hautatu badagoen Matroska edo WebM agiri bat eta EIG-k bere zati UID-ak gehituko ditu sarrera eremura ezkerraldean."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:402
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select audio file"
-msgstr "Hautatu etiketa agiria"
+msgstr "Hautatu audio agiria"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:473
 #, no-c-format
@@ -8910,9 +8902,9 @@ msgstr "Erakutsi bertsio argibideak."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
 #: src/mkvtoolnix-gui/util/settings.cpp:63
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Shut down the computer"
-msgstr "Itzali sistema minutu batean:"
+msgstr "Itzali ordenagailua"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:144
 msgid "Shut down the system in one minute:"
@@ -9002,9 +8994,9 @@ msgstr "Jauzita %1% byte hasieran (baliogabeko MP3 idazburua aurkitu da).\n"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
 #: src/mkvtoolnix-gui/util/settings.cpp:65
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sleep the computer"
-msgstr "Itzali sistema minutu batean:"
+msgstr "Lotaratu ordenagailua"
 
 #: src/info/mkvinfo.cpp:1370
 msgid "Slices"
@@ -9274,9 +9266,9 @@ msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "mkvmerge-ri esaten dio ez idazteko etiketarik estatistikekin bide bakoitzerako."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
-msgstr "mkvmerge-k cuetan 'CueDuration' elementuak ez idaztea eragiten du."
+msgstr "mkvmerge-ri esaten dio 'date' eremua ez idazteko zatien argibide idazburuetan"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
@@ -9521,9 +9513,9 @@ msgid "The attachment (%1%) is too big (%2%)."
 msgstr "(%1%) eranskina luzeegia da (%2%)."
 
 #: src/mkvtoolnix-gui/util/settings.cpp:45
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The audio file to play hasn't been set yet."
-msgstr "Aukera agiria sortu da."
+msgstr "Oraindik ez da ezarri irakurtzeko audio agiria."
 
 #: src/output/p_ac3.cpp:82
 #: src/output/p_mp3.cpp:73
@@ -9632,9 +9624,8 @@ msgstr "Oraingo paketearen denbora-kodea aurreko paketea baino txikiagoa da. Hon
 
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
-#, fuzzy
 msgid "The date the file was created."
-msgstr "Aukera agiria sortu da."
+msgstr "Agiria sortu zen eguna."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 #, no-c-format
