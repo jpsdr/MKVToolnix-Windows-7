@@ -31,6 +31,8 @@
   attached files. Fixes #2001.
 * mkvmerge: MP4 reader: MPEG-1/2 video read from MP4 files was written with an
   invalid codec ID (e.g. `V_MPEG7`) in certain cases. Fixes #1995.
+* mkvmerge: MPEG PS reader: made the file type detection less strict so that
+  garbage at the start of the file doesn't prevent detection. Fixes #2008.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20

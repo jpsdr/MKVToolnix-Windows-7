@@ -47,10 +47,36 @@ mpeg_ps_reader_c::probe_file(mm_io_c *in,
     if (in->read(buf, 4) != 4)
       return 0;
 
-    if (get_uint32_be(buf) != MPEGVIDEO_PACKET_START_CODE)
+    if (get_uint32_be(buf) == MPEGVIDEO_PACKET_START_CODE)
+      return 1;
+
+    in->setFilePointer(0, seek_beginning);
+
+    auto mem      = memory_c::alloc(32 * 1024);
+    auto num_read = in->read(mem, mem->get_size());
+
+    if (num_read < 4)
       return 0;
 
-    return 1;
+    auto base                           = mem->get_buffer();
+    auto code                           = get_uint32_be(base);
+    auto offset                         = 2u;
+    auto system_header_start_code_found = false;
+    auto packet_start_code_found        = false;
+
+    while(   ((offset + 4) < num_read)
+          && (!system_header_start_code_found || !packet_start_code_found)) {
+      ++offset;
+      code = (code << 8) | base[offset];
+
+      if (code == MPEGVIDEO_SYSTEM_HEADER_START_CODE)
+        system_header_start_code_found = true;
+
+      else if (code == MPEGVIDEO_PACKET_START_CODE)
+        packet_start_code_found = true;
+    }
+
+    return system_header_start_code_found && packet_start_code_found;
 
   } catch (...) {
     return 0;
