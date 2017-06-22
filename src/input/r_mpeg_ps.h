@@ -206,7 +206,7 @@ private:
 
   uint64_t m_probe_range;
 
-  debugging_option_c m_debug_timecodes;
+  debugging_option_c m_debug_timecodes, m_debug_headers, m_debug_packets, m_debug_resync;
 
 public:
   mpeg_ps_reader_c(const track_info_c &ti, const mm_io_cptr &in);
