@@ -69,7 +69,6 @@ char const * const teletext_page                   = "teletext_page";           
 char const * const text_subtitles                  = "text_subtitles";                  // track boolean
 char const * const title                           = "title";                           // container unicoode-string
 char const * const track_name                      = "track_name";                      // track unicoode-string
-char const * const ts_pid                          = "ts_pid";                          // track unsigned-integer
 char const * const uid                             = "uid";                             // track attachments unsigned-integer
 char const * const writing_application             = "writing_application";             // container unicode-string
 

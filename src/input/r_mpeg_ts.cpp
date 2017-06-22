@@ -1338,9 +1338,9 @@ reader_c::identify() {
 
   for (auto const &track : m_tracks) {
     info = mtx::id::info_c{};
-    info.add(mtx::id::language, track->language);
-    info.set(mtx::id::ts_pid,   track->pid);
-    info.set(mtx::id::number,   track->pid);
+    info.add(mtx::id::language,  track->language);
+    info.set(mtx::id::stream_id, track->pid);
+    info.set(mtx::id::number,    track->pid);
 
     if (track->program_number)
       info.set(mtx::id::program_number, track->program_number.get());

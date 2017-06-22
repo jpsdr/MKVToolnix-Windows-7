@@ -333,7 +333,8 @@ class SimpleTest
     json_store = JsonSchema::DocumentStore.new
     parser     = JsonSchema::Parser.new
     expander   = JsonSchema::ReferenceExpander.new
-    schema     = parser.parse JSON.load(File.read("../doc/json-schema/mkvmerge-identification-output-schema-v7.json"))
+    version    = IO.readlines("../src/merge/id_result.h").detect { |line| /#define +ID_JSON_FORMAT_VERSION\b/.match line }.gsub(/.* .* /, '').chop
+    schema     = parser.parse JSON.load(File.read("../doc/json-schema/mkvmerge-identification-output-schema-v#{version}.json"))
 
     expander.expand(schema, store: json_store)
     json_store.add_schema schema

@@ -1411,8 +1411,8 @@ mpeg_ps_reader_c::identify() {
       info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
 
     info.set(mtx::id::number,        (static_cast<uint64_t>(track->id.sub_id) << 32) | static_cast<uint64_t>(track->id.id));
-    info.add(mtx::id::stream_id,     boost::format("%|1$02x|") % track->id.id);
-    info.add(mtx::id::sub_stream_id, boost::format("%|1$02x|") % track->id.sub_id);
+    info.add(mtx::id::stream_id,     track->id.id);
+    info.add(mtx::id::sub_stream_id, track->id.sub_id);
 
     if ((0 != track->v_dwidth) && (0 != track->v_dheight))
       info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % track->v_dwidth % track->v_dheight);
