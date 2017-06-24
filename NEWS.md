@@ -49,6 +49,8 @@
   schemes such as lossless compression is applied; however, mkvmerge was
   wrongfully using the number of bytes after the schemes had been
   applied. Fixes #2022.
+* mkvmerge: MPLS reader: version number `0300` as used on Ultra HD Blu-ray
+  Discs is now accepted as well. Fixes #2010.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20

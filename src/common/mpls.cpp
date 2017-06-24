@@ -241,8 +241,7 @@ parser_c::parse_header() {
   m_header.ext_pos         = m_bc->get_bits(32);
 
   if (   (m_header.type_indicator1 != fourcc_c{"MPLS"})
-      || (   (m_header.type_indicator2 != fourcc_c{"0100"})
-          && (m_header.type_indicator2 != fourcc_c{"0200"})))
+      || !mtx::included_in(m_header.type_indicator2, fourcc_c{"0100"}, fourcc_c{"0200"}, fourcc_c{"0300"}))
     throw exception{boost::format("Wrong type indicator 1 (%1%) or 2 (%2%)") % m_header.type_indicator1 % m_header.type_indicator2};
 }
 
