@@ -23,6 +23,7 @@
 #define CLPI_FILE_MAGIC   FOURCC('H', 'D', 'M', 'V')
 #define CLPI_FILE_MAGIC2A FOURCC('0', '2', '0', '0')
 #define CLPI_FILE_MAGIC2B FOURCC('0', '1', '0', '0')
+#define CLPI_FILE_MAGIC2C FOURCC('0', '3', '0', '0')
 
 namespace mtx { namespace bluray { namespace clpi {
   struct program_stream_t {

@@ -131,7 +131,7 @@ parser_c::parse_header(bit_reader_cptr &bc) {
 
   magic = bc->get_bits(32);
   mxdebug_if(m_debug, boost::format("File magic 2: 0x%|1$08x|\n") % magic);
-  if ((CLPI_FILE_MAGIC2A != magic) && (CLPI_FILE_MAGIC2B != magic))
+  if ((CLPI_FILE_MAGIC2A != magic) && (CLPI_FILE_MAGIC2B != magic) && (CLPI_FILE_MAGIC2C != magic))
     throw false;
 
   m_sequence_info_start = bc->get_bits(32);
