@@ -1528,16 +1528,20 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend,
   if (   (Util::Settings::MergeAddingAppendingFilesPolicy::Ask == decision)
       || ((mouseButtons & Qt::RightButton)                     == Qt::RightButton)) {
     AddingAppendingFilesDialog dlg{this, m_config.m_files};
+    dlg.setDefaults(settings.m_mergeLastAddingAppendingDecision, m_lastAddAppendFileIdx);
     if (!dlg.exec())
       return;
 
     decision = dlg.decision();
     fileIdx  = m_filesModel->index(dlg.fileIndex(), 0);
 
-    if (dlg.alwaysUseThisDecision()) {
+    settings.m_mergeLastAddingAppendingDecision = decision;
+    m_lastAddAppendFileIdx                      = dlg.fileIndex();
+
+    if (dlg.alwaysUseThisDecision())
       settings.m_mergeAddingAppendingFilesPolicy = decision;
-      settings.save();
-    }
+
+    settings.save();
   }
 
   if (Util::Settings::MergeAddingAppendingFilesPolicy::AddAdditionalParts == decision)

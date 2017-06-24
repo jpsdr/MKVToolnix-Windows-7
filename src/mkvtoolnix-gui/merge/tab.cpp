@@ -36,6 +36,7 @@ using namespace mtx::gui;
 
 Tab::Tab(QWidget *parent)
   : QWidget{parent}
+  , m_lastAddAppendFileIdx{-1}
   , ui{new Ui::Tab}
   , m_mouseButtonsForFilesToAddDelayed{}
   , m_filesModel{new SourceFileModel{this}}

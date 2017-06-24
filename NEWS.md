@@ -12,6 +12,10 @@
   of #1990.
 * MKVToolNix GUI: tabs can now be closed by pressing the middle mouse
   button. Implements #1998.
+* MKVToolNix GUI: multiplex tool: the dialog asking the user what to do with
+  dropped files (add to current settings, add to new settings etc.) now
+  remembers the previous decision and defaults to it the next time it's
+  shown. Implements #1997.
 
 ## Bug fixes
 

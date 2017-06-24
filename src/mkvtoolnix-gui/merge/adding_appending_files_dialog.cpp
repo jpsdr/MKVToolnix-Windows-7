@@ -47,6 +47,24 @@ AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
 AddingAppendingFilesDialog::~AddingAppendingFilesDialog() {
 }
 
+void
+AddingAppendingFilesDialog::setDefaults(Util::Settings::MergeAddingAppendingFilesPolicy decision,
+                                        int fileIndex) {
+  auto ctrl = decision == Util::Settings::MergeAddingAppendingFilesPolicy::Add          ? ui->rbAdd
+            : decision == Util::Settings::MergeAddingAppendingFilesPolicy::Append       ? ui->rbAppend
+            : decision == Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew     ? ui->rbAddToNew
+            : decision == Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew ? ui->rbAddEachToNew
+            :                                                                             ui->rbAddAdditionalParts;
+
+  ctrl->setChecked(true);
+  ctrl->setFocus();
+
+  if ((fileIndex >= 0) && (fileIndex <= ui->cbFileName->count()))
+    ui->cbFileName->setCurrentIndex(fileIndex);
+
+  selectionChanged();
+}
+
 Util::Settings::MergeAddingAppendingFilesPolicy
 AddingAppendingFilesDialog::decision()
   const {

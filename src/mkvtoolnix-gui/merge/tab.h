@@ -38,6 +38,8 @@ protected:
   // non-UI stuff:
   MuxConfig m_config;
 
+  int m_lastAddAppendFileIdx;
+
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
   QStringList m_filesToAddDelayed;
