@@ -44,6 +44,11 @@
   frame. Fixes #2016.
 * mkvmerge: fixed a crash when appending video tracks where one track has a
   CodecPrivate member and the other one doesn't.
+* mkvmerge: track statistics tags: the `NUMBER_OF_BYTES` tag is supposed to
+  contain the number of bytes in a track before any of the content encoding
+  schemes such as lossless compression is applied; however, mkvmerge was
+  wrongfully using the number of bytes after the schemes had been
+  applied. Fixes #2022.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20

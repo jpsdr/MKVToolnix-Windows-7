@@ -41,9 +41,8 @@ packet_t::add_extensions(std::vector<packet_extension_cptr> const &new_extension
 
 void
 packet_t::account(track_statistics_c &statistics,
-                  int64_t timestamp_offset)
-  const {
-  statistics.account(assigned_timecode - timestamp_offset, get_duration(), data->get_size());
+                  int64_t timestamp_offset) {
+  statistics.account(assigned_timecode - timestamp_offset, get_duration(), calculate_uncompressed_size());
 }
 
 uint64_t
