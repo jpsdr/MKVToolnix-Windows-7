@@ -39,6 +39,9 @@
   streams, its value is now output as `stream_id` instead, and the `ts_pid`
   property has been removed. The JSON schema version has been bumped to 8 due
   to this change.
+* mkvmerge: MPEG program stream reader: (E-)AC-3 tracks were not detected if
+  the very first packet for that track didn't contain a full (E-)AC-3
+  frame. Fixes #2016.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20

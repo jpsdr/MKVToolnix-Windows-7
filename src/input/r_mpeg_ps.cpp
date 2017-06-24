@@ -806,21 +806,42 @@ mpeg_ps_reader_c::new_stream_a_mpeg(mpeg_ps_id_t,
 }
 
 void
-mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t,
+mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t id,
                                    unsigned char *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
-  ac3::frame_c header;
-  if (-1 == header.find_in(buf, length))
-    throw false;
+  mxdebug_if(m_debug_headers, boost::format("new_stream_a_ac3 for ID %1% buf len %2%\n") % id % length);
 
-  mxdebug_if(m_debug_headers,
-             boost::format("first ac3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
-             % header.m_bs_id % header.m_channels % header.m_sample_rate % header.m_bytes % header.m_samples);
+  byte_buffer_c buffer;
 
-  track->a_channels    = header.m_channels;
-  track->a_sample_rate = header.m_sample_rate;
-  track->a_bsid        = header.m_bs_id;
+  buffer.add(buf, length);
+
+  while (m_probe_range >= m_in->getFilePointer()) {
+    ac3::frame_c header;
+
+    if (-1 != header.find_in(buffer.get_buffer(), buffer.get_size())) {
+      mxdebug_if(m_debug_headers,
+                 boost::format("new_stream_a_ac3 first AC-3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
+                 % header.m_bs_id % header.m_channels % header.m_sample_rate % header.m_bytes % header.m_samples);
+
+      track->a_channels    = header.m_channels;
+      track->a_sample_rate = header.m_sample_rate;
+      track->a_bsid        = header.m_bs_id;
+
+      return;
+    }
+
+    if (!find_next_packet_for_id(id, m_probe_range))
+      throw false;
+
+    auto packet = parse_packet(id);
+    if (!packet || (id.sub_id != packet.m_id.sub_id))
+      continue;
+
+    buffer.add(packet.m_buffer->get_buffer(), packet.m_length);
+  }
+
+  throw false;
 }
 
 void
