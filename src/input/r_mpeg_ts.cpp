@@ -1676,7 +1676,7 @@ reader_c::get_charset_converter_for_coding_type(unsigned int coding) {
   if (coding_name.empty())
     coding_name = "UTF-8";
 
-  auto converter = charset_converter_c::init(coding_name);
+  auto converter = charset_converter_c::init(coding_name, true);
   return converter ? converter : charset_converter_c::init("UTF-8");
 }
 

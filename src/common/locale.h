@@ -40,7 +40,7 @@ protected:
   bool handle_string_with_bom(const std::string &source, std::string &recoded);
 
 public:                         // Static members
-  static charset_converter_cptr init(const std::string &charset);
+  static charset_converter_cptr init(const std::string &charset, bool ignore_errors = false);
   static bool is_utf8_charset_name(const std::string &charset);
 
 private:

@@ -67,7 +67,8 @@ charset_converter_c::get_charset()
 }
 
 charset_converter_cptr
-charset_converter_c::init(const std::string &charset) {
+charset_converter_c::init(const std::string &charset,
+                          bool ignore_errors) {
   std::string actual_charset = charset.empty() ? get_local_charset() : charset;
 
   std::map<std::string, charset_converter_cptr>::iterator converter = s_converters.find(actual_charset);
@@ -78,6 +79,9 @@ charset_converter_c::init(const std::string &charset) {
   if (windows_charset_converter_c::is_available(actual_charset))
     return charset_converter_cptr(new windows_charset_converter_c(actual_charset));
 #endif
+
+  if (ignore_errors && !iconv_charset_converter_c::is_available(actual_charset))
+    return {};
 
   return charset_converter_cptr(new iconv_charset_converter_c(actual_charset));
 }
