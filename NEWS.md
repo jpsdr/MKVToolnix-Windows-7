@@ -10,42 +10,33 @@
   multiple programs. The new column will contain the service name (think TV
   station names such as "arte HD") for such streams. Implements the GUI part
   of #1990.
-* MKVToolNix GUI: tabs can now be closed by pressing the middle mouse
-  button. Implements #1998.
 * MKVToolNix GUI: multiplex tool: the dialog asking the user what to do with
   dropped files (add to current settings, add to new settings etc.) now
   remembers the previous decision and defaults to it the next time it's
   shown. Implements #1997.
+* MKVToolNix GUI: tabs can now be closed by pressing the middle mouse
+  button. Implements #1998.
 
 ## Bug fixes
 
+* mkvmerge: MP4 reader: MPEG-1/2 video read from MP4 files was written with an
+  invalid codec ID (e.g. `V_MPEG7`) in certain cases. Fixes #1995.
+* mkvmerge: MPEG PS reader: made the file type detection less strict so that
+  garbage at the start of the file doesn't prevent detection. Fixes #2008.
+* mkvmerge: MPEG PS reader: (E-)AC-3 tracks were not detected if the very
+  first packet for that track didn't contain a full (E-)AC-3 frame. Fixes
+  #2016.
 * mkvmerge: MPEG TS reader: fixed mkvmerge not detecting all tracks in MPEG
   transport streams containing multiple programs. Fixes one part of #1990.
 * mkvmerge: MPEG TS reader: fixed track content being broken for some tracks
   read from MPEG transport streams containing multiple programs. Fixes another
   part of #1990.
-* mkvpropedit: fixed a crash when the selector used for `--tags` is invalid.
-* MKVToolNix GUI: fixed computation of value of total progress bar for multiple
-  jobs running. Fixes #2005.
-* Debian/Ubuntu packaging: during a `dpkg-buildpackage` run the test suite was
-  failing when a non-English locale was active and MKVToolNix packages had
-  already been installed. Fixes #2011.
-* MKVToolNix GUI: multiplexer, adding new attachments: when the GUI checks if
-  there's an attachment with the same name it will now disregard disabled
-  attached files. Fixes #2001.
-* mkvmerge: MP4 reader: MPEG-1/2 video read from MP4 files was written with an
-  invalid codec ID (e.g. `V_MPEG7`) in certain cases. Fixes #1995.
-* mkvmerge: MPEG PS reader: made the file type detection less strict so that
-  garbage at the start of the file doesn't prevent detection. Fixes #2008.
 * mkvmerge: JSON identification: the `stream_id` and `sub_stream_id` track
   properties were output as hexadecimal strings instead of unsigned
   integers. As the `ts_pid` track property was only used for MPEG transport
   streams, its value is now output as `stream_id` instead, and the `ts_pid`
   property has been removed. The JSON schema version has been bumped to 8 due
   to this change.
-* mkvmerge: MPEG program stream reader: (E-)AC-3 tracks were not detected if
-  the very first packet for that track didn't contain a full (E-)AC-3
-  frame. Fixes #2016.
 * mkvmerge: fixed a crash when appending video tracks where one track has a
   CodecPrivate member and the other one doesn't.
 * mkvmerge: track statistics tags: the `NUMBER_OF_BYTES` tag is supposed to
@@ -56,6 +47,15 @@
 * mkvmerge: CLPI & MPLS parsers: MPLS and CLPI files with version number
   `0300` as used on Ultra HD Blu-ray Discs are now accepted as well. Fixes
   #2010.
+* mkvpropedit: fixed a crash when the selector used for `--tags` is invalid.
+* MKVToolNix GUI: fixed computation of value of total progress bar for multiple
+  jobs running. Fixes #2005.
+* MKVToolNix GUI: multiplexer, adding new attachments: when the GUI checks if
+  there's an attachment with the same name it will now disregard disabled
+  attached files. Fixes #2001.
+* Debian/Ubuntu packaging: during a `dpkg-buildpackage` run the test suite was
+  failing when a non-English locale was active and MKVToolNix packages had
+  already been installed. Fixes #2011.
 
 
 # Version 12.0.0 "Trust / Lust" 2017-05-20
