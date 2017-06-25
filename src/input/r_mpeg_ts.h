@@ -272,7 +272,7 @@ struct program_t {
   uint16_t program_number;
   std::string service_provider, service_name;
 
-  bool operator<(program_t &other) const {
+  bool operator<(program_t const &other) const {
     return program_number < other.program_number;
   };
 };
