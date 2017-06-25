@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-06-21 18:54+0200\n"
-"PO-Revision-Date: 2017-05-15 21:14+0000\n"
+"PO-Revision-Date: 2017-06-22 20:51+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -545,14 +545,12 @@ msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                No escribe la información del índice (cue).\n"
 
 #: src/merge/mkvmerge.cpp:121
-#, fuzzy
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
 msgstr ""
-"  = <archivo>              No busca y concatena los archivos que tengan\n"
-"                           el mismo nombre básico, sino aquellos con un número\n"
-"                           diferente al final.\n"
+"  --no-date                No escribe el campo 'date' en el segmento de\n"
+"                            información de las cabeceras \n"
 
 #: src/merge/mkvmerge.cpp:209
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -971,7 +969,7 @@ msgstr "  B:  booleano (0 ó 1)\n"
 
 #: src/propedit/propedit_cli_parser.cpp:168
 msgid "  DT: date & time\n"
-msgstr ""
+msgstr "  DT: fecha & hora\n"
 
 #: src/propedit/propedit_cli_parser.cpp:167
 msgid "  FP: floating point number\n"
@@ -4405,7 +4403,7 @@ msgstr "Subtítulos DVB"
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:55
 #, no-c-format
@@ -7971,9 +7969,9 @@ msgid "Process &priority:"
 msgstr "&Prioridad del proceso:"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:57
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Program"
-msgstr "Progreso"
+msgstr "Programa"
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:197
 #, no-c-format
@@ -9336,9 +9334,9 @@ msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "Le dice a mkvmerge que no escriba tags con estadísticas para cada pista."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
-msgstr "Hace que mkvmerge no escriba elementos 'CueDuration' en los cues (índices)."
+msgstr "Le dice a mkvmerge que no escriba el campo 'date' en el segmento de información de las cabeceras."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
@@ -9694,9 +9692,8 @@ msgstr "El código de tiempo del paquete actual es mas pequeño que el del anter
 
 #: src/common/property_element.cpp:103
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
-#, fuzzy
 msgid "The date the file was created."
-msgstr "El archivo de opciones ha sido creado."
+msgstr "La fecha del archivo ha sido creada."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 #, no-c-format
@@ -9797,7 +9794,7 @@ msgstr "Los valores extraídos para el ancho y alto del video desde los datos de
 
 #: src/extract/extract_cli_parser.cpp:107
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a cue sheet with mkvmerge's '--chapters' option."
-msgstr "El quinto modo intenta extraer la información del capítulo y etiquetas, y las exporta como una hoja de distribución de pistas. Esto es lo contrario a usar una hoja de índices con la opción '--chapters' de mkvmerge."
+msgstr "El quinto modo intenta extraer la información del capítulo y etiquetas, y las exporta como una hoja de índices. Esto es lo contrario a usar una hoja de índices con la opción '--chapters' de mkvmerge."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:257
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:219
@@ -10195,7 +10192,7 @@ msgstr "El último timecode procesado antes del error encontrado fue %1%.\n"
 
 #: src/propedit/change.cpp:226
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
-msgstr ""
+msgstr "La letra 'Z' se puede usar en vez de la diferencia de la zona horaria UTC para indicar la hora UTC tambien conocida como Zulu."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:332
 #, no-c-format
@@ -10444,9 +10441,9 @@ msgid "The property value is not a valid boolean in '%1%'. %2%\n"
 msgstr "El valor de la propiedad no es un booleano válido en '%1%'. %2%\n"
 
 #: src/propedit/change.cpp:224
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid date & time string in '%1%'."
-msgstr "El valor de la propiedad no es un entero con signo válido en '%1%'. %2%\n"
+msgstr "El valor correcto no es un texto de fecha y hora válida '%1%'."
 
 #: src/propedit/change.cpp:152
 #, boost-format
@@ -10469,7 +10466,7 @@ msgstr "La razón es desconocida."
 
 #: src/propedit/change.cpp:225
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
-msgstr ""
+msgstr "El formato reconocido es 'YYYY-mm-ddTHH:MM:SS+zz:zz': año, mes, día, letra 'T', horas, minutos, segundos y la diferencia de la zona horaria UTC; por ejemplo: 2017-03-28T17:28-02:00"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "The rest is copied as is."
@@ -10899,7 +10896,7 @@ msgstr "Este elemento no está actualmente presente en el archivo."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
-msgstr ""
+msgstr "El campo se establece normalmento a la fecha en la que el archivo fue creado."
 
 #: src/input/subtitles.cpp:167
 msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
