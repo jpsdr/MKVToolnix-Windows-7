@@ -47,7 +47,6 @@ private:
   static std::map<std::string, charset_converter_cptr> s_converters;
 };
 
-#if defined(HAVE_ICONV_H)
 class iconv_charset_converter_c: public charset_converter_c {
 private:
   bool m_is_utf8;
@@ -66,7 +65,6 @@ public:                         // Static functions
 private:                        // Static functions
   static std::string convert(iconv_t handle, const std::string &source);
 };
-# endif  // HAVE_ICONV_H
 
 #if defined(SYS_WINDOWS)
 class windows_charset_converter_c: public charset_converter_c {
