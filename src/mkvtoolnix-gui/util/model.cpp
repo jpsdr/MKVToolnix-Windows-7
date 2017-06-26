@@ -129,6 +129,17 @@ walkTree(QAbstractItemModel &model,
     walkTree(model, model.index(row, 0, idx), worker);
 }
 
+void
+requestAllItems(QStandardItemModel &model,
+                QModelIndex const &parent) {
+  for (int row = 0, numRows = model.rowCount(parent), numCols = model.columnCount(); row < numRows; ++row) {
+    for (int col = 0; col < numCols; ++col)
+      model.itemFromIndex(model.index(row, col, parent));
+
+    requestAllItems(model, model.index(row, 0, parent));
+  }
+}
+
 QModelIndex
 findIndex(QAbstractItemModel const &model,
           std::function<bool(QModelIndex const &)> const &predicate,

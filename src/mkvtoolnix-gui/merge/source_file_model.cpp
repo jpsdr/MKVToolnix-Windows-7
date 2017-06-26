@@ -561,7 +561,11 @@ SourceFileModel::dropMimeData(QMimeData const *data,
   if (row == -1)
     row = rowCount(parent);
 
-  return dropSourceFiles(data, action, row, parent.isValid() ? parent.sibling(parent.row(), 0) : parent);
+  auto result = dropSourceFiles(data, action, row, parent.isValid() ? parent.sibling(parent.row(), 0) : parent);
+
+  Util::requestAllItems(*this);
+
+  return result;
 }
 
 QString

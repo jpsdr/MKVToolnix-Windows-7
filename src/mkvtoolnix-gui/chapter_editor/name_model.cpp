@@ -181,7 +181,11 @@ NameModel::dropMimeData(QMimeData const *data,
     return false;
 
   auto isInside = (-1 == row) && (-1 == column);
-  return QStandardItemModel::dropMimeData(data, action, isInside ? -1 : row, isInside ? -1 : 0, parent.sibling(parent.row(), 0));
+  auto result   = QStandardItemModel::dropMimeData(data, action, isInside ? -1 : row, isInside ? -1 : 0, parent.sibling(parent.row(), 0));
+
+  Util::requestAllItems(*this);
+
+  return result;
 }
 
 }}}

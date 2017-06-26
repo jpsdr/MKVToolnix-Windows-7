@@ -198,7 +198,11 @@ AttachmentModel::dropMimeData(QMimeData const *data,
   if (!ok)
     return false;
 
-  return QStandardItemModel::dropMimeData(data, action, row, 0, parent);
+  auto result = QStandardItemModel::dropMimeData(data, action, row, 0, parent);
+
+  Util::requestAllItems(*this);
+
+  return result;
 }
 
 Qt::ItemFlags

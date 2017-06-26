@@ -644,7 +644,11 @@ Model::dropMimeData(QMimeData const *data,
   if (!canDropMimeData(data, action, row, column, parent))
     return false;
 
-  return QStandardItemModel::dropMimeData(data, action, row, 0, parent);
+  auto result = QStandardItemModel::dropMimeData(data, action, row, 0, parent);
+
+  Util::requestAllItems(*this);
+
+  return result;
 }
 
 void
