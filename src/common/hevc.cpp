@@ -1677,6 +1677,8 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   } else if (m_sps_info_list[i].checksum != sps_info.checksum) {
     mxverb(2, boost::format("hevc: SPS ID %|1$04x| changed; checksum old %|2$04x| new %|3$04x|\n") % sps_info.id % m_sps_info_list[i].checksum % sps_info.checksum);
 
+    cleanup();
+
     m_sps_info_list[i] = sps_info;
     m_sps_list[i]      = parsed_nalu;
     m_hevcc_changed    = true;
@@ -1745,6 +1747,9 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
 
   } else if (m_pps_info_list[i].checksum != pps_info.checksum) {
     mxverb(2, boost::format("hevc: PPS ID %|1$04x| changed; checksum old %|2$04x| new %|3$04x|\n") % pps_info.id % m_pps_info_list[i].checksum % pps_info.checksum);
+
+    if (m_pps_info_list[i].sps_id != pps_info.sps_id)
+      cleanup();
 
     m_pps_info_list[i] = pps_info;
     m_pps_list[i]      = nalu;
