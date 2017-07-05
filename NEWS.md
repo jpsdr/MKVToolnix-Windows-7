@@ -9,10 +9,10 @@
   hidden. Fixes #2009.
 * mkvmerge: AVC/h.264 parser: fixed wrong frame order & timestamp calculation
   in certain situations when SPS (sequence parameter sets) or PPS (picture
-  parameter sets) change mid-sream. Fixes #2028.
+  parameter sets) change mid-stream. Fixes #2028.
 * mkvmerge: HEVC/h.265 parser: fixed wrong frame order & timestamp calculation
   in certain situations when SPS (sequence parameter sets) or PPS (picture
-  parameter sets) change mid-sream. This is the HEVC/h.265 equivalent of
+  parameter sets) change mid-stream. This is the HEVC/h.265 equivalent of
   #2028.
 
 
