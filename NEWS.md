@@ -10,7 +10,7 @@
 
 ## Bug fixes
 
-* mkvmerge: MPEG TS reader: mkvmerge won't emit warnings if the sytem's
+* mkvmerge: MPEG TS reader: mkvmerge won't emit warnings if the system's
   `iconv` library doesn't support the ISO 6937 character set. Fixes #2023.
 * MKVToolNix GUI: multiplex tool: implemented a workaround for a crash that
   could occur during drag & drop if at least one of the columns is
