@@ -454,7 +454,7 @@ void
 Model::updateProgress() {
   QMutexLocker locked{&m_mutex};
 
-  if (!(m_toBeProcessed.count() + m_queueNumDone))
+  if (m_toBeProcessed.isEmpty())
     return;
 
   auto numRunning       = 0;
@@ -467,7 +467,7 @@ Model::updateProgress() {
     }
 
   auto progress      = numRunning ? runningProgress / numRunning : 0u;
-  auto totalProgress = m_toBeProcessed.count() != 0 ? (m_queueNumDone * 100 + runningProgress) / m_toBeProcessed.count() : 0u;
+  auto totalProgress = (m_queueNumDone * 100 + runningProgress) / m_toBeProcessed.count();
 
   emit progressChanged(progress, totalProgress);
 }
