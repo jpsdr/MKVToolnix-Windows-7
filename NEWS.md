@@ -1,5 +1,13 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: changed the shortcuts for switching between the various
+  tools from `Alt+number` (e.g. `Alt+1` for the multiplexer tool) to
+  `Ctrl+Alt+number` in order to avoid clashing with Windows' input method for
+  arbitrary characters (pressing and holding `Alt` and typing the codepoint on
+  the number pad). Implements #2034.
+
 ## Bug fixes
 
 * mkvmerge: MPEG TS reader: mkvmerge won't emit warnings if the sytem's
