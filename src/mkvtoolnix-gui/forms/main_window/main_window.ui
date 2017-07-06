@@ -202,12 +202,20 @@
     <addaction name="actionJobQueueAcknowledgeAllErrors"/>
     <addaction name="actionJobQueueAcknowledgeAllWarningsErrors"/>
    </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>&amp;Window</string>
+    </property>
+    <addaction name="actionWindowNext"/>
+    <addaction name="actionWindowPrevious"/>
+   </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
    <addaction name="menuHeaderEditor"/>
    <addaction name="menuChapterEditor"/>
    <addaction name="menuJobQueue"/>
    <addaction name="menuJobOutput"/>
+   <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -814,6 +822,22 @@
    </property>
    <property name="text">
     <string>&amp;Save</string>
+   </property>
+  </action>
+  <action name="actionWindowNext">
+   <property name="text">
+    <string notr="true">Next</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F6</string>
+   </property>
+  </action>
+  <action name="actionWindowPrevious">
+   <property name="text">
+    <string notr="true">Previous</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+F6</string>
    </property>
   </action>
  </widget>

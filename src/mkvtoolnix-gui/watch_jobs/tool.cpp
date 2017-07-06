@@ -25,6 +25,8 @@ Tool::Tool(QWidget *parent,
 {
   // Setup UI controls.
   ui->setupUi(this);
+
+  MainWindow::get()->registerSubWindowWidget(*this, *ui->widgets);
 }
 
 Tool::~Tool() {
@@ -191,6 +193,15 @@ Tool::forEachTab(std::function<void(Tab &)> const &worker) {
   }
 
   ui->widgets->setCurrentIndex(currentIndex);
+}
+
+std::pair<QString, QString>
+Tool::nextPreviousWindowActionTexts()
+  const {
+  return {
+    QY("&Next job output tab"),
+    QY("&Previous job output tab"),
+  };
 }
 
 }}}

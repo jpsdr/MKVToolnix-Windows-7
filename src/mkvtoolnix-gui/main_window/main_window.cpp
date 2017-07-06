@@ -11,6 +11,7 @@
 #include <QtConcurrent>
 
 #include "common/fs_sys_helpers.h"
+#include "common/list_utils.h"
 #include "common/locale_string.h"
 #include "common/qt.h"
 #include "common/version.h"
@@ -56,6 +57,7 @@ class MainWindowPrivate {
   std::unique_ptr<Util::MovingPixmapOverlay> movingPixmapOverlay;
 
   QHash<QObject *, QString> helpURLs;
+  QHash<ToolBase *, QTabWidget *> subWindowWidgets;
 
   explicit MainWindowPrivate()
     : ui{new Ui::MainWindow}
@@ -157,6 +159,10 @@ MainWindow::setupMenu() {
   connect(d->ui->actionHelpWebSite,               &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(d->ui->actionHelpReportBug,             &QAction::triggered,             this, &MainWindow::visitHelpURL);
 
+  connect(d->ui->actionWindowNext,                &QAction::triggered,             this, [this]() { showNextOrPreviousSubWindow(1);  });
+  connect(d->ui->actionWindowPrevious,            &QAction::triggered,             this, [this]() { showNextOrPreviousSubWindow(-1); });
+  connect(d->ui->menuWindow,                      &QMenu::aboutToShow,             this, &MainWindow::setupWindowMenu);
+
   connect(this,                                   &MainWindow::preferencesChanged, this, &MainWindow::setToolSelectorVisibility);
 
   connect(d->ui->actionHelpCheckForUpdates,       &QAction::triggered,             this, &MainWindow::checkForUpdates);
@@ -191,6 +197,7 @@ MainWindow::setupToolSelector() {
 
   d->ui->tool->setCurrentIndex(0);
   d->toolMerge->toolShown();
+  showAndEnableMenu(*d->ui->menuWindow, d->subWindowWidgets.contains(d->toolMerge));
 
   d->toolSelectionActions << d->ui->actionGUIMergeTool    /* << d->ui->actionGUIExtractionTool << d->ui->actionGUIInfoTool*/
                           << d->ui->actionGUIHeaderEditor << d->ui->actionGUIChapterEditor  /*<< d->ui->actionGUITagEditor*/
@@ -280,8 +287,10 @@ MainWindow::toolChanged(int index) {
   auto widget   = d->ui->tool->widget(index);
   auto toolBase = dynamic_cast<ToolBase *>(widget);
 
-  if (toolBase)
+  if (toolBase) {
     toolBase->toolShown();
+    showAndEnableMenu(*d->ui->menuWindow, d->subWindowWidgets.contains(toolBase));
+  }
 }
 
 MainWindow *
@@ -682,6 +691,90 @@ MainWindow::runCacheCleanupOncePerVersion()
   Util::Settings::runOncePerVersion(Q("cacheCleanup"), []() {
     QtConcurrent::run(Util::Cache::cleanOldCacheFiles);
   });
+}
+
+std::pair<ToolBase *, QTabWidget *>
+MainWindow::currentSubWindowWidget() {
+  Q_D(MainWindow);
+
+  auto toolBase = dynamic_cast<ToolBase *>(d->ui->tool->widget(d->ui->tool->currentIndex()));
+
+  if (toolBase && d->subWindowWidgets.contains(toolBase))
+    return { toolBase, d->subWindowWidgets[toolBase] };
+
+  return {};
+}
+
+void
+MainWindow::registerSubWindowWidget(ToolBase &toolBase,
+                                    QTabWidget &tabWidget) {
+  Q_D(MainWindow);
+
+  d->subWindowWidgets[&toolBase] = &tabWidget;
+}
+
+void
+MainWindow::showNextOrPreviousSubWindow(int delta) {
+  auto subWindow = currentSubWindowWidget();
+
+  if (!subWindow.first)
+    return;
+
+  auto numSubWindows = subWindow.second->count();
+  if (numSubWindows < 2)
+    return;
+
+  auto newIndex = subWindow.second->currentIndex() + delta;
+  newIndex      = (newIndex + (newIndex < 0 ? numSubWindows : 0)) % numSubWindows;
+
+  subWindow.second->setCurrentIndex(newIndex);
+}
+
+void
+MainWindow::setupWindowMenu() {
+  Q_D(MainWindow);
+
+  auto subWindow = currentSubWindowWidget();
+
+  if (!subWindow.first)
+    return;
+
+  auto texts         = subWindow.first->nextPreviousWindowActionTexts();
+  auto numSubWindows = subWindow.second->count();
+  auto menu          = d->ui->menuWindow;
+
+  d->ui->actionWindowNext->setText(texts.first);
+  d->ui->actionWindowPrevious->setText(texts.second);
+
+  d->ui->actionWindowNext->setEnabled(numSubWindows >= 2);
+  d->ui->actionWindowPrevious->setEnabled(numSubWindows >= 2);
+
+  for (auto &action : menu->actions())
+    if (!mtx::included_in(action, d->ui->actionWindowNext, d->ui->actionWindowPrevious))
+      delete action;
+
+  if (!numSubWindows)
+    return;
+
+  menu->addSeparator();
+
+  for (auto tabIdx = 0; tabIdx < numSubWindows; ++tabIdx) {
+    auto prefix = tabIdx <= 8 ? Q("&%1: ").arg(tabIdx + 1)
+                : tabIdx == 9 ? Q("1&0: ")
+                :               Q("");
+    auto text   = subWindow.second->tabText(tabIdx);
+    auto action = menu->addAction(Q("%1%2").arg(prefix).arg(text));
+
+    connect(action, &QAction::triggered, this, [this, tabIdx]() { showSubWindow(tabIdx); });
+  }
+}
+
+void
+MainWindow::showSubWindow(unsigned int tabIdx) {
+  auto subWindow = currentSubWindowWidget();
+
+  if (subWindow.first && (tabIdx < static_cast<unsigned int>(subWindow.second->count())))
+    subWindow.second->setCurrentIndex(tabIdx);
 }
 
 }}

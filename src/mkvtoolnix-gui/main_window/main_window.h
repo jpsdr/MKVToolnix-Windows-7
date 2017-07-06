@@ -71,6 +71,8 @@ public:
 
   virtual void editPreferencesAndShowPage(PreferencesDialog::Page page);
 
+  virtual void registerSubWindowWidget(ToolBase &toolBase, QTabWidget &tabWidget);
+
 signals:
   void windowShown();
   void preferencesChanged();
@@ -90,6 +92,10 @@ public slots:
   virtual void checkForUpdates();
 
   virtual void displayInstallationProblems(Util::InstallationChecker::Problems const &problems);
+
+  virtual void setupWindowMenu();
+  virtual void showNextOrPreviousSubWindow(int delta);
+  virtual void showSubWindow(unsigned int tabIdx);
 
 public:                         // static
   static MainWindow *get();
@@ -119,6 +125,8 @@ protected:
 
   virtual void silentlyCheckForUpdates();
   virtual void runCacheCleanupOncePerVersion() const;
+
+  virtual std::pair<ToolBase *, QTabWidget *> currentSubWindowWidget();
 };
 
 }}

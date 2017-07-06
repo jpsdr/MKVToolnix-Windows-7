@@ -33,6 +33,7 @@ public:
 
   virtual void setupUi() override;
   virtual void setupActions() override;
+  virtual std::pair<QString, QString> nextPreviousWindowActionTexts() const override;
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;

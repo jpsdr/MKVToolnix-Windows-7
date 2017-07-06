@@ -33,6 +33,8 @@ Tool::Tool(QWidget *parent,
 {
   // Setup UI controls.
   ui->setupUi(this);
+
+  MainWindow::get()->registerSubWindowWidget(*this, *ui->merges);
 }
 
 Tool::~Tool() {
@@ -434,6 +436,15 @@ Tool::forEachTab(std::function<void(Tab &)> const &worker) {
   }
 
   ui->merges->setCurrentIndex(currentIndex);
+}
+
+std::pair<QString, QString>
+Tool::nextPreviousWindowActionTexts()
+  const {
+  return {
+    QY("&Next multiplex settings"),
+    QY("&Previous multiplex settings"),
+  };
 }
 
 }}}

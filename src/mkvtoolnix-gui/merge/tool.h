@@ -34,6 +34,7 @@ public:
 
   virtual void setupUi() override;
   virtual void setupActions() override;
+  virtual std::pair<QString, QString> nextPreviousWindowActionTexts() const override;
   virtual void openConfigFile(QString const &fileName);
   virtual void openFromConfig(MuxConfig const &config);
 

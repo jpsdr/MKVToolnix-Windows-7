@@ -35,6 +35,8 @@ Tool::Tool(QWidget *parent,
 {
   // Setup UI controls.
   ui->setupUi(this);
+
+  MainWindow::get()->registerSubWindowWidget(*this, *ui->editors);
 }
 
 Tool::~Tool() {
@@ -378,6 +380,15 @@ Tool::forEachTab(std::function<void(Tab &)> const &worker) {
   }
 
   ui->editors->setCurrentIndex(currentIndex);
+}
+
+std::pair<QString, QString>
+Tool::nextPreviousWindowActionTexts()
+  const {
+  return {
+    QY("&Next chapter editor tab"),
+    QY("&Previous chapter editor tab"),
+  };
 }
 
 }}}

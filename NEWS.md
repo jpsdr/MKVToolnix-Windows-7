@@ -7,6 +7,9 @@
   `Ctrl+Alt+number` in order to avoid clashing with Windows' input method for
   arbitrary characters (pressing and holding `Alt` and typing the codepoint on
   the number pad). Implements #2034.
+* MKVToolNix GUI: added a "Window" menu and entries with shortcuts for
+  selecting the next (`Ctrl+F6`) respectively previous tab (`Ctrl+Shift+F6`)
+  in the current tool. Implements #1972, #2032.
 
 ## Bug fixes
 

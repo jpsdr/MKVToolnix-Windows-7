@@ -42,6 +42,7 @@ public:
 
   virtual void setupUi() override;
   virtual void setupActions() override;
+  virtual std::pair<QString, QString> nextPreviousWindowActionTexts() const override;
 
 public slots:
   virtual void toolShown() override;
