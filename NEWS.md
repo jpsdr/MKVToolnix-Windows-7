@@ -10,6 +10,9 @@
 * MKVToolNix GUI: added a "Window" menu and entries with shortcuts for
   selecting the next (`Ctrl+F6`) respectively previous tab (`Ctrl+Shift+F6`)
   in the current tool. Implements #1972, #2032.
+* MKVToolNix GUI: on Windows the GUI will now determine the default font to
+  use by querying Windows for the default UI/message box font instead of using
+  the hardcoded `Segoe UI`. This might fix issues such as #2003 (unverified).
 
 ## Bug fixes
 

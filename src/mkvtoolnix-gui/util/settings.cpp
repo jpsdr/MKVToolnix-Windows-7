@@ -16,27 +16,9 @@
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Util {
-
-namespace {
-
-QFont
-defaultUiFont() {
-  auto font         = App::font();
-  // auto logicalDPI   = App::primaryScreen()->logicalDotsPerInch();
-  // auto minPointSize = static_cast<int>(9 + (std::max(logicalDPI, 95.) - 95 + 5) * 3 / 25);
-
-  // font.setPointSize(std::max(font.pointSize(), minPointSize));
-
-#if defined(SYS_WINDOWS)
-  font.setFamily(Q("Segoe UI"));
-#endif
-
-  return font;
-}
-
-}
 
 QString
 Settings::RunProgramConfig::validate()
