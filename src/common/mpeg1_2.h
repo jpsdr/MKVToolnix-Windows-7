@@ -65,7 +65,6 @@ int extract_fps_idx(const unsigned char *buffer, int buffer_size);
 double get_fps(int idx);
 bool extract_ar(const unsigned char *buffer, int buffer_size, float &ar);
 bool is_fourcc(uint32_t fourcc);
-bool version_from_fourcc(uint32_t fourcc);
 
 };
 

@@ -142,8 +142,3 @@ bool
 mpeg1_2::is_fourcc(uint32_t fourcc) {
   return (MPEGVIDEO_FOURCC_MPEG1 == fourcc) || (MPEGVIDEO_FOURCC_MPEG2 == fourcc);
 }
-
-bool
-mpeg1_2::version_from_fourcc(uint32_t fourcc) {
-  return (MPEGVIDEO_FOURCC_MPEG1 == fourcc) ? 1 : 2;
-}
