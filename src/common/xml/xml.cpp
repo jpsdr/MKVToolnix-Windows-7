@@ -74,9 +74,15 @@ load_file(std::string const &file_name,
                              "encoding \\s* = \\s*" // encoding attribute
                              "\" ( [^\"]+ ) \"",    // attribute value
                              boost::regex::perl | boost::regex::mod_x | boost::regex::icase);
-    boost::match_results<std::string::const_iterator> matches;
-    if (boost::regex_search(content, matches, encoding_re))
-      content = charset_converter_c::init(matches[1].str())->utf8(content);
+
+    boost::smatch matches;
+    if (boost::regex_search(content, matches, encoding_re)) {
+      // Extract the old encoding, replace the string with "UTF-8" so
+      // that pugixml doesn't recode, and recode to UTF-8.
+      auto encoding = matches[1].str();
+      content.replace(matches[1].first, matches[1].second, "UTF-8");
+      content = charset_converter_c::init(encoding)->utf8(content);
+    }
   }
 
   std::stringstream scontent(content);

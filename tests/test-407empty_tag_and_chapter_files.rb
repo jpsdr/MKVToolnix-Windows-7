@@ -5,6 +5,6 @@ describe "mkvmerge / empty tag and chapter files"
 
 file = "data/subtitles/srt/ven.srt"
 
-test_merge file, :args => "--global-tags data/text/tags-empty.xml"
-test_merge file, :args => "--tags 0:data/text/tags-empty.xml"
-test_merge file, :args => "--chapters data/text/chapters-empty.xml"
+test_merge file, :args => "--global-tags data/text/tags-invalid-empty.xml",  :exit_code => :error
+test_merge file, :args => "--tags 0:data/text/tags-invalid-empty.xml",       :exit_code => :error
+test_merge file, :args => "--chapters data/text/chapters-invalid-empty.xml", :exit_code => :error
