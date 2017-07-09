@@ -164,18 +164,18 @@ parse_latest_release_version(mtx::xml::document_cptr const &doc) {
 
   mtx_release_version_t release;
 
-  release.latest_source             = version_number_t{doc->select_single_node("/mkvtoolnix-releases/latest-source/version").node().child_value()};
+  release.latest_source             = version_number_t{doc->select_node("/mkvtoolnix-releases/latest-source/version").node().child_value()};
   release.latest_windows_build      = version_number_t{(boost::format("%1% build %2%")
-                                                        % doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/version").node().child_value()
-                                                        % doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/build").node().child_value()).str()};
+                                                        % doc->select_node("/mkvtoolnix-releases/latest-windows-pre/version").node().child_value()
+                                                        % doc->select_node("/mkvtoolnix-releases/latest-windows-pre/build").node().child_value()).str()};
   release.valid                     = release.latest_source.valid;
-  release.urls["general"]           = doc->select_single_node("/mkvtoolnix-releases/latest-source/url").node().child_value();
-  release.urls["source_code"]       = doc->select_single_node("/mkvtoolnix-releases/latest-source/source-code-url").node().child_value();
-  release.urls["windows_pre_build"] = doc->select_single_node("/mkvtoolnix-releases/latest-windows-pre/url").node().child_value();
+  release.urls["general"]           = doc->select_node("/mkvtoolnix-releases/latest-source/url").node().child_value();
+  release.urls["source_code"]       = doc->select_node("/mkvtoolnix-releases/latest-source/source-code-url").node().child_value();
+  release.urls["windows_pre_build"] = doc->select_node("/mkvtoolnix-releases/latest-windows-pre/url").node().child_value();
 
   for (auto arch : std::vector<std::string>{ "x86", "amd64" })
     for (auto package : std::vector<std::string>{ "installer", "portable" })
-      release.urls[std::string{"windows_"} + arch + "_" + package] = doc->select_single_node((std::string{"/mkvtoolnix-releases/latest-windows-binary/"} + package + "-url/" + arch).c_str()).node().child_value();
+      release.urls[std::string{"windows_"} + arch + "_" + package] = doc->select_node((std::string{"/mkvtoolnix-releases/latest-windows-binary/"} + package + "-url/" + arch).c_str()).node().child_value();
 
   if (debugging_c::requested("version_check")) {
     std::stringstream urls;
