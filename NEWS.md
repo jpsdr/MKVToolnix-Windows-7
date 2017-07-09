@@ -32,6 +32,8 @@
   at 100% when all jobs have finished. This was introduced by the attempt at
   fixing the computation of the value of total progress bar for multiple jobs
   running. Fixes #2005.
+* mkvmerge: MPEG PS reader: fixed mkvmerge trying to handle an "end" code the
+  same way as a "program stream map" code.
 
 
 # Version 13.0.0 "The Juggler" 2017-06-25

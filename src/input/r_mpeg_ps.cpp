@@ -1158,6 +1158,7 @@ mpeg_ps_reader_c::find_next_packet(mpeg_ps_id_t &id,
         case MPEGVIDEO_MPEG_PROGRAM_END_CODE:
           if (!resync_stream(header))
             return false;
+          break;
 
         case MPEGVIDEO_PROGRAM_STREAM_MAP_START_CODE:
           parse_program_stream_map();
