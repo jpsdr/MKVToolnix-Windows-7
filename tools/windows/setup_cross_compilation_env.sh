@@ -41,7 +41,7 @@ function update_mingw_cross_env {
   else
     echo Updating the M cross environment build scripts >> $LOGFILE
     cd $INSTALL_DIR
-    git pull >> $LOGFILE 2>&1
+    git fetch >> $LOGFILE 2>&1 && git reset --hard >> $LOGFILE 2>&1
   fi
 
   cd ${INSTALL_DIR}
