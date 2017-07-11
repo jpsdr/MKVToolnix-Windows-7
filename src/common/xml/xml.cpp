@@ -80,7 +80,7 @@ load_file(std::string const &file_name,
       // Extract the old encoding, replace the string with "UTF-8" so
       // that pugixml doesn't recode, and recode to UTF-8.
       auto encoding = matches[1].str();
-      content.replace(matches[1].first, matches[1].second, "UTF-8");
+      content.replace(matches.position(1), matches.length(1), "UTF-8");
       content = charset_converter_c::init(encoding)->utf8(content);
     }
   }
