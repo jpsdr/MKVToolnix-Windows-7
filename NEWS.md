@@ -35,6 +35,12 @@
 * mkvmerge: MPEG PS reader: fixed mkvmerge trying to handle an "end" code the
   same way as a "program stream map" code.
 
+## Build system changes
+
+* Boost: the minimum required version has been bumped to 1.49.0. Earlier
+  releases fail to build on my current systems and will therefore not be
+  supported anymore.
+
 
 # Version 13.0.0 "The Juggler" 2017-06-25
 

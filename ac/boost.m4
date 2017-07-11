@@ -1,5 +1,5 @@
 # boost's headers must be present.
-AX_BOOST_BASE([1.46.0])
+AX_BOOST_BASE([1.49.0])
 
 # boost::system must be present.
 AX_BOOST_SYSTEM()
