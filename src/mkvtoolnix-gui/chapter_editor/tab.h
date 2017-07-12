@@ -12,7 +12,6 @@
 #include "mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/types.h"
 
-class QAction;
 class QItemSelection;
 
 namespace libebml {
@@ -27,6 +26,7 @@ class Tab;
 
 class ChapterModel;
 class NameModel;
+class TabPrivate;
 
 class Tab : public QWidget {
   Q_OBJECT;
@@ -41,27 +41,15 @@ protected:
   using LoadResult       = std::pair<ChaptersPtr, bool>;
 
 protected:
-  // UI stuff:
-  std::unique_ptr<Ui::Tab> ui;
+  Q_DECLARE_PRIVATE(Tab);
 
-  QString m_fileName, m_originalFileName;
-  std::unique_ptr<QtKaxAnalyzer> m_analyzer;
-  QDateTime m_fileModificationTime;
+  QScopedPointer<TabPrivate> const d_ptr;
 
-  ChapterModel *m_chapterModel;
-  NameModel *m_nameModel;
-
-  QAction *m_expandAllAction, *m_collapseAllAction, *m_addEditionBeforeAction, *m_addEditionAfterAction, *m_addChapterBeforeAction, *m_addChapterAfterAction, *m_addSubChapterAction, *m_removeElementAction;
-  QAction *m_duplicateAction, *m_massModificationAction, *m_generateSubChaptersAction, *m_renumberSubChaptersAction;
-  QList<QWidget *> m_nameWidgets;
-
-  bool m_ignoreChapterSelectionChanges{};
-
-  QString m_savedState;
+  explicit Tab(QWidget *parent, TabPrivate &d);
 
 public:
   explicit Tab(QWidget *parent, QString const &fileName = QString{});
-  ~Tab();
+  virtual ~Tab();
 
   virtual void retranslateUi();
   virtual QString const &fileName() const;
@@ -116,6 +104,7 @@ public slots:
   virtual void closeTab();
 
 protected:
+  void setup();
   void setupUi();
   void resetData();
   void expandCollapseAll(bool expand, QModelIndex const &parentIdx = {});
