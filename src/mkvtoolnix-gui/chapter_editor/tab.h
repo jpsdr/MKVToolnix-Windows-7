@@ -28,6 +28,21 @@ class ChapterModel;
 class NameModel;
 class TabPrivate;
 
+struct ChapterAtomData {
+  KaxChapterAtom *atom, *parentAtom;
+  timestamp_c start, end, calculatedEnd;
+  QString primaryName;
+  int level;
+
+  ChapterAtomData()
+    : atom{}
+    , parentAtom{}
+    , level{}
+  {
+  }
+};
+using ChapterAtomDataPtr = std::shared_ptr<ChapterAtomData>;
+
 class Tab : public QWidget {
   Q_OBJECT;
 
@@ -114,6 +129,8 @@ protected:
   LoadResult loadFromMplsFile();
   LoadResult checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters);
 
+  bool readFileEndTimestampForMatroska();
+
   void resizeChapterColumnsToContents() const;
   void resizeNameColumnsToContents() const;
 
@@ -153,6 +170,7 @@ protected:
   std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>> expandTimecodes(QStandardItem *item);
   void setLanguages(QStandardItem *item, QString const &language);
   void setCountries(QStandardItem *item, QString const &country);
+  void setEndTimestamps(QStandardItem *startItem);
 
 protected:
   void setupToolTips();
@@ -163,6 +181,7 @@ protected:
   QStringList usedNameLanguages(QStandardItem *parentItem = nullptr);
   QStringList usedNameCountryCodes(QStandardItem *parentItem = nullptr);
   ChaptersPtr timecodesToChapters(std::vector<timestamp_c> const &timecodes) const;
+  QHash<KaxChapterAtom *, ChapterAtomDataPtr> collectChapterAtomDataForEdition(QStandardItem *item);
   QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimecode) const;
   bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace,
                          bool skipHidden);

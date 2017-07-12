@@ -26,6 +26,8 @@ class TabPrivate {
 
   QString savedState;
 
+  timestamp_c fileEndTimestamp;
+
   explicit TabPrivate(Tab &tab, QString const &pFileName);
 };
 

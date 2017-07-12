@@ -77,6 +77,12 @@ MassModificationDialog::retranslateUi() {
 
   Util::setToolTip(m_ui->dsbMultiplyBy, QY("If both shifting and multiplication are enabled then the shift will be performed before the multiplication."));
 
+  Util::setToolTip(m_ui->cbSetEndTimestamps,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."))
+                   .arg(QY("If there is no such chapter, the parent chapter's end timestamp will be used instead."))
+                   .arg(QY("If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration.")));
+
   if (m_editionOrChapterSelected)
     m_ui->lTitle->setText(QY("Please select the actions to apply to the selected edition or chapter and all of its children."));
   else
@@ -95,6 +101,7 @@ MassModificationDialog::actions()
   if (m_ui->cbSetLanguage->isChecked())                                       result |= Action::SetLanguage;
   if (m_ui->cbSetCountry->isChecked())                                        result |= Action::SetCountry;
   if (m_ui->cbMultiply->isChecked())                                          result |= Action::Multiply;
+  if (m_ui->cbSetEndTimestamps->isChecked())                                  result |= Action::SetEndTimestamps;
 
   return result;
 }

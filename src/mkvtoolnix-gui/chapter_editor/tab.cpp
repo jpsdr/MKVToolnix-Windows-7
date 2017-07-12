@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QMenu>
@@ -12,6 +13,8 @@
 #include "common/chapters/chapters.h"
 #include "common/construct.h"
 #include "common/ebml.h"
+#include "common/kax_file.h"
+#include "common/math.h"
 #include "common/mm_io_x.h"
 #include "common/mpls.h"
 #include "common/qt.h"
@@ -289,6 +292,83 @@ Tab::resetData() {
   d->chapterModel->reset();
 }
 
+bool
+Tab::readFileEndTimestampForMatroska() {
+  Q_D(Tab);
+
+  d->fileEndTimestamp.reset();
+
+  auto idx = d->analyzer->find(KaxInfo::ClassInfos.GlobalId);
+  if (-1 == idx) {
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(d->fileName)).exec();
+    return false;
+  }
+
+  auto info = d->analyzer->read_element(idx);
+  if (!info) {
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(d->fileName)).exec();
+    return false;
+  }
+
+  auto durationKax = FindChild<KaxDuration>(*info);
+  if (!durationKax) {
+    qDebug() << "readFileEndTimestampForMatroska: no duration found";
+    return true;
+  }
+
+  auto timecodeScale = FindChildValue<KaxTimecodeScale, uint64_t>(static_cast<KaxInfo &>(*info), TIMECODE_SCALE);
+  auto duration      = timestamp_c::ns(durationKax->GetValue() * timecodeScale);
+
+  qDebug() << "readFileEndTimestampForMatroska: duration is" << Q(format_timestamp(duration));
+
+  auto &fileIo = d->analyzer->get_file();
+  fileIo.setFilePointer(d->analyzer->get_segment_data_start_pos());
+
+  kax_file_c fileKax{fileIo};
+  fileKax.enable_reporting(false);
+
+  auto cluster = std::shared_ptr<KaxCluster>(fileKax.read_next_cluster());
+  if (!cluster) {
+    qDebug() << "readFileEndTimestampForMatroska: no cluster found";
+    return true;
+  }
+
+  cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(*cluster), timecodeScale);
+
+  auto minBlockTimestamp = timestamp_c::ns(0);
+
+  for (auto const &child : *cluster) {
+    timestamp_c blockTimestamp;
+
+    if (Is<KaxBlockGroup>(child)) {
+      auto &group = static_cast<KaxBlockGroup &>(*child);
+      auto block  = FindChild<KaxBlock>(group);
+
+      if (block) {
+        block->SetParent(*cluster);
+        blockTimestamp = timestamp_c::ns(mtx::math::to_signed(block->GlobalTimecode()));
+      }
+
+    } else if (Is<KaxSimpleBlock>(child)) {
+      auto &block = static_cast<KaxSimpleBlock &>(*child);
+      block.SetParent(*cluster);
+      blockTimestamp = timestamp_c::ns(mtx::math::to_signed(block.GlobalTimecode()));
+
+    }
+
+    if (   blockTimestamp.valid()
+        && (   !minBlockTimestamp.valid()
+            || (blockTimestamp < minBlockTimestamp)))
+      minBlockTimestamp = blockTimestamp;
+  }
+
+  d->fileEndTimestamp = minBlockTimestamp + duration;
+
+  qDebug() << "readFileEndTimestampForMatroska: minBlockTimestamp" << Q(format_timestamp(minBlockTimestamp)) << "result" << Q(format_timestamp(d->fileEndTimestamp));
+
+  return true;
+}
+
 Tab::LoadResult
 Tab::loadFromMatroskaFile() {
   Q_D(Tab);
@@ -315,6 +395,12 @@ Tab::loadFromMatroskaFile() {
   if (!chapters) {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(d->fileName)).exec();
     emit removeThisTab();
+    return {};
+  }
+
+  if (!readFileEndTimestampForMatroska()) {
+    emit removeThisTab();
+    return {};
   }
 
   d->analyzer->close_file();
@@ -1366,6 +1452,36 @@ Tab::setCountries(QStandardItem *item,
 }
 
 void
+Tab::setEndTimestamps(QStandardItem *startItem) {
+  Q_D(Tab);
+
+  if (!startItem)
+    return;
+
+  auto allAtomData = collectChapterAtomDataForEdition(startItem);
+
+  std::function<void(QStandardItem *)> setter = [d, &allAtomData, &setter](QStandardItem *item) {
+    if (item->parent()) {
+      auto chapter = d->chapterModel->chapterFromItem(item);
+      if (chapter) {
+        auto data = allAtomData[chapter.get()];
+        if (data && data->calculatedEnd.valid()) {
+          GetChild<KaxChapterTimeEnd>(*chapter).SetValue(data->calculatedEnd.to_ns());
+          d->chapterModel->updateRow(item->index());
+        }
+      }
+    }
+
+    for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+      setter(item->child(row));
+  };
+
+  setter(startItem);
+
+  setControlsFromStorage();
+}
+
+void
 Tab::massModify() {
   Q_D(Tab);
 
@@ -1401,6 +1517,9 @@ Tab::massModify() {
 
   if (actions & MassModificationDialog::Sort)
     item->sortChildren(1);
+
+  if (actions & MassModificationDialog::SetEndTimestamps)
+    setEndTimestamps(item);
 
   setControlsFromStorage();
 }
@@ -1879,6 +1998,103 @@ Tab::usedNameCountryCodes(QStandardItem *rootItem) {
   collector(rootItem);
 
   return countryCodes.toList();
+}
+
+QHash<KaxChapterAtom *, ChapterAtomDataPtr>
+Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
+  Q_D(Tab);
+
+  if (!item)
+    return {};
+
+  QHash<KaxChapterAtom *, ChapterAtomDataPtr> allAtoms;
+  QHash<KaxChapterAtom *, QVector<ChapterAtomDataPtr>> atomsByParent;
+  QVector<ChapterAtomDataPtr> atomList;
+
+  // Collect all existing start and end timestamps.
+  std::function<void(QStandardItem *, KaxChapterAtom *, int)> collector = [this, d, &collector, &allAtoms, &atomsByParent, &atomList](auto *currentItem, auto *parentAtom, int level) {
+    if (!currentItem)
+      return;
+
+    QVector<ChapterAtomDataPtr> currentAtoms;
+
+    auto chapter = d->chapterModel->chapterFromItem(currentItem);
+    if (chapter && currentItem->parent()) {
+      auto timeEndKax     = FindChild<KaxChapterTimeEnd>(*chapter);
+      auto displayKax     = FindChild<KaxChapterDisplay>(*chapter);
+
+      auto data           = std::make_shared<ChapterAtomData>();
+      data->atom          = chapter.get();
+      data->parentAtom    = parentAtom;
+      data->level         = level - 1;
+      data->start         = timestamp_c::ns(GetChildValue<KaxChapterTimeStart>(*chapter));
+
+      if (timeEndKax)
+        data->end         = timestamp_c::ns(timeEndKax->GetValue());
+
+      if (displayKax)
+        data->primaryName = Q(FindChildValue<KaxChapterString>(*displayKax));
+
+      allAtoms.insert(chapter.get(), data);
+      atomsByParent[parentAtom].append(data);
+      atomList.append(data);
+    }
+
+    for (std::size_t row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
+      collector(currentItem->child(row), chapter.get(), level + 1);
+  };
+
+  std::function<void(QStandardItem *)> calculator = [this, d, &calculator, &allAtoms, &atomsByParent](auto *parentItem) {
+    if (!parentItem || !parentItem->rowCount())
+      return;
+
+    auto parentAtom         = d->chapterModel->chapterFromItem(parentItem);
+    auto parentData         = allAtoms[parentAtom.get()];
+    auto &sortedData        = atomsByParent[parentAtom.get()];
+    auto parentEndTimestamp = parentData ? parentData->calculatedEnd : d->fileEndTimestamp;
+
+    for (std::size_t row = 0, numRows = parentItem->rowCount(); row < numRows; ++row) {
+      auto atom = d->chapterModel->chapterFromItem(parentItem->child(row));
+      auto data = allAtoms[atom.get()];
+
+      if (!data)
+        continue;
+
+      auto itr            = brng::lower_bound(sortedData, data, [](auto const &a, auto const &b) { return a->start <= b->start; });
+      data->calculatedEnd = itr == sortedData.end() ? parentEndTimestamp : (*itr)->start;
+    }
+
+    for (std::size_t row = 0, numRows = parentItem->rowCount(); row < numRows; ++row)
+      calculator(parentItem->child(row));
+  };
+
+  // Determine edition we're working in.
+  while (item->parent())
+    item = item->parent();
+
+  // Collect existing tree structure & basic data for each atom.
+  collector(item, nullptr, 0);
+
+  // Sort all levels by their start times.
+  for (auto const &key : atomsByParent.keys())
+    brng::sort(atomsByParent[key], [](ChapterAtomDataPtr const &a, ChapterAtomDataPtr const &b) { return a->start < b->start; });
+
+  // Calculate end timestamps.
+  calculator(item);
+
+  // Output debug info.
+  for (auto const &data : atomList)
+    qDebug() <<
+      Q((boost::format("collectChapterAtomData: data %1%%2% start %3% end %4% [%5%] atom %6% parent %7%")
+         % std::string(data->level * 2, ' ')
+         % to_utf8(data->primaryName)
+         % data->start
+         % data->end
+         % data->calculatedEnd
+         % data->atom
+         % data->parentAtom));
+
+  return allAtoms;
 }
 
 }}}

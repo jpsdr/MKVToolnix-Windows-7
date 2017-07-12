@@ -13,6 +13,9 @@
 * MKVToolNix GUI: on Windows the GUI will now determine the default font to
   use by querying Windows for the default UI/message box font instead of using
   the hardcoded `Segoe UI`. This might fix issues such as #2003 (unverified).
+* MKVToolNix GUI: chapter editor: added a function to the "additional
+  modifications" dialog for calculating and setting the end
+  timestamps. Implements #1887.
 
 ## Bug fixes
 
