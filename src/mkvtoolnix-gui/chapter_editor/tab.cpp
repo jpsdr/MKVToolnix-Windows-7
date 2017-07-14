@@ -222,7 +222,7 @@ Tab::setupToolTips() {
   Q_D(Tab);
 
   Util::setToolTip(d->ui->elements, QY("Right-click for actions for editions and chapters"));
-  Util::setToolTip(d->ui->pbBrowseSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment D->UID to the input field on the left."));
+  Util::setToolTip(d->ui->pbBrowseSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
 }
 
 void
