@@ -506,17 +506,17 @@ Tab::areWidgetsEnabled()
 }
 
 ChaptersPtr
-Tab::timecodesToChapters(std::vector<timestamp_c> const &timecodes)
+Tab::timestampsToChapters(std::vector<timestamp_c> const &timestamps)
   const {
   auto &cfg     = Util::Settings::get();
   auto chapters = ChaptersPtr{ static_cast<KaxChapters *>(mtx::construct::cons<KaxChapters>(mtx::construct::cons<KaxEditionEntry>())) };
   auto &edition = GetChild<KaxEditionEntry>(*chapters);
   auto idx      = 0;
 
-  for (auto const &timecode : timecodes) {
+  for (auto const &timestamp : timestamps) {
     auto nameTemplate = QString{ cfg.m_chapterNameTemplate };
-    auto name         = formatChapterName(nameTemplate, ++idx, timecode);
-    auto atom         = mtx::construct::cons<KaxChapterAtom>(new KaxChapterTimeStart, timecode.to_ns(),
+    auto name         = formatChapterName(nameTemplate, ++idx, timestamp);
+    auto atom         = mtx::construct::cons<KaxChapterAtom>(new KaxChapterTimeStart, timestamp.to_ns(),
                                                              mtx::construct::cons<KaxChapterDisplay>(new KaxChapterString,   name,
                                                                                                      new KaxChapterLanguage, to_utf8(cfg.m_defaultChapterLanguage)));
     if (!cfg.m_defaultChapterCountry.isEmpty())
@@ -542,7 +542,7 @@ Tab::loadFromMplsFile() {
     parser.enable_dropping_last_entry_if_at_end(Util::Settings::get().m_dropLastChapterFromBlurayPlaylist);
 
     if (parser.parse(&in))
-      chapters = timecodesToChapters(parser.get_chapters());
+      chapters = timestampsToChapters(parser.get_chapters());
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());
@@ -827,20 +827,20 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
   else
     DeleteChildren<KaxChapterFlagHidden>(*chapter);
 
-  auto startTimecode = int64_t{};
-  if (!parse_timestamp(to_utf8(d->ui->leChStart->text()), startTimecode))
+  auto startTimestamp = int64_t{};
+  if (!parse_timestamp(to_utf8(d->ui->leChStart->text()), startTimestamp))
     return { false, QY("The start time could not be parsed: %1").arg(Q(timestamp_parser_error)) };
-  GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTimecode);
+  GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTimestamp);
 
   if (!d->ui->leChEnd->text().isEmpty()) {
-    auto endTimecode = int64_t{};
-    if (!parse_timestamp(to_utf8(d->ui->leChEnd->text()), endTimecode))
+    auto endTimestamp = int64_t{};
+    if (!parse_timestamp(to_utf8(d->ui->leChEnd->text()), endTimestamp))
       return { false, QY("The end time could not be parsed: %1").arg(Q(timestamp_parser_error)) };
 
-    if (endTimecode <= startTimecode)
-      return { false, QY("The end time must be greater than the start timecode.") };
+    if (endTimestamp <= startTimestamp)
+      return { false, QY("The end time must be greater than the start time.") };
 
-    GetChild<KaxChapterTimeEnd>(*chapter).SetValue(endTimecode);
+    GetChild<KaxChapterTimeEnd>(*chapter).SetValue(endTimestamp);
 
   } else
     DeleteChildren<KaxChapterTimeEnd>(*chapter);
@@ -1286,8 +1286,8 @@ Tab::removeElement() {
 }
 
 void
-Tab::applyModificationToTimecodes(QStandardItem *item,
-                                  std::function<int64_t(int64_t)> const &unaryOp) {
+Tab::applyModificationToTimestamps(QStandardItem *item,
+                                   std::function<int64_t(int64_t)> const &unaryOp) {
   Q_D(Tab);
 
   if (!item)
@@ -1310,25 +1310,25 @@ Tab::applyModificationToTimecodes(QStandardItem *item,
   }
 
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
-    applyModificationToTimecodes(item->child(row), unaryOp);
+    applyModificationToTimestamps(item->child(row), unaryOp);
 }
 
 void
-Tab::multiplyTimecodes(QStandardItem *item,
-                       double factor) {
-  applyModificationToTimecodes(item, [=](int64_t timecode) { return static_cast<int64_t>((timecode * factor) * 10.0 + 5) / 10ll; });
+Tab::multiplyTimestamps(QStandardItem *item,
+                        double factor) {
+  applyModificationToTimestamps(item, [=](int64_t timestamp) { return static_cast<int64_t>((timestamp * factor) * 10.0 + 5) / 10ll; });
 }
 
 void
-Tab::shiftTimecodes(QStandardItem *item,
-                    int64_t delta) {
-  applyModificationToTimecodes(item, [=](int64_t timecode) { return timecode + delta; });
+Tab::shiftTimestamps(QStandardItem *item,
+                     int64_t delta) {
+  applyModificationToTimestamps(item, [=](int64_t timestamp) { return timestamp + delta; });
 }
 
 void
-Tab::constrictTimecodes(QStandardItem *item,
-                        boost::optional<uint64_t> const &constrictStart,
-                        boost::optional<uint64_t> const &constrictEnd) {
+Tab::constrictTimestamps(QStandardItem *item,
+                         boost::optional<uint64_t> const &constrictStart,
+                         boost::optional<uint64_t> const &constrictEnd) {
   Q_D(Tab);
 
   if (!item)
@@ -1337,7 +1337,7 @@ Tab::constrictTimecodes(QStandardItem *item,
   auto chapter = item->parent() ? d->chapterModel->chapterFromItem(item) : ChapterPtr{};
   if (!chapter) {
     for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
-      constrictTimecodes(item->child(row), {}, {});
+      constrictTimestamps(item->child(row), {}, {});
     return;
   }
 
@@ -1357,11 +1357,11 @@ Tab::constrictTimecodes(QStandardItem *item,
   d->chapterModel->updateRow(item->index());
 
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
-    constrictTimecodes(item->child(row), newStart, newEnd);
+    constrictTimestamps(item->child(row), newStart, newEnd);
 }
 
 std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>>
-Tab::expandTimecodes(QStandardItem *item) {
+Tab::expandTimestamps(QStandardItem *item) {
   Q_D(Tab);
 
   if (!item)
@@ -1370,7 +1370,7 @@ Tab::expandTimecodes(QStandardItem *item) {
   auto chapter = item->parent() ? d->chapterModel->chapterFromItem(item) : ChapterPtr{};
   if (!chapter) {
     for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
-      expandTimecodes(item->child(row));
+      expandTimestamps(item->child(row));
     return {};
   }
 
@@ -1381,7 +1381,7 @@ Tab::expandTimecodes(QStandardItem *item) {
   auto modified = false;
 
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row) {
-    auto startAndEnd = expandTimecodes(item->child(row));
+    auto startAndEnd = expandTimestamps(item->child(row));
 
     if (!newStart || (startAndEnd.first && (*startAndEnd.first < *newStart)))
       newStart = startAndEnd.first;
@@ -1498,16 +1498,16 @@ Tab::massModify() {
   auto actions = dlg.actions();
 
   if (actions & MassModificationDialog::Shift)
-    shiftTimecodes(item, dlg.shiftBy());
+    shiftTimestamps(item, dlg.shiftBy());
 
   if (actions & MassModificationDialog::Multiply)
-    multiplyTimecodes(item, dlg.multiplyBy());
+    multiplyTimestamps(item, dlg.multiplyBy());
 
   if (actions & MassModificationDialog::Constrict)
-    constrictTimecodes(item, {}, {});
+    constrictTimestamps(item, {}, {});
 
   if (actions & MassModificationDialog::Expand)
-    expandTimecodes(item);
+    expandTimestamps(item);
 
   if (actions & MassModificationDialog::SetLanguage)
     setLanguages(item, dlg.language());
@@ -1540,9 +1540,9 @@ Tab::duplicateElement() {
 QString
 Tab::formatChapterName(QString const &nameTemplate,
                        int chapterNumber,
-                       timestamp_c const &startTimecode)
+                       timestamp_c const &startTimestamp)
   const {
-  return Q(format_chapter_name_template(to_utf8(nameTemplate), chapterNumber, startTimecode));
+  return Q(format_chapter_name_template(to_utf8(nameTemplate), chapterNumber, startTimestamp));
 }
 
 void
@@ -1558,30 +1558,30 @@ Tab::generateSubChapters() {
 
   auto selectedItem    = d->chapterModel->itemFromIndex(selectedIdx);
   auto selectedChapter = d->chapterModel->chapterFromItem(selectedItem);
-  auto maxEndTimecode  = selectedChapter ? FindChildValue<KaxChapterTimeStart>(*selectedChapter, 0ull) : 0ull;
+  auto maxEndTimestamp = selectedChapter ? FindChildValue<KaxChapterTimeStart>(*selectedChapter, 0ull) : 0ull;
   auto numRows         = selectedItem->rowCount();
 
   for (auto row = 0; row < numRows; ++row) {
     auto chapter = d->chapterModel->chapterFromItem(selectedItem->child(row));
     if (chapter)
-      maxEndTimecode = std::max(maxEndTimecode, std::max(FindChildValue<KaxChapterTimeStart>(*chapter, 0ull), FindChildValue<KaxChapterTimeEnd>(*chapter, 0ull)));
+      maxEndTimestamp = std::max(maxEndTimestamp, std::max(FindChildValue<KaxChapterTimeStart>(*chapter, 0ull), FindChildValue<KaxChapterTimeEnd>(*chapter, 0ull)));
   }
 
-  GenerateSubChaptersParametersDialog dlg{this, numRows + 1, maxEndTimecode, usedNameLanguages(), usedNameCountryCodes()};
+  GenerateSubChaptersParametersDialog dlg{this, numRows + 1, maxEndTimestamp, usedNameLanguages(), usedNameCountryCodes()};
   if (!dlg.exec())
     return;
 
   auto toCreate      = dlg.numberOfEntries();
   auto chapterNumber = dlg.firstChapterNumber();
-  auto timecode      = dlg.startTimecode();
+  auto timestamp     = dlg.startTimestamp();
   auto duration      = dlg.durationInNs();
   auto nameTemplate  = dlg.nameTemplate();
   auto language      = dlg.language();
   auto country       = dlg.country();
 
   while (toCreate > 0) {
-    auto chapter = createEmptyChapter(timecode, chapterNumber, nameTemplate, language, country);
-    timecode    += duration;
+    auto chapter = createEmptyChapter(timestamp, chapterNumber, nameTemplate, language, country);
+    timestamp   += duration;
 
     ++chapterNumber;
     --toCreate;
@@ -1618,8 +1618,8 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
       return false;
   }
 
-  auto startTimecode = FindChildValue<KaxChapterTimeStart>(*chapter);
-  auto name          = to_wide(formatChapterName(nameTemplate, chapterNumber, timestamp_c::ns(startTimecode)));
+  auto startTimestamp = FindChildValue<KaxChapterTimeStart>(*chapter);
+  auto name           = to_wide(formatChapterName(nameTemplate, chapterNumber, timestamp_c::ns(startTimestamp)));
 
   if (RenumberSubChaptersParametersDialog::NameMatch::First == nameMatchingMode) {
     GetChild<KaxChapterString>(GetChild<KaxChapterDisplay>(*chapter)).SetValue(name);

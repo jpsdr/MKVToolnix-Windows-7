@@ -163,11 +163,11 @@ protected:
   void saveToMatroskaImpl(bool requireNewFileName);
   void updateFileNameDisplay();
 
-  void applyModificationToTimecodes(QStandardItem *item, std::function<int64_t(int64_t)> const &unaryOp);
-  void multiplyTimecodes(QStandardItem *item, double factor);
-  void shiftTimecodes(QStandardItem *item, int64_t delta);
-  void constrictTimecodes(QStandardItem *item, boost::optional<uint64_t> const &constrictStart, boost::optional<uint64_t> const &constrictEnd);
-  std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>> expandTimecodes(QStandardItem *item);
+  void applyModificationToTimestamps(QStandardItem *item, std::function<int64_t(int64_t)> const &unaryOp);
+  void multiplyTimestamps(QStandardItem *item, double factor);
+  void shiftTimestamps(QStandardItem *item, int64_t delta);
+  void constrictTimestamps(QStandardItem *item, boost::optional<uint64_t> const &constrictStart, boost::optional<uint64_t> const &constrictEnd);
+  std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>> expandTimestamps(QStandardItem *item);
   void setLanguages(QStandardItem *item, QString const &language);
   void setCountries(QStandardItem *item, QString const &country);
   void setEndTimestamps(QStandardItem *startItem);
@@ -180,9 +180,9 @@ protected:
   QString currentState() const;
   QStringList usedNameLanguages(QStandardItem *parentItem = nullptr);
   QStringList usedNameCountryCodes(QStandardItem *parentItem = nullptr);
-  ChaptersPtr timecodesToChapters(std::vector<timestamp_c> const &timecodes) const;
+  ChaptersPtr timestampsToChapters(std::vector<timestamp_c> const &timestamps) const;
   QHash<KaxChapterAtom *, ChapterAtomDataPtr> collectChapterAtomDataForEdition(QStandardItem *item);
-  QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimecode) const;
+  QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimestamp) const;
   bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace,
                          bool skipHidden);
 

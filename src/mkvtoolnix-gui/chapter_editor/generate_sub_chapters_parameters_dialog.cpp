@@ -22,13 +22,13 @@ using namespace mtx::gui;
 
 GenerateSubChaptersParametersDialog::GenerateSubChaptersParametersDialog(QWidget *parent,
                                                                          int firstChapterNumber,
-                                                                         uint64_t startTimecode,
+                                                                         uint64_t startTimestamp,
                                                                          QStringList const &additionalLanguages,
                                                                          QStringList const &additionalCountryCodes)
   : QDialog{parent}
   , m_ui{new Ui::GenerateSubChaptersParametersDialog}
 {
-  setupUi(firstChapterNumber, startTimecode, additionalLanguages, additionalCountryCodes);
+  setupUi(firstChapterNumber, startTimestamp, additionalLanguages, additionalCountryCodes);
   retranslateUi();
 }
 
@@ -37,7 +37,7 @@ GenerateSubChaptersParametersDialog::~GenerateSubChaptersParametersDialog() {
 
 void
 GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
-                                             uint64_t startTimecode,
+                                             uint64_t startTimestamp,
                                              QStringList const &additionalLanguages,
                                              QStringList const &additionalCountryCodes) {
   auto &cfg = Util::Settings::get();
@@ -45,7 +45,7 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->setupUi(this);
 
   m_ui->sbFirstChapterNumber->setValue(firstChapterNumber);
-  m_ui->leStartTimecode->setText(Q(format_timestamp(startTimecode)));
+  m_ui->leStartTimestamp->setText(Q(format_timestamp(startTimestamp)));
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
   m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup().setCurrentByData(cfg.m_defaultChapterLanguage);
@@ -56,16 +56,16 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   adjustSize();
 
   auto mw = MainWindow::get();
-  connect(m_ui->leStartTimecode, &QLineEdit::textChanged,         this,             &GenerateSubChaptersParametersDialog::verifyStartTimecode);
-  connect(m_ui->buttonBox,       &QDialogButtonBox::accepted,     this,             &GenerateSubChaptersParametersDialog::accept);
-  connect(m_ui->buttonBox,       &QDialogButtonBox::rejected,     this,             &GenerateSubChaptersParametersDialog::reject);
-  connect(mw,                    &MainWindow::preferencesChanged, m_ui->cbLanguage, &Util::ComboBoxBase::reInitialize);
-  connect(mw,                    &MainWindow::preferencesChanged, m_ui->cbCountry,  &Util::ComboBoxBase::reInitialize);
+  connect(m_ui->leStartTimestamp, &QLineEdit::textChanged,         this,             &GenerateSubChaptersParametersDialog::verifyStartTimestamp);
+  connect(m_ui->buttonBox,        &QDialogButtonBox::accepted,     this,             &GenerateSubChaptersParametersDialog::accept);
+  connect(m_ui->buttonBox,        &QDialogButtonBox::rejected,     this,             &GenerateSubChaptersParametersDialog::reject);
+  connect(mw,                     &MainWindow::preferencesChanged, m_ui->cbLanguage, &Util::ComboBoxBase::reInitialize);
+  connect(mw,                     &MainWindow::preferencesChanged, m_ui->cbCountry,  &Util::ComboBoxBase::reInitialize);
 }
 
 void
 GenerateSubChaptersParametersDialog::retranslateUi() {
-  Util::setToolTip(m_ui->leStartTimecode, QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."));
+  Util::setToolTip(m_ui->leStartTimestamp, QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."));
   Util::setToolTip(m_ui->leNameTemplate, Tool::chapterNameTemplateToolTip());
 }
 
@@ -88,12 +88,12 @@ GenerateSubChaptersParametersDialog::firstChapterNumber()
 }
 
 uint64_t
-GenerateSubChaptersParametersDialog::startTimecode()
+GenerateSubChaptersParametersDialog::startTimestamp()
   const {
-  int64_t timecode = 0;
-  parse_timestamp(to_utf8(m_ui->leStartTimecode->text()), timecode);
+  int64_t timestamp = 0;
+  parse_timestamp(to_utf8(m_ui->leStartTimestamp->text()), timestamp);
 
-  return timecode;
+  return timestamp;
 }
 
 QString
@@ -116,9 +116,9 @@ GenerateSubChaptersParametersDialog::country()
 }
 
 void
-GenerateSubChaptersParametersDialog::verifyStartTimecode() {
+GenerateSubChaptersParametersDialog::verifyStartTimestamp() {
   int64_t dummy = 0;
-  Util::buttonForRole(m_ui->buttonBox)->setEnabled(parse_timestamp(to_utf8(m_ui->leStartTimecode->text()), dummy));
+  Util::buttonForRole(m_ui->buttonBox)->setEnabled(parse_timestamp(to_utf8(m_ui->leStartTimestamp->text()), dummy));
 }
 
 }}}

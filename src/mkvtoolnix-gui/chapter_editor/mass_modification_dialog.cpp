@@ -115,9 +115,9 @@ MassModificationDialog::multiplyBy()
 int64_t
 MassModificationDialog::shiftBy()
   const {
-  auto timecode = int64_t{};
-  parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timecode, true);
-  return timecode;
+  auto timestamp = int64_t{};
+  parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timestamp, true);
+  return timestamp;
 }
 
 QString
@@ -147,8 +147,8 @@ MassModificationDialog::isShiftByValid()
   if (!m_ui->cbShift->isChecked())
     return true;
 
-  auto timecode = int64_t{};
-  return parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timecode, true);
+  auto timestamp = int64_t{};
+  return parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timestamp, true);
 }
 
 void
