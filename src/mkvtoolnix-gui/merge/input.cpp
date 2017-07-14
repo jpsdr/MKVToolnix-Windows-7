@@ -786,12 +786,22 @@ Tab::onTrackItemChanged(QStandardItem *item) {
   if (!track)
     return;
 
-  auto newMuxThis = item->checkState() == Qt::Checked;
+  auto newWantedMuxThis = (item->checkState() == Qt::Checked);
+  auto newMuxThis       = newWantedMuxThis && (!track->m_appendedTo || track->m_appendedTo->m_muxThis);
+
+  if (newWantedMuxThis != newMuxThis)
+    item->setCheckState(newMuxThis ? Qt::Checked : Qt::Unchecked);
+
   if (newMuxThis == track->m_muxThis)
     return;
 
   track->m_muxThis = newMuxThis;
   m_tracksModel->trackUpdated(track);
+
+  for (auto appendedTrack : track->m_appendedTracks) {
+    appendedTrack->m_muxThis = newMuxThis;
+    m_tracksModel->trackUpdated(appendedTrack);
+  }
 
   auto selected = selectedTracks();
   if ((1 == selected.count()) && selected.contains(track))
@@ -807,13 +817,28 @@ Tab::onMuxThisChanged(int selected) {
   auto data = ui->muxThis->itemData(selected);
   if (!data.isValid())
     return;
-  auto muxThis = data.toBool();
 
-  withSelectedTracks([muxThis](auto &track) { track.m_muxThis = muxThis; });
+  auto muxThis = data.toBool();
+  QList<Track *> appendedTracks;
+
+  withSelectedTracks([muxThis, &appendedTracks](auto &track) {
+    if (!track.m_appendedTo || track.m_appendedTo->m_muxThis)
+      track.m_muxThis = muxThis;
+    appendedTracks += track.m_appendedTracks;
+  });
+
+  for (auto track : appendedTracks) {
+    track->m_muxThis = muxThis;
+    m_tracksModel->trackUpdated(track);
+  }
 
   setOutputFileNameMaybe();
 
   m_tracksModel->updateEffectiveDefaultTrackFlags();
+
+  auto tracks = selectedTracks();
+  if (1 == tracks.count())
+    Util::setComboBoxIndexIf(ui->muxThis, [&tracks](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == tracks[0]->m_muxThis); });
 }
 
 void
@@ -834,8 +859,18 @@ Tab::toggleMuxThisForSelectedTracks() {
   }
 
   auto newEnabled = !allEnabled;
+  QList<Track *> appendedTracks;
 
-  withSelectedTracks([newEnabled](auto &track) { track.m_muxThis = newEnabled; }, false, ui->muxThis);
+  withSelectedTracks([newEnabled, &appendedTracks](auto &track) {
+    if (!track.m_appendedTo || track.m_appendedTo->m_muxThis)
+      track.m_muxThis = newEnabled;
+    appendedTracks += track.m_appendedTracks;
+  }, false, ui->muxThis);
+
+  for (auto track : appendedTracks) {
+    track->m_muxThis = newEnabled;
+    m_tracksModel->trackUpdated(track);
+  }
 
   Util::setComboBoxIndexIf(ui->muxThis, [newEnabled](auto const &, auto const &data) { return data.isValid() && (data.toBool() == newEnabled); });
 

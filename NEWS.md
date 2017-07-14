@@ -37,6 +37,9 @@
   running. Fixes #2005.
 * mkvmerge: MPEG PS reader: fixed mkvmerge trying to handle an "end" code the
   same way as a "program stream map" code.
+* MKVToolNix GUI: multiplex tool: appended tracks can no longer be enabled
+  (selected for multiplexing) if the track they're going to be appended to is
+  not enabled. Fixes #2039.
 
 ## Build system changes
 
