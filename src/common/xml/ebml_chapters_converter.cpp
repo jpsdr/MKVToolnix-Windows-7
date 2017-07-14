@@ -37,8 +37,8 @@ ebml_chapters_converter_c::setup_maps() {
   m_formatter_map["ChapterTimeStart"]  = format_timestamp;
   m_formatter_map["ChapterTimeEnd"]    = format_timestamp;
 
-  m_parser_map["ChapterTimeStart"]     = parse_timecode;
-  m_parser_map["ChapterTimeEnd"]       = parse_timecode;
+  m_parser_map["ChapterTimeStart"]     = parse_timestamp;
+  m_parser_map["ChapterTimeEnd"]       = parse_timestamp;
 
   m_limits["EditionUID"]               = limits_t{ true, false, 1, 0 };
   m_limits["EditionFlagHidden"]        = limits_t{ true, true,  0, 1 };

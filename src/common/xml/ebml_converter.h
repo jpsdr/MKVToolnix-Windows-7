@@ -72,7 +72,7 @@ public:
   static void parse_string(parser_context_t &ctx);
   static void parse_ustring(parser_context_t &ctx);
   static void parse_binary(parser_context_t &ctx);
-  static void parse_timecode(parser_context_t &ctx);
+  static void parse_timestamp(parser_context_t &ctx);
 
 protected:
   void format_value(pugi::xml_node &node, EbmlElement &e, value_formatter_t default_formatter) const;

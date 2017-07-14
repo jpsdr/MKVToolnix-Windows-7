@@ -83,7 +83,7 @@ public:
   static int probe_file(mm_text_io_c *in, uint64_t size);
 
 protected:
-  virtual int64_t try_to_parse_timecode(const char *s);
+  virtual int64_t try_to_parse_timestamp(const char *s);
   virtual void parse_metadata(mtx::xml::document_cptr &doc);
   virtual void parse_subtitles(mtx::xml::document_cptr &doc);
   virtual void create_codec_private(mtx::xml::document_cptr &doc);

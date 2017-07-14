@@ -49,8 +49,8 @@ parse_split_parts(const std::string &arg,
     if (pair[0].empty())
       start = requested_split_points.empty() ? 0 : std::get<1>(requested_split_points.back());
 
-    else if (!frames_fields && !parse_timecode(pair[0], start))
-      throw format_x{boost::format(Y("Invalid start time for '--split' in '--split %1%' (current part: %2%). Additional error message: %3%.\n")) % arg % part_spec % timecode_parser_error};
+    else if (!frames_fields && !parse_timestamp(pair[0], start))
+      throw format_x{boost::format(Y("Invalid start time for '--split' in '--split %1%' (current part: %2%). Additional error message: %3%.\n")) % arg % part_spec % timestamp_parser_error};
 
     else if (frames_fields && (!parse_number(pair[0], start) || (0 > start)))
       throw format_x{boost::format(Y("Invalid start frame/field number for '--split' in '--split %1%' (current part: %2%).\n")) % arg % part_spec};
@@ -59,8 +59,8 @@ parse_split_parts(const std::string &arg,
     if (pair[1].empty())
       end = std::numeric_limits<int64_t>::max();
 
-    else if (!frames_fields && !parse_timecode(pair[1], end))
-      throw format_x{boost::format(Y("Invalid end time for '--split' in '--split %1%' (current part: %2%). Additional error message: %3%.\n")) % arg % part_spec % timecode_parser_error};
+    else if (!frames_fields && !parse_timestamp(pair[1], end))
+      throw format_x{boost::format(Y("Invalid end time for '--split' in '--split %1%' (current part: %2%). Additional error message: %3%.\n")) % arg % part_spec % timestamp_parser_error};
 
     else if (frames_fields && (!parse_number(pair[1], end) || (0 > end)))
       throw format_x{boost::format(Y("Invalid end frame/field number for '--split' in '--split %1%' (current part: %2%).\n")) % arg % part_spec};

@@ -18,17 +18,17 @@
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 
-std::string timecode_parser_error;
+std::string timestamp_parser_error;
 
 inline bool
 set_tcp_error(const std::string &error) {
-  timecode_parser_error = error;
+  timestamp_parser_error = error;
   return false;
 }
 
 inline bool
 set_tcp_error(const boost::format &error) {
-  timecode_parser_error = error.str();
+  timestamp_parser_error = error.str();
   return false;
 }
 
@@ -66,9 +66,9 @@ parse_number_as_rational(std::string const &string,
 }
 
 bool
-parse_timecode(const std::string &src,
-               int64_t &timecode,
-               bool allow_negative) {
+parse_timestamp(const std::string &src,
+                int64_t &timestamp,
+                bool allow_negative) {
   // Recognized format:
   // 1. XXXXXXXu   with XXXXXX being a number followed
   //    by one of the units 's', 'ms', 'us' or 'ns'
@@ -98,7 +98,7 @@ parse_timecode(const std::string &src,
     if (!parse_duration_number_with_unit(src.substr(offset, src.length() - offset), value))
       throw false;
 
-    timecode = value * negative;
+    timestamp = value * negative;
 
     return true;
   } catch (...) {
@@ -187,21 +187,21 @@ parse_timecode(const std::string &src,
   if (s > 59)
     return set_tcp_error(boost::format(Y("Invalid number of seconds: %1% > 59")) % s);
 
-  timecode              = (((int64_t)h * 60 * 60 + (int64_t)m * 60 + (int64_t)s) * 1000000000ll + n) * negative;
-  timecode_parser_error = Y("no error");
+  timestamp              = (((int64_t)h * 60 * 60 + (int64_t)m * 60 + (int64_t)s) * 1000000000ll + n) * negative;
+  timestamp_parser_error = Y("no error");
 
   return true;
 }
 
 bool
-parse_timecode(const std::string &src,
-               timestamp_c &timecode,
-               bool allow_negative) {
+parse_timestamp(const std::string &src,
+                timestamp_c &timestamp,
+                bool allow_negative) {
   int64_t tmp{};
-  if (!parse_timecode(src, tmp, allow_negative))
+  if (!parse_timestamp(src, tmp, allow_negative))
     return false;
 
-  timecode = timestamp_c::ns(tmp);
+  timestamp = timestamp_c::ns(tmp);
 
   return true;
 }

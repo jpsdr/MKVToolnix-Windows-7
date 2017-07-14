@@ -178,192 +178,192 @@ TEST(StringsParsing, ParseNumberToRationalValidPatterns) {
 }
 
 TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnit) {
-  int64_t timecode;
+  int64_t timestamp;
 
-  EXPECT_TRUE(parse_timecode("123h", timecode, true));
-  EXPECT_EQ(442800000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("123h", timestamp, true));
+  EXPECT_EQ(442800000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("123m", timecode, true));
-  EXPECT_EQ(7380000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("123m", timestamp, true));
+  EXPECT_EQ(7380000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("123min", timecode, true));
-  EXPECT_EQ(7380000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("123min", timestamp, true));
+  EXPECT_EQ(7380000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("123ms", timecode, true));
-  EXPECT_EQ(123000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("123ms", timestamp, true));
+  EXPECT_EQ(123000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("123msec", timecode, true));
-  EXPECT_EQ(123000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("123msec", timestamp, true));
+  EXPECT_EQ(123000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("123us", timecode, true));
-  EXPECT_EQ(123000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("123us", timestamp, true));
+  EXPECT_EQ(123000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("123µs", timecode, true));
-  EXPECT_EQ(123000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("123µs", timestamp, true));
+  EXPECT_EQ(123000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("123ns", timecode, true));
-  EXPECT_EQ(123, timecode);
+  EXPECT_TRUE(parse_timestamp("123ns", timestamp, true));
+  EXPECT_EQ(123, timestamp);
 
-  EXPECT_TRUE(parse_timecode("123nsec", timecode, true));
-  EXPECT_EQ(123, timecode);
+  EXPECT_TRUE(parse_timestamp("123nsec", timestamp, true));
+  EXPECT_EQ(123, timestamp);
 }
 
-TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnitNegative) {
-  int64_t timecode;
+TEST(StringParsing, ParseTimestampValidPatternsNumberWithUnitNegative) {
+  int64_t timestamp;
 
-  EXPECT_TRUE(parse_timecode("-123h", timecode, true));
-  EXPECT_EQ(-442800000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-123h", timestamp, true));
+  EXPECT_EQ(-442800000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123m", timecode, true));
-  EXPECT_EQ(-7380000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-123m", timestamp, true));
+  EXPECT_EQ(-7380000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123min", timecode, true));
-  EXPECT_EQ(-7380000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-123min", timestamp, true));
+  EXPECT_EQ(-7380000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123s", timecode, true));
-  EXPECT_EQ(-123000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-123s", timestamp, true));
+  EXPECT_EQ(-123000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123ms", timecode, true));
-  EXPECT_EQ(-123000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-123ms", timestamp, true));
+  EXPECT_EQ(-123000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123msec", timecode, true));
-  EXPECT_EQ(-123000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-123msec", timestamp, true));
+  EXPECT_EQ(-123000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123us", timecode, true));
-  EXPECT_EQ(-123000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-123us", timestamp, true));
+  EXPECT_EQ(-123000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123µs", timecode, true));
-  EXPECT_EQ(-123000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-123µs", timestamp, true));
+  EXPECT_EQ(-123000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123ns", timecode, true));
-  EXPECT_EQ(-123, timecode);
+  EXPECT_TRUE(parse_timestamp("-123ns", timestamp, true));
+  EXPECT_EQ(-123, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123ns", timecode, true));
-  EXPECT_EQ(-123, timecode);
+  EXPECT_TRUE(parse_timestamp("-123ns", timestamp, true));
+  EXPECT_EQ(-123, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-123nsec", timecode, true));
-  EXPECT_EQ(-123, timecode);
+  EXPECT_TRUE(parse_timestamp("-123nsec", timestamp, true));
+  EXPECT_EQ(-123, timestamp);
 }
 
-TEST(StringParsing, ParseTimecodeValidPatternsHMSns) {
-  int64_t timecode;
+TEST(StringParsing, ParseTimestampValidPatternsHMSns) {
+  int64_t timestamp;
 
-  EXPECT_TRUE(parse_timecode("12:34:56.789123456", timecode, true));
-  EXPECT_EQ(45296789123456ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.789123456", timestamp, true));
+  EXPECT_EQ(45296789123456ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("2:34:56.789123456", timecode, true));
-  EXPECT_EQ(9296789123456ll, timecode);
+  EXPECT_TRUE(parse_timestamp("2:34:56.789123456", timestamp, true));
+  EXPECT_EQ(9296789123456ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("34:56.789123456", timecode, true));
-  EXPECT_EQ(2096789123456ll, timecode);
+  EXPECT_TRUE(parse_timestamp("34:56.789123456", timestamp, true));
+  EXPECT_EQ(2096789123456ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("4:56.789123456", timecode, true));
-  EXPECT_EQ(296789123456ll, timecode);
+  EXPECT_TRUE(parse_timestamp("4:56.789123456", timestamp, true));
+  EXPECT_EQ(296789123456ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56.78912345", timecode, true));
-  EXPECT_EQ(45296789123450ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.78912345", timestamp, true));
+  EXPECT_EQ(45296789123450ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56.7891234", timecode, true));
-  EXPECT_EQ(45296789123400ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.7891234", timestamp, true));
+  EXPECT_EQ(45296789123400ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56.789123", timecode, true));
-  EXPECT_EQ(45296789123000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.789123", timestamp, true));
+  EXPECT_EQ(45296789123000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56.78912", timecode, true));
-  EXPECT_EQ(45296789120000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.78912", timestamp, true));
+  EXPECT_EQ(45296789120000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56.7891", timecode, true));
-  EXPECT_EQ(45296789100000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.7891", timestamp, true));
+  EXPECT_EQ(45296789100000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56.789", timecode, true));
-  EXPECT_EQ(45296789000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.789", timestamp, true));
+  EXPECT_EQ(45296789000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56.78", timecode, true));
-  EXPECT_EQ(45296780000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.78", timestamp, true));
+  EXPECT_EQ(45296780000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56.7", timecode, true));
-  EXPECT_EQ(45296700000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56.7", timestamp, true));
+  EXPECT_EQ(45296700000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("12:34:56", timecode, true));
-  EXPECT_EQ(45296000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("12:34:56", timestamp, true));
+  EXPECT_EQ(45296000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("2:34:56", timecode, true));
-  EXPECT_EQ(9296000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("2:34:56", timestamp, true));
+  EXPECT_EQ(9296000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("34:56", timecode, true));
-  EXPECT_EQ(2096000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("34:56", timestamp, true));
+  EXPECT_EQ(2096000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("4:56", timecode, true));
-  EXPECT_EQ(296000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("4:56", timestamp, true));
+  EXPECT_EQ(296000000000ll, timestamp);
 }
 
-TEST(StringParsing, ParseTimecodeValidPatternsHMSnsNegative) {
-  int64_t timecode;
+TEST(StringParsing, ParseTimestampValidPatternsHMSnsNegative) {
+  int64_t timestamp;
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.789123456", timecode, true));
-  EXPECT_EQ(-45296789123456ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.789123456", timestamp, true));
+  EXPECT_EQ(-45296789123456ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-2:34:56.789123456", timecode, true));
-  EXPECT_EQ(-9296789123456ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-2:34:56.789123456", timestamp, true));
+  EXPECT_EQ(-9296789123456ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-34:56.789123456", timecode, true));
-  EXPECT_EQ(-2096789123456ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-34:56.789123456", timestamp, true));
+  EXPECT_EQ(-2096789123456ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-4:56.789123456", timecode, true));
-  EXPECT_EQ(-296789123456ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-4:56.789123456", timestamp, true));
+  EXPECT_EQ(-296789123456ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.78912345", timecode, true));
-  EXPECT_EQ(-45296789123450ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.78912345", timestamp, true));
+  EXPECT_EQ(-45296789123450ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.7891234", timecode, true));
-  EXPECT_EQ(-45296789123400ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.7891234", timestamp, true));
+  EXPECT_EQ(-45296789123400ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.789123", timecode, true));
-  EXPECT_EQ(-45296789123000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.789123", timestamp, true));
+  EXPECT_EQ(-45296789123000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.78912", timecode, true));
-  EXPECT_EQ(-45296789120000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.78912", timestamp, true));
+  EXPECT_EQ(-45296789120000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.7891", timecode, true));
-  EXPECT_EQ(-45296789100000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.7891", timestamp, true));
+  EXPECT_EQ(-45296789100000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.789", timecode, true));
-  EXPECT_EQ(-45296789000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.789", timestamp, true));
+  EXPECT_EQ(-45296789000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.78", timecode, true));
-  EXPECT_EQ(-45296780000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.78", timestamp, true));
+  EXPECT_EQ(-45296780000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56.7", timecode, true));
-  EXPECT_EQ(-45296700000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56.7", timestamp, true));
+  EXPECT_EQ(-45296700000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-12:34:56", timecode, true));
-  EXPECT_EQ(-45296000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-12:34:56", timestamp, true));
+  EXPECT_EQ(-45296000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-2:34:56", timecode, true));
-  EXPECT_EQ(-9296000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-2:34:56", timestamp, true));
+  EXPECT_EQ(-9296000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-34:56", timecode, true));
-  EXPECT_EQ(-2096000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-34:56", timestamp, true));
+  EXPECT_EQ(-2096000000000ll, timestamp);
 
-  EXPECT_TRUE(parse_timecode("-4:56", timecode, true));
-  EXPECT_EQ(-296000000000ll, timecode);
+  EXPECT_TRUE(parse_timestamp("-4:56", timestamp, true));
+  EXPECT_EQ(-296000000000ll, timestamp);
 }
 
-TEST(StringParsing, ParseTimecodeInvalidPatterns) {
-  int64_t timecode;
+TEST(StringParsing, ParseTimestampInvalidPatterns) {
+  int64_t timestamp;
 
-  EXPECT_FALSE(parse_timecode("12:34:56.789123456us", timecode, true));  // HMS: unit after
-  EXPECT_FALSE(parse_timecode("12:34:56.789123456qq", timecode, true));  // HMS: garbage after
-  EXPECT_FALSE(parse_timecode("12::56.789123456",     timecode, true));  // HMS: empty minutes
-  EXPECT_FALSE(parse_timecode("56.789123456",         timecode, true));  // HMS: no hours & minutes
-  EXPECT_FALSE(parse_timecode("qq56.789123456",       timecode, true));  // HMS: garbage before
-  EXPECT_FALSE(parse_timecode("-12:34:56.789123456",  timecode, false)); // HMS: negative but not allowed
+  EXPECT_FALSE(parse_timestamp("12:34:56.789123456us", timestamp, true));  // HMS: unit after
+  EXPECT_FALSE(parse_timestamp("12:34:56.789123456qq", timestamp, true));  // HMS: garbage after
+  EXPECT_FALSE(parse_timestamp("12::56.789123456",     timestamp, true));  // HMS: empty minutes
+  EXPECT_FALSE(parse_timestamp("56.789123456",         timestamp, true));  // HMS: no hours & minutes
+  EXPECT_FALSE(parse_timestamp("qq56.789123456",       timestamp, true));  // HMS: garbage before
+  EXPECT_FALSE(parse_timestamp("-12:34:56.789123456",  timestamp, false)); // HMS: negative but not allowed
 
-  EXPECT_FALSE(parse_timecode("-123s",                timecode, false)); // number+unit: negative but not allowed
-  EXPECT_FALSE(parse_timecode("123",                  timecode, false)); // number+unit: no unit
-  EXPECT_FALSE(parse_timecode("123q",                 timecode, false)); // number+unit: invalid unit
-  EXPECT_FALSE(parse_timecode("123s q",               timecode, false)); // number+unit: garbage after
-  EXPECT_FALSE(parse_timecode("q123s",                timecode, false)); // number+unit: garbage before
+  EXPECT_FALSE(parse_timestamp("-123s",                timestamp, false)); // number+unit: negative but not allowed
+  EXPECT_FALSE(parse_timestamp("123",                  timestamp, false)); // number+unit: no unit
+  EXPECT_FALSE(parse_timestamp("123q",                 timestamp, false)); // number+unit: invalid unit
+  EXPECT_FALSE(parse_timestamp("123s q",               timestamp, false)); // number+unit: garbage after
+  EXPECT_FALSE(parse_timestamp("q123s",                timestamp, false)); // number+unit: garbage before
 }
 
 }

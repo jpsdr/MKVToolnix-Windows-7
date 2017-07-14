@@ -198,14 +198,14 @@ ebml_converter_c::parse_ustring(parser_context_t &ctx) {
 }
 
 void
-ebml_converter_c::parse_timecode(parser_context_t &ctx) {
+ebml_converter_c::parse_timestamp(parser_context_t &ctx) {
   int64_t value;
-  if (!::parse_timecode(strip_copy(ctx.content), value)) {
+  if (!::parse_timestamp(strip_copy(ctx.content), value)) {
     auto details = (boost::format(Y("Expected a time in the following format: HH:MM:SS.nnn "
                                     "(HH = hour, MM = minute, SS = second, nnn = millisecond up to nanosecond. "
                                     "You may use up to nine digits for 'n' which would mean nanosecond precision). "
                                     "You may omit the hour as well. Found '%1%' instead. Additional error message: %2%"))
-                    % ctx.content % timecode_parser_error.c_str()).str();
+                    % ctx.content % timestamp_parser_error.c_str()).str();
 
     throw malformed_data_x{ ctx.name, ctx.node.offset_debug(), details };
   }

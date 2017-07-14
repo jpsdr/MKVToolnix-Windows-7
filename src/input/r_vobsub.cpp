@@ -230,7 +230,7 @@ vobsub_reader_c::parse_headers() {
       }
 
       int64_t timestamp;
-      if (!parse_timecode(line, timestamp, true))
+      if (!parse_timestamp(line, timestamp, true))
         mxerror_fn(m_ti.m_fname, boost::format(Y("line %1%: The 'delay' timestamp could not be parsed.\n")) % line_no);
       delay += timestamp * factor;
     }
@@ -265,7 +265,7 @@ vobsub_reader_c::parse_headers() {
       }
 
       int64_t timestamp;
-      if (!parse_timecode(parts[1], timestamp)) {
+      if (!parse_timestamp(parts[1], timestamp)) {
         mxwarn_fn(m_ti.m_fname,
                   boost::format(Y("Line %1%: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n")) % line_no);
         continue;

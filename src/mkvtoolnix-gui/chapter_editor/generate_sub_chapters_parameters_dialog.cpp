@@ -91,7 +91,7 @@ uint64_t
 GenerateSubChaptersParametersDialog::startTimecode()
   const {
   int64_t timecode = 0;
-  parse_timecode(to_utf8(m_ui->leStartTimecode->text()), timecode);
+  parse_timestamp(to_utf8(m_ui->leStartTimecode->text()), timecode);
 
   return timecode;
 }
@@ -118,7 +118,7 @@ GenerateSubChaptersParametersDialog::country()
 void
 GenerateSubChaptersParametersDialog::verifyStartTimecode() {
   int64_t dummy = 0;
-  Util::buttonForRole(m_ui->buttonBox)->setEnabled(parse_timecode(to_utf8(m_ui->leStartTimecode->text()), dummy));
+  Util::buttonForRole(m_ui->buttonBox)->setEnabled(parse_timestamp(to_utf8(m_ui->leStartTimecode->text()), dummy));
 }
 
 }}}

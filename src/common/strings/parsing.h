@@ -140,9 +140,9 @@ parse_property_to_value(std::string const &s,
 
 bool parse_duration_number_with_unit(const std::string &s, int64_t &value);
 
-extern std::string timecode_parser_error;
-extern bool parse_timecode(const std::string &s, int64_t &timecode, bool allow_negative = false);
-extern bool parse_timecode(const std::string &s, timestamp_c &timecode, bool allow_negative = false);
+extern std::string timestamp_parser_error;
+extern bool parse_timestamp(const std::string &s, int64_t &timestamp, bool allow_negative = false);
+extern bool parse_timestamp(const std::string &s, timestamp_c &timestamp, bool allow_negative = false);
 
 bool parse_bool(std::string value);
 

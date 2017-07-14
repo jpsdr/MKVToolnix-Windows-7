@@ -99,8 +99,8 @@ webvtt_parser_c::add_block() {
   m->parsing_global_data = false;
 
   timestamp_c start, end;
-  parse_timecode(matches[1].str(), start);
-  parse_timecode(matches[2].str(), end);
+  parse_timestamp(matches[1].str(), start);
+  parse_timestamp(matches[2].str(), end);
 
   auto content       = boost::join(std::make_pair(m->current_block.begin() + timestamp_line + 1, m->current_block.end()), "\n");;
   content            = adjust_embedded_timestamps(content, start.negate());
@@ -182,7 +182,7 @@ webvtt_parser_c::adjust_embedded_timestamps(std::string const &text,
 
   return boost::regex_replace(text, s_embedded_timestamp_re, [&offset](boost::smatch const &match) -> std::string {
     timestamp_c timestamp;
-    parse_timecode(match[1].str(), timestamp);
+    parse_timestamp(match[1].str(), timestamp);
     return (boost::format("<%1%>") % format_timestamp(timestamp + offset, 3)).str();
   });
 }

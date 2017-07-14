@@ -917,8 +917,8 @@ parse_arg_split_duration(const std::string &arg) {
     s.erase(0, strlen("duration:"));
 
   int64_t split_after;
-  if (!parse_timecode(s, split_after))
-    mxerror(boost::format(Y("Invalid time for '--split' in '--split %1%'. Additional error message: %2%\n")) % arg % timecode_parser_error);
+  if (!parse_timestamp(s, split_after))
+    mxerror(boost::format(Y("Invalid time for '--split' in '--split %1%'. Additional error message: %2%\n")) % arg % timestamp_parser_error);
 
   g_cluster_helper->add_split_point(split_point_c(split_after, split_point_c::duration, false));
 }
@@ -929,17 +929,17 @@ parse_arg_split_duration(const std::string &arg) {
   timecodes after which a new file should be started.
 */
 static void
-parse_arg_split_timecodes(const std::string &arg) {
+parse_arg_split_timestamps(const std::string &arg) {
   std::string s = arg;
 
-  if (balg::istarts_with(s, "timecodes:"))
-    s.erase(0, 10);
+  if (boost::regex_search(s, boost::regex{"^time(?:stamps|codes):", boost::regex::icase | boost::regex::perl}))
+    s = boost::regex_replace(s, boost::regex{"^.*?:", boost::regex::perl}, "");
 
-  std::vector<std::string> timecodes = split(s, ",");
-  for (auto &timecode : timecodes) {
+  std::vector<std::string> timestamps = split(s, ",");
+  for (auto &timestamp : timestamps) {
     int64_t split_after;
-    if (!parse_timecode(timecode, split_after))
-      mxerror(boost::format(Y("Invalid time for '--split' in '--split %1%'. Additional error message: %2%.\n")) % arg % timecode_parser_error);
+    if (!parse_timestamp(timestamp, split_after))
+      mxerror(boost::format(Y("Invalid time for '--split' in '--split %1%'. Additional error message: %2%.\n")) % arg % timestamp_parser_error);
     g_cluster_helper->add_split_point(split_point_c(split_after, split_point_c::timecode, true));
   }
 }
@@ -1110,8 +1110,8 @@ parse_arg_split(const std::string &arg) {
   else if (balg::istarts_with(s, "size:"))
     parse_arg_split_size(arg);
 
-  else if (balg::istarts_with(s, "timecodes:"))
-    parse_arg_split_timecodes(arg);
+  else if (boost::regex_search(s, boost::regex{"^time(?:stamps|codes):", boost::regex::icase | boost::regex::perl}))
+    parse_arg_split_timestamps(arg);
 
   else if (balg::istarts_with(s, "parts:"))
     parse_arg_split_parts(arg, false);
@@ -1804,7 +1804,7 @@ parse_arg_generate_chapters(std::string const &arg) {
     parts.emplace_back("");
 
   auto interval = int64_t{};
-  if (!parse_timecode(parts[1], interval) || (interval < 0))
+  if (!parse_timestamp(parts[1], interval) || (interval < 0))
     mxerror(boost::format("The chapter generation interval must be a positive number in '--generate-chapters %1%'.\n") % arg);
 
   g_cluster_helper->enable_chapter_generation(chapter_generation_mode_e::interval, g_chapter_language);

@@ -116,7 +116,7 @@ int64_t
 MassModificationDialog::shiftBy()
   const {
   auto timecode = int64_t{};
-  parse_timecode(to_utf8(m_ui->leShiftBy->text()), timecode, true);
+  parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timecode, true);
   return timecode;
 }
 
@@ -148,7 +148,7 @@ MassModificationDialog::isShiftByValid()
     return true;
 
   auto timecode = int64_t{};
-  return parse_timecode(to_utf8(m_ui->leShiftBy->text()), timecode, true);
+  return parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timecode, true);
 }
 
 void

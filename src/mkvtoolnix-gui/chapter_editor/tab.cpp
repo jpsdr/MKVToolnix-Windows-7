@@ -828,14 +828,14 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
     DeleteChildren<KaxChapterFlagHidden>(*chapter);
 
   auto startTimecode = int64_t{};
-  if (!parse_timecode(to_utf8(d->ui->leChStart->text()), startTimecode))
-    return { false, QY("The start time could not be parsed: %1").arg(Q(timecode_parser_error)) };
+  if (!parse_timestamp(to_utf8(d->ui->leChStart->text()), startTimecode))
+    return { false, QY("The start time could not be parsed: %1").arg(Q(timestamp_parser_error)) };
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTimecode);
 
   if (!d->ui->leChEnd->text().isEmpty()) {
     auto endTimecode = int64_t{};
-    if (!parse_timecode(to_utf8(d->ui->leChEnd->text()), endTimecode))
-      return { false, QY("The end time could not be parsed: %1").arg(Q(timecode_parser_error)) };
+    if (!parse_timestamp(to_utf8(d->ui->leChEnd->text()), endTimecode))
+      return { false, QY("The end time could not be parsed: %1").arg(Q(timestamp_parser_error)) };
 
     if (endTimecode <= startTimecode)
       return { false, QY("The end time must be greater than the start timecode.") };

@@ -124,15 +124,15 @@ usf_reader_c::parse_subtitles(mtx::xml::document_cptr &doc) {
 
       attribute = subtitle.attribute("start");
       if (attribute)
-        entry.m_start = try_to_parse_timecode(attribute.value());
+        entry.m_start = try_to_parse_timestamp(attribute.value());
 
       attribute = subtitle.attribute("stop");
       if (attribute)
-        entry.m_end = try_to_parse_timecode(attribute.value());
+        entry.m_end = try_to_parse_timestamp(attribute.value());
 
       attribute = subtitle.attribute("duration");
       if (attribute)
-        duration = try_to_parse_timecode(attribute.value());
+        duration = try_to_parse_timestamp(attribute.value());
 
       if ((-1 == entry.m_end) && (-1 != entry.m_start) && (-1 != duration))
         entry.m_end = entry.m_start + duration;
@@ -212,13 +212,13 @@ usf_reader_c::get_progress() {
 }
 
 int64_t
-usf_reader_c::try_to_parse_timecode(const char *s) {
-  int64_t timecode;
+usf_reader_c::try_to_parse_timestamp(const char *s) {
+  int64_t timestamp;
 
-  if (!parse_timecode(s, timecode))
+  if (!parse_timestamp(s, timestamp))
     throw mtx::xml::conversion_x{Y("Invalid start or stop timecode")};
 
-  return timecode;
+  return timestamp;
 }
 
 void
