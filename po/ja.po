@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-07-06 18:18+0200\n"
+"POT-Creation-Date: 2017-07-14 11:32+0200\n"
 "PO-Revision-Date: 2016-10-09 10:56+0900\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -1403,7 +1403,7 @@ msgstr "閉じる(&C)"
 msgid "&Close file"
 msgstr "ファイルを閉じる(&C)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:167
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
 #, no-c-format
 msgid "&Collapse all"
@@ -1413,8 +1413,9 @@ msgstr "全て折り畳む(&C)"
 msgid "&Command line:"
 msgstr "コマンドライン：(&C)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
-msgid "&Constrict start and end timecodes of sub-chapters to their parent's start and end timecodes"
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
+#, fuzzy
+msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "サブチャプタの開始と終了のタイムコードを収縮させ、親の開始と終了のタイムコードに収まるようにします(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:545
@@ -1482,7 +1483,7 @@ msgstr "有効(&E)"
 msgid "&Escape arguments for:"
 msgstr "引数のエスケープ(&E)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:166
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:197
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:278
 #, no-c-format
 msgid "&Expand all"
@@ -1512,7 +1513,7 @@ msgstr "再ナンバリングする最初のエントリ：(&F)"
 msgid "&Font && size:"
 msgstr "フォントとサイズ(&F)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:176
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
 #, no-c-format
 msgid "&Generate sub-chapters"
 msgstr "サブチャプタを生成(&G)"
@@ -1581,8 +1582,9 @@ msgstr "プレイリストの最小の継続時間：(&M)"
 msgid "&Multiplexer"
 msgstr "Mergeツール(&M)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:205
-msgid "&Multiply start and end timecodes by the following factor:"
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#, fuzzy
+msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "開始と終了のタイムコードに次の係数を掛けます：(&M)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
@@ -1739,7 +1741,7 @@ msgstr[0] "ジョブを削除(&R)"
 msgid "&Remove job from queue after completion:"
 msgstr "完了後にキューからジョブを消去する：(&R)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:173
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:204
 #, no-c-format
 msgid "&Remove selected edition or chapter"
 msgstr "選択したエディションまたはチャプターを削除(&R)"
@@ -1805,8 +1807,9 @@ msgstr "「隠し」フラグのチャプタをスキップする(&S)"
 msgid "&Skip file"
 msgstr "ファイルをスキップ(&S)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
-msgid "&Sort chapters by their start and end timecodes"
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#, fuzzy
+msgid "&Sort chapters by their start and end timestamps"
 msgstr "チャプタを開始及び終了のタイムコードでソート(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
@@ -1820,7 +1823,8 @@ msgid_plural "&Start jobs automatically"
 msgstr[0] "ジョブを自動的に開始(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
-msgid "&Start timecode of first created entry:"
+#, fuzzy
+msgid "&Start timestamp of first created entry:"
 msgstr "最初に作成されるエントリの開始タイムコード(&S)："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1343
@@ -2422,8 +2426,8 @@ msgstr "<Tag>に<Simple子要素がありません。"
 msgid "<Unnamed>"
 msgstr "<名前をつけてください>"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:211
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:183
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:250
 #, fuzzy, no-c-format
 msgid "<Unsaved file>"
 msgstr "<未保存のファイル>"
@@ -2758,27 +2762,27 @@ msgstr "メディアファイルを追加"
 msgid "Add media files as additional parts"
 msgstr "追加部分としてメディアファイルを追加"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:172
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:203
 #, no-c-format
 msgid "Add new &sub-chapter inside"
 msgstr "この中に新しいサブチャプタを追加する"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:170
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:201
 #, no-c-format
 msgid "Add new c&hapter before"
 msgstr "この前に新しいチャプタを追加する(&H)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:171
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:202
 #, no-c-format
 msgid "Add new ch&apter after"
 msgstr "この後に新しいチャプタを追加する(&A)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:168
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:199
 #, no-c-format
 msgid "Add new e&dition before"
 msgstr "この前に新しいエディションを追加する(&D)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:169
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:200
 #, no-c-format
 msgid "Add new ed&ition after"
 msgstr "この後に新しいエディションを追加する(&I)"
@@ -2824,7 +2828,7 @@ msgstr "タグファイルの追加"
 msgid "Adding, appending or adding as additional parts"
 msgstr "追加、追加結合、または追加部分として追加"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:175
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:206
 #, no-c-format
 msgid "Additional &modifications"
 msgstr "その他の変更(&M)"
@@ -2929,8 +2933,8 @@ msgstr "全てのエントリ"
 
 #: src/info/qt_ui.cpp:85
 #: src/info/qt_ui.cpp:94
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:519
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:556
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:669
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:708
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:187
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -3458,8 +3462,9 @@ msgstr "タイムコードに基づいて部分分割"
 msgid "C&onfiguration active"
 msgstr "設定を有効にする"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
-msgid "C&onstrict or expand timecodes"
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
+#, fuzzy
+msgid "C&onstrict or expand timestamps"
 msgstr "タイムコードの拡張または収縮(&O)"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
@@ -3610,7 +3615,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "最初に作成されるエントリのチャプタ番号：(&N)"
 
 #: src/merge/private/cluster_helper.h:55
-#: src/mkvtoolnix-gui/util/settings.cpp:301
+#: src/mkvtoolnix-gui/util/settings.cpp:283
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Chapter <NUM:2>"
@@ -3655,7 +3660,7 @@ msgstr "チャプタファイル："
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "チャプタ生成は少なくとも1つのビデオまたはオーディオトラックがMUXされる場合にのみ可能です。\n"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:201
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "Chapter mass modification"
 msgstr "チャプタをまとめて修正"
 
@@ -3929,7 +3934,7 @@ msgstr "コンテンツ暗号化"
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "テキスト字幕をこの文字セットに変換します（デフォルト：UTF-8。）"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:535
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:685
 #, no-c-format
 msgid "Converting the chapters to XML failed: %1"
 msgstr "チャプタのXMLへの変換に失敗しました：%1"
@@ -4095,7 +4100,7 @@ msgstr "各ファイルごとに新規のマージ設定を1つ作成する"
 msgid "Creating directory '%1%' failed: %2%"
 msgstr "ディレクトリ'%1%'の作成に失敗しました：%2%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:531
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:681
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:198
 #, no-c-format
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
@@ -4368,7 +4373,7 @@ msgstr "現在オンラインで入手可能な新しいバージョンはあり
 msgid "Currently only certain subtitle formats are compressed with the zlib algorithm."
 msgstr "現在のところ、いくつかの字幕フォーマットのみがzlibアルゴリズムで圧縮することができます。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:174
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
 #, no-c-format
 msgid "D&uplicate selected edition or chapter"
 msgstr "選択したエディションまたはチャプターを複製する(&U)"
@@ -4529,6 +4534,10 @@ msgstr "1つまたは複数の添付ファイルを削除します。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "下の設定によって、ソースファイルの言語が'undetermined' ('und')であった場合にもこの言語を使用することができます。"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
+msgid "Derive &end timestamps from start timestamps"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4827,8 +4836,9 @@ msgstr "今すぐ実行(&X)"
 msgid "E&xit"
 msgstr "修了(&E)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
-msgid "E&xpand chapter's start and end timecodes to include the minimum/maximum timecodes of all their sub-chapters"
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
+#, fuzzy
+msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "チャプタの開始及び終了のタイムコードを拡張し、全てのサブチャプタの最小・最大のタイムコードが含まれるようにします"
 
 #: src/info/mkvinfo.cpp:1658
@@ -5013,9 +5023,9 @@ msgstr "%1%行目でエラー発生：サブタイトル番号が見つかると
 msgid "Error loading settings file"
 msgstr "設定ファイルの読み込み中にエラーが発生しました"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:322
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:359
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:418
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:456
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:495
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:558
 #, no-c-format
 msgid "Error message from the parser: %1"
 msgstr "パーサからのエラーメッセージ：%1"
@@ -5143,7 +5153,7 @@ msgid "Executable not found"
 msgstr "実行ファイルが見つかりません"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:73
+#: src/mkvtoolnix-gui/util/settings.cpp:55
 #, fuzzy, no-c-format
 msgid "Execute a program"
 msgstr "プログラム実行"
@@ -5158,7 +5168,7 @@ msgstr ""
 msgid "Execute action when the &queue completes"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:78
+#: src/mkvtoolnix-gui/util/settings.cpp:60
 #, fuzzy, no-c-format
 msgid "Execute program '%1'"
 msgstr "プログラム実行"
@@ -5375,13 +5385,15 @@ msgstr "ファイル名：%1%"
 msgid "File not found"
 msgstr "ファイルが見つかりません"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:258
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:265
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:272
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:324
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:359
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:420
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:568
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:303
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:309
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:382
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:389
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:458
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:495
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:560
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:720
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:121
@@ -5455,6 +5467,11 @@ msgstr "ファイル/セグメントリンクとこの機能についての詳�
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timecode scale factor so that all timecodes and durations have a precision of one sample."
 msgstr "ビデオトラックは含まないが1つ以上のオーディオトラックを含むファイルに対してはmkvmergeは自動的に、全てのタイムコードと継続時間が1サンプル単位の精度を持つようにタイムコードのスケール係数を選択します。"
+
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
+#, no-c-format
+msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:504
 msgid "For such files you can use this parameter and decrease the size to 2."
@@ -5707,7 +5724,7 @@ msgid "Height of the video frames to display."
 msgstr "ビデオフレームの縦表示解像度です。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:64
+#: src/mkvtoolnix-gui/util/settings.cpp:46
 #, fuzzy, no-c-format
 msgid "Hibernate the computer"
 msgstr "システムを1分後にシャットダウン："
@@ -5961,6 +5978,11 @@ msgstr "「いいえ」を指定した場合は、選択されたトラックは
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
 msgstr "もしOGMフォーマットが使用され、ファイルの文字セットが正しく認識されなかった場合、このオプションを使って修正することができます。"
 
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
+#, no-c-format
+msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
 #, no-c-format
 msgid "If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present."
@@ -5970,6 +5992,11 @@ msgstr "マジック値である-1を使用するとmkvmergeは、ビデオト�
 #, no-c-format
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "数字の後ろに「ms」がついていた場合は、最大でnミリ秒のデータが各クラスタに入ることになります。"
+
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
+#, no-c-format
+msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #, fuzzy, no-c-format
@@ -6835,7 +6862,7 @@ msgid "Matroska audio/video files"
 msgstr "Matroskaオーディオ/ビデオファイル"
 
 #: src/info/qt_ui.cpp:83
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:556
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:708
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:182
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #: src/mkvtoolnix-gui/merge/output.cpp:277
@@ -7839,12 +7866,12 @@ msgid "Play a WAV file with the default application:"
 msgstr "WAVファイルをデフォルトのアプリケーションで再生する："
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:85
+#: src/mkvtoolnix-gui/util/settings.cpp:67
 #, fuzzy, no-c-format
 msgid "Play an audio file"
 msgstr "MPEGオーディオファイル"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:90
+#: src/mkvtoolnix-gui/util/settings.cpp:72
 #, fuzzy, no-c-format
 msgid "Play audio file '%1'"
 msgstr "MPEGオーディオファイル"
@@ -7898,12 +7925,12 @@ msgstr ""
 msgid "Please select its location below."
 msgstr "MediaInfoの場所を指定してください。"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
 #, no-c-format
 msgid "Please select the actions to apply to all editions, chapters and sub-chapters."
 msgstr "全てのエディション、チャプタやサブチャプタに対して適用するアクションを選択してください。"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:81
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:87
 #, no-c-format
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr "選択したエディション、チャプタやその全ての子要素に対して適用するアクションを選択してください。"
@@ -7923,8 +7950,8 @@ msgstr "プログラムが存在しないか、プログラムまたはそのデ
 
 #: src/common/qt_kax_analyzer.cpp:88
 #: src/common/qt_kax_analyzer.cpp:96
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:257
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:567
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:719
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:109
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:120
@@ -8191,7 +8218,7 @@ msgstr "RIFF CDXA"
 msgid "RSA"
 msgstr "RSA"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:177
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:208
 #, no-c-format
 msgid "Re&number sub-chapters"
 msgstr "サブチャプタを再ナンバリングする(&N)"
@@ -8419,7 +8446,7 @@ msgstr "右"
 msgid "Right-click for actions for all items"
 msgstr "全てのトラックへのアクションを行うには右クリックしてください"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:191
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:224
 #, fuzzy, no-c-format
 msgid "Right-click for actions for editions and chapters"
 msgstr "全てのトラックへのアクションを行うには右クリックしてください"
@@ -8460,8 +8487,9 @@ msgstr "実行中のジョブを編集することはできません。"
 msgid "Running jobs cannot be removed."
 msgstr "実行中のジョブを削除することはできません。"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
-msgid "S&hift start and end timecodes by the following amount:"
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#, fuzzy
+msgid "S&hift start and end timestamps by the following amount:"
 msgstr "開始と終了のタイムコードを次の量だけずらします：(&H)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:544
@@ -8525,12 +8553,12 @@ msgstr "新規のマージジョブのデフォルトとして保存する(&D)"
 msgid "Save attachment"
 msgstr "添付ファイルを保存"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:519
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:669
 #, no-c-format
 msgid "Save chapters as XML"
 msgstr "チャプタをXMLファイルとして保存する"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:556
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:708
 #, no-c-format
 msgid "Save chapters to Matroska file"
 msgstr "チャプタをMatroskaファイルとして保存"
@@ -8559,14 +8587,14 @@ msgstr "設定ファイルの保存形式"
 msgid "Save to &Matroska file"
 msgstr "Matroskaファイルに保存(&M)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:531
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:535
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:681
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:685
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:198
 #, no-c-format
 msgid "Saving failed"
 msgstr "保存に失敗しました"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:586
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:738
 #, no-c-format
 msgid "Saving the chapters failed."
 msgstr "チャプタの保存に失敗しました。"
@@ -8735,7 +8763,7 @@ msgstr[0] "特定のタイプの全てのトラックを選択(&T)"
 msgid "Select all tracks of specific &type"
 msgstr "特定のタイプの全てのトラックを選択(&T)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:192
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:225
 #: src/mkvtoolnix-gui/merge/output.cpp:176
 #: src/mkvtoolnix-gui/merge/output.cpp:177
 #: src/mkvtoolnix-gui/merge/output.cpp:178
@@ -8864,11 +8892,11 @@ msgstr "後ろの'--add-attachment'や'--replace-attachment'や'--update-attachm
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "後ろの'--add-attachment'や'--replace-attachment'や'--update-attachment'オプションで使用するUIDを設定します"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:204
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
 msgid "Set the chapter names' &languages:"
 msgstr "チャプタ名の言語を設定：(&L)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:202
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
 msgid "Set the chapter names' co&untries"
 msgstr "チャプタ名の国を設定(&U)"
 
@@ -8986,7 +9014,7 @@ msgid "Show version information."
 msgstr "プログラムのバージョン情報を表示します。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:63
+#: src/mkvtoolnix-gui/util/settings.cpp:45
 #, fuzzy, no-c-format
 msgid "Shut down the computer"
 msgstr "システムを1分後にシャットダウン："
@@ -9078,7 +9106,7 @@ msgid "Skipping %1% bytes at the beginning (no valid MP3 header found).\n"
 msgstr "開始点で%1%バイトをスキップします（有効なMP3ヘッダが見つかりませんでした）。\n"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
-#: src/mkvtoolnix-gui/util/settings.cpp:65
+#: src/mkvtoolnix-gui/util/settings.cpp:47
 #, fuzzy, no-c-format
 msgid "Sleep the computer"
 msgstr "システムを1分後にシャットダウン："
@@ -9595,7 +9623,7 @@ msgstr "添付ファイル'%1%'を読み込むことができませんでした�
 msgid "The attachment (%1%) is too big (%2%)."
 msgstr "この添付ファイル「%1%」は大きすぎます（%2%）。"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:45
+#: src/mkvtoolnix-gui/util/settings.cpp:27
 #, fuzzy, no-c-format
 msgid "The audio file to play hasn't been set yet."
 msgstr "オプションファイルが作成されました。"
@@ -9609,7 +9637,7 @@ msgstr "オーディオ・ビデオの同期が失われた可能性がありま
 msgid "The changes are written to the file.\n"
 msgstr "変更をファイルに書き込みます。\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:650
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:812
 #, no-c-format
 msgid "The chapter UID must be a number if given."
 msgstr "指定する場合は、チャプタUIDは数字である必要があります。"
@@ -9784,7 +9812,7 @@ msgstr "この継続時間の後に新しい出力ファイルが開始されま
 msgid "The edit specifications '%1%' and '%2%' resolve to the same track with the UID %3%.\n"
 msgstr "editで指定された'%1%'と'%2%'はUID %3%の同じトラックに解決されました。\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:725
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:889
 #, no-c-format
 msgid "The edition UID must be a number if given."
 msgstr "指定する場合は、エディションUIDは数字である必要があります。"
@@ -9795,14 +9823,14 @@ msgstr "指定する場合は、エディションUIDは数字である必要が
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "要素はファイルの終端に書き込まれましたが、セグメントサイズを更新できませんでした。そのため要素は不可視となります。処理は中断されます。ファイルは変更されました！"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:676
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:838
 #, no-c-format
 msgid "The end time could not be parsed: %1"
 msgstr "終了時間を解析することができませんでした：%1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:679
-#, no-c-format
-msgid "The end time must be greater than the start timecode."
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:841
+#, fuzzy, no-c-format
+msgid "The end time must be greater than the start time."
 msgstr "終了時間は開始のタイムコードよりも大きい必要があります。"
 
 #: src/output/p_mpeg4_p2.cpp:368
@@ -9964,7 +9992,7 @@ msgstr "このファイルにトラックID %1%はありません。\n"
 msgid "The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."
 msgstr "ヘッダエディタがファイルを読み込んだ以降に他のプログラムによってファイルは変更されました。よって再読み込みしなければなりません。残念ながら全ての変更が失われるということを意味します。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:506
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:654
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:223
 #, no-c-format
 msgid "The file has been saved successfully."
@@ -10057,9 +10085,11 @@ msgstr "このファイルはサポートされていないフォーマットで
 msgid "The file will not be processed further."
 msgstr "ファイルはこれ以上処理されません。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:256
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:272
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:566
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:303
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:309
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:380
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:718
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:352
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:119
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:681
@@ -10067,7 +10097,7 @@ msgstr "ファイルはこれ以上処理されません。"
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "開こうとしたファイル（%1）の読み込みに問題が発生しました。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:265
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:389
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
 #, no-c-format
 msgid "The file you tried to open (%1) does not contain any chapters."
@@ -10078,8 +10108,8 @@ msgstr "開こうとしたファイル（%1）にはチャプタが含まれて�
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "開こうとしたファイル（%1）は有効なMatroska・WebMファイルであるとは認識されませんでした。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:320
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:416
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:454
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:556
 #, no-c-format
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "開こうとしたファイル（%1）は有効なMatroskaファイルでもなく、有効なチャプタファイルでもないと認識されました。"
@@ -10427,7 +10457,7 @@ msgstr "調査範囲のパーセンテージ「%1%」は無効です。\n"
 msgid "The process will be aborted."
 msgstr "プロセスは中断します。"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:44
+#: src/mkvtoolnix-gui/util/settings.cpp:26
 #, fuzzy, no-c-format
 msgid "The program to execute hasn't been set yet."
 msgstr "設定が保存されました。"
@@ -10500,12 +10530,12 @@ msgstr "2番目のモードではタグを抽出しXMLに変換します。出�
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "このTTAファイルのシークテーブルは壊れているようです。\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:692
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:854
 #, no-c-format
 msgid "The segment UID could not be parsed: %1"
 msgstr "セグメントUIDを解析できませんでした：%1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:702
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:864
 #, no-c-format
 msgid "The segment edition UID must be a positive number if given."
 msgstr "指定する場合は、セグメントエディションUIDは正の数である必要があります。"
@@ -10544,7 +10574,7 @@ msgstr "ソースファイル'%1%'を開くのに失敗したか、最後まで�
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
 msgstr "コンテナのタイミング情報のソースは色々なものがあります：「--default-duration」オプションを使用した際にコマンドラインから与えられる値や、ソースコンテナやビデオビットストリームです。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:670
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:832
 #, no-c-format
 msgid "The start time could not be parsed: %1"
 msgstr "開始時間を解析できませんでした：%1"
@@ -11626,7 +11656,7 @@ msgstr "有効なフォーマットコードは以下の通りです："
 msgid "Valid hacks are:\n"
 msgstr "有効なハック：\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:623
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:781
 #, no-c-format
 msgid "Validation failed"
 msgstr "バリデーション失敗"
@@ -12046,7 +12076,7 @@ msgstr "間違った識別文字列です：'%|1$6s|' != 'theora'"
 msgid "Wrong identification string: '%|1$7s|' != 'kate\\0\\0\\0'"
 msgstr "間違った識別文字列です：'%|1$7s|' != 'kate\\0\\0\\0'"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:519
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:669
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:184
 #: src/mkvtoolnix-gui/merge/output.cpp:475
 #, no-c-format
@@ -12706,12 +12736,12 @@ msgstr "mm_text_io_c：UTF32_*は現在サポートされていません。\n"
 msgid "mono"
 msgstr "モノラル"
 
-#: src/input/r_mpeg_ps.cpp:1259
+#: src/input/r_mpeg_ps.cpp:1260
 #, boost-format
 msgid "mpeg_ps_reader: Should not have happened #1. %1%"
 msgstr "mpeg_ps_reader：発生するべきではありません #1。%1%"
 
-#: src/input/r_mpeg_ps.cpp:1282
+#: src/input/r_mpeg_ps.cpp:1283
 #, boost-format
 msgid "mpeg_ps_reader: Should not have happened #2. %1%"
 msgstr "mpeg_ps_reader：発生するべきではありません #2。%1%"
