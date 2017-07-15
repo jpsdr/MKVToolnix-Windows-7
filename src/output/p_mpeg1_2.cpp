@@ -59,7 +59,7 @@ mpeg1_2_video_packetizer_c::~mpeg1_2_video_packetizer_c() {
 
 void
 mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr packet) {
-  mxdebug_if(m_debug_stuffing_removal, boost::format("Starting stuff removal, frame size %1%\n") % packet->data->get_size());
+  mxdebug_if(m_debug_stuffing_removal, boost::format("Starting stuff removal, frame size %1%, timestamp %2%\n") % packet->data->get_size() % format_timestamp(packet->timecode));
 
   auto buf              = packet->data->get_buffer();
   auto size             = packet->data->get_size();
@@ -70,20 +70,22 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
   uint32_t chunk_type   = 0;
   bool seq_hdr_found    = false;
 
-  auto mid_remover      = [this, &stuffing_start, &pos, &size, &buf]() {
-    if (!stuffing_start || (stuffing_start >= (pos - 4)))
-      return;
+  // auto mid_remover      = [this, &stuffing_start, &pos, &size, &buf]() {
+  //   if (!stuffing_start || (stuffing_start >= (pos - 4)))
+  //     return;
 
-    auto num_stuffing_bytes       = pos - 4 - stuffing_start;
-    m_num_removed_stuffing_bytes += num_stuffing_bytes;
+  //   auto num_stuffing_bytes       = pos - 4 - stuffing_start;
+  //   m_num_removed_stuffing_bytes += num_stuffing_bytes;
 
-    ::memmove(&buf[stuffing_start], &buf[pos - 4], size - pos + 4);
+  //   if (m_debug_stuffing_removal)
+  //     debugging_c::hexdump(&buf[stuffing_start], num_stuffing_bytes + 4);
+  //   ::memmove(&buf[stuffing_start], &buf[pos - 4], size - pos + 4);
 
-    pos  -= num_stuffing_bytes;
-    size -= num_stuffing_bytes;
+  //   pos  -= num_stuffing_bytes;
+  //   size -= num_stuffing_bytes;
 
-    mxdebug_if(m_debug_stuffing_removal, boost::format("    Stuffing in the middle: %1%\n") % num_stuffing_bytes);
-  };
+  //   mxdebug_if(m_debug_stuffing_removal, boost::format("    Stuffing in the middle: %1%\n") % num_stuffing_bytes);
+  // };
 
   memory_cptr new_seq_hdr;
   auto seq_hdr_copier = [this, &chunk_type, &seq_hdr_found, &buf, &start_code_pos, &pos, &new_seq_hdr, &size](bool at_end) {
@@ -116,7 +118,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
     if ((MPEGVIDEO_SLICE_START_CODE_LOWER <= marker) && (MPEGVIDEO_SLICE_START_CODE_UPPER >= marker)) {
       mxdebug_if(m_debug_stuffing_removal, boost::format("  Slice start code at %1%\n") % (pos - 4));
 
-      mid_remover();
+      // mid_remover();
       seq_hdr_copier(false);
 
       chunk_type     = MPEGVIDEO_SLICE_START_CODE_LOWER;
@@ -124,9 +126,9 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
       start_code_pos = pos - 4;
 
     } else if ((marker & 0xffffff00) == 0x00000100) {
-      mxdebug_if(m_debug_stuffing_removal, boost::format("  Non-slice start code at %1%\n") % (pos - 4));
+      mxdebug_if(m_debug_stuffing_removal, boost::format("  Non-slice start code 0x%|2$08x| at %1%\n") % (pos - 4) % marker);
 
-      mid_remover();
+      // mid_remover();
       seq_hdr_copier(false);
 
       chunk_type     = marker;
@@ -146,13 +148,13 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
 
   if ((marker & 0xffffff00) == 0x00000100) {
     seq_hdr_copier(false);
-    mid_remover();
+    // mid_remover();
 
-  } else if (stuffing_start && (stuffing_start < size)) {
-    mxdebug_if(m_debug_stuffing_removal, boost::format("    Stuffing at the end: chunk_type 0x%|1$08x| stuffing_start %2% stuffing_size %3%\n") % chunk_type % stuffing_start % (stuffing_start ? size - stuffing_start : 0));
+  // } else if (stuffing_start && (stuffing_start < size)) {
+  //   mxdebug_if(m_debug_stuffing_removal, boost::format("    Stuffing at the end: chunk_type 0x%|1$08x| stuffing_start %2% stuffing_size %3%\n") % chunk_type % stuffing_start % (stuffing_start ? size - stuffing_start : 0));
 
-    m_num_removed_stuffing_bytes += size - stuffing_start;
-    size                          = stuffing_start;
+  //   m_num_removed_stuffing_bytes += size - stuffing_start;
+  //   size                          = stuffing_start;
   }
 
   packet->data->set_size(size);

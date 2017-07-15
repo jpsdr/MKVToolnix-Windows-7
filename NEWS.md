@@ -40,6 +40,14 @@
 * MKVToolNix GUI: multiplex tool: appended tracks can no longer be enabled
   (selected for multiplexing) if the track they're going to be appended to is
   not enabled. Fixes #2039.
+* mkvmerge: MPEG-1/-2 video: the "remove stuffing bytes" feature introduced in
+  v5.8.0 (feature request #734) was broken. In a lot of situations it did not
+  detect the end of a slice correctly and removed 0 bytes that were actually
+  part of the slice structure. Often there were no visual problems as decoders
+  were able to ignore such errors, but in other cases there are visual
+  artifacts upon decoding. As detecting the slice end properly requires
+  parsing the whole slice structure, this feature has been removed
+  again. Fixes #2045.
 
 ## Build system changes
 
