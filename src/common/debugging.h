@@ -79,10 +79,19 @@ public:
   }
 
   operator bool() const {
+    return ms_registered_options.at(get_idx()).get();
+  }
+
+  void set(boost::tribool requested) {
+    ms_registered_options.at(get_idx()).m_requested = requested;
+  }
+
+protected:
+  std::size_t get_idx() const {
     if (m_registered_idx == std::numeric_limits<size_t>::max())
       m_registered_idx = register_option(m_option);
 
-    return ms_registered_options.at(m_registered_idx).get();
+    return m_registered_idx;
   }
 
 public:
