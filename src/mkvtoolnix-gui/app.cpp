@@ -346,11 +346,11 @@ App::isInstalled() {
 
 void
 App::initializeLocale(QString const &requestedLocale) {
-  Q_D(App);
-
   auto locale = Util::Settings::get().localeToUse(requestedLocale);
 
 #if defined(HAVE_LIBINTL_H)
+  Q_D(App);
+
   if (!locale.isEmpty()) {
     if (d->m_currentTranslator)
       removeTranslator(d->m_currentTranslator.get());
