@@ -53,6 +53,7 @@ require_relative "rake.d/library"
 require_relative "rake.d/format_string_verifier"
 require_relative "rake.d/pch"
 require_relative "rake.d/po"
+require_relative "rake.d/source_tests"
 require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
 
@@ -856,6 +857,11 @@ namespace :tests do
   desc "Run product tests from 'tests' sub-directory (requires data files to be present)"
   task :products do
     run "cd tests && ./run.rb"
+  end
+
+  desc "Run built-in tests on source code files"
+  task :source do
+    Mtx::SourceTests.test_include_guards
   end
 end
 
