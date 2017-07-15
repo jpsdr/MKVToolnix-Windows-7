@@ -531,7 +531,7 @@ avi_reader_c::create_aac_packetizer(int aid,
   demuxer.m_samples_per_second = sample_rate;
   demuxer.m_channels           = channels;
 
-  auto packetizer              = new aac_packetizer_c(this, m_ti, profile, demuxer.m_samples_per_second, demuxer.m_channels, headerless);
+  auto packetizer              = new aac_packetizer_c(this, m_ti, profile, demuxer.m_samples_per_second, demuxer.m_channels, headerless ? aac_packetizer_c::headerless : aac_packetizer_c::with_headers);
 
   if (is_sbr)
     packetizer->set_audio_output_sampling_freq(output_sample_rate);

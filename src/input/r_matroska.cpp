@@ -1727,7 +1727,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
   if ((mtx::includes(m_ti.m_all_aac_is_sbr, t->tnum) && !m_ti.m_all_aac_is_sbr[t->tnum]) || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && !m_ti.m_all_aac_is_sbr[-1]))
     profile = detected_profile;
 
-  set_track_packetizer(t, new aac_packetizer_c(this, nti, profile, t->a_sfreq, t->a_channels, true));
+  set_track_packetizer(t, new aac_packetizer_c(this, nti, profile, t->a_sfreq, t->a_channels, aac_packetizer_c::headerless));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 

@@ -2202,7 +2202,7 @@ reader_c::create_packetizer(int64_t id) {
 
 void
 reader_c::create_aac_audio_packetizer(track_ptr const &track) {
-  auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_header.profile, track->m_aac_frame.m_header.sample_rate, track->m_aac_frame.m_header.channels, true);
+  auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_header.profile, track->m_aac_frame.m_header.sample_rate, track->m_aac_frame.m_header.channels, aac_packetizer_c::headerless);
   track->ptzr         = add_packetizer(aac_packetizer);
   track->converter    = std::make_shared<aac_framing_packet_converter_c>(PTZR(track->ptzr), track->m_aac_multiplex_type);
 

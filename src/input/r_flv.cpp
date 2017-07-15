@@ -414,7 +414,7 @@ flv_reader_c::create_v_generic_packetizer(flv_track_cptr &track) {
 
 void
 flv_reader_c::create_a_aac_packetizer(flv_track_cptr &track) {
-  track->m_ptzr = add_packetizer(new aac_packetizer_c(this, m_ti, track->m_a_profile, track->m_a_sample_rate, track->m_a_channels, true));
+  track->m_ptzr = add_packetizer(new aac_packetizer_c(this, m_ti, track->m_a_profile, track->m_a_sample_rate, track->m_a_channels, aac_packetizer_c::headerless));
   show_packetizer_info(m_audio_track_idx, PTZR(track->m_ptzr));
 }
 

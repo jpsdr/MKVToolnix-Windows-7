@@ -25,12 +25,12 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    int profile,
                                    int samples_per_sec,
                                    int channels,
-                                   bool headerless)
+                                   mode_e mode)
   : generic_packetizer_c(p_reader, p_ti)
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
   , m_profile(profile)
-  , m_headerless(headerless)
+  , m_mode{mode}
   , m_timestamp_calculator{static_cast<int64_t>(m_samples_per_sec)}
   , m_packet_duration{m_timestamp_calculator.get_duration(ms_samples_per_packet).to_ns()}
 {
@@ -77,7 +77,7 @@ int
 aac_packetizer_c::process(packet_cptr packet) {
   m_timestamp_calculator.add_timestamp(packet);
 
-  if (m_headerless)
+  if (m_mode == mode_e::headerless)
     return process_headerless(packet);
 
   m_parser.add_bytes(packet->data);

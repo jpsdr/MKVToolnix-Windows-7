@@ -21,9 +21,15 @@
 #include "merge/timestamp_calculator.h"
 
 class aac_packetizer_c: public generic_packetizer_c {
+public:
+  enum mode_e {
+    with_headers,
+    headerless,
+  };
+
 private:
   int m_samples_per_sec, m_channels, m_profile;
-  bool m_headerless;
+  mode_e m_mode;
   aac::parser_c m_parser;
   timestamp_calculator_c m_timestamp_calculator;
   int64_t m_packet_duration;
@@ -31,7 +37,7 @@ private:
   static const int ms_samples_per_packet = 1024;
 
 public:
-  aac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int profile, int samples_per_sec, int channels, bool headerless);
+  aac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int profile, int samples_per_sec, int channels, mode_e mode);
   virtual ~aac_packetizer_c();
 
   virtual int process(packet_cptr packet);

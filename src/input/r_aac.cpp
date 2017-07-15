@@ -107,7 +107,7 @@ aac_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('a', 0) || (NPTZR() != 0))
     return;
 
-  auto aacpacketizer = new aac_packetizer_c(this, m_ti, m_aacheader.profile, m_aacheader.sample_rate, m_aacheader.channels, true);
+  auto aacpacketizer = new aac_packetizer_c(this, m_ti, m_aacheader.profile, m_aacheader.sample_rate, m_aacheader.channels, aac_packetizer_c::headerless);
   add_packetizer(aacpacketizer);
 
   if (AAC_PROFILE_SBR == m_aacheader.profile)
