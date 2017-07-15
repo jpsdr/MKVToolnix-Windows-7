@@ -59,7 +59,29 @@ else
   opt_features_no="$opt_features_no\n   * profiling support"
 fi
 
+AC_ARG_ENABLE([addrsan],
+  AC_HELP_STRING([--enable-addrsan],[compile with address sanitization turned on (no)]),
+  [ADDRSAN=yes],[ADDRSAN=no])
+
+if test x"$ADDRSAN" = xyes ; then
+  opt_features_yes="$opt_features_yes\n   * development technique 'address sanitizer'"
+else
+  opt_features_no="$opt_features_no\n   * development technique 'address sanitizer'"
+fi
+
+AC_ARG_ENABLE([ubsan],
+  AC_HELP_STRING([--enable-ubsan],[compile with sanitization for undefined behavior turned on (no)]),
+  [UBSAN=yes],[UBSAN=no])
+
+if test x"$UBSAN" = xyes ; then
+  opt_features_yes="$opt_features_yes\n   * development technique 'undefined behavior sanitizer'"
+else
+  opt_features_no="$opt_features_no\n   * development technique 'undefined behavior sanitizer'"
+fi
+
 AC_SUBST(DEBUG_CFLAGS)
 AC_SUBST(PROFILING_CFLAGS)
 AC_SUBST(PROFILING_LIBS)
 AC_SUBST(OPTIMIZATION_CFLAGS)
+AC_SUBST(ADDRSAN)
+AC_SUBST(UBSAN)
