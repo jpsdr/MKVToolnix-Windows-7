@@ -45,8 +45,18 @@
 namespace aac {
 
 struct audio_config_t {
-  unsigned int profile, sample_rate, output_sample_rate, channels;
+  unsigned int profile, sample_rate, output_sample_rate, channels, samples_per_frame;
   bool sbr;
+
+  audio_config_t()
+    : profile{}
+    , sample_rate{}
+    , output_sample_rate{}
+    , channels{}
+    , samples_per_frame{1024}
+    , sbr{}
+  {
+  }
 };
 
 unsigned int get_sampling_freq_idx(unsigned int sampling_freq);

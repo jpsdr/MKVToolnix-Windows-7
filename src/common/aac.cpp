@@ -18,6 +18,7 @@
 #include "common/at_scope_exit.h"
 #include "common/codec.h"
 #include "common/endian.h"
+#include "common/list_utils.h"
 #include "common/mp4.h"
 #include "common/strings/formatting.h"
 
@@ -876,10 +877,20 @@ header_c::read_eld_specific_config() {
 
 void
 header_c::read_ga_specific_config() {
-  m_bc->skip_bit();             // frame_length_flag
-  if (m_bc->get_bit())          // depends_on_core_coder
-    m_bc->skip_bits(14);        // core_coder_delay
+  // GASpecificConfig as defined in ISO/IEC 14496-3:2005, section 4.4.1
+  // "Decoder configuration (GASpecificConfig)" in section 4.4 "Syntax".
+
+  auto frame_length_flag = m_bc->get_bit(); // frame_length_flag
+  if (m_bc->get_bit())                      // depends_on_core_coder
+    m_bc->skip_bits(14);                    // core_coder_delay
   bool extension_flag = m_bc->get_bit();
+
+  // Frame length in samples; see ISO/IEC 14496-3:2005, section
+  // 4.5.1.1 "GASpecificConfig()" in 4.5 "Overall data structure".
+  if (!mtx::included_in<int>(object_type, MP4AOT_SBR, MP4AOT_ER_AAC_LD))
+    config.samples_per_frame = frame_length_flag ? 960 : 1024;
+  else if (MP4AOT_ER_AAC_LD == object_type)
+    config.samples_per_frame = frame_length_flag ? 480 :  512;
 
   if (!config.channels)
     read_program_config_element();
