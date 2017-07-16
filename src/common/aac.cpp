@@ -91,20 +91,16 @@ parse_audio_specific_config(unsigned char const *data,
 }
 
 memory_cptr
-create_audio_specific_config(int profile,
-                             int channels,
-                             int sample_rate,
-                             int output_sample_rate,
-                             bool sbr) {
-  auto buffer   = memory_c::alloc(sbr ? 5 : 2);
+create_audio_specific_config(audio_config_t const &audio_config) {
+  auto buffer   = memory_c::alloc(audio_config.sbr ? 5 : 2);
   auto data     = buffer->get_buffer();
 
-  int srate_idx = aac::get_sampling_freq_idx(sample_rate);
-  data[0]       = ((profile + 1) << 3) | ((srate_idx & 0x0e) >> 1);
-  data[1]       = ((srate_idx & 0x01) << 7) | (channels << 3);
+  int srate_idx = aac::get_sampling_freq_idx(audio_config.sample_rate);
+  data[0]       = ((audio_config.profile + 1) << 3) | ((srate_idx & 0x0e) >> 1);
+  data[1]       = ((srate_idx & 0x01) << 7) | (audio_config.channels << 3);
 
-  if (sbr) {
-    srate_idx = aac::get_sampling_freq_idx(output_sample_rate);
+  if (audio_config.sbr) {
+    srate_idx = aac::get_sampling_freq_idx(audio_config.output_sample_rate);
     data[2]   = AAC_SYNC_EXTENSION_TYPE >> 3;
     data[3]   = ((AAC_SYNC_EXTENSION_TYPE & 0x07) << 5) | MP4AOT_SBR;
     data[4]   = (1 << 7) | (srate_idx << 3);

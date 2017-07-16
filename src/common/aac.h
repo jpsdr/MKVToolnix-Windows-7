@@ -52,7 +52,7 @@ struct audio_config_t {
 unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
 bool parse_codec_id(const std::string &codec_id, int &id, int &profile);
 boost::optional<audio_config_t> parse_audio_specific_config(unsigned char const *data, std::size_t size);
-memory_cptr create_audio_specific_config(int profile, int channels, int sample_rate, int output_sample_rate, bool sbr);
+memory_cptr create_audio_specific_config(audio_config_t const &audio_config);
 
 class header_c {
 public:
