@@ -515,9 +515,7 @@ avi_reader_c::create_aac_packetizer(int aid,
       audio_config.sbr                = false;
     }
 
-    unsigned char created_aac_data[AAC_MAX_PRIVATE_DATA_SIZE];
-    auto size           = aac::create_audio_specific_config(created_aac_data, audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr);
-    m_ti.m_private_data = memory_c::clone(created_aac_data, size);
+    m_ti.m_private_data = aac::create_audio_specific_config(audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr);
 
   } else {
     auto parsed_audio_config = aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size());

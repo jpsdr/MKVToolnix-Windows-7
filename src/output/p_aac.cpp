@@ -51,13 +51,11 @@ aac_packetizer_c::set_headers() {
     set_codec_private(m_ti.m_private_data);
 
   else {
-    unsigned char buffer[5];
-    int length = aac::create_audio_specific_config(buffer,
-                                                   AAC_PROFILE_SBR == m_profile ? AAC_PROFILE_LC : m_profile,
-                                                   m_channels, m_samples_per_sec,
-                                                   AAC_PROFILE_SBR == m_profile ? m_samples_per_sec * 2 : m_samples_per_sec,
-                                                   AAC_PROFILE_SBR == m_profile);
-    set_codec_private(memory_c::clone(buffer, length));
+    auto buffer = aac::create_audio_specific_config(AAC_PROFILE_SBR == m_profile ? AAC_PROFILE_LC : m_profile,
+                                                    m_channels, m_samples_per_sec,
+                                                    AAC_PROFILE_SBR == m_profile ? m_samples_per_sec * 2 : m_samples_per_sec,
+                                                    AAC_PROFILE_SBR == m_profile);
+    set_codec_private(buffer);
   }
 
   generic_packetizer_c::set_headers();
