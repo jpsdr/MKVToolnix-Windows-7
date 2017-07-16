@@ -1050,13 +1050,14 @@ check_append_mapping() {
              % error_message);
 
     else if (CAN_CONNECT_YES != result) {
-      std::string reason(  result == CAN_CONNECT_NO_FORMAT     ? Y("The formats do not match.")
+      if (error_message.empty())
+        error_message = (  result == CAN_CONNECT_NO_FORMAT     ? Y("The formats do not match.")
                          : result == CAN_CONNECT_NO_PARAMETERS ? Y("The track parameters do not match.")
                          :                                       Y("The reason is unknown."));
       mxerror(boost::format(Y("The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"))
               % amap.src_track_id % g_files[amap.src_file_id]->name
               % amap.dst_track_id % g_files[amap.dst_file_id]->name
-              % reason);
+              % error_message);
     }
 
     src_ptzr->connect(dst_ptzr);

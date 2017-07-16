@@ -48,6 +48,8 @@
   artifacts upon decoding. As detecting the slice end properly requires
   parsing the whole slice structure, this feature has been removed
   again. Fixes #2045.
+* mkvmerge: when appending fails the error message details (e.g. "the number
+  of channels differs: 1 and 2") were often not output. Fixes #2046.
 
 ## Build system changes
 
