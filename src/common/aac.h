@@ -44,9 +44,14 @@
 
 namespace aac {
 
+struct audio_config_t {
+  unsigned int profile, sample_rate, output_sample_rate, channels;
+  bool sbr;
+};
+
 unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
 bool parse_codec_id(const std::string &codec_id, int &id, int &profile);
-bool parse_audio_specific_config(const unsigned char *data, size_t size, int &profile, int &channels, int &sample_rate, int &output_sample_rate, bool &sbr);
+boost::optional<audio_config_t> parse_audio_specific_config(unsigned char const *data, std::size_t size);
 int create_audio_specific_config(unsigned char *data, int profile, int channels, int sample_rate, int output_sample_rate, bool sbr);
 
 class header_c {

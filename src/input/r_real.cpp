@@ -273,13 +273,10 @@ real_reader_c::create_dnet_audio_packetizer(real_demuxer_cptr dmx) {
 
 void
 real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
-  int channels, sample_rate;
-  int detected_profile;
+  auto audio_config     = aac::audio_config_t{};
+  bool profile_detected = false;
 
-  int64_t tid            = dmx->track->id;
-  int profile            = -1;
-  int output_sample_rate = 0;
-  bool sbr               = false;
+  int64_t tid           = dmx->track->id;
 
   if ((dmx->extra_data) && (4 < dmx->extra_data->get_size())) {
     const unsigned char *extra_data = dmx->extra_data->get_buffer();
@@ -287,54 +284,61 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
     mxverb(2, boost::format("real_reader: extra_len: %1%\n") % extra_len);
 
     if ((4 + extra_len) <= dmx->extra_data->get_size()) {
-      if (!aac::parse_audio_specific_config(&extra_data[4 + 1], extra_len - 1, profile, channels, sample_rate, output_sample_rate, sbr))
+      auto parsed_audio_config = aac::parse_audio_specific_config(&extra_data[4 + 1], extra_len - 1);
+      if (!parsed_audio_config)
         mxerror_tid(m_ti.m_fname, tid, Y("This AAC track does not contain valid headers. Could not parse the AAC information.\n"));
+
+      audio_config = *parsed_audio_config;
+
       mxverb(2,
              boost::format("real_reader: 1. profile: %1%, channels: %2%, sample_rate: %3%, output_sample_rate: %4%, sbr: %5%\n")
-             % profile % channels % sample_rate % output_sample_rate % sbr);
-      if (sbr)
-        profile = AAC_PROFILE_SBR;
+             % audio_config.profile % audio_config.channels % audio_config.sample_rate % audio_config.output_sample_rate % audio_config.sbr);
+
+      if (audio_config.sbr)
+        audio_config.profile = AAC_PROFILE_SBR;
+
+      profile_detected = true;
     }
   }
 
-  if (-1 == profile) {
-    channels    = dmx->channels;
-    sample_rate = dmx->samples_per_second;
-    if (!strcasecmp(dmx->fourcc, "racp") || (44100 > sample_rate)) {
-      output_sample_rate = 2 * sample_rate;
-      sbr                = true;
+  if (!profile_detected) {
+    audio_config.channels    = dmx->channels;
+    audio_config.sample_rate = dmx->samples_per_second;
+    if (!strcasecmp(dmx->fourcc, "racp") || (44100 > audio_config.sample_rate)) {
+      audio_config.output_sample_rate = 2 * audio_config.sample_rate;
+      audio_config.sbr                = true;
     }
 
   } else {
-    dmx->channels           = channels;
-    dmx->samples_per_second = sample_rate;
+    dmx->channels           = audio_config.channels;
+    dmx->samples_per_second = audio_config.sample_rate;
   }
 
-  detected_profile = profile;
-  if (sbr)
-    profile = AAC_PROFILE_SBR;
+  auto detected_profile = audio_config.profile;
+  if (audio_config.sbr)
+    audio_config.profile = AAC_PROFILE_SBR;
 
   if (   (mtx::includes(m_ti.m_all_aac_is_sbr, tid) && m_ti.m_all_aac_is_sbr[tid])
       || (mtx::includes(m_ti.m_all_aac_is_sbr, -1)  && m_ti.m_all_aac_is_sbr[-1]))
-    profile = AAC_PROFILE_SBR;
+    audio_config.profile = AAC_PROFILE_SBR;
 
-  if ((-1 != detected_profile)
+  if (profile_detected
       &&
       (   (mtx::includes(m_ti.m_all_aac_is_sbr, tid) && !m_ti.m_all_aac_is_sbr[tid])
        || (mtx::includes(m_ti.m_all_aac_is_sbr, -1)  && !m_ti.m_all_aac_is_sbr[-1])))
-    profile = detected_profile;
+    audio_config.profile = detected_profile;
 
   mxverb(2,
          boost::format("real_reader: 2. profile: %1%, channels: %2%, sample_rate: %3%, output_sample_rate: %4%, sbr: %5%\n")
-         % profile % channels % sample_rate % output_sample_rate % sbr);
+         % audio_config.profile % audio_config.channels % audio_config.sample_rate % audio_config.output_sample_rate % audio_config.sbr);
 
   dmx->is_aac = true;
-  dmx->ptzr   = add_packetizer(new aac_packetizer_c(this, m_ti, profile, sample_rate, channels, aac_packetizer_c::headerless));
+  dmx->ptzr   = add_packetizer(new aac_packetizer_c(this, m_ti, audio_config.profile, audio_config.sample_rate, audio_config.channels, aac_packetizer_c::headerless));
 
   show_packetizer_info(tid, PTZR(dmx->ptzr));
 
-  if (AAC_PROFILE_SBR == profile)
-    PTZR(dmx->ptzr)->set_audio_output_sampling_freq(output_sample_rate);
+  if (AAC_PROFILE_SBR == audio_config.profile)
+    PTZR(dmx->ptzr)->set_audio_output_sampling_freq(audio_config.output_sample_rate);
 
   // AAC packetizers might need the timecode of the first packet in order
   // to fill in stuff. Let's misuse ref_timecode for that.

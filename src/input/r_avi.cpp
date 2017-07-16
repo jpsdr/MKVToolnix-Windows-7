@@ -496,45 +496,47 @@ avi_reader_c::add_audio_demuxer(int aid) {
 generic_packetizer_c *
 avi_reader_c::create_aac_packetizer(int aid,
                                     avi_demuxer_t &demuxer) {
-  int profile, channels, sample_rate, output_sample_rate;
-  bool is_sbr;
+  aac::audio_config_t audio_config;
 
   bool headerless = (AVI_audio_format(m_avi) != 0x706d);
 
   if (!m_ti.m_private_data
       || (   !headerless
           && ((sizeof(alWAVEFORMATEX) + 7)  < m_ti.m_private_data->get_size()))) {
-    channels             = AVI_audio_channels(m_avi);
-    sample_rate          = AVI_audio_rate(m_avi);
-    if (44100 > sample_rate) {
-      profile            = AAC_PROFILE_SBR;
-      output_sample_rate = sample_rate * 2;
-      is_sbr             = true;
+    audio_config.channels             = AVI_audio_channels(m_avi);
+    audio_config.sample_rate          = AVI_audio_rate(m_avi);
+    if (44100 > audio_config.sample_rate) {
+      audio_config.profile            = AAC_PROFILE_SBR;
+      audio_config.output_sample_rate = audio_config.sample_rate * 2;
+      audio_config.sbr                = true;
     } else {
-      profile            = AAC_PROFILE_MAIN;
-      output_sample_rate = sample_rate;
-      is_sbr             = false;
+      audio_config.profile            = AAC_PROFILE_MAIN;
+      audio_config.output_sample_rate = audio_config.sample_rate;
+      audio_config.sbr                = false;
     }
 
     unsigned char created_aac_data[AAC_MAX_PRIVATE_DATA_SIZE];
-    auto size           = aac::create_audio_specific_config(created_aac_data, profile, channels, sample_rate, output_sample_rate, is_sbr);
+    auto size           = aac::create_audio_specific_config(created_aac_data, audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr);
     m_ti.m_private_data = memory_c::clone(created_aac_data, size);
 
   } else {
-    if (!aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size(), profile, channels, sample_rate, output_sample_rate, is_sbr))
+    auto parsed_audio_config = aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size());
+    if (!parsed_audio_config)
       mxerror_tid(m_ti.m_fname, aid + 1, Y("This AAC track does not contain valid headers. Could not parse the AAC information.\n"));
 
-    if (is_sbr)
-      profile = AAC_PROFILE_SBR;
+    audio_config = *parsed_audio_config;
+
+    if (audio_config.sbr)
+      audio_config.profile = AAC_PROFILE_SBR;
   }
 
-  demuxer.m_samples_per_second = sample_rate;
-  demuxer.m_channels           = channels;
+  demuxer.m_samples_per_second = audio_config.sample_rate;
+  demuxer.m_channels           = audio_config.channels;
 
-  auto packetizer              = new aac_packetizer_c(this, m_ti, profile, demuxer.m_samples_per_second, demuxer.m_channels, headerless ? aac_packetizer_c::headerless : aac_packetizer_c::with_headers);
+  auto packetizer              = new aac_packetizer_c(this, m_ti, audio_config.profile, demuxer.m_samples_per_second, demuxer.m_channels, headerless ? aac_packetizer_c::headerless : aac_packetizer_c::with_headers);
 
-  if (is_sbr)
-    packetizer->set_audio_output_sampling_freq(output_sample_rate);
+  if (audio_config.sbr)
+    packetizer->set_audio_output_sampling_freq(audio_config.output_sample_rate);
 
   return packetizer;
 }

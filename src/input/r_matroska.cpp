@@ -1688,46 +1688,45 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   // A_AAC/MPEG2/MAIN
   // 0123456789012345
-  int id               = 0;
-  int profile          = 0;
+  aac::audio_config_t audio_config;
   int detected_profile = AAC_PROFILE_MAIN;
 
   if (!t->ms_compat) {
     if (t->private_data && (2 <= t->private_data->get_size())) {
-      int channels, sfreq, osfreq;
-      bool sbr;
-
-      if (!aac::parse_audio_specific_config(t->private_data->get_buffer(), t->private_data->get_size(), profile, channels, sfreq, osfreq, sbr))
+      auto parsed_audio_config = aac::parse_audio_specific_config(t->private_data->get_buffer(), t->private_data->get_size());
+      if (!parsed_audio_config)
         mxerror_tid(m_ti.m_fname, t->tnum, Y("Malformed AAC codec initialization data found.\n"));
 
-      detected_profile = profile;
-      id               = AAC_ID_MPEG4;
-      if (sbr)
-        profile        = AAC_PROFILE_SBR;
+      audio_config           = *parsed_audio_config;
+      detected_profile       = audio_config.profile;
+      if (audio_config.sbr)
+        audio_config.profile = AAC_PROFILE_SBR;
 
-    } else if (!aac::parse_codec_id(t->codec_id, id, profile))
-      mxerror_tid(m_ti.m_fname, t->tnum, boost::format(Y("Malformed codec id '%1%'.\n")) % t->codec_id);
+    } else {
+      int id = 0, profile = 0;
+      if (!aac::parse_codec_id(t->codec_id, id, profile))
+        mxerror_tid(m_ti.m_fname, t->tnum, boost::format(Y("Malformed codec id '%1%'.\n")) % t->codec_id);
+      audio_config.profile = profile;
+    }
 
   } else {
-    int channels, sfreq, osfreq;
-    bool sbr;
-
-    if (!aac::parse_audio_specific_config(t->private_data->get_buffer() + sizeof(alWAVEFORMATEX), t->private_data->get_size() - sizeof(alWAVEFORMATEX), profile, channels, sfreq, osfreq, sbr))
+    auto parsed_audio_config = aac::parse_audio_specific_config(t->private_data->get_buffer() + sizeof(alWAVEFORMATEX), t->private_data->get_size() - sizeof(alWAVEFORMATEX));
+    if (!parsed_audio_config)
       mxerror_tid(m_ti.m_fname, t->tnum, Y("Malformed AAC codec initialization data found.\n"));
 
-    detected_profile = profile;
-    id               = AAC_ID_MPEG4;
-    if (sbr)
-      profile        = AAC_PROFILE_SBR;
+    audio_config           = *parsed_audio_config;
+    detected_profile       = audio_config.profile;
+    if (audio_config.sbr)
+      audio_config.profile = AAC_PROFILE_SBR;
   }
 
   if ((mtx::includes(m_ti.m_all_aac_is_sbr, t->tnum) &&  m_ti.m_all_aac_is_sbr[t->tnum]) || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) &&  m_ti.m_all_aac_is_sbr[-1]))
-    profile = AAC_PROFILE_SBR;
+    audio_config.profile = AAC_PROFILE_SBR;
 
   if ((mtx::includes(m_ti.m_all_aac_is_sbr, t->tnum) && !m_ti.m_all_aac_is_sbr[t->tnum]) || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && !m_ti.m_all_aac_is_sbr[-1]))
-    profile = detected_profile;
+    audio_config.profile = detected_profile;
 
-  set_track_packetizer(t, new aac_packetizer_c(this, nti, profile, t->a_sfreq, t->a_channels, aac_packetizer_c::headerless));
+  set_track_packetizer(t, new aac_packetizer_c(this, nti, audio_config.profile, t->a_sfreq, t->a_channels, aac_packetizer_c::headerless));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 

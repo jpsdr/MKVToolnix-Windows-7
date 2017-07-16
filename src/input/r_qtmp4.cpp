@@ -2758,26 +2758,26 @@ qtmp4_demuxer_c::handle_subtitles_stsd_atom(uint64_t atom_size,
 
 void
 qtmp4_demuxer_c::parse_aac_esds_decoder_config() {
-  int profile, sample_rate, channels, output_sample_rate;
-  bool aac_is_sbr;
-
   if (!esds.decoder_config || (2 > esds.decoder_config->get_size())) {
     mxwarn(boost::format(Y("Track %1%: AAC found, but decoder config data has length %2%.\n")) % id % (esds.decoder_config ? esds.decoder_config->get_size() : 0));
     return;
   }
 
-  if (!aac::parse_audio_specific_config(esds.decoder_config->get_buffer(), esds.decoder_config->get_size(), profile, channels, sample_rate, output_sample_rate, aac_is_sbr)) {
+  auto audio_config = aac::parse_audio_specific_config(esds.decoder_config->get_buffer(), esds.decoder_config->get_size());
+  if (!audio_config) {
     mxwarn(boost::format(Y("Track %1%: The AAC information could not be parsed.\n")) % id);
     return;
   }
 
-  mxdebug_if(m_debug_headers, boost::format(" AAC: profile: %1%, sample_rate: %2%, channels: %3%, output_sample_rate: %4%, sbr: %5%\n") % profile % sample_rate % channels % output_sample_rate % aac_is_sbr);
+  mxdebug_if(m_debug_headers,
+             boost::format(" AAC: profile: %1%, sample_rate: %2%, channels: %3%, output_sample_rate: %4%, sbr: %5%\n")
+             % audio_config->profile % audio_config->sample_rate % audio_config->channels % audio_config->output_sample_rate % audio_config->sbr);
 
-  a_channels               = channels;
-  a_samplerate             = sample_rate;
-  a_aac_profile            = aac_is_sbr ? AAC_PROFILE_SBR : profile;
-  a_aac_output_sample_rate = output_sample_rate;
-  a_aac_is_sbr             = aac_is_sbr;
+  a_channels               = audio_config->channels;
+  a_samplerate             = audio_config->sample_rate;
+  a_aac_profile            = audio_config->sbr ? AAC_PROFILE_SBR : audio_config->profile;
+  a_aac_output_sample_rate = audio_config->output_sample_rate;
+  a_aac_is_sbr             = audio_config->sbr;
   a_aac_config_parsed      = true;
 }
 

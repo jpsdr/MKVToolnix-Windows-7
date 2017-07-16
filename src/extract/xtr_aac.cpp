@@ -41,15 +41,16 @@ xtr_aac_c::create_file(xtr_base_c *master,
     if (!priv)
       mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 
-    int output_sfreq = 0;
-    bool is_sbr      = false;
-
     memory_cptr mem(new memory_c(priv->GetBuffer(), priv->GetSize(), false));
     m_content_decoder.reverse(mem, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
 
-    if (!aac::parse_audio_specific_config(mem->get_buffer(), mem->get_size(), m_profile, m_channels, sfreq, output_sfreq, is_sbr))
+    auto audio_config = aac::parse_audio_specific_config(mem->get_buffer(), mem->get_size());
+    if (!audio_config)
       mxerror(boost::format(Y("Track %1% with the CodecID '%2%' contains invalid \"codec private\" data for AAC.\n")) % m_tid % m_codec_id);
-    m_id = 0;
+
+    m_id       = 0;
+    m_channels = audio_config->channels;
+    m_profile  = audio_config->profile;
 
   } else {
     // A_AAC/MPEG4/MAIN

@@ -59,8 +59,7 @@ struct ogm_frame_t {
 
 class ogm_a_aac_demuxer_c: public ogm_demuxer_c {
 public:
-  int profile{}, output_sample_rate{};
-  bool sbr{};
+  aac::audio_config_t audio_config{};
 
 public:
   ogm_a_aac_demuxer_c(ogm_reader_c *p_reader);
@@ -1002,30 +1001,34 @@ ogm_a_aac_demuxer_c::ogm_a_aac_demuxer_c(ogm_reader_c *p_reader)
 
 void
 ogm_a_aac_demuxer_c::initialize() {
-  if ((packet_data[0]->get_size() >= (sizeof(stream_header) + 5)) &&
-      (aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,
-                      packet_data[0]->get_size()   - sizeof(stream_header) - 5,
-                      profile, channels, sample_rate, output_sample_rate, sbr))) {
-    if (sbr)
-      profile = AAC_PROFILE_SBR;
+  boost::optional<aac::audio_config_t> parsed_audio_config;
+
+  if (packet_data[0]->get_size() >= (sizeof(stream_header) + 5))
+    parsed_audio_config = aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,
+                                                           packet_data[0]->get_size()   - sizeof(stream_header) - 5);
+
+  if (parsed_audio_config) {
+    audio_config = *parsed_audio_config;
+    if (audio_config.sbr)
+      audio_config.profile = AAC_PROFILE_SBR;
 
   } else {
-    auto sth    = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
-    channels    = get_uint16_le(&sth->sh.audio.channels);
-    sample_rate = get_uint64_le(&sth->samples_per_unit);
-    profile     = AAC_PROFILE_LC;
+    auto sth                 = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
+    audio_config.channels    = get_uint16_le(&sth->sh.audio.channels);
+    audio_config.sample_rate = get_uint64_le(&sth->samples_per_unit);
+    audio_config.profile     = AAC_PROFILE_LC;
   }
 
   mxverb(2,
          boost::format("ogm_reader: %1%/%2%: profile %3%, channels %4%, sample_rate %5%, sbr %6%, output_sample_rate %7%\n")
-         % m_ti.m_id % m_ti.m_fname % profile % channels % sample_rate % sbr % output_sample_rate);
+         % m_ti.m_id % m_ti.m_fname % audio_config.profile % audio_config.channels % audio_config.sample_rate % audio_config.sbr % audio_config.output_sample_rate);
 }
 
 generic_packetizer_c *
 ogm_a_aac_demuxer_c::create_packetizer() {
-  generic_packetizer_c *ptzr_obj = new aac_packetizer_c(reader, m_ti, profile, sample_rate, channels, aac_packetizer_c::headerless);
-  if (sbr)
-    ptzr_obj->set_audio_output_sampling_freq(output_sample_rate);
+  auto ptzr_obj = new aac_packetizer_c(reader, m_ti, audio_config.profile, audio_config.sample_rate, audio_config.channels, aac_packetizer_c::headerless);
+  if (audio_config.sbr)
+    ptzr_obj->set_audio_output_sampling_freq(audio_config.output_sample_rate);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 

@@ -73,25 +73,21 @@ parse_codec_id(const std::string &codec_id,
   return true;
 }
 
-bool
-parse_audio_specific_config(const unsigned char *data,
-                            size_t size,
-                            int &profile,
-                            int &channels,
-                            int &sample_rate,
-                            int &output_sample_rate,
-                            bool &sbr) {
+boost::optional<audio_config_t>
+parse_audio_specific_config(unsigned char const *data,
+                            std::size_t size) {
   auto h = header_c::from_audio_specific_config(data, size);
   if (!h.is_valid)
-    return false;
+    return {};
 
-  profile            = h.profile;
-  channels           = h.channels;
-  sample_rate        = h.sample_rate;
-  output_sample_rate = h.output_sample_rate;
-  sbr                = h.is_sbr;
+  auto config               = audio_config_t{};
+  config.profile            = h.profile;
+  config.channels           = h.channels;
+  config.sample_rate        = h.sample_rate;
+  config.output_sample_rate = h.output_sample_rate;
+  config.sbr                = h.is_sbr;
 
-  return true;
+  return config;
 }
 
 int
