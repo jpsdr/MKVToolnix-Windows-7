@@ -259,8 +259,7 @@ struct qtmp4_demuxer_c {
   std::deque<int64_t> references;
   uint32_t a_channels, a_bitdepth;
   float a_samplerate;
-  int a_aac_profile, a_aac_output_sample_rate;
-  bool a_aac_is_sbr, a_aac_config_parsed;
+  boost::optional<aac::audio_config_t> a_aac_audio_config;
   ac3::frame_c m_ac3_header;
   mtx::dts::header_t m_dts_header;
 
@@ -297,10 +296,6 @@ struct qtmp4_demuxer_c {
     , a_channels{0}
     , a_bitdepth{0}
     , a_samplerate{0.0}
-    , a_aac_profile{0}
-    , a_aac_output_sample_rate{0}
-    , a_aac_is_sbr{false}
-    , a_aac_config_parsed{false}
     , warning_printed{false}
     , ptzr{-1}
     , m_debug_tables{            "qtmp4_full|qtmp4_tables|qtmp4_tables_full"}

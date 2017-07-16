@@ -1026,7 +1026,7 @@ ogm_a_aac_demuxer_c::initialize() {
 
 generic_packetizer_c *
 ogm_a_aac_demuxer_c::create_packetizer() {
-  auto ptzr_obj = new aac_packetizer_c(reader, m_ti, audio_config.profile, audio_config.sample_rate, audio_config.channels, aac_packetizer_c::headerless);
+  auto ptzr_obj = new aac_packetizer_c(reader, m_ti, audio_config, aac_packetizer_c::headerless);
   if (audio_config.sbr)
     ptzr_obj->set_audio_output_sampling_freq(audio_config.output_sample_rate);
 

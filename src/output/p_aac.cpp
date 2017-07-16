@@ -22,20 +22,15 @@ using namespace libmatroska;
 
 aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
-                                   int profile,
-                                   int samples_per_sec,
-                                   int channels,
+                                   aac::audio_config_t const &config,
                                    mode_e mode)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_samples_per_sec(samples_per_sec)
-  , m_channels(channels)
-  , m_profile(profile)
+  , m_config{config}
   , m_mode{mode}
-  , m_timestamp_calculator{static_cast<int64_t>(m_samples_per_sec)}
+  , m_timestamp_calculator{static_cast<int64_t>(m_config.sample_rate)}
   , m_packet_duration{m_timestamp_calculator.get_duration(ms_samples_per_packet).to_ns()}
 {
   set_track_type(track_audio);
-  set_track_default_duration(m_packet_duration);
 }
 
 aac_packetizer_c::~aac_packetizer_c() {
@@ -44,22 +39,23 @@ aac_packetizer_c::~aac_packetizer_c() {
 void
 aac_packetizer_c::set_headers() {
   set_codec_id(MKV_A_AAC);
-  set_audio_sampling_freq((float)m_samples_per_sec);
-  set_audio_channels(m_channels);
+  set_audio_sampling_freq(m_config.sample_rate);
+  set_audio_channels(m_config.channels);
+  set_track_default_duration(m_packet_duration);
+
+  if (m_config.sbr || (m_config.profile == AAC_PROFILE_SBR)) {
+    m_config.profile            = AAC_PROFILE_LC;
+    m_config.sbr                = true;
+    m_config.output_sample_rate = std::max<unsigned int>(m_config.sample_rate * 2, m_config.output_sample_rate);
+
+    set_audio_output_sampling_freq(m_config.output_sample_rate);
+  }
 
   if (m_ti.m_private_data && (0 < m_ti.m_private_data->get_size()))
     set_codec_private(m_ti.m_private_data);
 
-  else {
-    aac::audio_config_t audio_config{};
-    audio_config.profile            = AAC_PROFILE_SBR == m_profile ? AAC_PROFILE_LC : m_profile;
-    audio_config.channels           = m_channels;
-    audio_config.sample_rate        = m_samples_per_sec;
-    audio_config.output_sample_rate = AAC_PROFILE_SBR == m_profile ? m_samples_per_sec * 2 : m_samples_per_sec;
-    audio_config.sbr                = AAC_PROFILE_SBR == m_profile;
-
-    set_codec_private(aac::create_audio_specific_config(audio_config));
-  }
+  else
+    set_codec_private(aac::create_audio_specific_config(m_config));
 
   generic_packetizer_c::set_headers();
 }
@@ -105,10 +101,10 @@ aac_packetizer_c::can_connect_to(generic_packetizer_c *src,
   if (!asrc)
     return CAN_CONNECT_NO_FORMAT;
 
-  connect_check_a_samplerate(m_samples_per_sec, asrc->m_samples_per_sec);
-  connect_check_a_channels(m_channels, asrc->m_channels);
-  if (m_profile != asrc->m_profile) {
-    error_message = (boost::format(Y("The AAC profiles are different: %1% and %2%")) % m_profile % asrc->m_profile).str();
+  connect_check_a_samplerate(m_config.sample_rate, asrc->m_config.sample_rate);
+  connect_check_a_channels(m_config.channels, asrc->m_config.channels);
+  if (m_config.profile != asrc->m_config.profile) {
+    error_message = (boost::format(Y("The AAC profiles are different: %1% and %2%")) % m_config.profile % asrc->m_config.profile).str();
     return CAN_CONNECT_NO_PARAMETERS;
   }
 

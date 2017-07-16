@@ -1688,8 +1688,11 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   // A_AAC/MPEG2/MAIN
   // 0123456789012345
-  aac::audio_config_t audio_config;
-  int detected_profile = AAC_PROFILE_MAIN;
+  aac::audio_config_t audio_config{};
+
+  audio_config.sample_rate = t->a_sfreq;
+  audio_config.channels    = t->a_channels;
+  int detected_profile     = AAC_PROFILE_MAIN;
 
   if (!t->ms_compat) {
     if (t->private_data && (2 <= t->private_data->get_size())) {
@@ -1726,7 +1729,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
   if ((mtx::includes(m_ti.m_all_aac_is_sbr, t->tnum) && !m_ti.m_all_aac_is_sbr[t->tnum]) || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && !m_ti.m_all_aac_is_sbr[-1]))
     audio_config.profile = detected_profile;
 
-  set_track_packetizer(t, new aac_packetizer_c(this, nti, audio_config.profile, t->a_sfreq, t->a_channels, aac_packetizer_c::headerless));
+  set_track_packetizer(t, new aac_packetizer_c(this, nti, audio_config, aac_packetizer_c::headerless));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 

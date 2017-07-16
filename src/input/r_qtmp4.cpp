@@ -1725,10 +1725,7 @@ qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.esds.decoder_config;
-  dmx.ptzr            = add_packetizer(new aac_packetizer_c(this, m_ti, dmx.a_aac_profile, dmx.a_samplerate, dmx.a_channels, aac_packetizer_c::headerless));
-
-  if (dmx.a_aac_is_sbr)
-    PTZR(dmx.ptzr)->set_audio_output_sampling_freq(dmx.a_aac_output_sample_rate);
+  dmx.ptzr            = add_packetizer(new aac_packetizer_c(this, m_ti, *dmx.a_aac_audio_config, aac_packetizer_c::headerless));
 
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
@@ -2763,22 +2760,18 @@ qtmp4_demuxer_c::parse_aac_esds_decoder_config() {
     return;
   }
 
-  auto audio_config = aac::parse_audio_specific_config(esds.decoder_config->get_buffer(), esds.decoder_config->get_size());
-  if (!audio_config) {
+  a_aac_audio_config = aac::parse_audio_specific_config(esds.decoder_config->get_buffer(), esds.decoder_config->get_size());
+  if (!a_aac_audio_config) {
     mxwarn(boost::format(Y("Track %1%: The AAC information could not be parsed.\n")) % id);
     return;
   }
 
   mxdebug_if(m_debug_headers,
              boost::format(" AAC: profile: %1%, sample_rate: %2%, channels: %3%, output_sample_rate: %4%, sbr: %5%\n")
-             % audio_config->profile % audio_config->sample_rate % audio_config->channels % audio_config->output_sample_rate % audio_config->sbr);
+             % a_aac_audio_config->profile % a_aac_audio_config->sample_rate % a_aac_audio_config->channels % a_aac_audio_config->output_sample_rate % a_aac_audio_config->sbr);
 
-  a_channels               = audio_config->channels;
-  a_samplerate             = audio_config->sample_rate;
-  a_aac_profile            = audio_config->sbr ? AAC_PROFILE_SBR : audio_config->profile;
-  a_aac_output_sample_rate = audio_config->output_sample_rate;
-  a_aac_is_sbr             = audio_config->sbr;
-  a_aac_config_parsed      = true;
+  a_channels   = a_aac_audio_config->channels;
+  a_samplerate = a_aac_audio_config->sample_rate;
 }
 
 void
@@ -3108,7 +3101,7 @@ qtmp4_demuxer_c::verify_mp4a_audio_parameters() {
     return false;
   }
 
-  if (cdc.is(codec_c::type_e::A_AAC) && (!esds.decoder_config || !a_aac_config_parsed)) {
+  if (cdc.is(codec_c::type_e::A_AAC) && (!esds.decoder_config || !a_aac_audio_config)) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n")) % id);
     return false;
   }

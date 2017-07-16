@@ -333,7 +333,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
          % audio_config.profile % audio_config.channels % audio_config.sample_rate % audio_config.output_sample_rate % audio_config.sbr);
 
   dmx->is_aac = true;
-  dmx->ptzr   = add_packetizer(new aac_packetizer_c(this, m_ti, audio_config.profile, audio_config.sample_rate, audio_config.channels, aac_packetizer_c::headerless));
+  dmx->ptzr   = add_packetizer(new aac_packetizer_c(this, m_ti, audio_config, aac_packetizer_c::headerless));
 
   show_packetizer_info(tid, PTZR(dmx->ptzr));
 
