@@ -77,17 +77,9 @@ boost::optional<audio_config_t>
 parse_audio_specific_config(unsigned char const *data,
                             std::size_t size) {
   auto h = header_c::from_audio_specific_config(data, size);
-  if (!h.is_valid)
-    return {};
-
-  auto config               = audio_config_t{};
-  config.profile            = h.profile;
-  config.channels           = h.channels;
-  config.sample_rate        = h.sample_rate;
-  config.output_sample_rate = h.output_sample_rate;
-  config.sbr                = h.is_sbr;
-
-  return config;
+  if (h.is_valid)
+    return h.config;
+  return boost::none;
 }
 
 memory_cptr
@@ -359,17 +351,17 @@ std::string
 frame_c::to_string(bool verbose)
   const {
   if (!verbose)
-    return (boost::format("position %1% size %2% ID %3% profile %4%") % m_stream_position % m_header.bytes % m_header.id % m_header.profile).str();
+    return (boost::format("position %1% size %2% ID %3% profile %4%") % m_stream_position % m_header.bytes % m_header.id % m_header.config.profile).str();
 
   return (boost::format("position %1% size %2% garbage %3% ID %4% profile %5% sample rate %6% bit rate %7% channels %8%")
           % m_stream_position
           % m_header.bytes
           % m_garbage_size
           % m_header.id
-          % m_header.profile
-          % m_header.sample_rate
+          % m_header.config.profile
+          % m_header.config.sample_rate
           % m_header.bit_rate
-          % m_header.channels
+          % m_header.config.channels
           ).str();
 }
 
@@ -508,10 +500,10 @@ parser_c::decode_adts_header(unsigned char const *buffer,
       return { failure, 1 };
 
     bool protection_absent         = bc.get_bit();
-    frame.m_header.profile         = bc.get_bits(2);
+    frame.m_header.config.profile  = bc.get_bits(2);
     int sfreq_index                = bc.get_bits(4);
     bc.skip_bits(1);                               // private
-    frame.m_header.channels        = bc.get_bits(3);
+    frame.m_header.config.channels = bc.get_bits(3);
     bc.skip_bits(1 + 1);                           // original/copy & home
     bc.skip_bits(1 + 1);                           // copyright_id_bit & copyright_id_start
 
@@ -525,12 +517,12 @@ parser_c::decode_adts_header(unsigned char const *buffer,
     if (!protection_absent)
       bc.skip_bits(16);
 
-    frame.m_header.header_bit_size  = bc.get_bit_position();
-    frame.m_header.sample_rate      = s_sampling_freq[sfreq_index];
-    frame.m_header.bit_rate         = 1024;
-    frame.m_header.header_byte_size = (bc.get_bit_position() + 7) / 8;
-    frame.m_header.data_byte_size   = frame.m_header.bytes - frame.m_header.header_byte_size;
-    frame.m_header.is_valid         = true;
+    frame.m_header.header_bit_size    = bc.get_bit_position();
+    frame.m_header.config.sample_rate = s_sampling_freq[sfreq_index];
+    frame.m_header.bit_rate           = 1024;
+    frame.m_header.header_byte_size   = (bc.get_bit_position() + 7) / 8;
+    frame.m_header.data_byte_size     = frame.m_header.bytes - frame.m_header.header_byte_size;
+    frame.m_header.is_valid           = true;
 
     if (frame.m_header.bytes <= frame.m_header.header_byte_size)
       return { failure, 1 };
@@ -797,16 +789,16 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
 
     for (auto frame_idx = 1u; frame_idx < num_frames_found; ++frame_idx) {
       auto &current_frame = frames[frame_idx];
-      if (   (current_frame.m_header.id          != first_frame.m_header.id)
-          && (current_frame.m_header.profile     != first_frame.m_header.profile)
-          && (current_frame.m_header.channels    != first_frame.m_header.channels)
-          && (current_frame.m_header.sample_rate != first_frame.m_header.sample_rate)) {
+      if (   (current_frame.m_header.id                 != first_frame.m_header.id)
+          && (current_frame.m_header.config.profile     != first_frame.m_header.config.profile)
+          && (current_frame.m_header.config.channels    != first_frame.m_header.config.channels)
+          && (current_frame.m_header.config.sample_rate != first_frame.m_header.config.sample_rate)) {
         mxdebug_if(s_debug,
                    boost::format("Current frame number %9% at %10% differs from first frame. (first/current) ID: %1%/%2% profile: %3%/%4% channels: %5%/%6% sample rate: %7%/%8%\n")
-                   % first_frame.m_header.id          % current_frame.m_header.id
-                   % first_frame.m_header.profile     % current_frame.m_header.profile
-                   % first_frame.m_header.channels    % current_frame.m_header.channels
-                   % first_frame.m_header.sample_rate % current_frame.m_header.sample_rate
+                   % first_frame.m_header.id                 % current_frame.m_header.id
+                   % first_frame.m_header.config.profile     % current_frame.m_header.config.profile
+                   % first_frame.m_header.config.channels    % current_frame.m_header.config.channels
+                   % first_frame.m_header.config.sample_rate % current_frame.m_header.config.sample_rate
                    % frame_idx % (base + current_frame.m_stream_position));
 
         mismatch_found = true;
@@ -825,20 +817,6 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
 // ------------------------------------------------------------
 
 header_c::header_c()
-  : object_type{}
-  , extension_object_type{}
-  , profile{}
-  , sample_rate{}
-  , output_sample_rate{}
-  , bit_rate{}
-  , channels{}
-  , bytes{}
-  , id{}
-  , header_bit_size{}
-  , header_byte_size{}
-  , data_byte_size{}
-  , is_sbr{}
-  , is_valid{}
 {
 }
 
@@ -846,7 +824,7 @@ std::string
 header_c::to_string()
   const {
   return (boost::format("sample_rate: %1%; bit_rate: %2%; channels: %3%; bytes: %4%; id: %5%; profile: %6%; header_bit_size: %7%; header_byte_size: %8%; data_byte_size: %9%; is_sbr: %10%; is_valid: %11%")
-          % sample_rate % bit_rate % channels % bytes % id % profile % header_bit_size % header_byte_size % data_byte_size % is_sbr % is_valid).str();
+          % config.sample_rate % bit_rate % config.channels % bytes % id % config.profile % header_bit_size % header_byte_size % data_byte_size % config.sbr % is_valid).str();
 }
 
 int
@@ -903,7 +881,7 @@ header_c::read_ga_specific_config() {
     m_bc->skip_bits(14);        // core_coder_delay
   bool extension_flag = m_bc->get_bit();
 
-  if (!channels)
+  if (!config.channels)
     read_program_config_element();
 
   if ((MP4AOT_AAC_SCALABLE == object_type) || (MP4AOT_ER_AAC_SCALABLE == object_type))
@@ -930,7 +908,7 @@ void
 header_c::read_program_config_element() {
   m_bc->skip_bits(4);           // element_instance_tag
   object_type        = m_bc->get_bits(2);
-  sample_rate        = s_sampling_freq[m_bc->get_bits(4)];
+  config.sample_rate = s_sampling_freq[m_bc->get_bits(4)];
   int num_front_chan = m_bc->get_bits(4);
   int num_side_chan  = m_bc->get_bits(4);
   int num_back_chan  = m_bc->get_bits(4);
@@ -945,11 +923,11 @@ header_c::read_program_config_element() {
   if (m_bc->get_bit())          // matrix_mixdown_idx_present_flag
     m_bc->skip_bits(2 + 1);     // matrix_mixdown_idx, pseudo_surround_enable
 
-  channels = num_front_chan + num_side_chan + num_back_chan + num_lfe_chan;
+  config.channels = num_front_chan + num_side_chan + num_back_chan + num_lfe_chan;
 
   for (int idx = 0; idx < (num_front_chan + num_side_chan + num_back_chan); ++idx) {
     if (m_bc->get_bit())        // *_element_is_cpe
-      ++channels;
+      ++config.channels;
     m_bc->skip_bits(4);         // *_element_tag_select
   }
   m_bc->skip_bits(num_lfe_chan   *      4);  //                       lfe_element_tag_select
@@ -971,19 +949,19 @@ header_c::parse_audio_specific_config(bit_reader_c &bc,
     if (!object_type)
       return;
 
-    is_sbr      = false;
-    profile     = object_type - 1;
-    sample_rate = read_sample_rate();
-    channels    = m_bc->get_bits(4);
+    config.sbr         = false;
+    config.profile     = object_type - 1;
+    config.sample_rate = read_sample_rate();
+    config.channels    = m_bc->get_bits(4);
 
     if (   (MP4AOT_SBR == object_type)
         || (    (MP4AOT_PS == object_type)
             && !(    (m_bc->peek_bits(3) & 0x03)
                  && !(m_bc->peek_bits(9) & 0x3f)))) {
-      is_sbr                = true;
-      output_sample_rate    = read_sample_rate();
-      extension_object_type = object_type;
-      object_type           = read_object_type();
+      config.sbr                = true;
+      config.output_sample_rate = read_sample_rate();
+      extension_object_type     = object_type;
+      object_type               = read_object_type();
     }
 
     if (   (MP4AOT_AAC_MAIN == object_type) || (MP4AOT_AAC_LC    == object_type) || (MP4AOT_AAC_SSR    == object_type) || (MP4AOT_AAC_LTP         == object_type) || (MP4AOT_AAC_SCALABLE == object_type)
@@ -1015,9 +993,9 @@ header_c::parse_audio_specific_config(bit_reader_c &bc,
       if (0x2b7 == sync_extension_type) {
         extension_object_type = read_object_type();
         if (MP4AOT_SBR == extension_object_type) {
-          is_sbr = m_bc->get_bit();
-          if (is_sbr)
-            output_sample_rate = read_sample_rate();
+          config.sbr = m_bc->get_bit();
+          if (config.sbr)
+            config.output_sample_rate = read_sample_rate();
         }
 
       } else
@@ -1026,9 +1004,9 @@ header_c::parse_audio_specific_config(bit_reader_c &bc,
 
     is_valid = true;
 
-    if ((sample_rate >= 22050) && (sample_rate <= 24000)) {
-      output_sample_rate = 2 * sample_rate;
-      is_sbr             = true;
+    if ((config.sample_rate >= 22050) && (config.sample_rate <= 24000)) {
+      config.output_sample_rate = 2 * config.sample_rate;
+      config.sbr                = true;
     }
 
   } catch (mtx::exception &ex) {
@@ -1054,11 +1032,11 @@ header_c::parse_audio_specific_config(const unsigned char *data,
 bool
 operator ==(const header_c &h1,
             const header_c &h2) {
-  return (h1.sample_rate == h2.sample_rate)
-      && (h1.bit_rate    == h2.bit_rate)
-      && (h1.channels    == h2.channels)
-      && (h1.id          == h2.id)
-      && (h1.profile     == h2.profile);
+  return (h1.config.sample_rate == h2.config.sample_rate)
+      && (h1.bit_rate           == h2.bit_rate)
+      && (h1.config.channels    == h2.config.channels)
+      && (h1.id                 == h2.id)
+      && (h1.config.profile     == h2.config.profile);
 }
 
 } // namespace aac

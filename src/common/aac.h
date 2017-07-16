@@ -56,14 +56,16 @@ memory_cptr create_audio_specific_config(audio_config_t const &audio_config);
 
 class header_c {
 public:
-  unsigned int object_type, extension_object_type, profile, sample_rate, output_sample_rate, bit_rate, channels, bytes;
-  unsigned int id;                       // 0 = MPEG-4, 1 = MPEG-2
-  size_t header_bit_size, header_byte_size, data_byte_size;
+  audio_config_t config{};
 
-  bool is_sbr, is_valid;
+  unsigned int object_type{}, extension_object_type{}, bit_rate{}, bytes{};
+  unsigned int id{};                       // 0 = MPEG-4, 1 = MPEG-2
+  size_t header_bit_size{}, header_byte_size{}, data_byte_size{};
+
+  bool is_valid{};
 
 protected:
-  bit_reader_c *m_bc;
+  bit_reader_c *m_bc{};
 
 public:
   header_c();
