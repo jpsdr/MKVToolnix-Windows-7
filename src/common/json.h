@@ -6,8 +6,6 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   definitions and helper functions for AAC data
-
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
@@ -16,10 +14,12 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_NLOHMANN_JSONCPP)
-# include <json.hpp>
-#else
+#if !defined(HAVE_NLOHMANN_JSONCPP)
 # include "nlohmann-json/src/json.hpp"
+#elif HAVE_NLOHMANN_JSONCPP == 1
+# include <nlohmann/json.hpp>
+#else
+# include <json.hpp>
 #endif // HAVE_NLOHMANN_JSONCPP
 
 namespace mtx { namespace json {

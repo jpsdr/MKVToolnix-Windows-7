@@ -56,6 +56,10 @@
 * Boost: the minimum required version has been bumped to 1.49.0. Earlier
   releases fail to build on my current systems and will therefore not be
   supported anymore.
+* configure: when looking for the "nlohnmann JSON" include files configure
+  will now try the path "nlohmann/json.hpp" first, "json.hpp" second (only
+  "json.hpp" was tried before). If neither is found, the copy included in the
+  MKVToolNix sources will be used. Fixes #2048.
 
 
 # Version 13.0.0 "The Juggler" 2017-06-25

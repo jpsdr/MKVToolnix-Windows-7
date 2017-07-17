@@ -14,7 +14,7 @@ AC_CACHE_CHECK([nlohmann's json-cpp],[ac_cv_nlohmann_jsoncpp],[
     #include <iostream>
     #include <limits>
 
-    #include <json.hpp>
+    #include <nlohmann/json.hpp>
   ],[
     nlohmann::json json{
       { "unsigned_64bit_integer", std::numeric_limits<std::uint64_t>::max() },
@@ -22,16 +22,37 @@ AC_CACHE_CHECK([nlohmann's json-cpp],[ac_cv_nlohmann_jsoncpp],[
     };
 
     std::cout << json.dump();
-  ],[ac_cv_nlohmann_jsoncpp=yes],[ac_cv_nlohmann_jsoncpp=no])
+  ],[ac_cv_nlohmann_jsoncpp=yes],[ac_cv_nlohmann_jsoncpp=undetermined])
+
+  if test x"$ac_cv_nlohmann_jsoncpp" = xundetermined; then
+    AC_TRY_COMPILE([
+      #include <cstdint>
+      #include <iostream>
+      #include <limits>
+
+      #include <json.hpp>
+    ],[
+      nlohmann::json json{
+        { "unsigned_64bit_integer", std::numeric_limits<std::uint64_t>::max() },
+        { "signed_64bit_integer",   std::numeric_limits<std::int64_t>::min()  },
+      };
+
+      std::cout << json.dump();
+    ],[ac_cv_nlohmann_jsoncpp="yes, without the nlohmann subdir"],[ac_cv_nlohmann_jsoncpp=no])
+  fi
 
   CXXFLAGS="$ac_save_CXXFLAGS"
 
   AC_LANG_POP
 ])
 
-if test x"$ac_cv_nlohmann_jsoncpp" = xyes; then
-  AC_MSG_NOTICE([Using the system version of nlohmann json-cpp])
-  AC_DEFINE([HAVE_NLOHMANN_JSONCPP],[1],[Define if nlohmann's json-cpp is available.])
-else
+if test x"$ac_cv_nlohmann_jsoncpp" = xno; then
   AC_MSG_NOTICE([Using the internal version of nlohmann json-cpp])
+else
+  AC_MSG_NOTICE([Using the system version of nlohmann json-cpp])
+  if test x"$ac_cv_nlohmann_jsoncpp" = xyes; then
+    AC_DEFINE([HAVE_NLOHMANN_JSONCPP],[1],[Define if nlohmann's json-cpp is available.])
+  else
+    AC_DEFINE([HAVE_NLOHMANN_JSONCPP],[2],[Define if nlohmann's json-cpp is available.])
+  fi
 fi
