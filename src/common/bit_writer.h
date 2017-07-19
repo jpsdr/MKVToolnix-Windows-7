@@ -18,24 +18,23 @@
 
 class bit_writer_c {
 private:
-  unsigned char *m_end_of_data;
-  unsigned char *m_byte_position;
-  unsigned char *m_start_of_data;
-  std::size_t m_mask;
-
-  bool m_out_of_data;
+  memory_cptr m_buffer;
+  unsigned char *m_data{};
+  std::size_t m_size{}, m_byte_position{}, m_mask{0x80u};
 
 public:
-  bit_writer_c(unsigned char *data, std::size_t len)
-    : m_end_of_data(data + len)
-    , m_byte_position(data)
-    , m_start_of_data(data)
-    , m_mask(0x80)
-    , m_out_of_data(m_byte_position >= m_end_of_data)
+  bit_writer_c()
+    : m_buffer{memory_c::alloc(100)}
+    , m_data{m_buffer->get_buffer()}
   {
+    std::memset(m_buffer->get_buffer(), 0, m_buffer->get_size());
   }
 
-  uint64_t copy_bits(std::size_t n, bit_reader_c &src) {
+  inline memory_cptr get_buffer() {
+    return memory_c::clone(m_buffer->get_buffer(), m_size);
+  }
+
+  inline uint64_t copy_bits(std::size_t n, bit_reader_c &src) {
     uint64_t value = src.get_bits(n);
     put_bits(n, value);
 
@@ -62,52 +61,43 @@ public:
     return v & 1 ? (v + 1) / 2 : -(v / 2);
   }
 
-  void put_bits(std::size_t n, uint64_t value) {
+  inline void put_bits(std::size_t n, uint64_t value) {
     while (0 < n) {
-      put_bit(value & (1 << (n - 1)));
+      put_bit(value & (1ull << (n - 1)));
       --n;
     }
   }
 
-  void put_bit(bool bit) {
-    if (m_byte_position >= m_end_of_data) {
-      m_out_of_data = true;
-      throw mtx::mm_io::end_of_file_x();
-    }
+  inline void put_bit(bool bit) {
+    extend_buffer_if_needed();
 
     if (bit)
-      *m_byte_position |=  m_mask;
+      m_data[m_byte_position] |=  m_mask;
     else
-      *m_byte_position &= ~m_mask;
+      m_data[m_byte_position] &= ~m_mask;
+
     m_mask >>= 1;
+
     if (0 == m_mask) {
       m_mask = 0x80;
       ++m_byte_position;
-      if (m_byte_position == m_end_of_data)
-        m_out_of_data = true;
     }
+
+    update_size();
   }
 
-  void byte_align() {
+  inline void byte_align() {
     while (0x80 != m_mask)
       put_bit(0);
   }
 
-  void set_bit_position(std::size_t pos) {
-    if (pos > (static_cast<std::size_t>(m_end_of_data - m_start_of_data) * 8)) {
-      m_byte_position = m_end_of_data;
-      m_out_of_data   = true;
-
-      throw mtx::mm_io::seek_x();
-    }
-
-    m_byte_position = m_start_of_data + (pos / 8);
+  inline void set_bit_position(std::size_t pos) {
+    m_byte_position = pos / 8;
     m_mask          = 0x80 >> (pos % 8);
-    m_out_of_data   = m_byte_position == m_end_of_data;
   }
 
-  std::size_t get_bit_position() const {
-    std::size_t pos = (m_byte_position - m_start_of_data) * 8;
+  inline std::size_t get_bit_position() const {
+    std::size_t pos = m_byte_position * 8;
     for (auto i = 0u; 8 > i; ++i)
       if ((0x80u >> i) == m_mask) {
         pos += i;
@@ -116,20 +106,28 @@ public:
     return pos;
   }
 
-  std::size_t get_remaining_bits() const {
-    return (m_end_of_data - m_start_of_data) * 8 - get_bit_position();
-  }
-
-  void skip_bits(unsigned int num) {
+  inline void skip_bits(unsigned int num) {
     set_bit_position(get_bit_position() + num);
   }
 
-  void skip_bit() {
+  inline void skip_bit() {
     set_bit_position(get_bit_position() + 1);
   }
 
-  bool eof() const {
-    return (m_byte_position == m_end_of_data) || m_out_of_data;
+protected:
+  inline void extend_buffer_if_needed() {
+    if (m_byte_position < m_buffer->get_size())
+      return;
+
+    auto new_size = (m_byte_position / 100 + 1) * 100;
+    m_buffer->resize(new_size);
+    m_data = m_buffer->get_buffer();
+
+    std::memset(&m_data[m_size], 0, m_buffer->get_size() - m_size);
+  }
+
+  inline void update_size() {
+    m_size = std::max(m_size, m_byte_position + (m_mask == 0x80 ? 0 : 1));
   }
 };
 using bit_writer_cptr = std::shared_ptr<bit_writer_c>;

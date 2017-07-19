@@ -186,36 +186,32 @@ hevcc_c::parse_sei_list() {
   if (size == 100)
     return true;
 
-  auto mcptr_newsei = memory_c::alloc(size);
-  auto newsei       = mcptr_newsei->get_buffer();
-  bit_writer_c w(newsei, size);
-  mm_mem_io_c byte_writer{newsei, static_cast<uint64_t>(size), 100};
+  bit_writer_c w{};
 
   w.put_bits(1, 0); // forbidden_zero_bit
   w.put_bits(6, HEVC_NALU_TYPE_PREFIX_SEI); // nal_unit_type
   w.put_bits(6, 0); // nuh_reserved_zero_6bits
   w.put_bits(3, 1); // nuh_temporal_id_plus1
 
-  byte_writer.skip(2); // skip the nalu header
-
   for (iter = m_user_data.begin(); iter != m_user_data.end(); ++iter) {
     int payload_size = iter->second.size();
-    byte_writer.write_uint8(HEVC_SEI_USER_DATA_UNREGISTERED);
+    w.put_bits(8, HEVC_SEI_USER_DATA_UNREGISTERED);
     while (payload_size >= 255) {
-      byte_writer.write_uint8(255);
+      w.put_bits(8, 255);
       payload_size -= 255;
     }
-    byte_writer.write_uint8(payload_size);
-    byte_writer.write(&iter->second[0], iter->second.size());
+    w.put_bits(8, payload_size);
+
+    auto data    = &iter->second[0];
+    payload_size = iter->second.size();
+    for (int idx = 0; idx < payload_size; ++idx)
+      w.put_bits(8, data[idx]);
   }
 
-  w.set_bit_position(byte_writer.getFilePointer() * 8);
   w.put_bit(1);
   w.byte_align();
 
-  mcptr_newsei->set_size(w.get_bit_position() / 8);
-
-  m_sei_list.push_back(mpeg::rbsp_to_nalu(mcptr_newsei));
+  m_sei_list.push_back(mpeg::rbsp_to_nalu(w.get_buffer()));
 
   return true;
 }
@@ -931,11 +927,9 @@ slice_info_t::dump()
 bool
 parse_vps(memory_cptr const &buffer,
           vps_info_t &vps) {
-  auto size         = buffer->get_size();
-  auto mcptr_newvps = memory_c::alloc(size + 100);
-  auto newvps       = mcptr_newvps->get_buffer();
+  auto size = buffer->get_size();
   bit_reader_c r(buffer->get_buffer(), size);
-  bit_writer_c w(newvps, size + 100);
+  bit_writer_c w{};
   unsigned int i, j;
 
   memset(&vps, 0, sizeof(vps));
@@ -994,8 +988,7 @@ parse_vps(memory_cptr const &buffer,
   // Given we don't change the NALU while writing to w,
   // then we don't need to replace buffer with the bits we've written into w.
   // Leaving this code as reference if we ever do change the NALU while writing to w.
-  //buffer = mcptr_newvps;
-  //buffer->set_size(w.get_bit_position() / 8);
+  //buffer = w.get_buffer();
 
   vps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
 
@@ -1007,11 +1000,9 @@ parse_sps(memory_cptr const &buffer,
           sps_info_t &sps,
           std::vector<vps_info_t> &m_vps_info_list,
           bool keep_ar_info) {
-  auto size         = buffer->get_size();
-  auto mcptr_newsps = memory_c::alloc(size + 100);
-  auto newsps       = mcptr_newsps->get_buffer();
+  auto size = buffer->get_size();
   bit_reader_c r(buffer->get_buffer(), size);
-  bit_writer_c w(newsps, size + 100);
+  bit_writer_c w{};
   unsigned int i;
 
   keep_ar_info = !hack_engaged(ENGAGE_REMOVE_BITSTREAM_AR_INFO);
@@ -1126,10 +1117,9 @@ parse_sps(memory_cptr const &buffer,
   w.byte_align();
 
   // We potentially changed the NALU data with regards to the handling of keep_ar_info.
-  // Therefore, we replace buffer with the changed NALU that exists in w.
-  mcptr_newsps->resize(w.get_bit_position() / 8);
-
-  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *mcptr_newsps);
+  // Therefore, we return the changed NALU that exists in w.
+  auto new_sps = w.get_buffer();
+  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *new_sps);
 
   // See ITU-T H.265 section 7.4.3.2 for the width/height calculation
   // formula.
@@ -1141,7 +1131,7 @@ parse_sps(memory_cptr const &buffer,
     sps.height       -= std::min<unsigned int>((sub_height_c * sps.conf_win_bottom_offset) + (sub_height_c * sps.conf_win_top_offset),  sps.height);
   }
 
-  return mcptr_newsps;
+  return new_sps;
 }
 
 bool

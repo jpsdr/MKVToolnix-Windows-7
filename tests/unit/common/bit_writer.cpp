@@ -12,9 +12,7 @@ namespace {
 //   1111 0111 0010 0011 0100 1010 1000 0001
 
 TEST(BitWriter, PutBit) {
-  unsigned char value[4];
-  std::memset(value, 0, 4);
-  auto b = bit_writer_c{value, 4};
+  auto b = bit_writer_c{};
 
   // f
   EXPECT_NO_THROW(b.put_bit(1));
@@ -38,28 +36,28 @@ TEST(BitWriter, PutBit) {
   EXPECT_NO_THROW(b.put_bit(1));
 
   EXPECT_EQ(16, b.get_bit_position());
-  EXPECT_EQ(16, b.get_remaining_bits());
-  EXPECT_FALSE(b.eof());
 
-  EXPECT_EQ(0xf723, get_uint16_be(&value[0]));
-  EXPECT_EQ(0x0000, get_uint16_be(&value[2]));
+  auto buffer = b.get_buffer();
+  ASSERT_EQ(2, buffer->get_size());
+  EXPECT_EQ(0xf723, get_uint16_be(buffer->get_buffer()));
 }
 
 TEST(BitWriter, PutBits) {
-  unsigned char value[4];
-  std::memset(value, 0, 4);
-  auto b = bit_writer_c{value, 4};
+  auto b = bit_writer_c{};
 
   // f7
   EXPECT_NO_THROW(b.put_bits(4, 0x0f));
   EXPECT_NO_THROW(b.put_bits(4, 0x07));
-  EXPECT_EQ(0xf7,     value[0]);
-  EXPECT_EQ(0x000000, get_uint24_be(&value[1]));
+
+  auto buffer = b.get_buffer();
+  ASSERT_EQ(1, buffer->get_size());
+  EXPECT_EQ(0xf7, buffer->get_buffer()[0]);
 
   // 234
   EXPECT_NO_THROW(b.put_bits(12, 0x234));
-  EXPECT_EQ(0xf72340, get_uint24_be(&value[0]));
-  EXPECT_EQ(0x00,     value[3]);
+  buffer = b.get_buffer();
+  ASSERT_EQ(3, buffer->get_size());
+  EXPECT_EQ(0xf72340, get_uint24_be(buffer->get_buffer()));
 
   // a81 = 101 010 000…
   EXPECT_NO_THROW(b.put_bits(3, 0x05));
@@ -67,36 +65,36 @@ TEST(BitWriter, PutBits) {
   EXPECT_NO_THROW(b.put_bits(3, 0x00));
 
   EXPECT_EQ(29, b.get_bit_position());
-  EXPECT_EQ( 3, b.get_remaining_bits());
-  EXPECT_FALSE(b.eof());
-  EXPECT_EQ(0xf7234a80, get_uint32_be(&value[0]));
+  buffer = b.get_buffer();
+  ASSERT_EQ(4, buffer->get_size());
+  EXPECT_EQ(0xf7234a80, get_uint32_be(buffer->get_buffer()));
 }
 
 TEST(BitWriter, ByteAlign) {
-  unsigned char value[4];
-  std::memset(value, 0, 4);
-  auto b = bit_writer_c{value, 4};
+  auto b = bit_writer_c{};
 
   // f7
   b.byte_align();
-  EXPECT_EQ(         0, b.get_bit_position());
-  EXPECT_EQ(0x00000000, get_uint32_be(value));
+  EXPECT_EQ(0, b.get_bit_position());
+  ASSERT_EQ(0, b.get_buffer()->get_size());
 
   EXPECT_NO_THROW(b.put_bits(2, 0x03));
   b.byte_align();
-  EXPECT_EQ(         8, b.get_bit_position());
-  EXPECT_EQ(0xc0000000, get_uint32_be(value));
+  auto buffer = b.get_buffer();
+  EXPECT_EQ(8,    b.get_bit_position());
+  ASSERT_EQ(1,    buffer->get_size());
+  EXPECT_EQ(0xc0, buffer->get_buffer()[0]);
 
   EXPECT_NO_THROW(b.put_bits(7, 0x11));
   b.byte_align();
+  buffer = b.get_buffer();
   EXPECT_EQ(        16, b.get_bit_position());
-  EXPECT_EQ(0xc0220000, get_uint32_be(value));
+  ASSERT_EQ(2,      buffer->get_size());
+  EXPECT_EQ(0xc022, get_uint16_be(buffer->get_buffer()));
 }
 
 TEST(BitWriter, SkipBits) {
-  unsigned char value[4];
-  std::memset(value, 0, 4);
-  auto b = bit_writer_c{value, 4};
+  auto b = bit_writer_c{};
 
   EXPECT_EQ(0, b.get_bit_position());
   EXPECT_NO_THROW(b.skip_bits(3));
@@ -105,13 +103,11 @@ TEST(BitWriter, SkipBits) {
   EXPECT_EQ(10, b.get_bit_position());
   EXPECT_NO_THROW(b.skip_bit());
   EXPECT_EQ(11, b.get_bit_position());
+  ASSERT_EQ(0,  b.get_buffer()->get_size());
 }
 
-
 TEST(BitWriter, SetBitPosition) {
-  unsigned char value[4];
-  std::memset(value, 0, 4);
-  auto b = bit_writer_c{value, 4};
+  auto b = bit_writer_c{};
 
   EXPECT_EQ(0, b.get_bit_position());
 
@@ -127,23 +123,32 @@ TEST(BitWriter, SetBitPosition) {
   EXPECT_NO_THROW(b.set_bit_position(31));
   EXPECT_EQ(31, b.get_bit_position());
 
-  EXPECT_NO_THROW(b.set_bit_position(32));
-  EXPECT_THROW(b.set_bit_position(33), mtx::mm_io::seek_x);
+  ASSERT_EQ(0, b.get_buffer()->get_size());
+
+  EXPECT_NO_THROW(b.put_bit(1));
+  auto buffer = b.get_buffer();
+  ASSERT_EQ(4,          buffer->get_size());
+  EXPECT_EQ(0x00000001, get_uint32_be(buffer->get_buffer()));
 }
 
-TEST(BitWriter, ExceptionOnReadingBeyondEOF) {
-  unsigned char value[4];
-  std::memset(value, 0, 4);
-  auto b = bit_writer_c{value, 4};
+TEST(BitWriter, ExtendingTheBuffer) {
+  auto b = bit_writer_c{};
 
-  EXPECT_NO_THROW(b.set_bit_position(31));
-  EXPECT_NO_THROW(b.put_bit(1));
-  EXPECT_THROW(b.put_bit(1), mtx::mm_io::end_of_file_x);
+  for (int idx = 0; idx < 24; ++idx)
+    ASSERT_NO_THROW(b.put_bits(32, 0x01234567u));
 
-  b = bit_writer_c{value, 4};
-  EXPECT_NO_THROW(b.set_bit_position(24));
-  EXPECT_NO_THROW(b.put_bits(8, 0x81));
-  EXPECT_THROW(b.put_bit(1), mtx::mm_io::end_of_file_x);
+  ASSERT_EQ(96 * 8, b.get_bit_position());
+
+  ASSERT_NO_THROW(b.put_bits(64, 0x0123456789abcdefull));
+
+  ASSERT_EQ(104 * 8, b.get_bit_position());
+
+  auto buffer = b.get_buffer();
+
+  ASSERT_EQ(104, buffer->get_size());
+  EXPECT_EQ(0x01234567u, get_uint32_be(&buffer->get_buffer()[92]));
+  EXPECT_EQ(0x01234567u, get_uint32_be(&buffer->get_buffer()[96]));
+  EXPECT_EQ(0x89abcdefu, get_uint32_be(&buffer->get_buffer()[100]));
 }
 
 }

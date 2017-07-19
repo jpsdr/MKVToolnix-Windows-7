@@ -396,12 +396,9 @@ mpeg4::p10::parse_sps(memory_cptr const &buffer,
     {  44, true }, {  83, true }, {  86, true }, { 100, true }, { 110, true }, { 118, true }, { 122, true }, { 128, true }, { 244, true }
   };
 
-  int const add_space   = 100;
-  int size              = buffer->get_size();
-  auto mcptr_newsps     = memory_c::alloc(size + add_space);
-  auto newsps           = mcptr_newsps->get_buffer();
+  int size = buffer->get_size();
   bit_reader_c r(buffer->get_buffer(), size);
-  bit_writer_c w(newsps, size + add_space);
+  bit_writer_c w{};
   int i, nref, mb_width, mb_height;
 
   keep_ar_info = !hack_engaged(ENGAGE_REMOVE_BITSTREAM_AR_INFO);
@@ -657,11 +654,10 @@ mpeg4::p10::parse_sps(memory_cptr const &buffer,
   w.put_bit(1);
   w.byte_align();
 
-  mcptr_newsps->resize(w.get_bit_position() / 8);
+  auto new_sps = w.get_buffer();
+  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *new_sps);
 
-  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *mcptr_newsps);
-
-  return mcptr_newsps;
+  return new_sps;
 }
 
 bool
