@@ -20,7 +20,7 @@
 #include <FLAC/stream_decoder.h>
 #include <stdarg.h>
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/flac.h"
 #include "common/mm_io_x.h"
 

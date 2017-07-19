@@ -15,7 +15,7 @@
 
 #include <matroska/KaxTrackVideo.h>
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/codec.h"
 #include "common/ebml.h"
 #include "common/endian.h"

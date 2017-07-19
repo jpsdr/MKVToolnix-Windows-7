@@ -14,7 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/ac3.h"
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/debugging.h"
 #include "common/endian.h"
 #include "common/error.h"

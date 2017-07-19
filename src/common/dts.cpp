@@ -18,7 +18,7 @@
 # include <unistd.h>
 #endif  // HAVE_UNISTD_H
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/dts.h"
 #include "common/endian.h"
 #include "common/list_utils.h"

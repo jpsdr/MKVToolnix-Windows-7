@@ -18,7 +18,7 @@
 
 #include <vector>
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/fourcc.h"
 #include "common/timestamp.h"
 

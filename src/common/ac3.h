@@ -16,7 +16,6 @@
 
 #include "common/common_pch.h"
 
-#include "common/bit_cursor.h"
 #include "common/byte_buffer.h"
 
 #define AC3_SYNC_WORD           0x0b77
@@ -40,6 +39,8 @@
 #define EAC3_FRAME_TYPE_DEPENDENT    1
 #define EAC3_FRAME_TYPE_AC3_CONVERT  2
 #define EAC3_FRAME_TYPE_RESERVED     3
+
+class bit_reader_c;
 
 namespace ac3 {
   class frame_c {

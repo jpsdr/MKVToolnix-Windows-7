@@ -16,7 +16,7 @@
 #include <cstring>
 
 #include "common/ac3.h"
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/bswap.h"
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"

@@ -23,6 +23,7 @@
 #include "common/error.h"
 #include "common/hacks.h"
 #include "common/ivf.h"
+#include "common/mm_io_x.h"
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
 #include "common/mpeg4_p10.h"

@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/kate.h"
 
 kate_identification_header_t::kate_identification_header_t() {

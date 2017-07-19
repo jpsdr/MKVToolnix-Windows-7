@@ -32,6 +32,7 @@
 #include "common/iso639.h"
 #include "common/list_utils.h"
 #include "common/math.h"
+#include "common/mm_io_x.h"
 #include "common/mp3.h"
 #include "common/mp4.h"
 #include "common/strings/formatting.h"

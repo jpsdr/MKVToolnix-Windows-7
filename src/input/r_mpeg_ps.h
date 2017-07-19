@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/dts.h"

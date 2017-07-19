@@ -16,7 +16,8 @@
 #include <cmath>
 #include <unordered_map>
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
+#include "common/bit_writer.h"
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
 #include "common/endian.h"

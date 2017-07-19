@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bit_reader.h"
 #include "common/clpi.h"
 
 namespace mtx { namespace bluray { namespace clpi {
@@ -105,8 +106,8 @@ parser_c::parse() {
 
     bit_reader_cptr bc(new bit_reader_c(content->get_buffer(), file_size));
 
-    parse_header(bc);
-    parse_program_info(bc);
+    parse_header(*bc);
+    parse_program_info(*bc);
 
     if (m_debug)
       dump();
@@ -121,29 +122,29 @@ parser_c::parse() {
 }
 
 void
-parser_c::parse_header(bit_reader_cptr &bc) {
-  bc->set_bit_position(0);
+parser_c::parse_header(bit_reader_c &bc) {
+  bc.set_bit_position(0);
 
-  uint32_t magic = bc->get_bits(32);
+  uint32_t magic = bc.get_bits(32);
   mxdebug_if(m_debug, boost::format("File magic 1: 0x%|1$08x|\n") % magic);
   if (CLPI_FILE_MAGIC != magic)
     throw false;
 
-  magic = bc->get_bits(32);
+  magic = bc.get_bits(32);
   mxdebug_if(m_debug, boost::format("File magic 2: 0x%|1$08x|\n") % magic);
   if ((CLPI_FILE_MAGIC2A != magic) && (CLPI_FILE_MAGIC2B != magic) && (CLPI_FILE_MAGIC2C != magic))
     throw false;
 
-  m_sequence_info_start = bc->get_bits(32);
-  m_program_info_start  = bc->get_bits(32);
+  m_sequence_info_start = bc.get_bits(32);
+  m_program_info_start  = bc.get_bits(32);
 }
 
 void
-parser_c::parse_program_info(bit_reader_cptr &bc) {
-  bc->set_bit_position(m_program_info_start * 8);
+parser_c::parse_program_info(bit_reader_c &bc) {
+  bc.set_bit_position(m_program_info_start * 8);
 
-  bc->skip_bits(40);            // 32 bits length, 8 bits reserved
-  size_t num_program_streams = bc->get_bits(8), program_idx, stream_idx;
+  bc.skip_bits(40);            // 32 bits length, 8 bits reserved
+  size_t num_program_streams = bc.get_bits(8), program_idx, stream_idx;
 
   mxdebug_if(m_debug, boost::format("num_program_streams: %1%\n") % num_program_streams);
 
@@ -151,10 +152,10 @@ parser_c::parse_program_info(bit_reader_cptr &bc) {
     program_cptr program(new program_t);
     m_programs.push_back(program);
 
-    program->spn_program_sequence_start = bc->get_bits(32);
-    program->program_map_pid            = bc->get_bits(16);
-    program->num_streams                = bc->get_bits(8);
-    program->num_groups                 = bc->get_bits(8);
+    program->spn_program_sequence_start = bc.get_bits(32);
+    program->program_map_pid            = bc.get_bits(16);
+    program->num_streams                = bc.get_bits(8);
+    program->num_groups                 = bc.get_bits(8);
 
     for (stream_idx = 0; stream_idx < program->num_streams; ++stream_idx)
       parse_program_stream(bc, program);
@@ -162,22 +163,22 @@ parser_c::parse_program_info(bit_reader_cptr &bc) {
 }
 
 void
-parser_c::parse_program_stream(bit_reader_cptr &bc,
+parser_c::parse_program_stream(bit_reader_c &bc,
                                program_cptr &program) {
   program_stream_cptr stream(new program_stream_t);
   program->program_streams.push_back(stream);
 
-  stream->pid = bc->get_bits(16);
+  stream->pid = bc.get_bits(16);
 
-  if ((bc->get_bit_position() % 8) != 0) {
+  if ((bc.get_bit_position() % 8) != 0) {
     mxdebug_if(m_debug, "Bit position not divisible by 8\n");
     throw false;
   }
 
-  size_t length_in_bytes  = bc->get_bits(8);
-  size_t position_in_bits = bc->get_bit_position();
+  size_t length_in_bytes  = bc.get_bits(8);
+  size_t position_in_bits = bc.get_bit_position();
 
-  stream->coding_type     = bc->get_bits(8);
+  stream->coding_type     = bc.get_bits(8);
 
   char language[4];
   memset(language, 0, 4);
@@ -187,12 +188,12 @@ parser_c::parse_program_stream(bit_reader_cptr &bc,
     case 0x02:
     case 0xea:
     case 0x1b:
-      stream->format = bc->get_bits(4);
-      stream->rate   = bc->get_bits(4);
-      stream->aspect = bc->get_bits(4);
-      bc->skip_bits(2);
-      stream->oc_flag = bc->get_bits(1);
-      bc->skip_bits(1);
+      stream->format = bc.get_bits(4);
+      stream->rate   = bc.get_bits(4);
+      stream->aspect = bc.get_bits(4);
+      bc.skip_bits(2);
+      stream->oc_flag = bc.get_bits(1);
+      bc.skip_bits(1);
       break;
 
     case 0x03:
@@ -206,20 +207,20 @@ parser_c::parse_program_stream(bit_reader_cptr &bc,
     case 0x86:
     case 0xa1:
     case 0xa2:
-      stream->format = bc->get_bits(4);
-      stream->rate   = bc->get_bits(4);
-      bc->get_bytes(reinterpret_cast<unsigned char *>(language), 3);
+      stream->format = bc.get_bits(4);
+      stream->rate   = bc.get_bits(4);
+      bc.get_bytes(reinterpret_cast<unsigned char *>(language), 3);
       break;
 
     case 0x90:
     case 0x91:
     case 0xa0:
-      bc->get_bytes(reinterpret_cast<unsigned char *>(language), 3);
+      bc.get_bytes(reinterpret_cast<unsigned char *>(language), 3);
       break;
 
     case 0x92:
-      stream->char_code = bc->get_bits(8);
-      bc->get_bytes(reinterpret_cast<unsigned char *>(language), 3);
+      stream->char_code = bc.get_bits(8);
+      bc.get_bytes(reinterpret_cast<unsigned char *>(language), 3);
       break;
 
     default:
@@ -229,7 +230,7 @@ parser_c::parse_program_stream(bit_reader_cptr &bc,
 
   stream->language = language;
 
-  bc->set_bit_position(position_in_bits + length_in_bytes * 8);
+  bc.set_bit_position(position_in_bits + length_in_bytes * 8);
 }
 
 }}}

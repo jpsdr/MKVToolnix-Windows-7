@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/endian.h"
 #include "common/strings/formatting.h"
 #include "common/vc1.h"

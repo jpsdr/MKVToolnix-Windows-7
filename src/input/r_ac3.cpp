@@ -19,6 +19,7 @@
 #include "common/error.h"
 #include "common/id3.h"
 #include "common/id_info.h"
+#include "common/mm_io_x.h"
 #include "input/r_ac3.h"
 #include "merge/input_x.h"
 #include "output/p_ac3.h"

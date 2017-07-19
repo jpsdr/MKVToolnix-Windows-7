@@ -10,7 +10,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/command_line.h"
 #include "common/hevc.h"
 #include "common/mm_io_x.h"

@@ -15,7 +15,7 @@
 
 #include "avilib.h"
 #include "common/amf.h"
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"

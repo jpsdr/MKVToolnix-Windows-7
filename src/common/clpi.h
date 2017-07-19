@@ -16,9 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include <vector>
-
-#include "common/bit_cursor.h"
+class bit_reader_c;
 
 #define CLPI_FILE_MAGIC   FOURCC('H', 'D', 'M', 'V')
 #define CLPI_FILE_MAGIC2A FOURCC('0', '2', '0', '0')
@@ -78,9 +76,9 @@ namespace mtx { namespace bluray { namespace clpi {
     virtual void dump();
 
   protected:
-    virtual void parse_header(bit_reader_cptr &bc);
-    virtual void parse_program_info(bit_reader_cptr &bc);
-    virtual void parse_program_stream(bit_reader_cptr &bc, program_cptr &program);
+    virtual void parse_header(bit_reader_c &bc);
+    virtual void parse_program_info(bit_reader_c &bc);
+    virtual void parse_program_stream(bit_reader_c &bc, program_cptr &program);
   };
   using parser_cptr = std::shared_ptr<parser_c>;
 

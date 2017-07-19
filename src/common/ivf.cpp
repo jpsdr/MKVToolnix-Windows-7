@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/fourcc.h"
 #include "common/ivf.h"
 

@@ -18,7 +18,6 @@
 
 #include <ostream>
 
-#include "common/bit_cursor.h"
 #include "common/byte_buffer.h"
 #include "common/timestamp.h"
 
@@ -41,6 +40,8 @@
 #define AAC_LOAS_SYNC_WORD       0x56e000 // 0x2b7
 #define AAC_LOAS_SYNC_WORD_MASK  0xffe000 // first 11 of 24 bits
 #define AAC_LOAS_FRAME_SIZE_MASK 0x001fff // last 13 of 24 bits
+
+class bit_reader_c;
 
 namespace aac {
 

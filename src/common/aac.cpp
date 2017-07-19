@@ -16,6 +16,7 @@
 #include "common/aac.h"
 #include "common/aac_x.h"
 #include "common/at_scope_exit.h"
+#include "common/bit_reader.h"
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/list_utils.h"

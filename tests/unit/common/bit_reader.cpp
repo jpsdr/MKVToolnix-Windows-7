@@ -1,6 +1,6 @@
 #include "common/common_pch.h"
 
-#include "common/bit_cursor.h"
+#include "common/bit_reader.h"
 #include "common/endian.h"
 
 #include "gtest/gtest.h"
