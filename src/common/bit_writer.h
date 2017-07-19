@@ -94,7 +94,7 @@ public:
   }
 
   void set_bit_position(std::size_t pos) {
-    if (pos >= (static_cast<std::size_t>(m_end_of_data - m_start_of_data) * 8)) {
+    if (pos > (static_cast<std::size_t>(m_end_of_data - m_start_of_data) * 8)) {
       m_byte_position = m_end_of_data;
       m_out_of_data   = true;
 
@@ -103,9 +103,10 @@ public:
 
     m_byte_position = m_start_of_data + (pos / 8);
     m_mask          = 0x80 >> (pos % 8);
+    m_out_of_data   = m_byte_position == m_end_of_data;
   }
 
-  int get_bit_position() {
+  std::size_t get_bit_position() const {
     std::size_t pos = (m_byte_position - m_start_of_data) * 8;
     for (auto i = 0u; 8 > i; ++i)
       if ((0x80u >> i) == m_mask) {
@@ -115,12 +116,20 @@ public:
     return pos;
   }
 
+  std::size_t get_remaining_bits() const {
+    return (m_end_of_data - m_start_of_data) * 8 - get_bit_position();
+  }
+
   void skip_bits(unsigned int num) {
     set_bit_position(get_bit_position() + num);
   }
 
   void skip_bit() {
     set_bit_position(get_bit_position() + 1);
+  }
+
+  bool eof() const {
+    return (m_byte_position == m_end_of_data) || m_out_of_data;
   }
 };
 using bit_writer_cptr = std::shared_ptr<bit_writer_c>;
