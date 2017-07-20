@@ -13,8 +13,8 @@
 #include "common/ac3.h"
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
-#include "common/common_pch.h"
 #include "common/endian.h"
+#include "common/mm_io_x.h"
 #include "common/translation.h"
 
 static bool g_opt_checksum      = false;
