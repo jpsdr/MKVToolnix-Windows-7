@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-07-14 11:32+0200\n"
-"PO-Revision-Date: 2017-07-06 18:49+0000\n"
+"PO-Revision-Date: 2017-07-14 15:21+0000\n"
 "Last-Translator: Dean Lee <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -1299,7 +1299,7 @@ msgstr "章节编辑器(&C)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "&Chapter number of first created entry:"
-msgstr "新建章节条目的起始编号(&C):"
+msgstr "首个条目的章节编号(&C):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1373
 msgid "&Character set for text files:"
@@ -1350,9 +1350,8 @@ msgid "&Command line:"
 msgstr "命令行(&C):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
-#, fuzzy
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "将子章节的起止时间码收缩到上级章节之内(&C)"
+msgstr "将子章节的起止时间戳收缩到上级章节范围之内(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:545
 msgid "&Copy command line to clipboard"
@@ -1519,9 +1518,8 @@ msgid "&Multiplexer"
 msgstr "混流(&M)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
-#, fuzzy
 msgid "&Multiply start and end timestamps by the following factor:"
-msgstr "将起止时间码乘以该系数(&M):"
+msgstr "将起止时间戳乘以该系数(&M):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
@@ -1742,9 +1740,8 @@ msgid "&Skip file"
 msgstr "跳过文件(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
-#, fuzzy
 msgid "&Sort chapters by their start and end timestamps"
-msgstr "按章节的起止时间码排序(&S)"
+msgstr "按章节的起止时间戳排序(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
 msgid "&Start && end:"
@@ -1757,9 +1754,8 @@ msgid_plural "&Start jobs automatically"
 msgstr[0] "自动启动任务(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
-#, fuzzy
 msgid "&Start timestamp of first created entry:"
-msgstr "生成的首个条目的起始时间码(&S):"
+msgstr "首个条目的起始时间戳(&S):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1343
 msgid "&Subtitle tracks:"
@@ -3382,9 +3378,8 @@ msgid "C&onfiguration active"
 msgstr "配置已启用(&O)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
-#, fuzzy
 msgid "C&onstrict or expand timestamps"
-msgstr "收缩或扩展时间码(&O)"
+msgstr "收缩或扩展时间戳(&O)"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
 msgid "C&opy to clipboard"
@@ -3531,7 +3526,7 @@ msgstr "声道数: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
 msgid "Chapter &number of first created entry:"
-msgstr "首个新建条目的章节编号(&N):"
+msgstr "首个条目的章节编号(&N):"
 
 #: src/merge/private/cluster_helper.h:55
 #: src/mkvtoolnix-gui/util/settings.cpp:283
@@ -4431,7 +4426,7 @@ msgstr "根据下面的设置，可以在输入文件中的语言为“未指定
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Derive &end timestamps from start timestamps"
-msgstr ""
+msgstr "根据各起始时间戳推算终止时间戳(&E)"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4724,9 +4719,8 @@ msgid "E&xit"
 msgstr "退出(&X)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
-#, fuzzy
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
-msgstr "将章节的起止时间码扩展到包含其子章节的最小/最大时间码(&X)"
+msgstr "将章节的起止时间戳扩展到包含其所有子章节的最小/最大时间戳(&X)"
 
 #: src/info/mkvinfo.cpp:1658
 msgid "EBML head"
@@ -5353,7 +5347,7 @@ msgstr "对于不包含视频轨道但包含至少一条音频轨道的文件，
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
-msgstr ""
+msgstr "对于大多数条目，同一级别晚于当前章节的所有章节的最小起始时间戳，将用作当前章节的终止时间戳。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:504
 msgid "For such files you can use this parameter and decrease the size to 2."
@@ -5861,7 +5855,7 @@ msgstr "如果使用 OGM 格式且文件的字符集未能正确识别，可以�
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
-msgstr ""
+msgstr "若章节系加载自 Matroska 文件，最高级别最后一个章节的终止时间戳将根据文件时长推算得到。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
 #, no-c-format
@@ -5876,7 +5870,7 @@ msgstr "如果数字后紧接着 ms 则表示在每个簇中最多置入 n 毫�
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
-msgstr ""
+msgstr "若没有此类章节，则将使用上级章节的终止时间戳。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #, no-c-format
@@ -8350,9 +8344,8 @@ msgid "Running jobs cannot be removed."
 msgstr "无法移除正在运行的任务。"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
-#, fuzzy
 msgid "S&hift start and end timestamps by the following amount:"
-msgstr "将起止时间码平移如下数值(&H):"
+msgstr "将起止时间戳平移如下数值(&H):"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:544
 msgid "S&how command line"
@@ -9673,7 +9666,7 @@ msgid "The end time could not be parsed: %1"
 msgstr "无法解析终止时间: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:841
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The end time must be greater than the start time."
 msgstr "终止时间必须大于起始时间。"
 
