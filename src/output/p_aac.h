@@ -33,8 +33,7 @@ private:
   aac::parser_c m_parser;
   timestamp_calculator_c m_timestamp_calculator;
   int64_t m_packet_duration;
-
-  static const int ms_samples_per_packet = 1024;
+  bool m_first_packet;
 
 public:
   aac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, aac::audio_config_t const &config, mode_e mode);
@@ -51,6 +50,7 @@ public:
 
 private:
   virtual int process_headerless(packet_cptr packet);
+  virtual void handle_parsed_audio_config();
 };
 
 #endif // MTX_P_AAC_H

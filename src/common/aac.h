@@ -48,6 +48,8 @@ namespace aac {
 struct audio_config_t {
   unsigned int profile, sample_rate, output_sample_rate, channels, samples_per_frame;
   bool sbr;
+  memory_cptr ga_specific_config;
+  unsigned int ga_specific_config_bit_size;
 
   audio_config_t()
     : profile{}
@@ -56,6 +58,7 @@ struct audio_config_t {
     , channels{}
     , samples_per_frame{1024}
     , sbr{}
+    , ga_specific_config_bit_size{}
   {
   }
 };
@@ -114,12 +117,14 @@ protected:
   header_c m_header;
   bit_reader_c *m_bc;
   bool m_config_parsed;
+  memory_cptr m_audio_specific_config;
   debugging_option_c m_debug;
 
 public:
   latm_parser_c();
 
   bool config_parsed() const;
+  memory_cptr get_audio_specific_config() const;
   header_c const &get_header() const;
   size_t get_frame_bit_offset() const;
   size_t get_frame_length() const;
@@ -201,6 +206,7 @@ public:
   frame_c get_frame();
   uint64_t get_parsed_stream_position() const;
   uint64_t get_total_stream_position() const;
+  memory_cptr get_audio_specific_config() const;
 
   void abort_after_num_frames(size_t num_frames);
   void require_frame_at_first_byte(bool require);

@@ -16,6 +16,7 @@
 #include "common/aac.h"
 #include "common/codec.h"
 #include "merge/connection_checks.h"
+#include "merge/output_control.h"
 #include "output/p_aac.h"
 
 using namespace libmatroska;
@@ -28,12 +29,49 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
   , m_config(config)            // Due to a bug in gcc 4.9.x with (…) instead of {…}.
   , m_mode{mode}
   , m_timestamp_calculator{static_cast<int64_t>(config.sample_rate)}
-  , m_packet_duration{m_timestamp_calculator.get_duration(ms_samples_per_packet).to_ns()}
+  , m_packet_duration{}
+  , m_first_packet{true}
 {
   set_track_type(track_audio);
+
+  if (m_ti.m_private_data && (0 < m_ti.m_private_data->get_size())) {
+    auto parsed_config = aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size());
+    if (parsed_config)
+      m_config = *parsed_config;
+  }
+
+  if (!m_config.samples_per_frame)
+    m_config.samples_per_frame = 1024;
+
+  m_packet_duration = m_timestamp_calculator.get_duration(m_config.samples_per_frame).to_ns();
 }
 
 aac_packetizer_c::~aac_packetizer_c() {
+}
+
+void
+aac_packetizer_c::handle_parsed_audio_config() {
+  if (!m_first_packet)
+    return;
+
+  m_first_packet  = false;
+  auto raw_config = m_parser.get_audio_specific_config();
+
+  if (!raw_config)
+    return;
+
+  auto parsed_config = aac::parse_audio_specific_config(raw_config->get_buffer(), raw_config->get_size());
+
+  if (!parsed_config || (parsed_config->samples_per_frame == m_config.samples_per_frame))
+    return;
+
+  m_config.samples_per_frame = parsed_config->samples_per_frame;
+  m_ti.m_private_data        = raw_config;
+  m_packet_duration          = m_timestamp_calculator.get_duration(m_config.samples_per_frame).to_ns();
+
+  set_headers();
+
+  rerender_track_headers();
 }
 
 void
@@ -62,7 +100,9 @@ aac_packetizer_c::set_headers() {
 
 int
 aac_packetizer_c::process_headerless(packet_cptr packet) {
-  packet->timecode = m_timestamp_calculator.get_next_timestamp(ms_samples_per_packet).to_ns();
+  handle_parsed_audio_config();
+
+  packet->timecode = m_timestamp_calculator.get_next_timestamp(m_config.samples_per_frame).to_ns();
   packet->duration = m_packet_duration;
 
   add_packet(packet);

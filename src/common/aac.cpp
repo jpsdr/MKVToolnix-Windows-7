@@ -17,6 +17,7 @@
 #include "common/aac_x.h"
 #include "common/at_scope_exit.h"
 #include "common/bit_reader.h"
+#include "common/bit_writer.h"
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/list_utils.h"
@@ -86,21 +87,48 @@ parse_audio_specific_config(unsigned char const *data,
 
 memory_cptr
 create_audio_specific_config(audio_config_t const &audio_config) {
-  auto buffer   = memory_c::alloc(audio_config.sbr ? 5 : 2);
-  auto data     = buffer->get_buffer();
+  bit_writer_c w{};
 
-  int srate_idx = aac::get_sampling_freq_idx(audio_config.sample_rate);
-  data[0]       = ((audio_config.profile + 1) << 3) | ((srate_idx & 0x0e) >> 1);
-  data[1]       = ((srate_idx & 0x01) << 7) | (audio_config.channels << 3);
+  auto write_object_type = [&w](unsigned int object_type) {
+    if (object_type < 31)
+      w.put_bits(5, object_type);
+
+    else if (object_type > 31) {
+      w.put_bits(5, 31);
+      w.put_bits(6, object_type - 32);
+
+    } else
+      throw false;
+  };
+
+  auto write_sampling_frequency = [&w](unsigned int sampling_frequency) {
+    auto index = aac::get_sampling_freq_idx(sampling_frequency);
+
+    w.put_bits(4, index);
+    if (index == 0x0f)
+      w.put_bits(24, sampling_frequency);
+  };
+
+  write_object_type(audio_config.profile + 1);
+  write_sampling_frequency(audio_config.sample_rate);
+  w.put_bits(4, audio_config.channels);
+
+  if (audio_config.ga_specific_config && audio_config.ga_specific_config_bit_size) {
+    bit_reader_c r{audio_config.ga_specific_config->get_buffer(), audio_config.ga_specific_config->get_size()};
+    w.copy_bits(audio_config.ga_specific_config_bit_size, r);
+  } else
+    w.byte_align();
 
   if (audio_config.sbr) {
-    srate_idx = aac::get_sampling_freq_idx(audio_config.output_sample_rate);
-    data[2]   = AAC_SYNC_EXTENSION_TYPE >> 3;
-    data[3]   = ((AAC_SYNC_EXTENSION_TYPE & 0x07) << 5) | MP4AOT_SBR;
-    data[4]   = (1 << 7) | (srate_idx << 3);
+    w.put_bits(11, AAC_SYNC_EXTENSION_TYPE);
+    write_object_type(MP4AOT_SBR);
+    w.put_bits(1, 1);           // sbr_present_flag
+    write_sampling_frequency(audio_config.output_sample_rate ? audio_config.output_sample_rate : audio_config.sample_rate * 2);
   }
 
-  return buffer;
+  w.byte_align();
+
+  return w.get_buffer();
 }
 
 // ------------------------------------------------------------
@@ -123,6 +151,12 @@ bool
 latm_parser_c::config_parsed()
   const {
   return m_config_parsed;
+}
+
+memory_cptr
+latm_parser_c::get_audio_specific_config()
+  const {
+  return m_audio_specific_config;
 }
 
 header_c const &
@@ -170,7 +204,8 @@ latm_parser_c::parse_audio_specific_config(size_t asc_length) {
   if (!new_header.is_valid)
     throw false;
 
-  m_header = new_header;
+  m_header                = new_header;
+  m_audio_specific_config = create_audio_specific_config(m_header.config);
 }
 
 void
@@ -710,6 +745,18 @@ parser_c::get_multiplex_type_name(multiplex_type_e multiplex_type) {
        :                                         "unknown";
 }
 
+memory_cptr
+parser_c::get_audio_specific_config()
+  const {
+  if (m_multiplex_type == loas_latm_multiplex)
+    return m_latm_parser.get_audio_specific_config();
+
+  if (m_header.is_valid)
+    return create_audio_specific_config(m_header.config);
+
+  return {};
+}
+
 int
 parser_c::find_consecutive_frames(unsigned char const *buffer,
                                   size_t buffer_size,
@@ -881,7 +928,9 @@ header_c::read_ga_specific_config() {
   // GASpecificConfig as defined in ISO/IEC 14496-3:2005, section 4.4.1
   // "Decoder configuration (GASpecificConfig)" in section 4.4 "Syntax".
 
-  auto frame_length_flag = m_bc->get_bit(); // frame_length_flag
+  auto start_bit_position = m_bc->get_bit_position();
+  auto frame_length_flag  = m_bc->get_bit(); // frame_length_flag
+
   if (m_bc->get_bit())                      // depends_on_core_coder
     m_bc->skip_bits(14);                    // core_coder_delay
   bool extension_flag = m_bc->get_bit();
@@ -899,16 +948,26 @@ header_c::read_ga_specific_config() {
   if ((MP4AOT_AAC_SCALABLE == object_type) || (MP4AOT_ER_AAC_SCALABLE == object_type))
     m_bc->skip_bits(3);         // layer_nr
 
-  if (!extension_flag)
-    return;
+  if (extension_flag) {
+    if (MP4AOT_ER_BSAC == object_type)
+      m_bc->skip_bits(5 + 11);    // num_of_sub_frame, layer_length
 
-  if (MP4AOT_ER_BSAC == object_type)
-    m_bc->skip_bits(5 + 11);    // num_of_sub_frame, layer_length
+    if ((MP4AOT_ER_AAC_LC == object_type) || (MP4AOT_ER_AAC_LTP == object_type) || (MP4AOT_ER_AAC_SCALABLE == object_type) || (MP4AOT_ER_AAC_LD == object_type))
+      m_bc->skip_bits(1 + 1 + 1); // aac_section_data_resilience_flag, aac_scalefactor_data_resilience_flag, aac_spectral_data_resilience_flag
 
-  if ((MP4AOT_ER_AAC_LC == object_type) || (MP4AOT_ER_AAC_LTP == object_type) || (MP4AOT_ER_AAC_SCALABLE == object_type) || (MP4AOT_ER_AAC_LD == object_type))
-    m_bc->skip_bits(1 + 1 + 1); // aac_section_data_resilience_flag, aac_scalefactor_data_resilience_flag, aac_spectral_data_resilience_flag
+    m_bc->skip_bit();             // extension_flag3
+  }
 
-  m_bc->skip_bit();             // extension_flag3
+  // Store GASpecificConfig for later use.
+  auto end_bit_position              = m_bc->get_bit_position();
+  config.ga_specific_config_bit_size = end_bit_position - start_bit_position;
+
+  m_bc->set_bit_position(start_bit_position);
+
+  bit_writer_c w{};
+  w.copy_bits(config.ga_specific_config_bit_size, *m_bc);
+
+  config.ga_specific_config = w.get_buffer();
 }
 
 void
@@ -1002,7 +1061,7 @@ header_c::parse_audio_specific_config(bit_reader_c &bc,
       auto prior_position     = m_bc->get_bit_position();
       int sync_extension_type = m_bc->get_bits(11);
 
-      if (0x2b7 == sync_extension_type) {
+      if (AAC_SYNC_EXTENSION_TYPE == sync_extension_type) {
         extension_object_type = read_object_type();
         if (MP4AOT_SBR == extension_object_type) {
           config.sbr = m_bc->get_bit();

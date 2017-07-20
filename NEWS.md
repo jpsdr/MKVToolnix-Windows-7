@@ -16,6 +16,8 @@
 * MKVToolNix GUI: chapter editor: added a function to the "additional
   modifications" dialog for calculating and setting the end
   timestamps. Implements #1887.
+* mkvmerge: AAC: implemented support for AAC with 960 samples per
+  frame. Implements #2031.
 
 ## Bug fixes
 
