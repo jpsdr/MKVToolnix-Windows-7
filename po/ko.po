@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-07-14 11:32+0200\n"
-"PO-Revision-Date: 2017-07-06 19:48+0000\n"
+"PO-Revision-Date: 2017-07-14 15:09+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -1386,9 +1386,8 @@ msgid "&Command line:"
 msgstr "명령행(&C):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
-#, fuzzy
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "하위 챕터의 시작과 끝 타임코드를 그 부모의 시작과 끝 타임코드로 축소(&C)"
+msgstr "하위 챕터의 시작과 끝 타임스탬프를 그 부모의 시작과 끝 타임스탬프로 축소(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:545
 msgid "&Copy command line to clipboard"
@@ -1555,9 +1554,8 @@ msgid "&Multiplexer"
 msgstr "합치기(&M)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
-#, fuzzy
 msgid "&Multiply start and end timestamps by the following factor:"
-msgstr "시작과 종료 타임코드를 다음 인수로 곱합니다(&M):"
+msgstr "시작과 종료 타임스탬프를 다음 인수로 곱하기(&M):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
@@ -1778,9 +1776,8 @@ msgid "&Skip file"
 msgstr "파일 건너뛰기(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
-#, fuzzy
 msgid "&Sort chapters by their start and end timestamps"
-msgstr "그 시작과 끝 타임코드 순서로 챕터 정렬(&S)"
+msgstr "그 시작과 끝 타임스탬프 순서로 챕터 정렬(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
 msgid "&Start && end:"
@@ -1793,9 +1790,8 @@ msgid_plural "&Start jobs automatically"
 msgstr[0] "작업 자동 시작(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
-#, fuzzy
 msgid "&Start timestamp of first created entry:"
-msgstr "처음 만든 항목의 타임코드 시작(&S):"
+msgstr "처음 만든 항목의 시작 타임스탬프(&S):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1343
 msgid "&Subtitle tracks:"
@@ -3419,9 +3415,8 @@ msgid "C&onfiguration active"
 msgstr "설정 활성화하기(&O)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
-#, fuzzy
 msgid "C&onstrict or expand timestamps"
-msgstr "타임코드 축소 또는 확장(&O)"
+msgstr "타임스탬프 축소 또는 확장(&O)"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
 msgid "C&opy to clipboard"
@@ -4468,7 +4463,7 @@ msgstr "아래 설정에 따라서 소스 파일의 언어가 '미정의' ('und'
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Derive &end timestamps from start timestamps"
-msgstr ""
+msgstr "시작 타임스탬프에서 끝 타임스탬프 얻기(&E)"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4761,9 +4756,8 @@ msgid "E&xit"
 msgstr "종료(&X)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
-#, fuzzy
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
-msgstr "챕터의 시작과 끝 타임코드를 모든 하위 챕터의 최소/최대 타임코드를 포함하도록 확장(&X)"
+msgstr "모든 하위 챕터의 최소/최대 타임스탬프를 포함하도록 챕터의 시작과 끝 타임스탬프 확장(&X)"
 
 #: src/info/mkvinfo.cpp:1658
 msgid "EBML head"
@@ -5390,7 +5384,7 @@ msgstr "비디오 트랙은 포함하지 않고 적어도 하나의 오디오 �
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
-msgstr ""
+msgstr "대부분의 항목에 대해, 현재 챕터의 시작 타임스탬프보다 더 높은 동일한 레벨의 모든 챕터의 가장 작은 시작 타임스탬프가 끝 타임스탬프로 사용됩니다."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:504
 msgid "For such files you can use this parameter and decrease the size to 2."
@@ -5898,7 +5892,7 @@ msgstr "OGM 형식을 사용하고 파일의 문자셋을 제대로 인식하지
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
-msgstr ""
+msgstr "Matroska 파일에서 챕터를 불러오면, 최상위 레벨의 맨 마지막 챕터에 대한 끝 타임스탬프는 파일의 재생시간에서 유추됩니다."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
 #, no-c-format
@@ -5913,7 +5907,7 @@ msgstr "숫자의 접미어가 'ms'이면 적어도 'n' 밀리초의 데이터�
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
-msgstr ""
+msgstr "그런 챕터가 없다면, 부모 챕터의 끝 타임스탬프를 대신 사용합니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #, no-c-format
@@ -8388,9 +8382,8 @@ msgid "Running jobs cannot be removed."
 msgstr "실행 중인 작업은 삭제할 수 없습니다."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
-#, fuzzy
 msgid "S&hift start and end timestamps by the following amount:"
-msgstr "시작과 끝 타임코드를 다음 양만큼 이동하기(&'):"
+msgstr "시작과 끝 타임스탬프를 다음 양만큼 이동하기(&H):"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:544
 msgid "S&how command line"
@@ -9720,9 +9713,9 @@ msgid "The end time could not be parsed: %1"
 msgstr "종료 시간을 분석할 수 없습니다: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:841
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The end time must be greater than the start time."
-msgstr "종료 시간은 시작 타임코드보다 더 커야 합니다."
+msgstr "종료 시간은 시작 시간보다 더 커야 합니다."
 
 #: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
@@ -12394,7 +12387,7 @@ msgstr "matroska_리더: 트랙 유형을 찾지 못했습니다.\n"
 #: src/input/r_matroska.cpp:470
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
-msgstr "matroska_reader: mkvmerge는 FLAC을 지원하여 컴파일되지 않습니다. 트랙 %1%를 무시합니다.\n"
+msgstr "matroska_리더: mkvmerge는 FLAC 지원 없이 컴파일되었습니다.  %1% 트랙을 무시합니다.\n"
 
 #: src/input/r_matroska.cpp:1458
 msgid "matroska_reader: no EBML head found.\n"
