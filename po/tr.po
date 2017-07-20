@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-07-14 11:32+0200\n"
-"PO-Revision-Date: 2017-07-06 18:01+0000\n"
+"PO-Revision-Date: 2017-07-14 16:47+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -237,6 +237,9 @@ msgid ""
 "                           to derive luma and chroma values from red, green\n"
 "                           and blue color primaries.\n"
 msgstr ""
+"  --colour-matrix <TID:n>  Luma ve chroma değerlerini kırmızı, yeşil ve mavi\n"
+"                           renk birincillerinden türetmek için kullanılan görüntünün \n"
+"                           matriks katsayılarını ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:290
 msgid ""
@@ -1410,9 +1413,8 @@ msgid "&Command line:"
 msgstr "&Komut satırı:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
-#, fuzzy
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "Alt bölümlerin başlangıç ve bitiş zaman kodlarını onların esas başlangıç ve bitiş zaman kodlarına &daralt"
+msgstr "Alt bölümlerin başlangıç ve bitiş zaman damgalarını onların esas başlangıç ve bitiş zaman damgalarına &daralt"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:545
 msgid "&Copy command line to clipboard"
@@ -1581,9 +1583,8 @@ msgid "&Multiplexer"
 msgstr "Ç&oklayıcı"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
-#, fuzzy
 msgid "&Multiply start and end timestamps by the following factor:"
-msgstr "Şurada belirtilen etkene göre başlangıç ​ve bitiş za&man kodlarını çoğalt:"
+msgstr "Şurada belirtilen etkene göre başlangıç ​ve bitiş za&man damgalarını çoğalt:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
@@ -1807,9 +1808,8 @@ msgid "&Skip file"
 msgstr "Dosyayı &atla"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
-#, fuzzy
 msgid "&Sort chapters by their start and end timestamps"
-msgstr "Bölümleri başlangıç ve bitiş zaman kodlarına göre &sırala"
+msgstr "Bölümleri başlangıç ve bitiş zaman damgalarına göre &sırala"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
 msgid "&Start && end:"
@@ -1823,9 +1823,8 @@ msgstr[0] "İşi otomatik olarak &başlat"
 msgstr[1] "İşleri otomatik olarak &başlat"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
-#, fuzzy
 msgid "&Start timestamp of first created entry:"
-msgstr "İlk oluşturulan girişin &başlama zaman damgası:"
+msgstr "İlk oluşturulan girişin &başlangıç zaman damgası:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1343
 msgid "&Subtitle tracks:"
@@ -3458,9 +3457,8 @@ msgid "C&onfiguration active"
 msgstr "Yapılandırma &etkin"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
-#, fuzzy
 msgid "C&onstrict or expand timestamps"
-msgstr "Zaman k&odlarını daralt ya da genişlet"
+msgstr "Zaman damgalarını d&aralt ya da genişlet"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
 msgid "C&opy to clipboard"
@@ -4508,7 +4506,7 @@ msgstr "Aşağıdaki ayara bağlı olarak bu dil aynı zamanda eğer kaynak dosy
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Derive &end timestamps from start timestamps"
-msgstr ""
+msgstr "Bitiş zaman damgalarını başlangıç ​​zaman damgalarından tür&et"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4801,9 +4799,8 @@ msgid "E&xit"
 msgstr "Çı&kış"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
-#, fuzzy
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
-msgstr "Bölümün başlangıç ​​ve bitiş zaman kodlarını, tüm alt bölümlerinin en az/en fazla zaman kodlarını dahil etmek için &genişlet"
+msgstr "Bölümün başlangıç ​​ve bitiş zaman damgalarını, tüm alt bölümlerinin en az/en fazla zaman damgalarını dahil etmek için &genişlet"
 
 #: src/info/mkvinfo.cpp:1658
 msgid "EBML head"
@@ -5430,7 +5427,7 @@ msgstr "Görüntü izi içermeyecek ama en az bir ses izi içerecek dosyalar iç
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
-msgstr ""
+msgstr "Çoğu girişler için şu anki bölümün başlangıç zaman damgasından daha yüksek olan aynı seviyedeki tüm bülümlerin en küçük başlangıç zaman damgası bunun bitiş zaman damgası olarak kullanılacaktır."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:504
 msgid "For such files you can use this parameter and decrease the size to 2."
@@ -5939,7 +5936,7 @@ msgstr "Eğer OGM biçimi kullanılırsa ve dosyanın karakter kümesi tanınmaz
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
-msgstr ""
+msgstr "Eğer bölümler bir Matroska dosyasından yüklendiyse, en üst seviyedeki en son bölüm için bitiş zaman damgası dosyanın süresinden türetilecektir."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
 #, no-c-format
@@ -5954,7 +5951,7 @@ msgstr "Eğer sayı son eki 'ms' ise o zaman her küme içine verinin en çok 'n
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
-msgstr ""
+msgstr "Eğer böyle bir bölüm yoksa, bunun yerine esas bölümün bitiş zaman damgası kullanılacaktır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #, no-c-format
@@ -8436,9 +8433,8 @@ msgid "Running jobs cannot be removed."
 msgstr "Çalışan işler kaldırılamaz."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
-#, fuzzy
 msgid "S&hift start and end timestamps by the following amount:"
-msgstr "Şurada belirtilen miktara göre başlangıç ​ve bitiş &zaman kodlarını değiştir:"
+msgstr "Şurada belirtilen miktara göre başlangıç ​ve bitiş &zaman damgalarını değiştir:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:544
 msgid "S&how command line"
@@ -9774,9 +9770,9 @@ msgid "The end time could not be parsed: %1"
 msgstr "Bitiş zamanı ayrıştırılamadı: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:841
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The end time must be greater than the start time."
-msgstr "Bitiş zamanı başlangıç zaman kodundan büyük olmak zorundadır."
+msgstr "Bitiş zamanı başlangıç zamanından büyük olmak zorundadır."
 
 #: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
@@ -10921,7 +10917,7 @@ msgstr "Bu, uygulamadan çıkarken aynı zamanda tamamlanır."
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
-msgstr ""
+msgstr "Bu, GKA'nün bu belirli yapılandırmayı işaret etmesi için kullanabileceği gelişigüzel bir isimdir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:207
 #, no-c-format
