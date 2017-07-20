@@ -27,6 +27,13 @@
 #define ID_RESULT_TAGS            "tags"
 #define ID_RESULT_GLOBAL_TAGS_ID  -1
 
+// When bumping the schema version:
+// • increase `ID_JSON_FORMAT_VERSION` here
+// • copy `doc/json-schema/mkvmerge-identification-output-schema-v….json` with the next version number
+// • in the new copy adjust the following elements:
+//   1. `id`
+//   2. `properties` → `identification_format_version` → `minimum` and `maximum`
+// • adjust the link in `doc/man/mkvmerge.xml`
 #define ID_JSON_FORMAT_VERSION    8
 
 struct id_result_t {
