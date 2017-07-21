@@ -18,6 +18,7 @@
   timestamps. Implements #1887.
 * mkvmerge: AAC: implemented support for AAC with 960 samples per
   frame. Implements #2031.
+* mkvmerge: WAV reader: added support for Wave64 files. Implements #2042.
 
 ## Bug fixes
 

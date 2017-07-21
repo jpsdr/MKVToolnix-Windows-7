@@ -54,18 +54,35 @@ public:
 using wav_demuxer_cptr = std::shared_ptr<wav_demuxer_c>;
 
 struct wav_chunk_t {
-  int64_t pos;
-  char id[4];
-  int64_t len;
+  uint64_t pos, len;
+  memory_cptr id;
+};
+
+struct wave64_chunk_t {
+  unsigned char guid[16];
+  uint64_t size;
+};
+
+struct wave64_header_t {
+  wave64_chunk_t riff;
+  unsigned char wave_guid[16];
 };
 
 class wav_reader_c: public generic_reader_c {
+public:
+  enum class type_e {
+    unknown,
+    wave,
+    wave64,
+  };
+
 private:
+  type_e m_type;
   struct wave_header m_wheader;
   int64_t m_bytes_in_data_chunks, m_remaining_bytes_in_current_data_chunk;
 
   std::vector<wav_chunk_t> m_chunks;
-  int m_cur_data_chunk_idx;
+  boost::optional<std::size_t> m_cur_data_chunk_idx;
 
   wav_demuxer_cptr m_demuxer;
 
@@ -90,12 +107,19 @@ public:
   static int probe_file(mm_io_c *in, uint64_t size);
 
 protected:
+  static type_e determine_type(mm_io_c &in, uint64_t size);
+
+  boost::optional<std::size_t> find_chunk(const char *id, int start_idx = 0, bool allow_empty = true);
+
   void scan_chunks();
-  int find_chunk(const char *id, int start_idx = 0, bool allow_empty = true);
+  void scan_chunks_wave();
+  void scan_chunks_wave64();
 
   void dump_headers();
 
   void parse_file();
+  void parse_fmt_chunk();
+
   void create_demuxer();
 };
 

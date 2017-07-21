@@ -35,7 +35,7 @@ bool
 wav_dts_demuxer_c::probe(mm_io_cptr &io) {
   io->save_pos();
   auto read_buf = memory_c::alloc(DTS_READ_SIZE);
-  read_buf->set_size(io->read(read_buf, DTS_READ_SIZE));
+  read_buf->set_size(io->read(read_buf->get_buffer(), DTS_READ_SIZE));
   io->restore_pos();
 
   if (!m_parser.detect(*read_buf, 5))
