@@ -187,16 +187,6 @@ public:
     return its_counter ? its_counter->ptr : nullptr;
   }
 
-  bool operator ==(memory_c const &cmp) const {
-    return (get_size() == cmp.get_size())
-        && ((get_buffer() && cmp.get_buffer()) || (!get_buffer() && !cmp.get_buffer()))
-        && (get_buffer() ? !::memcmp(get_buffer(), cmp.get_buffer(), get_size()) : true);
-  }
-
-  bool operator !=(memory_c const &cmp) const {
-    return !(*this == cmp);
-  }
-
   std::string to_string() const {
     if (!is_allocated() || !get_size())
       return {};
@@ -262,6 +252,39 @@ private:
     }
   }
 };
+
+inline bool
+operator ==(memory_c const &a,
+            memory_c const &b) {
+  return (a.get_size() == b.get_size())
+      && ((a.get_buffer() && b.get_buffer()) || (!a.get_buffer() && !b.get_buffer()))
+      && (a.get_buffer() ? !std::memcmp(a.get_buffer(), b.get_buffer(), a.get_size()) : true);
+}
+
+inline bool
+operator !=(memory_c const &a,
+            memory_c const &b) {
+  return !(a == b);
+}
+
+inline bool
+operator ==(memory_c const &a,
+            char const *b) {
+  if (!a.get_buffer() && !b)
+    return true;
+
+  if (!a.get_buffer() || !b)
+    return false;
+
+  return (a.get_size() == std::strlen(b))
+    && !std::memcmp(a.get_buffer(), b, a.get_size());
+}
+
+inline bool
+operator !=(memory_c const &a,
+            char const *b) {
+  return !(a == b);
+}
 
 class memory_slice_cursor_c {
  protected:
