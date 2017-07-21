@@ -171,22 +171,6 @@ public:
     add(new_buffer->get_buffer(), new_buffer->get_size());
   }
 
-  operator const unsigned char *() const {
-    return its_counter ? its_counter->ptr : nullptr;
-  }
-
-  operator const void *() const {
-    return its_counter ? its_counter->ptr : nullptr;
-  }
-
-  operator unsigned char *() const {
-    return its_counter ? its_counter->ptr : nullptr;
-  }
-
-  operator void *() const {
-    return its_counter ? its_counter->ptr : nullptr;
-  }
-
   std::string to_string() const {
     if (!is_allocated() || !get_size())
       return {};
