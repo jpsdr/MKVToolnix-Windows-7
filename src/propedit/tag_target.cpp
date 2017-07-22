@@ -162,11 +162,15 @@ tag_target_c::execute() {
   else
     assert(false);
 
-  if (m_level1_element->ListSize()) {
-    mtx::tags::fix_mandatory_elements(m_level1_element);
-    if (!m_level1_element->CheckMandatory())
-      mxerror(boost::format(Y("Error parsing the tags in '%1%': some mandatory elements are missing.\n")) % m_file_name);
-  }
+  if (!m_level1_element->ListSize())
+    return;
+
+  mtx::tags::fix_mandatory_elements(m_level1_element);
+  if (!m_level1_element->CheckMandatory())
+    mxerror(boost::format(Y("Error parsing the tags in '%1%': some mandatory elements are missing.\n")) % m_file_name);
+
+  if (m_analyzer->is_webm())
+    mtx::tags::remove_elements_unsupported_by_webm(*m_level1_element);
 }
 
 void
@@ -390,4 +394,16 @@ bool
 tag_target_c::has_content_been_modified()
   const {
   return m_tags_modified;
+}
+
+bool
+tag_target_c::write_elements_set_to_default_value()
+  const {
+  return !m_analyzer->is_webm();
+}
+
+bool
+tag_target_c::add_mandatory_elements_if_missing()
+  const {
+  return false;
 }

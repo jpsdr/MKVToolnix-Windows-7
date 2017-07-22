@@ -22,6 +22,8 @@
 * mkvmerge, mkvpropedit: added support for chapters in WebM files that is
   spec-compliant by removing all tag elements not supported by the WebM
   spec. Implements #2002.
+* mkvpropedit: added support for tags in WebM files that is spec-compliant by
+  removing all tag elements not supported by the WebM spec.
 
 ## Bug fixes
 

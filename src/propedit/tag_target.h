@@ -60,6 +60,8 @@ public:
   virtual bool has_content_been_modified() const override;
 
   virtual void execute() override;
+  virtual bool write_elements_set_to_default_value() const override;
+  virtual bool add_mandatory_elements_if_missing() const override;
 
 protected:
   virtual void add_or_replace_global_tags(KaxTags *tags);
