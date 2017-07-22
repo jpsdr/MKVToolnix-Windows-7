@@ -105,8 +105,13 @@
      <term><option>-w</option>, <option>--webm</option></term>
      <listitem>
       <para>Create a WebM compliant file. This is also turned on if the output file name's extension is &quot;webm&quot;. This mode enforces
-      several restrictions. The only allowed codecs are VP8, VP9 video and Opus, Vorbis audio tracks. Neither chapters nor tags are
-      allowed. The DocType header item is changed to &quot;webm&quot;.
+      several restrictions. The only allowed codecs are VP8, VP9 video and Opus, Vorbis audio tracks. The DocType header item is changed to
+      &quot;webm&quot;.
+      </para>
+
+      <para>
+       For chapters and tags only a subset of elements are allowed. &mkvmerge; will automatically remove all elements not allowed by the
+       specification.
       </para>
      </listitem>
     </varlistentry>
