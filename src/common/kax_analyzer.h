@@ -120,8 +120,8 @@ public:
   kax_analyzer_c(mm_io_c *file);
   virtual ~kax_analyzer_c();
 
-  virtual update_element_result_e update_element(EbmlElement *e, bool write_defaults = false);
-  virtual update_element_result_e update_element(ebml_element_cptr const &e, bool write_defaults = false);
+  virtual update_element_result_e update_element(EbmlElement *e, bool write_defaults = false, bool add_mandatory_elements_if_missing = true);
+  virtual update_element_result_e update_element(ebml_element_cptr const &e, bool write_defaults = false, bool add_mandatory_elements_if_missing = true);
 
   virtual update_element_result_e remove_elements(EbmlId const &id);
 

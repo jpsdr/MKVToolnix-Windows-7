@@ -412,17 +412,20 @@ kax_analyzer_c::read_element(kax_analyzer_data_c const &element_data) {
 
 kax_analyzer_c::update_element_result_e
 kax_analyzer_c::update_element(ebml_element_cptr const &e,
-                               bool write_defaults) {
-  return update_element(e.get(), write_defaults);
+                               bool write_defaults,
+                               bool add_mandatory_elements_if_missing) {
+  return update_element(e.get(), write_defaults, add_mandatory_elements_if_missing);
 }
 
 kax_analyzer_c::update_element_result_e
 kax_analyzer_c::update_element(EbmlElement *e,
-                               bool write_defaults) {
+                               bool write_defaults,
+                               bool add_mandatory_elements_if_missing) {
   try {
     reopen_file_for_writing();
 
-    fix_mandatory_elements(e);
+    if (add_mandatory_elements_if_missing)
+      fix_mandatory_elements(e);
     remove_voids_from_master(e);
 
     placement_strategy_e strategy = get_placement_strategy_for(e);
