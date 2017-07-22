@@ -1285,24 +1285,11 @@ add_tags_from_cue_chapters() {
     file's actual length is known during \c finish_file(). However,
     the maximum size of chapters is know. So we reserve space at the
     beginning of the file for all of the chapters.
-
-    WebM compliant files must not contain chapters. This function
-    issues a warning and invalidates the chapters if this is the case.
  */
 static void
 render_chapter_void_placeholder() {
   if ((0 >= s_max_chapter_size) && (chapter_generation_mode_e::none == g_cluster_helper->get_chapter_generation_mode()))
     return;
-
-  if (outputting_webm()) {
-    mxwarn(boost::format(Y("Chapters are not allowed in WebM compliant files. No chapters will be written to the destination file.\n")));
-
-    g_kax_chapters.reset();
-    s_max_chapter_size = 0;
-    g_cluster_helper->enable_chapter_generation(chapter_generation_mode_e::none);
-
-    return;
-  }
 
   auto size           = s_max_chapter_size + (chapter_generation_mode_e::none == g_cluster_helper->get_chapter_generation_mode() ? 100 : 1000);
   s_kax_chapters_void = std::make_unique<EbmlVoid>();
@@ -1316,8 +1303,8 @@ render_chapter_void_placeholder() {
     them. Also determines the maximum size needed for rendering the
     tags.
 
-    WebM compliant files must not contain tags. This function
-    issues a warning and invalidates the tags if this is the case.
+    WebM compliant files support tags, but only a limited subset. All
+    unsupported elements will be removed silently.
  */
 static void
 prepare_tags_for_rendering() {
@@ -1456,9 +1443,14 @@ render_chapters() {
   fix_mandatory_elements(s_chapters_in_this_file.get());
   fix_chapter_country_codes(*s_chapters_in_this_file);
 
+  if (outputting_webm())
+    remove_chapter_elements_unsupported_by_webm(*s_chapters_in_this_file);
+
   auto replaced = false;
-  if (s_kax_chapters_void)
-    replaced = s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, true);
+  if (s_kax_chapters_void) {
+    auto with_defaults = !outputting_webm();
+    replaced           = s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, with_defaults);
+  }
 
   if (!replaced) {
     s_out->setFilePointer(0, seek_end);

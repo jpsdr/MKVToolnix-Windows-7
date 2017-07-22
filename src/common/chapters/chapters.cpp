@@ -536,6 +536,63 @@ fix_mandatory_chapter_elements(EbmlElement *e) {
   }
 }
 
+void
+remove_chapter_elements_unsupported_by_webm(EbmlMaster &master) {
+  static std::unordered_map<uint32_t, bool> s_supported_elements, s_readd_with_defaults;
+
+  if (s_supported_elements.empty()) {
+#define add(ref) s_supported_elements[ EBML_ID_VALUE(EBML_ID(ref)) ] = true;
+    add(KaxChapters);
+    add(KaxEditionEntry);
+    add(KaxChapterAtom);
+    add(KaxChapterUID);
+    add(KaxChapterStringUID);
+    add(KaxChapterTimeStart);
+    add(KaxChapterTimeEnd);
+    add(KaxChapterDisplay);
+    add(KaxChapterString);
+    add(KaxChapterLanguage);
+    add(KaxChapterCountry);
+#undef add
+
+#define add(ref) s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(ref)) ] = true;
+    add(KaxEditionFlagDefault);
+    add(KaxEditionFlagHidden);
+    add(KaxChapterFlagEnabled);
+    add(KaxChapterFlagHidden);
+#undef add
+  }
+
+  auto idx = 0u;
+
+  while (idx < master.ListSize()) {
+    auto e = master[idx];
+
+    if (e && s_supported_elements[ EBML_ID_VALUE(EbmlId(*e)) ]) {
+      auto sub_master = dynamic_cast<EbmlMaster *>(e);
+      if (sub_master)
+        remove_chapter_elements_unsupported_by_webm(*sub_master);
+
+      ++idx;
+
+      continue;
+    }
+
+    if (e && s_readd_with_defaults[ EBML_ID_VALUE(EbmlId(*e)) ]) {
+      auto new_with_defaults = &(e->CreateElement());
+      delete e;
+      master.GetElementList()[idx] = new_with_defaults;
+
+      ++idx;
+
+      continue;
+    }
+
+    delete e;
+    master.Remove(idx);
+  }
+}
+
 /** \brief Remove all chapter atoms that are outside of a time range
 
    All chapter atoms that lie completely outside the timecode range

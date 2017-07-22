@@ -87,6 +87,8 @@ int64_t get_chapter_end(KaxChapterAtom &atom, int64_t value_if_not_found = -1);
 std::string get_chapter_name(KaxChapterAtom &atom);
 
 void fix_mandatory_chapter_elements(EbmlElement *e);
+void remove_chapter_elements_unsupported_by_webm(EbmlMaster &master);
+
 KaxEditionEntry *find_edition_with_uid(KaxChapters &chapters, uint64_t uid);
 KaxChapterAtom *find_chapter_with_uid(KaxChapters &chapters, uint64_t uid);
 
