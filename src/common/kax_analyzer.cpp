@@ -15,7 +15,6 @@
 
 #include <algorithm>
 
-#include <ebml/EbmlHead.h>
 #include <ebml/EbmlStream.h>
 #include <ebml/EbmlVoid.h>
 #include <matroska/KaxCluster.h>
@@ -280,13 +279,20 @@ kax_analyzer_c::process_internal() {
   m_stream = new EbmlStream(*m_file);
 
   // Find the EbmlHead element. Must be the first one.
-  EbmlElement *l0 = m_stream->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL);
-  if (!l0)
+  m_ebml_head.reset(static_cast<EbmlHead *>(m_stream->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL)));
+  if (!m_ebml_head)
     throw mtx::kax_analyzer_x(Y("Not a valid Matroska file (no EBML head found)"));
 
-  // Don't verify its data for now.
-  l0->SkipData(*m_stream, EBML_CONTEXT(l0));
-  delete l0;
+  EbmlElement *l0{};
+  int upper_lvl_el{};
+
+  m_ebml_head->Read(*m_stream, EBML_CONTEXT(m_ebml_head.get()), upper_lvl_el, l0, true, SCOPE_ALL_DATA);
+  m_ebml_head->SkipData(*m_stream, EBML_CONTEXT(m_ebml_head.get()));
+
+  if (l0) {
+    delete l0;
+    l0 = nullptr;
+  }
 
   while (1) {
     // Next element must be a segment
@@ -302,12 +308,12 @@ kax_analyzer_c::process_internal() {
   }
 
   m_segment            = std::shared_ptr<KaxSegment>(static_cast<KaxSegment *>(l0));
-  int upper_lvl_el     = 0;
   bool aborted         = false;
   bool cluster_found   = false;
   bool meta_seek_found = false;
   m_segment_end        = m_segment->IsFiniteSize() ? m_segment->GetElementPosition() + m_segment->HeadSize() + m_segment->GetSize() : m_file->get_size();
   EbmlElement *l1      = nullptr;
+  upper_lvl_el         = 0;
 
   // In certain situations the caller doesn't way to have to pay the
   // price for full analysis. Then it can configure the parser to
@@ -1429,6 +1435,11 @@ kax_analyzer_c::fix_unknown_size_for_last_level1_element() {
 kax_analyzer_c::placement_strategy_e
 kax_analyzer_c::get_placement_strategy_for(EbmlElement *e) {
   return Is<KaxTags>(e) ? ps_end : ps_anywhere;
+}
+
+EbmlHead &
+kax_analyzer_c::get_ebml_head() {
+  return *m_ebml_head;
 }
 
 uint64_t

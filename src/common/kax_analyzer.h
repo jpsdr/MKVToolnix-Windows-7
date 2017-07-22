@@ -16,6 +16,7 @@
 
 #include "common/common_pch.h"
 
+#include <ebml/EbmlHead.h>
 #include <matroska/KaxSegment.h>
 
 #include "common/ebml.h"
@@ -101,6 +102,7 @@ private:
   mm_io_c *m_file{};
   bool m_close_file{true};
   std::shared_ptr<KaxSegment> m_segment;
+  std::shared_ptr<EbmlHead> m_ebml_head;
   uint64_t m_segment_end{};
   std::map<int64_t, bool> m_meta_seeks_by_position;
   EbmlStream *m_stream{};
@@ -130,6 +132,8 @@ public:
 
   virtual void with_elements(const EbmlId &id, std::function<void(kax_analyzer_data_c const &)> worker) const;
   virtual int find(EbmlId const &id);
+
+  virtual EbmlHead &get_ebml_head();
 
   virtual uint64_t get_segment_pos() const;
   virtual uint64_t get_segment_data_start_pos() const;
