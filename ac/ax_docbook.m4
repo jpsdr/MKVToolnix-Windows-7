@@ -8,7 +8,7 @@ if ! test -z "$DOCBOOK_ROOT"; then
 
 else
   AC_MSG_CHECKING([for DocBook XSL root directory])
-  for i in /usr/share/xml/docbook/stylesheet/xsl/nwalsh /usr/share/xml/docbook/stylesheet/nwalsh `ls -d /usr/share/{sg,x}ml/docbook/xsl-stylesheets* 2> /dev/null`; do
+  for i in /usr/share/xml/docbook/stylesheet/xsl/nwalsh /usr/share/xml/docbook/stylesheet/nwalsh `ls -d /usr/share/sgml/docbook/xsl-stylesheets* /usr/share/xml/docbook/xsl-stylesheets* 2> /dev/null`; do
     if test -f "$i/manpages/docbook.xsl"; then
       DOCBOOK_ROOT="$i"
       break
