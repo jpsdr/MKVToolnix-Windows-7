@@ -53,6 +53,9 @@
   again. Fixes #2045.
 * mkvmerge: when appending fails the error message details (e.g. "the number
   of channels differs: 1 and 2") were often not output. Fixes #2046.
+* MKVToolNix GUI: multiplexer: if the GUI is set to ensure unique output file
+  names, it will now verify that right before starting to multiplex/adding the
+  job to the queue, too. Fixes #2052.
 
 ## Build system changes
 

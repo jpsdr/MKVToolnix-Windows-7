@@ -433,6 +433,7 @@ void
 Tab::addToJobQueue(bool startNow,
                    boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings) {
   updateConfigFromControlValues();
+  setOutputFileNameMaybe();
 
   if (!isReadyForMerging() || !checkIfOverwritingIsOK())
     return;
