@@ -63,6 +63,8 @@
 * MKVToolNix GUI: multiplexer: if the GUI is set to ensure unique output file
   names, it will now verify that right before starting to multiplex/adding the
   job to the queue, too. Fixes #2052.
+* configure: fixed DocBook detection if `/bin/sh` is `dash`. Patch by Steve
+  Dibb. Fixes #2054.
 
 ## Build system changes
 
