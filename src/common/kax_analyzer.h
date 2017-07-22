@@ -111,6 +111,7 @@ private:
   open_mode m_open_mode{MODE_WRITE};
   bool m_throw_on_error{};
   boost::optional<uint64_t> m_parser_start_position;
+  bool m_is_webm{};
 
 public:                         // Static functions
   static bool probe(std::string file_name);
@@ -134,6 +135,7 @@ public:
   virtual int find(EbmlId const &id);
 
   virtual EbmlHead &get_ebml_head();
+  virtual bool is_webm() const;
 
   virtual uint64_t get_segment_pos() const;
   virtual uint64_t get_segment_data_start_pos() const;
@@ -204,6 +206,8 @@ protected:
   virtual void read_meta_seek(uint64_t pos, std::map<int64_t, bool> &positions_found);
   virtual void fix_element_sizes(uint64_t file_size);
   virtual void fix_unknown_size_for_last_level1_element();
+
+  virtual void determine_webm();
 
 protected:
   virtual bool process_internal();

@@ -16,6 +16,7 @@
 #include <algorithm>
 
 #include <ebml/EbmlStream.h>
+#include <ebml/EbmlSubHead.h>
 #include <ebml/EbmlVoid.h>
 #include <matroska/KaxCluster.h>
 #include <matroska/KaxSeekHead.h>
@@ -288,6 +289,8 @@ kax_analyzer_c::process_internal() {
 
   m_ebml_head->Read(*m_stream, EBML_CONTEXT(m_ebml_head.get()), upper_lvl_el, l0, true, SCOPE_ALL_DATA);
   m_ebml_head->SkipData(*m_stream, EBML_CONTEXT(m_ebml_head.get()));
+
+  determine_webm();
 
   if (l0) {
     delete l0;
@@ -1445,6 +1448,12 @@ kax_analyzer_c::get_ebml_head() {
   return *m_ebml_head;
 }
 
+bool
+kax_analyzer_c::is_webm()
+  const {
+  return m_is_webm;
+}
+
 uint64_t
 kax_analyzer_c::get_segment_pos()
   const {
@@ -1512,6 +1521,13 @@ kax_analyzer_c::with_elements(const EbmlId &id,
     if (data->m_id == id)
       worker(*data);
 }
+
+void
+kax_analyzer_c::determine_webm() {
+  auto doc_type = FindChild<EDocType>(*m_ebml_head);
+  m_is_webm     = doc_type && (doc_type->GetValue() == "webm");
+}
+
 
 // ------------------------------------------------------------
 
