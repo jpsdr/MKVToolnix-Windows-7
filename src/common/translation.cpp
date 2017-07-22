@@ -59,7 +59,7 @@ translation_c::translation_c(std::string const &iso639_2_code,
 {
 }
 
-// See http://msdn.microsoft.com/en-us/library/windows/desktop/dd318693(v=vs.85).aspx for the (sub) language IDs.
+// See http://msdn.microsoft.com/en-us/library/windows/desktop/dd318693.aspx for the (sub) language IDs.
 void
 translation_c::initialize_available_translations() {
   ms_available_translations.clear();
@@ -79,6 +79,7 @@ translation_c::initialize_available_translations() {
   ms_available_translations.emplace_back("pol", "pl_PL",       "pl",          "polish",     "Polish",               "Polski",              false, 0x0015, 0x00);
   ms_available_translations.emplace_back("por", "pt_BR",       "pt_BR",       "portuguese", "Brazilian Portuguese", "Português do Brasil", false, 0x0016, 0x01);
   ms_available_translations.emplace_back("por", "pt_PT",       "pt",          "portuguese", "Portuguese",           "Português",           false, 0x0016, 0x02);
+  ms_available_translations.emplace_back("rum", "ro_RO",       "ro",          "romanian",   "Romanian",             "Română",              false, 0x0018, 0x00);
   ms_available_translations.emplace_back("rus", "ru_RU",       "ru",          "russian",    "Russian",              "Русский",             false, 0x0019, 0x00);
   ms_available_translations.emplace_back("srp", "sr_RS",       "sr_RS",       "serbian",    "Serbian Cyrillic",     "Српски",              false, 0x001a, 0x03);
   ms_available_translations.emplace_back("srp", "sr_RS@latin", "sr_RS@latin", "serbian",    "Serbian Latin",        "Srpski",              false, 0x001a, 0x02);

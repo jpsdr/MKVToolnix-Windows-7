@@ -136,6 +136,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %lang(pl) %{_datadir}/locale/pl/*/*.mo
 %lang(pt) %{_datadir}/locale/pt/*/*.mo
 %lang(pt_BR) %{_datadir}/locale/pt_BR/*/*.mo
+%lang(ro) %{_datadir}/locale/ro/*/*.mo
 %lang(ru) %{_datadir}/locale/ru/*/*.mo
 %lang(sr_RS) %{_datadir}/locale/sr_RS/*/*.mo
 %lang(sr_RS@latin) %{_datadir}/locale/sr_RS@latin/*/*.mo
