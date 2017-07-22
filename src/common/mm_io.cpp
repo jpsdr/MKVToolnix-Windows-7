@@ -986,6 +986,18 @@ mm_text_io_c::has_byte_order_marker(const std::string &string) {
   return detect_byte_order_marker(reinterpret_cast<const unsigned char *>(string.c_str()), string.length(), byte_order, bom_length);
 }
 
+boost::optional<std::string>
+mm_text_io_c::get_encoding(byte_order_e byte_order) {
+  if (BO_NONE == byte_order)
+    return {};
+
+  return BO_UTF8     == byte_order ? std::string{"UTF-8"}
+       : BO_UTF16_LE == byte_order ? std::string{"UTF-16LE"}
+       : BO_UTF16_BE == byte_order ? std::string{"UTF-16BE"}
+       : BO_UTF32_LE == byte_order ? std::string{"UTF-32LE"}
+       :                             std::string{"UTF-32BE"};
+}
+
 // 1 byte: 0xxxxxxx,
 // 2 bytes: 110xxxxx 10xxxxxx,
 // 3 bytes: 1110xxxx 10xxxxxx 10xxxxxx

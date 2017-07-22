@@ -283,6 +283,9 @@ public:
   virtual void set_byte_order(byte_order_e byte_order) {
     m_byte_order = byte_order;
   }
+  virtual boost::optional<std::string> get_encoding() const {
+    return get_encoding(m_byte_order);
+  }
 
 protected:
   virtual void detect_eol_style();
@@ -290,6 +293,7 @@ protected:
 public:
   static bool has_byte_order_marker(const std::string &string);
   static bool detect_byte_order_marker(const unsigned char *buffer, unsigned int size, byte_order_e &byte_order, unsigned int &bom_length);
+  static boost::optional<std::string> get_encoding(byte_order_e byte_order);
 };
 
 using mm_text_io_cptr = std::shared_ptr<mm_text_io_c>;
