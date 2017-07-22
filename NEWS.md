@@ -19,9 +19,9 @@
 * mkvmerge: AAC: implemented support for AAC with 960 samples per
   frame. Implements #2031.
 * mkvmerge: WAV reader: added support for Wave64 files. Implements #2042.
-* mkvmerge, mkvpropedit: added support for chapters in WebM files that is
-  spec-compliant by removing all tag elements not supported by the WebM
-  spec. Implements #2002.
+* mkvmerge, mkvpropedit, MKVToolNix GUI (chapter editor): added support for
+  chapters in WebM files that is spec-compliant by removing all tag elements
+  not supported by the WebM spec. Implements #2002.
 * mkvpropedit: added support for tags in WebM files that is spec-compliant by
   removing all tag elements not supported by the WebM spec.
 

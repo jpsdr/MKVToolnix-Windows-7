@@ -577,7 +577,7 @@ Tab::load() {
   d->savedState = currentState();
   auto result   = kax_analyzer_c::probe(to_utf8(d->fileName)) ? loadFromMatroskaFile()
                 : d->fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile()
-                :                                              loadFromChapterFile();
+                :                                               loadFromChapterFile();
 
   if (result.first)
     chaptersLoaded(result.first, result.second);
@@ -705,7 +705,11 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
 
     if (doRequireNewFileName) {
       auto defaultFilePath = !d->fileName.isEmpty() ? QFileInfo{d->fileName}.path() : Util::Settings::get().lastOpenDirPath();
-      newFileName          = Util::getOpenFileName(this, QY("Save chapters to Matroska file"), defaultFilePath, QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") + QY("All files") + Q(" (*)"));
+      newFileName          = Util::getOpenFileName(this, QY("Save chapters to Matroska or WebM file"), defaultFilePath,
+                                                   QY("Supported file types") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") +
+                                                   QY("Matroska files")       + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
+                                                   QY("WebM files")           + Q(" (*.webm);;") +
+                                                   QY("All files")            + Q(" (*)"));
 
       if (newFileName.isEmpty())
         return false;
@@ -727,9 +731,14 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     auto chapters = d->chapterModel->allChapters();
     auto result   = kax_analyzer_c::uer_success;
 
-    if (chapters && (0 != chapters->ListSize()))
-      result = d->analyzer->update_element(chapters, true);
-    else
+    if (chapters && (0 != chapters->ListSize())) {
+      fix_mandatory_chapter_elements(chapters.get());
+      if (d->analyzer->is_webm())
+        remove_chapter_elements_unsupported_by_webm(*chapters);
+
+      result = d->analyzer->update_element(chapters, !d->analyzer->is_webm(), false);
+
+    } else
       result = d->analyzer->remove_elements(EBML_ID(KaxChapters));
 
     d->analyzer->close_file();
