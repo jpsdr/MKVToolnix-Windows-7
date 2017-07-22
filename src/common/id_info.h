@@ -36,6 +36,7 @@ char const * const default_duration                = "default_duration";        
 char const * const default_track                   = "default_track";                   // track boolean
 char const * const display_dimensions              = "display_dimensions";              // track ascii-string format:^\d+x\d+$
 char const * const duration                        = "duration";                        // container unsigned-integer
+char const * const encoding                        = "encoding";                        // track ascii-string
 char const * const enabled_track                   = "enabled_track";                   // track boolean
 char const * const forced_track                    = "forced_track";                    // track boolean
 char const * const language                        = "language";                        // track ascii-string format:^\w{3}$
