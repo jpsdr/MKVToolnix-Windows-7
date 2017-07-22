@@ -13,6 +13,7 @@
 #include <matroska/KaxChapters.h>
 
 #include "common/chapters/chapters.h"
+#include "common/kax_analyzer.h"
 #include "propedit/chapter_target.h"
 
 using namespace libmatroska;
@@ -66,4 +67,19 @@ chapter_target_c::execute() {
   fix_mandatory_chapter_elements(m_level1_element);
   if (!m_level1_element->CheckMandatory())
     mxerror(boost::format(Y("Error parsing the chapters in '%1%': some mandatory elements are missing.\n")) % m_file_name);
+
+  if (m_analyzer->is_webm())
+    remove_chapter_elements_unsupported_by_webm(*m_level1_element);
+}
+
+bool
+chapter_target_c::write_elements_set_to_default_value()
+  const {
+  return !m_analyzer->is_webm();
+}
+
+bool
+chapter_target_c::add_mandatory_elements_if_missing()
+  const {
+  return false;
 }

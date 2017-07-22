@@ -104,3 +104,15 @@ target_c::execute_change(kax_analyzer_c &analyzer) {
   m_analyzer = &analyzer;
   execute();
 }
+
+bool
+target_c::write_elements_set_to_default_value()
+  const {
+  return true;
+}
+
+bool
+target_c::add_mandatory_elements_if_missing()
+  const {
+  return true;
+}

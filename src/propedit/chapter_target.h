@@ -34,6 +34,8 @@ public:
   virtual void dump_info() const override;
 
   virtual bool has_changes() const override;
+  virtual bool write_elements_set_to_default_value() const override;
+  virtual bool add_mandatory_elements_if_missing() const override;
 
   virtual void execute() override;
 };

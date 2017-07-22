@@ -61,6 +61,9 @@ public:
   virtual uint64_t get_track_uid() const;
   virtual EbmlMaster *get_level1_element() const;
 
+  virtual bool write_elements_set_to_default_value() const;
+  virtual bool add_mandatory_elements_if_missing() const;
+
 protected:
   virtual void add_or_replace_all_master_elements(EbmlMaster *source);
 };
