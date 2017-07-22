@@ -24,6 +24,8 @@
   not supported by the WebM spec. Implements #2002.
 * mkvpropedit: added support for tags in WebM files that is spec-compliant by
   removing all tag elements not supported by the WebM spec.
+* translations: added a Romanian translation of the programs by Daniel (see
+  AUTHORS).
 
 ## Bug fixes
 
