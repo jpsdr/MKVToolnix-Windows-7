@@ -2640,8 +2640,10 @@ kax_reader_c::identify() {
       info.add(mtx::id::audio_bits_per_sample,    track->a_bps);
 
     } else if ('s' == track->type) {
-      if (track->codec.is(codec_c::type_e::S_SRT) || track->codec.is(codec_c::type_e::S_SSA_ASS) || track->codec.is(codec_c::type_e::S_KATE))
+      if (track->codec.is(codec_c::type_e::S_SRT) || track->codec.is(codec_c::type_e::S_SSA_ASS) || track->codec.is(codec_c::type_e::S_KATE)) {
         info.add(mtx::id::text_subtitles, true);
+        info.add(mtx::id::encoding, "UTF-8");
+      }
     }
 
     if (track->content_decoder.has_encodings())

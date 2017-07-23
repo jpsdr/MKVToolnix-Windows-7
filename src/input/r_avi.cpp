@@ -167,6 +167,7 @@ avi_reader_c::parse_subtitle_chunks() {
           = srt_parser_c::probe(&text_io) ? avi_subs_demuxer_t::TYPE_SRT
           : ssa_parser_c::probe(&text_io) ? avi_subs_demuxer_t::TYPE_SSA
           :                                 avi_subs_demuxer_t::TYPE_UNKNOWN;
+        demuxer.m_encoding = text_io.get_encoding();
 
         if (avi_subs_demuxer_t::TYPE_UNKNOWN != demuxer.m_type)
           m_subtitle_demuxers.push_back(demuxer);
@@ -893,6 +894,9 @@ avi_reader_c::identify_subtitles() {
     if (   (avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type)
         || (avi_subs_demuxer_t::TYPE_SSA == m_subtitle_demuxers[i].m_type))
       info.add(mtx::id::text_subtitles, true);
+
+    if (m_subtitle_demuxers[i].m_encoding)
+      info.add(mtx::id::encoding, *m_subtitle_demuxers[i].m_encoding);
 
     id_result_track(1 + AVI_audio_tracks(m_avi) + i, ID_RESULT_TRACK_SUBTITLES,
                       avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type ? codec_c::get_name(codec_c::type_e::S_SRT, "SRT")

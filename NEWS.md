@@ -26,6 +26,10 @@
   removing all tag elements not supported by the WebM spec.
 * translations: added a Romanian translation of the programs by Daniel (see
   AUTHORS).
+* mkvmerge: identification: if the encoding/character set of a text subtitle
+  track is known (e.g. because a byte order mark is present in the file), then
+  it will be output during identification as the `encoding`
+  property. Implements mkvmerge's part of #2053.
 
 ## Bug fixes
 

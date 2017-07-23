@@ -734,8 +734,10 @@ ogm_reader_c::identify() {
     if ((0 != sdemuxers[i]->display_width) && (0 != sdemuxers[i]->display_height))
       info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % sdemuxers[i]->display_width % sdemuxers[i]->display_height);
 
-    if (dynamic_cast<ogm_s_text_demuxer_c *>(sdemuxers[i].get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(sdemuxers[i].get()))
+    if (dynamic_cast<ogm_s_text_demuxer_c *>(sdemuxers[i].get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(sdemuxers[i].get())) {
       info.add(mtx::id::text_subtitles, true);
+      info.add(mtx::id::encoding,       "UTF-8");
+    }
 
     auto pixel_dimensions = sdemuxers[i]->get_pixel_dimensions();
     if (pixel_dimensions.first && pixel_dimensions.second)

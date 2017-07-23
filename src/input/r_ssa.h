@@ -23,6 +23,7 @@
 class ssa_reader_c: public generic_reader_c {
 private:
   ssa_parser_cptr m_subs;
+  boost::optional<std::string> m_encoding;
 
 public:
   ssa_reader_c(const track_info_c &ti, const mm_io_cptr &in);

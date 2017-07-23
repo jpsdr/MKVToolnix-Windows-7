@@ -108,6 +108,7 @@ void
 webvtt_reader_c::identify() {
   auto info = mtx::id::info_c{};
   info.add(mtx::id::text_subtitles, true);
+  info.add(mtx::id::encoding,       "UTF-8");
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_WEBVTT, "WebVTT"), info.get());

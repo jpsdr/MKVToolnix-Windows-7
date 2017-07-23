@@ -53,8 +53,9 @@ ssa_reader_c::read_headers() {
                                  : mtx::includes(m_ti.m_sub_charsets, -1) ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
                                  :                                          g_cc_local_utf8;
 
-  m_ti.m_id = 0;
-  m_subs    = ssa_parser_cptr(new ssa_parser_c(this, text_in.get(), m_ti.m_fname, 0));
+  m_ti.m_id  = 0;
+  m_subs     = ssa_parser_cptr(new ssa_parser_c(this, text_in.get(), m_ti.m_fname, 0));
+  m_encoding = text_in->get_encoding();
 
   m_subs->set_charset_converter(cc_utf8);
   m_subs->parse();
@@ -94,7 +95,10 @@ ssa_reader_c::get_progress() {
 void
 ssa_reader_c::identify() {
   auto info = mtx::id::info_c{};
+
   info.add(mtx::id::text_subtitles, true);
+  if (m_encoding)
+    info.add(mtx::id::encoding, *m_encoding);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_SSA_ASS, "SSA/ASS"), info.get());

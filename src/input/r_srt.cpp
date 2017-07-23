@@ -82,8 +82,12 @@ srt_reader_c::get_progress() {
 
 void
 srt_reader_c::identify() {
-  auto info = mtx::id::info_c{};
+  auto info     = mtx::id::info_c{};
+  auto encoding = m_text_in->get_encoding();
+
   info.add(mtx::id::text_subtitles, true);
+  if (encoding)
+    info.add(mtx::id::encoding, *encoding);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_SRT, "SRT"), info.get());
