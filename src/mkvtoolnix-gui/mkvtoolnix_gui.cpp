@@ -27,7 +27,9 @@ registerMetaTypes() {
   qRegisterMetaType<QFileInfoList>("QFileInfoList");
   qRegisterMetaType<mtx_release_version_t>("mtx_release_version_t");
   qRegisterMetaType<std::shared_ptr<pugi::xml_document>>("std::shared_ptr<pugi::xml_document>");
+#if defined(HAVE_UPDATE_CHECK)
   qRegisterMetaType<UpdateCheckStatus>("UpdateCheckStatus");
+#endif  // HAVE_UPDATE_CHECK
   qRegisterMetaType<Util::InstallationChecker::Problems>("Util::InstallationChecker::Problems");
 }
 

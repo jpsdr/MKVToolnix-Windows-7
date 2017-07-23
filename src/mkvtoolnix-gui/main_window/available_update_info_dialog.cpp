@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#if defined(HAVE_UPDATE_CHECK)
+
 #include <QDesktopServices>
 #include <QUrl>
 #include <QUrlQuery>
@@ -197,3 +199,5 @@ AvailableUpdateInfoDialog::visitDownloadLocation() {
 }
 
 }}
+
+#endif  // HAVE_UPDATE_CHECK

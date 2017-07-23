@@ -4,6 +4,7 @@
 #include <QThread>
 
 #include "common/qt.h"
+#include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"

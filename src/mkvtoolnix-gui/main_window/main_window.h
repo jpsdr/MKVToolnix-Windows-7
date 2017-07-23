@@ -88,8 +88,10 @@ public slots:
   virtual void setToolSelectorVisibility();
   virtual void raiseAndActivate();
 
+#if defined(HAVE_UPDATE_CHECK)
   virtual void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);
   virtual void checkForUpdates();
+#endif  // HAVE_UPDATE_CHECK
 
   virtual void displayInstallationProblems(Util::InstallationChecker::Problems const &problems);
 
@@ -106,7 +108,9 @@ public:                         // static
   static Jobs::Tool *jobTool();
   static WatchJobs::Tab *watchCurrentJobTab();
   static WatchJobs::Tool *watchJobTool();
+#if defined(HAVE_UPDATE_CHECK)
   static QString versionStringForSettings(version_number_t const &version);
+#endif  // HAVE_UPDATE_CHECK
 
   static QIcon const & yesIcon();
   static QIcon const & noIcon();
@@ -123,7 +127,9 @@ protected:
 
   virtual boost::optional<bool> filterWheelEventForStrongFocus(QObject *watched, QEvent *event);
 
+#if defined(HAVE_UPDATE_CHECK)
   virtual void silentlyCheckForUpdates();
+#endif  // HAVE_UPDATE_CHECK
   virtual void runCacheCleanupOncePerVersion() const;
 
   virtual std::pair<ToolBase *, QTabWidget *> currentSubWindowWidget();

@@ -97,7 +97,11 @@ MainWindow::MainWindow(QWidget *parent)
 
   jobTool()->loadAndStart();
 
+#if defined(HAVE_UPDATE_CHECK)
   silentlyCheckForUpdates();
+#else
+  d->ui->actionHelpCheckForUpdates->setVisible(false);
+#endif  // HAVE_UPDATE_CHECK
 
 #if defined(SYS_WINDOWS)
   new TaskbarProgress{this};
@@ -165,7 +169,9 @@ MainWindow::setupMenu() {
 
   connect(this,                                   &MainWindow::preferencesChanged, this, &MainWindow::setToolSelectorVisibility);
 
+#if defined(HAVE_UPDATE_CHECK)
   connect(d->ui->actionHelpCheckForUpdates,       &QAction::triggered,             this, &MainWindow::checkForUpdates);
+#endif  // HAVE_UPDATE_CHECK
 }
 
 void
@@ -446,6 +452,7 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
   emit preferencesChanged();
 }
 
+#if defined(HAVE_UPDATE_CHECK)
 void
 MainWindow::checkForUpdates() {
   AvailableUpdateInfoDialog dlg{this};
@@ -501,6 +508,7 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
   AvailableUpdateInfoDialog dlg{this};
   dlg.exec();
 }
+#endif  // HAVE_UPDATE_CHECK
 
 void
 MainWindow::showIconMovingToTool(QString const &pixmapName,

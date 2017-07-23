@@ -1,3 +1,12 @@
+# Version ?
+
+## Build system changes
+
+* configure: added option `--disable-update-check`. If given, the code
+  checking online for available updates will be disabled. The update check is
+  enabled and included in the GUI by default.
+
+
 # Version 14.0.0 "Flow" 2017-07-23
 
 ## New features and enhancements

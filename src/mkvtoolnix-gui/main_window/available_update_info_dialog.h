@@ -3,6 +3,8 @@
 
 #include "common/common_pch.h"
 
+#if defined(HAVE_UPDATE_CHECK)
+
 #include <QDialog>
 
 #include "common/version.h"
@@ -48,5 +50,7 @@ protected:
 };
 
 }}
+
+#endif  // HAVE_UPDATE_CHECK
 
 #endif  // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_AVAILABLE_UPDATE_INFO_DIALOG_H

@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#if defined(HAVE_UPDATE_CHECK)
+
 #include <QDebug>
 #include <QUrl>
 #include <QVector>
@@ -143,3 +145,5 @@ UpdateChecker::parseXml(QByteArray const &content) {
 }
 
 }}
+
+#endif  // HAVE_UPDATE_CHECK
