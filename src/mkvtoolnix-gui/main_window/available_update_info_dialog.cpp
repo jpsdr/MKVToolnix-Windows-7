@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
 #include <QDesktopServices>
+#include <QUrl>
+#include <QUrlQuery>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h"
@@ -99,6 +101,23 @@ AvailableUpdateInfoDialog::updateStatusDisplay() {
   }
 }
 
+QString
+AvailableUpdateInfoDialog::formattedCodename(QString const &codename,
+                                             QString const &artist) {
+  auto codenameQ = codename.toHtmlEscaped();
+
+  if (codename.isEmpty() || artist.isEmpty())
+    return codenameQ;
+
+  auto url   = QUrl{Q("https://www.youtube.com/results")};
+  auto query = QUrlQuery{};
+
+  query.addQueryItem(Q("search_query"), Q("%1 %2").arg(artist).arg(codename));
+  url.setQuery(query);
+
+  return Q("<a href=\"%1\">%2</a>").arg(url.toString(QUrl::FullyEncoded)).arg(codenameQ);
+}
+
 void
 AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   if (!m_releasesInfo) {
@@ -124,8 +143,10 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   for (auto &release : releases) {
     auto versionStr    = std::string{release.node().attribute("version").value()};
     auto versionStrQ   = Q(versionStr).toHtmlEscaped();
-    auto codenameQ     = Q(release.node().attribute("codename").value()).toHtmlEscaped();
-    auto heading       = !codenameQ.isEmpty() ? QY("Version %1 \"%2\"").arg(versionStrQ).arg(codenameQ) : QY("Version %1").arg(versionStrQ);
+    auto artist        = Q(release.node().attribute("codename-artist").value());
+    auto codename      = Q(release.node().attribute("codename").value());
+    auto codenameQ     = formattedCodename(codename, artist);
+    auto heading       = !codename.isEmpty() ? QY("Version %1 \"%2\"").arg(versionStrQ).arg(codenameQ) : QY("Version %1").arg(versionStrQ);
     auto currentTypeQ  = QString{};
     auto inList        = false;
 
