@@ -126,7 +126,10 @@ Track::setDefaults() {
   m_cropping                   = m_properties.value("cropping").toString();
   m_aacSbrWasDetected          = m_properties.value("aac_is_sbr").toString().contains(QRegExp{"1|true"});
   m_stereoscopy                = m_properties.contains("stereo_mode") ? m_properties.value("stereo_mode").toUInt() + 1 : 0;
-  m_characterSet               = m_properties.value("text_subtitles").toBool() && m_file && (m_file->m_type != FILE_TYPE_MATROSKA) ? settings.m_defaultSubtitleCharset : Q("");
+  auto encoding                = m_properties.value(Q("encoding")).toString();
+  m_characterSet               = !encoding.isEmpty()   ? encoding
+                               : canChangeSubCharset() ? settings.m_defaultSubtitleCharset
+                               :                         Q("");
 
   auto language = m_properties.value("language").toString();
   if (   language.isEmpty()
@@ -312,7 +315,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
       opt.options << Q("--cropping") << Q("%1:%2").arg(sid).arg(m_cropping);
 
   } else if (isSubtitles()) {
-    if (!m_characterSet.isEmpty())
+    if (canChangeSubCharset() && !m_characterSet.isEmpty())
       opt.options << Q("--sub-charset") << Q("%1:%2").arg(sid).arg(m_characterSet);
 
   } else if (isChapters()) {
@@ -405,6 +408,14 @@ Track::nameForType()
        : isTags()       ? QY("Tags")
        : isGlobalTags() ? QY("Global tags")
        :                   Q("INTERNAL ERROR");
+}
+
+bool
+Track::canChangeSubCharset()
+  const {
+  return isSubtitles()
+      && m_properties.value(Q("text_subtitles")).toBool()
+      && m_properties.value(Q("encoding")).toString().isEmpty();
 }
 
 }}}

@@ -614,7 +614,7 @@ Tab::onTrackSelectionChanged() {
 
   else if (track->isSubtitles()) {
     Util::enableWidgets(m_subtitleControls, true);
-    if (track->m_file->m_type == FILE_TYPE_MATROSKA)
+    if (!track->canChangeSubCharset())
       Util::enableWidgets(QList<QWidget *>{} << ui->characterSetLabel << ui->subtitleCharacterSet, false);
 
     else if (track->m_file->isTextSubtitleContainer())
@@ -1042,7 +1042,7 @@ Tab::onSubtitleCharacterSetChanged(int newValue) {
     return;
 
   withSelectedTracks([characterSet](auto &track) {
-    if (track.m_file->m_type != FILE_TYPE_MATROSKA)
+    if (track.canChangeSubCharset())
       track.m_characterSet = characterSet;
   }, true);
 }

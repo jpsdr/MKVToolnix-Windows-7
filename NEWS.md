@@ -30,6 +30,16 @@
   track is known (e.g. because a byte order mark is present in the file), then
   it will be output during identification as the `encoding`
   property. Implements mkvmerge's part of #2053.
+* MKVToolNix GUI: multiplexer: if the encoding/character set of a subtitle
+  track cannot be changed, the GUI will deactivate the "subtitle character
+  set" drop-down box and ignore changes to it when multiple tracks are
+  selected. Additionally, if the track's encoding is known and cannot be
+  changed (e.g. due to a byte order mark in the file), that encoding will be
+  selected in the drop-down box automatically. Both changes signal to the user
+  that she doesn't have to take care of the encoding herself. Implements the
+  GUI's part of
+  #2053.
+
 
 ## Bug fixes
 
