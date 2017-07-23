@@ -2,6 +2,30 @@
 
 ## New features and enhancements
 
+* mkvmerge: AAC: implemented support for AAC with 960 samples per
+  frame. Implements #2031.
+* mkvmerge: identification: if the encoding/character set of a text subtitle
+  track is known (e.g. because a byte order mark is present in the file), then
+  it will be output during identification as the `encoding`
+  property. Implements mkvmerge's part of #2053.
+* mkvmerge: WAV reader: added support for Wave64 files. Implements #2042.
+* mkvmerge, mkvpropedit, MKVToolNix GUI (chapter editor): added support for
+  chapters in WebM files that is spec-compliant by removing all tag elements
+  not supported by the WebM spec. Implements #2002.
+* mkvpropedit: added support for tags in WebM files that is spec-compliant by
+  removing all tag elements not supported by the WebM spec.
+* MKVToolNix GUI: multiplexer: if the encoding/character set of a subtitle
+  track cannot be changed, the GUI will deactivate the "subtitle character
+  set" drop-down box and ignore changes to it when multiple tracks are
+  selected. Additionally, if the track's encoding is known and cannot be
+  changed (e.g. due to a byte order mark in the file), that encoding will be
+  selected in the drop-down box automatically. Both changes signal to the user
+  that she doesn't have to take care of the encoding herself. Implements the
+  GUI's part of
+  #2053.
+* MKVToolNix GUI: chapter editor: added a function to the "additional
+  modifications" dialog for calculating and setting the end
+  timestamps. Implements #1887.
 * MKVToolNix GUI: changed the shortcuts for switching between the various
   tools from `Alt+number` (e.g. `Alt+1` for the multiplexer tool) to
   `Ctrl+Alt+number` in order to avoid clashing with Windows' input method for
@@ -13,41 +37,12 @@
 * MKVToolNix GUI: on Windows the GUI will now determine the default font to
   use by querying Windows for the default UI/message box font instead of using
   the hardcoded `Segoe UI`. This might fix issues such as #2003 (unverified).
-* MKVToolNix GUI: chapter editor: added a function to the "additional
-  modifications" dialog for calculating and setting the end
-  timestamps. Implements #1887.
-* mkvmerge: AAC: implemented support for AAC with 960 samples per
-  frame. Implements #2031.
-* mkvmerge: WAV reader: added support for Wave64 files. Implements #2042.
-* mkvmerge, mkvpropedit, MKVToolNix GUI (chapter editor): added support for
-  chapters in WebM files that is spec-compliant by removing all tag elements
-  not supported by the WebM spec. Implements #2002.
-* mkvpropedit: added support for tags in WebM files that is spec-compliant by
-  removing all tag elements not supported by the WebM spec.
 * translations: added a Romanian translation of the programs by Daniel (see
   AUTHORS).
-* mkvmerge: identification: if the encoding/character set of a text subtitle
-  track is known (e.g. because a byte order mark is present in the file), then
-  it will be output during identification as the `encoding`
-  property. Implements mkvmerge's part of #2053.
-* MKVToolNix GUI: multiplexer: if the encoding/character set of a subtitle
-  track cannot be changed, the GUI will deactivate the "subtitle character
-  set" drop-down box and ignore changes to it when multiple tracks are
-  selected. Additionally, if the track's encoding is known and cannot be
-  changed (e.g. due to a byte order mark in the file), that encoding will be
-  selected in the drop-down box automatically. Both changes signal to the user
-  that she doesn't have to take care of the encoding herself. Implements the
-  GUI's part of
-  #2053.
 
 
 ## Bug fixes
 
-* mkvmerge: MPEG TS reader: mkvmerge won't emit warnings if the system's
-  `iconv` library doesn't support the ISO 6937 character set. Fixes #2023.
-* MKVToolNix GUI: multiplex tool: implemented a workaround for a crash that
-  could occur during drag & drop if at least one of the columns is
-  hidden. Fixes #2009.
 * mkvmerge: AVC/h.264 parser: fixed wrong frame order & timestamp calculation
   in certain situations when SPS (sequence parameter sets) or PPS (picture
   parameter sets) change mid-stream. Fixes #2028.
@@ -55,15 +50,6 @@
   in certain situations when SPS (sequence parameter sets) or PPS (picture
   parameter sets) change mid-stream. This is the HEVC/h.265 equivalent of
   #2028.
-* MKVToolNix GUI: fixed the total progress reverting to 0% instead of staying
-  at 100% when all jobs have finished. This was introduced by the attempt at
-  fixing the computation of the value of total progress bar for multiple jobs
-  running. Fixes #2005.
-* mkvmerge: MPEG PS reader: fixed mkvmerge trying to handle an "end" code the
-  same way as a "program stream map" code.
-* MKVToolNix GUI: multiplex tool: appended tracks can no longer be enabled
-  (selected for multiplexing) if the track they're going to be appended to is
-  not enabled. Fixes #2039.
 * mkvmerge: MPEG-1/-2 video: the "remove stuffing bytes" feature introduced in
   v5.8.0 (feature request #734) was broken. In a lot of situations it did not
   detect the end of a slice correctly and removed 0 bytes that were actually
@@ -72,11 +58,25 @@
   artifacts upon decoding. As detecting the slice end properly requires
   parsing the whole slice structure, this feature has been removed
   again. Fixes #2045.
+* mkvmerge: MPEG PS reader: fixed mkvmerge trying to handle an "end" code the
+  same way as a "program stream map" code.
+* mkvmerge: MPEG TS reader: mkvmerge won't emit warnings if the system's
+  `iconv` library doesn't support the ISO 6937 character set. Fixes #2023.
 * mkvmerge: when appending fails the error message details (e.g. "the number
   of channels differs: 1 and 2") were often not output. Fixes #2046.
-* MKVToolNix GUI: multiplexer: if the GUI is set to ensure unique output file
-  names, it will now verify that right before starting to multiplex/adding the
-  job to the queue, too. Fixes #2052.
+* MKVToolNix GUI: multiplex tool: implemented a workaround for a crash that
+  could occur during drag & drop if at least one of the columns is
+  hidden. Fixes #2009.
+* MKVToolNix GUI: multiplex tool: appended tracks can no longer be enabled
+  (selected for multiplexing) if the track they're going to be appended to is
+  not enabled. Fixes #2039.
+* MKVToolNix GUI: multiplex tool: if the GUI is set to ensure unique output
+  file names, it will now verify that right before starting to
+  multiplex/adding the job to the queue, too. Fixes #2052.
+* MKVToolNix GUI: fixed the total progress reverting to 0% instead of staying
+  at 100% when all jobs have finished. This was introduced by the attempt at
+  fixing the computation of the value of total progress bar for multiple jobs
+  running. Fixes #2005.
 * configure: fixed DocBook detection if `/bin/sh` is `dash`. Patch by Steve
   Dibb. Fixes #2054.
 
