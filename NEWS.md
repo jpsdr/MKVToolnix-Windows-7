@@ -1,5 +1,15 @@
 # Version ?
 
+## Bug fixes
+
+* MKVToolNix GUI: removed the keyboard shortcuts for switching between the
+  different tools (e.g. `Ctrl+Alt+1` for the multiplexer). They overlapped
+  with basic functionality on keyboards that use an `AltGr` key, e.g. German
+  ones, where `AltGr+7` emits `{`. As `AltGr+key` is implemented as
+  `Ctrl+Alt+key` under the hood, this means that `AltGr+7` is really
+  `Ctrl+Alt+7` which the GUI now took to mean "switch to the job queue"
+  instead of "insert `{`". Fixes #2056.
+
 ## Build system changes
 
 * configure: added option `--disable-update-check`. If given, the code
