@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-07-22 14:52+0200\n"
-"PO-Revision-Date: 2017-07-07 21:49+0000\n"
+"PO-Revision-Date: 2017-07-25 21:16+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -1491,9 +1491,8 @@ msgid "&Command line:"
 msgstr "&Línea de comandos:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
-#, fuzzy
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "&Estrechar el código de tiempo inicial y final de los subcapítulos con respecto al código de tiempo inicial y final de los capítulos."
+msgstr "&Estrechar las marcas de de tiempo inicial y final de los subcapítulos con respecto a las marcas de tiempo inicial y final de los capítulos."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:545
 msgid "&Copy command line to clipboard"
@@ -1662,9 +1661,8 @@ msgid "&Multiplexer"
 msgstr "&Multiplexador"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
-#, fuzzy
 msgid "&Multiply start and end timestamps by the following factor:"
-msgstr "&Multiplicar, por el siguiente factor, el código de tiempo inicial y final:"
+msgstr "&Multiplicar las marcas de tiempo inicial y final por el siguiente factor:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
@@ -1727,9 +1725,8 @@ msgid "&Open Matroska or chapter file"
 msgstr "&Abrir un archivo Matroska o de capítulos"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:570
-#, fuzzy
 msgid "&Open Matroska, WebM or chapter file"
-msgstr "&Abrir un archivo Matroska o de capítulos"
+msgstr "&Abrir un archivo Matroska, WebM o de capítulos"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:119
 msgid "&Open as new tabs in the header editor"
@@ -1892,9 +1889,8 @@ msgid "&Skip file"
 msgstr "&Saltar archivo"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
-#, fuzzy
 msgid "&Sort chapters by their start and end timestamps"
-msgstr "&Ordenar capítulos según su código de tiempo inicial y final"
+msgstr "&Ordenar capítulos según sus marcas de tiempo inicial y final"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
 msgid "&Start && end:"
@@ -1908,9 +1904,8 @@ msgstr[0] "&Iniciar tarea automáticamente"
 msgstr[1] "&Iniciar tareas automáticamente"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
-#, fuzzy
 msgid "&Start timestamp of first created entry:"
-msgstr "&Código de tiempo inicial del primer registro creado:"
+msgstr "&Marca de tiempo inicial del primer registro creado:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1343
 msgid "&Subtitle tracks:"
@@ -3543,9 +3538,8 @@ msgid "C&onfiguration active"
 msgstr "C&onfiguración activa"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
-#, fuzzy
 msgid "C&onstrict or expand timestamps"
-msgstr "&Reducir o ampliar códigos de tiempo"
+msgstr "&Reducir o ampliar marcas de tiempo"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
 msgid "C&opy to clipboard"
@@ -4589,7 +4583,7 @@ msgstr "Dependiendo de la siguiente configuración, este idioma también se pued
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Derive &end timestamps from start timestamps"
-msgstr ""
+msgstr "Deducir marcas de tiempo &finales a partir de las iniciales."
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4882,9 +4876,8 @@ msgid "E&xit"
 msgstr "S&alir"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
-#, fuzzy
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
-msgstr "&Expandir los códigos de tiempo de inicio y fin del capítulo para incluir los máximos/mínimos códigos de tiempo de todos sus sub-capítulos"
+msgstr "&Expandir las marcas de tiempo de inicio y fin del capítulo para incluir las máximas/mínimas marcas de tiempo de todos sus sub-capítulos"
 
 #: src/info/mkvinfo.cpp:1658
 msgid "EBML head"
@@ -5511,7 +5504,7 @@ msgstr "Para los archivos que aun sin contener una pista de video tengan al meno
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
-msgstr ""
+msgstr "Para la mayoría de entradas, la marca de tiempo inicial más pequeña de todos los capítulos del mismo nivel y mayor a la marca de tiempo inicial del capítulo actual, será usada como su marca de tiempo final."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:504
 msgid "For such files you can use this parameter and decrease the size to 2."
@@ -6020,7 +6013,7 @@ msgstr "Si se utiliza el formato OGM y el código de caracteres del archivo no e
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
-msgstr ""
+msgstr "Si los capítulos fueron cargados a partir de un archivo Matroska, la marca de tiempo final del último capítulo del nivel superior se deducirá de la duración del archivo."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
 #, no-c-format
@@ -6035,7 +6028,7 @@ msgstr "Si el número tiene un sufijo 'ms' entonces asigna como mínimo 'n' mili
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
-msgstr ""
+msgstr "Si no hay un capítulo de este tipo, se utilizará la marca de tiempo final del capítulo padre."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #, no-c-format
@@ -8518,9 +8511,8 @@ msgid "Running jobs cannot be removed."
 msgstr "Las tareas en ejecución no se pueden eliminar."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
-#, fuzzy
 msgid "S&hift start and end timestamps by the following amount:"
-msgstr "Desplazar, con la siguiente cantidad, el código de tiempo inicial y final:"
+msgstr "De&splazar las marcas de tiempo inicial y final por la siguiente cantidad:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:544
 msgid "S&how command line"
@@ -8587,9 +8579,9 @@ msgid "Save chapters as XML"
 msgstr "Guardar capítulos en formato XML"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:708
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save chapters to Matroska or WebM file"
-msgstr "Guardar capítulos en el archivo Matroska"
+msgstr "Guardar capítulos en el archivo Matroska o WebM"
 
 #: src/info/qt_ui.cpp:94
 #, no-c-format
@@ -8612,9 +8604,8 @@ msgid "Save settings file as"
 msgstr "Guardar archivo de opciones como"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:583
-#, fuzzy
 msgid "Save to &Matroska or WebM file"
-msgstr "Guardar como archivo &Matroska"
+msgstr "Guardar como archivo &Matroska o WebM"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:681
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:685
@@ -9861,9 +9852,9 @@ msgid "The end time could not be parsed: %1"
 msgstr "El tiempo final no se puede analizar: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:850
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The end time must be greater than the start time."
-msgstr "El tiempo del fin debe ser mayor que el tiempo inicial del código de tiempo."
+msgstr "El tiempo del fin debe ser mayor que el tiempo inicial."
 
 #: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
