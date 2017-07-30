@@ -738,7 +738,7 @@ PreferencesDialog::enableOutputFileNameControls() {
   bool relativeSelected = ui->rbMAutoSetRelativeDirectory->isChecked();
   bool fixedSelected    = ui->rbMAutoSetFixedDirectory->isChecked();
 
-  Util::enableWidgets(QList<QWidget *>{} << ui->rbMAutoSetSameDirectory  << ui->rbMAutoSetPreviousDirectory << ui->rbMAutoSetRelativeDirectory << ui->rbMAutoSetFixedDirectory << ui->cbMUniqueOutputFileNames, isChecked);
+  Util::enableWidgets(QList<QWidget *>{} << ui->gbDestinationDirectory   << ui->cbMUniqueOutputFileNames,       isChecked);
   Util::enableWidgets(QList<QWidget *>{} << ui->leMAutoSetFixedDirectory << ui->pbMBrowseAutoSetFixedDirectory, isChecked && fixedSelected);
   ui->leMAutoSetRelativeDirectory->setEnabled(isChecked && relativeSelected);
 }
