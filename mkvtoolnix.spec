@@ -23,7 +23,7 @@ BuildRequires: gettext-devel, qt5-qtbase-devel, qt5-qtmultimedia-devel, libxslt,
 %endif
 
 %if 0%{?suse_version}
-BuildRequires: gcc6-c++
+BuildRequires: gcc7-c++
 %endif
 
 %if 0%{?fedora}
@@ -60,8 +60,8 @@ export CXX=/opt/rh/devtoolset-6/root/bin/g++
 %endif
 
 %if 0%{?suse_version}
-export CC=/usr/bin/gcc-6
-export CXX=/usr/bin/g++-6
+export CC=/usr/bin/gcc-7
+export CXX=/usr/bin/g++-7
 %endif
 
 %configure \
