@@ -261,6 +261,8 @@ Tab::setupInputControls() {
   m_filesMenu->addAction(m_removeFilesAction);
   m_filesMenu->addAction(m_removeAllFilesAction);
   m_filesMenu->addSeparator();
+  m_filesMenu->addAction(m_setDestinationFileNameAction);
+  m_filesMenu->addSeparator();
   m_filesMenu->addAction(m_openFilesInMediaInfoAction);
   m_filesMenu->addSeparator();
   m_filesMenu->addAction(m_selectTracksFromFilesAction);
@@ -382,6 +384,7 @@ Tab::setupInputControls() {
   connect(m_addAdditionalPartsAction2,      &QAction::triggered,                                                                              this,                     &Tab::onAddAdditionalParts);
   connect(m_removeFilesAction,              &QAction::triggered,                                                                              this,                     &Tab::onRemoveFiles);
   connect(m_removeAllFilesAction,           &QAction::triggered,                                                                              this,                     &Tab::onRemoveAllFiles);
+  connect(m_setDestinationFileNameAction,   &QAction::triggered,                                                                              this,                     &Tab::setDestinationFileNameFromSelectedFile);
   connect(m_openFilesInMediaInfoAction,     &QAction::triggered,                                                                              this,                     &Tab::onOpenFilesInMediaInfo);
   connect(m_openTracksInMediaInfoAction,    &QAction::triggered,                                                                              this,                     &Tab::onOpenTracksInMediaInfo);
 
@@ -1343,6 +1346,7 @@ Tab::enableFilesActions() {
   m_addAdditionalPartsAction2->setEnabled(1 == numSelected);
   m_removeFilesAction->setEnabled(0 < numSelected);
   m_removeAllFilesAction->setEnabled(!m_config.m_files.isEmpty());
+  m_setDestinationFileNameAction->setEnabled(1 == numSelected);
   m_openFilesInMediaInfoAction->setEnabled(0 < numSelected);
   m_selectTracksFromFilesAction->setEnabled(0 < numSelected);
 
@@ -1386,6 +1390,8 @@ Tab::retranslateInputUI() {
   m_addAdditionalPartsAction2->setText(QY("Add files as a&dditional parts"));
 
   m_removeAllFilesAction->setText(QY("Remove a&ll files"));
+
+  m_setDestinationFileNameAction->setText(QY("Set destination &file name from selected file's name"));
 
   m_selectAllTracksAction->setText(QY("&Select all items"));
   m_selectTracksOfTypeMenu->setTitle(QY("Select all tracks of specific &type"));
@@ -1487,18 +1493,21 @@ Tab::suggestOutputFileNameExtension()
 }
 
 void
-Tab::setOutputFileNameMaybe() {
+Tab::setOutputFileNameMaybe(bool force) {
   auto &settings = Util::Settings::get();
   auto policy    = settings.m_outputFileNamePolicy;
 
-  if ((Util::Settings::DontSetOutputFileName == policy) || m_config.m_firstInputFileName.isEmpty())
+  if (   !force
+      && (   (Util::Settings::DontSetOutputFileName == policy)
+          || m_config.m_firstInputFileName.isEmpty()))
     return;
 
   auto currentOutput = ui->output->text();
   QDir outputDir;
 
   // Don't override custom changes to the destination file name.
-  if (   !currentOutput.isEmpty()
+  if (   !force
+      && !currentOutput.isEmpty()
       && !m_config.m_destinationAuto.isEmpty()
       && (QDir::toNativeSeparators(currentOutput) != QDir::toNativeSeparators(m_config.m_destinationAuto)))
     return;
@@ -1509,11 +1518,12 @@ Tab::setOutputFileNameMaybe() {
   else if (Util::Settings::ToFixedDirectory == policy)
     outputDir = settings.m_fixedOutputDir;
 
-  else if (Util::Settings::ToSameAsFirstInputFile == policy)
-    outputDir = QFileInfo{m_config.m_firstInputFileName}.absoluteDir();
-
   else if (Util::Settings::ToRelativeOfFirstInputFile == policy)
     outputDir = QDir{ QFileInfo{m_config.m_firstInputFileName}.absoluteDir().path() + Q("/") + settings.m_relativeOutputDir.path() };
+
+  else if (   (Util::Settings::ToSameAsFirstInputFile == policy)
+           || force)
+    outputDir = QFileInfo{m_config.m_firstInputFileName}.absoluteDir();
 
   else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested destination file name policy");
@@ -1538,6 +1548,18 @@ Tab::setOutputFileNameMaybe() {
 
     ++idx;
   }
+}
+
+void
+Tab::setDestinationFileNameFromSelectedFile() {
+  auto selectedFiles = selectedSourceFiles();
+  if (selectedFiles.isEmpty())
+    return;
+
+  m_config.m_destinationAuto.clear();
+  m_config.m_firstInputFileName = QDir::toNativeSeparators(selectedFiles[0]->m_fileName);
+
+  setOutputFileNameMaybe(true);
 }
 
 void

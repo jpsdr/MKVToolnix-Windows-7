@@ -1,5 +1,15 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplex tool: added a new entry to the "source files"
+  context menu labeled "Set destination file name from selected file's
+  name". It will force the GUI to consider the selected file to be the
+  reference for automatically setting the file name, no matter which file was
+  originally added as the first file. It will also force setting the
+  destination file name once if automatic destination file name generation is
+  turned off in the preferences. Implements part of #2058.
+
 ## Bug fixes
 
 * MKVToolNix GUI: removed the keyboard shortcuts for switching between the

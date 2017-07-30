@@ -50,6 +50,7 @@ Tab::Tab(QWidget *parent)
   , m_addAdditionalPartsAction2{new QAction{this}}
   , m_removeFilesAction{new QAction{this}}
   , m_removeAllFilesAction{new QAction{this}}
+  , m_setDestinationFileNameAction{new QAction{this}}
   , m_selectAllTracksAction{new QAction{this}}
   , m_enableAllTracksAction{new QAction{this}}
   , m_disableAllTracksAction{new QAction{this}}

@@ -54,7 +54,7 @@ protected:
   bool m_currentlySettingInputControlValues;
 
   QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_addFilesAction2, *m_appendFilesAction2, *m_addAdditionalPartsAction2;
-  QAction *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
+  QAction *m_removeFilesAction, *m_removeAllFilesAction, *m_setDestinationFileNameAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
   QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction, *m_selectTracksFromFilesAction;
   QAction *m_enableAllAttachedFilesAction, *m_disableAllAttachedFilesAction, *m_enableSelectedAttachedFilesAction, *m_disableSelectedAttachedFilesAction;
   QAction *m_startMuxingLeaveAsIs, *m_startMuxingCreateNewSettings, *m_startMuxingCloseSettings, *m_startMuxingRemoveInputFiles;
@@ -165,6 +165,7 @@ public slots:
   virtual void onCopyFirstFileNameToTitle();
   virtual void onCopyOutputFileNameToTitle();
   virtual void onCopyTitleToOutputFileName();
+  virtual void setDestinationFileNameFromSelectedFile();
 
   virtual void addToJobQueue(bool startNow, boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings = boost::none);
 
@@ -327,7 +328,7 @@ protected:
   virtual void setTitleMaybe(QList<SourceFilePtr> const &files);
   virtual void setTitleMaybe(QString const &title);
 
-  virtual void setOutputFileNameMaybe();
+  virtual void setOutputFileNameMaybe(bool force = false);
   virtual QString suggestOutputFileNameExtension() const;
 
   virtual void enableDisableAllTracks(bool enable);
