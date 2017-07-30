@@ -9,6 +9,11 @@
   originally added as the first file. It will also force setting the
   destination file name once if automatic destination file name generation is
   turned off in the preferences. Implements part of #2058.
+* MKVToolNix GUI: multiplex tool: added an option in the preferences on
+  "Multiplexer" → "Output" labeled "Only use the first source file that
+  contains a video track". If enabled, only source files containing video
+  tracks will be used for setting the destination file name. Other files that
+  are added are ignore. Implements the rest of #2058.
 
 ## Bug fixes
 

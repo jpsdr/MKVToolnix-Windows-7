@@ -115,6 +115,7 @@ public:
   static void loadProperties(Util::ConfigFile &settings, QVariantMap &properties);
   static void debugDumpSpecificTrackList(QList<Track *> const &tracks);
   static QString settingsType();
+  static QString determineFirstInputFileName(QList<SourceFilePtr> const &files);
 };
 
 template<typename T>

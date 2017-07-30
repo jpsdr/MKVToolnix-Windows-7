@@ -179,6 +179,18 @@ MuxConfig::load(QString const &fileName) {
   m_configFileName = fileNameToOpen;
 }
 
+QString
+MuxConfig::determineFirstInputFileName(QList<SourceFilePtr> const &files) {
+  if (files.isEmpty())
+    return QString{};
+
+  if (!Util::Settings::get().m_autoDestinationOnlyForVideoFiles)
+    return files[0]->m_fileName;
+
+  auto itr = brng::find_if(files, [](auto const &file) { return file->hasVideoTrack(); });
+  return itr != files.end() ? (*itr)->m_fileName : QString{};
+}
+
 void
 MuxConfig::load(Util::ConfigFile &settings) {
   reset();
@@ -230,10 +242,7 @@ MuxConfig::load(Util::ConfigFile &settings) {
     m_tracks << track;
   }
 
-  auto value           = settings.value("firstInputFileName");
-  m_firstInputFileName = value.isValid()    ? value.toString()
-                       : !m_files.isEmpty() ? m_files[0]->m_fileName
-                       :                      QString{};
+  m_firstInputFileName = settings.value("firstInputFileName", determineFirstInputFileName(m_files)).toString();
   m_firstInputFileName = QDir::toNativeSeparators(m_firstInputFileName);
 
   settings.endGroup();

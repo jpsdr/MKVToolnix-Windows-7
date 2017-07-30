@@ -254,6 +254,7 @@ Settings::load() {
   m_headerEditorDroppedFilesPolicy     = static_cast<HeaderEditorDroppedFilesPolicy>(reg.value("headerEditorDroppedFilesPolicy", static_cast<int>(HeaderEditorDroppedFilesPolicy::Ask)).toInt());
 
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
+  m_autoDestinationOnlyForVideoFiles   = reg.value("autoDestinationOnlyForVideoFiles", false).toBool();
   m_relativeOutputDir                  = QDir{reg.value("relativeOutputDir").toString()};
   m_fixedOutputDir                     = QDir{reg.value("fixedOutputDir").toString()};
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",   true).toBool();
@@ -498,6 +499,7 @@ Settings::save()
   reg.setValue("headerEditorDroppedFilesPolicy",     static_cast<int>(m_headerEditorDroppedFilesPolicy));
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
+  reg.setValue("autoDestinationOnlyForVideoFiles",   m_autoDestinationOnlyForVideoFiles);
   reg.setValue("relativeOutputDir",                  m_relativeOutputDir.path());
   reg.setValue("fixedOutputDir",                     m_fixedOutputDir.path());
   reg.setValue("uniqueOutputFileNames",              m_uniqueOutputFileNames);

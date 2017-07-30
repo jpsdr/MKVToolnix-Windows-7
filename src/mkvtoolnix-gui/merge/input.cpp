@@ -1175,9 +1175,6 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
 
   setDefaultsFromSettingsForAddedFiles(identifiedFiles);
 
-  if (m_config.m_firstInputFileName.isEmpty())
-    m_config.m_firstInputFileName = identifiedFiles[0]->m_fileName;
-
   m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
 
   if (m_debugTrackModel) {
@@ -1187,6 +1184,9 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
   }
 
   reinitFilesTracksControls();
+
+  if (m_config.m_firstInputFileName.isEmpty())
+    m_config.m_firstInputFileName = m_config.determineFirstInputFileName(identifiedFiles);
 
   setTitleMaybe(identifiedFiles);
   setOutputFileNameMaybe();

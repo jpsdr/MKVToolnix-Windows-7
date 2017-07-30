@@ -142,6 +142,7 @@ public:
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
+  bool m_autoDestinationOnlyForVideoFiles;
   QDir m_relativeOutputDir, m_fixedOutputDir;
   bool m_uniqueOutputFileNames, m_autoClearOutputFileName;
 

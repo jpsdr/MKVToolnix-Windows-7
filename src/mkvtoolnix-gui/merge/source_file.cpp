@@ -131,6 +131,12 @@ SourceFile::hasRegularTrack()
   return m_tracks.end() != brng::find_if(m_tracks, [](TrackPtr const &track) { return track->isRegular(); });
 }
 
+bool
+SourceFile::hasVideoTrack()
+  const {
+  return m_tracks.end() != brng::find_if(m_tracks, [](TrackPtr const &track) { return track->isVideo(); });
+}
+
 QString
 SourceFile::container()
   const {
