@@ -203,33 +203,33 @@ PreferencesDialog::setupToolTips() {
   // GUI page
   Util::setToolTip(ui->cbGuiCheckForUpdates,
                    Q("%1 %2 %3")
-                   .arg(QY("If enabled the program will check online whether or not a new release of MKVToolNix is available on the home page."))
+                   .arg(QY("If enabled, the program will check online whether or not a new release of MKVToolNix is available on the home page."))
                    .arg(QY("This is done at startup and at most once within 24 hours."))
                    .arg(QY("No information is transmitted to the server.")));
 
-  Util::setToolTip(ui->cbGuiDisableAnimations, QY("If checked several short animations used throughout the program as visual clues for the user will be disabled."));
+  Util::setToolTip(ui->cbGuiDisableAnimations, QY("If checked, several short animations used throughout the program as visual clues for the user will be disabled."));
   Util::setToolTip(ui->cbGuiWarnBeforeClosingModifiedTabs,
                    Q("%1 %2")
-                   .arg(QY("If checked the program will ask for confirmation before closing or reloading tabs that have been modified."))
+                   .arg(QY("If checked, the program will ask for confirmation before closing or reloading tabs that have been modified."))
                    .arg(QY("This is also done when quitting the application.")));
   Util::setToolTip(ui->cbGuiWarnBeforeAbortingJobs,
                    Q("%1 %2")
-                   .arg(QY("If checked the program will ask for confirmation before aborting a running job."))
+                   .arg(QY("If checked, the program will ask for confirmation before aborting a running job."))
                    .arg(QY("This happens when clicking the \"abort job\" button in a \"job output\" tab and when quitting the application.")));
 
   Util::setToolTip(ui->cbGuiShowMoveUpDownButtons,
                    Q("%1 %2")
                    .arg(QY("Normally selected entries in list view can be moved around via drag & drop and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."))
-                   .arg(QY("If checked additional buttons for moving selected entries up and down will be shown next to several list views.")));
+                   .arg(QY("If checked, additional buttons for moving selected entries up and down will be shown next to several list views.")));
 
-  Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
+  Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled, the program will ask for confirmation before overwriting files and jobs."));
 
-  Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
-  Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the \"job output\" tool will not be cleared when a new job starts."));
-  Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting,     QY("If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."));
-  Util::setToolTip(ui->cbGuiResetJobWarningErrorCountersOnExit, QY("If enabled the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."));
-  Util::setToolTip(ui->cbGuiRemoveOldJobs,                      QY("If enabled the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
-  Util::setToolTip(ui->sbGuiRemoveOldJobsDays,                  QY("If enabled the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
+  Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled, the GUI will let you enter a description for a job when adding it to the queue."));
+  Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled, the first tab in the \"job output\" tool will not be cleared when a new job starts."));
+  Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting,     QY("If enabled, the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."));
+  Util::setToolTip(ui->cbGuiResetJobWarningErrorCountersOnExit, QY("If enabled, the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."));
+  Util::setToolTip(ui->cbGuiRemoveOldJobs,                      QY("If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
+  Util::setToolTip(ui->sbGuiRemoveOldJobsDays,                  QY("If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
@@ -242,7 +242,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbCEDropLastFromBlurayPlaylist,
                    Q("%1 %2")
                    .arg(QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."))
-                   .arg(QY("If enabled the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie.")));
+                   .arg(QY("If enabled, the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie.")));
   Util::setToolTip(ui->cbCETextFileCharacterSet,
                    Q("%1 %2 %3")
                    .arg(QY("The chapter editor needs to know the character set a text chapter file uses in order to display all characters properly."))
@@ -253,16 +253,16 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMAutoSetFileTitle,
                    Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QYH("Certain file formats have 'title' property."))
-                   .arg(QYH("When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."))
+                   .arg(QYH("When the user adds a file containing such a title, the program will copy the title into the \"file title\" input box if this option is enabled."))
                    .arg(QYH("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
-  Util::setToolTip(ui->cbMAutoClearFileTitle, QY("If this option is enabled the GUI will always clear the \"file title\" input box whenever the last source file is removed."));
+  Util::setToolTip(ui->cbMAutoClearFileTitle, QY("If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."));
 
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
                    Q("%1 %2")
                    .arg(QY("When a file is added its name is scanned."))
-                   .arg(QY("If it contains the word 'DELAY' followed by a number then this number is automatically put into the 'delay' input field for any audio track found in the file.")));
+                   .arg(QY("If it contains the word 'DELAY' followed by a number, this number is automatically put into the 'delay' input field for any audio track found in the file.")));
 
-  Util::setToolTip(ui->cbMDisableDefaultTrackForSubtitles, QY("If enabled all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."));
+  Util::setToolTip(ui->cbMDisableDefaultTrackForSubtitles, QY("If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."));
 
   Util::setToolTip(ui->cbMDisableCompressionForAllTrackTypes,
                    Q("%1 %2")
@@ -273,11 +273,11 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2 %3")
                    .arg(QY("File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."))
                    .arg(Q(YF("This amount is 0.3% of the source file's size or 10 MB, whichever is higher.")))
-                   .arg(QY("If tracks are known to be present but not found then the percentage to probe can be changed here.")));
+                   .arg(QY("If tracks are known to be present but not found, the percentage to probe can be changed here.")));
 
   Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,
                    Q("%1 %2")
-                   .arg(QY("If enabled the destination file name controls will always be visible no matter which tab is currently shown."))
+                   .arg(QY("If enabled, the destination file name controls will always be visible no matter which tab is currently shown."))
                    .arg(QY("Otherwise they're shown on the 'output' tab.")));
 
   auto controls = QWidgetList{} << ui->rbMTrackPropertiesLayoutHorizontalScrollArea << ui->rbMTrackPropertiesLayoutHorizontalTwoColumns << ui->rbMTrackPropertiesLayoutVerticalTabWidget;
@@ -323,7 +323,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("The language selected here is used for subtitle tracks for which their source file contains no such property."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
 
-  Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."));
+  Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."));
 
   Util::setToolTip(ui->leMDefaultAdditionalCommandLineOptions, QY("The options entered here are set for all new multiplex jobs by default."));
 
@@ -338,7 +338,7 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMAutoSetOutputFileName,
                    Q("%1 %2")
-                   .arg(QY("If this option is enabled and if there is currently no destination file name set then the program will set one for you when you add a source file."))
+                   .arg(QY("If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."))
                    .arg(QY("The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file.")));
 
   Util::setToolTip(ui->cbMAutoDestinationOnlyForVideoFiles,
@@ -348,19 +348,19 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMUniqueOutputFileNames,
                    Q("%1 %2")
-                   .arg(QY("If checked the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
+                   .arg(QY("If checked, the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified destination file name.")));
-  Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."));
+  Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."));
 
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("When adding source files all tracks are normally set to be copied into the destination file."))
-                   .arg(QYH("If this option is enabled then only those tracks will be set to be copied whose language is selected below."))
+                   .arg(QYH("If this option is enabled, only those tracks will be set to be copied whose language is selected below."))
                    .arg(QYH("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
                    .arg(QYH("Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
-  Util::setToolTip(ui->cbMEnableMuxingAllVideoTracks,    QY("If enabled then tracks of this type will always be set to be copied regardless of their language."));
-  Util::setToolTip(ui->cbMEnableMuxingAllAudioTracks,    QY("If enabled then tracks of this type will always be set to be copied regardless of their language."));
-  Util::setToolTip(ui->cbMEnableMuxingAllSubtitleTracks, QY("If enabled then tracks of this type will always be set to be copied regardless of their language."));
+  Util::setToolTip(ui->cbMEnableMuxingAllVideoTracks,    QY("If enabled, tracks of this type will always be set to be copied regardless of their language."));
+  Util::setToolTip(ui->cbMEnableMuxingAllAudioTracks,    QY("If enabled, tracks of this type will always be set to be copied regardless of their language."));
+  Util::setToolTip(ui->cbMEnableMuxingAllSubtitleTracks, QY("If enabled, tracks of this type will always be set to be copied regardless of their language."));
   ui->tbMEnableMuxingTracksByLanguage->setToolTips(QY("Tracks with a language in this list will be set not to be copied by default."),
                                                    QY("Only tracks with a language in this list will be set to be copied by default."));
 
@@ -369,21 +369,21 @@ PreferencesDialog::setupToolTips() {
                                         QY("The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedLanguagesOnly,
                    Q("%1 %2")
-                   .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
+                   .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   ui->tbOftenUsedCountries->setToolTips(QY("The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."),
                                         QY("The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedCountriesOnly,
                    Q("%1 %2")
-                   .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
+                   .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."),
                                             QY("The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedCharacterSetsOnly,
                    Q("%1 %2")
-                   .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
+                   .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   // Header editor  page
