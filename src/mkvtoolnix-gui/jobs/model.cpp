@@ -187,6 +187,13 @@ Model::withSelectedJobs(QAbstractItemView *view,
 }
 
 void
+Model::withSelectedJobsAsList(QAbstractItemView *view,
+                              std::function<void(QList<Job *> const &)> const &worker) {
+  QMutexLocker locked{&m_mutex};
+  worker(selectedJobs(view));
+}
+
+void
 Model::withAllJobs(std::function<void(Job &)> const &worker) {
   QMutexLocker locked{&m_mutex};
 
@@ -691,6 +698,52 @@ Model::runProgramOnQueueStop(QueueStatus status) {
   App::programRunner().run(Util::Settings::RunAfterJobQueueFinishes, [](ProgramRunner::VariableMap &) {
     // Nothing to do in this case.
   });
+}
+
+void
+Model::sortJobs(QList<Job *> &jobs,
+                bool reverse) {
+  auto rows = QHash<Job *, int>{};
+
+  for (auto const &job : jobs)
+    rows[job] = rowFromId(job->id());
+
+  std::sort(jobs.begin(), jobs.end(), [&rows](Job *a, Job *b) { return rows[a] < rows[b]; });
+
+  if (reverse)
+    brng::reverse(jobs);
+}
+
+void
+Model::moveJobsUpOrDown(QList<Job *> jobs,
+                        bool up) {
+  auto couldNotBeMoved = QHash<uint64_t, bool>{};
+  auto const direction = up ? -1 : +1;
+  auto const numRows   = rowCount();
+
+  sortJobs(jobs, !up);
+
+  for (auto const &job : jobs) {
+    auto id  = job->id();
+    auto row = rowFromId(id);
+
+    if (row == RowNotFound) {
+      qDebug() << "row not found for job ID" << id;
+      continue;
+    }
+
+    auto targetRow = row + direction;
+    Job *targetJob = (targetRow >= 0) && (targetRow < numRows) ? m_jobsById[idFromRow(targetRow)].get() : nullptr;
+
+    if (!targetJob || couldNotBeMoved[targetJob->id()]) {
+      couldNotBeMoved[id] = true;
+      continue;
+    }
+
+    auto rootItem = invisibleRootItem();
+    auto rowItems = rootItem->takeRow(row);
+    rootItem->insertRow(targetRow, rowItems);
+  }
 }
 
 }}}

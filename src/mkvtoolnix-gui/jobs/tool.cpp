@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/jobs/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
@@ -137,6 +138,8 @@ Tool::setupActions() {
   connect(ui->jobs,                                         &Util::BasicTreeView::doubleClicked,              this,    &Tool::onViewOutput);
   connect(ui->jobs,                                         &Util::BasicTreeView::customContextMenuRequested, this,    &Tool::onContextMenu);
   connect(ui->jobs,                                         &Util::BasicTreeView::deletePressed,              this,    &Tool::onRemove);
+  connect(ui->jobs,                                         &Util::BasicTreeView::ctrlDownPressed,            this,    [this]() { moveJobsUpOrDown(false); });
+  connect(ui->jobs,                                         &Util::BasicTreeView::ctrlUpPressed,              this,    [this]() { moveJobsUpOrDown(true); });
 
   connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::retranslateUi);
   connect(mw,                                               &MainWindow::aboutToClose,                        m_model, &Model::saveJobs);
@@ -292,6 +295,19 @@ Tool::onRemoveAll() {
 
   if (emitRunningWarning)
     MainWindow::get()->setStatusBarMessage(QY("Running jobs cannot be removed."));
+}
+
+void
+Tool::moveJobsUpOrDown(bool up) {
+  auto focus = App::instance()->focusWidget();
+
+  m_model->withSelectedJobsAsList(ui->jobs, [this, up](auto const &selectedJobs) {
+    m_model->moveJobsUpOrDown(selectedJobs, up);
+    selectJobs(selectedJobs);
+  });
+
+  if (focus)
+    focus->setFocus();
 }
 
 void
@@ -519,6 +535,19 @@ Tool::processDroppedFiles() {
   for (auto const &fileName : fileNames)
     if (!addDroppedFileAsJob(fileName))
       Util::MessageBox::critical(this)->title(QY("Error loading settings file")).text(QY("The file '%1' is neither a job queue file nor a settings file.").arg(fileName)).exec();
+}
+
+void
+Tool::selectJobs(QList<Job *> const &jobs) {
+  auto numColumns = m_model->columnCount() - 1;
+  auto selection  = QItemSelection{};
+
+  for (auto const &job : jobs) {
+    auto row = m_model->rowFromId(job->id());
+    selection.select(m_model->index(row, 0), m_model->index(row, numColumns));
+  }
+
+  ui->jobs->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
 }}}

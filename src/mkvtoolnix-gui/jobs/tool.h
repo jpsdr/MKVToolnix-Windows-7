@@ -65,6 +65,7 @@ public slots:
 
   void onJobQueueMenu();
   void onContextMenu(QPoint pos);
+  void moveJobsUpOrDown(bool up);
 
   void resizeColumnsToContents() const;
 
@@ -85,6 +86,8 @@ protected:
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
+
+  virtual void selectJobs(QList<Job *> const &jobs);
 };
 
 }}}

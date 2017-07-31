@@ -60,8 +60,11 @@ public:
   bool isRunning() const;
 
   void withSelectedJobs(QAbstractItemView *view, std::function<void(Job &)> const &worker);
+  void withSelectedJobsAsList(QAbstractItemView *view, std::function<void(QList<Job *> const &)> const &worker);
   void withAllJobs(std::function<void(Job &)> const &worker);
   void withJob(uint64_t id, std::function<void(Job &)> const &worker);
+
+  void moveJobsUpOrDown(QList<Job *> jobs, bool up);
 
   void removeJobsIf(std::function<bool(Job const &)> predicate);
   void add(JobPtr const &job);
@@ -118,6 +121,8 @@ protected:
   void scheduleJobForRemoval(uint64_t id);
 
   QList<Job *> selectedJobs(QAbstractItemView *view);
+
+  void sortJobs(QList<Job *> &jobs, bool reverse);
 
 public:
   static void convertJobQueueToSeparateIniFiles();
