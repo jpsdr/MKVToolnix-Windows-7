@@ -66,6 +66,8 @@ public slots:
   void onJobQueueMenu();
   void onContextMenu(QPoint pos);
   void moveJobsUpOrDown(bool up);
+  void setupMoveJobsButtons();
+  void enableMoveJobsButtons();
 
   void resizeColumnsToContents() const;
 

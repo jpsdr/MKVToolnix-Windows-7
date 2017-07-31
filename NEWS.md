@@ -15,7 +15,9 @@
   tracks will be used for setting the destination file name. Other files that
   are added are ignore. Implements the rest of #2058.
 * MKVToolNix GUI: job queue: selected jobs can now be move up and down by
-  pressing the `Ctrl+Up` and `Ctrl+Down` keys. Implements part of #2060.
+  pressing the `Ctrl+Up` and `Ctrl+Down` keys. Additionally, push buttons to
+  move them up & down are shown if the corresponding option is enabled in the
+  preferences. Implements #2060.
 
 ## Bug fixes
 

@@ -73,6 +73,8 @@ void
 Tool::setupUi() {
   ui->jobs->setModel(m_model);
 
+  setupMoveJobsButtons();
+
   Util::preventScrollingWithoutFocus(this);
   Util::HeaderViewManager::create(*ui->jobs, "Jobs::Jobs");
 
@@ -135,16 +137,27 @@ Tool::setupActions() {
   connect(m_editAndRemoveAction,                            &QAction::triggered,                              this,    &Tool::onEditAndRemove);
   connect(m_startImmediatelyAction,                         &QAction::triggered,                              this,    &Tool::onStartImmediately);
 
+  connect(ui->jobs->selectionModel(),                       &QItemSelectionModel::selectionChanged,           this,    &Tool::enableMoveJobsButtons);
   connect(ui->jobs,                                         &Util::BasicTreeView::doubleClicked,              this,    &Tool::onViewOutput);
   connect(ui->jobs,                                         &Util::BasicTreeView::customContextMenuRequested, this,    &Tool::onContextMenu);
   connect(ui->jobs,                                         &Util::BasicTreeView::deletePressed,              this,    &Tool::onRemove);
   connect(ui->jobs,                                         &Util::BasicTreeView::ctrlDownPressed,            this,    [this]() { moveJobsUpOrDown(false); });
   connect(ui->jobs,                                         &Util::BasicTreeView::ctrlUpPressed,              this,    [this]() { moveJobsUpOrDown(true); });
+  connect(ui->moveJobsDown,                                 &QPushButton::clicked,                            this,    [this]() { moveJobsUpOrDown(false); });
+  connect(ui->moveJobsUp,                                   &QPushButton::clicked,                            this,    [this]() { moveJobsUpOrDown(true); });
+
 
   connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::retranslateUi);
+  connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::setupMoveJobsButtons);
   connect(mw,                                               &MainWindow::aboutToClose,                        m_model, &Model::saveJobs);
 
   connect(MainWindow::watchCurrentJobTab(),                 &WatchJobs::Tab::watchCurrentJobTabCleared,       m_model, &Model::resetTotalProgress);
+}
+
+void
+Tool::setupMoveJobsButtons() {
+  ui->moveJobsButtons->setVisible(Util::Settings::get().m_showMoveUpDownButtons);
+  enableMoveJobsButtons();
 }
 
 void
@@ -548,6 +561,15 @@ Tool::selectJobs(QList<Job *> const &jobs) {
   }
 
   ui->jobs->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+}
+
+void
+Tool::enableMoveJobsButtons() {
+  auto hasSelected = false;
+  m_model->withSelectedJobsAsList(ui->jobs, [&hasSelected](auto const &selectedJobs) { hasSelected = !selectedJobs.isEmpty(); });
+
+  ui->moveJobsUp->setEnabled(hasSelected);
+  ui->moveJobsDown->setEnabled(hasSelected);
 }
 
 }}}
