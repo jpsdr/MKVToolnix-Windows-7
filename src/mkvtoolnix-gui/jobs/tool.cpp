@@ -316,7 +316,7 @@ Tool::moveJobsUpOrDown(bool up) {
 
   m_model->withSelectedJobsAsList(ui->jobs, [this, up](auto const &selectedJobs) {
     m_model->moveJobsUpOrDown(selectedJobs, up);
-    selectJobs(selectedJobs);
+    this->selectJobs(selectedJobs);
   });
 
   if (focus)
