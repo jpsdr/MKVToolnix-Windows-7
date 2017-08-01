@@ -139,9 +139,9 @@ get_version_info(const std::string &program,
 
   if (flags & vif_architecture)
 #if defined(ARCH_64BIT)
-    info.push_back("64bit");
+    info.push_back("64-bit");
 #else
-    info.push_back("32bit");
+    info.push_back("32-bit");
 #endif
 
   return boost::join(info, " ");
