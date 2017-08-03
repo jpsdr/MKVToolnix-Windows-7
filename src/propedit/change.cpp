@@ -229,8 +229,13 @@ change_c::parse_date_time() {
 
 void
 change_c::execute(EbmlMaster *master,
-                  EbmlMaster *sub_master) {
-  m_master = !m_property.m_sub_master_callbacks ? master : sub_master;
+                  EbmlMaster *sub_master,
+                  EbmlMaster *sub_sub_master,
+                  EbmlMaster *sub_sub_sub_master) {
+  m_master = m_property.m_sub_sub_sub_master_callbacks ? sub_sub_sub_master
+           : m_property.m_sub_sub_master_callbacks     ? sub_sub_master
+           : m_property.m_sub_master_callbacks         ? sub_master
+           :                                             master;
 
   if (!m_master)
     return;

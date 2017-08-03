@@ -99,7 +99,7 @@ track_target_c::has_add_or_set_change()
 void
 track_target_c::execute() {
   for (auto &change : m_changes)
-    change->execute(m_master, m_sub_master);
+    change->execute(m_master, m_sub_master, m_sub_sub_master, m_sub_sub_sub_master);
 
   fix_mandatory_segment_tracks_elements(m_master);
 }
@@ -152,20 +152,37 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
     if (!track_matches)
       continue;
 
-    m_track_uid  = track_uid;
-    m_track_type = this_track_type;
-    m_master     = track;
-    m_sub_master = track_video == m_track_type ? dynamic_cast<EbmlMaster *>(FindChild<KaxTrackVideo>(track))
-                 : track_audio == m_track_type ? dynamic_cast<EbmlMaster *>(FindChild<KaxTrackAudio>(track))
-                 :                               nullptr;
+    m_track_uid          = track_uid;
+    m_track_type         = this_track_type;
+    m_master             = track;
+    m_sub_master         = track_video == m_track_type ? static_cast<EbmlMaster *>(FindChild<KaxTrackVideo>(track))
+                         : track_audio == m_track_type ? static_cast<EbmlMaster *>(FindChild<KaxTrackAudio>(track))
+                         :                               nullptr;
+    m_sub_sub_master     = track_video != m_track_type ? nullptr
+                         : m_sub_master                ? static_cast<EbmlMaster *>(FindChild<KaxVideoColour>(m_sub_master))
+                         :                               nullptr;
+    m_sub_sub_sub_master = track_video != m_track_type ? nullptr
+                         : m_sub_sub_master            ? static_cast<EbmlMaster *>(FindChild<KaxVideoColourMasterMeta>(m_sub_sub_master))
+                         :                               nullptr;
 
     if (   !m_sub_master
         && (   (track_video == m_track_type)
             || (track_audio == m_track_type))
-        && has_add_or_set_change()) {
-      m_sub_master = track_video == m_track_type ? static_cast<EbmlMaster *>(new KaxTrackVideo) : static_cast<EbmlMaster *>(new KaxTrackAudio);
-      m_master->PushElement(*m_sub_master);
-    }
+        && has_add_or_set_change())
+      m_sub_master = track_video == m_track_type ? static_cast<EbmlMaster *>(&GetChild<KaxTrackVideo>(m_master))
+                   :                               static_cast<EbmlMaster *>(&GetChild<KaxTrackAudio>(m_master));
+
+    if (   m_sub_master
+        && !m_sub_sub_master
+        && (track_video == m_track_type)
+        && has_add_or_set_change())
+      m_sub_sub_master = &GetChild<KaxVideoColour>(m_sub_master);
+
+    if (   m_sub_sub_master
+        && !m_sub_sub_sub_master
+        && (track_video == m_track_type)
+        && has_add_or_set_change())
+      m_sub_sub_sub_master = &GetChild<KaxVideoColourMasterMeta>(m_sub_sub_master);
 
     if (sub_master_is_track()) {
       m_master     = m_level1_element;

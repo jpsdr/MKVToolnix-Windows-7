@@ -51,7 +51,7 @@ public:
 
   std::string get_spec();
 
-  void execute(EbmlMaster *master, EbmlMaster *sub_master);
+  void execute(EbmlMaster *master, EbmlMaster *sub_master, EbmlMaster *sub_sub_master = nullptr, EbmlMaster *sub_sub_sub_master = nullptr);
 
 public:
   static change_cptr parse_spec(change_type_e type, std::string const &spec);

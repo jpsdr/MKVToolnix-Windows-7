@@ -49,6 +49,7 @@ public:
 protected:
   void remove_empty_targets();
   void merge_targets();
+  void prune_empty_masters();
 };
 using options_cptr = std::shared_ptr<options_c>;
 

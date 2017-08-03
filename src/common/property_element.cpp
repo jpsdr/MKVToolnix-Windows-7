@@ -36,17 +36,21 @@
 std::map<uint32_t, std::vector<property_element_c> > property_element_c::s_properties;
 std::map<uint32_t, std::vector<property_element_c> > property_element_c::s_composed_properties;
 
-property_element_c::property_element_c(const std::string &name,
-                                       const EbmlCallbacks &callbacks,
-                                       const translatable_string_c &title,
-                                       const translatable_string_c &description,
-                                       const EbmlCallbacks &sub_master_callbacks)
-  : m_name(name)
-  , m_title(title)
-  , m_description(description)
-  , m_callbacks(&callbacks)
-  , m_sub_master_callbacks(&sub_master_callbacks)
-  , m_type(EBMLT_SKIP)
+property_element_c::property_element_c(std::string const &name,
+                                       EbmlCallbacks const &callbacks,
+                                       translatable_string_c const &title,
+                                       translatable_string_c const &description,
+                                       EbmlCallbacks const &sub_master_callbacks,
+                                       EbmlCallbacks const *sub_sub_master_callbacks,
+                                       EbmlCallbacks const *sub_sub_sub_master_callbacks)
+  : m_name{name}
+  , m_title{title}
+  , m_description{description}
+  , m_callbacks{&callbacks}
+  , m_sub_master_callbacks{&sub_master_callbacks}
+  , m_sub_sub_master_callbacks{sub_sub_master_callbacks}
+  , m_sub_sub_sub_master_callbacks{sub_sub_sub_master_callbacks}
+  , m_type{EBMLT_SKIP}
 {
   derive_type();
 }
@@ -87,11 +91,13 @@ property_element_c::derive_type() {
   delete e;
 }
 
-#define ELE(name, callbacks, title, description) s_properties[current_index].push_back(property_element_c(name, callbacks, title, description, *sub_master_callbacks))
+#define ELE( name, callbacks, title, description) s_properties[current_index].push_back(property_element_c(name, callbacks, title, description, *sub_master_callbacks, nullptr, nullptr))
+#define ELE2(name, callbacks, title, description) s_properties[current_index].push_back(property_element_c(name, callbacks, title, description, *sub_master_callbacks, sub_sub_master_callbacks))
+#define ELE3(name, callbacks, title, description) s_properties[current_index].push_back(property_element_c(name, callbacks, title, description, *sub_master_callbacks, sub_sub_master_callbacks, sub_sub_sub_master_callbacks))
 
 void
 property_element_c::init_tables() {
-  const EbmlCallbacks *sub_master_callbacks = nullptr;
+  EbmlCallbacks const *sub_master_callbacks = nullptr;
 
   s_properties.clear();
 

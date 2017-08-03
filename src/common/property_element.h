@@ -35,14 +35,13 @@ public:
   std::string m_name;
   translatable_string_c m_title, m_description;
 
-  const EbmlCallbacks *m_callbacks;
-  const EbmlCallbacks *m_sub_master_callbacks;
+  EbmlCallbacks const *m_callbacks, *m_sub_master_callbacks, *m_sub_sub_master_callbacks, *m_sub_sub_sub_master_callbacks;
 
   ebml_type_e m_type;
 
   property_element_c();
-  property_element_c(const std::string &name, const EbmlCallbacks &callbacks, const translatable_string_c &title, const translatable_string_c &description,
-                     const EbmlCallbacks &sub_master_callbacks);
+  property_element_c(std::string const &name, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description,
+                     EbmlCallbacks const &sub_master_callbacks, EbmlCallbacks const *sub_sub_master_callbacks = nullptr, EbmlCallbacks const *sub_sub_sub_master_callbacks = nullptr);
 
   bool is_valid() const;
 
