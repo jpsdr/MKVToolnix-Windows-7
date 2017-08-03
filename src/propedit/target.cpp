@@ -65,7 +65,7 @@ target_c::set_level1_element(ebml_element_cptr level1_element_cp,
 std::tuple<EbmlMaster *, EbmlMaster *, EbmlMaster *, EbmlMaster *>
 target_c::get_masters()
   const {
-  return { m_master, m_sub_master, m_sub_sub_master, m_sub_sub_sub_master };
+  return std::make_tuple(m_master, m_sub_master, m_sub_sub_master, m_sub_sub_sub_master);
 }
 
 void
