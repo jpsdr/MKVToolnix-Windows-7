@@ -18,6 +18,8 @@
   pressing the `Ctrl+Up` and `Ctrl+Down` keys. Additionally, push buttons to
   move them up & down are shown if the corresponding option is enabled in the
   preferences. Implements #2060.
+* mkvpropedit: added support for editing the video colour
+  attributes. Implements one half of #2038.
 
 ## Bug fixes
 

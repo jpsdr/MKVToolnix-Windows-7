@@ -97,7 +97,7 @@ property_element_c::derive_type() {
 
 void
 property_element_c::init_tables() {
-  EbmlCallbacks const *sub_master_callbacks = nullptr;
+  EbmlCallbacks const *sub_master_callbacks = nullptr, *sub_sub_master_callbacks = nullptr, *sub_sub_sub_master_callbacks = nullptr;
 
   s_properties.clear();
 
@@ -156,6 +156,38 @@ property_element_c::init_tables() {
                                                                                                 "(0: free resizing, 1: keep aspect ratio, 2: fixed)."));
   ELE("field-order",       KaxVideoFieldOrder::ClassInfos,      Y("Video field order"),       Y("Field order (0, 1, 2, 6, 9 or 14, see documentation)."));
   ELE("stereo-mode",       KaxVideoStereoMode::ClassInfos,      Y("Video stereo mode"),       Y("Stereo-3D video mode (0 - 11, see documentation)."));
+
+  sub_master_callbacks         = &KaxTrackVideo::ClassInfos;
+  sub_sub_master_callbacks     = &KaxVideoColour::ClassInfos;
+  sub_sub_sub_master_callbacks = &KaxVideoColourMasterMeta::ClassInfos;
+
+  ELE2("colour-matrix",                    KaxVideoColourMatrix::ClassInfos,            Y("Video: colour matrix coefficients"), Y("Sets the matrix coefficients of the video used to derive luma and chroma values "
+                                                                                                                                  "from red, green and blue color primaries."));
+  ELE2("colour-bits-per-channel",          KaxVideoBitsPerChannel::ClassInfos,          Y("Video: bits per colour channel"),    Y("Sets the number of coded bits for a colour channel."));
+  ELE2("chroma-subsample-horizontal",      KaxVideoChromaSubsampHorz::ClassInfos,       Y("Video: pixels to remove in chroma"), Y("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."));
+  ELE2("chroma-subsample-vertical",        KaxVideoChromaSubsampVert::ClassInfos,       Y("Video: pixels to remove in chroma"), Y("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."));
+  ELE2("cb-subsample-horizontal",          KaxVideoCbSubsampHorz::ClassInfos,           Y("Video: pixels to remove in Cb"),     Y("The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. "
+                                                                                                                                  "This is additive with chroma-subsample-horizontal."));
+  ELE2("cb-subsample-vertical",            KaxVideoCbSubsampVert::ClassInfos,           Y("Video: pixels to remove in Cb"),     Y("The amount of pixels to remove in the Cb channel for every pixel not removed vertically. "
+                                                                                                                                  "This is additive with chroma-subsample-vertical."));
+  ELE2("chroma-siting-horizontal",         KaxVideoChromaSitHorz::ClassInfos,           Y("Video: chroma siting"),              Y("How chroma is sited horizontally."));
+  ELE2("chroma-siting-vertical",           KaxVideoChromaSitVert::ClassInfos,           Y("Video: chroma siting"),              Y("How chroma is sited vertically."));
+  ELE2("colour-range",                     KaxVideoColourRange::ClassInfos,             Y("Video: colour range"),               Y("Clipping of the color ranges."));
+  ELE2("colour-transfer-characteristics",  KaxVideoColourTransferCharacter::ClassInfos, Y("Video: transfer characteristics"),   Y("The colour transfer characteristics of the video."));
+  ELE2("colour-primaries",                 KaxVideoColourPrimaries::ClassInfos,         Y("Video: colour primaries"),           Y("The colour primaries of the video."));
+  ELE2("max-content-light",                KaxVideoColourMaxCLL::ClassInfos,            Y("Video: maximum content light"),      Y("Maximum brightness of a single pixel in candelas per square meter (cd/m²)."));
+  ELE2("max-frame-light",                  KaxVideoColourMaxFALL::ClassInfos,           Y("Video: maximum frame light"),        Y("Maximum frame-average light level in candelas per square meter (cd/m²)."));
+
+  ELE3("chromaticity-coordinates-red-x",   KaxVideoRChromaX::ClassInfos,                Y("Video: chromacity red X"),           Y("Red X chromacity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-red-y",   KaxVideoRChromaY::ClassInfos,                Y("Video: chromacity red Y"),           Y("Red Y chromacity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-green-x", KaxVideoGChromaX::ClassInfos,                Y("Video: chromacity green X"),         Y("Green X chromacity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-green-y", KaxVideoGChromaY::ClassInfos,                Y("Video: chromacity green Y"),         Y("Green Y chromacity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-blue-x",  KaxVideoBChromaX::ClassInfos,                Y("Video: chromacity blue X"),          Y("Blue X chromacity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-blue-y",  KaxVideoBChromaY::ClassInfos,                Y("Video: chromacity blue Y"),          Y("Blue Y chromacity coordinate as defined by CIE 1931."));
+  ELE3("white-coordinates-x",              KaxVideoWhitePointChromaX::ClassInfos,       Y("Video: white point X"),              Y("White colour chromaticity coordinate X as defined by CIE 1931."));
+  ELE3("white-coordinates-y",              KaxVideoWhitePointChromaY::ClassInfos,       Y("Video: white point Y"),              Y("White colour chromaticity coordinate Y as defined by CIE 1931."));
+  ELE3("max-luminance",                    KaxVideoLuminanceMax::ClassInfos,            Y("Video: maximum luminance"),          Y("Maximum luminance in candelas per square meter (cd/m²)."));
+  ELE3("min-luminance",                    KaxVideoLuminanceMin::ClassInfos,            Y("Video: minimum luminance"),          Y("Minimum luminance in candelas per square meter (cd/m²)."));
 
   sub_master_callbacks = &KaxTrackAudio::ClassInfos;
 
