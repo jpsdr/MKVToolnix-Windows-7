@@ -37,6 +37,7 @@ public:
 
   EbmlCallbacks const *m_callbacks, *m_sub_master_callbacks, *m_sub_sub_master_callbacks, *m_sub_sub_sub_master_callbacks;
 
+  unsigned int m_bit_length;
   ebml_type_e m_type;
 
   property_element_c();

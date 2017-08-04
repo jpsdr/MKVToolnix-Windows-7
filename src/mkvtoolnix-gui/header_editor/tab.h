@@ -11,6 +11,8 @@
 class QAction;
 class QMenu;
 
+class property_element_c;
+
 namespace mtx { namespace gui { namespace HeaderEditor {
 
 namespace Ui {
@@ -20,6 +22,8 @@ class Tab;
 using KaxAttachedPtr  = std::shared_ptr<KaxAttached>;
 
 class AttachmentsPage;
+class TopLevelPage;
+class ValuePage;
 
 class Tab : public QWidget {
   Q_OBJECT;
@@ -84,6 +88,7 @@ protected:
   void expandCollapseAll(bool expand);
   void reportValidationFailure(bool isCritical, QModelIndex const &pageIdx);
 
+  ValuePage *createValuePage(TopLevelPage &parentPage, EbmlMaster &parentMaster, property_element_c const &element);
   PageBase *currentlySelectedPage() const;
 
   KaxAttachedPtr createAttachmentFromFile(QString const &fileName);

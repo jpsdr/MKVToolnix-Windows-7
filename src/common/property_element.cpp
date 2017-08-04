@@ -50,6 +50,7 @@ property_element_c::property_element_c(std::string const &name,
   , m_sub_master_callbacks{&sub_master_callbacks}
   , m_sub_sub_master_callbacks{sub_sub_master_callbacks}
   , m_sub_sub_sub_master_callbacks{sub_sub_sub_master_callbacks}
+  , m_bit_length{128}
   , m_type{EBMLT_SKIP}
 {
   derive_type();
