@@ -113,8 +113,8 @@ track_info_c::operator =(const track_info_c &src) {
   m_pixel_crop_list            = src.m_pixel_crop_list;
   m_pixel_cropping             = src.m_pixel_cropping;
 
-  m_colour_matrix_list         = src.m_colour_matrix_list;
-  m_colour_matrix              = src.m_colour_matrix;
+  m_colour_matrix_coeff_list   = src.m_colour_matrix_coeff_list;
+  m_colour_matrix_coeff        = src.m_colour_matrix_coeff;
 
   m_bits_per_channel_list      = src.m_bits_per_channel_list;
   m_bits_per_channel           = src.m_bits_per_channel;

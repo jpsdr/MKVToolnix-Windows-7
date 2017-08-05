@@ -211,9 +211,9 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     set_video_pixel_cropping(m_ti.m_pixel_crop_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified colour matrix for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_colour_matrix_list);
+  i = LOOKUP_TRACK_ID(m_ti.m_colour_matrix_coeff_list);
   if (-2 != i)
-    set_video_colour_matrix(m_ti.m_colour_matrix_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_colour_matrix(m_ti.m_colour_matrix_coeff_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified bits per channel parameter for this track.
   i = LOOKUP_TRACK_ID(m_ti.m_bits_per_channel_list);
@@ -658,13 +658,13 @@ generic_packetizer_c::set_video_pixel_cropping(int left,
 void
 generic_packetizer_c::set_video_colour_matrix(int matrix_index,
                                               option_source_e source) {
-  m_ti.m_colour_matrix.set(matrix_index, source);
+  m_ti.m_colour_matrix_coeff.set(matrix_index, source);
   if (   m_track_entry
       && (matrix_index >= 0)
       && (matrix_index <= 10)) {
     auto &video = GetChild<KaxTrackVideo>(m_track_entry);
     auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoColourMatrix>(color).SetValue(m_ti.m_colour_matrix.get());
+    GetChild<KaxVideoColourMatrix>(color).SetValue(m_ti.m_colour_matrix_coeff.get());
   }
 }
 
@@ -1016,8 +1016,8 @@ generic_packetizer_c::set_headers() {
         GetChild<KaxVideoPixelCropBottom>(video).SetValue(crop.bottom);
       }
 
-      if (m_ti.m_colour_matrix) {
-        int colour_matrix = m_ti.m_colour_matrix.get();
+      if (m_ti.m_colour_matrix_coeff) {
+        int colour_matrix = m_ti.m_colour_matrix_coeff.get();
         auto &colour      = GetChild<KaxVideoColour>(video);
         GetChild<KaxVideoColourMatrix>(colour).SetValue(colour_matrix);
       }

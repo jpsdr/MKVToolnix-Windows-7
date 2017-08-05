@@ -266,7 +266,8 @@ set_usage() {
                   "                           Sets the stereo mode parameter. It can\n"
                   "                           either be a number 0 - 14 or a keyword\n"
                   "                           (see documentation for the full list).\n");
-  usage_text += Y("  --colour-matrix <TID:n>  Sets the matrix coefficients of the video used\n"
+  usage_text += Y("  --colour-matrix-coefficients <TID:n>\n"
+                  "                           Sets the matrix coefficients of the video used\n"
                   "                           to derive luma and chroma values from red, green\n"
                   "                           and blue color primaries.\n");
   usage_text += Y("  --colour-bits-per-channel <TID:n>\n"
@@ -704,7 +705,7 @@ parse_arg_cropping(const std::string &s,
   ti.m_pixel_crop_list[id] = crop;
 }
 
-/** \brief Parse the \c --colour-matrix argument
+/** \brief Parse the \c --colour-matrix-coefficients argument
 
    The argument must have the form \c TID:n e.g. \c 0:2
    The number n must be one of the following integer numbers
@@ -720,9 +721,9 @@ parse_arg_cropping(const std::string &s,
    9: BT2020 Non-constant Luminance
    10: BT2020 Constant Luminance)
 */
-static void parse_arg_colour_matrix(const std::string &s, track_info_c &ti) {
-  if (!parse_property_to_value<int>(s, ti.m_colour_matrix_list))
-    mxerror(boost::format("Colour matrix parameter: not given in the form <TID>:n (argument was '%1%').") % s);
+static void parse_arg_colour_matrix_coefficients(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_value<int>(s, ti.m_colour_matrix_coeff_list))
+    mxerror(boost::format("Colour matrix coefficients parameter: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --colour-bits-per-channel argument
@@ -2526,11 +2527,11 @@ parse_args(std::vector<std::string> args) {
       parse_arg_cropping(next_arg, *ti);
       sit++;
 
-    } else if (this_arg == "--colour-matrix") {
+    } else if (mtx::included_in(this_arg, "--colour-matrix", "--colour-matrix-coefficients")) {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
 
-      parse_arg_colour_matrix(next_arg, *ti);
+      parse_arg_colour_matrix_coefficients(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--colour-bits-per-channel") {

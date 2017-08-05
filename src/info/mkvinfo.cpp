@@ -595,7 +595,7 @@ handle_video_colour(EbmlStream *&es,
 
   for (auto l5 : *static_cast<EbmlMaster *>(l4)) {
     if (Is<KaxVideoColourMatrix>(l5))
-      show_element(l5, 5, boost::format(Y("Colour matrix: %1%")) % static_cast<KaxVideoColourMatrix *>(l5)->GetValue());
+      show_element(l5, 5, boost::format(Y("Colour matrix coefficients: %1%")) % static_cast<KaxVideoColourMatrix *>(l5)->GetValue());
 
     else if (Is<KaxVideoBitsPerChannel>(l5))
       show_element(l5, 5, boost::format(Y("Bits per channel: %1%")) % static_cast<KaxVideoBitsPerChannel *>(l5)->GetValue());

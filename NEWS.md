@@ -43,6 +43,12 @@
   checking online for available updates will be disabled. The update check is
   enabled and included in the GUI by default.
 
+## Other changes
+
+* mkvmerge: the option `--colour-matrix` has been renamed to
+  `--colour-matrix-coefficients` in order to match the specification more
+  closely. The old option name will continue to be recognized as well.
+
 
 # Version 14.0.0 "Flow" 2017-07-23
 
