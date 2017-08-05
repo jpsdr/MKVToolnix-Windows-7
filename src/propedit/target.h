@@ -28,7 +28,7 @@ protected:
   std::string m_spec;
 
   ebml_element_cptr m_level1_element_cp, m_track_headers_cp;
-  EbmlMaster *m_level1_element, *m_master, *m_sub_master, *m_sub_sub_master, *m_sub_sub_sub_master;
+  EbmlMaster *m_level1_element, *m_master, *m_sub_master;
 
   uint64_t m_track_uid;
   track_type m_track_type;
@@ -60,7 +60,7 @@ public:
   virtual std::string const &get_spec() const;
   virtual uint64_t get_track_uid() const;
   virtual EbmlMaster *get_level1_element() const;
-  virtual std::tuple<EbmlMaster *, EbmlMaster *, EbmlMaster *, EbmlMaster *> get_masters() const;
+  virtual std::tuple<EbmlMaster *, EbmlMaster *> get_masters() const;
 
   virtual bool write_elements_set_to_default_value() const;
   virtual bool add_mandatory_elements_if_missing() const;

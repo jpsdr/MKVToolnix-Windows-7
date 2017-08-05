@@ -39,6 +39,7 @@ public:
   virtual ~track_target_c() override;
 
   virtual void validate() override;
+  virtual void look_up_property_elements();
 
   virtual void add_change(change_c::change_type_e type, const std::string &spec) override;
   virtual void parse_spec(std::string const &spec);

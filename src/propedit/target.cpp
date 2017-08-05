@@ -30,8 +30,6 @@ target_c::target_c()
   : m_level1_element{}
   , m_master{}
   , m_sub_master{}
-  , m_sub_sub_master{}
-  , m_sub_sub_sub_master{}
   , m_track_uid{}
   , m_track_type{INVALID_TRACK_TYPE}
   , m_analyzer{}
@@ -62,10 +60,10 @@ target_c::set_level1_element(ebml_element_cptr level1_element_cp,
   m_master            = m_level1_element;
 }
 
-std::tuple<EbmlMaster *, EbmlMaster *, EbmlMaster *, EbmlMaster *>
+std::tuple<EbmlMaster *, EbmlMaster *>
 target_c::get_masters()
   const {
-  return std::make_tuple(m_master, m_sub_master, m_sub_sub_master, m_sub_sub_sub_master);
+  return std::make_tuple(m_master, m_sub_master);
 }
 
 void

@@ -42,15 +42,14 @@ change_c::change_c(change_c::change_type_e type,
   , m_x_value(128)
   , m_fp_value(0)
   , m_master(nullptr)
+  , m_sub_sub_master{}
+  , m_sub_sub_sub_master{}
 {
 }
 
 void
-change_c::validate(std::vector<property_element_c> *property_table) {
-  if (!property_table)
-    return;
-
-  if (m_property.m_name.empty() && !lookup_property(*property_table))
+change_c::validate() {
+  if (m_property.m_name.empty())
     mxerror(boost::format(Y("The name '%1%' is not a valid property name for the current edit specification in '%2%'.\n")) % m_name % get_spec());
 
   if (change_c::ct_delete == m_type)
@@ -79,7 +78,7 @@ change_c::dump_info()
 }
 
 bool
-change_c::lookup_property(std::vector<property_element_c> &table) {
+change_c::look_up_property(std::vector<property_element_c> &table) {
   for (auto &property : table)
     if (property.m_name == m_name) {
       m_property = property;
@@ -223,11 +222,9 @@ change_c::parse_date_time() {
 
 void
 change_c::execute(EbmlMaster *master,
-                  EbmlMaster *sub_master,
-                  EbmlMaster *sub_sub_master,
-                  EbmlMaster *sub_sub_sub_master) {
-  m_master = m_property.m_sub_sub_sub_master_callbacks ? sub_sub_sub_master
-           : m_property.m_sub_sub_master_callbacks     ? sub_sub_master
+                  EbmlMaster *sub_master) {
+  m_master = m_property.m_sub_sub_sub_master_callbacks ? m_sub_sub_sub_master
+           : m_property.m_sub_sub_master_callbacks     ? m_sub_sub_master
            : m_property.m_sub_master_callbacks         ? sub_master
            :                                             master;
 

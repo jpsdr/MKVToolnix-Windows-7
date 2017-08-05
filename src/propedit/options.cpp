@@ -68,11 +68,15 @@ options_c::prune_empty_masters() {
     if (!dynamic_cast<track_target_c *>(target.get()))
       continue;
 
-    auto masters = target->get_masters();
+    auto &track_target = static_cast<track_target_c &>(*target);
+    auto masters       = track_target.get_masters();
 
-    handler(std::get<2>(masters), std::get<3>(masters)); // sub_sub_master and sub_sub_sub_master
-    handler(std::get<1>(masters), std::get<2>(masters)); // sub_master     and sub_sub_master
-    handler(std::get<0>(masters), std::get<1>(masters)); // master         and sub_master
+    for (auto const &change : track_target.m_changes) {
+      handler(change->m_sub_sub_master, change->m_sub_sub_sub_master); // sub_sub_master and sub_sub_sub_master
+      handler(std::get<1>(masters),     change->m_sub_sub_master);     // sub_master     and sub_sub_master
+    }
+
+    handler(std::get<0>(masters), std::get<1>(masters));               // master         and sub_master
   }
 }
 

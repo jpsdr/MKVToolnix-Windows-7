@@ -39,19 +39,19 @@ public:
   bitvalue_c m_x_value;
   double m_fp_value;
 
-  EbmlMaster *m_master;
+  EbmlMaster *m_master, *m_sub_sub_master, *m_sub_sub_sub_master;
 
 public:
   change_c(change_type_e type, const std::string &name, const std::string &value);
 
-  void validate(std::vector<property_element_c> *property_table = nullptr);
+  void validate();
   void dump_info() const;
 
-  bool lookup_property(std::vector<property_element_c> &table);
+  bool look_up_property(std::vector<property_element_c> &table);
 
   std::string get_spec();
 
-  void execute(EbmlMaster *master, EbmlMaster *sub_master, EbmlMaster *sub_sub_master = nullptr, EbmlMaster *sub_sub_sub_master = nullptr);
+  void execute(EbmlMaster *master, EbmlMaster *sub_master);
 
 public:
   static change_cptr parse_spec(change_type_e type, std::string const &spec);
