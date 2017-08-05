@@ -20,6 +20,8 @@
   preferences. Implements #2060.
 * mkvpropedit: added support for editing the video colour
   attributes. Implements one half of #2038.
+* mkvpropedit: added support for editing the video colour
+  attributes. Implements the second half of #2038.
 
 ## Bug fixes
 

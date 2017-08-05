@@ -13,6 +13,7 @@
 #include "common/construct.h"
 #include "common/ebml.h"
 #include "common/extern_data.h"
+#include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/property_element.h"
 #include "common/qt.h"
@@ -97,7 +98,7 @@ Tab::load() {
                            :                                  -1;
   auto expansionStatus     = QHash<QString, bool>{};
 
-  for (auto const &page : m_model->topLevelPages()) {
+  for (auto const &page : m_model->allExpandablePages()) {
     auto key = dynamic_cast<TopLevelPage &>(*page).internalIdentifier();
     expansionStatus[key] = ui->elements->isExpanded(page->m_pageIdx);
   }
@@ -130,7 +131,7 @@ Tab::load() {
 
   m_analyzer->close_file();
 
-  for (auto const &page : m_model->topLevelPages()) {
+  for (auto const &page : m_model->allExpandablePages()) {
     auto key = dynamic_cast<TopLevelPage &>(*page).internalIdentifier();
     ui->elements->setExpanded(page->m_pageIdx, expansionStatus[key]);
   }
@@ -348,10 +349,51 @@ Tab::hasBeenModified() {
 }
 
 void
+Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
+  auto trackType = FindChildValue<KaxTrackType>(page.m_master);
+
+  if (!mtx::included_in(trackType, track_video, track_audio))
+    return;
+
+  auto handler = [](EbmlMaster *parent, EbmlMaster *child) {
+    if (!parent || !child || (0 < child->ListSize()))
+      return;
+
+    auto itr = std::find(parent->begin(), parent->end(), child);
+    if (itr != parent->end())
+      parent->Remove(itr);
+
+    delete child;
+  };
+
+  if (trackType == track_video) {
+    auto trackVideo            = &GetChild<KaxTrackVideo>(page.m_master);
+    auto videoColour           = &GetChild<KaxVideoColour>(trackVideo);
+    auto videoColourMasterMeta = &GetChild<KaxVideoColourMasterMeta>(videoColour);
+
+    handler(videoColour,    videoColourMasterMeta);
+    handler(trackVideo,     videoColour);
+    handler(&page.m_master, trackVideo);
+
+  } else
+    // trackType is track_audio
+    handler(&page.m_master, &GetChild<KaxTrackAudio>(page.m_master));
+}
+
+void
+Tab::pruneEmptyMastersForAllTracks() {
+  for (auto const &page : m_model->topLevelPages())
+    if (dynamic_cast<TrackTypePage *>(page))
+      pruneEmptyMastersForTrack(static_cast<TrackTypePage &>(*page));
+}
+
+void
 Tab::doModifications() {
   auto &pages = m_model->topLevelPages();
   for (auto const &page : pages)
     page->doModifications();
+
+  pruneEmptyMastersForAllTracks();
 
   if (m_eSegmentInfo) {
     fix_mandatory_segmentinfo_elements(m_eSegmentInfo.get());
@@ -428,25 +470,45 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
     auto page      = new TrackTypePage{*this, *kTrackEntry, trackIdxMkvmerge++};
     page->init();
 
-    std::unordered_map<unsigned int, std::unordered_map<EbmlCallbacks const *, EbmlMaster *>> parentsByTypeAndCallback;
+    QHash<EbmlCallbacks const *, EbmlMaster *> parentMastersByCallback;
+    QHash<EbmlCallbacks const *, TopLevelPage *> parentPagesByCallback;
 
-    auto &parentsByCallback    = parentsByTypeAndCallback[trackType];
-    parentsByCallback[nullptr] = kTrackEntry;
+    parentMastersByCallback[nullptr] = kTrackEntry;
+    parentPagesByCallback[nullptr]   = page;
 
-    if (track_video == trackType)
-      parentsByCallback[&KaxTrackVideo::ClassInfos] = &GetChild<KaxTrackVideo>(kTrackEntry);
+    if (track_video == trackType) {
+      auto colourPage = new TopLevelPage{*this, YT("Colour information")};
+      colourPage->setInternalIdentifier(Q("videoColour %1").arg(trackIdxMkvmerge - 1));
+      colourPage->setParentPage(*page);
+      colourPage->init();
 
-    else if (track_audio == trackType)
-      parentsByCallback[&KaxTrackAudio::ClassInfos] = &GetChild<KaxTrackAudio>(kTrackEntry);
+      auto colourMasterMetaPage = new TopLevelPage{*this, YT("Colour mastering meta information")};
+      colourMasterMetaPage->setInternalIdentifier(Q("videoColourMasterMeta %1").arg(trackIdxMkvmerge - 1));
+      colourMasterMetaPage->setParentPage(*page);
+      colourMasterMetaPage->init();
+
+      parentMastersByCallback[&KaxTrackVideo::ClassInfos]            = &GetChild<KaxTrackVideo>(kTrackEntry);
+      parentMastersByCallback[&KaxVideoColour::ClassInfos]           = &GetChild<KaxVideoColour>(parentMastersByCallback[&KaxTrackVideo::ClassInfos]);
+      parentMastersByCallback[&KaxVideoColourMasterMeta::ClassInfos] = &GetChild<KaxVideoColourMasterMeta>(parentMastersByCallback[&KaxVideoColour::ClassInfos]);
+
+      parentPagesByCallback[&KaxTrackVideo::ClassInfos]              = page;
+      parentPagesByCallback[&KaxVideoColour::ClassInfos]             = colourPage;
+      parentPagesByCallback[&KaxVideoColourMasterMeta::ClassInfos]   = colourMasterMetaPage;
+
+    } else if (track_audio == trackType) {
+      parentMastersByCallback[&KaxTrackAudio::ClassInfos]            = &GetChild<KaxTrackAudio>(kTrackEntry);
+      parentPagesByCallback[&KaxTrackAudio::ClassInfos]              = page;
+    }
 
     for (auto const &element : propertyElements) {
-      if (element.m_sub_sub_master_callbacks)
-        // Not supported yet.
-        continue;
+      auto parentMasterCallbacks = element.m_sub_sub_sub_master_callbacks ? element.m_sub_sub_sub_master_callbacks
+                                 : element.m_sub_sub_master_callbacks     ? element.m_sub_sub_master_callbacks
+                                 :                                          element.m_sub_master_callbacks;
+      auto parentPage            = parentPagesByCallback[parentMasterCallbacks];
+      auto parentMaster          = parentMastersByCallback[parentMasterCallbacks];
 
-      auto parentMaster = parentsByCallback[element.m_sub_master_callbacks];
-      if (parentMaster)
-        createValuePage(*page, *parentMaster, element);
+      if (parentPage && parentMaster)
+        createValuePage(*parentPage, *parentMaster, element);
     }
   }
 }
@@ -512,9 +574,13 @@ Tab::collapseAll() {
 }
 
 void
-Tab::expandCollapseAll(bool expand) {
-  for (auto const &page : m_model->topLevelPages())
-    ui->elements->setExpanded(page->m_pageIdx, expand);
+Tab::expandCollapseAll(bool expand,
+                       QModelIndex const &parentIdx) {
+  if (parentIdx.isValid())
+    ui->elements->setExpanded(parentIdx, expand);
+
+  for (auto row = 0, numRows = m_model->rowCount(parentIdx); row < numRows; ++row)
+    expandCollapseAll(expand, m_model->index(row, 0, parentIdx));
 }
 
 void

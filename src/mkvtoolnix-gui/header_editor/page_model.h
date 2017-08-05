@@ -30,6 +30,7 @@ public:
 
   QList<PageBase *> pages() const;
   QList<PageBase *> const &topLevelPages() const;
+  QList<PageBase *> allExpandablePages() const;
 
   void reset();
 

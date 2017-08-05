@@ -23,6 +23,7 @@ using KaxAttachedPtr  = std::shared_ptr<KaxAttached>;
 
 class AttachmentsPage;
 class TopLevelPage;
+class TrackTypePage;
 class ValuePage;
 
 class Tab : public QWidget {
@@ -85,13 +86,16 @@ protected:
   void populateTree();
   void resetData();
   void doModifications();
-  void expandCollapseAll(bool expand);
+  void expandCollapseAll(bool expand, QModelIndex const &parentIdx = {});
   void reportValidationFailure(bool isCritical, QModelIndex const &pageIdx);
 
   ValuePage *createValuePage(TopLevelPage &parentPage, EbmlMaster &parentMaster, property_element_c const &element);
   PageBase *currentlySelectedPage() const;
 
   KaxAttachedPtr createAttachmentFromFile(QString const &fileName);
+
+  void pruneEmptyMastersForTrack(TrackTypePage &page);
+  void pruneEmptyMastersForAllTracks();
 
 public:
   static memory_cptr readFileData(QWidget *parent, QString const &fileName);

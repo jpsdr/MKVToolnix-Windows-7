@@ -3,6 +3,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/page_base.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
+#include "mkvtoolnix-gui/header_editor/top_level_page.h"
 #include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
@@ -82,6 +83,19 @@ QList<PageBase *> const &
 PageModel::topLevelPages()
   const {
   return m_topLevelPages;
+}
+
+QList<PageBase *>
+PageModel::allExpandablePages()
+  const {
+  auto pages = m_topLevelPages;
+
+  for (auto const &page : m_topLevelPages)
+    for (auto const &subPage : page->m_children)
+      if (dynamic_cast<TopLevelPage *>(subPage))
+        pages << static_cast<TopLevelPage *>(subPage);
+
+  return pages;
 }
 
 void

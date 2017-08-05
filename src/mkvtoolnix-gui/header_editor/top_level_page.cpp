@@ -18,7 +18,13 @@ TopLevelPage::~TopLevelPage() {
 
 void
 TopLevelPage::init() {
-  m_parent.appendPage(this);
+  m_parent.appendPage(this, m_parentPageIdx);
+}
+
+void
+TopLevelPage::setParentPage(PageBase &page) {
+  m_parentPageIdx  = page.m_pageIdx;
+  page.m_children << this;
 }
 
 QString
