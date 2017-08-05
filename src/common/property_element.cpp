@@ -162,7 +162,7 @@ property_element_c::init_tables() {
   sub_sub_master_callbacks     = &KaxVideoColour::ClassInfos;
   sub_sub_sub_master_callbacks = &KaxVideoColourMasterMeta::ClassInfos;
 
-  ELE2("colour-matrix",                    KaxVideoColourMatrix::ClassInfos,            Y("Video: colour matrix coefficients"), Y("Sets the matrix coefficients of the video used to derive luma and chroma values "
+  ELE2("colour-matrix-coefficients",       KaxVideoColourMatrix::ClassInfos,            Y("Video: colour matrix coefficients"), Y("Sets the matrix coefficients of the video used to derive luma and chroma values "
                                                                                                                                   "from red, green and blue color primaries."));
   ELE2("colour-bits-per-channel",          KaxVideoBitsPerChannel::ClassInfos,          Y("Video: bits per colour channel"),    Y("Sets the number of coded bits for a colour channel."));
   ELE2("chroma-subsample-horizontal",      KaxVideoChromaSubsampHorz::ClassInfos,       Y("Video: pixels to remove in chroma"), Y("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."));

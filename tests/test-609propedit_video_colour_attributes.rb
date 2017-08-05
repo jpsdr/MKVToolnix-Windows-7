@@ -12,7 +12,7 @@ test "set all attributes" do
   src = tmp
 
   colour_attributes = [
-    "colour-matrix",
+    "colour-matrix-coefficients",
     "colour-bits-per-channel",
     "chroma-subsample-horizontal",
     "chroma-subsample-vertical",
