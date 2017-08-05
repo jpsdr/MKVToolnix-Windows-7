@@ -549,137 +549,97 @@ handle_audio_track(EbmlStream *&es,
 }
 
 void handle_video_colour_master_meta(EbmlStream *&es,
-                                     EbmlElement *&l5,
-                                     std::vector<std::string> &summary) {
+                                     EbmlElement *&l5) {
   show_element(l5, 5, Y("Video colour mastering metadata"));
+
   for (auto l6: *static_cast<EbmlMaster *>(l5)) {
-    if (Is<KaxVideoRChromaX>(l6)) {
-      auto &x = *static_cast<KaxVideoRChromaX *>(l6);
-      show_element(l6, 6, boost::format(Y("Red colour coordinate x: %1%")) % x.GetValue());
-      summary.push_back((boost::format(Y("Red colour coordinate x: %1%")) % x.GetValue()).str());
+    if (Is<KaxVideoRChromaX>(l6))
+      show_element(l6, 6, boost::format(Y("Red colour coordinate x: %1%")) % static_cast<KaxVideoRChromaX *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoRChromaY>(l6)) {
-      auto &y = *static_cast<KaxVideoRChromaY *>(l6);
-      show_element(l6, 6, boost::format(Y("Red colour coordinate y: %1%")) % y.GetValue());
-      summary.push_back((boost::format(Y("Red colour coordinate y: %1%")) % y.GetValue()).str());
+    else if (Is<KaxVideoRChromaY>(l6))
+      show_element(l6, 6, boost::format(Y("Red colour coordinate y: %1%")) % static_cast<KaxVideoRChromaY *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoGChromaX>(l6)) {
-      auto &x = *static_cast<KaxVideoGChromaX *>(l6);
-      show_element(l6, 6, boost::format(Y("Green colour coordinate x: %1%")) % x.GetValue());
-      summary.push_back((boost::format(Y("Green colour coordinate x: %1%")) % x.GetValue()).str());
+    else if (Is<KaxVideoGChromaX>(l6))
+      show_element(l6, 6, boost::format(Y("Green colour coordinate x: %1%")) % static_cast<KaxVideoGChromaX *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoGChromaY>(l6)) {
-      auto &y = *static_cast<KaxVideoGChromaY *>(l6);
-      show_element(l6, 6, boost::format(Y("Green colour coordinate y: %1%")) % y.GetValue());
-      summary.push_back((boost::format(Y("Green colour coordinate y: %1%")) % y.GetValue()).str());
+    else if (Is<KaxVideoGChromaY>(l6))
+      show_element(l6, 6, boost::format(Y("Green colour coordinate y: %1%")) % static_cast<KaxVideoGChromaY *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoBChromaX>(l6)) {
-      auto &x = *static_cast<KaxVideoBChromaX *>(l6);
-      show_element(l6, 6, boost::format(Y("Blue colour coordinate x: %1%")) % x.GetValue());
-      summary.push_back((boost::format(Y("Blue colour coordinate x: %1%")) % x.GetValue()).str());
+    else if (Is<KaxVideoBChromaX>(l6))
+      show_element(l6, 6, boost::format(Y("Blue colour coordinate x: %1%")) % static_cast<KaxVideoBChromaX *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoBChromaY>(l6)) {
-      auto &y = *static_cast<KaxVideoBChromaY *>(l6);
-      show_element(l6, 6, boost::format(Y("Blue colour coordinate y: %1%")) % y.GetValue());
-      summary.push_back((boost::format(Y("Blue colour coordinate y: %1%")) % y.GetValue()).str());
+    else if (Is<KaxVideoBChromaY>(l6))
+      show_element(l6, 6, boost::format(Y("Blue colour coordinate y: %1%")) % static_cast<KaxVideoBChromaY *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoWhitePointChromaX>(l6)) {
-      auto &x = *static_cast<KaxVideoWhitePointChromaX *>(l6);
-      show_element(l6, 6, boost::format(Y("White colour coordinate x: %1%")) % x.GetValue());
-      summary.push_back((boost::format(Y("White colour coordinate x: %1%")) % x.GetValue()).str());
+    else if (Is<KaxVideoWhitePointChromaX>(l6))
+      show_element(l6, 6, boost::format(Y("White colour coordinate x: %1%")) % static_cast<KaxVideoWhitePointChromaX *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoWhitePointChromaY>(l6)) {
-      auto &y = *static_cast<KaxVideoWhitePointChromaY *>(l6);
-      show_element(l6, 6, boost::format(Y("White colour coordinate y: %1%")) % y.GetValue());
-      summary.push_back((boost::format(Y("White colour coordinate y: %1%")) % y.GetValue()).str());
+    else if (Is<KaxVideoWhitePointChromaY>(l6))
+      show_element(l6, 6, boost::format(Y("White colour coordinate y: %1%")) % static_cast<KaxVideoWhitePointChromaY *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoLuminanceMax>(l6)) {
-      auto &luminance = *static_cast<KaxVideoLuminanceMax *>(l6);
-      show_element(l6, 6, boost::format(Y("Max luminance: %1%")) % luminance.GetValue());
-      summary.push_back((boost::format(Y("Max luminance: %1%")) % luminance.GetValue()).str());
+    else if (Is<KaxVideoLuminanceMax>(l6))
+      show_element(l6, 6, boost::format(Y("Max luminance: %1%")) % static_cast<KaxVideoLuminanceMax *>(l6)->GetValue());
 
-    } else if (Is<KaxVideoLuminanceMin>(l6)) {
-      auto &luminance = *static_cast<KaxVideoLuminanceMin *>(l6);
-      show_element(l6, 6, boost::format(Y("Min luminance: %1%")) % luminance.GetValue());
-      summary.push_back((boost::format(Y("Min luminance: %1%")) % luminance.GetValue()).str());
-    }
+    else if (Is<KaxVideoLuminanceMin>(l6))
+      show_element(l6, 6, boost::format(Y("Min luminance: %1%")) % static_cast<KaxVideoLuminanceMin *>(l6)->GetValue());
+
+    else if (!is_global(es, l6, 6))
+      show_unknown_element(l6, 6);
   }
 }
 
 void
 handle_video_colour(EbmlStream *&es,
-                    EbmlElement *&l4,
-                    std::vector<std::string> &summary) {
+                    EbmlElement *&l4) {
   show_element(l4, 4, Y("Video colour information"));
+
   for (auto l5 : *static_cast<EbmlMaster *>(l4)) {
-    if (Is<KaxVideoColourMatrix>(l5)) {
-      auto &colour_matrix = *static_cast<KaxVideoColourMatrix *>(l5);
-      show_element(l5, 5, boost::format(Y("Colour matrix: %1%")) % colour_matrix.GetValue());
-      summary.push_back((boost::format(Y("Colour matrix: %1%")) % colour_matrix.GetValue()).str());
+    if (Is<KaxVideoColourMatrix>(l5))
+      show_element(l5, 5, boost::format(Y("Colour matrix: %1%")) % static_cast<KaxVideoColourMatrix *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoBitsPerChannel>(l5)) {
-      auto &bits_per_channel = *static_cast<KaxVideoBitsPerChannel *>(l5);
-      show_element(l5, 5, boost::format(Y("Bits per channel: %1%")) % bits_per_channel.GetValue());
-      summary.push_back((boost::format(Y("Bits per channel: %1%")) % bits_per_channel.GetValue()).str());
+    else if (Is<KaxVideoBitsPerChannel>(l5))
+      show_element(l5, 5, boost::format(Y("Bits per channel: %1%")) % static_cast<KaxVideoBitsPerChannel *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoChromaSubsampHorz>(l5)) {
-      auto &subsample_hori = *static_cast<KaxVideoChromaSubsampHorz *>(l5);
-      show_element(l5, 5, boost::format(Y("Horizontal chroma subsample: %1%")) % subsample_hori.GetValue());
-      summary.push_back((boost::format(Y("Horizontal chroma subsample: %1%")) % subsample_hori.GetValue()).str());
+    else if (Is<KaxVideoChromaSubsampHorz>(l5))
+      show_element(l5, 5, boost::format(Y("Horizontal chroma subsample: %1%")) % static_cast<KaxVideoChromaSubsampHorz *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoChromaSubsampVert>(l5)) {
-      auto &subsample_vert = *static_cast<KaxVideoChromaSubsampVert *>(l5);
-      show_element(l5, 5, boost::format(Y("Vertical chroma subsample: %1%")) % subsample_vert.GetValue());
-      summary.push_back((boost::format(Y("Vertical chroma subsample: %1%")) % subsample_vert.GetValue()).str());
+    else if (Is<KaxVideoChromaSubsampVert>(l5))
+      show_element(l5, 5, boost::format(Y("Vertical chroma subsample: %1%")) % static_cast<KaxVideoChromaSubsampVert *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoCbSubsampHorz>(l5)) {
-      auto &subsample_hori = *static_cast<KaxVideoCbSubsampHorz *>(l5);
-      show_element(l5, 5, boost::format(Y("Horizontal Cb subsample: %1%")) % subsample_hori.GetValue());
-      summary.push_back((boost::format(Y("Horizontal Cb subsample: %1%")) % subsample_hori.GetValue()).str());
+    else if (Is<KaxVideoCbSubsampHorz>(l5))
+      show_element(l5, 5, boost::format(Y("Horizontal Cb subsample: %1%")) % static_cast<KaxVideoCbSubsampHorz *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoCbSubsampVert>(l5)) {
-      auto &subsample_vert = *static_cast<KaxVideoCbSubsampVert *>(l5);
-      show_element(l5, 5, boost::format(Y("Vertical Cb subsample: %1%")) % subsample_vert.GetValue());
-      summary.push_back((boost::format(Y("Vertical Cb subsample: %1%")) % subsample_vert.GetValue()).str());
+    else if (Is<KaxVideoCbSubsampVert>(l5))
+      show_element(l5, 5, boost::format(Y("Vertical Cb subsample: %1%")) % static_cast<KaxVideoCbSubsampVert *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoChromaSitHorz>(l5)) {
-      auto &sit_hori = *static_cast<KaxVideoChromaSitHorz *>(l5);
-      show_element(l5, 5, boost::format(Y("Horizontal chroma siting: %1%")) % sit_hori.GetValue());
-      summary.push_back((boost::format(Y("Horizontal chroma siting: %1%")) % sit_hori.GetValue()).str());
+    else if (Is<KaxVideoChromaSitHorz>(l5))
+      show_element(l5, 5, boost::format(Y("Horizontal chroma siting: %1%")) % static_cast<KaxVideoChromaSitHorz *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoChromaSitVert>(l5)) {
-      auto &sit_vert = *static_cast<KaxVideoChromaSitVert *>(l5);
-      show_element(l5, 5, boost::format(Y("Vertical chroma siting: %1%")) % sit_vert.GetValue());
-      summary.push_back((boost::format(Y("Vertical chroma siting: %1%")) % sit_vert.GetValue()).str());
+    else if (Is<KaxVideoChromaSitVert>(l5))
+      show_element(l5, 5, boost::format(Y("Vertical chroma siting: %1%")) % static_cast<KaxVideoChromaSitVert *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoColourRange>(l5)) {
-      auto &range = *static_cast<KaxVideoColourRange *>(l5);
-      show_element(l5, 5, boost::format(Y("Colour range: %1%")) % range.GetValue());
-      summary.push_back((boost::format(Y("Colour range: %1%")) % range.GetValue()).str());
+    else if (Is<KaxVideoColourRange>(l5))
+      show_element(l5, 5, boost::format(Y("Colour range: %1%")) % static_cast<KaxVideoColourRange *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoColourTransferCharacter>(l5)) {
-      auto &transfer = *static_cast<KaxVideoColourTransferCharacter *>(l5);
-      show_element(l5, 5, boost::format(Y("Colour transfer: %1%")) % transfer.GetValue());
-      summary.push_back((boost::format(Y("Colour transfer: %1%")) % transfer.GetValue()).str());
+    else if (Is<KaxVideoColourTransferCharacter>(l5))
+      show_element(l5, 5, boost::format(Y("Colour transfer: %1%")) % static_cast<KaxVideoColourTransferCharacter *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoColourPrimaries>(l5)) {
-      auto &primaries = *static_cast<KaxVideoColourPrimaries *>(l5);
-      show_element(l5, 5, boost::format(Y("Colour primaries: %1%")) % primaries.GetValue());
-      summary.push_back((boost::format(Y("Colour primaries: %1%")) % primaries.GetValue()).str());
+    else if (Is<KaxVideoColourPrimaries>(l5))
+      show_element(l5, 5, boost::format(Y("Colour primaries: %1%")) % static_cast<KaxVideoColourPrimaries *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoColourMaxCLL>(l5)) {
-      auto &max = *static_cast<KaxVideoColourMaxCLL *>(l5);
-      show_element(l5, 5, boost::format(Y("Max content light: %1%")) % max.GetValue());
-      summary.push_back((boost::format(Y("Max content light: %1%")) % max.GetValue()).str());
+    else if (Is<KaxVideoColourMaxCLL>(l5))
+      show_element(l5, 5, boost::format(Y("Max content light: %1%")) % static_cast<KaxVideoColourMaxCLL *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoColourMaxFALL>(l5)) {
-      auto &max = *static_cast<KaxVideoColourMaxFALL *>(l5);
-      show_element(l5, 5, boost::format(Y("Max frame light: %1%")) % max.GetValue());
-      summary.push_back((boost::format(Y("Max frame light: %1%")) % max.GetValue()).str());
+    else if (Is<KaxVideoColourMaxFALL>(l5))
+      show_element(l5, 5, boost::format(Y("Max frame light: %1%")) % static_cast<KaxVideoColourMaxFALL *>(l5)->GetValue());
 
-    } else if (Is<KaxVideoColourMasterMeta>(l5)) {
-      handle_video_colour_master_meta(es, l5, summary);
-    }
+    else if (Is<KaxVideoColourMasterMeta>(l5))
+      handle_video_colour_master_meta(es, l5);
+
+    else if (!is_global(es, l5, 5))
+      show_unknown_element(l5, 5);
+  }
+}
   }
 }
 
@@ -785,7 +745,7 @@ handle_video_track(EbmlStream *&es,
       show_element(l4, 4, boost::format(Y("Frame rate: %1%")) % static_cast<KaxVideoFrameRate *>(l4)->GetValue());
 
     else if (Is<KaxVideoColour>(l4))
-      handle_video_colour(es, l4, summary);
+      handle_video_colour(es, l4);
 
     else if (!is_global(es, l4, 4))
       show_unknown_element(l4, 4);
