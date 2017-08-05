@@ -640,6 +640,37 @@ handle_video_colour(EbmlStream *&es,
       show_unknown_element(l5, 5);
   }
 }
+
+void
+handle_video_projection(EbmlStream *&es,
+                        EbmlElement *&l4) {
+  show_element(l4, 4, Y("Video projection"));
+
+  for (auto l5 : *static_cast<EbmlMaster *>(l4)) {
+    if (Is<KaxVideoProjectionType>(l5)) {
+      auto value       = static_cast<KaxVideoProjectionType *>(l5)->GetValue();
+      auto description = 0 == value ? Y("rectangular")
+                       : 1 == value ? Y("equirectangular")
+                       : 2 == value ? Y("cubemap")
+                       : 3 == value ? Y("mesh")
+                       :              Y("unknown");
+
+      show_element(l5, 5, boost::format(Y("Projection type: %1% (%2%)")) % value % description);
+
+    } else if (Is<KaxVideoProjectionPrivate>(l5))
+      show_element(l5, 5, boost::format(Y("Projection's private data: %1%")) % to_hex(static_cast<KaxVideoProjectionPrivate *>(l5)));
+
+    else if (Is<KaxVideoProjectionPoseYaw>(l5))
+      show_element(l5, 5, boost::format(Y("Projection's yaw rotation: %1%")) % static_cast<KaxVideoProjectionPoseYaw *>(l5)->GetValue());
+
+    else if (Is<KaxVideoProjectionPosePitch>(l5))
+      show_element(l5, 5, boost::format(Y("Projection's pitch rotation: %1%")) % static_cast<KaxVideoProjectionPosePitch *>(l5)->GetValue());
+
+    else if (Is<KaxVideoProjectionPoseRoll>(l5))
+      show_element(l5, 5, boost::format(Y("Projection's roll rotation: %1%")) % static_cast<KaxVideoProjectionPoseRoll *>(l5)->GetValue());
+
+    else if (!is_global(es, l5, 5))
+      show_unknown_element(l5, 5);
   }
 }
 
@@ -746,6 +777,9 @@ handle_video_track(EbmlStream *&es,
 
     else if (Is<KaxVideoColour>(l4))
       handle_video_colour(es, l4);
+
+    else if (Is<KaxVideoProjection>(l4))
+      handle_video_projection(es, l4);
 
     else if (!is_global(es, l4, 4))
       show_unknown_element(l4, 4);

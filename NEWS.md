@@ -22,6 +22,8 @@
   attributes. Implements one half of #2038.
 * MKVToolNix GUI: header editor: added support for editing the video colour
   attributes. Implements the second half of #2038.
+* mkvinfo: added support for the "video projection" track header
+  attributes. Part of the implementation of #2064.
 
 ## Bug fixes
 
