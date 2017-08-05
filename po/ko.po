@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-07-30 19:23+0200\n"
+"POT-Creation-Date: 2017-08-05 07:22+0200\n"
 "PO-Revision-Date: 2017-08-01 21:35+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1263,7 +1263,7 @@ msgstr "%s – 초"
 msgid "&Abort job"
 msgstr "작업 취소(&A)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:491
+#: src/mkvtoolnix-gui/jobs/tool.cpp:520
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:390
 #, no-c-format
 msgid "&Abort jobs"
@@ -1273,7 +1273,7 @@ msgstr "작업 취소(&A)"
 msgid "&About mkvinfo"
 msgstr "mkvinfo 정보(&A)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:385
+#: src/mkvtoolnix-gui/jobs/tool.cpp:414
 #, no-c-format
 msgid "&Acknowledge warnings and errors"
 msgstr "경고와 오류 알리기(&A)"
@@ -1293,7 +1293,7 @@ msgid "&Add attachment"
 msgstr "첨부 파일 추가(&A)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
@@ -1376,7 +1376,7 @@ msgid "&Close file"
 msgstr "파일 닫기(&C)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:279
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
 #, no-c-format
 msgid "&Collapse all"
 msgstr "모두 접기(&C)"
@@ -1455,7 +1455,7 @@ msgid "&Escape arguments for:"
 msgstr "이스케이프 인수(&E):"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:197
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:278
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
 #, no-c-format
 msgid "&Expand all"
 msgstr "모두 확장(&E)"
@@ -1629,7 +1629,7 @@ msgstr "Matroska, WebM 또는 챕터 파일 열기(&O)"
 msgid "&Open as new tabs in the header editor"
 msgstr "헤더 편집기에서 새 탭으로 열기(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:380
+#: src/mkvtoolnix-gui/jobs/tool.cpp:409
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:146
 #, no-c-format
 msgid "&Open folder"
@@ -1693,7 +1693,7 @@ msgstr "다시 불러오기(&R)"
 msgid "&Reload file"
 msgstr "파일 다시 불러오기(&R)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:283
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
@@ -1706,7 +1706,7 @@ msgid "&Remove file"
 msgid_plural "&Remove files"
 msgstr[0] "파일 삭제(&R)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:197
+#: src/mkvtoolnix-gui/jobs/tool.cpp:213
 #, no-c-format
 msgid "&Remove job"
 msgid_plural "&Remove jobs"
@@ -1735,7 +1735,7 @@ msgstr "이 값 초기화(&R)"
 msgid "&Save"
 msgstr "저장(&S)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:282
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:284
 #, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "첨부 파일 내용물을 파일로 저장"
@@ -1790,7 +1790,7 @@ msgstr "그 시작과 끝 타임스탬프 순서로 챕터 정렬(&S)"
 msgid "&Start && end:"
 msgstr "시작 && 끝(&S):"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:194
+#: src/mkvtoolnix-gui/jobs/tool.cpp:210
 #, no-c-format
 msgid "&Start job automatically"
 msgid_plural "&Start jobs automatically"
@@ -1842,7 +1842,7 @@ msgstr "비디오(&V)"
 msgid "&Video tracks:"
 msgstr "비디오 트랙(&V):"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:379
+#: src/mkvtoolnix-gui/jobs/tool.cpp:408
 #, no-c-format
 msgid "&View output"
 msgstr "출력 보기(&v)"
@@ -2263,18 +2263,15 @@ msgstr "'-D'와 '-d'는 동일한 소스 파일에서 사용합니다.\n"
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S'와 '-s'는 동일한 소스 파일에서 사용합니다.\n"
 
-#: src/common/property_element.cpp:119
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:419
+#: src/common/property_element.cpp:126
 msgid "'Default track' flag"
 msgstr "'기본 트랙' 플래그"
 
-#: src/common/property_element.cpp:122
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:425
+#: src/common/property_element.cpp:129
 msgid "'Forced display' flag"
 msgstr "'강제 표시' 플래그"
 
-#: src/common/property_element.cpp:121
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:422
+#: src/common/property_element.cpp:128
 msgid "'Track enabled' flag"
 msgstr "'유효 트랙' 플래그"
 
@@ -2434,13 +2431,11 @@ msgstr "유지할 내용의 타임코드 범위를 쉼표로 구분하여 열거
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "너비, 높이와 컬러 팔레트용 기본 설정값과 기본 인덱스가 대신 사용될 것입니다."
 
-#: src/common/property_element.cpp:134
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:453
+#: src/common/property_element.cpp:141
 msgid "A human-readable string specifying the codec."
 msgstr "인간이 읽을 수 있는 형식의 코덱을 지정하는 문자열입니다."
 
-#: src/common/property_element.cpp:131
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:444
+#: src/common/property_element.cpp:138
 msgid "A human-readable track name."
 msgstr "인간이 읽을 수 있는 형식의 트랙 이름입니다."
 
@@ -2460,17 +2455,13 @@ msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
 msgstr[0] "MKVToolNix 설치할 때 몇 가지 문제를 감지했습니다:"
 
-#: src/common/property_element.cpp:107
+#: src/common/property_element.cpp:114
 msgid ""
 "A randomly generated unique ID to identify the current\n"
 "segment between many others (128 bits)."
 msgstr ""
 "많은 다른 세그먼트에서 현재의 세그먼트를 식별하는\n"
 "임의로 생성되는 고유 ID입니다 (128 비트)."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:382
-msgid "A randomly generated unique ID to identify the current segment between many others (128 bits)."
-msgstr "다른 많은 세그먼트 중에서 현재 세그먼트를 인식하기 위해 무작위로 만든 고유 ID (128 비트)."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:391
 #: src/mkvtoolnix-gui/merge/output.cpp:407
@@ -2487,7 +2478,7 @@ msgstr "트랙"
 msgid "A track with the ID %1% was requested but not found in the file. The corresponding option will be ignored.\n"
 msgstr "트랙 ID %1%가 요구되었지만, 파일에서 찾지 못했습니다. 해당 옵션은 무시됩니다.\n"
 
-#: src/common/property_element.cpp:117
+#: src/common/property_element.cpp:124
 msgid ""
 "A unique ID to identify the Track. This should be\n"
 "kept the same when making a direct stream copy\n"
@@ -2497,29 +2488,17 @@ msgstr ""
 "다른 파일에 트랙을 직접 스트림 복사할때,\n"
 "이것은 동일하게 유지됩니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:415
-msgid "A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file."
-msgstr "트랙을 인식하기 위한 고유 ID. 이 트랙을 다른 파일에 직접 스트림 복사할 때 이 고유 ID는 동일하게 유지해야 합니다."
-
-#: src/common/property_element.cpp:110
+#: src/common/property_element.cpp:117
 msgid ""
 "A unique ID to identify the next chained\n"
 "segment (128 bits)."
 msgstr "다음 일련 세그먼트를 식별하는 고유 ID입니다 (128 비트)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:384
-msgid "A unique ID to identify the next chained segment (128 bits)."
-msgstr "연결된 다음 세그먼트를 인식하기 위한 고유 ID (128 비트)."
-
-#: src/common/property_element.cpp:109
+#: src/common/property_element.cpp:116
 msgid ""
 "A unique ID to identify the previous chained\n"
 "segment (128 bits)."
 msgstr "이전 일련 세그먼트를 식별하는 고유 ID입니다 (128 비트)."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
-msgid "A unique ID to identify the previous chained segment (128 bits)."
-msgstr "연결된 이전 세그먼트를 인식하기 위한 고유 ID (128 비트)."
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:52
 #, no-c-format
@@ -2613,7 +2592,7 @@ msgstr "실행 중인 모든 작업 취소하고 즉시 정지(&I)"
 msgid "Abort running job"
 msgstr "실행 중인 작업 취소"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:489
+#: src/mkvtoolnix-gui/jobs/tool.cpp:518
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:388
 #, no-c-format
 msgid "Abort running jobs"
@@ -2633,12 +2612,12 @@ msgstr "mkvinfo 정보"
 msgid "Acknowledge &all warnings and errors"
 msgstr "모든 경고와 오류 알리기(&A)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:384
+#: src/mkvtoolnix-gui/jobs/tool.cpp:413
 #, no-c-format
 msgid "Acknowledge &errors"
 msgstr "오류 알리기(&E)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:383
+#: src/mkvtoolnix-gui/jobs/tool.cpp:412
 #, no-c-format
 msgid "Acknowledge &warnings"
 msgstr "경고 알리기(&W)"
@@ -2704,7 +2683,7 @@ msgstr "현재 파일에 새 첨부 파일로 추가(&A)"
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "현재 합치기 설정에 새 소스 파일로 추가(&L)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:621
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:624
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -2906,7 +2885,7 @@ msgstr "모든 항목"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:621
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:624
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:317
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:399
@@ -2936,7 +2915,7 @@ msgstr "다음의 모든 파일명을 챕터 편집기에서 열 것입니다."
 msgid "All following file names will be opened in the header editor."
 msgstr "다음의 모든 파일명을 헤더 편집기에서 열 것입니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:547
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:546
 #, no-c-format
 msgid "All header values are OK."
 msgstr "모든 헤더 값에 이상이 없습니다."
@@ -3032,8 +3011,7 @@ msgstr "프로그램이 GUI와 같은 폴더에 있더라도 항상 전체 경�
 msgid "An <attachment-selector> can have three forms:"
 msgstr "<attachment-selector>는 3가지 형태를 취할 수 있음:"
 
-#: src/common/property_element.cpp:133
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:450
+#: src/common/property_element.cpp:140
 msgid "An ID corresponding to the codec."
 msgstr "코덱에 해당하는 ID입니다."
 
@@ -3056,21 +3034,13 @@ msgstr "'%1' 이름의 첨부 파일이 이미 있습니다."
 msgid "An empty file name is not valid.\n"
 msgstr "빈 파일 이름이 잘못되었습니다.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:381
-msgid "An escaped file name corresponding to the next segment."
-msgstr "다음 세그먼트에 해당하는 이스케이프 파일 이름입니다."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
-msgid "An escaped file name corresponding to the previous segment."
-msgstr "이전 시그먼트에 해당하는 이스케이프 파일 이름입니다."
-
-#: src/common/property_element.cpp:106
+#: src/common/property_element.cpp:113
 msgid ""
 "An escaped filename corresponding to\n"
 "the next segment."
 msgstr "다음 세그먼트에 해당하는 이스케이프 파일 이름입니다."
 
-#: src/common/property_element.cpp:105
+#: src/common/property_element.cpp:112
 msgid ""
 "An escaped filename corresponding to\n"
 "the previous segment."
@@ -3194,7 +3164,7 @@ msgstr "같은 이름의 첨부 파일이 존재합니다"
 #: src/info/mkvinfo.cpp:1213
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:20
-#: src/propedit/options.cpp:200
+#: src/propedit/options.cpp:231
 msgid "Attachments"
 msgstr "첨부 파일"
 
@@ -3208,13 +3178,11 @@ msgstr "소스 파일의 첨부 파일(&S):"
 msgid "Audio"
 msgstr "오디오"
 
-#: src/common/property_element.cpp:159
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:511
+#: src/common/property_element.cpp:198
 msgid "Audio bit depth"
 msgstr "오디오의 비트 심도"
 
-#: src/common/property_element.cpp:158
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:508
+#: src/common/property_element.cpp:197
 msgid "Audio channels"
 msgstr "오디오 채널"
 
@@ -3223,8 +3191,7 @@ msgstr "오디오 채널"
 msgid "Audio files"
 msgstr "오디오 파일"
 
-#: src/common/property_element.cpp:157
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:505
+#: src/common/property_element.cpp:196
 msgid "Audio output sampling frequency"
 msgstr "오디오 출력 샘플링 주파수"
 
@@ -3232,8 +3199,7 @@ msgstr "오디오 출력 샘플링 주파수"
 msgid "Audio properties"
 msgstr "오디오 속성"
 
-#: src/common/property_element.cpp:156
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:502
+#: src/common/property_element.cpp:195
 msgid "Audio sampling frequency"
 msgstr "오디오 샘플링 주파수"
 
@@ -3304,8 +3270,7 @@ msgstr "비트 심도: %1%"
 msgid "Bits per channel: %1%"
 msgstr "채널 당 비트 수: %1%"
 
-#: src/common/property_element.cpp:159
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:511
+#: src/common/property_element.cpp:198
 msgid "Bits per sample, mostly used for PCM."
 msgstr "샘플 당 비트수 입니다. 일반적으로 PCM으로 사용됩니다."
 
@@ -3355,6 +3320,14 @@ msgstr "블루레이 인덱스 파일"
 #, no-c-format
 msgid "Blu-ray playlist files"
 msgstr "블루레이 재생목록 파일"
+
+#: src/common/property_element.cpp:186
+msgid "Blue X chromacity coordinate as defined by CIE 1931."
+msgstr ""
+
+#: src/common/property_element.cpp:187
+msgid "Blue Y chromacity coordinate as defined by CIE 1931."
+msgstr ""
 
 #: src/info/mkvinfo.cpp:578
 #: src/info/mkvinfo.cpp:579
@@ -3459,7 +3432,7 @@ msgstr "모든 트랙의 통계를 계산하고, 새로운 태그를 추가하�
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:262
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:193
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:223
-#: src/mkvtoolnix-gui/jobs/tool.cpp:492
+#: src/mkvtoolnix-gui/jobs/tool.cpp:521
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:391
 #: src/mkvtoolnix-gui/merge/input.cpp:1211
 #: src/mkvtoolnix-gui/merge/tab.cpp:398
@@ -3538,22 +3511,22 @@ msgstr "어떤 파일 형식에는 그 트랙에 '언어' 속성이 있습니다
 msgid "Certain functions won't work correctly in this situation."
 msgstr "이 상황에서 어떤 기능은 바르게 동작하지 않을 것입니다."
 
-#: src/propedit/change.cpp:277
+#: src/propedit/change.cpp:282
 #, boost-format
 msgid "Change for '%1%' executed. No property of this type found. One entry added.\n"
 msgstr "'%1%'의 변경이 실행되었습니다. 이같은 유형의 속성을 찾지 못했습니다. 하나의 항목이 추가되었습니다.\n"
 
-#: src/propedit/change.cpp:257
+#: src/propedit/change.cpp:262
 #, boost-format
 msgid "Change for '%1%' executed. Number of entries deleted: %2%\n"
 msgstr "'%1%'의 변경이 실행되었습니다. 삭제된 항목 수: %2%개\n"
 
-#: src/propedit/change.cpp:283
+#: src/propedit/change.cpp:288
 #, boost-format
 msgid "Change for '%1%' executed. Number of entries set: %2%.\n"
 msgstr "'%1%'의 변경이 실행되었습니다. 설정된 항목 수: %2%개\n"
 
-#: src/propedit/change.cpp:294
+#: src/propedit/change.cpp:299
 #, boost-format
 msgid "Change for '%1%' executed. One entry added.\n"
 msgstr "'%1%'의 변경이 실행되었습니다. 하나의 항목이 추가되었습니다.\n"
@@ -3635,7 +3608,7 @@ msgstr "챕터 분석: 판(Edition) UID %1%는 고유한 것이 아니므로 재
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1733
 #: src/mkvtoolnix-gui/merge/track.cpp:407
-#: src/propedit/options.cpp:191
+#: src/propedit/options.cpp:222
 #, no-c-format
 msgid "Chapters"
 msgstr "챕터"
@@ -3684,6 +3657,11 @@ msgstr "이 옵션 체크시 파일 추가시 모든 트랙 형식에 대해 기
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1337
 msgid "Clearing settings auto&matically:"
 msgstr "설정  자동 삭제(&M):"
+
+#: src/common/property_element.cpp:176
+#, fuzzy
+msgid "Clipping of the color ranges."
+msgstr "  --colour-range <TID:n>   색상 범위 잘라내기.\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1335
 msgid "Close current settings"
@@ -3735,8 +3713,7 @@ msgstr "클러스터 타임코드: %|1$.3f|s"
 msgid "Codec"
 msgstr "코덱"
 
-#: src/common/property_element.cpp:133
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:450
+#: src/common/property_element.cpp:140
 msgid "Codec ID"
 msgstr "코덱 ID"
 
@@ -3771,8 +3748,7 @@ msgstr "코덱 다운로드 URL: %1%"
 msgid "Codec info URL: %1%"
 msgstr "코덱 정보 URL: %1%"
 
-#: src/common/property_element.cpp:134
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:453
+#: src/common/property_element.cpp:141
 msgid "Codec name"
 msgstr "코덱 이름"
 
@@ -3791,12 +3767,11 @@ msgstr "코덱 설정: %1%"
 msgid "Codec state: %1%"
 msgstr "코덱 상태: %1%"
 
-#: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:456
+#: src/common/property_element.cpp:142
 msgid "Codec-inherent delay"
 msgstr "코덱 고유의 지연 시간"
 
-#: src/mkvtoolnix-gui/header_editor/page_model.cpp:135
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:149
 #, no-c-format
 msgid "Codec/MIME type"
 msgstr "코덱/MIME 형식"
@@ -3805,6 +3780,16 @@ msgstr "코덱/MIME 형식"
 #, boost-format
 msgid "CodecPrivate, length %1%%2%"
 msgstr "CodecPrivate, 길이 %1%%2%"
+
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:480
+#, fuzzy
+msgid "Colour information"
+msgstr "비디오 색상 정보"
+
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:485
+#, fuzzy
+msgid "Colour mastering meta information"
+msgstr "정보를 저장하는 동안 오류 발생"
 
 #: src/info/mkvinfo.cpp:617
 #: src/info/mkvinfo.cpp:618
@@ -4298,8 +4283,7 @@ msgstr "DV 비디오 형식"
 msgid "DVB subtitles"
 msgstr "DVB 자막"
 
-#: src/common/property_element.cpp:103
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:378
+#: src/common/property_element.cpp:110
 msgid "Date"
 msgstr "날짜"
 
@@ -4341,8 +4325,7 @@ msgstr "기본값"
 msgid "Default additional co&mmand line options:"
 msgstr "기본 추가 명령행 옵션(&M):"
 
-#: src/common/property_element.cpp:130
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:441
+#: src/common/property_element.cpp:137
 msgid "Default duration"
 msgstr "기본 재생 시간"
 
@@ -4364,7 +4347,7 @@ msgstr "기본 플래그: %1%"
 msgid "Default subtitle &charset to set:"
 msgstr "기본 자막 문자셋 설정(&C):"
 
-#: src/mkvtoolnix-gui/header_editor/page_model.cpp:139
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:153
 #, no-c-format
 msgid "Default track"
 msgstr "기본 트랙"
@@ -4399,8 +4382,7 @@ msgstr "새로 추가한 트랙의 기본값"
 msgid "Delay (in ms):"
 msgstr "지연 (ms 단위):"
 
-#: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:456
+#: src/common/property_element.cpp:142
 msgid "Delay built into the codec during decoding in ns."
 msgstr "디코딩하는 동안 코덱에 들어 있는 지연 시간, 단위는 ns."
 
@@ -4518,7 +4500,7 @@ msgstr "첫 번째 소스 파일의 폴더에 상대적인 폴더(&R):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:276
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:278
 #, no-c-format
 msgid "Directory:"
 msgstr "폴더:"
@@ -4600,7 +4582,7 @@ msgstr "GUI를 시작하지 않습니다."
 msgid "Do not write meta seek elements at all."
 msgstr "메타 탐색(Meta seek) 요소를 전혀 기록하지 않습니다."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:490
+#: src/mkvtoolnix-gui/jobs/tool.cpp:519
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:389
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
@@ -4711,7 +4693,7 @@ msgstr "재생 시간: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "재생 시간: %|1$.3f|s (%2%)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:410
 #, no-c-format
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr "대응 도구에서 편집하고 대기열에서 삭제(&D)"
@@ -4909,7 +4891,7 @@ msgstr "%1%번째 행에서 오류: SRT 타임코드 행으로 예측되지만, 
 msgid "Error in line %1%: expected subtitle number and found some text.\n"
 msgstr "%1%번째 행에서 오류: 자막 번호로 예측되는 일부 텍스트를 찾았습니다.\n"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:521
+#: src/mkvtoolnix-gui/jobs/tool.cpp:550
 #: src/mkvtoolnix-gui/merge/tab.cpp:165
 #, no-c-format
 msgid "Error loading settings file"
@@ -5197,8 +5179,7 @@ msgstr "파일명(&L):"
 msgid "Fi&le title:"
 msgstr "파일 제목(&L):"
 
-#: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:493
+#: src/common/property_element.cpp:158
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr "필드 순서 (0, 1, 2, 6, 9 또는 14, 문서를 참조하세요)."
 
@@ -5238,12 +5219,12 @@ msgstr "파일 데이터 크기: %1%"
 msgid "File description: %1%"
 msgstr "파일 설명: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:184
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:186
 #, no-c-format
 msgid "File has been modified"
 msgstr "파일이 변경되었습니다"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:172
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:174
 #, no-c-format
 msgid "File has not been modified"
 msgstr "파일이 변경되지 않았습니다"
@@ -5258,7 +5239,7 @@ msgstr "파일 이름"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:275
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:277
 #, no-c-format
 msgid "File name:"
 msgstr "파일명:"
@@ -5283,8 +5264,8 @@ msgstr "파일이 없습니다"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:560
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:724
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:110
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:121
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:112
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:123
 #, no-c-format
 msgid "File parsing failed"
 msgstr "파일 분석 실패"
@@ -5394,7 +5375,7 @@ msgstr "모든 출력 메시지를 입력한 'code' 값의 언어로 강제 번�
 msgid "Forced flag: %1%"
 msgstr "강제 플래그: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/page_model.cpp:140
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:154
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
 #, no-c-format
 msgid "Forced track"
@@ -5526,6 +5507,14 @@ msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
 msgstr[0] "전역 태그: %1% 항목"
 
+#: src/common/property_element.cpp:184
+msgid "Green X chromacity coordinate as defined by CIE 1931."
+msgstr ""
+
+#: src/common/property_element.cpp:185
+msgid "Green Y chromacity coordinate as defined by CIE 1931."
+msgstr ""
+
 #: src/info/mkvinfo.cpp:568
 #: src/info/mkvinfo.cpp:569
 #, boost-format
@@ -5592,20 +5581,18 @@ msgstr "버퍼가 %1%바이트 밖에없고, 제거되어야하는 헤더 크기
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "버퍼가 제거되어야하는 바이트로 시작되지 않기 때문에, 헤더 제거 압축이 불가능합니다. 원하는 바이트: %1%; 찾음: %2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:547
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:562
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:564
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:546
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:561
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:563
 #, no-c-format
 msgid "Header validation"
 msgstr "헤더 검증"
 
-#: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:465
+#: src/common/property_element.cpp:148
 msgid "Height of the encoded video frames in pixels."
 msgstr "픽셀 단위로 인코딩된 비디오 프레임의 세로(높이) 해상도입니다."
 
-#: src/common/property_element.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:471
+#: src/common/property_element.cpp:150
 msgid "Height of the video frames to display."
 msgstr "비디오 프레임의 세로(높이) 해상도입니다."
 
@@ -5648,6 +5635,14 @@ msgstr "수평 크로마 위치선정:  %1%"
 #, boost-format
 msgid "Horizontal chroma subsample: %1%"
 msgstr "수평 크로마 서브샘플: %1%"
+
+#: src/common/property_element.cpp:174
+msgid "How chroma is sited horizontally."
+msgstr ""
+
+#: src/common/property_element.cpp:175
+msgid "How chroma is sited vertically."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -6450,7 +6445,7 @@ msgstr "ISO 8601 형식의 작업 종료 날짜 && 시간"
 msgid "Job output"
 msgstr "작업 출력"
 
-#: src/mkvtoolnix-gui/forms/jobs/tool.h:80
+#: src/mkvtoolnix-gui/forms/jobs/tool.h:125
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:193
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:357
 #, no-c-format
@@ -6501,11 +6496,10 @@ msgstr "Lace 번호: %1%"
 msgid "Lacing flag: %1%"
 msgstr "Lacing 플래그: %1%"
 
-#: src/common/property_element.cpp:132
+#: src/common/property_element.cpp:139
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:26
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:251
-#: src/mkvtoolnix-gui/header_editor/page_model.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:447
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:150
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48
 #, no-c-format
 msgid "Language"
@@ -6800,10 +6794,29 @@ msgstr "허용되는 최대 길이: %1%, 실제 길이: %2%"
 msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "허용되는 최대 값: %1%, 실제 값: %2%"
 
-#: src/common/property_element.cpp:128
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:436
+#: src/common/property_element.cpp:179
+#, fuzzy
+msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
+msgstr ""
+"  --max-content-light <TID:n>\n"
+"                           제곱 미터당 칸델라 단위에서 단일 픽셀의 최대 밝기\n"
+"                           (cd/m²).\n"
+
+#: src/common/property_element.cpp:135
 msgid "Maximum cache"
 msgstr "최대 캐시"
+
+#: src/common/property_element.cpp:180
+#, fuzzy
+msgid "Maximum frame-average light level in candelas per square meter (cd/m²)."
+msgstr ""
+"  --max-frame-light <TID:n>\n"
+"                           제곱 미터당 칸델라 단위에서 최대 프레임 평균 밝기\n"
+"                           수준 (cd/m²).\n"
+
+#: src/common/property_element.cpp:190
+msgid "Maximum luminance in candelas per square meter (cd/m²)."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Maximum number of files:"
@@ -6850,10 +6863,13 @@ msgstr "허용되는 최소 길이: %1%, 실제 길이: %2%"
 msgid "Minimum allowed value: %1%, actual value: %2%"
 msgstr "허용되는 최소 값: %1%, 실제 값: %2%"
 
-#: src/common/property_element.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:431
+#: src/common/property_element.cpp:133
 msgid "Minimum cache"
 msgstr "최소 캐시"
+
+#: src/common/property_element.cpp:191
+msgid "Minimum luminance in candelas per square meter (cd/m²)."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1704
@@ -6888,7 +6904,7 @@ msgstr "누락된 16진수의 자리 수"
 msgid "Missing start/end specifications for '--split' in '--split %1%'.\n"
 msgstr "'--split %1%'에서 '--split'의 시작/끝 지정이 누락되어 있습니다.\n"
 
-#: src/propedit/options.cpp:162
+#: src/propedit/options.cpp:193
 #, boost-format
 msgid "Modification of properties in the section '%1%' was requested, but no corresponding level 1 element was found in the file. %2%\n"
 msgstr "섹션 '%1%'의 속성 변경을 요청했지만, 파일에서 수준 1 요소에 해당하는 부분을 찾지 못했습니다. %2%\n"
@@ -6906,7 +6922,7 @@ msgstr "하나의 첨부 파일에 하나 이상의 MIME 유형이 지정되었�
 msgid "More than one description was given for a single attachment.\n"
 msgstr "하나의 첨부 파일에 여러개의 설명이 지정되었습니다.\n"
 
-#: src/propedit/options.cpp:106
+#: src/propedit/options.cpp:137
 #, boost-format
 msgid "More than one file name has been given ('%1%' and '%2%').\n"
 msgstr "파일 이름이 하나 이상 지정되었습니다 ('%1%'와 '%2%').\n"
@@ -6942,8 +6958,7 @@ msgstr "합치기 작업"
 msgid "Multiplexer"
 msgstr "합치기"
 
-#: src/common/property_element.cpp:111
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:385
+#: src/common/property_element.cpp:118
 msgid "Multiplexing application"
 msgstr "합치기 응용프로그램"
 
@@ -6975,9 +6990,8 @@ msgstr "NALU 크기 길이:"
 msgid "Na&me template:"
 msgstr "이름 템플릿(&M):"
 
-#: src/common/property_element.cpp:131
+#: src/common/property_element.cpp:138
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:444
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
 #: src/mkvtoolnix-gui/merge/track_model.cpp:49
@@ -6993,7 +7007,7 @@ msgstr "이름 템플릿(&P):"
 msgid "Name template:"
 msgstr "이름 템플릿:"
 
-#: src/mkvtoolnix-gui/header_editor/page_model.cpp:137
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:151
 #, no-c-format
 msgid "Name/Description"
 msgstr "이름/설명"
@@ -7028,8 +7042,7 @@ msgstr "다른 재생목록은 검색하지 않기"
 msgid "New value:"
 msgstr "새 값:"
 
-#: src/common/property_element.cpp:106
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:381
+#: src/common/property_element.cpp:113
 msgid "Next filename"
 msgstr "다음 파일명"
 
@@ -7047,8 +7060,7 @@ msgstr "다음 세그먼트 UID:"
 msgid "Next segment UID: %1%"
 msgstr "다음 세그먼트 UID: %1%"
 
-#: src/common/property_element.cpp:110
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:384
+#: src/common/property_element.cpp:117
 msgid "Next segment's unique ID"
 msgstr "다음 세그먼트의 고유 ID"
 
@@ -7232,7 +7244,7 @@ msgstr "출력해야할 스트림을 찾지 못했습니다. 중단합니다.\n"
 msgid "No track ID specified in '--%1% %2%'.\n"
 msgstr "'--%1% %2%'에 트랙 ID가 지정되어 있지 않습니다.\n"
 
-#: src/propedit/track_target.cpp:178
+#: src/propedit/track_target.cpp:195
 #, boost-format
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "edit로 지정된 '%1%'에서 해당 트랙을 찾지 못했습니다. %2%\n"
@@ -7386,13 +7398,11 @@ msgstr "만들 항목 개수(&M):"
 msgid "Number of chapters:"
 msgstr "챕터 수:"
 
-#: src/common/property_element.cpp:130
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:441
+#: src/common/property_element.cpp:137
 msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "프레임 당 나노초 (스케일되지 않음)입니다."
 
-#: src/common/property_element.cpp:158
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:508
+#: src/common/property_element.cpp:197
 msgid "Numbers of channels in the track."
 msgstr "트랙의 채널 수 입니다."
 
@@ -7429,7 +7439,7 @@ msgid_plural "Only %1% chapters found in source files & chapter files."
 msgstr[0] "소스 파일과 챕터 파일에서 %1%개의 챕터만 찾았습니다."
 
 #: src/merge/mkvmerge.cpp:1710
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:672
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:675
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7835,8 +7845,8 @@ msgstr "가능한 원인은 프로그램이 없거나 그 프로그램 또는 �
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:723
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:109
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:120
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:111
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:122
 #: src/propedit/propedit.cpp:47
 #: src/propedit/propedit.cpp:53
 #, no-c-format
@@ -7851,11 +7861,7 @@ msgstr "미리보기(&V):"
 msgid "Pre&viously used destination directory"
 msgstr "이전에 사용한 대상 폴더(&V)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
-msgid "Previous file name"
-msgstr "이전 파일명"
-
-#: src/common/property_element.cpp:105
+#: src/common/property_element.cpp:112
 msgid "Previous filename"
 msgstr "이전 파일명"
 
@@ -7873,8 +7879,7 @@ msgstr "이전 세그먼트 UID:"
 msgid "Previous segment UID: %1%"
 msgstr "이전 세그먼트 UID: %1%"
 
-#: src/common/property_element.cpp:109
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/common/property_element.cpp:116
 msgid "Previous segment's unique ID"
 msgstr "이전 세그먼트의 고유 ID"
 
@@ -7940,7 +7945,7 @@ msgstr "진행 상태: 100%%%1%"
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "진행 상태: [%1%%2%] %3%%%"
 
-#: src/mkvtoolnix-gui/header_editor/page_model.cpp:141
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:155
 #: src/mkvtoolnix-gui/merge/track_model.cpp:54
 #, no-c-format
 msgid "Properties"
@@ -8104,7 +8109,7 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "하위 챕터 번호 다시 매기기(&N)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:283
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:285
 #, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "첨부 파일을 새 파일로 교체(&P)"
@@ -8118,8 +8123,8 @@ msgstr "전체 NEWS.md 파일을 온라인으로 읽기"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "암호화된 VOB은 지원하지 않아 읽을 수 없습니다.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:669
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:681
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:672
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:684
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
 msgid "Reading failed"
@@ -8139,8 +8144,7 @@ msgstr "지정한 JSON 파일에서 추가 명령행 옵션을 읽습니다 (man
 msgid "Ready"
 msgstr "준비 완료"
 
-#: src/common/property_element.cpp:157
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:505
+#: src/common/property_element.cpp:196
 msgid "Real output sampling frequency in Hz."
 msgstr "실제 출력 샘플링 주파수(Hz단위)입니다."
 
@@ -8155,6 +8159,14 @@ msgstr "RealMedia"
 #: src/common/file_types.cpp:51
 msgid "RealMedia audio/video files"
 msgstr "RealMedia 오디오/비디오 파일"
+
+#: src/common/property_element.cpp:182
+msgid "Red X chromacity coordinate as defined by CIE 1931."
+msgstr ""
+
+#: src/common/property_element.cpp:183
+msgid "Red Y chromacity coordinate as defined by CIE 1931."
+msgstr ""
 
 #: src/info/mkvinfo.cpp:558
 #: src/info/mkvinfo.cpp:559
@@ -8278,7 +8290,7 @@ msgstr "'filename'파일의 첨부 파일을 바꿉니다"
 msgid "Replace attachment"
 msgstr "첨부 파일 교체"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:284
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:286
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "첨부 파일을 새 파일로 교체하고 첨부 파일에서 이름 && MIME 유형 얻기"
@@ -8330,12 +8342,12 @@ msgstr "모든 항목에 대한 동작은 우클릭하세요"
 msgid "Right-click for actions for editions and chapters"
 msgstr "에디션과 챕터에 대한 동작은 우클릭하세요"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
 #, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "헤더 요소와 첨부 파일에 대한 동작은 우클릭하세요"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:392
+#: src/mkvtoolnix-gui/jobs/tool.cpp:421
 #, no-c-format
 msgid "Right-click for actions for jobs"
 msgstr "작업에 대한 동작은 우클릭하세요"
@@ -8355,13 +8367,13 @@ msgstr "파일을 추가, 결합, 삭제하려면 우클릭하세요"
 msgid "Running"
 msgstr "실행 중"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:463
+#: src/mkvtoolnix-gui/jobs/tool.cpp:492
 #, no-c-format
 msgid "Running jobs cannot be edited."
 msgstr "실행 중인 작업은 편집할 수 없습니다."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:263
-#: src/mkvtoolnix-gui/jobs/tool.cpp:294
+#: src/mkvtoolnix-gui/jobs/tool.cpp:279
+#: src/mkvtoolnix-gui/jobs/tool.cpp:310
 #, no-c-format
 msgid "Running jobs cannot be removed."
 msgstr "실행 중인 작업은 삭제할 수 없습니다."
@@ -8406,8 +8418,7 @@ msgstr "처음 소스 파일과 같은 폴더(&M)"
 msgid "Sa&ve settings as"
 msgstr "다른 이름으로 설정 저장(&V)"
 
-#: src/common/property_element.cpp:156
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:502
+#: src/common/property_element.cpp:195
 msgid "Sampling frequency in Hz."
 msgstr "샘플링 주파수(Hz단위)입니다."
 
@@ -8475,17 +8486,17 @@ msgstr "저장 실패"
 msgid "Saving the chapters failed."
 msgstr "챕터 파일을 저장에 실패했습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:216
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:218
 #, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "변경된 첨부 파일 저장에 실패했습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:197
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "변경된 세그먼트 정보 헤더 저장에 실패했습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:201
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:203
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "변경된 트랙 헤더 저장에 실패했습니다."
@@ -8574,11 +8585,7 @@ msgstr "세그먼트 UID:"
 msgid "Segment e&dition UID:"
 msgstr "세그먼트 에디션 UID(&D):"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:379
-msgid "Segment file name"
-msgstr "세그먼트 파일명"
-
-#: src/common/property_element.cpp:104
+#: src/common/property_element.cpp:111
 msgid "Segment filename"
 msgstr "세그먼트 파일 이름"
 
@@ -8594,8 +8601,8 @@ msgstr "세그먼트 정보:"
 #: src/extract/timecodes_v2.cpp:243
 #: src/info/mkvinfo.cpp:451
 #: src/info/qt_ui.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:373
-#: src/propedit/options.cpp:177
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
+#: src/propedit/options.cpp:208
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
 #, no-c-format
@@ -8609,8 +8616,7 @@ msgstr "세그먼트 정보"
 msgid "Segment tracks"
 msgstr "세그먼트 트랙"
 
-#: src/common/property_element.cpp:107
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:382
+#: src/common/property_element.cpp:114
 msgid "Segment unique ID"
 msgstr "세그먼트 고유 ID"
 
@@ -8725,7 +8731,7 @@ msgstr "화면 비율 설정:"
 msgid "Set destination &file name from selected file's name"
 msgstr "선택한 파일명에서 대상 파일명 정하기(&F)"
 
-#: src/common/property_element.cpp:119
+#: src/common/property_element.cpp:126
 msgid ""
 "Set if that track (audio, video or subs) SHOULD\n"
 "be used if no language found matches the\n"
@@ -8734,11 +8740,7 @@ msgstr ""
 "사용자 설정과 일치하는 언어를 찾지 못했을 경우에는 어떤\n"
 "트랙(오디오, 비디오, 자막)이 사용될지 여부를 설정합니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:419
-msgid "Set if that track (audio, video or subs) SHOULD be used if no language found matches the user preference."
-msgstr "사용자가 선호하는 것과 일치하는 언어를 찾지 못할 경우에 사용할 트랙(오디오, 비디오, 자막)을 설정하세요."
-
-#: src/common/property_element.cpp:122
+#: src/common/property_element.cpp:129
 msgid ""
 "Set if that track MUST be used during playback.\n"
 "There can be many forced track for a kind (audio,\n"
@@ -8752,16 +8754,11 @@ msgstr ""
 "설정과 일치하는 언어 또는 기본 + 강제 표시 트랙을\n"
 "선택하여 재생합니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
-msgid "Set if that track MUST be used during playback. There can be many forced track for a kind (audio, video or subs). The player should select the one whose language matches the user preference or the default + forced track."
-msgstr "재생시 사용해야만 하는 트랙을 설정하세요. 오디오, 비디오나 자막같은 종류의 많은 강제 트랙이 있을 수 있습니다. 재생기는 사용자가 선호하는 언어와 일치하는 트랙이나 기본 + 강제 트랙을 선택해야 합니다."
-
-#: src/common/property_element.cpp:121
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:422
+#: src/common/property_element.cpp:128
 msgid "Set if the track is used."
 msgstr "트랙이 사용되는지 여부를 설정합니다."
 
-#: src/common/property_element.cpp:139
+#: src/common/property_element.cpp:146
 msgid "Set if the video is interlaced."
 msgstr "비디오이 인터레이스 여부를 설정합니다."
 
@@ -8809,6 +8806,17 @@ msgstr "재생하는 동안 재생기가 화면 상하좌우에서 특정 픽셀
 #, no-c-format
 msgid "Sets the lossless compression algorithm to be used for this track."
 msgstr "이 트랙에 무손실 압축 알고리즘을 사용하도록 설정합니다."
+
+#: src/common/property_element.cpp:165
+#, fuzzy
+msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."
+msgstr ""
+"  --colour-matrix <TID:n>  적/녹/청 삼원색에서 루마와 크로마값을 얻기 위해\n"
+"                           사용된 비디오 매트릭스 계수를 정합니다.\n"
+
+#: src/common/property_element.cpp:167
+msgid "Sets the number of coded bits for a colour channel."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:167
 msgid "Sets the segment UIDs to use."
@@ -9031,27 +9039,19 @@ msgstr "소스 파일명"
 msgid "Source file's directory"
 msgstr "소스 파일 폴더"
 
-#: src/common/property_element.cpp:132
+#: src/common/property_element.cpp:139
 msgid ""
 "Specifies the language of the track in the\n"
 "Matroska languages form."
 msgstr "Matroska 언어 형식으로 트랙 언어를 지정합니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:447
-msgid "Specifies the language of the track in the Matroska languages form."
-msgstr "Matroska 언어 형식으로 트랙 언어를 지정합니다."
-
-#: src/common/property_element.cpp:149
+#: src/common/property_element.cpp:156
 msgid ""
 "Specify the possible modifications to the aspect ratio\n"
 "(0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr ""
 "화면 비율에 대한 수정 가능한 설정을 지정합니다.\n"
 "(0: 자유 크기, 1: 화면 비율 유지, 2: 고정)."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:489
-msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
-msgstr "화면 비율에 가능한 수정 사항을 지정합니다 (0: 자유 크기, 1: 화면 비율 유지, 2: 고정)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1717
 msgid "Split mode:"
@@ -9092,13 +9092,13 @@ msgstr "cmd.exe를 통해 실행 파일 이외의 파일 형식을 시작합니�
 msgid "Start file types other than executable files via xdg-open."
 msgstr "xdg-open을 통해 실행 파일 이외의 파일 형식을 시작합니다."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:196
+#: src/mkvtoolnix-gui/jobs/tool.cpp:212
 #, no-c-format
 msgid "Start job &immediately"
 msgid_plural "Start jobs &immediately"
 msgstr[0] "작업 즉시 시작(&I)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:195
+#: src/mkvtoolnix-gui/jobs/tool.cpp:211
 #, no-c-format
 msgid "Start job &manually"
 msgid_plural "Start jobs &manually"
@@ -9140,8 +9140,7 @@ msgstr "스테레오 모드 매개변수: <TID>: <n|keyword>의 n이 0 ~ %1% 사
 msgid "Stereo mode: %1% (%2%)"
 msgstr "스테레오 모드: %1% (%2%)"
 
-#: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:496
+#: src/common/property_element.cpp:159
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "스테레오 3D 비디오 모드 (0 ~ 11, 문서를 참조하세요)."
 
@@ -9226,7 +9225,7 @@ msgstr "태그 선택기"
 
 #: src/info/mkvinfo.cpp:1642
 #: src/mkvtoolnix-gui/merge/track.cpp:408
-#: src/propedit/options.cpp:182
+#: src/propedit/options.cpp:213
 #, no-c-format
 msgid "Tags"
 msgstr "태그"
@@ -9456,6 +9455,32 @@ msgstr "XML 테그 파일 '%1%'에 포함되어 있는 오류: %2%\n"
 msgid "The XML tag file '%1%' could not be read.\n"
 msgstr "XML 테그 파일 '%1%'은 읽을 수 없습니다.\n"
 
+#: src/common/property_element.cpp:170
+#, fuzzy
+msgid "The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. This is additive with chroma-subsample-horizontal."
+msgstr ""
+"  --cb-subsample <TID:hori,vert>\n"
+"                           수평과 수직으로 제거하지 않은 모든 픽셀에 대해 Cb\n"
+"                           채널에서 제거할 픽셀의 양.  --chroma-subsample \n"
+"                           옵션으로 추가할 수 있습니다.\n"
+
+#: src/common/property_element.cpp:172
+#, fuzzy
+msgid "The amount of pixels to remove in the Cb channel for every pixel not removed vertically. This is additive with chroma-subsample-vertical."
+msgstr ""
+"  --cb-subsample <TID:hori,vert>\n"
+"                           수평과 수직으로 제거하지 않은 모든 픽셀에 대해 Cb\n"
+"                           채널에서 제거할 픽셀의 양.  --chroma-subsample \n"
+"                           옵션으로 추가할 수 있습니다.\n"
+
+#: src/common/property_element.cpp:168
+msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."
+msgstr ""
+
+#: src/common/property_element.cpp:169
+msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:2125
 #, boost-format
 msgid "The argument '%1%' is not allowed in identification mode.\n"
@@ -9560,6 +9585,14 @@ msgstr "코덱 개인 데이터가 일치하지 않습니다 (길이: %1% - %2%)
 msgid "The codec's private data does not match. Both have the same length (%1%) but different content."
 msgstr "코덱 개인 데이터가 일치하지 않습니다. 서로 길이는 같지만 (%1%) 내용이 다릅니다."
 
+#: src/common/property_element.cpp:178
+msgid "The colour primaries of the video."
+msgstr ""
+
+#: src/common/property_element.cpp:177
+msgid "The colour transfer characteristics of the video."
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:98
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
 msgstr "여기의 명령행은 윈도우에서도 역슬래시 문자로 유닉스 형식의 쉘 이스케이프를 사용합니다."
@@ -9612,8 +9645,7 @@ msgstr "현재 합치기 설정을 닫을 것입니다."
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "현재 패킷의 타임코드는 이전 패킷의 타임코드보다 작습니다. 이것은 보통 소스 파일이 100%%정확하게 작성되지 않은 Matroska 파일임을 의미합니다. 데이터 손실을 피하기 위해 타임코드는 %1%밀리초 조정됩니다. 이 때문에 오디오/비디오 동기화에 영향을 미칠 수 있지만, mkvmerge의 \"--sync\"옵션으로 보정할 수 있습니다. 만약 이미 \"--sync\"옵션을 사용하고 있지만 여전히 이 경고가 표시되는 경우는 걱정할 필요가 없습니다 -- 이것은 정상입니다. 이 오류가 여러번 발생하고, 특정 트랙에서 이 메시지가 여러번 표시되는 경우, 원본 파일 자체에 문제가 있거나 mkvmerge의 자체 버그일 수 있습니다. 이런 경우, 제작자 Moritz Bunkus <moritz@bunkus.org>에게 문의하십시오.\n"
 
-#: src/common/property_element.cpp:103
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:378
+#: src/common/property_element.cpp:110
 msgid "The date the file was created."
 msgstr "파일이 만들어진 날짜입니다."
 
@@ -9682,7 +9714,7 @@ msgstr "드라이브가 꽉 찼을지 모릅니다."
 msgid "The duration after which a new destination file is started."
 msgstr "지정한 재생 시간 이후에 새 대상 파일을 시작합니다."
 
-#: src/propedit/options.cpp:242
+#: src/propedit/options.cpp:273
 #, boost-format
 msgid "The edit specifications '%1%' and '%2%' resolve to the same track with the UID %3%.\n"
 msgstr "edit로 지정된 '%1%'와 '%2%'는 UID %3%와 같은 트랙으로 해결되었습니다.\n"
@@ -9812,7 +9844,7 @@ msgstr "'%1' 파일을 설치 폴더에서 찾지 못했습니다."
 msgid "The file '%1' exists already."
 msgstr "'%1' 파일이 이미 있습니다."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:521
+#: src/mkvtoolnix-gui/jobs/tool.cpp:550
 #, no-c-format
 msgid "The file '%1' is neither a job queue file nor a settings file."
 msgstr "'%1' 파일은 작업 대기열 파일이나 설정 파일이 아닙니다."
@@ -9822,7 +9854,7 @@ msgstr "'%1' 파일은 작업 대기열 파일이나 설정 파일이 아닙니�
 msgid "The file '%1' you've added is a playlist."
 msgstr "당신이 추가한 '%1' 파일은 재생목록입니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:671
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:674
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, no-c-format
 msgid "The file (%1) is too big (%2)."
@@ -9861,13 +9893,13 @@ msgstr "파일 기록을 위해 열 수 없습니다."
 msgid "The file does not contain track ID %1%.\n"
 msgstr "파일에 %1% 트랙 ID가 포함되어 있지 않습니다.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:185
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:187
 #, no-c-format
 msgid "The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."
 msgstr "헤더 편집기가 파일을 읽어온 이후에 다른 프로그램에서 파일이 변경되었습니다. 따라서 다시 불러와야합니다. 불행히도 모든 변경 내용이 손실되었음을 의미합니다."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:654
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:223
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:225
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "파일을 성공적으로 저장했습니다."
@@ -9922,8 +9954,7 @@ msgstr "파일을 수정 중입니다, 4/4 부분 수정 중..."
 msgid "The file is read in order to create track statistics.\n"
 msgstr "트랙 통계를 만들기 위해 파일을 읽었습니다.\n"
 
-#: src/common/property_element.cpp:104
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:379
+#: src/common/property_element.cpp:111
 msgid "The file name for this segment."
 msgstr "이 세그먼트에 대한 파일 이름입니다."
 
@@ -9965,8 +9996,8 @@ msgstr "이 파일은 더 이상 처리하지 않을 것입니다."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:681
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:121
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:684
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "열려고 했던 파일(%1)을 성공적으로 읽을 수 없었습니다."
@@ -9977,7 +10008,7 @@ msgstr "열려고 했던 파일(%1)을 성공적으로 읽을 수 없었습니�
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "열려고 했던 파일(%1)에 아무 챕터도 포함되어 있지 않습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:108
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:110
 #, no-c-format
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "열려고 했던 파일(%1)을 유효한 Matroska/WebM 파일로 인식하지 못했습니다."
@@ -10054,7 +10085,7 @@ msgstr "만들어진 대상 파일명은 소스 파일명과 같은 기반의 �
 msgid "The given timecode scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "지정된 타임코드 스케일 계수는 유효 범위 [1 ~ 10000000 또는 -1(비디오 트랙이 있어도 샘플링 소리 정밀도를 사용하는 경우)]에서 벗어나 있습니다.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:172
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:174
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "헤더값을 변경하지 않았습니다. 저장할 내용이 없습니다."
@@ -10140,7 +10171,7 @@ msgstr "mkvmerge가 받아들이는 클러스터의 최대 길이는 60000 블�
 msgid "The maximum number of files that will be created even if the last file might contain more bytes/time than wanted."
 msgstr "마지막 파일이 원하는 것보다 더 많은 바이트/시간을 포함하고 있어도 생성될 파일의 최대 숫자."
 
-#: src/common/property_element.cpp:128
+#: src/common/property_element.cpp:135
 msgid ""
 "The maximum number of frames a player\n"
 "should be able to cache during playback.\n"
@@ -10150,17 +10181,13 @@ msgstr ""
 "재생 중에 플레이어(재생기)가 캐시할 수 있는 최대 프레임 수 입니다.\n"
 "0을 지정하면 참조 유사-캐시 시스템은 사용되지 않습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:437
-msgid "The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
-msgstr "재생 중에 재생기가 캐시할 수 있는 최대 프레임 숫자. 0으로 설정하면 참조 유사 캐시 시스템을 사용하지 않습니다."
-
 #: src/common/qt_kax_analyzer.cpp:73
 #: src/propedit/propedit.cpp:37
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "메타 탐색(Meta seek) 요소는 파일의 끝에 기록했지만, 세그먼트 크기를 업데이트할 수 없습니다. 따라서 요소는 보이지 않게됩니다. 처리는 중단됩니다. 파일은 변경되었습니다!"
 
-#: src/common/property_element.cpp:126
+#: src/common/property_element.cpp:133
 msgid ""
 "The minimum number of frames a player\n"
 "should be able to cache during playback.\n"
@@ -10169,10 +10196,6 @@ msgid ""
 msgstr ""
 "재생 중에 플레이어(재생기)가 캐시할 수 있는 최소 프레임 수 입니다.\n"
 "0을 지정하면 참조 유사-캐시 시스템은 사용되지 않습니다."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:432
-msgid "The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
-msgstr "재생 중에 재생기가 캐시할 수 있는 최소 프레임 숫자. 0으로 설정하면 참조 유사 캐시 시스템을 사용하지 않습니다."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:669
 #, no-c-format
@@ -10196,13 +10219,11 @@ msgstr "%1% 이름은 '%2%'에서 현재 편집으로 지정되어있는 유효�
 msgid "The name must not be left empty."
 msgstr "이름 항목은 비워두면 안 됩니다."
 
-#: src/common/property_element.cpp:111
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:385
+#: src/common/property_element.cpp:118
 msgid "The name of the application or library used for multiplexing the file."
 msgstr "파일을 합치는데 사용된 응용프로그램이나 라이브러리의 이름."
 
-#: src/common/property_element.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/common/property_element.cpp:119
 msgid "The name of the application or library used for writing the file."
 msgstr "파일을 쓰는데 사용된 응용프로그램이나 라이브러리의 이름"
 
@@ -10234,45 +10255,29 @@ msgstr "2개의 오디오 트랙이 채널 수가 서로 다름: %1% - %2%"
 msgid "The number of external timecodes %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
 msgstr "외부 타임코드 %1% 수가 이 트랙의 프레임 수보다 작습니다. 이 트랙의 나머지 프레임은 의도대로 타임 스탬프(시간 정보)되지 않을지도 모릅니다. mkvmerge가 충돌할 가능성도 있습니다.\n"
 
-#: src/common/property_element.cpp:148
+#: src/common/property_element.cpp:155
 msgid ""
 "The number of video pixels to remove\n"
 "on the bottom of the image."
 msgstr "이미지 하단 부분에서 제거될 비디오 픽셀 수 입니다."
 
-#: src/common/property_element.cpp:145
+#: src/common/property_element.cpp:152
 msgid ""
 "The number of video pixels to remove\n"
 "on the left of the image."
 msgstr "이미지 왼쪽 부분에서 제거될 비디오 픽셀 수 입니다."
 
-#: src/common/property_element.cpp:147
+#: src/common/property_element.cpp:154
 msgid ""
 "The number of video pixels to remove\n"
 "on the right of the image."
 msgstr "이미지 오른쪽 부분에서 제거될 비디오 픽셀 수 입니다."
 
-#: src/common/property_element.cpp:146
+#: src/common/property_element.cpp:153
 msgid ""
 "The number of video pixels to remove\n"
 "on the top of the image."
 msgstr "이미지 상단 부분에서 제거될 비디오 픽셀 수 입니다."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:486
-msgid "The number of video pixels to remove on the bottom of the image."
-msgstr "이미지 하단 부분에서 제거할 비디오 픽셀 수 입니다."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:477
-msgid "The number of video pixels to remove on the left of the image."
-msgstr "이미지 왼쪽 부분에서 제거할 비디오 픽셀 수 입니다."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:483
-msgid "The number of video pixels to remove on the right of the image."
-msgstr "이미지 오른쪽 부분에서 제거할 비디오 픽셀 수 입니다."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:480
-msgid "The number of video pixels to remove on the top of the image."
-msgstr "이미지 상단 부분에서 제거할 비디오 픽셀 수 입니다."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:385
 #: src/mkvtoolnix-gui/merge/output.cpp:401
@@ -10572,8 +10577,7 @@ msgstr "이 스트림에 대한 타임코드는 파일의 중간이 재설정되
 msgid "The timecodes refer to the whole stream and not to each individual destination file."
 msgstr "타임코드는 각 개별 대상 파일이 아니라 전체 스트림을 나타냅니다."
 
-#: src/common/property_element.cpp:102
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+#: src/common/property_element.cpp:109
 msgid "The title for the whole movie."
 msgstr "전체 동영상의 제목입니다."
 
@@ -10602,8 +10606,7 @@ msgstr "'%2%' 파일의 %1% 트랙 번호를 '%4%' 파일의 %3% 트랙에 올�
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "'%2%' 파일의 %1% 트랙 번호를 '%4%' 파일의 %3% 트랙 번호에 결합할 수 없습니다. %5%\n"
 
-#: src/common/property_element.cpp:116
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:412
+#: src/common/property_element.cpp:123
 msgid "The track number as used in the Block Header."
 msgstr "블록 헤더에서 사용되는 트랙 번호입니다."
 
@@ -10700,8 +10703,8 @@ msgstr "'%1%'의 이용 가능한 번역이 없습니다.\n"
 msgid "There was an error querying the update status."
 msgstr "업데이트 상태를 확인하는 동안 오류가 발생했습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:562
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:564
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:561
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:563
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "헤더 값에 오류가 있어 헤더를 저장할 수 없습니다. 첫 번째 오류가 선택되어 있습니다."
@@ -10962,12 +10965,12 @@ msgstr "이 변수는 화면 너비의 픽셀값입니다."
 msgid "This program is licensed under the GPL v2 (see COPYING)."
 msgstr "이 프로그램의 라이센스는 GPV v2입니다 (COPYING 참고)."
 
-#: src/propedit/change.cpp:324
+#: src/propedit/change.cpp:329
 #, boost-format
 msgid "This property is mandatory and cannot be deleted in '%1%'. %2%\n"
 msgstr "이 속성은 필수이며, '%1%'에서 제거할 수 없습니다. %2%\n"
 
-#: src/propedit/change.cpp:289
+#: src/propedit/change.cpp:294
 #, boost-format
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "이 속성은 유일한 것입니다. '%1%'에 추가할 수 없습니다. %2%\n"
@@ -11055,8 +11058,7 @@ msgstr "타임코드와 기본 재생 시간"
 msgid "Timecodes:"
 msgstr "타임코드:"
 
-#: src/common/property_element.cpp:102
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+#: src/common/property_element.cpp:109
 msgid "Title"
 msgstr "제목"
 
@@ -11189,8 +11191,7 @@ msgstr "트랙 ID %1%: %2% (%3%)"
 msgid "Track ID for mkvmerge & mkvextract:"
 msgstr "mkvmerge와 mkvextract용 트랙 ID:"
 
-#: src/common/property_element.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:415
+#: src/common/property_element.cpp:124
 msgid "Track UID"
 msgstr "트랙 UID"
 
@@ -11203,14 +11204,13 @@ msgstr "트랙 UID: %1%"
 msgid "Track extraction"
 msgstr "트랙 추출"
 
-#: src/propedit/options.cpp:169
+#: src/propedit/options.cpp:200
 #: src/propedit/propedit_cli_parser.cpp:157
 #: src/propedit/propedit_cli_parser.cpp:249
 msgid "Track headers"
 msgstr "트랙 헤더"
 
-#: src/common/property_element.cpp:116
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:412
+#: src/common/property_element.cpp:123
 msgid "Track number"
 msgstr "트랙 번호"
 
@@ -11269,24 +11269,20 @@ msgid "Two files multiplexed with the same settings and this switch activated wi
 msgstr "같은 설정으로 합친 두 파일과 활성화된 이 스위치는 동일할 것입니다."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:253
-#: src/mkvtoolnix-gui/header_editor/page_model.cpp:134
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:148
 #: src/mkvtoolnix-gui/jobs/model.cpp:53
 #: src/mkvtoolnix-gui/merge/track_model.cpp:46
 #, no-c-format
 msgid "Type"
 msgstr "유형"
 
-#: src/common/property_element.cpp:144
+#: src/common/property_element.cpp:151
 msgid ""
 "Type of the unit for DisplayWidth/Height\n"
 "(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 msgstr ""
 "너비/높이표시 단위 유형\n"
 "(0: 픽셀, 1: 센티미터, 2: 인치, 3: 화면 비율)."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:474
-msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
-msgstr "너비/높이표시 단위 유형 (0: 픽셀, 1: 센티미터, 2: 인치, 3: 화면 비율)."
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:326
 msgid "Type-specific settings"
@@ -11305,7 +11301,7 @@ msgstr "유형:"
 msgid "Type: %1% (%2%)"
 msgstr "유형: %1% (%2%)"
 
-#: src/mkvtoolnix-gui/header_editor/page_model.cpp:138
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:152
 #, no-c-format
 msgid "UID"
 msgstr "UID"
@@ -11583,8 +11579,7 @@ msgstr "VfW 호환 비디오"
 msgid "Video"
 msgstr "비디오"
 
-#: src/common/property_element.cpp:149
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:489
+#: src/common/property_element.cpp:156
 msgid "Video aspect ratio type"
 msgstr "비디오 화면 비율 유형"
 
@@ -11596,47 +11591,39 @@ msgstr "비디오 색상 정보"
 msgid "Video colour mastering metadata"
 msgstr "비디오 색상 마스터링 메타데이터"
 
-#: src/common/property_element.cpp:148
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:486
+#: src/common/property_element.cpp:155
 msgid "Video crop bottom"
 msgstr "비디오 하단 잘라내기"
 
-#: src/common/property_element.cpp:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:477
+#: src/common/property_element.cpp:152
 msgid "Video crop left"
 msgstr "비디오 왼쪽 잘라내기"
 
-#: src/common/property_element.cpp:147
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:483
+#: src/common/property_element.cpp:154
 msgid "Video crop right"
 msgstr "비디오 오른쪽 잘라내기"
 
-#: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:480
+#: src/common/property_element.cpp:153
 msgid "Video crop top"
 msgstr "비디오 상단 잘라내기"
 
-#: src/common/property_element.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:471
+#: src/common/property_element.cpp:150
 msgid "Video display height"
 msgstr "비디오 세로 해상도"
 
-#: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:474
+#: src/common/property_element.cpp:151
 msgid "Video display unit"
 msgstr "비디오 해상도 단위"
 
-#: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:468
+#: src/common/property_element.cpp:149
 msgid "Video display width"
 msgstr "비디오 가로 해상도"
 
-#: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:493
+#: src/common/property_element.cpp:158
 msgid "Video field order"
 msgstr "비디오 필드 순서"
 
-#: src/common/property_element.cpp:139
+#: src/common/property_element.cpp:146
 msgid "Video interlaced flag"
 msgstr "비디오 인터레이스 플래그"
 
@@ -11645,13 +11632,11 @@ msgstr "비디오 인터레이스 플래그"
 msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "비디오 패킷 어셈블리에 실패하였습니다. 오류 코드: %1% (%2%)\n"
 
-#: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:465
+#: src/common/property_element.cpp:148
 msgid "Video pixel height"
 msgstr "비디오 높이 (픽셀 단위)"
 
-#: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:462
+#: src/common/property_element.cpp:147
 msgid "Video pixel width"
 msgstr "비디오 너비 (픽셀 단위)"
 
@@ -11660,8 +11645,7 @@ msgstr "비디오 너비 (픽셀 단위)"
 msgid "Video properties"
 msgstr "비디오 속성"
 
-#: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:496
+#: src/common/property_element.cpp:159
 msgid "Video stereo mode"
 msgstr "비디오 스테레오 모드"
 
@@ -11673,6 +11657,98 @@ msgstr "비디오 트랙"
 #, no-c-format
 msgid "Video track %1"
 msgstr "비디오 트랙 %1"
+
+#: src/common/property_element.cpp:167
+msgid "Video: bits per colour channel"
+msgstr ""
+
+#: src/common/property_element.cpp:174
+#: src/common/property_element.cpp:175
+#, fuzzy
+msgid "Video: chroma siting"
+msgstr "수직 크로마 위치선정: %1%"
+
+#: src/common/property_element.cpp:186
+#, fuzzy
+msgid "Video: chromacity blue X"
+msgstr "비디오 왼쪽 잘라내기"
+
+#: src/common/property_element.cpp:187
+#, fuzzy
+msgid "Video: chromacity blue Y"
+msgstr "비디오 왼쪽 잘라내기"
+
+#: src/common/property_element.cpp:184
+msgid "Video: chromacity green X"
+msgstr ""
+
+#: src/common/property_element.cpp:185
+msgid "Video: chromacity green Y"
+msgstr ""
+
+#: src/common/property_element.cpp:182
+msgid "Video: chromacity red X"
+msgstr ""
+
+#: src/common/property_element.cpp:183
+msgid "Video: chromacity red Y"
+msgstr ""
+
+#: src/common/property_element.cpp:165
+#, fuzzy
+msgid "Video: colour matrix coefficients"
+msgstr "비디오 색상 정보"
+
+#: src/common/property_element.cpp:178
+#, fuzzy
+msgid "Video: colour primaries"
+msgstr "비디오 색상 정보"
+
+#: src/common/property_element.cpp:176
+#, fuzzy
+msgid "Video: colour range"
+msgstr "비디오 색상 정보"
+
+#: src/common/property_element.cpp:179
+#, fuzzy
+msgid "Video: maximum content light"
+msgstr "최대 컨텐츠 광량: %1%"
+
+#: src/common/property_element.cpp:180
+#, fuzzy
+msgid "Video: maximum frame light"
+msgstr "최대 프레임 광량: %1%"
+
+#: src/common/property_element.cpp:190
+msgid "Video: maximum luminance"
+msgstr ""
+
+#: src/common/property_element.cpp:191
+msgid "Video: minimum luminance"
+msgstr ""
+
+#: src/common/property_element.cpp:170
+#: src/common/property_element.cpp:172
+msgid "Video: pixels to remove in Cb"
+msgstr ""
+
+#: src/common/property_element.cpp:168
+#: src/common/property_element.cpp:169
+#, fuzzy
+msgid "Video: pixels to remove in chroma"
+msgstr "이미지 오른쪽 부분에서 제거할 비디오 픽셀 수 입니다."
+
+#: src/common/property_element.cpp:177
+msgid "Video: transfer characteristics"
+msgstr ""
+
+#: src/common/property_element.cpp:188
+msgid "Video: white point X"
+msgstr ""
+
+#: src/common/property_element.cpp:189
+msgid "Video: white point Y"
+msgstr ""
 
 #: src/common/file_types.cpp:102
 #: src/output/p_vobbtn.h:36
@@ -11836,6 +11912,14 @@ msgstr "실행 시간:"
 msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr "사용자가 재생목록을 추가할 때마다 프로그램은 다른 재생목록이 있는지 폴더를 자동으로 스캔할 수 있고, 사용자에게 발견한 재생목록의 세부 목록을 제시할 수 있습니다."
 
+#: src/common/property_element.cpp:188
+msgid "White colour chromaticity coordinate X as defined by CIE 1931."
+msgstr ""
+
+#: src/common/property_element.cpp:189
+msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
+msgstr ""
+
 #: src/info/mkvinfo.cpp:588
 #: src/info/mkvinfo.cpp:589
 #, boost-format
@@ -11848,13 +11932,11 @@ msgstr "흰색 좌표 x: %1%"
 msgid "White colour coordinate y: %1%"
 msgstr "흰색 좌표 y: %1%"
 
-#: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:462
+#: src/common/property_element.cpp:147
 msgid "Width of the encoded video frames in pixels."
 msgstr "픽셀 단위로 인코딩된 비디오 프레임의 가로(너비) 해상도입니다."
 
-#: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:468
+#: src/common/property_element.cpp:149
 msgid "Width of the video frames to display."
 msgstr "비디오 프레임의 가로(너비) 해상도 입니다."
 
@@ -11896,8 +11978,7 @@ msgstr "ID 'AID'를 포함하여 첨부 파일 'outname'에 기록합니다."
 msgid "Write track with the ID TID to the file 'out'."
 msgstr "ID TID를 포함하여 트랙을 파일 'out'에 기록합니다."
 
-#: src/common/property_element.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/common/property_element.cpp:119
 msgid "Writing application"
 msgstr "쓰기 응용프로그램"
 
@@ -12406,11 +12487,11 @@ msgstr "memory.cpp/safememdup()가 파일 %1%에서 호출, %2%번째 행: mallo
 msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n"
 msgstr "memory.cpp/saferealloc()가 파일 %1%에서 호출, %2%번째 행: realloc()가 %3%바이트 크기를 nullptr 반환했습니다.\n"
 
-#: src/propedit/change.cpp:349
+#: src/propedit/change.cpp:354
 msgid "missing property name"
 msgstr "누락된 속성 이름"
 
-#: src/propedit/change.cpp:342
+#: src/propedit/change.cpp:347
 msgid "missing value"
 msgstr "누락된 값"
 
@@ -12857,6 +12938,18 @@ msgstr "– 없음으로 설정 –"
 #~ msgid "<unnamed>"
 #~ msgstr "<이름 없음>"
 
+#~ msgid "A randomly generated unique ID to identify the current segment between many others (128 bits)."
+#~ msgstr "다른 많은 세그먼트 중에서 현재 세그먼트를 인식하기 위해 무작위로 만든 고유 ID (128 비트)."
+
+#~ msgid "A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file."
+#~ msgstr "트랙을 인식하기 위한 고유 ID. 이 트랙을 다른 파일에 직접 스트림 복사할 때 이 고유 ID는 동일하게 유지해야 합니다."
+
+#~ msgid "A unique ID to identify the next chained segment (128 bits)."
+#~ msgstr "연결된 다음 세그먼트를 인식하기 위한 고유 ID (128 비트)."
+
+#~ msgid "A unique ID to identify the previous chained segment (128 bits)."
+#~ msgstr "연결된 이전 세그먼트를 인식하기 위한 고유 ID (128 비트)."
+
 #~ msgid "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 #~ msgstr "AAC 파일은 HE-AAC/AAC+/SBR AAC 오디오가 포함되어 있을 수 있습니다. 이것은 자동으로 감지할 수 없습니다. 따라서 실제로 이 입력 파일이 SBR AAC가 포함되어 있을 경우, '--aac-is-sbr 0'옵션을 수동으로 지정해야 합니다. 그렇지 않으면 잘못된 MUX가 이루어집니다. mkvmerge 문서도 읽어보십시오.\n"
 
@@ -12892,6 +12985,12 @@ msgstr "– 없음으로 설정 –"
 
 #~ msgid "Always remove the job afterwards"
 #~ msgstr "항상 나중에 작업 삭제"
+
+#~ msgid "An escaped file name corresponding to the next segment."
+#~ msgstr "다음 세그먼트에 해당하는 이스케이프 파일 이름입니다."
+
+#~ msgid "An escaped file name corresponding to the previous segment."
+#~ msgstr "이전 시그먼트에 해당하는 이스케이프 파일 이름입니다."
 
 #~ msgid "Ask the user"
 #~ msgstr "사용자에게 묻기"
@@ -13020,20 +13119,44 @@ msgstr "– 없음으로 설정 –"
 #~ msgid "Output file:"
 #~ msgstr "출력 파일:"
 
+#~ msgid "Previous file name"
+#~ msgstr "이전 파일명"
+
 #~ msgid "Progress: 100%\n"
 #~ msgstr "진행 상태: 100%\n"
 
 #~ msgid "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 #~ msgstr "RealMedia 파일은 HE-AAC / AAC+ / SBR AAC 오디오가 포함되어 있을 수 있습니다. 간혹 이것은 자동으로 감지하지 못할 수 있습니다. 따라서 이 입력 파일이 실제로 SBR AAC가 포함되어 있을 경우, '--aac-is-sbr %1%'옵션을 수동으로 지정하지 않으면 안 됩니다. 그렇지 않으면 잘못된 MUX가 이루어집니다. mkvmerge 문서도 읽어보십시오.\n"
 
+#~ msgid "Segment file name"
+#~ msgstr "세그먼트 파일명"
+
 #~ msgid "Select output directory"
 #~ msgstr "출력 폴더 선택"
+
+#~ msgid "Set if that track (audio, video or subs) SHOULD be used if no language found matches the user preference."
+#~ msgstr "사용자가 선호하는 것과 일치하는 언어를 찾지 못할 경우에 사용할 트랙(오디오, 비디오, 자막)을 설정하세요."
+
+#~ msgid "Set if that track MUST be used during playback. There can be many forced track for a kind (audio, video or subs). The player should select the one whose language matches the user preference or the default + forced track."
+#~ msgstr "재생시 사용해야만 하는 트랙을 설정하세요. 오디오, 비디오나 자막같은 종류의 많은 강제 트랙이 있을 수 있습니다. 재생기는 사용자가 선호하는 언어와 일치하는 트랙이나 기본 + 강제 트랙을 선택해야 합니다."
+
+#~ msgid "Specifies the language of the track in the Matroska languages form."
+#~ msgstr "Matroska 언어 형식으로 트랙 언어를 지정합니다."
+
+#~ msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
+#~ msgstr "화면 비율에 가능한 수정 사항을 지정합니다 (0: 자유 크기, 1: 화면 비율 유지, 2: 고정)."
 
 #~ msgid "The AVC video track is missing the 'CTTS' atom for frame timecode offsets. However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timecodes for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timecodes right. As it is missing the timecodes for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
 #~ msgstr "이 AVC 비디오 트랙에는 프레임 타임코드를 보정하는 'CTTS' atom이 누락되어 있습니다. 하지만, AVC/h.264에서는 전통적인 하나(P프레임인 경우) 또는 두개(B프레임인 경우) 보다 더 많은 다른 프레임을 참조하는 것이 허락되어 있습니다. 이 같은 프레임의 타임코드는 순서대로가 아니며(정렬되어 있지 않으며), 'CTTS' atom은 이 타임코드를 보정하기 위해 필요합니다. 그것이 누락되어 있기 때문에, 이 트랙의 타임코드는 잘못되었는지도 모릅니다. 출력 파일을 시청하면서 예상대로 보이는지 확인하십시오.\n"
 
 #~ msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 #~ msgstr "%1% 파일은 알 수 없는 유형입니다. 지원되는 파일 유형 목록 ('mkvmerge --list-types')을 참조하고, 만약 파일 유형이 지원되고 있는데 제대로 인식되지 않는 경우, 제작자 Moritz Bunkus <moritz@bunkus.org>에게 문의하십시오.\n"
+
+#~ msgid "The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
+#~ msgstr "재생 중에 재생기가 캐시할 수 있는 최대 프레임 숫자. 0으로 설정하면 참조 유사 캐시 시스템을 사용하지 않습니다."
+
+#~ msgid "The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
+#~ msgstr "재생 중에 재생기가 캐시할 수 있는 최소 프레임 숫자. 0으로 설정하면 참조 유사 캐시 시스템을 사용하지 않습니다."
 
 #~ msgid "The name of the application or library used for merging the file."
 #~ msgstr "파일을 먹싱하는데 사용된 응용프로그램이나 라이브러리의 이름"
@@ -13044,6 +13167,15 @@ msgstr "– 없음으로 설정 –"
 #~ msgid "The name of the output file '%1%' and of one of the input files is the same. This would cause mkvmerge to overwrite one of your input files. This is most likely not what you want.\n"
 #~ msgstr "출력 파일 이름 '%1%'과 입력 파일 중 하나가 파일 이름이 동일합니다. 이대로라면 mkvmerge는 입력 파일중 동일한 이름의 파일 하나를 덮어 버립니다. 아마도 이것은 대부분 원하지 않을 것입니다.\n"
 
+#~ msgid "The number of video pixels to remove on the bottom of the image."
+#~ msgstr "이미지 하단 부분에서 제거할 비디오 픽셀 수 입니다."
+
+#~ msgid "The number of video pixels to remove on the left of the image."
+#~ msgstr "이미지 왼쪽 부분에서 제거할 비디오 픽셀 수 입니다."
+
+#~ msgid "The number of video pixels to remove on the top of the image."
+#~ msgstr "이미지 상단 부분에서 제거할 비디오 픽셀 수 입니다."
+
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr "업데이트 정보를 %1%에서 읽을 수 없습니다.\n"
 
@@ -13052,6 +13184,9 @@ msgstr "– 없음으로 설정 –"
 
 #~ msgid "Track %1% was compressed with lzo1x but mkvmerge has not been compiled with support for lzo1x compression.\n"
 #~ msgstr "트랙 %1%은 lzo1x으로 압축되어 있지만, mkvmerge는 lzo1x 압축을 지원하여 컴파일되지는 않았습니다.\n"
+
+#~ msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
+#~ msgstr "너비/높이표시 단위 유형 (0: 픽셀, 1: 센티미터, 2: 인치, 3: 화면 비율)."
 
 #~ msgid "always ask the user"
 #~ msgstr "항상 사용자에게 묻기"
