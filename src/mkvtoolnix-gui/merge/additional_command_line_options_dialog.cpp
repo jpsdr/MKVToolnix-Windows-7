@@ -66,7 +66,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   add(Q("--engage force_passthrough_packetizer"), false, hacks, { QY("Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types.") });
   add(Q("--engage allow_avc_in_vfw_mode"),        false, hacks, { QY("Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI.") });
   add(Q("--engage no_simpleblocks"),              false, hacks, { QY("Disable the use of SimpleBlocks instead of BlockGroups.") });
-  add(Q("--engage use_codec_state"),              false, hacks, { QY("Allows the use of the CodecState element."), QY("This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers.") });
+  add(Q("--engage use_codec_state_only"),         false, hacks, { QY("Store changes in CodecPrivate data in CodecState elements instead of the frames."),
+                                                                  QY("This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers.") });
   add(Q("--engage remove_bitstream_ar_info"),     false, hacks,
       { QY("Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."),
         QY("This option causes mkvmerge to remove the aspect ratio information from the bitstream.") });
