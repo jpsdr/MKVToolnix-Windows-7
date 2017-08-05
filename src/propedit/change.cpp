@@ -50,19 +50,13 @@ change_c::validate(std::vector<property_element_c> *property_table) {
   if (!property_table)
     return;
 
-  for (auto &property : *property_table)
-    if (property.m_name == m_name) {
-      m_property = property;
+  if (m_property.m_name.empty() && !lookup_property(*property_table))
+    mxerror(boost::format(Y("The name '%1%' is not a valid property name for the current edit specification in '%2%'.\n")) % m_name % get_spec());
 
-      if (change_c::ct_delete == m_type)
-        validate_deletion_of_mandatory();
-      else
-        parse_value();
-
-      return;
-    }
-
-  mxerror(boost::format(Y("The name '%1%' is not a valid property name for the current edit specification in '%2%'.\n")) % m_name % get_spec());
+  if (change_c::ct_delete == m_type)
+    validate_deletion_of_mandatory();
+  else
+    parse_value();
 }
 
 std::string
