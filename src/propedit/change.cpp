@@ -316,7 +316,7 @@ change_c::set_element_at(int idx) {
 void
 change_c::validate_deletion_of_mandatory() {
   const EbmlSemantic *semantic = get_semantic();
-  if (semantic && semantic->Mandatory)
+  if (semantic && semantic->Mandatory && !m_sub_sub_master)
     mxerror(boost::format(Y("This property is mandatory and cannot be deleted in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
 }
 

@@ -24,6 +24,8 @@
   attributes. Implements the second half of #2038.
 * mkvinfo: added support for the "video projection" track header
   attributes. Part of the implementation of #2064.
+* mkvpropedit: added support for the "video projection" track header
+  attributes. Part of the implementation of #2064.
 
 ## Bug fixes
 

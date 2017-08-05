@@ -355,3 +355,49 @@ write_ebml_element_head(mm_io_c &out,
 
   return out.write(buffer, id_size + coded_size);
 }
+
+bool
+remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent,
+                                                    EbmlMaster *child,
+                                                    std::unordered_map<EbmlMaster *, bool> &handled) {
+  if (!parent || !child || handled[child])
+    return false;
+
+  if (0 < child->ListSize()) {
+    auto all_set_to_default_value = true;
+
+    for (auto const &childs_child : *child)
+      if (   !childs_child->IsDefaultValue()
+          || !(   dynamic_cast<EbmlBinary        *>(childs_child)
+               || dynamic_cast<EbmlDate          *>(childs_child)
+               || dynamic_cast<EbmlFloat         *>(childs_child)
+               || dynamic_cast<EbmlSInteger      *>(childs_child)
+               || dynamic_cast<EbmlString        *>(childs_child)
+               || dynamic_cast<EbmlUInteger      *>(childs_child)
+               || dynamic_cast<EbmlUnicodeString *>(childs_child))) {
+        all_set_to_default_value = false;
+        break;
+      }
+
+    if (!all_set_to_default_value)
+      return false;
+
+    mxinfo(boost::format("yes, all children set to default values. Dumping child.\n"));
+    dump_ebml_elements(child, true);
+
+    for (auto &childs_child : *child)
+      delete childs_child;
+
+    child->RemoveAll();
+  }
+
+  handled[child] = true;
+
+  auto itr = std::find(parent->begin(), parent->end(), child);
+  if (itr != parent->end())
+    parent->Remove(itr);
+
+  delete child;
+
+  return true;
+}

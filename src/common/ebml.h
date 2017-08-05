@@ -378,6 +378,7 @@ EbmlElement *create_ebml_element(const EbmlCallbacks &callbacks, const EbmlId &i
 EbmlMaster *sort_ebml_master(EbmlMaster *e);
 void remove_voids_from_master(EbmlElement *element);
 void move_children(EbmlMaster &source, EbmlMaster &destination);
+bool remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent, EbmlMaster *child, std::unordered_map<EbmlMaster *, bool> &handled);
 
 const EbmlCallbacks *find_ebml_callbacks(const EbmlCallbacks &base, const EbmlId &id);
 const EbmlCallbacks *find_ebml_callbacks(const EbmlCallbacks &base, const char *debug_name);
