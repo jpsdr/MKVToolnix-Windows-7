@@ -384,7 +384,7 @@ handle_segmentinfo() {
   KaxSegmentFamily *family = FindChild<KaxSegmentFamily>(g_kax_info_chap.get());
   while (family) {
     g_segfamily_uids.add_family_uid(*family);
-    family = FindNextChild<KaxSegmentFamily>(g_kax_info_chap.get(), family);
+    family = FindNextChild(*g_kax_info_chap, *family);
   }
 
   EbmlBinary *uid = FindChild<KaxSegmentUID>(g_kax_info_chap.get());

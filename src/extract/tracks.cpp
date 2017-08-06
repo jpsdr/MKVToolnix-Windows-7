@@ -157,7 +157,7 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
       bref = kreference->GetValue();
     else
       fref = kreference->GetValue();
-    kreference = FindNextChild<KaxReferenceBlock>(&blockgroup, kreference);
+    kreference = FindNextChild(blockgroup, *kreference);
   }
 
   // Any block additions present?

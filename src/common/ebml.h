@@ -208,19 +208,13 @@ FindChild(EbmlElement const *e) {
   return static_cast<A *>(m->FindFirstElt(EBML_INFO(A)));
 }
 
+#if !defined(HAVE_EBML_FINDNEXTCHILD)
 template <typename A> A*
-FindNextChild(EbmlMaster const *m,
-              EbmlElement const *p) {
-  return static_cast<A *>(m->FindNextElt(*p));
+FindNextChild(EbmlMaster &Master,
+              Type const  &PastElt) {
+  return static_cast<Type *>(Master.FindNextElt(PastElt, false));
 }
-
-template <typename A> A*
-FindNextChild(EbmlElement const *e,
-              EbmlElement const *p) {
-  auto m = dynamic_cast<EbmlMaster const *>(e);
-  assert(m);
-  return static_cast<A *>(m->FindNextElt(*p));
-}
+#endif  // !HAVE_EBML_FINDNEXTCHILD
 
 template<typename A> A &
 GetChild(EbmlMaster *m) {

@@ -1221,7 +1221,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
 
     track->track_number = ktnum->GetValue();
     if (find_track_by_num(track->track_number, track.get())) {
-      ktentry = FindNextChild<KaxTrackEntry>(l1, ktentry);
+      ktentry = FindNextChild(static_cast<EbmlMaster &>(*l1), *ktentry);
       continue;
     }
 
@@ -1305,7 +1305,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     track->content_decoder.initialize(*ktentry);
     m_tracks.push_back(track);
 
-    ktentry = FindNextChild<KaxTrackEntry>(l1, ktentry);
+    ktentry = FindNextChild(static_cast<EbmlMaster &>(*l1), *ktentry);
   } // while (ktentry)
 
   delete l1;
@@ -2390,7 +2390,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
       fref_found = true;
     }
 
-    ref_block = FindNextChild<KaxReferenceBlock>(block_group, ref_block);
+    ref_block = FindNextChild(*block_group, *ref_block);
   }
 
   if (('s' == block_track->type) && (-1 == block_duration))

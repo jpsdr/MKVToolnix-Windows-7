@@ -604,7 +604,7 @@ render_headers(mm_io_c *out) {
         KaxChapterTranslate *chapter_translate = FindChild<KaxChapterTranslate>(g_kax_info_chap.get());
         while (chapter_translate) {
           s_kax_infos->PushElement(*new KaxChapterTranslate(*chapter_translate));
-          chapter_translate = FindNextChild<KaxChapterTranslate>(g_kax_info_chap.get(), chapter_translate);
+          chapter_translate = FindNextChild(*g_kax_info_chap, *chapter_translate);
         }
       }
 
