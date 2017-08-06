@@ -211,8 +211,8 @@ FindChild(EbmlElement const *e) {
 #if !defined(HAVE_EBML_FINDNEXTCHILD)
 template <typename A> A*
 FindNextChild(EbmlMaster &Master,
-              Type const  &PastElt) {
-  return static_cast<Type *>(Master.FindNextElt(PastElt, false));
+              A const  &PastElt) {
+  return static_cast<A *>(Master.FindNextElt(PastElt, false));
 }
 #endif  // !HAVE_EBML_FINDNEXTCHILD
 
