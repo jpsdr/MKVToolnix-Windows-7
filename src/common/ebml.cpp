@@ -382,9 +382,6 @@ remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent,
     if (!all_set_to_default_value)
       return false;
 
-    mxinfo(boost::format("yes, all children set to default values. Dumping child.\n"));
-    dump_ebml_elements(child, true);
-
     for (auto &childs_child : *child)
       delete childs_child;
 
