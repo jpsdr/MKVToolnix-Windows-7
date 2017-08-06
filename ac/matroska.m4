@@ -31,7 +31,7 @@ if test x"$EBML_MATROSKA_INTERNAL" = xyes; then
 fi
 
 AC_DEFUN([AX_EBML_FINDNEXTCHILD],[
-  AC_CACHE_CHECK([if libEBML contains FindNextChild], [ax_ebml_findnextchild],[
+  AC_CACHE_CHECK([if libEBML contains FindNextChild], [ax_cv_ebml_findnextchild],[
     CXXFLAGS_SAVED=$CXXFLAGS
 
     if test x"$EBML_MATROSKA_INTERNAL" = xyes; then
@@ -55,14 +55,14 @@ using namespace libmatroska;
   EbmlElement *e = new KaxTitle;
   FindNextChild(*m, *e);
   ],
-      [ax_ebml_findnextchild="yes"],
-      [ax_ebml_findnextchild="no"])
+      [ax_cv_ebml_findnextchild="yes"],
+      [ax_cv_ebml_findnextchild="no"])
     AC_LANG_POP
 
     CXXFLAGS="$CXXFLAGS_SAVED"
   ])
 
-  if test x"$ax_ebml_findnextchild" = xyes; then
+  if test x"$ax_cv_ebml_findnextchild" = xyes; then
     AC_DEFINE(HAVE_EBML_FINDNEXTCHILD, 1, [Define if libEBML contains FindNextChild])
   fi
 ])
