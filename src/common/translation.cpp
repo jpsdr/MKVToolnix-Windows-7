@@ -22,6 +22,7 @@
 #include <locale.h>
 #include <stdlib.h>
 
+#include "common/fs_sys_helpers.h"
 #include "common/locale_string.h"
 #include "common/utf8_codecvt_facet.h"
 #include "common/strings/editing.h"
@@ -31,7 +32,6 @@
 # include <windows.h>
 # include <winnls.h>
 
-# include "common/fs_sys_helpers.h"
 # include "common/memory.h"
 #endif
 
@@ -306,6 +306,12 @@ init_locales(std::string locale) {
   locale_dir = g_cc_local_utf8->native((mtx::sys::get_installation_path() / "locale").string());
 
 # else  // SYS_WINDOWS
+  auto language_var = mtx::sys::get_environment_variable("LANGUAGE");
+  if (!language_var.empty()) {
+    mxdebug_if(debug, boost::format("[init_locales LANGUAGE is set to %1%; un-setting it]\n") % language_var);
+    mtx::sys::unset_environment_variable("LANGUAGE");
+  }
+
   std::string chosen_locale;
 
   try {

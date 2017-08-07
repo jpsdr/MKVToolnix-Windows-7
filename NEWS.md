@@ -38,6 +38,10 @@
   `Ctrl+Alt+key` under the hood, this means that `AltGr+7` is really
   `Ctrl+Alt+7` which the GUI now took to mean "switch to the job queue"
   instead of "insert `{`". Fixes #2056.
+* all: selecting the program's language (e.g. via the `--ui-language`
+  command-line option or via the GUI's preferences) did not work on Linux &
+  Unix if the `LANGUAGE` environment variable was set and didn't include the
+  desired language. Fixes #2070.
 
 ## Build system changes
 
