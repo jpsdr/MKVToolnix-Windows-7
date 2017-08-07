@@ -394,6 +394,8 @@ EbmlElement *find_ebml_element_by_id(EbmlMaster *master, const EbmlId &id);
 std::pair<EbmlMaster *, size_t> find_element_in_master(EbmlMaster *master, EbmlElement *element_to_find);
 
 void fix_mandatory_elements(EbmlElement *master);
+bool must_be_present_in_master(EbmlCallbacks const &callbacks);
+bool must_be_present_in_master(EbmlElement const &element);
 
 using ebml_element_cptr = std::shared_ptr<EbmlElement>;
 using ebml_master_cptr  = std::shared_ptr<EbmlMaster>;

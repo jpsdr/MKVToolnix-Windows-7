@@ -21,6 +21,7 @@
 #include <ebml/EbmlVoid.h>
 
 #include <matroska/KaxChapters.h>
+#include <matroska/KaxSegment.h>
 #include <matroska/KaxTags.h>
 #include <matroska/KaxTrackAudio.h>
 #include <matroska/KaxTrackVideo.h>
@@ -397,4 +398,43 @@ remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent,
   delete child;
 
   return true;
+}
+
+static bool
+must_be_present_in_master_by_id(EbmlId const &id) {
+  static debugging_option_c s_debug{"must_be_present_in_master"};
+
+  auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, id);
+  if (!semantic || !semantic->IsMandatory()) {
+    mxdebug_if(s_debug, boost::format("ID %|1$08x|: 0 (either no semantic or not mandatory)\n") % id.GetValue());
+    return false;
+  }
+
+  auto elt = std::shared_ptr<EbmlElement>(&semantic->Create());
+
+  mxdebug_if(s_debug, boost::format("ID %|1$08x|: %2% (default is %3%set)\n") % id.GetValue() % (!elt->DefaultISset()) % (elt->DefaultISset() ? "" : "not "));
+
+  return !elt->DefaultISset();
+}
+
+bool
+must_be_present_in_master(EbmlCallbacks const &callbacks) {
+  static std::unordered_map<uint32_t, bool> s_must_be_present;
+
+  auto id  = callbacks.ClassId();
+  auto itr = s_must_be_present.find(id.GetValue());
+
+  if (itr != s_must_be_present.end())
+    return itr->second;
+
+  auto result                      = must_be_present_in_master_by_id(id);
+  s_must_be_present[id.GetValue()] = result;
+
+  return result;
+}
+
+
+bool
+must_be_present_in_master(EbmlElement const &element) {
+  return must_be_present_in_master(element.Generic());
 }
