@@ -66,6 +66,11 @@ get_environment_variable(std::string const &key) {
   return var ? var : "";
 }
 
+void
+unset_environment_variable(std::string const &key) {
+  unsetenv(key.c_str());
+}
+
 int
 system(std::string const &command) {
   return ::system(command.c_str());

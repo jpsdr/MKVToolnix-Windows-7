@@ -45,6 +45,11 @@ set_environment_variable(const std::string &key,
   _putenv(env_buf.c_str());
 }
 
+void
+unset_environment_variable(std::string const &key) {
+  SetEnvironmentVariableA(key.c_str(), nullptr);
+}
+
 std::string
 get_environment_variable(const std::string &key) {
   auto size   = 100u;

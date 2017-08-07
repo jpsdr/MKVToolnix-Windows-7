@@ -30,6 +30,7 @@ uint64_t get_memory_usage();
 bool is_installed();
 
 std::string get_environment_variable(const std::string &key);
+void unset_environment_variable(std::string const &key);
 
 #if defined(SYS_WINDOWS)
 
