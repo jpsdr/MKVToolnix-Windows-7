@@ -213,8 +213,7 @@ translation_c::set_active_translation(const std::string &locale) {
   int idx                   = look_up_translation(locale);
   ms_active_translation_idx = std::max(idx, 0);
 
-  if (debugging_c::requested("locale"))
-    mxinfo(boost::format("[translation_c::set_active_translation() active_translation_idx %1% for locale %2%]\n") % ms_active_translation_idx % locale);
+  mxdebug_if(debugging_c::requested("locale"), boost::format("[translation_c::set_active_translation() active_translation_idx %1% for locale %2%]\n") % ms_active_translation_idx % locale);
 }
 
 // ------------------------------------------------------------
