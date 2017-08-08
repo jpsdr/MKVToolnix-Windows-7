@@ -194,7 +194,7 @@ property_element_c::init_tables() {
 
   ELE2("projection-type",       KaxVideoProjectionType::ClassInfos,      Y("Video: projection type"),             Y("Describes the projection used for this video track (0 – 3)."));
   ELE2("projection-private",    KaxVideoProjectionPrivate::ClassInfos,   Y("Video: projection-specific data"),    Y("Private data that only applies to a specific projection."));
-  ELE2("projection-pose-yaw",   KaxVideoProjectionPoseYaw::ClassInfos,   Y("Video: projection's yaw rotation"),   Y("Specifies a yaw rotation to the projection"));
+  ELE2("projection-pose-yaw",   KaxVideoProjectionPoseYaw::ClassInfos,   Y("Video: projection's yaw rotation"),   Y("Specifies a yaw rotation to the projection."));
   ELE2("projection-pose-pitch", KaxVideoProjectionPosePitch::ClassInfos, Y("Video: projection's pitch rotation"), Y("Specifies a pitch rotation to the projection."));
   ELE2("projection-pose-roll",  KaxVideoProjectionPoseRoll::ClassInfos,  Y("Video: projection's roll rotation"),  Y("Specifies a roll rotation to the projection."));
 
