@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QLineEdit>
+#include <QRegularExpression>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/bit_value_page.h"
@@ -17,7 +18,7 @@ BitValuePage::BitValuePage(Tab &parent,
                            translatable_string_c const &description,
                            unsigned int bitLength)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::Binary, title, description}
-  , m_originalValue{128}
+  , m_originalValue{static_cast<int>(bitLength ? bitLength : 8)}
   , m_bitLength{bitLength}
 {
 }
@@ -64,7 +65,7 @@ bool
 BitValuePage::validateValue()
   const {
   try {
-    auto bitValue = bitvalue_c{to_utf8(m_leValue->text()), m_bitLength};
+    valueToBitvalue();
   } catch (...) {
     return false;
   }
@@ -74,8 +75,17 @@ BitValuePage::validateValue()
 
 void
 BitValuePage::copyValueToElement() {
-  auto bitValue = bitvalue_c{to_utf8(m_leValue->text()), m_bitLength};
-  static_cast<EbmlBinary *>(m_element)->CopyBuffer(bitValue.data(), m_bitLength / 8);
+  auto bitValue = valueToBitvalue();
+  static_cast<EbmlBinary *>(m_element)->CopyBuffer(bitValue.data(), bitValue.byte_size());
+}
+
+bitvalue_c
+BitValuePage::valueToBitvalue()
+  const {
+  auto cleanedText = m_leValue->text().replace(QRegularExpression{Q("[^0-9a-fA-F]")}, Q(""));
+  auto bitLength   = m_bitLength ? m_bitLength : ((cleanedText.length() + 1) / 2) * 8;
+
+  return { to_utf8(cleanedText), bitLength };
 }
 
 }}}

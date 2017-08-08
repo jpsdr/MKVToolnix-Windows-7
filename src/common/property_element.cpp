@@ -204,6 +204,13 @@ property_element_c::init_tables() {
   ELE("output-sampling-frequency", KaxAudioOutputSamplingFreq::ClassInfos, Y("Audio output sampling frequency"), Y("Real output sampling frequency in Hz."));
   ELE("channels",                  KaxAudioChannels::ClassInfos,           Y("Audio channels"),                  Y("Numbers of channels in the track."));
   ELE("bit-depth",                 KaxAudioBitDepth::ClassInfos,           Y("Audio bit depth"),                 Y("Bits per sample, mostly used for PCM."));
+
+  auto look_up = [](EbmlCallbacks const &callbacks, std::string const &name) -> property_element_c & {
+    auto itr = brng::find_if(s_properties[callbacks.GlobalId.GetValue()], [&name](auto const &prop) { return prop.m_name == name; });
+    return *itr;
+  };
+
+  look_up(KaxTracks::ClassInfos, "projection-private").m_bit_length = 0;
 }
 
 std::vector<property_element_c> &
