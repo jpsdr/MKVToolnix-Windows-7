@@ -125,11 +125,11 @@ Tab::load() {
     return;
   }
 
-  m_fileModificationTime = QFileInfo{m_fileName}.lastModified();
-
   populateTree();
 
   m_analyzer->close_file();
+
+  m_fileModificationTime = QFileInfo{m_fileName}.lastModified();
 
   for (auto const &page : m_model->allExpandablePages()) {
     auto key = dynamic_cast<TopLevelPage &>(*page).internalIdentifier();

@@ -42,6 +42,11 @@
   command-line option or via the GUI's preferences) did not work on Linux &
   Unix if the `LANGUAGE` environment variable was set and didn't include the
   desired language. Fixes #2070.
+* MKVToolNix GUI: header editor: after saving the file the GUI wasn't updating
+  its internal file modification timestamp. That lead to the GUI wrongfully
+  claiming that the file had been modified externally when the user wanted to
+  save the file once more, requiring a reload of the file losing all
+  modifications made since saving the first time.
 
 ## Build system changes
 
