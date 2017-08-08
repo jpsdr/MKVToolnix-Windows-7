@@ -78,9 +78,9 @@ create_ebml_element(const EbmlCallbacks &callbacks,
   return nullptr;
 }
 
-const EbmlCallbacks *
-find_ebml_callbacks(const EbmlCallbacks &base,
-                    const EbmlId &id) {
+static EbmlCallbacks const *
+do_find_ebml_callbacks(EbmlCallbacks const &base,
+                       EbmlId const &id) {
   const EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
   const EbmlCallbacks *result;
   size_t i;
@@ -95,7 +95,7 @@ find_ebml_callbacks(const EbmlCallbacks &base,
   for (i = 0; i < EBML_CTX_SIZE(context); i++) {
     if (!(context != EBML_SEM_CONTEXT(EBML_CTX_IDX(context,i))))
       continue;
-    result = find_ebml_callbacks(EBML_CTX_IDX_INFO(context, i), id);
+    result = do_find_ebml_callbacks(EBML_CTX_IDX_INFO(context, i), id);
     if (result)
       return result;
   }
@@ -103,9 +103,24 @@ find_ebml_callbacks(const EbmlCallbacks &base,
   return nullptr;
 }
 
-const EbmlCallbacks *
-find_ebml_callbacks(const EbmlCallbacks &base,
-                    const char *debug_name) {
+EbmlCallbacks const *
+find_ebml_callbacks(EbmlCallbacks const &base,
+                    EbmlId const &id) {
+  static std::unordered_map<uint32_t, EbmlCallbacks const *> s_cache;
+
+  auto itr = s_cache.find(id.GetValue());
+  if (itr != s_cache.end())
+    return itr->second;
+
+  auto result            = do_find_ebml_callbacks(base, id);
+  s_cache[id.GetValue()] = result;
+
+  return result;
+}
+
+static EbmlCallbacks const *
+do_find_ebml_callbacks(EbmlCallbacks const &base,
+                       char const *debug_name) {
   const EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
   const EbmlCallbacks *result;
   size_t i;
@@ -120,7 +135,7 @@ find_ebml_callbacks(const EbmlCallbacks &base,
   for (i = 0; i < EBML_CTX_SIZE(context); i++) {
     if (!(context != EBML_SEM_CONTEXT(EBML_CTX_IDX(context,i))))
       continue;
-    result = find_ebml_callbacks(EBML_CTX_IDX_INFO(context, i), debug_name);
+    result = do_find_ebml_callbacks(EBML_CTX_IDX_INFO(context, i), debug_name);
     if (result)
       return result;
   }
@@ -128,9 +143,24 @@ find_ebml_callbacks(const EbmlCallbacks &base,
   return nullptr;
 }
 
-const EbmlCallbacks *
-find_ebml_parent_callbacks(const EbmlCallbacks &base,
-                           const EbmlId &id) {
+EbmlCallbacks const *
+find_ebml_callbacks(EbmlCallbacks const &base,
+                    char const *debug_name) {
+  static std::unordered_map<std::string, EbmlCallbacks const *> s_cache;
+
+  auto itr = s_cache.find(debug_name);
+  if (itr != s_cache.end())
+    return itr->second;
+
+  auto result         = do_find_ebml_callbacks(base, debug_name);
+  s_cache[debug_name] = result;
+
+  return result;
+}
+
+static EbmlCallbacks const *
+do_find_ebml_parent_callbacks(EbmlCallbacks const &base,
+                              EbmlId const &id) {
   const EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
   const EbmlCallbacks *result;
   size_t i;
@@ -142,7 +172,7 @@ find_ebml_parent_callbacks(const EbmlCallbacks &base,
   for (i = 0; i < EBML_CTX_SIZE(context); i++) {
     if (!(context != EBML_SEM_CONTEXT(EBML_CTX_IDX(context,i))))
       continue;
-    result = find_ebml_parent_callbacks(EBML_CTX_IDX_INFO(context, i), id);
+    result = do_find_ebml_parent_callbacks(EBML_CTX_IDX_INFO(context, i), id);
     if (result)
       return result;
   }
@@ -150,9 +180,24 @@ find_ebml_parent_callbacks(const EbmlCallbacks &base,
   return nullptr;
 }
 
-const EbmlSemantic *
-find_ebml_semantic(const EbmlCallbacks &base,
-                   const EbmlId &id) {
+EbmlCallbacks const *
+find_ebml_parent_callbacks(EbmlCallbacks const &base,
+                           EbmlId const &id) {
+  static std::unordered_map<uint32_t, EbmlCallbacks const *> s_cache;
+
+  auto itr = s_cache.find(id.GetValue());
+  if (itr != s_cache.end())
+    return itr->second;
+
+  auto result            = do_find_ebml_parent_callbacks(base, id);
+  s_cache[id.GetValue()] = result;
+
+  return result;
+}
+
+static EbmlSemantic const *
+do_find_ebml_semantic(EbmlCallbacks const &base,
+                      EbmlId const &id) {
   const EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
   const EbmlSemantic *result;
   size_t i;
@@ -164,12 +209,27 @@ find_ebml_semantic(const EbmlCallbacks &base,
   for (i = 0; i < EBML_CTX_SIZE(context); i++) {
     if (!(context != EBML_SEM_CONTEXT(EBML_CTX_IDX(context,i))))
       continue;
-    result = find_ebml_semantic(EBML_CTX_IDX_INFO(context, i), id);
+    result = do_find_ebml_semantic(EBML_CTX_IDX_INFO(context, i), id);
     if (result)
       return result;
   }
 
   return nullptr;
+}
+
+EbmlSemantic const *
+find_ebml_semantic(EbmlCallbacks const &base,
+                   EbmlId const &id) {
+  static std::unordered_map<uint32_t, EbmlSemantic const *> s_cache;
+
+  auto itr = s_cache.find(id.GetValue());
+  if (itr != s_cache.end())
+    return itr->second;
+
+  auto result            = do_find_ebml_semantic(base, id);
+  s_cache[id.GetValue()] = result;
+
+  return result;
 }
 
 EbmlMaster *
