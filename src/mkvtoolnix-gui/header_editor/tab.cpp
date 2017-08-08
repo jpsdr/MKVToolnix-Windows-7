@@ -358,10 +358,10 @@ Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
   std::unordered_map<EbmlMaster *, bool> handled;
 
   if (trackType == track_video) {
-    auto trackVideo            = &GetChild<KaxTrackVideo>(page.m_master);
-    auto videoColour           = &GetChild<KaxVideoColour>(trackVideo);
-    auto videoColourMasterMeta = &GetChild<KaxVideoColourMasterMeta>(videoColour);
-    auto videoProjection       = &GetChild<KaxVideoProjection>(trackVideo);
+    auto trackVideo            = &GetChildEmptyIfNew<KaxTrackVideo>(page.m_master);
+    auto videoColour           = &GetChildEmptyIfNew<KaxVideoColour>(trackVideo);
+    auto videoColourMasterMeta = &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(videoColour);
+    auto videoProjection       = &GetChildEmptyIfNew<KaxVideoProjection>(trackVideo);
 
     remove_master_from_parent_if_empty_or_only_defaults(videoColour,    videoColourMasterMeta, handled);
     remove_master_from_parent_if_empty_or_only_defaults(trackVideo,     videoColour,           handled);
@@ -370,7 +370,7 @@ Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
 
   } else
     // trackType is track_audio
-    remove_master_from_parent_if_empty_or_only_defaults(&page.m_master, &GetChild<KaxTrackAudio>(page.m_master), handled);
+    remove_master_from_parent_if_empty_or_only_defaults(&page.m_master, &GetChildEmptyIfNew<KaxTrackAudio>(page.m_master), handled);
 }
 
 void
@@ -485,10 +485,10 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       projectionPage->setParentPage(*page);
       projectionPage->init();
 
-      parentMastersByCallback[&KaxTrackVideo::ClassInfos]            = &GetChild<KaxTrackVideo>(kTrackEntry);
-      parentMastersByCallback[&KaxVideoColour::ClassInfos]           = &GetChild<KaxVideoColour>(parentMastersByCallback[&KaxTrackVideo::ClassInfos]);
-      parentMastersByCallback[&KaxVideoColourMasterMeta::ClassInfos] = &GetChild<KaxVideoColourMasterMeta>(parentMastersByCallback[&KaxVideoColour::ClassInfos]);
-      parentMastersByCallback[&KaxVideoProjection::ClassInfos]       = &GetChild<KaxVideoProjection>(parentMastersByCallback[&KaxTrackVideo::ClassInfos]);
+      parentMastersByCallback[&KaxTrackVideo::ClassInfos]            = &GetChildEmptyIfNew<KaxTrackVideo>(kTrackEntry);
+      parentMastersByCallback[&KaxVideoColour::ClassInfos]           = &GetChildEmptyIfNew<KaxVideoColour>(parentMastersByCallback[&KaxTrackVideo::ClassInfos]);
+      parentMastersByCallback[&KaxVideoColourMasterMeta::ClassInfos] = &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(parentMastersByCallback[&KaxVideoColour::ClassInfos]);
+      parentMastersByCallback[&KaxVideoProjection::ClassInfos]       = &GetChildEmptyIfNew<KaxVideoProjection>(parentMastersByCallback[&KaxTrackVideo::ClassInfos]);
 
       parentPagesByCallback[&KaxTrackVideo::ClassInfos]              = page;
       parentPagesByCallback[&KaxVideoColour::ClassInfos]             = colourPage;
@@ -496,7 +496,7 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       parentPagesByCallback[&KaxVideoProjection::ClassInfos]         = projectionPage;
 
     } else if (track_audio == trackType) {
-      parentMastersByCallback[&KaxTrackAudio::ClassInfos]            = &GetChild<KaxTrackAudio>(kTrackEntry);
+      parentMastersByCallback[&KaxTrackAudio::ClassInfos]            = &GetChildEmptyIfNew<KaxTrackAudio>(kTrackEntry);
       parentPagesByCallback[&KaxTrackAudio::ClassInfos]              = page;
     }
 

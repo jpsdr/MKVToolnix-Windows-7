@@ -221,6 +221,17 @@ GetChild(EbmlMaster *m) {
   return GetChild<A>(*m);
 }
 
+template<typename A> A &
+GetChildEmptyIfNew(EbmlMaster &m) {
+  auto *child = FindChild<A>(m);
+  return child ? *child : GetEmptyChild<A>(m);
+}
+
+template<typename A> A &
+GetChildEmptyIfNew(EbmlMaster *m) {
+  return GetChildEmptyIfNew<A>(*m);
+}
+
 template <typename A>A &
 GetFirstOrNextChild(EbmlMaster &master,
                     A *previous_child) {
