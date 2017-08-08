@@ -88,15 +88,21 @@ Tab::resetData() {
 
 void
 Tab::load() {
-  auto selectedIdx         = ui->elements->selectionModel()->currentIndex();
-  selectedIdx              = selectedIdx.isValid()          ? selectedIdx.sibling(selectedIdx.row(), 0) : selectedIdx;
-  auto selectedTopLevelRow = !selectedIdx.isValid()         ? -1
-                           : selectedIdx.parent().isValid() ? selectedIdx.parent().row()
-                           :                                  selectedIdx.row();
-  auto selected2ndLevelRow = !selectedIdx.isValid()         ? -1
-                           : selectedIdx.parent().isValid() ? selectedIdx.row()
-                           :                                  -1;
-  auto expansionStatus     = QHash<QString, bool>{};
+  QVector<int> selectedRows;
+
+  auto selectedIdx = ui->elements->selectionModel()->currentIndex();
+  if (!selectedIdx.isValid()) {
+    auto rowIndexes = ui->elements->selectionModel()->selectedRows();
+    if (!rowIndexes.isEmpty())
+      selectedIdx = rowIndexes.first();
+  }
+
+  while (selectedIdx.isValid()) {
+    selectedRows.insert(0, selectedIdx.row());
+    selectedIdx = selectedIdx.sibling(selectedIdx.row(), 0).parent();
+  }
+
+  QHash<QString, bool> expansionStatus;
 
   for (auto const &page : m_model->allExpandablePages()) {
     auto key = dynamic_cast<TopLevelPage &>(*page).internalIdentifier();
@@ -138,12 +144,12 @@ Tab::load() {
 
   Util::resizeViewColumnsToContents(ui->elements);
 
-  if (!selectedIdx.isValid() || (-1 == selectedTopLevelRow))
+  if (selectedRows.isEmpty())
     return;
 
-  selectedIdx = m_model->index(selectedTopLevelRow, 0);
-  if (-1 != selected2ndLevelRow)
-    selectedIdx = m_model->index(selected2ndLevelRow, 0, selectedIdx);
+  selectedIdx = m_model->index(selectedRows.takeFirst(), 0);
+  for (auto row : selectedRows)
+    selectedIdx = m_model->index(row, 0, selectedIdx);
 
   auto selection = QItemSelection{selectedIdx, selectedIdx.sibling(selectedIdx.row(), m_model->columnCount() - 1)};
   ui->elements->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
