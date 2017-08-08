@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-08-05 07:22+0200\n"
-"PO-Revision-Date: 2017-08-01 18:38+0000\n"
+"PO-Revision-Date: 2017-08-05 09:58+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -159,7 +159,7 @@ msgid ""
 msgstr ""
 "  --cb-subsample <TID:hori,vert>\n"
 "                           Yatay ve dikey olarak kaldırılmayan her pikselin\n"
-"                           Cb kanalı içinde kaldırılan piksel miktarı.\n"
+"                           Cb kanalı içinde kaldırmak için piksel miktarı.\n"
 "                           Bu --chroma-subsample ile katkı sağlar.\n"
 
 #: src/merge/mkvmerge.cpp:92
@@ -191,7 +191,7 @@ msgid ""
 msgstr ""
 "  --chroma-subsample <TID:hori,vert>\n"
 "                           Yatay ve dikey olarak kaldırılmayan her pikselin\n"
-"                           Cr ve Cb kanalı içinde kaldırılan piksel miktarı.\n"
+"                           Cr ve Cb kanalı içinde kaldırmak için piksel miktarı.\n"
 
 #: src/merge/mkvmerge.cpp:298
 msgid ""
@@ -238,7 +238,7 @@ msgid ""
 "                           and blue color primaries.\n"
 msgstr ""
 "  --colour-matrix <TID:n>  Luma ve chroma değerlerini kırmızı, yeşil ve mavi\n"
-"                           renk birincillerinden türetmek için kullanılan görüntünün \n"
+"                           renk önceliklerinden türetmek için kullanılan görüntünün \n"
 "                           matriks katsayılarını ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:290
@@ -247,7 +247,7 @@ msgid ""
 "                           The colour primaries of the video.\n"
 msgstr ""
 "  --colour-primaries <TID:n>\n"
-"                           Görüntünün renk birincilleri.\n"
+"                           Görüntünün renk öncelikleri.\n"
 
 #: src/merge/mkvmerge.cpp:287
 msgid "  --colour-range <TID:n>   Clipping of the color ranges.\n"
@@ -448,48 +448,44 @@ msgstr ""
 "                           ISO639-2 kodlarını listeler.\n"
 
 #: src/merge/mkvmerge.cpp:292
-#, fuzzy
 msgid ""
 "  --max-content-light <TID:n>\n"
 "                           Maximum brightness of a single pixel in candelas\n"
 "                           per square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <dosya>\n"
-"                           İlk yazılmış Matroska dosyası içinde\n"
-"                           dosya eki oluşturur.\n"
+"  --max-content-light <TID:n>\n"
+"                           Kandela bölü metrekare (cd/m²) olarak tek bir pikselin\n"
+"                           en fazla aydınlığı.\n"
 
 #: src/merge/mkvmerge.cpp:295
-#, fuzzy
 msgid ""
 "  --max-frame-light <TID:n>\n"
 "                           Maximum frame-average light level in candelas per\n"
 "                           square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <dosya>\n"
-"                           İlk yazılmış Matroska dosyası içinde\n"
-"                           dosya eki oluşturur.\n"
+"  --max-frame-light <TID:n>\n"
+"                           Kandela bölü metrekare (cd/m²) olarak en fazla\n"
+"                           kare ortalaması ışık seviyesi.\n"
 
 #: src/merge/mkvmerge.cpp:304
-#, fuzzy
 msgid ""
 "  --max-luminance <TID:float>\n"
 "                           Maximum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split timecodes:A[,B...]\n"
-"                           Her kareden/alandan A, B vb. sonra yeni bir\n"
-"                           dosya oluştur.\n"
+"  --max-luminance <TID:float>\n"
+"                           Kandela bölü metrekare (cd/m²) olarak en fazla\n"
+"                           parlaklık.\n"
 
 #: src/merge/mkvmerge.cpp:307
-#, fuzzy
 msgid ""
 "  --min-luminance <TID:float>\n"
 "                           Mininum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split timecodes:A[,B...]\n"
-"                           Her kareden/alandan A, B vb. sonra yeni bir\n"
-"                           dosya oluştur.\n"
+"  --min-luminance <TID:float>\n"
+"                           Kandela bölü metrekare (cd/m²) olarak en az\n"
+"                           parlaklık.\n"
 
 #: src/merge/mkvmerge.cpp:244
 msgid ""
@@ -3365,11 +3361,11 @@ msgstr "Blu-ray oynatma listesi dosyaları"
 
 #: src/common/property_element.cpp:186
 msgid "Blue X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "CIE 1931 tarafından tanımlanan Mavi X renklilik koordinatı."
 
 #: src/common/property_element.cpp:187
 msgid "Blue Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "CIE 1931 tarafından tanımlanan Mavi Y renklilik koordinatı."
 
 #: src/info/mkvinfo.cpp:578
 #: src/info/mkvinfo.cpp:579
@@ -3702,9 +3698,8 @@ msgid "Clearing settings auto&matically:"
 msgstr "Ayarlar oto&matik olarak temizlenirken:"
 
 #: src/common/property_element.cpp:176
-#, fuzzy
 msgid "Clipping of the color ranges."
-msgstr "  --colour-range <TID:n>   Renk paletlerinin kırpılması.\n"
+msgstr "Renk paletlerinin kırpılması."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1335
 msgid "Close current settings"
@@ -3825,14 +3820,12 @@ msgid "CodecPrivate, length %1%%2%"
 msgstr "CodecPrivate, uzunluk %1%%2%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:480
-#, fuzzy
 msgid "Colour information"
-msgstr "Görüntü rengi bilgileri"
+msgstr "Renk bilgileri"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:485
-#, fuzzy
 msgid "Colour mastering meta information"
-msgstr "Bilgi kaydetme hatası"
+msgstr "Renk yönetme üst bilgileri"
 
 #: src/info/mkvinfo.cpp:617
 #: src/info/mkvinfo.cpp:618
@@ -3850,7 +3843,7 @@ msgstr "Renk öncelikleri: %1%"
 #: src/info/mkvinfo.cpp:658
 #, boost-format
 msgid "Colour range: %1%"
-msgstr "Renk aralığı: %1%"
+msgstr "Renk paleti: %1%"
 
 #: src/info/mkvinfo.cpp:782
 #, boost-format
@@ -5553,11 +5546,11 @@ msgstr[1] "Genel etiket: %1% giriş"
 
 #: src/common/property_element.cpp:184
 msgid "Green X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "CIE 1931 tarafından tanımlanan Yeşil X renklilik koordinatı."
 
 #: src/common/property_element.cpp:185
 msgid "Green Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "CIE 1931 tarafından tanımlanan Yeşil Y renklilik koordinatı."
 
 #: src/info/mkvinfo.cpp:568
 #: src/info/mkvinfo.cpp:569
@@ -5682,11 +5675,11 @@ msgstr "Yatay renk doygunluğu alt örneği: %1%"
 
 #: src/common/property_element.cpp:174
 msgid "How chroma is sited horizontally."
-msgstr ""
+msgstr "Yatay olarak renk doygunluğunun nasıl yerleştiği."
 
 #: src/common/property_element.cpp:175
 msgid "How chroma is sited vertically."
-msgstr ""
+msgstr "Dikey olarak renk doygunluğunun nasıl yerleştiği."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -6839,28 +6832,20 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "En fazla izin verilen değer: %1%, asıl değer: %2%"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
-msgstr ""
-"  --attach-file-once <dosya>\n"
-"                           İlk yazılmış Matroska dosyası içinde\n"
-"                           dosya eki oluşturur.\n"
+msgstr "Kandela bölü metrekare (cd/m²) olarak tek bir pikselin en fazla aydınlığı."
 
 #: src/common/property_element.cpp:135
 msgid "Maximum cache"
 msgstr "En fazla önbellek"
 
 #: src/common/property_element.cpp:180
-#, fuzzy
 msgid "Maximum frame-average light level in candelas per square meter (cd/m²)."
-msgstr ""
-"  --attach-file-once <dosya>\n"
-"                           İlk yazılmış Matroska dosyası içinde\n"
-"                           dosya eki oluşturur.\n"
+msgstr "Kandela bölü metrekare (cd/m²) olarak en fazla kare ortalaması ışık seviyesi."
 
 #: src/common/property_element.cpp:190
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
-msgstr ""
+msgstr "Kandela bölü metrekare (cd/m²) olarak en fazla parlaklık."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Maximum number of files:"
@@ -6913,7 +6898,7 @@ msgstr "En az önbellek"
 
 #: src/common/property_element.cpp:191
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
-msgstr ""
+msgstr "Kandela bölü metrekare (cd/m²) olarak en az parlaklık."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1704
@@ -8213,11 +8198,11 @@ msgstr "RealMedia ses/görüntü dosyası"
 
 #: src/common/property_element.cpp:182
 msgid "Red X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "CIE 1931 tarafından tanımlanan Kırmızı X renklilik koordinatı."
 
 #: src/common/property_element.cpp:183
 msgid "Red Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "CIE 1931 tarafından tanımlanan Kırmızı Y renklilik koordinatı."
 
 #: src/info/mkvinfo.cpp:558
 #: src/info/mkvinfo.cpp:559
@@ -8861,16 +8846,12 @@ msgid "Sets the lossless compression algorithm to be used for this track."
 msgstr "Bu iz için kullanılacak kayıpsız sıkıştırma algoritmasını ayarlar."
 
 #: src/common/property_element.cpp:165
-#, fuzzy
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."
-msgstr ""
-"  --colour-matrix <TID:n>  Luma ve chroma değerlerini kırmızı, yeşil ve mavi\n"
-"                           renk birincillerinden türetmek için kullanılan görüntünün \n"
-"                           matriks katsayılarını ayarlar.\n"
+msgstr "Luma ve chroma değerlerini kırmızı, yeşil ve mavi renk önceliklerinden türetmek için kullanılan görüntünün matriks katsayılarını ayarlar."
 
 #: src/common/property_element.cpp:167
 msgid "Sets the number of coded bits for a colour channel."
-msgstr ""
+msgstr "Renk kanalı için birtakım kodlanmış bit'leri ayarlar."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:167
 msgid "Sets the segment UIDs to use."
@@ -9118,7 +9099,7 @@ msgstr "Bölme"
 #: src/mkvtoolnix-gui/merge/output.cpp:415
 #, no-c-format
 msgid "Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed."
-msgstr ""
+msgstr "Bölme işlemi, numarası listelenen bölümler için zaman kodu eşit ya da  başlangıç zaman kodundan büyük olan ilk anahtar kareden önce meydana gelecek."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:622
 msgid "Sta&rt all pending jobs"
@@ -9513,30 +9494,20 @@ msgid "The XML tag file '%1%' could not be read.\n"
 msgstr "XMl etiket dosyası '%1%' okunamadı.\n"
 
 #: src/common/property_element.cpp:170
-#, fuzzy
 msgid "The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. This is additive with chroma-subsample-horizontal."
-msgstr ""
-"  --cb-subsample <TID:hori,vert>\n"
-"                           Yatay ve dikey olarak kaldırılmayan her pikselin\n"
-"                           Cb kanalı içinde kaldırılan piksel miktarı.\n"
-"                           Bu --chroma-subsample ile katkı sağlar.\n"
+msgstr "Yatay olarak kaldırılmayan her pikselin Cb kanalı içinde kaldırmak için piksel miktarı. Bu chroma-subsample-horizontal ile katkı sağlar."
 
 #: src/common/property_element.cpp:172
-#, fuzzy
 msgid "The amount of pixels to remove in the Cb channel for every pixel not removed vertically. This is additive with chroma-subsample-vertical."
-msgstr ""
-"  --cb-subsample <TID:hori,vert>\n"
-"                           Yatay ve dikey olarak kaldırılmayan her pikselin\n"
-"                           Cb kanalı içinde kaldırılan piksel miktarı.\n"
-"                           Bu --chroma-subsample ile katkı sağlar.\n"
+msgstr "Dikey olarak kaldırılmayan her pikselin Cb kanalı içinde kaldırmak için piksel miktarı. Bu chroma-subsample-vertical ile katkı sağlar."
 
 #: src/common/property_element.cpp:168
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."
-msgstr ""
+msgstr "Yatay olarak kaldırılmayan her pikselin Cr ve Cb kanalları içinde kaldırmak için piksel miktarı."
 
 #: src/common/property_element.cpp:169
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."
-msgstr ""
+msgstr "Dikey olarak kaldırılmayan her pikselin Cr ve Cb kanalları içinde kaldırmak için piksel miktarı."
 
 #: src/merge/mkvmerge.cpp:2125
 #, boost-format
@@ -9644,11 +9615,11 @@ msgstr "Kodek'in özel verisi eşleşmiyor. Her ikisi de aynı uzunluğa sahip (
 
 #: src/common/property_element.cpp:178
 msgid "The colour primaries of the video."
-msgstr ""
+msgstr "Görüntünün renk öncelikleri."
 
 #: src/common/property_element.cpp:177
 msgid "The colour transfer characteristics of the video."
-msgstr ""
+msgstr "Görüntünün renk aktarım karakteristikleri."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:98
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
@@ -11657,7 +11628,7 @@ msgstr "Görüntü rengi bilgileri"
 
 #: src/info/mkvinfo.cpp:554
 msgid "Video colour mastering metadata"
-msgstr ""
+msgstr "Görüntü rengi yönetme üstverisi"
 
 #: src/common/property_element.cpp:155
 msgid "Video crop bottom"
@@ -11728,95 +11699,86 @@ msgstr "Görüntü izi %1"
 
 #: src/common/property_element.cpp:167
 msgid "Video: bits per colour channel"
-msgstr ""
+msgstr "Görüntü: renk kanalı başına bit"
 
 #: src/common/property_element.cpp:174
 #: src/common/property_element.cpp:175
-#, fuzzy
 msgid "Video: chroma siting"
-msgstr "Dikey renk doygunluğu yerleşimi: %1%"
+msgstr "Görüntü: renk doygunluğu yerleşimi"
 
 #: src/common/property_element.cpp:186
-#, fuzzy
 msgid "Video: chromacity blue X"
-msgstr "Görüntü kırpma sol"
+msgstr "Görüntü: renklilik mavi X"
 
 #: src/common/property_element.cpp:187
-#, fuzzy
 msgid "Video: chromacity blue Y"
-msgstr "Görüntü kırpma sol"
+msgstr "Görüntü: renklilik mavi Y"
 
 #: src/common/property_element.cpp:184
 msgid "Video: chromacity green X"
-msgstr ""
+msgstr "Görüntü: renklilik yeşil X"
 
 #: src/common/property_element.cpp:185
 msgid "Video: chromacity green Y"
-msgstr ""
+msgstr "Görüntü: renklilik yeşil Y"
 
 #: src/common/property_element.cpp:182
 msgid "Video: chromacity red X"
-msgstr ""
+msgstr "Görüntü: renklilik kırmızı X"
 
 #: src/common/property_element.cpp:183
 msgid "Video: chromacity red Y"
-msgstr ""
+msgstr "Görüntü: renklilik kırmızı Y"
 
 #: src/common/property_element.cpp:165
-#, fuzzy
 msgid "Video: colour matrix coefficients"
-msgstr "Görüntü rengi bilgileri"
+msgstr "Görüntü: renk matrisi katsayıları"
 
 #: src/common/property_element.cpp:178
-#, fuzzy
 msgid "Video: colour primaries"
-msgstr "Görüntü rengi bilgileri"
+msgstr "Görüntü: renk öncelikleri"
 
 #: src/common/property_element.cpp:176
-#, fuzzy
 msgid "Video: colour range"
-msgstr "Görüntü rengi bilgileri"
+msgstr "Görüntü: renk paleti"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Video: maximum content light"
-msgstr "En fazla içerik ışığı: %1%"
+msgstr "Görüntü: en fazla içerik ışığı"
 
 #: src/common/property_element.cpp:180
-#, fuzzy
 msgid "Video: maximum frame light"
-msgstr "En fazla kare ışığı: %1%"
+msgstr "Görüntü: en fazla kare ışığı"
 
 #: src/common/property_element.cpp:190
 msgid "Video: maximum luminance"
-msgstr ""
+msgstr "Görüntü: en fazla parlaklık"
 
 #: src/common/property_element.cpp:191
 msgid "Video: minimum luminance"
-msgstr ""
+msgstr "Görüntü: en az parlaklık"
 
 #: src/common/property_element.cpp:170
 #: src/common/property_element.cpp:172
 msgid "Video: pixels to remove in Cb"
-msgstr ""
+msgstr "Görüntü: Cb içinde kaldırmak için pikseller"
 
 #: src/common/property_element.cpp:168
 #: src/common/property_element.cpp:169
-#, fuzzy
 msgid "Video: pixels to remove in chroma"
-msgstr "Resmin sağındaki görüntü piksellerini kaldırmak için sayı."
+msgstr "Görüntü: renklilik içinde kaldırmak için pikseller"
 
 #: src/common/property_element.cpp:177
 msgid "Video: transfer characteristics"
-msgstr ""
+msgstr "Görüntü: aktarım karakteristikleri"
 
 #: src/common/property_element.cpp:188
 msgid "Video: white point X"
-msgstr ""
+msgstr "Görüntü: beyaz nokta X"
 
 #: src/common/property_element.cpp:189
 msgid "Video: white point Y"
-msgstr ""
+msgstr "Görüntü: beyaz nokta Y"
 
 #: src/common/file_types.cpp:102
 #: src/output/p_vobbtn.h:36
@@ -11982,11 +11944,11 @@ msgstr "Kullanıcı her ne zaman bir çalma listesi eklerse program otomatik ola
 
 #: src/common/property_element.cpp:188
 msgid "White colour chromaticity coordinate X as defined by CIE 1931."
-msgstr ""
+msgstr "CIE 1931 tarafından tanımlanan beyaz renk renklilik koordinatı X."
 
 #: src/common/property_element.cpp:189
 msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
-msgstr ""
+msgstr "CIE 1931 tarafından tanımlanan beyaz renk renklilik koordinatı Y."
 
 #: src/info/mkvinfo.cpp:588
 #: src/info/mkvinfo.cpp:589
