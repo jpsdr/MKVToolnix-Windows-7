@@ -107,7 +107,7 @@ track_target_c::execute() {
   for (auto &change : m_changes)
     change->execute(m_master, m_sub_master);
 
-  fix_mandatory_segment_tracks_elements(m_master);
+  fix_mandatory_elements(m_master);
 }
 
 void

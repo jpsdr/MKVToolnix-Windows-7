@@ -64,7 +64,7 @@ chapter_target_c::execute() {
   if (!m_level1_element->ListSize())
     return;
 
-  fix_mandatory_chapter_elements(m_level1_element);
+  fix_mandatory_elements(m_level1_element);
   if (!m_level1_element->CheckMandatory())
     mxerror(boost::format(Y("Error parsing the chapters in '%1%': some mandatory elements are missing.\n")) % m_file_name);
 

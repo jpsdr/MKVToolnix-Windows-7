@@ -204,7 +204,7 @@ ebml_chapters_converter_c::parse_file(std::string const &file_name,
   auto parse = [&file_name]() -> auto {
     auto master = ebml_chapters_converter_c{}.to_ebml(file_name, "Chapters");
     sort_ebml_master(master.get());
-    fix_mandatory_chapter_elements(static_cast<KaxChapters *>(master.get()));
+    fix_mandatory_elements(static_cast<KaxChapters *>(master.get()));
     return std::dynamic_pointer_cast<KaxChapters>(master);
   };
 

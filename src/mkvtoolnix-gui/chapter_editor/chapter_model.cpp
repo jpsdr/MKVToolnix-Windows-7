@@ -321,7 +321,7 @@ ChapterModel::fixMandatoryElements(QModelIndex const &parentIdx) {
     else if (Is<KaxEditionEntry>(*element) && !FindChildValue<KaxEditionUID>(*element, 0))
       DeleteChildren<KaxEditionUID>(*element);
 
-    fix_mandatory_chapter_elements(element.get());
+    fix_mandatory_elements(element.get());
   });
 }
 

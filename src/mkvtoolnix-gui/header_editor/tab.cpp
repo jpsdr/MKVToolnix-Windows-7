@@ -395,12 +395,12 @@ Tab::doModifications() {
   pruneEmptyMastersForAllTracks();
 
   if (m_eSegmentInfo) {
-    fix_mandatory_segmentinfo_elements(m_eSegmentInfo.get());
+    fix_mandatory_elements(m_eSegmentInfo.get());
     m_eSegmentInfo->UpdateSize(true, true);
   }
 
   if (m_eTracks) {
-    fix_mandatory_segment_tracks_elements(m_eTracks.get());
+    fix_mandatory_elements(m_eTracks.get());
     m_eTracks->UpdateSize(true, true);
   }
 }

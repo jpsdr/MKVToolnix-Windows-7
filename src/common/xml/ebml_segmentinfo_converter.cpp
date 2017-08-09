@@ -76,7 +76,7 @@ ebml_segmentinfo_converter_c::parse_file(std::string const &file_name,
                                          bool throw_on_error) {
   auto parse = [&file_name]() -> auto {
     auto master = ebml_segmentinfo_converter_c{}.to_ebml(file_name, "Info");
-    fix_mandatory_segmentinfo_elements(master.get());
+    fix_mandatory_elements(master.get());
     return std::dynamic_pointer_cast<KaxInfo>(master);
   };
 

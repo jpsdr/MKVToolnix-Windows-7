@@ -352,7 +352,7 @@ generic_packetizer_c::set_tag_track_uid() {
 
     GetChild<KaxTagTrackUID>(GetChild<KaxTagTargets>(tag)).SetValue(m_huid);
 
-    mtx::tags::fix_mandatory_elements(tag);
+    fix_mandatory_elements(tag);
 
     if (!tag->CheckMandatory())
       mxerror(boost::format(Y("The tags in '%1%' could not be parsed: some mandatory elements are missing.\n"))

@@ -1121,7 +1121,7 @@ calc_max_chapter_size() {
   // Step 2: Fix the mandatory elements and count the size of all chapters.
   s_max_chapter_size = 0;
   if (g_kax_chapters) {
-    fix_mandatory_chapter_elements(g_kax_chapters.get());
+    fix_mandatory_elements(g_kax_chapters.get());
     g_kax_chapters->UpdateSize(true);
     s_max_chapter_size += g_kax_chapters->ElementSize();
   }
@@ -1131,7 +1131,7 @@ calc_max_chapter_size() {
     if (!chapters)
       continue;
 
-    fix_mandatory_chapter_elements(chapters);
+    fix_mandatory_elements(chapters);
     chapters->UpdateSize(true);
     s_max_chapter_size += chapters->ElementSize();
   }
@@ -1309,7 +1309,7 @@ prepare_tags_for_rendering() {
   if (outputting_webm())
     mtx::tags::remove_elements_unsupported_by_webm(*s_kax_tags);
 
-  mtx::tags::fix_mandatory_elements(s_kax_tags.get());
+  fix_mandatory_elements(s_kax_tags.get());
   sort_ebml_master(s_kax_tags.get());
   if (!s_kax_tags->CheckMandatory())
     mxerror(boost::format(Y("Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n")) % BUGMSG);
@@ -1591,7 +1591,7 @@ finish_file(bool last_file,
   }
 
   if (tags_here) {
-    mtx::tags::fix_mandatory_elements(tags_here);
+    fix_mandatory_elements(tags_here);
     tags_here->UpdateSize();
     tags_here->Render(*s_out, true);
 

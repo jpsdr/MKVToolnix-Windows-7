@@ -732,7 +732,7 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     auto result   = kax_analyzer_c::uer_success;
 
     if (chapters && (0 != chapters->ListSize())) {
-      fix_mandatory_chapter_elements(chapters.get());
+      fix_mandatory_elements(chapters.get());
       if (d->analyzer->is_webm())
         remove_chapter_elements_unsupported_by_webm(*chapters);
 
