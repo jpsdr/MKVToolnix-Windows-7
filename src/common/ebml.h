@@ -168,10 +168,11 @@ GetNextEmptyChild(EbmlMaster &master,
   return *(static_cast<type *>(e));
 }
 
-template <typename type>type &
+template <typename T>
+T &
 AddEmptyChild(EbmlMaster &master) {
   EbmlMaster *m;
-  EbmlElement *e = new type;
+  EbmlElement *e = new T;
   if ((m = dynamic_cast<EbmlMaster *>(e))) {
     while (m->ListSize() > 0) {
       delete (*m)[0];
@@ -180,7 +181,13 @@ AddEmptyChild(EbmlMaster &master) {
   }
   master.PushElement(*e);
 
-  return *(static_cast<type *>(e));
+  return *(static_cast<T *>(e));
+}
+
+template <typename T>
+T &
+AddEmptyChild(EbmlMaster *master) {
+  return AddEmptyChild<T>(*master);
 }
 
 template <typename T>
