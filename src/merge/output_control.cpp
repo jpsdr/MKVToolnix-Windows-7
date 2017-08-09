@@ -561,15 +561,10 @@ render_headers(mm_io_c *out) {
     s_kax_infos->PushElement(*s_kax_duration);
 
     if (s_muxing_app.empty()) {
-      if (!hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
-        s_muxing_app   = std::string("libebml v") + EbmlCodeVersion + std::string(" + libmatroska v") + KaxCodeVersion;
-        s_writing_app  = get_version_info("mkvmerge", static_cast<version_info_flags_e>(vif_full | vif_untranslated));
-        s_writing_date = boost::posix_time::second_clock::universal_time();
-
-      } else {
-        s_muxing_app   = "no_variable_data";
-        s_writing_app  = "no_variable_data";
-      }
+      auto info_data = get_default_segment_info_data("mkvmerge");
+      s_muxing_app   = info_data.muxing_app;
+      s_writing_app  = info_data.writing_app;
+      s_writing_date = info_data.writing_date;
     }
 
     GetChild<KaxMuxingApp >(*s_kax_infos).SetValueUTF8(s_muxing_app);

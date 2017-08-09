@@ -13,7 +13,11 @@
 
 #include "common/common_pch.h"
 
+#include <ebml/EbmlVersion.h>
+#include <matroska/KaxVersion.h>
+
 #include "common/debugging.h"
+#include "common/hacks.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/version.h"
@@ -185,4 +189,21 @@ parse_latest_release_version(mtx::xml::document_cptr const &doc) {
   }
 
   return release;
+}
+
+segment_info_data_t
+get_default_segment_info_data(std::string const &application) {
+  segment_info_data_t data{};
+
+  if (!hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
+    data.muxing_app   = (boost::format("libebml v%1% + libmatroska v%2%") % EbmlCodeVersion % KaxCodeVersion).str();
+    data.writing_app  = get_version_info(application, static_cast<version_info_flags_e>(vif_full | vif_untranslated));
+    data.writing_date = boost::posix_time::second_clock::universal_time();
+
+  } else {
+    data.muxing_app   = "no_variable_data";
+    data.writing_app  = "no_variable_data";
+  }
+
+  return data;
 }
