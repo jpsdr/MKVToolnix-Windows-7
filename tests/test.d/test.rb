@@ -60,8 +60,9 @@ class Test
   end
 
   def sys(command, *arg)
-    @commands       << command
-    @debug_commands << command
+    options          = arg.extract_options!
+    @commands       << command unless options[:dont_record_command]
+    @debug_commands << command unless options[:dont_record_command]
     command         << " >/dev/null 2>/dev/null " unless (/>/.match(command))
 
     puts "COMMAND #{command}" if ENV['DEBUG']
@@ -121,7 +122,7 @@ class Test
     command = "../src/mkvpropedit --engage no_variable_data #{file_name} #{args.shift}"
     *result = sys command, retcode
 
-    sys "../src/tools/ebml_validator -M #{file_name}" if FileTest.exists?("../src/tools/ebml_validator")
+    sys "../src/tools/ebml_validator -M #{file_name}", :dont_record_command => true if FileTest.exists?("../src/tools/ebml_validator")
 
     return *result
   end
