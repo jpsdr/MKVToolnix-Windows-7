@@ -174,8 +174,8 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
         if (!prop.m_sub_sub_master_callbacks)
           continue;
 
-        change.m_sub_sub_master = prop.m_sub_sub_master_callbacks == &KaxVideoColour::ClassInfos     ? &GetChild<KaxVideoColour>(m_sub_master)
-                                : prop.m_sub_sub_master_callbacks == &KaxVideoProjection::ClassInfos ? &GetChild<KaxVideoProjection>(m_sub_master)
+        change.m_sub_sub_master = prop.m_sub_sub_master_callbacks == &KaxVideoColour::ClassInfos     ? &GetChildEmptyIfNew<KaxVideoColour>(m_sub_master)
+                                : prop.m_sub_sub_master_callbacks == &KaxVideoProjection::ClassInfos ? &GetChildEmptyIfNew<KaxVideoProjection>(m_sub_master)
                                 :                                                                      static_cast<EbmlMaster*>(nullptr);
 
         if (!change.m_sub_sub_master)
@@ -184,7 +184,7 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
         if (!prop.m_sub_sub_sub_master_callbacks)
           continue;
 
-        change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &KaxVideoColourMasterMeta::ClassInfos ? &GetChild<KaxVideoColourMasterMeta>(change.m_sub_sub_master)
+        change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &KaxVideoColourMasterMeta::ClassInfos ? &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(change.m_sub_sub_master)
                                     :                                                                                nullptr;
       }
 
