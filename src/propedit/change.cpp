@@ -148,9 +148,11 @@ change_c::parse_floating_point_number() {
 void
 change_c::parse_binary() {
   try {
-    m_x_value = bitvalue_c(m_value, 128);
+    m_x_value = bitvalue_c(m_value, m_property.m_bit_length);
   } catch (...) {
-    mxerror(boost::format(Y("The property value is not a valid binary spec or it is not exactly 128 bits long in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+    if (m_property.m_bit_length)
+      mxerror(boost::format(Y("The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED % m_property.m_bit_length);
+    mxerror(boost::format(Y("The property value is not a valid binary spec in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
   }
 }
 
