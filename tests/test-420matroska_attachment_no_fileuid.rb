@@ -13,7 +13,7 @@ test "extraction" do
 end
 
 test "propedit" do
-  sys "cp #{file} #{tmp}"
+  cp file, tmp
   propedit tmp, "--replace-attachment '=0:data/text/chap1.txt'"
   hash_tmp
 end

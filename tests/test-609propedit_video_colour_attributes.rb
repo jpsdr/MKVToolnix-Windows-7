@@ -8,7 +8,7 @@ def args *arrays
 end
 
 test "set all attributes" do
-  merge "--no-audio data/avi/v.avi"
+  merge "--no-audio data/avi/v.avi", :no_result => true
   src = tmp
 
   colour_attributes = [
@@ -43,19 +43,19 @@ test "set all attributes" do
   hashes = []
   work   = "#{src}-1"
 
-  sys "cp #{src} #{work}"
+  cp src, work
   propedit work, "--edit track:v1 --set pixel-width=1024"
   hashes << hash_file(work)
 
-  sys "cp #{src} #{work}"
+  cp src, work
   propedit work, "--edit track:v1 --set pixel-width=1024 #{args(colour_attributes)}"
   hashes << hash_file(work)
 
-  sys "cp #{src} #{work}"
+  cp src, work
   propedit work, "--edit track:v1 --set pixel-width=1024 #{args(colour_mastering_meta_attributes)}"
   hashes << hash_file(work)
 
-  sys "cp #{src} #{work}"
+  cp src, work
   propedit work, "--edit track:v1 --set pixel-width=1024 #{args(colour_attributes, colour_mastering_meta_attributes)}"
   hashes << hash_file(work)
 
@@ -63,28 +63,28 @@ test "set all attributes" do
 end
 
 test "delete attributes" do
-  merge "--no-audio --max-frame-light 0:41 --min-luminance 0:42 data/avi/v.avi"
+  merge "--no-audio --max-frame-light 0:41 --min-luminance 0:42 data/avi/v.avi", :no_result => true
 
   hashes = []
   src    = tmp
   work   = "#{src}-1"
 
-  sys "cp #{src} #{work}"
+  cp src, work
   propedit work, "--edit track:v1 --delete language"
   hashes << hash_file(work)
   # sys "mkvinfo #{work} >&2"
 
-  sys "cp #{src} #{work}"
+  cp src, work
   propedit work, "--edit track:v1 --delete language --delete min-luminance"
   hashes << hash_file(work)
   # sys "mkvinfo #{work} >&2"
 
-  sys "cp #{src} #{work}"
+  cp src, work
   propedit work, "--edit track:v1 --delete language --delete max-frame-light"
   hashes << hash_file(work)
   # sys "mkvinfo #{work} >&2"
 
-  sys "cp #{src} #{work}"
+  cp src, work
   propedit work, "--edit track:v1 --delete language --delete max-frame-light --delete min-luminance"
   hashes << hash_file(work)
   # sys "mkvinfo #{work} >&2"

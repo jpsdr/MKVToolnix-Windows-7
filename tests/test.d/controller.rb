@@ -126,9 +126,13 @@ class Controller
 
         expected_results = @results.hash?(class_name).split(/-/)
         actual_results   = result.split(/-/)
+        idx              = 0
 
-        current_test.commands.each_with_index do |command, idx|
-          msg += "  " + ((expected_results[idx] != actual_results[idx]) ? "(*)" : "   ") + " #{command}\n"
+        current_test.commands.each do |command|
+          command = { :command => command } unless command.is_a?(Hash)
+          prefix  = !command[:no_result] && (expected_results[idx] != actual_results[idx]) ? "(*)" : "   "
+          msg    += "  #{prefix} #{command[:command]}\n"
+          idx    += 1 unless command[:no_result]
         end
 
         if (update_failed)

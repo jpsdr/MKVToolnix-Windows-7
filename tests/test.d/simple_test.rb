@@ -235,7 +235,7 @@ class SimpleTest
 
     output  = options[:output] || self.tmp
     command = "../src/mkvmerge --engage no_variable_data -o #{output} #{args.first}"
-    self.sys command, :exit_code => options[:exit_code]
+    self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
   end
 
   def identify *args
@@ -247,7 +247,7 @@ class SimpleTest
 
     command = "../src/mkvmerge --identify --identification-format #{format} --engage no_variable_data #{args.first}"
 
-    self.sys command, :exit_code => options[:exit_code]
+    self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
   end
 
   def identify_json *args
@@ -256,7 +256,7 @@ class SimpleTest
 
     command = "../src/mkvmerge --identify --identification-format json --engage no_variable_data #{args.first}"
 
-    output, _ = self.sys(command, :exit_code => options[:exit_code])
+    output, _ = self.sys(command, :exit_code => options[:exit_code], :no_result => options[:no_result])
 
     return JSON.load(output.join(''))
   end
@@ -269,7 +269,7 @@ class SimpleTest
     output  = "> #{output}" unless %r{^[>\|]}.match(output)
     output  = '' if options[:output] == :return
     command = "../src/mkvinfo --engage no_variable_data --ui-language en_US #{args.first} #{output}"
-    self.sys command, :exit_code => options[:exit_code]
+    self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
   end
 
   def extract *args
@@ -279,7 +279,7 @@ class SimpleTest
     mode     = options[:mode] || :tracks
     command  = "../src/mkvextract --engage no_variable_data #{mode} #{args.first} " + options.keys.select { |key| key.is_a?(Numeric) }.sort.collect { |key| "#{key}:#{options[key]}" }.join(' ')
 
-    self.sys command, :exit_code => options[:exit_code]
+    self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
   end
 
   def propedit file_name, *args
@@ -287,7 +287,7 @@ class SimpleTest
     fail ArgumentError if args.empty?
 
     command = "../src/mkvpropedit --engage no_variable_data #{file_name} #{args.first}"
-    *result = self.sys command, :exit_code => options[:exit_code]
+    *result = self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
 
     self.sys "../src/tools/ebml_validator -M #{file_name}", dont_record_command: true if FileTest.exists?("../src/tools/ebml_validator")
 
@@ -300,7 +300,7 @@ class SimpleTest
     fail ArgumentError if args.empty?
 
     command    = args.shift
-    @commands << command unless options[:dont_record_command]
+    @commands << { :command => command, :no_result => options[:no_result] } unless options[:dont_record_command]
 
     if !%r{>}.match command
       temp_file = Tempfile.new('mkvtoolnix-test-output')
@@ -318,6 +318,13 @@ class SimpleTest
 
     return IO.readlines(temp_file.path), exit_code if temp_file
     return exit_code
+  end
+
+  def cp source, target, *args
+    options = args.extract_options!
+    options[:no_result] = true unless options.key?(:no_result)
+
+    sys "cp '#{source}' '#{target}'", options
   end
 
   def error reason

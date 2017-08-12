@@ -61,8 +61,8 @@ class Test
 
   def sys(command, *arg)
     options          = arg.extract_options!
-    @commands       << command unless options[:dont_record_command]
-    @debug_commands << command unless options[:dont_record_command]
+    @commands       << { :command => command, :no_result => options[:no_result] } unless options[:dont_record_command]
+    @debug_commands << command                                                    unless options[:dont_record_command]
     command         << " >/dev/null 2>/dev/null " unless (/>/.match(command))
 
     puts "COMMAND #{command}" if ENV['DEBUG']
