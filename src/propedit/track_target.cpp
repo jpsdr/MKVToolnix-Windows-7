@@ -179,16 +179,13 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
                                 :                                                                      static_cast<EbmlMaster*>(nullptr);
 
         if (!change.m_sub_sub_master)
-          mxerror(boost::format("programming error: unexpected sub-sub-master callbacks in property '%1%'\n") % prop.m_name);
+          continue;
 
         if (!prop.m_sub_sub_sub_master_callbacks)
           continue;
 
         change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &KaxVideoColourMasterMeta::ClassInfos ? &GetChild<KaxVideoColourMasterMeta>(change.m_sub_sub_master)
                                     :                                                                                nullptr;
-
-        if (!change.m_sub_sub_sub_master)
-          mxerror(boost::format("programming error: unexpected sub-sub-sub-master callbacks in property '%1%'\n") % prop.m_name);
       }
 
     if (sub_master_is_track()) {
