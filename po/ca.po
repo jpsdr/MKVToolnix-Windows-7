@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-08-08 12:49+0200\n"
-"PO-Revision-Date: 2017-07-30 21:30+0000\n"
+"PO-Revision-Date: 2017-08-11 21:55+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/ca/)\n"
@@ -28,6 +28,7 @@ msgid ""
 msgstr ""
 "\n"
 "El fitxer temporal TTA per a la pista amb l'ID %1% s'està copiant al fitxer TTA final. Això durà algun temps.\n"
+"\n"
 
 #: src/merge/output_control.cpp:234
 msgid ""
@@ -258,17 +259,16 @@ msgstr ""
 "                           nombre està sense especificar.\n"
 
 #: src/merge/mkvmerge.cpp:269
-#, fuzzy
 msgid ""
 "  --colour-matrix-coefficients <TID:n>\n"
 "                           Sets the matrix coefficients of the video used\n"
 "                           to derive luma and chroma values from red, green\n"
 "                           and blue color primaries.\n"
 msgstr ""
-"  --colour-matrix <TID:n>  Es defineixen els coeficients de la matriu del\n"
-"                           vídeo usada per a derivar els valors de\n"
-"                           luminància i de crominància dels colors primaris\n"
-"                           vermell, verd i blau.\n"
+"  --colour-matrix-coefficients <TID:n>\n"
+"                           Estableix els coeficients de la matriu del vídeo\n"
+"                           usada per a derivar els valors de luminància i de\n"
+"                           crominància dels colors primaris vermell, verd i blau.\n"
 
 #: src/merge/mkvmerge.cpp:291
 msgid ""
@@ -3429,11 +3429,11 @@ msgstr "Fitxers a la llista de reproducció Blu-ray"
 
 #: src/common/property_element.cpp:186
 msgid "Blue X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordenada X de crominància del blau definida per la CIE 1931."
 
 #: src/common/property_element.cpp:187
 msgid "Blue Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordenada Y de crominància del blau definida per la CIE 1931."
 
 #: src/info/mkvinfo.cpp:569
 #, boost-format
@@ -3764,9 +3764,8 @@ msgid "Clearing settings auto&matically:"
 msgstr "Esborra els ajustaments de forma auto&màtica:"
 
 #: src/common/property_element.cpp:176
-#, fuzzy
 msgid "Clipping of the color ranges."
-msgstr "  --colour-range <TID:n>   La retallada dels intervals de colors.\n"
+msgstr "La retallada dels intervals de colors."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1335
 msgid "Close current settings"
@@ -3889,19 +3888,17 @@ msgid "CodecPrivate, length %1%%2%"
 msgstr "Privades del còdec, longitud %1%%2%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:473
-#, fuzzy
 msgid "Colour information"
-msgstr "Informació dels colors del vídeo"
+msgstr "Informació del color"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:478
-#, fuzzy
 msgid "Colour mastering meta information"
-msgstr "Error en desar la informació"
+msgstr "Meta informació sobre domini del color"
 
 #: src/info/mkvinfo.cpp:598
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour matrix coefficients: %1%"
-msgstr "Informació dels colors del vídeo"
+msgstr "Coeficients de la matriu del color: %1%"
 
 #: src/info/mkvinfo.cpp:628
 #, boost-format
@@ -4527,7 +4524,7 @@ msgstr "Deriva l&es marques de temps de final de les marques de temps d'inici"
 
 #: src/common/property_element.cpp:195
 msgid "Describes the projection used for this video track (0 – 3)."
-msgstr ""
+msgstr "Descriu la projecció emprada per a aquesta pista de vídeo (0 - 3)."
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -5624,11 +5621,11 @@ msgstr[1] "Etiquetes globals: %1% entrades"
 
 #: src/common/property_element.cpp:184
 msgid "Green X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordenada X de crominància del verd definida per la CIE 1931."
 
 #: src/common/property_element.cpp:185
 msgid "Green Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordenada Y de crominància del verd definida per la CIE 1931."
 
 #: src/info/mkvinfo.cpp:563
 #, boost-format
@@ -5748,11 +5745,11 @@ msgstr "Submostra de la crominància horitzontal: %1%"
 
 #: src/common/property_element.cpp:174
 msgid "How chroma is sited horizontally."
-msgstr ""
+msgstr "Com està ubicada horitzontalment la crominància."
 
 #: src/common/property_element.cpp:175
 msgid "How chroma is sited vertically."
-msgstr ""
+msgstr "Com està ubicada verticalment la crominància."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -6902,28 +6899,20 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "Valor màxim permès: %1%, valor real: %2%"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
-msgstr ""
-"  --max-content-light <TID:n>\n"
-"                           La brillantor màxima d'un únic píxel en candeles\n"
-"                           per metre quadrat (cd/m²).\n"
+msgstr "Brillantor màxima d'un únic píxel en candeles per metre quadrat (cd/m²)."
 
 #: src/common/property_element.cpp:135
 msgid "Maximum cache"
 msgstr "Cau màxim"
 
 #: src/common/property_element.cpp:180
-#, fuzzy
 msgid "Maximum frame-average light level in candelas per square meter (cd/m²)."
-msgstr ""
-"  --max-frame-light <TID:n>\n"
-"                           Nivell de llum mitjana del marc màxim en candeles\n"
-"                           per metre quadrat (cd/m²).\n"
+msgstr "Nivell de llum mitjana del marc màxim en candeles per metre quadrat (cd/m²)."
 
 #: src/common/property_element.cpp:190
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
-msgstr ""
+msgstr "Luminància màxima en candeles per metre quadrat (cd/m²)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Maximum number of files:"
@@ -6975,7 +6964,7 @@ msgstr "Cau mínim"
 
 #: src/common/property_element.cpp:191
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
-msgstr ""
+msgstr "Luminància mínima en candeles per metre quadrat (cd/m²)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1704
@@ -7999,7 +7988,7 @@ msgstr "ID únic del segment anterior"
 
 #: src/common/property_element.cpp:196
 msgid "Private data that only applies to a specific projection."
-msgstr ""
+msgstr "Les dades privades només s'apliquen a una projecció específica."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1339
 msgid "Probe &range percentage:"
@@ -8065,29 +8054,29 @@ msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Progrés: [%1%%2%] %3%%%"
 
 #: src/info/mkvinfo.cpp:658
-#, fuzzy, boost-format
+#, boost-format
 msgid "Projection type: %1% (%2%)"
-msgstr "Abast: %1% (%2%)"
+msgstr "Tipus de projecció: %1% (%2%)"
 
 #: src/info/mkvinfo.cpp:667
-#, fuzzy, boost-format
+#, boost-format
 msgid "Projection's pitch rotation: %1%"
-msgstr "Aplicació d'escriptura: %1%"
+msgstr "Gir de la presentació de la projecció: %1%"
 
 #: src/info/mkvinfo.cpp:661
-#, fuzzy, boost-format
+#, boost-format
 msgid "Projection's private data: %1%"
-msgstr "2: dades privades del còdec"
+msgstr "Dades privades de la projecció: %1%"
 
 #: src/info/mkvinfo.cpp:670
 #, boost-format
 msgid "Projection's roll rotation: %1%"
-msgstr ""
+msgstr "Gir del rotllo de la projecció: %1%"
 
 #: src/info/mkvinfo.cpp:664
 #, boost-format
 msgid "Projection's yaw rotation: %1%"
-msgstr ""
+msgstr "Gir de l'encaix de la projecció: %1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:155
 #: src/mkvtoolnix-gui/merge/track_model.cpp:54
@@ -8306,11 +8295,11 @@ msgstr "Fitxers d'àudio/vídeo RealMedia"
 
 #: src/common/property_element.cpp:182
 msgid "Red X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordenada X de crominància del vermell definida per la CIE 1931."
 
 #: src/common/property_element.cpp:183
 msgid "Red Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordenada Y de crominància del vermell definida per la CIE 1931."
 
 #: src/info/mkvinfo.cpp:557
 #, boost-format
@@ -8703,7 +8692,7 @@ msgstr "Posició de cerca: %1%"
 #: src/info/mkvinfo.cpp:1055
 #, boost-format
 msgid "Seek pre-roll: %|1$.3f|ms (%2%ns)"
-msgstr "Pre-roll de cerca: %|1$.3f|ms (%2%ns)"
+msgstr "Cerca al pre-rotllo: %|1$.3f|ms (%2%ns)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:522
 msgid "Seg&ment UID:"
@@ -9190,15 +9179,15 @@ msgstr "Directori del fitxer d'origen"
 
 #: src/common/property_element.cpp:198
 msgid "Specifies a pitch rotation to the projection."
-msgstr ""
+msgstr "Especifica un gir de la presentació a la projecció."
 
 #: src/common/property_element.cpp:199
 msgid "Specifies a roll rotation to the projection."
-msgstr ""
+msgstr "Especifica un gir del rotllo a la projecció."
 
 #: src/common/property_element.cpp:197
 msgid "Specifies a yaw rotation to the projection."
-msgstr ""
+msgstr "Especifica un gir de l'encaix a la projecció"
 
 #: src/common/property_element.cpp:139
 msgid ""
@@ -9760,11 +9749,11 @@ msgstr "Les dades privades del còdec no coincideixen. Ambdues tenen la mateixa 
 
 #: src/common/property_element.cpp:178
 msgid "The colour primaries of the video."
-msgstr ""
+msgstr "Els colors primaris del vídeo."
 
 #: src/common/property_element.cpp:177
 msgid "The colour transfer characteristics of the video."
-msgstr ""
+msgstr "Les característiques de la transferència de color del vídeo."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:98
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
@@ -11825,14 +11814,12 @@ msgid "Video pixel width"
 msgstr "Amplada del vídeo en píxels"
 
 #: src/info/mkvinfo.cpp:647
-#, fuzzy
 msgid "Video projection"
-msgstr "Propietats del vídeo"
+msgstr "Projecció del vídeo"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:483
-#, fuzzy
 msgid "Video projection information"
-msgstr "Informació dels colors del vídeo"
+msgstr "Informació de la projecció del vídeo"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1669
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1689
@@ -11863,30 +11850,28 @@ msgid "Video: chroma siting"
 msgstr "Posició de la crominància vertical: %1%"
 
 #: src/common/property_element.cpp:186
-#, fuzzy
 msgid "Video: chromacity blue X"
-msgstr "Retalla la part esquerra del vídeo"
+msgstr "Vídeo: X crominància del blau"
 
 #: src/common/property_element.cpp:187
-#, fuzzy
 msgid "Video: chromacity blue Y"
-msgstr "Retalla la part esquerra del vídeo"
+msgstr "Vídeo: Y crominància del blau"
 
 #: src/common/property_element.cpp:184
 msgid "Video: chromacity green X"
-msgstr ""
+msgstr "Vídeo: X crominància del verd"
 
 #: src/common/property_element.cpp:185
 msgid "Video: chromacity green Y"
-msgstr ""
+msgstr "Vídeo: Y crominància del verd"
 
 #: src/common/property_element.cpp:182
 msgid "Video: chromacity red X"
-msgstr ""
+msgstr "Vídeo: X crominància del vermell"
 
 #: src/common/property_element.cpp:183
 msgid "Video: chromacity red Y"
-msgstr ""
+msgstr "Vídeo: Y crominància del vermell"
 
 #: src/common/property_element.cpp:165
 #, fuzzy
@@ -11915,11 +11900,11 @@ msgstr "Marc màxim de llum: %1%"
 
 #: src/common/property_element.cpp:190
 msgid "Video: maximum luminance"
-msgstr ""
+msgstr "Vídeo: luminància màxima"
 
 #: src/common/property_element.cpp:191
 msgid "Video: minimum luminance"
-msgstr ""
+msgstr "Vídeo: luminància mínima"
 
 #: src/common/property_element.cpp:170
 #: src/common/property_element.cpp:172
@@ -11933,37 +11918,36 @@ msgid "Video: pixels to remove in chroma"
 msgstr "El nombre de píxels a suprimir del vídeo a la part dreta de la imatge."
 
 #: src/common/property_element.cpp:195
-#, fuzzy
 msgid "Video: projection type"
-msgstr "Tipus de la relació d'aspecte del vídeo"
+msgstr "Vídeo: tipus de projecció"
 
 #: src/common/property_element.cpp:198
 msgid "Video: projection's pitch rotation"
-msgstr ""
+msgstr "Vídeo: gir de la presentació de la projecció"
 
 #: src/common/property_element.cpp:199
 msgid "Video: projection's roll rotation"
-msgstr ""
+msgstr "Vídeo: gir del rotllo de la projecció"
 
 #: src/common/property_element.cpp:197
 msgid "Video: projection's yaw rotation"
-msgstr ""
+msgstr "Vídeo: gir de l'encaix de la projecció"
 
 #: src/common/property_element.cpp:196
 msgid "Video: projection-specific data"
-msgstr ""
+msgstr "Vídeo: dades específiques de la projecció"
 
 #: src/common/property_element.cpp:177
 msgid "Video: transfer characteristics"
-msgstr ""
+msgstr "Vídeo: característiques de la transferència"
 
 #: src/common/property_element.cpp:188
 msgid "Video: white point X"
-msgstr ""
+msgstr "Vídeo: X punt blanc"
 
 #: src/common/property_element.cpp:189
 msgid "Video: white point Y"
-msgstr ""
+msgstr "Vídeo: Y punt blanc"
 
 #: src/common/file_types.cpp:102
 #: src/output/p_vobbtn.h:36
@@ -12129,11 +12113,11 @@ msgstr "Sempre que l'usuari afegeix una llista de reproducció, el programa cerc
 
 #: src/common/property_element.cpp:188
 msgid "White colour chromaticity coordinate X as defined by CIE 1931."
-msgstr ""
+msgstr "Coordenada X de crominància del color blanc definida per la CIE 1931."
 
 #: src/common/property_element.cpp:189
 msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
-msgstr ""
+msgstr "Coordenada Y de crominància del color blanc definida per la CIE 1931."
 
 #: src/info/mkvinfo.cpp:575
 #, boost-format
@@ -12444,7 +12428,7 @@ msgstr "create_track_number: no es troba file_num. %1%\n"
 
 #: src/info/mkvinfo.cpp:654
 msgid "cubemap"
-msgstr ""
+msgstr "Mapa del cub"
 
 # skip-rule: t-sp_tpc
 #: src/info/mkvinfo.cpp:1021
@@ -12477,7 +12461,7 @@ msgstr "Encriptatge"
 
 #: src/info/mkvinfo.cpp:653
 msgid "equirectangular"
-msgstr ""
+msgstr "Equirectangular"
 
 #: src/merge/output_control.cpp:411
 #, boost-format
@@ -12711,7 +12695,7 @@ msgstr "memory.cpp/saferealloc() crida des del fitxer %1%, línia %2%: realloc()
 
 #: src/info/mkvinfo.cpp:655
 msgid "mesh"
-msgstr ""
+msgstr "Malla"
 
 #: src/propedit/change.cpp:345
 msgid "missing property name"
@@ -13007,7 +12991,7 @@ msgstr "real_reader: Només s'admeten les versions 3, 4 i 5 de les capçaleres d
 
 #: src/info/mkvinfo.cpp:652
 msgid "rectangular"
-msgstr ""
+msgstr "Rectangular"
 
 #: src/info/mkvinfo.cpp:810
 msgid "rest: unknown"
