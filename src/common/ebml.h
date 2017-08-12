@@ -373,6 +373,23 @@ FindChildValue(EbmlMaster const *master,
   return FindChildValue<T>(*master, clone);
 }
 
+template<typename Telement,
+         typename Tvalue = decltype(Telement().GetValue())>
+boost::optional<Tvalue>
+FindOptionalChildValue(EbmlMaster const &master) {
+  auto child = FindChild<Telement>(master);
+  if (child)
+    return static_cast<Tvalue>(child->GetValue());
+  return boost::none;
+}
+
+template<typename Telement,
+         typename Tvalue = decltype(Telement().GetValue())>
+boost::optional<Tvalue>
+FindOptionalChildValue(EbmlMaster const *master) {
+  return FindOptionalChildValue<Telement>(*master);
+}
+
 template<typename Telement>
 decltype(Telement().GetValue())
 GetChildValue(EbmlMaster &master) {
