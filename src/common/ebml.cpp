@@ -20,18 +20,18 @@
 #include <ebml/EbmlUnicodeString.h>
 #include <ebml/EbmlVoid.h>
 
+#include <matroska/KaxBlock.h>
 #include <matroska/KaxChapters.h>
 #include <matroska/KaxSegment.h>
 #include <matroska/KaxTags.h>
 #include <matroska/KaxTrackAudio.h>
 #include <matroska/KaxTrackVideo.h>
 
-#include "common/chapters/chapters.h"
+#include "common/date_time.h"
 #include "common/ebml.h"
 #include "common/memory.h"
-#include "common/segmentinfo.h"
-#include "common/segment_tracks.h"
-#include "common/tags/tags.h"
+#include "common/unique_numbers.h"
+#include "common/version.h"
 
 using namespace libebml;
 
@@ -381,19 +381,184 @@ find_element_in_master(EbmlMaster *master,
   return std::make_pair<EbmlMaster *, size_t>(nullptr, 0);
 }
 
+static std::unordered_map<uint32_t, bool> const &
+get_deprecated_elements_by_id() {
+  static std::unordered_map<uint32_t, bool> s_elements;
+
+  if (!s_elements.empty())
+    return s_elements;
+
+  s_elements[KaxBlockVirtual::ClassInfos.GlobalId.GetValue()]       = true;
+  s_elements[KaxReferenceVirtual::ClassInfos.GlobalId.GetValue()]   = true;
+  s_elements[KaxSliceFrameNumber::ClassInfos.GlobalId.GetValue()]   = true;
+  s_elements[KaxSliceBlockAddID::ClassInfos.GlobalId.GetValue()]    = true;
+  s_elements[KaxSliceDelay::ClassInfos.GlobalId.GetValue()]         = true;
+  s_elements[KaxSliceDuration::ClassInfos.GlobalId.GetValue()]      = true;
+  s_elements[KaxEncryptedBlock::ClassInfos.GlobalId.GetValue()]     = true;
+  s_elements[KaxTrackTimecodeScale::ClassInfos.GlobalId.GetValue()] = true;
+  s_elements[KaxTrackOffset::ClassInfos.GlobalId.GetValue()]        = true;
+  s_elements[KaxCodecSettings::ClassInfos.GlobalId.GetValue()]      = true;
+  s_elements[KaxCodecInfoURL::ClassInfos.GlobalId.GetValue()]       = true;
+  s_elements[KaxCodecDownloadURL::ClassInfos.GlobalId.GetValue()]   = true;
+  s_elements[KaxOldStereoMode::ClassInfos.GlobalId.GetValue()]      = true;
+  s_elements[KaxVideoGamma::ClassInfos.GlobalId.GetValue()]         = true;
+  s_elements[KaxVideoFrameRate::ClassInfos.GlobalId.GetValue()]     = true;
+  s_elements[KaxAudioPosition::ClassInfos.GlobalId.GetValue()]      = true;
+  s_elements[KaxCueRefCluster::ClassInfos.GlobalId.GetValue()]      = true;
+  s_elements[KaxCueRefNumber::ClassInfos.GlobalId.GetValue()]       = true;
+  s_elements[KaxCueRefCodecState::ClassInfos.GlobalId.GetValue()]   = true;
+  s_elements[KaxFileReferral::ClassInfos.GlobalId.GetValue()]       = true;
+
+  return s_elements;
+}
+
+template<typename T>
+void
+fix_elements_set_to_default_value_if_unset(EbmlElement *e) {
+  static debugging_option_c s_debug{"fix_elements_in_master"};
+
+  auto t = static_cast<T *>(e);
+
+  if (!t->DefaultISset() || t->ValueIsSet())
+    return;
+
+  mxdebug_if(s_debug,
+             boost::format("fix_elements_in_master: element has default, but value is no set; setting: ID %|1$08x| name %2%\n")
+             % t->Generic().GlobalId.GetValue() % t->Generic().DebugName);
+  t->SetValue(t->GetValue());
+}
+
+void
+fix_elements_in_master(EbmlMaster *master) {
+  static debugging_option_c s_debug{"fix_elements_in_master"};
+
+  if (!master)
+    return;
+
+  auto callbacks = find_ebml_callbacks(KaxSegment::ClassInfos, master->Generic().GlobalId);
+  if (!callbacks) {
+    mxdebug_if(s_debug, boost::format("fix_elements_in_master: No callbacks found for ID %|1$08x|\n") % master->Generic().GlobalId.GetValue());
+    return;
+  }
+
+  std::unordered_map<uint32_t, bool> is_present;
+
+  auto &deprecated_elements    = get_deprecated_elements_by_id();
+  auto deprecated_elements_end = deprecated_elements.end();
+  auto idx                     = 0u;
+
+  // 1. Remove deprecated elements.
+  // 2. Record which elements are already present.
+  // 3. If the element has a default value and is currently unset, set
+  //    to the default value.
+
+  while (idx < master->ListSize()) {
+    auto child    = (*master)[idx];
+    auto child_id = child->Generic().GlobalId.GetValue();
+    auto itr      = deprecated_elements.find(child_id);
+
+    if (itr != deprecated_elements_end) {
+      delete child;
+      master->Remove(idx);
+      continue;
+
+    }
+
+    ++idx;
+    is_present[child_id] = true;
+
+    if (dynamic_cast<EbmlMaster *>(child))
+      fix_elements_in_master(static_cast<EbmlMaster *>(child));
+
+    else if (dynamic_cast<EbmlDate *>(child))
+      fix_elements_set_to_default_value_if_unset<EbmlDate>(child);
+
+    else if (dynamic_cast<EbmlFloat *>(child))
+      fix_elements_set_to_default_value_if_unset<EbmlFloat>(child);
+
+    else if (dynamic_cast<EbmlSInteger *>(child))
+      fix_elements_set_to_default_value_if_unset<EbmlSInteger>(child);
+
+    else if (dynamic_cast<EbmlString *>(child))
+      fix_elements_set_to_default_value_if_unset<EbmlString>(child);
+
+    else if (dynamic_cast<EbmlUInteger *>(child))
+      fix_elements_set_to_default_value_if_unset<EbmlUInteger>(child);
+
+    else if (dynamic_cast<EbmlUnicodeString *>(child))
+      fix_elements_set_to_default_value_if_unset<EbmlUnicodeString>(child);
+  }
+
+  // 4. Take care of certain mandatory elements without default values
+  //    that we can provide sensible values for, e.g. create UIDs
+  //    ourselves.
+
+  // 4.1. Info
+  if (dynamic_cast<KaxInfo *>(master)) {
+    auto info_data = get_default_segment_info_data();
+
+    if (!is_present[KaxMuxingApp::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxMuxingApp>(master).SetValueUTF8(info_data.muxing_app);
+
+    if (!is_present[KaxWritingApp::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxWritingApp>(master).SetValueUTF8(info_data.writing_app);
+
+    if (!is_present[KaxDateUTC::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxDateUTC>(master).SetValue(info_data.writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(info_data.writing_date));
+
+  }
+
+  // 4.2. Tracks
+  else if (dynamic_cast<KaxTrackEntry *>(master)) {
+    if (!is_present[KaxTrackUID::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxTrackUID>(master).SetValue(create_unique_number(UNIQUE_TRACK_IDS));
+  }
+
+  // 4.3. Chapters
+  else if (dynamic_cast<KaxEditionEntry *>(master)) {
+    if (!is_present[KaxEditionUID::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxEditionUID>(master).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+
+
+  } else if (dynamic_cast<KaxChapterAtom *>(master)) {
+    if (!is_present[KaxChapterUID::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxChapterUID>(master).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+
+    if (!is_present[KaxChapterTimeStart::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxChapterTimeStart>(master).SetValue(0);
+
+  } else if (dynamic_cast<KaxChapterDisplay *>(master)) {
+    if (!is_present[KaxChapterString::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxChapterString>(master).SetValueUTF8("");
+
+  }
+
+  // 4.4. Tags
+  else if (dynamic_cast<KaxTag *>(master)) {
+    if (!is_present[KaxTagTargets::ClassInfos.GlobalId.GetValue()])
+      fix_elements_in_master(&AddEmptyChild<KaxTagTargets>(master));
+
+  } else if (dynamic_cast<KaxTagTargets *>(master)) {
+    if (!is_present[KaxTagTargetTypeValue::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxTagTargetTypeValue>(master).SetValue(50); // = movie
+
+  } else if (dynamic_cast<KaxTagSimple *>(master)) {
+    if (!is_present[KaxTagName::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxTagName>(master).SetValueUTF8("");
+
+  }
+
+  // 4.5. Attachments
+  else if (dynamic_cast<KaxAttached *>(master)) {
+    if (!is_present[KaxFileUID::ClassInfos.GlobalId.GetValue()])
+      AddEmptyChild<KaxFileUID>(master).SetValue(create_unique_number(UNIQUE_ATTACHMENT_IDS));
+  }
+}
+
 void
 fix_mandatory_elements(EbmlElement *master) {
-  if (dynamic_cast<KaxInfo *>(master))
-    fix_mandatory_segmentinfo_elements(master);
-
-  else if (dynamic_cast<KaxTracks *>(master))
-    fix_mandatory_segment_tracks_elements(master);
-
-  else if (dynamic_cast<KaxTags *>(master))
-    mtx::tags::fix_mandatory_elements(master);
-
-  else if (dynamic_cast<KaxChapters *>(master))
-    fix_mandatory_chapter_elements(master);
+  if (dynamic_cast<EbmlMaster *>(master))
+    fix_elements_in_master(static_cast<EbmlMaster *>(master));
 }
 
 void

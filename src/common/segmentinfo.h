@@ -8,8 +8,7 @@
 
    segment info parser/writer functions
 
-   Written by Moritz Bunkus <moritz@bunkus.org> and
-   Steve Lhomme <steve.lhomme@free.fr>.
+   Written by Moritz Bunkus <moritz@bunkus.org>
 */
 
 #ifndef MTX_COMMON_SEGMENTINFO_H
@@ -19,13 +18,9 @@
 
 #include <matroska/KaxInfo.h>
 
-#include "common/mm_io.h"
-
 using namespace libebml;
 using namespace libmatroska;
 
 using kax_info_cptr = std::shared_ptr<KaxInfo>;
-
-void fix_mandatory_segmentinfo_elements(EbmlElement *e);
 
 #endif // MTX_COMMON_SEGMENTINFO_H

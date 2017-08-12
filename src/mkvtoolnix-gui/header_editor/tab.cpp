@@ -18,7 +18,6 @@
 #include "common/property_element.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
-#include "common/segment_tracks.h"
 #include "common/strings/formatting.h"
 #include "common/unique_numbers.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"

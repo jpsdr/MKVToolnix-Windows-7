@@ -1,5 +1,13 @@
 # Version ?
 
+## Important notes
+
+* mkvmerge, mkvpropedit, GUI's header and chapter editors: the programs will
+  no longer add most missing Matroska elements that are mandatory but have a
+  default value in the Matroska specification (e.g. the `TagLanguage` element
+  with a value of `und` if it isn't present in its `SimpleTag` parent). Due to
+  this change libEBML v1.3.5 is now required.
+
 ## New features and enhancements
 
 * MKVToolNix GUI: multiplex tool: added a new entry to the "source files"

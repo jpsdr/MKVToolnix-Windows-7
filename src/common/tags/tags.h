@@ -37,7 +37,6 @@ using namespace libmatroska;
 
 namespace mtx { namespace tags {
 
-void fix_mandatory_elements(EbmlElement *e);
 void remove_track_uid_targets(EbmlMaster *tag);
 void remove_elements_unsupported_by_webm(EbmlMaster &master);
 bool remove_track_statistics(KaxTags *tags, boost::optional<uint64_t> track_uid);

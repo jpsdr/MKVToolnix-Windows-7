@@ -10,7 +10,6 @@
 
 #include "common/common_pch.h"
 
-#include "common/segment_tracks.h"
 #include "common/strings/parsing.h"
 #include "propedit/propedit.h"
 #include "propedit/track_target.h"

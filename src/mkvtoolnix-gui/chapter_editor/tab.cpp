@@ -19,7 +19,6 @@
 #include "common/mpls.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
-#include "common/segment_tracks.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
