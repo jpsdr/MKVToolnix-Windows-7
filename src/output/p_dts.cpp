@@ -25,11 +25,11 @@ using namespace libmatroska;
 dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    mtx::dts::header_t const &dtsheader)
-  : generic_packetizer_c(p_reader, p_ti)
-  , m_packet_buffer(128 * 1024)
-  , m_first_header(dtsheader)
-  , m_previous_header(dtsheader)
-  , m_skipping_is_normal(false)
+  : generic_packetizer_c{p_reader, p_ti}
+  , m_packet_buffer{128 * 1024}
+  , m_first_header{dtsheader}
+  , m_previous_header{dtsheader}
+  , m_skipping_is_normal{}
   , m_reduce_to_core{get_option_for_track(m_ti.m_reduce_to_core, m_ti.m_id)}
   , m_timestamp_calculator{static_cast<int64_t>(m_first_header.core_sampling_frequency)}
 {
