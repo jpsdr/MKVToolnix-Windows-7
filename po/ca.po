@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-08-08 12:49+0200\n"
+"POT-Creation-Date: 2017-08-13 10:10+0200\n"
 "PO-Revision-Date: 2017-08-11 21:55+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -158,7 +158,7 @@ msgstr ""
 "                           Estableix el nombre màxim de blocs de nivells\n"
 "                           addicionals per aquesta pista.\n"
 
-#: src/merge/mkvmerge.cpp:336
+#: src/merge/mkvmerge.cpp:347
 msgid "  --capabilities           Lists optional features mkvmerge was compiled with.\n"
 msgstr ""
 "  --capabilities\n"
@@ -290,7 +290,7 @@ msgstr ""
 "  --colour-transfer-characteristics <TID:n>\n"
 "                           Les característiques de transferència del vídeo.\n"
 
-#: src/merge/mkvmerge.cpp:339
+#: src/merge/mkvmerge.cpp:350
 msgid ""
 "  --command-line-charset <charset>\n"
 "                           Charset for strings on the command line\n"
@@ -299,7 +299,7 @@ msgstr ""
 "                           Joc de caràcters per a les cadenes a la línia\n"
 "                           d'ordres\n"
 
-#: src/merge/mkvmerge.cpp:318
+#: src/merge/mkvmerge.cpp:329
 msgid ""
 "  --compression <TID:method>\n"
 "                           Sets the compression method used for the\n"
@@ -338,7 +338,7 @@ msgstr ""
 "                           Crea les entrades CUE (índex) per aquesta pista:\n"
 "                           Cap, només pels fotogrames I, per a totes.\n"
 
-#: src/merge/mkvmerge.cpp:344
+#: src/merge/mkvmerge.cpp:355
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
 msgstr "  --debug <topic>          Activa la depuració de la sortida per a «tema».\n"
 
@@ -396,7 +396,7 @@ msgstr ""
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       Habilita les durades per a tots els blocs.\n"
 
-#: src/merge/mkvmerge.cpp:345
+#: src/merge/mkvmerge.cpp:356
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr ""
 "  --engage <característica>\n"
@@ -478,7 +478,7 @@ msgstr "  --link-to-next <SID>     Vincula l'últim fitxer al SID indicat.\n"
 msgid "  --link-to-previous <SID> Link the first file to the given SID.\n"
 msgstr "  --link-to-previous <SID> Vincula el primer fitxer al SID indicat.\n"
 
-#: src/merge/mkvmerge.cpp:334
+#: src/merge/mkvmerge.cpp:345
 msgid ""
 "  --list-languages         Lists all ISO639 languages and their\n"
 "                           ISO639-2 codes.\n"
@@ -558,20 +558,20 @@ msgstr ""
 "  --no-global-tags         No conserva les etiquetes globals del fitxer\n"
 "                           d'origen.\n"
 
-#: src/merge/mkvmerge.cpp:341
+#: src/merge/mkvmerge.cpp:352
 msgid "  --output-charset <cset>  Output messages in this charset\n"
 msgstr ""
 "  --output-charset <joc_de_caràcters>\n"
 "                           Els missatges es crearan en aquest joc de\n"
 "                           caràcters.\n"
 
-#: src/merge/mkvmerge.cpp:337
+#: src/merge/mkvmerge.cpp:348
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr ""
 "  --priority <prioritat>   Estableix la prioritat en el processament\n"
 "                           del «mkvmerge».\n"
 
-#: src/merge/mkvmerge.cpp:329
+#: src/merge/mkvmerge.cpp:340
 msgid ""
 "  --probe-range-percentage <percent>\n"
 "                           Sets maximum size to probe for tracks in percent\n"
@@ -582,6 +582,53 @@ msgstr ""
 "                           Defineix la mida màxima per provar les pistes\n"
 "                           en el percentatge de la mida total del fitxer\n"
 "                           per a certs tipus de fitxers (per omissió: 0,3).\n"
+
+#: src/merge/mkvmerge.cpp:318
+#, fuzzy
+msgid ""
+"  --projection-pose-pitch <TID:float>\n"
+"                           A pitch rotation to the projection.\n"
+msgstr ""
+"  --colour-primaries <TID:n>\n"
+"                           Els colors primaris del vídeo.\n"
+
+#: src/merge/mkvmerge.cpp:320
+#, fuzzy
+msgid ""
+"  --projection-pose-roll <TID:float>\n"
+"                           A roll rotation to the projection.\n"
+msgstr ""
+"  --colour-primaries <TID:n>\n"
+"                           Els colors primaris del vídeo.\n"
+
+#: src/merge/mkvmerge.cpp:316
+#, fuzzy
+msgid ""
+"  --projection-pose-yaw <TID:float>\n"
+"                           A yaw rotation to the projection.\n"
+msgstr ""
+"  --colour-primaries <TID:n>\n"
+"                           Els colors primaris del vídeo.\n"
+
+#: src/merge/mkvmerge.cpp:313
+#, fuzzy
+msgid ""
+"  --projection-private <TID:data>\n"
+"                           Private data that only applies to a specific\n"
+"                           projection (as hex digits).\n"
+msgstr ""
+"  --compression <TID:mètode>\n"
+"                           Estableix el mètode de compressió emprat per a\n"
+"                           la pista especificada («none» o «zlib»).\n"
+
+#: src/merge/mkvmerge.cpp:311
+#, fuzzy
+msgid ""
+"  --projection-type <TID:method>\n"
+"                           Projection method used (0–3).\n"
+msgstr ""
+"  --colour-primaries <TID:n>\n"
+"                           Els colors primaris del vídeo.\n"
 
 #: src/merge/mkvmerge.cpp:234
 msgid ""
@@ -685,7 +732,7 @@ msgstr ""
 "                           un número de 0 a 14, o una paraula clau (vegeu\n"
 "                           la documentació per a una llista completa).\n"
 
-#: src/merge/mkvmerge.cpp:313
+#: src/merge/mkvmerge.cpp:324
 msgid ""
 "  --sub-charset <TID:charset>\n"
 "                           Determines the charset the text subtitles are\n"
@@ -738,7 +785,7 @@ msgstr ""
 "                           etc. Per omissió: copia les etiquetes per a totes\n"
 "                           les pistes.\n"
 
-#: src/merge/mkvmerge.cpp:338
+#: src/merge/mkvmerge.cpp:349
 msgid "  --ui-language <code>     Force the translations for 'code' to be used.\n"
 msgstr "  --ui-language <codi>     Força l'ús de les traduccions pel «codi».\n"
 
@@ -766,7 +813,7 @@ msgstr ""
 msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           No copia cap pista de vídeo des d'aquest fitxer.\n"
 
-#: src/merge/mkvmerge.cpp:326
+#: src/merge/mkvmerge.cpp:337
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
@@ -777,7 +824,7 @@ msgstr ""
 "                           identificació. («text», «verbose-text»\n"
 "                           i  «json»).\n"
 
-#: src/merge/mkvmerge.cpp:324
+#: src/merge/mkvmerge.cpp:335
 msgid ""
 "  -J <file>                This is a convenient alias for\n"
 "                           \"--identification-format json --identify file\".\n"
@@ -801,7 +848,7 @@ msgstr ""
 "  -T, --no-track-tags      No copia cap etiqueta per a les pistes des del\n"
 "                           fitxer d'origen.\n"
 
-#: src/merge/mkvmerge.cpp:349
+#: src/merge/mkvmerge.cpp:360
 msgid "  -V, --version            Show version information.\n"
 msgstr "  -V, --version            Mostra informació de la versió.\n"
 
@@ -844,17 +891,17 @@ msgstr ""
 "  -f, --fourcc <FOURCC>    Força el FourCC al valor especificat. Només\n"
 "                           funciona per a les pistes de vídeo.\n"
 
-#: src/merge/mkvmerge.cpp:348
+#: src/merge/mkvmerge.cpp:359
 msgid "  -h, --help               Show this help.\n"
 msgstr "  -h, --help               Mostra aquesta ajuda.\n"
 
-#: src/merge/mkvmerge.cpp:323
+#: src/merge/mkvmerge.cpp:334
 msgid "  -i, --identify <file>    Print information about the source file.\n"
 msgstr ""
 "  -i, --identify <fitxer>\n"
 "                           Imprimeix informació sobre el fitxer d'origen.\n"
 
-#: src/merge/mkvmerge.cpp:333
+#: src/merge/mkvmerge.cpp:344
 msgid "  -l, --list-types         Lists supported source file types.\n"
 msgstr "  -l, --list-types         Llista els tipus de fitxers d'origen admesos.\n"
 
@@ -875,7 +922,7 @@ msgstr ""
 msgid "  -o, --output out         Write to the file 'out'.\n"
 msgstr "  -o, --output sortida     Escriu al fitxer «sortida».\n"
 
-#: src/merge/mkvmerge.cpp:342
+#: src/merge/mkvmerge.cpp:353
 msgid ""
 "  -r, --redirect-output <file>\n"
 "                           Redirects all messages into this file.\n"
@@ -944,7 +991,7 @@ msgstr ""
 msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<fitxer>                El mateix que «= <fitxer>».\n"
 
-#: src/merge/mkvmerge.cpp:346
+#: src/merge/mkvmerge.cpp:357
 msgid ""
 "  @option-file.json        Reads additional command line options from\n"
 "                           the specified JSON file (see man page).\n"
@@ -1067,11 +1114,11 @@ msgstr " Opcions globals:\n"
 msgid " Options for each source file:\n"
 msgstr " Opcions per a cada fitxer d'origen:\n"
 
-#: src/merge/mkvmerge.cpp:317
+#: src/merge/mkvmerge.cpp:328
 msgid " Options that only apply to VobSub subtitle tracks:\n"
 msgstr " Opcions que només s'apliquen a les pistes de subtítols VobSub:\n"
 
-#: src/merge/mkvmerge.cpp:312
+#: src/merge/mkvmerge.cpp:323
 msgid " Options that only apply to text subtitle tracks:\n"
 msgstr " Opcions que només s'apliquen a les pistes de subtítols de text:\n"
 
@@ -1079,7 +1126,7 @@ msgstr " Opcions que només s'apliquen a les pistes de subtítols de text:\n"
 msgid " Options that only apply to video tracks:\n"
 msgstr " Opcions que només s'apliquen a les pistes de vídeo:\n"
 
-#: src/merge/mkvmerge.cpp:322
+#: src/merge/mkvmerge.cpp:333
 msgid " Other options:\n"
 msgstr " Altres opcions:\n"
 
@@ -1281,33 +1328,33 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: s'ha produït una excepció (missatge: %2%; tipus: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1531
-#: src/input/r_matroska.cpp:2219
+#: src/input/r_matroska.cpp:1555
+#: src/input/r_matroska.cpp:2243
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: s'ha produït una excepció desconeguda."
 
-#: src/merge/mkvmerge.cpp:645
+#: src/merge/mkvmerge.cpp:656
 #, boost-format
 msgid "%1%: divisor is 0 in '%2% %3%'.\n"
 msgstr "%1%: el divisor és 0 a «%2% %3%».\n"
 
-#: src/merge/mkvmerge.cpp:620
+#: src/merge/mkvmerge.cpp:631
 #, boost-format
 msgid "%1%: invalid track ID in '%2% %3%'.\n"
 msgstr "%1%: ID de la pista no vàlid en «%2% %3%».\n"
 
-#: src/merge/mkvmerge.cpp:637
+#: src/merge/mkvmerge.cpp:648
 #, boost-format
 msgid "%1%: missing dividend in '%2% %3%'.\n"
 msgstr "%1%: dividends absents a «%2% %3%».\n"
 
-#: src/merge/mkvmerge.cpp:640
+#: src/merge/mkvmerge.cpp:651
 #, boost-format
 msgid "%1%: missing divisor in '%2% %3%'.\n"
 msgstr "%1%: divisor absent a «%2% %3%».\n"
 
-#: src/merge/mkvmerge.cpp:616
+#: src/merge/mkvmerge.cpp:627
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: ID de la pista absent a «%2% %3%».\n"
@@ -1389,7 +1436,7 @@ msgid "&Add attachment"
 msgstr "&Afegeix un adjunt"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:282
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:287
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
@@ -1471,8 +1518,8 @@ msgstr "Tan&ca"
 msgid "&Close file"
 msgstr "Tan&ca el fitxer"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:197
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:286
 #, no-c-format
 msgid "&Collapse all"
 msgstr "&Contrau-ho tot"
@@ -1552,8 +1599,8 @@ msgstr "&Habilitades"
 msgid "&Escape arguments for:"
 msgstr "&Escapa els arguments per a:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:197
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:196
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:285
 #, no-c-format
 msgid "&Expand all"
 msgstr "&Expandeix-ho tot"
@@ -1582,7 +1629,7 @@ msgstr "&Primera entrada a tornar a numerar:"
 msgid "&Font && size:"
 msgstr "&Tipus de lletra i mida:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:206
 #, no-c-format
 msgid "&Generate sub-chapters"
 msgstr "&Genera els subcapítols"
@@ -1791,7 +1838,7 @@ msgstr "To&rna a carregar"
 msgid "&Reload file"
 msgstr "To&rna a carregar el fitxer"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:283
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:288
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
@@ -1817,7 +1864,7 @@ msgstr[1] "Sup&rimeix les tasques"
 msgid "&Remove job from queue after completion:"
 msgstr "Sup&rimeix la tasca de la cua després d'executar-la:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:204
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:203
 #, no-c-format
 msgid "&Remove selected edition or chapter"
 msgstr "Sup&rimeix l'edició o capítol seleccionat"
@@ -1836,7 +1883,7 @@ msgstr "&Reinicia aquest valor"
 msgid "&Save"
 msgstr "De&sa"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:284
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:289
 #, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "De&sa el contingut de l'adjunt a un fitxer"
@@ -1961,17 +2008,17 @@ msgstr "&Quan s'estableixi l'idioma:"
 msgid "&Window"
 msgstr "&Finestra"
 
-#: src/merge/mkvmerge.cpp:2158
+#: src/merge/mkvmerge.cpp:2228
 #, boost-format
 msgid "'%1%' can only be used with a file name. No further options are allowed if this option is used.\n"
 msgstr "«%1%» només pot ser emprat amb un nom de fitxer. Si s'usa aquesta opció, no es permetran d'altres.\n"
 
-#: src/merge/mkvmerge.cpp:1276
+#: src/merge/mkvmerge.cpp:1346
 #, boost-format
 msgid "'%1%' is an unsupported argument for --compression. Available compression methods are: %2%\n"
 msgstr "«%1%» és un argument no admès per --compression. Els mètodes de compressió disponibles són: %2%\n"
 
-#: src/merge/mkvmerge.cpp:1231
+#: src/merge/mkvmerge.cpp:1301
 #, boost-format
 msgid "'%1%' is an unsupported argument for --cues.\n"
 msgstr "«%1%» és un argument no admès per --cues.\n"
@@ -1981,18 +2028,18 @@ msgstr "«%1%» és un argument no admès per --cues.\n"
 msgid "'%1%' is missing the file name.\n"
 msgstr "«%1%» li manca el nom del fitxer.\n"
 
-#: src/merge/mkvmerge.cpp:1750
+#: src/merge/mkvmerge.cpp:1820
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--chapter-language %1%'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "«%1%» no és un codi ISO639-2 o ISO639-1 vàlid en «--chapter-language %1%». Vegeu «mkvmerge --list-languages» per a una llista de tots els idiomes i els seus respectius codis ISO639-2.\n"
 
-#: src/merge/mkvmerge.cpp:1852
+#: src/merge/mkvmerge.cpp:1922
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--default-language %1%'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "«%1%» no és un codi ISO639-2 o ISO639-1 vàlid en «--default-language %1%». Vegeu «mkvmerge --list-languages» per a una llista de tots els idiomes i els seus respectius codis ISO639-2.\n"
 
 #: src/extract/extract_cli_parser.cpp:193
-#: src/merge/mkvmerge.cpp:1312
+#: src/merge/mkvmerge.cpp:1382
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "«%1%» no és un codi ISO639-2 o ISO639-1 vàlid. Vegeu «mkvmerge --list-languages» per a una llista de tots els idiomes i els seus respectius codis ISO639-2.\n"
@@ -2013,12 +2060,12 @@ msgstr "«%1%» no és una línia CHAPTERxxNAME=..."
 msgid "'%1%' is not a valid ISO639-2 language code."
 msgstr "«%1%» no és un codi d'idioma ISO639-2 vàlid."
 
-#: src/merge/mkvmerge.cpp:1469
+#: src/merge/mkvmerge.cpp:1539
 #, boost-format
 msgid "'%1%' is not a valid append mode in '--append-mode %1%'.\n"
 msgstr "«%1%» no és un mode d'annexat vàlid a «--append-mode %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1584
+#: src/merge/mkvmerge.cpp:1654
 #, boost-format
 msgid "'%1%' is not a valid block additional max in '--blockadd %2%'.\n"
 msgstr "«%1%» no és un bloc addicional vàlid màxim a «--blockadd %2%».\n"
@@ -2028,13 +2075,13 @@ msgstr "«%1%» no és un bloc addicional vàlid màxim a «--blockadd %2%».\n"
 msgid "'%1%' is not a valid ccTLD country code."
 msgstr "«%1%» no és un codi de país ccTLD vàlid."
 
-#: src/merge/mkvmerge.cpp:903
+#: src/merge/mkvmerge.cpp:973
 #, boost-format
 msgid "'%1%' is not a valid field order."
 msgstr "«%1%» no és un ordre del camp vàlid."
 
-#: src/merge/mkvmerge.cpp:1411
-#: src/merge/mkvmerge.cpp:1414
+#: src/merge/mkvmerge.cpp:1481
+#: src/merge/mkvmerge.cpp:1484
 #, boost-format
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "«%1%» no és un ID de fitxer vàlid a «--track-order %2%».\n"
@@ -2044,57 +2091,57 @@ msgstr "«%1%» no és un ID de fitxer vàlid a «--track-order %2%».\n"
 msgid "'%1%' is not a valid hack.\n"
 msgstr "«%1%» no és un tall vàlid.\n"
 
-#: src/merge/mkvmerge.cpp:1454
+#: src/merge/mkvmerge.cpp:1524
 #, boost-format
 msgid "'%1%' is not a valid mapping of file and track IDs in '--append-to %2%'.\n"
 msgstr "«%1%» no és una assignació vàlida de l'ID del fitxer i pista a «--append-to %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1408
+#: src/merge/mkvmerge.cpp:1478
 #, boost-format
 msgid "'%1%' is not a valid pair of file ID and track ID in '--track-order %2%'.\n"
 msgstr "«%1%» no és un parell vàlid per a l'ID del fitxer i l'ID de la pista a «--track-order %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1511
+#: src/merge/mkvmerge.cpp:1581
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and NALU size length in '--nalu-size-length %1%'.\n"
 msgstr "«%1%» no és un parell vàlid per a l'ID de la pista i longitud de mida NALU per «--nalu-size-length %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1576
+#: src/merge/mkvmerge.cpp:1646
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and block additional in '--blockadd %1%'.\n"
 msgstr "«%1%» no és un parell vàlid per a l'ID de la pista i un bloc addicional a «--blockadd %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1483
+#: src/merge/mkvmerge.cpp:1553
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and default duration in '--default-duration %1%'.\n"
 msgstr "«%1%» no és un parell vàlid per a l'ID de la pista i durada per omissió per «--default-duration %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1621
+#: src/merge/mkvmerge.cpp:1691
 #, boost-format
 msgid "'%1%' is not a valid priority class.\n"
 msgstr "«%1%» no és una classe de prioritat vàlida.\n"
 
-#: src/merge/mkvmerge.cpp:1580
+#: src/merge/mkvmerge.cpp:1650
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--blockadd %2%'.\n"
 msgstr "«%1%» no és un ID de pista vàlid a «--blockadd %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1487
+#: src/merge/mkvmerge.cpp:1557
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--default-duration %2%'.\n"
 msgstr "«%1%» no és un ID de pista vàlid a «--default-duration %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1515
+#: src/merge/mkvmerge.cpp:1585
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "«%1%» no és un ID de pista vàlid a «--nalu-size-length %2%».\n"
 
-#: src/merge/mkvmerge.cpp:897
+#: src/merge/mkvmerge.cpp:967
 #, boost-format
 msgid "'%1%' is not a valid track ID."
 msgstr "«%1%» no és un ID de pista vàlid."
 
-#: src/merge/mkvmerge.cpp:1491
+#: src/merge/mkvmerge.cpp:1561
 #, boost-format
 msgid "'%1%' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n"
 msgstr "«%1%» no es reconeix com un format de número vàlid o no conté una unitat vàlida («s», «ms», «us», «ns», «fps», «p» o «i») a «%2%».\n"
@@ -2109,18 +2156,62 @@ msgstr "«%1%» només està permès quan s'extreuen capítols.\n"
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "«%1%» només està permès quan s'extreuen pistes.\n"
 
-#: src/merge/mkvmerge.cpp:2179
+#: src/merge/mkvmerge.cpp:2249
 #, boost-format
 msgid "'%1%' lacks a file name.\n"
 msgstr "«%1%» li manca un nom de fitxer.\n"
 
-#: src/merge/mkvmerge.cpp:2036
-#: src/merge/mkvmerge.cpp:2062
-#: src/merge/mkvmerge.cpp:2133
-#: src/merge/mkvmerge.cpp:2228
-#: src/merge/mkvmerge.cpp:2424
-#: src/merge/mkvmerge.cpp:2438
+#: src/merge/mkvmerge.cpp:2106
+#: src/merge/mkvmerge.cpp:2132
+#: src/merge/mkvmerge.cpp:2203
+#: src/merge/mkvmerge.cpp:2298
+#: src/merge/mkvmerge.cpp:2494
+#: src/merge/mkvmerge.cpp:2508
+#: src/merge/mkvmerge.cpp:2742
+#: src/merge/mkvmerge.cpp:2756
+#: src/merge/mkvmerge.cpp:2763
+#: src/merge/mkvmerge.cpp:2770
+#: src/merge/mkvmerge.cpp:2777
+#: src/merge/mkvmerge.cpp:2784
+#: src/merge/mkvmerge.cpp:2791
+#: src/merge/mkvmerge.cpp:2798
+#: src/merge/mkvmerge.cpp:2812
+#: src/merge/mkvmerge.cpp:2819
+#: src/merge/mkvmerge.cpp:2826
+#: src/merge/mkvmerge.cpp:2833
+#: src/merge/mkvmerge.cpp:2840
+#: src/merge/mkvmerge.cpp:2850
+#: src/merge/mkvmerge.cpp:2857
+#: src/merge/mkvmerge.cpp:2864
+#: src/merge/mkvmerge.cpp:2871
+#: src/merge/mkvmerge.cpp:2878
+#: src/merge/mkvmerge.cpp:2885
+#, boost-format
+msgid "'%1%' lacks its argument.\n"
+msgstr "«%1%» li manca el seu argument.\n"
+
+#: src/merge/mkvmerge.cpp:2567
+#, boost-format
+msgid "'%1%' lacks the FourCC.\n"
+msgstr "«%1%» li manca el FourCC.\n"
+
+#: src/merge/mkvmerge.cpp:2749
+#, boost-format
+msgid "'%1%' lacks the delay.\n"
+msgstr "«%1%» li manca el retard.\n"
+
+#: src/merge/mkvmerge.cpp:2413
+#, boost-format
+msgid "'%1%' lacks the file name.\n"
+msgstr "«%1%» li manca el nom de fitxer.\n"
+
+#: src/merge/mkvmerge.cpp:2602
+#: src/merge/mkvmerge.cpp:2609
+#: src/merge/mkvmerge.cpp:2616
+#: src/merge/mkvmerge.cpp:2623
+#: src/merge/mkvmerge.cpp:2630
 #: src/merge/mkvmerge.cpp:2637
+#: src/merge/mkvmerge.cpp:2644
 #: src/merge/mkvmerge.cpp:2651
 #: src/merge/mkvmerge.cpp:2658
 #: src/merge/mkvmerge.cpp:2665
@@ -2128,65 +2219,26 @@ msgstr "«%1%» li manca un nom de fitxer.\n"
 #: src/merge/mkvmerge.cpp:2679
 #: src/merge/mkvmerge.cpp:2686
 #: src/merge/mkvmerge.cpp:2693
+#: src/merge/mkvmerge.cpp:2700
 #: src/merge/mkvmerge.cpp:2707
 #: src/merge/mkvmerge.cpp:2714
 #: src/merge/mkvmerge.cpp:2721
 #: src/merge/mkvmerge.cpp:2728
 #: src/merge/mkvmerge.cpp:2735
-#: src/merge/mkvmerge.cpp:2745
-#: src/merge/mkvmerge.cpp:2752
-#: src/merge/mkvmerge.cpp:2759
-#: src/merge/mkvmerge.cpp:2766
-#: src/merge/mkvmerge.cpp:2773
-#: src/merge/mkvmerge.cpp:2780
 #, boost-format
-msgid "'%1%' lacks its argument.\n"
-msgstr "«%1%» li manca el seu argument.\n"
+msgid "'%1%' lacks the parameter.\n"
+msgstr "«%1%» li manca el paràmetre.\n"
 
-#: src/merge/mkvmerge.cpp:2497
+#: src/merge/mkvmerge.cpp:2805
 #, boost-format
-msgid "'%1%' lacks the FourCC.\n"
-msgstr "«%1%» li manca el FourCC.\n"
-
-#: src/merge/mkvmerge.cpp:2644
-#, boost-format
-msgid "'%1%' lacks the delay.\n"
-msgstr "«%1%» li manca el retard.\n"
-
-#: src/merge/mkvmerge.cpp:2343
-#, boost-format
-msgid "'%1%' lacks the file name.\n"
-msgstr "«%1%» li manca el nom de fitxer.\n"
+msgid "'%1%' lacks the track ID.\n"
+msgstr "«%1%» li manca l'ID de la pista.\n"
 
 #: src/merge/mkvmerge.cpp:2532
 #: src/merge/mkvmerge.cpp:2539
 #: src/merge/mkvmerge.cpp:2546
 #: src/merge/mkvmerge.cpp:2553
 #: src/merge/mkvmerge.cpp:2560
-#: src/merge/mkvmerge.cpp:2567
-#: src/merge/mkvmerge.cpp:2574
-#: src/merge/mkvmerge.cpp:2581
-#: src/merge/mkvmerge.cpp:2588
-#: src/merge/mkvmerge.cpp:2595
-#: src/merge/mkvmerge.cpp:2602
-#: src/merge/mkvmerge.cpp:2609
-#: src/merge/mkvmerge.cpp:2616
-#: src/merge/mkvmerge.cpp:2623
-#: src/merge/mkvmerge.cpp:2630
-#, boost-format
-msgid "'%1%' lacks the parameter.\n"
-msgstr "«%1%» li manca el paràmetre.\n"
-
-#: src/merge/mkvmerge.cpp:2700
-#, boost-format
-msgid "'%1%' lacks the track ID.\n"
-msgstr "«%1%» li manca l'ID de la pista.\n"
-
-#: src/merge/mkvmerge.cpp:2462
-#: src/merge/mkvmerge.cpp:2469
-#: src/merge/mkvmerge.cpp:2476
-#: src/merge/mkvmerge.cpp:2483
-#: src/merge/mkvmerge.cpp:2490
 #, boost-format
 msgid "'%1%' lacks the track numbers.\n"
 msgstr "«%1%» li manquen els números de la pista.\n"
@@ -2212,64 +2264,64 @@ msgstr "«%1%»: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "«%1%»: està processant els següents fitxers com a bons: %2%\n"
 
-#: src/input/r_matroska.cpp:1813
+#: src/input/r_matroska.cpp:1837
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "«%1%»: Esteu tornant a copiar una pista Opus que fou escrita en el mode experimental. La pista resultant s'escriurà seguint el mode final, però no es podrà recuperar el detall a partir d'una pista escrita en el mode experimental: el tall final. Això significa que un descodificador podria generar unes quantes mostres més del que tenia inicialment previst. Si és possible, hauríeu de tornar a multiplexar partint del fitxer Opus original.\n"
 
-#: src/merge/mkvmerge.cpp:2504
+#: src/merge/mkvmerge.cpp:2574
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "«--aspect-ratio» li manca la relació d'aspecte.\n"
 
-#: src/merge/mkvmerge.cpp:2511
+#: src/merge/mkvmerge.cpp:2581
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "«--aspect-ratio-factor» li manca el factor de la relació d'aspecte.\n"
 
-#: src/merge/mkvmerge.cpp:2314
+#: src/merge/mkvmerge.cpp:2384
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "«--attachment-description» li manca la descripció.\n"
 
-#: src/merge/mkvmerge.cpp:2323
+#: src/merge/mkvmerge.cpp:2393
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "«--attachment-mime-type» li manca el tipus MIME.\n"
 
-#: src/merge/mkvmerge.cpp:2333
+#: src/merge/mkvmerge.cpp:2403
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "«--attachment-name» li manca el nom.\n"
 
-#: src/merge/mkvmerge.cpp:2369
+#: src/merge/mkvmerge.cpp:2439
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "«--chapter-charset» li manca el joc de caràcters.\n"
 
-#: src/merge/mkvmerge.cpp:1761
+#: src/merge/mkvmerge.cpp:1831
 #, boost-format
 msgid "'--chapter-charset' may only be given once in '--chapter-charset %1%'.\n"
 msgstr "«--chapter-charset» només es pot donar una vegada a «--chapter-charset %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1764
+#: src/merge/mkvmerge.cpp:1834
 #, boost-format
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset %1%'.\n"
 msgstr "«--chapter-charset» s'ha d'assignar abans de «--chapters» a «--chapter-charset %1%».\n"
 
-#: src/merge/mkvmerge.cpp:2362
+#: src/merge/mkvmerge.cpp:2432
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "«--chapter-language» li manca l'idioma.\n"
 
-#: src/merge/mkvmerge.cpp:1743
+#: src/merge/mkvmerge.cpp:1813
 #, boost-format
 msgid "'--chapter-language' may only be given once in '--chapter-language %1%'.\n"
 msgstr "«--chapter-language» només es pot donar una vegada a «--chapter-language %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1746
+#: src/merge/mkvmerge.cpp:1816
 #, boost-format
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language %1%'.\n"
 msgstr "«--chapter-language» s'ha assignat abans de «--chapters» a «--chapter-language %1%».\n"
 
-#: src/merge/mkvmerge.cpp:2386
+#: src/merge/mkvmerge.cpp:2456
 msgid "'--chapters' lacks the file name.\n"
 msgstr "«--chapters» li manca el nom del fitxer.\n"
 
-#: src/merge/mkvmerge.cpp:2289
+#: src/merge/mkvmerge.cpp:2359
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "«--cluster-length» li manca l'extensió.\n"
 
@@ -2277,19 +2329,19 @@ msgstr "«--cluster-length» li manca l'extensió.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "«--command-line-charset» li manca el seu argument.\n"
 
-#: src/merge/mkvmerge.cpp:2525
+#: src/merge/mkvmerge.cpp:2595
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "«--cropping» li manquen els paràmetres del retall.\n"
 
-#: src/merge/mkvmerge.cpp:2376
+#: src/merge/mkvmerge.cpp:2446
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "«--cue-chapter-name-format» li manca el format.\n"
 
-#: src/merge/mkvmerge.cpp:2379
+#: src/merge/mkvmerge.cpp:2449
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "«--cue-chapter-name-format» s'ha assignat abans de «--chapters».\n"
 
-#: src/merge/mkvmerge.cpp:2518
+#: src/merge/mkvmerge.cpp:2588
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "«--display-dimensions» li manquen les dimensions.\n"
 
@@ -2297,71 +2349,71 @@ msgstr "«--display-dimensions» li manquen les dimensions.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "«--engage» li manca el seu argument.\n"
 
-#: src/merge/mkvmerge.cpp:2395
+#: src/merge/mkvmerge.cpp:2465
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "«--generate-chapters» li manca el mode.\n"
 
-#: src/merge/mkvmerge.cpp:2402
+#: src/merge/mkvmerge.cpp:2472
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "«--generate-chapters-name-template» li manca el nom de la plantilla.\n"
 
-#: src/merge/mkvmerge.cpp:2353
+#: src/merge/mkvmerge.cpp:2423
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "«--global-tags» li manca el nom del fitxer.\n"
 
-#: src/merge/mkvmerge.cpp:2799
+#: src/merge/mkvmerge.cpp:2904
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "«--link» només és útil en combinació amb «--split».\n"
 
-#: src/merge/mkvmerge.cpp:2275
+#: src/merge/mkvmerge.cpp:2345
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "«--link-to-next» li manca l'UID següent.\n"
 
-#: src/merge/mkvmerge.cpp:2268
+#: src/merge/mkvmerge.cpp:2338
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "«--link-to-previous» li manca l'UID anterior.\n"
 
-#: src/merge/mkvmerge.cpp:2282
+#: src/merge/mkvmerge.cpp:2352
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "«--segment-uid» li manca l'UID del segment.\n"
 
-#: src/merge/mkvmerge.cpp:2409
+#: src/merge/mkvmerge.cpp:2479
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "«--segmentinfo» li manca el nom del fitxer.\n"
 
-#: src/merge/mkvmerge.cpp:2249
+#: src/merge/mkvmerge.cpp:2319
 msgid "'--split' lacks the size.\n"
 msgstr "«--split» li manca la mida.\n"
 
-#: src/merge/mkvmerge.cpp:2256
+#: src/merge/mkvmerge.cpp:2326
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "«--split-max-files» li manca el nombre de fitxers.\n"
 
-#: src/merge/mkvmerge.cpp:1831
+#: src/merge/mkvmerge.cpp:1901
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "«--timecode-scale» s'ha emprat més d'una vegada.\n"
 
-#: src/merge/mkvmerge.cpp:2241
+#: src/merge/mkvmerge.cpp:2311
 msgid "'--title' lacks the title.\n"
 msgstr "«--title» li manca el títol.\n"
 
-#: src/merge/mkvmerge.cpp:2738
+#: src/merge/mkvmerge.cpp:2843
 msgid "'--track-order' may only be given once.\n"
 msgstr "«--track-order» només pot donar-se una vegada.\n"
 
-#: src/merge/mkvmerge.cpp:1952
+#: src/merge/mkvmerge.cpp:2022
 msgid "'-A' and '-a' used on the same source file.\n"
 msgstr "«-A» i «-a» s'han emprat en el mateix fitxer d'origen.\n"
 
-#: src/merge/mkvmerge.cpp:1961
+#: src/merge/mkvmerge.cpp:2031
 msgid "'-B' and '-b' used on the same source file.\n"
 msgstr "«-B» i «-b» s'han emprat en el mateix fitxer d'origen.\n"
 
-#: src/merge/mkvmerge.cpp:1955
+#: src/merge/mkvmerge.cpp:2025
 msgid "'-D' and '-d' used on the same source file.\n"
 msgstr "«-D» i «-d» s'han emprat en el mateix fitxer d'origen.\n"
 
-#: src/merge/mkvmerge.cpp:1958
+#: src/merge/mkvmerge.cpp:2028
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "«-S» i «-s» s'han emprat en el mateix fitxer d'origen.\n"
 
@@ -2497,14 +2549,14 @@ msgstr "<Tag> falta al <Simple> fill."
 msgid "<Unnamed>"
 msgstr "<Sense nom>"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:183
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:250
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:182
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:249
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr "<Fitxer sense desar>"
 
-#: src/input/r_matroska.cpp:2241
-#: src/input/r_matroska.cpp:2355
+#: src/input/r_matroska.cpp:2265
+#: src/input/r_matroska.cpp:2379
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "S'ha trobat un bloc a la marca de temps %1% pel número de pista %2%. No obstant això, no s'ha trobat cap capçalera per aquest número de pista. El bloc serà omès.\n"
@@ -2529,7 +2581,7 @@ msgstr "Una llista separada per comes dels números de fotogrames/camps després
 msgid "A comma-separated list of timecode ranges of content to keep."
 msgstr "Una llista separada per comes dels intervals del codi de temps del contingut a mantenir."
 
-#: src/input/r_matroska.cpp:732
+#: src/input/r_matroska.cpp:743
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "Un índex per omissió i amb els ajustaments per omissió que s'usaran per a l'amplada, alçada i color."
 
@@ -2790,7 +2842,7 @@ msgstr "Afegeix &adjunts nous al fitxer actual"
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "Afegeix com a fitxers d'origen nous als ajustaments de multiplexat actuals"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:624
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:629
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -2817,27 +2869,27 @@ msgstr "Afegeix alguns fitxers de suports"
 msgid "Add media files as additional parts"
 msgstr "Afegeix els fitxers de suports com a parts addicionals"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:203
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:202
 #, no-c-format
 msgid "Add new &sub-chapter inside"
 msgstr "Afegeix un &subcapítol nou dins"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:201
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:200
 #, no-c-format
 msgid "Add new c&hapter before"
 msgstr "Afegeix un ca&pítol nou abans"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:202
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:201
 #, no-c-format
 msgid "Add new ch&apter after"
 msgstr "Afegeix un capí&tol nou després"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:199
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
 #, no-c-format
 msgid "Add new e&dition before"
 msgstr "Afegeix una e&dició nova abans"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:200
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:199
 #, no-c-format
 msgid "Add new ed&ition after"
 msgstr "Afegeix una ed&ició nova després"
@@ -2883,7 +2935,7 @@ msgstr "Afegeix fitxers d'etiquetes"
 msgid "Adding, appending or adding as additional parts"
 msgstr "Afegeix, annexa o afegeix alguns fitxers com a parts addicionals"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:206
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
 #, no-c-format
 msgid "Additional &modifications"
 msgstr "&Modificacions addicionals"
@@ -2986,13 +3038,13 @@ msgstr "Totes les entrades"
 
 #: src/info/qt_ui.cpp:85
 #: src/info/qt_ui.cpp:94
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:669
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:712
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:668
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:711
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:188
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:624
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:629
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:317
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:399
@@ -3022,7 +3074,7 @@ msgstr "Tots els següents noms de fitxer s'obriran a l'editor de capítols."
 msgid "All following file names will be opened in the header editor."
 msgstr "Tots els següents noms de fitxer s'obriran a l'editor de la capçalera."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:546
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:551
 #, no-c-format
 msgid "All header values are OK."
 msgstr "Tots els valors de capçalera estan bé."
@@ -3132,7 +3184,7 @@ msgstr "No s'ha trobat un adjunt amb l'ID %1%.\n"
 msgid "An attachment with the name '%1' is already present."
 msgstr "Ja hi ha present un adjunt amb el nom «%1»."
 
-#: src/merge/mkvmerge.cpp:1943
+#: src/merge/mkvmerge.cpp:2013
 msgid "An empty file name is not valid.\n"
 msgstr "Un nom de fitxer buit no és vàlid.\n"
 
@@ -3152,7 +3204,7 @@ msgstr ""
 "Un nom de fitxer eludit corresponent al\n"
 "segment previ."
 
-#: src/merge/mkvmerge.cpp:3009
+#: src/merge/mkvmerge.cpp:3114
 msgid "An exception occurred when writing the destination file."
 msgstr "S'ha produït una excepció en escriure el fitxer de destinació."
 
@@ -3171,7 +3223,7 @@ msgstr "S'esperava un enter sense signe."
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "Analitza fluxos de bits MPEG4, situa cada fotograma en un bloc de Matroska, usa marques de temps adequades (I P B B = 0 120 40 80) i usa els ID del còdec V_MPEG4/ISO/..."
 
-#: src/merge/generic_packetizer.cpp:626
+#: src/merge/generic_packetizer.cpp:646
 #, boost-format
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "Ja s'ha definit l'altra pista per omissió per a %1% pistes. No s'establirà l'etiqueta «omissió» per a la pista %2% de «%3%».\n"
@@ -3200,16 +3252,16 @@ msgstr "Annexa alguns fitxers de suports"
 msgid "Append to an e&xisting source file"
 msgstr "Annexa a un fitxer d'origen e&xistent"
 
-#: src/merge/output_control.cpp:1775
+#: src/merge/output_control.cpp:1770
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "S'està unint la pista %1% des del fitxer núm. %2% («%3%») a la pista %4% des del fitxer núm. %5% («%6%»).\n"
 
-#: src/merge/mkvmerge.cpp:611
+#: src/merge/mkvmerge.cpp:622
 msgid "Aspect ratio"
 msgstr "Relació d'aspecte"
 
-#: src/merge/mkvmerge.cpp:611
+#: src/merge/mkvmerge.cpp:622
 msgid "Aspect ratio factor"
 msgstr "Factor de la relació d'aspecte"
 
@@ -3318,7 +3370,7 @@ msgstr "Pista d'àudio %1"
 msgid "Audio, subtitle, chapter properties"
 msgstr "Propietats de l'àudio, subtítols i capítols"
 
-#: src/merge/mkvmerge.cpp:373
+#: src/merge/mkvmerge.cpp:384
 #, boost-format
 msgid "Automatic MIME type recognition for '%1%': %2%\n"
 msgstr "Reconeixement automàtic del tipus MIME per a «%1%»: %2%\n"
@@ -3331,7 +3383,7 @@ msgstr "Ne&teja automàticament el nom del fitxer de destinació cada vegada que
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "&Neteja automàticament el títol del fitxer cada vegada que se suprimeixi l'últim fitxer"
 
-#: src/merge/mkvmerge.cpp:2198
+#: src/merge/mkvmerge.cpp:2268
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "Habilita automàticament el mode conforme amb WebM, segons l'extensió del nom del fitxer de destinació.\n"
 
@@ -3615,22 +3667,22 @@ msgstr "Alguns formats de fitxer tenen una propietat «idioma» per a les seves 
 msgid "Certain functions won't work correctly in this situation."
 msgstr "Certes característiques no funcionaran correctament en aquesta situació."
 
-#: src/propedit/change.cpp:273
+#: src/propedit/change.cpp:275
 #, boost-format
 msgid "Change for '%1%' executed. No property of this type found. One entry added.\n"
 msgstr "S'ha executat el canvi per a «%1%». No s'ha trobat cap propietat d'aquest tipus. S'ha afegit una entrada.\n"
 
-#: src/propedit/change.cpp:253
+#: src/propedit/change.cpp:255
 #, boost-format
 msgid "Change for '%1%' executed. Number of entries deleted: %2%\n"
 msgstr "S'ha executat el canvi per a «%1%». Nombre d'entrades suprimides: %2%\n"
 
-#: src/propedit/change.cpp:279
+#: src/propedit/change.cpp:281
 #, boost-format
 msgid "Change for '%1%' executed. Number of entries set: %2%.\n"
 msgstr "S'ha executat el canvi per a «%1%». Nombre d'entrades establertes: %2%.\n"
 
-#: src/propedit/change.cpp:290
+#: src/propedit/change.cpp:292
 #, boost-format
 msgid "Change for '%1%' executed. One entry added.\n"
 msgstr "S'ha executat el canvi per a «%1%». S'ha afegit una entrada.\n"
@@ -3784,12 +3836,12 @@ msgstr "Tanca el fitxer modificat"
 msgid "Cluster"
 msgstr "Clúster"
 
-#: src/merge/mkvmerge.cpp:1694
+#: src/merge/mkvmerge.cpp:1764
 #, boost-format
 msgid "Cluster length '%1%' out of range (0..65535).\n"
 msgstr "Longitud del clúster «%1%» fora de l'interval (0..65535).\n"
 
-#: src/merge/mkvmerge.cpp:1687
+#: src/merge/mkvmerge.cpp:1757
 #, boost-format
 msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "Longitud del clúster «%1%» fora de l'interval (100..32000).\n"
@@ -3887,11 +3939,11 @@ msgstr "Tipus de còdec/MIME"
 msgid "CodecPrivate, length %1%%2%"
 msgstr "Privades del còdec, longitud %1%%2%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:473
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:478
 msgid "Colour information"
 msgstr "Informació del color"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:478
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:483
 msgid "Colour mastering meta information"
 msgstr "Meta informació sobre domini del color"
 
@@ -3935,7 +3987,7 @@ msgstr "S'ha completat amb èxit"
 msgid "Completed with warnings"
 msgstr "S'ha completat amb avisos"
 
-#: src/merge/generic_packetizer.cpp:1192
+#: src/merge/generic_packetizer.cpp:1290
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "La compressió ha fallat: %1%\n"
@@ -3969,7 +4021,7 @@ msgstr "Encriptatge del contingut"
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "Converteix els subtítols de text a aquest joc de caràcters (omissió: UTF-8)."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:685
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:684
 #, no-c-format
 msgid "Converting the chapters to XML failed: %1"
 msgstr "La conversió dels capítols a XML ha fallat: %1"
@@ -4018,7 +4070,7 @@ msgstr "No s'ha pogut extreure la capçalera de la seqüència des d'aquesta pis
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "No s'ha pogut trobar un índex per a la pista d'àudio %1% (Missatge d'error «avilib»: %2%). S'ha omès la pista.\n"
 
-#: src/merge/output_control.cpp:1701
+#: src/merge/output_control.cpp:1696
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "No s'ha pogut trobar «gptzr» en annexar. %1%\n"
@@ -4128,13 +4180,13 @@ msgstr "Crea una nova pestanya d'ajustaments de multiplexat per a cada fitxer"
 msgid "Creating directory '%1%' failed: %2%"
 msgstr "La creació del directori «%1%» ha fallat: %2%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:681
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:680
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:198
 #, no-c-format
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
 msgstr "La creació del fitxer ha fallat. Comproveu-ho per assegurar-vos que teniu permís per escriure en aquest directori i que el disc no estigui ple."
 
-#: src/merge/mkvmerge.cpp:688
+#: src/merge/mkvmerge.cpp:699
 #, boost-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '%1%').\n"
 msgstr "Paràmetres del retall: no s'han assignat en la forma <TID>:<esquerra>,<a_dalt>,<dreta>,<a_baix>, p. ex., 0:10,5,10,5 (l'argument era «%1%»).\n"
@@ -4359,7 +4411,7 @@ msgstr "Actualment no hi ha disponible en línia una versió més recent."
 msgid "Currently only certain subtitle formats are compressed with the zlib algorithm."
 msgstr "Actualment només alguns formats de subtítol estan comprimits amb l'algoritme «zlib»."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:204
 #, no-c-format
 msgid "D&uplicate selected edition or chapter"
 msgstr "D&uplica l'edició o capítol seleccionat"
@@ -4608,7 +4660,7 @@ msgstr "Directori &relatiu al directori del primer fitxer d'origen:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:278
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:283
 #, no-c-format
 msgid "Directory:"
 msgstr "Directori:"
@@ -4647,8 +4699,8 @@ msgstr "Inhabilita els lligams per a totes les pistes."
 msgid "Discard padding: %|1$.3f|ms (%2%ns)"
 msgstr "Descarta l'ompliment: %|1$.3f|ms (%2%ns)"
 
-#: src/merge/mkvmerge.cpp:663
-#: src/merge/mkvmerge.cpp:669
+#: src/merge/mkvmerge.cpp:674
+#: src/merge/mkvmerge.cpp:680
 #, boost-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '%1%').\n"
 msgstr "Dimensions de visualització: no s'han assignat en la forma <TID>:<amplada>x<alçada>, p. ex., 1:640x480 (l'argument era «%1%»).\n"
@@ -4750,7 +4802,7 @@ msgstr "No generis els subcapítols"
 msgid "Don't show this message again."
 msgstr "No tornis a mostrar aquest missatge."
 
-#: src/merge/mkvmerge.cpp:2914
+#: src/merge/mkvmerge.cpp:3019
 msgid "Done scanning playlists.\n"
 msgstr "S'han escanejat les llistes de reproducció.\n"
 
@@ -5008,9 +5060,9 @@ msgstr "Error a la línia %1%: s'esperava un número de subtítol i s'ha trobat 
 msgid "Error loading settings file"
 msgstr "Error en carregar el fitxer d'ajustaments"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:456
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:495
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:558
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:455
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:494
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:557
 #, no-c-format
 msgid "Error message from the parser: %1"
 msgstr "Missatge d'error des de l'analitzador: %1"
@@ -5024,7 +5076,7 @@ msgstr "Error en analitzar un paquet PS de MPEG durant la fase de lectura de la 
 msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.\n"
 msgstr "Error en analitzar els capítols a «%1%»: Falten alguns elements obligatoris.\n"
 
-#: src/merge/mkvmerge.cpp:500
+#: src/merge/mkvmerge.cpp:511
 #: src/propedit/tag_target.cpp:170
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
@@ -5035,7 +5087,7 @@ msgstr "Error en analitzar les etiquetes a «%1%»: Falten alguns elements oblig
 msgid "Error reading Matroska file"
 msgstr "Error en llegir el fitxer Matroska"
 
-#: src/merge/output_control.cpp:768
+#: src/merge/output_control.cpp:763
 #, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "Error en llegir del fitxer «%1%».\n"
@@ -5072,7 +5124,7 @@ msgstr "Error: no s'ha pogut obrir el fitxer d'origen %1% (%2%)."
 msgid "Error: No EBML head found."
 msgstr "Error: no s'ha trobat la capçalera EBML."
 
-#: src/merge/mkvmerge.cpp:2192
+#: src/merge/mkvmerge.cpp:2262
 msgid ""
 "Error: no destination file name was given.\n"
 "\n"
@@ -5120,7 +5172,7 @@ msgstr "Exemples: «01:00:00» (després d'una hora) o «1800s» (després de 18
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Exemples: «01:00:00,01:30:00» (després d'una hora i després d'una hora i trenta minuts) o «180s,300s,00:10:00» (després de tres, cinc i deu minuts)."
 
-#: src/merge/mkvmerge.cpp:3009
+#: src/merge/mkvmerge.cpp:3114
 msgid "Exception details:"
 msgstr "Detalls de l'excepció:"
 
@@ -5330,12 +5382,12 @@ msgstr "Fitxer de dades, mida: %1%"
 msgid "File description: %1%"
 msgstr "Descripció del fitxer: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:186
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:191
 #, no-c-format
 msgid "File has been modified"
 msgstr "El fitxer ha estat modificat"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:174
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:179
 #, no-c-format
 msgid "File has not been modified"
 msgstr "El fitxer no ha estat modificat"
@@ -5350,7 +5402,7 @@ msgstr "Nom del fitxer"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:277
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 #, no-c-format
 msgid "File name:"
 msgstr "Nom del fitxer:"
@@ -5365,18 +5417,18 @@ msgstr "Nom del fitxer: %1%"
 msgid "File not found"
 msgstr "No s'ha trobat el fitxer"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:303
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:309
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:382
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:389
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:458
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:495
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:560
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:724
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:302
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:308
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:388
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:457
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:494
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:559
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:723
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:123
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:117
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:128
 #, no-c-format
 msgid "File parsing failed"
 msgstr "L'anàlisi del fitxer ha fallat"
@@ -5400,7 +5452,7 @@ msgstr "Tipus de fitxers com fluxos de programa i de transport MPEG (.vob, .m2ts
 msgid "File/Segment linking"
 msgstr "Vincula el fitxer/segment"
 
-#: src/merge/output_control.cpp:951
+#: src/merge/output_control.cpp:946
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Els fitxers no es poden annexar a si mateixos. L'argument per «--append-to» no és vàlid.\n"
 
@@ -5515,12 +5567,12 @@ msgstr "Força el factor de proporció pel codi de temps al valor indicat."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "S'ha trobat almenys un fotograma B sense una segona referència en un GOP sense tancar.\n"
 
-#: src/merge/mkvmerge.cpp:1384
+#: src/merge/mkvmerge.cpp:1454
 #, boost-format
 msgid "FourCC: Invalid track ID in '%1% %2%'.\n"
 msgstr "FourCC: ID de la pista no vàlid a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1380
+#: src/merge/mkvmerge.cpp:1450
 #, boost-format
 msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: falta l'ID de la pista a «%1% %2%».\n"
@@ -5691,9 +5743,9 @@ msgstr "No és possible suprimir la compressió de la capçalera perquè la mem�
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "No és possible suprimir la compressió de la capçalera perquè la memòria cau no ha estat iniciada amb els bytes que s'hauran de suprimir. Bytes necessaris: %1%; trobats: %2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:546
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:561
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:563
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:551
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:566
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:568
 #, no-c-format
 msgid "Header validation"
 msgstr "Validació de la capçalera"
@@ -6135,7 +6187,7 @@ msgstr "Error intern del programa"
 msgid "Interval:"
 msgstr "Interval:"
 
-#: src/merge/mkvmerge.cpp:1308
+#: src/merge/mkvmerge.cpp:1378
 #, boost-format
 msgid "Invalid %1% specified in '--%2% %3%'.\n"
 msgstr "S'ha especificat %1% no vàlid a «--%2% %3%».\n"
@@ -6173,22 +6225,22 @@ msgstr "Especificació de l'ID o nom de fitxer adjunt no vàlida a l'argument «
 msgid "Invalid attribute '%1%' in node '%2%' at position %3%"
 msgstr "Atribut «%1%» no vàlid en el node «%2%» a la posició %3%"
 
-#: src/merge/mkvmerge.cpp:1171
+#: src/merge/mkvmerge.cpp:1241
 #, boost-format
 msgid "Invalid boolean option specified in '--default-track %1%'.\n"
 msgstr "S'ha especificat una opció booleana no vàlida a «--default-track %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1549
+#: src/merge/mkvmerge.cpp:1619
 #, boost-format
 msgid "Invalid boolean option specified in '--fix-bitstream-timing-information %1%'.\n"
 msgstr "L'opció booleana especificada no és vàlida a «--fix-bitstream-timing-information %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1197
+#: src/merge/mkvmerge.cpp:1267
 #, boost-format
 msgid "Invalid boolean option specified in '--forced-track %1%'.\n"
 msgstr "S'ha especificat una opció booleana no vàlida a «--forced-track %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1605
+#: src/merge/mkvmerge.cpp:1675
 #, boost-format
 msgid "Invalid boolean specified in '--aac-is-sbr %1%'.\n"
 msgstr "S'ha especificat una opció booleana no vàlida a «--aac-is-sbr %1%».\n"
@@ -6198,28 +6250,28 @@ msgstr "S'ha especificat una opció booleana no vàlida a «--aac-is-sbr %1%».\
 msgid "Invalid change spec (%3%) in '%1% %2%'.\n"
 msgstr "El canvi de les especificacions no és vàlid (%3%) a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:984
-#: src/merge/mkvmerge.cpp:1023
+#: src/merge/mkvmerge.cpp:1054
+#: src/merge/mkvmerge.cpp:1093
 #, boost-format
 msgid "Invalid chapter number '%1%' for '--split' in '--split %2%': %3%\n"
 msgstr "Número del capítol «%1%» no vàlid per «--split» a «--split %2%»: %3%\n"
 
-#: src/merge/mkvmerge.cpp:1252
+#: src/merge/mkvmerge.cpp:1322
 #, boost-format
 msgid "Invalid compression option specified in '--compression %1%'.\n"
 msgstr "S'ha especificat una opció de compressió no vàlida a «--compression %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1245
+#: src/merge/mkvmerge.cpp:1315
 #, boost-format
 msgid "Invalid compression option. No track ID specified in '--compression %1%'.\n"
 msgstr "L'opció de compressió no és vàlida. No s'ha indicat cap ID per a la pista a «--compression %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1222
+#: src/merge/mkvmerge.cpp:1292
 #, boost-format
 msgid "Invalid cues option specified in '--cues %1%'.\n"
 msgstr "S'ha especificat una opció d'índex no vàlida a «--cues %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1215
+#: src/merge/mkvmerge.cpp:1285
 #, boost-format
 msgid "Invalid cues option. No track ID specified in '--cues %1%'.\n"
 msgstr "Opció d'índex no vàlida. No s'ha especificat cap ID per a la pista a «--cues %1%».\n"
@@ -6248,7 +6300,7 @@ msgstr "Temps final no vàlid per «--split» a «--split %1%» (part actual: %2
 msgid "Invalid end time for '--split' in '--split %1%' (current part: %2%). The end time must be bigger than the start time.\n"
 msgstr "Temps final no vàlid per «--split» a «--split %1%» (part actual: %2%). El número de final ha de ser més gran que el número d'inici.\n"
 
-#: src/merge/mkvmerge.cpp:1100
+#: src/merge/mkvmerge.cpp:1170
 #, boost-format
 msgid "Invalid format for '--split' in '--split %1%'.\n"
 msgstr "Format no vàlid per «--split» a «--split %1%».\n"
@@ -6299,7 +6351,7 @@ msgstr "El format no és vàlid: la cadena és buida."
 msgid "Invalid format: unknown character '%1%' found"
 msgstr "El format no és vàlid: s'ha trobat el caràcter desconegut «%1%»"
 
-#: src/merge/mkvmerge.cpp:964
+#: src/merge/mkvmerge.cpp:1034
 #, boost-format
 msgid "Invalid frame for '--split' in '--split %1%'.\n"
 msgstr "Fotograma no vàlid per «--split» a «--split %1%».\n"
@@ -6309,7 +6361,7 @@ msgstr "Fotograma no vàlid per «--split» a «--split %1%».\n"
 msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "La longitud de la capçalera no és vàlida: %1% (longitud total: %2%, idx: %3%, dataidx: %4%)\n"
 
-#: src/merge/mkvmerge.cpp:2054
+#: src/merge/mkvmerge.cpp:2124
 #, boost-format
 msgid "Invalid identification format in '%1% %2%'.\n"
 msgstr "Format no vàlid de la identificació a «%1% %2%».\n"
@@ -6353,7 +6405,7 @@ msgstr "Selector no vàlid a «%1% %2%».\n"
 msgid "Invalid settings"
 msgstr "Ajustaments no vàlids"
 
-#: src/merge/mkvmerge.cpp:1054
+#: src/merge/mkvmerge.cpp:1124
 #, boost-format
 msgid "Invalid split size in '--split %1%'.\n"
 msgstr "Mida no vàlida de la divisió: «--split %1%».\n"
@@ -6387,104 +6439,104 @@ msgstr "Temps d'inici no vàlid per «--split» a «--split %1%» (part actual: 
 msgid "Invalid start/end specification for '--split' in '--split %1%' (current part: %2%).\n"
 msgstr "Especificació d'inici/final no vàlida per «--split» a «--split %1%» (part actual: %2%).\n"
 
-#: src/merge/mkvmerge.cpp:1332
+#: src/merge/mkvmerge.cpp:1402
 #, boost-format
 msgid "Invalid sub charset option. No track ID specified in '--sub-charset %1%'.\n"
 msgstr "L'opció del subjoc de caràcters no és vàlida. No s'ha especificat cap ID per a la pista a «--sub-charset %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1339
+#: src/merge/mkvmerge.cpp:1409
 #, boost-format
 msgid "Invalid sub charset specified in '--sub-charset %1%'.\n"
 msgstr "S'ha especificat un subjec de caràcters no vàlid a «--sub-charset %1%».\n"
 
-#: src/merge/mkvmerge.cpp:563
+#: src/merge/mkvmerge.cpp:574
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'.\n"
 msgstr "S'ha especificat una opció de sincronització no vàlida a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:586
+#: src/merge/mkvmerge.cpp:597
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'. The divisor is zero.\n"
 msgstr "S'ha especificat una opció de sincronització no vàlida a «%1% %2%». El divisor és zero.\n"
 
-#: src/merge/mkvmerge.cpp:592
+#: src/merge/mkvmerge.cpp:603
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'. The linear sync value may not be equal to or smaller than zero.\n"
 msgstr "S'ha especificat una opció de sincronització no vàlida a «%1% %2%». El valor de la sincronització lineal no pot ser igual o menor que zero.\n"
 
-#: src/merge/mkvmerge.cpp:555
+#: src/merge/mkvmerge.cpp:566
 #, boost-format
 msgid "Invalid sync option. No track ID specified in '%1% %2%'.\n"
 msgstr "L'opció de sincronització no és vàlida. No s'ha especificat cap ID per a la pista a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1363
+#: src/merge/mkvmerge.cpp:1433
 #, boost-format
 msgid "Invalid tags file name specified in '%1% %2%'.\n"
 msgstr "S'ha especificat un nom de fitxer d'etiquetes no vàlid a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1356
+#: src/merge/mkvmerge.cpp:1426
 #, boost-format
 msgid "Invalid tags option. No track ID specified in '%1% %2%'.\n"
 msgstr "Opció d'etiquetes no vàlida. No s'ha especificat cap ID per a la pista a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:922
+#: src/merge/mkvmerge.cpp:992
 #, boost-format
 msgid "Invalid time for '--split' in '--split %1%'. Additional error message: %2%\n"
 msgstr "Temps no vàlid per «--split» a «--split %1%». Missatge d'error addicional: %2%\n"
 
-#: src/merge/mkvmerge.cpp:943
+#: src/merge/mkvmerge.cpp:1013
 #, boost-format
 msgid "Invalid time for '--split' in '--split %1%'. Additional error message: %2%.\n"
 msgstr "Temps no vàlid per «--split» a «--split %1%». Missatge d'error addicional: %2%.\n"
 
-#: src/merge/mkvmerge.cpp:533
+#: src/merge/mkvmerge.cpp:544
 #, boost-format
 msgid "Invalid track ID or language code in '%1% %2%'.\n"
 msgstr "S'ha especificat un ID de la pista o codi d'idioma no vàlid a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:559
-#: src/merge/mkvmerge.cpp:1360
-#: src/merge/mkvmerge.cpp:1561
+#: src/merge/mkvmerge.cpp:570
+#: src/merge/mkvmerge.cpp:1430
+#: src/merge/mkvmerge.cpp:1631
 #, boost-format
 msgid "Invalid track ID specified in '%1% %2%'.\n"
 msgstr "S'ha especificat un ID de la pista no vàlid a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1304
+#: src/merge/mkvmerge.cpp:1374
 #, boost-format
 msgid "Invalid track ID specified in '--%1% %2%'.\n"
 msgstr "S'ha especificat un ID de la pista no vàlid a «--%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1602
+#: src/merge/mkvmerge.cpp:1672
 #, boost-format
 msgid "Invalid track ID specified in '--aac-is-sbr %1%'.\n"
 msgstr "S'ha especificat un ID de la pista no vàlid a «--aac-is-sbr %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1249
+#: src/merge/mkvmerge.cpp:1319
 #, boost-format
 msgid "Invalid track ID specified in '--compression %1%'.\n"
 msgstr "S'ha especificat un ID de la pista no vàlid a «--compression %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1219
+#: src/merge/mkvmerge.cpp:1289
 #, boost-format
 msgid "Invalid track ID specified in '--cues %1%'.\n"
 msgstr "S'ha especificat un ID per a la pista no vàlid a «--cues %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1165
+#: src/merge/mkvmerge.cpp:1235
 #, boost-format
 msgid "Invalid track ID specified in '--default-track %1%'.\n"
 msgstr "S'ha especificat un ID de la pista no vàlid a «--default-track %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1543
+#: src/merge/mkvmerge.cpp:1613
 #, boost-format
 msgid "Invalid track ID specified in '--fix-bitstream-timing-information %1%'.\n"
 msgstr "S'ha especificat un ID de la pista no vàlid a «--fix-bitstream-timing-information %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1191
+#: src/merge/mkvmerge.cpp:1261
 #, boost-format
 msgid "Invalid track ID specified in '--forced-track %1%'.\n"
 msgstr "S'ha especificat un ID de la pista no vàlid a «--forced-track %1%».\n"
 
-#: src/merge/mkvmerge.cpp:1336
+#: src/merge/mkvmerge.cpp:1406
 #, boost-format
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "S'ha especificat un ID de la pista no vàlid a «--sub-charset %1%».\n"
@@ -6508,7 +6560,7 @@ msgstr "No es pot suprimir perquè és un camp obligatori de la capçalera."
 msgid "It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."
 msgstr "Per omissió s'estableix a 4 bytes, però hi ha fitxers que no contenen un fotograma o tall més gran que 65535 bytes."
 
-#: src/merge/mkvmerge.cpp:891
+#: src/merge/mkvmerge.cpp:961
 msgid "It does not consist of a track ID and a value separated by a colon."
 msgstr "No consisteix d'un ID de pista i un valor separat per dos punts."
 
@@ -6811,12 +6863,12 @@ msgstr "Llista de reproducció Blu-ray en MPLS"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Converteix aquesta pista en la predefinida per a cadascun dels seus tipus (àudio, vídeo, subtítols)."
 
-#: src/input/r_matroska.cpp:1701
-#: src/input/r_matroska.cpp:1718
+#: src/input/r_matroska.cpp:1725
+#: src/input/r_matroska.cpp:1742
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "S'han trobat dades d'inicialització del còdec AAC mal formades.\n"
 
-#: src/input/r_matroska.cpp:1711
+#: src/input/r_matroska.cpp:1735
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "ID del còdec amb format incorrecte «%1%».\n"
@@ -6848,7 +6900,7 @@ msgid "Matroska audio/video files"
 msgstr "Fitxers d'àudio/vídeo Matroska"
 
 #: src/info/qt_ui.cpp:83
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:710
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:709
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:182
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
 #: src/mkvtoolnix-gui/merge/output.cpp:277
@@ -7008,12 +7060,12 @@ msgstr "S'ha requerit la modificació de les propietats a la secció «%1%», pe
 msgid "More"
 msgstr "Més"
 
-#: src/merge/mkvmerge.cpp:2326
+#: src/merge/mkvmerge.cpp:2396
 #, boost-format
 msgid "More than one MIME type was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "S'ha indicat més d'un tipus MIME per a un únic adjunt. «%1%» serà descartat i s'emprarà «%2%» en el seu lloc.\n"
 
-#: src/merge/mkvmerge.cpp:2317
+#: src/merge/mkvmerge.cpp:2387
 msgid "More than one description was given for a single attachment.\n"
 msgstr "S'ha indicat més d'una descripció per a un únic adjunt.\n"
 
@@ -7022,12 +7074,12 @@ msgstr "S'ha indicat més d'una descripció per a un únic adjunt.\n"
 msgid "More than one file name has been given ('%1%' and '%2%').\n"
 msgstr "S'ha indicat més d'un nom de fitxer («%1%» i «%2%»).\n"
 
-#: src/merge/mkvmerge.cpp:2336
+#: src/merge/mkvmerge.cpp:2406
 #, boost-format
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "S'ha donat més d'un nom per a un únic adjunt. «%1%» serà descartat i s'emparà «%2%» en el seu lloc.\n"
 
-#: src/merge/output_control.cpp:1024
+#: src/merge/output_control.cpp:1019
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "Hi ha més d'una pista per annexar a la pista %1% des del fitxer núm. %2% («%3%»). L'argument per «--append-to» no és vàlid.\n"
@@ -7067,7 +7119,7 @@ msgstr "Aplicació de multiplexat: %1%"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexació al fitxer «%1» en el directori «%2»"
 
-#: src/merge/mkvmerge.cpp:3013
+#: src/merge/mkvmerge.cpp:3118
 #, boost-format
 msgid "Multiplexing took %1%.\n"
 msgstr "El multiplexat ha pres %1%.\n"
@@ -7180,7 +7232,7 @@ msgstr "ID únic del segment següent"
 msgid "No"
 msgstr "No"
 
-#: src/merge/mkvmerge.cpp:1298
+#: src/merge/mkvmerge.cpp:1368
 #, boost-format
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "No s'ha especificat cap %1% a «--%2% %3%».\n"
@@ -7197,7 +7249,7 @@ msgstr "No s'ha trobat cap capçalera DTS en els primers fotogrames. La pista se
 msgid "No EBML head found."
 msgstr "No s'ha trobat cap capçalera EBML."
 
-#: src/merge/mkvmerge.cpp:377
+#: src/merge/mkvmerge.cpp:388
 #, boost-format
 msgid "No MIME type has been set for the attachment '%1%', and it could not be guessed.\n"
 msgstr "No s'ha establert cap tipus MIME per a l'adjunt «%1%», i no es pot endevinar.\n"
@@ -7206,7 +7258,7 @@ msgstr "No s'ha establert cap tipus MIME per a l'adjunt «%1%», i no es pot end
 msgid "No actions have been added yet."
 msgstr "Encara no s'ha afegit cap acció."
 
-#: src/merge/output_control.cpp:983
+#: src/merge/output_control.cpp:978
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "No s'ha donat cap assignació d'annexió pel fitxer núm. %1% («%2%»). En el seu lloc s'emparà una assignació d'annexió per omissió de %3%. Si us plau, tingueu-ho en compte per si el «mkvmerge» avorta amb un missatge d'error respecte a opcions no vàlides per «--append-to».\n"
@@ -7221,13 +7273,13 @@ msgstr "Cap adjunt coincideix amb l'especificació «%1%».\n"
 msgid "No changes were made.\n"
 msgstr "No s'ha realitzat cap canvi.\n"
 
-#: src/merge/mkvmerge.cpp:989
+#: src/merge/mkvmerge.cpp:1059
 #, boost-format
 msgid "No chapter numbers listed after '--split %1%'.\n"
 msgstr "No hi ha números de capítol llistats després de «--split %1%».\n"
 
-#: src/merge/mkvmerge.cpp:993
-#: src/merge/mkvmerge.cpp:1019
+#: src/merge/mkvmerge.cpp:1063
+#: src/merge/mkvmerge.cpp:1089
 msgid "No chapters in source files or chapter files found to split by.\n"
 msgstr "No s'ha trobat cap capítol als fitxers d'origen o als fitxers de capítols trobats per a dividir.\n"
 
@@ -7264,7 +7316,7 @@ msgstr "Encara no s'ha obert cap fitxer."
 msgid "No file name given.\n"
 msgstr "No s'ha indicat cap nom de fitxer.\n"
 
-#: src/merge/mkvmerge.cpp:1921
+#: src/merge/mkvmerge.cpp:1991
 #, boost-format
 msgid "No file names were listed between '%1%' and '%2%'.\n"
 msgstr "No hi ha noms de fitxer llistats entre «%1%» i «%2%».\n"
@@ -7322,7 +7374,7 @@ msgstr "No s'ha trobat l'UID del segment en el fitxer «%1%»."
 msgid "No segment/level 0 element found."
 msgstr "No s'ha trobat cap element del segment/nivell 0."
 
-#: src/merge/mkvmerge.cpp:2802
+#: src/merge/mkvmerge.cpp:2907
 msgid "No source files were given.\n"
 msgstr "No s'ha indicat cap fitxer d'origen.\n"
 
@@ -7330,16 +7382,16 @@ msgstr "No s'ha indicat cap fitxer d'origen.\n"
 msgid "No space left to write to"
 msgstr "No queda espai per escriure"
 
-#: src/merge/mkvmerge.cpp:2986
+#: src/merge/mkvmerge.cpp:3091
 msgid "No streams to output were found. Aborting.\n"
 msgstr "No s'han trobat els fluxos de la sortida. S'està interrompent.\n"
 
-#: src/merge/mkvmerge.cpp:1295
+#: src/merge/mkvmerge.cpp:1365
 #, boost-format
 msgid "No track ID specified in '--%1% %2%'.\n"
 msgstr "No s'ha especificat cap ID per a la pista a «--%1% %2%».\n"
 
-#: src/propedit/track_target.cpp:203
+#: src/propedit/track_target.cpp:199
 #, boost-format
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "No s'ha trobat cap pista corresponent a l'especificació de l'edició «%1%». %2%\n"
@@ -7418,7 +7470,7 @@ msgstr "No és un fitxer de Matroska vàlid (no s'ha trobat la capçalera EBML)"
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "No és un fitxer de Matroska vàlid (no s'ha trobat cap element al segment/nivell 0)"
 
-#: src/merge/mkvmerge.cpp:984
+#: src/merge/mkvmerge.cpp:1054
 msgid "Not a valid number or not positive."
 msgstr "No és un número vàlid o no és positiu."
 
@@ -7464,7 +7516,7 @@ msgstr "Tingueu en compte que la majoria de les variables <MTX_…> estan buides
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Recordeu que al Windows també es poden emprar barres inclinades en lloc de barres invertides en els noms dels camins."
 
-#: src/merge/generic_packetizer.cpp:1560
+#: src/merge/generic_packetizer.cpp:1658
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Tingueu en compte que les especificacions de Matroska quant a l'emmagatzemament de «%1%» encara no han finalitzat. La implementació del «mkvmerge» està subjecta a canvis i usa el CodecID «%2%/EXPERIMENTAL» en comptes de «%2%». Aquest avís serà suprimit una vegada s'hagin finalitzat les especificacions i s'actualitzi el «mkvmerge».\n"
@@ -7527,15 +7579,15 @@ msgstr "Una de les opcions «--attachment-name», «--attachment-description» o
 msgid "Online check for updates"
 msgstr "Comprovació en línia de les actualitzacions"
 
-#: src/merge/mkvmerge.cpp:1025
+#: src/merge/mkvmerge.cpp:1095
 #, boost-format
 msgid "Only %1% chapter found in source files & chapter files."
 msgid_plural "Only %1% chapters found in source files & chapter files."
 msgstr[0] "Només s'ha trobat %1% capítol als fitxers d'origen i de capítols."
 msgstr[1] "Només s'han trobat %1% capítols als fitxers d'origen i de capítols."
 
-#: src/merge/mkvmerge.cpp:1711
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:675
+#: src/merge/mkvmerge.cpp:1781
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:680
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7564,12 +7616,12 @@ msgstr "Només és necessari per a fitxers d'origen AAC, perquè els fitxers AAC
 msgid "Only needed in certain situations:"
 msgstr "Només necessari en certes ocasions:"
 
-#: src/merge/mkvmerge.cpp:1774
+#: src/merge/mkvmerge.cpp:1844
 #, boost-format
 msgid "Only one chapter file allowed in '%1% %2%'.\n"
 msgstr "Només es permet un fitxer de capítols a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:2182
+#: src/merge/mkvmerge.cpp:2252
 msgid "Only one destination file allowed.\n"
 msgstr "Només es permet un fitxer de destinació.\n"
 
@@ -7581,7 +7633,7 @@ msgstr "Només es permet una instància de <%1%> a continuació de <%2%> a la po
 msgid "Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time."
 msgstr "Només es pot emprar <String> o <Binary> a continuació de <Simple>, no ambdues a la vegada."
 
-#: src/merge/mkvmerge.cpp:1820
+#: src/merge/mkvmerge.cpp:1890
 #, boost-format
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "Només es permet un fitxer d'informació del segment a «%1% %2%».\n"
@@ -7590,7 +7642,7 @@ msgstr "Només es permet un fitxer d'informació del segment a «%1% %2%».\n"
 msgid "Only one source file is allowed.\n"
 msgstr "Només es permet un fitxer d'origen.\n"
 
-#: src/merge/output_control.cpp:964
+#: src/merge/output_control.cpp:959
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Només s'ha donat una part de les assignacions d'annexió al fitxer núm. %1% («%2%»). O bé no especifiqueu cap assignació (en aquest cas s'usarà l'establerta com a predefinida) o en podeu establir una per a totes les pistes que es copiaran.\n"
@@ -7906,7 +7958,7 @@ msgid_plural "Please re-install MKVToolNix or fix the problems manually."
 msgstr[0] "Si us plau, torneu a instal·lar el MKVToolNix o solucioneu el problema de forma manual."
 msgstr[1] "Si us plau, torneu a instal·lar el MKVToolNix o solucioneu els problemes de forma manual."
 
-#: src/merge/mkvmerge.cpp:351
+#: src/merge/mkvmerge.cpp:362
 msgid ""
 "Please read the man page/the HTML documentation to mkvmerge. It\n"
 "explains several details in great length which are not obvious from\n"
@@ -7945,11 +7997,11 @@ msgstr "Les possibles causes són que el programa no existeix o que no esteu aut
 
 #: src/common/qt_kax_analyzer.cpp:88
 #: src/common/qt_kax_analyzer.cpp:96
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:723
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:380
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:111
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:122
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:116
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:127
 #: src/propedit/propedit.cpp:47
 #: src/propedit/propedit.cpp:53
 #, no-c-format
@@ -8034,7 +8086,7 @@ msgstr "Progrés:"
 #: src/extract/timecodes_v2.cpp:389
 #: src/extract/tracks.cpp:446
 #: src/extract/tracks.cpp:522
-#: src/merge/mkvmerge.cpp:2818
+#: src/merge/mkvmerge.cpp:2923
 #: src/merge/output_control.cpp:338
 #: src/propedit/tag_target.cpp:336
 #: src/propedit/tag_target.cpp:349
@@ -8237,12 +8289,12 @@ msgstr "RIFF CDXA"
 msgid "RSA"
 msgstr "RSA"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:208
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
 #, no-c-format
 msgid "Re&number sub-chapters"
 msgstr "Torna a &numerar els subcapítols"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:285
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:290
 #, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "Su&bstitueix l'adjunt amb un nom de fitxer nou"
@@ -8256,8 +8308,8 @@ msgstr "Llegeix tot el fitxer NEWS.md en línia"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "La lectura de VOB encriptats encara no està implementada.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:672
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:684
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:677
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:689
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
 msgid "Reading failed"
@@ -8421,7 +8473,7 @@ msgstr "Substitueix un adjunt amb el «nom_de_fitxer» del fitxer"
 msgid "Replace attachment"
 msgstr "Substitueix l'adjunt"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:286
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:291
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "Substitueix l'adjunt amb un nom de fitxer nou i o&btén el nom del tipus MIME"
@@ -8468,12 +8520,12 @@ msgstr "A la dreta"
 msgid "Right-click for actions for all items"
 msgstr "Clic dret per a les accions en tots els elements"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:224
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:223
 #, no-c-format
 msgid "Right-click for actions for editions and chapters"
 msgstr "Clic dret per a les accions en les edicions i els capítols"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:310
 #, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "Clic dret per a les accions en els elements de capçalera i adjunts"
@@ -8571,12 +8623,12 @@ msgstr "Desa com per &omissió per a les noves tasques de multiplexat"
 msgid "Save attachment"
 msgstr "Desa l'adjunt"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:669
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:668
 #, no-c-format
 msgid "Save chapters as XML"
 msgstr "Desa els capítols a un fitxer XML"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:708
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:707
 #, no-c-format
 msgid "Save chapters to Matroska or WebM file"
 msgstr "Desa els capítols a un fitxer Matroska o WebM"
@@ -8605,29 +8657,29 @@ msgstr "Desa el fitxer d'ajustaments com a"
 msgid "Save to &Matroska or WebM file"
 msgstr "Desa a un fitxer Matroska o WebM"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:681
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:685
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:680
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:684
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:198
 #, no-c-format
 msgid "Saving failed"
 msgstr "El desament ha fallat"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:747
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:746
 #, no-c-format
 msgid "Saving the chapters failed."
 msgstr "El desament dels capítols ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:218
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:223
 #, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "El desament dels adjunts modificats ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:197
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:202
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "El desament de la capçalera d'informació del segment modificat ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:203
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:208
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "El desament de les capçaleres de la pista modificada ha fallat."
@@ -8640,7 +8692,7 @@ msgstr "Explora el directori per a altres llistes de reproducció"
 msgid "Scanned Files"
 msgstr "Fitxers escanejats"
 
-#: src/merge/mkvmerge.cpp:2874
+#: src/merge/mkvmerge.cpp:2979
 #, boost-format
 msgid "Scanning %1% files in %2% playlist.\n"
 msgid_plural "Scanning %1% files in %2% playlists.\n"
@@ -8734,7 +8786,7 @@ msgstr "Informació del segment:"
 #: src/extract/timecodes_v2.cpp:243
 #: src/info/mkvinfo.cpp:451
 #: src/info/qt_ui.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:433
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:438
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
@@ -8779,7 +8831,7 @@ msgstr[1] "Selecciona tots els &elements dels fitxers seleccionats"
 msgid "Select all tracks of specific &type"
 msgstr "Selecciona totes les pistes d'un &tipus específic"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:225
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:224
 #: src/mkvtoolnix-gui/merge/output.cpp:176
 #: src/mkvtoolnix-gui/merge/output.cpp:177
 #: src/mkvtoolnix-gui/merge/output.cpp:178
@@ -9147,7 +9199,7 @@ msgstr "Talls"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Algunes pistes h.264/AVC contenen talls I, però falten els fotogrames clau reals."
 
-#: src/merge/output_control.cpp:1320
+#: src/merge/output_control.cpp:1315
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "Manquen alguns elements de l'etiqueta (aquest error no hauria d'haver succeït -ja deu haver succeït quelcom semblant anteriorment-). %1%\n"
@@ -9284,7 +9336,7 @@ msgstr "Estat"
 msgid "Status:"
 msgstr "Estat:"
 
-#: src/merge/mkvmerge.cpp:860
+#: src/merge/mkvmerge.cpp:930
 #, boost-format
 msgid "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and %1% or one of these keywords: %2% (argument was '%3%').\n"
 msgstr "Paràmetre pel mode estèreo: no s'ha assignat en la forma <TID>:<n|paraula_clau>, on «n» és un número entre 0 i %1%, o una d'aquestes paraules clau: %2% (l'argument era «%3%»).\n"
@@ -9340,14 +9392,14 @@ msgstr "A la pista %1% de subtítols manquen alguns elements de la durada. Si us
 msgid "Subtitles"
 msgstr "Subtítols"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:709
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:708
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:181
 #: src/mkvtoolnix-gui/merge/output.cpp:474
 #, no-c-format
 msgid "Supported file types"
 msgstr "Tipus de fitxers acceptats"
 
-#: src/merge/mkvmerge.cpp:419
+#: src/merge/mkvmerge.cpp:430
 msgid "Supported file types:\n"
 msgstr "Tipus de fitxers acceptats:\n"
 
@@ -9462,7 +9514,7 @@ msgstr "Les capçaleres FLAC no s'han pogut analitzar: no s'ha trobat l'estructu
 msgid "The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n"
 msgstr "Els FPS són 0,0, però el lector no ha proporcionat un codi de temps per a un paquet. %1%\n"
 
-#: src/merge/mkvmerge.cpp:1387
+#: src/merge/mkvmerge.cpp:1457
 #, boost-format
 msgid "The FourCC must be exactly four characters long in '%1% %2%'.\n"
 msgstr "El FourCC ha de ser exactament de quatre caràcters de longitud a «%1% %2%».\n"
@@ -9539,7 +9591,7 @@ msgstr "El fitxer Matroska ha estat modificat, però el registre meta de cerca n
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr "L'últim element del fitxer Matroska s'estableix a una mida desconeguda."
 
-#: src/merge/mkvmerge.cpp:1519
+#: src/merge/mkvmerge.cpp:1589
 #, boost-format
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length %1%'.\n"
 msgstr "La longitud de la mida NALU ha de ser un número entre el 2 i el 4 inclusivament a «--nalu-size-length %1%».\n"
@@ -9554,7 +9606,7 @@ msgstr "La capçalera d'identificació Theora no s'ha pogut analitzar (%1%).\n"
 msgid "The UID must not be left empty."
 msgstr "L'UID no pot estar buit."
 
-#: src/input/r_matroska.cpp:731
+#: src/input/r_matroska.cpp:742
 #, boost-format
 msgid "The VobSub subtitle track %1% does not contain its index in the CodecPrivate element."
 msgstr "La pista %1% de subtítols VobSub no conté el seu índex a l'element CodecPrivate."
@@ -9643,34 +9695,34 @@ msgstr ""
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2126
+#: src/merge/mkvmerge.cpp:2196
 #, boost-format
 msgid "The argument '%1%' is not allowed in identification mode.\n"
 msgstr "L'argument «%1%» no està permès en el mode identificació.\n"
 
-#: src/merge/mkvmerge.cpp:890
-#: src/merge/mkvmerge.cpp:896
-#: src/merge/mkvmerge.cpp:902
+#: src/merge/mkvmerge.cpp:960
+#: src/merge/mkvmerge.cpp:966
+#: src/merge/mkvmerge.cpp:972
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid."
 msgstr "L'argument «%1%» a «%2%» no és vàlid."
 
-#: src/merge/mkvmerge.cpp:1881
+#: src/merge/mkvmerge.cpp:1951
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: '%3%' is not a valid track ID.\n"
 msgstr "L'argument «%1%» a «%2%» no és vàlid: «%3%» no és un ID vàlid per a la pista.\n"
 
-#: src/merge/mkvmerge.cpp:1890
+#: src/merge/mkvmerge.cpp:1960
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: '%3%' must be either 'all' or 'first'.\n"
 msgstr "L'argument «%1%» a «%2%» no és vàlid: «%3%» haurà de ser «tots» o «primer».\n"
 
-#: src/merge/mkvmerge.cpp:1877
+#: src/merge/mkvmerge.cpp:1947
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: too many colons in element '%3%'.\n"
 msgstr "L'argument «%1%» a «%2%» no és vàlid: massa signes de dos punts a l'element «%3%».\n"
 
-#: src/merge/mkvmerge.cpp:1835
+#: src/merge/mkvmerge.cpp:1905
 msgid "The argument to '--timecode-scale' must be a number.\n"
 msgstr "L'argument per a «--timecode-scale» ha de ser un número.\n"
 
@@ -9679,12 +9731,12 @@ msgstr "L'argument per a «--timecode-scale» ha de ser un número.\n"
 msgid "The attachment #%1%, ID %2%, MIME type %3%, size %4%, is written to '%5%'.\n"
 msgstr "L'adjunt núm. %1%, ID %2%, tipus MIME %3%, mida %4%, s'ha escrit a «%5%».\n"
 
-#: src/merge/mkvmerge.cpp:1733
+#: src/merge/mkvmerge.cpp:1803
 #, boost-format
 msgid "The attachment '%1%' could not be read.\n"
 msgstr "No s'ha pogut llegir l'adjunt «%1%».\n"
 
-#: src/merge/mkvmerge.cpp:1710
+#: src/merge/mkvmerge.cpp:1780
 #, boost-format
 msgid "The attachment (%1%) is too big (%2%)."
 msgstr "L'adjunt (%1%) és massa gran (%2%)."
@@ -9703,7 +9755,7 @@ msgstr "La sincronització de l'àudio/vídeo es pot haver perdut."
 msgid "The changes are written to the file.\n"
 msgstr "Els canvis són escrits al fitxer.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:821
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:820
 #, no-c-format
 msgid "The chapter UID must be a number if given."
 msgstr "Si s'indica l'UID del capítol, haurà de ser un número."
@@ -9725,7 +9777,7 @@ msgstr "Els jocs de caràcters «seleccionats» aquí es mostraran a la part sup
 msgid "The chosen NALU size length of %1% is too small. Try using '4'.\n"
 msgstr "La longitud de la mida NALU escollida de %1% és massa petita. Intenteu usant «4».\n"
 
-#: src/merge/mkvmerge.cpp:1918
+#: src/merge/mkvmerge.cpp:1988
 #, boost-format
 msgid "The closing character '%1%' is missing.\n"
 msgstr "Manca el caràcter de tancament «%1%».\n"
@@ -9780,7 +9832,7 @@ msgstr "La capçalera del fitxer de correcció no es pot llegir correctament.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Els països «seleccionats» aquí es mostraran a la part superior de les llistes desplegables de país en el programa."
 
-#: src/merge/output_control.cpp:1510
+#: src/merge/output_control.cpp:1505
 msgid "The cue entries (the index) are being written...\n"
 msgstr "S'estan escrivint les entrades de l'índex...\n"
 
@@ -9802,7 +9854,7 @@ msgstr "El mode actual es pot canviar amb --multiplex, --edit-chapters o --edit-
 msgid "The current multiplex settings will be closed."
 msgstr "Es tancaran els ajustaments del multiplexat actuals."
 
-#: src/merge/generic_packetizer.cpp:1278
+#: src/merge/generic_packetizer.cpp:1376
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "El codi de temps del paquet actual és més petit que el del paquet anterior. Normalment, vol dir que el fitxer d'origen és un fitxer Matroska que no ha estat creat correctament al 100%%. Els codis de temps de tots els paquets seran ajustats per %1% ms per tal de no perdre cap dada. Això pot desfer la sincronització de l'àudio/vídeo, però es pot corregir amb l'opció «--sync» del «mkvmerge». Si ja heu emprat «--sync» i encara obteniu aquest avís, NO us preocupeu, és normal. Si l'error succeeix més d'una vegada, tornant a obtenir aquest missatge per a una pista en particular, llavors el fitxer d'origen pot estar mal editat, o «mkvmerge» conté un error. En aquest cas hauríeu de contactar amb l'autor, en Moritz Bunkus <moritz@bunkus.org>.\n"
@@ -9868,7 +9920,7 @@ msgstr "L'alçada de visualització de les dues pistes és diferent: %1% i %2%"
 msgid "The display width of the two tracks is different: %1% and %2%"
 msgstr "L'amplada de visualització de les dues pistes és diferent: %1% i %2%"
 
-#: src/merge/mkvmerge.cpp:3009
+#: src/merge/mkvmerge.cpp:3114
 msgid "The drive may be full."
 msgstr "La unitat podria estar plena."
 
@@ -9882,7 +9934,7 @@ msgstr "La durada després de la qual es començarà un nou fitxer de destinaci�
 msgid "The edit specifications '%1%' and '%2%' resolve to the same track with the UID %3%.\n"
 msgstr "Les especificacions d'edició «%1%» i «%2%» resolen la mateixa pista amb l'UID %3%.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:898
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:897
 #, no-c-format
 msgid "The edition UID must be a number if given."
 msgstr "Si s'indica l'UID de l'edició, haurà de ser un número."
@@ -9893,12 +9945,12 @@ msgstr "Si s'indica l'UID de l'edició, haurà de ser un número."
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "L'element s'ha escrit al final del fitxer, però la mida del segment no s'ha pogut actualitzar. Pel que l'element no serà visible. El procés serà interromput. El fitxer ha estat canviat!"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:847
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:846
 #, no-c-format
 msgid "The end time could not be parsed: %1"
 msgstr "El temps final no es pot analitzar: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:850
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:849
 #, no-c-format
 msgid "The end time must be greater than the start time."
 msgstr "El temps final haurà de ser més gran que el temps inicial."
@@ -9925,7 +9977,7 @@ msgstr "El fitxer «%1» ha estat modificat. De veres el voleu tancar? Es perdra
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "El fitxer «%1» ha estat modificat. De veres el voleu tornar a carregar? Es perdran tots els canvis."
 
-#: src/merge/mkvmerge.cpp:1714
+#: src/merge/mkvmerge.cpp:1784
 #, boost-format
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "El fitxer «%1%» no es pot adjuntar perquè no existeix o no es pot llegir.\n"
@@ -9962,7 +10014,7 @@ msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura: %2%.\n"
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
 #: src/extract/xtr_wav.cpp:133
-#: src/merge/output_control.cpp:1344
+#: src/merge/output_control.cpp:1339
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%.\n"
@@ -9972,7 +10024,7 @@ msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%.\n"
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "El fitxer «%1%» no s'ha pogut obrir o analitzar."
 
-#: src/merge/output_control.cpp:1348
+#: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "El fitxer «%1%» ha estat obert per a escriptura.\n"
@@ -10017,7 +10069,7 @@ msgstr "El fitxer «%1» no és un fitxer de la cua de treball ni un fitxer d'aj
 msgid "The file '%1' you've added is a playlist."
 msgstr "El fitxer «%1» que heu afegit és una llista de reproducció."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:674
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:679
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, no-c-format
 msgid "The file (%1) is too big (%2)."
@@ -10056,13 +10108,13 @@ msgstr "El fitxer no s'ha pogut obrir per a escriptura."
 msgid "The file does not contain track ID %1%.\n"
 msgstr "El fitxer no conté l'ID de la pista %1%.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:187
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:192
 #, no-c-format
 msgid "The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."
 msgstr "El fitxer ha estat canviat per un altre programa des que el va obrir l'editor de la capçalera. De manera que l'haureu de tornar a carregar. Malauradament, això vol dir que es perdran tots els canvis."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:654
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:225
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:653
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:230
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "El fitxer ha estat desat amb èxit."
@@ -10121,17 +10173,17 @@ msgstr "El fitxer es llegeix amb la finalitat de crear les estadístiques de la 
 msgid "The file name for this segment."
 msgstr "El nom de fitxer per aquest segment."
 
-#: src/merge/output_control.cpp:997
+#: src/merge/output_control.cpp:992
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no conté una pista amb l'ID %3%, o no s'ha copiat aquesta pista. L'argument per «--append-to» no és vàlid.\n"
 
-#: src/merge/output_control.cpp:1003
+#: src/merge/output_control.cpp:998
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no conté una pista amb l'ID %3%, o no s'ha copiat aquesta pista. De manera que no es pot annexar cap pista. L'argument per «--append-to» no és vàlid.\n"
 
-#: src/merge/output_control.cpp:943
+#: src/merge/output_control.cpp:938
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no serà annexat. L'argument per «--append-to» no és vàlid.\n"
@@ -10148,36 +10200,36 @@ msgstr "El fitxer no ha estat reconegut com un format admès (codi de sortida: %
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1532
-#: src/input/r_matroska.cpp:2220
+#: src/input/r_matroska.cpp:1556
+#: src/input/r_matroska.cpp:2244
 msgid "The file will not be processed further."
 msgstr "Aquest fitxer no es processarà més."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:303
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:309
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:380
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:722
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:302
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:308
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:379
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:721
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:121
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:684
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:126
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:689
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "El fitxer que intenteu obrir (%1) no es pot llegir adequadament."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:389
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:388
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:361
 #, no-c-format
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "El fitxer que intenteu obrir (%1) no conté cap capítol."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:110
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:115
 #, no-c-format
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "El fitxer que intenteu obrir (%1) no és reconegut com un fitxer Matroska/WebM vàlid."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:454
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:556
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:453
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:555
 #, no-c-format
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "El fitxer que intenteu obrir (%1) no és reconegut com un fitxer Matroska o de capítols vàlid."
@@ -10191,7 +10243,7 @@ msgstr "El primer clúster del codi de temps després de la resincronització é
 msgid "The first destination file only"
 msgstr "Només al primer fitxer de destinació"
 
-#: src/merge/mkvmerge.cpp:1981
+#: src/merge/mkvmerge.cpp:2051
 msgid "The first file cannot be appended because there are no files to append to.\n"
 msgstr "El primer fitxer no es pot annexar perquè no hi ha fitxers amb els quals annexar-lo.\n"
 
@@ -10231,7 +10283,7 @@ msgstr "El format segueix la forma HH:MM:SS.nnnnnnnnn o com un número seguit pe
 msgid "The formats can be mixed, too."
 msgstr "Els formats també es poden fusionar."
 
-#: src/merge/output_control.cpp:1054
+#: src/merge/output_control.cpp:1049
 msgid "The formats do not match."
 msgstr "Els formats no coincideixen."
 
@@ -10244,11 +10296,11 @@ msgstr "Els quatre modes extreuen els capítols i els converteixen a XML. La sor
 msgid "The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file."
 msgstr "El nom del fitxer de destinació generat es basa en el nom del fitxer d'origen però amb una extensió basada en els tipus de pista presents al fitxer."
 
-#: src/merge/mkvmerge.cpp:1841
+#: src/merge/mkvmerge.cpp:1911
 msgid "The given timecode scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "El factor d'escala assignat al codi de temps es troba fora d'un interval vàlid (1... 10000000 o -1 per a «precisió de la mostra fins i tot si hi ha present una pista de vídeo»).\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:174
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:179
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "Els valors de la capçalera no han estat modificats. No hi ha res per desar."
@@ -10307,7 +10359,7 @@ msgstr "Els idiomes «seleccionats» aquí es mostraran a la part superior de le
 msgid "The last timecode processed before the error was encountered was %1%.\n"
 msgstr "L'últim codi de temps processat abans de l'error trobat era %1%.\n"
 
-#: src/propedit/change.cpp:219
+#: src/propedit/change.cpp:221
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
 msgstr "Per indicar la UTC es pot usar la lletra «Z» en comptes del desplaçament de la zona horària, també coneguda com a temps Zulú."
 
@@ -10394,12 +10446,12 @@ msgstr "El nom de l'aplicació o biblioteca emprada per a multiplexar el fitxer.
 msgid "The name of the application or library used for writing the file."
 msgstr "El nom de l'aplicació o biblioteca emprada per escriure el fitxer."
 
-#: src/merge/mkvmerge.cpp:1947
+#: src/merge/mkvmerge.cpp:2017
 #, boost-format
 msgid "The name of the destination file '%1%' and of one of the source files is the same."
 msgstr "El nom del fitxer de destinació «%1%» i d'un dels fitxers d'origen és el mateix."
 
-#: src/merge/mkvmerge.cpp:1658
+#: src/merge/mkvmerge.cpp:1728
 #, boost-format
 msgid "The next UID was already given in '%1% %2%'.\n"
 msgstr "L'UID següent ja està assignat a «%1% %2%».\n"
@@ -10471,7 +10523,7 @@ msgstr "Els números proporcionats amb aquest argument són interpretats d'acord
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "Els únics còdecs permesos són pistes de vídeo VP8/VP9 i d'àudio Vorbis/Opus."
 
-#: src/merge/mkvmerge.cpp:2433
+#: src/merge/mkvmerge.cpp:2503
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "L'opció «--meta-seek-size» ja no és compatible. Si us plau, llegiu la documentació del «mkvmerge», especialment la secció quant a «estructura del fitxer Matroska (MATROSKA FILE LAYOUT).\n"
 
@@ -10493,12 +10545,12 @@ msgstr "L'ordre de les diferents opcions no és important."
 msgid "The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."
 msgstr "Les altres dues disposicions disponibles són: en dues columnes fixes a la dreta, o en un estri amb pestanyes a sota de la llista dels fitxers i pistes."
 
-#: src/merge/mkvmerge.cpp:1645
+#: src/merge/mkvmerge.cpp:1715
 #, boost-format
 msgid "The previous UID was already given in '%1% %2%'.\n"
 msgstr "L'UID anterior ja es va assignar a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:2069
+#: src/merge/mkvmerge.cpp:2139
 #, boost-format
 msgid "The probe range percentage '%1%' is invalid.\n"
 msgstr "L'interval de prova del percentatge «%1%» no és vàlid.\n"
@@ -10519,9 +10571,14 @@ msgstr "El programa per executar encara no s'ha establert."
 msgid "The property value contains non-ASCII characters, but the property is not a Unicode string in '%1%'. %2%\n"
 msgstr "El valor de la propietat conté caràcters no ASCII, però la propietat no és una cadena de caràcters Unicode a «%1%». %2%\n"
 
-#: src/propedit/change.cpp:153
-#, boost-format
-msgid "The property value is not a valid binary spec or it is not exactly 128 bits long in '%1%'. %2%\n"
+#: src/propedit/change.cpp:155
+#, fuzzy, boost-format
+msgid "The property value is not a valid binary spec in '%1%'. %2%\n"
+msgstr "El valor de la propietat no és un booleà vàlid a «%1%». %2%\n"
+
+#: src/propedit/change.cpp:154
+#, fuzzy, boost-format
+msgid "The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n"
 msgstr "El valor de la propietat no és una especificació binària o no és exactament d'una longitud de 128 bits a «%1%». %2%\n"
 
 #: src/propedit/change.cpp:138
@@ -10529,7 +10586,7 @@ msgstr "El valor de la propietat no és una especificació binària o no és exa
 msgid "The property value is not a valid boolean in '%1%'. %2%\n"
 msgstr "El valor de la propietat no és un booleà vàlid a «%1%». %2%\n"
 
-#: src/propedit/change.cpp:217
+#: src/propedit/change.cpp:219
 #, boost-format
 msgid "The property value is not a valid date & time string in '%1%'."
 msgstr "El valor de la propietat no és una cadena de data i hora vàlida a «%1%»."
@@ -10549,11 +10606,11 @@ msgstr "El valor de la propietat no és un enter amb signe vàlid a «%1%». %2%
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "El valor de la propietat no és un enter sense signe vàlid a «%1%». %2%\n"
 
-#: src/merge/output_control.cpp:1056
+#: src/merge/output_control.cpp:1051
 msgid "The reason is unknown."
 msgstr "La raó és desconeguda."
 
-#: src/propedit/change.cpp:218
+#: src/propedit/change.cpp:220
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
 msgstr "El format reconegut és «AAAA-mm-ddTHH:MM:SS+zz:zz»: l'any, mes, dia, lletra «T», hores, minuts, segons i el fus horari en funció de la UTC. Exemple: 2017-03-28T17:28-02:00."
 
@@ -10582,12 +10639,12 @@ msgstr "El segon mode extreu les etiquetes i les converteix a XML. La sortida é
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "La taula de cerca en aquest fitxer TTA sembla estar malmesa.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:863
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:862
 #, no-c-format
 msgid "The segment UID could not be parsed: %1"
 msgstr "L'UID del segment no es pot analitzar: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:873
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:872
 #, no-c-format
 msgid "The segment edition UID must be a positive number if given."
 msgstr "Si s'indica l'UID de l'edició del segment, haurà de ser un nombre positiu."
@@ -10610,7 +10667,7 @@ msgstr "El sisè mode troba els codis de temps de tots els blocs per a una pista
 msgid "The size after which a new destination file is started."
 msgstr "La mida després de la qual es començarà un nou fitxer de destinació."
 
-#: src/merge/mkvmerge.cpp:1727
+#: src/merge/mkvmerge.cpp:1797
 #, boost-format
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "La mida de l'adjunt «%1%» és 0.\n"
@@ -10626,7 +10683,7 @@ msgstr "El fitxer d'origen «%1%» no s'ha pogut obrir correctament, o recuperar
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
 msgstr "L'origen per a la informació dels temps del contenidor pot procedir: del valor indicat a la línia d'ordres amb l'opció «--default-duration», del contenidor d'origen o del flux de bits del vídeo."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:841
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:840
 #, no-c-format
 msgid "The start time could not be parsed: %1"
 msgstr "El temps inicial no es pot analitzar: %1"
@@ -10679,7 +10736,7 @@ msgstr "L'etiqueta o atribut «%1%» a la posició %2% conté dades que estan fo
 msgid "The tag or attribute '%1%' at position %2% contains invalid or mal-formed data."
 msgstr "L'etiqueta o atribut «%1%» a la posició %2% conté dades incorrectes o mal escrites."
 
-#: src/merge/generic_packetizer.cpp:358
+#: src/merge/generic_packetizer.cpp:378
 #, boost-format
 msgid "The tags in '%1%' could not be parsed: some mandatory elements are missing.\n"
 msgstr "Les etiquetes a «%1%» no s'han pogut analitzar: falten alguns elements obligatoris.\n"
@@ -10756,7 +10813,7 @@ msgstr "Els codis de temps es refereixen a tot el flux i no a cada fitxer de des
 msgid "The title for the whole movie."
 msgstr "El títol per a tota la pel·lícula."
 
-#: src/merge/output_control.cpp:1013
+#: src/merge/output_control.cpp:1008
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "La pista %1% del fitxer núm. %2% («%3%») es pot annexar més d'una vegada. L'argument per «--append-to» no és vàlid.\n"
@@ -10766,17 +10823,17 @@ msgstr "La pista %1% del fitxer núm. %2% («%3%») es pot annexar més d'una ve
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "La pista amb l'ID %1% no té un ID de còdec vàlid.\n"
 
-#: src/merge/output_control.cpp:693
+#: src/merge/output_control.cpp:688
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "Les capçaleres de la pista no s'han pogut reproduir correctament. %1%\n"
 
-#: src/merge/output_control.cpp:1045
+#: src/merge/output_control.cpp:1040
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "El número de la pista %1% del fitxer «%2%» probablement no es pot annexar correctament al número de la pista %3% del fitxer «%4%»: %5% Si us plau, assegureu-vos que el fitxer resultant es reprodueix tot el temps de forma correcta. És poc probable que l'autor d'aquest programa proporcioni cap tipus de suport per a les errades de reproducció amb el fitxer resultant.\n"
 
-#: src/merge/output_control.cpp:1057
+#: src/merge/output_control.cpp:1052
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "El número de la pista %1% del fitxer «%2%» no es pot annexar al número de la pista %3% del fitxer «%4%». %5%\n"
@@ -10785,7 +10842,7 @@ msgstr "El número de la pista %1% del fitxer «%2%» no es pot annexar al núme
 msgid "The track number as used in the Block Header."
 msgstr "El número de la pista que s'usa a la capçalera del bloc."
 
-#: src/merge/output_control.cpp:1055
+#: src/merge/output_control.cpp:1050
 msgid "The track parameters do not match."
 msgstr "Els paràmetres de la pista no coincideixen."
 
@@ -10793,13 +10850,13 @@ msgstr "Els paràmetres de la pista no coincideixen."
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
 msgstr "Les propietats de la pista a la pestanya «Entrada» es poden col·locar de tres maneres diferents per tal de satisfer les diferents maneres de treballar."
 
-#: src/merge/mkvmerge.cpp:1993
-#: src/merge/mkvmerge.cpp:2841
+#: src/merge/mkvmerge.cpp:2063
+#: src/merge/mkvmerge.cpp:2946
 #, boost-format
 msgid "The type of file '%1%' could not be recognized.\n"
 msgstr "El tipus de fitxer «%1%» no s'ha pogut reconèixer.\n"
 
-#: src/merge/mkvmerge.cpp:446
+#: src/merge/mkvmerge.cpp:457
 #, boost-format
 msgid "The type of file '%1%' is not supported.\n"
 msgstr "El tipus de fitxer «%1%» no està implementat.\n"
@@ -10862,8 +10919,8 @@ msgstr "Hi ha disponible una nova versió."
 msgid "There is currently a job running."
 msgstr "Actualment hi ha una tasca en execució."
 
-#: src/merge/output_control.cpp:937
-#: src/merge/output_control.cpp:947
+#: src/merge/output_control.cpp:932
+#: src/merge/output_control.cpp:942
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "No és un fitxer amb l'ID «%1%». L'argument per «--append-to» no era vàlid.\n"
@@ -10878,8 +10935,8 @@ msgstr "No hi ha traducció disponible per a «%1%».\n"
 msgid "There was an error querying the update status."
 msgstr "S'ha produït un error en consultar l'estat de l'actualització."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:561
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:563
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:566
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:568
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "S'han produït errors en els valors de la capçalera que impedeixen desar les capçaleres. S'ha seleccionat el primer error."
@@ -11141,12 +11198,12 @@ msgstr "Aquest paràmetre és l'amplada de visualització en píxels."
 msgid "This program is licensed under the GPL v2 (see COPYING)."
 msgstr "Aquest programa està llicenciat sota la GPL v2 de GNU (vegeu COPYING)."
 
-#: src/propedit/change.cpp:320
+#: src/propedit/change.cpp:322
 #, boost-format
 msgid "This property is mandatory and cannot be deleted in '%1%'. %2%\n"
 msgstr "Aquesta propietat és obligatòria i no es pot suprimir a «%1%». %2%\n"
 
-#: src/propedit/change.cpp:285
+#: src/propedit/change.cpp:287
 #, boost-format
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "Aquesta propietat és única. No es poden afegir més instàncies a «%1%». %2%\n"
@@ -11156,7 +11213,7 @@ msgstr "Aquesta propietat és única. No es poden afegir més instàncies a «%1
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "REALMENT això no hauria d'haver succeït. L'espai reservat per al primer element meta de cerca és massa petit. %1%\n"
 
-#: src/merge/output_control.cpp:1621
+#: src/merge/output_control.cpp:1616
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "REALMENT això no hauria d'haver succeït. L'espai reservat per al primer element de meta de cerca és massa petit. Mida necessària: %1%. %2%\n"
@@ -11177,8 +11234,8 @@ msgstr "Aquesta pista conté dades AAC/HE-AAC/AAC+ en SBR."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1532
-#: src/input/r_matroska.cpp:2220
+#: src/input/r_matroska.cpp:1556
+#: src/input/r_matroska.cpp:2244
 msgid "This usually indicates a damaged file structure."
 msgstr "Això normalment significa una estructura de fitxers malmesa."
 
@@ -11201,7 +11258,7 @@ msgstr "Això funciona correctament per a pistes de vídeo i subtítols però no
 msgid "This works with all track types."
 msgstr "Això funciona amb tots els tipus de pista."
 
-#: src/merge/mkvmerge.cpp:1948
+#: src/merge/mkvmerge.cpp:2018
 msgid "This would cause mkvmerge to overwrite one of your source files."
 msgstr "Això farà que el «mkvmerge» sobreescrigui un dels fitxers d'origen."
 
@@ -11270,7 +11327,7 @@ msgstr "Les privades del còdec de la pista %1% són massa petites.\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "La pista %1% ha estat comprimida amb un algorisme de compressió desconegut/no admès (%2%).\n"
 
-#: src/input/r_matroska.cpp:1231
+#: src/input/r_matroska.cpp:1255
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "A la pista %1% li manca el seu element UID de la pista, el qual és necessari segons l'especificació de Matroska. Si el fitxer conté etiquetes, llavors aquestes podrien quedar malmeses.\n"
@@ -11532,20 +11589,25 @@ msgstr "Tipus desconegut de codificació del contingut %1% per a la pista %2%.\n
 msgid "Unknown element"
 msgstr "Element desconegut"
 
-#: src/merge/mkvmerge.cpp:1663
+#: src/merge/mkvmerge.cpp:1733
 #, boost-format
 msgid "Unknown format for the next UID in '%1% %2%'.\n"
 msgstr "Format desconegut per a l'UID següent a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1650
+#: src/merge/mkvmerge.cpp:1720
 #, boost-format
 msgid "Unknown format for the previous UID in '%1% %2%'.\n"
 msgstr "Format desconegut per a l'UID anterior a «%1% %2%».\n"
 
-#: src/merge/mkvmerge.cpp:1675
+#: src/merge/mkvmerge.cpp:1745
 #, boost-format
 msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "Format desconegut per a l'UID del segment «%3%» a «%1% %2%».\n"
+
+#: src/merge/mkvmerge.cpp:897
+#, fuzzy, boost-format
+msgid "Unknown format in '%1% %2%'.\n"
+msgstr "Mode d'anàlisi desconegut a «%1% %2%».\n"
 
 #: src/input/r_vobsub.cpp:613
 #, boost-format
@@ -11601,7 +11663,7 @@ msgstr "mpeg_version de MPEG no admesa: 0x%|1$02x| en el paquet %2% pel codi de 
 msgid "Unsupported file format"
 msgstr "Format de fitxer no implementat"
 
-#: src/input/r_matroska.cpp:2027
+#: src/input/r_matroska.cpp:2051
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipus de pista no admès per aquesta pista.\n"
 
@@ -11655,7 +11717,7 @@ msgstr "Útil p. ex. quan es volen exactament dos fitxers."
 msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
 msgstr "Empra els noms dels capítols de l'idioma especificat per a l'extracció en lloc del primer nom de capítol trobat."
 
-#: src/merge/mkvmerge.cpp:1523
+#: src/merge/mkvmerge.cpp:1593
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
 msgstr "Emprar una longitud de mida NALU de 3 bytes hauria de donar lloc a pistes que no es podran descodificar amb certs còdecs AVC/h.264.\n"
 
@@ -11663,7 +11725,7 @@ msgstr "Emprar una longitud de mida NALU de 3 bytes hauria de donar lloc a piste
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Emprant el demultiplexador pel format «%1%».\n"
 
-#: src/input/r_matroska.cpp:1561
+#: src/input/r_matroska.cpp:1585
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Emprant el mòdul de sortida genèric pel tipus de pista «%1%».\n"
@@ -11698,7 +11760,7 @@ msgstr "Els codis de format vàlids són:"
 msgid "Valid hacks are:\n"
 msgstr "Les modificacions vàlides són:\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:790
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:789
 #, no-c-format
 msgid "Validation failed"
 msgstr "Ha fallat la validació"
@@ -11817,7 +11879,7 @@ msgstr "Amplada del vídeo en píxels"
 msgid "Video projection"
 msgstr "Projecció del vídeo"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:483
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:488
 msgid "Video projection information"
 msgstr "Informació de la projecció del vídeo"
 
@@ -12033,7 +12095,7 @@ msgid "WebM audio/video files"
 msgstr "Fitxers d'àudio/vídeo WebM"
 
 #: src/info/qt_ui.cpp:84
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:711
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:710
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #: src/mkvtoolnix-gui/merge/output.cpp:277
 #, no-c-format
@@ -12199,7 +12261,7 @@ msgstr "Versió errònia del Kate: %1%.%2% > %3%.x"
 msgid "Wrong Theora version: %1%.%2%.%3% != 3.2.x"
 msgstr "Versió errònia de Theora: %1%.%2%.%3% != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2259
+#: src/merge/mkvmerge.cpp:2329
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Argument erroni per «--split-max-files».\n"
 
@@ -12219,7 +12281,7 @@ msgstr "Cadena d'identificació errònia: «%|1$6s|» != «theora»"
 msgid "Wrong identification string: '%|1$7s|' != 'kate\\0\\0\\0'"
 msgstr "Cadena d'identificació erroni: «%|1$7s|» != «kate\\0\\0\\0»"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:669
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:668
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:185
 #: src/mkvtoolnix-gui/merge/output.cpp:475
 #, no-c-format
@@ -12421,7 +12483,7 @@ msgstr "Columna intercalada (primer dreta)"
 msgid "compression"
 msgstr "Compressió"
 
-#: src/merge/generic_packetizer.cpp:1579
+#: src/merge/generic_packetizer.cpp:1677
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: no es troba file_num. %1%\n"
@@ -12559,121 +12621,121 @@ msgstr "durada %1%, data: %2%"
 msgid "line %1%: The 'delay' timestamp could not be parsed.\n"
 msgstr "línia %1%: La marca de temps «retard» no s'ha pogut analitzar.\n"
 
-#: src/input/r_matroska.cpp:419
+#: src/input/r_matroska.cpp:430
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que hi ha %2% bits per mostra, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:410
+#: src/input/r_matroska.cpp:421
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que hi ha %2% canals, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:401
+#: src/input/r_matroska.cpp:412
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que hi ha %2% mostres per segon, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:597
+#: src/input/r_matroska.cpp:608
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que l'alçada és de %2%, però el BITMAPINFOHEADER diu que és de %3%.\n"
 
-#: src/input/r_matroska.cpp:588
+#: src/input/r_matroska.cpp:599
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que l'amplada és de %2%, però el BITMAPINFOHEADER diu que és de %3%.\n"
 
-#: src/input/r_matroska.cpp:1220
+#: src/input/r_matroska.cpp:1244
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: A una pista li manca el seu número de pista.\n"
 
-#: src/input/r_matroska.cpp:1627
+#: src/input/r_matroska.cpp:1651
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: No ha pogut mantenir l'UID de la pista %1% perquè ja està assignat al fitxer nou.\n"
 
-#: src/input/r_matroska.cpp:1471
-#: src/input/r_matroska.cpp:1476
+#: src/input/r_matroska.cpp:1495
+#: src/input/r_matroska.cpp:1500
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: No s'ha trobat cap segment.\n"
 
-#: src/input/r_matroska.cpp:1183
+#: src/input/r_matroska.cpp:1207
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Manca l'alçada en píxels.\n"
 
-#: src/input/r_matroska.cpp:1181
+#: src/input/r_matroska.cpp:1205
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Manca l'amplada en píxels.\n"
 
-#: src/input/r_matroska.cpp:765
+#: src/input/r_matroska.cpp:776
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_reader: L'ID del còdec «%1%» per a la pista «%2%» és desconegut.\n"
 
-#: src/input/r_matroska.cpp:434
-#: src/input/r_matroska.cpp:479
-#: src/input/r_matroska.cpp:500
-#: src/input/r_matroska.cpp:661
-#: src/input/r_matroska.cpp:679
-#: src/input/r_matroska.cpp:700
+#: src/input/r_matroska.cpp:445
+#: src/input/r_matroska.cpp:490
+#: src/input/r_matroska.cpp:511
+#: src/input/r_matroska.cpp:672
+#: src/input/r_matroska.cpp:690
+#: src/input/r_matroska.cpp:711
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però les dades privades del còdec no contenen capçaleres vàlides.\n"
 
-#: src/input/r_matroska.cpp:576
+#: src/input/r_matroska.cpp:587
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no estava present l'estructura BITMAPINFOHEADER. Pel que no tenim un FourCC per identificar el còdec de vídeo emprat.\n"
 
-#: src/input/r_matroska.cpp:379
+#: src/input/r_matroska.cpp:390
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no estava present l'estructura WAVEFORMATEX. Pel que no tenim un FourCC per identificar el còdec d'àudio emprat.\n"
 
-#: src/input/r_matroska.cpp:616
+#: src/input/r_matroska.cpp:627
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no hi havia capçaleres privades del còdec.\n"
 
-#: src/input/r_matroska.cpp:718
+#: src/input/r_matroska.cpp:729
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no s'han trobat dades privades del còdec.\n"
 
-#: src/input/r_matroska.cpp:1280
+#: src/input/r_matroska.cpp:1304
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: Manca l'ID del còdec.\n"
 
-#: src/input/r_matroska.cpp:648
+#: src/input/r_matroska.cpp:659
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_reader: No s'ha establert l'alçada per a la pista %1%.\n"
 
-#: src/input/r_matroska.cpp:642
+#: src/input/r_matroska.cpp:653
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_reader: No s'ha establert l'amplada per a la pista %1%.\n"
 
-#: src/input/r_matroska.cpp:803
+#: src/input/r_matroska.cpp:814
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader: La pista %1% sembla estar bé.\n"
 
-#: src/input/r_matroska.cpp:1238
+#: src/input/r_matroska.cpp:1262
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: No s'ha trobat el tipus de la pista.\n"
 
-#: src/input/r_matroska.cpp:470
+#: src/input/r_matroska.cpp:481
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: El «mkvmerge» no ha estat compilat amb la implementació per a fitxers FLAC. La pista %1% serà ignorada.\n"
 
-#: src/input/r_matroska.cpp:1458
+#: src/input/r_matroska.cpp:1482
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: No s'ha trobat la capçalera EBML.\n"
 
-#: src/input/r_matroska.cpp:798
+#: src/input/r_matroska.cpp:809
 #, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: tipus de demultiplexió desconegut per a la pista %1%: «%2%»\n"
@@ -12697,11 +12759,11 @@ msgstr "memory.cpp/saferealloc() crida des del fitxer %1%, línia %2%: realloc()
 msgid "mesh"
 msgstr "Malla"
 
-#: src/propedit/change.cpp:345
+#: src/propedit/change.cpp:347
 msgid "missing property name"
 msgstr "Manca el nom de la propietat"
 
-#: src/propedit/change.cpp:338
+#: src/propedit/change.cpp:340
 msgid "missing value"
 msgstr "Manca el valor"
 
@@ -13034,7 +13096,7 @@ msgstr "Subtítols"
 msgid "text subtitles"
 msgstr "Subtítols de text"
 
-#: src/merge/mkvmerge.cpp:2730
+#: src/merge/mkvmerge.cpp:2835
 msgid "timecodes"
 msgstr "Codis de temps"
 
@@ -13054,7 +13116,7 @@ msgstr "El camp superior es mostra primer, el camp inferior s'emmagatzema primer
 msgid "top field displayed first, top field stored first"
 msgstr "El camp superior es mostra primer, el camp superior s'emmagatzema primer"
 
-#: src/merge/mkvmerge.cpp:2723
+#: src/merge/mkvmerge.cpp:2828
 msgid "track name"
 msgstr "Nom de la pista"
 
@@ -13075,11 +13137,11 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. %1%\n"
 #: src/info/mkvinfo.cpp:881
 #: src/info/mkvinfo.cpp:1067
 #: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2680
+#: src/input/r_matroska.cpp:2704
 msgid "unknown"
 msgstr "Desconegut"
 
-#: src/input/r_matroska.cpp:2664
+#: src/input/r_matroska.cpp:2688
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "Desconegut, format de l'etiqueta 0x%|1$04x|"
