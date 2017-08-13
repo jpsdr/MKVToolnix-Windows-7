@@ -75,6 +75,9 @@ struct kax_track_t {
   double v_frate;
   char v_fourcc[5];
   bool v_bframes;
+  boost::optional<uint64_t> v_projection_type;
+  memory_cptr v_projection_private;
+  boost::optional<double> v_projection_pose_yaw, v_projection_pose_pitch, v_projection_pose_roll;
 
   // Parameters for audio tracks
   uint64_t a_channels, a_bps, a_formattag;

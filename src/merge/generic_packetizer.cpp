@@ -280,6 +280,26 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   if (-2 != i)
     set_video_min_luminance(m_ti.m_min_luminance_list[i], OPTION_SOURCE_COMMAND_LINE);
 
+  i = LOOKUP_TRACK_ID(m_ti.m_projection_type_list);
+  if (-2 != i)
+    set_video_projection_type(m_ti.m_projection_type_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  i = LOOKUP_TRACK_ID(m_ti.m_projection_private_list);
+  if (-2 != i)
+    set_video_projection_private(m_ti.m_projection_private_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  i = LOOKUP_TRACK_ID(m_ti.m_projection_pose_yaw_list);
+  if (-2 != i)
+    set_video_projection_pose_yaw(m_ti.m_projection_pose_yaw_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  i = LOOKUP_TRACK_ID(m_ti.m_projection_pose_pitch_list);
+  if (-2 != i)
+    set_video_projection_pose_pitch(m_ti.m_projection_pose_pitch_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  i = LOOKUP_TRACK_ID(m_ti.m_projection_pose_roll_list);
+  if (-2 != i)
+    set_video_projection_pose_roll(m_ti.m_projection_pose_roll_list[i], OPTION_SOURCE_COMMAND_LINE);
+
   // Let's see if the user has specified a field order for this track.
   i = LOOKUP_TRACK_ID(m_ti.m_field_order_list);
   if (-2 != i)
@@ -853,6 +873,59 @@ generic_packetizer_c::set_video_min_luminance(float luminance,
 }
 
 void
+generic_packetizer_c::set_video_projection_type(uint64_t value,
+                                                option_source_e source) {
+  m_ti.m_projection_type.set(value, source);
+  if (m_track_entry) {
+    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
+    GetChild<KaxVideoProjectionType>(projection).SetValue(value);
+  }
+}
+
+void
+generic_packetizer_c::set_video_projection_private(memory_cptr const &value,
+                                                   option_source_e source) {
+  m_ti.m_projection_private.set(value, source);
+  if (m_track_entry && value) {
+    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
+    if (value->get_size())
+      GetChild<KaxVideoProjectionPrivate>(projection).CopyBuffer(value->get_buffer(), value->get_size());
+    else
+      DeleteChildren<KaxVideoProjectionPrivate>(projection);
+  }
+}
+
+void
+generic_packetizer_c::set_video_projection_pose_yaw(double value,
+                                                    option_source_e source) {
+  m_ti.m_projection_pose_yaw.set(value, source);
+  if (m_track_entry && (value >= 0)) {
+    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
+    GetChild<KaxVideoProjectionPoseYaw>(projection).SetValue(value);
+  }
+}
+
+void
+generic_packetizer_c::set_video_projection_pose_pitch(double value,
+                                                      option_source_e source) {
+  m_ti.m_projection_pose_pitch.set(value, source);
+  if (m_track_entry && (value >= 0)) {
+    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
+    GetChild<KaxVideoProjectionPosePitch>(projection).SetValue(value);
+  }
+}
+
+void
+generic_packetizer_c::set_video_projection_pose_roll(double value,
+                                                     option_source_e source) {
+  m_ti.m_projection_pose_roll.set(value, source);
+  if (m_track_entry && (value >= 0)) {
+    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
+    GetChild<KaxVideoProjectionPoseRoll>(projection).SetValue(value);
+  }
+}
+
+void
 generic_packetizer_c::set_video_pixel_cropping(const pixel_crop_t &cropping,
                                                option_source_e source) {
   set_video_pixel_cropping(cropping.left, cropping.top, cropping.right, cropping.bottom, source);
@@ -1111,6 +1184,31 @@ generic_packetizer_c::set_headers() {
         auto &colour      = GetChild<KaxVideoColour>(video);
         auto &master_meta = GetChild<KaxVideoColourMasterMeta>(colour);
         GetChild<KaxVideoLuminanceMin>(master_meta).SetValue(luminance);
+      }
+
+      if (m_ti.m_projection_type) {
+        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
+        GetChild<KaxVideoProjectionType>(projection).SetValue(m_ti.m_projection_type.get());
+      }
+
+      if (m_ti.m_projection_private) {
+        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
+        GetChild<KaxVideoProjectionPrivate>(projection).CopyBuffer(m_ti.m_projection_private.get()->get_buffer(), m_ti.m_projection_private.get()->get_size());
+      }
+
+      if (m_ti.m_projection_pose_yaw) {
+        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
+        GetChild<KaxVideoProjectionPoseYaw>(projection).SetValue(m_ti.m_projection_pose_yaw.get());
+      }
+
+      if (m_ti.m_projection_pose_pitch) {
+        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
+        GetChild<KaxVideoProjectionPosePitch>(projection).SetValue(m_ti.m_projection_pose_pitch.get());
+      }
+
+      if (m_ti.m_projection_pose_roll) {
+        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
+        GetChild<KaxVideoProjectionPoseRoll>(projection).SetValue(m_ti.m_projection_pose_roll.get());
       }
 
       if (m_ti.m_field_order)

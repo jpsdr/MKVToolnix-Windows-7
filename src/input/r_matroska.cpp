@@ -168,6 +168,17 @@ kax_track_t::handle_packetizer_colour() {
     ptzr_ptr->set_video_max_luminance(v_max_luminance, OPTION_SOURCE_CONTAINER);
   if (v_min_luminance != -1)
     ptzr_ptr->set_video_min_luminance(v_min_luminance, OPTION_SOURCE_CONTAINER);
+
+  if (v_projection_type)
+    ptzr_ptr->set_video_projection_type(*v_projection_type, OPTION_SOURCE_CONTAINER);
+  if (v_projection_private)
+    ptzr_ptr->set_video_projection_private(v_projection_private, OPTION_SOURCE_CONTAINER);
+  if (v_projection_pose_yaw)
+    ptzr_ptr->set_video_projection_pose_yaw(*v_projection_pose_yaw, OPTION_SOURCE_CONTAINER);
+  if (v_projection_pose_pitch)
+    ptzr_ptr->set_video_projection_pose_pitch(*v_projection_pose_pitch, OPTION_SOURCE_CONTAINER);
+  if (v_projection_pose_roll)
+    ptzr_ptr->set_video_projection_pose_roll(*v_projection_pose_roll, OPTION_SOURCE_CONTAINER);
 }
 
 void
@@ -1165,6 +1176,19 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
       track->v_max_luminance              = FindChildValue<KaxVideoLuminanceMax>(colour_meta, -1.0);
       track->v_min_luminance              = FindChildValue<KaxVideoLuminanceMin>(colour_meta, -1.0);
     }
+  }
+
+  auto projection = FindChild<KaxVideoProjection>(*ktvideo);
+
+  if (projection) {
+    track->v_projection_type       = FindOptionalChildValue<KaxVideoProjectionType>(projection);
+    track->v_projection_pose_yaw   = FindOptionalChildValue<KaxVideoProjectionPoseYaw>(projection);
+    track->v_projection_pose_pitch = FindOptionalChildValue<KaxVideoProjectionPosePitch>(projection);
+    track->v_projection_pose_roll  = FindOptionalChildValue<KaxVideoProjectionPoseRoll>(projection);
+
+    auto kprojection_private = FindChild<KaxVideoProjectionPrivate>(projection);
+    if (kprojection_private)
+      track->v_projection_private = memory_c::clone(kprojection_private->GetBuffer(), kprojection_private->GetSize());
   }
 
   track->v_field_order  = FindChildValue<KaxVideoFieldOrder>(ktvideo, -1);

@@ -341,6 +341,21 @@ public:
   std::map<int64_t, float> m_min_luminance_list; // As given on the command line
   option_with_source_c<float> m_min_luminance; // For this very track
 
+  std::map<int64_t, uint64_t> m_projection_type_list; // As given on the command line
+  option_with_source_c<uint64_t> m_projection_type; // For this very track
+
+  std::map<int64_t, memory_cptr> m_projection_private_list; // As given on the command line
+  option_with_source_c<memory_cptr> m_projection_private; // For this very track
+
+  std::map<int64_t, double> m_projection_pose_yaw_list; // As given on the command line
+  option_with_source_c<double> m_projection_pose_yaw; // For this very track
+
+  std::map<int64_t, double> m_projection_pose_pitch_list; // As given on the command line
+  option_with_source_c<double> m_projection_pose_pitch; // For this very track
+
+  std::map<int64_t, double> m_projection_pose_roll_list; // As given on the command line
+  option_with_source_c<double> m_projection_pose_roll; // For this very track
+
   std::map<int64_t, std::pair<int64_t, bool>> m_default_durations; // As given on the command line
   std::map<int64_t, int> m_max_blockadd_ids; // As given on the command line
 

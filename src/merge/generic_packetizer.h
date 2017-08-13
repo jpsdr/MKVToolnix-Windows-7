@@ -228,6 +228,11 @@ public:
   virtual void set_video_white_colour_coordinates(white_colour_coordinates_t const &coordinates, option_source_e source);
   virtual void set_video_max_luminance(float max, option_source_e source);
   virtual void set_video_min_luminance(float min, option_source_e source);
+  virtual void set_video_projection_type(uint64_t value, option_source_e source);
+  virtual void set_video_projection_private(memory_cptr const &value, option_source_e source);
+  virtual void set_video_projection_pose_yaw(double value, option_source_e source);
+  virtual void set_video_projection_pose_pitch(double value, option_source_e source);
+  virtual void set_video_projection_pose_roll(double value, option_source_e source);
   virtual void set_video_field_order(uint64_t order, option_source_e source);
   virtual void set_video_stereo_mode(stereo_mode_c::mode stereo_mode, option_source_e source);
   virtual void set_video_stereo_mode_impl(EbmlMaster &video, stereo_mode_c::mode stereo_mode);

@@ -308,6 +308,17 @@ set_usage() {
   usage_text += Y("  --min-luminance <TID:float>\n"
                   "                           Mininum luminance in candelas per square meter\n"
                   "                           (cd/m²).\n");
+  usage_text += Y("  --projection-type <TID:method>\n"
+                  "                           Projection method used (0–3).\n");
+  usage_text += Y("  --projection-private <TID:data>\n"
+                  "                           Private data that only applies to a specific\n"
+                  "                           projection (as hex digits).\n");
+  usage_text += Y("  --projection-pose-yaw <TID:float>\n"
+                  "                           A yaw rotation to the projection.\n");
+  usage_text += Y("  --projection-pose-pitch <TID:float>\n"
+                  "                           A pitch rotation to the projection.\n");
+  usage_text += Y("  --projection-pose-roll <TID:float>\n"
+                  "                           A roll rotation to the projection.\n");
   usage_text +=   "\n";
   usage_text += Y(" Options that only apply to text subtitle tracks:\n");
   usage_text += Y("  --sub-charset <TID:charset>\n"
@@ -858,6 +869,41 @@ parse_arg_min_luminance(std::string const &s,
                         track_info_c &ti) {
   if (!parse_property_to_value<float>(s, ti.m_min_luminance_list))
     mxerror(boost::format("Min luminance parameter: not given in the form <TID>:n (argument was '%1%').") % s);
+}
+
+static void
+parse_arg_projection_type(std::string const &s,
+                          track_info_c &ti) {
+  if (!parse_property_to_value<uint64_t>(s, ti.m_projection_type_list))
+    mxerror(boost::format("Parameter %1%: not given in the form <TID>:n (argument was '%2%').\n") % "--projection-type" % s);
+}
+
+static void
+parse_arg_projection_private(std::string const &s,
+                             track_info_c &ti) {
+  auto parts = split(s, ":");
+  strip(parts);
+
+  uint64_t tid;
+
+  if ((parts.size() != 2) || !parse_number(parts[0], tid))
+    mxerror(boost::format("Parameter %1%: not given in the form <TID>:n (argument was '%2%').\n") % "--projection-private" % s);
+
+  try {
+    bitvalue_c value{parts[1]};
+    ti.m_projection_private_list[tid] = memory_c::clone(value.data(), value.byte_size());
+
+  } catch (...) {
+    mxerror(boost::format(Y("Unknown format in '%1% %2%'.\n")) % "--projection-private" % s);
+  }
+}
+
+static void
+parse_arg_projection_pose_xyz(std::string const &s,
+                              std::map<int64_t, double> &list,
+                              std::string const &arg_suffix) {
+  if (!parse_property_to_value<double>(s, list))
+    mxerror(boost::format("Parameter %1%: not given in the form <TID>:n (argument was '%2%').\n") % (boost::format("--projection-pose-%1%") % arg_suffix).str() % s);
 }
 
 /** \brief Parse the \c --stereo-mode argument
@@ -2647,6 +2693,41 @@ parse_args(std::vector<std::string> args) {
         mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
 
       parse_arg_min_luminance(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--projection-type") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_projection_type(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--projection-private") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_projection_private(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--projection-pose-yaw") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_projection_pose_xyz(next_arg, ti->m_projection_pose_yaw_list, "yaw");
+      sit++;
+
+    } else if (this_arg == "--projection-pose-pitch") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_projection_pose_xyz(next_arg, ti->m_projection_pose_pitch_list, "pitch");
+      sit++;
+
+    } else if (this_arg == "--projection-pose-roll") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_projection_pose_xyz(next_arg, ti->m_projection_pose_roll_list, "roll");
       sit++;
 
     } else if (this_arg == "--field-order") {

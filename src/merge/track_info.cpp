@@ -155,6 +155,21 @@ track_info_c::operator =(const track_info_c &src) {
   m_min_luminance_list         = src.m_min_luminance_list;
   m_min_luminance              = src.m_min_luminance;
 
+  m_projection_type_list       = src.m_projection_type_list;
+  m_projection_type            = src.m_projection_type;
+
+  m_projection_private_list    = src.m_projection_private_list;
+  m_projection_private         = src.m_projection_private;
+
+  m_projection_pose_yaw_list   = src.m_projection_pose_yaw_list;
+  m_projection_pose_yaw        = src.m_projection_pose_yaw;
+
+  m_projection_pose_pitch_list = src.m_projection_pose_pitch_list;
+  m_projection_pose_pitch      = src.m_projection_pose_pitch;
+
+  m_projection_pose_roll_list  = src.m_projection_pose_roll_list;
+  m_projection_pose_roll       = src.m_projection_pose_roll;
+
   m_stereo_mode_list           = src.m_stereo_mode_list;
   m_stereo_mode                = src.m_stereo_mode;
 
