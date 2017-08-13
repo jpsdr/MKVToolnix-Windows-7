@@ -59,6 +59,11 @@
   modifications made since saving the first time.
 * mkvinfo: fixed a null pointer dereference if an `EbmlBinary` element's data
   pointer is a null pointer. Fixes #2072.
+* mkvmerge: DTS handling: some source files provide timestamps for audio
+  tracks only once every `n` audio frames. In such situations mkvmerge was
+  buffering too much data resulting in a single gap in the timestamps of one
+  frame duration after frame number `n - 1` (the second audio timestamp read
+  from the source file was used one output frame too early). Fixes #2071.
 
 ## Build system changes
 

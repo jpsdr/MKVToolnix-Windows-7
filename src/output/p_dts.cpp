@@ -19,6 +19,7 @@
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
 #include "output/p_dts.h"
+#include "common/strings/formatting.h"
 
 using namespace libmatroska;
 
@@ -32,6 +33,8 @@ dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
   , m_skipping_is_normal{}
   , m_reduce_to_core{get_option_for_track(m_ti.m_reduce_to_core, m_ti.m_id)}
   , m_timestamp_calculator{static_cast<int64_t>(m_first_header.core_sampling_frequency)}
+  , m_stream_position{}
+  , m_packet_position{}
 {
   set_track_type(track_audio);
 }
@@ -39,11 +42,12 @@ dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
 dts_packetizer_c::~dts_packetizer_c() {
 }
 
-memory_cptr
-dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
-                                 bool flushing) {
+dts_packetizer_c::header_and_packet_t
+dts_packetizer_c::get_dts_packet(bool flushing) {
+  mtx::dts::header_t dtsheader{};
+
   if (0 == m_packet_buffer.get_size())
-    return nullptr;
+    return { dtsheader, nullptr, 0u };
 
   const unsigned char *buf = m_packet_buffer.get_buffer();
   int buf_size             = m_packet_buffer.get_size();
@@ -52,7 +56,7 @@ dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
   if (0 > pos) {
     if (4 < buf_size)
       m_packet_buffer.remove(buf_size - 4);
-    return nullptr;
+    return { dtsheader, nullptr, 0u };
   }
 
   if (0 < pos) {
@@ -64,7 +68,7 @@ dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
   pos = mtx::dts::find_header(buf, buf_size, dtsheader, flushing);
 
   if ((0 > pos) || (static_cast<int>(pos + dtsheader.frame_byte_size) > buf_size))
-    return nullptr;
+    return { dtsheader, nullptr, 0u };
 
   if ((1 < verbose) && (dtsheader != m_previous_header)) {
     mxinfo(Y("DTS header information changed! - New format:\n"));
@@ -87,6 +91,8 @@ dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
   }
 
   auto bytes_to_remove = pos + dtsheader.frame_byte_size;
+  auto packet_position = m_packet_position + pos;
+  m_packet_position   += bytes_to_remove;
 
   if (   m_reduce_to_core
       && dtsheader.has_core
@@ -101,7 +107,7 @@ dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
 
   m_packet_buffer.remove(bytes_to_remove);
 
-  return packet_buf;
+  return { dtsheader, packet_buf, packet_position };
 }
 
 void
@@ -118,7 +124,8 @@ dts_packetizer_c::set_headers() {
 
 int
 dts_packetizer_c::process(packet_cptr packet) {
-  m_timestamp_calculator.add_timestamp(packet);
+  m_timestamp_calculator.add_timestamp(packet, m_stream_position);
+  m_stream_position += packet->data->get_size();
 
   m_packet_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
@@ -130,15 +137,18 @@ dts_packetizer_c::process(packet_cptr packet) {
 
 void
 dts_packetizer_c::queue_available_packets(bool flushing) {
-  mtx::dts::header_t dtsheader;
-  memory_cptr dts_packet;
+  while (true) {
+    auto result = get_dts_packet(flushing);
+    if (!std::get<1>(result))
+      break;
 
-  while ((dts_packet = get_dts_packet(dtsheader, flushing))) {
-    m_queued_packets.emplace_back(std::make_pair(dtsheader, dts_packet));
+    m_queued_packets.push_back(result);
 
-    if (!m_first_header.core_sampling_frequency && dtsheader.core_sampling_frequency) {
-      m_first_header.core_sampling_frequency = dtsheader.core_sampling_frequency;
-      m_timestamp_calculator                  = timestamp_calculator_c{static_cast<int64_t>(m_first_header.core_sampling_frequency)};
+    auto current_sampling_frequency = std::get<0>(result).core_sampling_frequency;
+
+    if (!m_first_header.core_sampling_frequency && current_sampling_frequency) {
+      m_first_header.core_sampling_frequency = current_sampling_frequency;
+      m_timestamp_calculator                 = timestamp_calculator_c{static_cast<int64_t>(current_sampling_frequency)};
 
       set_audio_sampling_freq(m_first_header.get_effective_sampling_frequency());
 
@@ -153,10 +163,13 @@ dts_packetizer_c::process_available_packets() {
     return;
 
   for (auto const &header_and_packet : m_queued_packets) {
-    auto samples_in_packet = header_and_packet.first.get_packet_length_in_core_samples();
-    auto new_timecode      = m_timestamp_calculator.get_next_timestamp(samples_in_packet);
+    auto &header           = std::get<0>(header_and_packet);
+    auto &data             = std::get<1>(header_and_packet);
+    auto packet_position   = std::get<2>(header_and_packet);
+    auto samples_in_packet = header.get_packet_length_in_core_samples();
+    auto new_timecode      = m_timestamp_calculator.get_next_timestamp(samples_in_packet, packet_position);
 
-    add_packet(std::make_shared<packet_t>(header_and_packet.second, new_timecode.to_ns(), header_and_packet.first.get_packet_length_in_nanoseconds().to_ns()));
+    add_packet(std::make_shared<packet_t>(data, new_timecode.to_ns(), header.get_packet_length_in_nanoseconds().to_ns()));
   }
 
   m_queued_packets.clear();

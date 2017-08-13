@@ -24,7 +24,7 @@
 
 class dts_packetizer_c: public generic_packetizer_c {
 private:
-  using header_and_packet_t = std::pair<mtx::dts::header_t, memory_cptr>;
+  using header_and_packet_t = std::tuple<mtx::dts::header_t, memory_cptr, uint64_t>;
 
   byte_buffer_c m_packet_buffer;
 
@@ -32,6 +32,7 @@ private:
   bool m_skipping_is_normal, m_reduce_to_core;
   timestamp_calculator_c m_timestamp_calculator;
   std::deque<header_and_packet_t> m_queued_packets;
+  uint64_t m_stream_position, m_packet_position;
 
 public:
   dts_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, mtx::dts::header_t const &dts_header);
@@ -52,7 +53,7 @@ protected:
   virtual void flush_impl();
 
 private:
-  virtual memory_cptr get_dts_packet(mtx::dts::header_t &dts_header, bool flushing);
+  virtual header_and_packet_t get_dts_packet(bool flushing);
   virtual void queue_available_packets(bool flushing);
   virtual void process_available_packets();
 };
