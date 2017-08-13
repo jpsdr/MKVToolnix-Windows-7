@@ -1805,6 +1805,51 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
+    <varlistentry>
+     <term><option>--projection-type</option> <parameter>TID:method</parameter></term>
+     <listitem>
+      <para>
+       Sets the video projection method used. Valid values are 0 (rectangular projection), 1 (equirectangular projection), 2 (cubemap projection) and 3 (mesh projection).
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><option>--projection-private</option> <parameter>TID:data</parameter></term>
+     <listitem>
+      <para>
+       Sets private data that only applies to a specific projection. Data must be given as hex numbers with or without the &quot;0x&quot; prefix, with or without spaces.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><option>--projection-pose-yaw</option> <parameter>TID:float</parameter></term>
+     <listitem>
+      <para>
+       Specifies a yaw rotation to the projection.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><option>--projection-pose-pitch</option> <parameter>TID:float</parameter></term>
+     <listitem>
+      <para>
+       Specifies a pitch rotation to the projection.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><option>--projection-pose-roll</option> <parameter>TID:float</parameter></term>
+     <listitem>
+      <para>
+       Specifies a roll rotation to the projection.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.field_order">
      <term><option>--field-order</option> <parameter>TID:n</parameter></term>
      <listitem>
