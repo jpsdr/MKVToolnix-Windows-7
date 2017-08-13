@@ -57,6 +57,8 @@
   claiming that the file had been modified externally when the user wanted to
   save the file once more, requiring a reload of the file losing all
   modifications made since saving the first time.
+* mkvinfo: fixed a null pointer dereference if an `EbmlBinary` element's data
+  pointer is a null pointer. Fixes #2072.
 
 ## Build system changes
 

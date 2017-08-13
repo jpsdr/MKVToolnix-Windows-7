@@ -287,6 +287,9 @@ std::string
 to_hex(const unsigned char *buf,
        size_t size,
        bool compact) {
+  if (!buf || !size)
+    return {};
+
   static boost::format s_bf_to_hex("0x%|1$02x|");
   static boost::format s_bf_to_hex_compact("%|1$02x|");
 
