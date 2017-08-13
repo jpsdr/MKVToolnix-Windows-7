@@ -45,9 +45,10 @@ dts_packetizer_c::~dts_packetizer_c() {
 dts_packetizer_c::header_and_packet_t
 dts_packetizer_c::get_dts_packet(bool flushing) {
   mtx::dts::header_t dtsheader{};
+  memory_cptr packet_buf;
 
   if (0 == m_packet_buffer.get_size())
-    return { dtsheader, nullptr, 0u };
+    return std::make_tuple(dtsheader, packet_buf, 0ull);
 
   const unsigned char *buf = m_packet_buffer.get_buffer();
   int buf_size             = m_packet_buffer.get_size();
@@ -56,7 +57,7 @@ dts_packetizer_c::get_dts_packet(bool flushing) {
   if (0 > pos) {
     if (4 < buf_size)
       m_packet_buffer.remove(buf_size - 4);
-    return { dtsheader, nullptr, 0u };
+    return std::make_tuple(dtsheader, packet_buf, 0ull);
   }
 
   if (0 < pos) {
@@ -68,7 +69,7 @@ dts_packetizer_c::get_dts_packet(bool flushing) {
   pos = mtx::dts::find_header(buf, buf_size, dtsheader, flushing);
 
   if ((0 > pos) || (static_cast<int>(pos + dtsheader.frame_byte_size) > buf_size))
-    return { dtsheader, nullptr, 0u };
+    return std::make_tuple(dtsheader, packet_buf, 0ull);
 
   if ((1 < verbose) && (dtsheader != m_previous_header)) {
     mxinfo(Y("DTS header information changed! - New format:\n"));
@@ -103,11 +104,11 @@ dts_packetizer_c::get_dts_packet(bool flushing) {
     dtsheader.has_exss         = false;
   }
 
-  auto packet_buf = memory_c::clone(buf + pos, dtsheader.frame_byte_size);
+  packet_buf = memory_c::clone(buf + pos, dtsheader.frame_byte_size);
 
   m_packet_buffer.remove(bytes_to_remove);
 
-  return { dtsheader, packet_buf, packet_position };
+  return std::make_tuple(dtsheader, packet_buf, packet_position);
 }
 
 void
