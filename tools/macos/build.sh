@@ -271,7 +271,10 @@ function build_dmg {
   ${RAKE} install prefix=${dmgcnt}
   test -f ${dmgmac}/mkvtoolnix-gui
 
-  strip ${dmgcnt}/MacOS/mkv{merge,info,info-gui,extract,propedit,toolnix-gui}
+  for APP in ${dmgcnt}/MacOS/mkv{merge,info,info-gui,extract,propedit,toolnix-gui}; do
+    strip ${APP}
+    if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${APP}
+  done
 
   mv ${dmgmac}/mkvtoolnix/sounds ${dmgmac}/sounds
   rmdir ${dmgmac}/mkvtoolnix
@@ -388,6 +391,9 @@ EOF
   hdiutil create -srcfolder ${dmgbase} -volname ${volumename} \
     -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDZO -imagekey zlib-level=9 \
     ${CMPL}/MKVToolNix-${MTX_VER}
+
+  if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
+
   if [[ ${dmgname} != ${dmgbuildname} ]] mv ${dmgname} ${dmgbuildname}
 
   ln -s ${dmgbuildname} ${latest_link}
