@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-08-13 10:10+0200\n"
-"PO-Revision-Date: 2017-07-18 16:20+0000\n"
+"PO-Revision-Date: 2017-08-14 19:33+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -231,16 +231,16 @@ msgstr ""
 "                           n'est pas spécifié.\n"
 
 #: src/merge/mkvmerge.cpp:269
-#, fuzzy
 msgid ""
 "  --colour-matrix-coefficients <TID:n>\n"
 "                           Sets the matrix coefficients of the video used\n"
 "                           to derive luma and chroma values from red, green\n"
 "                           and blue color primaries.\n"
 msgstr ""
-"  --colour-matrix <TID:n>  Définit les coefficients de la matrice de la vidéo utilisée\n"
-"                           pour dériver les valeurs de luma et chroma à partir des couleurs primaires rouge, vert\n"
-"                           et bleu.\n"
+"  --colour-matrix-coefficients <TID:n>\n"
+"                           Définit les coefficients de matrice de la vidéo utilisés pour\n"
+"                           dériver les valeurs de luma et chroma depuis les couleurs  rouge, vert\n"
+"                           et bleu primaires.\n"
 
 #: src/merge/mkvmerge.cpp:291
 msgid ""
@@ -540,51 +540,46 @@ msgstr ""
 "                           (par défaut : 0.3).\n"
 
 #: src/merge/mkvmerge.cpp:318
-#, fuzzy
 msgid ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           A pitch rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Les couleurs primaires de la vidéo.\n"
+"  --projection-pose-pitch <TID:float>\n"
+"                           Une rotation en tangage de la projection.\n"
 
 #: src/merge/mkvmerge.cpp:320
-#, fuzzy
 msgid ""
 "  --projection-pose-roll <TID:float>\n"
 "                           A roll rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Les couleurs primaires de la vidéo.\n"
+"  --projection-pose-roll <TID:float>\n"
+"                           Une rotation en roulis de la projection.\n"
 
 #: src/merge/mkvmerge.cpp:316
-#, fuzzy
 msgid ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           A yaw rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Les couleurs primaires de la vidéo.\n"
+"  --projection-pose-yaw <TID:float>\n"
+"                           Une rotation en lacet de la projection.\n"
 
 #: src/merge/mkvmerge.cpp:313
-#, fuzzy
 msgid ""
 "  --projection-private <TID:data>\n"
 "                           Private data that only applies to a specific\n"
 "                           projection (as hex digits).\n"
 msgstr ""
-"  --compression <TID:mode>\n"
-"                           Définit le mode de compression utilisé pour la\n"
-"                           piste spécifiée (« aucun » ou « zlib »).\n"
+"  --projection-private <TID:data>\n"
+"                           Données privées s'appliquant seulement à une projection\n"
+"                           spécifique (en nombre hex.).\n"
 
 #: src/merge/mkvmerge.cpp:311
-#, fuzzy
 msgid ""
 "  --projection-type <TID:method>\n"
 "                           Projection method used (0–3).\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Les couleurs primaires de la vidéo.\n"
+"  --projection-type <TID:method>\n"
+"                           Méthode de projection utilisée (0–3).\n"
 
 #: src/merge/mkvmerge.cpp:234
 msgid ""
@@ -1688,7 +1683,7 @@ msgstr "&Seulement inclure les entrées souvent utilisées dans les sélections"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1363
 msgid "&Only use the first source file that contains a video track"
-msgstr ""
+msgstr "&Seulement utiliser le premier fichier source qui contient une piste vidéo"
 
 #: src/info/ui/mainwindow.h:107
 msgid "&Open"
@@ -1704,9 +1699,8 @@ msgid "&Open Matroska or chapter file"
 msgstr "&Ouvrir un fichier ou un chapitre Matroska…"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:570
-#, fuzzy
 msgid "&Open Matroska, WebM or chapter file"
-msgstr "&Ouvrir un fichier ou un chapitre Matroska…"
+msgstr "&Ouvrir un fichier Matroska, WebM ou de chapitres"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:119
 msgid "&Open as new tabs in the header editor"
@@ -3071,7 +3065,7 @@ msgstr "Toujours &basculer vers l'outil « Rapport de tâche » après en avoir 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:561
 #, no-c-format
 msgid "Always ask the user"
-msgstr "Toujours demander"
+msgstr "Toujours demander quoi faire"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1374
 msgid "Always enable copying for all tracks of the following types regardless of their language:"
@@ -3413,11 +3407,11 @@ msgstr "Fichiers de liste de lecture Blu-ray"
 
 #: src/common/property_element.cpp:186
 msgid "Blue X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordonnée de chromaticité X du bleu telle que définie par CIE 1931."
 
 #: src/common/property_element.cpp:187
 msgid "Blue Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordonnée de chromaticité Y du bleu telle que définie par CIE 1931."
 
 #: src/info/mkvinfo.cpp:569
 #, boost-format
@@ -3748,9 +3742,8 @@ msgid "Clearing settings auto&matically:"
 msgstr "Purger les paramètres auto&matiquement :"
 
 #: src/common/property_element.cpp:176
-#, fuzzy
 msgid "Clipping of the color ranges."
-msgstr "  --colour-range <TID:n>   Coupure selon les limites de couleurs.\n"
+msgstr "Écrêtage des plages de couleurs"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1335
 msgid "Close current settings"
@@ -3871,19 +3864,17 @@ msgid "CodecPrivate, length %1%%2%"
 msgstr "Données de codec privées, longueur %1%%2%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:478
-#, fuzzy
 msgid "Colour information"
-msgstr "Informations de couleur vidéo"
+msgstr "Informations sur les couleurs"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:483
-#, fuzzy
 msgid "Colour mastering meta information"
-msgstr "Erreur à l'enregistrement des informations"
+msgstr "Méta informations sur le matriçage des couleurs"
 
 #: src/info/mkvinfo.cpp:598
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour matrix coefficients: %1%"
-msgstr "Informations de couleur vidéo"
+msgstr "Coefficients de la matrice de couleurs : %1%"
 
 #: src/info/mkvinfo.cpp:628
 #, boost-format
@@ -3978,7 +3969,7 @@ msgstr "Copier la pièce jointe"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:636
 msgid "Copy file &title to destination file name"
-msgstr "Copier le &titre du fichier vers le nom du fichier de destination"
+msgstr "Copier le &titre du fichier vers le nom du fichier destination"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:47
 #, no-c-format
@@ -4505,7 +4496,7 @@ msgstr "Dériver les horodatages de &fin depuis les horodatages de début"
 
 #: src/common/property_element.cpp:195
 msgid "Describes the projection used for this video track (0 – 3)."
-msgstr ""
+msgstr "Décrit la projection utilisée pour cette piste vidéo (0 – 3)."
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4523,9 +4514,8 @@ msgid "Description:"
 msgstr "Description :"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1364
-#, fuzzy
 msgid "Destination directory"
-msgstr "Dossier du fichier de destination"
+msgstr "Répertoire de destination"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1765
 msgid "Destination file"
@@ -4533,7 +4523,7 @@ msgstr "Fichier de destination"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1361
 msgid "Destination file name"
-msgstr "Nom du fichier de destination"
+msgstr "Nom du fichier destination"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
 #, no-c-format
@@ -4543,7 +4533,7 @@ msgstr "Dossier du fichier de destination"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
 msgid "Destination file's name"
-msgstr "Nom du fichier de destination"
+msgstr "Nom du fichier destination"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1710
 msgid "Destination file:"
@@ -5600,11 +5590,11 @@ msgstr[1] "Balises globales : %1% entrées"
 
 #: src/common/property_element.cpp:184
 msgid "Green X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordonnée de chromaticité X du vert telle que définie par CIE 1931."
 
 #: src/common/property_element.cpp:185
 msgid "Green Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordonnée de chromaticité Y du vert telle que définie par CIE 1931."
 
 #: src/info/mkvinfo.cpp:563
 #, boost-format
@@ -5724,11 +5714,11 @@ msgstr "Sous-échantillonnage chroma horizontale : %1%"
 
 #: src/common/property_element.cpp:174
 msgid "How chroma is sited horizontally."
-msgstr ""
+msgstr "Comment la chroma est située horizontalement."
 
 #: src/common/property_element.cpp:175
 msgid "How chroma is sited vertically."
-msgstr ""
+msgstr "Comment la chroma est située verticalement."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -5758,9 +5748,9 @@ msgid "If a character set is selected here, it will be used instead of asking th
 msgstr "Si un jeu de caractères est défini ici, il sera utilisé plutôt que de demander à l'utilisateur."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:326
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."
-msgstr "Si un jeu de caractères est sélectionné ici, le programme le définira automatiquement  pour les pistes de sous-titres texte nouvellement ajoutées."
+msgstr "Si un jeu de caractères est sélectionné ici, le programme définira automatiquement l'entrée de jeu de caractères à cette valeur pour les pistes de sous-titres texte nouvellement ajoutées."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:395
 #, no-c-format
@@ -5794,94 +5784,93 @@ msgid "If both shifting and multiplication are enabled then the shift will be pe
 msgstr "Si le décalage et la multiplication sont tout les deux activés, le décalage sera effectué avant la multiplication."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:223
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, additional buttons for moving selected entries up and down will be shown next to several list views."
-msgstr "Si coché, des boutons supplémentaires pour déplacer les entrées sélectionnées vers le haut et vers le bas seront ajoutés à côté de plusieurs listes d'affichage."
+msgstr "Si coché, des boutons supplémentaires pour déplacer les entrées sélectionnées vers le haut/bas seront affichés à côté de plusieurs listes."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:372
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:379
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:386
-#, fuzzy
 msgid "If checked, only the list of often used entries will be included in the selections in the program."
 msgstr "Si coché, seule la liste des entrées souvent utilisées sera incluse dans les sélections du programme."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:210
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, several short animations used throughout the program as visual clues for the user will be disabled."
-msgstr "Si coché, plusieurs petites animations d'aide utilisateur seront désactivées du logiciel."
+msgstr "Si coché, plusieurs animations utilisées comme aides visuelles dans le programme seront désactivées."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:351
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."
-msgstr "Si coché, le programme vérifie que le nom suggéré de fichier destination est bien unique en y ajoutant un nombre (par ex. « (1)») à la fin."
+msgstr "Si coché, le programme s'assurera que le nom de destination suggéré du fichier est unique en ajoutant un chiffre (par ex. « (1) ») en fin de nom."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:217
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, the program will ask for confirmation before aborting a running job."
-msgstr "Si coché, le programme demandera confirmation avant d'abandonner une tâche active."
+msgstr "Si coché, le programme demandera confirmation avant d'abandonner une tâche en cours."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, the program will ask for confirmation before closing or reloading tabs that have been modified."
-msgstr "Si coché, le programme demandera confirmation avant de fermer et recharger les onglets modifiés."
+msgstr "Si coché, le programme demandera confirmation avant de fermer ou recharger des onglets modifiés."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:227
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If disabled, the GUI will let you enter a description for a job when adding it to the queue."
-msgstr "Si désactivé, l'interface permettra la saisie d'une description pour une tâche ajoutée en file d'attente."
+msgstr "Si désactivé, l'interface graphique permettra de saisir une description pour une tâche ajoutée en file d'attente."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."
-msgstr "Si activé, toutes les pistes de sous-titres auront leur signal « Piste par défaut » posé à « Non » lors de leur ajout."
+msgstr "Si activé, toutes les pistes de sous-titres verront leur signal « Piste par défaut » défini à « Non » lors de leur ajout."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:229
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."
-msgstr "Si activé, l'interface basculera automatiquement vers l'outil « Rapport de tâche » si une tâche est lancée (par ex. en pressant « Lancer le multiplexage »)."
+msgstr "Si activé, l'interface graphique basculera automatiquement vers l'outil « Rapport de tâches » dès qu'une tâche est lancée (par ex. en cliquant sur « Lancer le multiplexage »)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:231
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:232
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."
-msgstr "Si activé, l'interface utilisateur retirera les tâches effectuées plus anciennes que le nombre de jours configurés, quelque soit leur état à la fermeture."
+msgstr "Si activé, l'interface graphique retirera les tâches terminées plus âgées que le nombre de jours configuré, quel que soit leur état à la fermeture."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:280
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the destination file name controls will always be visible no matter which tab is currently shown."
-msgstr "Si activé, les contrôles de noms de fichiers destination seront toujours visibles quelque soit l'onglet ouvert."
+msgstr "Si activé, les contrôles de nom de fichier destination seront toujours visible quel que soit l'onglet actuellement affiché."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:228
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the first tab in the \"job output\" tool will not be cleared when a new job starts."
-msgstr "Si activé, le premier onglet de l'outil « Rapport de tâche » ne sera pas effacé au lancement d'une nouvelle tâche."
+msgstr "Si activé, le premier onglet de l'outil « Rapport de tâches » ne sera pas effacé quand une nouvelle tâche démarre."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:245
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie."
-msgstr "Si activé, la dernière entrée sera ignorée au chargement des chapitres d'une telle liste de lecture dans l'éditeur de chapitre, si elle est située à moins de 5 secondes de la fin du film."
+msgstr "Si activé, la dernière entrée sera ignorée quand des chapitres seront chargés de telles listes de lecture dans l'éditeur de chapitres si elle est située dans les 5 secondes de fin du film."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:225
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the program will ask for confirmation before overwriting files and jobs."
-msgstr "Si coché, le programme demandera confirmation avant de remplacer les fichiers et les tâches."
+msgstr "Si activé, le programme demandera confirmation avant d'écraser des fichiers et des tâches."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:206
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the program will check online whether or not a new release of MKVToolNix is available on the home page."
-msgstr "Si coché, le programme fera une recherche en ligne, qu'une nouvelle version de MKVToolNix soit disponible ou non sur le site."
+msgstr "Si activé, le programme vérifiera en ligne si une nouvelle version de MKVToolNix est disponible sur la page d’accueil."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:230
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."
-msgstr "Si activé, les compteurs d'erreurs et d'avertissements de toutes les tâches et les compteurs globaux de la barre d'état seront réinitialisés à 0 à la fermeture du programme."
+msgstr "Si activé, les compteurs d'avertissement et d'erreur de toutes les tâches ainsi que les compteurs globaux de la barre d'état seront réinitialisés à 0 à la fermeture."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:361
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:362
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:363
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
-msgstr "Si activé, les pistes de ce type seront toujours marquées pour être copiées quelque soit leur langue."
+msgstr "Si activé, les pistes de ce type seront toujours définies pour être copiées quelle que soit leur langue."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:171
 msgid "If fewer UIDs are specified than segments are created then random UIDs will be created for them."
@@ -5893,9 +5882,9 @@ msgid "If given then you may use up to nine digits after the decimal point."
 msgstr "Si fournis, il est possible d'utiliser jusqu'à neuf chiffres après le point décimal."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:263
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If it contains the word 'DELAY' followed by a number, this number is automatically put into the 'delay' input field for any audio track found in the file."
-msgstr "S'il contient le mot « DELAY » suivi d'un nombre, ce nombre est automatiquement reporté dans le champ « Décalage » pour chaque piste audio trouvée dans le fichier."
+msgstr "S'il contient le mot « DELAY » suivi d'un chiffre, ce chiffre sera automatiquement placé dans la boîte de saisie « Délai » pour chaque piste audio trouvée dans le fichier."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:502
 #, no-c-format
@@ -5967,34 +5956,33 @@ msgid "If there is no such chapter, the parent chapter's end timestamp will be u
 msgstr "S'il n'y a pas un tel chapitre, l'horodatage de fin du chapitre parent sera utilisé à la place."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."
-msgstr "Si cette option est activée et qu'il n'y a pas de nom de fichier destination actuellement défini, alors le programme en définira un quand un fichier source sera ajouté."
+msgstr "Si cette option est activée et que le nom du fichier destination n'est pas actuellement défini, le programme en définira un quand un fichier source sera ajouté."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:346
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled, only source files containing video tracks will be used for setting the destination file name."
-msgstr "Si cette option est activée, seules ces pistes dont la langue est sélectionnée ci-dessous seront marquées pour être copiées."
+msgstr "Si cette option est activée, seuls les fichiers source qui contiennent des pistes vidéo seront utilisés pour définir le nom de fichier destination."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:358
-#, fuzzy
 msgid "If this option is enabled, only those tracks will be set to be copied whose language is selected below."
-msgstr "Si cette option est activée, seules ces pistes dont la langue est sélectionnée ci-dessous seront marquées pour être copiées."
+msgstr "Si cette option est activée, seules les pistes dont la langue est sélectionnée ci-dessous seront définies pour être copiées."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:353
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."
-msgstr "Si cette option est activée, l'interface effacera toujours le champ de saisie « Nom de fichier destination » quand le dernier fichier source est retiré."
+msgstr "Si cette option est activée, l'interface graphique effacera toujours la boîte de saisie « Nom du fichier destination » quand le dernier fichier source est retiré."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:258
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."
-msgstr "Si cette option est activée, l'interface effacera toujours le champ de saisie « Titre de fichier » lorsque le dernier fichier source est retiré."
+msgstr "Si cette option est activée, l'interface graphique effacera toujours la boîte de saisie « Titre du fichier » quand le dernier fichier source est retiré."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:276
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If tracks are known to be present but not found, the percentage to probe can be changed here."
-msgstr "Si des pistes sont connues pour être présentes mais ne sont pas détectées, le pourcentage à examiner peut être modifié ici."
+msgstr "Si les pistes sont connues pour être présentes mais non trouvées, le pourcentage de sondage peut être modifié ici."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:367
 #, no-c-format
@@ -6880,28 +6868,20 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "Valeur maximale autorisée : %1%, valeur réelle : %2%"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
-msgstr ""
-"  --max-content-light <TID:n>\n"
-"                           Luminosité maximum d'un pixel unique en candelas\n"
-"                           par mètre carré (cd/m²).\n"
+msgstr "Luminosité maximale d'un pixel unique en candelas par mètre carré (cd/m²)."
 
 #: src/common/property_element.cpp:135
 msgid "Maximum cache"
 msgstr "Cache maximal"
 
 #: src/common/property_element.cpp:180
-#, fuzzy
 msgid "Maximum frame-average light level in candelas per square meter (cd/m²)."
-msgstr ""
-"  --max-frame-light <TID:n>\n"
-"                           Luminosité maximale par trame moyenne en candelas\n"
-"                           par mètre carré (cd/m²).\n"
+msgstr "Niveau maximal de lumière d'une trame moyenne en candelas par mètre carré (cd/m²)."
 
 #: src/common/property_element.cpp:190
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
-msgstr ""
+msgstr "Luminance maximale en candelas par mètre carré (cd/m²)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Maximum number of files:"
@@ -6953,7 +6933,7 @@ msgstr "Cache minimal"
 
 #: src/common/property_element.cpp:191
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
-msgstr ""
+msgstr "Luminance minimale en candelas par mètre carré (cd/m²)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1704
@@ -7721,9 +7701,9 @@ msgid "Original value:"
 msgstr "Valeur d'origine :"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:347
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Other files are ignored when they're added."
-msgstr "Les valeurs ne sont stockées que dans l'entête des pistes."
+msgstr "Les autres fichiers sont ignorés quand ils sont ajoutés."
 
 #: src/propedit/propedit_cli_parser.cpp:239
 msgid "Other options"
@@ -7975,7 +7955,7 @@ msgstr "Identifiant unique du segment précédent"
 
 #: src/common/property_element.cpp:196
 msgid "Private data that only applies to a specific projection."
-msgstr ""
+msgstr "Données privées qui s'appliquent seulement à une projection spécifique."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1339
 msgid "Probe &range percentage:"
@@ -8041,29 +8021,29 @@ msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Progression : [%1%%2%] %3%%%"
 
 #: src/info/mkvinfo.cpp:658
-#, fuzzy, boost-format
+#, boost-format
 msgid "Projection type: %1% (%2%)"
-msgstr "Portée : %1% (%2%)"
+msgstr "Type de projection : %1% (%2%)"
 
 #: src/info/mkvinfo.cpp:667
-#, fuzzy, boost-format
+#, boost-format
 msgid "Projection's pitch rotation: %1%"
-msgstr "Écriture de l'application : %1%"
+msgstr "Rotation en tangage de la projection : %1%"
 
 #: src/info/mkvinfo.cpp:661
-#, fuzzy, boost-format
+#, boost-format
 msgid "Projection's private data: %1%"
-msgstr "2 : données de codec privées"
+msgstr "Données privée de la projection : %1%"
 
 #: src/info/mkvinfo.cpp:670
 #, boost-format
 msgid "Projection's roll rotation: %1%"
-msgstr ""
+msgstr "Rotation en roulis de la projection : %1%"
 
 #: src/info/mkvinfo.cpp:664
 #, boost-format
 msgid "Projection's yaw rotation: %1%"
-msgstr ""
+msgstr "Rotation en lacet de la projection : %1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:155
 #: src/mkvtoolnix-gui/merge/track_model.cpp:54
@@ -8282,11 +8262,11 @@ msgstr "Fichiers audio/vidéo RealMedia"
 
 #: src/common/property_element.cpp:182
 msgid "Red X chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordonnée de chromaticité X du rouge telle que définie par CIE 1931."
 
 #: src/common/property_element.cpp:183
 msgid "Red Y chromacity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Coordonnée de chromaticité Y du rouge telle que définie par CIE 1931."
 
 #: src/info/mkvinfo.cpp:557
 #, boost-format
@@ -8564,9 +8544,9 @@ msgid "Save chapters as XML"
 msgstr "Enregistrer les chapitres en XML"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:707
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save chapters to Matroska or WebM file"
-msgstr "Enregistrer les chapitres dans un fichier Matroska"
+msgstr "Enregistrer les chapitres dans le fichier Matroska ou WebM"
 
 #: src/info/qt_ui.cpp:94
 #, no-c-format
@@ -8589,9 +8569,8 @@ msgid "Save settings file as"
 msgstr "Enregistrer le fichier de paramètres sous"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:583
-#, fuzzy
 msgid "Save to &Matroska or WebM file"
-msgstr "Enregistrer dans un fichier &Matroska…"
+msgstr "Enregistrer en fichier &Matroska ou WebM"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:680
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:684
@@ -8848,9 +8827,9 @@ msgid "Set aspect ratio:"
 msgstr "Ratio d'aspect  :"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1394
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Set destination &file name from selected file's name"
-msgstr "Sélectionner tous les &éléments du fichier sélectionné"
+msgstr "Définir le nom du &fichier destination depuis le nom du fichier sélectionné"
 
 #: src/common/property_element.cpp:126
 msgid ""
@@ -8930,16 +8909,12 @@ msgid "Sets the lossless compression algorithm to be used for this track."
 msgstr "Définit l'algorithme de compression sans perte à utiliser pour cette piste."
 
 #: src/common/property_element.cpp:165
-#, fuzzy
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."
-msgstr ""
-"  --colour-matrix <TID:n>  Définit les coefficients de la matrice de la vidéo utilisée\n"
-"                           pour dériver les valeurs de luma et chroma à partir des couleurs primaires rouge, vert\n"
-"                           et bleu.\n"
+msgstr "Définit les coefficients de matrice de la vidéo utilisés pour dériver les valeurs de luma et chroma depuis les couleurs primaires rouge, vert et bleu."
 
 #: src/common/property_element.cpp:167
 msgid "Sets the number of coded bits for a colour channel."
-msgstr ""
+msgstr "Définit le nombre de bits codés pour un canal de couleurs."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:167
 msgid "Sets the segment UIDs to use."
@@ -9164,15 +9139,15 @@ msgstr "Dossier du fichier source"
 
 #: src/common/property_element.cpp:198
 msgid "Specifies a pitch rotation to the projection."
-msgstr ""
+msgstr "Spécifie une rotation en tangage de la projection."
 
 #: src/common/property_element.cpp:199
 msgid "Specifies a roll rotation to the projection."
-msgstr ""
+msgstr "Spécifie une rotation en roulis de la projection."
 
 #: src/common/property_element.cpp:197
 msgid "Specifies a yaw rotation to the projection."
-msgstr ""
+msgstr "Spécifie une rotation en lacet de la projection."
 
 #: src/common/property_element.cpp:139
 msgid ""
@@ -9294,7 +9269,7 @@ msgstr "Arrêter &après que toutes les tâches actives soient terminées"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
 msgid "Store changes in CodecPrivate data in CodecState elements instead of the frames."
-msgstr ""
+msgstr "Stocke les modifications des données de CodecPrivate dans les éléments CodecState au lieu des trames."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1684
 msgid "Stretch by:"
@@ -9601,32 +9576,20 @@ msgid "The XML tag file '%1%' could not be read.\n"
 msgstr "Le fichier XML de balises « %1% » est illisible.\n"
 
 #: src/common/property_element.cpp:170
-#, fuzzy
 msgid "The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. This is additive with chroma-subsample-horizontal."
-msgstr ""
-"  --cb-subsample <TID:hori,vert>\n"
-"                           Le nombre de pixels à retirer du canal Cb\n"
-"                           pour chaque pixel non retiré horizontalement\n"
-"                           et verticalement. Cela vient en addition de\n"
-"                           --chroma-subsample.\n"
+msgstr "Le nombre de pixels à retirer du canal Cb pour chaque pixel non retiré horizontalement. Ceci est additif avec chroma-subsample-horizontal."
 
 #: src/common/property_element.cpp:172
-#, fuzzy
 msgid "The amount of pixels to remove in the Cb channel for every pixel not removed vertically. This is additive with chroma-subsample-vertical."
-msgstr ""
-"  --cb-subsample <TID:hori,vert>\n"
-"                           Le nombre de pixels à retirer du canal Cb\n"
-"                           pour chaque pixel non retiré horizontalement\n"
-"                           et verticalement. Cela vient en addition de\n"
-"                           --chroma-subsample.\n"
+msgstr "Le nombre de pixels à retirer du canal Cb pour chaque pixel non retiré verticalement. Ceci est additif avec chroma-subsample-vertical."
 
 #: src/common/property_element.cpp:168
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."
-msgstr ""
+msgstr "Le nombre de pixels à retirer des canaux Cr et Cb pour chaque pixel non retiré horizontalement."
 
 #: src/common/property_element.cpp:169
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."
-msgstr ""
+msgstr "Le nombre de pixels à retirer des canaux Cr et Cb pour chaque pixel non retiré verticalement."
 
 #: src/merge/mkvmerge.cpp:2196
 #, boost-format
@@ -9734,11 +9697,11 @@ msgstr "Les données privées du codec ne correspondent pas, elles ont la même 
 
 #: src/common/property_element.cpp:178
 msgid "The colour primaries of the video."
-msgstr ""
+msgstr "Les couleurs primaires de la vidéo."
 
 #: src/common/property_element.cpp:177
 msgid "The colour transfer characteristics of the video."
-msgstr ""
+msgstr "Les caractéristiques du transfert de couleurs de la vidéo."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:98
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
@@ -10511,14 +10474,14 @@ msgid "The property value contains non-ASCII characters, but the property is not
 msgstr "La valeur de la propriété contient des caractères non ASCII mais n'est pas une chaîne Unicode dans « %1% ». %2%\n"
 
 #: src/propedit/change.cpp:155
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec in '%1%'. %2%\n"
-msgstr "La valeur de la propriété n'est pas un booléen correct dans « %1% ». %2%\n"
+msgstr "La valeur de propriété n'est pas une spécification binaire valide dans '%1%'. %2%\n"
 
 #: src/propedit/change.cpp:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n"
-msgstr "La valeur de la propriété n'est pas une spécification binaire correcte ou n'a pas une longueur d'exactement 128 bits dans « %1% ». %2%\n"
+msgstr "La valeur de propriété n'est pas une spécification binaire valide ou n'est pas exactement longue de %3% bits dans '%1%'. %2%\n"
 
 #: src/propedit/change.cpp:138
 #, boost-format
@@ -11544,9 +11507,9 @@ msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "Format inconnu pour l'UID de segment « %3% » dans « %1% %2% ».\n"
 
 #: src/merge/mkvmerge.cpp:897
-#, fuzzy, boost-format
+#, boost-format
 msgid "Unknown format in '%1% %2%'.\n"
-msgstr "Mode d'analyse inconnu dans « %1% %2% ».\n"
+msgstr "Format inconnu dans '%1% %2%'.\n"
 
 #: src/input/r_vobsub.cpp:613
 #, boost-format
@@ -11815,14 +11778,12 @@ msgid "Video pixel width"
 msgstr "Largeur vidéo en pixels"
 
 #: src/info/mkvinfo.cpp:647
-#, fuzzy
 msgid "Video projection"
-msgstr "Propriétés vidéo"
+msgstr "Projection vidéo"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:488
-#, fuzzy
 msgid "Video projection information"
-msgstr "Informations de couleur vidéo"
+msgstr "Informations de projection vidéo"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1669
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1689
@@ -11844,116 +11805,106 @@ msgstr "Piste vidéo %1"
 
 #: src/common/property_element.cpp:167
 msgid "Video: bits per colour channel"
-msgstr ""
+msgstr "Vidéo : bits par canal de couleur"
 
 #: src/common/property_element.cpp:174
 #: src/common/property_element.cpp:175
-#, fuzzy
 msgid "Video: chroma siting"
-msgstr "Position de la chroma verticale : %1%"
+msgstr "Vidéo : situation de la chroma"
 
 #: src/common/property_element.cpp:186
-#, fuzzy
 msgid "Video: chromacity blue X"
-msgstr "Recadrage vidéo à gauche"
+msgstr "Vidéo : chromaticité bleu X"
 
 #: src/common/property_element.cpp:187
-#, fuzzy
 msgid "Video: chromacity blue Y"
-msgstr "Recadrage vidéo à gauche"
+msgstr "Vidéo : chromaticité bleu Y"
 
 #: src/common/property_element.cpp:184
 msgid "Video: chromacity green X"
-msgstr ""
+msgstr "Vidéo : chromaticité vert X"
 
 #: src/common/property_element.cpp:185
 msgid "Video: chromacity green Y"
-msgstr ""
+msgstr "Vidéo : chromaticité vert Y"
 
 #: src/common/property_element.cpp:182
 msgid "Video: chromacity red X"
-msgstr ""
+msgstr "Vidéo : chromaticité rouge X"
 
 #: src/common/property_element.cpp:183
 msgid "Video: chromacity red Y"
-msgstr ""
+msgstr "Vidéo : chromaticité rouge Y"
 
 #: src/common/property_element.cpp:165
-#, fuzzy
 msgid "Video: colour matrix coefficients"
-msgstr "Informations de couleur vidéo"
+msgstr "Vidéo : coefficients de la matrice de couleurs"
 
 #: src/common/property_element.cpp:178
-#, fuzzy
 msgid "Video: colour primaries"
-msgstr "Informations de couleur vidéo"
+msgstr "Vidéo : couleurs primaires"
 
 #: src/common/property_element.cpp:176
-#, fuzzy
 msgid "Video: colour range"
-msgstr "Informations de couleur vidéo"
+msgstr "Vidéo : plage de couleurs"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Video: maximum content light"
-msgstr "Luminosité max. : %1%"
+msgstr "Vidéo : lumière maximale par contenu"
 
 #: src/common/property_element.cpp:180
-#, fuzzy
 msgid "Video: maximum frame light"
-msgstr "Luminosité par trame max. : %1%"
+msgstr "Vidéo : lumière maximale par trame"
 
 #: src/common/property_element.cpp:190
 msgid "Video: maximum luminance"
-msgstr ""
+msgstr "Vidéo : luminance maximale"
 
 #: src/common/property_element.cpp:191
 msgid "Video: minimum luminance"
-msgstr ""
+msgstr "Vidéo : luminance minimale"
 
 #: src/common/property_element.cpp:170
 #: src/common/property_element.cpp:172
 msgid "Video: pixels to remove in Cb"
-msgstr ""
+msgstr "Vidéo : pixels à supprimer en Cb"
 
 #: src/common/property_element.cpp:168
 #: src/common/property_element.cpp:169
-#, fuzzy
 msgid "Video: pixels to remove in chroma"
-msgstr "Le nombre de pixels vidéo à retirer à droite de l'image."
+msgstr "Vidéo : pixels à supprimer en chroma"
 
 #: src/common/property_element.cpp:195
-#, fuzzy
 msgid "Video: projection type"
-msgstr "Type de ratio d'aspect vidéo"
+msgstr "Vidéo : type de projection"
 
 #: src/common/property_element.cpp:198
 msgid "Video: projection's pitch rotation"
-msgstr ""
+msgstr "Vidéo : rotation en tangage de la projection"
 
 #: src/common/property_element.cpp:199
 msgid "Video: projection's roll rotation"
-msgstr ""
+msgstr "Vidéo : rotation en roulis de la projection"
 
 #: src/common/property_element.cpp:197
 msgid "Video: projection's yaw rotation"
-msgstr ""
+msgstr "Vidéo : rotation en lacet de la projection"
 
 #: src/common/property_element.cpp:196
 msgid "Video: projection-specific data"
-msgstr ""
+msgstr "Vidéo : données de projection spécifique"
 
 #: src/common/property_element.cpp:177
 msgid "Video: transfer characteristics"
-msgstr ""
+msgstr "Vidéo : caractéristiques du transfert"
 
 #: src/common/property_element.cpp:188
 msgid "Video: white point X"
-msgstr ""
+msgstr "Vidéo : point blanc X"
 
 #: src/common/property_element.cpp:189
 msgid "Video: white point Y"
-msgstr ""
+msgstr "Vidéo : point blanc Y"
 
 #: src/common/file_types.cpp:102
 #: src/output/p_vobbtn.h:36
@@ -12090,9 +12041,8 @@ msgid "When appending: one chapter is created at the start and one whenever a fi
 msgstr "Par concaténation : un chapitre est créé au début et un autre où le fichier est concaténé."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:256
-#, fuzzy
 msgid "When the user adds a file containing such a title, the program will copy the title into the \"file title\" input box if this option is enabled."
-msgstr "Quand l'utilisateur ajoute un fichier contenant un tel titre, le programme le copiera dans le champ de saisie « Titre du fichier » si cette option est activée."
+msgstr "Quand un fichier contenant un tel titre est ajouté, le programme copiera le titre dans la boîte de saisie « Titre du fichier » si cette option est activée."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:310
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:316
@@ -12120,11 +12070,11 @@ msgstr "Quand l'utilisateur ajoute une liste de lecture, le programme peut autom
 
 #: src/common/property_element.cpp:188
 msgid "White colour chromaticity coordinate X as defined by CIE 1931."
-msgstr ""
+msgstr "Coordonnée de chromaticité X du blanc telle que définie par CIE 1931."
 
 #: src/common/property_element.cpp:189
 msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
-msgstr ""
+msgstr "Coordonnée de chromaticité Y du blanc telle que définie par CIE 1931."
 
 #: src/info/mkvinfo.cpp:575
 #, boost-format
@@ -12435,7 +12385,7 @@ msgstr "create_track_number : file_num introuvable. %1%\n"
 
 #: src/info/mkvinfo.cpp:654
 msgid "cubemap"
-msgstr ""
+msgstr "cube"
 
 #: src/info/mkvinfo.cpp:1021
 #, boost-format
@@ -12467,7 +12417,7 @@ msgstr "chiffrage"
 
 #: src/info/mkvinfo.cpp:653
 msgid "equirectangular"
-msgstr ""
+msgstr "équirectangulaire"
 
 #: src/merge/output_control.cpp:411
 #, boost-format
@@ -12701,7 +12651,7 @@ msgstr "memory.cpp/saferealloc() appelé du fichier %1%, ligne %2% :  realloc() 
 
 #: src/info/mkvinfo.cpp:655
 msgid "mesh"
-msgstr ""
+msgstr "grille"
 
 #: src/propedit/change.cpp:347
 msgid "missing property name"
@@ -12997,7 +12947,7 @@ msgstr "real_reader : seules les versions d'entête 3, 4 et 5 sont acceptées. L
 
 #: src/info/mkvinfo.cpp:652
 msgid "rectangular"
-msgstr ""
+msgstr "rectangulaire"
 
 #: src/info/mkvinfo.cpp:810
 msgid "rest: unknown"
