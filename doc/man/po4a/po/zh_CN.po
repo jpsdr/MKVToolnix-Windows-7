@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2017-08-13 10:23+0200\n"
-"PO-Revision-Date: 2017-07-23 17:40+0000\n"
+"PO-Revision-Date: 2017-08-13 11:15+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -36,10 +36,8 @@ msgstr "14.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2017-06-25"
 msgid "2017-07-23"
-msgstr "2017-06-25"
+msgstr "2017-07-23"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -3095,65 +3093,53 @@ msgstr "设置最低亮度，单位为坎德拉每平方米 (cd/m²)。数值应
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1809
-#, fuzzy
-#| msgid "<option>--compression</option> <parameter>TID:n</parameter>"
 msgid "<option>--projection-type</option> <parameter>TID:method</parameter>"
-msgstr "<option>--compression</option> <parameter>TID:n</parameter>"
+msgstr "<option>--projection-type</option> <parameter>TID:方式</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1812
 msgid "Sets the video projection method used. Valid values are 0 (rectangular projection), 1 (equirectangular projection), 2 (cubemap projection) and 3 (mesh projection)."
-msgstr ""
+msgstr "设置要使用的视频投影方式。有效值包括：0 (方形投影), 1 (等距圆柱投影), 2 (立方面投影), 3 (网状投影)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1818
-#, fuzzy
-#| msgid "<option>--reduce-to-core</option> <parameter>TID</parameter>"
 msgid "<option>--projection-private</option> <parameter>TID:data</parameter>"
-msgstr "<option>--reduce-to-core</option> <parameter>轨道ID</parameter>"
+msgstr "<option>--projection-private</option> <parameter>TID:数据</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1821
-#, fuzzy
-#| msgid "Sets the segment UIDs to use. This is a comma-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the &quot;0x&quot; prefix, with or without spaces, exactly 32 digits."
 msgid "Sets private data that only applies to a specific projection. Data must be given as hex numbers with or without the &quot;0x&quot; prefix, with or without spaces."
-msgstr "设定要使用的剪辑 UID。这是个逗号分割的 128 位 UID 列表，UID 为通常的格式: 十六进制数字，&quot;0x&quot; 前缀可选，空格可选，但必须恰好有 32 个数位。"
+msgstr "设置仅用于特定投影方式的私有数据。数据格式为十六进制数字，可以有 &quot;0x&quot; 前缀，可以有空格。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1827
-#, fuzzy
-#| msgid "<option>--reduce-to-core</option> <parameter>TID</parameter>"
 msgid "<option>--projection-pose-yaw</option> <parameter>TID:float</parameter>"
-msgstr "<option>--reduce-to-core</option> <parameter>轨道ID</parameter>"
+msgstr "<option>--projection-pose-yaw</option> <parameter>TID:浮点数</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1830
 msgid "Specifies a yaw rotation to the projection."
-msgstr ""
+msgstr "设置投影的水平平面旋转（yaw，上下轴不动）。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1836
-#, fuzzy
-#| msgid "<option>--min-luminance</option> <parameter>TID:float</parameter>"
 msgid "<option>--projection-pose-pitch</option> <parameter>TID:float</parameter>"
-msgstr "<option>--min-luminance</option> <parameter>TID:浮点数</parameter>"
+msgstr "<option>--projection-pose-pitch</option> <parameter>TID:浮点数</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1839
 msgid "Specifies a pitch rotation to the projection."
-msgstr ""
+msgstr "设置投影的上下旋转（pitch，左右轴不动）。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1845
-#, fuzzy
-#| msgid "<option>--reduce-to-core</option> <parameter>TID</parameter>"
 msgid "<option>--projection-pose-roll</option> <parameter>TID:float</parameter>"
-msgstr "<option>--reduce-to-core</option> <parameter>轨道ID</parameter>"
+msgstr "<option>--projection-pose-roll</option> <parameter>TID:浮点数</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1848
 msgid "Specifies a roll rotation to the projection."
-msgstr ""
+msgstr "设置投影的垂直平面旋转（roll，前后轴不动）。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1854
@@ -3285,10 +3271,8 @@ msgstr "<literal>json</literal> 格式输出机器可读的 JSON 表达式。此
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2000
-#, fuzzy
-#| msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v8.json\"><literal>mkvmerge-identification-output-schema-v8.json</literal></ulink>"
 msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v9.json\"><literal>mkvmerge-identification-output-schema-v9.json</literal></ulink>"
-msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v8.json\"><literal>mkvmerge-identification-output-schema-v8.json</literal></ulink>"
+msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v9.json\"><literal>mkvmerge-identification-output-schema-v9.json</literal></ulink>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2004
