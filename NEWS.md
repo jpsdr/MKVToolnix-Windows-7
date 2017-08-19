@@ -22,25 +22,29 @@
   contains a video track". If enabled, only source files containing video
   tracks will be used for setting the destination file name. Other files that
   are added are ignore. Implements the rest of #2058.
+* MKVToolNix GUI: header editor: added support for editing the video colour
+  attributes. Implements the second half of #2038.
+* MKVToolNix GUI: header editor: added support for the "video projection"
+  track header attributes. Part of the implementation of #2064.
 * MKVToolNix GUI: job queue: selected jobs can now be move up and down by
   pressing the `Ctrl+Up` and `Ctrl+Down` keys. Additionally, push buttons to
   move them up & down are shown if the corresponding option is enabled in the
   preferences. Implements #2060.
-* mkvpropedit: added support for editing the video colour
-  attributes. Implements one half of #2038.
-* MKVToolNix GUI: header editor: added support for editing the video colour
-  attributes. Implements the second half of #2038.
+* mkvmerge: added support for the "video projection" track header
+  attributes. Part of the implementation of #2064.
 * mkvinfo: added support for the "video projection" track header
   attributes. Part of the implementation of #2064.
+* mkvpropedit: added support for editing the video colour
+  attributes. Implements one half of #2038.
 * mkvpropedit: added support for the "video projection" track header
-  attributes. Part of the implementation of #2064.
-* MKVToolNix GUI: header editor: added support for the "video projection"
-  track header attributes. Part of the implementation of #2064.
-* mkvmerge: added support for the "video projection" track header
   attributes. Part of the implementation of #2064.
 
 ## Bug fixes
 
+* all: selecting the program's language (e.g. via the `--ui-language`
+  command-line option or via the GUI's preferences) did not work on Linux &
+  Unix if the `LANGUAGE` environment variable was set and didn't include the
+  desired language. Fixes #2070.
 * MKVToolNix GUI: removed the keyboard shortcuts for switching between the
   different tools (e.g. `Ctrl+Alt+1` for the multiplexer). They overlapped
   with basic functionality on keyboards that use an `AltGr` key, e.g. German
@@ -48,22 +52,18 @@
   `Ctrl+Alt+key` under the hood, this means that `AltGr+7` is really
   `Ctrl+Alt+7` which the GUI now took to mean "switch to the job queue"
   instead of "insert `{`". Fixes #2056.
-* all: selecting the program's language (e.g. via the `--ui-language`
-  command-line option or via the GUI's preferences) did not work on Linux &
-  Unix if the `LANGUAGE` environment variable was set and didn't include the
-  desired language. Fixes #2070.
 * MKVToolNix GUI: header editor: after saving the file the GUI wasn't updating
   its internal file modification timestamp. That lead to the GUI wrongfully
   claiming that the file had been modified externally when the user wanted to
   save the file once more, requiring a reload of the file losing all
   modifications made since saving the first time.
-* mkvinfo: fixed a null pointer dereference if an `EbmlBinary` element's data
-  pointer is a null pointer. Fixes #2072.
 * mkvmerge: DTS handling: some source files provide timestamps for audio
   tracks only once every `n` audio frames. In such situations mkvmerge was
   buffering too much data resulting in a single gap in the timestamps of one
   frame duration after frame number `n - 1` (the second audio timestamp read
   from the source file was used one output frame too early). Fixes #2071.
+* mkvinfo: fixed a null pointer dereference if an `EbmlBinary` element's data
+  pointer is a null pointer. Fixes #2072.
 
 ## Build system changes
 
