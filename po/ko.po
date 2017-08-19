@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-08-13 10:10+0200\n"
-"PO-Revision-Date: 2017-08-13 01:44+0000\n"
+"PO-Revision-Date: 2017-08-13 09:45+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -530,51 +530,46 @@ msgstr ""
 "                           (기본값: 0.3)\n"
 
 #: src/merge/mkvmerge.cpp:318
-#, fuzzy
 msgid ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           A pitch rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           비디오의 원색(기초 색상).\n"
+"  --projection-pose-pitch <TID:float>\n"
+"                           투사에 대한 피치(pitch) 회전.\n"
 
 #: src/merge/mkvmerge.cpp:320
-#, fuzzy
 msgid ""
 "  --projection-pose-roll <TID:float>\n"
 "                           A roll rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           비디오의 원색(기초 색상).\n"
+"  --projection-pose-roll <TID:float>\n"
+"                           투사에 대한 롤(roll) 회전.\n"
 
 #: src/merge/mkvmerge.cpp:316
-#, fuzzy
 msgid ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           A yaw rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           비디오의 원색(기초 색상).\n"
+"  --projection-pose-yaw <TID:float>\n"
+"                           투사에 대한 요(yaw) 회전.\n"
 
 #: src/merge/mkvmerge.cpp:313
-#, fuzzy
 msgid ""
 "  --projection-private <TID:data>\n"
 "                           Private data that only applies to a specific\n"
 "                           projection (as hex digits).\n"
 msgstr ""
-"  --compression <TID:Method>\n"
-"                           트랙에서 사용되는 압축 방법을 지정합니다.\n"
-"                           ('none'또는 'zlib')\n"
+"  --projection-private <TID:data>\n"
+"                           특정한 투사에만 적용되는 전용 데이터\n"
+"                           (16 진수로).\n"
 
 #: src/merge/mkvmerge.cpp:311
-#, fuzzy
 msgid ""
 "  --projection-type <TID:method>\n"
 "                           Projection method used (0–3).\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           비디오의 원색(기초 색상).\n"
+"  --projection-type <TID:method>\n"
+"                           사용된 투사 방법 (0–3).\n"
 
 #: src/merge/mkvmerge.cpp:234
 msgid ""
@@ -10402,14 +10397,14 @@ msgid "The property value contains non-ASCII characters, but the property is not
 msgstr "'%1%'에서 이 속성값은 비 ASCII 문자가 포함되어 있지만, 이 속성은 유니 코드 문자열이 아닙니다. %2%\n"
 
 #: src/propedit/change.cpp:155
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec in '%1%'. %2%\n"
-msgstr "'%1%'에서 이 속성값은 유효한 논리값(boolean)이 아닙니다. %2%\n"
+msgstr "'%1%'에서 이 속성값은 유효한 바이너리 사양이 아닙니다. %2%\n"
 
 #: src/propedit/change.cpp:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n"
-msgstr "'%1%'에서 이 속성값은 유효한 바이너리 사양이 아니거나 정확하게 128bit가 아닙니다. %2%\n"
+msgstr "'%1%'에서 이 속성값은 유효한 바이너리 사양이 아니거나 정확하게 %3% 비트가 아닙니다. %2%\n"
 
 #: src/propedit/change.cpp:138
 #, boost-format
@@ -11434,9 +11429,9 @@ msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 세그먼트 UID '%3%'가 알 수 없는 형식입니다.\n"
 
 #: src/merge/mkvmerge.cpp:897
-#, fuzzy, boost-format
+#, boost-format
 msgid "Unknown format in '%1% %2%'.\n"
-msgstr "'%1% %2%'에서 알 수 없는 분석 모드가 지정되었습니다.\n"
+msgstr "'%1% %2%'의 알 수 없는 형식입니다.\n"
 
 #: src/input/r_vobsub.cpp:613
 #, boost-format
