@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-08-13 10:10+0200\n"
-"PO-Revision-Date: 2017-08-11 21:55+0000\n"
+"PO-Revision-Date: 2017-08-13 14:56+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/ca/)\n"
@@ -584,51 +584,46 @@ msgstr ""
 "                           per a certs tipus de fitxers (per omissió: 0,3).\n"
 
 #: src/merge/mkvmerge.cpp:318
-#, fuzzy
 msgid ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           A pitch rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Els colors primaris del vídeo.\n"
+"  --projection-pose-pitch <TID:float>\n"
+"                           Un gir de la presentació a la projecció.\n"
 
 #: src/merge/mkvmerge.cpp:320
-#, fuzzy
 msgid ""
 "  --projection-pose-roll <TID:float>\n"
 "                           A roll rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Els colors primaris del vídeo.\n"
+"  --projection-pose-roll <TID:float>\n"
+"                           Un gir del rotllo a la projecció.\n"
 
 #: src/merge/mkvmerge.cpp:316
-#, fuzzy
 msgid ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           A yaw rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Els colors primaris del vídeo.\n"
+"  --projection-pose-yaw <TID:float>\n"
+"                           Un gir de l'encaix a la projecció.\n"
 
 #: src/merge/mkvmerge.cpp:313
-#, fuzzy
 msgid ""
 "  --projection-private <TID:data>\n"
 "                           Private data that only applies to a specific\n"
 "                           projection (as hex digits).\n"
 msgstr ""
-"  --compression <TID:mètode>\n"
-"                           Estableix el mètode de compressió emprat per a\n"
-"                           la pista especificada («none» o «zlib»).\n"
+"  --projection-private <TID:dades>\n"
+"                           Les dades privades només s'apliquen a una\n"
+"                           projecció específica (com a dígits hexadecimals).\n"
 
 #: src/merge/mkvmerge.cpp:311
-#, fuzzy
 msgid ""
 "  --projection-type <TID:method>\n"
 "                           Projection method used (0–3).\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Els colors primaris del vídeo.\n"
+"  --projection-type <TID:mètode>\n"
+"                           Mètode de projecció usat (0–3).\n"
 
 #: src/merge/mkvmerge.cpp:234
 msgid ""
@@ -9239,7 +9234,7 @@ msgstr "Especifica un gir del rotllo a la projecció."
 
 #: src/common/property_element.cpp:197
 msgid "Specifies a yaw rotation to the projection."
-msgstr "Especifica un gir de l'encaix a la projecció"
+msgstr "Especifica un gir de l'encaix a la projecció."
 
 #: src/common/property_element.cpp:139
 msgid ""
@@ -11605,9 +11600,9 @@ msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "Format desconegut per a l'UID del segment «%3%» a «%1% %2%».\n"
 
 #: src/merge/mkvmerge.cpp:897
-#, fuzzy, boost-format
+#, boost-format
 msgid "Unknown format in '%1% %2%'.\n"
-msgstr "Mode d'anàlisi desconegut a «%1% %2%».\n"
+msgstr "Format desconegut a «%1% %2%».\n"
 
 #: src/input/r_vobsub.cpp:613
 #, boost-format
@@ -11903,13 +11898,12 @@ msgstr "Pista de vídeo %1"
 
 #: src/common/property_element.cpp:167
 msgid "Video: bits per colour channel"
-msgstr ""
+msgstr "Vídeo: bits per canal de color"
 
 #: src/common/property_element.cpp:174
 #: src/common/property_element.cpp:175
-#, fuzzy
 msgid "Video: chroma siting"
-msgstr "Posició de la crominància vertical: %1%"
+msgstr "Vídeo: posició de la crominància"
 
 #: src/common/property_element.cpp:186
 msgid "Video: chromacity blue X"
@@ -11936,29 +11930,24 @@ msgid "Video: chromacity red Y"
 msgstr "Vídeo: Y crominància del vermell"
 
 #: src/common/property_element.cpp:165
-#, fuzzy
 msgid "Video: colour matrix coefficients"
-msgstr "Informació dels colors del vídeo"
+msgstr "Vídeo: coeficients de la matriu de color"
 
 #: src/common/property_element.cpp:178
-#, fuzzy
 msgid "Video: colour primaries"
-msgstr "Informació dels colors del vídeo"
+msgstr "Vídeo: colors primaris"
 
 #: src/common/property_element.cpp:176
-#, fuzzy
 msgid "Video: colour range"
-msgstr "Informació dels colors del vídeo"
+msgstr "Vídeo: interval del color"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Video: maximum content light"
-msgstr "Contingut màxim de llum: %1%"
+msgstr "Vídeo: màxim de llum al contingut"
 
 #: src/common/property_element.cpp:180
-#, fuzzy
 msgid "Video: maximum frame light"
-msgstr "Marc màxim de llum: %1%"
+msgstr "Vídeo: màxim de llum al fotograma"
 
 #: src/common/property_element.cpp:190
 msgid "Video: maximum luminance"
@@ -11971,13 +11960,12 @@ msgstr "Vídeo: luminància mínima"
 #: src/common/property_element.cpp:170
 #: src/common/property_element.cpp:172
 msgid "Video: pixels to remove in Cb"
-msgstr ""
+msgstr "Vídeo: píxels per eliminar al Cb"
 
 #: src/common/property_element.cpp:168
 #: src/common/property_element.cpp:169
-#, fuzzy
 msgid "Video: pixels to remove in chroma"
-msgstr "El nombre de píxels a suprimir del vídeo a la part dreta de la imatge."
+msgstr "Vídeo: píxels per eliminar a la crominància"
 
 #: src/common/property_element.cpp:195
 msgid "Video: projection type"
