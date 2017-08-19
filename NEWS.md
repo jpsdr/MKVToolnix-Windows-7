@@ -1,4 +1,4 @@
-# Version ?
+# Version 15.0.0 "Duel with the Devil" 2017-08-19
 
 ## Important notes
 
