@@ -884,7 +884,7 @@ parse_arg_projection_private(std::string const &s,
   auto parts = split(s, ":");
   strip(parts);
 
-  uint64_t tid;
+  uint64_t tid{};
 
   if ((parts.size() != 2) || !parse_number(parts[0], tid))
     mxerror(boost::format("Parameter %1%: not given in the form <TID>:n (argument was '%2%').\n") % "--projection-private" % s);
