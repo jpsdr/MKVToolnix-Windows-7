@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-08-13 10:10+0200\n"
-"PO-Revision-Date: 2017-08-13 08:06+0000\n"
+"PO-Revision-Date: 2017-08-16 16:20+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -232,15 +232,15 @@ msgstr ""
 "                           (tam liste için belgelere bakın).\n"
 
 #: src/merge/mkvmerge.cpp:269
-#, fuzzy
 msgid ""
 "  --colour-matrix-coefficients <TID:n>\n"
 "                           Sets the matrix coefficients of the video used\n"
 "                           to derive luma and chroma values from red, green\n"
 "                           and blue color primaries.\n"
 msgstr ""
-"  --colour-matrix <TID:n>  Luma ve chroma değerlerini kırmızı, yeşil ve mavi\n"
-"                           renk önceliklerinden türetmek için kullanılan görüntünün \n"
+"  --colour-matrix-coefficients <TID:n>\n"
+"                           Luma ve chroma değerlerini kırmızı, yeşil ve mavi\n"
+"                           renk önceliklerinden türetmek için kullanılan görüntünün\n"
 "                           matriks katsayılarını ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:291
@@ -394,7 +394,7 @@ msgid ""
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --forced-track <TID[:bool]>\n"
-"                           Bu iz için 'zorlanan' işaretini ayarlar veya\n"
+"                           Bu iz için 'zorlandı' işaretini ayarlar veya\n"
 "                           eğer bool 0 ise bulunmaması için zorlar.\n"
 
 #: src/merge/mkvmerge.cpp:98
@@ -541,51 +541,46 @@ msgstr ""
 "                           (tam liste için belgelere bakın).\n"
 
 #: src/merge/mkvmerge.cpp:318
-#, fuzzy
 msgid ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           A pitch rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Görüntünün renk öncelikleri.\n"
+"  --projection-pose-pitch <TID:float>\n"
+"                           İzdüşüme bir meyil dönüşü.\n"
 
 #: src/merge/mkvmerge.cpp:320
-#, fuzzy
 msgid ""
 "  --projection-pose-roll <TID:float>\n"
 "                           A roll rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Görüntünün renk öncelikleri.\n"
+"  --projection-pose-roll <TID:float>\n"
+"                           İzdüşüme bir yuvarlama dönüşü.\n"
 
 #: src/merge/mkvmerge.cpp:316
-#, fuzzy
 msgid ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           A yaw rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Görüntünün renk öncelikleri.\n"
+"  --projection-pose-yaw <TID:float>\n"
+"                           İzdüşüme bir sapma dönüşü.\n"
 
 #: src/merge/mkvmerge.cpp:313
-#, fuzzy
 msgid ""
 "  --projection-private <TID:data>\n"
 "                           Private data that only applies to a specific\n"
 "                           projection (as hex digits).\n"
 msgstr ""
-"  --compression <TID:yöntem>\n"
-"                           Belirtilmiş iz ('none' veya 'zlib') için kullanılan\n"
-"                           sıkıştırma yöntemini ayarlar.\n"
+"  --projection-private <TID:data>\n"
+"                           Sadece belirli bir izdüşüme uygulanan\n"
+"                           özel veri (onaltılık rakamlar gibi).\n"
 
 #: src/merge/mkvmerge.cpp:311
-#, fuzzy
 msgid ""
 "  --projection-type <TID:method>\n"
 "                           Projection method used (0–3).\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           Görüntünün renk öncelikleri.\n"
+"  --projection-type <TID:method>\n"
+"                           İzdüşümü yöntemi kullanma (0–3).\n"
 
 #: src/merge/mkvmerge.cpp:234
 msgid ""
@@ -1068,7 +1063,7 @@ msgstr " Parça bilgisi işleme:\n"
 #: src/info/mkvinfo.cpp:213
 #, boost-format
 msgid " at %1%"
-msgstr " de %1%"
+msgstr " bulunma yeri %1%"
 
 #: src/info/mkvinfo.cpp:216
 #, fuzzy, boost-format
@@ -4629,7 +4624,7 @@ msgstr "Görüntüleme boyutları: formda verilmez <TID>:<width>x<height>, örn.
 #: src/info/mkvinfo.cpp:701
 #, boost-format
 msgid "Display height: %1%"
-msgstr "Görüntü yükseklik: %1%"
+msgstr "Görüntü yüksekliği: %1%"
 
 #: src/info/mkvinfo.cpp:728
 #, boost-format
@@ -4638,12 +4633,12 @@ msgstr "Görüntü birimi: %1%%2%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1695
 msgid "Display width/height:"
-msgstr "Görüntü genişlik/yükseklik:"
+msgstr "Görüntü genişliği/yüksekliği:"
 
 #: src/info/mkvinfo.cpp:696
 #, boost-format
 msgid "Display width: %1%"
-msgstr "Görüntü genişlik: %1%"
+msgstr "Görüntü genişliği: %1%"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
@@ -5455,7 +5450,7 @@ msgstr "Kullanmak için çevirileri 'kod'a zorla."
 #: src/info/mkvinfo.cpp:1033
 #, boost-format
 msgid "Forced flag: %1%"
-msgstr "Zorlanan işareti: %1%"
+msgstr "Zorlandı işareti: %1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:154
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
@@ -5510,7 +5505,7 @@ msgstr "Kare oranı: %1%"
 #: src/info/mkvinfo.cpp:206
 #, boost-format
 msgid "Frame with size %1%%2%%3%"
-msgstr "%1%%2%%3% boyutlu kare"
+msgstr "Boyutu %1%%2%%3% olan kare"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:398
 #, no-c-format
@@ -5655,12 +5650,12 @@ msgstr "Başlık düzenleyici"
 #: src/common/compression/header_removal.cpp:47
 #, boost-format
 msgid "Header removal compression not possible because the buffer contained %1% bytes which is less than the size of the headers that should be removed, %2%."
-msgstr ""
+msgstr "Üstbilgiyi kaldırma sıkıştırması mümkün değil çünkü arabellek, kaldırılması gereken üstbilgilerin boyutundan az olan %1% baytı kapsamakta, %2%."
 
 #: src/common/compression/header_removal.cpp:61
 #, boost-format
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
-msgstr ""
+msgstr "Üstbilgiyi kaldırma sıkıştırması mümkün değil çünkü arabellek, kaldırılması gereken bayt ile başlamadı. Aranan bayt: %1%; bulunan: %2%."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:551
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:566
@@ -6802,7 +6797,7 @@ msgstr "Arızalanmış satır mı? (%1%)\n"
 #: src/mkvtoolnix-gui/merge/input.cpp:447
 #, no-c-format
 msgid "Mark this track as 'forced'."
-msgstr "Bu izi 'zorlanan' olarak işaretler."
+msgstr "Bu izi 'zorlandı' olarak işaretler."
 
 #: src/common/file_types.cpp:86
 msgid "Matroska"
@@ -9268,7 +9263,7 @@ msgstr "Tüm çalışan işler tamamlandıktan &sonra durdur"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
 msgid "Store changes in CodecPrivate data in CodecState elements instead of the frames."
-msgstr ""
+msgstr "Değişiklikler, kareler yerine CodecState öğeleri içinde CodecPrivate verilerinde saklanır."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1684
 msgid "Stretch by:"
@@ -9501,7 +9496,7 @@ msgstr "Matroska dosyasının son öğesi bilinmeyen bir boyuta ayarlı."
 #: src/merge/mkvmerge.cpp:1589
 #, boost-format
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length %1%'.\n"
-msgstr ""
+msgstr "NALU boyut uzunluğu '--nalu-size-length %1%' olarak 2 ve 4 kapsayarak arasında bir sayı olmak zorundadır.\n"
 
 #: src/input/r_ogm.cpp:1430
 #, boost-format
@@ -10367,7 +10362,7 @@ msgstr "İki ses izinin kanal sayıları farklı: %1% ve %2%"
 #: src/merge/timestamp_factory.cpp:259
 #, boost-format
 msgid "The number of external timecodes %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
-msgstr ""
+msgstr "Harici zaman kodlarının sayısı %1% bu izdeki karelerin sayısından küçük. Bu izin kalan kareleri, olmasını istediğiniz şekilde zaman damgalanmış olmayabilir. Hatta mkvmerge çökebilir.\n"
 
 #: src/common/property_element.cpp:155
 msgid ""
@@ -10467,14 +10462,14 @@ msgid "The property value contains non-ASCII characters, but the property is not
 msgstr "Özellik değeri ASCII olmayan karakterler içeriyor ama özellik, '%1%' içinde Evrensel Kod dizgisi değil. %2%\n"
 
 #: src/propedit/change.cpp:155
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec in '%1%'. %2%\n"
-msgstr "Özellik değeri, '%1%' içinde geçerli bir boolean değil. %2%\n"
+msgstr "Özellik değeri, '%1%' içinde geçerli bir belirli binari değil. %2%\n"
 
 #: src/propedit/change.cpp:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n"
-msgstr "Özellik değeri, '%1%' içinde geçerli bir belirli binari ya da tam olarak 128 bit uzunluğunda değil. %2%\n"
+msgstr "Özellik değeri, '%1%' içinde geçerli bir belirli binari ya da tam olarak %3% bit uzunluğunda değil. %2%\n"
 
 #: src/propedit/change.cpp:138
 #, boost-format
@@ -10856,12 +10851,12 @@ msgstr "Bu AAC izi geçerli başlıkları içermiyor. AAC bilgisi ayrıştırıl
 #: src/output/p_ac3.cpp:65
 #, boost-format
 msgid "This AC-3 track contains %1% bytes of non-AC-3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the non-AC-3 data.\n"
-msgstr ""
+msgstr "Bu AC-3 izi, başlangıçta AC-3 olmayan %1% bayt veri içeriyor. Bu, %2%ms gecikmeye karşılık gelir. Bu gecikme AC-3 olmayan verilerin yerine kullanılacaktır.\n"
 
 #: src/output/p_avc.cpp:102
 #, boost-format
 msgid "This AVC/h.264 contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to %1% for this track (command line parameter '--nalu-size-length %2%:%1%').\n"
-msgstr ""
+msgstr "Bu AVC/h.264, şu anki en fazla NALU boyutu için çok büyük olan kareler içeriyor. mkvmerge'ü yeniden çalıştırmalı ve bu iz için en fazla NALU boyutunu %1% olarak ayarlamalısınız (komut satırı parametresi '--nalu-size-length %2%:%1%').\n"
 
 #: src/output/p_avc.cpp:120
 #, boost-format
@@ -10875,7 +10870,7 @@ msgstr ""
 #: src/output/p_hevc_es.cpp:97
 #, boost-format
 msgid "This HEVC contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to %1% for this track (command line parameter '--nalu-size-length %2%:%1%').\n"
-msgstr ""
+msgstr "Bu HEVC, şu anki en fazla NALU boyutu için çok büyük olan kareler içeriyor. mkvmerge'ü yeniden çalıştırmalı ve bu iz için en fazla NALU boyutunu %1% olarak ayarlamalısınız (komut satırı parametresi '--nalu-size-length %2%:%1%').\n"
 
 #: src/output/p_hevc_es.cpp:115
 #, boost-format
@@ -10885,7 +10880,7 @@ msgstr "Bu HEVC izi bir anahtar kare ile başlamıyor. İlk %1% kare atlandı.\n
 #: src/output/p_mp3.cpp:60
 #, boost-format
 msgid "This MPEG audio track contains %1% bytes of non-MP3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the garbage data.\n"
-msgstr ""
+msgstr "Bu MPEG ses izi, başlangıçta MP3 olmayan %1% bayt veri içeriyor. Bu, %2%ms gecikmeye karşılık gelir. Bu gecikme anlamsız verilerin yerine kullanılacaktır.\n"
 
 #: src/input/r_ogm.cpp:880
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
@@ -11497,9 +11492,9 @@ msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "'%1% %2%' içinde parça UID '%3%' için bilinmeyen biçim.\n"
 
 #: src/merge/mkvmerge.cpp:897
-#, fuzzy, boost-format
+#, boost-format
 msgid "Unknown format in '%1% %2%'.\n"
-msgstr "'%1% %2%' içinde bilinmeyen ayrıştırma kipi.\n"
+msgstr "'%1% %2%' içinde bilinmeyen biçim.\n"
 
 #: src/input/r_vobsub.cpp:613
 #, boost-format
@@ -11629,7 +11624,7 @@ msgstr "'%1%' biçimi için çıktı modülü kullanılıyor.\n"
 #: src/merge/cluster_helper.cpp:740
 #, boost-format
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
-msgstr ""
+msgstr "Bölüm oluşturma için kaynak olarak '%2%' dosyasından ID %1% olan iz kullanılıyor.\n"
 
 #: src/common/file_types.cpp:101
 #: src/output/p_vc1.h:37
