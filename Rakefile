@@ -38,8 +38,7 @@ end
 require_relative "rake.d/extensions"
 require_relative "rake.d/config"
 
-read_config
-
+$config               = read_build_config
 $verbose              = ENV['V'].to_bool
 $build_system_modules = {}
 $have_gtest           = (c(:GTEST_TYPE) == "system") || (c(:GTEST_TYPE) == "internal")
@@ -157,6 +156,8 @@ def setup_globals
     :moc                   => mocflags,
   }
 
+  setup_macos_specifics if $building_for[:macos]
+
   $build_system_modules.values.each { |bsm| bsm[:setup].call if bsm[:setup] }
 end
 
@@ -164,6 +165,14 @@ def setup_overrides
   [ :programs, :manpages ].each do |type|
     value                      = c("AVAILABLE_LANGUAGES_#{type.to_s.upcase}")
     $available_languages[type] = value.split(/\s+/) unless value.empty?
+  end
+end
+
+def setup_macos_specifics
+  $macos_config = read_config_file("tools/macos/config.sh")
+
+  if ENV['MACOSX_DEPLOYMENT_TARGET'].to_s.empty? && !$macos_config[:MACOSX_DEPLOYMENT_TARGET].to_s.empty?
+    ENV['MACOSX_DEPLOYMENT_TARGET'] = $macos_config[:MACOSX_DEPLOYMENT_TARGET]
   end
 end
 

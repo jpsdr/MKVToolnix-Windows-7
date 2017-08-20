@@ -1,11 +1,18 @@
-def read_config
-  fail "build-config not found: please run ./configure" unless File.exists?("build-config")
+def read_config_file file_name
+  result = Hash[ *IO.readlines(file_name).collect { |line| line.chomp.gsub(/#.*/, "") }.select { |line| !line.empty? }.collect do |line|
+                   parts = line.split(/\s*=\s*/, 2).collect { |part| part.gsub(/^\s+/, '').gsub(/\s+$/, '') }
+                   key   = parts[0].gsub(%r{^export\s+}, '').to_sym
+                   value = (parts[1] || '').gsub(%r{^"|"$}, '').gsub(%r{\\"}, '"')
+                   [ key, value ]
+                 end.flatten ]
+  result.default = ''
 
-  $config = Hash[ *IO.readlines("build-config").collect { |line| line.chomp.gsub(/#.*/, "") }.select { |line| !line.empty? }.collect do |line|
-                     parts = line.split(/\s*=\s*/, 2).collect { |part| part.gsub(/^\s+/, '').gsub(/\s+$/, '') }
-                     [ parts[0].to_sym, parts[1] || '' ]
-                   end.flatten ]
-  $config.default = ''
+  result
+end
+
+def read_build_config
+  fail "build-config not found: please run ./configure" unless File.exists?("build-config")
+  read_config_file("build-config")
 end
 
 def c(idx, default = '')
