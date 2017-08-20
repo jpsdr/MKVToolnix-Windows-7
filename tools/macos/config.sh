@@ -15,5 +15,5 @@ export MACOSX_DEPLOYMENT_TARGET="10.9"
 export DRAKETHREADS=${DRAKETHREADS:-4}
 export MAKEFLAGS="-j ${DRAKETHREADS}"
 export SHARED_QT=1
-export QTVER=${QTVER:-5.7.1}
+export QTVER=${QTVER:-5.9.1}
 export SIGNATURE_IDENTITY="Mac Developer: Moritz Bunkus (R3F3XVNCQW)"

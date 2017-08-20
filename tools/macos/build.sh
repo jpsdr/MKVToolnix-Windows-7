@@ -126,9 +126,10 @@ function build_qtbase {
   local -a args
   args=(--prefix=${TARGET} -opensource -confirm-license -release
         -c++std c++14
-        -force-pkg-config -nomake examples -nomake tests
+        -force-pkg-config -pkg-config -nomake examples -nomake tests
         -no-glib -no-dbus  -no-sql-mysql -no-sql-sqlite -no-sql-odbc -no-sql-psql -no-sql-tds
-        -no-openssl -no-cups -no-feature-cups -no-feature-printer
+        -no-openssl -no-cups -no-feature-cups
+        # -no-feature-printer
         -no-feature-printpreviewwidget -no-feature-printdialog -no-feature-printpreviewdialog)
   args+=(-no-framework)
   if [[ -z $SHARED_QT ]] args+=(-static)
@@ -213,6 +214,39 @@ function build_qtmultimedia {
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
 
   CXXFLAGS=$saved_CXXFLAGS
+}
+
+function build_qtsvg {
+  local saved_CXXFLAGS=$CXXFLAGS
+  export CXXFLAGS="${QT_CXXFLAGS}"
+  export QMAKE_CXXFLAGS="${CXXFLAGS}"
+
+  CONFIGURE=qmake NO_MAKE=1 build_package qtsvg-opensource-src-${QTVER}.tar.xz
+  $DEBUG make
+  build_tarball command "make INSTALL_ROOT=TMPDIR install"
+
+  CXXFLAGS=$saved_CXXFLAGS
+}
+
+function build_qtimageformats {
+  local saved_CXXFLAGS=$CXXFLAGS
+  export CXXFLAGS="${QT_CXXFLAGS}"
+  export QMAKE_CXXFLAGS="${CXXFLAGS}"
+
+  CONFIGURE=qmake NO_MAKE=1 build_package qtimageformats-opensource-src-${QTVER}.tar.xz
+  $DEBUG make
+  build_tarball command "make INSTALL_ROOT=TMPDIR install"
+
+  CXXFLAGS=$saved_CXXFLAGS
+}
+
+function build_qt {
+  build_qtbase
+  build_qtmultimedia
+  build_qtsvg
+  build_qtimageformats
+  build_qttools
+  build_qttranslations
 }
 
 function build_configured_mkvtoolnix {
@@ -413,10 +447,7 @@ if [[ -z $@ ]]; then
   build_zlib
   build_gettext
   build_boost
-  build_qtbase
-  build_qtmultimedia
-  build_qttools
-  build_qttranslations
+  build_qt
   build_ruby
   build_configured_mkvtoolnix
 
