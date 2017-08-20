@@ -331,7 +331,7 @@ to /usr/local/bin
 EOF
 
   mkdir -p $dmgcnt/Resources
-  cp ${SRCDIR}/mmg.icns $dmgcnt/Resources/MKVToolNix.icns
+  cp share/icons/macos/MKVToolNix.icns $dmgcnt/Resources/MKVToolNix.icns
 
   for file in ${TARGET}/translations/qtbase_*.qm; do
     lang=${${file%.qm}##*_}
@@ -390,9 +390,6 @@ EOF
 
   macdeployqt $dmgapp -no-plugins -executable=$dmgmac/mkvinfo
 
-  mkdir -p ${dmgcnt}/plugins/platforms
-  # cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
-
   for plugin (audio mediaservice platforms playlistformats) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
 
   for LIB (${dmgmac}/**/*.dylib(.)) echo install_name_tool -id @executable_path/${LIB#${dmgmac}/} ${LIB}
@@ -408,11 +405,15 @@ EOF
     }
   }
 
-  # for FILE (${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui}) {
-  #   if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force --deep --sign ${SIGNATURE_IDENTITY} ${FILE}
-  # }
+  if [[ -n ${SIGNATURE_IDENTITY} ]]; then
+    typeset -a non_executables
+    for FILE (${dmgcnt}/**/*(.)) {
+      if [[ ${FILE} != */MacOS/mkv* ]] non_executables+=(${FILE})
+    }
 
-  # exit 0
+    codesign --force --sign ${SIGNATURE_IDENTITY} ${non_executables}
+    codesign --force --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
+  fi
 
   volumename=MKVToolNix-${MTX_VER}
   if [[ $DMG_PRE == 1 ]]; then
@@ -432,7 +433,7 @@ EOF
     -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDZO -imagekey zlib-level=9 \
     ${CMPL}/MKVToolNix-${MTX_VER}
 
-  # if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
+  if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
 
   if [[ ${dmgname} != ${dmgbuildname} ]] mv ${dmgname} ${dmgbuildname}
 
