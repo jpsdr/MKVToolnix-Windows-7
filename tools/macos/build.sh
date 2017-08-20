@@ -293,7 +293,8 @@ function build_dmg {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
   dmgbase=${CMPL}/dmg-${MTX_VER}
-  dmgcnt=$dmgbase/MKVToolNix-${MTX_VER}.app/Contents
+  dmgapp=$dmgbase/MKVToolNix-${MTX_VER}.app
+  dmgcnt=$dmgapp/Contents
   dmgmac=$dmgcnt/MacOS
   latest_link=${CMPL}/latest
 
@@ -305,10 +306,7 @@ function build_dmg {
   ${RAKE} install prefix=${dmgcnt}
   test -f ${dmgmac}/mkvtoolnix-gui
 
-  for APP in ${dmgcnt}/MacOS/mkv{merge,info,info-gui,extract,propedit,toolnix-gui}; do
-    strip ${APP}
-    if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${APP}
-  done
+  strip ${dmgcnt}/MacOS/mkv{merge,info,info-gui,extract,propedit,toolnix-gui}
 
   mv ${dmgmac}/mkvtoolnix/sounds ${dmgmac}/sounds
   rmdir ${dmgmac}/mkvtoolnix
@@ -390,23 +388,31 @@ EOF
 </plist>
 EOF
 
-  mkdir -p ${dmgcnt}/plugins/platforms ${dmgmac}/libs
-  cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
+  macdeployqt $dmgapp -no-plugins -executable=$dmgmac/mkvinfo
+
+  mkdir -p ${dmgcnt}/plugins/platforms
+  # cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
 
   for plugin (audio mediaservice platforms playlistformats) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
 
   for LIB (${dmgmac}/**/*.dylib(.)) echo install_name_tool -id @executable_path/${LIB#${dmgmac}/} ${LIB}
 
-  for FILE (${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui} ${dmgmac}/**/*.dylib) {
+  for FILE (${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui}) {
     otool -L ${FILE} | \
       grep -v : | \
       grep -v @executable_path | \
       awk '/libQt/ { print $1 }' | { \
       while read LIB ; do
-        install_name_tool -change ${LIB} @executable_path/libs/${LIB:t} ${FILE}
+        install_name_tool -change ${LIB} @executable_path/../Frameworks/${LIB:t} ${FILE}
       done
     }
   }
+
+  # for FILE (${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui}) {
+  #   if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force --deep --sign ${SIGNATURE_IDENTITY} ${FILE}
+  # }
+
+  # exit 0
 
   volumename=MKVToolNix-${MTX_VER}
   if [[ $DMG_PRE == 1 ]]; then
@@ -426,7 +432,7 @@ EOF
     -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDZO -imagekey zlib-level=9 \
     ${CMPL}/MKVToolNix-${MTX_VER}
 
-  if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
+  # if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
 
   if [[ ${dmgname} != ${dmgbuildname} ]] mv ${dmgname} ${dmgbuildname}
 
