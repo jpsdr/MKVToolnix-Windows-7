@@ -155,7 +155,7 @@ function build_qtbase {
 
 function build_qttools {
   local -a tools to_install
-  tools=(lrelease lconvert lupdate)
+  tools=(linguist/lrelease linguist/lconvert linguist/lupdate macdeployqt)
   to_install=()
 
   local package=qttools-opensource-src-${QTVER}
@@ -166,8 +166,8 @@ function build_qttools {
   CONFIGURE=qmake NO_MAKE=1 build_package ${package}.tar.xz
 
   for tool ($tools) {
-    to_install+=($PWD/bin/$tool)
-    pushd src/linguist/$tool
+    to_install+=($PWD/bin/${tool##*/})
+    pushd src/$tool
     qmake
     make
     popd
