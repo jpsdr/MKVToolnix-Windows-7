@@ -417,6 +417,8 @@ EOF
     codesign --force --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
   fi
 
+  if [[ -n $DMG_NO_DMG ]] return
+
   volumename=MKVToolNix-${MTX_VER}
   if [[ $DMG_PRE == 1 ]]; then
     local build_number_file=$HOME/net/home/prog/video/mingw/src/uc/build-number
