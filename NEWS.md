@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: the `doc type version` will be set at least to 2 if certain
+  elements are written (`CodecState`, `CueCodecState`, `FlagInterlaced`).
+
+
 # Version 15.0.0 "Duel with the Devil" 2017-08-19
 
 ## Important notes

@@ -110,8 +110,10 @@ cues_c::write(mm_io_c &out,
     GetChild<KaxCueClusterPosition>(positions).SetValue(point.cluster_position);
 
     auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timecode });
-    if (codec_state_position != m_codec_state_position_map.end())
+    if (codec_state_position != m_codec_state_position_map.end()) {
       GetChild<KaxCueCodecState>(positions).SetValue(codec_state_position->second);
+      set_required_matroska_version(2);
+    }
 
     if (point.relative_position)
       GetChild<KaxCueRelativePosition>(positions).SetValue(point.relative_position);

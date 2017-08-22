@@ -562,8 +562,10 @@ generic_packetizer_c::set_audio_bit_depth(int bit_depth) {
 void
 generic_packetizer_c::set_video_interlaced_flag(bool interlaced) {
   m_hvideo_interlaced_flag = interlaced ? 1 : 0;
-  if (m_track_entry)
+  if (m_track_entry) {
     GetChild<KaxVideoFlagInterlaced>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_interlaced_flag);
+    set_required_matroska_version(2);
+  }
 }
 
 void
@@ -1046,7 +1048,7 @@ generic_packetizer_c::set_headers() {
     KaxTrackVideo &video = GetChild<KaxTrackVideo>(m_track_entry);
 
     if (-1 != m_hvideo_interlaced_flag)
-      GetChild<KaxVideoFlagInterlaced>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_interlaced_flag);
+      set_video_interlaced_flag(m_hvideo_interlaced_flag != 0);
 
     if ((-1 != m_hvideo_pixel_height) && (-1 != m_hvideo_pixel_width)) {
       if ((-1 == m_hvideo_display_width) || (-1 == m_hvideo_display_height) || m_ti.m_aspect_ratio_given || m_ti.m_display_dimensions_given) {

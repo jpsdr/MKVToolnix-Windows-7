@@ -482,6 +482,8 @@ cluster_helper_c::render() {
       KaxCodecState *cstate = new KaxCodecState;
       bgroup.PushElement(*cstate);
       cstate->CopyBuffer(pack->codec_state->get_buffer(), pack->codec_state->get_size());
+
+      set_required_matroska_version(2);
     }
 
     if (-1 == m->first_timecode_in_file)
