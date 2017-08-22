@@ -390,11 +390,10 @@ EOF
 </plist>
 EOF
 
-  macdeployqt $dmgapp -no-plugins -executable=$dmgmac/mkvinfo
+  mkdir -p ${dmgmac}/libs
+  cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
 
   for plugin (audio mediaservice platforms playlistformats) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
-
-  for LIB (${dmgmac}/**/*.dylib(.)) echo install_name_tool -id @executable_path/${LIB#${dmgmac}/} ${LIB}
 
   for FILE (${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui}) {
     otool -L ${FILE} | \
@@ -402,7 +401,7 @@ EOF
       grep -v @executable_path | \
       awk '/libQt/ { print $1 }' | { \
       while read LIB ; do
-        install_name_tool -change ${LIB} @executable_path/../Frameworks/${LIB:t} ${FILE}
+        install_name_tool -change ${LIB} @executable_path/libs/${LIB:t} ${FILE}
       done
     }
   }
