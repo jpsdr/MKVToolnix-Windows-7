@@ -4,6 +4,8 @@
 
 * mkvmerge: the `doc type version` will be set at least to 2 if certain
   elements are written (`CodecState`, `CueCodecState`, `FlagInterlaced`).
+* mkvmerge: the track header attributes `MinCache` and `MaxCache` will not be
+  written anymore. Fixes #2079.
 
 
 # Version 15.0.0 "Duel with the Devil" 2017-08-19

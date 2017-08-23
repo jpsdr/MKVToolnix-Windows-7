@@ -53,7 +53,7 @@ struct kax_track_t {
   char sub_type;                // 't' = text, 'v' = VobSub
   bool passthrough;             // No special packetizer available.
 
-  uint32_t min_cache, max_cache, max_blockadd_id;
+  uint32_t max_blockadd_id;
   bool lacing_flag;
   uint64_t default_duration;
   timestamp_c seek_pre_roll, codec_delay;
@@ -74,7 +74,6 @@ struct kax_track_t {
   stereo_mode_c::mode v_stereo_mode;
   double v_frate;
   char v_fourcc[5];
-  bool v_bframes;
   boost::optional<uint64_t> v_projection_type;
   memory_cptr v_projection_private;
   boost::optional<double> v_projection_pose_yaw, v_projection_pose_pitch, v_projection_pose_roll;
@@ -121,8 +120,6 @@ struct kax_track_t {
     , type(' ')
     , sub_type(' ')
     , passthrough(false)
-    , min_cache(0)
-    , max_cache(0)
     , max_blockadd_id(0)
     , lacing_flag(true)
     , default_duration(0)
@@ -152,7 +149,6 @@ struct kax_track_t {
     , v_field_order{-1}
     , v_stereo_mode(stereo_mode_c::unspecified)
     , v_frate(0.0)
-    , v_bframes(false)
     , a_channels(0)
     , a_bps(0)
     , a_formattag(0)

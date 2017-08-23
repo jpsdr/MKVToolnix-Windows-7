@@ -67,8 +67,6 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_track_entry{}
   , m_hserialno{-1}
   , m_htrack_type{-1}
-  , m_htrack_min_cache{}
-  , m_htrack_max_cache{-1}
   , m_htrack_default_duration{-1}
   , m_htrack_default_duration_indicates_fields{}
   , m_default_duration_forced{true}
@@ -454,20 +452,6 @@ generic_packetizer_c::set_codec_private(memory_cptr const &buffer) {
 
   } else
     m_hcodec_private.reset();
-}
-
-void
-generic_packetizer_c::set_track_min_cache(int min_cache) {
-  m_htrack_min_cache = min_cache;
-  if (m_track_entry)
-    GetChild<KaxTrackMinCache>(m_track_entry).SetValue(min_cache);
-}
-
-void
-generic_packetizer_c::set_track_max_cache(int max_cache) {
-  m_htrack_max_cache = max_cache;
-  if (m_track_entry)
-    GetChild<KaxTrackMaxCache>(m_track_entry).SetValue(max_cache);
 }
 
 void
@@ -1003,12 +987,6 @@ generic_packetizer_c::set_headers() {
     GetChild<KaxCodecPrivate>(*m_track_entry).CopyBuffer(static_cast<binary *>(m_hcodec_private->get_buffer()), m_hcodec_private->get_size());
 
   if (!outputting_webm()) {
-    if (-1 != m_htrack_min_cache)
-      GetChild<KaxTrackMinCache>(m_track_entry).SetValue(m_htrack_min_cache);
-
-    if (-1 != m_htrack_max_cache)
-      GetChild<KaxTrackMaxCache>(m_track_entry).SetValue(m_htrack_max_cache);
-
     if (-1 != m_htrack_max_add_block_ids)
       GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_htrack_max_add_block_ids);
   }
@@ -1347,15 +1325,6 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
     pack->duration = static_cast<int64_t>(pack->duration * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator);
     if (pack->has_discard_padding())
       pack->duration -= std::min(pack->duration, pack->discard_padding.to_ns());
-  }
-
-  if ((2 > m_htrack_min_cache) && pack->has_fref()) {
-    set_track_min_cache(2);
-    rerender_track_headers();
-
-  } else if ((1 > m_htrack_min_cache) && pack->has_bref()) {
-    set_track_min_cache(1);
-    rerender_track_headers();
   }
 
   if (0 > pack->timecode)

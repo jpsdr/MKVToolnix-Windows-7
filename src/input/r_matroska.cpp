@@ -1288,9 +1288,6 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     track->enabled_track    = FindChildValue<KaxTrackFlagEnabled, bool>(ktentry, true);
     track->lacing_flag      = FindChildValue<KaxTrackFlagLacing>(ktentry);
     track->max_blockadd_id  = FindChildValue<KaxMaxBlockAdditionID>(ktentry);
-    track->min_cache        = FindChildValue<KaxTrackMinCache>(ktentry);
-    track->max_cache        = FindChildValue<KaxTrackMaxCache>(ktentry);
-    track->v_bframes        = 1 < track->min_cache;
 
     auto kax_seek_pre_roll  = FindChild<KaxSeekPreRoll>(ktentry);
     auto kax_codec_delay    = FindChild<KaxCodecDelay>(ktentry);
@@ -1596,10 +1593,6 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
 
   if (0.0 < t->v_frate)
     ptzr->set_track_default_duration(1000000000.0 / t->v_frate);
-  if (0 < t->min_cache)
-    ptzr->set_track_min_cache(t->min_cache);
-  if (0 < t->max_cache)
-    ptzr->set_track_max_cache(t->max_cache);
   if (t->seek_pre_roll.valid())
     ptzr->set_track_seek_pre_roll(t->seek_pre_roll);
 

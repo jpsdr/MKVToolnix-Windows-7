@@ -57,7 +57,7 @@ protected:
 
   // Header entries. Can be set via set_XXX and will be 'rendered'
   // by set_headers().
-  int m_hserialno, m_htrack_type, m_htrack_min_cache, m_htrack_max_cache;
+  int m_hserialno, m_htrack_type;
   int64_t m_htrack_default_duration;
   bool m_htrack_default_duration_indicates_fields;
   bool m_default_duration_forced;
@@ -186,8 +186,6 @@ public:
   virtual void set_codec_id(const std::string &id);
   virtual void set_codec_private(memory_cptr const &buffer);
 
-  virtual void set_track_min_cache(int min_cache);
-  virtual void set_track_max_cache(int max_cache);
   virtual void set_track_default_duration(int64_t default_duration, bool force = false);
   virtual void set_track_max_additionals(int max_add_block_ids);
   virtual int64_t get_track_default_duration() const;
