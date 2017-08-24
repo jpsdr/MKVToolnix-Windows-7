@@ -427,7 +427,7 @@ std::vector<iso639_language_t> const g_iso639_languages{
   { "South American Indian (Other)",                                                    "sai", std::string{}, std::string{}  },
   { "Southern Altai",                                                                   "alt", std::string{}, std::string{}  },
   { "Southern Sami",                                                                    "sma", std::string{}, std::string{}  },
-  { "Spanish; Castillan",                                                               "spa", "es",          std::string{}  },
+  { "Spanish; Castilian",                                                               "spa", "es",          std::string{}  },
   { "Sranan Tongo",                                                                     "srn", std::string{}, std::string{}  },
   { "Sukuma",                                                                           "suk", std::string{}, std::string{}  },
   { "Sumerian",                                                                         "sux", std::string{}, std::string{}  },
