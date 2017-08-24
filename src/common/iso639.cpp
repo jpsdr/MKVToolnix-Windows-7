@@ -63,7 +63,7 @@ std::vector<iso639_language_t> const g_iso639_languages{
   { "Bambara",                                                                          "bam", "bm",          std::string{}  },
   { "Bamileke languages",                                                               "bai", std::string{}, std::string{}  },
   { "Banda languages",                                                                  "bad", std::string{}, std::string{}  },
-  { "Bantu (Other)",                                                                    "bnt", std::string{}, std::string{}  },
+  { "Bantu languages",                                                                  "bnt", std::string{}, std::string{}  },
   { "Basa",                                                                             "bas", std::string{}, std::string{}  },
   { "Bashkir",                                                                          "bak", "ba",          std::string{}  },
   { "Basque",                                                                           "baq", "eu",          "eus"          },
@@ -373,7 +373,7 @@ std::vector<iso639_language_t> const g_iso639_languages{
   { "Polish",                                                                           "pol", "pl",          std::string{}  },
   { "Portuguese",                                                                       "por", "pt",          std::string{}  },
   { "Prakrit languages",                                                                "pra", std::string{}, std::string{}  },
-  { "Provençal, Old (to 1500);Occitan, Old (to 1500)",                                  "pro", std::string{}, std::string{}  },
+  { "Provençal, Old (to 1500); Occitan, Old (to 1500)",                                 "pro", std::string{}, std::string{}  },
   { "Pushto; Pashto",                                                                   "pus", "ps",          std::string{}  },
   { "Quechua",                                                                          "que", "qu",          std::string{}  },
   { "Rajasthani",                                                                       "raj", std::string{}, std::string{}  },
@@ -424,11 +424,12 @@ std::vector<iso639_language_t> const g_iso639_languages{
   { "Soninke",                                                                          "snk", std::string{}, std::string{}  },
   { "Sorbian languages",                                                                "wen", std::string{}, std::string{}  },
   { "Sotho, Southern",                                                                  "sot", "st",          std::string{}  },
-  { "South American Indian (Other)",                                                    "sai", std::string{}, std::string{}  },
+  { "South American Indian languages",                                                  "sai", std::string{}, std::string{}  },
   { "Southern Altai",                                                                   "alt", std::string{}, std::string{}  },
   { "Southern Sami",                                                                    "sma", std::string{}, std::string{}  },
   { "Spanish; Castilian",                                                               "spa", "es",          std::string{}  },
   { "Sranan Tongo",                                                                     "srn", std::string{}, std::string{}  },
+  { "Standard Moroccan Tamazight",                                                      "zgh", std::string{}, std::string{}  },
   { "Sukuma",                                                                           "suk", std::string{}, std::string{}  },
   { "Sumerian",                                                                         "sux", std::string{}, std::string{}  },
   { "Sundanese",                                                                        "sun", "su",          std::string{}  },
@@ -486,12 +487,12 @@ std::vector<iso639_language_t> const g_iso639_languages{
   { "Volapük",                                                                          "vol", "vo",          std::string{}  },
   { "Votic",                                                                            "vot", std::string{}, std::string{}  },
   { "Wakashan languages",                                                               "wak", std::string{}, std::string{}  },
-  { "Walamo",                                                                           "wal", std::string{}, std::string{}  },
   { "Walloon",                                                                          "wln", "wa",          std::string{}  },
   { "Waray",                                                                            "war", std::string{}, std::string{}  },
   { "Washo",                                                                            "was", std::string{}, std::string{}  },
   { "Welsh",                                                                            "wel", "cy",          "cym"          },
   { "Western Frisian",                                                                  "fry", "fy",          std::string{}  },
+  { "Wolaitta; Wolaytta",                                                               "wal", std::string{}, std::string{}  },
   { "Wolof",                                                                            "wol", "wo",          std::string{}  },
   { "Xhosa",                                                                            "xho", "xh",          std::string{}  },
   { "Yakut",                                                                            "sah", std::string{}, std::string{}  },
@@ -561,7 +562,7 @@ map_iso639_2_to_iso639_1(std::string const &iso639_2_code) {
 
 bool
 is_popular_language(std::string const &language) {
-  static std::vector<std::string> s_popular_languages = { "Chinese", "Dutch", "English", "Finnish", "French", "German", "Italian", "Japanese", "Norwegian", "Portuguese", "Russian", "Spanish", "Spanish; Castillan", "Swedish" };
+  static std::vector<std::string> s_popular_languages = { "Chinese", "Dutch", "English", "Finnish", "French", "German", "Italian", "Japanese", "Norwegian", "Portuguese", "Russian", "Spanish", "Spanish; Castilian", "Swedish" };
   return brng::find(s_popular_languages, language) != s_popular_languages.end();
 }
 
