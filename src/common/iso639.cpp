@@ -429,6 +429,7 @@ std::vector<iso639_language_t> const g_iso639_languages{
   { "Southern Sami",                                                                    "sma", std::string{}, std::string{}  },
   { "Spanish; Castilian",                                                               "spa", "es",          std::string{}  },
   { "Sranan Tongo",                                                                     "srn", std::string{}, std::string{}  },
+  { "Standard Moroccan Tamazight",                                                      "zgh", std::string{}, std::string{}  },
   { "Sukuma",                                                                           "suk", std::string{}, std::string{}  },
   { "Sumerian",                                                                         "sux", std::string{}, std::string{}  },
   { "Sundanese",                                                                        "sun", "su",          std::string{}  },
