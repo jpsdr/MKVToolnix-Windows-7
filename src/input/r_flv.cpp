@@ -15,11 +15,12 @@
 
 #include "avilib.h"
 #include "common/amf.h"
+#include "common/avc_es_parser.h"
+#include "common/avcc.h"
 #include "common/bit_reader.h"
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"
-#include "common/mpeg4_p10.h"
 #include "common/id_info.h"
 #include "input/r_flv.h"
 #include "merge/input_x.h"

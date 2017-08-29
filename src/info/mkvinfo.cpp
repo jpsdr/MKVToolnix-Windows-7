@@ -54,6 +54,8 @@
 #endif
 
 #include "avilib.h"
+#include "common/avc.h"
+#include "common/avcc.h"
 #include "common/chapters/chapters.h"
 #include "common/checksums/base.h"
 #include "common/codec.h"
@@ -67,7 +69,6 @@
 #include "common/math.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
-#include "common/mpeg4_p10.h"
 #include "common/stereo_mode.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"

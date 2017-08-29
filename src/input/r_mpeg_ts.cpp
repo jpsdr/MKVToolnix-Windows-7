@@ -17,6 +17,7 @@
 #include <iostream>
 
 #include "common/at_scope_exit.h"
+#include "common/avc_es_parser.h"
 #include "common/bswap.h"
 #include "common/checksums/crc.h"
 #include "common/checksums/base_fwd.h"

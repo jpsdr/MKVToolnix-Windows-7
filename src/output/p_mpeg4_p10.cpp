@@ -15,10 +15,10 @@
 
 #include <cmath>
 
+#include "common/avc_es_parser.h"
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"
-#include "common/mpeg4_p10.h"
 #include "common/strings/formatting.h"
 #include "merge/output_control.h"
 #include "output/p_mpeg4_p10.h"
