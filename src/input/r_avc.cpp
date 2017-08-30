@@ -41,7 +41,7 @@ avc_es_reader_c::probe_file(mm_io_c *in,
     int num_read, i;
     bool first = true;
 
-    mtx::avc::avc_es_parser_c parser;
+    mtx::avc::es_parser_c parser;
     parser.ignore_nalu_size_length_errors();
     parser.set_nalu_size_length(4);
 
@@ -82,7 +82,7 @@ avc_es_reader_c::avc_es_reader_c(const track_info_c &ti,
 void
 avc_es_reader_c::read_headers() {
   try {
-    mtx::avc::avc_es_parser_c parser;
+    mtx::avc::es_parser_c parser;
     parser.ignore_nalu_size_length_errors();
 
     int num_read, i;

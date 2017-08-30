@@ -28,7 +28,7 @@
 
 namespace mtx { namespace avc {
 
-avc_es_parser_c::avc_es_parser_c()
+es_parser_c::es_parser_c()
   : m_nalu_size_length(4)
   , m_keep_ar_info(true)
   , m_fix_bitstream_frame_rate(false)
@@ -63,7 +63,7 @@ avc_es_parser_c::avc_es_parser_c()
     init_nalu_names();
 }
 
-avc_es_parser_c::~avc_es_parser_c() {
+es_parser_c::~es_parser_c() {
   mxdebug_if(debugging_c::requested("avc_statistics"),
              boost::format("AVC statistics: #frames: out %1% discarded %2% #timecodes: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7% num_sei_nalus: %8% num_idr_slices: %9%\n")
              % m_stats.num_frames_out   % m_stats.num_frames_discarded % m_stats.num_timecodes_in % m_stats.num_timecodes_generated % m_stats.num_timecodes_discarded
@@ -88,7 +88,7 @@ avc_es_parser_c::~avc_es_parser_c() {
 }
 
 bool
-avc_es_parser_c::headers_parsed()
+es_parser_c::headers_parsed()
   const {
   return m_avcc_ready
       && !m_sps_info_list.empty()
@@ -97,13 +97,13 @@ avc_es_parser_c::headers_parsed()
 }
 
 void
-avc_es_parser_c::discard_actual_frames(bool discard) {
+es_parser_c::discard_actual_frames(bool discard) {
   m_discard_actual_frames = discard;
 }
 
 void
-avc_es_parser_c::add_bytes(unsigned char *buffer,
-                           size_t size) {
+es_parser_c::add_bytes(unsigned char *buffer,
+                       size_t size) {
   memory_slice_cursor_c cursor;
   int marker_size              = 0;
   int previous_marker_size     = 0;
@@ -166,7 +166,7 @@ avc_es_parser_c::add_bytes(unsigned char *buffer,
 }
 
 void
-avc_es_parser_c::flush() {
+es_parser_c::flush() {
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
     int marker_size = get_uint32_be(m_unparsed_buffer->get_buffer()) == NALU_START_CODE ? 4 : 3;
@@ -184,14 +184,14 @@ avc_es_parser_c::flush() {
 }
 
 void
-avc_es_parser_c::add_timecode(int64_t timecode) {
+es_parser_c::add_timecode(int64_t timecode) {
   m_provided_timestamps.emplace_back(timecode, m_stream_position);
   ++m_stats.num_timecodes_in;
 }
 
 bool
-avc_es_parser_c::flush_decision(slice_info_t &si,
-                                slice_info_t &ref) {
+es_parser_c::flush_decision(slice_info_t &si,
+                            slice_info_t &ref) {
 
   if (NALU_TYPE_IDR_SLICE == si.nalu_type) {
     if (0 != si.first_mb_in_slice)
@@ -228,7 +228,7 @@ avc_es_parser_c::flush_decision(slice_info_t &si,
 }
 
 void
-avc_es_parser_c::flush_incomplete_frame() {
+es_parser_c::flush_incomplete_frame() {
   if (!m_have_incomplete_frame || !m_avcc_ready)
     return;
 
@@ -238,7 +238,7 @@ avc_es_parser_c::flush_incomplete_frame() {
 }
 
 void
-avc_es_parser_c::flush_unhandled_nalus() {
+es_parser_c::flush_unhandled_nalus() {
   for (auto const &nalu_with_pos : m_unhandled_nalus)
     handle_nalu(nalu_with_pos.first, nalu_with_pos.second);
 
@@ -246,7 +246,7 @@ avc_es_parser_c::flush_unhandled_nalus() {
 }
 
 void
-avc_es_parser_c::add_sps_and_pps_to_extra_data() {
+es_parser_c::add_sps_and_pps_to_extra_data() {
   mxdebug_if(m_debug_sps_pps_changes, boost::format("mpeg4::p10: adding all SPS & PPS before key frame due to changes from AVCC\n"));
 
   brng::remove_erase_if(m_extra_data, [this](memory_cptr const &nalu) -> bool {
@@ -262,8 +262,8 @@ avc_es_parser_c::add_sps_and_pps_to_extra_data() {
 }
 
 void
-avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
-                                   uint64_t nalu_pos) {
+es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
+                               uint64_t nalu_pos) {
   if (!m_avcc_ready) {
     m_unhandled_nalus.emplace_back(nalu, nalu_pos);
     return;
@@ -348,7 +348,7 @@ avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
 }
 
 void
-avc_es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   sps_info_t sps_info;
 
   auto parsed_nalu = parse_sps(mtx::mpeg::nalu_to_rbsp(nalu), sps_info, m_keep_ar_info, m_fix_bitstream_frame_rate, duration_for(0, true));
@@ -404,7 +404,7 @@ avc_es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
 }
 
 void
-avc_es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
   pps_info_t pps_info;
 
   if (!parse_pps(mtx::mpeg::nalu_to_rbsp(nalu), pps_info))
@@ -436,7 +436,7 @@ avc_es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
 }
 
 void
-avc_es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
   try {
     ++m_stats.num_sei_nalus;
 
@@ -471,8 +471,8 @@ avc_es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
 }
 
 void
-avc_es_parser_c::handle_nalu(memory_cptr const &nalu,
-                             uint64_t nalu_pos) {
+es_parser_c::handle_nalu(memory_cptr const &nalu,
+                         uint64_t nalu_pos) {
   if (1 > nalu->get_size())
     return;
 
@@ -529,8 +529,8 @@ avc_es_parser_c::handle_nalu(memory_cptr const &nalu,
 }
 
 bool
-avc_es_parser_c::parse_slice(memory_cptr const &buffer,
-                             slice_info_t &si) {
+es_parser_c::parse_slice(memory_cptr const &buffer,
+                         slice_info_t &si) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
 
@@ -607,8 +607,8 @@ avc_es_parser_c::parse_slice(memory_cptr const &buffer,
 }
 
 int64_t
-avc_es_parser_c::duration_for(unsigned int sps,
-                              bool field_pic_flag)
+es_parser_c::duration_for(unsigned int sps,
+                          bool field_pic_flag)
   const {
   int64_t duration = -1 != m_forced_default_duration                                            ? m_forced_default_duration
                    : (m_sps_info_list.size() > sps) && m_sps_info_list[sps].timing_info_valid() ? m_sps_info_list[sps].timing_info.default_duration()
@@ -619,7 +619,7 @@ avc_es_parser_c::duration_for(unsigned int sps,
 }
 
 int64_t
-avc_es_parser_c::get_most_often_used_duration()
+es_parser_c::get_most_often_used_duration()
   const {
   int64_t const s_common_default_durations[] = {
     1000000000ll / 50,
@@ -661,7 +661,7 @@ avc_es_parser_c::get_most_often_used_duration()
 }
 
 void
-avc_es_parser_c::calculate_frame_order() {
+es_parser_c::calculate_frame_order() {
   auto frames_begin           = m_frames.begin();
   auto frames_end             = m_frames.end();
   auto frame_itr              = frames_begin;
@@ -720,7 +720,7 @@ avc_es_parser_c::calculate_frame_order() {
 }
 
 std::vector<int64_t>
-avc_es_parser_c::calculate_provided_timestamps_to_use() {
+es_parser_c::calculate_provided_timestamps_to_use() {
   auto frame_idx                     = 0u;
   auto provided_timestamps_idx       = 0u;
   auto const num_frames              = m_frames.size();
@@ -772,12 +772,12 @@ avc_es_parser_c::calculate_provided_timestamps_to_use() {
 }
 
 void
-avc_es_parser_c::calculate_frame_timestamps() {
+es_parser_c::calculate_frame_timestamps() {
   static auto s_debug_force_simple_picture_order = debugging_option_c{"avc_parser_force_simple_picture_order"};
   auto provided_timestamps_to_use                = calculate_provided_timestamps_to_use();
 
   if (!m_simple_picture_order && !s_debug_force_simple_picture_order)
-    brng::sort(m_frames, [](const avc_frame_t &f1, const avc_frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
+    brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
 
   auto frames_begin            = m_frames.begin();
   auto frames_end              = m_frames.end();
@@ -807,17 +807,17 @@ avc_es_parser_c::calculate_frame_timestamps() {
   m_max_timecode = m_frames.back().m_end;
 
   mxdebug_if(m_debug_timecodes, boost::format("CLEANUP frames <pres_ord dec_ord has_prov_tc tc dur>: %1%\n")
-             % boost::accumulate(m_frames, std::string(""), [](std::string const &accu, avc_frame_t const &frame) {
+             % boost::accumulate(m_frames, std::string(""), [](std::string const &accu, frame_t const &frame) {
                  return accu + (boost::format(" <%1% %2% %3% %4% %5%>") % frame.m_presentation_order % frame.m_decode_order % frame.m_has_provided_timecode % frame.m_start % (frame.m_end - frame.m_start)).str();
                }));
 
 
   if (!m_simple_picture_order)
-    brng::sort(m_frames, [](const avc_frame_t &f1, const avc_frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
+    brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
 }
 
 void
-avc_es_parser_c::calculate_frame_references_and_update_stats() {
+es_parser_c::calculate_frame_references_and_update_stats() {
   auto first_frame = true;
 
   for (auto &frame : m_frames) {
@@ -837,7 +837,7 @@ avc_es_parser_c::calculate_frame_references_and_update_stats() {
 }
 
 void
-avc_es_parser_c::cleanup() {
+es_parser_c::cleanup() {
   auto num_frames = m_frames.size();
   if (!num_frames)
     return;
@@ -872,8 +872,8 @@ avc_es_parser_c::cleanup() {
 }
 
 memory_cptr
-avc_es_parser_c::create_nalu_with_size(const memory_cptr &src,
-                                       bool add_extra_data) {
+es_parser_c::create_nalu_with_size(const memory_cptr &src,
+                                   bool add_extra_data) {
   auto nalu = mtx::mpeg::create_nalu_with_size(src, m_nalu_size_length, add_extra_data ? m_extra_data : std::vector<memory_cptr>{} );
 
   if (add_extra_data)
@@ -883,28 +883,28 @@ avc_es_parser_c::create_nalu_with_size(const memory_cptr &src,
 }
 
 memory_cptr
-avc_es_parser_c::get_avcc()
+es_parser_c::get_avcc()
   const {
   return avcc_c{static_cast<unsigned int>(m_nalu_size_length), m_sps_list, m_pps_list}.pack();
 }
 
 bool
-avc_es_parser_c::has_par_been_found()
+es_parser_c::has_par_been_found()
   const {
   assert(m_avcc_ready);
   return m_par_found;
 }
 
 int64_rational_c const &
-avc_es_parser_c::get_par()
+es_parser_c::get_par()
   const {
   assert(m_avcc_ready && m_par_found);
   return m_par;
 }
 
 std::pair<int64_t, int64_t> const
-avc_es_parser_c::get_display_dimensions(int width,
-                                        int height)
+es_parser_c::get_display_dimensions(int width,
+                                    int height)
   const {
   assert(m_avcc_ready && m_par_found);
 
@@ -918,19 +918,19 @@ avc_es_parser_c::get_display_dimensions(int width,
 }
 
 size_t
-avc_es_parser_c::get_num_field_slices()
+es_parser_c::get_num_field_slices()
   const {
   return m_stats.num_field_slices;
 }
 
 size_t
-avc_es_parser_c::get_num_frame_slices()
+es_parser_c::get_num_frame_slices()
   const {
   return m_stats.num_frame_slices;
 }
 
 void
-avc_es_parser_c::dump_info()
+es_parser_c::dump_info()
   const {
   mxinfo("Dumping m_frames_out:\n");
   for (auto &frame : m_frames_out) {
@@ -945,14 +945,14 @@ avc_es_parser_c::dump_info()
 }
 
 std::string
-avc_es_parser_c::get_nalu_type_name(int type)
+es_parser_c::get_nalu_type_name(int type)
   const {
   auto name = m_nalu_names_by_type.find(type);
   return (m_nalu_names_by_type.end() == name) ? "unknown" : name->second;
 }
 
 void
-avc_es_parser_c::init_nalu_names() {
+es_parser_c::init_nalu_names() {
   m_nalu_names_by_type[NALU_TYPE_NON_IDR_SLICE] = "non IDR slice";
   m_nalu_names_by_type[NALU_TYPE_DP_A_SLICE]    = "DP A slice";
   m_nalu_names_by_type[NALU_TYPE_DP_B_SLICE]    = "DP B slice";

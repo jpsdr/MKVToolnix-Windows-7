@@ -186,7 +186,7 @@ avc_es_video_packetizer_c::flush_frames() {
       m_first_frame = false;
     }
 
-    mtx::avc::avc_frame_t frame(m_parser.get_frame());
+    auto frame = m_parser.get_frame();
     add_packet(new packet_t(frame.m_data, frame.m_start,
                             frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
                             frame.m_keyframe            ? -1                          : frame.m_start + frame.m_ref1));

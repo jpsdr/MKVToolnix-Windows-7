@@ -2079,7 +2079,6 @@ void
 kax_reader_c::create_avc_video_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   if (!nti.m_private_data || !nti.m_private_data->get_size()) {
-    // avc_es_parser_cptr parser = parse_first_mpeg4_p10_frame(t, nti);
     create_avc_es_video_packetizer(t, nti);
     return;
   }

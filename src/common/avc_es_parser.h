@@ -21,7 +21,7 @@
 
 namespace mtx { namespace avc {
 
-struct avc_frame_t {
+struct frame_t {
   memory_cptr m_data;
   int64_t m_start, m_end, m_ref1, m_ref2;
   uint64_t m_position;
@@ -31,11 +31,11 @@ struct avc_frame_t {
   char m_type;
   bool m_order_calculated;
 
-  avc_frame_t() {
+  frame_t() {
     clear();
   }
 
-  avc_frame_t(const avc_frame_t &f) {
+  frame_t(const frame_t &f) {
     *this = f;
   }
 
@@ -69,7 +69,7 @@ struct avc_frame_t {
   }
 };
 
-class avc_es_parser_c {
+class es_parser_c {
 protected:
   int m_nalu_size_length;
 
@@ -84,7 +84,7 @@ protected:
   bool m_par_found;
   int64_rational_c m_par;
 
-  std::deque<avc_frame_t> m_frames, m_frames_out;
+  std::deque<frame_t> m_frames, m_frames_out;
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
   int64_t m_max_timecode, m_previous_frame_start_in_display_order;
   std::map<int64_t, int64_t> m_duration_frequency;
@@ -96,7 +96,7 @@ protected:
   memory_cptr m_unparsed_buffer;
   uint64_t m_stream_position, m_parsed_position;
 
-  avc_frame_t m_incomplete_frame;
+  frame_t m_incomplete_frame;
   bool m_have_incomplete_frame;
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
@@ -116,8 +116,8 @@ protected:
   } m_stats;
 
 public:
-  avc_es_parser_c();
-  ~avc_es_parser_c();
+  es_parser_c();
+  ~es_parser_c();
 
   void force_default_duration(int64_t default_duration) {
     m_forced_default_duration = default_duration;
@@ -159,10 +159,10 @@ public:
     return !m_frames_out.empty();
   }
 
-  avc_frame_t get_frame() {
+  frame_t get_frame() {
     assert(!m_frames_out.empty());
 
-    avc_frame_t frame(*m_frames_out.begin());
+    frame_t frame(*m_frames_out.begin());
     m_frames_out.erase(m_frames_out.begin(), m_frames_out.begin() + 1);
 
     return frame;
@@ -252,7 +252,6 @@ protected:
   void calculate_frame_timestamps();
   void calculate_frame_references_and_update_stats();
 };
-using avc_es_parser_cptr = std::shared_ptr<avc_es_parser_c>;
 
 }}
 

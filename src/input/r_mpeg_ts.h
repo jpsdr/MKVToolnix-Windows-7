@@ -323,7 +323,7 @@ public:
 
   // used for probing for stream types
   byte_buffer_cptr m_probe_data;
-  mtx::avc::avc_es_parser_cptr m_avc_parser;
+  mtx::avc::es_parser_cptr m_avc_parser;
   mtx::hevc::es_parser_cptr m_hevc_parser;
   truehd_parser_cptr m_truehd_parser;
   std::shared_ptr<M2VParser> m_m2v_parser;
