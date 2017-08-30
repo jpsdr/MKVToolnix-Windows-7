@@ -63,6 +63,7 @@ struct packet_t {
   boost::optional<uint64_t> uncompressed_size;
   timestamp_c discard_padding, output_order_timecode;
   bool duration_mandatory, superseeded, gap_following, factory_applied;
+  boost::optional<bool> key_flag, discardable_flag;
   generic_packetizer_c *source;
 
   std::vector<packet_extension_cptr> extensions;
@@ -194,7 +195,7 @@ struct packet_t {
   bool
   is_key_frame()
     const {
-    return !has_bref() && !has_fref();
+    return (key_flag && *key_flag) || (!has_bref() && !has_fref());
   }
 
   bool

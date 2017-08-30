@@ -74,7 +74,7 @@ public:
   kax_block_blob_c(BlockBlobType type): KaxBlockBlob(type) {
   }
 
-  bool add_frame_auto(const KaxTrackEntry &track, uint64 timecode, DataBuffer &buffer, LacingType lacing, int64_t past_block, int64_t forw_block);
+  bool add_frame_auto(const KaxTrackEntry &track, uint64 timecode, DataBuffer &buffer, LacingType lacing, int64_t past_block, int64_t forw_block, boost::optional<bool> key_flag, boost::optional<bool> discardable_flag);
   void set_block_duration(uint64_t time_length);
   bool replace_simple_by_group();
 };

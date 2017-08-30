@@ -77,7 +77,9 @@ kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
                                  DataBuffer &buffer,
                                  LacingType lacing,
                                  int64_t past_block,
-                                 int64_t forw_block) {
+                                 int64_t forw_block,
+                                 boost::optional<bool> key_flag,
+                                 boost::optional<bool> discardable_flag) {
   bool result = false;
 
   if (   (BLOCK_BLOB_ALWAYS_SIMPLE == SimpleBlockMode)
@@ -91,7 +93,12 @@ kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
     }
 
     result = Block.simpleblock->AddFrame(track, timecode, buffer, lacing);
-    if ((-1 == past_block) && (-1 == forw_block)) {
+
+    if (key_flag || discardable_flag) {
+      Block.simpleblock->SetKeyframe(key_flag && *key_flag);
+      Block.simpleblock->SetDiscardable(discardable_flag && *discardable_flag);
+
+    } else if ((-1 == past_block) && (-1 == forw_block)) {
       Block.simpleblock->SetKeyframe(true);
       Block.simpleblock->SetDiscardable(false);
 

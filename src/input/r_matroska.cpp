@@ -2272,8 +2272,11 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
       block_duration = 0;
   }
 
-  if (!block_simple->IsKeyframe()) {
-    if (block_simple->IsDiscardable())
+  auto key_flag         = block_simple->IsKeyframe();
+  auto discardable_flag = block_simple->IsDiscardable();
+
+  if (!key_flag) {
+    if (discardable_flag)
       block_fref = block_track->previous_timecode;
     else
       block_bref = block_track->previous_timecode;
@@ -2297,7 +2300,10 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
       DataBuffer &data_buffer = block_simple->GetBuffer(i);
       memory_cptr data(new memory_c(data_buffer.Buffer(), data_buffer.Size(), false));
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
+
       packet_cptr packet(new packet_t(data, m_last_timecode + i * frame_duration, block_duration, block_bref, block_fref));
+      packet->key_flag         = key_flag;
+      packet->discardable_flag = discardable_flag;
 
       static_cast<passthrough_packetizer_c *>(PTZR(block_track->ptzr))->process(packet);
     }
@@ -2311,11 +2317,17 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
 
       if (('s' == block_track->type) && ('t' == block_track->sub_type)) {
         if ((2 < data->get_size()) || ((0 < data->get_size()) && (' ' != *data->get_buffer()) && (0 != *data->get_buffer()) && !iscr(*data->get_buffer()))) {
-          PTZR(block_track->ptzr)->process(new packet_t(data, m_last_timecode, block_duration, block_bref, block_fref));
+          auto packet              = std::make_shared<packet_t>(data, m_last_timecode, block_duration, block_bref, block_fref);
+          packet->key_flag         = key_flag;
+          packet->discardable_flag = discardable_flag;
+
+          PTZR(block_track->ptzr)->process(packet);
         }
 
       } else {
         packet_cptr packet(new packet_t(data, m_last_timecode + i * frame_duration, block_duration, block_bref, block_fref));
+        packet->key_flag         = key_flag;
+        packet->discardable_flag = discardable_flag;
         PTZR(block_track->ptzr)->process(packet);
       }
     }

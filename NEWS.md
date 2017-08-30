@@ -9,6 +9,8 @@
 * mkvmerge: AVC/h.264: fixed the calculation of reference information for P
   and B frames. This also fixes some P frames being marked as B frames and
   vice versa.
+* mkvmerge: Matroska reader: the "key" and "discardable" flags of SimpleBlock
+  elements will be kept as they are. Partial fix for #2047.
 
 
 # Version 15.0.0 "Duel with the Devil" 2017-08-19
