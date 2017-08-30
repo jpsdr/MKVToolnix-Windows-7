@@ -65,6 +65,7 @@
 #include "common/endian.h"
 #include "common/fourcc.h"
 #include "common/hevc.h"
+#include "common/hevcc.h"
 #include "common/kax_file.h"
 #include "common/math.h"
 #include "common/mm_io.h"
