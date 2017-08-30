@@ -67,6 +67,10 @@ struct frame_t {
   bool is_b_frame() const {
     return 'B' == m_type;
   }
+
+  bool is_discardable() const {
+    return m_si.nal_ref_idc == 0;
+  }
 };
 
 class es_parser_c {

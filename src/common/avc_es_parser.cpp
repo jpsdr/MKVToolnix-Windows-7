@@ -536,7 +536,8 @@ es_parser_c::parse_slice(memory_cptr const &buffer,
 
     memset(&si, 0, sizeof(si));
 
-    si.nal_ref_idc = r.get_bits(3); // forbidden_zero_bit, nal_ref_idc
+    r.skip_bit();                   // forbidden_zero_bit
+    si.nal_ref_idc = r.get_bits(2); // nal_ref_idc
     si.nalu_type   = r.get_bits(5); // si.nalu_type
     if (   (NALU_TYPE_NON_IDR_SLICE != si.nalu_type)
         && (NALU_TYPE_DP_A_SLICE    != si.nalu_type)
