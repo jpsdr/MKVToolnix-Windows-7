@@ -37,7 +37,7 @@
 #include "merge/output_control.h"
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
-#include "output/p_avc.h"
+#include "output/p_avc_es.h"
 #include "output/p_kate.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg4_p2.h"
@@ -1273,7 +1273,7 @@ ogm_v_avc_demuxer_c::ogm_v_avc_demuxer_c(ogm_reader_c *p_reader)
 generic_packetizer_c *
 ogm_v_avc_demuxer_c::create_packetizer() {
   stream_header *sth          = (stream_header *)&packet_data[0]->get_buffer()[1];
-  generic_packetizer_c *vptzr = new mpeg4_p10_es_video_packetizer_c(reader, m_ti);
+  generic_packetizer_c *vptzr = new avc_es_video_packetizer_c(reader, m_ti);
 
   vptzr->set_video_pixel_dimensions(get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height));
 

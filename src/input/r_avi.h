@@ -21,11 +21,12 @@
 #include "merge/generic_reader.h"
 #include "common/error.h"
 #include "input/subtitles.h"
-#include "output/p_avc.h"
 
 namespace mtx { namespace id {
 class info_c;
 }}
+
+class avc_es_video_packetizer_c;
 
 struct avi_demuxer_t {
   int m_ptzr{-1};
@@ -109,7 +110,7 @@ protected:
   virtual void create_vp8_packetizer();
   virtual void create_video_packetizer();
 
-  virtual void set_avc_nal_size_size(mpeg4_p10_es_video_packetizer_c *ptzr);
+  virtual void set_avc_nal_size_size(avc_es_video_packetizer_c *ptzr);
 
   void extended_identify_mpeg4_l2(mtx::id::info_c &info);
 

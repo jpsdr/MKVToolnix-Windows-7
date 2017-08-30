@@ -29,7 +29,7 @@
 #include "merge/file_status.h"
 #include "mpegparser/M2VParser.h"
 #include "output/p_ac3.h"
-#include "output/p_avc.h"
+#include "output/p_avc_es.h"
 #include "output/p_dts.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
@@ -1271,7 +1271,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       m2vpacketizer->set_video_interlaced_flag(track->v_interlaced);
 
     } else if (track->codec.is(codec_c::type_e::V_MPEG4_P10)) {
-      track->ptzr = add_packetizer(new mpeg4_p10_es_video_packetizer_c(this, m_ti));
+      track->ptzr = add_packetizer(new avc_es_video_packetizer_c(this, m_ti));
       PTZR(track->ptzr)->set_video_pixel_dimensions(track->v_width, track->v_height);
       show_packetizer_info(id, PTZR(track->ptzr));
 

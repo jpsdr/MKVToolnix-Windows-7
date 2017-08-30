@@ -68,7 +68,7 @@
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_alac.h"
-#include "output/p_avc.h"
+#include "output/p_avc_es.h"
 #include "output/p_dirac.h"
 #include "output/p_dts.h"
 #include "output/p_dvbsub.h"
@@ -1648,7 +1648,7 @@ void
 kax_reader_c::create_video_packetizer(kax_track_t *t,
                                       track_info_c &nti) {
   if (t->codec.is(codec_c::type_e::V_MPEG4_P10) && t->ms_compat && !hack_engaged(ENGAGE_ALLOW_AVC_IN_VFW_MODE))
-    create_mpeg4_p10_es_video_packetizer(t, nti);
+    create_avc_es_video_packetizer(t, nti);
 
   else if (t->codec.is(codec_c::type_e::V_MPEG12)) {
     int version = t->codec_id[6] - '0';
@@ -1664,7 +1664,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
     show_packetizer_info(t->tnum, t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_MPEG4_P10))
-    create_mpeg4_p10_video_packetizer(t, nti);
+    create_avc_video_packetizer(t, nti);
 
   else if (t->codec.is(codec_c::type_e::V_THEORA)) {
     set_track_packetizer(t, new theora_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
@@ -2065,9 +2065,9 @@ kax_reader_c::create_packetizers() {
 }
 
 void
-kax_reader_c::create_mpeg4_p10_es_video_packetizer(kax_track_t *t,
-                                                   track_info_c &nti) {
-  mpeg4_p10_es_video_packetizer_c *ptzr = new mpeg4_p10_es_video_packetizer_c(this, nti);
+kax_reader_c::create_avc_es_video_packetizer(kax_track_t *t,
+                                             track_info_c &nti) {
+  auto ptzr = new avc_es_video_packetizer_c(this, nti);
   set_track_packetizer(t, ptzr);
 
   ptzr->set_video_pixel_dimensions(t->v_width, t->v_height);
@@ -2076,11 +2076,11 @@ kax_reader_c::create_mpeg4_p10_es_video_packetizer(kax_track_t *t,
 }
 
 void
-kax_reader_c::create_mpeg4_p10_video_packetizer(kax_track_t *t,
-                                                track_info_c &nti) {
+kax_reader_c::create_avc_video_packetizer(kax_track_t *t,
+                                          track_info_c &nti) {
   if (!nti.m_private_data || !nti.m_private_data->get_size()) {
     // avc_es_parser_cptr parser = parse_first_mpeg4_p10_frame(t, nti);
-    create_mpeg4_p10_es_video_packetizer(t, nti);
+    create_avc_es_video_packetizer(t, nti);
     return;
   }
 

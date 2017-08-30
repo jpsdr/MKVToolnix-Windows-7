@@ -23,20 +23,20 @@
 #include "merge/connection_checks.h"
 #include "merge/generic_reader.h"
 #include "merge/output_control.h"
-#include "output/p_avc.h"
+#include "output/p_avc_es.h"
 
 using namespace libmatroska;
 using namespace mpeg4::p10;
 
-mpeg4_p10_es_video_packetizer_c::
-mpeg4_p10_es_video_packetizer_c(generic_reader_c *p_reader,
-                                track_info_c &p_ti)
+avc_es_video_packetizer_c::
+avc_es_video_packetizer_c(generic_reader_c *p_reader,
+                          track_info_c &p_ti)
   : generic_packetizer_c(p_reader, p_ti)
   , m_default_duration_for_interlaced_content(-1)
   , m_first_frame(true)
   , m_set_display_dimensions(false)
-  , m_debug_timecodes{   "mpeg4_p10_es|mpeg4_p10_es_timecodes"}
-  , m_debug_aspect_ratio{"mpeg4_p10_es|mpeg4_p10_es_aspect_ratio"}
+  , m_debug_timecodes{   "avc_es|avc_es_timecodes"}
+  , m_debug_aspect_ratio{"avc_es|avc_es_aspect_ratio"}
 {
   m_relaxed_timecode_checking = true;
 
@@ -73,24 +73,24 @@ mpeg4_p10_es_video_packetizer_c(generic_reader_c *p_reader,
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::set_headers() {
+avc_es_video_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 
   m_track_entry->EnableLacing(false);
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::set_container_default_field_duration(int64_t default_duration) {
+avc_es_video_packetizer_c::set_container_default_field_duration(int64_t default_duration) {
   m_parser.set_container_default_duration(default_duration);
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::add_extra_data(memory_cptr data) {
+avc_es_video_packetizer_c::add_extra_data(memory_cptr data) {
   m_parser.add_bytes(data->get_buffer(), data->get_size());
 }
 
 int
-mpeg4_p10_es_video_packetizer_c::process(packet_cptr packet) {
+avc_es_video_packetizer_c::process(packet_cptr packet) {
   try {
     if (packet->has_timecode())
       m_parser.add_timecode(packet->timecode);
@@ -115,7 +115,7 @@ mpeg4_p10_es_video_packetizer_c::process(packet_cptr packet) {
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::handle_delayed_headers() {
+avc_es_video_packetizer_c::handle_delayed_headers() {
   if (0 < m_parser.get_num_skipped_frames())
     mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("This AVC/h.264 track does not start with a key frame. The first %1% frames have been skipped.\n")) % m_parser.get_num_skipped_frames());
 
@@ -138,7 +138,7 @@ mpeg4_p10_es_video_packetizer_c::handle_delayed_headers() {
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::handle_aspect_ratio() {
+avc_es_video_packetizer_c::handle_aspect_ratio() {
   mxdebug_if(m_debug_aspect_ratio, boost::format("already set? %1% has par been found? %2%\n") % display_dimensions_or_aspect_ratio_set() % m_parser.has_par_been_found());
 
   if (display_dimensions_or_aspect_ratio_set() || !m_parser.has_par_been_found())
@@ -156,7 +156,7 @@ mpeg4_p10_es_video_packetizer_c::handle_aspect_ratio() {
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::handle_actual_default_duration() {
+avc_es_video_packetizer_c::handle_actual_default_duration() {
   int64_t actual_default_duration = m_parser.get_most_often_used_duration();
   mxdebug_if(m_debug_timecodes, boost::format("Most often used duration: %1% forced? %2% current default duration: %3%\n") % actual_default_duration % m_default_duration_forced % m_htrack_default_duration);
 
@@ -174,13 +174,13 @@ mpeg4_p10_es_video_packetizer_c::handle_actual_default_duration() {
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::flush_impl() {
+avc_es_video_packetizer_c::flush_impl() {
   m_parser.flush();
   flush_frames();
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::flush_frames() {
+avc_es_video_packetizer_c::flush_frames() {
   while (m_parser.frame_available()) {
     if (m_first_frame) {
       handle_delayed_headers();
@@ -195,20 +195,20 @@ mpeg4_p10_es_video_packetizer_c::flush_frames() {
 }
 
 unsigned int
-mpeg4_p10_es_video_packetizer_c::get_nalu_size_length()
+avc_es_video_packetizer_c::get_nalu_size_length()
   const {
   return m_parser.get_nalu_size_length();
 }
 
 void
-mpeg4_p10_es_video_packetizer_c::connect(generic_packetizer_c *src,
+avc_es_video_packetizer_c::connect(generic_packetizer_c *src,
                                          int64_t p_append_timecode_offset) {
   generic_packetizer_c::connect(src, p_append_timecode_offset);
 
   if (2 != m_connected_to)
     return;
 
-  mpeg4_p10_es_video_packetizer_c *real_src = dynamic_cast<mpeg4_p10_es_video_packetizer_c *>(src);
+  avc_es_video_packetizer_c *real_src = dynamic_cast<avc_es_video_packetizer_c *>(src);
   assert(real_src);
 
   m_htrack_default_duration = real_src->m_htrack_default_duration;
@@ -221,9 +221,9 @@ mpeg4_p10_es_video_packetizer_c::connect(generic_packetizer_c *src,
 }
 
 connection_result_e
-mpeg4_p10_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                                std::string &error_message) {
-  mpeg4_p10_es_video_packetizer_c *vsrc = dynamic_cast<mpeg4_p10_es_video_packetizer_c *>(src);
+avc_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
+                                          std::string &error_message) {
+  avc_es_video_packetizer_c *vsrc = dynamic_cast<avc_es_video_packetizer_c *>(src);
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
 

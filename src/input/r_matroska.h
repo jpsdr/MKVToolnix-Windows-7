@@ -313,8 +313,8 @@ protected:
   virtual void create_wavpack_audio_packetizer(kax_track_t *t, track_info_c &nti);
 
   virtual void create_vc1_video_packetizer(kax_track_t *t, track_info_c &nti);
-  virtual void create_mpeg4_p10_video_packetizer(kax_track_t *t, track_info_c &nti);
-  virtual void create_mpeg4_p10_es_video_packetizer(kax_track_t *t, track_info_c &nti);
+  virtual void create_avc_video_packetizer(kax_track_t *t, track_info_c &nti);
+  virtual void create_avc_es_video_packetizer(kax_track_t *t, track_info_c &nti);
 
   virtual void read_headers_info(mm_io_c *io, EbmlElement *l0, int64_t position);
   virtual void read_headers_info_writing_app(KaxWritingApp *&kwriting_app);

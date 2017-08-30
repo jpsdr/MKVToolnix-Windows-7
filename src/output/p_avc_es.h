@@ -11,8 +11,8 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_AVC_H
-#define MTX_P_AVC_H
+#ifndef MTX_OUTPUT_P_AVC_ES_H
+#define MTX_OUTPUT_P_AVC_ES_H
 
 #include "common/common_pch.h"
 
@@ -21,7 +21,7 @@
 
 using namespace mpeg4::p10;
 
-class mpeg4_p10_es_video_packetizer_c: public generic_packetizer_c {
+class avc_es_video_packetizer_c: public generic_packetizer_c {
 protected:
   avc_es_parser_c m_parser;
   int64_t m_default_duration_for_interlaced_content;
@@ -29,7 +29,7 @@ protected:
   debugging_option_c m_debug_timecodes, m_debug_aspect_ratio;
 
 public:
-  mpeg4_p10_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
+  avc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
 
   virtual int process(packet_cptr packet);
   virtual void add_extra_data(memory_cptr data);
@@ -53,4 +53,4 @@ protected:
   virtual void flush_impl();
 };
 
-#endif // MTX_P_AVC_H
+#endif // MTX_OUTPUT_P_AVC_ES_H

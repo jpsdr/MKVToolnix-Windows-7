@@ -35,6 +35,7 @@
 #include "merge/file_status.h"
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
+#include "output/p_avc_es.h"
 #include "output/p_dts.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
@@ -303,8 +304,8 @@ avi_reader_c::create_mpeg4_p2_packetizer() {
 void
 avi_reader_c::create_mpeg4_p10_packetizer() {
   try {
-    mpeg4_p10_es_video_packetizer_c *ptzr = new mpeg4_p10_es_video_packetizer_c(this, m_ti);
-    m_vptzr                               = add_packetizer(ptzr);
+    auto ptzr = new avc_es_video_packetizer_c(this, m_ti);
+    m_vptzr   = add_packetizer(ptzr);
 
     ptzr->set_video_pixel_dimensions(m_video_width, m_video_height);
 
@@ -632,7 +633,7 @@ avi_reader_c::create_vorbis_packetizer(int aid) {
 }
 
 void
-avi_reader_c::set_avc_nal_size_size(mpeg4_p10_es_video_packetizer_c *ptzr) {
+avi_reader_c::set_avc_nal_size_size(avc_es_video_packetizer_c *ptzr) {
   m_avc_nal_size_size = ptzr->get_nalu_size_length();
 
   for (size_t i = 0; i < m_max_video_frames; ++i) {

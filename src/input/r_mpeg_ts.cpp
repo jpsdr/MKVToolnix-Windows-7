@@ -43,7 +43,7 @@
 #include "input/truehd_ac3_splitting_packet_converter.h"
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
-#include "output/p_avc.h"
+#include "output/p_avc_es.h"
 #include "output/p_dts.h"
 #include "output/p_dvbsub.h"
 #include "output/p_hdmv_pgs.h"
@@ -2246,8 +2246,8 @@ reader_c::create_mpeg1_2_video_packetizer(track_ptr &track) {
 
 void
 reader_c::create_mpeg4_p10_es_video_packetizer(track_ptr &track) {
-  generic_packetizer_c *ptzr = new mpeg4_p10_es_video_packetizer_c(this, m_ti);
-  track->ptzr                = add_packetizer(ptzr);
+  auto ptzr   = new avc_es_video_packetizer_c(this, m_ti);
+  track->ptzr = add_packetizer(ptzr);
   ptzr->set_video_pixel_dimensions(track->v_width, track->v_height);
 }
 
