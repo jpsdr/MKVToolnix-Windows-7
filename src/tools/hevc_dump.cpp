@@ -11,7 +11,7 @@
 #include "common/common_pch.h"
 
 #include "common/command_line.h"
-#include "common/hevc.h"
+#include "common/hevc_es_parser.h"
 #include "common/mm_io_x.h"
 
 static void
