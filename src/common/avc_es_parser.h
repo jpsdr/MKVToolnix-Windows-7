@@ -86,7 +86,7 @@ protected:
 
   std::deque<frame_t> m_frames, m_frames_out;
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
-  int64_t m_max_timecode, m_previous_frame_start_in_display_order;
+  int64_t m_max_timecode, m_previous_i_p_start;
   std::map<int64_t, int64_t> m_duration_frequency;
 
   std::vector<memory_cptr> m_sps_list, m_pps_list, m_extra_data;
@@ -249,8 +249,8 @@ protected:
   void init_nalu_names();
   void calculate_frame_order();
   std::vector<int64_t> calculate_provided_timestamps_to_use();
-  void calculate_frame_timestamps();
-  void calculate_frame_references_and_update_stats();
+  void calculate_frame_timestamps_and_references();
+  void update_frame_stats();
 };
 
 }}

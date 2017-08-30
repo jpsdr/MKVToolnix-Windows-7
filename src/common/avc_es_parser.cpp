@@ -44,7 +44,7 @@ es_parser_c::es_parser_c()
   , m_b_frames_since_keyframe(false)
   , m_par_found(false)
   , m_max_timecode(0)
-  , m_previous_frame_start_in_display_order{}
+  , m_previous_i_p_start{}
   , m_stream_position(0)
   , m_parsed_position(0)
   , m_have_incomplete_frame(false)
@@ -772,7 +772,7 @@ es_parser_c::calculate_provided_timestamps_to_use() {
 }
 
 void
-es_parser_c::calculate_frame_timestamps() {
+es_parser_c::calculate_frame_timestamps_and_references() {
   static auto s_debug_force_simple_picture_order = debugging_option_c{"avc_parser_force_simple_picture_order"};
   auto provided_timestamps_to_use                = calculate_provided_timestamps_to_use();
 
@@ -806,33 +806,50 @@ es_parser_c::calculate_frame_timestamps() {
 
   m_max_timecode = m_frames.back().m_end;
 
-  mxdebug_if(m_debug_timecodes, boost::format("CLEANUP frames <pres_ord dec_ord has_prov_tc tc dur>: %1%\n")
-             % boost::accumulate(m_frames, std::string(""), [](std::string const &accu, frame_t const &frame) {
-                 return accu + (boost::format(" <%1% %2% %3% %4% %5%>") % frame.m_presentation_order % frame.m_decode_order % frame.m_has_provided_timecode % frame.m_start % (frame.m_end - frame.m_start)).str();
-               }));
+  for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
+    if (frame_itr->is_i_frame()) {
+      m_previous_i_p_start = frame_itr->m_start;
+      continue;
+    }
 
+    frame_itr->m_ref1 = m_previous_i_p_start - frame_itr->m_start;
+
+    if (frame_itr->is_p_frame()) {
+      m_previous_i_p_start = frame_itr->m_start;
+      continue;
+    }
+
+    auto next_i_p_frame_itr = frame_itr + 1;
+
+    while ((frames_end != next_i_p_frame_itr) && next_i_p_frame_itr->is_b_frame())
+      ++next_i_p_frame_itr;
+
+    auto forward_ref_start = frames_end != next_i_p_frame_itr ? next_i_p_frame_itr->m_start : m_max_timecode;
+    frame_itr->m_ref2      = forward_ref_start - frame_itr->m_start;
+  }
+
+  mxdebug_if(m_debug_timecodes, boost::format("PRESENTATION order dump\n"));
+
+  for (auto &frame : m_frames)
+    mxdebug_if(m_debug_timecodes, boost::format("  type %1% TS %2% ref1 %3% ref2 %4% decode_order %5%\n") % frame.m_type % format_timestamp(frame.m_start) % frame.m_ref1 % frame.m_ref2 % frame.m_decode_order);
 
   if (!m_simple_picture_order)
     brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
 }
 
 void
-es_parser_c::calculate_frame_references_and_update_stats() {
-  auto first_frame = true;
+es_parser_c::update_frame_stats() {
+  mxdebug_if(m_debug_timecodes, boost::format("DECODE order dump\n"));
 
   for (auto &frame : m_frames) {
-    if (!frame.is_i_frame() && !first_frame)
-      frame.m_ref1 = m_previous_frame_start_in_display_order - frame.m_start;
+    mxdebug_if(m_debug_timecodes, boost::format("  type %1% TS %2% ref1 %3% ref2 %4%\n") % frame.m_type % format_timestamp(frame.m_start) % frame.m_ref1 % frame.m_ref2);
 
-    m_previous_frame_start_in_display_order = frame.m_start;
     m_duration_frequency[frame.m_end - frame.m_start]++;
 
     if (frame.m_si.field_pic_flag)
       ++m_stats.num_field_slices;
     else
       ++m_stats.num_field_slices;
-
-    first_frame = false;
   }
 }
 
@@ -853,8 +870,8 @@ es_parser_c::cleanup() {
   }
 
   calculate_frame_order();
-  calculate_frame_timestamps();
-  calculate_frame_references_and_update_stats();
+  calculate_frame_timestamps_and_references();
+  update_frame_stats();
 
   if (m_first_cleanup && !m_frames.front().m_keyframe) {
     // Drop all frames before the first key frames as they cannot be

@@ -6,6 +6,9 @@
   elements are written (`CodecState`, `CueCodecState`, `FlagInterlaced`).
 * mkvmerge: the track header attributes `MinCache` and `MaxCache` will not be
   written anymore. Fixes #2079.
+* mkvmerge: AVC/h.264: fixed the calculation of reference information for P
+  and B frames. This also fixes some P frames being marked as B frames and
+  vice versa.
 
 
 # Version 15.0.0 "Duel with the Devil" 2017-08-19
