@@ -26,7 +26,6 @@
 #include "output/p_avc_es.h"
 
 using namespace libmatroska;
-using namespace mpeg4::p10;
 
 avc_es_video_packetizer_c::
 avc_es_video_packetizer_c(generic_reader_c *p_reader,
@@ -187,7 +186,7 @@ avc_es_video_packetizer_c::flush_frames() {
       m_first_frame = false;
     }
 
-    avc_frame_t frame(m_parser.get_frame());
+    mtx::avc::avc_frame_t frame(m_parser.get_frame());
     add_packet(new packet_t(frame.m_data, frame.m_start,
                             frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
                             frame.m_keyframe            ? -1                          : frame.m_start + frame.m_ref1));

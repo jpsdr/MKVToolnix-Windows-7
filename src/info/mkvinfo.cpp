@@ -335,7 +335,7 @@ create_codec_dependent_private_info(KaxCodecPrivate &c_priv,
     return (boost::format(Y(" (format tag: 0x%|1$04x|)")) % get_uint16_le(&wfe->w_format_tag)).str();
 
   } else if ((codec_id == MKV_V_MPEG4_AVC) && ('v' == track_type) && (c_priv.GetSize() >= 4)) {
-    auto avcc = mpeg4::p10::avcc_c::unpack(memory_cptr{new memory_c(c_priv.GetBuffer(), c_priv.GetSize(), false)});
+    auto avcc = mtx::avc::avcc_c::unpack(memory_cptr{new memory_c(c_priv.GetBuffer(), c_priv.GetSize(), false)});
 
     return (boost::format(Y(" (h.264 profile: %1% @L%2%.%3%)"))
             % (  avcc.m_profile_idc ==  44 ? "CAVLC 4:4:4 Intra"

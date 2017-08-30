@@ -226,7 +226,7 @@ avi_reader_c::create_video_packetizer() {
   if (DIVX_TYPE_MPEG4 == m_divx_type)
     create_mpeg4_p2_packetizer();
 
-  else if (mpeg4::p10::is_avc_fourcc(codec) && !hack_engaged(ENGAGE_ALLOW_AVC_IN_VFW_MODE))
+  else if (mtx::avc::is_avc_fourcc(codec) && !hack_engaged(ENGAGE_ALLOW_AVC_IN_VFW_MODE))
     create_mpeg4_p10_packetizer();
 
   else if (mpeg1_2::is_fourcc(get_uint32_le(codec)))
@@ -313,7 +313,7 @@ avi_reader_c::create_mpeg4_p10_packetizer() {
       ptzr->set_container_default_field_duration(1000000000ll / m_fps / 2);
 
     if (0 < m_avi->extradata_size) {
-      auto avc_extra_nalus = mpeg4::p10::avcc_to_nalus(reinterpret_cast<unsigned char *>(m_avi->bitmap_info_header + 1), m_avi->extradata_size);
+      auto avc_extra_nalus = mtx::avc::avcc_to_nalus(reinterpret_cast<unsigned char *>(m_avi->bitmap_info_header + 1), m_avi->extradata_size);
       if (avc_extra_nalus)
         ptzr->add_extra_data(avc_extra_nalus);
     }

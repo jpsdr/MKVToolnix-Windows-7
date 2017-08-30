@@ -31,8 +31,7 @@
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
 
-namespace mpeg4 {
-namespace p10 {
+namespace mtx { namespace avc {
 
 static auto s_debug_fix_bistream_timing_info = debugging_option_c{"avc_parser|fix_bitstream_timing_info"};
 static auto s_debug_remove_bistream_ar_info  = debugging_option_c{"avc_parser|remove_bitstream_ar_info"};

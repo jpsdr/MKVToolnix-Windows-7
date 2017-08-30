@@ -721,7 +721,7 @@ mpeg_ps_reader_c::new_stream_v_avc(mpeg_ps_id_t id,
                                    unsigned char *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
-  mpeg4::p10::avc_es_parser_c parser;
+  mtx::avc::avc_es_parser_c parser;
 
   parser.ignore_nalu_size_length_errors();
   if (mtx::includes(m_ti.m_nalu_size_lengths, tracks.size()))

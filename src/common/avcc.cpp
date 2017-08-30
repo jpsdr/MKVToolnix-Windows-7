@@ -18,8 +18,7 @@
 #include "common/mm_io_x.h"
 #include "common/mpeg.h"
 
-namespace mpeg4 {
-namespace p10 {
+namespace mtx { namespace avc {
 
 avcc_c::avcc_c()
   : m_profile_idc{}

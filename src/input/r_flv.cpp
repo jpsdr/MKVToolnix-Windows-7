@@ -441,7 +441,7 @@ bool
 flv_reader_c::new_stream_v_avc(flv_track_cptr &track,
                                memory_cptr const &data) {
   try {
-    auto avcc = mpeg4::p10::avcc_c::unpack(data);
+    auto avcc = mtx::avc::avcc_c::unpack(data);
     avcc.parse_sps_list(true);
 
     for (auto &sps_info : avcc.m_sps_info_list) {

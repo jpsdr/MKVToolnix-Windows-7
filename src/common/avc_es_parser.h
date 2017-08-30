@@ -19,8 +19,7 @@
 
 #include "common/avc.h"
 
-namespace mpeg4 {
-namespace p10 {
+namespace mtx { namespace avc {
 
 struct avc_frame_t {
   memory_cptr m_data;

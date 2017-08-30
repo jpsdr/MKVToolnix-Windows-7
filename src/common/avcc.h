@@ -17,8 +17,7 @@
 
 #include "common/common_pch.h"
 
-namespace mpeg4 {
-namespace p10 {
+namespace mtx { namespace avc {
 
 struct sps_info_t;
 struct pps_info_t;

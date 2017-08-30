@@ -26,8 +26,7 @@
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
 
-namespace mpeg4 {
-namespace p10 {
+namespace mtx { namespace avc {
 
 avc_es_parser_c::avc_es_parser_c()
   : m_nalu_size_length(4)

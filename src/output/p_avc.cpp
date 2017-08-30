@@ -78,14 +78,14 @@ avc_video_packetizer_c::set_headers() {
       && m_ti.m_private_data->get_size()
       && m_ti.m_fix_bitstream_frame_rate
       && (-1 != l_track_default_duration))
-    set_codec_private(mpeg4::p10::fix_sps_fps(m_ti.m_private_data, l_track_default_duration));
+    set_codec_private(mtx::avc::fix_sps_fps(m_ti.m_private_data, l_track_default_duration));
 
   generic_video_packetizer_c::set_headers();
 }
 
 void
 avc_video_packetizer_c::extract_aspect_ratio() {
-  auto result = mpeg4::p10::extract_par(m_ti.m_private_data);
+  auto result = mtx::avc::extract_par(m_ti.m_private_data);
 
   set_codec_private(result.new_avcc);
 

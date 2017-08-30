@@ -244,7 +244,7 @@ track_c::new_stream_v_mpeg_1_2() {
 int
 track_c::new_stream_v_avc() {
   if (!m_avc_parser) {
-    m_avc_parser = mpeg4::p10::avc_es_parser_cptr(new mpeg4::p10::avc_es_parser_c);
+    m_avc_parser = mtx::avc::avc_es_parser_cptr(new mtx::avc::avc_es_parser_c);
     m_avc_parser->ignore_nalu_size_length_errors();
 
     if (mtx::includes(reader.m_ti.m_nalu_size_lengths, reader.m_tracks.size()))
