@@ -68,6 +68,7 @@
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_alac.h"
+#include "output/p_avc.h"
 #include "output/p_avc_es.h"
 #include "output/p_dirac.h"
 #include "output/p_dts.h"
@@ -83,7 +84,6 @@
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
 #include "output/p_mpeg4_p2.h"
-#include "output/p_mpeg4_p10.h"
 #include "output/p_opus.h"
 #include "output/p_passthrough.h"
 #include "output/p_pcm.h"
@@ -2084,7 +2084,7 @@ kax_reader_c::create_avc_video_packetizer(kax_track_t *t,
     return;
   }
 
-  set_track_packetizer(t, new mpeg4_p10_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
+  set_track_packetizer(t, new avc_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 

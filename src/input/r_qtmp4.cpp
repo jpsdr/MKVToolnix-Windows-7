@@ -45,12 +45,12 @@
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_alac.h"
+#include "output/p_avc.h"
 #include "output/p_dts.h"
 #include "output/p_hevc.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
 #include "output/p_mpeg4_p2.h"
-#include "output/p_mpeg4_p10.h"
 #include "output/p_passthrough.h"
 #include "output/p_pcm.h"
 #include "output/p_quicktime.h"
@@ -1692,9 +1692,9 @@ qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
 }
 
 void
-qtmp4_reader_c::create_video_packetizer_mpeg4_p10(qtmp4_demuxer_c &dmx) {
+qtmp4_reader_c::create_video_packetizer_avc(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv;
-  dmx.ptzr            = add_packetizer(new mpeg4_p10_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
+  dmx.ptzr            = add_packetizer(new avc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
@@ -1819,7 +1819,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
       create_video_packetizer_mpeg4_p2(dmx);
 
     else if (dmx.codec.is(codec_c::type_e::V_MPEG4_P10))
-      create_video_packetizer_mpeg4_p10(dmx);
+      create_video_packetizer_avc(dmx);
 
     else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2))
       create_video_packetizer_mpegh_p2(dmx);

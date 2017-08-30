@@ -21,14 +21,14 @@
 #include "common/hacks.h"
 #include "common/strings/formatting.h"
 #include "merge/output_control.h"
-#include "output/p_mpeg4_p10.h"
+#include "output/p_avc.h"
 
-mpeg4_p10_video_packetizer_c::
-mpeg4_p10_video_packetizer_c(generic_reader_c *p_reader,
-                             track_info_c &p_ti,
-                             double fps,
-                             int width,
-                             int height)
+avc_video_packetizer_c::
+avc_video_packetizer_c(generic_reader_c *p_reader,
+                       track_info_c &p_ti,
+                       double fps,
+                       int width,
+                       int height)
   : generic_video_packetizer_c{p_reader, p_ti, MKV_V_MPEG4_AVC, fps, width, height}
   , m_nalu_size_len_src{}
   , m_nalu_size_len_dst{}
@@ -42,7 +42,7 @@ mpeg4_p10_video_packetizer_c(generic_reader_c *p_reader,
 }
 
 void
-mpeg4_p10_video_packetizer_c::set_headers() {
+avc_video_packetizer_c::set_headers() {
   static auto s_debug_fix_bistream_timing_info = debugging_option_c{"fix_bitstream_timing_info"};
 
   if (m_ti.m_private_data && m_ti.m_private_data->get_size())
@@ -84,7 +84,7 @@ mpeg4_p10_video_packetizer_c::set_headers() {
 }
 
 void
-mpeg4_p10_video_packetizer_c::extract_aspect_ratio() {
+avc_video_packetizer_c::extract_aspect_ratio() {
   auto result = mpeg4::p10::extract_par(m_ti.m_private_data);
 
   set_codec_private(result.new_avcc);
@@ -104,7 +104,7 @@ mpeg4_p10_video_packetizer_c::extract_aspect_ratio() {
 }
 
 int
-mpeg4_p10_video_packetizer_c::process(packet_cptr packet) {
+avc_video_packetizer_c::process(packet_cptr packet) {
   if (VFT_PFRAMEAUTOMATIC == packet->bref) {
     packet->fref = -1;
     packet->bref = m_ref_timecode;
@@ -123,9 +123,9 @@ mpeg4_p10_video_packetizer_c::process(packet_cptr packet) {
 }
 
 connection_result_e
-mpeg4_p10_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                             std::string &error_message) {
-  mpeg4_p10_video_packetizer_c *vsrc = dynamic_cast<mpeg4_p10_video_packetizer_c *>(src);
+avc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
+                                       std::string &error_message) {
+  avc_video_packetizer_c *vsrc = dynamic_cast<avc_video_packetizer_c *>(src);
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
 
@@ -142,7 +142,7 @@ mpeg4_p10_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
 }
 
 void
-mpeg4_p10_video_packetizer_c::setup_nalu_size_len_change() {
+avc_video_packetizer_c::setup_nalu_size_len_change() {
   if (!m_ti.m_private_data || (5 > m_ti.m_private_data->get_size()))
     return;
 
@@ -163,7 +163,7 @@ mpeg4_p10_video_packetizer_c::setup_nalu_size_len_change() {
 }
 
 void
-mpeg4_p10_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
+avc_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
   unsigned char *src = packet->data->get_buffer();
   int size           = packet->data->get_size();
 
@@ -218,7 +218,7 @@ mpeg4_p10_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
 }
 
 void
-mpeg4_p10_video_packetizer_c::remove_filler_nalus(memory_c &data)
+avc_video_packetizer_c::remove_filler_nalus(memory_c &data)
   const {
   auto ptr        = data.get_buffer();
   auto total_size = data.get_size();

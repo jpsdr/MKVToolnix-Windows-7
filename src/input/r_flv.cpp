@@ -25,7 +25,7 @@
 #include "input/r_flv.h"
 #include "merge/input_x.h"
 #include "output/p_aac.h"
-#include "output/p_mpeg4_p10.h"
+#include "output/p_avc.h"
 #include "output/p_mp3.h"
 #include "output/p_video_for_windows.h"
 
@@ -390,7 +390,7 @@ flv_reader_c::create_packetizer(int64_t id) {
 void
 flv_reader_c::create_v_avc_packetizer(flv_track_cptr &track) {
   m_ti.m_private_data = track->m_private_data;
-  track->m_ptzr       = add_packetizer(new mpeg4_p10_video_packetizer_c(this, m_ti, track->m_v_frame_rate, track->m_v_width, track->m_v_height));
+  track->m_ptzr       = add_packetizer(new avc_video_packetizer_c(this, m_ti, track->m_v_frame_rate, track->m_v_width, track->m_v_height));
   show_packetizer_info(m_video_track_idx, PTZR(track->m_ptzr));
 }
 

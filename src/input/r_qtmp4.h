@@ -530,8 +530,8 @@ protected:
   virtual void create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx);
 
+  virtual void create_video_packetizer_avc(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx);
-  virtual void create_video_packetizer_mpeg4_p10(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_standard(qtmp4_demuxer_c &dmx);

@@ -11,20 +11,20 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_MPEG4_P10_H
-#define MTX_P_MPEG4_P10_H
+#ifndef MTX_OUTPUT_P_AVC_H
+#define MTX_OUTPUT_P_AVC_H
 
 #include "common/common_pch.h"
 
 #include "output/p_generic_video.h"
 
-class mpeg4_p10_video_packetizer_c: public generic_video_packetizer_c {
+class avc_video_packetizer_c: public generic_video_packetizer_c {
 protected:
   int m_nalu_size_len_src, m_nalu_size_len_dst;
   int64_t m_max_nalu_size;
 
 public:
-  mpeg4_p10_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, double fps, int width, int height);
+  avc_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, double fps, int width, int height);
   virtual int process(packet_cptr packet);
   virtual void set_headers();
 
@@ -41,4 +41,4 @@ protected:
   virtual void remove_filler_nalus(memory_c &data) const;
 };
 
-#endif  // MTX_P_MPEG4_P10_H
+#endif  // MTX_OUTPUT_P_AVC_H
