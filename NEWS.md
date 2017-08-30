@@ -11,6 +11,9 @@
   vice versa.
 * mkvmerge: Matroska reader: the "key" and "discardable" flags of SimpleBlock
   elements will be kept as they are. Partial fix for #2047.
+* mkvmerge: AVC/h.264 ES parser: only non-key frames that have the NALU header
+  field `nal_ref_idc` set to 0 will be marked as "discardable" in
+  `SimpleBlock` elements. Other half of the fix for #2047.
 
 
 # Version 15.0.0 "Duel with the Devil" 2017-08-19

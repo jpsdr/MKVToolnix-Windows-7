@@ -186,11 +186,15 @@ avc_es_video_packetizer_c::flush_frames() {
       m_first_frame = false;
     }
 
-    auto frame = m_parser.get_frame();
-    add_packet(new packet_t(frame.m_data, frame.m_start,
-                            frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
-                            frame.is_i_frame()          ? -1                          : frame.m_start + frame.m_ref1,
-                            !frame.is_b_frame()         ? -1                          : frame.m_start + frame.m_ref2));
+    auto frame               = m_parser.get_frame();
+    auto duration            = frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration;
+    auto packet              = std::make_shared<packet_t>(frame.m_data, frame.m_start, duration,
+                                                          frame.is_i_frame()  ? -1 : frame.m_start + frame.m_ref1,
+                                                          !frame.is_b_frame() ? -1 : frame.m_start + frame.m_ref2);
+    packet->key_flag         = frame.m_keyframe;
+    packet->discardable_flag = frame.is_discardable();
+
+    add_packet(packet);
   }
 }
 
