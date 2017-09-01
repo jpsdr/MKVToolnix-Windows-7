@@ -14,6 +14,14 @@
 * mkvmerge: AVC/h.264 ES parser: only non-key frames that have the NALU header
   field `nal_ref_idc` set to 0 will be marked as "discardable" in
   `SimpleBlock` elements. Other half of the fix for #2047.
+* configure: the checks for libEBML and libMatroska have been fixed to require
+  libEBML 1.3.5 and libMatroska 1.4.7 as intended.
+
+## Build system changes
+
+* libEBML v1.3.5 and libMatroska v1.4.7 are now required. In fact v15.0.0
+  already requires both but did not include proper version checks for them
+  (nor was there a NEWS.md entry for the new libMatroska requirement).
 
 
 # Version 15.0.0 "Duel with the Devil" 2017-08-19
