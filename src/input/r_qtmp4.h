@@ -263,7 +263,7 @@ struct qtmp4_demuxer_c {
   ac3::frame_c m_ac3_header;
   mtx::dts::header_t m_dts_header;
 
-  memory_cptr priv;
+  std::vector<memory_cptr> priv;
 
   bool warning_printed;
 

@@ -1693,7 +1693,7 @@ qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
 
 void
 qtmp4_reader_c::create_video_packetizer_avc(qtmp4_demuxer_c &dmx) {
-  m_ti.m_private_data = dmx.priv;
+  m_ti.m_private_data = dmx.priv.size() ? dmx.priv[0] : memory_cptr{};
   dmx.ptzr            = add_packetizer(new avc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
@@ -1701,7 +1701,7 @@ qtmp4_reader_c::create_video_packetizer_avc(qtmp4_demuxer_c &dmx) {
 
 void
 qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
-  m_ti.m_private_data = dmx.priv;
+  m_ti.m_private_data = dmx.priv.size() ? dmx.priv[0] : memory_cptr{};
   dmx.ptzr            = add_packetizer(new hevc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
@@ -2602,16 +2602,16 @@ qtmp4_demuxer_c::handle_stsd_atom(uint64_t atom_size,
 void
 qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
                                         int level) {
-  auto priv = stsd->get_buffer();
-  auto size = stsd->get_size();
+  auto stsd_raw = stsd->get_buffer();
+  auto size     = stsd->get_size();
 
   if (sizeof(sound_v0_stsd_atom_t) > atom_size)
     mxerror(boost::format(Y("Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n")) % id);
 
   sound_v1_stsd_atom_t sv1_stsd;
   sound_v2_stsd_atom_t sv2_stsd;
-  memcpy(&sv1_stsd, priv, sizeof(sound_v0_stsd_atom_t));
-  memcpy(&sv2_stsd, priv, sizeof(sound_v0_stsd_atom_t));
+  memcpy(&sv1_stsd, stsd_raw, sizeof(sound_v0_stsd_atom_t));
+  memcpy(&sv2_stsd, stsd_raw, sizeof(sound_v0_stsd_atom_t));
 
   if (fourcc)
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"))
@@ -2642,7 +2642,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
       mxerror(boost::format(Y("Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n")) % id);
 
     stsd_non_priv_struct_size = sizeof(sound_v1_stsd_atom_t);
-    memcpy(&sv1_stsd, priv, stsd_non_priv_struct_size);
+    memcpy(&sv1_stsd, stsd_raw, stsd_non_priv_struct_size);
 
     if (m_debug_headers)
       mxinfo(boost::format(" [v1] samples per packet: %1% bytes per packet: %2% bytes per frame: %3% bytes_per_sample: %4%")
@@ -2656,7 +2656,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
       mxerror(boost::format(Y("Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n")) % id);
 
     stsd_non_priv_struct_size = sizeof(sound_v2_stsd_atom_t);
-    memcpy(&sv2_stsd, priv, stsd_non_priv_struct_size);
+    memcpy(&sv2_stsd, stsd_raw, stsd_non_priv_struct_size);
 
     a_channels   = get_uint32_be(&sv2_stsd.v2.channels);
     a_bitdepth   = get_uint32_be(&sv2_stsd.v2.bits_per_channel);
@@ -2688,8 +2688,8 @@ qtmp4_demuxer_c::handle_video_stsd_atom(uint64_t atom_size,
     mxerror(boost::format(Y("Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n")) % id);
 
   video_stsd_atom_t v_stsd;
-  auto priv = stsd->get_buffer();
-  memcpy(&v_stsd, priv, sizeof(video_stsd_atom_t));
+  auto stsd_raw = stsd->get_buffer();
+  memcpy(&v_stsd, stsd_raw, sizeof(video_stsd_atom_t));
 
   if (fourcc)
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"))
@@ -2736,21 +2736,21 @@ qtmp4_demuxer_c::handle_colr_atom(memory_cptr const &atom_content,
 void
 qtmp4_demuxer_c::handle_subtitles_stsd_atom(uint64_t atom_size,
                                             int level) {
-  auto priv = stsd->get_buffer();
-  auto size = stsd->get_size();
+  auto stsd_raw = stsd->get_buffer();
+  auto size     = stsd->get_size();
 
   if (sizeof(base_stsd_atom_t) > atom_size)
     return;
 
   base_stsd_atom_t base_stsd;
-  memcpy(&base_stsd, priv, sizeof(base_stsd_atom_t));
+  memcpy(&base_stsd, stsd_raw, sizeof(base_stsd_atom_t));
 
  fourcc                    = fourcc_c{base_stsd.fourcc};
  stsd_non_priv_struct_size = sizeof(base_stsd_atom_t);
 
   if (m_debug_headers) {
     mxdebug(boost::format("%1%FourCC: %2%\n") % space(level * 2 + 1) % fourcc.description());
-    debugging_c::hexdump(priv, size);
+    debugging_c::hexdump(stsd_raw, size);
   }
 }
 
@@ -2823,7 +2823,8 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
   auto size = atom_size - stsd_non_priv_struct_size;
 
   if (!codec.is(codec_c::type_e::V_MPEG4_P10) && !codec.is(codec_c::type_e::V_MPEGH_P2) && size && !fourcc.equiv("mp4v") && !fourcc.equiv("xvid")) {
-    priv = memory_c::clone(mem, size);
+    priv.clear();
+    priv.emplace_back(memory_c::clone(mem, size));
     return;
   }
 
@@ -2842,17 +2843,17 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
       mxdebug_if(m_debug_headers, boost::format("%1%Video private data size: %2%, type: '%3%'\n") % space((level + 1) * 2 + 1) % atom.size % atom.fourcc);
 
       if ((atom.fourcc == "esds") || (atom.fourcc == "avcC") || (atom.fourcc == "hvcC")) {
-        if (!priv) {
-          priv = memory_c::alloc(atom.size - atom.hsize);
+        if (priv.empty()) {
+          priv.emplace_back(memory_c::alloc(atom.size - atom.hsize));
 
-          if (mio.read(priv, priv->get_size()) != priv->get_size()) {
-            priv.reset();
+          if (mio.read(priv[0], priv[0]->get_size()) != priv[0]->get_size()) {
+            priv.clear();
             return;
           }
         }
 
         if ((atom.fourcc == "esds") && !esds_parsed) {
-          mm_mem_io_c memio(priv->get_buffer(), priv->get_size());
+          mm_mem_io_c memio(priv[0]->get_buffer(), priv[0]->get_size());
           esds_parsed = parse_esds_atom(memio, level + 1);
         }
 
@@ -2872,7 +2873,8 @@ qtmp4_demuxer_c::parse_subtitles_header_priv_atoms(uint64_t atom_size,
   auto size = atom_size - stsd_non_priv_struct_size;
 
   if (!fourcc.equiv("mp4s")) {
-    priv = memory_c::clone(mem, size);
+    priv.clear();
+    priv.emplace_back(memory_c::clone(mem, size));
     return;
   }
 
@@ -2891,16 +2893,16 @@ qtmp4_demuxer_c::parse_subtitles_header_priv_atoms(uint64_t atom_size,
       mxdebug_if(m_debug_headers, boost::format("%1%Subtitles private data size: %2%, type: '%3%'\n") % space((level + 1) * 2 + 1) % atom.size % atom.fourcc);
 
       if (atom.fourcc == "esds") {
-        if (!priv) {
-          priv = memory_c::alloc(atom.size - atom.hsize);
-          if (mio.read(priv, priv->get_size()) != priv->get_size()) {
-            priv.reset();
+        if (priv.empty()) {
+          priv.emplace_back(memory_c::alloc(atom.size - atom.hsize));
+          if (mio.read(priv[0], priv[0]->get_size()) != priv[0]->get_size()) {
+            priv.clear();
             return;
           }
         }
 
         if (!esds_parsed) {
-          mm_mem_io_c memio(priv->get_buffer(), priv->get_size());
+          mm_mem_io_c memio(priv[0]->get_buffer(), priv[0]->get_size());
           esds_parsed = parse_esds_atom(memio, level + 1);
         }
       }
@@ -3131,7 +3133,7 @@ qtmp4_demuxer_c::verify_video_parameters() {
 
 bool
 qtmp4_demuxer_c::verify_avc_video_parameters() {
-  if (!priv || (4 > priv->get_size())) {
+  if (priv.empty() || (4 > priv[0]->get_size())) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n")) % id);
     return false;
   }
@@ -3141,7 +3143,7 @@ qtmp4_demuxer_c::verify_avc_video_parameters() {
 
 bool
 qtmp4_demuxer_c::verify_hevc_video_parameters() {
-  if (!priv || (23 > priv->get_size())) {
+  if (priv.empty() || (23 > priv[0]->get_size())) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n")) % id);
     return false;
   }
