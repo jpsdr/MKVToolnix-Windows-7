@@ -34,6 +34,7 @@
 #define MP4OTI_MPEG1Audio                      0x6B
 #define MP4OTI_JPEG                            0x6C
 #define MP4OTI_DTS                             0xA9
+#define MP4OTI_VORBIS                          0xDD
 #define MP4OTI_VOBSUB                          0xE0
 
 // Audio object type identifactors

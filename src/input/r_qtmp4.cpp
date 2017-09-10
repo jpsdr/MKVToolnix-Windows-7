@@ -56,6 +56,7 @@
 #include "output/p_quicktime.h"
 #include "output/p_video_for_windows.h"
 #include "output/p_vobsub.h"
+#include "output/p_vorbis.h"
 
 using namespace libmatroska;
 
@@ -1744,6 +1745,12 @@ qtmp4_reader_c::create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx) {
 }
 
 void
+qtmp4_reader_c::create_audio_packetizer_vorbis(qtmp4_demuxer_c &dmx) {
+  dmx.ptzr = add_packetizer(new vorbis_packetizer_c(this, m_ti, dmx.priv[0]->get_buffer(), dmx.priv[0]->get_size(), dmx.priv[1]->get_buffer(), dmx.priv[1]->get_size(), dmx.priv[2]->get_buffer(), dmx.priv[2]->get_size()));
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+}
+
+void
 qtmp4_reader_c::create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx) {
   passthrough_packetizer_c *ptzr = new passthrough_packetizer_c(this, m_ti);
   dmx.ptzr                      = add_packetizer(ptzr);
@@ -1854,6 +1861,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
     else if (dmx.codec.is(codec_c::type_e::A_DTS))
       packetizer_ok = create_audio_packetizer_dts(dmx);
+
+    else if (dmx.codec.is(codec_c::type_e::A_VORBIS))
+      create_audio_packetizer_vorbis(dmx);
 
     else
       create_audio_packetizer_passthrough(dmx);
@@ -2776,6 +2786,19 @@ qtmp4_demuxer_c::parse_aac_esds_decoder_config() {
 }
 
 void
+qtmp4_demuxer_c::parse_vorbis_esds_decoder_config() {
+  if (!esds.decoder_config || !esds.decoder_config->get_size())
+    return;
+
+  try {
+    codec = codec_c::look_up(codec_c::type_e::A_VORBIS);
+    priv  = unlace_memory_xiph(esds.decoder_config);
+
+  } catch (mtx::mem::lacing_x &) {
+  }
+}
+
+void
 qtmp4_demuxer_c::parse_audio_header_priv_atoms(uint64_t atom_size,
                                                int level) {
   auto mem  = stsd->get_buffer() + stsd_non_priv_struct_size;
@@ -2807,6 +2830,9 @@ qtmp4_demuxer_c::parse_audio_header_priv_atoms(uint64_t atom_size,
         if (esds_parsed) {
           if (codec_c::look_up_object_type_id(esds.object_type_id).is(codec_c::type_e::A_AAC))
             parse_aac_esds_decoder_config();
+
+          else if (codec_c::look_up_object_type_id(esds.object_type_id).is(codec_c::type_e::A_VORBIS))
+            parse_vorbis_esds_decoder_config();
         }
       }
 
@@ -3045,6 +3071,49 @@ qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
 }
 
 bool
+qtmp4_demuxer_c::derive_track_params_from_vorbis_private_data() {
+  if (priv.size() != 3)
+    return false;
+
+  ogg_packet ogg_headers[3];
+  memset(ogg_headers, 0, 3 * sizeof(ogg_packet));
+  ogg_headers[0].packet   = priv[0]->get_buffer();
+  ogg_headers[1].packet   = priv[1]->get_buffer();
+  ogg_headers[2].packet   = priv[2]->get_buffer();
+  ogg_headers[0].bytes    = priv[0]->get_size();
+  ogg_headers[1].bytes    = priv[1]->get_size();
+  ogg_headers[2].bytes    = priv[2]->get_size();
+  ogg_headers[0].b_o_s    = 1;
+  ogg_headers[1].packetno = 1;
+  ogg_headers[2].packetno = 2;
+  auto ok                 = false;
+
+  vorbis_info vi;
+  vorbis_comment vc;
+
+  vorbis_info_init(&vi);
+  vorbis_comment_init(&vc);
+
+  try {
+    for (int i = 0; 3 > i; ++i)
+      if (vorbis_synthesis_headerin(&vi, &vc, &ogg_headers[i]) < 0)
+        throw false;
+
+    a_channels   = vi.channels;
+    a_samplerate = vi.rate;
+    a_bitdepth   = 0;
+    ok           = true;
+
+  } catch (bool) {
+  }
+
+  vorbis_info_clear(&vi);
+  vorbis_comment_clear(&vc);
+
+  return ok;
+}
+
+bool
 qtmp4_demuxer_c::verify_audio_parameters() {
   if (codec.is(codec_c::type_e::A_MP2) || codec.is(codec_c::type_e::A_MP3))
     derive_track_params_from_mp3_audio_bitstream();
@@ -3054,6 +3123,9 @@ qtmp4_demuxer_c::verify_audio_parameters() {
 
   else if (codec.is(codec_c::type_e::A_DTS))
     derive_track_params_from_dts_audio_bitstream();
+
+  else if (codec.is(codec_c::type_e::A_VORBIS))
+    return derive_track_params_from_vorbis_private_data();
 
   if ((0 == a_channels) || (0.0 == a_samplerate)) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n")) % id);

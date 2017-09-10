@@ -1,5 +1,9 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: MP4 reader: added support for Vorbis. Implements #2093.
+
 ## Bug fixes
 
 * mkvmerge: the `doc type version` will be set at least to 2 if certain

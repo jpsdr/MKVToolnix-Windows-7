@@ -140,6 +140,7 @@ codec_c::look_up_object_type_id(unsigned int object_type_id) {
                  : MP4OTI_MPEG1Audio                           == object_type_id   ? type_e::A_MP2
                  : MP4OTI_MPEG2AudioPart3                      == object_type_id   ? type_e::A_MP3
                  : MP4OTI_DTS                                  == object_type_id   ? type_e::A_DTS
+                 : MP4OTI_VORBIS                               == object_type_id   ? type_e::A_VORBIS
                  : (   (MP4OTI_MPEG2VisualSimple               == object_type_id)
                     || (MP4OTI_MPEG2VisualMain                 == object_type_id)
                     || (MP4OTI_MPEG2VisualSNR                  == object_type_id)
