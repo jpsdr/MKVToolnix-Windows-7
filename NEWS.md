@@ -20,6 +20,9 @@
   `SimpleBlock` elements. Other half of the fix for #2047.
 * configure: the checks for libEBML and libMatroska have been fixed to require
   libEBML 1.3.5 and libMatroska 1.4.7 as intended.
+* mkvmerge: Matroska reader: if present in the file, the "white colour
+  coordinate x" track header attribute was written to both "white colour
+  coordinate x" and "white colour coordinate y" in the output file.
 
 ## Build system changes
 

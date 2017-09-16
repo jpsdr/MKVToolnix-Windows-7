@@ -1172,7 +1172,7 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
       track->v_chroma_coordinates.blue_x  = FindChildValue<KaxVideoBChromaX>(colour_meta, -1.0);
       track->v_chroma_coordinates.blue_y  = FindChildValue<KaxVideoBChromaY>(colour_meta, -1.0);
       track->v_white_colour_coordinates.x = FindChildValue<KaxVideoWhitePointChromaX>(colour_meta, -1.0);
-      track->v_white_colour_coordinates.y = FindChildValue<KaxVideoWhitePointChromaX>(colour_meta, -1.0);
+      track->v_white_colour_coordinates.y = FindChildValue<KaxVideoWhitePointChromaY>(colour_meta, -1.0);
       track->v_max_luminance              = FindChildValue<KaxVideoLuminanceMax>(colour_meta, -1.0);
       track->v_min_luminance              = FindChildValue<KaxVideoLuminanceMin>(colour_meta, -1.0);
     }
