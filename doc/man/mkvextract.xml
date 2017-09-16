@@ -579,7 +579,7 @@
    </varlistentry>
 
    <varlistentry>
-    <term>A_AC3</term>
+    <term>A_AC3, A_EAC3</term>
     <listitem>
      <para>
       These will be extracted to raw <abbrev>AC-3</abbrev> files.
@@ -592,6 +592,15 @@
     <listitem>
      <para>
       <abbrev>ALAC</abbrev> tracks are written to <abbrev>CAF</abbrev> files.
+     </para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term>A_DTS</term>
+    <listitem>
+     <para>
+      These will be extracted to raw <abbrev>DTS</abbrev> files.
      </para>
     </listitem>
    </varlistentry>
@@ -633,10 +642,10 @@
    </varlistentry>
 
    <varlistentry>
-    <term>A_PCM/INT/LIT</term>
+    <term>A_PCM/INT/LIT, A_PCM/INT/BIG</term>
     <listitem>
      <para>
-      Raw <abbrev>PCM</abbrev> data will be written to a <abbrev>WAV</abbrev> file.
+      Raw <abbrev>PCM</abbrev> data will be written to a <abbrev>WAV</abbrev> file. Big-endian integer data will be converted to little-endian data in the process.
      </para>
     </listitem>
    </varlistentry>
@@ -646,6 +655,15 @@
     <listitem>
      <para>
       <productname>RealAudio</productname> tracks are written to <productname>RealMedia</productname> files.
+     </para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term>A_TRUEHD, A_MLP</term>
+    <listitem>
+     <para>
+      These will be extracted to raw <abbrev>TrueHD</abbrev>/<abbrev>MLP</abbrev> files.
      </para>
     </listitem>
    </varlistentry>
@@ -689,6 +707,15 @@
    </varlistentry>
 
    <varlistentry>
+    <term>S_HDMV/TEXTST</term>
+    <listitem>
+     <para>
+      <abbrev>TextST</abbrev> subtitles will be written as a special file format invented for &mkvmerge; and &mkvextract;.
+     </para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
     <term>S_KATE</term>
     <listitem>
      <para>
@@ -698,7 +725,7 @@
    </varlistentry>
 
    <varlistentry>
-    <term>S_TEXT/SSA, S_TEXT/ASS</term>
+    <term>S_TEXT/SSA, S_TEXT/ASS, S_SSA, S_ASS</term>
     <listitem>
      <para>
       <abbrev>SSA</abbrev> and <abbrev>ASS</abbrev> text subtitles will be written as <abbrev>SSA</abbrev>/<abbrev>ASS</abbrev> files
@@ -708,7 +735,7 @@
    </varlistentry>
 
    <varlistentry>
-    <term>S_TEXT/UTF8</term>
+    <term>S_TEXT/UTF8, S_TEXT/ASCII</term>
     <listitem>
      <para>
       Simple text subtitles will be written as <abbrev>SRT</abbrev> files.
@@ -736,10 +763,38 @@
    </varlistentry>
 
    <varlistentry>
+    <term>S_TEXT/WEBVTT</term>
+    <listitem>
+     <para>
+      <abbrev>WebVTT</abbrev> text subtitles will be written as <abbrev>WebVTT</abbrev> files.
+     </para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term>V_MPEG1, V_MPEG2</term>
+    <listitem>
+     <para>
+      <abbrev>MPEG-1</abbrev> and <abbrev>MPEG-2</abbrev> video tracks will be written as <abbrev>MPEG</abbrev> elementary streams.
+     </para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
     <term>V_MPEG4/ISO/AVC</term>
     <listitem>
      <para>
       <abbrev>H.264</abbrev> / <abbrev>AVC</abbrev> video tracks are written to <abbrev>H.264</abbrev> elementary streams which can be
+      processed further with e.g. <productname>MP4Box</productname> from the <productname>GPAC</productname> package.
+     </para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term>V_MPEG4/ISO/HEVC</term>
+    <listitem>
+     <para>
+      <abbrev>H.265</abbrev> / <abbrev>HEVC</abbrev> video tracks are written to <abbrev>H.265</abbrev> elementary streams which can be
       processed further with e.g. <productname>MP4Box</productname> from the <productname>GPAC</productname> package.
      </para>
     </listitem>
