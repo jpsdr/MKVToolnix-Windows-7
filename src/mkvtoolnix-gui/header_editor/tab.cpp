@@ -134,8 +134,6 @@ Tab::load() {
 
   m_analyzer->close_file();
 
-  m_fileModificationTime = QFileInfo{m_fileName}.lastModified();
-
   for (auto const &page : m_model->allExpandablePages()) {
     auto key = dynamic_cast<TopLevelPage &>(*page).internalIdentifier();
     ui->elements->setExpanded(page->m_pageIdx, expansionStatus[key]);
@@ -183,14 +181,6 @@ Tab::save() {
   auto pageIdx = m_model->validate();
   if (pageIdx.isValid()) {
     reportValidationFailure(false, pageIdx);
-    return;
-  }
-
-  if (QFileInfo{m_fileName}.lastModified() != m_fileModificationTime) {
-    Util::MessageBox::critical(this)
-      ->title(QY("File has been modified"))
-      .text(QY("The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."))
-      .exec();
     return;
   }
 

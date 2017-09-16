@@ -23,6 +23,8 @@
 * mkvmerge: Matroska reader: if present in the file, the "white colour
   coordinate x" track header attribute was written to both "white colour
   coordinate x" and "white colour coordinate y" in the output file.
+* MKVToolNix GUI: header editor: removed the check for external modification
+  when saving the file. Fixes #2097.
 
 ## Build system changes
 

@@ -35,7 +35,6 @@ protected:
 
   QString m_fileName;
   std::unique_ptr<QtKaxAnalyzer> m_analyzer;
-  QDateTime m_fileModificationTime;
 
   PageModel *m_model;
   PageBase *m_segmentinfoPage{};
