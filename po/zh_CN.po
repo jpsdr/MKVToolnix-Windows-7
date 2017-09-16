@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-08-13 10:10+0200\n"
-"PO-Revision-Date: 2017-08-13 11:42+0000\n"
+"PO-Revision-Date: 2017-09-13 05:27+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -542,23 +542,22 @@ msgstr ""
 "                           视频的颜色基准。\n"
 
 #: src/merge/mkvmerge.cpp:313
-#, fuzzy
 msgid ""
 "  --projection-private <TID:data>\n"
 "                           Private data that only applies to a specific\n"
 "                           projection (as hex digits).\n"
 msgstr ""
-"  --compression <TID:method>\n"
-"                           设置指定轨道使用的压缩方式 ('none' 或 'zlib')。\n"
+"  --projection-private <TID:数据>\n"
+"                           只应用到特定投影方法的私有数据\n"
+"                           (以十六进制形式给出)。\n"
 
 #: src/merge/mkvmerge.cpp:311
-#, fuzzy
 msgid ""
 "  --projection-type <TID:method>\n"
 "                           Projection method used (0–3).\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           视频的颜色基准。\n"
+"  --projection-type <TID:方法>\n"
+"                           使用的投影方法 (0–3)。\n"
 
 #: src/merge/mkvmerge.cpp:234
 msgid ""
@@ -3667,9 +3666,8 @@ msgid "Clearing settings auto&matically:"
 msgstr "自动清理设置(&M):"
 
 #: src/common/property_element.cpp:176
-#, fuzzy
 msgid "Clipping of the color ranges."
-msgstr "  --colour-range <TID:n>   色域裁剪。\n"
+msgstr "色域裁剪。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1335
 msgid "Close current settings"
@@ -3790,19 +3788,17 @@ msgid "CodecPrivate, length %1%%2%"
 msgstr "编码格式私有数据，长度 %1%%2%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:478
-#, fuzzy
 msgid "Colour information"
-msgstr "视频颜色信息"
+msgstr "颜色信息"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:483
-#, fuzzy
 msgid "Colour mastering meta information"
-msgstr "保存信息出错"
+msgstr "颜色创作元信息"
 
 #: src/info/mkvinfo.cpp:598
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour matrix coefficients: %1%"
-msgstr "视频颜色信息"
+msgstr "颜色矩阵系数: %1%"
 
 #: src/info/mkvinfo.cpp:628
 #, boost-format
@@ -4424,7 +4420,7 @@ msgstr "根据各起始时间戳推算终止时间戳(&E)"
 
 #: src/common/property_element.cpp:195
 msgid "Describes the projection used for this video track (0 – 3)."
-msgstr ""
+msgstr "描述用于该视频轨道的投影模式 (0 – 3)。"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4442,9 +4438,8 @@ msgid "Description:"
 msgstr "描述:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1364
-#, fuzzy
 msgid "Destination directory"
-msgstr "输出文件目录"
+msgstr "目标目录"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1765
 msgid "Destination file"
@@ -5642,11 +5637,11 @@ msgstr "水平色度抽样: %1%"
 
 #: src/common/property_element.cpp:174
 msgid "How chroma is sited horizontally."
-msgstr ""
+msgstr "色度在水平方向如何分布。"
 
 #: src/common/property_element.cpp:175
 msgid "How chroma is sited vertically."
-msgstr ""
+msgstr "色度在垂直方向如何分布。"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -5676,7 +5671,7 @@ msgid "If a character set is selected here, it will be used instead of asking th
 msgstr "若此处选中了字符集，则将使用指定值而不会去询问用户。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:326
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."
 msgstr "如果在此处选择了一个字符集，程序会自动将其设置为新添加的文本字幕轨道的字符集。"
 
@@ -8827,7 +8822,7 @@ msgstr ""
 
 #: src/common/property_element.cpp:167
 msgid "Sets the number of coded bits for a colour channel."
-msgstr ""
+msgstr "设置某个颜色通道编码的位数。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:167
 msgid "Sets the segment UIDs to use."
@@ -9482,32 +9477,20 @@ msgid "The XML tag file '%1%' could not be read.\n"
 msgstr "XML 标签文件 '%1%' 无法读取。\n"
 
 #: src/common/property_element.cpp:170
-#, fuzzy
 msgid "The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. This is additive with chroma-subsample-horizontal."
-msgstr ""
-"  --cb-subsample <TID:水平,垂直>\n"
-"                           对 Cb 通道中未移除的像素\n"
-"                           水平与垂直方向需要移除的\n"
-"                           像素数量。该值将与\n"
-"                           --chroma-subsample 相加。\n"
+msgstr "对 Cb 通道中水平方向未移除的像素，需要移除的像素数量。该数值将与 chroma-subsample-horizontal 给出的数值相加。"
 
 #: src/common/property_element.cpp:172
-#, fuzzy
 msgid "The amount of pixels to remove in the Cb channel for every pixel not removed vertically. This is additive with chroma-subsample-vertical."
-msgstr ""
-"  --cb-subsample <TID:水平,垂直>\n"
-"                           对 Cb 通道中未移除的像素\n"
-"                           水平与垂直方向需要移除的\n"
-"                           像素数量。该值将与\n"
-"                           --chroma-subsample 相加。\n"
+msgstr "对 Cb 通道中垂直方向未移除的像素，需要移除的像素数量。该数值将与 chroma-subsample-vertical 给出的数值相加。"
 
 #: src/common/property_element.cpp:168
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."
-msgstr ""
+msgstr "对 Cr 与 Cb 通道中水平方向未移除的像素，需要移除的像素数量。"
 
 #: src/common/property_element.cpp:169
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."
-msgstr ""
+msgstr "对 Cr 与 Cb 通道中垂直方向未移除的像素，需要移除的像素数量。"
 
 #: src/merge/mkvmerge.cpp:2196
 #, boost-format
@@ -10373,14 +10356,14 @@ msgid "The property value contains non-ASCII characters, but the property is not
 msgstr "属性值包含非 ASCII 字符，但 '%1%' 中的属性并非 Unicode 字串。%2%\n"
 
 #: src/propedit/change.cpp:155
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec in '%1%'. %2%\n"
-msgstr "'%1%' 中的属性值不是有效的布尔值。%2%\n"
+msgstr "「%1%」中的属性值不是有效的二进制数据。%2%\n"
 
 #: src/propedit/change.cpp:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n"
-msgstr "'%1%' 中的属性值不是有效的二进制数据，或者长度不是 128 位。%2%\n"
+msgstr "「%1%」中的属性值不是有效的二进制数据，或长度不是 %3% 位。%2%\n"
 
 #: src/propedit/change.cpp:138
 #, boost-format
@@ -11946,7 +11929,6 @@ msgid "When appending: one chapter is created at the start and one whenever a fi
 msgstr "在追加文件时: 文件开头为第一章，随后每追加一个文件便创建一个章节。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:256
-#, fuzzy
 msgid "When the user adds a file containing such a title, the program will copy the title into the \"file title\" input box if this option is enabled."
 msgstr "如果勾选该选项，当用户添加包含该属性的文件时，程序会将标题复制到“文件标题”输入框中。"
 
