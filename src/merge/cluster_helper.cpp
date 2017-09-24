@@ -444,6 +444,7 @@ cluster_helper_c::render() {
                                           || !pack->is_key_frame()
                                           || has_codec_state
                                           || pack->has_discard_padding()
+                                          || render_group->m_has_discard_padding
                                           || must_duration_be_set(nullptr, pack)
                                           || source->is_lacing_prevented();
 
@@ -521,8 +522,10 @@ cluster_helper_c::render() {
         }
       }
 
-      if (pack->has_discard_padding())
+      if (pack->has_discard_padding()) {
         GetChild<KaxDiscardPadding>(*new_block_group).SetValue(pack->discard_padding.to_ns());
+        render_group->m_has_discard_padding = true;
+      }
     }
 
     elements_in_cluster++;

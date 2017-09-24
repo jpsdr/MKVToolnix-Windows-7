@@ -22,12 +22,13 @@ public:
   std::vector<kax_block_blob_cptr> m_groups;
   std::vector<int64_t> m_durations;
   generic_packetizer_c *m_source;
-  bool m_more_data, m_duration_mandatory;
+  bool m_more_data, m_duration_mandatory, m_has_discard_padding;
 
   render_groups_c(generic_packetizer_c *source)
     : m_source(source)
     , m_more_data(false)
     , m_duration_mandatory(false)
+    , m_has_discard_padding{}
   {
   }
 };

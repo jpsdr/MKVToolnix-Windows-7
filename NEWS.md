@@ -25,6 +25,8 @@
   coordinate x" and "white colour coordinate y" in the output file.
 * MKVToolNix GUI: header editor: removed the check for external modification
   when saving the file. Fixes #2097.
+* mkvmerge: Opus output: mkvmerge will now put all frames with discard padding
+  into their own block group. Fixes #2100.
 
 ## Build system changes
 
