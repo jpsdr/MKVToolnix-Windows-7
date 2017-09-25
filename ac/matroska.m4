@@ -4,7 +4,7 @@ dnl
 
 EBML_MATROSKA_INTERNAL=no
 PKG_CHECK_MODULES([EBML],[libebml >= 1.3.5],[],[EBML_MATROSKA_INTERNAL=yes])
-PKG_CHECK_MODULES([MATROSKA],[libmatroska >= 1.4.7],[],[EBML_MATROSKA_INTERNAL=yes])
+PKG_CHECK_MODULES([MATROSKA],[libmatroska >= 1.4.8],[],[EBML_MATROSKA_INTERNAL=yes])
 
 if test x"$EBML_MATROSKA_INTERNAL" = xyes; then
   if ! test -f lib/libebml/ebml/EbmlTypes.h ; then

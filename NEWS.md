@@ -30,9 +30,12 @@
 
 ## Build system changes
 
-* libEBML v1.3.5 and libMatroska v1.4.7 are now required. In fact v15.0.0
-  already requires both but did not include proper version checks for them
-  (nor was there a NEWS.md entry for the new libMatroska requirement).
+* libEBML v1.3.5 and libMatroska v1.4.8 are now required. In fact v15.0.0
+  already requires libEBML v1.3.5 and libMatroska v1.4.7 but did not include
+  proper version checks for them (nor was there a NEWS.md entry for the new
+  libMatroska requirement). New is the requirement for libMatroska v1.4.8 due
+  to it fixing writing block groups for tracks with the track number 128 (see
+  #2103).
 
 
 # Version 15.0.0 "Duel with the Devil" 2017-08-19
