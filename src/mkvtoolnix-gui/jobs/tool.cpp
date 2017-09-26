@@ -281,7 +281,7 @@ Tool::onRemove() {
 
 void
 Tool::onRemoveDone() {
-  m_model->removeJobsIf([this](Job const &job) {
+  m_model->removeJobsIf([](Job const &job) {
       return (Job::DoneOk       == job.status())
           || (Job::DoneWarnings == job.status())
           || (Job::Failed       == job.status())
@@ -291,7 +291,7 @@ Tool::onRemoveDone() {
 
 void
 Tool::onRemoveDoneOk() {
-  m_model->removeJobsIf([this](Job const &job) { return Job::DoneOk == job.status(); });
+  m_model->removeJobsIf([](Job const &job) { return Job::DoneOk == job.status(); });
 }
 
 void

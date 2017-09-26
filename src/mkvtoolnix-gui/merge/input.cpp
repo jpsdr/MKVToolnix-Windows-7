@@ -149,7 +149,7 @@ Tab::setupHorizontalTwoColumnsInputLayout() {
   ui->wProperties->show();
   ui->propertiesStack->setCurrentIndex(1);
 
-  auto moveTo = [this](QWidget *column, int position, QWidget *widget) {
+  auto moveTo = [](QWidget *column, int position, QWidget *widget) {
     auto layout = qobject_cast<QBoxLayout *>(column->layout());
     Q_ASSERT(!!layout);
 
@@ -173,7 +173,7 @@ Tab::setupVerticalTabWidgetInputLayout() {
   ui->twProperties->show();
   ui->wProperties->hide();
 
-  auto moveTo = [this](QWidget *page, int position, QWidget *widget) {
+  auto moveTo = [](QWidget *page, int position, QWidget *widget) {
     auto layout = qobject_cast<QBoxLayout *>(page->layout());
     Q_ASSERT(!!layout);
 

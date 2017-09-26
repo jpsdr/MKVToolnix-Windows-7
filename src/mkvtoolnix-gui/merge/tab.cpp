@@ -404,7 +404,7 @@ Tab::checkIfOverwritingIsOK() {
   auto nativeDestination            = QDir::toNativeSeparators(m_config.m_destination);
   auto jobWithSameDestinationExists = false;
 
-  MainWindow::jobTool()->model()->withAllJobs([this, &jobWithSameDestinationExists, &nativeDestination](Jobs::Job &job) {
+  MainWindow::jobTool()->model()->withAllJobs([&jobWithSameDestinationExists, &nativeDestination](Jobs::Job &job) {
     auto muxJob = qobject_cast<Jobs::MuxJob *>(&job);
 
     if (   muxJob

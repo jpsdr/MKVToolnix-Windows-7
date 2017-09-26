@@ -1950,7 +1950,7 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
 
   auto names = QSet<QString>{};
 
-  std::function<void(QStandardItem *)> collector = [this, d, &collector, &names](auto *currentItem) {
+  std::function<void(QStandardItem *)> collector = [d, &collector, &names](auto *currentItem) {
     if (!currentItem)
       return;
 
@@ -1983,7 +1983,7 @@ Tab::usedNameCountryCodes(QStandardItem *rootItem) {
 
   auto countryCodes = QSet<QString>{};
 
-  std::function<void(QStandardItem *)> collector = [this, d, &collector, &countryCodes](auto *currentItem) {
+  std::function<void(QStandardItem *)> collector = [d, &collector, &countryCodes](auto *currentItem) {
     if (!currentItem)
       return;
 
@@ -2020,7 +2020,7 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
   QVector<ChapterAtomDataPtr> atomList;
 
   // Collect all existing start and end timestamps.
-  std::function<void(QStandardItem *, KaxChapterAtom *, int)> collector = [this, d, &collector, &allAtoms, &atomsByParent, &atomList](auto *currentItem, auto *parentAtom, int level) {
+  std::function<void(QStandardItem *, KaxChapterAtom *, int)> collector = [d, &collector, &allAtoms, &atomsByParent, &atomList](auto *currentItem, auto *parentAtom, int level) {
     if (!currentItem)
       return;
 
@@ -2052,7 +2052,7 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
       collector(currentItem->child(row), chapter.get(), level + 1);
   };
 
-  std::function<void(QStandardItem *)> calculator = [this, d, &calculator, &allAtoms, &atomsByParent](auto *parentItem) {
+  std::function<void(QStandardItem *)> calculator = [d, &calculator, &allAtoms, &atomsByParent](auto *parentItem) {
     if (!parentItem || !parentItem->rowCount())
       return;
 

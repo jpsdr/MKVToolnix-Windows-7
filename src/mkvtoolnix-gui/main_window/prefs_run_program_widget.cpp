@@ -183,7 +183,7 @@ void
 PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &cfg) {
   Q_D(PrefsRunProgramWidget);
 
-  auto addItemIfSupported = [this, d, &cfg](QString const &title, Util::Settings::RunProgramType type) {
+  auto addItemIfSupported = [d, &cfg](QString const &title, Util::Settings::RunProgramType type) {
     if (App::programRunner().isRunProgramTypeSupported(type)) {
       d->ui->cbType->addItem(title, static_cast<int>(type));
 

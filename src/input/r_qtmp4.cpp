@@ -305,7 +305,7 @@ qtmp4_reader_c::parse_headers() {
 
   read_chapter_track();
 
-  brng::remove_erase_if(m_demuxers, [this](qtmp4_demuxer_cptr const &dmx) { return !dmx->ok || dmx->is_chapters(); });
+  brng::remove_erase_if(m_demuxers, [](qtmp4_demuxer_cptr const &dmx) { return !dmx->ok || dmx->is_chapters(); });
 
   detect_interleaving();
 
@@ -817,7 +817,7 @@ qtmp4_reader_c::handle_tfhd_atom(qt_atom_t,
 
   auto flags     = m_in->read_uint24_be();
   auto track_id  = m_in->read_uint32_be();
-  auto track_itr = brng::find_if(m_demuxers, [this, track_id](qtmp4_demuxer_cptr const &dmx) { return dmx->container_id == track_id; });
+  auto track_itr = brng::find_if(m_demuxers, [track_id](qtmp4_demuxer_cptr const &dmx) { return dmx->container_id == track_id; });
 
   if (!track_id || !mtx::includes(m_track_defaults, track_id) || (m_demuxers.end() == track_itr)) {
     mxdebug_if(m_debug_headers,
@@ -1084,7 +1084,7 @@ qtmp4_reader_c::read_chapter_track() {
   if (m_ti.m_no_chapters || m_chapters)
     return;
 
-  auto chapter_dmx_itr = brng::find_if(m_demuxers, [this](qtmp4_demuxer_cptr const &dmx) { return dmx->is_chapters(); });
+  auto chapter_dmx_itr = brng::find_if(m_demuxers, [](qtmp4_demuxer_cptr const &dmx) { return dmx->is_chapters(); });
   if (m_demuxers.end() == chapter_dmx_itr)
     return;
 
