@@ -274,7 +274,7 @@ hevcc_c::pack() {
   bit_writer_c w;
 
   auto write_list = [&w](std::vector<memory_cptr> const &list, uint8 nal_unit_type) {
-    w.put_bits(1, 0);
+    w.put_bits(1, 1);
     w.put_bits(1, 0);
     w.put_bits(6, nal_unit_type);
     w.put_bits(16, list.size());
@@ -340,8 +340,8 @@ hevcc_c::pack() {
   // max_sub_layers                      3     maximum number of temporal sub-layers
   // temporal_id_nesting_flag            1     Specifies whether inter prediction is additionally restricted. see [2] for interpretation.
   // size_nalu_minus_one                 2     Size of field NALU Length – 1
-  w.put_bits(2, m_codec_private.max_sub_layers_minus1 + 1);
-  w.put_bits(3, 0);
+  w.put_bits(2, 0);
+  w.put_bits(3, m_codec_private.max_sub_layers_minus1 + 1);
   w.put_bits(1, m_codec_private.temporal_id_nesting_flag);
   w.put_bits(2, m_nalu_size_length - 1);
   // num_arrays                          8     Number of arrays of parameter sets

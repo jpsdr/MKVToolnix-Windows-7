@@ -27,6 +27,10 @@
   when saving the file. Fixes #2097.
 * mkvmerge: Opus output: mkvmerge will now put all frames with discard padding
   into their own block group. Fixes #2100.
+* mkvmerge: HEVC/h.265: the generation of the HEVCC structure stored in
+  `CodecPrivate` was wrong in two places: 1. the position of the number of
+  sub-layers was swapped with reserved bits and 2. the VPS/SPS/PPS/SEI lists
+  did not start with a reserved 1 bit.
 
 ## Build system changes
 
