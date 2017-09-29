@@ -34,6 +34,8 @@
 * mkvmerge: AAC reader: mkvmerge will now emit an error message for AAC files
   whose header fields imply a sampling frequency or number of channels
   of 0. See #2107.
+* MKVToolNix GUI: job queue: fixed calculation of total progress when
+  automatic removal of completed is enabled. Fixes #2105.
 
 ## Build system changes
 

@@ -465,16 +465,21 @@ Model::updateProgress() {
     return;
 
   auto numRunning       = 0;
+  auto numPendingAuto   = 0;
   auto runningProgress  = 0;
 
   for (auto const &job : m_toBeProcessed)
     if (Job::Running == job->status()) {
       ++numRunning;
       runningProgress += job->progress();
-    }
+
+    } else if (Job::PendingAuto == job->status())
+      ++numPendingAuto;
 
   auto progress      = numRunning ? runningProgress / numRunning : 0u;
-  auto totalProgress = (m_queueNumDone * 100 + runningProgress) / m_toBeProcessed.count();
+  auto totalProgress = (m_queueNumDone * 100 + runningProgress) / (m_queueNumDone + numRunning + numPendingAuto);
+
+  qDebug() << "updateProgress: total" << totalProgress << "numDone" << m_queueNumDone << "numRunning" << numRunning << "numPendingAuto" << numPendingAuto << "runningProgress" << runningProgress;
 
   emit progressChanged(progress, totalProgress);
 }
