@@ -314,14 +314,18 @@ end
 # man pages from DocBook XML
 rule '.1' => '.xml' do |t|
   filter = lambda do |code, lines|
-    if (0 == code) && lines.any? { |line| /^error/i.match(line) }
+    if (0 == code) && lines.any? { |line| /^error|parser error/i.match(line) }
       File.unlink(t.name) if File.exists?(t.name)
       result = 1
+
+    elsif 0 != code
+      result = code
+      puts lines.join('')
+
     else
       result = 0
+      puts lines.join('') if $verbose
     end
-
-    puts lines.join('') if $verbose
 
     result
   end
