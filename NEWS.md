@@ -31,6 +31,9 @@
   `CodecPrivate` was wrong in two places: 1. the position of the number of
   sub-layers was swapped with reserved bits and 2. the VPS/SPS/PPS/SEI lists
   did not start with a reserved 1 bit.
+* mkvmerge: AAC reader: mkvmerge will now emit an error message for AAC files
+  whose header fields imply a sampling frequency or number of channels
+  of 0. See #2107.
 
 ## Build system changes
 

@@ -20,8 +20,9 @@
 #include "common/id3.h"
 #include "common/id_info.h"
 #include "input/r_aac.h"
-#include "merge/input_x.h"
 #include "merge/file_status.h"
+#include "merge/input_x.h"
+#include "merge/output_control.h"
 #include "output/p_aac.h"
 
 int
@@ -69,12 +70,12 @@ aac_reader_c::read_headers() {
 
     while (m_parser.frames_available()) {
       m_aacheader = m_parser.get_frame().m_header;
-      if (m_aacheader.config.sample_rate > 0)
+      if ((m_aacheader.config.sample_rate > 0) && (m_aacheader.config.channels > 0))
         break;
     }
 
-    if (!m_aacheader.config.sample_rate)
-      throw mtx::input::header_parsing_x();
+    if ((!m_aacheader.config.sample_rate || !m_aacheader.config.channels) && !g_identifying)
+      mxerror(boost::format(Y("The AAC file '%1%' contains invalid header data: the sampling frequency or the number of channels is 0.\n")) % m_ti.m_fname);
 
     m_parser             = aac::parser_c{};
 
