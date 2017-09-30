@@ -6,34 +6,36 @@
 
 ## Bug fixes
 
-* mkvmerge: the `doc type version` will be set at least to 2 if certain
-  elements are written (`CodecState`, `CueCodecState`, `FlagInterlaced`).
-* mkvmerge: the track header attributes `MinCache` and `MaxCache` will not be
-  written anymore. Fixes #2079.
-* mkvmerge: AVC/h.264: fixed the calculation of reference information for P
-  and B frames. This also fixes some P frames being marked as B frames and
-  vice versa.
-* mkvmerge: Matroska reader: the "key" and "discardable" flags of SimpleBlock
-  elements will be kept as they are. Partial fix for #2047.
+* configure: the checks for libEBML and libMatroska have been fixed to require
+  libEBML 1.3.5 and libMatroska 1.4.7 as intended.
+
+* mkvmerge: AAC reader: mkvmerge will now emit an error message for AAC files
+  whose header fields imply a sampling frequency or number of channels
+  of 0. See #2107.
+* mkvmerge: AVC/h.264 ES parser: fixed the calculation of reference
+  information for P and B frames. This also fixes some P frames being marked
+  as B frames and vice versa.
 * mkvmerge: AVC/h.264 ES parser: only non-key frames that have the NALU header
   field `nal_ref_idc` set to 0 will be marked as "discardable" in
   `SimpleBlock` elements. Other half of the fix for #2047.
-* configure: the checks for libEBML and libMatroska have been fixed to require
-  libEBML 1.3.5 and libMatroska 1.4.7 as intended.
-* mkvmerge: Matroska reader: if present in the file, the "white colour
-  coordinate x" track header attribute was written to both "white colour
-  coordinate x" and "white colour coordinate y" in the output file.
-* MKVToolNix GUI: header editor: removed the check for external modification
-  when saving the file. Fixes #2097.
-* mkvmerge: Opus output: mkvmerge will now put all frames with discard padding
-  into their own block group. Fixes #2100.
 * mkvmerge: HEVC/h.265: the generation of the HEVCC structure stored in
   `CodecPrivate` was wrong in two places: 1. the position of the number of
   sub-layers was swapped with reserved bits and 2. the VPS/SPS/PPS/SEI lists
   did not start with a reserved 1 bit.
-* mkvmerge: AAC reader: mkvmerge will now emit an error message for AAC files
-  whose header fields imply a sampling frequency or number of channels
-  of 0. See #2107.
+* mkvmerge: output: the `doc type version` will be set at least to 2 if
+  certain elements are written (`CodecState`, `CueCodecState`,
+  `FlagInterlaced`).
+* mkvmerge: output: the track header attributes `MinCache` and `MaxCache` will not be
+  written anymore. Fixes #2079.
+* mkvmerge: Matroska reader: the "key" and "discardable" flags of SimpleBlock
+  elements will be kept as they are. Partial fix for #2047.
+* mkvmerge: Matroska reader: if present in the file, the "white colour
+  coordinate x" track header attribute was written to both "white colour
+  coordinate x" and "white colour coordinate y" in the output file.
+* mkvmerge: Opus output: mkvmerge will now put all frames with discard padding
+  into their own block group. Fixes #2100.
+* MKVToolNix GUI: header editor: removed the check for external modification
+  when saving the file. Fixes #2097.
 * MKVToolNix GUI: job queue: fixed calculation of total progress when
   automatic removal of completed is enabled. Fixes #2105.
 
