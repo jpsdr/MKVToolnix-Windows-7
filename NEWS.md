@@ -1,4 +1,4 @@
-# Version ?
+# Version 16.0.0 "Protest" 2017-09-30
 
 ## New features and enhancements
 
