@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: AAC ADTS parser: mkvmerge will now parse the
+  `program_config_element` if it is located at the start of an AAC frame in
+  order to determine the actual number of channels. This overrides invalid
+  channel configurations in the ADTS headers, for example. Fixes #2107.
+
+
 # Version 16.0.0 "Protest" 2017-09-30
 
 ## New features and enhancements

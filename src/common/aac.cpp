@@ -111,7 +111,7 @@ create_audio_specific_config(audio_config_t const &audio_config) {
 
   write_object_type(audio_config.profile + 1);
   write_sampling_frequency(audio_config.sample_rate);
-  w.put_bits(4, audio_config.channels);
+  w.put_bits(4, audio_config.channels == 8 ? 7 : audio_config.channels);
 
   if (audio_config.ga_specific_config && audio_config.ga_specific_config_bit_size) {
     bit_reader_c r{audio_config.ga_specific_config->get_buffer(), audio_config.ga_specific_config->get_size()};
@@ -563,6 +563,11 @@ parser_c::decode_adts_header(unsigned char const *buffer,
 
     if (frame.m_header.bytes <= frame.m_header.header_byte_size)
       return { failure, 1 };
+
+    auto data_start_position = bc.get_bit_position();
+    if (bc.get_bits(3) == 0x05)
+      frame.m_header.parse_program_config_element(bc);
+    bc.set_bit_position(data_start_position);
 
     if (m_copy_data) {
       frame.m_data = memory_c::alloc(frame.m_header.data_byte_size);
@@ -1098,6 +1103,20 @@ header_c::parse_audio_specific_config(const unsigned char *data,
 
   bit_reader_c bc{data, static_cast<unsigned int>(size)};
   parse_audio_specific_config(bc, look_for_sync_extension);
+}
+
+void
+header_c::parse_program_config_element(bit_reader_c &bc) {
+  m_bc = &bc;
+
+  try {
+    read_program_config_element();
+
+  } catch (mtx::exception &ex) {
+    mxdebug_if(s_debug_parse_data, boost::format("aac::parse_audio_specific_config: exception: %1%\n") % ex);
+  }
+
+  m_bc = nullptr;
 }
 
 bool

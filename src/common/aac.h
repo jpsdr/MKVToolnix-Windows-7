@@ -91,6 +91,7 @@ public:
 
   void parse_audio_specific_config(const unsigned char *data, size_t size, bool look_for_sync_extension = true);
   void parse_audio_specific_config(bit_reader_c &bc, bool look_for_sync_extension = true);
+  void parse_program_config_element(bit_reader_c &bc);
 
 protected:
   int read_object_type();
