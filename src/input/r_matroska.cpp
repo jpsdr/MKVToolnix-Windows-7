@@ -1758,7 +1758,7 @@ kax_reader_c::create_ac3_audio_packetizer(kax_track_t *t,
                     : t->codec_id == MKV_A_EAC3     ? 16
                     :                                  0;
 
-  set_track_packetizer(t, new ac3_packetizer_c(this, nti, t->a_sfreq, t->a_channels, bsid, true));
+  set_track_packetizer(t, new ac3_packetizer_c(this, nti, t->a_sfreq, t->a_channels, bsid));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 

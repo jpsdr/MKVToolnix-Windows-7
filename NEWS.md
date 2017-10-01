@@ -6,6 +6,10 @@
   `program_config_element` if it is located at the start of an AAC frame in
   order to determine the actual number of channels. This overrides invalid
   channel configurations in the ADTS headers, for example. Fixes #2107.
+* mkvmerge: E-AC-3 in Matroska: if AC-3 cores and their corresponding E-AC-3
+  extension are located in two different Matroska blocks, then mkvmerge will
+  now re-assemble them into a single block and only use the first block's
+  timestamp.
 
 
 # Version 16.0.0 "Protest" 2017-09-30
