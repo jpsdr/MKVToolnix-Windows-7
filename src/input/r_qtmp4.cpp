@@ -1643,7 +1643,7 @@ qtmp4_reader_c::create_audio_packetizer_ac3(qtmp4_demuxer_c &dmx) {
     return false;
   }
 
-  dmx.ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, dmx.m_ac3_header.m_sample_rate, dmx.m_ac3_header.m_channels, dmx.m_ac3_header.m_bs_id, true));
+  dmx.ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, dmx.m_ac3_header.m_sample_rate, dmx.m_ac3_header.m_channels, dmx.m_ac3_header.m_bs_id));
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 
   return true;

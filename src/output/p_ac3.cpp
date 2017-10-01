@@ -28,14 +28,12 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    int samples_per_sec,
                                    int channels,
-                                   int bsid,
-                                   bool framed)
+                                   int bsid)
   : generic_packetizer_c(p_reader, p_ti)
   , m_timestamp_calculator{samples_per_sec}
   , m_samples_per_packet{1536}
   , m_packet_duration{m_timestamp_calculator.get_duration(m_samples_per_packet).to_ns()}
   , m_stream_position{}
-  , m_framed{framed}
   , m_first_packet{true}
 {
   m_first_ac3_header.m_sample_rate = samples_per_sec;
@@ -111,9 +109,6 @@ ac3_packetizer_c::process(packet_cptr packet) {
   m_timestamp_calculator.add_timestamp(packet, m_stream_position);
   m_stream_position += packet->data->get_size();
 
-  if (m_framed)
-    return process_framed(packet);
-
   add_to_buffer(packet->data->get_buffer(), packet->data->get_size());
 
   flush_packets();
@@ -121,23 +116,9 @@ ac3_packetizer_c::process(packet_cptr packet) {
   return FILE_STATUS_MOREDATA;
 }
 
-int
-ac3_packetizer_c::process_framed(packet_cptr const &packet) {
-  if (m_first_packet) {
-    m_parser.add_bytes(packet->data);
-    m_parser.flush();
-    if (m_parser.frame_available())
-      adjust_header_values(get_frame());
-  }
-
-  set_timecode_and_add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
-}
-
 void
 ac3_packetizer_c::set_timecode_and_add_packet(packet_cptr const &packet,
-                                              boost::optional<uint64_t> packet_stream_position) {
+                                              uint64_t packet_stream_position) {
   packet->timecode = m_timestamp_calculator.get_next_timestamp(m_samples_per_packet, packet_stream_position).to_ns();
   packet->duration = m_packet_duration;
 
@@ -157,9 +138,6 @@ ac3_packetizer_c::add_to_buffer(unsigned char *const buf,
 
 void
 ac3_packetizer_c::flush_impl() {
-  if (m_framed)
-    return;
-
   m_parser.flush();
   flush_packets();
 }
