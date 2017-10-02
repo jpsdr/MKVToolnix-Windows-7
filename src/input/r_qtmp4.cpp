@@ -3032,7 +3032,7 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
 void
 qtmp4_demuxer_c::derive_track_params_from_ac3_audio_bitstream() {
   auto buf    = read_first_bytes(64);
-  auto header = ac3::frame_c{};
+  auto header = mtx::ac3::frame_c{};
 
   if (!buf || (-1 == header.find_in(buf)))
     return;

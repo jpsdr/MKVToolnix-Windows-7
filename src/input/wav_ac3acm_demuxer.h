@@ -19,7 +19,7 @@
 
 class wav_ac3acm_demuxer_c: public wav_demuxer_c {
 protected:
-  ac3::frame_c m_ac3header;
+  mtx::ac3::frame_c m_ac3header;
   memory_cptr m_buf[2];
   int m_cur_buf;
   bool m_swap_bytes;

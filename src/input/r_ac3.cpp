@@ -69,7 +69,7 @@ ac3_reader_c::read_headers() {
 
     m_in->setFilePointer(tag_size_start, seek_beginning);
 
-    ac3::parser_c parser;
+    mtx::ac3::parser_c parser;
     parser.add_bytes(m_chunk->get_buffer(), init_read_len);
     if (!parser.frame_available())
       throw mtx::input::header_parsing_x();
@@ -129,7 +129,7 @@ ac3_reader_c::find_valid_headers(mm_io_c &in,
     in.setFilePointer(0, seek_beginning);
     skip_id3v2_tag(in);
 
-    ac3::parser_c parser;
+    mtx::ac3::parser_c parser;
     int num_read = in.read(buf->get_buffer(), probe_range);
     int pos      = parser.find_consecutive_frames(buf->get_buffer(), num_read, num_headers);
 

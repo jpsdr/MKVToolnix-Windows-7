@@ -817,7 +817,7 @@ mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t id,
   buffer.add(buf, length);
 
   while (m_probe_range >= m_in->getFilePointer()) {
-    ac3::frame_c header;
+    mtx::ac3::frame_c header;
 
     if (-1 != header.find_in(buffer.get_buffer(), buffer.get_size())) {
       mxdebug_if(m_debug_headers,

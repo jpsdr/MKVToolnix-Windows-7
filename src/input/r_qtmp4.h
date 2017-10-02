@@ -259,7 +259,7 @@ struct qtmp4_demuxer_c {
   uint32_t a_channels, a_bitdepth;
   float a_samplerate;
   boost::optional<mtx::aac::audio_config_t> a_aac_audio_config;
-  ac3::frame_c m_ac3_header;
+  mtx::ac3::frame_c m_ac3_header;
   mtx::dts::header_t m_dts_header;
 
   std::vector<memory_cptr> priv;

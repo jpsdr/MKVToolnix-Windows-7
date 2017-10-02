@@ -85,7 +85,7 @@ parse_file(const std::string &file_name) {
   memory_cptr mem    = memory_c::alloc(buf_size);
   unsigned char *ptr = mem->get_buffer();
 
-  ac3::parser_c parser;
+  mtx::ac3::parser_c parser;
 
   size_t num_read;
   do {
@@ -96,8 +96,8 @@ parse_file(const std::string &file_name) {
       parser.flush();
 
     while (parser.frame_available()) {
-      ac3::frame_c frame = parser.get_frame();
-      std::string output = frame.to_string(g_opt_frame_headers);
+      auto frame  = parser.get_frame();
+      auto output = frame.to_string(g_opt_frame_headers);
 
       if (g_opt_checksum) {
         uint32_t adler32  = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data);

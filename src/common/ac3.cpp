@@ -22,12 +22,14 @@
 #include "common/checksums/base.h"
 #include "common/endian.h"
 
-ac3::frame_c::frame_c() {
+namespace mtx { namespace ac3 {
+
+frame_c::frame_c() {
   init();
 }
 
 void
-ac3::frame_c::init() {
+frame_c::init() {
   m_sample_rate     = 0;
   m_bit_rate        = 0;
   m_channels        = 0;
@@ -45,22 +47,22 @@ ac3::frame_c::init() {
 }
 
 bool
-ac3::frame_c::is_eac3()
+frame_c::is_eac3()
   const {
   return (0x10 == m_bs_id) || !m_dependent_frames.empty();
 }
 
 void
-ac3::frame_c::add_dependent_frame(frame_c const &frame,
-                                  unsigned char const *buffer,
-                                  size_t buffer_size) {
+frame_c::add_dependent_frame(frame_c const &frame,
+                             unsigned char const *buffer,
+                             std::size_t buffer_size) {
   m_data->add(buffer, buffer_size);
   m_dependent_frames.push_back(frame);
 }
 
 bool
-ac3::frame_c::decode_header(unsigned char const *buffer,
-                            size_t buffer_size) {
+frame_c::decode_header(unsigned char const *buffer,
+                       std::size_t buffer_size) {
   bit_reader_c bc(buffer, buffer_size);
 
   try {
@@ -82,7 +84,7 @@ ac3::frame_c::decode_header(unsigned char const *buffer,
 }
 
 bool
-ac3::frame_c::decode_header_type_eac3(bit_reader_c &bc) {
+frame_c::decode_header_type_eac3(bit_reader_c &bc) {
   static const int sample_rates[] = { 48000, 44100, 32000, 24000, 22050, 16000 };
   static const int channels[]     = {     2,     1,     2,     3,     3,     4,     4,     5 };
   static const int samples[]      = {   256,   512,   768,  1536 };
@@ -115,7 +117,7 @@ ac3::frame_c::decode_header_type_eac3(bit_reader_c &bc) {
 }
 
 bool
-ac3::frame_c::decode_header_type_ac3(bit_reader_c &bc) {
+frame_c::decode_header_type_ac3(bit_reader_c &bc) {
   static const uint16_t sample_rates[]     = { 48000, 44100, 32000 };
   static const uint8_t channel_modes[]     = {  2,  1,  2,  3,  3,  4,  4,   5 };
   static const uint16_t bit_rates[]        = { 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 384, 448, 512, 576, 640 };
@@ -193,21 +195,21 @@ ac3::frame_c::decode_header_type_ac3(bit_reader_c &bc) {
 }
 
 int
-ac3::frame_c::find_in(memory_cptr const &buffer) {
+frame_c::find_in(memory_cptr const &buffer) {
   return find_in(buffer->get_buffer(), buffer->get_size());
 }
 
 int
-ac3::frame_c::find_in(unsigned char const *buffer,
-                      size_t buffer_size) {
-  for (size_t offset = 0; offset < buffer_size; ++offset)
+frame_c::find_in(unsigned char const *buffer,
+                 std::size_t buffer_size) {
+  for (std::size_t offset = 0; offset < buffer_size; ++offset)
     if (decode_header(&buffer[offset], buffer_size - offset))
       return offset;
   return -1;
 }
 
 std::string
-ac3::frame_c::to_string(bool verbose)
+frame_c::to_string(bool verbose)
   const {
   if (!verbose)
     return (boost::format("position %1% BS ID %2% size %3% E-AC-3 %4%") % m_stream_position % m_bs_id % m_bytes % is_eac3()).str();
@@ -246,7 +248,7 @@ ac3::frame_c::to_string(bool verbose)
 
 // ------------------------------------------------------------
 
-ac3::parser_c::parser_c()
+parser_c::parser_c()
   : m_parsed_stream_position(0)
   , m_total_stream_position(0)
   , m_garbage_size(0)
@@ -254,56 +256,56 @@ ac3::parser_c::parser_c()
 }
 
 void
-ac3::parser_c::add_bytes(memory_cptr const &mem) {
+parser_c::add_bytes(memory_cptr const &mem) {
   add_bytes(mem->get_buffer(), mem->get_size());
 }
 
 void
-ac3::parser_c::add_bytes(unsigned char *const buffer,
-                         size_t size) {
+parser_c::add_bytes(unsigned char *const buffer,
+                    std::size_t size) {
   m_buffer.add(buffer, size);
   m_total_stream_position += size;
   parse(false);
 }
 
 void
-ac3::parser_c::flush() {
+parser_c::flush() {
   parse(true);
 }
 
-size_t
-ac3::parser_c::frame_available()
+std::size_t
+parser_c::frame_available()
   const {
   return m_frames.size();
 }
 
-ac3::frame_c
-ac3::parser_c::get_frame() {
+frame_c
+parser_c::get_frame() {
   frame_c frame = m_frames.front();
   m_frames.pop_front();
   return frame;
 }
 
 uint64_t
-ac3::parser_c::get_total_stream_position()
+parser_c::get_total_stream_position()
   const {
   return m_total_stream_position;
 }
 
 uint64_t
-ac3::parser_c::get_parsed_stream_position()
+parser_c::get_parsed_stream_position()
   const {
   return m_parsed_stream_position;
 }
 
 void
-ac3::parser_c::parse(bool end_of_stream) {
+parser_c::parse(bool end_of_stream) {
   unsigned char *const buffer = m_buffer.get_buffer();
-  size_t buffer_size          = m_buffer.get_size();
-  size_t position             = 0;
+  std::size_t buffer_size     = m_buffer.get_size();
+  std::size_t position        = 0;
 
   while ((position + 8) < buffer_size) {
-    ac3::frame_c frame;
+    frame_c frame;
 
     if (!frame.decode_header(&buffer[position], buffer_size - position)) {
       ++position;
@@ -341,18 +343,18 @@ ac3::parser_c::parse(bool end_of_stream) {
 }
 
 int
-ac3::parser_c::find_consecutive_frames(unsigned char const *buffer,
-                                       size_t buffer_size,
-                                       size_t num_required_headers) {
+parser_c::find_consecutive_frames(unsigned char const *buffer,
+                                  std::size_t buffer_size,
+                                  std::size_t num_required_headers) {
   static auto s_debug = debugging_option_c{"ac3_consecutive_frames"};
-  size_t base = 0;
+  std::size_t base = 0;
 
   do {
     mxdebug_if(s_debug, boost::format("Starting search for %2% headers with base %1%, buffer size %3%\n") % base % num_required_headers % buffer_size);
 
-    size_t position = base;
+    std::size_t position = base;
 
-    ac3::frame_c first_frame;
+    frame_c first_frame;
     while (((position + 8) < buffer_size) && !first_frame.decode_header(&buffer[position], buffer_size - position))
       ++position;
 
@@ -361,13 +363,13 @@ ac3::parser_c::find_consecutive_frames(unsigned char const *buffer,
     if (!first_frame.m_valid)
       return -1;
 
-    size_t offset            = position + first_frame.m_bytes;
-    size_t num_headers_found = 1;
+    std::size_t offset            = position + first_frame.m_bytes;
+    std::size_t num_headers_found = 1;
 
     while (   (num_headers_found < num_required_headers)
            && (offset            < buffer_size)) {
 
-      ac3::frame_c current_frame;
+      frame_c current_frame;
       if (!current_frame.decode_header(&buffer[offset], buffer_size - offset))
         break;
 
@@ -444,9 +446,9 @@ pow_poly(unsigned int a,
 }
 
 bool
-verify_ac3_checksum(const unsigned char *buf,
-                    size_t size) {
-  ac3::frame_c frame;
+verify_checksum(unsigned char const *buf,
+                std::size_t size) {
+  frame_c frame;
 
   if (!frame.decode_header(buf, size))
     return false;
@@ -465,3 +467,5 @@ verify_ac3_checksum(const unsigned char *buf,
 
   return expected_crc == actual_crc;
 }
+
+}}                              // namespace mtx::ac3

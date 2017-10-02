@@ -45,7 +45,7 @@ struct truehd_frame_t {
   int m_size{}, m_sampling_rate{}, m_channels{}, m_samples_per_frame{};
   bool m_contains_atmos{};
 
-  ac3::frame_c m_ac3_header;
+  mtx::ac3::frame_c m_ac3_header;
 
   memory_cptr m_data;
 

@@ -39,7 +39,7 @@ wav_ac3acm_demuxer_c::probe(mm_io_cptr &io) {
   int len = io->read(m_buf[m_cur_buf]->get_buffer(), AC3ACM_READ_SIZE);
   io->restore_pos();
 
-  ac3::parser_c parser;
+  mtx::ac3::parser_c parser;
   int pos = parser.find_consecutive_frames(m_buf[m_cur_buf]->get_buffer(), len, 4);
 
   if (-1 == pos) {

@@ -41,52 +41,54 @@
 
 class bit_reader_c;
 
-namespace ac3 {
-  class frame_c {
-  public:
-    unsigned int m_sample_rate, m_bit_rate, m_channels, m_flags, m_bytes, m_bs_id, m_samples, m_frame_type, m_sub_stream_id;
-    uint64_t m_stream_position, m_garbage_size;
-    bool m_valid;
-    memory_cptr m_data;
-    std::vector<frame_c> m_dependent_frames;
+namespace mtx { namespace ac3 {
 
-  public:
-    frame_c();
-    void init();
-    bool is_eac3() const;
-    void add_dependent_frame(frame_c const &frame, unsigned char const *buffer, size_t buffer_size);
-    bool decode_header(unsigned char const *buffer, size_t buffer_size);
-    bool decode_header_type_eac3(bit_reader_c &bc);
-    bool decode_header_type_ac3(bit_reader_c &bc);
+class frame_c {
+public:
+  unsigned int m_sample_rate, m_bit_rate, m_channels, m_flags, m_bytes, m_bs_id, m_samples, m_frame_type, m_sub_stream_id;
+  uint64_t m_stream_position, m_garbage_size;
+  bool m_valid;
+  memory_cptr m_data;
+  std::vector<frame_c> m_dependent_frames;
 
-    std::string to_string(bool verbose) const;
+public:
+  frame_c();
+  void init();
+  bool is_eac3() const;
+  void add_dependent_frame(frame_c const &frame, unsigned char const *buffer, std::size_t buffer_size);
+  bool decode_header(unsigned char const *buffer, std::size_t buffer_size);
+  bool decode_header_type_eac3(bit_reader_c &bc);
+  bool decode_header_type_ac3(bit_reader_c &bc);
 
-    int find_in(memory_cptr const &buffer);
-    int find_in(unsigned char const *buffer, size_t buffer_size);
-  };
+  std::string to_string(bool verbose) const;
 
-  class parser_c {
-  protected:
-    std::deque<frame_c> m_frames;
-    byte_buffer_c m_buffer;
-    uint64_t m_parsed_stream_position, m_total_stream_position;
-    frame_c m_current_frame;
-    size_t m_garbage_size;
-
-  public:
-    parser_c();
-    void add_bytes(memory_cptr const &mem);
-    void add_bytes(unsigned char *const buffer, size_t size);
-    void flush();
-    size_t frame_available() const;
-    frame_c get_frame();
-    uint64_t get_parsed_stream_position() const;
-    uint64_t get_total_stream_position() const;
-
-    int find_consecutive_frames(unsigned char const *buffer, size_t buffer_size, size_t num_required_headers);
-
-    void parse(bool end_of_stream);
-  };
+  int find_in(memory_cptr const &buffer);
+  int find_in(unsigned char const *buffer, std::size_t buffer_size);
 };
 
-bool verify_ac3_checksum(unsigned char const *buf, size_t size);
+class parser_c {
+protected:
+  std::deque<frame_c> m_frames;
+  byte_buffer_c m_buffer;
+  uint64_t m_parsed_stream_position, m_total_stream_position;
+  frame_c m_current_frame;
+  std::size_t m_garbage_size;
+
+public:
+  parser_c();
+  void add_bytes(memory_cptr const &mem);
+  void add_bytes(unsigned char *const buffer, std::size_t size);
+  void flush();
+  std::size_t frame_available() const;
+  frame_c get_frame();
+  uint64_t get_parsed_stream_position() const;
+  uint64_t get_total_stream_position() const;
+
+  int find_consecutive_frames(unsigned char const *buffer, std::size_t buffer_size, std::size_t num_required_headers);
+
+  void parse(bool end_of_stream);
+};
+
+bool verify_checksum(unsigned char const *buf, std::size_t size);
+
+}}                              // namespace mtx::ac3

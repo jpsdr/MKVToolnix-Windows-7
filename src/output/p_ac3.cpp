@@ -47,9 +47,9 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
 ac3_packetizer_c::~ac3_packetizer_c() {
 }
 
-ac3::frame_c
+mtx::ac3::frame_c
 ac3_packetizer_c::get_frame() {
-  ac3::frame_c frame = m_parser.get_frame();
+  mtx::ac3::frame_c frame = m_parser.get_frame();
 
   if (0 == frame.m_garbage_size)
     return frame;
@@ -158,7 +158,7 @@ ac3_packetizer_c::flush_packets() {
 }
 
 void
-ac3_packetizer_c::adjust_header_values(ac3::frame_c const &ac3_header) {
+ac3_packetizer_c::adjust_header_values(mtx::ac3::frame_c const &ac3_header) {
   if (!m_first_packet)
     return;
 
