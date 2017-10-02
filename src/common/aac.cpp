@@ -24,7 +24,7 @@
 #include "common/mp4.h"
 #include "common/strings/formatting.h"
 
-namespace aac {
+namespace mtx { namespace aac {
 
 static unsigned int const s_sampling_freq[16] = {
   96000, 88200, 64000, 48000, 44100, 32000,
@@ -102,7 +102,7 @@ create_audio_specific_config(audio_config_t const &audio_config) {
   };
 
   auto write_sampling_frequency = [&w](unsigned int sampling_frequency) {
-    auto index = aac::get_sampling_freq_idx(sampling_frequency);
+    auto index = get_sampling_freq_idx(sampling_frequency);
 
     w.put_bits(4, index);
     if (index == 0x0f)
@@ -1086,7 +1086,7 @@ header_c::parse_audio_specific_config(bit_reader_c &bc,
     }
 
   } catch (mtx::exception &ex) {
-    mxdebug_if(s_debug_parse_data, boost::format("aac::parse_audio_specific_config: exception: %1%\n") % ex);
+    mxdebug_if(s_debug_parse_data, boost::format("mtx::aac::parse_audio_specific_config: exception: %1%\n") % ex);
   }
 
   m_bc = nullptr;
@@ -1099,7 +1099,7 @@ header_c::parse_audio_specific_config(const unsigned char *data,
   if (size < 2)
     return;
 
-  mxdebug_if(s_debug_parse_data, boost::format("aac::parse_audio_specific_config: size %1%, data: %2%\n") % size % to_hex(data, size));
+  mxdebug_if(s_debug_parse_data, boost::format("mtx::aac::parse_audio_specific_config: size %1%, data: %2%\n") % size % to_hex(data, size));
 
   bit_reader_c bc{data, static_cast<unsigned int>(size)};
   parse_audio_specific_config(bc, look_for_sync_extension);
@@ -1113,7 +1113,7 @@ header_c::parse_program_config_element(bit_reader_c &bc) {
     read_program_config_element();
 
   } catch (mtx::exception &ex) {
-    mxdebug_if(s_debug_parse_data, boost::format("aac::parse_audio_specific_config: exception: %1%\n") % ex);
+    mxdebug_if(s_debug_parse_data, boost::format("mtx::aac::parse_audio_specific_config: exception: %1%\n") % ex);
   }
 
   m_bc = nullptr;
@@ -1129,4 +1129,4 @@ operator ==(const header_c &h1,
       && (h1.config.profile     == h2.config.profile);
 }
 
-} // namespace aac
+}} // namespace mtx::aac

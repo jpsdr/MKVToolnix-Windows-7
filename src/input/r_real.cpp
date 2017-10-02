@@ -273,7 +273,7 @@ real_reader_c::create_dnet_audio_packetizer(real_demuxer_cptr dmx) {
 
 void
 real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
-  auto audio_config     = aac::audio_config_t{};
+  auto audio_config     = mtx::aac::audio_config_t{};
   bool profile_detected = false;
 
   int64_t tid           = dmx->track->id;
@@ -284,7 +284,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
     mxverb(2, boost::format("real_reader: extra_len: %1%\n") % extra_len);
 
     if ((4 + extra_len) <= dmx->extra_data->get_size()) {
-      auto parsed_audio_config = aac::parse_audio_specific_config(&extra_data[4 + 1], extra_len - 1);
+      auto parsed_audio_config = mtx::aac::parse_audio_specific_config(&extra_data[4 + 1], extra_len - 1);
       if (!parsed_audio_config)
         mxerror_tid(m_ti.m_fname, tid, Y("This AAC track does not contain valid headers. Could not parse the AAC information.\n"));
 

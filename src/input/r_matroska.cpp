@@ -1705,7 +1705,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   // A_AAC/MPEG2/MAIN
   // 0123456789012345
-  aac::audio_config_t audio_config{};
+  mtx::aac::audio_config_t audio_config{};
 
   audio_config.sample_rate = t->a_sfreq;
   audio_config.channels    = t->a_channels;
@@ -1713,7 +1713,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
 
   if (!t->ms_compat) {
     if (t->private_data && (2 <= t->private_data->get_size())) {
-      auto parsed_audio_config = aac::parse_audio_specific_config(t->private_data->get_buffer(), t->private_data->get_size());
+      auto parsed_audio_config = mtx::aac::parse_audio_specific_config(t->private_data->get_buffer(), t->private_data->get_size());
       if (!parsed_audio_config)
         mxerror_tid(m_ti.m_fname, t->tnum, Y("Malformed AAC codec initialization data found.\n"));
 
@@ -1724,13 +1724,13 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
 
     } else {
       int id = 0, profile = 0;
-      if (!aac::parse_codec_id(t->codec_id, id, profile))
+      if (!mtx::aac::parse_codec_id(t->codec_id, id, profile))
         mxerror_tid(m_ti.m_fname, t->tnum, boost::format(Y("Malformed codec id '%1%'.\n")) % t->codec_id);
       audio_config.profile = profile;
     }
 
   } else {
-    auto parsed_audio_config = aac::parse_audio_specific_config(t->private_data->get_buffer() + sizeof(alWAVEFORMATEX), t->private_data->get_size() - sizeof(alWAVEFORMATEX));
+    auto parsed_audio_config = mtx::aac::parse_audio_specific_config(t->private_data->get_buffer() + sizeof(alWAVEFORMATEX), t->private_data->get_size() - sizeof(alWAVEFORMATEX));
     if (!parsed_audio_config)
       mxerror_tid(m_ti.m_fname, t->tnum, Y("Malformed AAC codec initialization data found.\n"));
 

@@ -23,7 +23,7 @@ using namespace libmatroska;
 
 aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
-                                   aac::audio_config_t const &config,
+                                   mtx::aac::audio_config_t const &config,
                                    mode_e mode)
   : generic_packetizer_c(p_reader, p_ti)
   , m_config(config)            // Due to a bug in gcc 4.9.x with (…) instead of {…}.
@@ -35,7 +35,7 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
   set_track_type(track_audio);
 
   if (m_ti.m_private_data && (0 < m_ti.m_private_data->get_size())) {
-    auto parsed_config = aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size());
+    auto parsed_config = mtx::aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size());
     if (parsed_config)
       m_config = *parsed_config;
   }
@@ -60,7 +60,7 @@ aac_packetizer_c::handle_parsed_audio_config() {
   if (!raw_config)
     return;
 
-  auto parsed_config = aac::parse_audio_specific_config(raw_config->get_buffer(), raw_config->get_size());
+  auto parsed_config = mtx::aac::parse_audio_specific_config(raw_config->get_buffer(), raw_config->get_size());
 
   if (!parsed_config || (parsed_config->samples_per_frame == m_config.samples_per_frame))
     return;
@@ -93,7 +93,7 @@ aac_packetizer_c::set_headers() {
     set_codec_private(m_ti.m_private_data);
 
   else
-    set_codec_private(aac::create_audio_specific_config(m_config));
+    set_codec_private(mtx::aac::create_audio_specific_config(m_config));
 
   generic_packetizer_c::set_headers();
 }

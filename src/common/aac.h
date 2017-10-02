@@ -42,7 +42,7 @@
 
 class bit_reader_c;
 
-namespace aac {
+namespace mtx { namespace aac {
 
 struct audio_config_t {
   unsigned int profile, sample_rate, output_sample_rate, channels, samples_per_frame;
@@ -225,4 +225,4 @@ protected:
 };
 using parser_cptr = std::shared_ptr<parser_c>;
 
-} // namespace aac
+}} // namespace mtx::aac

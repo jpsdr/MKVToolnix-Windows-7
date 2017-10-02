@@ -415,7 +415,7 @@ flv_reader_c::create_v_generic_packetizer(flv_track_cptr &track) {
 
 void
 flv_reader_c::create_a_aac_packetizer(flv_track_cptr &track) {
-  aac::audio_config_t audio_config{};
+  mtx::aac::audio_config_t audio_config{};
 
   audio_config.profile     = track->m_a_profile;
   audio_config.sample_rate = track->m_a_sample_rate;
@@ -515,7 +515,7 @@ flv_reader_c::process_audio_tag_sound_format(flv_track_cptr &track,
     if (m_in->read(specific_codec_buf, size) != size)
        return false;
 
-    auto audio_config = aac::parse_audio_specific_config(specific_codec_buf, size);
+    auto audio_config = mtx::aac::parse_audio_specific_config(specific_codec_buf, size);
     if (!audio_config)
       return false;
 

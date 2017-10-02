@@ -499,7 +499,7 @@ avi_reader_c::add_audio_demuxer(int aid) {
 generic_packetizer_c *
 avi_reader_c::create_aac_packetizer(int aid,
                                     avi_demuxer_t &demuxer) {
-  aac::audio_config_t audio_config;
+  mtx::aac::audio_config_t audio_config;
 
   bool headerless = (AVI_audio_format(m_avi) != 0x706d);
 
@@ -518,10 +518,10 @@ avi_reader_c::create_aac_packetizer(int aid,
       audio_config.sbr                = false;
     }
 
-    m_ti.m_private_data = aac::create_audio_specific_config(audio_config);
+    m_ti.m_private_data = mtx::aac::create_audio_specific_config(audio_config);
 
   } else {
-    auto parsed_audio_config = aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size());
+    auto parsed_audio_config = mtx::aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size());
     if (!parsed_audio_config)
       mxerror_tid(m_ti.m_fname, aid + 1, Y("This AAC track does not contain valid headers. Could not parse the AAC information.\n"));
 

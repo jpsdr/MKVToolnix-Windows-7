@@ -59,7 +59,7 @@ struct ogm_frame_t {
 
 class ogm_a_aac_demuxer_c: public ogm_demuxer_c {
 public:
-  aac::audio_config_t audio_config{};
+  mtx::aac::audio_config_t audio_config{};
 
 public:
   ogm_a_aac_demuxer_c(ogm_reader_c *p_reader);
@@ -1003,11 +1003,11 @@ ogm_a_aac_demuxer_c::ogm_a_aac_demuxer_c(ogm_reader_c *p_reader)
 
 void
 ogm_a_aac_demuxer_c::initialize() {
-  boost::optional<aac::audio_config_t> parsed_audio_config;
+  boost::optional<mtx::aac::audio_config_t> parsed_audio_config;
 
   if (packet_data[0]->get_size() >= (sizeof(stream_header) + 5))
-    parsed_audio_config = aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,
-                                                           packet_data[0]->get_size()   - sizeof(stream_header) - 5);
+    parsed_audio_config = mtx::aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,
+                                                                packet_data[0]->get_size()   - sizeof(stream_header) - 5);
 
   if (parsed_audio_config) {
     audio_config = *parsed_audio_config;

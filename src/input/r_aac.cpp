@@ -77,7 +77,7 @@ aac_reader_c::read_headers() {
     if ((!m_aacheader.config.sample_rate || !m_aacheader.config.channels) && !g_identifying)
       mxerror(boost::format(Y("The AAC file '%1%' contains invalid header data: the sampling frequency or the number of channels is 0.\n")) % m_ti.m_fname);
 
-    m_parser             = aac::parser_c{};
+    m_parser             = mtx::aac::parser_c{};
 
     m_ti.m_id            = 0;       // ID for this track.
     int detected_profile = m_aacheader.config.profile;
@@ -155,7 +155,7 @@ aac_reader_c::find_valid_headers(mm_io_c &in,
     auto num_read = in.read(buf->get_buffer(), probe_range);
     in.setFilePointer(0, seek_beginning);
 
-    return aac::parser_c::find_consecutive_frames(buf->get_buffer(), num_read, num_headers);
+    return mtx::aac::parser_c::find_consecutive_frames(buf->get_buffer(), num_read, num_headers);
   } catch (...) {
     return -1;
   }

@@ -27,15 +27,15 @@ public:
   };
 
 private:
-  aac::audio_config_t m_config;
+  mtx::aac::audio_config_t m_config;
   mode_e m_mode;
-  aac::parser_c m_parser;
+  mtx::aac::parser_c m_parser;
   timestamp_calculator_c m_timestamp_calculator;
   int64_t m_packet_duration;
   bool m_first_packet;
 
 public:
-  aac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, aac::audio_config_t const &config, mode_e mode);
+  aac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, mtx::aac::audio_config_t const &config, mode_e mode);
   virtual ~aac_packetizer_c();
 
   virtual int process(packet_cptr packet);

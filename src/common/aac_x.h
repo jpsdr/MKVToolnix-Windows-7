@@ -17,7 +17,7 @@
 
 #include "common/error.h"
 
-namespace aac {
+namespace mtx { namespace aac {
 
 class unsupported_feature_x: public mtx::exception {
 private:
@@ -39,4 +39,4 @@ public:
 };
 
 
-} // namespace aac
+}} // namespace mtx::aac

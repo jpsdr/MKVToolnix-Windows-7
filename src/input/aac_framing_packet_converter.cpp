@@ -18,7 +18,7 @@
 #include "input/aac_framing_packet_converter.h"
 
 aac_framing_packet_converter_c::aac_framing_packet_converter_c(generic_packetizer_c *ptzr,
-                                                               aac::parser_c::multiplex_type_e multiplex_type)
+                                                               mtx::aac::parser_c::multiplex_type_e multiplex_type)
   : packet_converter_c{ptzr}
 {
   m_parser.set_multiplex_type(multiplex_type);

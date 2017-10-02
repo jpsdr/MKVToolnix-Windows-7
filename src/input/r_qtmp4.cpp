@@ -2771,7 +2771,7 @@ qtmp4_demuxer_c::parse_aac_esds_decoder_config() {
     return;
   }
 
-  a_aac_audio_config = aac::parse_audio_specific_config(esds.decoder_config->get_buffer(), esds.decoder_config->get_size());
+  a_aac_audio_config = mtx::aac::parse_audio_specific_config(esds.decoder_config->get_buffer(), esds.decoder_config->get_size());
   if (!a_aac_audio_config) {
     mxwarn(boost::format(Y("Track %1%: The AAC information could not be parsed.\n")) % id);
     return;

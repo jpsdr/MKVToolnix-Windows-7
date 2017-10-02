@@ -23,8 +23,8 @@
 class aac_reader_c: public generic_reader_c {
 private:
   memory_cptr m_chunk;
-  aac::header_c m_aacheader;
-  aac::parser_c m_parser;
+  mtx::aac::header_c m_aacheader;
+  mtx::aac::parser_c m_parser;
 
 public:
   aac_reader_c(const track_info_c &ti, const mm_io_cptr &in);
