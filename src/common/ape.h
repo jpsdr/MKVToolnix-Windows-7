@@ -16,4 +16,8 @@
 
 #include "common/common_pch.h"
 
-int ape_tag_present_at_end(mm_io_c &io);
+namespace mtx { namespace ape {
+
+int tag_present_at_end(mm_io_c &io);
+
+}}

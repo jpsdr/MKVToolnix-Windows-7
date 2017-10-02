@@ -72,7 +72,7 @@ tta_reader_c::read_headers() {
 
     uint64_t seek_sum  = m_in->getFilePointer() + 4 - tag_size;
     m_size            -= id3_tag_present_at_end(*m_in);
-    m_size            -= ape_tag_present_at_end(*m_in);
+    m_size            -= mtx::ape::tag_present_at_end(*m_in);
 
     uint32_t seek_point;
 

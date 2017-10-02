@@ -18,8 +18,10 @@
 #include "common/endian.h"
 #include "common/mm_io.h"
 
+namespace mtx { namespace ape {
+
 int
-ape_tag_present_at_end(mm_io_c &io) {
+tag_present_at_end(mm_io_c &io) {
   unsigned char buffer[24];
 
   io.save_pos();
@@ -42,3 +44,5 @@ ape_tag_present_at_end(mm_io_c &io) {
 
   return tag_size;
 }
+
+}}
