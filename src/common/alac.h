@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-namespace alac {
+namespace mtx { namespace alac {
 
 #if defined(COMP_MSC)
 #pragma pack(push,1)
@@ -39,4 +39,4 @@ struct PACKED_STRUCTURE codec_config_t {
 #pragma pack(pop)
 #endif
 
-}
+}}

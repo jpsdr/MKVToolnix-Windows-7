@@ -47,7 +47,7 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 
   m_priv = decode_codec_private(priv);
-  if (m_priv->get_size() != sizeof(alac::codec_config_t))
+  if (m_priv->get_size() != sizeof(mtx::alac::codec_config_t))
     mxerror(boost::format(Y("ALAC private data size mismatch\n")));
 
   xtr_base_c::create_file(master, track);
@@ -76,7 +76,7 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
   m_out->write(std::string{"frma"});
   m_out->write(std::string{"alac"});
 
-  m_out->write_uint32_be(12 + sizeof(alac::codec_config_t));     // ALAC Specific Info size = 36 (12 + sizeof(ALAXSpecificConfig))
+  m_out->write_uint32_be(12 + sizeof(mtx::alac::codec_config_t)); // ALAC Specific Info size = 36 (12 + sizeof(ALAXSpecificConfig))
   m_out->write(std::string{"alac"});                             // ALAC Specific Info ID
   m_out->write_uint32_be(0L);                                    // Version Flags
 

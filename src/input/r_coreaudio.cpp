@@ -116,8 +116,8 @@ coreaudio_reader_c::dump_headers()
           % (m_magic_cookie ? (boost::format("present, size %1%") % m_magic_cookie->get_size()).str() : std::string{"not present"})
           );
 
-  if (m_codec.is(codec_c::type_e::A_ALAC) && m_magic_cookie && (m_magic_cookie->get_size() >= sizeof(alac::codec_config_t))) {
-    auto cfg = reinterpret_cast<alac::codec_config_t *>(m_magic_cookie->get_buffer());
+  if (m_codec.is(codec_c::type_e::A_ALAC) && m_magic_cookie && (m_magic_cookie->get_size() >= sizeof(mtx::alac::codec_config_t))) {
+    auto cfg = reinterpret_cast<mtx::alac::codec_config_t *>(m_magic_cookie->get_buffer());
 
     mxdebug(boost::format("ALAC magic cookie dump:\n"
                           "  frame length:         %1%\n"
@@ -357,8 +357,8 @@ coreaudio_reader_c::parse_kuki_chunk() {
 
 void
 coreaudio_reader_c::handle_alac_magic_cookie(memory_cptr chunk) {
-  if (chunk->get_size() < sizeof(alac::codec_config_t))
-    debug_error_and_throw(boost::format("Invalid ALAC magic cookie; size: %1% < %2%") % chunk->get_size() % sizeof(alac::codec_config_t));
+  if (chunk->get_size() < sizeof(mtx::alac::codec_config_t))
+    debug_error_and_throw(boost::format("Invalid ALAC magic cookie; size: %1% < %2%") % chunk->get_size() % sizeof(mtx::alac::codec_config_t));
 
   // Convert old-style magic cookie
   if (!memcmp(chunk->get_buffer() + 4, "frmaalac", 8)) {
@@ -367,12 +367,12 @@ coreaudio_reader_c::handle_alac_magic_cookie(memory_cptr chunk) {
     auto const old_style_min_size
       = 12                            // format atom
       + 12                            // ALAC specific info (size, ID, version, flags)
-      + sizeof(alac::codec_config_t); // the magic cookie itself
+      + sizeof(mtx::alac::codec_config_t); // the magic cookie itself
 
     if (chunk->get_size() < old_style_min_size)
       debug_error_and_throw(boost::format("Invalid old-style ALAC magic cookie; size: %1% < %2%") % chunk->get_size() % old_style_min_size);
 
-    m_magic_cookie = memory_c::clone(chunk->get_buffer() + 12 + 12, sizeof(alac::codec_config_t));
+    m_magic_cookie = memory_c::clone(chunk->get_buffer() + 12 + 12, sizeof(mtx::alac::codec_config_t));
 
   } else
     m_magic_cookie = chunk;

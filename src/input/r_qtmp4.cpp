@@ -3146,7 +3146,7 @@ qtmp4_demuxer_c::verify_audio_parameters() {
 
 bool
 qtmp4_demuxer_c::verify_alac_audio_parameters() {
-  if (!stsd || (stsd->get_size() < (stsd_non_priv_struct_size + 12 + sizeof(alac::codec_config_t)))) {
+  if (!stsd || (stsd->get_size() < (stsd_non_priv_struct_size + 12 + sizeof(mtx::alac::codec_config_t)))) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n")) % id);
     return false;
   }

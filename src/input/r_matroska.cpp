@@ -438,7 +438,7 @@ kax_reader_c::verify_acm_audio_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_alac_audio_track(kax_track_t *t) {
-  if (t->private_data && (sizeof(alac::codec_config_t) <= t->private_data->get_size()))
+  if (t->private_data && (sizeof(mtx::alac::codec_config_t) <= t->private_data->get_size()))
     return true;
 
   if (verbose)
