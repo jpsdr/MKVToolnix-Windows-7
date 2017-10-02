@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_STRING_PARSING_H
-#define MTX_COMMON_STRING_PARSING_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -147,5 +146,3 @@ extern bool parse_timestamp(const std::string &s, timestamp_c &timestamp, bool a
 bool parse_bool(std::string value);
 
 uint64_t from_hex(const std::string &data);
-
-#endif  // MTX_COMMON_STRING_PARSING_H

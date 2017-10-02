@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_EXTRACT_OPTIONS_H
-#define MTX_EXTRACT_OPTIONS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -37,5 +36,3 @@ public:
 public:
   options_c();
 };
-
-#endif // MTX_EXTRACT_OPTIONS_H

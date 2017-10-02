@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MEMORY_H
-#define MTX_COMMON_MEMORY_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -389,5 +388,3 @@ private:
 
 memory_cptr lace_memory_xiph(const std::vector<memory_cptr> &blocks);
 std::vector<memory_cptr> unlace_memory_xiph(memory_cptr &buffer);
-
-#endif  // MTX_COMMON_MEMORY_H

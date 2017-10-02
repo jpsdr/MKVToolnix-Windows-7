@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_PACKET_CONVERTER_H
-#define MTX_INPUT_PACKET_CONVERTER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -39,5 +38,3 @@ public:
   }
 };
 using packet_converter_cptr = std::shared_ptr<packet_converter_c>;
-
-#endif  // MTX_INPUT_PACKET_CONVERTER_H

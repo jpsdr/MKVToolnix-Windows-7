@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_R_MPEG_PS_H
-#define MTX_INPUT_R_MPEG_PS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -250,5 +249,3 @@ private:
   void sort_tracks();
   void calculate_global_timecode_offset();
 };
-
-#endif // MTX_INPUT_R_MPEG_PS_H

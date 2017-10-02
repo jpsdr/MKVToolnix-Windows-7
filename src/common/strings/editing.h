@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_STRINGS_EDITING_H
-#define MTX_COMMON_STRINGS_EDITING_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -47,5 +46,3 @@ std::string get_displayable_string(const char *src, int max_len = -1);
 std::string get_displayable_string(std::string const &src);
 
 extern const std::string empty_string;
-
-#endif  // MTX_COMMON_STRINGS_EDITING_H

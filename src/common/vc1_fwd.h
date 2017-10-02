@@ -12,8 +12,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_VC1_FWD_H
-#define MTX_COMMON_VC1_FWD_H
+#pragma once
 
 namespace mtx { namespace vc1 {
 
@@ -24,5 +23,3 @@ class es_parser_c;
 using es_parser_cptr = std::shared_ptr<es_parser_c>;
 
 }}
-
-#endif  // MTX_COMMON_VC1_FWD_H

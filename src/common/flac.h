@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_FLAC_H
-#define MTX_COMMON_FLAC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -66,5 +65,3 @@ int decode_headers(unsigned char const *mem, int size, int num_elements, ...);
 }}                              // namespace mtx::flac
 
 #endif // HAVE_FLAC_FORMAT_H
-
-#endif // MTX_COMMON_FLAC_H

@@ -11,8 +11,7 @@
 
 */
 
-#ifndef MTX_COMMON_HEVCC_H
-#define MTX_COMMON_HEVCC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -72,5 +71,3 @@ public:
 };
 
 }}                              // namespace mtx::hevc
-
-#endif  // MTX_COMMON_HEVCC_H

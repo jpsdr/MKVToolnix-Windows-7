@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_TIMESTAMP_CALCULATOR_H
-#define MTX_MERGE_TIMESTAMP_CALCULATOR_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -49,5 +48,3 @@ protected:
   timestamp_c fetch_next_available_timestamp(int64_t samples_in_frame);
   timestamp_c calculate_next_timestamp(int64_t samples_in_frame);
 };
-
-#endif  // MTX_MERGE_TIMESTAMP_CALCULATOR_H

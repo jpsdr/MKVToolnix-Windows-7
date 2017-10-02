@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_VOBSUB_H
-#define MTX_R_VOBSUB_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -93,5 +92,3 @@ protected:
 
   virtual int extract_one_spu_packet(int64_t track_id);
 };
-
-#endif  // MTX_R_VOBSUB_H

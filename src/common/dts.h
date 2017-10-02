@@ -12,8 +12,7 @@
    Modified by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_DTS_H
-#define MTX_COMMON_DTS_H
+#pragma once
 
 #include "common/codec.h"
 #include "common/timestamp.h"
@@ -264,5 +263,3 @@ void convert_14_to_16_bits(const unsigned short *src, unsigned long srcwords, un
 bool detect(const void *src_buf, int len, bool &convert_14_to_16, bool &swap_bytes);
 
 }}
-
-#endif // MTX_COMMON_DTS_H

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_COMPRESSION_H
-#define MTX_COMMON_COMPRESSION_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -96,5 +95,3 @@ protected:
 
 #include "common/compression/header_removal.h"
 #include "common/compression/zlib.h"
-
-#endif // MTX_COMMON_COMPRESSION_H

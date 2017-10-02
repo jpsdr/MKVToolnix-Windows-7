@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_TIMESTAMP_H
-#define MTX_COMMON_TIMESTAMP_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -228,5 +227,3 @@ public:
 };
 
 using timestamp_c = basic_timestamp_c<int64_t>;
-
-#endif  // MTX_COMMON_TIMESTAMP_H

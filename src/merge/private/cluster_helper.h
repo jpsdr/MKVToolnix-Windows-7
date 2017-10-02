@@ -12,8 +12,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_PRIVATE_CLUSTER_HELPER_H
-#define MTX_MERGE_PRIVATE_CLUSTER_HELPER_H
+#pragma once
 
 #include "common/track_statistics.h"
 
@@ -67,5 +66,3 @@ public:
 public:
   ~impl_t();
 };
-
-#endif // MTX_MERGE_PRIVATE_CLUSTER_HELPER_H

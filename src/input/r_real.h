@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_REAL_H
-#define MTX_R_REAL_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -125,5 +124,3 @@ protected:
   virtual void create_dnet_audio_packetizer(real_demuxer_cptr dmx);
   virtual void create_video_packetizer(real_demuxer_cptr dmx);
 };
-
-#endif  // MTX_R_REAL_H

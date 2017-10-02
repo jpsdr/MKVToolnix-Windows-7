@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_VINT_H
-#define MTX_COMMON_VINT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -46,5 +45,3 @@ public:                         // static functions
   static vint_c read_ebml_id(mm_io_c &in);
   static vint_c read_ebml_id(mm_io_cptr const &in);
 };
-
-#endif  // MTX_COMMON_VINT_H

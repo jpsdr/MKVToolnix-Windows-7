@@ -12,8 +12,7 @@
    Modified by Peter Niemayer <niemayer@isg.de>.
 */
 
-#ifndef MTX_R_WAV_H
-#define MTX_R_WAV_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -122,5 +121,3 @@ protected:
 
   void create_demuxer();
 };
-
-#endif // MTX_R_WAV_H

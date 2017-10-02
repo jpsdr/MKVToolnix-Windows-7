@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_WAV_AC3ACM_DEMUXER_H
-#define MTX_INPUT_WAV_AC3ACM_DEMUXER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -50,5 +49,3 @@ public:
 protected:
   virtual int decode_buffer(int len);
 };
-
-#endif  // MTX_INPUT_WAV_AC3ACM_DEMUXER_H

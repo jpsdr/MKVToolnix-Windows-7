@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_HDMV_TEXTST_H
-#define MTX_COMMON_HDMV_TEXTST_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -41,5 +40,3 @@ enum character_code_e {         // corresponding iconv charset names
 void put_timestamp(unsigned char *buf, ::timestamp_c const &timestamp);
 
 }}
-
-#endif  // MTX_COMMON_HDMV_TEXTST_H

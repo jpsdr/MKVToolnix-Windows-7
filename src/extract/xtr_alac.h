@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_EXTRACT_XTR_ALAC_H
-#define MTX_EXTRACT_XTR_ALAC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -42,5 +41,3 @@ public:
 
 protected:
 };
-
-#endif

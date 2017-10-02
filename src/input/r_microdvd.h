@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef INPUT_R_MICRODVD_H
-#define INPUT_R_MICRODVD_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -22,5 +21,3 @@ class microdvd_reader_c {
 public:
   static int probe_file(mm_text_io_c *in, uint64_t size);
 };
-
-#endif  // INPUT_R_MICRODVD_H

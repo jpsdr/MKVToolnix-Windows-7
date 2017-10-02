@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_COMMON_H
-#define MTX_COMMON_COMMON_H
+#pragma once
 
 #undef min
 #undef max
@@ -135,5 +134,3 @@ extern unsigned int verbose;
 
 void mtx_common_init(std::string const &program_name, char const *argv0);
 std::string const &get_program_name();
-
-#endif // MTX_COMMON_COMMON_H

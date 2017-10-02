@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_TAG_TARGET_TYPE_H
-#define MTX_COMMON_TAG_TARGET_TYPE_H
+#pragma once
 
 namespace mtx { namespace tags {
 
@@ -50,4 +49,3 @@ enum target_type_e {
 };
 
 }}
-#endif // MTX_COMMON_TAGS_TARGET_TYPE_H

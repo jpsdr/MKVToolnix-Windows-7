@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PROPEDIT_TARGET_ID_MANAGER_H
-#define MTX_PROPEDIT_TARGET_ID_MANAGER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -83,5 +82,3 @@ target_id_manager_c<T>::remove(T *target) {
   if (m_targets.end() != itr)
     m_targets[std::distance(m_targets.begin(), itr)] = nullptr;
 }
-
-#endif  // MTX_PROPEDIT_TARGET_ID_MANAGER_H

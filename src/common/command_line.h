@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_COMMAND_LINE_H
-#define MTX_COMMON_COMMAND_LINE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -21,5 +20,3 @@ extern bool g_gui_mode;
 
 void usage(int exit_code = 0);
 bool handle_common_cli_args(std::vector<std::string> &args, const std::string &redirect_output_short);
-
-#endif  // MTX_COMMON_COMMAND_LINE_H

@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PROPEDIT_TARGET_H
-#define MTX_PROPEDIT_TARGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -69,5 +68,3 @@ protected:
   virtual void add_or_replace_all_master_elements(EbmlMaster *source);
 };
 using target_cptr = std::shared_ptr<target_c>;
-
-#endif // MTX_PROPEDIT_TARGET_H

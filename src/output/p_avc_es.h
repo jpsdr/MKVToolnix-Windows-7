@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_OUTPUT_P_AVC_ES_H
-#define MTX_OUTPUT_P_AVC_ES_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -50,5 +49,3 @@ protected:
   virtual void handle_actual_default_duration();
   virtual void flush_impl();
 };
-
-#endif // MTX_OUTPUT_P_AVC_ES_H

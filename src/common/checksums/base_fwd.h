@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_CHECKSUMS_BASE_FWD_H
-#define MTX_COMMON_CHECKSUMS_BASE_FWD_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -41,5 +40,3 @@ uint64_t calculate_as_uint(algorithm_e algorithm, memory_c const &buffer, uint64
 uint64_t calculate_as_uint(algorithm_e algorithm, void const *buffer, size_t size, uint64_t initial_value = 0);
 
 }} // namespace mtx { namespace checksum {
-
-#endif // MTX_COMMON_CHECKSUMS_BASE_FWD_H

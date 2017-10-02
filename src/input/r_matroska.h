@@ -12,8 +12,7 @@
    Modified by Steve Lhomme <s.lhomme@free.fr>.
 */
 
-#ifndef MTX_INPUT_R_MATROSKA_H
-#define MTX_INPUT_R_MATROSKA_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -335,5 +334,3 @@ protected:
   virtual void determine_minimum_timestamps();
   virtual void determine_global_timestamp_offset_to_apply();
 };
-
-#endif  // MTX_INPUT_R_MATROSKA_H

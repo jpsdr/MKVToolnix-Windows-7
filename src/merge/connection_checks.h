@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_CONNECTION_CHECKS_H
-#define MTX_MERGE_CONNECTION_CHECKS_H
+#pragma once
 
 #define connect_check_a_samplerate(a, b)                                                                                       \
   if ((a) != (b)) {                                                                                                            \
@@ -63,5 +62,3 @@
                      % (b->m_ti.m_private_data    ? b->m_ti.m_private_data->get_size()    : 0u)).str();                                                                                       \
     return CAN_CONNECT_MAYBE_CODECPRIVATE;                                                                                                                                                    \
   }
-
-#endif // MTX_MERGE_CONNECTION_CHECKS_H

@@ -10,8 +10,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_PROPERTY_TABLE_H
-#define MTX_COMMON_PROPERTY_TABLE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -58,5 +57,3 @@ public:                         // static
   static std::vector<property_element_c> &get_table_for(const EbmlCallbacks &master_callbacks, const EbmlCallbacks *sub_master_callbacks = nullptr, bool full_table = false);
 };
 using property_element_cptr = std::shared_ptr<property_element_c>;
-
-#endif  // MTX_COMMON_PROPERTY_TABLE_H

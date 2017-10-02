@@ -12,8 +12,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MPEG1_2_H
-#define MTX_COMMON_MPEG1_2_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -67,5 +66,3 @@ bool extract_ar(const unsigned char *buffer, int buffer_size, float &ar);
 bool is_fourcc(uint32_t fourcc);
 
 };
-
-#endif  // MTX_COMMON_MPEG1_2_H

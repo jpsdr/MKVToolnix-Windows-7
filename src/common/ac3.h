@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_AC3COMMON_H
-#define MTX_COMMON_AC3COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -91,5 +90,3 @@ namespace ac3 {
 };
 
 bool verify_ac3_checksum(unsigned char const *buf, size_t size);
-
-#endif // MTX_COMMON_AC3COMMON_H

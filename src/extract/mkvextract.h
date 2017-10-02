@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MKVEXTRACT_H
-#define MTX_MKVEXTRACT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -59,5 +58,3 @@ void extract_timecodes(const std::string &file_name, std::vector<track_spec_t> &
 void extract_cues(std::string const &file_name, std::vector<track_spec_t> const &tracks, kax_analyzer_c::parse_mode_e parse_mode);
 
 kax_analyzer_cptr open_and_analyze(std::string const &file_name, kax_analyzer_c::parse_mode_e parse_mode, bool exit_on_error = true);
-
-#endif // MTX_MKVEXTRACT_H

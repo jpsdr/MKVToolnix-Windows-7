@@ -12,8 +12,7 @@
    Adapted from code by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_KATE_COMMON_H
-#define MTX_COMMON_KATE_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -61,5 +60,3 @@ struct kate_identification_header_t {
 };
 
 void kate_parse_identification_header(const unsigned char *buffer, int size, kate_identification_header_t &header);
-
-#endif // MTX_COMMON_KATE_COMMON_H

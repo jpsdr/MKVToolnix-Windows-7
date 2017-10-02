@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_FILE_H
-#define MTX_COMMON_FILE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -21,5 +20,3 @@ namespace mtx { namespace file {
 bfs::path first_existing_path(std::vector<bfs::path> const &paths);
 
 }}
-
-#endif  // MTX_COMMON_FILE_H

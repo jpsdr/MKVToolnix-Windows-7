@@ -11,9 +11,6 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_TERMINAL_H
-#define MTX_COMMON_TERMINAL_H
+#pragma once
 
 int get_terminal_columns();
-
-#endif  // MTX_COMMON_TERMINAL_H

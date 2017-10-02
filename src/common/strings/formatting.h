@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_STRINGS_FORMATTING_H
-#define MTX_COMMON_STRINGS_FORMATTING_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -122,5 +121,3 @@ to_hex(EbmlBinary &bin,
 }
 
 std::string create_minutes_seconds_time_string(unsigned int seconds, bool omit_minutes_if_zero = false);
-
-#endif  // MTX_COMMON_STRINGS_FORMATTING_H

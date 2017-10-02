@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PACKET_EXTENSIONS_H
-#define MTX_PACKET_EXTENSIONS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -105,5 +104,3 @@ public:
 };
 
 using before_adding_to_cluster_cb_packet_extension_cptr = std::shared_ptr<before_adding_to_cluster_cb_packet_extension_c>;
-
-#endif  // MTX_PACKET_EXTENSIONS_H

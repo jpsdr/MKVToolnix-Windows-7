@@ -18,8 +18,7 @@
 **
 **************************************************************************/
 
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_STYLE_HELPER_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_STYLE_HELPER_H
+#pragma once
 
 #include <QtGui/QColor>
 #include <QtWidgets/QStyle>
@@ -77,5 +76,3 @@ public:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_STYLE_HELPER_H

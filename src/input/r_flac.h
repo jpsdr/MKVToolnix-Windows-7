@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_FLAC_H
-#define MTX_R_FLAC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -89,5 +88,3 @@ public:
 };
 
 #endif // HAVE_FLAC_FORMAT_H
-
-#endif  // MTX_R_FLAC_H

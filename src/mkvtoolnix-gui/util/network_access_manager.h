@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_NETWORK_ACCESS_MANAGER_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_NETWORK_ACCESS_MANAGER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -41,5 +40,3 @@ protected:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_NETWORK_ACCESS_MANAGER_H

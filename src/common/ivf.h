@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_IVF_COMMON_H
-#define MTX_COMMON_IVF_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -54,5 +53,3 @@ bool is_keyframe(const memory_cptr &buffer, codec_c::type_e codec);
 #pragma pack(pop)
 #endif
 };
-
-#endif // MTX_COMMON_IVF_COMMON_H

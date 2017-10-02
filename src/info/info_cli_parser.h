@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INFO_INFO_CLI_PARSER_H
-#define MTX_INFO_INFO_CLI_PARSER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -41,5 +40,3 @@ protected:
   void set_track_info();
   void set_hex_positions();
 };
-
-#endif // MTX_INFO_INFO_CLI_PARSER_H

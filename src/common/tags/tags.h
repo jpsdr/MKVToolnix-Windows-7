@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_TAG_COMMON_H
-#define MTX_COMMON_TAG_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -152,5 +151,3 @@ remove_simple_tags_for(KaxTags &tags,
 }
 
 }}
-
-#endif // MTX_COMMON_TAG_COMMON_H

@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MERGE_FILE_IDENTIFICATION_THREAD_H
-#define MTX_MKVTOOLNIX_GUI_MERGE_FILE_IDENTIFICATION_THREAD_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -95,5 +94,3 @@ public slots:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_MERGE_FILE_IDENTIFICATION_THREAD_H

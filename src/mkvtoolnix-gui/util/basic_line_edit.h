@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_BASIC_LINE_EDIT_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_BASIC_LINE_EDIT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -39,5 +38,3 @@ protected:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_BASIC_LINE_EDIT_H

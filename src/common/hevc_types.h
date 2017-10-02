@@ -11,8 +11,7 @@
 
 */
 
-#ifndef MTX_COMMON_HEVC_TYPES_H
-#define MTX_COMMON_HEVC_TYPES_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -314,5 +313,3 @@ using user_data_t = std::map< std::vector<unsigned char>, std::vector<unsigned c
 using es_parser_cptr = std::shared_ptr<es_parser_c>;
 
 }}                              // namespace mtx::hevc
-
-#endif  // MTX_COMMON_HEVC_TYPES_H

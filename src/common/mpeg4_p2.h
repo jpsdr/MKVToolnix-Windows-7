@@ -12,8 +12,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MPEG4_P2_H
-#define MTX_COMMON_MPEG4_P2_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -135,5 +134,3 @@ namespace mpeg4 {
     memory_cptr parse_config_data(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
   };
 };
-
-#endif  // MTX_COMMON_MPEG4_P2_H

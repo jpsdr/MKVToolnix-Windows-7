@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MERGE_ATTACHMENT_MODEL_H
-#define MTX_MKVTOOLNIX_GUI_MERGE_ATTACHMENT_MODEL_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -63,5 +62,3 @@ protected:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_MERGE_ATTACHMENT_MODEL_H

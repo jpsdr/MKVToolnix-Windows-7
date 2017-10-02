@@ -12,8 +12,7 @@
      <niemayer@isg.de> and modified by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_BIT_READER_H
-#define MTX_COMMON_BIT_READER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -207,5 +206,3 @@ protected:
   }
 };
 using bit_reader_cptr = std::shared_ptr<bit_reader_c>;
-
-#endif // MTX_COMMON_BIT_READER_H

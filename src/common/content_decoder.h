@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_CONTENT_DECODER_H
-#define MTX_COMMON_CONTENT_DECODER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -60,5 +59,3 @@ public:
   }
   std::string descriptive_algorithm_list();
 };
-
-#endif  // MTX_COMMON_CONTENT_DECODER_H

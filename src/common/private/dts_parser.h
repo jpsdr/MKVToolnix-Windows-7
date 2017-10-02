@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_PRIVATE_DTS_PARSER_H
-#define MTX_COMMON_PRIVATE_DTS_PARSER_H
+#pragma once
 
 #include "common/byte_buffer.h"
 #include "common/dts.h"
@@ -35,5 +34,3 @@ public:
 };
 
 }}
-
-#endif // MTX_COMMON_PRIVATE_DTS_PARSER_H

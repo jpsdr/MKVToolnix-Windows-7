@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_JOBS_JOB_P_H
-#define MTX_MKVTOOLNIX_GUI_JOBS_JOB_P_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -24,5 +23,3 @@ public:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_JOBS_JOB_P_H

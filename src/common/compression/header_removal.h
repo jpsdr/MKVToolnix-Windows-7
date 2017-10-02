@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_COMPRESSION_HEADER_REMOVAL_H
-#define MTX_COMMON_COMPRESSION_HEADER_REMOVAL_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -80,5 +79,3 @@ class mp3_compressor_c: public header_removal_compressor_c {
 public:
   mp3_compressor_c();
 };
-
-#endif // MTX_COMMON_COMPRESSION_HEADER_REMOVAL_H

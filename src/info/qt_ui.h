@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_QT_UI_H
-#define MTX_QT_UI_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -60,5 +59,3 @@ public:
   virtual void dragEnterEvent(QDragEnterEvent *event);
   virtual void dropEvent(QDropEvent *event);
 };
-
-#endif  // MTX_QT_UI_H

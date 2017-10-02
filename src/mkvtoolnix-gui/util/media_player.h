@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_MEDIA_PLAYER_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_MEDIA_PLAYER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -30,5 +29,3 @@ public slots:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_MEDIA_PLAYER_H

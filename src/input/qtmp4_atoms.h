@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_QTMP4_ATOMS_H
-#define MTX_INPUT_QTMP4_ATOMS_H
+#pragma once
 
 // 'Movie header' atom
 #if defined(COMP_MSC)
@@ -212,5 +211,3 @@ typedef struct {
   memory_cptr    decoder_config;
   memory_cptr    sl_config;
 } esds_t;
-
-#endif // MTX_INPUT_QTMP4_ATOMS_H

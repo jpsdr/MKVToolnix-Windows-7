@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_INSTALLATION_CHECKER_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_INSTALLATION_CHECKER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -41,5 +40,3 @@ public:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_INSTALLATION_CHECKER_H

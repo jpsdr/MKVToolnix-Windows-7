@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_INI_CONFIG_FILE_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_INI_CONFIG_FILE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -31,5 +30,3 @@ public:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_INI_CONFIG_FILE_H

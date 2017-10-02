@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_TRUEHD_COMMON_H
-#define MTX_COMMON_TRUEHD_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -117,5 +116,3 @@ protected:
   virtual unsigned int resync(unsigned int offset);
 };
 using truehd_parser_cptr = std::shared_ptr<truehd_parser_c>;
-
-#endif // MTX_COMMON_TRUEHD_COMMON_H

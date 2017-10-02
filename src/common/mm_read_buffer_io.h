@@ -12,8 +12,7 @@
    Modifications by Nils Maier <maierman@web.de>
 */
 
-#ifndef MTX_COMMON_MM_READ_BUFFER_IO_H
-#define MTX_COMMON_MM_READ_BUFFER_IO_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -48,5 +47,3 @@ protected:
 };
 
 using mm_read_buffer_io_cptr = std::shared_ptr<mm_read_buffer_io_c>;
-
-#endif // MTX_COMMON_MM_READ_BUFFER_IO_H

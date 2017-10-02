@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_PAGE_BASE_H
-#define MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_PAGE_BASE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -42,5 +41,3 @@ public:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_PAGE_BASE_H

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MTX_BITVALUE_H
-#define MTX_COMMON_MTX_BITVALUE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -65,5 +64,3 @@ public:
   void zero_content();
 };
 using bitvalue_cptr = std::shared_ptr<bitvalue_c>;
-
-#endif  // MTX_COMMON_MTX_BITVALUE_H

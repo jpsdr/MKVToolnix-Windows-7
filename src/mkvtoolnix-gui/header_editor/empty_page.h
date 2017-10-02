@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_EMPTY_PAGE_H
-#define MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_EMPTY_PAGE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -32,5 +31,3 @@ protected:
   virtual void setupUi();
 };
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_EMPTY_PAGE_H

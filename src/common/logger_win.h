@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_LOGGER_WIN_H
-#define MTX_COMMON_LOGGER_WIN_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -34,5 +33,3 @@ public:
 }}
 
 #endif // SYS_WINDOWS
-
-#endif // MTX_COMMON_LOGGER_WIN_H

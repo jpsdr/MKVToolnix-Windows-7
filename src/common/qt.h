@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_QT_H
-#define MTX_COMMON_QT_H
+#pragma once
 
 #include <QString>
 
@@ -103,5 +102,3 @@ operator <<(std::wostream &out,
   out << string.toStdWString();
   return out;
 }
-
-#endif  // MTX_COMMON_QT_H

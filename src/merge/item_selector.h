@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_ITEM_SELECTOR_H
-#define MTX_MERGE_ITEM_SELECTOR_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -89,5 +88,3 @@ public:
     return m_items.empty() && m_string_items.empty();
   }
 };
-
-#endif  // MTX_MERGE_ITEM_SELECTOR_H

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_WAV_PCM_DEMUXER_H
-#define MTX_INPUT_WAV_PCM_DEMUXER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -46,5 +45,3 @@ public:
   virtual unsigned int get_sampling_frequency() const;
   virtual unsigned int get_bits_per_sample() const;
 };
-
-#endif  // MTX_INPUT_WAV_PCM_DEMUXER_H

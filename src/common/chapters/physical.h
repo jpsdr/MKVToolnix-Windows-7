@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_CHAPTERS_PHYSICAL_H
-#define MTX_COMMON_CHAPTERS_PHYSICAL_H
+#pragma once
 
 // see http://www.matroska.org/technical/specs/index.html#physical
 #define CHAPTER_PHYSEQUIV_SET          70
@@ -38,5 +37,3 @@
 #define CHAPTER_PHYSEQUIV_TRACK        20
 
 #define CHAPTER_PHYSEQUIV_INDEX        10
-
-#endif // MTX_COMMON_CHAPTERS_PHYSICAL_H

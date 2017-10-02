@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_ACTION_FOR_DROPPED_FILES_DIALOG_H
-#define MTX_MKVTOOLNIX_GUI_ACTION_FOR_DROPPED_FILES_DIALOG_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -27,5 +26,3 @@ public:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_ACTION_FOR_DROPPED_FILES_DIALOG_H

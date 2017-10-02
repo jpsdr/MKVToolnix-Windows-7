@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_AMF_H
-#define MTX_COMMON_AMF_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -99,5 +98,3 @@ struct hash<mtx::amf::script_parser_c::data_type_e> {
   }
 };
 }
-
-#endif  // MTX_COMMON_H

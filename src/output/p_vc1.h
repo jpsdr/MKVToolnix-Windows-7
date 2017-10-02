@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_VC1_H
-#define MTX_P_VC1_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -45,5 +44,3 @@ protected:
   virtual void headers_found();
   virtual void add_timecodes_to_parser(packet_cptr &packet);
 };
-
-#endif // MTX_P_VC1_H

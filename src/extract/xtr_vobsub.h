@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_XTR_VOBSUB_H
-#define MTX_XTR_VOBSUB_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -43,5 +42,3 @@ public:
 protected:
   void fix_spu_duration(memory_c &buffer, timestamp_c const &duration) const;
 };
-
-#endif

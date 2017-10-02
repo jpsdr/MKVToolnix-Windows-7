@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MERGE_MUX_CONFIG_H
-#define MTX_MKVTOOLNIX_GUI_MERGE_MUX_CONFIG_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -156,5 +155,3 @@ saveSettingsGroup(char const *group,
 }
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_MERGE_MUX_CONFIG_H

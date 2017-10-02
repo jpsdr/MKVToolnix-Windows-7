@@ -12,8 +12,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_AVC_TYPES_H
-#define MTX_COMMON_AVC_TYPES_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -149,5 +148,3 @@ class es_parser_c;
 using es_parser_cptr = std::shared_ptr<es_parser_c>;
 
 }}
-
-#endif  // MTX_COMMON_AVC_TYPES_H

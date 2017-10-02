@@ -10,8 +10,7 @@
    Written by Moritz Bunkus and Mike Chen.
 */
 
-#ifndef MTX_XTR_HDMV_PGS_H
-#define MTX_XTR_HDMV_PGS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -28,5 +27,3 @@ public:
     return "SUP";
   }
 };
-
-#endif

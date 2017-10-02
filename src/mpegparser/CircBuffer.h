@@ -20,8 +20,7 @@
 
  **/
 
-#ifndef MTX_CIRC_BUFFER_H
-#define MTX_CIRC_BUFFER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -110,6 +109,3 @@ public:
   }
 
 };
-
-#endif // MTX_CIRC_BUFFER_H
-

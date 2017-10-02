@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_TASKBAR_PROGRESS_H
-#define MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_TASKBAR_PROGRESS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -35,5 +34,3 @@ public slots:
 }}
 
 #endif  // SYS_WINDOWS
-
-#endif // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_TASKBAR_PROGRESS_H

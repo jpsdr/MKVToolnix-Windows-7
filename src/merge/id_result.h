@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_ID_RESULT_H
-#define MTX_MERGE_ID_RESULT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -70,5 +69,3 @@ struct id_result_t {
 };
 
 void id_result_container_unsupported(std::string const &filename, translatable_string_c const &info);
-
-#endif  // MTX_MERGE_ID_RESULT_H

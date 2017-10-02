@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_PCM_H
-#define MTX_P_PCM_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -55,5 +54,3 @@ protected:
   virtual int64_t samples_to_size(int64_t size) const;
   virtual void byte_swap_data(memory_c &data) const;
 };
-
-#endif // MTX_P_PCM_H

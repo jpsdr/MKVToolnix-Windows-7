@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_PREFERENCES_DIALOG_H
-#define MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_PREFERENCES_DIALOG_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -100,5 +99,3 @@ protected:
 };
 
 }}
-
-#endif // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_PREFERENCES_DIALOG_H

@@ -11,8 +11,7 @@
   Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_CLPI_COMMON_H
-#define MTX_COMMON_CLPI_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -83,5 +82,3 @@ namespace mtx { namespace bluray { namespace clpi {
   using parser_cptr = std::shared_ptr<parser_c>;
 
 }}}                             // namespace mtx::bluray::clpi
-
-#endif // MTX_COMMON_CLPI_COMMON_H

@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_XTR_AAC_H
-#define MTX_XTR_AAC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -31,5 +30,3 @@ public:
     return "raw AAC file with ADTS headers";
   };
 };
-
-#endif

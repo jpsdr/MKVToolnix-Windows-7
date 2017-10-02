@@ -9,8 +9,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_FRAME_TIMING_H
-#define MTX_COMMON_FRAME_TIMING_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -28,5 +27,3 @@ extern std::vector<common_frame_rate_t> g_common_frame_rates;
 int64_rational_c determine_frame_rate(int64_t duration, int64_t max_difference = 20'000);
 
 }}
-
-#endif  // MTX_COMMON_FRAME_TIMING_H

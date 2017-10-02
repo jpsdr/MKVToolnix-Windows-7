@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_COMBO_BOX_BASE_P_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_COMBO_BOX_BASE_P_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -20,5 +19,3 @@ public:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_COMBO_BOX_BASE_P_H

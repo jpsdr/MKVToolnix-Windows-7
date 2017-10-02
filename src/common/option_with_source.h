@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_OPTION_WITH_SOURCE_H
-#define MTX_COMMON_OPTION_WITH_SOURCE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -76,5 +75,3 @@ public:
     m_source = source;
   }
 };
-
-#endif // MTX_COMMON_OPTION_WITH_SOURCE_H

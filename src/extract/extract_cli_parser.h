@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_EXTRACT_EXTRACT_CLI_PARSER_H
-#define MTX_EXTRACT_EXTRACT_CLI_PARSER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -54,5 +53,3 @@ protected:
   void set_extraction_mode();
   void add_extraction_spec();
 };
-
-#endif // MTX_EXTRACT_EXTRACT_CLI_PARSER_H

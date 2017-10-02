@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_OSTREAM_OPERATORS_H
-#define MTX_COMMON_OSTREAM_OPERATORS_H
+#pragma once
 
 namespace std {
 
@@ -60,5 +59,3 @@ operator <<(std::wostream &out,
 }
 
 }
-
-#endif  // MTX_COMMON_OSTREAM_OPERATORS_H

@@ -10,8 +10,7 @@
 
 */
 
-#ifndef MTX_P_HEVC_H
-#define MTX_P_HEVC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -38,5 +37,3 @@ protected:
   virtual void setup_nalu_size_len_change();
   virtual void change_nalu_size_len(packet_cptr packet);
 };
-
-#endif  // MTX_P_HEVC_H

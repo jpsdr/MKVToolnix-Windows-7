@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_CLUSTER_HELPER_C
-#define MTX_CLUSTER_HELPER_C
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -100,5 +99,3 @@ private:
 };
 
 extern std::unique_ptr<cluster_helper_c> g_cluster_helper;
-
-#endif // MTX_CLUSTER_HELPER_C

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_GENERIC_PACKETIZER_H
-#define MTX_GENERIC_PACKETIZER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -291,5 +290,3 @@ protected:
 };
 
 extern std::vector<generic_packetizer_c *> ptzrs_in_header_order;
-
-#endif  // MTX_GENERIC_PACKETIZER_H

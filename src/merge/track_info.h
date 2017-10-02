@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_TRACK_INFO_H
-#define MTX_MERGE_TRACK_INFO_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -404,5 +403,3 @@ get_option_for_track(T const &options,
 
   return default_value;
 }
-
-#endif  // MTX_MERGE_TRACK_INFO_H

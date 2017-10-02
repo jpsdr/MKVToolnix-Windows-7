@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_CHAPTERS_H
-#define MTX_COMMON_CHAPTERS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -103,5 +102,3 @@ void align_chapter_edition_uids(KaxChapters &reference, KaxChapters &modify);
 std::string format_chapter_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp, std::string const &appended_file_name = std::string{});
 
 void fix_chapter_country_codes(EbmlMaster &chapters);
-
-#endif // MTX_COMMON_CHAPTERS_H

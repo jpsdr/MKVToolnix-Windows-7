@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_XTR_AVI_H
-#define MTX_XTR_AVI_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -36,5 +35,3 @@ public:
     return "AVI (Microsoft Audio/Video Interleaved)";
   };
 };
-
-#endif

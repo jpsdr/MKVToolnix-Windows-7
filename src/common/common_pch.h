@@ -1,6 +1,3 @@
-#ifndef MTX_COMMON_COMMON_GCH_H
-#define MTX_COMMON_COMMON_GCH_H
+#pragma once
 
 #include "common/common.h"
-
-#endif

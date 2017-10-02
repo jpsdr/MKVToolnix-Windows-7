@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_TELETEXT_TO_SRT_PACKET_CONVERTER_H
-#define MTX_INPUT_TELETEXT_TO_SRT_PACKET_CONVERTER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -96,5 +95,3 @@ protected:
   static void remove_parity(unsigned char *buffer, size_t length);
   static void setup_character_maps();
 };
-
-#endif  // MTX_INPUT_TELETEXT_TO_SRT_PACKET_CONVERTER_H

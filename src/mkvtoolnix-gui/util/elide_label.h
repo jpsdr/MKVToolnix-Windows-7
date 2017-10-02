@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_ELIDE_LABEL_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_ELIDE_LABEL_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -48,5 +47,3 @@ protected:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_ELIDE_LABEL_H

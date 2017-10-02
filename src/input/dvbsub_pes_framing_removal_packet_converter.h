@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_DVBSUB_PES_FRAMING_REMOVAL_PACKET_CONVERTER_H
-#define MTX_DVBSUB_PES_FRAMING_REMOVAL_PACKET_CONVERTER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -29,5 +28,3 @@ public:
   virtual void flush() override;
   virtual bool convert(packet_cptr const &packet) override;
 };
-
-#endif  // MTX_DVBSUB_PES_FRAMING_REMOVAL_PACKET_CONVERTER_H

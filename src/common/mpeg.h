@@ -10,8 +10,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MPEG_COMMON_H
-#define MTX_COMMON_MPEG_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -50,5 +49,3 @@ memory_cptr create_nalu_with_size(memory_cptr const &src, std::size_t nalu_size_
 void remove_trailing_zero_bytes(memory_c &buffer);
 
 }}
-
-#endif  // MTX_COMMON_MPEG_COMMON_H

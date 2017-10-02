@@ -12,8 +12,7 @@
    files "libavutil/bswap.h".
 */
 
-#ifndef MTX_COMMON_BSWAP_H
-#define MTX_COMMON_BSWAP_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -49,5 +48,3 @@ bswap_64(uint64_t x) {
 void bswap_buffer(unsigned char const *src, unsigned char *dst, std::size_t num_bytes, std::size_t word_length);
 
 }
-
-#endif  // MTX_COMMON_BSWAP_H

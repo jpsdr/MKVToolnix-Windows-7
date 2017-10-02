@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_SORTING_H
-#define MTX_COMMON_SORTING_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -138,5 +137,3 @@ naturally(IterT first,
 }
 
 }}
-
-#endif  // MTX_COMMON_SORTING_H

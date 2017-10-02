@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_PGS_H
-#define MTX_R_PGS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -43,5 +42,3 @@ public:
 
   static int probe_file(mm_io_c *in, uint64_t size);
 };
-
-#endif // MTX_R_PGS_H

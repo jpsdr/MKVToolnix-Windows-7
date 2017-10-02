@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_AVI_H
-#define MTX_R_AVI_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -124,5 +123,3 @@ protected:
 
   virtual void debug_dump_video_index();
 };
-
-#endif  // MTX_R_AVI_H

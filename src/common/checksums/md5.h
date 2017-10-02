@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_CHECKSUMS_MD5_H
-#define MTX_COMMON_CHECKSUMS_MD5_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -40,5 +39,3 @@ protected:
 };
 
 }} // namespace mtx { namespace checksum {
-
-#endif // MTX_COMMON_CHECKSUMS_MD5_H

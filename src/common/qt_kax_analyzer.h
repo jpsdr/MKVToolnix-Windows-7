@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_QT_KAX_ANALYZER_H
-#define MTX_COMMON_QT_KAX_ANALYZER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -41,4 +40,3 @@ public:
 };
 
 #endif  // HAVE_QT
-#endif  // MTX_COMMON_QT_KAX_ANALYZER_H

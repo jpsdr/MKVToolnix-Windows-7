@@ -12,8 +12,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_AVC_H
-#define MTX_COMMON_AVC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -30,5 +29,3 @@ bool is_avc_fourcc(const char *fourcc);
 memory_cptr avcc_to_nalus(const unsigned char *buffer, size_t size);
 
 }}
-
-#endif  // MTX_COMMON_AVC_H

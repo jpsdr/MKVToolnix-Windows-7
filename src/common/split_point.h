@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_SPLIT_POINT_H
-#define MTX_COMMON_SPLIT_POINT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -54,5 +53,3 @@ public:
 
   std::string str() const;
 };
-
-#endif  // MTX_COMMON_SPLIT_POINT_H

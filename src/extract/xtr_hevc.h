@@ -9,8 +9,7 @@
 
 */
 
-#ifndef MTX_XTR_HEVC_H
-#define MTX_XTR_HEVC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -37,5 +36,3 @@ protected:
   virtual void unwrap_write_hevcc(bool skip_sei);
   virtual void check_for_sei_in_first_frame(nal_unit_list_t const &nal_units);
 };
-
-#endif

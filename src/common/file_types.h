@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_FILE_TYPES_H
-#define MTX_COMMON_FILE_TYPES_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -82,5 +81,3 @@ struct file_type_t {
   static std::vector<file_type_t> &get_supported();
   static translatable_string_c get_name(file_type_e type);
 };
-
-#endif // MTX_COMMON_FILE_TYPES_H

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_AAC_H
-#define MTX_P_AAC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -52,5 +51,3 @@ private:
   virtual int process_headerless(packet_cptr packet);
   virtual void handle_parsed_audio_config();
 };
-
-#endif // MTX_P_AAC_H

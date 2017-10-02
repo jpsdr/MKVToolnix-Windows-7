@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>
 */
 
-#ifndef MTX_COMMON_SEGMENTINFO_H
-#define MTX_COMMON_SEGMENTINFO_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -22,5 +21,3 @@ using namespace libebml;
 using namespace libmatroska;
 
 using kax_info_cptr = std::shared_ptr<KaxInfo>;
-
-#endif // MTX_COMMON_SEGMENTINFO_H

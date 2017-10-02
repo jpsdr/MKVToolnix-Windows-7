@@ -20,8 +20,7 @@
 
  **/
 
-#ifndef MTX_M2VPARSER_H
-#define MTX_M2VPARSER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -179,6 +178,3 @@ public:
   void TimestampWaitingFrames();
   void TryUpdate(MPEGFrameRef &frame);
 };
-
-
-#endif //MTX_M2VPARSER_H

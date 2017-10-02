@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_BYTE_BUFFER_H
-#define MTX_COMMON_BYTE_BUFFER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -131,5 +130,3 @@ private:
 };
 
 using byte_buffer_cptr = std::shared_ptr<byte_buffer_c>;
-
-#endif // MTX_COMMON_BYTE_BUFFER_H

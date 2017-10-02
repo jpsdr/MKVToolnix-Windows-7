@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_R_COREAUDIO_H
-#define MTX_INPUT_R_COREAUDIO_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -91,5 +90,3 @@ protected:
   void debug_error_and_throw(boost::format const &format) const;
   void dump_headers() const;
 };
-
-#endif  // MTX_INPUT_R_COREAUDIO_H

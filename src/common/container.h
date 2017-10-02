@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_CONTAINER_H
-#define MTX_COMMON_CONTAINER_H
+#pragma once
 
 #include <functional>
 
@@ -58,5 +57,3 @@ includes(Tcontainer const &container,
 }
 
 }
-
-#endif  // MTX_COMMON_CONTAINER_H

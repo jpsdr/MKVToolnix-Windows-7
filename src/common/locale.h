@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_LOCALE_H
-#define MTX_COMMON_LOCALE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -94,5 +93,3 @@ std::string get_local_charset();
 std::string get_local_console_charset();
 
 std::vector<std::string> command_line_utf8(int argc, char **argv);
-
-#endif  // MTX_COMMON_LOCALE_H

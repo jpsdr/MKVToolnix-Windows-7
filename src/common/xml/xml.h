@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_XML_H
-#define MTX_COMMON_XML_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -159,4 +158,3 @@ using document_cptr = std::shared_ptr<pugi::xml_document>;
 document_cptr load_file(std::string const &file_name, unsigned int options = pugi::parse_default, boost::optional<int64_t> max_read_size = boost::optional<int64_t>{});
 
 }}
-#endif  // MTX_COMMON_XML_H

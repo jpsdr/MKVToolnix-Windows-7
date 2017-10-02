@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_XTR_TEXTSUBS_H
-#define MTX_XTR_TEXTSUBS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -97,5 +96,3 @@ public:
     return "XML (USF text subtitles)";
   };
 };
-
-#endif

@@ -11,8 +11,7 @@
   Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_XML_EBML_TAGS_XML_CONVERTER_H
-#define MTX_COMMON_XML_EBML_TAGS_XML_CONVERTER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -42,5 +41,3 @@ public:
 };
 
 }}
-
-#endif // MTX_COMMON_XML_EBML_TAGS_XML_CONVERTER_H

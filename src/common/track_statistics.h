@@ -12,8 +12,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_TRACK_STATISTICS_H
-#define MTX_MERGE_TRACK_STATISTICS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -90,5 +89,3 @@ public:
 
   void create_tags(KaxTags &tags, std::string const &writing_app, boost::posix_time::ptime const &writing_date) const;
 };
-
-#endif // MTX_MERGE_TRACK_STATISTICS_H

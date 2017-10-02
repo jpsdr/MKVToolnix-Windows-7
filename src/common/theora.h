@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_THEORA_COMMON_H
-#define MTX_COMMON_THEORA_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -75,5 +74,3 @@ struct theora_identification_header_t {
 };
 
 void theora_parse_identification_header(unsigned char *buffer, int size, theora_identification_header_t &header);
-
-#endif // MTX_COMMON_THEORA_COMMON_H

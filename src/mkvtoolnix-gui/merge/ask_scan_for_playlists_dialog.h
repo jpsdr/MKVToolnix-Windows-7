@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MERGE_ASK_SCAN_FOR_PLAYLISTS_DIALOG_H
-#define MTX_MKVTOOLNIX_GUI_MERGE_ASK_SCAN_FOR_PLAYLISTS_DIALOG_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -26,5 +25,3 @@ public:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_MERGE_ASK_SCAN_FOR_PLAYLISTS_DIALOG_H

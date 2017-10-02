@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_STEREO_MODE_H
-#define MTX_COMMON_STEREO_MODE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -54,6 +53,3 @@ public:
     return 14;
   };
 };
-
-#endif  // MTX_COMMON_STEREO_MODE_H
-

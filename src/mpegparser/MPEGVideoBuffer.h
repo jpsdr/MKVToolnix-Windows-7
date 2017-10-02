@@ -20,8 +20,7 @@
 
  **/
 
-#ifndef MTX_MPEGVIDEOBUFFER_H
-#define MTX_MPEGVIDEOBUFFER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -161,5 +160,3 @@ public:
   MPEGChunk * ReadChunk();
   int32_t Feed(binary* data, uint32_t numBytes);
 };
-
-#endif //MTX_MPEGVIDEOBUFFER_H

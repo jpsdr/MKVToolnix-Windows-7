@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_OS_H
-#define MTX_COMMON_OS_H
+#pragma once
 
 #undef __STRICT_ANSI__
 
@@ -115,6 +114,4 @@ using uint64_t = UINT64_TYPE;
 # define ARCH_BIGENDIAN
 #else
 # define ARCH_LITTLEENDIAN
-#endif
-
 #endif

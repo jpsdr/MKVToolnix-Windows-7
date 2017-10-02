@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_CUES_H
-#define MTX_MERGE_CUES_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -65,5 +64,3 @@ protected:
   uint64_t calculate_point_size(cue_point_t const &point) const;
   uint64_t calculate_bytes_for_uint(uint64_t value) const;
 };
-
-#endif  // MTX_MERGE_CUES_H

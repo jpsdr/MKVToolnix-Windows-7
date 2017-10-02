@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_SIDE_BY_SIDE_MULTI_SELECT_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_SIDE_BY_SIDE_MULTI_SELECT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -55,5 +54,3 @@ protected:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_SIDE_BY_SIDE_MULTI_SELECT_H

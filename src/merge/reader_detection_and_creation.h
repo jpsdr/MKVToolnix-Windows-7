@@ -12,8 +12,7 @@
    Modified by Steve Lhomme <steve.lhomme@free.fr>.
 */
 
-#ifndef MTX_MERGE_READER_DETECTION_AND_TYPE_H
-#define MTX_MERGE_READER_DETECTION_AND_TYPE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -21,5 +20,3 @@ struct filelist_t;
 
 void get_file_type(filelist_t &file);
 void create_readers();
-
-#endif // MTX_MERGE_READER_DETECTION_AND_TYPE_H

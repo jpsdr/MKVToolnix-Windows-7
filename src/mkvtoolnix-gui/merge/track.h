@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MERGE_TRACK_H
-#define MTX_MKVTOOLNIX_GUI_MERGE_TRACK_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -94,5 +93,3 @@ public:
 }}}
 
 Q_DECLARE_METATYPE(mtx::gui::Merge::Track *)
-
-#endif  // MTX_MKVTOOLNIX_GUI_MERGE_TRACK_H

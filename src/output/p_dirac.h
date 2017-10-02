@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_DIRAC_H
-#define MTX_P_DIRAC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -45,5 +44,3 @@ protected:
   virtual void flush_frames();
   virtual void headers_found();
 };
-
-#endif // MTX_P_DIRAC_H

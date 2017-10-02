@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_DEBUGGING_H
-#define MTX_COMMON_DEBUGGING_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -157,5 +156,3 @@ private:
 };
 
 void dump_ebml_elements(libebml::EbmlElement *element, bool with_values = false);
-
-#endif  // MTX_COMMON_DEBUGGING_H

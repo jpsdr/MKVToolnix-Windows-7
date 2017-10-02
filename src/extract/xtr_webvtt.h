@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_EXTRACT_XTR_WEBVTT_H
-#define MTX_EXTRACT_XTR_WEBVTT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -32,5 +31,3 @@ public:
     return Y("WebVTT subtitles");
   };
 };
-
-#endif  // MTX_EXTRACT_XTR_WEBVTT_H

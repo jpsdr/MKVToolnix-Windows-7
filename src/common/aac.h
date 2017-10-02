@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_AACCOMMON_H
-#define MTX_COMMON_AACCOMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -227,5 +226,3 @@ protected:
 using parser_cptr = std::shared_ptr<parser_c>;
 
 } // namespace aac
-
-#endif // MTX_COMMON_AACCOMMON_H

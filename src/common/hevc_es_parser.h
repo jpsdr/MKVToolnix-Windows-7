@@ -11,8 +11,7 @@
 
 */
 
-#ifndef MTX_COMMON_HEVC_ES_PARSER_H
-#define MTX_COMMON_HEVC_ES_PARSER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -243,5 +242,3 @@ protected:
 };
 
 }}                              // namespace mtx::hevc
-
-#endif  // MTX_COMMON_HEVC_ES_PARSER_H

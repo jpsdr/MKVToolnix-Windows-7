@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MATH_H
-#define MTX_COMMON_MATH_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -65,5 +64,3 @@ to_signed(Tsigned const &s) {
 }}
 
 using int64_rational_c = boost::rational<int64_t>;
-
-#endif  // MTX_COMMON_MATH_H

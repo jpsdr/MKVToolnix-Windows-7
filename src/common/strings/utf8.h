@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_STRINGS_UTF8_H
-#define MTX_COMMON_STRINGS_UTF8_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -86,5 +85,3 @@ to_utf8(::libebml::UTFstring const &source) {
 
 size_t get_width_in_em(wchar_t c);
 size_t get_width_in_em(const std::wstring &s);
-
-#endif  // MTX_COMMON_STRINGS_UTF8_H

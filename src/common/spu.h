@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_SPU_H
-#define MTX_COMMON_SPU_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -24,5 +23,3 @@ timestamp_c get_duration(unsigned char const *data, std::size_t const buf_size);
 void set_duration(unsigned char *data, std::size_t const buf_size, timestamp_c const &duration);
 
 }}
-
-#endif // MTX_COMMON_SPU_H

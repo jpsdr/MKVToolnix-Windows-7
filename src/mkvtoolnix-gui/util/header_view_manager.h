@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_HEADER_VIEW_MANAGER_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_HEADER_VIEW_MANAGER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -42,5 +41,3 @@ protected:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_HEADER_VIEW_MANAGER_H

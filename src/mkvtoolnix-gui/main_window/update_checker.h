@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECKER_H
-#define MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECKER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -54,5 +53,3 @@ Q_DECLARE_METATYPE(mtx_release_version_t);
 Q_DECLARE_METATYPE(std::shared_ptr<pugi::xml_document>);
 
 #endif  // HAVE_UPDATE_CHECK
-
-#endif  // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECKER_H

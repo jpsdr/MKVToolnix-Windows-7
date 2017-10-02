@@ -11,8 +11,7 @@
   Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MPLS_COMMON_H
-#define MTX_COMMON_MPLS_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -189,5 +188,3 @@ protected:
 using parser_cptr = std::shared_ptr<parser_c>;
 
 }}}
-
-#endif // MTX_COMMON_MPLS_COMMON_H

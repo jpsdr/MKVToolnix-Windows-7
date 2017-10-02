@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_CHAPTER_EDITOR_TOOL_H
-#define MTX_MKVTOOLNIX_GUI_CHAPTER_EDITOR_TOOL_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -73,5 +72,3 @@ public:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_CHAPTER_EDITOR_TOOL_H

@@ -10,8 +10,7 @@
 
 */
 
-#ifndef MTX_P_HEVC_ES_H
-#define MTX_P_HEVC_ES_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -48,5 +47,3 @@ protected:
   virtual void handle_actual_default_duration();
   virtual void flush_impl();
 };
-
-#endif // MTX_P_HEVC_ES_H

@@ -12,8 +12,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_AVC_ES_PARSER_H
-#define MTX_COMMON_AVC_ES_PARSER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -258,5 +257,3 @@ protected:
 };
 
 }}
-
-#endif  // MTX_COMMON_AVC_ES_PARSER_H

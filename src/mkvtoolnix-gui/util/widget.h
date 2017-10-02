@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_WIDGET_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_WIDGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -43,5 +42,3 @@ void addSegmentUIDFromFileToLineEdit(QWidget &parent, QLineEdit &lineEdit, bool 
 QFont defaultUiFont();
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_WIDGET_H

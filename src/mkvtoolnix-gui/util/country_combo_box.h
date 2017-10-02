@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_COUNTRY_COMBO_BOX_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_COUNTRY_COMBO_BOX_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -22,5 +21,3 @@ public:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_COUNTRY_COMBO_BOX_H

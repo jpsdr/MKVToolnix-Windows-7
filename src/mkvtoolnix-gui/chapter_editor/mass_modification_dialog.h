@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_CHAPTER_EDITOR_MASS_MODIFICATION__DIALOG_H
-#define MTX_MKVTOOLNIX_GUI_CHAPTER_EDITOR_MASS_MODIFICATION__DIALOG_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -55,5 +54,3 @@ protected:
 }}}
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::ChapterEditor::MassModificationDialog::Actions);
-
-#endif // MTX_MKVTOOLNIX_GUI_CHAPTER_EDITOR_MASS_MODIFICATION__DIALOG_H

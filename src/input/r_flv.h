@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_FLV_H
-#define MTX_R_FLV_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -174,5 +173,3 @@ protected:
 
   unsigned int add_track(char type);
 };
-
-#endif // MTX_R_FLV_H

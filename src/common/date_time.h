@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_DATE_TIME_H
-#define MTX_COMMON_DATE_TIME_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -40,5 +39,3 @@ std::string format_epoch_time(std::time_t const epoch_time, std::string format_s
 std::string format_epoch_time_iso_8601(std::time_t const epoch_time, epoch_timezone_e timezone);
 
 }}
-
-#endif // MTX_COMMON_DATE_TIME_H

@@ -10,8 +10,7 @@
    Written by Moritz Bunkus.
 */
 
-#ifndef MTX_XTR_HDMV_TEXTST_H
-#define MTX_XTR_HDMV_TEXTST_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -37,5 +36,3 @@ public:
 protected:
   void put_timecode(unsigned char *buf, timestamp_c const &timestamp);
 };
-
-#endif

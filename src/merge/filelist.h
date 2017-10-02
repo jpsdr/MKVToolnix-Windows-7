@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_FILELIST_H
-#define MTX_MERGE_FILELIST_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -61,5 +60,3 @@ struct filelist_t {
 using filelist_cptr = std::shared_ptr<filelist_t>;
 
 extern std::vector<filelist_cptr> g_files;
-
-#endif  // MTX_MERGE_FILELIST_H

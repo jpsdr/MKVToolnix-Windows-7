@@ -12,8 +12,7 @@
    Modified by Steve Lhomme <steve.lhomme@free.fr>.
 */
 
-#ifndef MTX_OUTPUT_CONTROL_H
-#define MTX_OUTPUT_CONTROL_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -217,5 +216,3 @@ int64_t add_attachment(attachment_cptr const &attachment);
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
 void sighandler(int signum);
 #endif
-
-#endif // MTX_OUTPUT_CONTROL_H

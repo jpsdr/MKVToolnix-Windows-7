@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_MAIN_WINDOW_H
-#define MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_MAIN_WINDOW_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -136,5 +135,3 @@ protected:
 };
 
 }}
-
-#endif // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_MAIN_WINDOW_H

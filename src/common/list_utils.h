@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_LIST_UTILS_H
-#define MTX_COMMON_LIST_UTILS_H
+#pragma once
 
 #include <boost/optional.hpp>
 
@@ -117,5 +116,3 @@ all(Tcontainer container,
 }
 
 }
-
-#endif  // MTX_COMMON_LIST_UTILS_H

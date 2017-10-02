@@ -12,8 +12,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_LIBMATROSKA_EXTENSIONS
-#define MTX_LIBMATROSKA_EXTENSIONS
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -97,5 +96,3 @@ public:
   kax_cues_with_cleanup_c();
   virtual ~kax_cues_with_cleanup_c();
 };
-
-#endif // MTX_LIBMATROSKA_EXTENSIONS

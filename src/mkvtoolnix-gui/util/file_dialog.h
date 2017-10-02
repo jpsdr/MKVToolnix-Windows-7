@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_FILE_DIALOG_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_FILE_DIALOG_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -22,5 +21,3 @@ QString getSaveFileName(QWidget *parent = nullptr, QString const &caption = QStr
 QString getExistingDirectory(QWidget *parent = nullptr, QString const &caption = QString{}, QString const &dir = QString{}, QFileDialog::Options options = QFileDialog::ShowDirsOnly);
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_FILE_DIALOG_H

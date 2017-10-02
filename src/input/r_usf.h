@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_USF_H
-#define MTX_R_USF_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -89,5 +88,3 @@ protected:
   virtual void create_codec_private(mtx::xml::document_cptr &doc);
 
 };
-
-#endif  // MTX_R_USF_H

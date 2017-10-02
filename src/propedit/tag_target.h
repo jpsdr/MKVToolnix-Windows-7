@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PROPEDIT_TAG_TARGET_H
-#define MTX_PROPEDIT_TAG_TARGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -80,5 +79,3 @@ protected:
   virtual void account_all_clusters();
   virtual void create_track_statistics_tags();
 };
-
-#endif // MTX_PROPEDIT_TAG_TARGET_H

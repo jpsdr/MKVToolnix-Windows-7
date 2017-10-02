@@ -8,13 +8,10 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PROPEDIT_PROPEDIT_H
-#define MTX_PROPEDIT_PROPEDIT_H
+#pragma once
 
 #include "common/os.h"
 
 #include "common/common_pch.h"
 
 #define FILE_NOT_MODIFIED Y("The file has not been modified.")
-
-#endif // MTX_PROPEDIT_PROPEDIT_H

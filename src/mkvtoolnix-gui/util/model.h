@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_MODEL_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_MODEL_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -43,5 +42,3 @@ QModelIndex findIndex(QAbstractItemModel const &model, std::function<bool(QModel
 void setItemForegroundColorDisabled(QList<QStandardItem *> const &items, bool disabled);
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_MODEL_H

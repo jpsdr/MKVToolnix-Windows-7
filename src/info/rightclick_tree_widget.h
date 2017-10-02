@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_RIGHTCLICK_TREE_WIDGET_H
-#define MTX_RIGHTCLICK_TREE_WIDGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -28,5 +27,3 @@ public:
 protected:
   virtual void mousePressEvent(QMouseEvent *event);
 };
-
-#endif // MTX_RIGHTCLICK_TREE_WIDGET_H

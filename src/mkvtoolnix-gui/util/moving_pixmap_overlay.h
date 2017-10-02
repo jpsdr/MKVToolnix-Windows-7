@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_MOVING_PIXMAP_OVERLAY_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_MOVING_PIXMAP_OVERLAY_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -43,5 +42,3 @@ public slots:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_MOVING_PIXMAP_OVERLAY_H

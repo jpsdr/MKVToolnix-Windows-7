@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_R_QTMP4_H
-#define MTX_INPUT_R_QTMP4_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -554,5 +553,3 @@ protected:
 
   virtual std::string read_string_atom(qt_atom_t atom, size_t num_skipped);
 };
-
-#endif  // MTX_INPUT_R_QTMP4_H

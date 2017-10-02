@@ -9,8 +9,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_FILE_STATUS_H
-#define MTX_MERGE_FILE_STATUS_H
+#pragma once
 
 enum file_status_e {
   FILE_STATUS_DONE         = 0,
@@ -18,5 +17,3 @@ enum file_status_e {
   FILE_STATUS_HOLDING,
   FILE_STATUS_MOREDATA
 };
-
-#endif  // MTX_MERGE_FILE_STATUS_H

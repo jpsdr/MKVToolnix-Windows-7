@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_OUTPUT_P_ALAC_H
-#define MTX_OUTPUT_P_ALAC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -36,5 +35,3 @@ public:
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 };
-
-#endif // MTX_OUTPUT_P_ALAC_H

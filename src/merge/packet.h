@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PACKET_H
-#define MTX_PACKET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -228,5 +227,3 @@ struct packet_t {
   uint64_t calculate_uncompressed_size();
 };
 using packet_cptr = std::shared_ptr<packet_t>;
-
-#endif // MTX_PACKET_H

@@ -12,8 +12,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_DIRAC_COMMON_H
-#define MTX_COMMON_DIRAC_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -173,5 +172,3 @@ namespace dirac {
     virtual void flush_frame();
   };
 };
-
-#endif  // MTX_COMMON_DIRAC_COMMON_H

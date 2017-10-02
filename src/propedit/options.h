@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PROPEDIT_OPTIONS_H
-#define MTX_PROPEDIT_OPTIONS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -52,5 +51,3 @@ protected:
   void prune_empty_masters();
 };
 using options_cptr = std::shared_ptr<options_c>;
-
-#endif // MTX_PROPEDIT_OPTIONS_H

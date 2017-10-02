@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_FS_SYS_HELPERS_H
-#define MTX_COMMON_FS_SYS_HELPERS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -51,5 +50,3 @@ std::string format_windows_message(uint64_t message_id);
 #endif
 
 }}
-
-#endif

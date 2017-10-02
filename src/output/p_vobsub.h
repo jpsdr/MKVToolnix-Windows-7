@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_VOBSUB_H
-#define MTX_P_VOBSUB_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -36,5 +35,3 @@ public:
 protected:
   virtual void after_packet_timestamped(packet_t &packet) override;
 };
-
-#endif // MTX_P_VOBSUB_H

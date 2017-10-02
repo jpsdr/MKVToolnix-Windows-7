@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_PREFS_RUN_PROGRAM_WIDGET_H
-#define MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_PREFS_RUN_PROGRAM_WIDGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -58,5 +57,3 @@ protected:
 };
 
 }}
-
-#endif // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_PREFS_RUN_PROGRAM_WIDGET_H

@@ -11,8 +11,7 @@
 
 */
 
-#ifndef MTX_COMMON_HEVC_H
-#define MTX_COMMON_HEVC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -40,5 +39,3 @@ bool is_fourcc(const char *fourcc);
 memory_cptr hevcc_to_nalus(const unsigned char *buffer, size_t size);
 
 }}                              // namespace mtx::hevc
-
-#endif  // MTX_COMMON_HEVC_H

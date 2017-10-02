@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PROPEDIT_SEGMENT_INFO_TARGET_H
-#define MTX_PROPEDIT_SEGMENT_INFO_TARGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -38,5 +37,3 @@ public:
 
   virtual void execute() override;
 };
-
-#endif // MTX_PROPEDIT_SEGMENT_INFO_TARGET_H

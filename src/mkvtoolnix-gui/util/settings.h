@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_SETTINGS_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_SETTINGS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -234,5 +233,3 @@ public:
 }}}
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::Util::Settings::RunProgramForEvents);
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_SETTINGS_H

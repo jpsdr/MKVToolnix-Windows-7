@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_AAC_ADIF_H
-#define MTX_R_AAC_ADIF_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -23,5 +22,3 @@ class aac_adif_reader_c {
 public:
   static int probe_file(mm_io_c *io, uint64_t size);
 };
-
-#endif // MTX_R_AAC_ADIF_H

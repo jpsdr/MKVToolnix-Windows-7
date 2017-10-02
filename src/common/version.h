@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_VERSION_H
-#define MTX_COMMON_VERSION_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -67,5 +66,3 @@ version_number_t get_current_version();
 mtx_release_version_t parse_latest_release_version(mtx::xml::document_cptr const &doc);
 
 segment_info_data_t get_default_segment_info_data(std::string const &application = "MKVToolNix");
-
-#endif  // MTX_COMMON_VERSION_H

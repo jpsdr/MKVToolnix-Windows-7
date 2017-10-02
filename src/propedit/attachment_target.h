@@ -8,8 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_PROPEDIT_ATTACHMENT_TARGET_H
-#define MTX_PROPEDIT_ATTACHMENT_TARGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -134,5 +133,3 @@ operator <<(std::ostream &out,
 
   return out;
 }
-
-#endif // MTX_PROPEDIT_ATTACHMENT_TARGET_H

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_WEBVTT_H
-#define MTX_COMMON_WEBVTT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -56,5 +55,3 @@ public:
   static std::string adjust_embedded_timestamps(std::string const &text, timestamp_c const &offset);
 };
 using webvtt_parser_cptr = std::shared_ptr<webvtt_parser_c>;
-
-#endif // MTX_COMMON_WEBVTT_H

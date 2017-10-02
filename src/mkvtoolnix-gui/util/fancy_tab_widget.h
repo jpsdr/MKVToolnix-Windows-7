@@ -18,8 +18,7 @@
  **
  **************************************************************************/
 
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -167,5 +166,3 @@ private slots:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H

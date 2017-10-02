@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_FILE_TYPE_FILTER_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_FILE_TYPE_FILTER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -16,5 +15,3 @@ public:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_FILE_TYPE_FILTER_H

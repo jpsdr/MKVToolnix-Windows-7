@@ -10,8 +10,7 @@
    Written by Matt Rice <topquark@sluggy.net>.
 */
 
-#ifndef MTX_XTR_MPEG1_2_H
-#define MTX_XTR_MPEG1_2_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -32,5 +31,3 @@ public:
     return "MPEG-1/-2 program stream";
   };
 };
-
-#endif

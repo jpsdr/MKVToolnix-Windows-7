@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_TIMESTAMP_FACTORY_H
-#define MTX_TIMESTAMP_FACTORY_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -200,5 +199,3 @@ public:
     return m_default_duration;
   }
 };
-
-#endif // MTX_TIMESTAMP_FACTORY_H

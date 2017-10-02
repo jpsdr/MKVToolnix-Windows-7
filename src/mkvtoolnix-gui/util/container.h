@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_CONTAINER_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_CONTAINER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -20,5 +19,3 @@ std::vector<std::string> toStdStringVector(QStringList const &strings, int offse
 QStringList toStringList(std::vector<std::string> const &stdStrings, int offset = 0);
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_CONTAINER_H

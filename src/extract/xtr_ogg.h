@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_XTR_OGG_H
-#define MTX_XTR_OGG_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -132,5 +131,3 @@ public:
 protected:
   virtual void header_packets_unlaced(std::vector<memory_cptr> &header_packets);
 };
-
-#endif

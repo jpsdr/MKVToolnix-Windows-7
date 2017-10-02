@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MP4_H
-#define MTX_COMMON_MP4_H
+#pragma once
 
 // Object type identifications.
 // See http://gpac.sourceforge.net/tutorial/mediatypes.htm
@@ -80,5 +79,3 @@
 #define MP4AOT_SAOC            0x2b // Spatial Audio Object Coding
 #define MP4AOT_LD_SURROUND     0x2c // Low Delay MPEG Surround
 #define MP4AOT_USAC            0x2d // Unified Speech and Audio Coding
-
-#endif

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_COMPRESSION_ZLIB_H
-#define MTX_COMMON_COMPRESSION_ZLIB_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -29,5 +28,3 @@ protected:
   virtual memory_cptr do_decompress(memory_cptr const &buffer);
   virtual memory_cptr do_compress(memory_cptr const &buffer);
 };
-
-#endif // MTX_COMMON_COMPRESSION_ZLIB_H

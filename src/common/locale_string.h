@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_LOCALE_STRING_H
-#define MTX_COMMON_LOCALE_STRING_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -54,5 +53,3 @@ public:
   locale_string_c &set_codeset_and_modifier(const locale_string_c &src);
   std::string str(eval_type_e type = full);
 };
-
-#endif  // MTX_COMMON_LOCALE_STRING_H

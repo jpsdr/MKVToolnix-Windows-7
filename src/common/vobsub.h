@@ -9,8 +9,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_VOBSUB_H
-#define MTX_COMMON_VOBSUB_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -21,5 +20,3 @@ namespace mtx { namespace vobsub {
 std::string create_default_index(unsigned int width, unsigned int height, std::string const &palette);
 
 }}
-
-#endif  // MTX_COMMON_VOBSUB_H

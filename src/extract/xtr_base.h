@@ -10,8 +10,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_XTR_BASE_H
-#define MTX_XTR_BASE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -82,5 +81,3 @@ public:
   virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
   virtual void handle_codec_state(memory_cptr &codec_state);
 };
-
-#endif

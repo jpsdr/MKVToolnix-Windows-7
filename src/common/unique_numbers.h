@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_UNIQUE_NUMBERS_H
-#define MTX_COMMON_UNIQUE_NUMBERS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -30,5 +29,3 @@ void add_unique_number(uint64_t number, unique_id_category_e category);
 void remove_unique_number(uint64_t number, unique_id_category_e category);
 uint64_t create_unique_number(unique_id_category_e category);
 void ignore_unique_numbers(unique_id_category_e category);
-
-#endif  // MTX_COMMON_UNIQUE_NUMBERS_H

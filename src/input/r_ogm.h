@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_OGM_H
-#define MTX_R_OGM_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -113,5 +112,3 @@ private:
   virtual void process_header_packets(ogm_demuxer_cptr dmx);
   virtual void handle_stream_comments();
 };
-
-#endif  // MTX_R_OGM_H

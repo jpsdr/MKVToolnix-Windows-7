@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_VALUE_PAGE_H
-#define MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_VALUE_PAGE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -69,5 +68,3 @@ public slots:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_VALUE_PAGE_H

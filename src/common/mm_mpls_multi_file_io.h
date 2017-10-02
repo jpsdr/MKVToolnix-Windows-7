@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_MM_MPLS_MULTI_FILE_IO_H
-#define MTX_COMMON_MM_MPLS_MULTI_FILE_IO_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -53,5 +52,3 @@ public:
   static mm_io_cptr open_multi(mm_io_c *in);
 };
 using mm_mpls_multi_file_io_cptr = std::shared_ptr<mm_mpls_multi_file_io_c>;
-
-#endif  // MTX_COMMON_MM_MPLS_MULTI_FILE_IO_H

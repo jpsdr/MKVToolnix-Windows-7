@@ -9,8 +9,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_CONSTRUCT_H
-#define MTX_COMMON_CONSTRUCT_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -165,5 +164,3 @@ cons(Targs... args) -> Tmaster * {
 }
 
 }}
-
-#endif // MTX_COMMON_CONSTRUCT_H

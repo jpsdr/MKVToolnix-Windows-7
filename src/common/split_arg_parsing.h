@@ -10,8 +10,7 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_SPLIT_ARG_PARSING_H
-#define MTX_COMMON_SPLIT_ARG_PARSING_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -35,5 +34,3 @@ public:
 std::vector<split_point_c> parse_split_parts(const std::string &arg, bool frames_fields);
 
 }}
-
-#endif // MTX_COMMON_SPLIT_ARG_PARSING_H

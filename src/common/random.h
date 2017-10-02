@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_RANDOM_H
-#define MTX_COMMON_RANDOM_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -75,5 +74,3 @@ public:
 #endif
   static void cleanup();
 };
-
-#endif // MTX_COMMON_RANDOM_H

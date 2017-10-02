@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_VORBIS_H
-#define MTX_P_VORBIS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -63,5 +62,3 @@ public:
 
   virtual bool is_compatible_with(output_compatibility_e compatibility);
 };
-
-#endif  // MTX_P_VORBIS_H

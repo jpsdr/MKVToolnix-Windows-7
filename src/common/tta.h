@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_TTA_COMMON_H
-#define MTX_COMMON_TTA_COMMON_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -35,5 +34,3 @@ struct PACKED_STRUCTURE tta_file_header_t {
 #if defined(COMP_MSC)
 #pragma pack(pop)
 #endif
-
-#endif // MTX_COMMON_TTA_COMMON_H

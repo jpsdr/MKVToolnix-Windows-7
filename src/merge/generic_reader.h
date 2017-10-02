@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_GENERIC_READER_H
-#define MTX_MERGE_GENERIC_READER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -147,5 +146,3 @@ protected:
   virtual void display_identification_results_as_json();
   virtual void display_identification_results_as_text();
 };
-
-#endif  // MTX_MERGE_GENERIC_READER_H

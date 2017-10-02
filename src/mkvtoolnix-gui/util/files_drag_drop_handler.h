@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_FILES_DRAG_DROP_HANDLER_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_FILES_DRAG_DROP_HANDLER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -31,5 +30,3 @@ public:
 };
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_FILES_DRAG_DROP_HANDLER_H

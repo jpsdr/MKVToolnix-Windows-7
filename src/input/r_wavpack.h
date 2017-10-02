@@ -11,8 +11,7 @@
    Written by Steve Lhomme <steve.lhomme@free.fr>.
 */
 
-#ifndef MTX_R_WAVPACK_H
-#define MTX_R_WAVPACK_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -45,5 +44,3 @@ public:
 
   static int probe_file(mm_io_c *in, uint64_t size);
 };
-
-#endif // MTX_R_WAVPACK_H

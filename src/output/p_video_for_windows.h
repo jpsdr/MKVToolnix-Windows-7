@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_OUTPUT_P_VIDEO_FOR_WINDOWS_H
-#define MTX_OUTPUT_P_VIDEO_FOR_WINDOWS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -44,5 +43,3 @@ protected:
   virtual void rederive_frame_type_div3(packet_cptr &packet);
   virtual void rederive_frame_type_mpeg4_p2(packet_cptr &packet);
 };
-
-#endif // MTX_OUTPUT_P_VIDEO_FOR_WINDOWS_H

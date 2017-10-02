@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_ENDIAN_H
-#define MTX_COMMON_ENDIAN_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -37,5 +36,3 @@ void put_uint16_be(void *buf, uint16_t value);
 void put_uint24_be(void *buf, uint32_t value);
 void put_uint32_be(void *buf, uint32_t value);
 void put_uint64_be(void *buf, uint64_t value);
-
-#endif  // MTX_COMMON_ENDIAN_H

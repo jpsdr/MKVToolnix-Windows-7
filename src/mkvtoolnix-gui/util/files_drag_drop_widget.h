@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_FILES_DRAG_DROP_WIDGET_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_FILES_DRAG_DROP_WIDGET_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -27,5 +26,3 @@ signals:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_UTIL_FILES_DRAG_DROP_WIDGET_H

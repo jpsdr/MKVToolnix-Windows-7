@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MERGE_COMMAND_LINE_DIALOG_H
-#define MTX_MKVTOOLNIX_GUI_MERGE_COMMAND_LINE_DIALOG_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -30,5 +29,3 @@ public slots:
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_MERGE_COMMAND_LINE_DIALOG_H

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_AT_SCOPE_EXIT_H
-#define MTX_COMMON_AT_SCOPE_EXIT_H
+#pragma once
 
 class at_scope_exit_c {
 private:
@@ -23,5 +22,3 @@ public:
     m_code();
   }
 };
-
-#endif  // MTX_COMMON_AT_SCOPE_EXIT_H

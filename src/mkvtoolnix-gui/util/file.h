@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_FILE_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_FILE_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -23,5 +22,3 @@ QString removeInvalidPathCharacters(QString fileName);
 QStringList replaceDirectoriesByContainedFiles(QStringList const &namesToCheck);
 
 }}}
-
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_FILE_H

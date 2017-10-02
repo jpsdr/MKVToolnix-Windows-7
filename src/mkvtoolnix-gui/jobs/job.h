@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_JOBS_JOB_H
-#define MTX_MKVTOOLNIX_GUI_JOBS_JOB_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -138,5 +137,3 @@ public:                         // static
 
 Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::LineType);
 Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::Status);
-
-#endif  // MTX_MKVTOOLNIX_GUI_JOBS_JOB_H

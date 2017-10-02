@@ -12,8 +12,7 @@
    and Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_R_MPEG_TS_H
-#define MTX_INPUT_R_MPEG_TS_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -517,5 +516,3 @@ private:
 };
 
 }}
-
-#endif  // MTX_INPUT_R_MPEG_TS_H

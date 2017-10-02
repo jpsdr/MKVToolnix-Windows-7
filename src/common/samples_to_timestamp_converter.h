@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_SAMPLES_TO_TIMESTAMP_CONVERTER_H
-#define MTX_COMMON_SAMPLES_TO_TIMESTAMP_CONVERTER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -66,5 +65,3 @@ operator /(int64_t v1,
            const samples_to_timestamp_converter_c &v2) {
   return v2.m_numerator ? v1 * v2.m_denominator / v2.m_numerator : v1;
 }
-
-#endif  // MTX_COMMON_SAMPLES_TO_TIMESTAMP_CONVERTER_H

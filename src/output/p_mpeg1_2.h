@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_OUTPUT_P_MPEG1_2_H
-#define MTX_OUTPUT_P_MPEG1_2_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -47,5 +46,3 @@ protected:
   virtual void remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr packet);
   virtual void flush_impl();
 };
-
-#endif  // MTX_OUTPUT_P_MPEG1_2_H

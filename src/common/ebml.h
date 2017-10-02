@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_EBML_H
-#define MTX_COMMON_EBML_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -447,5 +446,3 @@ std::shared_ptr<T>
 clone(std::unique_ptr<T> const &e) {
   return clone(*e);
 }
-
-#endif // MTX_COMMON_EBML_H

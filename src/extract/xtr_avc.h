@@ -10,8 +10,7 @@
    Written by Matt Rice <topquark@sluggy.net>.
 */
 
-#ifndef MTX_XTR_AVC_H
-#define MTX_XTR_AVC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -38,5 +37,3 @@ public:
 
   virtual nal_unit_list_t find_nal_units(binary *buf, std::size_t frame_size) const;
 };
-
-#endif

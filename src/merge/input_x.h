@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_INPUT_X_H
-#define MTX_MERGE_INPUT_X_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -60,5 +59,3 @@ namespace mtx {
     };
   }
 }
-
-#endif  // MTX_MERGE_INPUT_X_H

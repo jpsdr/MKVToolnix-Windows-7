@@ -1,5 +1,4 @@
-#ifndef MTX_MKVTOOLNIX_GUI_MERGE_MKVMERGE_OPTION_BUILDER_H
-#define MTX_MKVTOOLNIX_GUI_MERGE_MKVMERGE_OPTION_BUILDER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -19,5 +18,3 @@ struct MkvmergeOptionBuilder {
 };
 
 }}}
-
-#endif // MTX_MKVTOOLNIX_GUI_MERGE_MKVMERGE_OPTION_BUILDER_H

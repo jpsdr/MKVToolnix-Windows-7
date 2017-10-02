@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_INPUT_BLURAY_PCM_CHANNEL_REMOVAL_PACKET_CONVERTER_H
-#define MTX_INPUT_BLURAY_PCM_CHANNEL_REMOVAL_PACKET_CONVERTER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -29,5 +28,3 @@ public:
 
   virtual bool convert(packet_cptr const &packet);
 };
-
-#endif  // MTX_INPUT_BLURAY_PCM_CHANNEL_REMOVAL_PACKET_CONVERTER_H

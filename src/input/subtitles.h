@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_SUBTITLES_H
-#define MTX_SUBTITLES_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -145,5 +144,3 @@ protected:
   void decode_chars(unsigned char const *in, unsigned char *out, size_t bytes_in);
 };
 using ssa_parser_cptr = std::shared_ptr<ssa_parser_c>;
-
-#endif // MTX_SUBTITLES_H

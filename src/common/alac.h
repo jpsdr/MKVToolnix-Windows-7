@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_ALAC_H
-#define MTX_COMMON_ALAC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -41,5 +40,3 @@ struct PACKED_STRUCTURE codec_config_t {
 #endif
 
 }
-
-#endif // MTX_COMMON_ALAC_H

@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_OUTPUT_P_AVC_H
-#define MTX_OUTPUT_P_AVC_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -40,5 +39,3 @@ protected:
   virtual void change_nalu_size_len(packet_cptr packet);
   virtual void remove_filler_nalus(memory_c &data) const;
 };
-
-#endif  // MTX_OUTPUT_P_AVC_H

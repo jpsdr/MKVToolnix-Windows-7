@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_R_AC3_H
-#define MTX_R_AC3_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -47,5 +46,3 @@ public:
 protected:
   static int find_valid_headers(mm_io_c &in, int64_t probe_range, int num_headers);
 };
-
-#endif // MTX_R_AC3_H

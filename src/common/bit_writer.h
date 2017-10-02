@@ -9,8 +9,7 @@
    A class for file-like write access on the bit level
 */
 
-#ifndef MTX_COMMON_BIT_WRITER_H
-#define MTX_COMMON_BIT_WRITER_H
+#pragma once
 
 #include "common/common_pch.h"
 
@@ -131,5 +130,3 @@ protected:
   }
 };
 using bit_writer_cptr = std::shared_ptr<bit_writer_c>;
-
-#endif // MTX_COMMON_BIT_WRITER_H

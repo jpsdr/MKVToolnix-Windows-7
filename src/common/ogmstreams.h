@@ -11,8 +11,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_OGGSTREAMS_H
-#define MTX_COMMON_OGGSTREAMS_H
+#pragma once
 
 /*
    Taken from http://tobias.everwicked.com/packfmt.htm
@@ -123,5 +122,3 @@ struct PACKED_STRUCTURE vp8_ogg_header_t {
 #define PACKET_LEN_BITS01        0xc0
 #define PACKET_LEN_BITS2         0x02
 #define PACKET_IS_SYNCPOINT      0x08
-
-#endif /* __OGGSTREAMS_H */
