@@ -15,8 +15,10 @@
 
 #include "common/mm_io.h"
 
+namespace mtx { namespace id3 {
+
 int
-skip_id3v2_tag(mm_io_c &io) {
+skip_v2_tag(mm_io_c &io) {
   unsigned char buffer[10];
 
   io.setFilePointer(0, seek_beginning);
@@ -47,7 +49,7 @@ skip_id3v2_tag(mm_io_c &io) {
 }
 
 int
-id3v2_tag_present_at_end(mm_io_c &io) {
+v2_tag_present_at_end(mm_io_c &io) {
   unsigned char buffer[10];
   int tag_size;
 
@@ -77,7 +79,7 @@ id3v2_tag_present_at_end(mm_io_c &io) {
 }
 
 int
-id3v1_tag_present_at_end(mm_io_c &io) {
+v1_tag_present_at_end(mm_io_c &io) {
   unsigned char buffer[3];
 
   if (io.get_size() < 128)
@@ -95,8 +97,10 @@ id3v1_tag_present_at_end(mm_io_c &io) {
 }
 
 int
-id3_tag_present_at_end(mm_io_c &io) {
-  if (id3v1_tag_present_at_end(io))
+tag_present_at_end(mm_io_c &io) {
+  if (v1_tag_present_at_end(io))
     return 128;
-  return id3v2_tag_present_at_end(io);
+  return v2_tag_present_at_end(io);
 }
+
+}}

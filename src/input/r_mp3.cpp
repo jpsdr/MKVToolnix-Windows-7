@@ -32,7 +32,7 @@ mp3_reader_c::probe_file(mm_io_c *in,
                          int num_headers,
                          bool require_zero_offset) {
   try {
-    skip_id3v2_tag(*in);
+    mtx::id3::skip_v2_tag(*in);
 
     auto offset = find_valid_headers(*in, probe_range, num_headers);
     return (require_zero_offset && (0 == offset)) || (!require_zero_offset && (0 <= offset));
@@ -52,8 +52,8 @@ mp3_reader_c::mp3_reader_c(const track_info_c &ti,
 void
 mp3_reader_c::read_headers() {
   try {
-    auto tag_size_start = skip_id3v2_tag(*m_in);
-    auto tag_size_end   = id3_tag_present_at_end(*m_in);
+    auto tag_size_start = mtx::id3::skip_v2_tag(*m_in);
+    auto tag_size_end   = mtx::id3::tag_present_at_end(*m_in);
 
     if (0 > tag_size_start)
       tag_size_start = 0;
@@ -125,7 +125,7 @@ mp3_reader_c::find_valid_headers(mm_io_c &io,
                                  int num_headers) {
   try {
     io.setFilePointer(0, seek_beginning);
-    skip_id3v2_tag(io);
+    mtx::id3::skip_v2_tag(io);
 
     memory_cptr buf = memory_c::alloc(probe_range);
     int nread       = io.read(buf->get_buffer(), probe_range);

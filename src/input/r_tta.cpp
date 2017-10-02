@@ -36,7 +36,7 @@ tta_reader_c::probe_file(mm_io_c *in,
     return 0;
   try {
     in->setFilePointer(0, seek_beginning);
-    int tag_size = skip_id3v2_tag(*in);
+    int tag_size = mtx::id3::skip_v2_tag(*in);
     if (-1 == tag_size)
       return 0;
     if (in->read(buf, 4) != 4)
@@ -59,7 +59,7 @@ tta_reader_c::tta_reader_c(const track_info_c &ti,
 void
 tta_reader_c::read_headers() {
   try {
-    int tag_size = skip_id3v2_tag(*m_in);
+    int tag_size = mtx::id3::skip_v2_tag(*m_in);
     if (0 > tag_size)
       mxerror_fn(m_ti.m_fname, boost::format(Y("tta_reader: tag_size < 0 in the c'tor. %1%\n")) % BUGMSG);
     m_size -= tag_size;
@@ -71,7 +71,7 @@ tta_reader_c::read_headers() {
       return;
 
     uint64_t seek_sum  = m_in->getFilePointer() + 4 - tag_size;
-    m_size            -= id3_tag_present_at_end(*m_in);
+    m_size            -= mtx::id3::tag_present_at_end(*m_in);
     m_size            -= mtx::ape::tag_present_at_end(*m_in);
 
     uint32_t seek_point;

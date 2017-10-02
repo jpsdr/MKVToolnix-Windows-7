@@ -15,7 +15,11 @@
 
 #include "common/common_pch.h"
 
-int skip_id3v2_tag(mm_io_c &io);
-int id3v1_tag_present_at_end(mm_io_c &io);
-int id3v2_tag_present_at_end(mm_io_c &io);
-int id3_tag_present_at_end(mm_io_c &io);
+namespace mtx { namespace id3 {
+
+int skip_v2_tag(mm_io_c &io);
+int v1_tag_present_at_end(mm_io_c &io);
+int v2_tag_present_at_end(mm_io_c &io);
+int tag_present_at_end(mm_io_c &io);
+
+}}

@@ -47,8 +47,8 @@ aac_reader_c::aac_reader_c(const track_info_c &ti,
 void
 aac_reader_c::read_headers() {
   try {
-    int tag_size_start = skip_id3v2_tag(*m_in);
-    int tag_size_end   = id3_tag_present_at_end(*m_in);
+    int tag_size_start = mtx::id3::skip_v2_tag(*m_in);
+    int tag_size_end   = mtx::id3::tag_present_at_end(*m_in);
 
     if (0 > tag_size_start)
       tag_size_start = 0;
