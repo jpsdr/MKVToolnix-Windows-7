@@ -62,7 +62,7 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
   m_out->write(std::string{"alac"});                             // mFormatID
   m_out->write_uint32_be(0);                                     // mFormatFlags
   m_out->write_uint32_be(0);                                     // mBytesPerPacket
-  m_out->write_uint32_be(caf::defs::default_frames_per_packet);  // mFramesPerPacket
+  m_out->write_uint32_be(mtx::caf::defs::default_frames_per_packet);  // mFramesPerPacket
   m_out->write_uint32_be(channels);                              // mChannelsPerFrame
   m_out->write_uint32_be(0);                                     // mBitsPerChannel
 
@@ -82,38 +82,43 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
 
   m_out->write(m_priv);                                          // audio specific config
 
-  auto alo = caf::channel_layout_t();
+  auto alo = mtx::caf::channel_layout_t();
   if (2 < channels) {
     switch (channels) {
       case 3:
-        alo.channel_layout_tag = caf::channel_layout_t::mpeg_3_0_b;
-        alo.channel_bitmap     = caf::channel_layout_t::left | caf::channel_layout_t::right | caf::channel_layout_t::center;
+        alo.channel_layout_tag = mtx::caf::channel_layout_t::mpeg_3_0_b;
+        alo.channel_bitmap     = mtx::caf::channel_layout_t::left | mtx::caf::channel_layout_t::right | mtx::caf::channel_layout_t::center;
         break;
       case 4:
-        alo.channel_layout_tag = caf::channel_layout_t::mpeg_4_0_b;
-        alo.channel_bitmap     = caf::channel_layout_t::left | caf::channel_layout_t::right | caf::channel_layout_t::center | caf::channel_layout_t::center_surround;
+        alo.channel_layout_tag = mtx::caf::channel_layout_t::mpeg_4_0_b;
+        alo.channel_bitmap     = mtx::caf::channel_layout_t::left | mtx::caf::channel_layout_t::right | mtx::caf::channel_layout_t::center | mtx::caf::channel_layout_t::center_surround;
         break;
       case 5:
-        alo.channel_layout_tag = caf::channel_layout_t::mpeg_5_0_d;
-        alo.channel_bitmap     = caf::channel_layout_t::left | caf::channel_layout_t::right | caf::channel_layout_t::center | caf::channel_layout_t::left_surround | caf::channel_layout_t::right_surround;
+        alo.channel_layout_tag = mtx::caf::channel_layout_t::mpeg_5_0_d;
+        alo.channel_bitmap     = mtx::caf::channel_layout_t::left          | mtx::caf::channel_layout_t::right          | mtx::caf::channel_layout_t::center
+                               | mtx::caf::channel_layout_t::left_surround | mtx::caf::channel_layout_t::right_surround;
         break;
       case 6:
-        alo.channel_layout_tag = caf::channel_layout_t::mpeg_5_1_d;
-        alo.channel_bitmap     = caf::channel_layout_t::left | caf::channel_layout_t::right | caf::channel_layout_t::center | caf::channel_layout_t::left_surround | caf::channel_layout_t::right_surround | caf::channel_layout_t::lfe_screen;
+        alo.channel_layout_tag = mtx::caf::channel_layout_t::mpeg_5_1_d;
+        alo.channel_bitmap     = mtx::caf::channel_layout_t::left          | mtx::caf::channel_layout_t::right          | mtx::caf::channel_layout_t::center
+                               | mtx::caf::channel_layout_t::left_surround | mtx::caf::channel_layout_t::right_surround | mtx::caf::channel_layout_t::lfe_screen;
         break;
       case 7:
-        alo.channel_layout_tag = caf::channel_layout_t::aac_6_1;
-        alo.channel_bitmap     = caf::channel_layout_t::left | caf::channel_layout_t::right | caf::channel_layout_t::center | caf::channel_layout_t::left_surround
-                               | caf::channel_layout_t::right_surround | caf::channel_layout_t::center_surround | caf::channel_layout_t::lfe_screen;
+        alo.channel_layout_tag = mtx::caf::channel_layout_t::aac_6_1;
+        alo.channel_bitmap     = mtx::caf::channel_layout_t::left          | mtx::caf::channel_layout_t::right          | mtx::caf::channel_layout_t::center
+                               | mtx::caf::channel_layout_t::left_surround | mtx::caf::channel_layout_t::right_surround | mtx::caf::channel_layout_t::center_surround
+                               | mtx::caf::channel_layout_t::lfe_screen;
         break;
       case 8:
-        alo.channel_layout_tag = caf::channel_layout_t::mpeg_7_1_b;
-        alo.channel_bitmap     = caf::channel_layout_t::left | caf::channel_layout_t::right | caf::channel_layout_t::center | caf::channel_layout_t::left_center
-                               | caf::channel_layout_t::right_center | caf::channel_layout_t::left_surround | caf::channel_layout_t::right_surround | caf::channel_layout_t::lfe_screen;
+        alo.channel_layout_tag = mtx::caf::channel_layout_t::mpeg_7_1_b;
+        alo.channel_bitmap     = mtx::caf::channel_layout_t::left          | mtx::caf::channel_layout_t::right          | mtx::caf::channel_layout_t::center
+                               | mtx::caf::channel_layout_t::left_center   | mtx::caf::channel_layout_t::right_center
+                               | mtx::caf::channel_layout_t::left_surround | mtx::caf::channel_layout_t::right_surround
+                               | mtx::caf::channel_layout_t::lfe_screen;
         break;
     }
 
-    auto acli = caf::channel_layout_info_t();
+    auto acli = mtx::caf::channel_layout_info_t();
 
     put_uint32_be(&acli.channel_layout_info_size, 24);                         // = sizeof(ALACChannelLayoutInfo)
     put_uint32_be(&acli.channel_layout_info_id,   FOURCC('c', 'h', 'a', 'n')); // = 'chan'
@@ -211,5 +216,5 @@ xtr_alac_c::handle_frame(xtr_frame_t &f) {
   m_pkt_sizes.push_back(amt_diff & 127);
 
   m_packets_written++;
-  m_frames_written += caf::defs::default_frames_per_packet;
+  m_frames_written += mtx::caf::defs::default_frames_per_packet;
 }
