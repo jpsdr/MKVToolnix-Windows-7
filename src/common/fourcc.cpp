@@ -21,7 +21,7 @@
 static uint32_t
 val(uint32_t value,
     fourcc_c::byte_order_t byte_order) {
-  return fourcc_c::big_endian == byte_order ? value : mtx::bswap_32(value);
+  return fourcc_c::big_endian == byte_order ? value : mtx::bytes::swap_32(value);
 }
 
 fourcc_c::fourcc_c()

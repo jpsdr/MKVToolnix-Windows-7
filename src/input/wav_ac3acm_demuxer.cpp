@@ -62,7 +62,7 @@ wav_ac3acm_demuxer_c::probe(mm_io_cptr &io) {
 int
 wav_ac3acm_demuxer_c::decode_buffer(int len) {
   if ((2 < len) && m_swap_bytes) {
-    mtx::bswap_buffer(m_buf[m_cur_buf]->get_buffer(), m_buf[m_cur_buf ^ 1]->get_buffer(), len, 2);
+    mtx::bytes::swap_buffer(m_buf[m_cur_buf]->get_buffer(), m_buf[m_cur_buf ^ 1]->get_buffer(), len, 2);
     m_cur_buf ^= 1;
   }
 

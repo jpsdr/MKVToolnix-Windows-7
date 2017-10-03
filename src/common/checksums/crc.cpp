@@ -70,7 +70,7 @@ crc_base_c::init_table() {
       uint32_t c = i << 24;
       for (auto j = 0u; j < 8u; j++)
         c = (c << 1) ^ ((parameters.poly << (32 - parameters.bits)) & (static_cast<int32_t>(c) >> 31));
-      m_table[i] = mtx::bswap_32(c);
+      m_table[i] = mtx::bytes::swap_32(c);
     }
   }
 
@@ -86,8 +86,8 @@ crc_base_c::get_result()
   auto result        = m_crc ^ m_xor_result;
 
   if (m_result_in_le)
-    result = result_length == 4 ? mtx::bswap_32(result)
-           : result_length == 2 ? mtx::bswap_16(result)
+    result = result_length == 4 ? mtx::bytes::swap_32(result)
+           : result_length == 2 ? mtx::bytes::swap_16(result)
            :                      result;
 
   unsigned char buffer[result_length];

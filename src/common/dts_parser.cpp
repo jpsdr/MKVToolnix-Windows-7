@@ -120,7 +120,7 @@ void
 parser_c::decode_buffer() {
   if (m->swap_bytes)
     decode_step(m->swap_remainder, 2, [this]() {
-      mtx::bswap_buffer(m->decode_buffer.get_buffer(), m->decode_buffer.get_buffer(), m->decode_buffer.get_size(), 2);
+      mtx::bytes::swap_buffer(m->decode_buffer.get_buffer(), m->decode_buffer.get_buffer(), m->decode_buffer.get_size(), 2);
     });
 
   if (m->pack_14_16)

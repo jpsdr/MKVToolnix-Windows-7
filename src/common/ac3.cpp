@@ -468,7 +468,7 @@ verify_checksum(unsigned char const *buf,
   int frame_size_words  = frame.m_bytes >> 1;
   int frame_size_58     = (frame_size_words >> 1) + (frame_size_words >> 3);
 
-  uint16_t actual_crc   = mtx::bswap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, buf + 4, 2 * frame_size_58 - 4));
+  uint16_t actual_crc   = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, buf + 4, 2 * frame_size_58 - 4));
   unsigned int crc_inv  = pow_poly((CRC16_POLY >> 1), (16 * frame_size_58) - 16, CRC16_POLY);
   actual_crc            = mul_poly(crc_inv, actual_crc, CRC16_POLY);
 

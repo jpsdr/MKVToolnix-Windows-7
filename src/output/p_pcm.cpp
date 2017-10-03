@@ -60,7 +60,7 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
 
   if (m_format == big_endian_integer)
     m_byte_swapper = [this](unsigned char const *src, unsigned char *dst, std::size_t num_bytes) {
-      mtx::bswap_buffer(src, dst, num_bytes, m_bits_per_sample / 8);
+      mtx::bytes::swap_buffer(src, dst, num_bytes, m_bits_per_sample / 8);
     };
 }
 

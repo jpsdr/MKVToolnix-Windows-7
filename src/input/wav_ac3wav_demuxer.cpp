@@ -50,8 +50,8 @@ wav_ac3wav_demuxer_c::decode_buffer(int len) {
     return -1;
 
   if (m_swap_bytes) {
-    memcpy(           m_buf[m_cur_buf ^ 1]->get_buffer(), m_buf[m_cur_buf]->get_buffer(),         8);
-    mtx::bswap_buffer(m_buf[m_cur_buf]->get_buffer() + 8, m_buf[m_cur_buf ^ 1]->get_buffer() + 8, len - 8, 2);
+    memcpy(                 m_buf[m_cur_buf ^ 1]->get_buffer(), m_buf[m_cur_buf]->get_buffer(),         8);
+    mtx::bytes::swap_buffer(m_buf[m_cur_buf]->get_buffer() + 8, m_buf[m_cur_buf ^ 1]->get_buffer() + 8, len - 8, 2);
     m_cur_buf ^= 1;
   }
 
