@@ -307,7 +307,7 @@ display_progress(bool is_100percent = false) {
     return;
 
   if (is_100percent) {
-    if (g_gui_mode)
+    if (mtx::cli::g_gui_mode)
       mxinfo(boost::format("#GUI#progress 100%%\n"));
     else
       mxinfo(boost::format(Y("Progress: 100%%%1%")) % "\r");
@@ -332,7 +332,7 @@ display_progress(bool is_100percent = false) {
   // if (2 < current_percentage)
   //   exit(42);
 
-  if (g_gui_mode)
+  if (mtx::cli::g_gui_mode)
     mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
   else
     mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");

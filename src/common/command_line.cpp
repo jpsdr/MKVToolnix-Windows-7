@@ -29,6 +29,8 @@
 #include "common/translation.h"
 #include "common/version.h"
 
+namespace mtx { namespace cli {
+
 bool g_gui_mode = false;
 
 /** \brief Reads command line arguments from a file
@@ -163,8 +165,8 @@ command_line_args_from_environment() {
 */
 #if !defined(SYS_WINDOWS)
 std::vector<std::string>
-command_line_utf8(int argc,
-                  char **argv) {
+args_in_utf8(int argc,
+             char **argv) {
   int i;
   std::vector<std::string> args = command_line_args_from_environment();
 
@@ -189,8 +191,8 @@ command_line_utf8(int argc,
 #else  // !defined(SYS_WINDOWS)
 
 std::vector<std::string>
-command_line_utf8(int,
-                  char **) {
+args_in_utf8(int,
+             char **) {
   std::vector<std::string> args = command_line_args_from_environment();
   std::string utf8;
 
@@ -217,7 +219,7 @@ command_line_utf8(int,
 }
 #endif // !defined(SYS_WINDOWS)
 
-std::string usage_text, version_info;
+std::string g_usage_text, g_version_info;
 
 /** Handle command line arguments common to all programs
 
@@ -235,8 +237,8 @@ std::string usage_text, version_info;
      called again and \c false otherwise.
 */
 bool
-handle_common_cli_args(std::vector<std::string> &args,
-                       const std::string &redirect_output_short) {
+handle_common_args(std::vector<std::string> &args,
+                   const std::string &redirect_output_short) {
   size_t i = 0;
 
   while (args.size() > i) {
@@ -329,7 +331,7 @@ handle_common_cli_args(std::vector<std::string> &args,
   i = 0;
   while (args.size() > i) {
     if ((args[i] == "-V") || (args[i] == "--version")) {
-      mxinfo(boost::format("%1%\n") % version_info);
+      mxinfo(boost::format("%1%\n") % g_version_info);
       mxexit();
 
     } else if ((args[i] == "-v") || (args[i] == "--verbose")) {
@@ -342,7 +344,7 @@ handle_common_cli_args(std::vector<std::string> &args,
       args.erase(args.begin() + i, args.begin() + i + 1);
 
     } else if ((args[i] == "-h") || (args[i] == "-?") || (args[i] == "--help"))
-      usage();
+      display_usage();
 
     else
       ++i;
@@ -352,7 +354,9 @@ handle_common_cli_args(std::vector<std::string> &args,
 }
 
 void
-usage(int exit_code) {
-  mxinfo(boost::format("%1%\n") % usage_text);
+display_usage(int exit_code) {
+  mxinfo(boost::format("%1%\n") % g_usage_text);
   mxexit(exit_code);
 }
+
+}}

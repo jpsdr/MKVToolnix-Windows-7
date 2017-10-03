@@ -165,7 +165,7 @@ static
 void setup(char **argv) {
   mtx_common_init("mkvpropedit", argv[0]);
   clear_list_of_unique_numbers(UNIQUE_ALL_IDS);
-  version_info = get_version_info("mkvpropedit", vif_full);
+  mtx::cli::g_version_info = get_version_info("mkvpropedit", vif_full);
 }
 
 /** \brief Setup and high level program control
@@ -178,7 +178,7 @@ main(int argc,
      char **argv) {
   setup(argv);
 
-  options_cptr options = propedit_cli_parser_c(command_line_utf8(argc, argv)).run();
+  options_cptr options = propedit_cli_parser_c(mtx::cli::args_in_utf8(argc, argv)).run();
 
   if (debugging_c::requested("dump_options")) {
     mxinfo("\nDumping options after parsing the command line\n\n");

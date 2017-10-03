@@ -29,41 +29,41 @@ public:
 
 static void
 setup_help_and_version_info() {
-  version_info = get_version_info("checksum", vif_full);
-  usage_text   = "checksum [options] file_name\n"
-         "\n"
-         "Calculates a checksum of a file. Used for testing MKVToolNix' checksumming\n"
-         "algorithms. The defaults are:\n"
-         "- Algorithm: Adler32\n"
-         "- Chunk size 4096\n"
-         "- Initial vlaue: 0\n"
-         "- XOR result with: 0\n"
-         "\n"
-         "Checksum options:\n"
-         "\n"
-         "  -a, --adler32          Use Adler32 (default algorithm)\n"
-         "      --crc8-atm         Use CRC-8 ATM\n"
-         "      --crc16-ansi       Use CRC-16 ANSI\n"
-         "      --crc16-ccitt      Use CRC-16 CCITT\n"
-         "  -c, --crc32-ieee       Use CRC-32 IEEE\n"
-         "      --crc32-ieee-le    Use CRC-32 IEEE Little Endian\n"
-         "  -t, --matroska         Use Matroska's CRC (CRC-32 IEEE Little Endian,\n"
-         "                         initial value 0xffffffff, XOR with 0xffffffff,\n"
-         "                         result is Little Endian)\n"
-         "  -m, --md5              Use MD5\n"
-         "  --chunk-size size      Calculate in chunks of \"size\" bytes; 0 means all\n"
-         "                         in one (default: 4096)\n"
-         "  --initial-value value  Use this as the initial value for CRC algorithms\n"
-         "                         (default: 0)\n"
-         "  --xor-result value     XOR the result with this value for CRC algorithms\n"
-         "                         (default: 0)\n"
-         "  --result-in-le         Output the result in Little Endian (default:\n"
-         "                         Big Endian)\n"
-         "\n"
-         "General options:\n"
-         "\n"
-         "  -h, --help             This help text\n"
-         "  -V, --version          Print version information\n";
+  mtx::cli::g_version_info = get_version_info("checksum", vif_full);
+  mtx::cli::g_usage_text   = "checksum [options] file_name\n"
+                             "\n"
+                             "Calculates a checksum of a file. Used for testing MKVToolNix' checksumming\n"
+                             "algorithms. The defaults are:\n"
+                             "- Algorithm: Adler32\n"
+                             "- Chunk size 4096\n"
+                             "- Initial vlaue: 0\n"
+                             "- XOR result with: 0\n"
+                             "\n"
+                             "Checksum options:\n"
+                             "\n"
+                             "  -a, --adler32          Use Adler32 (default algorithm)\n"
+                             "      --crc8-atm         Use CRC-8 ATM\n"
+                             "      --crc16-ansi       Use CRC-16 ANSI\n"
+                             "      --crc16-ccitt      Use CRC-16 CCITT\n"
+                             "  -c, --crc32-ieee       Use CRC-32 IEEE\n"
+                             "      --crc32-ieee-le    Use CRC-32 IEEE Little Endian\n"
+                             "  -t, --matroska         Use Matroska's CRC (CRC-32 IEEE Little Endian,\n"
+                             "                         initial value 0xffffffff, XOR with 0xffffffff,\n"
+                             "                         result is Little Endian)\n"
+                             "  -m, --md5              Use MD5\n"
+                             "  --chunk-size size      Calculate in chunks of \"size\" bytes; 0 means all\n"
+                             "                         in one (default: 4096)\n"
+                             "  --initial-value value  Use this as the initial value for CRC algorithms\n"
+                             "                         (default: 0)\n"
+                             "  --xor-result value     XOR the result with this value for CRC algorithms\n"
+                             "                         (default: 0)\n"
+                             "  --result-in-le         Output the result in Little Endian (default:\n"
+                             "                         Big Endian)\n"
+                             "\n"
+                             "General options:\n"
+                             "\n"
+                             "  -h, --help             This help text\n"
+                             "  -V, --version          Print version information\n";
 }
 
 static cli_options_c
@@ -192,8 +192,8 @@ main(int argc,
   mtx_common_init("checksum", argv[0]);
   setup_help_and_version_info();
 
-  auto args = command_line_utf8(argc, argv);
-  while (handle_common_cli_args(args, "-r"))
+  auto args = mtx::cli::args_in_utf8(argc, argv);
+  while (mtx::cli::handle_common_args(args, "-r"))
     ;
 
   auto options = parse_args(args);

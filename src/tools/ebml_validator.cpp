@@ -8,7 +8,7 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#include "common/os.h"
+#include "common/common_pch.h"
 
 #include <algorithm>
 #include <limits>
@@ -18,7 +18,7 @@
 
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
-#include "common/common_pch.h"
+#include "common/command_line.h"
 #include "common/mm_io.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
@@ -373,7 +373,7 @@ main(int argc,
   init_element_names();
   init_master_information();
 
-  std::vector<std::string> args = command_line_utf8(argc, argv);
+  std::vector<std::string> args = mtx::cli::args_in_utf8(argc, argv);
   std::string file_name         = parse_args(args);
 
   try {

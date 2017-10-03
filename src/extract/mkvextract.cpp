@@ -100,8 +100,8 @@ setup(char **argv) {
 
   set_process_priority(-1);
 
-  verbose      = 0;
-  version_info = get_version_info("mkvextract", vif_full);
+  verbose                  = 0;
+  mtx::cli::g_version_info = get_version_info("mkvextract", vif_full);
 }
 
 int
@@ -109,7 +109,7 @@ main(int argc,
      char **argv) {
   setup(argv);
 
-  options_c options = extract_cli_parser_c(command_line_utf8(argc, argv)).run();
+  options_c options = extract_cli_parser_c(mtx::cli::args_in_utf8(argc, argv)).run();
 
   if (options_c::em_tracks == options.m_extraction_mode)
     extract_tracks(options.m_file_name, options.m_tracks, options.m_parse_mode);
@@ -133,7 +133,7 @@ main(int argc,
     extract_timecodes(options.m_file_name, options.m_tracks, 2);
 
   else
-    usage(2);
+    mtx::cli::display_usage(2);
 
   mxexit();
 }

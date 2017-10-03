@@ -90,7 +90,7 @@ parser_c::parser_c(std::vector<std::string> const &args)
 void
 parser_c::parse_args() {
   set_usage();
-  while (!m_no_common_cli_args && handle_common_cli_args(m_args, ""))
+  while (!m_no_common_cli_args && mtx::cli::handle_common_args(m_args, ""))
     set_usage();
 
   run_hooks(parser_c::ht_common_options_parsed);
@@ -191,9 +191,9 @@ parser_c::add_common_options() {
 
 void
 parser_c::set_usage() {
-  usage_text = "";
+  mtx::cli::g_usage_text = "";
   for (auto &option : m_options)
-    usage_text += option.format_text();
+    mtx::cli::g_usage_text += option.format_text();
 }
 
 void

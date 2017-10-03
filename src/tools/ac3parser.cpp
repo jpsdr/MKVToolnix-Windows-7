@@ -13,6 +13,7 @@
 #include "common/ac3.h"
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
+#include "common/command_line.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"
 #include "common/translation.h"
@@ -115,7 +116,7 @@ main(int argc,
      char **argv) {
   mtx_common_init("ac3parser", argv[0]);
 
-  std::vector<std::string> args = command_line_utf8(argc, argv);
+  std::vector<std::string> args = mtx::cli::args_in_utf8(argc, argv);
   std::string file_name         = parse_args(args);
 
   try {

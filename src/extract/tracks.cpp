@@ -440,7 +440,7 @@ extract_tracks(const std::string &file_name,
         if (0 == verbose) {
           auto current_percentage = in->getFilePointer() * 100 / file_size;
 
-          if (g_gui_mode)
+          if (mtx::cli::g_gui_mode)
             mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
           else
             mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
@@ -516,7 +516,7 @@ extract_tracks(const std::string &file_name,
     close_extractors();
 
     if (0 == verbose) {
-      if (g_gui_mode)
+      if (mtx::cli::g_gui_mode)
         mxinfo(boost::format("#GUI#progress %1%%%\n") % 100);
       else
         mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 100 % "\n");

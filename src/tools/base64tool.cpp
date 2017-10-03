@@ -25,15 +25,14 @@
 
 void
 set_usage() {
-  usage_text = Y(
+  mtx::cli::g_version_info = get_version_info("base64util", vif_full);
+  mtx::cli::g_usage_text   = Y(
     "base64util <encode|decode> <input> <output> [maxlen]\n"
     "\n"
     "  encode - Read from <input>, encode to Base64 and write to <output>.\n"
     "           Max line length can be specified and is 72 if left out.\n"
     "  decode - Read from <input>, decode to binary and write to <output>.\n"
     );
-
-  version_info = get_version_info("base64util", vif_full);
 }
 
 int
@@ -50,7 +49,7 @@ main(int argc,
   set_usage();
 
   if (argc < 4)
-    usage(0);
+    mtx::cli::display_usage(0);
 
   mode = 0;
   if (!strcmp(argv[1], "encode"))
@@ -65,7 +64,7 @@ main(int argc,
     if (!parse_number(argv[4], maxlen) || (maxlen < 4))
       mxerror(Y("Max line length must be >= 4.\n\n"));
   } else if ((argc > 5) || ((argc > 4) && (mode == 'd')))
-    usage(2);
+    mtx::cli::display_usage(2);
 
   maxlen = ((maxlen + 3) / 4) * 4;
 

@@ -1848,7 +1848,7 @@ setup(char const *argv0,
   init_locales(locale);
   init_common_boost_formats();
 
-  version_info = get_version_info("mkvinfo", vif_full);
+  mtx::cli::g_version_info = get_version_info("mkvinfo", vif_full);
 }
 
 int
@@ -1866,7 +1866,7 @@ main(int argc,
      char **argv) {
   setup(argv[0]);
 
-  g_options = info_cli_parser_c(command_line_utf8(argc, argv)).run();
+  g_options = info_cli_parser_c(mtx::cli::args_in_utf8(argc, argv)).run();
 
   init_common_boost_formats();
 

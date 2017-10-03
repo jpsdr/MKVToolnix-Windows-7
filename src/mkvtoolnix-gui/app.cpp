@@ -58,7 +58,7 @@ App::App(int &argc,
   , d_ptr{new AppPrivate{}}
 {
   mtx_common_init("mkvtoolnix-gui", argv[0]);
-  version_info = get_version_info("mkvtoolnix-gui", vif_full);
+  mtx::cli::g_version_info = get_version_info("mkvtoolnix-gui", vif_full);
 
   // The routines for handling unique numbers cannot cope with
   // multiple chapters being worked on at the same time as they safe

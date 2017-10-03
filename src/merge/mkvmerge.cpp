@@ -74,6 +74,8 @@ using namespace libmatroska;
 #define S(x) std::string{x}
 static void
 set_usage() {
+  std::string usage_text;
+
   auto nl     = S("\n");
   usage_text  =   "";
   usage_text += Y("mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n");
@@ -363,7 +365,8 @@ set_usage() {
                   "explains several details in great length which are not obvious from\n"
                   "this listing.\n");
 
-  version_info = get_version_info("mkvmerge", vif_full);
+  mtx::cli::g_version_info = get_version_info("mkvmerge", vif_full);
+  mtx::cli::g_usage_text   = usage_text;
 }
 #undef S
 
@@ -371,7 +374,7 @@ set_usage() {
 */
 static void
 print_capabilities() {
-  mxinfo(boost::format("VERSION=%1%\n") % version_info);
+  mxinfo(boost::format("VERSION=%1%\n") % mtx::cli::g_version_info);
 #if defined(HAVE_FLAC_FORMAT_H)
   mxinfo("FLAC\n");
 #endif
@@ -2093,7 +2096,7 @@ handle_file_name_arg(const std::string &this_arg,
 std::vector<std::string>
 parse_common_args(std::vector<std::string> args) {
   set_usage();
-  while (handle_common_cli_args(args, ""))
+  while (mtx::cli::handle_common_args(args, ""))
     set_usage();
 
   return args;
@@ -2260,7 +2263,7 @@ parse_args(std::vector<std::string> args) {
 
   if (g_outfile.empty()) {
     mxinfo(Y("Error: no destination file name was given.\n\n"));
-    usage(2);
+    mtx::cli::display_usage(2);
   }
 
   if (!outputting_webm() && is_webm_file_name(g_outfile)) {
@@ -2917,7 +2920,7 @@ display_playlist_scan_progress(size_t num_scanned,
 
   auto current_percentage = (num_scanned * 1000 + 5) / total_num_to_scan / 10;
 
-  if (g_gui_mode)
+  if (mtx::cli::g_gui_mode)
     mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
   else
     mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
@@ -2974,7 +2977,7 @@ add_filelists_for_playlists() {
   if (num_playlists == num_files_in_playlists)
     return;
 
-  if (g_gui_mode)
+  if (mtx::cli::g_gui_mode)
     mxinfo(boost::format("#GUI#begin_scanning_playlists#num_playlists=%1%#num_files_in_playlists=%2%\n") % num_playlists % num_files_in_playlists);
   mxinfo(boost::format(NY("Scanning %1% files in %2% playlist.\n", "Scanning %1% files in %2% playlists.\n", num_playlists)) % num_files_in_playlists % num_playlists);
 
@@ -3014,7 +3017,7 @@ add_filelists_for_playlists() {
 
   display_playlist_scan_progress(num_files_in_playlists, num_files_in_playlists);
 
-  if (g_gui_mode)
+  if (mtx::cli::g_gui_mode)
     mxinfo("#GUI#end_scanning_playlists\n");
   mxinfo(boost::format(Y("Done scanning playlists.\n")));
 }
@@ -3058,7 +3061,7 @@ setup(int argc,
   signal(SIGINT, sighandler);
 #endif
 
-  auto args = parse_common_args(command_line_utf8(argc, argv));
+  auto args = parse_common_args(mtx::cli::args_in_utf8(argc, argv));
 
   g_cluster_helper = std::make_unique<cluster_helper_c>();
 

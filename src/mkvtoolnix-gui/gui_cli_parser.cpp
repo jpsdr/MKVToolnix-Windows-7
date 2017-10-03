@@ -125,7 +125,7 @@ void
 GuiCliParser::displayHelp() {
   Q_D(GuiCliParser);
 
-  mxinfo(boost::format("%1%\n") % usage_text);
+  mxinfo(boost::format("%1%\n") % mtx::cli::g_usage_text);
   d->exitAfterParsing = true;
 }
 
@@ -133,7 +133,7 @@ void
 GuiCliParser::displayVersion() {
   Q_D(GuiCliParser);
 
-  mxinfo(boost::format("%1%\n") % version_info);
+  mxinfo(boost::format("%1%\n") % mtx::cli::g_version_info);
   d->exitAfterParsing = true;
 }
 

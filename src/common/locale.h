@@ -91,5 +91,3 @@ extern charset_converter_cptr g_cc_local_utf8;
 
 std::string get_local_charset();
 std::string get_local_console_charset();
-
-std::vector<std::string> command_line_utf8(int argc, char **argv);

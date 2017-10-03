@@ -693,8 +693,8 @@ main(int argc,
      char **argv) {
   mtx_common_init("hevcc_dump", argv[0]);
 
-  auto args = command_line_utf8(argc, argv);
-  while (handle_common_cli_args(args, "-r"))
+  auto args = mtx::cli::args_in_utf8(argc, argv);
+  while (mtx::cli::handle_common_args(args, "-r"))
     ;
 
   auto file_spec = parse_args(args);
