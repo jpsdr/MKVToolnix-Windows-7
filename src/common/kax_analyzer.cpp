@@ -1472,7 +1472,7 @@ kax_analyzer_c::get_segment_data_start_pos()
   return m_segment->GetElementPosition() + m_segment->HeadSize();
 }
 
-bitvalue_cptr
+mtx::bits::value_cptr
 kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
   try {
     auto analyzer = std::make_shared<kax_analyzer_c>(file_name);
@@ -1487,7 +1487,7 @@ kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
       auto segment_uid  = segment_info ? FindChild<KaxSegmentUID>(segment_info) : nullptr;
 
       if (segment_uid)
-        return std::make_shared<bitvalue_c>(*segment_uid);
+        return std::make_shared<mtx::bits::value_c>(*segment_uid);
     }
 
   } catch (mtx::mm_io::exception &ex) {

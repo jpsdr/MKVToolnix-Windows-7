@@ -35,7 +35,7 @@ public:
   uint64_t m_ui_value;
   int64_t m_si_value;
   bool m_b_value;
-  bitvalue_c m_x_value;
+  mtx::bits::value_c m_x_value;
   double m_fp_value;
 
   EbmlMaster *m_master, *m_sub_sub_master, *m_sub_sub_sub_master;

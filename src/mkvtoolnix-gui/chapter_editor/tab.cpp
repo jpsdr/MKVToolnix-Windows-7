@@ -855,10 +855,10 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
 
   if (!d->ui->leChSegmentUid->text().isEmpty()) {
     try {
-      auto value = bitvalue_c{to_utf8(d->ui->leChSegmentUid->text())};
+      auto value = mtx::bits::value_c{to_utf8(d->ui->leChSegmentUid->text())};
       GetChild<KaxChapterSegmentUID>(*chapter).CopyBuffer(value.data(), value.byte_size());
 
-    } catch (mtx::bitvalue_parser_x const &ex) {
+    } catch (mtx::bits::value_parser_x const &ex) {
       return { false, QY("The segment UID could not be parsed: %1").arg(ex.what()) };
     }
 

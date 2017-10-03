@@ -29,7 +29,7 @@ BitValuePage::~BitValuePage() {
 QWidget *
 BitValuePage::createInputControl() {
   if (m_element)
-    m_originalValue = bitvalue_c{*static_cast<EbmlBinary *>(m_element)};
+    m_originalValue = mtx::bits::value_c{*static_cast<EbmlBinary *>(m_element)};
 
   m_leValue = new QLineEdit{this};
   m_leValue->setText(originalValueAsString());
@@ -79,7 +79,7 @@ BitValuePage::copyValueToElement() {
   static_cast<EbmlBinary *>(m_element)->CopyBuffer(bitValue.data(), bitValue.byte_size());
 }
 
-bitvalue_c
+mtx::bits::value_c
 BitValuePage::valueToBitvalue()
   const {
   auto cleanedText = m_leValue->text().replace(QRegularExpression{Q("[^0-9a-fA-F]")}, Q(""));

@@ -155,9 +155,9 @@ auto s_debug_rerender_track_headers         = debugging_option_c{"rerender|reren
 
 std::string g_default_language              = "und";
 
-bitvalue_cptr g_seguid_link_previous;
-bitvalue_cptr g_seguid_link_next;
-std::deque<bitvalue_cptr> g_forced_seguids;
+mtx::bits::value_cptr g_seguid_link_previous;
+mtx::bits::value_cptr g_seguid_link_next;
+std::deque<mtx::bits::value_cptr> g_forced_seguids;
 
 std::unique_ptr<KaxInfo> s_kax_infos;
 static KaxMyDuration *s_kax_duration;
@@ -176,7 +176,7 @@ static std::vector<std::tuple<timestamp_c, std::string, std::string>> s_addition
 
 static mm_io_cptr s_out;
 
-static bitvalue_c s_seguid_prev(128), s_seguid_current(128), s_seguid_next(128);
+static mtx::bits::value_c s_seguid_prev(128), s_seguid_current(128), s_seguid_next(128);
 
 static int s_display_files_done           = 0;
 static int s_display_path_length          = 1;
@@ -197,7 +197,7 @@ static auto s_required_matroska_read_version = 1u;
 */
 bool
 family_uids_c::add_family_uid(const KaxSegmentFamily &family) {
-  bitvalue_c new_uid(family);
+  mtx::bits::value_c new_uid(family);
 
   // look for the same UID
   family_uids_c::const_iterator it;

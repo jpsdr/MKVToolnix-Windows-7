@@ -14,7 +14,7 @@ class Tab;
 class BitValuePage: public ValuePage {
 public:
   QLineEdit *m_leValue{};
-  bitvalue_c m_originalValue;
+  mtx::bits::value_c m_originalValue;
   unsigned int m_bitLength;
 
 public:
@@ -28,7 +28,7 @@ public:
   virtual bool validateValue() const override;
   virtual void copyValueToElement() override;
 
-  virtual bitvalue_c valueToBitvalue() const;
+  virtual mtx::bits::value_c valueToBitvalue() const;
 };
 
 }}}

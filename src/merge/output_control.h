@@ -122,7 +122,7 @@ enum class identification_output_format_e {
   json,
 };
 
-class family_uids_c: public std::vector<bitvalue_c> {
+class family_uids_c: public std::vector<mtx::bits::value_c> {
 public:
   bool add_family_uid(const KaxSegmentFamily &family);
 };
@@ -138,10 +138,8 @@ extern std::string g_outfile;
 extern double g_timecode_scale;
 extern timecode_scale_mode_e g_timecode_scale_mode;
 
-using g_bitvalue_cptr = std::shared_ptr<bitvalue_c>;
-
-extern bitvalue_cptr g_seguid_link_previous, g_seguid_link_next;
-extern std::deque<bitvalue_cptr> g_forced_seguids;
+extern mtx::bits::value_cptr g_seguid_link_previous, g_seguid_link_next;
+extern std::deque<mtx::bits::value_cptr> g_forced_seguids;
 extern family_uids_c g_segfamily_uids;
 
 extern kax_info_cptr g_kax_info_chap;

@@ -400,15 +400,15 @@ handle_segmentinfo() {
 
   EbmlBinary *uid = FindChild<KaxSegmentUID>(g_kax_info_chap.get());
   if (uid)
-    g_forced_seguids.push_back(bitvalue_cptr(new bitvalue_c(*uid)));
+    g_forced_seguids.push_back(mtx::bits::value_cptr(new mtx::bits::value_c(*uid)));
 
   uid = FindChild<KaxNextUID>(g_kax_info_chap.get());
   if (uid)
-    g_seguid_link_next = bitvalue_cptr(new bitvalue_c(*uid));
+    g_seguid_link_next = mtx::bits::value_cptr(new mtx::bits::value_c(*uid));
 
   uid = FindChild<KaxPrevUID>(g_kax_info_chap.get());
   if (uid)
-    g_seguid_link_previous = bitvalue_cptr(new bitvalue_c(*uid));
+    g_seguid_link_previous = mtx::bits::value_cptr(new mtx::bits::value_c(*uid));
 
   auto segment_filename = FindChild<KaxSegmentFilename>(g_kax_info_chap.get());
   if (segment_filename)
@@ -890,7 +890,7 @@ parse_arg_projection_private(std::string const &s,
     mxerror(boost::format("Parameter %1%: not given in the form <TID>:n (argument was '%2%').\n") % "--projection-private" % s);
 
   try {
-    bitvalue_c value{parts[1]};
+    mtx::bits::value_c value{parts[1]};
     ti.m_projection_private_list[tid] = memory_c::clone(value.data(), value.byte_size());
 
   } catch (...) {
@@ -1691,10 +1691,10 @@ parse_arg_priority(const std::string &arg) {
   mxerror(boost::format(Y("'%1%' is not a valid priority class.\n")) % arg);
 }
 
-static bitvalue_cptr
+static mtx::bits::value_cptr
 parse_segment_uid_or_read_from_file(std::string const &arg) {
   if ((arg.length() < 2) || (arg[0] != '='))
-    return std::make_shared<bitvalue_c>(arg, 128);
+    return std::make_shared<mtx::bits::value_c>(arg, 128);
 
   auto file_name = std::string{&arg[1], arg.length() - 1};
 

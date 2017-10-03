@@ -148,7 +148,7 @@ change_c::parse_floating_point_number() {
 void
 change_c::parse_binary() {
   try {
-    m_x_value = bitvalue_c(m_value, m_property.m_bit_length);
+    m_x_value = mtx::bits::value_c(m_value, m_property.m_bit_length);
   } catch (...) {
     if (m_property.m_bit_length)
       mxerror(boost::format(Y("The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED % m_property.m_bit_length);
