@@ -13,6 +13,8 @@
 
 #pragma once
 
+namespace mtx {
+
 class at_scope_exit_c {
 private:
   std::function<void()> m_code;
@@ -22,3 +24,5 @@ public:
     m_code();
   }
 };
+
+}

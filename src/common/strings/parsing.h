@@ -19,7 +19,6 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "common/at_scope_exit.h"
 #include "common/math.h"
 #include "common/strings/editing.h"
 #include "common/timestamp.h"

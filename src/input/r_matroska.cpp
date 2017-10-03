@@ -857,7 +857,7 @@ kax_reader_c::handle_attachments(mm_io_c *io,
     return;
 
   io->save_pos(pos);
-  at_scope_exit_c restore([io]() { io->restore_pos(); });
+  mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
   std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
@@ -913,7 +913,7 @@ kax_reader_c::handle_chapters(mm_io_c *io,
     return;
 
   io->save_pos(pos);
-  at_scope_exit_c restore([io]() { io->restore_pos(); });
+  mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
   std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
@@ -945,7 +945,7 @@ kax_reader_c::handle_tags(mm_io_c *io,
     return;
 
   io->save_pos(pos);
-  at_scope_exit_c restore([io]() { io->restore_pos(); });
+  mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
   std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
@@ -1026,7 +1026,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
     return;
 
   io->save_pos(pos);
-  at_scope_exit_c restore([io]() { io->restore_pos(); });
+  mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
   std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
@@ -1363,7 +1363,7 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
     return;
 
   std::vector<int64_t> next_seek_head_positions;
-  at_scope_exit_c restore([io]() { io->restore_pos(); });
+  mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   try {
     io->save_pos(pos);
@@ -2536,7 +2536,7 @@ kax_reader_c::determine_minimum_timestamps() {
     return;
 
   m_in->save_pos();
-  at_scope_exit_c restore{[this]() { m_in->restore_pos(); }};
+  mtx::at_scope_exit_c restore{[this]() { m_in->restore_pos(); }};
 
   std::unordered_map<uint64_t, kax_track_cptr> tracks_by_number;
 

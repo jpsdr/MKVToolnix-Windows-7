@@ -172,7 +172,7 @@ ebml_equals_c::compare_impl(EbmlElement &a,
 
   } else if ((m_a = dynamic_cast<EbmlMaster *>(&a))) {
     m_path.push_back(EBML_NAME(&a));
-    at_scope_exit_c popper{[&]() { m_path.pop_back(); }};
+    mtx::at_scope_exit_c popper{[&]() { m_path.pop_back(); }};
 
     auto m_b = dynamic_cast<EbmlMaster *>(&b);
     for (int i = 0; i < std::min<int>(m_a->ListSize(), m_b->ListSize()); ++i)
