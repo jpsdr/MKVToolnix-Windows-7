@@ -94,7 +94,7 @@ main(int argc,
     buffer = (unsigned char *)safemalloc(size);
     size = in->read(buffer, size);
 
-    s = base64_encode(buffer, size, true, maxlen);
+    s = mtx::base64::encode(buffer, size, true, maxlen);
     safefree(buffer);
 
     out->write(s.c_str(), s.length());
@@ -108,7 +108,7 @@ main(int argc,
 
     auto decoded = std::string{};
     try {
-      decoded = base64_decode(s);
+      decoded = mtx::base64::decode(s);
     } catch(...) {
       mxerror(Y("The Base64 encoded data could not be decoded.\n"));
     }

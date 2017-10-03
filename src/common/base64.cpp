@@ -48,6 +48,8 @@
 #include "common/base64.h"
 #include "common/error.h"
 
+namespace mtx { namespace base64 {
+
 static const char base64_encoding[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 static void
@@ -61,10 +63,10 @@ encode_block(const unsigned char in[3],
 }
 
 std::string
-base64_encode(const unsigned char *src,
-              int src_len,
-              bool line_breaks,
-              int max_line_len) {
+encode(const unsigned char *src,
+       int src_len,
+       bool line_breaks,
+       int max_line_len) {
   int pos        = 0;
   int blocks_out = 0;
 
@@ -97,7 +99,7 @@ base64_encode(const unsigned char *src,
 }
 
 std::string
-base64_decode(std::string const &src) {
+decode(std::string const &src) {
   auto pos = 0u;
   auto pad = 0u;
   auto dst = std::string{};
@@ -158,3 +160,5 @@ base64_decode(std::string const &src) {
 
   return dst;
 }
+
+}}

@@ -275,7 +275,7 @@ ebml_converter_c::parse_binary(parser_context_t &ctx) {
 
   } else if (format == "base64") {
     try {
-      content = base64_decode(content);
+      content = mtx::base64::decode(content);
 
     } catch (mtx::base64::exception &) {
       throw malformed_data_x{ ctx.name, ctx.node.offset_debug(), Y("Invalid data for Base64 encoding found.") };

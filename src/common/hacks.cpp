@@ -75,7 +75,7 @@ engage_hacks(const std::string &hacks) {
         "IE9oIGhvbmV5LCB0aGF0J3Mgc28gc3dlZXQhCiAgIC8tLS0tLS0tXC8gICBPZiB"
         "jb3Vyc2UgSSdsbCBtYXJyeSB5b3UhCiAgLyB8ICAgICB8fAogKiAgfHwtLS0tfH"
         "wKICAgIF5eICAgIF5eCg==";
-      auto correction = base64_decode(initial);
+      auto correction = mtx::base64::decode(initial);
       mxinfo(correction);
       mxexit();
     }
