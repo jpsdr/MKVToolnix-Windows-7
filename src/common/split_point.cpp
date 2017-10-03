@@ -23,7 +23,7 @@ split_point_c::str()
           % format_timestamp(m_point)
           % (  duration          == m_type ? "duration"
              : size              == m_type ? "size"
-             : timecode          == m_type ? "timecode"
+             : timestamp         == m_type ? "timestamp"
              : chapter           == m_type ? "chapter"
              : parts             == m_type ? "part"
              : parts_frame_field == m_type ? "part(frame/field)"

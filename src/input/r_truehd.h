@@ -44,7 +44,7 @@ public:
   virtual void create_packetizers();
   virtual void create_packetizer(int64_t tid);
   virtual void add_available_track_ids();
-  virtual bool is_providing_timecodes() const {
+  virtual bool is_providing_timestamps() const {
     return false;
   }
 

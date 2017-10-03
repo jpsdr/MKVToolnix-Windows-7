@@ -27,7 +27,7 @@ using namespace libmatroska;
 kate_packetizer_c::kate_packetizer_c(generic_reader_c *reader,
                                      track_info_c &ti)
   : generic_packetizer_c{reader, ti}
-  , m_previous_timecode{}
+  , m_previous_timestamp{}
 {
   set_track_type(track_subtitle);
 
@@ -60,7 +60,7 @@ kate_packetizer_c::process(packet_cptr packet) {
   if (packet->data->get_size() < (1 + 3 * sizeof(int64_t))) {
     /* end packet is 1 byte long and has type 0x7f */
     if ((packet->data->get_size() == 1) && (packet->data->get_buffer()[0] == 0x7f)) {
-      packet->timecode           = m_previous_timecode;
+      packet->timestamp          = m_previous_timestamp;
       packet->duration           = 1;
       packet->duration_mandatory = true;
       add_packet(packet);
@@ -74,17 +74,18 @@ kate_packetizer_c::process(packet_cptr packet) {
   int64_t start_time         = get_uint64_le(packet->data->get_buffer() + 1);
   int64_t duration           = get_uint64_le(packet->data->get_buffer() + 1 + sizeof(int64_t));
 
-  double scaled_timecode     = start_time * (double)m_kate_id.gden / (double)m_kate_id.gnum;
+  double scaled_timestamp    = start_time * (double)m_kate_id.gden / (double)m_kate_id.gnum;
   double scaled_duration     = duration   * (double)m_kate_id.gden / (double)m_kate_id.gnum;
 
-  packet->timecode           = (int64_t)(scaled_timecode * 1000000000ll);
-  packet->duration           = (int64_t)(scaled_duration * 1000000000ll);
+  packet->timestamp          = (int64_t)(scaled_timestamp * 1000000000ll);
+  packet->duration           = (int64_t)(scaled_duration  * 1000000000ll);
   packet->duration_mandatory = true;
   packet->gap_following      = true;
 
-  int64_t end                = packet->timecode + packet->duration;
-  if (end > m_previous_timecode)
-    m_previous_timecode = end;
+  int64_t end                = packet->timestamp + packet->duration;
+
+  if (end > m_previous_timestamp)
+    m_previous_timestamp = end;
 
   add_packet(packet);
 

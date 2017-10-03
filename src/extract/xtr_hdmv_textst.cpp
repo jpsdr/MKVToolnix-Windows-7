@@ -91,7 +91,7 @@ xtr_hdmv_textst_c::handle_frame(xtr_frame_t &f) {
   ++m_num_presentation_segments;
 
   auto buf       = f.frame->get_buffer();
-  auto start_pts = timestamp_c::ns(f.timecode);
+  auto start_pts = timestamp_c::ns(f.timestamp);
   auto duration  = std::max<int64_t>(f.duration, 0);
   auto end_pts   = start_pts + (duration != 0 ? timestamp_c::ns(duration) : (mtx::hdmv_textst::get_timestamp(&buf[3 + 5]) - mtx::hdmv_textst::get_timestamp(&buf[3 + 0])).abs());
 

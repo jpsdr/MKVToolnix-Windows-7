@@ -313,8 +313,8 @@ kax_reader_c::kax_reader_c(const track_info_c &ti,
                            const mm_io_cptr &in)
   : generic_reader_c(ti, in)
   , m_segment_duration(0)
-  , m_last_timecode(0)
-  , m_first_timecode(-1)
+  , m_last_timestamp(0)
+  , m_first_timestamp(-1)
   , m_global_timestamp_offset{}
   , m_writing_app_ver(-1)
   , m_attachment_id(0)
@@ -496,7 +496,7 @@ kax_reader_c::verify_vorbis_audio_track(kax_track_t *t) {
   // individual packets. This comes back to haunt us because
   // when regenerating the timestamps from lacing those durations
   // are used and add up to too large a value. The result is the
-  // usual "timecode < m_last_timecode" message.
+  // usual "timestamp < m_last_timestamp" message.
   // Workaround: do not use durations for such m_tracks.
   if ((m_writing_app == "mkvmerge") && (-1 != m_writing_app_ver) && (0x07000000 > m_writing_app_ver))
     t->ignore_duration_hack = true;
@@ -1045,7 +1045,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   m_title             = to_utf8(FindChildValue<KaxTitle>(info));
   m_muxing_date_epoch = GetChild<KaxDateUTC>(info).GetEpochDate();
 
-  m_in_file->set_timecode_scale(m_tc_scale);
+  m_in_file->set_timestamp_scale(m_tc_scale);
 
   // Let's try to parse the "writing application" string. This usually
   // contains the name and version number of the application used for
@@ -1085,7 +1085,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
     // helper be a bit more imprecise in what it accepts when
     // looking for referenced packets.
     if (m_muxing_app == "DirectShow Matroska Muxer")
-      m_reference_timecode_tolerance = 1000000;
+      m_reference_timestamp_tolerance = 1000000;
   }
 
   m_segment_uid          = FindChildValue<KaxSegmentUID>(info);
@@ -1523,7 +1523,7 @@ kax_reader_c::read_headers_internal() {
     m_in_file->set_segment_end(*l0);
 
     // We've got our segment, so let's find the m_tracks
-    m_tc_scale = TIMECODE_SCALE;
+    m_tc_scale = TIMESTAMP_SCALE;
 
     while (m_in->getFilePointer() < m_in_file->get_segment_end()) {
       auto l1 = ebml_element_cptr{ m_in_file->read_next_level1_element() };
@@ -2227,16 +2227,16 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
       return FILE_STATUS_DONE;
     }
 
-    auto cluster_tc = FindChildValue<KaxClusterTimecode>(cluster);
-    cluster->InitTimecode(cluster_tc, m_tc_scale);
+    auto cluster_ts = FindChildValue<KaxClusterTimecode>(cluster);
+    cluster->InitTimecode(cluster_ts, m_tc_scale);
 
-    if (-1 == m_first_timecode) {
-      m_first_timecode = cluster_tc * m_tc_scale;
+    if (-1 == m_first_timestamp) {
+      m_first_timestamp = cluster_ts * m_tc_scale;
 
       // If we're appending this file to another one then the core
-      // needs the timecodes shifted to zero.
-      if (m_appending && m_chapters && (0 < m_first_timecode))
-        mtx::chapters::adjust_timecodes(*m_chapters, -m_first_timecode);
+      // needs the timestamps shifted to zero.
+      if (m_appending && m_chapters && (0 < m_first_timestamp))
+        mtx::chapters::adjust_timestamps(*m_chapters, -m_first_timestamp);
     }
 
     size_t bgidx;
@@ -2299,19 +2299,19 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
 
   if (!key_flag) {
     if (discardable_flag)
-      block_fref = block_track->previous_timecode;
+      block_fref = block_track->previous_timestamp;
     else
-      block_bref = block_track->previous_timecode;
+      block_bref = block_track->previous_timestamp;
   }
 
-  m_last_timecode = block_timestamp;
+  m_last_timestamp = block_timestamp;
   if (0 < block_simple->NumberFrames())
-    m_in_file->set_last_timecode(m_last_timecode + (block_simple->NumberFrames() - 1) * frame_duration);
+    m_in_file->set_last_timestamp(m_last_timestamp + (block_simple->NumberFrames() - 1) * frame_duration);
 
   // If we're appending this file to another one then the core
-  // needs the timecodes shifted to zero.
+  // needs the timestamps shifted to zero.
   if (m_appending)
-    m_last_timecode -= m_first_timecode;
+    m_last_timestamp -= m_first_timestamp;
 
   if ((-1 != block_track->ptzr) && block_track->passthrough) {
     // The handling for passthrough is a bit different. We don't have
@@ -2323,7 +2323,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
       memory_cptr data(new memory_c(data_buffer.Buffer(), data_buffer.Size(), false));
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
-      packet_cptr packet(new packet_t(data, m_last_timecode + i * frame_duration, block_duration, block_bref, block_fref));
+      packet_cptr packet(new packet_t(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref));
       packet->key_flag         = key_flag;
       packet->discardable_flag = discardable_flag;
 
@@ -2339,7 +2339,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
 
       if (('s' == block_track->type) && ('t' == block_track->sub_type)) {
         if ((2 < data->get_size()) || ((0 < data->get_size()) && (' ' != *data->get_buffer()) && (0 != *data->get_buffer()) && !iscr(*data->get_buffer()))) {
-          auto packet              = std::make_shared<packet_t>(data, m_last_timecode, block_duration, block_bref, block_fref);
+          auto packet              = std::make_shared<packet_t>(data, m_last_timestamp, block_duration, block_bref, block_fref);
           packet->key_flag         = key_flag;
           packet->discardable_flag = discardable_flag;
 
@@ -2347,7 +2347,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
         }
 
       } else {
-        packet_cptr packet(new packet_t(data, m_last_timecode + i * frame_duration, block_duration, block_bref, block_fref));
+        packet_cptr packet(new packet_t(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref));
         packet->key_flag         = key_flag;
         packet->discardable_flag = discardable_flag;
         PTZR(block_track->ptzr)->process(packet);
@@ -2355,8 +2355,8 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
     }
   }
 
-  block_track->previous_timecode  = m_last_timecode;
-  block_track->units_processed   += block_simple->NumberFrames();
+  block_track->previous_timestamp  = m_last_timestamp;
+  block_track->units_processed    += block_simple->NumberFrames();
 }
 
 void
@@ -2412,15 +2412,15 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
                       : block_track->v_frate ? static_cast<int64_t>(1000000000.0 / block_track->v_frate)
                       :                        int64_t{-1};
   auto frame_duration = -1 == block_duration ? int64_t{0} : block_duration;
-  m_last_timecode     = block_timestamp;
+  m_last_timestamp     = block_timestamp;
 
   if (0 < block->NumberFrames())
-    m_in_file->set_last_timecode(m_last_timecode + (block->NumberFrames() - 1) * frame_duration);
+    m_in_file->set_last_timestamp(m_last_timestamp + (block->NumberFrames() - 1) * frame_duration);
 
   // If we're appending this file to another one then the core
-  // needs the timecodes shifted to zero.
+  // needs the timestamps shifted to zero.
   if (m_appending)
-    m_last_timecode -= m_first_timecode;
+    m_last_timestamp -= m_first_timestamp;
 
   if (-1 == block_track->ptzr)
     return;
@@ -2457,9 +2457,9 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
     // any special cases, e.g. 0 terminating a string for the subs
     // and stuff. Just pass everything through as it is.
     if (bref_found)
-      block_bref += m_last_timecode;
+      block_bref += m_last_timestamp;
     if (fref_found)
-      block_fref += m_last_timecode;
+      block_fref += m_last_timestamp;
 
     size_t i;
     for (i = 0; i < block->NumberFrames(); i++) {
@@ -2467,7 +2467,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
       auto data         = std::make_shared<memory_c>(data_buffer.Buffer(), data_buffer.Size(), false);
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
-      auto packet                = std::make_shared<packet_t>(data, m_last_timecode + i * frame_duration, block_duration, block_bref, block_fref);
+      auto packet                = std::make_shared<packet_t>(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref);
       packet->duration_mandatory = duration;
 
       process_block_group_common(block_group, packet.get(), *block_track);
@@ -2479,9 +2479,9 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
   }
 
   if (bref_found)
-    block_bref += m_last_timecode;
+    block_bref += m_last_timestamp;
   if (fref_found)
-    block_fref += m_last_timecode;
+    block_fref += m_last_timestamp;
 
   for (auto block_idx = 0u, num_frames = block->NumberFrames(); block_idx < num_frames; ++block_idx) {
     auto &data_buffer = block->GetBuffer(block_idx);
@@ -2490,7 +2490,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
     if (('s' == block_track->type) && ('t' == block_track->sub_type)) {
       if ((2 < data->get_size()) || ((0 < data->get_size()) && (' ' != *data->get_buffer()) && (0 != *data->get_buffer()) && !iscr(*data->get_buffer()))) {
-        auto packet = std::make_shared<packet_t>(data, m_last_timecode, block_duration, block_bref, block_fref);
+        auto packet = std::make_shared<packet_t>(data, m_last_timestamp, block_duration, block_bref, block_fref);
 
         process_block_group_common(block_group, packet.get(), *block_track);
 
@@ -2498,7 +2498,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
       }
 
     } else {
-      auto packet = std::make_shared<packet_t>(data, m_last_timecode + block_idx * frame_duration, block_duration, block_bref, block_fref);
+      auto packet = std::make_shared<packet_t>(data, m_last_timestamp + block_idx * frame_duration, block_duration, block_bref, block_fref);
 
       if ((duration) && !duration->GetValue())
         packet->duration_mandatory = true;
@@ -2509,14 +2509,14 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
     }
   }
 
-  block_track->previous_timecode  = m_last_timecode;
-  block_track->units_processed   += block->NumberFrames();
+  block_track->previous_timestamp  = m_last_timestamp;
+  block_track->units_processed    += block->NumberFrames();
 }
 
 int
 kax_reader_c::get_progress() {
   if (0 != m_segment_duration)
-    return std::min(m_last_timecode, m_segment_duration) * 100 / m_segment_duration;
+    return std::min(m_last_timestamp, m_segment_duration) * 100 / m_segment_duration;
 
   return 100 * m_in->getFilePointer() / m_size;
 }
@@ -2553,8 +2553,8 @@ kax_reader_c::determine_minimum_timestamps() {
       if (!cluster)
         return;
 
-      auto cluster_tc = FindChildValue<KaxClusterTimecode>(*cluster);
-      cluster->InitTimecode(cluster_tc, m_tc_scale);
+      auto cluster_ts = FindChildValue<KaxClusterTimecode>(*cluster);
+      cluster->InitTimecode(cluster_ts, m_tc_scale);
 
       for (auto const &element : *cluster) {
         uint64_t track_number{};

@@ -33,7 +33,7 @@ hevc_video_packetizer_c(generic_reader_c *p_reader,
   , m_nalu_size_len_dst{}
   , m_max_nalu_size{}
 {
-  m_relaxed_timecode_checking = true;
+  m_relaxed_timestamp_checking = true;
 
   setup_nalu_size_len_change();
 
@@ -75,10 +75,10 @@ int
 hevc_video_packetizer_c::process(packet_cptr packet) {
   if (VFT_PFRAMEAUTOMATIC == packet->bref) {
     packet->fref = -1;
-    packet->bref = m_ref_timecode;
+    packet->bref = m_ref_timestamp;
   }
 
-  m_ref_timecode = packet->timecode;
+  m_ref_timestamp = packet->timestamp;
 
   if (m_nalu_size_len_dst && (m_nalu_size_len_dst != m_nalu_size_len_src))
     change_nalu_size_len(packet);

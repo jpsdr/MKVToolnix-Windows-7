@@ -560,7 +560,7 @@ static void
 parse_arg_sync(std::string s,
                std::string const &opt,
                track_info_c &ti) {
-  timecode_sync_t tcsync;
+  timestamp_sync_t tcsync;
 
   // Extract the track number.
   std::string orig               = s;
@@ -577,7 +577,7 @@ parse_arg_sync(std::string s,
     mxerror(boost::format(Y("Invalid sync option specified in '%1% %2%'.\n")) % opt % orig);
 
   if (parts[1] == "reset") {
-    ti.m_reset_timecodes_specs[id] = true;
+    ti.m_reset_timestamps_specs[id] = true;
     return;
   }
 
@@ -608,7 +608,7 @@ parse_arg_sync(std::string s,
   }
 
   tcsync.displacement     = (int64_t)atoi(s.c_str()) * 1000000ll;
-  ti.m_timecode_syncs[id] = tcsync;
+  ti.m_timestamp_syncs[id] = tcsync;
 }
 
 /** \brief Parse the \c --aspect-ratio argument
@@ -997,10 +997,10 @@ parse_arg_split_duration(const std::string &arg) {
   g_cluster_helper->add_split_point(split_point_c(split_after, split_point_c::duration, false));
 }
 
-/** \brief Parse the timecode format to \c --split
+/** \brief Parse the timestamp format to \c --split
 
   This function is called by ::parse_split if the format specifies
-  timecodes after which a new file should be started.
+  timestamps after which a new file should be started.
 */
 static void
 parse_arg_split_timestamps(const std::string &arg) {
@@ -1014,7 +1014,7 @@ parse_arg_split_timestamps(const std::string &arg) {
     int64_t split_after;
     if (!parse_timestamp(timestamp, split_after))
       mxerror(boost::format(Y("Invalid time for '--split' in '--split %1%'. Additional error message: %2%.\n")) % arg % timestamp_parser_error);
-    g_cluster_helper->add_split_point(split_point_c(split_after, split_point_c::timecode, true));
+    g_cluster_helper->add_split_point(split_point_c(split_after, split_point_c::timestamp, true));
   }
 }
 
@@ -1084,7 +1084,7 @@ parse_arg_split_chapters(std::string const &arg) {
 
       int64_t split_after = FindChildValue<KaxChapterTimeStart, uint64_t>(atom, 0);
       if (split_after)
-        new_split_points.push_back(split_point_c{split_after, split_point_c::timecode, true});
+        new_split_points.push_back(split_point_c{split_after, split_point_c::timestamp, true});
     }
   }
 
@@ -1899,8 +1899,8 @@ parse_arg_segmentinfo(const std::string &param,
 }
 
 static void
-parse_arg_timecode_scale(const std::string &arg) {
-  if (TIMECODE_SCALE_MODE_NORMAL != g_timecode_scale_mode)
+parse_arg_timestamp_scale(const std::string &arg) {
+  if (TIMESTAMP_SCALE_MODE_NORMAL != g_timestamp_scale_mode)
     mxerror(Y("'--timecode-scale' was used more than once.\n"));
 
   int64_t temp = 0;
@@ -1908,13 +1908,13 @@ parse_arg_timecode_scale(const std::string &arg) {
     mxerror(Y("The argument to '--timecode-scale' must be a number.\n"));
 
   if (-1 == temp)
-    g_timecode_scale_mode = TIMECODE_SCALE_MODE_AUTO;
+    g_timestamp_scale_mode = TIMESTAMP_SCALE_MODE_AUTO;
   else {
     if ((10000000 < temp) || (1 > temp))
       mxerror(Y("The given timecode scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"));
 
-    g_timecode_scale      = temp;
-    g_timecode_scale_mode = TIMECODE_SCALE_MODE_FIXED;
+    g_timestamp_scale      = temp;
+    g_timestamp_scale_mode = TIMESTAMP_SCALE_MODE_FIXED;
   }
 }
 
@@ -2510,7 +2510,7 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
-      parse_arg_timecode_scale(next_arg);
+      parse_arg_timestamp_scale(next_arg);
       sit++;
     }
 
@@ -2835,7 +2835,7 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
-      parse_arg_language(next_arg, ti->m_all_ext_timecodes, "timecodes", Y("timecodes"), false);
+      parse_arg_language(next_arg, ti->m_all_ext_timestamps, "timecodes", Y("timecodes"), false);
       sit++;
 
     } else if (this_arg == "--track-order") {
@@ -2996,14 +2996,14 @@ add_filelists_for_playlists() {
 
     assert(file_names.size() == play_items.size());
 
-    filelist->restricted_timecode_min = play_items[0].in_time;
-    filelist->restricted_timecode_max = play_items[0].out_time;
+    filelist->restricted_timestamp_min = play_items[0].in_time;
+    filelist->restricted_timestamp_max = play_items[0].out_time;
 
     for (size_t idx = 1, idx_end = file_names.size(); idx < idx_end; ++idx) {
-      auto current_filelist_id              = g_files.size() + new_filelists.size();
-      auto new_filelist                     = create_filelist_for_playlist(file_names[idx], previous_filelist_id, current_filelist_id, idx, *filelist->ti);
-      new_filelist->restricted_timecode_min = play_items[idx].in_time;
-      new_filelist->restricted_timecode_max = play_items[idx].out_time;
+      auto current_filelist_id               = g_files.size() + new_filelists.size();
+      auto new_filelist                      = create_filelist_for_playlist(file_names[idx], previous_filelist_id, current_filelist_id, idx, *filelist->ti);
+      new_filelist->restricted_timestamp_min = play_items[idx].in_time;
+      new_filelist->restricted_timestamp_max = play_items[idx].out_time;
 
       new_filelists.push_back(new_filelist);
 

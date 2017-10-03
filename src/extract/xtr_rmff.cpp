@@ -63,7 +63,7 @@ xtr_rmff_c::handle_frame(xtr_frame_t &f) {
   if (!rmff_frame)
     mxerror(Y("Memory for a RealAudio/RealVideo frame could not be allocated.\n"));
 
-  rmff_frame->timecode = f.timecode / 1000000;
+  rmff_frame->timecode = f.timestamp / 1000000;
   if (f.keyframe)
     rmff_frame->flags  = RMFF_FRAME_FLAG_KEYFRAME;
 

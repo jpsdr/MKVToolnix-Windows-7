@@ -51,28 +51,28 @@ Tab::setupControlLists() {
   m_typeIndependentControls << ui->generalOptionsBox << ui->muxThisLabel << ui->muxThis << ui->miscellaneousBox << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions;
 
   m_audioControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag << ui->forcedTrackFlagLabel << ui->forcedTrackFlag
-                  << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
-                  << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes << ui->audioPropertiesBox << ui->aacIsSBR << ui->cuesLabel << ui->cues
+                  << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
+                  << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps << ui->audioPropertiesBox << ui->aacIsSBR << ui->cuesLabel << ui->cues
                   << ui->propertiesLabel << ui->generalOptionsBox << ui->reduceToAudioCore;
 
   m_videoControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
-                  << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
-                  << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes
+                  << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
+                  << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps
                   << ui->videoPropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
                   << ui->stereoscopy << ui->naluSizeLengthLabel << ui->naluSizeLength << ui->croppingLabel << ui->cropping << ui->cuesLabel << ui->cues
                   << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo;
 
   m_subtitleControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
-                     << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
-                     << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes
+                     << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
+                     << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps
                      << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet << ui->cuesLabel << ui->cues
                      << ui->propertiesLabel << ui->generalOptionsBox;
 
   m_chapterControls << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet << ui->propertiesLabel << ui->generalOptionsBox;
 
   m_allInputControls << ui->muxThisLabel << ui->muxThis << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
-                     << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
-                     << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes
+                     << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
+                     << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps
                      << ui->videoPropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
                      << ui->stereoscopy << ui->croppingLabel << ui->cropping << ui->audioPropertiesBox << ui->aacIsSBR << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet
                      << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions
@@ -123,12 +123,12 @@ Tab::setupHorizontalScrollAreaInputLayout() {
 
   Q_ASSERT(!!layout);
 
-  auto widgets = QWidgetList{} << ui->generalOptionsBox << ui->timecodesAndDefaultDurationBox << ui->videoPropertiesBox << ui->audioPropertiesBox << ui->subtitleAndChapterPropertiesBox << ui->miscellaneousBox;
+  auto widgets = QWidgetList{} << ui->generalOptionsBox << ui->timestampsAndDefaultDurationBox << ui->videoPropertiesBox << ui->audioPropertiesBox << ui->subtitleAndChapterPropertiesBox << ui->miscellaneousBox;
   for (auto const &widget : widgets)
     widget->setParent(ui->scrollAreaWidgetContents);
 
   layout->insertWidget(0, ui->generalOptionsBox);
-  layout->insertWidget(1, ui->timecodesAndDefaultDurationBox);
+  layout->insertWidget(1, ui->timestampsAndDefaultDurationBox);
   layout->insertWidget(2, ui->videoPropertiesBox);
   layout->insertWidget(3, ui->audioPropertiesBox);
   layout->insertWidget(4, ui->subtitleAndChapterPropertiesBox);
@@ -158,7 +158,7 @@ Tab::setupHorizontalTwoColumnsInputLayout() {
   };
 
   moveTo(ui->propertiesColumn1, 0, ui->generalOptionsBox);
-  moveTo(ui->propertiesColumn1, 1, ui->timecodesAndDefaultDurationBox);
+  moveTo(ui->propertiesColumn1, 1, ui->timestampsAndDefaultDurationBox);
   moveTo(ui->propertiesColumn2, 0, ui->videoPropertiesBox);
   moveTo(ui->propertiesColumn2, 1, ui->audioPropertiesBox);
   moveTo(ui->propertiesColumn2, 2, ui->subtitleAndChapterPropertiesBox);
@@ -182,7 +182,7 @@ Tab::setupVerticalTabWidgetInputLayout() {
   };
 
   moveTo(ui->generalOptionsPage,                 0, ui->generalOptionsBox);
-  moveTo(ui->timecodesAndDefaultDurationPage,    0, ui->timecodesAndDefaultDurationBox);
+  moveTo(ui->timestampsAndDefaultDurationPage,   0, ui->timestampsAndDefaultDurationBox);
   moveTo(ui->videoPropertiesPage,                0, ui->videoPropertiesBox);
   moveTo(ui->audioSubtitleChapterPropertiesPage, 0, ui->audioPropertiesBox);
   moveTo(ui->audioSubtitleChapterPropertiesPage, 1, ui->subtitleAndChapterPropertiesBox);
@@ -328,7 +328,7 @@ Tab::setupInputControls() {
   connect(ui->additionalTrackOptions,       &QLineEdit::textChanged,                                                                          this,                     &Tab::onAdditionalTrackOptionsChanged);
   connect(ui->aspectRatio,                  static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this,                     &Tab::onAspectRatioChanged);
   connect(ui->aspectRatio,                  &QComboBox::editTextChanged,                                                                      this,                     &Tab::onAspectRatioChanged);
-  connect(ui->browseTimecodes,              &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTimecodes);
+  connect(ui->browseTimestamps,             &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTimestamps);
   connect(ui->browseTrackTags,              &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTrackTags);
   connect(ui->compression,                  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onCompressionChanged);
   connect(ui->cropping,                     &QLineEdit::textChanged,                                                                          this,                     &Tab::onCroppingChanged);
@@ -364,7 +364,7 @@ Tab::setupInputControls() {
   connect(ui->stretchBy,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onStretchByChanged);
   connect(ui->subtitleCharacterSet,         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onSubtitleCharacterSetChanged);
   connect(ui->subtitleCharacterSetPreview,  &QPushButton::clicked,                                                                            this,                     &Tab::onPreviewSubtitleCharacterSet);
-  connect(ui->timecodes,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onTimecodesChanged);
+  connect(ui->timestamps,                   &QLineEdit::textChanged,                                                                          this,                     &Tab::onTimestampsChanged);
   connect(ui->trackLanguage,                static_cast<void (Util::LanguageComboBox::*)(int)>(&Util::LanguageComboBox::currentIndexChanged), this,                     &Tab::onTrackLanguageChanged);
   connect(ui->trackName,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onTrackNameChanged);
   connect(ui->trackTags,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onTrackTagsChanged);
@@ -644,7 +644,7 @@ Tab::clearInputControlValues() {
   for (auto comboBox : m_comboBoxControls)
     comboBox->setCurrentIndex(0);
 
-  for (auto control : std::vector<QLineEdit *>{ui->trackName, ui->trackTags, ui->delay, ui->stretchBy, ui->timecodes, ui->displayWidth, ui->displayHeight, ui->cropping, ui->additionalTrackOptions})
+  for (auto control : std::vector<QLineEdit *>{ui->trackName, ui->trackTags, ui->delay, ui->stretchBy, ui->timestamps, ui->displayWidth, ui->displayHeight, ui->cropping, ui->additionalTrackOptions})
     control->setText(Q(""));
 
   ui->defaultDuration->setEditText(Q(""));
@@ -694,7 +694,7 @@ Tab::setInputControlValues(Track *track) {
   ui->trackTags->setText(                track->m_tags);
   ui->delay->setText(                    track->m_delay);
   ui->stretchBy->setText(                track->m_stretchBy);
-  ui->timecodes->setText(                track->m_timecodes);
+  ui->timestamps->setText(               track->m_timestamps);
   ui->displayWidth->setText(             track->m_displayWidth);
   ui->displayHeight->setText(            track->m_displayHeight);
   ui->cropping->setText(                 track->m_cropping);
@@ -950,15 +950,15 @@ Tab::onDefaultDurationChanged(QString newValue) {
 }
 
 void
-Tab::onTimecodesChanged(QString newValue) {
-  withSelectedTracks([&newValue](auto &track) { track.m_timecodes = newValue; });
+Tab::onTimestampsChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_timestamps = newValue; });
 }
 
 void
-Tab::onBrowseTimecodes() {
-  auto fileName = getOpenFileName(QY("Select timecode file"), QY("Text files") + Q(" (*.txt)"), ui->timecodes);
+Tab::onBrowseTimestamps() {
+  auto fileName = getOpenFileName(QY("Select timecode file"), QY("Text files") + Q(" (*.txt)"), ui->timestamps);
   if (!fileName.isEmpty())
-    withSelectedTracks([&fileName](auto &track) { track.m_timecodes = fileName; });
+    withSelectedTracks([&fileName](auto &track) { track.m_timestamps = fileName; });
 }
 
 void

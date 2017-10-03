@@ -43,7 +43,7 @@ struct frame_t {
   memory_cptr m_data;
   int64_t m_start, m_end, m_ref1, m_ref2;
   uint64_t m_position;
-  bool m_keyframe, m_has_provided_timecode;
+  bool m_keyframe, m_has_provided_timestamp;
   slice_info_t m_si;
   int m_presentation_order, m_decode_order;
 
@@ -58,7 +58,7 @@ struct frame_t {
     m_ref2                  = 0;
     m_position              = 0;
     m_keyframe              = false;
-    m_has_provided_timecode = false;
+    m_has_provided_timestamp = false;
     m_presentation_order    = 0;
     m_decode_order          = 0;
     m_data.reset();
@@ -83,7 +83,7 @@ protected:
 
   std::deque<frame_t> m_frames, m_frames_out;
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
-  int64_t m_max_timecode;
+  int64_t m_max_timestamp;
   std::map<int64_t, int64_t> m_duration_frequency;
 
   std::vector<memory_cptr> m_vps_list,
@@ -105,22 +105,22 @@ protected:
 
   bool m_simple_picture_order, m_ignore_nalu_size_length_errors, m_discard_actual_frames;
 
-  bool m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timecode_statistics, m_debug_timecodes, m_debug_sps_info;
+  bool m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamp_statistics, m_debug_timestamps, m_debug_sps_info;
   static std::unordered_map<int, std::string> ms_nalu_names_by_type;
 
   struct stats_t {
     std::vector<int> num_slices_by_type;
-    size_t num_frames_out, num_frames_discarded, num_timecodes_in, num_timecodes_generated, num_timecodes_discarded, num_field_slices, num_frame_slices;
+    size_t num_frames_out, num_frames_discarded, num_timestamps_in, num_timestamps_generated, num_timestamps_discarded, num_field_slices, num_frame_slices;
 
     stats_t()
-      : num_slices_by_type(3, 0)
-      , num_frames_out(0)
-      , num_frames_discarded(0)
-      , num_timecodes_in(0)
-      , num_timecodes_generated(0)
-      , num_timecodes_discarded(0)
-      , num_field_slices(0)
-      , num_frame_slices(0)
+      : num_slices_by_type{3, 0}
+      , num_frames_out{}
+      , num_frames_discarded{}
+      , num_timestamps_in{}
+      , num_timestamps_generated{}
+      , num_timestamps_discarded{}
+      , num_field_slices{}
+      , num_frame_slices{}
     {
     }
   } m_stats;
@@ -179,7 +179,7 @@ public:
 
   void handle_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
 
-  void add_timecode(int64_t timecode);
+  void add_timestamp(int64_t timestamp);
 
   bool headers_parsed() const;
 

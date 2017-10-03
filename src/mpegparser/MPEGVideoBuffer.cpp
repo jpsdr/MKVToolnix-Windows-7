@@ -200,17 +200,17 @@ bool ParseGOPHeader(MPEGChunk* chunk, MPEG2GOPHeader & hdr){
     return false;
   }
   binary* pos = chunk->GetPointer();
-  uint32_t timecode;
+  uint32_t timestamp;
   pos+=4; //skip the startcode
-  //Parse GOP timecode structure
-  timecode = ((uint32_t)pos[0] << 24) |
+  //Parse GOP timestamp structure
+  timestamp = ((uint32_t)pos[0] << 24) |
     ((uint32_t)pos[1] << 16) |
     ((uint32_t)pos[2] << 8) |
     ((uint32_t)pos[3]);
-  hdr.timeHours   = (timecode << 1) >> 27;
-  hdr.timeMinutes = (timecode << 6)>>26;
-  hdr.timeSeconds = (timecode << 13) >> 26;
-  hdr.timeFrames  = (timecode << 19) >> 26;
+  hdr.timeHours   = (timestamp << 1) >> 27;
+  hdr.timeMinutes = (timestamp << 6)>>26;
+  hdr.timeSeconds = (timestamp << 13) >> 26;
+  hdr.timeFrames  = (timestamp << 19) >> 26;
   pos+=3;
   hdr.closedGOP   = (pos[0] & 0x40) >> 6;
   hdr.brokenLink  = (pos[0] & 0x20) >> 5;;

@@ -34,25 +34,25 @@ enum MPEG2ParserState_e {
   MPV_PARSER_STATE_ERROR
 };
 
-// stores a ref to another frame (first of all a frame pointer, sometime later also its timecode)
+// stores a ref to another frame (first of all a frame pointer, sometime later also its timestamp)
 class MPEGFrame;
 class MPEGFrameRef {
 public:
   uint64_t frameNumber;
-  MediaTime timecode;
+  MediaTime timestamp;
 
   MPEGFrameRef() {
     Clear();
   }
   void Clear() {
     frameNumber = std::numeric_limits<uint64_t>::max();
-    timecode    = -1;
+    timestamp    = -1;
   }
   bool HasFrameNumber() const {
     return std::numeric_limits<uint64_t>::max() != frameNumber;
   }
-  bool HasTimecode() const {
-    return -1 != timecode;
+  bool HasTimestamp() const {
+    return -1 != timestamp;
   }
 };
 
@@ -64,7 +64,7 @@ public:
   uint32_t seqHdrDataSize;
   MediaTime duration;
   char frameType;
-  MediaTime timecode; // before stamping: sequence number; after stamping: real timecode
+  MediaTime timestamp; // before stamping: sequence number; after stamping: real timestamp
   unsigned int decodingOrder;
   MediaTime refs[2];
   MPEGFrameRef tmpRefs[2];
@@ -86,9 +86,9 @@ private:
   std::vector<MPEGChunk*> chunks; //Hold the chunks until we can order them
   std::vector<MPEGFrame*> waitQueue; //Holds unstamped buffers until we can stamp them.
   std::queue<MPEGFrame*> buffers; //Holds stamped buffers until they are requested.
-  std::unordered_map<uint64_t, uint64_t> frameTimecodes;
+  std::unordered_map<uint64_t, uint64_t> frameTimestamps;
   uint64_t frameCounter;
-  MediaTime previousTimecode;
+  MediaTime previousTimestamp;
   MediaTime previousDuration;
   //Added to allow reading the header's raw data, contains first found seq hdr.
   MPEGChunk* seqHdrChunk, *gopChunk;
@@ -112,7 +112,7 @@ private:
   uint8_t mpegVersion;
   MPEG2ParserState_e parserState;
   MPEGVideoBuffer * mpgBuf;
-  std::list<int64_t> m_timecodes;
+  std::list<int64_t> m_timestamps;
   bool throwOnError;
 
   int32_t InitParser();
@@ -126,7 +126,7 @@ private:
   int32_t OrderFrame(MPEGFrame* frame);
   void StampFrame(MPEGFrame* frame);
   void UpdateFrame(MPEGFrame* frame);
-  int32_t PrepareFrame(MPEGChunk* chunk, MediaTime timecode, MPEG2PictureHeader picHdr);
+  int32_t PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2PictureHeader picHdr);
 public:
   M2VParser();
   virtual ~M2VParser();
@@ -171,7 +171,7 @@ public:
     probing = true;
   }
 
-  void AddTimecode(int64_t timecode);
+  void AddTimestamp(int64_t timestamp);
 
   void SetThrowOnError(bool doThrow);
 

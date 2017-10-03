@@ -146,7 +146,7 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
   // Next find the block duration if there is one.
   KaxBlockDuration *kduration   = FindChild<KaxBlockDuration>(&blockgroup);
   int64_t duration              = !kduration ? -1 : static_cast<int64_t>(kduration->GetValue() * tc_scale);
-  int64_t max_timecode          = 0;
+  int64_t max_timestamp         = 0;
 
   // Now find backward and forward references.
   int64_t bref    = 0;
@@ -173,13 +173,13 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
   }
 
   for (i = 0; i < block->NumberFrames(); i++) {
-    int64_t this_timecode, this_duration;
+    int64_t this_timestamp, this_duration;
 
     if (0 > duration) {
-      this_timecode = block->GlobalTimecode();
+      this_timestamp = block->GlobalTimecode();
       this_duration = duration;
     } else {
-      this_timecode = block->GlobalTimecode() + i * duration /
+      this_timestamp = block->GlobalTimecode() + i * duration /
         block->NumberFrames();
       this_duration = duration / block->NumberFrames();
     }
@@ -191,13 +191,13 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
 
     auto &data = block->GetBuffer(i);
     auto frame = std::make_shared<memory_c>(data.Buffer(), data.Size(), false);
-    auto f     = xtr_frame_t{frame, kadditions, this_timecode, this_duration, bref, fref, false, false, true, discard_padding};
+    auto f     = xtr_frame_t{frame, kadditions, this_timestamp, this_duration, bref, fref, false, false, true, discard_padding};
     extractor->decode_and_handle_frame(f);
 
-    max_timecode = std::max(max_timecode, this_timecode);
+    max_timestamp = std::max(max_timestamp, this_timestamp);
   }
 
-  return max_timecode;
+  return max_timestamp;
 }
 
 static int64_t
@@ -221,28 +221,28 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
     return - 1;
 
   int64_t duration     = extractor->m_default_duration * simpleblock.NumberFrames();
-  int64_t max_timecode = 0;
+  int64_t max_timestamp = 0;
 
   for (i = 0; i < simpleblock.NumberFrames(); i++) {
-    int64_t this_timecode, this_duration;
+    int64_t this_timestamp, this_duration;
 
     if (0 > duration) {
-      this_timecode = simpleblock.GlobalTimecode();
+      this_timestamp = simpleblock.GlobalTimecode();
       this_duration = duration;
     } else {
-      this_timecode = simpleblock.GlobalTimecode() + i * duration / simpleblock.NumberFrames();
+      this_timestamp = simpleblock.GlobalTimecode() + i * duration / simpleblock.NumberFrames();
       this_duration = duration / simpleblock.NumberFrames();
     }
 
     auto &data = simpleblock.GetBuffer(i);
     auto frame = std::make_shared<memory_c>(data.Buffer(), data.Size(), false);
-    auto f     = xtr_frame_t{frame, nullptr, this_timecode, this_duration, -1, -1, simpleblock.IsKeyframe(), simpleblock.IsDiscardable(), false, timestamp_c::ns(0)};
+    auto f     = xtr_frame_t{frame, nullptr, this_timestamp, this_duration, -1, -1, simpleblock.IsKeyframe(), simpleblock.IsDiscardable(), false, timestamp_c::ns(0)};
     extractor->decode_and_handle_frame(f);
 
-    max_timecode = std::max(max_timecode, this_timecode);
+    max_timestamp = std::max(max_timestamp, this_timestamp);
   }
 
-  return max_timecode;
+  return max_timestamp;
 }
 
 static void
@@ -339,7 +339,7 @@ handle_segment_info(EbmlMaster *info,
     return;
 
   tc_scale = ktc_scale->GetValue();
-  file->set_timecode_scale(tc_scale);
+  file->set_timestamp_scale(tc_scale);
 }
 
 bool
@@ -361,7 +361,7 @@ extract_tracks(const std::string &file_name,
   }
 
   int64_t file_size = in->get_size();
-  uint64_t tc_scale = TIMECODE_SCALE;
+  uint64_t tc_scale = TIMESTAMP_SCALE;
   bool segment_info_found = false, tracks_found = false;
 
   // open input file
@@ -448,33 +448,33 @@ extract_tracks(const std::string &file_name,
 
         KaxClusterTimecode *ctc = FindChild<KaxClusterTimecode>(l1);
         if (ctc) {
-          uint64_t cluster_tc = ctc->GetValue();
-          show_element(ctc, 2, boost::format(Y("Cluster timecode: %|1$.3f|s")) % ((float)cluster_tc * (float)tc_scale / 1000000000.0));
-          cluster->InitTimecode(cluster_tc, tc_scale);
+          uint64_t cluster_ts = ctc->GetValue();
+          show_element(ctc, 2, boost::format(Y("Cluster timecode: %|1$.3f|s")) % ((float)cluster_ts * (float)tc_scale / 1000000000.0));
+          cluster->InitTimecode(cluster_ts, tc_scale);
         } else
           cluster->InitTimecode(0, tc_scale);
 
         size_t i;
-        int64_t max_timecode = -1;
+        int64_t max_timestamp = -1;
 
         for (i = 0; cluster->ListSize() > i; ++i) {
-          int64_t max_bg_timecode = -1;
-          EbmlElement *el         = (*cluster)[i];
+          int64_t max_bg_timestamp = -1;
+          EbmlElement *el          = (*cluster)[i];
 
           if (Is<KaxBlockGroup>(el)) {
             show_element(el, 2, Y("Block group"));
-            max_bg_timecode = handle_blockgroup(*static_cast<KaxBlockGroup *>(el), *cluster, tc_scale);
+            max_bg_timestamp = handle_blockgroup(*static_cast<KaxBlockGroup *>(el), *cluster, tc_scale);
 
           } else if (Is<KaxSimpleBlock>(el)) {
             show_element(el, 2, Y("SimpleBlock"));
-            max_bg_timecode = handle_simpleblock(*static_cast<KaxSimpleBlock *>(el), *cluster);
+            max_bg_timestamp = handle_simpleblock(*static_cast<KaxSimpleBlock *>(el), *cluster);
           }
 
-          max_timecode = std::max(max_timecode, max_bg_timecode);
+          max_timestamp = std::max(max_timestamp, max_bg_timestamp);
         }
 
-        if (-1 != max_timecode)
-          file->set_last_timecode(max_timecode);
+        if (-1 != max_timestamp)
+          file->set_last_timestamp(max_timestamp);
 
       } else if (Is<KaxChapters>(l1)) {
         KaxChapters &chapters = *static_cast<KaxChapters *>(l1);

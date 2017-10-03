@@ -340,9 +340,9 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
   if (AAC_PROFILE_SBR == audio_config.profile)
     PTZR(dmx->ptzr)->set_audio_output_sampling_freq(audio_config.output_sample_rate);
 
-  // AAC packetizers might need the timecode of the first packet in order
-  // to fill in stuff. Let's misuse ref_timecode for that.
-  dmx->ref_timecode = -1;
+  // AAC packetizers might need the timestamp of the first packet in order
+  // to fill in stuff. Let's misuse ref_timestamp for that.
+  dmx->ref_timestamp = -1;
 }
 
 void
@@ -410,7 +410,7 @@ real_reader_c::finish() {
   for (i = 0; i < demuxers.size(); i++) {
     real_demuxer_cptr dmx = demuxers[i];
     if (dmx && dmx->track && (dmx->track->type == RMFF_TRACK_TYPE_AUDIO) && !dmx->segments.empty())
-      deliver_audio_frames(dmx, dmx->last_timecode / dmx->num_packets);
+      deliver_audio_frames(dmx, dmx->last_timestamp / dmx->num_packets);
   }
 
   done = true;
@@ -440,7 +440,7 @@ real_reader_c::read(generic_packetizer_c *,
     return finish();
   }
 
-  int64_t timecode      = (int64_t)frame->timecode * 1000000ll;
+  int64_t timestamp     = (int64_t)frame->timecode * 1000000ll;
   real_demuxer_cptr dmx = find_demuxer(frame->id);
 
   if (!dmx || (-1 == dmx->ptzr)) {
@@ -464,14 +464,14 @@ real_reader_c::read(generic_packetizer_c *,
     // If the first AAC packet does not start at 0 then let the AAC
     // packetizer adjust its data accordingly.
     if (dmx->first_frame) {
-      dmx->ref_timecode = timecode;
-      PTZR(dmx->ptzr)->set_displacement_maybe(timecode);
+      dmx->ref_timestamp = timestamp;
+      PTZR(dmx->ptzr)->set_displacement_maybe(timestamp);
     }
 
     deliver_aac_frames(dmx, mem);
 
   } else
-    queue_audio_frames(dmx, mem, timecode, frame->flags);
+    queue_audio_frames(dmx, mem, timestamp, frame->flags);
 
   rmff_release_frame(frame);
 
@@ -483,7 +483,7 @@ real_reader_c::read(generic_packetizer_c *,
 void
 real_reader_c::queue_one_audio_frame(real_demuxer_cptr dmx,
                                      memory_c &mem,
-                                     uint64_t timecode,
+                                     uint64_t timestamp,
                                      uint32_t flags) {
   rv_segment_cptr segment(new rv_segment_t);
 
@@ -491,28 +491,28 @@ real_reader_c::queue_one_audio_frame(real_demuxer_cptr dmx,
   segment->flags = flags;
   dmx->segments.push_back(segment);
 
-  dmx->last_timecode = timecode;
+  dmx->last_timestamp = timestamp;
 
-  mxverb_tid(2, m_ti.m_fname, dmx->track->id, boost::format("enqueueing one length %1% timecode %2% flags 0x%|3$08x|\n") % mem.get_size() % timecode % flags);
+  mxverb_tid(2, m_ti.m_fname, dmx->track->id, boost::format("enqueueing one length %1% timestamp %2% flags 0x%|3$08x|\n") % mem.get_size() % timestamp % flags);
 }
 
 void
 real_reader_c::queue_audio_frames(real_demuxer_cptr dmx,
                                   memory_c &mem,
-                                  uint64_t timecode,
+                                  uint64_t timestamp,
                                   uint32_t flags) {
   // Enqueue the packets if no packets are in the queue or if the current
-  // packet's timecode is the same as the timecode of those before.
-  if (dmx->segments.empty() || (dmx->last_timecode == timecode)) {
-    queue_one_audio_frame(dmx, mem, timecode, flags);
+  // packet's timestamp is the same as the timestamp of those before.
+  if (dmx->segments.empty() || (dmx->last_timestamp == timestamp)) {
+    queue_one_audio_frame(dmx, mem, timestamp, flags);
     return;
   }
 
-  // This timecode is different. So let's push the packets out.
-  deliver_audio_frames(dmx, (timecode - dmx->last_timecode) / dmx->segments.size());
+  // This timestamp is different. So let's push the packets out.
+  deliver_audio_frames(dmx, (timestamp - dmx->last_timestamp) / dmx->segments.size());
 
   // Enqueue this packet.
-  queue_one_audio_frame(dmx, mem, timecode, flags);
+  queue_one_audio_frame(dmx, mem, timestamp, flags);
 }
 
 void
@@ -526,13 +526,13 @@ real_reader_c::deliver_audio_frames(real_demuxer_cptr dmx,
   for (i = 0; i < dmx->segments.size(); i++) {
     rv_segment_cptr segment = dmx->segments[i];
     mxverb_tid(2, m_ti.m_fname, dmx->track->id,
-               boost::format("delivering audio length %1% timecode %2% flags 0x%|3$08x| duration %4%\n")
-               % segment->data->get_size() % dmx->last_timecode % segment->flags % duration);
+               boost::format("delivering audio length %1% timestamp %2% flags 0x%|3$08x| duration %4%\n")
+               % segment->data->get_size() % dmx->last_timestamp % segment->flags % duration);
 
-    PTZR(dmx->ptzr)->process(new packet_t(segment->data, dmx->last_timecode, duration,
-                                          (segment->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? -1 : dmx->ref_timecode));
+    PTZR(dmx->ptzr)->process(new packet_t(segment->data, dmx->last_timestamp, duration,
+                                          (segment->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? -1 : dmx->ref_timestamp));
     if ((segment->flags & 2) == 2)
-      dmx->ref_timecode = dmx->last_timecode;
+      dmx->ref_timestamp = dmx->last_timestamp;
   }
 
   dmx->num_packets += dmx->segments.size();

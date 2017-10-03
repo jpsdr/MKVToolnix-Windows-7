@@ -109,8 +109,8 @@ struct cue_parser_args_t {
   std::vector<int64_t> start_indices;
   bool index00_missing;
   int64_t end;
-  int64_t min_tc;
-  int64_t max_tc;
+  int64_t min_ts;
+  int64_t max_ts;
   int64_t offset;
   KaxChapters *chapters;
   KaxEditionEntry *edition;
@@ -141,8 +141,8 @@ struct cue_parser_args_t {
     , start_of_track(-1)
     , index00_missing(false)
     , end(0)
-    , min_tc(0)
-    , max_tc(0)
+    , min_ts(0)
+    , max_ts(0)
     , offset(0)
     , chapters(nullptr)
     , edition(nullptr)
@@ -274,7 +274,7 @@ add_elements_for_cue_entry(cue_parser_args_t &a,
   if (a.start_indices.empty())
     mxerror(boost::format(Y("Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n")) % a.line_num);
 
-  if (!((a.start_indices[0] >= a.min_tc) && ((a.start_indices[0] <= a.max_tc) || (a.max_tc == -1))))
+  if (!((a.start_indices[0] >= a.min_ts) && ((a.start_indices[0] <= a.max_ts) || (a.max_ts == -1))))
     return;
 
   mtx::chapters::cue_entries_to_name(a.performer, a.title, a.global_performer, a.global_title, a.name, a.num);
@@ -340,8 +340,8 @@ erase_colon(std::string &s,
 
 mtx::chapters::kax_cptr
 parse_cue(mm_text_io_c *in,
-          int64_t min_tc,
-          int64_t max_tc,
+          int64_t min_ts,
+          int64_t max_ts,
           int64_t offset,
           const std::string &language,
           const std::string &charset,
@@ -359,8 +359,8 @@ parse_cue(mm_text_io_c *in,
   }
 
   a.language = language.empty() ? "eng" : language;
-  a.min_tc   = min_tc;
-  a.max_tc   = max_tc;
+  a.min_ts   = min_ts;
+  a.max_ts   = max_ts;
   a.offset   = offset;
 
   while (in->getline2(line)) {

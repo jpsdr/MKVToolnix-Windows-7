@@ -24,7 +24,7 @@ opus_packetizer_c::opus_packetizer_c(generic_reader_c *reader,
                                      track_info_c &ti)
   : generic_packetizer_c(reader, ti)
   , m_debug{"opus|opus_packetizer"}
-  , m_next_calculated_timecode{timestamp_c::ns(0)}
+  , m_next_calculated_timestamp{timestamp_c::ns(0)}
   , m_id_header(mtx::opus::id_header_t::decode(ti.m_private_data))
 {
   mxdebug_if(m_debug, boost::format("ID header: %1%\n") % m_id_header);
@@ -55,13 +55,13 @@ opus_packetizer_c::process(packet_cptr packet) {
     auto toc = mtx::opus::toc_t::decode(packet->data);
     mxdebug_if(m_debug, boost::format("TOC: %1%\n") % toc);
 
-    if (!packet->has_timecode() || (timestamp_c::ns(packet->timecode) == m_previous_provided_timecode))
-      packet->timecode             = m_next_calculated_timecode.to_ns();
+    if (!packet->has_timestamp() || (timestamp_c::ns(packet->timestamp) == m_previous_provided_timestamp))
+      packet->timestamp             = m_next_calculated_timestamp.to_ns();
     else
-      m_previous_provided_timecode = timestamp_c::ns(packet->timecode);
+      m_previous_provided_timestamp = timestamp_c::ns(packet->timestamp);
 
-    packet->duration               = toc.packet_duration.to_ns();
-    m_next_calculated_timecode     = timestamp_c::ns(packet->timecode + packet->duration);
+    packet->duration                = toc.packet_duration.to_ns();
+    m_next_calculated_timestamp     = timestamp_c::ns(packet->timestamp + packet->duration);
 
     add_packet(packet);
 

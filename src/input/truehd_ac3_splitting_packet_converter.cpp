@@ -21,8 +21,8 @@ truehd_ac3_splitting_packet_converter_c::truehd_ac3_splitting_packet_converter_c
                                                                                  generic_packetizer_c *ac3_ptzr)
   : packet_converter_c{truehd_ptzr}
   , m_ac3_ptzr{ac3_ptzr}
-  , m_truehd_timecode{-1}
-  , m_ac3_timecode{-1}
+  , m_truehd_timestamp{-1}
+  , m_ac3_timestamp{-1}
 {
 }
 
@@ -31,8 +31,8 @@ truehd_ac3_splitting_packet_converter_c::convert(packet_cptr const &packet) {
   m_parser.add_data(packet->data->get_buffer(), packet->data->get_size());
   m_parser.parse(true);
 
-  m_truehd_timecode = packet->timecode;
-  m_ac3_timecode    = packet->timecode;
+  m_truehd_timestamp = packet->timestamp;
+  m_ac3_timestamp    = packet->timestamp;
 
   process_frames();
 
@@ -63,12 +63,12 @@ truehd_ac3_splitting_packet_converter_c::process_frames() {
     auto frame = m_parser.get_next_frame();
 
     if (frame->is_truehd() && m_ptzr) {
-      static_cast<truehd_packetizer_c *>(m_ptzr)->process_framed(frame, m_truehd_timecode);
-      m_truehd_timecode = -1;
+      static_cast<truehd_packetizer_c *>(m_ptzr)->process_framed(frame, m_truehd_timestamp);
+      m_truehd_timestamp = -1;
 
     } else if (frame->is_ac3() && m_ac3_ptzr) {
-      m_ac3_ptzr->process(std::make_shared<packet_t>(frame->m_data, m_ac3_timecode));
-      m_ac3_timecode = -1;
+      m_ac3_ptzr->process(std::make_shared<packet_t>(frame->m_data, m_ac3_timestamp));
+      m_ac3_timestamp = -1;
     }
   }
 }

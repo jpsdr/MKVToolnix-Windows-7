@@ -41,8 +41,8 @@ dvbsub_pes_framing_removal_packet_converter_c::flush() {
 bool
 dvbsub_pes_framing_removal_packet_converter_c::convert(packet_cptr const &packet) {
   if (m_packet) {
-    if (!m_packet->has_duration() && m_packet->has_timecode() && packet->has_timecode())
-      m_packet->duration = packet->timecode - m_packet->timecode;
+    if (!m_packet->has_duration() && m_packet->has_timestamp() && packet->has_timestamp())
+      m_packet->duration = packet->timestamp - m_packet->timestamp;
 
     flush();
   }

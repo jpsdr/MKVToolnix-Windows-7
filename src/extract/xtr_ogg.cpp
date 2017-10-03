@@ -125,11 +125,11 @@ xtr_oggbase_c::header_packets_unlaced(std::vector<memory_cptr> &) {
 void
 xtr_oggbase_c::handle_frame(xtr_frame_t &f) {
   if (-1 != m_queued_granulepos)
-    m_queued_granulepos = f.timecode * m_sfreq / 1000000000;
+    m_queued_granulepos = f.timestamp * m_sfreq / 1000000000;
 
   queue_frame(f.frame, 0);
 
-  m_previous_end = f.timecode + f.duration;
+  m_previous_end = f.timestamp + f.duration;
 }
 
 xtr_oggbase_c::~xtr_oggbase_c() {
@@ -292,15 +292,15 @@ xtr_oggkate_c::handle_frame(xtr_frame_t &f) {
   op.bytes    = f.frame->get_size();
 
   /* we encode the backlink in the granulepos */
-  float f_timecode   = f.timecode / 1000000000.0;
+  float f_timestamp  = f.timestamp / 1000000000.0;
   int64_t g_backlink = 0;
 
   if (op.bytes >= static_cast<long>(1 + 3 * sizeof(int64_t)))
     g_backlink = get_uint64_le(op.packet + 1 + 2 * sizeof(int64_t));
 
   float f_backlink = g_backlink * (float)m_kate_id_header.gden / m_kate_id_header.gnum;
-  float f_base     = f_timecode - f_backlink;
-  float f_offset   = f_timecode - f_base;
+  float f_base     = f_timestamp - f_backlink;
+  float f_offset   = f_timestamp - f_base;
   int64_t g_base   = (int64_t)(f_base   * m_kate_id_header.gnum / m_kate_id_header.gden);
   int64_t g_offset = (int64_t)(f_offset * m_kate_id_header.gnum / m_kate_id_header.gden);
   op.granulepos    = (g_base << m_kate_id_header.kfgshift) | g_offset;

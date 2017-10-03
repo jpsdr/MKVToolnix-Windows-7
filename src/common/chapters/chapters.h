@@ -60,24 +60,24 @@ enum class format_e {
 };
 
 mtx::chapters::kax_cptr
-parse(const std::string &file_name, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
+parse(const std::string &file_name, int64_t min_ts = 0, int64_t max_ts = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
       bool exception_on_error = false, format_e *format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
 
 mtx::chapters::kax_cptr
-parse(mm_text_io_c *io, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
+parse(mm_text_io_c *io, int64_t min_ts = 0, int64_t max_ts = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
       bool exception_on_error = false, format_e *format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
 
 bool probe_simple(mm_text_io_c *in);
-mtx::chapters::kax_cptr parse_simple(mm_text_io_c *in, int64_t min_tc, int64_t max_tc, int64_t offset, const std::string &language, const std::string &charset);
+mtx::chapters::kax_cptr parse_simple(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, const std::string &language, const std::string &charset);
 
 extern std::string g_cue_name_format, g_default_language, g_default_country;
 
 bool probe_cue(mm_text_io_c *in);
-mtx::chapters::kax_cptr parse_cue(mm_text_io_c *in, int64_t min_tc, int64_t max_tc, int64_t offset, const std::string &language, const std::string &charset, std::unique_ptr<KaxTags> *tags = nullptr);
+mtx::chapters::kax_cptr parse_cue(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, const std::string &language, const std::string &charset, std::unique_ptr<KaxTags> *tags = nullptr);
 
 std::size_t write_simple(KaxChapters &chapters, mm_io_c &out, boost::optional<std::string> const &language_to_extract);
 
-bool select_in_timeframe(KaxChapters *chapters, int64_t min_tc, int64_t max_tc, int64_t offset);
+bool select_in_timeframe(KaxChapters *chapters, int64_t min_ts, int64_t max_ts, int64_t offset);
 
 int64_t get_uid(KaxChapterAtom &atom);
 int64_t get_start(KaxChapterAtom &atom, int64_t value_if_not_found = -1);
@@ -90,7 +90,7 @@ KaxEditionEntry *find_edition_with_uid(KaxChapters &chapters, uint64_t uid);
 KaxChapterAtom *find_chapter_with_uid(KaxChapters &chapters, uint64_t uid);
 
 void move_by_edition(KaxChapters &dst, KaxChapters &src);
-void adjust_timecodes(EbmlMaster &master, int64_t offset);
+void adjust_timestamps(EbmlMaster &master, int64_t offset);
 void merge_entries(EbmlMaster &master);
 int count_atoms(EbmlMaster &master);
 void regenerate_uids(EbmlMaster &master);

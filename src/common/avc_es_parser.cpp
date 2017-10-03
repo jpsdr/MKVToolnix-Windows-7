@@ -43,7 +43,7 @@ es_parser_c::es_parser_c()
   , m_recovery_point_valid(false)
   , m_b_frames_since_keyframe(false)
   , m_par_found(false)
-  , m_max_timecode(0)
+  , m_max_timestamp(0)
   , m_previous_i_p_start{}
   , m_stream_position(0)
   , m_parsed_position(0)
@@ -55,7 +55,7 @@ es_parser_c::es_parser_c()
   , m_all_i_slices_are_key_frames{hack_engaged(ENGAGE_ALL_I_SLICES_ARE_KEY_FRAMES)}
   , m_debug_keyframe_detection{"avc_parser|avc_keyframe_detection"}
   , m_debug_nalu_types{        "avc_parser|avc_nalu_types"}
-  , m_debug_timecodes{         "avc_parser|avc_timecodes"}
+  , m_debug_timestamps{        "avc_parser|avc_timestamps"}
   , m_debug_sps_info{          "avc_parser|avc_sps|avc_sps_info"}
   , m_debug_sps_pps_changes{   "avc_parser|avc_sps_pps_changes"}
 {
@@ -65,11 +65,11 @@ es_parser_c::es_parser_c()
 
 es_parser_c::~es_parser_c() {
   mxdebug_if(debugging_c::requested("avc_statistics"),
-             boost::format("AVC statistics: #frames: out %1% discarded %2% #timecodes: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7% num_sei_nalus: %8% num_idr_slices: %9%\n")
-             % m_stats.num_frames_out   % m_stats.num_frames_discarded % m_stats.num_timecodes_in % m_stats.num_timecodes_generated % m_stats.num_timecodes_discarded
+             boost::format("AVC statistics: #frames: out %1% discarded %2% #timestamps: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7% num_sei_nalus: %8% num_idr_slices: %9%\n")
+             % m_stats.num_frames_out   % m_stats.num_frames_discarded % m_stats.num_timestamps_in % m_stats.num_timestamps_generated % m_stats.num_timestamps_discarded
              % m_stats.num_field_slices % m_stats.num_frame_slices     % m_stats.num_sei_nalus    % m_stats.num_idr_slices);
 
-  mxdebug_if(m_debug_timecodes, boost::format("stream_position %1% parsed_position %2%\n") % m_stream_position % m_parsed_position);
+  mxdebug_if(m_debug_timestamps, boost::format("stream_position %1% parsed_position %2%\n") % m_stream_position % m_parsed_position);
 
   if (!debugging_c::requested("avc_num_slices_by_type"))
     return;
@@ -184,9 +184,9 @@ es_parser_c::flush() {
 }
 
 void
-es_parser_c::add_timecode(int64_t timecode) {
-  m_provided_timestamps.emplace_back(timecode, m_stream_position);
-  ++m_stats.num_timecodes_in;
+es_parser_c::add_timestamp(int64_t timestamp) {
+  m_provided_timestamps.emplace_back(timestamp, m_stream_position);
+  ++m_stats.num_timestamps_in;
 }
 
 bool
@@ -392,7 +392,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   if (   !has_stream_default_duration()
       && sps_info.timing_info_valid()) {
     m_stream_default_duration = sps_info.timing_info.default_duration();
-    mxdebug_if(m_debug_timecodes, boost::format("Stream default duration: %1%\n") % m_stream_default_duration);
+    mxdebug_if(m_debug_timestamps, boost::format("Stream default duration: %1%\n") % m_stream_default_duration);
   }
 
   if (   !m_par_found
@@ -640,7 +640,7 @@ es_parser_c::get_most_often_used_duration()
 
   // No duration at all!? No frame?
   if (m_duration_frequency.end() == most_often) {
-    mxdebug_if(m_debug_timecodes, boost::format("Duration frequency: none found, using 25 FPS\n"));
+    mxdebug_if(m_debug_timestamps, boost::format("Duration frequency: none found, using 25 FPS\n"));
     return 1000000000ll / 25;
   }
 
@@ -652,7 +652,7 @@ es_parser_c::get_most_often_used_duration()
       best = std::make_pair(common_default_duration, diff);
   }
 
-  mxdebug_if(m_debug_timecodes, boost::format("Duration frequency. Result: %1%, diff %2%. Best before adjustment: %3%. All: %4%\n")
+  mxdebug_if(m_debug_timestamps, boost::format("Duration frequency. Result: %1%, diff %2%. Best before adjustment: %3%. All: %4%\n")
              % best.first % best.second % most_often->first
              % boost::accumulate(m_duration_frequency, std::string(""), [](std::string const &accu, std::pair<int64_t, int64_t> const &pair) {
                  return accu + (boost::format(" <%1% %2%>") % pair.first % pair.second).str();
@@ -743,13 +743,13 @@ es_parser_c::calculate_provided_timestamps_to_use() {
 
     if (timestamp_to_use.valid()) {
       provided_timestamps_to_use.emplace_back(timestamp_to_use.to_ns());
-      frame.m_has_provided_timecode = true;
+      frame.m_has_provided_timestamp = true;
     }
 
     ++frame_idx;
   }
 
-  mxdebug_if(m_debug_timecodes,
+  mxdebug_if(m_debug_timestamps,
              boost::format("cleanup; num frames %1% num provided timestamps available %2% num provided timestamps to use %3%\n"
                            "  frames:\n%4%"
                            "  provided timestamps (available):\n%5%"
@@ -787,7 +787,7 @@ es_parser_c::calculate_frame_timestamps_and_references() {
   auto provided_timestamps_itr = provided_timestamps_to_use.begin();
 
   while (frames_end != frame_itr) {
-    if (frame_itr->m_has_provided_timecode) {
+    if (frame_itr->m_has_provided_timestamp) {
       frame_itr->m_start = *provided_timestamps_itr;
       ++provided_timestamps_itr;
 
@@ -795,8 +795,8 @@ es_parser_c::calculate_frame_timestamps_and_references() {
         previous_frame_itr->m_end = frame_itr->m_start;
 
     } else {
-      frame_itr->m_start = frames_begin == frame_itr ? m_max_timecode : previous_frame_itr->m_end;
-      ++m_stats.num_timecodes_generated;
+      frame_itr->m_start = frames_begin == frame_itr ? m_max_timestamp : previous_frame_itr->m_end;
+      ++m_stats.num_timestamps_generated;
     }
 
     frame_itr->m_end = frame_itr->m_start + duration_for(frame_itr->m_si);
@@ -805,7 +805,7 @@ es_parser_c::calculate_frame_timestamps_and_references() {
     ++frame_itr;
   }
 
-  m_max_timecode = m_frames.back().m_end;
+  m_max_timestamp = m_frames.back().m_end;
 
   for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
     if (frame_itr->is_i_frame()) {
@@ -825,14 +825,14 @@ es_parser_c::calculate_frame_timestamps_and_references() {
     while ((frames_end != next_i_p_frame_itr) && next_i_p_frame_itr->is_b_frame())
       ++next_i_p_frame_itr;
 
-    auto forward_ref_start = frames_end != next_i_p_frame_itr ? next_i_p_frame_itr->m_start : m_max_timecode;
+    auto forward_ref_start = frames_end != next_i_p_frame_itr ? next_i_p_frame_itr->m_start : m_max_timestamp;
     frame_itr->m_ref2      = forward_ref_start - frame_itr->m_start;
   }
 
-  mxdebug_if(m_debug_timecodes, boost::format("PRESENTATION order dump\n"));
+  mxdebug_if(m_debug_timestamps, boost::format("PRESENTATION order dump\n"));
 
   for (auto &frame : m_frames)
-    mxdebug_if(m_debug_timecodes, boost::format("  type %1% TS %2% ref1 %3% ref2 %4% decode_order %5%\n") % frame.m_type % format_timestamp(frame.m_start) % frame.m_ref1 % frame.m_ref2 % frame.m_decode_order);
+    mxdebug_if(m_debug_timestamps, boost::format("  type %1% TS %2% ref1 %3% ref2 %4% decode_order %5%\n") % frame.m_type % format_timestamp(frame.m_start) % frame.m_ref1 % frame.m_ref2 % frame.m_decode_order);
 
   if (!m_simple_picture_order)
     brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
@@ -840,10 +840,10 @@ es_parser_c::calculate_frame_timestamps_and_references() {
 
 void
 es_parser_c::update_frame_stats() {
-  mxdebug_if(m_debug_timecodes, boost::format("DECODE order dump\n"));
+  mxdebug_if(m_debug_timestamps, boost::format("DECODE order dump\n"));
 
   for (auto &frame : m_frames) {
-    mxdebug_if(m_debug_timecodes, boost::format("  type %1% TS %2% ref1 %3% ref2 %4%\n") % frame.m_type % format_timestamp(frame.m_start) % frame.m_ref1 % frame.m_ref2);
+    mxdebug_if(m_debug_timestamps, boost::format("  type %1% TS %2% ref1 %3% ref2 %4%\n") % frame.m_type % format_timestamp(frame.m_start) % frame.m_ref1 % frame.m_ref2);
 
     m_duration_frequency[frame.m_end - frame.m_start]++;
 
@@ -862,7 +862,7 @@ es_parser_c::cleanup() {
 
   if (m_discard_actual_frames) {
     m_stats.num_frames_discarded    += m_frames.size();
-    m_stats.num_timecodes_discarded += m_provided_timestamps.size();
+    m_stats.num_timestamps_discarded += m_provided_timestamps.size();
 
     m_frames.clear();
     m_provided_timestamps.clear();

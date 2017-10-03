@@ -47,10 +47,10 @@ class generic_packetizer_c {
 protected:
   int m_num_packets;
   std::deque<packet_cptr> m_packet_queue, m_deferred_packets;
-  int m_next_packet_wo_assigned_timecode;
+  int m_next_packet_wo_assigned_timestamp;
 
   int64_t m_free_refs, m_next_free_refs, m_enqueued_bytes;
-  int64_t m_safety_last_timecode, m_safety_last_duration;
+  int64_t m_safety_last_timestamp, m_safety_last_duration;
 
   KaxTrackEntry *m_track_entry;
 
@@ -79,7 +79,7 @@ protected:
   timestamp_factory_cptr m_timestamp_factory;
   timestamp_factory_application_e m_timestamp_factory_application_mode;
 
-  int64_t m_last_cue_timecode;
+  int64_t m_last_cue_timestamp;
 
   bool m_has_been_flushed;
 
@@ -93,9 +93,9 @@ public:
   track_info_c m_ti;
   generic_reader_c *m_reader;
   int m_connected_to;
-  int64_t m_correction_timecode_offset;
-  int64_t m_append_timecode_offset, m_max_timecode_seen;
-  bool m_relaxed_timecode_checking;
+  int64_t m_correction_timestamp_offset;
+  int64_t m_append_timestamp_offset, m_max_timestamp_seen;
+  bool m_relaxed_timestamp_checking;
 
 public:
   generic_packetizer_c(generic_reader_c *reader, track_info_c &ti);
@@ -118,8 +118,8 @@ public:
   }
   void discard_queued_packets();
   void flush();
-  virtual int64_t get_smallest_timecode() const {
-    return m_packet_queue.empty() ? 0x0FFFFFFF : m_packet_queue.front()->timecode;
+  virtual int64_t get_smallest_timestamp() const {
+    return m_packet_queue.empty() ? 0x0FFFFFFF : m_packet_queue.front()->timestamp;
   }
   inline int64_t get_queued_bytes() const {
     return m_enqueued_bytes;
@@ -146,11 +146,11 @@ public:
     return m_ti.m_cues;
   }
   virtual bool wants_cue_duration() const;
-  virtual int64_t get_last_cue_timecode() const {
-    return m_last_cue_timecode;
+  virtual int64_t get_last_cue_timestamp() const {
+    return m_last_cue_timestamp;
   }
-  virtual void set_last_cue_timecode(int64_t timecode) {
-    m_last_cue_timecode = timecode;
+  virtual void set_last_cue_timestamp(int64_t timestamp) {
+    m_last_cue_timestamp = timestamp;
   }
 
   virtual KaxTrackEntry *get_track_entry() const {
@@ -249,7 +249,7 @@ public:
 
   virtual translatable_string_c get_format_name() const = 0;
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) = 0;
-  virtual void connect(generic_packetizer_c *src, int64_t append_timecode_offset = -1);
+  virtual void connect(generic_packetizer_c *src, int64_t append_timestamp_offset = -1);
 
   virtual void enable_avi_audio_sync(bool enable) {
     m_ti.m_avi_audio_sync_enabled = enable;

@@ -88,10 +88,10 @@ mpeg_ps_reader_c::mpeg_ps_reader_c(const track_info_c &ti,
   : generic_reader_c(ti, in)
   , file_done(false)
   , m_probe_range{}
-  , m_debug_timecodes{"mpeg_ps|mpeg_ps_timecodes"}
-  , m_debug_headers{  "mpeg_ps|mpeg_ps_headers"}
-  , m_debug_packets{  "mpeg_ps|mpeg_ps_packets"}
-  , m_debug_resync{   "mpeg_ps|mpeg_ps_resync"}
+  , m_debug_timestamps{"mpeg_ps|mpeg_ps_timestamps"}
+  , m_debug_headers{   "mpeg_ps|mpeg_ps_headers"}
+  , m_debug_packets{   "mpeg_ps|mpeg_ps_packets"}
+  , m_debug_resync{    "mpeg_ps|mpeg_ps_resync"}
 {
 }
 
@@ -188,7 +188,7 @@ mpeg_ps_reader_c::read_headers() {
   }
 
   sort_tracks();
-  calculate_global_timecode_offset();
+  calculate_global_timestamp_offset();
 
   m_in->setFilePointer(0, seek_beginning);
 
@@ -230,26 +230,26 @@ mpeg_ps_reader_c::sort_tracks() {
 }
 
 void
-mpeg_ps_reader_c::calculate_global_timecode_offset() {
-  // Calculate by how much the timecodes have to be offset
+mpeg_ps_reader_c::calculate_global_timestamp_offset() {
+  // Calculate by how much the timestamps have to be offset
   if (tracks.empty())
     return;
 
   for (auto &track : tracks)
-    track->timecode_offset -= track->timecode_b_frame_offset;
+    track->timestamp_offset -= track->timestamp_b_frame_offset;
 
-  auto const &track_min_offset = *brng::min_element(tracks, [](mpeg_ps_track_ptr const &a, mpeg_ps_track_ptr const &b) { return a->timecode_offset < b->timecode_offset; });
-  global_timecode_offset       = std::numeric_limits<int64_t>::max() == track_min_offset->timecode_offset ? 0 : track_min_offset->timecode_offset;
+  auto const &track_min_offset = *brng::min_element(tracks, [](mpeg_ps_track_ptr const &a, mpeg_ps_track_ptr const &b) { return a->timestamp_offset < b->timestamp_offset; });
+  global_timestamp_offset      = std::numeric_limits<int64_t>::max() == track_min_offset->timestamp_offset ? 0 : track_min_offset->timestamp_offset;
 
   for (auto &track : tracks)
-    track->timecode_offset = std::numeric_limits<int64_t>::max() == track->timecode_offset ? global_timecode_offset : track->timecode_offset - global_timecode_offset;
+    track->timestamp_offset = std::numeric_limits<int64_t>::max() == track->timestamp_offset ? global_timestamp_offset : track->timestamp_offset - global_timestamp_offset;
 
-  if (!m_debug_timecodes)
+  if (!m_debug_timestamps)
     return;
 
-  std::string output = (boost::format("mpeg_ps: Timecode offset: min was %1% ") % global_timecode_offset).str();
+  std::string output = (boost::format("mpeg_ps: Timestamp offset: min was %1% ") % global_timestamp_offset).str();
   for (auto const &track : tracks)
-    output += (boost::format("%1%=%2% ") % track->id % track->timecode_offset).str();
+    output += (boost::format("%1%=%2% ") % track->id % track->timestamp_offset).str();
   mxdebug(output + "\n");
 }
 
@@ -688,18 +688,18 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
     throw false;
   }
 
-  track->codec          = codec_c::look_up(codec_c::type_e::V_MPEG12);
-  track->v_interlaced   = !seq_hdr.progressiveSequence;
-  track->v_version      = m2v_parser->GetMPEGVersion();
-  track->v_width        = seq_hdr.width;
-  track->v_height       = seq_hdr.height;
-  track->v_frame_rate   = seq_hdr.progressiveSequence ? seq_hdr.frameOrFieldRate : seq_hdr.frameOrFieldRate * 2.0f;
-  track->v_aspect_ratio = seq_hdr.aspectRatio;
-  track->timecode_b_frame_offset = 1000000000ll * num_leading_b_fields / seq_hdr.frameOrFieldRate / 2;
+  track->codec                    = codec_c::look_up(codec_c::type_e::V_MPEG12);
+  track->v_interlaced             = !seq_hdr.progressiveSequence;
+  track->v_version                = m2v_parser->GetMPEGVersion();
+  track->v_width                  = seq_hdr.width;
+  track->v_height                 = seq_hdr.height;
+  track->v_frame_rate             = seq_hdr.progressiveSequence ? seq_hdr.frameOrFieldRate : seq_hdr.frameOrFieldRate * 2.0f;
+  track->v_aspect_ratio           = seq_hdr.aspectRatio;
+  track->timestamp_b_frame_offset = 1000000000ll * num_leading_b_fields / seq_hdr.frameOrFieldRate / 2;
 
-  mxdebug_if(m_debug_timecodes,
+  mxdebug_if(m_debug_timestamps,
              boost::format("Leading B fields %1% rate %2% progressive? %3% calculated_offset %4% found_i? %5% found_non_b? %6%\n")
-             % num_leading_b_fields % seq_hdr.frameOrFieldRate % !!seq_hdr.progressiveSequence % track->timecode_b_frame_offset % found_i_frame % found_non_b_frame);
+             % num_leading_b_fields % seq_hdr.frameOrFieldRate % !!seq_hdr.progressiveSequence % track->timestamp_b_frame_offset % found_i_frame % found_non_b_frame);
 
   if ((0 >= track->v_aspect_ratio) || (1 == track->v_aspect_ratio))
     track->v_dwidth = track->v_width;
@@ -782,10 +782,10 @@ mpeg_ps_reader_c::new_stream_v_vc1(mpeg_ps_id_t id,
   mtx::vc1::sequence_header_t seqhdr;
   parser.get_sequence_header(seqhdr);
 
-  track->codec             = codec_c::look_up(codec_c::type_e::V_VC1);
-  track->v_width           = seqhdr.pixel_width;
-  track->v_height          = seqhdr.pixel_height;
-  track->provide_timecodes = true;
+  track->codec              = codec_c::look_up(codec_c::type_e::V_VC1);
+  track->v_width            = seqhdr.pixel_width;
+  track->v_height           = seqhdr.pixel_height;
+  track->provide_timestamps = true;
 
   track->use_buffer(512000);
 }
@@ -974,27 +974,27 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
         return;
     }
 
-    mxdebug_if(m_debug_timecodes && packet.has_pts(),
-               boost::format("Timecode for track %1%: %2% [%3%] (DTS: %4%)\n")
+    mxdebug_if(m_debug_timestamps && packet.has_pts(),
+               boost::format("Timestamp for track %1%: %2% [%3%] (DTS: %4%)\n")
                % id % format_timestamp(packet.pts()) % (packet.pts() * 90 / 1000000ll)
                % (packet.has_dts() ? (boost::format("%1% [%2%]") % format_timestamp(packet.dts()) % (packet.dts() * 90 / 1000000ll)).str() : std::string{"none"}));
 
     if (mtx::includes(blacklisted_ids, id.idx()))
       return;
 
-    int64_t timecode_for_offset = packet.pts();
-    if (std::numeric_limits<int64_t>::max() == timecode_for_offset)
-      timecode_for_offset = -1;
+    int64_t timestamp_for_offset = packet.pts();
+    if (std::numeric_limits<int64_t>::max() == timestamp_for_offset)
+      timestamp_for_offset = -1;
 
     if (mtx::includes(id2idx, id.idx())) {
       mpeg_ps_track_ptr &track = tracks[id2idx[id.idx()]];
-      if ((-1 != timecode_for_offset) && (-1 == track->timecode_offset))
-        track->timecode_offset = timecode_for_offset;
+      if ((-1 != timestamp_for_offset) && (-1 == track->timestamp_offset))
+        track->timestamp_offset = timestamp_for_offset;
       return;
     }
 
     mpeg_ps_track_ptr track(new mpeg_ps_track_t);
-    track->timecode_offset = timecode_for_offset;
+    track->timestamp_offset = timestamp_for_offset;
     track->type            = '?';
 
     int es_type = es_map[id.id];
@@ -1284,8 +1284,8 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       mxerror(boost::format(Y("mpeg_ps_reader: Should not have happened #2. %1%")) % BUGMSG);
   }
 
-  if (-1 != track->timecode_offset)
-    PTZR(track->ptzr)->m_ti.m_tcsync.displacement += track->timecode_offset;
+  if (-1 != track->timestamp_offset)
+    PTZR(track->ptzr)->m_ti.m_tcsync.displacement += track->timestamp_offset;
 
   m_ptzr_to_track_map[ PTZR(track->ptzr) ] = track;
 }
@@ -1340,12 +1340,12 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
 
       auto track = tracks[id2idx[new_id.idx()]];
 
-      int64_t timecode = packet.has_pts() ? packet.pts() : -1;
-      if ((-1 != timecode) && track->provide_timecodes)
-        timecode = std::max<int64_t>(timecode - global_timecode_offset, -1);
+      int64_t timestamp = packet.has_pts() ? packet.pts() : -1;
+      if ((-1 != timestamp) && track->provide_timestamps)
+        timestamp = std::max<int64_t>(timestamp - global_timestamp_offset, -1);
 
       else
-        timecode = -1;
+        timestamp = -1;
 
       if (track->skip_packet_data_bytes) {
         auto bytes_to_skip = std::min(packet.m_length, track->skip_packet_data_bytes);
@@ -1357,9 +1357,9 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
         if (((track->buffer_usage + packet.m_length) > track->buffer_size)) {
           packet_t *new_packet = new packet_t(new memory_c(track->buffer, track->buffer_usage, false));
 
-          if (!track->multiple_timecodes_packet_extension->empty()) {
-            new_packet->extensions.push_back(packet_extension_cptr(track->multiple_timecodes_packet_extension));
-            track->multiple_timecodes_packet_extension = new multiple_timecodes_packet_extension_c;
+          if (!track->multiple_timestamps_packet_extension->empty()) {
+            new_packet->extensions.push_back(packet_extension_cptr(track->multiple_timestamps_packet_extension));
+            track->multiple_timestamps_packet_extension = new multiple_timestamps_packet_extension_c;
           }
 
           PTZR(track->ptzr)->process(new_packet);
@@ -1373,8 +1373,8 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
           return finish();
         }
 
-        if (-1 != timecode)
-          track->multiple_timecodes_packet_extension->add(timecode, track->buffer_usage);
+        if (-1 != timestamp)
+          track->multiple_timestamps_packet_extension->add(timestamp, track->buffer_usage);
 
         track->buffer_usage += packet.m_length;
 
@@ -1386,7 +1386,7 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
           return finish();
         }
 
-        PTZR(track->ptzr)->process(new packet_t(buf, timecode));
+        PTZR(track->ptzr)->process(new packet_t(buf, timestamp));
       }
 
       return FILE_STATUS_MOREDATA;

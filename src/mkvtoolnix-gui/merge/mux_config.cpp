@@ -456,14 +456,14 @@ MuxConfig::buildMkvmergeOptions()
     attachment->buildMkvmergeOptions(options);
 
   if (DoNotSplit != m_splitMode) {
-    auto mode = SplitAfterSize      == m_splitMode ? Q("size:")
-              : SplitAfterDuration  == m_splitMode ? Q("duration:")
-              : SplitAfterTimecodes == m_splitMode ? Q("timecodes:")
-              : SplitByParts        == m_splitMode ? Q("parts:")
-              : SplitByPartsFrames  == m_splitMode ? Q("parts-frames:")
-              : SplitByFrames       == m_splitMode ? Q("frames:")
-              : SplitAfterChapters  == m_splitMode ? Q("chapters:")
-              :                                      Q("PROGRAM EROR");
+    auto mode = SplitAfterSize       == m_splitMode ? Q("size:")
+              : SplitAfterDuration   == m_splitMode ? Q("duration:")
+              : SplitAfterTimestamps == m_splitMode ? Q("timecodes:")
+              : SplitByParts         == m_splitMode ? Q("parts:")
+              : SplitByPartsFrames   == m_splitMode ? Q("parts-frames:")
+              : SplitByFrames        == m_splitMode ? Q("frames:")
+              : SplitAfterChapters   == m_splitMode ? Q("chapters:")
+              :                                       Q("PROGRAM EROR");
     options << Q("--split") << (mode + m_splitOptions);
 
     if (m_splitMaxFiles >= 2)

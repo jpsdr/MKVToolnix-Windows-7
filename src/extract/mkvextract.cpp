@@ -35,7 +35,7 @@ enum operation_mode_e {
   MODE_ATTACHMENTS,
   MODE_CHAPTERS,
   MODE_CUESHEET,
-  MODE_TIMECODES_V2,
+  MODE_TIMESTAMPS_V2,
 };
 
 kax_analyzer_cptr
@@ -129,8 +129,8 @@ main(int argc,
   else if (options_c::em_cuesheet == options.m_extraction_mode)
     extract_cuesheet(options.m_file_name, options.m_parse_mode);
 
-  else if (options_c::em_timecodes_v2 == options.m_extraction_mode)
-    extract_timecodes(options.m_file_name, options.m_tracks, 2);
+  else if (options_c::em_timestamps_v2 == options.m_extraction_mode)
+    extract_timestamps(options.m_file_name, options.m_tracks, 2);
 
   else
     mtx::cli::display_usage(2);

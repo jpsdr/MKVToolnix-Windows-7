@@ -52,8 +52,8 @@ timestamp_calculator_c::add_timestamp(int64_t timestamp,
 void
 timestamp_calculator_c::add_timestamp(packet_cptr const &packet,
                                       boost::optional<uint64_t> stream_position) {
-  if (packet->has_timecode())
-    add_timestamp(timestamp_c::ns(packet->timecode), stream_position);
+  if (packet->has_timestamp())
+    add_timestamp(timestamp_c::ns(packet->timestamp), stream_position);
 }
 
 timestamp_c

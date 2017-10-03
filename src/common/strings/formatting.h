@@ -85,8 +85,8 @@ std::string format_number(uint64_t number);
 
 template<typename T>
 std::string
-to_string(basic_timestamp_c<T> const &timecode) {
-  return format_timestamp(timecode.to_ns());
+to_string(basic_timestamp_c<T> const &timestamp) {
+  return format_timestamp(timestamp.to_ns());
 }
 
 

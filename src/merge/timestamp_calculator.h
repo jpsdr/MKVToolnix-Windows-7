@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definition for the timecode calculator
+   class definition for the timestamp calculator
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */

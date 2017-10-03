@@ -69,10 +69,10 @@ xtr_ivf_c::create_file(xtr_base_c *master,
 
 void
 xtr_ivf_c::handle_frame(xtr_frame_t &f) {
-  uint64_t frame_number = f.timecode * m_frame_rate_num / m_frame_rate_den / 1000000000ull;
+  uint64_t frame_number = f.timestamp * m_frame_rate_num / m_frame_rate_den / 1000000000ull;
 
-  mxverb(2, boost::format("timecode %1% num %2% den %3% frame_number %4% calculated back %5%\n")
-         % f.timecode % m_frame_rate_num % m_frame_rate_den % frame_number
+  mxverb(2, boost::format("timestamp %1% num %2% den %3% frame_number %4% calculated back %5%\n")
+         % f.timestamp % m_frame_rate_num % m_frame_rate_den % frame_number
          % (frame_number * 1000000000ull * m_frame_rate_den / m_frame_rate_num));
 
   ivf::frame_header_t frame_header;

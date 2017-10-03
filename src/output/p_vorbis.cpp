@@ -35,8 +35,8 @@ vorbis_packetizer_c::vorbis_packetizer_c(generic_reader_c *p_reader,
   , m_previous_bs(0)
   , m_samples(0)
   , m_previous_samples_sum(0)
-  , m_previous_timecode(0)
-  , m_timecode_offset(0)
+  , m_previous_timestamp(0)
+  , m_timestamp_offset(0)
 {
   m_headers.push_back(memory_cptr(new memory_c((unsigned char *)safememdup(d_header,     l_header),     l_header)));
   m_headers.push_back(memory_cptr(new memory_c((unsigned char *)safememdup(d_comments,   l_comments),   l_comments)));
@@ -89,12 +89,12 @@ int
 vorbis_packetizer_c::process(packet_cptr packet) {
   ogg_packet op;
 
-  // Remember the very first timecode we received.
-  if ((0 == m_samples) && (0 < packet->timecode))
-    m_timecode_offset = packet->timecode;
+  // Remember the very first timestamp we received.
+  if ((0 == m_samples) && (0 < packet->timestamp))
+    m_timestamp_offset = packet->timestamp;
 
   // Update the number of samples we have processed so that we can
-  // calculate the timecode on the next call.
+  // calculate the timestamp on the next call.
   op.packet                  = packet->data->get_buffer();
   op.bytes                   = packet->data->get_size();
   int64_t this_bs            = vorbis_packet_blocksize(&m_vi, &op);
@@ -102,17 +102,17 @@ vorbis_packetizer_c::process(packet_cptr packet) {
   m_previous_bs              = this_bs;
   m_samples                 += samples_here;
 
-  int64_t expected_timecode  = m_previous_timecode + m_previous_samples_sum * 1000000000 / m_vi.rate + m_timecode_offset;
-  int64_t chosen_timecode;
+  int64_t expected_timestamp = m_previous_timestamp + m_previous_samples_sum * 1000000000 / m_vi.rate + m_timestamp_offset;
+  int64_t chosen_timestamp;
 
-  if (packet->timecode > (expected_timecode + 100000000)) {
-    chosen_timecode        = packet->timecode;
-    packet->duration       = packet->timecode - (m_previous_timecode + m_previous_samples_sum * 1000000000 / m_vi.rate + m_timecode_offset);
-    m_previous_timecode    = packet->timecode;
+  if (packet->timestamp > (expected_timestamp + 100000000)) {
+    chosen_timestamp       = packet->timestamp;
+    packet->duration       = packet->timestamp - (m_previous_timestamp + m_previous_samples_sum * 1000000000 / m_vi.rate + m_timestamp_offset);
+    m_previous_timestamp   = packet->timestamp;
     m_previous_samples_sum = 0;
 
   } else {
-    chosen_timecode  = expected_timecode;
+    chosen_timestamp = expected_timestamp;
     packet->duration = (int64_t)(samples_here * 1000000000 / m_vi.rate);
   }
 
@@ -120,8 +120,8 @@ vorbis_packetizer_c::process(packet_cptr packet) {
 
   mxverb(2,
          boost::format("Vorbis: samples_here at %1% (orig %2% expected %3%): %4% (m_previous_samples_sum: %5%)\n")
-         % chosen_timecode % packet->timecode % expected_timecode % samples_here % m_previous_samples_sum);
-  packet->timecode = chosen_timecode;
+         % chosen_timestamp % packet->timestamp % expected_timestamp % samples_here % m_previous_samples_sum);
+  packet->timestamp = chosen_timestamp;
   add_packet(packet);
 
   return FILE_STATUS_MOREDATA;

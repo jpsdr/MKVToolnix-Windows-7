@@ -58,11 +58,11 @@ int generic_packetizer_c::ms_track_number = 0;
 generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
                                            track_info_c &ti)
   : m_num_packets{}
-  , m_next_packet_wo_assigned_timecode{}
+  , m_next_packet_wo_assigned_timestamp{}
   , m_free_refs{-1}
   , m_next_free_refs{-1}
   , m_enqueued_bytes{}
-  , m_safety_last_timecode{}
+  , m_safety_last_timestamp{}
   , m_safety_last_duration{}
   , m_track_entry{}
   , m_hserialno{-1}
@@ -84,30 +84,30 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_hvideo_display_height{-1}
   , m_hcompression{COMPRESSION_UNSPECIFIED}
   , m_timestamp_factory_application_mode{TFA_AUTOMATIC}
-  , m_last_cue_timecode{-1}
+  , m_last_cue_timestamp{-1}
   , m_has_been_flushed{}
   , m_prevent_lacing{}
   , m_connected_successor{}
   , m_ti{ti}
   , m_reader{reader}
   , m_connected_to{}
-  , m_correction_timecode_offset{}
-  , m_append_timecode_offset{}
-  , m_max_timecode_seen{}
-  , m_relaxed_timecode_checking{}
+  , m_correction_timestamp_offset{}
+  , m_append_timestamp_offset{}
+  , m_max_timestamp_seen{}
+  , m_relaxed_timestamp_checking{}
 {
-  // Let's see if the user specified timecode sync for this track.
-  if (mtx::includes(m_ti.m_timecode_syncs, m_ti.m_id))
-    m_ti.m_tcsync = m_ti.m_timecode_syncs[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_timecode_syncs, -1))
-    m_ti.m_tcsync = m_ti.m_timecode_syncs[-1];
+  // Let's see if the user specified timestamp sync for this track.
+  if (mtx::includes(m_ti.m_timestamp_syncs, m_ti.m_id))
+    m_ti.m_tcsync = m_ti.m_timestamp_syncs[m_ti.m_id];
+  else if (mtx::includes(m_ti.m_timestamp_syncs, -1))
+    m_ti.m_tcsync = m_ti.m_timestamp_syncs[-1];
   if (0 == m_ti.m_tcsync.numerator)
     m_ti.m_tcsync.numerator = 1;
   if (0 == m_ti.m_tcsync.denominator)
     m_ti.m_tcsync.denominator = 1;
 
-  // Let's see if the user specified "reset timecodes" for this track.
-  m_ti.m_reset_timecodes = mtx::includes(m_ti.m_reset_timecodes_specs, m_ti.m_id) || mtx::includes(m_ti.m_reset_timecodes_specs, -1);
+  // Let's see if the user specified "reset timestamps" for this track.
+  m_ti.m_reset_timestamps = mtx::includes(m_ti.m_reset_timestamps_specs, m_ti.m_id) || mtx::includes(m_ti.m_reset_timestamps_specs, -1);
 
   // Let's see if the user has specified which cues he wants for this track.
   if (mtx::includes(m_ti.m_cue_creations, m_ti.m_id))
@@ -171,11 +171,11 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   else if (mtx::includes(m_ti.m_track_names, -1))
     m_ti.m_track_name = m_ti.m_track_names[-1];
 
-  // Let's see if the user has specified external timecodes for this track.
-  if (mtx::includes(m_ti.m_all_ext_timecodes, m_ti.m_id))
-    m_ti.m_ext_timecodes = m_ti.m_all_ext_timecodes[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_all_ext_timecodes, -1))
-    m_ti.m_ext_timecodes = m_ti.m_all_ext_timecodes[-1];
+  // Let's see if the user has specified external timestamps for this track.
+  if (mtx::includes(m_ti.m_all_ext_timestamps, m_ti.m_id))
+    m_ti.m_ext_timestamps = m_ti.m_all_ext_timestamps[m_ti.m_id];
+  else if (mtx::includes(m_ti.m_all_ext_timestamps, -1))
+    m_ti.m_ext_timestamps = m_ti.m_all_ext_timestamps[-1];
 
   // Let's see if the user has specified an aspect ratio or display dimensions
   // for this track.
@@ -342,11 +342,11 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     g_packetizers_by_track_num[m_hserialno] = this;
   }
 
-  m_timestamp_factory = timestamp_factory_c::create(m_ti.m_ext_timecodes, m_ti.m_fname, m_ti.m_id);
+  m_timestamp_factory = timestamp_factory_c::create(m_ti.m_ext_timestamps, m_ti.m_fname, m_ti.m_id);
 
-  // If no external timecode file but a default duration has been
-  // given then create a simple timecode factory that generates the
-  // timecodes for the given FPS.
+  // If no external timestamp file but a default duration has been
+  // given then create a simple timestamp factory that generates the
+  // timestamps for the given FPS.
   if (!m_timestamp_factory && (-1 != m_htrack_default_duration)) {
     auto divisor        = m_htrack_default_duration_indicates_fields ? 2 : 1;
     m_timestamp_factory = timestamp_factory_c::create_fps_factory(m_htrack_default_duration / divisor, m_ti.m_tcsync);
@@ -967,7 +967,7 @@ generic_packetizer_c::set_headers() {
   if (!m_track_entry) {
     m_track_entry    = !g_kax_last_entry ? &GetChild<KaxTrackEntry>(*g_kax_tracks) : &GetNextChild<KaxTrackEntry>(*g_kax_tracks, *g_kax_last_entry);
     g_kax_last_entry = m_track_entry;
-    m_track_entry->SetGlobalTimecodeScale((int64_t)g_timecode_scale);
+    m_track_entry->SetGlobalTimecodeScale((int64_t)g_timestamp_scale);
   }
 
   GetChild<KaxTrackNumber>(m_track_entry).SetValue(m_hserialno);
@@ -1251,7 +1251,7 @@ void
 generic_packetizer_c::fix_headers() {
   GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(g_default_tracks[TRACK_TYPE_TO_DEFTRACK_TYPE(m_htrack_type)] == m_hserialno ? 1 : 0);
 
-  m_track_entry->SetGlobalTimecodeScale((int64_t)g_timecode_scale);
+  m_track_entry->SetGlobalTimecodeScale((int64_t)g_timestamp_scale);
 }
 
 void
@@ -1279,8 +1279,8 @@ generic_packetizer_c::account_enqueued_bytes(packet_t &packet,
 
 void
 generic_packetizer_c::add_packet(packet_cptr pack) {
-  if ((0 == m_num_packets) && m_ti.m_reset_timecodes)
-    m_ti.m_tcsync.displacement = -pack->timecode;
+  if ((0 == m_num_packets) && m_ti.m_reset_timestamps)
+    m_ti.m_tcsync.displacement = -pack->timestamp;
 
   ++m_num_packets;
 
@@ -1309,39 +1309,39 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
     m_deferred_packets.push_back(pack);
 }
 
-#define ADJUST_TIMECODE(x) (int64_t)((x + m_correction_timecode_offset + m_append_timecode_offset) * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator) + m_ti.m_tcsync.displacement
+#define ADJUST_TIMESTAMP(x) (int64_t)((x + m_correction_timestamp_offset + m_append_timestamp_offset) * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator) + m_ti.m_tcsync.displacement
 
 void
 generic_packetizer_c::add_packet2(packet_cptr pack) {
   if (pack->has_discard_padding())
     set_required_matroska_version(4);
 
-  pack->timecode   = ADJUST_TIMECODE(pack->timecode);
+  pack->timestamp   = ADJUST_TIMESTAMP(pack->timestamp);
   if (pack->has_bref())
-    pack->bref     = ADJUST_TIMECODE(pack->bref);
+    pack->bref     = ADJUST_TIMESTAMP(pack->bref);
   if (pack->has_fref())
-    pack->fref     = ADJUST_TIMECODE(pack->fref);
+    pack->fref     = ADJUST_TIMESTAMP(pack->fref);
   if (pack->has_duration()) {
     pack->duration = static_cast<int64_t>(pack->duration * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator);
     if (pack->has_discard_padding())
       pack->duration -= std::min(pack->duration, pack->discard_padding.to_ns());
   }
 
-  if (0 > pack->timecode)
+  if (0 > pack->timestamp)
     return;
 
-  // 'timecode < safety_last_timecode' may only occur for B frames. In this
-  // case we have the coding order, e.g. IPB1B2 and the timecodes
+  // 'timestamp < safety_last_timestamp' may only occur for B frames. In this
+  // case we have the coding order, e.g. IPB1B2 and the timestamps
   // I: 0, P: 120, B1: 40, B2: 80.
-  if (!m_relaxed_timecode_checking && (pack->timecode < m_safety_last_timecode) && (0 > pack->fref) && hack_engaged(ENGAGE_ENABLE_TIMECODE_WARNING)) {
+  if (!m_relaxed_timestamp_checking && (pack->timestamp < m_safety_last_timestamp) && (0 > pack->fref) && hack_engaged(ENGAGE_ENABLE_TIMESTAMP_WARNING)) {
     if (track_audio == m_htrack_type) {
-      int64_t needed_timecode_offset  = m_safety_last_timecode + m_safety_last_duration - pack->timecode;
-      m_correction_timecode_offset   += needed_timecode_offset;
-      pack->timecode                 += needed_timecode_offset;
+      int64_t needed_timestamp_offset  = m_safety_last_timestamp + m_safety_last_duration - pack->timestamp;
+      m_correction_timestamp_offset   += needed_timestamp_offset;
+      pack->timestamp                 += needed_timestamp_offset;
       if (pack->has_bref())
-        pack->bref += needed_timecode_offset;
+        pack->bref += needed_timestamp_offset;
       if (pack->has_fref())
-        pack->fref += needed_timecode_offset;
+        pack->fref += needed_timestamp_offset;
 
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format(Y("The current packet's timecode is smaller than that of the previous packet. "
@@ -1352,17 +1352,17 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
                                  "If this error happens more than once and you get this message more than once for a particular track "
                                  "then either is the source file badly mastered, or mkvmerge contains a bug. "
                                  "In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"))
-                 % ((needed_timecode_offset + 500000) / 1000000));
+                 % ((needed_timestamp_offset + 500000) / 1000000));
 
     } else
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format("generic_packetizer_c::add_packet2: timecode < last_timecode (%1% < %2%). %3%\n")
-                 % format_timestamp(pack->timecode) % format_timestamp(m_safety_last_timecode) % BUGMSG);
+                 boost::format("generic_packetizer_c::add_packet2: timestamp < last_timestamp (%1% < %2%). %3%\n")
+                 % format_timestamp(pack->timestamp) % format_timestamp(m_safety_last_timestamp) % BUGMSG);
   }
 
-  m_safety_last_timecode        = pack->timecode;
+  m_safety_last_timestamp        = pack->timestamp;
   m_safety_last_duration        = pack->duration;
-  pack->timecode_before_factory = pack->timecode;
+  pack->timestamp_before_factory = pack->timestamp;
 
   m_packet_queue.push_back(pack);
   if (!m_timestamp_factory || (TFA_IMMEDIATE == m_timestamp_factory_application_mode))
@@ -1390,13 +1390,13 @@ generic_packetizer_c::get_packet() {
   packet_cptr pack = m_packet_queue.front();
   m_packet_queue.pop_front();
 
-  pack->output_order_timecode = timestamp_c::ns(pack->assigned_timecode - std::max(m_codec_delay.to_ns(0), m_seek_pre_roll.to_ns(0)));
+  pack->output_order_timestamp = timestamp_c::ns(pack->assigned_timestamp - std::max(m_codec_delay.to_ns(0), m_seek_pre_roll.to_ns(0)));
 
   account_enqueued_bytes(*pack, -1);
 
-  --m_next_packet_wo_assigned_timecode;
-  if (0 > m_next_packet_wo_assigned_timecode)
-    m_next_packet_wo_assigned_timecode = 0;
+  --m_next_packet_wo_assigned_timestamp;
+  if (0 > m_next_packet_wo_assigned_timestamp)
+    m_next_packet_wo_assigned_timestamp = 0;
 
   return pack;
 }
@@ -1404,21 +1404,21 @@ generic_packetizer_c::get_packet() {
 void
 generic_packetizer_c::apply_factory_once(packet_cptr &packet) {
   if (!m_timestamp_factory) {
-    packet->assigned_timecode = packet->timecode;
-    packet->gap_following     = false;
+    packet->assigned_timestamp = packet->timestamp;
+    packet->gap_following      = false;
   } else
-    packet->gap_following     = m_timestamp_factory->get_next(packet);
+    packet->gap_following      = m_timestamp_factory->get_next(packet);
 
-  packet->factory_applied     = true;
+  packet->factory_applied      = true;
 
   mxverb(4,
          boost::format("apply_factory_once(): source %1% t %2% tbf %3% at %4%\n")
-         % packet->source->get_source_track_num() % packet->timecode % packet->timecode_before_factory % packet->assigned_timecode);
+         % packet->source->get_source_track_num() % packet->timestamp % packet->timestamp_before_factory % packet->assigned_timestamp);
 
-  m_max_timecode_seen           = std::max(m_max_timecode_seen, packet->assigned_timecode + packet->duration);
-  m_reader->m_max_timecode_seen = std::max(m_max_timecode_seen, m_reader->m_max_timecode_seen);
+  m_max_timestamp_seen           = std::max(m_max_timestamp_seen, packet->assigned_timestamp + packet->duration);
+  m_reader->m_max_timestamp_seen = std::max(m_max_timestamp_seen, m_reader->m_max_timestamp_seen);
 
-  ++m_next_packet_wo_assigned_timecode;
+  ++m_next_packet_wo_assigned_timestamp;
 }
 
 void
@@ -1427,7 +1427,7 @@ generic_packetizer_c::apply_factory() {
     return;
 
   // Find the first packet to which the factory hasn't been applied yet.
-  packet_cptr_di p_start = m_packet_queue.begin() + m_next_packet_wo_assigned_timecode;
+  packet_cptr_di p_start = m_packet_queue.begin() + m_next_packet_wo_assigned_timestamp;
 
   while ((m_packet_queue.end() != p_start) && (*p_start)->factory_applied)
     ++p_start;
@@ -1445,11 +1445,11 @@ generic_packetizer_c::apply_factory() {
 void
 generic_packetizer_c::apply_factory_short_queueing(packet_cptr_di &p_start) {
   while (m_packet_queue.end() != p_start) {
-    // Find the next packet with a timecode bigger than the start packet's
-    // timecode. All packets between those two including the start packet
+    // Find the next packet with a timestamp bigger than the start packet's
+    // timestamp. All packets between those two including the start packet
     // and excluding the end packet can be timestamped.
     packet_cptr_di p_end = p_start + 1;
-    while ((m_packet_queue.end() != p_end) && ((*p_end)->timecode_before_factory < (*p_start)->timecode_before_factory))
+    while ((m_packet_queue.end() != p_end) && ((*p_end)->timestamp_before_factory < (*p_start)->timestamp_before_factory))
       ++p_end;
 
     // Abort if no such packet was found, but keep on assigning if the
@@ -1457,7 +1457,7 @@ generic_packetizer_c::apply_factory_short_queueing(packet_cptr_di &p_start) {
     if (!m_has_been_flushed && (m_packet_queue.end() == p_end))
       return;
 
-    // Now assign timecodes to the ones between p_start and p_end...
+    // Now assign timestamps to the ones between p_start and p_end...
     packet_cptr_di p_current;
     for (p_current = p_start + 1; p_current != p_end; ++p_current)
       apply_factory_once(*p_current);
@@ -1478,7 +1478,7 @@ struct packet_sorter_t {
   }
 
   bool operator <(const packet_sorter_t &cmp) const {
-    return (*m_packet_queue)[m_index]->timecode < (*m_packet_queue)[cmp.m_index]->timecode;
+    return (*m_packet_queue)[m_index]->timestamp < (*m_packet_queue)[cmp.m_index]->timestamp;
   }
 };
 
@@ -1499,19 +1499,19 @@ generic_packetizer_c::apply_factory_full_queueing(packet_cptr_di &p_start) {
     if (!m_has_been_flushed && (m_packet_queue.end() == p_end))
       return;
 
-    // Now sort the frames by their timecode as the factory has to be
+    // Now sort the frames by their timestamp as the factory has to be
     // applied to the packets in the same order as they're timestamped.
     std::vector<packet_sorter_t> sorter;
-    bool needs_sorting        = false;
-    int64_t previous_timecode = 0;
-    size_t i                  = distance(m_packet_queue.begin(), p_start);
+    bool needs_sorting         = false;
+    int64_t previous_timestamp = 0;
+    size_t i                   = distance(m_packet_queue.begin(), p_start);
 
     packet_cptr_di p_current;
     for (p_current = p_start; p_current != p_end; ++i, ++p_current) {
       sorter.push_back(packet_sorter_t(i));
-      if (m_packet_queue[i]->timecode < previous_timecode)
+      if (m_packet_queue[i]->timestamp < previous_timestamp)
         needs_sorting = true;
-      previous_timecode = m_packet_queue[i]->timecode;
+      previous_timestamp = m_packet_queue[i]->timestamp;
     }
 
     if (needs_sorting)
@@ -1534,7 +1534,7 @@ generic_packetizer_c::force_duration_on_last_packet() {
   packet_cptr &packet        = m_packet_queue.back();
   packet->duration_mandatory = true;
   mxverb_tid(3, m_ti.m_fname, m_ti.m_id,
-             boost::format("force_duration_on_last_packet: forcing at %1% with %|2$.3f|ms\n") % format_timestamp(packet->timecode) % (packet->duration / 1000.0));
+             boost::format("force_duration_on_last_packet: forcing at %1% with %|2$.3f|ms\n") % format_timestamp(packet->timestamp) % (packet->duration / 1000.0));
 }
 
 int64_t
@@ -1552,24 +1552,24 @@ generic_packetizer_c::calculate_avi_audio_sync(int64_t num_bytes,
 
 void
 generic_packetizer_c::connect(generic_packetizer_c *src,
-                              int64_t append_timecode_offset) {
-  m_free_refs                  = src->m_free_refs;
-  m_next_free_refs             = src->m_next_free_refs;
-  m_track_entry                = src->m_track_entry;
-  m_hserialno                  = src->m_hserialno;
-  m_htrack_type                = src->m_htrack_type;
-  m_htrack_default_duration    = src->m_htrack_default_duration;
-  m_huid                       = src->m_huid;
-  m_hcompression               = src->m_hcompression;
-  m_compressor                 = compressor_c::create(m_hcompression);
-  m_last_cue_timecode          = src->m_last_cue_timecode;
-  m_timestamp_factory          = src->m_timestamp_factory;
-  m_correction_timecode_offset = 0;
+                              int64_t append_timestamp_offset) {
+  m_free_refs                   = src->m_free_refs;
+  m_next_free_refs              = src->m_next_free_refs;
+  m_track_entry                 = src->m_track_entry;
+  m_hserialno                   = src->m_hserialno;
+  m_htrack_type                 = src->m_htrack_type;
+  m_htrack_default_duration     = src->m_htrack_default_duration;
+  m_huid                        = src->m_huid;
+  m_hcompression                = src->m_hcompression;
+  m_compressor                  = compressor_c::create(m_hcompression);
+  m_last_cue_timestamp          = src->m_last_cue_timestamp;
+  m_timestamp_factory           = src->m_timestamp_factory;
+  m_correction_timestamp_offset = 0;
 
-  if (-1 == append_timecode_offset)
-    m_append_timecode_offset   = src->m_max_timecode_seen;
+  if (-1 == append_timestamp_offset)
+    m_append_timestamp_offset = src->m_max_timestamp_seen;
   else
-    m_append_timecode_offset   = append_timecode_offset;
+    m_append_timestamp_offset = append_timestamp_offset;
 
   m_connected_to++;
   if (2 == m_connected_to) {

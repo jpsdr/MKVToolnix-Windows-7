@@ -124,7 +124,7 @@ using namespace libmatroska;
 #define isblanktab(c) (((c) == ' ')  || ((c) == '\t'))
 #define iscr(c)       (((c) == '\n') || ((c) == '\r'))
 
-#define TIMECODE_SCALE 1000000
+#define TIMESTAMP_SCALE 1000000
 
 void mxrun_before_exit(std::function<void()> function);
 void mxexit(int code = -1);

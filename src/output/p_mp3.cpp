@@ -65,11 +65,11 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
   }
 
   if (!warning_printed)
-    m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timecode_offset) {
+    m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timestamp_offset) {
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format("%1% %2%\n")
                  % (boost::format(NY("This audio track contains %1% byte of invalid data which was skipped before timecode %2%.",
-                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timecode - timecode_offset))
+                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timestamp - timestamp_offset))
                  % Y("The audio/video synchronization may have been lost."));
     }));
 }
@@ -188,8 +188,8 @@ mp3_packetizer_c::process(packet_cptr packet) {
   m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   while ((mp3_packet = get_mp3_packet(&mp3header))) {
-    auto new_timecode = m_timestamp_calculator.get_next_timestamp(m_samples_per_frame);
-    auto packet       = std::make_shared<packet_t>(memory_c::clone(mp3_packet, mp3header.framesize), new_timecode.to_ns(), m_packet_duration);
+    auto new_timestamp = m_timestamp_calculator.get_next_timestamp(m_samples_per_frame);
+    auto packet        = std::make_shared<packet_t>(memory_c::clone(mp3_packet, mp3header.framesize), new_timestamp.to_ns(), m_packet_duration);
 
     packet->add_extensions(m_packet_extensions);
 

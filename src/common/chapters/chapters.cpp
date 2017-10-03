@@ -41,9 +41,9 @@ std::string g_default_language;
 /** The default country for all chapter entries that don't have their own. */
 std::string g_default_country;
 
-#define SIMCHAP_RE_TIMECODE_LINE "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d+)"
-#define SIMCHAP_RE_TIMECODE      "^\\s*CHAPTER\\d+\\s*=(.*)"
-#define SIMCHAP_RE_NAME_LINE     "^\\s*CHAPTER\\d+NAME\\s*=(.*)"
+#define SIMCHAP_RE_TIMESTAMP_LINE "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d+)"
+#define SIMCHAP_RE_TIMESTAMP      "^\\s*CHAPTER\\d+\\s*=(.*)"
+#define SIMCHAP_RE_NAME_LINE      "^\\s*CHAPTER\\d+NAME\\s*=(.*)"
 
 /** \brief Throw a special chapter parser exception.
 
@@ -74,8 +74,8 @@ chapter_error(const boost::format &format) {
 */
 bool
 probe_simple(mm_text_io_c *in) {
-  boost::regex timecode_line_re(SIMCHAP_RE_TIMECODE_LINE, boost::regex::perl);
-  boost::regex name_line_re(    SIMCHAP_RE_NAME_LINE,     boost::regex::perl);
+  boost::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE, boost::regex::perl};
+  boost::regex name_line_re{     SIMCHAP_RE_NAME_LINE,      boost::regex::perl};
   boost::smatch matches;
 
   std::string line;
@@ -88,7 +88,7 @@ probe_simple(mm_text_io_c *in) {
     if (line.empty())
       continue;
 
-    if (!boost::regex_search(line, timecode_line_re))
+    if (!boost::regex_search(line, timestamp_line_re))
       return false;
 
     while (in->getline2(line)) {
@@ -118,14 +118,14 @@ probe_simple(mm_text_io_c *in) {
    The parameters are checked for validity.
 
    \param in The text file to read from.
-   \param min_tc An optional timecode. If both \a min_tc and \a max_tc are
+   \param min_ts An optional timestamp. If both \a min_ts and \a max_ts are
      given then only those chapters that lie in the timerange
-     <tt>[min_tc..max_tc]</tt> are kept.
-   \param max_tc An optional timecode. If both \a min_tc and \a max_tc are
+     <tt>[min_ts..max_ts]</tt> are kept.
+   \param max_ts An optional timestamp. If both \a min_ts and \a max_ts are
      given then only those chapters that lie in the timerange
-     <tt>[min_tc..max_tc]</tt> are kept.
+     <tt>[min_ts..max_ts]</tt> are kept.
    \param offset An optional offset that is subtracted from all start and
-     end timecodes after the timerange check has been made.
+     end timestamps after the timerange check has been made.
    \param language This language is added as the \c KaxChapterLanguage
      for all entries.
    \param charset The charset the chapters are supposed to be it. The entries
@@ -137,8 +137,8 @@ probe_simple(mm_text_io_c *in) {
 */
 kax_cptr
 parse_simple(mm_text_io_c *in,
-             int64_t min_tc,
-             int64_t max_tc,
+             int64_t min_ts,
+             int64_t max_ts,
              int64_t offset,
              std::string const &language,
              std::string const &charset) {
@@ -154,11 +154,11 @@ parse_simple(mm_text_io_c *in,
   int64_t start            = 0;
   charset_converter_cptr cc_utf8;
 
-  // The core now uses ns precision timecodes.
-  if (0 < min_tc)
-    min_tc /= 1000000;
-  if (0 < max_tc)
-    max_tc /= 1000000;
+  // The core now uses ns precision timestamps.
+  if (0 < min_ts)
+    min_ts /= 1000000;
+  if (0 < max_ts)
+    max_ts /= 1000000;
   if (0 < offset)
     offset /= 1000000;
 
@@ -170,12 +170,12 @@ parse_simple(mm_text_io_c *in,
                            : !g_default_language.empty() ? g_default_language
                            :                                              "eng";
 
-  boost::regex timecode_line_re(SIMCHAP_RE_TIMECODE_LINE, boost::regex::perl);
-  boost::regex timecode_re(     SIMCHAP_RE_TIMECODE,      boost::regex::perl);
-  boost::regex name_line_re(    SIMCHAP_RE_NAME_LINE,     boost::regex::perl);
+  boost::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE, boost::regex::perl};
+  boost::regex timestamp_re{     SIMCHAP_RE_TIMESTAMP,      boost::regex::perl};
+  boost::regex name_line_re{     SIMCHAP_RE_NAME_LINE,      boost::regex::perl};
   boost::smatch matches;
 
-  std::string line, timecode_as_string;
+  std::string line, timestamp_as_string;
 
   while (in->getline2(line)) {
     strip(line);
@@ -183,7 +183,7 @@ parse_simple(mm_text_io_c *in,
       continue;
 
     if (0 == mode) {
-      if (!boost::regex_match(line, matches, timecode_line_re))
+      if (!boost::regex_match(line, matches, timestamp_line_re))
         chapter_error(boost::format(Y("'%1%' is not a CHAPTERxx=... line.")) % line);
 
       int64_t hour = 0, minute = 0, second = 0, msecs = 0;
@@ -200,10 +200,10 @@ parse_simple(mm_text_io_c *in,
       start = msecs + second * 1000 + minute * 1000 * 60 + hour * 1000 * 60 * 60;
       mode  = 1;
 
-      if (!boost::regex_match(line, matches, timecode_re))
+      if (!boost::regex_match(line, matches, timestamp_re))
         chapter_error(boost::format(Y("'%1%' is not a CHAPTERxx=... line.")) % line);
 
-      timecode_as_string = matches[1].str();
+      timestamp_as_string = matches[1].str();
 
     } else {
       if (!boost::regex_match(line, matches, name_line_re))
@@ -211,11 +211,11 @@ parse_simple(mm_text_io_c *in,
 
       std::string name = matches[1].str();
       if (name.empty())
-        name = timecode_as_string;
+        name = timestamp_as_string;
 
       mode = 0;
 
-      if ((start >= min_tc) && ((start <= max_tc) || (max_tc == -1))) {
+      if ((start >= min_ts) && ((start <= max_ts) || (max_ts == -1))) {
         if (!edition)
           edition = &GetChild<KaxEditionEntry>(*chaps);
 
@@ -248,14 +248,14 @@ parse_simple(mm_text_io_c *in,
    Its parameters don't have to be checked for validity.
 
    \param file_name The name of the text file to read from.
-   \param min_tc An optional timecode. If both \a min_tc and \a max_tc are
+   \param min_ts An optional timestamp. If both \a min_ts and \a max_ts are
      given then only those chapters that lie in the timerange
-     <tt>[min_tc..max_tc]</tt> are kept.
-   \param max_tc An optional timecode. If both \a min_tc and \a max_tc are
+     <tt>[min_ts..max_ts]</tt> are kept.
+   \param max_ts An optional timestamp. If both \a min_ts and \a max_ts are
      given then only those chapters that lie in the timerange
-     <tt>[min_tc..max_tc]</tt> are kept.
+     <tt>[min_ts..max_ts]</tt> are kept.
    \param offset An optional offset that is subtracted from all start and
-     end timecodes after the timerange check has been made.
+     end timestamps after the timerange check has been made.
    \param language This language is added as the \c KaxChapterLanguage
      for entries that don't specifiy it.
    \param charset The charset the chapters are supposed to be it. The entries
@@ -270,12 +270,12 @@ parse_simple(mm_text_io_c *in,
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
 
-   \see ::parse_chapters(mm_text_io_c *in,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,KaxTags **tags)
+   \see ::parse_chapters(mm_text_io_c *in,int64_t min_ts,int64_t max_ts, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,KaxTags **tags)
 */
 kax_cptr
 parse(const std::string &file_name,
-      int64_t min_tc,
-      int64_t max_tc,
+      int64_t min_ts,
+      int64_t max_ts,
       int64_t offset,
       const std::string &language,
       const std::string &charset,
@@ -284,7 +284,7 @@ parse(const std::string &file_name,
       std::unique_ptr<KaxTags> *tags) {
   try {
     mm_text_io_c in(new mm_file_io_c(file_name));
-    return parse(&in, min_tc, max_tc, offset, language, charset, exception_on_error, format, tags);
+    return parse(&in, min_ts, max_ts, offset, language, charset, exception_on_error, format, tags);
 
   } catch (parser_x &e) {
     if (exception_on_error)
@@ -310,14 +310,14 @@ parse(const std::string &file_name,
    The parameters are checked for validity.
 
    \param in The text file to read from.
-   \param min_tc An optional timecode. If both \a min_tc and \a max_tc are
+   \param min_ts An optional timestamp. If both \a min_ts and \a max_ts are
      given then only those chapters that lie in the timerange
-     <tt>[min_tc..max_tc]</tt> are kept.
-   \param max_tc An optional timecode. If both \a min_tc and \a max_tc are
+     <tt>[min_ts..max_ts]</tt> are kept.
+   \param max_ts An optional timestamp. If both \a min_ts and \a max_ts are
      given then only those chapters that lie in the timerange
-     <tt>[min_tc..max_tc]</tt> are kept.
+     <tt>[min_ts..max_ts]</tt> are kept.
    \param offset An optional offset that is subtracted from all start and
-     end timecodes after the timerange check has been made.
+     end timestamps after the timerange check has been made.
    \param language This language is added as the \c KaxChapterLanguage
      for entries that don't specifiy it.
    \param charset The charset the chapters are supposed to be it. The entries
@@ -332,12 +332,12 @@ parse(const std::string &file_name,
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
 
-   \see ::parse_chapters(const std::string &file_name,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,std::unique_ptr<KaxTags> *tags)
+   \see ::parse_chapters(const std::string &file_name,int64_t min_ts,int64_t max_ts, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,std::unique_ptr<KaxTags> *tags)
 */
 kax_cptr
 parse(mm_text_io_c *in,
-      int64_t min_tc,
-      int64_t max_tc,
+      int64_t min_ts,
+      int64_t max_ts,
       int64_t offset,
       const std::string &language,
       const std::string &charset,
@@ -352,19 +352,19 @@ parse(mm_text_io_c *in,
     if (probe_simple(in)) {
       if (format)
         *format = format_e::ogg;
-      return parse_simple(in, min_tc, max_tc, offset, language, charset);
+      return parse_simple(in, min_ts, max_ts, offset, language, charset);
 
     } else if (probe_cue(in)) {
       if (format)
         *format = format_e::cue;
-      return parse_cue(in, min_tc, max_tc, offset, language, charset, tags);
+      return parse_cue(in, min_ts, max_ts, offset, language, charset, tags);
 
     } else if (format)
       *format = format_e::xml;
 
     if (mtx::xml::ebml_chapters_converter_c::probe_file(in->get_file_name())) {
       auto chapters = mtx::xml::ebml_chapters_converter_c::parse_file(in->get_file_name(), true);
-      return select_in_timeframe(chapters.get(), min_tc, max_tc, offset) ? chapters : nullptr;
+      return select_in_timeframe(chapters.get(), min_ts, max_ts, offset) ? chapters : nullptr;
     }
 
     error = (boost::format(Y("Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n")) % in->get_file_name()).str();
@@ -387,15 +387,15 @@ parse(mm_text_io_c *in,
   return {};
 }
 
-/** \brief Get the start timecode for a chapter atom.
+/** \brief Get the start timestamp for a chapter atom.
 
    Its parameters don't have to be checked for validity.
 
-   \param atom The atom for which the start timecode should be returned.
-   \param value_if_not_found The value to return if no start timecode child
+   \param atom The atom for which the start timestamp should be returned.
+   \param value_if_not_found The value to return if no start timestamp child
      element was found. Defaults to -1.
 
-   \return The start timecode or \c value_if_not_found if the atom doesn't
+   \return The start timestamp or \c value_if_not_found if the atom doesn't
      contain such a child element.
 */
 int64_t
@@ -406,15 +406,15 @@ get_start(KaxChapterAtom &atom,
   return !start ? value_if_not_found : static_cast<int64_t>(start->GetValue());
 }
 
-/** \brief Get the end timecode for a chapter atom.
+/** \brief Get the end timestamp for a chapter atom.
 
    Its parameters don't have to be checked for validity.
 
-   \param atom The atom for which the end timecode should be returned.
-   \param value_if_not_found The value to return if no end timecode child
+   \param atom The atom for which the end timestamp should be returned.
+   \param value_if_not_found The value to return if no end timestamp child
      element was found. Defaults to -1.
 
-   \return The start timecode or \c value_if_not_found if the atom doesn't
+   \return The start timestamp or \c value_if_not_found if the atom doesn't
      contain such a child element.
 */
 int64_t
@@ -522,25 +522,25 @@ remove_elements_unsupported_by_webm(EbmlMaster &master) {
 
 /** \brief Remove all chapter atoms that are outside of a time range
 
-   All chapter atoms that lie completely outside the timecode range
-   given with <tt>[min_tc..max_tc]</tt> are deleted. This is the workhorse
+   All chapter atoms that lie completely outside the timestamp range
+   given with <tt>[min_ts..max_ts]</tt> are deleted. This is the workhorse
    for ::select_chapters_in_timeframe
 
    Chapters which start before the window but end inside or after the window
-   are kept as well, and their start timecode is adjusted.
+   are kept as well, and their start timestamp is adjusted.
 
    Its parameters don't have to be checked for validity.
 
-   \param min_tc The minimum timecode to accept.
-   \param max_tc The maximum timecode to accept.
-   \param offset This value is subtracted from both the start and end timecode
+   \param min_ts The minimum timestamp to accept.
+   \param max_ts The maximum timestamp to accept.
+   \param offset This value is subtracted from both the start and end timestamp
      for each chapter after the decision whether or not to keep it has been
      made.
    \param m The master containing the elements to check.
 */
 static void
-remove_entries(int64_t min_tc,
-               int64_t max_tc,
+remove_entries(int64_t min_ts,
+               int64_t max_ts,
                int64_t offset,
                EbmlMaster &m) {
   if (0 == m.ListSize())
@@ -563,7 +563,7 @@ remove_entries(int64_t min_tc,
   bool last_atom_found      = false;
 
   // Determine whether or not an entry has to be removed. Also retrieve
-  // the start and end timecodes.
+  // the start and end timestamps.
   size_t i;
   for (i = 0; m.ListSize() > i; ++i) {
     KaxChapterAtom *atom = dynamic_cast<KaxChapterAtom *>(m[i]);
@@ -610,18 +610,18 @@ remove_entries(int64_t min_tc,
       }
     }
 
-    if (   (entries[i].start < min_tc)
-        || ((max_tc >= 0) && (entries[i].start > max_tc)))
+    if (   (entries[i].start < min_ts)
+        || ((max_ts >= 0) && (entries[i].start > max_ts)))
       entries[i].remove = true;
 
-    if (entries[i].remove && (entries[i].start < min_tc) && (entries[i].end > min_tc))
+    if (entries[i].remove && (entries[i].start < min_ts) && (entries[i].end > min_ts))
       entries[i].spans = true;
 
     mxverb(3,
            boost::format("remove_chapters: entries[%1%]: remove %2% spans %3% start %4% end %5%\n")
            % i % entries[i].remove % entries[i].spans % entries[i].start % entries[i].end);
 
-    // Spanning entries must be kept, and their start timecode must be
+    // Spanning entries must be kept, and their start timestamp must be
     // adjusted. Entries that are to be deleted will be deleted later and
     // have to be skipped for now.
     if (entries[i].remove && !entries[i].spans)
@@ -631,23 +631,23 @@ remove_entries(int64_t min_tc,
     KaxChapterTimeEnd *cte   = static_cast<KaxChapterTimeEnd *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeEnd), false));
 
     if (entries[i].spans)
-      cts->SetValue(min_tc);
+      cts->SetValue(min_ts);
 
     cts->SetValue(cts->GetValue() - offset);
 
     if (cte) {
-      int64_t end_tc = cte->GetValue();
+      int64_t end_ts = cte->GetValue();
 
-      if ((max_tc >= 0) && (end_tc > max_tc))
-        end_tc = max_tc;
-      end_tc -= offset;
+      if ((max_ts >= 0) && (end_ts > max_ts))
+        end_ts = max_ts;
+      end_ts -= offset;
 
-      cte->SetValue(end_tc);
+      cte->SetValue(end_ts);
     }
 
     EbmlMaster *m2 = dynamic_cast<EbmlMaster *>(m[i]);
     if (m2)
-      remove_entries(min_tc, max_tc, offset, *m2);
+      remove_entries(min_ts, max_ts, offset, *m2);
   }
 
   // Now really delete those entries.
@@ -666,9 +666,9 @@ remove_entries(int64_t min_tc,
 /** \brief Merge all chapter atoms sharing the same UID
 
    If two or more chapters with the same UID are encountered on the same
-   level then those are merged into a single chapter. The start timecode
-   is the minimum start timecode of all the chapters, and the end timecode
-   is the maximum end timecode of all the chapters.
+   level then those are merged into a single chapter. The start timestamp
+   is the minimum start timestamp of all the chapters, and the end timestamp
+   is the maximum end timestamp of all the chapters.
 
    The parameters do not have to be checked for validity.
 
@@ -690,10 +690,10 @@ merge_entries(EbmlMaster &master) {
       continue;
 
     // First get the start and end time, if present.
-    int64_t start_tc = get_start(*atom, 0);
-    int64_t end_tc   = get_end(*atom);
+    int64_t start_ts = get_start(*atom, 0);
+    int64_t end_ts   = get_end(*atom);
 
-    mxverb(3, boost::format("chapters: merge_entries: looking for %1% with %2%, %3%\n") % uid % start_tc % end_tc);
+    mxverb(3, boost::format("chapters: merge_entries: looking for %1% with %2%, %3%\n") % uid % start_ts % end_ts);
 
     // Now iterate over all remaining atoms and find those with the same
     // UID.
@@ -715,17 +715,17 @@ merge_entries(EbmlMaster &master) {
       if (!merge_this)
         break;
 
-      // Do the merger! First get the start and end timecodes if present.
-      int64_t merge_start_tc = get_start(*merge_this, 0);
-      int64_t merge_end_tc   = get_end(*merge_this);
+      // Do the merger! First get the start and end timestamps if present.
+      int64_t merge_start_ts = get_start(*merge_this, 0);
+      int64_t merge_end_ts   = get_end(*merge_this);
 
       // Then compare them to the ones we have for the soon-to-be merged
       // chapter and assign accordingly.
-      if (merge_start_tc < start_tc)
-        start_tc = merge_start_tc;
+      if (merge_start_ts < start_ts)
+        start_ts = merge_start_ts;
 
-      if ((-1 == end_tc) || (merge_end_tc > end_tc))
-        end_tc = merge_end_tc;
+      if ((-1 == end_ts) || (merge_end_ts > end_ts))
+        end_ts = merge_end_ts;
 
       // Move all chapter atoms from the merged entry into the target
       // entry so that they will be merged recursively as well.
@@ -742,19 +742,19 @@ merge_entries(EbmlMaster &master) {
           ++merge_child_idx;
       }
 
-      mxverb(3, boost::format("chapters: merge_entries:   found one at %1% with %2%, %3%; merged to %4%, %5%\n") % merge_idx % merge_start_tc % merge_end_tc % start_tc % end_tc);
+      mxverb(3, boost::format("chapters: merge_entries:   found one at %1% with %2%, %3%; merged to %4%, %5%\n") % merge_idx % merge_start_ts % merge_end_ts % start_ts % end_ts);
 
       // Finally remove the entry itself.
       delete master[merge_idx];
       master.Remove(merge_idx);
     }
 
-    // Assign the start and end timecode to the chapter. Only assign an
-    // end timecode if one was present in at least one of the merged
+    // Assign the start and end timestamp to the chapter. Only assign an
+    // end timestamp if one was present in at least one of the merged
     // chapter atoms.
-    GetChild<KaxChapterTimeStart>(*atom).SetValue(start_tc);
-    if (-1 != end_tc)
-      GetChild<KaxChapterTimeEnd>(*atom).SetValue(end_tc);
+    GetChild<KaxChapterTimeStart>(*atom).SetValue(start_ts);
+    if (-1 != end_ts)
+      GetChild<KaxChapterTimeEnd>(*atom).SetValue(end_ts);
   }
 
   // Recusively merge atoms.
@@ -767,23 +767,23 @@ merge_entries(EbmlMaster &master) {
 
 /** \brief Remove all chapter atoms that are outside of a time range
 
-   All chapter atoms that lie completely outside the timecode range
-   given with <tt>[min_tc..max_tc]</tt> are deleted.
+   All chapter atoms that lie completely outside the timestamp range
+   given with <tt>[min_ts..max_ts]</tt> are deleted.
 
    Chapters which start before the window but end inside or after the window
-   are kept as well, and their start timecode is adjusted.
+   are kept as well, and their start timestamp is adjusted.
 
    If two or more chapters with the same UID are encountered on the same
-   level then those are merged into a single chapter. The start timecode
-   is the minimum start timecode of all the chapters, and the end timecode
-   is the maximum end timecode of all the chapters.
+   level then those are merged into a single chapter. The start timestamp
+   is the minimum start timestamp of all the chapters, and the end timestamp
+   is the maximum end timestamp of all the chapters.
 
    The parameters are checked for validity.
 
    \param chapters The chapters to check.
-   \param min_tc The minimum timecode to accept.
-   \param max_tc The maximum timecode to accept.
-   \param offset This value is subtracted from both the start and end timecode
+   \param min_ts The minimum timestamp to accept.
+   \param max_ts The maximum timestamp to accept.
+   \param offset This value is subtracted from both the start and end timestamp
      for each chapter after the decision whether or not to keep it has been
      made.
 
@@ -791,8 +791,8 @@ merge_entries(EbmlMaster &master) {
 */
 bool
 select_in_timeframe(KaxChapters *chapters,
-                    int64_t min_tc,
-                    int64_t max_tc,
+                    int64_t min_ts,
+                    int64_t max_ts,
                     int64_t offset) {
   // Check the parameters.
   if (!chapters)
@@ -803,7 +803,7 @@ select_in_timeframe(KaxChapters *chapters,
   for (master_idx = 0; chapters->ListSize() > master_idx; master_idx++) {
     EbmlMaster *work_master = dynamic_cast<KaxEditionEntry *>((*chapters)[master_idx]);
     if (work_master)
-      remove_entries(min_tc, max_tc, offset, *work_master);
+      remove_entries(min_ts, max_ts, offset, *work_master);
   }
 
   // Count the number of atoms in each edition. Delete editions without
@@ -953,22 +953,22 @@ move_by_edition(KaxChapters &dst,
   src.RemoveAll();
 }
 
-/** \brief Adjust all start and end timecodes by an offset
+/** \brief Adjust all start and end timestamps by an offset
 
-   All start and end timecodes are adjusted by an offset. This is done
+   All start and end timestamps are adjusted by an offset. This is done
    recursively.
 
    Its parameters don't have to be checked for validity.
 
    \param master A master containint the elements to adjust. This can be
      a KaxChapters, KaxEditionEntry or KaxChapterAtom object.
-   \param offset The offset to add to each timecode. Can be negative. If
-     the resulting timecode would be smaller than zero then it will be set
+   \param offset The offset to add to each timestamp. Can be negative. If
+     the resulting timestamp would be smaller than zero then it will be set
      to zero.
 */
 void
-adjust_timecodes(EbmlMaster &master,
-                 int64_t offset) {
+adjust_timestamps(EbmlMaster &master,
+                  int64_t offset) {
   size_t master_idx;
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
     if (!Is<KaxChapterAtom>(master[master_idx]))
@@ -988,7 +988,7 @@ adjust_timecodes(EbmlMaster &master,
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
     EbmlMaster *work_master = dynamic_cast<EbmlMaster *>(master[master_idx]);
     if (work_master)
-      adjust_timecodes(*work_master, offset);
+      adjust_timestamps(*work_master, offset);
   }
 }
 

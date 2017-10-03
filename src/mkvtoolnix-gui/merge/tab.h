@@ -142,8 +142,8 @@ public slots:
   virtual void onDelayChanged(QString newValue);
   virtual void onStretchByChanged(QString newValue);
   virtual void onDefaultDurationChanged(QString newValue);
-  virtual void onTimecodesChanged(QString newValue);
-  virtual void onBrowseTimecodes();
+  virtual void onTimestampsChanged(QString newValue);
+  virtual void onBrowseTimestamps();
   virtual void onFixBitstreamTimingInfoChanged(bool newValue);
   virtual void onBrowseTrackTags();
   virtual void onSetAspectRatio();

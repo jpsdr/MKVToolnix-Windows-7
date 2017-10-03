@@ -39,10 +39,10 @@ subtitles_c::process(generic_packetizer_c *p) {
 
 // ------------------------------------------------------------
 
-#define SRT_RE_VALUE         "\\s*(-?)\\s*(\\d+)"
-#define SRT_RE_TIMECODE      SRT_RE_VALUE ":" SRT_RE_VALUE ":" SRT_RE_VALUE "[,\\.:]" SRT_RE_VALUE
-#define SRT_RE_TIMECODE_LINE "^" SRT_RE_TIMECODE "\\s*[\\-\\s]+>\\s*" SRT_RE_TIMECODE "\\s*"
-#define SRT_RE_COORDINATES   "([XY]\\d+:\\d+\\s*){4}\\s*$"
+#define SRT_RE_VALUE          "\\s*(-?)\\s*(\\d+)"
+#define SRT_RE_TIMESTAMP      SRT_RE_VALUE ":" SRT_RE_VALUE ":" SRT_RE_VALUE "[,\\.:]" SRT_RE_VALUE
+#define SRT_RE_TIMESTAMP_LINE "^" SRT_RE_TIMESTAMP "\\s*[\\-\\s]+>\\s*" SRT_RE_TIMESTAMP "\\s*"
+#define SRT_RE_COORDINATES    "([XY]\\d+:\\d+\\s*){4}\\s*$"
 
 bool
 srt_parser_c::probe(mm_text_io_c *io) {
@@ -59,9 +59,9 @@ srt_parser_c::probe(mm_text_io_c *io) {
       return false;
 
     s = io->getline(100);
-    boost::regex timecode_re(SRT_RE_TIMECODE_LINE, boost::regex::perl);
+    boost::regex timestamp_re(SRT_RE_TIMESTAMP_LINE, boost::regex::perl);
     boost::smatch matches;
-    if (!boost::regex_search(s, timecode_re))
+    if (!boost::regex_search(s, timestamp_re))
       return false;
 
     s = io->getline();
@@ -86,18 +86,18 @@ srt_parser_c::srt_parser_c(mm_text_io_c *io,
 
 void
 srt_parser_c::parse() {
-  boost::regex timecode_re(SRT_RE_TIMECODE_LINE, boost::regex::perl);
+  boost::regex timestamp_re(SRT_RE_TIMESTAMP_LINE, boost::regex::perl);
   boost::regex number_re("^\\d+$", boost::regex::perl);
   boost::regex coordinates_re(SRT_RE_COORDINATES, boost::regex::perl);
 
   int64_t start                 = 0;
   int64_t end                   = 0;
   int64_t previous_start        = 0;
-  bool timecode_warning_printed = false;
+  bool timestamp_warning_printed = false;
   parser_state_e state          = STATE_INITIAL;
   int line_number               = 0;
   unsigned int subtitle_number  = 0;
-  unsigned int timecode_number  = 0;
+  unsigned int timestamp_number  = 0;
   std::string subtitles;
 
   m_io->setFilePointer(0, seek_beginning);
@@ -132,7 +132,7 @@ srt_parser_c::parse() {
 
     } else if (STATE_TIME == state) {
       boost::smatch matches;
-      if (!boost::regex_search(s, matches, timecode_re)) {
+      if (!boost::regex_search(s, matches, timestamp_re)) {
         mxwarn_tid(m_file_name, m_tid, boost::format(Y("Error in line %1%: expected a SRT timecode line but found something else. Aborting this file.\n")) % line_number);
         break;
       }
@@ -173,7 +173,7 @@ srt_parser_c::parse() {
       // The previous entry is done now. Append it to the list of subtitles.
       if (!subtitles.empty()) {
         strip_back(subtitles, true);
-        add(start, end, timecode_number, subtitles.c_str());
+        add(start, end, timestamp_number, subtitles.c_str());
       }
 
       // Calculate the start and end time in ns precision for the following entry.
@@ -204,20 +204,20 @@ srt_parser_c::parse() {
           end *= -1;
       }
 
-      // There are files for which start timecodes overlap. Matroska requires
-      // blocks to be sorted by their timecode. mkvmerge does this at the end
+      // There are files for which start timestamps overlap. Matroska requires
+      // blocks to be sorted by their timestamp. mkvmerge does this at the end
       // of this function, but warn the user that the original order is being
       // changed.
-      if (!timecode_warning_printed && (start < previous_start)) {
+      if (!timestamp_warning_printed && (start < previous_start)) {
         mxwarn_tid(m_file_name, m_tid, boost::format(Y("Warning in line %1%: The start timecode is smaller than that of the previous entry. "
                                                        "All entries from this file will be sorted by their start time.\n")) % line_number);
-        timecode_warning_printed = true;
+        timestamp_warning_printed = true;
       }
 
-      previous_start  = start;
-      subtitles       = "";
-      state           = STATE_SUBS;
-      timecode_number = subtitle_number;
+      previous_start   = start;
+      subtitles        = "";
+      state            = STATE_SUBS;
+      timestamp_number = subtitle_number;
 
     } else if (STATE_SUBS == state) {
       if (!subtitles.empty())
@@ -237,7 +237,7 @@ srt_parser_c::parse() {
 
   if (!subtitles.empty()) {
     strip_back(subtitles, true);
-    add(start, end, timecode_number, subtitles.c_str());
+    add(start, end, timestamp_number, subtitles.c_str());
   }
 
   sort();

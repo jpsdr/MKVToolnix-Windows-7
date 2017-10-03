@@ -40,11 +40,11 @@ enum cue_strategy_e {
   CUE_STRATEGY_SPARSE
 };
 
-struct timecode_sync_t {
+struct timestamp_sync_t {
   int64_t displacement;
   double numerator, denominator;
 
-  timecode_sync_t()
+  timestamp_sync_t()
   : displacement(0)
   , numerator(1.0)
   , denominator(1.0)
@@ -247,11 +247,11 @@ public:
   bool m_aspect_ratio_given, m_aspect_ratio_is_factor, m_display_dimensions_given;
   option_source_e m_display_dimensions_source;
 
-  std::map<int64_t, timecode_sync_t> m_timecode_syncs; // As given on the command line
-  timecode_sync_t m_tcsync;                       // For this very track
+  std::map<int64_t, timestamp_sync_t> m_timestamp_syncs; // As given on the command line
+  timestamp_sync_t m_tcsync;                       // For this very track
 
-  std::map<int64_t, bool> m_reset_timecodes_specs;
-  bool m_reset_timecodes;
+  std::map<int64_t, bool> m_reset_timestamps_specs;
+  bool m_reset_timestamps;
 
   std::map<int64_t, cue_strategy_e> m_cue_creations; // As given on the command line
   cue_strategy_e m_cues;          // For this very track
@@ -286,8 +286,8 @@ public:
   std::map<int64_t, std::string> m_track_names; // As given on the command line
   std::string m_track_name;            // For this very track
 
-  std::map<int64_t, std::string> m_all_ext_timecodes; // As given on the command line
-  std::string m_ext_timecodes;         // For this very track
+  std::map<int64_t, std::string> m_all_ext_timestamps; // As given on the command line
+  std::string m_ext_timestamps;         // For this very track
 
   std::map<int64_t, pixel_crop_t> m_pixel_crop_list; // As given on the command line
   option_with_source_c<pixel_crop_t> m_pixel_cropping;  // For this very track

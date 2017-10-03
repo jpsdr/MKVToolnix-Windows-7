@@ -38,7 +38,7 @@ generic_video_packetizer_c::generic_video_packetizer_c(generic_reader_c *p_reade
   , m_width{width}
   , m_height{height}
   , m_frames_output{}
-  , m_ref_timecode{-1}
+  , m_ref_timestamp{-1}
   , m_duration_shift{}
 {
   set_track_type(track_video);
@@ -62,7 +62,7 @@ generic_video_packetizer_c::set_headers() {
 
 // Semantics:
 // bref == -1: I frame, no references
-// bref == -2: P or B frame, use timecode of last I / P frame as the bref
+// bref == -2: P or B frame, use timestamp of last I / P frame as the bref
 // bref > 0:   P or B frame, use this bref as the backward reference
 //             (absolute reference, not relative!)
 // fref == 0:  P frame, no forward reference
@@ -70,11 +70,11 @@ generic_video_packetizer_c::set_headers() {
 //             not relative!)
 int
 generic_video_packetizer_c::process(packet_cptr packet) {
-  if ((0.0 == m_fps) && (-1 == packet->timecode))
+  if ((0.0 == m_fps) && (-1 == packet->timestamp))
     mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n")) % BUGMSG);
 
-  if (-1 == packet->timecode)
-    packet->timecode = (int64_t)(1000000000.0 * m_frames_output / m_fps) + m_duration_shift;
+  if (-1 == packet->timestamp)
+    packet->timestamp = (int64_t)(1000000000.0 * m_frames_output / m_fps) + m_duration_shift;
 
   if (-1 == packet->duration) {
     if (0.0 == m_fps)
@@ -88,16 +88,16 @@ generic_video_packetizer_c::process(packet_cptr packet) {
   ++m_frames_output;
 
   if (VFT_IFRAME == packet->bref)
-    // Add a key frame and save its timecode so that we can reference it later.
-    m_ref_timecode = packet->timecode;
+    // Add a key frame and save its timestamp so that we can reference it later.
+    m_ref_timestamp = packet->timestamp;
 
   else {
-    // P or B frame. Use our last timecode if the bref is -2, or the provided
+    // P or B frame. Use our last timestamp if the bref is -2, or the provided
     // one otherwise. The forward ref is always taken from the reader.
     if (VFT_PFRAMEAUTOMATIC == packet->bref)
-      packet->bref = m_ref_timecode;
+      packet->bref = m_ref_timestamp;
     if (VFT_NOBFRAME == packet->fref)
-      m_ref_timecode = packet->timecode;
+      m_ref_timestamp = packet->timestamp;
   }
 
   add_packet(packet);

@@ -380,7 +380,7 @@ frame_c::init() {
   m_header           = header_c{};
   m_stream_position  = 0;
   m_garbage_size     = 0;
-  m_timecode.reset();
+  m_timestamp.reset();
   m_data.reset();
 }
 
@@ -420,8 +420,8 @@ parser_c::parser_c()
 }
 
 void
-parser_c::add_timecode(timestamp_c const &timecode) {
-  m_provided_timecodes.push_back(timecode);
+parser_c::add_timestamp(timestamp_c const &timestamp) {
+  m_provided_timestamps.push_back(timestamp);
 }
 
 void
@@ -685,9 +685,9 @@ parser_c::decode_header(unsigned char const *buffer,
 
 void
 parser_c::push_frame(frame_c &frame) {
-  if (!m_provided_timecodes.empty()) {
-    frame.m_timecode = m_provided_timecodes.front();
-    m_provided_timecodes.pop_front();
+  if (!m_provided_timestamps.empty()) {
+    frame.m_timestamp = m_provided_timestamps.front();
+    m_provided_timestamps.pop_front();
   }
 
   frame.m_stream_position  = m_parsed_stream_position;

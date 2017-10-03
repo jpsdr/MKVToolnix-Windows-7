@@ -92,7 +92,7 @@ pcm_packetizer_c::size_to_samples(int64_t size)
 
 int
 pcm_packetizer_c::process(packet_cptr packet) {
-  if (packet->has_timecode() && (packet->data->get_size() >= m_min_packet_size))
+  if (packet->has_timestamp() && (packet->data->get_size() >= m_min_packet_size))
     return process_packaged(packet);
 
   m_buffer.add(packet->data->get_buffer(), packet->data->get_size());
@@ -126,12 +126,12 @@ pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
 
     m_buffer.remove(buffer_size);
 
-    packet->timecode -= size_to_samples(buffer_size) * m_s2ts;
+    packet->timestamp -= size_to_samples(buffer_size) * m_s2ts;
   }
 
   auto samples_here = size_to_samples(packet->data->get_size());
   packet->duration  = samples_here * m_s2ts;
-  m_samples_output  = packet->timecode / m_s2ts + samples_here;
+  m_samples_output  = packet->timestamp / m_s2ts + samples_here;
 
   ++m_num_durations_provided;
 

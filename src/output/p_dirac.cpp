@@ -27,7 +27,7 @@ using namespace libmatroska;
 dirac_video_packetizer_c::dirac_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti)
   : generic_packetizer_c(p_reader, p_ti)
   , m_headers_found(false)
-  , m_previous_timecode(-1)
+  , m_previous_timestamp(-1)
 {
   set_track_type(track_video);
   set_codec_id(MKV_V_DIRAC);
@@ -71,8 +71,8 @@ dirac_video_packetizer_c::set_headers() {
 
 int
 dirac_video_packetizer_c::process(packet_cptr packet) {
-  if (-1 != packet->timecode)
-    m_parser.add_timecode(packet->timecode);
+  if (-1 != packet->timestamp)
+    m_parser.add_timestamp(packet->timestamp);
 
   m_parser.add_bytes(packet->data->get_buffer(), packet->data->get_size());
 
@@ -105,9 +105,9 @@ dirac_video_packetizer_c::flush_frames() {
   while (m_parser.is_frame_available()) {
     dirac::frame_cptr frame = m_parser.get_frame();
 
-    add_packet(new packet_t(frame->data, frame->timecode, frame->duration, frame->contains_sequence_header ? -1 : m_previous_timecode));
+    add_packet(new packet_t(frame->data, frame->timestamp, frame->duration, frame->contains_sequence_header ? -1 : m_previous_timestamp));
 
-    m_previous_timecode = frame->timecode;
+    m_previous_timestamp = frame->timestamp;
   }
 }
 

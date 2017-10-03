@@ -147,7 +147,7 @@ public:
   header_c m_header;
   uint64_t m_stream_position;
   size_t m_garbage_size;
-  timestamp_c m_timecode;
+  timestamp_c m_timestamp;
   memory_cptr m_data;
 
 public:
@@ -175,7 +175,7 @@ protected:
 
 protected:
   std::deque<frame_c> m_frames;
-  std::deque<timestamp_c> m_provided_timecodes;
+  std::deque<timestamp_c> m_provided_timestamps;
   mtx::bytes::buffer_c m_buffer;
   unsigned char const *m_fixed_buffer;
   size_t m_fixed_buffer_size;
@@ -189,7 +189,7 @@ protected:
 
 public:
   parser_c();
-  void add_timecode(timestamp_c const &timecode);
+  void add_timestamp(timestamp_c const &timestamp);
 
   void add_bytes(memory_cptr const &mem);
   void add_bytes(unsigned char const *buffer, size_t size);

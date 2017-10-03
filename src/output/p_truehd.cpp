@@ -31,7 +31,7 @@ truehd_packetizer_c::truehd_packetizer_c(generic_reader_c *p_reader,
   : generic_packetizer_c{p_reader, p_ti}
   , m_first_frame{true}
   , m_current_samples_per_frame{}
-  , m_ref_timecode{}
+  , m_ref_timestamp{}
   , m_timestamp_calculator{sampling_rate}
 {
   m_first_truehd_header.m_codec         = codec;
@@ -55,8 +55,8 @@ truehd_packetizer_c::set_headers() {
 
 void
 truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame,
-                                    int64_t provided_timecode) {
-  m_timestamp_calculator.add_timestamp(provided_timecode);
+                                    int64_t provided_timestamp) {
+  m_timestamp_calculator.add_timestamp(provided_timestamp);
 
   if (frame->is_ac3())
     return;
@@ -67,12 +67,12 @@ truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame,
   }
 
   auto samples   = 0 == frame->m_samples_per_frame ? m_current_samples_per_frame : frame->m_samples_per_frame;
-  auto timecode  = m_timestamp_calculator.get_next_timestamp(samples).to_ns();
+  auto timestamp = m_timestamp_calculator.get_next_timestamp(samples).to_ns();
   auto duration  = m_timestamp_calculator.get_duration(samples).to_ns();
 
-  add_packet(std::make_shared<packet_t>(frame->m_data, timecode, duration, frame->is_sync() ? -1 : m_ref_timecode));
+  add_packet(std::make_shared<packet_t>(frame->m_data, timestamp, duration, frame->is_sync() ? -1 : m_ref_timestamp));
 
-  m_ref_timecode = timecode;
+  m_ref_timestamp = timestamp;
 }
 
 int

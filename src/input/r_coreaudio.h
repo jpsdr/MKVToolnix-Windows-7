@@ -29,7 +29,7 @@ struct coreaudio_chunk_t {
 using coreaudio_chunk_itr = std::vector<coreaudio_chunk_t>::iterator;
 
 struct coreaudio_packet_t {
-  uint64_t m_position, m_size, m_duration, m_timecode;
+  uint64_t m_position, m_size, m_duration, m_timestamp;
 };
 using coreaudio_packet_itr = std::vector<coreaudio_packet_t>::iterator;
 
@@ -49,7 +49,7 @@ private:
   double m_sample_rate;
   unsigned int m_flags, m_bytes_per_packet, m_frames_per_packet, m_channels, m_bits_per_sample;
 
-  samples_to_timestamp_converter_c m_frames_to_timecode;
+  samples_to_timestamp_converter_c m_frames_to_timestamp;
 
   debugging_option_c m_debug_headers, m_debug_chunks, m_debug_packets;
 

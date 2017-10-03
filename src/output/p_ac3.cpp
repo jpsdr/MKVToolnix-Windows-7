@@ -72,11 +72,11 @@ ac3_packetizer_c::get_frame() {
 
   if (!warning_printed) {
     auto bytes = frame.m_garbage_size;
-    m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timecode_offset) {
+    m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timestamp_offset) {
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format("%1% %2%\n")
                  % (boost::format(NY("This audio track contains %1% byte of invalid data which was skipped before timecode %2%.",
-                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timecode - timecode_offset))
+                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timestamp - timestamp_offset))
                  % Y("The audio/video synchronization may have been lost."));
     }));
   }
@@ -104,7 +104,7 @@ ac3_packetizer_c::set_headers() {
 
 int
 ac3_packetizer_c::process(packet_cptr packet) {
-  // mxinfo(boost::format("tc %1% size %2%\n") % format_timestamp(packet->timecode) % packet->data->get_size());
+  // mxinfo(boost::format("tc %1% size %2%\n") % format_timestamp(packet->timestamp) % packet->data->get_size());
 
   m_timestamp_calculator.add_timestamp(packet, m_stream_position);
   m_stream_position += packet->data->get_size();
@@ -117,13 +117,13 @@ ac3_packetizer_c::process(packet_cptr packet) {
 }
 
 void
-ac3_packetizer_c::set_timecode_and_add_packet(packet_cptr const &packet,
+ac3_packetizer_c::set_timestamp_and_add_packet(packet_cptr const &packet,
                                               uint64_t packet_stream_position) {
-  packet->timecode = m_timestamp_calculator.get_next_timestamp(m_samples_per_packet, packet_stream_position).to_ns();
+  packet->timestamp = m_timestamp_calculator.get_next_timestamp(m_samples_per_packet, packet_stream_position).to_ns();
   packet->duration = m_packet_duration;
 
   // if (packet_stream_position)
-  //   mxinfo(boost::format("  ts %1% position in %2% out %3%\n") % format_timestamp(packet->timecode) % format_number(m_stream_position) % format_number(*packet_stream_position));
+  //   mxinfo(boost::format("  ts %1% position in %2% out %3%\n") % format_timestamp(packet->timestamp) % format_number(m_stream_position) % format_number(*packet_stream_position));
 
   add_packet(packet);
 
@@ -151,7 +151,7 @@ ac3_packetizer_c::flush_packets() {
     auto packet = std::make_shared<packet_t>(frame.m_data);
     packet->add_extensions(m_packet_extensions);
 
-    set_timecode_and_add_packet(packet, frame.m_stream_position);
+    set_timestamp_and_add_packet(packet, frame.m_stream_position);
 
     m_packet_extensions.clear();
   }

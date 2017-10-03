@@ -201,7 +201,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("delay",                      m_delay);
   settings.setValue("stretchBy",                  m_stretchBy);
   settings.setValue("defaultDuration",            m_defaultDuration);
-  settings.setValue("timecodes",                  m_timecodes);
+  settings.setValue("timecodes",                  m_timestamps);
   settings.setValue("aspectRatio",                m_aspectRatio);
   settings.setValue("displayWidth",               m_displayWidth);
   settings.setValue("displayHeight",              m_displayHeight);
@@ -246,7 +246,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_delay                      = l.settings.value("delay").toString();
   m_stretchBy                  = l.settings.value("stretchBy").toString();
   m_defaultDuration            = l.settings.value("defaultDuration").toString();
-  m_timecodes                  = l.settings.value("timecodes").toString();
+  m_timestamps                 = l.settings.value("timecodes").toString();
   m_aspectRatio                = l.settings.value("aspectRatio").toString();
   m_displayWidth               = l.settings.value("displayWidth").toString();
   m_displayHeight              = l.settings.value("displayHeight").toString();
@@ -385,8 +385,8 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     opt.options << Q("--default-duration") << Q("%1:%2%3").arg(sid).arg(m_defaultDuration).arg(unit);
   }
 
-  if (!m_timecodes.isEmpty())
-    opt.options << Q("--timecodes") << Q("%1:%2").arg(sid).arg(m_timecodes);
+  if (!m_timestamps.isEmpty())
+    opt.options << Q("--timecodes") << Q("%1:%2").arg(sid).arg(m_timestamps);
 
   if (m_fixBitstreamTimingInfo)
     opt.options << Q("--fix-bitstream-timing-information") << Q("%1:1").arg(sid);

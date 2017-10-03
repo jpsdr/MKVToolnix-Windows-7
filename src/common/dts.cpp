@@ -848,8 +848,8 @@ header_t::decode_exss_header(unsigned char const *buf,
     if (static_fields_present) {
       reference_clock_code     = bc.get_bits(2);             // reference clock code
       substream_frame_duration = (bc.get_bits(3) + 1) * 512; // substream frame duration
-      if (bc.get_bit())                                      // timecode presence flag
-        bc.skip_bits(32 + 4);                                // timecode data
+      if (bc.get_bit())                                      // timestamp presence flag
+        bc.skip_bits(32 + 4);                                // timestamp data
 
       num_presentations = bc.get_bits(3) + 1;
       num_assets        = bc.get_bits(3) + 1;

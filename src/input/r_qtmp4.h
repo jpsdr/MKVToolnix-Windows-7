@@ -140,22 +140,22 @@ struct qt_frame_offset_t {
 
 struct qt_index_t {
   int64_t file_pos, size;
-  int64_t timecode, duration;
+  int64_t timestamp, duration;
   bool    is_keyframe;
 
   qt_index_t()
     : file_pos{}
     , size{}
-    , timecode{}
+    , timestamp{}
     , duration{}
     , is_keyframe{}
   {
   };
 
-  qt_index_t(int64_t p_file_pos, int64_t p_size, int64_t p_timecode, int64_t p_duration, bool p_is_keyframe)
+  qt_index_t(int64_t p_file_pos, int64_t p_size, int64_t p_timestamp, int64_t p_duration, bool p_is_keyframe)
     : file_pos{p_file_pos}
     , size{p_size}
-    , timecode{p_timecode}
+    , timestamp{p_timestamp}
     , duration{p_duration}
     , is_keyframe{p_is_keyframe}
   {
@@ -216,7 +216,7 @@ class qtmp4_reader_c;
 struct qtmp4_demuxer_c {
   qtmp4_reader_c &m_reader;
 
-  bool ok{}, m_tables_updated{}, m_timecodes_calculated{};
+  bool ok{}, m_tables_updated{}, m_timestamps_calculated{};
 
   char type;
   uint32_t id, container_id;
@@ -240,7 +240,7 @@ struct qtmp4_demuxer_c {
   std::vector<qt_random_access_point_t> random_access_point_table;
   std::unordered_map<uint32_t, std::vector<qt_sample_to_group_t> > sample_to_group_tables;
 
-  std::vector<int64_t> timecodes, durations, frame_indices;
+  std::vector<int64_t> timestamps, durations, frame_indices;
 
   std::vector<qt_index_t> m_index;
   std::vector<qt_fragment_t> m_fragments;
@@ -313,8 +313,8 @@ struct qtmp4_demuxer_c {
 
   void calculate_frame_rate();
   int64_t to_nsecs(int64_t value, boost::optional<int64_t> time_scale_to_use = boost::none);
-  void calculate_timecodes();
-  void adjust_timecodes(int64_t delta);
+  void calculate_timestamps();
+  void adjust_timestamps(int64_t delta);
 
   bool update_tables();
   void apply_edit_list();
@@ -363,7 +363,7 @@ struct qtmp4_demuxer_c {
   void set_packetizer_display_dimensions();
   void set_packetizer_colour_properties();
 
-  boost::optional<int64_t> min_timecode() const;
+  boost::optional<int64_t> min_timestamp() const;
 
   void determine_codec();
 
@@ -374,8 +374,8 @@ private:
   void mark_key_frames_from_key_frame_table();
   void mark_open_gop_random_access_points_as_key_frames();
 
-  void calculate_timecodes_constant_sample_size();
-  void calculate_timecodes_variable_sample_size();
+  void calculate_timestamps_constant_sample_size();
+  void calculate_timestamps_variable_sample_size();
 
   bool parse_esds_atom(mm_mem_io_c &memio, int level);
   uint32_t read_esds_descr_len(mm_mem_io_c &memio);
@@ -415,22 +415,22 @@ operator <<(std::ostream &out,
 
 struct qtmp4_chapter_entry_t {
   std::string m_name;
-  int64_t m_timecode;
+  int64_t m_timestamp;
 
   qtmp4_chapter_entry_t()
-    : m_timecode{}
+    : m_timestamp{}
   {
   }
 
   qtmp4_chapter_entry_t(const std::string &name,
-                        int64_t timecode)
+                        int64_t timestamp)
     : m_name{name}
-    , m_timecode{timecode}
+    , m_timestamp{timestamp}
   {
   }
 
   bool operator <(const qtmp4_chapter_entry_t &cmp) const {
-    return m_timecode < cmp.m_timecode;
+    return m_timestamp < cmp.m_timestamp;
   }
 };
 
@@ -450,7 +450,7 @@ private:
   qt_fragment_t *m_fragment;
   qtmp4_demuxer_c *m_track_for_fragment;
 
-  bool m_timecodes_calculated;
+  bool m_timestamps_calculated;
 
   debugging_option_c m_debug_chapters, m_debug_headers, m_debug_tables, m_debug_tables_full, m_debug_interleaving, m_debug_resync;
 
@@ -477,8 +477,8 @@ public:
 protected:
   virtual void parse_headers();
   virtual void verify_track_parameters_and_update_indexes();
-  virtual void calculate_timecodes();
-  virtual boost::optional<int64_t> calculate_global_min_timecode() const;
+  virtual void calculate_timestamps();
+  virtual boost::optional<int64_t> calculate_global_min_timestamp() const;
   virtual qt_atom_t read_atom(mm_io_c *read_from = nullptr, bool exit_on_error = true);
   virtual bool resync_to_top_level_atom(uint64_t start_pos);
   virtual void parse_itunsmpb(std::string data);

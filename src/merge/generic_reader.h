@@ -55,18 +55,18 @@ public:
   std::vector<generic_packetizer_c *> m_reader_packetizers;
   generic_packetizer_c *m_ptzr_first_packet;
   std::vector<int64_t> m_requested_track_ids, m_available_track_ids, m_used_track_ids;
-  int64_t m_max_timecode_seen;
+  int64_t m_max_timestamp_seen;
   mtx::chapters::kax_cptr m_chapters;
   bool m_appending;
   int m_num_video_tracks, m_num_audio_tracks, m_num_subtitle_tracks;
 
-  int64_t m_reference_timecode_tolerance;
+  int64_t m_reference_timestamp_tolerance;
 
 protected:
   id_result_t m_id_results_container;
   std::vector<id_result_t> m_id_results_tracks, m_id_results_attachments, m_id_results_chapters, m_id_results_tags;
 
-  timestamp_c m_restricted_timecodes_min, m_restricted_timecodes_max;
+  timestamp_c m_restricted_timestamps_min, m_restricted_timestamps_max;
 
 public:
   generic_reader_c(const track_info_c &ti, const mm_io_cptr &in);
@@ -74,13 +74,13 @@ public:
 
   virtual file_type_e get_format_type() const = 0;
   virtual translatable_string_c get_format_name() const;
-  virtual bool is_providing_timecodes() const {
+  virtual bool is_providing_timestamps() const {
     return true;
   }
 
-  virtual void set_timecode_restrictions(timestamp_c const &min, timestamp_c const &max);
-  virtual timestamp_c const &get_timecode_restriction_min() const;
-  virtual timestamp_c const &get_timecode_restriction_max() const;
+  virtual void set_timestamp_restrictions(timestamp_c const &min, timestamp_c const &max);
+  virtual timestamp_c const &get_timestamp_restriction_min() const;
+  virtual timestamp_c const &get_timestamp_restriction_max() const;
 
   virtual void read_headers() = 0;
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) = 0;
@@ -97,7 +97,7 @@ public:
   virtual int add_packetizer(generic_packetizer_c *ptzr);
   virtual size_t get_num_packetizers() const;
   virtual generic_packetizer_c *find_packetizer_by_id(int64_t id) const;
-  virtual void set_timecode_offset(int64_t offset);
+  virtual void set_timestamp_offset(int64_t offset);
 
   virtual void check_track_ids_and_packetizers();
   virtual void add_requested_track_id(int64_t id);

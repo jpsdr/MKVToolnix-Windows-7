@@ -22,7 +22,7 @@ class truehd_ac3_splitting_packet_converter_c: public packet_converter_c {
 protected:
   truehd_parser_c m_parser;
   generic_packetizer_c *m_ac3_ptzr;
-  int64_t m_truehd_timecode, m_ac3_timecode;
+  int64_t m_truehd_timestamp, m_ac3_timestamp;
 
 public:
   truehd_ac3_splitting_packet_converter_c(generic_packetizer_c *truehd_ptzr = nullptr, generic_packetizer_c *ac3_ptzr = nullptr);

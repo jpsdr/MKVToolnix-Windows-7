@@ -215,14 +215,14 @@ extract_cli_parser_c::set_extraction_mode() {
     const char *name;
     options_c::extraction_mode_e extraction_mode;
   } s_mode_map[] = {
-    { "tracks",       options_c::em_tracks       },
-    { "tags",         options_c::em_tags         },
-    { "attachments",  options_c::em_attachments  },
-    { "chapters",     options_c::em_chapters     },
-    { "cuesheet",     options_c::em_cuesheet     },
-    { "timecodes_v2", options_c::em_timecodes_v2 },
-    { "cues",         options_c::em_cues         },
-    { nullptr,        options_c::em_unknown      },
+    { "tracks",       options_c::em_tracks        },
+    { "tags",         options_c::em_tags          },
+    { "attachments",  options_c::em_attachments   },
+    { "chapters",     options_c::em_chapters      },
+    { "cuesheet",     options_c::em_cuesheet      },
+    { "timecodes_v2", options_c::em_timestamps_v2 },
+    { "cues",         options_c::em_cues          },
+    { nullptr,        options_c::em_unknown       },
   };
 
   int i;
@@ -237,10 +237,10 @@ extract_cli_parser_c::set_extraction_mode() {
 
 void
 extract_cli_parser_c::add_extraction_spec() {
-  if (   (options_c::em_tracks       != m_options.m_extraction_mode)
-      && (options_c::em_cues         != m_options.m_extraction_mode)
-      && (options_c::em_timecodes_v2 != m_options.m_extraction_mode)
-      && (options_c::em_attachments  != m_options.m_extraction_mode))
+  if (   (options_c::em_tracks        != m_options.m_extraction_mode)
+      && (options_c::em_cues          != m_options.m_extraction_mode)
+      && (options_c::em_timestamps_v2 != m_options.m_extraction_mode)
+      && (options_c::em_attachments   != m_options.m_extraction_mode))
     mxerror(boost::format(Y("Unrecognized command line option '%1%'.\n")) % m_current_arg);
 
   boost::regex s_track_id_re("^(\\d+)(:(.+))?$", boost::regex::perl);

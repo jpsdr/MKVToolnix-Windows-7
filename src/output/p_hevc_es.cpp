@@ -31,10 +31,10 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
   , m_default_duration_for_interlaced_content(-1)
   , m_first_frame(true)
   , m_set_display_dimensions(false)
-  , m_debug_timecodes(   debugging_c::requested("hevc_es|hevc_es_timecodes"))
+  , m_debug_timestamps(   debugging_c::requested("hevc_es|hevc_es_timestamps"))
   , m_debug_aspect_ratio(debugging_c::requested("hevc_es|hevc_es_aspect_ratio"))
 {
-  m_relaxed_timecode_checking = true;
+  m_relaxed_timestamp_checking = true;
 
   if (0 != m_ti.m_nalu_size_length)
     m_parser.set_nalu_size_length(m_ti.m_nalu_size_length);
@@ -45,12 +45,12 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
 
   m_parser.set_keep_ar_info(false);
 
-  // If no external timecode file has been specified then mkvmerge
+  // If no external timestamp file has been specified then mkvmerge
   // might have created a factory due to the --default-duration
   // command line argument. This factory must be disabled for the HEVC
   // packetizer because it takes care of handling the default
   // duration/FPS itself.
-  if (m_ti.m_ext_timecodes.empty())
+  if (m_ti.m_ext_timestamps.empty())
     m_timestamp_factory.reset();
 
   int64_t factory_default_duration;
@@ -58,12 +58,12 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
     m_parser.force_default_duration(factory_default_duration);
     set_track_default_duration(factory_default_duration);
     m_default_duration_forced = true;
-    mxdebug_if(m_debug_timecodes, boost::format("Forcing default duration due to timecode factory to %1%\n") % m_htrack_default_duration);
+    mxdebug_if(m_debug_timestamps, boost::format("Forcing default duration due to timestamp factory to %1%\n") % m_htrack_default_duration);
 
   } else if (m_default_duration_forced && (-1 != m_htrack_default_duration)) {
     m_default_duration_for_interlaced_content = m_htrack_default_duration / 2;
     m_parser.force_default_duration(m_default_duration_for_interlaced_content);
-    mxdebug_if(m_debug_timecodes, boost::format("Forcing default duration due to --default-duration to %1%\n") % m_htrack_default_duration);
+    mxdebug_if(m_debug_timestamps, boost::format("Forcing default duration due to --default-duration to %1%\n") % m_htrack_default_duration);
   }
 }
 
@@ -87,8 +87,8 @@ hevc_es_video_packetizer_c::add_extra_data(memory_cptr data) {
 int
 hevc_es_video_packetizer_c::process(packet_cptr packet) {
   try {
-    if (packet->has_timecode())
-      m_parser.add_timecode(packet->timecode);
+    if (packet->has_timestamp())
+      m_parser.add_timestamp(packet->timestamp);
     m_parser.add_bytes(packet->data->get_buffer(), packet->data->get_size());
     flush_frames();
 
@@ -143,7 +143,7 @@ hevc_es_video_packetizer_c::handle_aspect_ratio() {
 void
 hevc_es_video_packetizer_c::handle_actual_default_duration() {
   int64_t actual_default_duration = m_parser.get_most_often_used_duration();
-  mxdebug_if(m_debug_timecodes, boost::format("Most often used duration: %1% forced? %2% current default duration: %3%\n") % actual_default_duration % m_default_duration_forced % m_htrack_default_duration);
+  mxdebug_if(m_debug_timestamps, boost::format("Most often used duration: %1% forced? %2% current default duration: %3%\n") % actual_default_duration % m_default_duration_forced % m_htrack_default_duration);
 
   if (   !m_default_duration_forced
       && (0 < actual_default_duration)
@@ -187,8 +187,8 @@ hevc_es_video_packetizer_c::get_nalu_size_length()
 
 void
 hevc_es_video_packetizer_c::connect(generic_packetizer_c *src,
-                                         int64_t p_append_timecode_offset) {
-  generic_packetizer_c::connect(src, p_append_timecode_offset);
+                                         int64_t p_append_timestamp_offset) {
+  generic_packetizer_c::connect(src, p_append_timestamp_offset);
 
   if (2 != m_connected_to)
     return;

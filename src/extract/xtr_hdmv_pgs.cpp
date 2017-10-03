@@ -32,7 +32,7 @@ xtr_hdmv_pgs_c::handle_frame(xtr_frame_t &f) {
   binary *mybuffer = f.frame->get_buffer();
   int data_size    = f.frame->get_size();
   int offset       = 0;
-  uint64_t pts     = (f.timecode * 9) / 100000;
+  uint64_t pts     = (f.timestamp * 9) / 100000;
 
   memcpy(sup_header, "PG", 2);
   put_uint32_be(&sup_header[2], (uint32)pts);

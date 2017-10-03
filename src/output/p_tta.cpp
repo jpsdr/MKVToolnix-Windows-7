@@ -52,7 +52,7 @@ tta_packetizer_c::set_headers() {
 
 int
 tta_packetizer_c::process(packet_cptr packet) {
-  packet->timecode = std::llround((double)m_samples_output * 1000000000 / m_sample_rate);
+  packet->timestamp = std::llround((double)m_samples_output * 1000000000 / m_sample_rate);
   if (-1 == packet->duration) {
     packet->duration  = m_htrack_default_duration;
     m_samples_output += std::llround(m_sample_rate * TTA_FRAME_TIME);

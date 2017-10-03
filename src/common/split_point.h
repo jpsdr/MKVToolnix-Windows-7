@@ -20,7 +20,7 @@ public:
   enum type_e {
     duration,
     size,
-    timecode,
+    timestamp,
     chapter,
     parts,
     parts_frame_field,

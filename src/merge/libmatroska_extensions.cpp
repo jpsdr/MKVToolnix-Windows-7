@@ -35,7 +35,7 @@ kax_reference_block_c::UpdateSize(bool bSaveDefault,
 
 bool
 kax_block_group_c::add_frame(const KaxTrackEntry &track,
-                             uint64 timecode,
+                             uint64 timestamp,
                              DataBuffer &buffer,
                              int64_t past_block,
                              int64_t forw_block,
@@ -45,7 +45,7 @@ kax_block_group_c::add_frame(const KaxTrackEntry &track,
   block.SetParent(*ParentCluster);
 
   ParentTrack                     = &track;
-  bool result                     = block.AddFrame(track, timecode, buffer, lacing);
+  bool result                     = block.AddFrame(track, timestamp, buffer, lacing);
   kax_reference_block_c *past_ref = nullptr;
 
   if (0 <= past_block) {
@@ -73,7 +73,7 @@ kax_block_group_c::add_frame(const KaxTrackEntry &track,
 
 bool
 kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
-                                 uint64 timecode,
+                                 uint64 timestamp,
                                  DataBuffer &buffer,
                                  LacingType lacing,
                                  int64_t past_block,
@@ -92,7 +92,7 @@ kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
       Block.simpleblock->SetParent(*ParentCluster);
     }
 
-    result = Block.simpleblock->AddFrame(track, timecode, buffer, lacing);
+    result = Block.simpleblock->AddFrame(track, timestamp, buffer, lacing);
 
     if (key_flag || discardable_flag) {
       Block.simpleblock->SetKeyframe(key_flag && *key_flag);
@@ -104,8 +104,8 @@ kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
 
     } else {
       Block.simpleblock->SetKeyframe(false);
-      if (   ((-1 == forw_block) || (forw_block <= static_cast<int64_t>(timecode)))
-          && ((-1 == past_block) || (past_block <= static_cast<int64_t>(timecode))))
+      if (   ((-1 == forw_block) || (forw_block <= static_cast<int64_t>(timestamp)))
+          && ((-1 == past_block) || (past_block <= static_cast<int64_t>(timestamp))))
         Block.simpleblock->SetDiscardable(false);
       else
         Block.simpleblock->SetDiscardable(true);
@@ -113,7 +113,7 @@ kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
 
   } else if (replace_simple_by_group()) {
     kax_block_group_c *group = static_cast<kax_block_group_c *>(Block.group);
-    result = group->add_frame(track, timecode, buffer, past_block, forw_block, lacing);
+    result = group->add_frame(track, timestamp, buffer, past_block, forw_block, lacing);
   }
 
   return result;

@@ -104,10 +104,10 @@ struct track_order_t {
   int64_t track_id;
 };
 
-enum timecode_scale_mode_e {
-  TIMECODE_SCALE_MODE_NORMAL = 0,
-  TIMECODE_SCALE_MODE_FIXED,
-  TIMECODE_SCALE_MODE_AUTO
+enum timestamp_scale_mode_e {
+  TIMESTAMP_SCALE_MODE_NORMAL = 0,
+  TIMESTAMP_SCALE_MODE_FIXED,
+  TIMESTAMP_SCALE_MODE_AUTO
 };
 
 enum append_mode_e {
@@ -135,8 +135,8 @@ extern std::unordered_map<int64_t, generic_packetizer_c *> g_packetizers_by_trac
 
 extern std::string g_outfile;
 
-extern double g_timecode_scale;
-extern timecode_scale_mode_e g_timecode_scale_mode;
+extern double g_timestamp_scale;
+extern timestamp_scale_mode_e g_timestamp_scale_mode;
 
 extern mtx::bits::value_cptr g_seguid_link_previous, g_seguid_link_next;
 extern std::deque<mtx::bits::value_cptr> g_forced_seguids;

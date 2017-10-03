@@ -102,8 +102,8 @@ int
 aac_packetizer_c::process_headerless(packet_cptr packet) {
   handle_parsed_audio_config();
 
-  packet->timecode = m_timestamp_calculator.get_next_timestamp(m_config.samples_per_frame).to_ns();
-  packet->duration = m_packet_duration;
+  packet->timestamp = m_timestamp_calculator.get_next_timestamp(m_config.samples_per_frame).to_ns();
+  packet->duration  = m_packet_duration;
 
   add_packet(packet);
 

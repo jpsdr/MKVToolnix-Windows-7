@@ -72,10 +72,10 @@ xtr_webvtt_c::handle_frame(xtr_frame_t &f) {
   }
 
   auto content = chomp(normalize_line_endings(f.frame->to_string())) + "\n";
-  content      = webvtt_parser_c::adjust_embedded_timestamps(content, timestamp_c::ns(f.timecode));
+  content      = webvtt_parser_c::adjust_embedded_timestamps(content, timestamp_c::ns(f.timestamp));
   content      = (boost::format("\n%1%%2%%3% --> %4%%5%\n%6%")
                   % local_blocks % label
-                  % format_timestamp(f.timecode, 3) % format_timestamp(f.timecode + f.duration, 3)
+                  % format_timestamp(f.timestamp, 3) % format_timestamp(f.timestamp + f.duration, 3)
                   % settings_list % content).str();
 
   m_out->write(content);

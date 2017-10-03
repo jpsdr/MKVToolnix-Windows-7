@@ -80,12 +80,12 @@ generic_reader_c::generic_reader_c(const track_info_c &ti,
   , m_in{in}
   , m_size{static_cast<uint64_t>(in->get_size())}
   , m_ptzr_first_packet{}
-  , m_max_timecode_seen{}
+  , m_max_timestamp_seen{}
   , m_appending{}
   , m_num_video_tracks{}
   , m_num_audio_tracks{}
   , m_num_subtitle_tracks{}
-  , m_reference_timecode_tolerance{}
+  , m_reference_timestamp_tolerance{}
 {
   add_all_requested_track_ids(*this, m_ti.m_atracks.m_items);
   add_all_requested_track_ids(*this, m_ti.m_vtracks.m_items);
@@ -94,7 +94,7 @@ generic_reader_c::generic_reader_c(const track_info_c &ti,
   add_all_requested_track_ids(*this, m_ti.m_track_tags.m_items);
   add_all_requested_track_ids(*this, m_ti.m_all_fourccs);
   add_all_requested_track_ids(*this, m_ti.m_display_properties);
-  add_all_requested_track_ids(*this, m_ti.m_timecode_syncs);
+  add_all_requested_track_ids(*this, m_ti.m_timestamp_syncs);
   add_all_requested_track_ids(*this, m_ti.m_cue_creations);
   add_all_requested_track_ids(*this, m_ti.m_default_track_flags);
   add_all_requested_track_ids(*this, m_ti.m_fix_bitstream_frame_rate_flags);
@@ -104,7 +104,7 @@ generic_reader_c::generic_reader_c(const track_info_c &ti,
   add_all_requested_track_ids(*this, m_ti.m_all_aac_is_sbr);
   add_all_requested_track_ids(*this, m_ti.m_compression_list);
   add_all_requested_track_ids(*this, m_ti.m_track_names);
-  add_all_requested_track_ids(*this, m_ti.m_all_ext_timecodes);
+  add_all_requested_track_ids(*this, m_ti.m_all_ext_timestamps);
   add_all_requested_track_ids(*this, m_ti.m_pixel_crop_list);
   add_all_requested_track_ids(*this, m_ti.m_reduce_to_core);
 }
@@ -117,22 +117,22 @@ generic_reader_c::~generic_reader_c() {
 }
 
 void
-generic_reader_c::set_timecode_restrictions(timestamp_c const &min,
-                                            timestamp_c const &max) {
-  m_restricted_timecodes_min = min;
-  m_restricted_timecodes_max = max;
+generic_reader_c::set_timestamp_restrictions(timestamp_c const &min,
+                                             timestamp_c const &max) {
+  m_restricted_timestamps_min = min;
+  m_restricted_timestamps_max = max;
 }
 
 timestamp_c const &
-generic_reader_c::get_timecode_restriction_min()
+generic_reader_c::get_timestamp_restriction_min()
   const {
-  return m_restricted_timecodes_min;
+  return m_restricted_timestamps_min;
 }
 
 timestamp_c const &
-generic_reader_c::get_timecode_restriction_max()
+generic_reader_c::get_timestamp_restriction_max()
   const {
-  return m_restricted_timecodes_max;
+  return m_restricted_timestamps_max;
 }
 
 void
@@ -206,11 +206,11 @@ generic_reader_c::find_packetizer_by_id(int64_t id)
 }
 
 void
-generic_reader_c::set_timecode_offset(int64_t offset) {
-  m_max_timecode_seen = offset;
+generic_reader_c::set_timestamp_offset(int64_t offset) {
+  m_max_timestamp_seen = offset;
 
   for (auto ptzr : m_reader_packetizers)
-    ptzr->m_correction_timecode_offset = offset;
+    ptzr->m_correction_timestamp_offset = offset;
 }
 
 void
@@ -309,7 +309,7 @@ generic_reader_c::id_result_container(mtx::id::verbose_info_t const &verbose_inf
   m_id_results_container.info         = file_type_t::get_name(type).get_translated();
   m_id_results_container.verbose_info = verbose_info;
   m_id_results_container.verbose_info.emplace_back("container_type",         static_cast<int>(type));
-  m_id_results_container.verbose_info.emplace_back("is_providing_timecodes", is_providing_timecodes());
+  m_id_results_container.verbose_info.emplace_back("is_providing_timecodes", is_providing_timestamps());
 }
 
 void

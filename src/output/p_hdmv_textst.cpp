@@ -57,8 +57,8 @@ hdmv_textst_packetizer_c::process(packet_cptr packet) {
   auto start_pts = timestamp_c::mpeg((static_cast<int64_t>(buf[3] & 1) << 32) | get_uint32_be(&buf[4]));
   auto end_pts   = timestamp_c::mpeg((static_cast<int64_t>(buf[8] & 1) << 32) | get_uint32_be(&buf[9]));
 
-  if (!packet->has_timecode())
-    packet->timecode = start_pts.to_ns();
+  if (!packet->has_timestamp())
+    packet->timestamp = start_pts.to_ns();
 
   if (!packet->has_duration())
     packet->duration = (end_pts - start_pts).abs().to_ns();

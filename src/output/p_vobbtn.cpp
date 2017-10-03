@@ -31,7 +31,7 @@ vobbtn_packetizer_c::vobbtn_packetizer_c(generic_reader_c *p_reader,
                                          int width,
                                          int height)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_previous_timecode(0)
+  , m_previous_timestamp(0)
   , m_width(width)
   , m_height(height)
 {
@@ -60,9 +60,9 @@ vobbtn_packetizer_c::process(packet_cptr packet) {
   uint32_t vobu_end   = get_uint32_be(packet->data->get_buffer() + 0x11);
 
   packet->duration = (int64_t)(100000.0 * (float)(vobu_end - vobu_start) / 9);
-  if (-1 == packet->timecode) {
-    packet->timecode     = m_previous_timecode;
-    m_previous_timecode += packet->duration;
+  if (-1 == packet->timestamp) {
+    packet->timestamp     = m_previous_timestamp;
+    m_previous_timestamp += packet->duration;
   }
 
   packet->duration_mandatory = true;

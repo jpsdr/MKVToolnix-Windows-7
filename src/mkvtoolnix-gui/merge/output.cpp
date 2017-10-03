@@ -354,7 +354,7 @@ Tab::onSplitModeChanged(int newMode) {
             << Q("01:00:00")
             << Q("1800s");
 
-  } else if (MuxConfig::SplitAfterTimecodes == splitMode) {
+  } else if (MuxConfig::SplitAfterTimestamps == splitMode) {
     label    = QY("Timecodes:");
     tooltip << (Q("%1 %2")
                 .arg(QY("The timecodes after which a new destination file is started."))

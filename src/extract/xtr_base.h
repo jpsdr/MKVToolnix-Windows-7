@@ -26,7 +26,7 @@ using namespace libmatroska;
 struct xtr_frame_t {
   memory_cptr &frame;
   KaxBlockAdditions *additions;
-  int64_t timecode, duration, bref, fref;
+  int64_t timestamp, duration, bref, fref;
   bool keyframe, discardable, references_valid;
   timestamp_c discard_duration;
 };

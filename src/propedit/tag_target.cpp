@@ -240,7 +240,7 @@ bool
 tag_target_c::read_segment_info_and_tracks() {
   auto tracks       = m_analyzer->read_all(KaxTracks::ClassInfos);
   auto segment_info = m_analyzer->read_all(KaxInfo::ClassInfos);
-  m_timecode_scale  = segment_info ? FindChildValue<KaxTimecodeScale>(*segment_info, 1000000ull) : 1000000ull;
+  m_timestamp_scale = segment_info ? FindChildValue<KaxTimecodeScale>(*segment_info, 1000000ull) : 1000000ull;
 
   if (tracks && dynamic_cast<KaxTracks *>(tracks.get())) {
     for (size_t idx = 0, num_children = tracks->ListSize(); idx < num_children; ++idx) {
@@ -280,13 +280,13 @@ tag_target_c::account_block_group(KaxBlockGroup &block_group,
 
   block->SetParent(cluster);
 
-  auto block_duration = FindChild<KaxBlockDuration>(block_group);
-  auto frame_duration = block_duration ? static_cast<uint64_t>(block_duration->GetValue() * m_timecode_scale / num_frames) : m_default_durations_by_number[block->TrackNum()];
-  auto first_timecode = block->GlobalTimecode();
+  auto block_duration  = FindChild<KaxBlockDuration>(block_group);
+  auto frame_duration  = block_duration ? static_cast<uint64_t>(block_duration->GetValue() * m_timestamp_scale / num_frames) : m_default_durations_by_number[block->TrackNum()];
+  auto first_timestamp = block->GlobalTimecode();
 
   for (size_t idx = 0; idx < num_frames; ++idx) {
     auto &data_buffer = block->GetBuffer(idx);
-    stats_itr->second.account(first_timecode + idx * frame_duration, frame_duration, data_buffer.Size());
+    stats_itr->second.account(first_timestamp + idx * frame_duration, frame_duration, data_buffer.Size());
   }
 }
 
@@ -301,12 +301,12 @@ tag_target_c::account_simple_block(KaxSimpleBlock &simple_block,
 
   simple_block.SetParent(cluster);
 
-  auto frame_duration = m_default_durations_by_number[simple_block.TrackNum()];
-  auto first_timecode = simple_block.GlobalTimecode();
+  auto frame_duration  = m_default_durations_by_number[simple_block.TrackNum()];
+  auto first_timestamp = simple_block.GlobalTimecode();
 
   for (size_t idx = 0; idx < num_frames; ++idx) {
     auto &data_buffer = simple_block.GetBuffer(idx);
-    stats_itr->second.account(first_timecode + idx * frame_duration, frame_duration, data_buffer.Size());
+    stats_itr->second.account(first_timestamp + idx * frame_duration, frame_duration, data_buffer.Size());
   }
 }
 
@@ -340,7 +340,7 @@ tag_target_c::account_all_clusters() {
     if (!cluster)
       break;
 
-    cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(*cluster), m_timecode_scale);
+    cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(*cluster), m_timestamp_scale);
 
     account_one_cluster(*cluster);
 

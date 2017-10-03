@@ -20,7 +20,7 @@
 
 class vpx_video_packetizer_c: public generic_packetizer_c {
 protected:
-  int64_t m_previous_timecode;
+  int64_t m_previous_timestamp;
   codec_c::type_e m_codec;
 
 public:

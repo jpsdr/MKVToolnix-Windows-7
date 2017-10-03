@@ -111,8 +111,8 @@ bool g_use_durations                        = false;
 bool g_no_track_statistics_tags             = false;
 bool g_write_date                           = true;
 
-double g_timecode_scale                     = TIMECODE_SCALE;
-timecode_scale_mode_e g_timecode_scale_mode = TIMECODE_SCALE_MODE_NORMAL;
+double g_timestamp_scale                    = TIMESTAMP_SCALE;
+auto g_timestamp_scale_mode                 = timestamp_scale_mode_e{TIMESTAMP_SCALE_MODE_NORMAL};
 
 float g_video_fps                           = -1.0;
 int g_default_tracks[3]                     = { 0, 0, 0, };
@@ -212,7 +212,7 @@ family_uids_c::add_family_uid(const KaxSegmentFamily &family) {
 
 static int64_t
 calculate_file_duration() {
-  return std::llround(static_cast<double>(g_cluster_helper->get_duration()) / static_cast<double>(g_timecode_scale));
+  return std::llround(static_cast<double>(g_cluster_helper->get_duration()) / static_cast<double>(g_timestamp_scale));
 }
 
 /** \brief Fix the file after mkvmerge has been interrupted
@@ -242,7 +242,7 @@ sighandler(int /* signum */) {
   mxinfo(Y(" done\n"));
 
   mxinfo(Y("The file is being fixed, part 2/4..."));
-  // Now re-render the kax_duration and fill in the biggest timecode
+  // Now re-render the kax_duration and fill in the biggest timestamp
   // as the file's duration.
   s_out->save_pos(s_kax_duration->GetElementPosition());
   s_kax_duration->SetValue(calculate_file_duration());
@@ -414,7 +414,7 @@ add_packetizer_globally(generic_packetizer_c *packetizer) {
 }
 
 static void
-set_timecode_scale() {
+set_timestamp_scale() {
   bool video_present          = false;
   bool audio_present          = false;
   int64_t highest_sample_rate = 0;
@@ -428,26 +428,26 @@ set_timecode_scale() {
       highest_sample_rate = std::max(static_cast<int64_t>(ptzr.packetizer->get_audio_sampling_freq()), highest_sample_rate);
     }
 
-  bool debug = debugging_c::requested("set_timecode_scale|timecode_scale");
+  bool debug = debugging_c::requested("set_timestamp_scale|timestamp_scale");
   mxdebug_if(debug,
-             boost::format("timecode_scale: %1% audio present: %2% video present: %3% highest sample rate: %4%\n")
-             % (  TIMECODE_SCALE_MODE_NORMAL == g_timecode_scale_mode ? "normal"
-                : TIMECODE_SCALE_MODE_FIXED  == g_timecode_scale_mode ? "fixed"
-                : TIMECODE_SCALE_MODE_AUTO   == g_timecode_scale_mode ? "auto"
-                :                                                       "unknown")
+             boost::format("timestamp_scale: %1% audio present: %2% video present: %3% highest sample rate: %4%\n")
+             % (  TIMESTAMP_SCALE_MODE_NORMAL == g_timestamp_scale_mode ? "normal"
+                : TIMESTAMP_SCALE_MODE_FIXED  == g_timestamp_scale_mode ? "fixed"
+                : TIMESTAMP_SCALE_MODE_AUTO   == g_timestamp_scale_mode ? "auto"
+                :                                                         "unknown")
              % audio_present % video_present % highest_sample_rate);
 
-  if (   (TIMECODE_SCALE_MODE_FIXED != g_timecode_scale_mode)
+  if (   (TIMESTAMP_SCALE_MODE_FIXED != g_timestamp_scale_mode)
       && audio_present
       && (0 < highest_sample_rate)
       && (   !video_present
-          || (TIMECODE_SCALE_MODE_AUTO == g_timecode_scale_mode)))
-    g_timecode_scale = static_cast<int64_t>(1000000000.0 / highest_sample_rate - 1.0);
+          || (TIMESTAMP_SCALE_MODE_AUTO == g_timestamp_scale_mode)))
+    g_timestamp_scale = static_cast<int64_t>(1000000000.0 / highest_sample_rate - 1.0);
 
-  g_max_ns_per_cluster = std::min<int64_t>(32700 * g_timecode_scale, g_max_ns_per_cluster);
-  GetChild<KaxTimecodeScale>(*s_kax_infos).SetValue(g_timecode_scale);
+  g_max_ns_per_cluster = std::min<int64_t>(32700 * g_timestamp_scale, g_max_ns_per_cluster);
+  GetChild<KaxTimecodeScale>(*s_kax_infos).SetValue(g_timestamp_scale);
 
-  mxdebug_if(debug, boost::format("timecode_scale: %1% max ns per cluster: %2%\n") % g_timecode_scale % g_max_ns_per_cluster);
+  mxdebug_if(debug, boost::format("timestamp_scale: %1% max ns per cluster: %2%\n") % g_timestamp_scale % g_max_ns_per_cluster);
 }
 
 bool
@@ -555,7 +555,7 @@ render_headers(mm_io_c *out) {
 
     s_kax_infos = std::make_unique<KaxInfo>();
 
-    s_kax_duration = new KaxMyDuration{ !g_video_packetizer || (TIMECODE_SCALE_MODE_AUTO == g_timecode_scale_mode) ? EbmlFloat::FLOAT_64 : EbmlFloat::FLOAT_32};
+    s_kax_duration = new KaxMyDuration{ !g_video_packetizer || (TIMESTAMP_SCALE_MODE_AUTO == g_timestamp_scale_mode) ? EbmlFloat::FLOAT_64 : EbmlFloat::FLOAT_32};
 
     s_kax_duration->SetValue(0.0);
     s_kax_infos->PushElement(*s_kax_duration);
@@ -657,14 +657,14 @@ render_headers(mm_io_c *out) {
         if (!g_files[i]->appending)
           g_files[i]->reader->set_headers();
 
-      set_timecode_scale();
+      set_timestamp_scale();
 
       for (i = 0; i < g_packetizers.size(); i++)
         if (g_packetizers[i].packetizer)
           g_packetizers[i].packetizer->fix_headers();
 
     } else
-      set_timecode_scale();
+      set_timestamp_scale();
 
     s_kax_infos->Render(*out, true);
     g_kax_sh_main->IndexThis(*s_kax_infos, *g_kax_segment);
@@ -1096,7 +1096,7 @@ check_append_mapping() {
    This has to be done after creating the readers. Only the chapters
    of readers that aren't appended are put into the pool right away.
    The other chapters are added when a packetizer is appended because
-   the chapter timecodes have to be adjusted by the length of the file
+   the chapter timestamps have to be adjusted by the length of the file
    the packetizer is appended to.
    This function also calculates the sum of all chapter sizes so that
    enough space can be allocated at the start of each output file.
@@ -1373,9 +1373,9 @@ add_chapters_for_current_part() {
     return;
   }
 
-  int64_t start                   = g_cluster_helper->get_first_timecode_in_part();
-  int64_t end                     = g_cluster_helper->get_max_timecode_in_file(); // start + g_cluster_helper->get_duration();
-  int64_t offset                  = g_no_linking ? g_cluster_helper->get_first_timecode_in_file() + g_cluster_helper->get_discarded_duration() : 0;
+  int64_t start                   = g_cluster_helper->get_first_timestamp_in_part();
+  int64_t end                     = g_cluster_helper->get_max_timestamp_in_file(); // start + g_cluster_helper->get_duration();
+  int64_t offset                  = g_no_linking ? g_cluster_helper->get_first_timestamp_in_file() + g_cluster_helper->get_discarded_duration() : 0;
 
   auto chapters_here              = clone(g_kax_chapters);
   bool have_chapters_in_timeframe = mtx::chapters::select_in_timeframe(chapters_here.get(), start, end, offset);
@@ -1409,7 +1409,7 @@ prepare_additional_chapter_atoms_for_rendering() {
   if (!s_chapters_in_this_file)
     s_chapters_in_this_file = std::make_shared<KaxChapters>();
 
-  auto offset   = timestamp_c::ns(g_no_linking ? g_cluster_helper->get_first_timecode_in_file() + g_cluster_helper->get_discarded_duration() : 0);
+  auto offset   = timestamp_c::ns(g_no_linking ? g_cluster_helper->get_first_timestamp_in_file() + g_cluster_helper->get_discarded_duration() : 0);
   auto &edition = GetChild<KaxEditionEntry>(*s_chapters_in_this_file);
 
   if (!FindChild<KaxEditionUID>(edition))
@@ -1506,7 +1506,7 @@ finish_file(bool last_file,
     cues_c::get().write(*s_out, *g_kax_sh_main);
   }
 
-  // Now re-render the s_kax_duration and fill in the biggest timecode
+  // Now re-render the s_kax_duration and fill in the biggest timestamp
   // as the file's duration.
   s_out->save_pos(s_kax_duration->GetElementPosition());
   s_kax_duration->SetValue(calculate_file_duration());
@@ -1648,9 +1648,9 @@ static void establish_deferred_connections(filelist_t &file);
 
 static void
 append_chapters_for_track(filelist_t &src_file,
-                          int64_t timecode_adjustment) {
-  // Append some more chapters and adjust their timecodes by the highest
-  // timecode seen in the previous file/the track that we've been searching
+                          int64_t timestamp_adjustment) {
+  // Append some more chapters and adjust their timestamps by the highest
+  // timestamp seen in the previous file/the track that we've been searching
   // for above.
   auto chapters = src_file.reader->m_chapters.get();
   if (!chapters)
@@ -1661,7 +1661,7 @@ append_chapters_for_track(filelist_t &src_file,
   else
     mtx::chapters::align_uids(*g_kax_chapters, *chapters);
 
-  mtx::chapters::adjust_timecodes(*chapters, timecode_adjustment);
+  mtx::chapters::adjust_timestamps(*chapters, timestamp_adjustment);
   mtx::chapters::move_by_edition(*g_kax_chapters, *chapters);
   src_file.reader->m_chapters.reset();
 }
@@ -1684,7 +1684,7 @@ append_track(packetizer_t &ptzr,
   auto &dst_file = *g_files[amap.dst_file_id];
 
   if (deferred_file)
-    src_file.deferred_max_timecode_seen = deferred_file->reader->m_max_timecode_seen;
+    src_file.deferred_max_timestamp_seen = deferred_file->reader->m_max_timestamp_seen;
 
   // Find the generic_packetizer_c that we will be appending to the one
   // stored in ptzr.
@@ -1697,7 +1697,7 @@ append_track(packetizer_t &ptzr,
 
   // If we're dealing with a subtitle track or if the appending file contains
   // chapters then we have to suck the previous file dry. See below for the
-  // reason (short version: we need all max_timecode_seen values).
+  // reason (short version: we need all max_timestamp_seen values).
   if (   !dst_file.done
       && (   (APPEND_MODE_FILE_BASED     == g_append_mode)
           || ((*gptzr)->get_track_type() == track_subtitle)
@@ -1712,7 +1712,7 @@ append_track(packetizer_t &ptzr,
   if (   !ptzr.deferred
       && (track_subtitle == (*gptzr)->get_track_type())
       && (             0 == dst_file.reader->m_num_video_tracks)
-      && (            -1 == src_file.deferred_max_timecode_seen)
+      && (            -1 == src_file.deferred_max_timestamp_seen)
       && g_video_packetizer) {
 
     for (auto &file : g_files) {
@@ -1735,17 +1735,17 @@ append_track(packetizer_t &ptzr,
   }
 
   if (s_debug_appending) {
-    mxdebug(boost::format("appending: reader m_max_timecode_seen %1% and ptzr to append is %2% ptzr appended to is %3% src_file.appending %4% src_file.appended_to %5% dst_file.appending %6% dst_file.appended_to %7%\n")
-            % dst_file.reader->m_max_timecode_seen % static_cast<void *>(*gptzr) % static_cast<void *>(ptzr.packetizer) % src_file.appending % src_file.appended_to % dst_file.appending % dst_file.appended_to);
+    mxdebug(boost::format("appending: reader m_max_timestamp_seen %1% and ptzr to append is %2% ptzr appended to is %3% src_file.appending %4% src_file.appended_to %5% dst_file.appending %6% dst_file.appended_to %7%\n")
+            % dst_file.reader->m_max_timestamp_seen % static_cast<void *>(*gptzr) % static_cast<void *>(ptzr.packetizer) % src_file.appending % src_file.appended_to % dst_file.appending % dst_file.appended_to);
     for (auto &rep_ptzr : dst_file.reader->m_reader_packetizers)
-      mxdebug(boost::format("  ptzr @ %1% connected_to %2% max_timecode_seen %3%\n") % static_cast<void *>(rep_ptzr) % rep_ptzr->m_connected_to % rep_ptzr->m_max_timecode_seen);
+      mxdebug(boost::format("  ptzr @ %1% connected_to %2% max_timestamp_seen %3%\n") % static_cast<void *>(rep_ptzr) % rep_ptzr->m_connected_to % rep_ptzr->m_max_timestamp_seen);
   }
 
   // In rare cases (e.g. empty tracks) a whole file could be skipped
   // without having gotten a single packet through to the timecoding
-  // code. Therefore the reader's m_max_timecode_seen field would
+  // code. Therefore the reader's m_max_timestamp_seen field would
   // still be 0. Therefore we must ensure that each packetizer from a
-  // file we're trying to use m_max_timecode_seen from has already
+  // file we're trying to use m_max_timestamp_seen from has already
   // been connected fully. The very first file in a chain (meaning
   // files that are not in "appending to other file mode",
   // filelist_t.appending == false) would be OK as well.
@@ -1790,20 +1790,20 @@ append_track(packetizer_t &ptzr,
     g_video_packetizer = ptzr.packetizer;
 
   // If we're dealing with a subtitle track or if the appending file contains
-  // chapters then we have to do some magic. During splitting timecodes are
+  // chapters then we have to do some magic. During splitting timestamps are
   // offset by a certain amount. This amount is NOT the duration of the
   // previous file! That's why we cannot use
-  // dst_file.reader->max_timecode_seen. Instead we have to find the first
-  // packet in the appending file because its original timecode during the
+  // dst_file.reader->max_timestamp_seen. Instead we have to find the first
+  // packet in the appending file because its original timestamp during the
   // split phase was the offset. If we have that we can find the corresponding
-  // packetizer and use its max_timecode_seen.
+  // packetizer and use its max_timestamp_seen.
   //
   // All this only applies to gapless tracks. Good luck with other files.
   // Some files types also allow access to arbitrary tracks and packets
   // (e.g. AVI and Quicktime). Those files will not work correctly for this.
   // But then again I don't expect that people will try to concatenate such
   // files if they've been split before.
-  int64_t timecode_adjustment = dst_file.reader->m_max_timecode_seen;
+  int64_t timestamp_adjustment = dst_file.reader->m_max_timestamp_seen;
   if ((APPEND_MODE_FILE_BASED == g_append_mode)
       && (   (track_subtitle != ptzr.packetizer->get_track_type())
           || !dst_file.reader->is_simple_subtitle_container()))
@@ -1811,11 +1811,11 @@ append_track(packetizer_t &ptzr,
     ;
 
   else if (ptzr.deferred && deferred_file)
-    timecode_adjustment = src_file.deferred_max_timecode_seen;
+    timestamp_adjustment = src_file.deferred_max_timestamp_seen;
 
   else if (   (track_subtitle == ptzr.packetizer->get_track_type())
-           && (-1 < src_file.deferred_max_timecode_seen))
-    timecode_adjustment = src_file.deferred_max_timecode_seen;
+           && (-1 < src_file.deferred_max_timestamp_seen))
+    timestamp_adjustment = src_file.deferred_max_timestamp_seen;
 
   else if (   (ptzr.packetizer->get_track_type() == track_subtitle)
            || (src_file.reader->m_chapters)) {
@@ -1832,23 +1832,23 @@ append_track(packetizer_t &ptzr,
       if (g_append_mapping.end() != cmp_amap) {
         auto gptzr = dst_file.reader->find_packetizer_by_id(cmp_amap->dst_track_id);
         if (gptzr)
-          timecode_adjustment = gptzr->m_max_timecode_seen;
+          timestamp_adjustment = gptzr->m_max_timestamp_seen;
       }
     }
   }
 
   if ((APPEND_MODE_FILE_BASED == g_append_mode) || (ptzr.packetizer->get_track_type() == track_subtitle)) {
-    mxdebug_if(s_debug_appending, boost::format("appending: new timecode_adjustment for append_mode == FILE_BASED or subtitle track: %1% for %2%\n") % format_timestamp(timecode_adjustment) % ptzr.packetizer->m_ti.m_id);
+    mxdebug_if(s_debug_appending, boost::format("appending: new timestamp_adjustment for append_mode == FILE_BASED or subtitle track: %1% for %2%\n") % format_timestamp(timestamp_adjustment) % ptzr.packetizer->m_ti.m_id);
     // The actual connection.
-    ptzr.packetizer->connect(old_packetizer, timecode_adjustment);
+    ptzr.packetizer->connect(old_packetizer, timestamp_adjustment);
 
   } else {
-    mxdebug_if(s_debug_appending, boost::format("appending: new timecode_adjustment for append_mode == TRACK_BASED and NON subtitle track: %1% for %2%\n") % format_timestamp(timecode_adjustment) % ptzr.packetizer->m_ti.m_id);
+    mxdebug_if(s_debug_appending, boost::format("appending: new timestamp_adjustment for append_mode == TRACK_BASED and NON subtitle track: %1% for %2%\n") % format_timestamp(timestamp_adjustment) % ptzr.packetizer->m_ti.m_id);
     // The actual connection.
     ptzr.packetizer->connect(old_packetizer);
   }
 
-  append_chapters_for_track(src_file, timecode_adjustment);
+  append_chapters_for_track(src_file, timestamp_adjustment);
 
   ptzr.deferred = false;
 }
@@ -2007,7 +2007,7 @@ select_winning_packetizer() {
     if (!winner || !winner->pack)
       winner = &ptzr;
 
-    else if (ptzr.pack && (ptzr.pack->output_order_timecode < winner->pack->output_order_timecode))
+    else if (ptzr.pack && (ptzr.pack->output_order_timestamp < winner->pack->output_order_timestamp))
       winner = &ptzr;
   }
 
@@ -2025,7 +2025,7 @@ discard_queued_packets() {
 /** \brief Request packets and handle the next one
 
    Requests packets from each packetizer, selects the packet with the
-   lowest timecode and hands it over to the cluster helper for
+   lowest timestamp and hands it over to the cluster helper for
    rendering.  Also displays the progress.
 */
 void
@@ -2037,7 +2037,7 @@ main_loop() {
     pull_packetizers_for_packets();
     auto force_pulled = force_pull_packetizers_of_fully_held_files();
 
-    // Step 2: Pick the packet with the lowest timecode and
+    // Step 2: Pick the packet with the lowest timestamp and
     // stuff it into the Matroska file.
     auto winner = select_winning_packetizer();
 

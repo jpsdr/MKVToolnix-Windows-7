@@ -7,7 +7,7 @@
 
 namespace {
 
-TEST(TimecodeCalculator, NoTimecodesProvided) {
+TEST(TimestampCalculator, NoTimestampsProvided) {
   auto calc = timestamp_calculator_c{48000ll};
 
   ASSERT_EQ(timestamp_c::s(0), calc.get_next_timestamp(0));
@@ -65,7 +65,7 @@ TEST(TimestampCalculator, WithTimestampsProvidedByPacket) {
   auto calc = timestamp_calculator_c{48000ll};
 
   auto packet = std::make_shared<packet_t>();
-  packet->timecode = 10000000000;
+  packet->timestamp = 10000000000;
   calc.add_timestamp(packet);
   ASSERT_EQ(timestamp_c::s(10), calc.get_next_timestamp(0));
   ASSERT_EQ(timestamp_c::s(10), calc.get_next_timestamp(48000));
@@ -75,11 +75,11 @@ TEST(TimestampCalculator, WithTimestampsProvidedByPacket) {
   ASSERT_EQ(timestamp_c::ns(12757187500), calc.get_next_timestamp(96000));
   ASSERT_EQ(timestamp_c::ns(14757187500), calc.get_next_timestamp(96000));
 
-  packet->timecode = 20000000000;
+  packet->timestamp = 20000000000;
   calc.add_timestamp(packet);
-  packet->timecode = 21000000000;
+  packet->timestamp = 21000000000;
   calc.add_timestamp(packet);
-  packet->timecode = 22000000000;
+  packet->timestamp = 22000000000;
   calc.add_timestamp(packet);
   ASSERT_EQ(timestamp_c::s(20), calc.get_next_timestamp(96000));
   ASSERT_EQ(timestamp_c::s(21), calc.get_next_timestamp(96000));
@@ -91,7 +91,7 @@ TEST(TimestampCalculator, WithInvalidTimestampsProvided) {
   auto calc = timestamp_calculator_c{48000ll};
 
   auto packet = std::make_shared<packet_t>();
-  packet->timecode = -1;
+  packet->timestamp = -1;
   calc.add_timestamp(timestamp_c{});
   calc.add_timestamp(-1);
   calc.add_timestamp(packet);

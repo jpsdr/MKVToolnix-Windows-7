@@ -25,7 +25,7 @@ private:
 
   kate_identification_header_t m_kate_id;
 
-  int64_t m_previous_timecode;
+  int64_t m_previous_timestamp;
 
 public:
   kate_packetizer_c(generic_reader_c *reader, track_info_c &ti);

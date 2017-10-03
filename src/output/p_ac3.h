@@ -48,7 +48,7 @@ protected:
   virtual void adjust_header_values(mtx::ac3::frame_c const &ac3_header);
   virtual mtx::ac3::frame_c get_frame();
   virtual void flush_impl();
-  virtual void set_timecode_and_add_packet(packet_cptr const &packet, uint64_t packet_stream_position);
+  virtual void set_timestamp_and_add_packet(packet_cptr const &packet, uint64_t packet_stream_position);
 };
 
 class ac3_bs_packetizer_c: public ac3_packetizer_c {

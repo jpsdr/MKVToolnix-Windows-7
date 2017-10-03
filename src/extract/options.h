@@ -20,7 +20,7 @@ public:
     em_chapters,
     em_cuesheet,
     em_tags,
-    em_timecodes_v2,
+    em_timestamps_v2,
     em_tracks,
     em_cues,
   };

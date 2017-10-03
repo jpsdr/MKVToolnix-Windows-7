@@ -164,7 +164,7 @@ qtmp4_reader_c::qtmp4_reader_c(const track_info_c &ti,
   , m_fragment_implicit_offset{}
   , m_fragment{}
   , m_track_for_fragment{}
-  , m_timecodes_calculated{}
+  , m_timestamps_calculated{}
   , m_debug_chapters{    "qtmp4|qtmp4_full|qtmp4_chapters"}
   , m_debug_headers{     "qtmp4|qtmp4_full|qtmp4_headers"}
   , m_debug_tables{            "qtmp4_full|qtmp4_tables|qtmp4_tables_full"}
@@ -310,7 +310,7 @@ qtmp4_reader_c::parse_headers() {
   detect_interleaving();
 
   if (!g_identifying)
-    calculate_timecodes();
+    calculate_timestamps();
 
   mxdebug_if(m_debug_headers, boost::format("Number of valid tracks found: %1%\n") % m_demuxers.size());
 }
@@ -341,47 +341,47 @@ qtmp4_reader_c::verify_track_parameters_and_update_indexes() {
 }
 
 boost::optional<int64_t>
-qtmp4_reader_c::calculate_global_min_timecode()
+qtmp4_reader_c::calculate_global_min_timestamp()
   const {
-  boost::optional<int64_t> global_min_timecode;
+  boost::optional<int64_t> global_min_timestamp;
 
   for (auto const &dmx : m_demuxers) {
     if (!demuxing_requested(dmx->type, dmx->id, dmx->language)) {
       continue;
     }
 
-    auto dmx_min_timecode = dmx->min_timecode();
-    if (dmx_min_timecode && (!global_min_timecode || (dmx_min_timecode < *global_min_timecode))) {
-      global_min_timecode.reset(*dmx_min_timecode);
+    auto dmx_min_timestamp = dmx->min_timestamp();
+    if (dmx_min_timestamp && (!global_min_timestamp || (dmx_min_timestamp < *global_min_timestamp))) {
+      global_min_timestamp.reset(*dmx_min_timestamp);
     }
 
-    mxdebug_if(m_debug_headers, boost::format("Minimum timecode of track %1%: %2%\n") % dmx->id % (dmx_min_timecode ? format_timestamp(*dmx_min_timecode) : "none"));
+    mxdebug_if(m_debug_headers, boost::format("Minimum timestamp of track %1%: %2%\n") % dmx->id % (dmx_min_timestamp ? format_timestamp(*dmx_min_timestamp) : "none"));
   }
 
-  mxdebug_if(m_debug_headers, boost::format("Minimum global timecode: %1%\n") % (global_min_timecode ? format_timestamp(*global_min_timecode) : "none"));
+  mxdebug_if(m_debug_headers, boost::format("Minimum global timestamp: %1%\n") % (global_min_timestamp ? format_timestamp(*global_min_timestamp) : "none"));
 
-  return global_min_timecode;
+  return global_min_timestamp;
 }
 
 void
-qtmp4_reader_c::calculate_timecodes() {
-  if (m_timecodes_calculated)
+qtmp4_reader_c::calculate_timestamps() {
+  if (m_timestamps_calculated)
     return;
 
   for (auto &dmx : m_demuxers) {
     dmx->calculate_frame_rate();
-    dmx->calculate_timecodes();
+    dmx->calculate_timestamps();
   }
 
-  auto min_timecode = calculate_global_min_timecode();
+  auto min_timestamp = calculate_global_min_timestamp();
 
-  if (min_timecode && (0 != *min_timecode)) {
+  if (min_timestamp && (0 != *min_timestamp)) {
     for (auto &dmx : m_demuxers) {
-      dmx->adjust_timecodes(-*min_timecode);
+      dmx->adjust_timestamps(-*min_timestamp);
     }
   }
 
-  m_timecodes_calculated = true;
+  m_timestamps_calculated = true;
 }
 
 void
@@ -977,14 +977,14 @@ qtmp4_reader_c::handle_chpl_atom(qt_atom_t,
 
   int i;
   for (i = 0; i < count; ++i) {
-    uint64_t timecode = m_in->read_uint64_be() * 100;
+    uint64_t timestamp = m_in->read_uint64_be() * 100;
     memory_cptr buf   = memory_c::alloc(m_in->read_uint8() + 1);
     memset(buf->get_buffer(), 0, buf->get_size());
 
     if (m_in->read(buf->get_buffer(), buf->get_size() - 1) != (buf->get_size() - 1))
       break;
 
-    entries.push_back(qtmp4_chapter_entry_t(std::string(reinterpret_cast<char *>(buf->get_buffer())), timecode));
+    entries.push_back(qtmp4_chapter_entry_t(std::string(reinterpret_cast<char *>(buf->get_buffer())), timestamp));
   }
 
   recode_chapter_entries(entries);
@@ -1135,15 +1135,15 @@ qtmp4_reader_c::process_chapter_entries(int level,
   for (; entries.size() > i; ++i) {
     qtmp4_chapter_entry_t &chapter = entries[i];
 
-    mxdebug_if(m_debug_chapters, boost::format("%1%%2%: start %4% name %3%\n") % space((level + 1) * 2 + 1) % i % chapter.m_name % format_timestamp(chapter.m_timecode));
+    mxdebug_if(m_debug_chapters, boost::format("%1%%2%: start %4% name %3%\n") % space((level + 1) * 2 + 1) % i % chapter.m_name % format_timestamp(chapter.m_timestamp));
 
     out.puts(boost::format("CHAPTER%|1$02d|=%|2$02d|:%|3$02d|:%|4$02d|.%|5$03d|\n"
                            "CHAPTER%|1$02d|NAME=%6%\n")
              % i
-             % ( chapter.m_timecode / 60 / 60 / 1000000000)
-             % ((chapter.m_timecode      / 60 / 1000000000) %   60)
-             % ((chapter.m_timecode           / 1000000000) %   60)
-             % ((chapter.m_timecode           /    1000000) % 1000)
+             % ( chapter.m_timestamp / 60 / 60 / 1000000000)
+             % ((chapter.m_timestamp      / 60 / 1000000000) %   60)
+             % ((chapter.m_timestamp           / 1000000000) %   60)
+             % ((chapter.m_timestamp           /    1000000) % 1000)
              % chapter.m_name);
   }
 
@@ -1600,7 +1600,7 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
   }
 
   auto duration = dmx.m_use_frame_rate_for_duration ? *dmx.m_use_frame_rate_for_duration : index.duration;
-  PTZR(dmx.ptzr)->process(new packet_t(buffer, index.timecode, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+  PTZR(dmx.ptzr)->process(new packet_t(buffer, index.timestamp, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
   ++dmx.pos;
 
   if (dmx.pos < dmx.m_index.size())
@@ -2085,14 +2085,14 @@ qtmp4_demuxer_c::to_nsecs(int64_t value,
 }
 
 void
-qtmp4_demuxer_c::calculate_timecodes_constant_sample_size() {
+qtmp4_demuxer_c::calculate_timestamps_constant_sample_size() {
   int const num_frame_offsets = frame_offset_table.size();
   auto chunk_index            = 0;
 
   for (auto const &chunk : chunk_table) {
     auto frame_offset = chunk_index < num_frame_offsets ? frame_offset_table[chunk_index] : 0;
 
-    timecodes.push_back(to_nsecs(static_cast<uint64_t>(chunk.samples) * duration + frame_offset));
+    timestamps.push_back(to_nsecs(static_cast<uint64_t>(chunk.samples) * duration + frame_offset));
     durations.push_back(to_nsecs(static_cast<uint64_t>(chunk.size)    * duration));
     frame_indices.push_back(chunk_index);
 
@@ -2101,29 +2101,29 @@ qtmp4_demuxer_c::calculate_timecodes_constant_sample_size() {
 }
 
 void
-qtmp4_demuxer_c::calculate_timecodes_variable_sample_size() {
+qtmp4_demuxer_c::calculate_timestamps_variable_sample_size() {
   auto const num_frame_offsets = frame_offset_table.size();
   auto const num_samples       = sample_table.size();
 
-  std::vector<int64_t> timecodes_before_offsets;
+  std::vector<int64_t> timestamps_before_offsets;
 
-  timecodes.reserve(num_samples);
-  timecodes_before_offsets.reserve(num_samples);
+  timestamps.reserve(num_samples);
+  timestamps_before_offsets.reserve(num_samples);
   durations.reserve(num_samples);
   frame_indices.reserve(num_samples);
 
   for (unsigned int frame = 0; num_samples > frame; ++frame) {
-    auto timecode = to_nsecs(sample_table[frame].pts);
+    auto timestamp = to_nsecs(sample_table[frame].pts);
 
     frame_indices.push_back(frame);
-    timecodes_before_offsets.push_back(timecode);
-    timecodes.push_back(timecode + (frame < num_frame_offsets ? to_nsecs(frame_offset_table[frame]) : 0));
+    timestamps_before_offsets.push_back(timestamp);
+    timestamps.push_back(timestamp + (frame < num_frame_offsets ? to_nsecs(frame_offset_table[frame]) : 0));
   }
 
   int64_t avg_duration = 0, num_good_frames = 0;
 
   for (unsigned int frame = 0; num_samples > (frame + 1); ++frame) {
-    int64_t diff = timecodes_before_offsets[frame + 1] - timecodes_before_offsets[frame];
+    int64_t diff = timestamps_before_offsets[frame + 1] - timestamps_before_offsets[frame];
 
     if (0 >= diff)
       durations.push_back(0);
@@ -2145,47 +2145,47 @@ qtmp4_demuxer_c::calculate_timecodes_variable_sample_size() {
 }
 
 void
-qtmp4_demuxer_c::calculate_timecodes() {
-  if (m_timecodes_calculated)
+qtmp4_demuxer_c::calculate_timestamps() {
+  if (m_timestamps_calculated)
     return;
 
   if (0 != sample_size)
-    calculate_timecodes_constant_sample_size();
+    calculate_timestamps_constant_sample_size();
   else
-    calculate_timecodes_variable_sample_size();
+    calculate_timestamps_variable_sample_size();
 
   if (m_debug_tables) {
     mxdebug(boost::format("Timestamps for track ID %1%:\n") % id);
     auto fmt = boost::format("  %1%: pts %2%\n");
-    auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), timecodes.size());
+    auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), timestamps.size());
 
     for (auto idx = 0u; idx < end; ++idx)
-      mxdebug(fmt % idx % format_timestamp(timecodes[idx]));
+      mxdebug(fmt % idx % format_timestamp(timestamps[idx]));
   }
 
   build_index();
   apply_edit_list();
 
-  m_timecodes_calculated = true;
+  m_timestamps_calculated = true;
 }
 
 void
-qtmp4_demuxer_c::adjust_timecodes(int64_t delta) {
-  for (auto &timecode : timecodes)
-    timecode += delta;
+qtmp4_demuxer_c::adjust_timestamps(int64_t delta) {
+  for (auto &timestamp : timestamps)
+    timestamp += delta;
 
   for (auto &index : m_index)
-    index.timecode += delta;
+    index.timestamp += delta;
 }
 
 boost::optional<int64_t>
-qtmp4_demuxer_c::min_timecode()
+qtmp4_demuxer_c::min_timestamp()
   const {
   if (m_index.empty()) {
     return {};
   }
 
-  return boost::accumulate(m_index, std::numeric_limits<int64_t>::max(), [](int64_t min, auto const &entry) { return std::min(min, entry.timecode); });
+  return boost::accumulate(m_index, std::numeric_limits<int64_t>::max(), [](int64_t min, auto const &entry) { return std::min(min, entry.timestamp); });
 }
 
 bool
@@ -2365,7 +2365,7 @@ qtmp4_demuxer_c::apply_edit_list() {
     auto const edit_duration  = to_nsecs(edit.segment_duration, global_time_scale);
     auto const edit_start_cts = to_nsecs(edit.media_time);
     auto const edit_end_cts   = edit_start_cts + edit_duration;
-    auto itr                  = boost::range::find_if(m_index, [edit_start_cts](auto const &entry) { return (entry.timecode + entry.duration - (entry.duration > 0 ? 1 : 0)) >= edit_start_cts; });
+    auto itr                  = boost::range::find_if(m_index, [edit_start_cts](auto const &entry) { return (entry.timestamp + entry.duration - (entry.duration > 0 ? 1 : 0)) >= edit_start_cts; });
     auto const frame_idx      = static_cast<uint64_t>(std::distance(index_begin, itr));
 
     mxdebug_if(m_debug_editlists,
@@ -2377,8 +2377,8 @@ qtmp4_demuxer_c::apply_edit_list() {
       --itr;
     }
 
-    while ((itr < index_end) && (!edit_duration || (itr->timecode < edit_end_cts))) {
-      itr->timecode = timeline_cts + itr->timecode - edit_start_cts;
+    while ((itr < index_end) && (!edit_duration || (itr->timestamp < edit_end_cts))) {
+      itr->timestamp = timeline_cts + itr->timestamp - edit_start_cts;
       edited_index.emplace_back(*itr);
 
       ++itr;
@@ -2403,7 +2403,7 @@ qtmp4_demuxer_c::dump_index_entries(std::string const &message)
 
   for (auto idx = 0u; idx < end; ++idx) {
     auto const &entry = m_index[idx];
-    mxdebug(fmt % idx % format_timestamp(entry.timecode) % format_timestamp(entry.duration) % entry.is_keyframe % entry.file_pos % entry.size);
+    mxdebug(fmt % idx % format_timestamp(entry.timestamp) % format_timestamp(entry.duration) % entry.is_keyframe % entry.file_pos % entry.size);
   }
 }
 
@@ -2449,7 +2449,7 @@ qtmp4_demuxer_c::build_index_constant_sample_size_mode() {
       }
     }
 
-    m_index.emplace_back(chunk_table[frame_idx].pos, frame_size, timecodes[frame_idx], durations[frame_idx], false);
+    m_index.emplace_back(chunk_table[frame_idx].pos, frame_size, timestamps[frame_idx], durations[frame_idx], false);
   }
 }
 
@@ -2459,7 +2459,7 @@ qtmp4_demuxer_c::build_index_chunk_mode() {
     auto act_frame_idx = frame_indices[frame_idx];
     auto &sample       = sample_table[act_frame_idx];
 
-    m_index.emplace_back(sample.pos, sample.size, timecodes[frame_idx], durations[frame_idx], false);
+    m_index.emplace_back(sample.pos, sample.size, timestamps[frame_idx], durations[frame_idx], false);
   }
 }
 
@@ -2508,7 +2508,7 @@ qtmp4_demuxer_c::read_first_bytes(int num_bytes) {
   if (!update_tables())
     return memory_cptr{};
 
-  calculate_timecodes();
+  calculate_timestamps();
 
   auto buf       = memory_c::alloc(num_bytes);
   size_t buf_pos = 0;

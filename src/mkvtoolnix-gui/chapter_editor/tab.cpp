@@ -315,8 +315,8 @@ Tab::readFileEndTimestampForMatroska() {
     return true;
   }
 
-  auto timecodeScale = FindChildValue<KaxTimecodeScale, uint64_t>(static_cast<KaxInfo &>(*info), TIMECODE_SCALE);
-  auto duration      = timestamp_c::ns(durationKax->GetValue() * timecodeScale);
+  auto timestampScale = FindChildValue<KaxTimecodeScale, uint64_t>(static_cast<KaxInfo &>(*info), TIMESTAMP_SCALE);
+  auto duration       = timestamp_c::ns(durationKax->GetValue() * timestampScale);
 
   qDebug() << "readFileEndTimestampForMatroska: duration is" << Q(format_timestamp(duration));
 
@@ -332,7 +332,7 @@ Tab::readFileEndTimestampForMatroska() {
     return true;
   }
 
-  cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(*cluster), timecodeScale);
+  cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(*cluster), timestampScale);
 
   auto minBlockTimestamp = timestamp_c::ns(0);
 

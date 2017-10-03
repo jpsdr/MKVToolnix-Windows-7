@@ -25,7 +25,7 @@
 #include "common/timestamp.h"
 #include "merge/libmatroska_extensions.h"
 
-#define RND_TIMECODE_SCALE(a) (std::llround(static_cast<double>(a) / static_cast<double>(g_timecode_scale)) * static_cast<int64_t>(g_timecode_scale))
+#define ROUND_TIMESTAMP_SCALE(a) (std::llround(static_cast<double>(a) / static_cast<double>(g_timestamp_scale)) * static_cast<int64_t>(g_timestamp_scale))
 
 class generic_packetizer_c;
 class render_groups_c;
@@ -52,13 +52,13 @@ public:
   void prepare_new_cluster();
   KaxCluster *get_cluster();
   void add_packet(packet_cptr packet);
-  int64_t get_timecode();
+  int64_t get_timestamp();
   int render();
   int get_cluster_content_size();
   int64_t get_duration() const;
-  int64_t get_first_timecode_in_file() const;
-  int64_t get_first_timecode_in_part() const;
-  int64_t get_max_timecode_in_file() const;
+  int64_t get_first_timestamp_in_file() const;
+  int64_t get_first_timestamp_in_part() const;
+  int64_t get_max_timestamp_in_file() const;
   int64_t get_discarded_duration() const;
   void handle_discarded_duration(bool create_new_file, bool previously_discarding);
 

@@ -327,18 +327,18 @@ vobsub_reader_c::parse_headers() {
     for (i = 0; i < tsize; i++) {
       mxinfo(boost::format("vobsub_reader: Track number %1%\n") % i);
       for (k = 0; k < tracks[i]->entries.size(); k++)
-        mxinfo(boost::format("vobsub_reader:  %|1$04u| position: %|2$12d| (0x%|3$04x|%|4$08x|), timecode: %|5$12d| (%6%)\n")
+        mxinfo(boost::format("vobsub_reader:  %|1$04u| position: %|2$12d| (0x%|3$04x|%|4$08x|), timestamp: %|5$12d| (%6%)\n")
                % k % tracks[i]->entries[k].position % (tracks[i]->entries[k].position >> 32) % (tracks[i]->entries[k].position & 0xffffffff)
                % (tracks[i]->entries[k].timestamp / 1000000) % format_timestamp(tracks[i]->entries[k].timestamp, 3));
     }
   }
 }
 
-#define deliver() deliver_packet(dst_buf, dst_size, timecode, duration, PTZR(track->ptzr));
+#define deliver() deliver_packet(dst_buf, dst_size, timestamp, duration, PTZR(track->ptzr));
 int
 vobsub_reader_c::deliver_packet(unsigned char *buf,
                                 int size,
-                                int64_t timecode,
+                                int64_t timestamp,
                                 int64_t default_duration,
                                 generic_packetizer_c *ptzr) {
   if (!buf || (0 == size)) {
@@ -349,7 +349,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
   auto duration = mtx::spu::get_duration(buf, size);
   if (!duration.valid()) {
     duration = timestamp_c::ns(default_duration);
-    mxverb(2, boost::format("vobsub_reader: Could not extract the duration for a SPU packet (timecode: %1%).") % format_timestamp(timecode, 3));
+    mxverb(2, boost::format("vobsub_reader: Could not extract the duration for a SPU packet (timestamp: %1%).") % format_timestamp(timestamp, 3));
 
     int dcsq  =                   get_uint16_be(&buf[2]);
     int dcsq2 = dcsq + 3 < size ? get_uint16_be(&buf[dcsq + 2]) : -1;
@@ -411,7 +411,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
   }
 
   if (duration.valid())
-    ptzr->process(new packet_t(new memory_c(buf, size, true), timecode, duration.to_ns()));
+    ptzr->process(new packet_t(new memory_c(buf, size, true), timestamp, duration.to_ns()));
   else
     safefree(buf);
 
@@ -428,7 +428,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
   unsigned char buf[5];
 
   vobsub_track_c *track         = tracks[track_id];
-  int64_t timecode              = track->entries[track->idx].timestamp;
+  int64_t timestamp              = track->entries[track->idx].timestamp;
   int64_t duration              = track->entries[track->idx].duration;
   uint64_t extraction_start_pos = track->entries[track->idx].position;
   uint64_t extraction_end_pos   = track->idx >= track->entries.size() - 1 ? m_sub_file->get_size() : track->entries[track->idx + 1].position;
@@ -481,7 +481,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
             mxwarn_tid(m_ti.m_fname, track_id,
                        boost::format(Y("Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timecode %3%, assuming MPEG2. "
                                        "No further warnings will be printed for this track.\n"))
-                       % c % track->packet_num % format_timestamp(timecode, 3));
+                       % c % track->packet_num % format_timestamp(timestamp, 3));
             track->mpeg_version_warning_printed = true;
           }
           mpeg_version = 2;

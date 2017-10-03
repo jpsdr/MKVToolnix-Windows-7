@@ -47,7 +47,7 @@ frame_t::frame_t(frame_header_t const &p_header)
 void
 frame_t::init() {
   data.reset();
-  timecode             = -1;
+  timestamp             = -1;
   duration             = 0;
   contains_field       = false;
   contains_entry_point = false;
@@ -287,8 +287,8 @@ es_parser_c::es_parser_c()
   : m_stream_pos(0)
   , m_seqhdr_found(false)
   , m_seqhdr_changed{false}
-  , m_previous_timecode(0)
-  , m_num_timecodes(0)
+  , m_previous_timestamp(0)
+  , m_num_timestamps(0)
   , m_num_repeated_fields(0)
   , m_default_duration_forced(false)
   , m_default_duration(1000000000ll / 25)
@@ -433,10 +433,10 @@ es_parser_c::handle_frame_packet(memory_cptr packet) {
   m_current_frame->data  = packet;
   m_current_frame->data->grab();
 
-  if (!m_timecodes.empty())
+  if (!m_timestamps.empty())
     mxverb(2,
-           boost::format("es_parser_c::handle_frame_packet: next provided timecode %1% next calculated timecode %2%\n")
-           % format_timestamp(m_timecodes.front()) % format_timestamp(peek_next_calculated_timecode()));
+           boost::format("es_parser_c::handle_frame_packet: next provided timestamp %1% next calculated timestamp %2%\n")
+           % format_timestamp(m_timestamps.front()) % format_timestamp(peek_next_calculated_timestamp()));
 
 }
 
@@ -487,7 +487,7 @@ es_parser_c::flush_frame() {
   if (!m_pre_frame_extra_data.empty() || !m_post_frame_extra_data.empty())
     combine_extra_data_with_packet();
 
-  m_current_frame->timecode = get_next_timecode();
+  m_current_frame->timestamp = get_next_timestamp();
   m_current_frame->duration = get_default_duration();
 
   m_frames.push_back(m_current_frame);
@@ -547,37 +547,37 @@ es_parser_c::combine_extra_data_with_packet() {
 }
 
 int64_t
-es_parser_c::get_next_timecode() {
-  int64_t next_timecode = m_previous_timecode
-                        + (m_num_timecodes + m_num_repeated_fields) * m_default_duration
+es_parser_c::get_next_timestamp() {
+  int64_t next_timestamp = m_previous_timestamp
+                        + (m_num_timestamps + m_num_repeated_fields) * m_default_duration
                         - m_num_repeated_fields                     * m_default_duration / 2;
 
-  if (is_timecode_available()) {
+  if (is_timestamp_available()) {
     mxverb(3,
-           boost::format("\nes_parser_c::get_next_timecode(): provided timecode available; original next %1%, provided %2%\n")
-           % format_timestamp(next_timecode) % format_timestamp(m_timecodes.front()));
+           boost::format("\nes_parser_c::get_next_timestamp(): provided timestamp available; original next %1%, provided %2%\n")
+           % format_timestamp(next_timestamp) % format_timestamp(m_timestamps.front()));
 
-    next_timecode         = m_timecodes.front();
-    m_previous_timecode   = m_timecodes.front();
-    m_num_timecodes       = 0;
+    next_timestamp         = m_timestamps.front();
+    m_previous_timestamp   = m_timestamps.front();
+    m_num_timestamps       = 0;
     m_num_repeated_fields = 0;
 
-    m_timecodes.pop_front();
-    m_timecode_positions.pop_front();
+    m_timestamps.pop_front();
+    m_timestamp_positions.pop_front();
   }
 
-  m_num_timecodes += 1 + m_current_frame->header.repeat_frame;
+  m_num_timestamps += 1 + m_current_frame->header.repeat_frame;
   if (m_seqhdr.interlace_flag && m_current_frame->header.repeat_first_field_flag && !m_current_frame->contains_field)
     ++m_num_repeated_fields;
 
-  return next_timecode;
+  return next_timestamp;
 }
 
 int64_t
-es_parser_c::peek_next_calculated_timecode()
+es_parser_c::peek_next_calculated_timestamp()
   const {
-  return m_previous_timecode
-    + (m_num_timecodes + m_num_repeated_fields) * m_default_duration
+  return m_previous_timestamp
+    + (m_num_timestamps + m_num_repeated_fields) * m_default_duration
     - m_num_repeated_fields                     * m_default_duration / 2;
 }
 
@@ -602,20 +602,20 @@ es_parser_c::add_extra_data_if_not_present(std::deque<memory_cptr> &extra_data,
 }
 
 void
-es_parser_c::add_timecode(int64_t timecode,
+es_parser_c::add_timestamp(int64_t timestamp,
                           int64_t position) {
   position += m_stream_pos;
   if (m_unparsed_buffer)
     position += m_unparsed_buffer->get_size();
 
-  m_timecodes.push_back(timecode);
-  m_timecode_positions.push_back(position);
+  m_timestamps.push_back(timestamp);
+  m_timestamp_positions.push_back(position);
 }
 
 bool
-es_parser_c::is_timecode_available()
+es_parser_c::is_timestamp_available()
   const {
-  return !m_timecodes.empty() && (m_timecode_positions.front() <= m_stream_pos);
+  return !m_timestamps.empty() && (m_timestamp_positions.front() <= m_stream_pos);
 }
 
 }}

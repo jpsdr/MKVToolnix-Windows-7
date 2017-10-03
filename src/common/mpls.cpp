@@ -23,7 +23,7 @@
 namespace mtx { namespace bluray { namespace mpls {
 
 static timestamp_c
-mpls_time_to_timecode(uint64_t value) {
+mpls_time_to_timestamp(uint64_t value) {
   return timestamp_c::ns(value * 1000000ull / 45);
 }
 
@@ -279,8 +279,8 @@ parser_c::parse_play_item() {
   item.is_multi_angle       = m_bc->get_bit();
   item.connection_condition = m_bc->get_bits(4);
   item.stc_id               = m_bc->get_bits(8);
-  item.in_time              = mpls_time_to_timecode(m_bc->get_bits(32));
-  item.out_time             = mpls_time_to_timecode(m_bc->get_bits(32));
+  item.in_time              = mpls_time_to_timestamp(m_bc->get_bits(32));
+  item.out_time             = mpls_time_to_timestamp(m_bc->get_bits(32));
   item.relative_in_time     = m_playlist.duration;
   m_playlist.duration      += item.out_time - item.in_time;
 
@@ -327,10 +327,10 @@ parser_c::parse_sub_play_item() {
   item.connection_condition       = m_bc->skip_get_bits(27, 4); // reserved
   item.is_multi_clip_entries      = m_bc->get_bit();
   item.ref_to_stc_id              = m_bc->get_bits(8);
-  item.in_time                    = mpls_time_to_timecode(m_bc->get_bits(32));
-  item.out_time                   = mpls_time_to_timecode(m_bc->get_bits(32));
+  item.in_time                    = mpls_time_to_timestamp(m_bc->get_bits(32));
+  item.out_time                   = mpls_time_to_timestamp(m_bc->get_bits(32));
   item.sync_playitem_id           = m_bc->get_bits(16);
-  item.sync_start_pts_of_playitem = mpls_time_to_timecode(m_bc->get_bits(32));
+  item.sync_start_pts_of_playitem = mpls_time_to_timestamp(m_bc->get_bits(32));
 
   if (!item.is_multi_clip_entries)
     return item;
@@ -466,8 +466,8 @@ parser_c::parse_chapters() {
       continue;
 
     auto &play_item = m_playlist.items[play_item_idx];
-    auto timecode   = mpls_time_to_timecode(m_bc->get_bits(32));
-    m_chapters.push_back(timecode - play_item.in_time + play_item.relative_in_time);
+    auto timestamp   = mpls_time_to_timestamp(m_bc->get_bits(32));
+    m_chapters.push_back(timestamp - play_item.in_time + play_item.relative_in_time);
   }
 
   if (   !hack_engaged(ENGAGE_KEEP_LAST_CHAPTER_IN_MPLS)
@@ -492,8 +492,8 @@ parser_c::dump()
                        "  ok:           %1%\n"
                        "  num_chapters: %2%\n")
          % m_ok % m_chapters.size());
-  for (auto &timecode : m_chapters)
-    mxinfo(boost::format("    %1%\n") % timecode);
+  for (auto &timestamp : m_chapters)
+    mxinfo(boost::format("    %1%\n") % timestamp);
 
   m_header.dump();
   m_playlist.dump();

@@ -49,8 +49,8 @@ struct real_demuxer_t {
 
   bool first_frame;
   int num_packets;
-  uint64_t last_timecode;
-  int64_t ref_timecode;         // can be negative
+  uint64_t last_timestamp;
+  int64_t ref_timestamp;         // can be negative
 
   std::vector<rv_segment_cptr> segments;
 
@@ -73,8 +73,8 @@ struct real_demuxer_t {
     ra5p(nullptr),
     first_frame(true),
     num_packets(0),
-    last_timecode(0),
-    ref_timecode(0) {
+    last_timestamp(0),
+    ref_timestamp(0) {
 
     memset(fourcc, 0, 5);
   };
@@ -115,8 +115,8 @@ protected:
   virtual void set_dimensions(real_demuxer_cptr dmx, unsigned char *buffer, int size);
   virtual void get_information_from_data();
   virtual void deliver_aac_frames(real_demuxer_cptr dmx, memory_c &mem);
-  virtual void queue_audio_frames(real_demuxer_cptr dmx, memory_c &mem, uint64_t timecode, uint32_t flags);
-  virtual void queue_one_audio_frame(real_demuxer_cptr dmx, memory_c &mem, uint64_t timecode, uint32_t flags);
+  virtual void queue_audio_frames(real_demuxer_cptr dmx, memory_c &mem, uint64_t timestamp, uint32_t flags);
+  virtual void queue_one_audio_frame(real_demuxer_cptr dmx, memory_c &mem, uint64_t timestamp, uint32_t flags);
   virtual void deliver_audio_frames(real_demuxer_cptr dmx, uint64_t duration);
 
   virtual void create_audio_packetizer(real_demuxer_cptr dmx);

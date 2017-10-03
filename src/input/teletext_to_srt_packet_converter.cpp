@@ -360,12 +360,12 @@ teletext_to_srt_packet_converter_c::queue_packet(packet_cptr const &new_packet) 
   auto new_content = std::string{reinterpret_cast<char const *>(new_packet->data->get_buffer()), new_packet->data->get_size()};
 
   if (m_current_track->m_queued_packet) {
-    auto prev_timestamp = timestamp_c::ns(m_current_track->m_queued_packet->timecode);
+    auto prev_timestamp = timestamp_c::ns(m_current_track->m_queued_packet->timestamp);
     auto prev_end       = prev_timestamp + timestamp_c::ns(m_current_track->m_queued_packet->duration);
-    auto diff           = timestamp_c::ns(new_packet->timecode) - prev_end;
+    auto diff           = timestamp_c::ns(new_packet->timestamp) - prev_end;
 
     if ((diff.abs().to_ms() <= 40) && (old_content == new_content)) {
-      m_current_track->m_queued_packet->duration = (timestamp_c::ns(new_packet->timecode + new_packet->duration) - prev_timestamp).abs().to_ns();
+      m_current_track->m_queued_packet->duration = (timestamp_c::ns(new_packet->timestamp + new_packet->duration) - prev_timestamp).abs().to_ns();
       mxdebug_if(m_debug,
                  boost::format("  queue: merging packet with previous, now %1% duration %2% content %3%\n")
                  % format_timestamp(prev_timestamp) % format_timestamp(m_current_track->m_queued_packet->duration) % new_content);
@@ -381,7 +381,7 @@ teletext_to_srt_packet_converter_c::queue_packet(packet_cptr const &new_packet) 
 
   mxdebug_if(m_debug,
              boost::format("  queue: queueing packet %1% duration %2% content %3%\n")
-             % format_timestamp(new_packet->timecode) % format_timestamp(new_packet->duration) % new_content);
+             % format_timestamp(new_packet->timestamp) % format_timestamp(new_packet->duration) % new_content);
   m_current_track->m_queued_packet = new_packet;
 }
 
@@ -394,7 +394,7 @@ teletext_to_srt_packet_converter_c::flush() {
 
     auto old_content = std::string{reinterpret_cast<char const *>(data->m_queued_packet->data->get_buffer()), data->m_queued_packet->data->get_size()};
 
-    mxdebug_if(m_debug, boost::format("  queue: flushing packet %1% duration %2% content %3%\n") % format_timestamp(data->m_queued_packet->timecode) % format_timestamp(data->m_queued_packet->duration) % old_content);
+    mxdebug_if(m_debug, boost::format("  queue: flushing packet %1% duration %2% content %3%\n") % format_timestamp(data->m_queued_packet->timestamp) % format_timestamp(data->m_queued_packet->duration) % old_content);
 
     data->m_ptzr->process(data->m_queued_packet);
     data->m_queued_packet.reset();
@@ -456,9 +456,9 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
   m_in_size                  = packet->data->get_size();
   m_buf                      = packet->data->get_buffer();
   m_pos                      = 1;                // skip sub ID
-  m_current_packet_timestamp = timestamp_c::ns(packet->timecode);
+  m_current_packet_timestamp = timestamp_c::ns(packet->timestamp);
 
-  mxdebug_if(m_debug, boost::format("Starting conversion on packet with length %1% timestamp %2%\n") % m_in_size % format_timestamp(packet->timecode));
+  mxdebug_if(m_debug, boost::format("Starting conversion on packet with length %1% timestamp %2%\n") % m_in_size % format_timestamp(packet->timestamp));
 
   //
   // PES teletext payload (payload_index) packet length = 44 + 2 = 46

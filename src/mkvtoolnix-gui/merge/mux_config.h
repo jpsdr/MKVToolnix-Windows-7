@@ -53,7 +53,7 @@ public:
     DoNotSplit = 0,
     SplitAfterSize,
     SplitAfterDuration,
-    SplitAfterTimecodes,
+    SplitAfterTimestamps,
     SplitByParts,
     SplitByPartsFrames,
     SplitByFrames,

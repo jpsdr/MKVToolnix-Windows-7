@@ -46,7 +46,7 @@ xtr_srt_c::handle_frame(xtr_frame_t &f) {
     f.duration = 1000000000;
   }
 
-  int64_t start =         f.timecode / 1000000;
+  int64_t start =         f.timestamp / 1000000;
   int64_t end   = start + f.duration / 1000000;
 
   ++m_num_entries;
@@ -169,7 +169,7 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
     m_warning_printed = true;
   }
 
-  int64_t start =         f.timecode / 1000000;
+  int64_t start =         f.timestamp / 1000000;
   int64_t end   = start + f.duration / 1000000;
 
   char *s       = (char *)safemalloc(f.frame->get_size() + 1);
@@ -187,7 +187,7 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   int num;
   if (!parse_number(fields[0], num)) {
     mxwarn(boost::format(Y("Invalid format for a SSA line ('%1%') at timecode %2%: The first field is not an integer. This entry will be skipped.\n"))
-           % s % format_timestamp(f.timecode * 1000000, 3));
+           % s % format_timestamp(f.timestamp * 1000000, 3));
     return;
   }
 
@@ -341,7 +341,7 @@ xtr_usf_c::create_file(xtr_base_c *master,
 
 void
 xtr_usf_c::handle_frame(xtr_frame_t &f) {
-  usf_entry_t entry("", f.timecode, f.timecode + f.duration);
+  usf_entry_t entry("", f.timestamp, f.timestamp + f.duration);
   entry.m_text.append((const char *)f.frame->get_buffer(), f.frame->get_size());
   m_entries.push_back(entry);
 }

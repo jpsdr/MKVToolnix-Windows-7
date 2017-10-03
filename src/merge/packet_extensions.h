@@ -19,46 +19,46 @@
 
 #include "merge/packet.h"
 
-class multiple_timecodes_packet_extension_c: public packet_extension_c {
+class multiple_timestamps_packet_extension_c: public packet_extension_c {
 protected:
-  std::deque<int64_t> m_timecodes;
+  std::deque<int64_t> m_timestamps;
   std::deque<int64_t> m_positions;
 
 public:
-  multiple_timecodes_packet_extension_c() {
+  multiple_timestamps_packet_extension_c() {
   }
 
-  virtual ~multiple_timecodes_packet_extension_c() {
+  virtual ~multiple_timestamps_packet_extension_c() {
   }
 
   virtual packet_extension_type_e get_type() const {
-    return MULTIPLE_TIMECODES;
+    return MULTIPLE_TIMESTAMPS;
   }
 
-  inline void add(int64_t timecode, int64_t position) {
-    m_timecodes.push_back(timecode);
+  inline void add(int64_t timestamp, int64_t position) {
+    m_timestamps.push_back(timestamp);
     m_positions.push_back(position);
   }
 
   inline bool empty() {
-    return m_timecodes.empty();
+    return m_timestamps.empty();
   }
 
-  inline bool get_next(int64_t &timecode, int64_t &position) {
-    if (m_timecodes.empty())
+  inline bool get_next(int64_t &timestamp, int64_t &position) {
+    if (m_timestamps.empty())
       return false;
 
-    timecode = m_timecodes.front();
+    timestamp = m_timestamps.front();
     position = m_positions.front();
 
-    m_timecodes.pop_front();
+    m_timestamps.pop_front();
     m_positions.pop_front();
 
     return true;
   }
 };
 
-using multiple_timecodes_packet_extension_cptr = std::shared_ptr<multiple_timecodes_packet_extension_c>;
+using multiple_timestamps_packet_extension_cptr = std::shared_ptr<multiple_timestamps_packet_extension_c>;
 
 class subtitle_number_packet_extension_c: public packet_extension_c {
 private:

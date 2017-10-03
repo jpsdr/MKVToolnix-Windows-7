@@ -28,9 +28,9 @@ using namespace libmatroska;
 
 vc1_video_packetizer_c::vc1_video_packetizer_c(generic_reader_c *n_reader, track_info_c &n_ti)
   : generic_packetizer_c(n_reader, n_ti)
-  , m_previous_timecode(-1)
+  , m_previous_timestamp(-1)
 {
-  m_relaxed_timecode_checking = true;
+  m_relaxed_timestamp_checking = true;
 
   set_track_type(track_video);
   set_codec_id(MKV_V_MSCOMP);
@@ -96,25 +96,25 @@ vc1_video_packetizer_c::set_headers() {
 }
 
 void
-vc1_video_packetizer_c::add_timecodes_to_parser(packet_cptr &packet) {
-  if (-1 != packet->timecode)
-    m_parser.add_timecode(packet->timecode, 0);
+vc1_video_packetizer_c::add_timestamps_to_parser(packet_cptr &packet) {
+  if (-1 != packet->timestamp)
+    m_parser.add_timestamp(packet->timestamp, 0);
 
   for (auto &extension : packet->extensions) {
-    if (extension->get_type() != packet_extension_c::MULTIPLE_TIMECODES)
+    if (extension->get_type() != packet_extension_c::MULTIPLE_TIMESTAMPS)
       continue;
 
-    multiple_timecodes_packet_extension_c *tc_extension = static_cast<multiple_timecodes_packet_extension_c *>(extension.get());
-    int64_t timecode, position;
+    multiple_timestamps_packet_extension_c *tc_extension = static_cast<multiple_timestamps_packet_extension_c *>(extension.get());
+    int64_t timestamp, position;
 
-    while (tc_extension->get_next(timecode, position))
-      m_parser.add_timecode(timecode, position);
+    while (tc_extension->get_next(timestamp, position))
+      m_parser.add_timestamp(timestamp, position);
   }
 }
 
 int
 vc1_video_packetizer_c::process(packet_cptr packet) {
-  add_timecodes_to_parser(packet);
+  add_timestamps_to_parser(packet);
 
   m_parser.add_bytes(packet->data->get_buffer(), packet->data->get_size());
 
@@ -152,9 +152,9 @@ void
 vc1_video_packetizer_c::flush_frames() {
   while (m_parser.is_frame_available()) {
     auto frame = m_parser.get_frame();
-    add_packet(new packet_t(frame->data, frame->timecode, frame->duration, frame->is_key() ? -1 : m_previous_timecode));
+    add_packet(new packet_t(frame->data, frame->timestamp, frame->duration, frame->is_key() ? -1 : m_previous_timestamp));
 
-    m_previous_timecode = frame->timecode;
+    m_previous_timestamp = frame->timestamp;
   }
 }
 

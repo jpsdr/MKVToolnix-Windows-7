@@ -94,7 +94,7 @@ struct kax_track_t {
 
   bool ok;
 
-  int64_t previous_timecode;
+  int64_t previous_timestamp;
 
   content_decoder_c content_decoder;
 
@@ -158,7 +158,7 @@ struct kax_track_t {
     , language("eng")
     , units_processed(0)
     , ok(false)
-    , previous_timecode(0)
+    , previous_timestamp(0)
     , tags(nullptr)
     , ptzr(-1)
     , ptzr_ptr(nullptr)
@@ -212,7 +212,7 @@ private:
 
   std::shared_ptr<EbmlStream> m_es;
 
-  int64_t m_segment_duration, m_last_timecode, m_first_timecode, m_global_timestamp_offset;
+  int64_t m_segment_duration, m_last_timestamp, m_first_timestamp, m_global_timestamp_offset;
   std::string m_title;
 
   using deferred_positions_t = std::map<deferred_l1_type_e, std::vector<int64_t> >;

@@ -42,7 +42,7 @@ public:
 
   std::unordered_map<uint64_t, uint64_t> m_default_durations_by_number;
   std::unordered_map<uint64_t, track_statistics_c> m_track_statistics_by_number;
-  uint64_t m_timecode_scale{};
+  uint64_t m_timestamp_scale{};
 
 public:
   tag_target_c();

@@ -31,8 +31,8 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
                             int height,
                             bool input_is_native)
   : video_for_windows_packetizer_c(p_reader, p_ti, fps, width, height)
-  , m_timecodes_generated(0)
-  , m_previous_timecode(0)
+  , m_timestamps_generated(0)
+  , m_previous_timestamp(0)
   , m_aspect_ratio_extracted(false)
   , m_input_is_native(input_is_native)
   , m_output_is_native(hack_engaged(ENGAGE_NATIVE_MPEG4) || input_is_native)
@@ -46,12 +46,12 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
     if (!m_input_is_native)
       m_ti.m_private_data.reset();
 
-    // If no external timecode file has been specified then mkvmerge
+    // If no external timestamp file has been specified then mkvmerge
     // might have created a factory due to the --default-duration
     // command line argument. This factory must be disabled for this
     // packetizer because it takes care of handling the default
     // duration/FPS itself.
-    if (m_ti.m_ext_timecodes.empty())
+    if (m_ti.m_ext_timestamps.empty())
       m_timestamp_factory.reset();
 
     if (m_default_duration_forced)
@@ -73,10 +73,10 @@ mpeg4_p2_video_packetizer_c::~mpeg4_p2_video_packetizer_c() {
                        "  # P frames:            %2%\n"
                        "  # B frames:            %3%\n"
                        "  # NVOPs:               %4%\n"
-                       "  # generated timecodes: %5%\n"
-                       "  # dropped timecodes:   %6%\n")
+                       "  # generated timestamps: %5%\n"
+                       "  # dropped timestamps:   %6%\n")
          % m_statistics.m_num_i_frames % m_statistics.m_num_p_frames % m_statistics.m_num_b_frames % m_statistics.m_num_n_vops
-         % m_statistics.m_num_generated_timecodes % m_statistics.m_num_dropped_timecodes);
+         % m_statistics.m_num_generated_timestamps % m_statistics.m_num_dropped_timestamps);
 }
 
 int
@@ -97,14 +97,14 @@ int
 mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
   extract_config_data(packet);
 
-  // Add a timecode and a duration if they've been given.
-  if (-1 != packet->timecode) {
+  // Add a timestamp and a duration if they've been given.
+  if (-1 != packet->timestamp) {
     if (!m_default_duration_forced)
-      m_available_timecodes.push_back(timecode_duration_t(packet->timecode, packet->duration));
+      m_available_timestamps.push_back(timestamp_duration_t(packet->timestamp, packet->duration));
 
     else {
-      m_available_timecodes.push_back(timecode_duration_t(m_timecodes_generated * m_htrack_default_duration, m_htrack_default_duration));
-      ++m_timecodes_generated;
+      m_available_timestamps.push_back(timestamp_duration_t(m_timestamps_generated * m_htrack_default_duration, m_htrack_default_duration));
+      ++m_timestamps_generated;
     }
 
   } else if (0.0 == m_fps)
@@ -118,22 +118,22 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
     if (!frame.is_coded) {
       ++m_statistics.m_num_n_vops;
 
-      int num_surplus_timecodes = static_cast<int>(m_available_timecodes.size()) - static_cast<int>(m_ref_frames.size() + m_b_frames.size());
-      if (0 < num_surplus_timecodes) {
-        std::deque<timecode_duration_t>::iterator start = m_available_timecodes.begin() + m_ref_frames.size() + m_b_frames.size();
-        std::deque<timecode_duration_t>::iterator end   = start + num_surplus_timecodes;
+      int num_surplus_timestamps = static_cast<int>(m_available_timestamps.size()) - static_cast<int>(m_ref_frames.size() + m_b_frames.size());
+      if (0 < num_surplus_timestamps) {
+        std::deque<timestamp_duration_t>::iterator start = m_available_timestamps.begin() + m_ref_frames.size() + m_b_frames.size();
+        std::deque<timestamp_duration_t>::iterator end   = start + num_surplus_timestamps;
 
         if (0 != (m_ref_frames.size() + m_b_frames.size())) {
-          std::deque<timecode_duration_t>::iterator last = m_available_timecodes.begin() + m_ref_frames.size() + m_b_frames.size() - 1;
-          std::deque<timecode_duration_t>::iterator cur  = start;
+          std::deque<timestamp_duration_t>::iterator last = m_available_timestamps.begin() + m_ref_frames.size() + m_b_frames.size() - 1;
+          std::deque<timestamp_duration_t>::iterator cur  = start;
           while (cur != end) {
             last->m_duration = std::max(last->m_duration, static_cast<int64_t>(0)) + std::max(cur->m_duration, static_cast<int64_t>(0));
             ++cur;
           }
         }
 
-        m_available_timecodes.erase(start, end);
-        m_statistics.m_num_dropped_timecodes += num_surplus_timecodes;
+        m_available_timestamps.erase(start, end);
+        m_statistics.m_num_dropped_timestamps += num_surplus_timestamps;
       }
 
       continue;
@@ -151,8 +151,8 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
     if (FRAME_TYPE_B != frame.type)
       flush_frames(false);
 
-    frame.data     = (unsigned char *)safememdup(packet->data->get_buffer() + frame.pos, frame.size);
-    frame.timecode = -1;
+    frame.data      = (unsigned char *)safememdup(packet->data->get_buffer() + frame.pos, frame.size);
+    frame.timestamp = -1;
 
     if (FRAME_TYPE_B == frame.type)
       m_b_frames.push_back(frame);
@@ -160,7 +160,7 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
       m_ref_frames.push_back(frame);
   }
 
-  m_previous_timecode = m_available_timecodes.back().m_timecode;
+  m_previous_timestamp = m_available_timestamps.back().m_timestamp;
 
   return FILE_STATUS_MOREDATA;
 }
@@ -219,10 +219,10 @@ mpeg4_p2_video_packetizer_c::process_native(packet_cptr) {
   return FILE_STATUS_MOREDATA;
 }
 
-/** \brief Handle frame sequences in which too few timecodes are available
+/** \brief Handle frame sequences in which too few timestamps are available
 
    This function gets called if mkvmerge wants to flush its frame queue
-   but it doesn't have enough timecodes and/or durations available for
+   but it doesn't have enough timestamps and/or durations available for
    each queued frame. This can happen in two cases:
 
    1. A picture sequence is found that mkvmerge does not support. An
@@ -231,7 +231,7 @@ mpeg4_p2_video_packetizer_c::process_native(packet_cptr) {
       another P or I frame without an intermediate dummy frame.
 
    2. The end of the file has been reached but the frame queue contains
-      more frames than the timecode queue. For example: The last frame
+      more frames than the timestamp queue. For example: The last frame
       contained two frames, a P and a B frame. Right afterwards the
       end of the file is reached. In this case a dummy frame is missing.
 
@@ -239,31 +239,31 @@ mpeg4_p2_video_packetizer_c::process_native(packet_cptr) {
    track. The other case is not supported.
 */
 void
-mpeg4_p2_video_packetizer_c::generate_timecode_and_duration() {
+mpeg4_p2_video_packetizer_c::generate_timestamp_and_duration() {
   if (0.0 >= m_fps) {
     // TODO: error
     mxexit(1);
   }
 
-  if (m_available_timecodes.empty()) {
-    m_previous_timecode = (int64_t)(m_previous_timecode + 1000000000.0 / m_fps);
-    m_available_timecodes.push_back(timecode_duration_t(m_previous_timecode, (int64_t)(1000000000.0 / m_fps)));
+  if (m_available_timestamps.empty()) {
+    m_previous_timestamp = (int64_t)(m_previous_timestamp + 1000000000.0 / m_fps);
+    m_available_timestamps.push_back(timestamp_duration_t(m_previous_timestamp, (int64_t)(1000000000.0 / m_fps)));
 
-    mxverb(3, boost::format("mpeg4_p2::flush_frames(): Needed new timecode %1%\n") % m_previous_timecode);
-    ++m_statistics.m_num_generated_timecodes;
+    mxverb(3, boost::format("mpeg4_p2::flush_frames(): Needed new timestamp %1%\n") % m_previous_timestamp);
+    ++m_statistics.m_num_generated_timestamps;
   }
 }
 
 void
-mpeg4_p2_video_packetizer_c::get_next_timecode_and_duration(int64_t &timecode,
+mpeg4_p2_video_packetizer_c::get_next_timestamp_and_duration(int64_t &timestamp,
                                                             int64_t &duration) {
-  if (m_available_timecodes.empty())
-    generate_timecode_and_duration();
+  if (m_available_timestamps.empty())
+    generate_timestamp_and_duration();
 
-  timecode = m_available_timecodes.front().m_timecode;
-  duration = m_available_timecodes.front().m_duration;
+  timestamp = m_available_timestamps.front().m_timestamp;
+  duration = m_available_timestamps.front().m_duration;
 
-  m_available_timecodes.pop_front();
+  m_available_timestamps.pop_front();
 }
 
 void
@@ -274,10 +274,10 @@ mpeg4_p2_video_packetizer_c::flush_frames(bool end_of_file) {
   if (m_ref_frames.size() == 1) {
     video_frame_t &frame = m_ref_frames.front();
 
-    // The first frame in the file. Only apply the timecode, nothing else.
-    if (-1 == frame.timecode) {
-      get_next_timecode_and_duration(frame.timecode, frame.duration);
-      add_packet(new packet_t(new memory_c(frame.data, frame.size, true), frame.timecode, frame.duration));
+    // The first frame in the file. Only apply the timestamp, nothing else.
+    if (-1 == frame.timestamp) {
+      get_next_timestamp_and_duration(frame.timestamp, frame.duration);
+      add_packet(new packet_t(new memory_c(frame.data, frame.size, true), frame.timestamp, frame.duration));
     }
     return;
   }
@@ -286,12 +286,12 @@ mpeg4_p2_video_packetizer_c::flush_frames(bool end_of_file) {
   video_frame_t &fref_frame = m_ref_frames.back();
 
   for (auto &frame : m_b_frames)
-    get_next_timecode_and_duration(frame.timecode, frame.duration);
-  get_next_timecode_and_duration(fref_frame.timecode, fref_frame.duration);
+    get_next_timestamp_and_duration(frame.timestamp, frame.duration);
+  get_next_timestamp_and_duration(fref_frame.timestamp, fref_frame.duration);
 
-  add_packet(new packet_t(new memory_c(fref_frame.data, fref_frame.size, true), fref_frame.timecode, fref_frame.duration, FRAME_TYPE_P == fref_frame.type ? bref_frame.timecode : VFT_IFRAME));
+  add_packet(new packet_t(new memory_c(fref_frame.data, fref_frame.size, true), fref_frame.timestamp, fref_frame.duration, FRAME_TYPE_P == fref_frame.type ? bref_frame.timestamp : VFT_IFRAME));
   for (auto &frame : m_b_frames)
-    add_packet(new packet_t(new memory_c(frame.data, frame.size, true), frame.timecode, frame.duration, bref_frame.timecode, fref_frame.timecode));
+    add_packet(new packet_t(new memory_c(frame.data, frame.size, true), frame.timestamp, frame.duration, bref_frame.timestamp, fref_frame.timestamp));
 
   m_ref_frames.pop_front();
   m_b_frames.clear();

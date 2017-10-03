@@ -5,7 +5,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   extracts timecodes from Matroska files
+   extracts timestamps from Matroska files
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -41,29 +41,29 @@
 
 using namespace libmatroska;
 
-struct timecode_t {
-  int64_t m_timecode, m_duration;
+struct timestamp_t {
+  int64_t m_timestamp, m_duration;
 
-  timecode_t(int64_t timecode, int64_t duration)
-    : m_timecode(timecode)
+  timestamp_t(int64_t timestamp, int64_t duration)
+    : m_timestamp(timestamp)
     , m_duration(duration)
   {
   }
 };
 
 bool
-operator <(const timecode_t &t1,
-           const timecode_t &t2) {
-  return t1.m_timecode < t2.m_timecode;
+operator <(const timestamp_t &t1,
+           const timestamp_t &t2) {
+  return t1.m_timestamp < t2.m_timestamp;
 }
 
-struct timecode_extractor_t {
+struct timestamp_extractor_t {
   int64_t m_tid, m_tnum;
   mm_io_cptr m_file;
-  std::vector<timecode_t> m_timecodes;
+  std::vector<timestamp_t> m_timestamps;
   int64_t m_default_duration;
 
-  timecode_extractor_t(int64_t tid, int64_t tnum, const mm_io_cptr &file, int64_t default_duration)
+  timestamp_extractor_t(int64_t tid, int64_t tnum, const mm_io_cptr &file, int64_t default_duration)
     : m_tid(tid)
     , m_tnum(tnum)
     , m_file(file)
@@ -72,32 +72,32 @@ struct timecode_extractor_t {
   }
 };
 
-static std::vector<timecode_extractor_t> timecode_extractors;
+static std::vector<timestamp_extractor_t> timestamp_extractors;
 
 // ------------------------------------------------------------------------
 
 static void
-close_timecode_files() {
-  for (auto &extractor : timecode_extractors) {
-    auto &timecodes = extractor.m_timecodes;
+close_timestamp_files() {
+  for (auto &extractor : timestamp_extractors) {
+    auto &timestamps = extractor.m_timestamps;
 
-    std::sort(timecodes.begin(), timecodes.end());
-    for (auto timecode : timecodes)
-      extractor.m_file->puts(to_string(timecode.m_timecode, 1000000, 6) + "\n");
+    std::sort(timestamps.begin(), timestamps.end());
+    for (auto timestamp : timestamps)
+      extractor.m_file->puts(to_string(timestamp.m_timestamp, 1000000, 6) + "\n");
 
-    if (!timecodes.empty()) {
-      timecode_t &last_timecode = timecodes.back();
-      extractor.m_file->puts(to_string(last_timecode.m_timecode + last_timecode.m_duration, 1000000, 6) + "\n");
+    if (!timestamps.empty()) {
+      timestamp_t &last_timestamp = timestamps.back();
+      extractor.m_file->puts(to_string(last_timestamp.m_timestamp + last_timestamp.m_duration, 1000000, 6) + "\n");
     }
   }
 
-  timecode_extractors.clear();
+  timestamp_extractors.clear();
 }
 
 static void
-create_timecode_files(KaxTracks &kax_tracks,
-                      std::vector<track_spec_t> &tracks,
-                      int version) {
+create_timestamp_files(KaxTracks &kax_tracks,
+                       std::vector<track_spec_t> &tracks,
+                       int version) {
   size_t i;
   for (auto &tspec : tracks) {
     int track_number     = -1;
@@ -119,21 +119,21 @@ create_timecode_files(KaxTracks &kax_tracks,
 
     try {
       mm_io_cptr file = mm_write_buffer_io_c::open(tspec.out_name, 128 * 1024);
-      timecode_extractors.push_back(timecode_extractor_t(tspec.tid, kt_get_number(*track), file, std::max(kt_get_default_duration(*track), static_cast<int64_t>(0))));
+      timestamp_extractors.push_back(timestamp_extractor_t(tspec.tid, kt_get_number(*track), file, std::max(kt_get_default_duration(*track), static_cast<int64_t>(0))));
       file->puts(boost::format("# timecode format v%1%\n") % version);
 
     } catch(mtx::mm_io::exception &ex) {
-      close_timecode_files();
+      close_timestamp_files();
       mxerror(boost::format(Y("Could not open the timecode file '%1%' for writing (%2%).\n")) % tspec.out_name % ex);
     }
   }
 }
 
 static
-std::vector<timecode_extractor_t>::iterator
+std::vector<timestamp_extractor_t>::iterator
 find_extractor_by_track_number(unsigned int track_number) {
-  return std::find_if(timecode_extractors.begin(), timecode_extractors.end(),
-                      [=](timecode_extractor_t &xtr) { return track_number == xtr.m_tnum; });
+  return std::find_if(timestamp_extractors.begin(), timestamp_extractors.end(),
+                      [=](timestamp_extractor_t &xtr) { return track_number == xtr.m_tnum; });
 }
 
 static void
@@ -147,8 +147,8 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
   block->SetParent(cluster);
 
   // Do we need this block group?
-  std::vector<timecode_extractor_t>::iterator extractor = find_extractor_by_track_number(block->TrackNum());
-  if (timecode_extractors.end() == extractor)
+  std::vector<timestamp_extractor_t>::iterator extractor = find_extractor_by_track_number(block->TrackNum());
+  if (timestamp_extractors.end() == extractor)
     return;
 
   // Next find the block duration if there is one.
@@ -158,7 +158,7 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
   // Pass the block to the extractor.
   size_t i;
   for (i = 0; block->NumberFrames() > i; ++i)
-    extractor->m_timecodes.push_back(timecode_t(block->GlobalTimecode() + i * duration / block->NumberFrames(), duration / block->NumberFrames()));
+    extractor->m_timestamps.push_back(timestamp_t(block->GlobalTimecode() + i * duration / block->NumberFrames(), duration / block->NumberFrames()));
 }
 
 static void
@@ -169,20 +169,20 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
 
   simpleblock.SetParent(cluster);
 
-  std::vector<timecode_extractor_t>::iterator extractor = find_extractor_by_track_number(simpleblock.TrackNum());
-  if (timecode_extractors.end() == extractor)
+  std::vector<timestamp_extractor_t>::iterator extractor = find_extractor_by_track_number(simpleblock.TrackNum());
+  if (timestamp_extractors.end() == extractor)
     return;
 
   // Pass the block to the extractor.
   size_t i;
   for (i = 0; simpleblock.NumberFrames() > i; ++i)
-    extractor->m_timecodes.push_back(timecode_t(simpleblock.GlobalTimecode() + i * extractor->m_default_duration, extractor->m_default_duration));
+    extractor->m_timestamps.push_back(timestamp_t(simpleblock.GlobalTimecode() + i * extractor->m_default_duration, extractor->m_default_duration));
 }
 
 void
-extract_timecodes(const std::string &file_name,
-                  std::vector<track_spec_t> &tspecs,
-                  int version) {
+extract_timestamps(const std::string &file_name,
+                   std::vector<track_spec_t> &tspecs,
+                   int version) {
   if (tspecs.empty())
     mxerror(Y("Nothing to do.\n"));
 
@@ -230,7 +230,7 @@ extract_timecodes(const std::string &file_name,
 
     bool tracks_found = false;
     int upper_lvl_el  = 0;
-    uint64_t tc_scale = TIMECODE_SCALE;
+    uint64_t tc_scale = TIMESTAMP_SCALE;
 
     // We've got our segment, so let's find the tracks
     EbmlElement *l1   = es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true, 1);
@@ -279,12 +279,12 @@ extract_timecodes(const std::string &file_name,
         tracks_found = true;
         l1->Read(*es, EBML_CLASS_CONTEXT(KaxTracks), upper_lvl_el, l2, true);
         find_and_verify_track_uids(*dynamic_cast<KaxTracks *>(l1), tspecs);
-        create_timecode_files(*dynamic_cast<KaxTracks *>(l1), tspecs, version);
+        create_timestamp_files(*dynamic_cast<KaxTracks *>(l1), tspecs, version);
 
       } else if (Is<KaxCluster>(l1)) {
         show_element(l1, 1, Y("Cluster"));
         KaxCluster *cluster = (KaxCluster *)l1;
-        uint64_t cluster_tc = 0;
+        uint64_t cluster_ts = 0;
 
         if (0 == verbose) {
           auto current_percentage = in->getFilePointer() * 100 / file_size;
@@ -302,9 +302,9 @@ extract_timecodes(const std::string &file_name,
           if (Is<KaxClusterTimecode>(l2)) {
             KaxClusterTimecode &ctc = *static_cast<KaxClusterTimecode *>(l2);
             ctc.ReadData(es->I_O());
-            cluster_tc = ctc.GetValue();
-            show_element(l2, 2, boost::format(Y("Cluster timecode: %|1$.3f|s")) % ((float)cluster_tc * (float)tc_scale / 1000000000.0));
-            cluster->InitTimecode(cluster_tc, tc_scale);
+            cluster_ts = ctc.GetValue();
+            show_element(l2, 2, boost::format(Y("Cluster timecode: %|1$.3f|s")) % ((float)cluster_ts * (float)tc_scale / 1000000000.0));
+            cluster->InitTimecode(cluster_ts, tc_scale);
 
           } else if (Is<KaxBlockGroup>(l2)) {
             show_element(l2, 2, Y("Block group"));
@@ -380,7 +380,7 @@ extract_timecodes(const std::string &file_name,
     delete es;
     delete in;
 
-    close_timecode_files();
+    close_timestamp_files();
 
     if (0 == verbose) {
       if (mtx::cli::g_gui_mode)
@@ -393,6 +393,6 @@ extract_timecodes(const std::string &file_name,
     show_error(Y("Caught exception"));
     delete in;
 
-    close_timecode_files();
+    close_timestamp_files();
   }
 }

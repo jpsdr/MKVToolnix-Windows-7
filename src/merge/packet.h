@@ -31,7 +31,7 @@ class track_statistics_c;
 class packet_extension_c {
 public:
   enum packet_extension_type_e {
-    MULTIPLE_TIMECODES,
+    MULTIPLE_TIMESTAMPS,
     SUBTITLE_NUMBER,
     BEFORE_ADDING_TO_CLUSTER_CB,
   };
@@ -56,11 +56,11 @@ struct packet_t {
   KaxBlock *block;
   KaxCluster *cluster;
   int ref_priority, time_factor;
-  int64_t timecode, bref, fref, duration, assigned_timecode;
-  int64_t timecode_before_factory;
-  int64_t unmodified_assigned_timecode, unmodified_duration;
+  int64_t timestamp, bref, fref, duration, assigned_timestamp;
+  int64_t timestamp_before_factory;
+  int64_t unmodified_assigned_timestamp, unmodified_duration;
   boost::optional<uint64_t> uncompressed_size;
-  timestamp_c discard_padding, output_order_timecode;
+  timestamp_c discard_padding, output_order_timestamp;
   bool duration_mandatory, superseeded, gap_following, factory_applied;
   boost::optional<bool> key_flag, discardable_flag;
   generic_packetizer_c *source;
@@ -73,13 +73,13 @@ struct packet_t {
     , cluster{}
     , ref_priority{}
     , time_factor(1)
-    , timecode{}
+    , timestamp{}
     , bref{}
     , fref{}
     , duration(-1)
-    , assigned_timecode{}
-    , timecode_before_factory{}
-    , unmodified_assigned_timecode{}
+    , assigned_timestamp{}
+    , timestamp_before_factory{}
+    , unmodified_assigned_timestamp{}
     , unmodified_duration{}
     , discard_padding{}
     , duration_mandatory{}
@@ -91,7 +91,7 @@ struct packet_t {
   }
 
   packet_t(memory_cptr p_memory,
-           int64_t p_timecode = -1,
+           int64_t p_timestamp = -1,
            int64_t p_duration = -1,
            int64_t p_bref     = -1,
            int64_t p_fref     = -1)
@@ -101,13 +101,13 @@ struct packet_t {
     , cluster{}
     , ref_priority{}
     , time_factor(1)
-    , timecode(p_timecode)
+    , timestamp(p_timestamp)
     , bref(p_bref)
     , fref(p_fref)
     , duration(p_duration)
-    , assigned_timecode{}
-    , timecode_before_factory{}
-    , unmodified_assigned_timecode{}
+    , assigned_timestamp{}
+    , timestamp_before_factory{}
+    , unmodified_assigned_timestamp{}
     , unmodified_duration{}
     , discard_padding{}
     , duration_mandatory{}
@@ -119,7 +119,7 @@ struct packet_t {
   }
 
   packet_t(memory_c *n_memory,
-           int64_t p_timecode = -1,
+           int64_t p_timestamp = -1,
            int64_t p_duration = -1,
            int64_t p_bref     = -1,
            int64_t p_fref     = -1)
@@ -129,13 +129,13 @@ struct packet_t {
     , cluster{}
     , ref_priority{}
     , time_factor(1)
-    , timecode(p_timecode)
+    , timestamp(p_timestamp)
     , bref(p_bref)
     , fref(p_fref)
     , duration(p_duration)
-    , assigned_timecode{}
-    , timecode_before_factory{}
-    , unmodified_assigned_timecode{}
+    , assigned_timestamp{}
+    , timestamp_before_factory{}
+    , unmodified_assigned_timestamp{}
     , unmodified_duration{}
     , discard_padding{}
     , duration_mandatory{}
@@ -150,9 +150,9 @@ struct packet_t {
   }
 
   bool
-  has_timecode()
+  has_timestamp()
     const {
-    return 0 <= timecode;
+    return 0 <= timestamp;
   }
 
   bool
@@ -221,7 +221,7 @@ struct packet_t {
 
   void add_extensions(std::vector<packet_extension_cptr> const &new_extensions);
 
-  void normalize_timecodes();
+  void normalize_timestamps();
 
   void account(track_statistics_c &statistics, int64_t timestamp_offset);
   uint64_t calculate_uncompressed_size();

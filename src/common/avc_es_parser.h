@@ -24,7 +24,7 @@ struct frame_t {
   memory_cptr m_data;
   int64_t m_start, m_end, m_ref1, m_ref2;
   uint64_t m_position;
-  bool m_keyframe, m_has_provided_timecode;
+  bool m_keyframe, m_has_provided_timestamp;
   slice_info_t m_si;
   int m_presentation_order, m_decode_order;
   char m_type;
@@ -39,17 +39,17 @@ struct frame_t {
   }
 
   void clear() {
-    m_start                 = 0;
-    m_end                   = 0;
-    m_ref1                  = 0;
-    m_ref2                  = 0;
-    m_position              = 0;
-    m_keyframe              = false;
-    m_has_provided_timecode = false;
-    m_presentation_order    = 0;
-    m_decode_order          = 0;
-    m_type                  = '?';
-    m_order_calculated      = false;
+    m_start                  = 0;
+    m_end                    = 0;
+    m_ref1                   = 0;
+    m_ref2                   = 0;
+    m_position               = 0;
+    m_keyframe               = false;
+    m_has_provided_timestamp = false;
+    m_presentation_order     = 0;
+    m_decode_order           = 0;
+    m_type                   = '?';
+    m_order_calculated       = false;
     m_data.reset();
 
     m_si.clear();
@@ -89,7 +89,7 @@ protected:
 
   std::deque<frame_t> m_frames, m_frames_out;
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
-  int64_t m_max_timecode, m_previous_i_p_start;
+  int64_t m_max_timestamp, m_previous_i_p_start;
   std::map<int64_t, int64_t> m_duration_frequency;
 
   std::vector<memory_cptr> m_sps_list, m_pps_list, m_extra_data;
@@ -105,12 +105,12 @@ protected:
 
   bool m_ignore_nalu_size_length_errors, m_discard_actual_frames, m_simple_picture_order, m_first_cleanup, m_all_i_slices_are_key_frames;
 
-  debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timecodes, m_debug_sps_info, m_debug_sps_pps_changes;
+  debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamps, m_debug_sps_info, m_debug_sps_pps_changes;
   std::map<int, std::string> m_nalu_names_by_type;
 
   struct stats_t {
     std::vector<int> num_slices_by_type;
-    size_t num_frames_out{}, num_frames_discarded{}, num_timecodes_in{}, num_timecodes_generated{}, num_timecodes_discarded{}, num_field_slices{}, num_frame_slices{}, num_sei_nalus{}, num_idr_slices{};
+    size_t num_frames_out{}, num_frames_discarded{}, num_timestamps_in{}, num_timestamps_generated{}, num_timestamps_discarded{}, num_field_slices{}, num_frame_slices{}, num_sei_nalus{}, num_idr_slices{};
 
     stats_t()
       : num_slices_by_type(11, 0)
@@ -189,7 +189,7 @@ public:
 
   void handle_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
 
-  void add_timecode(int64_t timecode);
+  void add_timestamp(int64_t timestamp);
 
   bool headers_parsed() const;
 

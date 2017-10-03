@@ -78,8 +78,8 @@ flv_tag_c::flv_tag_c()
   : m_previous_tag_size{}
   , m_flags{}
   , m_data_size{}
-  , m_timecode{}
-  , m_timecode_extended{}
+  , m_timestamp{}
+  , m_timestamp_extended{}
   , m_next_position{}
   , m_ok{}
   , m_debug{"flv_full|flv_tags|flv_tag"}
@@ -113,16 +113,16 @@ flv_tag_c::is_script_data()
 bool
 flv_tag_c::read(mm_io_cptr const &in) {
   try {
-    auto position       = in->getFilePointer();
-    m_ok                = false;
-    m_previous_tag_size = in->read_uint32_be();
-    m_flags             = in->read_uint8();
-    m_data_size         = in->read_uint24_be();
-    m_timecode          = in->read_uint24_be();
-    m_timecode_extended = in->read_uint8();
+    auto position        = in->getFilePointer();
+    m_ok                 = false;
+    m_previous_tag_size  = in->read_uint32_be();
+    m_flags              = in->read_uint8();
+    m_data_size          = in->read_uint24_be();
+    m_timestamp          = in->read_uint24_be();
+    m_timestamp_extended = in->read_uint8();
     in->skip(3);
-    m_next_position     = in->getFilePointer() + m_data_size;
-    m_ok                = true;
+    m_next_position      = in->getFilePointer() + m_data_size;
+    m_ok                 = true;
 
     mxdebug_if(m_debug, boost::format("Tag @ %1%: %2%\n") % position % *this);
 
@@ -139,7 +139,7 @@ flv_track_c::flv_track_c(char type)
   : m_type{type}
   , m_headers_read{}
   , m_ptzr{-1}
-  , m_timecode{}
+  , m_timestamp{}
   , m_v_version{}
   , m_v_width{}
   , m_v_height{}
@@ -771,9 +771,9 @@ flv_reader_c::process_tag(bool skip_payload) {
   else if (m_tag.is_video() && !process_video_tag(track))
     return false;
 
-  track->m_timecode = m_tag.m_timecode + (m_tag.m_timecode_extended << 24);
+  track->m_timestamp = m_tag.m_timestamp + (m_tag.m_timestamp_extended << 24);
 
-  mxdebug_if(m_debug, boost::format("Data size after processing: %1%; timecode in ms: %2%\n") % m_tag.m_data_size % track->m_timecode);
+  mxdebug_if(m_debug, boost::format("Data size after processing: %1%; timestamp in ms: %2%\n") % m_tag.m_data_size % track->m_timestamp);
 
   if (!m_tag.m_data_size)
     return true;
@@ -819,14 +819,14 @@ flv_reader_c::read(generic_packetizer_c *,
     return FILE_STATUS_MOREDATA;
 
   if (-1 != track->m_ptzr) {
-    track->m_timecode = (track->m_timecode + track->m_v_cts_offset) * 1000000ll;
-    mxdebug_if(m_debug, boost::format(" PTS in nanoseconds: %1%\n") % track->m_timecode);
+    track->m_timestamp = (track->m_timestamp + track->m_v_cts_offset) * 1000000ll;
+    mxdebug_if(m_debug, boost::format(" PTS in nanoseconds: %1%\n") % track->m_timestamp);
 
     int64_t duration = -1;
     if (track->m_v_frame_rate && track->m_fourcc.equiv("AVC1"))
       duration = 1000000000ll / track->m_v_frame_rate;
 
-    auto packet = new packet_t(track->m_payload, track->m_timecode, duration, 'I' == track->m_v_frame_type ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME);
+    auto packet = new packet_t(track->m_payload, track->m_timestamp, duration, 'I' == track->m_v_frame_type ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME);
 
     if (track->m_extra_data)
       packet->codec_state = track->m_extra_data;

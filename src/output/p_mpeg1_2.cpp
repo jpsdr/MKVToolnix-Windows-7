@@ -59,7 +59,7 @@ mpeg1_2_video_packetizer_c::~mpeg1_2_video_packetizer_c() {
 
 void
 mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr packet) {
-  mxdebug_if(m_debug_stuffing_removal, boost::format("Starting stuff removal, frame size %1%, timestamp %2%\n") % packet->data->get_size() % format_timestamp(packet->timecode));
+  mxdebug_if(m_debug_stuffing_removal, boost::format("Starting stuff removal, frame size %1%, timestamp %2%\n") % packet->data->get_size() % format_timestamp(packet->timestamp));
 
   auto buf              = packet->data->get_buffer();
   auto size             = packet->data->get_size();
@@ -207,8 +207,8 @@ mpeg1_2_video_packetizer_c::process_unframed(packet_cptr packet) {
   auto data_ptr   = old_memory->get_buffer();
   int new_bytes   = old_memory->get_size();
 
-  if (packet->has_timecode())
-    m_parser.AddTimecode(packet->timecode);
+  if (packet->has_timestamp())
+    m_parser.AddTimestamp(packet->timestamp);
 
   do {
     int bytes_to_add = std::min<int>(m_parser.GetFreeBufferSpace(), new_bytes);
@@ -227,7 +227,7 @@ mpeg1_2_video_packetizer_c::process_unframed(packet_cptr packet) {
       if (!m_hcodec_private)
         create_private_data();
 
-      packet_cptr new_packet  = packet_cptr(new packet_t(new memory_c(frame->data, frame->size, true), frame->timecode, frame->duration, frame->refs[0], frame->refs[1]));
+      packet_cptr new_packet  = packet_cptr(new packet_t(new memory_c(frame->data, frame->size, true), frame->timestamp, frame->duration, frame->refs[0], frame->refs[1]));
       new_packet->time_factor = MPEG2_PICTURE_TYPE_FRAME == frame->pictureStructure ? 1 : 2;
 
       remove_stuffing_bytes_and_handle_sequence_headers(new_packet);

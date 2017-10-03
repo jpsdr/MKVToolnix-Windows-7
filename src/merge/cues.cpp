@@ -36,11 +36,11 @@ cues_c::cues_c()
 }
 
 void
-cues_c::set_duration_for_id_timecode(uint64_t id,
-                                     uint64_t timecode,
+cues_c::set_duration_for_id_timestamp(uint64_t id,
+                                     uint64_t timestamp,
                                      uint64_t duration) {
   if (!m_no_cue_duration)
-    m_id_timecode_duration_multimap.insert({ id_timecode_t{id, timecode}, duration });
+    m_id_timestamp_duration_multimap.insert({ id_timestamp_t{id, timestamp}, duration });
 }
 
 void
@@ -54,7 +54,7 @@ cues_c::add(KaxCues &cues) {
 
 void
 cues_c::add(KaxCuePoint &point) {
-  uint64_t timecode = FindChildValue<KaxCueTime>(point) * g_timecode_scale;
+  uint64_t timestamp = FindChildValue<KaxCueTime>(point) * g_timestamp_scale;
 
   for (auto point_child : point) {
     auto positions = dynamic_cast<KaxCueTrackPositions *>(point_child);
@@ -64,11 +64,11 @@ cues_c::add(KaxCuePoint &point) {
     uint64_t track_num = FindChildValue<KaxCueTrack>(*positions);
     assert(track_num <= static_cast<uint64_t>(std::numeric_limits<uint32_t>::max()));
 
-    m_points.push_back({ timecode, 0, FindChildValue<KaxCueClusterPosition>(*positions), static_cast<uint32_t>(track_num), 0 });
+    m_points.push_back({ timestamp, 0, FindChildValue<KaxCueClusterPosition>(*positions), static_cast<uint32_t>(track_num), 0 });
 
     uint64_t codec_state_position = FindChildValue<KaxCueCodecState>(*positions);
     if (codec_state_position)
-      m_codec_state_position_map[ id_timecode_t{ track_num, timecode } ] = codec_state_position;
+      m_codec_state_position_map[ id_timestamp_t{ track_num, timestamp } ] = codec_state_position;
   }
 }
 
@@ -103,13 +103,13 @@ cues_c::write(mm_io_c &out,
   for (auto &point : m_points) {
     KaxCuePoint kc_point;
 
-    GetChild<KaxCueTime>(kc_point).SetValue(point.timecode / g_timecode_scale);
+    GetChild<KaxCueTime>(kc_point).SetValue(point.timestamp / g_timestamp_scale);
 
     auto &positions = GetChild<KaxCueTrackPositions>(kc_point);
     GetChild<KaxCueTrack>(positions).SetValue(point.track_num);
     GetChild<KaxCueClusterPosition>(positions).SetValue(point.cluster_position);
 
-    auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timecode });
+    auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timestamp });
     if (codec_state_position != m_codec_state_position_map.end()) {
       GetChild<KaxCueCodecState>(positions).SetValue(codec_state_position->second);
       set_required_matroska_version(2);
@@ -119,7 +119,7 @@ cues_c::write(mm_io_c &out,
       GetChild<KaxCueRelativePosition>(positions).SetValue(point.relative_position);
 
     if (point.duration)
-      GetChild<KaxCueDuration>(positions).SetValue(RND_TIMECODE_SCALE(point.duration) / g_timecode_scale);
+      GetChild<KaxCueDuration>(positions).SetValue(ROUND_TIMESTAMP_SCALE(point.duration) / g_timestamp_scale);
 
     kc_point.Render(out);
   }
@@ -135,9 +135,9 @@ cues_c::write(mm_io_c &out,
 void
 cues_c::sort() {
   brng::sort(m_points, [](cue_point_t const &a, cue_point_t const &b) -> bool {
-      if (a.timecode < b.timecode)
+      if (a.timestamp < b.timestamp)
         return true;
-      if (a.timecode > b.timecode)
+      if (a.timestamp > b.timestamp)
         return false;
 
       if (a.track_num < b.track_num)
@@ -147,17 +147,17 @@ cues_c::sort() {
     });
 }
 
-std::multimap<id_timecode_t, uint64_t>
+std::multimap<id_timestamp_t, uint64_t>
 cues_c::calculate_block_positions(KaxCluster &cluster)
   const {
 
-  std::multimap<id_timecode_t, uint64_t> positions;
+  std::multimap<id_timestamp_t, uint64_t> positions;
 
   for (auto child : cluster) {
     auto simple_block = dynamic_cast<KaxSimpleBlock *>(child);
     if (simple_block) {
       simple_block->SetParent(cluster);
-      positions.insert({ id_timecode_t{ simple_block->TrackNum(), simple_block->GlobalTimecode()}, simple_block->GetElementPosition() });
+      positions.insert({ id_timestamp_t{ simple_block->TrackNum(), simple_block->GlobalTimecode()}, simple_block->GetElementPosition() });
       continue;
     }
 
@@ -170,7 +170,7 @@ cues_c::calculate_block_positions(KaxCluster &cluster)
       continue;
 
     block->SetParent(cluster);
-    positions.insert({ id_timecode_t{ block->TrackNum(), block->GlobalTimecode()}, block_group->GetElementPosition() });
+    positions.insert({ id_timestamp_t{ block->TrackNum(), block->GlobalTimecode()}, block_group->GetElementPosition() });
   }
 
   return positions;
@@ -186,17 +186,17 @@ cues_c::postprocess_cues(KaxCues &cues,
 
   auto cluster_data_start_pos = cluster.GetElementPosition() + cluster.HeadSize();
   auto block_positions        = calculate_block_positions(cluster);
-  std::map<id_timecode_t, size_t> nblocks_processed; //# blocks processed so far with given track #/timecode
+  std::map<id_timestamp_t, size_t> nblocks_processed; //# blocks processed so far with given track #/timestamp
 
   for (auto point = m_points.begin() + m_num_cue_points_postprocessed, end = m_points.end(); point != end; ++point) {
-    nblocks_processed[id_timecode_t{ point->track_num, point->timecode }]++;
+    nblocks_processed[id_timestamp_t{ point->track_num, point->timestamp }]++;
 
     // Set CueRelativePosition for all cues.
     if (!m_no_cue_relative_position) {
-      auto pair          = block_positions.equal_range({ point->track_num, point->timecode });
+      auto pair          = block_positions.equal_range({ point->track_num, point->timestamp });
       auto position_itr  = pair.first;
       auto pos_end       = pair.second;
-      auto num_processed = nblocks_processed[id_timecode_t{ point->track_num, point->timecode }];
+      auto num_processed = nblocks_processed[id_timestamp_t{ point->track_num, point->timestamp }];
 
       for (auto i = 0u; ((i + 1) < num_processed) && (position_itr != pos_end); ++i)
         position_itr++;
@@ -209,17 +209,17 @@ cues_c::postprocess_cues(KaxCues &cues,
 
       mxdebug_if(m_debug_cue_relative_position,
                  boost::format("cue_relative_position: looking for <%1%:%2%>: cluster_data_start_pos %3% position %4%\n")
-                 % point->track_num % point->timecode % cluster_data_start_pos % relative_position);
+                 % point->track_num % point->timestamp % cluster_data_start_pos % relative_position);
     }
 
     // Set CueDuration if the packetizer wants them.
     if (m_no_cue_duration)
       continue;
 
-    auto pair          = m_id_timecode_duration_multimap.equal_range({ point->track_num, point->timecode });
+    auto pair          = m_id_timestamp_duration_multimap.equal_range({ point->track_num, point->timestamp });
     auto duration_itr  = pair.first;
     auto dur_end       = pair.second;
-    auto num_processed = nblocks_processed[id_timecode_t{ point->track_num, point->timecode }];
+    auto num_processed = nblocks_processed[id_timestamp_t{ point->track_num, point->timestamp }];
 
     for (auto i = 0u; ((i + 1) < num_processed) && (duration_itr != dur_end); ++i)
       duration_itr++;
@@ -229,17 +229,17 @@ cues_c::postprocess_cues(KaxCues &cues,
     if (!ptzr || !ptzr->wants_cue_duration())
       continue;
 
-    if (m_id_timecode_duration_multimap.end() != duration_itr)
+    if (m_id_timestamp_duration_multimap.end() != duration_itr)
       point->duration = duration_itr->second;
 
     mxdebug_if(m_debug_cue_duration,
                boost::format("cue_duration: looking for <%1%:%2%>: %3%\n")
-               % point->track_num % point->timecode % (duration_itr == m_id_timecode_duration_multimap.end() ? static_cast<int64_t>(-1) : duration_itr->second));
+               % point->track_num % point->timestamp % (duration_itr == m_id_timestamp_duration_multimap.end() ? static_cast<int64_t>(-1) : duration_itr->second));
   }
 
   m_num_cue_points_postprocessed = m_points.size();
 
-  m_id_timecode_duration_multimap.clear();
+  m_id_timestamp_duration_multimap.clear();
 }
 
 uint64_t
@@ -261,12 +261,12 @@ uint64_t
 cues_c::calculate_point_size(cue_point_t const &point)
   const {
   uint64_t point_size = EBML_ID_LENGTH(EBML_ID(KaxCuePoint))           + 1
-                      + EBML_ID_LENGTH(EBML_ID(KaxCuePoint))           + 1 + calculate_bytes_for_uint(point.timecode / g_timecode_scale)
+                      + EBML_ID_LENGTH(EBML_ID(KaxCuePoint))           + 1 + calculate_bytes_for_uint(point.timestamp / g_timestamp_scale)
                       + EBML_ID_LENGTH(EBML_ID(KaxCueTrackPositions))  + 1
                       + EBML_ID_LENGTH(EBML_ID(KaxCueTrack))           + 1 + calculate_bytes_for_uint(point.track_num)
                       + EBML_ID_LENGTH(EBML_ID(KaxCueClusterPosition)) + 1 + calculate_bytes_for_uint(point.cluster_position);
 
-  auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timecode });
+  auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timestamp });
   if (codec_state_position != m_codec_state_position_map.end())
     point_size += EBML_ID_LENGTH(EBML_ID(KaxCueCodecState)) + 1 + calculate_bytes_for_uint(codec_state_position->second);
 
@@ -274,7 +274,7 @@ cues_c::calculate_point_size(cue_point_t const &point)
     point_size += EBML_ID_LENGTH(EBML_ID(KaxCueRelativePosition)) + 1 + calculate_bytes_for_uint(point.relative_position);
 
   if (point.duration)
-    point_size += EBML_ID_LENGTH(EBML_ID(KaxCueDuration)) + 1 + calculate_bytes_for_uint(RND_TIMECODE_SCALE(point.duration) / g_timecode_scale);
+    point_size += EBML_ID_LENGTH(EBML_ID(KaxCueDuration)) + 1 + calculate_bytes_for_uint(ROUND_TIMESTAMP_SCALE(point.duration) / g_timestamp_scale);
 
   return point_size;
 }

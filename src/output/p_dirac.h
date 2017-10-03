@@ -25,7 +25,7 @@ protected:
   dirac::sequence_header_t m_seqhdr;
   bool m_headers_found;
 
-  int64_t m_previous_timecode;
+  int64_t m_previous_timestamp;
 
 public:
   dirac_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);

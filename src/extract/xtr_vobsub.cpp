@@ -127,12 +127,12 @@ xtr_vobsub_c::handle_frame(xtr_frame_t &f) {
   size_t size         = f.frame->get_size();
 
   m_positions.push_back(vmaster->m_out->getFilePointer());
-  m_timecodes.push_back(f.timecode);
+  m_timestamps.push_back(f.timestamp);
 
   uint32_t padding = (2048 - (size + sizeof(mpeg_ps_header_t) + sizeof(mpeg_es_header_t))) & 2047;
   uint32_t first   = size + sizeof(mpeg_ps_header_t) + sizeof(mpeg_es_header_t) > 2048 ? 2048 - sizeof(mpeg_ps_header_t) - sizeof(mpeg_es_header_t) : size;
 
-  uint64_t c       = f.timecode * 9 / 100000;
+  uint64_t c       = f.timestamp * 9 / 100000;
 
   mpeg_ps_header_t ps;
   memset(&ps, 0, sizeof(mpeg_ps_header_t));
@@ -264,13 +264,13 @@ xtr_vobsub_c::write_idx(mm_io_c &idx,
 
   size_t i;
   for (i = 0; i < m_positions.size(); i++) {
-    int64_t timecode = m_timecodes[i] / 1000000;
+    int64_t timestamp = m_timestamps[i] / 1000000;
 
     idx.puts(boost::format("timestamp: %|1$02d|:%|2$02d|:%|3$02d|:%|4$03d|, filepos: %|5$1x|%|6$08x|\n")
-             % ((timecode / 60 / 60 / 1000) % 60)
-             % ((timecode / 60 / 1000) % 60)
-             % ((timecode / 1000) % 60)
-             % (timecode % 1000)
+             % ((timestamp / 60 / 60 / 1000) % 60)
+             % ((timestamp / 60 / 1000) % 60)
+             % ((timestamp / 1000) % 60)
+             % (timestamp % 1000)
              % (m_positions[i] >> 32)
              % (m_positions[i] & 0xffffffff));
   }

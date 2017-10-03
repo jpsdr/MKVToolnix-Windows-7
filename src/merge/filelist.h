@@ -44,14 +44,14 @@ struct filelist_t {
 
   int num_unfinished_packetizers{}, old_num_unfinished_packetizers{};
   std::vector<deferred_connection_t> deferred_connections;
-  int64_t deferred_max_timecode_seen{-1};
+  int64_t deferred_max_timestamp_seen{-1};
 
   bool is_playlist{};
   std::vector<generic_reader_c *> playlist_readers;
   size_t playlist_index{}, playlist_previous_filelist_id{};
   mm_mpls_multi_file_io_cptr playlist_mpls_in;
 
-  timestamp_c restricted_timecode_min, restricted_timecode_max;
+  timestamp_c restricted_timestamp_min, restricted_timestamp_max;
 
   filelist_t()
   {

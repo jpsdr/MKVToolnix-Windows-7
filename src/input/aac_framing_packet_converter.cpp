@@ -26,15 +26,15 @@ aac_framing_packet_converter_c::aac_framing_packet_converter_c(generic_packetize
 
 bool
 aac_framing_packet_converter_c::convert(packet_cptr const &packet) {
-  if (packet->has_timecode()) {
-    m_parser.add_timecode(timestamp_c::ns(packet->timecode));
+  if (packet->has_timestamp()) {
+    m_parser.add_timestamp(timestamp_c::ns(packet->timestamp));
   }
 
   m_parser.add_bytes(packet->data);
 
   while (m_parser.frames_available()) {
     auto frame      = m_parser.get_frame();
-    auto packet_out = std::make_shared<packet_t>(frame.m_data, frame.m_timecode.to_ns(-1));
+    auto packet_out = std::make_shared<packet_t>(frame.m_data, frame.m_timestamp.to_ns(-1));
     m_ptzr->process(packet_out);
   }
 

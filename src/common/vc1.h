@@ -119,7 +119,7 @@ struct frame_header_t {
 struct frame_t {
   frame_header_t header;
   memory_cptr    data;
-  int64_t        timecode;
+  int64_t        timestamp;
   int64_t        duration;
   bool           contains_field, contains_entry_point;
 
@@ -164,10 +164,10 @@ protected:
 
   std::deque<memory_cptr> m_unparsed_packets;
 
-  std::deque<int64_t> m_timecodes;
-  std::deque<int64_t> m_timecode_positions;
-  int64_t m_previous_timecode;
-  int64_t m_num_timecodes;
+  std::deque<int64_t> m_timestamps;
+  std::deque<int64_t> m_timestamp_positions;
+  int64_t m_previous_timestamp;
+  int64_t m_num_timestamps;
   int64_t m_num_repeated_fields;
 
   bool m_default_duration_forced;
@@ -226,7 +226,7 @@ public:
     return frame;
   }
 
-  virtual void add_timecode(int64_t timecode, int64_t position);
+  virtual void add_timestamp(int64_t timestamp, int64_t position);
 
   virtual void set_default_duration(int64_t default_duration) {
     m_default_duration        = default_duration;
@@ -246,8 +246,8 @@ protected:
   virtual void handle_slice_packet(memory_cptr packet);
   virtual void handle_unknown_packet(uint32_t marker, memory_cptr packet);
 
-  virtual int64_t get_next_timecode();
-  virtual int64_t peek_next_calculated_timecode() const;
+  virtual int64_t get_next_timestamp();
+  virtual int64_t peek_next_calculated_timestamp() const;
 
   virtual void add_pre_frame_extra_data(memory_cptr packet);
   virtual void add_post_frame_extra_data(memory_cptr packet);
@@ -258,7 +258,7 @@ protected:
 
   virtual void flush_frame();
 
-  virtual bool is_timecode_available() const;
+  virtual bool is_timestamp_available() const;
 
 protected:
   static void add_extra_data_if_not_present(std::deque<memory_cptr> &extra_data, memory_cptr const &packet);

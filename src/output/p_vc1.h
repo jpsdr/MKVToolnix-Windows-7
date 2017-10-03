@@ -24,7 +24,7 @@ protected:
   mtx::vc1::sequence_header_t m_seqhdr;
   memory_cptr m_raw_headers;
 
-  int64_t m_previous_timecode;
+  int64_t m_previous_timestamp;
 
 public:
   vc1_video_packetizer_c(generic_reader_c *n_reader, track_info_c &n_ti);
@@ -42,5 +42,5 @@ protected:
   virtual void flush_impl();
   virtual void flush_frames();
   virtual void headers_found();
-  virtual void add_timecodes_to_parser(packet_cptr &packet);
+  virtual void add_timestamps_to_parser(packet_cptr &packet);
 };

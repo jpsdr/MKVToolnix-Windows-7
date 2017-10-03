@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definition for the timecode factory
+   class definition for the timestamp factory
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -25,17 +25,17 @@ enum timestamp_factory_application_e {
   TFA_FULL_QUEUEING
 };
 
-class timecode_range_c {
+class timestamp_range_c {
 public:
   uint64_t start_frame, end_frame;
-  double fps, base_timecode;
+  double fps, base_timestamp;
 
-  bool operator <(const timecode_range_c &cmp) const {
+  bool operator <(const timestamp_range_c &cmp) const {
     return start_frame < cmp.start_frame;
   }
 };
 
-class timecode_duration_c {
+class timestamp_duration_c {
 public:
   double fps;
   int64_t duration;
@@ -73,7 +73,7 @@ public:
   }
   virtual bool get_next(packet_cptr &packet) {
     // No gap is following!
-    packet->assigned_timecode = packet->timecode;
+    packet->assigned_timestamp = packet->timestamp;
     return false;
   }
   virtual double get_default_duration(double proposal) {
@@ -89,12 +89,12 @@ public:
   }
 
   static timestamp_factory_cptr create(const std::string &file_name, const std::string &source_name, int64_t tid);
-  static timestamp_factory_cptr create_fps_factory(int64_t default_duration, timecode_sync_t const &tcsync);
+  static timestamp_factory_cptr create_fps_factory(int64_t default_duration, timestamp_sync_t const &tcsync);
 };
 
 class timestamp_factory_v1_c: public timestamp_factory_c {
 protected:
-  std::vector<timecode_range_c> m_ranges;
+  std::vector<timestamp_range_c> m_ranges;
   uint32_t m_current_range;
   uint64_t m_frameno;
   double m_default_fps;
@@ -124,7 +124,7 @@ protected:
 
 class timestamp_factory_v2_c: public timestamp_factory_c {
 protected:
-  std::vector<int64_t> m_timecodes, m_durations;
+  std::vector<int64_t> m_timestamps, m_durations;
   int64_t m_frameno;
   double m_default_duration;
   bool m_warning_printed;
@@ -151,9 +151,9 @@ public:
 
 class timestamp_factory_v3_c: public timestamp_factory_c {
 protected:
-  std::vector<timecode_duration_c> m_durations;
+  std::vector<timestamp_duration_c> m_durations;
   size_t m_current_duration;
-  int64_t m_current_timecode;
+  int64_t m_current_timestamp;
   int64_t m_current_offset;
   double m_default_fps;
 
@@ -163,7 +163,7 @@ public:
                         int64_t tid)
     : timestamp_factory_c(file_name, source_name, tid, 3)
     , m_current_duration(0)
-    , m_current_timecode(0)
+    , m_current_timestamp(0)
     , m_current_offset(0)
     , m_default_fps(0.0)
   {
@@ -178,11 +178,11 @@ public:
 class forced_default_duration_timestamp_factory_c: public timestamp_factory_c {
 protected:
   int64_t m_default_duration{}, m_frameno{};
-  timecode_sync_t m_tcsync{};
+  timestamp_sync_t m_tcsync{};
 
 public:
   forced_default_duration_timestamp_factory_c(int64_t default_duration,
-                                             timecode_sync_t const &tcsync,
+                                             timestamp_sync_t const &tcsync,
                                              const std::string &source_name,
                                              int64_t tid)
     : timestamp_factory_c{"", source_name, tid, 1}

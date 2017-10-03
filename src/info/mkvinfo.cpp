@@ -92,11 +92,11 @@ struct kax_track_t {
 };
 
 struct track_info_t {
-  int64_t m_size, m_min_timecode, m_max_timecode, m_blocks, m_blocks_by_ref_num[3], m_add_duration_for_n_packets;
+  int64_t m_size, m_min_timestamp, m_max_timestamp, m_blocks, m_blocks_by_ref_num[3], m_add_duration_for_n_packets;
 
   track_info_t();
-  bool min_timecode_unset();
-  bool max_timecode_unset();
+  bool min_timestamp_unset();
+  bool max_timestamp_unset();
 };
 
 kax_track_t::kax_track_t()
@@ -111,8 +111,8 @@ using kax_track_cptr = std::shared_ptr<kax_track_t>;
 
 track_info_t::track_info_t()
   : m_size(0)
-  , m_min_timecode(LLONG_MAX)
-  , m_max_timecode(LLONG_MIN)
+  , m_min_timestamp(LLONG_MAX)
+  , m_max_timestamp(LLONG_MIN)
   , m_blocks(0)
   , m_add_duration_for_n_packets(0)
 {
@@ -120,20 +120,20 @@ track_info_t::track_info_t()
 }
 
 bool
-track_info_t::min_timecode_unset() {
-  return LLONG_MAX == m_min_timecode;
+track_info_t::min_timestamp_unset() {
+  return LLONG_MAX == m_min_timestamp;
 }
 
 bool
-track_info_t::max_timecode_unset() {
-  return LLONG_MIN == m_max_timecode;
+track_info_t::max_timestamp_unset() {
+  return LLONG_MIN == m_max_timestamp;
 }
 
 std::vector<kax_track_cptr> s_tracks;
 std::map<unsigned int, kax_track_cptr> s_tracks_by_number;
 std::map<unsigned int, track_info_t> s_track_info;
 options_c g_options;
-static uint64_t s_tc_scale = TIMECODE_SCALE;
+static uint64_t s_ts_scale = TIMESTAMP_SCALE;
 std::vector<boost::format> g_common_boost_formats;
 size_t s_mkvmerge_track_id = 0;
 
@@ -169,7 +169,7 @@ size_t s_mkvmerge_track_id = 0;
 #define BF_SIMPLE_BLOCK_POSITION             BF_DO(19) // Intentional -- same format.
 #define BF_SIMPLE_BLOCK_SUMMARY              BF_DO(25)
 #define BF_SIMPLE_BLOCK_SUMMARY_V2           BF_DO(26)
-#define BF_CLUSTER_TIMECODE                  BF_DO(27)
+#define BF_CLUSTER_TIMESTAMP                 BF_DO(27)
 #define BF_CLUSTER_POSITION                  BF_DO(28)
 #define BF_CLUSTER_PREVIOUS_SIZE             BF_DO(29)
 #define BF_CODEC_STATE                       BF_DO(30)
@@ -208,7 +208,7 @@ init_common_boost_formats() {
   BF_ADD(Y("Frame with size %1%%2%%3%"));                                                                       // 24 -- BF_SIMPLE_BLOCK_FRAME
   BF_ADD(Y("%1% frame, track %2%, timecode %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"));                       // 25 -- BF_SIMPLE_BLOCK_SUMMARY
   BF_ADD(Y("[%1% frame for track %2%, timecode %3%]"));                                                         // 26 -- BF_SIMPLE_BLOCK_SUMMARY_V2
-  BF_ADD(Y("Cluster timecode: %|1$.3f|s"));                                                                     // 27 -- BF_CLUSTER_TIMECODE
+  BF_ADD(Y("Cluster timecode: %|1$.3f|s"));                                                                     // 27 -- BF_CLUSTER_TIMESTAMP
   BF_ADD(Y("Cluster position: %1%"));                                                                           // 28 -- BF_CLUSTER_POSITION
   BF_ADD(Y("Cluster previous size: %1%"));                                                                      // 29 -- BF_CLUSTER_PREVIOUS_SIZE
   BF_ADD(Y("Codec state: %1%"));                                                                                // 30 -- BF_CODEC_STATE
@@ -457,19 +457,19 @@ handle_info(EbmlStream *&es,
   auto m1                    = static_cast<EbmlMaster *>(l1);
   read_master(m1, es, EBML_CONTEXT(l1), upper_lvl_el, element_found);
 
-  s_tc_scale = FindChildValue<KaxTimecodeScale, uint64_t>(m1, TIMECODE_SCALE);
+  s_ts_scale = FindChildValue<KaxTimecodeScale, uint64_t>(m1, TIMESTAMP_SCALE);
 
   for (auto l2 : *m1)
     if (Is<KaxTimecodeScale>(l2)) {
-      s_tc_scale = static_cast<KaxTimecodeScale *>(l2)->GetValue();
-      show_element(l2, 2, boost::format(Y("Timecode scale: %1%")) % s_tc_scale);
+      s_ts_scale = static_cast<KaxTimecodeScale *>(l2)->GetValue();
+      show_element(l2, 2, boost::format(Y("Timecode scale: %1%")) % s_ts_scale);
 
     } else if (Is<KaxDuration>(l2)) {
       KaxDuration &duration = *static_cast<KaxDuration *>(l2);
       show_element(l2, 2,
                    boost::format(Y("Duration: %|1$.3f|s (%2%)"))
-                   % (duration.GetValue() * s_tc_scale / 1000000000.0)
-                   % format_timestamp(static_cast<uint64_t>(duration.GetValue()) * s_tc_scale, 3));
+                   % (duration.GetValue() * s_ts_scale / 1000000000.0)
+                   % format_timestamp(static_cast<uint64_t>(duration.GetValue()) * s_ts_scale, 3));
 
     } else if (Is<KaxMuxingApp>(l2))
       show_element(l2, 2, boost::format(Y("Multiplexing application: %1%")) % static_cast<KaxMuxingApp *>(l2)->GetValueUTF8());
@@ -1146,7 +1146,7 @@ handle_cues(EbmlStream *&es,
 
       for (auto l3 : *static_cast<EbmlMaster *>(l2))
         if (Is<KaxCueTime>(l3))
-          show_element(l3, 3, boost::format(Y("Cue time: %|1$.3f|s")) % (s_tc_scale * static_cast<double>(static_cast<KaxCueTime *>(l3)->GetValue()) / 1000000000.0));
+          show_element(l3, 3, boost::format(Y("Cue time: %|1$.3f|s")) % (s_ts_scale * static_cast<double>(static_cast<KaxCueTime *>(l3)->GetValue()) / 1000000000.0));
 
         else if (Is<KaxCueTrackPositions>(l3)) {
           show_element(l3, 3, Y("Cue track positions"));
@@ -1162,7 +1162,7 @@ handle_cues(EbmlStream *&es,
               show_element(l4, 4, boost::format(Y("Cue relative position: %1%")) % static_cast<KaxCueRelativePosition *>(l4)->GetValue());
 
             else if (Is<KaxCueDuration>(l4))
-              show_element(l4, 4, boost::format(Y("Cue duration: %1%"))         % format_timestamp(static_cast<KaxCueDuration *>(l4)->GetValue() * s_tc_scale));
+              show_element(l4, 4, boost::format(Y("Cue duration: %1%"))         % format_timestamp(static_cast<KaxCueDuration *>(l4)->GetValue() * s_ts_scale));
 
             else if (Is<KaxCueBlockNumber>(l4))
               show_element(l4, 4, boost::format(Y("Cue block number: %1%"))     % static_cast<KaxCueBlockNumber *>(l4)->GetValue());
@@ -1176,7 +1176,7 @@ handle_cues(EbmlStream *&es,
 
               for (auto l5 : *static_cast<EbmlMaster *>(l4))
                 if (Is<KaxCueRefTime>(l5))
-                  show_element(l5, 5, boost::format(Y("Cue ref time: %|1$.3f|s"))  % s_tc_scale % (static_cast<KaxCueRefTime *>(l5)->GetValue() / 1000000000.0));
+                  show_element(l5, 5, boost::format(Y("Cue ref time: %|1$.3f|s"))  % s_ts_scale % (static_cast<KaxCueRefTime *>(l5)->GetValue() / 1000000000.0));
 
                 else if (Is<KaxCueRefCluster>(l5))
                   show_element(l5, 5, boost::format(Y("Cue ref cluster: %1%"))     % static_cast<KaxCueRefCluster *>(l5)->GetValue());
@@ -1263,29 +1263,29 @@ handle_block_group(EbmlStream *&es,
   std::vector<uint32_t> frame_adlers;
   std::vector<std::string> frame_hexdumps;
 
-  auto num_references = 0u;
-  int64_t lf_timecode = 0;
-  int64_t lf_tnum     = 0;
-  int64_t frame_pos   = 0;
+  auto num_references  = 0u;
+  int64_t lf_timestamp = 0;
+  int64_t lf_tnum      = 0;
+  int64_t frame_pos    = 0;
 
-  float bduration     = -1.0;
+  float bduration      = -1.0;
 
   for (auto l3 : *static_cast<EbmlMaster *>(l2))
     if (Is<KaxBlock>(l3)) {
       KaxBlock &block = *static_cast<KaxBlock *>(l3);
       block.SetParent(*cluster);
 
-      lf_timecode = block.GlobalTimecode();
-      lf_tnum     = block.TrackNum();
-      bduration   = -1.0;
-      frame_pos   = block.GetElementPosition() + block.ElementSize();
+      lf_timestamp = block.GlobalTimecode();
+      lf_tnum      = block.TrackNum();
+      bduration    = -1.0;
+      frame_pos    = block.GetElementPosition() + block.ElementSize();
 
       show_element(l3, 3,
                    BF_BLOCK_GROUP_BLOCK_BASICS
                    % block.TrackNum()
                    % block.NumberFrames()
-                   % (static_cast<double>(lf_timecode) / 1000000000.0)
-                   % format_timestamp(lf_timecode, 3));
+                   % (static_cast<double>(lf_timestamp) / 1000000000.0)
+                   % format_timestamp(lf_timestamp, 3));
 
       for (size_t i = 0; i < block.NumberFrames(); ++i) {
         auto &data = block.GetBuffer(i);
@@ -1309,13 +1309,13 @@ handle_block_group(EbmlStream *&es,
 
     } else if (Is<KaxBlockDuration>(l3)) {
       auto duration = static_cast<KaxBlockDuration *>(l3)->GetValue();
-      bduration     = static_cast<double>(duration) * s_tc_scale / 1000000.0;
-      show_element(l3, 3, BF_BLOCK_GROUP_DURATION % (duration * s_tc_scale / 1000000) % (duration * s_tc_scale % 1000000));
+      bduration     = static_cast<double>(duration) * s_ts_scale / 1000000.0;
+      show_element(l3, 3, BF_BLOCK_GROUP_DURATION % (duration * s_ts_scale / 1000000) % (duration * s_ts_scale % 1000000));
 
     } else if (Is<KaxReferenceBlock>(l3)) {
       ++num_references;
 
-      int64_t reference = static_cast<KaxReferenceBlock *>(l3)->GetValue() * s_tc_scale;
+      int64_t reference = static_cast<KaxReferenceBlock *>(l3)->GetValue() * s_ts_scale;
 
       if (0 >= reference)
         show_element(l3, 3, BF_BLOCK_GROUP_REFERENCE_1 % (std::abs(reference) / 1000000) % (std::abs(reference) % 1000000));
@@ -1377,10 +1377,10 @@ handle_block_group(EbmlStream *&es,
               show_element(l5, 5, BF_BLOCK_GROUP_SLICE_FRAME    % static_cast<KaxSliceFrameNumber *>(l5)->GetValue());
 
             else if (Is<KaxSliceDelay>(l5))
-              show_element(l5, 5, BF_BLOCK_GROUP_SLICE_DELAY    % (static_cast<double>(static_cast<KaxSliceDelay *>(l5)->GetValue()) * s_tc_scale / 1000000.0));
+              show_element(l5, 5, BF_BLOCK_GROUP_SLICE_DELAY    % (static_cast<double>(static_cast<KaxSliceDelay *>(l5)->GetValue()) * s_ts_scale / 1000000.0));
 
             else if (Is<KaxSliceDuration>(l5))
-              show_element(l5, 5, BF_BLOCK_GROUP_SLICE_DURATION % (static_cast<double>(static_cast<KaxSliceDuration *>(l5)->GetValue()) * s_tc_scale / 1000000.0));
+              show_element(l5, 5, BF_BLOCK_GROUP_SLICE_DURATION % (static_cast<double>(static_cast<KaxSliceDuration *>(l5)->GetValue()) * s_ts_scale / 1000000.0));
 
             else if (Is<KaxSliceBlockAddID>(l5))
               show_element(l5, 5, BF_BLOCK_GROUP_SLICE_ADD_ID   % static_cast<KaxSliceBlockAddID *>(l5)->GetValue());
@@ -1408,8 +1408,8 @@ handle_block_group(EbmlStream *&es,
         mxinfo(BF_BLOCK_GROUP_SUMMARY_WITH_DURATION
                % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
-               % std::llround(lf_timecode / 1000000.0)
-               % format_timestamp(lf_timecode, 3)
+               % std::llround(lf_timestamp / 1000000.0)
+               % format_timestamp(lf_timestamp, 3)
                % bduration
                % frame_sizes[fidx]
                % frame_adlers[fidx]
@@ -1419,8 +1419,8 @@ handle_block_group(EbmlStream *&es,
         mxinfo(BF_BLOCK_GROUP_SUMMARY_NO_DURATION
                % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
-               % std::llround(lf_timecode / 1000000.0)
-               % format_timestamp(lf_timecode, 3)
+               % std::llround(lf_timestamp / 1000000.0)
+               % format_timestamp(lf_timestamp, 3)
                % frame_sizes[fidx]
                % frame_adlers[fidx]
                % frame_hexdumps[fidx]
@@ -1432,24 +1432,24 @@ handle_block_group(EbmlStream *&es,
                  BF_BLOCK_GROUP_SUMMARY_V2
                  % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                  % lf_tnum
-                 % std::llround(lf_timecode / 1000000.0));
+                 % std::llround(lf_timestamp / 1000000.0));
 
   track_info_t &tinfo = s_track_info[lf_tnum];
 
   tinfo.m_blocks                                          += frame_sizes.size();
   tinfo.m_blocks_by_ref_num[std::min(num_references, 2u)] += frame_sizes.size();
-  tinfo.m_min_timecode                                     = std::min(tinfo.m_min_timecode, lf_timecode);
+  tinfo.m_min_timestamp                                    = std::min(tinfo.m_min_timestamp, lf_timestamp);
   tinfo.m_size                                            += boost::accumulate(frame_sizes, 0);
 
-  if (!tinfo.max_timecode_unset() && (tinfo.m_max_timecode >= lf_timecode))
+  if (!tinfo.max_timestamp_unset() && (tinfo.m_max_timestamp >= lf_timestamp))
     return;
 
-  tinfo.m_max_timecode = lf_timecode;
+  tinfo.m_max_timestamp = lf_timestamp;
 
   if (-1 == bduration)
     tinfo.m_add_duration_for_n_packets  = frame_sizes.size();
   else {
-    tinfo.m_max_timecode               += bduration * 1000000.0;
+    tinfo.m_max_timestamp              += bduration * 1000000.0;
     tinfo.m_add_duration_for_n_packets  = 0;
   }
 }
@@ -1465,8 +1465,8 @@ handle_simple_block(EbmlStream *&es,
   block.SetParent(*cluster);
 
   int64_t frame_pos   = block.GetElementPosition() + block.ElementSize();
-  auto timecode_ns    = mtx::math::to_signed(block.GlobalTimecode());
-  auto timecode_ms    = std::llround(static_cast<double>(timecode_ns) / 1000000.0);
+  auto timestamp_ns   = mtx::math::to_signed(block.GlobalTimecode());
+  auto timestamp_ms   = std::llround(static_cast<double>(timestamp_ns) / 1000000.0);
   track_info_t &tinfo = s_track_info[block.TrackNum()];
 
   std::string info;
@@ -1480,8 +1480,8 @@ handle_simple_block(EbmlStream *&es,
                % info
                % block.TrackNum()
                % block.NumberFrames()
-               % (timecode_ns / 1000000000.0)
-               % format_timestamp(timecode_ns, 3));
+               % (timestamp_ns / 1000000000.0)
+               % format_timestamp(timestamp_ns, 3));
 
   int i;
   for (i = 0; i < (int)block.NumberFrames(); i++) {
@@ -1516,8 +1516,8 @@ handle_simple_block(EbmlStream *&es,
       mxinfo(BF_SIMPLE_BLOCK_SUMMARY
              % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
              % block.TrackNum()
-             % timecode_ms
-             % format_timestamp(timecode_ns, 3)
+             % timestamp_ms
+             % format_timestamp(timestamp_ns, 3)
              % frame_sizes[fidx]
              % frame_adlers[fidx]
              % position);
@@ -1528,12 +1528,12 @@ handle_simple_block(EbmlStream *&es,
                  BF_SIMPLE_BLOCK_SUMMARY_V2
                  % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
                  % block.TrackNum()
-                 % timecode_ms);
+                 % timestamp_ms);
 
   tinfo.m_blocks                                                                    += block.NumberFrames();
   tinfo.m_blocks_by_ref_num[block.IsKeyframe() ? 0 : block.IsDiscardable() ? 2 : 1] += block.NumberFrames();
-  tinfo.m_min_timecode                                                                = std::min(tinfo.m_min_timecode, static_cast<int64_t>(timecode_ns));
-  tinfo.m_max_timecode                                                                = std::max(tinfo.max_timecode_unset() ? 0 : tinfo.m_max_timecode, static_cast<int64_t>(timecode_ns));
+  tinfo.m_min_timestamp                                                               = std::min(tinfo.m_min_timestamp, static_cast<int64_t>(timestamp_ns));
+  tinfo.m_max_timestamp                                                               = std::max(tinfo.max_timestamp_unset() ? 0 : tinfo.m_max_timestamp, static_cast<int64_t>(timestamp_ns));
   tinfo.m_add_duration_for_n_packets                                                  = block.NumberFrames();
   tinfo.m_size                                                                       += boost::accumulate(frame_sizes, 0);
 }
@@ -1553,11 +1553,11 @@ handle_cluster(EbmlStream *&es,
   auto m1                    = static_cast<EbmlMaster *>(l1);
   read_master(m1, es, EBML_CONTEXT(l1), upper_lvl_el, element_found);
 
-  cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(m1), s_tc_scale);
+  cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(m1), s_ts_scale);
 
   for (auto l2 : *m1)
     if (Is<KaxClusterTimecode>(l2))
-      show_element(l2, 2, BF_CLUSTER_TIMECODE      % (static_cast<double>(static_cast<KaxClusterTimecode *>(l2)->GetValue()) * s_tc_scale / 1000000000.0));
+      show_element(l2, 2, BF_CLUSTER_TIMESTAMP     % (static_cast<double>(static_cast<KaxClusterTimecode *>(l2)->GetValue()) * s_ts_scale / 1000000000.0));
 
     else if (Is<KaxClusterPosition>(l2))
       show_element(l2, 2, BF_CLUSTER_POSITION      % static_cast<KaxClusterPosition *>(l2)->GetValue());
@@ -1584,7 +1584,7 @@ handle_elements_rec(EbmlStream *es,
                     EbmlElement *e,
                     mtx::xml::ebml_converter_c const &converter) {
   static boost::format s_bf_handle_elements_rec("%1%: %2%");
-  static std::vector<std::string> const s_output_as_timecode{ "ChapterTimeStart", "ChapterTimeEnd" };
+  static std::vector<std::string> const s_output_as_timestamp{ "ChapterTimeStart", "ChapterTimeEnd" };
 
   std::string elt_name = converter.get_tag_name(*e);
 
@@ -1594,7 +1594,7 @@ handle_elements_rec(EbmlStream *es,
       handle_elements_rec(es, level + 1, child, converter);
 
   } else if (dynamic_cast<EbmlUInteger *>(e)) {
-    if (brng::find(s_output_as_timecode, elt_name) != s_output_as_timecode.end())
+    if (brng::find(s_output_as_timestamp, elt_name) != s_output_as_timestamp.end())
       show_element(e, level, s_bf_handle_elements_rec % elt_name % format_timestamp(static_cast<EbmlUInteger *>(e)->GetValue()));
     else
       show_element(e, level, s_bf_handle_elements_rec % elt_name % static_cast<EbmlUInteger *>(e)->GetValue());
@@ -1707,8 +1707,8 @@ handle_segment(EbmlElement *l0,
   else
     show_element(l0, 0, boost::format(Y("Segment, size %1%")) % l0->GetSize());
 
-  // Prevent reporting "first timecode after resync":
-  kax_file->set_timecode_scale(-1);
+  // Prevent reporting "first timestamp after resync":
+  kax_file->set_timestamp_scale(-1);
 
   while ((l1 = kax_file->read_next_level1_element())) {
     std::shared_ptr<EbmlElement> af_l1(l1);
@@ -1760,12 +1760,12 @@ display_track_info() {
   for (auto &track : s_tracks) {
     track_info_t &tinfo  = s_track_info[track->tnum];
 
-    if (tinfo.min_timecode_unset())
-      tinfo.m_min_timecode = 0;
-    if (tinfo.max_timecode_unset())
-      tinfo.m_max_timecode = tinfo.m_min_timecode;
+    if (tinfo.min_timestamp_unset())
+      tinfo.m_min_timestamp = 0;
+    if (tinfo.max_timestamp_unset())
+      tinfo.m_max_timestamp = tinfo.m_min_timestamp;
 
-    int64_t duration  = tinfo.m_max_timecode - tinfo.m_min_timecode;
+    int64_t duration  = tinfo.m_max_timestamp - tinfo.m_min_timestamp;
     duration         += tinfo.m_add_duration_for_n_packets * track->default_duration;
 
     mxinfo(boost::format(Y("Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"))
@@ -1781,7 +1781,7 @@ bool
 process_file(const std::string &file_name) {
   // Elements for different levels
 
-  s_tc_scale = TIMECODE_SCALE;
+  s_ts_scale = TIMESTAMP_SCALE;
   s_tracks.clear();
   s_tracks_by_number.clear();
   s_track_info.clear();

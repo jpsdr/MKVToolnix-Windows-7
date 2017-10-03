@@ -168,9 +168,9 @@ dts_packetizer_c::process_available_packets() {
     auto &data             = std::get<1>(header_and_packet);
     auto packet_position   = std::get<2>(header_and_packet);
     auto samples_in_packet = header.get_packet_length_in_core_samples();
-    auto new_timecode      = m_timestamp_calculator.get_next_timestamp(samples_in_packet, packet_position);
+    auto new_timestamp     = m_timestamp_calculator.get_next_timestamp(samples_in_packet, packet_position);
 
-    add_packet(std::make_shared<packet_t>(data, new_timecode.to_ns(), header.get_packet_length_in_nanoseconds().to_ns()));
+    add_packet(std::make_shared<packet_t>(data, new_timestamp.to_ns(), header.get_packet_length_in_nanoseconds().to_ns()));
   }
 
   m_queued_packets.clear();

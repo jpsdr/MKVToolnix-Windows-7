@@ -120,7 +120,7 @@ public:
 
 class ogm_a_opus_demuxer_c: public ogm_demuxer_c {
 protected:
-  timestamp_c m_calculated_end_timecode;
+  timestamp_c m_calculated_end_timestamp;
 
   static debugging_option_c ms_debug;
 
@@ -1172,7 +1172,7 @@ ogm_a_vorbis_demuxer_c::process_page(int64_t /* granulepos */) {
 
 ogm_a_opus_demuxer_c::ogm_a_opus_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
-  , m_calculated_end_timecode{timestamp_c::ns(0)}
+  , m_calculated_end_timestamp{timestamp_c::ns(0)}
 {
   codec = codec_c::look_up(codec_c::type_e::A_OPUS);
 }
@@ -1191,7 +1191,7 @@ void
 ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
   ogg_packet op;
 
-  auto ogg_timecode = timestamp_c::ns(granulepos * 1000000000 / 48000);
+  auto ogg_timestamp = timestamp_c::ns(granulepos * 1000000000 / 48000);
 
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;
@@ -1201,13 +1201,13 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
 
     auto packet                = std::make_shared<packet_t>(memory_c::clone(op.packet, op.bytes));
     auto toc                   = mtx::opus::toc_t::decode(packet->data);
-    m_calculated_end_timecode += toc.packet_duration;
+    m_calculated_end_timestamp += toc.packet_duration;
 
-    if (m_calculated_end_timecode > ogg_timecode) {
-      packet->discard_padding = m_calculated_end_timecode - ogg_timecode;
+    if (m_calculated_end_timestamp > ogg_timestamp) {
+      packet->discard_padding = m_calculated_end_timestamp - ogg_timestamp;
       mxdebug_if(ms_debug,
                  boost::format("Opus discard padding calculated %1% Ogg timestamp %2% diff %3% samples %4% (Ogg page's granulepos %5%)\n")
-                 % m_calculated_end_timecode % ogg_timecode % packet->discard_padding % (packet->discard_padding.to_ns() * 48000 / 1000000000) % granulepos);
+                 % m_calculated_end_timestamp % ogg_timestamp % packet->discard_padding % (packet->discard_padding.to_ns() * 48000 / 1000000000) % granulepos);
     }
 
     reader->m_reader_packetizers[ptzr]->process(packet);
@@ -1396,10 +1396,10 @@ ogm_v_mscomp_demuxer_c::process_page(int64_t granulepos) {
   for (i = 0; i < frames.size(); ++i) {
     ogm_frame_t &frame = frames[i];
 
-    int64_t timecode = (last_granulepos + frames_since_granulepos_change) * default_duration;
+    int64_t timestamp = (last_granulepos + frames_since_granulepos_change) * default_duration;
     ++frames_since_granulepos_change;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(frame.mem, timecode, frame.duration, frame.flags & PACKET_IS_SYNCPOINT ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC));
+    reader->m_reader_packetizers[ptzr]->process(new packet_t(frame.mem, timestamp, frame.duration, frame.flags & PACKET_IS_SYNCPOINT ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC));
 
     units_processed += duration;
   }
@@ -1457,13 +1457,13 @@ ogm_v_theora_demuxer_c::process_page(int64_t granulepos) {
     // Zero-length frames are 'repeat previous frame' markers and
     // cannot be I frames.
     bool is_keyframe = (0 != op.bytes) && (0x00 == (op.packet[0] & 0x40));
-    int64_t timecode = (int64_t)(1000000000.0 * units_processed * theora.frd / theora.frn);
+    int64_t timestamp = (int64_t)(1000000000.0 * units_processed * theora.frd / theora.frn);
     int64_t duration = (int64_t)(1000000000.0 *                   theora.frd / theora.frn);
     int64_t bref     = is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC;
 
     ++units_processed;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(new memory_c(op.packet, op.bytes, false), timecode, duration, bref, VFT_NOBFRAME));
+    reader->m_reader_packetizers[ptzr]->process(new packet_t(new memory_c(op.packet, op.bytes, false), timestamp, duration, bref, VFT_NOBFRAME));
 
     mxverb(3,
            boost::format("Theora track %1% kfgshift %2% granulepos 0x%|3$08x| %|4$08x|%5%\n")
@@ -1569,12 +1569,12 @@ ogm_v_vp8_demuxer_c::process_page(int64_t granulepos) {
     auto &data       = packets[idx];
     auto is_keyframe = (0 != data->get_size()) && ((data->get_buffer()[0] & 0x01) == 0);
     auto frame_num   = pts - std::min<int64_t>(pts, num_packets - idx - 1 + 1);
-    auto timecode    = static_cast<int64_t>(1000000000.0 * frame_num * frame_rate_den / frame_rate_num);
+    auto timestamp    = static_cast<int64_t>(1000000000.0 * frame_num * frame_rate_den / frame_rate_num);
     auto bref        = is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC;
 
     ++units_processed;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(data, timecode, default_duration, bref, VFT_NOBFRAME));
+    reader->m_reader_packetizers[ptzr]->process(new packet_t(data, timestamp, default_duration, bref, VFT_NOBFRAME));
 
     mxdebug_if(debug,
                boost::format("VP8 track %1% size %10% #proc %11% frame# %12% fr_num %2% fr_den %3% granulepos 0x%|4$08x| %|5$08x| pts %6% inv_count %7% distance %8%%9%\n")

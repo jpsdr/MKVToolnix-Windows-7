@@ -84,16 +84,16 @@ struct video_frame_t {
   frame_type_e type;
   /** Private data. */
   unsigned char *priv;
-  /** The timecode of the frame in \c ns. */
-  int64_t timecode;
+  /** The timestamp of the frame in \c ns. */
+  int64_t timestamp;
   /** The duration of the frame in \c ns. */
   int64_t duration;
   /** The frame's backward reference in \c ns relative to its
-      \link video_frame_t::timecode timecode \endlink.
+      \link video_frame_t::timestamp timestamp \endlink.
       This value is only set for P and B frames. */
   int64_t bref;
   /** The frame's forward reference in \c ns relative to its
-      \link video_frame_t::timecode timecode \endlink.
+      \link video_frame_t::timestamp timestamp \endlink.
       This value is only set for B frames. */
   int64_t fref;
 
@@ -106,7 +106,7 @@ struct video_frame_t {
     , pos(0)
     , type(FRAME_TYPE_I)
     , priv(nullptr)
-    , timecode(0)
+    , timestamp(0)
     , duration(0)
     , bref(0)
     , fref(0)
