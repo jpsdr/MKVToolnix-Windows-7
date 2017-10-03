@@ -44,13 +44,13 @@ select_for_chapters(KaxTags &tags,
     if (targets) {
       for (auto child : *targets) {
         auto t_euid = dynamic_cast<KaxTagEditionUID *>(child);
-        if (t_euid && !find_edition_with_uid(chapters, t_euid->GetValue())) {
+        if (t_euid && !mtx::chapters::find_edition_with_uid(chapters, t_euid->GetValue())) {
           copy = false;
           break;
         }
 
         auto t_cuid = dynamic_cast<KaxTagChapterUID *>(child);
-        if (t_cuid && !find_chapter_with_uid(chapters, t_cuid->GetValue())) {
+        if (t_cuid && !mtx::chapters::find_chapter_with_uid(chapters, t_cuid->GetValue())) {
           copy = false;
           break;
         }

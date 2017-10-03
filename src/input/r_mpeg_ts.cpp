@@ -1279,10 +1279,10 @@ reader_c::process_chapter_entries() {
 
   mm_text_io_c text_out(&out, false);
   try {
-    m_chapters = parse_chapters(&text_out, 0, -1, 0, m_ti.m_chapter_language, "", true);
-    align_chapter_edition_uids(m_chapters.get());
+    m_chapters = mtx::chapters::parse(&text_out, 0, -1, 0, m_ti.m_chapter_language, "", true);
+    mtx::chapters::align_uids(m_chapters.get());
 
-  } catch (mtx::chapter_parser_x &ex) {
+  } catch (mtx::chapters::parser_x &ex) {
   }
 }
 

@@ -35,7 +35,7 @@ chapter_target_c::operator ==(target_c const &cmp)
 void
 chapter_target_c::validate() {
   if (!m_file_name.empty() && !m_new_chapters)
-    m_new_chapters = parse_chapters(m_file_name);
+    m_new_chapters = mtx::chapters::parse(m_file_name);
 }
 
 void
@@ -69,7 +69,7 @@ chapter_target_c::execute() {
     mxerror(boost::format(Y("Error parsing the chapters in '%1%': some mandatory elements are missing.\n")) % m_file_name);
 
   if (m_analyzer->is_webm())
-    remove_chapter_elements_unsupported_by_webm(*m_level1_element);
+    mtx::chapters::remove_elements_unsupported_by_webm(*m_level1_element);
 }
 
 bool

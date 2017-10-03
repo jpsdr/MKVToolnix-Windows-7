@@ -39,7 +39,7 @@ protected:
 public:
   static void write_xml(KaxChapters &chapters, mm_io_c &out);
   static bool probe_file(std::string const &file_name);
-  static kax_chapters_cptr parse_file(std::string const &file_name, bool throw_on_error);
+  static mtx::chapters::kax_cptr parse_file(std::string const &file_name, bool throw_on_error);
 };
 
 }}

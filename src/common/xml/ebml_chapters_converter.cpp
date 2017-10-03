@@ -198,7 +198,7 @@ ebml_chapters_converter_c::probe_file(std::string const &file_name) {
   return false;
 }
 
-kax_chapters_cptr
+mtx::chapters::kax_cptr
 ebml_chapters_converter_c::parse_file(std::string const &file_name,
                                       bool throw_on_error) {
   auto parse = [&file_name]() -> auto {
@@ -224,7 +224,7 @@ ebml_chapters_converter_c::parse_file(std::string const &file_name,
     mxerror(boost::format(Y("The XML chapter file '%1%' contains an error: %2%\n")) % file_name % ex.what());
   }
 
-  return kax_chapters_cptr{};
+  return mtx::chapters::kax_cptr{};
 }
 
 }}

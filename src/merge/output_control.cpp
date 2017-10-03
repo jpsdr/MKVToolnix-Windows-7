@@ -126,7 +126,7 @@ std::unique_ptr<KaxTracks> g_kax_tracks;
 KaxTrackEntry *g_kax_last_entry             = nullptr;
 std::unique_ptr<KaxSeekHead> g_kax_sh_main;
 std::unique_ptr<KaxSeekHead> g_kax_sh_cues;
-kax_chapters_cptr g_kax_chapters;
+mtx::chapters::kax_cptr g_kax_chapters;
 
 std::unique_ptr<KaxTags> g_tags_from_cue_chapters;
 
@@ -163,7 +163,7 @@ std::unique_ptr<KaxInfo> s_kax_infos;
 static KaxMyDuration *s_kax_duration;
 
 static std::unique_ptr<KaxTags> s_kax_tags;
-static kax_chapters_cptr s_chapters_in_this_file;
+static mtx::chapters::kax_cptr s_chapters_in_this_file;
 
 static std::unique_ptr<KaxAttachments> s_kax_as;
 
@@ -1114,7 +1114,7 @@ calc_max_chapter_size() {
     if (!g_kax_chapters)
       g_kax_chapters = std::make_shared<KaxChapters>();
 
-    move_chapters_by_edition(*g_kax_chapters, *file->reader->m_chapters);
+    mtx::chapters::move_by_edition(*g_kax_chapters, *file->reader->m_chapters);
     file->reader->m_chapters.reset();
   }
 
@@ -1368,7 +1368,7 @@ add_chapters_for_current_part() {
 
   if (!g_cluster_helper->splitting()) {
     s_chapters_in_this_file = clone(g_kax_chapters);
-    merge_chapter_entries(*s_chapters_in_this_file);
+    mtx::chapters::merge_entries(*s_chapters_in_this_file);
     sort_ebml_master(s_chapters_in_this_file.get());
     return;
   }
@@ -1378,7 +1378,7 @@ add_chapters_for_current_part() {
   int64_t offset                  = g_no_linking ? g_cluster_helper->get_first_timecode_in_file() + g_cluster_helper->get_discarded_duration() : 0;
 
   auto chapters_here              = clone(g_kax_chapters);
-  bool have_chapters_in_timeframe = select_chapters_in_timeframe(chapters_here.get(), start, end, offset);
+  bool have_chapters_in_timeframe = mtx::chapters::select_in_timeframe(chapters_here.get(), start, end, offset);
 
   mxdebug_if(s_debug, boost::format("offset %1% start %2% end %3% have chapters in timeframe? %4% chapters in this file? %5%\n") % offset % start % end % have_chapters_in_timeframe % !!s_chapters_in_this_file);
 
@@ -1388,9 +1388,9 @@ add_chapters_for_current_part() {
   if (!s_chapters_in_this_file)
     s_chapters_in_this_file = chapters_here;
   else
-    move_chapters_by_edition(*s_chapters_in_this_file, *chapters_here);
+    mtx::chapters::move_by_edition(*s_chapters_in_this_file, *chapters_here);
 
-  merge_chapter_entries(*s_chapters_in_this_file);
+  mtx::chapters::merge_entries(*s_chapters_in_this_file);
   sort_ebml_master(s_chapters_in_this_file.get());
 }
 
@@ -1436,10 +1436,10 @@ render_chapters() {
   }
 
   fix_mandatory_elements(s_chapters_in_this_file.get());
-  fix_chapter_country_codes(*s_chapters_in_this_file);
+  mtx::chapters::fix_country_codes(*s_chapters_in_this_file);
 
   if (outputting_webm())
-    remove_chapter_elements_unsupported_by_webm(*s_chapters_in_this_file);
+    mtx::chapters::remove_elements_unsupported_by_webm(*s_chapters_in_this_file);
 
   auto replaced = false;
   if (s_kax_chapters_void) {
@@ -1659,10 +1659,10 @@ append_chapters_for_track(filelist_t &src_file,
   if (!g_kax_chapters)
     g_kax_chapters = std::make_unique<KaxChapters>();
   else
-    align_chapter_edition_uids(*g_kax_chapters, *chapters);
+    mtx::chapters::align_uids(*g_kax_chapters, *chapters);
 
-  adjust_chapter_timecodes(*chapters, timecode_adjustment);
-  move_chapters_by_edition(*g_kax_chapters, *chapters);
+  mtx::chapters::adjust_timecodes(*chapters, timecode_adjustment);
+  mtx::chapters::move_by_edition(*g_kax_chapters, *chapters);
   src_file.reader->m_chapters.reset();
 }
 

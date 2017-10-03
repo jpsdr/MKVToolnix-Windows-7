@@ -19,7 +19,7 @@ using namespace libebml;
 
 class chapter_target_c: public target_c {
 protected:
-  kax_chapters_cptr m_new_chapters;
+  mtx::chapters::kax_cptr m_new_chapters;
 
 public:
   chapter_target_c();

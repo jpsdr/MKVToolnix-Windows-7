@@ -435,17 +435,17 @@ Tab::LoadResult
 Tab::loadFromChapterFile() {
   Q_D(Tab);
 
-  auto format   = chapter_format_e::xml;
+  auto format   = mtx::chapters::format_e::xml;
   auto chapters = ChaptersPtr{};
   auto error    = QString{};
 
   try {
-    chapters = parse_chapters(to_utf8(d->fileName), 0, -1, 0, "", to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &format);
+    chapters = mtx::chapters::parse(to_utf8(d->fileName), 0, -1, 0, "", to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &format);
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());
 
-  } catch (mtx::chapter_parser_x &ex) {
+  } catch (mtx::chapters::parser_x &ex) {
     error = Q(ex.what());
   }
 
@@ -457,7 +457,7 @@ Tab::loadFromChapterFile() {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
     emit removeThisTab();
 
-  } else if (format != chapter_format_e::xml) {
+  } else if (format != mtx::chapters::format_e::xml) {
     auto result = checkSimpleFormatForBomAndNonAscii(chapters);
 
     d->fileName.clear();
@@ -466,7 +466,7 @@ Tab::loadFromChapterFile() {
     return result;
   }
 
-  return { chapters, format == chapter_format_e::xml };
+  return { chapters, format == mtx::chapters::format_e::xml };
 }
 
 void
@@ -476,7 +476,7 @@ Tab::reloadSimpleChaptersWithCharacterSet(QString const &characterSet) {
   auto error = QString{};
 
   try {
-    auto chapters = parse_chapters(to_utf8(d->originalFileName), 0, -1, 0, "", to_utf8(characterSet), true);
+    auto chapters = mtx::chapters::parse(to_utf8(d->originalFileName), 0, -1, 0, "", to_utf8(characterSet), true);
     chaptersLoaded(chapters, false);
 
     Util::enableChildren(this, true);
@@ -487,7 +487,7 @@ Tab::reloadSimpleChaptersWithCharacterSet(QString const &characterSet) {
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());
-  } catch (mtx::chapter_parser_x &ex) {
+  } catch (mtx::chapters::parser_x &ex) {
     error = Q(ex.what());
   }
 
@@ -587,7 +587,7 @@ Tab::chaptersLoaded(ChaptersPtr const &chapters,
                     bool canBeWritten) {
   Q_D(Tab);
 
-  fix_chapter_country_codes(*chapters);
+  mtx::chapters::fix_country_codes(*chapters);
 
   if (!d->fileName.isEmpty())
     d->fileModificationTime = QFileInfo{d->fileName}.lastModified();
@@ -733,7 +733,7 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     if (chapters && (0 != chapters->ListSize())) {
       fix_mandatory_elements(chapters.get());
       if (d->analyzer->is_webm())
-        remove_chapter_elements_unsupported_by_webm(*chapters);
+        mtx::chapters::remove_elements_unsupported_by_webm(*chapters);
 
       result = d->analyzer->update_element(chapters, !d->analyzer->is_webm(), false);
 
@@ -1550,7 +1550,7 @@ Tab::formatChapterName(QString const &nameTemplate,
                        int chapterNumber,
                        timestamp_c const &startTimestamp)
   const {
-  return Q(format_chapter_name_template(to_utf8(nameTemplate), chapterNumber, startTimestamp));
+  return Q(mtx::chapters::format_name_template(to_utf8(nameTemplate), chapterNumber, startTimestamp));
 }
 
 void

@@ -928,10 +928,10 @@ kax_reader_c::handle_chapters(mm_io_c *io,
   tmp_chapters->Read(*m_es, EBML_CLASS_CONTEXT(KaxChapters), upper_lvl_el, l2, true);
 
   if (m_regenerate_chapter_uids)
-    regenerate_edition_and_chapter_uids(*tmp_chapters);
+    mtx::chapters::regenerate_uids(*tmp_chapters);
 
   if (!m_chapters)
-    m_chapters = kax_chapters_cptr{new KaxChapters};
+    m_chapters = mtx::chapters::kax_cptr{new KaxChapters};
 
   m_chapters->GetElementList().insert(m_chapters->begin(), tmp_chapters->begin(), tmp_chapters->end());
   tmp_chapters->RemoveAll();
@@ -2236,7 +2236,7 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
       // If we're appending this file to another one then the core
       // needs the timecodes shifted to zero.
       if (m_appending && m_chapters && (0 < m_first_timecode))
-        adjust_chapter_timecodes(*m_chapters, -m_first_timecode);
+        mtx::chapters::adjust_timecodes(*m_chapters, -m_first_timecode);
     }
 
     size_t bgidx;
@@ -2735,7 +2735,7 @@ kax_reader_c::identify() {
     id_result_attachment(attachment->ui_id, attachment->mime_type, attachment->data->get_size(), attachment->name, attachment->description, attachment->id);
 
   if (m_chapters)
-    id_result_chapters(count_chapter_atoms(*m_chapters));
+    id_result_chapters(mtx::chapters::count_atoms(*m_chapters));
 
   if (m_tags)
     id_result_tags(ID_RESULT_GLOBAL_TAGS_ID, mtx::tags::count_simple(*m_tags));

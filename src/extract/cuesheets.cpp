@@ -84,9 +84,9 @@ get_chapter_index(int idx,
   size_t i;
   std::string sidx = (boost::format("INDEX %|1$02d|") % idx).str();
   for (i = 0; i < atom.ListSize(); i++)
-    if (Is<KaxChapterAtom>(atom[i]) &&
-        (get_chapter_name(*static_cast<KaxChapterAtom *>(atom[i])) == sidx))
-      return get_chapter_start(*static_cast<KaxChapterAtom *>(atom[i]));
+    if (   Is<KaxChapterAtom>(atom[i])
+        && (mtx::chapters::get_name(*static_cast<KaxChapterAtom *>(atom[i])) == sidx))
+      return mtx::chapters::get_start(*static_cast<KaxChapterAtom *>(atom[i]));
 
   return -1;
 }
@@ -163,7 +163,7 @@ write_cuesheet(std::string file_name,
     KaxChapterAtom &atom =  *static_cast<KaxChapterAtom *>(chapters[i]);
 
     out.puts(boost::format("  TRACK %|1$02d| AUDIO\n") % (i + 1));
-    tag = find_tag_for_track(i + 1, tuid, get_chapter_uid(atom), tags);
+    tag = find_tag_for_track(i + 1, tuid, mtx::chapters::get_uid(atom), tags);
     if (!tag)
       continue;
 

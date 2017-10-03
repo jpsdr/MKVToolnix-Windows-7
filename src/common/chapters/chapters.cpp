@@ -34,10 +34,12 @@
 
 using namespace libmatroska;
 
+namespace mtx { namespace chapters {
+
 /** The default language for all chapter entries that don't have their own. */
-std::string g_default_chapter_language;
+std::string g_default_language;
 /** The default country for all chapter entries that don't have their own. */
-std::string g_default_chapter_country;
+std::string g_default_country;
 
 #define SIMCHAP_RE_TIMECODE_LINE "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d+)"
 #define SIMCHAP_RE_TIMECODE      "^\\s*CHAPTER\\d+\\s*=(.*)"
@@ -49,7 +51,7 @@ std::string g_default_chapter_country;
 */
 inline void
 chapter_error(const std::string &error) {
-  throw mtx::chapter_parser_x(boost::format(Y("Simple chapter parser: %1%\n")) % error);
+  throw parser_x(boost::format(Y("Simple chapter parser: %1%\n")) % error);
 }
 
 inline void
@@ -71,7 +73,7 @@ chapter_error(const boost::format &format) {
      otherwise.
 */
 bool
-probe_simple_chapters(mm_text_io_c *in) {
+probe_simple(mm_text_io_c *in) {
   boost::regex timecode_line_re(SIMCHAP_RE_TIMECODE_LINE, boost::regex::perl);
   boost::regex name_line_re(    SIMCHAP_RE_NAME_LINE,     boost::regex::perl);
   boost::smatch matches;
@@ -133,18 +135,18 @@ probe_simple_chapters(mm_text_io_c *in) {
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
 */
-kax_chapters_cptr
-parse_simple_chapters(mm_text_io_c *in,
-                      int64_t min_tc,
-                      int64_t max_tc,
-                      int64_t offset,
-                      const std::string &language,
-                      const std::string &charset) {
+kax_cptr
+parse_simple(mm_text_io_c *in,
+             int64_t min_tc,
+             int64_t max_tc,
+             int64_t offset,
+             std::string const &language,
+             std::string const &charset) {
   assert(in);
 
   in->setFilePointer(0);
 
-  kax_chapters_cptr chaps{new KaxChapters};
+  kax_cptr chaps{new KaxChapters};
   KaxChapterAtom *atom     = nullptr;
   KaxEditionEntry *edition = nullptr;
   int mode                 = 0;
@@ -164,10 +166,9 @@ parse_simple_chapters(mm_text_io_c *in,
   if (do_convert)
     cc_utf8 = charset_converter_c::init(charset);
 
-  std::string use_language =
-      !language.empty()                   ? language
-    : !g_default_chapter_language.empty() ? g_default_chapter_language
-    :                                       "eng";
+  std::string use_language = !language.empty()                          ? language
+                           : !g_default_language.empty() ? g_default_language
+                           :                                              "eng";
 
   boost::regex timecode_line_re(SIMCHAP_RE_TIMECODE_LINE, boost::regex::perl);
   boost::regex timecode_re(     SIMCHAP_RE_TIMECODE,      boost::regex::perl);
@@ -227,15 +228,15 @@ parse_simple_chapters(mm_text_io_c *in,
         GetChild<KaxChapterString>(display).SetValueUTF8(do_convert ? cc_utf8->utf8(name) : name);
         GetChild<KaxChapterLanguage>(display).SetValue(use_language);
 
-        if (!g_default_chapter_country.empty())
-          GetChild<KaxChapterCountry>(display).SetValue(g_default_chapter_country);
+        if (!g_default_country.empty())
+          GetChild<KaxChapterCountry>(display).SetValue(g_default_country);
 
         ++num;
       }
     }
   }
 
-  return 0 == num ? kax_chapters_cptr{} : chaps;
+  return 0 == num ? kax_cptr{} : chaps;
 }
 
 /** \brief Probe a file for different chapter formats and parse the file.
@@ -269,30 +270,30 @@ parse_simple_chapters(mm_text_io_c *in,
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
 
-   \see ::parse_chapters(mm_text_io_c *in,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,chapter_format_e *format,KaxTags **tags)
+   \see ::parse_chapters(mm_text_io_c *in,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,KaxTags **tags)
 */
-kax_chapters_cptr
-parse_chapters(const std::string &file_name,
-               int64_t min_tc,
-               int64_t max_tc,
-               int64_t offset,
-               const std::string &language,
-               const std::string &charset,
-               bool exception_on_error,
-               chapter_format_e *format,
-               std::unique_ptr<KaxTags> *tags) {
+kax_cptr
+parse(const std::string &file_name,
+      int64_t min_tc,
+      int64_t max_tc,
+      int64_t offset,
+      const std::string &language,
+      const std::string &charset,
+      bool exception_on_error,
+      format_e *format,
+      std::unique_ptr<KaxTags> *tags) {
   try {
     mm_text_io_c in(new mm_file_io_c(file_name));
-    return parse_chapters(&in, min_tc, max_tc, offset, language, charset, exception_on_error, format, tags);
+    return parse(&in, min_tc, max_tc, offset, language, charset, exception_on_error, format, tags);
 
-  } catch (mtx::chapter_parser_x &e) {
+  } catch (parser_x &e) {
     if (exception_on_error)
       throw;
     mxerror(boost::format(Y("Could not parse the chapters in '%1%': %2%\n")) % file_name % e.error());
 
   } catch (...) {
     if (exception_on_error)
-      throw mtx::chapter_parser_x(boost::format(Y("Could not open '%1%' for reading.\n")) % file_name);
+      throw parser_x(boost::format(Y("Could not open '%1%' for reading.\n")) % file_name);
     else
       mxerror(boost::format(Y("Could not open '%1%' for reading.\n")) % file_name);
   }
@@ -331,43 +332,43 @@ parse_chapters(const std::string &file_name,
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
 
-   \see ::parse_chapters(const std::string &file_name,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,chapter_format_e *format,std::unique_ptr<KaxTags> *tags)
+   \see ::parse_chapters(const std::string &file_name,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,std::unique_ptr<KaxTags> *tags)
 */
-kax_chapters_cptr
-parse_chapters(mm_text_io_c *in,
-               int64_t min_tc,
-               int64_t max_tc,
-               int64_t offset,
-               const std::string &language,
-               const std::string &charset,
-               bool exception_on_error,
-               chapter_format_e *format,
-               std::unique_ptr<KaxTags> *tags) {
+kax_cptr
+parse(mm_text_io_c *in,
+      int64_t min_tc,
+      int64_t max_tc,
+      int64_t offset,
+      const std::string &language,
+      const std::string &charset,
+      bool exception_on_error,
+      format_e *format,
+      std::unique_ptr<KaxTags> *tags) {
   assert(in);
 
   std::string error;
 
   try {
-    if (probe_simple_chapters(in)) {
+    if (probe_simple(in)) {
       if (format)
-        *format = chapter_format_e::ogg;
-      return parse_simple_chapters(in, min_tc, max_tc, offset, language, charset);
+        *format = format_e::ogg;
+      return parse_simple(in, min_tc, max_tc, offset, language, charset);
 
-    } else if (probe_cue_chapters(in)) {
+    } else if (probe_cue(in)) {
       if (format)
-        *format = chapter_format_e::cue;
-      return parse_cue_chapters(in, min_tc, max_tc, offset, language, charset, tags);
+        *format = format_e::cue;
+      return parse_cue(in, min_tc, max_tc, offset, language, charset, tags);
 
     } else if (format)
-      *format = chapter_format_e::xml;
+      *format = format_e::xml;
 
     if (mtx::xml::ebml_chapters_converter_c::probe_file(in->get_file_name())) {
       auto chapters = mtx::xml::ebml_chapters_converter_c::parse_file(in->get_file_name(), true);
-      return select_chapters_in_timeframe(chapters.get(), min_tc, max_tc, offset) ? chapters : nullptr;
+      return select_in_timeframe(chapters.get(), min_tc, max_tc, offset) ? chapters : nullptr;
     }
 
     error = (boost::format(Y("Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n")) % in->get_file_name()).str();
-  } catch (mtx::chapter_parser_x &e) {
+  } catch (mtx::chapters::parser_x &e) {
     error = e.error();
   } catch (mtx::mm_io::exception &ex) {
     error = (boost::format(Y("The XML chapter file '%1%' could not be read.\n")) % in->get_file_name()).str();
@@ -379,7 +380,7 @@ parse_chapters(mm_text_io_c *in,
 
   if (!error.empty()) {
     if (exception_on_error)
-      throw mtx::chapter_parser_x(error);
+      throw mtx::chapters::parser_x(error);
     mxerror(error);
   }
 
@@ -398,8 +399,8 @@ parse_chapters(mm_text_io_c *in,
      contain such a child element.
 */
 int64_t
-get_chapter_start(KaxChapterAtom &atom,
-                  int64_t value_if_not_found) {
+get_start(KaxChapterAtom &atom,
+          int64_t value_if_not_found) {
   KaxChapterTimeStart *start = FindChild<KaxChapterTimeStart>(&atom);
 
   return !start ? value_if_not_found : static_cast<int64_t>(start->GetValue());
@@ -417,8 +418,8 @@ get_chapter_start(KaxChapterAtom &atom,
      contain such a child element.
 */
 int64_t
-get_chapter_end(KaxChapterAtom &atom,
-                int64_t value_if_not_found) {
+get_end(KaxChapterAtom &atom,
+        int64_t value_if_not_found) {
   KaxChapterTimeEnd *end = FindChild<KaxChapterTimeEnd>(&atom);
 
   return !end ? value_if_not_found : static_cast<int64_t>(end->GetValue());
@@ -434,7 +435,7 @@ get_chapter_end(KaxChapterAtom &atom,
      such a child element.
 */
 std::string
-get_chapter_name(KaxChapterAtom &atom) {
+get_name(KaxChapterAtom &atom) {
   KaxChapterDisplay *display = FindChild<KaxChapterDisplay>(&atom);
   if (!display)
     return "";
@@ -456,14 +457,14 @@ get_chapter_name(KaxChapterAtom &atom) {
      child element.
 */
 int64_t
-get_chapter_uid(KaxChapterAtom &atom) {
+get_uid(KaxChapterAtom &atom) {
   KaxChapterUID *uid = FindChild<KaxChapterUID>(&atom);
 
   return !uid ? -1 : static_cast<int64_t>(uid->GetValue());
 }
 
 void
-remove_chapter_elements_unsupported_by_webm(EbmlMaster &master) {
+remove_elements_unsupported_by_webm(EbmlMaster &master) {
   static std::unordered_map<uint32_t, bool> s_supported_elements, s_readd_with_defaults;
 
   if (s_supported_elements.empty()) {
@@ -497,7 +498,7 @@ remove_chapter_elements_unsupported_by_webm(EbmlMaster &master) {
     if (e && s_supported_elements[ EBML_ID_VALUE(EbmlId(*e)) ]) {
       auto sub_master = dynamic_cast<EbmlMaster *>(e);
       if (sub_master)
-        remove_chapter_elements_unsupported_by_webm(*sub_master);
+        remove_elements_unsupported_by_webm(*sub_master);
 
       ++idx;
 
@@ -674,7 +675,7 @@ remove_entries(int64_t min_tc,
    \param master The master containing the elements to check.
 */
 void
-merge_chapter_entries(EbmlMaster &master) {
+merge_entries(EbmlMaster &master) {
   size_t master_idx;
 
   // Iterate over all children of the atomaster.
@@ -684,13 +685,13 @@ merge_chapter_entries(EbmlMaster &master) {
     if (!atom)
       continue;
 
-    int64_t uid = get_chapter_uid(*atom);
+    int64_t uid = get_uid(*atom);
     if (-1 == uid)
       continue;
 
     // First get the start and end time, if present.
-    int64_t start_tc = get_chapter_start(*atom, 0);
-    int64_t end_tc   = get_chapter_end(*atom);
+    int64_t start_tc = get_start(*atom, 0);
+    int64_t end_tc   = get_end(*atom);
 
     mxverb(3, boost::format("chapters: merge_entries: looking for %1% with %2%, %3%\n") % uid % start_tc % end_tc);
 
@@ -704,7 +705,7 @@ merge_chapter_entries(EbmlMaster &master) {
         if (!cmp_atom)
           continue;
 
-        if (get_chapter_uid(*cmp_atom) == uid) {
+        if (get_uid(*cmp_atom) == uid) {
           merge_this = cmp_atom;
           break;
         }
@@ -715,8 +716,8 @@ merge_chapter_entries(EbmlMaster &master) {
         break;
 
       // Do the merger! First get the start and end timecodes if present.
-      int64_t merge_start_tc = get_chapter_start(*merge_this, 0);
-      int64_t merge_end_tc   = get_chapter_end(*merge_this);
+      int64_t merge_start_tc = get_start(*merge_this, 0);
+      int64_t merge_end_tc   = get_end(*merge_this);
 
       // Then compare them to the ones we have for the soon-to-be merged
       // chapter and assign accordingly.
@@ -760,7 +761,7 @@ merge_chapter_entries(EbmlMaster &master) {
   for (master_idx = 0; master.ListSize() > master_idx; ++master_idx) {
     EbmlMaster *merge_master = dynamic_cast<EbmlMaster *>(master[master_idx]);
     if (merge_master)
-      merge_chapter_entries(*merge_master);
+      merge_entries(*merge_master);
   }
 }
 
@@ -789,10 +790,10 @@ merge_chapter_entries(EbmlMaster &master) {
    \return \c false if all chapters were discarded, \c true otherwise
 */
 bool
-select_chapters_in_timeframe(KaxChapters *chapters,
-                             int64_t min_tc,
-                             int64_t max_tc,
-                             int64_t offset) {
+select_in_timeframe(KaxChapters *chapters,
+                    int64_t min_tc,
+                    int64_t max_tc,
+                    int64_t offset) {
   // Check the parameters.
   if (!chapters)
     return false;
@@ -917,8 +918,8 @@ find_chapter_with_uid(KaxChapters &chapters,
    \param src The container the atoms and editions will be taken from.
 */
 void
-move_chapters_by_edition(KaxChapters &dst,
-                         KaxChapters &src) {
+move_by_edition(KaxChapters &dst,
+                KaxChapters &src) {
   size_t src_idx;
   for (src_idx = 0; src.ListSize() > src_idx; src_idx++) {
     EbmlMaster *m = dynamic_cast<EbmlMaster *>(src[src_idx]);
@@ -966,8 +967,8 @@ move_chapters_by_edition(KaxChapters &dst,
      to zero.
 */
 void
-adjust_chapter_timecodes(EbmlMaster &master,
-                         int64_t offset) {
+adjust_timecodes(EbmlMaster &master,
+                 int64_t offset) {
   size_t master_idx;
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
     if (!Is<KaxChapterAtom>(master[master_idx]))
@@ -987,13 +988,13 @@ adjust_chapter_timecodes(EbmlMaster &master,
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
     EbmlMaster *work_master = dynamic_cast<EbmlMaster *>(master[master_idx]);
     if (work_master)
-      adjust_chapter_timecodes(*work_master, offset);
+      adjust_timecodes(*work_master, offset);
   }
 }
 
 static int
-count_chapter_atoms_recursively(EbmlMaster &master,
-                                int count) {
+count_atoms_recursively(EbmlMaster &master,
+                        int count) {
   size_t master_idx;
 
   for (master_idx = 0; master.ListSize() > master_idx; ++master_idx)
@@ -1001,14 +1002,14 @@ count_chapter_atoms_recursively(EbmlMaster &master,
       ++count;
 
     else if (dynamic_cast<EbmlMaster *>(master[master_idx]))
-      count = count_chapter_atoms_recursively(*static_cast<EbmlMaster *>(master[master_idx]), count);
+      count = count_atoms_recursively(*static_cast<EbmlMaster *>(master[master_idx]), count);
 
   return count;
 }
 
 int
-count_chapter_atoms(EbmlMaster &master) {
-  return count_chapter_atoms_recursively(master, 0);
+count_atoms(EbmlMaster &master) {
+  return count_atoms_recursively(master, 0);
 }
 
 /** \brief Change the chapter edition UIDs to a single value
@@ -1025,7 +1026,7 @@ count_chapter_atoms(EbmlMaster &master) {
       UIDs will be changed.
 */
 void
-align_chapter_edition_uids(KaxChapters *chapters) {
+align_uids(KaxChapters *chapters) {
   if (!chapters)
     return;
 
@@ -1045,8 +1046,8 @@ align_chapter_edition_uids(KaxChapters *chapters) {
 }
 
 void
-align_chapter_edition_uids(KaxChapters &reference,
-                           KaxChapters &modify) {
+align_uids(KaxChapters &reference,
+           KaxChapters &modify) {
   size_t reference_idx = 0, modify_idx = 0;
 
   while (1) {
@@ -1071,7 +1072,7 @@ align_chapter_edition_uids(KaxChapters &reference,
 }
 
 void
-regenerate_edition_and_chapter_uids(EbmlMaster &master) {
+regenerate_uids(EbmlMaster &master) {
   for (size_t idx = 0, end = master.ListSize(); end > idx; ++idx) {
     auto element     = master[idx];
     auto edition_uid = dynamic_cast<KaxEditionUID *>(element);
@@ -1090,15 +1091,15 @@ regenerate_edition_and_chapter_uids(EbmlMaster &master) {
 
     auto sub_master = dynamic_cast<EbmlMaster *>(master[idx]);
     if (sub_master)
-      regenerate_edition_and_chapter_uids(*sub_master);
+      regenerate_uids(*sub_master);
   }
 }
 
 std::string
-format_chapter_name_template(std::string const &name_template,
-                             int chapter_number,
-                             timestamp_c const &start_timestamp,
-                             std::string const &appended_file_name) {
+format_name_template(std::string const &name_template,
+                     int chapter_number,
+                     timestamp_c const &start_timestamp,
+                     std::string const &appended_file_name) {
   auto name                 = name_template;
   auto number_re            = boost::regex{"<NUM(?::(\\d+))?>"};
   auto timestamp_re         = boost::regex{"<START(?::([^>]+))?>"};
@@ -1131,11 +1132,11 @@ format_chapter_name_template(std::string const &name_template,
 }
 
 void
-fix_chapter_country_codes(EbmlMaster &chapters) {
+fix_country_codes(EbmlMaster &chapters) {
   for (auto const &child : chapters) {
     auto sub_master = dynamic_cast<EbmlMaster *>(child);
     if (sub_master) {
-      fix_chapter_country_codes(*sub_master);
+      fix_country_codes(*sub_master);
       continue;
     }
 
@@ -1148,3 +1149,5 @@ fix_chapter_country_codes(EbmlMaster &chapters) {
       ccountry->SetValue(*mapped_cctld);
   }
 }
+
+}}

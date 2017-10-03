@@ -750,7 +750,7 @@ ogm_reader_c::identify() {
   }
 
   if (m_chapters.get())
-    id_result_chapters(count_chapter_atoms(*m_chapters));
+    id_result_chapters(mtx::chapters::count_atoms(*m_chapters));
 }
 
 void
@@ -863,10 +863,10 @@ ogm_reader_c::handle_stream_comments() {
 
         std::shared_ptr<mm_text_io_c> text_out(new mm_text_io_c(out.get(), false));
 
-        m_chapters   = parse_chapters(text_out.get(), 0, -1, 0, m_ti.m_chapter_language, "", true);
+        m_chapters   = mtx::chapters::parse(text_out.get(), 0, -1, 0, m_ti.m_chapter_language, "", true);
         chapters_set = true;
 
-        align_chapter_edition_uids(m_chapters.get());
+        mtx::chapters::align_uids(m_chapters.get());
       } catch (...) {
         exception_parsing_chapters = true;
       }

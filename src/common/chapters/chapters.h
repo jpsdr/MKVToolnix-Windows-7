@@ -33,72 +33,73 @@ namespace libmatroska {
 using namespace libebml;
 using namespace libmatroska;
 
-namespace mtx {
-  class chapter_parser_x: public exception {
-  protected:
-    std::string m_message;
-  public:
-    chapter_parser_x(const std::string &message)  : m_message(message)       { }
-    chapter_parser_x(const boost::format &message): m_message(message.str()) { }
-    virtual ~chapter_parser_x() throw() { }
-
-    virtual const char *what() const throw() {
-      return m_message.c_str();
-    }
-  };
-}
-
 class mm_io_c;
 class mm_text_io_c;
 
-using kax_chapters_cptr = std::shared_ptr<KaxChapters>;
+namespace mtx { namespace chapters {
 
-enum class chapter_format_e {
+using kax_cptr = std::shared_ptr<KaxChapters>;
+
+class parser_x: public exception {
+protected:
+  std::string m_message;
+public:
+  parser_x(const std::string &message)  : m_message(message)       { }
+  parser_x(const boost::format &message): m_message(message.str()) { }
+  virtual ~parser_x() throw() { }
+
+  virtual const char *what() const throw() {
+    return m_message.c_str();
+  }
+};
+
+enum class format_e {
   xml,
   ogg,
   cue,
 };
 
-kax_chapters_cptr
-parse_chapters(const std::string &file_name, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
-               bool exception_on_error = false, chapter_format_e *format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
+mtx::chapters::kax_cptr
+parse(const std::string &file_name, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
+      bool exception_on_error = false, format_e *format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
 
-kax_chapters_cptr
-parse_chapters(mm_text_io_c *io, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
-               bool exception_on_error = false, chapter_format_e *format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
+mtx::chapters::kax_cptr
+parse(mm_text_io_c *io, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
+      bool exception_on_error = false, format_e *format = nullptr, std::unique_ptr<KaxTags> *tags = nullptr);
 
-bool probe_simple_chapters(mm_text_io_c *in);
-kax_chapters_cptr parse_simple_chapters(mm_text_io_c *in, int64_t min_tc, int64_t max_tc, int64_t offset, const std::string &language, const std::string &charset);
+bool probe_simple(mm_text_io_c *in);
+mtx::chapters::kax_cptr parse_simple(mm_text_io_c *in, int64_t min_tc, int64_t max_tc, int64_t offset, const std::string &language, const std::string &charset);
 
-extern std::string g_cue_to_chapter_name_format;
-bool probe_cue_chapters(mm_text_io_c *in);
-kax_chapters_cptr parse_cue_chapters(mm_text_io_c *in, int64_t min_tc, int64_t max_tc, int64_t offset, const std::string &language, const std::string &charset, std::unique_ptr<KaxTags> *tags = nullptr);
+extern std::string g_cue_name_format, g_default_language, g_default_country;
 
-std::size_t write_chapters_simple(KaxChapters &chapters, mm_io_c &out, boost::optional<std::string> const &language_to_extract);
+bool probe_cue(mm_text_io_c *in);
+mtx::chapters::kax_cptr parse_cue(mm_text_io_c *in, int64_t min_tc, int64_t max_tc, int64_t offset, const std::string &language, const std::string &charset, std::unique_ptr<KaxTags> *tags = nullptr);
 
-bool select_chapters_in_timeframe(KaxChapters *chapters, int64_t min_tc, int64_t max_tc, int64_t offset);
+std::size_t write_simple(KaxChapters &chapters, mm_io_c &out, boost::optional<std::string> const &language_to_extract);
 
-extern std::string g_default_chapter_language, g_default_chapter_country;
+bool select_in_timeframe(KaxChapters *chapters, int64_t min_tc, int64_t max_tc, int64_t offset);
 
-int64_t get_chapter_uid(KaxChapterAtom &atom);
-int64_t get_chapter_start(KaxChapterAtom &atom, int64_t value_if_not_found = -1);
-int64_t get_chapter_end(KaxChapterAtom &atom, int64_t value_if_not_found = -1);
-std::string get_chapter_name(KaxChapterAtom &atom);
+int64_t get_uid(KaxChapterAtom &atom);
+int64_t get_start(KaxChapterAtom &atom, int64_t value_if_not_found = -1);
+int64_t get_end(KaxChapterAtom &atom, int64_t value_if_not_found = -1);
+std::string get_name(KaxChapterAtom &atom);
 
-void remove_chapter_elements_unsupported_by_webm(EbmlMaster &master);
+void remove_elements_unsupported_by_webm(EbmlMaster &master);
 
 KaxEditionEntry *find_edition_with_uid(KaxChapters &chapters, uint64_t uid);
 KaxChapterAtom *find_chapter_with_uid(KaxChapters &chapters, uint64_t uid);
 
-void move_chapters_by_edition(KaxChapters &dst, KaxChapters &src);
-void adjust_chapter_timecodes(EbmlMaster &master, int64_t offset);
-void merge_chapter_entries(EbmlMaster &master);
-int count_chapter_atoms(EbmlMaster &master);
-void regenerate_edition_and_chapter_uids(EbmlMaster &master);
+void move_by_edition(KaxChapters &dst, KaxChapters &src);
+void adjust_timecodes(EbmlMaster &master, int64_t offset);
+void merge_entries(EbmlMaster &master);
+int count_atoms(EbmlMaster &master);
+void regenerate_uids(EbmlMaster &master);
 
-void align_chapter_edition_uids(KaxChapters *chapters);
-void align_chapter_edition_uids(KaxChapters &reference, KaxChapters &modify);
+void align_uids(KaxChapters *chapters);
+void align_uids(KaxChapters &reference, KaxChapters &modify);
 
-std::string format_chapter_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp, std::string const &appended_file_name = std::string{});
+std::string format_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp, std::string const &appended_file_name = std::string{});
 
-void fix_chapter_country_codes(EbmlMaster &chapters);
+void fix_country_codes(EbmlMaster &chapters);
+
+}}

@@ -56,7 +56,7 @@ public:
   generic_packetizer_c *m_ptzr_first_packet;
   std::vector<int64_t> m_requested_track_ids, m_available_track_ids, m_used_track_ids;
   int64_t m_max_timecode_seen;
-  kax_chapters_cptr m_chapters;
+  mtx::chapters::kax_cptr m_chapters;
   bool m_appending;
   int m_num_video_tracks, m_num_audio_tracks, m_num_subtitle_tracks;
 

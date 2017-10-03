@@ -1843,11 +1843,11 @@ parse_arg_chapters(const std::string &param,
   if (g_chapter_file_name != "")
     mxerror(boost::format(Y("Only one chapter file allowed in '%1% %2%'.\n")) % param % arg);
 
-  auto format         = chapter_format_e::xml;
+  auto format         = mtx::chapters::format_e::xml;
   g_chapter_file_name = arg;
-  g_kax_chapters      = parse_chapters(g_chapter_file_name, 0, -1, 0, g_chapter_language.c_str(), g_chapter_charset.c_str(), false, &format, &g_tags_from_cue_chapters);
+  g_kax_chapters      = mtx::chapters::parse(g_chapter_file_name, 0, -1, 0, g_chapter_language.c_str(), g_chapter_charset.c_str(), false, &format, &g_tags_from_cue_chapters);
 
-  if (g_segment_title_set || !g_tags_from_cue_chapters || (chapter_format_e::cue != format))
+  if (g_segment_title_set || !g_tags_from_cue_chapters || (mtx::chapters::format_e::cue != format))
     return;
 
   auto cue_title = mtx::tags::get_simple_value("TITLE", *g_tags_from_cue_chapters);
@@ -2448,7 +2448,7 @@ parse_args(std::vector<std::string> args) {
       if (g_chapter_file_name != "")
         mxerror(Y("'--cue-chapter-name-format' must be given before '--chapters'.\n"));
 
-      g_cue_to_chapter_name_format = next_arg;
+      mtx::chapters::g_cue_name_format = next_arg;
       sit++;
 
     } else if (this_arg == "--chapters") {

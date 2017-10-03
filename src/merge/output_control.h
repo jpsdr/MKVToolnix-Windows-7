@@ -158,7 +158,7 @@ extern std::unique_ptr<KaxSegment> g_kax_segment;
 extern std::unique_ptr<KaxTracks> g_kax_tracks;
 extern KaxTrackEntry *g_kax_last_entry;
 extern std::unique_ptr<KaxSeekHead> g_kax_sh_main, g_kax_sh_cues;
-extern kax_chapters_cptr g_kax_chapters;
+extern mtx::chapters::kax_cptr g_kax_chapters;
 extern int64_t g_tags_size;
 extern std::string g_segment_title;
 extern bool g_segment_title_set;

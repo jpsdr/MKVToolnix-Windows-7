@@ -23,6 +23,8 @@
 
 using namespace libmatroska;
 
+namespace mtx { namespace chapters {
+
 using chapter_entry_c         = std::pair<timestamp_c, std::string>;
 using chapter_entry_storage_c = std::vector<chapter_entry_c>;
 
@@ -59,9 +61,9 @@ handle_atom(KaxChapterAtom const &atom,
 }
 
 std::size_t
-write_chapters_simple(KaxChapters &chapters,
-                      mm_io_c &out,
-                      boost::optional<std::string> const &language_to_extract) {
+write_simple(KaxChapters &chapters,
+             mm_io_c &out,
+             boost::optional<std::string> const &language_to_extract) {
   auto chapter_entries = chapter_entry_storage_c{};
 
   for (auto const &chapters_child : chapters) {
@@ -90,3 +92,5 @@ write_chapters_simple(KaxChapters &chapters,
 
   return chapter_num;
 }
+
+}}

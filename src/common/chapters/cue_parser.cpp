@@ -33,6 +33,8 @@
 
 using namespace libmatroska;
 
+namespace mtx { namespace chapters {
+
 // PERFORMER "Blackmore's Night"
 // TITLE "Fires At Midnight"
 // FILE "Range.wav" WAVE
@@ -47,7 +49,7 @@ using namespace libmatroska;
 //     INDEX 01 04:49:64
 
 bool
-probe_cue_chapters(mm_text_io_c *in) {
+probe_cue(mm_text_io_c *in) {
   std::string s;
 
   in->setFilePointer(0);
@@ -57,15 +59,15 @@ probe_cue_chapters(mm_text_io_c *in) {
   return (balg::istarts_with(s, "performer ") || balg::istarts_with(s, "title ") || balg::istarts_with(s, "file ") || balg::istarts_with(s, "catalog ") || balg::istarts_with(s, "rem "));
 }
 
-std::string g_cue_to_chapter_name_format;
+std::string g_cue_name_format;
 
 static void
-cue_entries_to_chapter_name(std::string &performer,
-                            std::string &title,
-                            std::string &global_performer,
-                            std::string &global_title,
-                            std::string &name,
-                            int num) {
+cue_entries_to_name(std::string &performer,
+                    std::string &title,
+                    std::string &global_performer,
+                    std::string &global_title,
+                    std::string &name,
+                    int num) {
   name = "";
 
   if (title.empty())
@@ -74,7 +76,7 @@ cue_entries_to_chapter_name(std::string &performer,
   if (performer.empty())
     performer = global_performer;
 
-  const char *this_char = g_cue_to_chapter_name_format.empty() ? "%p - %t" : g_cue_to_chapter_name_format.c_str();
+  const char *this_char = mtx::chapters::g_cue_name_format.empty() ? "%p - %t" : mtx::chapters::g_cue_name_format.c_str();
   const char *next_char = this_char + 1;
 
   while (0 != *this_char) {
@@ -275,7 +277,7 @@ add_elements_for_cue_entry(cue_parser_args_t &a,
   if (!((a.start_indices[0] >= a.min_tc) && ((a.start_indices[0] <= a.max_tc) || (a.max_tc == -1))))
     return;
 
-  cue_entries_to_chapter_name(a.performer, a.title, a.global_performer, a.global_title, a.name, a.num);
+  mtx::chapters::cue_entries_to_name(a.performer, a.title, a.global_performer, a.global_title, a.name, a.num);
 
   if (!a.edition) {
     a.edition = &GetChild<KaxEditionEntry>(*a.chapters);
@@ -336,14 +338,14 @@ erase_colon(std::string &s,
   return s;
 }
 
-kax_chapters_cptr
-parse_cue_chapters(mm_text_io_c *in,
-                   int64_t min_tc,
-                   int64_t max_tc,
-                   int64_t offset,
-                   const std::string &language,
-                   const std::string &charset,
-                   std::unique_ptr<KaxTags> *tags) {
+mtx::chapters::kax_cptr
+parse_cue(mm_text_io_c *in,
+          int64_t min_tc,
+          int64_t max_tc,
+          int64_t offset,
+          const std::string &language,
+          const std::string &charset,
+          std::unique_ptr<KaxTags> *tags) {
   cue_parser_args_t a;
   std::string line;
 
@@ -474,3 +476,5 @@ parse_cue_chapters(mm_text_io_c *in,
 
   return 0 == a.num ? nullptr : chapters;
 }
+
+}}

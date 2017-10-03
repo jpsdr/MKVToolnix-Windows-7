@@ -46,11 +46,11 @@ extract_chapters(const std::string &file_name,
   KaxChapters *chapters = dynamic_cast<KaxChapters *>(master.get());
   assert(chapters);
 
-  fix_chapter_country_codes(*chapters);
+  mtx::chapters::fix_country_codes(*chapters);
 
   if (!chapter_format_simple)
     mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, *g_mm_stdio);
 
   else
-    write_chapters_simple(*chapters, *g_mm_stdio.get(), language_to_extract);
+    mtx::chapters::write_simple(*chapters, *g_mm_stdio.get(), language_to_extract);
 }
