@@ -377,6 +377,7 @@ track_c::new_stream_a_ac3() {
   a_channels    = header.m_channels;
   a_sample_rate = header.m_sample_rate;
   a_bsid        = header.m_bs_id;
+  codec         = header.get_codec();
 
   return 0;
 }

@@ -20,6 +20,7 @@
 #include "common/bswap.h"
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
+#include "common/codec.h"
 #include "common/endian.h"
 
 namespace mtx { namespace ac3 {
@@ -50,6 +51,12 @@ bool
 frame_c::is_eac3()
   const {
   return (0x10 == m_bs_id) || !m_dependent_frames.empty();
+}
+
+codec_c
+frame_c::get_codec()
+  const {
+  return codec_c::look_up(codec_c::type_e::A_AC3).specialize(is_eac3() ? codec_c::specialization_e::e_ac_3 : codec_c::specialization_e::none);
 }
 
 void

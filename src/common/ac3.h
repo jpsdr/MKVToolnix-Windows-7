@@ -40,6 +40,7 @@
 #define EAC3_FRAME_TYPE_RESERVED     3
 
 class bit_reader_c;
+class codec_c;
 
 namespace mtx { namespace ac3 {
 
@@ -55,6 +56,7 @@ public:
   frame_c();
   void init();
   bool is_eac3() const;
+  codec_c get_codec() const;
   void add_dependent_frame(frame_c const &frame, unsigned char const *buffer, std::size_t buffer_size);
   bool decode_header(unsigned char const *buffer, std::size_t buffer_size);
   bool decode_header_type_eac3(bit_reader_c &bc);

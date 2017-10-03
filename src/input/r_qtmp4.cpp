@@ -3039,6 +3039,7 @@ qtmp4_demuxer_c::derive_track_params_from_ac3_audio_bitstream() {
 
   a_channels   = header.m_channels;
   a_samplerate = header.m_sample_rate;
+  codec        = header.get_codec();
 }
 
 void

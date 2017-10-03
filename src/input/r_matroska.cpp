@@ -541,6 +541,26 @@ kax_reader_c::verify_truehd_audio_track(kax_track_t *t) {
   return false;
 }
 
+bool
+kax_reader_c::verify_ac3_audio_track(kax_track_t *t) {
+  try {
+    read_first_frames(t, 5);
+
+    mtx::ac3::parser_c parser;
+    for (auto &frame : t->first_frames_data)
+      parser.add_bytes(frame->get_buffer(), frame->get_size());
+
+    if (parser.frame_available()) {
+      t->codec = parser.get_frame().get_codec();
+      return true;
+    }
+
+  } catch (...) {
+  }
+
+  return false;
+}
+
 void
 kax_reader_c::verify_audio_track(kax_track_t *t) {
   if (t->codec_id.empty())
@@ -553,7 +573,9 @@ kax_reader_c::verify_audio_track(kax_track_t *t) {
   else {
     t->codec = codec_c::look_up(t->codec_id);
 
-    if (t->codec.is(codec_c::type_e::A_ALAC))
+    if (t->codec.is(codec_c::type_e::A_AC3))
+      is_ok = verify_ac3_audio_track(t);
+    else if (t->codec.is(codec_c::type_e::A_ALAC))
       is_ok = verify_alac_audio_track(t);
     else if (t->codec.is(codec_c::type_e::A_VORBIS))
       is_ok = verify_vorbis_audio_track(t);

@@ -261,6 +261,7 @@ protected:
   virtual kax_track_t *find_track_by_uid(uint64_t uid, kax_track_t *c = nullptr);
 
   virtual bool verify_acm_audio_track(kax_track_t *t);
+  virtual bool verify_ac3_audio_track(kax_track_t *t);
   virtual bool verify_alac_audio_track(kax_track_t *t);
   virtual bool verify_dts_audio_track(kax_track_t *t);
   virtual bool verify_flac_audio_track(kax_track_t *t);

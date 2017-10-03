@@ -116,7 +116,7 @@ ac3_reader_c::identify() {
   info.add(mtx::id::audio_sampling_frequency, m_ac3header.m_sample_rate);
 
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AC3, "AC-3"), info.get());
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_ac3header.get_codec().get_name("AC-3"), info.get());
 }
 
 int

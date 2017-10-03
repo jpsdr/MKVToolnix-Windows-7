@@ -51,7 +51,12 @@ wav_ac3acm_demuxer_c::probe(mm_io_cptr &io) {
   if (-1 == pos)
     return false;
 
-  return m_ac3header.decode_header(m_buf[m_cur_buf]->get_buffer() + pos, len - pos);
+  if (!m_ac3header.decode_header(m_buf[m_cur_buf]->get_buffer() + pos, len - pos))
+    return false;
+
+  m_codec = m_ac3header.get_codec();
+
+  return true;
 }
 
 int

@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: AC-3: during identification regular AC-3 and E-AC-3 tracks will
+  now be identified differently for most container formats (exception: AVI,
+  Real Media, Ogg/OGM). The codec will be reported as `AC-3` for regular AC-3
+  and as `E-AC-3` for E-AC-3 tracks instead of the combined `AC-3/E-AC-3`.
+
 ## Bug fixes
 
 * mkvmerge: AAC ADTS parser: mkvmerge will now parse the

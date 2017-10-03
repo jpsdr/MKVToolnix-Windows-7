@@ -827,6 +827,7 @@ mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t id,
       track->a_channels    = header.m_channels;
       track->a_sample_rate = header.m_sample_rate;
       track->a_bsid        = header.m_bs_id;
+      track->codec         = header.get_codec();
 
       return;
     }

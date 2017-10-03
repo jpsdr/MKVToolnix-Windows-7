@@ -161,6 +161,8 @@ public:
     , mpeg_1_2_layer_3
 
     , truehd_atmos
+
+    , e_ac_3
   };
 
 private:

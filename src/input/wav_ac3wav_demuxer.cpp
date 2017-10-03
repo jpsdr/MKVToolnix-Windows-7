@@ -68,6 +68,8 @@ wav_ac3wav_demuxer_c::decode_buffer(int len) {
   if (!m_ac3header.decode_header(&base[8], payload_len))
     return -1;
 
+  m_codec = m_ac3header.get_codec();
+
   return payload_len;
 }
 

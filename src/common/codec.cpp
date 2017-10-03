@@ -43,7 +43,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("VP9",                     type_e::V_VP9,          track_video,    "vp9\\d|V_VP9");
 
   ms_codecs.emplace_back("AAC",                     type_e::A_AAC,          track_audio,    "mp4a|aac.|raac|racp|A_AAC.*",           std::vector<uint16_t>{ 0x00ffu, 0x706du });
-  ms_codecs.emplace_back("AC-3/E-AC-3",             type_e::A_AC3,          track_audio,    "ac3.|ac-3|sac3|eac3|ec-3|a52[\\sb]|dnet|A_E?AC3", 0x2000u);
+  ms_codecs.emplace_back("AC-3",                    type_e::A_AC3,          track_audio,    "ac3.|ac-3|sac3|eac3|ec-3|a52[\\sb]|dnet|A_E?AC3", 0x2000u);
   ms_codecs.emplace_back("ALAC",                    type_e::A_ALAC,         track_audio,    "alac|A_ALAC");
   ms_codecs.emplace_back("ATRAC3",                  type_e::A_ATRAC3,       track_audio,    "atrc|A_REAL/ATRC");
   ms_codecs.emplace_back("DTS",                     type_e::A_DTS,          track_audio,    "dts[\\sbcehl]|A_DTS",                   0x2001u);
@@ -88,6 +88,8 @@ codec_c::initialize() {
   ms_specialization_descriptions.emplace(specialization_e::mpeg_1_2_layer_3,       "MP3");
 
   ms_specialization_descriptions.emplace(specialization_e::truehd_atmos,           "TrueHD Atmos");
+
+  ms_specialization_descriptions.emplace(specialization_e::e_ac_3,                 "E-AC-3");
 }
 
 codec_c const
