@@ -76,7 +76,7 @@ public:
 class parser_c {
 protected:
   std::deque<frame_c> m_frames;
-  byte_buffer_c m_buffer;
+  mtx::bytes::buffer_c m_buffer;
   uint64_t m_parsed_stream_position, m_total_stream_position;
   frame_c m_current_frame;
   std::size_t m_garbage_size;

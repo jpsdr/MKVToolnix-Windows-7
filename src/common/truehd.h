@@ -100,7 +100,7 @@ protected:
     state_synced,
   } m_sync_state;
 
-  byte_buffer_c m_buffer;
+  mtx::bytes::buffer_c m_buffer;
   std::deque<truehd_frame_cptr> m_frames;
 
 public:

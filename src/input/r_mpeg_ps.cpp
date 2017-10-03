@@ -506,7 +506,7 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
   try {
     m_in->save_pos();
 
-    byte_buffer_c buffer;
+    mtx::bytes::buffer_c buffer;
     buffer.add(buf, length);
 
     bool mpeg_12_seqhdr_found  = false;
@@ -812,7 +812,7 @@ mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t id,
                                    mpeg_ps_track_ptr &track) {
   mxdebug_if(m_debug_headers, boost::format("new_stream_a_ac3 for ID %1% buf len %2%\n") % id % length);
 
-  byte_buffer_c buffer;
+  mtx::bytes::buffer_c buffer;
 
   buffer.add(buf, length);
 
@@ -850,7 +850,7 @@ mpeg_ps_reader_c::new_stream_a_dts(mpeg_ps_id_t id,
                                    unsigned char *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
-  byte_buffer_c buffer;
+  mtx::bytes::buffer_c buffer;
 
   buffer.add(buf, length);
 

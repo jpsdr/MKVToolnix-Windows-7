@@ -17,7 +17,9 @@
 
 #include "common/memory.h"
 
-class byte_buffer_c {
+namespace mtx { namespace bytes {
+
+class buffer_c {
 private:
   memory_cptr m_data;
   std::size_t m_filled, m_offset, m_size, m_chunk_size;
@@ -29,7 +31,7 @@ public:
     , at_back
   };
 
-  byte_buffer_c(std::size_t chunk_size = 128 * 1024)
+  buffer_c(std::size_t chunk_size = 128 * 1024)
     : m_data{memory_c::alloc(chunk_size)}
     , m_filled{}
     , m_offset{}
@@ -93,7 +95,7 @@ public:
 
   void remove(std::size_t num, position_e const remove_where = at_front) {
     if (num > m_filled)
-      mxerror("byte_buffer_c: num > m_filled. Should not have happened. Please file a bug report.\n");
+      mxerror("buffer_c: num > m_filled. Should not have happened. Please file a bug report.\n");
 
     if (remove_where == at_front)
       m_offset += num;
@@ -129,4 +131,6 @@ private:
   }
 };
 
-using byte_buffer_cptr = std::shared_ptr<byte_buffer_c>;
+using buffer_cptr = std::shared_ptr<buffer_c>;
+
+}}

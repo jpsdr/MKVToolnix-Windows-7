@@ -452,7 +452,7 @@ kax_reader_c::verify_dts_audio_track(kax_track_t *t) {
   try {
     read_first_frames(t, 5);
 
-    byte_buffer_c buffer;
+    mtx::bytes::buffer_c buffer;
     for (auto &frame : t->first_frames_data)
       buffer.add(*frame);
 

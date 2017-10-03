@@ -294,7 +294,7 @@ public:
   boost::optional<uint16_t> program_number;
   boost::optional<int> m_ttx_wanted_page;
   std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
-  byte_buffer_cptr pes_payload_read;    // buffer with the current PID payload
+  mtx::bytes::buffer_cptr pes_payload_read;    // buffer with the current PID payload
 
   bool probed_ok;
   int ptzr;                         // the actual packetizer instance
@@ -321,7 +321,7 @@ public:
   std::string language;
 
   // used for probing for stream types
-  byte_buffer_cptr m_probe_data;
+  mtx::bytes::buffer_cptr m_probe_data;
   mtx::avc::es_parser_cptr m_avc_parser;
   mtx::hevc::es_parser_cptr m_hevc_parser;
   truehd_parser_cptr m_truehd_parser;

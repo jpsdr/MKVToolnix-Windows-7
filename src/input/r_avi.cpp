@@ -550,7 +550,7 @@ avi_reader_c::create_dts_packetizer(int aid) {
     long audio_position   = AVI_get_audio_position_index(m_avi);
     unsigned int num_read = 0;
     int dts_position      = -1;
-    byte_buffer_c buffer;
+    mtx::bytes::buffer_c buffer;
     mtx::dts::header_t dtsheader;
 
     while ((-1 == dts_position) && (10 > num_read)) {

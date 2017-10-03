@@ -7,7 +7,7 @@
 namespace {
 
 TEST(ByteBuffer, Add) {
-  byte_buffer_c b;
+  mtx::bytes::buffer_c b;
 
   b.add(reinterpret_cast<unsigned char const *>("Hello"), 5);
 
@@ -23,7 +23,7 @@ TEST(ByteBuffer, Add) {
 }
 
 TEST(ByteBuffer, Remove) {
-  byte_buffer_c b;
+  mtx::bytes::buffer_c b;
 
   b.add(reinterpret_cast<unsigned char const *>("Hello world"), 11);
 
@@ -37,7 +37,7 @@ TEST(ByteBuffer, Remove) {
 
   ASSERT_EQ(std::string{"lo world"}, s);
 
-  b.remove(2, byte_buffer_c::at_back);
+  b.remove(2, mtx::bytes::buffer_c::at_back);
 
   ASSERT_EQ(6, b.get_size());
 
@@ -55,7 +55,7 @@ TEST(ByteBuffer, Remove) {
 }
 
 TEST(ByteBuffer, Prepend) {
-  byte_buffer_c b;
+  mtx::bytes::buffer_c b;
 
   b.add(reinterpret_cast<unsigned char const *>("You cruel world"), 15);
 

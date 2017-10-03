@@ -176,7 +176,7 @@ protected:
 protected:
   std::deque<frame_c> m_frames;
   std::deque<timestamp_c> m_provided_timecodes;
-  byte_buffer_c m_buffer;
+  mtx::bytes::buffer_c m_buffer;
   unsigned char const *m_fixed_buffer;
   size_t m_fixed_buffer_size;
   uint64_t m_parsed_stream_position, m_total_stream_position;

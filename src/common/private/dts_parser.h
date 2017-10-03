@@ -24,7 +24,7 @@ public:
   debugging_option_c debug{"dts_parser"};
 
   bool swap_bytes{}, pack_14_16{};
-  byte_buffer_c decode_buffer, swap_remainder, pack_remainder;
+  mtx::bytes::buffer_c decode_buffer, swap_remainder, pack_remainder;
   header_t first_header;
 
 public:

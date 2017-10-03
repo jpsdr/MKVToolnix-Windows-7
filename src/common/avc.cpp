@@ -647,7 +647,7 @@ avcc_to_nalus(const unsigned char *buffer,
       return memory_c::clone(buffer, size);
 
     mm_mem_io_c mem(buffer, size);
-    byte_buffer_c nalus(size * 2);
+    mtx::bytes::buffer_c nalus(size * 2);
 
     if (0x01 != mem.read_uint8())
       throw false;

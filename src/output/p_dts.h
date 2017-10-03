@@ -25,7 +25,7 @@ class dts_packetizer_c: public generic_packetizer_c {
 private:
   using header_and_packet_t = std::tuple<mtx::dts::header_t, memory_cptr, uint64_t>;
 
-  byte_buffer_c m_packet_buffer;
+  mtx::bytes::buffer_c m_packet_buffer;
 
   mtx::dts::header_t m_first_header, m_previous_header;
   bool m_skipping_is_normal, m_reduce_to_core;

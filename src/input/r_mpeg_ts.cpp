@@ -82,7 +82,7 @@ track_c::track_c(reader_c &p_reader,
   , pid{}
   , program_number{}
   , pes_payload_size_to_read{}
-  , pes_payload_read{new byte_buffer_c}
+  , pes_payload_read{new mtx::bytes::buffer_c}
   , probed_ok{}
   , ptzr{-1}
   , m_timestamp_wrap_add{timestamp_c::ns(0)}
@@ -183,7 +183,7 @@ track_c::add_pes_payload(unsigned char *ts_payload,
 void
 track_c::add_pes_payload_to_probe_data() {
   if (!m_probe_data)
-    m_probe_data = byte_buffer_cptr(new byte_buffer_c);
+    m_probe_data = mtx::bytes::buffer_cptr(new mtx::bytes::buffer_c);
   m_probe_data->add(pes_payload_read->get_buffer(), pes_payload_read->get_size());
 }
 

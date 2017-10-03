@@ -99,7 +99,7 @@ parser_c::get_first_header()
 }
 
 void
-parser_c::decode_step(byte_buffer_c &remainder_buffer,
+parser_c::decode_step(mtx::bytes::buffer_c &remainder_buffer,
                       std::size_t multiples_of,
                       std::function<void()> const &worker) {
   if (remainder_buffer.get_size()) {
@@ -110,7 +110,7 @@ parser_c::decode_step(byte_buffer_c &remainder_buffer,
   auto remaining_bytes = m->decode_buffer.get_size() % multiples_of;
   if (remaining_bytes) {
     remainder_buffer.add(m->decode_buffer.get_buffer() + m->decode_buffer.get_size() - remaining_bytes, remaining_bytes);
-    m->decode_buffer.remove(remaining_bytes, byte_buffer_c::at_back);
+    m->decode_buffer.remove(remaining_bytes, mtx::bytes::buffer_c::at_back);
   }
 
   worker();
@@ -129,7 +129,7 @@ parser_c::decode_buffer() {
       auto len_14 = len_16 * 14 / 16;
 
       convert_14_to_16_bits(reinterpret_cast<unsigned short *>(m->decode_buffer.get_buffer()), len_16 / 2, reinterpret_cast<unsigned short *>(m->decode_buffer.get_buffer()));
-      m->decode_buffer.remove(len_16 - len_14, byte_buffer_c::at_back);
+      m->decode_buffer.remove(len_16 - len_14, mtx::bytes::buffer_c::at_back);
     });
 }
 
