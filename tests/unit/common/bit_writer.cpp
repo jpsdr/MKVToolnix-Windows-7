@@ -12,7 +12,7 @@ namespace {
 //   1111 0111 0010 0011 0100 1010 1000 0001
 
 TEST(BitWriter, PutBit) {
-  auto b = bit_writer_c{};
+  auto b = mtx::bits::writer_c{};
 
   // f
   EXPECT_NO_THROW(b.put_bit(1));
@@ -43,7 +43,7 @@ TEST(BitWriter, PutBit) {
 }
 
 TEST(BitWriter, PutBits) {
-  auto b = bit_writer_c{};
+  auto b = mtx::bits::writer_c{};
 
   // f7
   EXPECT_NO_THROW(b.put_bits(4, 0x0f));
@@ -71,7 +71,7 @@ TEST(BitWriter, PutBits) {
 }
 
 TEST(BitWriter, ByteAlign) {
-  auto b = bit_writer_c{};
+  auto b = mtx::bits::writer_c{};
 
   // f7
   b.byte_align();
@@ -94,7 +94,7 @@ TEST(BitWriter, ByteAlign) {
 }
 
 TEST(BitWriter, SkipBits) {
-  auto b = bit_writer_c{};
+  auto b = mtx::bits::writer_c{};
 
   EXPECT_EQ(0, b.get_bit_position());
   EXPECT_NO_THROW(b.skip_bits(3));
@@ -107,7 +107,7 @@ TEST(BitWriter, SkipBits) {
 }
 
 TEST(BitWriter, SetBitPosition) {
-  auto b = bit_writer_c{};
+  auto b = mtx::bits::writer_c{};
 
   EXPECT_EQ(0, b.get_bit_position());
 
@@ -132,7 +132,7 @@ TEST(BitWriter, SetBitPosition) {
 }
 
 TEST(BitWriter, ExtendingTheBuffer) {
-  auto b = bit_writer_c{};
+  auto b = mtx::bits::writer_c{};
 
   for (int idx = 0; idx < 24; ++idx)
     ASSERT_NO_THROW(b.put_bits(32, 0x01234567u));

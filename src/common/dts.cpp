@@ -424,7 +424,7 @@ header_t::decode_core_header(unsigned char const *buf,
                              size_t size,
                              bool allow_no_exss_search) {
   try {
-    auto bc = bit_reader_c{buf, size};
+    auto bc = mtx::bits::reader_c{buf, size};
     bc.skip_bits(32);             // sync word
 
     frametype             = bc.get_bit() ? frametype_e::normal : frametype_e::termination;
@@ -540,7 +540,7 @@ header_t::decode_core_header(unsigned char const *buf,
 }
 
 void
-header_t::parse_lbr_parameters(bit_reader_c &bc,
+header_t::parse_lbr_parameters(mtx::bits::reader_c &bc,
                                substream_asset_t &asset) {
   asset.lbr_size         = bc.get_bits(14) + 1; // size of LBR component in extension substream
   asset.lbr_sync_present = bc.get_bit();
@@ -549,7 +549,7 @@ header_t::parse_lbr_parameters(bit_reader_c &bc,
 }
 
 void
-header_t::parse_xll_parameters(bit_reader_c &bc,
+header_t::parse_xll_parameters(mtx::bits::reader_c &bc,
                                substream_asset_t &asset) {
   asset.xll_size         = bc.get_bits(substream_size_bits) + 1; // size of XLL data in extension substream
   asset.xll_sync_present = bc.get_bit();                         // XLL sync word presence flag
@@ -567,7 +567,7 @@ header_t::parse_xll_parameters(bit_reader_c &bc,
 }
 
 bool
-header_t::decode_lbr_header(bit_reader_c &bc,
+header_t::decode_lbr_header(mtx::bits::reader_c &bc,
                             substream_asset_t &asset) {
   static const unsigned int s_lbr_sampling_frequencies[16] = {
     8000, 16000, 32000, 0,     0,     22050, 44100, 0,
@@ -589,7 +589,7 @@ header_t::decode_lbr_header(bit_reader_c &bc,
 }
 
 bool
-header_t::decode_xll_header(bit_reader_c &bc,
+header_t::decode_xll_header(mtx::bits::reader_c &bc,
                             substream_asset_t &asset) {
   bc.set_bit_position((asset.xll_offset + asset.xll_sync_offset) * 8);
   if (asset.xll_sync_present && (bc.get_bits(32) != static_cast<uint32_t>(sync_word_e::xll)))
@@ -634,7 +634,7 @@ header_t::decode_xll_header(bit_reader_c &bc,
 }
 
 bool
-header_t::decode_asset(bit_reader_c &bc,
+header_t::decode_asset(mtx::bits::reader_c &bc,
                        substream_asset_t &asset) {
   auto descriptor_pos  = bc.get_bit_position();
   auto descriptor_size = bc.get_bits(9) + 1;
@@ -805,7 +805,7 @@ bool
 header_t::decode_x96_header(unsigned char const *buf,
                              size_t size) {
   try {
-    auto bc = bit_reader_c{buf, size};
+    auto bc = mtx::bits::reader_c{buf, size};
     bc.skip_bits(32);             // sync word
 
     auto x96_size = bc.peek_bits(12) + 1;
@@ -823,7 +823,7 @@ bool
 header_t::decode_exss_header(unsigned char const *buf,
                              size_t size) {
   try {
-    auto bc = bit_reader_c{buf, size};
+    auto bc = mtx::bits::reader_c{buf, size};
     bc.skip_bits(32);             // sync word
     bc.skip_bits(8);              // user defined
     auto substream_index  = bc.get_bits(2);

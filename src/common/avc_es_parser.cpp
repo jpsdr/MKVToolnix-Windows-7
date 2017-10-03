@@ -442,7 +442,7 @@ es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
 
     auto nalu_as_rbsp = mtx::mpeg::nalu_to_rbsp(nalu);
 
-    bit_reader_c r(nalu_as_rbsp->get_buffer(), nalu_as_rbsp->get_size());
+    mtx::bits::reader_c r(nalu_as_rbsp->get_buffer(), nalu_as_rbsp->get_size());
 
     r.skip_bits(8);
 
@@ -532,7 +532,7 @@ bool
 es_parser_c::parse_slice(memory_cptr const &buffer,
                          slice_info_t &si) {
   try {
-    bit_reader_c r(buffer->get_buffer(), buffer->get_size());
+    mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
 
     memset(&si, 0, sizeof(si));
 

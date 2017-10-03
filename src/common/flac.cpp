@@ -148,7 +148,7 @@ decoder_c::init_flac_decoder() {
 // ----------------------------------------------------------------------
 
 static bool
-skip_utf8(bit_reader_c &bits,
+skip_utf8(mtx::bits::reader_c &bits,
           int size) {
 
   uint32_t value = bits.get_bits(8);
@@ -181,7 +181,7 @@ static int
 get_num_samples_internal(unsigned char const *mem,
                          int size,
                          FLAC__StreamMetadata_StreamInfo const &stream_info) {
-  bit_reader_c bits(mem, size);
+  mtx::bits::reader_c bits(mem, size);
 
   // Sync word: 11 1111 1111 1110
   if (bits.peek_bits(14) != 0x3ffe)

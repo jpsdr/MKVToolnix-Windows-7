@@ -204,7 +204,7 @@ flv_track_c::extract_flv1_width_and_height() {
     return;
 
   try {
-    auto r = bit_reader_c{m_payload->get_buffer(), static_cast<unsigned int>(m_payload->get_size())};
+    auto r = mtx::bits::reader_c{m_payload->get_buffer(), static_cast<unsigned int>(m_payload->get_size())};
     if (r.get_bits(17) != 1)
       return;                     // bad picture start code
 

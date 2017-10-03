@@ -177,7 +177,7 @@ hevcc_c::parse_sei_list() {
   if (size == 100)
     return true;
 
-  bit_writer_c w{};
+  mtx::bits::writer_c w{};
 
   w.put_bits(1, 0); // forbidden_zero_bit
   w.put_bits(6, HEVC_NALU_TYPE_PREFIX_SEI); // nal_unit_type
@@ -271,7 +271,7 @@ hevcc_c::pack() {
   if (!*this)
     return {};
 
-  bit_writer_c w;
+  mtx::bits::writer_c w;
 
   auto write_list = [&w](std::vector<memory_cptr> const &list, uint8 nal_unit_type) {
     w.put_bits(1, 1);
@@ -281,7 +281,7 @@ hevcc_c::pack() {
 
     for (auto &mem : list) {
       auto num_bytes = mem->get_size();
-      bit_reader_c r{mem->get_buffer(), num_bytes};
+      mtx::bits::reader_c r{mem->get_buffer(), num_bytes};
 
       w.put_bits(16, num_bytes);
 
@@ -371,7 +371,7 @@ hevcc_c::unpack(memory_cptr const &mem) {
     return hevcc;
 
   try {
-    bit_reader_c bit_reader(mem->get_buffer(), mem->get_size());
+    mtx::bits::reader_c bit_reader(mem->get_buffer(), mem->get_size());
     mm_mem_io_c byte_reader{*mem};
 
     // configuration_version               8     The value should be 0 until the format has been finalized. Thereafter is should have the specified value

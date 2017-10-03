@@ -104,7 +104,7 @@ parser_c::parse() {
       throw false;
     m_file.close();
 
-    bit_reader_cptr bc(new bit_reader_c(content->get_buffer(), file_size));
+    mtx::bits::reader_cptr bc(new mtx::bits::reader_c(content->get_buffer(), file_size));
 
     parse_header(*bc);
     parse_program_info(*bc);
@@ -122,7 +122,7 @@ parser_c::parse() {
 }
 
 void
-parser_c::parse_header(bit_reader_c &bc) {
+parser_c::parse_header(mtx::bits::reader_c &bc) {
   bc.set_bit_position(0);
 
   uint32_t magic = bc.get_bits(32);
@@ -140,7 +140,7 @@ parser_c::parse_header(bit_reader_c &bc) {
 }
 
 void
-parser_c::parse_program_info(bit_reader_c &bc) {
+parser_c::parse_program_info(mtx::bits::reader_c &bc) {
   bc.set_bit_position(m_program_info_start * 8);
 
   bc.skip_bits(40);            // 32 bits length, 8 bits reserved
@@ -163,7 +163,7 @@ parser_c::parse_program_info(bit_reader_c &bc) {
 }
 
 void
-parser_c::parse_program_stream(bit_reader_c &bc,
+parser_c::parse_program_stream(mtx::bits::reader_c &bc,
                                program_cptr &program) {
   program_stream_cptr stream(new program_stream_t);
   program->program_streams.push_back(stream);

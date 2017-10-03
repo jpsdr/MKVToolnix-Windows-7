@@ -150,7 +150,7 @@ protected:
   playlist_t m_playlist;
   std::vector<timestamp_c> m_chapters;
 
-  bit_reader_cptr m_bc;
+  mtx::bits::reader_cptr m_bc;
 
 public:
   parser_c();

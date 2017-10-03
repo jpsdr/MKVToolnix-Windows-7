@@ -686,7 +686,7 @@ track_c::parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
     //   4: teletext program schedule
     //   5: teletext subtitles: hearing impaired
 
-    bit_reader_c r{buffer, 5};
+    mtx::bits::reader_c r{buffer, 5};
 
     r.skip_bits(24);
     auto ttx_type     = r.get_bits(5);
@@ -1683,7 +1683,7 @@ reader_c::get_charset_converter_for_coding_type(unsigned int coding) {
 }
 
 std::string
-reader_c::read_descriptor_string(bit_reader_c &r) {
+reader_c::read_descriptor_string(mtx::bits::reader_c &r) {
   auto str_length = r.get_bits(8);
   if (!str_length)
     return {};
@@ -1718,7 +1718,7 @@ reader_c::read_descriptor_string(bit_reader_c &r) {
 }
 
 void
-reader_c::parse_sdt_service_desciptor(bit_reader_c &r,
+reader_c::parse_sdt_service_desciptor(mtx::bits::reader_c &r,
                                       uint16_t program_number) {
   r.skip_bits(8);               // service_type
 
@@ -1738,7 +1738,7 @@ reader_c::parse_sdt(track_c &track) {
   at_scope_exit_c finally{[&track]() { track.clear_pes_payload(); }};
 
   try {
-    bit_reader_c r{track.pes_payload_read->get_buffer(), track.pes_payload_read->get_size()};
+    mtx::bits::reader_c r{track.pes_payload_read->get_buffer(), track.pes_payload_read->get_size()};
 
     if (r.get_bits(8) != TS_SDT_TID)
       return false;

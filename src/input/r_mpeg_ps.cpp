@@ -268,7 +268,7 @@ mpeg_ps_reader_c::read_timestamp(int c,
 }
 
 bool
-mpeg_ps_reader_c::read_timestamp(bit_reader_c &bc,
+mpeg_ps_reader_c::read_timestamp(mtx::bits::reader_c &bc,
                                  int64_t &timestamp) {
   bc.skip_bits(4);
   int64_t temp_timestamp = bc.get_bits(3);
@@ -411,7 +411,7 @@ mpeg_ps_reader_c::parse_packet(mpeg_ps_id_t id,
     if (m_in->read(af_header->get_buffer(), hdrlen) != hdrlen)
       return packet;
 
-    bit_reader_c bc(af_header->get_buffer(), hdrlen);
+    mtx::bits::reader_c bc(af_header->get_buffer(), hdrlen);
 
     try {
       // PTS
@@ -919,7 +919,7 @@ mpeg_ps_reader_c::new_stream_a_pcm(mpeg_ps_id_t,
   static int const s_lpcm_frequency_table[4] = { 48000, 96000, 44100, 32000 };
 
   try {
-    auto bc = bit_reader_c{buffer, length};
+    auto bc = mtx::bits::reader_c{buffer, length};
     bc.skip_bits(8);            // emphasis (1), muse(1), reserved(1), frame number(5)
     track->a_bits_per_sample = 16 + bc.get_bits(2) * 4;
     track->a_sample_rate     = s_lpcm_frequency_table[ bc.get_bits(2) ];

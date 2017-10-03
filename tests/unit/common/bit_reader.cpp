@@ -13,7 +13,7 @@ namespace {
 TEST(BitReader, Initialization) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   EXPECT_EQ( 0, b.get_bit_position());
   EXPECT_EQ(32, b.get_remaining_bits());
@@ -23,7 +23,7 @@ TEST(BitReader, Initialization) {
 TEST(BitReader, GetBit) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f
   EXPECT_TRUE(b.get_bit());
@@ -54,7 +54,7 @@ TEST(BitReader, GetBit) {
 TEST(BitReader, GetBits) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f7
   EXPECT_EQ(0x0f, b.get_bits(4));
@@ -76,7 +76,7 @@ TEST(BitReader, GetBits) {
 TEST(BitReader, GetUnsignedGolomb) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // 1111 0111
   EXPECT_EQ(   0, b.get_unsigned_golomb());
@@ -95,7 +95,7 @@ TEST(BitReader, GetUnsignedGolomb) {
 TEST(BitReader, GetSignedGolomb) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // 1111 0111
   EXPECT_EQ(   0, b.get_signed_golomb());
@@ -114,7 +114,7 @@ TEST(BitReader, GetSignedGolomb) {
 TEST(BitReader, PeekBits) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f7
   EXPECT_EQ(0x0f, b.peek_bits(4));
@@ -131,7 +131,7 @@ TEST(BitReader, PeekBits) {
 TEST(BitReader, GetUnary) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f7
   EXPECT_EQ(0, b.get_unary(1, 8));
@@ -154,7 +154,7 @@ TEST(BitReader, GetUnary) {
 TEST(BitReader, Get012) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f7
   EXPECT_EQ(2, b.get_012());
@@ -169,7 +169,7 @@ TEST(BitReader, Get012) {
 TEST(BitReader, ByteAlign) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f7
   b.byte_align();
@@ -190,7 +190,7 @@ TEST(BitReader, ByteAlign) {
 TEST(BitReader, GetBytes) {
   unsigned char value[4], target[2];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f7
   std::memset(target, 0, 2);
@@ -209,7 +209,7 @@ TEST(BitReader, GetBytes) {
 TEST(BitReader, SkipBits) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f7
   EXPECT_EQ(0, b.get_bit_position());
@@ -224,7 +224,7 @@ TEST(BitReader, SkipBits) {
 TEST(BitReader, SetBitPosition) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   // f7
   EXPECT_EQ(0, b.get_bit_position());
@@ -248,58 +248,58 @@ TEST(BitReader, SetBitPosition) {
 TEST(BitReader, ExceptionOnReadingBeyondEOF) {
   unsigned char value[4], target[2];
   put_uint32_be(value, 0xf7234a81);
-  auto b = bit_reader_c{value, 4};
+  auto b = mtx::bits::reader_c{value, 4};
 
   EXPECT_NO_THROW(b.set_bit_position(31));
   EXPECT_TRUE(b.get_bit());
   EXPECT_THROW(b.get_bit(), mtx::mm_io::end_of_file_x);
 
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(24));
   EXPECT_EQ(0x81, b.get_bits(8));
   EXPECT_THROW(b.get_bit(), mtx::mm_io::end_of_file_x);
 
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(25));
   EXPECT_THROW(b.get_bits(8), mtx::mm_io::end_of_file_x);
 
   std::memset(target, 0, 2);
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(0));
   EXPECT_NO_THROW(b.get_bytes(target, 1));
   EXPECT_EQ(0xf7, target[0]);
 
   std::memset(target, 0, 2);
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(0));
   EXPECT_NO_THROW(b.get_bytes(target, 2));
   EXPECT_EQ(0xf723, get_uint16_be(target));
 
   std::memset(target, 0, 2);
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(4));
   EXPECT_NO_THROW(b.get_bytes(target, 2));
   EXPECT_EQ(0x7234, get_uint16_be(target));
 
   std::memset(target, 0, 2);
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(24));
   EXPECT_NO_THROW(b.get_bytes(target, 1));
   EXPECT_EQ(0x81, target[0]);
 
   std::memset(target, 0, 2);
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(16));
   EXPECT_NO_THROW(b.get_bytes(target, 2));
   EXPECT_EQ(0x4a81, get_uint16_be(target));
 
   std::memset(target, 0, 2);
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(25));
   EXPECT_THROW(b.get_bytes(target, 1), mtx::mm_io::end_of_file_x);
 
   std::memset(target, 0, 2);
-  b = bit_reader_c{value, 4};
+  b = mtx::bits::reader_c{value, 4};
   EXPECT_NO_THROW(b.set_bit_position(24));
   EXPECT_THROW(b.get_bytes(target, 2), mtx::mm_io::end_of_file_x);
 }

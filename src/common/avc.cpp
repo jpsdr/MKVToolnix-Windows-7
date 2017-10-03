@@ -65,8 +65,8 @@ par_extraction_t::is_valid()
 }
 
 static void
-hrdcopy(bit_reader_c &r,
-        bit_writer_c &w) {
+hrdcopy(mtx::bits::reader_c &r,
+        mtx::bits::writer_c &w) {
   int ncpb = w.copy_unsigned_golomb(r); // cpb_cnt_minus1
   w.copy_bits(4, r);                    // bit_rate_scale
   w.copy_bits(4, r);                    // cpb_size_scale
@@ -82,8 +82,8 @@ hrdcopy(bit_reader_c &r,
 }
 
 static void
-slcopy(bit_reader_c &r,
-       bit_writer_c &w,
+slcopy(mtx::bits::reader_c &r,
+       mtx::bits::writer_c &w,
        int size) {
   int delta, next = 8, j;
 
@@ -230,8 +230,8 @@ parse_sps(memory_cptr const &buffer,
   };
 
   int size = buffer->get_size();
-  bit_reader_c r(buffer->get_buffer(), size);
-  bit_writer_c w{};
+  mtx::bits::reader_c r(buffer->get_buffer(), size);
+  mtx::bits::writer_c w{};
   int i, nref, mb_width, mb_height;
 
   keep_ar_info = !hack_engaged(ENGAGE_REMOVE_BITSTREAM_AR_INFO);
@@ -497,7 +497,7 @@ bool
 parse_pps(memory_cptr const &buffer,
           pps_info_t &pps) {
   try {
-    bit_reader_c r(buffer->get_buffer(), buffer->get_size());
+    mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
 
     memset(&pps, 0, sizeof(pps));
 

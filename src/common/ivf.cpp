@@ -40,7 +40,7 @@ frame_header_t::frame_header_t()
 
 static bool
 is_keyframe_vp9(memory_c const &buffer) {
-  bit_reader_c bc{buffer.get_buffer(), buffer.get_size()};
+  mtx::bits::reader_c bc{buffer.get_buffer(), buffer.get_size()};
 
   // frame marker
   if (bc.get_bits(2) != 0x02)

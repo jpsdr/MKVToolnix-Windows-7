@@ -85,7 +85,7 @@ truehd_frame_t::parse_truehd_header(unsigned char const *data,
   static debugging_option_c s_debug{"truehd_atmos"};
 
   try {
-    bit_reader_c r{&data[8], size - 8};
+    mtx::bits::reader_c r{&data[8], size - 8};
 
     auto rate_bits      = r.get_bits(4);
     m_samples_per_frame = 40 << (rate_bits & 0x07);

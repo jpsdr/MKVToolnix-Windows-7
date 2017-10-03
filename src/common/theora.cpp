@@ -26,7 +26,7 @@ void
 theora_parse_identification_header(unsigned char *buffer,
                                    int size,
                                    theora_identification_header_t &header) {
-  bit_reader_c bc(buffer, size);
+  mtx::bits::reader_c bc(buffer, size);
   int i;
 
   header.headertype = bc.get_bits(8);

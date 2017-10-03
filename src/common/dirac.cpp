@@ -40,7 +40,7 @@ dirac::frame_t::init() {
 }
 
 static unsigned int
-read_uint(bit_reader_c &bc) {
+read_uint(mtx::bits::reader_c &bc) {
   int count          = 0;
   unsigned int value = 0;
 
@@ -123,7 +123,7 @@ dirac::parse_sequence_header(const unsigned char *buf,
   };
 
   try {
-    bit_reader_c bc(buf, size);
+    mtx::bits::reader_c bc(buf, size);
     dirac::sequence_header_t hdr;
 
     bc.skip_bits((4 + 1 + 4 + 4) * 8); // Marker, type, next offset, previous offset

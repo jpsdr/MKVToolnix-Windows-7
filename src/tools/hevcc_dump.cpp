@@ -163,7 +163,7 @@ parse_args(std::vector<std::string> &args) {
 
 static void
 parse_profile_tier_level(std::size_t indent,
-                         bit_reader_c &r,
+                         mtx::bits::reader_c &r,
                          bool profile_present_flag,
                          unsigned int max_num_sub_layers_minus_1) {
   v(indent, "profile tier level");
@@ -289,7 +289,7 @@ parse_profile_tier_level(std::size_t indent,
 
 static void
 parse_scaling_list_data(std::size_t indent,
-                        bit_reader_c &r) {
+                        mtx::bits::reader_c &r) {
   v(indent, "scaling list data");
   indent += 2;
 
@@ -316,7 +316,7 @@ parse_scaling_list_data(std::size_t indent,
 
 static void
 parse_short_term_reference_picture_set(std::size_t indent,
-                                       bit_reader_c &r,
+                                       mtx::bits::reader_c &r,
                                        unsigned int pic_set_idx,
                                        unsigned int num_short_term_ref_pic_sets) {
   v(indent, (boost::format("short-term reference picture set %1%") % pic_set_idx).str());
@@ -340,7 +340,7 @@ parse_short_term_reference_picture_set(std::size_t indent,
 
 static void
 parse_hrd_parameters(std::size_t indent,
-                     bit_reader_c &/* r */,
+                     mtx::bits::reader_c &/* r */,
                      bool /* stuff */,
                      unsigned int /* sps_max_sub_layers_minus1 */) {
   v(indent, "HRD parameters");
@@ -351,7 +351,7 @@ parse_hrd_parameters(std::size_t indent,
 
 static void
 parse_vui_parameters(std::size_t indent,
-                     bit_reader_c &r,
+                     mtx::bits::reader_c &r,
                      unsigned int sps_max_sub_layers_minus1) {
   unsigned int aspect_ratio_info_present_flag, overscan_info_present_flag, video_signal_type_present_flag, chroma_loc_info_present_flag, vui_timing_info_present_flag, bitstream_restriction_flag;
   unsigned int default_display_window_flag{};
@@ -444,7 +444,7 @@ parse_vui_parameters(std::size_t indent,
 
 static void
 parse_sps_range_extension(std::size_t indent,
-                          bit_reader_c &) {
+                          mtx::bits::reader_c &) {
   v(indent, "range extension");
   indent += 2;
 
@@ -453,7 +453,7 @@ parse_sps_range_extension(std::size_t indent,
 
 static void
 parse_sps_multilayer_extension(std::size_t indent,
-                          bit_reader_c &) {
+                          mtx::bits::reader_c &) {
   v(indent, "multilayer extension");
   indent += 2;
 
@@ -462,7 +462,7 @@ parse_sps_multilayer_extension(std::size_t indent,
 
 static void
 parse_sps_3d_extension(std::size_t indent,
-                          bit_reader_c &) {
+                          mtx::bits::reader_c &) {
   v(indent, "3d extension");
   indent += 2;
 
@@ -471,7 +471,7 @@ parse_sps_3d_extension(std::size_t indent,
 
 static void
 parse_sps_scc_extension(std::size_t indent,
-                          bit_reader_c &) {
+                          mtx::bits::reader_c &) {
   v(indent, "scc extension");
   indent += 2;
 
@@ -480,7 +480,7 @@ parse_sps_scc_extension(std::size_t indent,
 
 static void
 parse_sps_extension_4bits(std::size_t indent,
-                          bit_reader_c &) {
+                          mtx::bits::reader_c &) {
   v(indent, "extension 4bits");
   indent += 2;
 
@@ -488,7 +488,7 @@ parse_sps_extension_4bits(std::size_t indent,
 }
 
 static void
-parse_sps(bit_reader_c &r) {
+parse_sps(mtx::bits::reader_c &r) {
   unsigned int sps_max_sub_layers_minus1, chroma_format_idc, conformance_window_flag, sps_sub_layer_ordering_info_present_flag, scaling_list_enabled_flag, pcm_enabled_flag, num_short_term_ref_pic_sets, long_term_ref_pics_present_flag;
   unsigned int vui_parameters_present_flag, sps_extension_present_flag, log2_max_pic_order_cnt_lsb_minus4;
   unsigned int sps_range_extension_flag{}, sps_multilayer_extension_flag{}, sps_3d_extension_flag{}, sps_scc_extension_flag{}, sps_extension_4bits{};
@@ -607,7 +607,7 @@ parse_sps(bit_reader_c &r) {
 }
 
 static void
-parse_hevcc(bit_reader_c &r) {
+parse_hevcc(mtx::bits::reader_c &r) {
   unsigned int num_arrays;
 
   v(0, "configuration_version",              r.get_bits(8));
@@ -665,7 +665,7 @@ parse_hevcc(bit_reader_c &r) {
       v(2, (boost::format("NAL unit %1%") % nal_unit_idx).str());
       v(4, "nal_unit_size", (boost::format("%1% (RBSP size: %2%)") % nal_unit_size % data->get_size()).str());
 
-      bit_reader_c nalu_r{data->get_buffer(), data->get_size()};
+      mtx::bits::reader_c nalu_r{data->get_buffer(), data->get_size()};
 
       if (type == HEVC_NALU_TYPE_SEQ_PARAM)
         parse_sps(nalu_r);
@@ -683,7 +683,7 @@ read_and_parse_hevcc(std::string const &file_name,
 
   in.setFilePointer(file_pos);
   auto data = in.read(size);
-  auto r    = bit_reader_c{data->get_buffer(), data->get_size()};
+  auto r    = mtx::bits::reader_c{data->get_buffer(), data->get_size()};
 
   parse_hevcc(r);
 }

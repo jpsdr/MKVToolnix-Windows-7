@@ -39,10 +39,15 @@
 #define EAC3_FRAME_TYPE_AC3_CONVERT  2
 #define EAC3_FRAME_TYPE_RESERVED     3
 
-class bit_reader_c;
 class codec_c;
 
-namespace mtx { namespace ac3 {
+namespace mtx {
+
+namespace bits {
+class reader_c;
+}
+
+namespace ac3 {
 
 class frame_c {
 public:
@@ -59,8 +64,8 @@ public:
   codec_c get_codec() const;
   void add_dependent_frame(frame_c const &frame, unsigned char const *buffer, std::size_t buffer_size);
   bool decode_header(unsigned char const *buffer, std::size_t buffer_size);
-  bool decode_header_type_eac3(bit_reader_c &bc);
-  bool decode_header_type_ac3(bit_reader_c &bc);
+  bool decode_header_type_eac3(mtx::bits::reader_c &bc);
+  bool decode_header_type_ac3(mtx::bits::reader_c &bc);
 
   std::string to_string(bool verbose) const;
 

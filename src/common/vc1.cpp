@@ -83,7 +83,7 @@ parse_sequence_header(const unsigned char *buf,
     static const int s_framerate_nr[5] = { 24, 25, 30, 50, 60 };
     static const int s_framerate_dr[2] = { 1000, 1001 };
 
-    bit_reader_c bc(buf, size);
+    mtx::bits::reader_c bc(buf, size);
     sequence_header_t hdr;
 
     bc.skip_bits(32);           // Marker
@@ -177,7 +177,7 @@ parse_entrypoint(const unsigned char *buf,
                  entrypoint_t &entrypoint,
                  sequence_header_t &seqhdr) {
   try {
-    bit_reader_c bc(buf, size);
+    mtx::bits::reader_c bc(buf, size);
     entrypoint_t ep;
 
     bc.skip_bits(32);           // marker
@@ -227,7 +227,7 @@ parse_frame_header(const unsigned char *buf,
                    frame_header_t &frame_header,
                    sequence_header_t &seqhdr) {
   try {
-    bit_reader_c bc(buf, size);
+    mtx::bits::reader_c bc(buf, size);
     frame_header_t fh;
 
     bc.skip_bits(32);           // marker

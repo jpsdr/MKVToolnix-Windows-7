@@ -58,8 +58,8 @@ par_extraction_t::is_valid()
 }
 
 static void
-profile_tier_copy(bit_reader_c &r,
-                  bit_writer_c &w,
+profile_tier_copy(mtx::bits::reader_c &r,
+                  mtx::bits::writer_c &w,
                   vps_info_t &vps,
                   unsigned int maxNumSubLayersMinus1) {
   unsigned int i;
@@ -99,8 +99,8 @@ profile_tier_copy(bit_reader_c &r,
 }
 
 static void
-sub_layer_hrd_parameters_copy(bit_reader_c &r,
-                              bit_writer_c &w,
+sub_layer_hrd_parameters_copy(mtx::bits::reader_c &r,
+                              mtx::bits::writer_c &w,
                               unsigned int CpbCnt,
                               bool sub_pic_cpb_params_present_flag) {
   unsigned int i;
@@ -119,8 +119,8 @@ sub_layer_hrd_parameters_copy(bit_reader_c &r,
 }
 
 static void
-hrd_parameters_copy(bit_reader_c &r,
-                    bit_writer_c &w,
+hrd_parameters_copy(mtx::bits::reader_c &r,
+                    mtx::bits::writer_c &w,
                     bool commonInfPresentFlag,
                     unsigned int maxNumSubLayersMinus1) {
   unsigned int i;
@@ -183,8 +183,8 @@ hrd_parameters_copy(bit_reader_c &r,
 }
 
 static void
-scaling_list_data_copy(bit_reader_c &r,
-                       bit_writer_c &w) {
+scaling_list_data_copy(mtx::bits::reader_c &r,
+                       mtx::bits::writer_c &w) {
   unsigned int i;
   unsigned int sizeId;
   for (sizeId = 0; sizeId < 4; sizeId++) {
@@ -208,8 +208,8 @@ scaling_list_data_copy(bit_reader_c &r,
 }
 
 static void
-short_term_ref_pic_set_copy(bit_reader_c &r,
-                            bit_writer_c &w,
+short_term_ref_pic_set_copy(mtx::bits::reader_c &r,
+                            mtx::bits::writer_c &w,
                             short_term_ref_pic_set_t *short_term_ref_pic_sets,
                             unsigned int idx_rps,
                             unsigned int num_short_term_ref_pic_sets) {
@@ -341,8 +341,8 @@ short_term_ref_pic_set_copy(bit_reader_c &r,
 }
 
 static void
-vui_parameters_copy(bit_reader_c &r,
-                    bit_writer_c &w,
+vui_parameters_copy(mtx::bits::reader_c &r,
+                    mtx::bits::writer_c &w,
                     sps_info_t &sps,
                     bool keep_ar_info,
                     unsigned int max_sub_layers_minus1) {
@@ -479,8 +479,8 @@ bool
 parse_vps(memory_cptr const &buffer,
           vps_info_t &vps) {
   auto size = buffer->get_size();
-  bit_reader_c r(buffer->get_buffer(), size);
-  bit_writer_c w{};
+  mtx::bits::reader_c r(buffer->get_buffer(), size);
+  mtx::bits::writer_c w{};
   unsigned int i, j;
 
   memset(&vps, 0, sizeof(vps));
@@ -552,8 +552,8 @@ parse_sps(memory_cptr const &buffer,
           std::vector<vps_info_t> &m_vps_info_list,
           bool keep_ar_info) {
   auto size = buffer->get_size();
-  bit_reader_c r(buffer->get_buffer(), size);
-  bit_writer_c w{};
+  mtx::bits::reader_c r(buffer->get_buffer(), size);
+  mtx::bits::writer_c w{};
   unsigned int i;
 
   keep_ar_info = !hack_engaged(ENGAGE_REMOVE_BITSTREAM_AR_INFO);
@@ -689,7 +689,7 @@ bool
 parse_pps(memory_cptr const &buffer,
           pps_info_t &pps) {
   try {
-    bit_reader_c r(buffer->get_buffer(), buffer->get_size());
+    mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
 
     memset(&pps, 0, sizeof(pps));
 
@@ -718,7 +718,7 @@ bool
 parse_sei(memory_cptr const &buffer,
           user_data_t &user_data) {
   try {
-    bit_reader_c r(buffer->get_buffer(), buffer->get_size());
+    mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
     mm_mem_io_c byte_reader{*buffer};
 
     unsigned int bytes_read   = 0;

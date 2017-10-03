@@ -8,7 +8,7 @@
 
    A class for file-like read access on the bit level
 
-   The bit_reader_c class was originally written by Peter Niemayer
+   The mtx::bits::reader_c class was originally written by Peter Niemayer
      <niemayer@isg.de> and modified by Moritz Bunkus <moritz@bunkus.org>.
 */
 
@@ -18,7 +18,9 @@
 
 #include "common/mm_io_x.h"
 
-class bit_reader_c {
+namespace mtx { namespace bits {
+
+class reader_c {
 private:
   const unsigned char *m_end_of_data;
   const unsigned char *m_byte_position;
@@ -27,7 +29,7 @@ private:
   bool m_out_of_data;
 
 public:
-  bit_reader_c(unsigned char const *data, std::size_t len) {
+  reader_c(unsigned char const *data, std::size_t len) {
     init(data, len);
   }
 
@@ -205,4 +207,6 @@ protected:
     }
   }
 };
-using bit_reader_cptr = std::shared_ptr<bit_reader_c>;
+using reader_cptr = std::shared_ptr<reader_c>;
+
+}}

@@ -40,7 +40,9 @@
 #define AAC_LOAS_SYNC_WORD_MASK  0xffe000 // first 11 of 24 bits
 #define AAC_LOAS_FRAME_SIZE_MASK 0x001fff // last 13 of 24 bits
 
-class bit_reader_c;
+namespace mtx { namespace bits {
+class reader_c;
+}}
 
 namespace mtx { namespace aac {
 
@@ -78,7 +80,7 @@ public:
   bool is_valid{};
 
 protected:
-  bit_reader_c *m_bc{};
+  mtx::bits::reader_c *m_bc{};
 
 public:
   header_c();
@@ -89,8 +91,8 @@ public:
   static header_c from_audio_specific_config(const unsigned char *data, size_t size);
 
   void parse_audio_specific_config(const unsigned char *data, size_t size, bool look_for_sync_extension = true);
-  void parse_audio_specific_config(bit_reader_c &bc, bool look_for_sync_extension = true);
-  void parse_program_config_element(bit_reader_c &bc);
+  void parse_audio_specific_config(mtx::bits::reader_c &bc, bool look_for_sync_extension = true);
+  void parse_program_config_element(mtx::bits::reader_c &bc);
 
 protected:
   int read_object_type();
@@ -115,7 +117,7 @@ protected:
   int m_audio_mux_version, m_audio_mux_version_a;
   size_t m_fixed_frame_length, m_frame_length_type, m_frame_bit_offset, m_frame_length;
   header_c m_header;
-  bit_reader_c *m_bc;
+  mtx::bits::reader_c *m_bc;
   bool m_config_parsed;
   memory_cptr m_audio_specific_config;
   debugging_option_c m_debug;
@@ -129,7 +131,7 @@ public:
   size_t get_frame_bit_offset() const;
   size_t get_frame_length() const;
 
-  void parse(bit_reader_c &bc);
+  void parse(mtx::bits::reader_c &bc);
 
 protected:
   unsigned int get_value();

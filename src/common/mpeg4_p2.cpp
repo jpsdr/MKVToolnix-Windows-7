@@ -22,7 +22,7 @@
 
 namespace mpeg4 {
   namespace p2 {
-    static bool find_vol_header(bit_reader_c &bits);
+    static bool find_vol_header(mtx::bits::reader_c &bits);
     static bool parse_vol_header(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
     static bool extract_par_internal(const unsigned char *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
     static void parse_frame(video_frame_t &frame, const unsigned char *buffer, const mpeg4::p2::config_data_t &config_data);
@@ -38,7 +38,7 @@ mpeg4::p2::config_data_t::config_data_t()
 }
 
 static bool
-mpeg4::p2::find_vol_header(bit_reader_c &bits) {
+mpeg4::p2::find_vol_header(mtx::bits::reader_c &bits) {
   uint32_t marker;
 
   while (!bits.eof()) {
@@ -65,7 +65,7 @@ static bool
 mpeg4::p2::parse_vol_header(const unsigned char *buffer,
                             int buffer_size,
                             mpeg4::p2::config_data_t &config_data) {
-  bit_reader_c bits(buffer, buffer_size);
+  mtx::bits::reader_c bits(buffer, buffer_size);
 
   if (!find_vol_header(bits))
     return false;
@@ -168,7 +168,7 @@ mpeg4::p2::extract_par_internal(const unsigned char *buffer,
   const uint32_t ar_nums[16] = {0, 1, 12, 10, 16, 40, 0, 0, 0, 0,  0,  0,  0,  0, 0, 0};
   const uint32_t ar_dens[16] = {1, 1, 11, 11, 11, 33, 1, 1, 1, 1,  1,  1,  1,  1, 1, 1};
   uint32_t aspect_ratio_info, num, den;
-  bit_reader_c bits(buffer, buffer_size);
+  mtx::bits::reader_c bits(buffer, buffer_size);
 
   if (!find_vol_header(bits))
     return false;
@@ -236,7 +236,7 @@ mpeg4::p2::parse_frame(video_frame_t &frame,
                        const mpeg4::p2::config_data_t &config_data) {
   static const frame_type_e s_frame_type_map[4] = { FRAME_TYPE_I, FRAME_TYPE_P, FRAME_TYPE_B, FRAME_TYPE_P };
 
-  bit_reader_c bc(&buffer[ frame.pos + 4 ], frame.size);
+  mtx::bits::reader_c bc(&buffer[ frame.pos + 4 ], frame.size);
 
   frame.type = s_frame_type_map[ bc.get_bits(2) ];
 

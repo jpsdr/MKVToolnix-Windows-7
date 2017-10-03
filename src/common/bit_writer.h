@@ -15,14 +15,16 @@
 
 #include "common/bit_reader.h"
 
-class bit_writer_c {
+namespace mtx { namespace bits {
+
+class writer_c {
 private:
   memory_cptr m_buffer;
   unsigned char *m_data{};
   std::size_t m_size{}, m_byte_position{}, m_mask{0x80u};
 
 public:
-  bit_writer_c()
+  writer_c()
     : m_buffer{memory_c::alloc(100)}
     , m_data{m_buffer->get_buffer()}
   {
@@ -33,14 +35,14 @@ public:
     return memory_c::clone(m_buffer->get_buffer(), m_size);
   }
 
-  inline uint64_t copy_bits(std::size_t n, bit_reader_c &src) {
+  inline uint64_t copy_bits(std::size_t n, reader_c &src) {
     uint64_t value = src.get_bits(n);
     put_bits(n, value);
 
     return value;
   }
 
-  inline uint64_t copy_unsigned_golomb(bit_reader_c &r) {
+  inline uint64_t copy_unsigned_golomb(reader_c &r) {
     int n = 0;
 
     while (r.get_bit() == 0) {
@@ -55,7 +57,7 @@ public:
     return (1 << n) - 1 + bits;
   }
 
-  inline int64_t copy_signed_golomb(bit_reader_c &r) {
+  inline int64_t copy_signed_golomb(reader_c &r) {
     int64_t v = copy_unsigned_golomb(r);
     return v & 1 ? (v + 1) / 2 : -(v / 2);
   }
@@ -129,4 +131,6 @@ protected:
     m_size = std::max(m_size, m_byte_position + (m_mask == 0x80 ? 0 : 1));
   }
 };
-using bit_writer_cptr = std::shared_ptr<bit_writer_c>;
+using writer_cptr = std::shared_ptr<writer_c>;
+
+}}

@@ -87,7 +87,7 @@ parse_audio_specific_config(unsigned char const *data,
 
 memory_cptr
 create_audio_specific_config(audio_config_t const &audio_config) {
-  bit_writer_c w{};
+  mtx::bits::writer_c w{};
 
   auto write_object_type = [&w](unsigned int object_type) {
     if (object_type < 31)
@@ -114,7 +114,7 @@ create_audio_specific_config(audio_config_t const &audio_config) {
   w.put_bits(4, audio_config.channels == 8 ? 7 : audio_config.channels);
 
   if (audio_config.ga_specific_config && audio_config.ga_specific_config_bit_size) {
-    bit_reader_c r{audio_config.ga_specific_config->get_buffer(), audio_config.ga_specific_config->get_size()};
+    mtx::bits::reader_c r{audio_config.ga_specific_config->get_buffer(), audio_config.ga_specific_config->get_size()};
     w.copy_bits(audio_config.ga_specific_config_bit_size, r);
   } else
     w.byte_align();
@@ -184,7 +184,7 @@ latm_parser_c::get_value() {
 }
 
 void
-latm_parser_c::parse(bit_reader_c &bc) {
+latm_parser_c::parse(mtx::bits::reader_c &bc) {
   auto cleanup = at_scope_exit_c{[this]() { m_bc = nullptr; }};
 
   m_bc = &bc;
@@ -526,7 +526,7 @@ parser_c::decode_adts_header(unsigned char const *buffer,
                              size_t buffer_size) {
   try {
     auto frame = frame_c{};
-    auto bc    = bit_reader_c{buffer, static_cast<unsigned int>(buffer_size)};
+    auto bc    = mtx::bits::reader_c{buffer, static_cast<unsigned int>(buffer_size)};
 
     if (bc.get_bits(12) != 0xfff)                  // ADTS header
       return { failure, 1 };
@@ -601,7 +601,7 @@ parser_c::decode_loas_latm_header(unsigned char const *buffer,
     if (loas_frame_end > buffer_size)
       return { need_more_data, 0 };
 
-    auto bc = bit_reader_c{buffer, loas_frame_end};
+    auto bc = mtx::bits::reader_c{buffer, loas_frame_end};
     bc.skip_bits(3 * 8);
 
     m_latm_parser.parse(bc);
@@ -969,7 +969,7 @@ header_c::read_ga_specific_config() {
 
   m_bc->set_bit_position(start_bit_position);
 
-  bit_writer_c w{};
+  mtx::bits::writer_c w{};
   w.copy_bits(config.ga_specific_config_bit_size, *m_bc);
 
   config.ga_specific_config = w.get_buffer();
@@ -1015,7 +1015,7 @@ header_c::read_program_config_element() {
 }
 
 void
-header_c::parse_audio_specific_config(bit_reader_c &bc,
+header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
                                       bool look_for_sync_extension) {
   m_bc = &bc;
 
@@ -1101,12 +1101,12 @@ header_c::parse_audio_specific_config(const unsigned char *data,
 
   mxdebug_if(s_debug_parse_data, boost::format("mtx::aac::parse_audio_specific_config: size %1%, data: %2%\n") % size % to_hex(data, size));
 
-  bit_reader_c bc{data, static_cast<unsigned int>(size)};
+  mtx::bits::reader_c bc{data, static_cast<unsigned int>(size)};
   parse_audio_specific_config(bc, look_for_sync_extension);
 }
 
 void
-header_c::parse_program_config_element(bit_reader_c &bc) {
+header_c::parse_program_config_element(mtx::bits::reader_c &bc) {
   m_bc = &bc;
 
   try {

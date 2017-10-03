@@ -520,7 +520,7 @@ bool
 es_parser_c::parse_slice(memory_cptr const &buffer,
                          slice_info_t &si) {
   try {
-    bit_reader_c r(buffer->get_buffer(), buffer->get_size());
+    mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
     unsigned int i;
 
     memset(&si, 0, sizeof(si));

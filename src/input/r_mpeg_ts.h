@@ -467,7 +467,7 @@ private:
   bool parse_pmt(track_c &track);
   bool parse_pmt_pid_info(mm_mem_io_c &mem, uint16_t program_number);
   bool parse_sdt(track_c &track);
-  void parse_sdt_service_desciptor(bit_reader_c &r, uint16_t program_number);
+  void parse_sdt_service_desciptor(mtx::bits::reader_c &r, uint16_t program_number);
   void parse_pes(track_c &track);
   void probe_packet_complete(track_c &track);
   int determine_track_parameters(track_c &track);
@@ -509,7 +509,7 @@ private:
   void add_multiplexed_ids(std::vector<uint64_t> &multiplexed_ids, track_c &track);
 
   static memory_cptr read_pmt_descriptor(mm_io_c &io);
-  static std::string read_descriptor_string(bit_reader_c &r);
+  static std::string read_descriptor_string(mtx::bits::reader_c &r);
   static charset_converter_cptr get_charset_converter_for_coding_type(unsigned int coding);
 
   friend class track_c;
