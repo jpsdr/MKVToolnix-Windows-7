@@ -16,9 +16,11 @@
 
 #define INDENT_DEFAULT -1
 
-using cli_parser_cb_t = std::function<void(void)>;
+namespace mtx { namespace cli {
 
-class cli_parser_c {
+using parser_cb_t = std::function<void(void)>;
+
+class parser_c {
 protected:
   struct option_t {
     enum option_type_e {
@@ -31,13 +33,13 @@ protected:
     option_type_e m_type;
     std::string m_spec, m_name;
     translatable_string_c m_description;
-    cli_parser_cb_t m_callback;
+    parser_cb_t m_callback;
     bool m_needs_arg;
     int m_indent;
 
     option_t();
     option_t(option_type_e type, translatable_string_c const &description, int indent = INDENT_DEFAULT);
-    option_t(std::string const &spec, translatable_string_c const &description, cli_parser_cb_t const &callback, bool needs_arg);
+    option_t(std::string const &spec, translatable_string_c const &description, parser_cb_t const &callback, bool needs_arg);
     option_t(std::string const &name, translatable_string_c const &description);
 
     std::string format_text();
@@ -54,14 +56,14 @@ protected:
 
   std::string m_current_arg, m_next_arg;
 
-  std::map<hook_type_e, std::vector<cli_parser_cb_t>> m_hooks;
+  std::map<hook_type_e, std::vector<parser_cb_t>> m_hooks;
 
   bool m_no_common_cli_args;
 
 protected:
-  cli_parser_c(std::vector<std::string> const &args);
+  parser_c(std::vector<std::string> const &args);
 
-  void add_option(std::string const &spec, cli_parser_cb_t const &callback, translatable_string_c const &description);
+  void add_option(std::string const &spec, parser_cb_t const &callback, translatable_string_c const &description);
   void add_informational_option(std::string const &name, translatable_string_c const &description);
   void add_section_header(translatable_string_c const &title, int indent = INDENT_DEFAULT);
   void add_information(translatable_string_c const &information, int indent = INDENT_DEFAULT);
@@ -73,6 +75,8 @@ protected:
 
   void dummy_callback();
 
-  void add_hook(hook_type_e hook_type, cli_parser_cb_t const &callback);
+  void add_hook(hook_type_e hook_type, parser_cb_t const &callback);
   bool run_hooks(hook_type_e hook_type);
 };
+
+}}

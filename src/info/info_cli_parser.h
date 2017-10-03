@@ -16,7 +16,7 @@
 #include "info/mkvinfo.h"
 #include "info/options.h"
 
-class info_cli_parser_c: public cli_parser_c {
+class info_cli_parser_c: public mtx::cli::parser_c {
 protected:
   options_c m_options;
 

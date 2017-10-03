@@ -16,7 +16,7 @@
 #include "propedit/attachment_target.h"
 #include "propedit/options.h"
 
-class propedit_cli_parser_c: public cli_parser_c {
+class propedit_cli_parser_c: public mtx::cli::parser_c {
 protected:
   options_cptr m_options;
   target_cptr m_target;

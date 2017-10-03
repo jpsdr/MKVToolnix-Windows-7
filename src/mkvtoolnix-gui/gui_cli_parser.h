@@ -7,7 +7,7 @@
 namespace mtx { namespace gui {
 
 class GuiCliParserPrivate;
-class GuiCliParser: public cli_parser_c {
+class GuiCliParser: public mtx::cli::parser_c {
 protected:
   Q_DECLARE_PRIVATE(GuiCliParser);
 

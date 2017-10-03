@@ -22,7 +22,7 @@
 #include "extract/options.h"
 
 extract_cli_parser_c::extract_cli_parser_c(const std::vector<std::string> &args)
-  : cli_parser_c(args)
+  : mtx::cli::parser_c{args}
   , m_num_unknown_args(0)
 {
   set_default_values();
@@ -128,7 +128,7 @@ extract_cli_parser_c::init_parser() {
 
   add_separator();
 
-  add_hook(cli_parser_c::ht_unknown_option, std::bind(&extract_cli_parser_c::set_mode_or_extraction_spec, this));
+  add_hook(mtx::cli::parser_c::ht_unknown_option, std::bind(&extract_cli_parser_c::set_mode_or_extraction_spec, this));
 }
 
 #undef OPT

@@ -21,7 +21,7 @@
 #include "info/options.h"
 
 info_cli_parser_c::info_cli_parser_c(const std::vector<std::string> &args)
-  : cli_parser_c(args)
+  : mtx::cli::parser_c{args}
 {
   verbose = 0;
 }
@@ -49,7 +49,7 @@ info_cli_parser_c::init_parser() {
 
   add_common_options();
 
-  add_hook(cli_parser_c::ht_unknown_option, std::bind(&info_cli_parser_c::set_file_name, this));
+  add_hook(mtx::cli::parser_c::ht_unknown_option, std::bind(&info_cli_parser_c::set_file_name, this));
 }
 
 #undef OPT

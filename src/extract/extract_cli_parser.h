@@ -18,7 +18,7 @@
 #include "extract/mkvextract.h"
 #include "extract/options.h"
 
-class extract_cli_parser_c: public cli_parser_c {
+class extract_cli_parser_c: public mtx::cli::parser_c {
 protected:
   options_c m_options;
   int m_num_unknown_args;

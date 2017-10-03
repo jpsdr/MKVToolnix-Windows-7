@@ -24,7 +24,7 @@ class GuiCliParserPrivate {
 };
 
 GuiCliParser::GuiCliParser(std::vector<std::string> const &args)
-  : cli_parser_c{args}
+  : mtx::cli::parser_c{args}
   , d_ptr{new GuiCliParserPrivate}
 {
 }
@@ -64,7 +64,7 @@ GuiCliParser::initParser() {
   OPT("debug=option",  enableDebugging, {});
   OPT("engage=hack",   enableHack,      {});
 
-  add_hook(cli_parser_c::ht_unknown_option, std::bind(&GuiCliParser::handleFileNameArg, this));
+  add_hook(mtx::cli::parser_c::ht_unknown_option, std::bind(&GuiCliParser::handleFileNameArg, this));
 }
 
 #undef OPT
