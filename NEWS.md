@@ -1,5 +1,20 @@
 # Version ?
 
+## Important notes
+
+* The word "timecode" has been changed to "timestamp" everywhere it has been
+  used in MKVToolNix. This affects program output (including mkvinfo's), GUI
+  controls, command line parameters (e.g. `mkvmerge --timestamp-scale …`) and
+  file formats. All programs remain backwards compatible insofar as they still
+  accept "timecode" in all those places.
+
+  The reason for the change is wrong usage. What both the Matroska specification
+  and MKVToolNix used "timecode" for is normally called a "timestamp" in audio &
+  video domains. A "timecode" on the other hand has a specific meaning. As the
+  Matroska specification is moving towards implementing real timecodes, it will
+  also move towards correcting the verbiage. MKVToolNix is following this
+  change.
+
 ## New features and enhancements
 
 * mkvmerge: AC-3: during identification regular AC-3 and E-AC-3 tracks will
