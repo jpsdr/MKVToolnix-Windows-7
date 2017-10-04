@@ -138,8 +138,10 @@ vc1_video_packetizer_c::headers_found() {
   memcpy(m_raw_headers->get_buffer(),                          raw_seqhdr->get_buffer(),     raw_seqhdr->get_size());
   memcpy(m_raw_headers->get_buffer() + raw_seqhdr->get_size(), raw_entrypoint->get_buffer(), raw_entrypoint->get_size());
 
-  if (!m_reader->m_appending)
+  if (!m_reader->m_appending) {
     set_headers();
+    rerender_track_headers();
+  }
 }
 
 void

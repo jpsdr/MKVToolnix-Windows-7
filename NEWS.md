@@ -17,6 +17,9 @@
   extension are located in two different Matroska blocks, then mkvmerge will
   now re-assemble them into a single block and only use the first block's
   timestamp.
+* mkvmerge: VC-1: under certain conditions (e.g. only muxing a single VC-1
+  track without any other tracks) mkvmerge was always setting the pixel width
+  & height to 123. The frame rate was wrong, too. Fixes #2113.
 
 
 # Version 16.0.0 "Protest" 2017-09-30
