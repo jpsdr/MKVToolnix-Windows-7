@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation rev. 01 09.2017\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-10-04 19:22+0200\n"
-"PO-Revision-Date: 2017-10-01 18:31+0200\n"
+"POT-Creation-Date: 2017-10-04 19:42+0200\n"
+"PO-Revision-Date: 2017-10-04 19:46+0200\n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
 "Language-Team: bovirus <bovirus@gmail.com>\n"
 "Language: it\n"
@@ -54,11 +54,11 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:160
 msgid ""
 "  --append-mode <file|track>\n"
-"                           Selects how mkvmerge calculates timecodes when\n"
+"                           Selects how mkvmerge calculates timestamps when\n"
 "                           appending files.\n"
 msgstr ""
 "  --append-mode <file|traccia>\n"
-"                           Seleziona come mkvmerge calcola i timecode quando\n"
+"                           Seleziona come mkvmerge calcola i timestamp quando\n"
 "                           aggiungi file.\n"
 
 #: src/merge/mkvmerge.cpp:155
@@ -644,32 +644,32 @@ msgstr ""
 msgid ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
 "                           Same as 'parts:', but 'startN'/'endN' are frame/\n"
-"                           field numbers instead of timecodes.\n"
+"                           field numbers instead of timestamps.\n"
 msgstr ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
 "                           Come per 'parts:', ma 'startN'/'endN' sono i numeri\n"
-"                           di frame/campo invece che il timecode.\n"
+"                           di frame/campo invece che il timestamp.\n"
 
 #: src/merge/mkvmerge.cpp:138
 msgid ""
 "  --split parts:start1-end1[,[+]start2-end2,...]\n"
-"                           Keep ranges of timecodes start-end, either in\n"
+"                           Keep ranges of timestamps start-end, either in\n"
 "                           separate files or append to previous range's file\n"
 "                           if prefixed with '+'.\n"
 msgstr ""
 "  --split parts:inizio1-fine1[,[+]inizio2-fine2,...]\n"
-"                           Mantiene gli intervalli di timecode inizio-fine, entrambi in\n"
+"                           Mantiene gli intervalli di timestamp inizio-fine, entrambi in\n"
 "                           file separati o apposti a file di precedenti intervalli\n"
 "                           se il prefisso è '+'.\n"
 
 #: src/merge/mkvmerge.cpp:135
 msgid ""
-"  --split timecodes:A[,B...]\n"
-"                           Create a new file after each timecode A, B\n"
+"  --split timestamps:A[,B...]\n"
+"                           Create a new file after each timestamp A, B\n"
 "                           etc.\n"
 msgstr ""
-"  --split timecodes:A[,B...]\n"
-"                          Crea un nuovo file dopo ogni timecode A, B\n"
+"  --split timestamps:A[,B...]\n"
+"                          Crea un nuovo file dopo ogni timestamp A, B\n"
 "                           ecc.\n"
 
 #: src/merge/mkvmerge.cpp:151
@@ -699,12 +699,12 @@ msgstr ""
 "                           letti per la conversione in UTF-8.\n"
 
 #: src/merge/mkvmerge.cpp:127
-msgid "  --timecode-scale <n>     Force the timecode scale factor to n.\n"
-msgstr "  --timecode-scale <n>     Forza il rapporto di scala del timecode a n.\n"
+msgid "  --timestamp-scale <n>    Force the timestamp scale factor to n.\n"
+msgstr "  --timestamp-scale <n>    Forza il rapporto di scala del timestamp a n.\n"
 
 #: src/merge/mkvmerge.cpp:239
-msgid "  --timecodes <TID:file>   Read the timecodes to be used from a file.\n"
-msgstr "  --timecodes <TID:file>   Legge i timecode da usare da un file.\n"
+msgid "  --timestamps <TID:file>  Read the timestamps to be used from a file.\n"
+msgstr "  --timestamps <TID:file>  Legge i timestamp da usare da un file.\n"
 
 #: src/merge/mkvmerge.cpp:88
 msgid "  --title <title>          Title for this destination file.\n"
@@ -890,17 +890,17 @@ msgstr "  -w, --webm               Crea un file compatibile WebM.\n"
 #: src/merge/mkvmerge.cpp:213
 msgid ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
-"                           Synchronize, adjust the track's timecodes with\n"
+"                           Synchronize, adjust the track's timestamps with\n"
 "                           the id TID by 'd' ms.\n"
-"                           'o/p': Adjust the timecodes by multiplying with\n"
+"                           'o/p': Adjust the timestamps by multiplying with\n"
 "                           'o/p' to fix linear drifts. 'p' defaults to\n"
 "                           1 if omitted. Both 'o' and 'p' can be\n"
 "                           floating point numbers.\n"
 msgstr ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
-"                          Sincronizza, adatta il timecode delle tracce con\n"
+"                          Sincronizza, adatta il timestamp delle tracce con\n"
 "                           l'id TID di 'd' ms.\n"
-"                           'o/p': adatta il timecode per multipli di\n"
+"                           'o/p': adatta il timestamp per multipli di\n"
 "                           'o/p' per fissare derive lineari. 'p' predefinito a\n"
 "                           1 se omesso. Entrambi 'o' e 'p' possono essere\n"
 "                           numeri decimali.\n"
@@ -1201,18 +1201,18 @@ msgstr[1] "%1% byte"
 
 #: src/info/mkvinfo.cpp:204
 #, boost-format
-msgid "%1% frame, track %2%, timecode %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"
-msgstr "Frame %1%, traccia %2%, timecode %3% (%4%), durata %|5$.3f|, dimensione %6%, adler 0x%|7$08x|%8%%9%\n"
+msgid "%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"
+msgstr "Frame %1%, traccia %2%, timestamp %3% (%4%), durata %|5$.3f|, dimensione %6%, adler 0x%|7$08x|%8%%9%\n"
 
 #: src/info/mkvinfo.cpp:209
 #, boost-format
-msgid "%1% frame, track %2%, timecode %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"
-msgstr "Frame %1%, traccia %2%, timecode %3% (%4%), dimensione %5%, adler 0x%|6$08x|%7%\n"
+msgid "%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"
+msgstr "Frame %1%, traccia %2%, timestamp %3% (%4%), dimensione %5%, adler 0x%|6$08x|%7%\n"
 
 #: src/info/mkvinfo.cpp:205
 #, boost-format
-msgid "%1% frame, track %2%, timecode %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"
-msgstr "Frame %1%, traccia %2%, timecode %3% (%4%), dimensione %5%, adler 0x%|6$08x|%7%%8%\n"
+msgid "%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"
+msgstr "Frame %1%, traccia %2%, timestamp %3% (%4%), dimensione %5%, adler 0x%|6$08x|%7%%8%\n"
 
 #: src/common/strings/formatting.cpp:315
 #, boost-format
@@ -2322,8 +2322,8 @@ msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' - numero file non specificato.\n"
 
 #: src/merge/mkvmerge.cpp:1904
-msgid "'--timecode-scale' was used more than once.\n"
-msgstr "'--timecode-scale' è stato usato più di una volta.\n"
+msgid "'--timestamp-scale' was used more than once.\n"
+msgstr "'--timestamp-scale' è stato usato più di una volta.\n"
 
 #: src/merge/mkvmerge.cpp:2314
 msgid "'--title' lacks the title.\n"
@@ -2510,8 +2510,8 @@ msgstr "Un elenco di numeri. separato da virgole. di frame/campi dopo cui suddiv
 
 #: src/mkvtoolnix-gui/merge/output.cpp:373
 #, no-c-format
-msgid "A comma-separated list of timecode ranges of content to keep."
-msgstr "Una lista separata da virgole di intervalli timecode da mantenere."
+msgid "A comma-separated list of timestamp ranges of content to keep."
+msgstr "Una lista separata da virgole di intervalli timestamp da mantenere."
 
 #: src/input/r_matroska.cpp:765
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
@@ -2919,8 +2919,8 @@ msgstr "Dopo dimensione destinazione"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
-msgid "After specific timecodes"
-msgstr "Dopo specifici timecode"
+msgid "After specific timestamps"
+msgstr "Dopo specifici timestamp"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:321
 msgid "After the job &queue has stopped"
@@ -3365,8 +3365,8 @@ msgstr "Bit per campione, molto usato per PCM."
 
 #: src/info/mkvinfo.cpp:188
 #, boost-format
-msgid "Block (track number %1%, %2% frame(s), timecode %|3$.3f|s = %4%)"
-msgstr "Blocco (numero traccia %1%, %2% frame, timecode %|3$.3f|s = %4%)"
+msgid "Block (track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%)"
+msgstr "Blocco (numero traccia %1%, %2% frame, timestamp %|3$.3f|s = %4%)"
 
 #: src/info/mkvinfo.cpp:202
 #, boost-format
@@ -3474,8 +3474,8 @@ msgstr "In parti in base al numero di frame/campi"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:144
 #, no-c-format
-msgid "By parts based on timecodes"
-msgstr "In parti in base al timecode"
+msgid "By parts based on timestamps"
+msgstr "In parti in base al timestamp"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:318
 msgid "C&onfiguration active"
@@ -3531,8 +3531,8 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #: src/output/p_mpeg4_p2.cpp:111
-msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timecodes nor a number of frames per second.\n"
-msgstr "Impossibile convertire frame video non nativi MPEG4 se il contenitore sorgente non fornisce nessun timecode o un numero di frame per secondo\n"
+msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timestamps nor a number of frames per second.\n"
+msgstr "Impossibile convertire frame video non nativi MPEG4 se il contenitore sorgente non fornisce nessun timestamp o un numero di frame per secondo\n"
 
 #: src/extract/xtr_vobsub.cpp:85
 #, boost-format
@@ -3791,8 +3791,8 @@ msgstr "Precedente dimensione segmento: %1%"
 #: src/extract/tracks.cpp:452
 #: src/info/mkvinfo.cpp:211
 #, boost-format
-msgid "Cluster timecode: %|1$.3f|s"
-msgstr "Timecode segmento: %|1$.3f|s"
+msgid "Cluster timestamp: %|1$.3f|s"
+msgstr "Timestamp segmento: %|1$.3f|s"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:45
@@ -4044,8 +4044,8 @@ msgstr "Impossibile aprire il file '%1%' per la ridirezione verso la destinazion
 
 #: src/extract/timestamps_v2.cpp:127
 #, boost-format
-msgid "Could not open the timecode file '%1%' for writing (%2%).\n"
-msgstr "Impossibile aprire il file timecode '%1%' in scrittura (%2%).\n"
+msgid "Could not open the timestamp file '%1%' for writing (%2%).\n"
+msgstr "Impossibile aprire il file timestamp '%1%' in scrittura (%2%).\n"
 
 #: src/common/xml/ebml_converter.cpp:252
 #, boost-format
@@ -4841,8 +4841,8 @@ msgstr "Ogni intervallo consiste in un numero iniziale/finale di frame/campo con
 
 #: src/mkvtoolnix-gui/merge/output.cpp:375
 #, no-c-format
-msgid "Each range consists of a start and end timecode with a '-' in the middle, e.g. '00:01:15-00:03:20'."
-msgstr "Ogni intervallo consiste in un timecode di inizio e uno di fine con un '-' nel mezzo, es. '00:01:15-00:03:20'."
+msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
+msgstr "Ogni intervallo consiste in un timestamp di inizio e uno di fine con un '-' nel mezzo, es. '00:01:15-00:03:20'."
 
 #: src/info/mkvinfo.cpp:185
 #, boost-format
@@ -4968,8 +4968,8 @@ msgstr "Errore nell'esecuzione di mkvmerge"
 
 #: src/input/subtitles.cpp:135
 #, boost-format
-msgid "Error in line %1%: expected a SRT timecode line but found something else. Aborting this file.\n"
-msgstr "Errore nella linea %1%: atteso una linea timecode SRT ma invece trovato altro. File ignorato.\n"
+msgid "Error in line %1%: expected a SRT timestamp line but found something else. Aborting this file.\n"
+msgstr "Errore nella linea %1%: atteso una linea timestamp SRT ma invece trovato altro. File ignorato.\n"
 
 #: src/input/subtitles.cpp:126
 #, boost-format
@@ -5414,8 +5414,8 @@ msgstr "Per una spiegazione dettagliata del collegamento file/segmento e di ques
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
 #, no-c-format
-msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timecode scale factor so that all timecodes and durations have a precision of one sample."
-msgstr "Per i file che non contengono una traccia video ma almeno una traccia video mkvmerge sceglierà automaticamente un fattore di scala timecode in modo che tutti i timecode e le durate avranno la precisione dell'esempio."
+msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
+msgstr "Per i file che non contengono una traccia video ma almeno una traccia video mkvmerge sceglierà automaticamente un fattore di scala timestamp in modo che tutti i timestamp e le durate avranno la precisione dell'esempio."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
 #, no-c-format
@@ -5477,8 +5477,8 @@ msgstr "Forza la durata predefinita o il numero di frame per secondo per una tra
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
 #, no-c-format
-msgid "Forces the timecode scale factor to the given value."
-msgstr "Forza il fattore di scala timecode ad un valore definito."
+msgid "Forces the timestamp scale factor to the given value."
+msgstr "Forza il fattore di scala timestamp ad un valore definito."
 
 #: src/mpegparser/M2VParser.cpp:448
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
@@ -5759,8 +5759,8 @@ msgstr "Se in un intervallo il numero iniziale è prefissato da un '+' il suo co
 
 #: src/mkvtoolnix-gui/merge/output.cpp:378
 #, no-c-format
-msgid "If a range's start timecode is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
-msgstr "Se l'intervallo del timecode è prefissato da un '+' il suo contenuto verrà sovrascritto nello stesso file dal precedente intervallo. Altrimenti verrà creato un nuovo file per questo intervallo."
+msgid "If a range's start timestamp is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
+msgstr "Se l'intervallo del timestamp è prefissato da un '+' il suo contenuto verrà sovrascritto nello stesso file dal precedente intervallo. Altrimenti verrà creato un nuovo file per questo intervallo."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:394
 #, no-c-format
@@ -5769,8 +5769,8 @@ msgstr "Se manca il numero iniziale verrà usato il numero finale dell'intervall
 
 #: src/mkvtoolnix-gui/merge/output.cpp:376
 #, no-c-format
-msgid "If a start timecode is left out then the previous range's end timecode is used, or the start of the file if there was no previous range."
-msgstr "Se è usato il timecode iniziale è tralasciato rispetto al precedente intervallo fine timecode, o l'inizio del file non aveva un precedente intervallo."
+msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
+msgstr "Se è usato il timestamp iniziale è tralasciato rispetto al precedente intervallo fine timestamp, o l'inizio del file non aveva un precedente intervallo."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:221
 #, no-c-format
@@ -5986,8 +5986,8 @@ msgstr "Se le tracce sono note per essere presenti ma non sono state trovate, la
 
 #: src/mkvtoolnix-gui/merge/output.cpp:367
 #, no-c-format
-msgid "If two or more timecodes are used then you have to separate them with commas."
-msgstr "Se sono usati due o più timecode vanno separati con virgole."
+msgid "If two or more timestamps are used then you have to separate them with commas."
+msgstr "Se sono usati due o più timestamp vanno separati con virgole."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:421
 #, no-c-format
@@ -6224,8 +6224,8 @@ msgstr "Formato non valido per '--split' in '--split %1%'.\n"
 
 #: src/extract/xtr_textsubs.cpp:189
 #, boost-format
-msgid "Invalid format for a SSA line ('%1%') at timecode %2%: The first field is not an integer. This entry will be skipped.\n"
-msgstr "Formato non valido per la linea SSA ('%1%') al timecode %2%. Il primo campo non è un intero. Questo elemento verrà ignorato.\n"
+msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: The first field is not an integer. This entry will be skipped.\n"
+msgstr "Formato non valido per la linea SSA ('%1%') al timestamp %2%. Il primo campo non è un intero. Questo elemento verrà ignorato.\n"
 
 #: src/common/strings/parsing.cpp:147
 msgid "Invalid format: At least minutes and seconds have to be given, but no colon was found"
@@ -6338,8 +6338,8 @@ msgid "Invalid start frame/field number for '--split' in '--split %1%' (current 
 msgstr "Numero iniziale per frame/campo non valido per '--split' in '--split %1%' (parte attuale: %2%). Il numero iniziale deve essere maggiore o uguale al numero finale della parte precedente.\n"
 
 #: src/input/r_usf.cpp:219
-msgid "Invalid start or stop timecode"
-msgstr "Timecode inizio o fine non valido"
+msgid "Invalid start or stop timestamp"
+msgstr "Timestamp inizio o fine non valido"
 
 #: src/common/split_arg_parsing.cpp:53
 #, boost-format
@@ -6614,19 +6614,19 @@ msgstr "Sinistra"
 
 #: src/merge/timestamp_factory.cpp:357
 #, boost-format
-msgid "Line %1% of the timecode file '%2%' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
-msgstr "La linea %1% del file timecode '%2%' contiene dati inconsistenti (es. durata o FPS minori di zero).\n"
+msgid "Line %1% of the timestamp file '%2%' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
+msgstr "La linea %1% del file timestamp '%2%' contiene dati inconsistenti (es. durata o FPS minori di zero).\n"
 
 #: src/merge/timestamp_factory.cpp:120
 #, boost-format
-msgid "Line %1% of the timecode file '%2%' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
-msgstr "La linea %1% del file timecode '%2%' contiene dati inconsistenti (es. numero frame iniziale maggiore del frame finale, o alcuni valori minori di zero).\n"
+msgid "Line %1% of the timestamp file '%2%' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
+msgstr "La linea %1% del file timestamp '%2%' contiene dati inconsistenti (es. numero frame iniziale maggiore del frame finale, o alcuni valori minori di zero).\n"
 
 #: src/merge/timestamp_factory.cpp:115
 #: src/merge/timestamp_factory.cpp:350
 #, boost-format
-msgid "Line %1% of the timecode file '%2%' could not be parsed.\n"
-msgstr "La linea %1% del file timecode '%2% non può essere analizzata.\n"
+msgid "Line %1% of the timestamp file '%2%' could not be parsed.\n"
+msgstr "La linea %1% del file timestamp '%2% non può essere analizzata.\n"
 
 #: src/input/subtitles.cpp:199
 #, boost-format
@@ -6646,8 +6646,8 @@ msgstr "Linea %1%: la linea sembra un sottotitolo ma il formato non è stato ric
 
 #: src/input/r_vobsub.cpp:287
 #, boost-format
-msgid "Line %1%: The line seems to be a subtitle entry but the timecode was negative even after adding the track delay. Negative timecodes are not supported in Matroska. This entry will be skipped.\n"
-msgstr "Linea %1%: questa linea sembra un sottotitolo ma il timecode è negativo anche dopo aver aggiunto il ritardo traccia. Un timecode negativo non è supportato dallo standard Matroska. Questo elemento verrà ignorato.\n"
+msgid "Line %1%: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
+msgstr "Linea %1%: questa linea sembra un sottotitolo ma il timestamp è negativo anche dopo aver aggiunto il ritardo traccia. Un timestamp negativo non è supportato dallo standard Matroska. Questo elemento verrà ignorato.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 msgid "Link files"
@@ -7366,8 +7366,8 @@ msgstr "Normalmente mkvmerge per le tracce sottotitoli con alcuni codec appliche
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
 #, no-c-format
-msgid "Normally mkvmerge will use a value of 1000000 which means that timecodes and durations will have a precision of 1ms."
-msgstr "Nomalmente mkvmerge userà un valore di 1000000 che significa che i timecode e le durate avranno una precisione di 1ms."
+msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
+msgstr "Nomalmente mkvmerge userà un valore di 1000000 che significa che i timestamp e le durate avranno una precisione di 1ms."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:222
 #, no-c-format
@@ -8807,8 +8807,8 @@ msgstr "Seleziona file tag"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:959
 #, no-c-format
-msgid "Select timecode file"
-msgstr "Seleziona file timecode"
+msgid "Select timestamp file"
+msgstr "Seleziona file timestamp"
 
 #: src/mkvtoolnix-gui/forms/util/side_by_side_multi_select.h:129
 msgid "Selected:"
@@ -9057,8 +9057,8 @@ msgstr "BloccoSemplice"
 
 #: src/info/mkvinfo.cpp:207
 #, boost-format
-msgid "SimpleBlock (%1%track number %2%, %3% frame(s), timecode %|4$.3f|s = %5%)"
-msgstr "SimpleBlock (%1%traccia numero %2%, %3% frame, timecode %|4$.3f|s = %5%)"
+msgid "SimpleBlock (%1%track number %2%, %3% frame(s), timestamp %|4$.3f|s = %5%)"
+msgstr "SimpleBlock (%1%traccia numero %2%, %3% frame, timestamp %|4$.3f|s = %5%)"
 
 #: src/mpegparser/M2VParser.cpp:399
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
@@ -9176,8 +9176,8 @@ msgstr "Suddivisione"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:415
 #, no-c-format
-msgid "Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed."
-msgstr "La divisione avverrà appena prima del primo frame chiave in cui il timecode è uguale o maggiore del primo timecode per il capitolo che è nell'elenco."
+msgid "Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed."
+msgstr "La divisione avverrà appena prima del primo frame chiave in cui il timestamp è uguale o maggiore del primo timestamp per il capitolo che è nell'elenco."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:622
 msgid "Sta&rt all pending jobs"
@@ -9425,8 +9425,8 @@ msgstr "L'intestazione FLAC non può essere analizzata: struttura info flusso no
 
 #: src/output/p_generic_video.cpp:74
 #, boost-format
-msgid "The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n"
-msgstr "Il FPS è 0.0 ma il lettore non ha fornito un timecode per il pacchetto. %1%\n"
+msgid "The FPS is 0.0 but the reader did not provide a timestamp for a packet. %1%\n"
+msgstr "Il FPS è 0.0 ma il lettore non ha fornito un timestamp per il pacchetto. %1%\n"
 
 #: src/merge/mkvmerge.cpp:1460
 #, boost-format
@@ -9625,8 +9625,8 @@ msgid "The argument '%1%' to '%2%' is invalid: too many colons in element '%3%'.
 msgstr "L'argomento '%1%' in '%2%' non è valido: troppe virgole nell'elemento '%3%'.\n"
 
 #: src/merge/mkvmerge.cpp:1908
-msgid "The argument to '--timecode-scale' must be a number.\n"
-msgstr "L'argomento '--timecode-scale' deve essere un numero.\n"
+msgid "The argument to '--timestamp-scale' must be a number.\n"
+msgstr "L'argomento '--timestamp-scale' deve essere un numero.\n"
 
 #: src/extract/attachments.cpp:114
 #, boost-format
@@ -9758,8 +9758,8 @@ msgstr "Le impostazioni attuali di multiplexing verranno chiuse."
 
 #: src/merge/generic_packetizer.cpp:1347
 #, boost-format
-msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
-msgstr "Il timecode del pacchetto attuale è più piccolo del pacchetto precedente. Questo normalmente significa che il file sorgente è un file Matroska non creato correttamente al 100%%. I timecode di tutti i pacchetti verranno adattati di %1%ms per evitare qualsiasi perdita di dati. Questo potrebbe comportare una desincronizzazione audio/video, che può essere corretta con l'opzione \"--sync\" di mkvmerge. Se stai gia usando \"--sync\" e ottieni comuqnue la notifica NON ti preoccupare - questo è normale. Se questo errore si verifica spesso per una traccia in particolare probabilmente il file è danneggiato, o mkvmerge ha un bug. In questo caso contatta l'autore Moritz Bunkus <moritz@bunkus.org>.\n"
+msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
+msgstr "Il timestamp del pacchetto attuale è più piccolo del pacchetto precedente. Questo normalmente significa che il file sorgente è un file Matroska non creato correttamente al 100%%. I timestamp di tutti i pacchetti verranno adattati di %1%ms per evitare qualsiasi perdita di dati. Questo potrebbe comportare una desincronizzazione audio/video, che può essere corretta con l'opzione \"--sync\" di mkvmerge. Se stai gia usando \"--sync\" e ottieni comuqnue la notifica NON ti preoccupare - questo è normale. Se questo errore si verifica spesso per una traccia in particolare probabilmente il file è danneggiato, o mkvmerge ha un bug. In questo caso contatta l'autore Moritz Bunkus <moritz@bunkus.org>.\n"
 
 #: src/common/property_element.cpp:110
 msgid "The date the file was created."
@@ -9855,7 +9855,7 @@ msgstr "Non può essere analizzato il punto finale: %1"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:849
 #, no-c-format
 msgid "The end time must be greater than the start time."
-msgstr "Il tempo finale deve essere maggiore del timecode iniziale."
+msgstr "Il tempo finale deve essere maggiore del timestamp iniziale."
 
 #: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
@@ -10133,8 +10133,8 @@ msgstr "Il file che hai cercato di aprire (%1) non è un nè un file Matroska n�
 
 #: src/common/kax_file.cpp:52
 #, boost-format
-msgid "The first cluster timecode after the resync is %1%.\n"
-msgstr "Il timecode del primo cluster dopo la risincronizzazione è %1%.\n"
+msgid "The first cluster timestamp after the resync is %1%.\n"
+msgstr "Il timestamp del primo cluster dopo la risincronizzazione è %1%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1762
 msgid "The first destination file only"
@@ -10194,8 +10194,8 @@ msgid "The generated destination file name has the same base name as the source 
 msgstr "Il nome file destinazione generato ha lo stessa base del nome file sorgente ma con una estensione basata sul tipo di traccia presente nel file."
 
 #: src/merge/mkvmerge.cpp:1914
-msgid "The given timecode scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
-msgstr "Il fattore di scala del timecode fornito è fuori dei valori validi (1...10000000 o -1 per 'campione di precisione anche se la traccia video è presente').\n"
+msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
+msgstr "Il fattore di scala del timestamp fornito è fuori dei valori validi (1...10000000 o -1 per 'campione di precisione anche se la traccia video è presente').\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:177
 #, no-c-format
@@ -10253,8 +10253,8 @@ msgstr "Le lingue nell'elenco 'selezionate' verranno visualizzate nel programma 
 
 #: src/common/kax_file.cpp:215
 #, boost-format
-msgid "The last timecode processed before the error was encountered was %1%.\n"
-msgstr "L'ultimo timecode elaborato, prima dell'errrore, era %1%.\n"
+msgid "The last timestamp processed before the error was encountered was %1%.\n"
+msgstr "L'ultimo timestamp elaborato, prima dell'errrore, era %1%.\n"
 
 #: src/propedit/change.cpp:221
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
@@ -10267,8 +10267,8 @@ msgstr "Le lettere 'G', 'M', 'K' sono usate per indicare rispettivamente giga/me
 
 #: src/merge/timestamp_factory.cpp:214
 #, boost-format
-msgid "The line %1% of the timecode file '%2%' does not contain a valid floating point number.\n"
-msgstr "La linea %1% del timecode '%2%' non contiene un numero in virgola mobile valido.\n"
+msgid "The line %1% of the timestamp file '%2%' does not contain a valid floating point number.\n"
+msgstr "La linea %1% del timestamp '%2%' non contiene un numero in virgola mobile valido.\n"
 
 #: src/common/translation.cpp:349
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
@@ -10368,8 +10368,8 @@ msgstr "Il numero dei canali delle due tracce audio è differente: %1% e %2%"
 
 #: src/merge/timestamp_factory.cpp:270
 #, boost-format
-msgid "The number of external timecodes %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
-msgstr "Il numero dei timecode esterni %1% è più piccolo del numero dei frame in questa traccia. I frame rimanenti di questa traccia non verramo marchiati temporalmente come ci si aspetta. mkvmerge potrebbe anche bloccarsi.\n"
+msgid "The number of external timestamps %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
+msgstr "Il numero dei timestamp esterni %1% è più piccolo del numero dei frame in questa traccia. I frame rimanenti di questa traccia non verramo marchiati temporalmente come ci si aspetta. mkvmerge potrebbe anche bloccarsi.\n"
 
 #: src/common/property_element.cpp:155
 msgid ""
@@ -10556,8 +10556,8 @@ msgid "The settings file '%1' contains invalid settings and was not loaded."
 msgstr "Il file impostazioni '%1' contiene impostazioni non valide e non è stato caricato."
 
 #: src/extract/extract_cli_parser.cpp:116
-msgid "The sixth mode finds the timecodes of all blocks for a track and outputs a timecode v2 file with these timecodes."
-msgstr "Il sesto modo cerca i timecode di tutti blocchi e crea un file timecode v2 con tutti questi timecode."
+msgid "The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."
+msgstr "Il sesto modo cerca i timestamp di tutti blocchi e crea un file timestamp v2 con tutti questi timestamp."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:331
 #, no-c-format
@@ -10649,62 +10649,62 @@ msgstr "Il terzo modo estrae gli allegati dal file sorgente."
 
 #: src/merge/timestamp_factory.cpp:64
 #, boost-format
-msgid "The timecode file '%1%' contains an unsupported/unrecognized format (version %2%).\n"
-msgstr "Il file timecode '%1%' contiene un formato sconosciuto/non supportato (versione %2%).\n"
+msgid "The timestamp file '%1%' contains an unsupported/unrecognized format (version %2%).\n"
+msgstr "Il file timestamp '%1%' contiene un formato sconosciuto/non supportato (versione %2%).\n"
 
 #: src/merge/timestamp_factory.cpp:50
 #, boost-format
-msgid "The timecode file '%1%' contains an unsupported/unrecognized format line. The very first line must look like '# timecode format v1'.\n"
-msgstr "Il file timecode '%1%' contiene una linea sconosciuta/non supportata. La prima linea deve essere tipo '# timecode format v1'.\n"
+msgid "The timestamp file '%1%' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"
+msgstr "Il file timestamp '%1%' contiene una linea sconosciuta/non supportata. La prima linea deve essere tipo '# timestamp format v1'.\n"
 
 #: src/merge/timestamp_factory.cpp:33
 #, boost-format
-msgid "The timecode file '%1%' could not be opened for reading.\n"
-msgstr "Il file timecode '%1%' non può essere aperto in lettura.\n"
+msgid "The timestamp file '%1%' could not be opened for reading.\n"
+msgstr "Il file timestamp '%1%' non può essere aperto in lettura.\n"
 
 #: src/merge/timestamp_factory.cpp:88
 #: src/merge/timestamp_factory.cpp:96
 #: src/merge/timestamp_factory.cpp:102
 #: src/merge/timestamp_factory.cpp:304
 #, boost-format
-msgid "The timecode file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n"
-msgstr "Il file timecode '%1%' non contiene una linea 'Assume' valida con il numero predefinito di frame per secondo.\n"
+msgid "The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n"
+msgstr "Il file timestamp '%1%' non contiene una linea 'Assume' valida con il numero predefinito di frame per secondo.\n"
 
 #: src/merge/timestamp_factory.cpp:339
 #, boost-format
-msgid "The timecode file '%1%' does not contain a valid 'Gap' line with the duration of the gap.\n"
-msgstr "Il file timecode '%1%' non contiene una linea 'Gap' valida con la durata del gap.\n"
+msgid "The timestamp file '%1%' does not contain a valid 'Gap' line with the duration of the gap.\n"
+msgstr "Il file timestamp '%1%' non contiene una linea 'Gap' valida con la durata del gap.\n"
 
 #: src/merge/timestamp_factory.cpp:241
 #: src/merge/timestamp_factory.cpp:368
 #, boost-format
-msgid "The timecode file '%1%' does not contain any valid entry.\n"
-msgstr "Il file timecode '%1%' non contiene nessun elemento valido.\n"
+msgid "The timestamp file '%1%' does not contain any valid entry.\n"
+msgstr "Il file timestamp '%1%' non contiene nessun elemento valido.\n"
 
 #: src/merge/timestamp_factory.cpp:217
 #, boost-format
 msgid ""
-"The timecode v2 file '%1%' contains timecodes that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timecode file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timecodes in the timecode file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timecode file with the first timecodes being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n"
+"The timestamp v2 file '%1%' contains timestamps that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timestamp file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timestamps in the timestamp file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timestamp file with the first timestamps being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n"
 "\n"
-"If you really have to specify non-sorted timecodes then use the timecode format v4. It is identical to format v2 but allows non-sorted timecodes.\n"
+"If you really have to specify non-sorted timestamps then use the timestamp format v4. It is identical to format v2 but allows non-sorted timestamps.\n"
 msgstr ""
-"Il file timecode v2 '%1%' contiene timecode non in ordine. Questo a causa di un bug di mkvmerge fino alla versione 1.5.0 (inclusa) questo era necessario se la traccia alla quale il timcode era applicato conteneva B frame. A iniziare da mkvmerge 1.5.1 ciò viene gestito correttamente, e i timecode nel file timecode devono essere ordinati normalmente. Per esempio, la sequenza frame 'IPBBP...' a 25 FPS richiede un file timecode con il primo timecode a '0', '40', '80', '120' ecc e non '0', '120', '40', '80' ecc.\n"
+"Il file timestamp v2 '%1%' contiene timestamp non in ordine. Questo a causa di un bug di mkvmerge fino alla versione 1.5.0 (inclusa) questo era necessario se la traccia alla quale il timcode era applicato conteneva B frame. A iniziare da mkvmerge 1.5.1 ciò viene gestito correttamente, e i timestamp nel file timestamp devono essere ordinati normalmente. Per esempio, la sequenza frame 'IPBBP...' a 25 FPS richiede un file timestamp con il primo timestamp a '0', '40', '80', '120' ecc e non '0', '120', '40', '80' ecc.\n"
 "\n"
-"Se hai vuoi specificare dei timecdoe non ordinati usa il timecode formato v4. È identico al formato v2 ma permette timecode non in ordine.\n"
+"Se hai vuoi specificare dei timecdoe non ordinati usa il timestamp formato v4. È identico al formato v2 ma permette timestamp non in ordine.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:360
 #, no-c-format
-msgid "The timecodes after which a new destination file is started."
-msgstr "I timecode dopo che è stato creato un nuovo file destinazione."
+msgid "The timestamps after which a new destination file is started."
+msgstr "I timestamp dopo che è stato creato un nuovo file destinazione."
 
 #: src/input/r_ogm.cpp:602
-msgid "The timecodes for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
-msgstr "I timecode per questi fliussi sono stati ripristinati nel mezzo del file. Questo non è supportato. Il pacchetto attuale verra scartato.\n"
+msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
+msgstr "I timestamp per questi fliussi sono stati ripristinati nel mezzo del file. Questo non è supportato. Il pacchetto attuale verra scartato.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:361
 #, no-c-format
-msgid "The timecodes refer to the whole stream and not to each individual destination file."
-msgstr "I timecode si riferiscono all'intero stream e non ad ogni singolo file destinazione."
+msgid "The timestamps refer to the whole stream and not to each individual destination file."
+msgstr "I timestamp si riferiscono all'intero stream e non ad ogni singolo file destinazione."
 
 #: src/common/property_element.cpp:109
 msgid "The title for the whole movie."
@@ -10874,8 +10874,8 @@ msgid "This AVC/h.264 track does not start with a key frame. The first %1% frame
 msgstr "Questa traccia AVC/H.264 non inizia con un frame chiave. I primi %1% frame sono stati ignorati.\n"
 
 #: src/output/p_avc_es.cpp:129
-msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timecode file has been provided for it, nor does the source container provide timecodes. The resulting timecodes may not be useful.\n"
-msgstr "Questa informazione di timing della traccia AVC/H264 indica che usa un frame rate variabile. Non avendo indicato una durata predefinita o un file timecode esterno, il contenitore sorgente non contiene timecode. Il timecdoe risultante potrebbe non essere utilizzabile.\n"
+msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
+msgstr "Questa informazione di timing della traccia AVC/H264 indica che usa un frame rate variabile. Non avendo indicato una durata predefinita o un file timestamp esterno, il contenitore sorgente non contiene timestamp. Il timecdoe risultante potrebbe non essere utilizzabile.\n"
 
 #: src/output/p_hevc_es.cpp:97
 #, boost-format
@@ -10908,10 +10908,10 @@ msgstr "Il valore è lo 0.3% della dimensione del file sorgente o 10MB, anche se
 #: src/output/p_ac3.cpp:78
 #: src/output/p_mp3.cpp:71
 #, boost-format
-msgid "This audio track contains %1% byte of invalid data which was skipped before timecode %2%."
-msgid_plural "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%."
-msgstr[0] "Questa traccia audio contiene %1% byte di dati non validi che sono stati ignorati prima del timecode %2%."
-msgstr[1] "Questa traccia audio contiene %1% byte di dati non validi che sono stati ignorati prima del timecode %2%."
+msgid "This audio track contains %1% byte of invalid data which was skipped before timestamp %2%."
+msgid_plural "This audio track contains %1% bytes of invalid data which were skipped before timestamp %2%."
+msgstr[0] "Questa traccia audio contiene %1% byte di dati non validi che sono stati ignorati prima del timestamp %2%."
+msgstr[1] "Questa traccia audio contiene %1% byte di dati non validi che sono stati ignorati prima del timestamp %2%."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:52
 #, no-c-format
@@ -10940,8 +10940,8 @@ msgid "This field is normally set to the date the file is created."
 msgstr "Questo campo è normalmente impostato alla data di creazione del file."
 
 #: src/input/subtitles.cpp:166
-msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
-msgstr "Questo file contiene coordinate nelle linee timecode. Tali coordinate non sono supportate dal formato sottotitoli SRT Matroska. Le coordinate verranno rimosse automaticamente.\n"
+msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
+msgstr "Questo file contiene coordinate nelle linee timestamp. Tali coordinate non sono supportate dal formato sottotitoli SRT Matroska. Le coordinate verranno rimosse automaticamente.\n"
 
 #: src/extract/mkvextract.cpp:65
 #: src/propedit/propedit.cpp:139
@@ -11164,29 +11164,29 @@ msgid "Time slice"
 msgstr "Fetta temporale"
 
 #: src/extract/extract_cli_parser.cpp:114
-msgid "Timecode extraction"
-msgstr "Estrazione timecode"
+msgid "Timestamp extraction"
+msgstr "Estrazione timestamp"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1686
-msgid "Timecode file:"
-msgstr "File timecode:"
+msgid "Timestamp file:"
+msgstr "File timestamp:"
 
 #: src/extract/timestamps_v2.cpp:252
 #: src/info/mkvinfo.cpp:465
 #: src/info/mkvinfo.cpp:1043
 #, boost-format
-msgid "Timecode scale: %1%"
-msgstr "Scala timecode: %1%"
+msgid "Timestamp scale: %1%"
+msgstr "Scala timestamp: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1668
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1682
-msgid "Timecodes and default duration"
-msgstr "Timecode e durata predefinita"
+msgid "Timestamps and default duration"
+msgstr "Timestamp e durata predefinita"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:358
 #, no-c-format
-msgid "Timecodes:"
-msgstr "Timecode:"
+msgid "Timestamps:"
+msgstr "Timestamp:"
 
 #: src/common/property_element.cpp:109
 msgid "Title"
@@ -11284,8 +11284,8 @@ msgstr "Traccia %1%: trovato AAC, ma i dati configurazione del decoder hanno lun
 
 #: src/extract/xtr_textsubs.cpp:361
 #, boost-format
-msgid "Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n"
-msgstr "Traccia %1%: un elemento sottotitolo USF al timecode %2% non è correttamente formattato XML e verrà ignorato.\n"
+msgid "Track %1%: An USF subtitle entry starting at timestamp %2% is not well-formed XML and will be skipped.\n"
+msgstr "Traccia %1%: un elemento sottotitolo USF al timestamp %2% non è correttamente formattato XML e verrà ignorato.\n"
 
 #: src/extract/xtr_avc.cpp:43
 #: src/extract/xtr_hevc.cpp:85
@@ -11552,8 +11552,8 @@ msgstr "Intero senza segno"
 
 #: src/input/r_vobsub.cpp:482
 #, boost-format
-msgid "Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timecode %3%, assuming MPEG2. No further warnings will be printed for this track.\n"
-msgstr "Versione MPEG non supportata: 0x%|1$02x| nel pacchetto %2% per il timecode %3%, assunto MPEG2. Non verranno emessi ulteriori avvisi per questa traccia.\n"
+msgid "Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timestamp %3%, assuming MPEG2. No further warnings will be printed for this track.\n"
+msgstr "Versione MPEG non supportata: 0x%|1$02x| nel pacchetto %2% per il timestamp %3%, assunto MPEG2. Non verranno emessi ulteriori avvisi per questa traccia.\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:179
 #, no-c-format
@@ -11957,8 +11957,8 @@ msgstr "Chiedi prima di s&ovrascrivere elementi esistenti (file, attività, ecc)
 
 #: src/input/subtitles.cpp:211
 #, boost-format
-msgid "Warning in line %1%: The start timecode is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
-msgstr "Attenzione alla linea %1%: il timecode iniziale è più piccolo dell'elemento precedente. Tutti gli elementi di questo file verranno ordinati in base al tempo iniziale.\n"
+msgid "Warning in line %1%: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
+msgstr "Attenzione alla linea %1%: il timestamp iniziale è più piccolo dell'elemento precedente. Tutti gli elementi di questo file verranno ordinati in base al tempo iniziale.\n"
 
 #: src/common/output.cpp:137
 #: src/mkvtoolnix-gui/jobs/job.cpp:278
@@ -12302,8 +12302,8 @@ msgstr "Decompressione Zlib fallita. Risultato: %1%\n"
 #: src/info/mkvinfo.cpp:206
 #: src/info/mkvinfo.cpp:210
 #, boost-format
-msgid "[%1% frame for track %2%, timecode %3%]"
-msgstr "[%1% frame per la traccia %2%, timecode %3%]"
+msgid "[%1% frame for track %2%, timestamp %3%]"
+msgstr "[%1% frame per la traccia %2%, timestamp %3%]"
 
 #: src/output/p_ac3.cpp:220
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
@@ -12715,12 +12715,12 @@ msgid "mkvextract tags <inname> [options]"
 msgstr "mkvextract tags <inname> [opzioni]"
 
 #: src/extract/extract_cli_parser.cpp:120
-msgid "mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_track1.txt"
-msgstr "mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_traccia1.txt"
+msgid "mkvextract timestamps_v2 \"a movie.mkv\" 1:timestamps_track1.txt"
+msgstr "mkvextract timestamps_v2 \"a movie.mkv\" 1:timestamps_traccia1.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
-msgid "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
+msgid "mkvextract timestamps_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
+msgstr "mkvextract timestamps_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:77
 msgid "mkvextract tracks \"a movie.mkv\" 2:audio.ogg -c ISO8859-1 3:subs.srt"
@@ -12790,13 +12790,13 @@ msgstr "mkvmerge non è stato compilato con il supporto FLAC ma la gestione di q
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:79
 #, no-c-format
-msgid "mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it."
-msgstr "mkvmerge normalmente calcola il ritardo implicito in base alla sua presenza e sposta tutti timecode delle tracce in modo relativo."
+msgid "mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."
+msgstr "mkvmerge normalmente calcola il ritardo implicito in base alla sua presenza e sposta tutti timestamp delle tracce in modo relativo."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:83
 #, no-c-format
-msgid "mkvmerge normally removes that last entry if it's timecode is within five seconds of the total duration."
-msgstr "mkvmerge normalmente rimuove l'ultimo elemento se il suo timecode è scritto negli ultimi cinque secondi della durata totale."
+msgid "mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."
+msgstr "mkvmerge normalmente rimuove l'ultimo elemento se il suo timestamp è scritto negli ultimi cinque secondi della durata totale."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:174
 #: src/mkvtoolnix-gui/merge/output.cpp:175
@@ -12988,8 +12988,8 @@ msgid "text subtitles"
 msgstr "sottotitoli testuali"
 
 #: src/merge/mkvmerge.cpp:2838
-msgid "timecodes"
-msgstr "timecode"
+msgid "timestamps"
+msgstr "timestamp"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
@@ -13294,10 +13294,10 @@ msgstr "-- Imposta a nessuno –"
 #~ msgstr "Info"
 
 #~ msgid ""
-#~ "Invalid format for a SSA line ('%1%') at timecode %2%: Too many fields "
+#~ "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields "
 #~ "found (%3% instead of 9). This entry will be skipped.\n"
 #~ msgstr ""
-#~ "Formato non valido per la linea SSA ('%1%') al timecode %2%. Trovati "
+#~ "Formato non valido per la linea SSA ('%1%') al timestamp %2%. Trovati "
 #~ "troppi campi (%3% invece di 9). Questo elemento verrà ignorato.\n"
 
 #~ msgid "Merge"
@@ -13426,21 +13426,21 @@ msgstr "-- Imposta a nessuno –"
 #~ "libera, 1: mantieni rapporto: 2: fisso)."
 
 #~ msgid ""
-#~ "The AVC video track is missing the 'CTTS' atom for frame timecode "
+#~ "The AVC video track is missing the 'CTTS' atom for frame timestamp "
 #~ "offsets. However, AVC/h.264 allows frames to have more than the "
 #~ "traditional one (for P frames) or two (for B frames) references to other "
-#~ "frames. The timecodes for such frames will be out-of-order, and the "
-#~ "'CTTS' atom is needed for getting the timecodes right. As it is missing "
-#~ "the timecodes for this track might be wrong. You should watch the "
+#~ "frames. The timestamps for such frames will be out-of-order, and the "
+#~ "'CTTS' atom is needed for getting the timestamps right. As it is missing "
+#~ "the timestamps for this track might be wrong. You should watch the "
 #~ "resulting file and make sure that it looks like you expected it to.\n"
 #~ msgstr ""
 #~ "Nella traccia video AVC è mancante l'atomo 'CTTS' per l'offset del "
-#~ "timecode del frame. Cionostante, AVC/H.264 permette che i frame hanno "
+#~ "timestamp del frame. Cionostante, AVC/H.264 permette che i frame hanno "
 #~ "possno avere più di uno (P frame) o due (B frame) riferimenti ad altri "
-#~ "frame. Il timecode per questi frame sarà al di fuori, e l'atomo 'CTTS' è "
-#~ "necessario per ottenere il corretto timecode. Se CTTS è mancante i "
-#~ "timecode per questa traccia potrebbero essere errati. Devi controllare il "
-#~ "file risultante e assicurarti che sia come ti aspetti.\n"
+#~ "frame. Il timestamp per questi frame sarà al di fuori, e l'atomo 'CTTS' è "
+#~ "necessario per ottenere il corretto timestamp. Se CTTS è mancante i "
+#~ "timestamp per questa traccia potrebbero essere errati. Devi controllare "
+#~ "il file risultante e assicurarti che sia come ti aspetti.\n"
 
 #~ msgid ""
 #~ "The file '%1%' has unknown type. Please have a look at the supported file "
@@ -13606,11 +13606,11 @@ msgstr "-- Imposta a nessuno –"
 
 #~ msgid ""
 #~ "spu_extraction_duration: Encountered broken SPU packet (next_off < "
-#~ "start_off) at timecode %1%. This packet might be displayed incorrectly or "
-#~ "not at all.\n"
+#~ "start_off) at timestamp %1%. This packet might be displayed incorrectly "
+#~ "or not at all.\n"
 #~ msgstr ""
 #~ "spu_extraction_duration: incontrato un pacchetto SPU corrotto (next_off < "
-#~ "start_off) al timecode %1%. Questo pacchetto potrebbe non essere "
+#~ "start_off) al timestamp %1%. Questo pacchetto potrebbe non essere "
 #~ "visualizzato correttamente in parte o tutto.\n"
 
 #~ msgid "tags"
