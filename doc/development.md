@@ -36,9 +36,9 @@ Directories in alphabetical order:
 Internally all strings are encoded in UTF-8. Strings must be re-coded
 during input/output.
 
-# Timecodes #
+# Timestamps #
 
-All timecodes and durations are stored as `int64_t` variables with
+All timestamps and durations are stored as `int64_t` variables with
 nanosecond precision.
 
 # Outputting messages to the user #
@@ -170,7 +170,7 @@ The reader must return `FILE_STATUS_MOREDATA` if more data is
 available and `FILE_STATUS_DONE` when the end has been reached.
 
 Each data packet is stored in an instance of `packet_c`. If the source
-container provides a timecode then that timecode should be set in the
+container provides a timestamp then that timestamp should be set in the
 packet as well.
 
 ## `create_packetizer(int64_t track_id)` ##

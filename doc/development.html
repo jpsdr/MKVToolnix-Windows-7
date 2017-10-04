@@ -12,7 +12,7 @@
 <ul>
 <li><a><span class="toc-section-number">1</span> File system layout</a></li>
 <li><a><span class="toc-section-number">2</span> Strings &amp; encoding</a></li>
-<li><a><span class="toc-section-number">3</span> Timecodes</a></li>
+<li><a><span class="toc-section-number">3</span> Timestamps</a></li>
 <li><a><span class="toc-section-number">4</span> Outputting messages to the user</a></li>
 <li><a><span class="toc-section-number">5</span> Classes</a><ul>
 <li><a><span class="toc-section-number">5.1</span> General</a></li>
@@ -56,8 +56,8 @@
 </ul>
 <h1><span class="header-section-number">2</span> Strings &amp; encoding</h1>
 <p>Internally all strings are encoded in UTF-8. Strings must be re-coded during input/output.</p>
-<h1><span class="header-section-number">3</span> Timecodes</h1>
-<p>All timecodes and durations are stored as <code>int64_t</code> variables with nanosecond precision.</p>
+<h1><span class="header-section-number">3</span> Timestamps</h1>
+<p>All timestamps and durations are stored as <code>int64_t</code> variables with nanosecond precision.</p>
 <h1><span class="header-section-number">4</span> Outputting messages to the user</h1>
 <p>There are basically four functions that output stuff: <code>mxinfo()</code>, <code>mxverb()</code>, <code>mxwarn()</code> and <code>mxerror()</code>. Each takes either a string or an argument produced by <code>boost::format()</code> (see <a href="http://www.boost.org/doc/libs/1_47_0/libs/format/doc/format.html">the Boost::Format documentation</a> if you're not familiar with it), and <code>mxverb()</code> also takes a verbosity level argument.</p>
 <p><code>mxinfo()</code> is supposed to be used for messages that are always output. Its messages must be translatable by using the <code>_()</code> macro, Example:</p>
@@ -100,7 +100,7 @@ file-&gt;setFilePointer(61, seek_current);</code></pre>
 <p>Requests that the reader reads data for a specific track. mkvmerge uses a pulling model: the core asks each packetizer to provide data. The packetizers in turn ask the reader they've been created from to read data by calling this function.</p>
 <p>If the reader supports arbitrary access to track data (e.g. for AVI and MP4/MOV files) then the reader should only read data for the requested track in order not to consume too much memory. If the file format doesn't allow for direct access to that data then the reader can simply read the next packet regardless which track that packet belongs to. The packetizer will call the reader's <code>read()</code> function as often as necessary until it has enough data.</p>
 <p>The reader must return <code>FILE_STATUS_MOREDATA</code> if more data is available and <code>FILE_STATUS_DONE</code> when the end has been reached.</p>
-<p>Each data packet is stored in an instance of <code>packet_c</code>. If the source container provides a timecode then that timecode should be set in the packet as well.</p>
+<p>Each data packet is stored in an instance of <code>packet_c</code>. If the source container provides a timestamp then that timestamp should be set in the packet as well.</p>
 <h2><span class="header-section-number">6.3</span> <code>create_packetizer(int64_t track_id)</code></h2>
 <p>Has to create a packetizer for the track with the specific ID. This ID is the same number that the user uses on the command line as well as the number used in the call to <code>id_result_track()</code> (see below).</p>
 <p>This function has to verify that the user actually wants this track processed. This is checked with the <code>demuxing_requested()</code> function. Example from the MP3 reader (as the MP3 file format can only contain one track the ID is always 0; see the Matroska reader for more complex examples):</p>
