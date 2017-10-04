@@ -28,7 +28,7 @@ test "split timecodes + appending vs split parts" do
   result = []
   source = "data/mp4/10-DanseMacabreOp.40.m4a"
 
-  merge "--disable-lacing --split timecodes:01:21,01:52,03:07,03:51 #{source}", :output => "#{tmp}-%02d"
+  merge "--disable-lacing --split timestamps:01:21,01:52,03:07,03:51 #{source}", :output => "#{tmp}-%02d"
   result += (1..5).collect { |idx| hash_file "#{tmp}-0#{idx}" }
 
   merge "--disable-lacing #{tmp}-02 + #{tmp}-04", :output => "#{tmp}-appended"

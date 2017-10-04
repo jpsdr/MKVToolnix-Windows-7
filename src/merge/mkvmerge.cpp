@@ -2506,7 +2506,7 @@ parse_args(std::vector<std::string> args) {
       mxwarn(Y("The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"));
       sit++;
 
-    } else if (this_arg == "--timecode-scale") {
+    } else if (mtx::included_in(this_arg, "--timecode-scale", "--timestamp-scale")) {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
@@ -2831,11 +2831,11 @@ parse_args(std::vector<std::string> args) {
       parse_arg_language(next_arg, ti->m_track_names, "track-name", Y("track name"), false, true);
       sit++;
 
-    } else if (this_arg == "--timecodes") {
+    } else if (mtx::included_in(this_arg, "--timecodes", "--timestamps")) {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
-      parse_arg_language(next_arg, ti->m_all_ext_timestamps, "timecodes", Y("timecodes"), false);
+      parse_arg_language(next_arg, ti->m_all_ext_timestamps, this_arg, Y("timecodes"), false);
       sit++;
 
     } else if (this_arg == "--track-order") {
