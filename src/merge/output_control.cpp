@@ -91,32 +91,32 @@ std::vector<append_spec_t> g_append_mapping;
 std::unordered_map<int64_t, generic_packetizer_c *> g_packetizers_by_track_num;
 family_uids_c g_segfamily_uids;
 
-int64_t g_attachment_sizes_first            = 0;
-int64_t g_attachment_sizes_others           = 0;
+int64_t g_attachment_sizes_first                              = 0;
+int64_t g_attachment_sizes_others                             = 0;
 
 kax_info_cptr g_kax_info_chap;
 
 // Variables set by the command line parser.
 std::string g_outfile;
-int64_t g_file_sizes                        = 0;
-int g_max_blocks_per_cluster                = 65535;
-int64_t g_max_ns_per_cluster                = 5000000000ll;
-bool g_write_cues                           = true;
-bool g_cue_writing_requested                = false;
-generic_packetizer_c *g_video_packetizer    = nullptr;
-bool g_write_meta_seek_for_clusters         = false;
-bool g_no_lacing                            = false;
-bool g_no_linking                           = true;
-bool g_use_durations                        = false;
-bool g_no_track_statistics_tags             = false;
-bool g_write_date                           = true;
+int64_t g_file_sizes                                          = 0;
+int g_max_blocks_per_cluster                                  = 65535;
+int64_t g_max_ns_per_cluster                                  = 5000000000ll;
+bool g_write_cues                                             = true;
+bool g_cue_writing_requested                                  = false;
+generic_packetizer_c *g_video_packetizer                      = nullptr;
+bool g_write_meta_seek_for_clusters                           = false;
+bool g_no_lacing                                              = false;
+bool g_no_linking                                             = true;
+bool g_use_durations                                          = false;
+bool g_no_track_statistics_tags                               = false;
+bool g_write_date                                             = true;
 
-double g_timestamp_scale                    = TIMESTAMP_SCALE;
-auto g_timestamp_scale_mode                 = timestamp_scale_mode_e{TIMESTAMP_SCALE_MODE_NORMAL};
+double g_timestamp_scale                                      = TIMESTAMP_SCALE;
+timestamp_scale_mode_e g_timestamp_scale_mode                 = timestamp_scale_mode_e{TIMESTAMP_SCALE_MODE_NORMAL};
 
-float g_video_fps                           = -1.0;
-int g_default_tracks[3]                     = { 0, 0, 0, };
-int g_default_tracks_priority[3]            = { 0, 0, 0, };
+float g_video_fps                                             = -1.0;
+int g_default_tracks[3]                                       = { 0, 0, 0, };
+int g_default_tracks_priority[3]                              = { 0, 0, 0, };
 
 bool g_identifying                                            = false;
 identification_output_format_e g_identification_output_format = identification_output_format_e::text;
