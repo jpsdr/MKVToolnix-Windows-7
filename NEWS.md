@@ -35,7 +35,6 @@
 
 * configure: the checks for libEBML and libMatroska have been fixed to require
   libEBML 1.3.5 and libMatroska 1.4.7 as intended.
-
 * mkvmerge: AAC reader: mkvmerge will now emit an error message for AAC files
   whose header fields imply a sampling frequency or number of channels
   of 0. See #2107.
