@@ -201,7 +201,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("delay",                      m_delay);
   settings.setValue("stretchBy",                  m_stretchBy);
   settings.setValue("defaultDuration",            m_defaultDuration);
-  settings.setValue("timecodes",                  m_timestamps);
+  settings.setValue("timestamps",                 m_timestamps);
   settings.setValue("aspectRatio",                m_aspectRatio);
   settings.setValue("displayWidth",               m_displayWidth);
   settings.setValue("displayHeight",              m_displayHeight);
@@ -246,7 +246,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_delay                      = l.settings.value("delay").toString();
   m_stretchBy                  = l.settings.value("stretchBy").toString();
   m_defaultDuration            = l.settings.value("defaultDuration").toString();
-  m_timestamps                 = l.settings.value("timecodes").toString();
+  m_timestamps                 = l.settings.value("timestamps", l.settings.value("timecodes").toString()).toString();
   m_aspectRatio                = l.settings.value("aspectRatio").toString();
   m_displayWidth               = l.settings.value("displayWidth").toString();
   m_displayHeight              = l.settings.value("displayHeight").toString();
