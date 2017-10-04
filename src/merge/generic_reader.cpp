@@ -308,8 +308,8 @@ generic_reader_c::id_result_container(mtx::id::verbose_info_t const &verbose_inf
   auto type                           = get_format_type();
   m_id_results_container.info         = file_type_t::get_name(type).get_translated();
   m_id_results_container.verbose_info = verbose_info;
-  m_id_results_container.verbose_info.emplace_back("container_type",         static_cast<int>(type));
-  m_id_results_container.verbose_info.emplace_back("is_providing_timecodes", is_providing_timestamps());
+  m_id_results_container.verbose_info.emplace_back("container_type",          static_cast<int>(type));
+  m_id_results_container.verbose_info.emplace_back("is_providing_timestamps", is_providing_timestamps());
 }
 
 void

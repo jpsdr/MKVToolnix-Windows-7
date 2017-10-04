@@ -240,7 +240,7 @@ FileIdentifier::parseChapters(QVariantMap const &obj) {
 // "properties": {
 //   "container_type": 17,
 //   "duration": 71255000000,
-//   "is_providing_timecodes": true,
+//   "is_providing_timestamps": true,
 //   "segment_uid": "a93dd71320097620bc002ac740ac4b50"
 // },
 // "recognized": true,

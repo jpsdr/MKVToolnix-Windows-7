@@ -33,7 +33,7 @@
 //   1. `id`
 //   2. `properties` → `identification_format_version` → `minimum` and `maximum`
 // • adjust the link in `doc/man/mkvmerge.xml`
-#define ID_JSON_FORMAT_VERSION    9
+#define ID_JSON_FORMAT_VERSION    10
 
 struct id_result_t {
   int64_t id;
