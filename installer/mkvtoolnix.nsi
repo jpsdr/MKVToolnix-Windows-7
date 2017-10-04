@@ -170,6 +170,8 @@ Section "Program files" SEC01
   Delete "$INSTDIR\doc\nl\mmg.html"
   Delete "$INSTDIR\doc\uk\mmg.html"
   Delete "$INSTDIR\doc\zh_CN\mmg.html"
+  Delete "$INSTDIR\examples\example-timecodes-v1.txt"
+  Delete "$INSTDIR\examples\example-timecodes-v2.txt"
   Delete "$INSTDIR\locale\cs\LC_MESSAGES\qtbase.qm"
   Delete "$INSTDIR\locale\de\LC_MESSAGES\qtbase.qm"
   Delete "$INSTDIR\locale\fr\LC_MESSAGES\qtbase.qm"
