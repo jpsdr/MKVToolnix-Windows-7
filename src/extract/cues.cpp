@@ -60,7 +60,7 @@ write_cues(std::vector<track_spec_t> const &tracks,
       auto out = mm_file_io_c{track.out_name, MODE_CREATE};
 
       for (auto const &p : track_cue_points) {
-        auto line = (boost::format("timecode=%1% duration=%2% cluster_position=%3% relative_position=%4%\n")
+        auto line = (boost::format("timestamp=%1% duration=%2% cluster_position=%3% relative_position=%4%\n")
                      % format_timestamp(p.timestamp * timestamp_scale, 9)
                      % (p.duration          ? format_timestamp(p.duration.get() * timestamp_scale, 9)      : "-")
                      % (p.cluster_position  ? to_string(p.cluster_position.get() + segment_data_start_pos) : "-")
