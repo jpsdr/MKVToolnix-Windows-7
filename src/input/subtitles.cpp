@@ -132,7 +132,7 @@ srt_parser_c::parse() {
     } else if (STATE_TIME == state) {
       boost::smatch matches;
       if (!boost::regex_search(s, matches, timestamp_re)) {
-        mxwarn_tid(m_file_name, m_tid, boost::format(Y("Error in line %1%: expected a SRT timecode line but found something else. Aborting this file.\n")) % line_number);
+        mxwarn_tid(m_file_name, m_tid, boost::format(Y("Error in line %1%: expected a SRT timestamp line but found something else. Aborting this file.\n")) % line_number);
         break;
       }
 
@@ -163,7 +163,7 @@ srt_parser_c::parse() {
 
       if (boost::regex_search(s, coordinates_re) && !m_coordinates_warning_shown) {
         mxwarn_tid(m_file_name, m_tid,
-                   Y("This file contains coordinates in the timecode lines. "
+                   Y("This file contains coordinates in the timestamp lines. "
                      "Such coordinates are not supported by the Matroska SRT subtitle format. "
                      "The coordinates will be removed automatically.\n"));
         m_coordinates_warning_shown = true;
@@ -208,7 +208,7 @@ srt_parser_c::parse() {
       // of this function, but warn the user that the original order is being
       // changed.
       if (!timestamp_warning_printed && (start < previous_start)) {
-        mxwarn_tid(m_file_name, m_tid, boost::format(Y("Warning in line %1%: The start timecode is smaller than that of the previous entry. "
+        mxwarn_tid(m_file_name, m_tid, boost::format(Y("Warning in line %1%: The start timestamp is smaller than that of the previous entry. "
                                                        "All entries from this file will be sorted by their start time.\n")) % line_number);
         timestamp_warning_printed = true;
       }

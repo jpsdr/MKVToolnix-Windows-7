@@ -140,8 +140,8 @@ Tab::moveOutputFileNameToOutputTab() {
 void
 Tab::retranslateOutputUI() {
   Util::setComboBoxTexts(ui->splitMode,
-                         QStringList{} << QY("Do not split")                << QY("After output size")                     << QY("After output duration")     << QY("After specific timecodes")
-                                       << QY("By parts based on timecodes") << QY("By parts based on frame/field numbers") << QY("After frame/field numbers") << QY("Before chapters"));
+                         QStringList{} << QY("Do not split")                 << QY("After output size")                     << QY("After output duration")     << QY("After specific timestamps")
+                                       << QY("By parts based on timestamps") << QY("By parts based on frame/field numbers") << QY("After frame/field numbers") << QY("Before chapters"));
 
   setupOutputToolTips();
 }
@@ -355,27 +355,27 @@ Tab::onSplitModeChanged(int newMode) {
             << Q("1800s");
 
   } else if (MuxConfig::SplitAfterTimestamps == splitMode) {
-    label    = QY("Timecodes:");
+    label    = QY("Timestamps:");
     tooltip << (Q("%1 %2")
-                .arg(QY("The timecodes after which a new destination file is started."))
-                .arg(QY("The timecodes refer to the whole stream and not to each individual destination file.")))
+                .arg(QY("The timestamps after which a new destination file is started."))
+                .arg(QY("The timestamps refer to the whole stream and not to each individual destination file.")))
             << (Q("%1 %2 %3")
                 .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
                 .arg(QY("You may omit the number of hours 'HH'."))
                 .arg(QY("You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' or none at all.")))
             << (Q("%1 %2")
-                .arg(QY("If two or more timecodes are used then you have to separate them with commas."))
+                .arg(QY("If two or more timestamps are used then you have to separate them with commas."))
                 .arg(QY("The formats can be mixed, too.")))
             << QY("Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes).");
 
   } else if (MuxConfig::SplitByParts == splitMode) {
     label    = QY("Parts:");
-    tooltip << QY("A comma-separated list of timecode ranges of content to keep.")
+    tooltip << QY("A comma-separated list of timestamp ranges of content to keep.")
             << (Q("%1 %2")
-                .arg(QY("Each range consists of a start and end timecode with a '-' in the middle, e.g. '00:01:15-00:03:20'."))
-                .arg(QY("If a start timecode is left out then the previous range's end timecode is used, or the start of the file if there was no previous range.")))
+                .arg(QY("Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."))
+                .arg(QY("If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range.")))
             << QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'.")
-            << QY("If a range's start timecode is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range.");
+            << QY("If a range's start timestamp is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range.");
 
   } else if (MuxConfig::SplitByPartsFrames == splitMode) {
     label    = QY("Parts:");
@@ -412,7 +412,7 @@ Tab::onSplitModeChanged(int newMode) {
     tooltip << (Q("%1 %2")
                 .arg(QY("Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."))
                 .arg(QY("The numbering starts at 1.")))
-            << QY("Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed.")
+            << QY("Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed.")
             << (Q("%1 %2")
                 .arg(QY("A chapter starting at 0s is never considered for splitting and discarded silently."))
                 .arg(QY("This mode only considers the top-most level of chapters across all edition entries.")));

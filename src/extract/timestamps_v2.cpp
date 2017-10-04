@@ -124,7 +124,7 @@ create_timestamp_files(KaxTracks &kax_tracks,
 
     } catch(mtx::mm_io::exception &ex) {
       close_timestamp_files();
-      mxerror(boost::format(Y("Could not open the timecode file '%1%' for writing (%2%).\n")) % tspec.out_name % ex);
+      mxerror(boost::format(Y("Could not open the timestamp file '%1%' for writing (%2%).\n")) % tspec.out_name % ex);
     }
   }
 }
@@ -249,7 +249,7 @@ extract_timestamps(const std::string &file_name,
             KaxTimecodeScale &ktc_scale = *static_cast<KaxTimecodeScale *>(l2);
             ktc_scale.ReadData(es->I_O());
             tc_scale = ktc_scale.GetValue();
-            show_element(l2, 2, boost::format(Y("Timecode scale: %1%")) % tc_scale);
+            show_element(l2, 2, boost::format(Y("Timestamp scale: %1%")) % tc_scale);
           } else
             l2->SkipData(*es, EBML_CONTEXT(l2));
 
@@ -303,7 +303,7 @@ extract_timestamps(const std::string &file_name,
             KaxClusterTimecode &ctc = *static_cast<KaxClusterTimecode *>(l2);
             ctc.ReadData(es->I_O());
             cluster_ts = ctc.GetValue();
-            show_element(l2, 2, boost::format(Y("Cluster timecode: %|1$.3f|s")) % ((float)cluster_ts * (float)tc_scale / 1000000000.0));
+            show_element(l2, 2, boost::format(Y("Cluster timestamp: %|1$.3f|s")) % ((float)cluster_ts * (float)tc_scale / 1000000000.0));
             cluster->InitTimecode(cluster_ts, tc_scale);
 
           } else if (Is<KaxBlockGroup>(l2)) {

@@ -284,8 +284,8 @@ vobsub_reader_c::parse_headers() {
 
       if (0 > entry.timestamp) {
         mxwarn_fn(m_ti.m_fname,
-                  boost::format(Y("Line %1%: The line seems to be a subtitle entry but the timecode was negative even after adding the track "
-                                  "delay. Negative timecodes are not supported in Matroska. This entry will be skipped.\n")) % line_no);
+                  boost::format(Y("Line %1%: The line seems to be a subtitle entry but the timestamp was negative even after adding the track "
+                                  "delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n")) % line_no);
         continue;
       }
 
@@ -479,7 +479,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
         else {
           if (!track->mpeg_version_warning_printed) {
             mxwarn_tid(m_ti.m_fname, track_id,
-                       boost::format(Y("Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timecode %3%, assuming MPEG2. "
+                       boost::format(Y("Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timestamp %3%, assuming MPEG2. "
                                        "No further warnings will be printed for this track.\n"))
                        % c % track->packet_num % format_timestamp(timestamp, 3));
             track->mpeg_version_warning_printed = true;

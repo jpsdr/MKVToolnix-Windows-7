@@ -449,7 +449,7 @@ extract_tracks(const std::string &file_name,
         KaxClusterTimecode *ctc = FindChild<KaxClusterTimecode>(l1);
         if (ctc) {
           uint64_t cluster_ts = ctc->GetValue();
-          show_element(ctc, 2, boost::format(Y("Cluster timecode: %|1$.3f|s")) % ((float)cluster_ts * (float)tc_scale / 1000000000.0));
+          show_element(ctc, 2, boost::format(Y("Cluster timestamp: %|1$.3f|s")) % ((float)cluster_ts * (float)tc_scale / 1000000000.0));
           cluster->InitTimecode(cluster_ts, tc_scale);
         } else
           cluster->InitTimecode(0, tc_scale);

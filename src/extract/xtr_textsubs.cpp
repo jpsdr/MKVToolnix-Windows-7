@@ -186,7 +186,7 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   // Convert the ReadOrder entry so that we can re-order the entries later.
   int num;
   if (!parse_number(fields[0], num)) {
-    mxwarn(boost::format(Y("Invalid format for a SSA line ('%1%') at timecode %2%: The first field is not an integer. This entry will be skipped.\n"))
+    mxwarn(boost::format(Y("Invalid format for a SSA line ('%1%') at timestamp %2%: The first field is not an integer. This entry will be skipped.\n"))
            % s % format_timestamp(f.timestamp * 1000000, 3));
     return;
   }
@@ -358,7 +358,7 @@ xtr_usf_c::finish_track() {
     std::stringstream text_in(text);
     pugi::xml_document subtitle_doc;
     if (!subtitle_doc.load(text_in, pugi::parse_default | pugi::parse_declaration | pugi::parse_doctype | pugi::parse_pi | pugi::parse_comments)) {
-      mxwarn(boost::format(Y("Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n")) % m_tid % format_timestamp(entry.m_start * 1000000, 3));
+      mxwarn(boost::format(Y("Track %1%: An USF subtitle entry starting at timestamp %2% is not well-formed XML and will be skipped.\n")) % m_tid % format_timestamp(entry.m_start * 1000000, 3));
       continue;
     }
 

@@ -22,7 +22,7 @@ my %datapoints = ();
 my $pos        = 0;
 
 while (my $line = <$in>) {
-  next unless ($line =~ m/frame,\s+track\s+(\d+),\s+timecode\s+(\d+).*,\s+size\s+(\d+)/i);
+  next unless ($line =~ m/frame,\s+track\s+(\d+),\s+timestamp\s+(\d+).*,\s+size\s+(\d+)/i);
 
   $datapoints{$1} ||= [];
   push @{ $datapoints{$1} }, [$2, $pos];

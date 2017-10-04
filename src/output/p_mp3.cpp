@@ -68,8 +68,8 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
     m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timestamp_offset) {
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format("%1% %2%\n")
-                 % (boost::format(NY("This audio track contains %1% byte of invalid data which was skipped before timecode %2%.",
-                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timestamp - timestamp_offset))
+                 % (boost::format(NY("This audio track contains %1% byte of invalid data which was skipped before timestamp %2%.",
+                                     "This audio track contains %1% bytes of invalid data which were skipped before timestamp %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timestamp - timestamp_offset))
                  % Y("The audio/video synchronization may have been lost."));
     }));
 }

@@ -216,7 +216,7 @@ usf_reader_c::try_to_parse_timestamp(const char *s) {
   int64_t timestamp;
 
   if (!parse_timestamp(s, timestamp))
-    throw mtx::xml::conversion_x{Y("Invalid start or stop timecode")};
+    throw mtx::xml::conversion_x{Y("Invalid start or stop timestamp")};
 
   return timestamp;
 }

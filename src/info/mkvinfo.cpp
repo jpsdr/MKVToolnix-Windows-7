@@ -181,41 +181,41 @@ size_t s_mkvmerge_track_id = 0;
 void
 init_common_boost_formats() {
   g_common_boost_formats.clear();
-  BF_ADD(Y("(Unknown element: %1%; ID: 0x%2% size: %3%)"));                                                     //  0 -- BF_SHOW_UNKNOWN_ELEMENT
-  BF_ADD(Y("EbmlVoid (size: %1%)"));                                                                            //  1 -- BF_EBMLVOID
-  BF_ADD(Y("length %1%, data: %2%"));                                                                           //  2 -- BF_FORMAT_BINARY_1
-  BF_ADD(Y(" (adler: 0x%|1$08x|)"));                                                                            //  3 -- BF_FORMAT_BINARY_2
-  BF_ADD(Y("Block (track number %1%, %2% frame(s), timecode %|3$.3f|s = %4%)"));                                //  4 -- BF_BLOCK_GROUP_BLOCK_SUMMARY
-  BF_ADD(Y("Frame with size %1%%2%%3%"));                                                                       //  5 -- BF_BLOCK_GROUP_BLOCK_FRAME
-  BF_ADD(Y("Block duration: %1%.%|2$06d|ms"));                                                                  //  6 -- BF_BLOCK_GROUP_DURATION
-  BF_ADD(Y("Reference block: -%1%.%|2$06d|ms"));                                                                //  7 -- BF_BLOCK_GROUP_REFERENCE_1
-  BF_ADD(Y("Reference block: %1%.%|2$06d|ms"));                                                                 //  8 -- BF_BLOCK_GROUP_REFERENCE_2
-  BF_ADD(Y("Reference priority: %1%"));                                                                         //  9 -- BF_BLOCK_GROUP_REFERENCE_PRIORITY
-  BF_ADD(Y("Block virtual: %1%"));                                                                              // 10 -- BF_BLOCK_GROUP_VIRTUAL
-  BF_ADD(Y("Reference virtual: %1%"));                                                                          // 11 -- BF_BLOCK_GROUP_REFERENCE_VIRTUAL
-  BF_ADD(Y("AdditionalID: %1%"));                                                                               // 12 -- BF_BLOCK_GROUP_ADD_ID
-  BF_ADD(Y("Block additional: %1%"));                                                                           // 13 -- BF_BLOCK_GROUP_ADDITIONAL
-  BF_ADD(Y("Lace number: %1%"));                                                                                // 14 -- BF_BLOCK_GROUP_SLICE_LACE
-  BF_ADD(Y("Frame number: %1%"));                                                                               // 15 -- BF_BLOCK_GROUP_SLICE_FRAME
-  BF_ADD(Y("Delay: %|1$.3f|ms"));                                                                               // 16 -- BF_BLOCK_GROUP_SLICE_DELAY
-  BF_ADD(Y("Duration: %|1$.3f|ms"));                                                                            // 17 -- BF_BLOCK_GROUP_SLICE_DURATION
-  BF_ADD(Y("Block additional ID: %1%"));                                                                        // 18 -- BF_BLOCK_GROUP_SLICE_ADD_ID
-  BF_ADD(Y(", position %1%"));                                                                                  // 19 -- BF_BLOCK_GROUP_SUMMARY_POSITION
-  BF_ADD(Y("%1% frame, track %2%, timecode %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n")); // 20 -- BF_BLOCK_GROUP_SUMMARY_WITH_DURATION
-  BF_ADD(Y("%1% frame, track %2%, timecode %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"));                    // 21 -- BF_BLOCK_GROUP_SUMMARY_NO_DURATION
-  BF_ADD(Y("[%1% frame for track %2%, timecode %3%]"));                                                         // 22 -- BF_BLOCK_GROUP_SUMMARY_V2
-  BF_ADD(Y("SimpleBlock (%1%track number %2%, %3% frame(s), timecode %|4$.3f|s = %5%)"));                       // 23 -- BF_SIMPLE_BLOCK_BASICS
-  BF_ADD(Y("Frame with size %1%%2%%3%"));                                                                       // 24 -- BF_SIMPLE_BLOCK_FRAME
-  BF_ADD(Y("%1% frame, track %2%, timecode %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"));                       // 25 -- BF_SIMPLE_BLOCK_SUMMARY
-  BF_ADD(Y("[%1% frame for track %2%, timecode %3%]"));                                                         // 26 -- BF_SIMPLE_BLOCK_SUMMARY_V2
-  BF_ADD(Y("Cluster timecode: %|1$.3f|s"));                                                                     // 27 -- BF_CLUSTER_TIMESTAMP
-  BF_ADD(Y("Cluster position: %1%"));                                                                           // 28 -- BF_CLUSTER_POSITION
-  BF_ADD(Y("Cluster previous size: %1%"));                                                                      // 29 -- BF_CLUSTER_PREVIOUS_SIZE
-  BF_ADD(Y("Codec state: %1%"));                                                                                // 30 -- BF_CODEC_STATE
-  BF_ADD(Y(" at %1%"));                                                                                         // 31 -- BF_AT
-  BF_ADD(Y(" size %1%"));                                                                                       // 32 -- BF_SIZE
-  BF_ADD(Y("Discard padding: %|1$.3f|ms (%2%ns)"));                                                             // 33 -- BF_BLOCK_GROUP_DISCARD_PADDING
-  BF_ADD(Y(" at 0x%|1$x|"));                                                                                    // 34 -- BF_AT_HEX
+  BF_ADD(Y("(Unknown element: %1%; ID: 0x%2% size: %3%)"));                                                      //  0 -- BF_SHOW_UNKNOWN_ELEMENT
+  BF_ADD(Y("EbmlVoid (size: %1%)"));                                                                             //  1 -- BF_EBMLVOID
+  BF_ADD(Y("length %1%, data: %2%"));                                                                            //  2 -- BF_FORMAT_BINARY_1
+  BF_ADD(Y(" (adler: 0x%|1$08x|)"));                                                                             //  3 -- BF_FORMAT_BINARY_2
+  BF_ADD(Y("Block (track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%)"));                                //  4 -- BF_BLOCK_GROUP_BLOCK_SUMMARY
+  BF_ADD(Y("Frame with size %1%%2%%3%"));                                                                        //  5 -- BF_BLOCK_GROUP_BLOCK_FRAME
+  BF_ADD(Y("Block duration: %1%.%|2$06d|ms"));                                                                   //  6 -- BF_BLOCK_GROUP_DURATION
+  BF_ADD(Y("Reference block: -%1%.%|2$06d|ms"));                                                                 //  7 -- BF_BLOCK_GROUP_REFERENCE_1
+  BF_ADD(Y("Reference block: %1%.%|2$06d|ms"));                                                                  //  8 -- BF_BLOCK_GROUP_REFERENCE_2
+  BF_ADD(Y("Reference priority: %1%"));                                                                          //  9 -- BF_BLOCK_GROUP_REFERENCE_PRIORITY
+  BF_ADD(Y("Block virtual: %1%"));                                                                               // 10 -- BF_BLOCK_GROUP_VIRTUAL
+  BF_ADD(Y("Reference virtual: %1%"));                                                                           // 11 -- BF_BLOCK_GROUP_REFERENCE_VIRTUAL
+  BF_ADD(Y("AdditionalID: %1%"));                                                                                // 12 -- BF_BLOCK_GROUP_ADD_ID
+  BF_ADD(Y("Block additional: %1%"));                                                                            // 13 -- BF_BLOCK_GROUP_ADDITIONAL
+  BF_ADD(Y("Lace number: %1%"));                                                                                 // 14 -- BF_BLOCK_GROUP_SLICE_LACE
+  BF_ADD(Y("Frame number: %1%"));                                                                                // 15 -- BF_BLOCK_GROUP_SLICE_FRAME
+  BF_ADD(Y("Delay: %|1$.3f|ms"));                                                                                // 16 -- BF_BLOCK_GROUP_SLICE_DELAY
+  BF_ADD(Y("Duration: %|1$.3f|ms"));                                                                             // 17 -- BF_BLOCK_GROUP_SLICE_DURATION
+  BF_ADD(Y("Block additional ID: %1%"));                                                                         // 18 -- BF_BLOCK_GROUP_SLICE_ADD_ID
+  BF_ADD(Y(", position %1%"));                                                                                   // 19 -- BF_BLOCK_GROUP_SUMMARY_POSITION
+  BF_ADD(Y("%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n")); // 20 -- BF_BLOCK_GROUP_SUMMARY_WITH_DURATION
+  BF_ADD(Y("%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"));                    // 21 -- BF_BLOCK_GROUP_SUMMARY_NO_DURATION
+  BF_ADD(Y("[%1% frame for track %2%, timestamp %3%]"));                                                         // 22 -- BF_BLOCK_GROUP_SUMMARY_V2
+  BF_ADD(Y("SimpleBlock (%1%track number %2%, %3% frame(s), timestamp %|4$.3f|s = %5%)"));                       // 23 -- BF_SIMPLE_BLOCK_BASICS
+  BF_ADD(Y("Frame with size %1%%2%%3%"));                                                                        // 24 -- BF_SIMPLE_BLOCK_FRAME
+  BF_ADD(Y("%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"));                       // 25 -- BF_SIMPLE_BLOCK_SUMMARY
+  BF_ADD(Y("[%1% frame for track %2%, timestamp %3%]"));                                                         // 26 -- BF_SIMPLE_BLOCK_SUMMARY_V2
+  BF_ADD(Y("Cluster timestamp: %|1$.3f|s"));                                                                     // 27 -- BF_CLUSTER_TIMESTAMP
+  BF_ADD(Y("Cluster position: %1%"));                                                                            // 28 -- BF_CLUSTER_POSITION
+  BF_ADD(Y("Cluster previous size: %1%"));                                                                       // 29 -- BF_CLUSTER_PREVIOUS_SIZE
+  BF_ADD(Y("Codec state: %1%"));                                                                                 // 30 -- BF_CODEC_STATE
+  BF_ADD(Y(" at %1%"));                                                                                          // 31 -- BF_AT
+  BF_ADD(Y(" size %1%"));                                                                                        // 32 -- BF_SIZE
+  BF_ADD(Y("Discard padding: %|1$.3f|ms (%2%ns)"));                                                              // 33 -- BF_BLOCK_GROUP_DISCARD_PADDING
+  BF_ADD(Y(" at 0x%|1$x|"));                                                                                     // 34 -- BF_AT_HEX
 }
 
 std::string
@@ -462,7 +462,7 @@ handle_info(EbmlStream *&es,
   for (auto l2 : *m1)
     if (Is<KaxTimecodeScale>(l2)) {
       s_ts_scale = static_cast<KaxTimecodeScale *>(l2)->GetValue();
-      show_element(l2, 2, boost::format(Y("Timecode scale: %1%")) % s_ts_scale);
+      show_element(l2, 2, boost::format(Y("Timestamp scale: %1%")) % s_ts_scale);
 
     } else if (Is<KaxDuration>(l2)) {
       KaxDuration &duration = *static_cast<KaxDuration *>(l2);
@@ -1040,7 +1040,7 @@ handle_tracks(EbmlStream *&es,
           summary.push_back((boost::format(Y("language: %1%"))              % language).str());
 
         } else if (Is<KaxTrackTimecodeScale>(l3))
-          show_element(l3, 3, boost::format(Y("Timecode scale: %1%"))       % static_cast<KaxTrackTimecodeScale *>(l3)->GetValue());
+          show_element(l3, 3, boost::format(Y("Timestamp scale: %1%"))      % static_cast<KaxTrackTimecodeScale *>(l3)->GetValue());
 
         else if (Is<KaxMaxBlockAdditionID>(l3))
           show_element(l3, 3, boost::format(Y("Max BlockAddition ID: %1%")) % static_cast<KaxMaxBlockAdditionID *>(l3)->GetValue());

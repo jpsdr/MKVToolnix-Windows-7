@@ -49,7 +49,7 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
     auto element = read_next_level1_element_internal(wanted_id);
 
     if (report_cluster_timestamp && (-1 != m_timestamp_scale))
-      report(boost::format(Y("The first cluster timecode after the resync is %1%.\n"))
+      report(boost::format(Y("The first cluster timestamp after the resync is %1%.\n"))
              % format_timestamp(FindChildValue<KaxClusterTimecode>(static_cast<KaxCluster *>(element)) * m_timestamp_scale));
 
     return element;
@@ -212,7 +212,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
          % m_in.get_file_name() % m_resync_start_pos);
 
   if (is_cluster_id && (-1 != m_last_timestamp)) {
-    report(boost::format(Y("The last timecode processed before the error was encountered was %1%.\n")) % format_timestamp(m_last_timestamp));
+    report(boost::format(Y("The last timestamp processed before the error was encountered was %1%.\n")) % format_timestamp(m_last_timestamp));
     m_last_timestamp = -1;
   }
 

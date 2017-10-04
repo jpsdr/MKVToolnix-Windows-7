@@ -127,8 +127,8 @@ avc_es_video_packetizer_c::handle_delayed_headers() {
           || (   !m_parser.get_timing_info().fixed_frame_rate
               && (m_parser.get_timing_info().default_duration() < 5000000)))) // 200 fields/s
     mxwarn_tid(m_ti.m_fname, m_ti.m_id, Y("This AVC/h.264 track's timing information indicates that it uses a variable frame rate. "
-                                          "However, no default duration nor an external timecode file has been provided for it, nor does the source container provide timecodes. "
-                                          "The resulting timecodes may not be useful.\n"));
+                                          "However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. "
+                                          "The resulting timestamps may not be useful.\n"));
 
   handle_aspect_ratio();
   handle_actual_default_duration();

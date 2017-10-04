@@ -956,7 +956,7 @@ Tab::onTimestampsChanged(QString newValue) {
 
 void
 Tab::onBrowseTimestamps() {
-  auto fileName = getOpenFileName(QY("Select timecode file"), QY("Text files") + Q(" (*.txt)"), ui->timestamps);
+  auto fileName = getOpenFileName(QY("Select timestamp file"), QY("Text files") + Q(" (*.txt)"), ui->timestamps);
   if (!fileName.isEmpty())
     withSelectedTracks([&fileName](auto &track) { track.m_timestamps = fileName; });
 }

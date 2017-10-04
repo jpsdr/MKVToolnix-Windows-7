@@ -386,7 +386,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
   }
 
   if (!m_timestamps.isEmpty())
-    opt.options << Q("--timecodes") << Q("%1:%2").arg(sid).arg(m_timestamps);
+    opt.options << Q("--timestamps") << Q("%1:%2").arg(sid).arg(m_timestamps);
 
   if (m_fixBitstreamTimingInfo)
     opt.options << Q("--fix-bitstream-timing-information") << Q("%1:1").arg(sid);

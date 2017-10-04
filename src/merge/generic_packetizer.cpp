@@ -1344,9 +1344,9 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
         pack->fref += needed_timestamp_offset;
 
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format(Y("The current packet's timecode is smaller than that of the previous packet. "
+                 boost::format(Y("The current packet's timestamp is smaller than that of the previous packet. "
                                  "This usually means that the source file is a Matroska file that has not been created 100%% correctly. "
-                                 "The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. "
+                                 "The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. "
                                  "This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. "
                                  "If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. "
                                  "If this error happens more than once and you get this message more than once for a particular track "

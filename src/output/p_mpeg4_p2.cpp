@@ -109,7 +109,7 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
 
   } else if (0.0 == m_fps)
     mxerror_tid(m_ti.m_fname, m_ti.m_id, Y("Cannot convert non-native MPEG4 video frames into native ones if the source container "
-                                       "provides neither timecodes nor a number of frames per second.\n"));
+                                       "provides neither timestamps nor a number of frames per second.\n"));
 
   std::vector<video_frame_t> frames;
   mpeg4::p2::find_frame_types(packet->data->get_buffer(), packet->data->get_size(), frames, m_config_data);

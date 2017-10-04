@@ -599,7 +599,7 @@ ogm_reader_c::process_page(ogg_page *og) {
 
   if ((-1 != granulepos) && (granulepos < dmx->last_granulepos)) {
     mxwarn_tid(m_ti.m_fname, dmx->track_id,
-               Y("The timecodes for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"));
+               Y("The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"));
     return;
   }
 

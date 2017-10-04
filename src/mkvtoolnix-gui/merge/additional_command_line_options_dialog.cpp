@@ -44,11 +44,11 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   add(Q("--disable-lacing"),                false, global, { QY("Disables lacing for all tracks."), QY("This will increase the file's size, especially if there are many audio tracks."), QY("Use only for testing.") });
   add(Q("--enable-durations"),              false, global, { QY("Write durations for all blocks."), QY("This will increase file size and does not offer any additional value for players at the moment.") });
   add(Q("--disable-track-statistics-tags"), false, global, { QY("Tells mkvmerge not to write tags with statistics for each track.") });
-  add(Q("--timecode-scale"),                true,  global,
-      { QY("Forces the timecode scale factor to the given value."),
+  add(Q("--timestamp-scale"),               true,  global,
+      { QY("Forces the timestamp scale factor to the given value."),
         QY("You have to enter a value between 1000 and 10000000 or the magic value -1."),
-        QY("Normally mkvmerge will use a value of 1000000 which means that timecodes and durations will have a precision of 1ms."),
-        QY("For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timecode scale factor so that all timecodes and durations have a precision of one sample."),
+        QY("Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."),
+        QY("For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."),
         QY("This causes bigger overhead but allows precise seeking and extraction."),
         QY("If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present.") });
 
@@ -76,11 +76,11 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   add(Q("--engage no_cue_relative_position"),     false, hacks, { QY("Causes mkvmerge not to write 'CueRelativePosition' elements in the cues.") });
   add(Q("--engage no_delay_for_garbage_in_avi"),  false, hacks,
       { QY("Garbage at the start of audio tracks in AVI files is normally used for delaying that track."),
-        QY("mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it."),
+        QY("mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."),
         QY("This option prevents that behavior.") });
   add(Q("--engage keep_last_chapter_in_mpls"),    false, hacks,
       { QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."),
-        QY("mkvmerge normally removes that last entry if it's timecode is within five seconds of the total duration."),
+        QY("mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."),
         QY("Enabling this option causes mkvmerge to keep that last entry.") });
   add(Q("--engage all_i_slices_are_key_frames"),  false, hacks,
       { QY("Some h.264/AVC tracks contain I slices but lack real key frames."),

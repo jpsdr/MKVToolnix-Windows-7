@@ -48,7 +48,7 @@ extract_cli_parser_c::init_parser() {
   add_information(YT("mkvextract attachments <inname> [options] [AID1:out1 [AID2:out2 ...]]"));
   add_information(YT("mkvextract chapters <inname> [options]"));
   add_information(YT("mkvextract cuesheet <inname> [options]"));
-  add_information(YT("mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"));
+  add_information(YT("mkvextract timestamps_v2 <inname> [TID1:out1 [TID2:out2 ...]]"));
   add_information(YT("mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"));
   add_information(YT("mkvextract <-h|-V>"));
 
@@ -111,13 +111,13 @@ extract_cli_parser_c::init_parser() {
 
   add_information(YT("mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"));
 
-  add_section_header(YT("Timecode extraction"));
+  add_section_header(YT("Timestamp extraction"));
 
-  add_information(YT("The sixth mode finds the timecodes of all blocks for a track and outputs a timecode v2 file with these timecodes."));
+  add_information(YT("The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."));
 
   add_section_header(YT("Example"));
 
-  add_information(YT("mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_track1.txt"));
+  add_information(YT("mkvextract timestamps_v2 \"a movie.mkv\" 1:timestamps_track1.txt"));
 
   add_section_header(YT("Cue extraction"));
   add_information(YT("This mode extracts cue information for some tracks to external text files."));

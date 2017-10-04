@@ -124,7 +124,7 @@ set_usage() {
                   "                           information headers.\n");
   usage_text += Y("  --disable-lacing         Do not use lacing.\n");
   usage_text += Y("  --enable-durations       Enable block durations for all blocks.\n");
-  usage_text += Y("  --timecode-scale <n>     Force the timecode scale factor to n.\n");
+  usage_text += Y("  --timestamp-scale <n>    Force the timestamp scale factor to n.\n");
   usage_text += Y("  --disable-track-statistics-tags\n"
                   "                           Do not write tags with track statistics.\n");
   usage_text +=   "\n";
@@ -132,16 +132,16 @@ set_usage() {
   usage_text += Y("  --split <d[K,M,G]|HH:MM:SS|s>\n"
                   "                           Create a new file after d bytes (KB, MB, GB)\n"
                   "                           or after a specific time.\n");
-  usage_text += Y("  --split timecodes:A[,B...]\n"
-                  "                           Create a new file after each timecode A, B\n"
+  usage_text += Y("  --split timestamps:A[,B...]\n"
+                  "                           Create a new file after each timestamp A, B\n"
                   "                           etc.\n");
   usage_text += Y("  --split parts:start1-end1[,[+]start2-end2,...]\n"
-                  "                           Keep ranges of timecodes start-end, either in\n"
+                  "                           Keep ranges of timestamps start-end, either in\n"
                   "                           separate files or append to previous range's file\n"
                   "                           if prefixed with '+'.\n");
   usage_text += Y("  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
                   "                           Same as 'parts:', but 'startN'/'endN' are frame/\n"
-                  "                           field numbers instead of timecodes.\n");
+                  "                           field numbers instead of timestamps.\n");
   usage_text += Y("  --split frames:A[,B...]\n"
                   "                           Create a new file after each frame/field A, B\n"
                   "                           etc.\n");
@@ -158,7 +158,7 @@ set_usage() {
                   "                           appended to another track of the preceding\n"
                   "                           file.\n");
   usage_text += Y("  --append-mode <file|track>\n"
-                  "                           Selects how mkvmerge calculates timecodes when\n"
+                  "                           Selects how mkvmerge calculates timestamps when\n"
                   "                           appending files.\n");
   usage_text += Y("  <file1> + <file2>        Append file2 to file1.\n");
   usage_text += Y("  <file1> +<file2>         Same as \"<file1> + <file2>\".\n");
@@ -211,9 +211,9 @@ set_usage() {
   usage_text += Y("  --no-global-tags         Don't keep global tags from the source file.\n");
   usage_text += Y("  --no-chapters            Don't keep chapters from the source file.\n");
   usage_text += Y("  -y, --sync <TID:d[,o[/p]]>\n"
-                  "                           Synchronize, adjust the track's timecodes with\n"
+                  "                           Synchronize, adjust the track's timestamps with\n"
                   "                           the id TID by 'd' ms.\n"
-                  "                           'o/p': Adjust the timecodes by multiplying with\n"
+                  "                           'o/p': Adjust the timestamps by multiplying with\n"
                   "                           'o/p' to fix linear drifts. 'p' defaults to\n"
                   "                           1 if omitted. Both 'o' and 'p' can be\n"
                   "                           floating point numbers.\n");
@@ -236,7 +236,7 @@ set_usage() {
   usage_text += Y("  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
                   "                           HD extensions instead of copying both the core\n"
                   "                           and the extensions.\n");
-  usage_text += Y("  --timecodes <TID:file>   Read the timecodes to be used from a file.\n");
+  usage_text += Y("  --timestamps <TID:file>  Read the timestamps to be used from a file.\n");
   usage_text += Y("  --default-duration <TID:Xs|ms|us|ns|fps>\n"
                   "                           Force the default duration of a track to X.\n"
                   "                           X can be a floating point number or a fraction.\n");
@@ -1901,17 +1901,17 @@ parse_arg_segmentinfo(const std::string &param,
 static void
 parse_arg_timestamp_scale(const std::string &arg) {
   if (TIMESTAMP_SCALE_MODE_NORMAL != g_timestamp_scale_mode)
-    mxerror(Y("'--timecode-scale' was used more than once.\n"));
+    mxerror(Y("'--timestamp-scale' was used more than once.\n"));
 
   int64_t temp = 0;
   if (!parse_number(arg, temp))
-    mxerror(Y("The argument to '--timecode-scale' must be a number.\n"));
+    mxerror(Y("The argument to '--timestamp-scale' must be a number.\n"));
 
   if (-1 == temp)
     g_timestamp_scale_mode = TIMESTAMP_SCALE_MODE_AUTO;
   else {
     if ((10000000 < temp) || (1 > temp))
-      mxerror(Y("The given timecode scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"));
+      mxerror(Y("The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"));
 
     g_timestamp_scale      = temp;
     g_timestamp_scale_mode = TIMESTAMP_SCALE_MODE_FIXED;
@@ -2506,7 +2506,7 @@ parse_args(std::vector<std::string> args) {
       mxwarn(Y("The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"));
       sit++;
 
-    } else if (mtx::included_in(this_arg, "--timecode-scale", "--timestamp-scale")) {
+    } else if (mtx::included_in(this_arg, "--timestamp-scale", "--timestamp-scale")) {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
@@ -2831,11 +2831,11 @@ parse_args(std::vector<std::string> args) {
       parse_arg_language(next_arg, ti->m_track_names, "track-name", Y("track name"), false, true);
       sit++;
 
-    } else if (mtx::included_in(this_arg, "--timecodes", "--timestamps")) {
+    } else if (mtx::included_in(this_arg, "--timestamps", "--timestamps")) {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
-      parse_arg_language(next_arg, ti->m_all_ext_timestamps, this_arg, Y("timecodes"), false);
+      parse_arg_language(next_arg, ti->m_all_ext_timestamps, this_arg, Y("timestamps"), false);
       sit++;
 
     } else if (this_arg == "--track-order") {

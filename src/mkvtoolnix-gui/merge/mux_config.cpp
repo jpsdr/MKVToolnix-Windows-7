@@ -458,7 +458,7 @@ MuxConfig::buildMkvmergeOptions()
   if (DoNotSplit != m_splitMode) {
     auto mode = SplitAfterSize       == m_splitMode ? Q("size:")
               : SplitAfterDuration   == m_splitMode ? Q("duration:")
-              : SplitAfterTimestamps == m_splitMode ? Q("timecodes:")
+              : SplitAfterTimestamps == m_splitMode ? Q("timestamps:")
               : SplitByParts         == m_splitMode ? Q("parts:")
               : SplitByPartsFrames   == m_splitMode ? Q("parts-frames:")
               : SplitByFrames        == m_splitMode ? Q("frames:")

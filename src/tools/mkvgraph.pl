@@ -27,12 +27,12 @@ sub gather_data {
   my %data     = ();
 
   while (my $line = <$file>) {
-    # P frame, track 1, timecode 501 (00:00:00.501), size 5724, adler 0xb1b79c2f, position 106331
-    next unless ($line =~ m/^(.)\s+frame,\s+track\s+(\d+),\s+timecode\s+(\d+)\s.*?size\s+(\d+),.*?position\s+(\d+)/);
+    # P frame, track 1, timestamp 501 (00:00:00.501), size 5724, adler 0xb1b79c2f, position 106331
+    next unless ($line =~ m/^(.)\s+frame,\s+track\s+(\d+),\s+timestamp\s+(\d+)\s.*?size\s+(\d+),.*?position\s+(\d+)/);
 
-    $data{$2} ||= { map +($_ => []), qw(type timecode size position) };
+    $data{$2} ||= { map +($_ => []), qw(type timestamp size position) };
     push @{ $data{$2}->{type}     }, $type_map{$1};
-    push @{ $data{$2}->{timecode} }, $3;
+    push @{ $data{$2}->{timestamp} }, $3;
     push @{ $data{$2}->{size}     }, $4;
     push @{ $data{$2}->{position} }, $5;
 
@@ -49,6 +49,6 @@ $Data::Dumper::Sortkeys = 1;
 my $data  = gather_data($ARGV[0]);
 my $track = $data->{1};
 
-for (my $i = 0; $i < scalar @{ $track->{timecode} }; $i++) {
-  print "$track->{position}->[$i] $track->{timecode}->[$i]\n";
+for (my $i = 0; $i < scalar @{ $track->{timestamp} }; $i++) {
+  print "$track->{position}->[$i] $track->{timestamp}->[$i]\n";
 }
