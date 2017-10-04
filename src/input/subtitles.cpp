@@ -60,7 +60,6 @@ srt_parser_c::probe(mm_text_io_c *io) {
 
     s = io->getline(100);
     boost::regex timestamp_re(SRT_RE_TIMESTAMP_LINE, boost::regex::perl);
-    boost::smatch matches;
     if (!boost::regex_search(s, timestamp_re))
       return false;
 
