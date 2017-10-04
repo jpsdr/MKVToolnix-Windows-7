@@ -120,7 +120,7 @@ create_timestamp_files(KaxTracks &kax_tracks,
     try {
       mm_io_cptr file = mm_write_buffer_io_c::open(tspec.out_name, 128 * 1024);
       timestamp_extractors.push_back(timestamp_extractor_t(tspec.tid, kt_get_number(*track), file, std::max(kt_get_default_duration(*track), static_cast<int64_t>(0))));
-      file->puts(boost::format("# timecode format v%1%\n") % version);
+      file->puts(boost::format("# timestamp format v%1%\n") % version);
 
     } catch(mtx::mm_io::exception &ex) {
       close_timestamp_files();

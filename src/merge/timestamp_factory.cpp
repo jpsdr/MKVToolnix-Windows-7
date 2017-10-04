@@ -35,7 +35,18 @@ timestamp_factory_c::create(std::string const &file_name,
 
   std::string line;
   int version = -1;
-  if (!in->getline2(line) || !balg::istarts_with(line, "# timecode format v") || !parse_number(&line[strlen("# timecode format v")], version))
+  bool ok     = in->getline2(line);
+  if (ok) {
+    auto format_line_re = boost::regex{"^# *time(?:code|stamp) *format v(\\d+).*", boost::regex::perl};
+    boost::smatch matches;
+
+    if (boost::regex_search(line, matches, format_line_re))
+      ok = parse_number(matches[1].str(), version);
+    else
+      ok = false;
+  }
+
+  if (!ok)
     mxerror(boost::format(Y("The timecode file '%1%' contains an unsupported/unrecognized format line. The very first line must look like '# timecode format v1'.\n"))
             % file_name);
 
