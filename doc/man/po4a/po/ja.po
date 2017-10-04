@@ -254,9 +254,9 @@ msgstr "説明"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:62
 #, fuzzy
-#| msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells &mkvextract; what to extract. Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link> and <link linkend=\"mkvextract.description.timecodes_v2\">timecodes</link>.  The second argument is the name of the source file. It must be a &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode."
-msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells &mkvextract; what to extract. Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link>, <link linkend=\"mkvextract.description.timecodes_v2\">timecodes</link> and <link linkend=\"mkvextract.description.cues\">cues</link>.  The second argument is the name of the source file. It must be a &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode."
-msgstr "&matroska; ファイルの特定の部分を、他の有用なフォーマットで抽出します。最初の<option>mode</option>引数は、&mkvextract; に何を抽出すべきかを指示します。現在サポートされているのは、<link linkend=\"mkvextract.description.tracks\">トラック</link>、<link linkend=\"mkvextract.description.tags\">タグ</link>、<link linkend=\"mkvextract.description.attachments\">添付ファイル</link>、<link linkend=\"mkvextract.description.chapters\">チャプタ</link>、<link linkend=\"mkvextract.description.cuesheets\">CUEシート</link> 及び <link linkend=\"mkvextract.description.timecodes_v2\">タイムコード</link>の抽出です。二個目の引数はソースファイルの名前です。これは&matroska;ファイルでなければなりません。続く全ての引数は、オプションと抽出設定です。これらは指定されたmodeに依存します。"
+#| msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells &mkvextract; what to extract. Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link> and <link linkend=\"mkvextract.description.timestamps_v2\">timestamps</link>.  The second argument is the name of the source file. It must be a &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode."
+msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells &mkvextract; what to extract. Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link>, <link linkend=\"mkvextract.description.timestamps_v2\">timestamps</link> and <link linkend=\"mkvextract.description.cues\">cues</link>.  The second argument is the name of the source file. It must be a &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode."
+msgstr "&matroska; ファイルの特定の部分を、他の有用なフォーマットで抽出します。最初の<option>mode</option>引数は、&mkvextract; に何を抽出すべきかを指示します。現在サポートされているのは、<link linkend=\"mkvextract.description.tracks\">トラック</link>、<link linkend=\"mkvextract.description.tags\">タグ</link>、<link linkend=\"mkvextract.description.attachments\">添付ファイル</link>、<link linkend=\"mkvextract.description.chapters\">チャプタ</link>、<link linkend=\"mkvextract.description.cuesheets\">CUEシート</link> 及び <link linkend=\"mkvextract.description.timestamps_v2\">タイムコード</link>の抽出です。二個目の引数はソースファイルの名前です。これは&matroska;ファイルでなければなりません。続く全ての引数は、オプションと抽出設定です。これらは指定されたmodeに依存します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:72
@@ -681,24 +681,24 @@ msgstr "抽出されたCUEシートは、出力がリダイレクトされてい
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:404
-msgid "Timecode extraction mode"
+msgid "Timestamp extraction mode"
 msgstr "タイムコード抽出モード"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:407
 #, fuzzy
-#| msgid "Syntax: <command>mkvextract</command> <option>timecodes_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
-msgid "Syntax: <command>mkvextract <option>timecodes_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
-msgstr "書式: <command>mkvextract</command> <option>timecodes_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
+#| msgid "Syntax: <command>mkvextract</command> <option>timestamps_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
+msgid "Syntax: <command>mkvextract <option>timestamps_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
+msgstr "書式: <command>mkvextract</command> <option>timestamps_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:411
-msgid "The extracted timecodes are written to the console unless the output is redirected (see the section about <link linkend=\"mkvextract.output_redirection\">output redirection</link> for details)."
+msgid "The extracted timestamps are written to the console unless the output is redirected (see the section about <link linkend=\"mkvextract.output_redirection\">output redirection</link> for details)."
 msgstr "抽出されたタイムコードは、出力がリダイレクトされていなければコンソールに出力されます。(詳細については、<link linkend=\"mkvextract.output_redirection\">出力リダイレクト</link>についてのセクションを参照ください。)"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:420
-msgid "Causes extraction of the timecodes for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
+msgid "Causes extraction of the timestamps for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
 msgstr "IDが<parameter>TID</parameter>であるトラックがソースファイルに存在すれば、タイムコードを<parameter>outname</parameter>に抽出します。このオプションは複数回指定できます。トラックIDは、&mkvmerge;に<option>--identify</option>を指定して実行した際の出力に表示されるものと同じです。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
@@ -711,8 +711,8 @@ msgstr "例:"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvextract.xml:429
 #, no-wrap
-msgid "$ mkvextract timecodes_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
-msgstr "$ mkvextract timecodes_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
+msgid "$ mkvextract timestamps_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
+msgstr "$ mkvextract timestamps_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:436
@@ -738,7 +738,7 @@ msgstr "<parameter>TID:outname</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:447
 #, fuzzy
-#| msgid "Causes extraction of the timecodes for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
+#| msgid "Causes extraction of the timestamps for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
 msgid "Causes extraction of the cues for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option and not the numbers contained in the <classname>CueTrack</classname> element."
 msgstr "IDが<parameter>TID</parameter>であるトラックがソースファイルに存在すれば、タイムコードを<parameter>outname</parameter>に抽出します。このオプションは複数回指定できます。トラックIDは、&mkvmerge;に<option>--identify</option>を指定して実行した際の出力に表示されるものと同じです。"
 
@@ -750,7 +750,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:465
 #, no-wrap
-msgid "timecode=00:00:13.305000000 duration=- cluster_position=757741 relative_position=11"
+msgid "timestamp=00:00:13.305000000 duration=- cluster_position=757741 relative_position=11"
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
@@ -763,13 +763,13 @@ msgstr "基本的には、以下の様な構成です。"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:471
 #, fuzzy
-#| msgid "Timecodes"
-msgid "timecode"
+#| msgid "Timestamps"
+msgid "timestamp"
 msgstr "タイムコード"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:473
-msgid "The cue point's timecode with nanosecond precision. The format is <literal>HH:MM:SS.nnnnnnnnn</literal>. This element is always set."
+msgid "The cue point's timestamp with nanosecond precision. The format is <literal>HH:MM:SS.nnnnnnnnn</literal>. This element is always set."
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -817,9 +817,9 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:517
 #, fuzzy, no-wrap
-#| msgid "$ mkvextract timecodes_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
+#| msgid "$ mkvextract timestamps_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
 msgid "$ mkvextract cues input.mkv 1:cues-track1.txt 2:cues-track2.txt"
-msgstr "$ mkvextract timecodes_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
+msgstr "$ mkvextract timestamps_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:522
@@ -1026,7 +1026,7 @@ msgstr "A_TTA1"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:675
-msgid "<productname>TrueAudio</productname> tracks are written to <abbrev>TTA</abbrev> files. Please note that due to &matroska;'s limited timecode precision the extracted file's header will be different regarding two fields: <varname>data_length</varname> (the total number of samples in the file) and the <abbrev>CRC</abbrev>."
+msgid "<productname>TrueAudio</productname> tracks are written to <abbrev>TTA</abbrev> files. Please note that due to &matroska;'s limited timestamp precision the extracted file's header will be different regarding two fields: <varname>data_length</varname> (the total number of samples in the file) and the <abbrev>CRC</abbrev>."
 msgstr "<productname>TrueAudio</productname>トラックは<abbrev>TTA</abbrev>ファイルに書き出されます。&matroska;のタイムコード精度の上限のため、抽出されたファイルのヘッダは、<varname>data_length</varname>フィールド(ファイルに含まれる総サンプル数)と<abbrev>CRC</abbrev>については不正確になります。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
@@ -1262,13 +1262,13 @@ msgstr "チャプタは&xml;フォーマットに変換されます。このフ�
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:868
-msgid "Timecodes"
+msgid "Timestamps"
 msgstr "タイムコード"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:871
-msgid "Timecodes are first sorted and then output as a timecode v2 format compliant file ready to be fed to &mkvmerge;.  The extraction to other formats (v1, v3 and v4) is not supported."
-msgstr "タイムコードはまず整列された後に、&mkvmerge;で読み込むことのできる timecode v2 形式に準拠するファイルに書き出されます。他の形式(v1, v3, v4)への抽出はサポートされていません。"
+msgid "Timestamps are first sorted and then output as a timestamp v2 format compliant file ready to be fed to &mkvmerge;.  The extraction to other formats (v1, v3 and v4) is not supported."
+msgstr "タイムコードはまず整列された後に、&mkvmerge;で読み込むことのできる timestamp v2 形式に準拠するファイルに書き出されます。他の形式(v1, v3, v4)への抽出はサポートされていません。"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:880
@@ -2069,17 +2069,17 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:485
-msgid "<option>--timecode-scale</option> <parameter>factor</parameter>"
-msgstr "<option>--timecode-scale</option> <parameter>factor</parameter>"
+msgid "<option>--timestamp-scale</option> <parameter>factor</parameter>"
+msgstr "<option>--timestamp-scale</option> <parameter>factor</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:488
-msgid "Forces the timecode scale factor to <parameter>factor</parameter>. Valid values are in the range <constant>1000</constant>..<constant>10000000</constant> or the special value <constant>-1</constant>."
+msgid "Forces the timestamp scale factor to <parameter>factor</parameter>. Valid values are in the range <constant>1000</constant>..<constant>10000000</constant> or the special value <constant>-1</constant>."
 msgstr "タイムコードスケールの係数を<parameter>factor</parameter>に強制設定します。この値は1000～10000000、もしくは-1に設定しなければなりません。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:493
-msgid "Normally &mkvmerge; will use a value of <constant>1000000</constant> which means that timecodes and durations will have a precision of 1ms. For files that will not contain a video track but at least one audio track &mkvmerge; will automatically chose a timecode scale factor so that all timecodes and durations have a precision of one audio sample. This causes bigger overhead but allows precise seeking and extraction."
+msgid "Normally &mkvmerge; will use a value of <constant>1000000</constant> which means that timestamps and durations will have a precision of 1ms. For files that will not contain a video track but at least one audio track &mkvmerge; will automatically chose a timestamp scale factor so that all timestamps and durations have a precision of one audio sample. This causes bigger overhead but allows precise seeking and extraction."
 msgstr "通常&mkvmerge;は<constant>1000000</constant>を使用します。これはタイムコードとフレーム持続期間が1ミリ秒単位の精度を持つことを意味します。ビデオトラックを含まず、1つ以上のオーディオトラックを含むファイルでは、&mkvmerge;は全てのタイムコードとフレーム持続時間がサンプリング音1つ分の精度を持つようタイムコードスケールの係数を自動的に選択します。これによってオーバーヘッドは大きくなりますが、正確なシークと展開が可能になります。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -2161,61 +2161,61 @@ msgstr "'<literal>duration:</literal>'という接頭辞は、互換性のため
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:579
-msgid "Splitting after specific timecodes."
+msgid "Splitting after specific timestamps."
 msgstr "指定した各タイムコードで分割します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:583
-msgid "Syntax: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
-msgstr "書式: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgid "Syntax: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgstr "書式: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:587
-msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:591
-msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all have the same format as the ones used for the duration (see above). The list of timecodes is separated by commas.  After the input stream has reached the current split point's timecode a new file is created. Then the next split point given in this list is used."
+msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all have the same format as the ones used for the duration (see above). The list of timestamps is separated by commas.  After the input stream has reached the current split point's timestamp a new file is created. Then the next split point given in this list is used."
 msgstr "パラメータ<parameter>A</parameter>、<parameter>B</parameter>、<parameter>C</parameter>…は、durationで使用されるものと同じフォーマットで指定しなければなりません(上記参照)。タイムコードのリストはコンマで区切られます。入力ストリームが現在の分割点に達すると次のファイルが作成され、このリストから次の分割点が使用されます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:597
-msgid "The '<literal>timecodes:</literal>' prefix must not be omitted."
-msgstr "'<literal>timecodes:</literal>'という接頭辞は、互換性のために省略できるようになっています。"
+msgid "The '<literal>timestamps:</literal>' prefix must not be omitted."
+msgstr "'<literal>timestamps:</literal>'という接頭辞は、互換性のために省略できるようになっています。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:603
-msgid "Keeping specific parts by specifying timecode ranges while discarding others."
+msgid "Keeping specific parts by specifying timestamp ranges while discarding others."
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:607
 #, fuzzy
-#| msgid "Syntax: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+#| msgid "Syntax: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 msgid "Syntax: <option>--split</option> <literal>parts:</literal><parameter>start1</parameter>-<parameter>end1</parameter><optional>,<optional>+</optional><parameter>start2</parameter>-<parameter>end2</parameter><optional>,<optional>+</optional><parameter>start3</parameter>-<parameter>end3</parameter>...</optional></optional>"
-msgstr "書式: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgstr "書式: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:613
 #, fuzzy
-#| msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "<code>--split parts:00:01:20-00:02:45,00:05:50-00:10:30</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:614
 #, fuzzy
-#| msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "<code>--split parts:00:01:20-00:02:45,+00:05:50-00:10:30</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:615
 #, fuzzy
-#| msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "<code>--split parts:-00:02:45,00:05:50-</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:611
@@ -2225,22 +2225,22 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:620
-msgid "The <literal>parts</literal> mode tells &mkvmerge; to keep certain ranges of timecodes while discarding others. The ranges to keep have to be listed after the <literal>parts:</literal> keyword and be separated by commas. A range itself consists of a start and an end timecode in the same format the other variations of <parameter>--split</parameter> accept (e.g. both <literal>00:01:20</literal> and <literal>80s</literal> refer to the same timecode)."
+msgid "The <literal>parts</literal> mode tells &mkvmerge; to keep certain ranges of timestamps while discarding others. The ranges to keep have to be listed after the <literal>parts:</literal> keyword and be separated by commas. A range itself consists of a start and an end timestamp in the same format the other variations of <parameter>--split</parameter> accept (e.g. both <literal>00:01:20</literal> and <literal>80s</literal> refer to the same timestamp)."
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:627
-msgid "If a start timecode is left out then it defaults to the previous range's end timecode. If there was no previous range then it defaults to the start of the file (see example 3)."
+msgid "If a start timestamp is left out then it defaults to the previous range's end timestamp. If there was no previous range then it defaults to the start of the file (see example 3)."
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:632
-msgid "If an end timecode is left out then it defaults to the end of the source files which basically tells &mkvmerge; to keep the rest (see example 3)."
+msgid "If an end timestamp is left out then it defaults to the end of the source files which basically tells &mkvmerge; to keep the rest (see example 3)."
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:637
-msgid "Normally each range will be written to a new file. This can be changed so that consecutive ranges are written to the same file. For that the user has to prefix the start timecode with a <literal>+</literal>. This tells &mkvmerge; not to create a new file and instead append the range to the same file the previous range was written to. Timecodes will be adjusted so that there will be no gap in the output file even if there was a gap in the two ranges in the input file."
+msgid "Normally each range will be written to a new file. This can be changed so that consecutive ranges are written to the same file. For that the user has to prefix the start timestamp with a <literal>+</literal>. This tells &mkvmerge; not to create a new file and instead append the range to the same file the previous range was written to. Timestamps will be adjusted so that there will be no gap in the output file even if there was a gap in the two ranges in the input file."
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
@@ -2260,7 +2260,7 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:662
-msgid "Note that &mkvmerge; only makes decisions about splitting at key frame positions. This applies to both the start and the end of each range. So even if an end timecode is between two key frames &mkvmerge; will continue outputting the frames up to but excluding the following key frame."
+msgid "Note that &mkvmerge; only makes decisions about splitting at key frame positions. This applies to both the start and the end of each range. So even if an end timestamp is between two key frames &mkvmerge; will continue outputting the frames up to but excluding the following key frame."
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
@@ -2271,30 +2271,30 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:675
 #, fuzzy
-#| msgid "Syntax: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+#| msgid "Syntax: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 msgid "Syntax: <option>--split</option> <literal>parts-frames:</literal><parameter>start1</parameter>-<parameter>end1</parameter><optional>,<optional>+</optional><parameter>start2</parameter>-<parameter>end2</parameter><optional>,<optional>+</optional><parameter>start3</parameter>-<parameter>end3</parameter>...</optional></optional>"
-msgstr "書式: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgstr "書式: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:681
 #, fuzzy
-#| msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "<code>--split parts-frames:137-258,548-1211</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:682
 #, fuzzy
-#| msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "<code>--split parts-frames:733-912,+1592-2730</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:683
 #, fuzzy
-#| msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "<code>--split parts-frames:-430,2512-</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:688
@@ -2313,7 +2313,7 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:704
-msgid "Normally each range will be written to a new file. This can be changed so that consecutive ranges are written to the same file. For that the user has to prefix the start number with a <literal>+</literal>. This tells &mkvmerge; not to create a new file and instead append the range to the same file the previous range was written to. Timecodes will be adjusted so that there will be no gap in the output file even if there was a gap in the two ranges in the input file."
+msgid "Normally each range will be written to a new file. This can be changed so that consecutive ranges are written to the same file. For that the user has to prefix the start number with a <literal>+</literal>. This tells &mkvmerge; not to create a new file and instead append the range to the same file the previous range was written to. Timestamps will be adjusted so that there will be no gap in the output file even if there was a gap in the two ranges in the input file."
 msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
@@ -2351,64 +2351,64 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:751
 #, fuzzy
-#| msgid "Splitting after specific timecodes."
+#| msgid "Splitting after specific timestamps."
 msgid "Splitting after specific frames/fields."
 msgstr "指定した各タイムコードで分割します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:755
 #, fuzzy
-#| msgid "Syntax: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+#| msgid "Syntax: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 msgid "Syntax: <option>--split</option> <literal>frames:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
-msgstr "書式: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgstr "書式: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:759
 #, fuzzy
-#| msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "Example: <code>--split frames:120,237,891</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:763
 #, fuzzy
-#| msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all have the same format as the ones used for the duration (see above). The list of timecodes is separated by commas.  After the input stream has reached the current split point's timecode a new file is created. Then the next split point given in this list is used."
+#| msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all have the same format as the ones used for the duration (see above). The list of timestamps is separated by commas.  After the input stream has reached the current split point's timestamp a new file is created. Then the next split point given in this list is used."
 msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all be positive integers.  Numbering starts at 1.  The list of frame/field numbers is separated by commas.  After the input stream has reached the current split point's frame/field number a new file is created.  Then the next split point given in this list is used."
 msgstr "パラメータ<parameter>A</parameter>、<parameter>B</parameter>、<parameter>C</parameter>…は、durationで使用されるものと同じフォーマットで指定しなければなりません(上記参照)。タイムコードのリストはコンマで区切られます。入力ストリームが現在の分割点に達すると次のファイルが作成され、このリストから次の分割点が使用されます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:769
 #, fuzzy
-#| msgid "The '<literal>timecodes:</literal>' prefix must not be omitted."
+#| msgid "The '<literal>timestamps:</literal>' prefix must not be omitted."
 msgid "The '<literal>frames:</literal>' prefix must not be omitted."
-msgstr "'<literal>timecodes:</literal>'という接頭辞は、互換性のために省略できるようになっています。"
+msgstr "'<literal>timestamps:</literal>'という接頭辞は、互換性のために省略できるようになっています。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:788
 #, fuzzy
-#| msgid "Splitting after specific timecodes."
+#| msgid "Splitting after specific timestamps."
 msgid "Splitting before specific chapters."
 msgstr "指定した各タイムコードで分割します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:792
 #, fuzzy
-#| msgid "Syntax: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+#| msgid "Syntax: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 msgid "Syntax: <option>--split</option> <literal>chapters:all</literal> or <option>--split</option> <literal>chapters:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
-msgstr "書式: <option>--split</option> <literal>timecodes:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgstr "書式: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:797
 #, fuzzy
-#| msgid "Example: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "Example: <code>--split chapters:5,8</code>"
-msgstr "例: <code>--split timecodes:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:801
 #, fuzzy
-#| msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all have the same format as the ones used for the duration (see above). The list of timecodes is separated by commas.  After the input stream has reached the current split point's timecode a new file is created. Then the next split point given in this list is used."
-msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all be positive integers.  Numbering starts at 1.  The list of chapter numbers is separated by commas.  Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed.  A chapter starting at 0s is never considered for splitting and discarded silently."
+#| msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all have the same format as the ones used for the duration (see above). The list of timestamps is separated by commas.  After the input stream has reached the current split point's timestamp a new file is created. Then the next split point given in this list is used."
+msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all be positive integers.  Numbering starts at 1.  The list of chapter numbers is separated by commas.  Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed.  A chapter starting at 0s is never considered for splitting and discarded silently."
 msgstr "パラメータ<parameter>A</parameter>、<parameter>B</parameter>、<parameter>C</parameter>…は、durationで使用されるものと同じフォーマットで指定しなければなりません(上記参照)。タイムコードのリストはコンマで区切られます。入力ストリームが現在の分割点に達すると次のファイルが作成され、このリストから次の分割点が使用されます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
@@ -2419,9 +2419,9 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:812
 #, fuzzy
-#| msgid "The '<literal>timecodes:</literal>' prefix must not be omitted."
+#| msgid "The '<literal>timestamps:</literal>' prefix must not be omitted."
 msgid "The '<literal>chapters:</literal>' prefix must not be omitted."
-msgstr "'<literal>timecodes:</literal>'という接頭辞は、互換性のために省略できるようになっています。"
+msgstr "'<literal>timestamps:</literal>'という接頭辞は、互換性のために省略できるようになっています。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:817
@@ -2470,12 +2470,12 @@ msgstr "<option>--append-mode</option> <parameter>mode</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:877
-msgid "Determines how timecodes are calculated when appending files.  The parameter <parameter>mode</parameter> can have two values: '<literal>file</literal>' which is also the default and '<literal>track</literal>'."
+msgid "Determines how timestamps are calculated when appending files.  The parameter <parameter>mode</parameter> can have two values: '<literal>file</literal>' which is also the default and '<literal>track</literal>'."
 msgstr "ファイルを結合する際に、タイムコードがどのように計算されるかを決定します。パラメータ<parameter>mode</parameter>は'<literal>file</literal>'(デフォルト)、'<literal>track</literal>の二つの値を取り得ます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:882
-msgid "When mkvmerge appends a track (called '<literal>track2_1</literal>' from now on) from a second file (called '<literal>file2</literal>') to a track (called '<literal>track1_1</literal>') from the first file (called '<literal>file1</literal>')  then it has to offset all timecodes for '<literal>track2_1</literal>' by an amount.  For '<literal>file</literal>' mode this amount is the highest timecode encountered in '<literal>file1</literal>' even if that timecode was from a different track than '<literal>track1_1</literal>'. In track mode the offset is the highest timecode of '<literal>track1_1</literal>'."
+msgid "When mkvmerge appends a track (called '<literal>track2_1</literal>' from now on) from a second file (called '<literal>file2</literal>') to a track (called '<literal>track1_1</literal>') from the first file (called '<literal>file1</literal>')  then it has to offset all timestamps for '<literal>track2_1</literal>' by an amount.  For '<literal>file</literal>' mode this amount is the highest timestamp encountered in '<literal>file1</literal>' even if that timestamp was from a different track than '<literal>track1_1</literal>'. In track mode the offset is the highest timestamp of '<literal>track1_1</literal>'."
 msgstr "mkvmergeが二つめのファイル(以後'<literal>file2</literal>'と呼ぶ)のトラック(以後'<literal>track2_1</literal>'と呼ぶ)を、一つめのファイル(以後'<literal>file1</literal>'と呼ぶ)のトラック(以後'<literal>track1_1</literal>'と呼ぶ)と結合する際、'<literal>track2_1</literal>'のタイムコードは一定量だけずらす必要があります。'<literal>file</literal>'モードでは、ずらす量は'<literal>file1</literal>'の中の'<literal>track1_1</literal>'以外のトラックを含む全てのトラックの中で一番大きいタイムコードの値になります。'<literal>track</literal>'モードでは、'<literal>track1_1</literal>'の中で一番大きいタイムコードの値になります。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -2882,7 +2882,7 @@ msgstr "<option>-y</option>, <option>--sync</option> <parameter>TID:d<optional>,
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1306
-msgid "Adjust the timecodes of the track with the id <parameter>TID</parameter> by <parameter>d</parameter> ms. The track IDs are the same as the ones given with <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>)."
+msgid "Adjust the timestamps of the track with the id <parameter>TID</parameter> by <parameter>d</parameter> ms. The track IDs are the same as the ones given with <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>)."
 msgstr "トラックIDが<parameter>TID</parameter>のトラックのタイムコードを<parameter>d</parameter>ミリ秒だけ調整します。トラックIDは<link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link>オプションで得られるものと同じです(<link linkend=\"mkvmerge.track_ids\">トラックID</link>のセクションを参照してください)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -3021,13 +3021,13 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1469
-msgid "<option>--timecodes</option> <parameter>TID:file-name</parameter>"
-msgstr "<option>--timecodes</option> <parameter>TID:file-name</parameter>"
+msgid "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
+msgstr "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1472
-msgid "Read the timecodes to be used for the specific track ID from <parameter>file-name</parameter>.  These timecodes forcefully override the timecodes that &mkvmerge; normally calculates. Read the section about <link linkend=\"mkvmerge.external_timecode_files\">external timecode files</link>."
-msgstr "指定したトラックIDのタイムコードを、<parameter>file-name</parameter>から読み込みます。これらのタイムコードは&mkvmerge;が通常計算するタイムコードを強制的に上書きします。<link linkend=\"mkvmerge.external_timecode_files\">外部タイムコードファイル</link>のセクションを参照してください。"
+msgid "Read the timestamps to be used for the specific track ID from <parameter>file-name</parameter>.  These timestamps forcefully override the timestamps that &mkvmerge; normally calculates. Read the section about <link linkend=\"mkvmerge.external_timestamp_files\">external timestamp files</link>."
+msgstr "指定したトラックIDのタイムコードを、<parameter>file-name</parameter>から読み込みます。これらのタイムコードは&mkvmerge;が通常計算するタイムコードを強制的に上書きします。<link linkend=\"mkvmerge.external_timestamp_files\">外部タイムコードファイル</link>のセクションを参照してください。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1480
@@ -3036,7 +3036,7 @@ msgstr "<option>--default-duration</option> <parameter>TID:x</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1483
-msgid "Forces the default duration of a given track to the specified value.  Also modifies the track's timecodes to match the default duration.  The argument <parameter>x</parameter> must be postfixed with '<literal>s</literal>', '<literal>ms</literal>', '<literal>us</literal>', '<literal>ns</literal>', '<literal>fps</literal>', '<literal>p</literal>' or '<literal>i</literal>' to specify the default duration in seconds, milliseconds, microseconds, nanoseconds, 'frames per second', 'progressive frames per second' or 'interlaced frames per second' respectively. The number <parameter>x</parameter> itself can be a floating point number or a fraction."
+msgid "Forces the default duration of a given track to the specified value.  Also modifies the track's timestamps to match the default duration.  The argument <parameter>x</parameter> must be postfixed with '<literal>s</literal>', '<literal>ms</literal>', '<literal>us</literal>', '<literal>ns</literal>', '<literal>fps</literal>', '<literal>p</literal>' or '<literal>i</literal>' to specify the default duration in seconds, milliseconds, microseconds, nanoseconds, 'frames per second', 'progressive frames per second' or 'interlaced frames per second' respectively. The number <parameter>x</parameter> itself can be a floating point number or a fraction."
 msgstr "指定したトラックの default duration を強制的に設定します。トラックのトラックのタイムコードも、 default duration に合うように変更されます。引数<parameter>x</parameter>は'<literal>s</literal>'、'<literal>ms</literal>'、'<literal>us</literal>'、'<literal>ns</literal>'、'<literal>fps</literal>'、<literal>p</literal>'。'<literal>i</literal>のうちどれか一つを後置されていなければなりません。それぞれ、 default duration は秒、ミリ秒、マイクロ秒、ナノ秒、'fps'、1秒あたりのプログレッシブフレーム、1秒あたりのインターレスのフレーム数単位で指定されます。<parameter>x</parameter>は小数または分数で指定できます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -3046,7 +3046,7 @@ msgstr "デフォルトのフレーム持続時間が指定されなかった場
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1497
-msgid "This option can also be used to change the <abbrev>FPS</abbrev> of video tracks without having to use an external timecode file."
+msgid "This option can also be used to change the <abbrev>FPS</abbrev> of video tracks without having to use an external timestamp file."
 msgstr "このオプションは、外部タイムコードファイルを使用せずにビデオトラックの<abbrev>FPS</abbrev>を変更するのにも使えます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -3323,9 +3323,9 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1772
 #, fuzzy
-#| msgid "<option>--timecodes</option> <parameter>TID:file-name</parameter>"
+#| msgid "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
 msgid "<option>--chromaticity-coordinates</option> <parameter>TID:red-x,red-y,green-x,green-y,blue-x,blue-y</parameter>"
-msgstr "<option>--timecodes</option> <parameter>TID:file-name</parameter>"
+msgstr "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1776
@@ -3359,9 +3359,9 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1800
 #, fuzzy
-#| msgid "<option>--timecodes</option> <parameter>TID:file-name</parameter>"
+#| msgid "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
 msgid "<option>--min-luminance</option> <parameter>TID:float</parameter>"
-msgstr "<option>--timecodes</option> <parameter>TID:file-name</parameter>"
+msgstr "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1803
@@ -3409,9 +3409,9 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1836
 #, fuzzy
-#| msgid "<option>--timecodes</option> <parameter>TID:file-name</parameter>"
+#| msgid "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
 msgid "<option>--projection-pose-pitch</option> <parameter>TID:float</parameter>"
-msgstr "<option>--timecodes</option> <parameter>TID:file-name</parameter>"
+msgstr "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1839
@@ -4315,7 +4315,7 @@ msgstr "各セグメントはユニークな128bit幅のセグメントUIDを持
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2772
-msgid "If a file is split into several smaller ones and linking is used then the timecodes will not start at 0 again but will continue where the last file has left off. This way the absolute time is kept even if the previous files are not available (e.g. when streaming). If no linking is used then the timecodes should start at 0 for each file. By default &mkvmerge; does not use file linking. If you want that you can turn it on with the <option>--link</option> option. This option is only useful if splitting is activated as well."
+msgid "If a file is split into several smaller ones and linking is used then the timestamps will not start at 0 again but will continue where the last file has left off. This way the absolute time is kept even if the previous files are not available (e.g. when streaming). If no linking is used then the timestamps should start at 0 for each file. By default &mkvmerge; does not use file linking. If you want that you can turn it on with the <option>--link</option> option. This option is only useful if splitting is activated as well."
 msgstr "もしひとつのファイルがいくつかの小さなファイルに分割されて紐付けされる場合、タイムコードは0から始まらず、前のファイルの続きから始まります。この方式では、前のファイルが無い場合も絶対時間が保たれます(例: ストリーミングを使用している際)。もし、紐付けが使用されない場合、タイムコードは各ファイルで0から始まります。デフォルトでは&mkvmerge;はファイル紐付けを使用しません。ファイル紐付けを使用したい場合は、<option>--link</option>オプションを使用する必要があります。このオプションはファイル分割が有効な場合以外には無効です。"
 
 #. type: Content of: <refentry><refsect1><para>
@@ -4398,7 +4398,7 @@ msgstr "シンプルチャプタフォーマット"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2853
-msgid "This formmat consists of pairs of lines that start with '<literal>CHAPTERxx=</literal>' and '<literal>CHAPTERxxNAME=</literal>' respectively. The first one contains the start timecode while the second one contains the title. Here's an example:"
+msgid "This formmat consists of pairs of lines that start with '<literal>CHAPTERxx=</literal>' and '<literal>CHAPTERxxNAME=</literal>' respectively. The first one contains the start timestamp while the second one contains the title. Here's an example:"
 msgstr "このフォーマットは、'<literal>CHAPTERxx=</literal>'で始まる行と'<literal>ChapterxxNAME=</literal>'で始まる行のペアから成ります。前者の行は開始タイムコードを含み、後者はタイトルを含みます。下に例を示します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
@@ -4590,7 +4590,7 @@ msgstr "注意"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2956
-msgid "When splitting files &mkvmerge; will correctly adjust the chapters as well. This means that each file only includes the chapter entries that apply to it, and that the timecodes will be offset to match the new timecodes of each output file."
+msgid "When splitting files &mkvmerge; will correctly adjust the chapters as well. This means that each file only includes the chapter entries that apply to it, and that the timestamps will be offset to match the new timestamps of each output file."
 msgstr "&mkvmerge;は出力ファイルを分割する際、チャプタも適切に処理します。つまり、分割された各ファイルはそのファイルに関係するチャプタのみを含み、タイムコードには適切なオフセットがかかります。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
@@ -4751,8 +4751,8 @@ msgstr "セグメント情報XMLファイルで、Matroskaファイルの&quot;s
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3108
-msgid "Other &quot;segment information&quot; header fields can be set via command line options but not via the XML file. This includes e.g. the <option><link linkend=\"mkvmerge.description.title\">--title</link></option> and the <option><link linkend=\"mkvmerge.description.timecode_scale\">--timecode-scale</link></option> options."
-msgstr "他の&quot;segment information&quot;ヘッダフィールドはコマンドラインオプション経由で設定できますが、XMLファイル経由では設定できません。 これはには例えば<option><link linkend=\"mkvmerge.description.title\">--title</link></option>や<option><link linkend=\"mkvmerge.description.timecode_scale\">--timecode-scale</link></option> オプションなどが含まれます。"
+msgid "Other &quot;segment information&quot; header fields can be set via command line options but not via the XML file. This includes e.g. the <option><link linkend=\"mkvmerge.description.title\">--title</link></option> and the <option><link linkend=\"mkvmerge.description.timestamp_scale\">--timestamp-scale</link></option> options."
+msgstr "他の&quot;segment information&quot;ヘッダフィールドはコマンドラインオプション経由で設定できますが、XMLファイル経由では設定できません。 これはには例えば<option><link linkend=\"mkvmerge.description.title\">--title</link></option>や<option><link linkend=\"mkvmerge.description.timestamp_scale\">--timestamp-scale</link></option> オプションなどが含まれます。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3114
@@ -4838,24 +4838,24 @@ msgstr "音声のみのファイルはこのようになるでしょう。"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvmerge.xml:3181
-msgid "External timecode files"
+msgid "External timestamp files"
 msgstr "外部タイムコードファイル"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3183
-msgid "&mkvmerge; allows the user to chose the timecodes for a specific track himself. This can be used in order to create files with variable frame rate video or include gaps in audio. A frame in this case is the unit that &mkvmerge; creates separately per &matroska; block. For video this is exactly one frame, for audio this is one packet of the specific audio type. E.g. for <abbrev>AC-3</abbrev> this would be a packet containing <constant>1536</constant> samples."
+msgid "&mkvmerge; allows the user to chose the timestamps for a specific track himself. This can be used in order to create files with variable frame rate video or include gaps in audio. A frame in this case is the unit that &mkvmerge; creates separately per &matroska; block. For video this is exactly one frame, for audio this is one packet of the specific audio type. E.g. for <abbrev>AC-3</abbrev> this would be a packet containing <constant>1536</constant> samples."
 msgstr "ユーザは、特定のトラックのタイムコードを自分で&mkvmerge;に指定することができます。これは可変フレームレートビデオを含むファイルを作成するときや、オーディオに無音を挿入するときに使用できます。この場合、フレームは&matroska;ブロックを作成する際の単位となります。ビデオでは、これはちょうど1フレームとなり、オーディオではこれは各オーディオタイプの1パケットとなります。例えば、<abbrev>AC-3</abbrev>では、これは<constant>1536</constant>サンプルを含む1パケットとなります。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3190
-msgid "Timecode files that are used when tracks are appended to each other must only be specified for the first part in a chain of tracks.  For example if you append two files, v1.avi and v2.avi, and want to use timecodes then your command line must look something like this:"
+msgid "Timestamp files that are used when tracks are appended to each other must only be specified for the first part in a chain of tracks.  For example if you append two files, v1.avi and v2.avi, and want to use timestamps then your command line must look something like this:"
 msgstr "結合されたトラックにタイムコードファイルを指定する場合は、各結合されるトラックチェインの最初の部分にのみ指定してください。例えばv1.avi、v2.aviの二つのファイルを結合し、タイムコードを使用したいときのコマンドラインは次のようになります。"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:3194
 #, no-wrap
-msgid "$ mkvmerge ... --timecodes 0:my_timecodes.txt v1.avi +v2.avi"
-msgstr "$ mkvmerge ... --timecodes 0:my_timecodes.txt v1.avi +v2.avi"
+msgid "$ mkvmerge ... --timestamps 0:my_timestamps.txt v1.avi +v2.avi"
+msgstr "$ mkvmerge ... --timestamps 0:my_timestamps.txt v1.avi +v2.avi"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3197
@@ -4864,7 +4864,7 @@ msgstr "&mkvmerge;は、4つのフォーマットを認識します。最初の1
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3202
-msgid "Timecode file format v1"
+msgid "Timestamp file format v1"
 msgstr "タイムコードファイルフォーマット v1"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
@@ -4876,62 +4876,62 @@ msgstr "このフォーマットはバージョン行から始まります。2�
 #: doc/man/mkvmerge.xml:3210
 #, no-wrap
 msgid ""
-"# timecode format v1\n"
+"# timestamp format v1\n"
 "assume 27.930\n"
 "800,1000,25\n"
 "1500,1700,30"
 msgstr ""
-"# timecode format v1\n"
+"# timestamp format v1\n"
 "assume 27.930\n"
 "800,1000,25\n"
 "1500,1700,30"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3217
-msgid "Timecode file format v2"
+msgid "Timestamp file format v2"
 msgstr "タイムコードファイルフォーマット v2"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3220
-msgid "In this format each line contains a timecode for the corresponding frame.  This timecode must be given in millisecond precision.  It can be a floating point number, but it doesn't have to be.  You <emphasis>have to</emphasis> give at least as many timecode lines as there are frames in the track.  The timecodes in this file must be sorted.  Example for 25fps:"
+msgid "In this format each line contains a timestamp for the corresponding frame.  This timestamp must be given in millisecond precision.  It can be a floating point number, but it doesn't have to be.  You <emphasis>have to</emphasis> give at least as many timestamp lines as there are frames in the track.  The timestamps in this file must be sorted.  Example for 25fps:"
 msgstr "このフォーマットでは、各行は対応するフレームのタイムコードを含みます。このタイムコードはミリ秒単位の精度で指定しなければなりません。小数を指定することができますが、小数でなくてもかまいません。最低でも、トラックに含まれるフレーム数と同数のタイムコード行を含ま<emphasis>なければなりません</emphasis>。このファイル内のタイムコードは整列されていなければなりません。例えば、25fpsでは以下のようになります。"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:3225
 #, no-wrap
 msgid ""
-"# timecode format v2\n"
+"# timestamp format v2\n"
 "0\n"
 "40\n"
 "80"
 msgstr ""
-"# timecode format v2\n"
+"# timestamp format v2\n"
 "0\n"
 "40\n"
 "80"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3232
-msgid "Timecode file format v3"
+msgid "Timestamp file format v3"
 msgstr "タイムコードファイルフォーマット v3"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3234
-msgid "In this format each line contains a duration in seconds followed by an optional number of frames per second.  Both can be floating point numbers.  If the number of frames per second is not present the default one is used.  For audio you should let the codec calculate the frame timecodes itself.  For that you should be using <constant>0.0</constant> as the number of frames per second.  You can also create gaps in the stream by using the '<literal>gap</literal>' keyword followed by the duration of the gap.  Example for an audio file:"
+msgid "In this format each line contains a duration in seconds followed by an optional number of frames per second.  Both can be floating point numbers.  If the number of frames per second is not present the default one is used.  For audio you should let the codec calculate the frame timestamps itself.  For that you should be using <constant>0.0</constant> as the number of frames per second.  You can also create gaps in the stream by using the '<literal>gap</literal>' keyword followed by the duration of the gap.  Example for an audio file:"
 msgstr "このフォーマットでは、各行は秒単位の持続時間と、省略可能なフレームレートを含みます。この二つは両方とも小数を指定できます。もし、フレームレートが指定されない場合はデフォルトの値が使用されます。オーディオではコーデックにタイムコードを計算させるべきです。このためには、フレームレートとして<constant>0.0</constant>を指定してください。また、'<literal>gap</literal>'キーワードの後に持続時間を指定して、無音を指定することもできます。オーディオファイル用の例を示します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:3240
 #, no-wrap
 msgid ""
-"# timecode format v3\n"
+"# timestamp format v3\n"
 "assume 0.0\n"
 "25.325\n"
 "7.530,38.236\n"
 "gap, 10.050\n"
 "2.000,38.236"
 msgstr ""
-"# timecode format v3\n"
+"# timestamp format v3\n"
 "assume 0.0\n"
 "25.325\n"
 "7.530,38.236\n"
@@ -4940,12 +4940,12 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3249
-msgid "Timecode file format v4"
+msgid "Timestamp file format v4"
 msgstr "タイムコードファイルフォーマット v4"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3251
-msgid "This format is identical to the v2 format.  The only difference is that the timecodes do not have to be sorted.  This format should almost never be used."
+msgid "This format is identical to the v2 format.  The only difference is that the timestamps do not have to be sorted.  This format should almost never be used."
 msgstr "このフォーマットはv2フォーマットと同一です。唯一の違いは、タイムコードが整列されていなくてもいいという点です。このフォーマットが使われることはほぼ無いでしょう。"
 
 #. type: Content of: <refentry><refsect1><para>
