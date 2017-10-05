@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-10-04 19:42+0200\n"
-"PO-Revision-Date: 2017-10-04 19:50+0200\n"
+"PO-Revision-Date: 2017-10-05 17:35+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -57,7 +57,7 @@ msgid ""
 "                           appending files.\n"
 msgstr ""
 "  --append-mode <file|track>\n"
-"                           Dosyalar eklendiğinde mkvmerge'ün zaman kodlarını\n"
+"                           Dosyalar eklendiğinde mkvmerge'ün zaman damgalarını\n"
 "                           nasıl hesaplayacağını seçer.\n"
 
 #: src/merge/mkvmerge.cpp:155
@@ -642,7 +642,7 @@ msgid ""
 msgstr ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
 "                           'Kısımlar:' ile aynıdır ancak 'startN'/'endN', zaman\n"
-"                            kodlarının yerine kare/alan numaralarıdır.\n"
+"                            damgalarının yerine kare/alan numaralarıdır.\n"
 
 #: src/merge/mkvmerge.cpp:138
 msgid ""
@@ -652,7 +652,7 @@ msgid ""
 "                           if prefixed with '+'.\n"
 msgstr ""
 "  --split parts:start1-end1[,[+]start2-end2,...]\n"
-"                           Zaman kodlarının başlama-bitiş aralığını tutar, eğer\n"
+"                           Zaman damgalarının başlama-bitiş aralığını tutar, eğer\n"
 "                           '+' ön ekiyle başlıyorsa ya ayrı dosyalarda tutar ya da\n"
 "                           önceki aralığın dosyasına ekler.\n"
 
@@ -663,8 +663,8 @@ msgid ""
 "                           etc.\n"
 msgstr ""
 "  --split timestamps:A[,B...]\n"
-"                           Yeni dosyayı her zaman kodundan A, B\n"
-"                           vb.'dan sonra oluştur.\n"
+"                           Yeni dosyayı her zaman damgası A, B\n"
+"                           vb.'dan sonra oluşturur.\n"
 
 #: src/merge/mkvmerge.cpp:151
 msgid "  --split-max-files <n>    Create at most n files.\n"
@@ -694,11 +694,11 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:127
 msgid "  --timestamp-scale <n>    Force the timestamp scale factor to n.\n"
-msgstr "  --timestamp-scale <n>    Zaman kodu ölçeğini n değerine zorlar.\n"
+msgstr "  --timestamp-scale <n>    Zaman damgası ölçeği etkenini n değerine zorlar.\n"
 
 #: src/merge/mkvmerge.cpp:239
 msgid "  --timestamps <TID:file>  Read the timestamps to be used from a file.\n"
-msgstr "  --timestamps <TID:dosya>  Dosyadan kullanılması için zaman kodlarını oku.\n"
+msgstr "  --timestamps <TID:dosya>  Dosyadan kullanılması için zaman damgalarını okur.\n"
 
 #: src/merge/mkvmerge.cpp:88
 msgid "  --title <title>          Title for this destination file.\n"
@@ -890,10 +890,10 @@ msgid ""
 "                           floating point numbers.\n"
 msgstr ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
-"                           'd' ms olarak id TID ile izin zaman kodlarını ayarla,\n"
-"                           eşitle.\n"
+"                           'd' ms olarak id TID ile izin zaman damgalarını ayarlar,\n"
+"                           eşitler.\n"
 "                           'o/p': Doğrusal sürüklemeleri sabitlemek için 'o/p'\n"
-"                           ile çarparak zaman kodlarını ayarlar. Eğer atlandıysa\n"
+"                           ile çarparak zaman damgalarını ayarlar. Eğer atlandıysa\n"
 "                           'p' varsayılanı 1'dir. Her iki 'o' ve 'p'\n"
 "                           kayan noktalı sayılar olabilir.\n"
 
@@ -1194,17 +1194,17 @@ msgstr[1] "%1% bayt"
 #: src/info/mkvinfo.cpp:204
 #, boost-format
 msgid "%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"
-msgstr "%1% kare, iz %2%, zaman kodu %3% (%4%), süre %|5$.3f|, boyut %6%, adler 0x%|7$08x|%8%%9%\n"
+msgstr "%1% kare, iz %2%, zaman damgası %3% (%4%), süre %|5$.3f|, boyut %6%, adler 0x%|7$08x|%8%%9%\n"
 
 #: src/info/mkvinfo.cpp:209
 #, boost-format
 msgid "%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"
-msgstr "%1% kare, iz %2%, zaman kodu %3% (%4%), boyut %5%, adler 0x%|6$08x|%7%\n"
+msgstr "%1% kare, iz %2%, zaman damgası %3% (%4%), boyut %5%, adler 0x%|6$08x|%7%\n"
 
 #: src/info/mkvinfo.cpp:205
 #, boost-format
 msgid "%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"
-msgstr "%1% kare, iz %2%, zaman kodu %3% (%4%), boyut %5%, adler 0x%|6$08x|%7%%8%\n"
+msgstr "%1% kare, iz %2%, zaman damgası %3% (%4%), boyut %5%, adler 0x%|6$08x|%7%%8%\n"
 
 #: src/common/strings/formatting.cpp:315
 #, boost-format
@@ -2912,7 +2912,7 @@ msgstr "Çıktı boyutundan sonra böl"
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
 msgid "After specific timestamps"
-msgstr "Belirli zaman kodundan sonra böl"
+msgstr "Belirli zaman damgalarından sonra böl"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:321
 msgid "After the job &queue has stopped"
@@ -3358,7 +3358,7 @@ msgstr "Örnek başına bit, çoğunlukla PCM için kullanılır."
 #: src/info/mkvinfo.cpp:188
 #, boost-format
 msgid "Block (track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%)"
-msgstr "Blok (iz numarası %1%, %2% kare, zaman kodu %|3$.3f|s = %4%)"
+msgstr "Blok (iz numarası %1%, %2% kare, zaman damgası %|3$.3f|s = %4%)"
 
 #: src/info/mkvinfo.cpp:202
 #, boost-format
@@ -3467,7 +3467,7 @@ msgstr "Kare/alan numaralarına dayanarak kısımlara göre böl"
 #: src/mkvtoolnix-gui/merge/output.cpp:144
 #, no-c-format
 msgid "By parts based on timestamps"
-msgstr "Zaman kodlarına dayanarak kısımlara göre böl"
+msgstr "Zaman damgalarına dayanarak kısımlara göre böl"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:318
 msgid "C&onfiguration active"
@@ -3784,7 +3784,7 @@ msgstr "Küme önceki boyutu: %1%"
 #: src/info/mkvinfo.cpp:211
 #, boost-format
 msgid "Cluster timestamp: %|1$.3f|s"
-msgstr "Küme zaman kodu: %|1$.3f|s"
+msgstr "Küme zaman damgası: %|1$.3f|s"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:45
@@ -4037,7 +4037,7 @@ msgstr "Çıktıyı yönlendirmek için '%1%' dosyası açılamadı.\n"
 #: src/extract/timestamps_v2.cpp:127
 #, boost-format
 msgid "Could not open the timestamp file '%1%' for writing (%2%).\n"
-msgstr "Yazmak için zaman kodu dosyası '%1%' açılamadı (%2%).\n"
+msgstr "Yazmak için zaman damgası dosyası '%1%' açılamadı (%2%).\n"
 
 #: src/common/xml/ebml_converter.cpp:252
 #, boost-format
@@ -11538,7 +11538,7 @@ msgstr "İşaretsiz tamsayı"
 #: src/input/r_vobsub.cpp:482
 #, boost-format
 msgid "Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timestamp %3%, assuming MPEG2. No further warnings will be printed for this track.\n"
-msgstr ""
+msgstr "Desteklenmeyen MPEG mpeg_sürümü: %3% zaman damgası için %2% paketindeki 0x%|1$02x|, MPEG2 kabul ediliyor. Bu iz için başka uyarı yazdırılmayacaktır.\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:179
 #, no-c-format
@@ -12972,7 +12972,7 @@ msgstr "metin altyazıları"
 
 #: src/merge/mkvmerge.cpp:2838
 msgid "timestamps"
-msgstr "zaman kodları"
+msgstr "zaman damgaları"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
