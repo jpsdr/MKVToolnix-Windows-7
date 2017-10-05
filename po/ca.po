@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-10-04 19:42+0200\n"
+"POT-Creation-Date: 2017-10-05 20:33+0200\n"
 "PO-Revision-Date: 2017-10-04 19:45+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1431,7 +1431,7 @@ msgid "&Add attachment"
 msgstr "&Afegeix un adjunt"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:277
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:292
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
@@ -1514,7 +1514,7 @@ msgid "&Close file"
 msgstr "Tan&ca el fitxer"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:197
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:276
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:291
 #, no-c-format
 msgid "&Collapse all"
 msgstr "&Contrau-ho tot"
@@ -1595,7 +1595,7 @@ msgid "&Escape arguments for:"
 msgstr "&Escapa els arguments per a:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:196
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:275
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:290
 #, no-c-format
 msgid "&Expand all"
 msgstr "&Expandeix-ho tot"
@@ -1833,7 +1833,7 @@ msgstr "To&rna a carregar"
 msgid "&Reload file"
 msgstr "To&rna a carregar el fitxer"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:278
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:293
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
@@ -1878,7 +1878,7 @@ msgstr "&Reinicia aquest valor"
 msgid "&Save"
 msgstr "De&sa"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:279
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:294
 #, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "De&sa el contingut de l'adjunt a un fitxer"
@@ -2837,7 +2837,7 @@ msgstr "Afegeix &adjunts nous al fitxer actual"
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "Afegeix com a fitxers d'origen nous als ajustaments de multiplexat actuals"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:619
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:634
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -3039,7 +3039,7 @@ msgstr "Totes les entrades"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:619
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:634
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:317
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:399
@@ -3069,7 +3069,7 @@ msgstr "Tots els següents noms de fitxer s'obriran a l'editor de capítols."
 msgid "All following file names will be opened in the header editor."
 msgstr "Tots els següents noms de fitxer s'obriran a l'editor de la capçalera."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:541
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:556
 #, no-c-format
 msgid "All header values are OK."
 msgstr "Tots els valors de capçalera estan bé."
@@ -3934,11 +3934,11 @@ msgstr "Tipus de còdec/MIME"
 msgid "CodecPrivate, length %1%%2%"
 msgstr "Privades del còdec, longitud %1%%2%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:468
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:483
 msgid "Colour information"
 msgstr "Informació del color"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:473
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:488
 msgid "Colour mastering meta information"
 msgstr "Meta informació sobre domini del color"
 
@@ -4655,7 +4655,7 @@ msgstr "Directori &relatiu al directori del primer fitxer d'origen:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:273
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:288
 #, no-c-format
 msgid "Directory:"
 msgstr "Directori:"
@@ -5033,6 +5033,11 @@ msgstr "Error %1%\n"
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "Error en crear un fitxer temporal (motiu: %1)."
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:133
+#, fuzzy, no-c-format
+msgid "Error details: %1."
+msgstr "Detalls de l'excepció:"
+
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:77
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:167
 #, no-c-format
@@ -5377,7 +5382,7 @@ msgstr "Fitxer de dades, mida: %1%"
 msgid "File description: %1%"
 msgstr "Descripció del fitxer: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:177
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:192
 #, no-c-format
 msgid "File has not been modified"
 msgstr "El fitxer no ha estat modificat"
@@ -5392,7 +5397,7 @@ msgstr "Nom del fitxer"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:272
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:287
 #, no-c-format
 msgid "File name:"
 msgstr "Nom del fitxer:"
@@ -5418,7 +5423,7 @@ msgstr "No s'ha trobat el fitxer"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:723
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:128
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:143
 #, no-c-format
 msgid "File parsing failed"
 msgstr "L'anàlisi del fitxer ha fallat"
@@ -5733,9 +5738,9 @@ msgstr "No és possible suprimir la compressió de la capçalera perquè la mem�
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "No és possible suprimir la compressió de la capçalera perquè la memòria cau no ha estat iniciada amb els bytes que s'hauran de suprimir. Bytes necessaris: %1%; trobats: %2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:541
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:556
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:558
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:571
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:573
 #, no-c-format
 msgid "Header validation"
 msgstr "Validació de la capçalera"
@@ -7354,7 +7359,7 @@ msgstr "Encara sense sortida"
 msgid "No permission to read from, to write to or to create"
 msgstr "Sense permisos de lectura, escriptura o creació"
 
-#: src/common/kax_analyzer.cpp:1504
+#: src/common/kax_analyzer.cpp:1513
 #, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "No s'ha trobat l'UID del segment en el fitxer «%1%»."
@@ -7452,11 +7457,11 @@ msgstr "Normalment, les entrades seleccionades a la vista de llista es poden mou
 msgid "Not a hex digit at position %1%"
 msgstr "No hi ha un dígit hexadecimal a la posició %1%"
 
-#: src/common/kax_analyzer.cpp:285
+#: src/common/kax_analyzer.cpp:292
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "No és un fitxer de Matroska vàlid (no s'ha trobat la capçalera EBML)"
 
-#: src/common/kax_analyzer.cpp:304
+#: src/common/kax_analyzer.cpp:311
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "No és un fitxer de Matroska vàlid (no s'ha trobat cap element al segment/nivell 0)"
 
@@ -7577,7 +7582,7 @@ msgstr[0] "Només s'ha trobat %1% capítol als fitxers d'origen i de capítols."
 msgstr[1] "Només s'han trobat %1% capítols als fitxers d'origen i de capítols."
 
 #: src/merge/mkvmerge.cpp:1784
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:670
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:685
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7991,7 +7996,7 @@ msgstr "Les possibles causes són que el programa no existeix o que no esteu aut
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:116
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:127
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:138
 #: src/propedit/propedit.cpp:47
 #: src/propedit/propedit.cpp:53
 #, no-c-format
@@ -8090,7 +8095,7 @@ msgstr "Progrés: %1%%%%2%"
 msgid "Progress: 100%%%1%"
 msgstr "Progrés: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1570
+#: src/common/kax_analyzer.cpp:1579
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Progrés: [%1%%2%] %3%%%"
@@ -8284,7 +8289,7 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "Torna a &numerar els subcapítols"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:295
 #, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "Su&bstitueix l'adjunt amb un nom de fitxer nou"
@@ -8298,8 +8303,8 @@ msgstr "Llegeix tot el fitxer NEWS.md en línia"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "La lectura de VOB encriptats encara no està implementada.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:667
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:679
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:682
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
 msgid "Reading failed"
@@ -8463,7 +8468,7 @@ msgstr "Substitueix un adjunt amb el «nom_de_fitxer» del fitxer"
 msgid "Replace attachment"
 msgstr "Substitueix l'adjunt"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:296
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "Substitueix l'adjunt amb un nom de fitxer nou i o&btén el nom del tipus MIME"
@@ -8515,7 +8520,7 @@ msgstr "Clic dret per a les accions en tots els elements"
 msgid "Right-click for actions for editions and chapters"
 msgstr "Clic dret per a les accions en les edicions i els capítols"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:300
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:315
 #, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "Clic dret per a les accions en els elements de capçalera i adjunts"
@@ -8659,17 +8664,17 @@ msgstr "El desament ha fallat"
 msgid "Saving the chapters failed."
 msgstr "El desament dels capítols ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:213
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:228
 #, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "El desament dels adjunts modificats ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:192
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:207
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "El desament de la capçalera d'informació del segment modificat ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:198
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:213
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "El desament de les capçaleres de la pista modificada ha fallat."
@@ -8776,7 +8781,7 @@ msgstr "Informació del segment:"
 #: src/extract/timestamps_v2.cpp:243
 #: src/info/mkvinfo.cpp:453
 #: src/info/qt_ui.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:428
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:443
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
@@ -9837,6 +9842,10 @@ msgstr "Es tancaran els ajustaments del multiplexat actuals."
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "El codi de temps del paquet actual és més petit que el del paquet anterior. Normalment, vol dir que el fitxer d'origen és un fitxer Matroska que no ha estat creat correctament al 100%%. Els codis de temps de tots els paquets seran ajustats per %1% ms per tal de no perdre cap dada. Això pot desfer la sincronització de l'àudio/vídeo, però es pot corregir amb l'opció «--sync» del «mkvmerge». Si ja heu emprat «--sync» i encara obteniu aquest avís, NO us preocupeu, és normal. Si l'error succeeix més d'una vegada, tornant a obtenir aquest missatge per a una pista en particular, llavors el fitxer d'origen pot estar mal editat, o «mkvmerge» conté un error. En aquest cas hauríeu de contactar amb l'autor, en Moritz Bunkus <moritz@bunkus.org>.\n"
 
+#: src/common/kax_analyzer.cpp:175
+msgid "The data in the file is corrupted and cannot be modified safely"
+msgstr ""
+
 #: src/common/property_element.cpp:110
 msgid "The date the file was created."
 msgstr "La data en què es va crear el fitxer."
@@ -9965,8 +9974,8 @@ msgstr "El fitxer «%1%» no es pot adjuntar perquè no existeix o no es pot lle
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura i escriptura, o una de les operacions ha fallat: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1494
-#: src/common/kax_analyzer.cpp:1497
+#: src/common/kax_analyzer.cpp:1503
+#: src/common/kax_analyzer.cpp:1506
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura: %2%."
@@ -9997,7 +10006,7 @@ msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura: %2%.\n"
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1500
+#: src/common/kax_analyzer.cpp:1509
 #, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "El fitxer «%1%» no s'ha pogut obrir o analitzar."
@@ -10047,7 +10056,7 @@ msgstr "El fitxer «%1» no és un fitxer de la cua de treball ni un fitxer d'aj
 msgid "The file '%1' you've added is a playlist."
 msgstr "El fitxer «%1» que heu afegit és una llista de reproducció."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:669
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:684
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, no-c-format
 msgid "The file (%1) is too big (%2)."
@@ -10087,7 +10096,7 @@ msgid "The file does not contain track ID %1%.\n"
 msgstr "El fitxer no conté l'ID de la pista %1%.\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:653
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:235
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "El fitxer ha estat desat amb èxit."
@@ -10184,8 +10193,8 @@ msgstr "Aquest fitxer no es processarà més."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:395
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:721
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:679
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:141
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "El fitxer que intenteu obrir (%1) no es pot llegir adequadament."
@@ -10273,7 +10282,7 @@ msgstr "El nom del fitxer de destinació generat es basa en el nom del fitxer d'
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "El factor d'escala assignat al codi de temps es troba fora d'un interval vàlid (1... 10000000 o -1 per a «precisió de la mostra fins i tot si hi ha present una pista de vídeo»).\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:177
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:192
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "Els valors de la capçalera no han estat modificats. No hi ha res per desar."
@@ -10908,8 +10917,8 @@ msgstr "No hi ha traducció disponible per a «%1%».\n"
 msgid "There was an error querying the update status."
 msgstr "S'ha produït un error en consultar l'estat de l'actualització."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:556
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:558
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:571
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:573
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "S'han produït errors en els valors de la capçalera que impedeixen desar les capçaleres. S'ha seleccionat el primer error."
@@ -11852,7 +11861,7 @@ msgstr "Amplada del vídeo en píxels"
 msgid "Video projection"
 msgstr "Projecció del vídeo"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:478
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:493
 msgid "Video projection information"
 msgstr "Informació de la projecció del vídeo"
 

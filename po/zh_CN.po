@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-10-04 19:42+0200\n"
+"POT-Creation-Date: 2017-10-05 20:33+0200\n"
 "PO-Revision-Date: 2017-10-04 19:50+0200\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -1304,7 +1304,7 @@ msgid "&Add attachment"
 msgstr "添加附件(&A)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:277
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:292
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
@@ -1387,7 +1387,7 @@ msgid "&Close file"
 msgstr "关闭文件(&C)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:197
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:276
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:291
 #, no-c-format
 msgid "&Collapse all"
 msgstr "全部收起(&C)"
@@ -1466,7 +1466,7 @@ msgid "&Escape arguments for:"
 msgstr "命令行转义格式(&E):"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:196
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:275
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:290
 #, no-c-format
 msgid "&Expand all"
 msgstr "全部展开(&E)"
@@ -1704,7 +1704,7 @@ msgstr "重新加载(&R)"
 msgid "&Reload file"
 msgstr "重新加载(&R)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:278
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:293
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
@@ -1746,7 +1746,7 @@ msgstr "重置该值(&R)"
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:279
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:294
 #, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "将附件内容保存到文件(&S)"
@@ -2696,7 +2696,7 @@ msgstr "作为新附件添加到当前文件(&A)"
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "作为输入文件添加到当前混流设置(&L)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:619
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:634
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -2898,7 +2898,7 @@ msgstr "所有条目"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:619
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:634
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:317
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:399
@@ -2928,7 +2928,7 @@ msgstr "其后所有文件名将在章节编辑器中打开。"
 msgid "All following file names will be opened in the header editor."
 msgstr "其后所有文件名将在头部编辑器中打开。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:541
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:556
 #, no-c-format
 msgid "All header values are OK."
 msgstr "所有头部数值均有效。"
@@ -3787,11 +3787,11 @@ msgstr "编解码器/MIME 类型"
 msgid "CodecPrivate, length %1%%2%"
 msgstr "编码格式私有数据，长度 %1%%2%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:468
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:483
 msgid "Colour information"
 msgstr "颜色信息"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:473
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:488
 msgid "Colour mastering meta information"
 msgstr "颜色创作元信息"
 
@@ -4504,7 +4504,7 @@ msgstr "首个输入文件所在目录的相对目录(&R):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:273
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:288
 #, no-c-format
 msgid "Directory:"
 msgstr "目录:"
@@ -4879,6 +4879,11 @@ msgstr "错误 %1%\n"
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "创建临时文件出错 (原因: %1)。"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:133
+#, fuzzy, no-c-format
+msgid "Error details: %1."
+msgstr "异常详情:"
+
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:77
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:167
 #, no-c-format
@@ -5223,7 +5228,7 @@ msgstr "文件数据，大小: %1%"
 msgid "File description: %1%"
 msgstr "文件描述: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:177
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:192
 #, no-c-format
 msgid "File has not been modified"
 msgstr "文件未被修改"
@@ -5238,7 +5243,7 @@ msgstr "文件名"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:272
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:287
 #, no-c-format
 msgid "File name:"
 msgstr "文件名:"
@@ -5264,7 +5269,7 @@ msgstr "找不到文件"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:723
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:128
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:143
 #, no-c-format
 msgid "File parsing failed"
 msgstr "解析文件失败"
@@ -5578,9 +5583,9 @@ msgstr "无法执行除头压缩，因为缓冲区仅包含 %1% 字节，小于�
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "无法执行除头压缩，因为缓冲区未以待移除的字节起始。需要的字节: %1%；找到的是: %2%。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:541
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:556
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:558
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:571
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:573
 #, no-c-format
 msgid "Header validation"
 msgstr "头部验证"
@@ -7199,7 +7204,7 @@ msgstr "尚无输出消息"
 msgid "No permission to read from, to write to or to create"
 msgstr "无读取、写入或创建权限"
 
-#: src/common/kax_analyzer.cpp:1504
+#: src/common/kax_analyzer.cpp:1513
 #, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "文件“%1%”中找不到剪辑 UID。"
@@ -7297,11 +7302,11 @@ msgstr "通常情况下，可以在列表视图中通过拖拽和键盘快捷键
 msgid "Not a hex digit at position %1%"
 msgstr "非十六进制数字，位于 %1%"
 
-#: src/common/kax_analyzer.cpp:285
+#: src/common/kax_analyzer.cpp:292
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "不是有效的 Matroska 文件 (未发现 EBML 头)"
 
-#: src/common/kax_analyzer.cpp:304
+#: src/common/kax_analyzer.cpp:311
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "不是有效的 Matroska 文件 (未发现剪辑/0 级元素)"
 
@@ -7421,7 +7426,7 @@ msgid_plural "Only %1% chapters found in source files & chapter files."
 msgstr[0] "输入文件及章节文件中只有 %1% 个章节。"
 
 #: src/merge/mkvmerge.cpp:1784
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:670
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:685
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7827,7 +7832,7 @@ msgstr "可能的原因包括: 程序不存在，或您无权访问它或其目�
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:116
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:127
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:138
 #: src/propedit/propedit.cpp:47
 #: src/propedit/propedit.cpp:53
 #, no-c-format
@@ -7925,7 +7930,7 @@ msgstr "进度: %1%%%%2%"
 msgid "Progress: 100%%%1%"
 msgstr "进度: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1570
+#: src/common/kax_analyzer.cpp:1579
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "进度: [%1%%2%] %3%%%"
@@ -8119,7 +8124,7 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "重新编号命名子章节(&N)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:295
 #, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "用新文件替换附件(&P)"
@@ -8133,8 +8138,8 @@ msgstr "在线阅读完整的 NEWS.md 文件"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "不支持读取已加密的 VOB。\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:667
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:679
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:682
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
 msgid "Reading failed"
@@ -8298,7 +8303,7 @@ msgstr "用文件 'filename' 替换一个现有附件"
 msgid "Replace attachment"
 msgstr "替换附件"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:296
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "用新文件替换附件，并沿用其名称及 MIME 类型(&D)"
@@ -8350,7 +8355,7 @@ msgstr "右击查看针对所有项目的选项"
 msgid "Right-click for actions for editions and chapters"
 msgstr "右击查看针对版本与章节的操作"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:300
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:315
 #, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "右击查看针对头部元素与附件的操作"
@@ -8494,17 +8499,17 @@ msgstr "保存失败"
 msgid "Saving the chapters failed."
 msgstr "保存章节失败。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:213
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:228
 #, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "保存修改后的附件失败。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:192
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:207
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "修改后的剪辑信息头部保存失败。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:198
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:213
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "保存修改后的轨道头部信息失败。"
@@ -8609,7 +8614,7 @@ msgstr "剪辑信息:"
 #: src/extract/timestamps_v2.cpp:243
 #: src/info/mkvinfo.cpp:453
 #: src/info/qt_ui.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:428
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:443
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
@@ -9656,6 +9661,10 @@ msgstr "当前混流设置页面将被关闭。"
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "当前封包的时间码比前一封包的小。这通常表明输入文件不是 100%% 正确创建的 Matroska 文件。所有封包的时间码将调整 %1% 毫秒以避免丢失任何数据。这可能导致音频/视频不同步，但可以通过 mkvmerge 的“--sync”选项修正。如果您已经使用了“--sync”却仍然收到本警告，请 *不必担心* -- 这是正常的。如果反复发生或某条特定轨道多次出现本警告，则可能输入文件制作存在严重问题，也可能 mkvmerge 存在 bug。如果是这样，请联系作者 Moritz Bunkus <moritz@bunkus.org>。\n"
 
+#: src/common/kax_analyzer.cpp:175
+msgid "The data in the file is corrupted and cannot be modified safely"
+msgstr ""
+
 #: src/common/property_element.cpp:110
 msgid "The date the file was created."
 msgstr "文件创建的日期。"
@@ -9783,8 +9792,8 @@ msgstr "文件 '%1%' 无法附加，因为该文件不存在或无法读取。\n
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "文件 '%1%' 无法以读写模式打开，或对该文件的读写操作失败: %2%。\n"
 
-#: src/common/kax_analyzer.cpp:1494
-#: src/common/kax_analyzer.cpp:1497
+#: src/common/kax_analyzer.cpp:1503
+#: src/common/kax_analyzer.cpp:1506
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "文件 '%1%' 无法以读取模式打开: %2%。"
@@ -9815,7 +9824,7 @@ msgstr "文件 '%1%' 无法以读取模式打开: %2%。\n"
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "文件 '%1%' 无法以写入模式打开: %2%。\n"
 
-#: src/common/kax_analyzer.cpp:1500
+#: src/common/kax_analyzer.cpp:1509
 #, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "文件 '%1%' 无法打开或解析。"
@@ -9865,7 +9874,7 @@ msgstr "文件“%1”既非任务队列文件，亦非设置文件。"
 msgid "The file '%1' you've added is a playlist."
 msgstr "您添加的 '%1' 文件是一个播放列表。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:669
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:684
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, no-c-format
 msgid "The file (%1) is too big (%2)."
@@ -9905,7 +9914,7 @@ msgid "The file does not contain track ID %1%.\n"
 msgstr "该文件不包含轨道 ID %1%。\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:653
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:235
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "文件已被成功保存。"
@@ -10002,8 +10011,8 @@ msgstr "将不会进一步处理该文件。"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:395
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:721
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:679
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:141
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "您试图打开的文件 (%1) 无法成功读取。"
@@ -10091,7 +10100,7 @@ msgstr "生成的输出文件名的名称部分（基本文件名）与输入文
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "指定的时间码缩放比例超出有效范围 (1 到 10000000，或 -1 代表“即使视频轨道存在时依然使用采样精度”)。\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:177
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:192
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "头部数值未被修改。无需保存。"
@@ -10714,8 +10723,8 @@ msgstr "尚无 '%1%' 的翻译。\n"
 msgid "There was an error querying the update status."
 msgstr "查询更新信息时出错。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:556
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:558
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:571
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:573
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "某些头部值出现错误导致无法保存头部。第一处错误已被选中。"
@@ -11655,7 +11664,7 @@ msgstr "视频像素宽度"
 msgid "Video projection"
 msgstr "视频投影"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:478
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:493
 msgid "Video projection information"
 msgstr "视频投影信息"
 
