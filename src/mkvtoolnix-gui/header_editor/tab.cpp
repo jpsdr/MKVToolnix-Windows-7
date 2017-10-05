@@ -201,38 +201,53 @@ Tab::save() {
 
   doModifications();
 
-  if (segmentinfoModified && m_eSegmentInfo) {
-    auto result = m_analyzer->update_element(m_eSegmentInfo, true);
-    if (kax_analyzer_c::uer_success != result)
-      QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified segment information header failed."));
-  }
+  bool ok = true;
 
-  if (tracksModified && m_eTracks) {
-    auto result = m_analyzer->update_element(m_eTracks, true);
-    if (kax_analyzer_c::uer_success != result)
-      QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
-  }
+  try {
+    if (segmentinfoModified && m_eSegmentInfo) {
+      auto result = m_analyzer->update_element(m_eSegmentInfo, true);
+      if (kax_analyzer_c::uer_success != result) {
+        QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified segment information header failed."));
+        ok = false;
+      }
+    }
 
-  if (attachmentsModified) {
-    auto attachments = std::make_shared<KaxAttachments>();
+    if (tracksModified && m_eTracks) {
+      auto result = m_analyzer->update_element(m_eTracks, true);
+      if (kax_analyzer_c::uer_success != result) {
+        QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
+        ok = false;
+      }
+    }
 
-    for (auto const &attachedFilePage : m_attachmentsPage->m_children)
-      attachments->PushElement(*dynamic_cast<AttachedFilePage &>(*attachedFilePage).m_attachment.get());
+    if (attachmentsModified) {
+      auto attachments = std::make_shared<KaxAttachments>();
 
-    auto result = attachments->ListSize() ? m_analyzer->update_element(attachments.get(), true)
-                :                           m_analyzer->remove_elements(KaxAttachments::ClassInfos.GlobalId);
+      for (auto const &attachedFilePage : m_attachmentsPage->m_children)
+        attachments->PushElement(*dynamic_cast<AttachedFilePage &>(*attachedFilePage).m_attachment.get());
 
-    attachments->RemoveAll();
+      auto result = attachments->ListSize() ? m_analyzer->update_element(attachments.get(), true)
+                  :                           m_analyzer->remove_elements(KaxAttachments::ClassInfos.GlobalId);
 
-    if (kax_analyzer_c::uer_success != result)
-      QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
+      attachments->RemoveAll();
+
+      if (kax_analyzer_c::uer_success != result) {
+        QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
+        ok = false;
+      }
+    }
+
+  } catch (mtx::kax_analyzer_x &ex) {
+    QMessageBox::critical(this, QY("Error writing Matroska file"), QY("Error details: %1.").arg(Q(ex.what())));
+    ok = false;
   }
 
   m_analyzer->close_file();
 
   load();
 
-  MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
+  if (ok)
+    MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
 }
 
 void
