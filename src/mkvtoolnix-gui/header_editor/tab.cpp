@@ -120,11 +120,26 @@ Tab::load() {
   }
 
   m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
+  bool ok    = false;
+  QString error;
 
-  if (!m_analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).set_open_mode(MODE_READ).process()) {
+  try {
+    ok = m_analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast)
+      .set_open_mode(MODE_READ)
+      .set_throw_on_error(true)
+      .process();
+
+  } catch (mtx::kax_analyzer_x &ex) {
+    error = QY("Error details: %1.").arg(Q(ex.what()));
+  }
+
+  if (!ok) {
+    if (error.isEmpty())
+      error = QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file.");
+
     auto text = Q("%1 %2")
       .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName))
-      .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
+      .arg(error);
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
     emit removeThisTab();
     return;

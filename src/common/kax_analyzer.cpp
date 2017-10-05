@@ -151,6 +151,9 @@ kax_analyzer_c::debug_dump_elements_maybe(const std::string &hook_name) {
 
 void
 kax_analyzer_c::validate_data_structures(const std::string &hook_name) {
+  if (m_data.empty())
+    return;
+
   bool gap_debugging = analyzer_debugging_requested("gaps");
   bool ok            = true;
   size_t i;
@@ -167,6 +170,10 @@ kax_analyzer_c::validate_data_structures(const std::string &hook_name) {
 
   if (!ok) {
     debug_dump_elements();
+
+    if (m_throw_on_error)
+      throw mtx::kax_analyzer_x{Y("The data in the file is corrupted and cannot be modified safely")};
+
     debug_abort_process();
   }
 }
@@ -357,6 +364,8 @@ kax_analyzer_c::process_internal() {
     read_all_meta_seeks();
 
   show_progress_done();
+
+  validate_data_structures("process_internal_end");
 
   if (!aborted) {
     if (parse_mode_full != m_parse_mode)

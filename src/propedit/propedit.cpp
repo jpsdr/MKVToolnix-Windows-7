@@ -130,7 +130,7 @@ run(options_cptr &options) {
       .set_open_mode(MODE_WRITE)
       .set_throw_on_error(true)
       .process();
-  } catch (mtx::mm_io::exception &ex) {
+  } catch (mtx::exception &ex) {
     mxerror(boost::format(Y("The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n")) % options->m_file_name % ex);
   } catch (...) {
   }

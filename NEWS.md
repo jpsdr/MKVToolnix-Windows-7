@@ -38,6 +38,9 @@
 * mkvmerge: Dirac: under certain conditions (e.g. only muxing a single Dirac
   track without any other tracks) mkvmerge was always setting the pixel width
   & height to 123. The frame rate was wrong, too.
+* mkvpropedit, GUI's header editor: both programs will now show proper error
+  messages instead of crashing when certain kinds of data corruption is found
+  when reading a file. Fixes #2115.
 
 
 # Version 16.0.0 "Protest" 2017-09-30
