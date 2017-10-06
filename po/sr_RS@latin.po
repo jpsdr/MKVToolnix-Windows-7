@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-10-05 20:33+0200\n"
-"PO-Revision-Date: 2017-10-04 19:49+0200\n"
+"PO-Revision-Date: 2017-10-06 18:16+0200\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
 "Language: sr_RS@latin\n"
@@ -55,7 +55,7 @@ msgid ""
 "                           appending files.\n"
 msgstr ""
 "  --append-mode <file|track>\n"
-"                           Selektuje kako mkvmerge izračunava vremenske kodove pri\n"
+"                           Selektuje kako mkvmerge izračunava vremenske oznake pri\n"
 "                           spajanju fajlova.\n"
 
 #: src/merge/mkvmerge.cpp:155
@@ -654,7 +654,7 @@ msgid ""
 msgstr ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
 "                           Isto kao 'parts:', samo što su 'startN'/'endN' brojevi\n"
-"                           slika/poluslika a ne vremenski kodovi.\n"
+"                           slika/poluslika a ne vremenske oznake.\n"
 
 #: src/merge/mkvmerge.cpp:138
 msgid ""
@@ -675,8 +675,8 @@ msgid ""
 "                           etc.\n"
 msgstr ""
 "  --split timestamps:A[,B...]\n"
-"                           Kreiraj novi fajl nakon svakog A, B itd\n"
-"                           vremenskog koda\n"
+"                           Kreiraj novi fajl nakon svake vremenske oznake A, B\n"
+"                           itd.\n"
 
 #: src/merge/mkvmerge.cpp:151
 msgid "  --split-max-files <n>    Create at most n files.\n"
@@ -706,11 +706,11 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:127
 msgid "  --timestamp-scale <n>    Force the timestamp scale factor to n.\n"
-msgstr "  --timestamp-scale <n>    Primorava množitelj vremenskog koda u n.\n"
+msgstr "  --timestamp-scale <n>    Primorava množitelj vremenske oznake u n.\n"
 
 #: src/merge/mkvmerge.cpp:239
 msgid "  --timestamps <TID:file>  Read the timestamps to be used from a file.\n"
-msgstr "  --timestamps <TID:file> Pročitaj iz fajla vremenske kodove koji će biti korišćeni.\n"
+msgstr "  --timestamps <TID:file> Pročitaj vremenske oznake koje će biti korišćene, iz fajla.\n"
 
 #: src/merge/mkvmerge.cpp:88
 #, fuzzy
@@ -906,9 +906,9 @@ msgid ""
 "                           floating point numbers.\n"
 msgstr ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
-"                           Sinhronizuj, doteraj vremenske kodove staze sa\n"
+"                           Sinhronizuj, doteraj vremenske oznake staze sa\n"
 "                           identifikatorom TID za 'd' milisekundi.\n"
-"                           'o/p': Doteraj vremenske kodove množeći sa\n"
+"                           'o/p': Doteraj vremenske oznake množeći sa\n"
 "                           'o/p' da bi popravio linearno pomeranje. U slučaju\n"
 "                           da nije navedeno, default za 'p' je 1. I 'o' i 'p' mogu biti\n"
 "                           brojevi sa pokretnim zarezom.\n"
@@ -1433,7 +1433,6 @@ msgid "&Chapter number of first created entry:"
 msgstr "B&roj prve napravljene stavke:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1391
-#, fuzzy
 msgid "&Character set for text files:"
 msgstr "&Skup znakova:"
 
@@ -1482,9 +1481,8 @@ msgid "&Command line:"
 msgstr "&Komandna linija:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
-#, fuzzy
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "Sabij početni i krajnji vremenski kod pod-poglavlja u početni i krajnji vremenski kod njihovog roditelja"
+msgstr "Sabij početne i krajnje vremenske oznake pod-poglavlja u početne i krajnje vremenske oznake njihovog roditelja"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:545
 msgid "&Copy command line to clipboard"
@@ -1655,9 +1653,8 @@ msgid "&Multiplexer"
 msgstr "&Multiplekser"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
-#, fuzzy
 msgid "&Multiply start and end timestamps by the following factor:"
-msgstr "Po&množi početne i krajnje vremenske kodove sledećim činiocem:"
+msgstr "Po&množi početne i krajnje vremenske oznake sledećim činiocem:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
@@ -1708,7 +1705,7 @@ msgstr "Uvrsti samo često korišćene unose u selekcije"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1363
 msgid "&Only use the first source file that contains a video track"
-msgstr ""
+msgstr "&Koristi samo prvi izvorni fajl koji sadrži video stazu."
 
 #: src/info/ui/mainwindow.h:107
 msgid "&Open"
@@ -1892,9 +1889,8 @@ msgid "&Skip file"
 msgstr "&Preskoči fajl"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
-#, fuzzy
 msgid "&Sort chapters by their start and end timestamps"
-msgstr "&Sortiraj poglavlja po njihovim početnim i krajnjim vremenskim kodovima"
+msgstr "&Sortiraj poglavlja prema njihovim početnim i krajnjim vremenskim oznakama"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
 msgid "&Start && end:"
@@ -1909,9 +1905,8 @@ msgstr[1] "Započni zadatke &automatski"
 msgstr[2] "Započni zadatke &automatski"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
-#, fuzzy
 msgid "&Start timestamp of first created entry:"
-msgstr "&Početni vremenski kod prve stavke:"
+msgstr "&Početna vremenska oznaka prve stavke:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1359
 msgid "&Subtitle tracks:"
@@ -2543,7 +2538,7 @@ msgstr "Zarezom odvojena lista brojeva slika/poluslika nakon kojih se pravi pode
 #: src/mkvtoolnix-gui/merge/output.cpp:373
 #, no-c-format
 msgid "A comma-separated list of timestamp ranges of content to keep."
-msgstr "Zarezom odvojena lista opsega vremenskih kodova koji se čuvaju."
+msgstr "Zarezom odvojena lista opsega vremenskih oznaka koji se čuvaju."
 
 #: src/input/r_matroska.cpp:765
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
@@ -2953,7 +2948,7 @@ msgstr "Posle određene veličine"
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
 msgid "After specific timestamps"
-msgstr "Posle određenog vremenskog koda"
+msgstr "Posle određene vremenske oznake"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:321
 msgid "After the job &queue has stopped"
@@ -3186,7 +3181,7 @@ msgstr "Očekivan je ceo broj bez predznaka."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
 #, no-c-format
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
-msgstr "Analiziraj MPEG4 bit-potoke, stavi svaku sliku u jedan Matroska blok, koristi pravilan timestamping (I P B B = 0 120 40 80), koristi V_MPEG4/ISO/... ID Kodeka."
+msgstr "Analiziraj MPEG4 bit-potoke, stavi svaku sliku u jedan Matroska blok, koristi pravilan redosled vremenskih oznaka (I P B B = 0 120 40 80), koristi V_MPEG4/ISO/... ID Kodeka."
 
 #: src/merge/generic_packetizer.cpp:632
 #, boost-format
@@ -3399,7 +3394,7 @@ msgstr "Bitova po uzorku, uglavnom se koristi za PCM."
 #: src/info/mkvinfo.cpp:188
 #, boost-format
 msgid "Block (track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%)"
-msgstr "Blok (staza broj %1%, %2% slika(e), vremenski kod %|3$.3f|s = %4%)"
+msgstr "Blok (staza broj %1%, %2% slika(e), vremenska oznaka %|3$.3f|s = %4%)"
 
 #: src/info/mkvinfo.cpp:202
 #, boost-format
@@ -3498,7 +3493,7 @@ msgstr "Dugmad"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:249
 #, no-c-format
 msgid "By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."
-msgstr ""
+msgstr "Po pravilu uvek pita korisnika koji skup znakova se koristi pri otvaranju fajla koje ne može da prepozna automatski."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:144
 #, no-c-format
@@ -3508,16 +3503,15 @@ msgstr "Na delove na osnovu brojeva slika/poluslika"
 #: src/mkvtoolnix-gui/merge/output.cpp:144
 #, no-c-format
 msgid "By parts based on timestamps"
-msgstr "Na delove na osnovu vremenskih kodova"
+msgstr "Na delove na osnovu vremenskih oznaka"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:318
 msgid "C&onfiguration active"
 msgstr "&Konfiguracija aktivna"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
-#, fuzzy
 msgid "C&onstrict or expand timestamps"
-msgstr "S&abij ili proširi vremenske kodove"
+msgstr "S&abij ili proširi vremenske oznake"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:127
 msgid "C&opy to clipboard"
@@ -3566,7 +3560,7 @@ msgstr "Otkaži"
 
 #: src/output/p_mpeg4_p2.cpp:111
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timestamps nor a number of frames per second.\n"
-msgstr "Ne mogu da konvertujem ne-nativne MPEG4 video slike u nativne ako izvorni kontejner ne obezbeđuje ni vremenske kodove ni broj slika u sekundi.\n"
+msgstr "Ne mogu da konvertujem ne-nativne MPEG4 video slike u nativne ako izvorni kontejner ne obezbeđuje ni vremenske oznake ni broj slika u sekundi.\n"
 
 #: src/extract/xtr_vobsub.cpp:85
 #, boost-format
@@ -3827,7 +3821,7 @@ msgstr "Prethodna veličina klastera: %1%"
 #: src/info/mkvinfo.cpp:211
 #, boost-format
 msgid "Cluster timestamp: %|1$.3f|s"
-msgstr "Vremenski kod klastera: %|1$.3f|s"
+msgstr "Vremenska oznaka klastera: %|1$.3f|s"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:45
@@ -4082,7 +4076,7 @@ msgstr "Ne mogu da otvorim fajl '%1%' za upravljanje izlaza.\n"
 #: src/extract/timestamps_v2.cpp:127
 #, boost-format
 msgid "Could not open the timestamp file '%1%' for writing (%2%).\n"
-msgstr "Ne mogu da otvorim fajl sa vremenskim kodom '%1%' za upisivanje (%2%).\n"
+msgstr "Ne mogu da otvorim fajl sa vremenskom oznakom '%1%' za upisivanje (%2%).\n"
 
 #: src/common/xml/ebml_converter.cpp:252
 #, boost-format
@@ -4178,9 +4172,8 @@ msgid "Ctrl+F"
 msgstr "Ctrl+F"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:652
-#, fuzzy
 msgid "Ctrl+F6"
-msgstr "Ctrl+F"
+msgstr "Ctrl+F6"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:612
 msgid "Ctrl+L"
@@ -4221,9 +4214,8 @@ msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:655
-#, fuzzy
 msgid "Ctrl+Shift+F6"
-msgstr "Ctrl+Shift+L"
+msgstr "Ctrl+Shift+F6"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:620
 msgid "Ctrl+Shift+L"
@@ -4306,9 +4298,9 @@ msgid "Cue sheet extraction"
 msgstr "Izvlačenje CUE lista"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Cue sheet files"
-msgstr "Tekstualni fajlovi"
+msgstr "Cue sheet fajlovi"
 
 #: src/common/chapters/cue_parser.cpp:394
 #, boost-format
@@ -4536,7 +4528,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Derive &end timestamps from start timestamps"
-msgstr ""
+msgstr "Izvedi krajnje vremenske oznake iz početnih"
 
 #: src/common/property_element.cpp:195
 msgid "Describes the projection used for this video track (0 – 3)."
@@ -4558,9 +4550,8 @@ msgid "Description:"
 msgstr "Opis:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1364
-#, fuzzy
 msgid "Destination directory"
-msgstr "Direktorijum odredišnog fajla"
+msgstr "Odredišni direktorijum"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1765
 msgid "Destination file"
@@ -4838,9 +4829,8 @@ msgid "E&xit"
 msgstr "Iz&ađi"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
-#, fuzzy
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
-msgstr "Proširi početni i krajnji vremenski kod poglavlja da obuhvati minimalni/maksimalni kod od svih njihovih pod-poglavlja"
+msgstr "Proširi početne i krajnje vremenske oznake poglavlja da obuhvati minimalnu/maksimalnu oznaku od svih njihovih pod-poglavlja"
 
 #: src/info/mkvinfo.cpp:1654
 msgid "EBML head"
@@ -4883,7 +4873,7 @@ msgstr "Svaki opseg sa sastoji od početnog i krajnjeg broja slike/poluslike sa 
 #: src/mkvtoolnix-gui/merge/output.cpp:375
 #, no-c-format
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
-msgstr "Svaki opseg se sastoji od početnog i krajnjeg vremenskog koda sa '-' u sredini, npr. '00:01:15-00:03:20'."
+msgstr "Svaki opseg se sastoji od početne i krajnje vremenske oznake sa '-' u sredini, npr. '00:01:15-00:03:20'."
 
 #: src/info/mkvinfo.cpp:185
 #, boost-format
@@ -5002,9 +4992,9 @@ msgid "Error creating a temporary file (reason: %1)."
 msgstr "Greška prilikom kreiranja privremenog fajla (razlog: %1)."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:133
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Error details: %1."
-msgstr "Detalji odstupanja:"
+msgstr "Detalji greške: %1."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:77
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:167
@@ -5015,7 +5005,7 @@ msgstr "Greška prilikom izvršavanja mkvmerge programa"
 #: src/input/subtitles.cpp:135
 #, boost-format
 msgid "Error in line %1%: expected a SRT timestamp line but found something else. Aborting this file.\n"
-msgstr "Greška u liniji %1%: očekivao SRT vremenski kod ali pronašao nešto drugo. Obrada fajla prekinuta.\n"
+msgstr "Greška u liniji %1%: očekivao SRT vremensku oznaku ali pronašao nešto drugo. Obrada fajla prekinuta.\n"
 
 #: src/input/subtitles.cpp:126
 #, boost-format
@@ -5179,7 +5169,7 @@ msgstr "Izvrši program '%1'"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
 #, no-c-format
 msgid "Executes the action immediately."
-msgstr ""
+msgstr "Izvršava radnju odmah."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:189
 #, no-c-format
@@ -5245,9 +5235,9 @@ msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "Izvlačenje track ID %1% sa CodecID '%2%' nije podržano.\n"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:356
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extraction tool"
-msgstr "&Izvlačenje"
+msgstr "Izvlačenje"
 
 #: src/info/ui/mainwindow.h:129
 msgid "F1"
@@ -5462,7 +5452,7 @@ msgstr "Za detaljno objašnjenje o povezivanju fajlova/segmenata i o ovoj funkci
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
-msgstr "Za fajlove koji neće sadržavati video stazu ali makar jednu audio stazu mkvmerge će automatski izabrati množitelj vremenskog koda tako da svi vremenski kodovi i trajanja imaju preciznost od jednog uzorka."
+msgstr "Za fajlove koji neće sadržavati video stazu ali makar jednu audio stazu mkvmerge će automatski izabrati množitelj vremenske oznake tako da sve vremenske oznake i trajanja imaju preciznost od jednog uzorka."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
 #, no-c-format
@@ -5525,7 +5515,7 @@ msgstr "Postavlja podrazumevano trajanje ili broj slika u sekundi za stazu."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
 #, no-c-format
 msgid "Forces the timestamp scale factor to the given value."
-msgstr "Primorava množitelj vremenskog koda u datu vrednost."
+msgstr "Primorava množitelj vremenske oznake u datu vrednost."
 
 #: src/mpegparser/M2VParser.cpp:448
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
@@ -5793,12 +5783,12 @@ msgstr "IVF sa VP8 video fajlovi"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:250
 #, no-c-format
 msgid "If a character set is selected here, it will be used instead of asking the user."
-msgstr ""
+msgstr "Umesto toga, ovde možete izabrati skup znakova koji će se koristiti."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:326
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."
-msgstr "Ako se ovde izabere skup znakova program će automatski podesiti skupove znakova u ovu vrednost za novo dodate staze sa tekstualnim titlovima."
+msgstr "Ako se ovde izabere skup znakova, program će automatski podesiti skupove znakova u ovu vrednost za novo dodate staze sa tekstualnim titlovima."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:395
 #, no-c-format
@@ -5808,7 +5798,7 @@ msgstr "Ako je početni broj opsega prefiksiran sa '+' onda će njegov sadržaj 
 #: src/mkvtoolnix-gui/merge/output.cpp:378
 #, no-c-format
 msgid "If a range's start timestamp is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
-msgstr "Ako je početni vremenski kod opsega prefiksiran sa '+' onda će njegov sadržaj biti zapisan u isti fajl kao i prethodni opseg. U protivnom novi fajl će biti napravljen za ovaj opseg."
+msgstr "Ako je početna vremenska oznaka opsega prefiksirana sa '+' onda će njegov sadržaj biti zapisan u isti fajl kao i prethodni opseg. U protivnom novi fajl će biti napravljen za ovaj opseg."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:394
 #, no-c-format
@@ -5818,7 +5808,7 @@ msgstr "Ako je početni broj izostavljen onda je krajnji broj prethodnog opsega 
 #: src/mkvtoolnix-gui/merge/output.cpp:376
 #, no-c-format
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
-msgstr "Ako je početni vremenski kod izostavljen onda je krajnji vremenski kod prethodnog opsega korišćen, ili početak fajla ako nije bilo prethodnog opsega."
+msgstr "Ako je početna vremenska oznaka izostavljena, onda je krajnja vremenska oznaka prethodnog opsega korišćena, ili početak fajla ako nije bilo prethodnog opsega."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:221
 #, no-c-format
@@ -5832,92 +5822,91 @@ msgid "If both shifting and multiplication are enabled then the shift will be pe
 msgstr "Ako je omogućeno i pomeranje i množenje, onda će se pomeranje vršiti pre množenja."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:223
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, additional buttons for moving selected entries up and down will be shown next to several list views."
 msgstr "Ako je čekirano, pored liste biće prikazana dodatna dugmad za pomeranje izabranih stavki gore i dole."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:372
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:379
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:386
-#, fuzzy
 msgid "If checked, only the list of often used entries will be included in the selections in the program."
 msgstr "Ako je čekirano, program će u sebi sadržavati samo listu često korišćenih stavki."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:210
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, several short animations used throughout the program as visual clues for the user will be disabled."
-msgstr "Ako je čekirano, nekoliko kratkih animacija korišćenih kroz čitav program kao vizuelni trag, će biti isključeno."
+msgstr "Ako je čekirano, kratke animacije korišćene kao vizuelna pomoć u programu će biti isključene."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:351
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."
-msgstr "Ako je čekirano, program će se pobrinuti da je predloženo ime odredišnog fajla jedinstveno, dodajući broj (npr. ' (1)') na kraju imena fajla."
+msgstr "Ako je čekirano, program će se postarati da je predloženo ime odredišnog fajla jedinstveno, dodajući broj (npr. ' (1)') na kraju imena fajla."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:217
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, the program will ask for confirmation before aborting a running job."
 msgstr "Ako je čekirano, program će pitati za potvrdu pre nego što prekine pokrenuti zadatak."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If checked, the program will ask for confirmation before closing or reloading tabs that have been modified."
 msgstr "Ako je čekirano, program će pitati za potvrdu pre nego što zatvori ili ponovo učita tabove koji su izmenjeni."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:227
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If disabled, the GUI will let you enter a description for a job when adding it to the queue."
 msgstr "Ako je onemogućeno, program će vam dati da unesete opis zadatka kada ga dodajete na listu."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."
-msgstr "Ako je omogućeno, sve titl staze će imati njihovu »default track« zastavicu postavljenu na »ne« kada su dodate."
+msgstr "Ako je omogućeno, sve titl staze će imati svoju »default track« zastavicu postavljenu na »ne« kada se dodaju."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:229
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."
 msgstr "Ako je omogućeno, program će automatski prebaciti na prozor sa rezultatom zadatka uvek kada započnete zadatak (npr. pritiskom na \"počni multipleksiranje\")."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:231
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:232
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."
-msgstr "Ako je omogućeno, program će ukloniti završene zadatke starije od podešenog broja dana bez obzira na njihov status pri izlasku."
+msgstr "Ako je omogućeno, program će ukloniti završene zadatke starije od podešenog broja dana bez obzira na njihov status po završetku."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:280
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the destination file name controls will always be visible no matter which tab is currently shown."
 msgstr "Ako je omogućeno, polje sa imenom odredišnog fajla će uvek biti vidljivo bez obzira koji tab je trenutno prikazan."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:228
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the first tab in the \"job output\" tool will not be cleared when a new job starts."
 msgstr "Ako je omogućeno, prvi tab iz alatke »rezultat zadatka« neće biti očišćen kada počne novi zadatak."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:245
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie."
 msgstr "Ako je ovo omogućeno, poslednja stavka iz takvih plejlisti će biti preskočena pri učitavanju u urednik poglavlja, ako se nalazi pet sekundi od kraja filma."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:225
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the program will ask for confirmation before overwriting files and jobs."
 msgstr "Ako je omogućeno, program će pitati za potvrdu pre nego što prepiše fajlove i zadatke."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:206
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the program will check online whether or not a new release of MKVToolNix is available on the home page."
 msgstr "Ako je omogućeno, program će proveriti da li je dostupno novo izdanje MKVToolNix-a na web stranici programa."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:230
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."
-msgstr "Ako je omogućeno, brojači upozorenja i grešaka svih zadataka kao i globalni brojači na statusnoj traci biće resetovani na 0 pri izlasku iz programa."
+msgstr "Ako je omogućeno, prikaz upozorenja i grešaka zadataka kao i globalni prikaz na statusnoj traci biće resetovan na 0 pri izlasku iz programa."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:361
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:362
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:363
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
 msgstr "Ako je omogućeno, onda će staze ovog tipa uvek biti obeležene za kopiranje bez obzira na njihov jezik."
 
@@ -5931,9 +5920,9 @@ msgid "If given then you may use up to nine digits after the decimal point."
 msgstr "Ako su navedeni onda možete koristiti do devet cifara posle decimalne tačke."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:263
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If it contains the word 'DELAY' followed by a number, this number is automatically put into the 'delay' input field for any audio track found in the file."
-msgstr "Ako sadrži reč 'DELAY' praćen brojem onda se ovaj broj automatski stavlja u polje za unos 'kašnjenje' za svaku audio stazu nađenu u fajlu."
+msgstr "Ako sadrži reč 'DELAY' praćen brojem, onda se taj broj automatski stavlja u polje za unos 'kašnjenje' za svaku audio stazu nađenu u fajlu."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:502
 #, no-c-format
@@ -6005,39 +5994,38 @@ msgid "If there is no such chapter, the parent chapter's end timestamp will be u
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."
-msgstr "Ako je ova opcija omogućena i ako trenutno nije zadato ime odredišnog fajla, program će onda za vas uneti ime kada dodate izvorni fajl."
+msgstr "Ako je ova opcija omogućena i ako trenutno nije uneto ime odredišnog fajla, program će onda za vas uneti ime kada dodate izvorni fajl."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:346
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled, only source files containing video tracks will be used for setting the destination file name."
-msgstr "Ako je ova opcija omogućena onda će samo staze čiji je jezik dole izabran biti obeležene za kopiranje."
+msgstr "Ako je ova opcija omogućena, samo će izvorni fajlovi koji sadrže video staze biti korišćeni za unos naziva odredišnog fajla."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:358
-#, fuzzy
 msgid "If this option is enabled, only those tracks will be set to be copied whose language is selected below."
-msgstr "Ako je ova opcija omogućena onda će samo staze čiji je jezik dole izabran biti obeležene za kopiranje."
+msgstr "Ako je ova opcija omogućena, samo će staze čiji je jezik dole izabran biti obeležene za kopiranje."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:353
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."
 msgstr "Ako je ova opcija omogućena, program će uvek izbrisati naziv fajla iz polja \"odredišni fajl\" kad god se ukloni poslednji izvorni fajl."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:258
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."
 msgstr "Ako je ova opcija omogućena, program će uvek izbrisati naslov iz polja \"naslov fajla\" kad god se ukloni poslednji izvorni fajl."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:276
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If tracks are known to be present but not found, the percentage to probe can be changed here."
 msgstr "Ako se zna da staze postoje ali da nisu pronađene, onda ovde možete promeniti procenat za ispitivanje."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:367
 #, no-c-format
 msgid "If two or more timestamps are used then you have to separate them with commas."
-msgstr "Ako se koriste dva ili vise vremenska koda onda ih morate razdvojiti sa zarezima."
+msgstr "Ako se koriste dve ili više vremenskih oznaka onda ih morate odvojiti sa zarezima."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:421
 #, no-c-format
@@ -6275,7 +6263,7 @@ msgstr "Nevažeći format za '--split' u '--split %1%'.\n"
 #: src/extract/xtr_textsubs.cpp:189
 #, boost-format
 msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: The first field is not an integer. This entry will be skipped.\n"
-msgstr "Nevažeći format za SSA liniju ('%1%') na vremenskom kodu %2%: Prvo polje nije ceo broj. Ovaj unos će biti preskočen.\n"
+msgstr "Nevažeći format za SSA liniju ('%1%') na vremenskoj oznaci %2%: Prvo polje nije ceo broj. Ovaj unos će biti preskočen.\n"
 
 #: src/common/strings/parsing.cpp:147
 msgid "Invalid format: At least minutes and seconds have to be given, but no colon was found"
@@ -6389,7 +6377,7 @@ msgstr "Nevažeći početni broj slike/poluslike za '--split' u '--split %1%' (t
 
 #: src/input/r_usf.cpp:219
 msgid "Invalid start or stop timestamp"
-msgstr "Nevažeći početak ili završetak u vremenskom kodu"
+msgstr "Nevažeća početna ili završna vremenska oznaka"
 
 #: src/common/split_arg_parsing.cpp:53
 #, boost-format
@@ -6602,7 +6590,7 @@ msgstr "Kate"
 
 #: src/output/p_kate.cpp:69
 msgid "Kate packet is too small and is being skipped.\n"
-msgstr "kate paket je previše mali i preskače se.\n"
+msgstr "Kate paket je previše mali i preskače se.\n"
 
 #: src/extract/extract_cli_parser.cpp:70
 msgid "Keep only the BlockAdditions up to this level (default: keep all levels)"
@@ -6633,7 +6621,7 @@ msgstr "Jezik"
 
 #: src/common/kate.cpp:76
 msgid "Language is not NUL terminated"
-msgstr "Jezik se ne završava sa nultim bajtom."
+msgstr "Jezik se ne završava sa nultim bajtom"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1737
@@ -6665,20 +6653,18 @@ msgstr "Levo"
 #: src/merge/timestamp_factory.cpp:357
 #, boost-format
 msgid "Line %1% of the timestamp file '%2%' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
-msgstr ""
-"Linija %1% iz fajla sa vremenskim kodom '%2%' sadrži nedosledan podatak (npr. trajanje ili FPS su manji od nule).\n"
-"Строка %1% файла тайм-кодов '%2%' содержит противоречивые данные (например, продолжительность или FPS меньше нуля).\n"
+msgstr "Linija %1% iz fajla sa vremenskom oznakom '%2%' sadrži nedosledan podatak (npr. trajanje ili FPS su manji od nule).\n"
 
 #: src/merge/timestamp_factory.cpp:120
 #, boost-format
 msgid "Line %1% of the timestamp file '%2%' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
-msgstr "Linija %1% iz fajla sa vremenskim kodom '%2%' sadrži nedosledan podatak (npr. broj početne slike je veći od broja poslednje slike, ili su neke vrednosti manje od nule).\n"
+msgstr "Linija %1% iz fajla sa vremenskom oznakom '%2%' sadrži nedosledan podatak (npr. broj početne slike je veći od broja poslednje slike, ili su neke vrednosti manje od nule).\n"
 
 #: src/merge/timestamp_factory.cpp:115
 #: src/merge/timestamp_factory.cpp:350
 #, boost-format
 msgid "Line %1% of the timestamp file '%2%' could not be parsed.\n"
-msgstr "Linija %1% iz fajla sa vremenskim kodom '%2%' ne može biti raščlanjena.\n"
+msgstr "Linija %1% iz fajla sa vremenskom oznakom '%2%' ne može biti raščlanjena.\n"
 
 #: src/input/subtitles.cpp:199
 #, boost-format
@@ -6699,7 +6685,7 @@ msgstr "Linija %1%: Linija izgleda kao unos za titl ali format ne može biti pre
 #: src/input/r_vobsub.cpp:287
 #, boost-format
 msgid "Line %1%: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
-msgstr "Linija %1%: Linija izgleda kao unos za titl ali je vremenski kod bio negativan čak i nakon dodavanja kašnjenja stazi. Negativni vremenski kodovi nisu podržani u Matroski. Ovaj unos će biti preskočen.\n"
+msgstr "Linija %1%: Linija izgleda kao unos za titl ali je vremenska oznaka bila negativna čak i nakon dodavanja kašnjenja stazi. Negativne vremenske oznake nisu podržane u Matroski. Ovaj unos će biti preskočen.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 msgid "Link files"
@@ -6761,9 +6747,9 @@ msgid "MKVToolNix GUI preferences"
 msgstr "MKVToolNix GUI opcije"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:250
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "MKVToolNix GUI's installation directory"
-msgstr "MKVToolNix GUI kofiguracioni fajlovi"
+msgstr "MKVToolNix GUI instalacioni direktorijum"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:123
 #: src/mkvtoolnix-gui/merge/tab.cpp:201
@@ -7412,22 +7398,22 @@ msgstr "Završeni zadaci uobičajeno ostaju na listi zadataka čak i posle resta
 #: src/mkvtoolnix-gui/merge/input.cpp:472
 #, no-c-format
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
-msgstr "Normalno mkvmerge ne menja tajming informaciju (brzina slika/poluslika) pohranjenu u video bit-potoku."
+msgstr "Program po pravilu ne menja tajming informaciju (brzina slika/poluslika) pohranjenu u video bit-potoku."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
-msgstr "Mkvmerge uobičajeno čuva informaciju o formatu slike u MPEG4 video bit-potocima i stavlja tu informaciju u kontejner."
+msgstr "Mkvmerge po pravilu čuva informaciju o formatu slike u MPEG4 video bit-potocima i stavlja tu informaciju u kontejner."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #, no-c-format
 msgid "Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."
-msgstr "mkvmerge će po običaju primeniti dodatnu lossless kompresiju za titl staze određenih kodeka."
+msgstr "mkvmerge će po pravilu primeniti dodatnu lossless kompresiju za titl staze određenih kodeka."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
-msgstr "Mkvmerge će uobičajeno koristiti vrednost 1000000 što znači da će vremenski kodovi i trajanja imati preciznost od 1ms."
+msgstr "Mkvmerge će po pravilu koristiti vrednost 1000000 što znači da će vremenske oznake i trajanja imati preciznost od 1ms."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:222
 #, no-c-format
@@ -7472,17 +7458,17 @@ msgstr "Nije još započeto"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:498
 msgid "Note also that there are not a lot of players that support the cropping parameters."
-msgstr "Imajte takođe na umu da nema mnogo plejera koji podržavaju parametre podrezivanja."
+msgstr "Imajte takođe u vidu da nema mnogo plejera koji podržavaju parametre podrezivanja."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:257
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
-msgstr "Imajte na umu da čak i ako je opcija isključena mkvmerge će kopirati naslov izvornog fajla osim ako je on ručno postavljen od strane korisnika."
+msgstr "Imajte u vidu da čak iako je opcija isključena, mkvmerge će kopirati naslov izvornog fajla osim ako je on ručno postavljen od strane korisnika."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:480
 #: src/mkvtoolnix-gui/merge/input.cpp:486
 #: src/mkvtoolnix-gui/merge/input.cpp:491
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
-msgstr "Imajte na umu da mnogi plejeri ne koriste vrednosti širine/visine prikaza direktno već koriste odnos od tih vrednosti kada podešavaju početnu veličinu prozora."
+msgstr "Imajte u vidu da mnogi plejeri ne koriste vrednosti širine/visine prikaza direktno već koriste odnos od tih vrednosti kada podešavaju početnu veličinu prozora."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
 #, no-c-format
@@ -7496,15 +7482,15 @@ msgstr "Znajte da u Windows-u takođe može da se koristi kosa crta umesto obrnu
 #: src/merge/generic_packetizer.cpp:1629
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
-msgstr "Imajte na umu da Matroska specifikacije koje se odnose na skladištenje '%1%' nisu još uvek finalizovane. Stoga je podrška za to podložna promeni i koristi CodecID '%2%/EXPERIMENTAL' umesto '%2%'. Ovo upozorenje će biti uklonjeno kada specifikacije budu finalizovane i mkvmerge ažuriran u skladu sa tim.\n"
+msgstr "Imajte u vidu da Matroska specifikacije koje se odnose na skladištenje '%1%' nisu još uvek finalizovane. Stoga je podrška za to podložna promeni i koristi CodecID '%2%/EXPERIMENTAL' umesto '%2%'. Ovo upozorenje će biti uklonjeno kada specifikacije budu finalizovane i mkvmerge ažuriran u skladu sa tim.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:360
 msgid "Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files)."
-msgstr "Imajte na umu da je stavka jezika »Neodređen (und)« preuzeta za staze za koje jezik nije poznat (npr. one pročitane iz SRT titl fajlova)."
+msgstr "Imajte u vidu da je stavka jezika »Neodređen (und)« preuzeta za staze za koje jezik nije poznat (npr. one pročitane iz SRT titl fajlova)."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:496
 msgid "Note that the video content is not modified by this option."
-msgstr "Imajte na umu da sadržaj videa nije izmenjen sa ovom opcijom."
+msgstr "Imajte u vidu da sadržaj videa nije izmenjen sa ovom opcijom."
 
 #: src/extract/attachments.cpp:130
 #: src/extract/cues.cpp:183
@@ -7766,9 +7752,9 @@ msgid "Original value:"
 msgstr "Originalna vrednost:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:347
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Other files are ignored when they're added."
-msgstr "Vrednosti su sačuvane samo u zaglavljima staze."
+msgstr "Ostali fajlovi će biti ignorisani."
 
 #: src/propedit/propedit_cli_parser.cpp:239
 msgid "Other options"
@@ -7788,7 +7774,7 @@ msgstr "U suprotnom, na listu će prvo biti uvrštene često korišćene stavke 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:281
 #, no-c-format
 msgid "Otherwise they're shown on the 'output' tab."
-msgstr "U suprotnom nalazi se u tabu 'Izlaz'."
+msgstr "Inače se nalazi u tabu 'Izlaz'."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:183
 #, no-c-format
@@ -8033,18 +8019,18 @@ msgstr "Procenat &sadržaja za ispitivanje:"
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Problem sa MKVToolNix instalacijom"
+msgstr[1] "Problemi sa MKVToolNix instalacijom"
+msgstr[2] "Problemi sa MKVToolNix instalacijom"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1329
 msgid "Process &priority:"
 msgstr "Prioritet &procesa:"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:57
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Program"
-msgstr "Progres"
+msgstr "Program"
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:197
 #, no-c-format
@@ -8546,9 +8532,8 @@ msgid "Running jobs cannot be removed."
 msgstr "Započeti zadaci se ne mogu ukloniti."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
-#, fuzzy
 msgid "S&hift start and end timestamps by the following amount:"
-msgstr "&Pomeri početne i krajnje vremenske kodove za sledeću vrednost:"
+msgstr "&Pomeri početne i krajnje vremenske oznake za sledeću vrednost:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:544
 msgid "S&how command line"
@@ -8614,9 +8599,9 @@ msgid "Save chapters as XML"
 msgstr "Sačuvaj poglavlja kao XML"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:707
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save chapters to Matroska or WebM file"
-msgstr "Sačuvaj poglavlja u Matroska fajl"
+msgstr "Sačuvaj poglavlja u Matroska ili WebM fajl"
 
 #: src/info/qt_ui.cpp:94
 #, no-c-format
@@ -8639,9 +8624,8 @@ msgid "Save settings file as"
 msgstr "Sačuvaj podešavanja kao"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:583
-#, fuzzy
 msgid "Save to &Matroska or WebM file"
-msgstr "Sačuvaj u &Matroska fajl"
+msgstr "Sačuvaj u &Matroska ili WebM fajl"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:680
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:684
@@ -8880,7 +8864,7 @@ msgstr "Izaberite fajl sa tagovima"
 #: src/mkvtoolnix-gui/merge/input.cpp:959
 #, no-c-format
 msgid "Select timestamp file"
-msgstr "Izaberite fajl sa vremenskim kodovima"
+msgstr "Izaberite fajl sa vremenskim oznakama"
 
 #: src/mkvtoolnix-gui/forms/util/side_by_side_multi_select.h:129
 msgid "Selected:"
@@ -9178,7 +9162,7 @@ msgstr "Slajsevi"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:86
 #, no-c-format
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
-msgstr "Neke h.264/AVC staze sadrže I slike ali nemaju prave ključne slike."
+msgstr "Neke h.264/AVC staze sadrže I slike koje nisu prave ključne slike."
 
 #: src/merge/output_control.cpp:1315
 #, boost-format
@@ -9249,7 +9233,7 @@ msgstr "Deljenje"
 #: src/mkvtoolnix-gui/merge/output.cpp:415
 #, no-c-format
 msgid "Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed."
-msgstr "Do deljenja će doći neposredno pre prve ključne slike čiji vremenski kod je jednak ili veći od početnog vremenskog koda za poglavlja čiji su brojevi navedeni."
+msgstr "Do deljenja će doći tačno pre prve ključne slike čija vremenska oznaka je jednaka ili veća od početne vremenske oznake za poglavlja čiji su brojevi navedeni."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:622
 msgid "Sta&rt all pending jobs"
@@ -9501,7 +9485,7 @@ msgstr "FLAC zaglavlje ne može biti raščlanjeno: struktura informacije potoka
 #: src/output/p_generic_video.cpp:74
 #, boost-format
 msgid "The FPS is 0.0 but the reader did not provide a timestamp for a packet. %1%\n"
-msgstr "FPS je 0.0 ali čitač nije naveo vremenski kod za paket. %1%\n"
+msgstr "FPS je 0.0 ali čitač nije naveo vremensku oznaku za paket. %1%\n"
 
 #: src/merge/mkvmerge.cpp:1460
 #, boost-format
@@ -9752,7 +9736,7 @@ msgstr "Ako se navodi, chapter UID mora biti broj."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:248
 #, no-c-format
 msgid "The chapter editor needs to know the character set a text chapter file uses in order to display all characters properly."
-msgstr ""
+msgstr "Urednik poglavlja mora da zna koji skup znakova fajl sa poglavljima koristi da bi mogao da prikaže sve znakove pravilno."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:383
@@ -9846,7 +9830,7 @@ msgstr "Aktuelne multipleks postavke će biti zatvorene."
 #: src/merge/generic_packetizer.cpp:1347
 #, boost-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
-msgstr "Vremenski kod trenutnog paketa je niži nego onaj od prethodnog paketa. Ovo obično znači da je izvorni fajl Matroska fajl koji nije bio napravljen 100%% ispravno. Vremenski kodovi svih paketa će biti prilagođeni sa %1%ms kako ne bi izgubili nikakve podatke. Ovo može poremetiti audio/video sinhronizaciju, ali to može biti ispravljeno sa mkvmerge \"--sync\" parametrom. Ako već koristite \"--sync\" a i dalje dobijate ovo upozorenje onda NE brinite -- ovo je normalno. Ako se ova greška dešava više od jednom i takođe dobijate ovu poruku više od jednom za ovu naročitu stazu onda je ili izvorni fajl loše napravljen, ili mkvmerge sadrži programsku grešku. U ovom slučaju trebalo bi da kontaktirate autora Morica Bunkusa <moritz@bunkus.org>.\n"
+msgstr "Vremenska oznaka trenutnog paketa je niža nego ona od prethodnog paketa. Ovo obično znači da je izvorni fajl Matroska fajl koji nije bio napravljen 100%% ispravno. Vremenske oznake svih paketa će biti prilagođene sa %1%ms kako ne bi izgubili nikakve podatke. Ovo može poremetiti audio/video sinhronizaciju, ali to može biti ispravljeno sa mkvmerge \"--sync\" parametrom. Ako već koristite \"--sync\" a i dalje dobijate ovo upozorenje onda NE brinite -- ovo je normalno. Ako se ova greška dešava više od jednom i takođe dobijate ovu poruku više od jednom za ovu naročitu stazu, onda je ili izvorni fajl loše napravljen, ili mkvmerge sadrži programsku grešku. U ovom slučaju trebalo bi da kontaktirate autora Morica Bunkusa <moritz@bunkus.org>.\n"
 
 #: src/common/kax_analyzer.cpp:175
 msgid "The data in the file is corrupted and cannot be modified safely"
@@ -10228,7 +10212,7 @@ msgstr "Fajl koji ste pokušali da otvorite (%1) nije prepoznat ni kao važeći 
 #: src/common/kax_file.cpp:52
 #, boost-format
 msgid "The first cluster timestamp after the resync is %1%.\n"
-msgstr "Prvi klaster vremenskog koda nakon resinhronizovanja je %1%.\n"
+msgstr "Prvi klaster vremenske oznake nakon resinhronizovanja je %1%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1762
 msgid "The first destination file only"
@@ -10289,7 +10273,7 @@ msgstr "Generisano ime ima istu osnovu kao izvorni fajl ali sa ekstenzijom zasno
 
 #: src/merge/mkvmerge.cpp:1914
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
-msgstr "Navedeni množitelj vremenskog koda je izvan važećeg opsega (1...10000000 ili -1 za 'preciznost uzorka čak i ako je video staza prisutna').\n"
+msgstr "Navedeni množitelj vremenske oznake je izvan važećeg opsega (1...10000000 ili -1 za 'preciznost uzorka čak i ako je video staza prisutna').\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:192
 #, no-c-format
@@ -10348,7 +10332,7 @@ msgstr "Jezici iz liste 'odabrano' će biti prikazani na vrhu svih padajućih li
 #: src/common/kax_file.cpp:215
 #, boost-format
 msgid "The last timestamp processed before the error was encountered was %1%.\n"
-msgstr "Poslednji obrađeni vremenski kod pre nego što je naiđeno na grešku je %1%.\n"
+msgstr "Poslednja obrađena vremenska oznaka pre nego što je naiđeno na grešku je %1%.\n"
 
 #: src/propedit/change.cpp:221
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
@@ -10362,7 +10346,7 @@ msgstr "Slova 'G', 'M' i 'K' mogu biti upotrebljena da se naznači giga/mega/kil
 #: src/merge/timestamp_factory.cpp:214
 #, boost-format
 msgid "The line %1% of the timestamp file '%2%' does not contain a valid floating point number.\n"
-msgstr "Linija %1% iz fajla vremenskog koda '%2%' ne sadrži važeći broj sa pokretnim zarezom.\n"
+msgstr "Linija %1% iz fajla vremenske oznake '%2%' ne sadrži važeći broj sa pokretnim zarezom.\n"
 
 #: src/common/translation.cpp:349
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
@@ -10463,7 +10447,7 @@ msgstr "Broj kanala dve audio staze je različit: %1% and %2%"
 #: src/merge/timestamp_factory.cpp:270
 #, boost-format
 msgid "The number of external timestamps %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
-msgstr "Broj spoljnih vremenskih kodova %1% je manji nego broj slika u ovoj stazi. Preostale slike iz ove staze možda neće biti vremenski označene na onaj način kako ste vi nameravali. mkvmerge će se možda čak i srušiti.\n"
+msgstr "Broj spoljnih vremenskih oznaka %1% je manji nego broj slika u ovoj stazi. Preostale slike iz ove staze možda neće biti vremenski označene na onaj način kako ste vi nameravali. mkvmerge će se možda čak i srušiti.\n"
 
 #: src/common/property_element.cpp:155
 msgid ""
@@ -10651,7 +10635,7 @@ msgstr "Konfiguracioni fajl '%1' sadrži nevažeće parametre i nije učitan."
 
 #: src/extract/extract_cli_parser.cpp:116
 msgid "The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."
-msgstr "Šesti režim pronalazi vremenske kodove svih blokova staze i proizvodi fajl sa ovim vremenskim kodovima formata v2."
+msgstr "Šesti režim pronalazi vremenske oznake svih blokova staze i proizvodi fajl formata v2 sa ovim vremenskim oznakama."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:331
 #, no-c-format
@@ -10744,17 +10728,17 @@ msgstr "Treći režim izvlači priloge iz izvornog fajla."
 #: src/merge/timestamp_factory.cpp:64
 #, boost-format
 msgid "The timestamp file '%1%' contains an unsupported/unrecognized format (version %2%).\n"
-msgstr "Fajl sa vremenskim kodom '%1%' sadrži nepodržan/neprepoznat format (version %2%).\n"
+msgstr "Fajl sa vremenskom oznakom '%1%' sadrži nepodržan/neprepoznat format (version %2%).\n"
 
 #: src/merge/timestamp_factory.cpp:50
 #, boost-format
 msgid "The timestamp file '%1%' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"
-msgstr "Fajl sa vremenskim kodom '%1%' sadrži liniju od nepodržanog/neprepoznatog formata. Sama prva linija mora da izgleda kao '# timestamp format v1'.\n"
+msgstr "Fajl sa vremenskom oznakom '%1%' sadrži liniju od nepodržanog/neprepoznatog formata. Sama prva linija mora da izgleda kao '# timestamp format v1'.\n"
 
 #: src/merge/timestamp_factory.cpp:33
 #, boost-format
 msgid "The timestamp file '%1%' could not be opened for reading.\n"
-msgstr "Fajl sa vremenskim kodom '%1%' ne može biti otvoren radi čitanja.\n"
+msgstr "Fajl sa vremenskom oznakom '%1%' ne može biti otvoren radi čitanja.\n"
 
 #: src/merge/timestamp_factory.cpp:88
 #: src/merge/timestamp_factory.cpp:96
@@ -10762,18 +10746,18 @@ msgstr "Fajl sa vremenskim kodom '%1%' ne može biti otvoren radi čitanja.\n"
 #: src/merge/timestamp_factory.cpp:304
 #, boost-format
 msgid "The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n"
-msgstr "Fajl sa vremenskim kodom '%1%' ne sadrži ispravnu 'Assume' liniju sa definisanim brojem slika u sekundi.\n"
+msgstr "Fajl sa vremenskom oznakom '%1%' ne sadrži ispravnu 'Assume' liniju sa definisanim brojem slika u sekundi.\n"
 
 #: src/merge/timestamp_factory.cpp:339
 #, boost-format
 msgid "The timestamp file '%1%' does not contain a valid 'Gap' line with the duration of the gap.\n"
-msgstr "Fajl sa vremenskim kodom '%1%' ne sadrži ispravnu 'Gap' (praznina) liniju sa definisanim trajanjem praznine.\n"
+msgstr "Fajl sa vremenskom oznakom '%1%' ne sadrži ispravnu 'Gap' (praznina) liniju sa definisanim trajanjem praznine.\n"
 
 #: src/merge/timestamp_factory.cpp:241
 #: src/merge/timestamp_factory.cpp:368
 #, boost-format
 msgid "The timestamp file '%1%' does not contain any valid entry.\n"
-msgstr "Fajl sa vremenskim kodom '%1%' ne sadrži nijedan važeći unos.\n"
+msgstr "Fajl sa vremenskom ozankom '%1%' ne sadrži nijedan važeći unos.\n"
 
 #: src/merge/timestamp_factory.cpp:217
 #, boost-format
@@ -10782,23 +10766,23 @@ msgid ""
 "\n"
 "If you really have to specify non-sorted timestamps then use the timestamp format v4. It is identical to format v2 but allows non-sorted timestamps.\n"
 msgstr ""
-"Fajl sa v2 vremenskim kodovima '%1%' sadrži kodove koji nisu poređani po redu. Zbog baga u mkvmerge verzijama do i uključujući v1.5.0 ovo je bilo neophodno ako je staza na koju je vremenski kod primenjen sadržavala B slike. Počevši od v1.5.1 mkvmerge sada rukuje sa ovim ispravno, i vremenski kodovi moraju biti normalno raspoređeni. Na primer, sekvenca 'IPBBP...' pri 25 FPS zahteva vremenske kodove da budu '0', '40', '80', '120' itd a ne '0', '120', '40', '80' etc.\n"
+"Fajl sa v2 vremenskom oznakom '%1%' sadrži oznake koje nisu poređane po redu. Zbog baga u mkvmerge verzijama do i uključujući v1.5.0 ovo je bilo neophodno ako je staza na koju je vremenska oznaka primenjena sadržavala B slike. Počevši od v1.5.1 mkvmerge sada rukuje sa ovim ispravno, i vremenske oznake moraju biti normalno raspoređene. Na primer, sekvenca 'IPBBP...' pri 25 FPS zahteva da početne vremenske oznake budu '0', '40', '80', '120' itd a ne '0', '120', '40', '80' etc.\n"
 "\n"
-"Ako stvarno morate da navedete nesortirane kodove onda koristite format v4. Identičan je formatu v2 ali dozvoljava nesortirane vremenske kodove.\n"
+"Ako stvarno morate da navedete nesortirane oznake onda koristite format v4. Identičan je formatu v2 ali dozvoljava nesortirane vremenske oznake.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:360
 #, no-c-format
 msgid "The timestamps after which a new destination file is started."
-msgstr "Vremenski kodovi nakon kojeg je započet novi odredišni fajl."
+msgstr "Vremenske oznake nakon kojeg je započet novi odredišni fajl."
 
 #: src/input/r_ogm.cpp:602
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
-msgstr "Vremenski kodovi za ovaj potok su bili resetovani u sredini fajla. Ovo nije podržano. Trenutni paket će biti odbačen.\n"
+msgstr "Vremenske oznake za ovaj potok su resetovane u sredini fajla. Ovo nije podržano. Trenutni paket će biti odbačen.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:361
 #, no-c-format
 msgid "The timestamps refer to the whole stream and not to each individual destination file."
-msgstr "Vremenski kodovi se odnose na celi potok a ne na svaki pojedinačni odredišni fajl."
+msgstr "Vremenske oznake se odnose na celi potok a ne na svaki pojedinačni odredišni fajl."
 
 #: src/common/property_element.cpp:109
 msgid "The title for the whole movie."
@@ -10969,7 +10953,7 @@ msgstr "Ova AVC/h.264 staza ne počinje sa ključnom slikom. Prvih %1% slika je 
 
 #: src/output/p_avc_es.cpp:129
 msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
-msgstr "Informacija o tajmingu ove AVC/h.264 staze ukazuje da ona koristi varijabilni FPS. Ipak, za nju nisu dati ni podaci o osnovnom trajanju ni spoljni fajl sa vremenskim kodovima, a ni izvorni kontejner ne sadrži vremenske kodove. Dobijeni vremenski kodovi možda neće biti korisni.\n"
+msgstr "Informacija o tajmingu ove AVC/h.264 staze ukazuje da ona koristi varijabilni FPS. Ipak, za nju nisu dati ni podaci o osnovnom trajanju, ni spoljni fajl sa vremenskom oznakom, a ni izvorni kontejner ne sadrži vremenske oznake. Dobijene vremenske oznake možda neće biti korisne.\n"
 
 #: src/output/p_hevc_es.cpp:97
 #, boost-format
@@ -11004,9 +10988,9 @@ msgstr "Ova količina je 0.3% veličine izvornog fajla ili 10 MB, šta god je ve
 #, boost-format
 msgid "This audio track contains %1% byte of invalid data which was skipped before timestamp %2%."
 msgid_plural "This audio track contains %1% bytes of invalid data which were skipped before timestamp %2%."
-msgstr[0] "Ova audio staza sadrži %1% bajt nevažećih podataka koji su preskočeni pre vremenskog koda %2%."
-msgstr[1] "Ova audio staza sadrži %1% bajta nevažećih podataka koji su preskočeni pre vremenskog koda %2%."
-msgstr[2] "Ova audio staza sadrži %1% bajtova nevažećih podataka koji su preskočeni pre vremenskog koda %2%."
+msgstr[0] "Ova audio staza sadrži %1% bajt nevažećih podataka koji su preskočeni pre vremenske oznake %2%."
+msgstr[1] "Ova audio staza sadrži %1% bajta nevažećih podataka koji su preskočeni pre vremenske oznake %2%."
+msgstr[2] "Ova audio staza sadrži %1% bajtova nevažećih podataka koji su preskočeni pre vremenske oznake %2%."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:52
 #, no-c-format
@@ -11036,7 +11020,7 @@ msgstr "U ovom polju se obično postavlja datum kada je fajl napravljen."
 
 #: src/input/subtitles.cpp:166
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
-msgstr "Ovaj fajl sadrži koordinate u linijama vremenskih kodova. Takve koordinate nisu podržane u Matroska SRT formatu titlova. Koordinate će biti automatski uklonjene.\n"
+msgstr "Ovaj fajl sadrži koordinate u linijama vremenskih oznaka. Takve koordinate nisu podržane u Matroska SRT formatu titlova. Koordinate će biti automatski uklonjene.\n"
 
 #: src/extract/mkvextract.cpp:65
 #: src/propedit/propedit.cpp:139
@@ -11151,9 +11135,9 @@ msgid "This option controls how the chapter names are created."
 msgstr "Ova opcija kontroliše kako su imena poglavlja kreirana."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:87
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "This option forces mkvmerge to treat all of those I slices as key frames."
-msgstr "Ova opcija tera mkvmerge da ukloni informaciju o formatu slike iz bit-potoka."
+msgstr "Ova opcija tera mkvmerge da tretira sve te I slike kao ključne slike."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:30
 #, no-c-format
@@ -11260,28 +11244,28 @@ msgstr "Time slice"
 
 #: src/extract/extract_cli_parser.cpp:114
 msgid "Timestamp extraction"
-msgstr "Izvlačenje vremenskih kodova"
+msgstr "Izvlačenje vremenskih oznaka"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1686
 msgid "Timestamp file:"
-msgstr "Fajl sa vremenskim kodovima:"
+msgstr "Vremenske oznake:"
 
 #: src/extract/timestamps_v2.cpp:252
 #: src/info/mkvinfo.cpp:465
 #: src/info/mkvinfo.cpp:1043
 #, boost-format
 msgid "Timestamp scale: %1%"
-msgstr "Skala vremenskog koda: %1%"
+msgstr "Skala vremenskih oznaka: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1668
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1682
 msgid "Timestamps and default duration"
-msgstr "Vremenski kodovi i podrazumevano trajanje"
+msgstr "Vremenske oznake i podrazumevano trajanje"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:358
 #, no-c-format
 msgid "Timestamps:"
-msgstr "Vremenski kodovi:"
+msgstr "Vremenske oznake:"
 
 #: src/common/property_element.cpp:109
 msgid "Title"
@@ -11380,7 +11364,7 @@ msgstr "Staza  %1%: AAC pronađen, ali konfiguracija dekodera ima dužinu %2%.\n
 #: src/extract/xtr_textsubs.cpp:361
 #, boost-format
 msgid "Track %1%: An USF subtitle entry starting at timestamp %2% is not well-formed XML and will be skipped.\n"
-msgstr "Staza %1%: USF titl unos koji započinje sa vremenskim kodom %2% nije pravilno formiran XML i biće preskočen.\n"
+msgstr "Staza %1%: USF titl unos koji započinje sa vremenskom oznakom %2% nije pravilno formiran XML i biće preskočen.\n"
 
 #: src/extract/xtr_avc.cpp:43
 #: src/extract/xtr_hevc.cpp:85
@@ -11499,7 +11483,7 @@ msgstr "Dva fajla multipleksirana sa istim podešavanjem i sa uključenim ovim p
 #: src/mkvtoolnix-gui/merge/track_model.cpp:46
 #, no-c-format
 msgid "Type"
-msgstr "Tip:"
+msgstr "Tip"
 
 #: src/common/property_element.cpp:151
 msgid ""
@@ -11510,9 +11494,8 @@ msgstr ""
 "(0: pikseli, 1: centimetri, 2: inči, 3: format slike)."
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:326
-#, fuzzy
 msgid "Type-specific settings"
-msgstr "&Otvori podešavanja"
+msgstr "Specifična podešavanja"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:277
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:207
@@ -11598,9 +11581,9 @@ msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "Nepoznat format za segment sa UID '%3%' in '%1% %2%'.\n"
 
 #: src/merge/mkvmerge.cpp:900
-#, fuzzy, boost-format
+#, boost-format
 msgid "Unknown format in '%1% %2%'.\n"
-msgstr "Nepoznat režim raščlanjivanja u '%1% %2%'.\n"
+msgstr "Nepoznat format u '%1% %2%'.\n"
 
 #: src/input/r_vobsub.cpp:613
 #, boost-format
@@ -11649,7 +11632,7 @@ msgstr "Celi broj bez predznaka"
 #: src/input/r_vobsub.cpp:482
 #, boost-format
 msgid "Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timestamp %3%, assuming MPEG2. No further warnings will be printed for this track.\n"
-msgstr "Nepodržan MPEG mpeg_version: 0x%|1$02x| u paketu %2% za vremenski kod %3%, pretpostavljam MPEG2. Daljnja upozorenja neće biti prikazana za ovu stazu.\n"
+msgstr "Nepodržan MPEG mpeg_version: 0x%|1$02x| u paketu %2% za vremensku oznaku %3%, pretpostavljam MPEG2. Daljnja upozorenja neće biti prikazana za ovu stazu.\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:179
 #, no-c-format
@@ -11695,12 +11678,12 @@ msgstr "Koristi fiksne vrednosti za elemente koji se i inače menjaju (datum mul
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 #, no-c-format
 msgid "Use only for testing."
-msgstr "Koristi samo za testiranje"
+msgstr "Koristi samo za testiranje."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:39
 #, no-c-format
 msgid "Use this only for testing purposes."
-msgstr "Koristi ovo samo u svrhe testiranja"
+msgstr "Koristi ovo samo u svrhe testiranja."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:159
 msgid "Useful e.g. when you want exactly two files."
@@ -12066,7 +12049,7 @@ msgstr "Upozori pre p&repisivanja preko postojećih stvari (fajlovi, zadaci itd.
 #: src/input/subtitles.cpp:211
 #, boost-format
 msgid "Warning in line %1%: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
-msgstr "Upozorenje u liniji %1%: Početni vremenski kod je manji nego onaj od prethodnog zapisa. Svi zapisi iz ovog fajla će biti sortirani po njihovom početnom vremenu.\n"
+msgstr "Upozorenje u liniji %1%: Početna vremenska oznaka je manja od one iz prethodnog zapisa. Svi zapisi iz ovog fajla će biti sortirani po njihovom početnom vremenu.\n"
 
 #: src/common/output.cpp:137
 #: src/mkvtoolnix-gui/jobs/job.cpp:278
@@ -12127,7 +12110,6 @@ msgid "When &dropping files:"
 msgstr "Kada prevučeš &fajlove:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:306
-#, fuzzy
 msgid "When &finished…"
 msgstr "&Kada se završi..."
 
@@ -12145,9 +12127,8 @@ msgid "When appending: one chapter is created at the start and one whenever a fi
 msgstr "prilikom pripajanja: jedno poglavlje se pravi na početku svakog pripojenog fajla."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:256
-#, fuzzy
 msgid "When the user adds a file containing such a title, the program will copy the title into the \"file title\" input box if this option is enabled."
-msgstr "Kada korisnik doda fajl koji sadrži takav naslov program će tada kopirati naslov u polje za unos »naslov fajla« ako je ova opcija uključena."
+msgstr "Kada korisnik doda fajl koji sadrži takav naslov, program će tada kopirati naslov u polje za unos »naslov fajla« ako je ova opcija uključena."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:310
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:316
@@ -12413,7 +12394,7 @@ msgstr "Zlib dekompresija nije uspela. Rezultat: %1%\n"
 #: src/info/mkvinfo.cpp:210
 #, boost-format
 msgid "[%1% frame for track %2%, timestamp %3%]"
-msgstr "[%1% slika za stazu %2%, vremenski kod %3%]"
+msgstr "[%1% slika za stazu %2%, vremenska oznaka %3%]"
 
 #: src/output/p_ac3.cpp:220
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
@@ -12577,7 +12558,7 @@ msgstr "flac_reader: ne mogu da inicijalizujem FLAC paketizer.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:523
 msgid "for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly"
-msgstr "za fajlove sa informacijom o poglavlju (npr. OGM, MP4) za koje mkvmerge ne detektuje kodovanje ispravno."
+msgstr "za fajlove sa informacijom o poglavlju (npr. OGM, MP4) za koje mkvmerge ne detektuje kodovanje ispravno"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
@@ -12824,7 +12805,7 @@ msgstr "mkvextract tags <inname> [opcije]"
 
 #: src/extract/extract_cli_parser.cpp:120
 msgid "mkvextract timestamps_v2 \"a movie.mkv\" 1:timestamps_track1.txt"
-msgstr "mkvextract timestamps_v2 \"film.mkv\" 1:vremenski_kodovi_staza1.txt"
+msgstr "mkvextract timestamps_v2 \"film.mkv\" 1:timestamps_track1.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
 msgid "mkvextract timestamps_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
@@ -12899,12 +12880,12 @@ msgstr "mkvmerge nije kompajlovan sa podrškom za FLAC ali upotreba ovog potoka 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:79
 #, no-c-format
 msgid "mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."
-msgstr "mkvmerge obično izračunava kašnjenje nagovešteno njegovim prisustvom i pomera sve vremenske kodove staze za tu vrednost."
+msgstr "mkvmerge obično izračunava kašnjenje nagovešteno njegovim prisustvom i pomera sve vremenske oznake staze za tu vrednost."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:83
 #, no-c-format
 msgid "mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."
-msgstr "mkvmerge uobičajeno uklanja tu zadnju stavku ako je njen vremenski kod unutar 5 sekundi od kraja trajanja."
+msgstr "mkvmerge uobičajeno uklanja tu zadnju stavku ako je njena vremenska oznaka unutar 5 sekundi od kraja trajanja."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:174
 #: src/mkvtoolnix-gui/merge/output.cpp:175
@@ -13033,9 +13014,8 @@ msgid "pixel width: %1%"
 msgstr "širina u pikselima: %1%"
 
 #: src/info/mkvinfo.cpp:749
-#, fuzzy
 msgid "progressive"
-msgstr "Progres"
+msgstr "progressive"
 
 #: src/extract/xtr_base.cpp:52
 msgid "raw data"
@@ -13098,7 +13078,7 @@ msgstr "tekstualni titlovi"
 
 #: src/merge/mkvmerge.cpp:2838
 msgid "timestamps"
-msgstr "vremenski kodovi"
+msgstr "vremenske oznake"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
@@ -13157,7 +13137,7 @@ msgstr "video"
 
 #: src/input/r_vobsub.cpp:579
 msgid "vobsub_reader: sub file read failure"
-msgstr "vobsub_reader: neuspešno pročitan sub fajl."
+msgstr "vobsub_reader: neuspešno pročitan sub fajl"
 
 #: src/common/wavpack.cpp:157
 msgid "wavpack_reader: non-audio block found\n"
@@ -13172,14 +13152,14 @@ msgid "x"
 msgstr "x"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:51
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "– All chapter names regardless of their language –"
-msgstr "– sva imena poglavlja bez obzira na njihov jezik –"
+msgstr "– Sva imena poglavlja bez obzira na njihov jezik –"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:50
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "– First chapter name regardless of its language –"
-msgstr "– prvo ime poglavlja bez obzira na njegov jezik –"
+msgstr "– Prvo ime poglavlja bez obzira na njegov jezik –"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:82
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:98
@@ -13189,9 +13169,9 @@ msgstr "– bez selekcije –"
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:52
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "– Set to none –"
-msgstr "– nijedna –"
+msgstr "– ništa –"
 
 #~ msgid "%1 of %2 file processed"
 #~ msgid_plural "%1 of %2 files processed"
