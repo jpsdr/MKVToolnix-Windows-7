@@ -46,6 +46,8 @@
   #2121.
 * mkvmerge: SRT reader: fixed calculating the duration of entries starting
   with at a negative timestamp.
+* mkvmerge: fixed AC-3 being mis-detected as encrypted MPEG program streams
+  under certain conditions.
 
 
 # Version 16.0.0 "Protest" 2017-09-30

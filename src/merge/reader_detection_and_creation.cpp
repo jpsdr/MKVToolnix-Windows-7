@@ -212,14 +212,6 @@ get_file_type_internal(filelist_t &file) {
   if (FILE_TYPE_IS_UNKNOWN != type)
     return { type, size };
 
-  // File types that are mis-detected sometimes
-  if (do_probe<dts_reader_c>(io, size, true))
-    return { FILE_TYPE_DTS, size };
-  if (do_probe<mtx::mpeg_ts::reader_c>(io, size))
-    return { FILE_TYPE_MPEG_TS, size };
-  if (do_probe<mpeg_ps_reader_c>(io, size))
-    return { FILE_TYPE_MPEG_PS, size };
-
   // Try raw audio formats and require eight consecutive frames at the
   // start of the file.
   if (do_probe<mp3_reader_c>(io, size, 128 * 1024, 8, true))
@@ -228,6 +220,14 @@ get_file_type_internal(filelist_t &file) {
     return { FILE_TYPE_AC3, size };
   if (do_probe<aac_reader_c>(io, size, 128 * 1024, 8, true))
     return { FILE_TYPE_AAC, size };
+
+  // File types that are mis-detected sometimes
+  if (do_probe<dts_reader_c>(io, size, true))
+    return { FILE_TYPE_DTS, size };
+  if (do_probe<mtx::mpeg_ts::reader_c>(io, size))
+    return { FILE_TYPE_MPEG_TS, size };
+  if (do_probe<mpeg_ps_reader_c>(io, size))
+    return { FILE_TYPE_MPEG_PS, size };
 
   // File types which are the same in raw format and in other container formats.
   // Detection requires 20 or more consecutive packets.
