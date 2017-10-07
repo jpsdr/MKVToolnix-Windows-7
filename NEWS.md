@@ -44,6 +44,8 @@
 * mkvmerge: an error message will be output if the single-value-form of the
   `--sync` option is used and it isn't a number (e.g. `--sync 0:asd`). Fixes
   #2121.
+* mkvmerge: SRT reader: fixed calculating the duration of entries starting
+  with at a negative timestamp.
 
 
 # Version 16.0.0 "Protest" 2017-09-30

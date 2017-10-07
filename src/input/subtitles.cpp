@@ -136,7 +136,7 @@ srt_parser_c::parse() {
         break;
       }
 
-      int s_h = 0, s_min = 0, s_sec = 0, e_h = 0, e_min = 0, e_sec = 0;
+      int64_t s_h = 0, s_min = 0, s_sec = 0, s_ns = 0, e_h = 0, e_min = 0, e_sec = 0, e_ns = 0;
 
       //        1         2       3      4        5     6             7    8
       // "\\s*(-?)\\s*(\\d+):\\s(-?)*(\\d+):\\s*(-?)(\\d+)[,\\.]\\s*(-?)(\\d+)?"
@@ -175,24 +175,22 @@ srt_parser_c::parse() {
         add(start, end, timestamp_number, subtitles.c_str());
       }
 
-      // Calculate the start and end time in ns precision for the following entry.
-      start  = (int64_t)s_h * 60 * 60 + s_min * 60 + s_sec;
-      end    = (int64_t)e_h * 60 * 60 + e_min * 60 + e_sec;
-
-      start *= 1000000000ll * s_neg;
-      end   *= 1000000000ll * e_neg;
-
       while (s_rest.length() < 9)
         s_rest += "0";
       if (s_rest.length() > 9)
         s_rest.erase(9);
-      start += atol(s_rest.c_str());
 
       while (e_rest.length() < 9)
         e_rest += "0";
       if (e_rest.length() > 9)
         e_rest.erase(9);
-      end += atol(e_rest.c_str());
+
+      parse_number(s_rest, s_ns);
+      parse_number(e_rest, e_ns);
+
+      // Calculate the start and end time in ns precision for the following entry.
+      start  = ((s_h * 60 * 60 + s_min * 60 + s_sec) * 1'000'000'000ll + s_ns) * s_neg;
+      end    = ((e_h * 60 * 60 + e_min * 60 + e_sec) * 1'000'000'000ll + e_ns) * e_neg;
 
       if (0 > start) {
         mxwarn_tid(m_file_name, m_tid,
