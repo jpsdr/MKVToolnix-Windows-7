@@ -218,6 +218,7 @@ class SimpleTest
         result = test[:block].call
       rescue RuntimeError => ex
         show_message "Test case '#{self.class.name}', sub-test '#{test[:name]}': #{ex}"
+        result = :failed
       end
       result
     end
