@@ -41,6 +41,9 @@
 * mkvpropedit, GUI's header editor: both programs will now show proper error
   messages instead of crashing when certain kinds of data corruption is found
   when reading a file. Fixes #2115.
+* mkvmerge: an error message will be output if the single-value-form of the
+  `--sync` option is used and it isn't a number (e.g. `--sync 0:asd`). Fixes
+  #2121.
 
 
 # Version 16.0.0 "Protest" 2017-09-30

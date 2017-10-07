@@ -607,7 +607,10 @@ parse_arg_sync(std::string s,
 
   }
 
-  tcsync.displacement     = (int64_t)atoi(s.c_str()) * 1000000ll;
+  if (!parse_number(s, tcsync.displacement))
+    mxerror(boost::format(Y("Invalid sync option specified in '%1% %2%'.\n")) % opt % orig);
+
+  tcsync.displacement     *= 1000000ll;
   ti.m_timestamp_syncs[id] = tcsync;
 }
 
