@@ -33,10 +33,8 @@
 using namespace libmatroska;
 
 void
-extract_tags(const std::string &file_name,
-             kax_analyzer_c::parse_mode_e parse_mode) {
-  auto analyzer      = open_and_analyze(file_name, parse_mode);
-  ebml_master_cptr m = analyzer->read_all(EBML_INFO(KaxTags));
+extract_tags(kax_analyzer_c &analyzer) {
+  auto m = analyzer.read_all(EBML_INFO(KaxTags));
   if (!m)
     return;
 

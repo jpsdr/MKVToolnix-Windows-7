@@ -194,13 +194,10 @@ write_cuesheet(std::string file_name,
 }
 
 void
-extract_cuesheet(const std::string &file_name,
-                 kax_analyzer_c::parse_mode_e parse_mode) {
-  auto analyzer = open_and_analyze(file_name, parse_mode);
-
+extract_cuesheet(kax_analyzer_c &analyzer) {
   KaxChapters all_chapters;
-  ebml_master_cptr chapters_m(analyzer->read_all(EBML_INFO(KaxChapters)));
-  ebml_master_cptr tags_m(    analyzer->read_all(EBML_INFO(KaxTags)));
+  auto chapters_m       = analyzer.read_all(EBML_INFO(KaxChapters));
+  auto tags_m           = analyzer.read_all(EBML_INFO(KaxTags));
   KaxChapters *chapters = dynamic_cast<KaxChapters *>(chapters_m.get());
   KaxTags *all_tags     = dynamic_cast<KaxTags *>(    tags_m.get());
 
@@ -217,7 +214,7 @@ extract_cuesheet(const std::string &file_name,
         all_chapters.PushElement(*edition_entry);
   }
 
-  write_cuesheet(file_name, all_chapters, *all_tags, -1, *g_mm_stdio);
+  write_cuesheet(analyzer.get_file().get_file_name(), all_chapters, *all_tags, -1, *g_mm_stdio);
 
   while (all_chapters.ListSize() > 0)
     all_chapters.Remove(0);

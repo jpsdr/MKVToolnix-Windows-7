@@ -17,6 +17,7 @@
 
 #include "common/chapters/chapters.h"
 #include "common/command_line.h"
+#include "common/list_utils.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
 #include "common/strings/parsing.h"
@@ -111,29 +112,31 @@ main(int argc,
 
   options_c options = extract_cli_parser_c(mtx::cli::args_in_utf8(argc, argv)).run();
 
+  if (!mtx::included_in(options.m_extraction_mode, options_c::em_tracks, options_c::em_tags, options_c::em_attachments, options_c::em_chapters, options_c::em_cues, options_c::em_cuesheet, options_c::em_timestamps_v2))
+    mtx::cli::display_usage(2);
+
+  auto analyzer = open_and_analyze(options.m_file_name, options.m_parse_mode);
+
   if (options_c::em_tracks == options.m_extraction_mode)
-    extract_tracks(options.m_file_name, options.m_tracks, options.m_parse_mode);
+    extract_tracks(*analyzer, options.m_tracks);
 
   else if (options_c::em_tags == options.m_extraction_mode)
-    extract_tags(options.m_file_name, options.m_parse_mode);
+    extract_tags(*analyzer);
 
   else if (options_c::em_attachments == options.m_extraction_mode)
-    extract_attachments(options.m_file_name, options.m_tracks, options.m_parse_mode);
+    extract_attachments(*analyzer, options.m_tracks);
 
   else if (options_c::em_chapters == options.m_extraction_mode)
-    extract_chapters(options.m_file_name, options.m_simple_chapter_format, options.m_parse_mode, options.m_simple_chapter_language);
+    extract_chapters(*analyzer, options.m_simple_chapter_format, options.m_simple_chapter_language);
 
   else if (options_c::em_cues == options.m_extraction_mode)
-    extract_cues(options.m_file_name, options.m_tracks, options.m_parse_mode);
+    extract_cues(*analyzer, options.m_tracks);
 
   else if (options_c::em_cuesheet == options.m_extraction_mode)
-    extract_cuesheet(options.m_file_name, options.m_parse_mode);
+    extract_cuesheet(*analyzer);
 
   else if (options_c::em_timestamps_v2 == options.m_extraction_mode)
-    extract_timestamps(options.m_file_name, options.m_tracks, 2);
-
-  else
-    mtx::cli::display_usage(2);
+    extract_timestamps(*analyzer, options.m_tracks, 2);
 
   mxexit();
 }

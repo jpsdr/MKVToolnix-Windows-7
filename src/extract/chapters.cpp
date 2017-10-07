@@ -34,12 +34,10 @@
 using namespace libmatroska;
 
 void
-extract_chapters(const std::string &file_name,
+extract_chapters(kax_analyzer_c &analyzer,
                  bool chapter_format_simple,
-                 kax_analyzer_c::parse_mode_e parse_mode,
                  boost::optional<std::string> const &language_to_extract) {
-  auto analyzer           = open_and_analyze(file_name, parse_mode);
-  ebml_master_cptr master = analyzer->read_all(EBML_INFO(KaxChapters));
+  auto master = analyzer.read_all(EBML_INFO(KaxChapters));
   if (!master)
     return;
 

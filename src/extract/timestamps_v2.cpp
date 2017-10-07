@@ -180,31 +180,25 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
 }
 
 void
-extract_timestamps(const std::string &file_name,
+extract_timestamps(kax_analyzer_c &analyzer,
                    std::vector<track_spec_t> &tspecs,
                    int version) {
   if (tspecs.empty())
     mxerror(Y("Nothing to do.\n"));
 
   // open input file
-  mm_io_c *in;
-  try {
-    in = new mm_file_io_c(file_name, MODE_READ);
-  } catch (mtx::mm_io::exception &ex) {
-    show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
-    return;
-  }
+  auto &in = analyzer.get_file();
 
   try {
-    int64_t file_size = in->get_size();
-    EbmlStream *es    = new EbmlStream(*in);
+    in.setFilePointer(0);
+
+    int64_t file_size = in.get_size();
+    auto es           = std::make_shared<EbmlStream>(in);
 
     // Find the EbmlHead element. Must be the first one.
     EbmlElement *l0 = es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL);
     if (!l0) {
       show_error(Y("Error: No EBML head found."));
-      delete es;
-
       return;
     }
 
@@ -287,7 +281,7 @@ extract_timestamps(const std::string &file_name,
         uint64_t cluster_ts = 0;
 
         if (0 == verbose) {
-          auto current_percentage = in->getFilePointer() * 100 / file_size;
+          auto current_percentage = in.getFilePointer() * 100 / file_size;
 
           if (mtx::cli::g_gui_mode)
             mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
@@ -377,8 +371,6 @@ extract_timestamps(const std::string &file_name,
     } // while (l1)
 
     delete l0;
-    delete es;
-    delete in;
 
     close_timestamp_files();
 
@@ -391,7 +383,6 @@ extract_timestamps(const std::string &file_name,
 
   } catch (...) {
     show_error(Y("Caught exception"));
-    delete in;
 
     close_timestamp_files();
   }

@@ -343,56 +343,42 @@ handle_segment_info(EbmlMaster *info,
 }
 
 bool
-extract_tracks(const std::string &file_name,
-               std::vector<track_spec_t> &tspecs,
-               kax_analyzer_c::parse_mode_e parse_mode) {
+extract_tracks(kax_analyzer_c &analyzer,
+               std::vector<track_spec_t> &tspecs) {
   if (tspecs.empty())
     mxerror(Y("Nothing to do.\n"));
 
   // open input file
-  mm_io_cptr in;
-  kax_file_cptr file;
-  try {
-    in   = mm_file_io_c::open(file_name);
-    file = std::make_shared<kax_file_c>(*in);
-  } catch (mtx::mm_io::exception &ex) {
-    show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
-    return false;
-  }
-
-  int64_t file_size = in->get_size();
+  auto &in          = analyzer.get_file();
+  auto file         = std::make_shared<kax_file_c>(in);
+  int64_t file_size = in.get_size();
   uint64_t tc_scale = TIMESTAMP_SCALE;
   bool segment_info_found = false, tracks_found = false;
 
   // open input file
-  auto analyzer = open_and_analyze(file_name, parse_mode, false);
-  if (analyzer) {
-    auto af_master    = ebml_master_cptr{ analyzer->read_all(EBML_INFO(KaxInfo)) };
-    auto segment_info = dynamic_cast<KaxInfo *>(af_master.get());
-    if (segment_info) {
-      segment_info_found = true;
-      handle_segment_info(segment_info, file.get(), tc_scale);
-    }
+  auto af_master    = ebml_master_cptr{ analyzer.read_all(EBML_INFO(KaxInfo)) };
+  auto segment_info = dynamic_cast<KaxInfo *>(af_master.get());
+  if (segment_info) {
+    segment_info_found = true;
+    handle_segment_info(segment_info, file.get(), tc_scale);
+  }
 
-    af_master   = ebml_master_cptr{ analyzer->read_all(EBML_INFO(KaxTracks)) };
-    auto tracks = dynamic_cast<KaxTracks *>(af_master.get());
-    if (tracks) {
-      tracks_found = true;
-      find_and_verify_track_uids(*tracks, tspecs);
-      create_extractors(*tracks, tspecs);
-    }
+  af_master   = ebml_master_cptr{ analyzer.read_all(EBML_INFO(KaxTracks)) };
+  auto tracks = dynamic_cast<KaxTracks *>(af_master.get());
+  if (tracks) {
+    tracks_found = true;
+    find_and_verify_track_uids(*tracks, tspecs);
+    create_extractors(*tracks, tspecs);
   }
 
   try {
-    in->setFilePointer(0);
-    EbmlStream *es = new EbmlStream(*in);
+    in.setFilePointer(0);
+    auto es = std::make_shared<EbmlStream>(in);
 
     // Find the EbmlHead element. Must be the first one.
     EbmlElement *l0 = es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL);
     if (!l0) {
       show_error(Y("Error: No EBML head found."));
-      delete es;
-
       return false;
     }
 
@@ -438,7 +424,7 @@ extract_tracks(const std::string &file_name,
         KaxCluster *cluster = static_cast<KaxCluster *>(l1);
 
         if (0 == verbose) {
-          auto current_percentage = in->getFilePointer() * 100 / file_size;
+          auto current_percentage = in.getFilePointer() * 100 / file_size;
 
           if (mtx::cli::g_gui_mode)
             mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
@@ -506,7 +492,6 @@ extract_tracks(const std::string &file_name,
     } // while (l1)
 
     delete l0;
-    delete es;
 
     write_all_cuesheets(all_chapters, all_tags, tspecs);
 
