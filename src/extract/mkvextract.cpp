@@ -20,6 +20,7 @@
 #include "common/list_utils.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
+#include "common/mm_write_buffer_io.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
 #include "common/version.h"
@@ -69,6 +70,22 @@ open_and_analyze(std::string const &file_name,
   }
 }
 
+mm_io_cptr
+open_output_file(std::string const &file_name) {
+  if (mtx::included_in(file_name, "", "-"))
+    return g_mm_stdio;
+
+  try {
+    return mm_write_buffer_io_c::open(file_name, 128 * 1024);
+
+  } catch (mtx::mm_io::exception &ex) {
+    mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % file_name % ex);
+  }
+
+  // Shut up the compiler.
+  return {};
+}
+
 void
 show_element(EbmlElement *l,
              int level,
@@ -111,32 +128,44 @@ main(int argc,
   setup(argv);
 
   options_c options = extract_cli_parser_c(mtx::cli::args_in_utf8(argc, argv)).run();
+  auto first_mode   = options.m_modes.back().m_extraction_mode;
 
-  if (!mtx::included_in(options.m_extraction_mode, options_c::em_tracks, options_c::em_tags, options_c::em_attachments, options_c::em_chapters, options_c::em_cues, options_c::em_cuesheet, options_c::em_timestamps_v2))
+  if (!mtx::included_in(first_mode, options_c::em_tracks, options_c::em_tags, options_c::em_attachments, options_c::em_chapters, options_c::em_cues, options_c::em_cuesheet, options_c::em_timestamps_v2))
     mtx::cli::display_usage(2);
 
-  auto analyzer = open_and_analyze(options.m_file_name, options.m_parse_mode);
+  auto analyzer       = open_and_analyze(options.m_file_name, options.m_parse_mode);
+  auto done_something = false;
 
-  if (options_c::em_tracks == options.m_extraction_mode)
-    extract_tracks(*analyzer, options.m_tracks);
+  for (auto &mode_options : options.m_modes) {
+    auto done_something_here = false;
 
-  else if (options_c::em_tags == options.m_extraction_mode)
-    extract_tags(*analyzer);
+    if (options_c::em_tracks == mode_options.m_extraction_mode)
+      done_something_here = extract_tracks(*analyzer, mode_options);
 
-  else if (options_c::em_attachments == options.m_extraction_mode)
-    extract_attachments(*analyzer, options.m_tracks);
+    else if (options_c::em_tags == mode_options.m_extraction_mode)
+      done_something_here = extract_tags(*analyzer, mode_options);
 
-  else if (options_c::em_chapters == options.m_extraction_mode)
-    extract_chapters(*analyzer, options.m_simple_chapter_format, options.m_simple_chapter_language);
+    else if (options_c::em_attachments == mode_options.m_extraction_mode)
+     done_something_here = extract_attachments(*analyzer, mode_options);
 
-  else if (options_c::em_cues == options.m_extraction_mode)
-    extract_cues(*analyzer, options.m_tracks);
+    else if (options_c::em_chapters == mode_options.m_extraction_mode)
+      done_something_here = extract_chapters(*analyzer, mode_options);
 
-  else if (options_c::em_cuesheet == options.m_extraction_mode)
-    extract_cuesheet(*analyzer);
+    else if (options_c::em_cues == mode_options.m_extraction_mode)
+      done_something_here = extract_cues(*analyzer, mode_options);
 
-  else if (options_c::em_timestamps_v2 == options.m_extraction_mode)
-    extract_timestamps(*analyzer, options.m_tracks, 2);
+    else if (options_c::em_cuesheet == mode_options.m_extraction_mode)
+      done_something_here = extract_cuesheet(*analyzer, mode_options);
+
+    else if (options_c::em_timestamps_v2 == mode_options.m_extraction_mode)
+      done_something_here = extract_timestamps(*analyzer, mode_options);
+
+    if (done_something_here)
+      done_something = true;
+  }
+
+  if (!done_something)
+    mxerror(Y("Nothing to do.\n"));
 
   mxexit();
 }

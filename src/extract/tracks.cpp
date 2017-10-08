@@ -344,9 +344,11 @@ handle_segment_info(EbmlMaster *info,
 
 bool
 extract_tracks(kax_analyzer_c &analyzer,
-               std::vector<track_spec_t> &tspecs) {
+               options_c::mode_options_c &options) {
+  auto &tspecs = options.m_tracks;
+
   if (tspecs.empty())
-    mxerror(Y("Nothing to do.\n"));
+    return false;
 
   // open input file
   auto &in          = analyzer.get_file();

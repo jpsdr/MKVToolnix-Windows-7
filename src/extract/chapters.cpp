@@ -33,22 +33,23 @@
 
 using namespace libmatroska;
 
-void
+bool
 extract_chapters(kax_analyzer_c &analyzer,
-                 bool chapter_format_simple,
-                 boost::optional<std::string> const &language_to_extract) {
-  auto master = analyzer.read_all(EBML_INFO(KaxChapters));
-  if (!master)
-    return;
+                 options_c::mode_options_c &options) {
+  auto element  = analyzer.read_all(EBML_INFO(KaxChapters));
+  auto chapters = dynamic_cast<KaxChapters *>(element.get());
 
-  KaxChapters *chapters = dynamic_cast<KaxChapters *>(master.get());
-  assert(chapters);
+  if (!chapters)
+    return true;
 
   mtx::chapters::fix_country_codes(*chapters);
+  auto output = open_output_file(options.m_output_file_name);
 
-  if (!chapter_format_simple)
-    mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, *g_mm_stdio);
+  if (!options.m_simple_chapter_format)
+    mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, *output);
 
   else
-    mtx::chapters::write_simple(*chapters, *g_mm_stdio.get(), language_to_extract);
+    mtx::chapters::write_simple(*chapters, *output, options.m_simple_chapter_language);
+
+  return true;
 }

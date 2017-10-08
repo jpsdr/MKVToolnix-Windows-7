@@ -175,11 +175,11 @@ determine_cluster_data_start_positions(mm_io_c &file,
   }
 }
 
-void
+bool
 extract_cues(kax_analyzer_c &analyzer,
-             std::vector<track_spec_t> const &tracks) {
-  if (tracks.empty())
-    mxerror(Y("Nothing to do.\n"));
+             options_c::mode_options_c &options) {
+  if (options.m_tracks.empty())
+    return false;
 
   auto cue_points             = parse_cue_points(analyzer);
   auto timestamp_scale        = find_timestamp_scale(analyzer);
@@ -187,5 +187,7 @@ extract_cues(kax_analyzer_c &analyzer,
   auto segment_data_start_pos = analyzer.get_segment_data_start_pos();
 
   determine_cluster_data_start_positions(analyzer.get_file(), segment_data_start_pos, cue_points);
-  write_cues(tracks, track_number_map, cue_points, segment_data_start_pos, timestamp_scale);
+  write_cues(options.m_tracks, track_number_map, cue_points, segment_data_start_pos, timestamp_scale);
+
+  return true;
 }

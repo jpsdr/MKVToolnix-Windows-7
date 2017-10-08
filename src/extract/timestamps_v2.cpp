@@ -179,12 +179,11 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
     extractor->m_timestamps.push_back(timestamp_t(simpleblock.GlobalTimecode() + i * extractor->m_default_duration, extractor->m_default_duration));
 }
 
-void
+bool
 extract_timestamps(kax_analyzer_c &analyzer,
-                   std::vector<track_spec_t> &tspecs,
-                   int version) {
-  if (tspecs.empty())
-    mxerror(Y("Nothing to do.\n"));
+                   options_c::mode_options_c &options) {
+  if (options.m_tracks.empty())
+    return false;
 
   // open input file
   auto &in = analyzer.get_file();
@@ -199,7 +198,7 @@ extract_timestamps(kax_analyzer_c &analyzer,
     EbmlElement *l0 = es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL);
     if (!l0) {
       show_error(Y("Error: No EBML head found."));
-      return;
+      return false;
     }
 
     // Don't verify its data for now.
@@ -211,7 +210,7 @@ extract_timestamps(kax_analyzer_c &analyzer,
       l0 = es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL);
       if (!l0) {
         show_error(Y("No segment/level 0 element found."));
-        return;
+        return false;
       }
       if (Is<KaxSegment>(l0)) {
         show_element(l0, 0, Y("Segment"));
@@ -272,8 +271,8 @@ extract_timestamps(kax_analyzer_c &analyzer,
 
         tracks_found = true;
         l1->Read(*es, EBML_CLASS_CONTEXT(KaxTracks), upper_lvl_el, l2, true);
-        find_and_verify_track_uids(*dynamic_cast<KaxTracks *>(l1), tspecs);
-        create_timestamp_files(*dynamic_cast<KaxTracks *>(l1), tspecs, version);
+        find_and_verify_track_uids(*dynamic_cast<KaxTracks *>(l1), options.m_tracks);
+        create_timestamp_files(*dynamic_cast<KaxTracks *>(l1), options.m_tracks, 2);
 
       } else if (Is<KaxCluster>(l1)) {
         show_element(l1, 1, Y("Cluster"));
@@ -381,9 +380,13 @@ extract_timestamps(kax_analyzer_c &analyzer,
         mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 100 % "\n");
     }
 
+    return true;
+
   } catch (...) {
     show_error(Y("Caught exception"));
 
     close_timestamp_files();
+
+    return false;
   }
 }

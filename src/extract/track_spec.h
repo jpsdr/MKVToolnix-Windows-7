@@ -33,4 +33,6 @@ struct track_spec_t {
   bool done;
 
   track_spec_t();
+
+  void dump(std::string const &prefix) const;
 };

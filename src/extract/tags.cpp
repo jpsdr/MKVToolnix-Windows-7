@@ -32,14 +32,15 @@
 
 using namespace libmatroska;
 
-void
-extract_tags(kax_analyzer_c &analyzer) {
-  auto m = analyzer.read_all(EBML_INFO(KaxTags));
-  if (!m)
-    return;
+bool
+extract_tags(kax_analyzer_c &analyzer,
+             options_c::mode_options_c &options) {
+  auto tags = analyzer.read_all(EBML_INFO(KaxTags));
 
-  KaxTags *tags = dynamic_cast<KaxTags *>(m.get());
-  assert(tags);
+  if (!dynamic_cast<KaxTags *>(tags.get()))
+    return true;
 
-  mtx::xml::ebml_tags_converter_c::write_xml(*tags, *g_mm_stdio);
+  mtx::xml::ebml_tags_converter_c::write_xml(static_cast<KaxTags &>(*tags), *open_output_file(options.m_output_file_name));
+
+  return true;
 }

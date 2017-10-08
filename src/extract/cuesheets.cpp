@@ -193,8 +193,9 @@ write_cuesheet(std::string file_name,
   }
 }
 
-void
-extract_cuesheet(kax_analyzer_c &analyzer) {
+bool
+extract_cuesheet(kax_analyzer_c &analyzer,
+                 options_c::mode_options_c &options) {
   KaxChapters all_chapters;
   auto chapters_m       = analyzer.read_all(EBML_INFO(KaxChapters));
   auto tags_m           = analyzer.read_all(EBML_INFO(KaxTags));
@@ -202,7 +203,7 @@ extract_cuesheet(kax_analyzer_c &analyzer) {
   KaxTags *all_tags     = dynamic_cast<KaxTags *>(    tags_m.get());
 
   if (!chapters || !all_tags)
-    return;
+    return true;
 
   for (auto chapter_entry : *chapters) {
     if (!dynamic_cast<KaxEditionEntry *>(chapter_entry))
@@ -214,8 +215,10 @@ extract_cuesheet(kax_analyzer_c &analyzer) {
         all_chapters.PushElement(*edition_entry);
   }
 
-  write_cuesheet(analyzer.get_file().get_file_name(), all_chapters, *all_tags, -1, *g_mm_stdio);
+  write_cuesheet(analyzer.get_file().get_file_name(), all_chapters, *all_tags, -1, *open_output_file(options.m_output_file_name));
 
   while (all_chapters.ListSize() > 0)
     all_chapters.Remove(0);
+
+  return true;
 }
