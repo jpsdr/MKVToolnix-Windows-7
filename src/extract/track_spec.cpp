@@ -34,7 +34,8 @@ track_spec_t::dump(std::string const &prefix)
                        "%1%blackadd level:   %7%\n"
                        "%1%target mdoe:      %8%\n")
          % prefix % tid % tuid % out_name % sub_charset % extract_cuesheet % extract_blockadd_level
-         % (  target_mode == tm_normal ? "normal"
-            : target_mode == tm_raw    ? "raw"
-            :                            "full raw"));
+         % (  target_mode == tm_normal   ? "normal"
+            : target_mode == tm_raw      ? "raw"
+            : target_mode == tm_full_raw ? "full raw"
+            :                              "timestamps"));
 }

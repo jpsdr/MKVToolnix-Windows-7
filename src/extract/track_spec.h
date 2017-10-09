@@ -18,7 +18,8 @@ struct track_spec_t {
   enum target_mode_e {
     tm_normal,
     tm_raw,
-    tm_full_raw
+    tm_full_raw,
+    tm_timestamps,
   };
 
   int64_t tid, tuid;

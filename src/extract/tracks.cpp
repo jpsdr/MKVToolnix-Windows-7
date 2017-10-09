@@ -12,8 +12,6 @@
 
 #include "common/common_pch.h"
 
-#include <cassert>
-
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
 #include <ebml/EbmlStream.h>
@@ -37,14 +35,51 @@
 #include "common/kax_file.h"
 #include "common/mm_io_x.h"
 #include "common/mm_write_buffer_io.h"
+#include "common/strings/formatting.h"
 #include "extract/mkvextract.h"
 #include "extract/xtr_base.h"
 
 using namespace libmatroska;
 
-static std::vector<xtr_base_c *> extractors;
+// ------------------------------------------------------------------------
+
+struct timestamp_t {
+  int64_t m_timestamp, m_duration;
+
+  timestamp_t(int64_t timestamp, int64_t duration)
+    : m_timestamp(timestamp)
+    , m_duration(duration)
+  {
+  }
+};
+
+bool
+operator <(const timestamp_t &t1,
+           const timestamp_t &t2) {
+  return t1.m_timestamp < t2.m_timestamp;
+}
+
+struct timestamp_extractor_t {
+  int64_t m_tid, m_tnum;
+  mm_io_cptr m_file;
+  std::vector<timestamp_t> m_timestamps;
+  int64_t m_default_duration;
+
+  timestamp_extractor_t(int64_t tid, int64_t tnum, const mm_io_cptr &file, int64_t default_duration)
+    : m_tid(tid)
+    , m_tnum(tnum)
+    , m_file(file)
+    , m_default_duration(default_duration)
+  {
+  }
+};
+
+static std::unordered_map<int64_t, std::shared_ptr<timestamp_extractor_t>> timestamp_extractors;
 
 // ------------------------------------------------------------------------
+
+static std::unordered_map<int64_t, std::shared_ptr<xtr_base_c>> track_extractors_by_track_number;
+static std::vector<std::shared_ptr<xtr_base_c>> track_extractor_list;
 
 static void
 create_extractors(KaxTracks &kax_tracks,
@@ -66,25 +101,14 @@ create_extractors(KaxTracks &kax_tracks,
       continue;
 
     // Is there more than one track with the same track number?
-    xtr_base_c *extractor = nullptr;
-    size_t k;
-    for (k = 0; k < extractors.size(); k++)
-      if (extractors[k]->m_track_num == tnum) {
-        mxwarn(boost::format(Y("More than one track with the track number %1% found.\n")) % tnum);
-        extractor = extractors[k];
-        break;
-      }
-    if (extractor)
+    if (track_extractors_by_track_number.find(tnum) != track_extractors_by_track_number.end()) {
+      mxwarn(boost::format(Y("More than one track with the track number %1% found.\n")) % tnum);
       continue;
+    }
 
     // Does the user want this track to be extracted?
-    track_spec_t *tspec = nullptr;
-    for (k = 0; k < tracks.size(); k++)
-      if (tracks[k].tid == track_id) {
-        tspec = &tracks[k];
-        break;
-      }
-    if (!tspec)
+    auto tspec_itr = brng::find_if(tracks, [track_id](auto const &t) { return (track_spec_t::tm_timestamps != t.target_mode) && (track_id == t.tid); });
+    if (tspec_itr == tracks.end())
       continue;
 
     // Let's find the codec ID and create an extractor for it.
@@ -92,33 +116,119 @@ create_extractors(KaxTracks &kax_tracks,
     if (codec_id.empty())
       mxerror(boost::format(Y("The track ID %1% does not have a valid CodecID.\n")) % track_id);
 
-    extractor = xtr_base_c::create_extractor(codec_id, track_id, *tspec);
+    auto extractor = xtr_base_c::create_extractor(codec_id, track_id, *tspec_itr);
     if (!extractor)
       mxerror(boost::format(Y("Extraction of track ID %1% with the CodecID '%2%' is not supported.\n")) % track_id % codec_id);
 
     extractor->m_track_num = tnum;
 
     // Has there another file been requested with the same name?
-    xtr_base_c *master = nullptr;
-    for (k = 0; k < extractors.size(); k++)
-      if (extractors[k]->m_file_name == tspec->out_name) {
-        master = extractors[k];
-        break;
-      }
+    auto extractor_itr = brng::find_if(track_extractor_list, [&tspec_itr](auto &x) { return x->m_file_name == tspec_itr->out_name; });
+    xtr_base_c *master = extractor_itr != track_extractor_list.end() ? extractor_itr->get() : nullptr;
 
     // Let the extractor create the file.
     extractor->create_file(master, track);
 
     // We're done.
-    extractors.push_back(extractor);
+    track_extractors_by_track_number.insert({ tnum, extractor });
+    track_extractor_list.push_back(extractor);
 
     mxinfo(boost::format(Y("Extracting track %1% with the CodecID '%2%' to the file '%3%'. Container format: %4%\n"))
            % track_id % codec_id % extractor->get_file_name().string() % extractor->get_container_name());
   }
 
   // Signal that all headers have been taken care of.
-  for (i = 0; i < extractors.size(); i++)
-    extractors[i]->headers_done();
+  for (auto &extractor : track_extractor_list)
+    extractor->headers_done();
+}
+
+static void
+close_timestamp_files() {
+  for (auto &pair : timestamp_extractors) {
+    auto &extractor  = *pair.second;
+    auto &timestamps = extractor.m_timestamps;
+
+    std::sort(timestamps.begin(), timestamps.end());
+    for (auto timestamp : timestamps)
+      extractor.m_file->puts(to_string(timestamp.m_timestamp, 1000000, 6) + "\n");
+
+    if (!timestamps.empty()) {
+      timestamp_t &last_timestamp = timestamps.back();
+      extractor.m_file->puts(to_string(last_timestamp.m_timestamp + last_timestamp.m_duration, 1000000, 6) + "\n");
+    }
+  }
+
+  timestamp_extractors.clear();
+}
+
+static void
+create_timestamp_files(KaxTracks &kax_tracks,
+                       std::vector<track_spec_t> &tracks) {
+  size_t i;
+  for (auto &tspec : tracks) {
+    if (track_spec_t::tm_timestamps != tspec.target_mode)
+      continue;
+
+    int track_number     = -1;
+    KaxTrackEntry *track = nullptr;
+    for (i = 0; kax_tracks.ListSize() > i; ++i) {
+      if (!Is<KaxTrackEntry>(kax_tracks[i]))
+        continue;
+
+      ++track_number;
+      if (track_number != tspec.tid)
+        continue;
+
+      track = static_cast<KaxTrackEntry *>(kax_tracks[i]);
+      break;
+    }
+
+    if (!track)
+      continue;
+
+    try {
+      mm_io_cptr file = mm_write_buffer_io_c::open(tspec.out_name, 128 * 1024);
+      timestamp_extractors[kt_get_number(*track)] = std::make_shared<timestamp_extractor_t>(tspec.tid, kt_get_number(*track), file, std::max<int64_t>(kt_get_default_duration(*track), 0));
+      file->puts("# timestamp format v2\n");
+
+    } catch(mtx::mm_io::exception &ex) {
+      close_timestamp_files();
+      mxerror(boost::format(Y("Could not open the timestamp file '%1%' for writing (%2%).\n")) % tspec.out_name % ex);
+    }
+  }
+}
+
+static void
+handle_blockgroup_timestamps(KaxBlockGroup &blockgroup,
+                             int64_t tc_scale) {
+  auto block = FindChild<KaxBlock>(blockgroup);
+  if (!block)
+    return;
+
+  // Do we need this block group?
+  auto extractor = timestamp_extractors.find(block->TrackNum());
+  if (timestamp_extractors.end() == extractor)
+    return;
+
+  // Next find the block duration if there is one.
+  auto kduration   = FindChild<KaxBlockDuration>(blockgroup);
+  int64_t duration = !kduration ? extractor->second->m_default_duration * block->NumberFrames() : kduration->GetValue() * tc_scale;
+
+  // Pass the block to the extractor.
+  for (auto idx = 0u, end = block->NumberFrames(); idx < end; ++idx)
+    extractor->second->m_timestamps.push_back(timestamp_t(block->GlobalTimecode() + idx * duration / block->NumberFrames(), duration / block->NumberFrames()));
+}
+
+static void
+handle_simpleblock_timestamps(KaxSimpleBlock &simpleblock) {
+  auto itr = timestamp_extractors.find(simpleblock.TrackNum());
+  if (timestamp_extractors.end() == itr)
+    return;
+
+  // Pass the block to the extractor.
+  auto &extractor = *itr->second;
+  for (auto idx = 0u, end = simpleblock.NumberFrames(); idx < end; ++idx)
+    extractor.m_timestamps.emplace_back(simpleblock.GlobalTimecode() + idx * extractor.m_default_duration, extractor.m_default_duration);
 }
 
 static int64_t
@@ -132,18 +242,15 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
 
   block->SetParent(cluster);
 
+  handle_blockgroup_timestamps(blockgroup, tc_scale);
+
   // Do we need this block group?
-  xtr_base_c *extractor = nullptr;
-  size_t i;
-  for (i = 0; i < extractors.size(); i++)
-    if (block->TrackNum() == extractors[i]->m_track_num) {
-      extractor = extractors[i];
-      break;
-    }
-  if (!extractor)
+  auto extractor_itr = track_extractors_by_track_number.find(block->TrackNum());
+  if (extractor_itr == track_extractors_by_track_number.end())
     return -1;
 
   // Next find the block duration if there is one.
+  auto &extractor               = *extractor_itr->second;
   KaxBlockDuration *kduration   = FindChild<KaxBlockDuration>(&blockgroup);
   int64_t duration              = !kduration ? -1 : static_cast<int64_t>(kduration->GetValue() * tc_scale);
   int64_t max_timestamp         = 0;
@@ -152,7 +259,7 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
   int64_t bref    = 0;
   int64_t fref    = 0;
   auto kreference = FindChild<KaxReferenceBlock>(&blockgroup);
-  for (i = 0; (2 > i) && kreference; i++) {
+  for (int i = 0; (2 > i) && kreference; i++) {
     if (0 > kreference->GetValue())
       bref = kreference->GetValue();
     else
@@ -164,15 +271,15 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
   KaxBlockAdditions *kadditions = FindChild<KaxBlockAdditions>(&blockgroup);
 
   if (0 > duration)
-    duration = extractor->m_default_duration * block->NumberFrames();
+    duration = extractor.m_default_duration * block->NumberFrames();
 
   KaxCodecState *kcstate = FindChild<KaxCodecState>(&blockgroup);
   if (kcstate) {
     memory_cptr codec_state(new memory_c(kcstate->GetBuffer(), kcstate->GetSize(), false));
-    extractor->handle_codec_state(codec_state);
+    extractor.handle_codec_state(codec_state);
   }
 
-  for (i = 0; i < block->NumberFrames(); i++) {
+  for (unsigned int i = 0; i < block->NumberFrames(); i++) {
     int64_t this_timestamp, this_duration;
 
     if (0 > duration) {
@@ -192,7 +299,7 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
     auto &data = block->GetBuffer(i);
     auto frame = std::make_shared<memory_c>(data.Buffer(), data.Size(), false);
     auto f     = xtr_frame_t{frame, kadditions, this_timestamp, this_duration, bref, fref, false, false, true, discard_padding};
-    extractor->decode_and_handle_frame(f);
+    extractor.decode_and_handle_frame(f);
 
     max_timestamp = std::max(max_timestamp, this_timestamp);
   }
@@ -204,26 +311,22 @@ static int64_t
 handle_simpleblock(KaxSimpleBlock &simpleblock,
                    KaxCluster &cluster) {
   if (0 == simpleblock.NumberFrames())
-    return - 1;
+    return -1;
 
   simpleblock.SetParent(cluster);
 
-  // Do we need this block group?
-  xtr_base_c *extractor = nullptr;
-  size_t i;
-  for (i = 0; i < extractors.size(); i++)
-    if (simpleblock.TrackNum() == extractors[i]->m_track_num) {
-      extractor = extractors[i];
-      break;
-    }
+  handle_simpleblock_timestamps(simpleblock);
 
-  if (!extractor)
+  // Do we need this block group?
+  auto extractor_itr = track_extractors_by_track_number.find(simpleblock.TrackNum());
+  if (extractor_itr == track_extractors_by_track_number.end())
     return - 1;
 
-  int64_t duration     = extractor->m_default_duration * simpleblock.NumberFrames();
+  auto &extractor       = *extractor_itr->second;
+  int64_t duration      = extractor.m_default_duration * simpleblock.NumberFrames();
   int64_t max_timestamp = 0;
 
-  for (i = 0; i < simpleblock.NumberFrames(); i++) {
+  for (unsigned int i = 0; i < simpleblock.NumberFrames(); i++) {
     int64_t this_timestamp, this_duration;
 
     if (0 > duration) {
@@ -237,7 +340,7 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
     auto &data = simpleblock.GetBuffer(i);
     auto frame = std::make_shared<memory_c>(data.Buffer(), data.Size(), false);
     auto f     = xtr_frame_t{frame, nullptr, this_timestamp, this_duration, -1, -1, simpleblock.IsKeyframe(), simpleblock.IsDiscardable(), false, timestamp_c::ns(0)};
-    extractor->decode_and_handle_frame(f);
+    extractor.decode_and_handle_frame(f);
 
     max_timestamp = std::max(max_timestamp, this_timestamp);
   }
@@ -247,22 +350,19 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
 
 static void
 close_extractors() {
-  size_t i;
+  for (auto &extractor : track_extractor_list)
+    extractor->finish_track();
 
-  for (i = 0; i < extractors.size(); i++)
-    extractors[i]->finish_track();
+  for (auto &extractor : track_extractor_list)
+    if (extractor->m_master)
+      extractor->finish_file();
 
-  for (i = 0; i < extractors.size(); i++)
-    if (extractors[i]->m_master)
-      extractors[i]->finish_file();
+  for (auto &extractor : track_extractor_list)
+    if (!extractor->m_master)
+      extractor->finish_file();
 
-  for (i = 0; i < extractors.size(); i++) {
-    if (!extractors[i]->m_master)
-      extractors[i]->finish_file();
-    delete extractors[i];
-  }
-
-  extractors.clear();
+  track_extractors_by_track_number.clear();
+  track_extractor_list.clear();
 }
 
 static void
@@ -371,6 +471,7 @@ extract_tracks(kax_analyzer_c &analyzer,
     tracks_found = true;
     find_and_verify_track_uids(*tracks, tspecs);
     create_extractors(*tracks, tspecs);
+    create_timestamp_files(*tracks, tspecs);
   }
 
   try {
@@ -418,8 +519,10 @@ extract_tracks(kax_analyzer_c &analyzer,
 
       } else if (Is<KaxTracks>(l1) && !tracks_found) {
         tracks_found = true;
-        find_and_verify_track_uids(*dynamic_cast<KaxTracks *>(l1), tspecs);
-        create_extractors(*dynamic_cast<KaxTracks *>(l1), tspecs);
+        tracks       = dynamic_cast<KaxTracks *>(l1);
+        find_and_verify_track_uids(*tracks, tspecs);
+        create_extractors(*tracks, tspecs);
+        create_timestamp_files(*tracks, tspecs);
 
       } else if (Is<KaxCluster>(l1)) {
         show_element(l1, 1, Y("Cluster"));
@@ -501,6 +604,7 @@ extract_tracks(kax_analyzer_c &analyzer,
     // lullaby. Just close your eyes, listen to her sweet voice, singing,
     // singing, fading... fad... ing...
     close_extractors();
+    close_timestamp_files();
 
     if (0 == verbose) {
       if (mtx::cli::g_gui_mode)

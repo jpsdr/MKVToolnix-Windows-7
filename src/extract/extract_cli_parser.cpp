@@ -389,6 +389,8 @@ extract_cli_parser_c::run() {
 
   parse_args();
 
+  m_options.merge_tracks_and_timestamps_targets();
+
   if (m_debug)
     m_options.dump();
 

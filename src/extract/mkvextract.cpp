@@ -157,9 +157,6 @@ main(int argc,
     else if (options_c::em_cuesheet == mode_options.m_extraction_mode)
       done_something_here = extract_cuesheet(*analyzer, mode_options);
 
-    else if (options_c::em_timestamps_v2 == mode_options.m_extraction_mode)
-      done_something_here = extract_timestamps(*analyzer, mode_options);
-
     if (done_something_here)
       done_something = true;
   }

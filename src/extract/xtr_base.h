@@ -71,7 +71,7 @@ public:
   virtual void init_content_decoder(KaxTrackEntry &track);
   virtual memory_cptr decode_codec_private(KaxCodecPrivate *priv);
 
-  static xtr_base_c *create_extractor(const std::string &new_codec_id, int64_t new_tid, track_spec_t &tspec);
+  static std::shared_ptr<xtr_base_c> create_extractor(const std::string &new_codec_id, int64_t new_tid, track_spec_t &tspec);
 };
 
 class xtr_fullraw_c : public xtr_base_c {

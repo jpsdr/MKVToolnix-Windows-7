@@ -52,4 +52,5 @@ public:
 
   void dump() const;
   std::vector<mode_options_c>::iterator get_options_for_mode(extraction_mode_e mode);
+  void merge_tracks_and_timestamps_targets();
 };

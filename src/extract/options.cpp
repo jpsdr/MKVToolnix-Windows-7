@@ -73,3 +73,23 @@ options_c::get_options_for_mode(extraction_mode_e mode) {
 
   return itr;
 }
+
+void
+options_c::merge_tracks_and_timestamps_targets() {
+  auto tracks_itr     = brng::find_if(m_modes, [](auto const &mode) { return em_tracks        == mode.m_extraction_mode; });
+  auto timestamps_itr = brng::find_if(m_modes, [](auto const &mode) { return em_timestamps_v2 == mode.m_extraction_mode; });
+
+  if (timestamps_itr == m_modes.end())
+    return;
+
+  for (auto &tspec : timestamps_itr->m_tracks)
+    tspec.target_mode = track_spec_t::tm_timestamps;
+
+  if (tracks_itr == m_modes.end())
+    timestamps_itr->m_extraction_mode = em_tracks;
+
+  else {
+    brng::copy(timestamps_itr->m_tracks, std::back_inserter(tracks_itr->m_tracks));
+    m_modes.erase(timestamps_itr);
+  }
+}
