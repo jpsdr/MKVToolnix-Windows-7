@@ -15,7 +15,7 @@
   also move towards correcting the verbiage. MKVToolNix is following this
   change.
 
-* mkvextract' command line interface has been changed to allow extraction of
+* mkvextract's command line interface has been changed to allow extraction of
   multiple items at the same time. The first argument must now be the source
   file's name. All following arguments either set the mode (e.g. `tracks`) or
   specify what to extract in the currently active mode.
