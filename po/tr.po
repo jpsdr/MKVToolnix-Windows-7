@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-10-05 20:33+0200\n"
-"PO-Revision-Date: 2017-10-05 17:35+0000\n"
+"PO-Revision-Date: 2017-10-07 08:16+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -4834,7 +4834,7 @@ msgstr "Her aralık tam ortada '-' ile başlama ve bitiş kare/alan numarasında
 #: src/mkvtoolnix-gui/merge/output.cpp:375
 #, no-c-format
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
-msgstr "Her aralık tam ortada '-' ile başlama ve bitiş zaman kodundan oluşur, örneğin '00:01:15-00:03:20'."
+msgstr "Her aralık tam ortada '-' ile başlama ve bitiş zaman damgasından oluşur, örneğin '00:01:15-00:03:20'."
 
 #: src/info/mkvinfo.cpp:185
 #, boost-format
@@ -4953,9 +4953,9 @@ msgid "Error creating a temporary file (reason: %1)."
 msgstr "Geçici bir dosya oluştururken hata (sebep: %1)."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:133
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Error details: %1."
-msgstr "İstisna ayrıntıları:"
+msgstr "Hata ayrıntıları: %1."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:77
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:167
@@ -4966,7 +4966,7 @@ msgstr "mkvmerge çalıştırılırken hata oldu"
 #: src/input/subtitles.cpp:135
 #, boost-format
 msgid "Error in line %1%: expected a SRT timestamp line but found something else. Aborting this file.\n"
-msgstr "Satır %1% içinde hata: beklenen SRT zaman kodu satırı ama başka bir şey bulundu. Bu dosya iptal ediliyor.\n"
+msgstr "Satır %1% içinde hata: beklenen SRT zaman damgası satırı ama başka bir şey bulundu. Bu dosya iptal ediliyor.\n"
 
 #: src/input/subtitles.cpp:126
 #, boost-format
@@ -5412,7 +5412,7 @@ msgstr "Dosya/parça bağlamasının geniş kapsamlı açıklaması ve bu özell
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
-msgstr "Görüntü izi içermeyecek ama en az bir ses izi içerecek dosyalar için mkvmerge otomatik olarak bir zaman kodu ölçek faktörü seçecek böylece tüm zaman kodları ve süreleri bir örnek duyarlılığna sahip olur."
+msgstr "Görüntü izi içermeyecek ama en az bir ses izi içerecek dosyalar için mkvmerge otomatik olarak bir zaman damgası ölçek faktörü seçecek böylece tüm zaman damgaları ve süreleri bir örnek duyarlılığna sahip olur."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
 #, no-c-format
@@ -5475,7 +5475,7 @@ msgstr "Varsayılan süreye ya da bir iz için saniye başına kare sayısına z
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
 #, no-c-format
 msgid "Forces the timestamp scale factor to the given value."
-msgstr "Zaman kodu ölçeği etkenini verilen değere zorlar."
+msgstr "Zaman damgası ölçeği etkenini verilen değere zorlar."
 
 #: src/mpegparser/M2VParser.cpp:448
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
@@ -5757,7 +5757,7 @@ msgstr "Eğer aralığın başlama numarası ön eki '+' ise o zaman içeriği �
 #: src/mkvtoolnix-gui/merge/output.cpp:378
 #, no-c-format
 msgid "If a range's start timestamp is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
-msgstr "Eğer aralığın başlama zaman kodu ön eki '+' ise o zaman içeriği önceki aralıktaki gibi aynı dosyaya yazılacaktır. Aksi halde bu aralık için yeni bir dosya oluşturulacaktır."
+msgstr "Eğer aralığın başlama zaman damgası ön eki '+' ise o zaman içeriği önceki aralıktaki gibi aynı dosyaya yazılacaktır. Aksi halde bu aralık için yeni bir dosya oluşturulacaktır."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:394
 #, no-c-format
@@ -5767,7 +5767,7 @@ msgstr "Eğer başlama numarası atlanırsa o zaman önceki aralığın bitiş n
 #: src/mkvtoolnix-gui/merge/output.cpp:376
 #, no-c-format
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
-msgstr "Eğer başlama zaman kodu atlanırsa o zaman önceki aralığın bitiş zaman kodu ya da önceki aralık olmadıysa dosyanın başlangıcı kullanılır."
+msgstr "Eğer başlama zaman damgası atlanırsa o zaman önceki aralığın bitiş zaman damgası ya da önceki aralık olmadıysa dosyanın başlangıcı kullanılır."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:221
 #, no-c-format
@@ -5984,7 +5984,7 @@ msgstr "Eğer izin mevcut olduğu biliniyorsa, ama bulunamadıysa, araştırma i
 #: src/mkvtoolnix-gui/merge/output.cpp:367
 #, no-c-format
 msgid "If two or more timestamps are used then you have to separate them with commas."
-msgstr "Eğer iki veya daha fazla zaman kodu kullanıldıysa o zaman onları virgüllerle ayırmak zorundasınız."
+msgstr "Eğer iki veya daha fazla zaman damgası kullanıldıysa o zaman onları virgüllerle ayırmak zorundasınız."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:421
 #, no-c-format
@@ -6222,7 +6222,7 @@ msgstr "'--split %1%' içinde '--split' için geçersiz biçim.\n"
 #: src/extract/xtr_textsubs.cpp:189
 #, boost-format
 msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: The first field is not an integer. This entry will be skipped.\n"
-msgstr "%2% zaman kodunda SSA satırı ('%1%') için geçersiz biçim: İlk alan tam sayı değildir. Bu giriş atlanacaktır.\n"
+msgstr "%2% zaman damgasında SSA satırı ('%1%') için geçersiz biçim: İlk alan tam sayı değildir. Bu giriş atlanacaktır.\n"
 
 #: src/common/strings/parsing.cpp:147
 msgid "Invalid format: At least minutes and seconds have to be given, but no colon was found"
@@ -6336,7 +6336,7 @@ msgstr "'--split %1%' içindeki '--split' için geçersiz başlama karesi/alanı
 
 #: src/input/r_usf.cpp:219
 msgid "Invalid start or stop timestamp"
-msgstr "Geçersiz başlatma ve durdurma zaman kodu"
+msgstr "Geçersiz başlatma ve durdurma zaman damgası"
 
 #: src/common/split_arg_parsing.cpp:53
 #, boost-format
@@ -6612,18 +6612,18 @@ msgstr "Sol"
 #: src/merge/timestamp_factory.cpp:357
 #, boost-format
 msgid "Line %1% of the timestamp file '%2%' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
-msgstr "'%2%' zaman kodu dosyasının %1%. satırı tutarsız veri içeriyor (örn. süre ya da FPS sıfırdan küçük).\n"
+msgstr "'%2%' zaman damgası dosyasının %1%. satırı tutarsız veri içeriyor (örn. süre ya da FPS sıfırdan küçük).\n"
 
 #: src/merge/timestamp_factory.cpp:120
 #, boost-format
 msgid "Line %1% of the timestamp file '%2%' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
-msgstr "'%2%' zaman kodu dosyasının %1%. satırı tutarsız veri içeriyor (örn. başlangıç karesi numarası bitiş karesi numarasından büyük ya da bazı değerler sıfırdan küçük).\n"
+msgstr "'%2%' zaman damgası dosyasının %1%. satırı tutarsız veri içeriyor (örn. başlangıç karesi numarası bitiş karesi numarasından büyük ya da bazı değerler sıfırdan küçük).\n"
 
 #: src/merge/timestamp_factory.cpp:115
 #: src/merge/timestamp_factory.cpp:350
 #, boost-format
 msgid "Line %1% of the timestamp file '%2%' could not be parsed.\n"
-msgstr "'%2%' zaman kodu dosyasının %1%. satırı ayrıştırılamadı.\n"
+msgstr "'%2%' zaman damgası dosyasının %1%. satırı ayrıştırılamadı.\n"
 
 #: src/input/subtitles.cpp:199
 #, boost-format
@@ -6644,7 +6644,7 @@ msgstr "Satır %1%: Satır bir altyazı girişi olarak görünüyor ancak biçim
 #: src/input/r_vobsub.cpp:287
 #, boost-format
 msgid "Line %1%: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
-msgstr "Satır %1%: Satır bir altyazı girişi olarak görünüyor ancak zaman kodu iz gecikmesi eklendikten sonra bile eksi oldu. Eksi zaman kodları Matroska içinde desteklenmez. Bu giriş atlanacaktır.\n"
+msgstr "Satır %1%: Satır bir altyazı girişi olarak görünüyor ancak zaman damgası iz gecikmesi eklendikten sonra bile eksi oldu. Eksi zaman damgaları Matroska içinde desteklenmez. Bu giriş atlanacaktır.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 msgid "Link files"
@@ -7364,7 +7364,7 @@ msgstr "Normalde mkvmerge, belirli kodeklere altyazı izleri için ilave kayıps
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
-msgstr "Normalde mkvmerge, zaman kodlarının ve sürelerinin 1ms duyarlılığına sahip olacağı anlamına gelen 1000000 değerini kullanacak."
+msgstr "Normalde mkvmerge, zaman damgalarının ve sürelerinin 1ms duyarlılığına sahip olacağı anlamına gelen 1000000 değerini kullanacak."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:222
 #, no-c-format
@@ -8804,7 +8804,7 @@ msgstr "Etiketler dosyası seç"
 #: src/mkvtoolnix-gui/merge/input.cpp:959
 #, no-c-format
 msgid "Select timestamp file"
-msgstr "Zaman kodu dosyası seç"
+msgstr "Zaman damgası dosyası seç"
 
 #: src/mkvtoolnix-gui/forms/util/side_by_side_multi_select.h:129
 msgid "Selected:"
@@ -9053,7 +9053,7 @@ msgstr "Basit Blok"
 #: src/info/mkvinfo.cpp:207
 #, boost-format
 msgid "SimpleBlock (%1%track number %2%, %3% frame(s), timestamp %|4$.3f|s = %5%)"
-msgstr "Basit Blok (%1% iz numarası %2%, %3% kare, zaman kodu %|4$.3f|s = %5%)"
+msgstr "Basit Blok (%1% iz numarası %2%, %3% kare, zaman damgası %|4$.3f|s = %5%)"
 
 #: src/mpegparser/M2VParser.cpp:399
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
@@ -9170,7 +9170,7 @@ msgstr "Bölme"
 #: src/mkvtoolnix-gui/merge/output.cpp:415
 #, no-c-format
 msgid "Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed."
-msgstr "Bölme işlemi, numarası listelenen bölümler için zaman kodu eşit ya da  başlangıç zaman kodundan büyük olan ilk anahtar kareden önce meydana gelecek."
+msgstr "Bölme işlemi, numarası listelenen bölümler için zaman damgası eşit ya da  başlangıç zaman damgasından büyük olan ilk anahtar kareden önce meydana gelecek."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:622
 msgid "Sta&rt all pending jobs"
@@ -9397,7 +9397,7 @@ msgstr ".idx dosyası dili gösteren 'id: ...' satırı içermiyor.\n"
 #: src/input/r_aac.cpp:78
 #, boost-format
 msgid "The AAC file '%1%' contains invalid header data: the sampling frequency or the number of channels is 0.\n"
-msgstr ""
+msgstr "AAC dosyası '%1%' geçersiz başlık verisi içeriyor: örnekleme sıklığı veya kanal sayısı 0'dır.\n"
 
 #: src/output/p_aac.cpp:147
 #, boost-format
@@ -9419,7 +9419,7 @@ msgstr "FLAC başlıkları ayrıştırılamadı: akış bilgisi yapısı bulunma
 #: src/output/p_generic_video.cpp:74
 #, boost-format
 msgid "The FPS is 0.0 but the reader did not provide a timestamp for a packet. %1%\n"
-msgstr "FPS 0.0'dır ama okuyucu paket için bir zaman kodu vermedi. %1%\n"
+msgstr "FPS 0.0'dır ama okuyucu paket için bir zaman damgası vermedi. %1%\n"
 
 #: src/merge/mkvmerge.cpp:1460
 #, boost-format
@@ -9756,7 +9756,7 @@ msgstr ""
 
 #: src/common/kax_analyzer.cpp:175
 msgid "The data in the file is corrupted and cannot be modified safely"
-msgstr ""
+msgstr "Dosyadaki veri bozulmuş ve güvenle değiştirilemez"
 
 #: src/common/property_element.cpp:110
 msgid "The date the file was created."
@@ -10131,7 +10131,7 @@ msgstr "Açmaya çalıştığınız dosya (%1) ne geçerli bir Matroska ne de ge
 #: src/common/kax_file.cpp:52
 #, boost-format
 msgid "The first cluster timestamp after the resync is %1%.\n"
-msgstr "Yeniden eşitlemeden sonraki ilk küme zaman kodu %1%.\n"
+msgstr "Yeniden eşitlemeden sonraki ilk küme zaman damgası %1%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1762
 msgid "The first destination file only"
@@ -10192,7 +10192,7 @@ msgstr "Oluşturulan çıktı dosyası adı kaynak dosya adı ile aynı temel ad
 
 #: src/merge/mkvmerge.cpp:1914
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
-msgstr "Verilen zaman kodu ölçeği etkeni geçerli aralığın dışında ('hatta bir görüntü izi mevcut ise bile örnek duyarlılık' için 1...10000000 veya -1).\n"
+msgstr "Verilen zaman damgası ölçeği etkeni geçerli aralığın dışında ('hatta bir görüntü izi mevcut ise bile örnek duyarlılık' için 1...10000000 veya -1).\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:192
 #, no-c-format
@@ -10251,7 +10251,7 @@ msgstr "Sağdaki 'seçilen' listesindeki diller, programdaki tüm aşağı açı
 #: src/common/kax_file.cpp:215
 #, boost-format
 msgid "The last timestamp processed before the error was encountered was %1%.\n"
-msgstr "Hata ile karşılaşılmadan önce işlenen son zaman kodu %1%.\n"
+msgstr "Hata ile karşılaşılmadan önce işlenen son zaman damgası %1%.\n"
 
 #: src/propedit/change.cpp:221
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
@@ -10265,7 +10265,7 @@ msgstr "'G', 'M' ve 'K' harfleri sırasıyla giga/mega/kilo baytı göstermesi i
 #: src/merge/timestamp_factory.cpp:214
 #, boost-format
 msgid "The line %1% of the timestamp file '%2%' does not contain a valid floating point number.\n"
-msgstr "%2%' zaman kodu dosyasının '%1%' satırı geçerli bir kayan noktalı sayı içermiyor.\n"
+msgstr "%2%' zaman damgası dosyasının '%1%' satırı geçerli bir kayan noktalı sayı içermiyor.\n"
 
 #: src/common/translation.cpp:349
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
@@ -10366,7 +10366,7 @@ msgstr "İki ses izinin kanal sayıları farklı: %1% ve %2%"
 #: src/merge/timestamp_factory.cpp:270
 #, boost-format
 msgid "The number of external timestamps %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
-msgstr "Harici zaman kodlarının sayısı %1% bu izdeki karelerin sayısından küçük. Bu izin kalan kareleri, olmasını istediğiniz şekilde zaman damgalanmış olmayabilir. Hatta mkvmerge çökebilir.\n"
+msgstr "Harici zaman damgalarının sayısı %1% bu izdeki karelerin sayısından küçük. Bu izin kalan kareleri, olmasını istediğiniz şekilde zaman damgalı olmayabilir. Hatta mkvmerge çökebilir.\n"
 
 #: src/common/property_element.cpp:155
 msgid ""
@@ -10554,7 +10554,7 @@ msgstr "Ayarlar dosyası '%1' geçersiz ayarlar içeriyor ve yüklenemedi."
 
 #: src/extract/extract_cli_parser.cpp:116
 msgid "The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."
-msgstr "Altıncı kip bir iz için tüm blokların zaman kodlarını bulur ve bu zaman kodları ile zaman kodu s2 dosyasının çıktısını verir."
+msgstr "Altıncı kip bir iz için tüm blokların zaman damgalarını bulur ve bu zaman kodları ile zaman damgası s2 dosyasının çıktısını verir."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:331
 #, no-c-format
@@ -10665,18 +10665,18 @@ msgstr "Zaman damgası dosyası '%1%' okumak için açılamadı.\n"
 #: src/merge/timestamp_factory.cpp:304
 #, boost-format
 msgid "The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n"
-msgstr "Zaman kodu dosyası '%1%', saniye başına varsayılan kare sayısıyla geçerli bir 'Assume' satırı içermiyor.\n"
+msgstr "Zaman damgası dosyası '%1%', saniye başına varsayılan kare sayısıyla geçerli bir 'Assume' satırı içermiyor.\n"
 
 #: src/merge/timestamp_factory.cpp:339
 #, boost-format
 msgid "The timestamp file '%1%' does not contain a valid 'Gap' line with the duration of the gap.\n"
-msgstr "Zaman kodu dosyası '%1%', boşluğun süresiyle geçerli bir 'Gap' satırı içermiyor.\n"
+msgstr "Zaman damgası dosyası '%1%', boşluğun süresiyle geçerli bir 'Gap' satırı içermiyor.\n"
 
 #: src/merge/timestamp_factory.cpp:241
 #: src/merge/timestamp_factory.cpp:368
 #, boost-format
 msgid "The timestamp file '%1%' does not contain any valid entry.\n"
-msgstr "Zaman kodu dosyası '%1%', herhangi bir geçerli giriş içermiyor.\n"
+msgstr "Zaman damgası dosyası '%1%', herhangi bir geçerli giriş içermiyor.\n"
 
 #: src/merge/timestamp_factory.cpp:217
 #, boost-format
@@ -10689,16 +10689,16 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:360
 #, no-c-format
 msgid "The timestamps after which a new destination file is started."
-msgstr "Yeni bir hedef dosya başlatıldıktan sonraki zaman kodları."
+msgstr "Yeni bir hedef dosya başlatıldıktan sonraki zaman damgaları."
 
 #: src/input/r_ogm.cpp:602
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
-msgstr "Bu akış için zaman kodları dosyanın ortasında sıfırlandı. Bu desteklenmiyor. Şu anki paket atılacaktır.\n"
+msgstr "Bu akış için zaman damgaları dosyanın ortasında sıfırlandı. Bu desteklenmiyor. Şu anki paket atılacaktır.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:361
 #, no-c-format
 msgid "The timestamps refer to the whole stream and not to each individual destination file."
-msgstr "Zaman kodları her bir tek hedef dosyayı değil bütün akışı ifade eder."
+msgstr "Zaman damgaları her bir tek hedef dosyayı değil bütün akışı ifade eder."
 
 #: src/common/property_element.cpp:109
 msgid "The title for the whole movie."
@@ -10905,7 +10905,7 @@ msgstr "Bu miktar kaynak dosyanın boyutunun % 0.3'ü veya 10 MB'tır, hangisi d
 msgid "This audio track contains %1% byte of invalid data which was skipped before timestamp %2%."
 msgid_plural "This audio track contains %1% bytes of invalid data which were skipped before timestamp %2%."
 msgstr[0] "Bu ses izi %2% zaman kodundan önce atlanmış geçersiz %1% bayt veri içeriyor."
-msgstr[1] "Bu ses izi %2% zaman kodundan önce atlanmış geçersiz %1% bayt veri içeriyor."
+msgstr[1] "Bu ses izi %2% zaman damgasından önce atlanmış geçersiz %1% bayt veri içeriyor."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:52
 #, no-c-format
@@ -10935,7 +10935,7 @@ msgstr "Bu alan normalde, oluşturulan tarihe dosyaya ayarlanır."
 
 #: src/input/subtitles.cpp:166
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
-msgstr "Bu dosya zaman kodu satırlarında koordinatlar içeriyor. Bu tür koordinatlar Matroska SRT altyazı biçimi tarafından desteklenmez. Koordinatlar otomatik olarak kaldırılacaktır.\n"
+msgstr "Bu dosya zaman damgası satırlarında koordinatlar içeriyor. Bu tür koordinatlar Matroska SRT altyazı biçimi tarafından desteklenmez. Koordinatlar otomatik olarak kaldırılacaktır.\n"
 
 #: src/extract/mkvextract.cpp:65
 #: src/propedit/propedit.cpp:139
@@ -11159,28 +11159,28 @@ msgstr "Zaman dilimi"
 
 #: src/extract/extract_cli_parser.cpp:114
 msgid "Timestamp extraction"
-msgstr "Zaman kodu çıkartma"
+msgstr "Zaman damgası çıkartma"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1686
 msgid "Timestamp file:"
-msgstr "Zaman kodu dosyası:"
+msgstr "Zaman damgası dosyası:"
 
 #: src/extract/timestamps_v2.cpp:252
 #: src/info/mkvinfo.cpp:465
 #: src/info/mkvinfo.cpp:1043
 #, boost-format
 msgid "Timestamp scale: %1%"
-msgstr "Zaman kodu ölçeği: %1%"
+msgstr "Zaman damgası ölçeği: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1668
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1682
 msgid "Timestamps and default duration"
-msgstr "Zaman kodları ve varsayılan süre"
+msgstr "Zaman damgaları ve varsayılan süre"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:358
 #, no-c-format
 msgid "Timestamps:"
-msgstr "Zaman kodları:"
+msgstr "Zaman damgaları:"
 
 #: src/common/property_element.cpp:109
 msgid "Title"
@@ -11952,7 +11952,7 @@ msgstr "Var olan öğelerin ü&zerine yazmadan önce uyar (dosyalar, işler vb.)
 #: src/input/subtitles.cpp:211
 #, boost-format
 msgid "Warning in line %1%: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
-msgstr "Satır %1%'te uyarı: Başlama zamanı kodu önceki girişteki zamandan küçük. Bu dosyadan tüm girişler başlama zamanlarına göre sıralanacaktır.\n"
+msgstr "Satır %1%'te uyarı: Başlama zamanı damgası önceki girişteki zamandan küçük. Bu dosyadan tüm girişler başlama zamanlarına göre sıralanacaktır.\n"
 
 #: src/common/output.cpp:137
 #: src/mkvtoolnix-gui/jobs/job.cpp:278
@@ -12297,7 +12297,7 @@ msgstr "Zlib çıkartması başarısız oldu. Sonuç: %1%\n"
 #: src/info/mkvinfo.cpp:210
 #, boost-format
 msgid "[%1% frame for track %2%, timestamp %3%]"
-msgstr "[iz %2% için %1% kare, zaman kodu %3%]"
+msgstr "[iz %2% için %1% kare, zaman damgası %3%]"
 
 #: src/output/p_ac3.cpp:220
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
@@ -12708,7 +12708,7 @@ msgstr "mkvextract tags <içtekiadı> [seçenekler]"
 
 #: src/extract/extract_cli_parser.cpp:120
 msgid "mkvextract timestamps_v2 \"a movie.mkv\" 1:timestamps_track1.txt"
-msgstr "mkvextract timestamps_v2 \"a film.mkv\" 1:zamankodları_iz1.txt"
+msgstr "mkvextract timestamps_v2 \"film.mkv\" 1:zamandamgaları_iz1.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
 msgid "mkvextract timestamps_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
@@ -12788,7 +12788,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:83
 #, no-c-format
 msgid "mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."
-msgstr "mkvmerge normalde, zaman kodu toplam sürenin beş saniye içinde ise bu son girişi kaldırır."
+msgstr "mkvmerge normalde, zaman damgası toplam sürenin beş saniye içinde ise bu son girişi kaldırır."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:174
 #: src/mkvtoolnix-gui/merge/output.cpp:175
