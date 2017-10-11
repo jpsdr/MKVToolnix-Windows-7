@@ -49,23 +49,35 @@
   <title>Synopsis</title>
   <cmdsynopsis>
    <command>mkvextract</command>
-   <arg choice="req">mode</arg>
    <arg choice="req">source-filename</arg>
+   <arg choice="req">mode1</arg>
    <arg>options</arg>
-   <arg>extraction-spec</arg>
+   <arg>extraction-spec1</arg>
+   <arg>mode2</arg>
+   <arg>options</arg>
+   <arg>extraction-spec2</arg>
+   <arg>…</arg>
   </cmdsynopsis>
  </refsynopsisdiv>
 
  <refsect1 id="mkvextract.description">
   <title>Description</title>
   <para>
-   This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells
-   &mkvextract; what to extract. Currently supported is the extraction of <link linkend="mkvextract.description.tracks">tracks</link>, <link
+   This program extracts specific parts from a &matroska; file to other useful formats. The first argument is the name of the source file
+   which must be a &matroska; file.
+  </para>
+
+  <para>
+   All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file.
+   Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass.
+   Most options can only be used in certain modes with a few options applying to all modes.
+  </para>
+
+  <para>
+   Currently supported is the extraction of <link linkend="mkvextract.description.tracks">tracks</link>, <link
    linkend="mkvextract.description.tags">tags</link>, <link linkend="mkvextract.description.attachments">attachments</link>, <link
    linkend="mkvextract.description.chapters">chapters</link>, <link linkend="mkvextract.description.cuesheets">CUE sheets</link>, <link
-   linkend="mkvextract.description.timestamps_v2">timestamps</link> and <link
-   linkend="mkvextract.description.cues">cues</link>.  The second argument is the name of the source file. It must be a
-   &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode.
+   linkend="mkvextract.description.timestamps_v2">timestamps</link> and <link linkend="mkvextract.description.cues">cues</link>.
   </para>
 
   <refsect2 id="mkvextract.description.common">
@@ -227,7 +239,7 @@
    <title>Track extraction mode</title>
 
    <para>
-    Syntax: <command>mkvextract <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>
+    Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>tracks</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>
    </para>
 
    <para>
@@ -305,30 +317,17 @@
        tracks then those tracks will be saved in the same file. Example:
       </para>
 
-      <screen>$ mkvextract tracks input.mkv 1:output-two-tracks.rm 2:output-two-tracks.rm</screen>
+      <screen>$ mkvextract input.mkv tracks 0:video.h264 2:output-two-vobsub-tracks.idx 3:output-two-vobsub-tracks.idx</screen>
      </listitem>
     </varlistentry>
    </variablelist>
-  </refsect2>
-
-  <refsect2 id="mkvextract.description.tags">
-   <title>Tags extraction mode</title>
-
-   <para>
-    Syntax: <command>mkvextract <option>tags</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional></command>
-   </para>
-
-   <para>
-    The extracted tags are written to the console unless the output is redirected (see the section about <link
-    linkend="mkvextract.output_redirection">output redirection</link> for details).
-   </para>
   </refsect2>
 
   <refsect2 id="mkvextract.description.attachments">
    <title>Attachments extraction mode</title>
 
    <para>
-    Syntax: <command>mkvextract <option>attachments</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional></command>
+    Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>attachments</option> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional></command>
    </para>
 
    <variablelist>
@@ -350,7 +349,7 @@
    <title>Chapters extraction mode</title>
 
    <para>
-    Syntax: <command>mkvextract <option>chapters</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional></command>
+    Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>chapters</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.xml</parameter></command>
    </para>
 
    <variablelist>
@@ -382,8 +381,19 @@
    </variablelist>
 
    <para>
-    The extracted chapters are written to the console unless the output is redirected (see the section about <link
-    linkend="mkvextract.output_redirection">output redirection</link> for details).
+    The chapters are written to specified output file. By default the &xml; format understood by &mkvmerge; is used. If no chapters are found in the file, the output file is not created.
+   </para>
+  </refsect2>
+
+  <refsect2 id="mkvextract.description.tags">
+   <title>Tags extraction mode</title>
+
+   <para>
+    Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>tags</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.xml</parameter></command>
+   </para>
+
+   <para>
+    The tags are written to specified output file in the &xml; format understood by &mkvmerge;. If no tags are found in the file, the output file is not created.
    </para>
   </refsect2>
 
@@ -391,12 +401,11 @@
    <title>Cue sheet extraction mode</title>
 
    <para>
-    Syntax: <command>mkvextract <option>cuesheet</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional></command>
+    Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>cuesheet</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.cue</parameter></command>
    </para>
 
    <para>
-    The extracted cue sheet is written to the console unless the output is redirected (see the section about <link
-    linkend="mkvextract.output_redirection">output redirection</link> for details).
+    The cue sheet is written to specified output file. If no chapters or tags are found in the file, the output file is not created.
    </para>
   </refsect2>
 
@@ -404,12 +413,7 @@
    <title>Timestamp extraction mode</title>
 
    <para>
-    Syntax: <command>mkvextract <option>timestamps_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>
-   </para>
-
-   <para>
-    The extracted timestamps are written to the console unless the output is redirected (see the section about <link
-    linkend="mkvextract.output_redirection">output redirection</link> for details).
+    Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>timestamps_v2</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>
    </para>
 
    <variablelist>
@@ -426,7 +430,7 @@
        Example:
       </para>
 
-      <screen>$ mkvextract timestamps_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt</screen>
+      <screen>$ mkvextract input.mkv timestamps_v2 1:ts-track1.txt 2:ts-track2.txt</screen>
      </listitem>
     </varlistentry>
    </variablelist>
@@ -436,7 +440,7 @@
    <title>Cues extraction mode</title>
 
    <para>
-    Syntax: <command>mkvextract <option>cues</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>
+    Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>cues</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>
    </para>
 
    <variablelist>
@@ -514,40 +518,30 @@
     Example:
    </para>
 
-   <screen>$ mkvextract cues input.mkv 1:cues-track1.txt 2:cues-track2.txt</screen>
+   <screen>$ mkvextract input.mkv cues 1:cues-track1.txt 2:cues-track2.txt</screen>
   </refsect2>
  </refsect1>
 
- <refsect1 id="mkvextract.output_redirection">
-  <title>Output redirection</title>
+ <refsect1 id="mkvextract.examples">
+  <title>Examples</title>
 
   <para>
-   Several extraction modes cause &mkvextract; to write the extracted data to the console. There are generally two ways of writing this data
-   into a file: one provided by the shell and one provided by &mkvextract; itself.
+   Extracting both chapters and tags in their respective &xml; formats at the same time:
   </para>
 
+  <screen>$ mkvmerge movie.mkv chapters movie-chapters.xml tags movie-tags.xml</screen>
+
   <para>
-   The shell's builtin redirection mechanism is used by appending '<literal>&gt; output-filename.ext</literal>' to the command
-   line. Example:
+   Extracting a couple of tracks and their respective timestamps at the same time:
   </para>
 
-  <screen>$ mkvextract tags source.mkv &gt; tags.xml</screen>
+  <screen>$ mkvmerge "Another Movie.mkv" tracks 0:video.h265 "1:main audio.aac" "2:director's comments.aac" timestamps_v2 "0:timestamps video.txt" "1:timestamps main audio.txt" "2:timestamps director's comments.txt"</screen>
 
   <para>
-   &mkvextract;'s own redirection is invoked with the <link
-   linkend="mkvextract.description.common.redirect_output"><option>--redirect-output</option></link> option. Example:
-   </para>
+   Extracting chapters in the Ogg/OGM format and re-encoding a text subtitle track to another character set:
+  </para>
 
-  <screen>$ mkvextract tags source.mkv --redirect-output tags.xml</screen>
-
-  <note>
-   <para>
-    On Windows you should probably use the <link
-    linkend="mkvextract.description.common.redirect_output"><option>--redirect-output</option></link> option because
-    <command>cmd.exe</command> sometimes interpretes special characters before they're written into the output file resulting in broken
-    output.
-   </para>
-  </note>
+  <screen>$ mkvmerge "My Movie.mkv" chapters --simple "My Chapters.txt" tracks -c MS-ANSI "2:My Subtitles.srt"</screen>
  </refsect1>
 
  <refsect1 id="mkvextract.text_files_and_charsets">
