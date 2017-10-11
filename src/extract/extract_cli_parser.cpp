@@ -44,26 +44,29 @@ extract_cli_parser_c::set_default_values() {
 
 void
 extract_cli_parser_c::init_parser() {
-  add_information(YT("mkvextract <mode> <source-filename> [options] <extraction-spec>"));
+  add_information(YT("mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"));
 
-  add_section_header(YT("Usage"));
-  add_information(YT("mkvextract tracks <inname> [options] [TID1:out1 [TID2:out2 ...]]"));
-  add_information(YT("mkvextract tags <inname> [options]"));
-  add_information(YT("mkvextract attachments <inname> [options] [AID1:out1 [AID2:out2 ...]]"));
-  add_information(YT("mkvextract chapters <inname> [options]"));
-  add_information(YT("mkvextract cuesheet <inname> [options]"));
-  add_information(YT("mkvextract timestamps_v2 <inname> [TID1:out1 [TID2:out2 ...]]"));
-  add_information(YT("mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"));
-  add_information(YT("mkvextract <-h|-V>"));
+  add_section_header(YT("Modes"));
+  add_information(YT("tracks [options] [TID1:out1 [TID2:out2 ...]]"));
+  add_information(YT("tags [options] out.xml"));
+  add_information(YT("attachments [options] [AID1:out1 [AID2:out2 ...]]"));
+  add_information(YT("chapters [options] out.xml"));
+  add_information(YT("cuesheet [options] out.cue"));
+  add_information(YT("timestamps_v2 [TID1:out1 [TID2:out2 ...]]"));
+  add_information(YT("cues [options] [TID1:out1 [TID2:out2 ...]]"));
+
+  add_section_header(YT("Other options"));
+  add_information(YT("mkvextract <-h|--help|-V|--version>"));
 
   add_separator();
 
-  add_information(YT("The first word tells mkvextract what to extract. The second must be the source file. "
-                     "There are few global options that can be used with all modes. "
-                     "All other options depend on the mode."));
+  add_information(TSV(YT("The first argument must be the name of source file."),
+                      YT("All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file."),
+                      YT("Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."),
+                      YT("Most options can only be used in certain modes with a few options applying to all modes.")));
 
   add_section_header(YT("Global options"));
-  OPT("f|parse-fully",    set_parse_fully,      YT("Parse the whole file instead of relying on the index."));
+  OPT("f|parse-fully", set_parse_fully, YT("Parse the whole file instead of relying on the index."));
 
   add_common_options();
 
@@ -78,15 +81,15 @@ extract_cli_parser_c::init_parser() {
 
   add_section_header(YT("Example"));
 
-  add_information(YT("mkvextract tracks \"a movie.mkv\" 2:audio.ogg -c ISO8859-1 3:subs.srt"));
+  add_information(YT("mkvextract \"a movie.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:subs.srt"));
   add_separator();
 
   add_section_header(YT("Tag extraction"));
-  add_information(YT("The second mode extracts the tags and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."));
+  add_information(YT("The second mode extracts the tags, converts them to XML and writes them to an output file."));
 
   add_section_header(YT("Example"));
 
-  add_information(YT("mkvextract tags \"a movie.mkv\" > movie_tags.xml"));
+  add_information(YT("mkvextract \"a movie.mkv\" tags movie_tags.xml"));
 
   add_section_header(YT("Attachment extraction"));
 
@@ -95,16 +98,16 @@ extract_cli_parser_c::init_parser() {
 
   add_section_header(YT("Example"));
 
-  add_information(YT("mkvextract attachments \"a movie.mkv\" 4:cover.jpg"));
+  add_information(YT("mkvextract \"a movie.mkv\" attachments 4:cover.jpg"));
 
   add_section_header(YT("Chapter extraction"));
-  add_information(YT("The fourth mode extracts the chapters and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."));
-  OPT("s|simple", set_simple, YT("Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."));
+  add_information(YT("The fourth mode extracts the chapters, converts them to XML and writes them to an output file."));
+  OPT("s|simple",                 set_simple,          YT("Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."));
   OPT("simple-language=language", set_simple_language, YT("Uses the chapter names of the specified language for extraction instead of the first chapter name found."));
 
   add_section_header(YT("Example"));
 
-  add_information(YT("mkvextract chapters \"a movie.mkv\" > movie_chapters.xml"));
+  add_information(YT("mkvextract \"a movie.mkv\" chapters movie_chapters.xml"));
 
   add_section_header(YT("Cue sheet extraction"));
 
@@ -113,7 +116,7 @@ extract_cli_parser_c::init_parser() {
 
   add_section_header(YT("Example"));
 
-  add_information(YT("mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"));
+  add_information(YT("mkvextract \"audiofile.mka\" cuesheet audiofile.cue"));
 
   add_section_header(YT("Timestamp extraction"));
 
@@ -121,14 +124,21 @@ extract_cli_parser_c::init_parser() {
 
   add_section_header(YT("Example"));
 
-  add_information(YT("mkvextract timestamps_v2 \"a movie.mkv\" 1:timestamps_track1.txt"));
+  add_information(YT("mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"));
 
   add_section_header(YT("Cue extraction"));
   add_information(YT("This mode extracts cue information for some tracks to external text files."));
 
   add_section_header(YT("Example"));
 
-  add_information(YT("mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"));
+  add_information(YT("mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"));
+
+  add_section_header(YT("Extracting multiple items at the same time"));
+  add_information(YT("Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."));
+
+  add_section_header(YT("Example"));
+
+  add_information(YT("mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"));
 
   add_separator();
 
