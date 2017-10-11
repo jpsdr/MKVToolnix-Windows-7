@@ -223,13 +223,19 @@ translatable_string_c::translatable_string_c()
 }
 
 translatable_string_c::translatable_string_c(const std::string &untranslated_string)
-  : m_untranslated_string(untranslated_string)
+  : m_untranslated_strings{untranslated_string}
 {
 }
 
 translatable_string_c::translatable_string_c(const char *untranslated_string)
-  : m_untranslated_string(untranslated_string)
+  : m_untranslated_strings{std::string{untranslated_string}}
 {
+}
+
+translatable_string_c::translatable_string_c(std::vector<translatable_string_c> const &untranslated_strings)
+{
+  for (auto const &untranslated_string : untranslated_strings)
+    m_untranslated_strings.emplace_back(untranslated_string.get_untranslated());
 }
 
 std::string
@@ -239,19 +245,32 @@ translatable_string_c::get_translated()
   if (m_overridden_by)
     return *m_overridden_by;
 
-  return m_untranslated_string.empty() ? "" : Y(m_untranslated_string.c_str());
+  std::vector<std::string> translated_strings;
+  for (auto const &untranslated_string : m_untranslated_strings)
+    if (!untranslated_string.empty())
+      translated_strings.emplace_back(Y(untranslated_string.c_str()));
+
+  return join(translated_strings);
 }
 
 std::string
 translatable_string_c::get_untranslated()
   const
 {
-  return m_untranslated_string;
+  return join(m_untranslated_strings);
 }
 
-void
+translatable_string_c &
 translatable_string_c::override(std::string const &by) {
   m_overridden_by.reset(by);
+  return *this;
+}
+
+std::string
+translatable_string_c::join(std::vector<std::string> const &strings)
+  const {
+  auto separator = translation_c::get_active_translation().m_line_breaks_anywhere ? "" : " ";
+  return boost::join(strings, separator);
 }
 
 // ------------------------------------------------------------
