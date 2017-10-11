@@ -15,12 +15,32 @@
   also move towards correcting the verbiage. MKVToolNix is following this
   change.
 
+* mkvextract' command line interface has been changed to allow extraction of
+  multiple items at the same time. The first argument must now be the source
+  file's name. All following arguments either set the mode (e.g. `tracks`) or
+  specify what to extract in the currently active mode.
+
+  Those items that were written to the standard output (chapters, tags and cue
+  sheets) are now always written to files instead. Therefore the respective
+  modes require an output file name.
+
+  For example, extracting two tracks, the chapters and the tags can be done
+  with the following command:
+
+  `mkvextract input.mkv tracks 0:video.h265 1:audio.aac chapters chapters.xml tags tags.xml`
+
+  The old interface (specifying the mode first and the source file name
+  second) remains working and supported. However, it is now deprecated and
+  will be removed at the end of 2018.
+
 ## New features and enhancements
 
 * mkvmerge: AC-3: during identification regular AC-3 and E-AC-3 tracks will
   now be identified differently for most container formats (exception: AVI,
   Real Media, Ogg/OGM). The codec will be reported as `AC-3` for regular AC-3
   and as `E-AC-3` for E-AC-3 tracks instead of the combined `AC-3/E-AC-3`.
+* mkvextract: the command line interface has been changed to allow extraction
+  of multiple items at the same time. See section "Important notes" for details.
 
 ## Bug fixes
 
