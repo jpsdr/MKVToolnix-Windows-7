@@ -2182,28 +2182,6 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
       </para>
      </listitem>
     </varlistentry>
-
-    <varlistentry>
-     <term><option>--check-for-updates</option></term>
-     <listitem>
-      <para>
-       Checks online for new releases by downloading the URL <ulink
-       url="http://mkvtoolnix-releases.bunkus.org/latest-release.xml">http://mkvtoolnix-releases.bunkus.org/latest-release.xml</ulink>. Four
-       lines will be output in <literal>key=value</literal> style: the URL from where the information was retrieved (key
-       <literal>version_check_url</literal>), the currently running version (key <literal>running_version</literal>), the latest release's
-       version (key <literal>available_version</literal>) and the download URL (key <literal>download_url</literal>).
-      </para>
-
-      <para>
-       Afterwards the program exists with an exit code of 0 if no newer release is available, with 1 if a newer release is available and with
-       2 if an error occured (e.g. if the update information could not be retrieved).
-      </para>
-
-      <para>
-       This option is only available if the program was built with support for libcurl.
-      </para>
-     </listitem>
-    </varlistentry>
    </variablelist>
   </refsect2>
  </refsect1>
