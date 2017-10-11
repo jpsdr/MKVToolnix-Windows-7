@@ -231,7 +231,7 @@ extract_cli_parser_c::extraction_mode_from_string(std::string const &mode_string
 
 std::string
 extract_cli_parser_c::extraction_mode_to_string(boost::optional<options_c::extraction_mode_e> mode) {
-  static std::unordered_map<options_c::extraction_mode_e, std::string> s_mode_map{
+  static std::unordered_map<options_c::extraction_mode_e, std::string, mtx::hash<options_c::extraction_mode_e>> s_mode_map{
     { options_c::em_unknown,       "unknown"       },
     { options_c::em_tracks,        "tracks"        },
     { options_c::em_tags,          "tags"          },

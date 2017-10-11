@@ -15,6 +15,7 @@
 #include <unordered_map>
 
 #include "common/cli_parser.h"
+#include "common/container.h"
 #include "extract/mkvextract.h"
 #include "extract/options.h"
 
@@ -36,7 +37,7 @@ protected:
   int m_extract_blockadd_level;
   track_spec_t::target_mode_e m_target_mode;
 
-  std::unordered_map<options_c::extraction_mode_e, std::unordered_map<int64_t, bool>> m_used_tids;
+  std::unordered_map<options_c::extraction_mode_e, std::unordered_map<int64_t, bool>, mtx::hash<options_c::extraction_mode_e>> m_used_tids;
 
   debugging_option_c m_debug;
 
