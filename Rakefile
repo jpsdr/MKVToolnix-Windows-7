@@ -317,6 +317,7 @@ rule '.1' => '.xml' do |t|
     if (0 == code) && lines.any? { |line| /^error|parser error/i.match(line) }
       File.unlink(t.name) if File.exists?(t.name)
       result = 1
+      puts lines.join('')
 
     elsif 0 != code
       result = code
