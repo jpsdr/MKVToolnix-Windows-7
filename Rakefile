@@ -509,12 +509,18 @@ EOT
   task :qt => FileList[ "#{$top_srcdir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
   if c?(:PO4A_WORKS)
+    filter = lambda do |code, lines|
+      lines = lines.reject { |l| %r{seems outdated.*differ between|please consider running po4a-updatepo|^$}i.match(l) }
+      puts lines.join('') unless lines.empty?
+      code
+    end
+
     $available_languages[:manpages].each do |language|
       $manpages.each do |manpage|
         name = manpage.gsub(/man\//, "man/#{language}/")
         file name            => [ name.ext('xml'),     "doc/man/po4a/po/#{language}.po" ]
         file name.ext('xml') => [ manpage.ext('.xml'), "doc/man/po4a/po/#{language}.po" ] do |t|
-          runq "po4a", "#{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}"
+          runq "po4a", "#{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}", :filter_output => filter
         end
       end
     end
