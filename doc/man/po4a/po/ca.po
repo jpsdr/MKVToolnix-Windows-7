@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2017-10-11 16:18+0200\n"
-"PO-Revision-Date: 2017-10-07 18:43+0000\n"
+"PO-Revision-Date: 2017-10-13 11:43+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
@@ -242,10 +242,8 @@ msgstr "Sinopsis"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvextract.xml:51
-#, fuzzy
-#| msgid "<command>mkvextract</command> <arg choice=\"req\">mode</arg> <arg choice=\"req\">source-filename</arg> <arg>options</arg> <arg>extraction-spec</arg>"
 msgid "<command>mkvextract</command> <arg choice=\"req\">source-filename</arg> <arg choice=\"req\">mode1</arg> <arg>options</arg> <arg>extraction-spec1</arg> <arg>mode2</arg> <arg>options</arg> <arg>extraction-spec2</arg> <arg>…</arg>"
-msgstr "<command>mkvextract</command> <arg choice=\"req\">mode</arg> <arg choice=\"req\">nom_fitxer_origen</arg> <arg>opcions</arg> <arg>especificacions_extracció</arg>"
+msgstr "<command>mkvextract</command> <arg choice=\"req\">nom-fitxer_origen</arg> <arg choice=\"req\">mode1</arg> <arg>opcions</arg> <arg>extracció-especificacions1</arg> <arg>mode2</arg> <arg>opcions</arg> <arg>extracció-especificacions2</arg> <arg>…</arg>"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:64
@@ -259,19 +257,17 @@ msgstr "Descripció"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:66
 msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument is the name of the source file which must be a &matroska; file."
-msgstr ""
+msgstr "Aquest programa extreu parts específiques d'un fitxer &matroska; a altres formats útils. El primer argument és el nom del fitxer d'origen que haurà de ser un fitxer &matroska;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:71
 msgid "All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file.  Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass.  Most options can only be used in certain modes with a few options applying to all modes."
-msgstr ""
+msgstr "Tots els altres arguments canviaran a un determinat mode d'extracció, canviaran les opcions per al mode actual o s'especifcarà extreure a quin fitxer. Es poden usar múltiples modes en la mateixa invocació del «mkvextract», el qual permet l'extracció de múltiples coses en un sol pas. La majoria de les opcions només es poden usar en determinats modes amb algunes opcions que s'apliquen a tots els modes."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:77
-#, fuzzy
-#| msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells &mkvextract; what to extract. Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link>, <link linkend=\"mkvextract.description.timestamps_v2\">timestamps</link> and <link linkend=\"mkvextract.description.cues\">cues</link>.  The second argument is the name of the source file. It must be a &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode."
 msgid "Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link>, <link linkend=\"mkvextract.description.timestamps_v2\">timestamps</link> and <link linkend=\"mkvextract.description.cues\">cues</link>."
-msgstr "Aquest programa extreu parts específiques d'un fitxer &matroska; a altres formats d'utilitat. El primer argument, <option>mode</option>, li indica al &mkvextract; què ha d'extreure. Actualment és possible extreure <link linkend=\"mkvextract.description.tracks\">pistes (tracks)</link>, <link linkend=\"mkvextract.description.tags\">etiquetes (tags)</link>, <link linkend=\"mkvextract.description.attachments\">adjunts (attachments)</link>, <link linkend=\"mkvextract.description.chapters\">capítols (chapters)</link>, <link linkend=\"mkvextract.description.cuesheets\">fulls de muntatge (CUE sheets)</link>, <link linkend=\"mkvextract.description.timestamps_v2\">codis de temps (timestamps)</link> i <link linkend=\"mkvextract.description.cues\">índexs (cues)</link>. El segon argument és el nom del fitxer d'origen. Aquest haurà de ser un fitxer &matroska;. La resta d'arguments són opcions i especificacions per a l'extracció -ambdues depenen del mode seleccionat-."
+msgstr "Actualment s'admet l'extracció de <link linkend=\"mkvextract.description.tracks\">pistes</link>, <link linkend=\"mkvextract.description.tags\">etiquetes</link>, <link linkend=\"mkvextract.description.attachments\">adjunts</link>, <link linkend=\"mkvextract.description.chapters\">capítols</link>, <link linkend=\"mkvextract.description.cuesheets\">fulls de muntatge CUE</link>, <link linkend=\"mkvextract.description.timestamps_v2\">timestamps</link> i <link linkend=\"mkvextract.description.cues\">índexs</link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:84
@@ -470,10 +466,8 @@ msgstr "Mode extracció de la pista"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:220
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract <option>cues</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>tracks</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
-msgstr "Sintaxi: <command>mkvextract <option>cues</option> <parameter>nom_fitxer_origen</parameter> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom_fitxer_destinació_1</parameter> <optional><parameter>TID2:nom_fitxer_destinació_2</parameter> «...»</optional></command>"
+msgstr "Sintaxi: <command>mkvextract <parameter>nom-fitxer_origen</parameter> <option>tracks</option> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom-fitxer_destinació1</parameter> <optional><parameter>TID2:nom-fitxer_destinació2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:224
@@ -548,10 +542,9 @@ msgstr "Cada nom de sortida només s'ha d'emprar una vegada. L'única excepció 
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvextract.xml:298
-#, fuzzy, no-wrap
-#| msgid "$ mkvextract tracks input.mkv 1:output-two-tracks.rm 2:output-two-tracks.rm"
+#, no-wrap
 msgid "$ mkvextract input.mkv tracks 0:video.h264 2:output-two-vobsub-tracks.idx 3:output-two-vobsub-tracks.idx"
-msgstr "$ mkvextract tracks entrada.mkv 1:sortida_dos_pistes.rm 2:sortida_dos_pistes.rm"
+msgstr "$ mkvextract entrada.mkv tracks 0:video.h264 2:sortida-dues-pistes-vobsub.idx 3:sortida-dues-pistes-vobsub.idx"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:305
@@ -560,10 +553,8 @@ msgstr "Mode extracció dels adjunts"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:308
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract <option>attachments</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional></command>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>attachments</option> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional></command>"
-msgstr "Sintaxi: <command>mkvextract <option>attachments</option> <parameter>nom_fitxer_origen</parameter> <optional><parameter>opcions</parameter></optional> <parameter>AID1:nom_sortida_1</parameter> <optional><parameter>AID2:nom_sortida_2</parameter> «...»</optional></command>"
+msgstr "Sintaxi: <command>mkvextract <parameter>nom-fitxer_origen</parameter> <option>attachments</option> <optional><parameter>opcions</parameter></optional> <parameter>AID1:nom_sortida1</parameter> <optional><parameter>AID2:nom_sortida2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:313
@@ -582,10 +573,8 @@ msgstr "Mode extracció dels capítols"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:330
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract <option>cues</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>chapters</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.xml</parameter></command>"
-msgstr "Sintaxi: <command>mkvextract <option>cues</option> <parameter>nom_fitxer_origen</parameter> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom_fitxer_destinació_1</parameter> <optional><parameter>TID2:nom_fitxer_destinació_2</parameter> «...»</optional></command>"
+msgstr "Sintaxi: <command>mkvextract <parameter>nom-fitxer_origen</parameter> <option>chapters</option> <optional><parameter>opcions</parameter></optional> <parameter>nom-fitxer_sortida.xml</parameter></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:335
@@ -615,7 +604,7 @@ msgstr "L'ús d'aquesta opció permet a l'usuari determinar quins són els noms 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:362
 msgid "The chapters are written to specified output file. By default the &xml; format understood by &mkvmerge; is used. If no chapters are found in the file, the output file is not created."
-msgstr ""
+msgstr "Els capítols s'escriuran en un fitxer de sortida especificat. Per omissió, s'utilitzarà el format &xml; entès pel &mkvmerge;. Si no es troba cap capítol al fitxer, el fitxer de sortida no serà creat."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:367
@@ -624,15 +613,13 @@ msgstr "Mode extracció de les etiquetes"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:370
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract <option>cues</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>tags</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.xml</parameter></command>"
-msgstr "Sintaxi: <command>mkvextract <option>cues</option> <parameter>nom_fitxer_origen</parameter> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom_fitxer_destinació_1</parameter> <optional><parameter>TID2:nom_fitxer_destinació_2</parameter> «...»</optional></command>"
+msgstr "Sintaxi: <command>mkvextract <parameter>nom-fitxer_origen</parameter> <option>tags</option> <optional><parameter>opcions</parameter></optional> <parameter>nom-fitxer_sortida.xml</parameter></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:374
 msgid "The tags are written to specified output file in the &xml; format understood by &mkvmerge;. If no tags are found in the file, the output file is not created."
-msgstr ""
+msgstr "Les etiquetes s'escriuran en un fitxer de sortida especificat, s'utilitzarà el format &xml; entès pel &mkvmerge;. Si no es troba cap etiqueta al fitxer, el fitxer de sortida no serà creat."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:379
@@ -641,15 +628,13 @@ msgstr "Mode extracció del full de muntatge"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:382
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract <option>cues</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>cuesheet</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.cue</parameter></command>"
-msgstr "Sintaxi: <command>mkvextract <option>cues</option> <parameter>nom_fitxer_origen</parameter> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom_fitxer_destinació_1</parameter> <optional><parameter>TID2:nom_fitxer_destinació_2</parameter> «...»</optional></command>"
+msgstr "Sintaxi: <command>mkvextract <parameter>nom-fitxer_origen</parameter> <option>cuesheet</option> <optional><parameter>opcions</parameter></optional> <parameter>nom-fitxer_sortida.cue</parameter></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:386
 msgid "The cue sheet is written to specified output file. If no chapters or tags are found in the file, the output file is not created."
-msgstr ""
+msgstr "El full de muntatge s'escriurà en un fitxer de sortida especificat. Si no es troba cap capítol o etiqueta al fitxer, no es crearà el fitxer de sortida."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:391
@@ -658,10 +643,8 @@ msgstr "Mode extracció del codi de temps"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:394
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract <option>cues</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>timestamps_v2</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
-msgstr "Sintaxi: <command>mkvextract <option>cues</option> <parameter>nom_fitxer_origen</parameter> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom_fitxer_destinació_1</parameter> <optional><parameter>TID2:nom_fitxer_destinació_2</parameter> «...»</optional></command>"
+msgstr "Sintaxi: <command>mkvextract <parameter>nom-fitxer_origen</parameter> <option>timestamps_v2</option> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom-fitxer_destinació1</parameter> <optional><parameter>TID2:nom-fitxer_destinació2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:402
@@ -677,10 +660,9 @@ msgstr "Exemple:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvextract.xml:411
-#, fuzzy, no-wrap
-#| msgid "$ mkvextract timestamps_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
+#, no-wrap
 msgid "$ mkvextract input.mkv timestamps_v2 1:ts-track1.txt 2:ts-track2.txt"
-msgstr "$ mkvextract timestamps_v2 entrada.mkv 1:ct_pista_1.txt 2:ct_pista_2.txt"
+msgstr "$ mkvextract entrada.mkv timestamps_v2 1:pista-ts1.txt 2:pista-ts2.txt"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:418
@@ -689,10 +671,8 @@ msgstr "Mode extracció dels índexs"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:421
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract <option>cues</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>cues</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
-msgstr "Sintaxi: <command>mkvextract <option>cues</option> <parameter>nom_fitxer_origen</parameter> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom_fitxer_destinació_1</parameter> <optional><parameter>TID2:nom_fitxer_destinació_2</parameter> «...»</optional></command>"
+msgstr "Sintaxi: <command>mkvextract <parameter>nom-fitxer_origen</parameter> <option>cues</option> <optional><parameter>opcions</parameter></optional> <parameter>TID1:nom-fitxer_destinació1</parameter> <optional><parameter>TID2:nom-fitxer_destinació2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:426
@@ -772,10 +752,9 @@ msgstr "Dins del fitxer &matroska;, el <classname>CueRelativePosition</classname
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:499
-#, fuzzy, no-wrap
-#| msgid "$ mkvextract cues input.mkv 1:cues-track1.txt 2:cues-track2.txt"
+#, no-wrap
 msgid "$ mkvextract input.mkv cues 1:cues-track1.txt 2:cues-track2.txt"
-msgstr "$ mkvextract cues entrada.mkv 1:índex_pista_1.txt 2:índex_pista_2.txt"
+msgstr "$ mkvextract entrada.mkv cues 1:índexs-pista1.txt 2:índexs-pista2.txt"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:504
@@ -787,36 +766,35 @@ msgstr "Exemples"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:507
 msgid "Extracting both chapters and tags in their respective &xml; formats at the same time:"
-msgstr ""
+msgstr "Extreure alhora els capítols i les etiquetes en els seus respectius formats en &xml;:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:510
-#, fuzzy, no-wrap
-#| msgid "$ mkvpropedit movie.mkv --chapters new-chapters.xml"
+#, no-wrap
 msgid "$ mkvmerge movie.mkv chapters movie-chapters.xml tags movie-tags.xml"
-msgstr "$ mkvpropedit peli.mkv --chapters capítols_nous.xml"
+msgstr "$ mkvmerge peli.mkv chapters capítols-peli.xml tags etiquetes-peli.xml"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:513
 msgid "Extracting a couple of tracks and their respective timestamps at the same time:"
-msgstr ""
+msgstr "Extreure alhora un parell de pistes i els seus respectius codis de temps:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:516
 #, no-wrap
 msgid "$ mkvmerge \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:director's comments.aac\" timestamps_v2 \"0:timestamps video.txt\" \"1:timestamps main audio.txt\" \"2:timestamps director's comments.txt\""
-msgstr ""
+msgstr "$ mkvmerge \"Una altra peli.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:comentaris_del_director.aac\" timestamps_v2 \"0:codis_de_temps_vídeo.txt\" \"1:codis_de_temps_àudio_principal.txt\" \"2:codis_de_temps_comentaris_del_director.txt\""
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:519
 msgid "Extracting chapters in the Ogg/OGM format and re-encoding a text subtitle track to another character set:"
-msgstr ""
+msgstr "Extreure capítols en el format Ogg/OGM i tornar a codificar una pista amb subtítols de text a un altre joc de caràcters:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:522
 #, no-wrap
 msgid "$ mkvmerge \"My Movie.mkv\" chapters --simple \"My Chapters.txt\" tracks -c MS-ANSI \"2:My Subtitles.srt\""
-msgstr ""
+msgstr "$ mkvmerge \"Una altra peli.mkv\" chapters --simple \"Capítols meus.txt\" tracks -c MS-ANSI \"2:Subtítols meus.srt\""
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:526
@@ -3341,10 +3319,8 @@ msgstr "La sortida del format <literal>json</literal>  és una representació JS
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2000
-#, fuzzy
-#| msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v9.json\"><literal>mkvmerge-identification-output-schema-v9.json</literal></ulink>"
 msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v10.json\"><literal>mkvmerge-identification-output-schema-v10.json</literal></ulink>"
-msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v9.json\"><literal>mkvmerge-identification-output-schema-v9.json</literal></ulink>"
+msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v10.json\"><literal>mkvmerge-identification-output-schema-v10.json</literal></ulink>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2004
