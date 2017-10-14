@@ -22,7 +22,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Protest"
+#define VERSIONNAME "Be Ur Friend"
 
 version_number_t::version_number_t()
 {

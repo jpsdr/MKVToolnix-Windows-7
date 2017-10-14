@@ -1,4 +1,4 @@
-# Version ?
+# Version 17.0.0 "Be Ur Friend" 2017-10-14
 
 ## Important notes
 
