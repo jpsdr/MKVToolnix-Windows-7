@@ -2,11 +2,11 @@
 
 ## Important notes
 
-* The word "timecode" has been changed to "timestamp" everywhere it has been
+* The word "timecode" has been changed to "timestamp" everywhere it was
   used in MKVToolNix. This affects program output (including mkvinfo's), GUI
   controls, command line parameters (e.g. `mkvmerge --timestamp-scale …`) and
   file formats. All programs remain backwards compatible insofar as they still
-  accept "timecode" in all those places.
+  accept "timecode" in all those places (e.g. `mkvmerge --timecode-scale …`).
 
   The reason for the change is wrong usage. What both the Matroska specification
   and MKVToolNix used "timecode" for is normally called a "timestamp" in audio &
@@ -48,26 +48,26 @@
   `program_config_element` if it is located at the start of an AAC frame in
   order to determine the actual number of channels. This overrides invalid
   channel configurations in the ADTS headers, for example. Fixes #2107.
+* mkvmerge: fixed AC-3 being misdetected as encrypted MPEG program streams
+  under certain conditions.
+* mkvmerge: Dirac: under certain conditions (e.g. only muxing a single Dirac
+  track without any other tracks) mkvmerge was always setting the pixel width
+  & height to 123. The frame rate was wrong, too.
 * mkvmerge: E-AC-3 in Matroska: if AC-3 cores and their corresponding E-AC-3
   extension are located in two different Matroska blocks, then mkvmerge will
   now re-assemble them into a single block and only use the first block's
   timestamp.
+* mkvmerge: SRT reader: fixed calculating the duration of entries starting
+  with at a negative timestamp.
 * mkvmerge: VC-1: under certain conditions (e.g. only muxing a single VC-1
   track without any other tracks) mkvmerge was always setting the pixel width
   & height to 123. The frame rate was wrong, too. Fixes #2113.
-* mkvmerge: Dirac: under certain conditions (e.g. only muxing a single Dirac
-  track without any other tracks) mkvmerge was always setting the pixel width
-  & height to 123. The frame rate was wrong, too.
+* mkvmerge: command line options: an error message will be output if the
+  single-value-form of the `--sync` option is used and it isn't a number
+  (e.g. `--sync 0:asd`). Fixes #2121.
 * mkvpropedit, GUI's header editor: both programs will now show proper error
   messages instead of crashing when certain kinds of data corruption is found
   when reading a file. Fixes #2115.
-* mkvmerge: an error message will be output if the single-value-form of the
-  `--sync` option is used and it isn't a number (e.g. `--sync 0:asd`). Fixes
-  #2121.
-* mkvmerge: SRT reader: fixed calculating the duration of entries starting
-  with at a negative timestamp.
-* mkvmerge: fixed AC-3 being mis-detected as encrypted MPEG program streams
-  under certain conditions.
 
 
 # Version 16.0.0 "Protest" 2017-09-30
