@@ -54,6 +54,8 @@ ac3_packetizer_c::get_frame() {
   if (0 == frame.m_garbage_size)
     return frame;
 
+  m_timestamp_calculator.drop_timestamps_before_position(frame.m_stream_position);
+
   bool warning_printed = false;
   if (m_first_packet) {
     auto offset = calculate_avi_audio_sync(frame.m_garbage_size, m_samples_per_packet, m_packet_duration);

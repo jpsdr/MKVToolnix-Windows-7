@@ -38,6 +38,8 @@ public:
   void add_timestamp(int64_t timestamp, boost::optional<uint64_t> stream_position = boost::none);
   void add_timestamp(packet_cptr const &packet, boost::optional<uint64_t> stream_position = boost::none);
 
+  void drop_timestamps_before_position(uint64_t stream_position);
+
   timestamp_c get_next_timestamp(int64_t samples_in_frame, boost::optional<uint64_t> stream_position = boost::none);
   timestamp_c get_duration(int64_t samples);
 

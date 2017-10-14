@@ -56,6 +56,19 @@ timestamp_calculator_c::add_timestamp(packet_cptr const &packet,
     add_timestamp(timestamp_c::ns(packet->timestamp), stream_position);
 }
 
+void
+timestamp_calculator_c::drop_timestamps_before_position(uint64_t stream_position) {
+  if (m_available_timestamps.empty())
+    return;
+
+  auto itr = brng::find_if(m_available_timestamps, [stream_position](auto const &entry) {
+    return entry.second && (*entry.second >= stream_position);
+  });
+
+  if (itr != m_available_timestamps.end())
+    m_available_timestamps.erase(m_available_timestamps.begin(), itr);
+}
+
 timestamp_c
 timestamp_calculator_c::get_next_timestamp(int64_t samples_in_frame,
                                            boost::optional<uint64_t> stream_position) {
