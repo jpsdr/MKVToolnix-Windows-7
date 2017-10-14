@@ -122,7 +122,7 @@ void
 ac3_packetizer_c::set_timestamp_and_add_packet(packet_cptr const &packet,
                                               uint64_t packet_stream_position) {
   packet->timestamp = m_timestamp_calculator.get_next_timestamp(m_samples_per_packet, packet_stream_position).to_ns();
-  packet->duration = m_packet_duration;
+  packet->duration  = m_packet_duration;
 
   // if (packet_stream_position)
   //   mxinfo(boost::format("  ts %1% position in %2% out %3%\n") % format_timestamp(packet->timestamp) % format_number(m_stream_position) % format_number(*packet_stream_position));
