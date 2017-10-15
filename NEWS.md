@@ -5,6 +5,9 @@
 * GUI: multiplexer: the "reduce to core" checkbox in the "audio properties"
   section will be disabled if the functionality is not implemented for the
   selected track's codec. See #2134.
+* GUI: multiplexer: the "AAC is SBR/HE-AAC/AAC+" checkbox in the "audio
+  properties" section will be disabled if the functionality is not implemented
+  for the selected track's codec & container.
 
 
 # Version 17.0.0 "Be Ur Friend" 2017-10-14

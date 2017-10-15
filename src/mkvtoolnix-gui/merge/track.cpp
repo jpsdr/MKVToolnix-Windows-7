@@ -427,4 +427,12 @@ Track::canReduceToAudioCore()
       && m_codec.contains(QRegularExpression{Q("dts"), QRegularExpression::CaseInsensitiveOption});
 }
 
+bool
+Track::canSetAacToSbr()
+  const {
+  return isAudio()
+      && m_codec.contains(QRegularExpression{Q("aac"), QRegularExpression::CaseInsensitiveOption})
+      && mtx::included_in(m_file->m_type, FILE_TYPE_AAC, FILE_TYPE_MATROSKA, FILE_TYPE_REAL);
+}
+
 }}}

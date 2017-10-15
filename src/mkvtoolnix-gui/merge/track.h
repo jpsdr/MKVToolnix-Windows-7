@@ -76,6 +76,7 @@ public:
   virtual bool isPropertySet(QString const &property) const;
   virtual bool canChangeSubCharset() const;
   virtual bool canReduceToAudioCore() const;
+  virtual bool canSetAacToSbr() const;
 
   virtual void setDefaults();
   virtual QString extractAudioDelayFromFileName() const;

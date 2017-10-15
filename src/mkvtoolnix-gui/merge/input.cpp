@@ -52,8 +52,8 @@ Tab::setupControlLists() {
 
   m_audioControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag << ui->forcedTrackFlagLabel << ui->forcedTrackFlag
                   << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
-                  << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps << ui->audioPropertiesBox << ui->aacIsSBR << ui->cuesLabel << ui->cues
-                  << ui->propertiesLabel << ui->generalOptionsBox << ui->reduceToAudioCore;
+                  << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps << ui->audioPropertiesBox << ui->aacIsSBR << ui->aacIsSBRLabel
+                  << ui->cuesLabel << ui->cues << ui->propertiesLabel << ui->generalOptionsBox << ui->reduceToAudioCore;
 
   m_videoControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
                   << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
@@ -611,6 +611,7 @@ Tab::onTrackSelectionChanged() {
 
   if (track->isAudio()) {
     Util::enableWidgets(m_audioControls, true);
+    Util::enableWidgets({ ui->aacIsSBRLabel, ui->aacIsSBR }, track->canSetAacToSbr());
     ui->reduceToAudioCore->setEnabled(track->canReduceToAudioCore());
 
   } else if (track->isVideo())
