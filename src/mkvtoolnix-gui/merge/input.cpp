@@ -609,10 +609,11 @@ Tab::onTrackSelectionChanged() {
 
   setInputControlValues(track);
 
-  if (track->isAudio())
+  if (track->isAudio()) {
     Util::enableWidgets(m_audioControls, true);
+    ui->reduceToAudioCore->setEnabled(track->canReduceToAudioCore());
 
-  else if (track->isVideo())
+  } else if (track->isVideo())
     Util::enableWidgets(m_videoControls, true);
 
   else if (track->isSubtitles()) {

@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/iso639.h"
 #include "common/list_utils.h"
 #include "common/strings/editing.h"
@@ -416,6 +418,13 @@ Track::canChangeSubCharset()
   return isSubtitles()
       && m_properties.value(Q("text_subtitles")).toBool()
       && m_properties.value(Q("encoding")).toString().isEmpty();
+}
+
+bool
+Track::canReduceToAudioCore()
+  const {
+  return isAudio()
+      && m_codec.contains(QRegularExpression{Q("dts"), QRegularExpression::CaseInsensitiveOption});
 }
 
 }}}
