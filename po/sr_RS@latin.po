@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-10-11 15:46+0200\n"
-"PO-Revision-Date: 2017-10-06 18:16+0200\n"
+"PO-Revision-Date: 2017-10-14 20:00+0200\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
 "Language: sr_RS@latin\n"
@@ -249,13 +249,12 @@ msgstr ""
 "                           (pogl. dokumentaciju za kompletnu listu).\n"
 
 #: src/merge/mkvmerge.cpp:293
-#, fuzzy
 msgid ""
 "  --colour-primaries <TID:n>\n"
 "                           The colour primaries of the video.\n"
 msgstr ""
-"  --command-line-charset <charset>\n"
-"                           Skup znakova za nizove u komandnoj liniji\n"
+"  --colour-primaries <TID:n>\n"
+"                           Primarne boje videa.\n"
 
 #: src/merge/mkvmerge.cpp:290
 msgid "  --colour-range <TID:n>   Clipping of the color ranges.\n"
@@ -848,12 +847,10 @@ msgid "  -i, --identify <file>    Print information about the source file.\n"
 msgstr "  -i, --identify <file>   Napiši informaciju o izvornom fajlu.\n"
 
 #: src/merge/mkvmerge.cpp:346
-#, fuzzy
 msgid "  -l, --list-types         Lists supported source file types.\n"
-msgstr "  -l, --list-types         Izlistava podržane tipove formata ulaznih fajlova.\n"
+msgstr "  -l, --list-types         Izlistava podržane izvorne tipove fajlova.\n"
 
 #: src/merge/mkvmerge.cpp:202
-#, fuzzy
 msgid ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
 "                           Copy the attachments with the IDs n, m etc. to\n"
@@ -862,8 +859,8 @@ msgid ""
 msgstr ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
 "                           Kopiraj priloge sa ID n,m itd. u\n"
-"                           sve ili samo u prvi izlazni fajl. Default: kopiraj\n"
-"                           sve priloge u sve izlazne fajlove.\n"
+"                           sve ili samo u prvi odredišni fajl. Default: kopiraj\n"
+"                           sve priloge u sve odredišne fajlove.\n"
 
 #: src/merge/mkvmerge.cpp:86
 msgid "  -o, --output out         Write to the file 'out'.\n"
@@ -934,13 +931,12 @@ msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<file>                  Isto kao \"= <file>\".\n"
 
 #: src/merge/mkvmerge.cpp:359
-#, fuzzy
 msgid ""
 "  @option-file.json        Reads additional command line options from\n"
 "                           the specified JSON file (see man page).\n"
 msgstr ""
-"  @optionsfile            Iščitava dodatne parametre komandne linije iz\n"
-"                           navedenog fajla (pogl. man stranu).\n"
+" @option-file.json        Iščitava dodatne parametre komandne linije iz\n"
+"                           navedenog JSON fajla (pogl. man stranu).\n"
 
 #: src/propedit/propedit_cli_parser.cpp:163
 msgid "  B:  boolean (0 or 1)\n"
@@ -948,7 +944,7 @@ msgstr "  B:  logička (0 ili 1)\n"
 
 #: src/propedit/propedit_cli_parser.cpp:168
 msgid "  DT: date & time\n"
-msgstr ""
+msgstr "  DT: date & time\n"
 
 #: src/propedit/propedit_cli_parser.cpp:167
 msgid "  FP: floating point number\n"
@@ -1083,9 +1079,9 @@ msgid " at %1%"
 msgstr " at %1%"
 
 #: src/info/mkvinfo.cpp:218
-#, fuzzy, boost-format
+#, boost-format
 msgid " at 0x%|1$x|"
-msgstr " (adler: 0x%|1$08x|)"
+msgstr " at 0x%|1$x|"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:820
 #, no-c-format
@@ -1426,7 +1422,7 @@ msgstr "&Otkaži"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:368
 #, no-c-format
 msgid "&Chapter editor"
-msgstr "Urednik &poglavlja"
+msgstr "&Urednik poglavlja"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "&Chapter number of first created entry:"
@@ -1670,24 +1666,24 @@ msgid "&New"
 msgstr "&Novi"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:390
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Next chapter editor tab"
-msgstr "Urednik &poglavlja"
+msgstr "&Sledeći tab urednika poglavlja"
 
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:295
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Next header editor tab"
-msgstr "Urednik &zaglavlja"
+msgstr "&Sledeći tab urednika zaglavlja"
 
 #: src/mkvtoolnix-gui/watch_jobs/tool.cpp:202
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Next job output tab"
-msgstr "Sačuvaj rezultat zadatka"
+msgstr "&Sledeći tab sa rezultatom zadatka"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:445
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Next multiplex settings"
-msgstr "Podrazumevano za nove multipleks postavke"
+msgstr "&Sledeće multipleks postavke"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
 msgid "&Number of entries to renumber:"
@@ -1721,9 +1717,8 @@ msgid "&Open Matroska or chapter file"
 msgstr "&Otvori MKV ili fajl sa poglavljima"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:570
-#, fuzzy
 msgid "&Open Matroska, WebM or chapter file"
-msgstr "&Otvori MKV ili fajl sa poglavljima"
+msgstr "&Otvori Matroska, WebM ili fajl sa poglavljima"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:119
 msgid "&Open as new tabs in the header editor"
@@ -1763,24 +1758,24 @@ msgid "&Preferences"
 msgstr "P&ostavke"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:391
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Previous chapter editor tab"
-msgstr "Urednik &poglavlja"
+msgstr "&Prethodni tab urednika poglavlja"
 
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:296
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Previous header editor tab"
-msgstr "Urednik &zaglavlja"
+msgstr "&Prethodni tab urednika zaglavlja"
 
 #: src/mkvtoolnix-gui/watch_jobs/tool.cpp:203
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Previous job output tab"
-msgstr "Sačuvaj rezultat zadatka"
+msgstr "&Prethodni tab sa rezultatom zadatka"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:446
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Previous multiplex settings"
-msgstr "Podrazumevano za nove multipleks postavke"
+msgstr "&Prethodne multipleks postavke"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:564
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:584
@@ -1965,7 +1960,7 @@ msgstr "&Postavi jezik:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:662
 msgid "&Window"
-msgstr ""
+msgstr "&Prozor"
 
 #: src/merge/mkvmerge.cpp:2234
 #, boost-format
@@ -2434,7 +2429,7 @@ msgstr "--- Greške emitovane od zadatka '%1' započele u %2 ---"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:351
 #, no-c-format
 msgid "--- Output of job '%1' started on %2 ---"
-msgstr "---  rezultat zadatka '%1' započet u %2 ---"
+msgstr "--- rezultat zadatka '%1' započet u %2 ---"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:331
 #, no-c-format
@@ -3443,11 +3438,11 @@ msgstr "Blu-ray plejliste"
 
 #: src/common/property_element.cpp:186
 msgid "Blue X chromaticity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Plava X koordinata hromatičnosti prema definiciji CIE 1931."
 
 #: src/common/property_element.cpp:187
 msgid "Blue Y chromaticity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Plava Y koordinata hromatičnosti prema definiciji CIE 1931."
 
 #: src/info/mkvinfo.cpp:571
 #, boost-format
@@ -3898,9 +3893,8 @@ msgid "CodecPrivate, length %1%%2%"
 msgstr "CodecPrivate, dužina %1%%2%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:498
-#, fuzzy
 msgid "Colour information"
-msgstr "Video colour information"
+msgstr "Kolorna informacija"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:503
 #, fuzzy
@@ -4532,7 +4526,7 @@ msgstr "Izvedi krajnje vremenske oznake iz početnih"
 
 #: src/common/property_element.cpp:195
 msgid "Describes the projection used for this video track (0 – 3)."
-msgstr ""
+msgstr "Opisuje projekciju koja se koristi za ovu video stazu (0 – 3)."
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
@@ -4898,7 +4892,7 @@ msgstr "Edicija/Poglavlje"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:856
 #, no-c-format
 msgid "Either fix the error or remove the configuration before closing the preferences dialog."
-msgstr ""
+msgstr "Ispravite grešku ili uklonite konfiguraciju pre nego što zatvorite prozor sa postavkama."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:413
 #, no-c-format
@@ -5634,11 +5628,11 @@ msgstr[2] "Globalni tagovi: %1% zapisa"
 
 #: src/common/property_element.cpp:184
 msgid "Green X chromaticity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Zelena X koordinata hromatičnosti prema definiciji CIE 1931."
 
 #: src/common/property_element.cpp:185
 msgid "Green Y chromaticity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Zelena Y koordinata hromatičnosti prema definiciji CIE 1931."
 
 #: src/info/mkvinfo.cpp:565
 #, boost-format
@@ -5684,7 +5678,7 @@ msgstr "HEVC/h.265 elementarni potok"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:367
 #, no-c-format
 msgid "Header &editor"
-msgstr "Urednik &zaglavlja"
+msgstr "&Urednik zaglavlja"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1387
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:190
@@ -7070,12 +7064,12 @@ msgstr "Ipak, većina ostalih podešavanja iz taba Izlaz će ostati netaknuta."
 
 #: src/extract/extract_cli_parser.cpp:66
 msgid "Most options can only be used in certain modes with a few options applying to all modes."
-msgstr ""
+msgstr "Veći deo opcija može da se koristi samo u određenim režimima sa par opcija koje se odnose na sve režime."
 
 #: src/extract/extract_cli_parser.cpp:65
 #: src/extract/extract_cli_parser.cpp:137
 msgid "Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."
-msgstr ""
+msgstr "Može da se koristi više režima u istom prizivanju mkvextract programa dozvoljavajući izvlačenje više stvari u jednom prolazu."
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:179
 #, no-c-format
@@ -8333,11 +8327,11 @@ msgstr "RealMedia audio/video fajlovi"
 
 #: src/common/property_element.cpp:182
 msgid "Red X chromaticity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Crvena X koordinata hromatičnosti prema definiciji CIE 1931."
 
 #: src/common/property_element.cpp:183
 msgid "Red Y chromaticity coordinate as defined by CIE 1931."
-msgstr ""
+msgstr "Crvena Y koordinata hromatičnosti prema definiciji CIE 1931."
 
 #: src/info/mkvinfo.cpp:559
 #, boost-format
@@ -8897,9 +8891,9 @@ msgid "Set aspect ratio:"
 msgstr "Podesi format slike:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1394
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Set destination &file name from selected file's name"
-msgstr "Izaberi sve stavke od izabranog fajla"
+msgstr "Za odredišni fajl koristi ime od izabranog fajla"
 
 #: src/common/property_element.cpp:126
 msgid ""
@@ -9749,9 +9743,9 @@ msgstr "Urednik poglavlja mora da zna koji skup znakova fajl sa poglavljima kori
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:383
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."
-msgstr "Skupovi znakova izabrani ovde biće prikazani na vrhu padajuce liste svih skupova znakova iz programa."
+msgstr "Skupovi znakova sa liste 'izabrano' biće prikazani na vrhu padajuće liste sa skupovima znakova u celom programu."
 
 #: src/output/p_avc.cpp:186
 #: src/output/p_hevc.cpp:157
@@ -9810,9 +9804,9 @@ msgstr "Ispravka zaglavlja fajla nije pravilno pročitana.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:375
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:376
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
-msgstr "Države izabrane ovde biće prikazane na vrhu padajuce liste sa svim državama iz programa"
+msgstr "Države sa liste 'izabrano' biće prikazane na vrhu padajuće liste sa državama u celom programu."
 
 #: src/merge/output_control.cpp:1505
 msgid "The cue entries (the index) are being written...\n"
@@ -9843,7 +9837,7 @@ msgstr "Vremenska oznaka trenutnog paketa je niža nego ona od prethodnog paketa
 
 #: src/common/kax_analyzer.cpp:175
 msgid "The data in the file is corrupted and cannot be modified safely"
-msgstr ""
+msgstr "Fajl je oštećen i ne može da se izmeni bez problema"
 
 #: src/common/property_element.cpp:110
 #, fuzzy
@@ -9939,9 +9933,9 @@ msgid "The end time could not be parsed: %1"
 msgstr "Krajnje vreme ne može biti raščlanjeno: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:849
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The end time must be greater than the start time."
-msgstr "Krajnje vreme mora biti veće od početnog vremenskog koda."
+msgstr "Završno vreme mora biti veće od početnog vremena."
 
 #: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
@@ -9949,9 +9943,8 @@ msgid "The extracted values for video width and height from the MPEG4 layer 2 vi
 msgstr "Izvučene vrednosti za širinu i visinu videa iz MPEG4 layer 2 video bit-potoka se razlikuje od vrednosti koje se nalaze u izvornom kontejneru. Biće korišćene one iz video bit-potoka (%1%x%2%).\n"
 
 #: src/extract/extract_cli_parser.cpp:114
-#, fuzzy
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a cue sheet with mkvmerge's '--chapters' option."
-msgstr "Peti režim pokušava da izvuče informaciju o poglavljima i tagove i izbaci ih kao CUE list. Ovo je obrnuto od korišćenja CUE lista sa mkvmege parametrom '--chapters'."
+msgstr "Peti režim pokušava da izvuče informaciju o poglavljima i tagove i izbaci ih kao CUE list. Ovo je obrnuto od korišćenja CUE lista sa mkvmege opcijom '--chapters'."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:260
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:221
@@ -10038,9 +10031,9 @@ msgid "The file '%1' contains tags."
 msgstr "Fajl '%1' sadrži tagove."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:661
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' could not be found in the installation folder."
-msgstr "Fajl '%1%' ne može biti otvoren za čitanje: %2%."
+msgstr "Fajl '%1' nije pronađen u instalacionom folderu."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:395
 #, no-c-format
@@ -10048,9 +10041,9 @@ msgid "The file '%1' exists already."
 msgstr "Fajl '%1' već postoji."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:550
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' is neither a job queue file nor a settings file."
-msgstr "Fajl '%1%' je otvoren za zapisivanje.\n"
+msgstr "Fajl '%1' nije fajl sa listom zadataka a ni fajl sa postavkama."
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:49
 #, no-c-format
@@ -10219,7 +10212,7 @@ msgstr "Fajl koji ste pokušali da otvorite (%1) nije prepoznat ni kao važeći 
 
 #: src/extract/extract_cli_parser.cpp:63
 msgid "The first argument must be the name of source file."
-msgstr ""
+msgstr "Prvi argument mora biti ime izvornog fajla."
 
 #: src/common/kax_file.cpp:52
 #, boost-format
@@ -10271,9 +10264,8 @@ msgid "The formats do not match."
 msgstr "Formati se ne slažu."
 
 #: src/extract/extract_cli_parser.cpp:104
-#, fuzzy
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
-msgstr "Četvrti režim izvlači poglavlja i konvertuje ih u XML. Rezultat je zapisan u standardni izlaz. Izlaz može biti korišćen kao izvor za mkvmerge."
+msgstr "Četvrti režim izvlači poglavlja, konvertuje ih u XML i zapisuje ih u izlazni fajl."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 #, no-c-format
@@ -10300,7 +10292,7 @@ msgstr "Horizontalni raspored sa dve fiksne kolone dovodi do šireg prozora dok 
 #: src/mkvtoolnix-gui/merge/tool.cpp:185
 #, no-c-format
 msgid "The job has been added to the job queue."
-msgstr ""
+msgstr "Zadatak je dodat na listu zadataka."
 
 #: src/input/r_usf.cpp:118
 #, boost-format
@@ -10336,7 +10328,7 @@ msgstr "Jezik koji se ovde izabere takođe se koristi kada se prave poglavlja."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:369
 #, no-c-format
 msgid "The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."
-msgstr "Jezici iz liste 'odabrano' će biti prikazani na vrhu svih padajućih lista jezika u programu."
+msgstr "Jezici sa liste 'izabrano' biće prikazani na vrhu padajuće liste sa jezicima u celom programu."
 
 #: src/common/kax_file.cpp:215
 #, boost-format
@@ -10401,9 +10393,9 @@ msgstr ""
 "se ne koristi."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:669
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
-msgstr "mkvmerge izvršni fajl nije pronađen."
+msgstr "mkvmerge izvršni fajl je pronađen, ali nije mogao da se izvrši."
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:171
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:665
@@ -10546,9 +10538,9 @@ msgid "The process will be aborted."
 msgstr "Proces će biti obustavljen."
 
 #: src/mkvtoolnix-gui/util/settings.cpp:26
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The program to execute hasn't been set yet."
-msgstr "Konfiguracija je sačuvana."
+msgstr "Program koji se izvršava još nije podešen."
 
 #: src/propedit/change.cpp:111
 #, boost-format
@@ -10556,14 +10548,14 @@ msgid "The property value contains non-ASCII characters, but the property is not
 msgstr "Vrednost svojstva sadrži karaktere koji nisu ASCII, ali svojstvo nije Unicode linija u '%1%'. %2%\n"
 
 #: src/propedit/change.cpp:155
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec in '%1%'. %2%\n"
-msgstr "Vrednost svojstva nije važeća logička vrednost u '%1%'. %2%\n"
+msgstr "Vrednost svojstva nije važeća binarna vrednost u '%1%'. %2%\n"
 
 #: src/propedit/change.cpp:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n"
-msgstr "Vrednost svojstva nije važeća binarna vrednost ili nije dugačka tačno 128 bita u '%1%'. %2%\n"
+msgstr "Vrednost svojstva nije važeća binarna vrednost ili nije dugačka tačno %3% bita u '%1%'. %2%\n"
 
 #: src/propedit/change.cpp:138
 #, boost-format
@@ -10571,9 +10563,9 @@ msgid "The property value is not a valid boolean in '%1%'. %2%\n"
 msgstr "Vrednost svojstva nije važeća logička vrednost u '%1%'. %2%\n"
 
 #: src/propedit/change.cpp:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "The property value is not a valid date & time string in '%1%'."
-msgstr "Vrednost svojstva nije važeći broj sa predznakom u '%1%'. %2%\n"
+msgstr "Vrednost svojstva nije važeći niz za datum & vreme u '%1%'."
 
 #: src/propedit/change.cpp:145
 #, boost-format
@@ -10616,9 +10608,8 @@ msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "Učestalost uzorkovanja dve audio staze se razlikuje: %1% and %2%"
 
 #: src/extract/extract_cli_parser.cpp:88
-#, fuzzy
 msgid "The second mode extracts the tags, converts them to XML and writes them to an output file."
-msgstr "Drugi režim izvlači tagove i konvertuje ih u XML. Rezultat je zapisan u standardni izlaz. Takav izlaz može biti korišćen kao izvor za mkvmerge."
+msgstr "Drugi režim izvlači tagove, konvertuje ih u XML i zapisuje ih u izlazni fajl."
 
 #: src/input/r_tta.cpp:92
 msgid "The seek table in this TTA file seems to be broken.\n"
@@ -11010,7 +11001,7 @@ msgstr "Ovo uzrokuje dodatni trošak u veličini ali omogućava precizno pretra�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:854
 #, no-c-format
 msgid "This configuration is currently invalid."
-msgstr "Ova konfiguracija je trenutno nevažeća."
+msgstr "Ova konfiguracija je nevažeća."
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:172
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:174
@@ -11063,7 +11054,7 @@ msgstr "Ovo se takođe dešava kada se izlazi iz aplikacije."
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
-msgstr ""
+msgstr "Ovo je proizvoljno ime koje program može da koristi da uputi na ovu konfiguraciju."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:207
 #, no-c-format
@@ -11215,7 +11206,7 @@ msgstr "Ovaj obrazac će biti korišćen za nove stavke poglavlja."
 #: src/mkvtoolnix-gui/merge/input.cpp:511
 #, no-c-format
 msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
-msgstr "Ova staza sadrži SBR AAC/HE-AAC/AAC+ podatak."
+msgstr "Ova staza sadrži SBR AAC/HE-AAC/AAC+ podatke."
 
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
@@ -11779,9 +11770,9 @@ msgid "Vertical Cb subsample: %1%"
 msgstr "bitova po uzorku: %1%"
 
 #: src/info/mkvinfo.cpp:621
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma siting: %1%"
-msgstr "Cue relative position: %1%"
+msgstr "Vertikalna pozicija hrome: %1%"
 
 #: src/info/mkvinfo.cpp:609
 #, fuzzy, boost-format
@@ -11968,9 +11959,8 @@ msgid "Video: pixels to remove in chroma"
 msgstr "Broj video piksela za uklanjanje sa desne strane slike."
 
 #: src/common/property_element.cpp:195
-#, fuzzy
 msgid "Video: projection type"
-msgstr "Tip video formata slike"
+msgstr "Video: tip projekcije"
 
 #: src/common/property_element.cpp:198
 msgid "Video: projection's pitch rotation"
@@ -12164,11 +12154,11 @@ msgstr "Uvek kada korisnik doda plejlistu program može automatski da skenira di
 
 #: src/common/property_element.cpp:188
 msgid "White colour chromaticity coordinate X as defined by CIE 1931."
-msgstr ""
+msgstr "X koordinata hromatičnosti Bele boje prema definiciji CIE 1931."
 
 #: src/common/property_element.cpp:189
 msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
-msgstr ""
+msgstr "Y koordinata hromatičnosti Bele boje prema definiciji CIE 1931."
 
 #: src/info/mkvinfo.cpp:577
 #, boost-format
@@ -12417,9 +12407,8 @@ msgid "anaglyph (green/magenta)"
 msgstr "anaglif (zelena/magenta)"
 
 #: src/extract/extract_cli_parser.cpp:52
-#, fuzzy
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
-msgstr "mkvextract attachments <inname> [opcije] [AID1:out1 [AID2:out2 ...]]"
+msgstr "attachments [opcije] [AID1:out1 [AID2:out2 ...]]"
 
 #: src/info/mkvinfo.cpp:1065
 #: src/input/r_matroska.cpp:110
@@ -12459,7 +12448,7 @@ msgstr "kanali: %1%"
 
 #: src/extract/extract_cli_parser.cpp:53
 msgid "chapters [options] out.xml"
-msgstr ""
+msgstr "chapters [opcije] out.xml"
 
 #: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
@@ -12491,9 +12480,8 @@ msgid "cubemap"
 msgstr ""
 
 #: src/extract/extract_cli_parser.cpp:56
-#, fuzzy
 msgid "cues [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract cues <inname> [opcije] [TID1:out1 [TID2:out2 ...]]"
+msgstr "cues [opcije] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:54
 msgid "cuesheet [options] out.cue"
@@ -12763,7 +12751,7 @@ msgstr "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() retur
 
 #: src/info/mkvinfo.cpp:657
 msgid "mesh"
-msgstr ""
+msgstr "mesh"
 
 #: src/propedit/change.cpp:347
 msgid "missing property name"
@@ -12782,53 +12770,44 @@ msgid "mkvInfo"
 msgstr "mkvInfo"
 
 #: src/extract/extract_cli_parser.cpp:101
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" attachments 4:cover.jpg"
-msgstr "mkvextract attachments \"film.mkv\" 4:naslovna.jpg"
+msgstr "mkvextract \"film.mkv\" attachments 4:naslovna.jpg"
 
 #: src/extract/extract_cli_parser.cpp:110
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" chapters movie_chapters.xml"
-msgstr "mkvextract chapters \"film.mkv\" > poglavlja_filma.xml"
+msgstr "mkvextract \"film.mkv\" chapters poglavlja_filma.xml"
 
 #: src/extract/extract_cli_parser.cpp:134
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"
-msgstr "mkvextract cues \"film.mkv\" 0:cues_track0.txt"
+msgstr "mkvextract \"film.mkv\" cues 0:cues_track0.txt"
 
 #: src/extract/extract_cli_parser.cpp:92
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tags movie_tags.xml"
-msgstr "mkvextract tags \"film.mkv\" > tag_filma.xml"
+msgstr "mkvextract \"film.mkv\" tags tagovi_filma.xml"
 
 #: src/extract/extract_cli_parser.cpp:127
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
-msgstr "mkvextract timestamps_v2 \"film.mkv\" 1:timestamps_track1.txt"
+msgstr "mkvextract \"film.mkv\" timestamps_v2 1:timestamps_track1.txt"
 
 #: src/extract/extract_cli_parser.cpp:141
 msgid "mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"
-msgstr ""
+msgstr "mkvextract \"film.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters poglavlja.xml tags tagovi.xml"
 
 #: src/extract/extract_cli_parser.cpp:84
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:subs.srt"
-msgstr "mkvextract tracks \"film.mkv\" 2:audio.ogg -c ISO8859-1 3:prevod.srt"
+msgstr "mkvextract \"film.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:prevod.srt"
 
 #: src/extract/extract_cli_parser.cpp:119
-#, fuzzy
 msgid "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
-msgstr "mkvextract cuesheet \"audiofajl.mka\" > audiofajl.cue"
+msgstr "mkvextract \"audiofajl.mka\" cuesheet audiofajl.cue "
 
 #: src/extract/extract_cli_parser.cpp:59
-#, fuzzy
 msgid "mkvextract <-h|--help|-V|--version>"
-msgstr "mkvextract <-h|-V>"
+msgstr "mkvextract <-h|--help|-V|--version>"
 
 #: src/extract/extract_cli_parser.cpp:47
-#, fuzzy
 msgid "mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"
-msgstr "mkvextract <mode> <source-filename> [opcije] <extraction-spec>"
+msgstr "mkvextract <izvorni-fajl> <mode1> [opcije] <extraction-spec1> [<mode2> [opcije] <extraction-spec2>…]"
 
 #: src/extract/mkvextract.cpp:94
 #, boost-format
@@ -13085,7 +13064,7 @@ msgstr "titlovi"
 
 #: src/extract/extract_cli_parser.cpp:51
 msgid "tags [options] out.xml"
-msgstr ""
+msgstr "tags [options] out.xml"
 
 #: src/output/p_textsubs.h:38
 msgid "text subtitles"
@@ -13096,9 +13075,8 @@ msgid "timestamps"
 msgstr "vremenske oznake"
 
 #: src/extract/extract_cli_parser.cpp:55
-#, fuzzy
 msgid "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract timestamps_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
+msgstr "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
@@ -13121,9 +13099,8 @@ msgid "track name"
 msgstr "ime staze"
 
 #: src/extract/extract_cli_parser.cpp:50
-#, fuzzy
 msgid "tracks [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract tracks <inname> [opcije] [TID1:out1 [TID2:out2 ...]]"
+msgstr "tracks [opcije] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/input/r_tta.cpp:64
 #, boost-format
