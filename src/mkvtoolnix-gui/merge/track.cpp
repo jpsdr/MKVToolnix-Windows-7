@@ -432,7 +432,7 @@ Track::canSetAacToSbr()
   const {
   return isAudio()
       && m_codec.contains(QRegularExpression{Q("aac"), QRegularExpression::CaseInsensitiveOption})
-      && mtx::included_in(m_file->m_type, FILE_TYPE_AAC, FILE_TYPE_MATROSKA, FILE_TYPE_REAL);
+      && mtx::included_in(m_file->m_type, mtx::file_type_e::aac, mtx::file_type_e::matroska, mtx::file_type_e::real);
 }
 
 }}}

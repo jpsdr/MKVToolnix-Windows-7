@@ -28,8 +28,8 @@ public:
   webvtt_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~webvtt_reader_c();
 
-  virtual file_type_e get_format_type() const {
-    return FILE_TYPE_WEBVTT;
+  virtual mtx::file_type_e get_format_type() const {
+    return mtx::file_type_e::webvtt;
   }
 
   virtual void read_headers();

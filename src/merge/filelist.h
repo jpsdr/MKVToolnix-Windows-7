@@ -33,7 +33,7 @@ struct filelist_t {
   int64_t size{};
   size_t id{};
 
-  file_type_e type{FILE_TYPE_IS_UNKNOWN};
+  mtx::file_type_e type{mtx::file_type_e::is_unknown};
 
   packet_cptr pack;
 

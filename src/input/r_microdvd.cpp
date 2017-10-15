@@ -40,7 +40,7 @@ microdvd_reader_c::probe_file(mm_text_io_c *in,
     }
 
     if (boost::regex_match(line, re))
-      id_result_container_unsupported(in->get_file_name(), file_type_t::get_name(FILE_TYPE_MICRODVD));
+      id_result_container_unsupported(in->get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::microdvd));
 
   } catch (mtx::mm_io::end_of_file_x &) {
   }

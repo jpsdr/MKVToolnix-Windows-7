@@ -35,7 +35,7 @@ asf_reader_c::probe_file(mm_io_c *in,
     in->setFilePointer(0, seek_beginning);
 
     if (MAGIC_ASF_WMV == get_uint32_be(buf)) {
-      id_result_container_unsupported(in->get_file_name(), file_type_t::get_name(FILE_TYPE_ASF));
+      id_result_container_unsupported(in->get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::asf));
       // Never reached:
       return 1;
     }

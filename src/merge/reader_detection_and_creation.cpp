@@ -115,7 +115,7 @@ do_probe(Tio &io,
   return result;
 }
 
-static file_type_e
+static mtx::file_type_e
 detect_text_file_formats(filelist_t const &file) {
   auto text_io = mm_text_io_cptr{};
   try {
@@ -123,19 +123,19 @@ detect_text_file_formats(filelist_t const &file) {
     auto text_size = text_io->get_size();
 
     if (do_probe<webvtt_reader_c>(text_io, text_size))
-      return FILE_TYPE_WEBVTT;
+      return mtx::file_type_e::webvtt;
     else if (do_probe<srt_reader_c>(text_io, text_size))
-      return FILE_TYPE_SRT;
+      return mtx::file_type_e::srt;
     else if (do_probe<ssa_reader_c>(text_io, text_size))
-      return FILE_TYPE_SSA;
+      return mtx::file_type_e::ssa;
     else if (do_probe<vobsub_reader_c>(text_io, text_size))
-      return FILE_TYPE_VOBSUB;
+      return mtx::file_type_e::vobsub;
     else if (do_probe<usf_reader_c>(text_io, text_size))
-      return FILE_TYPE_USF;
+      return mtx::file_type_e::usf;
 
     // Unsupported text subtitle formats
     else if (do_probe<microdvd_reader_c>(text_io, text_size))
-      return FILE_TYPE_MICRODVD;
+      return mtx::file_type_e::microdvd;
 
   } catch (mtx::mm_io::exception &ex) {
     mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file.name % ex);
@@ -144,7 +144,7 @@ detect_text_file_formats(filelist_t const &file) {
     mxerror(boost::format(Y("The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n")) % file.name);
   }
 
-  return FILE_TYPE_IS_UNKNOWN;
+  return mtx::file_type_e::is_unknown;
 }
 
 /** \brief Probe the file type
@@ -152,7 +152,7 @@ detect_text_file_formats(filelist_t const &file) {
    Opens the input file and calls the \c probe_file function for each known
    file reader class. Uses \c mm_text_io_c for subtitle probing.
 */
-static std::pair<file_type_e, int64_t>
+static std::pair<mtx::file_type_e, int64_t>
 get_file_type_internal(filelist_t &file) {
   mm_io_cptr af_io = open_input_file(file);
   mm_io_c *io      = af_io.get();
@@ -164,70 +164,70 @@ get_file_type_internal(filelist_t &file) {
 
   // File types that can be detected unambiguously but are not supported
   if (do_probe<aac_adif_reader_c>(io, size))
-    return { FILE_TYPE_AAC, size };
+    return { mtx::file_type_e::aac, size };
   if (do_probe<asf_reader_c>(io, size))
-    return { FILE_TYPE_ASF, size };
+    return { mtx::file_type_e::asf, size };
   if (do_probe<cdxa_reader_c>(io, size))
-    return { FILE_TYPE_CDXA, size };
+    return { mtx::file_type_e::cdxa, size };
   if (do_probe<flv_reader_c>(io, size))
-    return { FILE_TYPE_FLV, size };
+    return { mtx::file_type_e::flv, size };
   if (do_probe<hdsub_reader_c>(io, size))
-    return { FILE_TYPE_HDSUB, size };
+    return { mtx::file_type_e::hdsub, size };
 
   // File types that can be detected unambiguously
   if (do_probe<avi_reader_c>(io, size))
-    return { FILE_TYPE_AVI, size };
+    return { mtx::file_type_e::avi, size };
   if (do_probe<kax_reader_c>(io, size))
-    return { FILE_TYPE_MATROSKA, size };
+    return { mtx::file_type_e::matroska, size };
   if (do_probe<wav_reader_c>(io, size))
-    return { FILE_TYPE_WAV, size };
+    return { mtx::file_type_e::wav, size };
   if (do_probe<ogm_reader_c>(io, size))
-    return { FILE_TYPE_OGM, size };
+    return { mtx::file_type_e::ogm, size };
   if (do_probe<hdmv_textst_reader_c>(io, size))
-    return { FILE_TYPE_HDMV_TEXTST, size };
+    return { mtx::file_type_e::hdmv_textst, size };
   if (do_probe<flac_reader_c>(io, size))
-    return { FILE_TYPE_FLAC, size };
+    return { mtx::file_type_e::flac, size };
   if (do_probe<pgssup_reader_c>(io, size))
-    return { FILE_TYPE_PGSSUP, size };
+    return { mtx::file_type_e::pgssup, size };
   if (do_probe<real_reader_c>(io, size))
-    return { FILE_TYPE_REAL, size };
+    return { mtx::file_type_e::real, size };
   if (do_probe<qtmp4_reader_c>(io, size))
-    return { FILE_TYPE_QTMP4, size };
+    return { mtx::file_type_e::qtmp4, size };
   if (do_probe<tta_reader_c>(io, size))
-    return { FILE_TYPE_TTA, size };
+    return { mtx::file_type_e::tta, size };
   if (do_probe<vc1_es_reader_c>(io, size))
-    return { FILE_TYPE_VC1, size };
+    return { mtx::file_type_e::vc1, size };
   if (do_probe<wavpack_reader_c>(io, size))
-    return { FILE_TYPE_WAVPACK4, size };
+    return { mtx::file_type_e::wavpack4, size };
   if (do_probe<ivf_reader_c>(io, size))
-    return { FILE_TYPE_IVF, size };
+    return { mtx::file_type_e::ivf, size };
   if (do_probe<coreaudio_reader_c>(io, size))
-    return { FILE_TYPE_COREAUDIO, size };
+    return { mtx::file_type_e::coreaudio, size };
   if (do_probe<dirac_es_reader_c>(io, size))
-    return { FILE_TYPE_DIRAC, size };
+    return { mtx::file_type_e::dirac, size };
 
   // All text file types (subtitles).
   auto type = detect_text_file_formats(file);
 
-  if (FILE_TYPE_IS_UNKNOWN != type)
+  if (mtx::file_type_e::is_unknown != type)
     return { type, size };
 
   // Try raw audio formats and require eight consecutive frames at the
   // start of the file.
   if (do_probe<mp3_reader_c>(io, size, 128 * 1024, 8, true))
-    return { FILE_TYPE_MP3, size };
+    return { mtx::file_type_e::mp3, size };
   if (do_probe<ac3_reader_c>(io, size, 128 * 1024, 8, true))
-    return { FILE_TYPE_AC3, size };
+    return { mtx::file_type_e::ac3, size };
   if (do_probe<aac_reader_c>(io, size, 128 * 1024, 8, true))
-    return { FILE_TYPE_AAC, size };
+    return { mtx::file_type_e::aac, size };
 
   // File types that are mis-detected sometimes
   if (do_probe<dts_reader_c>(io, size, true))
-    return { FILE_TYPE_DTS, size };
+    return { mtx::file_type_e::dts, size };
   if (do_probe<mtx::mpeg_ts::reader_c>(io, size))
-    return { FILE_TYPE_MPEG_TS, size };
+    return { mtx::file_type_e::mpeg_ts, size };
   if (do_probe<mpeg_ps_reader_c>(io, size))
-    return { FILE_TYPE_MPEG_PS, size };
+    return { mtx::file_type_e::mpeg_ps, size };
 
   // File types which are the same in raw format and in other container formats.
   // Detection requires 20 or more consecutive packets.
@@ -236,38 +236,38 @@ get_file_type_internal(filelist_t &file) {
 
   for (auto probe_size : s_probe_sizes1) {
     if (do_probe<mp3_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets1))
-      return { FILE_TYPE_MP3, size };
+      return { mtx::file_type_e::mp3, size };
     if (do_probe<ac3_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets1))
-      return { FILE_TYPE_AC3, size };
+      return { mtx::file_type_e::ac3, size };
     if (do_probe<aac_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets1))
-      return { FILE_TYPE_AAC, size };
+      return { mtx::file_type_e::aac, size };
   }
 
   // More file types with detection issues.
   if (do_probe<truehd_reader_c>(io, size))
-    return { FILE_TYPE_TRUEHD, size };
+    return { mtx::file_type_e::truehd, size };
   if (do_probe<dts_reader_c>(io, size))
-    return { FILE_TYPE_DTS, size };
+    return { mtx::file_type_e::dts, size };
   if (do_probe<vobbtn_reader_c>(io, size))
-    return { FILE_TYPE_VOBBTN, size };
+    return { mtx::file_type_e::vobbtn, size };
 
   // Try some more of the raw audio formats before trying elementary
   // stream video formats (MPEG 1/2, AVC/h.264, HEVC/h.265; those
   // often enough simply work). However, require that the first frame
   // starts at the beginning of the file.
   if (do_probe<mp3_reader_c>(io, size, 32 * 1024, 1, true))
-    return { FILE_TYPE_MP3, size };
+    return { mtx::file_type_e::mp3, size };
   if (do_probe<ac3_reader_c>(io, size, 32 * 1024, 1, true))
-    return { FILE_TYPE_AC3, size };
+    return { mtx::file_type_e::ac3, size };
   if (do_probe<aac_reader_c>(io, size, 32 * 1024, 1, true))
-    return { FILE_TYPE_AAC, size };
+    return { mtx::file_type_e::aac, size };
 
   if (do_probe<mpeg_es_reader_c>(io, size))
-    return { FILE_TYPE_MPEG_ES, size };
+    return { mtx::file_type_e::mpeg_es, size };
   if (do_probe<avc_es_reader_c>(io, size))
-    return { FILE_TYPE_AVC_ES, size };
+    return { mtx::file_type_e::avc_es, size };
   if (do_probe<hevc_es_reader_c>(io, size))
-    return { FILE_TYPE_HEVC_ES, size };
+    return { mtx::file_type_e::hevc_es, size };
 
   // File types which are the same in raw format and in other container formats.
   // Detection requires 20 or more consecutive packets.
@@ -276,18 +276,18 @@ get_file_type_internal(filelist_t &file) {
 
   for (auto probe_size : s_probe_sizes2) {
     if (do_probe<mp3_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets2))
-      return { FILE_TYPE_MP3, size };
+      return { mtx::file_type_e::mp3, size };
     else if (do_probe<ac3_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets2))
-      return { FILE_TYPE_AC3, size };
+      return { mtx::file_type_e::ac3, size };
     else if (do_probe<aac_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets2))
-      return { FILE_TYPE_AAC, size };
+      return { mtx::file_type_e::aac, size };
   }
 
   // File types that are mis-detected sometimes and that aren't supported
   if (do_probe<dv_reader_c>(io, size))
-    return { FILE_TYPE_DV, size };
+    return { mtx::file_type_e::dv, size };
 
-  return { FILE_TYPE_IS_UNKNOWN, size };
+  return { mtx::file_type_e::is_unknown, size };
 }
 
 void
@@ -316,102 +316,102 @@ create_readers() {
       mm_io_cptr input_file = file->playlist_mpls_in ? std::static_pointer_cast<mm_io_c>(file->playlist_mpls_in) : open_input_file(*file);
 
       switch (file->type) {
-        case FILE_TYPE_AAC:
+        case mtx::file_type_e::aac:
           file->reader.reset(new aac_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_AC3:
+        case mtx::file_type_e::ac3:
           file->reader.reset(new ac3_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_AVC_ES:
+        case mtx::file_type_e::avc_es:
           file->reader.reset(new avc_es_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_HEVC_ES:
+        case mtx::file_type_e::hevc_es:
           file->reader.reset(new hevc_es_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_AVI:
+        case mtx::file_type_e::avi:
           file->reader.reset(new avi_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_COREAUDIO:
+        case mtx::file_type_e::coreaudio:
           file->reader.reset(new coreaudio_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_DIRAC:
+        case mtx::file_type_e::dirac:
           file->reader.reset(new dirac_es_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_DTS:
+        case mtx::file_type_e::dts:
           file->reader.reset(new dts_reader_c(*file->ti, input_file));
           break;
 #if defined(HAVE_FLAC_FORMAT_H)
-        case FILE_TYPE_FLAC:
+        case mtx::file_type_e::flac:
           file->reader.reset(new flac_reader_c(*file->ti, input_file));
           break;
 #endif
-        case FILE_TYPE_FLV:
+        case mtx::file_type_e::flv:
           file->reader.reset(new flv_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_HDMV_TEXTST:
+        case mtx::file_type_e::hdmv_textst:
           file->reader.reset(new hdmv_textst_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_IVF:
+        case mtx::file_type_e::ivf:
           file->reader.reset(new ivf_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_MATROSKA:
+        case mtx::file_type_e::matroska:
           file->reader.reset(new kax_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_MP3:
+        case mtx::file_type_e::mp3:
           file->reader.reset(new mp3_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_MPEG_ES:
+        case mtx::file_type_e::mpeg_es:
           file->reader.reset(new mpeg_es_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_MPEG_PS:
+        case mtx::file_type_e::mpeg_ps:
           file->reader.reset(new mpeg_ps_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_MPEG_TS:
+        case mtx::file_type_e::mpeg_ts:
           file->reader.reset(new mtx::mpeg_ts::reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_OGM:
+        case mtx::file_type_e::ogm:
           file->reader.reset(new ogm_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_PGSSUP:
+        case mtx::file_type_e::pgssup:
           file->reader.reset(new pgssup_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_QTMP4:
+        case mtx::file_type_e::qtmp4:
           file->reader.reset(new qtmp4_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_REAL:
+        case mtx::file_type_e::real:
           file->reader.reset(new real_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_SSA:
+        case mtx::file_type_e::ssa:
           file->reader.reset(new ssa_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_SRT:
+        case mtx::file_type_e::srt:
           file->reader.reset(new srt_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_TRUEHD:
+        case mtx::file_type_e::truehd:
           file->reader.reset(new truehd_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_TTA:
+        case mtx::file_type_e::tta:
           file->reader.reset(new tta_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_USF:
+        case mtx::file_type_e::usf:
           file->reader.reset(new usf_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_VC1:
+        case mtx::file_type_e::vc1:
           file->reader.reset(new vc1_es_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_VOBBTN:
+        case mtx::file_type_e::vobbtn:
           file->reader.reset(new vobbtn_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_VOBSUB:
+        case mtx::file_type_e::vobsub:
           file->reader.reset(new vobsub_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_WAV:
+        case mtx::file_type_e::wav:
           file->reader.reset(new wav_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_WAVPACK4:
+        case mtx::file_type_e::wavpack4:
           file->reader.reset(new wavpack_reader_c(*file->ti, input_file));
           break;
-        case FILE_TYPE_WEBVTT:
+        case mtx::file_type_e::webvtt:
           file->reader.reset(new webvtt_reader_c(*file->ti, input_file));
           break;
         default:

@@ -72,7 +72,7 @@ public:
   generic_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~generic_reader_c();
 
-  virtual file_type_e get_format_type() const = 0;
+  virtual mtx::file_type_e get_format_type() const = 0;
   virtual translatable_string_c get_format_name() const;
   virtual bool is_providing_timestamps() const {
     return true;

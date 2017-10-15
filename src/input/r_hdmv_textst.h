@@ -25,8 +25,8 @@ public:
   hdmv_textst_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~hdmv_textst_reader_c();
 
-  virtual file_type_e get_format_type() const {
-    return FILE_TYPE_HDMV_TEXTST;
+  virtual mtx::file_type_e get_format_type() const {
+    return mtx::file_type_e::hdmv_textst;
   }
 
   virtual void read_headers();

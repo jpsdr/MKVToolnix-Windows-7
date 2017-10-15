@@ -92,8 +92,8 @@ public:
   real_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~real_reader_c();
 
-  virtual file_type_e get_format_type() const {
-    return FILE_TYPE_REAL;
+  virtual mtx::file_type_e get_format_type() const {
+    return mtx::file_type_e::real;
   }
 
   virtual void read_headers();

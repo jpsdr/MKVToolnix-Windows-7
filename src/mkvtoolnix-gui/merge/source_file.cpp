@@ -34,7 +34,7 @@ fixAssociationsFor(char const *group,
 
 SourceFile::SourceFile(QString const &fileName)
   : m_fileName{QDir::toNativeSeparators(fileName)}
-  , m_type{FILE_TYPE_IS_UNKNOWN}
+  , m_type{mtx::file_type_e::is_unknown}
   , m_appended{}
   , m_additionalPart{}
   , m_isPlaylist{}
@@ -146,7 +146,7 @@ SourceFile::container()
 bool
 SourceFile::isTextSubtitleContainer()
   const {
-  return mtx::included_in(m_type, FILE_TYPE_SRT, FILE_TYPE_SSA);
+  return mtx::included_in(m_type, mtx::file_type_e::srt, mtx::file_type_e::ssa);
 }
 
 void
@@ -161,7 +161,7 @@ SourceFile::saveSettings(Util::ConfigFile &settings)
 
   settings.setValue("objectID",        reinterpret_cast<qulonglong>(this));
   settings.setValue("fileName",        m_fileName);
-  settings.setValue("type",            m_type);
+  settings.setValue("type",            static_cast<unsigned int>(m_type));
   settings.setValue("appended",        m_appended);
   settings.setValue("additionalPart",  m_additionalPart);
   settings.setValue("appendedTo",      reinterpret_cast<qulonglong>(m_appendedTo));
@@ -204,7 +204,7 @@ SourceFile::loadSettings(MuxConfig::Loader &l) {
   for (auto const &playlistFile : playlistFiles)
     m_playlistFiles << QFileInfo{playlistFile};
 
-  if ((FILE_TYPE_IS_UNKNOWN > m_type) || (FILE_TYPE_MAX < m_type))
+  if ((mtx::file_type_e::is_unknown > m_type) || (mtx::file_type_e::max < m_type))
     throw InvalidSettingsX{};
 
   MuxConfig::loadProperties(l.settings, m_properties);

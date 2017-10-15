@@ -1446,7 +1446,7 @@ Tab::setTitleMaybe(QList<SourceFilePtr> const &files) {
   for (auto const &file : files) {
     setTitleMaybe(file->m_properties.value("title").toString());
 
-    if (FILE_TYPE_OGM != file->m_type)
+    if (mtx::file_type_e::ogm != file->m_type)
       continue;
 
     for (auto const &track : file->m_tracks)

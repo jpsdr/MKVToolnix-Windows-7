@@ -428,7 +428,7 @@ handle_segmentinfo() {
 
 static void
 list_file_types() {
-  std::vector<file_type_t> &file_types = file_type_t::get_supported();
+  auto &file_types = mtx::file_type_t::get_supported();
 
   mxinfo(Y("Supported file types:\n"));
 
@@ -486,7 +486,7 @@ identify(std::string &filename) {
 
   get_file_type(file);
 
-  if (FILE_TYPE_IS_UNKNOWN == file.type)
+  if (mtx::file_type_e::is_unknown == file.type)
     display_unsupported_file_type(file);
 
   create_readers();
@@ -2065,7 +2065,7 @@ handle_file_name_arg(const std::string &this_arg,
 
   get_file_type(file);
 
-  if (FILE_TYPE_IS_UNKNOWN == file.type)
+  if (mtx::file_type_e::is_unknown == file.type)
     mxerror(boost::format(Y("The type of file '%1%' could not be recognized.\n")) % file.name);
 
   if (file.is_playlist) {
@@ -2073,7 +2073,7 @@ handle_file_name_arg(const std::string &this_arg,
     ti->m_fname = file.name;
   }
 
-  if (FILE_TYPE_CHAPTERS != file.type) {
+  if (mtx::file_type_e::chapters != file.type) {
     file.ti.swap(ti);
 
     g_files.push_back(file_p);
@@ -2948,7 +2948,7 @@ create_filelist_for_playlist(bfs::path const &file_name,
 
   get_file_type(new_filelist);
 
-  if (FILE_TYPE_IS_UNKNOWN == new_filelist.type)
+  if (mtx::file_type_e::is_unknown == new_filelist.type)
     mxerror(boost::format(Y("The type of file '%1%' could not be recognized.\n")) % new_filelist.name);
 
   new_filelist.ti                       = std::make_unique<track_info_c>();

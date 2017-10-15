@@ -34,7 +34,7 @@ hdsub_reader_c::probe_file(mm_io_c *in,
     in->setFilePointer(0, seek_beginning);
 
     if (HDSUB_FILE_MAGIC == get_uint16_be(buf)) {
-      id_result_container_unsupported(in->get_file_name(), file_type_t::get_name(FILE_TYPE_HDSUB));
+      id_result_container_unsupported(in->get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::hdsub));
       // Never reached:
       return 1;
     }

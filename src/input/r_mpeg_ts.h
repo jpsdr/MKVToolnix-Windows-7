@@ -435,8 +435,8 @@ public:
 
   static bool probe_file(mm_io_c *in, uint64_t size);
 
-  virtual file_type_e get_format_type() const {
-    return FILE_TYPE_MPEG_TS;
+  virtual mtx::file_type_e get_format_type() const {
+    return mtx::file_type_e::mpeg_ts;
   }
 
   virtual void read_headers();

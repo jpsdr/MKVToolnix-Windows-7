@@ -15,6 +15,8 @@
 
 #include "common/file_types.h"
 
+namespace mtx {
+
 static std::vector<file_type_t> s_supported_file_types;
 
 std::vector<file_type_t> &
@@ -66,43 +68,45 @@ file_type_t::get_supported() {
 
 translatable_string_c
 file_type_t::get_name(file_type_e type) {
-  return FILE_TYPE_AAC         == type ? YT("AAC")
-       : FILE_TYPE_AC3         == type ? YT("AC-3")
-       : FILE_TYPE_ASF         == type ? YT("Windows Media (ASF/WMV)")
-       : FILE_TYPE_AVC_ES      == type ? YT("AVC/h.264")
-       : FILE_TYPE_AVI         == type ? YT("AVI")
-       : FILE_TYPE_CDXA        == type ? YT("RIFF CDXA")
-       : FILE_TYPE_CHAPTERS    == type ? translatable_string_c{} // currently intentionally left blank
-       : FILE_TYPE_COREAUDIO   == type ? YT("CoreAudio")
-       : FILE_TYPE_DIRAC       == type ? YT("Dirac")
-       : FILE_TYPE_DTS         == type ? YT("DTS")
-       : FILE_TYPE_DV          == type ? YT("DV video format")
-       : FILE_TYPE_FLAC        == type ? YT("FLAC")
-       : FILE_TYPE_FLV         == type ? YT("Flash Video")
-       : FILE_TYPE_HDMV_TEXTST == type ? YT("HDMV TextST subtitles")
-       : FILE_TYPE_HEVC_ES     == type ? YT("HEVC/h.265")
-       : FILE_TYPE_HDSUB       == type ? YT("HD-DVD subtitles")
-       : FILE_TYPE_IVF         == type ? YT("IVF (VP8/VP9)")
-       : FILE_TYPE_MATROSKA    == type ? YT("Matroska")
-       : FILE_TYPE_MICRODVD    == type ? YT("MicroDVD")
-       : FILE_TYPE_MP3         == type ? YT("MP2/MP3")
-       : FILE_TYPE_MPEG_ES     == type ? YT("MPEG video elementary stream")
-       : FILE_TYPE_MPEG_PS     == type ? YT("MPEG program stream")
-       : FILE_TYPE_MPEG_TS     == type ? YT("MPEG transport stream")
-       : FILE_TYPE_OGM         == type ? YT("Ogg/OGM")
-       : FILE_TYPE_PGSSUP      == type ? YT("PGSSUP")
-       : FILE_TYPE_QTMP4       == type ? YT("QuickTime/MP4")
-       : FILE_TYPE_REAL        == type ? YT("RealMedia")
-       : FILE_TYPE_SRT         == type ? YT("SRT subtitles")
-       : FILE_TYPE_SSA         == type ? YT("SSA/ASS subtitles")
-       : FILE_TYPE_TRUEHD      == type ? YT("TrueHD")
-       : FILE_TYPE_TTA         == type ? YT("TTA")
-       : FILE_TYPE_USF         == type ? YT("USF subtitles")
-       : FILE_TYPE_VC1         == type ? YT("VC-1")
-       : FILE_TYPE_VOBBTN      == type ? YT("VobBtn")
-       : FILE_TYPE_VOBSUB      == type ? YT("VobSub")
-       : FILE_TYPE_WAV         == type ? YT("WAV")
-       : FILE_TYPE_WAVPACK4    == type ? YT("WAVPACK")
-       : FILE_TYPE_WEBVTT      == type ? YT("WebVTT subtitles")
-       :                                 YT("unknown");
+  return file_type_e::aac         == type ? YT("AAC")
+       : file_type_e::ac3         == type ? YT("AC-3")
+       : file_type_e::asf         == type ? YT("Windows Media (ASF/WMV)")
+       : file_type_e::avc_es      == type ? YT("AVC/h.264")
+       : file_type_e::avi         == type ? YT("AVI")
+       : file_type_e::cdxa        == type ? YT("RIFF CDXA")
+       : file_type_e::chapters    == type ? translatable_string_c{} // currently intentionally left blank
+       : file_type_e::coreaudio   == type ? YT("CoreAudio")
+       : file_type_e::dirac       == type ? YT("Dirac")
+       : file_type_e::dts         == type ? YT("DTS")
+       : file_type_e::dv          == type ? YT("DV video format")
+       : file_type_e::flac        == type ? YT("FLAC")
+       : file_type_e::flv         == type ? YT("Flash Video")
+       : file_type_e::hdmv_textst == type ? YT("HDMV TextST subtitles")
+       : file_type_e::hevc_es     == type ? YT("HEVC/h.265")
+       : file_type_e::hdsub       == type ? YT("HD-DVD subtitles")
+       : file_type_e::ivf         == type ? YT("IVF (VP8/VP9)")
+       : file_type_e::matroska    == type ? YT("Matroska")
+       : file_type_e::microdvd    == type ? YT("MicroDVD")
+       : file_type_e::mp3         == type ? YT("MP2/MP3")
+       : file_type_e::mpeg_es     == type ? YT("MPEG video elementary stream")
+       : file_type_e::mpeg_ps     == type ? YT("MPEG program stream")
+       : file_type_e::mpeg_ts     == type ? YT("MPEG transport stream")
+       : file_type_e::ogm         == type ? YT("Ogg/OGM")
+       : file_type_e::pgssup      == type ? YT("PGSSUP")
+       : file_type_e::qtmp4       == type ? YT("QuickTime/MP4")
+       : file_type_e::real        == type ? YT("RealMedia")
+       : file_type_e::srt         == type ? YT("SRT subtitles")
+       : file_type_e::ssa         == type ? YT("SSA/ASS subtitles")
+       : file_type_e::truehd      == type ? YT("TrueHD")
+       : file_type_e::tta         == type ? YT("TTA")
+       : file_type_e::usf         == type ? YT("USF subtitles")
+       : file_type_e::vc1         == type ? YT("VC-1")
+       : file_type_e::vobbtn      == type ? YT("VobBtn")
+       : file_type_e::vobsub      == type ? YT("VobSub")
+       : file_type_e::wav         == type ? YT("WAV")
+       : file_type_e::wavpack4    == type ? YT("WAVPACK")
+       : file_type_e::webvtt      == type ? YT("WebVTT subtitles")
+       :                                    YT("unknown");
+}
+
 }

@@ -31,7 +31,7 @@ public:
   QList<SourceFilePtr> m_additionalParts, m_appendedFiles;
   QList<QFileInfo> m_playlistFiles;
 
-  file_type_e m_type;
+  mtx::file_type_e m_type;
   bool m_appended, m_additionalPart, m_isPlaylist, m_dontScanForOtherPlaylists;
   SourceFile *m_appendedTo;
 

@@ -65,8 +65,8 @@ public:
   usf_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~usf_reader_c();
 
-  virtual file_type_e get_format_type() const {
-    return FILE_TYPE_USF;
+  virtual mtx::file_type_e get_format_type() const {
+    return mtx::file_type_e::usf;
   }
 
   virtual void read_headers();

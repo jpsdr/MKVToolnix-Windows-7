@@ -15,7 +15,7 @@ FileTypeFilter::get() {
   if (!s_filter.isEmpty())
     return s_filter;
 
-  auto &file_types = file_type_t::get_supported();
+  auto &file_types = mtx::file_type_t::get_supported();
 
   std::map<QString, bool> all_extensions_map;
   for (auto &file_type : file_types) {

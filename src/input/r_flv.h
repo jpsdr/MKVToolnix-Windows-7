@@ -153,8 +153,8 @@ public:
 
   static int probe_file(mm_io_c *io, uint64_t size);
 
-  virtual file_type_e get_format_type() const {
-    return FILE_TYPE_FLV;
+  virtual mtx::file_type_e get_format_type() const {
+    return mtx::file_type_e::flv;
   }
 
 protected:

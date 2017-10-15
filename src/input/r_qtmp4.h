@@ -460,8 +460,8 @@ public:
   qtmp4_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~qtmp4_reader_c();
 
-  virtual file_type_e get_format_type() const {
-    return FILE_TYPE_QTMP4;
+  virtual mtx::file_type_e get_format_type() const {
+    return mtx::file_type_e::qtmp4;
   }
 
   virtual void read_headers();
