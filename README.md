@@ -180,6 +180,18 @@ library files are:
 
 Now run `rake` and, as "root", `rake install`.
 
+### 2.4.3. If things go wrong
+
+By default the commands executed by the build system aren't
+output. You can change that by adding `V=1` as an argument to the
+`rake` command.
+
+If `rake` executes too many processes at once, then you've stumbled
+across a known bug in `rake`. In that case you should install the
+`drake` Ruby gem and use the command `drake` instead of
+`rake`. `drake` supports parallelism properly and doesn't try to
+execute all jobs at once.
+
 ## 2.5. Notes for compilation on (Open)Solaris
 
 You can compile MKVToolNix with Sun's sunstudio compiler, but you need
