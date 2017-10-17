@@ -74,17 +74,15 @@ namespace brng  = boost::range;
 /* i18n stuff */
 #if defined(HAVE_LIBINTL_H)
 # include <libintl.h>
-# if !defined Y
-#  define Y(s) gettext(s)
-#  define NY(s_singular, s_plural, count) ngettext(s_singular, s_plural, count)
-# endif
-#else /* HAVE_LIBINTL_H */
-# if !defined Y
-#  define Y(s) (s)
-#  define NY(s_singular, s_plural, count) ((count) != 1 ? (s_plural) : (s_singular))
-# endif
+#else
+# define gettext(s)                            (s)
+# define ngettext(s_singular, s_plural, count) ((count) != 1 ? (s_plural) : (s_singular))
 #endif
 
+#undef Y
+#undef NY
+#define Y(s)                            gettext(u8##s)
+#define NY(s_singular, s_plural, count) ngettext(u8##s_singular, u8##s_plural, count)
 #define YF(s)        Y(s)
 #define NYF(s, p, c) NY(s, p, c)
 

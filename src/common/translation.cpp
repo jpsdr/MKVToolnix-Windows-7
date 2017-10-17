@@ -248,7 +248,7 @@ translatable_string_c::get_translated()
   std::vector<std::string> translated_strings;
   for (auto const &untranslated_string : m_untranslated_strings)
     if (!untranslated_string.empty())
-      translated_strings.emplace_back(Y(untranslated_string.c_str()));
+      translated_strings.emplace_back(gettext(untranslated_string.c_str()));
 
   return join(translated_strings);
 }
