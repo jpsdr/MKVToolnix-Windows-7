@@ -26,7 +26,7 @@ end
 # For newer rake turn on parallel processing, too. Newer rake versions
 # use an OpenStruct, though, so testing with responds_to? won't work.
 version = Rake::VERSION.gsub(%r{[^0-9\.]+}, "").split(%r{\.}).map(&:to_i)
-if (version[0] > 10) || ((version[0] == 10) && (version[1] >= 1))
+if (version[0] > 10) || ((version[0] == 10) && (version[1] >= 3))
   Rake.application.options.always_multitask = true
 end
 
