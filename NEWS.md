@@ -8,6 +8,9 @@
 * GUI: multiplexer: the "AAC is SBR/HE-AAC/AAC+" checkbox in the "audio
   properties" section will be disabled if the functionality is not implemented
   for the selected track's codec & container.
+* mkvmerge: tags: reintroduced a workaround for non-compliant files with tags
+  that do not contain the mandatory `SimpleTag` element. This workaround was
+  removed during code refactoring in release v15.0.0.
 
 
 # Version 17.0.0 "Be Ur Friend" 2017-10-14

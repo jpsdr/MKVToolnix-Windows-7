@@ -538,6 +538,9 @@ fix_elements_in_master(EbmlMaster *master) {
     if (!is_present[KaxTagTargets::ClassInfos.GlobalId.GetValue()])
       fix_elements_in_master(&AddEmptyChild<KaxTagTargets>(master));
 
+    else if (!is_present[KaxTagSimple::ClassInfos.GlobalId.GetValue()])
+      fix_elements_in_master(&AddEmptyChild<KaxTagSimple>(master));
+
   } else if (dynamic_cast<KaxTagTargets *>(master)) {
     if (!is_present[KaxTagTargetTypeValue::ClassInfos.GlobalId.GetValue()])
       AddEmptyChild<KaxTagTargetTypeValue>(master).SetValue(50); // = movie
