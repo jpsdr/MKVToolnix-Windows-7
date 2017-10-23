@@ -32,7 +32,7 @@ else
 fi
 
 SRCDIR=$(pwd)
-LOGFILE=$(mktemp -p '' mkvtoolnix_setup_cross_compilation_env.XXXXXX)
+LOGFILE=${LOGFILE:-$(mktemp -p '' mkvtoolnix_setup_cross_compilation_env.XXXXXX)}
 
 function update_mingw_cross_env {
   if [[ ! -d $INSTALL_DIR ]]; then
