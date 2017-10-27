@@ -12,6 +12,11 @@
   that do not contain the mandatory `SimpleTag` element. This workaround was
   removed during code refactoring in release v15.0.0.
 
+## Bug fixes
+
+* mkvmerge: WebVTT: mkvmerge did not recognize timestamp lines if the hours
+  components were absent. Fixes #2139.
+
 
 # Version 17.0.0 "Be Ur Friend" 2017-10-14
 

@@ -17,7 +17,7 @@
 #include "common/strings/parsing.h"
 #include "common/webvtt.h"
 
-#define RE_TIMESTAMP "(\\d{2}:\\d{2}:\\d{2}\\.\\d{3})"
+#define RE_TIMESTAMP "((?:\\d{2}:)?\\d{2}:\\d{2}\\.\\d{3})"
 
 struct webvtt_parser_c::impl_t {
 public:
