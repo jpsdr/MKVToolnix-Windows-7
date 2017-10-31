@@ -15,19 +15,16 @@
 
 #include "common/common_pch.h"
 
-#include <deque>
-
 namespace mtx { namespace mem {
 
 class slice_cursor_c {
 protected:
-  std::size_t m_pos{}, m_pos_in_slice{}, m_size{};
-  std::deque<memory_cptr> m_slices;
-  std::deque<memory_cptr>::iterator m_slice;
+  std::size_t m_pos{}, m_pos_in_slice{}, m_size{}, m_current_slice_num{}, m_current_slice_size{};
+  unsigned char *m_current_slice_buffer{};
+  std::vector<memory_cptr> m_slices;
 
 public:
   slice_cursor_c()
-    : m_slice(m_slices.end())
   {
   }
 
@@ -36,21 +33,26 @@ public:
 
   slice_cursor_c(slice_cursor_c const &) = delete;
 
+  void init_slice_variables() {
+    if (m_current_slice_num < m_slices.size()) {
+      auto &slice            = *m_slices[m_current_slice_num];
+      m_current_slice_buffer = slice.get_buffer();
+      m_current_slice_size   = slice.get_size();
+    } else {
+      m_current_slice_buffer = nullptr;
+      m_current_slice_size   = 0;
+    }
+  }
+
   void add_slice(memory_cptr const &slice) {
     if (slice->get_size() == 0)
       return;
 
-    if (m_slices.end() == m_slice) {
-      m_slices.push_back(slice);
-      m_slice = m_slices.begin();
-
-    } else {
-      auto pos = std::distance(m_slices.begin(), m_slice);
-      m_slices.push_back(slice);
-      m_slice = m_slices.begin() + pos;
-    }
-
+    m_slices.emplace_back(slice);
     m_size += slice->get_size();
+
+    if (!m_current_slice_buffer)
+      init_slice_variables();
   }
 
   void add_slice(unsigned char *buffer, std::size_t size) {
@@ -61,19 +63,20 @@ public:
   }
 
   inline unsigned char get_char() {
-    assert(m_pos < m_size);
+    assert(m_current_slice_buffer && (m_pos < m_size));
 
-    auto &slice = *m_slice->get();
-    auto c      = *(slice.get_buffer() + m_pos_in_slice);
+    auto c = m_current_slice_buffer[m_pos_in_slice];
 
     ++m_pos_in_slice;
     ++m_pos;
 
-    if (m_pos_in_slice < slice.get_size())
+    if (m_pos_in_slice < m_current_slice_size)
       return c;
 
-    ++m_slice;
+    ++m_current_slice_num;
     m_pos_in_slice = 0;
+
+    init_slice_variables();
 
     return c;
   }
@@ -99,9 +102,12 @@ public:
       m_slices.clear();
       m_size = 0;
     }
-    m_pos          = 0;
-    m_pos_in_slice = 0;
-    m_slice        = m_slices.begin();
+
+    m_pos               = 0;
+    m_pos_in_slice      = 0;
+    m_current_slice_num = 0;
+
+    init_slice_variables();
   }
 
   void copy(unsigned char *dest, std::size_t start, std::size_t size) {
