@@ -22,6 +22,7 @@
 #include "common/endian.h"
 #include "common/frame_timing.h"
 #include "common/hacks.h"
+#include "common/memory_slice_cursor.h"
 #include "common/mm_io.h"
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
@@ -104,7 +105,7 @@ es_parser_c::discard_actual_frames(bool discard) {
 void
 es_parser_c::add_bytes(unsigned char *buffer,
                        size_t size) {
-  memory_slice_cursor_c cursor;
+  mtx::mem::slice_cursor_c cursor;
   int marker_size              = 0;
   int previous_marker_size     = 0;
   int previous_pos             = -1;

@@ -16,6 +16,7 @@
 
 #include "common/bit_reader.h"
 #include "common/endian.h"
+#include "common/memory_slice_cursor.h"
 #include "common/strings/formatting.h"
 #include "common/vc1.h"
 
@@ -301,7 +302,7 @@ es_parser_c::~es_parser_c() {
 void
 es_parser_c::add_bytes(unsigned char *buffer,
                        int size) {
-  memory_slice_cursor_c cursor;
+  mtx::mem::slice_cursor_c cursor;
 
   int previous_pos            = -1;
   int64_t previous_stream_pos = m_stream_pos;

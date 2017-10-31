@@ -24,6 +24,7 @@
 #include "common/hevc.h"
 #include "common/hevc_es_parser.h"
 #include "common/hevcc.h"
+#include "common/memory_slice_cursor.h"
 #include "common/strings/formatting.h"
 #include "common/timestamp.h"
 
@@ -117,7 +118,7 @@ es_parser_c::discard_actual_frames(bool discard) {
 void
 es_parser_c::add_bytes(unsigned char *buffer,
                        size_t size) {
-  memory_slice_cursor_c cursor;
+  mtx::mem::slice_cursor_c cursor;
   int marker_size              = 0;
   int previous_marker_size     = 0;
   int previous_pos             = -1;

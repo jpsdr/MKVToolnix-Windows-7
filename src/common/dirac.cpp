@@ -17,6 +17,7 @@
 #include "common/bit_reader.h"
 #include "common/dirac.h"
 #include "common/endian.h"
+#include "common/memory_slice_cursor.h"
 
 #define MAX_STANDARD_VIDEO_FORMAT 23
 
@@ -224,7 +225,7 @@ dirac::es_parser_c::~es_parser_c() {
 void
 dirac::es_parser_c::add_bytes(unsigned char *buffer,
                               size_t size) {
-  memory_slice_cursor_c cursor;
+  mtx::mem::slice_cursor_c cursor;
 
   bool previous_found         = false;
   size_t previous_pos         = 0;
