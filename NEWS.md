@@ -19,6 +19,10 @@
 * mkvmerge: Matroska identification: the `date_local` and `date_utc`
   attributes will only be output if the identified Matroska file actually
   contains the "date" header field.
+* mkvpropedit, GUI's header editor: the `date` header field won't be added
+  automatically anymore whenever the segment info section is edited and the
+  `date` element is either deleted or not present in the first place. Fixes
+  #2143.
 
 
 # Version 17.0.0 "Be Ur Friend" 2017-10-14

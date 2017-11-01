@@ -502,10 +502,6 @@ fix_elements_in_master(EbmlMaster *master) {
 
     if (!is_present[KaxWritingApp::ClassInfos.GlobalId.GetValue()])
       AddEmptyChild<KaxWritingApp>(master).SetValueUTF8(info_data.writing_app);
-
-    if (!is_present[KaxDateUTC::ClassInfos.GlobalId.GetValue()])
-      AddEmptyChild<KaxDateUTC>(master).SetValue(info_data.writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(info_data.writing_date));
-
   }
 
   // 4.2. Tracks
