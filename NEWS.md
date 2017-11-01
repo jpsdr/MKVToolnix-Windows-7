@@ -16,6 +16,9 @@
 
 * mkvmerge: WebVTT: mkvmerge did not recognize timestamp lines if the hours
   components were absent. Fixes #2139.
+* mkvmerge: Matroska identification: the `date_local` and `date_utc`
+  attributes will only be output if the identified Matroska file actually
+  contains the "date" header field.
 
 
 # Version 17.0.0 "Be Ur Friend" 2017-10-14

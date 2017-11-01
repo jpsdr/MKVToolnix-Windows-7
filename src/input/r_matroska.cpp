@@ -1043,7 +1043,9 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   m_tc_scale          = FindChildValue<KaxTimecodeScale, uint64_t>(info, 1000000);
   m_segment_duration  = std::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
   m_title             = to_utf8(FindChildValue<KaxTitle>(info));
-  m_muxing_date_epoch = GetChild<KaxDateUTC>(info).GetEpochDate();
+  auto muxing_date    = FindChild<KaxDateUTC>(info);
+  if (muxing_date)
+    m_muxing_date_epoch = muxing_date->GetEpochDate();
 
   m_in_file->set_timestamp_scale(m_tc_scale);
 
@@ -2643,8 +2645,10 @@ kax_reader_c::identify() {
 
   info.set(mtx::id::muxing_application,  m_muxing_app);
   info.set(mtx::id::writing_application, m_raw_writing_app);
-  info.add(mtx::id::date_utc,            mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch, mtx::date_time::epoch_timezone_e::UTC));
-  info.add(mtx::id::date_local,          mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch, mtx::date_time::epoch_timezone_e::local));
+  if (m_muxing_date_epoch) {
+    info.add(mtx::id::date_utc,   mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch.get(), mtx::date_time::epoch_timezone_e::UTC));
+    info.add(mtx::id::date_local, mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch.get(), mtx::date_time::epoch_timezone_e::local));
+  }
 
   id_result_container(info.get());
 
