@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-10-11 15:46+0200\n"
-"PO-Revision-Date: 2017-10-06 09:05+0000\n"
+"PO-Revision-Date: 2017-10-14 22:11+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -3017,7 +3017,7 @@ msgstr "Toutes les occurrences de la chaîne « <TID> » seront remplacées pa
 
 #: src/extract/extract_cli_parser.cpp:64
 msgid "All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file."
-msgstr ""
+msgstr "Tous les autres arguments soit basculent vers un mode d'extraction particulier, soit modifient des options pour le mode en cours, soit spécifient quoi extraire vers quel fichier."
 
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "All other strings work just like the track header selectors (see above)."
@@ -5192,7 +5192,7 @@ msgstr "Ratio d'aspect extrait des entêtes vidéoTheora extraite et dimensions 
 
 #: src/extract/extract_cli_parser.cpp:136
 msgid "Extracting multiple items at the same time"
-msgstr ""
+msgstr "Extraction de plusieurs éléments en même temps"
 
 #: src/extract/tracks.cpp:136
 #, boost-format
@@ -6978,7 +6978,7 @@ msgstr "Indications de début/fin manquantes pour « --split » dans « --split 
 
 #: src/extract/extract_cli_parser.cpp:49
 msgid "Modes"
-msgstr ""
+msgstr "Modes"
 
 #: src/propedit/options.cpp:184
 #, boost-format
@@ -7024,12 +7024,12 @@ msgstr "La plupart des autres paramètres de l'onglet « Cible » seront conserv
 
 #: src/extract/extract_cli_parser.cpp:66
 msgid "Most options can only be used in certain modes with a few options applying to all modes."
-msgstr ""
+msgstr "La plupart des options peuvent seulement être utilisées dans certains modes avec quelques options s'appliquant à tous les modes."
 
 #: src/extract/extract_cli_parser.cpp:65
 #: src/extract/extract_cli_parser.cpp:137
 msgid "Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."
-msgstr ""
+msgstr "Plusieurs modes peuvent être utilisés en invoquant mkvextract, ce qui permet d'extraire plusieurs choses en une seule passe."
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:179
 #, no-c-format
@@ -10150,7 +10150,7 @@ msgstr "Le fichier d'ouverture (%1) n'est reconnu ni comme un fichier Matroska, 
 
 #: src/extract/extract_cli_parser.cpp:63
 msgid "The first argument must be the name of source file."
-msgstr ""
+msgstr "Le premier argument doit être le nom du fichier source."
 
 #: src/common/kax_file.cpp:52
 #, boost-format
@@ -10202,9 +10202,8 @@ msgid "The formats do not match."
 msgstr "Les formats ne correspondent pas."
 
 #: src/extract/extract_cli_parser.cpp:104
-#, fuzzy
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
-msgstr "Le quatrième mode extrait les chapitres et les convertit en XML. Le rapport est écrit dans le rapport standard. Il peut être servir de source à mkvmerge."
+msgstr "Le second mode extrait les chapitres, les convertit en XML et les écrit vers un fichier cible."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 #, no-c-format
@@ -10547,9 +10546,8 @@ msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "Les fréquences d'échantillonnage des deux pistes audio sont différentes : %1% et %2%"
 
 #: src/extract/extract_cli_parser.cpp:88
-#, fuzzy
 msgid "The second mode extracts the tags, converts them to XML and writes them to an output file."
-msgstr "Le deuxième mode extrait les balises et les convertit en XML. Le rapport est écrit dans le rapport standard. Il peut servir de source à mkvmerge."
+msgstr "Le second mode extrait les balises, les convertit en XML et les écrit vers un fichier cible."
 
 #: src/input/r_tta.cpp:92
 msgid "The seek table in this TTA file seems to be broken.\n"
@@ -12335,9 +12333,8 @@ msgid "anaglyph (green/magenta)"
 msgstr "Anaglyphe (vert/magenta)"
 
 #: src/extract/extract_cli_parser.cpp:52
-#, fuzzy
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
-msgstr "mkvextract attachments <source> [options] [AID1:cible1 [AID2:cible2 …]]"
+msgstr "attachments [options] [AID1:out1 [AID2:out2 ...]]"
 
 #: src/info/mkvinfo.cpp:1065
 #: src/input/r_matroska.cpp:110
@@ -12377,7 +12374,7 @@ msgstr "canaux : %1%"
 
 #: src/extract/extract_cli_parser.cpp:53
 msgid "chapters [options] out.xml"
-msgstr ""
+msgstr "chapters [options] out.xml"
 
 #: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
@@ -12409,13 +12406,12 @@ msgid "cubemap"
 msgstr "cube"
 
 #: src/extract/extract_cli_parser.cpp:56
-#, fuzzy
 msgid "cues [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract cues <source> [options] [TID1:cible1 [TID2:cible2 …]]"
+msgstr "cues [options] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:54
 msgid "cuesheet [options] out.cue"
-msgstr ""
+msgstr "cuesheet [options] out.cue"
 
 #: src/info/mkvinfo.cpp:1023
 #, boost-format
@@ -12700,53 +12696,44 @@ msgid "mkvInfo"
 msgstr "mkvInfo"
 
 #: src/extract/extract_cli_parser.cpp:101
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" attachments 4:cover.jpg"
-msgstr "mkvextract attachments \"film.mkv\" 4:jaquette.jpg"
+msgstr "mkvextract \"a movie.mkv\" attachments 4:cover.jpg"
 
 #: src/extract/extract_cli_parser.cpp:110
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" chapters movie_chapters.xml"
-msgstr "mkvextract chapters \"film.mkv\" > film_chapitres.xml"
+msgstr "mkvextract \"a movie.mkv\" chapters movie_chapters.xml"
 
 #: src/extract/extract_cli_parser.cpp:134
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"
-msgstr "mkvextract cues \"un film.mkv\" 0:index_piste0.txt"
+msgstr "mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"
 
 #: src/extract/extract_cli_parser.cpp:92
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tags movie_tags.xml"
-msgstr "mkvextract tags \"film.mkv\" > film_balises.xml"
+msgstr "mkvextract \"a movie.mkv\" tags movie_tags.xml"
 
 #: src/extract/extract_cli_parser.cpp:127
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
-msgstr "mkvextract timestamps_v2 \"film.mkv\" 1:codes-temporels_piste1.txt"
+msgstr "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
 
 #: src/extract/extract_cli_parser.cpp:141
 msgid "mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"
-msgstr ""
+msgstr "mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"
 
 #: src/extract/extract_cli_parser.cpp:84
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:subs.srt"
-msgstr "mkvextract tracks \"film.mkv\" 2:audio.ogg -c ISO8859-1 3:sous-titres.srt"
+msgstr "mkvextract \"a movie.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:subs.srt"
 
 #: src/extract/extract_cli_parser.cpp:119
-#, fuzzy
 msgid "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
-msgstr "mkvextract cuesheet \"fichier-audio.mka\" > fichier-audio.cue"
+msgstr "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
 
 #: src/extract/extract_cli_parser.cpp:59
-#, fuzzy
 msgid "mkvextract <-h|--help|-V|--version>"
-msgstr "mkvextract <-h|-V>"
+msgstr "mkvextract <-h|--help|-V|--version>"
 
 #: src/extract/extract_cli_parser.cpp:47
-#, fuzzy
 msgid "mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"
-msgstr "mkvextract <mode> <fichier-source> [options] <spécifications-extraction>"
+msgstr "mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"
 
 #: src/extract/mkvextract.cpp:94
 #, boost-format
@@ -13003,7 +12990,7 @@ msgstr "sous-titres"
 
 #: src/extract/extract_cli_parser.cpp:51
 msgid "tags [options] out.xml"
-msgstr ""
+msgstr "tags [options] out.xml"
 
 #: src/output/p_textsubs.h:38
 msgid "text subtitles"
@@ -13014,9 +13001,8 @@ msgid "timestamps"
 msgstr "codes temporels"
 
 #: src/extract/extract_cli_parser.cpp:55
-#, fuzzy
 msgid "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract timestamps_v2 <source> [TID1:cible1 [TID2:cible2 …]]"
+msgstr "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
@@ -13039,9 +13025,8 @@ msgid "track name"
 msgstr "nom de piste"
 
 #: src/extract/extract_cli_parser.cpp:50
-#, fuzzy
 msgid "tracks [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract tracks <source> [options] [TID1:cible1 [TID2:cible2 …]]"
+msgstr "tracks [options] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/input/r_tta.cpp:64
 #, boost-format
