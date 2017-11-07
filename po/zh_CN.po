@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-10-11 15:46+0200\n"
-"PO-Revision-Date: 2017-10-04 19:50+0200\n"
+"PO-Revision-Date: 2017-11-06 17:07+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -217,15 +217,16 @@ msgstr ""
 "                           0 表示位数未指定。\n"
 
 #: src/merge/mkvmerge.cpp:271
-#, fuzzy
 msgid ""
 "  --colour-matrix-coefficients <TID:n>\n"
 "                           Sets the matrix coefficients of the video used\n"
 "                           to derive luma and chroma values from red, green\n"
 "                           and blue color primaries.\n"
 msgstr ""
-"  --colour-matrix <TID:n>  设置视频从红绿蓝三原色衍生出\n"
-"                           亮度及色度值所用的矩阵系数。\n"
+"  --colour-matrix-coefficients <TID:n>\n"
+"                           设置用于从红绿蓝颜色基准计算\n"
+"                           亮度信号（luma）与色度信号（chroma）\n"
+"                           的矩阵系数。\n"
 
 #: src/merge/mkvmerge.cpp:293
 msgid ""
@@ -515,31 +516,28 @@ msgstr ""
 "                           最大百分比 (默认值: 0.3)。\n"
 
 #: src/merge/mkvmerge.cpp:320
-#, fuzzy
 msgid ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           A pitch rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           视频的颜色基准。\n"
+"  --projection-pose-pitch <TID:浮点数>\n"
+"                           投影 pitch 轴旋转（左右轴不动）。\n"
 
 #: src/merge/mkvmerge.cpp:322
-#, fuzzy
 msgid ""
 "  --projection-pose-roll <TID:float>\n"
 "                           A roll rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           视频的颜色基准。\n"
+"  --projection-pose-roll <TID:浮点数>\n"
+"                           投影 roll 轴旋转（前后轴不动）。\n"
 
 #: src/merge/mkvmerge.cpp:318
-#, fuzzy
 msgid ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           A yaw rotation to the projection.\n"
 msgstr ""
-"  --colour-primaries <TID:n>\n"
-"                           视频的颜色基准。\n"
+"  --projection-pose-yaw <TID:浮点数>\n"
+"                           投影 yaw 轴旋转（上下轴不动）。\n"
 
 #: src/merge/mkvmerge.cpp:315
 msgid ""
@@ -2944,7 +2942,7 @@ msgstr "所有 \"<TID>\" 将会被替换为轨道的轨道 ID。"
 
 #: src/extract/extract_cli_parser.cpp:64
 msgid "All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file."
-msgstr ""
+msgstr "其他参数可切换到特定的提取模式，更改当前活动模式的选项，或指定将哪些内容提取到哪些文件中。"
 
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "All other strings work just like the track header selectors (see above)."
@@ -4881,9 +4879,9 @@ msgstr "创建临时文件出错 (原因: %1)。"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:133
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:241
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Error details: %1."
-msgstr "异常详情:"
+msgstr "错误细节: %1。"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:77
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:167
@@ -5116,7 +5114,7 @@ msgstr "从 Theora 视频头中提取宽高比信息并设置显示尺寸为 %1%
 
 #: src/extract/extract_cli_parser.cpp:136
 msgid "Extracting multiple items at the same time"
-msgstr ""
+msgstr "同时提取多个项目"
 
 #: src/extract/tracks.cpp:136
 #, boost-format
@@ -5892,7 +5890,7 @@ msgstr "如果勾选该选项且当前没有设置输出文件名，程序会在
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:346
 #, no-c-format
 msgid "If this option is enabled, only source files containing video tracks will be used for setting the destination file name."
-msgstr "如果勾选该选项，则只有包含视频轨道的输入文件才被用于设置目标文件名称。"
+msgstr "如果勾选该选项，则只有包含视频轨道的输入文件才被用于设置输出文件名称。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:358
 msgid "If this option is enabled, only those tracks will be set to be copied whose language is selected below."
@@ -6901,7 +6899,7 @@ msgstr "'--split %1%' 中缺少用于 '--split' 的开始/结束点。\n"
 
 #: src/extract/extract_cli_parser.cpp:49
 msgid "Modes"
-msgstr ""
+msgstr "模式"
 
 #: src/propedit/options.cpp:184
 #, boost-format
@@ -6947,12 +6945,12 @@ msgstr "而“输出”选项卡中的多数其他设置将会保留。"
 
 #: src/extract/extract_cli_parser.cpp:66
 msgid "Most options can only be used in certain modes with a few options applying to all modes."
-msgstr ""
+msgstr "大部分选项只能在特定模式下使用，只有少数选项可在所有模式下使用。"
 
 #: src/extract/extract_cli_parser.cpp:65
 #: src/extract/extract_cli_parser.cpp:137
 msgid "Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."
-msgstr ""
+msgstr "对 mkvextract 的同一次调用可以使用多种模式，这样可以只读取一遍就提取多种内容。"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:179
 #, no-c-format
@@ -8827,11 +8825,8 @@ msgid "Sets the lossless compression algorithm to be used for this track."
 msgstr "设置将使用在该轨道的无损压缩算法。"
 
 #: src/common/property_element.cpp:165
-#, fuzzy
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."
-msgstr ""
-"  --colour-matrix <TID:n>  设置视频从红绿蓝三原色衍生出\n"
-"                           亮度及色度值所用的矩阵系数。\n"
+msgstr "设置用于从红绿蓝颜色基准计算亮度信号（luma）与色度信号（chroma）的矩阵系数。"
 
 #: src/common/property_element.cpp:167
 msgid "Sets the number of coded bits for a colour channel."
@@ -9180,7 +9175,7 @@ msgstr "所有正在运行的任务结束后停止(&A)"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
 msgid "Store changes in CodecPrivate data in CodecState elements instead of the frames."
-msgstr ""
+msgstr "将 CodecPrivate 数据的变更存储在 CodecState 元素中，而非存储在帧中。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1684
 msgid "Stretch by:"
@@ -9313,7 +9308,7 @@ msgstr "此 .idx 文件不包含指明语言的 'id: ...' 行。\n"
 #: src/input/r_aac.cpp:78
 #, boost-format
 msgid "The AAC file '%1%' contains invalid header data: the sampling frequency or the number of channels is 0.\n"
-msgstr ""
+msgstr "AAC 文件「%1%」包含无效头部数据: 采样频率或声道数为 0。\n"
 
 #: src/output/p_aac.cpp:147
 #, boost-format
@@ -9672,7 +9667,7 @@ msgstr "当前封包的时间码比前一封包的小。这通常表明输入文
 
 #: src/common/kax_analyzer.cpp:175
 msgid "The data in the file is corrupted and cannot be modified safely"
-msgstr ""
+msgstr "文件中的数据已损坏，无法安全修改"
 
 #: src/common/property_element.cpp:110
 msgid "The date the file was created."
@@ -10044,7 +10039,7 @@ msgstr "您试图打开的文件 (%1) 既不是有效的 Matroska 文件，也�
 
 #: src/extract/extract_cli_parser.cpp:63
 msgid "The first argument must be the name of source file."
-msgstr ""
+msgstr "第一个参数必须为输入文件名称。"
 
 #: src/common/kax_file.cpp:52
 #, boost-format
@@ -10096,9 +10091,8 @@ msgid "The formats do not match."
 msgstr "格式不匹配。"
 
 #: src/extract/extract_cli_parser.cpp:104
-#, fuzzy
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
-msgstr "第四种模式用于提取章节，并将其转换为 XML。输出内容将写入标准输出。输出内容可以用作 mkvmerge 的输入文件。"
+msgstr "第四种模式用于提取章节，并将其转换为 XML，写入到输出文件中。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 #, no-c-format
@@ -10429,9 +10423,8 @@ msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "两条音频轨道的采样率不同: %1% 与 %2%"
 
 #: src/extract/extract_cli_parser.cpp:88
-#, fuzzy
 msgid "The second mode extracts the tags, converts them to XML and writes them to an output file."
-msgstr "第二种模式用于提取标签，并将其转换为 XML。输出内容将写入标准输出。输出内容可以用作 mkvmerge 的输入文件。"
+msgstr "第二种模式用于提取标签，并将其转换为 XML，写入到输出文件中。"
 
 #: src/input/r_tta.cpp:92
 msgid "The seek table in this TTA file seems to be broken.\n"
@@ -11704,107 +11697,98 @@ msgid "Video: chroma siting"
 msgstr "视频: 色度分布"
 
 #: src/common/property_element.cpp:186
-#, fuzzy
 msgid "Video: chromaticity blue X"
-msgstr "视频左边裁剪"
+msgstr "视频: 色度 蓝 X"
 
 #: src/common/property_element.cpp:187
-#, fuzzy
 msgid "Video: chromaticity blue Y"
-msgstr "视频左边裁剪"
+msgstr "视频: 色度 蓝 Y"
 
 #: src/common/property_element.cpp:184
 msgid "Video: chromaticity green X"
-msgstr ""
+msgstr "视频: 色度 绿 X"
 
 #: src/common/property_element.cpp:185
 msgid "Video: chromaticity green Y"
-msgstr ""
+msgstr "视频: 色度 绿 Y"
 
 #: src/common/property_element.cpp:182
 msgid "Video: chromaticity red X"
-msgstr ""
+msgstr "视频: 色度 红 X"
 
 #: src/common/property_element.cpp:183
 msgid "Video: chromaticity red Y"
-msgstr ""
+msgstr "视频: 色度 红 Y"
 
 #: src/common/property_element.cpp:165
-#, fuzzy
 msgid "Video: colour matrix coefficients"
-msgstr "视频颜色信息"
+msgstr "视频: 颜色矩阵系数"
 
 #: src/common/property_element.cpp:178
-#, fuzzy
 msgid "Video: colour primaries"
-msgstr "视频颜色信息"
+msgstr "视频: 颜色基准"
 
 #: src/common/property_element.cpp:176
-#, fuzzy
 msgid "Video: colour range"
-msgstr "视频颜色信息"
+msgstr "视频: 色域"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Video: maximum content light"
-msgstr "最高内容亮度: %1%"
+msgstr "视频: 最高内容亮度"
 
 #: src/common/property_element.cpp:180
-#, fuzzy
 msgid "Video: maximum frame light"
-msgstr "最高帧亮度: %1%"
+msgstr "视频: 最高帧亮度"
 
 #: src/common/property_element.cpp:190
 msgid "Video: maximum luminance"
-msgstr ""
+msgstr "视频: 最高亮度"
 
 #: src/common/property_element.cpp:191
 msgid "Video: minimum luminance"
-msgstr ""
+msgstr "视频: 最低亮度"
 
 #: src/common/property_element.cpp:170
 #: src/common/property_element.cpp:172
 msgid "Video: pixels to remove in Cb"
-msgstr ""
+msgstr "视频: Cb 通道要移除的像素"
 
 #: src/common/property_element.cpp:168
 #: src/common/property_element.cpp:169
-#, fuzzy
 msgid "Video: pixels to remove in chroma"
-msgstr "视频画面右边要移除的像素数。"
+msgstr "视频: 色度通道要移除的像素"
 
 #: src/common/property_element.cpp:195
-#, fuzzy
 msgid "Video: projection type"
-msgstr "视频宽高比类型"
+msgstr "视频: 投影类型"
 
 #: src/common/property_element.cpp:198
 msgid "Video: projection's pitch rotation"
-msgstr ""
+msgstr "视频: 投影 pitch 轴旋转（左右轴不动）"
 
 #: src/common/property_element.cpp:199
 msgid "Video: projection's roll rotation"
-msgstr ""
+msgstr "视频: 投影 roll 轴旋转（前后轴不动）"
 
 #: src/common/property_element.cpp:197
 msgid "Video: projection's yaw rotation"
-msgstr ""
+msgstr "视频: 投影 yaw 轴旋转（上下轴不动）"
 
 #: src/common/property_element.cpp:196
 msgid "Video: projection-specific data"
-msgstr ""
+msgstr "视频: 投影特定数据"
 
 #: src/common/property_element.cpp:177
 msgid "Video: transfer characteristics"
-msgstr ""
+msgstr "视频: 传输特征"
 
 #: src/common/property_element.cpp:188
 msgid "Video: white point X"
-msgstr ""
+msgstr "视频: 白点 X"
 
 #: src/common/property_element.cpp:189
 msgid "Video: white point Y"
-msgstr ""
+msgstr "视频: 白点 Y"
 
 #: src/common/file_types.cpp:102
 #: src/output/p_vobbtn.h:35
@@ -12223,9 +12207,8 @@ msgid "anaglyph (green/magenta)"
 msgstr "浮雕式 (绿/品红)"
 
 #: src/extract/extract_cli_parser.cpp:52
-#, fuzzy
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
-msgstr "mkvextract attachments <输入文件名> [选项] [AID1:输出1 [AID2:输出2 ...]]"
+msgstr "attachments [选项] [AID1:输出1 [AID2:输出2 ...]]"
 
 #: src/info/mkvinfo.cpp:1065
 #: src/input/r_matroska.cpp:110
@@ -12265,7 +12248,7 @@ msgstr "声道数: %1%"
 
 #: src/extract/extract_cli_parser.cpp:53
 msgid "chapters [options] out.xml"
-msgstr ""
+msgstr "chapters [选项] 输出.xml"
 
 #: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
@@ -12297,13 +12280,12 @@ msgid "cubemap"
 msgstr "立方面（cubemap）"
 
 #: src/extract/extract_cli_parser.cpp:56
-#, fuzzy
 msgid "cues [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract cues <输入文件名> [选项] [TID1:输出1 [TID2:输出2 ...]]"
+msgstr "cues [选项] [TID1:输出1 [TID2:输出2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:54
 msgid "cuesheet [options] out.cue"
-msgstr ""
+msgstr "cuesheet [选项] 输出.cue"
 
 #: src/info/mkvinfo.cpp:1023
 #, boost-format
@@ -12588,53 +12570,44 @@ msgid "mkvInfo"
 msgstr "mkvInfo"
 
 #: src/extract/extract_cli_parser.cpp:101
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" attachments 4:cover.jpg"
-msgstr "mkvextract attachments \"一部影片.mkv\" 4:封面.jpg"
+msgstr "mkvextract \"一部影片.mkv\" attachments 4:封面.jpg"
 
 #: src/extract/extract_cli_parser.cpp:110
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" chapters movie_chapters.xml"
-msgstr "mkvextract chapters \"一部影片.mkv\" > 影片章节.xml"
+msgstr "mkvextract \"一部影片.mkv\" chapters 影片章节.xml"
 
 #: src/extract/extract_cli_parser.cpp:134
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"
-msgstr "mkvextract cues \"一部影片.mkv\" 0:索引_轨道0.txt"
+msgstr "mkvextract \"一部影片.mkv\" cues 0:cues_轨道0.txt"
 
 #: src/extract/extract_cli_parser.cpp:92
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tags movie_tags.xml"
-msgstr "mkvextract tags \"一部影片.mkv\" > 影片标签.xml"
+msgstr "mkvextract \"一部影片.mkv\" tags 影片标签.xml"
 
 #: src/extract/extract_cli_parser.cpp:127
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
-msgstr "mkvextract timestamps_v2 \"一部影片.mkv\" 1:时间码_轨道1.txt"
+msgstr "mkvextract \"一部影片.mkv\" timestamps_v2 1:时间戳_轨道1.txt"
 
 #: src/extract/extract_cli_parser.cpp:141
 msgid "mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"
-msgstr ""
+msgstr "mkvextract \"一部影片.mkv\" tracks 0:视频.h264 1:音频.aac timestamps_v2 0:时间戳.视频.txt chapters 章节.xml tags 标签.xml"
 
 #: src/extract/extract_cli_parser.cpp:84
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:subs.srt"
-msgstr "mkvextract tracks \"一部影片.mkv\" 2:音频.ogg -c ISO8859-1 3:字幕.srt"
+msgstr "mkvextract \"一部影片.mkv\" tracks 2:音频.ogg -c ISO8859-1 3:字幕.srt"
 
 #: src/extract/extract_cli_parser.cpp:119
-#, fuzzy
 msgid "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
-msgstr "mkvextract cuesheet \"音频文件.mka\" > 音频文件.cue"
+msgstr "mkvextract \"音频文件.mka\" cuesheet 音频文件.cue"
 
 #: src/extract/extract_cli_parser.cpp:59
-#, fuzzy
 msgid "mkvextract <-h|--help|-V|--version>"
-msgstr "mkvextract <-h|-V>"
+msgstr "mkvextract <-h|--help|-V|--version>"
 
 #: src/extract/extract_cli_parser.cpp:47
-#, fuzzy
 msgid "mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"
-msgstr "mkvextract <模式> <输入文件名> [选项] <选择轨道与输出文件>"
+msgstr "mkvextract <source-filename> <mode1> [选项] <extraction-spec1> [<mode2> [选项] <extraction-spec2>…]"
 
 #: src/extract/mkvextract.cpp:94
 #, boost-format
@@ -12891,7 +12864,7 @@ msgstr "字幕"
 
 #: src/extract/extract_cli_parser.cpp:51
 msgid "tags [options] out.xml"
-msgstr ""
+msgstr "tags [选项] 输出.xml"
 
 #: src/output/p_textsubs.h:38
 msgid "text subtitles"
@@ -12902,9 +12875,8 @@ msgid "timestamps"
 msgstr "时间码"
 
 #: src/extract/extract_cli_parser.cpp:55
-#, fuzzy
 msgid "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract timestamps_v2 <输入文件名> [TID1:输出1 [TID2:输入2 ...]]"
+msgstr "timestamps_v2 [TID1:输出1 [TID2:输出2 ...]]"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
@@ -12927,9 +12899,8 @@ msgid "track name"
 msgstr "轨道名称"
 
 #: src/extract/extract_cli_parser.cpp:50
-#, fuzzy
 msgid "tracks [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract tracks <输入文件名> [选项] [TID1:输出1 [TID2:输出2 ...]]"
+msgstr "tracks [选项] [TID1:输出1 [TID2:输出2 ...]]"
 
 #: src/input/r_tta.cpp:64
 #, boost-format
