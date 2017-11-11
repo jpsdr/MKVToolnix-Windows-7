@@ -308,7 +308,7 @@ set_usage() {
                   "                           Maximum luminance in candelas per square meter\n"
                   "                           (cd/m²).\n");
   usage_text += Y("  --min-luminance <TID:float>\n"
-                  "                           Mininum luminance in candelas per square meter\n"
+                  "                           Minimum luminance in candelas per square meter\n"
                   "                           (cd/m²).\n");
   usage_text += Y("  --projection-type <TID:method>\n"
                   "                           Projection method used (0–3).\n");
