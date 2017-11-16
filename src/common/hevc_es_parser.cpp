@@ -77,26 +77,31 @@ es_parser_c::es_parser_c()
   , m_debug_timestamps(        debugging_c::requested("hevc_parser|hevc_timestamps"))
   , m_debug_sps_info(          debugging_c::requested("hevc_parser|hevc_sps|hevc_sps_info"))
 {
+  if (debugging_c::requested("hevc_statistics"))
+    init_nalu_names();
 }
 
 es_parser_c::~es_parser_c() {
-  mxdebug_if(debugging_c::requested("hevc_statistics"),
-             boost::format("HEVC statistics: #frames: out %1% discarded %2% #timestamps: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7%\n")
-             % m_stats.num_frames_out % m_stats.num_frames_discarded % m_stats.num_timestamps_in % m_stats.num_timestamps_generated % m_stats.num_timestamps_discarded
-             % m_stats.num_field_slices % m_stats.num_frame_slices);
-
   mxdebug_if(m_debug_timestamps, boost::format("stream_position %1% parsed_position %2%\n") % m_stream_position % m_parsed_position);
 
-  if (!debugging_c::requested("hevc_num_slices_by_type"))
+  if (!debugging_c::requested("hevc_statistics"))
     return;
+
+  mxdebug(boost::format("HEVC statistics: #frames: out %1% discarded %2% #timestamps: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7%\n")
+          % m_stats.num_frames_out % m_stats.num_frames_discarded % m_stats.num_timestamps_in % m_stats.num_timestamps_generated % m_stats.num_timestamps_discarded
+          % m_stats.num_field_slices % m_stats.num_frame_slices);
 
   static const char *s_type_names[] = {
     "B",  "P",  "I", "unknown"
   };
 
-  int i;
+  mxdebug("hevc: Number of NALUs by type:\n");
+  for (int i = 0, size = m_stats.num_nalus_by_type.size(); i < size; ++i)
+    if (0 != m_stats.num_nalus_by_type[i])
+      mxdebug(boost::format("  %1%: %2%\n") % get_nalu_type_name(i) % m_stats.num_nalus_by_type[i]);
+
   mxdebug("hevc: Number of slices by type:\n");
-  for (i = 0; 2 >= i; ++i)
+  for (int i = 0; 2 >= i; ++i)
     if (0 != m_stats.num_slices_by_type[i])
       mxdebug(boost::format("  %1%: %2%\n") % s_type_names[i] % m_stats.num_slices_by_type[i]);
 }
@@ -450,6 +455,8 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
   int type = (*(nalu->get_buffer()) >> 1) & 0x3F;
 
   mxdebug_if(m_debug_nalu_types, boost::format("NALU type 0x%|1$02x| (%2%) size %3%\n") % type % get_nalu_type_name(type) % nalu->get_size());
+
+  ++m_stats.num_nalus_by_type[std::min(type, 63)];
 
   switch (type) {
     case HEVC_NALU_TYPE_VIDEO_PARAM:

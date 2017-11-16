@@ -109,11 +109,12 @@ protected:
   static std::unordered_map<int, std::string> ms_nalu_names_by_type;
 
   struct stats_t {
-    std::vector<int> num_slices_by_type;
+    std::vector<int> num_slices_by_type, num_nalus_by_type;
     size_t num_frames_out, num_frames_discarded, num_timestamps_in, num_timestamps_generated, num_timestamps_discarded, num_field_slices, num_frame_slices;
 
     stats_t()
       : num_slices_by_type(3, 0)
+      , num_nalus_by_type(64, 0)
       , num_frames_out{}
       , num_frames_discarded{}
       , num_timestamps_in{}
