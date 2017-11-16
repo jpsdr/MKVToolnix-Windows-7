@@ -115,6 +115,8 @@ def setup_globals
   $unwrapped_po            = %{ca es eu it nl uk pl sr_RS@latin tr}
   $po_multiple_sources     = %{sv}
 
+  $benchmark_sources       = FileList["src/benchmark/*.cpp"].to_a if c?(:GOOGLE_BENCHMARK)
+
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
   cflags_common           += " #{c(:WNO_INCONSISTENT_MISSING_OVERRIDE)} #{c(:WNO_POTENTIALLY_EVALUATED_EXPRESSION)}"
   cflags_common           += " #{c(:OPTIMIZATION_CFLAGS)} -D_FILE_OFFSET_BITS=64"
@@ -210,6 +212,8 @@ def define_default_task
   # Build ebml_validator by default when not cross-compiling as it is
   # needed for running the tests.
   targets << "apps:tools:ebml_validator" if c(:host) == c(:build)
+
+  targets << "src/benchmark/benchmark" if c?(:GOOGLE_BENCHMARK) && !$benchmark_sources.empty?
 
   task :default => targets do
     puts "Done. Enjoy :)"
@@ -843,6 +847,7 @@ task :clean do
     src/*/qt_resources.cpp
     src/info/ui/*.h
     src/mkvtoolnix-gui/forms/**/*.h
+    src/benchmark/benchmark
     tests/unit/all
     tests/unit/merge/merge
     tests/unit/propedit/propedit
@@ -1054,6 +1059,19 @@ if $build_mkvtoolnix_gui
     libraries($common_libs, :qt).
     libraries("-mwindows", :powrprof, :if => $building_for[:windows]).
     libraries($custom_libs).
+    create
+end
+
+#
+# benchmark
+#
+
+if c?(:GOOGLE_BENCHMARK) && !$benchmark_sources.empty?
+  Application.new("src/benchmark/benchmark").
+    description("Build the benchmark executable").
+    aliases(:benchmark, :bench).
+    sources($benchmark_sources).
+    libraries($common_libs, :benchmark).
     create
 end
 
