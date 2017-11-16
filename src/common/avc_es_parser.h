@@ -106,14 +106,15 @@ protected:
   bool m_ignore_nalu_size_length_errors, m_discard_actual_frames, m_simple_picture_order, m_first_cleanup, m_all_i_slices_are_key_frames;
 
   debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamps, m_debug_sps_info, m_debug_sps_pps_changes;
-  std::map<int, std::string> m_nalu_names_by_type;
+  static std::map<int, std::string> ms_nalu_names_by_type;
 
   struct stats_t {
-    std::vector<int> num_slices_by_type;
+    std::vector<int> num_slices_by_type, num_nalus_by_type;
     size_t num_frames_out{}, num_frames_discarded{}, num_timestamps_in{}, num_timestamps_generated{}, num_timestamps_discarded{}, num_field_slices{}, num_frame_slices{}, num_sei_nalus{}, num_idr_slices{};
 
     stats_t()
       : num_slices_by_type(11, 0)
+      , num_nalus_by_type(13, 0)
     {
     }
   } m_stats;
@@ -213,7 +214,7 @@ public:
 
   void dump_info() const;
 
-  std::string get_nalu_type_name(int type) const;
+  std::string get_nalu_type_name(int type);
 
   bool has_stream_default_duration() const {
     return -1 != m_stream_default_duration;

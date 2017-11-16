@@ -29,6 +29,8 @@
 
 namespace mtx { namespace avc {
 
+std::map<int, std::string> es_parser_c::ms_nalu_names_by_type;
+
 es_parser_c::es_parser_c()
   : m_nalu_size_length(4)
   , m_keep_ar_info(true)
@@ -60,32 +62,35 @@ es_parser_c::es_parser_c()
   , m_debug_sps_info{          "avc_parser|avc_sps|avc_sps_info"}
   , m_debug_sps_pps_changes{   "avc_parser|avc_sps_pps_changes"}
 {
-  if (m_debug_nalu_types)
+  if (m_debug_nalu_types || debugging_c::requested("avc_statistics"))
     init_nalu_names();
 }
 
 es_parser_c::~es_parser_c() {
-  mxdebug_if(debugging_c::requested("avc_statistics"),
-             boost::format("AVC statistics: #frames: out %1% discarded %2% #timestamps: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7% num_sei_nalus: %8% num_idr_slices: %9%\n")
-             % m_stats.num_frames_out   % m_stats.num_frames_discarded % m_stats.num_timestamps_in % m_stats.num_timestamps_generated % m_stats.num_timestamps_discarded
-             % m_stats.num_field_slices % m_stats.num_frame_slices     % m_stats.num_sei_nalus    % m_stats.num_idr_slices);
-
   mxdebug_if(m_debug_timestamps, boost::format("stream_position %1% parsed_position %2%\n") % m_stream_position % m_parsed_position);
 
-  if (!debugging_c::requested("avc_num_slices_by_type"))
+  if (!debugging_c::requested("avc_statistics"))
     return;
 
-  static const char *s_type_names[] = {
+  mxdebug(boost::format("AVC statistics: #frames: out %1% discarded %2% #timestamps: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7% num_sei_nalus: %8% num_idr_slices: %9%\n")
+          % m_stats.num_frames_out   % m_stats.num_frames_discarded % m_stats.num_timestamps_in % m_stats.num_timestamps_generated % m_stats.num_timestamps_discarded
+          % m_stats.num_field_slices % m_stats.num_frame_slices     % m_stats.num_sei_nalus     % m_stats.num_idr_slices);
+
+  static const char *s_slice_type_names[] = {
     "P",  "B",  "I",  "SP",  "SI",
     "P2", "B2", "I2", "SP2", "SI2",
     "unknown"
   };
 
-  int i;
+  mxdebug("mpeg4::p10: Number of NALUs by type:\n");
+  for (int i = 0, size = m_stats.num_nalus_by_type.size(); i < size; ++i)
+    if (0 != m_stats.num_nalus_by_type[i])
+      mxdebug(boost::format("  %1%: %2%\n") % get_nalu_type_name(i + 1) % m_stats.num_nalus_by_type[i]);
+
   mxdebug("mpeg4::p10: Number of slices by type:\n");
-  for (i = 0; 10 >= i; ++i)
+  for (int i = 0, size = m_stats.num_slices_by_type.size(); i < size; ++i)
     if (0 != m_stats.num_slices_by_type[i])
-      mxdebug(boost::format("  %1%: %2%\n") % s_type_names[i] % m_stats.num_slices_by_type[i]);
+      mxdebug(boost::format("  %1%: %2%\n") % s_slice_type_names[i] % m_stats.num_slices_by_type[i]);
 }
 
 bool
@@ -480,6 +485,8 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
   int type = *(nalu->get_buffer()) & 0x1f;
 
   mxdebug_if(m_debug_nalu_types, boost::format("NALU type 0x%|1$02x| (%2%) at %3% size %4%\n") % type % get_nalu_type_name(type) % nalu_pos % nalu->get_size());
+
+  ++m_stats.num_nalus_by_type[std::max(std::min(type, 13), 1) - 1];
 
   switch (type) {
     case NALU_TYPE_SEQ_PARAM:
@@ -964,26 +971,30 @@ es_parser_c::dump_info()
 }
 
 std::string
-es_parser_c::get_nalu_type_name(int type)
-  const {
-  auto name = m_nalu_names_by_type.find(type);
-  return (m_nalu_names_by_type.end() == name) ? "unknown" : name->second;
+es_parser_c::get_nalu_type_name(int type) {
+  init_nalu_names();
+
+  auto name = ms_nalu_names_by_type.find(type);
+  return (ms_nalu_names_by_type.end() == name) ? "unknown" : name->second;
 }
 
 void
 es_parser_c::init_nalu_names() {
-  m_nalu_names_by_type[NALU_TYPE_NON_IDR_SLICE] = "non IDR slice";
-  m_nalu_names_by_type[NALU_TYPE_DP_A_SLICE]    = "DP A slice";
-  m_nalu_names_by_type[NALU_TYPE_DP_B_SLICE]    = "DP B slice";
-  m_nalu_names_by_type[NALU_TYPE_DP_C_SLICE]    = "DP C slice";
-  m_nalu_names_by_type[NALU_TYPE_IDR_SLICE]     = "IDR slice";
-  m_nalu_names_by_type[NALU_TYPE_SEI]           = "SEI";
-  m_nalu_names_by_type[NALU_TYPE_SEQ_PARAM]     = "SEQ param";
-  m_nalu_names_by_type[NALU_TYPE_PIC_PARAM]     = "PIC param";
-  m_nalu_names_by_type[NALU_TYPE_ACCESS_UNIT]   = "access unit";
-  m_nalu_names_by_type[NALU_TYPE_END_OF_SEQ]    = "end of sequence";
-  m_nalu_names_by_type[NALU_TYPE_END_OF_STREAM] = "end of stream";
-  m_nalu_names_by_type[NALU_TYPE_FILLER_DATA]   = "filler";
+  if (!ms_nalu_names_by_type.empty())
+    return;
+
+  ms_nalu_names_by_type[NALU_TYPE_NON_IDR_SLICE] = "non IDR slice";
+  ms_nalu_names_by_type[NALU_TYPE_DP_A_SLICE]    = "DP A slice";
+  ms_nalu_names_by_type[NALU_TYPE_DP_B_SLICE]    = "DP B slice";
+  ms_nalu_names_by_type[NALU_TYPE_DP_C_SLICE]    = "DP C slice";
+  ms_nalu_names_by_type[NALU_TYPE_IDR_SLICE]     = "IDR slice";
+  ms_nalu_names_by_type[NALU_TYPE_SEI]           = "SEI";
+  ms_nalu_names_by_type[NALU_TYPE_SEQ_PARAM]     = "SEQ param";
+  ms_nalu_names_by_type[NALU_TYPE_PIC_PARAM]     = "PIC param";
+  ms_nalu_names_by_type[NALU_TYPE_ACCESS_UNIT]   = "access unit";
+  ms_nalu_names_by_type[NALU_TYPE_END_OF_SEQ]    = "end of sequence";
+  ms_nalu_names_by_type[NALU_TYPE_END_OF_STREAM] = "end of stream";
+  ms_nalu_names_by_type[NALU_TYPE_FILLER_DATA]   = "filler";
 }
 
 }}
