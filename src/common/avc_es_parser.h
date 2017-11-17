@@ -238,7 +238,7 @@ public:
   std::pair<int64_t, int64_t> const get_display_dimensions(int width = -1, int height = -1) const;
 
 protected:
-  bool parse_slice(memory_cptr const &buffer, slice_info_t &si);
+  bool parse_slice(memory_cptr const &nalu, slice_info_t &si);
   void handle_sps_nalu(memory_cptr const &nalu);
   void handle_pps_nalu(memory_cptr const &nalu);
   void handle_sei_nalu(memory_cptr const &nalu);
