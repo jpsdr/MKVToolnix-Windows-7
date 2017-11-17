@@ -17,6 +17,10 @@
   longer restrict optimization flags to `-O1` and use `-O3` again (older
   versions of clang suffered from excessive memory usage with higher
   optimization levels).
+* build system: when building with mingw 7.2.0 or newer, `configure` will no
+  longer restrict optimization flags to `-O2` and use `-O3` again (older
+  versions of mingw suffered from bugs such as segmentation faults with higher
+  optimization levels).
 
 ## Bug fixes
 

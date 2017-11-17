@@ -38,9 +38,9 @@ if test x"$enable_optimization" = xyes; then
     opt_features_no="$opt_features_no\n   * full optimization: due to bug 11962 in LLVM/clang only -O1 will be used for optimization"
     OPTIMIZATION_CFLAGS="-O1"
 
-  elif test "x$ac_cv_mingw32" = "xyes" -a "x$MINGW_PROCESSOR_ARCH" = "xx86" && check_version 5.1.0 $ac_cv_compiler_version; then
+  elif test "x$ac_cv_mingw32" = "xyes" -a "x$MINGW_PROCESSOR_ARCH" = "xx86" && check_version 5.1.0 $ac_cv_compiler_version && ! check_version 7.2.0 $ac_cv_compiler_version; then
     OPTIMIZATION_CFLAGS="-O2 -fno-ipa-icf"
-    opt_features_no="$opt_features_no\n   * full optimization: due to an issue in mingw g++ full optimization cannot be used"
+    opt_features_no="$opt_features_no\n   * full optimization: due to an issue in mingw g++ >= 5.1.0 and < 7.2.0 full optimization cannot be used"
 
   else
     OPTIMIZATION_CFLAGS="-O3"
