@@ -25,10 +25,10 @@ else
   WNO_MAYBE_UNINITIALIZED="-Wno-maybe-uninitialized"
   FSTACK_PROTECTOR="-fstack-protector"
 
-  if check_version 4.9.0 $ac_cv_gcc_version ; then
+  if check_version 4.9.0 $ac_cv_compiler_version ; then
     FSTACK_PROTECTOR="-fstack-protector-strong"
 
-  elif check_version 4.8.0 $ac_cv_gcc_version ; then
+  elif check_version 4.8.0 $ac_cv_compiler_version ; then
     WLOGICAL_OP="-Wlogical-op"
   fi
 fi
