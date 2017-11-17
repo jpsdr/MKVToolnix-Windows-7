@@ -1287,7 +1287,7 @@ handle_block_group(EbmlStream *&es,
                    % (static_cast<double>(lf_timestamp) / 1000000000.0)
                    % format_timestamp(lf_timestamp, 3));
 
-      for (size_t i = 0; i < block.NumberFrames(); ++i) {
+      for (int i = 0, num_frames = block.NumberFrames(); i < num_frames; ++i) {
         auto &data = block.GetBuffer(i);
         auto adler = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, data.Buffer(), data.Size());
 

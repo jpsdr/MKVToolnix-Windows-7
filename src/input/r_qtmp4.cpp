@@ -2117,7 +2117,7 @@ qtmp4_demuxer_c::calculate_timestamps_variable_sample_size() {
 
     frame_indices.push_back(frame);
     timestamps_before_offsets.push_back(timestamp);
-    timestamps.push_back(timestamp + (frame < num_frame_offsets ? to_nsecs(frame_offset_table[frame]) : 0));
+    timestamps.push_back(timestamp + (static_cast<unsigned int>(frame) < num_frame_offsets ? to_nsecs(frame_offset_table[frame]) : 0));
   }
 
   int64_t avg_duration = 0, num_good_frames = 0;
@@ -2455,7 +2455,7 @@ qtmp4_demuxer_c::build_index_constant_sample_size_mode() {
 
 void
 qtmp4_demuxer_c::build_index_chunk_mode() {
-  for (std::size_t frame_idx = 0, num_frames = frame_indices.size(); frame_idx < num_frames; ++frame_idx) {
+  for (int frame_idx = 0, num_frames = frame_indices.size(); frame_idx < num_frames; ++frame_idx) {
     auto act_frame_idx = frame_indices[frame_idx];
     auto &sample       = sample_table[act_frame_idx];
 
@@ -2486,13 +2486,13 @@ qtmp4_demuxer_c::mark_open_gop_random_access_points_as_key_frames() {
   if (table_itr == sample_to_group_tables.end())
     return;
 
-  auto const num_index_entries        = m_index.size();
+  int const num_index_entries         = m_index.size();
   auto const num_random_access_points = random_access_point_table.size();
-  auto current_sample                 = 0u;
+  auto current_sample                 = 0;
 
   for (auto const &s2g : table_itr->second) {
     if (s2g.group_description_index && ((s2g.group_description_index - 1) < num_random_access_points)) {
-      for (auto end = std::min<size_t>(current_sample + s2g.sample_count, num_index_entries); current_sample < end; ++current_sample)
+      for (auto end = std::min<int>(current_sample + s2g.sample_count, num_index_entries); current_sample < end; ++current_sample)
         m_index[current_sample].is_keyframe = true;
 
     } else

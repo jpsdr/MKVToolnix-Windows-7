@@ -26,7 +26,7 @@ swap_buffer(unsigned char const *src,
   if ((num_bytes % word_length) != 0)
     throw std::invalid_argument((boost::format(Y("The number of bytes to swap isn't divisible by %1%.")) % word_length).str());
 
-  for (std::size_t idx = 0; idx < num_bytes; idx += word_length)
+  for (int idx = 0; idx < static_cast<int>(num_bytes); idx += word_length)
     put_uint_le(&dst[idx], get_uint_be(&src[idx], word_length), word_length);
 }
 

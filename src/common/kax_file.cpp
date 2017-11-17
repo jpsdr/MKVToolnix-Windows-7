@@ -172,7 +172,7 @@ kax_file_c::read_one_element() {
 bool
 kax_file_c::is_level1_element_id(vint_c id) const {
   auto &context = EBML_CLASS_CONTEXT(KaxSegment);
-  for (size_t segment_idx = 0, end = EBML_CTX_SIZE(context); end > segment_idx; ++segment_idx)
+  for (int segment_idx = 0, end = EBML_CTX_SIZE(context); end > segment_idx; ++segment_idx)
     if (EBML_ID_VALUE(EBML_CTX_IDX_ID(context,segment_idx)) == id.m_value)
       return true;
 
@@ -315,7 +315,7 @@ kax_file_c::get_element_size(EbmlElement *e) {
     return e->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*e)) + e->GetSize();
 
   auto max_end_pos = e->GetElementPosition() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*e));
-  for (size_t idx = 0, end = m->ListSize(); end > idx; ++idx)
+  for (int idx = 0, end = m->ListSize(); end > idx; ++idx)
     max_end_pos = std::max(max_end_pos, (*m)[idx]->GetElementPosition() + get_element_size((*m)[idx]));
 
   return max_end_pos - e->GetElementPosition();

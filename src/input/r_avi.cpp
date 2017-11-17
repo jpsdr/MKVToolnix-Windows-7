@@ -636,7 +636,7 @@ void
 avi_reader_c::set_avc_nal_size_size(avc_es_video_packetizer_c *ptzr) {
   m_avc_nal_size_size = ptzr->get_nalu_size_length();
 
-  for (size_t i = 0; i < m_max_video_frames; ++i) {
+  for (int i = 0; i < static_cast<int>(m_max_video_frames); ++i) {
     int size = AVI_frame_size(m_avi, i);
     if (0 == size)
       continue;

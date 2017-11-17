@@ -1010,12 +1010,12 @@ reader_c::detect_packet_size(mm_io_c *in,
     size = in->read(mem, size);
 
     std::vector<int> positions;
-    for (size_t i = 0; i < size; ++i)
+    for (int i = 0; i < static_cast<int>(size); ++i)
       if (0x47 == mem[i])
         positions.push_back(i);
 
-    for (size_t i = 0; positions.size() > i; ++i) {
-      for (size_t k = 0; 0 != potential_packet_sizes[k]; ++k) {
+    for (int i = 0, num_positions = positions.size(); i < num_positions; ++i) {
+      for (int k = 0; 0 != potential_packet_sizes[k]; ++k) {
         unsigned int pos            = positions[i];
         unsigned int packet_size    = potential_packet_sizes[k];
         unsigned int num_startcodes = 1;
@@ -1163,12 +1163,12 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
 void
 reader_c::read_headers() {
-  for (std::size_t idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
+  for (int idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
     read_headers_for_file(idx);
 
   m_tracks = std::move(m_all_probed_tracks);
 
-  for (std::size_t idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
+  for (int idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
     parse_clip_info_file(idx);
 
   process_chapter_entries();
@@ -2298,7 +2298,7 @@ reader_c::create_packetizers() {
   determine_global_timestamp_offset();
 
   mxdebug_if(m_debug_headers, boost::format("create_packetizers: create packetizers...\n"));
-  for (std::size_t i = 0u, end = m_tracks.size(); i < end; ++i)
+  for (int i = 0, end = m_tracks.size(); i < end; ++i)
     create_packetizer(i);
 }
 

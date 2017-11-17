@@ -374,7 +374,7 @@ boost::optional<std::size_t>
 wav_reader_c::find_chunk(const char *id,
                          int start_idx,
                          bool allow_empty) {
-  for (std::size_t idx = start_idx, end = m_chunks.size(); idx < end; ++idx)
+  for (int idx = start_idx, end = m_chunks.size(); idx < end; ++idx)
     if (!strncasecmp(reinterpret_cast<char *>(m_chunks[idx].id->get_buffer()), id, 4) && (allow_empty || m_chunks[idx].len))
       return idx;
 

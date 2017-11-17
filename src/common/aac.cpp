@@ -774,7 +774,7 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
                                   size_t num_required_frames) {
   static auto s_debug = debugging_option_c{"aac_consecutive_frames"};
 
-  for (size_t base = 0; (base + 8) < buffer_size; ++base) {
+  for (int base = 0; (base + 8) < static_cast<int>(buffer_size); ++base) {
     mxdebug_if(s_debug, boost::format("Starting search for %2% headers with base %1%, buffer size %3%\n") % base % num_required_frames % buffer_size);
 
     auto value = get_uint24_be(&buffer[base]);

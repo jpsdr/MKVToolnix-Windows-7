@@ -1965,7 +1965,7 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
         names << (kLanguage ? Q(*kLanguage) : Q("eng"));
       }
 
-    for (std::size_t row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
+    for (int row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
       collector(currentItem->child(row));
   };
 
@@ -1999,7 +1999,7 @@ Tab::usedNameCountryCodes(QStandardItem *rootItem) {
           countryCodes << Q(*kCountry);
       }
 
-    for (std::size_t row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
+    for (int row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
       collector(currentItem->child(row));
   };
 
@@ -2048,7 +2048,7 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
       atomList.append(data);
     }
 
-    for (std::size_t row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
+    for (int row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
       collector(currentItem->child(row), chapter.get(), level + 1);
   };
 
@@ -2061,7 +2061,7 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
     auto &sortedData        = atomsByParent[parentAtom.get()];
     auto parentEndTimestamp = parentData ? parentData->calculatedEnd : d->fileEndTimestamp;
 
-    for (std::size_t row = 0, numRows = parentItem->rowCount(); row < numRows; ++row) {
+    for (int row = 0, numRows = parentItem->rowCount(); row < numRows; ++row) {
       auto atom = d->chapterModel->chapterFromItem(parentItem->child(row));
       auto data = allAtoms[atom.get()];
 
@@ -2072,7 +2072,7 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
       data->calculatedEnd = itr == sortedData.end() ? parentEndTimestamp : (*itr)->start;
     }
 
-    for (std::size_t row = 0, numRows = parentItem->rowCount(); row < numRows; ++row)
+    for (int row = 0, numRows = parentItem->rowCount(); row < numRows; ++row)
       calculator(parentItem->child(row));
   };
 

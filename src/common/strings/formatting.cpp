@@ -111,7 +111,7 @@ std::string
 to_string(double value,
           unsigned int precision) {
   int64_t scale = 1;
-  for (size_t i = 0; i < precision; ++i)
+  for (int i = 0; i < static_cast<int>(precision); ++i)
     scale *= 10;
 
   return to_string(static_cast<int64_t>(value * scale), scale, precision);
@@ -294,7 +294,7 @@ to_hex(const unsigned char *buf,
   static boost::format s_bf_to_hex_compact("%|1$02x|");
 
   std::string hex;
-  for (size_t idx = 0; idx < size; ++idx)
+  for (int idx = 0; idx < static_cast<int>(size); ++idx)
     hex += (compact || hex.empty() ? std::string{""} : std::string{" "}) + ((compact ? s_bf_to_hex_compact : s_bf_to_hex) % static_cast<unsigned int>(buf[idx])).str();
 
   return hex;

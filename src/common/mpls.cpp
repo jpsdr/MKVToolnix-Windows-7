@@ -447,7 +447,7 @@ void
 parser_c::parse_chapters() {
   m_bc->set_bit_position(m_header.chapter_pos * 8);
   m_bc->skip_bits(32);          // unknown
-  size_t num_chapters = m_bc->get_bits(16);
+  int num_chapters = m_bc->get_bits(16);
 
   // 0 unknown
   // 1 type
@@ -455,7 +455,7 @@ parser_c::parse_chapters() {
   // 4, 5, 6, 7 chapter_time
   // 8 - 13 unknown
 
-  for (size_t idx = 0u; idx < num_chapters; ++idx) {
+  for (int idx = 0u; idx < num_chapters; ++idx) {
     m_bc->set_bit_position((m_header.chapter_pos + 4 + 2 + idx * 14) * 8);
     m_bc->skip_bits(8);         // unknown
     if (1 != m_bc->get_bits(8)) // chapter type: entry mark

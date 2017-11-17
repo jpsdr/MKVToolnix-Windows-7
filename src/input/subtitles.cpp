@@ -564,9 +564,9 @@ ssa_parser_c::decode_chars(unsigned char const *in,
   size_t bytes_out = 4 == bytes_in ? 3 : 3 == bytes_in ? 2 : 1;
   uint32_t value   = 0;
 
-  for (size_t idx = 0; idx < bytes_in; ++idx)
+  for (int idx = 0; idx < static_cast<int>(bytes_in); ++idx)
     value |= (static_cast<uint32_t>(in[idx]) - 33) << (6 * (3 - idx));
 
-  for (size_t idx = 0; idx < bytes_out; ++idx)
+  for (int idx = 0; idx < static_cast<int>(bytes_out); ++idx)
     out[idx] = (value >> ((2 - idx) * 8)) & 0xff;
 }

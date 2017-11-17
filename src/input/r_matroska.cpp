@@ -2158,7 +2158,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
           if (!block_track || (0 == block_simple->NumberFrames()))
             continue;
 
-          for (size_t frame_idx = 0; block_simple->NumberFrames() > frame_idx; ++frame_idx) {
+          for (int frame_idx = 0, num_frames = block_simple->NumberFrames(); frame_idx < num_frames; ++frame_idx) {
             frames_by_track_id[ block_simple->TrackNum() ]++;
 
             if (frames_by_track_id[ block_simple->TrackNum() ] <= block_track->first_frames_data.size())
@@ -2183,7 +2183,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
           if (!block_track || (0 == block->NumberFrames()))
             continue;
 
-          for (size_t frame_idx = 0; block->NumberFrames() > frame_idx; ++frame_idx) {
+          for (int frame_idx = 0, num_frames = block->NumberFrames(); frame_idx < num_frames; ++frame_idx) {
             frames_by_track_id[ block->TrackNum() ]++;
 
             if (frames_by_track_id[ block->TrackNum() ] <= block_track->first_frames_data.size())

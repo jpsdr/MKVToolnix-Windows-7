@@ -82,9 +82,9 @@ int
 version_number_t::compare(const version_number_t &cmp)
   const
 {
-  for (std::size_t idx = 0, num_parts = std::max(parts.size(), cmp.parts.size()); idx < num_parts; ++idx) {
-    auto this_num = idx < parts.size()     ? parts[idx]     : 0;
-    auto cmp_num  = idx < cmp.parts.size() ? cmp.parts[idx] : 0;
+  for (int idx = 0, num_parts = std::max(parts.size(), cmp.parts.size()); idx < num_parts; ++idx) {
+    auto this_num = static_cast<unsigned int>(idx) < parts.size()     ? parts[idx]     : 0;
+    auto cmp_num  = static_cast<unsigned int>(idx) < cmp.parts.size() ? cmp.parts[idx] : 0;
 
     if (this_num < cmp_num)
       return -1;

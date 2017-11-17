@@ -967,7 +967,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
     auto const &data = *m_data[data_idx];
 
     if (Is<KaxSeekHead>(data.m_id)) {
-      if (data_idx == seek_head_idx)
+      if (static_cast<unsigned int>(data_idx) == seek_head_idx)
         return seek_head_idx;
 
       first_seek_head_idx.reset(data_idx);

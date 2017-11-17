@@ -3002,7 +3002,7 @@ add_filelists_for_playlists() {
     filelist->restricted_timestamp_min = play_items[0].in_time;
     filelist->restricted_timestamp_max = play_items[0].out_time;
 
-    for (size_t idx = 1, idx_end = file_names.size(); idx < idx_end; ++idx) {
+    for (int idx = 1, idx_end = file_names.size(); idx < idx_end; ++idx) {
       auto current_filelist_id               = g_files.size() + new_filelists.size();
       auto new_filelist                      = create_filelist_for_playlist(file_names[idx], previous_filelist_id, current_filelist_id, idx, *filelist->ti);
       new_filelist->restricted_timestamp_min = play_items[idx].in_time;

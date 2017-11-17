@@ -207,7 +207,7 @@ teletext_to_srt_packet_converter_c::setup_character_maps() {
 void
 teletext_to_srt_packet_converter_c::bit_reverse(unsigned char *buffer,
                                                 size_t length) {
-  for (size_t idx = 0; idx < length; ++idx)
+  for (int idx = 0; idx < static_cast<int>(length); ++idx)
     buffer[idx] = invtab[buffer[idx]];
 }
 
@@ -215,7 +215,7 @@ void
 teletext_to_srt_packet_converter_c::unham(unsigned char const *in,
                                           unsigned char *out,
                                           size_t hambytes) {
-  for (size_t idx = 0; idx < (hambytes / 2); ++idx, ++out, in += 2)
+  for (int idx = 0; idx < static_cast<int>(hambytes / 2); ++idx, ++out, in += 2)
     *out = (unhamtab[*in] & 0x0f) | ((unhamtab[*(in + 1)] & 0x0f) << 4);
 }
 
@@ -224,7 +224,7 @@ int
 teletext_to_srt_packet_converter_c::ttx_to_page(int ttx) {
   int retval = 0;
 
-  for (size_t idx = 0; idx < 4; ++idx) {
+  for (int idx = 0; idx < 4; ++idx) {
     retval *= 10;
     retval += (ttx & 0xf000) >> 12;
     ttx   <<= 4;
@@ -236,7 +236,7 @@ teletext_to_srt_packet_converter_c::ttx_to_page(int ttx) {
 void
 teletext_to_srt_packet_converter_c::remove_parity(unsigned char *buffer,
                                                   size_t length) {
-  for (size_t idx = 0; idx < length; ++idx)
+  for (int idx = 0; idx < static_cast<int>(length); ++idx)
     buffer[idx] &= 0x7f;
 }
 

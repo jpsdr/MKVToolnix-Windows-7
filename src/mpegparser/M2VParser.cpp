@@ -135,7 +135,7 @@ int32_t M2VParser::InitParser(){
   //Gotta find a sequence header now
   MPEGChunk* chunk;
   //MPEGChunk* seqHdrChunk;
-  for(size_t i = 0; i < chunks.size(); i++){
+  for (int i = 0, numChunks = chunks.size(); i < numChunks; i++){
     chunk = chunks[i];
     if(chunk->GetType() == MPEG_VIDEO_SEQUENCE_START_CODE){
       //Copy the header for later, we must copy because the actual chunk will be deleted in a bit
@@ -146,7 +146,7 @@ int32_t M2VParser::InitParser(){
 
       //Look for sequence extension to identify mpeg2
       binary* pData = chunk->GetPointer();
-      for(size_t j = 3; j < chunk->GetSize() - 4; j++){
+      for (int j = 3, chunkSize = chunk->GetSize() - 4; j < chunkSize; j++){
         if(pData[j] == 0x00 && pData[j+1] == 0x00 && pData[j+2] == 0x01 && pData[j+3] == 0xb5 && ((pData[j+4] & 0xF0) == 0x10)){
           mpegVersion = 2;
           break;
@@ -272,7 +272,7 @@ void
 M2VParser::TimestampWaitingFrames() {
   // mxinfo(boost::format("  flushing %1%\n") % waitQueue.size());
 
-  for (std::size_t idx = 0, numFrames = waitQueue.size(); idx < numFrames; ++idx)
+  for (int idx = 0, numFrames = waitQueue.size(); idx < numFrames; ++idx)
     waitQueue[idx]->decodingOrder = idx;
 
   brng::sort(waitQueue, [](MPEGFrame *a, MPEGFrame *b) { return a->timestamp < b->timestamp; });

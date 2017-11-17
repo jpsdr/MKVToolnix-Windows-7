@@ -1073,7 +1073,7 @@ align_uids(KaxChapters &reference,
 
 void
 regenerate_uids(EbmlMaster &master) {
-  for (size_t idx = 0, end = master.ListSize(); end > idx; ++idx) {
+  for (int idx = 0, end = master.ListSize(); end > idx; ++idx) {
     auto element     = master[idx];
     auto edition_uid = dynamic_cast<KaxEditionUID *>(element);
 

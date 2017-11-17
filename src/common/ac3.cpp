@@ -209,7 +209,7 @@ frame_c::find_in(memory_cptr const &buffer) {
 int
 frame_c::find_in(unsigned char const *buffer,
                  std::size_t buffer_size) {
-  for (std::size_t offset = 0; offset < buffer_size; ++offset)
+  for (int offset = 0; offset < static_cast<int>(buffer_size); ++offset)
     if (decode_header(&buffer[offset], buffer_size - offset))
       return offset;
   return -1;
