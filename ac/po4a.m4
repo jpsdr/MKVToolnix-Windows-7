@@ -29,7 +29,7 @@ if test "$PO4A" != "" -a "$PO4A_TRANSLATE" != ""; then
     [ac_cv_po4a_works],
     [
       ac_cv_po4a_works=no
-      $PO4A_TRANSLATE $PO4A_TRANSLATE_FLAGS -m $srcdir/doc/man/mkvmerge.xml -p $srcdir/doc/man/po4a/po/ja.po -l /dev/null
+      $PO4A_TRANSLATE $PO4A_TRANSLATE_FLAGS -m $srcdir/doc/man/mkvmerge.xml -p $srcdir/doc/man/po4a/po/ja.po -l /dev/null > /dev/null 2> /dev/null
       if test "$?" = 0; then
         ac_cv_po4a_works=yes
       fi
