@@ -963,7 +963,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
 
   boost::optional<unsigned int> first_seek_head_idx;
 
-  for (unsigned int data_idx = 0, end = m_data.size(); end > data_idx; ++data_idx) {
+  for (int data_idx = 0, end = m_data.size(); end > data_idx; ++data_idx) {
     auto const &data = *m_data[data_idx];
 
     if (Is<KaxSeekHead>(data.m_id)) {
@@ -1003,7 +1003,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
   while (first_time) {
     mxdebug_if(m_debug, boost::format("  looking for place for the new seek head at the start…\n"));
     // Find a place at the front with enough space.
-    for (unsigned int data_idx = 0u, end = m_data.size(); data_idx < end; ++data_idx) {
+    for (int data_idx = 0, end = m_data.size(); data_idx < end; ++data_idx) {
       auto &data = *m_data[data_idx];
 
       if (Is<KaxCluster>(data.m_id))

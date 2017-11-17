@@ -44,7 +44,7 @@ int32_t MPEGVideoBuffer::FindStartCode(uint32_t startPos){
   if(window < 4) //Make sure we have enough bytes to search.
     return -1;
 
-  for(unsigned int i = startPos; i < (startPos + window - 3); i++){
+  for(int i = startPos, endPos = startPos + window - 3; i < endPos; i++){
     CircBuffer& buf = *myBuffer;
     binary a,b,c,d;
     a = buf[i];

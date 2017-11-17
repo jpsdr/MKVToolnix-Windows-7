@@ -371,7 +371,7 @@ kax_reader_c::unlace_vorbis_private_data(kax_track_t *t,
     if (blocks.size() != 3)
       return false;
 
-    for (unsigned int i = 0; 3 > i; ++i) {
+    for (int i = 0; 3 > i; ++i) {
       t->headers[i]      = blocks[i]->get_buffer();
       t->header_sizes[i] = blocks[i]->get_size();
     }

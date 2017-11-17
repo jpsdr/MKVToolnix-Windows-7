@@ -2112,7 +2112,7 @@ qtmp4_demuxer_c::calculate_timestamps_variable_sample_size() {
   durations.reserve(num_samples);
   frame_indices.reserve(num_samples);
 
-  for (unsigned int frame = 0; num_samples > frame; ++frame) {
+  for (int frame = 0; static_cast<int>(num_samples) > frame; ++frame) {
     auto timestamp = to_nsecs(sample_table[frame].pts);
 
     frame_indices.push_back(frame);
@@ -2122,7 +2122,7 @@ qtmp4_demuxer_c::calculate_timestamps_variable_sample_size() {
 
   int64_t avg_duration = 0, num_good_frames = 0;
 
-  for (unsigned int frame = 0; num_samples > (frame + 1); ++frame) {
+  for (int frame = 0; static_cast<int>(num_samples) > (frame + 1); ++frame) {
     int64_t diff = timestamps_before_offsets[frame + 1] - timestamps_before_offsets[frame];
 
     if (0 >= diff)

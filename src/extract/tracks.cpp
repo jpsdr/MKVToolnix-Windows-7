@@ -279,7 +279,7 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
     extractor.handle_codec_state(codec_state);
   }
 
-  for (unsigned int i = 0; i < block->NumberFrames(); i++) {
+  for (int i = 0, num_frames = block->NumberFrames(); i < num_frames; i++) {
     int64_t this_timestamp, this_duration;
 
     if (0 > duration) {
@@ -326,7 +326,7 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
   int64_t duration      = extractor.m_default_duration * simpleblock.NumberFrames();
   int64_t max_timestamp = 0;
 
-  for (unsigned int i = 0; i < simpleblock.NumberFrames(); i++) {
+  for (int i = 0, num_frames = simpleblock.NumberFrames(); i < num_frames; i++) {
     int64_t this_timestamp, this_duration;
 
     if (0 > duration) {

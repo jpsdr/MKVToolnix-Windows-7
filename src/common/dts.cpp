@@ -903,9 +903,9 @@ convert_14_to_16_bits(const unsigned short *src,
   // srcwords has to be a multiple of 8!
   // you will get (srcbytes >> 3)*7 destination words!
 
-  const unsigned long l = srcwords >> 3;
+  int const l = srcwords >> 3;
 
-  for (unsigned long b = 0; b < l; b++) {
+  for (int b = 0; b < l; b++) {
     unsigned short src_0 = (src[0] >>  8) | (src[0] << 8);
     unsigned short src_1 = (src[1] >>  8) | (src[1] << 8);
     unsigned short src_2 = (src[2] >>  8) | (src[2] << 8);
