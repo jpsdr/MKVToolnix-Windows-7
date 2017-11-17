@@ -26,10 +26,16 @@
 
 namespace mtx { namespace aac {
 
+// See ISO/IEC 14496-3, table 1.16 — Sampling Frequency Index
 static unsigned int const s_sampling_freq[16] = {
   96000, 88200, 64000, 48000, 44100, 32000,
   24000, 22050, 16000, 12000, 11025,  8000,
    7350,     0,     0,     0 // filling
+};
+
+// See ISO/IEC 14496-3, table 1.17 — Channel Configuration
+static unsigned int const s_adts_channels[8] = {
+  0, 1, 2, 3, 4, 5, 6, 8,
 };
 
 static debugging_option_c s_debug_parse_data{"aac_parse_audio_specific_config|aac_full"};
@@ -540,7 +546,7 @@ parser_c::decode_adts_header(unsigned char const *buffer,
     frame.m_header.config.profile  = bc.get_bits(2);
     int sfreq_index                = bc.get_bits(4);
     bc.skip_bits(1);                               // private
-    frame.m_header.config.channels = bc.get_bits(3);
+    frame.m_header.config.channels = s_adts_channels[bc.get_bits(3)];
     bc.skip_bits(1 + 1);                           // original/copy & home
     bc.skip_bits(1 + 1);                           // copyright_id_bit & copyright_id_start
 

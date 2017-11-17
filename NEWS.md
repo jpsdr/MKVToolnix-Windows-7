@@ -25,6 +25,9 @@
   automatically anymore whenever the segment info section is edited and the
   `date` element is either deleted or not present in the first place. Fixes
   #2143.
+* mkvmerge: AAC ADTS parser: fixed interpretation of the
+  `channel_configuration` header element for ADTS files that do not contain a
+  program configuration element: value 7 means 7.1 channels. Fixes #2151.
 
 
 # Version 17.0.0 "Be Ur Friend" 2017-10-14
