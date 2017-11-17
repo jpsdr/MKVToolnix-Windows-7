@@ -11,6 +11,8 @@
 * mkvmerge: tags: reintroduced a workaround for non-compliant files with tags
   that do not contain the mandatory `SimpleTag` element. This workaround was
   removed during code refactoring in release v15.0.0.
+* mkvmerge: AVC & HEVC ES parsers: performance improvements by copying much
+  less memory around.
 
 ## Bug fixes
 
