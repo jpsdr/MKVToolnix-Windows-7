@@ -304,4 +304,65 @@ TEST(BitReader, ExceptionOnReadingBeyondEOF) {
   EXPECT_THROW(b.get_bytes(target, 2), mtx::mm_io::end_of_file_x);
 }
 
+TEST(BitReader, RBSPMode1) {
+  unsigned char value[5] = { 0x08, 0x00, 0x00, 0x03, 0x1f };
+  auto b = mtx::bits::reader_c{value, 5};
+  b.enable_rbsp_mode();
+
+  EXPECT_EQ(0x00, b.get_bits(4));
+  EXPECT_EQ(0x10, b.get_bits(5));
+  EXPECT_EQ(0x00, b.get_bits(11));
+  EXPECT_EQ(0x01, b.get_bits(8));
+  EXPECT_EQ(36,   b.get_bit_position());
+  EXPECT_EQ(0x0f, b.get_bits(4));
+}
+
+TEST(BitReader, RBSPMode2) {
+  unsigned char value[8] = { 0x08, 0x00, 0x00, 0x03, 0x00, 0x00, 0x03, 0x1f };
+  auto b = mtx::bits::reader_c{value, 8};
+  b.enable_rbsp_mode();
+
+  // 0        8        16       24       32       40       48       56
+  // 00001000 00000000 00000000 00000011 00000000 00000000 00000011 00011111
+  EXPECT_EQ(0x00, b.get_bits(4));
+  EXPECT_EQ(0x10, b.get_bits(5));
+  EXPECT_EQ(0x00, b.get_bits(11));
+  EXPECT_EQ(0x00, b.get_bits(16));
+  EXPECT_EQ(0x01, b.get_bits(8));
+  EXPECT_EQ(60,   b.get_bit_position());
+  EXPECT_EQ(0x0f, b.get_bits(4));
+}
+
+TEST(BitReader, RBSPMode3) {
+  unsigned char value[6] = { 0x08, 0x00, 0x00, 0x03, 0x00, 0x1f };
+  auto b = mtx::bits::reader_c{value, 6};
+  b.enable_rbsp_mode();
+
+  EXPECT_EQ(0x080000, b.get_bits(24));
+  b.skip_bits(8);
+  EXPECT_EQ(0x1f, b.get_bits(8));
+  EXPECT_EQ(48,   b.get_bit_position());
+}
+
+TEST(BitReader, RBSPMode4) {
+  unsigned char value[6] = { 0x08, 0x00, 0x00, 0x03, 0x03, 0x1f };
+  auto b = mtx::bits::reader_c{value, 6};
+  b.enable_rbsp_mode();
+
+  EXPECT_EQ(0x080000, b.get_bits(24));
+  EXPECT_EQ(0x03, b.get_bits(8));
+  EXPECT_EQ(0x1f, b.get_bits(8));
+}
+
+TEST(BitReader, RBSPMode5) {
+  unsigned char value[4] = { 0x01, 0x9f, 0x03, 0x6e };
+  auto b = mtx::bits::reader_c{value, 4};
+  b.enable_rbsp_mode();
+
+  EXPECT_EQ(0x01, b.get_bits(8));
+  EXPECT_EQ(0x9f, b.get_bits(8));
+  EXPECT_EQ(0x03, b.get_bits(8));
+  EXPECT_EQ(0x6e, b.get_bits(8));
+}
+
 }

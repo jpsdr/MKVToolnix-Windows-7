@@ -26,7 +26,8 @@ private:
   const unsigned char *m_byte_position;
   const unsigned char *m_start_of_data;
   std::size_t m_bits_valid;
-  bool m_out_of_data;
+  bool m_out_of_data, m_rbsp_mode;
+  uint16_t m_rbsp_bytes;
 
 public:
   reader_c(unsigned char const *data, std::size_t len) {
@@ -39,6 +40,13 @@ public:
     m_start_of_data = data;
     m_bits_valid    = len ? 8 : 0;
     m_out_of_data   = m_byte_position >= m_end_of_data;
+    m_rbsp_mode     = false;
+    m_rbsp_bytes    = 0xffffu;
+  }
+
+  void enable_rbsp_mode() {
+    m_rbsp_mode  = true;
+    m_rbsp_bytes = 0xff00u | (m_bits_valid == 8 ? *m_byte_position : 0u);
   }
 
   bool eof() {
@@ -69,6 +77,15 @@ public:
       if (0 == m_bits_valid) {
         m_bits_valid     = 8;
         m_byte_position += 1;
+
+        if (m_rbsp_mode && (m_byte_position < m_end_of_data)) {
+          if ((*m_byte_position == 0x03) && (m_rbsp_bytes == 0x0000)) {
+            ++m_byte_position;
+            m_rbsp_bytes = 0xff00u | *m_byte_position;
+
+          } else
+            m_rbsp_bytes = (m_rbsp_bytes << 8) | *m_byte_position;
+        }
       }
 
       n -= b;
@@ -116,7 +133,7 @@ public:
   uint64_t peek_bits(std::size_t n) {
     uint64_t r                             = 0;
     const unsigned char *tmp_byte_position = m_byte_position;
-    std::size_t tmp_bits_valid                  = m_bits_valid;
+    std::size_t tmp_bits_valid             = m_bits_valid;
 
     while (0 < n) {
       if (tmp_byte_position >= m_end_of_data)
@@ -181,11 +198,17 @@ public:
   }
 
   void skip_bits(std::size_t num) {
-    set_bit_position(get_bit_position() + num);
+    if (!m_rbsp_mode)
+      set_bit_position(get_bit_position() + num);
+    else
+      get_bits(num);
   }
 
   void skip_bit() {
-    set_bit_position(get_bit_position() + 1);
+    if (!m_rbsp_mode)
+      set_bit_position(get_bit_position() + 1);
+    else
+      get_bits(1);
   }
 
   uint64_t skip_get_bits(std::size_t to_skip,
