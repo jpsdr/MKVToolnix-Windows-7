@@ -225,7 +225,7 @@ public:
   static std::string get_nalu_type_name(int type);
 
 protected:
-  bool parse_slice(memory_cptr const &buffer, slice_info_t &si);
+  bool parse_slice(memory_cptr const &nalu, slice_info_t &si);
   void handle_vps_nalu(memory_cptr const &nalu);
   void handle_sps_nalu(memory_cptr const &nalu);
   void handle_pps_nalu(memory_cptr const &nalu);

@@ -235,7 +235,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
   }
 
   slice_info_t si;
-  if (!parse_slice(mpeg::nalu_to_rbsp(nalu), si))
+  if (!parse_slice(nalu, si))   // no conversion to RBSP; the bit reader takes care of it
     return;
 
   if (m_have_incomplete_frame && si.first_slice_segment_in_pic_flag)
@@ -525,10 +525,12 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
 }
 
 bool
-es_parser_c::parse_slice(memory_cptr const &buffer,
+es_parser_c::parse_slice(memory_cptr const &nalu,
                          slice_info_t &si) {
   try {
-    mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
+    mtx::bits::reader_c r(nalu->get_buffer(), nalu->get_size());
+    r.enable_rbsp_mode();
+
     unsigned int i;
 
     memset(&si, 0, sizeof(si));
