@@ -34,7 +34,7 @@ else
 fi
 
 if test x"$enable_optimization" = xyes; then
-  if test x"$ac_cv_compiler_is_clang" = xyes; then
+  if test x"$ac_cv_compiler_is_clang" = xyes && ! check_version 3.8.0 $ac_cv_compiler_version; then
     opt_features_no="$opt_features_no\n   * full optimization: due to bug 11962 in LLVM/clang only -O1 will be used for optimization"
     OPTIMIZATION_CFLAGS="-O1"
 

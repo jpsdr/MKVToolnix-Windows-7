@@ -13,6 +13,10 @@
   removed during code refactoring in release v15.0.0.
 * mkvmerge: AVC & HEVC ES parsers: performance improvements by copying much
   less memory around.
+* build system: when building with clang v3.8.0 or newer, `configure` will no
+  longer restrict optimization flags to `-O1` and use `-O3` again (older
+  versions of clang suffered from excessive memory usage with higher
+  optimization levels).
 
 ## Bug fixes
 
