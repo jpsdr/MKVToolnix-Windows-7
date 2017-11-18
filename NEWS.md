@@ -1,4 +1,4 @@
-# Version ?
+# Version 18.0.0 "Apricity" 2017-11-18
 
 ## New features and enhancements
 
