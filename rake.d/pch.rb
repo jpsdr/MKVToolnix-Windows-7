@@ -614,7 +614,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
   # GCC and clang differ in their extension preferences for precompiled
   # headers. clang has some knowledge of gch and at the time of this writing,
   # actually does search for both { .pch, .gch } but it's not documented.
-  @extension = c?(:USE_CLANG) ? ".pch" : ".gch"
+  @extension = c(:COMPILER_TYPE) == "clang" ? ".pch" : ".gch"
 
   # Cache global verbose flag.
   @verbose = $verbose
