@@ -291,8 +291,8 @@ Reading and writing avi files.
 Copyright (C) 1999 Rainer Johanni <Rainer@Johanni.de>, originally part
 of the transcode package.
 
-  * License: GNU General Public License v2
-  * URL: http://www.transcoding.org/
+  * License: GNU General Public License v2 or later
+  * URL: the project doesn't seem to have a home page anymore
 
 ## 6.2. Boost's utf8_codecvt_facet
 
