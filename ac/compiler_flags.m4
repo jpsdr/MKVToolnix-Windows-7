@@ -18,6 +18,10 @@ if test $COMPILER_TYPE = clang; then
   CXXFLAGS="$ac_save_CXXFLAGS -Werror -Wno-potentially-evaluated-expression"
   AC_TRY_COMPILE([],[],[ WNO_POTENTIALLY_EVALUATED_EXPRESSION="-Wno-potentially-evaluated-expression" ],[])
 
+  if check_version 3.5.0 $COMPILER_VERSION ; then
+    FSTACK_PROTECTOR="-fstack-protector-strong"
+  fi
+
   AC_LANG_POP()
   CXXFLAGS="$ac_save_CXXFLAGS"
 

@@ -21,6 +21,8 @@
   longer restrict optimization flags to `-O2` and use `-O3` again (older
   versions of mingw suffered from bugs such as segmentation faults with higher
   optimization levels).
+* build system: stack protection is enabled when building with clang 3.5.0 or
+  newer on all platforms.
 
 ## Bug fixes
 
