@@ -2,17 +2,6 @@
 
 ## New features and enhancements
 
-* GUI: multiplexer: the "reduce to core" checkbox in the "audio properties"
-  section will be disabled if the functionality is not implemented for the
-  selected track's codec. See #2134.
-* GUI: multiplexer: the "AAC is SBR/HE-AAC/AAC+" checkbox in the "audio
-  properties" section will be disabled if the functionality is not implemented
-  for the selected track's codec & container.
-* mkvmerge: tags: reintroduced a workaround for non-compliant files with tags
-  that do not contain the mandatory `SimpleTag` element. This workaround was
-  removed during code refactoring in release v15.0.0.
-* mkvmerge: AVC & HEVC ES parsers: performance improvements by copying much
-  less memory around.
 * build system: when building with clang v3.8.0 or newer, `configure` will no
   longer restrict optimization flags to `-O1` and use `-O3` again (older
   versions of clang suffered from excessive memory usage with higher
@@ -23,21 +12,32 @@
   optimization levels).
 * build system: stack protection is enabled when building with clang 3.5.0 or
   newer on all platforms.
+* mkvmerge: AVC & HEVC ES parsers: performance improvements by copying much
+  less memory around.
+* mkvmerge: tags: reintroduced a workaround for non-compliant files with tags
+  that do not contain the mandatory `SimpleTag` element. This workaround was
+  removed during code refactoring in release v15.0.0.
+* GUI: multiplexer: the "AAC is SBR/HE-AAC/AAC+" checkbox in the "audio
+  properties" section will be disabled if the functionality is not implemented
+  for the selected track's codec & container.
+* GUI: multiplexer: the "reduce to core" checkbox in the "audio properties"
+  section will be disabled if the functionality is not implemented for the
+  selected track's codec. See #2134.
 
 ## Bug fixes
 
-* mkvmerge: WebVTT: mkvmerge did not recognize timestamp lines if the hours
-  components were absent. Fixes #2139.
+* mkvmerge: AAC ADTS parser: fixed interpretation of the
+  `channel_configuration` header element for ADTS files that do not contain a
+  program configuration element: value 7 means 7.1 channels. Fixes #2151.
 * mkvmerge: Matroska identification: the `date_local` and `date_utc`
   attributes will only be output if the identified Matroska file actually
   contains the "date" header field.
+* mkvmerge: WebVTT: mkvmerge did not recognize timestamp lines if the hours
+  components were absent. Fixes #2139.
 * mkvpropedit, GUI's header editor: the `date` header field won't be added
   automatically anymore whenever the segment info section is edited and the
   `date` element is either deleted or not present in the first place. Fixes
   #2143.
-* mkvmerge: AAC ADTS parser: fixed interpretation of the
-  `channel_configuration` header element for ADTS files that do not contain a
-  program configuration element: value 7 means 7.1 channels. Fixes #2151.
 
 
 # Version 17.0.0 "Be Ur Friend" 2017-10-14
