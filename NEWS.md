@@ -1,3 +1,11 @@
+# Version ?
+
+## Important notes
+
+* The MKVToolNix project now contains a
+  [Code of Coduct](https://mkvtoolnix.download/doc/CODE_OF_CONDUCT.md).
+
+
 # Version 18.0.0 "Apricity" 2017-11-18
 
 ## New features and enhancements

@@ -15,15 +15,16 @@ MKVToolNix 18.0.0
   6. [Unit tests](#26-unit-tests)
 3. [Reporting bugs](#3-reporting-bugs)
 4. [Test suite and continuous integration tests](#4-test-suite-and-continuous-integration-tests)
-5. [Included libraries and their licenses](#5-included-libraries-and-their-licenses)
-  1. [avilib](#51-avilib)
-  2. [Boost's utf8_codecvt_facet](#52-boosts-utf8_codecvt_facet)
-  3. [libEBML](#53-libebml)
-  4. [libMatroska](#54-libmatroska)
-  5. [librmff](#55-librmff)
-  6. [nlohmann's JSON](#56-nlohmanns-json)
-  7. [pugixml](#57-pugixml)
-  8. [utf8-cpp](#58-utf8-cpp)
+5. [Code of Conduct](#5-code-of-conduct)
+6. [Included libraries and their licenses](#6-included-libraries-and-their-licenses)
+  1. [avilib](#61-avilib)
+  2. [Boost's utf8_codecvt_facet](#62-boosts-utf8_codecvt_facet)
+  3. [libEBML](#63-libebml)
+  4. [libMatroska](#64-libmatroska)
+  5. [librmff](#65-librmff)
+  6. [nlohmann's JSON](#66-nlohmanns-json)
+  7. [pugixml](#67-pugixml)
+  8. [utf8-cpp](#68-utf8-cpp)
 
 -----------------
 
@@ -273,11 +274,17 @@ commit made to the git repository. The tests include:
   * building and running the test file test suite
   * building with all optional features disabled
 
-# 5. Included third-party components and their licenses
+# 5. Code of Conduct
+
+Please note that this project is released with a
+[Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project
+you agree to abide by its terms.
+
+# 6. Included third-party components and their licenses
 
 MKVToolNix includes and uses the following libraries & artwork:
 
-## 5.1. avilib
+## 6.1. avilib
 
 Reading and writing avi files.
 
@@ -287,7 +294,7 @@ of the transcode package.
   * License: GNU General Public License v2
   * URL: http://www.transcoding.org/
 
-## 5.2. Boost's utf8_codecvt_facet
+## 6.2. Boost's utf8_codecvt_facet
 
 A class, `utf8_codecvt_facet`, derived from `std::codecvt<wchar_t, char>`,
 which can be used to convert utf8 data in files into `wchar_t` strings
@@ -296,21 +303,21 @@ in the application.
   * License: Boost Software License - Version 1.0 (see `doc/licenses/Boost-1.0.txt`)
   * URL: http://www.boost.org
 
-## 5.3. libEBML
+## 6.3. libEBML
 
 A C++ library to parse EBML files
 
   * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
   * URL: http://www.matroska.org/
 
-## 5.4. libMatroska
+## 6.4. libMatroska
 
 A C++ library to parse Matroska files
 
   * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
   * URL: http://www.matroska.org/
 
-## 5.5. librmff
+## 6.5. librmff
 
 librmff is short for 'RealMedia file format access library'. It aims
 at providing the programmer an easy way to read and write RealMedia
@@ -319,28 +326,28 @@ files.
   * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
   * URL: https://www.bunkus.org/videotools/librmff/index.html
 
-## 5.6. nlohmann's JSON
+## 6.6. nlohmann's JSON
 
 JSON for Modern C++
 
   * License: MIT (see `doc/licenses/nlohmann-json-MIT.txt`)
   * URL: https://github.com/nlohmann/json
 
-## 5.7. pugixml
+## 6.7. pugixml
 
 An XML processing library
 
   * License: MIT (see `doc/licenses/pugixml-MIT.txt`)
   * URL: http://pugixml.org/
 
-## 5.8. utf8-cpp
+## 6.8. utf8-cpp
 
 UTF-8 with C++ in a Portable Way
 
   * License: custom (see `doc/licenses/utf8-cpp-custom.txt`)
   * URL: http://utfcpp.sourceforge.net/
 
-## 5.9. Oxygen icons and sound files
+## 6.9. Oxygen icons and sound files
 
 Most of the icons included in this package originate from the Oxygen
 Project. These include all files in the `share/icons` sub-directory
