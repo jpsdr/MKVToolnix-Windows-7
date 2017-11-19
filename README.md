@@ -307,14 +307,14 @@ in the application.
 
 A C++ library to parse EBML files
 
-  * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
+  * License: GNU Lesser General Public License v2.1 or later (see `doc/licenses/LGPL-2.1.txt`)
   * URL: http://www.matroska.org/
 
 ## 6.4. libMatroska
 
 A C++ library to parse Matroska files
 
-  * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
+  * License: GNU Lesser General Public License v2.1 or later (see `doc/licenses/LGPL-2.1.txt`)
   * URL: http://www.matroska.org/
 
 ## 6.5. librmff
@@ -323,7 +323,7 @@ librmff is short for 'RealMedia file format access library'. It aims
 at providing the programmer an easy way to read and write RealMedia
 files.
 
-  * License: GNU Lesser General Public License v2.1 (see `doc/licenses/LGPL-2.1.txt`)
+  * License: GNU Lesser General Public License v2.1 or later (see `doc/licenses/LGPL-2.1.txt`)
   * URL: https://www.bunkus.org/videotools/librmff/index.html
 
 ## 6.6. nlohmann's JSON
