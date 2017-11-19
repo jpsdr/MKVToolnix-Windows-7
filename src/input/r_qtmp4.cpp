@@ -2435,9 +2435,20 @@ qtmp4_demuxer_c::dump_index_entries(std::string const &message)
   mxdebug(boost::format("%1% for track ID %2%: %3% entries\n") % message % id % m_index.size());
 
   auto fmt = boost::format("  %1%: timestamp %2% duration %3% key? %4% file_pos %5% size %6%\n");
-  auto end = std::min<std::size_t>(!m_debug_indexes_full ? 20 : std::numeric_limits<std::size_t>::max(), m_index.size());
+  auto end = std::min<int>(!m_debug_indexes_full ? 10 : std::numeric_limits<int>::max(), m_index.size());
 
-  for (auto idx = 0u; idx < end; ++idx) {
+  for (int idx = 0; idx < end; ++idx) {
+    auto const &entry = m_index[idx];
+    mxdebug(fmt % idx % format_timestamp(entry.timestamp) % format_timestamp(entry.duration) % entry.is_keyframe % entry.file_pos % entry.size);
+  }
+
+  if (m_debug_indexes_full)
+    return;
+
+  auto start = m_index.size() - std::min<int>(m_index.size(), 10);
+  end        = m_index.size();
+
+  for (int idx = start; idx < end; ++idx) {
     auto const &entry = m_index[idx];
     mxdebug(fmt % idx % format_timestamp(entry.timestamp) % format_timestamp(entry.duration) % entry.is_keyframe % entry.file_pos % entry.size);
   }
