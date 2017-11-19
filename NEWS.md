@@ -5,6 +5,13 @@
 * The MKVToolNix project now contains a
   [Code of Coduct](https://mkvtoolnix.download/doc/CODE_OF_CONDUCT.md).
 
+## Bug fixes
+
+* mkvmerge: MP4 reader: fixed mkvmerge's interpretation of edit list entries
+  with `segment_duration == 0` when there's more than one edit list entry. In
+  that case mkvmerge was reading the whole content more than once. Fixes
+  #2152.
+
 
 # Version 18.0.0 "Apricity" 2017-11-18
 

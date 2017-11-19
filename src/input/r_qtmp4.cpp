@@ -2362,7 +2362,7 @@ qtmp4_demuxer_c::apply_edit_list() {
   auto const global_time_scale = m_reader.m_time_scale;
   auto timeline_cts            = int64_t{};
   auto info_fmt                = boost::format("%1% [segment_duration %2% media_time %3% media_rate %4%/%5%]");
-  auto entry_index             = 0;
+  auto entry_index             = 0u;
 
   for (auto &edit : editlist_table) {
     auto info = (info_fmt % entry_index % edit.segment_duration % edit.media_time % edit.media_rate_integer % edit.media_rate_fraction).str();
@@ -2386,6 +2386,11 @@ qtmp4_demuxer_c::apply_edit_list() {
     if (edit.media_time == -1) {
       timeline_cts = to_nsecs(edit.segment_duration, global_time_scale);
       mxdebug_if(m_debug_editlists, boost::format("  %1%: empty edit (media_time == -1); track start offset %2%\n") % info % format_timestamp(timeline_cts));
+      continue;
+    }
+
+    if ((edit.segment_duration == 0) && (edit.media_time >= 0) && (entry_index < num_edits)) {
+      mxdebug_if(m_debug_editlists, boost::format("  %1%: empty edit (segment_duration == 0, media_time >= 0) and more entries present; ignoring\n") % info);
       continue;
     }
 
