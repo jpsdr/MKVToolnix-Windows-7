@@ -490,6 +490,8 @@ qtmp4_reader_c::handle_ctts_atom(qtmp4_demuxer_c &dmx,
   auto count = m_in->read_uint32_be();
   mxdebug_if(m_debug_headers, boost::format("%1%Frame offset table v%3%: %2% raw entries\n") % space(level * 2 + 1) % count % static_cast<unsigned int>(version));
 
+  dmx.raw_frame_offset_table.reserve(dmx.raw_frame_offset_table.size() + count);
+
   size_t i;
   for (i = 0; i < count; ++i) {
     qt_frame_offset_t frame_offset;
@@ -529,6 +531,8 @@ qtmp4_reader_c::handle_sgpd_atom(qtmp4_demuxer_c &dmx,
   if (grouping_type != "rap ")
     return;
 
+  dmx.random_access_point_table.reserve(dmx.random_access_point_table.size() + count);
+
   for (auto idx = 0u; idx < count; ++idx) {
     if ((version == 1) && (default_description_length == 0))
       m_in->skip(4);            // description_length
@@ -567,6 +571,7 @@ qtmp4_reader_c::handle_sbgp_atom(qtmp4_demuxer_c &dmx,
   mxdebug_if(m_debug_headers, boost::format("%1%Sample to group table: version %2%, type '%3%', %4% raw entries\n") % space(level * 2 + 2) % static_cast<unsigned int>(version) % grouping_type % count);
 
   auto &table = dmx.sample_to_group_tables[grouping_type.value()];
+  table.reserve(table.size() + count);
 
   for (auto idx = 0u; idx < count; ++idx) {
     auto sample_count            = m_in->read_uint32_be();
@@ -875,6 +880,14 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
   std::vector<uint32_t> all_sample_flags;
   std::vector<bool> all_keyframe_flags;
 
+  track.durmap_table.reserve(track.durmap_table.size() + entries);
+  track.sample_table.reserve(track.sample_table.size() + entries);
+  track.chunk_table.reserve(track.chunk_table.size() + entries);
+  track.raw_frame_offset_table.reserve(track.raw_frame_offset_table.size() + entries);
+  track.keyframe_table.reserve(track.keyframe_table.size() + entries);
+  all_sample_flags.reserve(entries);
+  all_keyframe_flags.reserve(entries);
+
   for (auto idx = 0u; idx < entries; ++idx) {
     auto sample_duration = flags & QTMP4_TRUN_SAMPLE_DURATION   ? m_in->read_uint32_be() : m_fragment->sample_duration;
     auto sample_size     = flags & QTMP4_TRUN_SAMPLE_SIZE       ? m_in->read_uint32_be() : m_fragment->sample_size;
@@ -974,6 +987,8 @@ qtmp4_reader_c::handle_chpl_atom(qt_atom_t,
     return;
 
   std::vector<qtmp4_chapter_entry_t> entries;
+
+  entries.reserve(count);
 
   int i;
   for (i = 0; i < count; ++i) {
@@ -1096,6 +1111,8 @@ qtmp4_reader_c::read_chapter_track() {
   uint64_t pts_scale_num = 1000000000ull                                         / pts_scale_gcd;
   uint64_t pts_scale_den = static_cast<uint64_t>((*chapter_dmx_itr)->time_scale) / pts_scale_gcd;
 
+  entries.reserve((*chapter_dmx_itr)->sample_table.size());
+
   for (auto &sample : (*chapter_dmx_itr)->sample_table) {
     if (2 >= sample.size)
       continue;
@@ -1209,6 +1226,8 @@ qtmp4_reader_c::handle_stco_atom(qtmp4_demuxer_c &dmx,
 
   mxdebug_if(m_debug_headers, boost::format("%1%Chunk offset table: %2% entries\n") % space(level * 2 + 1) % count);
 
+  dmx.chunk_table.reserve(dmx.chunk_table.size() + count);
+
   for (auto i = 0u; i < count; ++i)
     dmx.chunk_table.emplace_back(0, m_in->read_uint32_be());
 
@@ -1231,6 +1250,8 @@ qtmp4_reader_c::handle_co64_atom(qtmp4_demuxer_c &dmx,
 
   mxdebug_if(m_debug_headers, boost::format("%1%64bit chunk offset table: %2% entries\n") % space(level * 2 + 1) % count);
 
+  dmx.chunk_table.reserve(dmx.chunk_table.size() + count);
+
   for (auto i = 0u; i < count; ++i)
     dmx.chunk_table.emplace_back(0, m_in->read_uint64_be());
 
@@ -1251,6 +1272,9 @@ qtmp4_reader_c::handle_stsc_atom(qtmp4_demuxer_c &dmx,
   m_in->skip(1 + 3);        // version & flags
   uint32_t count = m_in->read_uint32_be();
   size_t i;
+
+  dmx.chunkmap_table.reserve(dmx.chunkmap_table.size() + count);
+
   for (i = 0; i < count; ++i) {
     qt_chunkmap_t chunkmap;
 
@@ -1306,6 +1330,8 @@ qtmp4_reader_c::handle_stss_atom(qtmp4_demuxer_c &dmx,
   m_in->skip(1 + 3);        // version & flags
   uint32_t count = m_in->read_uint32_be();
 
+  dmx.keyframe_table.reserve(dmx.keyframe_table.size() + count);
+
   size_t i;
   for (i = 0; i < count; ++i)
     dmx.keyframe_table.push_back(m_in->read_uint32_be());
@@ -1332,6 +1358,8 @@ qtmp4_reader_c::handle_stsz_atom(qtmp4_demuxer_c &dmx,
   uint32_t count       = m_in->read_uint32_be();
 
   if (0 == sample_size) {
+    dmx.sample_table.reserve(dmx.sample_table.size() + count);
+
     size_t i;
     for (i = 0; i < count; ++i) {
       qt_sample_t sample;
@@ -1368,6 +1396,8 @@ qtmp4_reader_c::handle_sttd_atom(qtmp4_demuxer_c &dmx,
   m_in->skip(1 + 3);        // version & flags
   uint32_t count = m_in->read_uint32_be();
 
+  dmx.durmap_table.reserve(dmx.durmap_table.size() + count);
+
   size_t i;
   for (i = 0; i < count; ++i) {
     qt_durmap_t durmap;
@@ -1394,6 +1424,8 @@ qtmp4_reader_c::handle_stts_atom(qtmp4_demuxer_c &dmx,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
   uint32_t count = m_in->read_uint32_be();
+
+  dmx.durmap_table.reserve(dmx.durmap_table.size() + count);
 
   size_t i;
   for (i = 0; i < count; ++i) {
@@ -2089,6 +2121,10 @@ qtmp4_demuxer_c::calculate_timestamps_constant_sample_size() {
   int const num_frame_offsets = frame_offset_table.size();
   auto chunk_index            = 0;
 
+  timestamps.reserve(timestamps.size() + chunk_table.size());
+  durations.reserve(durations.size() + chunk_table.size());
+  frame_indices.reserve(frame_indices.size() + chunk_table.size());
+
   for (auto const &chunk : chunk_table) {
     auto frame_offset = chunk_index < num_frame_offsets ? frame_offset_table[chunk_index] : 0;
 
@@ -2430,6 +2466,8 @@ qtmp4_demuxer_c::build_index_constant_sample_size_mode() {
   auto v1_bytes_per_frame    = 1 == v0_audio_version ? get_uint32_be(&sound_stsd_atom->v1.bytes_per_frame)    : 0;
   auto v1_samples_per_packet = 1 == v0_audio_version ? get_uint32_be(&sound_stsd_atom->v1.samples_per_packet) : 0;
 
+  m_index.reserve(m_index.size() + chunk_table.size());
+
   size_t frame_idx;
   for (frame_idx = 0; frame_idx < chunk_table.size(); ++frame_idx) {
     uint64_t frame_size;
@@ -2455,6 +2493,8 @@ qtmp4_demuxer_c::build_index_constant_sample_size_mode() {
 
 void
 qtmp4_demuxer_c::build_index_chunk_mode() {
+  m_index.reserve(m_index.size() + frame_indices.size());
+
   for (int frame_idx = 0, num_frames = frame_indices.size(); frame_idx < num_frames; ++frame_idx) {
     auto act_frame_idx = frame_indices[frame_idx];
     auto &sample       = sample_table[act_frame_idx];
