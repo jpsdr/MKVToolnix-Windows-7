@@ -8,6 +8,7 @@
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
    Changes by Robert Millan <rmh@aybabtu.com>.
+   Changes by Daniel Løvbrøtte Olsen <daniel@dodsorf.as>
 */
 
 #include "common/common_pch.h"
@@ -2187,6 +2188,12 @@ std::vector<mime_type_t> const mime_types = {
   { "audio/x-wav",                                            { "wav" }                                                },
   { "chemical/x-pdb",                                         { "pdb" }                                                },
   { "chemical/x-xyz",                                         { "xyz" }                                                },
+  { "font/sfnt",                                              {}                                                       },
+  { "font/ttf",                                               {}                                                       },
+  { "font/otf" ,                                              {}                                                       },
+  { "font/collection",                                        {}                                                       },
+  { "font/woff",                                              { "woff" }                                               },
+  { "font/woff2",                                             { "woff2" }                                              },
   { "image/bmp",                                              { "bmp" }                                                },
   { "image/cgm",                                              {}                                                       },
   { "image/cgmComputerGraphicsMetafile",                      {}                                                       },
