@@ -11,6 +11,8 @@
   with `segment_duration == 0` when there's more than one edit list entry. In
   that case mkvmerge was reading the whole content more than once. Fixes
   #2152.
+* mkvmerge: Media Types: Added RFC8081 Media Types. This means mkvmerge can
+  detect and use the new font/ttf, font/otf, font/woff, and font/woff2 mime types
 
 
 # Version 18.0.0 "Apricity" 2017-11-18
