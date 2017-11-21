@@ -92,7 +92,6 @@ mtx_common_cleanup() {
     g_mm_stdio = std::shared_ptr<mm_io_c>(new mm_stdio_c);
   }
 
-  random_c::cleanup();
   mm_file_io_c::cleanup();
 
   matroska_done();
@@ -178,6 +177,8 @@ set_process_priority(int priority) {
 void
 mtx_common_init(std::string const &program_name,
                 char const *argv0) {
+  random_c::init();
+
   g_cc_local_utf8 = charset_converter_c::init("");
 
   init_common_output(true);
@@ -189,8 +190,6 @@ mtx_common_init(std::string const &program_name,
 #endif
 
   matroska_init();
-
-  srand(time(nullptr));
 
   debugging_c::init();
   init_hacks();

@@ -13,170 +13,61 @@
 
 #include "common/common_pch.h"
 
-#if !defined(SYS_WINDOWS)
-# include <sys/time.h>
-# include <time.h>
-#else
-# include <windows.h>
-#endif
+#include <cstdlib>
+#include <random>
 
-#include "common/mm_io.h"
+#include "common/fs_sys_helpers.h"
 #include "common/random.h"
 
-bool random_c::m_seeded = false;
+namespace {
+
+std::unique_ptr<std::mt19937_64> s_generator;
+std::uniform_int_distribution<uint8_t> s_uint8_distribution;
+std::uniform_int_distribution<uint32_t> s_uint32_distribution;
+std::uniform_int_distribution<uint64_t> s_uint64_distribution;
+
+}
+
+void
+random_c::init() {
+  if (s_generator)
+    return;
+
+  s_generator = std::make_unique<std::mt19937_64>();
 
 #if defined(SYS_WINDOWS)
+  // mingw's implementation of std::random_device yields deterministic
+  // sequences, unfortunately.
+  auto seed = mtx::sys::get_current_time_millis();
 
-bool random_c::m_tried_uuidcreate = false;
-bool random_c::m_use_uuidcreate   = false;
+#else
+  auto seed = std::random_device()();
+#endif
+
+  std::srand(seed);
+  s_generator->seed(seed);
+}
 
 void
 random_c::generate_bytes(void *destination,
                          size_t num_bytes) {
-  UUID uuid;
+  auto dst = static_cast<unsigned char *>(destination);
 
-  if (!m_seeded) {
-    srand(GetTickCount());
-    m_seeded = true;
-  }
-
-  if (!m_tried_uuidcreate) {
-    // Find out whether UuidCreate returns different
-    // data in Data4 on each call by comparing up to five
-    // results. If not use srand() and rand().
-    UUID first_uuid;
-    int i;
-
-    m_use_uuidcreate = true;
-    RPC_STATUS status = UuidCreate(&first_uuid);
-    if ((RPC_S_OK == status) || (RPC_S_UUID_LOCAL_ONLY == status)) {
-      for (i = 0; i < 5; ++i) {
-        status = UuidCreate(&uuid);
-        if (((RPC_S_OK != status) && (RPC_S_UUID_LOCAL_ONLY != status)) ||
-            !memcmp(first_uuid.Data4, uuid.Data4, sizeof(uuid.Data4))) {
-          m_use_uuidcreate = false;
-          break;
-        }
-      }
-    } else
-      m_use_uuidcreate = false;
-
-    m_tried_uuidcreate = true;
-  }
-
-  size_t num_written = 0;
-  while (num_written < num_bytes) {
-    if (m_use_uuidcreate) {
-      RPC_STATUS status = UuidCreate(&uuid);
-      if ((RPC_S_OK != status) && (RPC_S_UUID_LOCAL_ONLY != status)) {
-        m_use_uuidcreate = false;
-        continue;
-      }
-
-      int num_left = num_bytes - num_written;
-      if (num_left > 8)
-        num_left = 8;
-      memcpy((unsigned char *)destination + num_written, &uuid.Data4, num_left);
-      num_written += num_left;
-
-    } else
-      for (; num_written < num_bytes; ++num_written)
-        ((unsigned char *)destination)[num_written] = (unsigned char)(256.0 * rand() / (RAND_MAX + 1.0));
-  }
+  for (int i = 0; i < static_cast<int>(num_bytes); ++i, ++dst)
+    *dst = s_uint8_distribution(*s_generator);
 }
 
-#else  // defined(SYS_WINDOWS)
-
-mm_io_cptr random_c::m_dev_urandom;
-bool random_c::m_tried_dev_urandom = false;
-
-void
-random_c::generate_bytes(void *destination,
-                         size_t num_bytes) {
-  try {
-    if (!m_tried_dev_urandom) {
-      m_tried_dev_urandom = true;
-      m_dev_urandom       = mm_file_io_c::open("/dev/urandom");
-    }
-    if (m_dev_urandom && (m_dev_urandom->read(destination, num_bytes) == num_bytes))
-      return;
-  } catch(...) {
-  }
-
-  if (!m_seeded) {
-    struct timeval tv;
-
-    gettimeofday(&tv, nullptr);
-    srand(tv.tv_usec + tv.tv_sec);
-    m_seeded = true;
-  }
-
-  unsigned int i;
-  for (i = 0; i < num_bytes; ++i)
-    ((unsigned char *)destination)[i] = (unsigned char)(256.0 * rand() / (RAND_MAX + 1.0));
+uint8_t
+random_c::generate_8bits() {
+  return s_uint8_distribution(*s_generator);
 }
 
-#endif // defined(SYS_WINDOWS)
-
-#if defined(DEBUG)
-void
-random_c::test() {
-  uint32_t ranges[16];
-  const unsigned int num = 1000000;
-
-  unsigned int i;
-  for (i = 0; 16 > i; ++i)
-    ranges[i] = 0;
-
-  for (i = 0; num > i; ++i) {
-    uint32_t n = random_c::generate_32bits();
-    bool found = false;
-    unsigned int k;
-    for (k = 1; 15 >= k; ++k)
-      if (n < (k * 0x10000000)) {
-        ++ranges[k - 1];
-        found = true;
-        break;
-      }
-    if (!found)
-      ++ranges[15];
-  }
-
-  for (i = 0; i < 16; i++)
-    printf("%0d: %d (%.2f%%)\n", i, ranges[i], (double)ranges[i] * 100.0 / num);
-
-#if !defined(SYS_WINDOWS)
-  m_tried_dev_urandom = true;
-  m_dev_urandom.reset();
-
-  for (i = 0; 16 > i; i++)
-    ranges[i] = 0;
-
-  for (i = 0; num > i; i++) {
-    uint32_t n = random_c::generate_32bits();
-    bool found = false;
-    unsigned int k;
-    for (k = 1; 15 >= k; ++k)
-      if (n < (k * 0x10000000)) {
-        ++ranges[k - 1];
-        found = true;
-        break;
-      }
-    if (!found)
-      ++ranges[15];
-  }
-
-  for (i = 0; i < 16; i++)
-    printf("%0d: %d (%.2f%%)\n", i, ranges[i], (double)ranges[i] * 100.0 / num);
-#endif
-
-  exit(0);
+uint32_t
+random_c::generate_32bits() {
+  return s_uint32_distribution(*s_generator);
 }
-#endif  // defined(DEBUG)
 
-void
-random_c::cleanup() {
-#if !defined(SYS_WINDOWS)
-  m_dev_urandom.reset();
-#endif
+uint64_t
+random_c::generate_64bits() {
+  return s_uint64_distribution(*s_generator);
 }

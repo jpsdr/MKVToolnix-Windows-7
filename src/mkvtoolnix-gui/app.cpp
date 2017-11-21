@@ -14,6 +14,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
+#include "common/random.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
@@ -59,6 +60,8 @@ App::App(int &argc,
 {
   mtx_common_init("mkvtoolnix-gui", argv[0]);
   mtx::cli::g_version_info = get_version_info("mkvtoolnix-gui", vif_full);
+
+  qsrand(random_c::generate_64bits());
 
   // The routines for handling unique numbers cannot cope with
   // multiple chapters being worked on at the same time as they safe

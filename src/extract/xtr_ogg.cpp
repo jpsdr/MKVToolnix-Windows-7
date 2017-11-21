@@ -64,7 +64,7 @@ xtr_oggbase_c::create_file(xtr_base_c *master,
 
   xtr_base_c::create_file(master, track);
 
-  ogg_stream_init(&m_os, hack_engaged(ENGAGE_NO_VARIABLE_DATA) ? 1804289383 : random_c::generate_31bits());
+  ogg_stream_init(&m_os, hack_engaged(ENGAGE_NO_VARIABLE_DATA) ? 1804289383 : random_c::generate_32bits() & 0x7ffff'ffff);
 }
 
 void
