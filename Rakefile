@@ -1072,7 +1072,7 @@ if c?(:GOOGLE_BENCHMARK) && !$benchmark_sources.empty?
     description("Build the benchmark executable").
     aliases(:benchmark, :bench).
     sources($benchmark_sources).
-    libraries($common_libs, :benchmark).
+    libraries($common_libs, :benchmark, :qt).
     create
 end
 
