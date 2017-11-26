@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2017-11-07 21:30+0100\n"
-"PO-Revision-Date: 2017-10-04 19:47+0200\n"
+"PO-Revision-Date: 2017-11-24 14:58+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -372,13 +372,13 @@ msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <opcja>       Włącza podaną eksperymentalną \"opcję\".\n"
 
 #: src/merge/mkvmerge.cpp:265
-#, fuzzy
 msgid ""
 "  --field-order <TID:n>    Sets the video field order parameter\n"
 "                           (see documentation for valid values).\n"
 msgstr ""
-"  --blockadd <TID:x>       Określa maksymalną ilość dodatkowych poziomów\n"
-"                           bloku dla tej ścieżki.\n"
+"  --field-order <TID:n>    Ustawia parametr kolejności pól obrazu\n"
+"                           (zobacz dokumentację dla prawidłowych wartości).\n"
+"\n"
 
 #: src/merge/mkvmerge.cpp:243
 msgid ""
@@ -453,15 +453,15 @@ msgstr ""
 "                                   oraz ISO639-2.\n"
 
 #: src/merge/mkvmerge.cpp:295
-#, fuzzy
 msgid ""
 "  --max-content-light <TID:n>\n"
 "                           Maximum brightness of a single pixel in candelas\n"
 "                           per square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <plik>\n"
-"                             Zapisuje załącznik tylko do\n"
-"                             pierwszego pliku Matroski.\n"
+"  --max-content-light <TID:n>\n"
+"                           Maksymalna jasność pojedynczego piksela w kandelach\n"
+"                           na metr kwadratowy (cd/m²).\n"
+"\n"
 
 #: src/merge/mkvmerge.cpp:298
 #, fuzzy
@@ -475,24 +475,26 @@ msgstr ""
 "                             pierwszego pliku Matroski.\n"
 
 #: src/merge/mkvmerge.cpp:307
-#, fuzzy
 msgid ""
 "  --max-luminance <TID:float>\n"
 "                           Maximum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           Dzieli plik po każdej klatce/polu A, B, itd.\n"
+"  --max-luminance <TID:float>\n"
+"                           Maksymalna jasność w kandelach na metr kwadratowy\n"
+"                           (cd/m²).\n"
+"\n"
 
 #: src/merge/mkvmerge.cpp:310
-#, fuzzy
 msgid ""
 "  --min-luminance <TID:float>\n"
 "                           Minimum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           Dzieli plik po każdej klatce/polu A, B, itd.\n"
+"  --min-luminance <TID:float>\n"
+"                           Minimalna jasność w kandelach na metr kwadratowy\n"
+"                           (cd/m²).\n"
+"\n"
 
 #: src/merge/mkvmerge.cpp:246
 msgid ""
@@ -1678,7 +1680,7 @@ msgstr "&Następna karta"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
 msgid "&Number of entries to renumber:"
-msgstr "Ilość podrozdziałów do prze&numerowania:"
+msgstr "Liczba podrozdziałów do prze&numerowania:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1373
 msgid "&Only enable copying of tracks with specific languages by default"
@@ -3292,7 +3294,7 @@ msgstr "Głębia bitów"
 
 #: src/common/property_element.cpp:205
 msgid "Audio channels"
-msgstr "Ilość kanałów"
+msgstr "Liczba kanałów"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:398
 #, no-c-format
@@ -3379,7 +3381,7 @@ msgstr "Bitów na kanał: %1%"
 
 #: src/common/property_element.cpp:206
 msgid "Bits per sample, mostly used for PCM."
-msgstr "Ilość bitów na próbkę, głównie stosowane dla PCM."
+msgstr "Liczba bitów na próbkę, głównie stosowane dla PCM."
 
 #: src/info/mkvinfo.cpp:188
 #, boost-format
@@ -3622,12 +3624,12 @@ msgstr "Zmiana dla \"%1%\" została dokonana. Nie znaleziono właściwości tego
 #: src/propedit/change.cpp:255
 #, boost-format
 msgid "Change for '%1%' executed. Number of entries deleted: %2%\n"
-msgstr "Zmiana dla \"%1%\" została dokonana. Ilość wpisów usuniętych: %2%\n"
+msgstr "Zmiana dla \"%1%\" została dokonana. Liczba wpisów usuniętych: %2%\n"
 
 #: src/propedit/change.cpp:281
 #, boost-format
 msgid "Change for '%1%' executed. Number of entries set: %2%.\n"
-msgstr "Zmiana dla \"%1%\" została dokonana. Ilość wpisów ustawionych: %2%.\n"
+msgstr "Zmiana dla \"%1%\" została dokonana. Liczba wpisów ustawionych: %2%.\n"
 
 #: src/propedit/change.cpp:292
 #, boost-format
@@ -4979,9 +4981,9 @@ msgstr "Błąd podczas tworzenia pliku tymczasowego (powód: %1)."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:133
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:241
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Error details: %1."
-msgstr "Szczegóły wyjątku:"
+msgstr "Szczegóły błędu: %1."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:77
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:167
@@ -5214,7 +5216,7 @@ msgstr "Wyodrębniono informacje o proporcjach obrazu z nagłówków Theora i us
 
 #: src/extract/extract_cli_parser.cpp:136
 msgid "Extracting multiple items at the same time"
-msgstr ""
+msgstr "Wyodrębnianie wielu elementów w tym samym czasie"
 
 #: src/extract/tracks.cpp:136
 #, boost-format
@@ -5551,7 +5553,7 @@ msgstr "Dowolnie modyfikowane pole dla opcji użytkownika dla tej ścieżki."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:179
 #, no-c-format
 msgid "GUI"
-msgstr "GUI"
+msgstr "Interfejs graficzny"
 
 #: src/info/mkvinfo.cpp:739
 #, boost-format
@@ -6324,12 +6326,12 @@ msgstr "Nieprawidłowa minuta: %1%"
 #: src/common/strings/parsing.cpp:186
 #, boost-format
 msgid "Invalid number of minutes: %1% > 59"
-msgstr "Nieprawidłowa ilość minut: %1% > 59"
+msgstr "Nieprawidłowa liczba minut: %1% > 59"
 
 #: src/common/strings/parsing.cpp:188
 #, boost-format
 msgid "Invalid number of seconds: %1% > 59"
-msgstr "Nieprawidłowa ilość sekund: %1% > 59"
+msgstr "Nieprawidłowa liczba sekund: %1% > 59"
 
 #: src/common/chapters/chapters.cpp:198
 #, boost-format
@@ -6866,9 +6868,9 @@ msgid "Max BlockAddition ID: %1%"
 msgstr "Maks BlockAddition ID: %1%"
 
 #: src/info/mkvinfo.cpp:633
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max content light: %1%"
-msgstr "Ucięte piksele z prawej: %1%"
+msgstr "Maksymalna zawartość światła: %1%"
 
 #: src/info/mkvinfo.cpp:636
 #, fuzzy, boost-format
@@ -6876,9 +6878,9 @@ msgid "Max frame light: %1%"
 msgstr "Wysokość w pikselach: %1%"
 
 #: src/info/mkvinfo.cpp:583
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max luminance: %1%"
-msgstr "MaksBufor: %1%"
+msgstr "Maksymalna jasność: %1%"
 
 #: src/info/mkvinfo.cpp:1015
 #, boost-format
@@ -6898,12 +6900,8 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "Maksymalna dozwolona wartość: %1%, obecna wartość: %2%"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
-msgstr ""
-"  --attach-file-once <plik>\n"
-"                             Zapisuje załącznik tylko do\n"
-"                             pierwszego pliku Matroski.\n"
+msgstr "Maksymalna jasność pojedynczego piksela w kandelach na metr kwadratowy (cd/m²)."
 
 #: src/common/property_element.cpp:135
 msgid "Maximum cache"
@@ -6919,7 +6917,7 @@ msgstr ""
 
 #: src/common/property_element.cpp:190
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
-msgstr ""
+msgstr "Maksymalna jasność w kandelach na metr kwadratowy (cd/m²)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Maximum number of files:"
@@ -6944,9 +6942,9 @@ msgid "Mime type: %1%"
 msgstr "Typ Mime: %1%"
 
 #: src/info/mkvinfo.cpp:586
-#, fuzzy, boost-format
+#, boost-format
 msgid "Min luminance: %1%"
-msgstr "MinBufor: %1%"
+msgstr "Minimalna jasność: %1%"
 
 #: src/info/mkvinfo.cpp:1012
 #, boost-format
@@ -6971,7 +6969,7 @@ msgstr "Minimalny bufor"
 
 #: src/common/property_element.cpp:191
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
-msgstr ""
+msgstr "Minimalna jasność w kandelach na metr kwadratowy (cd/m²)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1704
@@ -7009,7 +7007,7 @@ msgstr "Brakuje podania czasu rozpoczęcia/zakończenia dla \"--split\" w \"--sp
 
 #: src/extract/extract_cli_parser.cpp:49
 msgid "Modes"
-msgstr ""
+msgstr "Tryby"
 
 #: src/propedit/options.cpp:184
 #, boost-format
@@ -7504,19 +7502,19 @@ msgstr "Nie ma nic do zrobienia.\n"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:197
 msgid "Nu&mber of entries to create:"
-msgstr "Ilość podrozdziałów do ut&worzenia:"
+msgstr "Liczba podrozdziałów do ut&worzenia:"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:246
 msgid "Number of chapters:"
-msgstr "Ilość rozdziałów:"
+msgstr "Liczba rozdziałów:"
 
 #: src/common/property_element.cpp:137
 msgid "Number of nanoseconds (not scaled) per frame."
-msgstr "Ilość nanosekund na klatkę (nieskalowanych)."
+msgstr "Liczba nanosekund na klatkę (nieskalowanych)."
 
 #: src/common/property_element.cpp:205
 msgid "Numbers of channels in the track."
-msgstr "Ilość kanałów w ścieżce."
+msgstr "Liczba kanałów w ścieżce."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:180
 #, no-c-format
@@ -9281,7 +9279,7 @@ msgstr "Rozpoczęto o:"
 #: src/info/mkvinfo.cpp:1771
 #, boost-format
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
-msgstr "Statystyki dla ścieżki numer %1%: ilość bloków: %2%; rozmiar w bajtach: %3%; czas trwania w sekundach: %4%; przybliżona przepływność w bitach/sekunę: %5%\n"
+msgstr "Statystyki dla ścieżki numer %1%: liczba bloków: %2%; rozmiar w bajtach: %3%; czas trwania w sekundach: %4%; przybliżona przepływność w bitach/sekundę: %5%\n"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:50
 #, no-c-format
@@ -9379,7 +9377,7 @@ msgstr "TTA (The lossless True Audio codec)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1315
 msgid "Tab &position in tab widgets:"
-msgstr "&Położenie zakładek w widżetach:"
+msgstr "&Położenie zakładek w kartach:"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:356
 #, no-c-format
@@ -9497,7 +9495,7 @@ msgstr "GUI może Ci pomóc rozpocząć pracę nad kolejnym plikiem po tym, jak 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:53
 #, no-c-format
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
-msgstr "GUI może przeskanować te pliki, pokazać wynik (włączając w to czas trwania i ilość ścieżek każdej znalezionej listy odtwarzania) oraz pozwoli wybrać, które z nich mają być dodane."
+msgstr "GUI może przeskanować te pliki, pokazać wynik (włączając w to czas trwania i liczbę ścieżek każdej znalezionej listy odtwarzania) oraz pozwoli wybrać, które z nich mają być dodane."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1100
 #: src/mkvtoolnix-gui/merge/input.cpp:1118
@@ -9825,7 +9823,7 @@ msgstr "Obecny pakiet kodów czasowych jest mniejszy od poprzedniego. To przewa�
 
 #: src/common/kax_analyzer.cpp:175
 msgid "The data in the file is corrupted and cannot be modified safely"
-msgstr ""
+msgstr "Dane w pliku są uszkodzone i nie można ich bezpiecznie zmodyfikować"
 
 #: src/common/property_element.cpp:110
 msgid "The date the file was created."
@@ -10199,7 +10197,7 @@ msgstr "Plik, który próbujesz otworzyć (%1), nie jest rozpoznawany ani jako p
 
 #: src/extract/extract_cli_parser.cpp:63
 msgid "The first argument must be the name of source file."
-msgstr ""
+msgstr "Pierwszy argument musi być nazwą pliku źródłowego."
 
 #: src/common/kax_file.cpp:52
 #, boost-format
@@ -10251,9 +10249,8 @@ msgid "The formats do not match."
 msgstr "Formaty nie pasują do siebie."
 
 #: src/extract/extract_cli_parser.cpp:104
-#, fuzzy
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
-msgstr "Czwarty tryb wyodrębnia rozdziały i konwertuje je do formatu XML. Dane wyjściowe są zapisywane do standardowego wyjścia. Wyjście może być użyte jako źródło dla mkvmerge."
+msgstr "Czwarty tryb wyodrębnia rozdziały, konwertuje je do XML i zapisuje do pliku wyjściowego."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 #, no-c-format
@@ -10588,9 +10585,8 @@ msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "Ścieżki różnią się częstotliwością próbkowania: %1% oraz %2%"
 
 #: src/extract/extract_cli_parser.cpp:88
-#, fuzzy
 msgid "The second mode extracts the tags, converts them to XML and writes them to an output file."
-msgstr "Drugi tryb wyodrębnia tagi i konwertuje je do formatu XML. Dane wyjściowe są zapisywane do standardowego wyjścia. Wyjście może być użyte jako źródło dla mkvmerge."
+msgstr "Drugi tryb wyodrębnia tagi, konwertuje je do XML i zapisuje do pliku wyjściowego."
 
 #: src/input/r_tta.cpp:92
 msgid "The seek table in this TTA file seems to be broken.\n"
@@ -11562,9 +11558,11 @@ msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "Nieznany format UID segmentu \"%3%\" w \"%1% %2%\".\n"
 
 #: src/merge/mkvmerge.cpp:903
-#, fuzzy, boost-format
+#, boost-format
 msgid "Unknown format in '%1% %2%'.\n"
-msgstr "Nieznany tryb analizy składni w \"%1% %2%\".\n"
+msgstr ""
+"Nieznany format w \"%1% %2%\".\n"
+"\n"
 
 #: src/input/r_vobsub.cpp:613
 #, boost-format
@@ -11762,7 +11760,7 @@ msgstr "głębia bitów: %1%"
 
 #: src/output/p_video_for_windows.h:37
 msgid "VfW compatible video"
-msgstr "Video kompatybilne z VFW"
+msgstr "Wideo kompatybilne z VFW"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:48
 #: src/mkvtoolnix-gui/merge/track.cpp:405
@@ -11912,9 +11910,8 @@ msgid "Video: colour range"
 msgstr "DV wideo format"
 
 #: src/common/property_element.cpp:179
-#, fuzzy
 msgid "Video: maximum content light"
-msgstr "Ucięte piksele z prawej: %1%"
+msgstr "Obraz: maksymalna zawartość światła"
 
 #: src/common/property_element.cpp:180
 #, fuzzy
@@ -11923,16 +11920,16 @@ msgstr "Wysokość w pikselach: %1%"
 
 #: src/common/property_element.cpp:190
 msgid "Video: maximum luminance"
-msgstr ""
+msgstr "Obraz: maksymalna jasność"
 
 #: src/common/property_element.cpp:191
 msgid "Video: minimum luminance"
-msgstr ""
+msgstr "Obraz: minimalna jasność"
 
 #: src/common/property_element.cpp:170
 #: src/common/property_element.cpp:172
 msgid "Video: pixels to remove in Cb"
-msgstr ""
+msgstr "Obraz: piksele do usunięcia w Cb"
 
 #: src/common/property_element.cpp:168
 #: src/common/property_element.cpp:169
