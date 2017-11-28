@@ -33,6 +33,7 @@ public:
 protected:
   void restoreHidden(QStringList const &hiddenColumns);
   void restoreVisualIndexes(QStringList const &columnOrder);
+  void restoreSizes(QStringList const &columnSizes);
   QString symbolicColumnName(int logicalIndex);
 
   Q_DECLARE_PRIVATE(HeaderViewManager);

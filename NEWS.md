@@ -5,6 +5,11 @@
 * The MKVToolNix project now contains a
   [Code of Coduct](https://mkvtoolnix.download/doc/CODE_OF_CONDUCT.md).
 
+## New features and enhancements
+
+* GUI: the GUI will now save and restore the widths of columns in tree and
+  list views. Implements #2057.
+
 ## Bug fixes
 
 * mkvmerge: MP4 reader: fixed mkvmerge's interpretation of edit list entries
