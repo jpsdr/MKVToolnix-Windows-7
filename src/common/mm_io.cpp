@@ -1086,13 +1086,15 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
   while (1) {
     memset(utf8char, 0, 9);
 
-    int len = read_next_char(utf8char);
+    auto previous_pos = getFilePointer();
+    auto len          = read_next_char(utf8char);
+
     if (0 == len)
       return s;
 
     if ((1 == len) && (utf8char[0] == '\r')) {
       if (previous_was_carriage_return && !m_uses_newlines) {
-        setFilePointer(-1, seek_current);
+        setFilePointer(previous_pos);
         return s;
       }
 
@@ -1104,7 +1106,7 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
       return s;
 
     if (previous_was_carriage_return) {
-      setFilePointer(-len, seek_current);
+      setFilePointer(previous_pos);
       return s;
     }
 
