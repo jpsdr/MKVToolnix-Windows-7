@@ -22,6 +22,9 @@
 * mkvmerge: fixed reading text files encoded in UTF-16 oder UTF-32 that have
   different forms of line endings (new lines, carriage returns or a mix of
   both). Fixes #2160.
+* MKVToolNix GUI: multiplexer: changing the "subtitle/chapter character set"
+  drop-down was ignored when the selected track was a chapter track. Fixes
+  #2165.
 
 
 # Version 18.0.0 "Apricity" 2017-11-18

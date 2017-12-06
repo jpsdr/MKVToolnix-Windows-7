@@ -625,8 +625,12 @@ Tab::onTrackSelectionChanged() {
     else if (track->m_file->isTextSubtitleContainer())
       ui->subtitleCharacterSetPreview->setEnabled(true);
 
-  } else if (track->isChapters())
+  } else if (track->isChapters()) {
     Util::enableWidgets(m_chapterControls, true);
+
+    if (!track->canChangeSubCharset())
+      Util::enableWidgets(QList<QWidget *>{} << ui->characterSetLabel << ui->subtitleCharacterSet, false);
+  }
 
   if (track->isAppended())
     Util::enableWidgets(m_notIfAppendingControls, false);

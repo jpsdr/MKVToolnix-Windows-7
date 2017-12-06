@@ -415,9 +415,16 @@ Track::nameForType()
 bool
 Track::canChangeSubCharset()
   const {
-  return isSubtitles()
+  if (   isSubtitles()
       && m_properties.value(Q("text_subtitles")).toBool()
-      && m_properties.value(Q("encoding")).toString().isEmpty();
+      && m_properties.value(Q("encoding")).toString().isEmpty())
+    return true;
+
+  if (   isChapters()
+       && mtx::included_in(m_file->m_type, mtx::file_type_e::qtmp4, mtx::file_type_e::mpeg_ts, mtx::file_type_e::ogm))
+    return true;
+
+  return false;
 }
 
 bool
