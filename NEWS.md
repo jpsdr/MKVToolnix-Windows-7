@@ -25,6 +25,9 @@
 * MKVToolNix GUI: multiplexer: changing the "subtitle/chapter character set"
   drop-down was ignored when the selected track was a chapter track. Fixes
   #2165.
+* MKVToolNix GUI: multiplexer: once a "subtitle/chapter character set" was set
+  for a track it couldn't be changed back to the empty entry (=
+  auto-detection) anymore.
 
 
 # Version 18.0.0 "Apricity" 2017-11-18

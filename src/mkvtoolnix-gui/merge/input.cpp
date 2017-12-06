@@ -1046,13 +1046,13 @@ Tab::onReduceAudioToCoreChanged(bool newValue) {
 
 void
 Tab::onSubtitleCharacterSetChanged(int newValue) {
-  auto characterSet = ui->subtitleCharacterSet->itemData(newValue).toString();
-  if (characterSet.isEmpty())
+  auto data = ui->subtitleCharacterSet->itemData(newValue);
+  if (!data.isValid())
     return;
 
-  withSelectedTracks([characterSet](auto &track) {
+  withSelectedTracks([&data](auto &track) {
     if (track.canChangeSubCharset())
-      track.m_characterSet = characterSet;
+      track.m_characterSet = data.toString();
   }, true);
 }
 
