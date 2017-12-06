@@ -106,104 +106,104 @@ property_element_c::init_tables() {
   s_properties[KaxTracks::ClassInfos.GlobalId.Value] = std::vector<property_element_c>();
   uint32_t current_index                             = KaxInfo::ClassInfos.GlobalId.Value;
 
-  ELE("title",                KaxTitle::ClassInfos,           Y("Title"),                        Y("The title for the whole movie."));
-  ELE("date",                 KaxDateUTC::ClassInfos,         Y("Date"),                         Y("The date the file was created."));
-  ELE("segment-filename",     KaxSegmentFilename::ClassInfos, Y("Segment filename"),             Y("The file name for this segment."));
-  ELE("prev-filename",        KaxPrevFilename::ClassInfos,    Y("Previous filename"),            Y("An escaped filename corresponding to\nthe previous segment."));
-  ELE("next-filename",        KaxNextFilename::ClassInfos,    Y("Next filename"),                Y("An escaped filename corresponding to\nthe next segment."));
-  ELE("segment-uid",          KaxSegmentUID::ClassInfos,      Y("Segment unique ID"),            Y("A randomly generated unique ID to identify the current\n"
-                                                                                                   "segment between many others (128 bits)."));
-  ELE("prev-uid",             KaxPrevUID::ClassInfos,         Y("Previous segment's unique ID"), Y("A unique ID to identify the previous chained\nsegment (128 bits)."));
-  ELE("next-uid",             KaxNextUID::ClassInfos,         Y("Next segment's unique ID"),     Y("A unique ID to identify the next chained\nsegment (128 bits)."));
-  ELE("muxing-application",   KaxMuxingApp::ClassInfos,       Y("Multiplexing application"),     Y("The name of the application or library used for multiplexing the file."));
-  ELE("writing-application",  KaxWritingApp::ClassInfos,      Y("Writing application"),          Y("The name of the application or library used for writing the file."));
+  ELE("title",                KaxTitle::ClassInfos,           YT("Title"),                        YT("The title for the whole movie."));
+  ELE("date",                 KaxDateUTC::ClassInfos,         YT("Date"),                         YT("The date the file was created."));
+  ELE("segment-filename",     KaxSegmentFilename::ClassInfos, YT("Segment filename"),             YT("The file name for this segment."));
+  ELE("prev-filename",        KaxPrevFilename::ClassInfos,    YT("Previous filename"),            YT("An escaped filename corresponding to\nthe previous segment."));
+  ELE("next-filename",        KaxNextFilename::ClassInfos,    YT("Next filename"),                YT("An escaped filename corresponding to\nthe next segment."));
+  ELE("segment-uid",          KaxSegmentUID::ClassInfos,      YT("Segment unique ID"),            YT("A randomly generated unique ID to identify the current\n"
+                                                                                                     "segment between many others (128 bits)."));
+  ELE("prev-uid",             KaxPrevUID::ClassInfos,         YT("Previous segment's unique ID"), YT("A unique ID to identify the previous chained\nsegment (128 bits)."));
+  ELE("next-uid",             KaxNextUID::ClassInfos,         YT("Next segment's unique ID"),     YT("A unique ID to identify the next chained\nsegment (128 bits)."));
+  ELE("muxing-application",   KaxMuxingApp::ClassInfos,       YT("Multiplexing application"),     YT("The name of the application or library used for multiplexing the file."));
+  ELE("writing-application",  KaxWritingApp::ClassInfos,      YT("Writing application"),          YT("The name of the application or library used for writing the file."));
 
   current_index = KaxTracks::ClassInfos.GlobalId.Value;
 
-  ELE("track-number",         KaxTrackNumber::ClassInfos,          Y("Track number"),          Y("The track number as used in the Block Header."));
-  ELE("track-uid",            KaxTrackUID::ClassInfos,             Y("Track UID"),             Y("A unique ID to identify the Track. This should be\nkept the same when making a "
-                                                                                                 "direct stream copy\nof the Track to another file."));
-  ELE("flag-default",         KaxTrackFlagDefault::ClassInfos,     Y("'Default track' flag"),  Y("Set if that track (audio, video or subs) SHOULD\nbe used if no language found matches the\n"
-                                                                                                 "user preference."));
-  ELE("flag-enabled",         KaxTrackFlagEnabled::ClassInfos,     Y("'Track enabled' flag"),  Y("Set if the track is used."));
-  ELE("flag-forced",          KaxTrackFlagForced::ClassInfos,      Y("'Forced display' flag"), Y("Set if that track MUST be used during playback.\n"
-                                                                                                 "There can be many forced track for a kind (audio,\nvideo or subs). "
-                                                                                                 "The player should select the one\nwhose language matches the user preference or the\n"
-                                                                                                 "default + forced track."));
-  ELE("min-cache",            KaxTrackMinCache::ClassInfos,        Y("Minimum cache"),         Y("The minimum number of frames a player\nshould be able to cache during playback.\n"
-                                                                                                 "If set to 0, the reference pseudo-cache system\nis not used."));
-  ELE("max-cache",            KaxTrackMaxCache::ClassInfos,        Y("Maximum cache"),         Y("The maximum number of frames a player\nshould be able to cache during playback.\n"
-                                                                                                 "If set to 0, the reference pseudo-cache system\nis not used."));
-  ELE("default-duration",     KaxTrackDefaultDuration::ClassInfos, Y("Default duration"),      Y("Number of nanoseconds (not scaled) per frame."));
-  ELE("name",                 KaxTrackName::ClassInfos,            Y("Name"),                  Y("A human-readable track name."));
-  ELE("language",             KaxTrackLanguage::ClassInfos,        Y("Language"),              Y("Specifies the language of the track in the\nMatroska languages form."));
-  ELE("codec-id",             KaxCodecID::ClassInfos,              Y("Codec ID"),              Y("An ID corresponding to the codec."));
-  ELE("codec-name",           KaxCodecName::ClassInfos,            Y("Codec name"),            Y("A human-readable string specifying the codec."));
-  ELE("codec-delay",          KaxCodecDelay::ClassInfos,           Y("Codec-inherent delay"),  Y("Delay built into the codec during decoding in ns."));
+  ELE("track-number",         KaxTrackNumber::ClassInfos,          YT("Track number"),          YT("The track number as used in the Block Header."));
+  ELE("track-uid",            KaxTrackUID::ClassInfos,             YT("Track UID"),             YT("A unique ID to identify the Track. This should be\nkept the same when making a "
+                                                                                                   "direct stream copy\nof the Track to another file."));
+  ELE("flag-default",         KaxTrackFlagDefault::ClassInfos,     YT("'Default track' flag"),  YT("Set if that track (audio, video or subs) SHOULD\nbe used if no language found matches the\n"
+                                                                                                   "user preference."));
+  ELE("flag-enabled",         KaxTrackFlagEnabled::ClassInfos,     YT("'Track enabled' flag"),  YT("Set if the track is used."));
+  ELE("flag-forced",          KaxTrackFlagForced::ClassInfos,      YT("'Forced display' flag"), YT("Set if that track MUST be used during playback.\n"
+                                                                                                   "There can be many forced track for a kind (audio,\nvideo or subs). "
+                                                                                                   "The player should select the one\nwhose language matches the user preference or the\n"
+                                                                                                   "default + forced track."));
+  ELE("min-cache",            KaxTrackMinCache::ClassInfos,        YT("Minimum cache"),         YT("The minimum number of frames a player\nshould be able to cache during playback.\n"
+                                                                                                   "If set to 0, the reference pseudo-cache system\nis not used."));
+  ELE("max-cache",            KaxTrackMaxCache::ClassInfos,        YT("Maximum cache"),         YT("The maximum number of frames a player\nshould be able to cache during playback.\n"
+                                                                                                   "If set to 0, the reference pseudo-cache system\nis not used."));
+  ELE("default-duration",     KaxTrackDefaultDuration::ClassInfos, YT("Default duration"),      YT("Number of nanoseconds (not scaled) per frame."));
+  ELE("name",                 KaxTrackName::ClassInfos,            YT("Name"),                  YT("A human-readable track name."));
+  ELE("language",             KaxTrackLanguage::ClassInfos,        YT("Language"),              YT("Specifies the language of the track in the\nMatroska languages form."));
+  ELE("codec-id",             KaxCodecID::ClassInfos,              YT("Codec ID"),              YT("An ID corresponding to the codec."));
+  ELE("codec-name",           KaxCodecName::ClassInfos,            YT("Codec name"),            YT("A human-readable string specifying the codec."));
+  ELE("codec-delay",          KaxCodecDelay::ClassInfos,           YT("Codec-inherent delay"),  YT("Delay built into the codec during decoding in ns."));
 
   sub_master_callbacks = &KaxTrackVideo::ClassInfos;
 
-  ELE("interlaced",        KaxVideoFlagInterlaced::ClassInfos,  Y("Video interlaced flag"),   Y("Set if the video is interlaced."));
-  ELE("pixel-width",       KaxVideoPixelWidth::ClassInfos,      Y("Video pixel width"),       Y("Width of the encoded video frames in pixels."));
-  ELE("pixel-height",      KaxVideoPixelHeight::ClassInfos,     Y("Video pixel height"),      Y("Height of the encoded video frames in pixels."));
-  ELE("display-width",     KaxVideoDisplayWidth::ClassInfos,    Y("Video display width"),     Y("Width of the video frames to display."));
-  ELE("display-height",    KaxVideoDisplayHeight::ClassInfos,   Y("Video display height"),    Y("Height of the video frames to display."));
-  ELE("display-unit",      KaxVideoDisplayUnit::ClassInfos,     Y("Video display unit"),      Y("Type of the unit for DisplayWidth/Height\n(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."));
-  ELE("pixel-crop-left",   KaxVideoPixelCropLeft::ClassInfos,   Y("Video crop left"),         Y("The number of video pixels to remove\non the left of the image."));
-  ELE("pixel-crop-top",    KaxVideoPixelCropTop::ClassInfos,    Y("Video crop top"),          Y("The number of video pixels to remove\non the top of the image."));
-  ELE("pixel-crop-right",  KaxVideoPixelCropRight::ClassInfos,  Y("Video crop right"),        Y("The number of video pixels to remove\non the right of the image."));
-  ELE("pixel-crop-bottom", KaxVideoPixelCropBottom::ClassInfos, Y("Video crop bottom"),       Y("The number of video pixels to remove\non the bottom of the image."));
-  ELE("aspect-ratio-type", KaxVideoAspectRatio::ClassInfos,     Y("Video aspect ratio type"), Y("Specify the possible modifications to the aspect ratio\n"
-                                                                                                "(0: free resizing, 1: keep aspect ratio, 2: fixed)."));
-  ELE("field-order",       KaxVideoFieldOrder::ClassInfos,      Y("Video field order"),       Y("Field order (0, 1, 2, 6, 9 or 14, see documentation)."));
-  ELE("stereo-mode",       KaxVideoStereoMode::ClassInfos,      Y("Video stereo mode"),       Y("Stereo-3D video mode (0 - 11, see documentation)."));
+  ELE("interlaced",        KaxVideoFlagInterlaced::ClassInfos,  YT("Video interlaced flag"),   YT("Set if the video is interlaced."));
+  ELE("pixel-width",       KaxVideoPixelWidth::ClassInfos,      YT("Video pixel width"),       YT("Width of the encoded video frames in pixels."));
+  ELE("pixel-height",      KaxVideoPixelHeight::ClassInfos,     YT("Video pixel height"),      YT("Height of the encoded video frames in pixels."));
+  ELE("display-width",     KaxVideoDisplayWidth::ClassInfos,    YT("Video display width"),     YT("Width of the video frames to display."));
+  ELE("display-height",    KaxVideoDisplayHeight::ClassInfos,   YT("Video display height"),    YT("Height of the video frames to display."));
+  ELE("display-unit",      KaxVideoDisplayUnit::ClassInfos,     YT("Video display unit"),      YT("Type of the unit for DisplayWidth/Height\n(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."));
+  ELE("pixel-crop-left",   KaxVideoPixelCropLeft::ClassInfos,   YT("Video crop left"),         YT("The number of video pixels to remove\non the left of the image."));
+  ELE("pixel-crop-top",    KaxVideoPixelCropTop::ClassInfos,    YT("Video crop top"),          YT("The number of video pixels to remove\non the top of the image."));
+  ELE("pixel-crop-right",  KaxVideoPixelCropRight::ClassInfos,  YT("Video crop right"),        YT("The number of video pixels to remove\non the right of the image."));
+  ELE("pixel-crop-bottom", KaxVideoPixelCropBottom::ClassInfos, YT("Video crop bottom"),       YT("The number of video pixels to remove\non the bottom of the image."));
+  ELE("aspect-ratio-type", KaxVideoAspectRatio::ClassInfos,     YT("Video aspect ratio type"), YT("Specify the possible modifications to the aspect ratio\n"
+                                                                                                  "(0: free resizing, 1: keep aspect ratio, 2: fixed)."));
+  ELE("field-order",       KaxVideoFieldOrder::ClassInfos,      YT("Video field order"),       YT("Field order (0, 1, 2, 6, 9 or 14, see documentation)."));
+  ELE("stereo-mode",       KaxVideoStereoMode::ClassInfos,      YT("Video stereo mode"),       YT("Stereo-3D video mode (0 - 11, see documentation)."));
 
   sub_master_callbacks         = &KaxTrackVideo::ClassInfos;
   sub_sub_master_callbacks     = &KaxVideoColour::ClassInfos;
   sub_sub_sub_master_callbacks = &KaxVideoColourMasterMeta::ClassInfos;
 
-  ELE2("colour-matrix-coefficients",       KaxVideoColourMatrix::ClassInfos,            Y("Video: colour matrix coefficients"), Y("Sets the matrix coefficients of the video used to derive luma and chroma values "
-                                                                                                                                  "from red, green and blue color primaries."));
-  ELE2("colour-bits-per-channel",          KaxVideoBitsPerChannel::ClassInfos,          Y("Video: bits per colour channel"),    Y("Sets the number of coded bits for a colour channel."));
-  ELE2("chroma-subsample-horizontal",      KaxVideoChromaSubsampHorz::ClassInfos,       Y("Video: pixels to remove in chroma"), Y("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."));
-  ELE2("chroma-subsample-vertical",        KaxVideoChromaSubsampVert::ClassInfos,       Y("Video: pixels to remove in chroma"), Y("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."));
-  ELE2("cb-subsample-horizontal",          KaxVideoCbSubsampHorz::ClassInfos,           Y("Video: pixels to remove in Cb"),     Y("The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. "
-                                                                                                                                  "This is additive with chroma-subsample-horizontal."));
-  ELE2("cb-subsample-vertical",            KaxVideoCbSubsampVert::ClassInfos,           Y("Video: pixels to remove in Cb"),     Y("The amount of pixels to remove in the Cb channel for every pixel not removed vertically. "
-                                                                                                                                  "This is additive with chroma-subsample-vertical."));
-  ELE2("chroma-siting-horizontal",         KaxVideoChromaSitHorz::ClassInfos,           Y("Video: chroma siting"),              Y("How chroma is sited horizontally."));
-  ELE2("chroma-siting-vertical",           KaxVideoChromaSitVert::ClassInfos,           Y("Video: chroma siting"),              Y("How chroma is sited vertically."));
-  ELE2("colour-range",                     KaxVideoColourRange::ClassInfos,             Y("Video: colour range"),               Y("Clipping of the color ranges."));
-  ELE2("colour-transfer-characteristics",  KaxVideoColourTransferCharacter::ClassInfos, Y("Video: transfer characteristics"),   Y("The colour transfer characteristics of the video."));
-  ELE2("colour-primaries",                 KaxVideoColourPrimaries::ClassInfos,         Y("Video: colour primaries"),           Y("The colour primaries of the video."));
-  ELE2("max-content-light",                KaxVideoColourMaxCLL::ClassInfos,            Y("Video: maximum content light"),      Y("Maximum brightness of a single pixel in candelas per square meter (cd/m²)."));
-  ELE2("max-frame-light",                  KaxVideoColourMaxFALL::ClassInfos,           Y("Video: maximum frame light"),        Y("Maximum frame-average light level in candelas per square meter (cd/m²)."));
+  ELE2("colour-matrix-coefficients",       KaxVideoColourMatrix::ClassInfos,            YT("Video: colour matrix coefficients"), YT("Sets the matrix coefficients of the video used to derive luma and chroma values "
+                                                                                                                                    "from red, green and blue color primaries."));
+  ELE2("colour-bits-per-channel",          KaxVideoBitsPerChannel::ClassInfos,          YT("Video: bits per colour channel"),    YT("Sets the number of coded bits for a colour channel."));
+  ELE2("chroma-subsample-horizontal",      KaxVideoChromaSubsampHorz::ClassInfos,       YT("Video: pixels to remove in chroma"), YT("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."));
+  ELE2("chroma-subsample-vertical",        KaxVideoChromaSubsampVert::ClassInfos,       YT("Video: pixels to remove in chroma"), YT("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."));
+  ELE2("cb-subsample-horizontal",          KaxVideoCbSubsampHorz::ClassInfos,           YT("Video: pixels to remove in Cb"),     YT("The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. "
+                                                                                                                                    "This is additive with chroma-subsample-horizontal."));
+  ELE2("cb-subsample-vertical",            KaxVideoCbSubsampVert::ClassInfos,           YT("Video: pixels to remove in Cb"),     YT("The amount of pixels to remove in the Cb channel for every pixel not removed vertically. "
+                                                                                                                                    "This is additive with chroma-subsample-vertical."));
+  ELE2("chroma-siting-horizontal",         KaxVideoChromaSitHorz::ClassInfos,           YT("Video: chroma siting"),              YT("How chroma is sited horizontally."));
+  ELE2("chroma-siting-vertical",           KaxVideoChromaSitVert::ClassInfos,           YT("Video: chroma siting"),              YT("How chroma is sited vertically."));
+  ELE2("colour-range",                     KaxVideoColourRange::ClassInfos,             YT("Video: colour range"),               YT("Clipping of the color ranges."));
+  ELE2("colour-transfer-characteristics",  KaxVideoColourTransferCharacter::ClassInfos, YT("Video: transfer characteristics"),   YT("The colour transfer characteristics of the video."));
+  ELE2("colour-primaries",                 KaxVideoColourPrimaries::ClassInfos,         YT("Video: colour primaries"),           YT("The colour primaries of the video."));
+  ELE2("max-content-light",                KaxVideoColourMaxCLL::ClassInfos,            YT("Video: maximum content light"),      YT("Maximum brightness of a single pixel in candelas per square meter (cd/m²)."));
+  ELE2("max-frame-light",                  KaxVideoColourMaxFALL::ClassInfos,           YT("Video: maximum frame light"),        YT("Maximum frame-average light level in candelas per square meter (cd/m²)."));
 
-  ELE3("chromaticity-coordinates-red-x",   KaxVideoRChromaX::ClassInfos,                Y("Video: chromaticity red X"),         Y("Red X chromaticity coordinate as defined by CIE 1931."));
-  ELE3("chromaticity-coordinates-red-y",   KaxVideoRChromaY::ClassInfos,                Y("Video: chromaticity red Y"),         Y("Red Y chromaticity coordinate as defined by CIE 1931."));
-  ELE3("chromaticity-coordinates-green-x", KaxVideoGChromaX::ClassInfos,                Y("Video: chromaticity green X"),       Y("Green X chromaticity coordinate as defined by CIE 1931."));
-  ELE3("chromaticity-coordinates-green-y", KaxVideoGChromaY::ClassInfos,                Y("Video: chromaticity green Y"),       Y("Green Y chromaticity coordinate as defined by CIE 1931."));
-  ELE3("chromaticity-coordinates-blue-x",  KaxVideoBChromaX::ClassInfos,                Y("Video: chromaticity blue X"),        Y("Blue X chromaticity coordinate as defined by CIE 1931."));
-  ELE3("chromaticity-coordinates-blue-y",  KaxVideoBChromaY::ClassInfos,                Y("Video: chromaticity blue Y"),        Y("Blue Y chromaticity coordinate as defined by CIE 1931."));
-  ELE3("white-coordinates-x",              KaxVideoWhitePointChromaX::ClassInfos,       Y("Video: white point X"),              Y("White colour chromaticity coordinate X as defined by CIE 1931."));
-  ELE3("white-coordinates-y",              KaxVideoWhitePointChromaY::ClassInfos,       Y("Video: white point Y"),              Y("White colour chromaticity coordinate Y as defined by CIE 1931."));
-  ELE3("max-luminance",                    KaxVideoLuminanceMax::ClassInfos,            Y("Video: maximum luminance"),          Y("Maximum luminance in candelas per square meter (cd/m²)."));
-  ELE3("min-luminance",                    KaxVideoLuminanceMin::ClassInfos,            Y("Video: minimum luminance"),          Y("Minimum luminance in candelas per square meter (cd/m²)."));
+  ELE3("chromaticity-coordinates-red-x",   KaxVideoRChromaX::ClassInfos,                YT("Video: chromaticity red X"),         YT("Red X chromaticity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-red-y",   KaxVideoRChromaY::ClassInfos,                YT("Video: chromaticity red Y"),         YT("Red Y chromaticity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-green-x", KaxVideoGChromaX::ClassInfos,                YT("Video: chromaticity green X"),       YT("Green X chromaticity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-green-y", KaxVideoGChromaY::ClassInfos,                YT("Video: chromaticity green Y"),       YT("Green Y chromaticity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-blue-x",  KaxVideoBChromaX::ClassInfos,                YT("Video: chromaticity blue X"),        YT("Blue X chromaticity coordinate as defined by CIE 1931."));
+  ELE3("chromaticity-coordinates-blue-y",  KaxVideoBChromaY::ClassInfos,                YT("Video: chromaticity blue Y"),        YT("Blue Y chromaticity coordinate as defined by CIE 1931."));
+  ELE3("white-coordinates-x",              KaxVideoWhitePointChromaX::ClassInfos,       YT("Video: white point X"),              YT("White colour chromaticity coordinate X as defined by CIE 1931."));
+  ELE3("white-coordinates-y",              KaxVideoWhitePointChromaY::ClassInfos,       YT("Video: white point Y"),              YT("White colour chromaticity coordinate Y as defined by CIE 1931."));
+  ELE3("max-luminance",                    KaxVideoLuminanceMax::ClassInfos,            YT("Video: maximum luminance"),          YT("Maximum luminance in candelas per square meter (cd/m²)."));
+  ELE3("min-luminance",                    KaxVideoLuminanceMin::ClassInfos,            YT("Video: minimum luminance"),          YT("Minimum luminance in candelas per square meter (cd/m²)."));
 
   sub_sub_master_callbacks = &KaxVideoProjection::ClassInfos;
 
-  ELE2("projection-type",       KaxVideoProjectionType::ClassInfos,      Y("Video: projection type"),             Y("Describes the projection used for this video track (0 – 3)."));
-  ELE2("projection-private",    KaxVideoProjectionPrivate::ClassInfos,   Y("Video: projection-specific data"),    Y("Private data that only applies to a specific projection."));
-  ELE2("projection-pose-yaw",   KaxVideoProjectionPoseYaw::ClassInfos,   Y("Video: projection's yaw rotation"),   Y("Specifies a yaw rotation to the projection."));
-  ELE2("projection-pose-pitch", KaxVideoProjectionPosePitch::ClassInfos, Y("Video: projection's pitch rotation"), Y("Specifies a pitch rotation to the projection."));
-  ELE2("projection-pose-roll",  KaxVideoProjectionPoseRoll::ClassInfos,  Y("Video: projection's roll rotation"),  Y("Specifies a roll rotation to the projection."));
+  ELE2("projection-type",       KaxVideoProjectionType::ClassInfos,      YT("Video: projection type"),             YT("Describes the projection used for this video track (0 – 3)."));
+  ELE2("projection-private",    KaxVideoProjectionPrivate::ClassInfos,   YT("Video: projection-specific data"),    YT("Private data that only applies to a specific projection."));
+  ELE2("projection-pose-yaw",   KaxVideoProjectionPoseYaw::ClassInfos,   YT("Video: projection's yaw rotation"),   YT("Specifies a yaw rotation to the projection."));
+  ELE2("projection-pose-pitch", KaxVideoProjectionPosePitch::ClassInfos, YT("Video: projection's pitch rotation"), YT("Specifies a pitch rotation to the projection."));
+  ELE2("projection-pose-roll",  KaxVideoProjectionPoseRoll::ClassInfos,  YT("Video: projection's roll rotation"),  YT("Specifies a roll rotation to the projection."));
 
   sub_master_callbacks = &KaxTrackAudio::ClassInfos;
 
-  ELE("sampling-frequency",        KaxAudioSamplingFreq::ClassInfos,       Y("Audio sampling frequency"),        Y("Sampling frequency in Hz."));
-  ELE("output-sampling-frequency", KaxAudioOutputSamplingFreq::ClassInfos, Y("Audio output sampling frequency"), Y("Real output sampling frequency in Hz."));
-  ELE("channels",                  KaxAudioChannels::ClassInfos,           Y("Audio channels"),                  Y("Numbers of channels in the track."));
-  ELE("bit-depth",                 KaxAudioBitDepth::ClassInfos,           Y("Audio bit depth"),                 Y("Bits per sample, mostly used for PCM."));
+  ELE("sampling-frequency",        KaxAudioSamplingFreq::ClassInfos,       YT("Audio sampling frequency"),        YT("Sampling frequency in Hz."));
+  ELE("output-sampling-frequency", KaxAudioOutputSamplingFreq::ClassInfos, YT("Audio output sampling frequency"), YT("Real output sampling frequency in Hz."));
+  ELE("channels",                  KaxAudioChannels::ClassInfos,           YT("Audio channels"),                  YT("Numbers of channels in the track."));
+  ELE("bit-depth",                 KaxAudioBitDepth::ClassInfos,           YT("Audio bit depth"),                 YT("Bits per sample, mostly used for PCM."));
 
   auto look_up = [](EbmlCallbacks const &callbacks, std::string const &name) -> property_element_c & {
     auto itr = brng::find_if(s_properties[callbacks.GlobalId.GetValue()], [&name](auto const &prop) { return prop.m_name == name; });

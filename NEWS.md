@@ -28,6 +28,9 @@
 * MKVToolNix GUI: multiplexer: once a "subtitle/chapter character set" was set
   for a track it couldn't be changed back to the empty entry (=
   auto-detection) anymore.
+* MKVToolNix GUI: header editor: fixed re-translating several displayed
+  strings when the GUI language is changed if the language the GUI was started
+  with was not English. Fixes #2159.
 
 
 # Version 18.0.0 "Apricity" 2017-11-18
