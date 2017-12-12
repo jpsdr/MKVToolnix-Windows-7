@@ -430,18 +430,6 @@ find_and_verify_track_uids(KaxTracks &tracks,
       mxerror(boost::format(Y("No track with the ID %1% was found in the source file.\n")) % tspec.tid);
 }
 
-static void
-handle_segment_info(EbmlMaster *info,
-                    kax_file_c *file,
-                    uint64_t &tc_scale) {
-  auto ktc_scale = FindChild<KaxTimecodeScale>(info);
-  if (!ktc_scale)
-    return;
-
-  tc_scale = ktc_scale->GetValue();
-  file->set_timestamp_scale(tc_scale);
-}
-
 bool
 extract_tracks(kax_analyzer_c &analyzer,
                options_c::mode_options_c &options) {
@@ -454,25 +442,19 @@ extract_tracks(kax_analyzer_c &analyzer,
   auto &in          = analyzer.get_file();
   auto file         = std::make_shared<kax_file_c>(in);
   int64_t file_size = in.get_size();
-  uint64_t tc_scale = TIMESTAMP_SCALE;
-  bool segment_info_found = false, tracks_found = false;
 
   // open input file
-  auto af_master    = ebml_master_cptr{ analyzer.read_all(EBML_INFO(KaxInfo)) };
-  auto segment_info = dynamic_cast<KaxInfo *>(af_master.get());
-  if (segment_info) {
-    segment_info_found = true;
-    handle_segment_info(segment_info, file.get(), tc_scale);
-  }
+  auto af_segment_info = ebml_master_cptr{ analyzer.read_all(EBML_INFO(KaxInfo)) };
+  auto segment_info    = dynamic_cast<KaxInfo *>(af_segment_info.get());
+  auto af_tracks       = ebml_master_cptr{ analyzer.read_all(EBML_INFO(KaxTracks)) };
+  auto tracks          = dynamic_cast<KaxTracks *>(af_tracks.get());
 
-  af_master   = ebml_master_cptr{ analyzer.read_all(EBML_INFO(KaxTracks)) };
-  auto tracks = dynamic_cast<KaxTracks *>(af_master.get());
-  if (tracks) {
-    tracks_found = true;
-    find_and_verify_track_uids(*tracks, tspecs);
-    create_extractors(*tracks, tspecs);
-    create_timestamp_files(*tracks, tspecs);
-  }
+  if (!segment_info || !tracks)
+    return false;
+
+  find_and_verify_track_uids(*tracks, tspecs);
+  create_extractors(*tracks, tspecs);
+  create_timestamp_files(*tracks, tspecs);
 
   try {
     in.setFilePointer(0);
@@ -498,107 +480,70 @@ extract_tracks(kax_analyzer_c &analyzer,
         return false;
       }
 
-      if (Is<KaxSegment>(l0)) {
-        show_element(l0, 0, Y("Segment"));
+      if (Is<KaxSegment>(l0))
         break;
-      }
 
       l0->SkipData(*es, EBML_CONTEXT(l0));
       delete l0;
     }
 
-    EbmlElement *l1   = nullptr;
+    auto previous_percentage = -1;
+    auto tc_scale            = FindChildValue<KaxTimecodeScale, uint64_t>(segment_info, 1000000);
 
-    KaxChapters all_chapters;
-    KaxTags all_tags;
+    file->set_timestamp_scale(tc_scale);
+    file->set_segment_end(*l0);
 
-    while ((l1 = file->read_next_level1_element())) {
-      if (Is<KaxInfo>(l1) && !segment_info_found) {
-        segment_info_found = true;
-        handle_segment_info(static_cast<EbmlMaster *>(l1), file.get(), tc_scale);
+    while (true) {
+      auto cluster = std::unique_ptr<KaxCluster>{file->read_next_cluster()};
+      if (!cluster)
+        break;
 
-      } else if (Is<KaxTracks>(l1) && !tracks_found) {
-        tracks_found = true;
-        tracks       = dynamic_cast<KaxTracks *>(l1);
-        find_and_verify_track_uids(*tracks, tspecs);
-        create_extractors(*tracks, tspecs);
-        create_timestamp_files(*tracks, tspecs);
+      auto ctc = static_cast<KaxClusterTimecode *> (cluster->FindFirstElt(EBML_INFO(KaxClusterTimecode), false));
+      cluster->InitTimecode(ctc ? ctc->GetValue() : 0, tc_scale);
 
-      } else if (Is<KaxCluster>(l1)) {
-        show_element(l1, 1, Y("Cluster"));
-        KaxCluster *cluster = static_cast<KaxCluster *>(l1);
+      if (0 == verbose) {
+        auto current_percentage = in.getFilePointer() * 100 / file_size;
 
-        if (0 == verbose) {
-          auto current_percentage = in.getFilePointer() * 100 / file_size;
-
+        if (previous_percentage != static_cast<int>(current_percentage)) {
           if (mtx::cli::g_gui_mode)
             mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
           else
             mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
+
+          previous_percentage = current_percentage;
         }
-
-        KaxClusterTimecode *ctc = FindChild<KaxClusterTimecode>(l1);
-        if (ctc) {
-          uint64_t cluster_ts = ctc->GetValue();
-          show_element(ctc, 2, boost::format(Y("Cluster timestamp: %|1$.3f|s")) % ((float)cluster_ts * (float)tc_scale / 1000000000.0));
-          cluster->InitTimecode(cluster_ts, tc_scale);
-        } else
-          cluster->InitTimecode(0, tc_scale);
-
-        size_t i;
-        int64_t max_timestamp = -1;
-
-        for (i = 0; cluster->ListSize() > i; ++i) {
-          int64_t max_bg_timestamp = -1;
-          EbmlElement *el          = (*cluster)[i];
-
-          if (Is<KaxBlockGroup>(el)) {
-            show_element(el, 2, Y("Block group"));
-            max_bg_timestamp = handle_blockgroup(*static_cast<KaxBlockGroup *>(el), *cluster, tc_scale);
-
-          } else if (Is<KaxSimpleBlock>(el)) {
-            show_element(el, 2, Y("SimpleBlock"));
-            max_bg_timestamp = handle_simpleblock(*static_cast<KaxSimpleBlock *>(el), *cluster);
-          }
-
-          max_timestamp = std::max(max_timestamp, max_bg_timestamp);
-        }
-
-        if (-1 != max_timestamp)
-          file->set_last_timestamp(max_timestamp);
-
-      } else if (Is<KaxChapters>(l1)) {
-        KaxChapters &chapters = *static_cast<KaxChapters *>(l1);
-
-        while (chapters.ListSize() > 0) {
-          if (Is<KaxEditionEntry>(chapters[0])) {
-            KaxEditionEntry &entry = *static_cast<KaxEditionEntry *>(chapters[0]);
-            while (entry.ListSize() > 0) {
-              if (Is<KaxChapterAtom>(entry[0]))
-                all_chapters.PushElement(*entry[0]);
-              entry.Remove(0);
-            }
-          }
-          chapters.Remove(0);
-        }
-
-      } else if (Is<KaxTags>(l1)) {
-        KaxTags &tags = *static_cast<KaxTags *>(l1);
-
-        while (tags.ListSize() > 0) {
-          all_tags.PushElement(*tags[0]);
-          tags.Remove(0);
-        }
-
       }
 
-      delete l1;
+      size_t i;
+      int64_t max_timestamp = -1;
 
-    } // while (l1)
+      for (i = 0; cluster->ListSize() > i; ++i) {
+        int64_t max_bg_timestamp = -1;
+        EbmlElement *el          = (*cluster)[i];
+
+        if (Is<KaxBlockGroup>(el))
+          max_bg_timestamp = handle_blockgroup(*static_cast<KaxBlockGroup *>(el), *cluster, tc_scale);
+
+        else if (Is<KaxSimpleBlock>(el))
+          max_bg_timestamp = handle_simpleblock(*static_cast<KaxSimpleBlock *>(el), *cluster);
+
+        max_timestamp = std::max(max_timestamp, max_bg_timestamp);
+      }
+
+      if (-1 != max_timestamp)
+        file->set_last_timestamp(max_timestamp);
+    }
 
     delete l0;
 
-    write_all_cuesheets(all_chapters, all_tags, tspecs);
+    auto af_chapters = ebml_element_cptr{ analyzer.read_all(EBML_INFO(KaxChapters)) };
+    auto chapters    = dynamic_cast<KaxChapters *>(af_chapters.get());
+
+    auto af_tags     = ebml_element_cptr{ analyzer.read_all(EBML_INFO(KaxTags)) };
+    auto tags        = dynamic_cast<KaxTags *>(af_tags.get());
+
+    if (chapters && tags)
+      write_all_cuesheets(*chapters, *tags, tspecs);
 
     // Now just close the files and go to sleep. Mummy will sing you a
     // lullaby. Just close your eyes, listen to her sweet voice, singing,
