@@ -31,6 +31,7 @@
 #include "common/list_utils.h"
 #include "common/kax_analyzer.h"
 #include "common/mm_io_x.h"
+#include "common/mm_read_buffer_io.h"
 #include "common/strings/editing.h"
 
 using namespace libebml;
@@ -100,6 +101,8 @@ kax_analyzer_c::reopen_file() {
 
   try {
     m_file = new mm_file_io_c(m_file_name, m_open_mode);
+    if (MODE_READ == m_open_mode)
+      m_file = new mm_read_buffer_io_c(m_file);
 
   } catch (mtx::mm_io::exception &) {
     delete m_file;
