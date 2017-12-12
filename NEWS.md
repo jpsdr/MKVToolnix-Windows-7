@@ -34,6 +34,10 @@
 * MKVToolNix GUI: header editor: fixed re-translating several displayed
   strings when the GUI language is changed if the language the GUI was started
   with was not English. Fixes #2159.
+* MKVToolNix GUI: header editor: whenever a file did not contain a "date"
+  element in its segment information section, the GUI would erroneously ask
+  the user to confirm discarding unsaved changes when closing or reloading the
+  tab. Fixes #2167.
 
 
 # Version 18.0.0 "Apricity" 2017-11-18

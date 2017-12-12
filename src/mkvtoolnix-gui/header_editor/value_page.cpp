@@ -212,7 +212,7 @@ ValuePage::willBePresent()
 bool
 ValuePage::hasThisBeenModified()
   const {
-  return m_cbAddOrRemove->isChecked() || (currentValueAsString() != originalValueAsString());
+  return m_cbAddOrRemove->isChecked() || (m_present && (currentValueAsString() != originalValueAsString()));
 }
 
 bool
