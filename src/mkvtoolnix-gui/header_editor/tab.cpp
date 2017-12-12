@@ -778,4 +778,32 @@ Tab::handleDroppedFiles(QStringList const &fileNames,
     addAttachments(fileNames);
 }
 
+bool
+Tab::isClosingOrReloadingOkIfModified(ModifiedConfirmationMode mode) {
+  if (!Util::Settings::get().m_warnBeforeClosingModifiedTabs)
+    return true;
+
+  if (!hasBeenModified())
+    return true;
+
+  auto tool = MainWindow::headerEditorTool();
+  MainWindow::get()->switchToTool(tool);
+  tool->showTab(*this);
+
+  auto closing  = mode == ModifiedConfirmationMode::Closing;
+  auto text     = closing ? QY("The file \"%1\" has been modified. Do you really want to close? All changes will be lost.")
+                :           QY("The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost.");
+  auto title    = closing ? QY("Close modified file") : QY("Reload modified file");
+  auto yesLabel = closing ? QY("&Close file")         : QY("&Reload file");
+
+  auto answer   = Util::MessageBox::question(this)
+    ->title(title)
+    .text(text.arg(QFileInfo{fileName()}.fileName()))
+    .buttonLabel(QMessageBox::Yes, yesLabel)
+    .buttonLabel(QMessageBox::No,  QY("Cancel"))
+    .exec();
+
+  return answer == QMessageBox::Yes;
+}
+
 }}}

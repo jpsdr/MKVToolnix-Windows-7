@@ -5,7 +5,6 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMenu>
-#include <QMessageBox>
 #include <QMimeData>
 
 #include "common/qt.h"
@@ -17,7 +16,6 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
-#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -182,21 +180,8 @@ Tool::save() {
 void
 Tool::reload() {
   auto tab = currentTab();
-  if (!tab)
-    return;
-
-  if (Util::Settings::get().m_warnBeforeClosingModifiedTabs && tab->hasBeenModified()) {
-    auto answer = Util::MessageBox::question(this)
-      ->title(QY("Reload modified file"))
-      .text(QY("The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()))
-      .buttonLabel(QMessageBox::Yes, QY("&Reload file"))
-      .buttonLabel(QMessageBox::No,  QY("Cancel"))
-      .exec();
-    if (answer != QMessageBox::Yes)
-      return;
-  }
-
-  tab->load();
+  if (tab && tab->isClosingOrReloadingOkIfModified(Tab::ModifiedConfirmationMode::Reloading))
+    tab->load();
 }
 
 void
@@ -206,25 +191,15 @@ Tool::validate() {
     tab->validate();
 }
 
+
 bool
 Tool::closeTab(int index) {
   if ((0  > index) || (ui->editors->count() <= index))
     return false;
 
   auto tab = static_cast<Tab *>(ui->editors->widget(index));
-
-  if (Util::Settings::get().m_warnBeforeClosingModifiedTabs && tab->hasBeenModified()) {
-    MainWindow::get()->switchToTool(this);
-    ui->editors->setCurrentIndex(index);
-    auto answer = Util::MessageBox::question(this)
-      ->title(QY("Close modified file"))
-      .text(QY("The file \"%1\" has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()))
-      .buttonLabel(QMessageBox::Yes, QY("&Close file"))
-      .buttonLabel(QMessageBox::No,  QY("Cancel"))
-      .exec();
-    if (answer != QMessageBox::Yes)
-      return false;
-  }
+  if (!tab->isClosingOrReloadingOkIfModified(Tab::ModifiedConfirmationMode::Closing))
+    return false;
 
   ui->editors->removeTab(index);
   delete tab;
@@ -286,6 +261,11 @@ Tool::forEachTab(std::function<void(Tab &)> const &worker) {
   }
 
   ui->editors->setCurrentIndex(currentIndex);
+}
+
+void
+Tool::showTab(Tab &tab) {
+  ui->editors->setCurrentWidget(&tab);
 }
 
 std::pair<QString, QString>

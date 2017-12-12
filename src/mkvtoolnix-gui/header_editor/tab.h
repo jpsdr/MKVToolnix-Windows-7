@@ -26,6 +26,13 @@ class TrackTypePage;
 class ValuePage;
 
 class Tab : public QWidget {
+public:
+  enum class ModifiedConfirmationMode {
+    Closing,
+    Reloading,
+  };
+
+private:
   Q_OBJECT;
 
 protected:
@@ -57,6 +64,7 @@ public:
   virtual QString title() const;
   virtual void validate();
   virtual void addAttachment(KaxAttachedPtr const &attachment);
+  virtual bool isClosingOrReloadingOkIfModified(ModifiedConfirmationMode mode);
 
 signals:
   void removeThisTab();
