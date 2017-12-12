@@ -7,8 +7,8 @@
 
 ## New features and enhancements
 
-* GUI: the GUI will now save and restore the widths of columns in tree and
-  list views. Implements #2057.
+* MKVToolNix GUI: the GUI will now save and restore the widths of columns in
+  tree and list views. Implements #2057.
 
 ## Bug fixes
 
