@@ -31,7 +31,7 @@ protected:
   debugging_option_c m_debug_seek, m_debug_read;
 
 public:
-  mm_read_buffer_io_c(mm_io_c *in, size_t buffer_size = 1 << 12, bool delete_in = true);
+  mm_read_buffer_io_c(mm_io_c *in, size_t buffer_size = 1 << 17, bool delete_in = true);
   virtual ~mm_read_buffer_io_c();
 
   virtual uint64 getFilePointer();

@@ -72,11 +72,11 @@ static mm_io_cptr
 open_input_file(filelist_t &file) {
   try {
     if (file.all_names.size() == 1)
-      return mm_io_cptr(new mm_read_buffer_io_c(new mm_file_io_c(file.name), 1 << 17));
+      return mm_io_cptr(new mm_read_buffer_io_c(new mm_file_io_c(file.name)));
 
     else {
       std::vector<bfs::path> paths = file_names_to_paths(file.all_names);
-      return mm_io_cptr(new mm_read_buffer_io_c(new mm_multi_file_io_c(paths, file.name), 1 << 17));
+      return mm_io_cptr(new mm_read_buffer_io_c(new mm_multi_file_io_c(paths, file.name)));
     }
 
   } catch (mtx::mm_io::exception &ex) {
