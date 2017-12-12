@@ -130,6 +130,7 @@ def setup_globals
   cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
   cflags_common           += " -fPIC "                                                   if c?(:USE_QT) && !$building_for[:windows]
   cflags_common           += " -DQT_STATICPLUGIN"                                        if c?(:USE_QT) &&  $building_for[:windows]
+  cflags_common           += " -DMTX_APPIMAGE"                                           if c?(:APPIMAGE_BUILD) && !$building_for[:windows]
 
   cflags                   = "#{cflags_common} #{c(:USER_CFLAGS)}"
 
