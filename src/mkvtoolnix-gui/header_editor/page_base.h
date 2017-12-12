@@ -29,7 +29,7 @@ public:
   PageBase(Tab &parent, translatable_string_c const &title);
   virtual ~PageBase();
 
-  virtual bool hasBeenModified() const;
+  virtual PageBase *hasBeenModified();
   virtual bool hasThisBeenModified() const = 0;
   virtual void doModifications();
   virtual void modifyThis() = 0;

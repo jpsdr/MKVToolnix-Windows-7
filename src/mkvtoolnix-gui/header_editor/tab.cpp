@@ -346,6 +346,9 @@ Tab::populateTree() {
 void
 Tab::selectionChanged(QModelIndex const &current,
                       QModelIndex const &) {
+  if (m_ignoreSelectionChanges)
+    return;
+
   auto selectedPage = m_model->selectedPage(current);
   if (selectedPage)
     ui->pageContainer->setCurrentWidget(selectedPage);
@@ -363,14 +366,16 @@ Tab::title()
   return QFileInfo{m_fileName}.fileName();
 }
 
-bool
+PageBase *
 Tab::hasBeenModified() {
   auto &pages = m_model->topLevelPages();
-  for (auto const &page : pages)
-    if (page->hasBeenModified())
-      return true;
+  for (auto const &page : pages) {
+    auto modifiedPage = page->hasBeenModified();
+    if (modifiedPage)
+      return modifiedPage;
+  }
 
-  return false;
+  return nullptr;
 }
 
 void
@@ -778,17 +783,36 @@ Tab::handleDroppedFiles(QStringList const &fileNames,
     addAttachments(fileNames);
 }
 
+void
+Tab::focusPage(PageBase *page) {
+  auto idx = m_model->indexFromPage(page);
+  if (!idx.isValid())
+    return;
+
+  auto selection = QItemSelection{idx.sibling(idx.row(), 0), idx.sibling(idx.row(), m_model->columnCount() - 1)};
+
+  m_ignoreSelectionChanges = true;
+
+  ui->elements->selectionModel()->setCurrentIndex(idx.sibling(idx.row(), 0), QItemSelectionModel::ClearAndSelect);
+  ui->elements->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+  ui->pageContainer->setCurrentWidget(page);
+
+  m_ignoreSelectionChanges = false;
+}
+
 bool
 Tab::isClosingOrReloadingOkIfModified(ModifiedConfirmationMode mode) {
   if (!Util::Settings::get().m_warnBeforeClosingModifiedTabs)
     return true;
 
-  if (!hasBeenModified())
+  auto modifiedPage = hasBeenModified();
+  if (!modifiedPage)
     return true;
 
   auto tool = MainWindow::headerEditorTool();
   MainWindow::get()->switchToTool(tool);
   tool->showTab(*this);
+  focusPage(modifiedPage);
 
   auto closing  = mode == ModifiedConfirmationMode::Closing;
   auto text     = closing ? QY("The file \"%1\" has been modified. Do you really want to close? All changes will be lost.")

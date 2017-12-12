@@ -25,21 +25,22 @@ PageBase::PageBase(Tab &parent,
 PageBase::~PageBase() {
 }
 
-bool
-PageBase::hasBeenModified()
-  const {
+PageBase *
+PageBase::hasBeenModified() {
   if (hasThisBeenModified()) {
     // auto vp = dynamic_cast<ValuePage const *>(this);
     // qDebug() << "I have been modified: " << typeid(*this).name() << " title " << title()
     //          << " orig " << (vp ? vp->originalValueAsString() : Q("<not a value page>")) << " current " << (vp ? vp->currentValueAsString() : Q("<not a value page>"));
-    return true;
+    return this;
   }
 
-  for (auto child : m_children)
-    if (child->hasBeenModified())
-      return true;
+  for (auto child : m_children) {
+    auto modifiedPage = child->hasBeenModified();
+    if (modifiedPage)
+      return modifiedPage;
+  }
 
-  return false;
+  return nullptr;
 }
 
 void

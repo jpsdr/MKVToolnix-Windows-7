@@ -45,6 +45,7 @@ protected:
   PageModel *m_model;
   PageBase *m_segmentinfoPage{};
   AttachmentsPage *m_attachmentsPage{};
+  bool m_ignoreSelectionChanges{};
 
   QMenu *m_treeContextMenu;
   QAction *m_expandAllAction, *m_collapseAllAction, *m_addAttachmentsAction, *m_removeAttachmentAction, *m_saveAttachmentContentAction, *m_replaceAttachmentContentAction, *m_replaceAttachmentContentSetValuesAction;
@@ -57,7 +58,7 @@ public:
 
   PageModel *model() const;
 
-  virtual bool hasBeenModified();
+  virtual PageBase *hasBeenModified();
   virtual void retranslateUi();
   virtual void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
   virtual QString const &fileName() const;
@@ -82,6 +83,7 @@ public slots:
   virtual void saveAttachmentContent();
   virtual void replaceAttachmentContent(bool deriveNameAndMimeType);
   virtual void handleDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
+  virtual void focusPage(PageBase *page);
 
 protected:
   void setupUi();
