@@ -2711,8 +2711,14 @@ guess_mime_type_internal(std::string ext,
   if (!m || (-1 == magic_load(m, magic_filename.c_str())))
     return guess_mime_type_by_ext(ext);
 # else  // defined(SYS_WINDOWS)
+#  ifdef MTX_APPIMAGE
+  auto magic_filename = (mtx::sys::get_installation_path() / ".." / "share" / "file" / "magic.mgc").string();
+  if (!m || (-1 == magic_load(m, magic_filename.c_str())) || (-1 == magic_load(m, nullptr)))
+    return guess_mime_type_by_ext(ext);
+#  else
   if (!m || (-1 == magic_load(m, nullptr)))
     return guess_mime_type_by_ext(ext);
+#  endif  // defined(MTX_APPIMAGE)
 # endif  // defined(SYS_WINDOWS)
 
   ret = guess_mime_type_by_content(m, ext);
