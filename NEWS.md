@@ -40,6 +40,8 @@
   tab. Fixes #2167.
 * mkvextract: fixed slow track extraction speed on Windows due to lack of
   buffering. Fixes #2166.
+* MKVToolNix GUI: job queue: jobs are now saved when their status changes in
+  addition to when the program exits. Fixes #2168.
 
 
 # Version 18.0.0 "Apricity" 2017-11-18

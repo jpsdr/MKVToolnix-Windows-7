@@ -301,6 +301,9 @@ Model::onStatusChanged(uint64_t id,
   if ((Job::Running == oldStatus) && (Job::Running != newStatus))
     ++m_queueNumDone;
 
+  if (newStatus != Job::Running)
+    job.saveQueueFile();
+
   startNextAutoJob();
 
   processAutomaticJobRemoval(id, status);
