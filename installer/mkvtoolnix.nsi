@@ -310,7 +310,7 @@ FunctionEnd
 
 Function onClickMediaFoundationMoreInformation
   Pop $0
-  ExecShell "open" "https://github.com/mbunkus/mkvtoolnix/wiki/DLLs-not-found"
+  ExecShell "open" "https://gitlab.com/mbunkus/mkvtoolnix/wikis/DLLs-not-found"
 FunctionEnd
 
 Function showExternalLinks
