@@ -186,12 +186,12 @@ cluster_helper_c::split_if_necessary(packet_cptr &packet) {
 
   } else if (   (split_point_c::duration == m->current_split_point->m_type)
              && (0 <= m->first_timestamp_in_file)
-             && (packet->assigned_timestamp - m->first_timestamp_in_file) >= m->current_split_point->m_point)
+                && (timestamp_c::ns(packet->assigned_timestamp - m->first_timestamp_in_file - m->current_split_point->m_point) > timestamp_c::ms(-1)))
     split_now = true;
 
   else if (   (   (split_point_c::timestamp == m->current_split_point->m_type)
                || (split_point_c::parts     == m->current_split_point->m_type))
-           && (packet->assigned_timestamp   >= m->current_split_point->m_point))
+           && (timestamp_c::ns(packet->assigned_timestamp - m->current_split_point->m_point) > timestamp_c::ms(-1)))
     split_now = true;
 
   else if (   (   (split_point_c::frame_field       == m->current_split_point->m_type)

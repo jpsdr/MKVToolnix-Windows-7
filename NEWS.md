@@ -14,6 +14,9 @@
 * MKVToolNix GUI: header editor: when closing or reloading a modified file,
   the GUI will now focus the first element that's been modified before asking
   the user for confirmation regarding discarding unsaved changes.
+* mkvmerge: splitting by duration, by timestamps or by timestamp-based parts:
+  mkvmerge will now consider the first key frame within 1ms of the requested
+  value to be eligible for splitting.
 
 ## Bug fixes
 
