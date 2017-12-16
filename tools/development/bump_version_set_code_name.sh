@@ -74,7 +74,7 @@ function update_files {
 
   perl -pi -e 's/^(AC_INIT.*\[)'$FROM'(\].*)/${1}'$TO'${2}/' configure.ac
   perl -pi -e 's/^MKVToolNix '$FROM'$/MKVToolNix '$TO'/' README.md
-  perl -pi -e 's/^Building MKVToolNix [0-9.]+/Building MKVToolNix '$TO'/i' README.Windows.md
+  perl -pi -e 's/^Building MKVToolNix [0-9.]+/Building MKVToolNix '$TO'/i' Building.for.Windows.md
   perl -pi -e 's/define PRODUCT_VERSION .*/define PRODUCT_VERSION \"'$TO_NSI'\"/' installer/mkvtoolnix.nsi
   perl -pi -e "s{#define VERSIONNAME.*}{#define VERSIONNAME \"${CODENAME}\"}" src/common/version.cpp
 }

@@ -4,7 +4,7 @@ set -e
 
 # Creates a tree with all the required libraries for use with the
 # mingw cross compiler. The libraries are compiled appropriately.
-# Read the file "README.Windows.md" for instructions.
+# Read the file "Building.for.Windows.md" for instructions.
 
 #
 # SETUP -- adjust these variables if neccessary.
