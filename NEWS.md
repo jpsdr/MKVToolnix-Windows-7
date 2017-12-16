@@ -4,6 +4,8 @@
 
 * The MKVToolNix project now contains a
   [Code of Coduct](https://mkvtoolnix.download/doc/CODE_OF_CONDUCT.md).
+* The MKVToolNix project's source code repository, bug tracker and wiki have
+  been moved to [GitLab](https://gitlab.com/mbunkus/mkvtoolnix/).
 
 ## New features and enhancements
 

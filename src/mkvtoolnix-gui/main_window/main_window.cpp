@@ -235,11 +235,11 @@ void
 MainWindow::setupHelpURLs() {
   Q_D(MainWindow);
 
-  d->helpURLs[d->ui->actionHelpFAQ]                   = "https://github.com/mbunkus/mkvtoolnix/wiki";
-  d->helpURLs[d->ui->actionHelpKnownProblems]         = "https://github.com/mbunkus/mkvtoolnix/wiki/Troubleshooting";
+  d->helpURLs[d->ui->actionHelpFAQ]                   = "https://gitlab.com/mbunkus/mkvtoolnix/wikis";
+  d->helpURLs[d->ui->actionHelpKnownProblems]         = "https://gitlab.com/mbunkus/mkvtoolnix/wikis/Troubleshooting";
   d->helpURLs[d->ui->actionHelpMkvmergeDocumentation] = "https://mkvtoolnix.download/doc/mkvmerge.html";
   d->helpURLs[d->ui->actionHelpWebSite]               = "https://mkvtoolnix.download/";
-  d->helpURLs[d->ui->actionHelpReportBug]             = "https://github.com/mbunkus/mkvtoolnix/issues/";
+  d->helpURLs[d->ui->actionHelpReportBug]             = "https://gitlab.com/mbunkus/mkvtoolnix/issues/";
 }
 
 void
