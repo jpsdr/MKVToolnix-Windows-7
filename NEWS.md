@@ -9,17 +9,20 @@
 
 ## New features and enhancements
 
+* mkvmerge: splitting by duration, by timestamps or by timestamp-based parts:
+  mkvmerge will now consider the first key frame within 1ms of the requested
+  value to be eligible for splitting.
 * MKVToolNix GUI: the GUI will now save and restore the widths of columns in
   tree and list views. Implements #2057.
 * MKVToolNix GUI: header editor: when closing or reloading a modified file,
   the GUI will now focus the first element that's been modified before asking
   the user for confirmation regarding discarding unsaved changes.
-* mkvmerge: splitting by duration, by timestamps or by timestamp-based parts:
-  mkvmerge will now consider the first key frame within 1ms of the requested
-  value to be eligible for splitting.
 
 ## Bug fixes
 
+* mkvmerge: fixed reading text files encoded in UTF-16 oder UTF-32 that have
+  different forms of line endings (new lines, carriage returns or a mix of
+  both). Fixes #2160.
 * mkvmerge: MP4 reader: fixed mkvmerge's interpretation of edit list entries
   with `segment_duration == 0` when there's more than one edit list entry. In
   that case mkvmerge was reading the whole content more than once. Fixes
@@ -27,9 +30,10 @@
 * mkvmerge, GUI's multiplexer: MIME types: added the `font` top-level media
   types from RFC 8081. This means that the following new MIME types for fonts
   can be used: `font/ttf`, `font/otf`, `font/woff` and `font/woff2`.
-* mkvmerge: fixed reading text files encoded in UTF-16 oder UTF-32 that have
-  different forms of line endings (new lines, carriage returns or a mix of
-  both). Fixes #2160.
+* mkvmerge: MPEG transport stream reader: fixed slow speed on Windows due to
+  lack of buffering.
+* mkvextract: fixed slow track extraction speed on Windows due to lack of
+  buffering. Fixes #2166.
 * MKVToolNix GUI: multiplexer: changing the "subtitle/chapter character set"
   drop-down was ignored when the selected track was a chapter track. Fixes
   #2165.
@@ -43,12 +47,8 @@
   element in its segment information section, the GUI would erroneously ask
   the user to confirm discarding unsaved changes when closing or reloading the
   tab. Fixes #2167.
-* mkvextract: fixed slow track extraction speed on Windows due to lack of
-  buffering. Fixes #2166.
 * MKVToolNix GUI: job queue: jobs are now saved when their status changes in
   addition to when the program exits. Fixes #2168.
-* mkvmerge: MPEG transport stream reader: fixed slow speed on Windows due to
-  lack of buffering.
 
 
 # Version 18.0.0 "Apricity" 2017-11-18
