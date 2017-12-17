@@ -29,6 +29,7 @@
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
 #include "common/mm_io_x.h"
+#include "common/mm_file_io.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -182,44 +183,6 @@ mm_file_io_c::truncate(int64_t pos) {
 
 void
 mm_file_io_c::setup() {
-}
-
-static bool s_stdout_binmode_set = false;
-
-size_t
-mm_stdio_c::_write(const void *buffer,
-                   size_t size) {
-  HANDLE h_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
-  if (INVALID_HANDLE_VALUE == h_stdout)
-    return 0;
-
-  DWORD file_type = GetFileType(h_stdout);
-  bool is_console = false;
-  if ((FILE_TYPE_UNKNOWN != file_type) && ((file_type & ~FILE_TYPE_REMOTE) == FILE_TYPE_CHAR)) {
-    DWORD dummy;
-    is_console = GetConsoleMode(h_stdout, &dummy);
-  }
-
-  if (is_console) {
-    const std::wstring &w = to_wide(std::string(static_cast<const char *>(buffer), size));
-    DWORD bytes_written   = 0;
-
-    WriteConsoleW(h_stdout, w.c_str(), w.length(), &bytes_written, nullptr);
-
-    return bytes_written;
-  }
-
-  if (!s_stdout_binmode_set) {
-    _setmode(1, _O_BINARY);
-    s_stdout_binmode_set = true;
-  }
-
-  size_t bytes_written = fwrite(buffer, 1, size, stdout);
-  fflush(stdout);
-
-  m_cached_size = -1;
-
-  return bytes_written;
 }
 
 #endif  // defined(SYS_WINDOWS)
