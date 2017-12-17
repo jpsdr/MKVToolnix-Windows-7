@@ -3,7 +3,7 @@
 ## Important notes
 
 * The MKVToolNix project now contains a
-  [Code of Coduct](https://mkvtoolnix.download/doc/CODE_OF_CONDUCT.md).
+  [Code of Conduct](https://mkvtoolnix.download/doc/CODE_OF_CONDUCT.md).
 * The MKVToolNix project's source code repository, bug tracker and wiki have
   been moved to [GitLab](https://gitlab.com/mbunkus/mkvtoolnix/).
 
@@ -20,7 +20,7 @@
 
 ## Bug fixes
 
-* mkvmerge: fixed reading text files encoded in UTF-16 oder UTF-32 that have
+* mkvmerge: fixed reading text files encoded in UTF-16 order UTF-32 that have
   different forms of line endings (new lines, carriage returns or a mix of
   both). Fixes #2160.
 * mkvmerge: MP4 reader: fixed mkvmerge's interpretation of edit list entries
