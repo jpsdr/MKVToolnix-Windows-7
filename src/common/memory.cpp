@@ -167,3 +167,34 @@ _saferealloc(void *mem,
 
   return reinterpret_cast<unsigned char *>(mem);
 }
+
+// ----------------------------------------------------------------------
+
+memory_c &
+memory_c::splice(memory_c &buffer,
+                 std::size_t offset,
+                 std::size_t to_remove,
+                 boost::optional<memory_c const &> to_insert) {
+  auto size = buffer.get_size();
+
+  if ((offset + to_remove) > size)
+    throw std::invalid_argument{(boost::format("splice: (offset + to_remove) > buffer_size: (%1% + %2%) >= %3%") % offset % to_remove % size).str()};
+
+  auto insert_size = to_insert ? to_insert->get_size() : 0;
+  auto diff        = static_cast<int64_t>(to_remove) - static_cast<int64_t>(insert_size);
+  auto remaining   = size - offset - to_remove;
+
+  if ((remaining > 0) && (diff != 0)) {
+    if (diff < 0)
+      buffer.resize(size - diff);
+
+    std::memmove(buffer.get_buffer() + offset + insert_size, buffer.get_buffer() + offset + to_remove, remaining);
+  }
+
+  if (to_insert)
+    std::memcpy(buffer.get_buffer() + offset, to_insert->get_buffer(), insert_size);
+
+  buffer.resize(size - diff);
+
+  return buffer;
+}

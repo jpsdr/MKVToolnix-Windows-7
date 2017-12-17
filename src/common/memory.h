@@ -196,6 +196,8 @@ public:
     return std::make_shared<memory_c>(reinterpret_cast<unsigned char *>(&buffer[0]), buffer.length(), false);
   }
 
+  static memory_c & splice(memory_c &buffer, std::size_t offset, std::size_t to_remove, boost::optional<memory_c const &> to_insert = boost::none);
+
 private:
   struct counter {
     unsigned char *ptr;
