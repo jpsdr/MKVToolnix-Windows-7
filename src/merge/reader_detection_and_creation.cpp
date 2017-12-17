@@ -315,7 +315,7 @@ create_readers() {
 
   for (auto &file : g_files) {
     try {
-      mm_io_cptr input_file = file->playlist_mpls_in ? std::static_pointer_cast<mm_io_c>(file->playlist_mpls_in) : open_input_file(*file);
+      mm_io_cptr input_file = file->playlist_mpls_in ? std::static_pointer_cast<mm_io_c>(std::make_shared<mm_read_buffer_io_c>(file->playlist_mpls_in)) : open_input_file(*file);
 
       switch (file->type) {
         case mtx::file_type_e::aac:

@@ -47,6 +47,8 @@
   buffering. Fixes #2166.
 * MKVToolNix GUI: job queue: jobs are now saved when their status changes in
   addition to when the program exits. Fixes #2168.
+* mkvmerge: MPEG transport stream reader: fixed slow speed on Windows due to
+  lack of buffering.
 
 
 # Version 18.0.0 "Apricity" 2017-11-18
