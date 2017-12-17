@@ -231,13 +231,12 @@ avc_video_packetizer_c::remove_filler_nalus(memory_c &data)
       break;
 
     if (ptr[idx + m_nalu_size_len_dst] == NALU_TYPE_FILLER_DATA) {
-      memmove(&ptr[idx], &ptr[idx + nalu_size], total_size - idx - nalu_size);
+      memory_c::splice(data, idx, nalu_size);
       total_size -= nalu_size;
+      ptr         = data.get_buffer();
       continue;
     }
 
     idx += nalu_size;
   }
-
-  data.resize(total_size);
 }
