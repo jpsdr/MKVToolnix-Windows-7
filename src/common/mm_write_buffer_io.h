@@ -43,4 +43,3 @@ protected:
   virtual size_t _write(const void *buffer, size_t size);
   virtual void flush_buffer();
 };
-using mm_write_buffer_io_cptr = std::shared_ptr<mm_write_buffer_io_c>;

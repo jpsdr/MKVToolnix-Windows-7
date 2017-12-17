@@ -22,6 +22,7 @@
 #include "common/ebml.h"
 #include "common/kax_analyzer.h"
 #include "common/mm_io_x.h"
+#include "common/mm_file_io.h"
 #include "common/strings/formatting.h"
 #include "extract/mkvextract.h"
 

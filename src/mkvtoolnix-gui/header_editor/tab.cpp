@@ -15,6 +15,7 @@
 #include "common/extern_data.h"
 #include "common/list_utils.h"
 #include "common/mm_io_x.h"
+#include "common/mm_file_io.h"
 #include "common/property_element.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"

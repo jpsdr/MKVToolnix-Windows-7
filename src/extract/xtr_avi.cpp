@@ -18,6 +18,7 @@
 #include "common/endian.h"
 #include "common/hacks.h"
 #include "common/mm_io_x.h"
+#include "common/mm_file_io.h"
 #include "extract/xtr_avi.h"
 
 xtr_avi_c::xtr_avi_c(const std::string &codec_id,

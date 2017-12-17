@@ -19,7 +19,6 @@
 #include "common/codec.h"
 #include "common/dts.h"
 #include "common/error.h"
-#include "common/mm_io.h"
 #include "merge/generic_reader.h"
 
 class wav_reader_c;

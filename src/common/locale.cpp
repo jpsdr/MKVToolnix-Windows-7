@@ -26,6 +26,9 @@
 
 #include "common/memory.h"
 #include "common/mm_io.h"
+#include "common/mm_mem_io.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "common/strings/parsing.h"
 #ifdef SYS_WINDOWS
 # include "common/fs_sys_helpers.h"

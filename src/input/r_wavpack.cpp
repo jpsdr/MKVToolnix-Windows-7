@@ -18,6 +18,7 @@
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/id_info.h"
+#include "common/mm_file_io.h"
 #include "input/r_wavpack.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"

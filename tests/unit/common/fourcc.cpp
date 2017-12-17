@@ -4,6 +4,7 @@
 
 #include "common/endian.h"
 #include "common/fourcc.h"
+#include "common/mm_mem_io.h"
 
 #include "gtest/gtest.h"
 

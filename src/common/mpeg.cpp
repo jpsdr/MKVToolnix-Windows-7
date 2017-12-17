@@ -14,6 +14,7 @@
 
 #include "common/debugging.h"
 #include "common/endian.h"
+#include "common/mm_mem_io.h"
 #include "common/mpeg.h"
 
 namespace mtx { namespace mpeg {

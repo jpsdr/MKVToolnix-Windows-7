@@ -27,6 +27,7 @@
 
 #include "common/debugging.h"
 #include "common/logger.h"
+#include "common/mm_mem_io.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 

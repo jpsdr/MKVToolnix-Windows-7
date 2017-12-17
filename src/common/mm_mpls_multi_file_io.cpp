@@ -5,6 +5,7 @@
 #include "common/debugging.h"
 #include "common/file.h"
 #include "common/id_info.h"
+#include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/strings/formatting.h"
 

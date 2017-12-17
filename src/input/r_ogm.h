@@ -18,7 +18,6 @@
 #include <ogg/ogg.h>
 
 #include "common/codec.h"
-#include "common/mm_io.h"
 #include "merge/generic_reader.h"
 #include "common/theora.h"
 #include "common/kate.h"

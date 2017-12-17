@@ -18,10 +18,11 @@
 #include "common/extern_data.h"
 #include "common/id_info.h"
 #include "common/locale.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "input/r_ssa.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
-
 
 int
 ssa_reader_c::probe_file(mm_text_io_c *in,

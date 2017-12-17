@@ -23,6 +23,7 @@ extern "C" {
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/mm_io.h"
+#include "common/mm_file_io.h"
 #include "common/strings/editing.h"
 
 #ifdef SYS_UNIX

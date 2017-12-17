@@ -23,6 +23,7 @@
 #include "common/endian.h"
 #include "common/hacks.h"
 #include "common/mm_io_x.h"
+#include "common/mm_mem_io.h"
 #include "common/mpeg.h"
 #include "common/hevc.h"
 #include "common/hevcc.h"

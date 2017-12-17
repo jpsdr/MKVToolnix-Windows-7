@@ -15,7 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include "common/mm_mpls_multi_file_io_fwd.h"
 #include "common/mm_multi_file_io.h"
 #include "common/mpls.h"
 
@@ -51,4 +50,3 @@ public:
   static mm_io_cptr open_multi(std::string const &display_file_name);
   static mm_io_cptr open_multi(mm_io_c *in);
 };
-using mm_mpls_multi_file_io_cptr = std::shared_ptr<mm_mpls_multi_file_io_c>;

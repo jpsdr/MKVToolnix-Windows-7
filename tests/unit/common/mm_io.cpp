@@ -4,6 +4,7 @@
 #include "tests/unit/util.h"
 
 #include "common/mm_io_x.h"
+#include "common/mm_file_io.h"
 
 namespace {
 

@@ -19,6 +19,7 @@
 #include "common/endian.h"
 #include "common/id_info.h"
 #include "common/mm_io_x.h"
+#include "common/mm_mem_io.h"
 #include "common/strings/formatting.h"
 #include "input/r_coreaudio.h"
 #include "merge/input_x.h"

@@ -16,6 +16,7 @@
 #include "common/command_line.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"
+#include "common/mm_file_io.h"
 #include "common/translation.h"
 
 static bool g_opt_checksum      = false;

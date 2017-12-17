@@ -19,6 +19,7 @@
 #include "common/base64.h"
 #include "common/ebml.h"
 #include "common/mm_io_x.h"
+#include "common/mm_file_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"

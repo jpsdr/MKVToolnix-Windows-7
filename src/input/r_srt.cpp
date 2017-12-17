@@ -15,6 +15,8 @@
 
 #include "common/codec.h"
 #include "common/id_info.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "input/r_srt.h"
 #include "input/subtitles.h"
 #include "merge/input_x.h"

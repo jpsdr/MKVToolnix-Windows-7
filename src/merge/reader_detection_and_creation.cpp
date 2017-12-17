@@ -13,8 +13,11 @@
 #include "common/common_pch.h"
 
 // #include "common/logger.h"
+#include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"
+#include "common/mm_proxy_io.h"
 #include "common/mm_read_buffer_io.h"
+#include "common/mm_text_io.h"
 #include "common/strings/formatting.h"
 #include "common/xml/xml.h"
 #include "input/r_aac.h"

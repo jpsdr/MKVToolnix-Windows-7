@@ -19,7 +19,7 @@
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
 #include "common/command_line.h"
-#include "common/mm_io.h"
+#include "common/mm_file_io.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
 

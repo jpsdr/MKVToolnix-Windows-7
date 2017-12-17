@@ -15,7 +15,8 @@
 
 #include "common/endian.h"
 #include "common/extern_data.h"
-#include "common/mm_io.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "input/subtitles.h"

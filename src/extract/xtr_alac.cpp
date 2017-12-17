@@ -18,6 +18,7 @@
 #include "common/caf.h"
 #include "common/ebml.h"
 #include "common/endian.h"
+#include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
 
 #include "extract/xtr_alac.h"

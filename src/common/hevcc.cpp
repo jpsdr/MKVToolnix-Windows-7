@@ -15,7 +15,7 @@
 
 #include "common/bit_reader.h"
 #include "common/bit_writer.h"
-#include "common/mm_io.h"
+#include "common/mm_mem_io.h"
 #include "common/mpeg.h"
 #include "common/hevc.h"
 #include "common/hevcc.h"

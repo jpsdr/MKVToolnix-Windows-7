@@ -19,6 +19,7 @@
 #include <unordered_map>
 
 #include "common/memory.h"
+#include "common/mm_io_fwd.h"
 
 class debugging_c {
 protected:
@@ -105,7 +106,6 @@ public:
     mxdebug(msg);                  \
   }
 
-class mm_io_c;
 namespace libebml {
 class EbmlElement;
 };

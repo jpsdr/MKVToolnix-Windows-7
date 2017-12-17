@@ -14,6 +14,8 @@
 #include "common/common_pch.h"
 
 #include "common/mm_io_x.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "common/strings/formatting.h"
 #include "input/r_microdvd.h"
 #include "merge/id_result.h"

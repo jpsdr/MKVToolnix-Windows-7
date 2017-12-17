@@ -49,7 +49,7 @@
 #include "common/iso639.h"
 #include "common/kax_analyzer.h"
 #include "common/list_utils.h"
-#include "common/mm_io.h"
+#include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"

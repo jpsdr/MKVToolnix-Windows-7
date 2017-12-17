@@ -20,6 +20,8 @@
 #include "common/iso639.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/xml/ebml_converter.h"

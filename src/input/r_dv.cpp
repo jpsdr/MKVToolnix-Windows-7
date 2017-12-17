@@ -18,6 +18,7 @@
 
 #include "common/endian.h"
 #include "common/file_types.h"
+#include "common/mm_mem_io.h"
 #include "input/r_dv.h"
 #include "merge/id_result.h"
 

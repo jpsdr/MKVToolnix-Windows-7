@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/list_utils.h"
+#include "common/mm_proxy_io.h"
 #include "common/strings/formatting.h"
 #include "merge/generic_packetizer.h"
 #include "merge/generic_reader.h"

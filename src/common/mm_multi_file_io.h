@@ -21,9 +21,6 @@ namespace mtx { namespace id {
 class info_c;
 }}
 
-class mm_multi_file_io_c;
-using mm_multi_file_io_cptr = std::shared_ptr<mm_multi_file_io_c>;
-
 class mm_multi_file_io_c: public mm_io_c {
 protected:
   struct file_t {

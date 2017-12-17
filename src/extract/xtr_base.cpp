@@ -21,6 +21,7 @@
 #include "common/ebml.h"
 #include "common/list_utils.h"
 #include "common/mm_io_x.h"
+#include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
 #include "common/strings/editing.h"
 #include "extract/xtr_aac.h"

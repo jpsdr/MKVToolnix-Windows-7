@@ -16,7 +16,6 @@
 #include "common/common_pch.h"
 
 #include "common/file_types.h"
-#include "common/mm_mpls_multi_file_io_fwd.h"
 #include "merge/output_control.h"
 
 class generic_reader_c;

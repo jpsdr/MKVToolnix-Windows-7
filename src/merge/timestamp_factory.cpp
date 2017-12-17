@@ -14,7 +14,9 @@
 
 #include "common/common_pch.h"
 
-#include "common/mm_io.h"
+#include "common/mm_file_io.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "merge/timestamp_factory.h"

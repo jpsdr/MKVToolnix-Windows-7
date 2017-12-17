@@ -28,6 +28,8 @@
 
 #include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
+#include "common/mm_file_io.h"
+#include "common/mm_stdio.h"
 #include "common/random.h"
 #include "common/stereo_mode.h"
 #include "common/strings/editing.h"

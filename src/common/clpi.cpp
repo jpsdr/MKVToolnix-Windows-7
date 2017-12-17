@@ -15,6 +15,7 @@
 
 #include "common/bit_reader.h"
 #include "common/clpi.h"
+#include "common/mm_file_io.h"
 
 namespace mtx { namespace bluray { namespace clpi {
 

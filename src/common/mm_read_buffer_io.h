@@ -45,5 +45,3 @@ protected:
   virtual uint32 _read(void *buffer, size_t size);
   virtual size_t _write(const void *buffer, size_t size);
 };
-
-using mm_read_buffer_io_cptr = std::shared_ptr<mm_read_buffer_io_c>;

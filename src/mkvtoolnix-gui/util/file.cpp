@@ -9,6 +9,8 @@
 #include <QRegularExpression>
 #include <QUrl>
 
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/string.h"

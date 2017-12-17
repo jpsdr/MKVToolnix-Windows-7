@@ -28,6 +28,7 @@
 #include "common/frame_timing.h"
 #include "common/hacks.h"
 #include "common/mm_io.h"
+#include "common/mm_mem_io.h"
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
 

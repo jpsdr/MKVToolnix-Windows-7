@@ -16,6 +16,7 @@
 #include "common/avcc.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"
+#include "common/mm_mem_io.h"
 #include "common/mpeg.h"
 
 namespace mtx { namespace avc {

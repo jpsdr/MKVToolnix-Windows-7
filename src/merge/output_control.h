@@ -40,7 +40,6 @@ namespace libmatroska {
 
 using namespace libmatroska;
 
-class mm_io_c;
 class generic_packetizer_c;
 class track_info_c;
 struct filelist_t;

@@ -17,6 +17,7 @@
 
 #include <FLAC/stream_decoder.h>
 
+#include "common/mm_file_io.h"
 #include "output/p_flac.h"
 #include "input/r_ogm.h"
 #include "input/r_ogm_flac.h"

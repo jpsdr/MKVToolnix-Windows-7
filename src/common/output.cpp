@@ -26,6 +26,7 @@
 #include "common/locale.h"
 #include "common/logger.h"
 #include "common/mm_io.h"
+#include "common/mm_stdio.h"
 #include "common/strings/utf8.h"
 
 bool g_suppress_info              = false;

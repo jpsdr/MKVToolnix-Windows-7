@@ -18,6 +18,8 @@
 #include <unordered_map>
 #include <boost/variant.hpp>
 
+#include "common/mm_mem_io.h"
+
 namespace mtx { namespace amf {
 
 using value_type_t = boost::variant<double, bool, std::string>;

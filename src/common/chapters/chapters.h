@@ -33,9 +33,6 @@ namespace libmatroska {
 using namespace libebml;
 using namespace libmatroska;
 
-class mm_io_c;
-class mm_text_io_c;
-
 namespace mtx { namespace chapters {
 
 using kax_cptr = std::shared_ptr<KaxChapters>;

@@ -18,6 +18,7 @@
 #include "common/endian.h"
 #include "common/math.h"
 #include "common/mm_io.h"
+#include "common/mm_mem_io.h"
 #include "common/mpeg4_p2.h"
 
 namespace mpeg4 {
