@@ -23,10 +23,7 @@
 
 void
 mm_proxy_io_c::close() {
-  if (m_proxy_delete_io)
-    delete m_proxy_io;
-
-  m_proxy_io = nullptr;
+  m_proxy_io.reset();
 }
 
 

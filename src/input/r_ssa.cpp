@@ -27,7 +27,7 @@
 int
 ssa_reader_c::probe_file(mm_text_io_c *in,
                          uint64_t) {
-  return ssa_parser_c::probe(in);
+  return ssa_parser_c::probe(*in);
 }
 
 ssa_reader_c::ssa_reader_c(const track_info_c &ti,
@@ -41,7 +41,7 @@ ssa_reader_c::read_headers() {
   mm_text_io_cptr text_in;
 
   try {
-    text_in = std::shared_ptr<mm_text_io_c>(new mm_text_io_c(m_in.get(), false));
+    text_in = std::make_shared<mm_text_io_c>(m_in);
   } catch (...) {
     throw mtx::input::open_x();
   }
@@ -55,7 +55,7 @@ ssa_reader_c::read_headers() {
                                  :                                          g_cc_local_utf8;
 
   m_ti.m_id  = 0;
-  m_subs     = ssa_parser_cptr(new ssa_parser_c(this, text_in.get(), m_ti.m_fname, 0));
+  m_subs     = std::make_shared<ssa_parser_c>(*this, text_in, m_ti.m_fname, 0);
   m_encoding = text_in->get_encoding();
 
   m_subs->set_charset_converter(cc_utf8);

@@ -74,7 +74,7 @@ kax_analyzer_c::kax_analyzer_c(std::string file_name)
   m_close_file = true;
 }
 
-kax_analyzer_c::kax_analyzer_c(mm_io_c *file)
+kax_analyzer_c::kax_analyzer_c(mm_io_cptr const &file)
 {
   m_file_name  = file->get_file_name();
   m_file       = file;
@@ -88,11 +88,8 @@ kax_analyzer_c::~kax_analyzer_c() {
 void
 kax_analyzer_c::close_file() {
   if (m_close_file) {
-    delete m_file;
-    m_file = nullptr;
-
-    delete m_stream;
-    m_stream = nullptr;
+    m_file.reset();
+    m_stream.reset();
   }
 }
 
@@ -102,18 +99,17 @@ kax_analyzer_c::reopen_file() {
     return;
 
   try {
-    m_file = new mm_file_io_c(m_file_name, m_open_mode);
+    m_file = std::make_shared<mm_file_io_c>(m_file_name, m_open_mode);
     if (MODE_READ == m_open_mode)
-      m_file = new mm_read_buffer_io_c(m_file);
+      m_file = std::make_shared<mm_read_buffer_io_c>(m_file);
 
   } catch (mtx::mm_io::exception &) {
-    delete m_file;
-    m_file = nullptr;
+    m_file.reset();
 
     throw MODE_READ == m_open_mode ? uer_error_opening_for_reading : uer_error_opening_for_writing;
   }
 
-  m_stream = new EbmlStream(*m_file);
+  m_stream = std::make_shared<EbmlStream>(*m_file);
 }
 
 void
@@ -121,8 +117,7 @@ kax_analyzer_c::reopen_file_for_writing() {
   if (m_file && (MODE_WRITE == m_open_mode))
     return;
 
-  delete m_file;
-  m_file      = nullptr;
+  m_file.reset();
   m_open_mode = MODE_WRITE;
 
   reopen_file();
@@ -289,7 +284,7 @@ kax_analyzer_c::process_internal() {
   m_data.clear();
 
   m_file->setFilePointer(0);
-  m_stream = new EbmlStream(*m_file);
+  m_stream = std::make_shared<EbmlStream>(*m_file);
 
   // Find the EbmlHead element. Must be the first one.
   m_ebml_head.reset(static_cast<EbmlHead *>(m_stream->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL)));

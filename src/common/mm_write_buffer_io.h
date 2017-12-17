@@ -27,7 +27,7 @@ protected:
   debugging_option_c m_debug_seek, m_debug_write;
 
 public:
-  mm_write_buffer_io_c(mm_io_c *out, size_t buffer_size, bool delete_out = true);
+  mm_write_buffer_io_c(mm_io_cptr const &out, size_t buffer_size);
   virtual ~mm_write_buffer_io_c();
 
   virtual uint64 getFilePointer();

@@ -166,11 +166,11 @@ avi_reader_c::parse_subtitle_chunks() {
       }
 
       if (0 != demuxer.m_subtitles->get_size()) {
-        mm_text_io_c text_io(new mm_mem_io_c(demuxer.m_subtitles->get_buffer(), demuxer.m_subtitles->get_size()));
+        mm_text_io_c text_io(std::make_shared<mm_mem_io_c>(demuxer.m_subtitles->get_buffer(), demuxer.m_subtitles->get_size()));
         demuxer.m_type
-          = srt_parser_c::probe(&text_io) ? avi_subs_demuxer_t::TYPE_SRT
-          : ssa_parser_c::probe(&text_io) ? avi_subs_demuxer_t::TYPE_SSA
-          :                                 avi_subs_demuxer_t::TYPE_UNKNOWN;
+          = srt_parser_c::probe(text_io) ? avi_subs_demuxer_t::TYPE_SRT
+          : ssa_parser_c::probe(text_io) ? avi_subs_demuxer_t::TYPE_SSA
+          :                                avi_subs_demuxer_t::TYPE_UNKNOWN;
         demuxer.m_encoding = text_io.get_encoding();
 
         if (avi_subs_demuxer_t::TYPE_UNKNOWN != demuxer.m_type)
@@ -371,7 +371,7 @@ avi_reader_c::create_subs_packetizer(int idx) {
 
   m_ti.m_private_data.reset();
 
-  demuxer.m_text_io = mm_text_io_cptr(new mm_text_io_c(new mm_mem_io_c(demuxer.m_subtitles->get_buffer(), demuxer.m_subtitles->get_size())));
+  demuxer.m_text_io = std::make_shared<mm_text_io_c>(std::make_shared<mm_mem_io_c>(*demuxer.m_subtitles));
 
   if (avi_subs_demuxer_t::TYPE_SRT == demuxer.m_type)
     create_srt_packetizer(idx);
@@ -382,11 +382,11 @@ avi_reader_c::create_subs_packetizer(int idx) {
 
 void
 avi_reader_c::create_srt_packetizer(int idx) {
-  avi_subs_demuxer_t &demuxer = m_subtitle_demuxers[idx];
-  int id                      = idx + 1 + AVI_audio_tracks(m_avi);
+  auto &demuxer  = m_subtitle_demuxers[idx];
+  int id         = idx + 1 + AVI_audio_tracks(m_avi);
 
-  srt_parser_c *parser        = new srt_parser_c(demuxer.m_text_io.get(), m_ti.m_fname, id);
-  demuxer.m_subs              = subtitles_cptr(parser);
+  auto parser    = std::make_shared<srt_parser_c>(demuxer.m_text_io, m_ti.m_fname, id);
+  demuxer.m_subs = parser;
 
   parser->parse();
 
@@ -398,16 +398,16 @@ avi_reader_c::create_srt_packetizer(int idx) {
 
 void
 avi_reader_c::create_ssa_packetizer(int idx) {
-  avi_subs_demuxer_t &demuxer    = m_subtitle_demuxers[idx];
-  int id                         = idx + 1 + AVI_audio_tracks(m_avi);
+  auto &demuxer  = m_subtitle_demuxers[idx];
+  int id         = idx + 1 + AVI_audio_tracks(m_avi);
 
-  ssa_parser_c *parser           = new ssa_parser_c(this, demuxer.m_text_io.get(), m_ti.m_fname, id);
-  demuxer.m_subs                 = subtitles_cptr(parser);
+  auto parser    = std::make_shared<ssa_parser_c>(*this, demuxer.m_text_io, m_ti.m_fname, id);
+  demuxer.m_subs = parser;
 
-  charset_converter_cptr cc_utf8 = mtx::includes(m_ti.m_sub_charsets, id)         ? charset_converter_c::init(m_ti.m_sub_charsets[id])
-                                 : mtx::includes(m_ti.m_sub_charsets, -1)         ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
-                                 : demuxer.m_text_io->get_byte_order() != BO_NONE ? charset_converter_c::init("UTF-8")
-                                 :                                                  g_cc_local_utf8;
+  auto cc_utf8   = mtx::includes(m_ti.m_sub_charsets, id)         ? charset_converter_c::init(m_ti.m_sub_charsets[id])
+                 : mtx::includes(m_ti.m_sub_charsets, -1)         ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
+                 : demuxer.m_text_io->get_byte_order() != BO_NONE ? charset_converter_c::init("UTF-8")
+                 :                                                  g_cc_local_utf8;
 
   parser->set_charset_converter(cc_utf8);
   parser->set_attachment_id_base(g_attachments.size());
@@ -916,12 +916,12 @@ avi_reader_c::identify_attachments() {
 
   for (i = 0; m_subtitle_demuxers.size() > i; ++i) {
     try {
-      avi_subs_demuxer_t &demuxer = m_subtitle_demuxers[i];
-      mm_text_io_c text_io(new mm_mem_io_c(demuxer.m_subtitles->get_buffer(), demuxer.m_subtitles->get_size()));
-      ssa_parser_c parser(this, &text_io, m_ti.m_fname, i + 1 + AVI_audio_tracks(m_avi));
+      auto &demuxer = m_subtitle_demuxers[i];
+      auto text_io  = std::make_shared<mm_text_io_c>(std::make_shared<mm_mem_io_c>(*demuxer.m_subtitles));
+      auto parser   = std::make_shared<ssa_parser_c>(*this, text_io, m_ti.m_fname, i + 1 + AVI_audio_tracks(m_avi));
 
-      parser.set_attachment_id_base(g_attachments.size());
-      parser.parse();
+      parser->set_attachment_id_base(g_attachments.size());
+      parser->parse();
 
     } catch (...) {
     }

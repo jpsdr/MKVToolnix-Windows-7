@@ -1264,7 +1264,8 @@ reader_c::process_chapter_entries() {
 
   std::stable_sort(m_chapter_timestamps.begin(), m_chapter_timestamps.end());
 
-  mm_mem_io_c out{nullptr, 0, 1000};
+  auto af_out = std::make_shared<mm_mem_io_c>(nullptr, 0, 1000);
+  auto &out   = *af_out;
   out.set_file_name(m_ti.m_fname);
   out.write_bom("UTF-8");
 
@@ -1281,7 +1282,7 @@ reader_c::process_chapter_entries() {
              % ( ms                   % 1000));
   }
 
-  mm_text_io_c text_out(&out, false);
+  mm_text_io_c text_out(af_out);
   try {
     m_chapters = mtx::chapters::parse(&text_out, 0, -1, 0, m_ti.m_chapter_language, "", true);
     mtx::chapters::align_uids(m_chapters.get());

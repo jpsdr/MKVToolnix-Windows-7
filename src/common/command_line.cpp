@@ -50,7 +50,7 @@ read_args_from_old_option_file(std::vector<std::string> &args,
   bool skip_next;
 
   try {
-    mm_io = std::make_shared<mm_text_io_c>(new mm_file_io_c(filename));
+    mm_io = std::make_shared<mm_text_io_c>(std::make_shared<mm_file_io_c>(filename));
   } catch (mtx::mm_io::exception &ex) {
     mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % filename % ex);
   }
@@ -85,7 +85,7 @@ read_args_from_json_file(std::vector<std::string> &args,
   std::string buffer;
 
   try {
-    auto io = std::make_shared<mm_text_io_c>(new mm_file_io_c(filename));
+    auto io = std::make_shared<mm_text_io_c>(std::make_shared<mm_file_io_c>(filename));
     io->read(buffer, io->get_size());
 
   } catch (mtx::mm_io::exception &ex) {

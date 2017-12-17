@@ -17,13 +17,11 @@
 
 class mm_proxy_io_c: public mm_io_c {
 protected:
-  mm_io_c *m_proxy_io;
-  bool m_proxy_delete_io;
+  mm_io_cptr m_proxy_io;
 
 public:
-  mm_proxy_io_c(mm_io_c *proxy_io, bool proxy_delete_io = true)
-    : m_proxy_io(proxy_io)
-    , m_proxy_delete_io(proxy_delete_io)
+  mm_proxy_io_c(mm_io_cptr const &proxy_io)
+    : m_proxy_io{proxy_io}
   {
   }
   virtual ~mm_proxy_io_c() {
@@ -47,7 +45,7 @@ public:
     return m_proxy_io->get_file_name();
   }
   virtual mm_io_c *get_proxied() const {
-    return m_proxy_io;
+    return m_proxy_io.get();
   }
 
 protected:

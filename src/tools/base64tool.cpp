@@ -75,7 +75,7 @@ main(int argc,
   try {
     in = mm_io_cptr(new mm_file_io_c(argv[2]));
     if (mode != 'e')
-      intext = mm_io_cptr(new mm_text_io_c(in.get(), false));
+      intext = std::make_shared<mm_text_io_c>(in);
   } catch (mtx::mm_io::exception &ex) {
     mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % argv[2] % ex);
   }

@@ -1440,7 +1440,7 @@ void
 kax_reader_c::find_level1_elements_via_analyzer() {
   try {
     auto start_pos = m_in->get_size() - std::min<int64_t>(m_in->get_size(), 5 * 1024 * 1024);
-    auto analyzer  = std::make_shared<kax_analyzer_c>(m_in.get());
+    auto analyzer  = std::make_shared<kax_analyzer_c>(m_in);
     auto ok        = analyzer
       ->set_parse_mode(kax_analyzer_c::parse_mode_full)
       .set_open_mode(MODE_READ)

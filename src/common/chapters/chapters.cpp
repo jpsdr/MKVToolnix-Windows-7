@@ -285,7 +285,7 @@ parse(const std::string &file_name,
       format_e *format,
       std::unique_ptr<KaxTags> *tags) {
   try {
-    mm_text_io_c in(new mm_file_io_c(file_name));
+    mm_text_io_c in(std::make_shared<mm_file_io_c>(file_name));
     return parse(&in, min_ts, max_ts, offset, language, charset, exception_on_error, format, tags);
 
   } catch (parser_x &e) {

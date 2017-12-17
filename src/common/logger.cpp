@@ -121,7 +121,7 @@ file_target_c::~file_target_c() {
 void
 file_target_c::log_line(std::string const &message) {
   try {
-    mm_text_io_c out(new mm_file_io_c(m_file_name.string(), bfs::exists(m_file_name) ? MODE_WRITE : MODE_CREATE));
+    mm_text_io_c out(std::make_shared<mm_file_io_c>(m_file_name.string(), bfs::exists(m_file_name) ? MODE_WRITE : MODE_CREATE));
     out.setFilePointer(0, seek_end);
     out.puts(format_line(message));
   } catch (mtx::mm_io::exception &ex) {

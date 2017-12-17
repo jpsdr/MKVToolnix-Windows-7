@@ -22,9 +22,8 @@
    Class for handling UTF-8/UTF-16/UTF-32 text files.
 */
 
-mm_text_io_c::mm_text_io_c(mm_io_c *in,
-                           bool delete_in)
-  : mm_proxy_io_c(in, delete_in)
+mm_text_io_c::mm_text_io_c(mm_io_cptr const &in)
+  : mm_proxy_io_c{in}
   , m_byte_order(BO_NONE)
   , m_bom_len(0)
   , m_uses_carriage_returns(false)

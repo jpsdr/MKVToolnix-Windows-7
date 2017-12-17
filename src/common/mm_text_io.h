@@ -22,7 +22,7 @@ protected:
   bool m_uses_carriage_returns, m_uses_newlines, m_eol_style_detected;
 
 public:
-  mm_text_io_c(mm_io_c *in, bool delete_in = true);
+  mm_text_io_c(mm_io_cptr const &in);
 
   virtual void setFilePointer(int64 offset, seek_mode mode=seek_beginning);
   virtual std::string getline(boost::optional<std::size_t> max_chars = boost::none);

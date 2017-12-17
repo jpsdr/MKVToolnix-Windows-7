@@ -100,13 +100,13 @@ public:
 private:
   std::vector<kax_analyzer_data_cptr> m_data;
   std::string m_file_name;
-  mm_io_c *m_file{};
+  mm_io_cptr m_file;
   bool m_close_file{true};
   std::shared_ptr<KaxSegment> m_segment;
   std::shared_ptr<EbmlHead> m_ebml_head;
   uint64_t m_segment_end{};
   std::map<int64_t, bool> m_meta_seeks_by_position;
-  EbmlStream *m_stream{};
+  std::shared_ptr<EbmlStream> m_stream;
   debugging_option_c m_debug{"kax_analyzer"};
   parse_mode_e m_parse_mode{parse_mode_full};
   open_mode m_open_mode{MODE_WRITE};
@@ -119,7 +119,7 @@ public:                         // Static functions
 
 public:
   kax_analyzer_c(std::string file_name);
-  kax_analyzer_c(mm_io_c *file);
+  kax_analyzer_c(mm_io_cptr const &file);
   virtual ~kax_analyzer_c();
 
   virtual update_element_result_e update_element(EbmlElement *e, bool write_defaults = false, bool add_mandatory_elements_if_missing = true);

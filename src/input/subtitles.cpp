@@ -46,12 +46,12 @@ subtitles_c::process(generic_packetizer_c *p) {
 #define SRT_RE_COORDINATES    "([XY]\\d+:\\d+\\s*){4}\\s*$"
 
 bool
-srt_parser_c::probe(mm_text_io_c *io) {
+srt_parser_c::probe(mm_text_io_c &io) {
   try {
-    io->setFilePointer(0, seek_beginning);
+    io.setFilePointer(0, seek_beginning);
     std::string s;
     do {
-      s = io->getline(10);
+      s = io.getline(10);
       strip(s);
     } while (s.empty());
 
@@ -59,13 +59,13 @@ srt_parser_c::probe(mm_text_io_c *io) {
     if (!parse_number(s, dummy))
       return false;
 
-    s = io->getline(100);
+    s = io.getline(100);
     boost::regex timestamp_re(SRT_RE_TIMESTAMP_LINE, boost::regex::perl);
     if (!boost::regex_search(s, timestamp_re))
       return false;
 
-    s = io->getline();
-    io->setFilePointer(0, seek_beginning);
+    s = io.getline();
+    io.setFilePointer(0, seek_beginning);
 
   } catch (...) {
     return false;
@@ -74,7 +74,7 @@ srt_parser_c::probe(mm_text_io_c *io) {
   return true;
 }
 
-srt_parser_c::srt_parser_c(mm_text_io_c *io,
+srt_parser_c::srt_parser_c(mm_text_io_cptr const &io,
                            const std::string &file_name,
                            int64_t tid)
   : m_io(io)
@@ -244,17 +244,17 @@ srt_parser_c::parse() {
 // ------------------------------------------------------------
 
 bool
-ssa_parser_c::probe(mm_text_io_c *io) {
+ssa_parser_c::probe(mm_text_io_c &io) {
   boost::regex script_info_re("^\\s*\\[script\\s+info\\]",   boost::regex::perl | boost::regex::icase);
   boost::regex styles_re(     "^\\s*\\[V4\\+?\\s+Styles\\]", boost::regex::perl | boost::regex::icase);
   boost::regex comment_re(    "^\\s*$|^\\s*[!;]",            boost::regex::perl | boost::regex::icase);
 
   try {
     int line_number = 0;
-    io->setFilePointer(0, seek_beginning);
+    io.setFilePointer(0, seek_beginning);
 
     std::string line;
-    while (io->getline2(line, 1000)) {
+    while (io.getline2(line, 1000)) {
       ++line_number;
 
       // Read at most 100 lines.
@@ -278,8 +278,8 @@ ssa_parser_c::probe(mm_text_io_c *io) {
   return false;
 }
 
-ssa_parser_c::ssa_parser_c(generic_reader_c *reader,
-                           mm_text_io_c *io,
+ssa_parser_c::ssa_parser_c(generic_reader_c &reader,
+                           mm_text_io_cptr const &io,
                            const std::string &file_name,
                            int64_t tid)
   : m_reader(reader)
@@ -508,7 +508,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
 
   ++m_attachment_id;
 
-  if (!m_reader->attachment_requested(m_attachment_id)) {
+  if (!m_reader.attachment_requested(m_attachment_id)) {
     name    = "";
     data_uu = "";
     return;

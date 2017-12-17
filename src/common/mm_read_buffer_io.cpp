@@ -18,10 +18,9 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_read_buffer_io.h"
 
-mm_read_buffer_io_c::mm_read_buffer_io_c(mm_io_c *in,
-                                         size_t buffer_size,
-                                         bool delete_in)
-  : mm_proxy_io_c(in, delete_in)
+mm_read_buffer_io_c::mm_read_buffer_io_c(mm_io_cptr const &in,
+                                         size_t buffer_size)
+  : mm_proxy_io_c{in}
   , m_af_buffer(memory_c::alloc(buffer_size))
   , m_buffer(m_af_buffer->get_buffer())
   , m_cursor(0)

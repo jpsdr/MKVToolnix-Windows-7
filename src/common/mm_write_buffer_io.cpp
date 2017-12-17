@@ -19,10 +19,9 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
 
-mm_write_buffer_io_c::mm_write_buffer_io_c(mm_io_c *out,
-                                           size_t buffer_size,
-                                           bool delete_out)
-  : mm_proxy_io_c(out, delete_out)
+mm_write_buffer_io_c::mm_write_buffer_io_c(mm_io_cptr const &out,
+                                           size_t buffer_size)
+  : mm_proxy_io_c{out}
   , m_af_buffer(memory_c::alloc(buffer_size))
   , m_buffer(m_af_buffer->get_buffer())
   , m_fill(0)
@@ -39,7 +38,7 @@ mm_write_buffer_io_c::~mm_write_buffer_io_c() {
 mm_io_cptr
 mm_write_buffer_io_c::open(const std::string &file_name,
                            size_t buffer_size) {
-  return mm_io_cptr(new mm_write_buffer_io_c(new mm_file_io_c(file_name, MODE_CREATE), buffer_size));
+  return std::make_shared<mm_write_buffer_io_c>(std::make_shared<mm_file_io_c>(file_name, MODE_CREATE), buffer_size);
 }
 
 uint64

@@ -63,7 +63,7 @@ load_file(std::string const &file_name,
           unsigned int options,
           boost::optional<int64_t> max_read_size) {
   auto af_in = mm_file_io_c::open(file_name, MODE_READ);
-  mm_text_io_c in(af_in.get(), false);
+  mm_text_io_c in(af_in);
   std::string content;
   auto bytes_to_read = (max_read_size ? std::min(in.get_size(), *max_read_size) : in.get_size()) - in.get_byte_order_length();
 

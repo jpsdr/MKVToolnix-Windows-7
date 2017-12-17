@@ -75,11 +75,11 @@ static mm_io_cptr
 open_input_file(filelist_t &file) {
   try {
     if (file.all_names.size() == 1)
-      return mm_io_cptr(new mm_read_buffer_io_c(new mm_file_io_c(file.name)));
+      return std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_file_io_c>(file.name));
 
     else {
       std::vector<bfs::path> paths = file_names_to_paths(file.all_names);
-      return mm_io_cptr(new mm_read_buffer_io_c(new mm_multi_file_io_c(paths, file.name)));
+      return std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_multi_file_io_c>(paths, file.name));
     }
 
   } catch (mtx::mm_io::exception &ex) {
@@ -122,7 +122,7 @@ static mtx::file_type_e
 detect_text_file_formats(filelist_t const &file) {
   auto text_io = mm_text_io_cptr{};
   try {
-    text_io        = std::make_shared<mm_text_io_c>(new mm_file_io_c(file.name));
+    text_io        = std::make_shared<mm_text_io_c>(std::make_shared<mm_file_io_c>(file.name));
     auto text_size = text_io->get_size();
 
     if (do_probe<webvtt_reader_c>(text_io, text_size))

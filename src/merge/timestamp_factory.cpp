@@ -28,9 +28,9 @@ timestamp_factory_c::create(std::string const &file_name,
   if (file_name.empty())
     return timestamp_factory_cptr{};
 
-  mm_io_c *in = nullptr;           // avoid gcc warning
+  mm_io_cptr in;
   try {
-    in = new mm_text_io_c(new mm_file_io_c(file_name));
+    in = std::make_shared<mm_text_io_c>(std::make_shared<mm_file_io_c>(file_name));
   } catch(...) {
     mxerror(boost::format(Y("The timestamp file '%1%' could not be opened for reading.\n")) % file_name);
   }
@@ -66,7 +66,6 @@ timestamp_factory_c::create(std::string const &file_name,
     mxerror(boost::format(Y("The timestamp file '%1%' contains an unsupported/unrecognized format (version %2%).\n")) % file_name % version);
 
   factory->parse(*in);
-  delete in;
 
   return timestamp_factory_cptr(factory);
 }

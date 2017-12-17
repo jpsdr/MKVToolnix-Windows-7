@@ -47,7 +47,7 @@ webvtt_reader_c::~webvtt_reader_c() {
 void
 webvtt_reader_c::read_headers() {
   try {
-    m_text_in = std::make_shared<mm_text_io_c>(m_in.get(), false);
+    m_text_in = std::make_shared<mm_text_io_c>(m_in);
     m_ti.m_id = 0;                 // ID for this track.
 
   } catch (...) {

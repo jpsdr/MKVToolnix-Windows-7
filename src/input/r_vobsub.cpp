@@ -76,7 +76,7 @@ vobsub_reader_c::vobsub_reader_c(const track_info_c &ti,
 void
 vobsub_reader_c::read_headers() {
   try {
-    m_idx_file = mm_text_io_cptr(new mm_text_io_c(m_in.get(), false));
+    m_idx_file = std::make_shared<mm_text_io_c>(m_in);
   } catch (...) {
     throw mtx::input::open_x();
   }

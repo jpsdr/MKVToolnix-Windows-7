@@ -24,7 +24,7 @@
 int
 srt_reader_c::probe_file(mm_text_io_c *in,
                          uint64_t) {
-  return srt_parser_c::probe(in);
+  return srt_parser_c::probe(*in);
 }
 
 srt_reader_c::srt_reader_c(const track_info_c &ti,
@@ -36,12 +36,12 @@ srt_reader_c::srt_reader_c(const track_info_c &ti,
 void
 srt_reader_c::read_headers() {
   try {
-    m_text_in = mm_text_io_cptr(new mm_text_io_c(m_in.get(), false));
-    if (!srt_parser_c::probe(m_text_in.get()))
+    m_text_in = std::make_shared<mm_text_io_c>(m_in);
+    if (!srt_parser_c::probe(*m_text_in))
       throw mtx::input::invalid_format_x();
 
     m_ti.m_id = 0;                 // ID for this track.
-    m_subs    = srt_parser_cptr(new srt_parser_c(m_text_in.get(), m_ti.m_fname, 0));
+    m_subs    = std::make_shared<srt_parser_c>(m_text_in, m_ti.m_fname, 0);
 
   } catch (...) {
     throw mtx::input::open_x();

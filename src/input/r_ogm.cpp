@@ -864,10 +864,9 @@ ogm_reader_c::handle_stream_comments() {
 
         out->set_file_name(m_ti.m_fname);
 
-        std::shared_ptr<mm_text_io_c> text_out(new mm_text_io_c(out.get(), false));
-
-        m_chapters   = mtx::chapters::parse(text_out.get(), 0, -1, 0, m_ti.m_chapter_language, "", true);
-        chapters_set = true;
+        auto text_out = std::make_shared<mm_text_io_c>(out);
+        m_chapters    = mtx::chapters::parse(text_out.get(), 0, -1, 0, m_ti.m_chapter_language, "", true);
+        chapters_set  = true;
 
         mtx::chapters::align_uids(m_chapters.get());
       } catch (...) {

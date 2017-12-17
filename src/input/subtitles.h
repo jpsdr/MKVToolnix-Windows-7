@@ -74,17 +74,17 @@ public:
   };
 
 protected:
-  mm_text_io_c *m_io;
+  mm_text_io_cptr m_io;
   const std::string &m_file_name;
   int64_t m_tid;
   bool m_coordinates_warning_shown;
 
 public:
-  srt_parser_c(mm_text_io_c *io, const std::string &file_name, int64_t tid);
+  srt_parser_c(mm_text_io_cptr const &io, const std::string &file_name, int64_t tid);
   void parse();
 
 public:
-  static bool probe(mm_text_io_c *io);
+  static bool probe(mm_text_io_c &io);
 };
 using srt_parser_cptr = std::shared_ptr<srt_parser_c>;
 
@@ -100,8 +100,8 @@ public:
   };
 
 protected:
-  generic_reader_c *m_reader;
-  mm_text_io_c *m_io;
+  generic_reader_c &m_reader;
+  mm_text_io_cptr m_io;
   const std::string &m_file_name;
   int64_t m_tid;
   charset_converter_cptr m_cc_utf8;
@@ -114,7 +114,7 @@ public:
   std::vector<attachment_t> m_attachments;
 
 public:
-  ssa_parser_c(generic_reader_c *reader, mm_text_io_c *io, const std::string &file_name, int64_t tid);
+  ssa_parser_c(generic_reader_c &reader, mm_text_io_cptr const &io, const std::string &file_name, int64_t tid);
   void parse();
 
   bool is_ass() {
@@ -134,7 +134,7 @@ public:
   }
 
 public:
-  static bool probe(mm_text_io_c *io);
+  static bool probe(mm_text_io_c &io);
 
 protected:
   int64_t parse_time(std::string &time);
