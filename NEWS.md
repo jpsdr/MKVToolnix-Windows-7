@@ -1,4 +1,4 @@
-# Version ?
+# Version 19.0.0 "Brave Captain" 2017-12-17
 
 ## Important notes
 
