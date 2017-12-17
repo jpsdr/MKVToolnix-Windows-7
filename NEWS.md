@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: update check dialog: Markdown links will now be converted to
+  clickable links. Fixes #2176.
+
+
 # Version 19.0.0 "Brave Captain" 2017-12-17
 
 ## Important notes
