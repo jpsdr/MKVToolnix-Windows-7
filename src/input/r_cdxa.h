@@ -19,5 +19,5 @@
 
 class cdxa_reader_c {
 public:
-  static bool probe_file(mm_io_c *in, uint64_t size);
+  static bool probe_file(mm_io_c &in, uint64_t size);
 };

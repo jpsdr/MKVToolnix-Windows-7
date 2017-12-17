@@ -33,7 +33,7 @@ struct PACKED_STRUCTURE flv_header_t {
 
   flv_header_t();
 
-  bool read(mm_io_c *in);
+  bool read(mm_io_c &in);
   bool read(mm_io_cptr const &in);
 
   bool has_video() const;
@@ -151,7 +151,7 @@ public:
   virtual void create_packetizers();
   virtual void add_available_track_ids();
 
-  static int probe_file(mm_io_c *io, uint64_t size);
+  static int probe_file(mm_io_c &io, uint64_t size);
 
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::flv;

@@ -26,16 +26,16 @@
 #include "output/p_alac.h"
 
 int
-coreaudio_reader_c::probe_file(mm_io_c *in,
+coreaudio_reader_c::probe_file(mm_io_c &in,
                                uint64_t size) {
   try {
     if (8 > size)
       return false;
 
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     std::string magic;
-    return (4 == in->read(magic, 4)) && (balg::to_lower_copy(magic) == "caff") ? 1 : 0;
+    return (4 == in.read(magic, 4)) && (balg::to_lower_copy(magic) == "caff") ? 1 : 0;
 
   } catch (...) {
   }
@@ -80,7 +80,7 @@ coreaudio_reader_c::identify() {
 
 void
 coreaudio_reader_c::read_headers() {
-  if (!coreaudio_reader_c::probe_file(m_in.get(), m_size))
+  if (!coreaudio_reader_c::probe_file(*m_in, m_size))
     throw mtx::input::invalid_format_x();
 
   // Skip "caff" magic, version and flags

@@ -56,7 +56,7 @@ hdmv_textst_reader_c::read_segment(mm_io_c &in) {
 }
 
 int
-hdmv_textst_reader_c::probe_file(mm_io_c *in,
+hdmv_textst_reader_c::probe_file(mm_io_c &in,
                                  uint64_t size) {
   if (10 > size)
     return 0;
@@ -64,13 +64,13 @@ hdmv_textst_reader_c::probe_file(mm_io_c *in,
   try {
     auto magic = std::string{};
 
-    in->setFilePointer(0);
-    in->read(magic, 6);
+    in.setFilePointer(0);
+    in.read(magic, 6);
     if (magic != "TextST")
       return 0;
 
-    auto segment = read_segment(*in);
-    in->skip(2);
+    auto segment = read_segment(in);
+    in.skip(2);
 
     return segment && (mtx::hdmv_textst::dialog_style_segment == segment->get_buffer()[0]) ? 1 : 0;
 

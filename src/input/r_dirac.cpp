@@ -28,16 +28,16 @@
 #define READ_SIZE 1024 * 1024
 
 int
-dirac_es_reader_c::probe_file(mm_io_c *in,
+dirac_es_reader_c::probe_file(mm_io_c &in,
                               uint64_t size) {
   try {
     if (PROBESIZE > size)
       return 0;
 
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     memory_cptr buf = memory_c::alloc(READ_SIZE);
-    int num_read    = in->read(buf->get_buffer(), READ_SIZE);
+    int num_read    = in.read(buf->get_buffer(), READ_SIZE);
 
     if (4 > num_read)
       return 0;

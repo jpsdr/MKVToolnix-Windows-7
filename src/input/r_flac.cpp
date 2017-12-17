@@ -30,17 +30,17 @@
 #if defined(HAVE_FLAC_FORMAT_H)
 
 bool
-flac_reader_c::probe_file(mm_io_c *io,
+flac_reader_c::probe_file(mm_io_c &in,
                           uint64_t size) {
   if (4 > size)
     return false;
 
   std::string data;
   try {
-    io->setFilePointer(0, seek_beginning);
-    if (io->read(data, 4) != 4)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(data, 4) != 4)
       return false;
-    io->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     return data == "fLaC";
   } catch (...) {
@@ -367,20 +367,20 @@ flac_reader_c::identify() {
 #else  // HAVE_FLAC_FORMAT_H
 
 bool
-flac_reader_c::probe_file(mm_io_c *in,
+flac_reader_c::probe_file(mm_io_c &in,
                           uint64_t size) {
   if (4 > size)
     return false;
 
   std::string data;
   try {
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(data, 4) != 4)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(data, 4) != 4)
       return false;
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     if (data == "fLaC")
-      id_result_container_unsupported(in->get_file_name(), "FLAC");
+      id_result_container_unsupported(in.get_file_name(), "FLAC");
   } catch (...) {
   }
   return false;

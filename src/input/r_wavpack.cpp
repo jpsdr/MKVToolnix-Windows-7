@@ -25,15 +25,15 @@
 #include "output/p_wavpack.h"
 
 int
-wavpack_reader_c::probe_file(mm_io_c *in,
+wavpack_reader_c::probe_file(mm_io_c &in,
                              uint64_t) {
   wavpack_header_t header;
 
   try {
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(&header, sizeof(wavpack_header_t)) != sizeof(wavpack_header_t))
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(&header, sizeof(wavpack_header_t)) != sizeof(wavpack_header_t))
       return 0;
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
   } catch (...) {
     return 0;
   }

@@ -156,7 +156,7 @@ public:
   parser_c();
   virtual ~parser_c();
 
-  virtual bool parse(mm_io_c *in);
+  virtual bool parse(mm_io_c &in);
   virtual bool is_ok() const {
     return m_ok;
   }

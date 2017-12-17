@@ -23,7 +23,7 @@
 #include "merge/id_result.h"
 
 int
-dv_reader_c::probe_file(mm_io_c *in,
+dv_reader_c::probe_file(mm_io_c &in,
                         uint64_t size) {
   try {
     if (5 > size)
@@ -32,8 +32,8 @@ dv_reader_c::probe_file(mm_io_c *in,
     uint64_t probe_size = std::min(size, static_cast<uint64_t>(20 * 1024 * 1024));
     memory_cptr mem     = memory_c::alloc(probe_size);
 
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(mem, probe_size) != probe_size)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(mem, probe_size) != probe_size)
       return 0;
 
     mm_mem_io_c mem_io(mem->get_buffer(), probe_size);
@@ -66,7 +66,7 @@ dv_reader_c::probe_file(mm_io_c *in,
         && (   (matches > 4)
             || (   (secondary_matches                >= 10)
                 && ((probe_size / secondary_matches) <  24000)))) {
-      id_result_container_unsupported(in->get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::dv));
+      id_result_container_unsupported(in.get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::dv));
       // Never reached:
       return 1;
     }

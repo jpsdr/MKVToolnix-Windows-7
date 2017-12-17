@@ -94,7 +94,7 @@ open_input_file(filelist_t &file) {
 
 static bool
 open_playlist_file(filelist_t &file,
-                   mm_io_c *in) {
+                   mm_io_c &in) {
   auto mpls_in = mm_mpls_multi_file_io_c::open_multi(in);
   if (!mpls_in)
     return false;
@@ -112,7 +112,7 @@ int
 do_probe(Tio &io,
          Targs && ...args) {
   // log_it(boost::format("%1%: probe start") % typeid(Treader).name());
-  auto result = Treader::probe_file(&(*io), std::forward<Targs>(args)...);
+  auto result = Treader::probe_file(*io, std::forward<Targs>(args)...);
   // log_it(boost::format("%1%: probe done") % typeid(Treader).name());
 
   return result;
@@ -157,13 +157,12 @@ detect_text_file_formats(filelist_t const &file) {
 */
 static std::pair<mtx::file_type_e, int64_t>
 get_file_type_internal(filelist_t &file) {
-  mm_io_cptr af_io = open_input_file(file);
-  mm_io_c *io      = af_io.get();
-  int64_t size     = std::min(io->get_size(), static_cast<int64_t>(1 << 25));
+  auto io          = open_input_file(file);
+  auto size        = std::min(io->get_size(), static_cast<int64_t>(1 << 25));
+  auto is_playlist = !file.is_playlist && open_playlist_file(file, *io);
 
-  auto is_playlist = !file.is_playlist && open_playlist_file(file, io);
   if (is_playlist)
-    io = file.playlist_mpls_in.get();
+    io = file.playlist_mpls_in;
 
   // File types that can be detected unambiguously but are not supported
   if (do_probe<aac_adif_reader_c>(io, size))

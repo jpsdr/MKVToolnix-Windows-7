@@ -37,7 +37,7 @@ public:
     return true;
   }
 
-  static int probe_file(mm_io_c *in, uint64_t size);
+  static int probe_file(mm_io_c &in, uint64_t size);
 
 protected:
   static memory_cptr read_segment(mm_io_c &in);

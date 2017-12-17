@@ -304,17 +304,17 @@ extract_vorbis_comments(const memory_cptr &mem) {
    Probes a file by simply comparing the first four bytes to 'OggS'.
 */
 int
-ogm_reader_c::probe_file(mm_io_c *in,
+ogm_reader_c::probe_file(mm_io_c &in,
                          uint64_t size) {
   unsigned char data[4];
 
   if (4 > size)
     return 0;
   try {
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(data, 4) != 4)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(data, 4) != 4)
       return 0;
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
   } catch (...) {
     return 0;
   }
@@ -335,7 +335,7 @@ ogm_reader_c::ogm_reader_c(const track_info_c &ti,
 
 void
 ogm_reader_c::read_headers() {
-  if (!ogm_reader_c::probe_file(m_in.get(), m_size))
+  if (!ogm_reader_c::probe_file(*m_in, m_size))
     throw mtx::input::invalid_format_x();
 
   ogg_sync_init(&oy);

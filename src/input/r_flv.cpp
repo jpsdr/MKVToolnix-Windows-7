@@ -59,12 +59,12 @@ flv_header_t::is_valid()
 
 bool
 flv_header_t::read(mm_io_cptr const &in) {
-  return read(in.get());
+  return read(*in);
 }
 
 bool
-flv_header_t::read(mm_io_c *in) {
-  if (sizeof(*this) != in->read(this, sizeof(*this)))
+flv_header_t::read(mm_io_c &in) {
+  if (sizeof(*this) != in.read(this, sizeof(*this)))
     return false;
 
   data_offset = get_uint32_be(&data_offset);
@@ -235,13 +235,13 @@ flv_track_c::extract_flv1_width_and_height() {
 // --------------------------------------------------
 
 int
-flv_reader_c::probe_file(mm_io_c *io,
+flv_reader_c::probe_file(mm_io_c &in,
                          uint64_t) {
   try {
     flv_header_t header;
 
-    io->setFilePointer(0);
-    return header.read(io) && header.is_valid() ? 1 : 0;
+    in.setFilePointer(0);
+    return header.read(in) && header.is_valid() ? 1 : 0;
 
   } catch (...) {
     return 0;

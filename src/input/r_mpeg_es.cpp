@@ -31,7 +31,7 @@
 #define READ_SIZE 1024 * 1024
 
 int
-mpeg_es_reader_c::probe_file(mm_io_c *in,
+mpeg_es_reader_c::probe_file(mm_io_c &in,
                              uint64_t size) {
   auto debug = debugging_option_c{"mpeg_es_detection|mpeg_es_probe"};
 
@@ -41,13 +41,13 @@ mpeg_es_reader_c::probe_file(mm_io_c *in,
   try {
     memory_cptr af_buf = memory_c::alloc(READ_SIZE);
     unsigned char *buf = af_buf->get_buffer();
-    in->setFilePointer(0, seek_beginning);
-    int num_read = in->read(buf, READ_SIZE);
+    in.setFilePointer(0, seek_beginning);
+    int num_read = in.read(buf, READ_SIZE);
 
     if (4 > num_read)
       return 0;
 
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     // MPEG TS starts with 0x47.
     if (0x47 == buf[0])
@@ -112,7 +112,7 @@ mpeg_es_reader_c::probe_file(mm_io_c *in,
     // Let's try to read one frame.
     M2VParser parser;
     parser.SetProbeMode();
-    if (!read_frame(parser, *in, READ_SIZE))
+    if (!read_frame(parser, in, READ_SIZE))
       return 0;
 
   } catch (...) {

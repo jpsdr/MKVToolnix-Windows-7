@@ -290,17 +290,17 @@ kax_track_t::discard_track_statistics_tags() {
    head signature.
 */
 int
-kax_reader_c::probe_file(mm_io_c *in,
+kax_reader_c::probe_file(mm_io_c &in,
                          uint64_t size) {
   unsigned char data[4];
 
   if (4 > size)
     return 0;
   try {
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(data, 4) != 4)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(data, 4) != 4)
       return 0;
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
   } catch (...) {
     return 0;
   }

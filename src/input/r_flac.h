@@ -63,7 +63,7 @@ public:
     return false;
   }
 
-  static bool probe_file(mm_io_c *in, uint64_t size);
+  static bool probe_file(mm_io_c &in, uint64_t size);
 
   virtual FLAC__StreamDecoderReadStatus flac_read_cb(FLAC__byte buffer[], size_t *bytes);
   virtual void flac_metadata_cb(const FLAC__StreamMetadata *metadata);
@@ -84,7 +84,7 @@ protected:
 
 class flac_reader_c {
 public:
-  static bool probe_file(mm_io_c *in, uint64_t size);
+  static bool probe_file(mm_io_c &in, uint64_t size);
 };
 
 #endif // HAVE_FLAC_FORMAT_H

@@ -31,14 +31,14 @@
 #define READ_SIZE 16384
 
 int
-dts_reader_c::probe_file(mm_io_c *in,
+dts_reader_c::probe_file(mm_io_c &in,
                          uint64_t size,
                          bool strict_mode) {
   if (size < READ_SIZE)
     return 0;
 
   try {
-    auto chunks         = scan_chunks(*in);
+    auto chunks         = scan_chunks(in);
     auto strmdata_chunk = brng::find_if(chunks, [](chunk_t const &chunk) { return chunk.type == chunk_type_e::strmdata; });
     if (strmdata_chunk == chunks.end())
       return 0;
@@ -46,8 +46,8 @@ dts_reader_c::probe_file(mm_io_c *in,
     unsigned char buf[READ_SIZE];
     auto bytes_to_read = std::min<uint64_t>(strmdata_chunk->data_size, READ_SIZE);
 
-    in->setFilePointer(strmdata_chunk->data_start, seek_beginning);
-    if (in->read(buf, bytes_to_read) != bytes_to_read)
+    in.setFilePointer(strmdata_chunk->data_start, seek_beginning);
+    if (in.read(buf, bytes_to_read) != bytes_to_read)
       return 0;
 
     bool convert_14_to_16 = false, swap_bytes = false;

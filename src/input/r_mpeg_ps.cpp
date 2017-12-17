@@ -38,22 +38,22 @@
 #include "output/p_vc1.h"
 
 int
-mpeg_ps_reader_c::probe_file(mm_io_c *in,
+mpeg_ps_reader_c::probe_file(mm_io_c &in,
                              uint64_t) {
   try {
     unsigned char buf[4];
 
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(buf, 4) != 4)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(buf, 4) != 4)
       return 0;
 
     if (get_uint32_be(buf) == MPEGVIDEO_PACKET_START_CODE)
       return 1;
 
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     auto mem      = memory_c::alloc(32 * 1024);
-    auto num_read = in->read(mem, mem->get_size());
+    auto num_read = in.read(mem, mem->get_size());
 
     if (num_read < 4)
       return 0;

@@ -97,7 +97,7 @@ public:
   virtual void create_packetizer(int64_t tid);
   virtual void add_available_track_ids();
 
-  static int probe_file(mm_io_c *in, uint64_t size);
+  static int probe_file(mm_io_c &in, uint64_t size);
 
 private:
   virtual ogm_demuxer_cptr find_demuxer(int serialno);

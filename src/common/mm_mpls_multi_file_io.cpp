@@ -35,14 +35,14 @@ mm_io_cptr
 mm_mpls_multi_file_io_c::open_multi(std::string const &display_file_name) {
   try {
     mm_file_io_c in{display_file_name};
-    return open_multi(&in);
+    return open_multi(in);
   } catch (mtx::mm_io::exception &) {
     return mm_io_cptr{};
   }
 }
 
 mm_io_cptr
-mm_mpls_multi_file_io_c::open_multi(mm_io_c *in) {
+mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
   auto mpls_parser = std::make_shared<mtx::bluray::mpls::parser_c>();
 
   if (!mpls_parser->parse(in) || mpls_parser->get_playlist().items.empty()) {
@@ -50,7 +50,7 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c *in) {
     return mm_io_cptr{};
   }
 
-  auto mpls_dir = bfs::system_complete(bfs::path(in->get_file_name())).remove_filename();
+  auto mpls_dir = bfs::system_complete(bfs::path(in.get_file_name())).remove_filename();
 
   std::vector<bfs::path> file_names;
 

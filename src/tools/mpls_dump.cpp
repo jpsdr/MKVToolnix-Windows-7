@@ -60,7 +60,7 @@ parse_file(const std::string &file_name) {
   auto in     = mm_file_io_c{file_name};
   auto parser = mtx::bluray::mpls::parser_c{};
 
-  if (!parser.parse(&in))
+  if (!parser.parse(in))
     mxerror("MPLS file could not be parsed.\n");
 
   parser.dump();

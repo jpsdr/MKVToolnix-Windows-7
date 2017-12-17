@@ -118,9 +118,9 @@ wav_reader_c::determine_type(mm_io_c &in,
 }
 
 int
-wav_reader_c::probe_file(mm_io_c *in,
+wav_reader_c::probe_file(mm_io_c &in,
                          uint64_t size) {
-  return determine_type(*in, size) != type_e::unknown;
+  return determine_type(in, size) != type_e::unknown;
 }
 
 void

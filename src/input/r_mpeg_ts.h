@@ -432,7 +432,7 @@ public:
   reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~reader_c();
 
-  static bool probe_file(mm_io_c *in, uint64_t size);
+  static bool probe_file(mm_io_c &in, uint64_t size);
 
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::mpeg_ts;
@@ -448,7 +448,7 @@ public:
   virtual void parse_packet(unsigned char *buf);
 
   static timestamp_c read_timestamp(unsigned char *p);
-  static int detect_packet_size(mm_io_c *in, uint64_t size);
+  static int detect_packet_size(mm_io_c &in, uint64_t size);
 
 private:
   void read_headers_for_file(std::size_t file_num);

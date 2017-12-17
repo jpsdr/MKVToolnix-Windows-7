@@ -20,7 +20,7 @@
 #include "merge/id_result.h"
 
 int
-hdsub_reader_c::probe_file(mm_io_c *in,
+hdsub_reader_c::probe_file(mm_io_c &in,
                          uint64_t size) {
   try {
     if (2 > size)
@@ -28,13 +28,13 @@ hdsub_reader_c::probe_file(mm_io_c *in,
 
     unsigned char buf[2];
 
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(buf, 2) != 2)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(buf, 2) != 2)
       return 0;
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     if (HDSUB_FILE_MAGIC == get_uint16_be(buf)) {
-      id_result_container_unsupported(in->get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::hdsub));
+      id_result_container_unsupported(in.get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::hdsub));
       // Never reached:
       return 1;
     }

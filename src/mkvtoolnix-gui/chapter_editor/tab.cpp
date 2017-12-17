@@ -541,7 +541,7 @@ Tab::loadFromMplsFile() {
 
     parser.enable_dropping_last_entry_if_at_end(Util::Settings::get().m_dropLastChapterFromBlurayPlaylist);
 
-    if (parser.parse(&in))
+    if (parser.parse(in))
       chapters = timestampsToChapters(parser.get_chapters());
 
   } catch (mtx::mm_io::exception &ex) {

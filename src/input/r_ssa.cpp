@@ -25,9 +25,9 @@
 #include "merge/file_status.h"
 
 int
-ssa_reader_c::probe_file(mm_text_io_c *in,
+ssa_reader_c::probe_file(mm_text_io_c &in,
                          uint64_t) {
-  return ssa_parser_c::probe(*in);
+  return ssa_parser_c::probe(in);
 }
 
 ssa_reader_c::ssa_reader_c(const track_info_c &ti,
@@ -46,7 +46,7 @@ ssa_reader_c::read_headers() {
     throw mtx::input::open_x();
   }
 
-  if (!ssa_reader_c::probe_file(text_in.get(), 0))
+  if (!ssa_reader_c::probe_file(*text_in, 0))
     throw mtx::input::invalid_format_x();
 
   charset_converter_cptr cc_utf8 = text_in->get_byte_order() != BO_NONE   ? charset_converter_c::init("UTF-8")

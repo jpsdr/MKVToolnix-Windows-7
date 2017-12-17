@@ -194,21 +194,21 @@ parser_c::enable_dropping_last_entry_if_at_end(bool enable) {
 }
 
 bool
-parser_c::parse(mm_io_c *file) {
+parser_c::parse(mm_io_c &file) {
   try {
-    file->setFilePointer(0);
-    int64_t file_size = file->get_size();
+    file.setFilePointer(0);
+    int64_t file_size = file.get_size();
 
     if ((4 * 5 > file_size) || (10 * 1024 * 1024 < file_size))
       throw mtx::bluray::mpls::exception(boost::format("File too small or too big: %1%") % file_size);
 
-    auto content = file->read(4 * 5);
+    auto content = file.read(4 * 5);
     m_bc         = std::make_shared<mtx::bits::reader_c>(content->get_buffer(), 4 * 5);
     parse_header();
 
-    file->setFilePointer(0);
+    file.setFilePointer(0);
 
-    content = file->read(file_size);
+    content = file.read(file_size);
     m_bc    = std::make_shared<mtx::bits::reader_c>(content->get_buffer(), file_size);
 
     parse_playlist();
@@ -227,7 +227,7 @@ parser_c::parse(mm_io_c *file) {
   if (m_debug)
     dump();
 
-  file->setFilePointer(0);
+  file.setFilePointer(0);
 
   return m_ok;
 }

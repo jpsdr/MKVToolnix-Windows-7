@@ -31,7 +31,7 @@
 debugging_option_c avc_es_reader_c::ms_debug{"avc_reader"};
 
 int
-avc_es_reader_c::probe_file(mm_io_c *in,
+avc_es_reader_c::probe_file(mm_io_c &in,
                             uint64_t size) {
   try {
     if (PROBESIZE > size)
@@ -45,9 +45,9 @@ avc_es_reader_c::probe_file(mm_io_c *in,
     parser.ignore_nalu_size_length_errors();
     parser.set_nalu_size_length(4);
 
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
     for (i = 0; MAX_PROBE_BUFFERS > i; ++i) {
-      num_read = in->read(buf->get_buffer(), READ_SIZE);
+      num_read = in.read(buf->get_buffer(), READ_SIZE);
       if (4 > num_read)
         return 0;
 

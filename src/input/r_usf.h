@@ -79,7 +79,7 @@ public:
     return true;
   }
 
-  static int probe_file(mm_text_io_c *in, uint64_t size);
+  static int probe_file(mm_text_io_c &in, uint64_t size);
 
 protected:
   virtual int64_t try_to_parse_timestamp(const char *s);

@@ -102,7 +102,7 @@ public:
     return false;
   }
 
-  static int probe_file(mm_io_c *in, uint64_t size);
+  static int probe_file(mm_io_c &in, uint64_t size);
 
 protected:
   static type_e determine_type(mm_io_c &in, uint64_t size);

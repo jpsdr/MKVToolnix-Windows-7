@@ -57,17 +57,17 @@
 #define GAB2_ID_SUBTITLES        0x0004
 
 bool
-avi_reader_c::probe_file(mm_io_c *in,
+avi_reader_c::probe_file(mm_io_c &in,
                          uint64_t size) {
   if (12 > size)
     return false;
 
   std::string data;
   try {
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(data, 12) != 12)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(data, 12) != 12)
       return false;
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
   } catch (...) {
     return false;
   }
@@ -85,7 +85,7 @@ avi_reader_c::avi_reader_c(const track_info_c &ti,
 void
 avi_reader_c::read_headers() {
   try {
-    if (!avi_reader_c::probe_file(m_in.get(), m_size))
+    if (!avi_reader_c::probe_file(*m_in, m_size))
       throw mtx::input::invalid_format_x();
 
   } catch (mtx::mm_io::exception &) {

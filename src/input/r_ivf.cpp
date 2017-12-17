@@ -24,14 +24,14 @@
 #include "merge/file_status.h"
 
 int
-ivf_reader_c::probe_file(mm_io_c *io,
+ivf_reader_c::probe_file(mm_io_c &in,
                          uint64_t size) {
   if (sizeof(ivf::file_header_t) > size)
     return 0;
 
   ivf::file_header_t header;
-  io->setFilePointer(0, seek_beginning);
-  if (io->read(&header, sizeof(ivf::file_header_t)) < sizeof(ivf::file_header_t))
+  in.setFilePointer(0, seek_beginning);
+  if (in.read(&header, sizeof(ivf::file_header_t)) < sizeof(ivf::file_header_t))
     return 0;
 
   if (memcmp(header.file_magic, "DKIF", 4) || header.get_codec().is(codec_c::type_e::UNKNOWN))

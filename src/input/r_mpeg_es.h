@@ -43,5 +43,5 @@ public:
 
   static bool read_frame(M2VParser &parser, mm_io_c &in, int64_t max_size = -1);
 
-  static int probe_file(mm_io_c *in, uint64_t size);
+  static int probe_file(mm_io_c &in, uint64_t size);
 };

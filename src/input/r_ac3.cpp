@@ -27,15 +27,15 @@
 #define AC3_READ_SIZE 16384
 
 int
-ac3_reader_c::probe_file(mm_io_c *in,
+ac3_reader_c::probe_file(mm_io_c &in,
                          uint64_t,
                          int64_t probe_size,
                          int num_headers,
                          bool require_zero_offset) {
   try {
-    in->setFilePointer(0, seek_beginning);
-    mtx::id3::skip_v2_tag(*in);
-    int offset = find_valid_headers(*in, probe_size, num_headers);
+    in.setFilePointer(0, seek_beginning);
+    mtx::id3::skip_v2_tag(in);
+    int offset = find_valid_headers(in, probe_size, num_headers);
 
     return (require_zero_offset && (0 == offset)) || (!require_zero_offset && (0 <= offset));
 

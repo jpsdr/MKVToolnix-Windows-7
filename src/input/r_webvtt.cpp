@@ -22,11 +22,11 @@
 #include "merge/input_x.h"
 
 int
-webvtt_reader_c::probe_file(mm_text_io_c *in,
+webvtt_reader_c::probe_file(mm_text_io_c &in,
                             uint64_t) {
   try {
-    in->setFilePointer(0, seek_beginning);
-    auto line = in->getline(100);
+    in.setFilePointer(0, seek_beginning);
+    auto line = in.getline(100);
 
     return line.find("WEBVTT") == 0;
 

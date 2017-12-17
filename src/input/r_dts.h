@@ -71,7 +71,7 @@ public:
     return false;
   }
 
-  static int probe_file(mm_io_c *in, uint64_t size, bool strict_mode = false);
+  static int probe_file(mm_io_c &in, uint64_t size, bool strict_mode = false);
   static chunks_t scan_chunks(mm_io_c &in);
 
 protected:

@@ -21,18 +21,18 @@
 #include "merge/id_result.h"
 
 int
-microdvd_reader_c::probe_file(mm_text_io_c *in,
+microdvd_reader_c::probe_file(mm_text_io_c &in,
                               uint64_t) {
   try {
     boost::regex re("^\\{\\d+?\\}\\{\\d+?\\}.+$", boost::regex::perl);
 
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     std::string line;
     auto line_num = 0u;
 
     while (line_num < 20) {
-      line = in->getline(50);
+      line = in.getline(50);
       strip(line);
 
       if (!line.empty())
@@ -42,7 +42,7 @@ microdvd_reader_c::probe_file(mm_text_io_c *in,
     }
 
     if (boost::regex_match(line, re))
-      id_result_container_unsupported(in->get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::microdvd));
+      id_result_container_unsupported(in.get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::microdvd));
 
   } catch (mtx::mm_io::end_of_file_x &) {
   }

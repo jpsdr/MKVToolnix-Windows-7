@@ -97,7 +97,7 @@ mb_file_io_t mm_io_file_io = {
 };
 
 int
-real_reader_c::probe_file(mm_io_c *in,
+real_reader_c::probe_file(mm_io_c &in,
                           uint64_t size) {
   unsigned char data[4];
 
@@ -105,10 +105,10 @@ real_reader_c::probe_file(mm_io_c *in,
     return 0;
 
   try {
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(data, 4) != 4)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(data, 4) != 4)
       return 0;
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
   } catch (...) {
     return 0;

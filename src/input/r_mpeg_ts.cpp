@@ -984,21 +984,18 @@ file_t::all_pmts_found()
 // ------------------------------------------------------------
 
 bool
-reader_c::probe_file(mm_io_c *in,
+reader_c::probe_file(mm_io_c &in,
                      uint64_t) {
-  auto mpls_in   = dynamic_cast<mm_mpls_multi_file_io_c *>(in);
-  auto in_to_use = mpls_in ? static_cast<mm_io_c *>(mpls_in) : in;
-
-  if (in_to_use->get_size() < 4)
+  if (in.get_size() < 4)
     return false;
 
-  auto packet_size = detect_packet_size(in_to_use, in_to_use->get_size());
+  auto packet_size = detect_packet_size(in, in.get_size());
 
   return packet_size > 0;
 }
 
 int
-reader_c::detect_packet_size(mm_io_c *in,
+reader_c::detect_packet_size(mm_io_c &in,
                              uint64_t size) {
   debugging_option_c debug{"mpeg_ts|mpeg_ts_packet_size"};
 
@@ -1010,8 +1007,8 @@ reader_c::detect_packet_size(mm_io_c *in,
 
     mxdebug_if(debug, boost::format("detect_packet_size: size to probe %1% num required startcodes %2%\n") % size % num_startcodes_required);
 
-    in->setFilePointer(0, seek_beginning);
-    size = in->read(mem, size);
+    in.setFilePointer(0, seek_beginning);
+    size = in.read(mem, size);
 
     std::vector<int> positions;
     for (int i = 0; i < static_cast<int>(size); ++i)
@@ -1093,7 +1090,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
     f.m_probe_range          = calculate_probe_range(file_size, 10 * 1024 * 1024);
     auto size_to_probe       = std::min<uint64_t>(file_size,     f.m_probe_range);
     auto min_size_to_probe   = std::min<uint64_t>(size_to_probe, 5 * 1024 * 1024);
-    f.m_detected_packet_size = detect_packet_size(f.m_in.get(), size_to_probe);
+    f.m_detected_packet_size = detect_packet_size(*f.m_in, size_to_probe);
 
     f.m_in->setFilePointer(0);
 

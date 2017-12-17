@@ -17,5 +17,5 @@
 
 class hdsub_reader_c {
 public:
-  static int probe_file(mm_io_c *in, uint64_t size);
+  static int probe_file(mm_io_c &in, uint64_t size);
 };

@@ -22,9 +22,9 @@
 #include "merge/input_x.h"
 
 int
-srt_reader_c::probe_file(mm_text_io_c *in,
+srt_reader_c::probe_file(mm_text_io_c &in,
                          uint64_t) {
-  return srt_parser_c::probe(*in);
+  return srt_parser_c::probe(in);
 }
 
 srt_reader_c::srt_reader_c(const track_info_c &ti,

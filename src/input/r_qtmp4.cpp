@@ -123,18 +123,18 @@ read_qtmp4_atom(mm_io_c *read_from,
 }
 
 int
-qtmp4_reader_c::probe_file(mm_io_c *in,
+qtmp4_reader_c::probe_file(mm_io_c &in,
                            uint64_t) {
   try {
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
 
     while (1) {
-      uint64_t atom_pos  = in->getFilePointer();
-      uint64_t atom_size = in->read_uint32_be();
+      uint64_t atom_pos  = in.getFilePointer();
+      uint64_t atom_size = in.read_uint32_be();
       fourcc_c atom(in);
 
       if (1 == atom_size)
-        atom_size = in->read_uint64_be();
+        atom_size = in.read_uint64_be();
 
       mxverb(3, boost::format("Quicktime/MP4 reader: Atom: '%1%': %2%\n") % atom % atom_size);
 
@@ -147,7 +147,7 @@ qtmp4_reader_c::probe_file(mm_io_c *in,
       if ((atom != "wide") && (atom != "skip"))
         return 0;
 
-      in->setFilePointer(atom_pos + atom_size);
+      in.setFilePointer(atom_pos + atom_size);
     }
 
   } catch (...) {
@@ -180,7 +180,7 @@ qtmp4_reader_c::qtmp4_reader_c(const track_info_c &ti,
 void
 qtmp4_reader_c::read_headers() {
   try {
-    if (!qtmp4_reader_c::probe_file(m_in.get(), m_size))
+    if (!qtmp4_reader_c::probe_file(*m_in, m_size))
       throw mtx::input::invalid_format_x();
 
     show_demuxer_info();

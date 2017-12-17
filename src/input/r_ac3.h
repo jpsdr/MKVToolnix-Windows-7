@@ -41,7 +41,7 @@ public:
     return false;
   }
 
-  static int probe_file(mm_io_c *in, uint64_t size, int64_t probe_size, int num_headers, bool require_zero_offset = false);
+  static int probe_file(mm_io_c &in, uint64_t size, int64_t probe_size, int num_headers, bool require_zero_offset = false);
 
 protected:
   static int find_valid_headers(mm_io_c &in, int64_t probe_range, int num_headers);

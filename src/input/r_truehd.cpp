@@ -26,12 +26,12 @@
 #define TRUEHD_READ_SIZE (1024 * 1024)
 
 int
-truehd_reader_c::probe_file(mm_io_c *in,
+truehd_reader_c::probe_file(mm_io_c &in,
                             uint64_t /* size */) {
   try {
-    in->setFilePointer(0, seek_beginning);
-    mtx::id3::skip_v2_tag(*in);
-    return find_valid_headers(*in, TRUEHD_READ_SIZE, 2) ? 1 : 0;
+    in.setFilePointer(0, seek_beginning);
+    mtx::id3::skip_v2_tag(in);
+    return find_valid_headers(in, TRUEHD_READ_SIZE, 2) ? 1 : 0;
 
   } catch (...) {
     return 0;

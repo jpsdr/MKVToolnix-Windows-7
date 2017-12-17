@@ -49,17 +49,17 @@ vobsub_entry_c::operator < (const vobsub_entry_c &cmp) const {
 }
 
 int
-vobsub_reader_c::probe_file(mm_io_c *in,
+vobsub_reader_c::probe_file(mm_io_c &in,
                             uint64_t) {
   char chunk[80];
 
   try {
-    in->setFilePointer(0, seek_beginning);
-    if (in->read(chunk, 80) != 80)
+    in.setFilePointer(0, seek_beginning);
+    if (in.read(chunk, 80) != 80)
       return 0;
     if (strncasecmp(chunk, id_string.c_str(), id_string.length()))
       return 0;
-    in->setFilePointer(0, seek_beginning);
+    in.setFilePointer(0, seek_beginning);
   } catch (...) {
     return 0;
   }
