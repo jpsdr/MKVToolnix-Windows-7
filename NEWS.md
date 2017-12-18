@@ -4,6 +4,11 @@
 
 * MKVToolNix GUI: update check dialog: Markdown links will now be converted to
   clickable links. Fixes #2176.
+* mkvmerge: AVC parser: when fixing the bitstream timing information mkvmerge
+  will now use exact representations of the desired field duration if
+  possible. For example, when indicating 50 fields/second `num_units_in_tick`
+  is set to 1 and `time_scale` to 50 instead of 5368709 and 268435456. Part of
+  the fix for #1673.
 
 
 # Version 19.0.0 "Brave Captain" 2017-12-17
