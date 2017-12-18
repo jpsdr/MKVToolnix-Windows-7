@@ -9,6 +9,9 @@
   possible. For example, when indicating 50 fields/second `num_units_in_tick`
   is set to 1 and `time_scale` to 50 instead of 5368709 and 268435456. Part of
   the fix for #1673.
+* mkvmerge: AVC packetizer (framed): when mkvmerge is told to fix the
+  bitstream timing information, it will now update all SPS NALUs, not just the
+  ones in the AVCC. Part of the fix for #1673.
 
 
 # Version 19.0.0 "Brave Captain" 2017-12-17

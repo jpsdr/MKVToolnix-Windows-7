@@ -19,6 +19,7 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"
+#include "common/mpeg.h"
 #include "common/strings/formatting.h"
 #include "merge/output_control.h"
 #include "output/p_avc.h"
@@ -30,9 +31,7 @@ avc_video_packetizer_c(generic_reader_c *p_reader,
                        int width,
                        int height)
   : generic_video_packetizer_c{p_reader, p_ti, MKV_V_MPEG4_AVC, fps, width, height}
-  , m_nalu_size_len_src{}
-  , m_nalu_size_len_dst{}
-  , m_max_nalu_size{}
+  , m_debug_fix_bistream_timing_info{"fix_bitstream_timing_info"}
 {
   m_relaxed_timestamp_checking = true;
 
@@ -43,12 +42,10 @@ avc_video_packetizer_c(generic_reader_c *p_reader,
 
 void
 avc_video_packetizer_c::set_headers() {
-  static auto s_debug_fix_bistream_timing_info = debugging_option_c{"fix_bitstream_timing_info"};
-
   if (m_ti.m_private_data && m_ti.m_private_data->get_size())
     extract_aspect_ratio();
 
-  int64_t l_track_default_duration = -1, divisor = 2;
+  int64_t divisor = 2;
 
   if (m_default_duration_forced) {
     if (m_htrack_default_duration_indicates_fields) {
@@ -56,29 +53,29 @@ avc_video_packetizer_c::set_headers() {
       divisor = 1;
     }
 
-    l_track_default_duration = m_htrack_default_duration;
+    m_track_default_duration = m_htrack_default_duration;
   }
 
-  if ((-1 == l_track_default_duration) && m_timestamp_factory)
-    l_track_default_duration = m_timestamp_factory->get_default_duration(-1);
+  if ((-1 == m_track_default_duration) && m_timestamp_factory)
+    m_track_default_duration = m_timestamp_factory->get_default_duration(-1);
 
-  if ((-1 == l_track_default_duration) && (0.0 < m_fps))
-    l_track_default_duration = static_cast<int64_t>(1000000000.0 / m_fps);
+  if ((-1 == m_track_default_duration) && (0.0 < m_fps))
+    m_track_default_duration = static_cast<int64_t>(1000000000.0 / m_fps);
 
-  if (-1 != l_track_default_duration)
-    l_track_default_duration /= divisor;
+  if (-1 != m_track_default_duration)
+    m_track_default_duration /= divisor;
 
-  mxdebug_if(s_debug_fix_bistream_timing_info,
-             boost::format("fix_bitstream_timing_info: factory default_duration %1% default_duration_forced? %2% htrack_default_duration %3% fps %4% l_track_default_duration %5%\n")
+  mxdebug_if(m_debug_fix_bistream_timing_info,
+             boost::format("fix_bitstream_timing_info [AVCC]: factory default_duration %1% default_duration_forced? %2% htrack_default_duration %3% fps %4% m_track_default_duration %5%\n")
              % (m_timestamp_factory ? m_timestamp_factory->get_default_duration(-1) : -2)
              % m_default_duration_forced % m_htrack_default_duration
-             % m_fps % l_track_default_duration);
+             % m_fps % m_track_default_duration);
 
   if (   m_ti.m_private_data
       && m_ti.m_private_data->get_size()
       && m_ti.m_fix_bitstream_frame_rate
-      && (-1 != l_track_default_duration))
-    set_codec_private(mtx::avc::fix_sps_fps(m_ti.m_private_data, l_track_default_duration));
+      && (-1 != m_track_default_duration))
+    set_codec_private(mtx::avc::fix_sps_fps(m_ti.m_private_data, m_track_default_duration));
 
   generic_video_packetizer_c::set_headers();
 }
@@ -115,7 +112,7 @@ avc_video_packetizer_c::process(packet_cptr packet) {
   if (m_nalu_size_len_dst && (m_nalu_size_len_dst != m_nalu_size_len_src))
     change_nalu_size_len(packet);
 
-  remove_filler_nalus(*packet->data);
+  process_nalus(*packet->data);
 
   add_packet(packet);
 
@@ -218,7 +215,7 @@ avc_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
 }
 
 void
-avc_video_packetizer_c::remove_filler_nalus(memory_c &data)
+avc_video_packetizer_c::process_nalus(memory_c &data)
   const {
   auto ptr        = data.get_buffer();
   auto total_size = data.get_size();
@@ -230,11 +227,39 @@ avc_video_packetizer_c::remove_filler_nalus(memory_c &data)
     if ((idx + nalu_size) > total_size)
       break;
 
-    if (ptr[idx + m_nalu_size_len_dst] == NALU_TYPE_FILLER_DATA) {
+    if (static_cast<int>(nalu_size) < m_nalu_size_len_dst)
+      break;
+
+    auto const nalu_type = ptr[idx + m_nalu_size_len_dst] & 0x1f;
+
+    if (nalu_type == NALU_TYPE_FILLER_DATA) {
       memory_c::splice(data, idx, nalu_size);
       total_size -= nalu_size;
       ptr         = data.get_buffer();
       continue;
+    }
+
+    if (   (nalu_type == NALU_TYPE_SEQ_PARAM)
+        && m_ti.m_fix_bitstream_frame_rate
+        && (-1 != m_track_default_duration)) {
+      mxdebug_if(m_debug_fix_bistream_timing_info, boost::format("fix_bitstream_timing_info [NALU]: m_track_default_duration %1%\n") % m_track_default_duration);
+
+      mtx::avc::sps_info_t sps_info;
+      auto parsed_nalu = mtx::avc::parse_sps(mtx::mpeg::nalu_to_rbsp(memory_c::clone(&ptr[idx + m_nalu_size_len_dst], nalu_size - m_nalu_size_len_dst)), sps_info, true, true, m_track_default_duration);
+
+      if (parsed_nalu) {
+        parsed_nalu = mtx::mpeg::rbsp_to_nalu(parsed_nalu);
+
+        memory_c::splice(data, idx + m_nalu_size_len_dst, nalu_size - m_nalu_size_len_dst, *parsed_nalu);
+
+        total_size = data.get_size();
+        ptr        = data.get_buffer();
+
+        put_uint_be(&ptr[idx], parsed_nalu->get_size(), m_nalu_size_len_dst);
+
+        idx += parsed_nalu->get_size() + m_nalu_size_len_dst;
+        continue;
+      }
     }
 
     idx += nalu_size;
