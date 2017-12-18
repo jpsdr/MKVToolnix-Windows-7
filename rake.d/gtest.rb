@@ -11,6 +11,13 @@ namespace :tests do
   task :run_unit => 'tests:unit' do
     $gtest_apps.each { |app| run "LC_ALL=C ./tests/unit/#{app}/#{app}" }
   end
+
+  if !c(:VALGRIND).to_s.empty?
+    desc "Build and run the unit tests under valgrind's memcheck"
+    task :run_valgrind_unit => 'tests:unit' do
+      $gtest_apps.each { |app| run "LC_ALL=C #{c(:VALGRIND)} --tool=memcheck --num-callers=12 ./tests/unit/#{app}/#{app}" }
+    end
+  end
 end
 
 $build_system_modules[:gtest] = {

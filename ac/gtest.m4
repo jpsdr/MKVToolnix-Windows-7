@@ -27,3 +27,4 @@ AC_DEFUN([AX_GTEST],[
 ])
 
 AX_GTEST
+AC_PATH_PROG(VALGRIND, valgrind,, $PATH)
