@@ -184,12 +184,11 @@ memory_c::splice(memory_c &buffer,
   auto diff        = static_cast<int64_t>(to_remove) - static_cast<int64_t>(insert_size);
   auto remaining   = size - offset - to_remove;
 
-  if ((remaining > 0) && (diff != 0)) {
-    if (diff < 0)
-      buffer.resize(size - diff);
+  if (diff < 0)
+    buffer.resize(size - diff);
 
+  if ((remaining > 0) && (diff != 0))
     std::memmove(buffer.get_buffer() + offset + insert_size, buffer.get_buffer() + offset + to_remove, remaining);
-  }
 
   if (to_insert)
     std::memcpy(buffer.get_buffer() + offset, to_insert->get_buffer(), insert_size);
