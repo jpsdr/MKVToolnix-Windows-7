@@ -71,7 +71,7 @@ xtr_hevc_c::unwrap_write_hevcc(bool skip_sei) {
 }
 
 bool
-xtr_hevc_c::write_nal(binary const *data,
+xtr_hevc_c::write_nal(binary *data,
                       size_t &pos,
                       size_t data_size,
                       size_t write_nal_size_size) {
@@ -131,4 +131,11 @@ xtr_hevc_c::handle_frame(xtr_frame_t &f) {
   }
 
   m_drop_vps_sps_pps_in_frame = false;
+}
+
+unsigned char
+xtr_hevc_c::get_nalu_type(unsigned char const *buffer,
+                          std::size_t size)
+  const {
+  return size > 0 ? (buffer[0] >> 1) & 0x3f : 0;
 }

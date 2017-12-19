@@ -6,27 +6,28 @@
    or visit http://www.gnu.org/copyleft/gpl.html
 
    extracts tracks from Matroska files into other files
-
-   Written by Matt Rice <topquark@sluggy.net>.
 */
 
 #include "common/common_pch.h"
 
 #include "common/ebml.h"
 #include "common/endian.h"
+#include "common/list_utils.h"
 #include "extract/xtr_avc.h"
 
 binary const xtr_avc_c::ms_start_code[4] = { 0x00, 0x00, 0x00, 0x01 };
+binary const xtr_avc_c::ms_aud_nalu[2]   = { 0x09, 0xf0 };
 
 xtr_avc_c::xtr_avc_c(const std::string &codec_id,
                      int64_t tid,
                      track_spec_t &tspec)
   : xtr_base_c(codec_id, tid, tspec)
 {
+  m_parser.discard_actual_frames(true);
 }
 
 bool
-xtr_avc_c::write_nal(const binary *data,
+xtr_avc_c::write_nal(binary *data,
                      size_t &pos,
                      size_t data_size,
                      size_t write_nal_size_size) {
@@ -52,6 +53,72 @@ xtr_avc_c::write_nal(const binary *data,
   return true;
 }
 
+bool
+xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
+                                               std::size_t size) {
+  auto nalu_positions   = find_nal_units(buffer, size);
+  auto have_aud_sps_pps = false;
+
+  for (auto const &nalu_pos : nalu_positions) {
+    if (static_cast<int>(nalu_pos.first->get_size()) <= m_nal_size_size)
+      return false;
+
+    auto nalu = std::make_shared<memory_c>(nalu_pos.first->get_buffer() + m_nal_size_size, nalu_pos.first->get_size() - m_nal_size_size);
+    auto type = nalu_pos.second;
+
+    mxdebug_if(m_debug_access_unit_delimiters, boost::format(" type %1%\n") % static_cast<unsigned int>(type));
+
+    if (type == NALU_TYPE_SEQ_PARAM) {
+      m_parser.handle_sps_nalu(nalu);
+      have_aud_sps_pps = true;
+      continue;
+    }
+
+    if (type == NALU_TYPE_PIC_PARAM) {
+      m_parser.handle_pps_nalu(nalu);
+      have_aud_sps_pps = true;
+      continue;
+    }
+
+    if (!mtx::included_in(type, NALU_TYPE_IDR_SLICE, NALU_TYPE_NON_IDR_SLICE, NALU_TYPE_DP_A_SLICE, NALU_TYPE_DP_B_SLICE, NALU_TYPE_DP_C_SLICE))
+      continue;
+
+    if (have_aud_sps_pps) {
+      mxdebug_if(m_debug_access_unit_delimiters, "  AUD/SPS/PPS before first IDR slice\n");
+      return false;
+    }
+
+    if (type != NALU_TYPE_IDR_SLICE) {
+      m_previous_idr_pic_id.reset();
+      return false;
+    }
+
+    mtx::avc::slice_info_t si;
+    if (!m_parser.parse_slice(nalu, si)) {
+      mxdebug_if(m_debug_access_unit_delimiters, "  IDR slice parsing failed\n");
+      m_previous_idr_pic_id.reset();
+      return false;
+    }
+
+    mxdebug_if(m_debug_access_unit_delimiters, boost::format("  IDR slice parsing OK current ID %1% prev ID %2%\n") % si.idr_pic_id % (m_previous_idr_pic_id ? static_cast<int>(*m_previous_idr_pic_id) : -1));
+
+    auto result           = m_previous_idr_pic_id && (*m_previous_idr_pic_id == si.idr_pic_id);
+    m_previous_idr_pic_id = si.idr_pic_id;
+
+    return result;
+  }
+
+  return false;
+}
+
+void
+xtr_avc_c::write_access_unit_delimiter() {
+  mxdebug_if(m_debug_access_unit_delimiters, boost::format("writing access unit delimiter\n"));
+
+  m_out->write(ms_start_code, 4);
+  m_out->write(ms_aud_nalu,   2);
+}
+
 void
 xtr_avc_c::create_file(xtr_base_c *master,
                        KaxTrackEntry &track) {
@@ -72,17 +139,25 @@ xtr_avc_c::create_file(xtr_base_c *master,
   size_t pos          = 6;
   unsigned int numsps = buf[5] & 0x1f;
   size_t i;
-  for (i = 0; (i < numsps) && (mpriv->get_size() > pos); ++i)
+  for (i = 0; (i < numsps) && (mpriv->get_size() > pos); ++i) {
+    auto previous_pos = pos;
     if (!write_nal(buf, pos, mpriv->get_size(), 2))
       break;
+
+    m_parser.handle_sps_nalu(std::make_shared<memory_c>(&buf[previous_pos + 2], pos - previous_pos - 2));
+  }
 
   if (mpriv->get_size() <= pos)
     return;
 
   unsigned int numpps = buf[pos++];
 
-  for (i = 0; (i < numpps) && (mpriv->get_size() > pos); ++i)
+  for (i = 0; (i < numpps) && (mpriv->get_size() > pos); ++i) {
+    auto previous_pos = pos;
     write_nal(buf, pos, mpriv->get_size(), 2);
+
+    m_parser.handle_pps_nalu(std::make_shared<memory_c>(&buf[previous_pos + 2], pos - previous_pos - 2));
+  }
 }
 
 nal_unit_list_t
@@ -94,7 +169,7 @@ xtr_avc_c::find_nal_units(binary *buf,
 
   while (frame_size >= (pos + m_nal_size_size + 1)) {
     auto nal_size              = get_uint_be(&buf[pos], m_nal_size_size);
-    auto actual_nal_unit_type  = (buf[pos + m_nal_size_size] >> 1) & 0x3f;
+    auto actual_nal_unit_type  = get_nalu_type(&buf[pos + m_nal_size_size], nal_size);
 
     list.emplace_back(std::make_shared<memory_c>(&buf[pos], m_nal_size_size + nal_size, false), actual_nal_unit_type);
 
@@ -109,7 +184,19 @@ xtr_avc_c::handle_frame(xtr_frame_t &f) {
   size_t pos  = 0;
   binary *buf = (binary *)f.frame->get_buffer();
 
+  mxdebug_if(m_debug_access_unit_delimiters, "handle_frame() start\n");
+
+  if (need_to_write_access_unit_delimiter(buf, f.frame->get_size()))
+    write_access_unit_delimiter();
+
   while (f.frame->get_size() > pos)
     if (!write_nal(buf, pos, f.frame->get_size(), m_nal_size_size))
       return;
+}
+
+unsigned char
+xtr_avc_c::get_nalu_type(unsigned char const *buffer,
+                         std::size_t size)
+  const {
+  return size > 0 ? buffer[0] & 0x1f : 0;
 }

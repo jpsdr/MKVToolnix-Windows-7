@@ -12,6 +12,11 @@
 * mkvmerge: AVC packetizer (framed): when mkvmerge is told to fix the
   bitstream timing information, it will now update all SPS NALUs, not just the
   ones in the AVCC. Part of the fix for #1673.
+* mkvextract: AVC/h.264: if two consecutive IDR frames with the same
+  `idr_pic_id` parameter and no access unit delimiters/sequence parameter
+  sets/picture parameter sets between them are found, mkvextract will insert
+  an access unit delimiter in order to signal the start of a new access
+  unit. Fixes #1704.
 
 
 # Version 19.0.0 "Brave Captain" 2017-12-17

@@ -30,9 +30,10 @@ public:
 
   virtual void create_file(xtr_base_c *master, KaxTrackEntry &track) override;
   virtual void handle_frame(xtr_frame_t &f) override;
-  virtual bool write_nal(const binary *data, size_t &pos, size_t data_size, size_t write_nal_size_size) override;
+  virtual bool write_nal(binary *data, size_t &pos, size_t data_size, size_t write_nal_size_size) override;
 
 protected:
   virtual void unwrap_write_hevcc(bool skip_sei);
   virtual void check_for_sei_in_first_frame(nal_unit_list_t const &nal_units);
+  virtual unsigned char get_nalu_type(unsigned char const *buffer, std::size_t size) const override;
 };
