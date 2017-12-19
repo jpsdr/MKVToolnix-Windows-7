@@ -11,6 +11,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/debugging.h"
 #include "common/frame_timing.h"
 
 namespace mtx { namespace frame_timing {
@@ -34,6 +35,8 @@ std::vector<common_frame_rate_t> g_common_frame_rates{
 int64_rational_c
 determine_frame_rate(int64_t duration,
                      int64_t max_difference) {
+  static debugging_option_c s_debug{"determine_frame_rate|fix_bitstream_timing_info"};
+
   // search in the common FPS list
   using common_frame_rate_diff_t = std::pair<int64_t, common_frame_rate_t>;
   auto potentials = std::vector<common_frame_rate_diff_t>{};
@@ -44,12 +47,18 @@ determine_frame_rate(int64_t duration,
       potentials.emplace_back(difference, common_frame_rate);
   }
 
-  if (potentials.empty())
+  if (potentials.empty()) {
+    mxdebug_if(s_debug, boost::format("determine_frame_rate: duration %1% max_difference %2%: no match found\n") % duration % max_difference);
     return {};
+  }
 
   brng::sort(potentials, [](auto const &a, auto const &b) {
     return a.first < b.first;
   });
+
+  mxdebug_if(s_debug,
+             boost::format("determine_frame_rate: duration %1% max_difference %2%: %3% match(es) found returning %4% Δ %5%\n")
+             % duration % max_difference % potentials.size() % potentials[0].second.frame_rate % potentials[0].first);
 
   return potentials[0].second.frame_rate;
 }
