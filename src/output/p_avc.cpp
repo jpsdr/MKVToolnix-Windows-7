@@ -19,6 +19,7 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"
+#include "common/list_utils.h"
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
 #include "merge/output_control.h"
@@ -232,7 +233,7 @@ avc_video_packetizer_c::process_nalus(memory_c &data)
 
     auto const nalu_type = ptr[idx + m_nalu_size_len_dst] & 0x1f;
 
-    if (nalu_type == NALU_TYPE_FILLER_DATA) {
+    if (mtx::included_in(nalu_type, NALU_TYPE_FILLER_DATA, NALU_TYPE_ACCESS_UNIT)) {
       memory_c::splice(data, idx, nalu_size);
       total_size -= nalu_size;
       ptr         = data.get_buffer();

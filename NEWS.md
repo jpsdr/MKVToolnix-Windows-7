@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: AVC/h.264 packetizer (framed): access unit delimiter NALUs will
+  now be removed. Implements #2173.
+
 ## Bug fixes
 
 * MKVToolNix GUI: update check dialog: Markdown links will now be converted to
