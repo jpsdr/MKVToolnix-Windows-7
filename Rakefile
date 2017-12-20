@@ -445,7 +445,7 @@ namespace :translations do
       header        = <<EOT
 # translation of mkvtoolnix.pot to #{ENV['LANGUAGE']}
 # Copyright (C) #{now.year} Moritz Bunkus
-# This file is distributed under the same license as the mkvtoolnix package.
+# This file is distributed under the same license as the MKVToolNix package.
 #
 msgid ""
 EOT
@@ -461,6 +461,8 @@ EOT
 
       out.puts content
     end
+
+    puts "Remember to look up the plural forms in this document:\nhttp://docs.translatehouse.org/projects/localization-guide/en/latest/l10n/pluralforms.html"
   end
 
   def verify_format_strings languages
