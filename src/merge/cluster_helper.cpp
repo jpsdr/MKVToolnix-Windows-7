@@ -34,6 +34,8 @@
 #include <matroska/KaxCuesData.h>
 #include <matroska/KaxSeekHead.h>
 
+debugging_option_c render_groups_c::ms_gap_detection{"cluster_helper_gap_detection"};
+
 cluster_helper_c::impl_t::~impl_t() {
 }
 
@@ -445,6 +447,7 @@ cluster_helper_c::render() {
                                           || has_codec_state
                                           || pack->has_discard_padding()
                                           || render_group->m_has_discard_padding
+                                          || render_group->follows_gap(*pack)
                                           || must_duration_be_set(nullptr, pack)
                                           || source->is_lacing_prevented();
 
@@ -502,6 +505,7 @@ cluster_helper_c::render() {
 
     render_group->m_durations.push_back(pack->get_unmodified_duration());
     render_group->m_duration_mandatory |= pack->duration_mandatory;
+    render_group->m_expected_next_timestamp = pack->assigned_timestamp + pack->get_duration();
 
     cues_c::get().set_duration_for_id_timestamp(source->get_track_num(), pack->assigned_timestamp - timestamp_offset, pack->get_duration());
 

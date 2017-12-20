@@ -22,6 +22,10 @@
   sets/picture parameter sets between them are found, mkvextract will insert
   an access unit delimiter in order to signal the start of a new access
   unit. Fixes #1704.
+* mkvmerge: if there's a gap in audio timestamps, a new block group/lace will
+  be started for the first frame after each gap. Before the fix the frame
+  after the gap was often stored in the previous block group causing the gap
+  to be in the wrong place: at the end of that block group. Fixes #1700.
 
 
 # Version 19.0.0 "Brave Captain" 2017-12-17

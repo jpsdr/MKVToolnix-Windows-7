@@ -22,6 +22,8 @@ public:
   std::vector<int64_t> m_durations;
   generic_packetizer_c *m_source;
   bool m_more_data, m_duration_mandatory, m_has_discard_padding;
+  int64_t m_expected_next_timestamp{-1};
+  static debugging_option_c ms_gap_detection;
 
   render_groups_c(generic_packetizer_c *source)
     : m_source(source)
@@ -29,6 +31,22 @@ public:
     , m_duration_mandatory(false)
     , m_has_discard_padding{}
   {
+  }
+
+  bool follows_gap(packet_t &pack) const {
+    // return false;
+
+    if (-1 == m_expected_next_timestamp)
+      return false;
+
+    auto diff   = timestamp_c::ns(pack.assigned_timestamp - m_expected_next_timestamp).abs();
+    auto result = diff > timestamp_c::ms(2);
+
+    mxdebug_if(ms_gap_detection,
+               boost::format("follows gap %1% expected next: %2% assigned %3%  %4%\n")
+               % result % format_timestamp(m_expected_next_timestamp) % format_timestamp(pack.assigned_timestamp) % diff);
+
+    return result;
   }
 };
 using render_groups_cptr = std::shared_ptr<render_groups_c>;
