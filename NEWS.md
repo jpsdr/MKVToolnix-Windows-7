@@ -18,10 +18,9 @@
   bitstream timing information, it will now update all SPS NALUs, not just the
   ones in the AVCC. Part of the fix for #1673.
 * mkvextract: AVC/h.264: if two consecutive IDR frames with the same
-  `idr_pic_id` parameter and no access unit delimiters/sequence parameter
-  sets/picture parameter sets between them are found, mkvextract will insert
-  an access unit delimiter in order to signal the start of a new access
-  unit. Fixes #1704.
+  `idr_pic_id` parameter and no access unit delimiters are found between them,
+  mkvextract will insert an access unit delimiter in order to signal the start
+  of a new access unit. Fixes #1704.
 * mkvmerge: if there's a gap in audio timestamps, a new block group/lace will
   be started for the first frame after each gap. Before the fix the frame
   after the gap was often stored in the previous block group causing the gap
