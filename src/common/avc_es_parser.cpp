@@ -490,12 +490,10 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
 
   switch (type) {
     case NALU_TYPE_SEQ_PARAM:
-      flush_incomplete_frame();
       handle_sps_nalu(nalu);
       break;
 
     case NALU_TYPE_PIC_PARAM:
-      flush_incomplete_frame();
       handle_pps_nalu(nalu);
       break;
 
