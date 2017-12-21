@@ -56,8 +56,8 @@ xtr_avc_c::write_nal(binary *data,
 bool
 xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
                                                std::size_t size) {
-  auto nalu_positions   = find_nal_units(buffer, size);
-  auto have_aud_sps_pps = false;
+  auto nalu_positions = find_nal_units(buffer, size);
+  auto have_aud       = false;
 
   for (auto const &nalu_pos : nalu_positions) {
     if (static_cast<int>(nalu_pos.first->get_size()) <= m_nal_size_size)
@@ -70,21 +70,24 @@ xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
 
     if (type == NALU_TYPE_SEQ_PARAM) {
       m_parser.handle_sps_nalu(nalu);
-      have_aud_sps_pps = true;
       continue;
     }
 
     if (type == NALU_TYPE_PIC_PARAM) {
       m_parser.handle_pps_nalu(nalu);
-      have_aud_sps_pps = true;
+      continue;
+    }
+
+    if (type == NALU_TYPE_ACCESS_UNIT) {
+      have_aud = true;
       continue;
     }
 
     if (!mtx::included_in(type, NALU_TYPE_IDR_SLICE, NALU_TYPE_NON_IDR_SLICE, NALU_TYPE_DP_A_SLICE, NALU_TYPE_DP_B_SLICE, NALU_TYPE_DP_C_SLICE))
       continue;
 
-    if (have_aud_sps_pps) {
-      mxdebug_if(m_debug_access_unit_delimiters, "  AUD/SPS/PPS before first IDR slice\n");
+    if (have_aud) {
+      mxdebug_if(m_debug_access_unit_delimiters, "  AUD before first IDR slice\n");
       return false;
     }
 
