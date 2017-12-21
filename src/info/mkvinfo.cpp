@@ -92,11 +92,8 @@ struct kax_track_t {
 };
 
 struct track_info_t {
-  int64_t m_size, m_min_timestamp, m_max_timestamp, m_blocks, m_blocks_by_ref_num[3], m_add_duration_for_n_packets;
-
-  track_info_t();
-  bool min_timestamp_unset();
-  bool max_timestamp_unset();
+  int64_t m_size{}, m_blocks{}, m_blocks_by_ref_num[3]{0, 0, 0}, m_add_duration_for_n_packets{};
+  boost::optional<int64_t> m_min_timestamp, m_max_timestamp;
 };
 
 kax_track_t::kax_track_t()
@@ -108,26 +105,6 @@ kax_track_t::kax_track_t()
 {
 }
 using kax_track_cptr = std::shared_ptr<kax_track_t>;
-
-track_info_t::track_info_t()
-  : m_size(0)
-  , m_min_timestamp(LLONG_MAX)
-  , m_max_timestamp(LLONG_MIN)
-  , m_blocks(0)
-  , m_add_duration_for_n_packets(0)
-{
-  memset(m_blocks_by_ref_num, 0, sizeof(int64_t) * 3);
-}
-
-bool
-track_info_t::min_timestamp_unset() {
-  return LLONG_MAX == m_min_timestamp;
-}
-
-bool
-track_info_t::max_timestamp_unset() {
-  return LLONG_MIN == m_max_timestamp;
-}
 
 std::vector<kax_track_cptr> s_tracks;
 std::map<unsigned int, kax_track_cptr> s_tracks_by_number;
@@ -1438,10 +1415,10 @@ handle_block_group(EbmlStream *&es,
 
   tinfo.m_blocks                                          += frame_sizes.size();
   tinfo.m_blocks_by_ref_num[std::min(num_references, 2u)] += frame_sizes.size();
-  tinfo.m_min_timestamp                                    = std::min(tinfo.m_min_timestamp, lf_timestamp);
+  tinfo.m_min_timestamp                                    = std::min(tinfo.m_min_timestamp ? *tinfo.m_min_timestamp : lf_timestamp, lf_timestamp);
   tinfo.m_size                                            += boost::accumulate(frame_sizes, 0);
 
-  if (!tinfo.max_timestamp_unset() && (tinfo.m_max_timestamp >= lf_timestamp))
+  if (tinfo.m_max_timestamp && (*tinfo.m_max_timestamp >= lf_timestamp))
     return;
 
   tinfo.m_max_timestamp = lf_timestamp;
@@ -1449,7 +1426,7 @@ handle_block_group(EbmlStream *&es,
   if (-1 == bduration)
     tinfo.m_add_duration_for_n_packets  = frame_sizes.size();
   else {
-    tinfo.m_max_timestamp              += bduration * 1000000.0;
+    *tinfo.m_max_timestamp             += bduration * 1000000.0;
     tinfo.m_add_duration_for_n_packets  = 0;
   }
 }
@@ -1532,9 +1509,9 @@ handle_simple_block(EbmlStream *&es,
 
   tinfo.m_blocks                                                                    += block.NumberFrames();
   tinfo.m_blocks_by_ref_num[block.IsKeyframe() ? 0 : block.IsDiscardable() ? 2 : 1] += block.NumberFrames();
-  tinfo.m_min_timestamp                                                               = std::min(tinfo.m_min_timestamp, static_cast<int64_t>(timestamp_ns));
-  tinfo.m_max_timestamp                                                               = std::max(tinfo.max_timestamp_unset() ? 0 : tinfo.m_max_timestamp, static_cast<int64_t>(timestamp_ns));
-  tinfo.m_add_duration_for_n_packets                                                  = block.NumberFrames();
+  tinfo.m_min_timestamp                                                              = std::min(tinfo.m_min_timestamp ? *tinfo.m_min_timestamp : static_cast<int64_t>(timestamp_ns), static_cast<int64_t>(timestamp_ns));
+  tinfo.m_max_timestamp                                                              = std::max(tinfo.m_max_timestamp ? *tinfo.m_max_timestamp : static_cast<int64_t>(timestamp_ns), static_cast<int64_t>(timestamp_ns));
+  tinfo.m_add_duration_for_n_packets                                                 = block.NumberFrames();
   tinfo.m_size                                                                       += boost::accumulate(frame_sizes, 0);
 }
 
@@ -1760,12 +1737,12 @@ display_track_info() {
   for (auto &track : s_tracks) {
     track_info_t &tinfo  = s_track_info[track->tnum];
 
-    if (tinfo.min_timestamp_unset())
+    if (!tinfo.m_min_timestamp)
       tinfo.m_min_timestamp = 0;
-    if (tinfo.max_timestamp_unset())
+    if (!tinfo.m_max_timestamp)
       tinfo.m_max_timestamp = tinfo.m_min_timestamp;
 
-    int64_t duration  = tinfo.m_max_timestamp - tinfo.m_min_timestamp;
+    int64_t duration  = *tinfo.m_max_timestamp - *tinfo.m_min_timestamp;
     duration         += tinfo.m_add_duration_for_n_packets * track->default_duration;
 
     mxinfo(boost::format(Y("Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"))
