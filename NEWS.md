@@ -9,12 +9,12 @@
 
 * MKVToolNix GUI: update check dialog: Markdown links will now be converted to
   clickable links. Fixes #2176.
-* mkvmerge: AVC parser: when fixing the bitstream timing information mkvmerge
-  will now use exact representations of the desired field duration if
+* mkvmerge: AVC/h.264 parser: when fixing the bitstream timing information
+  mkvmerge will now use exact representations of the desired field duration if
   possible. For example, when indicating 50 fields/second `num_units_in_tick`
   is set to 1 and `time_scale` to 50 instead of 5368709 and 268435456. Part of
   the fix for #1673.
-* mkvmerge: AVC packetizer (framed): when mkvmerge is told to fix the
+* mkvmerge: AVC/h.264 packetizer (framed): when mkvmerge is told to fix the
   bitstream timing information, it will now update all SPS NALUs, not just the
   ones in the AVCC. Part of the fix for #1673.
 * mkvextract: AVC/h.264: if two consecutive IDR frames with the same
@@ -97,8 +97,8 @@
   optimization levels).
 * build system: stack protection is enabled when building with clang 3.5.0 or
   newer on all platforms.
-* mkvmerge: AVC & HEVC ES parsers: performance improvements by copying much
-  less memory around.
+* mkvmerge: AVC/h.264 & HEVC/h.265 ES parsers: performance improvements by
+  copying much less memory around.
 * mkvmerge: tags: reintroduced a workaround for non-compliant files with tags
   that do not contain the mandatory `SimpleTag` element. This workaround was
   removed during code refactoring in release v15.0.0.
