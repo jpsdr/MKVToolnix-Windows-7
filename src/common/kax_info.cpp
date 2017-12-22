@@ -132,7 +132,9 @@ namespace mtx {
 
 std::vector<boost::format> kax_info_c::ms_common_boost_formats;
 
-kax_info_c::kax_info_c() {
+kax_info_c::kax_info_c()
+  : m_out{g_mm_stdio}
+{
   if (ms_common_boost_formats.empty())
     init_common_boost_formats();
 }
@@ -186,6 +188,11 @@ kax_info_c::set_verbosity(int verbosity) {
 }
 
 void
+kax_info_c::set_output(mm_io_cptr const &out) {
+  m_out = out;
+}
+
+void
 kax_info_c::init_common_boost_formats() {
   ms_common_boost_formats.clear();
   BF_ADD(Y("(Unknown element: %1%; ID: 0x%2% size: %3%)"));                                                      //  0 -- BF_SHOW_UNKNOWN_ELEMENT
@@ -233,7 +240,7 @@ kax_info_c::ui_show_element(int level,
   std::string level_buffer(level, ' ');
   level_buffer[0] = '|';
 
-  mxinfo(boost::format("%1%+ %2%\n") % level_buffer % create_element_text(text, position, size));
+  m_out->write((boost::format("%1%+ %2%\n") % level_buffer % create_element_text(text, position, size)).str());
 }
 
 void
@@ -1056,17 +1063,17 @@ kax_info_c::handle_tracks(int &upper_lvl_el,
           show_unknown_element(l3, 3);
 
       if (m_show_summary)
-        mxinfo(boost::format(Y("Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"))
-               % track->tnum
-               % (  'a' == track->type ? Y("audio")
-                  : 'v' == track->type ? Y("video")
-                  : 's' == track->type ? Y("subtitles")
-                  : 'b' == track->type ? Y("buttons")
-                  :                      Y("unknown"))
-               % kax_codec_id
-               % fourcc_buffer
-               % (summary.empty() ? "" : ", ")
-               % boost::join(summary, ", "));
+        m_out->write((boost::format(Y("Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"))
+                      % track->tnum
+                      % (  'a' == track->type ? Y("audio")
+                           : 'v' == track->type ? Y("video")
+                           : 's' == track->type ? Y("subtitles")
+                           : 'b' == track->type ? Y("buttons")
+                           :                      Y("unknown"))
+                      % kax_codec_id
+                      % fourcc_buffer
+                      % (summary.empty() ? "" : ", ")
+                      % boost::join(summary, ", ")).str());
 
     } else if (!is_global(l2, 2))
       show_unknown_element(l2, 2);
@@ -1396,26 +1403,26 @@ kax_info_c::handle_block_group(EbmlElement *&l2,
       }
 
       if (bduration != -1.0)
-        mxinfo(BF_BLOCK_GROUP_SUMMARY_WITH_DURATION
-               % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
-               % lf_tnum
-               % std::llround(lf_timestamp / 1000000.0)
-               % format_timestamp(lf_timestamp, 3)
-               % bduration
-               % frame_sizes[fidx]
-               % frame_adlers[fidx]
-               % frame_hexdumps[fidx]
-               % position);
+        m_out->write((BF_BLOCK_GROUP_SUMMARY_WITH_DURATION
+                      % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
+                      % lf_tnum
+                      % std::llround(lf_timestamp / 1000000.0)
+                      % format_timestamp(lf_timestamp, 3)
+                      % bduration
+                      % frame_sizes[fidx]
+                      % frame_adlers[fidx]
+                      % frame_hexdumps[fidx]
+                      % position).str());
       else
-        mxinfo(BF_BLOCK_GROUP_SUMMARY_NO_DURATION
-               % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
-               % lf_tnum
-               % std::llround(lf_timestamp / 1000000.0)
-               % format_timestamp(lf_timestamp, 3)
-               % frame_sizes[fidx]
-               % frame_adlers[fidx]
-               % frame_hexdumps[fidx]
-               % position);
+        m_out->write((BF_BLOCK_GROUP_SUMMARY_NO_DURATION
+                      % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
+                      % lf_tnum
+                      % std::llround(lf_timestamp / 1000000.0)
+                      % format_timestamp(lf_timestamp, 3)
+                      % frame_sizes[fidx]
+                      % frame_adlers[fidx]
+                      % frame_hexdumps[fidx]
+                      % position).str());
     }
 
   } else if (m_verbose > 2)
@@ -1503,14 +1510,14 @@ kax_info_c::handle_simple_block(EbmlElement *&l2,
         frame_pos += frame_sizes[fidx];
       }
 
-      mxinfo(BF_SIMPLE_BLOCK_SUMMARY
-             % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
-             % block.TrackNum()
-             % timestamp_ms
-             % format_timestamp(timestamp_ns, 3)
-             % frame_sizes[fidx]
-             % frame_adlers[fidx]
-             % position);
+      m_out->write((BF_SIMPLE_BLOCK_SUMMARY
+                    % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
+                    % block.TrackNum()
+                    % timestamp_ms
+                    % format_timestamp(timestamp_ns, 3)
+                    % frame_sizes[fidx]
+                    % frame_adlers[fidx]
+                    % position).str());
     }
 
   } else if (m_verbose > 2)
@@ -1750,12 +1757,12 @@ kax_info_c::display_track_info() {
     int64_t duration  = *tinfo.m_max_timestamp - *tinfo.m_min_timestamp;
     duration         += tinfo.m_add_duration_for_n_packets * track->default_duration;
 
-    mxinfo(boost::format(Y("Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"))
-           % track->tnum
-           % tinfo.m_blocks
-           % tinfo.m_size
-           % (duration / 1000000000.0)
-           % static_cast<uint64_t>(duration == 0 ? 0 : tinfo.m_size * 8000000000.0 / duration));
+    m_out->write((boost::format(Y("Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"))
+                  % track->tnum
+                  % tinfo.m_blocks
+                  % tinfo.m_size
+                  % (duration / 1000000000.0)
+                  % static_cast<uint64_t>(duration == 0 ? 0 : tinfo.m_size * 8000000000.0 / duration)).str());
   }
 }
 

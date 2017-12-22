@@ -58,7 +58,7 @@ protected:
   uint64_t m_ts_scale{TIMESTAMP_SCALE};
   std::size_t m_mkvmerge_track_id{};
   std::shared_ptr<EbmlStream> m_es;
-  mm_io_cptr m_in;
+  mm_io_cptr m_in, m_out;
 
   bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{};
   int m_hexdump_max_size{}, m_verbose{};
@@ -76,6 +76,8 @@ public:
   void set_hex_positions(bool enable);
   void set_hexdump_max_size(int max_size);
   void set_verbosity(int verbosity);
+
+  void set_output(mm_io_cptr const &out);
 
   void reset();
   bool process_file(std::string const &file_name);
