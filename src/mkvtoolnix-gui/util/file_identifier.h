@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <QVariant>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -14,11 +15,11 @@ class FileIdentifier: public QObject {
   Q_OBJECT;
 
 protected:
-  Q_DECLARE_PRIVATE(FileIdentifier);
+  MTX_DECLARE_PRIVATE(FileIdentifier);
 
-  QScopedPointer<FileIdentifierPrivate> const d_ptr;
+  std::unique_ptr<FileIdentifierPrivate> const p_ptr;
 
-  explicit FileIdentifier(FileIdentifierPrivate &d);
+  explicit FileIdentifier(FileIdentifierPrivate &p);
 
 public:
   FileIdentifier(QString const &fileName = QString{});

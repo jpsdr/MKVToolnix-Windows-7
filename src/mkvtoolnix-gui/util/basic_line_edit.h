@@ -4,6 +4,7 @@
 
 #include <QLineEdit>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 class QDragEnterEvent;
@@ -15,9 +16,13 @@ namespace mtx { namespace gui { namespace Util {
 class BasicLineEditPrivate;
 class BasicLineEdit : public QLineEdit {
   Q_OBJECT;
-  Q_DECLARE_PRIVATE(BasicLineEdit);
 
-  QScopedPointer<BasicLineEditPrivate> const d_ptr;
+protected:
+  MTX_DECLARE_PRIVATE(BasicLineEdit);
+
+  std::unique_ptr<BasicLineEditPrivate> const p_ptr;
+
+  explicit BasicLineEdit(BasicLineEditPrivate &p);
 
 public:
   BasicLineEdit(QWidget *parent);

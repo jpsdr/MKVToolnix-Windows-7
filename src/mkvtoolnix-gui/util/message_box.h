@@ -11,9 +11,18 @@ class MessageBoxPrivate;
 
 using MessageBoxPtr = std::shared_ptr<MessageBox>;
 
+class MessageBoxPrivate;
 class MessageBox {
+protected:
+  MTX_DECLARE_PRIVATE(MessageBox);
+
+  std::unique_ptr<MessageBoxPrivate> const p_ptr;
+
+  explicit MessageBox(MessageBoxPrivate &p);
+
 public:
   MessageBox(QWidget *parent);
+  MessageBox(MessageBox const &) = delete;
   virtual ~MessageBox();
 
   MessageBox &buttons(QMessageBox::StandardButtons pButtons);
@@ -31,12 +40,6 @@ public:
   static MessageBoxPtr information(QWidget *parent);
   static MessageBoxPtr warning(QWidget *parent);
   static MessageBoxPtr critical(QWidget *parent);
-
-private:
-  Q_DISABLE_COPY(MessageBox);
-  Q_DECLARE_PRIVATE(MessageBox);
-
-  QScopedPointer<MessageBoxPrivate> const d_ptr;
 };
 
 }}}

@@ -3,17 +3,18 @@
 #include "common/common_pch.h"
 
 #include "common/cli_parser.h"
+#include "common/qt.h"
 
 namespace mtx { namespace gui {
 
 class GuiCliParserPrivate;
 class GuiCliParser: public mtx::cli::parser_c {
 protected:
-  Q_DECLARE_PRIVATE(GuiCliParser);
+  MTX_DECLARE_PRIVATE(GuiCliParser);
 
-  QScopedPointer<GuiCliParserPrivate> const d_ptr;
+  std::unique_ptr<GuiCliParserPrivate> const p_ptr;
 
-  explicit GuiCliParser(GuiCliParserPrivate &d, QWidget *parent);
+  explicit GuiCliParser(GuiCliParserPrivate &p, QWidget *parent);
 
 public:
   GuiCliParser(std::vector<std::string> const &args);

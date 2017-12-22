@@ -29,7 +29,7 @@ class MessageBoxPrivate {
 };
 
 MessageBox::MessageBox(QWidget *parent)
-  : d_ptr{new MessageBoxPrivate{parent}}
+  : p_ptr{new MessageBoxPrivate{parent}}
 {
 }
 
@@ -38,58 +38,44 @@ MessageBox::~MessageBox() {
 
 MessageBox &
 MessageBox::buttons(QMessageBox::StandardButtons pButtons) {
-  Q_D(MessageBox);
-
-  d->m_buttons = pButtons;
+  p_func()->m_buttons = pButtons;
   return *this;
 }
 
 MessageBox &
 MessageBox::defaultButton(QMessageBox::StandardButton pDefaultButton) {
-  Q_D(MessageBox);
-
-  d->m_defaultButton = pDefaultButton;
+  p_func()->m_defaultButton = pDefaultButton;
   return *this;
 }
 
 MessageBox &
 MessageBox::icon(QMessageBox::Icon pIcon) {
-  Q_D(MessageBox);
-
-  d->m_icon = pIcon;
+  p_func()->m_icon = pIcon;
   return *this;
 }
 
 MessageBox &
 MessageBox::text(QString const & pText) {
-  Q_D(MessageBox);
-
-  d->m_text = pText;
+  p_func()->m_text = pText;
   return *this;
 }
 
 MessageBox &
 MessageBox::title(QString const & pTitle) {
-  Q_D(MessageBox);
-
-  d->m_title = pTitle;
+  p_func()->m_title = pTitle;
   return *this;
 }
 
 MessageBox &
 MessageBox::buttonLabel(QMessageBox::StandardButton button,
                         QString const &label) {
-  Q_D(MessageBox);
-
-  d->m_buttonLabels[button] = label;
+  p_func()->m_buttonLabels[button] = label;
   return *this;
 }
 
 MessageBox &
 MessageBox::onlyOnce(QString const &id) {
-  Q_D(MessageBox);
-
-  d->m_onlyOnceID = id;
+  p_func()->m_onlyOnceID = id;
   return *this;
 }
 
@@ -131,25 +117,25 @@ MessageBox::critical(QWidget *parent) {
 
 QMessageBox::StandardButton
 MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
-  Q_D(MessageBox);
+  auto p = p_func();
 
   if (pDefaultButton)
-    d->m_defaultButton = *pDefaultButton;
+    p->m_defaultButton = *pDefaultButton;
 
-  if (!d->m_onlyOnceID.isEmpty()) {
+  if (!p->m_onlyOnceID.isEmpty()) {
     auto reg          = Util::Settings::registry();
-    auto hasBeenShown = reg->value(Q("messageBox/showOnce/%1").arg(d->m_onlyOnceID), false).toBool();
+    auto hasBeenShown = reg->value(Q("messageBox/showOnce/%1").arg(p->m_onlyOnceID), false).toBool();
 
     if (hasBeenShown)
-      return d->m_defaultButton;
+      return p->m_defaultButton;
   }
 
-  QMessageBox msgBox{d->m_icon, d->m_title, d->m_text, QMessageBox::NoButton, d->m_parent};
+  QMessageBox msgBox{p->m_icon, p->m_title, p->m_text, QMessageBox::NoButton, p->m_parent};
   auto buttonBox = msgBox.findChild<QDialogButtonBox *>();
   auto mask      = static_cast<unsigned int>(QMessageBox::FirstButton);
 
   while (mask <= static_cast<unsigned int>(QMessageBox::LastButton)) {
-    auto sb = static_cast<unsigned int>(d->m_buttons & mask);
+    auto sb = static_cast<unsigned int>(p->m_buttons & mask);
     mask  <<= 1;
 
     if (!sb)
@@ -160,8 +146,8 @@ MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
     if (msgBox.defaultButton())
       continue;
 
-    if (   ((d->m_defaultButton == QMessageBox::NoButton) && (buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole))
-        || ((d->m_defaultButton != QMessageBox::NoButton) && (sb == static_cast<unsigned int>(d->m_defaultButton))))
+    if (   ((p->m_defaultButton == QMessageBox::NoButton) && (buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole))
+        || ((p->m_defaultButton != QMessageBox::NoButton) && (sb == static_cast<unsigned int>(p->m_defaultButton))))
       msgBox.setDefaultButton(button);
   }
 
@@ -169,14 +155,14 @@ MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
   // sheet says.
   msgBox.setTextInteractionFlags(Qt::TextBrowserInteraction);
 
-  for (auto const &standardButton : d->m_buttonLabels.keys()) {
-    auto label      = d->m_buttonLabels[standardButton];
+  for (auto const &standardButton : p->m_buttonLabels.keys()) {
+    auto label      = p->m_buttonLabels[standardButton];
     auto pushButton = buttonBox->button(static_cast<QDialogButtonBox::StandardButton>(standardButton));
     if (pushButton && !label.isEmpty())
       pushButton->setText(label);
   }
 
-  if (!d->m_onlyOnceID.isEmpty()) {
+  if (!p->m_onlyOnceID.isEmpty()) {
     auto checkBox = new QCheckBox{&msgBox};
     checkBox->setText(QY("Don't show this message again."));
     msgBox.setCheckBox(checkBox);
@@ -185,9 +171,9 @@ MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
   if (msgBox.exec() == -1)
     return QMessageBox::Cancel;
 
-  if (!d->m_onlyOnceID.isEmpty() && msgBox.checkBox()->isChecked()) {
+  if (!p->m_onlyOnceID.isEmpty() && msgBox.checkBox()->isChecked()) {
     auto reg = Util::Settings::registry();
-    reg->setValue(Q("messageBox/showOnce/%1").arg(d->m_onlyOnceID), true);
+    reg->setValue(Q("messageBox/showOnce/%1").arg(p->m_onlyOnceID), true);
   }
 
   return msgBox.standardButton(msgBox.clickedButton());

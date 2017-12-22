@@ -5,6 +5,7 @@
 #include <QByteArray>
 #include <QProcess>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 
 namespace mtx { namespace gui {
@@ -25,9 +26,9 @@ class MuxJob: public Job {
   Q_OBJECT;
 
 protected:
-  Q_DECLARE_PRIVATE(MuxJob);
+  MTX_DECLARE_PRIVATE(MuxJob);
 
-  explicit MuxJob(MuxJobPrivate &d);
+  explicit MuxJob(MuxJobPrivate &p);
 
 public:
   MuxJob(Status status, mtx::gui::Merge::MuxConfigPtr const &config);

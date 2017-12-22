@@ -19,7 +19,7 @@ class BasicTabWidgetPrivate {
 
 BasicTabWidget::BasicTabWidget(QWidget *parent)
   : QTabWidget{parent}
-  , d_ptr{new BasicTabWidgetPrivate}
+  , p_ptr{new BasicTabWidgetPrivate}
 {
   tabBar()->installEventFilter(this);
 }
@@ -29,25 +29,21 @@ BasicTabWidget::~BasicTabWidget() {
 
 void
 BasicTabWidget::setCloseTabOnMiddleClick(bool close) {
-  Q_D(BasicTabWidget);
-
-  d->m_closeTabOnMiddleClick = close;
+  p_func()->m_closeTabOnMiddleClick = close;
 }
 
 bool
 BasicTabWidget::closeTabOnMiddleClick()
   const {
-  Q_D(const BasicTabWidget);
-
-  return d->m_closeTabOnMiddleClick;
+  return p_func()->m_closeTabOnMiddleClick;
 }
 
 bool
 BasicTabWidget::eventFilter(QObject *o,
                             QEvent *e) {
-  Q_D(BasicTabWidget);
+  auto p = p_func();
 
-  if (   d->m_closeTabOnMiddleClick
+  if (   p->m_closeTabOnMiddleClick
       && (o == tabBar())
       && (e->type() == QEvent::MouseButtonPress)) {
 

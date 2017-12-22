@@ -4,6 +4,7 @@
 
 #include <QDialog>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 class QListWidget;
@@ -14,9 +15,13 @@ namespace mtx { namespace gui {
 class SelectCharacterSetDialogPrivate;
 class SelectCharacterSetDialog : public QDialog {
   Q_OBJECT;
-  Q_DECLARE_PRIVATE(SelectCharacterSetDialog);
 
-  QScopedPointer<SelectCharacterSetDialogPrivate> const d_ptr;
+protected:
+  MTX_DECLARE_PRIVATE(SelectCharacterSetDialog);
+
+  std::unique_ptr<SelectCharacterSetDialogPrivate> const p_ptr;
+
+  explicit SelectCharacterSetDialog(SelectCharacterSetDialogPrivate &p);
 
 public:
   explicit SelectCharacterSetDialog(QWidget *parent, QString const &fileName, QString const &initialCharacterSet = QString{}, QStringList const &additionalCharacterSets = QStringList{});

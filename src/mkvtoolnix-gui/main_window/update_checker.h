@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QThread>
 
+#include "common/qt.h"
 #include "common/version.h"
 
 namespace mtx { namespace gui {
@@ -21,11 +22,12 @@ class UpdateCheckerPrivate;
 class UpdateChecker : public QObject {
   Q_OBJECT;
 
-  Q_DECLARE_PRIVATE(UpdateChecker);
+protected:
+  MTX_DECLARE_PRIVATE(UpdateChecker);
 
-  QScopedPointer<UpdateCheckerPrivate> const d_ptr;
+  std::unique_ptr<UpdateCheckerPrivate> const p_ptr;
 
-  explicit UpdateChecker(UpdateCheckerPrivate &d);
+  explicit UpdateChecker(UpdateCheckerPrivate &p);
 
 public:
   UpdateChecker(QObject *parent = nullptr);

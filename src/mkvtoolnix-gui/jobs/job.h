@@ -9,6 +9,7 @@
 #include <QStringList>
 #include <QUuid>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 
 namespace mtx { namespace gui {
@@ -27,11 +28,11 @@ class Job: public QObject {
   Q_OBJECT;
 
 protected:
-  Q_DECLARE_PRIVATE(Job);
+  MTX_DECLARE_PRIVATE(Job);
 
-  QScopedPointer<JobPrivate> const d_ptr;
+  std::unique_ptr<JobPrivate> const p_ptr;
 
-  explicit Job(JobPrivate &d);
+  explicit Job(JobPrivate &p);
 
   Q_ENUMS(Status);
 
