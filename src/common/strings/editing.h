@@ -39,9 +39,6 @@ void strip_back(std::string &s, bool newlines = false);
 
 std::string &shrink_whitespace(std::string &s);
 
-std::string escape(const std::string &src);
-std::string unescape(const std::string &src);
-
 std::string get_displayable_string(const char *src, int max_len = -1);
 std::string get_displayable_string(std::string const &src);
 

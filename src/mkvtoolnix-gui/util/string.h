@@ -10,7 +10,6 @@ class QStringList;
 namespace mtx { namespace gui { namespace Util {
 
 enum EscapeMode {
-  EscapeMkvtoolnix,
   EscapeJSON,
   EscapeShellUnix,
   EscapeShellCmdExeArgument,

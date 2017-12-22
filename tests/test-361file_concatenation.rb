@@ -23,7 +23,7 @@ test_merge "'(' #{vob_files[0]} #{vob_files[1]} ')'"
 
 m2ts_files = (0..3).map { |i| "data/ts/0000#{i}.m2ts" }
 
-test_identify m2ts_files[0], :verbose => true
+test_identify m2ts_files[0], :format => :json
 
 # These four must be equal.
 test_merge m2ts_files[0]

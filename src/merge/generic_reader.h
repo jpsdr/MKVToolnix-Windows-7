@@ -139,8 +139,6 @@ protected:
   virtual void id_result_chapters(int num_entries);
   virtual void id_result_tags(int64_t track_id, int num_entries);
 
-  virtual std::string id_escape_string(const std::string &s);
-
   virtual mm_io_c *get_underlying_input(mm_io_c *actual_in = nullptr) const;
 
   virtual void display_identification_results_as_json();

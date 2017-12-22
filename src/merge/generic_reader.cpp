@@ -23,48 +23,6 @@
 
 static int64_rational_c s_probe_range_percentage{3, 10}; // 0.3%
 
-static std::string
-format_json_value(nlohmann::json const &value) {
-  return value.is_number()  ? to_string(value.get<uint64_t>())
-       : value.is_boolean() ? std::string{value.get<bool>() ? "1" : "0"}
-       :                      value.get<std::string>();
-}
-
-static std::string
-format_key_and_json_value(std::string const &key,
-                          nlohmann::json const &value) {
-  return (boost::format{"%1%:%2%"} % escape(key) % escape(format_json_value(value))).str();
-}
-
-static std::string
-format_verbose_info(mtx::id::verbose_info_t const &info) {
-  auto formatted = std::vector<std::string>{};
-  auto sub_fmt   = boost::format("%1%.%2%.%3%");
-
-  for (auto const &pair : info) {
-    if (pair.second.is_array()) {
-      auto idx = 0u;
-
-      for (auto it = pair.second.begin(), end = pair.second.end(); it != end; ++it) {
-        if (it->is_object()) {
-          for (auto sub_it = it->begin(), sub_end = it->end(); sub_it != sub_end; ++sub_it)
-            formatted.emplace_back(format_key_and_json_value((sub_fmt % pair.first % idx % sub_it.key()).str(), sub_it.value()));
-
-          ++idx;
-
-        } else
-          formatted.emplace_back(format_key_and_json_value(pair.first, *it));
-      }
-
-    } else
-      formatted.emplace_back(format_key_and_json_value(pair.first, pair.second));
-  }
-
-  brng::sort(formatted);
-
-  return boost::join(formatted, " ");
-}
-
 // ----------------------------------------------------------------------
 
 template<typename T>
@@ -359,74 +317,35 @@ generic_reader_c::display_identification_results() {
 
 void
 generic_reader_c::display_identification_results_as_text() {
-  auto identify_verbose    = mtx::included_in(g_identification_output_format, identification_output_format_e::verbose_text, identification_output_format_e::gui);
-  auto identify_for_gui    = identification_output_format_e::gui == g_identification_output_format;
-
-  std::string format_file, format_track, format_attachment, format_att_description, format_att_file_name;
-
-  if (identify_for_gui) {
-    format_file            =   "File '%1%': container: %2%";
-    format_track           =   "Track ID %1%: %2% (%3%)";
-    format_attachment      =   "Attachment ID %1%: type \"%2%\", size %3% bytes";
-    format_att_description =   ", description \"%1%\"";
-    format_att_file_name   =   ", file name \"%1%\"";
-
-  } else {
-    format_file            = Y("File '%1%': container: %2%");
-    format_track           = Y("Track ID %1%: %2% (%3%)");
-    format_attachment      = Y("Attachment ID %1%: type '%2%', size %3% bytes");
-    format_att_description = Y(", description '%1%'");
-    format_att_file_name   = Y(", file name '%1%'");
-  }
-
-  mxinfo(boost::format(format_file) % m_ti.m_fname % m_id_results_container.info);
-
-  if (identify_verbose && !m_id_results_container.verbose_info.empty())
-    mxinfo(boost::format(" [%1%]") % format_verbose_info(m_id_results_container.verbose_info));
-
+  mxinfo(boost::format(Y("File '%1%': container: %2%")) % m_ti.m_fname % m_id_results_container.info);
   mxinfo("\n");
 
   for (auto &result : m_id_results_tracks) {
-    mxinfo(boost::format(format_track) % result.id % result.type % result.info);
-
-    if (identify_verbose && !result.verbose_info.empty())
-      mxinfo(boost::format(" [%1%]") % format_verbose_info(result.verbose_info));
-
+    mxinfo(boost::format(Y("Track ID %1%: %2% (%3%)")) % result.id % result.type % result.info);
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_attachments) {
-    mxinfo(boost::format(format_attachment) % result.id % id_escape_string(result.type) % result.size);
+    mxinfo(boost::format(Y("Attachment ID %1%: type '%2%', size %3% bytes")) % result.id % result.type % result.size);
 
     if (!result.description.empty())
-      mxinfo(boost::format(format_att_description) % id_escape_string(result.description));
+      mxinfo(boost::format(Y(", description '%1%'")) % result.description);
 
     if (!result.info.empty())
-      mxinfo(boost::format(format_att_file_name) % id_escape_string(result.info));
-
-    if (identify_verbose && !result.verbose_info.empty())
-      mxinfo(boost::format(" [%1%]") % format_verbose_info(result.verbose_info));
+      mxinfo(boost::format(Y(", file name '%1%'")) % result.info);
 
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_chapters) {
-    if (identify_for_gui)
-      mxinfo(boost::format("Chapters: %1% entries") % result.size);
-    else
-      mxinfo(boost::format(NY("Chapters: %1% entry", "Chapters: %1% entries", result.size)) % result.size);
+    mxinfo(boost::format(NY("Chapters: %1% entry", "Chapters: %1% entries", result.size)) % result.size);
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_tags) {
-    if (ID_RESULT_GLOBAL_TAGS_ID == result.id) {
-      if (identify_for_gui)
-        mxinfo(boost::format("Global tags: %1% entries") % result.size);
-      else
-        mxinfo(boost::format(NY("Global tags: %1% entry", "Global tags: %1% entries", result.size)) % result.size);
+    if (ID_RESULT_GLOBAL_TAGS_ID == result.id)
+      mxinfo(boost::format(NY("Global tags: %1% entry", "Global tags: %1% entries", result.size)) % result.size);
 
-    } else if (identify_for_gui)
-      mxinfo(boost::format("Tags for track ID %1%: %2% entries") % result.id % result.size);
     else
       mxinfo(boost::format(NY("Tags for track ID %1%: %2% entry", "Tags for track ID %1%: %2% entries", result.size)) % result.id % result.size);
 
@@ -496,11 +415,6 @@ generic_reader_c::display_identification_results_as_json() {
   }
 
   display_json_output(json);
-}
-
-std::string
-generic_reader_c::id_escape_string(const std::string &s) {
-  return identification_output_format_e::gui == g_identification_output_format ? escape(s) : s;
 }
 
 void

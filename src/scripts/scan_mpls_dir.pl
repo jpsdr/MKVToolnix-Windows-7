@@ -5,6 +5,8 @@ use warnings;
 
 use English;
 
+use JSON::PP;
+
 my $exe = $ENV{MKVMERGE} // 'mkvmerge';
 
 sub mpls_files {
@@ -14,11 +16,12 @@ sub mpls_files {
 sub identify {
   my ($file_name) = @_;
 
-  my $output = `$exe --identify-verbose $file_name 2> /dev/null`;
+  my $output = `$exe -J $file_name 2> /dev/null`;
   return undef if $CHILD_ERROR != 0;
 
-  my ($duration) = $output =~ m{playlist_duration:(\d+)};
-  my ($size)     = $output =~ m{playlist_size:(\d+)};
+  $output        = JSON::PP::decode_json($output);
+  my ($duration) = $output->{container}->{properties}->{playlist_duration};
+  my ($size)     = $output->{container}->{properties}->{playlist_size};
 
   return undef unless $duration && $size;
 

@@ -6,7 +6,7 @@ class T_255aspect_ratio_display_dimensions < Test
   end
 
   def get_display_dimensions file_name
-    `mkvmerge --identify-for-gui "#{file_name}" | grep 'display_dimensions:' | sed -e 's/.*display_dimensions://' -e 's/ .*//'`.chomp
+    JSON.load(`mkvmerge -J "#{file_name}"`)["tracks"][0]["properties"]["display_dimensions"]
   end
 
   def run_test_with_args initial_args

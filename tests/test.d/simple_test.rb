@@ -176,8 +176,8 @@ class SimpleTest
     @blocks[:tests] << {
       :name  => full_command_line,
       :block => lambda {
-        sys "../src/mkvmerge --identify-verbose #{full_command_line} > #{tmp}", :exit_code => 3
-        %r{unsupported container}.match(IO.readlines(tmp).first || '') ? :ok : :bad
+        json = identify_json full_command_line, :exit_code => 3
+        (json["container"]["recognized"] == true) && (json["container"]["supported"] == false) ? :ok : :bad
       },
     }
   end
@@ -243,9 +243,7 @@ class SimpleTest
     options = args.extract_options!
     fail ArgumentError if args.empty?
 
-    verbose = !options[:verbose].nil? ? options[:verbose]                             : true
-    format  = options[:format]        ? options[:format].to_s.downcase.gsub(/_/, '-') : verbose ? 'verbose-text' : 'text'
-
+    format  = options[:format] ? options[:format].to_s.downcase.gsub(/_/, '-') : 'text'
     command = "../src/mkvmerge --identify --identification-format #{format} --engage no_variable_data #{args.first}"
 
     self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]

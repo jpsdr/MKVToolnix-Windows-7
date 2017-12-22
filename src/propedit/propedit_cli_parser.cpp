@@ -260,8 +260,8 @@ propedit_cli_parser_c::init_parser() {
 
   add_section_header(YT("Attachment selectors"), 0);
   add_information(YT("An <attachment-selector> can have three forms:"), 1);
-  add_information(YT("1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify-verbose'. These are usually simply numbered starting from 0 (e.g. '2')."), 2);
-  add_information(YT("2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify-verbose'. These are usually random-looking numbers (e.g. '128975986723')."), 2);
+  add_information(YT("1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."), 2);
+  add_information(YT("2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."), 2);
   add_information(YT("3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."), 2);
 
   add_hook(mtx::cli::parser_c::ht_unknown_option, std::bind(&propedit_cli_parser_c::set_file_name, this));

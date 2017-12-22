@@ -1,5 +1,18 @@
 # Version ?
 
+## Important notes
+
+* Feature removal: several deprecated features have been removed:
+* mkvmerge: the deprecated options `--identify-verbose` (and its counterpart
+  `-I`), `--identify-for-gui`, `--identify-for-mmg` and
+  `--identification-format verbose-text` have been removed.
+* all command line tools: support for the deprecated, old, proprietary format
+  used for option files has been removed.
+* all command line tools: support for passing command line options via the
+  deprecated environment variables `MKVTOOLNIX_OPTIONS`, `MKVEXTRACT_OPTIONS`,
+  `MKVINFO_OPTIONS`, `MKVMERGE_OPTIONS`, and `MKVPROPEDIT_OPTIONS` has been
+  removed.
+
 ## New features and enhancements
 
 * mkvmerge: AVC/h.264 packetizer (framed): access unit delimiter NALUs will

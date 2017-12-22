@@ -156,7 +156,7 @@ attachment_target_c::parse_spec(command_e command,
     m_selector_string_arg = matches[4 + offset].str();
 
     if (ac_replace == m_command)
-      m_selector_string_arg = unescape(m_selector_string_arg);
+      m_selector_string_arg = unescape_colon(m_selector_string_arg);
   }
 
   if ((ac_replace == m_command) && m_file_name.empty())
@@ -335,4 +335,10 @@ attachment_target_c::replace_attachment_values(KaxAttached &att) {
 
   if (m_file_content)
     GetChild<KaxFileData>(att).CopyBuffer(m_file_content->get_buffer(), m_file_content->get_size());
+}
+
+std::string
+attachment_target_c::unescape_colon(std::string arg) {
+  boost::replace_all(arg, "\\c", ":");
+  return arg;
 }

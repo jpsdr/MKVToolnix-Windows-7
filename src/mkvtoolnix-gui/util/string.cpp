@@ -42,20 +42,6 @@ DeferredRegularExpression::operator *() {
 // ----------------------------------------------------------------------
 
 static QString
-escapeMkvtoolnix(QString const &source) {
-  if (source.isEmpty())
-    return QString{"#EMPTY#"};
-  return to_qs(::escape(to_utf8(source)));
-}
-
-static QString
-unescapeMkvtoolnix(QString const &source) {
-  if (source == Q("#EMPTY#"))
-    return Q("");
-  return to_qs(::unescape(to_utf8(source)));
-}
-
-static QString
 escapeShellUnix(QString const &source) {
   if (source.isEmpty())
     return Q("\"\"");
@@ -186,8 +172,7 @@ unescapeKeyboardShortcuts(QString const &text) {
 QString
 escape(QString const &source,
        EscapeMode mode) {
-  return EscapeMkvtoolnix          == mode ? escapeMkvtoolnix(source)
-       : EscapeShellUnix           == mode ? escapeShellUnix(source)
+  return EscapeShellUnix           == mode ? escapeShellUnix(source)
        : EscapeShellCmdExeArgument == mode ? escapeShellWindows(source)
        : EscapeShellCmdExeProgram  == mode ? escapeShellWindowsProgram(source)
        : EscapeKeyboardShortcuts   == mode ? escapeKeyboardShortcuts(source)
@@ -197,10 +182,9 @@ escape(QString const &source,
 QString
 unescape(QString const &source,
          EscapeMode mode) {
-  Q_ASSERT(mtx::included_in(mode, EscapeMkvtoolnix, EscapeKeyboardShortcuts));
+  Q_ASSERT(mtx::included_in(mode, EscapeKeyboardShortcuts));
 
-  return EscapeKeyboardShortcuts == mode ? unescapeKeyboardShortcuts(source)
-       :                                   unescapeMkvtoolnix(source);
+  return unescapeKeyboardShortcuts(source);
 }
 
 static QStringList

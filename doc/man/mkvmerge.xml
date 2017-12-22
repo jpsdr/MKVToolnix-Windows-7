@@ -1934,31 +1934,13 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry id="mkvmerge.description.identify_verbose">
-     <term><option>-I</option>, <option>--identify-verbose</option> <parameter>file-name</parameter></term>
-     <listitem>
-      <para>
-       Will let &mkvmerge; probe the single file and report its type, the tracks contained in the file and their track IDs. If this option is
-       used then the only other option allowed is the filename.
-      </para>
-
-      <para>
-       The output will also contain properties for all items found, e.g. the file title or the track language.
-      </para>
-
-      <note>
-       <para>This option is deprecated. It will be removed in 2018.</para>
-      </note>
-     </listitem>
-    </varlistentry>
-
     <varlistentry id="mkvmerge.description.identification_format">
      <term><option>-F</option>, <option>--identification-format</option> <parameter>format</parameter></term>
      <listitem>
       <para>
        Determines the output format used by the <link linkend="mkvmerge.description.identify"><literal>--identify</literal>
-       option</link>. The following formats are supported: <literal>text</literal> (the default if this option isn't used),
-       <literal>verbose-text</literal> and <literal>json</literal>.
+       option</link>. The following formats are supported: <literal>text</literal> (the default if this option isn't used) and
+       <literal>json</literal>.
       </para>
 
       <orderedlist>
@@ -1967,26 +1949,6 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
 
         <para>This format is not meant to be parsed. The output will be translated into the language &mkvmerge; uses (see also <link
         linkend="mkvmerge.description.ui_language">--ui-language</link>).</para>
-       </listitem>
-
-       <listitem>
-        <para>
-         The <literal>verbose-text</literal> format extends the <literal>text</literal> format with additional properties for each item. The
-         extra information is surronded by square brackets. It consists of space-saparated key/value pairs where keys and values are separated
-         by a colon.
-        </para>
-
-        <para>
-         Each value is escaped according to the rules described in <link linkend="mkvmerge.escaping">the section about escaping special
-         characters in text</link>.
-        </para>
-
-        <para>This format is not meant to be parsed. The output will be translated into the language &mkvmerge; uses (see also <link
-        linkend="mkvmerge.description.ui_language">--ui-language</link>).</para>
-
-        <note>
-         <para>This option is deprecated. It will be removed in 2018.</para>
-        </note>
        </listitem>
 
        <listitem>
@@ -2593,29 +2555,21 @@ Track ID 1: audio (A_MPEG/L3)</screen>
   </para>
 
   <para>
-   There are two formats for option files: a JSON format and a proprietary legacy format. The legacy format is deprecated, and support for
-   it will likely be removed in 2018.
+   An option file contains JSON-formatted data. Its content must be a valid JSON array consisting solely of JSON
+   strings. The file's encoding must be UTF-8. The file should not start with a <foreignphrase>byte order marker</foreignphrase>
+   (<abbrev>BOM</abbrev>), but if one exists, it will be skipped.
   </para>
 
-  <refsect2 id="mkvmerge.option_files.json_format">
-   <title>The JSON format</title>
+  <para>
+   The rules for escaping special characters inside JSON are the ones in the official JSON specification, <ulink url="https://tools.ietf.org/html/rfc7159">RFC 7159</ulink>.
+  </para>
 
-   <para>
-    A JSON option file's name must end in '<filename>.json</filename>'. Its content must be a valid JSON array consisting solely of JSON
-    strings. The file's encoding must be UTF-8. The file should not start with a <foreignphrase>byte order marker</foreignphrase>
-    (<abbrev>BOM</abbrev>), but if one exists, it will be skipped.
-   </para>
+  <para>
+   The command line '<command>mkvmerge -o "my file.mkv" -A "a movie.avi" sound.ogg</command>' could be converted into the following
+   JSON option file called e.g. '<filename>options.json</filename>':
+  </para>
 
-   <para>
-    The rules for escaping special characters inside JSON are the ones in the official JSON specification, <ulink url="https://tools.ietf.org/html/rfc7159">RFC 7159</ulink>.
-   </para>
-
-   <para>
-    The command line '<command>mkvmerge -o "my file.mkv" -A "a movie.avi" sound.ogg</command>' could be converted into the following
-    JSON option file called e.g. '<filename>options.json</filename>':
-   </para>
-
-   <programlisting>[
+  <programlisting>[
   "-o",
   "c:\\Matroska\\my file.mkv",
   "--title",
@@ -2624,59 +2578,6 @@ Track ID 1: audio (A_MPEG/L3)</screen>
   "a movie.avi",
   "sound.ogg"
 ]</programlisting>
-  </refsect2>
-
-  <refsect2 id="mkvmerge.option_files.legacy_format">
-   <title>The legacy format</title>
-
-   <para>
-    There are several rules regarding option files. Lines whose first non-whitespace character is a hash mark ('<literal>#</literal>') are
-    treated as comments and ignored. White spaces at the start and end of a line will be stripped. Each line must contain exactly one
-    option.
-   </para>
-
-   <para>
-    A line not containing anything is also ignored. An empty argument is represented by the line '<literal>#EMPTY#</literal>'.
-   </para>
-
-   <para>
-    Several chars can be escaped, e.g. if you need to start a non-comment line with '#'. The rules are described in <link
-    linkend="mkvmerge.escaping">the section about escaping text</link>.
-   </para>
-
-   <para>
-    Note that backslashes must always be escaped. Hash marks ('#') must be escaped if they should not start a comment.
-   </para>
-
-   <para>
-    The command line '<command>mkvmerge -o "my file.mkv" -A "a movie.avi" sound.ogg</command>' could be converted into the following
-    legacy option file called e.g. '<filename>options.txt</filename>':
-   </para>
-
-   <programlisting># Write to the file "c:\Matroska\my file.mkv" on Windows.
--o
-c:\\Matroska\\my file.mkv
-# Set the title to '#65'.
---title
-\h65
-# Only take the video from "a movie.avi".
--A
-a movie.avi
-sound.ogg</programlisting>
-  </refsect2>
-
- </refsect1>
-
- <refsect1 id="mkvmerge.escaping">
-  <title>Escaping special chars in text</title>
-  <para>
-   There are a few places in which special characters in text must or should be escaped. The rules for escaping are simple: each character
-   that needs escaping is replaced with a backslash followed by another character.
-  </para>
-
-  <para>
-   The rules are: ' ' (a space) becomes '\s', '&quot;' (double quotes) becomes '\2', ':' becomes '\c', '#' becomes '\h', '[' becomes '\b', ']' becomes '\B' and '\' (a single backslash) itself becomes '\\'.
-  </para>
  </refsect1>
 
  <refsect1 id="mkvmerge.subtitles">
@@ -3284,15 +3185,6 @@ gap, 10.050
     <listitem>
      <para>The content is treated as if it had been passed via the <link
      linkend="mkvmerge.description.engage"><option>--engage</option></link> option.</para>
-    </listitem>
-   </varlistentry>
-
-   <varlistentry>
-    <term><varname>MKVMERGE_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname></term>
-    <listitem>
-     <para>The content is split on white space. The resulting partial strings are treated as if it had been passed as command line
-     options. If you need to pass special characters (e.g. spaces) then you have to escape them (see <link linkend="mkvmerge.escaping">the
-     section about escaping special characters in text</link>).</para>
     </listitem>
    </varlistentry>
   </variablelist>

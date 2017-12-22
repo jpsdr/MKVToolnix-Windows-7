@@ -112,6 +112,8 @@ protected:
   virtual void replace_attachment_values(KaxAttached &att);
 
   virtual bool matches_by_uid_name_or_mime_type(KaxAttached &att);
+
+  virtual std::string unescape_colon(std::string arg);
 };
 
 inline bool

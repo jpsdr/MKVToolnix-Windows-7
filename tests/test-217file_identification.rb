@@ -30,11 +30,10 @@ class T_217file_identification < Test
       "data/wp/with-correction.wv",
       "data/wp/without-correction.wv"
     ].collect do |file|
-      sys "../src/mkvmerge --identify-verbose #{file} > #{tmp}", 0
+      sys "../src/mkvmerge -J #{file} > #{tmp}", 0
       hash_tmp
     end
 
     checksum.join '-'
   end
 end
-

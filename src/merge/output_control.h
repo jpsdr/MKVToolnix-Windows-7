@@ -116,8 +116,6 @@ enum append_mode_e {
 
 enum class identification_output_format_e {
   text,
-  verbose_text,
-  gui,
   json,
 };
 

@@ -338,7 +338,7 @@ set_usage() {
                   "                           \"--identification-format json --identify file\".\n");
   usage_text += Y("  -F, --identification-format <format>\n"
                   "                           Set the identification results format\n"
-                  "                           ('text', 'verbose-text', 'json').\n");
+                  "                           ('text' or 'json'; default is 'text').\n");
   usage_text += Y("  --probe-range-percentage <percent>\n"
                   "                           Sets maximum size to probe for tracks in percent\n"
                   "                           of the total file size for certain file types\n"
@@ -2116,12 +2116,6 @@ parse_arg_identification_format(std::vector<std::string>::const_iterator &sit,
   if (next_arg == "text")
     g_identification_output_format = identification_output_format_e::text;
 
-  else if (next_arg == "verbose-text")
-    g_identification_output_format = identification_output_format_e::verbose_text;
-
-  else if (next_arg == "gui")
-    g_identification_output_format = identification_output_format_e::gui;
-
   else if (next_arg == "json") {
     g_identification_output_format = identification_output_format_e::json;
     redirect_warnings_and_errors_to_json();
@@ -2169,18 +2163,12 @@ handle_identification_args(std::vector<std::string> &args) {
   }
 
   for (auto const &this_arg : args) {
-    if (!mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui", "-J"))
+    if (!mtx::included_in(this_arg, "-i", "--identify", "-J"))
       continue;
 
     identification_command = this_arg;
 
-    if (mtx::included_in(this_arg, "-I", "--identify-verbose"))
-      g_identification_output_format = identification_output_format_e::verbose_text;
-
-    else if (mtx::included_in(this_arg, "--identify-for-mmg", "--identify-for-gui"))
-      g_identification_output_format = identification_output_format_e::gui;
-
-    else if (this_arg == "-J") {
+    if (this_arg == "-J") {
       g_identification_output_format = identification_output_format_e::json;
       redirect_warnings_and_errors_to_json();
     }
@@ -2192,7 +2180,7 @@ handle_identification_args(std::vector<std::string> &args) {
   for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
     auto const &this_arg = *sit;
 
-    if (mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui", "-J"))
+    if (mtx::included_in(this_arg, "-i", "--identify", "-J"))
       continue;
 
     if (mtx::included_in(this_arg, "-F", "--identification-format"))
@@ -2230,7 +2218,7 @@ parse_args(std::vector<std::string> args) {
       list_iso639_languages();
       mxexit();
 
-    } else if (mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui", "-J"))
+    } else if (mtx::included_in(this_arg, "-i", "--identify", "-J"))
       mxerror(boost::format(Y("'%1%' can only be used with a file name. No further options are allowed if this option is used.\n")) % this_arg);
 
     else if (this_arg == "--capabilities") {

@@ -52,16 +52,14 @@ CommandLineDialog::onEscapeModeChanged(int index) {
   auto mode = 0 == index ? Util::EscapeShellCmdExeArgument
             : 1 == index ? Util::EscapeShellUnix
             : 2 == index ? Util::EscapeJSON
-            : 3 == index ? Util::EscapeMkvtoolnix
             :              Util::DontEscape;
 
-  auto sep  = Util::EscapeMkvtoolnix == mode ? "\n" : " ";
   auto opts = m_options;
 
-  if (mtx::included_in(mode, Util::EscapeJSON, Util::EscapeMkvtoolnix))
+  if (mtx::included_in(mode, Util::EscapeJSON))
     opts.removeFirst();
 
-  ui->commandLine->setPlainText(Util::escape(opts, mode).join(Q(sep)));
+  ui->commandLine->setPlainText(Util::escape(opts, mode).join(Q(" ")));
 }
 
 void

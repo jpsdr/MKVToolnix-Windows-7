@@ -19,10 +19,7 @@ static void
 output_container_unsupported_text(std::string const &filename,
                                   translatable_string_c const &info) {
   if (g_identifying) {
-    if (identification_output_format_e::gui == g_identification_output_format)
-      mxinfo(boost::format("File '%1%': unsupported container: %2%\n") % filename % info);
-    else
-      mxinfo(boost::format(Y("File '%1%': unsupported container: %2%\n")) % filename % info);
+    mxinfo(boost::format(Y("File '%1%': unsupported container: %2%\n")) % filename % info);
     mxexit(3);
 
   } else

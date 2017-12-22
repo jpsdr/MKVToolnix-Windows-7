@@ -36,49 +36,6 @@ namespace mtx { namespace cli {
 
 bool g_gui_mode = false;
 
-/** \brief Reads command line arguments from a file
-
-   Each line contains exactly one command line argument or a
-   comment. Arguments are converted to UTF-8 and appended to the array
-   \c args.
-*/
-static void
-read_args_from_old_option_file(std::vector<std::string> &args,
-                               std::string const &filename) {
-  mm_text_io_cptr mm_io;
-  std::string buffer;
-  bool skip_next;
-
-  try {
-    mm_io = std::make_shared<mm_text_io_c>(std::make_shared<mm_file_io_c>(filename));
-  } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % filename % ex);
-  }
-
-  skip_next = false;
-  while (!mm_io->eof() && mm_io->getline2(buffer)) {
-    if (skip_next) {
-      skip_next = false;
-      continue;
-    }
-    strip(buffer);
-
-    if (buffer == "#EMPTY#") {
-      args.push_back("");
-      continue;
-    }
-
-    if ((buffer[0] == '#') || (buffer[0] == 0))
-      continue;
-
-    if (buffer == "--command-line-charset") {
-      skip_next = true;
-      continue;
-    }
-    args.push_back(unescape(buffer));
-  }
-}
-
 static void
 read_args_from_json_file(std::vector<std::string> &args,
                          std::string const &filename) {
@@ -121,36 +78,6 @@ read_args_from_json_file(std::vector<std::string> &args,
   }
 }
 
-static void
-read_args_from_file(std::vector<std::string> &args,
-                    std::string const &filename) {
-  auto path = bfs::path{filename};
-  if (balg::to_lower_copy(path.extension().string()) == ".json")
-    read_args_from_json_file(args, filename);
-
-  else
-    read_args_from_old_option_file(args, filename);
-}
-
-static std::vector<std::string>
-command_line_args_from_environment() {
-  std::vector<std::string> all_args;
-
-  auto process = [&all_args](std::string const &variable) {
-    auto value = getenv((boost::format("%1%_OPTIONS") % variable).str().c_str());
-    if (value && value[0]) {
-      auto args = split(value, " ");
-      std::transform(args.begin(), args.end(), std::back_inserter(all_args), unescape);
-    }
-  };
-
-  process("MKVTOOLNIX");
-  process("MTX");
-  process(balg::to_upper_copy(get_program_name()));
-
-  return all_args;
-}
-
 /** \brief Expand the command line parameters
 
    Takes each command line paramter, converts it to UTF-8, and reads more
@@ -171,13 +98,13 @@ std::vector<std::string>
 args_in_utf8(int argc,
              char **argv) {
   int i;
-  std::vector<std::string> args = command_line_args_from_environment();
+  std::vector<std::string> args;
 
   charset_converter_cptr cc_command_line = g_cc_stdio;
 
   for (i = 1; i < argc; i++)
     if (argv[i][0] == '@')
-      read_args_from_file(args, &argv[i][1]);
+      read_args_from_json_file(args, &argv[i][1]);
     else {
       if (!strcmp(argv[i], "--command-line-charset")) {
         if ((i + 1) == argc)
