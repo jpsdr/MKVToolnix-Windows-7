@@ -123,7 +123,7 @@ args_in_utf8(int argc,
 std::vector<std::string>
 args_in_utf8(int,
              char **) {
-  std::vector<std::string> args = command_line_args_from_environment();
+  std::vector<std::string> args;
   std::string utf8;
 
   int num_args     = 0;
@@ -137,7 +137,7 @@ args_in_utf8(int,
     auto arg = to_utf8(std::wstring{arg_list[i]});
 
     if (arg[0] == '@')
-      read_args_from_file(args, arg.substr(1));
+      read_args_from_json_file(args, arg.substr(1));
 
     else
       args.push_back(arg);
