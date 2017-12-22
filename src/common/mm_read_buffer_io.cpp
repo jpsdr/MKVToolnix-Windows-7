@@ -32,7 +32,7 @@ mm_read_buffer_io_c::mm_read_buffer_io_c(mm_io_cptr const &in,
   , m_debug_seek{"read_buffer_io|read_buffer_io_read"}
   , m_debug_read{"read_buffer_io|read_buffer_io_read"}
 {
-  setFilePointer(0, seek_beginning);
+  setFilePointer(in->getFilePointer(), seek_beginning);
 }
 
 mm_read_buffer_io_c::~mm_read_buffer_io_c() {

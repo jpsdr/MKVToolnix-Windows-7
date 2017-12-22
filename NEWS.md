@@ -41,6 +41,11 @@
 * mkvmerge: AVC/h.264 parser: mkvmerge no longer assumes that encountering
   sequence parameter set or picture parameter set NALUs signal the start of a
   new frame. Fixes #2179.
+* mkvmerge: read buffer I/O class: the class could get out of sync regarding
+  the file position of the underlying file I/O class causing wrong data to be
+  returned on subsequent read operations. One result was that trying to
+  identifying MPLS files that refer to very short M2TS files caused mkvmerge
+  to segfault.
 
 
 # Version 19.0.0 "Brave Captain" 2017-12-17
