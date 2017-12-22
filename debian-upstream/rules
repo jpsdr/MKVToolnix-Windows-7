@@ -50,7 +50,7 @@ endif
 
 	rake apps:mkvinfo USE_QT=no QT_LIBS=' ' QT_INCLUDES=' '
 
-	touch src/info/qt_ui.o src/info/qt_resources.cpp src/info/qt_resources.o src/info/libmtxinfo.a src/mkvinfo
+	touch src/info/qt_resources.cpp src/info/qt_resources.o $(patsubst %.cpp,%.o,$(wildcard src/info/*.cpp)) src/info/libmtxinfo.a src/mkvinfo
 
 override_dh_install:
 	rake install DESTDIR=$(CURDIR)/debian/tmp
