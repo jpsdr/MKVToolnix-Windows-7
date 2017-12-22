@@ -33,7 +33,7 @@ using namespace mtx::gui;
 
 UpdateChecker::UpdateChecker(QObject *parent)
   : QObject{parent}
-  , d_ptr{new UpdateCheckerPrivate{}}
+  , p_ptr{new UpdateCheckerPrivate{}}
 {
 }
 
@@ -42,16 +42,14 @@ UpdateChecker::~UpdateChecker() {
 
 UpdateChecker &
 UpdateChecker::setRetrieveReleasesInfo(bool enable) {
-  Q_D(UpdateChecker);
-
-  d->m_retrieveReleasesInfo = enable;
+  p_func()->m_retrieveReleasesInfo = enable;
 
   return *this;
 }
 
 void
 UpdateChecker::start() {
-  Q_D(UpdateChecker);
+  auto p = p_func();
 
   qDebug() << "UpdateChecker::start: initiating requests";
 
@@ -63,7 +61,7 @@ UpdateChecker::start() {
 
   debugging_c::requested("version_check_url", &urls[0]);
 
-  if (d->m_retrieveReleasesInfo) {
+  if (p->m_retrieveReleasesInfo) {
     urls << MTX_RELEASES_INFO_URL;
     debugging_c::requested("releases_info_url", &urls[1]);
   }
@@ -73,7 +71,7 @@ UpdateChecker::start() {
   qDebug() << "UpdateChecker::start: URL list built";
 
   for (auto const &url : urls)
-    d->m_tokens.push_back(manager.download(QUrl{Q("%1.gz").arg(Q(url))}));
+    p->m_tokens.push_back(manager.download(QUrl{Q("%1.gz").arg(Q(url))}));
 
   qDebug() << "UpdateChecker::start: startup done";
 }
@@ -81,11 +79,11 @@ UpdateChecker::start() {
 void
 UpdateChecker::handleDownloadedContent(quint64 token,
                                        QByteArray const &content) {
-  Q_D(UpdateChecker);
+  auto p = p_func();
 
   qDebug() << "UpdateChecker::handleDownloadedContent: token" << token;
 
-  auto idx = d->m_tokens.indexOf(token);
+  auto idx = p->m_tokens.indexOf(token);
   if (idx < 0) {
     qDebug() << "UpdateChecker::handleDownloadedContent: token unknown";
     return;
@@ -93,27 +91,27 @@ UpdateChecker::handleDownloadedContent(quint64 token,
 
   auto doc = parseXml(content);
 
-  ++d->m_numFinished;
+  ++p->m_numFinished;
 
-  qDebug() << "UpdateChecker::handleDownloadedContent: for" << idx << "numFinished" << d->m_numFinished;
+  qDebug() << "UpdateChecker::handleDownloadedContent: for" << idx << "numFinished" << p->m_numFinished;
 
   if (idx == 0) {
-    d->m_release = parse_latest_release_version(doc);
+    p->m_release = parse_latest_release_version(doc);
 
-    auto status = !d->m_release.valid                                       ? UpdateCheckStatus::Failed
-                : d->m_release.current_version < d->m_release.latest_source ? UpdateCheckStatus::NewReleaseAvailable
+    auto status = !p->m_release.valid                                       ? UpdateCheckStatus::Failed
+                : p->m_release.current_version < p->m_release.latest_source ? UpdateCheckStatus::NewReleaseAvailable
                 :                                                             UpdateCheckStatus::NoNewReleaseAvailable;
 
     qDebug() << "UpdateChecker::handleDownloadedContent: latest version info retrieved; status:" << static_cast<int>(status);
 
-    emit checkFinished(status, d->m_release);
+    emit checkFinished(status, p->m_release);
 
   } else {
     qDebug() << "UpdateChecker::handleDownloadedContent: releases info retrieved";
     emit releaseInformationRetrieved(doc);
   }
 
-  if (d->m_numFinished < d->m_tokens.size())
+  if (p->m_numFinished < p->m_tokens.size())
     return;
 
   qDebug() << "UpdateChecker::handleDownloadedContent: done, deleting object";

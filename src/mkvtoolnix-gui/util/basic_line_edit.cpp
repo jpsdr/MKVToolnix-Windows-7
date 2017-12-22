@@ -19,7 +19,7 @@ class BasicLineEditPrivate {
 
 BasicLineEdit::BasicLineEdit(QWidget *parent)
   : QLineEdit{parent}
-  , d_ptr{new BasicLineEditPrivate}
+  , p_ptr{new BasicLineEditPrivate}
 {
 }
 
@@ -28,25 +28,21 @@ BasicLineEdit::~BasicLineEdit() {
 
 BasicLineEdit &
 BasicLineEdit::acceptDroppedFiles(bool enable) {
-  Q_D(BasicLineEdit);
-
-  d->m_acceptDroppedFiles = enable;
+  p_func()->m_acceptDroppedFiles = enable;
   return *this;
 }
 
 BasicLineEdit &
 BasicLineEdit::setTextToDroppedFileName(bool enable) {
-  Q_D(BasicLineEdit);
-
-  d->m_setTextToDroppedFileName = enable;
+  p_func()->m_setTextToDroppedFileName = enable;
   return *this;
 }
 
 void
 BasicLineEdit::dragEnterEvent(QDragEnterEvent *event) {
-  Q_D(BasicLineEdit);
+  auto p = p_func();
 
-  if (d->m_acceptDroppedFiles && d->m_filesDDHandler.handle(event, false))
+  if (p->m_acceptDroppedFiles && p->m_filesDDHandler.handle(event, false))
     return;
 
   QLineEdit::dragEnterEvent(event);
@@ -54,9 +50,9 @@ BasicLineEdit::dragEnterEvent(QDragEnterEvent *event) {
 
 void
 BasicLineEdit::dragMoveEvent(QDragMoveEvent *event) {
-  Q_D(BasicLineEdit);
+  auto p = p_func();
 
-  if (d->m_acceptDroppedFiles && d->m_filesDDHandler.handle(event, false))
+  if (p->m_acceptDroppedFiles && p->m_filesDDHandler.handle(event, false))
     return;
 
   QLineEdit::dragMoveEvent(event);
@@ -64,12 +60,12 @@ BasicLineEdit::dragMoveEvent(QDragMoveEvent *event) {
 
 void
 BasicLineEdit::dropEvent(QDropEvent *event) {
-  Q_D(BasicLineEdit);
+  auto p = p_func();
 
-  if (d->m_acceptDroppedFiles && d->m_filesDDHandler.handle(event, true)) {
-    auto fileNames = d->m_filesDDHandler.fileNames();
+  if (p->m_acceptDroppedFiles && p->m_filesDDHandler.handle(event, true)) {
+    auto fileNames = p->m_filesDDHandler.fileNames();
 
-    if (d->m_setTextToDroppedFileName && !fileNames.isEmpty())
+    if (p->m_setTextToDroppedFileName && !fileNames.isEmpty())
       setText(fileNames[0]);
 
     emit filesDropped(fileNames);

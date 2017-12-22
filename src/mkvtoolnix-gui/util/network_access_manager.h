@@ -4,6 +4,8 @@
 
 #include <QObject>
 
+#include "common/qt.h"
+
 class QByteArray;
 class QNetworkAccessManager;
 class QUrl;
@@ -14,11 +16,12 @@ class NetworkAccessManagerPrivate;
 class NetworkAccessManager : public QObject {
   Q_OBJECT;
 
-  Q_DECLARE_PRIVATE(NetworkAccessManager);
+protected:
+  MTX_DECLARE_PRIVATE(NetworkAccessManager);
 
-  QScopedPointer<NetworkAccessManagerPrivate> const d_ptr;
+  std::unique_ptr<NetworkAccessManagerPrivate> const p_ptr;
 
-  explicit NetworkAccessManager(NetworkAccessManagerPrivate &d);
+  explicit NetworkAccessManager(NetworkAccessManagerPrivate &p);
 
 public:
   NetworkAccessManager();

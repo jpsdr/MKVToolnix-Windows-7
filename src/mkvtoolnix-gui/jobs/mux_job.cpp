@@ -36,8 +36,8 @@ MuxJob::MuxJob(Status status,
   setupMuxJobConnections();
 }
 
-MuxJob::MuxJob(MuxJobPrivate &d)
-  : Job{d}
+MuxJob::MuxJob(MuxJobPrivate &p)
+  : Job{p}
 {
   setupMuxJobConnections();
 }
@@ -47,56 +47,55 @@ MuxJob::~MuxJob() {
 
 void
 MuxJob::setupMuxJobConnections() {
-  Q_D(MuxJob);
+  auto p = p_func();
 
-  connect(&d->process, &QProcess::readyReadStandardOutput,                                              this, &MuxJob::readAvailable);
-  connect(&d->process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &MuxJob::processFinished);
-  connect(&d->process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error),       this, &MuxJob::processError);
+  connect(&p->process, &QProcess::readyReadStandardOutput,                                              this, &MuxJob::readAvailable);
+  connect(&p->process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &MuxJob::processFinished);
+  connect(&p->process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error),       this, &MuxJob::processError);
 }
 
 void
 MuxJob::abort() {
-  Q_D(MuxJob);
+  auto p = p_func();
 
-  if (d->aborted || (QProcess::NotRunning == d->process.state()))
+  if (p->aborted || (QProcess::NotRunning == p->process.state()))
     return;
 
-  d->aborted = true;
-  d->process.close();
+  p->aborted = true;
+  p->process.close();
 }
 
 void
 MuxJob::start() {
-  Q_D(MuxJob);
-
-  d->aborted      = false;
-  d->settingsFile = Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob", d->config->buildMkvmergeOptions());
+  auto p          = p_func();
+  p->aborted      = false;
+  p->settingsFile = Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob", p->config->buildMkvmergeOptions());
 
   setStatus(Job::Running);
   setProgress(0);
 
-  d->process.start(Util::Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(d->settingsFile->fileName()), QIODevice::ReadOnly);
+  p->process.start(Util::Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(p->settingsFile->fileName()), QIODevice::ReadOnly);
 }
 
 void
 MuxJob::processBytesRead() {
-  Q_D(MuxJob);
+  auto p = p_func();
 
-  d->bytesRead.replace("\r\n", "\n").replace('\r', '\n');
+  p->bytesRead.replace("\r\n", "\n").replace('\r', '\n');
 
-  auto start = 0, numRead = d->bytesRead.size();
+  auto start = 0, numRead = p->bytesRead.size();
 
   while (start < numRead) {
-    auto pos = d->bytesRead.indexOf('\n', start);
+    auto pos = p->bytesRead.indexOf('\n', start);
     if (-1 == pos)
       break;
 
-    processLine(QString::fromUtf8(d->bytesRead.mid(start, pos - start)));
+    processLine(QString::fromUtf8(p->bytesRead.mid(start, pos - start)));
 
     start = pos + 1;
   }
 
-  d->bytesRead.remove(0, start);
+  p->bytesRead.remove(0, start);
 }
 
 void
@@ -138,22 +137,22 @@ MuxJob::processLine(QString const &rawLine) {
 
 void
 MuxJob::readAvailable() {
-  Q_D(MuxJob);
+  auto p = p_func();
 
-  d->bytesRead += d->process.readAllStandardOutput();
+  p->bytesRead += p->process.readAllStandardOutput();
   processBytesRead();
 }
 
 void
 MuxJob::processFinished(int exitCode,
                         QProcess::ExitStatus exitStatus) {
-  Q_D(MuxJob);
+  auto p = p_func();
 
-  if (!d->bytesRead.isEmpty())
-    processLine(QString::fromUtf8(d->bytesRead));
+  if (!p->bytesRead.isEmpty())
+    processLine(QString::fromUtf8(p->bytesRead));
 
-  d->exitCode = exitCode;
-  auto status = d->aborted                         ? Job::Aborted
+  p->exitCode = exitCode;
+  auto status = p->aborted                         ? Job::Aborted
               : QProcess::NormalExit != exitStatus ? Job::Failed
               : 0 == exitCode                      ? Job::DoneOk
               : 1 == exitCode                      ? Job::DoneWarnings
@@ -161,7 +160,7 @@ MuxJob::processFinished(int exitCode,
 
   setStatus(status);
 
-  if (d->quitAfterFinished)
+  if (p->quitAfterFinished)
     QTimer::singleShot(0, MainWindow::get(), SLOT(close()));
 }
 
@@ -182,31 +181,27 @@ MuxJob::displayableType()
 QString
 MuxJob::displayableDescription()
   const {
-  Q_D(const MuxJob);
-
-  QFileInfo info{d->config->m_destination};
+  QFileInfo info{p_func()->config->m_destination};
   return QY("Multiplexing to file \"%1\" in directory \"%2\"").arg(info.fileName()).arg(QDir::toNativeSeparators(info.dir().path()));
 }
 
 QString
 MuxJob::outputFolder()
   const {
-  Q_D(const MuxJob);
-
-  QFileInfo info{d->config->m_destination};
+  QFileInfo info{p_func()->config->m_destination};
   return info.dir().path();
 }
 
 void
 MuxJob::saveJobInternal(Util::ConfigFile &settings)
   const {
-  Q_D(const MuxJob);
+  auto p = p_func();
 
   settings.setValue("jobType", "MuxJob");
-  settings.setValue("aborted", d->aborted);
+  settings.setValue("aborted", p->aborted);
 
   settings.beginGroup("muxConfig");
-  d->config->save(settings);
+  p->config->save(settings);
   settings.endGroup();
 }
 
@@ -218,8 +213,8 @@ MuxJob::loadMuxJob(Util::ConfigFile &settings) {
   config->load(settings);
   settings.endGroup();
 
-  auto job                                                 = std::make_shared<MuxJob>(PendingManual, config);
-  static_cast<MuxJobPrivate *>(job->d_ptr.data())->aborted = settings.value("aborted", false).toBool();
+  auto job               = std::make_shared<MuxJob>(PendingManual, config);
+  job->p_func()->aborted = settings.value("aborted", false).toBool();
   job->loadJobBasis(settings);
 
   return std::static_pointer_cast<Job>(job);
@@ -228,10 +223,10 @@ MuxJob::loadMuxJob(Util::ConfigFile &settings) {
 Merge::MuxConfig const &
 MuxJob::config()
   const {
-  Q_D(const MuxJob);
+  auto p = p_func();
 
-  Q_ASSERT(!!d->config);
-  return *d->config;
+  Q_ASSERT(!!p->config);
+  return *p->config;
 }
 
 void

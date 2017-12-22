@@ -29,9 +29,9 @@ class HeaderViewManagerPrivate {
 
 HeaderViewManager::HeaderViewManager(QObject *parent)
   : QObject{parent}
-  , d_ptr{new HeaderViewManagerPrivate}
+  , p_ptr{new HeaderViewManagerPrivate}
 {
-  d_ptr->delayedSaveState.setSingleShot(true);
+  p_func()->delayedSaveState.setSingleShot(true);
 }
 
 HeaderViewManager::~HeaderViewManager() {
@@ -40,27 +40,26 @@ HeaderViewManager::~HeaderViewManager() {
 void
 HeaderViewManager::manage(QTreeView &treeView,
                           QString const &name) {
-  Q_D(HeaderViewManager);
+  auto p      = p_func();
+  p->name     = name;
+  p->treeView = &treeView;
 
-  d->name     = name;
-  d->treeView = &treeView;
-
-  d->treeView->header()->setContextMenuPolicy(Qt::CustomContextMenu);
+  p->treeView->header()->setContextMenuPolicy(Qt::CustomContextMenu);
 
   QTimer::singleShot(0, this, SLOT(restoreState()));
 }
 
 void
 HeaderViewManager::saveState() {
-  Q_D(HeaderViewManager);
+  auto p = p_func();
 
-  if (d->preventSaving)
+  if (p->preventSaving)
     return;
 
   QStringList hiddenColumns, columnOrder, columnSizes;
   QHash<QString, int> visualIndexMap;
 
-  auto headerView = d->treeView->header();
+  auto headerView = p->treeView->header();
 
   for (auto logicalIndex = 0, columnCount = headerView->count(); logicalIndex < columnCount; ++logicalIndex) {
     auto columnName = symbolicColumnName(logicalIndex);
@@ -80,7 +79,7 @@ HeaderViewManager::saveState() {
   auto reg = Settings::registry();
 
   reg->beginGroup("headerViewManager");
-  reg->beginGroup(d->name);
+  reg->beginGroup(p->name);
 
   reg->setValue("columnOrder",   columnOrder);
   reg->setValue("columnSizes",   columnSizes);
@@ -92,12 +91,11 @@ HeaderViewManager::saveState() {
 
 void
 HeaderViewManager::restoreState() {
-  Q_D(HeaderViewManager);
-
+  auto p   = p_func();
   auto reg = Settings::registry();
 
   reg->beginGroup("headerViewManager");
-  reg->beginGroup(d->name);
+  reg->beginGroup(p->name);
 
   restoreVisualIndexes(reg->value("columnOrder").toStringList());
   restoreHidden(reg->value("hiddenColumns").toStringList());
@@ -106,21 +104,20 @@ HeaderViewManager::restoreState() {
   reg->endGroup();
   reg->endGroup();
 
-  auto headerView = d->treeView->header();
+  auto headerView = p->treeView->header();
 
   connect(headerView,           &QHeaderView::customContextMenuRequested, this, &HeaderViewManager::showContextMenu);
   connect(headerView,           &QHeaderView::sectionMoved,               this, &HeaderViewManager::saveState);
-  connect(headerView,           &QHeaderView::sectionResized,             this, [d]() { d->delayedSaveState.start(200); });
-  connect(&d->delayedSaveState, &QTimer::timeout,                         this, &HeaderViewManager::saveState);
+  connect(headerView,           &QHeaderView::sectionResized,             this, [p]() { p->delayedSaveState.start(200); });
+  connect(&p->delayedSaveState, &QTimer::timeout,                         this, &HeaderViewManager::saveState);
 
-  d->preventSaving = false;
+  p->preventSaving = false;
 }
 
 void
 HeaderViewManager::restoreHidden(QStringList const &hiddenColumns) {
-  Q_D(HeaderViewManager);
-
-  auto headerView        = d->treeView->header();
+  auto p                 = p_func();
+  auto headerView        = p->treeView->header();
   auto const columnCount = headerView->count();
 
   for (auto logicalIndex = 0; logicalIndex < columnCount; ++logicalIndex)
@@ -129,9 +126,8 @@ HeaderViewManager::restoreHidden(QStringList const &hiddenColumns) {
 
 void
 HeaderViewManager::restoreVisualIndexes(QStringList const &columnOrder) {
-  Q_D(HeaderViewManager);
-
-  auto headerView        = d->treeView->header();
+  auto p                 = p_func();
+  auto headerView        = p->treeView->header();
   auto visualIndexes     = QHash<QString, int>{};
   auto visualToLogical   = QHash<int, int>{};
   auto const columnCount = headerView->count();
@@ -169,9 +165,8 @@ HeaderViewManager::restoreVisualIndexes(QStringList const &columnOrder) {
 
 void
 HeaderViewManager::restoreSizes(QStringList const &columnSizes) {
-  Q_D(HeaderViewManager);
-
-  auto headerView  = d->treeView->header();
+  auto p           = p_func();
+  auto headerView  = p->treeView->header();
   auto columnCount = headerView->count();
 
   QHash<QString, int> sizeMap;
@@ -204,37 +199,35 @@ HeaderViewManager::create(QTreeView &treeView,
 
 void
 HeaderViewManager::toggleColumn(int column) {
-  Q_D(HeaderViewManager);
+  auto p          = p_func();
+  auto headerView = p->treeView->header();
 
-  auto headerView = d->treeView->header();
   headerView->setSectionHidden(column, !headerView->isSectionHidden(column));
 
   saveState();
 
-  resizeViewColumnsToContents(d->treeView);
+  resizeViewColumnsToContents(p->treeView);
 }
 
 void
 HeaderViewManager::resetColumns() {
-  Q_D(HeaderViewManager);
-
-  d->preventSaving = true;
+  auto p           = p_func();
+  p->preventSaving = true;
 
   restoreVisualIndexes({});
   restoreHidden({});
 
-  d->preventSaving = false;
+  p->preventSaving = false;
 
   saveState();
 
-  resizeViewColumnsToContents(d->treeView);
+  resizeViewColumnsToContents(p->treeView);
 }
 
 void
 HeaderViewManager::showContextMenu(QPoint const &pos) {
-  Q_D(HeaderViewManager);
-
-  auto headerView = d->treeView->header();
+  auto p          = p_func();
+  auto headerView = p->treeView->header();
   auto menu       = new QMenu{headerView};
   auto action     = new QAction{menu};
 
@@ -267,9 +260,7 @@ HeaderViewManager::showContextMenu(QPoint const &pos) {
 
 QString
 HeaderViewManager::symbolicColumnName(int logicalIndex) {
-  Q_D(HeaderViewManager);
-
-  return d->treeView->model()->headerData(logicalIndex, Qt::Horizontal, Util::SymbolicNameRole).toString();
+  return p_func()->treeView->model()->headerData(logicalIndex, Qt::Horizontal, Util::SymbolicNameRole).toString();
 }
 
 }}}

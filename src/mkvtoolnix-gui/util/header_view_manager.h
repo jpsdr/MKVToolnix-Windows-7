@@ -4,6 +4,8 @@
 
 #include <QObject>
 
+#include "common/qt.h"
+
 class QString;
 class QTreeView;
 
@@ -12,6 +14,13 @@ namespace mtx { namespace gui { namespace Util {
 class HeaderViewManagerPrivate;
 class HeaderViewManager : public QObject {
   Q_OBJECT;
+
+protected:
+  MTX_DECLARE_PRIVATE(HeaderViewManager);
+
+  std::unique_ptr<HeaderViewManagerPrivate> const p_ptr;
+
+  explicit HeaderViewManager(HeaderViewManagerPrivate &p);
 
 public:
   explicit HeaderViewManager(QObject *parent = nullptr);
@@ -35,10 +44,6 @@ protected:
   void restoreVisualIndexes(QStringList const &columnOrder);
   void restoreSizes(QStringList const &columnSizes);
   QString symbolicColumnName(int logicalIndex);
-
-  Q_DECLARE_PRIVATE(HeaderViewManager);
-
-  QScopedPointer<HeaderViewManagerPrivate> const d_ptr;
 };
 
 }}}

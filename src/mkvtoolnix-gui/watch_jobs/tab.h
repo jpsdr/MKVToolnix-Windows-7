@@ -4,6 +4,7 @@
 
 #include <QWidget>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 
 class QDateTime;
@@ -16,15 +17,15 @@ class Tab;
 }
 
 class TabPrivate;
-
 class Tab : public QWidget {
   Q_OBJECT;
 
-private:
-  Q_DISABLE_COPY(Tab);
-  Q_DECLARE_PRIVATE(Tab);
+protected:
+  MTX_DECLARE_PRIVATE(Tab);
 
-  QScopedPointer<TabPrivate> const d_ptr;
+  std::unique_ptr<TabPrivate> const p_ptr;
+
+  explicit Tab(TabPrivate &p);
 
 public:
   explicit Tab(QWidget *parent, bool forCurrentJob = false);

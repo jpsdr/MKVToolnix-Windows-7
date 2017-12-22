@@ -70,7 +70,7 @@ class TabPrivate {
 Tab::Tab(QWidget *parent,
          bool forCurrentJob)
   : QWidget{parent}
-  , d_ptr{new TabPrivate{this, forCurrentJob}}
+  , p_ptr{new TabPrivate{this, forCurrentJob}}
 {
   setupUi();
 }
@@ -80,12 +80,12 @@ Tab::~Tab() {
 
 void
 Tab::setupUi() {
-  Q_D(Tab);
+  auto p = p_func();
 
   // Setup UI controls.
-  d->ui->setupUi(this);
+  p->ui->setupUi(this);
 
-  d->m_saveOutputAction->setEnabled(false);
+  p->m_saveOutputAction->setEnabled(false);
 
   Util::preventScrollingWithoutFocus(this);
 
@@ -97,65 +97,64 @@ Tab::setupUi() {
 
   retranslateUi();
 
-  d->ui->acknowledgeWarningsAndErrorsButton->setIcon(QIcon{Q(":/icons/16x16/dialog-ok-apply.png")});
-  d->ui->abortButton->setIcon(QIcon{Q(":/icons/16x16/dialog-cancel.png")});
+  p->ui->acknowledgeWarningsAndErrorsButton->setIcon(QIcon{Q(":/icons/16x16/dialog-ok-apply.png")});
+  p->ui->abortButton->setIcon(QIcon{Q(":/icons/16x16/dialog-cancel.png")});
 
   auto model = MainWindow::jobTool()->model();
 
-  connect(d->ui->abortButton,                        &QPushButton::clicked,                                  this, &Tab::onAbort);
-  connect(d->ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,                                  this, &Tab::acknowledgeWarningsAndErrors);
+  connect(p->ui->abortButton,                        &QPushButton::clicked,                                  this, &Tab::onAbort);
+  connect(p->ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,                                  this, &Tab::acknowledgeWarningsAndErrors);
   connect(model,                                     &Jobs::Model::progressChanged,                          this, &Tab::onQueueProgressChanged);
   connect(model,                                     &Jobs::Model::queueStatusChanged,                       this, &Tab::updateRemainingTime);
-  connect(d->m_whenFinished,                         &QMenu::aboutToShow,                                    this, &Tab::setupWhenFinishedActions);
-  connect(d->m_moreActions,                          &QMenu::aboutToShow,                                    this, &Tab::enableMoreActionsActions);
-  connect(d->m_saveOutputAction,                     &QAction::triggered,                                    this, &Tab::onSaveOutput);
-  connect(d->m_clearOutputAction,                    &QAction::triggered,                                    this, &Tab::clearOutput);
-  connect(d->m_openFolderAction,                     &QAction::triggered,                                    this, &Tab::openFolder);
+  connect(p->m_whenFinished,                         &QMenu::aboutToShow,                                    this, &Tab::setupWhenFinishedActions);
+  connect(p->m_moreActions,                          &QMenu::aboutToShow,                                    this, &Tab::enableMoreActionsActions);
+  connect(p->m_saveOutputAction,                     &QAction::triggered,                                    this, &Tab::onSaveOutput);
+  connect(p->m_clearOutputAction,                    &QAction::triggered,                                    this, &Tab::clearOutput);
+  connect(p->m_openFolderAction,                     &QAction::triggered,                                    this, &Tab::openFolder);
   connect(MainWindow::jobTool()->model(),            &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, this, &Tab::disableButtonIfAllWarningsAndErrorsButtonAcknowledged);
 }
 
 void
 Tab::setupMoreActionsMenu() {
-  Q_D(Tab);
+  auto p = p_func();
 
-  d->ui->whenFinishedButton->setMenu(d->m_whenFinished);
+  p->ui->whenFinishedButton->setMenu(p->m_whenFinished);
 
   // Setup the "more actions" menu.
-  d->m_moreActions->addAction(d->m_openFolderAction);
-  d->m_moreActions->addSeparator();
-  d->m_moreActions->addAction(d->m_saveOutputAction);
+  p->m_moreActions->addAction(p->m_openFolderAction);
+  p->m_moreActions->addSeparator();
+  p->m_moreActions->addAction(p->m_saveOutputAction);
 
   if (isCurrentJobTab())
-    d->m_moreActions->addAction(d->m_clearOutputAction);
+    p->m_moreActions->addAction(p->m_clearOutputAction);
 
-  d->ui->moreActionsButton->setMenu(d->m_moreActions);
+  p->ui->moreActionsButton->setMenu(p->m_moreActions);
 
-  d->m_openFolderAction->setIcon(QIcon{Q(":/icons/16x16/document-open-folder.png")});
-  d->m_saveOutputAction->setIcon(QIcon{Q(":/icons/16x16/document-save.png")});
+  p->m_openFolderAction->setIcon(QIcon{Q(":/icons/16x16/document-open-folder.png")});
+  p->m_saveOutputAction->setIcon(QIcon{Q(":/icons/16x16/document-save.png")});
 }
 
 void
 Tab::retranslateUi() {
-  Q_D(Tab);
+  auto p = p_func();
 
-  d->ui->retranslateUi(this);
+  p->ui->retranslateUi(this);
 
-  d->ui->description->setText(d->m_currentJobDescription.isEmpty() ? QY("No job has been started yet.") : d->m_currentJobDescription);
-  d->m_saveOutputAction->setText(QY("&Save output"));
-  d->m_clearOutputAction->setText(QY("&Clear output and reset progress"));
-  d->m_openFolderAction->setText(QY("&Open folder"));
+  p->ui->description->setText(p->m_currentJobDescription.isEmpty() ? QY("No job has been started yet.") : p->m_currentJobDescription);
+  p->m_saveOutputAction->setText(QY("&Save output"));
+  p->m_clearOutputAction->setText(QY("&Clear output and reset progress"));
+  p->m_openFolderAction->setText(QY("&Open folder"));
 
-  d->ui->output->setPlaceholderText(QY("No output yet"));
-  d->ui->warnings->setPlaceholderText(QY("No warnings yet"));
-  d->ui->errors->setPlaceholderText(QY("No errors yet"));
+  p->ui->output->setPlaceholderText(QY("No output yet"));
+  p->ui->warnings->setPlaceholderText(QY("No warnings yet"));
+  p->ui->errors->setPlaceholderText(QY("No errors yet"));
 }
 
 void
 Tab::connectToJob(Jobs::Job const &job) {
-  Q_D(Tab);
-
-  d->m_currentlyConnectedJob = &job;
-  d->m_id                    = job.id();
+  auto p                     = p_func();
+  p->m_currentlyConnectedJob = &job;
+  p->m_id                    = job.id();
   auto connType              = static_cast<Qt::ConnectionType>(Qt::AutoConnection | Qt::UniqueConnection);
 
   connect(&job, &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged,      connType);
@@ -165,11 +164,11 @@ Tab::connectToJob(Jobs::Job const &job) {
 
 void
 Tab::disconnectFromJob(Jobs::Job const &job) {
-  Q_D(Tab);
+  auto p = p_func();
 
-  if (d->m_currentlyConnectedJob == &job) {
-    d->m_currentlyConnectedJob = nullptr;
-    d->m_id                    = std::numeric_limits<uint64_t>::max();
+  if (p->m_currentlyConnectedJob == &job) {
+    p->m_currentlyConnectedJob = nullptr;
+    p->m_id                    = std::numeric_limits<uint64_t>::max();
   }
 
   disconnect(&job, &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged);
@@ -180,16 +179,14 @@ Tab::disconnectFromJob(Jobs::Job const &job) {
 uint64_t
 Tab::queueProgress()
   const {
-  Q_D(const Tab);
-
-  return d->m_queueProgress;
+  return p_func()->m_queueProgress;
 }
 
 void
 Tab::onAbort() {
-  Q_D(Tab);
+  auto p = p_func();
 
-  if (std::numeric_limits<uint64_t>::max() == d->m_id)
+  if (std::numeric_limits<uint64_t>::max() == p->m_id)
     return;
 
   if (   Util::Settings::get().m_warnBeforeAbortingJobs
@@ -201,38 +198,38 @@ Tab::onAbort() {
             .exec() == QMessageBox::No))
     return;
 
-  MainWindow::jobTool()->model()->withJob(d->m_id, [](Jobs::Job &job) { job.abort(); });
+  MainWindow::jobTool()->model()->withJob(p->m_id, [](Jobs::Job &job) { job.abort(); });
 }
 
 void
 Tab::onStatusChanged(uint64_t id,
                      mtx::gui::Jobs::Job::Status,
                      mtx::gui::Jobs::Job::Status newStatus) {
-  Q_D(Tab);
+  auto p = p_func();
 
-  if (QObject::sender() != d->m_currentlyConnectedJob)
+  if (QObject::sender() != p->m_currentlyConnectedJob)
     return;
 
   auto job = MainWindow::jobTool()->model()->fromId(id);
   if (!job) {
-    d->ui->abortButton->setEnabled(false);
-    d->m_saveOutputAction->setEnabled(false);
+    p->ui->abortButton->setEnabled(false);
+    p->m_saveOutputAction->setEnabled(false);
     MainWindow::watchJobTool()->enableMenuActions();
 
-    d->m_id                 = std::numeric_limits<uint64_t>::max();
-    d->m_currentJobProgress = 0;
-    d->m_currentJobProgress = Jobs::Job::Aborted;
+    p->m_id                 = std::numeric_limits<uint64_t>::max();
+    p->m_currentJobProgress = 0;
+    p->m_currentJobProgress = Jobs::Job::Aborted;
     updateRemainingTime();
 
     return;
   }
 
-  job->action([this, d, job, newStatus]() {
-    d->m_currentJobStatus = job->status();
+  job->action([this, p, job, newStatus]() {
+    p->m_currentJobStatus = job->status();
 
-    d->ui->abortButton->setEnabled(Jobs::Job::Running == d->m_currentJobStatus);
-    d->m_saveOutputAction->setEnabled(true);
-    d->ui->status->setText(Jobs::Job::displayableStatus(d->m_currentJobStatus));
+    p->ui->abortButton->setEnabled(Jobs::Job::Running == p->m_currentJobStatus);
+    p->m_saveOutputAction->setEnabled(true);
+    p->ui->status->setText(Jobs::Job::displayableStatus(p->m_currentJobStatus));
     MainWindow::watchJobTool()->enableMenuActions();
 
     // Check for the signalled status, not the current one, in order to
@@ -241,8 +238,8 @@ Tab::onStatusChanged(uint64_t id,
     if (Jobs::Job::Running == newStatus)
       setInitialDisplay(*job);
 
-    else if (mtx::included_in(d->m_currentJobStatus, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
-      d->ui->finishedAt->setText(Util::displayableDate(job->dateFinished()));
+    else if (mtx::included_in(p->m_currentJobStatus, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
+      p->ui->finishedAt->setText(Util::displayableDate(job->dateFinished()));
   });
 
   updateRemainingTime();
@@ -268,117 +265,114 @@ Tab::updateOneRemainingTimeLabel(QLabel *label,
 
 void
 Tab::updateRemainingTime() {
-  Q_D(Tab);
+  auto p = p_func();
 
-  if ((Jobs::Job::Running != d->m_currentJobStatus) || !d->m_currentJobProgress)
-    d->ui->remainingTimeCurrentJob->setText(Q("–"));
+  if ((Jobs::Job::Running != p->m_currentJobStatus) || !p->m_currentJobProgress)
+    p->ui->remainingTimeCurrentJob->setText(Q("–"));
 
   else
-    updateOneRemainingTimeLabel(d->ui->remainingTimeCurrentJob, d->m_currentJobStartTime, d->m_currentJobProgress);
+    updateOneRemainingTimeLabel(p->ui->remainingTimeCurrentJob, p->m_currentJobStartTime, p->m_currentJobProgress);
 
   auto model = MainWindow::jobTool()->model();
   if (!model->isRunning())
-    d->ui->remainingTimeQueue->setText(Q("–"));
+    p->ui->remainingTimeQueue->setText(Q("–"));
 
   else
-    updateOneRemainingTimeLabel(d->ui->remainingTimeQueue, model->queueStartTime(), d->m_queueProgress);
+    updateOneRemainingTimeLabel(p->ui->remainingTimeQueue, model->queueStartTime(), p->m_queueProgress);
 }
 
 void
 Tab::onQueueProgressChanged(int,
                             int totalProgress) {
-  Q_D(Tab);
-
-  d->m_queueProgress = totalProgress;
+  p_func()->m_queueProgress = totalProgress;
   updateRemainingTime();
 }
 
 void
 Tab::onJobProgressChanged(uint64_t,
                           unsigned int progress) {
-  Q_D(Tab);
+  auto p = p_func();
 
-  if (QObject::sender() != d->m_currentlyConnectedJob)
+  if (QObject::sender() != p->m_currentlyConnectedJob)
     return;
 
-  d->ui->progressBar->setValue(progress);
-  d->m_currentJobProgress = progress;
+  p->ui->progressBar->setValue(progress);
+  p->m_currentJobProgress = progress;
   updateRemainingTime();
 }
 
 void
 Tab::onLineRead(QString const &line,
                 Jobs::Job::LineType type) {
-  Q_D(Tab);
+  auto p = p_func();
 
-  if ((QObject::sender() != d->m_currentlyConnectedJob) || line.isEmpty())
+  if ((QObject::sender() != p->m_currentlyConnectedJob) || line.isEmpty())
     return;
 
-  auto &storage = Jobs::Job::InfoLine    == type ? d->ui->output
-                : Jobs::Job::WarningLine == type ? d->ui->warnings
-                :                                  d->ui->errors;
+  auto &storage = Jobs::Job::InfoLine    == type ? p->ui->output
+                : Jobs::Job::WarningLine == type ? p->ui->warnings
+                :                                  p->ui->errors;
 
   auto prefix   = Jobs::Job::InfoLine    == type ? Q("")
                 : Jobs::Job::WarningLine == type ? Q("%1 ").arg(QY("Warning:"))
                 :                                  Q("%1 ").arg(QY("Error:"));
 
   if (mtx::included_in(type, Jobs::Job::WarningLine, Jobs::Job::ErrorLine)) {
-    d->ui->acknowledgeWarningsAndErrorsButton->setEnabled(true);
+    p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(true);
 
-    if (isCurrentJobTab() && Util::Settings::get().m_showOutputOfAllJobs && !d->m_currentJobLineTypeSeen[type]) {
-      d->m_currentJobLineTypeSeen[type] = true;
-      auto dateStarted                  = Util::displayableDate(d->m_currentJobStartTime);
-      auto separator                    = Jobs::Job::WarningLine == type ? QY("--- Warnings emitted by job '%1' started on %2 ---").arg(d->m_currentJobDescription).arg(dateStarted)
-                                        :                                  QY("--- Errors emitted by job '%1' started on %2 ---"  ).arg(d->m_currentJobDescription).arg(dateStarted);
+    if (isCurrentJobTab() && Util::Settings::get().m_showOutputOfAllJobs && !p->m_currentJobLineTypeSeen[type]) {
+      p->m_currentJobLineTypeSeen[type] = true;
+      auto dateStarted                  = Util::displayableDate(p->m_currentJobStartTime);
+      auto separator                    = Jobs::Job::WarningLine == type ? QY("--- Warnings emitted by job '%1' started on %2 ---").arg(p->m_currentJobDescription).arg(dateStarted)
+                                        :                                  QY("--- Errors emitted by job '%1' started on %2 ---"  ).arg(p->m_currentJobDescription).arg(dateStarted);
 
       storage->appendPlainText(separator);
     }
   }
 
-  d->m_fullOutput << Q("%1%2").arg(prefix).arg(line);
+  p->m_fullOutput << Q("%1%2").arg(prefix).arg(line);
   storage->appendPlainText(line);
 
 }
 
 void
 Tab::setInitialDisplay(Jobs::Job const &job) {
-  Q_D(Tab);
-
+  auto p                     = p_func();
   auto dateStarted           = Util::displayableDate(job.dateStarted());
-  d->m_currentJobDescription = job.description();
+  p->m_currentJobDescription = job.description();
 
   if (isCurrentJobTab() && Util::Settings::get().m_showOutputOfAllJobs) {
-    auto outputOfJobLine = QY("--- Output of job '%1' started on %2 ---").arg(d->m_currentJobDescription).arg(dateStarted);
-    d->m_fullOutput << outputOfJobLine << job.fullOutput();
+    auto outputOfJobLine = QY("--- Output of job '%1' started on %2 ---").arg(p->m_currentJobDescription).arg(dateStarted);
+    p->m_fullOutput << outputOfJobLine << job.fullOutput();
 
-    d->ui->output->appendPlainText(outputOfJobLine);
+    p->ui->output->appendPlainText(outputOfJobLine);
 
   } else {
-    d->m_fullOutput = job.fullOutput();
+    p->m_fullOutput = job.fullOutput();
 
-    d->ui->output  ->setPlainText(!job.output().isEmpty()   ? Q("%1\n").arg(job.output().join("\n"))   : Q(""));
-    d->ui->warnings->setPlainText(!job.warnings().isEmpty() ? Q("%1\n").arg(job.warnings().join("\n")) : Q(""));
-    d->ui->errors  ->setPlainText(!job.errors().isEmpty()   ? Q("%1\n").arg(job.errors().join("\n"))   : Q(""));
+    p->ui->output  ->setPlainText(!job.output().isEmpty()   ? Q("%1\n").arg(job.output().join("\n"))   : Q(""));
+    p->ui->warnings->setPlainText(!job.warnings().isEmpty() ? Q("%1\n").arg(job.warnings().join("\n")) : Q(""));
+    p->ui->errors  ->setPlainText(!job.errors().isEmpty()   ? Q("%1\n").arg(job.errors().join("\n"))   : Q(""));
   }
 
-  d->m_currentJobLineTypeSeen.clear();
+  p->m_currentJobLineTypeSeen.clear();
 
-  d->m_currentJobStatus    = job.status();
-  d->m_currentJobProgress  = job.progress();
-  d->m_currentJobStartTime = job.dateStarted();
-  d->m_queueProgress       = MainWindow::watchCurrentJobTab()->queueProgress();
+  p->m_currentJobStatus    = job.status();
+  p->m_currentJobProgress  = job.progress();
+  p->m_currentJobStartTime = job.dateStarted();
+  p->m_queueProgress       = MainWindow::watchCurrentJobTab()->queueProgress();
 
-  d->ui->description->setText(d->m_currentJobDescription);
-  d->ui->status->setText(Jobs::Job::displayableStatus(job.status()));
-  d->ui->progressBar->setValue(job.progress());
+  p->ui->description->setText(p->m_currentJobDescription);
+  p->ui->status->setText(Jobs::Job::displayableStatus(job.status()));
+  p->ui->progressBar->setValue(job.progress());
 
-  d->ui->startedAt ->setText(job.dateStarted() .isValid() ? Util::displayableDate(job.dateStarted())  : QY("Not started yet"));
-  d->ui->finishedAt->setText(job.dateFinished().isValid() ? Util::displayableDate(job.dateFinished()) : QY("Not finished yet"));
+  p->ui->startedAt ->setText(job.dateStarted() .isValid() ? Util::displayableDate(job.dateStarted())  : QY("Not started yet"));
+  p->ui->finishedAt->setText(job.dateFinished().isValid() ? Util::displayableDate(job.dateFinished()) : QY("Not finished yet"));
 
-  d->ui->abortButton->setEnabled(Jobs::Job::Running == job.status());
-  d->m_saveOutputAction->setEnabled(!mtx::included_in(job.status(), Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
+  p->ui->abortButton->setEnabled(Jobs::Job::Running == job.status());
+  p->m_saveOutputAction->setEnabled(!mtx::included_in(job.status(), Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
 
-  d->ui->acknowledgeWarningsAndErrorsButton->setEnabled(job.numUnacknowledgedWarnings() || job.numUnacknowledgedErrors());
+  p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(job.numUnacknowledgedWarnings() || job.numUnacknowledgedErrors());
 
   updateRemainingTime();
 }
@@ -386,16 +380,15 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
 void
 Tab::disableButtonIfAllWarningsAndErrorsButtonAcknowledged(int numWarnings,
                                                            int numErrors) {
-  Q_D(Tab);
+  auto p = p_func();
 
   if (!numWarnings && !numErrors)
-    d->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
+    p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
 }
 
 void
 Tab::onSaveOutput() {
-  Q_D(Tab);
-
+  auto p        = p_func();
   auto &cfg     = Util::Settings::get();
   auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"));
 
@@ -404,7 +397,7 @@ Tab::onSaveOutput() {
 
   QFile out{fileName};
   if (out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-    out.write(Q("%1\n").arg(d->m_fullOutput.join(Q("\n"))).toUtf8());
+    out.write(Q("%1\n").arg(p->m_fullOutput.join(Q("\n"))).toUtf8());
     out.close();
   }
 
@@ -415,92 +408,84 @@ Tab::onSaveOutput() {
 uint64_t
 Tab::id()
   const {
-  Q_D(const Tab);
-
-  return d->m_id;
+  return p_func()->m_id;
 }
 
 bool
 Tab::isSaveOutputEnabled()
   const {
-  Q_D(const Tab);
-
-  return d->m_saveOutputAction->isEnabled();
+  return p_func()->m_saveOutputAction->isEnabled();
 }
 
 bool
 Tab::isCurrentJobTab()
   const {
-  Q_D(const Tab);
-
-  return d->m_forCurrentJob;
+  return p_func()->m_forCurrentJob;
 }
 
 void
 Tab::acknowledgeWarningsAndErrors() {
-  Q_D(Tab);
+  auto p = p_func();
 
-  MainWindow::jobTool()->acknowledgeWarningsAndErrors(d->m_id);
-  d->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
+  MainWindow::jobTool()->acknowledgeWarningsAndErrors(p->m_id);
+  p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
 }
 
 void
 Tab::clearOutput() {
-  Q_D(Tab);
+  auto p = p_func();
 
-  d->ui->output->clear();
-  d->ui->warnings->clear();
-  d->ui->errors->clear();
+  p->ui->output->clear();
+  p->ui->warnings->clear();
+  p->ui->errors->clear();
 
   if (MainWindow::jobTool()->model()->isRunning())
     return;
 
-  d->m_currentJobDescription.clear();
+  p->m_currentJobDescription.clear();
 
-  d->ui->progressBar->reset();
-  d->ui->status->setText(QY("No job started yet"));
-  d->ui->description->setText(QY("No job has been started yet."));
-  d->ui->startedAt->setText(QY("Not started yet"));
-  d->ui->finishedAt->setText(QY("Not finished yet"));
-  d->ui->remainingTimeCurrentJob->setText(Q("–"));
-  d->ui->remainingTimeQueue->setText(Q("–"));
+  p->ui->progressBar->reset();
+  p->ui->status->setText(QY("No job started yet"));
+  p->ui->description->setText(QY("No job has been started yet."));
+  p->ui->startedAt->setText(QY("Not started yet"));
+  p->ui->finishedAt->setText(QY("Not finished yet"));
+  p->ui->remainingTimeCurrentJob->setText(Q("–"));
+  p->ui->remainingTimeQueue->setText(Q("–"));
 
   emit watchCurrentJobTabCleared();
 }
 
 void
 Tab::openFolder() {
-  Q_D(Tab);
-
-  MainWindow::jobTool()->model()->withJob(d->m_id, [](Jobs::Job &job) { job.openOutputFolder(); });
+  MainWindow::jobTool()->model()->withJob(p_func()->m_id, [](Jobs::Job &job) { job.openOutputFolder(); });
 }
 
 void
 Tab::enableMoreActionsActions() {
-  Q_D(Tab);
+  auto p      = p_func();
+  auto hasJob = std::numeric_limits<uint64_t>::max() != p->m_id;
 
-  auto hasJob = std::numeric_limits<uint64_t>::max() != d->m_id;
-  d->m_openFolderAction->setEnabled(hasJob);
+  p->m_openFolderAction->setEnabled(hasJob);
 }
 
 void
 Tab::setupWhenFinishedActions() {
-  Q_D(Tab);
+  auto p = p_func();
 
-  d->m_whenFinished->clear();
+  p->m_whenFinished->clear();
 
   auto afterCurrentJobMenu                = new QMenu{QY("Execute action after next &job completion")};
   auto afterJobQueueMenu                  = new QMenu{QY("Execute action when the &queue completes")};
-  auto editRunProgramConfigurationsAction = new QAction{d->m_whenFinished};
+  auto editRunProgramConfigurationsAction = new QAction{p->m_whenFinished};
   auto menus                              = QVector<QMenu *>{} << afterCurrentJobMenu << afterJobQueueMenu;
   auto &programRunner                     = App::programRunner();
 
   editRunProgramConfigurationsAction->setText(QY("&Edit available actions to execute"));
 
-  d->m_whenFinished->addMenu(afterCurrentJobMenu);
-  d->m_whenFinished->addMenu(afterJobQueueMenu);
-  d->m_whenFinished->addSeparator();
-  d->m_whenFinished->addAction(editRunProgramConfigurationsAction);
+  p->m_whenFinished->addMenu(afterCurrentJobMenu);
+  p->m_whenFinished->addMenu(afterJobQueueMenu);
+  p->m_whenFinished->addSeparator();
+  p->m_whenFinished->addAction(editRunProgramConfigurationsAction);
 
   connect(editRunProgramConfigurationsAction, &QAction::triggered, MainWindow::get(), &MainWindow::editRunProgramConfigurations);
 

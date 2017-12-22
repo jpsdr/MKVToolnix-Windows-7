@@ -4,6 +4,8 @@
 
 #include <QObject>
 
+#include "common/qt.h"
+
 namespace mtx { namespace gui { namespace Util {
 
 class MediaPlayerPrivate;
@@ -11,11 +13,11 @@ class MediaPlayer : public QObject {
   Q_OBJECT;
 
 protected:
-  Q_DECLARE_PRIVATE(MediaPlayer);
+  MTX_DECLARE_PRIVATE(MediaPlayer);
 
-  QScopedPointer<MediaPlayerPrivate> const d_ptr;
+  std::unique_ptr<MediaPlayerPrivate> const p_ptr;
 
-  explicit MediaPlayer(MediaPlayerPrivate &d);
+  explicit MediaPlayer(MediaPlayerPrivate &p);
 
 public:
   MediaPlayer();

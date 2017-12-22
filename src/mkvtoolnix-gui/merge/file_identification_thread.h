@@ -19,17 +19,17 @@ class FileIdentificationWorkerPrivate;
 class FileIdentificationWorker : public QObject {
   Q_OBJECT;
 
+protected:
+  MTX_DECLARE_PRIVATE(FileIdentificationWorker);
+
+  std::unique_ptr<FileIdentificationWorkerPrivate> const p_ptr;
+
+  explicit FileIdentificationWorker(FileIdentificationWorkerPrivate &p);
+
   enum class Result {
     Wait,
     Continue,
   };
-
-protected:
-  Q_DECLARE_PRIVATE(FileIdentificationWorker);
-
-  QScopedPointer<FileIdentificationWorkerPrivate> const d_ptr;
-
-  explicit FileIdentificationWorker(FileIdentificationWorkerPrivate &d);
 
 public:
   FileIdentificationWorker(QObject *parent = nullptr);
@@ -78,7 +78,7 @@ class FileIdentificationThread : public QThread {
   Q_OBJECT;
 
 protected:
-  QScopedPointer<FileIdentificationWorker> m_worker;
+  std::unique_ptr<FileIdentificationWorker> m_worker;
 
 public:
   FileIdentificationThread(QObject *parent = nullptr);

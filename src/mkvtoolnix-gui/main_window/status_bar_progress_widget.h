@@ -4,6 +4,8 @@
 
 #include <QWidget>
 
+#include "common/qt.h"
+
 class QMouseEvent;
 
 namespace mtx { namespace gui {
@@ -17,9 +19,11 @@ class StatusBarProgressWidget : public QWidget {
   Q_OBJECT;
 
 protected:
-  Q_DECLARE_PRIVATE(StatusBarProgressWidget);
+  MTX_DECLARE_PRIVATE(StatusBarProgressWidget);
 
-  QScopedPointer<StatusBarProgressWidgetPrivate> const d_ptr;
+  std::unique_ptr<StatusBarProgressWidgetPrivate> const p_ptr;
+
+  explicit StatusBarProgressWidget(StatusBarProgressWidgetPrivate &p);
 
 public:
   explicit StatusBarProgressWidget(QWidget *parent = nullptr);

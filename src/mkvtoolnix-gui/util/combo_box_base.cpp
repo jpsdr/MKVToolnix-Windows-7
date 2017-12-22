@@ -13,14 +13,14 @@ ComboBoxBasePrivate::~ComboBoxBasePrivate() {
 
 ComboBoxBase::ComboBoxBase(QWidget *parent)
   : QComboBox{parent}
-  , d_ptr{new ComboBoxBasePrivate}
+  , p_ptr{new ComboBoxBasePrivate}
 {
 }
 
-ComboBoxBase::ComboBoxBase(ComboBoxBasePrivate &d,
+ComboBoxBase::ComboBoxBase(ComboBoxBasePrivate &p,
                            QWidget *parent)
   : QComboBox{parent}
-  , d_ptr{&d}
+  , p_ptr{&p}
 {
 }
 
@@ -30,10 +30,9 @@ ComboBoxBase::~ComboBoxBase() {
 ComboBoxBase &
 ComboBoxBase::setup(bool withEmpty,
                     QString const &emptyTitle) {
-  Q_D(ComboBoxBase);
-
-  d->m_withEmpty  = withEmpty;
-  d->m_emptyTitle = emptyTitle;
+  auto p          = p_func();
+  p->m_withEmpty  = withEmpty;
+  p->m_emptyTitle = emptyTitle;
 
   return *this;
 }
@@ -64,12 +63,12 @@ ComboBoxBase::setAdditionalItems(QString const &item) {
 
 ComboBoxBase &
 ComboBoxBase::setAdditionalItems(QStringList const &items) {
-  Q_D(ComboBoxBase);
+  auto p = p_func();
 
-  d->m_additionalItems.clear();
+  p->m_additionalItems.clear();
   for (auto const &item : items)
     if (!item.isEmpty())
-      d->m_additionalItems << item;
+      p->m_additionalItems << item;
 
   return *this;
 }
@@ -77,28 +76,27 @@ ComboBoxBase::setAdditionalItems(QStringList const &items) {
 QStringList const &
 ComboBoxBase::additionalItems()
   const {
-  Q_D(const ComboBoxBase);
+  auto p = p_func();
 
-  return d->m_additionalItems;
+  return p->m_additionalItems;
 }
 
 void
 ComboBoxBase::reInitialize() {
-  Q_D(ComboBoxBase);
-
+  auto p                  = p_func();
   auto previousBlocked    = blockSignals(true);
   auto data               = currentData();
   auto firstText          = itemText(0);
   auto firstData          = itemData(0);
   auto additionalModified = false;
 
-  if (data.isValid() && !d->m_additionalItems.contains(data.toString())) {
-    d->m_additionalItems << data.toString();
+  if (data.isValid() && !p->m_additionalItems.contains(data.toString())) {
+    p->m_additionalItems << data.toString();
     additionalModified = true;
   }
 
   clear();
-  setup(d->m_withEmpty, d->m_emptyTitle);
+  setup(p->m_withEmpty, p->m_emptyTitle);
 
   if (!firstData.isValid())
     insertItem(0, firstText, firstData);
@@ -109,7 +107,7 @@ ComboBoxBase::reInitialize() {
     setCurrentByData(data.toString());
 
   if (additionalModified)
-    d->m_additionalItems.removeLast();
+    p->m_additionalItems.removeLast();
 
   blockSignals(previousBlocked);
 }

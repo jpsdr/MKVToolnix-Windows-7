@@ -40,14 +40,13 @@ using namespace mtx::gui;
 
 FileIdentificationWorker::FileIdentificationWorker(QObject *parent)
   : QObject{parent}
-  , d_ptr{new FileIdentificationWorkerPrivate{}}
+  , p_ptr{new FileIdentificationWorkerPrivate{}}
 {
-  Q_D(FileIdentificationWorker);
-
-  d->m_simpleChaptersRE = boost::regex{"^CHAPTER\\d{2}=.*CHAPTER\\d{2}NAME=",   boost::regex::perl | boost::regex::mod_s};
-  d->m_xmlChaptersRE    = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Chapters>", boost::regex::perl | boost::regex::mod_s};
-  d->m_xmlSegmentInfoRE = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Info>",     boost::regex::perl | boost::regex::mod_s};
-  d->m_xmlTagsRE        = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Tags>",     boost::regex::perl | boost::regex::mod_s};
+  auto p                = p_func();
+  p->m_simpleChaptersRE = boost::regex{"^CHAPTER\\d{2}=.*CHAPTER\\d{2}NAME=",   boost::regex::perl | boost::regex::mod_s};
+  p->m_xmlChaptersRE    = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Chapters>", boost::regex::perl | boost::regex::mod_s};
+  p->m_xmlSegmentInfoRE = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Info>",     boost::regex::perl | boost::regex::mod_s};
+  p->m_xmlTagsRE        = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Tags>",     boost::regex::perl | boost::regex::mod_s};
 }
 
 FileIdentificationWorker::~FileIdentificationWorker() {
@@ -57,13 +56,13 @@ void
 FileIdentificationWorker::addFilesToIdentify(QStringList const &fileNames,
                                              bool append,
                                              QModelIndex const &sourceFileIdx) {
-  Q_D(FileIdentificationWorker);
+  auto p = p_func();
 
   qDebug() << "FileIdentificationWorker::addFilesToIdentify: adding" << fileNames;
 
-  QMutexLocker lock{&d->m_mutex};
+  QMutexLocker lock{&p->m_mutex};
 
-  d->m_toIdentify.push_back({ fileNames, append, sourceFileIdx });
+  p->m_toIdentify.push_back({ fileNames, append, sourceFileIdx });
 
   QTimer::singleShot(0, this, SLOT(identifyFiles()));
 }
@@ -71,24 +70,22 @@ FileIdentificationWorker::addFilesToIdentify(QStringList const &fileNames,
 
 void
 FileIdentificationWorker::abortPlaylistScan() {
-  Q_D(FileIdentificationWorker);
-
   qDebug() << "FileIdentificationWorker::abortPlaylistScan: setting flag";
 
-  d->m_abortPlaylistScan = true;
+  p_func()->m_abortPlaylistScan = true;
 }
 
 void
 FileIdentificationWorker::addIdentifiedFile(SourceFilePtr const &identifiedFile) {
-  Q_D(FileIdentificationWorker);
+  auto p = p_func();
 
-  QMutexLocker lock{&d->m_mutex};
-  d->m_toIdentify.first().m_identifiedFiles << identifiedFile;
+  QMutexLocker lock{&p->m_mutex};
+  p->m_toIdentify.first().m_identifiedFiles << identifiedFile;
 }
 
 void
 FileIdentificationWorker::identifyFiles() {
-  Q_D(FileIdentificationWorker);
+  auto p = p_func();
 
   qDebug() << "FileIdentificationWorker::identifyFiles: starting loop";
 
@@ -98,8 +95,8 @@ FileIdentificationWorker::identifyFiles() {
     QString fileName;
 
     {
-      QMutexLocker lock{&d->m_mutex};
-      if (d->m_toIdentify.isEmpty()) {
+      QMutexLocker lock{&p->m_mutex};
+      if (p->m_toIdentify.isEmpty()) {
         qDebug() << "FileIdentificationWorker::identifyFiles: exiting loop (nothing left to do)";
 
         emit queueFinished();
@@ -107,13 +104,13 @@ FileIdentificationWorker::identifyFiles() {
         return;
       }
 
-      auto &pack = d->m_toIdentify.first();
+      auto &pack = p->m_toIdentify.first();
 
       if (pack.m_fileNames.isEmpty()) {
         qDebug() << "FileIdentificationWorker::identifyFiles: pack finished, notifying";
 
         emit filesIdentified(pack.m_identifiedFiles, pack.m_append, pack.m_sourceFileIdx);
-        d->m_toIdentify.removeFirst();
+        p->m_toIdentify.removeFirst();
 
         continue;
       }
@@ -132,7 +129,7 @@ FileIdentificationWorker::identifyFiles() {
 
 bool
 FileIdentificationWorker::handleFileThatShouldBeSelectedElsewhere(QString const &fileName) {
-  Q_D(FileIdentificationWorker);
+  auto p = p_func();
 
   QFile file{fileName};
   if (!file.open(QIODevice::ReadOnly))
@@ -140,13 +137,13 @@ FileIdentificationWorker::handleFileThatShouldBeSelectedElsewhere(QString const 
 
   auto content = std::string{ file.read(1024).data() };
 
-  if (boost::regex_search(content, d->m_simpleChaptersRE) || boost::regex_search(content, d->m_xmlChaptersRE))
+  if (boost::regex_search(content, p->m_simpleChaptersRE) || boost::regex_search(content, p->m_xmlChaptersRE))
     emit identifiedAsXmlOrSimpleChapters(fileName);
 
-  else if (boost::regex_search(content, d->m_xmlSegmentInfoRE))
+  else if (boost::regex_search(content, p->m_xmlSegmentInfoRE))
     emit identifiedAsXmlSegmentInfo(fileName);
 
-  else if (boost::regex_search(content, d->m_xmlTagsRE))
+  else if (boost::regex_search(content, p->m_xmlTagsRE))
     emit identifiedAsXmlTags(fileName);
 
   else
@@ -200,8 +197,7 @@ FileIdentificationWorker::continueByScanningPlaylists(QFileInfoList const &files
 
 FileIdentificationWorker::Result
 FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
-  Q_D(FileIdentificationWorker);
-
+  auto p        = p_func();
   auto numFiles = files.count();
 
   if (!numFiles)
@@ -210,7 +206,7 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
   qDebug() << "FileIdentificationWorker::scanPlaylists: starting playlist scan, num files:" << numFiles;
   qDebug() << "FileIdentificationWorker::scanPlaylists: TID" << QThread::currentThreadId();
 
-  d->m_abortPlaylistScan = false;
+  p->m_abortPlaylistScan = false;
 
   emit playlistScanStarted(numFiles);
 
@@ -223,7 +219,7 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
     else
       qDebug() << "the error of my ways" << identifier.errorTitle() << identifier.errorText();
 
-    if (d->m_abortPlaylistScan) {
+    if (p->m_abortPlaylistScan) {
       qDebug() << "FileIdentificationWorker::scanPlaylists: scan aborted";
 
       emit playlistScanFinished();

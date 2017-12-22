@@ -24,31 +24,30 @@ SelectCharacterSetDialog::SelectCharacterSetDialog(QWidget *parent,
                                                    QString const &initialCharacterSet,
                                                    QStringList const &additionalCharacterSets)
   : QDialog{parent, Qt::Dialog | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
-  , d_ptr{new SelectCharacterSetDialogPrivate}
+  , p_ptr{new SelectCharacterSetDialogPrivate}
 {
-  Q_D(SelectCharacterSetDialog);
-
+  auto p                    = p_func();
   auto characterSetToSelect = initialCharacterSet.isEmpty() ? Q(g_cc_local_utf8->get_charset()) : initialCharacterSet;
 
   QFile file{fileName};
   if (file.open(QIODevice::ReadOnly))
-    d->m_content = file.readAll();
+    p->m_content = file.readAll();
 
-  d->m_ui->setupUi(this);
+  p->m_ui->setupUi(this);
 
-  d->m_ui->fileName->setText(fileName);
+  p->m_ui->fileName->setText(fileName);
 
   auto characterSets = additionalCharacterSets;
   characterSets << characterSetToSelect;
 
-  d->m_ui->characterSet->setAdditionalItems(characterSets).setup().setCurrentByData(characterSetToSelect);
+  p->m_ui->characterSet->setAdditionalItems(characterSets).setup().setCurrentByData(characterSetToSelect);
 
-  d->m_ui->content->setPlaceholderText(QY("File not found"));
+  p->m_ui->content->setPlaceholderText(QY("File not found"));
 
   connect(MainWindow::get(),     &MainWindow::preferencesChanged,                                        this, &SelectCharacterSetDialog::retranslateUi);
-  connect(d->m_ui->characterSet, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SelectCharacterSetDialog::updatePreview);
-  connect(d->m_ui->buttonBox,    &QDialogButtonBox::accepted,                                            this, &SelectCharacterSetDialog::accept);
-  connect(d->m_ui->buttonBox,    &QDialogButtonBox::rejected,                                            this, &SelectCharacterSetDialog::reject);
+  connect(p->m_ui->characterSet, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SelectCharacterSetDialog::updatePreview);
+  connect(p->m_ui->buttonBox,    &QDialogButtonBox::accepted,                                            this, &SelectCharacterSetDialog::accept);
+  connect(p->m_ui->buttonBox,    &QDialogButtonBox::rejected,                                            this, &SelectCharacterSetDialog::reject);
   connect(this,                  &SelectCharacterSetDialog::accepted,                                    this, &SelectCharacterSetDialog::emitResult);
   connect(this,                  &SelectCharacterSetDialog::finished,                                    this, &SelectCharacterSetDialog::deleteLater);
 
@@ -63,21 +62,21 @@ SelectCharacterSetDialog::~SelectCharacterSetDialog() {
 
 void
 SelectCharacterSetDialog::retranslateUi() {
-  Q_D(SelectCharacterSetDialog);
+  auto p = p_func();
 
-  d->m_ui->retranslateUi(this);
+  p->m_ui->retranslateUi(this);
 }
 
 void
 SelectCharacterSetDialog::updatePreview() {
-  Q_D(SelectCharacterSetDialog);
+  auto p = p_func();
 
-  if (d->m_content.isEmpty())
+  if (p->m_content.isEmpty())
     return;
 
   auto converter = charset_converter_c::init(to_utf8(selectedCharacterSet()));
   if (converter)
-    d->m_ui->content->setPlainText(Q(converter->utf8(d->m_content.data())));
+    p->m_ui->content->setPlainText(Q(converter->utf8(p->m_content.data())));
 }
 
 void
@@ -88,24 +87,18 @@ SelectCharacterSetDialog::emitResult() {
 QString
 SelectCharacterSetDialog::selectedCharacterSet()
   const {
-  Q_D(const SelectCharacterSetDialog);
-
-  return d->m_ui->characterSet->currentData().toString();
+  return p_func()->m_ui->characterSet->currentData().toString();
 }
 
 void
 SelectCharacterSetDialog::setUserData(QVariant const &data) {
-  Q_D(SelectCharacterSetDialog);
-
-  d->m_userData = data;
+  p_func()->m_userData = data;
 }
 
 QVariant const &
 SelectCharacterSetDialog::userData()
   const {
-  Q_D(const SelectCharacterSetDialog);
-
-  return d->m_userData;
+  return p_func()->m_userData;
 }
 
 }}

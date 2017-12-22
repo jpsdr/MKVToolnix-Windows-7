@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <QModelIndex>
 
+#include "common/qt.h"
 #include "common/qt_kax_analyzer.h"
 #include "common/timestamp.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
@@ -55,9 +56,9 @@ protected:
   using LoadResult       = std::pair<ChaptersPtr, bool>;
 
 protected:
-  Q_DECLARE_PRIVATE(Tab);
+  MTX_DECLARE_PRIVATE(Tab);
 
-  QScopedPointer<TabPrivate> const d_ptr;
+  std::unique_ptr<TabPrivate> const p_ptr;
 
   explicit Tab(QWidget *parent, TabPrivate &d);
 

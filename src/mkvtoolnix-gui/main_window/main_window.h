@@ -4,6 +4,7 @@
 
 #include <QMainWindow>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/update_checker.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
@@ -44,11 +45,9 @@ class MainWindow : public QMainWindow {
   Q_OBJECT;
 
 protected:
-  Q_DECLARE_PRIVATE(MainWindow);
+  MTX_DECLARE_PRIVATE(MainWindow);
 
-  QScopedPointer<MainWindowPrivate> const d_ptr;
-
-  explicit MainWindow(MainWindowPrivate &d, QWidget *parent);
+  std::unique_ptr<MainWindowPrivate> const p_ptr;
 
 public:
   explicit MainWindow(QWidget *parent = nullptr);

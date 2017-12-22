@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QStringList>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/gui_cli_parser.h"
 
 class QLocalServer;
@@ -32,9 +33,14 @@ class App : public QApplication {
   Q_OBJECT;
 
 protected:
-  Q_DECLARE_PRIVATE(App);
+  MTX_DECLARE_PRIVATE(App);
 
-  QScopedPointer<AppPrivate> const d_ptr;
+  std::unique_ptr<AppPrivate> const p_ptr;
+
+  explicit App(AppPrivate &p);
+
+
+protected:
 
   explicit App(AppPrivate &d, QWidget *parent);
 

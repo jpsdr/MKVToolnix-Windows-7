@@ -21,7 +21,7 @@ public:
 
 MediaPlayer::MediaPlayer()
   : QObject{}
-  , d_ptr{new MediaPlayerPrivate}
+  , p_ptr{new MediaPlayerPrivate}
 {
 }
 
@@ -31,29 +31,27 @@ MediaPlayer::~MediaPlayer() {
 bool
 MediaPlayer::isPlaying()
   const {
-  Q_D(const MediaPlayer);
-
-  return d->player->state() == QMediaPlayer::PlayingState;
+  return p_func()->player->state() == QMediaPlayer::PlayingState;
 }
 
 void
 MediaPlayer::playFile(QString const &fileName,
                       unsigned int volume) {
-  Q_D(MediaPlayer);
+  auto p = p_func();
 
   stopPlayback();
 
-  d->player->setVolume(volume);
-  d->player->setMedia(QUrl::fromLocalFile(fileName));
-  d->player->play();
+  p->player->setVolume(volume);
+  p->player->setMedia(QUrl::fromLocalFile(fileName));
+  p->player->play();
 }
 
 void
 MediaPlayer::stopPlayback() {
-  Q_D(MediaPlayer);
+  auto p = p_func();
 
-  d->player->stop();
-  d->player->setMedia({});
+  p->player->stop();
+  p->player->setMedia({});
 }
 
 }}}

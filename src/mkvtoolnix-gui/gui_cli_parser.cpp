@@ -25,7 +25,7 @@ class GuiCliParserPrivate {
 
 GuiCliParser::GuiCliParser(std::vector<std::string> const &args)
   : mtx::cli::parser_c{args}
-  , d_ptr{new GuiCliParserPrivate}
+  , p_ptr{new GuiCliParserPrivate}
 {
 }
 
@@ -78,43 +78,38 @@ GuiCliParser::raiseAndActivate() {
 
 void
 GuiCliParser::handleFileNameArg() {
-  Q_D(GuiCliParser);
-
+  auto p   = p_func();
   auto arg = QDir::toNativeSeparators(QFileInfo{Q(m_current_arg)}.absoluteFilePath());
 
   if (arg.endsWith(Q(".mtxcfg")))
-    d->configFiles << arg;
+    p->configFiles << arg;
 
   else
-    *d->toProcess << arg;
+    *p->toProcess << arg;
 }
 
 void
 GuiCliParser::setChaptersMode() {
-  Q_D(GuiCliParser);
-
-  d->toProcess = &d->editChapters;
+  auto p       = p_func();
+  p->toProcess = &p->editChapters;
 }
 
 void
 GuiCliParser::setHeadersMode() {
-  Q_D(GuiCliParser);
-
-  d->toProcess = &d->editHeaders;
+  auto         p = p_func();
+  p->toProcess = &p->editHeaders;
 }
 
 void
 GuiCliParser::setMergeMode() {
-  Q_D(GuiCliParser);
-
-  d->toProcess = &d->addToMerge;
+  auto         p = p_func();
+  p->toProcess = &p->addToMerge;
 }
 
 void
 GuiCliParser::run() {
-  Q_D(GuiCliParser);
-
-  d->toProcess         = &d->addToMerge;
+  auto p               = p_func();
+  p->toProcess         = &p->addToMerge;
   m_no_common_cli_args = true;
 
   initParser();
@@ -123,40 +118,39 @@ GuiCliParser::run() {
 
 void
 GuiCliParser::displayHelp() {
-  Q_D(GuiCliParser);
+  auto p = p_func();
 
   mxinfo(boost::format("%1%\n") % mtx::cli::g_usage_text);
-  d->exitAfterParsing = true;
+  p->exitAfterParsing = true;
 }
 
 void
 GuiCliParser::displayVersion() {
-  Q_D(GuiCliParser);
+  auto p = p_func();
 
   mxinfo(boost::format("%1%\n") % mtx::cli::g_version_info);
-  d->exitAfterParsing = true;
+  p->exitAfterParsing = true;
 }
 
 bool
 GuiCliParser::exitAfterParsing()
   const {
-  Q_D(const GuiCliParser);
+  auto p = p_func();
 
-  return d->exitAfterParsing;
+  return p->exitAfterParsing;
 }
 
 QStringList
 GuiCliParser::rebuildCommandLine()
   const {
-  Q_D(const GuiCliParser);
+  auto p    = p_func();
+  auto args = QStringList{} << p->configFiles << p->addToMerge;
 
-  auto args = QStringList{} << d->configFiles << d->addToMerge;
+  if (!p->editChapters.isEmpty())
+    args << Q("--edit-chapters") << p->editChapters;
 
-  if (!d->editChapters.isEmpty())
-    args << Q("--edit-chapters") << d->editChapters;
-
-  if (!d->editHeaders.isEmpty())
-    args << Q("--edit-headers") << d->editHeaders;
+  if (!p->editHeaders.isEmpty())
+    args << Q("--edit-headers") << p->editHeaders;
 
   return args;
 }
@@ -174,33 +168,25 @@ GuiCliParser::enableHack() {
 QStringList const &
 GuiCliParser::configFiles()
   const {
-  Q_D(const GuiCliParser);
-
-  return d->configFiles;
+  return p_func()->configFiles;
 }
 
 QStringList const &
 GuiCliParser::addToMerge()
   const {
-  Q_D(const GuiCliParser);
-
-  return d->addToMerge;
+  return p_func()->addToMerge;
 }
 
 QStringList const &
 GuiCliParser::editChapters()
   const {
-  Q_D(const GuiCliParser);
-
-  return d->editChapters;
+  return p_func()->editChapters;
 }
 
 QStringList const &
 GuiCliParser::editHeaders()
   const {
-  Q_D(const GuiCliParser);
-
-  return d->editHeaders;
+  return p_func()->editHeaders;
 }
 
 }}

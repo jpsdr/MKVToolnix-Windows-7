@@ -4,6 +4,7 @@
 
 #include <QWidget>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui {
@@ -13,11 +14,11 @@ class PrefsRunProgramWidget : public QWidget {
   Q_OBJECT;
 
 protected:
-  Q_DECLARE_PRIVATE(PrefsRunProgramWidget);
+  MTX_DECLARE_PRIVATE(PrefsRunProgramWidget);
 
-  QScopedPointer<PrefsRunProgramWidgetPrivate> const d_ptr;
+  std::unique_ptr<PrefsRunProgramWidgetPrivate> const p_ptr;
 
-  explicit PrefsRunProgramWidget(PrefsRunProgramWidgetPrivate &d, QWidget *parent, Util::Settings::RunProgramConfig const &cfg);
+  explicit PrefsRunProgramWidget(PrefsRunProgramWidgetPrivate &p, QWidget *parent, Util::Settings::RunProgramConfig const &cfg);
 
 public:
   explicit PrefsRunProgramWidget(QWidget *parent, Util::Settings::RunProgramConfig const &cfg);

@@ -4,21 +4,22 @@
 
 #include <QComboBox>
 
+#include "common/qt.h"
+
 namespace mtx { namespace gui { namespace Util {
 
 class ComboBoxBasePrivate;
 class ComboBoxBase: public QComboBox {
   Q_OBJECT;
 
+protected:
+  MTX_DECLARE_PRIVATE(ComboBoxBase);
+
+  std::unique_ptr<ComboBoxBasePrivate> const p_ptr;
+
+  explicit ComboBoxBase(ComboBoxBasePrivate &p, QWidget *parent);
+
   using StringPairVector = std::vector<std::pair<QString, QString>>;
-
-protected:
-  Q_DECLARE_PRIVATE(ComboBoxBase);
-
-protected:
-  QScopedPointer<ComboBoxBasePrivate> d_ptr;
-
-  explicit ComboBoxBase(ComboBoxBasePrivate &d, QWidget *parent);
 
 public:
   explicit ComboBoxBase(QWidget *parent = nullptr);
