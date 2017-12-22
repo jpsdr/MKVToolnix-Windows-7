@@ -21,36 +21,23 @@
 #include <QVector>
 
 #include "common/qt.h"
+#include "info/options.h"
 #include "info/ui/mainwindow.h"
 
 class main_window_c: public QMainWindow, public Ui_main_window {
   Q_OBJECT;
 
-private slots:
-  void open();
-  void save_text_file();
-
-  void show_all();
-
-  void about();
-
 private:
-  int last_percent, num_elements;
+  int last_percent{-1}, num_elements{};
 
   QVector<QTreeWidgetItem *> parent_items;
   QString current_file;
-  QTreeWidgetItem *root;
+  QTreeWidgetItem *root{};
 
-  void expand_elements();
-  void write_tree(QFile &file, QTreeWidgetItem *item, int level);
+  options_c m_options;
 
 public:
-  main_window_c();
-
-  void show_error(const QString &message);
-  void show_progress(int percentage, const QString &text);
-
-  void add_item(int level, const QString &text);
+  main_window_c(options_c const &options);
 
   void expand_all_elements(QTreeWidgetItem *item, bool expand);
 
@@ -58,4 +45,21 @@ public:
 
   virtual void dragEnterEvent(QDragEnterEvent *event);
   virtual void dropEvent(QDropEvent *event);
+
+public slots:
+  void open();
+  void save_text_file();
+
+  void show_all();
+
+  void about();
+
+  void show_error(QString const &message);
+  void show_progress(int percentage, const QString &text);
+  void add_item(int level, QString const &text);
+  void toggle_element_expansion(QTreeWidgetItem *item);
+
+private:
+  void expand_elements();
+  void write_tree(QFile &file, QTreeWidgetItem *item, int level);
 };

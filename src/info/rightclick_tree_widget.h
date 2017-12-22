@@ -19,7 +19,8 @@
 class rightclick_tree_widget: public QTreeWidget {
   Q_OBJECT;
 
-public slots:
+signals:
+  void expansion_requested(QTreeWidgetItem *item);
 
 public:
   rightclick_tree_widget(QWidget *parent = nullptr);

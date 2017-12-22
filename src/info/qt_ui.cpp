@@ -12,6 +12,13 @@
 
 #include "common/common_pch.h"
 
+#include <QIcon>
+#include <QList>
+#include <QMessageBox>
+#include <QMimeData>
+#include <QMouseEvent>
+#include <QFileDialog>
+
 #if defined(SYS_WINDOWS)
 # include <windows.h>
 #endif
@@ -20,26 +27,22 @@
 #include <matroska/KaxVersion.h>
 
 #include "common/common_pch.h"
+#include "common/kax_info.h"
 #include "common/locale.h"
 #include "common/qt.h"
 #include "common/version.h"
+#include "info/qt_kax_info.h"
 #include "info/qt_ui.h"
 #include "info/mkvinfo.h"
-
-#include <QIcon>
-#include <QList>
-#include <QMessageBox>
-#include <QMimeData>
-#include <QMouseEvent>
-#include <QFileDialog>
 
 using namespace libebml;
 using namespace libmatroska;
 
-main_window_c::main_window_c():
-  last_percent(-1), num_elements(0),
-  root(nullptr) {
+// ----------------------------------------------------------------------
 
+main_window_c::main_window_c(options_c const &options)
+  : m_options{options}
+{
   setupUi(this);
 
   QIcon icon;
@@ -49,18 +52,20 @@ main_window_c::main_window_c():
 
   setWindowIcon(icon);
 
-  connect(action_Open,           &QAction::triggered, this, &main_window_c::open);
-  connect(action_Save_text_file, &QAction::triggered, this, &main_window_c::save_text_file);
-  connect(action_Exit,           &QAction::triggered, this, &main_window_c::close);
+  connect(action_Open,           &QAction::triggered,                          this, &main_window_c::open);
+  connect(action_Save_text_file, &QAction::triggered,                          this, &main_window_c::save_text_file);
+  connect(action_Exit,           &QAction::triggered,                          this, &main_window_c::close);
 
-  connect(action_Show_all,       &QAction::triggered, this, &main_window_c::show_all);
+  connect(action_Show_all,       &QAction::triggered,                          this, &main_window_c::show_all);
 
-  connect(action_About,          &QAction::triggered, this, &main_window_c::about);
+  connect(action_About,          &QAction::triggered,                          this, &main_window_c::about);
+
+  connect(tree,                  &rightclick_tree_widget::expansion_requested, this, &main_window_c::toggle_element_expansion);
 
   action_Save_text_file->setEnabled(false);
 
   action_Show_all->setCheckable(true);
-  action_Show_all->setChecked(0 < g_options.m_verbose);
+  action_Show_all->setChecked(0 < m_options.m_verbose);
 
   action_Expand_important->setCheckable(true);
   action_Expand_important->setChecked(true);
@@ -128,7 +133,7 @@ main_window_c::write_tree(QFile &file,
 
 void
 main_window_c::show_all() {
-  g_options.m_verbose = action_Show_all->isChecked() ? 2 : 0;
+  m_options.m_verbose = action_Show_all->isChecked() ? 2 : 0;
   if (!current_file.isEmpty())
     parse_file(current_file);
 }
@@ -171,7 +176,23 @@ main_window_c::parse_file(const QString &file_name) {
   parent_items.clear();
   parent_items.append(root);
 
-  if (process_file(file_name.toUtf8().data())) {
+  mtx::qt_kax_info_c info;
+
+  info.set_use_gui(true);
+  info.set_calc_checksums(m_options.m_calc_checksums);
+  info.set_show_summary(m_options.m_show_summary);
+  info.set_show_hexdump(m_options.m_show_hexdump);
+  info.set_show_size(m_options.m_show_size);
+  info.set_show_track_info(m_options.m_show_track_info);
+  info.set_hex_positions(m_options.m_hex_positions);
+  info.set_hexdump_max_size(m_options.m_hexdump_max_size);
+  info.set_verbosity(m_options.m_verbose);
+
+  connect(&info, &mtx::qt_kax_info_c::element_found,    this, &main_window_c::add_item);
+  connect(&info, &mtx::qt_kax_info_c::error_found,      this, &main_window_c::show_error);
+  connect(&info, &mtx::qt_kax_info_c::progress_changed, this, &main_window_c::show_progress);
+
+  if (info.process_file(file_name.toUtf8().data())) {
     action_Save_text_file->setEnabled(true);
     current_file = file_name;
     if (action_Expand_important->isChecked())
@@ -274,7 +295,13 @@ main_window_c::dropEvent(QDropEvent *event) {
     }
 }
 
-static main_window_c *gui;
+void
+main_window_c::toggle_element_expansion(QTreeWidgetItem *item) {
+  if (item)
+    expand_all_elements(item, !item->isExpanded());
+}
+
+// ----------------------------------------------------------------------
 
 rightclick_tree_widget::rightclick_tree_widget(QWidget *parent):
   QTreeWidget(parent) {
@@ -287,44 +314,17 @@ rightclick_tree_widget::mousePressEvent(QMouseEvent *event) {
     return;
   }
 
-  QTreeWidgetItem *item = itemAt(event->pos());
-  if (item) {
-    gui->expand_all_elements(item, !item->isExpanded());
-  }
+  auto item = itemAt(event->pos());
+  if (item)
+    emit expansion_requested(item);
 }
 
-void
-ui_show_error(const std::string &error) {
-  if (g_options.m_use_gui)
-    gui->show_error(Q(error));
-  else
-    console_show_error(error);
-}
-
-void
-ui_show_element(int level,
-                const std::string &text,
-                int64_t position,
-                int64_t size) {
-  if (!g_options.m_use_gui)
-    console_show_element(level, text, position, size);
-
-  else if (0 <= position)
-    gui->add_item(level, Q(create_element_text(text, position, size)));
-
-  else
-    gui->add_item(level, Q(text));
-}
-
-void
-ui_show_progress(int percentage,
-                 const std::string &text) {
-  gui->show_progress(percentage, Q(text));
-}
+// ----------------------------------------------------------------------
 
 int
 ui_run(int argc,
-       char **argv) {
+       char **argv,
+       options_c const &options) {
 #if defined(SYS_WINDOWS)
   FreeConsole();
 #endif
@@ -339,12 +339,11 @@ ui_run(int argc,
   QApplication::setStyle(Q("windowsvista"));
 #endif
 
-  main_window_c main_window;
-  gui = &main_window;
+  main_window_c main_window{options};
   main_window.show();
 
-  if (!g_options.m_file_name.empty())
-    gui->parse_file(Q(g_options.m_file_name));
+  if (!options.m_file_name.empty())
+    main_window.parse_file(Q(options.m_file_name));
 
   return app.exec();
 }

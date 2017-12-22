@@ -14,49 +14,11 @@
 
 #include "info/mkvinfo.h"
 
-void
-console_show_element(int level,
-                     const std::string &text,
-                     int64_t position,
-                     int64_t size) {
-  char *level_buffer;
-
-  level_buffer = new char[level + 1];
-  memset(&level_buffer[1], ' ', level);
-  level_buffer[0] = '|';
-  level_buffer[level] = 0;
-  mxinfo(boost::format("%1%+ %2%\n") % level_buffer % create_element_text(text, position, size));
-  delete []level_buffer;
-}
-
-void
-console_show_error(const std::string &error) {
-  mxinfo(boost::format("(%1%) %2%\n") % NAME % error);
-  mxexit(2);
-}
-
 #if !defined(HAVE_QT)
-void
-ui_show_element(int level,
-                const std::string &text,
-                int64_t position,
-                int64_t size) {
-  console_show_element(level, text, position, size);
-}
-
-void
-ui_show_error(const std::string &error) {
-  console_show_error(error);
-}
-
-void
-ui_show_progress(int /* percentage */,
-                 const std::string &/* text */) {
-}
-
 int
 ui_run(int /* argc */,
-       char **/* argv */) {
+       char **/* argv */,
+       options_c const &/* options */) {
   return 0;
 }
 

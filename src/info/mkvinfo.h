@@ -17,21 +17,9 @@
 
 #include "info/options.h"
 
-#define NAME "MKVInfo"
-
-extern options_c g_options;
-
-int console_main();
-bool process_file(const std::string &file_name);
+void console_main(options_c const &options);
 void setup(char const *argv0, const std::string &locale = "");
 void cleanup();
 
-std::string create_element_text(const std::string &text, int64_t position, int64_t size);
-void ui_show_error(const std::string &error);
-void ui_show_element(int level, const std::string &text, int64_t position, int64_t size);
-void ui_show_progress(int percentage, const std::string &text);
-int ui_run(int argc, char **argv);
+int ui_run(int argc, char **argv, options_c const &options);
 bool ui_graphical_available();
-
-void console_show_error(const std::string &text);
-void console_show_element(int level, const std::string &text, int64_t position, int64_t size);
