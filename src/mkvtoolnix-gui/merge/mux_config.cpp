@@ -198,12 +198,12 @@ MuxConfig::load(Util::ConfigFile &settings) {
   // Check supported config file version
   if (settings.childGroups().contains(App::settingsBaseGroupName())) {
     settings.beginGroup(App::settingsBaseGroupName());
-    if (   (settings.value("version", std::numeric_limits<int>::max()).toInt() > MTXCFG_VERSION)
+    if (   (settings.value("version", std::numeric_limits<unsigned int>::max()).toUInt() > Util::ConfigFile::MtxCfgVersion)
         || (settings.value("type").toString() != settingsType()))
       throw InvalidSettingsX{};
     settings.endGroup();
 
-  } else if (settings.value("version", std::numeric_limits<int>::max()).toInt() > MTXCFG_VERSION)
+  } else if (settings.value("version", std::numeric_limits<unsigned int>::max()).toUInt() > Util::ConfigFile::MtxCfgVersion)
     // Config files written until 8.0.0 didn't use that group.
     throw InvalidSettingsX{};
 
@@ -288,7 +288,7 @@ void
 MuxConfig::save(Util::ConfigFile &settings)
   const {
   settings.beginGroup(App::settingsBaseGroupName());
-  settings.setValue("version", MTXCFG_VERSION);
+  settings.setValue("version", Util::ConfigFile::MtxCfgVersion);
   settings.setValue("type",    settingsType());
   settings.endGroup();
 

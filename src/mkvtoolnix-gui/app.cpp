@@ -14,6 +14,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
+#include "common/qt_kax_info.h"
 #include "common/random.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
@@ -212,6 +213,8 @@ App::reinitializeLanguageLists() {
   s_commonCharacterSets.clear();
 
   initializeLanguageLists();
+
+  qt_kax_info_c::init_common_boost_formats();
 }
 
 void

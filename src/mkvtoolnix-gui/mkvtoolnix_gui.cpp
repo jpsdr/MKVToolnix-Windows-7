@@ -5,6 +5,7 @@
 #include <QProcess>
 
 #include "common/fs_sys_helpers.h"
+#include "common/kax_info.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/job.h"
@@ -31,6 +32,8 @@ registerMetaTypes() {
   qRegisterMetaType<UpdateCheckStatus>("UpdateCheckStatus");
 #endif  // HAVE_UPDATE_CHECK
   qRegisterMetaType<Util::InstallationChecker::Problems>("Util::InstallationChecker::Problems");
+  qRegisterMetaType<mtx::kax_info_c::result_e>("mtx::kax_info_c::result_e");
+  qRegisterMetaType<int64_t>("int64_t");
 }
 
 int

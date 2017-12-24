@@ -918,7 +918,7 @@ end
   { :name => 'mtxinput',    :dir => 'src/input'                                                                      },
   { :name => 'mtxoutput',   :dir => 'src/output'                                                                     },
   { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                   },
-  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp  qt_kax_info.cpp mkvinfo.cpp mkvinfo-gui.cpp static_plugins.cpp}, },
+  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp mkvinfo.cpp mkvinfo-gui.cpp static_plugins.cpp}, },
   { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                 },
   { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                },
   { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                },
@@ -927,6 +927,9 @@ end
   Library.
     new("#{[ lib[:dir] ].flatten.first}/lib#{lib[:name]}").
     sources([ lib[:dir] ].flatten, :type => :dir, :except => lib[:except]).
+    only_if(c?(:USE_QT) && (lib[:name] == 'mtxcommon')).
+    sources(FileList["src/common/*.h"].select { |h| read_files(h)[h].any? { |line| /\bQ_OBJECT\b/.match line } }.map { |h| h.ext 'moc' }).
+    end_if.
     build_dll(lib[:name] == 'mtxcommon').
     libraries(:iconv, :z, :matroska, :ebml, :rpcrt4).
     create
@@ -983,7 +986,7 @@ Application.new("src/mkvinfo").
   libraries(:mtxinfo, $common_libs).
   only_if(c?(:USE_QT)).
   sources("src/info/sys_windows.o", :if => $building_for[:windows]).
-  sources("src/info/qt_ui.cpp", "src/info/qt_ui.moc", "src/info/qt_kax_info.cpp", "src/info/qt_kax_info.moc", "src/info/rightclick_tree_widget.moc", $mkvinfo_ui_files).
+  sources("src/info/qt_ui.cpp", "src/info/qt_ui.moc", "src/info/rightclick_tree_widget.moc", $mkvinfo_ui_files).
   sources('src/info/qt_resources.cpp').
   sources('src/info/static_plugins.cpp', :if => File.exist?('src/info/static_plugins.cpp')).
   libraries(:qt).

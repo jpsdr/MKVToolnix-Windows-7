@@ -22,6 +22,9 @@ protected:
   QString m_fileName;
 
 public:
+  static unsigned int const MtxCfgVersion = 1;
+
+public:
   ConfigFile(QString const &fileName);
   virtual ~ConfigFile();
 

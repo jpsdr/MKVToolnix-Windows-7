@@ -9,6 +9,7 @@
 #include "common/logger.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/jobs/info_job.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/job_p.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
@@ -394,6 +395,9 @@ Job::loadJob(Util::ConfigFile &settings) {
 
   if (jobType == "MuxJob")
     return MuxJob::loadMuxJob(settings);
+
+  if (jobType == "InfoJob")
+    return InfoJob::loadInfoJob(settings);
 
   log_it(boost::format("MTX Job::loadJob: Unknown job type encountered (%1%) in %2%") % jobType % settings.fileName());
   throw Merge::InvalidSettingsX{};

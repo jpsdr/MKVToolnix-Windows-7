@@ -9,8 +9,6 @@
 
 #include "mkvtoolnix-gui/util/config_file.h"
 
-#define MTXCFG_VERSION 1
-
 class QTemporaryFile;
 
 namespace mtx { namespace gui { namespace Merge {

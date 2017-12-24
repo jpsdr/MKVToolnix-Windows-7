@@ -188,8 +188,8 @@ kax_info_c::set_verbosity(int verbosity) {
 }
 
 void
-kax_info_c::set_output(mm_io_cptr const &out) {
-  m_out = out;
+kax_info_c::set_destination_file_name(std::string const &file_name) {
+  m_destination_file_name = file_name;
 }
 
 void
@@ -1682,7 +1682,7 @@ kax_info_c::handle_ebml_head(EbmlElement *l0) {
   }
 }
 
-void
+kax_info_c::result_e
 kax_info_c::handle_segment(EbmlElement *l0) {
   auto file_size         = m_in->get_size();
   auto l1                = static_cast<EbmlElement *>(nullptr);
@@ -1714,7 +1714,7 @@ kax_info_c::handle_segment(EbmlElement *l0) {
     else if (Is<KaxCluster>(l1)) {
       show_element(l1, 1, Y("Cluster"));
       if ((m_verbose == 0) && !m_show_summary)
-        return;
+        return result_e::succeeded;
       handle_cluster(upper_lvl_el, l1, file_size);
 
     } else if (Is<KaxCues>(l1))
@@ -1738,7 +1738,12 @@ kax_info_c::handle_segment(EbmlElement *l0) {
       break;
     if (!in_parent(l0))
       break;
+    if (m_abort)
+      return result_e::aborted;
+
   } // while (l1)
+
+  return result_e::succeeded;
 }
 
 void
@@ -1776,7 +1781,7 @@ kax_info_c::reset() {
   m_in.reset();
 }
 
-bool
+kax_info_c::result_e
 kax_info_c::process_file(std::string const &file_name) {
   at_scope_exit_c cleanup([this]() { reset(); });
 
@@ -1787,7 +1792,16 @@ kax_info_c::process_file(std::string const &file_name) {
     m_in = mm_file_io_c::open(file_name);
   } catch (mtx::mm_io::exception &ex) {
     ui_show_error((boost::format(Y("Error: Couldn't open source file %1% (%2%).")) % file_name % ex).str());
-    return false;
+    return result_e::failed;
+  }
+
+  // open output file
+  try {
+    m_out = std::make_shared<mm_file_io_c>(m_destination_file_name, MODE_CREATE);
+
+  } catch (mtx::mm_io::exception &ex) {
+    ui_show_error((boost::format(Y("The file '%1%' could not be opened for writing: %2%.")) % m_destination_file_name % ex).str());
+    return result_e::failed;
   }
 
   try {
@@ -1797,7 +1811,7 @@ kax_info_c::process_file(std::string const &file_name) {
     auto l0 = ebml_element_cptr{ m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL) };
     if (!l0 || !Is<EbmlHead>(*l0)) {
       ui_show_error(Y("No EBML head found."));
-      return false;
+      return result_e::failed;
     }
 
     handle_ebml_head(l0.get());
@@ -1816,7 +1830,9 @@ kax_info_c::process_file(std::string const &file_name) {
         continue;
       }
 
-      handle_segment(l0.get());
+      auto result = handle_segment(l0.get());
+      if (result == result_e::aborted)
+        return result;
 
       l0->SkipData(*m_es, EBML_CONTEXT(l0));
 
@@ -1827,17 +1843,22 @@ kax_info_c::process_file(std::string const &file_name) {
     if (!m_use_gui && m_show_track_info)
       display_track_info();
 
-    return true;
+    return result_e::succeeded;
 
   } catch (mtx::kax_info_x &) {
     throw;
 
   } catch (...) {
     ui_show_error(Y("Caught exception"));
-    return false;
+    return result_e::failed;
   }
 
-  return true;
+  return result_e::succeeded;
+}
+
+void
+kax_info_c::abort() {
+  m_abort = true;
 }
 
 }

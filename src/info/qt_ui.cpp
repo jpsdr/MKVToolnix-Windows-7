@@ -30,8 +30,8 @@
 #include "common/kax_info.h"
 #include "common/locale.h"
 #include "common/qt.h"
+#include "common/qt_kax_info.h"
 #include "common/version.h"
-#include "info/qt_kax_info.h"
 #include "info/qt_ui.h"
 #include "info/mkvinfo.h"
 
@@ -188,11 +188,11 @@ main_window_c::parse_file(const QString &file_name) {
   info.set_hexdump_max_size(m_options.m_hexdump_max_size);
   info.set_verbosity(m_options.m_verbose);
 
-  connect(&info, &mtx::qt_kax_info_c::element_found,    this, &main_window_c::add_item);
+  connect(&info, &mtx::qt_kax_info_c::element_found,    this, &main_window_c::show_element);
   connect(&info, &mtx::qt_kax_info_c::error_found,      this, &main_window_c::show_error);
   connect(&info, &mtx::qt_kax_info_c::progress_changed, this, &main_window_c::show_progress);
 
-  if (info.process_file(file_name.toUtf8().data())) {
+  if (info.process_file(file_name.toUtf8().data()) == mtx::kax_info_c::result_e::succeeded) {
     action_Save_text_file->setEnabled(true);
     current_file = file_name;
     if (action_Expand_important->isChecked())
@@ -258,6 +258,14 @@ main_window_c::add_item(int level,
   QTreeWidgetItem *item = new QTreeWidgetItem(parent_items.last());
   item->setText(0, text);
   parent_items.append(item);
+}
+
+void
+main_window_c::show_element(int level,
+                            QString const &text,
+                            int64_t position,
+                            int64_t size) {
+  add_item(level, 0 <= position ? Q(dynamic_cast<mtx::qt_kax_info_c *>(sender())->create_element_text(to_utf8(text), position, size)) : text);
 }
 
 void

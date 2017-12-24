@@ -34,6 +34,13 @@ public:
 };
 
 class kax_info_c {
+public:
+  enum class result_e {
+    succeeded,
+    failed,
+    aborted,
+  };
+
 protected:
   struct track_t {
     uint64_t tnum{}, tuid{};
@@ -59,9 +66,12 @@ protected:
   std::size_t m_mkvmerge_track_id{};
   std::shared_ptr<EbmlStream> m_es;
   mm_io_cptr m_in, m_out;
+  std::string m_destination_file_name;
 
   bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{};
   int m_hexdump_max_size{}, m_verbose{};
+
+  bool m_abort{};
 
 public:
   kax_info_c();
@@ -76,11 +86,11 @@ public:
   void set_hex_positions(bool enable);
   void set_hexdump_max_size(int max_size);
   void set_verbosity(int verbosity);
-
-  void set_output(mm_io_cptr const &out);
+  void set_destination_file_name(std::string const &file_name);
 
   void reset();
-  bool process_file(std::string const &file_name);
+  virtual result_e process_file(std::string const &file_name);
+  void abort();
 
   std::string create_element_text(std::string const &text, int64_t position, int64_t size);
   std::string create_hexdump(unsigned char const *buf, int size);
@@ -122,7 +132,7 @@ protected:
   void handle_chapters(int &upper_lvl_el, EbmlElement *&l1);
   void handle_tags(int &upper_lvl_el, EbmlElement *&l1);
   void handle_ebml_head(EbmlElement *l0);
-  void handle_segment(EbmlElement *l0);
+  result_e handle_segment(EbmlElement *l0);
 
   void display_track_info();
 
