@@ -44,7 +44,9 @@ FORMS += \
     forms/header_editor/attachments_page.ui \
     forms/header_editor/attached_file_page.ui \
     forms/header_editor/action_for_dropped_files_dialog.ui \
-    forms/main_window/code_of_conduct_dialog.ui
+    forms/main_window/code_of_conduct_dialog.ui \
+    forms/info/tab.ui \
+    forms/info/tool.ui
 
 RESOURCES += \
     qt_resources.qrc

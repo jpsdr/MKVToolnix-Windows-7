@@ -23,6 +23,9 @@ class Tool;
 namespace HeaderEditor {
 class Tool;
 }
+namespace Info {
+class Tool;
+}
 namespace Jobs {
 class Tool;
 enum class QueueStatus;
@@ -104,6 +107,7 @@ public:                         // static
   static MainWindow *get();
   static Ui::MainWindow *getUi();
   static Merge::Tool *mergeTool();
+  static Info::Tool *infoTool();
   static HeaderEditor::Tool *headerEditorTool();
   static ChapterEditor::Tool *chapterEditorTool();
   static Jobs::Tool *jobTool();

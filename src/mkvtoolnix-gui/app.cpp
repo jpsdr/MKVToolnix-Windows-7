@@ -469,6 +469,9 @@ App::handleCommandLineArgumentsLocally() {
   if (!p->m_cliParser->addToMerge().isEmpty())
     emit addingFilesToMergeRequested(p->m_cliParser->addToMerge());
 
+  if (!p->m_cliParser->runInfoOn().isEmpty())
+    emit runningInfoOnRequested(p->m_cliParser->runInfoOn());
+
   if (!p->m_cliParser->editChapters().isEmpty())
     emit editingChaptersRequested(p->m_cliParser->editChapters());
 

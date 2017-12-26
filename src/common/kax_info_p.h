@@ -35,11 +35,12 @@ public:
   std::vector<std::shared_ptr<track_t>> m_tracks;
   std::unordered_map<unsigned int, std::shared_ptr<track_t>> m_tracks_by_number;
   std::unordered_map<unsigned int, track_info_t> m_track_info;
+  std::vector<std::shared_ptr<EbmlElement>> m_retained_elements;
   uint64_t m_ts_scale{TIMESTAMP_SCALE}, m_file_size{};
   std::size_t m_mkvmerge_track_id{};
   std::shared_ptr<EbmlStream> m_es;
   mm_io_cptr m_in, m_out{g_mm_stdio};
-  std::string m_destination_file_name;
+  std::string m_source_file_name, m_destination_file_name;
   int m_level{};
   std::vector<std::string> m_summary;
   std::shared_ptr<track_t> m_track;
@@ -50,7 +51,7 @@ public:
   int64_t m_num_references{}, m_lf_timestamp{}, m_lf_tnum{};
   boost::optional<int64_t> m_block_duration;
 
-  bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{};
+  bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{}, m_retain_elements{};
   int m_hexdump_max_size{}, m_verbose{};
 
   bool m_abort{};

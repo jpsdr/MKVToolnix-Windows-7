@@ -19,6 +19,7 @@
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
+#include "mkvtoolnix-gui/info/tool.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 #include "mkvtoolnix-gui/main_window/code_of_conduct_dialog.h"
@@ -52,6 +53,7 @@ class MainWindowPrivate {
   StatusBarProgressWidget *statusBarProgress{};
   Util::WaitingSpinnerWidget *queueSpinner{};
   Merge::Tool *toolMerge{};
+  Info::Tool *toolInfo{};
   Jobs::Tool *toolJobs{};
   HeaderEditor::Tool *toolHeaderEditor{};
   ChapterEditor::Tool *toolChapterEditor{};
@@ -202,7 +204,7 @@ MainWindow::setupConnections() {
   // Tool actions:
   connect(p->ui->actionGUIMergeTool,              &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
   // connect(p->ui->actionGUIExtractionTool,         &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-  // connect(p->ui->actionGUIInfoTool,               &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+  connect(p->ui->actionGUIInfoTool,               &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
   connect(p->ui->actionGUIHeaderEditor,           &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
   connect(p->ui->actionGUIChapterEditor,          &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
   // connect(p->ui->actionGUITagEditor,              &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
@@ -225,6 +227,7 @@ MainWindow::setupToolSelector() {
   auto p               = p_func();
 
   p->toolMerge         = new Merge::Tool{p->ui->tool,         p->ui->menuMerge};
+  p->toolInfo          = new Info::Tool{p->ui->tool,          p->ui->menuInfo};
   p->toolHeaderEditor  = new HeaderEditor::Tool{p->ui->tool,  p->ui->menuHeaderEditor};
   p->toolChapterEditor = new ChapterEditor::Tool{p->ui->tool, p->ui->menuChapterEditor};
   p->toolJobs          = new Jobs::Tool{p->ui->tool,          p->ui->menuJobQueue};
@@ -232,7 +235,7 @@ MainWindow::setupToolSelector() {
 
   p->ui->tool->appendTab(p->toolMerge,                        QIcon{":/icons/48x48/merge.png"},                      QY("Multiplexer"));
   // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon{":/icons/48x48/split.png"},                      QY("Extractor"));
-  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon{":/icons/48x48/document-preview-archive.png"},   QY("Info tool"));
+  p->ui->tool->appendTab(p->toolInfo,                         QIcon{":/icons/48x48/document-preview-archive.png"},   QY("Info tool"));
   p->ui->tool->appendTab(p->toolHeaderEditor,                 QIcon{":/icons/48x48/document-edit.png"},              QY("Header editor"));
   p->ui->tool->appendTab(p->toolChapterEditor,                QIcon{":/icons/48x48/story-editor.png"},               QY("Chapter editor"));
   // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("Tags editor"));
@@ -251,12 +254,11 @@ MainWindow::setupToolSelector() {
   p->toolMerge->toolShown();
   showAndEnableMenu(*p->ui->menuWindow, p->subWindowWidgets.contains(p->toolMerge));
 
-  p->toolSelectionActions << p->ui->actionGUIMergeTool    /* << p->ui->actionGUIExtractionTool << p->ui->actionGUIInfoTool*/
+  p->toolSelectionActions << p->ui->actionGUIMergeTool    /* << p->ui->actionGUIExtractionTool */ << p->ui->actionGUIInfoTool
                           << p->ui->actionGUIHeaderEditor << p->ui->actionGUIChapterEditor  /*<< p->ui->actionGUITagEditor*/
                           << p->ui->actionGUIJobQueue     << p->ui->actionGUIJobOutput;
 
   p->ui->actionGUIExtractionTool->setVisible(false);
-  p->ui->actionGUIInfoTool->setVisible(false);
   p->ui->actionGUITagEditor->setVisible(false);
 }
 
@@ -343,6 +345,11 @@ MainWindow::mergeTool() {
   return GET_P->toolMerge;
 }
 
+Info::Tool *
+MainWindow::infoTool() {
+  return GET_P->toolInfo;
+}
+
 HeaderEditor::Tool *
 MainWindow::headerEditorTool() {
   return GET_P->toolHeaderEditor;
@@ -382,8 +389,8 @@ MainWindow::retranslateUi() {
   // Intentionally replacing the list right away again in order not to
   // lose the translations for the three currently unimplemented
   // tools.
-  auto toolTitles = QStringList{} << QY("Extraction tool") << QY("Info tool") << QY("Tag editor");
-  toolTitles      = QStringList{} << QY("Multiplexer") << QY("Header editor") << QY("Chapter editor") << QY("Job queue") << QY("Job output");
+  auto toolTitles = QStringList{} << QY("Extraction tool") << QY("Tag editor");
+  toolTitles      = QStringList{} << QY("Multiplexer") << QY("Info tool") << QY("Header editor") << QY("Chapter editor") << QY("Job queue") << QY("Job output");
 
   for (auto idx = 0, count = p->ui->tool->count(); idx < count; ++idx)
     p->ui->tool->setTabText(idx, toolTitles[idx]);
@@ -393,6 +400,7 @@ MainWindow::retranslateUi() {
   // same form.
   p->ui->menuGUI          ->setTitle(QY("MKVToolNix &GUI"));
   p->ui->menuMerge        ->setTitle(QY("&Multiplexer"));
+  p->ui->menuInfo         ->setTitle(QY("&Info tool"));
   p->ui->menuHeaderEditor ->setTitle(QY("Header &editor"));
   p->ui->menuChapterEditor->setTitle(QY("&Chapter editor"));
   p->ui->menuJobQueue     ->setTitle(QY("&Job queue"));

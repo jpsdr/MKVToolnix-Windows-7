@@ -76,6 +76,7 @@ signals:
   void editingChaptersRequested(QStringList const &fileNames);
   void editingHeadersRequested(QStringList const &fileNames);
   void openConfigFilesRequested(QStringList const &fileNames);
+  void runningInfoOnRequested(QStringList const &fileNames);
 
 public slots:
   void saveSettings() const;

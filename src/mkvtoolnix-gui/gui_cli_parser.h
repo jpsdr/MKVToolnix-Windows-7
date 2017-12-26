@@ -29,6 +29,7 @@ public:
   QStringList const &addToMerge() const;
   QStringList const &editChapters() const;
   QStringList const &editHeaders() const;
+  QStringList const &runInfoOn() const;
 
 protected:
   void initParser();
@@ -38,6 +39,7 @@ protected:
   void displayVersion();
   void setChaptersMode();
   void setHeadersMode();
+  void setInfoMode();
   void setMergeMode();
   void raiseAndActivate();
   void enableDebugging();

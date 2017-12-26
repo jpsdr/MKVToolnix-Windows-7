@@ -66,10 +66,14 @@ public:
   void set_hexdump_max_size(int max_size);
   void set_verbosity(int verbosity);
   void set_destination_file_name(std::string const &file_name);
+  void set_source_file(mm_io_cptr const &file);
+  void set_source_file_name(std::string const &file_name);
+  void set_retain_elements(bool enable);
 
   void reset();
   virtual result_e open_and_process_file(std::string const &file_name);
-  virtual result_e process_file(mm_io_cptr const &file);
+  virtual result_e open_and_process_file();
+  virtual result_e process_file();
   void abort();
 
   std::string create_element_text(std::string const &text, int64_t position, int64_t size);
@@ -105,6 +109,8 @@ public:
   virtual void ui_show_element(EbmlElement &e);
   virtual void ui_show_progress(int percentage, std::string const &text);
 
+  void discard_retained_element(EbmlElement &element_to_remove);
+
 protected:
   void init();
   void init_custom_element_value_formatters_and_processors();
@@ -122,6 +128,8 @@ protected:
   result_e handle_segment(EbmlElement *l0);
 
   void display_track_info();
+
+  void retain_element(std::shared_ptr<EbmlElement> const &element);
 
 public:
   static void init_common_formats();

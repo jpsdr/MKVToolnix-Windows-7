@@ -15,7 +15,7 @@ namespace mtx { namespace gui {
 class GuiCliParserPrivate {
   friend class GuiCliParser;
 
-  QStringList configFiles, addToMerge, editChapters, editHeaders;
+  QStringList configFiles, addToMerge, runInfoOn, editChapters, editHeaders;
   QStringList *toProcess{};
   bool exitAfterParsing{};
 
@@ -40,7 +40,7 @@ GuiCliParser::initParser() {
 
   add_section_header(YT("Usage"));
   add_information(YT("mkvtoolnix-gui <configuration file names>"));
-  add_information(YT("mkvtoolnix-gui [--multiplex|--edit-chapters|--edit-headers] <file names>"));
+  add_information(YT("mkvtoolnix-gui [--multiplex|--info|--edit-chapters|--edit-headers] <file names>"));
 
   add_separator();
 
@@ -53,6 +53,7 @@ GuiCliParser::initParser() {
   add_section_header(YT("Options"));
 
   OPT("multiplex|merge", setMergeMode,    (boost::format("%1% %2%") % YT("All following file names will be added as source files to the current multiplex settings.") % YT("This is the default mode.")).str());
+  OPT("info",            setInfoMode,     YT("All following file names will be opened in the info tool."));
   OPT("edit-chapters",   setChaptersMode, YT("All following file names will be opened in the chapter editor."));
   OPT("edit-headers",    setHeadersMode,  YT("All following file names will be opened in the header editor."));
   OPT("activate",        raiseAndActivate, "");
@@ -98,6 +99,12 @@ void
 GuiCliParser::setHeadersMode() {
   auto         p = p_func();
   p->toProcess = &p->editHeaders;
+}
+
+void
+GuiCliParser::setInfoMode() {
+  auto p       = p_func();
+  p->toProcess = &p->runInfoOn;
 }
 
 void
@@ -175,6 +182,12 @@ QStringList const &
 GuiCliParser::addToMerge()
   const {
   return p_func()->addToMerge;
+}
+
+QStringList const &
+GuiCliParser::runInfoOn()
+  const {
+  return p_func()->runInfoOn;
 }
 
 QStringList const &

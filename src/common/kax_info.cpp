@@ -143,6 +143,11 @@ kax_info_c::init() {
 }
 
 void
+kax_info_c::set_retain_elements(bool enable) {
+  p_func()->m_retain_elements = enable;
+}
+
+void
 kax_info_c::set_use_gui(bool enable) {
   p_func()->m_use_gui = enable;
 }
@@ -190,6 +195,16 @@ kax_info_c::set_verbosity(int verbosity) {
 void
 kax_info_c::set_destination_file_name(std::string const &file_name) {
   p_func()->m_destination_file_name = file_name;
+}
+
+void
+kax_info_c::set_source_file_name(std::string const &file_name) {
+  p_func()->m_source_file_name = file_name;
+}
+
+void
+kax_info_c::set_source_file(mm_io_cptr const &file) {
+  p_func()->m_in = file;
 }
 
 #define BF_ADD(idx, fmt) idx = s_common_formats.size(); s_common_formats.push_back(boost::format(fmt))
@@ -1092,6 +1107,8 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   while ((l1 = kax_file->read_next_level1_element())) {
     std::shared_ptr<EbmlElement> af_l1(l1);
 
+    retain_element(af_l1);
+
     if (Is<KaxCluster>(l1) && (p->m_verbose == 0) && !p->m_show_summary) {
       ui_show_element(*l1);
       return result_e::succeeded;
@@ -1181,10 +1198,9 @@ kax_info_c::reset() {
 }
 
 kax_info_c::result_e
-kax_info_c::process_file(mm_io_cptr const &file) {
-  auto p = p_func();
+kax_info_c::process_file() {
+  auto p         = p_func();
 
-  p->m_in        = file;
   p->m_file_size = p->m_in->get_size();
   p->m_es        = std::make_shared<EbmlStream>(*p->m_in);
 
@@ -1201,6 +1217,8 @@ kax_info_c::process_file(mm_io_cptr const &file) {
   read_master(static_cast<EbmlMaster *>(l0.get()), EBML_CONTEXT(l0), upper_lvl_el, element_found);
   delete element_found;
 
+  retain_element(l0);
+
   handle_elements_generic(*l0);
   l0->SkipData(*p->m_es, EBML_CONTEXT(l0));
 
@@ -1209,6 +1227,8 @@ kax_info_c::process_file(mm_io_cptr const &file) {
     l0 = ebml_element_cptr{ p->m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL) };
     if (!l0)
       break;
+
+    retain_element(l0);
 
     if (!Is<KaxSegment>(*l0)) {
       show_element(l0.get(), 0, Y("Unknown element"));
@@ -1235,6 +1255,12 @@ kax_info_c::process_file(mm_io_cptr const &file) {
 
 kax_info_c::result_e
 kax_info_c::open_and_process_file(std::string const &file_name) {
+  p_func()->m_source_file_name = file_name;
+  return open_and_process_file();
+}
+
+kax_info_c::result_e
+kax_info_c::open_and_process_file() {
   auto p = p_func();
 
   at_scope_exit_c cleanup([this]() { reset(); });
@@ -1243,9 +1269,9 @@ kax_info_c::open_and_process_file(std::string const &file_name) {
 
   // open input file
   try {
-    p->m_in = mm_file_io_c::open(file_name);
+    p->m_in = mm_file_io_c::open(p->m_source_file_name);
   } catch (mtx::mm_io::exception &ex) {
-    ui_show_error((boost::format(Y("Error: Couldn't open source file %1% (%2%).")) % file_name % ex).str());
+    ui_show_error((boost::format(Y("Error: Couldn't open source file %1% (%2%).")) % p->m_source_file_name % ex).str());
     return result_e::failed;
   }
 
@@ -1261,7 +1287,7 @@ kax_info_c::open_and_process_file(std::string const &file_name) {
   }
 
   try {
-    process_file(p->m_in);
+    process_file();
 
   } catch (mtx::kax_info::exception &) {
     throw;
@@ -1281,6 +1307,19 @@ kax_info_c::open_and_process_file(std::string const &file_name) {
 void
 kax_info_c::abort() {
   p_func()->m_abort = true;
+}
+
+void
+kax_info_c::retain_element(std::shared_ptr<EbmlElement> const &element) {
+  auto p = p_func();
+
+  if (p->m_retain_elements)
+    p->m_retained_elements.push_back(element);
+}
+
+void
+kax_info_c::discard_retained_element(EbmlElement &element_to_remove) {
+  boost::remove_erase_if(p_func()->m_retained_elements, [&element_to_remove](auto const &retained_element) { return retained_element.get() == &element_to_remove; });
 }
 
 }

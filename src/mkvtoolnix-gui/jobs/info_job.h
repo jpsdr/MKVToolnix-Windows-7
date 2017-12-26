@@ -43,7 +43,7 @@ public:
 public slots:
   virtual void abort() override;
   virtual void showElementInfo(int level, QString const &text, int64_t position, int64_t size);
-  virtual void showElement(int level, EbmlElement *e);
+  virtual void showElement(int level, EbmlElement *element);
   virtual void showError(const QString &message);
   virtual void updateProgress(int percentage, const QString &text);
   virtual void infoStarted();

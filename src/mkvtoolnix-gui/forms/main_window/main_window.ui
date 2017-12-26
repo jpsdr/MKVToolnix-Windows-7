@@ -211,8 +211,19 @@
     <addaction name="actionWindowNext"/>
     <addaction name="actionWindowPrevious"/>
    </widget>
+   <widget class="QMenu" name="menuInfo">
+    <property name="title">
+     <string>&amp;Info tool</string>
+    </property>
+    <addaction name="actionInfoOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionInfoClose"/>
+    <addaction name="separator"/>
+    <addaction name="actionInfoCloseAll"/>
+   </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
+   <addaction name="menuInfo"/>
    <addaction name="menuHeaderEditor"/>
    <addaction name="menuChapterEditor"/>
    <addaction name="menuJobQueue"/>
@@ -825,6 +836,39 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+F6</string>
+   </property>
+  </action>
+  <action name="actionInfoOpen">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-open-folder.png</normaloff>:/icons/16x16/document-open-folder.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionInfoClose">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionInfoCloseAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>Close &amp;all tabs</string>
    </property>
   </action>
  </widget>

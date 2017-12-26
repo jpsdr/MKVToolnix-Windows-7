@@ -14,6 +14,7 @@
 
 #if defined(HAVE_QT)
 
+# include "common/kax_element_names.h"
 # include "common/qt.h"
 # include "common/qt_kax_info.h"
 # include "common/kax_info_p.h"
@@ -21,8 +22,8 @@
 namespace mtx {
 
 qt_kax_info_c::qt_kax_info_c(QString const &file_name)
-  : m_source_file_name{to_utf8(file_name)}
 {
+  set_source_file_name(to_utf8(file_name));
 }
 
 qt_kax_info_c::~qt_kax_info_c() {
@@ -70,10 +71,10 @@ qt_kax_info_c::ui_show_progress(int percentage,
 }
 
 kax_info_c::result_e
-qt_kax_info_c::process_file(mm_io_cptr const &file) {
+qt_kax_info_c::process_file() {
   emit started();
 
-  auto result = kax_info_c::process_file(file);
+  auto result = kax_info_c::process_file();
 
   emit finished(result);
 
@@ -81,13 +82,13 @@ qt_kax_info_c::process_file(mm_io_cptr const &file) {
 }
 
 void
-qt_kax_info_c::set_source_file_name(std::string const &file_name) {
-  m_source_file_name = file_name;
-}
-
-void
 qt_kax_info_c::run() {
-  open_and_process_file(m_source_file_name);
+  auto p = p_func();
+
+  if (p->m_in)
+    process_file();
+  else
+    open_and_process_file(p->m_source_file_name);
 }
 
 }

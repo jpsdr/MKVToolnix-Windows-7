@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mtx::gui::Info::Tab</class>
+ <widget class="QWidget" name="mtx::gui::Info::Tab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">mtx::gui::Info::Tab</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="mtx::gui::Util::BasicTreeView" name="elements">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mtx::gui::Util::BasicTreeView</class>
+   <extends>QTreeView</extends>
+   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
+  </customwidget>
+ </customwidgets>
+<resources/>
+ <connections/>
+</ui>

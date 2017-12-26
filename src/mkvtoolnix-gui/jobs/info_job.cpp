@@ -130,8 +130,13 @@ InfoJob::showElementInfo(int level,
 
 void
 InfoJob::showElement(int level,
-                     EbmlElement *e) {
-  emit lineRead(Q("level %1 position %2 size %3: %4").arg(level).arg(e->GetElementPosition()).arg(e->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*e)) + e->GetSize()).arg(Q(kax_element_names_c::get(*e))), InfoLine);
+                     EbmlElement *element) {
+  emit lineRead(Q("level %1 position %2 size %3: %4")
+                .arg(level)
+                .arg(element->GetElementPosition())
+                .arg(element->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*element)) + element->GetSize())
+                .arg(Q(kax_element_names_c::get(*element))),
+                InfoLine);
 }
 
 void
