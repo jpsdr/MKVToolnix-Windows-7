@@ -13,58 +13,72 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class ElideLabelPrivate {
+private:
+  friend class ElideLabel;
+
+  QString m_text;
+  Qt::TextElideMode m_elideMode{Qt::ElideMiddle};
+};
+
 ElideLabel::ElideLabel(QWidget *parent,
                        Qt::WindowFlags flags)
   : QFrame{parent, flags}
+  , p_ptr{new ElideLabelPrivate}
 {
-  initVars();
 }
 
 ElideLabel::ElideLabel(QString const &text,
                        QWidget *parent,
                        Qt::WindowFlags flags)
   : QFrame{parent, flags}
-  , m_text{text}
+  , p_ptr{new ElideLabelPrivate}
 {
-  initVars();
+  p_func()->m_text = text;
+}
+
+ElideLabel::ElideLabel(QWidget *parent,
+                       ElideLabelPrivate &p)
+  : QFrame{parent}
+  , p_ptr{&p}
+{
 }
 
 ElideLabel::~ElideLabel() {
 }
 
-void
-ElideLabel::initVars() {
-  m_elideMode = Qt::ElideMiddle;
-}
-
 QString
 ElideLabel::text()
   const {
-  return m_text;
+  return p_func()->m_text;
 }
 
 void
 ElideLabel::setText(QString const &text) {
-  if (text == m_text)
+  auto p = p_func();
+
+  if (text == p->m_text)
     return;
 
-  m_text = text;
+  p->m_text = text;
   updateLabel();
-  emit textChanged(m_text);
+  emit textChanged(p->m_text);
 }
 
 Qt::TextElideMode
 ElideLabel::elideMode()
   const {
-  return m_elideMode;
+  return p_func()->m_elideMode;
 }
 
 void
 ElideLabel::setElideMode(Qt::TextElideMode mode) {
-  if (mode == m_elideMode)
+  auto p = p_func();
+
+  if (mode == p->m_elideMode)
     return;
 
-  m_elideMode = mode;
+  p->m_elideMode = mode;
   updateLabel();
 }
 
@@ -78,7 +92,7 @@ ElideLabel::sizeHint()
 QSize
 ElideLabel::minimumSizeHint()
   const {
-  if (Qt::ElideNone == m_elideMode)
+  if (Qt::ElideNone == p_func()->m_elideMode)
     return sizeHint();
 
   auto metrics = fontMetrics();
@@ -96,13 +110,15 @@ ElideLabel::changeEvent(QEvent *event) {
 
 void
 ElideLabel::paintEvent(QPaintEvent *event) {
+  auto p = p_func();
+
   QFrame::paintEvent(event);
 
-  QPainter p{this};
   auto r          = contentsRect();
-  auto elidedText = fontMetrics().elidedText(m_text, m_elideMode, r.width());
+  auto elidedText = fontMetrics().elidedText(p->m_text, p->m_elideMode, r.width());
 
-  p.drawText(r, Qt::AlignLeft, elidedText);
+  QPainter painter{this};
+  painter.drawText(r, Qt::AlignLeft, elidedText);
 }
 
 void

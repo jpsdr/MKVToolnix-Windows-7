@@ -5,12 +5,22 @@
 #include <QObject>
 #include <QStringList>
 
+#include "common/qt.h"
+
 class QDropEvent;
 
 namespace mtx { namespace gui { namespace Util {
 
+class FilesDragDropHandlerPrivate;
 class FilesDragDropHandler: public QObject {
   Q_OBJECT;
+
+protected:
+  MTX_DECLARE_PRIVATE(FilesDragDropHandler);
+
+  std::unique_ptr<FilesDragDropHandlerPrivate> const p_ptr;
+
+  explicit FilesDragDropHandler(FilesDragDropHandlerPrivate &p);
 
 public:
   enum class Mode {
@@ -18,12 +28,9 @@ public:
     Remember,
   };
 
-protected:
-  QStringList m_fileNames;
-  Mode m_mode;
-
 public:
   FilesDragDropHandler(Mode mode);
+  virtual ~FilesDragDropHandler();
 
   bool handle(QDropEvent *event, bool isDrop);
   QStringList const & fileNames() const;

@@ -5,7 +5,7 @@
 #include <Qt>
 #include <QTreeView>
 
-#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
+#include "common/qt.h"
 
 class QDragEnterEvent;
 class QDragMoveEvent;
@@ -13,12 +13,16 @@ class QDropEvent;
 
 namespace mtx { namespace gui { namespace Util {
 
+class BasicTreeViewPrivate;
 class BasicTreeView : public QTreeView {
   Q_OBJECT;
 
 protected:
-  bool m_acceptDroppedFiles{}, m_enterActivatesAllSelected{};
-  FilesDragDropHandler m_filesDDHandler;
+  MTX_DECLARE_PRIVATE(BasicTreeView);
+
+  std::unique_ptr<BasicTreeViewPrivate> const p_ptr;
+
+  explicit BasicTreeView(QWidget *parent, BasicTreeViewPrivate &p);
 
 public:
   BasicTreeView(QWidget *parent);

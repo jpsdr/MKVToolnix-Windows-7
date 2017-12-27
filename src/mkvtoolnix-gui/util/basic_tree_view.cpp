@@ -5,14 +5,30 @@
 
 #include "common/list_utils.h"
 #include "mkvtoolnix-gui/util/basic_tree_view.h"
+#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 namespace mtx { namespace gui { namespace Util {
 
 using namespace mtx::gui;
 
+class BasicTreeViewPrivate {
+private:
+  friend class BasicTreeView;
+
+  bool m_acceptDroppedFiles{}, m_enterActivatesAllSelected{};
+  FilesDragDropHandler m_filesDDHandler{FilesDragDropHandler::Mode::Remember};
+};
+
 BasicTreeView::BasicTreeView(QWidget *parent)
   : QTreeView{parent}
-  , m_filesDDHandler{FilesDragDropHandler::Mode::Remember}
+  , p_ptr{new BasicTreeViewPrivate}
+{
+}
+
+BasicTreeView::BasicTreeView(QWidget *parent,
+                             BasicTreeViewPrivate &p)
+  : QTreeView{parent}
+  , p_ptr{&p}
 {
 }
 
@@ -21,19 +37,21 @@ BasicTreeView::~BasicTreeView() {
 
 BasicTreeView &
 BasicTreeView::acceptDroppedFiles(bool enable) {
-  m_acceptDroppedFiles = enable;
+  p_func()->m_acceptDroppedFiles = enable;
   return *this;
 }
 
 BasicTreeView &
 BasicTreeView::enterActivatesAllSelected(bool enable) {
-  m_enterActivatesAllSelected = enable;
+  p_func()->m_enterActivatesAllSelected = enable;
   return *this;
 }
 
 void
 BasicTreeView::dragEnterEvent(QDragEnterEvent *event) {
-  if (m_acceptDroppedFiles && m_filesDDHandler.handle(event, false))
+  auto p = p_func();
+
+  if (p->m_acceptDroppedFiles && p->m_filesDDHandler.handle(event, false))
     return;
 
   QTreeView::dragEnterEvent(event);
@@ -41,7 +59,9 @@ BasicTreeView::dragEnterEvent(QDragEnterEvent *event) {
 
 void
 BasicTreeView::dragMoveEvent(QDragMoveEvent *event) {
-  if (m_acceptDroppedFiles && m_filesDDHandler.handle(event, false))
+  auto p = p_func();
+
+  if (p->m_acceptDroppedFiles && p->m_filesDDHandler.handle(event, false))
     return;
 
   QTreeView::dragMoveEvent(event);
@@ -49,8 +69,10 @@ BasicTreeView::dragMoveEvent(QDragMoveEvent *event) {
 
 void
 BasicTreeView::dropEvent(QDropEvent *event) {
-  if (m_acceptDroppedFiles && m_filesDDHandler.handle(event, true)) {
-    emit filesDropped(m_filesDDHandler.fileNames(), event->mouseButtons(), event->keyboardModifiers());
+  auto p = p_func();
+
+  if (p->m_acceptDroppedFiles && p->m_filesDDHandler.handle(event, true)) {
+    emit filesDropped(p->m_filesDDHandler.fileNames(), event->mouseButtons(), event->keyboardModifiers());
     return;
   }
 
@@ -67,7 +89,9 @@ BasicTreeView::toggleSelectionOfCurrentItem() {
 
 void
 BasicTreeView::keyPressEvent(QKeyEvent *event) {
-  if (   m_enterActivatesAllSelected
+  auto p = p_func();
+
+  if (   p->m_enterActivatesAllSelected
       && (event->modifiers() == Qt::NoModifier)
       && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Return, Qt::Key_Enter)) {
     emit allSelectedActivated();

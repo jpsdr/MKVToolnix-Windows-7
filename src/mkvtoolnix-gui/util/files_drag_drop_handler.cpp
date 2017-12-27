@@ -8,30 +8,54 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class FilesDragDropHandlerPrivate {
+private:
+  friend class FilesDragDropHandler;
+
+  QStringList m_fileNames;
+  FilesDragDropHandler::Mode m_mode{FilesDragDropHandler::Mode::PassThrough};
+
+  FilesDragDropHandlerPrivate(FilesDragDropHandler::Mode mode)
+    : m_mode{mode}
+  {
+  }
+};
+
 FilesDragDropHandler::FilesDragDropHandler(Mode mode)
   : QObject{}
-  , m_mode{mode}
+  , p_ptr{new FilesDragDropHandlerPrivate{mode}}
 {
+}
+
+FilesDragDropHandler::FilesDragDropHandler(FilesDragDropHandlerPrivate &p)
+  : QObject{}
+  , p_ptr{&p}
+{
+}
+
+FilesDragDropHandler::~FilesDragDropHandler() {
 }
 
 bool
 FilesDragDropHandler::handle(QDropEvent *event,
                              bool isDrop) {
+  auto p = p_func();
+
   event->ignore();
 
   if (!event->mimeData()->hasUrls())
     return false;
 
-  if (isDrop && (Mode::Remember == m_mode))
-    m_fileNames = QStringList{};
+  if (isDrop && (Mode::Remember == p->m_mode))
+    p->m_fileNames = QStringList{};
 
   for (auto const &url : event->mimeData()->urls())
     if (!url.isLocalFile())
       return false;
-    else if (isDrop && (Mode::Remember == m_mode))
-      m_fileNames << QDir::toNativeSeparators(url.toLocalFile());
+    else if (isDrop && (Mode::Remember == p->m_mode))
+      p->m_fileNames << QDir::toNativeSeparators(url.toLocalFile());
 
-  if (Mode::Remember == m_mode)
+  if (Mode::Remember == p->m_mode)
     event->acceptProposedAction();
 
   return true;
@@ -40,7 +64,7 @@ FilesDragDropHandler::handle(QDropEvent *event,
 QStringList const &
 FilesDragDropHandler::fileNames()
   const {
-  return m_fileNames;
+  return p_func()->m_fileNames;
 }
 
 }}}

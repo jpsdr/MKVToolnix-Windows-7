@@ -8,11 +8,16 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class FilesDragDropWidgetPrivate;
 class FilesDragDropWidget : public QWidget {
   Q_OBJECT;
 
 protected:
-  mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
+  MTX_DECLARE_PRIVATE(FilesDragDropWidget);
+
+  std::unique_ptr<FilesDragDropWidgetPrivate> const p_ptr;
+
+  explicit FilesDragDropWidget(QWidget *parent, FilesDragDropWidgetPrivate &p);
 
 public:
   explicit FilesDragDropWidget(QWidget *parent = nullptr);

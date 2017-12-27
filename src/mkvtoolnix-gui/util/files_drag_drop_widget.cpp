@@ -7,9 +7,23 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class FilesDragDropWidgetPrivate {
+private:
+  friend class FilesDragDropWidget;
+
+  mtx::gui::Util::FilesDragDropHandler m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember};
+};
+
 FilesDragDropWidget::FilesDragDropWidget(QWidget *parent)
   : QWidget{parent}
-  , m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember}
+  , p_ptr{new FilesDragDropWidgetPrivate}
+{
+}
+
+FilesDragDropWidget::FilesDragDropWidget(QWidget *parent,
+                                         FilesDragDropWidgetPrivate &p)
+  : QWidget{parent}
+  , p_ptr{&p}
 {
 }
 
@@ -18,13 +32,15 @@ FilesDragDropWidget::~FilesDragDropWidget() {
 
 void
 FilesDragDropWidget::dragEnterEvent(QDragEnterEvent *event) {
-  m_filesDDHandler.handle(event, false);
+  p_func()->m_filesDDHandler.handle(event, false);
 }
 
 void
 FilesDragDropWidget::dropEvent(QDropEvent *event) {
-  if (m_filesDDHandler.handle(event, true))
-    emit filesDropped(m_filesDDHandler.fileNames());
+  auto p = p_func();
+
+  if (p->m_filesDDHandler.handle(event, true))
+    emit filesDropped(p->m_filesDDHandler.fileNames());
 }
 
 }}}

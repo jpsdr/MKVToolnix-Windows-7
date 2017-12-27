@@ -5,19 +5,24 @@
 #include <Qt>
 #include <QFrame>
 
+#include "common/qt.h"
+
 class QString;
 class QEvent;
 class QPaintEvent;
 
 namespace mtx { namespace gui { namespace Util {
 
+class ElideLabelPrivate;
 class ElideLabel: public QFrame {
   Q_OBJECT;
-  Q_PROPERTY(Qt::TextElideMode elideMode READ elideMode WRITE setElideMode);
 
 protected:
-  QString m_text;
-  Qt::TextElideMode m_elideMode;
+  MTX_DECLARE_PRIVATE(ElideLabel);
+
+  std::unique_ptr<ElideLabelPrivate> const p_ptr;
+
+  explicit ElideLabel(QWidget *parent, ElideLabelPrivate &p);
 
 public:
   explicit ElideLabel(QWidget *parent = nullptr, Qt::WindowFlags flags = 0);
@@ -42,7 +47,6 @@ protected:
   virtual void changeEvent(QEvent *event);
   virtual void paintEvent(QPaintEvent *event);
 
-  void initVars();
   void updateLabel();
 };
 
