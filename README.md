@@ -286,13 +286,13 @@ MKVToolNix includes and uses the following libraries & artwork:
 
 ## 6.1. avilib
 
-Reading and writing avi files.
+Reading and writing AVI files. Originally part of the `transcode`
+package.
 
-Copyright (C) 1999 Rainer Johanni <Rainer@Johanni.de>, originally part
-of the transcode package.
-
+  * Copyright: 1999 Rainer Johanni <Rainer@Johanni.de>
   * License: GNU General Public License v2 or later
-  * URL: the project doesn't seem to have a home page anymore
+  * URL: the `transcode` project doesn't seem to have a home page anymore
+  * Corresponding files: `lib/avilib-0.6.10/*`
 
 ## 6.2. Boost's utf8_codecvt_facet
 
@@ -300,22 +300,30 @@ A class, `utf8_codecvt_facet`, derived from `std::codecvt<wchar_t, char>`,
 which can be used to convert utf8 data in files into `wchar_t` strings
 in the application.
 
+  * Copyright:
+    * 2001 Ronald Garcia, Indiana University (garcia@osl.iu.edu)
+    * Andrew Lumsdaine, Indiana University (lums@osl.iu.edu)
   * License: Boost Software License - Version 1.0 (see `doc/licenses/Boost-1.0.txt`)
   * URL: http://www.boost.org
+  * Corresponding files: `lib/boost/*`
 
 ## 6.3. libEBML
 
 A C++ library to parse EBML files
 
+  * Copyright: 2002-2010 Steve Lhomme et. al.
   * License: GNU Lesser General Public License v2.1 or later (see `doc/licenses/LGPL-2.1.txt`)
   * URL: http://www.matroska.org/
+  * Corresponding files: `lib/libebml/*`
 
 ## 6.4. libMatroska
 
 A C++ library to parse Matroska files
 
+  * Copyright: 2002-2010 Steve Lhomme et. al.
   * License: GNU Lesser General Public License v2.1 or later (see `doc/licenses/LGPL-2.1.txt`)
   * URL: http://www.matroska.org/
+  * Corresponding files: `lib/libmatroska/*`
 
 ## 6.5. librmff
 
@@ -323,29 +331,37 @@ librmff is short for 'RealMedia file format access library'. It aims
 at providing the programmer an easy way to read and write RealMedia
 files.
 
+  * Copyright: Moritz Bunkus
   * License: GNU Lesser General Public License v2.1 or later (see `doc/licenses/LGPL-2.1.txt`)
   * URL: https://www.bunkus.org/videotools/librmff/index.html
+  * Corresponding files: `lib/librmff/*`
 
 ## 6.6. nlohmann's JSON
 
 JSON for Modern C++
 
+  * Copyright: 2013-2016 Niels Lohmann
   * License: MIT (see `doc/licenses/nlohmann-json-MIT.txt`)
   * URL: https://github.com/nlohmann/json
+  * Corresponding files: `lib/nlohmann-json/*`
 
 ## 6.7. pugixml
 
 An XML processing library
 
+  * Copyright: 2006–2017 by Arseny Kapoulkine <arseny.kapoulkine@gmail.com>
   * License: MIT (see `doc/licenses/pugixml-MIT.txt`)
   * URL: http://pugixml.org/
+  * Corresponding files: `lib/pugixml/*`
 
 ## 6.8. utf8-cpp
 
 UTF-8 with C++ in a Portable Way
 
+  * Copyright: 2006 Nemanja Trifunovic
   * License: custom (see `doc/licenses/utf8-cpp-custom.txt`)
   * URL: http://utfcpp.sourceforge.net/
+  * Corresponding files: `lib/utf8-cpp/*`
 
 ## 6.9. Oxygen icons and sound files
 
@@ -364,11 +380,36 @@ from the Oxygen project.
 
   * License: GNU Lesser General Public License v3 (see `doc/licenses/LGPL-3.0.txt`)
   * URL: https://techbase.kde.org/Projects/Oxygen
+  * Corresponding files:
+    * `share/icons/*` (except for `share/icons/*/mkv*`)
+    * `share/sounds/*`
 
-## 6.10. QtWaitingSpinner
+## 6.10. MKVToolNix icons
+
+  * Copyright:
+    * 2011 Alexandr Grigorcea <cahr.gr@gmail.com>
+    * 2012 Eduard Geier <edu.g@online.de>
+    * 2012 Ben Humpert <ben@an3k.de>
+  * License: Creative Commons Attribution 3.0 Unported (CC BY 3.0) (see `doc/licenses/CC-BY-3.0.txt`)
+  * Corresponding files: `share/icons/*/mkv*`
+
+## 6.11. QtWaitingSpinner
 
 A highly configurable, custom Qt widget for showing "waiting" or
 "loading" spinner icons in Qt applications
 
+  * Copyright:
+    * 2012–2014 by Alexander Turkin
+    * 2014 by William Hallatt
+    * 2015 by Jacob Dawid
   * License: MIT (see `doc/licenses/QtWaitingSpinner-MIT.txt`)
   * URL: https://github.com/snowwlex/QtWaitingSpinner
+  * Corresponding files: `src/mkvtoolnix-gui/util/waiting_spinning_widget.{h,cpp}`
+
+## 6.12. Fancy tab widget
+
+A beefed-up tab widget class for Qt extracted from the Qt Creator project
+
+  * Copyright: 2011 Nokia Corporation and/or its subsidiary(-ies).
+  * License: GNU General Public License v2 (see `COPYING`)
+  * Corresponding files: `src/mkvtoolnix-gui/util/fancy_tab_widget.{h,cpp}`
