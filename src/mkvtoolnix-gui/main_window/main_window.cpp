@@ -33,6 +33,7 @@
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/moving_pixmap_overlay.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/waiting_spinner_widget.h"
 #include "mkvtoolnix-gui/util/widget.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
@@ -48,6 +49,7 @@ class MainWindowPrivate {
 
   std::unique_ptr<Ui::MainWindow> ui;
   StatusBarProgressWidget *statusBarProgress{};
+  Util::WaitingSpinnerWidget *queueSpinner{};
   Merge::Tool *toolMerge{};
   Jobs::Tool *toolJobs{};
   HeaderEditor::Tool *toolHeaderEditor{};
@@ -74,14 +76,9 @@ MainWindow::MainWindow(QWidget *parent)
 
   // Setup UI controls.
   p->ui->setupUi(this);
+
   setToolSelectorVisibility();
-
-  p->movingPixmapOverlay = std::make_unique<Util::MovingPixmapOverlay>(centralWidget());
-
-  p->statusBarProgress = new StatusBarProgressWidget{this};
-  p->ui->statusBar->addPermanentWidget(p->statusBarProgress);
-
-  setupMenu();
+  setupAuxiliaryWidgets();
   setupToolSelector();
   setupHelpURLs();
 
@@ -93,6 +90,8 @@ MainWindow::MainWindow(QWidget *parent)
   Util::restoreWidgetGeometry(this);
 
   App::programRunner().setup();
+
+  setupConnections();
 
   jobTool()->loadAndStart();
 
@@ -149,27 +148,72 @@ MainWindow::createNotImplementedWidget() {
 }
 
 void
-MainWindow::setupMenu() {
+MainWindow::setupAuxiliaryWidgets() {
   auto p = p_func();
 
-  connect(p->ui->actionGUIExit,                   &QAction::triggered,             this, &MainWindow::close);
-  connect(p->ui->actionGUIPreferences,            &QAction::triggered,             this, &MainWindow::editPreferences);
+  p->movingPixmapOverlay = std::make_unique<Util::MovingPixmapOverlay>(centralWidget());
 
-  connect(p->ui->actionHelpFAQ,                   &QAction::triggered,             this, &MainWindow::visitHelpURL);
-  connect(p->ui->actionHelpKnownProblems,         &QAction::triggered,             this, &MainWindow::visitHelpURL);
-  connect(p->ui->actionHelpMkvmergeDocumentation, &QAction::triggered,             this, &MainWindow::visitMkvmergeDocumentation);
-  connect(p->ui->actionHelpWebSite,               &QAction::triggered,             this, &MainWindow::visitHelpURL);
-  connect(p->ui->actionHelpReportBug,             &QAction::triggered,             this, &MainWindow::visitHelpURL);
+  p->statusBarProgress = new StatusBarProgressWidget{this};
+  p->ui->statusBar->addPermanentWidget(p->statusBarProgress);
 
-  connect(p->ui->actionWindowNext,                &QAction::triggered,             this, [this]() { showNextOrPreviousSubWindow(1);  });
-  connect(p->ui->actionWindowPrevious,            &QAction::triggered,             this, [this]() { showNextOrPreviousSubWindow(-1); });
-  connect(p->ui->menuWindow,                      &QMenu::aboutToShow,             this, &MainWindow::setupWindowMenu);
+  // Queue status spinner
+  p->queueSpinner = new Util::WaitingSpinnerWidget{nullptr, false, false};
+  p->queueSpinner->setMinimumSize(23, 23);
+  p->queueSpinner->setMinimumTrailOpacity(15.0);
+  p->queueSpinner->setTrailFadePercentage(70.0);
+  p->queueSpinner->setNumberOfLines(12);
+  p->queueSpinner->setLineLength(9);
+  p->queueSpinner->setLineWidth(2);
+  p->queueSpinner->setInnerRadius(4);
+  p->queueSpinner->setRevolutionsPerSecond(1);
+  p->queueSpinner->setColor(QColor(0, 0, 0));
 
-  connect(this,                                   &MainWindow::preferencesChanged, this, &MainWindow::setToolSelectorVisibility);
+  p->ui->statusBar->addPermanentWidget(p->queueSpinner);
+}
+
+void
+MainWindow::setupConnections() {
+  auto p             = p_func();
+  auto currentJobTab = p->watchJobTool->currentJobTab();
+  auto jobModel      = p->toolJobs->model();
+
+  // Menu actions:
+  connect(p->ui->actionGUIExit,                   &QAction::triggered,                                    this,                 &MainWindow::close);
+  connect(p->ui->actionGUIPreferences,            &QAction::triggered,                                    this,                 &MainWindow::editPreferences);
+
+  connect(p->ui->actionHelpFAQ,                   &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
+  connect(p->ui->actionHelpKnownProblems,         &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
+  connect(p->ui->actionHelpMkvmergeDocumentation, &QAction::triggered,                                    this,                 &MainWindow::visitMkvmergeDocumentation);
+  connect(p->ui->actionHelpWebSite,               &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
+  connect(p->ui->actionHelpReportBug,             &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
+
+  connect(p->ui->actionWindowNext,                &QAction::triggered,                                    this,                 [this]() { showNextOrPreviousSubWindow(1);  });
+  connect(p->ui->actionWindowPrevious,            &QAction::triggered,                                    this,                 [this]() { showNextOrPreviousSubWindow(-1); });
+  connect(p->ui->menuWindow,                      &QMenu::aboutToShow,                                    this,                 &MainWindow::setupWindowMenu);
 
 #if defined(HAVE_UPDATE_CHECK)
-  connect(p->ui->actionHelpCheckForUpdates,       &QAction::triggered,             this, &MainWindow::checkForUpdates);
+  connect(p->ui->actionHelpCheckForUpdates,       &QAction::triggered,                                    this,                 &MainWindow::checkForUpdates);
 #endif  // HAVE_UPDATE_CHECK
+
+  // Tool actions:
+  connect(p->ui->actionGUIMergeTool,              &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+  // connect(p->ui->actionGUIExtractionTool,         &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+  // connect(p->ui->actionGUIInfoTool,               &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+  connect(p->ui->actionGUIHeaderEditor,           &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+  connect(p->ui->actionGUIChapterEditor,          &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+  // connect(p->ui->actionGUITagEditor,              &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+  connect(p->ui->actionGUIJobQueue,               &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+  connect(p->ui->actionGUIJobOutput,              &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
+
+  connect(p->ui->tool,                            &Util::FancyTabWidget::currentChanged,                  this,                 &MainWindow::toolChanged);
+  connect(jobModel,                               &Jobs::Model::progressChanged,                          p->statusBarProgress, &StatusBarProgressWidget::setProgress);
+  connect(jobModel,                               &Jobs::Model::jobStatsChanged,                          p->statusBarProgress, &StatusBarProgressWidget::setJobStats);
+  connect(jobModel,                               &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, p->statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
+  connect(jobModel,                               &Jobs::Model::queueStatusChanged,                       this,                 &MainWindow::startStopQueueSpinner);
+  connect(currentJobTab,                          &WatchJobs::Tab::watchCurrentJobTabCleared,             p->statusBarProgress, &StatusBarProgressWidget::reset);
+
+  // Auxiliary actions:
+  connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setToolSelectorVisibility);
 }
 
 void
@@ -210,23 +254,6 @@ MainWindow::setupToolSelector() {
   p->ui->actionGUIExtractionTool->setVisible(false);
   p->ui->actionGUIInfoTool->setVisible(false);
   p->ui->actionGUITagEditor->setVisible(false);
-
-  auto currentJobTab = p->watchJobTool->currentJobTab();
-
-  connect(p->ui->actionGUIMergeTool,      &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-  // connect(p->ui->actionGUIExtractionTool, &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-  // connect(p->ui->actionGUIInfoTool,       &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-  connect(p->ui->actionGUIHeaderEditor,   &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-  connect(p->ui->actionGUIChapterEditor,  &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-  // connect(p->ui->actionGUITagEditor,      &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-  connect(p->ui->actionGUIJobQueue,       &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-  connect(p->ui->actionGUIJobOutput,      &QAction::triggered,                                    this,                 &MainWindow::changeToolToSender);
-
-  connect(p->ui->tool,                    &Util::FancyTabWidget::currentChanged,                  this,                 &MainWindow::toolChanged);
-  connect(p->toolJobs->model(),           &Jobs::Model::progressChanged,                          p->statusBarProgress, &StatusBarProgressWidget::setProgress);
-  connect(p->toolJobs->model(),           &Jobs::Model::jobStatsChanged,                          p->statusBarProgress, &StatusBarProgressWidget::setJobStats);
-  connect(p->toolJobs->model(),           &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, p->statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
-  connect(currentJobTab,                  &WatchJobs::Tab::watchCurrentJobTabCleared,             p->statusBarProgress, &StatusBarProgressWidget::reset);
 }
 
 void
@@ -776,6 +803,16 @@ MainWindow::showSubWindow(unsigned int tabIdx) {
 
   if (subWindow.first && (tabIdx < static_cast<unsigned int>(subWindow.second->count())))
     subWindow.second->setCurrentIndex(tabIdx);
+}
+
+void
+MainWindow::startStopQueueSpinner(Jobs::QueueStatus status) {
+  auto p = p_func();
+
+  if (status == Jobs::QueueStatus::Running)
+    p->queueSpinner->start();
+  else
+    p->queueSpinner->stop();
 }
 
 }}

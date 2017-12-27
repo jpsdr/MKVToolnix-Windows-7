@@ -364,3 +364,11 @@ from the Oxygen project.
 
   * License: GNU Lesser General Public License v3 (see `doc/licenses/LGPL-3.0.txt`)
   * URL: https://techbase.kde.org/Projects/Oxygen
+
+## 6.10. QtWaitingSpinner
+
+A highly configurable, custom Qt widget for showing "waiting" or
+"loading" spinner icons in Qt applications
+
+  * License: MIT (see `doc/licenses/QtWaitingSpinner-MIT.txt`)
+  * URL: https://github.com/snowwlex/QtWaitingSpinner

@@ -25,6 +25,7 @@ class Tool;
 }
 namespace Jobs {
 class Tool;
+enum class QueueStatus;
 }
 namespace Merge {
 class Tool;
@@ -96,6 +97,7 @@ public slots:
   virtual void setupWindowMenu();
   virtual void showNextOrPreviousSubWindow(int delta);
   virtual void showSubWindow(unsigned int tabIdx);
+  virtual void startStopQueueSpinner(Jobs::QueueStatus status);
 
 public:                         // static
   static MainWindow *get();
@@ -114,9 +116,10 @@ public:                         // static
   static QIcon const & noIcon();
 
 protected:
-  virtual void setupMenu();
+  virtual void setupConnections();
   virtual void setupToolSelector();
   virtual void setupHelpURLs();
+  virtual void setupAuxiliaryWidgets();
   virtual QWidget *createNotImplementedWidget();
 
   virtual void showEvent(QShowEvent *event);
