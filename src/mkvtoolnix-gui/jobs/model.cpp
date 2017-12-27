@@ -272,15 +272,13 @@ Model::onStatusChanged(uint64_t id,
   if (row == RowNotFound)
     return;
 
-  auto &job       = *m_jobsById[id];
-  auto status     = job.status();
-  auto numBefore  = m_toBeProcessed.count();
+  auto &job   = *m_jobsById[id];
+  auto status = job.status();
+
+  // qDebug() << "Model::onStatusChanged id" << id << "old" << static_cast<int>(oldStatus) << "new" << newStatus;
 
   if (job.isToBeProcessed())
     m_toBeProcessed.insert(&job);
-
-  if (m_toBeProcessed.count() != numBefore)
-    updateProgress();
 
   if (included_in(status, Job::PendingManual, Job::PendingAuto, Job::Running))
     job.setDateFinished(QDateTime{});
@@ -300,6 +298,8 @@ Model::onStatusChanged(uint64_t id,
 
   if ((Job::Running == oldStatus) && (Job::Running != newStatus))
     ++m_queueNumDone;
+
+  updateProgress();
 
   if (newStatus != Job::Running)
     job.saveQueueFile();
@@ -478,6 +478,9 @@ Model::updateProgress() {
 
     } else if (Job::PendingAuto == job->status())
       ++numPendingAuto;
+
+  if ((m_queueNumDone + numRunning + numPendingAuto) == 0)
+    return;
 
   auto progress      = numRunning ? runningProgress / numRunning : 0u;
   auto totalProgress = (m_queueNumDone * 100 + runningProgress) / (m_queueNumDone + numRunning + numPendingAuto);
