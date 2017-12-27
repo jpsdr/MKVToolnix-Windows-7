@@ -1796,12 +1796,14 @@ kax_info_c::process_file(std::string const &file_name) {
   }
 
   // open output file
-  try {
-    m_out = std::make_shared<mm_file_io_c>(m_destination_file_name, MODE_CREATE);
+  if (!m_destination_file_name.empty()) {
+    try {
+      m_out = std::make_shared<mm_file_io_c>(m_destination_file_name, MODE_CREATE);
 
-  } catch (mtx::mm_io::exception &ex) {
-    ui_show_error((boost::format(Y("The file '%1%' could not be opened for writing: %2%.")) % m_destination_file_name % ex).str());
-    return result_e::failed;
+    } catch (mtx::mm_io::exception &ex) {
+      ui_show_error((boost::format(Y("The file '%1%' could not be opened for writing: %2%.")) % m_destination_file_name % ex).str());
+      return result_e::failed;
+    }
   }
 
   try {
