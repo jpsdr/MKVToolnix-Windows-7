@@ -220,8 +220,10 @@ Job::setPendingAuto() {
 
   QMutexLocker locked{&p->mutex};
 
-  if (!mtx::included_in(p->status, PendingAuto, Running))
+  if (!mtx::included_in(p->status, PendingAuto, Running)) {
+    setProgress(0);
     setStatus(PendingAuto);
+  }
 }
 
 void
@@ -230,8 +232,10 @@ Job::setPendingManual() {
 
   QMutexLocker locked{&p->mutex};
 
-  if ((PendingManual != p->status) && (Running != p->status))
+  if ((PendingManual != p->status) && (Running != p->status)) {
+    setProgress(0);
     setStatus(PendingManual);
+  }
 }
 
 void

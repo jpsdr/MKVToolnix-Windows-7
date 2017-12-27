@@ -428,6 +428,7 @@ Model::startJobImmediately(Job &job) {
   MainWindow::watchCurrentJobTab()->disconnectFromJob(job);
   MainWindow::watchJobTool()->viewOutput(job);
 
+  job.setProgress(0);
   job.start();
   updateJobStats();
 }
