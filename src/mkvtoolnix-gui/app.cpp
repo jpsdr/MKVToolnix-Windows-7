@@ -215,7 +215,7 @@ App::reinitializeLanguageLists() {
 
   initializeLanguageLists();
 
-  qt_kax_info_c::init_common_boost_formats();
+  qt_kax_info_c::init_common_formats();
   kax_element_names_c::reset();
 }
 

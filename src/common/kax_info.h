@@ -57,8 +57,15 @@ protected:
   using track_cptr = std::shared_ptr<track_t>;
 
 protected:
-  static std::vector<boost::format> ms_common_boost_formats;
+  static std::vector<boost::format> ms_common_formats;
+  static unsigned int ms_bf_show_unknown_element, ms_bf_ebmlvoid, ms_bf_format_binary_1, ms_bf_format_binary_2, ms_bf_block_group_block_summary, ms_bf_block_group_block_frame, ms_bf_block_group_duration,
+    ms_bf_block_group_reference_1, ms_bf_block_group_reference_2, ms_bf_block_group_reference_priority, ms_bf_block_group_virtual, ms_bf_block_group_reference_virtual, ms_bf_block_group_add_id, ms_bf_block_group_additional,
+    ms_bf_block_group_slice_lace, ms_bf_block_group_slice_frame, ms_bf_block_group_slice_delay, ms_bf_block_group_slice_duration, ms_bf_block_group_slice_add_id, ms_bf_block_group_summary_position,
+    ms_bf_block_group_summary_with_duration, ms_bf_block_group_summary_no_duration, ms_bf_block_group_summary_v2, ms_bf_simple_block_basics, ms_bf_simple_block_frame, ms_bf_simple_block_summary,
+    ms_bf_simple_block_summary_v2, ms_bf_cluster_timestamp, ms_bf_cluster_position, ms_bf_cluster_previous_size, ms_bf_codec_state, ms_bf_at, ms_bf_size, ms_bf_block_group_discard_padding, ms_bf_at_hex,
+    ms_bf_block_group_block_adler, ms_bf_simple_block_adler, ms_bf_simple_block_position;
 
+protected:
   std::vector<track_cptr> m_tracks;
   std::map<unsigned int, track_cptr> m_tracks_by_number;
   std::map<unsigned int, track_info_t> m_track_info;
@@ -137,7 +144,7 @@ protected:
   void display_track_info();
 
 public:
-  static void init_common_boost_formats();
+  static void init_common_formats();
 };
 using kax_info_cptr = std::shared_ptr<kax_info_c>;
 
