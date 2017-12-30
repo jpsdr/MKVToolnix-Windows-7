@@ -49,10 +49,6 @@
 #include <matroska/KaxTrackVideo.h>
 #include <matroska/KaxVersion.h>
 
-#if !defined(MATROSKA_VERSION)
-#define MATROSKA_VERSION 2
-#endif
-
 #include "avilib.h"
 #include "common/at_scope_exit.h"
 #include "common/avc.h"
@@ -543,11 +539,9 @@ kax_info_c::handle_audio_track(EbmlElement *&l3,
       show_element(l4, 4, boost::format(Y("Channels: %1%")) % channels.GetValue());
       summary.push_back((boost::format(Y("channels: %1%")) % channels.GetValue()).str());
 
-#if MATROSKA_VERSION >= 2
     } else if (Is<KaxAudioPosition>(l4)) {
       KaxAudioPosition &positions = *static_cast<KaxAudioPosition *>(l4);
       show_element(l4, 4, boost::format(Y("Channel positions: %1%")) % format_binary(positions));
-#endif
 
     } else if (Is<KaxAudioBitDepth>(l4)) {
       KaxAudioBitDepth &bps = *static_cast<KaxAudioBitDepth *>(l4);
@@ -728,7 +722,6 @@ kax_info_c::handle_video_track(EbmlElement *&l3,
       show_element(l4, 4, boost::format(Y("Pixel crop bottom: %1%")) % bottom.GetValue());
       summary.push_back((boost::format(Y("pixel crop bottom: %1%")) % bottom.GetValue()).str());
 
-#if MATROSKA_VERSION >= 2
     } else if (Is<KaxVideoDisplayUnit>(l4)) {
       auto unit = static_cast<KaxVideoDisplayUnit *>(l4)->GetValue();
       show_element(l4, 4,
@@ -775,7 +768,6 @@ kax_info_c::handle_video_track(EbmlElement *&l3,
                       : 1 == ar_type ? Y(" (keep aspect ratio)")
                       : 2 == ar_type ? Y(" (fixed)")
                       :                  ""));
-#endif
     } else if (Is<KaxVideoColourSpace>(l4))
       show_element(l4, 4, boost::format(Y("Colour space: %1%")) % format_binary(*static_cast<KaxVideoColourSpace *>(l4)));
 
@@ -967,10 +959,8 @@ kax_info_c::handle_tracks(int &upper_lvl_el,
                           : 'b' == track->type ? "buttons"
                           :                      "unknown"));
 
-#if MATROSKA_VERSION >= 2
         } else if (Is<KaxTrackFlagEnabled>(l3))
           show_element(l3, 3, boost::format(Y("Enabled: %1%"))                % static_cast<KaxTrackFlagEnabled *>(l3)->GetValue());
-#endif
 
         else if (Is<KaxTrackName>(l3))
           show_element(l3, 3, boost::format(Y("Name: %1%"))                   % static_cast<KaxTrackName *>(l3)->GetValueUTF8());
@@ -994,7 +984,6 @@ kax_info_c::handle_tracks(int &upper_lvl_el,
         } else if (Is<KaxCodecName>(l3))
           show_element(l3, 3, boost::format(Y("Codec name: %1%"))             % static_cast<KaxCodecName *>(l3)->GetValueUTF8());
 
-#if MATROSKA_VERSION >= 2
         else if (Is<KaxCodecSettings>(l3))
           show_element(l3, 3, boost::format(Y("Codec settings: %1%"))         % static_cast<KaxCodecSettings *>(l3)->GetValueUTF8());
 
@@ -1009,7 +998,6 @@ kax_info_c::handle_tracks(int &upper_lvl_el,
 
         else if (Is<KaxTrackOverlay>(l3))
           show_element(l3, 3, boost::format(Y("Track overlay: %1%"))          % static_cast<KaxTrackOverlay *>(l3)->GetValue());
-#endif // MATROSKA_VERSION >= 2
 
         else if (Is<KaxTrackMinCache>(l3))
           show_element(l3, 3, boost::format(Y("MinCache: %1%"))               % static_cast<KaxTrackMinCache *>(l3)->GetValue());
@@ -1168,7 +1156,6 @@ kax_info_c::handle_cues(int &upper_lvl_el,
             else if (Is<KaxCueBlockNumber>(l4))
               show_element(l4, 4, boost::format(Y("Cue block number: %1%"))     % static_cast<KaxCueBlockNumber *>(l4)->GetValue());
 
-#if MATROSKA_VERSION >= 2
             else if (Is<KaxCueCodecState>(l4))
               show_element(l4, 4, boost::format(Y("Cue codec state: %1%"))      % static_cast<KaxCueCodecState *>(l4)->GetValue());
 
@@ -1190,8 +1177,6 @@ kax_info_c::handle_cues(int &upper_lvl_el,
 
                 else if (!is_global(l5, 5))
                   show_unknown_element(l5, 5);
-
-#endif // MATROSKA_VERSION >= 2
 
             } else if (!is_global(l4, 4))
               show_unknown_element(l4, 4);
@@ -1324,7 +1309,6 @@ kax_info_c::handle_block_group(EbmlElement *&l2,
     } else if (Is<KaxReferencePriority>(l3))
       show_element(l3, 3, BF_BLOCK_GROUP_REFERENCE_PRIORITY % static_cast<KaxReferencePriority *>(l3)->GetValue());
 
-#if MATROSKA_VERSION >= 2
     else if (Is<KaxBlockVirtual>(l3))
       show_element(l3, 3, BF_BLOCK_GROUP_VIRTUAL            % format_binary(*static_cast<KaxBlockVirtual *>(l3)));
 
@@ -1339,7 +1323,6 @@ kax_info_c::handle_block_group(EbmlElement *&l2,
       show_element(l3, 3, BF_BLOCK_GROUP_DISCARD_PADDING    % (static_cast<double>(value) / 1000000.0) % value);
     }
 
-#endif // MATROSKA_VERSION >= 2
     else if (Is<KaxBlockAdditions>(l3)) {
       show_element(l3, 3, Y("Additions"));
 

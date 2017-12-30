@@ -35,11 +35,6 @@
 #include "common/strings/editing.h"
 #include "common/translation.h"
 
-#if !defined(LIBMATROSKA_VERSION) || (LIBMATROSKA_VERSION <= 0x000801)
-#define matroska_init()
-#define matroska_done()
-#endif
-
 #if defined(SYS_WINDOWS)
 #include "common/fs_sys_helpers.h"
 

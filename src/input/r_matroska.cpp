@@ -1220,10 +1220,7 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
 
   // For older files.
   track->v_frate        = FindChildValue<KaxVideoFrameRate>(ktvideo, track->v_frate);
-
-#if MATROSKA_VERSION >= 2
   track->v_display_unit = FindChildValue<KaxVideoDisplayUnit>(ktvideo);
-#endif
 
   if (!track->v_width)
     mxerror(Y("matroska_reader: Pixel width is missing.\n"));
