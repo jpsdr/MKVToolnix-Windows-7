@@ -56,7 +56,8 @@ public slots:
 
   void show_error(QString const &message);
   void show_progress(int percentage, const QString &text);
-  void show_element(int level, QString const &text, int64_t position, int64_t size);
+  void show_element_info(int level, QString const &text, int64_t position, int64_t size);
+  void show_element(int level, EbmlElement *e);
   void add_item(int level, QString const &text);
   void toggle_element_expansion(QTreeWidgetItem *item);
 

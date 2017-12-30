@@ -33,14 +33,16 @@ public:
   virtual result_e process_file(std::string const &file_name) override;
 
   virtual void ui_show_error(std::string const &error) override;
-  virtual void ui_show_element(int level, std::string const &text, int64_t position, int64_t size) override;
+  virtual void ui_show_element_info(int level, std::string const &text, int64_t position, int64_t size) override;
+  virtual void ui_show_element(EbmlElement &e) override;
   virtual void ui_show_progress(int percentage, std::string const &text) override;
 
 public slots:
   virtual void start_processing();
 
 signals:
-  void element_found(int level, QString const &text, int64_t position, int64_t size);
+  void element_info_found(int level, QString const &text, int64_t position, int64_t size);
+  void element_found(int level, EbmlElement *e);
   void error_found(const QString &message);
   void progress_changed(int percentage, const QString &text);
   void started();

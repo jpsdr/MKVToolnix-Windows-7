@@ -63,6 +63,7 @@
 #include "common/fourcc.h"
 #include "common/hevc.h"
 #include "common/hevcc.h"
+#include "common/kax_element_names.h"
 #include "common/kax_file.h"
 #include "common/kax_info.h"
 #include "common/math.h"
@@ -124,12 +125,16 @@ unsigned int kax_info_c::ms_bf_at_hex                            = 0;
 unsigned int kax_info_c::ms_bf_block_group_block_adler           = 0;
 unsigned int kax_info_c::ms_bf_simple_block_adler                = 0;
 unsigned int kax_info_c::ms_bf_simple_block_position             = 0;
+unsigned int kax_info_c::ms_bf_crc32_value                       = 0;
+unsigned int kax_info_c::ms_bf_element_size                      = 0;
 
 kax_info_c::kax_info_c()
   : m_out{g_mm_stdio}
 {
   if (ms_common_formats.empty())
     init_common_formats();
+
+  init_custom_element_value_formatters_and_processors();
 }
 
 kax_info_c::~kax_info_c() {
@@ -225,6 +230,8 @@ kax_info_c::init_common_formats() {
   BF_ADD(ms_bf_size,                              Y(" size %1%"));
   BF_ADD(ms_bf_block_group_discard_padding,       Y("Discard padding: %|1$.3f|ms (%2%ns)"));
   BF_ADD(ms_bf_at_hex,                            Y(" at 0x%|1$x|"));
+  BF_ADD(ms_bf_crc32_value,                         "0x%|1$08x|");
+  BF_ADD(ms_bf_element_size,                      Y("size %1%"));
 
   ms_bf_block_group_block_adler = ms_bf_format_binary_2;
   ms_bf_simple_block_adler      = ms_bf_format_binary_2;
@@ -234,14 +241,25 @@ kax_info_c::init_common_formats() {
 #undef BF_ADD
 
 void
-kax_info_c::ui_show_element(int level,
-                            std::string const &text,
-                            int64_t position,
-                            int64_t size) {
+kax_info_c::ui_show_element_info(int level,
+                                 std::string const &text,
+                                 int64_t position,
+                                 int64_t size) {
   std::string level_buffer(level, ' ');
   level_buffer[0] = '|';
 
   m_out->write((boost::format("%1%+ %2%\n") % level_buffer % create_element_text(text, position, size)).str());
+}
+
+void
+kax_info_c::ui_show_element(EbmlElement &e) {
+  if (m_show_summary)
+    return;
+
+  std::string level_buffer(m_level, ' ');
+  level_buffer[0] = '|';
+
+  m_out->write((boost::format("%1%+ %2%\n") % level_buffer % create_text_representation(e)).str());
 }
 
 void
@@ -257,15 +275,7 @@ kax_info_c::ui_show_progress(int /* percentage */,
 void
 kax_info_c::show_unknown_element(EbmlElement *e,
                                  int level) {
-  static boost::format s_bf_show_unknown_element("%|1$02x|");
-
-  int i;
-  std::string element_id;
-  for (i = EBML_ID_LENGTH(static_cast<const EbmlId &>(*e)) - 1; 0 <= i; --i)
-    element_id += (s_bf_show_unknown_element % ((EBML_ID_VALUE(static_cast<const EbmlId &>(*e)) >> (i * 8)) & 0xff)).str();
-
-  std::string s = (ms_common_formats[ms_bf_show_unknown_element] % EBML_NAME(e) % element_id % (e->GetSize() + e->HeadSize())).str();
-  show_element(e, level, s, true);
+  show_element(e, level, create_unknown_element_text(*e), true);
 }
 
 void
@@ -276,12 +286,12 @@ kax_info_c::show_element(EbmlElement *l,
   if (m_show_summary)
     return;
 
-  ui_show_element(level, info,
-                    !l                 ? -1
-                  :                      static_cast<int64_t>(l->GetElementPosition()),
-                    !l                 ? -1
-                  : !l->IsFiniteSize() ? -2
-                  :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()));
+  ui_show_element_info(level, info,
+                         !l                 ? -1
+                       :                      static_cast<int64_t>(l->GetElementPosition()),
+                         !l                 ? -1
+                       : !l->IsFiniteSize() ? -2
+                       :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()));
 
   if (!l || !skip)
     return;
@@ -304,6 +314,18 @@ kax_info_c::show_element(EbmlElement *l,
 }
 
 std::string
+kax_info_c::create_unknown_element_text(EbmlElement &e) {
+  static boost::format s_bf_show_unknown_element("%|1$02x|");
+
+  int i;
+  std::string element_id;
+  for (i = EBML_ID_LENGTH(static_cast<const EbmlId &>(e)) - 1; 0 <= i; --i)
+    element_id += (s_bf_show_unknown_element % ((EBML_ID_VALUE(static_cast<const EbmlId &>(e)) >> (i * 8)) & 0xff)).str();
+
+  return (ms_common_formats[ms_bf_show_unknown_element] % EBML_NAME(&e) % element_id % (e.GetSize() + e.HeadSize())).str();
+}
+
+std::string
 kax_info_c::create_element_text(const std::string &text,
                                 int64_t position,
                                 int64_t size) {
@@ -320,6 +342,61 @@ kax_info_c::create_element_text(const std::string &text,
   }
 
   return text + additional_text;
+}
+
+std::string
+kax_info_c::create_text_representation(EbmlElement &e) {
+  auto text = kax_element_names_c::get(e);
+
+  if (text.empty())
+    text = create_unknown_element_text(e);
+
+  else {
+    auto value = format_element_value(e);
+    if (!value.empty())
+      text += std::string{": "} + value;
+  }
+
+  return create_element_text(text, e.GetElementPosition(), e.HeadSize() + e.GetSize());
+}
+
+std::string
+kax_info_c::format_element_value(EbmlElement &e) {
+  auto formatter = m_custom_element_value_formatters.find(EbmlId(e).GetValue());
+
+  return formatter == m_custom_element_value_formatters.end() ? format_element_value_default(e) : formatter->second(e);
+}
+
+std::string
+kax_info_c::format_element_value_default(EbmlElement &e) {
+  if (Is<EbmlVoid>(e))
+    return format_element_size(e);
+
+  if (Is<EbmlCrc32>(e))
+    return (ms_common_formats[ms_bf_crc32_value] % static_cast<EbmlCrc32 &>(e).GetCrc32()).str();
+
+  if (dynamic_cast<EbmlUInteger *>(&e))
+    return to_string(static_cast<EbmlUInteger &>(e).GetValue());
+
+  if (dynamic_cast<EbmlSInteger *>(&e))
+    return to_string(static_cast<EbmlSInteger &>(e).GetValue());
+
+  if (dynamic_cast<EbmlString *>(&e))
+    return static_cast<EbmlString &>(e).GetValue();
+
+  if (dynamic_cast<EbmlUnicodeString *>(&e))
+    return static_cast<EbmlUnicodeString &>(e).GetValueUTF8();
+
+  if (dynamic_cast<EbmlBinary *>(&e))
+    return format_binary(static_cast<EbmlBinary &>(e));
+
+  if (dynamic_cast<EbmlDate *>(&e))
+    return mtx::date_time::to_string(boost::posix_time::from_time_t(static_cast<EbmlDate &>(e).GetEpochDate()), "%a %b %d %H:%M:%S %Y UTC");
+
+  if (dynamic_cast<EbmlMaster *>(&e))
+    return {};
+
+  throw std::invalid_argument{"format_element_value: unsupported EbmlElement type"};
 }
 
 std::string
@@ -438,90 +515,81 @@ kax_info_c::format_binary(EbmlBinary &bin,
   return result;
 }
 
-void
-kax_info_c::handle_chaptertranslate(EbmlElement *&l2) {
-  show_element(l2, 2, Y("Chapter Translate"));
+#define FMT(Class, Formatter)  m_custom_element_value_formatters.insert({ Class::ClassInfos.GlobalId.GetValue(), Formatter });
+#define PROC(Class, Processor) m_custom_element_processors.insert({ Class::ClassInfos.GlobalId.GetValue(), Processor });
 
-  for (auto l3 : *static_cast<EbmlMaster *>(l2))
-    if (Is<KaxChapterTranslateEditionUID>(l3))
-      show_element(l3, 3, boost::format(Y("Chapter Translate Edition UID: %1%")) % static_cast<KaxChapterTranslateEditionUID *>(l3)->GetValue());
+std::string
+kax_info_c::format_binary_as_hex(EbmlElement &e) {
+  return to_hex(static_cast<EbmlBinary &>(e));
+}
 
-    else if (Is<KaxChapterTranslateCodec>(l3))
-      show_element(l3, 3, boost::format(Y("Chapter Translate Codec: %1%"))       % static_cast<KaxChapterTranslateCodec *>(l3)->GetValue());
+std::string
+kax_info_c::format_element_size(EbmlElement &e) {
+  if (e.IsFiniteSize())
+    return (ms_common_formats[ms_bf_element_size] % e.GetSize()).str();
+  return Y("size unknown");
+}
 
-    else if (Is<KaxChapterTranslateID>(l3))
-      show_element(l3, 3, boost::format(Y("Chapter Translate ID: %1%"))          % format_binary(*static_cast<EbmlBinary *>(l3)));
-
-    else if (!is_global(l3, 3))
-      show_unknown_element(l3, 3);
+std::string
+kax_info_c::format_unsigned_integer_as_timestamp(EbmlElement &e) {
+  return format_timestamp(static_cast<EbmlUInteger &>(e).GetValue());
 }
 
 void
-kax_info_c::handle_info(int &upper_lvl_el,
-                        EbmlElement *&l1) {
-  // General info about this Matroska file
-  show_element(l1, 1, Y("Segment information"));
+kax_info_c::init_custom_element_value_formatters_and_processors() {
+  m_custom_element_value_formatters.clear();
+  m_custom_element_processors.clear();
 
-  upper_lvl_el               = 0;
-  EbmlElement *element_found = nullptr;
-  auto m1                    = static_cast<EbmlMaster *>(l1);
-  read_master(m1, EBML_CONTEXT(l1), upper_lvl_el, element_found);
+  // Simple processors:
+  PROC(KaxInfo, ([this](EbmlElement &e) -> bool { this->m_ts_scale = FindChildValue<KaxTimecodeScale, uint64_t>(static_cast<KaxInfo &>(e), TIMESTAMP_SCALE); return true; }));
 
-  m_ts_scale = FindChildValue<KaxTimecodeScale, uint64_t>(m1, TIMESTAMP_SCALE);
+  // More complex processors:
+  PROC(KaxSeekHead, [this](EbmlElement &e) -> bool {
+    if ((m_verbose < 2) && !m_use_gui) {
+      show_element(&e, 1, Y("Seek head (subentries will be skipped)"));
+      return false;
+    }
 
-  for (auto l2 : *m1)
-    if (Is<KaxTimecodeScale>(l2)) {
-      m_ts_scale = static_cast<KaxTimecodeScale *>(l2)->GetValue();
-      show_element(l2, 2, boost::format(Y("Timestamp scale: %1%")) % m_ts_scale);
+    return true;
+  });
 
-    } else if (Is<KaxDuration>(l2)) {
-      KaxDuration &duration = *static_cast<KaxDuration *>(l2);
-      show_element(l2, 2,
-                   boost::format(Y("Duration: %|1$.3f|s (%2%)"))
-                   % (duration.GetValue() * m_ts_scale / 1000000000.0)
-                   % format_timestamp(static_cast<uint64_t>(duration.GetValue()) * m_ts_scale, 3));
+  // Simple formatters:
+  FMT(KaxSegmentUID,       &kax_info_c::format_binary_as_hex);
+  FMT(KaxSegmentFamily,    &kax_info_c::format_binary_as_hex);
+  FMT(KaxNextUID,          &kax_info_c::format_binary_as_hex);
+  FMT(KaxSegmentFamily,    &kax_info_c::format_binary_as_hex);
+  FMT(KaxPrevUID,          &kax_info_c::format_binary_as_hex);
+  FMT(KaxSegment,          &kax_info_c::format_element_size);
+  FMT(KaxFileData,         &kax_info_c::format_element_size);
+  FMT(KaxChapterTimeStart, &kax_info_c::format_unsigned_integer_as_timestamp);
+  FMT(KaxChapterTimeEnd,   &kax_info_c::format_unsigned_integer_as_timestamp);
 
-    } else if (Is<KaxMuxingApp>(l2))
-      show_element(l2, 2, boost::format(Y("Multiplexing application: %1%")) % static_cast<KaxMuxingApp *>(l2)->GetValueUTF8());
+  // More complex formatters:
+  FMT(KaxDuration, [this](EbmlElement &e) -> std::string {
+    auto duration = static_cast<KaxDuration &>(e).GetValue();
+    return (boost::format("%|1$.3f|s (%2%)") % (duration * m_ts_scale / 1000000000.0) % format_timestamp(duration * m_ts_scale, 3)).str();
+  });
 
-    else if (Is<KaxWritingApp>(l2))
-      show_element(l2, 2, boost::format(Y("Writing application: %1%")) % static_cast<KaxWritingApp *>(l2)->GetValueUTF8());
+  FMT(KaxSeekID, [](EbmlElement &e) -> std::string {
+    auto &seek_id = static_cast<KaxSeekID &>(e);
+    EbmlId id(seek_id.GetBuffer(), seek_id.GetSize());
 
-    else if (Is<KaxDateUTC>(l2)) {
-      auto epoch_time = boost::posix_time::from_time_t(static_cast<KaxDateUTC *>(l2)->GetEpochDate());
-      auto formatted  = mtx::date_time::to_string(epoch_time, "%a %b %d %H:%M:%S %Y");
-      show_element(l2, 2, boost::format(Y("Date: %1% UTC"))                % formatted);
-
-    } else if (Is<KaxSegmentUID>(l2))
-      show_element(l2, 2, boost::format(Y("Segment UID: %1%"))             % to_hex(static_cast<KaxSegmentUID *>(l2)));
-
-    else if (Is<KaxSegmentFamily>(l2))
-      show_element(l2, 2, boost::format(Y("Family UID: %1%"))              % to_hex(static_cast<KaxSegmentFamily *>(l2)));
-
-    else if (Is<KaxChapterTranslate>(l2))
-      handle_chaptertranslate(l2);
-
-    else if (Is<KaxPrevUID>(l2))
-      show_element(l2, 2, boost::format(Y("Previous segment UID: %1%"))    % to_hex(static_cast<KaxPrevUID *>(l2)));
-
-    else if (Is<KaxPrevFilename>(l2))
-      show_element(l2, 2, boost::format(Y("Previous filename: %1%"))       % static_cast<KaxPrevFilename *>(l2)->GetValueUTF8());
-
-    else if (Is<KaxNextUID>(l2))
-      show_element(l2, 2, boost::format(Y("Next segment UID: %1%"))        % to_hex(static_cast<KaxNextUID *>(l2)));
-
-    else if (Is<KaxNextFilename>(l2))
-      show_element(l2, 2, boost::format(Y("Next filename: %1%"))           % static_cast<KaxNextFilename *>(l2)->GetValueUTF8());
-
-    else if (Is<KaxSegmentFilename>(l2))
-      show_element(l2, 2, boost::format(Y("Segment filename: %1%"))        % static_cast<KaxSegmentFilename *>(l2)->GetValueUTF8());
-
-    else if (Is<KaxTitle>(l2))
-      show_element(l2, 2, boost::format(Y("Title: %1%"))                   % static_cast<KaxTitle *>(l2)->GetValueUTF8());
-
-    else if (!is_global(l2, 2))
-      show_unknown_element(l2, 2);
+    return (boost::format("%1% (%2%)")
+            % to_hex(seek_id)
+            % (  Is<KaxInfo>(id)        ? "KaxInfo"
+               : Is<KaxCluster>(id)     ? "KaxCluster"
+               : Is<KaxTracks>(id)      ? "KaxTracks"
+               : Is<KaxCues>(id)        ? "KaxCues"
+               : Is<KaxAttachments>(id) ? "KaxAttachments"
+               : Is<KaxChapters>(id)    ? "KaxChapters"
+               : Is<KaxTags>(id)        ? "KaxTags"
+               : Is<KaxSeekHead>(id)    ? "KaxSeekHead"
+               :                          "unknown")).str();
+  });
 }
+
+#undef FMT
+#undef PROC
 
 void
 kax_info_c::handle_audio_track(EbmlElement *&l3,
@@ -1073,53 +1141,6 @@ kax_info_c::handle_tracks(int &upper_lvl_el,
 }
 
 void
-kax_info_c::handle_seek_head(int &upper_lvl_el,
-                             EbmlElement *&l1) {
-  if ((m_verbose < 2) && !m_use_gui) {
-    show_element(l1, 1, Y("Seek head (subentries will be skipped)"));
-    return;
-  }
-
-  show_element(l1, 1, Y("Seek head"));
-
-  upper_lvl_el               = 0;
-  EbmlElement *element_found = nullptr;
-  auto m1                    = static_cast<EbmlMaster *>(l1);
-  read_master(m1, EBML_CONTEXT(l1), upper_lvl_el, element_found);
-
-  for (auto l2 : *m1)
-    if (Is<KaxSeek>(l2)) {
-      show_element(l2, 2, Y("Seek entry"));
-
-      for (auto l3 : *static_cast<EbmlMaster *>(l2))
-        if (Is<KaxSeekID>(l3)) {
-          KaxSeekID &seek_id = static_cast<KaxSeekID &>(*l3);
-          EbmlId id(seek_id.GetBuffer(), seek_id.GetSize());
-
-          show_element(l3, 3,
-                       boost::format(Y("Seek ID: %1% (%2%)"))
-                       % to_hex(seek_id)
-                       % (  Is<KaxInfo>(id)        ? "KaxInfo"
-                          : Is<KaxCluster>(id)     ? "KaxCluster"
-                          : Is<KaxTracks>(id)      ? "KaxTracks"
-                          : Is<KaxCues>(id)        ? "KaxCues"
-                          : Is<KaxAttachments>(id) ? "KaxAttachments"
-                          : Is<KaxChapters>(id)    ? "KaxChapters"
-                          : Is<KaxTags>(id)        ? "KaxTags"
-                          : Is<KaxSeekHead>(id)    ? "KaxSeekHead"
-                          :                          "unknown"));
-
-        } else if (Is<KaxSeekPosition>(l3))
-          show_element(l3, 3, boost::format(Y("Seek position: %1%")) % static_cast<KaxSeekPosition *>(l3)->GetValue());
-
-        else if (!is_global(l3, 3))
-          show_unknown_element(l3, 3);
-
-    } else if (!is_global(l2, 2))
-      show_unknown_element(l2, 2);
-}
-
-void
 kax_info_c::handle_cues(int &upper_lvl_el,
                         EbmlElement *&l1) {
   if (m_verbose < 2) {
@@ -1187,43 +1208,6 @@ kax_info_c::handle_cues(int &upper_lvl_el,
               show_unknown_element(l4, 4);
 
         } else if (!is_global(l3, 3))
-          show_unknown_element(l3, 3);
-
-    } else if (!is_global(l2, 2))
-      show_unknown_element(l2, 2);
-}
-
-void
-kax_info_c::handle_attachments(int &upper_lvl_el,
-                               EbmlElement *&l1) {
-  show_element(l1, 1, Y("Attachments"));
-
-  upper_lvl_el               = 0;
-  EbmlElement *element_found = nullptr;
-  auto m1                    = static_cast<EbmlMaster *>(l1);
-  read_master(m1, EBML_CONTEXT(l1), upper_lvl_el, element_found);
-
-  for (auto l2 : *m1)
-    if (Is<KaxAttached>(l2)) {
-      show_element(l2, 2, Y("Attached"));
-
-      for (auto l3 : *static_cast<EbmlMaster *>(l2))
-        if (Is<KaxFileDescription>(l3))
-          show_element(l3, 3, boost::format(Y("File description: %1%")) % static_cast<KaxFileDescription *>(l3)->GetValueUTF8());
-
-         else if (Is<KaxFileName>(l3))
-          show_element(l3, 3, boost::format(Y("File name: %1%"))        % static_cast<KaxFileName *>(l3)->GetValueUTF8());
-
-         else if (Is<KaxMimeType>(l3))
-           show_element(l3, 3, boost::format(Y("Mime type: %1%"))       % static_cast<KaxMimeType *>(l3)->GetValue());
-
-         else if (Is<KaxFileData>(l3))
-          show_element(l3, 3, boost::format(Y("File data, size: %1%"))  % static_cast<KaxFileData *>(l3)->GetSize());
-
-         else if (Is<KaxFileUID>(l3))
-           show_element(l3, 3, boost::format(Y("File UID: %1%"))        % static_cast<KaxFileUID *>(l3)->GetValue());
-
-         else if (!is_global(l3, 3))
           show_unknown_element(l3, 3);
 
     } else if (!is_global(l2, 2))
@@ -1520,7 +1504,7 @@ kax_info_c::handle_simple_block(EbmlElement *&l2,
   tinfo.m_min_timestamp                                                              = std::min(tinfo.m_min_timestamp ? *tinfo.m_min_timestamp : static_cast<int64_t>(timestamp_ns), static_cast<int64_t>(timestamp_ns));
   tinfo.m_max_timestamp                                                              = std::max(tinfo.m_max_timestamp ? *tinfo.m_max_timestamp : static_cast<int64_t>(timestamp_ns), static_cast<int64_t>(timestamp_ns));
   tinfo.m_add_duration_for_n_packets                                                 = block.NumberFrames();
-  tinfo.m_size                                                                       += boost::accumulate(frame_sizes, 0);
+  tinfo.m_size                                                                      += boost::accumulate(frame_sizes, 0);
 }
 
 void
@@ -1562,127 +1546,22 @@ kax_info_c::handle_cluster(int &upper_lvl_el,
       show_unknown_element(l2, 2);
 }
 
-void
-kax_info_c::handle_elements_rec(int level,
-                                EbmlElement *e,
-                                mtx::xml::ebml_converter_c const &converter) {
-  static boost::format s_bf_handle_elements_rec("%1%: %2%");
-  static std::vector<std::string> const s_output_as_timestamp{ "ChapterTimeStart", "ChapterTimeEnd" };
-
-  std::string elt_name = converter.get_tag_name(*e);
-
-  if (dynamic_cast<EbmlMaster *>(e)) {
-    show_element(e, level, elt_name);
-    for (auto child : *static_cast<EbmlMaster *>(e))
-      handle_elements_rec(level + 1, child, converter);
-
-  } else if (dynamic_cast<EbmlUInteger *>(e)) {
-    if (brng::find(s_output_as_timestamp, elt_name) != s_output_as_timestamp.end())
-      show_element(e, level, s_bf_handle_elements_rec % elt_name % format_timestamp(static_cast<EbmlUInteger *>(e)->GetValue()));
-    else
-      show_element(e, level, s_bf_handle_elements_rec % elt_name % static_cast<EbmlUInteger *>(e)->GetValue());
-
-  } else if (dynamic_cast<EbmlSInteger *>(e))
-    show_element(e, level, s_bf_handle_elements_rec   % elt_name % static_cast<EbmlSInteger *>(e)->GetValue());
-
-  else if (dynamic_cast<EbmlString *>(e))
-    show_element(e, level, s_bf_handle_elements_rec   % elt_name % static_cast<EbmlString *>(e)->GetValue());
-
-  else if (dynamic_cast<EbmlUnicodeString *>(e))
-    show_element(e, level, s_bf_handle_elements_rec   % elt_name % static_cast<EbmlUnicodeString *>(e)->GetValueUTF8());
-
-  else if (dynamic_cast<EbmlBinary *>(e))
-    show_element(e, level, s_bf_handle_elements_rec   % elt_name % format_binary(*static_cast<EbmlBinary *>(e)));
-
-  else
-    assert(false);
-}
-
-void
-kax_info_c::handle_chapters(int &upper_lvl_el,
-                            EbmlElement *&l1) {
-  show_element(l1, 1, Y("Chapters"));
-
-  upper_lvl_el               = 0;
-  EbmlMaster *m1             = static_cast<EbmlMaster *>(l1);
-  EbmlElement *element_found = nullptr;
-  read_master(m1, EBML_CONTEXT(l1), upper_lvl_el, element_found);
-
-  mtx::xml::ebml_chapters_converter_c converter;
-  for (auto l2 : *static_cast<EbmlMaster *>(l1))
-    handle_elements_rec(2, l2, converter);
-}
-
-void
-kax_info_c::handle_tags(int &upper_lvl_el,
-                        EbmlElement *&l1) {
-  show_element(l1, 1, Y("Tags"));
-
-  upper_lvl_el               = 0;
-  EbmlMaster *m1             = static_cast<EbmlMaster *>(l1);
-  EbmlElement *element_found = nullptr;
-  read_master(m1, EBML_CONTEXT(l1), upper_lvl_el, element_found);
-
-  mtx::xml::ebml_tags_converter_c converter;
-  for (auto l2 : *static_cast<EbmlMaster *>(l1))
-    handle_elements_rec(2, l2, converter);
-}
-
-void
-kax_info_c::handle_ebml_head(EbmlElement *l0) {
-  show_element(l0, 0, Y("EBML head"));
-
-  while (in_parent(l0)) {
-    int upper_lvl_el = 0;
-    EbmlElement *e   = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true);
-
-    if (!e)
-      return;
-
-    e->ReadData(*m_in);
-
-    if (Is<EVersion>(e))
-      show_element(e, 1, boost::format(Y("EBML version: %1%"))             % static_cast<EbmlUInteger *>(e)->GetValue());
-
-    else if (Is<EReadVersion>(e))
-      show_element(e, 1, boost::format(Y("EBML read version: %1%"))        % static_cast<EbmlUInteger *>(e)->GetValue());
-
-    else if (Is<EMaxIdLength>(e))
-      show_element(e, 1, boost::format(Y("EBML maximum ID length: %1%"))   % static_cast<EbmlUInteger *>(e)->GetValue());
-
-    else if (Is<EMaxSizeLength>(e))
-      show_element(e, 1, boost::format(Y("EBML maximum size length: %1%")) % static_cast<EbmlUInteger *>(e)->GetValue());
-
-    else if (Is<EDocType>(e))
-      show_element(e, 1, boost::format(Y("Doc type: %1%"))                 % std::string(*static_cast<EbmlString *>(e)));
-
-    else if (Is<EDocTypeVersion>(e))
-      show_element(e, 1, boost::format(Y("Doc type version: %1%"))         % static_cast<EbmlUInteger *>(e)->GetValue());
-
-    else if (Is<EDocTypeReadVersion>(e))
-      show_element(e, 1, boost::format(Y("Doc type read version: %1%"))    % static_cast<EbmlUInteger *>(e)->GetValue());
-
-    else
-      show_unknown_element(e, 1);
-
-    e->SkipData(*m_es, EBML_CONTEXT(e));
-    delete e;
-  }
-}
-
 kax_info_c::result_e
 kax_info_c::handle_segment(EbmlElement *l0) {
-  auto file_size         = m_in->get_size();
-  auto l1                = static_cast<EbmlElement *>(nullptr);
-  auto upper_lvl_el      = 0;
-  auto kax_file          = std::make_shared<kax_file_c>(*m_in);
-
-  kax_file->set_segment_end(*l0);
-
   if (!l0->IsFiniteSize())
     show_element(l0, 0, Y("Segment, size unknown"));
   else
     show_element(l0, 0, boost::format(Y("Segment, size %1%")) % l0->GetSize());
+  // ui_show_element(*l0);
+
+  auto file_size         = m_in->get_size();
+  auto l1                = static_cast<EbmlElement *>(nullptr);
+  auto upper_lvl_el      = 0;
+  auto kax_file          = std::make_shared<kax_file_c>(*m_in);
+  m_level                = 1;
+
+  kax_file->set_segment_end(*l0);
+
 
   // Prevent reporting "first timestamp after resync":
   kax_file->set_timestamp_scale(-1);
@@ -1690,14 +1569,8 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   while ((l1 = kax_file->read_next_level1_element())) {
     std::shared_ptr<EbmlElement> af_l1(l1);
 
-    if (Is<KaxInfo>(l1))
-      handle_info(upper_lvl_el, l1);
-
-    else if (Is<KaxTracks>(l1))
+    if (Is<KaxTracks>(l1))
       handle_tracks(upper_lvl_el, l1);
-
-    else if (Is<KaxSeekHead>(l1))
-      handle_seek_head(upper_lvl_el, l1);
 
     else if (Is<KaxCluster>(l1)) {
       show_element(l1, 1, Y("Cluster"));
@@ -1708,18 +1581,10 @@ kax_info_c::handle_segment(EbmlElement *l0) {
     } else if (Is<KaxCues>(l1))
       handle_cues(upper_lvl_el, l1);
 
-    // Weee! Attachments!
-    else if (Is<KaxAttachments>(l1))
-      handle_attachments(upper_lvl_el, l1);
+    else if (Is<EbmlVoid>(l1) || Is<EbmlCrc32>(l1) || Is<KaxInfo>(l1) || Is<KaxSeekHead>(l1) || Is<KaxAttachments>(l1) || Is<KaxChapters>(l1) || Is<KaxTags>(l1))
+      handle_elements_generic(*l1);
 
-    else if (Is<KaxChapters>(l1))
-      handle_chapters(upper_lvl_el, l1);
-
-    // Let's handle some TAGS.
-    else if (Is<KaxTags>(l1))
-      handle_tags(upper_lvl_el, l1);
-
-    else if (!is_global(l1, 1))
+    else
       show_unknown_element(l1, 1);
 
     if (!m_in->setFilePointer2(l1->GetElementPosition() + kax_file->get_element_size(l1)))
@@ -1732,6 +1597,26 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   } // while (l1)
 
   return result_e::succeeded;
+}
+
+void
+kax_info_c::handle_elements_generic(EbmlElement &e) {
+  auto processor = m_custom_element_processors.find(EbmlId(e).GetValue());
+  if (processor != m_custom_element_processors.end())
+    if (!processor->second(e))
+      return;
+
+  ui_show_element(e);
+
+  if (!dynamic_cast<EbmlMaster *>(&e))
+    return;
+
+  ++m_level;
+
+  for (auto child : static_cast<EbmlMaster &>(e))
+    handle_elements_generic(*child);
+
+  --m_level;
 }
 
 void
@@ -1804,7 +1689,13 @@ kax_info_c::process_file(std::string const &file_name) {
       return result_e::failed;
     }
 
-    handle_ebml_head(l0.get());
+    int upper_lvl_el           = 0;
+    EbmlElement *element_found = nullptr;
+
+    read_master(static_cast<EbmlMaster *>(l0.get()), EBML_CONTEXT(l0), upper_lvl_el, element_found);
+    delete element_found;
+
+    handle_elements_generic(*l0);
     l0->SkipData(*m_es, EBML_CONTEXT(l0));
 
     while (1) {

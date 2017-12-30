@@ -34,6 +34,7 @@ registerMetaTypes() {
   qRegisterMetaType<Util::InstallationChecker::Problems>("Util::InstallationChecker::Problems");
   qRegisterMetaType<mtx::kax_info_c::result_e>("mtx::kax_info_c::result_e");
   qRegisterMetaType<int64_t>("int64_t");
+  qRegisterMetaType<EbmlElement *>("EbmlElement *");
 }
 
 int

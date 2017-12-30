@@ -188,9 +188,10 @@ main_window_c::parse_file(const QString &file_name) {
   info.set_hexdump_max_size(m_options.m_hexdump_max_size);
   info.set_verbosity(m_options.m_verbose);
 
-  connect(&info, &mtx::qt_kax_info_c::element_found,    this, &main_window_c::show_element);
-  connect(&info, &mtx::qt_kax_info_c::error_found,      this, &main_window_c::show_error);
-  connect(&info, &mtx::qt_kax_info_c::progress_changed, this, &main_window_c::show_progress);
+  connect(&info, &mtx::qt_kax_info_c::element_info_found, this, &main_window_c::show_element_info);
+  connect(&info, &mtx::qt_kax_info_c::element_found,      this, &main_window_c::show_element);
+  connect(&info, &mtx::qt_kax_info_c::error_found,        this, &main_window_c::show_error);
+  connect(&info, &mtx::qt_kax_info_c::progress_changed,   this, &main_window_c::show_progress);
 
   if (info.process_file(file_name.toUtf8().data()) == mtx::kax_info_c::result_e::succeeded) {
     action_Save_text_file->setEnabled(true);
@@ -261,11 +262,17 @@ main_window_c::add_item(int level,
 }
 
 void
-main_window_c::show_element(int level,
-                            QString const &text,
-                            int64_t position,
-                            int64_t size) {
+main_window_c::show_element_info(int level,
+                                 QString const &text,
+                                 int64_t position,
+                                 int64_t size) {
   add_item(level, 0 <= position ? Q(dynamic_cast<mtx::qt_kax_info_c *>(sender())->create_element_text(to_utf8(text), position, size)) : text);
+}
+
+void
+main_window_c::show_element(int level,
+                            EbmlElement *e) {
+  add_item(level, Q(dynamic_cast<mtx::qt_kax_info_c *>(sender())->create_text_representation(*e)));
 }
 
 void
@@ -336,6 +343,8 @@ ui_run(int argc,
 #if defined(SYS_WINDOWS)
   FreeConsole();
 #endif
+
+  qRegisterMetaType<EbmlElement *>("EbmlElement *");
 
   QApplication app(argc, argv);
 
