@@ -13,6 +13,7 @@
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
+#include "common/kax_element_names.h"
 #include "common/qt.h"
 #include "common/qt_kax_info.h"
 #include "common/random.h"
@@ -215,6 +216,7 @@ App::reinitializeLanguageLists() {
   initializeLanguageLists();
 
   qt_kax_info_c::init_common_boost_formats();
+  kax_element_names_c::reset();
 }
 
 void
