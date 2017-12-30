@@ -971,13 +971,6 @@ Application.new("src/mkvmerge").
 # mkvinfo
 #
 
-$mkvinfo_ui_files   = FileList["src/info/ui/*.ui"].to_a
-$mkvinfo_ui_h_files = $mkvinfo_ui_files.collect { |file| file.ext('h') }
-
-%w{qt_ui.o qt_ui.moc}.each do |name|
-  file "src/info/#{name}" => $mkvinfo_ui_h_files
-end
-
 Application.new("src/mkvinfo").
   description("Build the mkvinfo executable").
   aliases(:mkvinfo).
@@ -985,10 +978,9 @@ Application.new("src/mkvinfo").
   sources("src/info/resources.o", :if => $building_for[:windows]).
   libraries(:mtxinfo, $common_libs).
   only_if(c?(:USE_QT)).
-  sources("src/info/sys_windows.o", :if => $building_for[:windows]).
-  sources("src/info/qt_ui.cpp", "src/info/qt_ui.moc", "src/info/rightclick_tree_widget.moc", $mkvinfo_ui_files).
-  sources('src/info/qt_resources.cpp').
-  sources('src/info/static_plugins.cpp', :if => File.exist?('src/info/static_plugins.cpp')).
+  qt_dependencies_and_sources("info", :cpp_except => [ "src/info/sys_windows.cpp", "src/info/mkvinfo-gui.cpp" ]).
+  sources("src/info/qt_resources.cpp").
+  sources("src/info/sys_windows.cpp", :if => $building_for[:windows]).
   libraries(:qt).
   end_if.
   libraries($custom_libs).
@@ -998,9 +990,9 @@ if $build_mkvinfo_gui
   Application.new("src/mkvinfo-gui").
     description("Build the mkvinfo-gui executable").
     aliases("mkvinfo-gui").
-    sources("src/info/mkvinfo-gui.cpp").
-    sources("src/info/resources.o", :if => $building_for[:windows]).
-    sources('src/info/static_plugins.cpp', :if => File.exist?('src/info/static_plugins.cpp')).
+    qt_dependencies_and_sources("info", :cpp_except => [ "src/info/sys_windows.cpp" ]).
+    sources("src/info/qt_resources.cpp").
+    sources("src/info/sys_windows.cpp", "src/info/resources.o", :if => $building_for[:windows]).
     libraries(:qt, $custom_libs).
     libraries("-mwindows", :if => $building_for[:windows]).
     create
@@ -1035,33 +1027,10 @@ Application.new("src/mkvpropedit").
 #
 
 if $build_mkvtoolnix_gui
-  ui_h_files      = $gui_ui_files.collect { |ui| ui.ext 'h' }
-  cpp_files       = FileList['src/mkvtoolnix-gui/**/*.cpp'].to_a.for_target!
-  h_files         = FileList['src/mkvtoolnix-gui/**/*.h'].to_a.for_target! - ui_h_files
-  cpp_content     = read_files cpp_files
-  h_content       = read_files h_files
-
-  qobject_h_files = h_files.select { |h| h_content[h].any? { |line| /\bQ_OBJECT\b/.match line } }
-
-  form_include_re = %r{^\s* \# \s* include \s+ \" (mkvtoolnix-gui/forms/[^\"]+) }x
-  dependencies    = {}
-
-  cpp_files.each do |cpp|
-    cpp_content[cpp].each do |line|
-      next unless form_include_re.match line
-
-      dependencies[cpp] ||= []
-      dependencies[cpp]  << "src/#{$1}"
-    end
-  end
-
-  dependencies.each { |cpp, ui_hs| file cpp.ext('o') => ui_hs }
-
   Application.new("src/mkvtoolnix-gui/mkvtoolnix-gui").
     description("Build the mkvtoolnix-gui executable").
     aliases("mkvtoolnix-gui").
-    sources(qobject_h_files.collect { |h| h.ext 'moc' }).
-    sources(cpp_files, $gui_ui_files, 'src/mkvtoolnix-gui/qt_resources.cpp').
+    qt_dependencies_and_sources("mkvtoolnix-gui").
     sources("src/mkvtoolnix-gui/resources.o", :if => $building_for[:windows]).
     libraries($common_libs, :qt).
     libraries("-mwindows", :powrprof, :if => $building_for[:windows]).
