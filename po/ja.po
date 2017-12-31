@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-12-22 21:17+0100\n"
+"POT-Creation-Date: 2018-01-01 00:38+0100\n"
 "PO-Revision-Date: 2017-10-04 19:47+0200\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -983,57 +983,57 @@ msgstr "  X:  16進数のバイナリ\n"
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <file1> <file2> ]      \"<file1> + <file2>\"と同じです。\n"
 
-#: src/common/kax_info.cpp:345
+#: src/common/kax_info.cpp:381
 #, boost-format
 msgid " (FourCC: %1%)"
 msgstr " (FourCC: %1%)"
 
-#: src/common/kax_info.cpp:373
+#: src/common/kax_info.cpp:409
 #, boost-format
 msgid " (HEVC profile: %1% @L%2%.%3%)"
 msgstr " (HEVCプロファイル: %1% @L%2%.%3%)"
 
-#: src/common/kax_info.cpp:201
-#: src/common/kax_info.cpp:987
+#: src/common/kax_info.cpp:182
+#: src/common/kax_info.cpp:571
 #, boost-format
 msgid " (adler: 0x%|1$08x|)"
 msgstr " (adler: 0x%|1$08x|)"
 
-#: src/common/kax_info.cpp:740
+#: src/common/kax_info.cpp:696
 msgid " (aspect ratio)"
 msgstr "(アスペクト比)"
 
-#: src/common/kax_info.cpp:738
+#: src/common/kax_info.cpp:694
 msgid " (centimeters)"
 msgstr " (センチメートル)"
 
-#: src/common/kax_info.cpp:776
+#: src/common/kax_info.cpp:724
 msgid " (fixed)"
 msgstr " (固定)"
 
-#: src/common/kax_info.cpp:349
+#: src/common/kax_info.cpp:385
 #, boost-format
 msgid " (format tag: 0x%|1$04x|)"
 msgstr " (フォーマットタグ: 0x%|1$04x|)"
 
-#: src/common/kax_info.cpp:774
+#: src/common/kax_info.cpp:722
 msgid " (free resizing)"
 msgstr " (可変アスペクト比)"
 
-#: src/common/kax_info.cpp:354
+#: src/common/kax_info.cpp:390
 #, boost-format
 msgid " (h.264 profile: %1% @L%2%.%3%)"
 msgstr " (h.264プロファイル：%1% @L%2%.%3%)"
 
-#: src/common/kax_info.cpp:739
+#: src/common/kax_info.cpp:695
 msgid " (inches)"
 msgstr " (インチ)"
 
-#: src/common/kax_info.cpp:775
+#: src/common/kax_info.cpp:723
 msgid " (keep aspect ratio)"
 msgstr "(固定アスペクト比)"
 
-#: src/common/kax_info.cpp:737
+#: src/common/kax_info.cpp:693
 msgid " (pixels)"
 msgstr " (ピクセル)"
 
@@ -1082,13 +1082,13 @@ msgstr " その他のオプション:\n"
 msgid " Segment info handling:\n"
 msgstr " セグメント情報の処理：\n"
 
-#: src/common/kax_info.cpp:229
+#: src/common/kax_info.cpp:193
 #: src/extract/mkvextract.cpp:106
 #, boost-format
 msgid " at %1%"
 msgstr " at %1%"
 
-#: src/common/kax_info.cpp:232
+#: src/common/kax_info.cpp:195
 #, fuzzy, boost-format
 msgid " at 0x%|1$x|"
 msgstr " (adler: 0x%|1$08x|)"
@@ -1112,12 +1112,12 @@ msgid " second"
 msgid_plural " seconds"
 msgstr[0] "秒"
 
-#: src/common/kax_info.cpp:230
+#: src/common/kax_info.cpp:194
 #, boost-format
 msgid " size %1%"
 msgstr " サイズ %1%"
 
-#: src/common/kax_info.cpp:318
+#: src/common/kax_info.cpp:293
 msgid " size is unknown"
 msgstr " サイズが不明です"
 
@@ -1199,26 +1199,36 @@ msgid "%1 warning"
 msgid_plural "%1 warnings"
 msgstr[0] "%1個の警告"
 
+#: src/common/kax_info.cpp:811
+#, fuzzy, boost-format
+msgid "%1% (%|2$.3f| frames/fields per second for a video track)"
+msgstr "デフォルトのフレーム持続期間：%|1$.3f|ms（ビデオトラックの場合は毎秒%|2$.3f|フレーム・フィールド）"
+
+#: src/common/kax_info.cpp:796
+#, fuzzy, boost-format
+msgid "%1% (track ID for mkvmerge & mkvextract: %2%)"
+msgstr "トラック番号：%1% （トラックID for mkvmerge & mkvextract: %2%)"
+
 #: src/common/strings/formatting.cpp:321
 #, boost-format
 msgid "%1% byte"
 msgid_plural "%1% bytes"
 msgstr[0] "%1%バイト"
 
-#: src/common/kax_info.cpp:218
-#, boost-format
-msgid "%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"
-msgstr "%1% フレーム、トラック %2%、タイムコード %3% (%4%)、持続時間 %|5$.3f|、サイズ %6%、adler 0x%|7$08x|%8%%9%\n"
+#: src/common/kax_info.cpp:186
+#, fuzzy, boost-format
+msgid "%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"
+msgstr "%1% フレーム、トラック %2%、タイムコード %3% (%4%)、サイズ %5%、adler 0x%|6$08x|%7%%8%\n"
 
-#: src/common/kax_info.cpp:223
-#, boost-format
-msgid "%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"
+#: src/common/kax_info.cpp:191
+#, fuzzy, boost-format
+msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"
 msgstr "%1% フレーム、トラック %2%、タイムコード %3% (%4%)、サイズ %5%、adler 0x%|6$08x|%7%\n"
 
-#: src/common/kax_info.cpp:219
-#, boost-format
-msgid "%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"
-msgstr "%1% フレーム、トラック %2%、タイムコード %3% (%4%)、サイズ %5%、adler 0x%|6$08x|%7%%8%\n"
+#: src/common/kax_info.cpp:187
+#, fuzzy, boost-format
+msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"
+msgstr "%1% フレーム、トラック %2%、タイムコード %3% (%4%)、サイズ %5%、adler 0x%|6$08x|%7%\n"
 
 #: src/common/strings/formatting.cpp:315
 #, boost-format
@@ -1264,8 +1274,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: 例外が発生しました (メッセージ: %2%; タイプ: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1576
-#: src/input/r_matroska.cpp:2259
+#: src/input/r_matroska.cpp:1573
+#: src/input/r_matroska.cpp:2256
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: 未知の例外が発生しました。"
@@ -1294,6 +1304,11 @@ msgstr "%1%：'%2% %3%'に除数がありません。\n"
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%：'%2% %3%'にトラックIDがありません。\n"
+
+#: src/common/kax_info.cpp:189
+#, fuzzy, boost-format
+msgid "%1%track number %2%, %3% frame(s), timestamp %4%"
+msgstr "シンプルブロック (%1%トラック番号 %2%、%3% フレーム、タイムコード %|4$.3f|s = %5%)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
@@ -1343,12 +1358,12 @@ msgid "&Abort job"
 msgstr "ジョブを中断(&A)"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:520
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:388
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:415
 #, no-c-format
 msgid "&Abort jobs"
 msgstr "ジョブを中断(&A)"
 
-#: src/info/ui/mainwindow.h:127
+#: src/info/forms/mainwindow.h:127
 msgid "&About mkvinfo"
 msgstr "mkvinfoについて(&A)"
 
@@ -1409,7 +1424,7 @@ msgid "&Cancel"
 msgstr "キャンセル(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:589
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:366
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:393
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "チャプタエディタ(&C)"
@@ -1543,7 +1558,7 @@ msgstr "引数のエスケープ(&E)"
 msgid "&Expand all"
 msgstr "全て展開(&E)"
 
-#: src/info/ui/mainwindow.h:123
+#: src/info/forms/mainwindow.h:123
 msgid "&Expand important elements"
 msgstr "重要な要素を展開(&E)"
 
@@ -1555,7 +1570,7 @@ msgstr "抽出ツール(&E)"
 msgid "&FAQ"
 msgstr "FAQ(&F)"
 
-#: src/info/ui/mainwindow.h:133
+#: src/info/forms/mainwindow.h:133
 msgid "&File"
 msgstr "ファイル(&F)"
 
@@ -1576,8 +1591,8 @@ msgstr "サブチャプタを生成(&G)"
 msgid "&Header editor"
 msgstr "ヘッダエディタ(&H)"
 
-#: src/info/ui/mainwindow.h:132
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:369
+#: src/info/forms/mainwindow.h:132
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:396
 #, no-c-format
 msgid "&Help"
 msgstr "ヘルプ(&H)"
@@ -1595,13 +1610,13 @@ msgstr "Infoツール(&I)"
 msgid "&Input"
 msgstr "入力(&I)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:368
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:395
 #, no-c-format
 msgid "&Job output"
 msgstr "ジョブの出力(&J)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:590
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:367
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:394
 #, no-c-format
 msgid "&Job queue"
 msgstr "ジョブキュー(&J)"
@@ -1631,7 +1646,7 @@ msgid "&Minimum playlist duration:"
 msgstr "プレイリストの最小の継続時間：(&M)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:585
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:364
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:391
 #, fuzzy, no-c-format
 msgid "&Multiplexer"
 msgstr "Mergeツール(&M)"
@@ -1694,7 +1709,7 @@ msgstr "よく使用される選択項目"
 msgid "&Only use the first source file that contains a video track"
 msgstr ""
 
-#: src/info/ui/mainwindow.h:107
+#: src/info/forms/mainwindow.h:107
 msgid "&Open"
 msgstr "開く(&O)"
 
@@ -1727,7 +1742,7 @@ msgstr "フォルダを開く(&O)"
 msgid "&Open settings"
 msgstr "設定ファイルを開く(&O)"
 
-#: src/info/ui/mainwindow.h:131
+#: src/info/forms/mainwindow.h:131
 msgid "&Options"
 msgstr "オプション(&O)"
 
@@ -1837,7 +1852,7 @@ msgstr "出力を保存(&S)"
 msgid "&Save settings"
 msgstr "設定を保存(&S)"
 
-#: src/info/ui/mainwindow.h:111
+#: src/info/forms/mainwindow.h:111
 msgid "&Save to text file"
 msgstr "テキストファイルに保存(&S)"
 
@@ -2205,7 +2220,7 @@ msgstr "'%1%'：%2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%'：後続のファイルを同様に処理しています：%2%\n"
 
-#: src/input/r_matroska.cpp:1854
+#: src/input/r_matroska.cpp:1851
 #, fuzzy, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%'：実験的モードでMUXされたOpusのトラックを再MUXしようとしています。出力されるトラックは最終的なモードで上書きされますが、実験的モードでMUXされたトラックからは詳細情報が1つ回復不能になります。エンドトリミングがそれです。これは、デコーダーの出力が元々意図されていたよりも数サンプル多くなる可能性があるということを意味します。もし可能であれば、オリジナルのOpusファイルから再MUXしてください。\n"
@@ -2370,7 +2385,12 @@ msgstr "'強制表示'フラグ"
 msgid "'Track enabled' flag"
 msgstr "'有効トラック'フラグ"
 
-#: src/common/kax_info.cpp:198
+#: src/common/kax_info.cpp:277
+#, fuzzy, boost-format
+msgid "(Known element, but invalid at this position: %1%; ID: 0x%2% size: %3%)"
+msgstr "(未知のエレメント: %1%; ID：0x%2% サイズ： %3%)"
+
+#: src/common/kax_info.cpp:180
 #, boost-format
 msgid "(Unknown element: %1%; ID: 0x%2% size: %3%)"
 msgstr "(未知のエレメント: %1%; ID：0x%2% サイズ： %3%)"
@@ -2403,7 +2423,7 @@ msgstr ", 説明 '%1%'"
 msgid ", file name '%1%'"
 msgstr ", ファイル名 '%1%'"
 
-#: src/common/kax_info.cpp:217
+#: src/common/kax_info.cpp:185
 #, boost-format
 msgid ", position %1%"
 msgstr ", 位置：%1%"
@@ -2427,7 +2447,7 @@ msgstr "--- %2に開始したジョブ「%1」で警告が発生しました ---
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. 'mkvmerge --identify'で列挙される、添付ファイルのIDとして解釈される数字。これは通常、単純に0を開始点として番号が付けられます（例：'2'）。"
 
-#: src/common/kax_info.cpp:812
+#: src/common/kax_info.cpp:733
 msgid "1: all frames"
 msgstr "1: 全フレーム"
 
@@ -2435,7 +2455,7 @@ msgstr "1: 全フレーム"
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. 'mkvmerge --identify'で列挙され、添付ファイルのユニークID（UID）として解釈される、'='が最初に付加された数字。これは通常ランダムに見える数字です（例：'128975986723'）。"
 
-#: src/common/kax_info.cpp:814
+#: src/common/kax_info.cpp:735
 msgid "2: codec private data"
 msgstr "2: コーデック固有データ"
 
@@ -2496,8 +2516,8 @@ msgstr "<名前をつけてください>"
 msgid "<Unsaved file>"
 msgstr "<未保存のファイル>"
 
-#: src/input/r_matroska.cpp:2281
-#: src/input/r_matroska.cpp:2407
+#: src/input/r_matroska.cpp:2278
+#: src/input/r_matroska.cpp:2404
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "トラック番号%2%のタイムスタンプ%1%でブロックが見つかりましが、そのトラック番号のヘッダが見つかりませんでした。このブロックはスキップされます。\n"
@@ -2544,7 +2564,7 @@ msgstr "ファイル'%1%'を作成する別のジョブが既にジョブキュ�
 msgid "A name for this track that players can display helping the user chose the right track to play, e.g. \"director's comments\"."
 msgstr "ユーザーが正しいトラックを選んで再生できるようにプレイヤーが表示することのできる、このトラックの名前です。例：「ディレクターのコメント」"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:686
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:713
 #, no-c-format
 msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
@@ -2563,10 +2583,6 @@ msgstr ""
 #, no-c-format
 msgid "A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."
 msgstr "1つのMatroskaブロックには、完全な1フレーム（プログレッシブのコンテンツの場合）か片フィールド（インターレースのコンテンツの場合）が格納されています。"
-
-#: src/common/kax_info.cpp:921
-msgid "A track"
-msgstr "トラック"
 
 #: src/merge/generic_reader.cpp:206
 #, boost-format
@@ -2688,12 +2704,12 @@ msgid "Abort running job"
 msgstr "実行中のジョブを中断"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:518
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:386
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:413
 #, no-c-format
 msgid "Abort running jobs"
 msgstr "実行中のジョブを中断"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:265
+#: src/mkvtoolnix-gui/jobs/job.cpp:270
 #, fuzzy, no-c-format
 msgid "Aborted by user"
 msgstr "ユーザーにより中断"
@@ -2888,12 +2904,7 @@ msgstr "追加のコマンドラインオプション"
 msgid "Additional options:"
 msgstr "追加オプション："
 
-#: src/common/kax_info.cpp:210
-#, boost-format
-msgid "AdditionalID: %1%"
-msgstr "追加ID：%1%"
-
-#: src/common/kax_info.cpp:1344
+#: src/common/kax_element_names.cpp:254
 msgid "Additions"
 msgstr "追加情報"
 
@@ -2957,9 +2968,9 @@ msgstr "終了後に全ての入力ファイルを削除します。(&R)"
 msgid "Afterwards create &new multiplex settings and close the current ones."
 msgstr "終了後に新しいマージ設定を作成し、現在の設定は閉じます。(&N)"
 
-#: src/common/kax_info.cpp:837
-#, boost-format
-msgid "Algorithm: %1% (%2%)"
+#: src/common/kax_element_names.cpp:168
+#, fuzzy
+msgid "Algorithm"
 msgstr "アルゴリズム：%1% (%2%)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:371
@@ -3212,10 +3223,10 @@ msgstr "アスペクト比"
 msgid "Aspect ratio factor"
 msgstr "アスペクト比の係数"
 
-#: src/common/kax_info.cpp:772
-#, boost-format
-msgid "Aspect ratio type: %1%%2%"
-msgstr "アスペクト比の種類：%1%%2%"
+#: src/common/kax_element_names.cpp:158
+#, fuzzy
+msgid "Aspect ratio type"
+msgstr "アスペクト比"
 
 #: src/common/xml/ebml_chapters_converter.cpp:107
 msgid "At least one <ChapterAtom> element is needed."
@@ -3238,7 +3249,7 @@ msgstr "添付先：(&T)"
 msgid "Attach to"
 msgstr "添付先"
 
-#: src/common/kax_info.cpp:1218
+#: src/common/kax_element_names.cpp:228
 msgid "Attached"
 msgstr "添付ファイル"
 
@@ -3253,6 +3264,11 @@ msgstr "添付ファイル"
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "添付ファイル ID %1%：タイプ'%2%'、サイズ%3%バイト"
 
+#: src/common/kax_element_names.cpp:301
+#, fuzzy
+msgid "Attachment UID"
+msgstr "添付ファイル"
+
 #: src/extract/extract_cli_parser.cpp:94
 msgid "Attachment extraction"
 msgstr "添付ファイルの抽出"
@@ -3266,7 +3282,7 @@ msgstr "添付ファイルセレクタ："
 msgid "Attachment with same name present"
 msgstr "同じ名前の添付ファイルが存在します"
 
-#: src/common/kax_info.cpp:1209
+#: src/common/kax_element_names.cpp:227
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:20
 #: src/propedit/options.cpp:222
@@ -3307,6 +3323,11 @@ msgstr "オーディオプロパティ"
 #: src/common/property_element.cpp:203
 msgid "Audio sampling frequency"
 msgstr "オーディオのサンプリング周波数"
+
+#: src/common/kax_element_names.cpp:103
+#, fuzzy
+msgid "Audio track"
+msgstr "オーディオトラック：(&A)"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
 #, no-c-format
@@ -3361,52 +3382,57 @@ msgstr "利用可能："
 msgid "Before chapters"
 msgstr "チャプタの前で分割"
 
+#: src/common/kax_element_names.cpp:307
+msgid "Binary"
+msgstr ""
+
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:156
 #, no-c-format
 msgid "Binary (displayed as hexadecimal numbers)"
 msgstr "バイナリ（16進数で表示されます）"
 
-#: src/common/kax_info.cpp:554
-#, boost-format
-msgid "Bit depth: %1%"
+#: src/common/kax_element_names.cpp:108
+#, fuzzy
+msgid "Bit depth"
 msgstr "ビット深度：%1%"
 
-#: src/common/kax_info.cpp:610
-#, boost-format
-msgid "Bits per channel: %1%"
+#: src/common/kax_element_names.cpp:124
+#, fuzzy
+msgid "Bits per channel"
 msgstr "チャンネルあたりビット数：%1%"
 
 #: src/common/property_element.cpp:206
 msgid "Bits per sample, mostly used for PCM."
 msgstr "サンプル当たりのビット数です。通常はPCMで使われます。"
 
-#: src/common/kax_info.cpp:202
-#, boost-format
-msgid "Block (track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%)"
-msgstr "ブロック (トラック番号 %1%、%2% フレーム、タイムコード %|3$.3f|s = %4%)"
+#: src/common/kax_element_names.cpp:239
+#, fuzzy
+msgid "Block"
+msgstr "ブロックグループ"
 
-#: src/common/kax_info.cpp:216
-#, boost-format
-msgid "Block additional ID: %1%"
-msgstr "BlockAddition ID：%1%"
-
-#: src/common/kax_info.cpp:211
-#, boost-format
-msgid "Block additional: %1%"
+#: src/common/kax_element_names.cpp:247
+#, fuzzy
+msgid "Block additional"
 msgstr "BlockAddition：%1%"
 
-#: src/common/kax_info.cpp:204
-#, boost-format
-msgid "Block duration: %1%.%|2$06d|ms"
-msgstr "ブロックの持続時間：%1%.%|2$06d|ms"
+#: src/common/kax_element_names.cpp:246
+#: src/common/kax_element_names.cpp:252
+#, fuzzy
+msgid "Block additional ID"
+msgstr "BlockAddition ID：%1%"
 
-#: src/common/kax_info.cpp:1258
+#: src/common/kax_element_names.cpp:240
+#, fuzzy
+msgid "Block duration"
+msgstr "デフォルトのフレーム持続期間"
+
+#: src/common/kax_element_names.cpp:238
 msgid "Block group"
 msgstr "ブロックグループ"
 
-#: src/common/kax_info.cpp:208
-#, boost-format
-msgid "Block virtual: %1%"
+#: src/common/kax_element_names.cpp:243
+#, fuzzy
+msgid "Block virtual"
 msgstr "バーチャルブロック：%1%"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:244
@@ -3433,14 +3459,14 @@ msgstr ""
 msgid "Blue Y chromaticity coordinate as defined by CIE 1931."
 msgstr ""
 
-#: src/common/kax_info.cpp:579
-#, fuzzy, boost-format
-msgid "Blue colour coordinate x: %1%"
+#: src/common/kax_element_names.cpp:115
+#, fuzzy
+msgid "Blue colour coordinate x"
 msgstr "CUE参照状態：%1%"
 
-#: src/common/kax_info.cpp:582
-#, fuzzy, boost-format
-msgid "Blue colour coordinate y: %1%"
+#: src/common/kax_element_names.cpp:116
+#, fuzzy
+msgid "Blue colour coordinate y"
 msgstr "CUE参照状態：%1%"
 
 #: src/input/r_vobsub.cpp:555
@@ -3535,7 +3561,7 @@ msgstr "全てのトラックの統計情報を計算し、タグを新規に追
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:262
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #: src/mkvtoolnix-gui/jobs/tool.cpp:521
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:389
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:416
 #: src/mkvtoolnix-gui/merge/input.cpp:1217
 #: src/mkvtoolnix-gui/merge/tab.cpp:398
 #: src/mkvtoolnix-gui/merge/tab.cpp:424
@@ -3577,7 +3603,8 @@ msgstr "CodecID '%5%'のトラック%4%を既に同じファイルに記録し�
 msgid "Category is not NUL terminated"
 msgstr "カテゴリがNULで終わっていません"
 
-#: src/common/kax_info.cpp:1836
+#: src/common/kax_info.cpp:1211
+#: src/common/kax_info.cpp:1215
 #: src/extract/tracks.cpp:564
 msgid "Caught exception"
 msgstr "例外をキャッチしました"
@@ -3607,7 +3634,7 @@ msgstr "ファイルフォーマットによっては「title」プロパティ�
 msgid "Certain file formats have a 'language' property for their tracks."
 msgstr "ファイルフォーマットによってはトラックに「language」プロパティがあります。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:688
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:715
 #, no-c-format
 msgid "Certain functions won't work correctly in this situation."
 msgstr ""
@@ -3632,14 +3659,14 @@ msgstr "'%1%'への変更が実行されました。設定されたエントリ�
 msgid "Change for '%1%' executed. One entry added.\n"
 msgstr "'%1%'への変更が実行されました。1つのエントリが追加されました。\n"
 
-#: src/common/kax_info.cpp:549
-#, boost-format
-msgid "Channel positions: %1%"
+#: src/common/kax_element_names.cpp:107
+#, fuzzy
+msgid "Channel positions"
 msgstr "チャンネル位置：%1%"
 
-#: src/common/kax_info.cpp:543
-#, boost-format
-msgid "Channels: %1%"
+#: src/common/kax_element_names.cpp:106
+#, fuzzy
+msgid "Channels"
 msgstr "チャンネル数：%1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
@@ -3652,28 +3679,30 @@ msgstr "最初に作成されるエントリのチャプタ番号：(&N)"
 msgid "Chapter <NUM:2>"
 msgstr "Chapter <NUM:2>"
 
-#: src/common/kax_info.cpp:442
-msgid "Chapter Translate"
-msgstr "Chapter Translate"
+#: src/common/kax_element_names.cpp:272
+#: src/common/kax_element_names.cpp:300
+#, fuzzy
+msgid "Chapter UID"
+msgstr "チャプタ"
 
-#: src/common/kax_info.cpp:449
-#, boost-format
-msgid "Chapter Translate Codec: %1%"
-msgstr "Chapter Translate Codec: %1%"
+#: src/common/kax_element_names.cpp:271
+#, fuzzy
+msgid "Chapter atom"
+msgstr "チャプタエディタ"
 
-#: src/common/kax_info.cpp:446
-#, boost-format
-msgid "Chapter Translate Edition UID: %1%"
-msgstr "Chapter Translate Edition UID: %1%"
+#: src/common/kax_element_names.cpp:287
+#, fuzzy
+msgid "Chapter country"
+msgstr "チャプタ：%1%個のエントリ"
 
-#: src/common/kax_info.cpp:452
-#, boost-format
-msgid "Chapter Translate ID: %1%"
-msgstr "Chapter Translate ID: %1%"
+#: src/common/kax_element_names.cpp:283
+#, fuzzy
+msgid "Chapter display"
+msgstr "チャプタファイル："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1396
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:189
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:233
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:187
 #, no-c-format
 msgid "Chapter editor"
@@ -3687,10 +3716,30 @@ msgstr "チャプタの抽出"
 msgid "Chapter file:"
 msgstr "チャプタファイル："
 
+#: src/common/kax_element_names.cpp:277
+#, fuzzy
+msgid "Chapter flag enabled"
+msgstr "チャプタファイル："
+
+#: src/common/kax_element_names.cpp:276
+#, fuzzy
+msgid "Chapter flag hidden"
+msgstr "「隠し」フラグのチャプタをスキップする(&S)"
+
 #: src/merge/cluster_helper.cpp:748
 #, fuzzy
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "チャプタ生成は少なくとも1つのビデオまたはオーディオトラックがMUXされる場合にのみ可能です。\n"
+
+#: src/common/kax_element_names.cpp:285
+#, fuzzy
+msgid "Chapter language"
+msgstr "Chapter Translate"
+
+#: src/common/kax_element_names.cpp:286
+#, fuzzy
+msgid "Chapter language (IETF)"
+msgstr "Chapter Translate"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "Chapter mass modification"
@@ -3706,7 +3755,100 @@ msgstr "チャプタ番号："
 msgid "Chapter parser: The EditionUID %1% is not unique and could not be reused. A new one will be created.\n"
 msgstr "チャプタパーサー：エディションUID %1%がユニークではなく、再使用されることもできません。新しいUIDが生成されます。\n"
 
-#: src/common/kax_info.cpp:1616
+#: src/common/kax_element_names.cpp:280
+msgid "Chapter physical equivalent"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:288
+#, fuzzy
+msgid "Chapter process"
+msgstr "チャプタ"
+
+#: src/common/kax_element_names.cpp:289
+#, fuzzy
+msgid "Chapter process codec ID"
+msgstr "Chapter Translate Codec: %1%"
+
+#: src/common/kax_element_names.cpp:291
+msgid "Chapter process command"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:293
+#, fuzzy
+msgid "Chapter process data"
+msgstr "Chapter Translate"
+
+#: src/common/kax_element_names.cpp:290
+#, fuzzy
+msgid "Chapter process private"
+msgstr "Chapter Translate"
+
+#: src/common/kax_element_names.cpp:292
+#, fuzzy
+msgid "Chapter process time"
+msgstr "Chapter Translate"
+
+#: src/common/kax_element_names.cpp:278
+#, fuzzy
+msgid "Chapter segment UID"
+msgstr "次のセグメントUID："
+
+#: src/common/kax_element_names.cpp:279
+#, fuzzy
+msgid "Chapter segment edition UID"
+msgstr "セグメントエディションUID：(&D)"
+
+#: src/common/kax_element_names.cpp:284
+#, fuzzy
+msgid "Chapter string"
+msgstr "チャプタの抽出"
+
+#: src/common/kax_element_names.cpp:273
+#, fuzzy
+msgid "Chapter string UID"
+msgstr "チャプタの抽出"
+
+#: src/common/kax_element_names.cpp:275
+#, fuzzy
+msgid "Chapter time end"
+msgstr "チャプタファイル："
+
+#: src/common/kax_element_names.cpp:274
+#, fuzzy
+msgid "Chapter time start"
+msgstr "チャプタエディタ"
+
+#: src/common/kax_element_names.cpp:281
+#, fuzzy
+msgid "Chapter track"
+msgstr "チャプタの抽出"
+
+#: src/common/kax_element_names.cpp:282
+#, fuzzy
+msgid "Chapter track number"
+msgstr "チャプタ番号："
+
+#: src/common/kax_element_names.cpp:98
+#, fuzzy
+msgid "Chapter translate"
+msgstr "Chapter Translate"
+
+#: src/common/kax_element_names.cpp:101
+#, fuzzy
+msgid "Chapter translate ID"
+msgstr "Chapter Translate"
+
+#: src/common/kax_element_names.cpp:100
+#, fuzzy
+msgid "Chapter translate codec"
+msgstr "Chapter Translate Codec: %1%"
+
+#: src/common/kax_element_names.cpp:99
+#, fuzzy
+msgid "Chapter translate edition UID"
+msgstr "Chapter Translate Edition UID: %1%"
+
+#: src/common/kax_element_names.cpp:265
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 #: src/mkvtoolnix-gui/merge/track.cpp:409
@@ -3777,7 +3919,7 @@ msgstr "コーデック設定：%1%"
 msgid "Close modified file"
 msgstr "変更されたファイルを閉じる"
 
-#: src/common/kax_info.cpp:1715
+#: src/common/kax_element_names.cpp:260
 msgid "Cluster"
 msgstr "クラスタ"
 
@@ -3791,19 +3933,19 @@ msgstr "クラスタの長さ'%1%'が範囲（0～65535）から外れていま�
 msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "クラスタの長さ'%1%'が範囲（100～32000）から外れています。\n"
 
-#: src/common/kax_info.cpp:226
-#, boost-format
-msgid "Cluster position: %1%"
+#: src/common/kax_element_names.cpp:262
+#, fuzzy
+msgid "Cluster position"
 msgstr "クラスタ位置：%1%"
 
-#: src/common/kax_info.cpp:227
-#, boost-format
-msgid "Cluster previous size: %1%"
+#: src/common/kax_element_names.cpp:263
+#, fuzzy
+msgid "Cluster previous size"
 msgstr "前クラスタサイズ：%1%"
 
-#: src/common/kax_info.cpp:225
-#, boost-format
-msgid "Cluster timestamp: %|1$.3f|s"
+#: src/common/kax_element_names.cpp:261
+#, fuzzy
+msgid "Cluster timestamp"
 msgstr "クラスタのタイムコード：%|1$.3f|s"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
@@ -3812,6 +3954,7 @@ msgstr "クラスタのタイムコード：%|1$.3f|s"
 msgid "Codec"
 msgstr "コーデック"
 
+#: src/common/kax_element_names.cpp:185
 #: src/common/property_element.cpp:140
 msgid "Codec ID"
 msgstr "コーデックID"
@@ -3822,50 +3965,42 @@ msgstr "コーデックID"
 msgid "Codec ID:"
 msgstr "コーデックID："
 
-#: src/common/kax_info.cpp:980
-#, boost-format
-msgid "Codec ID: %1%"
-msgstr "コーデックID：%1%"
-
-#: src/common/kax_info.cpp:1008
-#, boost-format
-msgid "Codec decode all: %1%"
+#: src/common/kax_element_names.cpp:192
+#, fuzzy
+msgid "Codec decode all"
 msgstr "Codec decode all: %1%"
 
-#: src/common/kax_info.cpp:1056
-#, boost-format
-msgid "Codec delay: %|1$.3f|ms (%2%ns)"
-msgstr "Codec delay: %|1$.3f|ms (%2%ns)"
-
-#: src/common/kax_info.cpp:1005
-#, boost-format
-msgid "Codec download URL: %1%"
+#: src/common/kax_element_names.cpp:191
+#, fuzzy
+msgid "Codec download URL"
 msgstr "コーデックダウンロードURL：%1%"
 
-#: src/common/kax_info.cpp:1002
-#, boost-format
-msgid "Codec info URL: %1%"
+#: src/common/kax_element_names.cpp:190
+#, fuzzy
+msgid "Codec info URL"
 msgstr "コーデック情報URL：%1%"
 
+#: src/common/kax_element_names.cpp:187
 #: src/common/property_element.cpp:141
 msgid "Codec name"
 msgstr "コーデック名"
 
-#: src/common/kax_info.cpp:995
-#, boost-format
-msgid "Codec name: %1%"
-msgstr "コーデック名：%1%"
-
-#: src/common/kax_info.cpp:999
-#, boost-format
-msgid "Codec settings: %1%"
+#: src/common/kax_element_names.cpp:189
+#, fuzzy
+msgid "Codec settings"
 msgstr "コーデック設定：%1%"
 
-#: src/common/kax_info.cpp:228
-#, boost-format
-msgid "Codec state: %1%"
+#: src/common/kax_element_names.cpp:245
+#, fuzzy
+msgid "Codec state"
 msgstr "コーデック状態：%1%"
 
+#: src/common/kax_element_names.cpp:186
+#, fuzzy
+msgid "Codec's private data"
+msgstr "2: コーデック固有データ"
+
+#: src/common/kax_element_names.cpp:188
 #: src/common/property_element.cpp:142
 msgid "Codec-inherent delay"
 msgstr "コーデック固有のディレイ"
@@ -3874,11 +4009,6 @@ msgstr "コーデック固有のディレイ"
 #, no-c-format
 msgid "Codec/MIME type"
 msgstr "コーデック・MIMEタイプ"
-
-#: src/common/kax_info.cpp:992
-#, boost-format
-msgid "CodecPrivate, length %1%%2%"
-msgstr "CodecPrivate、長さ %1%%2%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:504
 #, fuzzy
@@ -3890,29 +4020,29 @@ msgstr "ビデオトラック"
 msgid "Colour mastering meta information"
 msgstr "情報の保存中にエラーが発生しました"
 
-#: src/common/kax_info.cpp:607
-#, fuzzy, boost-format
-msgid "Colour matrix coefficients: %1%"
+#: src/common/kax_element_names.cpp:123
+#, fuzzy
+msgid "Colour matrix coefficients"
 msgstr "ビデオトラック"
 
-#: src/common/kax_info.cpp:637
-#, fuzzy, boost-format
-msgid "Colour primaries: %1%"
+#: src/common/kax_element_names.cpp:133
+#, fuzzy
+msgid "Colour primaries"
 msgstr "色空間：%1%"
 
-#: src/common/kax_info.cpp:631
-#, fuzzy, boost-format
-msgid "Colour range: %1%"
+#: src/common/kax_element_names.cpp:131
+#, fuzzy
+msgid "Colour range"
 msgstr "色空間：%1%"
 
-#: src/common/kax_info.cpp:780
-#, boost-format
-msgid "Colour space: %1%"
+#: src/common/kax_element_names.cpp:159
+#, fuzzy
+msgid "Colour space"
 msgstr "色空間：%1%"
 
-#: src/common/kax_info.cpp:634
-#, fuzzy, boost-format
-msgid "Colour transfer: %1%"
+#: src/common/kax_element_names.cpp:132
+#, fuzzy
+msgid "Colour transfer"
 msgstr "色空間：%1%"
 
 #: src/info/qt_ui.cpp:149
@@ -3920,12 +4050,12 @@ msgstr "色空間：%1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "Compiled with libebml %1 + libmatroska %2."
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:262
+#: src/mkvtoolnix-gui/jobs/job.cpp:267
 #, fuzzy, no-c-format
 msgid "Completed OK"
 msgstr "正常に完了しました"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:263
+#: src/mkvtoolnix-gui/jobs/job.cpp:268
 #, fuzzy, no-c-format
 msgid "Completed with warnings"
 msgstr "完了しましたが、警告があります"
@@ -3944,19 +4074,20 @@ msgstr "圧縮："
 msgid "Container"
 msgstr "コンテナ"
 
-#: src/common/kax_info.cpp:831
+#: src/common/kax_element_names.cpp:167
 msgid "Content compression"
 msgstr "コンテンツ圧縮"
 
-#: src/common/kax_info.cpp:801
+#: src/common/kax_element_names.cpp:163
 msgid "Content encoding"
 msgstr "コンテンツエンコーディング"
 
-#: src/common/kax_info.cpp:797
+#: src/common/kax_element_names.cpp:162
+#: src/common/kax_element_names.cpp:203
 msgid "Content encodings"
 msgstr "コンテンツエンコーディング"
 
-#: src/common/kax_info.cpp:851
+#: src/common/kax_element_names.cpp:170
 msgid "Content encryption"
 msgstr "コンテンツ暗号化"
 
@@ -4145,7 +4276,7 @@ msgstr "クロッピングのパラメータ：<TID>:<left>,<top>,<right>,<botto
 msgid "Cropping:"
 msgstr "クロッピング："
 
-#: src/info/ui/mainwindow.h:121
+#: src/info/forms/mainwindow.h:121
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
@@ -4154,7 +4285,7 @@ msgstr "Ctrl+A"
 msgid "Ctrl+D"
 msgstr "Ctrl+A"
 
-#: src/info/ui/mainwindow.h:125
+#: src/info/forms/mainwindow.h:125
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
@@ -4177,7 +4308,7 @@ msgstr "Ctrl+L"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: src/info/ui/mainwindow.h:109
+#: src/info/forms/mainwindow.h:109
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:532
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:554
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:572
@@ -4188,7 +4319,7 @@ msgstr "Ctrl+O"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/info/ui/mainwindow.h:117
+#: src/info/forms/mainwindow.h:117
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:537
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -4198,7 +4329,7 @@ msgstr "Ctrl+Q"
 msgid "Ctrl+R"
 msgstr "Ctrl+R"
 
-#: src/info/ui/mainwindow.h:113
+#: src/info/forms/mainwindow.h:113
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:528
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:562
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:580
@@ -4226,24 +4357,24 @@ msgstr "Ctrl+T"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
-#: src/common/kax_info.cpp:1169
-#, boost-format
-msgid "Cue block number: %1%"
+#: src/common/kax_element_names.cpp:219
+#, fuzzy
+msgid "Cue block number"
 msgstr "CUEブロック番号：%1%"
 
-#: src/common/kax_info.cpp:1160
-#, boost-format
-msgid "Cue cluster position: %1%"
+#: src/common/kax_element_names.cpp:216
+#, fuzzy
+msgid "Cue cluster position"
 msgstr "CUEクラスタ位置：%1%"
 
-#: src/common/kax_info.cpp:1173
-#, boost-format
-msgid "Cue codec state: %1%"
+#: src/common/kax_element_names.cpp:220
+#, fuzzy
+msgid "Cue codec state"
 msgstr "CUEコーデック状態：%1%"
 
-#: src/common/kax_info.cpp:1166
-#, boost-format
-msgid "Cue duration: %1%"
+#: src/common/kax_element_names.cpp:218
+#, fuzzy
+msgid "Cue duration"
 msgstr "Cue duration: %1%"
 
 #: src/extract/extract_cli_parser.cpp:129
@@ -4254,37 +4385,37 @@ msgstr "キューの抽出"
 msgid "Cue name format:"
 msgstr "CUEの名前フォーマット："
 
-#: src/common/kax_info.cpp:1146
+#: src/common/kax_element_names.cpp:212
 msgid "Cue point"
 msgstr "CUEポイント"
 
-#: src/common/kax_info.cpp:1183
-#, boost-format
-msgid "Cue ref cluster: %1%"
+#: src/common/kax_element_names.cpp:223
+#, fuzzy
+msgid "Cue ref cluster"
 msgstr "CUE参照クラスタ：%1%"
 
-#: src/common/kax_info.cpp:1189
-#, boost-format
-msgid "Cue ref codec state: %1%"
+#: src/common/kax_element_names.cpp:225
+#, fuzzy
+msgid "Cue ref codec state"
 msgstr "CUE参照状態：%1%"
 
-#: src/common/kax_info.cpp:1186
-#, boost-format
-msgid "Cue ref number: %1%"
+#: src/common/kax_element_names.cpp:224
+#, fuzzy
+msgid "Cue ref number"
 msgstr "CUE参照番号：%1%"
 
-#: src/common/kax_info.cpp:1180
-#, boost-format
-msgid "Cue ref time: %|1$.3f|s"
+#: src/common/kax_element_names.cpp:222
+#, fuzzy
+msgid "Cue ref time"
 msgstr "CUE参照時間：%|1$.3f|s"
 
-#: src/common/kax_info.cpp:1176
+#: src/common/kax_element_names.cpp:221
 msgid "Cue reference"
 msgstr "CUE参照"
 
-#: src/common/kax_info.cpp:1163
-#, boost-format
-msgid "Cue relative position: %1%"
+#: src/common/kax_element_names.cpp:217
+#, fuzzy
+msgid "Cue relative position"
 msgstr "Cue relative position: %1%"
 
 #: src/extract/extract_cli_parser.cpp:112
@@ -4311,21 +4442,25 @@ msgstr "CUEシートパーサ：%3%行目のインデックス番号が無効で
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
 msgstr "CUEシートパーサ：前のトラックエントリのインデックスエントリが見つかりませんでした（現在%1%行目）\n"
 
-#: src/common/kax_info.cpp:1150
-#, boost-format
-msgid "Cue time: %|1$.3f|s"
-msgstr "CUE時間：%|1$.3f|s"
+#: src/common/kax_element_names.cpp:213
+#, fuzzy
+msgid "Cue time"
+msgstr "テキストファイル"
 
-#: src/common/kax_info.cpp:1153
+#: src/common/kax_element_names.cpp:215
+#, fuzzy
+msgid "Cue track"
+msgstr "CUEトラック：%1%"
+
+#: src/common/kax_element_names.cpp:214
 msgid "Cue track positions"
 msgstr "CUEトラック位置"
 
-#: src/common/kax_info.cpp:1157
-#, boost-format
-msgid "Cue track: %1%"
-msgstr "CUEトラック：%1%"
+#: src/common/kax_element_names.cpp:211
+msgid "Cues"
+msgstr ""
 
-#: src/common/kax_info.cpp:1133
+#: src/common/kax_info.cpp:522
 msgid "Cues (subentries will be skipped)"
 msgstr "CUE (サブエントリはスキップされます)"
 
@@ -4390,6 +4525,7 @@ msgstr "DVビデオフォーマット"
 msgid "DVB subtitles"
 msgstr "HD-DVD字幕"
 
+#: src/common/kax_element_names.cpp:88
 #: src/common/property_element.cpp:110
 msgid "Date"
 msgstr ""
@@ -4409,11 +4545,6 @@ msgstr "完了日時"
 msgid "Date started"
 msgstr "開始日"
 
-#: src/common/kax_info.cpp:492
-#, boost-format
-msgid "Date: %1% UTC"
-msgstr "日付：%1% UTC"
-
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
@@ -4432,6 +4563,7 @@ msgstr "デフォルト(&D)"
 msgid "Default additional co&mmand line options:"
 msgstr "デフォルトの追加コマンドラインオプション：(&M)"
 
+#: src/common/kax_element_names.cpp:196
 #: src/common/property_element.cpp:137
 msgid "Default duration"
 msgstr "デフォルトのフレーム持続期間"
@@ -4440,15 +4572,10 @@ msgstr "デフォルトのフレーム持続期間"
 msgid "Default duration/FPS:"
 msgstr "デフォルトのフレーム持続期間・FPS："
 
-#: src/common/kax_info.cpp:1023
-#, boost-format
-msgid "Default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
-msgstr "デフォルトのフレーム持続期間：%|1$.3f|ms（ビデオトラックの場合は毎秒%|2$.3f|フレーム・フィールド）"
-
-#: src/common/kax_info.cpp:1035
-#, boost-format
-msgid "Default flag: %1%"
-msgstr "デフォルトフラグ：%1%"
+#: src/common/kax_element_names.cpp:310
+#, fuzzy
+msgid "Default language"
+msgstr "デフォルト値"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1364
 msgid "Default subtitle &charset to set:"
@@ -4458,6 +4585,11 @@ msgstr "デフォルトで設定する字幕の文字セット：(&C)"
 #, no-c-format
 msgid "Default track"
 msgstr "デフォルトトラック"
+
+#: src/common/kax_element_names.cpp:198
+#, fuzzy
+msgid "Default track flag"
+msgstr "'デフォルトトラック'フラグ："
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:51
 #, no-c-format
@@ -4486,6 +4618,10 @@ msgstr "新しいMUX設定のデフォルト値"
 msgid "Defaults for newly added tracks"
 msgstr "新しく追加されるトラックのデフォルト値"
 
+#: src/common/kax_element_names.cpp:250
+msgid "Delay"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1686
 msgid "Delay (in ms):"
 msgstr "ディレイ(ms単位)："
@@ -4498,11 +4634,6 @@ msgstr "コーデックに組み込まれている、デコード中に発生す
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
 msgstr "このトラックのタイムスタンプを数msだけ遅らせます。"
-
-#: src/common/kax_info.cpp:214
-#, boost-format
-msgid "Delay: %|1$.3f|ms"
-msgstr "遅延：%|1$.3f|ms"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Delete all existing track statistics tags"
@@ -4558,6 +4689,11 @@ msgstr "出力ファイルの名前"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1370
 #, fuzzy
 msgid "Destination file name"
+msgstr "出力ファイルの名前"
+
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:102
+#, fuzzy, no-c-format
+msgid "Destination file name: %1"
 msgstr "出力ファイルの名前"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
@@ -4641,7 +4777,7 @@ msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "シンプルブロックを使用せず、代わりにブロックグループを使用します。"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
-#: src/mkvtoolnix-gui/jobs/job.cpp:266
+#: src/mkvtoolnix-gui/jobs/job.cpp:271
 #, fuzzy, no-c-format
 msgid "Disabled"
 msgstr "無効"
@@ -4652,9 +4788,9 @@ msgstr "無効"
 msgid "Disables lacing for all tracks."
 msgstr "lacingを全てのトラックに対して無効化します。"
 
-#: src/common/kax_info.cpp:231
-#, boost-format
-msgid "Discard padding: %|1$.3f|ms (%2%ns)"
+#: src/common/kax_element_names.cpp:253
+#, fuzzy
+msgid "Discard padding"
 msgstr "Discard padding: %|1$.3f|ms (%2%ns)"
 
 #: src/merge/mkvmerge.cpp:680
@@ -4663,24 +4799,24 @@ msgstr "Discard padding: %|1$.3f|ms (%2%ns)"
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '%1%').\n"
 msgstr "表示解像度：\"<TID>:<width>x<height>\"（例：\"1:640x480\"）の形で指定されていません（パラメータは'%1%'です）。\n"
 
-#: src/common/kax_info.cpp:708
-#, boost-format
-msgid "Display height: %1%"
+#: src/common/kax_element_names.cpp:148
+#, fuzzy
+msgid "Display height"
 msgstr "表示高さ：%1%"
 
-#: src/common/kax_info.cpp:735
-#, boost-format
-msgid "Display unit: %1%%2%"
+#: src/common/kax_element_names.cpp:153
+#, fuzzy
+msgid "Display unit"
 msgstr "表示単位：%1%%2%"
+
+#: src/common/kax_element_names.cpp:147
+#, fuzzy
+msgid "Display width"
+msgstr "表示幅：%1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 msgid "Display width/height:"
 msgstr "表示解像度（横/縦）："
-
-#: src/common/kax_info.cpp:703
-#, boost-format
-msgid "Display width: %1%"
-msgstr "表示幅：%1%"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
@@ -4702,7 +4838,7 @@ msgid "Do not write meta seek elements at all."
 msgstr "メタシーク要素を全く記録しません。"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:519
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:387
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:414
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "本当に現在実行中の全てのジョブを中断しますか？"
@@ -4723,20 +4859,20 @@ msgstr "本当に「%1」を別の添付ファイルとして追加しますか�
 msgid "Do you want to overwrite the file?"
 msgstr "ファイルを上書きしますか？"
 
-#: src/common/kax_info.cpp:1675
-#, boost-format
-msgid "Doc type read version: %1%"
+#: src/common/kax_element_names.cpp:76
+#, fuzzy
+msgid "Document type"
+msgstr "Doc type: %1%"
+
+#: src/common/kax_element_names.cpp:78
+#, fuzzy
+msgid "Document type read version"
 msgstr "Doc type read version: %1%"
 
-#: src/common/kax_info.cpp:1672
-#, boost-format
-msgid "Doc type version: %1%"
+#: src/common/kax_element_names.cpp:77
+#, fuzzy
+msgid "Document type version"
 msgstr "Doc type version: %1%"
-
-#: src/common/kax_info.cpp:1669
-#, boost-format
-msgid "Doc type: %1%"
-msgstr "Doc type: %1%"
 
 #: src/common/file_types.cpp:33
 msgid "Dolby TrueHD"
@@ -4793,6 +4929,8 @@ msgstr "オーディオトラックからロスレスの拡張部分を削ぎ落
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
 msgstr "ファイルのこの特定の構造のため、この状況を自動的に修復することはできません。"
 
+#: src/common/kax_element_names.cpp:85
+#: src/common/kax_element_names.cpp:251
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:240
 msgid "Duration"
 msgstr "継続時間"
@@ -4802,16 +4940,6 @@ msgstr "継続時間"
 #, no-c-format
 msgid "Duration:"
 msgstr "継続時間："
-
-#: src/common/kax_info.cpp:215
-#, boost-format
-msgid "Duration: %|1$.3f|ms"
-msgstr "長さ: %|1$.3f|ms"
-
-#: src/common/kax_info.cpp:479
-#, boost-format
-msgid "Duration: %|1$.3f|s (%2%)"
-msgstr "長さ: %|1$.3f|s (%2%)"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:410
 #, no-c-format
@@ -4827,7 +4955,7 @@ msgstr "全ての添付ファイルを選択(&S)"
 msgid "E&xecute now"
 msgstr "今すぐ実行(&X)"
 
-#: src/info/ui/mainwindow.h:115
+#: src/info/forms/mainwindow.h:115
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
 msgid "E&xit"
 msgstr "修了(&E)"
@@ -4837,29 +4965,28 @@ msgstr "修了(&E)"
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "チャプタの開始及び終了のタイムコードを拡張し、全てのサブチャプタの最小・最大のタイムコードが含まれるようにします"
 
-#: src/common/kax_info.cpp:1645
+#: src/common/kax_element_names.cpp:80
+msgid "EBML CRC-32"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:71
 msgid "EBML head"
 msgstr "EBMLヘッダ"
 
-#: src/common/kax_info.cpp:1663
-#, boost-format
-msgid "EBML maximum ID length: %1%"
-msgstr "EBML最大ID長：%1%"
-
-#: src/common/kax_info.cpp:1666
-#, boost-format
-msgid "EBML maximum size length: %1%"
-msgstr "EBML最大サイズ長：%1%"
-
-#: src/common/kax_info.cpp:1660
-#, boost-format
-msgid "EBML read version: %1%"
+#: src/common/kax_element_names.cpp:73
+#, fuzzy
+msgid "EBML read version"
 msgstr "EBML read version: %1%"
 
-#: src/common/kax_info.cpp:1657
-#, boost-format
-msgid "EBML version: %1%"
+#: src/common/kax_element_names.cpp:72
+#, fuzzy
+msgid "EBML version"
 msgstr "EBMLバージョン：%1%"
+
+#: src/common/kax_element_names.cpp:79
+#, fuzzy
+msgid "EBML void"
+msgstr "EBMLヘッダ"
 
 #: src/merge/reader_detection_and_creation.cpp:420
 #, boost-format
@@ -4880,19 +5007,36 @@ msgstr "各範囲は、'-'を真ん中に置いた開始点と終了点のフレ
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr "各範囲は、'-'を真ん中に置いた開始点と終了点のタイムコードで構成されます、例：'00:01:15-00:03:20'。"
 
-#: src/common/kax_info.cpp:199
-#, boost-format
-msgid "EbmlVoid (size: %1%)"
-msgstr "EbmlVoid (サイズ：%1%)"
-
 #: src/propedit/propedit_cli_parser.cpp:245
 msgid "Edit selectors for properties"
 msgstr "プロパティのEditセレクター"
 
+#: src/common/kax_element_names.cpp:267
+#: src/common/kax_element_names.cpp:299
+#, fuzzy
+msgid "Edition UID"
+msgstr "エディションエントリ"
+
+#: src/common/kax_element_names.cpp:266
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
 #, no-c-format
 msgid "Edition entry"
+msgstr "エディションエントリ"
+
+#: src/common/kax_element_names.cpp:269
+#, fuzzy
+msgid "Edition flag default"
+msgstr "エディションエントリ"
+
+#: src/common/kax_element_names.cpp:268
+#, fuzzy
+msgid "Edition flag hidden"
+msgstr "エディションエントリ"
+
+#: src/common/kax_element_names.cpp:270
+#, fuzzy
+msgid "Edition flag ordered"
 msgstr "エディションエントリ"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
@@ -4934,10 +5078,10 @@ msgstr "カテゴリ'%1%'の要素（'--edit %2%'）：\n"
 msgid "Enable copying of tracks by their language"
 msgstr "言語に基づいてMUXを行うようにする"
 
-#: src/common/kax_info.cpp:972
-#, boost-format
-msgid "Enabled: %1%"
-msgstr "有効：%1%"
+#: src/common/kax_element_names.cpp:183
+#, fuzzy
+msgid "Enabled"
+msgstr "有効(&E)"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:154
 #, no-c-format
@@ -4954,14 +5098,14 @@ msgstr "このオプションを有効にすると、mkvmergeはそのような�
 msgid "Enabling tracks"
 msgstr "トラックの有効化"
 
-#: src/common/kax_info.cpp:857
-#, boost-format
-msgid "Encryption algorithm: %1% (%2%)"
+#: src/common/kax_element_names.cpp:171
+#, fuzzy
+msgid "Encryption algorithm"
 msgstr "暗号化アルゴリズム：%1% (%2%)"
 
-#: src/common/kax_info.cpp:868
-#, boost-format
-msgid "Encryption key ID: %1%"
+#: src/common/kax_element_names.cpp:172
+#, fuzzy
+msgid "Encryption key ID"
 msgstr "暗号化鍵ID：%1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
@@ -5074,13 +5218,13 @@ msgstr "Matroskaファイルの書き込み中にエラーが発生しました"
 #: src/common/output.cpp:133
 #: src/common/output.cpp:134
 #: src/common/output.cpp:135
-#: src/mkvtoolnix-gui/jobs/job.cpp:246
+#: src/mkvtoolnix-gui/jobs/job.cpp:251
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:318
 #, no-c-format
 msgid "Error:"
 msgstr "エラー："
 
-#: src/common/kax_info.cpp:1789
+#: src/common/kax_info.cpp:1145
 #, fuzzy, boost-format
 msgid "Error: Couldn't open source file %1% (%2%)."
 msgstr "エラー：入力ファイル%1%（%2%）を開けませんでした。"
@@ -5249,12 +5393,12 @@ msgstr "コーデックID '%2%'のトラック%1%をファイル'%3%'に抽出�
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "コーデックID '%2%'のトラックID%1%の抽出はサポートされていません。\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:354
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
 msgid "Extraction tool"
 msgstr "抽出ツール"
 
-#: src/info/ui/mainwindow.h:129
+#: src/info/forms/mainwindow.h:129
 msgid "F1"
 msgstr "F1"
 
@@ -5271,7 +5415,7 @@ msgstr "FLAC（Free Lossless Audio Codec）"
 msgid "FLV (Flash Video)"
 msgstr "FLV (Flash Video)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:264
+#: src/mkvtoolnix-gui/jobs/job.cpp:269
 #, fuzzy, no-c-format
 msgid "Failed"
 msgstr "失敗"
@@ -5302,9 +5446,9 @@ msgstr "一時ファイル'%1%'の作成に失敗しました：%2%\n"
 msgid "Failed to parse the USF codec private data for track %1%: %2%\n"
 msgstr "トラック%1%のUSFコーデックプライベートデータの解析に失敗しました：%2%\n"
 
-#: src/common/kax_info.cpp:498
-#, boost-format
-msgid "Family UID: %1%"
+#: src/common/kax_element_names.cpp:90
+#, fuzzy
+msgid "Family UID"
 msgstr "ファミリーUID: %1%"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:172
@@ -5315,15 +5459,15 @@ msgstr "ファイル名：(&L)"
 msgid "Fi&le title:"
 msgstr "ファイルタイトル：(&L)"
 
+#: src/common/kax_element_names.cpp:156
+#, fuzzy
+msgid "Field order"
+msgstr "横解像度（ピクセル）"
+
 #: src/common/property_element.cpp:158
 #, fuzzy
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr "ステレオ3Dビデオモードです（0～11、ドキュメントを参照してください）。"
-
-#: src/common/kax_info.cpp:752
-#, fuzzy, boost-format
-msgid "Field order: %1% (%2%)"
-msgstr "ステレオモード：%1%（%2%）"
 
 #: src/merge/generic_reader.cpp:320
 #, boost-format
@@ -5335,9 +5479,9 @@ msgstr "ファイル'%1%'：コンテナ：%2%"
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "ファイル'%1%'：サポートされていないコンテナ：%2%\n"
 
-#: src/common/kax_info.cpp:1234
-#, boost-format
-msgid "File UID: %1%"
+#: src/common/kax_element_names.cpp:233
+#, fuzzy
+msgid "File UID"
 msgstr "ファイルUID：%1%"
 
 #: src/input/r_real.cpp:430
@@ -5346,14 +5490,14 @@ msgstr "ファイルUID：%1%"
 msgid "File contains fewer frames than expected or is corrupt after frame %1%.\n"
 msgstr "ファイルが予測されたよりも少ないフレームしか含んでいないか、フレーム%1%の後ろが壊れています。\n"
 
-#: src/common/kax_info.cpp:1231
-#, boost-format
-msgid "File data, size: %1%"
-msgstr "ファイルデータ、サイズ：%1%"
+#: src/common/kax_element_names.cpp:232
+#, fuzzy
+msgid "File data"
+msgstr "ファイル名"
 
-#: src/common/kax_info.cpp:1222
-#, boost-format
-msgid "File description: %1%"
+#: src/common/kax_element_names.cpp:229
+#, fuzzy
+msgid "File description"
 msgstr "ファイル説明：%1%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:193
@@ -5361,6 +5505,7 @@ msgstr "ファイル説明：%1%"
 msgid "File has not been modified"
 msgstr "ファイルは変更されませんでした"
 
+#: src/common/kax_element_names.cpp:230
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:241
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:258
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
@@ -5375,11 +5520,6 @@ msgstr "ファイル名"
 #, no-c-format
 msgid "File name:"
 msgstr "ファイル名："
-
-#: src/common/kax_info.cpp:1225
-#, boost-format
-msgid "File name: %1%"
-msgstr "ファイル名：%1%"
 
 #: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:45
 #, fuzzy, no-c-format
@@ -5502,16 +5642,16 @@ msgstr "Xiph方式でブロックを1つにまとめます。"
 msgid "Force the translations for 'code' to be used."
 msgstr "使用される翻訳を'code'に強制設定します。"
 
-#: src/common/kax_info.cpp:1038
-#, boost-format
-msgid "Forced flag: %1%"
-msgstr "強制表示フラグ：%1%"
-
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:154
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
 #, no-c-format
 msgid "Forced track"
 msgstr "強制表示トラック"
+
+#: src/common/kax_element_names.cpp:199
+#, fuzzy
+msgid "Forced track flag"
+msgstr "「強制表示トラック」フラグ："
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
@@ -5546,18 +5686,18 @@ msgstr "FourCC：'%1% %2%'で無効なトラックIDがあります。\n"
 msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC：'%1% %2%'でトラックIDがありません。\n"
 
-#: src/common/kax_info.cpp:213
-#, boost-format
-msgid "Frame number: %1%"
+#: src/common/kax_element_names.cpp:249
+#, fuzzy
+msgid "Frame number"
 msgstr "フレーム数：%1%"
 
-#: src/common/kax_info.cpp:783
-#, boost-format
-msgid "Frame rate: %1%"
+#: src/common/kax_element_names.cpp:160
+#, fuzzy
+msgid "Frame rate"
 msgstr "フレームレート：%1%"
 
-#: src/common/kax_info.cpp:203
-#: src/common/kax_info.cpp:222
+#: src/common/kax_info.cpp:184
+#: src/common/kax_info.cpp:190
 #, boost-format
 msgid "Frame with size %1%%2%%3%"
 msgstr "フレームサイズ：%1%%2%%3%"
@@ -5577,9 +5717,9 @@ msgstr "このトラックのユーザー定義オプション用のフリーフ
 msgid "GUI"
 msgstr "GUI"
 
-#: src/common/kax_info.cpp:744
-#, boost-format
-msgid "Gamma: %1%"
+#: src/common/kax_element_names.cpp:154
+#, fuzzy
+msgid "Gamma"
 msgstr "ガンマ：%1%"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
@@ -5647,15 +5787,15 @@ msgstr ""
 msgid "Green Y chromaticity coordinate as defined by CIE 1931."
 msgstr ""
 
-#: src/common/kax_info.cpp:573
-#, boost-format
-msgid "Green colour coordinate x: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:113
+#, fuzzy
+msgid "Green colour coordinate x"
+msgstr "CUE参照状態：%1%"
 
-#: src/common/kax_info.cpp:576
-#, boost-format
-msgid "Green colour coordinate y: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:114
+#, fuzzy
+msgid "Green colour coordinate y"
+msgstr "CUE参照状態：%1%"
 
 #: src/common/file_types.cpp:86
 msgid "HD-DVD subtitles"
@@ -5690,14 +5830,14 @@ msgstr "HEVC/h.265 (unframed)"
 msgid "HEVC/h.265 elementary streams"
 msgstr "AVC/h.265エレメンタリストリーム"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:365
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:392
 #, no-c-format
 msgid "Header &editor"
 msgstr "ヘッダエディタ(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1394
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:188
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:186
 #, no-c-format
 msgid "Header editor"
@@ -5750,19 +5890,19 @@ msgstr "プロセスの優先度：(&P)"
 msgid "Highest priority"
 msgstr "プロセスの優先度：(&P)"
 
-#: src/common/kax_info.cpp:619
-#, fuzzy, boost-format
-msgid "Horizontal Cb subsample: %1%"
+#: src/common/kax_element_names.cpp:127
+#, fuzzy
+msgid "Horizontal Cb subsample"
 msgstr "サンプルあたりビット数：%1%"
 
-#: src/common/kax_info.cpp:625
-#, boost-format
-msgid "Horizontal chroma siting: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:129
+#, fuzzy
+msgid "Horizontal chroma siting"
+msgstr "Cue relative position: %1%"
 
-#: src/common/kax_info.cpp:613
-#, fuzzy, boost-format
-msgid "Horizontal chroma subsample: %1%"
+#: src/common/kax_element_names.cpp:125
+#, fuzzy
+msgid "Horizontal chroma subsample"
 msgstr "サンプルあたりビット数：%1%"
 
 #: src/common/property_element.cpp:174
@@ -6114,7 +6254,12 @@ msgstr ""
 msgid "Indexing (cues):"
 msgstr "インデックス（キュー）："
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:354
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:145
+#, fuzzy, no-c-format
+msgid "Info job"
+msgstr "Infoツール"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
 msgid "Info tool"
 msgstr "Infoツール"
@@ -6143,9 +6288,9 @@ msgstr "代わりに、このようなファイルは「出力」タブの「セ
 msgid "Interface &language:"
 msgstr "インターフェース言語：(&L)"
 
-#: src/common/kax_info.cpp:747
-#, boost-format
-msgid "Interlaced: %1%"
+#: src/common/kax_element_names.cpp:155
+#, fuzzy
+msgid "Interlaced"
 msgstr "インターレース：%1%"
 
 #: src/extract/xtr_textsubs.cpp:131
@@ -6574,15 +6719,15 @@ msgstr "ジョブの説明"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "ISO 8601形式のジョブが終了した日付と時刻"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:192
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:236
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #, no-c-format
 msgid "Job output"
 msgstr "ジョブの出力"
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:125
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:191
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:235
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #, no-c-format
 msgid "Job queue"
 msgstr "ジョブキュー"
@@ -6621,16 +6766,17 @@ msgstr "このレベルまでのBlockAdditionのみを保持します（デフ�
 msgid "Known &problems in recent releases"
 msgstr "最近のリリースの既知の問題(&P)"
 
-#: src/common/kax_info.cpp:212
-#, boost-format
-msgid "Lace number: %1%"
+#: src/common/kax_element_names.cpp:248
+#, fuzzy
+msgid "Lace number"
 msgstr "Lace number: %1%"
 
-#: src/common/kax_info.cpp:1032
-#, boost-format
-msgid "Lacing flag: %1%"
+#: src/common/kax_element_names.cpp:197
+#, fuzzy
+msgid "Lacing flag"
 msgstr "Lacing flag: %1%"
 
+#: src/common/kax_element_names.cpp:200
 #: src/common/property_element.cpp:139
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:26
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:251
@@ -6650,11 +6796,6 @@ msgstr "言語がNULで終わっていません。"
 #, no-c-format
 msgid "Language:"
 msgstr "言語："
-
-#: src/common/kax_info.cpp:1042
-#, boost-format
-msgid "Language: %1%"
-msgstr "言語：%1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1325
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1349
@@ -6724,6 +6865,11 @@ msgstr "全ての有効なプロパティ名を列挙して終了します"
 msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."
 msgstr "拡張子.mtxcfgのファイル名を列挙すると、その設定ファイルは該当するツールでロードされます。"
 
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:152
+#, fuzzy, no-c-format
+msgid "Listing content of file \"%1\" in directory \"%2\""
+msgstr "ディレクトリ»%2«のファイル»%1«へマージ"
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:489
 #, fuzzy, no-c-format
 msgid "Lower priority"
@@ -6738,17 +6884,18 @@ msgstr "プロセスの優先度：(&P)"
 msgid "M&ore actions"
 msgstr "その他のアクション(&O)"
 
-#: src/common/kax_info.cpp:886
+#: src/common/kax_info.cpp:792
 msgid "MD5"
 msgstr "MD5"
 
+#: src/common/kax_element_names.cpp:231
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:63
 #, no-c-format
 msgid "MIME type"
 msgstr "MIMEタイプ"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:363
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:390
 #, no-c-format
 msgid "MKVToolNix &GUI"
 msgstr "MKVToolNix GUI (&G)"
@@ -6835,12 +6982,12 @@ msgstr "MPLS Blu-ray プレイリスト"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "このトラックをそのタイプ（オーディオ、ビデオ、字幕）のデフォルトトラックに設定します。"
 
-#: src/input/r_matroska.cpp:1742
-#: src/input/r_matroska.cpp:1759
+#: src/input/r_matroska.cpp:1739
+#: src/input/r_matroska.cpp:1756
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "無効な形式のAACコーデック初期化データが見つかりました。\n"
 
-#: src/input/r_matroska.cpp:1752
+#: src/input/r_matroska.cpp:1749
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "無効な形式のコーデックID '%1%'です。\n"
@@ -6885,30 +7032,15 @@ msgstr "Matroskaファイル"
 msgid "Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."
 msgstr "Matroskaファイルはキューデータ無しでも再生できますが、恐らくシークが不正確で遅くなります。"
 
-#: src/common/kax_info.cpp:1049
-#, boost-format
-msgid "Max BlockAddition ID: %1%"
-msgstr "最大BlockAddition ID：%1%"
+#: src/common/kax_element_names.cpp:74
+#, fuzzy
+msgid "Maximum EBML ID length"
+msgstr "EBML最大ID長：%1%"
 
-#: src/common/kax_info.cpp:640
-#, fuzzy, boost-format
-msgid "Max content light: %1%"
-msgstr "切り捨てピクセル(右)：%1%"
-
-#: src/common/kax_info.cpp:643
-#, fuzzy, boost-format
-msgid "Max frame light: %1%"
-msgstr "ピクセル高さ：%1%"
-
-#: src/common/kax_info.cpp:591
-#, fuzzy, boost-format
-msgid "Max luminance: %1%"
-msgstr "最大キャッシュ：%1%"
-
-#: src/common/kax_info.cpp:1018
-#, boost-format
-msgid "MaxCache: %1%"
-msgstr "最大キャッシュ：%1%"
+#: src/common/kax_element_names.cpp:75
+#, fuzzy
+msgid "Maximum EBML size length"
+msgstr "EBML最大サイズ長：%1%"
 
 #: src/common/xml/ebml_converter.cpp:228
 #, boost-format
@@ -6922,6 +7054,11 @@ msgstr "許容される最大の長さ：%1%、実際の長さ：%2%"
 msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "許容される最大の値：%1%、実際の値：%2%"
 
+#: src/common/kax_element_names.cpp:202
+#, fuzzy
+msgid "Maximum block additional ID"
+msgstr "BlockAddition ID：%1%"
+
 #: src/common/property_element.cpp:179
 #, fuzzy
 msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
@@ -6930,9 +7067,20 @@ msgstr ""
 "                           作成される最初のMatroskaファイルにのみ\n"
 "                           ファイルを添付します。\n"
 
+#: src/common/kax_element_names.cpp:195
 #: src/common/property_element.cpp:135
 msgid "Maximum cache"
 msgstr "最大キャッシュ"
+
+#: src/common/kax_element_names.cpp:134
+#, fuzzy
+msgid "Maximum content light"
+msgstr "切り捨てピクセル(右)：%1%"
+
+#: src/common/kax_element_names.cpp:135
+#, fuzzy
+msgid "Maximum frame light"
+msgstr "ピクセル高さ：%1%"
 
 #: src/common/property_element.cpp:180
 #, fuzzy
@@ -6941,6 +7089,11 @@ msgstr ""
 "  --attach-file-once <file>\n"
 "                           作成される最初のMatroskaファイルにのみ\n"
 "                           ファイルを添付します。\n"
+
+#: src/common/kax_element_names.cpp:119
+#, fuzzy
+msgid "Maximum luminance"
+msgstr "最大キャッシュ：%1%"
 
 #: src/common/property_element.cpp:190
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
@@ -6963,21 +7116,6 @@ msgstr "RealAudio/RealVideoのフレームのためのメモリを確保する�
 msgid "MicroDVD"
 msgstr "MicroDVD"
 
-#: src/common/kax_info.cpp:1228
-#, boost-format
-msgid "Mime type: %1%"
-msgstr "MIMEタイプ：%1%"
-
-#: src/common/kax_info.cpp:594
-#, fuzzy, boost-format
-msgid "Min luminance: %1%"
-msgstr "最小キャッシュ：%1%"
-
-#: src/common/kax_info.cpp:1015
-#, boost-format
-msgid "MinCache: %1%"
-msgstr "最小キャッシュ：%1%"
-
 #: src/common/xml/ebml_converter.cpp:226
 #, boost-format
 msgid "Minimum allowed length: %1%, actual length: %2%"
@@ -6990,9 +7128,15 @@ msgstr "許容される最小の長さ：%1%、実際の長さ：%2%"
 msgid "Minimum allowed value: %1%, actual value: %2%"
 msgstr "許容される最小の値：%1%、実際の値：%2%"
 
+#: src/common/kax_element_names.cpp:194
 #: src/common/property_element.cpp:133
 msgid "Minimum cache"
 msgstr "最小キャッシュ"
+
+#: src/common/kax_element_names.cpp:120
+#, fuzzy
+msgid "Minimum luminance"
+msgstr "最小キャッシュ：%1%"
 
 #: src/common/property_element.cpp:191
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
@@ -7041,7 +7185,7 @@ msgstr ""
 msgid "Modification of properties in the section '%1%' was requested, but no corresponding level 1 element was found in the file. %2%\n"
 msgstr "セクション'%1%'のプロパティの変更が要求されましたが、ファイルには対応するレベル1の要素が見つかりませんでした。%2%\n"
 
-#: src/common/kax_info.cpp:1348
+#: src/common/kax_element_names.cpp:255
 msgid "More"
 msgstr "More"
 
@@ -7092,21 +7236,17 @@ msgstr ""
 msgid "Multiplex job"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:185
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:229
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:181
 #, fuzzy, no-c-format
 msgid "Multiplexer"
 msgstr "Mergeツール(&M)"
 
+#: src/common/kax_element_names.cpp:86
 #: src/common/property_element.cpp:118
 #, fuzzy
 msgid "Multiplexing application"
-msgstr "MUXアプリケーション"
-
-#: src/common/kax_info.cpp:484
-#, fuzzy, boost-format
-msgid "Multiplexing application: %1%"
 msgstr "MUXアプリケーション"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:185
@@ -7132,6 +7272,8 @@ msgstr "NALUサイズ長："
 msgid "Na&me template:"
 msgstr "チャプタ名テンプレート：(&M)"
 
+#: src/common/kax_element_names.cpp:184
+#: src/common/kax_element_names.cpp:305
 #: src/common/property_element.cpp:138
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
@@ -7160,11 +7302,6 @@ msgstr "名前・説明"
 msgid "Name:"
 msgstr "名前："
 
-#: src/common/kax_info.cpp:976
-#, boost-format
-msgid "Name: %1%"
-msgstr "名前：%1%"
-
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:525
 msgid "Names"
 msgstr "名前"
@@ -7184,23 +7321,19 @@ msgstr "他のプレイリストがないかのスキャンを常に行わない
 msgid "New value:"
 msgstr "新しい値："
 
+#: src/common/kax_element_names.cpp:94
 #: src/common/property_element.cpp:113
 msgid "Next filename"
 msgstr "次のファイル名"
 
-#: src/common/kax_info.cpp:513
-#, boost-format
-msgid "Next filename: %1%"
-msgstr "次のファイル名：%1%"
+#: src/common/kax_element_names.cpp:93
+#, fuzzy
+msgid "Next segment UID"
+msgstr "次のセグメントUID："
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1735
 msgid "Next segment UID:"
 msgstr "次のセグメントUID："
-
-#: src/common/kax_info.cpp:510
-#, boost-format
-msgid "Next segment UID: %1%"
-msgstr "次のセグメントUID：%1%"
 
 #: src/common/property_element.cpp:117
 msgid "Next segment's unique ID"
@@ -7240,7 +7373,7 @@ msgstr "AC-3ヘッダが最初のフレームで見つかりませんでした�
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "DTSヘッダが最初のフレームで見つかりませんでした：トラックはスキップされます。\n"
 
-#: src/common/kax_info.cpp:1799
+#: src/common/kax_info.cpp:1166
 msgid "No EBML head found."
 msgstr "EBMLヘッダが見つかりません。"
 
@@ -7757,14 +7890,10 @@ msgstr "Opus"
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus (in Ogg) audio files"
 
+#: src/common/kax_element_names.cpp:164
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:259
 msgid "Order"
 msgstr "順序付き"
-
-#: src/common/kax_info.cpp:805
-#, boost-format
-msgid "Order: %1%"
-msgstr "順番：%1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
 #, fuzzy, no-c-format
@@ -7812,9 +7941,9 @@ msgstr "出力"
 msgid "Output messages in this charset"
 msgstr "この文字セットでメッセージを出力します"
 
-#: src/common/kax_info.cpp:538
-#, boost-format
-msgid "Output sampling frequency: %1%"
+#: src/common/kax_element_names.cpp:105
+#, fuzzy
+msgid "Output sampling frequency"
 msgstr "出力サンプル周波数：%1%"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:393
@@ -7849,7 +7978,7 @@ msgstr "パケット番号%1%は無効なFLACヘッダを含んでいるため�
 msgid "Parse the whole file instead of relying on the index."
 msgstr "インデックスを信頼する代わりにファイルの全体を解析します。"
 
-#: src/common/kax_info.cpp:1545
+#: src/common/kax_info.cpp:583
 msgid "Parsing file"
 msgstr "ファイルを解析しています"
 
@@ -7859,44 +7988,44 @@ msgstr "ファイルを解析しています"
 msgid "Parts:"
 msgstr "部分："
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:260
+#: src/mkvtoolnix-gui/jobs/job.cpp:265
 #, fuzzy, no-c-format
 msgid "Pending automatic start"
 msgstr "自動開始待ち"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:259
+#: src/mkvtoolnix-gui/jobs/job.cpp:264
 #, fuzzy, no-c-format
 msgid "Pending manual start"
 msgstr "手動開始待ち"
 
-#: src/common/kax_info.cpp:728
-#, boost-format
-msgid "Pixel crop bottom: %1%"
+#: src/common/kax_element_names.cpp:152
+#, fuzzy
+msgid "Pixel crop bottom"
 msgstr "切り捨てピクセル(下)：%1%"
 
-#: src/common/kax_info.cpp:713
-#, boost-format
-msgid "Pixel crop left: %1%"
+#: src/common/kax_element_names.cpp:149
+#, fuzzy
+msgid "Pixel crop left"
 msgstr "切り捨てピクセル(左)：%1%"
 
-#: src/common/kax_info.cpp:723
-#, boost-format
-msgid "Pixel crop right: %1%"
+#: src/common/kax_element_names.cpp:151
+#, fuzzy
+msgid "Pixel crop right"
 msgstr "切り捨てピクセル(右)：%1%"
 
-#: src/common/kax_info.cpp:718
-#, boost-format
-msgid "Pixel crop top: %1%"
+#: src/common/kax_element_names.cpp:150
+#, fuzzy
+msgid "Pixel crop top"
 msgstr "切り捨てピクセル(上)：%1%"
 
-#: src/common/kax_info.cpp:698
-#, boost-format
-msgid "Pixel height: %1%"
+#: src/common/kax_element_names.cpp:146
+#, fuzzy
+msgid "Pixel height"
 msgstr "ピクセル高さ：%1%"
 
-#: src/common/kax_info.cpp:693
-#, boost-format
-msgid "Pixel width: %1%"
+#: src/common/kax_element_names.cpp:145
+#, fuzzy
+msgid "Pixel width"
 msgstr "ピクセル幅：%1%"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
@@ -7944,7 +8073,7 @@ msgstr[0] "%1秒より短いプレイリストは無視されます。"
 msgid "Please enter the new job's description."
 msgstr "新しいジョブの説明を入力してください。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:716
 #, no-c-format
 msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
@@ -8008,23 +8137,19 @@ msgstr "プレビュー：(&V)"
 msgid "Pre&viously used destination directory"
 msgstr "以前に使用された出力ディレクトリ(&V)"
 
+#: src/common/kax_element_names.cpp:92
 #: src/common/property_element.cpp:112
 msgid "Previous filename"
 msgstr "以前のファイル名"
 
-#: src/common/kax_info.cpp:507
-#, boost-format
-msgid "Previous filename: %1%"
-msgstr "以前のファイル名：%1%"
+#: src/common/kax_element_names.cpp:91
+#, fuzzy
+msgid "Previous segment UID"
+msgstr "以前のセグメントUID："
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1733
 msgid "Previous segment UID:"
 msgstr "以前のセグメントUID："
-
-#: src/common/kax_info.cpp:504
-#, boost-format
-msgid "Previous segment UID: %1%"
-msgstr "以前のセグメントUID：%1%"
 
 #: src/common/property_element.cpp:116
 msgid "Previous segment's unique ID"
@@ -8038,7 +8163,7 @@ msgstr ""
 msgid "Probe &range percentage:"
 msgstr "調査範囲のパーセンテージ：(&R)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:682
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:709
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
@@ -8094,30 +8219,30 @@ msgstr "進行状況: 100%%%1%"
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "進行状況: [%1%%2%] %3%%%"
 
-#: src/common/kax_info.cpp:666
-#, fuzzy, boost-format
-msgid "Projection type: %1% (%2%)"
-msgstr "スコープ：%1% (%2%)"
+#: src/common/kax_element_names.cpp:138
+#, fuzzy
+msgid "Projection type"
+msgstr "ビデオのアスペクト比のタイプ"
 
-#: src/common/kax_info.cpp:675
-#, fuzzy, boost-format
-msgid "Projection's pitch rotation: %1%"
+#: src/common/kax_element_names.cpp:141
+#, fuzzy
+msgid "Projection's pitch rotation"
 msgstr "書き込みアプリケーション：%1%"
 
-#: src/common/kax_info.cpp:669
-#, fuzzy, boost-format
-msgid "Projection's private data: %1%"
+#: src/common/kax_element_names.cpp:139
+#, fuzzy
+msgid "Projection's private data"
 msgstr "2: コーデック固有データ"
 
-#: src/common/kax_info.cpp:678
-#, boost-format
-msgid "Projection's roll rotation: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:142
+#, fuzzy
+msgid "Projection's roll rotation"
+msgstr "書き込みアプリケーション：%1%"
 
-#: src/common/kax_info.cpp:672
-#, boost-format
-msgid "Projection's yaw rotation: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:140
+#, fuzzy
+msgid "Projection's yaw rotation"
+msgstr "書き込みアプリケーション：%1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:155
 #: src/mkvtoolnix-gui/merge/track_model.cpp:54
@@ -8274,7 +8399,7 @@ msgstr "Quicktime/MP4リーダ：トラックID %1%は複数のFourCCを持っ�
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
-#: src/common/kax_info.cpp:876
+#: src/common/kax_info.cpp:782
 msgid "RSA"
 msgstr "RSA"
 
@@ -8314,7 +8439,7 @@ msgstr "セグメントUIDの読み込みに失敗"
 msgid "Reads additional command line options from the specified JSON file (see man page)."
 msgstr "指定されたファイルから追加のコマンドラインオプションを読み込みます　　　　　　　　　　　　　（man pageを参照してください。）"
 
-#: src/info/qt_ui.cpp:202
+#: src/info/qt_ui.cpp:203
 #, no-c-format
 msgid "Ready"
 msgstr "準備完了"
@@ -8343,15 +8468,15 @@ msgstr ""
 msgid "Red Y chromaticity coordinate as defined by CIE 1931."
 msgstr ""
 
-#: src/common/kax_info.cpp:567
-#, boost-format
-msgid "Red colour coordinate x: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:111
+#, fuzzy
+msgid "Red colour coordinate x"
+msgstr "CUE参照状態：%1%"
 
-#: src/common/kax_info.cpp:570
-#, boost-format
-msgid "Red colour coordinate y: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:112
+#, fuzzy
+msgid "Red colour coordinate y"
+msgstr "CUE参照状態：%1%"
 
 #: src/common/cli_parser.cpp:184
 msgid "Redirects all messages into this file."
@@ -8361,24 +8486,19 @@ msgstr "このファイルに全てのメッセージをリダイレクトしま
 msgid "Reduce to core"
 msgstr "コアへと削る"
 
-#: src/common/kax_info.cpp:206
-#, boost-format
-msgid "Reference block: %1%.%|2$06d|ms"
+#: src/common/kax_element_names.cpp:241
+#, fuzzy
+msgid "Reference block"
 msgstr "参照ブロック：%1%.%|2$06d|ms"
 
-#: src/common/kax_info.cpp:205
-#, boost-format
-msgid "Reference block: -%1%.%|2$06d|ms"
-msgstr "参照ブロック：-%1%.%|2$06d|ms"
-
-#: src/common/kax_info.cpp:207
-#, boost-format
-msgid "Reference priority: %1%"
+#: src/common/kax_element_names.cpp:242
+#, fuzzy
+msgid "Reference priority"
 msgstr "参照優先度：%1%"
 
-#: src/common/kax_info.cpp:209
-#, boost-format
-msgid "Reference virtual: %1%"
+#: src/common/kax_element_names.cpp:244
+#, fuzzy
+msgid "Reference virtual"
 msgstr "Reference virtual: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
@@ -8536,7 +8656,7 @@ msgstr "添付ファイルの操作を行うには右クリックします"
 msgid "Right-click to add, append and remove files"
 msgstr "ファイルの追加、追加結合、削除を行うには右クリックしてください"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:261
+#: src/mkvtoolnix-gui/jobs/job.cpp:266
 #, fuzzy, no-c-format
 msgid "Running"
 msgstr "実行中"
@@ -8565,7 +8685,7 @@ msgstr "コマンドラインを表示(&H)"
 msgid "S&top job queue"
 msgstr "ジョブキューを停止(&T)"
 
-#: src/common/kax_info.cpp:885
+#: src/common/kax_info.cpp:791
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
@@ -8594,14 +8714,14 @@ msgstr "最初の入力ファイルと同じディレクトリ(&M)"
 msgid "Sa&ve settings as"
 msgstr "設定を名前を付けて保存(&V)"
 
+#: src/common/kax_element_names.cpp:104
+#, fuzzy
+msgid "Sampling frequency"
+msgstr "サンプリング周波数：%1%"
+
 #: src/common/property_element.cpp:203
 msgid "Sampling frequency in Hz."
 msgstr "サンプリング周波数（Hz単位）です。"
-
-#: src/common/kax_info.cpp:533
-#, boost-format
-msgid "Sampling frequency: %1%"
-msgstr "サンプリング周波数：%1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:582
 msgid "Save as &XML file"
@@ -8702,56 +8822,54 @@ msgstr "ディレクトリをスキャンしています"
 msgid "Scanning playlists"
 msgstr "プレイリストのスキャン"
 
-#: src/common/kax_info.cpp:819
-#, boost-format
-msgid "Scope: %1% (%2%)"
-msgstr "スコープ：%1% (%2%)"
+#: src/common/kax_element_names.cpp:165
+msgid "Scope"
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:102
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
 msgid "See below for examples."
 msgstr "下方に例を示します。"
 
-#: src/common/kax_info.cpp:1107
-#, boost-format
-msgid "Seek ID: %1% (%2%)"
-msgstr "シークID：%1% (%2%)"
+#: src/common/kax_element_names.cpp:208
+#, fuzzy
+msgid "Seek ID"
+msgstr "シークヘッダ"
 
-#: src/common/kax_info.cpp:1099
+#: src/common/kax_element_names.cpp:207
 msgid "Seek entry"
 msgstr "シークエントリ"
 
-#: src/common/kax_info.cpp:1090
+#: src/common/kax_element_names.cpp:206
 msgid "Seek head"
 msgstr "シークヘッダ"
 
-#: src/common/kax_info.cpp:1086
+#: src/common/kax_info.cpp:516
 msgid "Seek head (subentries will be skipped)"
 msgstr "シークヘッダ (サブエントリはスキップされます)"
 
-#: src/common/kax_info.cpp:1120
-#, boost-format
-msgid "Seek position: %1%"
+#: src/common/kax_element_names.cpp:209
+#, fuzzy
+msgid "Seek position"
 msgstr "シーク位置：%1%"
 
-#: src/common/kax_info.cpp:1060
-#, boost-format
-msgid "Seek pre-roll: %|1$.3f|ms (%2%ns)"
-msgstr "Seek pre-roll: %|1$.3f|ms (%2%ns)"
+#: src/common/kax_element_names.cpp:204
+#, fuzzy
+msgid "Seek pre-roll"
+msgstr "シークエントリ"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:522
 msgid "Seg&ment UID:"
 msgstr "セグメントUID：(&M)"
 
-#: src/info/qt_ui.cpp:224
-#, no-c-format
+#: src/common/kax_element_names.cpp:82
 msgid "Segment"
 msgstr "セグメント"
 
-#: src/common/kax_info.cpp:495
-#, boost-format
-msgid "Segment UID: %1%"
-msgstr "セグメントUID：%1%"
+#: src/common/kax_element_names.cpp:89
+#, fuzzy
+msgid "Segment UID"
+msgstr "セグメントUID："
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1731
 msgid "Segment UIDs:"
@@ -8761,47 +8879,26 @@ msgstr "セグメントUID："
 msgid "Segment e&dition UID:"
 msgstr "セグメントエディションUID：(&D)"
 
+#: src/common/kax_element_names.cpp:95
 #: src/common/property_element.cpp:111
 msgid "Segment filename"
 msgstr "セグメントファイル名"
-
-#: src/common/kax_info.cpp:516
-#, boost-format
-msgid "Segment filename: %1%"
-msgstr "セグメントファイル名：%1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Segment info:"
 msgstr "セグメント情報："
 
-#: src/common/kax_info.cpp:462
-#: src/info/qt_ui.cpp:225
+#: src/common/kax_element_names.cpp:83
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:464
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
-#, no-c-format
 msgid "Segment information"
 msgstr "セグメント情報"
-
-#: src/common/kax_info.cpp:910
-#: src/info/qt_ui.cpp:226
-#, no-c-format
-msgid "Segment tracks"
-msgstr "セグメントトラック"
 
 #: src/common/property_element.cpp:114
 msgid "Segment unique ID"
 msgstr "セグメントの固有ID"
-
-#: src/common/kax_info.cpp:1697
-#, boost-format
-msgid "Segment, size %1%"
-msgstr "セグメント、サイズ %1%"
-
-#: src/common/kax_info.cpp:1695
-msgid "Segment, size unknown"
-msgstr "セグメント、不明なサイズ"
 
 #: src/mkvtoolnix-gui/util/widget.cpp:175
 #, no-c-format
@@ -8998,14 +9095,10 @@ msgstr "使用するセグメントUIDを指定します。"
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "ビデオトラックのステレオモードをこの値に設定します。"
 
+#: src/common/kax_element_names.cpp:169
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1756
 msgid "Settings"
 msgstr "設定"
-
-#: src/common/kax_info.cpp:846
-#, boost-format
-msgid "Settings: %1%"
-msgstr "設定：%1%"
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -9017,7 +9110,7 @@ msgstr "短いAACオーディオパケットです（長さ：%1% < %2%）\n"
 msgid "Short AAC audio packet (length: %1% < 2)\n"
 msgstr "短いAACオーディオパケットです（長さ：%1% < 2）\n"
 
-#: src/info/ui/mainwindow.h:119
+#: src/info/forms/mainwindow.h:119
 msgid "Show &all elements"
 msgstr "全ての要素を表示(&A)"
 
@@ -9083,30 +9176,40 @@ msgstr "システムを1分後にシャットダウン："
 msgid "Shut down the system in one minute:"
 msgstr "システムを1分後にシャットダウン："
 
-#: src/common/kax_info.cpp:873
-#, boost-format
-msgid "Signature algorithm: %1% (%2%)"
-msgstr "署名アルゴリズム：%1% (%2%)"
-
-#: src/common/kax_info.cpp:882
-#, boost-format
-msgid "Signature hash algorithm: %1% (%2%)"
-msgstr "署名ハッシュアルゴリズム：%1% (%2%)"
-
-#: src/common/kax_info.cpp:890
-#, boost-format
-msgid "Signature key ID: %1%"
-msgstr "署名鍵ID：%1%"
-
-#: src/common/kax_info.cpp:893
-#, boost-format
-msgid "Signature: %1%"
+#: src/common/kax_element_names.cpp:176
+#, fuzzy
+msgid "Signature"
 msgstr "署名：%1%"
 
-#: src/common/kax_info.cpp:1249
-#, boost-format
-msgid "Silent Track Number: %1%"
+#: src/common/kax_element_names.cpp:173
+#, fuzzy
+msgid "Signature algorithm"
+msgstr "署名アルゴリズムなし"
+
+#: src/common/kax_element_names.cpp:174
+#, fuzzy
+msgid "Signature hash algorithm"
+msgstr "署名ハッシュアルゴリズムなし"
+
+#: src/common/kax_element_names.cpp:175
+#, fuzzy
+msgid "Signature key ID"
+msgstr "署名鍵ID：%1%"
+
+#: src/common/kax_element_names.cpp:236
+#, fuzzy
+msgid "Silent track number"
 msgstr "Silent Track Number: %1%"
+
+#: src/common/kax_element_names.cpp:235
+#, fuzzy
+msgid "Silent tracks"
+msgstr "セグメントトラック"
+
+#: src/common/kax_element_names.cpp:304
+#, fuzzy
+msgid "Simple"
+msgstr "シンプルブロック"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
 #: src/mkvtoolnix-gui/merge/output.cpp:476
@@ -9114,15 +9217,14 @@ msgstr "Silent Track Number: %1%"
 msgid "Simple OGM-style chapter files"
 msgstr "シンプルなOGM形式のチャプタファイル"
 
+#: src/common/kax_element_names.cpp:258
+msgid "Simple block"
+msgstr "シンプルブロック"
+
 #: src/common/chapters/chapters.cpp:56
 #, boost-format
 msgid "Simple chapter parser: %1%\n"
 msgstr "シンプルチャプタパーサ：%1%\n"
-
-#: src/common/kax_info.cpp:221
-#, boost-format
-msgid "SimpleBlock (%1%track number %2%, %3% frame(s), timestamp %|4$.3f|s = %5%)"
-msgstr "シンプルブロック (%1%トラック番号 %2%、%3% フレーム、タイムコード %|4$.3f|s = %5%)"
 
 #: src/mpegparser/M2VParser.cpp:399
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
@@ -9163,7 +9265,7 @@ msgstr "開始点で%1%バイトをスキップします（有効なMP3ヘッダ
 msgid "Sleep the computer"
 msgstr "システムを1分後にシャットダウン："
 
-#: src/common/kax_info.cpp:1364
+#: src/common/kax_element_names.cpp:256
 msgid "Slices"
 msgstr "スライス"
 
@@ -9190,6 +9292,11 @@ msgstr "ソースファイル"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Source file name"
+msgstr "ソースファイル名"
+
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:101
+#, fuzzy, no-c-format
+msgid "Source file name: %1"
 msgstr "ソースファイル名"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
@@ -9289,7 +9396,7 @@ msgstr "GUIを起動します(入力ファイルが指定されていた場合�
 msgid "Started at:"
 msgstr "開始日時："
 
-#: src/common/kax_info.cpp:1760
+#: src/common/kax_info.cpp:1116
 #, boost-format
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
 msgstr "トラック番号%1%の統計情報: ブロックの数: %2%；サイズ（バイト）: %3%; 持続時間（秒）: %4%; おおよそのビットレート（ビット/秒）: %5%\n"
@@ -9307,15 +9414,15 @@ msgstr "ステータス"
 msgid "Status:"
 msgstr "ステータス："
 
+#: src/common/kax_element_names.cpp:157
+#, fuzzy
+msgid "Stereo mode"
+msgstr "ビデオステレオモード"
+
 #: src/merge/mkvmerge.cpp:936
 #, boost-format
 msgid "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and %1% or one of these keywords: %2% (argument was '%3%').\n"
 msgstr "ステレオモードパラメータ：<TID>:<n|keyword>のnが0～%1%の数字ではないか、keywordが%2%のうちの1つではありません（パラメータは'%3%'でした）。\n"
-
-#: src/common/kax_info.cpp:765
-#, boost-format
-msgid "Stereo mode: %1% (%2%)"
-msgstr "ステレオモード：%1%（%2%）"
 
 #: src/common/property_element.cpp:159
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
@@ -9338,6 +9445,7 @@ msgstr ""
 msgid "Stretch by:"
 msgstr "引き延ばし："
 
+#: src/common/kax_element_names.cpp:306
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:153
 #, no-c-format
 msgid "String"
@@ -9392,7 +9500,12 @@ msgstr "TTA（The lossless True Audio codec）"
 msgid "Tab &position in tab widgets:"
 msgstr "タブウィジェットにおけるタブの位置："
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:354
+#: src/common/kax_element_names.cpp:296
+#, fuzzy
+msgid "Tag"
+msgstr "タグ"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
 msgid "Tag editor"
 msgstr "タグエディタ"
@@ -9401,11 +9514,20 @@ msgstr "タグエディタ"
 msgid "Tag extraction"
 msgstr "タグの抽出"
 
+#: src/common/kax_element_names.cpp:308
+#, fuzzy
+msgid "Tag language"
+msgstr "言語"
+
+#: src/common/kax_element_names.cpp:309
+msgid "Tag language (IETF)"
+msgstr ""
+
 #: src/propedit/propedit_cli_parser.cpp:256
 msgid "Tag selectors"
 msgstr "タグセレクター"
 
-#: src/common/kax_info.cpp:1631
+#: src/common/kax_element_names.cpp:295
 #: src/mkvtoolnix-gui/merge/track.cpp:410
 #: src/propedit/options.cpp:204
 #, no-c-format
@@ -9425,6 +9547,18 @@ msgstr[0] "トラックID %1%のタグ：%2%個のエントリ"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1683
 msgid "Tags:"
 msgstr "タグ："
+
+#: src/common/kax_element_names.cpp:302
+msgid "Target type"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:303
+msgid "Target type value"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:297
+msgid "Targets"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 #, no-c-format
@@ -9985,6 +10119,11 @@ msgstr "ファイル'%1%'を開いて読み込むことができませんでし�
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
 msgstr "ファイル'%1%'を開いて読み込むことができませんでした：%2%。\n"
 
+#: src/common/kax_info.cpp:1155
+#, fuzzy, boost-format
+msgid "The file '%1%' could not be opened for writing: %2%."
+msgstr "ファイル'%1%'を開いて書き込むことができませんでした：%2%。\n"
+
 #: src/extract/attachments.cpp:121
 #: src/extract/cues.cpp:74
 #: src/extract/mkvextract.cpp:82
@@ -10029,7 +10168,7 @@ msgstr "このファイル「%1」にはセグメント情報が含まれてい�
 msgid "The file '%1' contains tags."
 msgstr "このファイル「%1」にはタグが含まれています。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:658
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:685
 #, fuzzy, no-c-format
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "ファイル'%1%'を開いて読み込むことができませんでした：%2%。"
@@ -10175,8 +10314,8 @@ msgstr "このファイルはサポートされていないフォーマットで
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1577
-#: src/input/r_matroska.cpp:2260
+#: src/input/r_matroska.cpp:1574
+#: src/input/r_matroska.cpp:2257
 msgid "The file will not be processed further."
 msgstr "ファイルはこれ以上処理されません。"
 
@@ -10389,13 +10528,13 @@ msgstr ""
 "再生中にプレーヤがキャッシュすることのできる最小フレーム数です。\n"
 "0を指定すると、リファレンスの疑似キャッシュシステムは使用されません。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:666
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:693
 #, fuzzy, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
 msgstr "mkvmergeの実行ファイルが見つかりませんでした。"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:170
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:662
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:76
 #, no-c-format
 msgid "The mkvmerge executable was not found."
@@ -10853,12 +10992,12 @@ msgstr "値は負の数でも構いませんが、この計算後にタイムス
 msgid "The values are only stored in the track headers."
 msgstr "この値はトラックのヘッダーに格納されるのみです。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:670
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:697
 #, fuzzy, no-c-format
 msgid "The version line reported by mkvmerge ('%1') could not be recognized."
 msgstr "XMLタグファイル'%1%'を読み込むことができませんでした。\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:674
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:701
 #, no-c-format
 msgid "The versions of mkvmerge (%1) and the GUI (%2) differ."
 msgstr ""
@@ -10881,7 +11020,7 @@ msgstr "トラックID %1%にはキューがありません。\n"
 msgid "There is a new version available online."
 msgstr "新しいバージョンがオンラインで入手可能です。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:387
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:414
 #, no-c-format
 msgid "There is currently a job running."
 msgstr "実行中のジョブがあります。"
@@ -11026,7 +11165,7 @@ msgstr "この機能はアプリケーション%1が必要です。"
 msgid "This happens when clicking the \"abort job\" button in a \"job output\" tab and when quitting the application."
 msgstr "これは「ジョブ出力」タブの「ジョブを中断」ボタンをクリックした場合及びアプリケーションを終了する場合に発生します。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:138
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:137
 #, no-c-format
 msgid "This has not been implemented yet."
 msgstr "未実装です。"
@@ -11200,8 +11339,8 @@ msgstr "このトラックにはSBR AAC/HE-AAC/AAC+が含まれています。"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1577
-#: src/input/r_matroska.cpp:2260
+#: src/input/r_matroska.cpp:1574
+#: src/input/r_matroska.cpp:2257
 msgid "This usually indicates a damaged file structure."
 msgstr "これは通常ファイル構造が損傷していることを意味します。"
 
@@ -11228,7 +11367,7 @@ msgstr "これは全てのトラックタイプに有効です。"
 msgid "This would cause mkvmerge to overwrite one of your source files."
 msgstr ""
 
-#: src/common/kax_info.cpp:1368
+#: src/common/kax_element_names.cpp:257
 msgid "Time slice"
 msgstr "タイムスライス"
 
@@ -11240,10 +11379,10 @@ msgstr "タイムコードの抽出"
 msgid "Timestamp file:"
 msgstr "タイムコードファイル："
 
-#: src/common/kax_info.cpp:474
-#: src/common/kax_info.cpp:1046
-#, boost-format
-msgid "Timestamp scale: %1%"
+#: src/common/kax_element_names.cpp:84
+#: src/common/kax_element_names.cpp:201
+#, fuzzy
+msgid "Timestamp scale"
 msgstr "タイムコードスケール：%1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
@@ -11256,14 +11395,10 @@ msgstr "タイムコードとデフォルトの持続時間"
 msgid "Timestamps:"
 msgstr "タイムコード："
 
+#: src/common/kax_element_names.cpp:96
 #: src/common/property_element.cpp:109
 msgid "Title"
 msgstr "タイトル"
-
-#: src/common/kax_info.cpp:519
-#, boost-format
-msgid "Title: %1%"
-msgstr "タイトル：%1%"
 
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, fuzzy, no-c-format
@@ -11279,6 +11414,11 @@ msgstr "上"
 msgid "Trac&k name:"
 msgstr "トラック名：(&K)"
 
+#: src/common/kax_element_names.cpp:179
+#, fuzzy
+msgid "Track"
+msgstr "トラック："
+
 #: src/extract/xtr_avc.cpp:137
 #: src/extract/xtr_hdmv_textst.cpp:44
 #: src/extract/xtr_hdmv_textst.cpp:63
@@ -11292,7 +11432,7 @@ msgstr "トラック%1%のCodecPrivateが小さすぎます。\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "トラック%1%は未知もしくはサポートされていない圧縮アルゴリズム（%2%）で圧縮されています。\n"
 
-#: src/input/r_matroska.cpp:1279
+#: src/input/r_matroska.cpp:1276
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "トラック%1%には、Matroskaの仕様上は必須のトラックUID要素がありません。ファイルにタグが含まれている場合、そのタグは壊れている可能性があります。\n"
@@ -11340,7 +11480,7 @@ msgstr "コーデックID '%2%'のトラック%1%は\"codec private\"要素が�
 msgid "Track %1% with the CodecID '%2%' is missing the \"default duration\" element and cannot be extracted.\n"
 msgstr "コーデックID '%2%'のトラック%1%は\"default duration\"要素がなく、抽出することができません。\n"
 
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:622
 #, boost-format
 msgid "Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 msgstr "トラック %1%：%2%、コーデックID： %3%%4%%5%%6%\n"
@@ -11389,14 +11529,11 @@ msgstr "トラックID %1%：%2%（%3%）"
 msgid "Track ID for mkvmerge & mkvextract:"
 msgstr "mkvmergeとmkvextract用のトラック番号："
 
+#: src/common/kax_element_names.cpp:181
+#: src/common/kax_element_names.cpp:298
 #: src/common/property_element.cpp:124
 msgid "Track UID"
 msgstr "トラックUID"
-
-#: src/common/kax_info.cpp:953
-#, boost-format
-msgid "Track UID: %1%"
-msgstr "トラックUID：%1%"
 
 #: src/extract/extract_cli_parser.cpp:73
 msgid "Track extraction"
@@ -11408,6 +11545,7 @@ msgstr "トラックの抽出"
 msgid "Track headers"
 msgstr "トラック名"
 
+#: src/common/kax_element_names.cpp:180
 #: src/common/property_element.cpp:123
 msgid "Track number"
 msgstr "トラック番号"
@@ -11423,20 +11561,20 @@ msgstr "トラック%1%は暗号化されていますが暗号化解除はまだ
 msgid "Track number for mkvpropedit:"
 msgstr "mkvpropedit用のトラック番号："
 
-#: src/common/kax_info.cpp:948
-#, boost-format
-msgid "Track number: %1% (track ID for mkvmerge & mkvextract: %2%)"
-msgstr "トラック番号：%1% （トラックID for mkvmerge & mkvextract: %2%)"
-
-#: src/common/kax_info.cpp:1011
-#, boost-format
-msgid "Track overlay: %1%"
+#: src/common/kax_element_names.cpp:193
+#, fuzzy
+msgid "Track overlay"
 msgstr "トラックオーバーレイ：%1%"
 
-#: src/common/kax_info.cpp:963
-#, boost-format
-msgid "Track type: %1%"
+#: src/common/kax_element_names.cpp:182
+#, fuzzy
+msgid "Track type"
 msgstr "トラックタイプ：%1%"
+
+#: src/common/kax_element_names.cpp:178
+#, fuzzy
+msgid "Tracks"
+msgstr "トラック："
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:364
 #, fuzzy, no-c-format
@@ -11466,6 +11604,7 @@ msgstr "2つのVobSubトラックを同じファイルに抽出できるのは�
 msgid "Two files multiplexed with the same settings and this switch activated will be identical."
 msgstr "同じ設定かつこのスイッチが有効な状態でMUXされた2つのファイルは全く同じものになります。"
 
+#: src/common/kax_element_names.cpp:166
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:253
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:148
 #: src/mkvtoolnix-gui/jobs/model.cpp:53
@@ -11495,11 +11634,6 @@ msgstr "設定ファイルを開く(&O)"
 msgid "Type:"
 msgstr "タイプ："
 
-#: src/common/kax_info.cpp:824
-#, boost-format
-msgid "Type: %1% (%2%)"
-msgstr "タイプ：%1% (%2%)"
-
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:152
 #, no-c-format
 msgid "UID"
@@ -11528,10 +11662,10 @@ msgstr "ファイルを追加結合できません"
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "片フィールドフレームの後に予期せぬピクチャフレームがありました。MUXしようとする前にこのMPEG2ビデオストリームを修復してください。\n"
 
-#: src/common/kax_info.cpp:368
-#: src/common/kax_info.cpp:377
+#: src/common/kax_info.cpp:404
+#: src/common/kax_info.cpp:413
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
-#: src/mkvtoolnix-gui/jobs/job.cpp:267
+#: src/mkvtoolnix-gui/jobs/job.cpp:272
 #, no-c-format
 msgid "Unknown"
 msgstr "未知"
@@ -11551,7 +11685,7 @@ msgstr "'%1%'に未知のチャプタファイルフォーマットがありま�
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "トラック%2%は未知のエンコーディングタイプ%1%です。\n"
 
-#: src/common/kax_info.cpp:1813
+#: src/common/kax_info.cpp:1186
 msgid "Unknown element"
 msgstr "未知の要素"
 
@@ -11630,7 +11764,7 @@ msgstr "サポートされていないMPEGバージョンです：0x%|1$02x|（�
 msgid "Unsupported file format"
 msgstr "サポートされていないフォーマット"
 
-#: src/input/r_matroska.cpp:2068
+#: src/input/r_matroska.cpp:2065
 msgid "Unsupported track type for this track.\n"
 msgstr "このトラックはサポートされているトラックタイプではありません。\n"
 
@@ -11691,7 +11825,7 @@ msgstr "NALUサイズを3バイトにすると、特定のAVC/h.264コーデッ�
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "フォーマット'%1%'のデマルチプレクサを使用しています。\n"
 
-#: src/input/r_matroska.cpp:1606
+#: src/input/r_matroska.cpp:1603
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "トラックタイプ'%1%'の一般的出力モジュールを使用しています。\n"
@@ -11755,19 +11889,19 @@ msgstr "バージョン %1"
 msgid "Version %1 \"%2\""
 msgstr "バージョン %1 \"%2\""
 
-#: src/common/kax_info.cpp:622
-#, fuzzy, boost-format
-msgid "Vertical Cb subsample: %1%"
+#: src/common/kax_element_names.cpp:128
+#, fuzzy
+msgid "Vertical Cb subsample"
 msgstr "サンプルあたりビット数：%1%"
 
-#: src/common/kax_info.cpp:628
-#, fuzzy, boost-format
-msgid "Vertical chroma siting: %1%"
+#: src/common/kax_element_names.cpp:130
+#, fuzzy
+msgid "Vertical chroma siting"
 msgstr "Cue relative position: %1%"
 
-#: src/common/kax_info.cpp:616
-#, fuzzy, boost-format
-msgid "Vertical chroma subsample: %1%"
+#: src/common/kax_element_names.cpp:126
+#, fuzzy
+msgid "Vertical chroma subsample"
 msgstr "サンプルあたりビット数：%1%"
 
 #: src/output/p_video_for_windows.h:37
@@ -11784,12 +11918,12 @@ msgstr "ビデオ"
 msgid "Video aspect ratio type"
 msgstr "ビデオのアスペクト比のタイプ"
 
-#: src/common/kax_info.cpp:603
+#: src/common/kax_element_names.cpp:122
 #, fuzzy
 msgid "Video colour information"
 msgstr "ビデオトラック"
 
-#: src/common/kax_info.cpp:563
+#: src/common/kax_element_names.cpp:110
 msgid "Video colour mastering metadata"
 msgstr ""
 
@@ -11843,7 +11977,7 @@ msgstr "縦解像度（ピクセル）"
 msgid "Video pixel width"
 msgstr "横解像度（ピクセル）"
 
-#: src/common/kax_info.cpp:655
+#: src/common/kax_element_names.cpp:137
 #, fuzzy
 msgid "Video projection"
 msgstr "ビデオプロパティ"
@@ -11862,7 +11996,7 @@ msgstr "ビデオプロパティ"
 msgid "Video stereo mode"
 msgstr "ビデオステレオモード"
 
-#: src/common/kax_info.cpp:688
+#: src/common/kax_element_names.cpp:144
 msgid "Video track"
 msgstr "ビデオトラック"
 
@@ -12044,7 +12178,7 @@ msgid "Warning in line %1%: The start timestamp is smaller than that of the prev
 msgstr "%1%行目で警告：開始時間のタイムコードが前のエントリのタイムコードよりも小さいです。このファイルの全てのエントリは開始時間でソートされます。\n"
 
 #: src/common/output.cpp:138
-#: src/mkvtoolnix-gui/jobs/job.cpp:245
+#: src/mkvtoolnix-gui/jobs/job.cpp:250
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:317
 #, no-c-format
 msgid "Warning:"
@@ -12157,15 +12291,15 @@ msgstr ""
 msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
 msgstr ""
 
-#: src/common/kax_info.cpp:585
-#, boost-format
-msgid "White colour coordinate x: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:117
+#, fuzzy
+msgid "White colour coordinate x"
+msgstr "CUE参照状態：%1%"
 
-#: src/common/kax_info.cpp:588
-#, boost-format
-msgid "White colour coordinate y: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:118
+#, fuzzy
+msgid "White colour coordinate y"
+msgstr "CUE参照状態：%1%"
 
 #: src/common/property_element.cpp:147
 msgid "Width of the encoded video frames in pixels."
@@ -12216,14 +12350,10 @@ msgstr "IDが'AID'の添付ファイルを'outname'に書き込みます。"
 msgid "Write track with the ID TID to the file 'out'."
 msgstr "IDがTIDのトラックをファイル'out'に書き込みます。"
 
+#: src/common/kax_element_names.cpp:87
 #: src/common/property_element.cpp:119
 msgid "Writing application"
 msgstr "書き込みアプリケーション"
-
-#: src/common/kax_info.cpp:487
-#, boost-format
-msgid "Writing application: %1%"
-msgstr "書き込みアプリケーション：%1%"
 
 #: src/extract/xtr_vobsub.cpp:232
 #, boost-format
@@ -12388,8 +12518,8 @@ msgstr "時間「HH」の数は省略することができます。"
 msgid "Zlib decompression failed. Result: %1%\n"
 msgstr "Zlib展開が失敗しました。結果：%1%\n"
 
-#: src/common/kax_info.cpp:220
-#: src/common/kax_info.cpp:224
+#: src/common/kax_info.cpp:188
+#: src/common/kax_info.cpp:192
 #, boost-format
 msgid "[%1% frame for track %2%, timestamp %3%]"
 msgstr "[トラック%2%の%1%フレーム、タイムコード %3%]"
@@ -12411,12 +12541,12 @@ msgstr "アナグリフ方式（緑／マゼンタ）"
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "mkvextract attachments <入力ファイル名> [オプション] [AID1:出力1 [AID2:出力2 ...]]"
 
-#: src/common/kax_info.cpp:1068
+#: src/common/kax_info.cpp:624
 #: src/input/r_matroska.cpp:110
 msgid "audio"
 msgstr "オーディオ"
 
-#: src/common/kax_info.cpp:555
+#: src/common/kax_info.cpp:593
 #, boost-format
 msgid "bits per sample: %1%"
 msgstr "サンプルあたりビット数：%1%"
@@ -12429,20 +12559,20 @@ msgstr "フィールドシーケンシャル方式（レフトファースト）
 msgid "both eyes laced in one block (right first)"
 msgstr "フィールドシーケンシャル方式（ライトファースト）"
 
-#: src/common/kax_info.cpp:757
+#: src/common/kax_info.cpp:707
 msgid "bottom field displayed first, bottom field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:758
+#: src/common/kax_info.cpp:708
 msgid "bottom field displayed first, top field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:1071
+#: src/common/kax_info.cpp:627
 #: src/input/r_matroska.cpp:111
 msgid "buttons"
 msgstr "ボタン"
 
-#: src/common/kax_info.cpp:544
+#: src/common/kax_info.cpp:592
 #, boost-format
 msgid "channels: %1%"
 msgstr "チャンネル数：%1%"
@@ -12467,7 +12597,7 @@ msgstr "垂直インターリーブ方式（レフトファースト）"
 msgid "column interleaved (right first)"
 msgstr "垂直インターリーブ方式（ライトファースト）"
 
-#: src/common/kax_info.cpp:826
+#: src/common/kax_info.cpp:748
 msgid "compression"
 msgstr "圧縮"
 
@@ -12476,7 +12606,7 @@ msgstr "圧縮"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number：file_numが見つかりませんでした。%1%\n"
 
-#: src/common/kax_info.cpp:662
+#: src/common/kax_info.cpp:682
 msgid "cubemap"
 msgstr ""
 
@@ -12489,7 +12619,7 @@ msgstr "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgid "cuesheet [options] out.cue"
 msgstr ""
 
-#: src/common/kax_info.cpp:1026
+#: src/common/kax_info.cpp:612
 #, boost-format
 msgid "default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
 msgstr "デフォルトのフレーム持続期間：%|1$.3f|ms（ビデオトラックの場合毎秒%|2$.3f|フレーム・フィールド）"
@@ -12499,25 +12629,25 @@ msgstr "デフォルトのフレーム持続期間：%|1$.3f|ms（ビデオト�
 msgid "deflateInit() failed. Result: %1%\n"
 msgstr "deflateInit()が失敗しました。結果：%1%\n"
 
-#: src/common/kax_info.cpp:1473
+#: src/common/kax_info.cpp:965
 msgid "discardable, "
 msgstr " "
 
-#: src/common/kax_info.cpp:709
+#: src/common/kax_info.cpp:598
 #, boost-format
 msgid "display height: %1%"
 msgstr "表示高さ：%1%"
 
-#: src/common/kax_info.cpp:704
+#: src/common/kax_info.cpp:597
 #, boost-format
 msgid "display width: %1%"
 msgstr "表示幅：%1%"
 
-#: src/common/kax_info.cpp:827
+#: src/common/kax_info.cpp:749
 msgid "encryption"
 msgstr "暗号化"
 
-#: src/common/kax_info.cpp:661
+#: src/common/kax_info.cpp:681
 msgid "equirectangular"
 msgstr ""
 
@@ -12591,7 +12721,7 @@ msgstr "generic video"
 msgid "have an xcptn\n"
 msgstr "例外があります\n"
 
-#: src/common/kax_info.cpp:842
+#: src/common/kax_info.cpp:760
 msgid "header removal"
 msgstr "ヘッダ削除"
 
@@ -12600,16 +12730,16 @@ msgstr "ヘッダ削除"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit()が失敗しました。結果：%1%\n"
 
-#: src/common/kax_info.cpp:1471
+#: src/common/kax_info.cpp:963
 msgid "key, "
 msgstr "キー、"
 
-#: src/common/kax_info.cpp:1043
+#: src/common/kax_info.cpp:603
 #, boost-format
 msgid "language: %1%"
 msgstr "言語：%1%"
 
-#: src/common/kax_info.cpp:200
+#: src/common/kax_info.cpp:181
 #, boost-format
 msgid "length %1%, data: %2%"
 msgstr "長さ %1%、データ：%2%"
@@ -12644,25 +12774,25 @@ msgstr "matroska_reader：（トラック%1%、MS互換モード）Matroskaに�
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader：（トラック%1%、MS互換モード）Matroskaによるとビデオの横解像度は%2%ですが、BITMAPINFOHEADERによると%3%です。\n"
 
-#: src/input/r_matroska.cpp:1268
+#: src/input/r_matroska.cpp:1265
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader：トラックにトラック番号がありません。\n"
 
-#: src/input/r_matroska.cpp:1668
+#: src/input/r_matroska.cpp:1665
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reade：新しいファイルに既に割り当てられているため、トラックUID %1%を保持することができませんでした。\n"
 
-#: src/input/r_matroska.cpp:1516
-#: src/input/r_matroska.cpp:1521
+#: src/input/r_matroska.cpp:1513
+#: src/input/r_matroska.cpp:1518
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader：セグメントが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:1231
+#: src/input/r_matroska.cpp:1228
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader：ピクセルの高さがありません。\n"
 
-#: src/input/r_matroska.cpp:1229
+#: src/input/r_matroska.cpp:1226
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader：ピクセルの幅がありません。\n"
 
@@ -12701,7 +12831,7 @@ msgstr "matroska_reader：トラック%1%のコーデックIDは'%2%'ですが�
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader：トラック%1%のコーデックIDは'%2%'ですが、プライベートデータが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:1325
+#: src/input/r_matroska.cpp:1322
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader：コーデックIDがありません。\n"
 
@@ -12720,7 +12850,7 @@ msgstr "matroska_reader：トラック%1%の幅が設定されませんでした
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader：トラック%1%はOKのようです。\n"
 
-#: src/input/r_matroska.cpp:1286
+#: src/input/r_matroska.cpp:1283
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader：トラックタイプが見つかりませんでした。\n"
 
@@ -12729,7 +12859,7 @@ msgstr "matroska_reader：トラックタイプが見つかりませんでした
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader：mkvmergeはFLACをサポートしてコンパイルされていません。トラック%1%を無視します。\n"
 
-#: src/input/r_matroska.cpp:1503
+#: src/input/r_matroska.cpp:1500
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader：EBMLヘッドが見つかりませんでした。\n"
 
@@ -12753,7 +12883,7 @@ msgstr "memory.cpp/safememdup() ファイル %1% から呼び出し、%2%行：m
 msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n"
 msgstr "memory.cpp/saferealloc() ファイル %1% から呼び出し、%2%行：realloc() が%3%バイトのサイズの要求に対しnullptrを返しました。\n"
 
-#: src/common/kax_info.cpp:663
+#: src/common/kax_info.cpp:683
 msgid "mesh"
 msgstr ""
 
@@ -12769,7 +12899,7 @@ msgstr "値がありません"
 msgid "mkv&merge documentation"
 msgstr "mkvmergeのドキュメント"
 
-#: src/info/ui/mainwindow.h:106
+#: src/info/forms/mainwindow.h:106
 msgid "mkvInfo"
 msgstr "mkvInfo"
 
@@ -12905,7 +13035,7 @@ msgstr "mkvmergeは2種類のチャプタフォーマットをサポートして
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmergeは割り込み信号（Ctrl+C？）によって中断されました。\n"
 
-#: src/common/kax_info.cpp:949
+#: src/common/kax_info.cpp:551
 #, boost-format
 msgid "mkvmerge/mkvextract track ID: %1%"
 msgstr "mkvmerge/mkvextractのトラックID: %1%"
@@ -12945,7 +13075,7 @@ msgstr "mpeg_ps_reader：発生するべきではありません #1。%1%"
 msgid "mpeg_ps_reader: Should not have happened #2. %1%"
 msgstr "mpeg_ps_reader：発生するべきではありません #2。%1%"
 
-#: src/common/kax_info.cpp:859
+#: src/common/kax_info.cpp:768
 msgid "no encryption"
 msgstr "暗号化なし"
 
@@ -12958,11 +13088,11 @@ msgstr "エラー無し"
 msgid "no file loaded"
 msgstr "ファイルが読み込まれていません"
 
-#: src/common/kax_info.cpp:875
+#: src/common/kax_info.cpp:781
 msgid "no signature algorithm"
 msgstr "署名アルゴリズムなし"
 
-#: src/common/kax_info.cpp:884
+#: src/common/kax_info.cpp:790
 msgid "no signature hash algorithm"
 msgstr "署名ハッシュアルゴリズムなし"
 
@@ -12980,7 +13110,7 @@ msgstr "ogg_sync_bufferが失敗しました\n"
 msgid "or"
 msgstr "または"
 
-#: src/common/kax_info.cpp:539
+#: src/common/kax_info.cpp:591
 #, boost-format
 msgid "output sampling freq: %1%"
 msgstr "出力サンプル周波数：%1%"
@@ -12989,37 +13119,37 @@ msgstr "出力サンプル周波数：%1%"
 msgid "passthrough"
 msgstr "パススルー"
 
-#: src/common/kax_info.cpp:729
+#: src/common/kax_info.cpp:602
 #, boost-format
 msgid "pixel crop bottom: %1%"
 msgstr "切り捨てピクセル(下)：%1%"
 
-#: src/common/kax_info.cpp:714
+#: src/common/kax_info.cpp:599
 #, boost-format
 msgid "pixel crop left: %1%"
 msgstr "切り捨てピクセル(左)：%1%"
 
-#: src/common/kax_info.cpp:724
+#: src/common/kax_info.cpp:601
 #, boost-format
 msgid "pixel crop right: %1%"
 msgstr "切り捨てピクセル：%1%"
 
-#: src/common/kax_info.cpp:719
+#: src/common/kax_info.cpp:600
 #, boost-format
 msgid "pixel crop top: %1%"
 msgstr "切り捨てピクセル：%1%"
 
-#: src/common/kax_info.cpp:699
+#: src/common/kax_info.cpp:596
 #, boost-format
 msgid "pixel height: %1%"
 msgstr "切り捨てピクセル：%1%"
 
-#: src/common/kax_info.cpp:694
+#: src/common/kax_info.cpp:595
 #, boost-format
 msgid "pixel width: %1%"
 msgstr "ピクセル幅：%1%"
 
-#: src/common/kax_info.cpp:754
+#: src/common/kax_info.cpp:704
 #, fuzzy
 msgid "progressive"
 msgstr "進行状況"
@@ -13038,11 +13168,11 @@ msgstr "real_reader：ID %1%のRealAudio FourCCを見つけることができま
 msgid "real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID %1% uses version %2% and will be skipped.\n"
 msgstr "real_reader：オーディオヘッダバージョン3、4、5のみがサポートされています。トラックID %1%はバージョン%2%を使っているのでスキップされます。\n"
 
-#: src/common/kax_info.cpp:660
+#: src/common/kax_info.cpp:680
 msgid "rectangular"
 msgstr ""
 
-#: src/common/kax_info.cpp:816
+#: src/common/kax_info.cpp:737
 msgid "rest: unknown"
 msgstr "1でも2でもない：未知"
 
@@ -13054,7 +13184,7 @@ msgstr "水平インターリーブ方式（レフトファースト）"
 msgid "row interleaved (right first)"
 msgstr "水平インターリーブ方式（ライトファースト）"
 
-#: src/common/kax_info.cpp:534
+#: src/common/kax_info.cpp:590
 #, boost-format
 msgid "sampling freq: %1%"
 msgstr "サンプリング周波数：%1%"
@@ -13067,6 +13197,16 @@ msgstr "サイドバイサイド方式（レフトファースト）"
 msgid "side by side (right first)"
 msgstr "サイドバイサイド方式（ライトファースト）"
 
+#: src/common/kax_info.cpp:197
+#, fuzzy, boost-format
+msgid "size %1%"
+msgstr " サイズ %1%"
+
+#: src/common/kax_info.cpp:470
+#, fuzzy
+msgid "size unknown"
+msgstr " サイズが不明です"
+
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader：無効なフォーマットです。\"[Events]\"セクションで\"Format\"行を見つけることができませんでした。"
@@ -13075,7 +13215,7 @@ msgstr "ssa_reader：無効なフォーマットです。\"[Events]\"セクシ�
 msgid "subtitle"
 msgstr "字幕"
 
-#: src/common/kax_info.cpp:1070
+#: src/common/kax_info.cpp:626
 msgid "subtitles"
 msgstr "字幕"
 
@@ -13104,17 +13244,22 @@ msgstr "トップアンドボトム方式（レフトファースト）"
 msgid "top bottom (right first)"
 msgstr "トップアンドボトム方式（ライトファースト）"
 
-#: src/common/kax_info.cpp:759
+#: src/common/kax_info.cpp:709
 msgid "top field displayed first, bottom field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:755
+#: src/common/kax_info.cpp:705
 msgid "top field displayed first, top field stored first"
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:2822
 msgid "track name"
 msgstr "トラック名"
+
+#: src/common/kax_info.cpp:183
+#, fuzzy, boost-format
+msgid "track number %1%, %2% frame(s), timestamp %3%"
+msgstr "ブロック (トラック番号 %1%、%2% フレーム、タイムコード %|3$.3f|s = %4%)"
 
 #: src/extract/extract_cli_parser.cpp:50
 #, fuzzy
@@ -13128,30 +13273,31 @@ msgstr "tta_reader：c'tor内でtag_sizeが負になりました。 %1%\n"
 
 #: src/common/file_types.cpp:109
 #: src/common/fs_sys_helpers/windows.cpp:168
-#: src/common/kax_info.cpp:664
-#: src/common/kax_info.cpp:818
-#: src/common/kax_info.cpp:828
-#: src/common/kax_info.cpp:843
-#: src/common/kax_info.cpp:865
-#: src/common/kax_info.cpp:877
-#: src/common/kax_info.cpp:887
-#: src/common/kax_info.cpp:1072
+#: src/common/kax_info.cpp:628
+#: src/common/kax_info.cpp:684
+#: src/common/kax_info.cpp:710
+#: src/common/kax_info.cpp:739
+#: src/common/kax_info.cpp:750
+#: src/common/kax_info.cpp:761
+#: src/common/kax_info.cpp:774
+#: src/common/kax_info.cpp:783
+#: src/common/kax_info.cpp:793
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2734
+#: src/input/r_matroska.cpp:2731
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2718
+#: src/input/r_matroska.cpp:2715
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "未知、フォーマットタグ 0x%|1$04x|"
 
-#: src/common/kax_info.cpp:756
+#: src/common/kax_info.cpp:706
 msgid "unspecified"
 msgstr ""
 
-#: src/common/kax_info.cpp:1069
+#: src/common/kax_info.cpp:625
 #: src/input/r_matroska.cpp:112
 msgid "video"
 msgstr "ビデオ"
@@ -13198,6 +13344,9 @@ msgstr "無しに設定"
 #~ msgid_plural "%1 of %2 files processed"
 #~ msgstr[0] "%2個のファイル中%1個が処理されました"
 
+#~ msgid "%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"
+#~ msgstr "%1% フレーム、トラック %2%、タイムコード %3% (%4%)、持続時間 %|5$.3f|、サイズ %6%、adler 0x%|7$08x|%8%%9%\n"
+
 #~ msgid "&Add program"
 #~ msgstr "プログラムを追加(&A)"
 
@@ -13231,6 +13380,9 @@ msgstr "無しに設定"
 #~ msgid "A randomly generated unique ID to identify the current segment between many others (128 bits)."
 #~ msgstr "多くの他のセグメントから現在のセグメントを識別するためのランダムに生成されるユニークIDです（128ビット）。"
 
+#~ msgid "A track"
+#~ msgstr "トラック"
+
 #~ msgid "A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file."
 #~ msgstr "トラックを識別するための固有のIDです。他のファイルにトラックをダイレクトストリームコピーする場合、これは同じに保たれます。"
 
@@ -13245,6 +13397,9 @@ msgstr "無しに設定"
 
 #~ msgid "Add as new input fi&les"
 #~ msgstr "新しい入力ファイルとして追加(&L)"
+
+#~ msgid "Additional ID"
+#~ msgstr "追加ID：%1%"
 
 #~ msgid "All output files"
 #~ msgstr "全ての出力ファイル"
@@ -13288,11 +13443,35 @@ msgstr "無しに設定"
 #~ msgid "Ask the user"
 #~ msgstr "ユーザーに尋ねる"
 
+#~ msgid "Aspect ratio type: %1%%2%"
+#~ msgstr "アスペクト比の種類：%1%%2%"
+
+#~ msgid "Block duration: %1%.%|2$06d|ms"
+#~ msgstr "ブロックの持続時間：%1%.%|2$06d|ms"
+
+#~ msgid "Chapter Translate ID: %1%"
+#~ msgstr "Chapter Translate ID: %1%"
+
 #~ msgid "Chapters are not allowed in WebM compliant files. No chapters will be written to the destination file.\n"
 #~ msgstr "チャプタはWebMの規格に準拠したファイルでは使用することができません。どの出力ファイルにもチャプタは書き込まれません。\n"
 
 #~ msgid "Check online for the latest release."
 #~ msgstr "最新のリリースをオンラインでチェックします。"
+
+#~ msgid "Codec ID: %1%"
+#~ msgstr "コーデックID：%1%"
+
+#~ msgid "Codec delay"
+#~ msgstr "コーデック固有のディレイ"
+
+#~ msgid "Codec delay: %|1$.3f|ms (%2%ns)"
+#~ msgstr "Codec delay: %|1$.3f|ms (%2%ns)"
+
+#~ msgid "Codec name: %1%"
+#~ msgstr "コーデック名：%1%"
+
+#~ msgid "CodecPrivate, length %1%%2%"
+#~ msgstr "CodecPrivate、長さ %1%%2%"
 
 #~ msgid "Colour matrix: %1%"
 #~ msgstr "色空間：%1%"
@@ -13327,6 +13506,9 @@ msgstr "無しに設定"
 #~ msgid "Ctrl+U"
 #~ msgstr "Ctrl+U"
 
+#~ msgid "Cue time: %|1$.3f|s"
+#~ msgstr "CUE時間：%|1$.3f|s"
+
 #~ msgid "DTS_Header problem: invalid frame bytes size\n"
 #~ msgstr "DTSヘッダに問題：フレームバイトサイズが無効です\n"
 
@@ -13339,8 +13521,26 @@ msgstr "無しに設定"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "日付 (無効な値：%1%)"
 
+#~ msgid "Date: %1% UTC"
+#~ msgstr "日付：%1% UTC"
+
+#~ msgid "Default flag"
+#~ msgstr "デフォルトフラグ：%1%"
+
+#~ msgid "Delay: %|1$.3f|ms"
+#~ msgstr "遅延：%|1$.3f|ms"
+
+#~ msgid "Duration: %|1$.3f|ms"
+#~ msgstr "長さ: %|1$.3f|ms"
+
+#~ msgid "Duration: %|1$.3f|s (%2%)"
+#~ msgstr "長さ: %|1$.3f|s (%2%)"
+
 #~ msgid "E&nable all attached files"
 #~ msgstr "全ての添付ファイルを有効化(&N)"
+
+#~ msgid "EbmlVoid (size: %1%)"
+#~ msgstr "EbmlVoid (サイズ：%1%)"
 
 #~ msgid "Edit chapters"
 #~ msgstr "チャプタを編集"
@@ -13351,6 +13551,9 @@ msgstr "無しに設定"
 #~ msgid "Edit tags"
 #~ msgstr "タグを編集"
 
+#~ msgid "Enabled: %1%"
+#~ msgstr "有効：%1%"
+
 #~ msgid "Error importing file"
 #~ msgstr "設定ファイルの読み込み中にエラーが発生しました"
 
@@ -13360,11 +13563,23 @@ msgstr "無しに設定"
 #~ msgid "Extract"
 #~ msgstr "抽出"
 
+#~ msgid "Field order: %1% (%2%)"
+#~ msgstr "ステレオモード：%1%（%2%）"
+
 #~ msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 #~ msgstr "ファイル%1%は未知のファイルタイプです。サポートされているファイルタイプ一覧（'mkvmerge --list-types'）を参照し、もしそのファイルタイプがサポートされているのに正しく認識されない場合は、作者のMoritz Bunkus <moritz@bunkus.org>に連絡してください。\n"
 
+#~ msgid "File data, size: %1%"
+#~ msgstr "ファイルデータ、サイズ：%1%"
+
 #~ msgid "File has been modified"
 #~ msgstr "ファイルは変更されています"
+
+#~ msgid "File name: %1%"
+#~ msgstr "ファイル名：%1%"
+
+#~ msgid "Forced flag"
+#~ msgstr "強制表示フラグ：%1%"
 
 #~ msgid "Info"
 #~ msgstr "Info"
@@ -13372,8 +13587,23 @@ msgstr "無しに設定"
 #~ msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"
 #~ msgstr "タイムコード%2%のSSA行（'%1%'）が無効なフォーマットです：フィールドの数が多すぎます（正しくは9つですが%3%でした）。このエントリはスキップされます。\n"
 
+#~ msgid "Language: %1%"
+#~ msgstr "言語：%1%"
+
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "MKVToolNixオプションファイル"
+
+#~ msgid "Max BlockAddition ID: %1%"
+#~ msgstr "最大BlockAddition ID：%1%"
+
+#~ msgid "Max content light: %1%"
+#~ msgstr "切り捨てピクセル(右)：%1%"
+
+#~ msgid "Max frame light: %1%"
+#~ msgstr "ピクセル高さ：%1%"
+
+#~ msgid "MaxCache: %1%"
+#~ msgstr "最大キャッシュ：%1%"
 
 #~ msgid "Merge"
 #~ msgstr "マージ"
@@ -13390,11 +13620,20 @@ msgstr "無しに設定"
 #~ msgid "Merging application"
 #~ msgstr "MUXアプリケーション"
 
+#~ msgid "Mime type"
+#~ msgstr "MIMEタイプ：%1%"
+
+#~ msgid "MinCache: %1%"
+#~ msgstr "最小キャッシュ：%1%"
+
 #~ msgid "Missing header/comment packets for stream. This file is broken but should be muxed correctly. If not please contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ msgstr "ストリームのヘッダ/コメントパケットがありません。このファイルは壊れていますが正しくMUXされているはずです。もしそうでない場合は作者のMoritz Bunkus <moritz@bunkus.org>に連絡してください。\n"
 
 #~ msgid "Mu&x this track:"
 #~ msgstr "このトラックをMux (&M)"
+
+#~ msgid "Multiplexing application: %1%"
+#~ msgstr "MUXアプリケーション"
 
 #~ msgid "Mux this"
 #~ msgstr "このトラックをMuxする"
@@ -13405,6 +13644,15 @@ msgstr "無しに設定"
 #~ msgid "Muxing application: %1%"
 #~ msgstr "MUXに使用されたアプリケーション：%1%"
 
+#~ msgid "Name: %1%"
+#~ msgstr "名前：%1%"
+
+#~ msgid "Next filename: %1%"
+#~ msgstr "次のファイル名：%1%"
+
+#~ msgid "Next segment UID: %1%"
+#~ msgstr "次のセグメントUID：%1%"
+
 #~ msgid "No input files were given. No output will be created.\n"
 #~ msgstr "入力ファイルが指定されていません。出力ファイルは作成されません。\n"
 
@@ -13414,6 +13662,9 @@ msgstr "無しに設定"
 #~ msgid "Open track's file in &MediaInfo"
 #~ msgid_plural "Open tracks' files in &MediaInfo"
 #~ msgstr[0] "トラックのファイルをMediaInfoで開く(&M)"
+
+#~ msgid "Order: %1%"
+#~ msgstr "順番：%1%"
 
 #~ msgid "Output file"
 #~ msgstr "出力ファイル"
@@ -13427,17 +13678,53 @@ msgstr "無しに設定"
 #~ msgid "Previous file name"
 #~ msgstr "以前のファイル名"
 
+#~ msgid "Previous filename: %1%"
+#~ msgstr "以前のファイル名：%1%"
+
+#~ msgid "Previous segment UID: %1%"
+#~ msgstr "以前のセグメントUID：%1%"
+
 #~ msgid "Progress: 100%\n"
 #~ msgstr "進行状況: 100%\n"
+
+#~ msgid "Projection type: %1% (%2%)"
+#~ msgstr "スコープ：%1% (%2%)"
 
 #~ msgid "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 #~ msgstr "RealMediaファイルはHE-AAC/AAC+/SBR AACオーディオを含んでいることがあります。これは自動で検知できないことがあります。よってこの入力ファイルが実際にSBR AACを含んでいる場合、手動で'--aac-is-sbr %1%'を指定しなければなりません。でないと間違ってMUXされてしまいます。mkvmergeのドキュメントも読んでください。\n"
 
+#~ msgid "Reference block: -%1%.%|2$06d|ms"
+#~ msgstr "参照ブロック：-%1%.%|2$06d|ms"
+
 #~ msgid "Remove a&ll"
 #~ msgstr "全てのジョブを削除する(&L)"
 
+#~ msgid "Scope: %1% (%2%)"
+#~ msgstr "スコープ：%1% (%2%)"
+
+#~ msgid "Seek ID: %1% (%2%)"
+#~ msgstr "シークID：%1% (%2%)"
+
+#~ msgid "Seek pre-roll: %|1$.3f|ms (%2%ns)"
+#~ msgstr "Seek pre-roll: %|1$.3f|ms (%2%ns)"
+
+#~ msgid "Segment UID: %1%"
+#~ msgstr "セグメントUID：%1%"
+
 #~ msgid "Segment file name"
 #~ msgstr "セグメントファイル名"
+
+#~ msgid "Segment filename: %1%"
+#~ msgstr "セグメントファイル名：%1%"
+
+#~ msgid "Segment tracks"
+#~ msgstr "セグメントトラック"
+
+#~ msgid "Segment, size %1%"
+#~ msgstr "セグメント、サイズ %1%"
+
+#~ msgid "Segment, size unknown"
+#~ msgstr "セグメント、不明なサイズ"
 
 #~ msgid "Select output directory"
 #~ msgstr "出力ディレクトリを選択してください"
@@ -13448,17 +13735,23 @@ msgstr "無しに設定"
 #~ msgid "Set if that track MUST be used during playback. There can be many forced track for a kind (audio, video or subs). The player should select the one whose language matches the user preference or the default + forced track."
 #~ msgstr "再生中にトラックが使用されるべきかどうかを設定します。1つの種類（オーディオ、ビデオ、字幕）に複数の強制表示トラックが存在することも可能です。プレーヤはユーザー設定と言語が一致するトラックもしくはデフォルト+強制表示のトラックを選択します。"
 
-#~ msgid "Simple block"
-#~ msgstr "シンプルブロック"
+#~ msgid "Settings: %1%"
+#~ msgstr "設定：%1%"
 
-#~ msgid "SimpleBlock"
-#~ msgstr "シンプルブロック"
+#~ msgid "Signature algorithm: %1% (%2%)"
+#~ msgstr "署名アルゴリズム：%1% (%2%)"
+
+#~ msgid "Signature hash algorithm: %1% (%2%)"
+#~ msgstr "署名ハッシュアルゴリズム：%1% (%2%)"
 
 #~ msgid "Specifies the language of the track in the Matroska languages form."
 #~ msgstr "Matroska言語形式でトラックの言語を指定します。"
 
 #~ msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
 #~ msgstr "アスペクト比を修正可能かどうかを設定します（0：フリーリサイズ、1：アスペクト比を保持する、2：固定）。"
+
+#~ msgid "Stereo mode: %1% (%2%)"
+#~ msgstr "ステレオモード：%1%（%2%）"
 
 #~ msgid "The AVC video track is missing the 'CTTS' atom for frame timestamp offsets. However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timestamps for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timestamps right. As it is missing the timestamps for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
 #~ msgstr "このAVCビデオトラックにはフレームタイムコードを補正する'CTTS' atomがありません。しかし、AVC/h.264では伝統的な1つ（Pフレームの場合）もしくは2つ（Bフレームの場合）より多く他のフレームを参照することが許されています。そのようなフレームのタイムコードは順番通りでないことがあり、'CTTS' atomはタイムコードを補正するために必要です。それが無いため、このトラックのタイムコードは正しくないかもしれません。出力されたファイルを見て期待通りに見えることを確認してください。\n"
@@ -13499,14 +13792,26 @@ msgstr "無しに設定"
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr "アップデート情報を %1% から読み出すことができませんでした。\n"
 
+#~ msgid "Title: %1%"
+#~ msgstr "タイトル：%1%"
+
 #~ msgid "Track %1% was compressed with bzlib but mkvmerge has not been compiled with support for bzlib compression.\n"
 #~ msgstr "トラック%1%はbzlibで圧縮されていますが、mkvmergeはbzlib圧縮をサポートしてコンパイルされていません。\n"
 
 #~ msgid "Track %1% was compressed with lzo1x but mkvmerge has not been compiled with support for lzo1x compression.\n"
 #~ msgstr "トラック%1%はlzo1xで圧縮されていますが、mkvmergeはlzo1x圧縮をサポートしてコンパイルされていません。\n"
 
+#~ msgid "Track UID: %1%"
+#~ msgstr "トラックUID：%1%"
+
 #~ msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 #~ msgstr "縦表示解像度・横表示解像度の単位です（0：ピクセル、1：センチメートル、2：インチ、3：アスペクト比）。"
+
+#~ msgid "Type: %1% (%2%)"
+#~ msgstr "タイプ：%1% (%2%)"
+
+#~ msgid "Writing application: %1%"
+#~ msgstr "書き込みアプリケーション：%1%"
 
 #~ msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 #~ msgstr "マージの開始前及びジョブキューにジョブジョブを追加する前には少なくとも1つのソースファイルを追加する必要があります。"

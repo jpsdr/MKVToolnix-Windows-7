@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2017-12-22 21:17+0100\n"
+"POT-Creation-Date: 2018-01-01 00:38+0100\n"
 "PO-Revision-Date: 2017-11-24 14:58+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -968,57 +968,57 @@ msgstr "  X:  liczba heksadecymalna\n"
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <plik1> <plik2> ]     Tak samo, jak \"<plik1> + <plik2>\".\n"
 
-#: src/common/kax_info.cpp:345
+#: src/common/kax_info.cpp:381
 #, boost-format
 msgid " (FourCC: %1%)"
 msgstr "(Kod FourCC: %1%)"
 
-#: src/common/kax_info.cpp:373
+#: src/common/kax_info.cpp:409
 #, boost-format
 msgid " (HEVC profile: %1% @L%2%.%3%)"
 msgstr " (profil HEVC: %1% @L%2%.%3%)"
 
-#: src/common/kax_info.cpp:201
-#: src/common/kax_info.cpp:987
+#: src/common/kax_info.cpp:182
+#: src/common/kax_info.cpp:571
 #, boost-format
 msgid " (adler: 0x%|1$08x|)"
 msgstr " (adler: 0x%|1$08x|)"
 
-#: src/common/kax_info.cpp:740
+#: src/common/kax_info.cpp:696
 msgid " (aspect ratio)"
 msgstr "(proporcje obrazu)"
 
-#: src/common/kax_info.cpp:738
+#: src/common/kax_info.cpp:694
 msgid " (centimeters)"
 msgstr " (centymetry)"
 
-#: src/common/kax_info.cpp:776
+#: src/common/kax_info.cpp:724
 msgid " (fixed)"
 msgstr "(ustalone proporcje)"
 
-#: src/common/kax_info.cpp:349
+#: src/common/kax_info.cpp:385
 #, boost-format
 msgid " (format tag: 0x%|1$04x|)"
 msgstr " (format tagu: 0x%|1$04x|)"
 
-#: src/common/kax_info.cpp:774
+#: src/common/kax_info.cpp:722
 msgid " (free resizing)"
 msgstr "(dowolna zmiana)"
 
-#: src/common/kax_info.cpp:354
+#: src/common/kax_info.cpp:390
 #, boost-format
 msgid " (h.264 profile: %1% @L%2%.%3%)"
 msgstr " (profil h.264: %1% @L%2%.%3%)"
 
-#: src/common/kax_info.cpp:739
+#: src/common/kax_info.cpp:695
 msgid " (inches)"
 msgstr " (cale)"
 
-#: src/common/kax_info.cpp:775
+#: src/common/kax_info.cpp:723
 msgid " (keep aspect ratio)"
 msgstr "(utrzymanie proporcji obrazu)"
 
-#: src/common/kax_info.cpp:737
+#: src/common/kax_info.cpp:693
 msgid " (pixels)"
 msgstr " (piksele)"
 
@@ -1066,13 +1066,13 @@ msgstr "Pozostałe opcje:\n"
 msgid " Segment info handling:\n"
 msgstr "Informacje o segmencie:\n"
 
-#: src/common/kax_info.cpp:229
+#: src/common/kax_info.cpp:193
 #: src/extract/mkvextract.cpp:106
 #, boost-format
 msgid " at %1%"
 msgstr ""
 
-#: src/common/kax_info.cpp:232
+#: src/common/kax_info.cpp:195
 #, fuzzy, boost-format
 msgid " at 0x%|1$x|"
 msgstr " (adler: 0x%|1$08x|)"
@@ -1100,12 +1100,12 @@ msgstr[0] " sekunda"
 msgstr[1] " sekundy"
 msgstr[2] " sekund"
 
-#: src/common/kax_info.cpp:230
+#: src/common/kax_info.cpp:194
 #, boost-format
 msgid " size %1%"
 msgstr "rozmiar %1%"
 
-#: src/common/kax_info.cpp:318
+#: src/common/kax_info.cpp:293
 msgid " size is unknown"
 msgstr "nieznany rozmiar"
 
@@ -1199,6 +1199,16 @@ msgstr[0] "%1 ostrzeżenie"
 msgstr[1] "%1 ostrzeżenia"
 msgstr[2] "%1 ostrzeżeń"
 
+#: src/common/kax_info.cpp:811
+#, fuzzy, boost-format
+msgid "%1% (%|2$.3f| frames/fields per second for a video track)"
+msgstr "Domyślny czas trwania: %|1$.3f|ms (%|2$.3f| kl/s dla ścieżki wideo)"
+
+#: src/common/kax_info.cpp:796
+#, fuzzy, boost-format
+msgid "%1% (track ID for mkvmerge & mkvextract: %2%)"
+msgstr "Numer ścieżki: %1% (ID ścieżki dla mkvmerge i mkvextract: %2%)"
+
 #: src/common/strings/formatting.cpp:321
 #, boost-format
 msgid "%1% byte"
@@ -1207,20 +1217,20 @@ msgstr[0] "%1% bajt"
 msgstr[1] "%1% bajty"
 msgstr[2] "%1% bajtów"
 
-#: src/common/kax_info.cpp:218
-#, boost-format
-msgid "%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"
-msgstr "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), czas trwania %|5$.3f|, rozmiar %6%, adler 0x%|7$08x|%8%%9%\n"
+#: src/common/kax_info.cpp:186
+#, fuzzy, boost-format
+msgid "%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"
+msgstr "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), rozmiar %5%, adler 0x%|6$08x|%7%%8%\n"
 
-#: src/common/kax_info.cpp:223
-#, boost-format
-msgid "%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"
+#: src/common/kax_info.cpp:191
+#, fuzzy, boost-format
+msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"
 msgstr "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), rozmiar %5%, adler 0x%|6$08x|%7%\n"
 
-#: src/common/kax_info.cpp:219
-#, boost-format
-msgid "%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"
-msgstr "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), rozmiar %5%, adler 0x%|6$08x|%7%%8%\n"
+#: src/common/kax_info.cpp:187
+#, fuzzy, boost-format
+msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"
+msgstr "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), rozmiar %5%, adler 0x%|6$08x|%7%\n"
 
 #: src/common/strings/formatting.cpp:315
 #, boost-format
@@ -1270,8 +1280,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: wystąpił wyjątek (wiadomość: %2%; typ: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1576
-#: src/input/r_matroska.cpp:2259
+#: src/input/r_matroska.cpp:1573
+#: src/input/r_matroska.cpp:2256
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: wystąpił nieznany wyjątek."
@@ -1300,6 +1310,11 @@ msgstr "%1%: brakuje dzielnika w \"%2% %3%\".\n"
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: brakuje ID ścieżki w \"%2% %3%\".\n"
+
+#: src/common/kax_info.cpp:189
+#, fuzzy, boost-format
+msgid "%1%track number %2%, %3% frame(s), timestamp %4%"
+msgstr "SimpleBlock (%1%numer ściezki %2%, %3% klatka(ek/i), kod czasowy %|4$.3f|s = %5%)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
@@ -1349,12 +1364,12 @@ msgid "&Abort job"
 msgstr "Przerwij z&adanie "
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:520
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:388
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:415
 #, no-c-format
 msgid "&Abort jobs"
 msgstr "Przerwij z&adania "
 
-#: src/info/ui/mainwindow.h:127
+#: src/info/forms/mainwindow.h:127
 msgid "&About mkvinfo"
 msgstr "Inform&acje o mkvinfo "
 
@@ -1413,7 +1428,7 @@ msgid "&Cancel"
 msgstr "&Anuluj "
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:589
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:366
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:393
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "Edytor &rozdziałów"
@@ -1549,7 +1564,7 @@ msgstr "Znaki &modyfikacji dla:"
 msgid "&Expand all"
 msgstr "R&ozwiń wszystko"
 
-#: src/info/ui/mainwindow.h:123
+#: src/info/forms/mainwindow.h:123
 msgid "&Expand important elements"
 msgstr "Rozwiń ważn&e elementy"
 
@@ -1561,7 +1576,7 @@ msgstr "Narzędzi&e wyodrębniania"
 msgid "&FAQ"
 msgstr "&FAQ — Najczęściej zadawane pytania"
 
-#: src/info/ui/mainwindow.h:133
+#: src/info/forms/mainwindow.h:133
 msgid "&File"
 msgstr "&Plik"
 
@@ -1582,8 +1597,8 @@ msgstr "Ut&wórz podrozdziały"
 msgid "&Header editor"
 msgstr "&Edytor nagłówków"
 
-#: src/info/ui/mainwindow.h:132
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:369
+#: src/info/forms/mainwindow.h:132
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:396
 #, no-c-format
 msgid "&Help"
 msgstr "&Pomoc"
@@ -1601,13 +1616,13 @@ msgstr "Narzędzie &informacyjne"
 msgid "&Input"
 msgstr "W&ejście"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:368
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:395
 #, no-c-format
 msgid "&Job output"
 msgstr "Postęp za&dań"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:590
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:367
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:394
 #, no-c-format
 msgid "&Job queue"
 msgstr "&Kolejka zadań"
@@ -1637,7 +1652,7 @@ msgid "&Minimum playlist duration:"
 msgstr "&Minimalny czas trwania listy odtwarzania:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:585
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:364
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:391
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "&Multiplekser"
@@ -1697,7 +1712,7 @@ msgstr "&W listach rozwijanych programu pokazuj wyłącznie wybrane pozycje"
 msgid "&Only use the first source file that contains a video track"
 msgstr "&Użyj tylko pierwszego pliku źródłowego, który zawiera ścieżkę wideo"
 
-#: src/info/ui/mainwindow.h:107
+#: src/info/forms/mainwindow.h:107
 msgid "&Open"
 msgstr "&Otwórz "
 
@@ -1729,7 +1744,7 @@ msgstr "&Otwórz folder"
 msgid "&Open settings"
 msgstr "&Otwórz plik ustawień"
 
-#: src/info/ui/mainwindow.h:131
+#: src/info/forms/mainwindow.h:131
 msgid "&Options"
 msgstr "&Ustawienia"
 
@@ -1845,7 +1860,7 @@ msgstr "Zapi&sz dziennik zdarzeń"
 msgid "&Save settings"
 msgstr "Zapi&sz ustawienia"
 
-#: src/info/ui/mainwindow.h:111
+#: src/info/forms/mainwindow.h:111
 msgid "&Save to text file"
 msgstr "Zapi&sz do pliku tekstowego "
 
@@ -2212,7 +2227,7 @@ msgstr "\"%1%\": %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "\"%1%\": Przetwarzanie również następujących plików: %2%\n"
 
-#: src/input/r_matroska.cpp:1854
+#: src/input/r_matroska.cpp:1851
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "\"%1%\": Kopiujesz ścieżkę Opus, która została zapisana w trybie eksperymentalnym. Ścieżka wynikowa zostanie zapisana w trybie finalnym, jednak jeden parametr nie może być uzyskany ze ścieżki zapisanej w trybie eksperymentalnym: jest to przycięcie. Oznacza to, że dekoder może dać na wyjście o kilka więcej sampli niż to było zamierzone oryginalnie. Powinienieś zremultipleksować ścieżkę Opus z pliku oryginalnego, jeśli to tylko możliwe.\n"
@@ -2377,7 +2392,12 @@ msgstr "Flaga \"Wymuszona ścieżka\""
 msgid "'Track enabled' flag"
 msgstr "Flaga \"Ścieżka włączona\""
 
-#: src/common/kax_info.cpp:198
+#: src/common/kax_info.cpp:277
+#, fuzzy, boost-format
+msgid "(Known element, but invalid at this position: %1%; ID: 0x%2% size: %3%)"
+msgstr "(Nieznany element: %1%; ID: 0x%2% rozmiar: %3%)"
+
+#: src/common/kax_info.cpp:180
 #, boost-format
 msgid "(Unknown element: %1%; ID: 0x%2% size: %3%)"
 msgstr "(Nieznany element: %1%; ID: 0x%2% rozmiar: %3%)"
@@ -2410,7 +2430,7 @@ msgstr ", opis \"%1%\""
 msgid ", file name '%1%'"
 msgstr ", nazwa pliku \"%1%\""
 
-#: src/common/kax_info.cpp:217
+#: src/common/kax_info.cpp:185
 #, boost-format
 msgid ", position %1%"
 msgstr ", pozycja %1%"
@@ -2434,7 +2454,7 @@ msgstr "► Ostrzeżenia emitowane przez zadanie: \"%1\". Rozpoczęto o: %2"
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. Liczba, która będzie interpretowana jako ID załącznika, wyświetlana przez \"mkvmerge --identify\". Z reguły są to numery mogące rozpoczynać się od 0 (np.: \"2\")."
 
-#: src/common/kax_info.cpp:812
+#: src/common/kax_info.cpp:733
 msgid "1: all frames"
 msgstr "1: wszystkie klatki"
 
@@ -2442,7 +2462,7 @@ msgstr "1: wszystkie klatki"
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. Liczba z przedrostkiem \"=\", która będzie interpretowana jako unikalne ID załącznika (UID), wyświetlane przez \"mkvmerge --identify\". Są to numery z cyframi przypadkowej kolejności (np.: \"128975986723\")"
 
-#: src/common/kax_info.cpp:814
+#: src/common/kax_info.cpp:735
 msgid "2: codec private data"
 msgstr "2: dane własne kodeka"
 
@@ -2503,8 +2523,8 @@ msgstr "<Bez nazwy>"
 msgid "<Unsaved file>"
 msgstr "<Niezapisany plik>"
 
-#: src/input/r_matroska.cpp:2281
-#: src/input/r_matroska.cpp:2407
+#: src/input/r_matroska.cpp:2278
+#: src/input/r_matroska.cpp:2404
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Został znaleziony blok w miejscu %1% w ścieżce o numerze %2%. Jednakże nie znaleziono nagłówków dla tej ściezki. Blok zostanie pominięty.\n"
@@ -2551,7 +2571,7 @@ msgstr "Zadanie tworzące plik \"%1\" znajduje się już w kolejce."
 msgid "A name for this track that players can display helping the user chose the right track to play, e.g. \"director's comments\"."
 msgstr "Nazwa dla zaznaczonej ścieżki, którą odtwarzacze mogą pokazać, tym samym pomagając użytkownikowi wybrać właściwą ścieżkę, np. \"komentarz reżysera\"."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:686
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:713
 #, no-c-format
 msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
@@ -2572,10 +2592,6 @@ msgstr ""
 #, no-c-format
 msgid "A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."
 msgstr "Pojedynczy blok Matroski zawiera pełną klatkę (zawartość progresywna) lub pojedyncze pole (zawartość z przeplotem)."
-
-#: src/common/kax_info.cpp:921
-msgid "A track"
-msgstr "Ścieżka"
 
 #: src/merge/generic_reader.cpp:206
 #, boost-format
@@ -2701,12 +2717,12 @@ msgid "Abort running job"
 msgstr "Przerwij trwające zadanie"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:518
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:386
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:413
 #, no-c-format
 msgid "Abort running jobs"
 msgstr "Przerwij trwające zadania"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:265
+#: src/mkvtoolnix-gui/jobs/job.cpp:270
 #, no-c-format
 msgid "Aborted by user"
 msgstr "Przerwane przez użytkownika"
@@ -2898,12 +2914,7 @@ msgstr "Dodatkowe opcje linii komend"
 msgid "Additional options:"
 msgstr "Opcje dodatkowe:"
 
-#: src/common/kax_info.cpp:210
-#, boost-format
-msgid "AdditionalID: %1%"
-msgstr "Dodatkowe ID: %1%"
-
-#: src/common/kax_info.cpp:1344
+#: src/common/kax_element_names.cpp:254
 msgid "Additions"
 msgstr "Dodatki"
 
@@ -2967,9 +2978,9 @@ msgstr "Następnie &usuń wszystkie pliki źródłowe."
 msgid "Afterwards create &new multiplex settings and close the current ones."
 msgstr "Następnie stwórz &nowe ustawienia multipleksowania i zamknij obecnie istniejące."
 
-#: src/common/kax_info.cpp:837
-#, boost-format
-msgid "Algorithm: %1% (%2%)"
+#: src/common/kax_element_names.cpp:168
+#, fuzzy
+msgid "Algorithm"
 msgstr "Algorytm: %1% (%2%)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:371
@@ -3218,10 +3229,10 @@ msgstr "Proporcje obrazu"
 msgid "Aspect ratio factor"
 msgstr "Współczynnik proporcji obrazu"
 
-#: src/common/kax_info.cpp:772
-#, boost-format
-msgid "Aspect ratio type: %1%%2%"
-msgstr "Typ proporcji obrazu: %1%%2%"
+#: src/common/kax_element_names.cpp:158
+#, fuzzy
+msgid "Aspect ratio type"
+msgstr "Proporcje obrazu"
 
 #: src/common/xml/ebml_chapters_converter.cpp:107
 msgid "At least one <ChapterAtom> element is needed."
@@ -3244,7 +3255,7 @@ msgstr "&Załącz do:"
 msgid "Attach to"
 msgstr "Załącz do"
 
-#: src/common/kax_info.cpp:1218
+#: src/common/kax_element_names.cpp:228
 msgid "Attached"
 msgstr "Załączony"
 
@@ -3259,6 +3270,11 @@ msgstr "Załącznik"
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID załącznika %1%: rodzaj \"%2%\", rozmiar %3% bajtów"
 
+#: src/common/kax_element_names.cpp:301
+#, fuzzy
+msgid "Attachment UID"
+msgstr "Załącznik"
+
 #: src/extract/extract_cli_parser.cpp:94
 msgid "Attachment extraction"
 msgstr "Wyodrębnianie załączników"
@@ -3272,7 +3288,7 @@ msgstr "Selektory załączników"
 msgid "Attachment with same name present"
 msgstr "Wykryto załącznik o tej samej nazwie"
 
-#: src/common/kax_info.cpp:1209
+#: src/common/kax_element_names.cpp:227
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:20
 #: src/propedit/options.cpp:222
@@ -3313,6 +3329,11 @@ msgstr "Właściwości dźwięku"
 #: src/common/property_element.cpp:203
 msgid "Audio sampling frequency"
 msgstr "Częstotliwość próbkowania dźwięku"
+
+#: src/common/kax_element_names.cpp:103
+#, fuzzy
+msgid "Audio track"
+msgstr "Ścieżki &audio:"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
 #, no-c-format
@@ -3365,52 +3386,56 @@ msgstr "Dostępne:"
 msgid "Before chapters"
 msgstr "Według istniejących rozdziałów"
 
+#: src/common/kax_element_names.cpp:307
+msgid "Binary"
+msgstr ""
+
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:156
 #, no-c-format
 msgid "Binary (displayed as hexadecimal numbers)"
 msgstr "Liczba binarna (wyświetlana w systemie heksadecymalnym)"
 
-#: src/common/kax_info.cpp:554
-#, boost-format
-msgid "Bit depth: %1%"
+#: src/common/kax_element_names.cpp:108
+#, fuzzy
+msgid "Bit depth"
 msgstr "Głębia bitów: %1%"
 
-#: src/common/kax_info.cpp:610
-#, boost-format
-msgid "Bits per channel: %1%"
+#: src/common/kax_element_names.cpp:124
+#, fuzzy
+msgid "Bits per channel"
 msgstr "Bitów na kanał: %1%"
 
 #: src/common/property_element.cpp:206
 msgid "Bits per sample, mostly used for PCM."
 msgstr "Liczba bitów na próbkę, głównie stosowane dla PCM."
 
-#: src/common/kax_info.cpp:202
-#, boost-format
-msgid "Block (track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%)"
-msgstr "Blok (numer ścieżki %1%, %2% klatek, kod czasowy %|3$.3f|s = %4%)"
+#: src/common/kax_element_names.cpp:239
+#, fuzzy
+msgid "Block"
+msgstr "SimpleBlock"
 
-#: src/common/kax_info.cpp:216
-#, boost-format
-msgid "Block additional ID: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:247
+#, fuzzy
+msgid "Block additional"
+msgstr "(kolejna część)"
 
-#: src/common/kax_info.cpp:211
-#, boost-format
-msgid "Block additional: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:246
+#: src/common/kax_element_names.cpp:252
+#, fuzzy
+msgid "Block additional ID"
+msgstr "Maks BlockAddition ID: %1%"
 
-#: src/common/kax_info.cpp:204
-#, boost-format
-msgid "Block duration: %1%.%|2$06d|ms"
-msgstr ""
+#: src/common/kax_element_names.cpp:240
+#, fuzzy
+msgid "Block duration"
+msgstr "Domyślny czas trwania"
 
-#: src/common/kax_info.cpp:1258
+#: src/common/kax_element_names.cpp:238
 msgid "Block group"
 msgstr ""
 
-#: src/common/kax_info.cpp:208
-#, boost-format
-msgid "Block virtual: %1%"
+#: src/common/kax_element_names.cpp:243
+msgid "Block virtual"
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:244
@@ -3437,14 +3462,12 @@ msgstr ""
 msgid "Blue Y chromaticity coordinate as defined by CIE 1931."
 msgstr ""
 
-#: src/common/kax_info.cpp:579
-#, boost-format
-msgid "Blue colour coordinate x: %1%"
+#: src/common/kax_element_names.cpp:115
+msgid "Blue colour coordinate x"
 msgstr ""
 
-#: src/common/kax_info.cpp:582
-#, boost-format
-msgid "Blue colour coordinate y: %1%"
+#: src/common/kax_element_names.cpp:116
+msgid "Blue colour coordinate y"
 msgstr ""
 
 #: src/input/r_vobsub.cpp:555
@@ -3538,7 +3561,7 @@ msgstr "Oblicz statystyki dla wszystkich ścieżek i dodaj/odśwież ich tagi."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:262
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #: src/mkvtoolnix-gui/jobs/tool.cpp:521
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:389
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:416
 #: src/mkvtoolnix-gui/merge/input.cpp:1217
 #: src/mkvtoolnix-gui/merge/tab.cpp:398
 #: src/mkvtoolnix-gui/merge/tab.cpp:424
@@ -3580,7 +3603,8 @@ msgstr "Nie można zapisać ścieżki %1% z CodecID \"%2%\" do pliku, \"%3%\", p
 msgid "Category is not NUL terminated"
 msgstr "Kategoria nie jest zakończona znakiem NUL"
 
-#: src/common/kax_info.cpp:1836
+#: src/common/kax_info.cpp:1211
+#: src/common/kax_info.cpp:1215
 #: src/extract/tracks.cpp:564
 msgid "Caught exception"
 msgstr "Wykryto wyjątek"
@@ -3610,7 +3634,7 @@ msgstr "Niektóre formaty plików mają właściwość \"tytuł\"."
 msgid "Certain file formats have a 'language' property for their tracks."
 msgstr "Niektóre formaty plików mają właściwość \"język\", przyporządkowaną dla zawartych w nich ścieżek."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:688
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:715
 #, no-c-format
 msgid "Certain functions won't work correctly in this situation."
 msgstr "Niektóre funkcje nie będą działać prawidłowo w tej sytuacji."
@@ -3635,14 +3659,14 @@ msgstr "Zmiana dla \"%1%\" została dokonana. Liczba wpisów ustawionych: %2%.\n
 msgid "Change for '%1%' executed. One entry added.\n"
 msgstr "Zmiana dla \"%1%\" została dokonana. Dodano jeden wpis.\n"
 
-#: src/common/kax_info.cpp:549
-#, boost-format
-msgid "Channel positions: %1%"
+#: src/common/kax_element_names.cpp:107
+#, fuzzy
+msgid "Channel positions"
 msgstr "Pozycje kanałów: %1%"
 
-#: src/common/kax_info.cpp:543
-#, boost-format
-msgid "Channels: %1%"
+#: src/common/kax_element_names.cpp:106
+#, fuzzy
+msgid "Channels"
 msgstr "Kanały: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
@@ -3655,28 +3679,30 @@ msgstr "&Numer pierwszego podrozdziału:"
 msgid "Chapter <NUM:2>"
 msgstr "Rozdział <NUM:2>"
 
-#: src/common/kax_info.cpp:442
-msgid "Chapter Translate"
-msgstr ""
+#: src/common/kax_element_names.cpp:272
+#: src/common/kax_element_names.cpp:300
+#, fuzzy
+msgid "Chapter UID"
+msgstr "Rozdziały"
 
-#: src/common/kax_info.cpp:449
-#, boost-format
-msgid "Chapter Translate Codec: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:271
+#, fuzzy
+msgid "Chapter atom"
+msgstr "Edytor rozdziałów"
 
-#: src/common/kax_info.cpp:446
-#, boost-format
-msgid "Chapter Translate Edition UID: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:287
+#, fuzzy
+msgid "Chapter country"
+msgstr "Rozdziały: %1% pozycja"
 
-#: src/common/kax_info.cpp:452
-#, boost-format
-msgid "Chapter Translate ID: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:283
+#, fuzzy
+msgid "Chapter display"
+msgstr "Plik rozdziałów:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1396
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:189
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:233
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:187
 #, no-c-format
 msgid "Chapter editor"
@@ -3690,9 +3716,28 @@ msgstr "Wyodrębnianie rozdziałów"
 msgid "Chapter file:"
 msgstr "Plik rozdziałów:"
 
+#: src/common/kax_element_names.cpp:277
+#, fuzzy
+msgid "Chapter flag enabled"
+msgstr "Plik rozdziałów:"
+
+#: src/common/kax_element_names.cpp:276
+#, fuzzy
+msgid "Chapter flag hidden"
+msgstr "Pomiń rozdziały &oflagowane jako \"ukryte\""
+
 #: src/merge/cluster_helper.cpp:748
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "Tworzenie rozdziałów jest możliwe tylko wtedy, gdy przynajmniej jedna ścieżka wideo lub audio jest kopiowana.\n"
+
+#: src/common/kax_element_names.cpp:285
+#, fuzzy
+msgid "Chapter language"
+msgstr "Plik rozdziałów:"
+
+#: src/common/kax_element_names.cpp:286
+msgid "Chapter language (IETF)"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "Chapter mass modification"
@@ -3708,7 +3753,98 @@ msgstr "Numery rozdziałów:"
 msgid "Chapter parser: The EditionUID %1% is not unique and could not be reused. A new one will be created.\n"
 msgstr "Moduł rozdziałów: EditionUID %1% nie jest unikalne i nie może być użyte ponownie. Zostanie stworzony nowy UID.\n"
 
-#: src/common/kax_info.cpp:1616
+#: src/common/kax_element_names.cpp:280
+msgid "Chapter physical equivalent"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:288
+#, fuzzy
+msgid "Chapter process"
+msgstr "Rozdziały"
+
+#: src/common/kax_element_names.cpp:289
+msgid "Chapter process codec ID"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:291
+msgid "Chapter process command"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:293
+#, fuzzy
+msgid "Chapter process data"
+msgstr "Edytor rozdziałów"
+
+#: src/common/kax_element_names.cpp:290
+msgid "Chapter process private"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:292
+#, fuzzy
+msgid "Chapter process time"
+msgstr "Wyodrębnianie rozdziałów"
+
+#: src/common/kax_element_names.cpp:278
+#, fuzzy
+msgid "Chapter segment UID"
+msgstr "UID następnego segmentu:"
+
+#: src/common/kax_element_names.cpp:279
+#, fuzzy
+msgid "Chapter segment edition UID"
+msgstr "UID e&dycji segmentu:"
+
+#: src/common/kax_element_names.cpp:284
+#, fuzzy
+msgid "Chapter string"
+msgstr "Wyodrębnianie rozdziałów"
+
+#: src/common/kax_element_names.cpp:273
+#, fuzzy
+msgid "Chapter string UID"
+msgstr "Wyodrębnianie rozdziałów"
+
+#: src/common/kax_element_names.cpp:275
+#, fuzzy
+msgid "Chapter time end"
+msgstr "Plik rozdziałów:"
+
+#: src/common/kax_element_names.cpp:274
+#, fuzzy
+msgid "Chapter time start"
+msgstr "Edytor rozdziałów"
+
+#: src/common/kax_element_names.cpp:281
+#, fuzzy
+msgid "Chapter track"
+msgstr "Wyodrębnianie rozdziałów"
+
+#: src/common/kax_element_names.cpp:282
+#, fuzzy
+msgid "Chapter track number"
+msgstr "Numery rozdziałów:"
+
+#: src/common/kax_element_names.cpp:98
+#, fuzzy
+msgid "Chapter translate"
+msgstr "Wyodrębnianie rozdziałów"
+
+#: src/common/kax_element_names.cpp:101
+#, fuzzy
+msgid "Chapter translate ID"
+msgstr "Wyodrębnianie rozdziałów"
+
+#: src/common/kax_element_names.cpp:100
+#, fuzzy
+msgid "Chapter translate codec"
+msgstr "Wyodrębnianie rozdziałów"
+
+#: src/common/kax_element_names.cpp:99
+#, fuzzy
+msgid "Chapter translate edition UID"
+msgstr "Wyodrębnianie rozdziałów"
+
+#: src/common/kax_element_names.cpp:265
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 #: src/mkvtoolnix-gui/merge/track.cpp:409
@@ -3779,7 +3915,7 @@ msgstr "Zamknij bieżące ustawienia"
 msgid "Close modified file"
 msgstr "Zamknij zmodyfikowany plik"
 
-#: src/common/kax_info.cpp:1715
+#: src/common/kax_element_names.cpp:260
 msgid "Cluster"
 msgstr "Klaster"
 
@@ -3793,19 +3929,19 @@ msgstr "Długość klastra \"%1%\" poza zakresem (0..65535).\n"
 msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "Długość klastra \"%1%\" poza zakresem (100..32000).\n"
 
-#: src/common/kax_info.cpp:226
-#, boost-format
-msgid "Cluster position: %1%"
+#: src/common/kax_element_names.cpp:262
+#, fuzzy
+msgid "Cluster position"
 msgstr "Położenie klastra: %1% "
 
-#: src/common/kax_info.cpp:227
-#, boost-format
-msgid "Cluster previous size: %1%"
+#: src/common/kax_element_names.cpp:263
+#, fuzzy
+msgid "Cluster previous size"
 msgstr "Poprzedni rozmiar klastra: %1%"
 
-#: src/common/kax_info.cpp:225
-#, boost-format
-msgid "Cluster timestamp: %|1$.3f|s"
+#: src/common/kax_element_names.cpp:261
+#, fuzzy
+msgid "Cluster timestamp"
 msgstr "Kod czasowy klastra: %|1$.3f|s"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
@@ -3814,6 +3950,7 @@ msgstr "Kod czasowy klastra: %|1$.3f|s"
 msgid "Codec"
 msgstr "Kodek"
 
+#: src/common/kax_element_names.cpp:185
 #: src/common/property_element.cpp:140
 msgid "Codec ID"
 msgstr "ID kodeka"
@@ -3824,50 +3961,41 @@ msgstr "ID kodeka"
 msgid "Codec ID:"
 msgstr "ID kodeka:"
 
-#: src/common/kax_info.cpp:980
-#, boost-format
-msgid "Codec ID: %1%"
-msgstr "ID kodeka: %1%"
-
-#: src/common/kax_info.cpp:1008
-#, boost-format
-msgid "Codec decode all: %1%"
+#: src/common/kax_element_names.cpp:192
+msgid "Codec decode all"
 msgstr ""
 
-#: src/common/kax_info.cpp:1056
-#, boost-format
-msgid "Codec delay: %|1$.3f|ms (%2%ns)"
-msgstr "Opóźnienie kodeka: %|1$.3f|ms (%2%ns)"
-
-#: src/common/kax_info.cpp:1005
-#, boost-format
-msgid "Codec download URL: %1%"
+#: src/common/kax_element_names.cpp:191
+#, fuzzy
+msgid "Codec download URL"
 msgstr "Adres pobierania kodeka: %1%"
 
-#: src/common/kax_info.cpp:1002
-#, boost-format
-msgid "Codec info URL: %1%"
+#: src/common/kax_element_names.cpp:190
+#, fuzzy
+msgid "Codec info URL"
 msgstr "Adres informacji o kodeku: %1%"
 
+#: src/common/kax_element_names.cpp:187
 #: src/common/property_element.cpp:141
 msgid "Codec name"
 msgstr "Nazwa kodeka"
 
-#: src/common/kax_info.cpp:995
-#, boost-format
-msgid "Codec name: %1%"
-msgstr "Nazwa kodeka: %1%"
-
-#: src/common/kax_info.cpp:999
-#, boost-format
-msgid "Codec settings: %1%"
+#: src/common/kax_element_names.cpp:189
+#, fuzzy
+msgid "Codec settings"
 msgstr "Ustawienia kodeka: %1%"
 
-#: src/common/kax_info.cpp:228
-#, boost-format
-msgid "Codec state: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:245
+#, fuzzy
+msgid "Codec state"
+msgstr "Nazwa kodeka"
 
+#: src/common/kax_element_names.cpp:186
+#, fuzzy
+msgid "Codec's private data"
+msgstr "2: dane własne kodeka"
+
+#: src/common/kax_element_names.cpp:188
 #: src/common/property_element.cpp:142
 msgid "Codec-inherent delay"
 msgstr "Opóźnienie zakładane przez kodek"
@@ -3876,11 +4004,6 @@ msgstr "Opóźnienie zakładane przez kodek"
 #, no-c-format
 msgid "Codec/MIME type"
 msgstr "Kodek/Typ MIME"
-
-#: src/common/kax_info.cpp:992
-#, boost-format
-msgid "CodecPrivate, length %1%%2%"
-msgstr "CodecPrivate, długość %1%%2%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:504
 #, fuzzy
@@ -3892,29 +4015,29 @@ msgstr "DV wideo format"
 msgid "Colour mastering meta information"
 msgstr "Błąd podczas zapisywania informacji"
 
-#: src/common/kax_info.cpp:607
-#, fuzzy, boost-format
-msgid "Colour matrix coefficients: %1%"
+#: src/common/kax_element_names.cpp:123
+#, fuzzy
+msgid "Colour matrix coefficients"
 msgstr "DV wideo format"
 
-#: src/common/kax_info.cpp:637
-#, fuzzy, boost-format
-msgid "Colour primaries: %1%"
+#: src/common/kax_element_names.cpp:133
+#, fuzzy
+msgid "Colour primaries"
 msgstr "Przestrzeń koloru: %1%"
 
-#: src/common/kax_info.cpp:631
-#, fuzzy, boost-format
-msgid "Colour range: %1%"
+#: src/common/kax_element_names.cpp:131
+#, fuzzy
+msgid "Colour range"
 msgstr "Przestrzeń koloru: %1%"
 
-#: src/common/kax_info.cpp:780
-#, boost-format
-msgid "Colour space: %1%"
+#: src/common/kax_element_names.cpp:159
+#, fuzzy
+msgid "Colour space"
 msgstr "Przestrzeń koloru: %1%"
 
-#: src/common/kax_info.cpp:634
-#, fuzzy, boost-format
-msgid "Colour transfer: %1%"
+#: src/common/kax_element_names.cpp:132
+#, fuzzy
+msgid "Colour transfer"
 msgstr "Przestrzeń koloru: %1%"
 
 #: src/info/qt_ui.cpp:149
@@ -3922,12 +4045,12 @@ msgstr "Przestrzeń koloru: %1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "Skompilowano przy użyciu bibliotek libebml %1 + libmatroska %2. "
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:262
+#: src/mkvtoolnix-gui/jobs/job.cpp:267
 #, no-c-format
 msgid "Completed OK"
 msgstr "Zakończono pomyślnie"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:263
+#: src/mkvtoolnix-gui/jobs/job.cpp:268
 #, no-c-format
 msgid "Completed with warnings"
 msgstr "Zakończono z ostrzeżeniami"
@@ -3946,19 +4069,20 @@ msgstr "Kompresja ścieżki:"
 msgid "Container"
 msgstr "Kontener"
 
-#: src/common/kax_info.cpp:831
+#: src/common/kax_element_names.cpp:167
 msgid "Content compression"
 msgstr "Kompresja zawartości"
 
-#: src/common/kax_info.cpp:801
+#: src/common/kax_element_names.cpp:163
 msgid "Content encoding"
 msgstr "Kodowanie zawartości"
 
-#: src/common/kax_info.cpp:797
+#: src/common/kax_element_names.cpp:162
+#: src/common/kax_element_names.cpp:203
 msgid "Content encodings"
 msgstr "Kodowania zawartości"
 
-#: src/common/kax_info.cpp:851
+#: src/common/kax_element_names.cpp:170
 msgid "Content encryption"
 msgstr "Szyfrowanie zawartości"
 
@@ -4140,7 +4264,7 @@ msgstr "Parametry obcięcia: nie zostały podane w formie <TID>:<lewo>,<góra>,<
 msgid "Cropping:"
 msgstr "Obcinanie obrazu:"
 
-#: src/info/ui/mainwindow.h:121
+#: src/info/forms/mainwindow.h:121
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
@@ -4148,7 +4272,7 @@ msgstr "Ctrl+A"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: src/info/ui/mainwindow.h:125
+#: src/info/forms/mainwindow.h:125
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
@@ -4169,7 +4293,7 @@ msgstr "Ctrl+L"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: src/info/ui/mainwindow.h:109
+#: src/info/forms/mainwindow.h:109
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:532
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:554
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:572
@@ -4180,7 +4304,7 @@ msgstr "Ctrl+O"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/info/ui/mainwindow.h:117
+#: src/info/forms/mainwindow.h:117
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:537
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -4190,7 +4314,7 @@ msgstr "Ctrl+Q"
 msgid "Ctrl+R"
 msgstr "Ctrl+R"
 
-#: src/info/ui/mainwindow.h:113
+#: src/info/forms/mainwindow.h:113
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:528
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:562
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:580
@@ -4217,24 +4341,24 @@ msgstr "Ctrl+T"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
-#: src/common/kax_info.cpp:1169
-#, boost-format
-msgid "Cue block number: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:219
+#, fuzzy
+msgid "Cue block number"
+msgstr "Numer ścieżki"
 
-#: src/common/kax_info.cpp:1160
-#, boost-format
-msgid "Cue cluster position: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:216
+#, fuzzy
+msgid "Cue cluster position"
+msgstr "Położenie klastra: %1% "
 
-#: src/common/kax_info.cpp:1173
-#, boost-format
-msgid "Cue codec state: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:220
+#, fuzzy
+msgid "Cue codec state"
+msgstr "Nazwa kodeka"
 
-#: src/common/kax_info.cpp:1166
-#, boost-format
-msgid "Cue duration: %1%"
+#: src/common/kax_element_names.cpp:218
+#, fuzzy
+msgid "Cue duration"
 msgstr "Czas trwania cue: %1%"
 
 #: src/extract/extract_cli_parser.cpp:129
@@ -4245,38 +4369,36 @@ msgstr "Wyodrębnianie plików cue"
 msgid "Cue name format:"
 msgstr "Format nazw z pliku cue:"
 
-#: src/common/kax_info.cpp:1146
+#: src/common/kax_element_names.cpp:212
 msgid "Cue point"
 msgstr ""
 
-#: src/common/kax_info.cpp:1183
-#, boost-format
-msgid "Cue ref cluster: %1%"
+#: src/common/kax_element_names.cpp:223
+#, fuzzy
+msgid "Cue ref cluster"
+msgstr "Klaster"
+
+#: src/common/kax_element_names.cpp:225
+msgid "Cue ref codec state"
 msgstr ""
 
-#: src/common/kax_info.cpp:1189
-#, boost-format
-msgid "Cue ref codec state: %1%"
+#: src/common/kax_element_names.cpp:224
+#, fuzzy
+msgid "Cue ref number"
+msgstr "Numery rozdziałów:"
+
+#: src/common/kax_element_names.cpp:222
+msgid "Cue ref time"
 msgstr ""
 
-#: src/common/kax_info.cpp:1186
-#, boost-format
-msgid "Cue ref number: %1%"
-msgstr ""
-
-#: src/common/kax_info.cpp:1180
-#, boost-format
-msgid "Cue ref time: %|1$.3f|s"
-msgstr ""
-
-#: src/common/kax_info.cpp:1176
+#: src/common/kax_element_names.cpp:221
 msgid "Cue reference"
 msgstr ""
 
-#: src/common/kax_info.cpp:1163
-#, boost-format
-msgid "Cue relative position: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:217
+#, fuzzy
+msgid "Cue relative position"
+msgstr "Położenie klastra: %1% "
 
 #: src/extract/extract_cli_parser.cpp:112
 msgid "Cue sheet extraction"
@@ -4302,21 +4424,25 @@ msgstr "Analizator arkusza cue: Nieprawidłowy numer INDEX (otrzymano %1%, oczek
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
 msgstr "Analizator arkusza cue: Nie znaleziono żadnego wpisu INDEX dla poprzedniego wpisu TRACK (obecna linia: %1%)\n"
 
-#: src/common/kax_info.cpp:1150
-#, boost-format
-msgid "Cue time: %|1$.3f|s"
-msgstr "Czas cue: %|1$.3f|s"
+#: src/common/kax_element_names.cpp:213
+#, fuzzy
+msgid "Cue time"
+msgstr "Pliki arkuszy cue"
 
-#: src/common/kax_info.cpp:1153
+#: src/common/kax_element_names.cpp:215
+#, fuzzy
+msgid "Cue track"
+msgstr "Ścieżka cue: %1%"
+
+#: src/common/kax_element_names.cpp:214
 msgid "Cue track positions"
 msgstr ""
 
-#: src/common/kax_info.cpp:1157
-#, boost-format
-msgid "Cue track: %1%"
-msgstr "Ścieżka cue: %1%"
+#: src/common/kax_element_names.cpp:211
+msgid "Cues"
+msgstr ""
 
-#: src/common/kax_info.cpp:1133
+#: src/common/kax_info.cpp:522
 msgid "Cues (subentries will be skipped)"
 msgstr "Znaczniki cue (podzespoły są pomijane)"
 
@@ -4380,6 +4506,7 @@ msgstr "DV wideo format"
 msgid "DVB subtitles"
 msgstr "Napisy DVB"
 
+#: src/common/kax_element_names.cpp:88
 #: src/common/property_element.cpp:110
 msgid "Date"
 msgstr "Data"
@@ -4399,11 +4526,6 @@ msgstr "Data zakończenia"
 msgid "Date started"
 msgstr "Data rozpoczęcia"
 
-#: src/common/kax_info.cpp:492
-#, boost-format
-msgid "Date: %1% UTC"
-msgstr "Data: %1% UTC"
-
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
@@ -4422,6 +4544,7 @@ msgstr "Domyślne"
 msgid "Default additional co&mmand line options:"
 msgstr "Dodatkowe opcje linii ko&mend:"
 
+#: src/common/kax_element_names.cpp:196
 #: src/common/property_element.cpp:137
 msgid "Default duration"
 msgstr "Domyślny czas trwania"
@@ -4430,15 +4553,10 @@ msgstr "Domyślny czas trwania"
 msgid "Default duration/FPS:"
 msgstr "Domyślny czas trwania/FPS:"
 
-#: src/common/kax_info.cpp:1023
-#, boost-format
-msgid "Default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
-msgstr "Domyślny czas trwania: %|1$.3f|ms (%|2$.3f| kl/s dla ścieżki wideo)"
-
-#: src/common/kax_info.cpp:1035
-#, boost-format
-msgid "Default flag: %1%"
-msgstr "Ścieżka domyślna: %1%"
+#: src/common/kax_element_names.cpp:310
+#, fuzzy
+msgid "Default language"
+msgstr "► Wartości domyślne"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1364
 msgid "Default subtitle &charset to set:"
@@ -4448,6 +4566,11 @@ msgstr "&Ustaw domyślny zestaw znaków napisów na:"
 #, no-c-format
 msgid "Default track"
 msgstr "Domyślna ścieżka"
+
+#: src/common/kax_element_names.cpp:198
+#, fuzzy
+msgid "Default track flag"
+msgstr "Flaga \"Domyślna ścieżka\""
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:51
 #, no-c-format
@@ -4475,6 +4598,10 @@ msgstr "Opcje dla nowych ustawień multipleksowania"
 msgid "Defaults for newly added tracks"
 msgstr "Opcje dla nowo dodanych ścieżek"
 
+#: src/common/kax_element_names.cpp:250
+msgid "Delay"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1686
 msgid "Delay (in ms):"
 msgstr "Opóźnienie (w ms):"
@@ -4487,11 +4614,6 @@ msgstr "Opóźnienie w dekodowaniu, jakie zakłada dany format kodeka, wyrażone
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
 msgstr "Dostosuj opóźnienie ścieżki o wartość w ms (milisekundach)."
-
-#: src/common/kax_info.cpp:214
-#, boost-format
-msgid "Delay: %|1$.3f|ms"
-msgstr "Opóźnienie: %|1$.3f|ms"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Delete all existing track statistics tags"
@@ -4544,6 +4666,11 @@ msgstr "Plik docelowy"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1370
 msgid "Destination file name"
+msgstr "Nazwa pliku docelowego"
+
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:102
+#, fuzzy, no-c-format
+msgid "Destination file name: %1"
 msgstr "Nazwa pliku docelowego"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
@@ -4624,7 +4751,7 @@ msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Wyłącz użycie SimpleBlocks zamiast BlockGroups."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
-#: src/mkvtoolnix-gui/jobs/job.cpp:266
+#: src/mkvtoolnix-gui/jobs/job.cpp:271
 #, no-c-format
 msgid "Disabled"
 msgstr "Wyłączone"
@@ -4634,9 +4761,8 @@ msgstr "Wyłączone"
 msgid "Disables lacing for all tracks."
 msgstr "Wyłącza lacing dla wszystkich ścieżek."
 
-#: src/common/kax_info.cpp:231
-#, boost-format
-msgid "Discard padding: %|1$.3f|ms (%2%ns)"
+#: src/common/kax_element_names.cpp:253
+msgid "Discard padding"
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:680
@@ -4645,24 +4771,24 @@ msgstr ""
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '%1%').\n"
 msgstr "Wymiary wyświetlania: nie zostały podane w formie <TID>:<szer>x<wys>, np. 1:640x480 (podana wartość to \"%1%\").\n"
 
-#: src/common/kax_info.cpp:708
-#, boost-format
-msgid "Display height: %1%"
+#: src/common/kax_element_names.cpp:148
+#, fuzzy
+msgid "Display height"
 msgstr "Wyświetlana wysokość: %1%"
 
-#: src/common/kax_info.cpp:735
-#, boost-format
-msgid "Display unit: %1%%2%"
+#: src/common/kax_element_names.cpp:153
+#, fuzzy
+msgid "Display unit"
 msgstr "Jednostka wyświetlania: %1%%2%"
+
+#: src/common/kax_element_names.cpp:147
+#, fuzzy
+msgid "Display width"
+msgstr "Wyświetlana szerokość: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 msgid "Display width/height:"
 msgstr "Wyświetlana szerokość/wysokość:"
-
-#: src/common/kax_info.cpp:703
-#, boost-format
-msgid "Display width: %1%"
-msgstr "Wyświetlana szerokość: %1%"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
@@ -4684,7 +4810,7 @@ msgid "Do not write meta seek elements at all."
 msgstr "Nie zapisuj żadnych elementów indeksu wyszukiwania."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:519
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:387
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:414
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "Czy na pewno chcesz przerwać wszystkie obecnie trwające zadania?"
@@ -4705,20 +4831,20 @@ msgstr "Czy na pewno chcesz dodać \"%1\" jako kolejny załącznik?"
 msgid "Do you want to overwrite the file?"
 msgstr "Czy chcesz nadpisać ten plik?"
 
-#: src/common/kax_info.cpp:1675
-#, boost-format
-msgid "Doc type read version: %1%"
+#: src/common/kax_element_names.cpp:76
+#, fuzzy
+msgid "Document type"
+msgstr "Rodzaj DocType: %1%"
+
+#: src/common/kax_element_names.cpp:78
+#, fuzzy
+msgid "Document type read version"
 msgstr "Minimalna wersja DocType, aby odczytać: %1%"
 
-#: src/common/kax_info.cpp:1672
-#, boost-format
-msgid "Doc type version: %1%"
+#: src/common/kax_element_names.cpp:77
+#, fuzzy
+msgid "Document type version"
 msgstr "Wersja DocType: %1%"
-
-#: src/common/kax_info.cpp:1669
-#, boost-format
-msgid "Doc type: %1%"
-msgstr "Rodzaj DocType: %1%"
 
 #: src/common/file_types.cpp:33
 msgid "Dolby TrueHD"
@@ -4774,6 +4900,8 @@ msgstr "Odrzuca rozszerzenie HD ze ścieżki audio i zachowuje jedynie stratny r
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
 msgstr "Z powodu szczególnej struktury pliku, ta sytuacja nie może zostać rozwiązana automatycznie."
 
+#: src/common/kax_element_names.cpp:85
+#: src/common/kax_element_names.cpp:251
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:240
 msgid "Duration"
 msgstr "Czas trwania"
@@ -4783,16 +4911,6 @@ msgstr "Czas trwania"
 #, no-c-format
 msgid "Duration:"
 msgstr "Czas trwania:"
-
-#: src/common/kax_info.cpp:215
-#, boost-format
-msgid "Duration: %|1$.3f|ms"
-msgstr "Czas trwania: %|1$.3f|ms"
-
-#: src/common/kax_info.cpp:479
-#, boost-format
-msgid "Duration: %|1$.3f|s (%2%)"
-msgstr "Czas trwania: %|1$.3f|s (%2%)"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:410
 #, no-c-format
@@ -4808,7 +4926,7 @@ msgstr "Włącz wszystkie załącz&niki"
 msgid "E&xecute now"
 msgstr "&Wykonaj teraz"
 
-#: src/info/ui/mainwindow.h:115
+#: src/info/forms/mainwindow.h:115
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
 msgid "E&xit"
 msgstr "Zamknij &program"
@@ -4817,29 +4935,28 @@ msgstr "Zamknij &program"
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "&Rozszerz czasy początków i końców rozdziałów, aby uwzględnić w nich czasy minimalne/maksymalne wszystkich ich podrozdziałów"
 
-#: src/common/kax_info.cpp:1645
+#: src/common/kax_element_names.cpp:80
+msgid "EBML CRC-32"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:71
 msgid "EBML head"
 msgstr "Nagłówek EBML"
 
-#: src/common/kax_info.cpp:1663
-#, boost-format
-msgid "EBML maximum ID length: %1%"
-msgstr "Maksymalna długość ID: %1%"
-
-#: src/common/kax_info.cpp:1666
-#, boost-format
-msgid "EBML maximum size length: %1%"
-msgstr "Maksymalna długość rozmiaru EBML: %1%"
-
-#: src/common/kax_info.cpp:1660
-#, boost-format
-msgid "EBML read version: %1%"
+#: src/common/kax_element_names.cpp:73
+#, fuzzy
+msgid "EBML read version"
 msgstr "Minimalna wersja EBML, aby odczytać: %1%"
 
-#: src/common/kax_info.cpp:1657
-#, boost-format
-msgid "EBML version: %1%"
+#: src/common/kax_element_names.cpp:72
+#, fuzzy
+msgid "EBML version"
 msgstr "Wersja EBML: %1%"
+
+#: src/common/kax_element_names.cpp:79
+#, fuzzy
+msgid "EBML void"
+msgstr "Nagłówek EBML"
 
 #: src/merge/reader_detection_and_creation.cpp:420
 #, boost-format
@@ -4860,19 +4977,36 @@ msgstr "Każdy odcinek posiada klatkę/pole początkowe i końcowe z myślnikiem
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr "Każdy odcinek posiada czas początkowy i końcowy z myślnikiem po środku, np.: \"00:01:15-00:03:20\"."
 
-#: src/common/kax_info.cpp:199
-#, boost-format
-msgid "EbmlVoid (size: %1%)"
-msgstr "EbmlVoid (rozmiar: %1%)"
-
 #: src/propedit/propedit_cli_parser.cpp:245
 msgid "Edit selectors for properties"
 msgstr "Selektory dla edytowania właściwości"
 
+#: src/common/kax_element_names.cpp:267
+#: src/common/kax_element_names.cpp:299
+#, fuzzy
+msgid "Edition UID"
+msgstr "Edycja"
+
+#: src/common/kax_element_names.cpp:266
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
 #, no-c-format
 msgid "Edition entry"
+msgstr "Edycja"
+
+#: src/common/kax_element_names.cpp:269
+#, fuzzy
+msgid "Edition flag default"
+msgstr "Edycja"
+
+#: src/common/kax_element_names.cpp:268
+#, fuzzy
+msgid "Edition flag hidden"
+msgstr "Edycja"
+
+#: src/common/kax_element_names.cpp:270
+#, fuzzy
+msgid "Edition flag ordered"
 msgstr "Edycja"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
@@ -4913,10 +5047,10 @@ msgstr "Elementy w kategorii \"%1%\" (\"-edit %2%\"):\n"
 msgid "Enable copying of tracks by their language"
 msgstr "Włącz gotowość do kopiowania ścieżek ze względu na ich język"
 
-#: src/common/kax_info.cpp:972
-#, boost-format
-msgid "Enabled: %1%"
-msgstr "Włączona: %1%"
+#: src/common/kax_element_names.cpp:183
+#, fuzzy
+msgid "Enabled"
+msgstr "Włączon&e "
 
 #: src/mkvtoolnix-gui/merge/output.cpp:154
 #, no-c-format
@@ -4933,15 +5067,15 @@ msgstr "Włączenie tej opcji spowoduje, że mkvmerge zachowa ostatni rozdział.
 msgid "Enabling tracks"
 msgstr "► Włączanie ścieżek"
 
-#: src/common/kax_info.cpp:857
-#, boost-format
-msgid "Encryption algorithm: %1% (%2%)"
+#: src/common/kax_element_names.cpp:171
+#, fuzzy
+msgid "Encryption algorithm"
 msgstr "Algorytm szyfrowania: %1% (%2%)"
 
-#: src/common/kax_info.cpp:868
-#, boost-format
-msgid "Encryption key ID: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:172
+#, fuzzy
+msgid "Encryption key ID"
+msgstr "szyfrowanie"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
 #, no-c-format
@@ -5053,13 +5187,13 @@ msgstr "Błąd podczas zapisu pliku Matroski"
 #: src/common/output.cpp:133
 #: src/common/output.cpp:134
 #: src/common/output.cpp:135
-#: src/mkvtoolnix-gui/jobs/job.cpp:246
+#: src/mkvtoolnix-gui/jobs/job.cpp:251
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:318
 #, no-c-format
 msgid "Error:"
 msgstr "Błąd:"
 
-#: src/common/kax_info.cpp:1789
+#: src/common/kax_info.cpp:1145
 #, boost-format
 msgid "Error: Couldn't open source file %1% (%2%)."
 msgstr "Błąd: Nie można było otworzyć pliku źródłowego %1% (%2%)."
@@ -5225,12 +5359,12 @@ msgstr "Wyodrębnianie ścieżki %1% z CodecID \"%2%\" do pliku \"%3%\". Format 
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "Wyodrębnianie ID ścieżki %1% z CodecID \"%2%\" nie jest obsługiwane.\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:354
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
 msgid "Extraction tool"
 msgstr "Narzędzie wyodrębniania"
 
-#: src/info/ui/mainwindow.h:129
+#: src/info/forms/mainwindow.h:129
 msgid "F1"
 msgstr "F1"
 
@@ -5247,7 +5381,7 @@ msgstr "FLAC (Free Lossless Audio Codec)"
 msgid "FLV (Flash Video)"
 msgstr "FLV (Flash Video)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:264
+#: src/mkvtoolnix-gui/jobs/job.cpp:269
 #, no-c-format
 msgid "Failed"
 msgstr "Niepowodzenie"
@@ -5278,10 +5412,10 @@ msgstr "Błąd tworzenia tymczasowego pliku \"%1%\": %2%\n"
 msgid "Failed to parse the USF codec private data for track %1%: %2%\n"
 msgstr "Nie udało się wczytać danych własnych kodeka USF dla ścieżki %1%: %2%\n"
 
-#: src/common/kax_info.cpp:498
-#, boost-format
-msgid "Family UID: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:90
+#, fuzzy
+msgid "Family UID"
+msgstr "UID pliku: %1%"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:172
 msgid "Fi&le name:"
@@ -5291,14 +5425,14 @@ msgstr "Nazwa p&liku:"
 msgid "Fi&le title:"
 msgstr "Tytuł p&liku:"
 
+#: src/common/kax_element_names.cpp:156
+#, fuzzy
+msgid "Field order"
+msgstr "Kolejność pól obrazu"
+
 #: src/common/property_element.cpp:158
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr "Kolejność pól (0, 1, 2, 6, 9 lub 14, patrz dokumentacja)."
-
-#: src/common/kax_info.cpp:752
-#, boost-format
-msgid "Field order: %1% (%2%)"
-msgstr "Kolejność pól: %1% (%2%)"
 
 #: src/merge/generic_reader.cpp:320
 #, boost-format
@@ -5310,9 +5444,9 @@ msgstr "Plik \"%1%\": kontener: %2%"
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Plik \"%1%\": nieobsługiwany kontener: %2%\n"
 
-#: src/common/kax_info.cpp:1234
-#, boost-format
-msgid "File UID: %1%"
+#: src/common/kax_element_names.cpp:233
+#, fuzzy
+msgid "File UID"
 msgstr "UID pliku: %1%"
 
 #: src/input/r_real.cpp:430
@@ -5321,14 +5455,14 @@ msgstr "UID pliku: %1%"
 msgid "File contains fewer frames than expected or is corrupt after frame %1%.\n"
 msgstr "Plik zawiera mniej klatek niż oczekiwano lub jest uszkodzony po klatce %1%.\n"
 
-#: src/common/kax_info.cpp:1231
-#, boost-format
-msgid "File data, size: %1%"
-msgstr "Dane pliku, rozmiar: %1%"
+#: src/common/kax_element_names.cpp:232
+#, fuzzy
+msgid "File data"
+msgstr "Nazwa pliku"
 
-#: src/common/kax_info.cpp:1222
-#, boost-format
-msgid "File description: %1%"
+#: src/common/kax_element_names.cpp:229
+#, fuzzy
+msgid "File description"
 msgstr "Opis pliku: %1%"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:193
@@ -5336,6 +5470,7 @@ msgstr "Opis pliku: %1%"
 msgid "File has not been modified"
 msgstr "Plik nie został zmodyfikowany"
 
+#: src/common/kax_element_names.cpp:230
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:241
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:258
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
@@ -5350,11 +5485,6 @@ msgstr "Nazwa pliku"
 #, no-c-format
 msgid "File name:"
 msgstr "Nazwa pliku:"
-
-#: src/common/kax_info.cpp:1225
-#, boost-format
-msgid "File name: %1%"
-msgstr "Nazwa pliku: %1%"
 
 #: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:45
 #, no-c-format
@@ -5477,16 +5607,16 @@ msgstr "Wymuś lacing w stylu Xiph."
 msgid "Force the translations for 'code' to be used."
 msgstr "Wymuś użycie tłumaczenia, którego państwo ma dany \"kod\" "
 
-#: src/common/kax_info.cpp:1038
-#, boost-format
-msgid "Forced flag: %1%"
-msgstr "Wymuszona ścieżka: %1%"
-
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:154
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
 #, no-c-format
 msgid "Forced track"
 msgstr "Wymuszona ścieżka"
+
+#: src/common/kax_element_names.cpp:199
+#, fuzzy
+msgid "Forced track flag"
+msgstr "Flaga \"Wymuszona ścieżka\":"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
@@ -5521,18 +5651,18 @@ msgstr "FourCC: Nieprawidłowe ID ścieżki w \"%1% %2%\".\n"
 msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: Brakuje ID ścieżki w \"%1% %2%\".\n"
 
-#: src/common/kax_info.cpp:213
-#, boost-format
-msgid "Frame number: %1%"
+#: src/common/kax_element_names.cpp:249
+#, fuzzy
+msgid "Frame number"
 msgstr "Numer klatki: %1%"
 
-#: src/common/kax_info.cpp:783
-#, boost-format
-msgid "Frame rate: %1%"
+#: src/common/kax_element_names.cpp:160
+#, fuzzy
+msgid "Frame rate"
 msgstr "Liczba klatek/s: %1%"
 
-#: src/common/kax_info.cpp:203
-#: src/common/kax_info.cpp:222
+#: src/common/kax_info.cpp:184
+#: src/common/kax_info.cpp:190
 #, boost-format
 msgid "Frame with size %1%%2%%3%"
 msgstr "Klatka o rozmiarze %1%%2%%3%"
@@ -5552,9 +5682,9 @@ msgstr "Dowolnie modyfikowane pole dla opcji użytkownika dla tej ścieżki."
 msgid "GUI"
 msgstr "Interfejs graficzny"
 
-#: src/common/kax_info.cpp:744
-#, boost-format
-msgid "Gamma: %1%"
+#: src/common/kax_element_names.cpp:154
+#, fuzzy
+msgid "Gamma"
 msgstr "Gamma: %1%"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
@@ -5624,14 +5754,12 @@ msgstr ""
 msgid "Green Y chromaticity coordinate as defined by CIE 1931."
 msgstr ""
 
-#: src/common/kax_info.cpp:573
-#, boost-format
-msgid "Green colour coordinate x: %1%"
+#: src/common/kax_element_names.cpp:113
+msgid "Green colour coordinate x"
 msgstr ""
 
-#: src/common/kax_info.cpp:576
-#, boost-format
-msgid "Green colour coordinate y: %1%"
+#: src/common/kax_element_names.cpp:114
+msgid "Green colour coordinate y"
 msgstr ""
 
 #: src/common/file_types.cpp:86
@@ -5665,14 +5793,14 @@ msgstr "HEVC/h.265 (nieklatkowe - z kodami startowymi)"
 msgid "HEVC/h.265 elementary streams"
 msgstr "HEVC/h.265 dane podstawowe (surowe)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:365
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:392
 #, no-c-format
 msgid "Header &editor"
 msgstr "&Edytor nagłówków"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1394
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:188
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:186
 #, no-c-format
 msgid "Header editor"
@@ -5725,19 +5853,19 @@ msgstr "Wyższy priorytet"
 msgid "Highest priority"
 msgstr "Najwyższy priorytet"
 
-#: src/common/kax_info.cpp:619
-#, fuzzy, boost-format
-msgid "Horizontal Cb subsample: %1%"
+#: src/common/kax_element_names.cpp:127
+#, fuzzy
+msgid "Horizontal Cb subsample"
 msgstr "głębia bitów: %1%"
 
-#: src/common/kax_info.cpp:625
-#, boost-format
-msgid "Horizontal chroma siting: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:129
+#, fuzzy
+msgid "Horizontal chroma siting"
+msgstr "Obcięcie obrazu z prawej"
 
-#: src/common/kax_info.cpp:613
-#, fuzzy, boost-format
-msgid "Horizontal chroma subsample: %1%"
+#: src/common/kax_element_names.cpp:125
+#, fuzzy
+msgid "Horizontal chroma subsample"
 msgstr "głębia bitów: %1%"
 
 #: src/common/property_element.cpp:174
@@ -6084,7 +6212,12 @@ msgstr "Niezależnie od pól wyboru, każda aktywna konfiguracja może być wywo
 msgid "Indexing (cues):"
 msgstr "Indeksowanie (cues):"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:354
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:145
+#, fuzzy, no-c-format
+msgid "Info job"
+msgstr "Narzędzie informacyjne"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
 msgid "Info tool"
 msgstr "Narzędzie informacyjne"
@@ -6113,9 +6246,9 @@ msgstr "Zamiast tego taki plik musi być ustawiony poprzez opcję \"informacje o
 msgid "Interface &language:"
 msgstr "&Język interfejsu:"
 
-#: src/common/kax_info.cpp:747
-#, boost-format
-msgid "Interlaced: %1%"
+#: src/common/kax_element_names.cpp:155
+#, fuzzy
+msgid "Interlaced"
 msgstr "Przeplot: %1%"
 
 #: src/extract/xtr_textsubs.cpp:131
@@ -6544,15 +6677,15 @@ msgstr "Opis zadania"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Data i czas zakończenia zadania w formacie ISO 8601"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:192
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:236
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #, no-c-format
 msgid "Job output"
 msgstr "Postęp zadań"
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:125
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:191
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:235
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #, no-c-format
 msgid "Job queue"
 msgstr "Kolejka zadań"
@@ -6591,16 +6724,17 @@ msgstr "Zachowaj tylko BlockAdditions do obecnego poziomu (domyślnie: zachowaj 
 msgid "Known &problems in recent releases"
 msgstr "Znane &problemy w ostatnich wydaniach"
 
-#: src/common/kax_info.cpp:212
-#, boost-format
-msgid "Lace number: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:248
+#, fuzzy
+msgid "Lace number"
+msgstr "Numer ścieżki"
 
-#: src/common/kax_info.cpp:1032
-#, boost-format
-msgid "Lacing flag: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:197
+#, fuzzy
+msgid "Lacing flag"
+msgstr "Analizowanie pliku"
 
+#: src/common/kax_element_names.cpp:200
 #: src/common/property_element.cpp:139
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:26
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:251
@@ -6620,11 +6754,6 @@ msgstr "Język nie jest zakończony znakiem NUL"
 #, no-c-format
 msgid "Language:"
 msgstr "Język:"
-
-#: src/common/kax_info.cpp:1042
-#, boost-format
-msgid "Language: %1%"
-msgstr "Język: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1325
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1349
@@ -6694,6 +6823,11 @@ msgstr "Sporządź listę wszystkich nazw właściwości i wyjdź"
 msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."
 msgstr "Wyszczególnienie plików konfiguracyjnych (mających rozszerzenie .mtxcfg) spowoduje załadowanie ich do odpowiedniego narzędzia."
 
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:152
+#, fuzzy, no-c-format
+msgid "Listing content of file \"%1\" in directory \"%2\""
+msgstr "Multipleksowanie do pliku »%1« w katalogu »%2«"
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:489
 #, no-c-format
 msgid "Lower priority"
@@ -6708,17 +6842,18 @@ msgstr "Najniższy priorytet"
 msgid "M&ore actions"
 msgstr "Więcej czynn&ości"
 
-#: src/common/kax_info.cpp:886
+#: src/common/kax_info.cpp:792
 msgid "MD5"
 msgstr "MD5"
 
+#: src/common/kax_element_names.cpp:231
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:63
 #, no-c-format
 msgid "MIME type"
 msgstr "Typ MIME"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:363
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:390
 #, no-c-format
 msgid "MKVToolNix &GUI"
 msgstr "MKVToolNix &GUI"
@@ -6805,12 +6940,12 @@ msgstr "MPLS - listy odtwarzania Blu-ray"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Ustawia ścieżkę jako domyślną dla swojego typu (audio, wideo, napisy)."
 
-#: src/input/r_matroska.cpp:1742
-#: src/input/r_matroska.cpp:1759
+#: src/input/r_matroska.cpp:1739
+#: src/input/r_matroska.cpp:1756
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Znaleziono zdeformowane dane inicjalizacji kodeka AAC.\n"
 
-#: src/input/r_matroska.cpp:1752
+#: src/input/r_matroska.cpp:1749
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Uszkodzone id kodeka \"%1%\".\n"
@@ -6855,30 +6990,15 @@ msgstr "Pliki Matroski"
 msgid "Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."
 msgstr "Pliki Matroski mogą być odtwarzane bez indeksu cue, jednakże wyszukiwanie prawdopodobnie będzie niedokładne i powolne."
 
-#: src/common/kax_info.cpp:1049
-#, boost-format
-msgid "Max BlockAddition ID: %1%"
-msgstr "Maks BlockAddition ID: %1%"
+#: src/common/kax_element_names.cpp:74
+#, fuzzy
+msgid "Maximum EBML ID length"
+msgstr "Maksymalna długość ID: %1%"
 
-#: src/common/kax_info.cpp:640
-#, boost-format
-msgid "Max content light: %1%"
-msgstr "Maksymalna zawartość światła: %1%"
-
-#: src/common/kax_info.cpp:643
-#, fuzzy, boost-format
-msgid "Max frame light: %1%"
-msgstr "Wysokość w pikselach: %1%"
-
-#: src/common/kax_info.cpp:591
-#, boost-format
-msgid "Max luminance: %1%"
-msgstr "Maksymalna jasność: %1%"
-
-#: src/common/kax_info.cpp:1018
-#, boost-format
-msgid "MaxCache: %1%"
-msgstr "MaksBufor: %1%"
+#: src/common/kax_element_names.cpp:75
+#, fuzzy
+msgid "Maximum EBML size length"
+msgstr "Maksymalna długość rozmiaru EBML: %1%"
 
 #: src/common/xml/ebml_converter.cpp:228
 #, boost-format
@@ -6892,13 +7012,29 @@ msgstr "Maksymalna dozwolona długość: %1%, obecna długość: %2%"
 msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "Maksymalna dozwolona wartość: %1%, obecna wartość: %2%"
 
+#: src/common/kax_element_names.cpp:202
+#, fuzzy
+msgid "Maximum block additional ID"
+msgstr "Maks BlockAddition ID: %1%"
+
 #: src/common/property_element.cpp:179
 msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
 msgstr "Maksymalna jasność pojedynczego piksela w kandelach na metr kwadratowy (cd/m²)."
 
+#: src/common/kax_element_names.cpp:195
 #: src/common/property_element.cpp:135
 msgid "Maximum cache"
 msgstr "Maksymalny bufor"
+
+#: src/common/kax_element_names.cpp:134
+#, fuzzy
+msgid "Maximum content light"
+msgstr "Obraz: maksymalna zawartość światła"
+
+#: src/common/kax_element_names.cpp:135
+#, fuzzy
+msgid "Maximum frame light"
+msgstr "Wysokość w pikselach: %1%"
 
 #: src/common/property_element.cpp:180
 #, fuzzy
@@ -6907,6 +7043,11 @@ msgstr ""
 "  --attach-file-once <plik>\n"
 "                             Zapisuje załącznik tylko do\n"
 "                             pierwszego pliku Matroski.\n"
+
+#: src/common/kax_element_names.cpp:119
+#, fuzzy
+msgid "Maximum luminance"
+msgstr "Obraz: maksymalna jasność"
 
 #: src/common/property_element.cpp:190
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
@@ -6929,21 +7070,6 @@ msgstr "Pamięć dla klatki RealAudio/RealVideo nie może być przyporządkowana
 msgid "MicroDVD"
 msgstr "MicroDVD"
 
-#: src/common/kax_info.cpp:1228
-#, boost-format
-msgid "Mime type: %1%"
-msgstr "Typ Mime: %1%"
-
-#: src/common/kax_info.cpp:594
-#, boost-format
-msgid "Min luminance: %1%"
-msgstr "Minimalna jasność: %1%"
-
-#: src/common/kax_info.cpp:1015
-#, boost-format
-msgid "MinCache: %1%"
-msgstr "MinBufor: %1%"
-
 #: src/common/xml/ebml_converter.cpp:226
 #, boost-format
 msgid "Minimum allowed length: %1%, actual length: %2%"
@@ -6956,9 +7082,15 @@ msgstr "Minimalna dozwolona długość: %1%, aktualna długość: %2%"
 msgid "Minimum allowed value: %1%, actual value: %2%"
 msgstr "Minimalna dozwolona wartość: %1%, aktualna wartość: %2%"
 
+#: src/common/kax_element_names.cpp:194
 #: src/common/property_element.cpp:133
 msgid "Minimum cache"
 msgstr "Minimalny bufor"
+
+#: src/common/kax_element_names.cpp:120
+#, fuzzy
+msgid "Minimum luminance"
+msgstr "Obraz: minimalna jasność"
 
 #: src/common/property_element.cpp:191
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
@@ -7007,7 +7139,7 @@ msgstr "Tryby"
 msgid "Modification of properties in the section '%1%' was requested, but no corresponding level 1 element was found in the file. %2%\n"
 msgstr "Zostało wydane żądanie modyfikacji właściwości w sekcji \"%1%\", ale nie został znaleziony w pliku żaden odpowiedni element poziomu1. %2%\n"
 
-#: src/common/kax_info.cpp:1348
+#: src/common/kax_element_names.cpp:255
 msgid "More"
 msgstr "Więcej"
 
@@ -7058,21 +7190,17 @@ msgstr ""
 msgid "Multiplex job"
 msgstr "Multipleksowanie"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:185
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:355
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:229
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:181
 #, no-c-format
 msgid "Multiplexer"
 msgstr "Multiplekser"
 
+#: src/common/kax_element_names.cpp:86
 #: src/common/property_element.cpp:118
 msgid "Multiplexing application"
 msgstr "Aplikacja multipleksująca"
-
-#: src/common/kax_info.cpp:484
-#, boost-format
-msgid "Multiplexing application: %1%"
-msgstr "Aplikacja multipleksująca: %1%"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:185
 #, no-c-format
@@ -7097,6 +7225,8 @@ msgstr "Rozmiar NALU:"
 msgid "Na&me template:"
 msgstr "Nazwa szablon&u:"
 
+#: src/common/kax_element_names.cpp:184
+#: src/common/kax_element_names.cpp:305
 #: src/common/property_element.cpp:138
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
@@ -7125,11 +7255,6 @@ msgstr "Nazwa/Opis"
 msgid "Name:"
 msgstr "Nazwa:"
 
-#: src/common/kax_info.cpp:976
-#, boost-format
-msgid "Name: %1%"
-msgstr "Nazwa: %1%"
-
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:525
 msgid "Names"
 msgstr "Nazwy"
@@ -7149,23 +7274,19 @@ msgstr "Nigdy nie skanuj w poszukiwaniu innych list odtwarzania"
 msgid "New value:"
 msgstr "Nowa wartość:"
 
+#: src/common/kax_element_names.cpp:94
 #: src/common/property_element.cpp:113
 msgid "Next filename"
 msgstr "Nazwa pliku następującego"
 
-#: src/common/kax_info.cpp:513
-#, boost-format
-msgid "Next filename: %1%"
-msgstr "Nazwa pliku następującego: %1%"
+#: src/common/kax_element_names.cpp:93
+#, fuzzy
+msgid "Next segment UID"
+msgstr "UID następnego segmentu:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1735
 msgid "Next segment UID:"
 msgstr "UID następnego segmentu:"
-
-#: src/common/kax_info.cpp:510
-#, boost-format
-msgid "Next segment UID: %1%"
-msgstr "UID następnego segmentu: %1%"
 
 #: src/common/property_element.cpp:117
 msgid "Next segment's unique ID"
@@ -7205,7 +7326,7 @@ msgstr "Nie znaleziono nagłówka AC-3 w pierwszej klatce; ścieżka zostanie po
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nie znaleziono nagłówka DTS w pierwszych klatkach; ścieżka zostanie pominięta.\n"
 
-#: src/common/kax_info.cpp:1799
+#: src/common/kax_info.cpp:1166
 msgid "No EBML head found."
 msgstr "Nie znaleziono nagłówka EBML."
 
@@ -7724,14 +7845,10 @@ msgstr "Opus"
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus - pliki audio (w kontenerze OGG)"
 
+#: src/common/kax_element_names.cpp:164
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:259
 msgid "Order"
 msgstr "Kolejność"
-
-#: src/common/kax_info.cpp:805
-#, boost-format
-msgid "Order: %1%"
-msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
 #, no-c-format
@@ -7779,9 +7896,9 @@ msgstr "► Wyjście"
 msgid "Output messages in this charset"
 msgstr "Wyjściowe wiadomości w tym zestawie znaków"
 
-#: src/common/kax_info.cpp:538
-#, boost-format
-msgid "Output sampling frequency: %1%"
+#: src/common/kax_element_names.cpp:105
+#, fuzzy
+msgid "Output sampling frequency"
 msgstr "Wyjściowa częstotliwość próbkowania: %1%"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:393
@@ -7816,7 +7933,7 @@ msgstr "Pakiet o numerze %1% zawiera nieprawidłowy nagłówek FLAC i jest pomij
 msgid "Parse the whole file instead of relying on the index."
 msgstr "Analizuj cały plik zamiast polegać na indeksie."
 
-#: src/common/kax_info.cpp:1545
+#: src/common/kax_info.cpp:583
 msgid "Parsing file"
 msgstr "Analizowanie pliku"
 
@@ -7826,44 +7943,44 @@ msgstr "Analizowanie pliku"
 msgid "Parts:"
 msgstr "Fragmenty:"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:260
+#: src/mkvtoolnix-gui/jobs/job.cpp:265
 #, no-c-format
 msgid "Pending automatic start"
 msgstr "Czeka na automatyczny start"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:259
+#: src/mkvtoolnix-gui/jobs/job.cpp:264
 #, no-c-format
 msgid "Pending manual start"
 msgstr "Czeka na ręczny start"
 
-#: src/common/kax_info.cpp:728
-#, boost-format
-msgid "Pixel crop bottom: %1%"
+#: src/common/kax_element_names.cpp:152
+#, fuzzy
+msgid "Pixel crop bottom"
 msgstr "Ucięte piksele z dołu: %1%"
 
-#: src/common/kax_info.cpp:713
-#, boost-format
-msgid "Pixel crop left: %1%"
+#: src/common/kax_element_names.cpp:149
+#, fuzzy
+msgid "Pixel crop left"
 msgstr "Ucięte piksele z lewej: %1%"
 
-#: src/common/kax_info.cpp:723
-#, boost-format
-msgid "Pixel crop right: %1%"
+#: src/common/kax_element_names.cpp:151
+#, fuzzy
+msgid "Pixel crop right"
 msgstr "Ucięte piksele z prawej: %1%"
 
-#: src/common/kax_info.cpp:718
-#, boost-format
-msgid "Pixel crop top: %1%"
+#: src/common/kax_element_names.cpp:150
+#, fuzzy
+msgid "Pixel crop top"
 msgstr "Ucięte piksele u góry: %1%"
 
-#: src/common/kax_info.cpp:698
-#, boost-format
-msgid "Pixel height: %1%"
+#: src/common/kax_element_names.cpp:146
+#, fuzzy
+msgid "Pixel height"
 msgstr "Wysokość w pikselach: %1%"
 
-#: src/common/kax_info.cpp:693
-#, boost-format
-msgid "Pixel width: %1%"
+#: src/common/kax_element_names.cpp:145
+#, fuzzy
+msgid "Pixel width"
 msgstr "Szerokość w pikselach: %1%"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
@@ -7913,7 +8030,7 @@ msgstr[2] "Listy odtwarzania krótsze niż %1 sekund będą pomijane."
 msgid "Please enter the new job's description."
 msgstr "Proszę wpisać opis dla nowego zadania:"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:716
 #, no-c-format
 msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
@@ -7980,23 +8097,19 @@ msgstr "&Podgląd:"
 msgid "Pre&viously used destination directory"
 msgstr "&Poprzednio użyty katalog docelowy"
 
+#: src/common/kax_element_names.cpp:92
 #: src/common/property_element.cpp:112
 msgid "Previous filename"
 msgstr "Nazwa pliku poprzedzającego"
 
-#: src/common/kax_info.cpp:507
-#, boost-format
-msgid "Previous filename: %1%"
-msgstr "Nazwa pliku poprzedzającego: %1%"
+#: src/common/kax_element_names.cpp:91
+#, fuzzy
+msgid "Previous segment UID"
+msgstr "UID poprzedniego segmentu:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1733
 msgid "Previous segment UID:"
 msgstr "UID poprzedniego segmentu:"
-
-#: src/common/kax_info.cpp:504
-#, boost-format
-msgid "Previous segment UID: %1%"
-msgstr "UID poprzedniego segmentu: %1%"
 
 #: src/common/property_element.cpp:116
 msgid "Previous segment's unique ID"
@@ -8010,7 +8123,7 @@ msgstr ""
 msgid "Probe &range percentage:"
 msgstr "&Zakres procentowy pliku do analizy:"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:682
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:709
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
@@ -8068,30 +8181,30 @@ msgstr "Postęp: 100%%%1%"
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Postęp: [%1%%2%] %3%%%"
 
-#: src/common/kax_info.cpp:666
-#, fuzzy, boost-format
-msgid "Projection type: %1% (%2%)"
-msgstr "Typ proporcji obrazu: %1%%2%"
+#: src/common/kax_element_names.cpp:138
+#, fuzzy
+msgid "Projection type"
+msgstr "Typ proporcji obrazu"
 
-#: src/common/kax_info.cpp:675
-#, fuzzy, boost-format
-msgid "Projection's pitch rotation: %1%"
+#: src/common/kax_element_names.cpp:141
+#, fuzzy
+msgid "Projection's pitch rotation"
 msgstr "Program zapisujący: %1%"
 
-#: src/common/kax_info.cpp:669
-#, fuzzy, boost-format
-msgid "Projection's private data: %1%"
+#: src/common/kax_element_names.cpp:139
+#, fuzzy
+msgid "Projection's private data"
 msgstr "2: dane własne kodeka"
 
-#: src/common/kax_info.cpp:678
-#, boost-format
-msgid "Projection's roll rotation: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:142
+#, fuzzy
+msgid "Projection's roll rotation"
+msgstr "Program zapisujący: %1%"
 
-#: src/common/kax_info.cpp:672
-#, boost-format
-msgid "Projection's yaw rotation: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:140
+#, fuzzy
+msgid "Projection's yaw rotation"
+msgstr "Program zapisujący: %1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:155
 #: src/mkvtoolnix-gui/merge/track_model.cpp:54
@@ -8248,7 +8361,7 @@ msgstr "Moduł wczytujący Quicktime/MP4: ID ścieżki %1% posiada więcej niż 
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
-#: src/common/kax_info.cpp:876
+#: src/common/kax_info.cpp:782
 msgid "RSA"
 msgstr "RSA"
 
@@ -8287,7 +8400,7 @@ msgstr "Wczytywanie UID segmentu zakończone niepowodzeniem"
 msgid "Reads additional command line options from the specified JSON file (see man page)."
 msgstr "Wczytuje dodatkowe opcje linii komend z określonego pliku JSON (patrz dokumentacja)."
 
-#: src/info/qt_ui.cpp:202
+#: src/info/qt_ui.cpp:203
 #, no-c-format
 msgid "Ready"
 msgstr "Gotowe"
@@ -8316,14 +8429,12 @@ msgstr ""
 msgid "Red Y chromaticity coordinate as defined by CIE 1931."
 msgstr ""
 
-#: src/common/kax_info.cpp:567
-#, boost-format
-msgid "Red colour coordinate x: %1%"
+#: src/common/kax_element_names.cpp:111
+msgid "Red colour coordinate x"
 msgstr ""
 
-#: src/common/kax_info.cpp:570
-#, boost-format
-msgid "Red colour coordinate y: %1%"
+#: src/common/kax_element_names.cpp:112
+msgid "Red colour coordinate y"
 msgstr ""
 
 #: src/common/cli_parser.cpp:184
@@ -8334,24 +8445,17 @@ msgstr "Przekierowywuje wszystkie wiadomości do tego pliku."
 msgid "Reduce to core"
 msgstr "Zredukuj do rdzenia"
 
-#: src/common/kax_info.cpp:206
-#, boost-format
-msgid "Reference block: %1%.%|2$06d|ms"
+#: src/common/kax_element_names.cpp:241
+msgid "Reference block"
 msgstr ""
 
-#: src/common/kax_info.cpp:205
-#, boost-format
-msgid "Reference block: -%1%.%|2$06d|ms"
-msgstr ""
+#: src/common/kax_element_names.cpp:242
+#, fuzzy
+msgid "Reference priority"
+msgstr "Niższy priorytet"
 
-#: src/common/kax_info.cpp:207
-#, boost-format
-msgid "Reference priority: %1%"
-msgstr ""
-
-#: src/common/kax_info.cpp:209
-#, boost-format
-msgid "Reference virtual: %1%"
+#: src/common/kax_element_names.cpp:244
+msgid "Reference virtual"
 msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
@@ -8508,7 +8612,7 @@ msgstr "Użyj PPM, aby dodać, zaznaczyć lub usunąć załączniki"
 msgid "Right-click to add, append and remove files"
 msgstr "Użyj PPM, aby dodać, scalić lub usunąć pliki"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:261
+#: src/mkvtoolnix-gui/jobs/job.cpp:266
 #, no-c-format
 msgid "Running"
 msgstr "W trakcie"
@@ -8536,7 +8640,7 @@ msgstr "Pokaż linię komen&d"
 msgid "S&top job queue"
 msgstr "Za&trzymaj kolejkę zadań"
 
-#: src/common/kax_info.cpp:885
+#: src/common/kax_info.cpp:791
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
@@ -8564,14 +8668,14 @@ msgstr "&Ten sam katalog, co pierwszy plik źródłowy"
 msgid "Sa&ve settings as"
 msgstr "Zapisz ustawienia &jako"
 
+#: src/common/kax_element_names.cpp:104
+#, fuzzy
+msgid "Sampling frequency"
+msgstr "Częstotliwość próbkowania: %1%"
+
 #: src/common/property_element.cpp:203
 msgid "Sampling frequency in Hz."
 msgstr "Częstotliwość dźwięku w Hz."
-
-#: src/common/kax_info.cpp:533
-#, boost-format
-msgid "Sampling frequency: %1%"
-msgstr "Częstotliwość próbkowania: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:582
 msgid "Save as &XML file"
@@ -8672,9 +8776,8 @@ msgstr "Skanowanie katalogu"
 msgid "Scanning playlists"
 msgstr "Skanowanie list odtwarzania Blu-ray"
 
-#: src/common/kax_info.cpp:819
-#, boost-format
-msgid "Scope: %1% (%2%)"
+#: src/common/kax_element_names.cpp:165
+msgid "Scope"
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:102
@@ -8682,46 +8785,43 @@ msgstr ""
 msgid "See below for examples."
 msgstr "Zobacz poniższe przykłady."
 
-#: src/common/kax_info.cpp:1107
-#, boost-format
-msgid "Seek ID: %1% (%2%)"
+#: src/common/kax_element_names.cpp:208
+msgid "Seek ID"
 msgstr ""
 
-#: src/common/kax_info.cpp:1099
+#: src/common/kax_element_names.cpp:207
 msgid "Seek entry"
 msgstr ""
 
-#: src/common/kax_info.cpp:1090
+#: src/common/kax_element_names.cpp:206
 msgid "Seek head"
 msgstr ""
 
-#: src/common/kax_info.cpp:1086
+#: src/common/kax_info.cpp:516
 msgid "Seek head (subentries will be skipped)"
 msgstr "Seek head (podrzędne pozycje zostaną pominięte)"
 
-#: src/common/kax_info.cpp:1120
-#, boost-format
-msgid "Seek position: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:209
+#, fuzzy
+msgid "Seek position"
+msgstr ", pozycja %1%"
 
-#: src/common/kax_info.cpp:1060
-#, boost-format
-msgid "Seek pre-roll: %|1$.3f|ms (%2%ns)"
+#: src/common/kax_element_names.cpp:204
+msgid "Seek pre-roll"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:522
 msgid "Seg&ment UID:"
 msgstr "UID seg&mentu:"
 
-#: src/info/qt_ui.cpp:224
-#, no-c-format
+#: src/common/kax_element_names.cpp:82
 msgid "Segment"
 msgstr "Segment"
 
-#: src/common/kax_info.cpp:495
-#, boost-format
-msgid "Segment UID: %1%"
-msgstr "UID obecnego segmentu: %1%"
+#: src/common/kax_element_names.cpp:89
+#, fuzzy
+msgid "Segment UID"
+msgstr "UID obecnego segmentu:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1731
 msgid "Segment UIDs:"
@@ -8731,47 +8831,26 @@ msgstr "UID obecnego segmentu:"
 msgid "Segment e&dition UID:"
 msgstr "UID e&dycji segmentu:"
 
+#: src/common/kax_element_names.cpp:95
 #: src/common/property_element.cpp:111
 msgid "Segment filename"
 msgstr "Nazwa segmentu"
-
-#: src/common/kax_info.cpp:516
-#, boost-format
-msgid "Segment filename: %1%"
-msgstr "Nazwa segmentu: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Segment info:"
 msgstr "Informacja o segmencie:"
 
-#: src/common/kax_info.cpp:462
-#: src/info/qt_ui.cpp:225
+#: src/common/kax_element_names.cpp:83
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:464
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
-#, no-c-format
 msgid "Segment information"
 msgstr "Informacje o segmencie"
-
-#: src/common/kax_info.cpp:910
-#: src/info/qt_ui.cpp:226
-#, no-c-format
-msgid "Segment tracks"
-msgstr "Ścieżki segmentu"
 
 #: src/common/property_element.cpp:114
 msgid "Segment unique ID"
 msgstr "Unikalny ID segmentu"
-
-#: src/common/kax_info.cpp:1697
-#, boost-format
-msgid "Segment, size %1%"
-msgstr "Segment, rozmiar %1%"
-
-#: src/common/kax_info.cpp:1695
-msgid "Segment, size unknown"
-msgstr "Segment, rozmiar nieznany"
 
 #: src/mkvtoolnix-gui/util/widget.cpp:175
 #, no-c-format
@@ -8971,14 +9050,10 @@ msgstr "Ustawia UID segmentu, który ma być użyty."
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "Ustawia tryb stereo wybranej ścieżki wideo na podaną wartość."
 
+#: src/common/kax_element_names.cpp:169
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1756
 msgid "Settings"
 msgstr "Ustawienia"
-
-#: src/common/kax_info.cpp:846
-#, boost-format
-msgid "Settings: %1%"
-msgstr "Ustawienia: %1%"
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -8990,7 +9065,7 @@ msgstr "Krótki pakiet dźwięku AAC (długość: %1% < %2%)\n"
 msgid "Short AAC audio packet (length: %1% < 2)\n"
 msgstr "Krótki pakiet dźwięku AAC (długość: %1% < 2)\n"
 
-#: src/info/ui/mainwindow.h:119
+#: src/info/forms/mainwindow.h:119
 msgid "Show &all elements"
 msgstr "Pok&aż wszystkie elementy"
 
@@ -9056,30 +9131,40 @@ msgstr "Wyłącz komputer"
 msgid "Shut down the system in one minute:"
 msgstr "Zamknij system za 1 minutę:"
 
-#: src/common/kax_info.cpp:873
-#, boost-format
-msgid "Signature algorithm: %1% (%2%)"
-msgstr "Algorytm sygnatury: %1% (%2%)"
-
-#: src/common/kax_info.cpp:882
-#, boost-format
-msgid "Signature hash algorithm: %1% (%2%)"
-msgstr "\"Hash\" algorytm sygnatury: %1% (%2%)"
-
-#: src/common/kax_info.cpp:890
-#, boost-format
-msgid "Signature key ID: %1%"
-msgstr "Klucz ID sygnatury: %1%"
-
-#: src/common/kax_info.cpp:893
-#, boost-format
-msgid "Signature: %1%"
+#: src/common/kax_element_names.cpp:176
+#, fuzzy
+msgid "Signature"
 msgstr "Sygnatura: %1%"
 
-#: src/common/kax_info.cpp:1249
-#, boost-format
-msgid "Silent Track Number: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:173
+#, fuzzy
+msgid "Signature algorithm"
+msgstr "brak algorytmu sygnatury"
+
+#: src/common/kax_element_names.cpp:174
+#, fuzzy
+msgid "Signature hash algorithm"
+msgstr "brak algorytmu hasha sygnatury"
+
+#: src/common/kax_element_names.cpp:175
+#, fuzzy
+msgid "Signature key ID"
+msgstr "Klucz ID sygnatury: %1%"
+
+#: src/common/kax_element_names.cpp:236
+#, fuzzy
+msgid "Silent track number"
+msgstr "Numer ścieżki"
+
+#: src/common/kax_element_names.cpp:235
+#, fuzzy
+msgid "Silent tracks"
+msgstr "Ścieżki segmentu"
+
+#: src/common/kax_element_names.cpp:304
+#, fuzzy
+msgid "Simple"
+msgstr "SimpleBlock"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
 #: src/mkvtoolnix-gui/merge/output.cpp:476
@@ -9087,15 +9172,15 @@ msgstr ""
 msgid "Simple OGM-style chapter files"
 msgstr "Proste pliki rozdziałów typu OGM"
 
+#: src/common/kax_element_names.cpp:258
+#, fuzzy
+msgid "Simple block"
+msgstr "SimpleBlock"
+
 #: src/common/chapters/chapters.cpp:56
 #, boost-format
 msgid "Simple chapter parser: %1%\n"
 msgstr ""
-
-#: src/common/kax_info.cpp:221
-#, boost-format
-msgid "SimpleBlock (%1%track number %2%, %3% frame(s), timestamp %|4$.3f|s = %5%)"
-msgstr "SimpleBlock (%1%numer ściezki %2%, %3% klatka(ek/i), kod czasowy %|4$.3f|s = %5%)"
 
 #: src/mpegparser/M2VParser.cpp:399
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
@@ -9136,7 +9221,7 @@ msgstr "Pomijanie %1% bajtów na początku pliku (nie znaleziono prawidłowego n
 msgid "Sleep the computer"
 msgstr "Uśpij komputer"
 
-#: src/common/kax_info.cpp:1364
+#: src/common/kax_element_names.cpp:256
 msgid "Slices"
 msgstr ""
 
@@ -9163,6 +9248,11 @@ msgstr "Plik źródłowy"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Source file name"
+msgstr "Nazwa pliku źródłowego"
+
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:101
+#, fuzzy, no-c-format
+msgid "Source file name: %1"
 msgstr "Nazwa pliku źródłowego"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
@@ -9264,7 +9354,7 @@ msgstr "Uruchom interfejs graficzny (i otwórz plik, jeśli podano jego nazwę).
 msgid "Started at:"
 msgstr "Rozpoczęto o:"
 
-#: src/common/kax_info.cpp:1760
+#: src/common/kax_info.cpp:1116
 #, boost-format
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
 msgstr "Statystyki dla ścieżki numer %1%: liczba bloków: %2%; rozmiar w bajtach: %3%; czas trwania w sekundach: %4%; przybliżona przepływność w bitach/sekundę: %5%\n"
@@ -9282,15 +9372,15 @@ msgstr "Status"
 msgid "Status:"
 msgstr "Status:"
 
+#: src/common/kax_element_names.cpp:157
+#, fuzzy
+msgid "Stereo mode"
+msgstr "Tryb stereo obrazu"
+
 #: src/merge/mkvmerge.cpp:936
 #, boost-format
 msgid "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and %1% or one of these keywords: %2% (argument was '%3%').\n"
 msgstr "Parametr trybu stereo: nie podano go w formie <TID>:<n|parametr> gdzie n to liczba pomiędzy 0 i %1% lub nie podano jednego ze słowa kluczy: %2% (parametr miał wartość \"%3%\").\n"
-
-#: src/common/kax_info.cpp:765
-#, boost-format
-msgid "Stereo mode: %1% (%2%)"
-msgstr "Tryb stereo: %1% (%2%)"
 
 #: src/common/property_element.cpp:159
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
@@ -9313,6 +9403,7 @@ msgstr ""
 msgid "Stretch by:"
 msgstr "Rozciągnij ścieżkę o:"
 
+#: src/common/kax_element_names.cpp:306
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:153
 #, no-c-format
 msgid "String"
@@ -9367,7 +9458,12 @@ msgstr "TTA (The lossless True Audio codec)"
 msgid "Tab &position in tab widgets:"
 msgstr "&Położenie zakładek w kartach:"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:354
+#: src/common/kax_element_names.cpp:296
+#, fuzzy
+msgid "Tag"
+msgstr "Tagi"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
 msgid "Tag editor"
 msgstr "Edytor tagów"
@@ -9376,11 +9472,20 @@ msgstr "Edytor tagów"
 msgid "Tag extraction"
 msgstr "Wyodrębnianie tagów"
 
+#: src/common/kax_element_names.cpp:308
+#, fuzzy
+msgid "Tag language"
+msgstr "Język"
+
+#: src/common/kax_element_names.cpp:309
+msgid "Tag language (IETF)"
+msgstr ""
+
 #: src/propedit/propedit_cli_parser.cpp:256
 msgid "Tag selectors"
 msgstr "Selektory tagów"
 
-#: src/common/kax_info.cpp:1631
+#: src/common/kax_element_names.cpp:295
 #: src/mkvtoolnix-gui/merge/track.cpp:410
 #: src/propedit/options.cpp:204
 #, no-c-format
@@ -9402,6 +9507,18 @@ msgstr[2] "Tagi dla ID ścieżki %1%: %2% pozycji"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1683
 msgid "Tags:"
 msgstr "Tagi:"
+
+#: src/common/kax_element_names.cpp:302
+msgid "Target type"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:303
+msgid "Target type value"
+msgstr ""
+
+#: src/common/kax_element_names.cpp:297
+msgid "Targets"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 #, no-c-format
@@ -9958,6 +10075,11 @@ msgstr "Plik \"%1%\" nie mógł zostać otwarty w celu wczytania: %2%."
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
 msgstr "Plik \"%1%\" nie mógł zostać otwarty w celu wczytania: %2%\n"
 
+#: src/common/kax_info.cpp:1155
+#, fuzzy, boost-format
+msgid "The file '%1%' could not be opened for writing: %2%."
+msgstr "Plik \"%1%\" nie mógł zostać otwarty w celu zapisania: %2%\n"
+
 #: src/extract/attachments.cpp:121
 #: src/extract/cues.cpp:74
 #: src/extract/mkvextract.cpp:82
@@ -10002,7 +10124,7 @@ msgstr "Plik \"%1\" zawiera informacje o segmencie."
 msgid "The file '%1' contains tags."
 msgstr "Plik \"%1\" zawiera tagi."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:658
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:685
 #, no-c-format
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "Nie znaleziono pliku \"%1\" w folderze instalacyjnym."
@@ -10148,8 +10270,8 @@ msgstr "Plik nie został rozpoznany jako obsługiwany format (kod wyjściowy: %1
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1577
-#: src/input/r_matroska.cpp:2260
+#: src/input/r_matroska.cpp:1574
+#: src/input/r_matroska.cpp:2257
 msgid "The file will not be processed further."
 msgstr "Plik nie może być dalej przetwarzany."
 
@@ -10364,13 +10486,13 @@ msgstr ""
 "Jeśli parametr ustawimy na 0, wtedy pseudo\n"
 "bufor nie zostanie użyty."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:666
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:693
 #, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
 msgstr "Plik wykonywalny mkvmerge został znaleziony, ale nie mógł zostać uruchomiony."
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:170
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:662
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:76
 #, no-c-format
 msgid "The mkvmerge executable was not found."
@@ -10826,12 +10948,12 @@ msgstr "Wartość może być ujemna, ale miej na uwadze, że każda klatka, któ
 msgid "The values are only stored in the track headers."
 msgstr "Wartości są przechowywane w nagłówkach ścieżek."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:670
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:697
 #, fuzzy, no-c-format
 msgid "The version line reported by mkvmerge ('%1') could not be recognized."
 msgstr "Ten typ pliku \"%1%\" nie mógł zostać rozpoznany.\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:674
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:701
 #, no-c-format
 msgid "The versions of mkvmerge (%1) and the GUI (%2) differ."
 msgstr "Wersje mkvmerge (%1) oraz MKVToolNix GUI (%2) różnią się."
@@ -10854,7 +10976,7 @@ msgstr "Nie ma żadnych danych cue dla ID ścieżki %1%.\n"
 msgid "There is a new version available online."
 msgstr "Dostępna jest nowa wersja programu."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:387
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:414
 #, no-c-format
 msgid "There is currently a job running."
 msgstr "Obecnie istnieje co najmniej jedno trwające zadanie."
@@ -11001,7 +11123,7 @@ msgstr "Ta funkcja wymaga posiadania aplikacji %1."
 msgid "This happens when clicking the \"abort job\" button in a \"job output\" tab and when quitting the application."
 msgstr "Dzieje się to w przypadku kliknięcia przycisku \"Przerwij zadanie\" w sekcji \"Postęp zadań\" oraz kiedy aplikacja jest zamykana."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:138
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:137
 #, no-c-format
 msgid "This has not been implemented yet."
 msgstr "Ta funkcja nie została jeszcze zaimplementowana."
@@ -11175,8 +11297,8 @@ msgstr "Opcja określa, czy wybrana ścieżka zawiera dane SBR AAC/HE-AAC/AAC+."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1577
-#: src/input/r_matroska.cpp:2260
+#: src/input/r_matroska.cpp:1574
+#: src/input/r_matroska.cpp:2257
 msgid "This usually indicates a damaged file structure."
 msgstr "Zazwyczaj oznacza uszkodzoną strukturę plików."
 
@@ -11203,7 +11325,7 @@ msgstr "To działa ze ścieżkami wszystkich rodzajów."
 msgid "This would cause mkvmerge to overwrite one of your source files."
 msgstr "To spowodowałoby nadpisanie jednego z Twoich plików źródłowych przez mkvmerge."
 
-#: src/common/kax_info.cpp:1368
+#: src/common/kax_element_names.cpp:257
 msgid "Time slice"
 msgstr ""
 
@@ -11215,10 +11337,10 @@ msgstr "Wyodrębnianie kodów czasowych"
 msgid "Timestamp file:"
 msgstr "Plik z kodami czasowymi:"
 
-#: src/common/kax_info.cpp:474
-#: src/common/kax_info.cpp:1046
-#, boost-format
-msgid "Timestamp scale: %1%"
+#: src/common/kax_element_names.cpp:84
+#: src/common/kax_element_names.cpp:201
+#, fuzzy
+msgid "Timestamp scale"
 msgstr "Skalowanie kodów czasowych: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
@@ -11231,14 +11353,10 @@ msgstr "Kody czasowe i domyślny czas trwania"
 msgid "Timestamps:"
 msgstr "Kody czasowe:"
 
+#: src/common/kax_element_names.cpp:96
 #: src/common/property_element.cpp:109
 msgid "Title"
 msgstr "Tytuł"
-
-#: src/common/kax_info.cpp:519
-#, boost-format
-msgid "Title: %1%"
-msgstr "Tytuł: %1%"
 
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, no-c-format
@@ -11254,6 +11372,11 @@ msgstr "Góra"
 msgid "Trac&k name:"
 msgstr "Naz&wa ścieżki:"
 
+#: src/common/kax_element_names.cpp:179
+#, fuzzy
+msgid "Track"
+msgstr "Ścieżki:"
+
 #: src/extract/xtr_avc.cpp:137
 #: src/extract/xtr_hdmv_textst.cpp:44
 #: src/extract/xtr_hdmv_textst.cpp:63
@@ -11267,7 +11390,7 @@ msgstr "CodecPrivate ścieżki %1% jest za mały.\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "Ścieżka %1% została skompresowana przy pomocy nieznanego/nieobsługiwanego algorytmu kompresji (%2%).\n"
 
-#: src/input/r_matroska.cpp:1279
+#: src/input/r_matroska.cpp:1276
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Ścieżka %1% nie posiada UID ścieżki, który powinien być obowiązkowo obecny, aby być zgodnym ze specyfikacją Matroski. Jeśli plik zawiera tagi, wtedy te tagi mogą być uszkodzone.\n"
@@ -11315,7 +11438,7 @@ msgstr "Ścieżka %1% z CodecID \"%2%\" nie posiada elementu \"dane własne kode
 msgid "Track %1% with the CodecID '%2%' is missing the \"default duration\" element and cannot be extracted.\n"
 msgstr "Ścieżka %1% z CodecID \"%2%\" nie posiada elementu \"czas trwania\" i nie może być wyodrębniona.\n"
 
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:622
 #, boost-format
 msgid "Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 msgstr "Ścieżka %1%: %2%, ID kodeka: %3%%4%%5%%6%\n"
@@ -11364,14 +11487,11 @@ msgstr "ID ścieżki %1%: %2% (%3%)"
 msgid "Track ID for mkvmerge & mkvextract:"
 msgstr "ID ścieżki dla mkvmerge i mkvextract:"
 
+#: src/common/kax_element_names.cpp:181
+#: src/common/kax_element_names.cpp:298
 #: src/common/property_element.cpp:124
 msgid "Track UID"
 msgstr "UID ścieżki"
-
-#: src/common/kax_info.cpp:953
-#, boost-format
-msgid "Track UID: %1%"
-msgstr "UID ścieżki: %1%"
 
 #: src/extract/extract_cli_parser.cpp:73
 msgid "Track extraction"
@@ -11383,6 +11503,7 @@ msgstr "Wyodrębnianie ścieżek"
 msgid "Track headers"
 msgstr "Nagłówki ścieżki"
 
+#: src/common/kax_element_names.cpp:180
 #: src/common/property_element.cpp:123
 msgid "Track number"
 msgstr "Numer ścieżki"
@@ -11398,20 +11519,20 @@ msgstr "Ścieżka o numerze %1% została zaszyfrowana, a deszyfrowanie nie zosta
 msgid "Track number for mkvpropedit:"
 msgstr "Numer ścieżki dla mkvpropedit:"
 
-#: src/common/kax_info.cpp:948
-#, boost-format
-msgid "Track number: %1% (track ID for mkvmerge & mkvextract: %2%)"
-msgstr "Numer ścieżki: %1% (ID ścieżki dla mkvmerge i mkvextract: %2%)"
+#: src/common/kax_element_names.cpp:193
+#, fuzzy
+msgid "Track overlay"
+msgstr "Numer ścieżki"
 
-#: src/common/kax_info.cpp:1011
-#, boost-format
-msgid "Track overlay: %1%"
-msgstr ""
-
-#: src/common/kax_info.cpp:963
-#, boost-format
-msgid "Track type: %1%"
+#: src/common/kax_element_names.cpp:182
+#, fuzzy
+msgid "Track type"
 msgstr "Rodzaj ścieżki: %1%"
+
+#: src/common/kax_element_names.cpp:178
+#, fuzzy
+msgid "Tracks"
+msgstr "Ścieżki:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:364
 #, no-c-format
@@ -11441,6 +11562,7 @@ msgstr "Dwie ścieżki VobSub mogą być wyodrębnione do tego samego pliku, tyl
 msgid "Two files multiplexed with the same settings and this switch activated will be identical."
 msgstr "Dwa pliki będą identyczne, jeśli zostaną zmultipleksowane z tymi samymi ustawieniami i z włączoną tą opcją."
 
+#: src/common/kax_element_names.cpp:166
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:253
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:148
 #: src/mkvtoolnix-gui/jobs/model.cpp:53
@@ -11468,11 +11590,6 @@ msgstr "Ustawienia"
 #, no-c-format
 msgid "Type:"
 msgstr "Typ:"
-
-#: src/common/kax_info.cpp:824
-#, boost-format
-msgid "Type: %1% (%2%)"
-msgstr "Typ: %1% (%2%)"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:152
 #, no-c-format
@@ -11502,10 +11619,10 @@ msgstr "Nie można scalić plików"
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Nieoczekiwanie natrafiono na klatkę obrazu po wystąpieniu pojedynczego pola. Napraw ścieżkę MPEG2, zanim będziesz próbować ją multipleksować.\n"
 
-#: src/common/kax_info.cpp:368
-#: src/common/kax_info.cpp:377
+#: src/common/kax_info.cpp:404
+#: src/common/kax_info.cpp:413
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
-#: src/mkvtoolnix-gui/jobs/job.cpp:267
+#: src/mkvtoolnix-gui/jobs/job.cpp:272
 #, no-c-format
 msgid "Unknown"
 msgstr "Nieznany"
@@ -11525,7 +11642,7 @@ msgstr "Nieznany format rozdziału w \"%1%\". Plik nie zawiera wspieranego forma
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "Nieznany typ kodowania zawartości %1% dla ścieżki %2%.\n"
 
-#: src/common/kax_info.cpp:1813
+#: src/common/kax_info.cpp:1186
 msgid "Unknown element"
 msgstr "Nieznany element"
 
@@ -11605,7 +11722,7 @@ msgstr "Brak wsparcia dla MPEG mpeg_version: 0x%|1$02x| w pakiecie %2% dla kodu 
 msgid "Unsupported file format"
 msgstr "Format nieobsługiwany"
 
-#: src/input/r_matroska.cpp:2068
+#: src/input/r_matroska.cpp:2065
 msgid "Unsupported track type for this track.\n"
 msgstr "Ten typ ścieżki nie jest obsługiwany.\n"
 
@@ -11666,7 +11783,7 @@ msgstr "Użycie NALU o rozmiarze 3 bajtów może spowodować niemożność zdeko
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Użycie demultipleksera dla formatu \"%1%\".\n"
 
-#: src/input/r_matroska.cpp:1606
+#: src/input/r_matroska.cpp:1603
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Użycie ogólnego modułu wyjścia dla ścieżki typu \"%1%\".\n"
@@ -11730,19 +11847,19 @@ msgstr "Wersja %1"
 msgid "Version %1 \"%2\""
 msgstr "Wersja %1 \"%2\""
 
-#: src/common/kax_info.cpp:622
-#, fuzzy, boost-format
-msgid "Vertical Cb subsample: %1%"
+#: src/common/kax_element_names.cpp:128
+#, fuzzy
+msgid "Vertical Cb subsample"
 msgstr "głębia bitów: %1%"
 
-#: src/common/kax_info.cpp:628
-#, boost-format
-msgid "Vertical chroma siting: %1%"
-msgstr ""
+#: src/common/kax_element_names.cpp:130
+#, fuzzy
+msgid "Vertical chroma siting"
+msgstr "Obcięcie obrazu z prawej"
 
-#: src/common/kax_info.cpp:616
-#, fuzzy, boost-format
-msgid "Vertical chroma subsample: %1%"
+#: src/common/kax_element_names.cpp:126
+#, fuzzy
+msgid "Vertical chroma subsample"
 msgstr "głębia bitów: %1%"
 
 #: src/output/p_video_for_windows.h:37
@@ -11759,12 +11876,12 @@ msgstr "Wideo"
 msgid "Video aspect ratio type"
 msgstr "Typ proporcji obrazu"
 
-#: src/common/kax_info.cpp:603
+#: src/common/kax_element_names.cpp:122
 #, fuzzy
 msgid "Video colour information"
 msgstr "DV wideo format"
 
-#: src/common/kax_info.cpp:563
+#: src/common/kax_element_names.cpp:110
 msgid "Video colour mastering metadata"
 msgstr ""
 
@@ -11817,7 +11934,7 @@ msgstr "Wysokość pikseli obrazu"
 msgid "Video pixel width"
 msgstr "Szerokość pikseli obrazu"
 
-#: src/common/kax_info.cpp:655
+#: src/common/kax_element_names.cpp:137
 #, fuzzy
 msgid "Video projection"
 msgstr "Właściwości obrazu"
@@ -11836,7 +11953,7 @@ msgstr "Właściwości obrazu"
 msgid "Video stereo mode"
 msgstr "Tryb stereo obrazu"
 
-#: src/common/kax_info.cpp:688
+#: src/common/kax_element_names.cpp:144
 msgid "Video track"
 msgstr "Ścieżka wideo"
 
@@ -12017,7 +12134,7 @@ msgid "Warning in line %1%: The start timestamp is smaller than that of the prev
 msgstr "Ostrzeżenie w linii %1%: Czas rozpoczęcia jest wcześniejszy od tego z poprzedniej linii. Wszystkie pozycje z tego pliku będą ustawione wg czasu rozpoczęcia.\n"
 
 #: src/common/output.cpp:138
-#: src/mkvtoolnix-gui/jobs/job.cpp:245
+#: src/mkvtoolnix-gui/jobs/job.cpp:250
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:317
 #, no-c-format
 msgid "Warning:"
@@ -12127,14 +12244,12 @@ msgstr ""
 msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
 msgstr ""
 
-#: src/common/kax_info.cpp:585
-#, boost-format
-msgid "White colour coordinate x: %1%"
+#: src/common/kax_element_names.cpp:117
+msgid "White colour coordinate x"
 msgstr ""
 
-#: src/common/kax_info.cpp:588
-#, boost-format
-msgid "White colour coordinate y: %1%"
+#: src/common/kax_element_names.cpp:118
+msgid "White colour coordinate y"
 msgstr ""
 
 #: src/common/property_element.cpp:147
@@ -12183,14 +12298,10 @@ msgstr "Zapisuje załącznik z ID \"AID\" to \"outname\"."
 msgid "Write track with the ID TID to the file 'out'."
 msgstr "Zapisuje ścieżkę z ID TID to pliku \"out\"."
 
+#: src/common/kax_element_names.cpp:87
 #: src/common/property_element.cpp:119
 msgid "Writing application"
 msgstr "Aplikacja zapisująca"
-
-#: src/common/kax_info.cpp:487
-#, boost-format
-msgid "Writing application: %1%"
-msgstr "Program zapisujący: %1%"
 
 #: src/extract/xtr_vobsub.cpp:232
 #, boost-format
@@ -12360,8 +12471,8 @@ msgstr "Możesz pominąć liczbę godzin \"GG\"."
 msgid "Zlib decompression failed. Result: %1%\n"
 msgstr "Dekompresja zlib niepomyślna. Wynik: %1%\n"
 
-#: src/common/kax_info.cpp:220
-#: src/common/kax_info.cpp:224
+#: src/common/kax_info.cpp:188
+#: src/common/kax_info.cpp:192
 #, boost-format
 msgid "[%1% frame for track %2%, timestamp %3%]"
 msgstr "[%1% klatka ścieżki %2%, kod czasowy %3%]"
@@ -12383,12 +12494,12 @@ msgstr "Anaglif (zielony/magenta)"
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "mkvextract attachments <nazwa pliku> [opcje] [AID1:out1 [AID2:out2 ...]]"
 
-#: src/common/kax_info.cpp:1068
+#: src/common/kax_info.cpp:624
 #: src/input/r_matroska.cpp:110
 msgid "audio"
 msgstr "audio"
 
-#: src/common/kax_info.cpp:555
+#: src/common/kax_info.cpp:593
 #, boost-format
 msgid "bits per sample: %1%"
 msgstr "głębia bitów: %1%"
@@ -12401,20 +12512,20 @@ msgstr "Obydwa widoki w jednym bloku (lewe pierwsze)"
 msgid "both eyes laced in one block (right first)"
 msgstr "Obydwa widoki w jednym bloku (prawe pierwsze)"
 
-#: src/common/kax_info.cpp:757
+#: src/common/kax_info.cpp:707
 msgid "bottom field displayed first, bottom field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:758
+#: src/common/kax_info.cpp:708
 msgid "bottom field displayed first, top field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:1071
+#: src/common/kax_info.cpp:627
 #: src/input/r_matroska.cpp:111
 msgid "buttons"
 msgstr "przyciski"
 
-#: src/common/kax_info.cpp:544
+#: src/common/kax_info.cpp:592
 #, boost-format
 msgid "channels: %1%"
 msgstr "kanały: %1%"
@@ -12439,7 +12550,7 @@ msgstr "Pionowy przeplot (lewe pierwsze)"
 msgid "column interleaved (right first)"
 msgstr "Pionowy przeplot (prawe pierwsze)"
 
-#: src/common/kax_info.cpp:826
+#: src/common/kax_info.cpp:748
 msgid "compression"
 msgstr "kompresja"
 
@@ -12448,7 +12559,7 @@ msgstr "kompresja"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: nie znaleziono file_num. %1%\n"
 
-#: src/common/kax_info.cpp:662
+#: src/common/kax_info.cpp:682
 msgid "cubemap"
 msgstr ""
 
@@ -12461,7 +12572,7 @@ msgstr "mkvextract cues <nazwa pliku> [opcje] [TID1:out1 [TID2:out2 ...]]"
 msgid "cuesheet [options] out.cue"
 msgstr ""
 
-#: src/common/kax_info.cpp:1026
+#: src/common/kax_info.cpp:612
 #, boost-format
 msgid "default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
 msgstr "domyślny czas trwania: %|1$.3f|ms (%|2$.3f| kl/s dla pliku wideo)"
@@ -12471,25 +12582,25 @@ msgstr "domyślny czas trwania: %|1$.3f|ms (%|2$.3f| kl/s dla pliku wideo)"
 msgid "deflateInit() failed. Result: %1%\n"
 msgstr "deflateInit() zakończone niepowodzeniem. Wynik: %1%\n"
 
-#: src/common/kax_info.cpp:1473
+#: src/common/kax_info.cpp:965
 msgid "discardable, "
 msgstr ""
 
-#: src/common/kax_info.cpp:709
+#: src/common/kax_info.cpp:598
 #, boost-format
 msgid "display height: %1%"
 msgstr "wyświetlana wysokość: %1%"
 
-#: src/common/kax_info.cpp:704
+#: src/common/kax_info.cpp:597
 #, boost-format
 msgid "display width: %1%"
 msgstr "wyświetlana szerokość: %1%"
 
-#: src/common/kax_info.cpp:827
+#: src/common/kax_info.cpp:749
 msgid "encryption"
 msgstr "szyfrowanie"
 
-#: src/common/kax_info.cpp:661
+#: src/common/kax_info.cpp:681
 msgid "equirectangular"
 msgstr ""
 
@@ -12561,7 +12672,7 @@ msgstr ""
 msgid "have an xcptn\n"
 msgstr "posiada xcptn\n"
 
-#: src/common/kax_info.cpp:842
+#: src/common/kax_info.cpp:760
 msgid "header removal"
 msgstr "kompresja nagłówków"
 
@@ -12570,16 +12681,16 @@ msgstr "kompresja nagłówków"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() zakończone niepowodzeniem. Wynik: %1%\n"
 
-#: src/common/kax_info.cpp:1471
+#: src/common/kax_info.cpp:963
 msgid "key, "
 msgstr "klucz,"
 
-#: src/common/kax_info.cpp:1043
+#: src/common/kax_info.cpp:603
 #, boost-format
 msgid "language: %1%"
 msgstr "język: %1%"
 
-#: src/common/kax_info.cpp:200
+#: src/common/kax_info.cpp:181
 #, boost-format
 msgid "length %1%, data: %2%"
 msgstr "długość %1%, dane: %2%"
@@ -12614,25 +12725,25 @@ msgstr "matroska_reader: (tryb kompatybilności z MS dla ścieżki %1%) Matroska
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (tryb kompatybilności z MS dla ścieżki %1%) Matroska mówi, że szerokość obrazu to %2%, ale BITMAPINFOHEADER podaje %3%.\n"
 
-#: src/input/r_matroska.cpp:1268
+#: src/input/r_matroska.cpp:1265
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: Ścieżka nie posiada numeru ścieżki.\n"
 
-#: src/input/r_matroska.cpp:1668
+#: src/input/r_matroska.cpp:1665
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: Nie można przyjąć UID ścieżki - %1%, ponieważ jest on już przyporządkowany dla nowego pliku.\n"
 
-#: src/input/r_matroska.cpp:1516
-#: src/input/r_matroska.cpp:1521
+#: src/input/r_matroska.cpp:1513
+#: src/input/r_matroska.cpp:1518
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Nie znaleziono segmentu.\n"
 
-#: src/input/r_matroska.cpp:1231
+#: src/input/r_matroska.cpp:1228
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Brakuje wartości wysokości piksela.\n"
 
-#: src/input/r_matroska.cpp:1229
+#: src/input/r_matroska.cpp:1226
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Brakuje wartości szerokości piksela.\n"
 
@@ -12671,7 +12782,7 @@ msgstr "matroska_reader: CodecID dla ścieżki %1% to \"%2%\", jednakże brak je
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader: CodecID dla ścieżki %1% to \"%2%\", jednakże brak jest danych własnych.\n"
 
-#: src/input/r_matroska.cpp:1325
+#: src/input/r_matroska.cpp:1322
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: Brakuje CodecID.\n"
 
@@ -12690,7 +12801,7 @@ msgstr "matroska_reader: Nie została ustawiona szerokość dla ścieżki %1%.\n
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader: Ścieżka %1% wygląda na prawidłową.\n"
 
-#: src/input/r_matroska.cpp:1286
+#: src/input/r_matroska.cpp:1283
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: Nie znaleziono typu ścieżki.\n"
 
@@ -12699,7 +12810,7 @@ msgstr "matroska_reader: Nie znaleziono typu ścieżki.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge nie został skompilowany z obsługą FLAC. Ignorowanie ścieżki %1%.\n"
 
-#: src/input/r_matroska.cpp:1503
+#: src/input/r_matroska.cpp:1500
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: nie znaleziono nagłówka EBML.\n"
 
@@ -12723,7 +12834,7 @@ msgstr "memory.cpp/safememdup() wywołane z pliku %1%, linia %2%: malloc() zwró
 msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n"
 msgstr "memory.cpp/saferealloc() wywołany z pliku %1%, linia %2%: realloc() zwrócił nullptr dla rozmiaru %3% bajtów.\n"
 
-#: src/common/kax_info.cpp:663
+#: src/common/kax_info.cpp:683
 msgid "mesh"
 msgstr ""
 
@@ -12739,7 +12850,7 @@ msgstr "brakuje wartości"
 msgid "mkv&merge documentation"
 msgstr "Dokumentacja &mkvmerge"
 
-#: src/info/ui/mainwindow.h:106
+#: src/info/forms/mainwindow.h:106
 msgid "mkvInfo"
 msgstr "mkvInfo"
 
@@ -12873,7 +12984,7 @@ msgstr "mkvmerge obsługuje dwa rodzaje formatów rozdziałów: tekstowy format 
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "Przerwano działanie mkvmerge poprzez SIGINT (Ctrl+C?)\n"
 
-#: src/common/kax_info.cpp:949
+#: src/common/kax_info.cpp:551
 #, boost-format
 msgid "mkvmerge/mkvextract track ID: %1%"
 msgstr "ID ścieżki mkvmerge/mkvextract: %1%"
@@ -12912,7 +13023,7 @@ msgstr "mpeg_ps_reader: To nie powinno było się zdarzyć #1. %1%"
 msgid "mpeg_ps_reader: Should not have happened #2. %1%"
 msgstr "mpeg_ps_reader: To nie powinno było się zdarzyć #2. %1%"
 
-#: src/common/kax_info.cpp:859
+#: src/common/kax_info.cpp:768
 msgid "no encryption"
 msgstr "brak szyfrowania"
 
@@ -12925,11 +13036,11 @@ msgstr "brak błędów"
 msgid "no file loaded"
 msgstr "nie załadowano pliku"
 
-#: src/common/kax_info.cpp:875
+#: src/common/kax_info.cpp:781
 msgid "no signature algorithm"
 msgstr "brak algorytmu sygnatury"
 
-#: src/common/kax_info.cpp:884
+#: src/common/kax_info.cpp:790
 msgid "no signature hash algorithm"
 msgstr "brak algorytmu hasha sygnatury"
 
@@ -12947,7 +13058,7 @@ msgstr "ogg_sync_buffer zakończono niepowodzeniem\n"
 msgid "or"
 msgstr "lub"
 
-#: src/common/kax_info.cpp:539
+#: src/common/kax_info.cpp:591
 #, boost-format
 msgid "output sampling freq: %1%"
 msgstr "wyjściowa częstotliwość próbkowania: %1%"
@@ -12956,37 +13067,37 @@ msgstr "wyjściowa częstotliwość próbkowania: %1%"
 msgid "passthrough"
 msgstr ""
 
-#: src/common/kax_info.cpp:729
+#: src/common/kax_info.cpp:602
 #, boost-format
 msgid "pixel crop bottom: %1%"
 msgstr "ucięte piksele z dołu: %1%"
 
-#: src/common/kax_info.cpp:714
+#: src/common/kax_info.cpp:599
 #, boost-format
 msgid "pixel crop left: %1%"
 msgstr "ucięte piksele z lewej: %1%"
 
-#: src/common/kax_info.cpp:724
+#: src/common/kax_info.cpp:601
 #, boost-format
 msgid "pixel crop right: %1%"
 msgstr "ucięte piksele z prawej: %1%"
 
-#: src/common/kax_info.cpp:719
+#: src/common/kax_info.cpp:600
 #, boost-format
 msgid "pixel crop top: %1%"
 msgstr "ucięte piksele u góry: %1%"
 
-#: src/common/kax_info.cpp:699
+#: src/common/kax_info.cpp:596
 #, boost-format
 msgid "pixel height: %1%"
 msgstr "wysokość w pikselach: %1%"
 
-#: src/common/kax_info.cpp:694
+#: src/common/kax_info.cpp:595
 #, boost-format
 msgid "pixel width: %1%"
 msgstr "szerokość w pikselach: %1%"
 
-#: src/common/kax_info.cpp:754
+#: src/common/kax_info.cpp:704
 msgid "progressive"
 msgstr "progresywny"
 
@@ -13004,11 +13115,11 @@ msgstr "real_reader: Nie można odnaleźć kodu FourCC RealAudio dla id %1% (dł
 msgid "real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID %1% uses version %2% and will be skipped.\n"
 msgstr "real_reader: Jedynie wersje nagłówka dźwiękowego 3, 4 i 5 są obsługiwane. Ścieżka o ID %1% używa wersji %2% i zostanie pominięta.\n"
 
-#: src/common/kax_info.cpp:660
+#: src/common/kax_info.cpp:680
 msgid "rectangular"
 msgstr ""
 
-#: src/common/kax_info.cpp:816
+#: src/common/kax_info.cpp:737
 msgid "rest: unknown"
 msgstr "reszta: nieznana"
 
@@ -13020,7 +13131,7 @@ msgstr "Poziomy przeplot (lewe pierwsze)"
 msgid "row interleaved (right first)"
 msgstr "Poziomy przeplot (prawe pierwsze)"
 
-#: src/common/kax_info.cpp:534
+#: src/common/kax_info.cpp:590
 #, boost-format
 msgid "sampling freq: %1%"
 msgstr "częstotliwość próbkowania: %1%"
@@ -13033,6 +13144,16 @@ msgstr "Obok siebie (lewe pierwsze)"
 msgid "side by side (right first)"
 msgstr "Obok siebie (prawe pierwsze)"
 
+#: src/common/kax_info.cpp:197
+#, fuzzy, boost-format
+msgid "size %1%"
+msgstr "rozmiar %1%"
+
+#: src/common/kax_info.cpp:470
+#, fuzzy
+msgid "size unknown"
+msgstr "nieznany rozmiar"
+
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Nieprawidłowy format. Nie można odnaleźć linii \"Format\" w sekcji \"[Events]\"."
@@ -13041,7 +13162,7 @@ msgstr "ssa_reader: Nieprawidłowy format. Nie można odnaleźć linii \"Format\
 msgid "subtitle"
 msgstr "napisy"
 
-#: src/common/kax_info.cpp:1070
+#: src/common/kax_info.cpp:626
 msgid "subtitles"
 msgstr "napisy"
 
@@ -13070,17 +13191,22 @@ msgstr "Góra dół (lewe pierwsze)"
 msgid "top bottom (right first)"
 msgstr "Góra dół (prawe pierwsze)"
 
-#: src/common/kax_info.cpp:759
+#: src/common/kax_info.cpp:709
 msgid "top field displayed first, bottom field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:755
+#: src/common/kax_info.cpp:705
 msgid "top field displayed first, top field stored first"
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:2822
 msgid "track name"
 msgstr "nazwa ścieżki"
+
+#: src/common/kax_info.cpp:183
+#, fuzzy, boost-format
+msgid "track number %1%, %2% frame(s), timestamp %3%"
+msgstr "Blok (numer ścieżki %1%, %2% klatek, kod czasowy %|3$.3f|s = %4%)"
 
 #: src/extract/extract_cli_parser.cpp:50
 #, fuzzy
@@ -13094,30 +13220,31 @@ msgstr "tta_reader: tag_size < 0 w c'tor. %1%\n"
 
 #: src/common/file_types.cpp:109
 #: src/common/fs_sys_helpers/windows.cpp:168
-#: src/common/kax_info.cpp:664
-#: src/common/kax_info.cpp:818
-#: src/common/kax_info.cpp:828
-#: src/common/kax_info.cpp:843
-#: src/common/kax_info.cpp:865
-#: src/common/kax_info.cpp:877
-#: src/common/kax_info.cpp:887
-#: src/common/kax_info.cpp:1072
+#: src/common/kax_info.cpp:628
+#: src/common/kax_info.cpp:684
+#: src/common/kax_info.cpp:710
+#: src/common/kax_info.cpp:739
+#: src/common/kax_info.cpp:750
+#: src/common/kax_info.cpp:761
+#: src/common/kax_info.cpp:774
+#: src/common/kax_info.cpp:783
+#: src/common/kax_info.cpp:793
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2734
+#: src/input/r_matroska.cpp:2731
 msgid "unknown"
 msgstr "nieznany"
 
-#: src/input/r_matroska.cpp:2718
+#: src/input/r_matroska.cpp:2715
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "nieznany, format tagu 0x%|1$04x|"
 
-#: src/common/kax_info.cpp:756
+#: src/common/kax_info.cpp:706
 msgid "unspecified"
 msgstr ""
 
-#: src/common/kax_info.cpp:1069
+#: src/common/kax_info.cpp:625
 #: src/input/r_matroska.cpp:112
 msgid "video"
 msgstr "wideo"
@@ -13166,6 +13293,13 @@ msgstr "– Ustaw na żadne –"
 #~ msgstr[1] "%1 z %2 plików zostały przetworzone"
 #~ msgstr[2] "%1 z %2 plików zostało przetworzonych"
 
+#~ msgid ""
+#~ "%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, "
+#~ "adler 0x%|7$08x|%8%%9%\n"
+#~ msgstr ""
+#~ "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), czas trwania %|5$.3f|, "
+#~ "rozmiar %6%, adler 0x%|7$08x|%8%%9%\n"
+
 #~ msgid "&Add program"
 #~ msgstr "Dod&aj program "
 
@@ -13204,6 +13338,9 @@ msgstr "– Ustaw na żadne –"
 #~ "Unikalny (128 bitowy) ID składający się z liczb wygenerowanych losowo do "
 #~ "zidentyfikowania obecnego segmentu wśród innych."
 
+#~ msgid "A track"
+#~ msgstr "Ścieżka"
+
 #~ msgid ""
 #~ "A unique ID to identify the Track. This should be kept the same when "
 #~ "making a direct stream copy of the Track to another file."
@@ -13236,6 +13373,9 @@ msgstr "– Ustaw na żadne –"
 
 #~ msgid "Add as new input fi&les"
 #~ msgstr "&Dodaj jako nowe pliki wejściowe do bieżącej karty"
+
+#~ msgid "Additional ID"
+#~ msgstr "Dodatkowe ID: %1%"
 
 #~ msgid "All output files"
 #~ msgstr "do wszystkich plików wyjściowych"
@@ -13283,6 +13423,9 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "Ask the user"
 #~ msgstr "Pytaj użytkownika"
 
+#~ msgid "Aspect ratio type: %1%%2%"
+#~ msgstr "Typ proporcji obrazu: %1%%2%"
+
 #~ msgid ""
 #~ "Chapters are not allowed in WebM compliant files. No chapters will be "
 #~ "written to the destination file.\n"
@@ -13292,6 +13435,21 @@ msgstr "– Ustaw na żadne –"
 
 #~ msgid "Check online for the latest release."
 #~ msgstr "Sprawdzaj, czy jest dostępna aktualizacja."
+
+#~ msgid "Codec ID: %1%"
+#~ msgstr "ID kodeka: %1%"
+
+#~ msgid "Codec delay"
+#~ msgstr "Opóźnienie zakładane przez kodek"
+
+#~ msgid "Codec delay: %|1$.3f|ms (%2%ns)"
+#~ msgstr "Opóźnienie kodeka: %|1$.3f|ms (%2%ns)"
+
+#~ msgid "Codec name: %1%"
+#~ msgstr "Nazwa kodeka: %1%"
+
+#~ msgid "CodecPrivate, length %1%%2%"
+#~ msgstr "CodecPrivate, długość %1%%2%"
 
 #~ msgid "Colour matrix: %1%"
 #~ msgstr "Przestrzeń koloru: %1%"
@@ -13326,6 +13484,9 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "Ctrl+U"
 #~ msgstr "Ctrl+U"
 
+#~ msgid "Cue time: %|1$.3f|s"
+#~ msgstr "Czas cue: %|1$.3f|s"
+
 #~ msgid "DTS_Header problem: invalid frame bytes size\n"
 #~ msgstr "Problem z DTS_Header: nieprawidłowy rozmiar klatki w bajtach\n"
 
@@ -13339,8 +13500,26 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Data (nieprawidłowa, wartość: %1%)"
 
+#~ msgid "Date: %1% UTC"
+#~ msgstr "Data: %1% UTC"
+
+#~ msgid "Default flag"
+#~ msgstr "Ścieżka domyślna: %1%"
+
+#~ msgid "Delay: %|1$.3f|ms"
+#~ msgstr "Opóźnienie: %|1$.3f|ms"
+
+#~ msgid "Duration: %|1$.3f|ms"
+#~ msgstr "Czas trwania: %|1$.3f|ms"
+
+#~ msgid "Duration: %|1$.3f|s (%2%)"
+#~ msgstr "Czas trwania: %|1$.3f|s (%2%)"
+
 #~ msgid "E&nable all attached files"
 #~ msgstr "Włącz wszystkie załączo&ne pliki"
+
+#~ msgid "EbmlVoid (size: %1%)"
+#~ msgstr "EbmlVoid (rozmiar: %1%)"
 
 #~ msgid "Edit chapters"
 #~ msgstr "Edytuj rozdziały"
@@ -13351,6 +13530,9 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "Edit tags"
 #~ msgstr "Edytuj tagi"
 
+#~ msgid "Enabled: %1%"
+#~ msgstr "Włączona: %1%"
+
 #~ msgid "Error importing file"
 #~ msgstr "Błąd podczas wczytywania pliku ustawień"
 
@@ -13359,6 +13541,9 @@ msgstr "– Ustaw na żadne –"
 
 #~ msgid "Extract"
 #~ msgstr "Wyodrębnij"
+
+#~ msgid "Field order: %1% (%2%)"
+#~ msgstr "Kolejność pól: %1% (%2%)"
 
 #~ msgid ""
 #~ "File %1% has unknown type. Please have a look at the supported file types "
@@ -13371,8 +13556,17 @@ msgstr "– Ustaw na żadne –"
 #~ "<moritz@bunkus.org>, jeśli Twój plik powinien być obsługiwany, a nie jest "
 #~ "poprawnie rozpoznawany.\n"
 
+#~ msgid "File data, size: %1%"
+#~ msgstr "Dane pliku, rozmiar: %1%"
+
 #~ msgid "File has been modified"
 #~ msgstr "Plik został zmodyfikowany"
+
+#~ msgid "File name: %1%"
+#~ msgstr "Nazwa pliku: %1%"
+
+#~ msgid "Forced flag"
+#~ msgstr "Wymuszona ścieżka: %1%"
 
 #~ msgid "Info"
 #~ msgstr "mkvInfo"
@@ -13384,8 +13578,23 @@ msgstr "– Ustaw na żadne –"
 #~ "Został użyty nieprawidłowy format dla SSA w linii (\"%1%\") o czasie %2%: "
 #~ "Znaleziono za dużo pól (%3% zamiast 9). Ta linia zostanie pominięta.\n"
 
+#~ msgid "Language: %1%"
+#~ msgstr "Język: %1%"
+
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "Pliki opcji MKVToolNix (stary format)"
+
+#~ msgid "Max content light: %1%"
+#~ msgstr "Maksymalna zawartość światła: %1%"
+
+#~ msgid "Max frame light: %1%"
+#~ msgstr "Wysokość w pikselach: %1%"
+
+#~ msgid "Max luminance: %1%"
+#~ msgstr "Maksymalna jasność: %1%"
+
+#~ msgid "MaxCache: %1%"
+#~ msgstr "MaksBufor: %1%"
 
 #~ msgid "Merge"
 #~ msgstr "Muksowanie"
@@ -13402,6 +13611,15 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "Merging application"
 #~ msgstr "Aplikacja muksująca"
 
+#~ msgid "Mime type"
+#~ msgstr "Typ Mime: %1%"
+
+#~ msgid "Min luminance: %1%"
+#~ msgstr "Minimalna jasność: %1%"
+
+#~ msgid "MinCache: %1%"
+#~ msgstr "MinBufor: %1%"
+
 #~ msgid ""
 #~ "Missing header/comment packets for stream. This file is broken but should "
 #~ "be muxed correctly. If not please contact the author Moritz Bunkus "
@@ -13414,6 +13632,9 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "Mu&x this track:"
 #~ msgstr "Muk&suj tę ścieżkę:"
 
+#~ msgid "Multiplexing application: %1%"
+#~ msgstr "Aplikacja multipleksująca: %1%"
+
 #~ msgid "Mux this"
 #~ msgstr "Muksuj to"
 
@@ -13425,6 +13646,15 @@ msgstr "– Ustaw na żadne –"
 
 #~ msgid "Name &template:"
 #~ msgstr "Nazwa &szablonu:"
+
+#~ msgid "Name: %1%"
+#~ msgstr "Nazwa: %1%"
+
+#~ msgid "Next filename: %1%"
+#~ msgstr "Nazwa pliku następującego: %1%"
+
+#~ msgid "Next segment UID: %1%"
+#~ msgstr "UID następnego segmentu: %1%"
 
 #~ msgid "No input files were given. No output will be created.\n"
 #~ msgstr "Nie podano żadnych plików wejściowych. Nic nie zostanie zapisane.\n"
@@ -13450,8 +13680,17 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "Previous file name"
 #~ msgstr "Nazwa pliku poprzedzającego"
 
+#~ msgid "Previous filename: %1%"
+#~ msgstr "Nazwa pliku poprzedzającego: %1%"
+
+#~ msgid "Previous segment UID: %1%"
+#~ msgstr "UID poprzedniego segmentu: %1%"
+
 #~ msgid "Progress: 100%\n"
 #~ msgstr "Postęp: 100%\n"
+
+#~ msgid "Projection type: %1% (%2%)"
+#~ msgstr "Typ proporcji obrazu: %1%%2%"
 
 #~ msgid ""
 #~ "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases "
@@ -13469,8 +13708,23 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "Remove a&ll"
 #~ msgstr "&Usuń wszystko"
 
+#~ msgid "Segment UID: %1%"
+#~ msgstr "UID obecnego segmentu: %1%"
+
 #~ msgid "Segment file name"
 #~ msgstr "Nazwa pliku segmentu"
+
+#~ msgid "Segment filename: %1%"
+#~ msgstr "Nazwa segmentu: %1%"
+
+#~ msgid "Segment tracks"
+#~ msgstr "Ścieżki segmentu"
+
+#~ msgid "Segment, size %1%"
+#~ msgstr "Segment, rozmiar %1%"
+
+#~ msgid "Segment, size unknown"
+#~ msgstr "Segment, rozmiar nieznany"
 
 #~ msgid "Select output directory"
 #~ msgstr "Wybierz folder wyjściowy"
@@ -13493,8 +13747,14 @@ msgstr "– Ustaw na żadne –"
 #~ "Odtwarzacz powninien wybrać taką ścieżkę, której język odpowiada "
 #~ "preferencjom użytkownika, lub wybrać ścieżkę domyślną + wymuszoną."
 
-#~ msgid "SimpleBlock"
-#~ msgstr "SimpleBlock"
+#~ msgid "Settings: %1%"
+#~ msgstr "Ustawienia: %1%"
+
+#~ msgid "Signature algorithm: %1% (%2%)"
+#~ msgstr "Algorytm sygnatury: %1% (%2%)"
+
+#~ msgid "Signature hash algorithm: %1% (%2%)"
+#~ msgstr "\"Hash\" algorytm sygnatury: %1% (%2%)"
 
 #~ msgid "Specifies the language of the track in the Matroska languages form."
 #~ msgstr "Określa język ścieżki w formacie językowym Matroski."
@@ -13505,6 +13765,9 @@ msgstr "– Ustaw na żadne –"
 #~ msgstr ""
 #~ "Określa możliwe zmiany w propocjach obrazu (0: dowolna zmiana, 1: "
 #~ "utrzymanie proporcji, 2: ustalone proporcje)."
+
+#~ msgid "Stereo mode: %1% (%2%)"
+#~ msgstr "Tryb stereo: %1% (%2%)"
 
 #~ msgid ""
 #~ "The AVC video track is missing the 'CTTS' atom for frame timestamp "
@@ -13596,6 +13859,9 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr "Informacja o aktualizacji nie mogła zostać pobrana z %1%.\n"
 
+#~ msgid "Title: %1%"
+#~ msgstr "Tytuł: %1%"
+
 #~ msgid ""
 #~ "Track %1% was compressed with bzlib but mkvmerge has not been compiled "
 #~ "with support for bzlib compression.\n"
@@ -13610,6 +13876,9 @@ msgstr "– Ustaw na żadne –"
 #~ "Ścieżka %1% została skompresowana przy pomocy lzo1x jednakże mkvmerge nie "
 #~ "został skompilowany z obsługą kompresji lzo1x.\n"
 
+#~ msgid "Track UID: %1%"
+#~ msgstr "UID ścieżki: %1%"
+
 #~ msgid ""
 #~ "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: "
 #~ "inches, 3: aspect ratio)."
@@ -13617,8 +13886,14 @@ msgstr "– Ustaw na żadne –"
 #~ "Rodzaj jednostek dla funkcji Wyświetlana szer./wys. (0: piksele, 1: "
 #~ "centymetry, 2: cale, 3: proporcje obrazu)."
 
+#~ msgid "Type: %1% (%2%)"
+#~ msgstr "Typ: %1% (%2%)"
+
 #~ msgid "Use a &vertical layout for the \"input\" tab"
 #~ msgstr "Użyj &wertykalnego układu okienek w zakładce \"Wejście\""
+
+#~ msgid "Writing application: %1%"
+#~ msgstr "Program zapisujący: %1%"
 
 #~ msgid ""
 #~ "You have to add at least one source file before you can start merging or "
