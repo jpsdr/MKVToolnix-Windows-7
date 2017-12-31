@@ -973,7 +973,7 @@ Application.new("src/mkvmerge").
 Application.new("src/mkvinfo").
   description("Build the mkvinfo executable").
   aliases(:mkvinfo).
-  sources("src/info/mkvinfo.cpp").
+  sources(FileList["src/info/*.cpp"].to_a.reject { |f| %r{/qt|mkvinfo-gui.cpp|sys_windows.cpp$}.match(f) }).
   sources("src/info/resources.o", :if => $building_for[:windows]).
   libraries($common_libs).
   only_if(c?(:USE_QT)).
