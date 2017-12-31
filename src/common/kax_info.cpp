@@ -20,6 +20,7 @@
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 
+#include <ebml/EbmlDummy.h>
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
 #include <ebml/EbmlStream.h>
@@ -314,15 +315,23 @@ kax_info_c::show_element(EbmlElement *l,
 }
 
 std::string
+kax_info_c::format_ebml_id_as_hex(EbmlId const &id) {
+  return (boost::format((boost::format("%%|1$0%1%x|") % EBML_ID_LENGTH(id)).str()) % EBML_ID_VALUE(id)).str();
+}
+
+std::string
+kax_info_c::format_ebml_id_as_hex(EbmlElement &e) {
+  return format_ebml_id_as_hex(static_cast<const EbmlId &>(e));
+}
+
+std::string
 kax_info_c::create_unknown_element_text(EbmlElement &e) {
-  static boost::format s_bf_show_unknown_element("%|1$02x|");
+  return (ms_common_formats[ms_bf_show_unknown_element] % EBML_NAME(&e) % format_ebml_id_as_hex(e) % (e.GetSize() + e.HeadSize())).str();
+}
 
-  int i;
-  std::string element_id;
-  for (i = EBML_ID_LENGTH(static_cast<const EbmlId &>(e)) - 1; 0 <= i; --i)
-    element_id += (s_bf_show_unknown_element % ((EBML_ID_VALUE(static_cast<const EbmlId &>(e)) >> (i * 8)) & 0xff)).str();
-
-  return (ms_common_formats[ms_bf_show_unknown_element] % EBML_NAME(&e) % element_id % (e.GetSize() + e.HeadSize())).str();
+std::string
+kax_info_c::create_known_element_but_not_allowed_here_text(EbmlElement &e) {
+  return (boost::format(Y("(Known element, but invalid at this position: %1%; ID: 0x%2% size: %3%)")) % kax_element_names_c::get(e) % format_ebml_id_as_hex(e) % (e.GetSize() + e.HeadSize())).str();
 }
 
 std::string
@@ -351,6 +360,9 @@ kax_info_c::create_text_representation(EbmlElement &e) {
   if (text.empty())
     text = create_unknown_element_text(e);
 
+  else if (dynamic_cast<EbmlDummy *>(&e))
+    text = create_known_element_but_not_allowed_here_text(e);
+
   else {
     auto value = format_element_value(e);
     if (!value.empty())
@@ -364,7 +376,7 @@ std::string
 kax_info_c::format_element_value(EbmlElement &e) {
   auto formatter = m_custom_element_value_formatters.find(EbmlId(e).GetValue());
 
-  return formatter == m_custom_element_value_formatters.end() ? format_element_value_default(e) : formatter->second(e);
+  return (formatter == m_custom_element_value_formatters.end()) || dynamic_cast<EbmlDummy *>(&e) ? format_element_value_default(e) : formatter->second(e);
 }
 
 std::string

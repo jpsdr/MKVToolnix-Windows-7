@@ -105,6 +105,7 @@ public:
 
   std::string create_element_text(std::string const &text, int64_t position, int64_t size);
   std::string create_unknown_element_text(EbmlElement &e);
+  std::string create_known_element_but_not_allowed_here_text(EbmlElement &e);
   std::string create_hexdump(unsigned char const *buf, int size);
   std::string create_codec_dependent_private_info(KaxCodecPrivate &c_priv, char track_type, std::string const &codec_id);
   std::string create_text_representation(EbmlElement &e);
@@ -152,6 +153,8 @@ public:
   static std::string format_binary_as_hex(EbmlElement &e);
   static std::string format_element_size(EbmlElement &e);
   static std::string format_unsigned_integer_as_timestamp(EbmlElement &e);
+  static std::string format_ebml_id_as_hex(EbmlElement &e);
+  static std::string format_ebml_id_as_hex(EbmlId const &id);
 };
 using kax_info_cptr = std::shared_ptr<kax_info_c>;
 
