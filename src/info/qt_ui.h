@@ -22,7 +22,7 @@
 
 #include "common/qt.h"
 #include "info/options.h"
-#include "info/ui/mainwindow.h"
+#include "info/forms/mainwindow.h"
 
 class main_window_c: public QMainWindow, public Ui_main_window {
   Q_OBJECT;
