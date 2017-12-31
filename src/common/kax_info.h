@@ -70,7 +70,7 @@ protected:
   std::vector<track_cptr> m_tracks;
   std::unordered_map<unsigned int, track_cptr> m_tracks_by_number;
   std::unordered_map<unsigned int, track_info_t> m_track_info;
-  uint64_t m_ts_scale{TIMESTAMP_SCALE};
+  uint64_t m_ts_scale{TIMESTAMP_SCALE}, m_file_size{};
   std::size_t m_mkvmerge_track_id{};
   std::shared_ptr<EbmlStream> m_es;
   mm_io_cptr m_in, m_out;
@@ -78,6 +78,12 @@ protected:
   int m_level{};
   std::vector<std::string> m_summary;
   std::shared_ptr<track_t> m_track;
+  KaxCluster *m_cluster{};
+  std::vector<int> m_frame_sizes;
+  std::vector<uint32_t> m_frame_adlers;
+  std::vector<std::string> m_frame_hexdumps;
+  int64_t m_num_references{}, m_lf_timestamp{}, m_lf_tnum{};
+  double m_block_duration{};
 
   bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{};
   int m_hexdump_max_size{}, m_verbose{};
@@ -114,14 +120,25 @@ public:
   std::string create_codec_dependent_private_info(KaxCodecPrivate &c_priv, char track_type, std::string const &codec_id);
   std::string create_text_representation(EbmlElement &e);
   std::string format_binary(EbmlBinary &bin, std::size_t max_len = 16);
-  std::string format_element_value(EbmlElement &e);
-  std::string format_element_value_default(EbmlElement &e);
-  std::string format_unsigned_integer_as_scaled_timestamp(EbmlElement &e);
   std::string format_binary_as_hex(EbmlElement &e);
   std::string format_element_size(EbmlElement &e);
-  std::string format_unsigned_integer_as_timestamp(EbmlElement &e);
+  std::string format_element_value(EbmlElement &e);
+  std::string format_element_value_default(EbmlElement &e);
   std::string format_ebml_id_as_hex(EbmlElement &e);
   std::string format_ebml_id_as_hex(EbmlId const &id);
+  std::string format_unsigned_integer_as_timestamp(EbmlElement &e);
+  std::string format_unsigned_integer_as_scaled_timestamp(EbmlElement &e);
+  std::string format_signed_integer_as_timestamp(EbmlElement &e);
+  std::string format_block(EbmlElement &e);
+  std::string format_simple_block(EbmlElement &e);
+
+  bool pre_block_group(EbmlElement &e);
+  bool pre_block(EbmlElement &e);
+  bool pre_simple_block(EbmlElement &e);
+
+  void post_block_group(EbmlElement &e);
+  void post_block(EbmlElement &e);
+  void post_simple_block(EbmlElement &e);
 
   virtual void ui_show_error(std::string const &error);
   virtual void ui_show_element_info(int level, std::string const &text, int64_t position, int64_t size);
@@ -138,13 +155,9 @@ protected:
   void add_track(track_cptr const &t);
   track_t *find_track(int tnum);
 
-  bool is_global(EbmlElement *l, int level);
   void read_master(EbmlMaster *m, EbmlSemanticContext const &ctx, int &upper_lvl_el, EbmlElement *&l2);
 
-  void handle_silent_track(EbmlElement *&l2);
   void handle_block_group(EbmlElement *&l2, KaxCluster *&cluster);
-  void handle_simple_block(EbmlElement *&l2, KaxCluster *&cluster);
-  void handle_cluster(int &upper_lvl_el, EbmlElement *&l1, int64_t file_size);
   void handle_elements_generic(EbmlElement &e);
   result_e handle_segment(EbmlElement *l0);
 

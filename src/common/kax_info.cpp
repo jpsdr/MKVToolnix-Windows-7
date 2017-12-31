@@ -200,11 +200,11 @@ kax_info_c::init_common_formats() {
   BF_ADD(ms_bf_ebmlvoid,                          Y("EbmlVoid (size: %1%)"));
   BF_ADD(ms_bf_format_binary_1,                   Y("length %1%, data: %2%"));
   BF_ADD(ms_bf_format_binary_2,                   Y(" (adler: 0x%|1$08x|)"));
-  BF_ADD(ms_bf_block_group_block_summary,         Y("Block (track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%)"));
+  BF_ADD(ms_bf_block_group_block_summary,         Y("track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%"));
   BF_ADD(ms_bf_block_group_block_frame,           Y("Frame with size %1%%2%%3%"));
-  BF_ADD(ms_bf_block_group_duration,              Y("Block duration: %1%.%|2$06d|ms"));
-  BF_ADD(ms_bf_block_group_reference_1,           Y("Reference block: -%1%.%|2$06d|ms"));
-  BF_ADD(ms_bf_block_group_reference_2,           Y("Reference block: %1%.%|2$06d|ms"));
+  BF_ADD(ms_bf_block_group_duration,                "%1%.%|2$06d|ms");
+  BF_ADD(ms_bf_block_group_reference_1,             "-%1%.%|2$06d|ms");
+  BF_ADD(ms_bf_block_group_reference_2,             "%1%.%|2$06d|ms");
   BF_ADD(ms_bf_block_group_reference_priority,    Y("Reference priority: %1%"));
   BF_ADD(ms_bf_block_group_virtual,               Y("Block virtual: %1%"));
   BF_ADD(ms_bf_block_group_reference_virtual,     Y("Reference virtual: %1%"));
@@ -219,7 +219,7 @@ kax_info_c::init_common_formats() {
   BF_ADD(ms_bf_block_group_summary_with_duration, Y("%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"));
   BF_ADD(ms_bf_block_group_summary_no_duration,   Y("%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"));
   BF_ADD(ms_bf_block_group_summary_v2,            Y("[%1% frame for track %2%, timestamp %3%]"));
-  BF_ADD(ms_bf_simple_block_basics,               Y("SimpleBlock (%1%track number %2%, %3% frame(s), timestamp %|4$.3f|s = %5%)"));
+  BF_ADD(ms_bf_simple_block_basics,               Y("%1%track number %2%, %3% frame(s), timestamp %|4$.3f|s = %5%"));
   BF_ADD(ms_bf_simple_block_frame,                Y("Frame with size %1%%2%%3%"));
   BF_ADD(ms_bf_simple_block_summary,              Y("%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"));
   BF_ADD(ms_bf_simple_block_summary_v2,           Y("[%1% frame for track %2%, timestamp %3%]"));
@@ -485,21 +485,6 @@ kax_info_c::find_track(int tnum) {
   return m_tracks_by_number[tnum].get();
 }
 
-bool
-kax_info_c::is_global(EbmlElement *l,
-                      int level) {
-  if (Is<EbmlVoid>(l)) {
-    show_element(l, level, (ms_common_formats[ms_bf_ebmlvoid] % (l->ElementSize() - l->HeadSize())).str());
-    return true;
-
-  } else if (Is<EbmlCrc32>(l)) {
-    show_element(l, level, "EbmlCrc32");
-    return true;
-  }
-
-  return false;
-}
-
 void
 kax_info_c::read_master(EbmlMaster *m,
                         EbmlSemanticContext const &ctx,
@@ -552,10 +537,17 @@ kax_info_c::format_unsigned_integer_as_scaled_timestamp(EbmlElement &e) {
   return format_timestamp(m_ts_scale * static_cast<EbmlUInteger &>(e).GetValue());
 }
 
-#define PRE( Class, Processor) m_custom_element_pre_processors.insert(  { Class::ClassInfos.GlobalId.GetValue(), Processor });
-#define POST(Class, Processor) m_custom_element_post_processors.insert( { Class::ClassInfos.GlobalId.GetValue(), Processor });
-#define FMT( Class, Formatter) m_custom_element_value_formatters.insert({ Class::ClassInfos.GlobalId.GetValue(), Formatter });
-#define FMTM(Class, Formatter) FMT(Class, std::bind(&kax_info_c::Formatter, this, std::placeholders::_1));
+std::string
+kax_info_c::format_signed_integer_as_timestamp(EbmlElement &e) {
+  return format_timestamp(static_cast<EbmlSInteger &>(e).GetValue());
+}
+
+#define PRE(  Class, Processor) m_custom_element_pre_processors.insert(  { Class::ClassInfos.GlobalId.GetValue(), Processor });
+#define POST( Class, Processor) m_custom_element_post_processors.insert( { Class::ClassInfos.GlobalId.GetValue(), Processor });
+#define FMT(  Class, Formatter) m_custom_element_value_formatters.insert({ Class::ClassInfos.GlobalId.GetValue(), Formatter });
+#define PREM( Class, Processor) PRE(Class, std::bind(&kax_info_c::Processor, this, std::placeholders::_1));
+#define POSTM(Class, Processor) POST(Class, std::bind(&kax_info_c::Processor, this, std::placeholders::_1));
+#define FMTM( Class, Formatter) FMT(Class, std::bind(&kax_info_c::Formatter, this, std::placeholders::_1));
 
 void
 kax_info_c::init_custom_element_value_formatters_and_processors() {
@@ -564,7 +556,11 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   m_custom_element_post_processors.clear();
 
   // Simple processors:
-  PRE(KaxInfo, ([this](EbmlElement &e) -> bool { m_ts_scale = FindChildValue<KaxTimecodeScale, uint64_t>(static_cast<KaxInfo &>(e), TIMESTAMP_SCALE); return true; }));
+  PRE(KaxInfo,         [this](EbmlElement &e) -> bool { m_ts_scale = FindChildValue<KaxTimecodeScale>(static_cast<KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
+  PRE(KaxTracks,       [this](EbmlElement &)  -> bool { m_mkvmerge_track_id = 0; return true; });
+  PREM(KaxSimpleBlock, pre_simple_block);
+  PREM(KaxBlockGroup,  pre_block_group);
+  PREM(KaxBlock,       pre_block);
 
   // More complex processors:
   PRE(KaxSeekHead, [this](EbmlElement &e) -> bool {
@@ -578,8 +574,6 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
       show_element(&e, 1, Y("Cues (subentries will be skipped)"));
     return m_verbose >= 2;
   });
-
-  PRE(KaxTracks, [this](EbmlElement &) -> bool { m_mkvmerge_track_id = 0; return true; });
 
   PRE(KaxTrackEntry, [this](EbmlElement &e) -> bool {
     m_summary.clear();
@@ -634,6 +628,17 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   });
 
+  PRE(KaxCluster, [this](EbmlElement &e) -> bool {
+    m_cluster = static_cast<KaxCluster *>(&e);
+
+    if (m_use_gui)
+      ui_show_progress(100 * m_cluster->GetElementPosition() / m_file_size, Y("Parsing file"));
+
+    m_cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(m_cluster), m_ts_scale);
+
+    return true;
+  });
+
   POST(KaxAudioSamplingFreq,       [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("sampling freq: %1%")) % static_cast<KaxAudioSamplingFreq &>(e).GetValue()).str()); });
   POST(KaxAudioOutputSamplingFreq, [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("output sampling freq: %1%")) % static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue()).str()); });
   POST(KaxAudioChannels,           [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("channels: %1%")) % static_cast<KaxAudioChannels &>(e).GetValue()).str()); });
@@ -648,6 +653,13 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   POST(KaxVideoPixelCropRight,     [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel crop right: %1%")) % static_cast<KaxVideoPixelCropRight &>(e).GetValue()).str()); });
   POST(KaxVideoPixelCropBottom,    [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel crop bottom: %1%")) % static_cast<KaxVideoPixelCropBottom &>(e).GetValue()).str()); });
   POST(KaxTrackLanguage,           [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("language: %1%")) % static_cast<KaxTrackLanguage &>(e).GetValue()).str()); });
+  POST(KaxBlockDuration,           [this](EbmlElement &e) { m_block_duration = static_cast<double>(static_cast<KaxBlockDuration &>(e).GetValue()) * m_ts_scale / 1000000.0; });
+  POST(KaxReferenceBlock,          [this](EbmlElement &)  { ++m_num_references; });
+
+  POSTM(KaxSimpleBlock,            post_simple_block);
+  POSTM(KaxBlock,                  post_block);
+  POSTM(KaxBlockGroup,             post_block_group);
+
   POST(KaxTrackDefaultDuration,    [this](EbmlElement &) {
     m_summary.push_back((boost::format(Y("default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"))
                          % (static_cast<double>(m_track->default_duration) / 1000000.0)
@@ -687,6 +699,12 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   FMTM(KaxCueRefTime,       format_unsigned_integer_as_scaled_timestamp);
   FMTM(KaxCodecDelay,       format_unsigned_integer_as_timestamp);
   FMTM(KaxSeekPreRoll,      format_unsigned_integer_as_timestamp);
+  FMTM(KaxClusterTimecode,  format_unsigned_integer_as_scaled_timestamp);
+  FMTM(KaxSliceDelay,       format_unsigned_integer_as_scaled_timestamp);
+  FMTM(KaxSliceDuration,    format_signed_integer_as_timestamp);
+  FMTM(KaxSimpleBlock,      format_simple_block);
+  FMTM(KaxBlock,            format_block);
+  FMTM(KaxBlockDuration,    format_unsigned_integer_as_scaled_timestamp);
 
   // More complex formatters:
   FMT(KaxDuration, [this](EbmlElement &e) -> std::string {
@@ -848,236 +866,161 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
               % (static_cast<double>(m_track->default_duration) / 1000000.0)
               % (1000000000.0 / static_cast<double>(m_track->default_duration))).str();
   });
+
+  FMT(KaxReferenceBlock, [this](EbmlElement &e) -> std::string {
+    auto reference = static_cast<int64_t>(static_cast<KaxReferenceBlock &>(e).GetValue() * m_ts_scale);
+    return 0 >= reference ? (ms_common_formats[ms_bf_block_group_reference_1] % (std::abs(reference) / 1000000) % (std::abs(reference) % 1000000)).str()
+         : 0 < reference  ? (ms_common_formats[ms_bf_block_group_reference_2] % (         reference  / 1000000) % (         reference  % 1000000)).str()
+         :                  std::string{};
+  });
 }
 
 #undef FMT
-#undef FMTM
 #undef PRE
 #undef POST
+#undef FMTM
+#undef PREM
+#undef POSTM
 
-void
-kax_info_c::handle_silent_track(EbmlElement *&l2) {
-  show_element(l2, 2, "Silent Tracks");
+bool
+kax_info_c::pre_block(EbmlElement &e) {
+  auto &block = static_cast<KaxBlock &>(e);
 
-  for (auto l3 : *static_cast<EbmlMaster *>(l2))
-    if (Is<KaxClusterSilentTrackNumber>(l3))
-      show_element(l3, 3, boost::format(Y("Silent Track Number: %1%")) % static_cast<KaxClusterSilentTrackNumber *>(l3)->GetValue());
+  block.SetParent(*m_cluster);
 
-    else if (!is_global(l3, 3))
-      show_unknown_element(l3, 3);
+  m_lf_timestamp   = block.GlobalTimecode();
+  m_lf_tnum        = block.TrackNum();
+  m_block_duration = -1.0;
+
+  return true;
+}
+
+std::string
+kax_info_c::format_block(EbmlElement &e) {
+  auto &block = static_cast<KaxBlock &>(e);
+
+  return (ms_common_formats[ms_bf_block_group_block_summary]
+          % block.TrackNum()
+          % block.NumberFrames()
+          % (static_cast<double>(m_lf_timestamp) / 1000000000.0)
+          % format_timestamp(m_lf_timestamp, 3)).str();
 }
 
 void
-kax_info_c::handle_block_group(EbmlElement *&l2,
-                               KaxCluster *&cluster) {
-  show_element(l2, 2, Y("Block group"));
+kax_info_c::post_block(EbmlElement &e) {
+  auto &block = static_cast<KaxBlock &>(e);
 
-  std::vector<int> frame_sizes;
-  std::vector<uint32_t> frame_adlers;
-  std::vector<std::string> frame_hexdumps;
+  for (int i = 0, num_frames = block.NumberFrames(); i < num_frames; ++i) {
+    auto &data = block.GetBuffer(i);
+    auto adler = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, data.Buffer(), data.Size());
 
-  auto num_references  = 0u;
-  int64_t lf_timestamp = 0;
-  int64_t lf_tnum      = 0;
-  int64_t frame_pos    = 0;
+    std::string adler_str;
+    if (m_calc_checksums)
+      adler_str = (ms_common_formats[ms_bf_block_group_block_adler] % adler).str();
 
-  float bduration      = -1.0;
+    std::string hex;
+    if (m_show_hexdump)
+      hex = create_hexdump(data.Buffer(), data.Size());
 
-  for (auto l3 : *static_cast<EbmlMaster *>(l2))
-    if (Is<KaxBlock>(l3)) {
-      KaxBlock &block = *static_cast<KaxBlock *>(l3);
-      block.SetParent(*cluster);
+    show_element(nullptr, 4, ms_common_formats[ms_bf_block_group_block_frame] % data.Size() % adler_str % hex);
 
-      lf_timestamp = block.GlobalTimecode();
-      lf_tnum      = block.TrackNum();
-      bduration    = -1.0;
-      frame_pos    = block.GetElementPosition() + block.ElementSize();
+    m_frame_sizes.push_back(data.Size());
+    m_frame_adlers.push_back(adler);
+    m_frame_hexdumps.push_back(hex);
+  }
+}
 
-      show_element(l3, 3,
-                   ms_common_formats[ms_bf_block_group_block_summary]
-                   % block.TrackNum()
-                   % block.NumberFrames()
-                   % (static_cast<double>(lf_timestamp) / 1000000000.0)
-                   % format_timestamp(lf_timestamp, 3));
+bool
+kax_info_c::pre_block_group(EbmlElement &) {
+  m_num_references = 0;
+  m_lf_timestamp   = 0;
+  m_lf_tnum        = 0;
 
-      for (int i = 0, num_frames = block.NumberFrames(); i < num_frames; ++i) {
-        auto &data = block.GetBuffer(i);
-        auto adler = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, data.Buffer(), data.Size());
+  m_frame_sizes.clear();
+  m_frame_adlers.clear();
+  m_frame_hexdumps.clear();
 
-        std::string adler_str;
-        if (m_calc_checksums)
-          adler_str = (ms_common_formats[ms_bf_block_group_block_adler] % adler).str();
+  return true;
+}
 
-        std::string hex;
-        if (m_show_hexdump)
-          hex = create_hexdump(data.Buffer(), data.Size());
-
-        show_element(nullptr, 4, ms_common_formats[ms_bf_block_group_block_frame] % data.Size() % adler_str % hex);
-
-        frame_sizes.push_back(data.Size());
-        frame_adlers.push_back(adler);
-        frame_hexdumps.push_back(hex);
-        frame_pos -= data.Size();
-      }
-
-    } else if (Is<KaxBlockDuration>(l3)) {
-      auto duration = static_cast<KaxBlockDuration *>(l3)->GetValue();
-      bduration     = static_cast<double>(duration) * m_ts_scale / 1000000.0;
-      show_element(l3, 3, ms_common_formats[ms_bf_block_group_duration] % (duration * m_ts_scale / 1000000) % (duration * m_ts_scale % 1000000));
-
-    } else if (Is<KaxReferenceBlock>(l3)) {
-      ++num_references;
-
-      int64_t reference = static_cast<KaxReferenceBlock *>(l3)->GetValue() * m_ts_scale;
-
-      if (0 >= reference)
-        show_element(l3, 3, ms_common_formats[ms_bf_block_group_reference_1] % (std::abs(reference) / 1000000) % (std::abs(reference) % 1000000));
-
-      else if (0 < reference)
-        show_element(l3, 3, ms_common_formats[ms_bf_block_group_reference_2] % (reference / 1000000) % (reference % 1000000));
-
-    } else if (Is<KaxReferencePriority>(l3))
-      show_element(l3, 3, ms_common_formats[ms_bf_block_group_reference_priority] % static_cast<KaxReferencePriority *>(l3)->GetValue());
-
-    else if (Is<KaxBlockVirtual>(l3))
-      show_element(l3, 3, ms_common_formats[ms_bf_block_group_virtual]            % format_binary(*static_cast<KaxBlockVirtual *>(l3)));
-
-    else if (Is<KaxReferenceVirtual>(l3))
-      show_element(l3, 3, ms_common_formats[ms_bf_block_group_reference_virtual]  % static_cast<KaxReferenceVirtual *>(l3)->GetValue());
-
-    else if (Is<KaxCodecState>(l3))
-      show_element(l3, 3, ms_common_formats[ms_bf_codec_state]                    % format_binary(*static_cast<KaxCodecState *>(l3)));
-
-    else if (Is<KaxDiscardPadding>(l3)) {
-      auto value = static_cast<KaxDiscardPadding *>(l3)->GetValue();
-      show_element(l3, 3, ms_common_formats[ms_bf_block_group_discard_padding]    % (static_cast<double>(value) / 1000000.0) % value);
-    }
-
-    else if (Is<KaxBlockAdditions>(l3)) {
-      show_element(l3, 3, Y("Additions"));
-
-      for (auto l4 : *static_cast<EbmlMaster *>(l3))
-        if (Is<KaxBlockMore>(l4)) {
-          show_element(l4, 4, Y("More"));
-
-          for (auto l5 : *static_cast<EbmlMaster *>(l4))
-            if (Is<KaxBlockAddID>(l5))
-              show_element(l5, 5, ms_common_formats[ms_bf_block_group_add_id]     % static_cast<KaxBlockAddID *>(l5)->GetValue());
-
-            else if (Is<KaxBlockAdditional>(l5))
-              show_element(l5, 5, ms_common_formats[ms_bf_block_group_additional] % format_binary(*static_cast<KaxBlockAdditional *>(l5)));
-
-            else if (!is_global(l5, 5))
-              show_unknown_element(l5, 5);
-
-        } else if (!is_global(l4, 4))
-          show_unknown_element(l4, 4);
-
-    } else if (Is<KaxSlices>(l3)) {
-      show_element(l3, 3, Y("Slices"));
-
-      for (auto l4 : *static_cast<EbmlMaster *>(l3))
-        if (Is<KaxTimeSlice>(l4)) {
-          show_element(l4, 4, Y("Time slice"));
-
-          for (auto l5 : *static_cast<EbmlMaster *>(l4))
-            if (Is<KaxSliceLaceNumber>(l5))
-              show_element(l5, 5, ms_common_formats[ms_bf_block_group_slice_lace]     % static_cast<KaxSliceLaceNumber *>(l5)->GetValue());
-
-            else if (Is<KaxSliceFrameNumber>(l5))
-              show_element(l5, 5, ms_common_formats[ms_bf_block_group_slice_frame]    % static_cast<KaxSliceFrameNumber *>(l5)->GetValue());
-
-            else if (Is<KaxSliceDelay>(l5))
-              show_element(l5, 5, ms_common_formats[ms_bf_block_group_slice_delay]    % (static_cast<double>(static_cast<KaxSliceDelay *>(l5)->GetValue()) * m_ts_scale / 1000000.0));
-
-            else if (Is<KaxSliceDuration>(l5))
-              show_element(l5, 5, ms_common_formats[ms_bf_block_group_slice_duration] % (static_cast<double>(static_cast<KaxSliceDuration *>(l5)->GetValue()) * m_ts_scale / 1000000.0));
-
-            else if (Is<KaxSliceBlockAddID>(l5))
-              show_element(l5, 5, ms_common_formats[ms_bf_block_group_slice_add_id]   % static_cast<KaxSliceBlockAddID *>(l5)->GetValue());
-
-            else if (!is_global(l5, 5))
-              show_unknown_element(l5, 5);
-
-        } else if (!is_global(l4, 4))
-          show_unknown_element(l4, 4);
-
-    } else if (!is_global(l3, 3))
-      show_unknown_element(l3, 3);
-
+void
+kax_info_c::post_block_group(EbmlElement &e) {
   if (m_show_summary) {
     std::string position;
     std::size_t fidx;
+    auto frame_pos = e.GetElementPosition() + e.HeadSize();
 
-    for (fidx = 0; fidx < frame_sizes.size(); fidx++) {
+    for (fidx = 0; fidx < m_frame_sizes.size(); fidx++) {
       if (1 <= m_verbose) {
         position   = (ms_common_formats[ms_bf_block_group_summary_position] % frame_pos).str();
-        frame_pos += frame_sizes[fidx];
+        frame_pos += m_frame_sizes[fidx];
       }
 
-      if (bduration != -1.0)
+      if (m_block_duration != -1.0)
         m_out->write((ms_common_formats[ms_bf_block_group_summary_with_duration]
-                      % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
-                      % lf_tnum
-                      % std::llround(lf_timestamp / 1000000.0)
-                      % format_timestamp(lf_timestamp, 3)
-                      % bduration
-                      % frame_sizes[fidx]
-                      % frame_adlers[fidx]
-                      % frame_hexdumps[fidx]
+                      % (m_num_references >= 2 ? 'B' : m_num_references == 1 ? 'P' : 'I')
+                      % m_lf_tnum
+                      % std::llround(m_lf_timestamp / 1000000.0)
+                      % format_timestamp(m_lf_timestamp, 3)
+                      % m_block_duration
+                      % m_frame_sizes[fidx]
+                      % m_frame_adlers[fidx]
+                      % m_frame_hexdumps[fidx]
                       % position).str());
       else
         m_out->write((ms_common_formats[ms_bf_block_group_summary_no_duration]
-                      % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
-                      % lf_tnum
-                      % std::llround(lf_timestamp / 1000000.0)
-                      % format_timestamp(lf_timestamp, 3)
-                      % frame_sizes[fidx]
-                      % frame_adlers[fidx]
-                      % frame_hexdumps[fidx]
+                      % (m_num_references >= 2 ? 'B' : m_num_references == 1 ? 'P' : 'I')
+                      % m_lf_tnum
+                      % std::llround(m_lf_timestamp / 1000000.0)
+                      % format_timestamp(m_lf_timestamp, 3)
+                      % m_frame_sizes[fidx]
+                      % m_frame_adlers[fidx]
+                      % m_frame_hexdumps[fidx]
                       % position).str());
     }
 
   } else if (m_verbose > 2)
     show_element(nullptr, 2,
                  ms_common_formats[ms_bf_block_group_summary_v2]
-                 % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
-                 % lf_tnum
-                 % std::llround(lf_timestamp / 1000000.0));
+                 % (m_num_references >= 2 ? 'B' : m_num_references == 1 ? 'P' : 'I')
+                 % m_lf_tnum
+                 % std::llround(m_lf_timestamp / 1000000.0));
 
-  auto &tinfo = m_track_info[lf_tnum];
+  auto &tinfo = m_track_info[m_lf_tnum];
 
-  tinfo.m_blocks                                          += frame_sizes.size();
-  tinfo.m_blocks_by_ref_num[std::min(num_references, 2u)] += frame_sizes.size();
-  tinfo.m_min_timestamp                                    = std::min(tinfo.m_min_timestamp ? *tinfo.m_min_timestamp : lf_timestamp, lf_timestamp);
-  tinfo.m_size                                            += boost::accumulate(frame_sizes, 0);
+  tinfo.m_blocks                                                    += m_frame_sizes.size();
+  tinfo.m_blocks_by_ref_num[std::min<int64_t>(m_num_references, 2)] += m_frame_sizes.size();
+  tinfo.m_min_timestamp                                              = std::min(tinfo.m_min_timestamp ? *tinfo.m_min_timestamp : m_lf_timestamp, m_lf_timestamp);
+  tinfo.m_size                                                      += boost::accumulate(m_frame_sizes, 0);
 
-  if (tinfo.m_max_timestamp && (*tinfo.m_max_timestamp >= lf_timestamp))
+  if (tinfo.m_max_timestamp && (*tinfo.m_max_timestamp >= m_lf_timestamp))
     return;
 
-  tinfo.m_max_timestamp = lf_timestamp;
+  tinfo.m_max_timestamp = m_lf_timestamp;
 
-  if (-1 == bduration)
-    tinfo.m_add_duration_for_n_packets  = frame_sizes.size();
+  if (-1 == m_block_duration)
+    tinfo.m_add_duration_for_n_packets  = m_frame_sizes.size();
   else {
-    *tinfo.m_max_timestamp             += bduration * 1000000.0;
+    *tinfo.m_max_timestamp             += m_block_duration * 1000000.0;
     tinfo.m_add_duration_for_n_packets  = 0;
   }
 }
 
-void
-kax_info_c::handle_simple_block(EbmlElement *&l2,
-                                KaxCluster *&cluster) {
-  std::vector<int> frame_sizes;
-  std::vector<uint32_t> frame_adlers;
+bool
+kax_info_c::pre_simple_block(EbmlElement &e) {
+  m_frame_sizes.clear();
+  m_frame_adlers.clear();
+  m_frame_hexdumps.clear();
 
-  KaxSimpleBlock &block = *static_cast<KaxSimpleBlock *>(l2);
-  block.SetParent(*cluster);
+  static_cast<KaxSimpleBlock &>(e).SetParent(*m_cluster);
 
-  int64_t frame_pos   = block.GetElementPosition() + block.ElementSize();
-  auto timestamp_ns   = mtx::math::to_signed(block.GlobalTimecode());
-  auto timestamp_ms   = std::llround(static_cast<double>(timestamp_ns) / 1000000.0);
-  track_info_t &tinfo = m_track_info[block.TrackNum()];
+  return true;
+}
+
+std::string
+kax_info_c::format_simple_block(EbmlElement &e) {
+  auto &block       = static_cast<KaxSimpleBlock &>(e);
+  auto timestamp_ns = mtx::math::to_signed(block.GlobalTimecode());
 
   std::string info;
   if (block.IsKeyframe())
@@ -1085,18 +1028,26 @@ kax_info_c::handle_simple_block(EbmlElement *&l2,
   if (block.IsDiscardable())
     info += Y("discardable, ");
 
-  show_element(l2, 2,
-               ms_common_formats[ms_bf_simple_block_basics]
-               % info
-               % block.TrackNum()
-               % block.NumberFrames()
-               % (timestamp_ns / 1000000000.0)
-               % format_timestamp(timestamp_ns, 3));
+  return (ms_common_formats[ms_bf_simple_block_basics]
+          % info
+          % block.TrackNum()
+          % block.NumberFrames()
+          % (timestamp_ns / 1000000000.0)
+          % format_timestamp(timestamp_ns, 3)).str();
+}
 
-  int i;
-  for (i = 0; i < (int)block.NumberFrames(); i++) {
-    DataBuffer &data = block.GetBuffer(i);
-    uint32_t adler   = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, data.Buffer(), data.Size());
+void
+kax_info_c::post_simple_block(EbmlElement &e) {
+  auto &block       = static_cast<KaxSimpleBlock &>(e);
+  auto &tinfo       = m_track_info[block.TrackNum()];
+  auto timestamp_ns = mtx::math::to_signed(block.GlobalTimecode());
+  auto timestamp_ms = std::llround(static_cast<double>(timestamp_ns) / 1000000.0);
+  int num_frames    = block.NumberFrames();
+  int64_t frame_pos = block.GetElementPosition() + block.ElementSize();
+
+  for (int idx = 0; idx < num_frames; ++idx) {
+    auto &data = block.GetBuffer(idx);
+    auto adler = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, data.Buffer(), data.Size());
 
     std::string adler_str;
     if (m_calc_checksums)
@@ -1108,19 +1059,18 @@ kax_info_c::handle_simple_block(EbmlElement *&l2,
 
     show_element(nullptr, 3, ms_common_formats[ms_bf_simple_block_frame] % data.Size() % adler_str % hex);
 
-    frame_sizes.push_back(data.Size());
-    frame_adlers.push_back(adler);
+    m_frame_sizes.push_back(data.Size());
+    m_frame_adlers.push_back(adler);
     frame_pos -= data.Size();
   }
 
   if (m_show_summary) {
     std::string position;
-    std::size_t fidx;
 
-    for (fidx = 0; fidx < frame_sizes.size(); fidx++) {
+    for (int idx = 0; idx < num_frames; idx++) {
       if (1 <= m_verbose) {
         position   = (ms_common_formats[ms_bf_simple_block_position] % frame_pos).str();
-        frame_pos += frame_sizes[fidx];
+        frame_pos += m_frame_sizes[idx];
       }
 
       m_out->write((ms_common_formats[ms_bf_simple_block_summary]
@@ -1128,8 +1078,8 @@ kax_info_c::handle_simple_block(EbmlElement *&l2,
                     % block.TrackNum()
                     % timestamp_ms
                     % format_timestamp(timestamp_ns, 3)
-                    % frame_sizes[fidx]
-                    % frame_adlers[fidx]
+                    % m_frame_sizes[idx]
+                    % m_frame_adlers[idx]
                     % position).str());
     }
 
@@ -1145,46 +1095,7 @@ kax_info_c::handle_simple_block(EbmlElement *&l2,
   tinfo.m_min_timestamp                                                              = std::min(tinfo.m_min_timestamp ? *tinfo.m_min_timestamp : static_cast<int64_t>(timestamp_ns), static_cast<int64_t>(timestamp_ns));
   tinfo.m_max_timestamp                                                              = std::max(tinfo.m_max_timestamp ? *tinfo.m_max_timestamp : static_cast<int64_t>(timestamp_ns), static_cast<int64_t>(timestamp_ns));
   tinfo.m_add_duration_for_n_packets                                                 = block.NumberFrames();
-  tinfo.m_size                                                                      += boost::accumulate(frame_sizes, 0);
-}
-
-void
-kax_info_c::handle_cluster(int &upper_lvl_el,
-                           EbmlElement *&l1,
-                           int64_t file_size) {
-  auto cluster = static_cast<KaxCluster *>(l1);
-
-  if (m_use_gui)
-    ui_show_progress(100 * cluster->GetElementPosition() / file_size, Y("Parsing file"));
-
-  upper_lvl_el               = 0;
-  EbmlElement *element_found = nullptr;
-  auto m1                    = static_cast<EbmlMaster *>(l1);
-  read_master(m1, EBML_CONTEXT(l1), upper_lvl_el, element_found);
-
-  cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(m1), m_ts_scale);
-
-  for (auto l2 : *m1)
-    if (Is<KaxClusterTimecode>(l2))
-      show_element(l2, 2, ms_common_formats[ms_bf_cluster_timestamp]     % (static_cast<double>(static_cast<KaxClusterTimecode *>(l2)->GetValue()) * m_ts_scale / 1000000000.0));
-
-    else if (Is<KaxClusterPosition>(l2))
-      show_element(l2, 2, ms_common_formats[ms_bf_cluster_position]      % static_cast<KaxClusterPosition *>(l2)->GetValue());
-
-    else if (Is<KaxClusterPrevSize>(l2))
-      show_element(l2, 2, ms_common_formats[ms_bf_cluster_previous_size] % static_cast<KaxClusterPrevSize *>(l2)->GetValue());
-
-    else if (Is<KaxClusterSilentTracks>(l2))
-      handle_silent_track(l2);
-
-    else if (Is<KaxBlockGroup>(l2))
-      handle_block_group(l2, cluster);
-
-    else if (Is<KaxSimpleBlock>(l2))
-      handle_simple_block(l2, cluster);
-
-    else if (!is_global(l2, 2))
-      show_unknown_element(l2, 2);
+  tinfo.m_size                                                                      += boost::accumulate(m_frame_sizes, 0);
 }
 
 kax_info_c::result_e
@@ -1195,11 +1106,10 @@ kax_info_c::handle_segment(EbmlElement *l0) {
     show_element(l0, 0, boost::format(Y("Segment, size %1%")) % l0->GetSize());
   // ui_show_element(*l0);
 
-  auto file_size         = m_in->get_size();
-  auto l1                = static_cast<EbmlElement *>(nullptr);
-  auto upper_lvl_el      = 0;
-  auto kax_file          = std::make_shared<kax_file_c>(*m_in);
-  m_level                = 1;
+  m_file_size   = m_in->get_size();
+  auto l1       = static_cast<EbmlElement *>(nullptr);
+  auto kax_file = std::make_shared<kax_file_c>(*m_in);
+  m_level       = 1;
 
   kax_file->set_segment_end(*l0);
 
@@ -1210,15 +1120,11 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   while ((l1 = kax_file->read_next_level1_element())) {
     std::shared_ptr<EbmlElement> af_l1(l1);
 
-    if (Is<KaxCluster>(l1)) {
-      show_element(l1, 1, Y("Cluster"));
-      if ((m_verbose == 0) && !m_show_summary)
-        return result_e::succeeded;
-      handle_cluster(upper_lvl_el, l1, file_size);
+    if (Is<KaxCluster>(l1) && (m_verbose == 0) && !m_show_summary) {
+      ui_show_element(*l1);
+      return result_e::succeeded;
 
-    }
-
-    else if (Is<EbmlVoid>(l1) || Is<EbmlCrc32>(l1) || Is<KaxInfo>(l1) || Is<KaxSeekHead>(l1) || Is<KaxAttachments>(l1) || Is<KaxChapters>(l1) || Is<KaxTags>(l1) || Is<KaxCues>(l1) || Is<KaxTracks>(l1))
+    } else if (Is<EbmlVoid>(l1) || Is<EbmlCrc32>(l1) || Is<KaxInfo>(l1) || Is<KaxSeekHead>(l1) || Is<KaxAttachments>(l1) || Is<KaxChapters>(l1) || Is<KaxTags>(l1) || Is<KaxCues>(l1) || Is<KaxTracks>(l1) || Is<KaxCluster>(l1))
       handle_elements_generic(*l1);
 
     else
