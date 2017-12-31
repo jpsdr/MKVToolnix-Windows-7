@@ -408,6 +408,9 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
   if (dynamic_cast<EbmlMaster *>(&e))
     return {};
 
+  if (dynamic_cast<EbmlFloat *>(&e))
+    return to_string(static_cast<EbmlFloat &>(e).GetValue());
+
   throw std::invalid_argument{"format_element_value: unsupported EbmlElement type"};
 }
 
@@ -576,6 +579,99 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return m_verbose >= 2;
   });
 
+  PRE(KaxTracks, [this](EbmlElement &) -> bool { m_mkvmerge_track_id = 0; return true; });
+
+  PRE(KaxTrackEntry, [this](EbmlElement &e) -> bool {
+    m_summary.clear();
+
+    auto &master              = static_cast<EbmlMaster &>(e);
+    m_track                   = std::make_shared<track_t>();
+    m_track->tuid             = FindChildValue<KaxTrackUID>(master);
+    m_track->codec_id         = FindChildValue<KaxCodecID>(master);
+    m_track->default_duration = FindChildValue<KaxTrackDefaultDuration>(master);
+
+    return true;
+  });
+
+  PRE(KaxTrackNumber, [this](EbmlElement &e) -> bool {
+    m_track->tnum = static_cast<KaxTrackNumber &>(e).GetValue();
+
+    auto existing_track = find_track(m_track->tnum);
+    auto track_id       = m_mkvmerge_track_id;
+    if (!existing_track) {
+      m_track->mkvmerge_track_id = m_mkvmerge_track_id;
+      ++m_mkvmerge_track_id;
+      add_track(m_track);
+
+    } else
+      track_id = existing_track->mkvmerge_track_id;
+
+    m_summary.push_back((boost::format(Y("mkvmerge/mkvextract track ID: %1%")) % track_id).str());
+
+    return true;
+  });
+
+  PRE(KaxTrackType, [this](EbmlElement &e) -> bool {
+    auto ttype    = static_cast<KaxTrackType &>(e).GetValue();
+    m_track->type = track_audio    == ttype ? 'a'
+                  : track_video    == ttype ? 'v'
+                  : track_subtitle == ttype ? 's'
+                  : track_buttons  == ttype ? 'b'
+                  :                           '?';
+    return true;
+  });
+
+  PRE(KaxCodecPrivate, [this](EbmlElement &e) -> bool {
+    auto &c_priv     = static_cast<KaxCodecPrivate &>(e);
+    m_track-> fourcc = create_codec_dependent_private_info(c_priv, m_track->type, m_track->codec_id);
+
+    if (m_calc_checksums && !m_show_summary)
+      m_track->fourcc += (boost::format(Y(" (adler: 0x%|1$08x|)")) % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, c_priv.GetBuffer(), c_priv.GetSize())).str();
+
+    if (m_show_hexdump)
+      m_track->fourcc += create_hexdump(c_priv.GetBuffer(), c_priv.GetSize());
+
+    return true;
+  });
+
+  POST(KaxAudioSamplingFreq,       [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("sampling freq: %1%")) % static_cast<KaxAudioSamplingFreq &>(e).GetValue()).str()); });
+  POST(KaxAudioOutputSamplingFreq, [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("output sampling freq: %1%")) % static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue()).str()); });
+  POST(KaxAudioChannels,           [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("channels: %1%")) % static_cast<KaxAudioChannels &>(e).GetValue()).str()); });
+  POST(KaxAudioBitDepth,           [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("bits per sample: %1%")) % static_cast<KaxAudioBitDepth &>(e).GetValue()).str()); });
+
+  POST(KaxVideoPixelWidth,         [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel width: %1%")) % static_cast<KaxVideoPixelWidth &>(e).GetValue()).str()); });
+  POST(KaxVideoPixelHeight,        [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel height: %1%")) % static_cast<KaxVideoPixelHeight &>(e).GetValue()).str()); });
+  POST(KaxVideoDisplayWidth,       [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("display width: %1%")) % static_cast<KaxVideoDisplayWidth &>(e).GetValue()).str()); });
+  POST(KaxVideoDisplayHeight,      [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("display height: %1%")) % static_cast<KaxVideoDisplayHeight &>(e).GetValue()).str()); });
+  POST(KaxVideoPixelCropLeft,      [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel crop left: %1%")) % static_cast<KaxVideoPixelCropLeft &>(e).GetValue()).str()); });
+  POST(KaxVideoPixelCropTop,       [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel crop top: %1%")) % static_cast<KaxVideoPixelCropTop &>(e).GetValue()).str()); });
+  POST(KaxVideoPixelCropRight,     [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel crop right: %1%")) % static_cast<KaxVideoPixelCropRight &>(e).GetValue()).str()); });
+  POST(KaxVideoPixelCropBottom,    [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel crop bottom: %1%")) % static_cast<KaxVideoPixelCropBottom &>(e).GetValue()).str()); });
+  POST(KaxTrackLanguage,           [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("language: %1%")) % static_cast<KaxTrackLanguage &>(e).GetValue()).str()); });
+  POST(KaxTrackDefaultDuration,    [this](EbmlElement &) {
+    m_summary.push_back((boost::format(Y("default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"))
+                         % (static_cast<double>(m_track->default_duration) / 1000000.0)
+                         % (1000000000.0 / static_cast<double>(m_track->default_duration))
+                         ).str());
+  });
+
+  POST(KaxTrackEntry, [this](EbmlElement &) {
+    if (!m_show_summary)
+      return;
+
+    m_out->write((boost::format(Y("Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"))
+                  % m_track->tnum
+                  % (  'a' == m_track->type ? Y("audio")
+                     : 'v' == m_track->type ? Y("video")
+                     : 's' == m_track->type ? Y("subtitles")
+                     : 'b' == m_track->type ? Y("buttons")
+                     :                        Y("unknown"))
+                  % m_track->codec_id
+                  % m_track->fourcc
+                  % (m_summary.empty() ? "" : ", ")
+                  % boost::join(m_summary, ", ")).str());
+  });
+
   // Simple formatters:
   FMTM(KaxSegmentUID,       format_binary_as_hex);
   FMTM(KaxSegmentFamily,    format_binary_as_hex);
@@ -589,6 +685,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   FMTM(KaxCueDuration,      format_unsigned_integer_as_scaled_timestamp);
   FMTM(KaxCueTime,          format_unsigned_integer_as_scaled_timestamp);
   FMTM(KaxCueRefTime,       format_unsigned_integer_as_scaled_timestamp);
+  FMTM(KaxCodecDelay,       format_unsigned_integer_as_timestamp);
+  FMTM(KaxSeekPreRoll,      format_unsigned_integer_as_timestamp);
 
   // More complex formatters:
   FMT(KaxDuration, [this](EbmlElement &e) -> std::string {
@@ -612,561 +710,150 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                : Is<KaxSeekHead>(id)    ? "KaxSeekHead"
                :                          "unknown")).str();
   });
+
+  FMT(KaxVideoProjectionType, [](EbmlElement &e) -> std::string {
+    auto value       = static_cast<KaxVideoProjectionType &>(e).GetValue();
+    auto description = 0 == value ? Y("rectangular")
+                     : 1 == value ? Y("equirectangular")
+                     : 2 == value ? Y("cubemap")
+                     : 3 == value ? Y("mesh")
+                     :              Y("unknown");
+
+    return (boost::format("%1% (%2%)") % value % description).str();
+  });
+
+  FMT(KaxVideoDisplayUnit, [](EbmlElement &e) -> std::string {
+      auto unit = static_cast<KaxVideoDisplayUnit &>(e).GetValue();
+      return (boost::format("%1%%2%")
+              % unit
+              % (  0 == unit ? Y(" (pixels)")
+                   : 1 == unit ? Y(" (centimeters)")
+                   : 2 == unit ? Y(" (inches)")
+                   : 3 == unit ? Y(" (aspect ratio)")
+                   :               "")).str();
+  });
+
+  FMT(KaxVideoFieldOrder, [](EbmlElement &e) -> std::string {
+    auto field_order = static_cast<KaxVideoFieldOrder &>(e).GetValue();
+    return (boost::format("%1% (%2%)")
+            % field_order
+            % (  0  == field_order ? Y("progressive")
+               : 1  == field_order ? Y("top field displayed first, top field stored first")
+               : 2  == field_order ? Y("unspecified")
+               : 6  == field_order ? Y("bottom field displayed first, bottom field stored first")
+               : 9  == field_order ? Y("bottom field displayed first, top field stored first")
+               : 14 == field_order ? Y("top field displayed first, bottom field stored first")
+               :                     Y("unknown"))).str();
+  });
+
+  FMT(KaxVideoStereoMode, [](EbmlElement &e) -> std::string {
+    auto stereo_mode = static_cast<KaxVideoStereoMode &>(e).GetValue();
+    return (boost::format("%1% (%2%)") % stereo_mode % stereo_mode_c::translate(static_cast<stereo_mode_c::mode>(stereo_mode))).str();
+  });
+
+  FMT(KaxVideoAspectRatio, [](EbmlElement &e) -> std::string {
+    auto ar_type = static_cast<KaxVideoAspectRatio &>(e).GetValue();
+    return (boost::format("%1%%2%")
+            % ar_type
+            % (  0 == ar_type ? Y(" (free resizing)")
+               : 1 == ar_type ? Y(" (keep aspect ratio)")
+               : 2 == ar_type ? Y(" (fixed)")
+               :                  "")).str();
+  });
+
+  FMT(KaxContentEncodingScope, [](EbmlElement &e) -> std::string {
+    std::vector<std::string> scope;
+    auto ce_scope = static_cast<KaxContentEncodingScope &>(e).GetValue();
+
+    if ((ce_scope & 0x01) == 0x01)
+      scope.push_back(Y("1: all frames"));
+    if ((ce_scope & 0x02) == 0x02)
+      scope.push_back(Y("2: codec private data"));
+    if ((ce_scope & 0xfc) != 0x00)
+      scope.push_back(Y("rest: unknown"));
+    if (scope.empty())
+      scope.push_back(Y("unknown"));
+
+    return (boost::format("%1% (%2%)") % ce_scope % boost::join(scope, ", ")).str();
+  });
+
+  FMT(KaxContentEncodingType, [](EbmlElement &e) -> std::string {
+    auto ce_type = static_cast<KaxContentEncodingType &>(e).GetValue();
+    return (boost::format("%1% (%2%)")
+            % ce_type
+            % (  0 == ce_type ? Y("compression")
+               : 1 == ce_type ? Y("encryption")
+               :                Y("unknown"))).str();
+  });
+
+  FMT(KaxContentCompAlgo, [](EbmlElement &e) -> std::string {
+    auto c_algo = static_cast<KaxContentCompAlgo &>(e).GetValue();
+    return (boost::format("%1% (%2%)")
+            % c_algo
+            % (  0 == c_algo ?   "ZLIB"
+               : 1 == c_algo ?   "bzLib"
+               : 2 == c_algo ?   "lzo1x"
+               : 3 == c_algo ? Y("header removal")
+               :               Y("unknown"))).str();
+  });
+
+  FMT(KaxContentEncAlgo, [](EbmlElement &e) -> std::string {
+    auto e_algo = static_cast<KaxContentEncAlgo &>(e).GetValue();
+    return (boost::format("%1% (%2%)")
+            % e_algo
+            % (  0 == e_algo ? Y("no encryption")
+               : 1 == e_algo ?   "DES"
+               : 2 == e_algo ?   "3DES"
+               : 3 == e_algo ?   "Twofish"
+               : 4 == e_algo ?   "Blowfish"
+               : 5 == e_algo ?   "AES"
+               :               Y("unknown"))).str();
+  });
+
+  FMT(KaxContentSigAlgo, [](EbmlElement &e) -> std::string {
+    auto s_algo = static_cast<KaxContentSigAlgo &>(e).GetValue();
+    return (boost::format("%1% (%2%)")
+            % s_algo
+            % (  0 == s_algo ? Y("no signature algorithm")
+               : 1 == s_algo ? Y("RSA")
+               :               Y("unknown"))).str();
+  });
+
+  FMT(KaxContentSigHashAlgo, [](EbmlElement &e) -> std::string {
+    auto s_halgo = static_cast<KaxContentSigHashAlgo &>(e).GetValue();
+    return (boost::format(Y("Signature hash algorithm: %1% (%2%)"))
+            % s_halgo
+            % (  0 == s_halgo ? Y("no signature hash algorithm")
+               : 1 == s_halgo ? Y("SHA1-160")
+               : 2 == s_halgo ? Y("MD5")
+               :                Y("unknown"))).str();
+  });
+
+  FMT(KaxTrackNumber, [this](EbmlElement &) -> std::string { return (boost::format(Y("%1% (track ID for mkvmerge & mkvextract: %2%)")) % m_track->tnum % m_track->mkvmerge_track_id).str(); });
+
+  FMT(KaxTrackType, [this](EbmlElement &) -> std::string {
+    return 'a' == m_track->type ? "audio"
+         : 'v' == m_track->type ? "video"
+         : 's' == m_track->type ? "subtitles"
+         : 'b' == m_track->type ? "buttons"
+         :                        "unknown";
+  });
+
+  FMT(KaxCodecPrivate, [this](EbmlElement &e) -> std::string {
+    return (boost::format(Y("size %1%")) % e.GetSize()).str() + m_track->fourcc;
+  });
+
+  FMT(KaxTrackDefaultDuration, [this](EbmlElement &) -> std::string {
+      return (boost::format(Y("%|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"))
+              % (static_cast<double>(m_track->default_duration) / 1000000.0)
+              % (1000000000.0 / static_cast<double>(m_track->default_duration))).str();
+  });
 }
 
 #undef FMT
 #undef FMTM
 #undef PRE
 #undef POST
-
-void
-kax_info_c::handle_audio_track(EbmlElement *&l3,
-                               std::vector<std::string> &summary) {
-  show_element(l3, 3, "Audio track");
-
-  for (auto l4 : *static_cast<EbmlMaster *>(l3))
-    if (Is<KaxAudioSamplingFreq>(l4)) {
-      KaxAudioSamplingFreq &freq = *static_cast<KaxAudioSamplingFreq *>(l4);
-      show_element(l4, 4, boost::format(Y("Sampling frequency: %1%")) % freq.GetValue());
-      summary.push_back((boost::format(Y("sampling freq: %1%")) % freq.GetValue()).str());
-
-    } else if (Is<KaxAudioOutputSamplingFreq>(l4)) {
-      KaxAudioOutputSamplingFreq &ofreq = *static_cast<KaxAudioOutputSamplingFreq *>(l4);
-      show_element(l4, 4, boost::format(Y("Output sampling frequency: %1%")) % ofreq.GetValue());
-      summary.push_back((boost::format(Y("output sampling freq: %1%")) % ofreq.GetValue()).str());
-
-    } else if (Is<KaxAudioChannels>(l4)) {
-      KaxAudioChannels &channels = *static_cast<KaxAudioChannels *>(l4);
-      show_element(l4, 4, boost::format(Y("Channels: %1%")) % channels.GetValue());
-      summary.push_back((boost::format(Y("channels: %1%")) % channels.GetValue()).str());
-
-    } else if (Is<KaxAudioPosition>(l4)) {
-      KaxAudioPosition &positions = *static_cast<KaxAudioPosition *>(l4);
-      show_element(l4, 4, boost::format(Y("Channel positions: %1%")) % format_binary(positions));
-
-    } else if (Is<KaxAudioBitDepth>(l4)) {
-      KaxAudioBitDepth &bps = *static_cast<KaxAudioBitDepth *>(l4);
-      show_element(l4, 4, boost::format(Y("Bit depth: %1%")) % bps.GetValue());
-      summary.push_back((boost::format(Y("bits per sample: %1%")) % bps.GetValue()).str());
-
-    } else if (!is_global(l4, 4))
-      show_unknown_element(l4, 4);
-}
-
-void
-kax_info_c::handle_video_colour_master_meta(EbmlElement *&l5) {
-  show_element(l5, 5, Y("Video colour mastering metadata"));
-
-  for (auto l6: *static_cast<EbmlMaster *>(l5)) {
-    if (Is<KaxVideoRChromaX>(l6))
-      show_element(l6, 6, boost::format(Y("Red colour coordinate x: %1%")) % static_cast<KaxVideoRChromaX *>(l6)->GetValue());
-
-    else if (Is<KaxVideoRChromaY>(l6))
-      show_element(l6, 6, boost::format(Y("Red colour coordinate y: %1%")) % static_cast<KaxVideoRChromaY *>(l6)->GetValue());
-
-    else if (Is<KaxVideoGChromaX>(l6))
-      show_element(l6, 6, boost::format(Y("Green colour coordinate x: %1%")) % static_cast<KaxVideoGChromaX *>(l6)->GetValue());
-
-    else if (Is<KaxVideoGChromaY>(l6))
-      show_element(l6, 6, boost::format(Y("Green colour coordinate y: %1%")) % static_cast<KaxVideoGChromaY *>(l6)->GetValue());
-
-    else if (Is<KaxVideoBChromaX>(l6))
-      show_element(l6, 6, boost::format(Y("Blue colour coordinate x: %1%")) % static_cast<KaxVideoBChromaX *>(l6)->GetValue());
-
-    else if (Is<KaxVideoBChromaY>(l6))
-      show_element(l6, 6, boost::format(Y("Blue colour coordinate y: %1%")) % static_cast<KaxVideoBChromaY *>(l6)->GetValue());
-
-    else if (Is<KaxVideoWhitePointChromaX>(l6))
-      show_element(l6, 6, boost::format(Y("White colour coordinate x: %1%")) % static_cast<KaxVideoWhitePointChromaX *>(l6)->GetValue());
-
-    else if (Is<KaxVideoWhitePointChromaY>(l6))
-      show_element(l6, 6, boost::format(Y("White colour coordinate y: %1%")) % static_cast<KaxVideoWhitePointChromaY *>(l6)->GetValue());
-
-    else if (Is<KaxVideoLuminanceMax>(l6))
-      show_element(l6, 6, boost::format(Y("Max luminance: %1%")) % static_cast<KaxVideoLuminanceMax *>(l6)->GetValue());
-
-    else if (Is<KaxVideoLuminanceMin>(l6))
-      show_element(l6, 6, boost::format(Y("Min luminance: %1%")) % static_cast<KaxVideoLuminanceMin *>(l6)->GetValue());
-
-    else if (!is_global(l6, 6))
-      show_unknown_element(l6, 6);
-  }
-}
-
-void
-kax_info_c::handle_video_colour(EbmlElement *&l4) {
-  show_element(l4, 4, Y("Video colour information"));
-
-  for (auto l5 : *static_cast<EbmlMaster *>(l4)) {
-    if (Is<KaxVideoColourMatrix>(l5))
-      show_element(l5, 5, boost::format(Y("Colour matrix coefficients: %1%")) % static_cast<KaxVideoColourMatrix *>(l5)->GetValue());
-
-    else if (Is<KaxVideoBitsPerChannel>(l5))
-      show_element(l5, 5, boost::format(Y("Bits per channel: %1%")) % static_cast<KaxVideoBitsPerChannel *>(l5)->GetValue());
-
-    else if (Is<KaxVideoChromaSubsampHorz>(l5))
-      show_element(l5, 5, boost::format(Y("Horizontal chroma subsample: %1%")) % static_cast<KaxVideoChromaSubsampHorz *>(l5)->GetValue());
-
-    else if (Is<KaxVideoChromaSubsampVert>(l5))
-      show_element(l5, 5, boost::format(Y("Vertical chroma subsample: %1%")) % static_cast<KaxVideoChromaSubsampVert *>(l5)->GetValue());
-
-    else if (Is<KaxVideoCbSubsampHorz>(l5))
-      show_element(l5, 5, boost::format(Y("Horizontal Cb subsample: %1%")) % static_cast<KaxVideoCbSubsampHorz *>(l5)->GetValue());
-
-    else if (Is<KaxVideoCbSubsampVert>(l5))
-      show_element(l5, 5, boost::format(Y("Vertical Cb subsample: %1%")) % static_cast<KaxVideoCbSubsampVert *>(l5)->GetValue());
-
-    else if (Is<KaxVideoChromaSitHorz>(l5))
-      show_element(l5, 5, boost::format(Y("Horizontal chroma siting: %1%")) % static_cast<KaxVideoChromaSitHorz *>(l5)->GetValue());
-
-    else if (Is<KaxVideoChromaSitVert>(l5))
-      show_element(l5, 5, boost::format(Y("Vertical chroma siting: %1%")) % static_cast<KaxVideoChromaSitVert *>(l5)->GetValue());
-
-    else if (Is<KaxVideoColourRange>(l5))
-      show_element(l5, 5, boost::format(Y("Colour range: %1%")) % static_cast<KaxVideoColourRange *>(l5)->GetValue());
-
-    else if (Is<KaxVideoColourTransferCharacter>(l5))
-      show_element(l5, 5, boost::format(Y("Colour transfer: %1%")) % static_cast<KaxVideoColourTransferCharacter *>(l5)->GetValue());
-
-    else if (Is<KaxVideoColourPrimaries>(l5))
-      show_element(l5, 5, boost::format(Y("Colour primaries: %1%")) % static_cast<KaxVideoColourPrimaries *>(l5)->GetValue());
-
-    else if (Is<KaxVideoColourMaxCLL>(l5))
-      show_element(l5, 5, boost::format(Y("Max content light: %1%")) % static_cast<KaxVideoColourMaxCLL *>(l5)->GetValue());
-
-    else if (Is<KaxVideoColourMaxFALL>(l5))
-      show_element(l5, 5, boost::format(Y("Max frame light: %1%")) % static_cast<KaxVideoColourMaxFALL *>(l5)->GetValue());
-
-    else if (Is<KaxVideoColourMasterMeta>(l5))
-      handle_video_colour_master_meta(l5);
-
-    else if (!is_global(l5, 5))
-      show_unknown_element(l5, 5);
-  }
-}
-
-void
-kax_info_c::handle_video_projection(EbmlElement *&l4) {
-  show_element(l4, 4, Y("Video projection"));
-
-  for (auto l5 : *static_cast<EbmlMaster *>(l4)) {
-    if (Is<KaxVideoProjectionType>(l5)) {
-      auto value       = static_cast<KaxVideoProjectionType *>(l5)->GetValue();
-      auto description = 0 == value ? Y("rectangular")
-                       : 1 == value ? Y("equirectangular")
-                       : 2 == value ? Y("cubemap")
-                       : 3 == value ? Y("mesh")
-                       :              Y("unknown");
-
-      show_element(l5, 5, boost::format(Y("Projection type: %1% (%2%)")) % value % description);
-
-    } else if (Is<KaxVideoProjectionPrivate>(l5))
-      show_element(l5, 5, boost::format(Y("Projection's private data: %1%")) % to_hex(static_cast<KaxVideoProjectionPrivate *>(l5)));
-
-    else if (Is<KaxVideoProjectionPoseYaw>(l5))
-      show_element(l5, 5, boost::format(Y("Projection's yaw rotation: %1%")) % static_cast<KaxVideoProjectionPoseYaw *>(l5)->GetValue());
-
-    else if (Is<KaxVideoProjectionPosePitch>(l5))
-      show_element(l5, 5, boost::format(Y("Projection's pitch rotation: %1%")) % static_cast<KaxVideoProjectionPosePitch *>(l5)->GetValue());
-
-    else if (Is<KaxVideoProjectionPoseRoll>(l5))
-      show_element(l5, 5, boost::format(Y("Projection's roll rotation: %1%")) % static_cast<KaxVideoProjectionPoseRoll *>(l5)->GetValue());
-
-    else if (!is_global(l5, 5))
-      show_unknown_element(l5, 5);
-  }
-}
-
-void
-kax_info_c::handle_video_track(EbmlElement *&l3,
-                               std::vector<std::string> &summary) {
-  show_element(l3, 3, Y("Video track"));
-
-  for (auto l4 : *static_cast<EbmlMaster *>(l3))
-    if (Is<KaxVideoPixelWidth>(l4)) {
-      KaxVideoPixelWidth &width = *static_cast<KaxVideoPixelWidth *>(l4);
-      show_element(l4, 4, boost::format(Y("Pixel width: %1%")) % width.GetValue());
-      summary.push_back((boost::format(Y("pixel width: %1%")) % width.GetValue()).str());
-
-    } else if (Is<KaxVideoPixelHeight>(l4)) {
-      KaxVideoPixelHeight &height = *static_cast<KaxVideoPixelHeight *>(l4);
-      show_element(l4, 4, boost::format(Y("Pixel height: %1%")) % height.GetValue());
-      summary.push_back((boost::format(Y("pixel height: %1%")) % height.GetValue()).str());
-
-    } else if (Is<KaxVideoDisplayWidth>(l4)) {
-      KaxVideoDisplayWidth &width = *static_cast<KaxVideoDisplayWidth *>(l4);
-      show_element(l4, 4, boost::format(Y("Display width: %1%")) % width.GetValue());
-      summary.push_back((boost::format(Y("display width: %1%")) % width.GetValue()).str());
-
-    } else if (Is<KaxVideoDisplayHeight>(l4)) {
-      KaxVideoDisplayHeight &height = *static_cast<KaxVideoDisplayHeight *>(l4);
-      show_element(l4, 4, boost::format(Y("Display height: %1%")) % height.GetValue());
-      summary.push_back((boost::format(Y("display height: %1%")) % height.GetValue()).str());
-
-    } else if (Is<KaxVideoPixelCropLeft>(l4)) {
-      KaxVideoPixelCropLeft &left = *static_cast<KaxVideoPixelCropLeft *>(l4);
-      show_element(l4, 4, boost::format(Y("Pixel crop left: %1%")) % left.GetValue());
-      summary.push_back((boost::format(Y("pixel crop left: %1%")) % left.GetValue()).str());
-
-    } else if (Is<KaxVideoPixelCropTop>(l4)) {
-      KaxVideoPixelCropTop &top = *static_cast<KaxVideoPixelCropTop *>(l4);
-      show_element(l4, 4, boost::format(Y("Pixel crop top: %1%")) % top.GetValue());
-      summary.push_back((boost::format(Y("pixel crop top: %1%")) % top.GetValue()).str());
-
-    } else if (Is<KaxVideoPixelCropRight>(l4)) {
-      KaxVideoPixelCropRight &right = *static_cast<KaxVideoPixelCropRight *>(l4);
-      show_element(l4, 4, boost::format(Y("Pixel crop right: %1%")) % right.GetValue());
-      summary.push_back((boost::format(Y("pixel crop right: %1%")) % right.GetValue()).str());
-
-    } else if (Is<KaxVideoPixelCropBottom>(l4)) {
-      KaxVideoPixelCropBottom &bottom = *static_cast<KaxVideoPixelCropBottom *>(l4);
-      show_element(l4, 4, boost::format(Y("Pixel crop bottom: %1%")) % bottom.GetValue());
-      summary.push_back((boost::format(Y("pixel crop bottom: %1%")) % bottom.GetValue()).str());
-
-    } else if (Is<KaxVideoDisplayUnit>(l4)) {
-      auto unit = static_cast<KaxVideoDisplayUnit *>(l4)->GetValue();
-      show_element(l4, 4,
-                   boost::format(Y("Display unit: %1%%2%"))
-                   % unit
-                   % (  0 == unit ? Y(" (pixels)")
-                      : 1 == unit ? Y(" (centimeters)")
-                      : 2 == unit ? Y(" (inches)")
-                      : 3 == unit ? Y(" (aspect ratio)")
-                      :               ""));
-
-    } else if (Is<KaxVideoGamma>(l4))
-      show_element(l4, 4, boost::format(Y("Gamma: %1%")) % static_cast<KaxVideoGamma *>(l4)->GetValue());
-
-    else if (Is<KaxVideoFlagInterlaced>(l4))
-      show_element(l4, 4, boost::format(Y("Interlaced: %1%")) % static_cast<KaxVideoFlagInterlaced *>(l4)->GetValue());
-
-    else if (Is<KaxVideoFieldOrder>(l4)) {
-      auto field_order = static_cast<KaxVideoFieldOrder *>(l4)->GetValue();
-      show_element(l4, 4,
-                   boost::format(Y("Field order: %1% (%2%)"))
-                   % field_order
-                   % (  0  == field_order ? Y("progressive")
-                      : 1  == field_order ? Y("top field displayed first, top field stored first")
-                      : 2  == field_order ? Y("unspecified")
-                      : 6  == field_order ? Y("bottom field displayed first, bottom field stored first")
-                      : 9  == field_order ? Y("bottom field displayed first, top field stored first")
-                      : 14 == field_order ? Y("top field displayed first, bottom field stored first")
-                      :                       "unknown"));
-
-    } else if (Is<KaxVideoStereoMode>(l4)) {
-      auto stereo_mode = static_cast<KaxVideoStereoMode *>(l4)->GetValue();
-      show_element(l4, 4,
-                   boost::format(Y("Stereo mode: %1% (%2%)"))
-                   % stereo_mode
-                   % stereo_mode_c::translate(static_cast<stereo_mode_c::mode>(stereo_mode)));
-
-    } else if (Is<KaxVideoAspectRatio>(l4)) {
-      auto ar_type = static_cast<KaxVideoAspectRatio *>(l4)->GetValue();
-      show_element(l4, 4,
-                   boost::format(Y("Aspect ratio type: %1%%2%"))
-                   % ar_type
-                   % (  0 == ar_type ? Y(" (free resizing)")
-                      : 1 == ar_type ? Y(" (keep aspect ratio)")
-                      : 2 == ar_type ? Y(" (fixed)")
-                      :                  ""));
-    } else if (Is<KaxVideoColourSpace>(l4))
-      show_element(l4, 4, boost::format(Y("Colour space: %1%")) % format_binary(*static_cast<KaxVideoColourSpace *>(l4)));
-
-    else if (Is<KaxVideoFrameRate>(l4))
-      show_element(l4, 4, boost::format(Y("Frame rate: %1%")) % static_cast<KaxVideoFrameRate *>(l4)->GetValue());
-
-    else if (Is<KaxVideoColour>(l4))
-      handle_video_colour(l4);
-
-    else if (Is<KaxVideoProjection>(l4))
-      handle_video_projection(l4);
-
-    else if (!is_global(l4, 4))
-      show_unknown_element(l4, 4);
-}
-
-void
-kax_info_c::handle_content_encodings(EbmlElement *&l3) {
-  show_element(l3, 3, Y("Content encodings"));
-
-  for (auto l4 : *static_cast<EbmlMaster *>(l3))
-    if (Is<KaxContentEncoding>(l4)) {
-      show_element(l4, 4, Y("Content encoding"));
-
-      for (auto l5 : *static_cast<EbmlMaster *>(l4))
-        if (Is<KaxContentEncodingOrder>(l5))
-          show_element(l5, 5, boost::format(Y("Order: %1%")) % static_cast<KaxContentEncodingOrder *>(l5)->GetValue());
-
-        else if (Is<KaxContentEncodingScope>(l5)) {
-          std::vector<std::string> scope;
-          auto ce_scope = static_cast<KaxContentEncodingScope *>(l5)->GetValue();
-
-          if ((ce_scope & 0x01) == 0x01)
-            scope.push_back(Y("1: all frames"));
-          if ((ce_scope & 0x02) == 0x02)
-            scope.push_back(Y("2: codec private data"));
-          if ((ce_scope & 0xfc) != 0x00)
-            scope.push_back(Y("rest: unknown"));
-          if (scope.empty())
-            scope.push_back(Y("unknown"));
-          show_element(l5, 5, boost::format(Y("Scope: %1% (%2%)")) % ce_scope % boost::join(scope, ", "));
-
-        } else if (Is<KaxContentEncodingType>(l5)) {
-          auto ce_type = static_cast<KaxContentEncodingType *>(l5)->GetValue();
-          show_element(l5, 5,
-                       boost::format(Y("Type: %1% (%2%)"))
-                       % ce_type
-                       % (  0 == ce_type ? Y("compression")
-                          : 1 == ce_type ? Y("encryption")
-                          :                Y("unknown")));
-
-        } else if (Is<KaxContentCompression>(l5)) {
-          show_element(l5, 5, Y("Content compression"));
-
-          for (auto l6 : *static_cast<EbmlMaster *>(l5))
-            if (Is<KaxContentCompAlgo>(l6)) {
-              auto c_algo = static_cast<KaxContentCompAlgo *>(l6)->GetValue();
-              show_element(l6, 6,
-                           boost::format(Y("Algorithm: %1% (%2%)"))
-                           % c_algo
-                           % (  0 == c_algo ?   "ZLIB"
-                              : 1 == c_algo ?   "bzLib"
-                              : 2 == c_algo ?   "lzo1x"
-                              : 3 == c_algo ? Y("header removal")
-                              :               Y("unknown")));
-
-            } else if (Is<KaxContentCompSettings>(l6))
-              show_element(l6, 6, boost::format(Y("Settings: %1%")) % format_binary(*static_cast<KaxContentCompSettings *>(l6)));
-
-            else if (!is_global(l6, 6))
-              show_unknown_element(l6, 6);
-        } else if (Is<KaxContentEncryption>(l5)) {
-          show_element(l5, 5, Y("Content encryption"));
-
-          for (auto l6 : *static_cast<EbmlMaster *>(l5))
-            if (Is<KaxContentEncAlgo>(l6)) {
-              auto e_algo = static_cast<KaxContentEncAlgo *>(l6)->GetValue();
-              show_element(l6, 6,
-                           boost::format(Y("Encryption algorithm: %1% (%2%)"))
-                           % e_algo
-                           % (  0 == e_algo ? Y("no encryption")
-                              : 1 == e_algo ?   "DES"
-                              : 2 == e_algo ?   "3DES"
-                              : 3 == e_algo ?   "Twofish"
-                              : 4 == e_algo ?   "Blowfish"
-                              : 5 == e_algo ?   "AES"
-                              :               Y("unknown")));
-
-            } else if (Is<KaxContentEncKeyID>(l6))
-              show_element(l6, 6, boost::format(Y("Encryption key ID: %1%")) % format_binary(*static_cast<KaxContentEncKeyID *>(l6)));
-
-            else if (Is<KaxContentSigAlgo>(l6)) {
-              auto s_algo = static_cast<KaxContentSigAlgo *>(l6)->GetValue();
-              show_element(l6, 6,
-                           boost::format(Y("Signature algorithm: %1% (%2%)"))
-                           % s_algo
-                           % (  0 == s_algo ? Y("no signature algorithm")
-                              : 1 == s_algo ? Y("RSA")
-                              :               Y("unknown")));
-
-            } else if (Is<KaxContentSigHashAlgo>(l6)) {
-              auto s_halgo = static_cast<KaxContentSigHashAlgo *>(l6)->GetValue();
-              show_element(l6, 6,
-                           boost::format(Y("Signature hash algorithm: %1% (%2%)"))
-                           % s_halgo
-                           % (  0 == s_halgo ? Y("no signature hash algorithm")
-                              : 1 == s_halgo ? Y("SHA1-160")
-                              : 2 == s_halgo ? Y("MD5")
-                              :                Y("unknown")));
-
-            } else if (Is<KaxContentSigKeyID>(l6))
-              show_element(l6, 6, boost::format(Y("Signature key ID: %1%")) % format_binary(*static_cast<KaxContentSigKeyID *>(l6)));
-
-            else if (Is<KaxContentSignature>(l6))
-              show_element(l6, 6, boost::format(Y("Signature: %1%")) % format_binary(*static_cast<KaxContentSignature *>(l6)));
-
-            else if (!is_global(l6, 6))
-              show_unknown_element(l6, 6);
-
-        } else if (!is_global(l5, 5))
-          show_unknown_element(l5, 5);
-
-    } else if (!is_global(l4, 4))
-      show_unknown_element(l4, 4);
-}
-
-void
-kax_info_c::handle_tracks(int &upper_lvl_el,
-                          EbmlElement *&l1) {
-  // Yep, we've found our KaxTracks element. Now find all tracks
-  // contained in this segment.
-  show_element(l1, 1, Y("Segment tracks"));
-
-  m_mkvmerge_track_id        = 0;
-  upper_lvl_el               = 0;
-  EbmlElement *element_found = nullptr;
-  auto m1                    = static_cast<EbmlMaster *>(l1);
-  read_master(m1, EBML_CONTEXT(l1), upper_lvl_el, element_found);
-
-  for (auto l2 : *m1)
-    if (Is<KaxTrackEntry>(l2)) {
-      // We actually found a track entry :) We're happy now.
-      show_element(l2, 2, Y("A track"));
-
-      std::vector<std::string> summary;
-      std::string kax_codec_id, fourcc_buffer;
-      auto track = std::make_shared<track_t>();
-
-      for (auto l3 : *static_cast<EbmlMaster *>(l2))
-        // Now evaluate the data belonging to this track
-        if (Is<KaxTrackAudio>(l3))
-          handle_audio_track(l3, summary);
-
-        else if (Is<KaxTrackVideo>(l3))
-          handle_video_track(l3, summary);
-
-        else if (Is<KaxTrackNumber>(l3)) {
-          track->tnum = static_cast<KaxTrackNumber *>(l3)->GetValue();
-
-          auto existing_track = find_track(track->tnum);
-          auto track_id       = m_mkvmerge_track_id;
-          if (!existing_track) {
-            track->mkvmerge_track_id = m_mkvmerge_track_id;
-            ++m_mkvmerge_track_id;
-            add_track(track);
-
-          } else
-            track_id = existing_track->mkvmerge_track_id;
-
-          show_element(l3, 3, boost::format(Y("Track number: %1% (track ID for mkvmerge & mkvextract: %2%)")) % track->tnum % track_id);
-          summary.push_back((boost::format(Y("mkvmerge/mkvextract track ID: %1%"))                            % track_id).str());
-
-        } else if (Is<KaxTrackUID>(l3)) {
-          track->tuid = static_cast<KaxTrackUID *>(l3)->GetValue();
-          show_element(l3, 3, boost::format(Y("Track UID: %1%"))                                              % track->tuid);
-
-        } else if (Is<KaxTrackType>(l3)) {
-          auto ttype  = static_cast<KaxTrackType *>(l3)->GetValue();
-          track->type = track_audio    == ttype ? 'a'
-                      : track_video    == ttype ? 'v'
-                      : track_subtitle == ttype ? 's'
-                      : track_buttons  == ttype ? 'b'
-                      :                           '?';
-          show_element(l3, 3,
-                       boost::format(Y("Track type: %1%"))
-                       % (  'a' == track->type ? "audio"
-                          : 'v' == track->type ? "video"
-                          : 's' == track->type ? "subtitles"
-                          : 'b' == track->type ? "buttons"
-                          :                      "unknown"));
-
-        } else if (Is<KaxTrackFlagEnabled>(l3))
-          show_element(l3, 3, boost::format(Y("Enabled: %1%"))                % static_cast<KaxTrackFlagEnabled *>(l3)->GetValue());
-
-        else if (Is<KaxTrackName>(l3))
-          show_element(l3, 3, boost::format(Y("Name: %1%"))                   % static_cast<KaxTrackName *>(l3)->GetValueUTF8());
-
-        else if (Is<KaxCodecID>(l3)) {
-          kax_codec_id = static_cast<KaxCodecID *>(l3)->GetValue();
-          show_element(l3, 3, boost::format(Y("Codec ID: %1%"))               % kax_codec_id);
-
-        } else if (Is<KaxCodecPrivate>(l3)) {
-          KaxCodecPrivate &c_priv = *static_cast<KaxCodecPrivate *>(l3);
-          fourcc_buffer = create_codec_dependent_private_info(c_priv, track->type, kax_codec_id);
-
-          if (m_calc_checksums && !m_show_summary)
-            fourcc_buffer += (boost::format(Y(" (adler: 0x%|1$08x|)"))        % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, c_priv.GetBuffer(), c_priv.GetSize())).str();
-
-          if (m_show_hexdump)
-            fourcc_buffer += create_hexdump(c_priv.GetBuffer(), c_priv.GetSize());
-
-          show_element(l3, 3, boost::format(Y("CodecPrivate, length %1%%2%")) % c_priv.GetSize() % fourcc_buffer);
-
-        } else if (Is<KaxCodecName>(l3))
-          show_element(l3, 3, boost::format(Y("Codec name: %1%"))             % static_cast<KaxCodecName *>(l3)->GetValueUTF8());
-
-        else if (Is<KaxCodecSettings>(l3))
-          show_element(l3, 3, boost::format(Y("Codec settings: %1%"))         % static_cast<KaxCodecSettings *>(l3)->GetValueUTF8());
-
-        else if (Is<KaxCodecInfoURL>(l3))
-          show_element(l3, 3, boost::format(Y("Codec info URL: %1%"))         % static_cast<KaxCodecInfoURL *>(l3)->GetValue());
-
-        else if (Is<KaxCodecDownloadURL>(l3))
-          show_element(l3, 3, boost::format(Y("Codec download URL: %1%"))     % static_cast<KaxCodecDownloadURL *>(l3)->GetValue());
-
-        else if (Is<KaxCodecDecodeAll>(l3))
-          show_element(l3, 3, boost::format(Y("Codec decode all: %1%"))       % static_cast<KaxCodecDecodeAll *>(l3)->GetValue());
-
-        else if (Is<KaxTrackOverlay>(l3))
-          show_element(l3, 3, boost::format(Y("Track overlay: %1%"))          % static_cast<KaxTrackOverlay *>(l3)->GetValue());
-
-        else if (Is<KaxTrackMinCache>(l3))
-          show_element(l3, 3, boost::format(Y("MinCache: %1%"))               % static_cast<KaxTrackMinCache *>(l3)->GetValue());
-
-        else if (Is<KaxTrackMaxCache>(l3))
-          show_element(l3, 3, boost::format(Y("MaxCache: %1%"))               % static_cast<KaxTrackMaxCache *>(l3)->GetValue());
-
-        else if (Is<KaxTrackDefaultDuration>(l3)) {
-          track->default_duration = static_cast<KaxTrackDefaultDuration *>(l3)->GetValue();
-          show_element(l3, 3,
-                       boost::format(Y("Default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"))
-                       % (static_cast<double>(track->default_duration) / 1000000.0)
-                       % (1000000000.0 / static_cast<double>(track->default_duration)));
-          summary.push_back((boost::format(Y("default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"))
-                             % (static_cast<double>(track->default_duration) / 1000000.0)
-                             % (1000000000.0 / static_cast<double>(track->default_duration))
-                             ).str());
-
-        } else if (Is<KaxTrackFlagLacing>(l3))
-          show_element(l3, 3, boost::format(Y("Lacing flag: %1%"))          % static_cast<KaxTrackFlagLacing *>(l3)->GetValue());
-
-        else if (Is<KaxTrackFlagDefault>(l3))
-          show_element(l3, 3, boost::format(Y("Default flag: %1%"))         % static_cast<KaxTrackFlagDefault *>(l3)->GetValue());
-
-        else if (Is<KaxTrackFlagForced>(l3))
-          show_element(l3, 3, boost::format(Y("Forced flag: %1%"))          % static_cast<KaxTrackFlagForced *>(l3)->GetValue());
-
-        else if (Is<KaxTrackLanguage>(l3)) {
-          auto language = static_cast<KaxTrackLanguage *>(l3)->GetValue();
-          show_element(l3, 3, boost::format(Y("Language: %1%"))             % language);
-          summary.push_back((boost::format(Y("language: %1%"))              % language).str());
-
-        } else if (Is<KaxTrackTimecodeScale>(l3))
-          show_element(l3, 3, boost::format(Y("Timestamp scale: %1%"))      % static_cast<KaxTrackTimecodeScale *>(l3)->GetValue());
-
-        else if (Is<KaxMaxBlockAdditionID>(l3))
-          show_element(l3, 3, boost::format(Y("Max BlockAddition ID: %1%")) % static_cast<KaxMaxBlockAdditionID *>(l3)->GetValue());
-
-        else if (Is<KaxContentEncodings>(l3))
-          handle_content_encodings(l3);
-
-        else if (Is<KaxCodecDelay>(l3)) {
-          auto value = static_cast<KaxCodecDelay *>(l3)->GetValue();
-          show_element(l3, 3, boost::format(Y("Codec delay: %|1$.3f|ms (%2%ns)")) % (static_cast<double>(value) / 1000000.0) % value);
-
-        } else if (Is<KaxSeekPreRoll>(l3)) {
-          auto value = static_cast<KaxSeekPreRoll *>(l3)->GetValue();
-          show_element(l3, 3, boost::format(Y("Seek pre-roll: %|1$.3f|ms (%2%ns)")) % (static_cast<double>(value) / 1000000.0) % value);
-
-        } else if (!is_global(l3, 3))
-          show_unknown_element(l3, 3);
-
-      if (m_show_summary)
-        m_out->write((boost::format(Y("Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"))
-                      % track->tnum
-                      % (  'a' == track->type ? Y("audio")
-                           : 'v' == track->type ? Y("video")
-                           : 's' == track->type ? Y("subtitles")
-                           : 'b' == track->type ? Y("buttons")
-                           :                      Y("unknown"))
-                      % kax_codec_id
-                      % fourcc_buffer
-                      % (summary.empty() ? "" : ", ")
-                      % boost::join(summary, ", ")).str());
-
-    } else if (!is_global(l2, 2))
-      show_unknown_element(l2, 2);
-}
 
 void
 kax_info_c::handle_silent_track(EbmlElement *&l2) {
@@ -1523,10 +1210,7 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   while ((l1 = kax_file->read_next_level1_element())) {
     std::shared_ptr<EbmlElement> af_l1(l1);
 
-    if (Is<KaxTracks>(l1))
-      handle_tracks(upper_lvl_el, l1);
-
-    else if (Is<KaxCluster>(l1)) {
+    if (Is<KaxCluster>(l1)) {
       show_element(l1, 1, Y("Cluster"));
       if ((m_verbose == 0) && !m_show_summary)
         return result_e::succeeded;
@@ -1534,7 +1218,7 @@ kax_info_c::handle_segment(EbmlElement *l0) {
 
     }
 
-    else if (Is<EbmlVoid>(l1) || Is<EbmlCrc32>(l1) || Is<KaxInfo>(l1) || Is<KaxSeekHead>(l1) || Is<KaxAttachments>(l1) || Is<KaxChapters>(l1) || Is<KaxTags>(l1) || Is<KaxCues>(l1))
+    else if (Is<EbmlVoid>(l1) || Is<EbmlCrc32>(l1) || Is<KaxInfo>(l1) || Is<KaxSeekHead>(l1) || Is<KaxAttachments>(l1) || Is<KaxChapters>(l1) || Is<KaxTags>(l1) || Is<KaxCues>(l1) || Is<KaxTracks>(l1))
       handle_elements_generic(*l1);
 
     else
@@ -1554,22 +1238,27 @@ kax_info_c::handle_segment(EbmlElement *l0) {
 
 void
 kax_info_c::handle_elements_generic(EbmlElement &e) {
-  auto pre_processor = m_custom_element_pre_processors.find(EbmlId(e).GetValue());
-  if (pre_processor != m_custom_element_pre_processors.end())
-    if (!pre_processor->second(e))
-      return;
+  auto is_dummy = !!dynamic_cast<EbmlDummy *>(&e);
+  if (!is_dummy) {
+    auto pre_processor = m_custom_element_pre_processors.find(EbmlId(e).GetValue());
+    if (pre_processor != m_custom_element_pre_processors.end())
+      if (!pre_processor->second(e))
+        return;
+  }
 
   ui_show_element(e);
 
-  if (!dynamic_cast<EbmlMaster *>(&e))
+  if (dynamic_cast<EbmlMaster *>(&e)) {
+    ++m_level;
+
+    for (auto child : static_cast<EbmlMaster &>(e))
+      handle_elements_generic(*child);
+
+    --m_level;
+  }
+
+  if (is_dummy)
     return;
-
-  ++m_level;
-
-  for (auto child : static_cast<EbmlMaster &>(e))
-    handle_elements_generic(*child);
-
-  --m_level;
 
   auto post_processor = m_custom_element_post_processors.find(EbmlId(e).GetValue());
   if (post_processor != m_custom_element_post_processors.end())
@@ -1685,6 +1374,10 @@ kax_info_c::process_file(std::string const &file_name) {
 
   } catch (mtx::kax_info_x &) {
     throw;
+
+  } catch (std::exception &ex) {
+    ui_show_error((boost::format("%1%: %2%") % Y("Caught exception") % ex.what()).str());
+    return result_e::failed;
 
   } catch (...) {
     ui_show_error(Y("Caught exception"));

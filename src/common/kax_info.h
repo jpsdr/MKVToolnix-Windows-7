@@ -47,6 +47,7 @@ protected:
     char type{' '};
     int64_t default_duration{};
     std::size_t mkvmerge_track_id{};
+    std::string codec_id, fourcc;
   };
 
   struct track_info_t {
@@ -75,6 +76,8 @@ protected:
   mm_io_cptr m_in, m_out;
   std::string m_destination_file_name;
   int m_level{};
+  std::vector<std::string> m_summary;
+  std::shared_ptr<track_t> m_track;
 
   bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{};
   int m_hexdump_max_size{}, m_verbose{};
@@ -138,13 +141,6 @@ protected:
   bool is_global(EbmlElement *l, int level);
   void read_master(EbmlMaster *m, EbmlSemanticContext const &ctx, int &upper_lvl_el, EbmlElement *&l2);
 
-  void handle_audio_track(EbmlElement *&l3, std::vector<std::string> &summary);
-  void handle_video_colour_master_meta(EbmlElement *&l5);
-  void handle_video_colour(EbmlElement *&l4);
-  void handle_video_projection(EbmlElement *&l4);
-  void handle_video_track(EbmlElement *&l3, std::vector<std::string> &summary);
-  void handle_content_encodings(EbmlElement *&l3);
-  void handle_tracks(int &upper_lvl_el, EbmlElement *&l1);
   void handle_silent_track(EbmlElement *&l2);
   void handle_block_group(EbmlElement *&l2, KaxCluster *&cluster);
   void handle_simple_block(EbmlElement *&l2, KaxCluster *&cluster);
