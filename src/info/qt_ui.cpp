@@ -26,7 +26,7 @@
 #include <ebml/EbmlVersion.h>
 #include <matroska/KaxVersion.h>
 
-#include "common/common_pch.h"
+#include "common/kax_element_names.h"
 #include "common/kax_info.h"
 #include "common/locale.h"
 #include "common/qt.h"
@@ -222,9 +222,9 @@ void
 main_window_c::expand_elements() {
   int l0, l1, c0, c1;
   QTreeWidgetItem *i0, *i1;
-  const QString s_segment(QY("Segment"));
-  const QString s_info(QY("Segment information"));
-  const QString s_tracks(QY("Segment tracks"));
+  auto s_segment = Q(mtx::kax_element_names_c::get(KaxSegment::ClassInfos.GlobalId.GetValue()));
+  auto s_info    = Q(mtx::kax_element_names_c::get(KaxInfo::ClassInfos.GlobalId.GetValue()));
+  auto s_tracks  = Q(mtx::kax_element_names_c::get(KaxTracks::ClassInfos.GlobalId.GetValue()));
 
   setUpdatesEnabled(false);
 
