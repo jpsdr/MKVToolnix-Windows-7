@@ -12,6 +12,26 @@
   deprecated environment variables `MKVTOOLNIX_OPTIONS`, `MKVEXTRACT_OPTIONS`,
   `MKVINFO_OPTIONS`, `MKVMERGE_OPTIONS`, and `MKVPROPEDIT_OPTIONS` has been
   removed.
+* mkvinfo: most of its code was re-written in order to lay the groundwork for
+  including its functionality in MKVToolNix GUI but with more features than
+  the existing mkvinfo GUI. The result is that a lot of its output has been
+  changed slightly while keeping the basic layout. Changes include but aren't
+  limited to:
+
+  * Several element names are a bit clearer (e.g. `Maximum cache` instead of
+    `MaxCache`).
+  * All timestamps and durations are now output as nanoseconds in formatted
+    form (e.g. `01:23:45.67890123`), and all additional formats (e.g. floating
+    point numbers output in seconds or milliseconds) were removed.
+  * Element names for chapters and tags are now translated if a translation is
+    available.
+  * Elements located in wrong positions within the Matroska document are
+    handled better.
+
+  While mkvinfo's output is mostly kept very stable, it is not designed to be
+  parsed by other utilities. Even though I've tried hard to cram all changes
+  and cleanups into this version, additional changes may be made in the next
+  couple of releases depending on user feedback and bug reports.
 
 ## New features and enhancements
 
