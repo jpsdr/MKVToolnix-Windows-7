@@ -167,7 +167,6 @@ class Target
       when :mtxinput         then [ '-Lsrc/input',      '-lmtxinput'    ]
       when :mtxoutput        then [ '-Lsrc/output',     '-lmtxoutput'   ]
       when :mtxmerge         then [ '-Lsrc/merge',      '-lmtxmerge'    ]
-      when :mtxinfo          then [ '-Lsrc/info',       '-lmtxinfo'     ]
       when :mtxextract       then [ '-Lsrc/extract',    '-lmtxextract'  ]
       when :mtxpropedit      then [ '-Lsrc/propedit',   '-lmtxpropedit' ]
       when :mtxunittest      then [ '-Ltests/unit',     '-lmtxunittest' ]

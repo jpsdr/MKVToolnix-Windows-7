@@ -918,7 +918,6 @@ end
   { :name => 'mtxinput',    :dir => 'src/input'                                                                      },
   { :name => 'mtxoutput',   :dir => 'src/output'                                                                     },
   { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                   },
-  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp mkvinfo.cpp mkvinfo-gui.cpp static_plugins.cpp}, },
   { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                 },
   { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                },
   { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                },
@@ -976,7 +975,7 @@ Application.new("src/mkvinfo").
   aliases(:mkvinfo).
   sources("src/info/mkvinfo.cpp").
   sources("src/info/resources.o", :if => $building_for[:windows]).
-  libraries(:mtxinfo, $common_libs).
+  libraries($common_libs).
   only_if(c?(:USE_QT)).
   qt_dependencies_and_sources("info", :cpp_except => [ "src/info/sys_windows.cpp", "src/info/mkvinfo-gui.cpp" ]).
   sources("src/info/qt_resources.cpp").
@@ -990,10 +989,10 @@ if $build_mkvinfo_gui
   Application.new("src/mkvinfo-gui").
     description("Build the mkvinfo-gui executable").
     aliases("mkvinfo-gui").
-    qt_dependencies_and_sources("info", :cpp_except => [ "src/info/sys_windows.cpp" ]).
+    qt_dependencies_and_sources("info", :cpp_except => [ "src/info/sys_windows.cpp", "src/info/mkvinfo.cpp" ]).
     sources("src/info/qt_resources.cpp").
     sources("src/info/sys_windows.cpp", "src/info/resources.o", :if => $building_for[:windows]).
-    libraries(:qt, $custom_libs).
+    libraries($common_libs, :qt, $custom_libs).
     libraries("-mwindows", :if => $building_for[:windows]).
     create
 end
