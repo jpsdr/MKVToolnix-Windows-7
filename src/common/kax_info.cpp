@@ -93,8 +93,6 @@ unsigned int kax_info_c::ms_bf_format_binary_1                   = 0;
 unsigned int kax_info_c::ms_bf_format_binary_2                   = 0;
 unsigned int kax_info_c::ms_bf_block_group_block_summary         = 0;
 unsigned int kax_info_c::ms_bf_block_group_block_frame           = 0;
-unsigned int kax_info_c::ms_bf_block_group_reference_1           = 0;
-unsigned int kax_info_c::ms_bf_block_group_reference_2           = 0;
 unsigned int kax_info_c::ms_bf_block_group_summary_position      = 0;
 unsigned int kax_info_c::ms_bf_block_group_summary_with_duration = 0;
 unsigned int kax_info_c::ms_bf_block_group_summary_no_duration   = 0;
@@ -182,17 +180,15 @@ kax_info_c::init_common_formats() {
   BF_ADD(ms_bf_show_unknown_element,              Y("(Unknown element: %1%; ID: 0x%2% size: %3%)"));
   BF_ADD(ms_bf_format_binary_1,                   Y("length %1%, data: %2%"));
   BF_ADD(ms_bf_format_binary_2,                   Y(" (adler: 0x%|1$08x|)"));
-  BF_ADD(ms_bf_block_group_block_summary,         Y("track number %1%, %2% frame(s), timestamp %|3$.3f|s = %4%"));
+  BF_ADD(ms_bf_block_group_block_summary,         Y("track number %1%, %2% frame(s), timestamp %3%"));
   BF_ADD(ms_bf_block_group_block_frame,           Y("Frame with size %1%%2%%3%"));
-  BF_ADD(ms_bf_block_group_reference_1,             "-%1%.%|2$06d|ms");
-  BF_ADD(ms_bf_block_group_reference_2,             "%1%.%|2$06d|ms");
   BF_ADD(ms_bf_block_group_summary_position,      Y(", position %1%"));
-  BF_ADD(ms_bf_block_group_summary_with_duration, Y("%1% frame, track %2%, timestamp %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"));
-  BF_ADD(ms_bf_block_group_summary_no_duration,   Y("%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%%8%\n"));
+  BF_ADD(ms_bf_block_group_summary_with_duration, Y("%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"));
+  BF_ADD(ms_bf_block_group_summary_no_duration,   Y("%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"));
   BF_ADD(ms_bf_block_group_summary_v2,            Y("[%1% frame for track %2%, timestamp %3%]"));
-  BF_ADD(ms_bf_simple_block_basics,               Y("%1%track number %2%, %3% frame(s), timestamp %|4$.3f|s = %5%"));
+  BF_ADD(ms_bf_simple_block_basics,               Y("%1%track number %2%, %3% frame(s), timestamp %4%"));
   BF_ADD(ms_bf_simple_block_frame,                Y("Frame with size %1%%2%%3%"));
-  BF_ADD(ms_bf_simple_block_summary,              Y("%1% frame, track %2%, timestamp %3% (%4%), size %5%, adler 0x%|6$08x|%7%\n"));
+  BF_ADD(ms_bf_simple_block_summary,              Y("%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"));
   BF_ADD(ms_bf_simple_block_summary_v2,           Y("[%1% frame for track %2%, timestamp %3%]"));
   BF_ADD(ms_bf_at,                                Y(" at %1%"));
   BF_ADD(ms_bf_size,                              Y(" size %1%"));
@@ -508,6 +504,11 @@ kax_info_c::format_signed_integer_as_timestamp(EbmlElement &e) {
   return format_timestamp(static_cast<EbmlSInteger &>(e).GetValue());
 }
 
+std::string
+kax_info_c::format_signed_integer_as_scaled_timestamp(EbmlElement &e) {
+  return format_timestamp(m_ts_scale * static_cast<EbmlSInteger &>(e).GetValue());
+}
+
 #define PRE(  Class, Processor) m_custom_element_pre_processors.insert(  { Class::ClassInfos.GlobalId.GetValue(), Processor });
 #define POST( Class, Processor) m_custom_element_post_processors.insert( { Class::ClassInfos.GlobalId.GetValue(), Processor });
 #define FMT(  Class, Formatter) m_custom_element_value_formatters.insert({ Class::ClassInfos.GlobalId.GetValue(), Formatter });
@@ -619,7 +620,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   POST(KaxVideoPixelCropRight,     [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel crop right: %1%")) % static_cast<KaxVideoPixelCropRight &>(e).GetValue()).str()); });
   POST(KaxVideoPixelCropBottom,    [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("pixel crop bottom: %1%")) % static_cast<KaxVideoPixelCropBottom &>(e).GetValue()).str()); });
   POST(KaxTrackLanguage,           [this](EbmlElement &e) { m_summary.push_back((boost::format(Y("language: %1%")) % static_cast<KaxTrackLanguage &>(e).GetValue()).str()); });
-  POST(KaxBlockDuration,           [this](EbmlElement &e) { m_block_duration = static_cast<double>(static_cast<KaxBlockDuration &>(e).GetValue()) * m_ts_scale / 1000000.0; });
+  POST(KaxBlockDuration,           [this](EbmlElement &e) { m_block_duration = static_cast<double>(static_cast<KaxBlockDuration &>(e).GetValue()) * m_ts_scale; });
   POST(KaxReferenceBlock,          [this](EbmlElement &)  { ++m_num_references; });
 
   POSTM(KaxSimpleBlock,            post_simple_block);
@@ -671,13 +672,11 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   FMTM(KaxSimpleBlock,      format_simple_block);
   FMTM(KaxBlock,            format_block);
   FMTM(KaxBlockDuration,    format_unsigned_integer_as_scaled_timestamp);
+  FMTM(KaxReferenceBlock,   format_signed_integer_as_scaled_timestamp);
+
+  FMT(KaxDuration,          [this](EbmlElement &e) { return format_timestamp(static_cast<int64_t>(static_cast<EbmlFloat &>(e).GetValue() * m_ts_scale)); });
 
   // More complex formatters:
-  FMT(KaxDuration, [this](EbmlElement &e) -> std::string {
-    auto duration = static_cast<KaxDuration &>(e).GetValue();
-    return (boost::format("%|1$.3f|s (%2%)") % (duration * m_ts_scale / 1000000000.0) % format_timestamp(duration * m_ts_scale, 3)).str();
-  });
-
   FMT(KaxSeekID, [](EbmlElement &e) -> std::string {
     auto &seek_id = static_cast<KaxSeekID &>(e);
     EbmlId id(seek_id.GetBuffer(), seek_id.GetSize());
@@ -805,7 +804,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
   FMT(KaxContentSigHashAlgo, [](EbmlElement &e) -> std::string {
     auto s_halgo = static_cast<KaxContentSigHashAlgo &>(e).GetValue();
-    return (boost::format(Y("Signature hash algorithm: %1% (%2%)"))
+    return (boost::format("%1% (%2%)")
             % s_halgo
             % (  0 == s_halgo ? Y("no signature hash algorithm")
                : 1 == s_halgo ? Y("SHA1-160")
@@ -824,20 +823,13 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   });
 
   FMT(KaxCodecPrivate, [this](EbmlElement &e) -> std::string {
-    return (boost::format(Y("size %1%")) % e.GetSize()).str() + m_track->fourcc;
+    return (ms_common_formats[ms_bf_element_size] % e.GetSize()).str() + m_track->fourcc;
   });
 
   FMT(KaxTrackDefaultDuration, [this](EbmlElement &) -> std::string {
-      return (boost::format(Y("%|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"))
-              % (static_cast<double>(m_track->default_duration) / 1000000.0)
+      return (boost::format(Y("%1% (%|2$.3f| frames/fields per second for a video track)"))
+              % format_timestamp(m_track->default_duration)
               % (1000000000.0 / static_cast<double>(m_track->default_duration))).str();
-  });
-
-  FMT(KaxReferenceBlock, [this](EbmlElement &e) -> std::string {
-    auto reference = static_cast<int64_t>(static_cast<KaxReferenceBlock &>(e).GetValue() * m_ts_scale);
-    return 0 >= reference ? (ms_common_formats[ms_bf_block_group_reference_1] % (std::abs(reference) / 1000000) % (std::abs(reference) % 1000000)).str()
-         : 0 < reference  ? (ms_common_formats[ms_bf_block_group_reference_2] % (         reference  / 1000000) % (         reference  % 1000000)).str()
-         :                  std::string{};
   });
 }
 
@@ -856,7 +848,7 @@ kax_info_c::pre_block(EbmlElement &e) {
 
   m_lf_timestamp   = block.GlobalTimecode();
   m_lf_tnum        = block.TrackNum();
-  m_block_duration = -1.0;
+  m_block_duration = boost::none;
 
   return true;
 }
@@ -868,8 +860,7 @@ kax_info_c::format_block(EbmlElement &e) {
   return (ms_common_formats[ms_bf_block_group_block_summary]
           % block.TrackNum()
           % block.NumberFrames()
-          % (static_cast<double>(m_lf_timestamp) / 1000000000.0)
-          % format_timestamp(m_lf_timestamp, 3)).str();
+          % format_timestamp(m_lf_timestamp)).str();
 }
 
 void
@@ -922,13 +913,12 @@ kax_info_c::post_block_group(EbmlElement &e) {
         frame_pos += m_frame_sizes[fidx];
       }
 
-      if (m_block_duration != -1.0)
+      if (m_block_duration)
         m_out->write((ms_common_formats[ms_bf_block_group_summary_with_duration]
                       % (m_num_references >= 2 ? 'B' : m_num_references == 1 ? 'P' : 'I')
                       % m_lf_tnum
-                      % std::llround(m_lf_timestamp / 1000000.0)
-                      % format_timestamp(m_lf_timestamp, 3)
-                      % m_block_duration
+                      % format_timestamp(m_lf_timestamp)
+                      % format_timestamp(*m_block_duration)
                       % m_frame_sizes[fidx]
                       % m_frame_adlers[fidx]
                       % m_frame_hexdumps[fidx]
@@ -937,8 +927,7 @@ kax_info_c::post_block_group(EbmlElement &e) {
         m_out->write((ms_common_formats[ms_bf_block_group_summary_no_duration]
                       % (m_num_references >= 2 ? 'B' : m_num_references == 1 ? 'P' : 'I')
                       % m_lf_tnum
-                      % std::llround(m_lf_timestamp / 1000000.0)
-                      % format_timestamp(m_lf_timestamp, 3)
+                      % format_timestamp(m_lf_timestamp)
                       % m_frame_sizes[fidx]
                       % m_frame_adlers[fidx]
                       % m_frame_hexdumps[fidx]
@@ -950,7 +939,7 @@ kax_info_c::post_block_group(EbmlElement &e) {
                  ms_common_formats[ms_bf_block_group_summary_v2]
                  % (m_num_references >= 2 ? 'B' : m_num_references == 1 ? 'P' : 'I')
                  % m_lf_tnum
-                 % std::llround(m_lf_timestamp / 1000000.0));
+                 % format_timestamp(m_lf_timestamp));
 
   auto &tinfo = m_track_info[m_lf_tnum];
 
@@ -964,10 +953,10 @@ kax_info_c::post_block_group(EbmlElement &e) {
 
   tinfo.m_max_timestamp = m_lf_timestamp;
 
-  if (-1 == m_block_duration)
+  if (!m_block_duration)
     tinfo.m_add_duration_for_n_packets  = m_frame_sizes.size();
   else {
-    *tinfo.m_max_timestamp             += m_block_duration * 1000000.0;
+    *tinfo.m_max_timestamp             += *m_block_duration;
     tinfo.m_add_duration_for_n_packets  = 0;
   }
 }
@@ -998,8 +987,7 @@ kax_info_c::format_simple_block(EbmlElement &e) {
           % info
           % block.TrackNum()
           % block.NumberFrames()
-          % (timestamp_ns / 1000000000.0)
-          % format_timestamp(timestamp_ns, 3)).str();
+          % format_timestamp(timestamp_ns)).str();
 }
 
 void
@@ -1007,7 +995,6 @@ kax_info_c::post_simple_block(EbmlElement &e) {
   auto &block       = static_cast<KaxSimpleBlock &>(e);
   auto &tinfo       = m_track_info[block.TrackNum()];
   auto timestamp_ns = mtx::math::to_signed(block.GlobalTimecode());
-  auto timestamp_ms = std::llround(static_cast<double>(timestamp_ns) / 1000000.0);
   int num_frames    = block.NumberFrames();
   int64_t frame_pos = block.GetElementPosition() + block.ElementSize();
 
@@ -1042,8 +1029,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
       m_out->write((ms_common_formats[ms_bf_simple_block_summary]
                     % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
                     % block.TrackNum()
-                    % timestamp_ms
-                    % format_timestamp(timestamp_ns, 3)
+                    % format_timestamp(timestamp_ns)
                     % m_frame_sizes[idx]
                     % m_frame_adlers[idx]
                     % position).str());
@@ -1054,7 +1040,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
                  ms_common_formats[ms_bf_simple_block_summary_v2]
                  % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
                  % block.TrackNum()
-                 % timestamp_ms);
+                 % timestamp_ns);
 
   tinfo.m_blocks                                                                    += block.NumberFrames();
   tinfo.m_blocks_by_ref_num[block.IsKeyframe() ? 0 : block.IsDiscardable() ? 2 : 1] += block.NumberFrames();

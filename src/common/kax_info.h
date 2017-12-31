@@ -59,7 +59,7 @@ protected:
 
 protected:
   static std::vector<boost::format> ms_common_formats;
-  static unsigned int ms_bf_show_unknown_element, ms_bf_format_binary_1, ms_bf_format_binary_2, ms_bf_block_group_block_summary, ms_bf_block_group_block_frame, ms_bf_block_group_reference_1, ms_bf_block_group_reference_2,
+  static unsigned int ms_bf_show_unknown_element, ms_bf_format_binary_1, ms_bf_format_binary_2, ms_bf_block_group_block_summary, ms_bf_block_group_block_frame,
     ms_bf_block_group_summary_position, ms_bf_block_group_summary_with_duration, ms_bf_block_group_summary_no_duration, ms_bf_block_group_summary_v2, ms_bf_simple_block_basics, ms_bf_simple_block_frame,
     ms_bf_simple_block_summary, ms_bf_simple_block_summary_v2, ms_bf_at, ms_bf_size, ms_bf_at_hex, ms_bf_block_group_block_adler, ms_bf_simple_block_adler, ms_bf_simple_block_position, ms_bf_crc32_value, ms_bf_element_size;
 
@@ -80,7 +80,7 @@ protected:
   std::vector<uint32_t> m_frame_adlers;
   std::vector<std::string> m_frame_hexdumps;
   int64_t m_num_references{}, m_lf_timestamp{}, m_lf_tnum{};
-  double m_block_duration{};
+  boost::optional<int64_t> m_block_duration;
 
   bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{};
   int m_hexdump_max_size{}, m_verbose{};
@@ -126,6 +126,7 @@ public:
   std::string format_unsigned_integer_as_timestamp(EbmlElement &e);
   std::string format_unsigned_integer_as_scaled_timestamp(EbmlElement &e);
   std::string format_signed_integer_as_timestamp(EbmlElement &e);
+  std::string format_signed_integer_as_scaled_timestamp(EbmlElement &e);
   std::string format_block(EbmlElement &e);
   std::string format_simple_block(EbmlElement &e);
 
