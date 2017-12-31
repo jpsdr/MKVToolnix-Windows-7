@@ -1100,11 +1100,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
 
 kax_info_c::result_e
 kax_info_c::handle_segment(EbmlElement *l0) {
-  if (!l0->IsFiniteSize())
-    show_element(l0, 0, Y("Segment, size unknown"));
-  else
-    show_element(l0, 0, boost::format(Y("Segment, size %1%")) % l0->GetSize());
-  // ui_show_element(*l0);
+  ui_show_element(*l0);
 
   m_file_size   = m_in->get_size();
   auto l1       = static_cast<EbmlElement *>(nullptr);
