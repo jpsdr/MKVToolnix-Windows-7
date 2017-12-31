@@ -527,9 +527,6 @@ kax_info_c::format_binary(EbmlBinary &bin,
   return result;
 }
 
-#define FMT(Class, Formatter)  m_custom_element_value_formatters.insert({ Class::ClassInfos.GlobalId.GetValue(), Formatter });
-#define PROC(Class, Processor) m_custom_element_processors.insert({ Class::ClassInfos.GlobalId.GetValue(), Processor });
-
 std::string
 kax_info_c::format_binary_as_hex(EbmlElement &e) {
   return to_hex(static_cast<EbmlBinary &>(e));
@@ -547,34 +544,51 @@ kax_info_c::format_unsigned_integer_as_timestamp(EbmlElement &e) {
   return format_timestamp(static_cast<EbmlUInteger &>(e).GetValue());
 }
 
+std::string
+kax_info_c::format_unsigned_integer_as_scaled_timestamp(EbmlElement &e) {
+  return format_timestamp(m_ts_scale * static_cast<EbmlUInteger &>(e).GetValue());
+}
+
+#define PRE( Class, Processor) m_custom_element_pre_processors.insert(  { Class::ClassInfos.GlobalId.GetValue(), Processor });
+#define POST(Class, Processor) m_custom_element_post_processors.insert( { Class::ClassInfos.GlobalId.GetValue(), Processor });
+#define FMT( Class, Formatter) m_custom_element_value_formatters.insert({ Class::ClassInfos.GlobalId.GetValue(), Formatter });
+#define FMTM(Class, Formatter) FMT(Class, std::bind(&kax_info_c::Formatter, this, std::placeholders::_1));
+
 void
 kax_info_c::init_custom_element_value_formatters_and_processors() {
   m_custom_element_value_formatters.clear();
-  m_custom_element_processors.clear();
+  m_custom_element_pre_processors.clear();
+  m_custom_element_post_processors.clear();
 
   // Simple processors:
-  PROC(KaxInfo, ([this](EbmlElement &e) -> bool { this->m_ts_scale = FindChildValue<KaxTimecodeScale, uint64_t>(static_cast<KaxInfo &>(e), TIMESTAMP_SCALE); return true; }));
+  PRE(KaxInfo, ([this](EbmlElement &e) -> bool { m_ts_scale = FindChildValue<KaxTimecodeScale, uint64_t>(static_cast<KaxInfo &>(e), TIMESTAMP_SCALE); return true; }));
 
   // More complex processors:
-  PROC(KaxSeekHead, [this](EbmlElement &e) -> bool {
-    if ((m_verbose < 2) && !m_use_gui) {
+  PRE(KaxSeekHead, [this](EbmlElement &e) -> bool {
+    if ((m_verbose < 2) && !m_use_gui)
       show_element(&e, 1, Y("Seek head (subentries will be skipped)"));
-      return false;
-    }
+    return (m_verbose >= 2) || m_use_gui;
+  });
 
-    return true;
+  PRE(KaxCues, [this](EbmlElement &e) -> bool {
+    if (m_verbose < 2)
+      show_element(&e, 1, Y("Cues (subentries will be skipped)"));
+    return m_verbose >= 2;
   });
 
   // Simple formatters:
-  FMT(KaxSegmentUID,       &kax_info_c::format_binary_as_hex);
-  FMT(KaxSegmentFamily,    &kax_info_c::format_binary_as_hex);
-  FMT(KaxNextUID,          &kax_info_c::format_binary_as_hex);
-  FMT(KaxSegmentFamily,    &kax_info_c::format_binary_as_hex);
-  FMT(KaxPrevUID,          &kax_info_c::format_binary_as_hex);
-  FMT(KaxSegment,          &kax_info_c::format_element_size);
-  FMT(KaxFileData,         &kax_info_c::format_element_size);
-  FMT(KaxChapterTimeStart, &kax_info_c::format_unsigned_integer_as_timestamp);
-  FMT(KaxChapterTimeEnd,   &kax_info_c::format_unsigned_integer_as_timestamp);
+  FMTM(KaxSegmentUID,       format_binary_as_hex);
+  FMTM(KaxSegmentFamily,    format_binary_as_hex);
+  FMTM(KaxNextUID,          format_binary_as_hex);
+  FMTM(KaxSegmentFamily,    format_binary_as_hex);
+  FMTM(KaxPrevUID,          format_binary_as_hex);
+  FMTM(KaxSegment,          format_element_size);
+  FMTM(KaxFileData,         format_element_size);
+  FMTM(KaxChapterTimeStart, format_unsigned_integer_as_timestamp);
+  FMTM(KaxChapterTimeEnd,   format_unsigned_integer_as_timestamp);
+  FMTM(KaxCueDuration,      format_unsigned_integer_as_scaled_timestamp);
+  FMTM(KaxCueTime,          format_unsigned_integer_as_scaled_timestamp);
+  FMTM(KaxCueRefTime,       format_unsigned_integer_as_scaled_timestamp);
 
   // More complex formatters:
   FMT(KaxDuration, [this](EbmlElement &e) -> std::string {
@@ -601,7 +615,9 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 }
 
 #undef FMT
-#undef PROC
+#undef FMTM
+#undef PRE
+#undef POST
 
 void
 kax_info_c::handle_audio_track(EbmlElement *&l3,
@@ -1153,80 +1169,6 @@ kax_info_c::handle_tracks(int &upper_lvl_el,
 }
 
 void
-kax_info_c::handle_cues(int &upper_lvl_el,
-                        EbmlElement *&l1) {
-  if (m_verbose < 2) {
-    show_element(l1, 1, Y("Cues (subentries will be skipped)"));
-    return;
-  }
-
-  show_element(l1, 1, "Cues");
-
-  upper_lvl_el               = 0;
-  EbmlElement *element_found = nullptr;
-  auto m1                    = static_cast<EbmlMaster *>(l1);
-  read_master(m1, EBML_CONTEXT(l1), upper_lvl_el, element_found);
-
-  for (auto l2 : *m1)
-    if (Is<KaxCuePoint>(l2)) {
-      show_element(l2, 2, Y("Cue point"));
-
-      for (auto l3 : *static_cast<EbmlMaster *>(l2))
-        if (Is<KaxCueTime>(l3))
-          show_element(l3, 3, boost::format(Y("Cue time: %|1$.3f|s")) % (m_ts_scale * static_cast<double>(static_cast<KaxCueTime *>(l3)->GetValue()) / 1000000000.0));
-
-        else if (Is<KaxCueTrackPositions>(l3)) {
-          show_element(l3, 3, Y("Cue track positions"));
-
-          for (auto l4 : *static_cast<EbmlMaster *>(l3))
-            if (Is<KaxCueTrack>(l4))
-              show_element(l4, 4, boost::format(Y("Cue track: %1%"))            % static_cast<KaxCueTrack *>(l4)->GetValue());
-
-            else if (Is<KaxCueClusterPosition>(l4))
-              show_element(l4, 4, boost::format(Y("Cue cluster position: %1%")) % static_cast<KaxCueClusterPosition *>(l4)->GetValue());
-
-            else if (Is<KaxCueRelativePosition>(l4))
-              show_element(l4, 4, boost::format(Y("Cue relative position: %1%")) % static_cast<KaxCueRelativePosition *>(l4)->GetValue());
-
-            else if (Is<KaxCueDuration>(l4))
-              show_element(l4, 4, boost::format(Y("Cue duration: %1%"))         % format_timestamp(static_cast<KaxCueDuration *>(l4)->GetValue() * m_ts_scale));
-
-            else if (Is<KaxCueBlockNumber>(l4))
-              show_element(l4, 4, boost::format(Y("Cue block number: %1%"))     % static_cast<KaxCueBlockNumber *>(l4)->GetValue());
-
-            else if (Is<KaxCueCodecState>(l4))
-              show_element(l4, 4, boost::format(Y("Cue codec state: %1%"))      % static_cast<KaxCueCodecState *>(l4)->GetValue());
-
-            else if (Is<KaxCueReference>(l4)) {
-              show_element(l4, 4, Y("Cue reference"));
-
-              for (auto l5 : *static_cast<EbmlMaster *>(l4))
-                if (Is<KaxCueRefTime>(l5))
-                  show_element(l5, 5, boost::format(Y("Cue ref time: %|1$.3f|s"))  % m_ts_scale % (static_cast<KaxCueRefTime *>(l5)->GetValue() / 1000000000.0));
-
-                else if (Is<KaxCueRefCluster>(l5))
-                  show_element(l5, 5, boost::format(Y("Cue ref cluster: %1%"))     % static_cast<KaxCueRefCluster *>(l5)->GetValue());
-
-                else if (Is<KaxCueRefNumber>(l5))
-                  show_element(l5, 5, boost::format(Y("Cue ref number: %1%"))      % static_cast<KaxCueRefNumber *>(l5)->GetValue());
-
-                else if (Is<KaxCueRefCodecState>(l5))
-                  show_element(l5, 5, boost::format(Y("Cue ref codec state: %1%")) % static_cast<KaxCueRefCodecState *>(l5)->GetValue());
-
-                else if (!is_global(l5, 5))
-                  show_unknown_element(l5, 5);
-
-            } else if (!is_global(l4, 4))
-              show_unknown_element(l4, 4);
-
-        } else if (!is_global(l3, 3))
-          show_unknown_element(l3, 3);
-
-    } else if (!is_global(l2, 2))
-      show_unknown_element(l2, 2);
-}
-
-void
 kax_info_c::handle_silent_track(EbmlElement *&l2) {
   show_element(l2, 2, "Silent Tracks");
 
@@ -1590,10 +1532,9 @@ kax_info_c::handle_segment(EbmlElement *l0) {
         return result_e::succeeded;
       handle_cluster(upper_lvl_el, l1, file_size);
 
-    } else if (Is<KaxCues>(l1))
-      handle_cues(upper_lvl_el, l1);
+    }
 
-    else if (Is<EbmlVoid>(l1) || Is<EbmlCrc32>(l1) || Is<KaxInfo>(l1) || Is<KaxSeekHead>(l1) || Is<KaxAttachments>(l1) || Is<KaxChapters>(l1) || Is<KaxTags>(l1))
+    else if (Is<EbmlVoid>(l1) || Is<EbmlCrc32>(l1) || Is<KaxInfo>(l1) || Is<KaxSeekHead>(l1) || Is<KaxAttachments>(l1) || Is<KaxChapters>(l1) || Is<KaxTags>(l1) || Is<KaxCues>(l1))
       handle_elements_generic(*l1);
 
     else
@@ -1613,9 +1554,9 @@ kax_info_c::handle_segment(EbmlElement *l0) {
 
 void
 kax_info_c::handle_elements_generic(EbmlElement &e) {
-  auto processor = m_custom_element_processors.find(EbmlId(e).GetValue());
-  if (processor != m_custom_element_processors.end())
-    if (!processor->second(e))
+  auto pre_processor = m_custom_element_pre_processors.find(EbmlId(e).GetValue());
+  if (pre_processor != m_custom_element_pre_processors.end())
+    if (!pre_processor->second(e))
       return;
 
   ui_show_element(e);
@@ -1629,6 +1570,10 @@ kax_info_c::handle_elements_generic(EbmlElement &e) {
     handle_elements_generic(*child);
 
   --m_level;
+
+  auto post_processor = m_custom_element_post_processors.find(EbmlId(e).GetValue());
+  if (post_processor != m_custom_element_post_processors.end())
+    post_processor->second(e);
 }
 
 void

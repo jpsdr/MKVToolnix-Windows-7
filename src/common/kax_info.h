@@ -82,7 +82,8 @@ protected:
   bool m_abort{};
 
   std::unordered_map<uint32_t, std::function<std::string(EbmlElement &)>> m_custom_element_value_formatters;
-  std::unordered_map<uint32_t, std::function<bool(EbmlElement &)>> m_custom_element_processors;
+  std::unordered_map<uint32_t, std::function<bool(EbmlElement &)>> m_custom_element_pre_processors;
+  std::unordered_map<uint32_t, std::function<void(EbmlElement &)>> m_custom_element_post_processors;
 
 public:
   kax_info_c();
@@ -112,6 +113,12 @@ public:
   std::string format_binary(EbmlBinary &bin, std::size_t max_len = 16);
   std::string format_element_value(EbmlElement &e);
   std::string format_element_value_default(EbmlElement &e);
+  std::string format_unsigned_integer_as_scaled_timestamp(EbmlElement &e);
+  std::string format_binary_as_hex(EbmlElement &e);
+  std::string format_element_size(EbmlElement &e);
+  std::string format_unsigned_integer_as_timestamp(EbmlElement &e);
+  std::string format_ebml_id_as_hex(EbmlElement &e);
+  std::string format_ebml_id_as_hex(EbmlId const &id);
 
   virtual void ui_show_error(std::string const &error);
   virtual void ui_show_element_info(int level, std::string const &text, int64_t position, int64_t size);
@@ -138,7 +145,6 @@ protected:
   void handle_video_track(EbmlElement *&l3, std::vector<std::string> &summary);
   void handle_content_encodings(EbmlElement *&l3);
   void handle_tracks(int &upper_lvl_el, EbmlElement *&l1);
-  void handle_cues(int &upper_lvl_el, EbmlElement *&l1);
   void handle_silent_track(EbmlElement *&l2);
   void handle_block_group(EbmlElement *&l2, KaxCluster *&cluster);
   void handle_simple_block(EbmlElement *&l2, KaxCluster *&cluster);
@@ -150,11 +156,6 @@ protected:
 
 public:
   static void init_common_formats();
-  static std::string format_binary_as_hex(EbmlElement &e);
-  static std::string format_element_size(EbmlElement &e);
-  static std::string format_unsigned_integer_as_timestamp(EbmlElement &e);
-  static std::string format_ebml_id_as_hex(EbmlElement &e);
-  static std::string format_ebml_id_as_hex(EbmlId const &id);
 };
 using kax_info_cptr = std::shared_ptr<kax_info_c>;
 
