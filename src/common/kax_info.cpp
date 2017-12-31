@@ -236,16 +236,9 @@ kax_info_c::ui_show_progress(int /* percentage */,
 }
 
 void
-kax_info_c::show_unknown_element(EbmlElement *e,
-                                 int level) {
-  show_element(e, level, create_unknown_element_text(*e), true);
-}
-
-void
 kax_info_c::show_element(EbmlElement *l,
                          int level,
-                         const std::string &info,
-                         bool skip) {
+                         const std::string &info) {
   if (m_show_summary)
     return;
 
@@ -255,25 +248,13 @@ kax_info_c::show_element(EbmlElement *l,
                          !l                 ? -1
                        : !l->IsFiniteSize() ? -2
                        :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()));
-
-  if (!l || !skip)
-    return;
-
-  // Dump unknown elements recursively.
-  auto *m = dynamic_cast<EbmlMaster *>(l);
-  if (m)
-    for (auto child : *m)
-      show_unknown_element(child, level + 1);
-
-  l->SkipData(*m_es, EBML_CONTEXT(l));
 }
 
 void
 kax_info_c::show_element(EbmlElement *l,
                          int level,
-                         boost::format const &info,
-                         bool skip) {
-  show_element(l, level, info.str(), skip);
+                         boost::format const &info) {
+  show_element(l, level, info.str());
 }
 
 std::string
@@ -532,13 +513,13 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   // More complex processors:
   PRE(KaxSeekHead, [this](EbmlElement &e) -> bool {
     if ((m_verbose < 2) && !m_use_gui)
-      show_element(&e, 1, Y("Seek head (subentries will be skipped)"));
+      show_element(&e, m_level, Y("Seek head (subentries will be skipped)"));
     return (m_verbose >= 2) || m_use_gui;
   });
 
   PRE(KaxCues, [this](EbmlElement &e) -> bool {
     if (m_verbose < 2)
-      show_element(&e, 1, Y("Cues (subentries will be skipped)"));
+      show_element(&e, m_level, Y("Cues (subentries will be skipped)"));
     return m_verbose >= 2;
   });
 
@@ -879,7 +860,7 @@ kax_info_c::post_block(EbmlElement &e) {
     if (m_show_hexdump)
       hex = create_hexdump(data.Buffer(), data.Size());
 
-    show_element(nullptr, 4, ms_common_formats[ms_bf_block_group_block_frame] % data.Size() % adler_str % hex);
+    show_element(nullptr, m_level + 1, ms_common_formats[ms_bf_block_group_block_frame] % data.Size() % adler_str % hex);
 
     m_frame_sizes.push_back(data.Size());
     m_frame_adlers.push_back(adler);
@@ -935,7 +916,7 @@ kax_info_c::post_block_group(EbmlElement &e) {
     }
 
   } else if (m_verbose > 2)
-    show_element(nullptr, 2,
+    show_element(nullptr, m_level + 1,
                  ms_common_formats[ms_bf_block_group_summary_v2]
                  % (m_num_references >= 2 ? 'B' : m_num_references == 1 ? 'P' : 'I')
                  % m_lf_tnum
@@ -1010,7 +991,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
     if (m_show_hexdump)
       hex = create_hexdump(data.Buffer(), data.Size());
 
-    show_element(nullptr, 3, ms_common_formats[ms_bf_simple_block_frame] % data.Size() % adler_str % hex);
+    show_element(nullptr, m_level + 1, ms_common_formats[ms_bf_simple_block_frame] % data.Size() % adler_str % hex);
 
     m_frame_sizes.push_back(data.Size());
     m_frame_adlers.push_back(adler);
@@ -1036,7 +1017,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
     }
 
   } else if (m_verbose > 2)
-    show_element(nullptr, 2,
+    show_element(nullptr, m_level + 1,
                  ms_common_formats[ms_bf_simple_block_summary_v2]
                  % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
                  % block.TrackNum()
@@ -1072,11 +1053,8 @@ kax_info_c::handle_segment(EbmlElement *l0) {
       ui_show_element(*l1);
       return result_e::succeeded;
 
-    } else if (Is<EbmlVoid>(l1) || Is<EbmlCrc32>(l1) || Is<KaxInfo>(l1) || Is<KaxSeekHead>(l1) || Is<KaxAttachments>(l1) || Is<KaxChapters>(l1) || Is<KaxTags>(l1) || Is<KaxCues>(l1) || Is<KaxTracks>(l1) || Is<KaxCluster>(l1))
+    } else
       handle_elements_generic(*l1);
-
-    else
-      show_unknown_element(l1, 1);
 
     if (!m_in->setFilePointer2(l1->GetElementPosition() + kax_file->get_element_size(l1)))
       break;

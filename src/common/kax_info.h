@@ -146,9 +146,8 @@ public:
 protected:
   void init_custom_element_value_formatters_and_processors();
 
-  void show_unknown_element(EbmlElement *e, int level);
-  void show_element(EbmlElement *l, int level, std::string const &info, bool skip = false);
-  void show_element(EbmlElement *l, int level, boost::format const &info, bool skip = false);
+  void show_element(EbmlElement *l, int level, std::string const &info);
+  void show_element(EbmlElement *l, int level, boost::format const &info);
 
   void add_track(track_cptr const &t);
   track_t *find_track(int tnum);
