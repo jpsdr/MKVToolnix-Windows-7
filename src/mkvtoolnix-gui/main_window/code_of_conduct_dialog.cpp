@@ -18,7 +18,7 @@ CodeOfConductDialog::CodeOfConductDialog(QWidget *parent)
 
   QFile coc{Q(":/CODE_OF_CONDUCT.md")};
   if (coc.open(QIODevice::ReadOnly))
-    ui->codeOfConduct->setText(Q(mtx::markdown::to_html(coc.readAll().toStdString())));
+    ui->codeOfConduct->setText(Q(mtx::markdown::to_html(std::string{coc.readAll().constData()})));
 
   connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &CodeOfConductDialog::accept);
 }
