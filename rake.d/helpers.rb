@@ -185,6 +185,23 @@ def list_targets? *targets
 end
 
 class Rake::Task
+  def mo_all_prerequisites
+    todo   = [name]
+    result = []
+
+    while !todo.empty?
+      current = todo.shift
+      prereqs = Rake::Task[current].prerequisites
+
+      next if prereqs.empty?
+
+      result << [current, prereqs]
+      todo   += prereqs
+    end
+
+    result.uniq
+  end
+
   def investigate
     result = "------------------------------\n"
     result << "Investigating #{name}\n"

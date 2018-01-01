@@ -752,6 +752,25 @@ namespace :dev do
     revision = `git rev-parse --short HEAD`.chomp
     create_source_tarball "-#{revision}"
   end
+
+  desc "Dump dependencies of the task given with TASK environment variable"
+  task "dependencies" do
+    if ENV['TASK'].blank?
+      puts "'TASK' environment variable not set"
+      exit 1
+    end
+
+    task = Rake::Task[ENV['TASK']]
+    if !task
+      puts "No task named '#{ENV['MTASK']}'"
+      exit 1
+    end
+
+    prereqs = task.mo_all_prerequisites
+    longest = prereqs.map { |p| p[0].length }.max
+
+    puts prereqs.map { |p| sprintf("%-#{longest}s => %s", p[0], p[1].sort.join(" ")) }.join("\n")
+  end
 end
 
 # Installation tasks
