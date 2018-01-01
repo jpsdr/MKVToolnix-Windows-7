@@ -136,6 +136,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   auto releases          = m_releasesInfo->select_nodes("/mkvtoolnix-releases/release[not(@version='HEAD')]");
   auto reReleased        = boost::regex{"^released\\s+v?[\\d\\.]+", boost::regex::perl | boost::regex::icase};
   auto reBug             = boost::regex{"(#\\d+)", boost::regex::perl | boost::regex::icase};
+  auto reNewlines        = boost::regex{"\r?\n", boost::regex::perl | boost::regex::icase};
   auto bugFormatter      = [](boost::smatch const &matches) -> std::string {
     auto number_str = matches[1].str().substr(1);
     return (boost::format("<a href=\"https://gitlab.com/mbunkus/mkvtoolnix/issues/%1%\">#%1%</a>") % number_str).str();
@@ -177,7 +178,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
         html << Q("<p><ul>");
       }
 
-      auto text = boost::regex_replace(mtx::markdown::to_html(change.child_value()), reBug,  bugFormatter);
+      auto text = boost::regex_replace(boost::regex_replace(mtx::markdown::to_html(change.child_value()), reBug,  bugFormatter), reNewlines, " ");
       html     << Q("<li>%1</li>").arg(Q(text));
     }
 
