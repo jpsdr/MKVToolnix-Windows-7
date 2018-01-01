@@ -946,7 +946,7 @@ end
     new("#{[ lib[:dir] ].flatten.first}/lib#{lib[:name]}").
     sources([ lib[:dir] ].flatten, :type => :dir, :except => lib[:except]).
     only_if(c?(:USE_QT) && (lib[:name] == 'mtxcommon')).
-    sources(FileList["src/common/*.h"].select { |h| read_files(h)[h].any? { |line| /\bQ_OBJECT\b/.match line } }.map { |h| h.ext 'moc' }).
+    qt_dependencies_and_sources("common").
     end_if.
     build_dll(lib[:name] == 'mtxcommon').
     libraries(:iconv, :z, :matroska, :ebml, :rpcrt4).

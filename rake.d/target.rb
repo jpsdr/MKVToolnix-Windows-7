@@ -89,27 +89,26 @@ class Target
   end
 
   def qt_dependencies_and_sources(subdir, options = {})
-    ui_files         = FileList["src/#{subdir}/forms/**/*.ui"].to_a
-    ui_h_files       = ui_files.collect { |ui| ui.ext 'h' }
-    cpp_files        = FileList["src/#{subdir}/**/*.cpp"].to_a.for_target! - (options[:cpp_except] || [])
-    h_files          = FileList["src/#{subdir}/**/*.h"].to_a.for_target! - ui_h_files
-    cpp_content      = read_files cpp_files
-    h_content        = read_files h_files
-    qobject_h_files  = h_files.select { |h| h_content[h].any? { |line| /\bQ_OBJECT\b/.match line } }
+    ui_files           = FileList["src/#{subdir}/forms/**/*.ui"].to_a
+    ui_h_files         = ui_files.collect { |ui| ui.ext 'h' }
+    cpp_files          = FileList["src/#{subdir}/**/*.cpp"].to_a.for_target! - (options[:cpp_except] || [])
+    h_files            = FileList["src/#{subdir}/**/*.h"].to_a.for_target! - ui_h_files
+    content            = read_files(cpp_files + h_files)
+    qobject_h_files    = h_files.select { |h| content[h].any? { |line| /\bQ_OBJECT\b/.match line } }
 
-    form_include_re  = %r{^\s* \# \s* include \s+ \" (#{subdir}/forms/[^\"]+) }x
-    cpp_dependencies = {}
+    form_include_re    = %r{^\s* \# \s* include \s+ \" (#{subdir}/forms/[^\"]+) }x
+    extra_dependencies = {}
 
-    cpp_files.each do |cpp|
-      cpp_content[cpp].each do |line|
+    (cpp_files + h_files).each do |file_name|
+      content[file_name].each do |line|
         next unless form_include_re.match line
 
-        cpp_dependencies[cpp] ||= []
-        cpp_dependencies[cpp]  << "src/#{$1}"
+        extra_dependencies[file_name] ||= []
+        extra_dependencies[file_name]  << "src/#{$1}"
       end
     end
 
-    cpp_dependencies.each { |cpp, ui_hs| file cpp.ext('o') => ui_hs }
+    extra_dependencies.each { |file_name, ui_hs| file file_name => ui_hs }
 
     self.
       sources(ui_files).
