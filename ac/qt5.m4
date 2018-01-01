@@ -231,9 +231,16 @@ return 0;
     if test x"$problem" = x && test x"$QT_PKG_CONFIG_STATIC" != x; then
       qmake_dir="`mktemp -d`"
 
+      if test x"$MINGW" = x1 && check_version 5.10.0 $moc_ver; then
+        QTPLUGIN="qwindowsvistastyle"
+      else
+        QTPLUGIN=""
+      fi
+
       touch "$qmake_dir/empty.cpp"
       cat > "$qmake_dir/dummy.pro" <<EOF
 QT += core multimedia
+QTPLUGIN += $QTPLUGIN
 CONFIG += release static
 TARGET = console
 TEMPLATE = app
