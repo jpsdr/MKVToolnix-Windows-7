@@ -89,26 +89,31 @@ class Target
   end
 
   def qt_dependencies_and_sources(subdir, options = {})
-    ui_files           = FileList["src/#{subdir}/forms/**/*.ui"].to_a
-    ui_h_files         = ui_files.collect { |ui| ui.ext 'h' }
-    cpp_files          = FileList["src/#{subdir}/**/*.cpp"].to_a.for_target! - (options[:cpp_except] || [])
-    h_files            = FileList["src/#{subdir}/**/*.h"].to_a.for_target! - ui_h_files
-    content            = read_files(cpp_files + h_files)
-    qobject_h_files    = h_files.select { |h| content[h].any? { |line| /\bQ_OBJECT\b/.match line } }
+    ui_files         = FileList["src/#{subdir}/forms/**/*.ui"].to_a
+    ui_h_files       = ui_files.collect { |ui| ui.ext 'h' }
+    cpp_files        = FileList["src/#{subdir}/**/*.cpp"].to_a.for_target! - (options[:cpp_except] || [])
+    h_files          = FileList["src/#{subdir}/**/*.h"].to_a.for_target! - ui_h_files
+    content          = read_files(cpp_files + h_files)
+    qobject_h_files  = h_files.select { |h| content[h].any? { |line| /\bQ_OBJECT\b/.match line } }
 
-    form_include_re    = %r{^\s* \# \s* include \s+ \" (#{subdir}/forms/[^\"]+) }x
-    extra_dependencies = {}
+    form_include_re  = %r{^\s* \# \s* include \s+ \" (#{subdir}/forms/[^\"]+) }x
+    dep_builder      = lambda do |files|
+      extra_dependencies = {}
 
-    (cpp_files + h_files).each do |file_name|
-      content[file_name].each do |line|
-        next unless form_include_re.match line
+      files.each do |file_name|
+        content[file_name].each do |line|
+          next unless form_include_re.match line
 
-        extra_dependencies[file_name] ||= []
-        extra_dependencies[file_name]  << "src/#{$1}"
+          extra_dependencies[file_name] ||= []
+          extra_dependencies[file_name]  << "src/#{$1}"
+        end
       end
+
+      extra_dependencies
     end
 
-    extra_dependencies.each { |file_name, ui_hs| file file_name => ui_hs }
+    dep_builder.call(cpp_files).      each { |cpp, ui_hs| file cpp.ext('o')   => ui_hs }
+    dep_builder.call(qobject_h_files).each { |h,   ui_hs| file h.  ext('moc') => ui_hs }
 
     cpp_files << "src/#{subdir}/qt_resources.cpp" if FileTest.exists?("src/#{subdir}/qt_resources.qrc")
 
@@ -158,6 +163,7 @@ class Target
       when :flac             then c(:FLAC_LIBS)
       when :iconv            then c(:ICONV_LIBS)
       when :intl             then c(:LIBINTL_LIBS)
+      when :cmark            then c(:CMARK_LIBS)
       when :boost_regex      then c(:BOOST_REGEX_LIB)
       when :boost_filesystem then c(:BOOST_FILESYSTEM_LIB)
       when :boost_system     then c(:BOOST_SYSTEM_LIB)
