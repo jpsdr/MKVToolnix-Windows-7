@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
+#include "mkvtoolnix-gui/main_window/code_of_conduct_dialog.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
@@ -186,6 +187,7 @@ MainWindow::setupConnections() {
   connect(p->ui->actionHelpMkvmergeDocumentation, &QAction::triggered,                                    this,                 &MainWindow::visitMkvmergeDocumentation);
   connect(p->ui->actionHelpWebSite,               &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpReportBug,             &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
+  connect(p->ui->actionHelpCodeOfConduct,         &QAction::triggered,                                    this,                 [this]() { CodeOfConductDialog{this}.exec(); });
 
   connect(p->ui->actionWindowNext,                &QAction::triggered,                                    this,                 [this]() { showNextOrPreviousSubWindow(1);  });
   connect(p->ui->actionWindowPrevious,            &QAction::triggered,                                    this,                 [this]() { showNextOrPreviousSubWindow(-1); });

@@ -43,7 +43,8 @@ FORMS += \
     forms/main_window/prefs_run_program_widget.ui \
     forms/header_editor/attachments_page.ui \
     forms/header_editor/attached_file_page.ui \
-    forms/header_editor/action_for_dropped_files_dialog.ui
+    forms/header_editor/action_for_dropped_files_dialog.ui \
+    forms/main_window/code_of_conduct_dialog.ui
 
 RESOURCES += \
     qt_resources.qrc
