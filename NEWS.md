@@ -3,15 +3,17 @@
 ## Important notes
 
 * Feature removal: several deprecated features have been removed:
-* mkvmerge: the deprecated options `--identify-verbose` (and its counterpart
-  `-I`), `--identify-for-gui`, `--identify-for-mmg` and
-  `--identification-format verbose-text` have been removed.
-* all command line tools: support for the deprecated, old, proprietary format
-  used for option files has been removed.
-* all command line tools: support for passing command line options via the
-  deprecated environment variables `MKVTOOLNIX_OPTIONS`, `MKVEXTRACT_OPTIONS`,
-  `MKVINFO_OPTIONS`, `MKVMERGE_OPTIONS`, and `MKVPROPEDIT_OPTIONS` has been
-  removed.
+
+  * mkvmerge: the deprecated options `--identify-verbose` (and its counterpart
+    `-I`), `--identify-for-gui`, `--identify-for-mmg` and
+    `--identification-format verbose-text` have been removed.
+  * all command line tools: support for the deprecated, old, proprietary format
+    used for option files has been removed.
+  * all command line tools: support for passing command line options via the
+    deprecated environment variables `MKVTOOLNIX_OPTIONS`, `MKVEXTRACT_OPTIONS`,
+    `MKVINFO_OPTIONS`, `MKVMERGE_OPTIONS`, and `MKVPROPEDIT_OPTIONS` has been
+    removed.
+
 * mkvinfo: most of its code was re-written in order to lay the groundwork for
   including its functionality in MKVToolNix GUI but with more features than
   the existing mkvinfo GUI. The result is that a lot of its output has been
