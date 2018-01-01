@@ -111,6 +111,10 @@ built. These include:
   toolkit. You need this if you want to use the MKVToolNix GUI or
   mkvinfo's GUI.
 
+- [cmark](https://github.com/commonmark/cmark) — the CommonMark
+  parsing and rendering library in C is required when building the Qt
+  GUIs.
+
 - [libFLAC](http://downloads.xiph.org/releases/flac/) for FLAC
   support (Free Lossless Audio Codec)
 

@@ -69,6 +69,11 @@
   identifying MPLS files that refer to very short M2TS files caused mkvmerge
   to segfault.
 
+## Build system changes
+
+* [cmark](https://github.com/commonmark/cmark), the CommonMark parsing and
+  rendering library in C, is now required when building the GUIs.
+
 
 # Version 19.0.0 "Brave Captain" 2017-12-17
 

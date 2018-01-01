@@ -10,7 +10,7 @@ Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
 Requires: hicolor-icon-theme
 
-BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0, po4a
+BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0, cmark-devel, po4a
 
 %if 0%{?centos}
 BuildRequires: devtoolset-6-gcc-c++, rubygem-drake
