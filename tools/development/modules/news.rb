@@ -8,25 +8,24 @@ def parse_news file_name
   ignore       = true
 
   flush        = lambda do
+    current_line = current_line.join("\n").gsub(%r{\A\n+|\n+\z}, '')
+
     if !current_line.empty?
       news << {
-        :content => current_line.join(' '),
+        :content => current_line,
         :version => version,
         :date    => date,
         :type    => type
       }
-      current_line = []
     end
+
+    current_line = []
   end
 
   IO.read(file_name).
     gsub(%r{<!--.*?-->}, '').
     split(%r{\n}).
     each do |line|
-    is_continuation = %r{^\s}.match(line)
-    line            = line.chomp.gsub(%r{^\s+}, '').gsub(%r{\s+}, ' ')
-
-    next if line.empty?
 
     flush.call if %r{^[#*]}.match(line)
 
@@ -48,12 +47,9 @@ def parse_news file_name
     elsif %r{ ^\#\# \s+ (.+) }x.match(line)
       type = $1
 
-    elsif %r{ ^\# }x.match(line) && !is_continuation
-      fail "Don't know what to do with this line: #{line}"
-
     else
-      flush.call                              if     /^\*/.match(line)
-      current_line << line.gsub(/^\*\s*/, '') unless line.empty?
+      flush.call if /^\*/.match(line)
+      current_line << line.gsub(%r{^\*\s*}, '').sub(%r{^\s\s}, '')
 
     end
   end
