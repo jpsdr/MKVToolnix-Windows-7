@@ -110,6 +110,8 @@ class Target
 
     extra_dependencies.each { |file_name, ui_hs| file file_name => ui_hs }
 
+    cpp_files << "src/#{subdir}/qt_resources.cpp" if FileTest.exists?("src/#{subdir}/qt_resources.qrc")
+
     self.
       sources(ui_files).
       sources(qobject_h_files.collect { |h| h.ext 'moc' }).
