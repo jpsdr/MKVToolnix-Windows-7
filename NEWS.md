@@ -68,6 +68,8 @@
   returned on subsequent read operations. One result was that trying to
   identifying MPLS files that refer to very short M2TS files caused mkvmerge
   to segfault.
+* mkvmerge: SRT reader: mkvmerge can now handle SRT files with timestamps
+  without decimal places (e.g. `00:01:15` instead of `00:01:15.000`).
 
 ## Build system changes
 

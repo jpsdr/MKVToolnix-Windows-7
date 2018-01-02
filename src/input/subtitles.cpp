@@ -41,7 +41,7 @@ subtitles_c::process(generic_packetizer_c *p) {
 // ------------------------------------------------------------
 
 #define SRT_RE_VALUE          "\\s*(-?)\\s*(\\d+)"
-#define SRT_RE_TIMESTAMP      SRT_RE_VALUE ":" SRT_RE_VALUE ":" SRT_RE_VALUE "[,\\.:]" SRT_RE_VALUE
+#define SRT_RE_TIMESTAMP      SRT_RE_VALUE ":" SRT_RE_VALUE ":" SRT_RE_VALUE "(?:[,\\.:]" SRT_RE_VALUE ")?"
 #define SRT_RE_TIMESTAMP_LINE "^" SRT_RE_TIMESTAMP "\\s*[\\-\\s]+>\\s*" SRT_RE_TIMESTAMP "\\s*"
 #define SRT_RE_COORDINATES    "([XY]\\d+:\\d+\\s*){4}\\s*$"
 
@@ -139,8 +139,8 @@ srt_parser_c::parse() {
 
       int64_t s_h = 0, s_min = 0, s_sec = 0, s_ns = 0, e_h = 0, e_min = 0, e_sec = 0, e_ns = 0;
 
-      //        1         2       3      4        5     6             7    8
-      // "\\s*(-?)\\s*(\\d+):\\s(-?)*(\\d+):\\s*(-?)(\\d+)[,\\.]\\s*(-?)(\\d+)?"
+      //        1         2       3      4        5     6                7     8
+      // "\\s*(-?)\\s*(\\d+):\\s(-?)*(\\d+):\\s*(-?)(\\d+)(?:[,\\.]\\s*(-?)(\\d+))?"
 
       parse_number(matches[ 2].str(), s_h);
       parse_number(matches[ 4].str(), s_min);
