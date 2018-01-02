@@ -82,11 +82,12 @@ ensure
 end
 
 def runq(action, target, cmdline, options = {})
-  start = Time.now
+  start  = Time.now
+  runner = lambda { run_wrapper cmdline, options.clone.merge(:dont_echo => !$verbose) }
 
   puts_action action, :target => target, :prefix => $run_show_start_stop ? "[start          ]" : nil
 
-  code     = run_wrapper cmdline, options.clone.merge(:dont_echo => !$verbose)
+  code     = options[:mutex] ? options[:mutex].synchronize(&runner) : runner.call
   duration = Time.now - start
 
   if $run_show_start_stop
@@ -97,8 +98,7 @@ def runq(action, target, cmdline, options = {})
 end
 
 def runq_git(msg, cmdline, options = {})
-  puts_qaction "git #{cmdline.split(/\s+/)[0]}", :target => "#{msg}"
-  $git_mutex.synchronize { run "git #{cmdline}", options.clone.merge(:dont_echo => !$verbose) }
+  runq "git #{cmdline.split(/\s+/)[0]}", "#{msg}", "git #{cmdline}", :mutex => $git_mutex
 end
 
 def ensure_dir dir
