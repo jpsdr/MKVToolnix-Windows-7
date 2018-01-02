@@ -44,7 +44,7 @@ module AddPo
 
     orig_items = read_po target
 
-    puts_qaction "merge", target
+    puts_qaction "merge", :target => target
 
     updated_items = read_po file_name
     merged_items  = merge_po orig_items, updated_items, :headers_to_update => %w{Project-Id-Version}

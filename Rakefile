@@ -40,6 +40,7 @@ require_relative "rake.d/config"
 
 $config               = read_build_config
 $verbose              = ENV['V'].to_bool
+$run_show_start_stop  = !$verbose && ENV['RUN_SHOW_START_STOP'].to_bool
 $build_system_modules = {}
 $have_gtest           = (c(:GTEST_TYPE) == "system") || (c(:GTEST_TYPE) == "internal")
 $gtest_apps           = []
@@ -437,7 +438,7 @@ namespace :translations do
       end
     end
 
-    puts_action "create", "po/#{locale}.po"
+    puts_action "create", :target => "po/#{locale}.po"
     File.open "po/#{locale}.po", "w" do |out|
       now           = Time.now
       email         = ENV['EMAIL']
@@ -881,7 +882,7 @@ task :clean do
   remove_files_by_patterns patterns
 
   if Dir.exists? $dependency_dir
-    puts_vaction "rm -rf", "#{$dependency_dir}"
+    puts_vaction "rm -rf", :target => "#{$dependency_dir}"
     FileUtils.rm_rf $dependency_dir
   end
 end

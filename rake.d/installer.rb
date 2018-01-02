@@ -25,7 +25,7 @@ module Mtx::Installer
   end
 
   def self.update_one_translation_file file_name, english
-    puts_qaction "nsh_update", file_name
+    puts_qaction "nsh_update", :target => file_name
 
     language        = self.read_translation_file file_name
     translation_lines = []

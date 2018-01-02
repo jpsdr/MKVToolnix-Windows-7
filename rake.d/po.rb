@@ -152,7 +152,7 @@ def write_po file_name, items
 end
 
 def normalize_po file
-  puts_action "NORMALIZE-PO", file
+  puts_action "NORMALIZE-PO", :target => file
   write_po file, read_po(file)
 end
 
@@ -219,7 +219,7 @@ def transifex_pull_and_merge resource, language
 
   runq "tx pull", po_file, "tx pull -f -r mkvtoolnix.#{resource} -l #{language} > /dev/null"
 
-  puts_qaction "merge", po_file
+  puts_qaction "merge", :target => po_file
 
   transifex_items = read_po(po_file)
   merged_items    = merge_po orig_items, transifex_items

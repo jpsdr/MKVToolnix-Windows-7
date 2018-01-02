@@ -14,18 +14,19 @@ def puts(message)
   }
 end
 
-def puts_action(action, target=nil)
+def puts_action(action, options = {})
   msg  = sprintf "%*s", $action_width, action.gsub(/ +/, '_').upcase
-  msg += " #{target}" if target && !target.empty?
+  msg += " #{options[:target]}"       if !options[:target].blank?
+  msg  = "#{options[:prefix]} #{msg}" if !options[:prefix].blank?
   puts msg
 end
 
-def puts_qaction(action, target=nil)
-  puts_action(action, target) unless $verbose
+def puts_qaction(action, options = {})
+  puts_action(action, options) unless $verbose
 end
 
-def puts_vaction(action, target=nil)
-  puts_action(action, target) if $verbose
+def puts_vaction(action, options = {})
+  puts_action(action, options) if $verbose
 end
 
 def error(message)
@@ -81,12 +82,22 @@ ensure
 end
 
 def runq(action, target, cmdline, options = {})
-  puts_qaction action, target
-  run cmdline, options.clone.merge(:dont_echo => !$verbose)
+  start = Time.now
+
+  puts_action action, :target => target, :prefix => $run_show_start_stop ? "[start          ]" : nil
+
+  code     = run_wrapper cmdline, options.clone.merge(:dont_echo => !$verbose)
+  duration = Time.now - start
+
+  if $run_show_start_stop
+    puts_action action, :target => target, :prefix => sprintf("[%s  %02d:%02d.%03d]", code == 0 ? "done" : "fail", (duration / 60).to_i, duration.to_i % 60, (duration * 1000).to_i % 1000)
+  end
+
+  exit code if (code != 0) && !options[:allow_failure].to_bool
 end
 
 def runq_git(msg, cmdline, options = {})
-  puts_qaction "git #{cmdline.split(/\s+/)[0]}", "#{msg}"
+  puts_qaction "git #{cmdline.split(/\s+/)[0]}", :target => "#{msg}"
   $git_mutex.synchronize { run "git #{cmdline}", options.clone.merge(:dont_echo => !$verbose) }
 end
 
@@ -170,7 +181,7 @@ end
 
 def remove_files_by_patterns patterns
   patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq.select { |file_name| File.exists? file_name }.each do |file_name|
-    puts_vaction "rm", file_name
+    puts_vaction "rm", :target => file_name
     File.unlink file_name
   end
 end
