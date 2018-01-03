@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-01-01 00:38+0100\n"
-"PO-Revision-Date: 2017-11-29 12:11+0000\n"
+"PO-Revision-Date: 2018-01-03 10:43+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/ca/)\n"
@@ -809,7 +809,6 @@ msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           No copia cap pista de vídeo des d'aquest fitxer.\n"
 
 #: src/merge/mkvmerge.cpp:339
-#, fuzzy
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
@@ -817,8 +816,8 @@ msgid ""
 msgstr ""
 "  -F, --identification-format <format>\n"
 "                           Estableix el format dels resultats de la\n"
-"                           identificació. («text», «verbose-text»\n"
-"                           i  «json»).\n"
+"                           identificació. («text» o «json»; per omissió\n"
+"                           és  «json»).\n"
 
 #: src/merge/mkvmerge.cpp:337
 msgid ""
@@ -1257,14 +1256,14 @@ msgstr[1] "%1 avisos"
 
 # skip-rule: t-sp_tpc
 #: src/common/kax_info.cpp:811
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% (%|2$.3f| frames/fields per second for a video track)"
-msgstr "Durada per omissió: %|1$.3f|ms (%|2$.3f| fotogrames/camps per segon per a una pista de vídeo)"
+msgstr "%1% (%|2$.3f| fotogrames/camps per segon per a una pista de vídeo)"
 
 #: src/common/kax_info.cpp:796
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% (track ID for mkvmerge & mkvextract: %2%)"
-msgstr "Número de pista: %1% (ID de la pista per a «mkvmerge» i «mkvextract»: %2%)"
+msgstr "%1% (ID de la pista per a «mkvmerge» i «mkvextract»: %2%)"
 
 #: src/common/strings/formatting.cpp:321
 #, boost-format
@@ -1274,19 +1273,19 @@ msgstr[0] "%1% byte"
 msgstr[1] "%1% bytes"
 
 #: src/common/kax_info.cpp:186
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"
-msgstr "%1% fotograma, pista %2%, codi de temps %3% (%4%), mida %5%, adler 0x%|6$08x|%7%%8%\n"
+msgstr "%1% fotograma, pista %2%, codi de temps %3%, durada %4%, mida %5%, adler 0x%|6$08x|%7%%8%\n"
 
 #: src/common/kax_info.cpp:191
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"
-msgstr "%1% fotograma, pista %2%, codi de temps %3% (%4%), mida %5%, adler 0x%|6$08x|%7%\n"
+msgstr "%1% fotograma, pista %2%, codi de temps %3%, mida %4%, adler 0x%|5$08x|%6%\n"
 
 #: src/common/kax_info.cpp:187
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"
-msgstr "%1% fotograma, pista %2%, codi de temps %3% (%4%), mida %5%, adler 0x%|6$08x|%7%\n"
+msgstr "%1% fotograma, pista %2%, codi de temps %3%, mida %4%, adler 0x%|5$08x|%6%%7%\n"
 
 #: src/common/strings/formatting.cpp:315
 #, boost-format
@@ -1367,9 +1366,9 @@ msgstr "%1%: ID de la pista absent a «%2% %3%».\n"
 
 # skip-rule: t-sp_tpc
 #: src/common/kax_info.cpp:189
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1%track number %2%, %3% frame(s), timestamp %4%"
-msgstr "Bloc simple (%1% número de pista %2%, %3% fotograma/es, codi de temps %|4$.3f|s = %5%)"
+msgstr "%1%número de pista %2%, %3% fotograma/es, codi de temps %4%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
@@ -2442,9 +2441,9 @@ msgid "'Track enabled' flag"
 msgstr "Etiqueta «Pista habilitada»"
 
 #: src/common/kax_info.cpp:277
-#, fuzzy, boost-format
+#, boost-format
 msgid "(Known element, but invalid at this position: %1%; ID: 0x%2% size: %3%)"
-msgstr "(Element desconegut: %1%; ID: 0x%2% mida: %3%)"
+msgstr "(Element desconegut, però no és vàlid en aquesta posició: %1%; ID: 0x%2% mida: %3%)"
 
 #: src/common/kax_info.cpp:180
 #, boost-format
@@ -2509,7 +2508,7 @@ msgstr "1: tots els fotogrames"
 
 #: src/propedit/propedit_cli_parser.cpp:264
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
-msgstr "2.- Un número amb el prefix «=», el qual serà interpretat com un l'ID únic de l'adjunt llistat per «mkvmerge --identify». Normalment, són nombres aleatoris. (p. ex., «128975986723»)."
+msgstr "2.- Un número amb el prefix «=», el qual serà interpretat com l'ID únic de l'adjunt llistat per «mkvmerge --identify». Normalment, són nombres aleatoris. (p. ex., «128975986723»)."
 
 #: src/common/kax_info.cpp:735
 msgid "2: codec private data"
@@ -3027,9 +3026,8 @@ msgid "Afterwards create &new multiplex settings and close the current ones."
 msgstr "Després crea uns ajustaments de multiplexat &nous i tanca els actuals."
 
 #: src/common/kax_element_names.cpp:168
-#, fuzzy
 msgid "Algorithm"
-msgstr "Algorisme: %1% (%2%)"
+msgstr "Algorisme"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:371
 #, no-c-format
@@ -3278,9 +3276,8 @@ msgid "Aspect ratio factor"
 msgstr "Factor de la relació d'aspecte"
 
 #: src/common/kax_element_names.cpp:158
-#, fuzzy
 msgid "Aspect ratio type"
-msgstr "Relació d'aspecte"
+msgstr "Tipus de la relació d'aspecte"
 
 #: src/common/xml/ebml_chapters_converter.cpp:107
 msgid "At least one <ChapterAtom> element is needed."
@@ -3319,9 +3316,8 @@ msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID %1% de l'adjunt: tipus «%2%», mida %3% bytes"
 
 #: src/common/kax_element_names.cpp:301
-#, fuzzy
 msgid "Attachment UID"
-msgstr "Adjunt"
+msgstr "UID de l'adjunt"
 
 #: src/extract/extract_cli_parser.cpp:94
 msgid "Attachment extraction"
@@ -3379,9 +3375,8 @@ msgid "Audio sampling frequency"
 msgstr "Freqüència de mostreig de l'àudio"
 
 #: src/common/kax_element_names.cpp:103
-#, fuzzy
 msgid "Audio track"
-msgstr "Pistes d'à&udio:"
+msgstr "Pista d'àudio"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
 #, no-c-format
@@ -3436,7 +3431,7 @@ msgstr "Abans dels capítols"
 
 #: src/common/kax_element_names.cpp:307
 msgid "Binary"
-msgstr ""
+msgstr "Binari"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:156
 #, no-c-format
@@ -3444,48 +3439,41 @@ msgid "Binary (displayed as hexadecimal numbers)"
 msgstr "Binari (mostrat com a números hexadecimals)"
 
 #: src/common/kax_element_names.cpp:108
-#, fuzzy
 msgid "Bit depth"
-msgstr "Profunditat de bits: %1%"
+msgstr "Profunditat de bits"
 
 #: src/common/kax_element_names.cpp:124
-#, fuzzy
 msgid "Bits per channel"
-msgstr "Bits per canal: %1%"
+msgstr "Bits per canal"
 
 #: src/common/property_element.cpp:206
 msgid "Bits per sample, mostly used for PCM."
 msgstr "Bits per mostra, més emprat per a PCM."
 
 #: src/common/kax_element_names.cpp:239
-#, fuzzy
 msgid "Block"
-msgstr "Grup del bloc"
+msgstr "Bloc"
 
 #: src/common/kax_element_names.cpp:247
-#, fuzzy
 msgid "Block additional"
-msgstr "Bloc addicional: %1%"
+msgstr "Bloc addicional"
 
 #: src/common/kax_element_names.cpp:246
 #: src/common/kax_element_names.cpp:252
-#, fuzzy
 msgid "Block additional ID"
-msgstr "ID addicional del bloc: %1%"
+msgstr "ID del bloc addicional"
 
 #: src/common/kax_element_names.cpp:240
-#, fuzzy
 msgid "Block duration"
-msgstr "Durada per omissió"
+msgstr "Durada del bloc"
 
 #: src/common/kax_element_names.cpp:238
 msgid "Block group"
 msgstr "Grup del bloc"
 
 #: src/common/kax_element_names.cpp:243
-#, fuzzy
 msgid "Block virtual"
-msgstr "Bloc virtual: %1%"
+msgstr "Bloc virtual"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:244
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:82
@@ -3512,14 +3500,12 @@ msgid "Blue Y chromaticity coordinate as defined by CIE 1931."
 msgstr "Coordenada Y de crominància del blau definida per la CIE 1931."
 
 #: src/common/kax_element_names.cpp:115
-#, fuzzy
 msgid "Blue colour coordinate x"
-msgstr "Coordenades de «x» pel color blau: %1%"
+msgstr "Coordenades de «x» pel color blau"
 
 #: src/common/kax_element_names.cpp:116
-#, fuzzy
 msgid "Blue colour coordinate y"
-msgstr "Coordenades de «y» pel color blau: %1%"
+msgstr "Coordenades de «y» pel color blau"
 
 #: src/input/r_vobsub.cpp:555
 #, boost-format
@@ -3711,14 +3697,12 @@ msgid "Change for '%1%' executed. One entry added.\n"
 msgstr "S'ha executat el canvi per a «%1%». S'ha afegit una entrada.\n"
 
 #: src/common/kax_element_names.cpp:107
-#, fuzzy
 msgid "Channel positions"
-msgstr "Posicions del canal: %1%"
+msgstr "Posicions del canal"
 
 #: src/common/kax_element_names.cpp:106
-#, fuzzy
 msgid "Channels"
-msgstr "Canals: %1%"
+msgstr "Canals"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
 msgid "Chapter &number of first created entry:"
@@ -3732,24 +3716,20 @@ msgstr "Capítol <NUM:2>"
 
 #: src/common/kax_element_names.cpp:272
 #: src/common/kax_element_names.cpp:300
-#, fuzzy
 msgid "Chapter UID"
-msgstr "Capítols"
+msgstr "UID del capítol"
 
 #: src/common/kax_element_names.cpp:271
-#, fuzzy
 msgid "Chapter atom"
-msgstr "Editor de capítols"
+msgstr "Àtom del capítol"
 
 #: src/common/kax_element_names.cpp:287
-#, fuzzy
 msgid "Chapter country"
-msgstr "Capítols: %1% entrada"
+msgstr "País del capítol"
 
 #: src/common/kax_element_names.cpp:283
-#, fuzzy
 msgid "Chapter display"
-msgstr "Fitxer de capítols:"
+msgstr "Mostra el capítol"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1396
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:233
@@ -3768,28 +3748,24 @@ msgid "Chapter file:"
 msgstr "Fitxer de capítols:"
 
 #: src/common/kax_element_names.cpp:277
-#, fuzzy
 msgid "Chapter flag enabled"
-msgstr "Fitxer de capítols:"
+msgstr "Etiqueta del capítol habilitada"
 
 #: src/common/kax_element_names.cpp:276
-#, fuzzy
 msgid "Chapter flag hidden"
-msgstr "O&met els capítols marcats com a «ocult»"
+msgstr "Etiqueta del capítol oculta"
 
 #: src/merge/cluster_helper.cpp:748
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "La generació de capítols només és possible si almenys es copia una pista de vídeo o d'àudio.\n"
 
 #: src/common/kax_element_names.cpp:285
-#, fuzzy
 msgid "Chapter language"
-msgstr "Traducció de capítols"
+msgstr "Idioma del capítol"
 
 #: src/common/kax_element_names.cpp:286
-#, fuzzy
 msgid "Chapter language (IETF)"
-msgstr "Traducció de capítols"
+msgstr "Idioma del capítol (IETF)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "Chapter mass modification"
@@ -3807,96 +3783,79 @@ msgstr "Analitzador del capítol: L'UID editat %1% no és exclusiu i no es podr�
 
 #: src/common/kax_element_names.cpp:280
 msgid "Chapter physical equivalent"
-msgstr ""
+msgstr "Equivalent al capítol físic"
 
 #: src/common/kax_element_names.cpp:288
-#, fuzzy
 msgid "Chapter process"
-msgstr "Capítols"
+msgstr "Procés del capítol"
 
 #: src/common/kax_element_names.cpp:289
-#, fuzzy
 msgid "Chapter process codec ID"
-msgstr "Còdec per a la traducció de capítols: %1%"
+msgstr "ID del còdec pel procés del capítol"
 
 #: src/common/kax_element_names.cpp:291
 msgid "Chapter process command"
-msgstr ""
+msgstr "Ordre pel procés del capítol"
 
 #: src/common/kax_element_names.cpp:293
-#, fuzzy
 msgid "Chapter process data"
-msgstr "Traducció de capítols"
+msgstr "Dades pel procés del capítol"
 
 #: src/common/kax_element_names.cpp:290
-#, fuzzy
 msgid "Chapter process private"
-msgstr "Traducció de capítols"
+msgstr "Procés del capítol privat"
 
 #: src/common/kax_element_names.cpp:292
-#, fuzzy
 msgid "Chapter process time"
-msgstr "Traducció de capítols"
+msgstr "Temps pel procés del capítol"
 
 #: src/common/kax_element_names.cpp:278
-#, fuzzy
 msgid "Chapter segment UID"
-msgstr "UID del segment següent:"
+msgstr "UID del segment del capítol"
 
 #: src/common/kax_element_names.cpp:279
-#, fuzzy
 msgid "Chapter segment edition UID"
-msgstr "UID d'e&dició del segment:"
+msgstr "UID d'edició del segment del capítol"
 
 #: src/common/kax_element_names.cpp:284
-#, fuzzy
 msgid "Chapter string"
-msgstr "Extracció de capítols"
+msgstr "Cadena del capítol"
 
 #: src/common/kax_element_names.cpp:273
-#, fuzzy
 msgid "Chapter string UID"
-msgstr "Extracció de capítols"
+msgstr "UID de la cadena del capítol"
 
 #: src/common/kax_element_names.cpp:275
-#, fuzzy
 msgid "Chapter time end"
-msgstr "Fitxer de capítols:"
+msgstr "Temps de finalització del capítol"
 
 #: src/common/kax_element_names.cpp:274
-#, fuzzy
 msgid "Chapter time start"
-msgstr "Editor de capítols"
+msgstr "Temps d'inici del capítol"
 
 #: src/common/kax_element_names.cpp:281
-#, fuzzy
 msgid "Chapter track"
-msgstr "Extracció de capítols"
+msgstr "Pista de capítol"
 
 #: src/common/kax_element_names.cpp:282
-#, fuzzy
 msgid "Chapter track number"
-msgstr "Números dels capítols:"
+msgstr "Número de la pista del capítol"
 
 #: src/common/kax_element_names.cpp:98
-#, fuzzy
 msgid "Chapter translate"
-msgstr "Traducció de capítols"
+msgstr "Traducció del capítol"
 
 #: src/common/kax_element_names.cpp:101
-#, fuzzy
 msgid "Chapter translate ID"
-msgstr "Traducció de capítols"
+msgstr "ID de la traducció del capítol"
 
 #: src/common/kax_element_names.cpp:100
-#, fuzzy
 msgid "Chapter translate codec"
-msgstr "Còdec per a la traducció de capítols: %1%"
+msgstr "Còdec de la traducció del capítol"
 
 #: src/common/kax_element_names.cpp:99
-#, fuzzy
 msgid "Chapter translate edition UID"
-msgstr "UID d'edició per a la traducció de capítols: %1%"
+msgstr "UID de l'edició de la traducció del capítol"
 
 #: src/common/kax_element_names.cpp:265
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
@@ -3983,20 +3942,17 @@ msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "Longitud del clúster «%1%» fora de l'interval (100..32000).\n"
 
 #: src/common/kax_element_names.cpp:262
-#, fuzzy
 msgid "Cluster position"
-msgstr "Posició del clúster: %1%"
+msgstr "Posició del clúster"
 
 #: src/common/kax_element_names.cpp:263
-#, fuzzy
 msgid "Cluster previous size"
-msgstr "Mida prèvia del clúster: %1%"
+msgstr "Mida prèvia del clúster"
 
 # skip-rule: t-sp_tpc
 #: src/common/kax_element_names.cpp:261
-#, fuzzy
 msgid "Cluster timestamp"
-msgstr "Codi de temps del clúster: %|1$.3f|s"
+msgstr "Codi de temps del clúster"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:45
@@ -4016,19 +3972,16 @@ msgid "Codec ID:"
 msgstr "ID del còdec:"
 
 #: src/common/kax_element_names.cpp:192
-#, fuzzy
 msgid "Codec decode all"
-msgstr "Còdec de descodificació integral: %1%"
+msgstr "Còdec de descodificació integral"
 
 #: src/common/kax_element_names.cpp:191
-#, fuzzy
 msgid "Codec download URL"
-msgstr "URL de baixada del còdec: %1%"
+msgstr "URL de baixada del còdec"
 
 #: src/common/kax_element_names.cpp:190
-#, fuzzy
 msgid "Codec info URL"
-msgstr "URL d'informació del còdec: %1%"
+msgstr "URL d'informació del còdec"
 
 #: src/common/kax_element_names.cpp:187
 #: src/common/property_element.cpp:141
@@ -4036,19 +3989,16 @@ msgid "Codec name"
 msgstr "Nom del còdec"
 
 #: src/common/kax_element_names.cpp:189
-#, fuzzy
 msgid "Codec settings"
-msgstr "Ajustaments del còdec: %1%"
+msgstr "Ajustaments del còdec"
 
 #: src/common/kax_element_names.cpp:245
-#, fuzzy
 msgid "Codec state"
-msgstr "Estat del còdec: %1%"
+msgstr "Estat del còdec"
 
 #: src/common/kax_element_names.cpp:186
-#, fuzzy
 msgid "Codec's private data"
-msgstr "2: dades privades del còdec"
+msgstr "Dades privades del còdec"
 
 #: src/common/kax_element_names.cpp:188
 #: src/common/property_element.cpp:142
@@ -4069,29 +4019,24 @@ msgid "Colour mastering meta information"
 msgstr "Meta informació sobre domini del color"
 
 #: src/common/kax_element_names.cpp:123
-#, fuzzy
 msgid "Colour matrix coefficients"
-msgstr "Coeficients de la matriu del color: %1%"
+msgstr "Coeficients de la matriu del color"
 
 #: src/common/kax_element_names.cpp:133
-#, fuzzy
 msgid "Colour primaries"
-msgstr "Colors primaris: %1%"
+msgstr "Colors primaris"
 
 #: src/common/kax_element_names.cpp:131
-#, fuzzy
 msgid "Colour range"
-msgstr "Interval de colors: %1%"
+msgstr "Interval del color"
 
 #: src/common/kax_element_names.cpp:159
-#, fuzzy
 msgid "Colour space"
-msgstr "Espai de color: %1%"
+msgstr "Espai de color"
 
 #: src/common/kax_element_names.cpp:132
-#, fuzzy
 msgid "Colour transfer"
-msgstr "Transferència del color: %1%"
+msgstr "Transferència del color"
 
 #: src/info/qt_ui.cpp:149
 #, no-c-format
@@ -4395,24 +4340,20 @@ msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #: src/common/kax_element_names.cpp:219
-#, fuzzy
 msgid "Cue block number"
-msgstr "Nombre de blocs de l'índex: %1%"
+msgstr "Nombre de blocs de l'índex"
 
 #: src/common/kax_element_names.cpp:216
-#, fuzzy
 msgid "Cue cluster position"
-msgstr "Posició del clúster de l'índex: %1%"
+msgstr "Posició del clúster de l'índex"
 
 #: src/common/kax_element_names.cpp:220
-#, fuzzy
 msgid "Cue codec state"
-msgstr "Estat del còdec de l'índex: %1%"
+msgstr "Estat del còdec de l'índex"
 
 #: src/common/kax_element_names.cpp:218
-#, fuzzy
 msgid "Cue duration"
-msgstr "Durada de l'índex: %1%"
+msgstr "Durada de l'índex"
 
 #: src/extract/extract_cli_parser.cpp:129
 msgid "Cue extraction"
@@ -4427,34 +4368,29 @@ msgid "Cue point"
 msgstr "Punt de l'índex"
 
 #: src/common/kax_element_names.cpp:223
-#, fuzzy
 msgid "Cue ref cluster"
-msgstr "Clúster de referència de l'índex: %1%"
+msgstr "Clúster de referència de l'índex"
 
 #: src/common/kax_element_names.cpp:225
-#, fuzzy
 msgid "Cue ref codec state"
-msgstr "Estat del còdec de referència de l'índex: %1%"
+msgstr "Estat del còdec de referència de l'índex"
 
 #: src/common/kax_element_names.cpp:224
-#, fuzzy
 msgid "Cue ref number"
-msgstr "Número de referència de l'índex: %1%"
+msgstr "Número de referència de l'índex"
 
 # skip-rule: t-sp_tpc
 #: src/common/kax_element_names.cpp:222
-#, fuzzy
 msgid "Cue ref time"
-msgstr "Temps de referència de l'índex: %|1$.3f|s"
+msgstr "Temps de referència de l'índex"
 
 #: src/common/kax_element_names.cpp:221
 msgid "Cue reference"
 msgstr "Referència de l'índex"
 
 #: src/common/kax_element_names.cpp:217
-#, fuzzy
 msgid "Cue relative position"
-msgstr "Posició relativa de l'índex: %1%"
+msgstr "Posició relativa de l'índex"
 
 #: src/extract/extract_cli_parser.cpp:112
 msgid "Cue sheet extraction"
@@ -4481,14 +4417,12 @@ msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (curr
 msgstr "Analitzador del full de muntatge: no s'ha trobat cap entrada de l'ÍNDEX per a l'entrada de la PISTA anterior (línia actual: %1%)\n"
 
 #: src/common/kax_element_names.cpp:213
-#, fuzzy
 msgid "Cue time"
-msgstr "Fitxers del full de muntatge"
+msgstr "Temps de l'índex"
 
 #: src/common/kax_element_names.cpp:215
-#, fuzzy
 msgid "Cue track"
-msgstr "Pista de l'índex: %1%"
+msgstr "Pista de l'índex"
 
 #: src/common/kax_element_names.cpp:214
 msgid "Cue track positions"
@@ -4496,7 +4430,7 @@ msgstr "Posicions de la pista a l'índex"
 
 #: src/common/kax_element_names.cpp:211
 msgid "Cues"
-msgstr ""
+msgstr "Fulls de muntatge"
 
 #: src/common/kax_info.cpp:522
 msgid "Cues (subentries will be skipped)"
@@ -4610,9 +4544,8 @@ msgid "Default duration/FPS:"
 msgstr "Durada/FPS per omissió:"
 
 #: src/common/kax_element_names.cpp:310
-#, fuzzy
 msgid "Default language"
-msgstr "Valors per omissió"
+msgstr "Idioma per omissió"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1364
 msgid "Default subtitle &charset to set:"
@@ -4624,7 +4557,6 @@ msgid "Default track"
 msgstr "Pista per omissió"
 
 #: src/common/kax_element_names.cpp:198
-#, fuzzy
 msgid "Default track flag"
 msgstr "Etiqueta «Pista per omissió»"
 
@@ -4656,7 +4588,7 @@ msgstr "Per omissió per a les pistes que s'afegeixin noves"
 
 #: src/common/kax_element_names.cpp:250
 msgid "Delay"
-msgstr ""
+msgstr "Retard"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1686
 msgid "Delay (in ms):"
@@ -4725,9 +4657,9 @@ msgid "Destination file name"
 msgstr "Nom del fitxer de destinació"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Destination file name: %1"
-msgstr "Nom del fitxer de destinació"
+msgstr "Nom del fitxer de destinació: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
 #, no-c-format
@@ -4804,7 +4736,7 @@ msgstr "Inhabilita les ani&macions"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
 #, no-c-format
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
-msgstr "Inhabilita l'ús de blocs simples en comptes de grups de blocs."
+msgstr "Inhabilita l'ús de blocs senzills en comptes de grups de blocs."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
 #: src/mkvtoolnix-gui/jobs/job.cpp:271
@@ -4819,9 +4751,8 @@ msgstr "Inhabilita els lligams per a totes les pistes."
 
 # skip-rule: t-sp_tpc
 #: src/common/kax_element_names.cpp:253
-#, fuzzy
 msgid "Discard padding"
-msgstr "Descarta l'ompliment: %|1$.3f|ms (%2%ns)"
+msgstr "Descarta l'ompliment"
 
 #: src/merge/mkvmerge.cpp:680
 #: src/merge/mkvmerge.cpp:686
@@ -4830,19 +4761,16 @@ msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:
 msgstr "Dimensions de visualització: no s'han assignat en la forma <TID>:<amplada>x<alçada>, p. ex., 1:640x480 (l'argument era «%1%»).\n"
 
 #: src/common/kax_element_names.cpp:148
-#, fuzzy
 msgid "Display height"
-msgstr "Alçada de visualització: %1%"
+msgstr "Alçada de visualització"
 
 #: src/common/kax_element_names.cpp:153
-#, fuzzy
 msgid "Display unit"
-msgstr "Unitat de visualització: %1%%2%"
+msgstr "Unitat de visualització"
 
 #: src/common/kax_element_names.cpp:147
-#, fuzzy
 msgid "Display width"
-msgstr "Amplada de visualització: %1%"
+msgstr "Amplada de visualització"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 msgid "Display width/height:"
@@ -4890,19 +4818,16 @@ msgid "Do you want to overwrite the file?"
 msgstr "Esteu segur que voleu sobreescriure el fitxer?"
 
 #: src/common/kax_element_names.cpp:76
-#, fuzzy
 msgid "Document type"
-msgstr "Tipus de document: %1%"
+msgstr "Tipus de document"
 
 #: src/common/kax_element_names.cpp:78
-#, fuzzy
 msgid "Document type read version"
-msgstr "Versió de lectura del tipus de document: %1%"
+msgstr "Versió de lectura del tipus de document"
 
 #: src/common/kax_element_names.cpp:77
-#, fuzzy
 msgid "Document type version"
-msgstr "Versió del tipus de document: %1%"
+msgstr "Versió del tipus de document"
 
 #: src/common/file_types.cpp:33
 msgid "Dolby TrueHD"
@@ -4995,26 +4920,23 @@ msgstr "E&xpandeix les marques de temps d'inici i final del capítol per inclour
 
 #: src/common/kax_element_names.cpp:80
 msgid "EBML CRC-32"
-msgstr ""
+msgstr "EBML CRC-32"
 
 #: src/common/kax_element_names.cpp:71
 msgid "EBML head"
 msgstr "Capçalera EBML"
 
 #: src/common/kax_element_names.cpp:73
-#, fuzzy
 msgid "EBML read version"
-msgstr "Versió de lectura de l'EBML: %1%"
+msgstr "Versió de lectura de l'EBML"
 
 #: src/common/kax_element_names.cpp:72
-#, fuzzy
 msgid "EBML version"
-msgstr "Versió EBML: %1%"
+msgstr "Versió de l'EBML"
 
 #: src/common/kax_element_names.cpp:79
-#, fuzzy
 msgid "EBML void"
-msgstr "Capçalera EBML"
+msgstr "EBML buit"
 
 #: src/merge/reader_detection_and_creation.cpp:420
 #, boost-format
@@ -5041,9 +4963,8 @@ msgstr "Selectors per a l'edició de les propietats"
 
 #: src/common/kax_element_names.cpp:267
 #: src/common/kax_element_names.cpp:299
-#, fuzzy
 msgid "Edition UID"
-msgstr "Edició de l'entrada"
+msgstr "UID de l'edició"
 
 #: src/common/kax_element_names.cpp:266
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
@@ -5053,19 +4974,16 @@ msgid "Edition entry"
 msgstr "Edició de l'entrada"
 
 #: src/common/kax_element_names.cpp:269
-#, fuzzy
 msgid "Edition flag default"
-msgstr "Edició de l'entrada"
+msgstr "Etiqueta d'edició predeterminada"
 
 #: src/common/kax_element_names.cpp:268
-#, fuzzy
 msgid "Edition flag hidden"
-msgstr "Edició de l'entrada"
+msgstr "Etiqueta d'edició oculta"
 
 #: src/common/kax_element_names.cpp:270
-#, fuzzy
 msgid "Edition flag ordered"
-msgstr "Edició de l'entrada"
+msgstr "Etiqueta d'edició ordenada"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 #, no-c-format
@@ -5106,9 +5024,8 @@ msgid "Enable copying of tracks by their language"
 msgstr "Habilita la còpia de les pistes segons el seu idioma"
 
 #: src/common/kax_element_names.cpp:183
-#, fuzzy
 msgid "Enabled"
-msgstr "&Habilitades"
+msgstr "Habilitat"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:154
 #, no-c-format
@@ -5126,14 +5043,12 @@ msgid "Enabling tracks"
 msgstr "Habilita les pistes"
 
 #: src/common/kax_element_names.cpp:171
-#, fuzzy
 msgid "Encryption algorithm"
-msgstr "Algorisme  d'encriptatge: %1% (%2%)"
+msgstr "Algorisme  d'encriptatge"
 
 #: src/common/kax_element_names.cpp:172
-#, fuzzy
 msgid "Encryption key ID"
-msgstr "ID de la clau d'encriptatge: %1%"
+msgstr "ID de la clau d'encriptatge"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
 #, no-c-format
@@ -5471,9 +5386,8 @@ msgid "Failed to parse the USF codec private data for track %1%: %2%\n"
 msgstr "Ha fallat en analitzar les dades privades del còdec USF per a la pista %1%: %2%\n"
 
 #: src/common/kax_element_names.cpp:90
-#, fuzzy
 msgid "Family UID"
-msgstr "UID de la família: %1%"
+msgstr "UID de la família"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:172
 msgid "Fi&le name:"
@@ -5484,9 +5398,8 @@ msgid "Fi&le title:"
 msgstr "Títo&l del fitxer:"
 
 #: src/common/kax_element_names.cpp:156
-#, fuzzy
 msgid "Field order"
-msgstr "Ordre del camp de vídeo"
+msgstr "Ordre del camp"
 
 #: src/common/property_element.cpp:158
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
@@ -5503,9 +5416,8 @@ msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Fitxer «%1%»: contenidor no admès: %2%\n"
 
 #: src/common/kax_element_names.cpp:233
-#, fuzzy
 msgid "File UID"
-msgstr "UID del fitxer: %1%"
+msgstr "UID del fitxer"
 
 #: src/input/r_real.cpp:430
 #: src/input/r_real.cpp:439
@@ -5514,14 +5426,12 @@ msgid "File contains fewer frames than expected or is corrupt after frame %1%.\n
 msgstr "El fitxer conté menys fotogrames dels esperats o està malmès després del fotograma %1%.\n"
 
 #: src/common/kax_element_names.cpp:232
-#, fuzzy
 msgid "File data"
-msgstr "Nom del fitxer"
+msgstr "Dades del fitxer"
 
 #: src/common/kax_element_names.cpp:229
-#, fuzzy
 msgid "File description"
-msgstr "Descripció del fitxer: %1%"
+msgstr "Descripció del fitxer"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:193
 #, no-c-format
@@ -5672,9 +5582,8 @@ msgid "Forced track"
 msgstr "Pista forçada"
 
 #: src/common/kax_element_names.cpp:199
-#, fuzzy
 msgid "Forced track flag"
-msgstr "Etiqueta «Pista forçada»:"
+msgstr "Etiqueta «Pista forçada»"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
@@ -5710,14 +5619,12 @@ msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: falta l'ID de la pista a «%1% %2%».\n"
 
 #: src/common/kax_element_names.cpp:249
-#, fuzzy
 msgid "Frame number"
-msgstr "Número del fotograma: %1%"
+msgstr "Número del fotograma"
 
 #: src/common/kax_element_names.cpp:160
-#, fuzzy
 msgid "Frame rate"
-msgstr "Velocitat dels fotogrames: %1%"
+msgstr "Velocitat dels fotogrames"
 
 #: src/common/kax_info.cpp:184
 #: src/common/kax_info.cpp:190
@@ -5741,9 +5648,8 @@ msgid "GUI"
 msgstr "IGU"
 
 #: src/common/kax_element_names.cpp:154
-#, fuzzy
 msgid "Gamma"
-msgstr "Gamma: %1%"
+msgstr "Gamma"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
 #, no-c-format
@@ -5812,14 +5718,12 @@ msgid "Green Y chromaticity coordinate as defined by CIE 1931."
 msgstr "Coordenada Y de crominància del verd definida per la CIE 1931."
 
 #: src/common/kax_element_names.cpp:113
-#, fuzzy
 msgid "Green colour coordinate x"
-msgstr "Coordenades de «x» pel color verd: %1%"
+msgstr "Coordenades de «x» pel color verd"
 
 #: src/common/kax_element_names.cpp:114
-#, fuzzy
 msgid "Green colour coordinate y"
-msgstr "Coordenades de «y» pel color verd: %1%"
+msgstr "Coordenades de «y» pel color verd"
 
 #: src/common/file_types.cpp:86
 msgid "HD-DVD subtitles"
@@ -5913,19 +5817,16 @@ msgid "Highest priority"
 msgstr "Prioritat més alta"
 
 #: src/common/kax_element_names.cpp:127
-#, fuzzy
 msgid "Horizontal Cb subsample"
-msgstr "Submostra Cb horitzontal: %1%"
+msgstr "Submostra Cb horitzontal"
 
 #: src/common/kax_element_names.cpp:129
-#, fuzzy
 msgid "Horizontal chroma siting"
-msgstr "Posició de la crominància horitzontal: %1%"
+msgstr "Posició de la crominància horitzontal"
 
 #: src/common/kax_element_names.cpp:125
-#, fuzzy
 msgid "Horizontal chroma subsample"
-msgstr "Submostra de la crominància horitzontal: %1%"
+msgstr "Submostra de la crominància horitzontal"
 
 #: src/common/property_element.cpp:174
 msgid "How chroma is sited horizontally."
@@ -6272,9 +6173,9 @@ msgid "Indexing (cues):"
 msgstr "Indexació (CUE):"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Info job"
-msgstr "Eina d'informació"
+msgstr "Informació de la tasca"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
@@ -6306,9 +6207,8 @@ msgid "Interface &language:"
 msgstr "I&dioma de la interfície:"
 
 #: src/common/kax_element_names.cpp:155
-#, fuzzy
 msgid "Interlaced"
-msgstr "Entrellaçat: %1%"
+msgstr "Entrellaçat"
 
 #: src/extract/xtr_textsubs.cpp:131
 #, boost-format
@@ -6784,14 +6684,12 @@ msgid "Known &problems in recent releases"
 msgstr "&Problemes coneguts en versions recents"
 
 #: src/common/kax_element_names.cpp:248
-#, fuzzy
 msgid "Lace number"
-msgstr "Número de cordó: %1%"
+msgstr "Número del lligam"
 
 #: src/common/kax_element_names.cpp:197
-#, fuzzy
 msgid "Lacing flag"
-msgstr "Etiqueta del lligam: %1%"
+msgstr "Etiqueta del lligam"
 
 #: src/common/kax_element_names.cpp:200
 #: src/common/property_element.cpp:139
@@ -6883,9 +6781,9 @@ msgid "Listing configuration file names with the extension .mtxcfg causes the GU
 msgstr "El fet de llistar els noms dels fitxers de configuració amb l'extensió .mtxcfg causa que la IGU carregui els fitxers de configuració a l'eina adequada."
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:152
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Listing content of file \"%1\" in directory \"%2\""
-msgstr "Multiplexació al fitxer «%1» en el directori «%2»"
+msgstr "S'està llistant el contingut del fitxer «%1» en el directori «%2»"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:489
 #, no-c-format
@@ -7050,14 +6948,12 @@ msgid "Matroska files can be played back without the cue data, but seeking will 
 msgstr "Els fitxers Matroska es poden reproduir sense l'índex, però les cerques probablement seran imprecises i lentes."
 
 #: src/common/kax_element_names.cpp:74
-#, fuzzy
 msgid "Maximum EBML ID length"
-msgstr "Longitud màxima de l'ID de l'EBML: %1%"
+msgstr "Longitud màxima de l'ID de l'EBML"
 
 #: src/common/kax_element_names.cpp:75
-#, fuzzy
 msgid "Maximum EBML size length"
-msgstr "Longitud màxima de la mida de l'EBML: %1%"
+msgstr "Longitud màxima de la mida de l'EBML"
 
 #: src/common/xml/ebml_converter.cpp:228
 #, boost-format
@@ -7072,9 +6968,8 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "Valor màxim permès: %1%, valor real: %2%"
 
 #: src/common/kax_element_names.cpp:202
-#, fuzzy
 msgid "Maximum block additional ID"
-msgstr "ID addicional del bloc: %1%"
+msgstr "ID del bloc addicional màxim"
 
 #: src/common/property_element.cpp:179
 msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
@@ -7086,23 +6981,20 @@ msgid "Maximum cache"
 msgstr "Cau màxim"
 
 #: src/common/kax_element_names.cpp:134
-#, fuzzy
 msgid "Maximum content light"
-msgstr "Vídeo: màxim de llum al contingut"
+msgstr "Màxim de llum al contingut"
 
 #: src/common/kax_element_names.cpp:135
-#, fuzzy
 msgid "Maximum frame light"
-msgstr "Vídeo: màxim de llum al fotograma"
+msgstr "Màxim de llum al fotograma"
 
 #: src/common/property_element.cpp:180
 msgid "Maximum frame-average light level in candelas per square meter (cd/m²)."
 msgstr "Nivell de llum mitjana del marc màxim en candeles per metre quadrat (cd/m²)."
 
 #: src/common/kax_element_names.cpp:119
-#, fuzzy
 msgid "Maximum luminance"
-msgstr "Vídeo: luminància màxima"
+msgstr "Luminància màxima"
 
 #: src/common/property_element.cpp:190
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
@@ -7143,9 +7035,8 @@ msgid "Minimum cache"
 msgstr "Cau mínim"
 
 #: src/common/kax_element_names.cpp:120
-#, fuzzy
 msgid "Minimum luminance"
-msgstr "Vídeo: luminància mínima"
+msgstr "Luminància mínima"
 
 #: src/common/property_element.cpp:191
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
@@ -7335,9 +7226,8 @@ msgid "Next filename"
 msgstr "Nom del fitxer següent"
 
 #: src/common/kax_element_names.cpp:93
-#, fuzzy
 msgid "Next segment UID"
-msgstr "UID del segment següent:"
+msgstr "UID del segment següent"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1735
 msgid "Next segment UID:"
@@ -7947,9 +7837,8 @@ msgid "Output messages in this charset"
 msgstr "Missatges de sortida en aquest joc de caràcters"
 
 #: src/common/kax_element_names.cpp:105
-#, fuzzy
 msgid "Output sampling frequency"
-msgstr "Freqüència de mostreig per a la sortida: %1%"
+msgstr "Freqüència de mostreig per a la sortida"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:393
 #: src/mkvtoolnix-gui/merge/tab.cpp:418
@@ -8005,34 +7894,28 @@ msgid "Pending manual start"
 msgstr "Inici manual pendent"
 
 #: src/common/kax_element_names.cpp:152
-#, fuzzy
 msgid "Pixel crop bottom"
-msgstr "Retall inferior en píxels: %1%"
+msgstr "Retall inferior en píxels"
 
 #: src/common/kax_element_names.cpp:149
-#, fuzzy
 msgid "Pixel crop left"
-msgstr "Retall esquerre en píxels: %1%"
+msgstr "Retall esquerre en píxels"
 
 #: src/common/kax_element_names.cpp:151
-#, fuzzy
 msgid "Pixel crop right"
-msgstr "Retall dret en píxels: %1%"
+msgstr "Retall dret en píxels"
 
 #: src/common/kax_element_names.cpp:150
-#, fuzzy
 msgid "Pixel crop top"
-msgstr "Retall superior en píxels: %1%"
+msgstr "Retall superior en píxels"
 
 #: src/common/kax_element_names.cpp:146
-#, fuzzy
 msgid "Pixel height"
-msgstr "Alçada en píxels: %1%"
+msgstr "Alçada en píxels"
 
 #: src/common/kax_element_names.cpp:145
-#, fuzzy
 msgid "Pixel width"
-msgstr "Amplada en píxels: %1%"
+msgstr "Amplada en píxels"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
 msgid "Play a WAV file with the default application:"
@@ -8151,9 +8034,8 @@ msgid "Previous filename"
 msgstr "Nom del fitxer anterior"
 
 #: src/common/kax_element_names.cpp:91
-#, fuzzy
 msgid "Previous segment UID"
-msgstr "UID del segment anterior:"
+msgstr "UID del segment anterior"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1733
 msgid "Previous segment UID:"
@@ -8229,29 +8111,24 @@ msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Progrés: [%1%%2%] %3%%%"
 
 #: src/common/kax_element_names.cpp:138
-#, fuzzy
 msgid "Projection type"
-msgstr "Vídeo: tipus de projecció"
+msgstr "Tipus de projecció"
 
 #: src/common/kax_element_names.cpp:141
-#, fuzzy
 msgid "Projection's pitch rotation"
-msgstr "Gir de la presentació de la projecció: %1%"
+msgstr "Gir de la presentació de la projecció"
 
 #: src/common/kax_element_names.cpp:139
-#, fuzzy
 msgid "Projection's private data"
-msgstr "Dades privades de la projecció: %1%"
+msgstr "Dades privades de la projecció"
 
 #: src/common/kax_element_names.cpp:142
-#, fuzzy
 msgid "Projection's roll rotation"
-msgstr "Gir del rotllo de la projecció: %1%"
+msgstr "Gir del rotllo de la projecció"
 
 #: src/common/kax_element_names.cpp:140
-#, fuzzy
 msgid "Projection's yaw rotation"
-msgstr "Gir de l'encaix de la projecció: %1%"
+msgstr "Gir de l'encaix de la projecció"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:155
 #: src/mkvtoolnix-gui/merge/track_model.cpp:54
@@ -8477,14 +8354,12 @@ msgid "Red Y chromaticity coordinate as defined by CIE 1931."
 msgstr "Coordenada Y de crominància del vermell definida per la CIE 1931."
 
 #: src/common/kax_element_names.cpp:111
-#, fuzzy
 msgid "Red colour coordinate x"
-msgstr "Coordenades de «x» pel color vermell: %1%"
+msgstr "Coordenades de «x» pel color vermell"
 
 #: src/common/kax_element_names.cpp:112
-#, fuzzy
 msgid "Red colour coordinate y"
-msgstr "Coordenades de «y» pel color vermell: %1%"
+msgstr "Coordenades de «y» pel color vermell"
 
 #: src/common/cli_parser.cpp:184
 msgid "Redirects all messages into this file."
@@ -8495,19 +8370,16 @@ msgid "Reduce to core"
 msgstr "Acobla al nucli"
 
 #: src/common/kax_element_names.cpp:241
-#, fuzzy
 msgid "Reference block"
-msgstr "Bloc de referència: %1%.%|2$06d|ms"
+msgstr "Bloc de referència"
 
 #: src/common/kax_element_names.cpp:242
-#, fuzzy
 msgid "Reference priority"
-msgstr "Prioritat de referència: %1%"
+msgstr "Prioritat de referència"
 
 #: src/common/kax_element_names.cpp:244
-#, fuzzy
 msgid "Reference virtual"
-msgstr "Referència virtual: %1%"
+msgstr "Referència virtual"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:821
@@ -8720,9 +8592,8 @@ msgid "Sa&ve settings as"
 msgstr "De&sa els ajustaments com a"
 
 #: src/common/kax_element_names.cpp:104
-#, fuzzy
 msgid "Sampling frequency"
-msgstr "Freqüència de mostreig: %1%"
+msgstr "Freqüència de mostreig"
 
 #: src/common/property_element.cpp:203
 msgid "Sampling frequency in Hz."
@@ -8828,7 +8699,7 @@ msgstr "Escanejat de les llistes de reproducció"
 
 #: src/common/kax_element_names.cpp:165
 msgid "Scope"
-msgstr ""
+msgstr "Abast"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:102
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
@@ -8836,9 +8707,8 @@ msgid "See below for examples."
 msgstr "Vegeu a sota pels exemples."
 
 #: src/common/kax_element_names.cpp:208
-#, fuzzy
 msgid "Seek ID"
-msgstr "Capçalera de cerca"
+msgstr "ID de la cerca"
 
 #: src/common/kax_element_names.cpp:207
 msgid "Seek entry"
@@ -8853,14 +8723,12 @@ msgid "Seek head (subentries will be skipped)"
 msgstr "Capçalera de cerca (les subentrades seran omeses)"
 
 #: src/common/kax_element_names.cpp:209
-#, fuzzy
 msgid "Seek position"
-msgstr "Posició de cerca: %1%"
+msgstr "Posició de la cerca"
 
 #: src/common/kax_element_names.cpp:204
-#, fuzzy
 msgid "Seek pre-roll"
-msgstr "Entrada de cerca"
+msgstr " Cerca al pre-rotllo"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:522
 msgid "Seg&ment UID:"
@@ -8871,9 +8739,8 @@ msgid "Segment"
 msgstr "Segment"
 
 #: src/common/kax_element_names.cpp:89
-#, fuzzy
 msgid "Segment UID"
-msgstr "Els UID del segment:"
+msgstr "UID del segment"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1731
 msgid "Segment UIDs:"
@@ -9183,39 +9050,32 @@ msgid "Shut down the system in one minute:"
 msgstr "Apaga el sistema en un minut:"
 
 #: src/common/kax_element_names.cpp:176
-#, fuzzy
 msgid "Signature"
-msgstr "Signatura: %1%"
+msgstr "Signatura"
 
 #: src/common/kax_element_names.cpp:173
-#, fuzzy
 msgid "Signature algorithm"
-msgstr "Sense algorisme de signatura"
+msgstr "Algorisme de la signatura"
 
 #: src/common/kax_element_names.cpp:174
-#, fuzzy
 msgid "Signature hash algorithm"
-msgstr "Cap signatura amb algoritme hash"
+msgstr "Signatura amb algoritme hash"
 
 #: src/common/kax_element_names.cpp:175
-#, fuzzy
 msgid "Signature key ID"
-msgstr "ID de la clau de signatura: %1%"
+msgstr "ID de la clau de signatura"
 
 #: src/common/kax_element_names.cpp:236
-#, fuzzy
 msgid "Silent track number"
-msgstr "Número de la pista muda: %1%"
+msgstr "Número de la pista muda"
 
 #: src/common/kax_element_names.cpp:235
-#, fuzzy
 msgid "Silent tracks"
-msgstr "Pistes del segment"
+msgstr "Pistes mudes"
 
 #: src/common/kax_element_names.cpp:304
-#, fuzzy
 msgid "Simple"
-msgstr "Bloc simple"
+msgstr "Senzill"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
 #: src/mkvtoolnix-gui/merge/output.cpp:476
@@ -9225,12 +9085,12 @@ msgstr "Fitxers de capítols senzill a l'estil OGM"
 
 #: src/common/kax_element_names.cpp:258
 msgid "Simple block"
-msgstr "Bloc simple"
+msgstr "Bloc senzill"
 
 #: src/common/chapters/chapters.cpp:56
 #, boost-format
 msgid "Simple chapter parser: %1%\n"
-msgstr "Analitzador de capítol simple: %1%\n"
+msgstr "Analitzador de capítol senzill: %1%\n"
 
 #: src/mpegparser/M2VParser.cpp:399
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
@@ -9301,9 +9161,9 @@ msgid "Source file name"
 msgstr "Nom del fitxer d'origen"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:101
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Source file name: %1"
-msgstr "Nom del fitxer d'origen"
+msgstr "Nom del fitxer d'origen: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
@@ -9423,9 +9283,8 @@ msgid "Status:"
 msgstr "Estat:"
 
 #: src/common/kax_element_names.cpp:157
-#, fuzzy
 msgid "Stereo mode"
-msgstr "Mode estèreo del vídeo"
+msgstr "Mode estèreo"
 
 #: src/merge/mkvmerge.cpp:936
 #, boost-format
@@ -9509,9 +9368,8 @@ msgid "Tab &position in tab widgets:"
 msgstr "&Posició de les pestanyes als estris:"
 
 #: src/common/kax_element_names.cpp:296
-#, fuzzy
 msgid "Tag"
-msgstr "Etiquetes"
+msgstr "Etiqueta"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
@@ -9523,13 +9381,12 @@ msgid "Tag extraction"
 msgstr "Extracció d'etiquetes"
 
 #: src/common/kax_element_names.cpp:308
-#, fuzzy
 msgid "Tag language"
-msgstr "Idioma"
+msgstr "Etiqueta de l'idioma"
 
 #: src/common/kax_element_names.cpp:309
 msgid "Tag language (IETF)"
-msgstr ""
+msgstr "Etiqueta de l'idioma (IETF)"
 
 #: src/propedit/propedit_cli_parser.cpp:256
 msgid "Tag selectors"
@@ -9559,15 +9416,15 @@ msgstr "Etiquetes:"
 
 #: src/common/kax_element_names.cpp:302
 msgid "Target type"
-msgstr ""
+msgstr "Tipus de destinació"
 
 #: src/common/kax_element_names.cpp:303
 msgid "Target type value"
-msgstr ""
+msgstr "Valor del tipus de destinació"
 
 #: src/common/kax_element_names.cpp:297
 msgid "Targets"
-msgstr ""
+msgstr "Destinacions"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 #, no-c-format
@@ -10114,9 +9971,9 @@ msgid "The file '%1%' could not be opened for reading: %2%.\n"
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura: %2%.\n"
 
 #: src/common/kax_info.cpp:1155
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%."
-msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%.\n"
+msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%."
 
 #: src/extract/attachments.cpp:121
 #: src/extract/cues.cpp:74
@@ -11384,9 +11241,8 @@ msgstr "Fitxer pels codis de temps:"
 
 #: src/common/kax_element_names.cpp:84
 #: src/common/kax_element_names.cpp:201
-#, fuzzy
 msgid "Timestamp scale"
-msgstr "Escala del codi de temps: %1%"
+msgstr "Escala del codi de temps"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1685
@@ -11418,9 +11274,8 @@ msgid "Trac&k name:"
 msgstr "Nom de la &pista:"
 
 #: src/common/kax_element_names.cpp:179
-#, fuzzy
 msgid "Track"
-msgstr "Pistes:"
+msgstr "Pista"
 
 #: src/extract/xtr_avc.cpp:137
 #: src/extract/xtr_hdmv_textst.cpp:44
@@ -11565,19 +11420,16 @@ msgid "Track number for mkvpropedit:"
 msgstr "Número de la pista per a «mkvpropedit»:"
 
 #: src/common/kax_element_names.cpp:193
-#, fuzzy
 msgid "Track overlay"
-msgstr "Superposat de la pista: %1%"
+msgstr "Superposat de la pista"
 
 #: src/common/kax_element_names.cpp:182
-#, fuzzy
 msgid "Track type"
-msgstr "Tipus de pista: %1%"
+msgstr "Tipus de pista"
 
 #: src/common/kax_element_names.cpp:178
-#, fuzzy
 msgid "Tracks"
-msgstr "Pistes:"
+msgstr "Pistes"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:364
 #, no-c-format
@@ -11891,19 +11743,16 @@ msgid "Version %1 \"%2\""
 msgstr "Versió %1 «%2»"
 
 #: src/common/kax_element_names.cpp:128
-#, fuzzy
 msgid "Vertical Cb subsample"
-msgstr "Submostra Cb vertical: %1%"
+msgstr "Submostra Cb vertical"
 
 #: src/common/kax_element_names.cpp:130
-#, fuzzy
 msgid "Vertical chroma siting"
-msgstr "Posició de la crominància vertical: %1%"
+msgstr "Posició de la crominància vertical"
 
 #: src/common/kax_element_names.cpp:126
-#, fuzzy
 msgid "Vertical chroma subsample"
-msgstr "Submostra de la crominància vertical: %1%"
+msgstr "Submostra de la crominància vertical"
 
 #: src/output/p_video_for_windows.h:37
 msgid "VfW compatible video"
@@ -12276,14 +12125,12 @@ msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
 msgstr "Coordenada Y de crominància del color blanc definida per la CIE 1931."
 
 #: src/common/kax_element_names.cpp:117
-#, fuzzy
 msgid "White colour coordinate x"
-msgstr "Coordenades de «x» pel color blanc: %1%"
+msgstr "Coordenades de «x» pel color blanc"
 
 #: src/common/kax_element_names.cpp:118
-#, fuzzy
 msgid "White colour coordinate y"
-msgstr "Coordenades de «y» pel color blanc: %1%"
+msgstr "Coordenades de «y» pel color blanc"
 
 #: src/common/property_element.cpp:147
 msgid "Width of the encoded video frames in pixels."
@@ -13056,7 +12903,7 @@ msgstr "No s'ha carregat cap fitxer"
 
 #: src/common/kax_info.cpp:781
 msgid "no signature algorithm"
-msgstr "Sense algorisme de signatura"
+msgstr "Sense algorisme de la signatura"
 
 #: src/common/kax_info.cpp:790
 msgid "no signature hash algorithm"
@@ -13163,14 +13010,13 @@ msgid "side by side (right first)"
 msgstr "Costat a costat (dreta primer)"
 
 #: src/common/kax_info.cpp:197
-#, fuzzy, boost-format
+#, boost-format
 msgid "size %1%"
-msgstr " mida %1%"
+msgstr "mida %1%"
 
 #: src/common/kax_info.cpp:470
-#, fuzzy
 msgid "size unknown"
-msgstr " la mida és desconeguda"
+msgstr "mida desconeguda"
 
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
@@ -13222,9 +13068,9 @@ msgstr "Nom de la pista"
 
 # skip-rule: t-sp_tpc
 #: src/common/kax_info.cpp:183
-#, fuzzy, boost-format
+#, boost-format
 msgid "track number %1%, %2% frame(s), timestamp %3%"
-msgstr "Bloc (número de pista %1%, %2% fotograma/es, codi de temps %|3$.3f|s = %4%)"
+msgstr "número de pista %1%, %2% fotograma/es, codi de temps %3%"
 
 #: src/extract/extract_cli_parser.cpp:50
 msgid "tracks [options] [TID1:out1 [TID2:out2 ...]]"
