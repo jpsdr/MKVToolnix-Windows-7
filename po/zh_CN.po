@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-01-01 00:38+0100\n"
-"PO-Revision-Date: 2017-11-06 17:07+0000\n"
+"PO-Revision-Date: 2018-01-01 03:46+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -718,15 +718,14 @@ msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           不复制此文件中的任何视频轨道。\n"
 
 #: src/merge/mkvmerge.cpp:339
-#, fuzzy
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
 "                           ('text' or 'json'; default is 'text').\n"
 msgstr ""
-"  -F, --identification-format <format>\n"
+"  -F, --identification-format <格式>\n"
 "                           设置识别结果输出格式\n"
-"                           ('text'、'verbose-text'、'json').\n"
+"                           ('text' 或 'json'; 默认为 'text')。\n"
 
 #: src/merge/mkvmerge.cpp:337
 msgid ""
@@ -1131,14 +1130,14 @@ msgid_plural "%1 warnings"
 msgstr[0] "%1 个警告"
 
 #: src/common/kax_info.cpp:811
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% (%|2$.3f| frames/fields per second for a video track)"
-msgstr "默认帧时长: %|1$.3f|毫秒 (对于视频轨道为 %|2$.3f| 帧/场每秒)"
+msgstr "%1% (对应视频轨的 %|2$.3f| 帧/场每秒)"
 
 #: src/common/kax_info.cpp:796
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% (track ID for mkvmerge & mkvextract: %2%)"
-msgstr "轨道编号: %1% (用于 mkvmerge & mkvextract 的轨道 ID: %2%)"
+msgstr "%1% (mkvmerge & mkvextract 的轨道 ID: %2%)"
 
 #: src/common/strings/formatting.cpp:321
 #, boost-format
@@ -1147,19 +1146,19 @@ msgid_plural "%1% bytes"
 msgstr[0] "%1% 字节"
 
 #: src/common/kax_info.cpp:186
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"
-msgstr "%1% 帧，轨道 %2%，时间码 %3% (%4%)，大小 %5%，adler 0x%|6$08x|%7%%8%\n"
+msgstr "%1% 帧, %2% 轨, 时间戳 %3%, 时长 %4%, 大小 %5%, adler 0x%|6$08x|%7%%8%\n"
 
 #: src/common/kax_info.cpp:191
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"
-msgstr "%1% 帧，轨道 %2%，时间码 %3% (%4%)，大小 %5%，adler 0x%|6$08x|%7%\n"
+msgstr "%1% 帧, %2% 轨, 时间戳 %3%, 大小 %4%, adler 0x%|5$08x|%6%\n"
 
 #: src/common/kax_info.cpp:187
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"
-msgstr "%1% 帧，轨道 %2%，时间码 %3% (%4%)，大小 %5%，adler 0x%|6$08x|%7%\n"
+msgstr "%1% 帧, %2% 轨, 时间戳 %3%, 大小 %4%, adler 0x%|5$08x|%6%%7%\n"
 
 #: src/common/strings/formatting.cpp:315
 #, boost-format
@@ -1237,9 +1236,9 @@ msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: '%2% %3%' 中缺少轨道 ID。\n"
 
 #: src/common/kax_info.cpp:189
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1%track number %2%, %3% frame(s), timestamp %4%"
-msgstr "简化区块 (%1%轨道编号 %2%，%3% 帧，时间码 %|4$.3f|秒 = %5%)"
+msgstr "%1%轨道编号 %2%, %3% 帧, 时间戳 %4%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
@@ -2306,9 +2305,9 @@ msgid "'Track enabled' flag"
 msgstr "“可用轨道”标记"
 
 #: src/common/kax_info.cpp:277
-#, fuzzy, boost-format
+#, boost-format
 msgid "(Known element, but invalid at this position: %1%; ID: 0x%2% size: %3%)"
-msgstr "(未知元素: %1%；ID: 0x%2% 大小: %3%)"
+msgstr "(已知元素，但在当前位置无效: %1%; ID: 0x%2% 大小: %3%)"
 
 #: src/common/kax_info.cpp:180
 #, boost-format
@@ -2365,7 +2364,7 @@ msgstr "--- 任务“%1”(启动时间 %2) 的警告消息 ---"
 
 #: src/propedit/propedit_cli_parser.cpp:263
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
-msgstr "1. 一个表示附件 ID 的数字 ('mkvmerge --identify' 所列出的)。通常是从 0 开始的数字编号 (如 '2')。"
+msgstr "1. 数字形式的附件 ID，即「mkvmerge --identify」所列出的附件编号。通常从 0 开始依次递增 (如 '2')。"
 
 #: src/common/kax_info.cpp:733
 msgid "1: all frames"
@@ -2373,7 +2372,7 @@ msgstr "1: 所有帧"
 
 #: src/propedit/propedit_cli_parser.cpp:264
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
-msgstr "2. 数字，以“=”为前缀，表示附件的唯一 ID（UID，即“mkvmerge --identify”所列出的 ID）。通常是看起来随机的数字 (如“128975986723”)。"
+msgstr "2. 前缀为「=」的数字，表示附件的唯一 ID (UID)，即「mkvmerge --identify」所列出的 UID。通常看起来像随机数 (如 '128975986723')。"
 
 #: src/common/kax_info.cpp:735
 msgid "2: codec private data"
@@ -2883,9 +2882,8 @@ msgid "Afterwards create &new multiplex settings and close the current ones."
 msgstr "然后新建混流设置页面，并关闭当前各页(&N)。"
 
 #: src/common/kax_element_names.cpp:168
-#, fuzzy
 msgid "Algorithm"
-msgstr "算法: %1% (%2%)"
+msgstr "算法"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:371
 #, no-c-format
@@ -3130,9 +3128,8 @@ msgid "Aspect ratio factor"
 msgstr "宽高比系数"
 
 #: src/common/kax_element_names.cpp:158
-#, fuzzy
 msgid "Aspect ratio type"
-msgstr "宽高比"
+msgstr "宽高比类型"
 
 #: src/common/xml/ebml_chapters_converter.cpp:107
 msgid "At least one <ChapterAtom> element is needed."
@@ -3171,9 +3168,8 @@ msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "附件 ID %1%: 类型 '%2%'，大小 %3% 字节"
 
 #: src/common/kax_element_names.cpp:301
-#, fuzzy
 msgid "Attachment UID"
-msgstr "附件"
+msgstr "附件 UID"
 
 #: src/extract/extract_cli_parser.cpp:94
 msgid "Attachment extraction"
@@ -3233,9 +3229,8 @@ msgid "Audio sampling frequency"
 msgstr "音频采样率"
 
 #: src/common/kax_element_names.cpp:103
-#, fuzzy
 msgid "Audio track"
-msgstr "音频轨道(&A):"
+msgstr "音频轨"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
 #, no-c-format
@@ -3290,7 +3285,7 @@ msgstr "在章节之前"
 
 #: src/common/kax_element_names.cpp:307
 msgid "Binary"
-msgstr ""
+msgstr "二进制"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:156
 #, no-c-format
@@ -3298,48 +3293,41 @@ msgid "Binary (displayed as hexadecimal numbers)"
 msgstr "二进制数据 (显示为十六进制数字)"
 
 #: src/common/kax_element_names.cpp:108
-#, fuzzy
 msgid "Bit depth"
-msgstr "位深: %1%"
+msgstr "位深"
 
 #: src/common/kax_element_names.cpp:124
-#, fuzzy
 msgid "Bits per channel"
-msgstr "声道位深: %1%"
+msgstr "每通道位数"
 
 #: src/common/property_element.cpp:206
 msgid "Bits per sample, mostly used for PCM."
 msgstr "采样深度，主要用于 PCM。"
 
 #: src/common/kax_element_names.cpp:239
-#, fuzzy
 msgid "Block"
-msgstr "块组"
+msgstr "块"
 
 #: src/common/kax_element_names.cpp:247
-#, fuzzy
 msgid "Block additional"
-msgstr "附加区块: %1%"
+msgstr "块加成"
 
 #: src/common/kax_element_names.cpp:246
 #: src/common/kax_element_names.cpp:252
-#, fuzzy
 msgid "Block additional ID"
-msgstr "附加区块 ID: %1%"
+msgstr "块加成 ID"
 
 #: src/common/kax_element_names.cpp:240
-#, fuzzy
 msgid "Block duration"
-msgstr "默认帧时长"
+msgstr "块时长"
 
 #: src/common/kax_element_names.cpp:238
 msgid "Block group"
 msgstr "块组"
 
 #: src/common/kax_element_names.cpp:243
-#, fuzzy
 msgid "Block virtual"
-msgstr "虚拟区块: %1%"
+msgstr "块实质"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:244
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:82
@@ -3366,14 +3354,12 @@ msgid "Blue Y chromaticity coordinate as defined by CIE 1931."
 msgstr "CIE 1931 定义的蓝色度 Y 坐标。"
 
 #: src/common/kax_element_names.cpp:115
-#, fuzzy
 msgid "Blue colour coordinate x"
-msgstr "蓝色坐标 x: %1%"
+msgstr "块颜色坐标 x"
 
 #: src/common/kax_element_names.cpp:116
-#, fuzzy
 msgid "Blue colour coordinate y"
-msgstr "蓝色坐标 y: %1%"
+msgstr "块颜色坐标 y"
 
 #: src/input/r_vobsub.cpp:555
 #, boost-format
@@ -3565,14 +3551,12 @@ msgid "Change for '%1%' executed. One entry added.\n"
 msgstr "已执行对 '%1%' 的更改。新增了一个条目。\n"
 
 #: src/common/kax_element_names.cpp:107
-#, fuzzy
 msgid "Channel positions"
-msgstr "声道位置: %1%"
+msgstr "声道位置"
 
 #: src/common/kax_element_names.cpp:106
-#, fuzzy
 msgid "Channels"
-msgstr "声道数: %1%"
+msgstr "声道数"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
 msgid "Chapter &number of first created entry:"
@@ -3586,24 +3570,20 @@ msgstr "第 <NUM:2> 章"
 
 #: src/common/kax_element_names.cpp:272
 #: src/common/kax_element_names.cpp:300
-#, fuzzy
 msgid "Chapter UID"
-msgstr "章节"
+msgstr "章节 UID"
 
 #: src/common/kax_element_names.cpp:271
-#, fuzzy
 msgid "Chapter atom"
-msgstr "章节编辑器"
+msgstr "章节原子"
 
 #: src/common/kax_element_names.cpp:287
-#, fuzzy
 msgid "Chapter country"
-msgstr "章节: %1% 个条目"
+msgstr "章节国家"
 
 #: src/common/kax_element_names.cpp:283
-#, fuzzy
 msgid "Chapter display"
-msgstr "章节文件:"
+msgstr "章节显示"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1396
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:233
@@ -3622,28 +3602,24 @@ msgid "Chapter file:"
 msgstr "章节文件:"
 
 #: src/common/kax_element_names.cpp:277
-#, fuzzy
 msgid "Chapter flag enabled"
-msgstr "章节文件:"
+msgstr "章节标记启用"
 
 #: src/common/kax_element_names.cpp:276
-#, fuzzy
 msgid "Chapter flag hidden"
-msgstr "跳过标记为“隐藏”的章节(&S)"
+msgstr "章节标记隐藏"
 
 #: src/merge/cluster_helper.cpp:748
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "至少需复制一个视频轨或音频轨，方可使用章节生成。\n"
 
 #: src/common/kax_element_names.cpp:285
-#, fuzzy
 msgid "Chapter language"
-msgstr "章节翻译"
+msgstr "章节语言"
 
 #: src/common/kax_element_names.cpp:286
-#, fuzzy
 msgid "Chapter language (IETF)"
-msgstr "章节翻译"
+msgstr "章节语言 (IETF)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "Chapter mass modification"
@@ -3661,96 +3637,79 @@ msgstr "章节解析器: 版本 UID %1% 不唯一，不能重复使用。将生�
 
 #: src/common/kax_element_names.cpp:280
 msgid "Chapter physical equivalent"
-msgstr ""
+msgstr "章节实际等同"
 
 #: src/common/kax_element_names.cpp:288
-#, fuzzy
 msgid "Chapter process"
-msgstr "章节"
+msgstr "章节处理"
 
 #: src/common/kax_element_names.cpp:289
-#, fuzzy
 msgid "Chapter process codec ID"
-msgstr "章节翻译编码格式: %1%"
+msgstr "章节处理编解码器 ID"
 
 #: src/common/kax_element_names.cpp:291
 msgid "Chapter process command"
-msgstr ""
+msgstr "章节处理命令"
 
 #: src/common/kax_element_names.cpp:293
-#, fuzzy
 msgid "Chapter process data"
-msgstr "章节翻译"
+msgstr "章节处理数据"
 
 #: src/common/kax_element_names.cpp:290
-#, fuzzy
 msgid "Chapter process private"
-msgstr "章节翻译"
+msgstr "章节处理私有"
 
 #: src/common/kax_element_names.cpp:292
-#, fuzzy
 msgid "Chapter process time"
-msgstr "章节翻译"
+msgstr "章节处理时间"
 
 #: src/common/kax_element_names.cpp:278
-#, fuzzy
 msgid "Chapter segment UID"
-msgstr "下一剪辑 UID:"
+msgstr "章节剪辑 UID"
 
 #: src/common/kax_element_names.cpp:279
-#, fuzzy
 msgid "Chapter segment edition UID"
-msgstr "剪辑版本 UI&D:"
+msgstr "章节剪辑版本 UID"
 
 #: src/common/kax_element_names.cpp:284
-#, fuzzy
 msgid "Chapter string"
-msgstr "章节提取"
+msgstr "章节字符串"
 
 #: src/common/kax_element_names.cpp:273
-#, fuzzy
 msgid "Chapter string UID"
-msgstr "章节提取"
+msgstr "章节字符串 UID"
 
 #: src/common/kax_element_names.cpp:275
-#, fuzzy
 msgid "Chapter time end"
-msgstr "章节文件:"
+msgstr "章节时间终止"
 
 #: src/common/kax_element_names.cpp:274
-#, fuzzy
 msgid "Chapter time start"
-msgstr "章节编辑器"
+msgstr "章节时间起始"
 
 #: src/common/kax_element_names.cpp:281
-#, fuzzy
 msgid "Chapter track"
-msgstr "章节提取"
+msgstr "章节轨道"
 
 #: src/common/kax_element_names.cpp:282
-#, fuzzy
 msgid "Chapter track number"
-msgstr "章节编号:"
+msgstr "章节轨道编号"
 
 #: src/common/kax_element_names.cpp:98
-#, fuzzy
 msgid "Chapter translate"
 msgstr "章节翻译"
 
 #: src/common/kax_element_names.cpp:101
-#, fuzzy
 msgid "Chapter translate ID"
-msgstr "章节翻译"
+msgstr "章节翻译 ID"
 
 #: src/common/kax_element_names.cpp:100
-#, fuzzy
 msgid "Chapter translate codec"
-msgstr "章节翻译编码格式: %1%"
+msgstr "章节翻译编解码器"
 
 #: src/common/kax_element_names.cpp:99
-#, fuzzy
 msgid "Chapter translate edition UID"
-msgstr "章节翻译版本 UID: %1%"
+msgstr "章节翻译版本 UID"
 
 #: src/common/kax_element_names.cpp:265
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
@@ -3836,19 +3795,16 @@ msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "簇长 '%1%' 超出值域 (100..32000)。\n"
 
 #: src/common/kax_element_names.cpp:262
-#, fuzzy
 msgid "Cluster position"
-msgstr "簇位置: %1%"
+msgstr "簇位置"
 
 #: src/common/kax_element_names.cpp:263
-#, fuzzy
 msgid "Cluster previous size"
-msgstr "前一簇大小: %1%"
+msgstr "前一簇大小"
 
 #: src/common/kax_element_names.cpp:261
-#, fuzzy
 msgid "Cluster timestamp"
-msgstr "簇时间码: %|1$.3f|s"
+msgstr "簇时间戳"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:45
@@ -3868,19 +3824,16 @@ msgid "Codec ID:"
 msgstr "编码格式 ID:"
 
 #: src/common/kax_element_names.cpp:192
-#, fuzzy
 msgid "Codec decode all"
-msgstr "编码格式支持解码破损数据: %1%"
+msgstr "编解码器解码全部"
 
 #: src/common/kax_element_names.cpp:191
-#, fuzzy
 msgid "Codec download URL"
-msgstr "编解码器下载地址: %1%"
+msgstr "编解码器下载 URL"
 
 #: src/common/kax_element_names.cpp:190
-#, fuzzy
 msgid "Codec info URL"
-msgstr "编码格式信息地址: %1%"
+msgstr "编解码器信息 URL"
 
 #: src/common/kax_element_names.cpp:187
 #: src/common/property_element.cpp:141
@@ -3888,19 +3841,16 @@ msgid "Codec name"
 msgstr "编码格式名称"
 
 #: src/common/kax_element_names.cpp:189
-#, fuzzy
 msgid "Codec settings"
-msgstr "编码设置: %1%"
+msgstr "编解码器设置"
 
 #: src/common/kax_element_names.cpp:245
-#, fuzzy
 msgid "Codec state"
-msgstr "编码格式状态: %1%"
+msgstr "编解码器状态"
 
 #: src/common/kax_element_names.cpp:186
-#, fuzzy
 msgid "Codec's private data"
-msgstr "2: 编码格式私有数据"
+msgstr "编解码器私有数据"
 
 #: src/common/kax_element_names.cpp:188
 #: src/common/property_element.cpp:142
@@ -3921,29 +3871,24 @@ msgid "Colour mastering meta information"
 msgstr "颜色创作元信息"
 
 #: src/common/kax_element_names.cpp:123
-#, fuzzy
 msgid "Colour matrix coefficients"
-msgstr "颜色矩阵系数: %1%"
+msgstr "编解码器矩阵系数"
 
 #: src/common/kax_element_names.cpp:133
-#, fuzzy
 msgid "Colour primaries"
-msgstr "颜色基准: %1%"
+msgstr "颜色基准"
 
 #: src/common/kax_element_names.cpp:131
-#, fuzzy
 msgid "Colour range"
-msgstr "颜色范围: %1%"
+msgstr "颜色范围"
 
 #: src/common/kax_element_names.cpp:159
-#, fuzzy
 msgid "Colour space"
-msgstr "色彩空间: %1%"
+msgstr "颜色空间"
 
 #: src/common/kax_element_names.cpp:132
-#, fuzzy
 msgid "Colour transfer"
-msgstr "颜色转换: %1%"
+msgstr "颜色转换"
 
 #: src/info/qt_ui.cpp:149
 #, no-c-format
@@ -4247,24 +4192,20 @@ msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #: src/common/kax_element_names.cpp:219
-#, fuzzy
 msgid "Cue block number"
-msgstr "分块数量索引: %1%"
+msgstr "cue 块编号"
 
 #: src/common/kax_element_names.cpp:216
-#, fuzzy
 msgid "Cue cluster position"
-msgstr "簇位置索引: %1%"
+msgstr "cue 簇位置"
 
 #: src/common/kax_element_names.cpp:220
-#, fuzzy
 msgid "Cue codec state"
-msgstr "编码格式状态索引: %1%"
+msgstr "cue 编解码器状态"
 
 #: src/common/kax_element_names.cpp:218
-#, fuzzy
 msgid "Cue duration"
-msgstr "区块时长索引: %1%"
+msgstr "cue 时长"
 
 #: src/extract/extract_cli_parser.cpp:129
 msgid "Cue extraction"
@@ -4279,33 +4220,28 @@ msgid "Cue point"
 msgstr "索引点"
 
 #: src/common/kax_element_names.cpp:223
-#, fuzzy
 msgid "Cue ref cluster"
-msgstr "参考区块簇位置索引: %1%"
+msgstr "cue 参考簇"
 
 #: src/common/kax_element_names.cpp:225
-#, fuzzy
 msgid "Cue ref codec state"
-msgstr "编码格式状态参考元素位置索引: %1%"
+msgstr "cue 参考编解码器状态"
 
 #: src/common/kax_element_names.cpp:224
-#, fuzzy
 msgid "Cue ref number"
-msgstr "参考区块数量索引: %1%"
+msgstr "cue 参考编号"
 
 #: src/common/kax_element_names.cpp:222
-#, fuzzy
 msgid "Cue ref time"
-msgstr "参考区块时间戳索引: %|1$.3f|秒"
+msgstr "cue 参考时间"
 
 #: src/common/kax_element_names.cpp:221
 msgid "Cue reference"
 msgstr "参考区块簇索引"
 
 #: src/common/kax_element_names.cpp:217
-#, fuzzy
 msgid "Cue relative position"
-msgstr "相对位置索引: %1%"
+msgstr "cue 相对位置"
 
 #: src/extract/extract_cli_parser.cpp:112
 msgid "Cue sheet extraction"
@@ -4332,14 +4268,12 @@ msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (curr
 msgstr "CUE 表单解析器: 没有找到前一个 TRACK 条目的 INDEX 条目 (当前行: %1%)\n"
 
 #: src/common/kax_element_names.cpp:213
-#, fuzzy
 msgid "Cue time"
-msgstr "cue 表单文件"
+msgstr "cue 时间"
 
 #: src/common/kax_element_names.cpp:215
-#, fuzzy
 msgid "Cue track"
-msgstr "索引轨道: %1%"
+msgstr "cue 轨道"
 
 #: src/common/kax_element_names.cpp:214
 msgid "Cue track positions"
@@ -4347,7 +4281,7 @@ msgstr "轨道位置索引"
 
 #: src/common/kax_element_names.cpp:211
 msgid "Cues"
-msgstr ""
+msgstr "cue"
 
 #: src/common/kax_info.cpp:522
 msgid "Cues (subentries will be skipped)"
@@ -4461,9 +4395,8 @@ msgid "Default duration/FPS:"
 msgstr "默认帧时长或帧率:"
 
 #: src/common/kax_element_names.cpp:310
-#, fuzzy
 msgid "Default language"
-msgstr "默认值"
+msgstr "默认语言"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1364
 msgid "Default subtitle &charset to set:"
@@ -4475,9 +4408,8 @@ msgid "Default track"
 msgstr "默认轨道"
 
 #: src/common/kax_element_names.cpp:198
-#, fuzzy
 msgid "Default track flag"
-msgstr "“默认轨道”标记"
+msgstr "默认轨道标记"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:51
 #, no-c-format
@@ -4507,7 +4439,7 @@ msgstr "新增轨道的默认值"
 
 #: src/common/kax_element_names.cpp:250
 msgid "Delay"
-msgstr ""
+msgstr "延迟"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1686
 msgid "Delay (in ms):"
@@ -4576,9 +4508,9 @@ msgid "Destination file name"
 msgstr "输出文件名"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Destination file name: %1"
-msgstr "输出文件名"
+msgstr "输出文件名: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
 #, no-c-format
@@ -4669,9 +4601,8 @@ msgid "Disables lacing for all tracks."
 msgstr "在所有轨道中禁用捆绑。"
 
 #: src/common/kax_element_names.cpp:253
-#, fuzzy
 msgid "Discard padding"
-msgstr "丢弃填充: %|1$.3f|毫秒 (%2%纳秒)"
+msgstr "丢弃衬垫数据"
 
 #: src/merge/mkvmerge.cpp:680
 #: src/merge/mkvmerge.cpp:686
@@ -4680,19 +4611,16 @@ msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:
 msgstr "显示尺寸: 格式不符合 <TID>:<width>x<height>，例如 1:640x480 (目前使用的参数为 '%1%')。\n"
 
 #: src/common/kax_element_names.cpp:148
-#, fuzzy
 msgid "Display height"
-msgstr "显示高度: %1%"
+msgstr "显示器高度"
 
 #: src/common/kax_element_names.cpp:153
-#, fuzzy
 msgid "Display unit"
-msgstr "显示单位: %1%%2%"
+msgstr "显示器单位"
 
 #: src/common/kax_element_names.cpp:147
-#, fuzzy
 msgid "Display width"
-msgstr "显示宽度: %1%"
+msgstr "显示器宽度"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 msgid "Display width/height:"
@@ -4740,19 +4668,16 @@ msgid "Do you want to overwrite the file?"
 msgstr "是否覆盖该文件？"
 
 #: src/common/kax_element_names.cpp:76
-#, fuzzy
 msgid "Document type"
-msgstr "文档类型: %1%"
+msgstr "文档类型"
 
 #: src/common/kax_element_names.cpp:78
-#, fuzzy
 msgid "Document type read version"
-msgstr "读取所需文档类型版本: %1%"
+msgstr "文档类型读取版本"
 
 #: src/common/kax_element_names.cpp:77
-#, fuzzy
 msgid "Document type version"
-msgstr "创建所用文档类型版本: %1%"
+msgstr "文档类型版本"
 
 #: src/common/file_types.cpp:33
 msgid "Dolby TrueHD"
@@ -4845,26 +4770,23 @@ msgstr "将章节的起止时间戳扩展到包含其所有子章节的最小/�
 
 #: src/common/kax_element_names.cpp:80
 msgid "EBML CRC-32"
-msgstr ""
+msgstr "EBML CRC-32"
 
 #: src/common/kax_element_names.cpp:71
 msgid "EBML head"
 msgstr "EBML 头"
 
 #: src/common/kax_element_names.cpp:73
-#, fuzzy
 msgid "EBML read version"
-msgstr "读取所需 EBML 版本: %1%"
+msgstr "EBML 读取版本"
 
 #: src/common/kax_element_names.cpp:72
-#, fuzzy
 msgid "EBML version"
-msgstr "EBML 版本: %1%"
+msgstr "EBML 版本"
 
 #: src/common/kax_element_names.cpp:79
-#, fuzzy
 msgid "EBML void"
-msgstr "EBML 头"
+msgstr "EBML void"
 
 #: src/merge/reader_detection_and_creation.cpp:420
 #, boost-format
@@ -4891,9 +4813,8 @@ msgstr "编辑属性选择器"
 
 #: src/common/kax_element_names.cpp:267
 #: src/common/kax_element_names.cpp:299
-#, fuzzy
 msgid "Edition UID"
-msgstr "版本条目"
+msgstr "版本 UID"
 
 #: src/common/kax_element_names.cpp:266
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
@@ -4903,19 +4824,16 @@ msgid "Edition entry"
 msgstr "版本条目"
 
 #: src/common/kax_element_names.cpp:269
-#, fuzzy
 msgid "Edition flag default"
-msgstr "版本条目"
+msgstr "版本标记默认"
 
 #: src/common/kax_element_names.cpp:268
-#, fuzzy
 msgid "Edition flag hidden"
-msgstr "版本条目"
+msgstr "版本标记隐藏"
 
 #: src/common/kax_element_names.cpp:270
-#, fuzzy
 msgid "Edition flag ordered"
-msgstr "版本条目"
+msgstr "版本标记有序"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 #, no-c-format
@@ -4956,9 +4874,8 @@ msgid "Enable copying of tracks by their language"
 msgstr "根据语言启用要复制的轨道"
 
 #: src/common/kax_element_names.cpp:183
-#, fuzzy
 msgid "Enabled"
-msgstr "启用(&E)"
+msgstr "启用"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:154
 #, no-c-format
@@ -4976,14 +4893,12 @@ msgid "Enabling tracks"
 msgstr "启用轨道"
 
 #: src/common/kax_element_names.cpp:171
-#, fuzzy
 msgid "Encryption algorithm"
-msgstr "加密算法: %1% (%2%)"
+msgstr "加密算法"
 
 #: src/common/kax_element_names.cpp:172
-#, fuzzy
 msgid "Encryption key ID"
-msgstr "加密密钥 ID: %1%"
+msgstr "加密密钥 ID"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
 #, no-c-format
@@ -5321,9 +5236,8 @@ msgid "Failed to parse the USF codec private data for track %1%: %2%\n"
 msgstr "无法解析轨道 %1% 的 USF 编码格式私有数据: %2%\n"
 
 #: src/common/kax_element_names.cpp:90
-#, fuzzy
 msgid "Family UID"
-msgstr "剪辑族 UID: %1%"
+msgstr "剪辑族 UID"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:172
 msgid "Fi&le name:"
@@ -5334,9 +5248,8 @@ msgid "Fi&le title:"
 msgstr "文件标题(&L):"
 
 #: src/common/kax_element_names.cpp:156
-#, fuzzy
 msgid "Field order"
-msgstr "视频场序"
+msgstr "场序"
 
 #: src/common/property_element.cpp:158
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
@@ -5353,9 +5266,8 @@ msgid "File '%1%': unsupported container: %2%\n"
 msgstr "文件 '%1%': 不支持的容器: %2%\n"
 
 #: src/common/kax_element_names.cpp:233
-#, fuzzy
 msgid "File UID"
-msgstr "文件 UID: %1%"
+msgstr "文件 UID"
 
 #: src/input/r_real.cpp:430
 #: src/input/r_real.cpp:439
@@ -5364,14 +5276,12 @@ msgid "File contains fewer frames than expected or is corrupt after frame %1%.\n
 msgstr "文件包含的帧数比预期的少，或者文件在第 %1% 帧后损坏。\n"
 
 #: src/common/kax_element_names.cpp:232
-#, fuzzy
 msgid "File data"
-msgstr "文件名"
+msgstr "文件数据"
 
 #: src/common/kax_element_names.cpp:229
-#, fuzzy
 msgid "File description"
-msgstr "文件描述: %1%"
+msgstr "文件描述"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:193
 #, no-c-format
@@ -5522,9 +5432,8 @@ msgid "Forced track"
 msgstr "强制轨道"
 
 #: src/common/kax_element_names.cpp:199
-#, fuzzy
 msgid "Forced track flag"
-msgstr "“强制轨道”标记:"
+msgstr "强制轨道标记"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
@@ -5560,14 +5469,12 @@ msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: '%1% %2%' 中缺少轨道 ID。\n"
 
 #: src/common/kax_element_names.cpp:249
-#, fuzzy
 msgid "Frame number"
-msgstr "帧编号: %1%"
+msgstr "帧编号"
 
 #: src/common/kax_element_names.cpp:160
-#, fuzzy
 msgid "Frame rate"
-msgstr "帧率: %1%"
+msgstr "帧率"
 
 #: src/common/kax_info.cpp:184
 #: src/common/kax_info.cpp:190
@@ -5591,9 +5498,8 @@ msgid "GUI"
 msgstr "图形界面"
 
 #: src/common/kax_element_names.cpp:154
-#, fuzzy
 msgid "Gamma"
-msgstr "伽玛修正: %1%"
+msgstr "gamma"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
 #, no-c-format
@@ -5661,14 +5567,12 @@ msgid "Green Y chromaticity coordinate as defined by CIE 1931."
 msgstr "CIE 1931 定义的绿色度 Y 坐标。"
 
 #: src/common/kax_element_names.cpp:113
-#, fuzzy
 msgid "Green colour coordinate x"
-msgstr "绿色坐标 x: %1%"
+msgstr "绿色坐标 x"
 
 #: src/common/kax_element_names.cpp:114
-#, fuzzy
 msgid "Green colour coordinate y"
-msgstr "绿色坐标 y: %1%"
+msgstr "绿色坐标 y"
 
 #: src/common/file_types.cpp:86
 msgid "HD-DVD subtitles"
@@ -5762,19 +5666,16 @@ msgid "Highest priority"
 msgstr "最高优先级"
 
 #: src/common/kax_element_names.cpp:127
-#, fuzzy
 msgid "Horizontal Cb subsample"
-msgstr "水平 Cb 抽样: %1%"
+msgstr "水平 Cb 抽样"
 
 #: src/common/kax_element_names.cpp:129
-#, fuzzy
 msgid "Horizontal chroma siting"
-msgstr "水平色度分布: %1%"
+msgstr "水平色度分布"
 
 #: src/common/kax_element_names.cpp:125
-#, fuzzy
 msgid "Horizontal chroma subsample"
-msgstr "水平色度抽样: %1%"
+msgstr "水平色度抽样"
 
 #: src/common/property_element.cpp:174
 msgid "How chroma is sited horizontally."
@@ -6121,9 +6022,9 @@ msgid "Indexing (cues):"
 msgstr "索引 (cue):"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Info job"
-msgstr "信息工具"
+msgstr "信息任务"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:381
 #, no-c-format
@@ -6155,9 +6056,8 @@ msgid "Interface &language:"
 msgstr "界面语言(&L):"
 
 #: src/common/kax_element_names.cpp:155
-#, fuzzy
 msgid "Interlaced"
-msgstr "隔行扫描: %1%"
+msgstr "隔行扫描"
 
 #: src/extract/xtr_textsubs.cpp:131
 #, boost-format
@@ -6633,14 +6533,12 @@ msgid "Known &problems in recent releases"
 msgstr "近期版本中的已知问题(&P)"
 
 #: src/common/kax_element_names.cpp:248
-#, fuzzy
 msgid "Lace number"
-msgstr "捆绑数目: %1%"
+msgstr "交错编号"
 
 #: src/common/kax_element_names.cpp:197
-#, fuzzy
 msgid "Lacing flag"
-msgstr "“捆绑”标记: %1%"
+msgstr "交错标记"
 
 #: src/common/kax_element_names.cpp:200
 #: src/common/property_element.cpp:139
@@ -6732,9 +6630,9 @@ msgid "Listing configuration file names with the extension .mtxcfg causes the GU
 msgstr "若给出以 .mtxcfg 为后缀的配置文件名称，程序将在相应工具中载入这些配置文件。"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:152
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Listing content of file \"%1\" in directory \"%2\""
-msgstr "混流到目录“%2”中的文件“%1”"
+msgstr "列出目录「%2」中文件「%1」的内容"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:489
 #, no-c-format
@@ -6899,14 +6797,12 @@ msgid "Matroska files can be played back without the cue data, but seeking will 
 msgstr "Matroska 文件即使没有 cue 索引数据也能播放，但跳转定位可能会变得不精确且缓慢。"
 
 #: src/common/kax_element_names.cpp:74
-#, fuzzy
 msgid "Maximum EBML ID length"
-msgstr "EBML ID 最大长度: %1%"
+msgstr "EBML ID 最大长度"
 
 #: src/common/kax_element_names.cpp:75
-#, fuzzy
 msgid "Maximum EBML size length"
-msgstr "EBML 大小最大长度: %1%"
+msgstr "EBML 大小最大长度"
 
 #: src/common/xml/ebml_converter.cpp:228
 #, boost-format
@@ -6921,9 +6817,8 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "允许的最大值: %1%，实际值: %2%"
 
 #: src/common/kax_element_names.cpp:202
-#, fuzzy
 msgid "Maximum block additional ID"
-msgstr "附加区块 ID: %1%"
+msgstr "最大块加成 ID"
 
 #: src/common/property_element.cpp:179
 msgid "Maximum brightness of a single pixel in candelas per square meter (cd/m²)."
@@ -6935,23 +6830,20 @@ msgid "Maximum cache"
 msgstr "最大缓存"
 
 #: src/common/kax_element_names.cpp:134
-#, fuzzy
 msgid "Maximum content light"
-msgstr "视频: 最高内容亮度"
+msgstr "最高内容亮度"
 
 #: src/common/kax_element_names.cpp:135
-#, fuzzy
 msgid "Maximum frame light"
-msgstr "视频: 最高帧亮度"
+msgstr "最高帧亮度"
 
 #: src/common/property_element.cpp:180
 msgid "Maximum frame-average light level in candelas per square meter (cd/m²)."
 msgstr "最大帧平均亮度级别，单位为坎德拉每平方米 (cd/m²)。"
 
 #: src/common/kax_element_names.cpp:119
-#, fuzzy
 msgid "Maximum luminance"
-msgstr "视频: 最高亮度"
+msgstr "最高亮度"
 
 #: src/common/property_element.cpp:190
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
@@ -6992,9 +6884,8 @@ msgid "Minimum cache"
 msgstr "最小缓存"
 
 #: src/common/kax_element_names.cpp:120
-#, fuzzy
 msgid "Minimum luminance"
-msgstr "视频: 最低亮度"
+msgstr "最低亮度"
 
 #: src/common/property_element.cpp:191
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
@@ -7184,9 +7075,8 @@ msgid "Next filename"
 msgstr "下一文件名"
 
 #: src/common/kax_element_names.cpp:93
-#, fuzzy
 msgid "Next segment UID"
-msgstr "下一剪辑 UID:"
+msgstr "下一剪辑 UID"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1735
 msgid "Next segment UID:"
@@ -7791,9 +7681,8 @@ msgid "Output messages in this charset"
 msgstr "用指定的字符集输出消息"
 
 #: src/common/kax_element_names.cpp:105
-#, fuzzy
 msgid "Output sampling frequency"
-msgstr "输出采样率: %1%"
+msgstr "输出采样频率"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:393
 #: src/mkvtoolnix-gui/merge/tab.cpp:418
@@ -7848,34 +7737,28 @@ msgid "Pending manual start"
 msgstr "等待手动启动"
 
 #: src/common/kax_element_names.cpp:152
-#, fuzzy
 msgid "Pixel crop bottom"
-msgstr "下边裁剪像素: %1%"
+msgstr "像素裁剪 下"
 
 #: src/common/kax_element_names.cpp:149
-#, fuzzy
 msgid "Pixel crop left"
-msgstr "左边裁剪像素: %1%"
+msgstr "像素裁剪 左"
 
 #: src/common/kax_element_names.cpp:151
-#, fuzzy
 msgid "Pixel crop right"
-msgstr "右边裁剪像素: %1%"
+msgstr "像素裁剪 右"
 
 #: src/common/kax_element_names.cpp:150
-#, fuzzy
 msgid "Pixel crop top"
-msgstr "上边裁剪像素: %1%"
+msgstr "像素裁剪 上"
 
 #: src/common/kax_element_names.cpp:146
-#, fuzzy
 msgid "Pixel height"
-msgstr "像素高度: %1%"
+msgstr "像素高度"
 
 #: src/common/kax_element_names.cpp:145
-#, fuzzy
 msgid "Pixel width"
-msgstr "像素宽度: %1%"
+msgstr "像素宽度"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
 msgid "Play a WAV file with the default application:"
@@ -7991,9 +7874,8 @@ msgid "Previous filename"
 msgstr "上一文件名"
 
 #: src/common/kax_element_names.cpp:91
-#, fuzzy
 msgid "Previous segment UID"
-msgstr "上一剪辑 UID:"
+msgstr "上一剪辑 UID"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1733
 msgid "Previous segment UID:"
@@ -8068,29 +7950,24 @@ msgid "Progress: [%1%%2%] %3%%%"
 msgstr "进度: [%1%%2%] %3%%%"
 
 #: src/common/kax_element_names.cpp:138
-#, fuzzy
 msgid "Projection type"
-msgstr "视频: 投影类型"
+msgstr "投影类型"
 
 #: src/common/kax_element_names.cpp:141
-#, fuzzy
 msgid "Projection's pitch rotation"
-msgstr "投影 pitch 轴旋转（左右轴不动）: %1%"
+msgstr "投影 pitch 轴旋转（左右轴不动）"
 
 #: src/common/kax_element_names.cpp:139
-#, fuzzy
 msgid "Projection's private data"
-msgstr "投影私有数据: %1%"
+msgstr "投影私有数据"
 
 #: src/common/kax_element_names.cpp:142
-#, fuzzy
 msgid "Projection's roll rotation"
-msgstr "投影 roll 轴旋转（前后轴不动）: %1%"
+msgstr "投影 roll 轴旋转（前后轴不动）"
 
 #: src/common/kax_element_names.cpp:140
-#, fuzzy
 msgid "Projection's yaw rotation"
-msgstr "投影 yaw 轴旋转（上下轴不动）: %1%"
+msgstr "投影 yaw 轴旋转（上下轴不动）"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:155
 #: src/mkvtoolnix-gui/merge/track_model.cpp:54
@@ -8316,14 +8193,12 @@ msgid "Red Y chromaticity coordinate as defined by CIE 1931."
 msgstr "CIE 1931 定义的红色度 Y 坐标。"
 
 #: src/common/kax_element_names.cpp:111
-#, fuzzy
 msgid "Red colour coordinate x"
-msgstr "红色坐标 x: %1%"
+msgstr "红色坐标 x"
 
 #: src/common/kax_element_names.cpp:112
-#, fuzzy
 msgid "Red colour coordinate y"
-msgstr "红色坐标 y: %1%"
+msgstr "红色坐标 y"
 
 #: src/common/cli_parser.cpp:184
 msgid "Redirects all messages into this file."
@@ -8334,19 +8209,16 @@ msgid "Reduce to core"
 msgstr "仅保留核心"
 
 #: src/common/kax_element_names.cpp:241
-#, fuzzy
 msgid "Reference block"
-msgstr "参考区块: %1%.%|2$06d|毫秒"
+msgstr "参考块"
 
 #: src/common/kax_element_names.cpp:242
-#, fuzzy
 msgid "Reference priority"
-msgstr "参考区块优先级: %1%"
+msgstr "参考优先级"
 
 #: src/common/kax_element_names.cpp:244
-#, fuzzy
 msgid "Reference virtual"
-msgstr "虚拟参考区块: %1%"
+msgstr "参考实质"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:821
@@ -8559,9 +8431,8 @@ msgid "Sa&ve settings as"
 msgstr "设置另存为(&V)"
 
 #: src/common/kax_element_names.cpp:104
-#, fuzzy
 msgid "Sampling frequency"
-msgstr "采样率: %1%"
+msgstr "采样率"
 
 #: src/common/property_element.cpp:203
 msgid "Sampling frequency in Hz."
@@ -8666,7 +8537,7 @@ msgstr "播放列表扫描"
 
 #: src/common/kax_element_names.cpp:165
 msgid "Scope"
-msgstr ""
+msgstr "范围"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:102
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
@@ -8674,9 +8545,8 @@ msgid "See below for examples."
 msgstr "示例请参见下文。"
 
 #: src/common/kax_element_names.cpp:208
-#, fuzzy
 msgid "Seek ID"
-msgstr "定位头"
+msgstr "定位 ID"
 
 #: src/common/kax_element_names.cpp:207
 msgid "Seek entry"
@@ -8691,14 +8561,12 @@ msgid "Seek head (subentries will be skipped)"
 msgstr "定位头 (子条目将被跳过)"
 
 #: src/common/kax_element_names.cpp:209
-#, fuzzy
 msgid "Seek position"
-msgstr "定位位置: %1%"
+msgstr "定位位置"
 
 #: src/common/kax_element_names.cpp:204
-#, fuzzy
 msgid "Seek pre-roll"
-msgstr "定位条目"
+msgstr "定位预滚"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:522
 msgid "Seg&ment UID:"
@@ -8709,9 +8577,8 @@ msgid "Segment"
 msgstr "剪辑"
 
 #: src/common/kax_element_names.cpp:89
-#, fuzzy
 msgid "Segment UID"
-msgstr "剪辑 UID 列表:"
+msgstr "剪辑 UID"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1731
 msgid "Segment UIDs:"
@@ -9012,39 +8879,32 @@ msgid "Shut down the system in one minute:"
 msgstr "在一分钟内关闭系统:"
 
 #: src/common/kax_element_names.cpp:176
-#, fuzzy
 msgid "Signature"
-msgstr "签名: %1%"
+msgstr "签名"
 
 #: src/common/kax_element_names.cpp:173
-#, fuzzy
 msgid "Signature algorithm"
-msgstr "未使用签名算法"
+msgstr "签名算法"
 
 #: src/common/kax_element_names.cpp:174
-#, fuzzy
 msgid "Signature hash algorithm"
-msgstr "未使用签名散列算法"
+msgstr "签名 hash 算法"
 
 #: src/common/kax_element_names.cpp:175
-#, fuzzy
 msgid "Signature key ID"
-msgstr "签名密钥 ID: %1%"
+msgstr "签名密钥 ID"
 
 #: src/common/kax_element_names.cpp:236
-#, fuzzy
 msgid "Silent track number"
-msgstr "静默轨道编号: %1%"
+msgstr "静默轨道编号"
 
 #: src/common/kax_element_names.cpp:235
-#, fuzzy
 msgid "Silent tracks"
-msgstr "剪辑轨道"
+msgstr "静默轨道"
 
 #: src/common/kax_element_names.cpp:304
-#, fuzzy
 msgid "Simple"
-msgstr "简化区块"
+msgstr "简单"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
 #: src/mkvtoolnix-gui/merge/output.cpp:476
@@ -9054,7 +8914,7 @@ msgstr "OGM 风格的简易章节文件"
 
 #: src/common/kax_element_names.cpp:258
 msgid "Simple block"
-msgstr "简化区块"
+msgstr "简单块"
 
 #: src/common/chapters/chapters.cpp:56
 #, boost-format
@@ -9130,9 +8990,9 @@ msgid "Source file name"
 msgstr "输入文件名称"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:101
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Source file name: %1"
-msgstr "输入文件名称"
+msgstr "输入文件名: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
@@ -9246,9 +9106,8 @@ msgid "Status:"
 msgstr "状态:"
 
 #: src/common/kax_element_names.cpp:157
-#, fuzzy
 msgid "Stereo mode"
-msgstr "视频立体模式"
+msgstr "立体模式"
 
 #: src/merge/mkvmerge.cpp:936
 #, boost-format
@@ -9332,7 +9191,6 @@ msgid "Tab &position in tab widgets:"
 msgstr "页面标签显示位置(&P):"
 
 #: src/common/kax_element_names.cpp:296
-#, fuzzy
 msgid "Tag"
 msgstr "标签"
 
@@ -9346,13 +9204,12 @@ msgid "Tag extraction"
 msgstr "标签提取"
 
 #: src/common/kax_element_names.cpp:308
-#, fuzzy
 msgid "Tag language"
-msgstr "语言"
+msgstr "标签语言"
 
 #: src/common/kax_element_names.cpp:309
 msgid "Tag language (IETF)"
-msgstr ""
+msgstr "标签语言 (IETF)"
 
 #: src/propedit/propedit_cli_parser.cpp:256
 msgid "Tag selectors"
@@ -9381,15 +9238,15 @@ msgstr "标签:"
 
 #: src/common/kax_element_names.cpp:302
 msgid "Target type"
-msgstr ""
+msgstr "目标类型"
 
 #: src/common/kax_element_names.cpp:303
 msgid "Target type value"
-msgstr ""
+msgstr "目标类型值"
 
 #: src/common/kax_element_names.cpp:297
 msgid "Targets"
-msgstr ""
+msgstr "目标"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 #, no-c-format
@@ -9935,9 +9792,9 @@ msgid "The file '%1%' could not be opened for reading: %2%.\n"
 msgstr "文件 '%1%' 无法以读取模式打开: %2%。\n"
 
 #: src/common/kax_info.cpp:1155
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%."
-msgstr "文件 '%1%' 无法以写入模式打开: %2%。\n"
+msgstr "文件「%1%」无法以写入模式打开: %2%."
 
 #: src/extract/attachments.cpp:121
 #: src/extract/cues.cpp:74
@@ -11192,9 +11049,8 @@ msgstr "时间码文件:"
 
 #: src/common/kax_element_names.cpp:84
 #: src/common/kax_element_names.cpp:201
-#, fuzzy
 msgid "Timestamp scale"
-msgstr "时间码缩放比例: %1%"
+msgstr "时间戳缩放"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1685
@@ -11226,9 +11082,8 @@ msgid "Trac&k name:"
 msgstr "轨道名称(&K):"
 
 #: src/common/kax_element_names.cpp:179
-#, fuzzy
 msgid "Track"
-msgstr "轨道列表:"
+msgstr "轨道"
 
 #: src/extract/xtr_avc.cpp:137
 #: src/extract/xtr_hdmv_textst.cpp:44
@@ -11373,19 +11228,16 @@ msgid "Track number for mkvpropedit:"
 msgstr "用于 mkvpropedit 的轨道编号:"
 
 #: src/common/kax_element_names.cpp:193
-#, fuzzy
 msgid "Track overlay"
-msgstr "覆盖轨道: %1%"
+msgstr "轨道重叠"
 
 #: src/common/kax_element_names.cpp:182
-#, fuzzy
 msgid "Track type"
-msgstr "轨道类型: %1%"
+msgstr "轨道类型"
 
 #: src/common/kax_element_names.cpp:178
-#, fuzzy
 msgid "Tracks"
-msgstr "轨道列表:"
+msgstr "轨道"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:364
 #, no-c-format
@@ -11697,19 +11549,16 @@ msgid "Version %1 \"%2\""
 msgstr "版本 %1 \"%2\""
 
 #: src/common/kax_element_names.cpp:128
-#, fuzzy
 msgid "Vertical Cb subsample"
-msgstr "垂直 Cb 抽样: %1%"
+msgstr "垂直 Cb 抽样"
 
 #: src/common/kax_element_names.cpp:130
-#, fuzzy
 msgid "Vertical chroma siting"
-msgstr "垂直色度分布: %1%"
+msgstr "垂直色度分布"
 
 #: src/common/kax_element_names.cpp:126
-#, fuzzy
 msgid "Vertical chroma subsample"
-msgstr "垂直色度抽样: %1%"
+msgstr "垂直色度抽样"
 
 #: src/output/p_video_for_windows.h:37
 msgid "VfW compatible video"
@@ -12082,14 +11931,12 @@ msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
 msgstr "CIE 1931 定义的白色色度 Y 坐标。"
 
 #: src/common/kax_element_names.cpp:117
-#, fuzzy
 msgid "White colour coordinate x"
-msgstr "白色坐标 x: %1%"
+msgstr "白色坐标 x"
 
 #: src/common/kax_element_names.cpp:118
-#, fuzzy
 msgid "White colour coordinate y"
-msgstr "白色坐标 y: %1%"
+msgstr "白色坐标 y"
 
 #: src/common/property_element.cpp:147
 msgid "Width of the encoded video frames in pixels."
@@ -12968,14 +12815,13 @@ msgid "side by side (right first)"
 msgstr "并行 (右先)"
 
 #: src/common/kax_info.cpp:197
-#, fuzzy, boost-format
+#, boost-format
 msgid "size %1%"
-msgstr " 大小 %1%"
+msgstr "大小 %1%"
 
 #: src/common/kax_info.cpp:470
-#, fuzzy
 msgid "size unknown"
-msgstr " 大小未知"
+msgstr "大小未知"
 
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
@@ -13026,9 +12872,9 @@ msgid "track name"
 msgstr "轨道名称"
 
 #: src/common/kax_info.cpp:183
-#, fuzzy, boost-format
+#, boost-format
 msgid "track number %1%, %2% frame(s), timestamp %3%"
-msgstr "区块 (轨道编号 %1%，%2% 帧，时间码 %|3$.3f|s = %4%)"
+msgstr "轨道编号 %1%, %2% 帧, 时间戳 %3%"
 
 #: src/extract/extract_cli_parser.cpp:50
 msgid "tracks [options] [TID1:out1 [TID2:out2 ...]]"
