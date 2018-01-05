@@ -23,7 +23,7 @@ class UpdateChecker : public QObject {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(UpdateChecker);
+  MTX_DECLARE_PRIVATE(UpdateCheckerPrivate);
 
   std::unique_ptr<UpdateCheckerPrivate> const p_ptr;
 

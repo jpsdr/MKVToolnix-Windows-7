@@ -16,7 +16,7 @@ class HeaderViewManager : public QObject {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(HeaderViewManager);
+  MTX_DECLARE_PRIVATE(HeaderViewManagerPrivate);
 
   std::unique_ptr<HeaderViewManagerPrivate> const p_ptr;
 

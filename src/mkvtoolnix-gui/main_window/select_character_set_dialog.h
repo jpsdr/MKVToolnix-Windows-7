@@ -17,7 +17,7 @@ class SelectCharacterSetDialog : public QDialog {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(SelectCharacterSetDialog);
+  MTX_DECLARE_PRIVATE(SelectCharacterSetDialogPrivate);
 
   std::unique_ptr<SelectCharacterSetDialogPrivate> const p_ptr;
 

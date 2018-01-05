@@ -13,7 +13,7 @@ class FilesDragDropWidget : public QWidget {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(FilesDragDropWidget);
+  MTX_DECLARE_PRIVATE(FilesDragDropWidgetPrivate);
 
   std::unique_ptr<FilesDragDropWidgetPrivate> const p_ptr;
 

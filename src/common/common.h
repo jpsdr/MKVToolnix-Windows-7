@@ -132,3 +132,13 @@ extern unsigned int verbose;
 
 void mtx_common_init(std::string const &program_name, char const *argv0);
 std::string const &get_program_name();
+
+#define MTX_DECLARE_PRIVATE(PrivateClass) \
+  inline PrivateClass* p_func() { return reinterpret_cast<PrivateClass *>(&(*p_ptr)); } \
+  inline const PrivateClass* p_func() const { return reinterpret_cast<const PrivateClass *>(&(*p_ptr)); } \
+  friend class PrivateClass;
+
+#define MTX_DECLARE_PUBLIC(Class)                                    \
+  inline Class* q_func() { return static_cast<Class *>(q_ptr); } \
+  inline const Class* q_func() const { return static_cast<const Class *>(q_ptr); } \
+  friend class Class;

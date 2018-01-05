@@ -25,21 +25,6 @@
 #define QNY(singular, plural, count) to_qs(NY(singular, plural, count))
 #define QTR(s, dummy) to_qs(Y(s))
 
-#define MTX_DECLARE_PRIVATE(Class) \
-  inline Class##Private* p_func() { return reinterpret_cast<Class##Private *>(&(*p_ptr)); } \
-  inline const Class##Private* p_func() const { return reinterpret_cast<const Class##Private *>(&(*p_ptr)); } \
-  friend class Class##Private;
-
-#define MTX_DECLARE_PRIVATE_P(Pptr, Class) \
-  inline Class##Private* p_func() { return reinterpret_cast<Class##Private *>(&(*Pptr)); } \
-  inline const Class##Private* p_func() const { return reinterpret_cast<const Class##Private *>(&(*Pptr)); } \
-  friend class Class##Private;
-
-#define MTX_DECLARE_PUBLIC(Class)                                    \
-  inline Class* q_func() { return static_cast<Class *>(q_ptr); } \
-  inline const Class* q_func() const { return static_cast<const Class *>(q_ptr); } \
-  friend class Class;
-
 inline QChar
 to_qs(char const source) {
   return QChar{source};

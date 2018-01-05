@@ -28,7 +28,7 @@ class Job: public QObject {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(Job);
+  MTX_DECLARE_PRIVATE(JobPrivate);
 
   std::unique_ptr<JobPrivate> const p_ptr;
 

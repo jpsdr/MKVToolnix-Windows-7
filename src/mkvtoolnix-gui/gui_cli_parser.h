@@ -10,7 +10,7 @@ namespace mtx { namespace gui {
 class GuiCliParserPrivate;
 class GuiCliParser: public mtx::cli::parser_c {
 protected:
-  MTX_DECLARE_PRIVATE(GuiCliParser);
+  MTX_DECLARE_PRIVATE(GuiCliParserPrivate);
 
   std::unique_ptr<GuiCliParserPrivate> const p_ptr;
 

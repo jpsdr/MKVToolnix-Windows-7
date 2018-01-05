@@ -14,7 +14,7 @@ using MessageBoxPtr = std::shared_ptr<MessageBox>;
 class MessageBoxPrivate;
 class MessageBox {
 protected:
-  MTX_DECLARE_PRIVATE(MessageBox);
+  MTX_DECLARE_PRIVATE(MessageBoxPrivate);
 
   std::unique_ptr<MessageBoxPrivate> const p_ptr;
 

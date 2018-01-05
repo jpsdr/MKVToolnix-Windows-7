@@ -13,7 +13,7 @@ class ComboBoxBase: public QComboBox {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(ComboBoxBase);
+  MTX_DECLARE_PRIVATE(ComboBoxBasePrivate);
 
   std::unique_ptr<ComboBoxBasePrivate> const p_ptr;
 

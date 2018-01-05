@@ -56,7 +56,7 @@ protected:
   using LoadResult       = std::pair<ChaptersPtr, bool>;
 
 protected:
-  MTX_DECLARE_PRIVATE(Tab);
+  MTX_DECLARE_PRIVATE(TabPrivate);
 
   std::unique_ptr<TabPrivate> const p_ptr;
 

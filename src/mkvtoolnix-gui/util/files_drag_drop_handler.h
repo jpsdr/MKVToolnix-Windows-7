@@ -16,7 +16,7 @@ class FilesDragDropHandler: public QObject {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(FilesDragDropHandler);
+  MTX_DECLARE_PRIVATE(FilesDragDropHandlerPrivate);
 
   std::unique_ptr<FilesDragDropHandlerPrivate> const p_ptr;
 

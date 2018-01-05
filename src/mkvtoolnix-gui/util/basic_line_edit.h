@@ -18,7 +18,7 @@ class BasicLineEdit : public QLineEdit {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(BasicLineEdit);
+  MTX_DECLARE_PRIVATE(BasicLineEditPrivate);
 
   std::unique_ptr<BasicLineEditPrivate> const p_ptr;
 

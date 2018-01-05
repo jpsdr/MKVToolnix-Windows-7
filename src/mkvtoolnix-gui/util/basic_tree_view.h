@@ -18,7 +18,7 @@ class BasicTreeView : public QTreeView {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(BasicTreeView);
+  MTX_DECLARE_PRIVATE(BasicTreeViewPrivate);
 
   std::unique_ptr<BasicTreeViewPrivate> const p_ptr;
 

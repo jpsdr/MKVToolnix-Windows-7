@@ -24,7 +24,7 @@ class InfoJob: public Job {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(InfoJob);
+  MTX_DECLARE_PRIVATE(InfoJobPrivate);
 
   explicit InfoJob(InfoJobPrivate &p);
 

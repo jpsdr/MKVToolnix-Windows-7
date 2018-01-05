@@ -20,7 +20,7 @@ class FileIdentificationWorker : public QObject {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(FileIdentificationWorker);
+  MTX_DECLARE_PRIVATE(FileIdentificationWorkerPrivate);
 
   std::unique_ptr<FileIdentificationWorkerPrivate> const p_ptr;
 

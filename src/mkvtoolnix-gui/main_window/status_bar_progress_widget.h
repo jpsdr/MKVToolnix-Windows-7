@@ -19,7 +19,7 @@ class StatusBarProgressWidget : public QWidget {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(StatusBarProgressWidget);
+  MTX_DECLARE_PRIVATE(StatusBarProgressWidgetPrivate);
 
   std::unique_ptr<StatusBarProgressWidgetPrivate> const p_ptr;
 

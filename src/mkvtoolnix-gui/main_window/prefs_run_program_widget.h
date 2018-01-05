@@ -14,7 +14,7 @@ class PrefsRunProgramWidget : public QWidget {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(PrefsRunProgramWidget);
+  MTX_DECLARE_PRIVATE(PrefsRunProgramWidgetPrivate);
 
   std::unique_ptr<PrefsRunProgramWidgetPrivate> const p_ptr;
 

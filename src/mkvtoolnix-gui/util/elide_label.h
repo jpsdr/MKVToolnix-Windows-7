@@ -18,7 +18,7 @@ class ElideLabel: public QFrame {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(ElideLabel);
+  MTX_DECLARE_PRIVATE(ElideLabelPrivate);
 
   std::unique_ptr<ElideLabelPrivate> const p_ptr;
 

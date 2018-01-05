@@ -21,7 +21,7 @@ class Tab : public QWidget {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(Tab);
+  MTX_DECLARE_PRIVATE(TabPrivate);
 
   std::unique_ptr<TabPrivate> const p_ptr;
 

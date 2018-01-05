@@ -17,7 +17,7 @@ class NetworkAccessManager : public QObject {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(NetworkAccessManager);
+  MTX_DECLARE_PRIVATE(NetworkAccessManagerPrivate);
 
   std::unique_ptr<NetworkAccessManagerPrivate> const p_ptr;
 

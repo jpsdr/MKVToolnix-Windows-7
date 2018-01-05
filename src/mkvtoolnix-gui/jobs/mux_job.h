@@ -26,7 +26,7 @@ class MuxJob: public Job {
   Q_OBJECT;
 
 protected:
-  MTX_DECLARE_PRIVATE(MuxJob);
+  MTX_DECLARE_PRIVATE(MuxJobPrivate);
 
   explicit MuxJob(MuxJobPrivate &p);
 
