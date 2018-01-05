@@ -40,6 +40,7 @@
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace ChapterEditor {
@@ -1708,13 +1709,7 @@ Tab::renumberSubChapters() {
 void
 Tab::expandCollapseAll(bool expand,
                        QModelIndex const &parentIdx) {
-  auto p = p_func();
-
-  if (parentIdx.isValid())
-    p->ui->elements->setExpanded(parentIdx, expand);
-
-  for (auto row = 0, numRows = p->chapterModel->rowCount(parentIdx); row < numRows; ++row)
-    expandCollapseAll(expand, p->chapterModel->index(row, 0, parentIdx));
+  Util::expandCollapseAll(p_func()->ui->elements, expand, parentIdx);
 }
 
 void

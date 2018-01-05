@@ -45,6 +45,7 @@
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
@@ -596,22 +597,12 @@ Tab::reportValidationFailure(bool isCritical,
 
 void
 Tab::expandAll() {
-  expandCollapseAll(true);
+  Util::expandCollapseAll(ui->elements, true);
 }
 
 void
 Tab::collapseAll() {
-  expandCollapseAll(false);
-}
-
-void
-Tab::expandCollapseAll(bool expand,
-                       QModelIndex const &parentIdx) {
-  if (parentIdx.isValid())
-    ui->elements->setExpanded(parentIdx, expand);
-
-  for (auto row = 0, numRows = m_model->rowCount(parentIdx); row < numRows; ++row)
-    expandCollapseAll(expand, m_model->index(row, 0, parentIdx));
+  Util::expandCollapseAll(ui->elements, false);
 }
 
 void

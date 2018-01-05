@@ -94,7 +94,6 @@ protected:
   void populateTree();
   void resetData();
   void doModifications();
-  void expandCollapseAll(bool expand, QModelIndex const &parentIdx = {});
   void reportValidationFailure(bool isCritical, QModelIndex const &pageIdx);
 
   ValuePage *createValuePage(TopLevelPage &parentPage, EbmlMaster &parentMaster, property_element_c const &element);
