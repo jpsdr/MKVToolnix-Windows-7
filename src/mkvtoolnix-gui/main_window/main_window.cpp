@@ -58,6 +58,8 @@ class MainWindowPrivate {
   WatchJobs::Tool *watchJobTool{};
   QList<QAction *> toolSelectionActions;
   std::unique_ptr<Util::MovingPixmapOverlay> movingPixmapOverlay;
+  bool queueIsRunning{};
+  int spinnerIsSpinning{};
 
   QHash<QObject *, QString> helpURLs;
   QHash<ToolBase *, QTabWidget *> subWindowWidgets;
@@ -211,7 +213,7 @@ MainWindow::setupConnections() {
   connect(jobModel,                               &Jobs::Model::progressChanged,                          p->statusBarProgress, &StatusBarProgressWidget::setProgress);
   connect(jobModel,                               &Jobs::Model::jobStatsChanged,                          p->statusBarProgress, &StatusBarProgressWidget::setJobStats);
   connect(jobModel,                               &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, p->statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
-  connect(jobModel,                               &Jobs::Model::queueStatusChanged,                       this,                 &MainWindow::startStopQueueSpinner);
+  connect(jobModel,                               &Jobs::Model::queueStatusChanged,                       this,                 &MainWindow::startStopQueueSpinnerForQueue);
   connect(currentJobTab,                          &WatchJobs::Tab::watchCurrentJobTabCleared,             p->statusBarProgress, &StatusBarProgressWidget::reset);
 
   // Auxiliary actions:
@@ -808,13 +810,31 @@ MainWindow::showSubWindow(unsigned int tabIdx) {
 }
 
 void
-MainWindow::startStopQueueSpinner(Jobs::QueueStatus status) {
+MainWindow::startStopQueueSpinnerForQueue(Jobs::QueueStatus status) {
+  auto p                 = p_func();
+  auto newQueueIsRunning = status == Jobs::QueueStatus::Running;
+
+  if (p->queueIsRunning == newQueueIsRunning)
+    return;
+
+  p->queueIsRunning = newQueueIsRunning;
+  startStopQueueSpinner(newQueueIsRunning);
+}
+
+void
+MainWindow::startStopQueueSpinner(bool start) {
   auto p = p_func();
 
-  if (status == Jobs::QueueStatus::Running)
-    p->queueSpinner->start();
-  else
-    p->queueSpinner->stop();
+  if (start) {
+    ++p->spinnerIsSpinning;
+    if (p->spinnerIsSpinning)
+      p->queueSpinner->start();
+
+  } else if (p->spinnerIsSpinning > 0) {
+    --p->spinnerIsSpinning;
+    if (!p->spinnerIsSpinning)
+      p->queueSpinner->stop();
+  }
 }
 
 }}

@@ -97,7 +97,8 @@ public slots:
   virtual void setupWindowMenu();
   virtual void showNextOrPreviousSubWindow(int delta);
   virtual void showSubWindow(unsigned int tabIdx);
-  virtual void startStopQueueSpinner(Jobs::QueueStatus status);
+  virtual void startStopQueueSpinnerForQueue(Jobs::QueueStatus status);
+  virtual void startStopQueueSpinner(bool start);
 
 public:                         // static
   static MainWindow *get();
