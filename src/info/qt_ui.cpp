@@ -24,6 +24,7 @@
 #endif
 
 #include <ebml/EbmlVersion.h>
+#include <matroska/KaxSegment.h>
 #include <matroska/KaxVersion.h>
 
 #include "common/kax_element_names.h"

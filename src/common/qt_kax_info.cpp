@@ -16,6 +16,7 @@
 
 # include "common/qt.h"
 # include "common/qt_kax_info.h"
+# include "common/kax_info_p.h"
 
 namespace mtx {
 
@@ -24,7 +25,7 @@ qt_kax_info_c::~qt_kax_info_c() {
 
 void
 qt_kax_info_c::ui_show_error(std::string const &error) {
-  if (!m_use_gui)
+  if (!p_func()->m_use_gui)
     kax_info_c::ui_show_error(error);
   else
     emit error_found(Q(error));
@@ -35,7 +36,9 @@ qt_kax_info_c::ui_show_element_info(int level,
                                     std::string const &text,
                                     int64_t position,
                                     int64_t size) {
-  if (!m_use_gui || !m_destination_file_name.empty())
+  auto p = p_func();
+
+  if (!p->m_use_gui || !p->m_destination_file_name.empty())
     kax_info_c::ui_show_element_info(level, text, position, size);
 
   else {
@@ -45,11 +48,13 @@ qt_kax_info_c::ui_show_element_info(int level,
 
 void
 qt_kax_info_c::ui_show_element(EbmlElement &e) {
-  if (!m_use_gui || !m_destination_file_name.empty())
+  auto p = p_func();
+
+  if (!p->m_use_gui || !p->m_destination_file_name.empty())
     kax_info_c::ui_show_element(e);
 
   else {
-    emit element_found(m_level, &e);
+    emit element_found(p->m_level, &e);
   }
 }
 

@@ -15,81 +15,42 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxSegment.h>
 #include <matroska/KaxCluster.h>
-
-#include "common/xml/ebml_converter.h"
 
 namespace mtx {
 
 using namespace libebml;
 using namespace libmatroska;
 
-class kax_info_x: public std::runtime_error {
+namespace kax_info {
+
+class exception: public std::runtime_error {
 public:
-  kax_info_x(std::string const &error)
+  exception(std::string const &error)
     : std::runtime_error{error}
   {
   }
 };
 
+struct track_t;
+class private_c;
+
+}
+
 class kax_info_c {
+protected:
+  MTX_DECLARE_PRIVATE(kax_info::private_c);
+
+  std::unique_ptr<kax_info::private_c> const p_ptr;
+
+  explicit kax_info_c(kax_info::private_c &p);
+
 public:
   enum class result_e {
     succeeded,
     failed,
     aborted,
   };
-
-protected:
-  struct track_t {
-    uint64_t tnum{}, tuid{};
-    char type{' '};
-    int64_t default_duration{};
-    std::size_t mkvmerge_track_id{};
-    std::string codec_id, fourcc;
-  };
-
-  struct track_info_t {
-    int64_t m_size{}, m_blocks{}, m_blocks_by_ref_num[3]{0, 0, 0}, m_add_duration_for_n_packets{};
-    boost::optional<int64_t> m_min_timestamp, m_max_timestamp;
-  };
-
-  using track_cptr = std::shared_ptr<track_t>;
-
-protected:
-  static std::vector<boost::format> ms_common_formats;
-  static unsigned int ms_bf_show_unknown_element, ms_bf_format_binary_1, ms_bf_format_binary_2, ms_bf_block_group_block_summary, ms_bf_block_group_block_frame,
-    ms_bf_block_group_summary_position, ms_bf_block_group_summary_with_duration, ms_bf_block_group_summary_no_duration, ms_bf_block_group_summary_v2, ms_bf_simple_block_basics, ms_bf_simple_block_frame,
-    ms_bf_simple_block_summary, ms_bf_simple_block_summary_v2, ms_bf_at, ms_bf_size, ms_bf_at_hex, ms_bf_block_group_block_adler, ms_bf_simple_block_adler, ms_bf_simple_block_position, ms_bf_crc32_value, ms_bf_element_size;
-
-protected:
-  std::vector<track_cptr> m_tracks;
-  std::unordered_map<unsigned int, track_cptr> m_tracks_by_number;
-  std::unordered_map<unsigned int, track_info_t> m_track_info;
-  uint64_t m_ts_scale{TIMESTAMP_SCALE}, m_file_size{};
-  std::size_t m_mkvmerge_track_id{};
-  std::shared_ptr<EbmlStream> m_es;
-  mm_io_cptr m_in, m_out;
-  std::string m_destination_file_name;
-  int m_level{};
-  std::vector<std::string> m_summary;
-  std::shared_ptr<track_t> m_track;
-  KaxCluster *m_cluster{};
-  std::vector<int> m_frame_sizes;
-  std::vector<uint32_t> m_frame_adlers;
-  std::vector<std::string> m_frame_hexdumps;
-  int64_t m_num_references{}, m_lf_timestamp{}, m_lf_tnum{};
-  boost::optional<int64_t> m_block_duration;
-
-  bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{};
-  int m_hexdump_max_size{}, m_verbose{};
-
-  bool m_abort{};
-
-  std::unordered_map<uint32_t, std::function<std::string(EbmlElement &)>> m_custom_element_value_formatters;
-  std::unordered_map<uint32_t, std::function<bool(EbmlElement &)>> m_custom_element_pre_processors;
-  std::unordered_map<uint32_t, std::function<void(EbmlElement &)>> m_custom_element_post_processors;
 
 public:
   kax_info_c();
@@ -145,13 +106,14 @@ public:
   virtual void ui_show_progress(int percentage, std::string const &text);
 
 protected:
+  void init();
   void init_custom_element_value_formatters_and_processors();
 
   void show_element(EbmlElement *l, int level, std::string const &info);
   void show_element(EbmlElement *l, int level, boost::format const &info);
 
-  void add_track(track_cptr const &t);
-  track_t *find_track(int tnum);
+  void add_track(std::shared_ptr<kax_info::track_t> const &t);
+  kax_info::track_t *find_track(int tnum);
 
   void read_master(EbmlMaster *m, EbmlSemanticContext const &ctx, int &upper_lvl_el, EbmlElement *&l2);
 

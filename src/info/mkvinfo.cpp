@@ -48,7 +48,7 @@ console_main(options_c const &options) {
 
   try {
     info.process_file(options.m_file_name);
-  } catch (mtx::kax_info_x &ex) {
+  } catch (mtx::kax_info::exception &ex) {
     mxinfo(ex.what());
     mxexit(2);
   }
