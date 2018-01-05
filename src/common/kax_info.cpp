@@ -1035,7 +1035,6 @@ kax_info_c::result_e
 kax_info_c::handle_segment(EbmlElement *l0) {
   ui_show_element(*l0);
 
-  m_file_size   = m_in->get_size();
   auto l1       = static_cast<EbmlElement *>(nullptr);
   auto kax_file = std::make_shared<kax_file_c>(*m_in);
   m_level       = 1;
@@ -1133,6 +1132,57 @@ kax_info_c::reset() {
 }
 
 kax_info_c::result_e
+kax_info_c::process_file(mm_io_cptr const &file) {
+  m_in        = file;
+  m_file_size = m_in->get_size();
+  m_es        = std::make_shared<EbmlStream>(*m_in);
+
+  // Find the EbmlHead element. Must be the first one.
+  auto l0 = ebml_element_cptr{ m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL) };
+  if (!l0 || !Is<EbmlHead>(*l0)) {
+    ui_show_error(Y("No EBML head found."));
+    return result_e::failed;
+  }
+
+  int upper_lvl_el           = 0;
+  EbmlElement *element_found = nullptr;
+
+  read_master(static_cast<EbmlMaster *>(l0.get()), EBML_CONTEXT(l0), upper_lvl_el, element_found);
+  delete element_found;
+
+  handle_elements_generic(*l0);
+  l0->SkipData(*m_es, EBML_CONTEXT(l0));
+
+  while (1) {
+    // NEXT element must be a segment
+    l0 = ebml_element_cptr{ m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL) };
+    if (!l0)
+      break;
+
+    if (!Is<KaxSegment>(*l0)) {
+      show_element(l0.get(), 0, Y("Unknown element"));
+      l0->SkipData(*m_es, EBML_CONTEXT(l0));
+
+      continue;
+    }
+
+    auto result = handle_segment(l0.get());
+    if (result == result_e::aborted)
+      return result;
+
+    l0->SkipData(*m_es, EBML_CONTEXT(l0));
+
+    if ((m_verbose == 0) && !m_show_summary)
+      break;
+  }
+
+  if (!m_use_gui && m_show_track_info)
+    display_track_info();
+
+  return result_e::succeeded;
+}
+
+kax_info_c::result_e
 kax_info_c::process_file(std::string const &file_name) {
   at_scope_exit_c cleanup([this]() { reset(); });
 
@@ -1158,51 +1208,7 @@ kax_info_c::process_file(std::string const &file_name) {
   }
 
   try {
-    m_es = std::make_shared<EbmlStream>(*m_in);
-
-    // Find the EbmlHead element. Must be the first one.
-    auto l0 = ebml_element_cptr{ m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL) };
-    if (!l0 || !Is<EbmlHead>(*l0)) {
-      ui_show_error(Y("No EBML head found."));
-      return result_e::failed;
-    }
-
-    int upper_lvl_el           = 0;
-    EbmlElement *element_found = nullptr;
-
-    read_master(static_cast<EbmlMaster *>(l0.get()), EBML_CONTEXT(l0), upper_lvl_el, element_found);
-    delete element_found;
-
-    handle_elements_generic(*l0);
-    l0->SkipData(*m_es, EBML_CONTEXT(l0));
-
-    while (1) {
-      // NEXT element must be a segment
-      l0 = ebml_element_cptr{ m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL) };
-      if (!l0)
-        break;
-
-      if (!Is<KaxSegment>(*l0)) {
-        show_element(l0.get(), 0, Y("Unknown element"));
-        l0->SkipData(*m_es, EBML_CONTEXT(l0));
-
-        continue;
-      }
-
-      auto result = handle_segment(l0.get());
-      if (result == result_e::aborted)
-        return result;
-
-      l0->SkipData(*m_es, EBML_CONTEXT(l0));
-
-      if ((m_verbose == 0) && !m_show_summary)
-        break;
-    }
-
-    if (!m_use_gui && m_show_track_info)
-      display_track_info();
-
-    return result_e::succeeded;
+    process_file(m_in);
 
   } catch (mtx::kax_info_x &) {
     throw;

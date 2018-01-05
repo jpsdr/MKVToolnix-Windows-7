@@ -108,6 +108,7 @@ public:
 
   void reset();
   virtual result_e process_file(std::string const &file_name);
+  virtual result_e process_file(mm_io_cptr const &file);
   void abort();
 
   std::string create_element_text(std::string const &text, int64_t position, int64_t size);
