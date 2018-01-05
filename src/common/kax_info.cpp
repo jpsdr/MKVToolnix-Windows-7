@@ -1234,7 +1234,7 @@ kax_info_c::process_file(mm_io_cptr const &file) {
 }
 
 kax_info_c::result_e
-kax_info_c::process_file(std::string const &file_name) {
+kax_info_c::open_and_process_file(std::string const &file_name) {
   auto p = p_func();
 
   at_scope_exit_c cleanup([this]() { reset(); });

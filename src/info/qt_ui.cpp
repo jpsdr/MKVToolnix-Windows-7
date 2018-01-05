@@ -194,7 +194,7 @@ main_window_c::parse_file(const QString &file_name) {
   connect(&info, &mtx::qt_kax_info_c::error_found,        this, &main_window_c::show_error);
   connect(&info, &mtx::qt_kax_info_c::progress_changed,   this, &main_window_c::show_progress);
 
-  if (info.process_file(file_name.toUtf8().data()) == mtx::kax_info_c::result_e::succeeded) {
+  if (info.open_and_process_file(file_name.toUtf8().data()) == mtx::kax_info_c::result_e::succeeded) {
     action_Save_text_file->setEnabled(true);
     current_file = file_name;
     if (action_Expand_important->isChecked())

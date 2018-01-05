@@ -20,6 +20,11 @@
 
 namespace mtx {
 
+qt_kax_info_c::qt_kax_info_c(QString const &file_name)
+  : m_source_file_name{to_utf8(file_name)}
+{
+}
+
 qt_kax_info_c::~qt_kax_info_c() {
 }
 
@@ -65,10 +70,10 @@ qt_kax_info_c::ui_show_progress(int percentage,
 }
 
 kax_info_c::result_e
-qt_kax_info_c::process_file(std::string const &file_name) {
+qt_kax_info_c::process_file(mm_io_cptr const &file) {
   emit started();
 
-  auto result = kax_info_c::process_file(file_name);
+  auto result = kax_info_c::process_file(file);
 
   emit finished(result);
 
@@ -81,8 +86,8 @@ qt_kax_info_c::set_source_file_name(std::string const &file_name) {
 }
 
 void
-qt_kax_info_c::start_processing() {
-  process_file(m_source_file_name);
+qt_kax_info_c::run() {
+  open_and_process_file(m_source_file_name);
 }
 
 }

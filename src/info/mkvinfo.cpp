@@ -47,7 +47,7 @@ console_main(options_c const &options) {
   info.set_verbosity(options.m_verbose);
 
   try {
-    info.process_file(options.m_file_name);
+    info.open_and_process_file(options.m_file_name);
   } catch (mtx::kax_info::exception &ex) {
     mxinfo(ex.what());
     mxexit(2);

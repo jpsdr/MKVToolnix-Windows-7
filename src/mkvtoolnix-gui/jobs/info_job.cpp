@@ -50,7 +50,7 @@ void
 InfoJob::setupInfoJobConnections() {
   auto p = p_func();
 
-  connect(p->thread, &QThread::started,                       p->info,   &mtx::qt_kax_info_c::start_processing);
+  connect(p->thread, &QThread::started,                       p->info,   &mtx::qt_kax_info_c::run);
   connect(p->thread, &QThread::finished,                      p->info,   &QObject::deleteLater);
   connect(p->thread, &QThread::finished,                      p->thread, &QObject::deleteLater);
 

@@ -68,7 +68,7 @@ public:
   void set_destination_file_name(std::string const &file_name);
 
   void reset();
-  virtual result_e process_file(std::string const &file_name);
+  virtual result_e open_and_process_file(std::string const &file_name);
   virtual result_e process_file(mm_io_cptr const &file);
   void abort();
 
