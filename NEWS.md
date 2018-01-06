@@ -70,6 +70,9 @@
   to segfault.
 * mkvmerge: SRT reader: mkvmerge can now handle SRT files with timestamps
   without decimal places (e.g. `00:01:15` instead of `00:01:15.000`).
+* mkvmerge: Opus: when re-muxing Opus from Matroska mkvmerge will now write
+  "block duration" elements for all block groups where a "discard padding" is
+  set, too. Fixes #2188.
 
 ## Build system changes
 
