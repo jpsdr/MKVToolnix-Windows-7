@@ -72,7 +72,7 @@ class Target
     }
 
     obj_re          = /\.(?:moc)?o$/
-    no_file_deps_re = /\.(?:moc)?o$/
+    no_file_deps_re = /\.o$/
 
     list           = list.collect { |e| e.respond_to?(:to_a) ? e.to_a : e }.flatten
     file_mode      = (options[:type] || :file) == :file
@@ -80,6 +80,7 @@ class Target
     new_sources    = list.collect { |entry| file_mode ? (entry.respond_to?(:to_a) ? entry.to_a : entry) : FileList["#{entry}/*.c", "#{entry}/*.cpp", "#{entry}/*.cc"].to_a }.flatten.select { |file| !except[file] }
     new_deps       = new_sources.collect { |file| [ file.ext(ext_map[ file.pathmap('%x') ] || 'o'), file ] }
     new_file_deps  = new_deps.reject { |src, tgt| no_file_deps_re.match src }
+    new_file_deps += new_sources.select { |file| %r{\.moc$}.match file }.map { |file| [ file, file.ext('h') ] }
     @objects       = ( @objects      + new_deps.collect { |a| a.first }.select { |file| obj_re.match file } ).uniq
     @dependencies  = ( @dependencies + new_deps.collect { |a| a.first }                                     ).uniq
     @file_deps     = ( @file_deps    + new_file_deps                                                        ).uniq
