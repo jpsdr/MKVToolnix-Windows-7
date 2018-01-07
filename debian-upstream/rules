@@ -14,7 +14,7 @@ LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 override_dh_clean:
 	[ ! -f build-config ] || rake clean:dist
 
-	dh_clean src/mkvinfo-gui config.status config.log \
+	dh_clean config.status config.log \
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
 
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
@@ -39,28 +39,10 @@ endif
 
 	rake
 
-	mv src/mkvinfo src/mkvinfo-gui
-	rm src/info/*.o src/info/qt_resources.cpp
-	rm -rf rake.d/dependency.d
-
-	cp -a config.h config.h.ref
-	sed -i -e '/#define.*HAVE_QT/d' config.h
-	touch -r config.h.ref config.h
-	rm config.h.ref
-
-	rake apps:mkvinfo USE_QT=no QT_LIBS=' ' QT_INCLUDES=' '
-
-	touch src/info/qt_resources.cpp src/info/qt_resources.o $(patsubst %.cpp,%.o,$(wildcard src/info/*.cpp)) src/info/libmtxinfo.a src/mkvinfo
-
 override_dh_install:
 	rake install DESTDIR=$(CURDIR)/debian/tmp
 
 	dh_install --list-missing -Xmkvtoolnix.xml
-
-	mv debian/mkvtoolnix/usr/bin/mkvinfo debian/mkvtoolnix/usr/bin/mkvinfo-text
-
-	dh_link -pmkvtoolnix usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-text.1.gz
-	dh_link -pmkvtoolnix-gui usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-gui.1.gz
 
 override_dh_strip:
 	dh_strip -pmkvtoolnix     --dbg-package=mkvtoolnix-dbg

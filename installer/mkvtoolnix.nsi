@@ -162,6 +162,7 @@ Section "Program files" SEC01
   # Delete files that might be present from older installation
   # if this is just an upgrade.
   Delete "$INSTDIR\mkv*.ico"
+  Delete "$INSTDIR\mkvinfo-gui.exe"
   Delete "$INSTDIR\mmg.exe"
   Delete "$INSTDIR\data\magic.mgc"
   Delete "$INSTDIR\doc\command_line_references_and_guide.html"
@@ -239,7 +240,7 @@ Section "Program files" SEC01
 
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP"
   SetOutPath "$INSTDIR"
-  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\mkvinfo GUI.lnk" "$INSTDIR\mkvinfo.exe" "-g" "$INSTDIR\mkvinfo.exe"
+  Delete "$SMPROGRAMS\$ICONS_GROUP\mkvinfo GUI.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI preview.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line references and guide.lnk"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI.lnk" "$INSTDIR\mkvtoolnix-gui.exe" "" "$INSTDIR\mkvtoolnix-gui.exe"

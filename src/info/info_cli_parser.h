@@ -13,7 +13,6 @@
 #include "common/common_pch.h"
 
 #include "common/cli_parser.h"
-#include "info/mkvinfo.h"
 #include "info/options.h"
 
 class info_cli_parser_c: public mtx::cli::parser_c {
@@ -28,8 +27,6 @@ public:
 protected:
   void init_parser();
 
-  void set_gui();
-  void set_no_gui();
   void set_checksum();
   void set_check_mode();
   void set_summary();

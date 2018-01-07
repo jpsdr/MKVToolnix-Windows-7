@@ -34,10 +34,6 @@ info_cli_parser_c::init_parser() {
 
   add_section_header(YT("Options"));
 
-#if defined(HAVE_QT)
-  OPT("G|no-gui",        set_no_gui,        YT("Do not start the GUI."));
-  OPT("g|gui",           set_gui,           YT("Start the GUI (and open inname if it was given)."));
-#endif
   OPT("c|checksum",      set_checksum,      YT("Calculate and display checksums of frame contents."));
   OPT("C|check-mode",    set_check_mode,    YT("Calculate and display checksums and use verbosity level 4."));
   OPT("s|summary",       set_summary,       YT("Only show summaries of the contents, not each element."));
@@ -53,22 +49,6 @@ info_cli_parser_c::init_parser() {
 }
 
 #undef OPT
-
-void
-info_cli_parser_c::set_gui() {
-  if (!ui_graphical_available())
-    mxerror("mkvinfo was compiled without GUI support.\n");
-
-  m_options.m_use_gui = true;
-}
-
-void
-info_cli_parser_c::set_no_gui() {
-  if (!ui_graphical_available())
-    mxerror("mkvinfo was compiled without GUI support.\n");
-
-  m_options.m_use_gui = false;
-}
 
 void
 info_cli_parser_c::set_checksum() {

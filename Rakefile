@@ -65,17 +65,15 @@ def setup_globals
   }
 
   $build_mkvtoolnix_gui  ||=  c?(:USE_QT)
-  $build_mkvinfo_gui       =  c?(:USE_QT) && ($building_for[:windows] || $building_for[:macos])
   $build_tools           ||=  c?(:BUILD_TOOLS)
 
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
-  $programs                << "mkvinfo-gui"    if $build_mkvinfo_gui
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
   $tools                   =  %w{ac3parser base64tool checksum diracparser ebml_validator hevc_dump hevcc_dump mpls_dump vc1parser}
 
   $application_subdirs     =  { "mkvtoolnix-gui" => "mkvtoolnix-gui/" }
-  $applications            =  $programs.collect { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
-  $manpages                =  $programs.reject { |name| %r{mkvinfo-gui}.match(name) }.map { |name| "doc/man/#{name}.1" }
+  $applications            =  $programs.map { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
+  $manpages                =  $programs.map { |name| "doc/man/#{name}.1" }
   $manpages                << "doc/man/mkvtoolnix-gui.1" if $build_mkvtoolnix_gui
 
   $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Isrc"
@@ -795,7 +793,6 @@ namespace :install do
     install_dir :desktopdir, :mimepackagesdir
     install_data :mimepackagesdir, FileList[ "#{$top_srcdir}/share/mime/*.xml" ]
     if c?(:USE_QT)
-      install_data :desktopdir, "#{$top_srcdir}/share/desktop/org.bunkus.mkvinfo.desktop"
       install_data :desktopdir, "#{$top_srcdir}/share/desktop/org.bunkus.mkvtoolnix-gui.desktop"
     end
 
@@ -999,29 +996,10 @@ Application.new("src/mkvmerge").
 Application.new("src/mkvinfo").
   description("Build the mkvinfo executable").
   aliases(:mkvinfo).
-  sources(FileList["src/info/*.cpp"].to_a.reject { |f| %r{/qt|mkvinfo-gui.cpp|sys_windows.cpp$}.match(f) }).
+  sources(FileList["src/info/*.cpp"]).
   sources("src/info/resources.o", :if => $building_for[:windows]).
-  libraries($common_libs).
-  only_if(c?(:USE_QT)).
-  qt_dependencies_and_sources("info", :cpp_except => [ "src/info/sys_windows.cpp", "src/info/mkvinfo-gui.cpp" ]).
-  sources("src/info/qt_resources.cpp").
-  sources("src/info/sys_windows.cpp", :if => $building_for[:windows]).
-  libraries(:qt).
-  end_if.
-  libraries($custom_libs).
+  libraries($common_libs, $custom_libs).
   create
-
-if $build_mkvinfo_gui
-  Application.new("src/mkvinfo-gui").
-    description("Build the mkvinfo-gui executable").
-    aliases("mkvinfo-gui").
-    qt_dependencies_and_sources("info", :cpp_except => [ "src/info/sys_windows.cpp", "src/info/mkvinfo.cpp" ]).
-    sources("src/info/qt_resources.cpp").
-    sources("src/info/sys_windows.cpp", "src/info/resources.o", :if => $building_for[:windows]).
-    libraries($common_libs, :qt, $custom_libs).
-    libraries("-mwindows", :if => $building_for[:windows]).
-    create
-end
 
 #
 # mkvextract

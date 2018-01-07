@@ -15,21 +15,21 @@
 #include "common/command_line.h"
 #include "common/kax_info.h"
 #include "common/version.h"
-#include "info/mkvinfo.h"
 #include "info/info_cli_parser.h"
 
 void
-setup(char const *argv0,
-      std::string const &locale) {
+setup(char const *argv0) {
   mtx_common_init("mkvinfo", argv0);
-
-  init_locales(locale);
-
   mtx::cli::g_version_info = get_version_info("mkvinfo", vif_full);
 }
 
-void
-console_main(options_c const &options) {
+int
+main(int argc,
+     char **argv) {
+  setup(argv[0]);
+
+  auto options = info_cli_parser_c(mtx::cli::args_in_utf8(argc, argv)).run();
+
   set_process_priority(-1);
 
   if (options.m_file_name.empty())
@@ -52,19 +52,8 @@ console_main(options_c const &options) {
     mxinfo(ex.what());
     mxexit(2);
   }
-}
-
-int
-main(int argc,
-     char **argv) {
-  setup(argv[0]);
-
-  auto options = info_cli_parser_c(mtx::cli::args_in_utf8(argc, argv)).run();
-
-  if (options.m_use_gui)
-    ui_run(argc, argv, options);
-  else
-    console_main(options);
 
   mxexit();
+
+  return 0;
 }

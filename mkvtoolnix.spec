@@ -90,7 +90,7 @@ strip ${RPM_BUILD_ROOT}/usr/bin/*
 drake DESTDIR=$RPM_BUILD_ROOT install
 %endif
 
-for f in mkvtoolnix-gui mkvinfo; do
+for f in mkvtoolnix-gui; do
   desktop-file-validate %{buildroot}%{_datadir}/applications/org.bunkus.$f.desktop
 done
 
