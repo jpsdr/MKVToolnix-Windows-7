@@ -5,6 +5,7 @@ require "fileutils"
 
 $git_mutex     = Mutex.new
 $message_mutex = Mutex.new
+$dir_mutex     = Mutex.new
 $action_width  = 12
 
 def puts(message)
@@ -102,8 +103,10 @@ def runq_git(msg, cmdline, options = {})
 end
 
 def ensure_dir dir
-  File.unlink(dir) if  FileTest.exist?(dir) && !FileTest.directory?(dir)
-  Dir.mkdir(dir)   if !FileTest.exist?(dir)
+  $dir_mutex.synchronize {
+    File.unlink(dir) if  FileTest.exist?(dir) && !FileTest.directory?(dir)
+    Dir.mkdir(dir)   if !FileTest.exist?(dir)
+  }
 end
 
 def create_dependency_dirs
