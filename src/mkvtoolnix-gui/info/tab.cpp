@@ -2,7 +2,6 @@
 
 #include <QDebug>
 #include <QStandardItem>
-#include <QThreadPool>
 #include <QVector>
 
 #include <ebml/EbmlDummy.h>
@@ -17,12 +16,14 @@
 #include "common/mm_io_x.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/info/tab.h"
+#include "mkvtoolnix-gui/info/initial_scan.h"
 #include "mkvtoolnix-gui/info/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
+#include "mkvtoolnix-gui/util/serial_worker_queue.h"
 #include "mkvtoolnix-gui/util/tree.h"
 
 namespace mtx { namespace gui { namespace Info {
@@ -45,6 +46,8 @@ public:
 
   QString m_fileName;
   QVector<QStandardItem *> m_treeInsertionPosition;
+  QThread *m_queueThread{};
+  Util::SerialWorkerQueue *m_queue{};
 };
 
 Tab::Tab(QWidget *parent)
@@ -63,9 +66,19 @@ Tab::Tab(QWidget *parent)
   Util::HeaderViewManager::create(*p->m_ui->elements, "Info::Elements");
 
   retranslateUi();
+
+  auto pair        = Util::SerialWorkerQueue::create();
+  p->m_queueThread = pair.first;
+  p->m_queue       = pair.second;
+  p->m_queueThread->start();
 }
 
 Tab::~Tab() {
+  auto p = p_func();
+
+  p->m_queue->abort();
+  p->m_queueThread->quit();
+  p->m_queueThread->wait();
 }
 
 QString
@@ -88,7 +101,7 @@ Tab::load(QString const &fileName) {
     p->m_treeInsertionPosition.clear();
     p->m_treeInsertionPosition << model->invisibleRootItem();
 
-    p->m_info->setAutoDelete(false);
+    p->m_info->moveToThread(p->m_queueThread);
     p->m_info->set_source_file(p->m_file);
     p->m_info->set_use_gui(true);
     p->m_info->set_retain_elements(true);
@@ -102,7 +115,7 @@ Tab::load(QString const &fileName) {
 
     emit titleChanged();
 
-    QThreadPool::globalInstance()->start(p->m_info.get());
+    p->m_queue->add(new InitialScan{*p->m_info});
 
   } catch (mtx::mm_io::exception &ex) {
     Util::MessageBox::critical(this)->title(QY("Reading failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();

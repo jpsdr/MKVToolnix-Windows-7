@@ -16,13 +16,13 @@
 #include "common/common_pch.h"
 
 #include <QObject>
-#include <QRunnable>
 
 #include "common/kax_info.h"
+#include "mkvtoolnix-gui/util/runnable.h"
 
 namespace mtx { namespace gui { namespace Util {
 
-class KaxInfo: public QObject, public QRunnable, public ::mtx::kax_info_c {
+class KaxInfo: public QObject, public ::mtx::kax_info_c {
   Q_OBJECT;
 
 public:
@@ -38,7 +38,8 @@ public:
   virtual void ui_show_progress(int percentage, std::string const &text) override;
 
 public slots:
-  virtual void run() override;
+  virtual void run();
+  virtual void abort();
 
 signals:
   void element_info_found(int level, QString const &text, int64_t position, int64_t size);

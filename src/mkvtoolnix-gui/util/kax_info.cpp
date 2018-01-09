@@ -89,4 +89,9 @@ KaxInfo::run() {
     open_and_process_file(p->m_source_file_name);
 }
 
+void
+KaxInfo::abort() {
+  ::mtx::kax_info_c::abort();
+}
+
 }}}
