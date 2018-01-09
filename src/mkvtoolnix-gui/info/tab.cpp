@@ -178,7 +178,8 @@ Tab::showElement(int level,
 
 void
 Tab::showError(const QString &message) {
-  qDebug() << "error" << message;
+  Util::MessageBox::critical(this)->title(QY("Error reading Matroska file")).text(message).exec();
+  emit removeThisTab();
 }
 
 void

@@ -1207,7 +1207,7 @@ kax_info_c::process_file() {
   // Find the EbmlHead element. Must be the first one.
   auto l0 = ebml_element_cptr{ p->m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL) };
   if (!l0 || !Is<EbmlHead>(*l0)) {
-    ui_show_error(Y("No EBML head found."));
+    ui_show_error((boost::format("%1% %2%") % Y("No EBML head found.") % Y("This file is probably not a Matroska file.")).str());
     return result_e::failed;
   }
 
