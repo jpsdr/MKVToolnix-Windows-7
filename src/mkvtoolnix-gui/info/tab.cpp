@@ -16,11 +16,11 @@
 #include "common/mm_file_io.h"
 #include "common/mm_io_x.h"
 #include "common/qt.h"
-#include "common/qt_kax_info.h"
 #include "mkvtoolnix-gui/forms/info/tab.h"
 #include "mkvtoolnix-gui/info/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
+#include "mkvtoolnix-gui/util/kax_info.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/tree.h"
@@ -39,7 +39,7 @@ int EbmlIdRole      = Qt::UserRole + 4;
 class TabPrivate {
 public:
   std::unique_ptr<Ui::Tab> m_ui{new Ui::Tab};
-  std::unique_ptr<mtx::qt_kax_info_c> m_info;
+  std::unique_ptr<Util::KaxInfo> m_info;
 
   mm_io_cptr m_file;
 
@@ -82,7 +82,7 @@ Tab::load(QString const &fileName) {
     auto model    = static_cast<QStandardItemModel *>(p->m_ui->elements->model());
     p->m_fileName = fileName;
     p->m_file     = std::static_pointer_cast<mm_io_c>(std::make_shared<mm_file_io_c>(to_utf8(fileName), MODE_READ));
-    p->m_info     = std::make_unique<mtx::qt_kax_info_c>();
+    p->m_info     = std::make_unique<Util::KaxInfo>();
 
     model->removeRows(0, model->rowCount());
     p->m_treeInsertionPosition.clear();
@@ -93,12 +93,12 @@ Tab::load(QString const &fileName) {
     p->m_info->set_use_gui(true);
     p->m_info->set_retain_elements(true);
 
-    connect(p->m_info.get(), &mtx::qt_kax_info_c::started,            []() { MainWindow::get()->startStopQueueSpinner(true); });
-    connect(p->m_info.get(), &mtx::qt_kax_info_c::finished,           []() { MainWindow::get()->startStopQueueSpinner(false); });
-    connect(p->m_info.get(), &mtx::qt_kax_info_c::finished,           this, &Tab::expandImportantElements);
-    connect(p->m_info.get(), &mtx::qt_kax_info_c::element_info_found, this, &Tab::showElementInfo);
-    connect(p->m_info.get(), &mtx::qt_kax_info_c::element_found,      this, &Tab::showElement);
-    connect(p->m_info.get(), &mtx::qt_kax_info_c::error_found,        this, &Tab::showError);
+    connect(p->m_info.get(), &Util::KaxInfo::started,            []() { MainWindow::get()->startStopQueueSpinner(true); });
+    connect(p->m_info.get(), &Util::KaxInfo::finished,           []() { MainWindow::get()->startStopQueueSpinner(false); });
+    connect(p->m_info.get(), &Util::KaxInfo::finished,           this, &Tab::expandImportantElements);
+    connect(p->m_info.get(), &Util::KaxInfo::element_info_found, this, &Tab::showElementInfo);
+    connect(p->m_info.get(), &Util::KaxInfo::element_found,      this, &Tab::showElement);
+    connect(p->m_info.get(), &Util::KaxInfo::error_found,        this, &Tab::showError);
 
     emit titleChanged();
 

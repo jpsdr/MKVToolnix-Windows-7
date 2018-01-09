@@ -14,8 +14,8 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/kax_element_names.h"
+#include "common/kax_info.h"
 #include "common/qt.h"
-#include "common/qt_kax_info.h"
 #include "common/random.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
@@ -215,7 +215,7 @@ App::reinitializeLanguageLists() {
 
   initializeLanguageLists();
 
-  qt_kax_info_c::init_common_formats();
+  ::mtx::kax_info_c::init_common_formats();
   kax_element_names_c::reset();
 }
 

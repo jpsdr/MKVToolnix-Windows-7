@@ -50,16 +50,16 @@ void
 InfoJob::setupInfoJobConnections() {
   auto p = p_func();
 
-  connect(p->thread, &QThread::started,                       p->info,   &mtx::qt_kax_info_c::run);
+  connect(p->thread, &QThread::started,                       p->info,   &Util::KaxInfo::run);
   connect(p->thread, &QThread::finished,                      p->info,   &QObject::deleteLater);
   connect(p->thread, &QThread::finished,                      p->thread, &QObject::deleteLater);
 
-  connect(p->info,   &mtx::qt_kax_info_c::started,            this,      &InfoJob::infoStarted);
-  connect(p->info,   &mtx::qt_kax_info_c::finished,           this,      &InfoJob::infoFinished);
-  connect(p->info,   &mtx::qt_kax_info_c::element_info_found, this,      &InfoJob::showElementInfo);
-  connect(p->info,   &mtx::qt_kax_info_c::element_found,      this,      &InfoJob::showElement);
-  connect(p->info,   &mtx::qt_kax_info_c::error_found,        this,      &InfoJob::showError);
-  connect(p->info,   &mtx::qt_kax_info_c::progress_changed,   this,      &InfoJob::updateProgress);
+  connect(p->info,   &Util::KaxInfo::started,            this,      &InfoJob::infoStarted);
+  connect(p->info,   &Util::KaxInfo::finished,           this,      &InfoJob::infoFinished);
+  connect(p->info,   &Util::KaxInfo::element_info_found, this,      &InfoJob::showElementInfo);
+  connect(p->info,   &Util::KaxInfo::element_found,      this,      &InfoJob::showElement);
+  connect(p->info,   &Util::KaxInfo::error_found,        this,      &InfoJob::showError);
+  connect(p->info,   &Util::KaxInfo::progress_changed,   this,      &InfoJob::updateProgress);
 }
 
 void
@@ -70,7 +70,7 @@ InfoJob::start() {
     return;
 
   p->thread = new QThread;
-  p->info   = new mtx::qt_kax_info_c;
+  p->info   = new Util::KaxInfo;
 
   p->info->set_use_gui(true);
   p->info->set_source_file_name(to_utf8(p->config->m_sourceFileName));

@@ -3,8 +3,8 @@
 #include "common/common_pch.h"
 
 #include "common/qt.h"
-#include "common/qt_kax_info.h"
 #include "mkvtoolnix-gui/jobs/job.h"
+#include "mkvtoolnix-gui/util/kax_info.h"
 
 namespace mtx { namespace gui {
 

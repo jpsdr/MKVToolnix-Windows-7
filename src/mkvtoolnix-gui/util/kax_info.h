@@ -20,15 +20,15 @@
 
 #include "common/kax_info.h"
 
-namespace mtx {
+namespace mtx { namespace gui { namespace Util {
 
-class qt_kax_info_c: public QObject, public QRunnable, public kax_info_c {
+class KaxInfo: public QObject, public QRunnable, public ::mtx::kax_info_c {
   Q_OBJECT;
 
 public:
-  qt_kax_info_c() = default;
-  qt_kax_info_c(QString const &file_name);
-  virtual ~qt_kax_info_c();
+  KaxInfo() = default;
+  KaxInfo(QString const &file_name);
+  virtual ~KaxInfo();
 
   virtual result_e process_file() override;
 
@@ -49,6 +49,6 @@ signals:
   void finished(mtx::kax_info_c::result_e result);
 };
 
-}
+}}}
 
-Q_DECLARE_METATYPE(mtx::kax_info_c::result_e);
+Q_DECLARE_METATYPE(::mtx::kax_info_c::result_e);

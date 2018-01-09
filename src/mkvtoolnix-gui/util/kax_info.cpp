@@ -5,32 +5,30 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   A Qt GUI for mkvinfo
-
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_QT)
+#include <matroska/KaxCluster.h>
 
-# include "common/kax_element_names.h"
-# include "common/qt.h"
-# include "common/qt_kax_info.h"
-# include "common/kax_info_p.h"
+#include "common/kax_element_names.h"
+#include "common/qt.h"
+#include "common/kax_info_p.h"
+#include "mkvtoolnix-gui/util/kax_info.h"
 
-namespace mtx {
+namespace mtx { namespace gui { namespace Util {
 
-qt_kax_info_c::qt_kax_info_c(QString const &file_name)
+KaxInfo::KaxInfo(QString const &file_name)
 {
   set_source_file_name(to_utf8(file_name));
 }
 
-qt_kax_info_c::~qt_kax_info_c() {
+KaxInfo::~KaxInfo() {
 }
 
 void
-qt_kax_info_c::ui_show_error(std::string const &error) {
+KaxInfo::ui_show_error(std::string const &error) {
   if (!p_func()->m_use_gui)
     kax_info_c::ui_show_error(error);
   else
@@ -38,10 +36,10 @@ qt_kax_info_c::ui_show_error(std::string const &error) {
 }
 
 void
-qt_kax_info_c::ui_show_element_info(int level,
-                                    std::string const &text,
-                                    int64_t position,
-                                    int64_t size) {
+KaxInfo::ui_show_element_info(int level,
+                              std::string const &text,
+                              int64_t position,
+                              int64_t size) {
   auto p = p_func();
 
   if (!p->m_use_gui || !p->m_destination_file_name.empty())
@@ -53,7 +51,7 @@ qt_kax_info_c::ui_show_element_info(int level,
 }
 
 void
-qt_kax_info_c::ui_show_element(EbmlElement &e) {
+KaxInfo::ui_show_element(EbmlElement &e) {
   auto p = p_func();
 
   if (!p->m_use_gui || !p->m_destination_file_name.empty())
@@ -65,13 +63,13 @@ qt_kax_info_c::ui_show_element(EbmlElement &e) {
 }
 
 void
-qt_kax_info_c::ui_show_progress(int percentage,
-                                std::string const &text) {
+KaxInfo::ui_show_progress(int percentage,
+                          std::string const &text) {
   emit progress_changed(percentage, Q(text));
 }
 
 kax_info_c::result_e
-qt_kax_info_c::process_file() {
+KaxInfo::process_file() {
   emit started();
 
   auto result = kax_info_c::process_file();
@@ -82,7 +80,7 @@ qt_kax_info_c::process_file() {
 }
 
 void
-qt_kax_info_c::run() {
+KaxInfo::run() {
   auto p = p_func();
 
   if (p->m_in)
@@ -91,6 +89,4 @@ qt_kax_info_c::run() {
     open_and_process_file(p->m_source_file_name);
 }
 
-}
-
-#endif  // defined(HAVE_QT)
+}}}
