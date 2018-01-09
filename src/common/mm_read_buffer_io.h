@@ -26,7 +26,6 @@ protected:
   bool m_eof;
   size_t m_fill;
   int64_t m_offset;
-  const size_t m_size;
   bool m_buffering;
   debugging_option_c m_debug_seek, m_debug_read;
 
@@ -40,6 +39,7 @@ public:
   inline virtual bool eof() { return m_eof; }
   virtual void clear_eof() { m_eof = false; }
   virtual void enable_buffering(bool enable);
+  virtual void set_buffer_size(std::size_t new_buffer_size = 1 << 17);
 
 protected:
   virtual uint32 _read(void *buffer, size_t size);

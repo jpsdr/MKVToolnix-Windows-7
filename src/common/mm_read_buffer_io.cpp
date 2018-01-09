@@ -27,7 +27,6 @@ mm_read_buffer_io_c::mm_read_buffer_io_c(mm_io_cptr const &in,
   , m_eof(false)
   , m_fill(0)
   , m_offset(0)
-  , m_size(buffer_size)
   , m_buffering(true)
   , m_debug_seek{"read_buffer_io|read_buffer_io_read"}
   , m_debug_read{"read_buffer_io|read_buffer_io_read"}
@@ -128,7 +127,7 @@ mm_read_buffer_io_c::_read(void *buffer,
       m_offset += m_cursor;
       m_cursor  = 0;
       m_fill    = 0;
-      avail     = std::min(get_size() - m_offset, static_cast<int64_t>(m_size));
+      avail     = std::min(get_size() - m_offset, static_cast<int64_t>(m_af_buffer->get_size()));
 
       if (!avail) {
         // must keep track of eof, as m_proxy_io->eof() will never be reached
@@ -167,4 +166,23 @@ mm_read_buffer_io_c::enable_buffering(bool enable) {
     m_cursor = 0;
     m_fill   = 0;
   }
+}
+
+void
+mm_read_buffer_io_c::set_buffer_size(std::size_t new_buffer_size) {
+  if (new_buffer_size == m_af_buffer->get_size())
+    return;
+
+  m_af_buffer->resize(new_buffer_size);
+  m_buffer = m_af_buffer->get_buffer();
+
+  if (!m_buffering)
+    return;
+
+  auto previous_pos = getFilePointer();
+  m_offset          = previous_pos;
+  m_cursor          = 0;
+  m_fill            = 0;
+
+  m_proxy_io->setFilePointer(previous_pos);
 }
