@@ -73,6 +73,8 @@
 * mkvmerge: Opus: when re-muxing Opus from Matroska mkvmerge will now write
   "block duration" elements for all block groups where a "discard padding" is
   set, too. Fixes #2188.
+* build system: fixed a race condition when creating new directories if `rake`
+  is run with `-jN` in newer versions of Ruby/`rake`. Fixes #2194.
 
 ## Build system changes
 
