@@ -286,7 +286,7 @@ public:
   std::size_t m_file_num;
   uint64_t m_id;
 
-  bool processed;
+  bool processed, m_skip_pes_payload{};
   pid_type_e type;
   codec_c codec;
   uint16_t pid;

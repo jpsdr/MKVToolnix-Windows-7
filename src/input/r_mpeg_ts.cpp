@@ -2003,12 +2003,24 @@ reader_c::handle_pes_payload(track_c &track,
 
     if (ts_payload_size < sizeof(pes_header_t)) {
       mxdebug_if(m_debug_headers, boost::format("handle_pes_payload: error: TS payload size %1% too small for PES header %2%\n") % ts_payload_size % sizeof(pes_header_t));
+      track.m_skip_pes_payload = true;
+      return;
+    }
+
+    auto const start_code = get_uint24_be(ts_payload);
+    if (start_code != 0x000001) {
+      mxdebug_if(m_debug_headers, boost::format("handle_pes_payload: error: PES header in TS payload does not start with proper start code; actual: %|1$06x|\n") % start_code);
+      track.m_skip_pes_payload = true;
       return;
     }
 
     auto pes_header                = reinterpret_cast<pes_header_t *>(ts_payload);
     track.pes_payload_size_to_read = pes_header->get_pes_packet_length() + offsetof(pes_header_t, flags1);
+    track.m_skip_pes_payload       = false;
   }
+
+  if (track.m_skip_pes_payload)
+    return;
 
   track.add_pes_payload(ts_payload, ts_payload_size);
 

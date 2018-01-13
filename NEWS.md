@@ -75,6 +75,10 @@
   set, too. Fixes #2188.
 * build system: fixed a race condition when creating new directories if `rake`
   is run with `-jN` in newer versions of Ruby/`rake`. Fixes #2194.
+* mkvmerge: MPEG TS reader: TS packet payloads will only be treated as PES
+  packets if the payload actually starts with a PES start code. The prior
+  behavior led to wrong timestamps and potentially broken frame data. Fixes
+  #2193.
 
 ## Build system changes
 
