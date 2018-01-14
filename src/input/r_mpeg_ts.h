@@ -116,6 +116,10 @@ struct PACKED_STRUCTURE packet_header_t {
   bool has_payload() const {
     return (flags2 & 0x10) == 0x10;
   }
+
+  uint8_t continuity_counter() const {
+    return flags2 & 0x0f;
+  }
 };
 
 // PAT header
@@ -292,6 +296,7 @@ public:
   uint16_t pid;
   boost::optional<uint16_t> program_number;
   boost::optional<int> m_ttx_wanted_page;
+  boost::optional<uint8_t> m_expected_next_continuity_counter;
   std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
   mtx::bytes::buffer_cptr pes_payload_read;    // buffer with the current PID payload
 
@@ -364,6 +369,7 @@ public:
   bool parse_subtitling_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
 
   bool has_packetizer() const;
+  bool transport_error_detected(packet_header_t &ts_header) const;
 
   void set_pid(uint16_t new_pid);
 
@@ -398,7 +404,7 @@ struct file_t {
   timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_timestamp_restriction_min, m_timestamp_restriction_max, m_timestamp_mpls_sync, m_last_non_subtitle_pts, m_last_non_subtitle_dts;
 
   processing_state_e m_state;
-  uint64_t m_probe_range;
+  uint64_t m_probe_range, m_position{};
 
   bool m_file_done, m_packet_sent_to_packetizer;
 
@@ -423,7 +429,7 @@ protected:
 
   std::vector<timestamp_c> m_chapter_timestamps;
 
-  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_sdt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi, m_debug_mpls;
+  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_sdt, m_debug_headers, m_debug_pes_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi, m_debug_mpls;
 
 protected:
   static int potential_packet_sizes[];
@@ -460,6 +466,7 @@ private:
   void handle_ts_payload(track_c &track, packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
   void handle_pat_pmt_payload(track_c &track, packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
   void handle_pes_payload(track_c &track, packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
+  drop_decision_e handle_transport_errors(track_c &track, packet_header_t &ts_header);
   track_ptr handle_packet_for_pid_not_listed_in_pmt(uint16_t pid);
 
   bool parse_pat(track_c &track);

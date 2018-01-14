@@ -927,11 +927,24 @@ track_c::reset_processing_state() {
   m_timestamp.reset();
   m_previous_timestamp.reset();
   m_previous_valid_timestamp.reset();
+  m_expected_next_continuity_counter.reset();
 
   clear_pes_payload();
   processed            = false;
   m_timestamps_wrapped = false;
   m_timestamp_wrap_add = timestamp_c::ns(0);
+}
+
+bool
+track_c::transport_error_detected(packet_header_t &ts_header)
+  const {
+  if (ts_header.has_transport_error())
+    return true;
+
+  if (!m_expected_next_continuity_counter)
+    return false;
+
+  return ts_header.continuity_counter() != m_expected_next_continuity_counter.get();
 }
 
 // ------------------------------------------------------------
@@ -1049,6 +1062,7 @@ reader_c::reader_c(const track_info_c &ti,
   , m_debug_pat_pmt{           "mpeg_ts|pat|pmt|headers"}
   , m_debug_sdt{               "mpeg_ts|sdt|headers"}
   , m_debug_headers{           "mpeg_ts|headers"}
+  , m_debug_pes_headers{       "mpeg_ts|headers|pes_headers"}
   , m_debug_packet{            "mpeg_ts|packet"}
   , m_debug_aac{               "mpeg_ts|mpeg_aac"}
   , m_debug_timestamp_wrapping{"mpeg_ts|timestamp_wrapping"}
@@ -1857,7 +1871,7 @@ reader_c::parse_pes(track_c &track) {
   }
 
   if (m_debug_packet) {
-    mxdebug(boost::format("parse_pes: PES info at file position %1% (file num %2%):\n") % (f.m_in->getFilePointer() - f.m_detected_packet_size) % track.m_file_num);
+    mxdebug(boost::format("parse_pes: PES info at file position %1% (file num %2%):\n") % f.m_position % track.m_file_num);
     mxdebug(boost::format("parse_pes:    stream_id = %1% PID = %2%\n") % static_cast<unsigned int>(pes_header->stream_id) % track.pid);
     mxdebug(boost::format("parse_pes:    PES_packet_length = %1%, PES_header_data_length = %2%, data starts at %3%\n") % pes_size % static_cast<unsigned int>(pes_header->pes_header_data_length) % to_skip);
     mxdebug(boost::format("parse_pes:    PTS? %1% (%5% processed %6%) DTS? (%7% processed %8%) %2% ESCR = %3% ES_rate = %4%\n")
@@ -1987,29 +2001,57 @@ reader_c::handle_pat_pmt_payload(track_c &track,
     probe_packet_complete(track);
 }
 
+drop_decision_e
+reader_c::handle_transport_errors(track_c &track,
+                                  packet_header_t &ts_header) {
+  auto decision = drop_decision_e::keep;
+
+  if (track.transport_error_detected(ts_header) && !track.m_skip_pes_payload) {
+    mxdebug_if(m_debug_pes_headers,
+               boost::format("handle_transport_errors: error detected for track PID %1% (0x%|1$04x|) at %2% (%3%, expected continuity_counter %4% actual %5%); dropping current PES packet (expected size %6% read %7%)\n")
+               % track.pid
+               % file().m_position
+               % (ts_header.has_transport_error() ? "transport_error flag" : "wrong continuity_counter")
+               % (track.m_expected_next_continuity_counter ? to_string(static_cast<unsigned int>(track.m_expected_next_continuity_counter.get())) : std::string{"—"})
+               % static_cast<unsigned int>(ts_header.continuity_counter())
+               % track.pes_payload_size_to_read
+               % track.pes_payload_read->get_size());
+
+    track.clear_pes_payload();
+    track.m_skip_pes_payload = true;
+    decision                 = drop_decision_e::drop;
+  }
+
+  track.m_expected_next_continuity_counter = (ts_header.continuity_counter() + (ts_header.has_payload() ? 1 : 0)) % 16;
+
+  return decision;
+}
+
 void
 reader_c::handle_pes_payload(track_c &track,
                              packet_header_t &ts_header,
                              unsigned char *ts_payload,
                              std::size_t ts_payload_size) {
+  handle_transport_errors(track, ts_header);
+
   if (ts_header.is_payload_unit_start()) {
     if (track.is_pes_payload_size_unbounded() && track.pes_payload_read->get_size())
       parse_pes(track);
 
-    if (track.pes_payload_size_to_read && track.pes_payload_read->get_size() && m_debug_headers)
+    if (track.pes_payload_size_to_read && track.pes_payload_read->get_size() && m_debug_pes_headers)
       mxdebug(boost::format("handle_pes_payload: error: dropping incomplete PES payload; target size %1% already read %2%\n") % track.pes_payload_size_to_read % track.pes_payload_read->get_size());
 
     track.clear_pes_payload();
 
     if (ts_payload_size < sizeof(pes_header_t)) {
-      mxdebug_if(m_debug_headers, boost::format("handle_pes_payload: error: TS payload size %1% too small for PES header %2%\n") % ts_payload_size % sizeof(pes_header_t));
+      mxdebug_if(m_debug_pes_headers, boost::format("handle_pes_payload: error: TS payload size %1% too small for PES header %2%\n") % ts_payload_size % sizeof(pes_header_t));
       track.m_skip_pes_payload = true;
       return;
     }
 
     auto const start_code = get_uint24_be(ts_payload);
     if (start_code != 0x000001) {
-      mxdebug_if(m_debug_headers, boost::format("handle_pes_payload: error: PES header in TS payload does not start with proper start code; actual: %|1$06x|\n") % start_code);
+      mxdebug_if(m_debug_pes_headers, boost::format("handle_pes_payload: error: PES header in TS payload does not start with proper start code; actual: %|1$06x|\n") % start_code);
       track.m_skip_pes_payload = true;
       return;
     }
@@ -2381,11 +2423,13 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
   unsigned char buf[TS_MAX_PACKET_SIZE + 1];
 
   while (!f.m_packet_sent_to_packetizer) {
+    f.m_position = f.m_in->getFilePointer();
+
     if (f.m_in->read(buf, f.m_detected_packet_size) != static_cast<unsigned int>(f.m_detected_packet_size))
       return finish();
 
     if (buf[0] != 0x47) {
-      if (resync(f.m_in->getFilePointer() - f.m_detected_packet_size))
+      if (resync(f.m_position))
         continue;
       return finish();
     }

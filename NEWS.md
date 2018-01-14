@@ -79,6 +79,12 @@
   packets if the payload actually starts with a PES start code. The prior
   behavior led to wrong timestamps and potentially broken frame data. Fixes
   #2193.
+* mkvmerge: MPEG TS reader: mkvmerge will now drop incomplete PES packets as
+  soon as an error is detected in the transport stream instead of passing the
+  incomplete frame to the packetizer. An error is assumed either if the
+  `transport_error_indicator` flag is set or if the value of the
+  `continuity_counter` header field doesn't match the expected value. Fixes
+  #2181.
 
 ## Build system changes
 
