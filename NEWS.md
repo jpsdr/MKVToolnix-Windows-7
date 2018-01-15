@@ -6,13 +6,12 @@
 
   * mkvmerge: the deprecated options `--identify-verbose` (and its counterpart
     `-I`), `--identify-for-gui`, `--identify-for-mmg` and
-    `--identification-format verbose-text` have been removed.
+    `--identification-format verbose-text`
   * all command line tools: support for the deprecated, old, proprietary format
-    used for option files has been removed.
+    used for option files
   * all command line tools: support for passing command line options via the
     deprecated environment variables `MKVTOOLNIX_OPTIONS`, `MKVEXTRACT_OPTIONS`,
-    `MKVINFO_OPTIONS`, `MKVMERGE_OPTIONS`, and `MKVPROPEDIT_OPTIONS` has been
-    removed.
+    `MKVINFO_OPTIONS`, `MKVMERGE_OPTIONS` and `MKVPROPEDIT_OPTIONS`
 
 * mkvinfo: most of its code was re-written in order to lay the groundwork for
   including its functionality in MKVToolNix GUI but with more features than
@@ -23,7 +22,7 @@
   * Several element names are a bit clearer (e.g. `Maximum cache` instead of
     `MaxCache`).
   * All timestamps and durations are now output as nanoseconds in formatted
-    form (e.g. `01:23:45.67890123`), and all additional formats (e.g. floating
+    form (e.g. `01:23:45.67890123`). All additional formats (e.g. floating
     point numbers output in seconds or milliseconds) were removed.
   * Element names for chapters and tags are now translated if a translation is
     available.
@@ -42,39 +41,17 @@
 
 ## Bug fixes
 
-* MKVToolNix GUI: update check dialog: Markdown links will now be converted to
-  clickable links. Fixes #2176.
 * mkvmerge: AVC/h.264 parser: when fixing the bitstream timing information
   mkvmerge will now use exact representations of the desired field duration if
   possible. For example, when indicating 50 fields/second `num_units_in_tick`
   is set to 1 and `time_scale` to 50 instead of 5368709 and 268435456. Part of
   the fix for #1673.
-* mkvmerge: AVC/h.264 packetizer (framed): when mkvmerge is told to fix the
-  bitstream timing information, it will now update all SPS NALUs, not just the
-  ones in the AVCC. Part of the fix for #1673.
-* mkvextract: AVC/h.264: if two consecutive IDR frames with the same
-  `idr_pic_id` parameter and no access unit delimiters are found between them,
-  mkvextract will insert an access unit delimiter in order to signal the start
-  of a new access unit. Fixes #1704.
-* mkvmerge: if there's a gap in audio timestamps, a new block group/lace will
-  be started for the first frame after each gap. Before the fix the frame
-  after the gap was often stored in the previous block group causing the gap
-  to be in the wrong place: at the end of that block group. Fixes #1700.
 * mkvmerge: AVC/h.264 parser: mkvmerge no longer assumes that encountering
   sequence parameter set or picture parameter set NALUs signal the start of a
   new frame. Fixes #2179.
-* mkvmerge: read buffer I/O class: the class could get out of sync regarding
-  the file position of the underlying file I/O class causing wrong data to be
-  returned on subsequent read operations. One result was that trying to
-  identifying MPLS files that refer to very short M2TS files caused mkvmerge
-  to segfault.
-* mkvmerge: SRT reader: mkvmerge can now handle SRT files with timestamps
-  without decimal places (e.g. `00:01:15` instead of `00:01:15.000`).
-* mkvmerge: Opus: when re-muxing Opus from Matroska mkvmerge will now write
-  "block duration" elements for all block groups where a "discard padding" is
-  set, too. Fixes #2188.
-* build system: fixed a race condition when creating new directories if `rake`
-  is run with `-jN` in newer versions of Ruby/`rake`. Fixes #2194.
+* mkvmerge: AVC/h.264 packetizer (framed): when mkvmerge is told to fix the
+  bitstream timing information, it will now update all SPS NALUs, not just the
+  ones in the AVCC. Part of the fix for #1673.
 * mkvmerge: MPEG TS reader: TS packet payloads will only be treated as PES
   packets if the payload actually starts with a PES start code. The prior
   behavior led to wrong timestamps and potentially broken frame data. Fixes
@@ -85,6 +62,29 @@
   `transport_error_indicator` flag is set or if the value of the
   `continuity_counter` header field doesn't match the expected value. Fixes
   #2181.
+* mkvmerge: Opus: when re-muxing Opus from Matroska mkvmerge will now write
+  "block duration" elements for all block groups where a "discard padding" is
+  set, too. Fixes #2188.
+* mkvmerge: SRT reader: mkvmerge can now handle SRT files with timestamps
+  without decimal places (e.g. `00:01:15` instead of `00:01:15.000`).
+* mkvmerge: read buffer I/O class: the class could get out of sync regarding
+  the file position of the underlying file I/O class causing wrong data to be
+  returned on subsequent read operations. One result was that trying to
+  identifying MPLS files that refer to very short M2TS files caused mkvmerge
+  to segfault.
+* mkvmerge: multiplexer core: if there's a gap in audio timestamps, a new
+  block group/lace will be started for the first frame after each gap. Before
+  the fix the frame after the gap was often stored in the previous block group
+  causing the gap to be in the wrong place: at the end of that block
+  group. Fixes #1700.
+* mkvextract: AVC/h.264: if two consecutive IDR frames with the same
+  `idr_pic_id` parameter and no access unit delimiters are found between them,
+  mkvextract will insert an access unit delimiter in order to signal the start
+  of a new access unit. Fixes #1704.
+* MKVToolNix GUI: update check dialog: Markdown links will now be converted to
+  clickable links. Fixes #2176.
+* build system: fixed a race condition when creating new directories if `rake`
+  is run with `-jN` in newer versions of Ruby/`rake`. Fixes #2194.
 
 ## Build system changes
 
