@@ -71,6 +71,10 @@ function build_pkgconfig {
      --enable-static --enable-shared=no
 }
 
+function build_cmake {
+  build_package cmake-3.10.0.tar.gz --prefix=${TARGET}
+}
+
 function build_ogg {
   build_package libogg-1.3.2.tar.gz --prefix=${TARGET} \
     --disable-shared --enable-static
@@ -120,6 +124,26 @@ function build_boost {
   NO_MAKE=1 CONFIGURE=./bootstrap.sh build_package boost_1_60_0.tar.bz2 \
     --with-toolset=clang
   build_tarball command "./b2 ${args} ${properties} install"
+}
+
+function build_cmark {
+  NO_CONFIGURE=1 build_package cmark-0.28.3.tar.gz
+
+  for PATCH in ${SCRIPT_PATH}/cmark-patches/*.patch; do
+    patch -p1 < ${PATCH}
+  done
+
+  mkdir build
+  cd build
+
+  $DEBUG cmake .. \
+    -DCMAKE_INSTALL_PREFIX=${TARGET} \
+    -DCMARK_TESTS=OFF \
+    -DCMARK_STATIC=ON \
+    -DCMARK_SHARED=OFF
+  $DEBUG make
+
+  build_tarball command "make DESTDIR=TMPDIR install"
 }
 
 function build_qtbase {
@@ -451,11 +475,13 @@ if [[ -z $@ ]]; then
   build_autoconf
   build_automake
   build_pkgconfig
+  build_cmake
   build_ogg
   build_vorbis
   build_flac
   build_zlib
   build_gettext
+  build_cmark
   build_boost
   build_qt
   build_ruby
