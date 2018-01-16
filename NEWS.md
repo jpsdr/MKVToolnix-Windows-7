@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* build system: `configure` was treating `--disable-ubsan` and
+  `--disable-addrsan` the same as `--enable-ubsan` and
+  `--enable-addrsan`. Fixes #2199.
+
+
 # Version 20.0.0 "I Am The Sun" 2018-01-15
 
 ## Important notes
