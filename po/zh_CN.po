@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-01-15 21:50+0100\n"
+"POT-Creation-Date: 2018-01-18 21:03+0100\n"
 "PO-Revision-Date: 2018-01-16 07:48+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -4982,7 +4982,7 @@ msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.
 msgstr "解析 '%1%' 中的章节出错: 缺少一些必要元素。\n"
 
 #: src/merge/mkvmerge.cpp:514
-#: src/propedit/tag_target.cpp:170
+#: src/propedit/tag_target.cpp:171
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "解析 '%1%' 中的标签出错: 缺少一些必要元素。\n"
@@ -7274,7 +7274,7 @@ msgstr "未在 '--%1% %2%' 中指定轨道 ID。\n"
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "没有找到编辑选项 '%1%' 对应的轨道。%2%\n"
 
-#: src/propedit/tag_target.cpp:264
+#: src/propedit/tag_target.cpp:269
 msgid "No track headers were found for which statistics could be calculated.\n"
 msgstr "未找到可以计算统计信息的轨道头。\n"
 
@@ -7936,9 +7936,9 @@ msgstr "进度:"
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2917
 #: src/merge/output_control.cpp:340
-#: src/propedit/tag_target.cpp:336
-#: src/propedit/tag_target.cpp:349
 #: src/propedit/tag_target.cpp:354
+#: src/propedit/tag_target.cpp:367
+#: src/propedit/tag_target.cpp:372
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "进度: %1%%%%2%"
@@ -9959,7 +9959,7 @@ msgstr "正在修复文件，第 3/4 步..."
 msgid "The file is being fixed, part 4/4..."
 msgstr "正在修复文件，第 4/4 步..."
 
-#: src/propedit/tag_target.cpp:335
+#: src/propedit/tag_target.cpp:353
 msgid "The file is read in order to create track statistics.\n"
 msgstr "要创建轨道统计信息，需要读取该文件。\n"
 
@@ -11254,6 +11254,11 @@ msgstr "语言在此列表中的轨道默认设为不复制。"
 
 #: src/extract/xtr_base.cpp:125
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
+msgstr "无法提取使用不支持的内容编码方案 (压缩或加密) 的轨道。\n"
+
+#: src/propedit/tag_target.cpp:262
+#, fuzzy
+msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "无法提取使用不支持的内容编码方案 (压缩或加密) 的轨道。\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249

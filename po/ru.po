@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-01-15 21:50+0100\n"
+"POT-Creation-Date: 2018-01-18 21:03+0100\n"
 "PO-Revision-Date: 2018-01-16 20:23+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -4897,7 +4897,7 @@ msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.
 msgstr "Ошибка при разборе глав в '%1%': некоторые обязательные элементы отсутствуют.\n"
 
 #: src/merge/mkvmerge.cpp:514
-#: src/propedit/tag_target.cpp:170
+#: src/propedit/tag_target.cpp:171
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "Ошибка при разборе тегов в '%1%': некоторые обязательные элементы отсутствуют.\n"
@@ -7192,7 +7192,7 @@ msgstr "Не указан идентификатор дорожки в '--%1% %2
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "Не найдено дорожки, соответствующей спецификации редактирования '%1%'. %2%\n"
 
-#: src/propedit/tag_target.cpp:264
+#: src/propedit/tag_target.cpp:269
 msgid "No track headers were found for which statistics could be calculated.\n"
 msgstr "Не найдено никаких заголовков дорожек, для которых могла бы быть вычислена статистика.\n"
 
@@ -7878,9 +7878,9 @@ msgstr "Выполнено:"
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2917
 #: src/merge/output_control.cpp:340
-#: src/propedit/tag_target.cpp:336
-#: src/propedit/tag_target.cpp:349
 #: src/propedit/tag_target.cpp:354
+#: src/propedit/tag_target.cpp:367
+#: src/propedit/tag_target.cpp:372
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "Обработано: %1%%%%2%"
@@ -9935,7 +9935,7 @@ msgstr "Производится исправление файла, часть 3
 msgid "The file is being fixed, part 4/4..."
 msgstr "Производится исправление файла, часть 4/4..."
 
-#: src/propedit/tag_target.cpp:335
+#: src/propedit/tag_target.cpp:353
 msgid "The file is read in order to create track statistics.\n"
 msgstr "Файл считывается для создания статистики дорожки.\n"
 
@@ -11245,6 +11245,11 @@ msgstr "Дорожки с выбранным в этом списке языко
 
 #: src/extract/xtr_base.cpp:125
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
+msgstr "Дорожки с неподдерживаемыми схемами кодирования данных (сжатие или шифрование) не могут быть извлечены.\n"
+
+#: src/propedit/tag_target.cpp:262
+#, fuzzy
+msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Дорожки с неподдерживаемыми схемами кодирования данных (сжатие или шифрование) не могут быть извлечены.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249

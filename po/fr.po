@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-01-15 21:50+0100\n"
+"POT-Creation-Date: 2018-01-18 21:03+0100\n"
 "PO-Revision-Date: 2018-01-01 17:20+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
@@ -5060,7 +5060,7 @@ msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.
 msgstr "Erreur à l'analyse des chapitres dans « %1% » : des éléments obligatoires manquent.\n"
 
 #: src/merge/mkvmerge.cpp:514
-#: src/propedit/tag_target.cpp:170
+#: src/propedit/tag_target.cpp:171
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "Erreur à l'analyse des balises dans « %1% » : des éléments obligatoires manquent.\n"
@@ -7353,7 +7353,7 @@ msgstr "Aucun ID de piste spécifié dans « --%1% %2% ».\n"
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "Aucune piste correspondant à la spécification de l'édition « %1% » n'a été trouvée. %2%\n"
 
-#: src/propedit/tag_target.cpp:264
+#: src/propedit/tag_target.cpp:269
 msgid "No track headers were found for which statistics could be calculated.\n"
 msgstr "Aucun entête de piste n'a été trouvé pour lequel des statistiques pourraient être établies.\n"
 
@@ -8023,9 +8023,9 @@ msgstr "Progression :"
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2917
 #: src/merge/output_control.cpp:340
-#: src/propedit/tag_target.cpp:336
-#: src/propedit/tag_target.cpp:349
 #: src/propedit/tag_target.cpp:354
+#: src/propedit/tag_target.cpp:367
+#: src/propedit/tag_target.cpp:372
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "Progression : %1%%%%2%"
@@ -10070,7 +10070,7 @@ msgstr "Le fichier est en cours de correction, partiel 3/4…"
 msgid "The file is being fixed, part 4/4..."
 msgstr "Le fichier est en cours de correction, partiel 4/4…"
 
-#: src/propedit/tag_target.cpp:335
+#: src/propedit/tag_target.cpp:353
 msgid "The file is read in order to create track statistics.\n"
 msgstr "Le fichier est lu afin de créer des statistiques de piste.\n"
 
@@ -11378,6 +11378,11 @@ msgstr "Les pistes avec une langue dans cette liste seront marquées pour ne pas
 
 #: src/extract/xtr_base.cpp:125
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
+msgstr "Les pistes avec schémas d'encodage de données non gérés (compression ou chiffrement) ne peuvent pas être extraites.\n"
+
+#: src/propedit/tag_target.cpp:262
+#, fuzzy
+msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Les pistes avec schémas d'encodage de données non gérés (compression ou chiffrement) ne peuvent pas être extraites.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249

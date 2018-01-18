@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-01-15 21:50+0100\n"
+"POT-Creation-Date: 2018-01-18 21:03+0100\n"
 "PO-Revision-Date: 2018-01-16 02:34+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -5018,7 +5018,7 @@ msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.
 msgstr "'%1%'에서 챕터를 분석하는 동안 오류 발생: 필수 요소의 일부가 누락되어 있습니다.\n"
 
 #: src/merge/mkvmerge.cpp:514
-#: src/propedit/tag_target.cpp:170
+#: src/propedit/tag_target.cpp:171
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "'%1%'에서 태그를 분석하는 동안 오류 발생: 필수 요소의 일부가 누락되어 있습니다.\n"
@@ -7310,7 +7310,7 @@ msgstr "'--%1% %2%'에 트랙 ID가 지정되어 있지 않습니다.\n"
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "edit로 지정된 '%1%'에서 해당 트랙을 찾지 못했습니다. %2%\n"
 
-#: src/propedit/tag_target.cpp:264
+#: src/propedit/tag_target.cpp:269
 msgid "No track headers were found for which statistics could be calculated.\n"
 msgstr "통계를 계산할 수 있는 트랙 헤더를 찾지 못했습니다.\n"
 
@@ -7973,9 +7973,9 @@ msgstr "진행 상태:"
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2917
 #: src/merge/output_control.cpp:340
-#: src/propedit/tag_target.cpp:336
-#: src/propedit/tag_target.cpp:349
 #: src/propedit/tag_target.cpp:354
+#: src/propedit/tag_target.cpp:367
+#: src/propedit/tag_target.cpp:372
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "진행 상태: %1%%%%2%"
@@ -10005,7 +10005,7 @@ msgstr "파일을 수정 중입니다, 3/4 부분 수정 중..."
 msgid "The file is being fixed, part 4/4..."
 msgstr "파일을 수정 중입니다, 4/4 부분 수정 중..."
 
-#: src/propedit/tag_target.cpp:335
+#: src/propedit/tag_target.cpp:353
 msgid "The file is read in order to create track statistics.\n"
 msgstr "트랙 통계를 만들기 위해 파일을 읽었습니다.\n"
 
@@ -11300,6 +11300,11 @@ msgstr "이 목록의 언어로 된 트랙은 기본적으로 복사하지 않�
 
 #: src/extract/xtr_base.cpp:125
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
+msgstr "지원되지 않는 방식(압축/암호화)으로 인코딩된 내용은 추출할 수 없습니다.\n"
+
+#: src/propedit/tag_target.cpp:262
+#, fuzzy
+msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "지원되지 않는 방식(압축/암호화)으로 인코딩된 내용은 추출할 수 없습니다.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249

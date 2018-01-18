@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-01-15 21:50+0100\n"
+"POT-Creation-Date: 2018-01-18 21:03+0100\n"
 "PO-Revision-Date: 2017-11-07 02:53+0100\n"
 "Last-Translator: René Maassen <bmom43@hotmail.com>\n"
 "Language-Team: \n"
@@ -5143,7 +5143,7 @@ msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.
 msgstr "Fout bij ontleden van hoofdstukken '%1%': sommige verplichte elementen ontbreken.\n"
 
 #: src/merge/mkvmerge.cpp:514
-#: src/propedit/tag_target.cpp:170
+#: src/propedit/tag_target.cpp:171
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "Fout bij ontleden van markeringen '%1%': sommige verplichte elementen ontbreken.\n"
@@ -7461,7 +7461,7 @@ msgstr "Geen spoor ID opgegeven in '--%1% %2%'.\n"
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "Geen spoor dat beantwoordt aan te bewerken specificaties '%1%' is gevonden. %2%\n"
 
-#: src/propedit/tag_target.cpp:264
+#: src/propedit/tag_target.cpp:269
 msgid "No track headers were found for which statistics could be calculated.\n"
 msgstr "Er werden geen spoor beginblokken gevonden waarvoor statistieken konden worden berekend.\n"
 
@@ -8140,9 +8140,9 @@ msgstr "Voortgang:"
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2917
 #: src/merge/output_control.cpp:340
-#: src/propedit/tag_target.cpp:336
-#: src/propedit/tag_target.cpp:349
 #: src/propedit/tag_target.cpp:354
+#: src/propedit/tag_target.cpp:367
+#: src/propedit/tag_target.cpp:372
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "Voortgang: %1%%%%2%"
@@ -10206,7 +10206,7 @@ msgstr "Het bestand wordt gerepareerd, deel 3/4..."
 msgid "The file is being fixed, part 4/4..."
 msgstr "Het bestand wordt gerepareerd, deel 4/4..."
 
-#: src/propedit/tag_target.cpp:335
+#: src/propedit/tag_target.cpp:353
 msgid "The file is read in order to create track statistics.\n"
 msgstr "Het bestand is gelezen om spoor statistieken aan te maken.\n"
 
@@ -11519,6 +11519,11 @@ msgstr "Sporen met een taal in deze lijst worden standaard ingesteld om niet te 
 
 #: src/extract/xtr_base.cpp:125
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
+msgstr "Sporen met niet ondersteunde codeer schema's (compressie of versleuteling) kunnen niet uitgepakt worden.\n"
+
+#: src/propedit/tag_target.cpp:262
+#, fuzzy
+msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Sporen met niet ondersteunde codeer schema's (compressie of versleuteling) kunnen niet uitgepakt worden.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249
