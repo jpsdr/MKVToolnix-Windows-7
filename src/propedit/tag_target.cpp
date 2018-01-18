@@ -256,7 +256,7 @@ tag_target_c::read_segment_info_and_tracks() {
 
       m_default_durations_by_number[track_number] = default_duration;
       m_track_statistics_by_number.emplace(track_number, track_statistics_c{track_uid});
-      m_content_decoders_by_number.emplace(track_number, new content_decoder_c{*track});
+      m_content_decoders_by_number.emplace(track_number, std::shared_ptr<content_decoder_c>(new content_decoder_c{*track}));
 
       if (!m_content_decoders_by_number[track_number]->is_ok())
         mxerror(Y("Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"));
