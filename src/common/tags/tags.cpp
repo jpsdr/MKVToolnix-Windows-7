@@ -271,7 +271,7 @@ set_simple(KaxTag &tag,
   }
 
   if (!k_simple_tag) {
-    k_simple_tag = new KaxTagSimple;
+    k_simple_tag = static_cast<KaxTagSimple *>(empty_ebml_master(new KaxTagSimple));
     tag.PushElement(*k_simple_tag);
   }
 

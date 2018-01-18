@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: track statistics tags: the `TagDefault` element will not be
+  written anymore as it was always set to the default value `1`
+  anyway. Implements #2202.
+
 ## Bug fixes
 
 * build system: `configure` was treating `--disable-ubsan` and
