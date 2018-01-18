@@ -25,6 +25,8 @@ class KaxSimpleBlock;
 class KaxCluster;
 }
 
+class content_decoder_c;
+
 class tag_target_c: public track_target_c {
 public:
   enum tag_operation_mode_e {
@@ -42,6 +44,7 @@ public:
 
   std::unordered_map<uint64_t, uint64_t> m_default_durations_by_number;
   std::unordered_map<uint64_t, track_statistics_c> m_track_statistics_by_number;
+  std::unordered_map<uint64_t, std::shared_ptr<content_decoder_c>> m_content_decoders_by_number;
   uint64_t m_timestamp_scale{};
 
 public:
@@ -73,6 +76,7 @@ protected:
   virtual bool requires_sub_master() const;
 
   virtual bool read_segment_info_and_tracks();
+  virtual void account_frame(uint64_t track_num, uint64_t timestamp, uint64_t duration, memory_cptr frame);
   virtual void account_block_group(KaxBlockGroup &block_group, KaxCluster &cluster);
   virtual void account_simple_block(KaxSimpleBlock &simple_block, KaxCluster &cluster);
   virtual void account_one_cluster(KaxCluster &cluster);

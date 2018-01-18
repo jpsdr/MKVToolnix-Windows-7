@@ -18,6 +18,7 @@
 #include <matroska/KaxTags.h>
 #include <matroska/KaxTracks.h>
 
+#include "common/content_decoder.h"
 #include "common/hacks.h"
 #include "common/kax_analyzer.h"
 #include "common/kax_file.h"
@@ -255,6 +256,10 @@ tag_target_c::read_segment_info_and_tracks() {
 
       m_default_durations_by_number[track_number] = default_duration;
       m_track_statistics_by_number.emplace(track_number, track_statistics_c{track_uid});
+      m_content_decoders_by_number.emplace(track_number, new content_decoder_c{*track});
+
+      if (!m_content_decoders_by_number[track_number]->is_ok())
+        mxerror(Y("Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"));
     }
   }
 
@@ -263,6 +268,19 @@ tag_target_c::read_segment_info_and_tracks() {
 
   mxwarn(Y("No track headers were found for which statistics could be calculated.\n"));
   return false;
+}
+
+void
+tag_target_c::account_frame(uint64_t track_num,
+                            uint64_t timestamp,
+                            uint64_t duration,
+                            memory_cptr frame) {
+  auto &decoder = m_content_decoders_by_number[track_num];
+
+  if (decoder)
+    decoder->reverse(frame, CONTENT_ENCODING_SCOPE_BLOCK);
+
+  m_track_statistics_by_number[track_num].account(timestamp, duration, frame->get_size());
 }
 
 void
@@ -286,7 +304,7 @@ tag_target_c::account_block_group(KaxBlockGroup &block_group,
 
   for (int idx = 0; idx < static_cast<int>(num_frames); ++idx) {
     auto &data_buffer = block->GetBuffer(idx);
-    stats_itr->second.account(first_timestamp + idx * frame_duration, frame_duration, data_buffer.Size());
+    account_frame(block->TrackNum(), first_timestamp + idx * frame_duration, frame_duration, std::make_shared<memory_c>(data_buffer.Buffer(), data_buffer.Size(), false));
   }
 }
 
@@ -306,7 +324,7 @@ tag_target_c::account_simple_block(KaxSimpleBlock &simple_block,
 
   for (int idx = 0; idx < static_cast<int>(num_frames); ++idx) {
     auto &data_buffer = simple_block.GetBuffer(idx);
-    stats_itr->second.account(first_timestamp + idx * frame_duration, frame_duration, data_buffer.Size());
+    account_frame(simple_block.TrackNum(), first_timestamp + idx * frame_duration, frame_duration, std::make_shared<memory_c>(data_buffer.Buffer(), data_buffer.Size(), false));
   }
 }
 

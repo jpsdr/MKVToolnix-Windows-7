@@ -11,6 +11,9 @@
 * build system: `configure` was treating `--disable-ubsan` and
   `--disable-addrsan` the same as `--enable-ubsan` and
   `--enable-addrsan`. Fixes #2199.
+* mkvpropedit: adding track statistics tags: for tracks with content encoding
+  (compression) mkvpropedit is now accounting the uncompressed number of
+  bytes, not the encoded (compressed) number of bytes. Fixes #2200.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15
