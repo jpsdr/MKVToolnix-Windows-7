@@ -231,7 +231,7 @@ kax_info_c::ui_show_element_info(int level,
   std::string level_buffer(level, ' ');
   level_buffer[0] = '|';
 
-  p_func()->m_out->write((boost::format("%1%+ %2%\n") % level_buffer % create_element_text(text, position, size)).str());
+  p_func()->m_out->puts((boost::format("%1%+ %2%\n") % level_buffer % create_element_text(text, position, size)).str());
 }
 
 void
@@ -244,7 +244,7 @@ kax_info_c::ui_show_element(EbmlElement &e) {
   std::string level_buffer(p->m_level, ' ');
   level_buffer[0] = '|';
 
-  p->m_out->write((boost::format("%1%+ %2%\n") % level_buffer % create_text_representation(e)).str());
+  p->m_out->puts((boost::format("%1%+ %2%\n") % level_buffer % create_text_representation(e)).str());
 }
 
 void
@@ -649,17 +649,17 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     if (!p->m_show_summary)
       return;
 
-    p->m_out->write((boost::format(Y("Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"))
-                  % p->m_track->tnum
-                  % (  'a' == p->m_track->type ? Y("audio")
-                     : 'v' == p->m_track->type ? Y("video")
-                     : 's' == p->m_track->type ? Y("subtitles")
-                     : 'b' == p->m_track->type ? Y("buttons")
-                     :                           Y("unknown"))
-                  % p->m_track->codec_id
-                  % p->m_track->fourcc
-                  % (p->m_summary.empty() ? "" : ", ")
-                  % boost::join(p->m_summary, ", ")).str());
+    p->m_out->puts((boost::format(Y("Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"))
+                   % p->m_track->tnum
+                   % (  'a' == p->m_track->type ? Y("audio")
+                      : 'v' == p->m_track->type ? Y("video")
+                      : 's' == p->m_track->type ? Y("subtitles")
+                      : 'b' == p->m_track->type ? Y("buttons")
+                      :                           Y("unknown"))
+                   % p->m_track->codec_id
+                   % p->m_track->fourcc
+                   % (p->m_summary.empty() ? "" : ", ")
+                   % boost::join(p->m_summary, ", ")).str());
   });
 
   // Simple formatters:
@@ -935,24 +935,24 @@ kax_info_c::post_block_group(EbmlElement &e) {
       }
 
       if (p->m_block_duration)
-        p->m_out->write((s_common_formats[s_bf_block_group_summary_with_duration]
-                      % (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I')
-                      % p->m_lf_tnum
-                      % format_timestamp(p->m_lf_timestamp)
-                      % format_timestamp(*p->m_block_duration)
-                      % p->m_frame_sizes[fidx]
-                      % p->m_frame_adlers[fidx]
-                      % p->m_frame_hexdumps[fidx]
-                      % position).str());
+        p->m_out->puts((s_common_formats[s_bf_block_group_summary_with_duration]
+                       % (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I')
+                       % p->m_lf_tnum
+                       % format_timestamp(p->m_lf_timestamp)
+                       % format_timestamp(*p->m_block_duration)
+                       % p->m_frame_sizes[fidx]
+                       % p->m_frame_adlers[fidx]
+                       % p->m_frame_hexdumps[fidx]
+                       % position).str());
       else
-        p->m_out->write((s_common_formats[s_bf_block_group_summary_no_duration]
-                      % (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I')
-                      % p->m_lf_tnum
-                      % format_timestamp(p->m_lf_timestamp)
-                      % p->m_frame_sizes[fidx]
-                      % p->m_frame_adlers[fidx]
-                      % p->m_frame_hexdumps[fidx]
-                      % position).str());
+        p->m_out->puts((s_common_formats[s_bf_block_group_summary_no_duration]
+                       % (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I')
+                       % p->m_lf_tnum
+                       % format_timestamp(p->m_lf_timestamp)
+                       % p->m_frame_sizes[fidx]
+                       % p->m_frame_adlers[fidx]
+                       % p->m_frame_hexdumps[fidx]
+                       % position).str());
     }
 
   } else if (p->m_verbose > 2)
@@ -1051,13 +1051,13 @@ kax_info_c::post_simple_block(EbmlElement &e) {
         frame_pos += p->m_frame_sizes[idx];
       }
 
-      p->m_out->write((s_common_formats[s_bf_simple_block_summary]
-                    % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
-                    % block.TrackNum()
-                    % format_timestamp(timestamp_ns)
-                    % p->m_frame_sizes[idx]
-                    % p->m_frame_adlers[idx]
-                    % position).str());
+      p->m_out->puts((s_common_formats[s_bf_simple_block_summary]
+                     % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
+                     % block.TrackNum()
+                     % format_timestamp(timestamp_ns)
+                     % p->m_frame_sizes[idx]
+                     % p->m_frame_adlers[idx]
+                     % position).str());
     }
 
   } else if (p->m_verbose > 2)
@@ -1160,12 +1160,12 @@ kax_info_c::display_track_info() {
     int64_t duration  = *tinfo.m_max_timestamp - *tinfo.m_min_timestamp;
     duration         += tinfo.m_add_duration_for_n_packets * track->default_duration;
 
-    p->m_out->write((boost::format(Y("Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"))
-                  % track->tnum
-                  % tinfo.m_blocks
-                  % tinfo.m_size
-                  % (duration / 1000000000.0)
-                  % static_cast<uint64_t>(duration == 0 ? 0 : tinfo.m_size * 8000000000.0 / duration)).str());
+    p->m_out->puts((boost::format(Y("Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"))
+                   % track->tnum
+                   % tinfo.m_blocks
+                   % tinfo.m_size
+                   % (duration / 1000000000.0)
+                   % static_cast<uint64_t>(duration == 0 ? 0 : tinfo.m_size * 8000000000.0 / duration)).str());
   }
 }
 

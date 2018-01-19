@@ -14,6 +14,8 @@
 * mkvpropedit: adding track statistics tags: for tracks with content encoding
   (compression) mkvpropedit is now accounting the uncompressed number of
   bytes, not the encoded (compressed) number of bytes. Fixes #2200.
+* mkvinfo: Windows: line endings will be written as `\r\n` (carriage return &
+  line feed) again instead of just `\n` (line feed).
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15
