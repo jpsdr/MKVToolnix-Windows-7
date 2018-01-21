@@ -18,6 +18,9 @@
   line feed) again instead of just `\n` (line feed).
 * build system: an error message is output if a command to execute is not
   found instead of silently failing.
+* build system: in addition to looking for the `gettext` C function and
+  library, `configure` now also verifies the presence of the `msgfmt` program
+  instead of simply relying on it.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15

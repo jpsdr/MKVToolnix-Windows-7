@@ -309,7 +309,7 @@ if $building_for[:windows]
 end
 
 rule '.mo' => '.po' do |t|
-  runq "msgfmt", t.source, "msgfmt -c -o #{t.name} #{t.sources.join(" ")}"
+  runq "msgfmt", t.source, "#{c(:MSGFMT)} -c -o #{t.name} #{t.sources.join(" ")}"
 end
 
 if !c(:LCONVERT).blank?

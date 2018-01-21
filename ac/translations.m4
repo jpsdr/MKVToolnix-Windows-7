@@ -12,6 +12,11 @@ if test "x$with_gettext" != "xno"; then
                  [ gettext_found=no ],
                  [ -liconv ])
   fi
+
+  AC_PATH_PROG(MSGFMT, msgfmt,, $PATH)
+  if test -z "$MSGFMT"; then
+    gettext_found=no
+  fi
 fi
 
 if test x"$gettext_found" = xyes ; then
