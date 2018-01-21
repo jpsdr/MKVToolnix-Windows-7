@@ -94,7 +94,15 @@ def runq(action, target, cmdline, options = {})
     puts_action action, :target => target, :prefix => sprintf("[%s  %02d:%02d.%03d]", code == 0 ? "done" : "fail", (duration / 60).to_i, duration.to_i % 60, (duration * 1000).to_i % 1000)
   end
 
-  exit code if (code != 0) && !options[:allow_failure].to_bool
+  if (code != 0) && !options[:allow_failure].to_bool
+    if code == 127
+      puts "Error: command not found: #{cmdline}"
+    elsif code == -1
+      puts "Error: could not create child process for: #{cmdline}"
+    end
+
+    exit code
+  end
 end
 
 def runq_git(msg, cmdline, options = {})

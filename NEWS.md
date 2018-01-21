@@ -16,6 +16,8 @@
   bytes, not the encoded (compressed) number of bytes. Fixes #2200.
 * mkvinfo: Windows: line endings will be written as `\r\n` (carriage return &
   line feed) again instead of just `\n` (line feed).
+* build system: an error message is output if a command to execute is not
+  found instead of silently failing.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15
