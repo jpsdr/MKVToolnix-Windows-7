@@ -12,7 +12,11 @@ end
 
 def read_build_config
   fail "build-config not found: please run ./configure" unless File.exists?("build-config")
-  read_config_file("build-config")
+
+  config = read_config_file("build-config")
+  config = config.merge(read_config_file("build-config.local")) if File.exists?("build-config.local")
+
+  config
 end
 
 def c(idx, default = '')
