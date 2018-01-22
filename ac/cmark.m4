@@ -6,8 +6,8 @@ if test x"$have_qt" = "xyes" ; then
   PKG_CHECK_EXISTS([libcmark],[cmark_found=yes],[cmark_found=no])
   if test x"$cmark_found" = xyes; then
     PKG_CHECK_MODULES([libcmark],[libcmark],[cmark_found=yes])
-    CMARK_CFLAGS="`pkg-config --cflags libcmark`"
-    CMARK_LIBS="`pkg-config --libs libcmark`"
+    CMARK_CFLAGS="`$PKG_CONFIG --cflags libcmark`"
+    CMARK_LIBS="`$PKG_CONFIG --libs libcmark`"
   fi
 
   if test x"$cmark_found" != xyes; then
