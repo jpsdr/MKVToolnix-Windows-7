@@ -21,6 +21,9 @@
 * build system: in addition to looking for the `gettext` C function and
   library, `configure` now also verifies the presence of the `msgfmt` program
   instead of simply relying on it.
+* mkvmerge, mkvextract: Matroska parser: fixed a segmentation fault that
+  occurred whenever the first level 1 element after resyncing after an error
+  in the file structure isn't a cluster. Fixes #2211.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15

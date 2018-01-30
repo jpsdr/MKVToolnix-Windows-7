@@ -48,7 +48,7 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
   try {
     auto element = read_next_level1_element_internal(wanted_id);
 
-    if (report_cluster_timestamp && (-1 != m_timestamp_scale))
+    if (element && report_cluster_timestamp && (-1 != m_timestamp_scale))
       report(boost::format(Y("The first cluster timestamp after the resync is %1%.\n"))
              % format_timestamp(FindChildValue<KaxClusterTimecode>(static_cast<KaxCluster *>(element)) * m_timestamp_scale));
 
