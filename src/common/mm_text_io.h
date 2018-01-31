@@ -26,7 +26,7 @@ public:
 
   virtual void setFilePointer(int64 offset, seek_mode mode=seek_beginning);
   virtual std::string getline(boost::optional<std::size_t> max_chars = boost::none);
-  virtual int read_next_char(char *buffer);
+  virtual std::string read_next_codepoint();
   virtual byte_order_e get_byte_order() const {
     return m_byte_order;
   }

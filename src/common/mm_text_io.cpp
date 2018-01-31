@@ -57,9 +57,10 @@ mm_text_io_c::detect_eol_style() {
   auto num_chars_read = 0u;
 
   while (1) {
-    char utf8char[9];
-    size_t len = read_next_char(utf8char);
-    if (0 == len)
+    auto utf8char = read_next_codepoint();
+    auto len      = utf8char.length();
+
+    if (!len)
       break;
 
     ++num_chars_read;
@@ -136,72 +137,71 @@ mm_text_io_c::get_encoding(byte_order_e byte_order) {
 // 2 bytes: 110xxxxx 10xxxxxx,
 // 3 bytes: 1110xxxx 10xxxxxx 10xxxxxx
 
-int
-mm_text_io_c::read_next_char(char *buffer) {
-  if (BO_NONE == m_byte_order)
-    return read(buffer, 1);
+std::string
+mm_text_io_c::read_next_codepoint() {
+  unsigned char buffer[9];
 
-  unsigned char stream[6];
-  size_t size = 0;
+  if (BO_NONE == m_byte_order) {
+    std::string::size_type length = read(buffer, 1);
+    return std::string{reinterpret_cast<char *>(buffer), length};
+  }
+
+  std::string::size_type size;
   if (BO_UTF8 == m_byte_order) {
-    if (read(stream, 1) != 1)
-      return 0;
+    if (read(buffer, 1) != 1)
+      return {};
 
-    size = ((stream[0] & 0x80) == 0x00) ?  1
-         : ((stream[0] & 0xe0) == 0xc0) ?  2
-         : ((stream[0] & 0xf0) == 0xe0) ?  3
-         : ((stream[0] & 0xf8) == 0xf0) ?  4
-         : ((stream[0] & 0xfc) == 0xf8) ?  5
-         : ((stream[0] & 0xfe) == 0xfc) ?  6
+    size = ((buffer[0] & 0x80) == 0x00) ?  1
+         : ((buffer[0] & 0xe0) == 0xc0) ?  2
+         : ((buffer[0] & 0xf0) == 0xe0) ?  3
+         : ((buffer[0] & 0xf8) == 0xf0) ?  4
+         : ((buffer[0] & 0xfc) == 0xf8) ?  5
+         : ((buffer[0] & 0xfe) == 0xfc) ?  6
          :                                99;
 
     if (99 == size)
-      throw mtx::mm_io::text::invalid_utf8_char_x(stream[0]);
+      throw mtx::mm_io::text::invalid_utf8_char_x(buffer[0]);
 
-    if ((1 < size) && (read(&stream[1], size - 1) != (size - 1)))
-      return 0;
+    if ((1 < size) && (read(&buffer[1], size - 1) != (size - 1)))
+      return {};
 
-    memcpy(buffer, stream, size);
+    return std::string{reinterpret_cast<char *>(buffer), size};
+  }
 
-    return size;
+  size = ((BO_UTF16_LE == m_byte_order) || (BO_UTF16_BE == m_byte_order)) ? 2 : 4;
 
-  } else if ((BO_UTF16_LE == m_byte_order) || (BO_UTF16_BE == m_byte_order))
-    size = 2;
-  else
-    size = 4;
-
-  if (read(stream, size) != size)
-    return 0;
+  if (read(buffer, size) != size)
+    return {};
 
   unsigned long data = 0;
   auto little_endian = ((BO_UTF16_LE == m_byte_order) || (BO_UTF32_LE == m_byte_order));
   auto shift         = little_endian ? 0 : 8 * (size - 1);
   for (auto i = 0u; i < size; i++) {
-    data  |= static_cast<unsigned long>(stream[i]) << shift;
+    data  |= static_cast<unsigned long>(buffer[i]) << shift;
     shift += little_endian ? 8 : -8;
   }
 
   if (data < 0x80) {
     buffer[0] = data;
-    return 1;
+    return std::string{reinterpret_cast<char *>(buffer), 1};
   }
 
   if (data < 0x800) {
     buffer[0] = 0xc0 | (data >> 6);
     buffer[1] = 0x80 | (data & 0x3f);
-    return 2;
+    return std::string{reinterpret_cast<char *>(buffer), 2};
   }
 
   if (data < 0x10000) {
     buffer[0] = 0xe0 |  (data >> 12);
     buffer[1] = 0x80 | ((data >> 6) & 0x3f);
     buffer[2] = 0x80 |  (data       & 0x3f);
-    return 3;
+    return std::string{reinterpret_cast<char *>(buffer), 3};
   }
 
   mxerror(Y("mm_text_io_c: UTF32_* is not supported at the moment.\n"));
 
-  return 0;
+  return {};
 }
 
 std::string
@@ -213,15 +213,13 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
     detect_eol_style();
 
   std::string s;
-  char utf8char[9];
   bool previous_was_carriage_return = false;
   std::size_t num_chars_read{};
 
   while (1) {
-    memset(utf8char, 0, 9);
-
     auto previous_pos = getFilePointer();
-    auto len          = read_next_char(utf8char);
+    auto utf8char     = read_next_codepoint();
+    auto len          = utf8char.length();
 
     if (0 == len)
       return s;
