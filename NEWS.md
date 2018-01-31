@@ -5,6 +5,10 @@
 * mkvmerge: track statistics tags: the `TagDefault` element will not be
   written anymore as it was always set to the default value `1`
   anyway. Implements #2202.
+* mkvmerge, MKVToolNix GUI: JSON files can now contain C++-style line comments
+  outside of strings (e.g. something like this: `// this is ignored`). Such
+  comments, even though not part of the official JSON specifications, are now
+  ignored when reading JSON files.
 
 ## Bug fixes
 
