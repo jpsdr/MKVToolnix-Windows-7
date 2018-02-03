@@ -84,7 +84,7 @@ Tab::setupControlLists() {
                            << ui->forcedTrackFlagLabel << ui->forcedTrackFlag         << ui->compressionLabel            << ui->compression      << ui->trackTagsLabel        << ui->trackTags         << ui->browseTrackTags
                            << ui->defaultDurationLabel << ui->defaultDuration         << ui->fixBitstreamTimingInfo      << ui->setAspectRatio   << ui->setDisplayWidthHeight << ui->aspectRatio
                            << ui->displayWidth         << ui->displayDimensionsXLabel << ui->displayHeight               << ui->stereoscopyLabel << ui->stereoscopy
-                           << ui->naluSizeLengthLabel  << ui->naluSizeLength          << ui->croppingLabel               << ui->cropping         << ui->aacIsSBR              << ui->characterSetLabel << ui->subtitleCharacterSet
+                           << ui->naluSizeLengthLabel  << ui->naluSizeLength          << ui->croppingLabel               << ui->cropping         << ui->aacIsSBR
                            << ui->cuesLabel            << ui->cues                    << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions;
 }
 
@@ -1053,7 +1053,7 @@ Tab::onSubtitleCharacterSetChanged(int newValue) {
   withSelectedTracks([&data](auto &track) {
     if (track.canChangeSubCharset())
       track.m_characterSet = data.toString();
-  }, true);
+  });
 }
 
 void
