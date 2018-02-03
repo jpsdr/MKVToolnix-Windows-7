@@ -7,7 +7,7 @@
 #include <matroska/KaxAttached.h>
 
 #include "common/ebml.h"
-#include "common/extern_data.h"
+#include "common/mime.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/forms/header_editor/attached_file_page.h"
@@ -55,7 +55,7 @@ AttachedFilePage::retranslateUi() {
 
 void
 AttachedFilePage::init() {
-  for (auto &mimeType : mime_types)
+  for (auto &mimeType : g_mime_types)
     ui->mimeType->addItem(Q(mimeType.name), Q(mimeType.name));
 
   retranslateUi();

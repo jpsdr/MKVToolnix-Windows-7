@@ -17,9 +17,9 @@
 #include <vorbis/codec.h>
 
 #include "common/codec.h"
-#include "common/extern_data.h"
 #include "common/flac.h"
 #include "common/id_info.h"
+#include "common/mime.h"
 #include "input/r_flac.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"

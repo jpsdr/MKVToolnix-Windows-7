@@ -14,7 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/endian.h"
-#include "common/extern_data.h"
+#include "common/mime.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
 #include "common/strings/formatting.h"

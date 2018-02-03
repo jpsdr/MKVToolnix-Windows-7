@@ -12,8 +12,8 @@
 
 #include "common/construct.h"
 #include "common/ebml.h"
-#include "common/extern_data.h"
 #include "common/list_utils.h"
+#include "common/mime.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/property_element.h"

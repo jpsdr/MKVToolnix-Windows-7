@@ -1,6 +1,6 @@
 #include "common/common_pch.h"
 
-#include "common/extern_data.h"
+#include "common/mime.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/attachment.h"
