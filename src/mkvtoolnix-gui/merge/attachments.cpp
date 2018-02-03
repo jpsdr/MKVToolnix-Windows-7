@@ -42,7 +42,7 @@ Tab::setupAttachmentsControls() {
   m_attachmentsMenu->addAction(m_selectAllAttachmentsAction);
 
   // MIME type
-  for (auto &mime_type : g_mime_types)
+  for (auto &mime_type : mtx::mime::g_types)
     ui->attachmentMIMEType->addItem(to_qs(mime_type.name), to_qs(mime_type.name));
 
   ui->attachmentMIMEType->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);

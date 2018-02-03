@@ -13,7 +13,9 @@
 
 #include "common/mime.h"
 
-std::vector<mime_type_t> const g_mime_types = {
+namespace mtx { namespace mime {
+
+std::vector<type_t> const g_types = {
   { "application/activemessage",                              {}                                                       },
   { "application/andrew-inset",                               { "ez" }                                                 },
   { "application/applefile",                                  {}                                                       },
@@ -645,3 +647,5 @@ std::vector<mime_type_t> const g_mime_types = {
   { "x-conference/x-cooltalk",                                { "ice" }                                                },
   { "x-world/x-vrml",                                         { "vrm", "vrml", "wrl" }                                 },
 };
+
+}}                              // namespace mtx::mime

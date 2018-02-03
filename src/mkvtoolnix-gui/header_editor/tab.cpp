@@ -715,7 +715,7 @@ Tab::createAttachmentFromFile(QString const &fileName) {
   if (!content)
     return {};
 
-  auto mimeType   = guess_mime_type(to_utf8(fileName), true);
+  auto mimeType   = mtx::mime::guess_type(to_utf8(fileName), true);
   auto uid        = create_unique_number(UNIQUE_ATTACHMENT_IDS);
   auto fileData   = new KaxFileData;
   auto attachment = KaxAttachedPtr{

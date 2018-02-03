@@ -13,18 +13,16 @@
 
 #include "common/common_pch.h"
 
-struct mime_type_t {
+namespace mtx { namespace mime {
+
+struct type_t {
   std::string const name;
   std::vector<std::string> const extensions;
-
-  mime_type_t(std::string const &p_name, std::vector<std::string> const p_extensions)
-    : name{p_name}
-    , extensions{p_extensions}
-  {
-  }
 };
 
-extern std::vector<mime_type_t> const g_mime_types;
+extern std::vector<type_t> const g_types;
 
-std::string guess_mime_type(std::string ext, bool is_file);
-std::string primary_file_extension_for_mime_type(std::string const &mime_type);
+std::string guess_type(std::string ext, bool is_file);
+std::string primary_file_extension_for_type(std::string const &type);
+
+}}

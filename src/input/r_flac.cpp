@@ -250,7 +250,7 @@ flac_reader_c::attachment_name_from_metadata(FLAC__StreamMetadata_Picture const 
                         : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_PUBLISHER_LOGOTYPE   ? "publisher - Studio logotype"
                         :                                                                           "unknown";
 
-  auto extension = primary_file_extension_for_mime_type(mime_type);
+  auto extension = mtx::mime::primary_file_extension_for_type(mime_type);
 
   if (!extension.empty())
     name += std::string{"."} + extension;

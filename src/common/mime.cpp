@@ -21,27 +21,29 @@ extern "C" {
 #include "common/mime.h"
 #include "common/mm_file_io.h"
 
+namespace mtx { namespace mime {
+
 namespace {
 
 std::string
-guess_mime_type_by_ext(std::string ext) {
+guess_type_by_ext(std::string ext) {
   /* chop off basename */
   auto i = ext.rfind('.');
   if (std::string::npos == i)
     return "";
   ext = balg::to_lower_copy(ext.substr(i + 1));
 
-  for (auto &mime_type : g_mime_types)
-    if (brng::find(mime_type.extensions, ext) != mime_type.extensions.end())
-      return mime_type.name;
+  for (auto &type : g_types)
+    if (brng::find(type.extensions, ext) != type.extensions.end())
+      return type.name;
 
   return "";
 }
 
 #if HAVE_MAGIC_H
 std::string
-guess_mime_type_by_content(magic_t &m,
-                           std::string const &file_name) {
+guess_type_by_content(magic_t &m,
+                      std::string const &file_name) {
   try {
     mm_file_io_c file(file_name);
     uint64_t file_size = file.get_size();
@@ -58,13 +60,13 @@ guess_mime_type_by_content(magic_t &m,
       if (buf->get_size() < (buffer_size + bytes_to_read))
         buf->resize(buffer_size + bytes_to_read);
 
-      int64_t bytes_read     = file.read(buf->get_buffer() + buffer_size, bytes_to_read);
-      buffer_size           += bytes_read;
+      int64_t bytes_read  = file.read(buf->get_buffer() + buffer_size, bytes_to_read);
+      buffer_size        += bytes_read;
 
-      std::string mime_type  = magic_buffer(m, buf->get_buffer(), buffer_size);
+      std::string type    = magic_buffer(m, buf->get_buffer(), buffer_size);
 
-      if (!mime_type.empty())
-        return mime_type;
+      if (!type.empty())
+        return type;
     }
   } catch (...) {
   }
@@ -73,13 +75,13 @@ guess_mime_type_by_content(magic_t &m,
 }
 
 std::string
-guess_mime_type_internal(std::string ext,
-                         bool is_file) {
+guess_type_internal(std::string ext,
+                    bool is_file) {
   std::string ret;
   magic_t m;
 
   if (!is_file)
-    return guess_mime_type_by_ext(ext);
+    return guess_type_by_ext(ext);
 
   // In newer versions of libmagic MAGIC_MIME is declared as MAGIC_MIME_TYPE | MAGIC_MIME_ENCODING.
   // Older versions don't know MAGIC_MIME_TYPE, though -- the old MAGIC_MIME is the new MAGIC_MIME_TYPE,
@@ -93,30 +95,30 @@ guess_mime_type_internal(std::string ext,
 # ifdef SYS_WINDOWS
   auto magic_filename = (mtx::sys::get_installation_path() / "data" / "magic").string();
   if (!m || (-1 == magic_load(m, magic_filename.c_str())))
-    return guess_mime_type_by_ext(ext);
+    return guess_type_by_ext(ext);
 # else  // defined(SYS_WINDOWS)
 #  ifdef MTX_APPIMAGE
   auto magic_filename = (mtx::sys::get_installation_path() / ".." / "share" / "file" / "magic.mgc").string();
   if (!m || (-1 == magic_load(m, magic_filename.c_str())) || (-1 == magic_load(m, nullptr)))
-    return guess_mime_type_by_ext(ext);
+    return guess_type_by_ext(ext);
 #  else
   if (!m || (-1 == magic_load(m, nullptr)))
-    return guess_mime_type_by_ext(ext);
+    return guess_type_by_ext(ext);
 #  endif  // defined(MTX_APPIMAGE)
 # endif  // defined(SYS_WINDOWS)
 
-  ret = guess_mime_type_by_content(m, ext);
+  ret = guess_type_by_content(m, ext);
   magic_close(m);
 
   if (ret == "")
-    return guess_mime_type_by_ext(ext);
+    return guess_type_by_ext(ext);
   else {
     int idx = ret.find(';');
     if (-1 != idx)
       ret.erase(idx);
 
     if (ret == "application/octet-stream")
-      ret = guess_mime_type_by_ext(ext);
+      ret = guess_type_by_ext(ext);
 
     return ret;
   }
@@ -125,31 +127,33 @@ guess_mime_type_internal(std::string ext,
 #else  // HAVE_MAGIC_H
 
 std::string
-guess_mime_type_internal(std::string ext,
-                         bool) {
-  return guess_mime_type_by_ext(ext);
+guess_type_internal(std::string ext,
+                    bool) {
+  return guess_type_by_ext(ext);
 }
 #endif  // HAVE_MAGIC_H
 
 } // anonymous namespace
 
 std::string
-primary_file_extension_for_mime_type(std::string const &mime_type) {
-  auto itr = brng::find_if(g_mime_types, [&mime_type](auto const &m) { return m.name == mime_type; });
+primary_file_extension_for_type(std::string const &type) {
+  auto itr = brng::find_if(g_types, [&type](auto const &m) { return m.name == type; });
 
-  return (itr != g_mime_types.end()) && !itr->extensions.empty() ? itr->extensions[0] : std::string{};
+  return (itr != g_types.end()) && !itr->extensions.empty() ? itr->extensions[0] : std::string{};
 }
 
 std::string
-guess_mime_type(std::string ext,
-                bool is_file) {
-  std::string mime_type = guess_mime_type_internal(ext, is_file);
+guess_type(std::string ext,
+           bool is_file) {
+  std::string type = guess_type_internal(ext, is_file);
 
-  if (mime_type.empty())
+  if (type.empty())
     return "application/octet-stream";
 
-  else if (mime_type == "application/x-font-ttf")
+  else if (type == "application/x-font-ttf")
     return "application/x-truetype-font";
 
-  return mime_type;
+  return type;
 }
+
+}}                              // namespace mtx::mime

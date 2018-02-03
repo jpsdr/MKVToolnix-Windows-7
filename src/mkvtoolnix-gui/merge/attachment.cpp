@@ -45,7 +45,7 @@ Attachment::loadSettings(MuxConfig::Loader &l) {
 
 void
 Attachment::guessMIMEType() {
-  m_MIMEType = to_qs(guess_mime_type(to_utf8(m_fileName), true));
+  m_MIMEType = to_qs(mtx::mime::guess_type(to_utf8(m_fileName), true));
 }
 
 void

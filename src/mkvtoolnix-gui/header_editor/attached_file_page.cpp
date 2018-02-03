@@ -55,7 +55,7 @@ AttachedFilePage::retranslateUi() {
 
 void
 AttachedFilePage::init() {
-  for (auto &mimeType : g_mime_types)
+  for (auto &mimeType : mtx::mime::g_types)
     ui->mimeType->addItem(Q(mimeType.name), Q(mimeType.name));
 
   retranslateUi();
@@ -221,7 +221,7 @@ AttachedFilePage::replaceContent(bool deriveNameAndMimeType) {
   if (!deriveNameAndMimeType)
     return;
 
-  auto mimeType = Q(guess_mime_type(to_utf8(fileName), true));
+  auto mimeType = Q(mtx::mime::guess_type(to_utf8(fileName), true));
 
   ui->name->setText(fileInfo.fileName());
   ui->mimeType->setEditText(mimeType);

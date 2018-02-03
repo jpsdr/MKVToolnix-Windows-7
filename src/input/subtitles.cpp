@@ -544,7 +544,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
 
   decode_chars(in, out, data_uu.length() % 4);
 
-  attachment.mime_type = guess_mime_type(name, false);
+  attachment.mime_type = mtx::mime::guess_type(name, false);
 
   if (attachment.mime_type == "")
     attachment.mime_type = "application/octet-stream";

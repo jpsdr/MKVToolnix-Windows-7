@@ -383,7 +383,7 @@ print_capabilities() {
 
 static std::string
 guess_mime_type_and_report(std::string file_name) {
-  std::string mime_type = guess_mime_type(file_name, true);
+  auto mime_type = mtx::mime::guess_type(file_name, true);
   if (mime_type != "") {
     mxinfo(boost::format(Y("Automatic MIME type recognition for '%1%': %2%\n")) % file_name % mime_type);
     return mime_type;
