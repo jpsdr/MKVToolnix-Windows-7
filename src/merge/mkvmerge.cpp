@@ -2052,14 +2052,14 @@ handle_file_name_arg(const std::string &this_arg,
       ti->m_disable_multi_file = true;
       file.name.erase(0, 1);
     }
+  }
 
-    if (append_next_file) {
-      if (g_files.empty())
-        mxerror(Y("The first file cannot be appended because there are no files to append to.\n"));
+  if (append_next_file) {
+    if (g_files.empty())
+      mxerror(Y("The first file cannot be appended because there are no files to append to.\n"));
 
-      file.appending   = true;
-      append_next_file = false;
-    }
+    file.appending   = true;
+    append_next_file = false;
   }
 
   ti->m_fname = file.name;

@@ -35,6 +35,12 @@
   appended subtitle files, too. Fixes #2214.
 * MKVToolNix GUI: multiplexer: when appending, all tracks appended to disabled
   tracks will start out disabled, too.
+* mkvmerge: appending files with additional parts at the same time was broken
+  if more than one additional part was appended (e.g. when appending files
+  from DVDs with something like `'(' VTS_01_1.VOB VTS_01_2.VOB ')' + '('
+  VTS_02_1.VOB VTS_02_2.VOB ')'`). In such a situation the content from files
+  `VTS_02_1.VOB` and `VTS_02_2.VOB` where laid out in parallel to the content
+  from the earlier files.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15
