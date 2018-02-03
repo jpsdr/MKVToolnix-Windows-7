@@ -28,6 +28,9 @@
 * mkvmerge, mkvextract: Matroska parser: fixed a segmentation fault that
   occurred whenever the first level 1 element after resyncing after an error
   in the file structure isn't a cluster. Fixes #2211.
+* mkvmerge, MKVToolNix GUI multiplexer & header editor: fixed a crash during
+  file type detection for attachments if MKVToolNix is installed in a path
+  with non-ASCII characters (e.g. German Umlauts). Fixes #2212.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15

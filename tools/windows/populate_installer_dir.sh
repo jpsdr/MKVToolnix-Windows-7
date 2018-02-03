@@ -51,7 +51,7 @@ function create_directories {
 
   cd ${tgt_dir}
   rm -rf *
-  mkdir -p examples data/sounds doc/licenses locale/libqt
+  mkdir -p examples data/sounds doc/licenses locale/libqt share/misc
 
   print -- " done"
 }
@@ -67,7 +67,7 @@ function copy_files {
   cp src/*.exe src/mkvtoolnix-gui/*.exe installer/*.url ${tgt_dir}/
   cp share/icons/windows/mkvtoolnix-gui.ico ${tgt_dir}/installer/
 
-  cp ${mxe_usr_dir}/share/misc/magic.mgc ${tgt_dir}/data/
+  cp ${mxe_usr_dir}/share/misc/magic.mgc ${tgt_dir}/share/misc/
   cp share/sounds/* ${tgt_dir}/data/sounds/
   touch ${tgt_dir}/data/portable-app
 

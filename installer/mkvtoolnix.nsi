@@ -157,11 +157,13 @@ Section "Program files" SEC01
   File /r "../doc"
   File /r "../examples"
   File /r "../locale"
+  File /r "../share"
 
   # Delete files that might be present from older installation
   # if this is just an upgrade.
   Delete "$INSTDIR\mkv*.ico"
   Delete "$INSTDIR\mmg.exe"
+  Delete "$INSTDIR\data\magic.mgc"
   Delete "$INSTDIR\doc\command_line_references_and_guide.html"
   Delete "$INSTDIR\doc\en\mmg.html"
   Delete "$INSTDIR\doc\de\mmg.html"
@@ -404,6 +406,7 @@ Section Uninstall
   RMDir /r "$INSTDIR\doc"
   RMDir /r "$INSTDIR\examples"
   RMDir /r "$INSTDIR\locale"
+  RMDir /r "$INSTDIR\share"
   RMDir "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"

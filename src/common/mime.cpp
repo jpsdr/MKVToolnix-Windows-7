@@ -92,20 +92,14 @@ guess_type_internal(std::string ext,
   m = magic_open(MAGIC_MIME      | MAGIC_SYMLINK);
 # endif  // MAGIC_MIME_TYPE
 
-# ifdef SYS_WINDOWS
-  auto magic_filename = (mtx::sys::get_installation_path() / "data" / "magic").string();
-  if (!m || (-1 == magic_load(m, magic_filename.c_str())))
-    return guess_type_by_ext(ext);
-# else  // defined(SYS_WINDOWS)
-#  ifdef MTX_APPIMAGE
+# ifdef MTX_APPIMAGE
   auto magic_filename = (mtx::sys::get_installation_path() / ".." / "share" / "file" / "magic.mgc").string();
   if (!m || (-1 == magic_load(m, magic_filename.c_str())) || (-1 == magic_load(m, nullptr)))
     return guess_type_by_ext(ext);
-#  else
+# else
   if (!m || (-1 == magic_load(m, nullptr)))
     return guess_type_by_ext(ext);
-#  endif  // defined(MTX_APPIMAGE)
-# endif  // defined(SYS_WINDOWS)
+# endif  // defined(MTX_APPIMAGE)
 
   ret = guess_type_by_content(m, ext);
   magic_close(m);

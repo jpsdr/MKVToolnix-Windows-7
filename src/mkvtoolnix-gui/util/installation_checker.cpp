@@ -51,9 +51,9 @@ InstallationChecker::runChecks() {
   }
 
 #if defined(SYS_WINDOWS)
-  auto magicFile = App::applicationDirPath() + "/data/magic.mgc";
+  auto magicFile = App::applicationDirPath() + "/share/misc/magic.mgc";
   if (!QFileInfo{magicFile}.exists())
-    problems << Problem{ ProblemType::FileNotFound, Q("data\\magic.mgc") };
+    problems << Problem{ ProblemType::FileNotFound, Q("share\\misc\\magic.mgc") };
 
 #endif  // SYS_WINDOWS
 
