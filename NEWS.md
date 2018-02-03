@@ -33,6 +33,8 @@
   with non-ASCII characters (e.g. German Umlauts). Fixes #2212.
 * MKVToolNix GUI: multiplexer: the subtitle character set can now be set for
   appended subtitle files, too. Fixes #2214.
+* MKVToolNix GUI: multiplexer: when appending, all tracks appended to disabled
+  tracks will start out disabled, too.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15

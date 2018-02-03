@@ -228,7 +228,9 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
     if (!newTrack->m_appendedTo) {
       newTrack->m_appendedTo = lastTrack;
       newTrack->m_muxThis    = false;
-    }
+
+    } else
+      newTrack->m_muxThis    = newTrack->m_appendedTo->m_muxThis;
 
     auto row = m_tracks->indexOf(newTrack->m_appendedTo);
     Q_ASSERT(row != -1);
