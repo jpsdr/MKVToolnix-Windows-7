@@ -595,6 +595,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
     p->m_summary.push_back((boost::format(Y("mkvmerge/mkvextract track ID: %1%")) % track_id).str());
 
+    p->m_track_by_element[&e] = p->m_track;
+
     return true;
   }));
 
@@ -617,6 +619,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
     if (p->m_show_hexdump)
       p->m_track->fourcc += create_hexdump(c_priv.GetBuffer(), c_priv.GetSize());
+
+    p->m_track_by_element[&e] = p->m_track;
 
     return true;
   }));
@@ -838,24 +842,26 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                :                Y("unknown"))).str();
   });
 
-  FMT(KaxTrackNumber, [p](EbmlElement &) -> std::string { return (boost::format(Y("%1% (track ID for mkvmerge & mkvextract: %2%)")) % p->m_track->tnum % p->m_track->mkvmerge_track_id).str(); });
+  FMT(KaxTrackNumber, [p](EbmlElement &e) -> std::string { return (boost::format(Y("%1% (track ID for mkvmerge & mkvextract: %2%)")) % p->m_track_by_element[&e]->tnum % p->m_track_by_element[&e]->mkvmerge_track_id).str(); });
 
-  FMT(KaxTrackType, [p](EbmlElement &) -> std::string {
-    return 'a' == p->m_track->type ? "audio"
-         : 'v' == p->m_track->type ? "video"
-         : 's' == p->m_track->type ? "subtitles"
-         : 'b' == p->m_track->type ? "buttons"
-         :                           "unknown";
+  FMT(KaxTrackType, [](EbmlElement &e) -> std::string {
+    auto ttype = static_cast<KaxTrackType &>(e).GetValue();
+    return track_audio    == ttype ? Y("audio")
+         : track_video    == ttype ? Y("video")
+         : track_subtitle == ttype ? Y("subtitles")
+         : track_buttons  == ttype ? Y("buttons")
+         :                           Y("unknown");
   });
 
   FMT(KaxCodecPrivate, [p](EbmlElement &e) -> std::string {
-    return (s_common_formats[s_bf_element_size] % e.GetSize()).str() + p->m_track->fourcc;
+    return (s_common_formats[s_bf_element_size] % e.GetSize()).str() + p->m_track_by_element[&e]->fourcc;
   });
 
-  FMT(KaxTrackDefaultDuration, [p](EbmlElement &) -> std::string {
-      return (boost::format(Y("%1% (%|2$.3f| frames/fields per second for a video track)"))
-              % format_timestamp(p->m_track->default_duration)
-              % (1000000000.0 / static_cast<double>(p->m_track->default_duration))).str();
+  FMT(KaxTrackDefaultDuration, [](EbmlElement &e) -> std::string {
+    auto default_duration = static_cast<KaxTrackDefaultDuration &>(e).GetValue();
+    return (boost::format(Y("%1% (%|2$.3f| frames/fields per second for a video track)"))
+            % format_timestamp(default_duration)
+            % (1000000000.0 / static_cast<double>(default_duration))).str();
   });
 }
 

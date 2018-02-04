@@ -36,6 +36,7 @@ public:
   std::unordered_map<unsigned int, std::shared_ptr<track_t>> m_tracks_by_number;
   std::unordered_map<unsigned int, track_info_t> m_track_info;
   std::vector<std::shared_ptr<EbmlElement>> m_retained_elements;
+  std::unordered_map<EbmlElement *, std::shared_ptr<track_t>> m_track_by_element;
   uint64_t m_ts_scale{TIMESTAMP_SCALE}, m_file_size{};
   std::size_t m_mkvmerge_track_id{};
   std::shared_ptr<EbmlStream> m_es;
