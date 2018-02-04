@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
-"POT-Creation-Date: 2018-02-04 17:22+0100\n"
+"POT-Creation-Date: 2018-02-04 18:33+0100\n"
 "PO-Revision-Date: 2017-12-23 17:14+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
@@ -250,7 +250,7 @@ msgstr "<command>mkvextract</command> <arg choice=\"req\">nom-fitxer_origen</arg
 #: doc/man/mkvinfo.xml:58
 #: doc/man/mkvmerge.xml:65
 #: doc/man/mkvpropedit.xml:59
-#: doc/man/mkvtoolnix-gui.xml:62
+#: doc/man/mkvtoolnix-gui.xml:63
 msgid "Description"
 msgstr "Descripció"
 
@@ -413,7 +413,7 @@ msgstr "Serà detallat i mostrarà tots els elements importants del &matroska; a
 #: doc/man/mkvinfo.xml:204
 #: doc/man/mkvmerge.xml:2130
 #: doc/man/mkvpropedit.xml:449
-#: doc/man/mkvtoolnix-gui.xml:104
+#: doc/man/mkvtoolnix-gui.xml:112
 msgid "<option>-h</option>, <option>--help</option>"
 msgstr "<option>-h</option>, <option>--help</option>"
 
@@ -422,7 +422,7 @@ msgstr "<option>-h</option>, <option>--help</option>"
 #: doc/man/mkvinfo.xml:207
 #: doc/man/mkvmerge.xml:2133
 #: doc/man/mkvpropedit.xml:452
-#: doc/man/mkvtoolnix-gui.xml:107
+#: doc/man/mkvtoolnix-gui.xml:115
 msgid "Show usage information and exit."
 msgstr "Mostra la informació d'ús i surt."
 
@@ -431,7 +431,7 @@ msgstr "Mostra la informació d'ús i surt."
 #: doc/man/mkvinfo.xml:213
 #: doc/man/mkvmerge.xml:2139
 #: doc/man/mkvpropedit.xml:458
-#: doc/man/mkvtoolnix-gui.xml:113
+#: doc/man/mkvtoolnix-gui.xml:121
 msgid "<option>-V</option>, <option>--version</option>"
 msgstr "<option>-V</option>, <option>--version</option>"
 
@@ -440,7 +440,7 @@ msgstr "<option>-V</option>, <option>--version</option>"
 #: doc/man/mkvinfo.xml:216
 #: doc/man/mkvmerge.xml:2142
 #: doc/man/mkvpropedit.xml:461
-#: doc/man/mkvtoolnix-gui.xml:116
+#: doc/man/mkvtoolnix-gui.xml:124
 msgid "Show version information and exit."
 msgstr "Mostra la informació sobre la versió i surt."
 
@@ -1220,7 +1220,7 @@ msgstr "El contingut es tractarà com si s'hagués passat l'opció <link linkend
 #: doc/man/mkvinfo.xml:331
 #: doc/man/mkvmerge.xml:3194
 #: doc/man/mkvpropedit.xml:755
-#: doc/man/mkvtoolnix-gui.xml:124
+#: doc/man/mkvtoolnix-gui.xml:132
 msgid "See also"
 msgstr "Vegeu també"
 
@@ -1234,7 +1234,7 @@ msgstr "&mkvmerge;, &mkvinfo;, &mkvpropedit;, &mtxgui;"
 #: doc/man/mkvinfo.xml:338
 #: doc/man/mkvmerge.xml:3201
 #: doc/man/mkvpropedit.xml:762
-#: doc/man/mkvtoolnix-gui.xml:131
+#: doc/man/mkvtoolnix-gui.xml:139
 msgid "WWW"
 msgstr "WWW"
 
@@ -1243,7 +1243,7 @@ msgstr "WWW"
 #: doc/man/mkvinfo.xml:340
 #: doc/man/mkvmerge.xml:3203
 #: doc/man/mkvpropedit.xml:764
-#: doc/man/mkvtoolnix-gui.xml:133
+#: doc/man/mkvtoolnix-gui.xml:141
 msgid "The latest version can always be found at <ulink url=\"https://mkvtoolnix.download/\">the MKVToolNix homepage</ulink>."
 msgstr "Sempre trobareu l'última versió a <ulink url=\"https://mkvtoolnix.download/\">la pàgina de les MKVToolNix</ulink>."
 
@@ -5147,56 +5147,76 @@ msgstr "Una IGU pel &mkvmerge; que inclou un editor de capítols i de la capçal
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvtoolnix-gui.xml:51
-msgid "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">configuration-file-name.mtxcfg</arg> <arg choice=\"opt\">source-file.ext</arg> <arg choice=\"opt\">--edit-chapters <arg>chapter-file.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>matroska-file.mkv</arg></arg> </group>"
+#, fuzzy
+#| msgid "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">configuration-file-name.mtxcfg</arg> <arg choice=\"opt\">source-file.ext</arg> <arg choice=\"opt\">--edit-chapters <arg>chapter-file.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>matroska-file.mkv</arg></arg> </group>"
+msgid "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">configuration-file-name.mtxcfg</arg> <arg choice=\"opt\">source-file.ext</arg> <arg choice=\"opt\">--info <arg>matroska-file.mkv</arg></arg> <arg choice=\"opt\">--edit-chapters <arg>chapter-file.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>matroska-file.mkv</arg></arg> </group>"
 msgstr "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">nom_fitxer_configuració.mtxcfg</arg> <arg choice=\"opt\">fitxer_origen.ext</arg> <arg choice=\"opt\">--edit-chapters <arg>fitxer_capítols.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>fitxer_matroska.mkv</arg></arg> </group>"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvtoolnix-gui.xml:64
-msgid "&mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge; (and will evolve to cover &mkvinfo; and &mkvextract; as well). It offers easy access to most of &mkvmerge;'s options. All settings (e.g. source files, track options etc) can be saved and restored."
+#: doc/man/mkvtoolnix-gui.xml:65
+#, fuzzy
+#| msgid "&mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge; (and will evolve to cover &mkvinfo; and &mkvextract; as well). It offers easy access to most of &mkvmerge;'s options. All settings (e.g. source files, track options etc) can be saved and restored."
+msgid "&mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge;. It also implements &mkvinfo;'s and &mkvpropedit;'s functionality and will evolve to cover &mkvextract; as well. All settings (e.g. source files, track options etc) can be saved and restored."
 msgstr "El &mkvtoolnix-gui; és una <productname>IGU</productname> basada en les <abbrev>Qt</abbrev> pel &mkvmerge; (i evolucionarà per cobrir el &mkvinfo; i el &mkvextract;). Ofereix un fàcil accés a la majoria d'opcions del &mkvmerge;. Tots els ajustaments (p. ex., fitxers d'origen, opcions de les pistes, etc.) es poden desar i restaurar."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvtoolnix-gui.xml:70
-msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
+#: doc/man/mkvtoolnix-gui.xml:71
+#, fuzzy
+#| msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
+msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the info tool, the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
 msgstr "El fet de llistar noms de fitxer de configuració amb l'extensió <literal>.mtxcfg</literal> farà que la IGU els carregui a l'eina corresponent. Qualsevol altre nom de fitxer serà afegit (en funció del mode actual) com un fitxer d'origen per a multiplexar, obert a l'editor de capítols o a l'editor de la capçalera. El mode actual es pot canviar amb les opcions <option>--merge</option>, <option>--edit-chapters</option> o <option>--edit-headers</option>. El mode per omissió és afegir fitxers pel multiplexat."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvtoolnix-gui.xml:77
+#: doc/man/mkvtoolnix-gui.xml:78
 msgid "Note that if an instance of the application is already running when the application is started a second time, all file names given on the command line are handled by the already-running instance."
 msgstr "Tingueu en compte que si ja s'està executant una instància de l'aplicació quan es llança una segona instància, tots els noms de fitxer indicats a la línia d'ordres restaran a càrrec de la primera instància."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvtoolnix-gui.xml:83
+#: doc/man/mkvtoolnix-gui.xml:84
 msgid "<option>--merge</option>"
 msgstr "<option>--merge</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvtoolnix-gui.xml:85
+#: doc/man/mkvtoolnix-gui.xml:86
 msgid "All following file names will be added as source files to the current multiplex job. This is the default mode."
 msgstr "Tots els noms de fitxer que segueixen s'afegiran com a fitxers d'origen a la tasca de multiplexat actual. Aquest és el mode per omissió."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvtoolnix-gui.xml:90
+#: doc/man/mkvtoolnix-gui.xml:91
+#, fuzzy
+#| msgid "<option>--link</option>"
+msgid "<option>--info</option>"
+msgstr "<option>--link</option>"
+
+#. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
+#: doc/man/mkvtoolnix-gui.xml:93
+#, fuzzy
+#| msgid "All following file names will be opened in the header editor."
+msgid "All following file names will be opened in the info tool."
+msgstr "Tots els noms de fitxer que segueixen s'obriran a l'editor de la capçalera."
+
+#. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
+#: doc/man/mkvtoolnix-gui.xml:98
 msgid "<option>--edit-chapters</option>"
 msgstr "<option>--edit-chapters</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvtoolnix-gui.xml:92
+#: doc/man/mkvtoolnix-gui.xml:100
 msgid "All following file names will be opened in the chapter editor."
 msgstr "Tots els noms de fitxer que segueixen s'obriran a l'editor de capítols."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvtoolnix-gui.xml:97
+#: doc/man/mkvtoolnix-gui.xml:105
 msgid "<option>--edit-headers</option>"
 msgstr "<option>--edit-headers</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvtoolnix-gui.xml:99
+#: doc/man/mkvtoolnix-gui.xml:107
 msgid "All following file names will be opened in the header editor."
 msgstr "Tots els noms de fitxer que segueixen s'obriran a l'editor de la capçalera."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvtoolnix-gui.xml:126
+#: doc/man/mkvtoolnix-gui.xml:134
 msgid "&mkvmerge;, &mkvextract;, &mkvinfo;, &mkvpropedit;"
 msgstr "&mkvmerge;, &mkvextract;, &mkvinfo;, &mkvpropedit;"
 

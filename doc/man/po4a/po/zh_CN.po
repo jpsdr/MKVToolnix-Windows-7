@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
-"POT-Creation-Date: 2018-02-04 17:22+0100\n"
+"POT-Creation-Date: 2018-02-04 18:33+0100\n"
 "PO-Revision-Date: 2017-12-24 15:08+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -248,7 +248,7 @@ msgstr "<command>mkvextract</command> <arg choice=\"req\">输入文件名</arg> 
 #: doc/man/mkvinfo.xml:58
 #: doc/man/mkvmerge.xml:65
 #: doc/man/mkvpropedit.xml:59
-#: doc/man/mkvtoolnix-gui.xml:62
+#: doc/man/mkvtoolnix-gui.xml:63
 msgid "Description"
 msgstr "说明"
 
@@ -411,7 +411,7 @@ msgstr "使输出信息更详尽，且每当读取到重要的 &matroska; 元素
 #: doc/man/mkvinfo.xml:204
 #: doc/man/mkvmerge.xml:2130
 #: doc/man/mkvpropedit.xml:449
-#: doc/man/mkvtoolnix-gui.xml:104
+#: doc/man/mkvtoolnix-gui.xml:112
 msgid "<option>-h</option>, <option>--help</option>"
 msgstr "<option>-h</option>, <option>--help</option>"
 
@@ -420,7 +420,7 @@ msgstr "<option>-h</option>, <option>--help</option>"
 #: doc/man/mkvinfo.xml:207
 #: doc/man/mkvmerge.xml:2133
 #: doc/man/mkvpropedit.xml:452
-#: doc/man/mkvtoolnix-gui.xml:107
+#: doc/man/mkvtoolnix-gui.xml:115
 msgid "Show usage information and exit."
 msgstr "显示用法信息并退出。"
 
@@ -429,7 +429,7 @@ msgstr "显示用法信息并退出。"
 #: doc/man/mkvinfo.xml:213
 #: doc/man/mkvmerge.xml:2139
 #: doc/man/mkvpropedit.xml:458
-#: doc/man/mkvtoolnix-gui.xml:113
+#: doc/man/mkvtoolnix-gui.xml:121
 msgid "<option>-V</option>, <option>--version</option>"
 msgstr "<option>-V</option>, <option>--version</option>"
 
@@ -438,7 +438,7 @@ msgstr "<option>-V</option>, <option>--version</option>"
 #: doc/man/mkvinfo.xml:216
 #: doc/man/mkvmerge.xml:2142
 #: doc/man/mkvpropedit.xml:461
-#: doc/man/mkvtoolnix-gui.xml:116
+#: doc/man/mkvtoolnix-gui.xml:124
 msgid "Show version information and exit."
 msgstr "显示版本信息并退出。"
 
@@ -1218,7 +1218,7 @@ msgstr "内容将被当作通过 <link linkend=\"mkvextract.description.engage\"
 #: doc/man/mkvinfo.xml:331
 #: doc/man/mkvmerge.xml:3194
 #: doc/man/mkvpropedit.xml:755
-#: doc/man/mkvtoolnix-gui.xml:124
+#: doc/man/mkvtoolnix-gui.xml:132
 msgid "See also"
 msgstr "参阅"
 
@@ -1232,7 +1232,7 @@ msgstr "&mkvmerge;, &mkvinfo;, &mkvpropedit;, &mtxgui;"
 #: doc/man/mkvinfo.xml:338
 #: doc/man/mkvmerge.xml:3201
 #: doc/man/mkvpropedit.xml:762
-#: doc/man/mkvtoolnix-gui.xml:131
+#: doc/man/mkvtoolnix-gui.xml:139
 msgid "WWW"
 msgstr "网络"
 
@@ -1241,7 +1241,7 @@ msgstr "网络"
 #: doc/man/mkvinfo.xml:340
 #: doc/man/mkvmerge.xml:3203
 #: doc/man/mkvpropedit.xml:764
-#: doc/man/mkvtoolnix-gui.xml:133
+#: doc/man/mkvtoolnix-gui.xml:141
 msgid "The latest version can always be found at <ulink url=\"https://mkvtoolnix.download/\">the MKVToolNix homepage</ulink>."
 msgstr "最新版本总可以在 <ulink url=\"https://mkvtoolnix.download/\">MKVToolNix 主页</ulink> 找到。"
 
@@ -5145,56 +5145,76 @@ msgstr "&mkvmerge; 的 GUI，包含章节编辑器和头部字段编辑器"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvtoolnix-gui.xml:51
-msgid "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">configuration-file-name.mtxcfg</arg> <arg choice=\"opt\">source-file.ext</arg> <arg choice=\"opt\">--edit-chapters <arg>chapter-file.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>matroska-file.mkv</arg></arg> </group>"
+#, fuzzy
+#| msgid "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">configuration-file-name.mtxcfg</arg> <arg choice=\"opt\">source-file.ext</arg> <arg choice=\"opt\">--edit-chapters <arg>chapter-file.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>matroska-file.mkv</arg></arg> </group>"
+msgid "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">configuration-file-name.mtxcfg</arg> <arg choice=\"opt\">source-file.ext</arg> <arg choice=\"opt\">--info <arg>matroska-file.mkv</arg></arg> <arg choice=\"opt\">--edit-chapters <arg>chapter-file.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>matroska-file.mkv</arg></arg> </group>"
 msgstr "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">配置文件名.mtxcfg</arg> <arg choice=\"opt\">source-file.ext</arg> <arg choice=\"opt\">--edit-chapters <arg>章节文件.扩展名</arg></arg> <arg choice=\"opt\">--edit-headers <arg>matroska-文件.mkv</arg></arg> </group>"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvtoolnix-gui.xml:64
-msgid "&mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge; (and will evolve to cover &mkvinfo; and &mkvextract; as well). It offers easy access to most of &mkvmerge;'s options. All settings (e.g. source files, track options etc) can be saved and restored."
+#: doc/man/mkvtoolnix-gui.xml:65
+#, fuzzy
+#| msgid "&mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge; (and will evolve to cover &mkvinfo; and &mkvextract; as well). It offers easy access to most of &mkvmerge;'s options. All settings (e.g. source files, track options etc) can be saved and restored."
+msgid "&mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge;. It also implements &mkvinfo;'s and &mkvpropedit;'s functionality and will evolve to cover &mkvextract; as well. All settings (e.g. source files, track options etc) can be saved and restored."
 msgstr "&mkvtoolnix-gui; 是基于 <productname>Qt</productname> 的 &mkvmerge; <abbrev>GUI</abbrev> (将来也会支持 &mkvinfo; 与 &mkvextract;)。通过它可以轻松访问 &mkvmerge;'s 的大多数选项。所有设置项 (如输入文件、轨道选项等) 均可以保存／恢复。"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvtoolnix-gui.xml:70
-msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
+#: doc/man/mkvtoolnix-gui.xml:71
+#, fuzzy
+#| msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
+msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the info tool, the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
 msgstr "给出扩展名为 <literal>.mtxcfg</literal> 的配置文件名，可让 GUI 在对应工具中加载这些配置文件。其他文件名将根据当前模式，添加为待混流的输入文件、在章节编辑器或头部编辑器中打开。当前模式可通过 <option>--merge</option>、<option>--edit-chapters</option> 或 <option>--edit-headers</option> 修改。默认模式为添加文件用于混流。"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvtoolnix-gui.xml:77
+#: doc/man/mkvtoolnix-gui.xml:78
 msgid "Note that if an instance of the application is already running when the application is started a second time, all file names given on the command line are handled by the already-running instance."
 msgstr "注意，若再次启动应用程序时，已经有一个该应用程序的实例在运行，则命令行给出的所有文件都将由已在运行的实例处理。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvtoolnix-gui.xml:83
+#: doc/man/mkvtoolnix-gui.xml:84
 msgid "<option>--merge</option>"
 msgstr "<option>--merge</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvtoolnix-gui.xml:85
+#: doc/man/mkvtoolnix-gui.xml:86
 msgid "All following file names will be added as source files to the current multiplex job. This is the default mode."
 msgstr "后面的所有文件名都将作为输入文件添加到当前混流任务。这是默认模式。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvtoolnix-gui.xml:90
+#: doc/man/mkvtoolnix-gui.xml:91
+#, fuzzy
+#| msgid "<option>--link</option>"
+msgid "<option>--info</option>"
+msgstr "<option>--link</option>"
+
+#. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
+#: doc/man/mkvtoolnix-gui.xml:93
+#, fuzzy
+#| msgid "All following file names will be opened in the header editor."
+msgid "All following file names will be opened in the info tool."
+msgstr "后面的所有文件名都将在头部编辑器中打开。"
+
+#. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
+#: doc/man/mkvtoolnix-gui.xml:98
 msgid "<option>--edit-chapters</option>"
 msgstr "<option>--edit-chapters</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvtoolnix-gui.xml:92
+#: doc/man/mkvtoolnix-gui.xml:100
 msgid "All following file names will be opened in the chapter editor."
 msgstr "后面的所有文件名都将在章节编辑器中打开。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvtoolnix-gui.xml:97
+#: doc/man/mkvtoolnix-gui.xml:105
 msgid "<option>--edit-headers</option>"
 msgstr "<option>--edit-headers</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvtoolnix-gui.xml:99
+#: doc/man/mkvtoolnix-gui.xml:107
 msgid "All following file names will be opened in the header editor."
 msgstr "后面的所有文件名都将在头部编辑器中打开。"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvtoolnix-gui.xml:126
+#: doc/man/mkvtoolnix-gui.xml:134
 msgid "&mkvmerge;, &mkvextract;, &mkvinfo;, &mkvpropedit;"
 msgstr "&mkvmerge;, &mkvextract;, &mkvinfo;, &mkvpropedit;"
 
