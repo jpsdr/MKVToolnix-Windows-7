@@ -52,6 +52,7 @@
    <group>
     <arg choice="opt">configuration-file-name.mtxcfg</arg>
     <arg choice="opt">source-file.ext</arg>
+    <arg choice="opt">--info <arg>matroska-file.mkv</arg></arg>
     <arg choice="opt">--edit-chapters <arg>chapter-file.ext</arg></arg>
     <arg choice="opt">--edit-headers <arg>matroska-file.mkv</arg></arg>
    </group>
@@ -61,16 +62,16 @@
  <refsect1 id="mkvtoolnix-gui.description">
   <title>Description</title>
   <para>
-   &mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge; (and will evolve to cover &mkvinfo; and
-   &mkvextract; as well). It offers easy access to most of &mkvmerge;'s options. All settings (e.g. source files, track options etc) can be
+   &mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge;. It also implements &mkvinfo;'s and
+   &mkvpropedit;'s functionality and will evolve to cover &mkvextract; as well. All settings (e.g. source files, track options etc) can be
    saved and restored.
   </para>
 
   <para>
    Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in
-   the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor
-   depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or
-   <option>--edit-headers</option>. The default mode is adding files for multiplexing.
+   the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the info tool, the chapter editor or in
+   the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--info</option>,
+   <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing.
   </para>
 
   <para>
@@ -83,6 +84,13 @@
     <term><option>--merge</option></term>
     <listitem>
      <para>All following file names will be added as source files to the current multiplex job. This is the default mode.</para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term><option>--info</option></term>
+    <listitem>
+     <para>All following file names will be opened in the info tool.</para>
     </listitem>
    </varlistentry>
 
