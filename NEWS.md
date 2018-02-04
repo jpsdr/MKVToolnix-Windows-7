@@ -9,6 +9,9 @@
   outside of strings (e.g. something like this: `// this is ignored`). Such
   comments, even though not part of the official JSON specifications, are now
   ignored when reading JSON files.
+* MKVToolNix GUI: an "info" tool has been added, replacing the functionality
+  of mkvinfo's GUI. The functionality is not on par yet but will be for
+  release v22.
 
 ## Bug fixes
 
@@ -43,6 +46,11 @@
   from the earlier files.
 * mkvmerge: MP4 reader: fixed reading HEVC/h.265 video tracks if they're
   stored as Annex B byte streams inside MP4. Fixes #2215.
+
+## Build system changes
+
+* mkvinfo: the GUI portion has been removed. mkvinfo is now a pure
+  command-line program again.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15
