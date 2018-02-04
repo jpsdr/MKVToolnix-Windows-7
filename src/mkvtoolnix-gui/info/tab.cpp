@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QStandardItem>
+#include <QThread>
 #include <QVector>
 
 #include <ebml/EbmlDummy.h>
