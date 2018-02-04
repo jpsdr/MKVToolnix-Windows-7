@@ -51,6 +51,7 @@
 #include "output/p_avc.h"
 #include "output/p_dts.h"
 #include "output/p_hevc.h"
+#include "output/p_hevc_es.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
 #include "output/p_mpeg4_p2.h"
@@ -1738,8 +1739,23 @@ qtmp4_reader_c::create_video_packetizer_avc(qtmp4_demuxer_c &dmx) {
 }
 
 void
+qtmp4_reader_c::create_video_packetizer_mpegh_p2_es(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
+  dmx.ptzr            = add_packetizer(new hevc_es_video_packetizer_c(this, m_ti));
+
+  PTZR(dmx.ptzr)->set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
+
+  if (dmx.frame_rate.numerator()) {
+    auto duration = boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator(), dmx.frame_rate.numerator()} * 1'000'000'000ll);
+    PTZR(dmx.ptzr)->set_track_default_duration(duration);
+  }
+
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+}
+
+void
 qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
-  m_ti.m_private_data = dmx.priv.size() ? dmx.priv[0] : memory_cptr{};
+  m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
   dmx.ptzr            = add_packetizer(new hevc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
@@ -1865,6 +1881,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
     else if (dmx.codec.is(codec_c::type_e::V_MPEG4_P10))
       create_video_packetizer_avc(dmx);
 
+    else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2) && dmx.m_hevc_is_annex_b)
+      create_video_packetizer_mpegh_p2_es(dmx);
+
     else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2))
       create_video_packetizer_mpegh_p2(dmx);
 
@@ -1953,7 +1972,7 @@ qtmp4_reader_c::identify() {
       info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_video);
 
     else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2))
-      info.add(mtx::id::packetizer, mtx::id::mpegh_p2_video);
+      info.add(mtx::id::packetizer, dmx.m_hevc_is_annex_b ? mtx::id::mpegh_p2_es_video : mtx::id::mpegh_p2_video);
 
     info.add(mtx::id::language, dmx.language);
 
@@ -3175,6 +3194,40 @@ qtmp4_demuxer_c::derive_track_params_from_vorbis_private_data() {
   return ok;
 }
 
+void
+qtmp4_demuxer_c::check_for_hevc_video_annex_b_bitstream() {
+  auto buf = read_first_bytes(4);
+  if (buf->get_size() < 4)
+    return;
+
+  auto value = get_uint32_be(buf->get_buffer());
+  if (value != 0x00000001)
+    return;
+
+  auto probe_size = 128 * 1024;
+  while (probe_size <= (1024 * 1024)) {
+    mtx::hevc::es_parser_c parser;
+    parser.ignore_nalu_size_length_errors();
+
+    buf = read_first_bytes(probe_size);
+    if (!buf)
+      return;
+
+    parser.add_bytes(buf);
+    if (!parser.headers_parsed()) {
+      probe_size *= 2;
+      continue;
+    }
+
+    priv.clear();
+    priv.emplace_back(parser.get_hevcc());
+
+    break;
+  }
+
+  m_hevc_is_annex_b = true;
+}
+
 bool
 qtmp4_demuxer_c::verify_audio_parameters() {
   if (codec.is(codec_c::type_e::A_MP2) || codec.is(codec_c::type_e::A_MP3))
@@ -3248,6 +3301,9 @@ qtmp4_demuxer_c::verify_mp4a_audio_parameters() {
 
 bool
 qtmp4_demuxer_c::verify_video_parameters() {
+  if (codec.is(codec_c::type_e::V_MPEGH_P2))
+    check_for_hevc_video_annex_b_bitstream();
+
   if (!v_width || !v_height || !fourcc) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n")) % id);
     return false;

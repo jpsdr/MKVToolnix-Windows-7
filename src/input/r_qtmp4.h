@@ -254,6 +254,7 @@ struct qtmp4_demuxer_c {
   unsigned int stsd_non_priv_struct_size;
   uint32_t v_width, v_height, v_bitdepth, v_display_width_flt{}, v_display_height_flt{};
   uint16_t v_colour_primaries, v_colour_transfer_characteristics, v_colour_matrix_coefficients;
+  bool m_hevc_is_annex_b{};
   std::deque<int64_t> references;
   uint32_t a_channels, a_bitdepth;
   float a_samplerate;
@@ -358,6 +359,7 @@ struct qtmp4_demuxer_c {
   void derive_track_params_from_dts_audio_bitstream();
   void derive_track_params_from_mp3_audio_bitstream();
   bool derive_track_params_from_vorbis_private_data();
+  void check_for_hevc_video_annex_b_bitstream();
 
   void set_packetizer_display_dimensions();
   void set_packetizer_colour_properties();
@@ -535,6 +537,7 @@ protected:
   virtual void create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx);
+  virtual void create_video_packetizer_mpegh_p2_es(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_standard(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_svq1(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_prores(qtmp4_demuxer_c &dmx);

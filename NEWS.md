@@ -41,6 +41,8 @@
   VTS_02_1.VOB VTS_02_2.VOB ')'`). In such a situation the content from files
   `VTS_02_1.VOB` and `VTS_02_2.VOB` where laid out in parallel to the content
   from the earlier files.
+* mkvmerge: MP4 reader: fixed reading HEVC/h.265 video tracks if they're
+  stored as Annex B byte streams inside MP4. Fixes #2215.
 
 
 # Version 20.0.0 "I Am The Sun" 2018-01-15
