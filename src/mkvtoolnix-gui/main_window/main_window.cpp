@@ -288,11 +288,8 @@ void
 MainWindow::showTheseMenusOnly(QList<QMenu *> const &menus) {
   auto p = p_func();
 
-  showAndEnableMenu(*p->ui->menuMerge,         menus.contains(p->ui->menuMerge));
-  showAndEnableMenu(*p->ui->menuHeaderEditor,  menus.contains(p->ui->menuHeaderEditor));
-  showAndEnableMenu(*p->ui->menuChapterEditor, menus.contains(p->ui->menuChapterEditor));
-  showAndEnableMenu(*p->ui->menuJobQueue,      menus.contains(p->ui->menuJobQueue));
-  showAndEnableMenu(*p->ui->menuJobOutput,     menus.contains(p->ui->menuJobOutput));
+  for (auto menu : std::vector<QMenu *>{ p->ui->menuMerge, p->ui->menuInfo, p->ui->menuHeaderEditor, p->ui->menuChapterEditor, p->ui->menuJobQueue, p->ui->menuJobOutput })
+    showAndEnableMenu(*menu, menus.contains(menu));
 }
 
 void
