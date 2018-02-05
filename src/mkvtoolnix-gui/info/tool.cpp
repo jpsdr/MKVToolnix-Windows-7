@@ -121,16 +121,11 @@ Tool::appendTab(Tab *tab) {
 
 void
 Tool::selectAndOpenFile() {
-  // TODO: Tool::openFile
-  // auto &file_types    = mtx::file_type_t::get_supported();
-  // auto &matroska_type = *brng::find_if(file_types, [](auto const &type) { return type.extensions.find("mkv") != std::string::npos; });
-  // auto filter         = Q("%1 (%2);;%3 (*)").arg(Q(matroska_type.title)).
-  auto &settings      = Util::Settings::get();
-  auto fileName       = Util::getOpenFileName(this, QY("Open Matroska file"), settings.lastOpenDirPath(), QY("All files") + Q(" (*)"));
-  if (fileName.isEmpty())
-    return;
+  auto &settings = Util::Settings::get();
+  auto fileName  = Util::getOpenFileName(this, QY("Open Matroska or WebM file"), settings.lastOpenDirPath(), QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
 
-  openFile(fileName);
+  if (!fileName.isEmpty())
+    openFile(fileName);
 }
 
 void
