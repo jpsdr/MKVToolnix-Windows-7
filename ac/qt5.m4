@@ -226,7 +226,7 @@ return 0;
       problem="test program could not be compiled"
     fi
 
-    rm -f src/info/static_plugins.cpp src/mkvtoolnix-gui/static_plugins.cpp
+    rm -f src/mkvtoolnix-gui/static_plugins.cpp
 
     if test x"$problem" = x && test x"$QT_PKG_CONFIG_STATIC" != x; then
       qmake_dir="`mktemp -d`"
@@ -272,7 +272,6 @@ EOF
         qmake_libs="`grep '^LIBS' "$makefile" | sed -Ee 's/^LIBS[[ \t]]*=[[ \t]]*//'`"
         QT_LIBS="$qmake_libs $QT_LIBS"
 
-        cp "$qmake_dir/console_plugin_import.cpp" src/info/static_plugins.cpp
         cp "$qmake_dir/console_plugin_import.cpp" src/mkvtoolnix-gui/static_plugins.cpp
       fi
 
