@@ -46,6 +46,9 @@
   from the earlier files.
 * mkvmerge: MP4 reader: fixed reading HEVC/h.265 video tracks if they're
   stored as Annex B byte streams inside MP4. Fixes #2215.
+* mkvmerge: Ogg Opus reader: mkvmerge will now emit a warning instead of
+  aborting when it encounters an Ogg Opus page with no data in the
+  packet. Fixes #2217.
 
 ## Build system changes
 

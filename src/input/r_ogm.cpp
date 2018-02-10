@@ -1201,18 +1201,22 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
     if ((4 <= op.bytes) && !memcmp(op.packet, "Opus", 4))
       continue;
 
-    auto packet                = std::make_shared<packet_t>(memory_c::clone(op.packet, op.bytes));
-    auto toc                   = mtx::opus::toc_t::decode(packet->data);
-    m_calculated_end_timestamp += toc.packet_duration;
+    try {
+      auto packet                = std::make_shared<packet_t>(memory_c::clone(op.packet, op.bytes));
+      auto toc                   = mtx::opus::toc_t::decode(packet->data);
+      m_calculated_end_timestamp += toc.packet_duration;
 
-    if (m_calculated_end_timestamp > ogg_timestamp) {
-      packet->discard_padding = m_calculated_end_timestamp - ogg_timestamp;
-      mxdebug_if(ms_debug,
-                 boost::format("Opus discard padding calculated %1% Ogg timestamp %2% diff %3% samples %4% (Ogg page's granulepos %5%)\n")
-                 % m_calculated_end_timestamp % ogg_timestamp % packet->discard_padding % (packet->discard_padding.to_ns() * 48000 / 1000000000) % granulepos);
+      if (m_calculated_end_timestamp > ogg_timestamp) {
+        packet->discard_padding = m_calculated_end_timestamp - ogg_timestamp;
+        mxdebug_if(ms_debug,
+                   boost::format("Opus discard padding calculated %1% Ogg timestamp %2% diff %3% samples %4% (Ogg page's granulepos %5%)\n")
+                   % m_calculated_end_timestamp % ogg_timestamp % packet->discard_padding % (packet->discard_padding.to_ns() * 48000 / 1000000000) % granulepos);
+      }
+
+      reader->m_reader_packetizers[ptzr]->process(packet);
+    } catch (mtx::opus::decode_error &ex) {
+      mxwarn_fn(m_ti.m_fname, boost::format(Y("Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n")) % format_timestamp(ogg_timestamp) % ex);
     }
-
-    reader->m_reader_packetizers[ptzr]->process(packet);
   }
 }
 
