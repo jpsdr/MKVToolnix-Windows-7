@@ -47,21 +47,10 @@ class reader_c;
 namespace mtx { namespace aac {
 
 struct audio_config_t {
-  unsigned int profile, sample_rate, output_sample_rate, channels, samples_per_frame;
-  bool sbr;
+  unsigned int profile{}, sample_rate{}, output_sample_rate{}, channels{}, samples_per_frame{1024};
+  bool sbr{};
   memory_cptr ga_specific_config;
-  unsigned int ga_specific_config_bit_size;
-
-  audio_config_t()
-    : profile{}
-    , sample_rate{}
-    , output_sample_rate{}
-    , channels{}
-    , samples_per_frame{1024}
-    , sbr{}
-    , ga_specific_config_bit_size{}
-  {
-  }
+  unsigned int ga_specific_config_bit_size{};
 };
 
 unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
