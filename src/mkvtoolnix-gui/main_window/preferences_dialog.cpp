@@ -90,6 +90,10 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupMergeAddingAppendingFilesPolicy();
   setupTrackPropertiesLayout();
 
+  // Info tool page
+  ui->wIDefaultJobSettings->setFileNameVisible(false);
+  ui->wIDefaultJobSettings->setSettings(m_cfg.m_defaultInfoJobSettings);
+
   // Chapter editor page
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   ui->cbCETextFileCharacterSet->setAdditionalItems(m_cfg.m_ceTextFileCharacterSet).setup(true, QY("Always ask the user")).setCurrentByData(m_cfg.m_ceTextFileCharacterSet);
@@ -183,6 +187,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
                    addItem(Page::Output,              pMerge,  QY("Output"));
                    addItem(Page::EnablingTracks,      pMerge,  QY("Enabling tracks"));
                    addItem(Page::Playlists,           pMerge,  QY("Playlists"));
+                   addItem(Page::Info,                nullptr, QY("Info tool"),             "document-preview-archive");
                    addItem(Page::HeaderEditor,        nullptr, QY("Header editor"),         "document-edit");
                    addItem(Page::ChapterEditor,       nullptr, QY("Chapter editor"),        "story-editor");
   auto pJobs     = addItem(Page::Jobs,                nullptr, QY("Jobs & job queue"),      "view-task");
@@ -707,6 +712,9 @@ PreferencesDialog::save() {
   m_cfg.m_oftenUsedLanguagesOnly             = ui->cbOftenUsedLanguagesOnly->isChecked() && !m_cfg.m_oftenUsedLanguages.isEmpty();
   m_cfg.m_oftenUsedCountriesOnly             = ui->cbOftenUsedCountriesOnly->isChecked() && !m_cfg.m_oftenUsedCountries.isEmpty();
   m_cfg.m_oftenUsedCharacterSetsOnly         = ui->cbOftenUsedCharacterSetsOnly->isChecked() && !m_cfg.m_oftenUsedCharacterSets.isEmpty();
+
+  // Info tool page
+  m_cfg.m_defaultInfoJobSettings             = ui->wIDefaultJobSettings->settings();
 
   // Header editor page
   m_cfg.m_headerEditorDroppedFilesPolicy     = static_cast<Util::Settings::HeaderEditorDroppedFilesPolicy>(ui->cbHEDroppedFilesPolicy->currentData().toInt());

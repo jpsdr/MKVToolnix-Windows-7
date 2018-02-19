@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mtx::gui::Info::JobSettingsWidget</class>
+ <widget class="QWidget" name="mtx::gui::Info::JobSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>538</width>
+    <height>234</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QGridLayout" name="gridLayout" columnstretch="0,1">
+     <item row="1" column="0">
+      <widget class="QLabel" name="modeLabel">
+       <property name="text">
+        <string>&amp;Mode:</string>
+       </property>
+       <property name="buddy">
+        <cstring>mode</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="mode">
+       <item>
+        <property name="text">
+         <string>all elements in a tree-like structure</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>one-line summaries for each track and frame</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="verbosityLabel">
+       <property name="text">
+        <string>&amp;Verbosity:</string>
+       </property>
+       <property name="buddy">
+        <cstring>verbosity</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="verbosity">
+       <item>
+        <property name="text">
+         <string>stop at the first cluster</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>show all elements</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="hexDumpsLabel">
+       <property name="text">
+        <string>&amp;Hex dumps:</string>
+       </property>
+       <property name="buddy">
+        <cstring>hexDumps</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="hexDumps">
+       <item>
+        <property name="text">
+         <string>do not show hex dumps</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>show first 16 bytes of frames and CodecPrivate elements as hex dumps</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>show all bytes of frames and CodecPrivate elements as hex dumps</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="fileNameLabel">
+       <property name="text">
+        <string>&amp;File name:</string>
+       </property>
+       <property name="buddy">
+        <cstring>fileName</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="mtx::gui::Util::BasicLineEdit" name="fileName"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="browseFileName">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../qt_resources.qrc">
+           <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checksums">
+     <property name="text">
+      <string>Calculate Adler32 &amp;checksums for each frame and binary element</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="trackInfo">
+     <property name="text">
+      <string>Show a &amp;summary line with statistics for each track at the end</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="hexPositions">
+     <property name="text">
+      <string>Output element positions in he&amp;xadecimal</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mtx::gui::Util::BasicLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>mkvtoolnix-gui/util/basic_line_edit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>fileName</tabstop>
+  <tabstop>browseFileName</tabstop>
+  <tabstop>mode</tabstop>
+  <tabstop>verbosity</tabstop>
+  <tabstop>hexDumps</tabstop>
+  <tabstop>checksums</tabstop>
+  <tabstop>trackInfo</tabstop>
+  <tabstop>hexPositions</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../qt_resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

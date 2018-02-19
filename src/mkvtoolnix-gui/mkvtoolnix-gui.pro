@@ -46,7 +46,9 @@ FORMS += \
     forms/header_editor/action_for_dropped_files_dialog.ui \
     forms/main_window/code_of_conduct_dialog.ui \
     forms/info/tab.ui \
-    forms/info/tool.ui
+    forms/info/tool.ui \
+    forms/info/job_settings_widget.ui \
+    forms/info/job_settings_dialog.ui
 
 RESOURCES += \
     qt_resources.qrc

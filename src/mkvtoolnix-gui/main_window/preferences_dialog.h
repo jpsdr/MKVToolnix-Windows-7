@@ -27,6 +27,7 @@ public:
     Output,
     EnablingTracks,
     Playlists,
+    Info,
     HeaderEditor,
     ChapterEditor,
     Jobs,

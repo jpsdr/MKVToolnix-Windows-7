@@ -40,6 +40,8 @@ public slots:
 
   virtual void selectAndOpenFile();
 
+  virtual void saveCurrentTab();
+
   virtual bool closeTab(int index);
   virtual void closeCurrentTab();
   virtual void closeSendingTab();

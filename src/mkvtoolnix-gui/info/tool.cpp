@@ -54,6 +54,7 @@ Tool::setupActions() {
 
   connect(m_infoMenu,               &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
 
+  connect(mwUi->actionInfoSave,     &QAction::triggered,             this, &Tool::saveCurrentTab);
   connect(mwUi->actionInfoOpen,     &QAction::triggered,             this, &Tool::selectAndOpenFile);
   connect(mwUi->actionInfoClose,    &QAction::triggered,             this, &Tool::closeCurrentTab);
   connect(mwUi->actionInfoCloseAll, &QAction::triggered,             this, &Tool::closeAllTabs);
@@ -174,6 +175,13 @@ Tool::closeAllTabs() {
   }
 
   return true;
+}
+
+void
+Tool::saveCurrentTab() {
+  auto tab = currentTab();
+  if (tab)
+    tab->save();
 }
 
 void

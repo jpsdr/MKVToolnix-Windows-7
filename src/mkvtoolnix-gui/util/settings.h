@@ -9,6 +9,7 @@
 #include <QVariant>
 
 #include "common/translation.h"
+#include "mkvtoolnix-gui/info/job_settings.h"
 
 class QSettings;
 class QSplitter;
@@ -167,6 +168,7 @@ public:
 
   QString m_mediaInfoExe;
 
+  Info::JobSettings m_defaultInfoJobSettings;
   RunProgramConfigList m_runProgramConfigurations;
 
 public:
@@ -194,10 +196,12 @@ public slots:
 protected:
   void loadDefaults(QSettings &reg, QString const &guiVersion);
   void loadSplitterSizes(QSettings &reg);
+  void loadDefaultInfoJobSettings(QSettings &reg);
   void loadRunProgramConfigurations(QSettings &reg);
 
   void saveDefaults(QSettings &reg) const;
   void saveSplitterSizes(QSettings &reg) const;
+  void saveDefaultInfoJobSettings(QSettings &reg) const;
   void saveRunProgramConfigurations(QSettings &reg) const;
 
   void addDefaultRunProgramConfigurations(QSettings &reg);

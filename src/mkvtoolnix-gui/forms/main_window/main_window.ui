@@ -41,7 +41,7 @@
      <x>0</x>
      <y>0</y>
      <width>838</width>
-     <height>23</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGUI">
@@ -216,6 +216,8 @@
      <string>&amp;Info tool</string>
     </property>
     <addaction name="actionInfoOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionInfoSave"/>
     <addaction name="separator"/>
     <addaction name="actionInfoClose"/>
     <addaction name="separator"/>
@@ -869,6 +871,18 @@
    </property>
    <property name="text">
     <string>Close &amp;all tabs</string>
+   </property>
+  </action>
+  <action name="actionInfoSave">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

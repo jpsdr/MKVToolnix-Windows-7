@@ -72,7 +72,7 @@ InfoJob::start() {
   p->thread = new QThread;
   p->info   = new Util::KaxInfo;
 
-  p->info->set_use_gui(true);
+  p->info->set_use_gui(p->config->m_destinationFileName.isEmpty());
   p->info->set_source_file_name(to_utf8(p->config->m_sourceFileName));
   p->info->set_destination_file_name(to_utf8(p->config->m_destinationFileName));
   p->info->set_calc_checksums(p->config->m_calcChecksums);

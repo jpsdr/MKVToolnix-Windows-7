@@ -301,6 +301,7 @@ Settings::load() {
 
   loadDefaults(reg, guiVersion);
   loadSplitterSizes(reg);
+  loadDefaultInfoJobSettings(reg);
   loadRunProgramConfigurations(reg);
   addDefaultRunProgramConfigurations(reg);
 }
@@ -350,6 +351,25 @@ Settings::loadSplitterSizes(QSettings &reg) {
     m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
     m_relativeOutputDir    = Q("..");
   }
+}
+
+void
+Settings::loadDefaultInfoJobSettings(QSettings &reg) {
+  reg.beginGroup("settings");
+  reg.beginGroup("info");
+  reg.beginGroup("defaultJobSettings");
+
+  auto &s          = m_defaultInfoJobSettings;
+  s.m_mode         = static_cast<Info::JobSettings::Mode>(     reg.value("mode",      static_cast<int>(Info::JobSettings::Mode::Tree))                   .toInt());
+  s.m_verbosity    = static_cast<Info::JobSettings::Verbosity>(reg.value("verbosity", static_cast<int>(Info::JobSettings::Verbosity::StopAtFirstCluster)).toInt());
+  s.m_hexDumps     = static_cast<Info::JobSettings::HexDumps>( reg.value("hexDumps",  static_cast<int>(Info::JobSettings::HexDumps::None))               .toInt());
+  s.m_checksums    = reg.value("checksums").toBool();
+  s.m_trackInfo    = reg.value("trackInfo").toBool();
+  s.m_hexPositions = reg.value("hexPositions").toBool();
+
+  reg.endGroup();
+  reg.endGroup();
+  reg.endGroup();
 }
 
 void
@@ -544,6 +564,7 @@ Settings::save()
 
   saveDefaults(reg);
   saveSplitterSizes(reg);
+  saveDefaultInfoJobSettings(reg);
   saveRunProgramConfigurations(reg);
 }
 
@@ -575,6 +596,26 @@ Settings::saveSplitterSizes(QSettings &reg)
   reg.endGroup();               // splitterSizes
 
   saveRunProgramConfigurations(reg);
+}
+
+void
+Settings::saveDefaultInfoJobSettings(QSettings &reg)
+  const {
+  reg.beginGroup("settings");
+  reg.beginGroup("info");
+  reg.beginGroup("defaultJobSettings");
+
+  auto &s = m_defaultInfoJobSettings;
+  reg.setValue("mode",         static_cast<int>(s.m_mode));
+  reg.setValue("verbosity",    static_cast<int>(s.m_verbosity));
+  reg.setValue("hexDumps",     static_cast<int>(s.m_hexDumps));
+  reg.setValue("checksums",    s.m_checksums);
+  reg.setValue("trackInfo",    s.m_trackInfo);
+  reg.setValue("hexPositions", s.m_hexPositions);
+
+  reg.endGroup();
+  reg.endGroup();
+  reg.endGroup();
 }
 
 void

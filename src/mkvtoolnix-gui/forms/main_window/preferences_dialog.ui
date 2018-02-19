@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>813</width>
-    <height>489</height>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1126,6 +1126,35 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="pInfoGeneral">
+       <layout class="QVBoxLayout" name="verticalLayout_33">
+        <item>
+         <widget class="QGroupBox" name="groupBox_17">
+          <property name="title">
+           <string>Default info job settings</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_32">
+           <item>
+            <widget class="mtx::gui::Info::JobSettingsWidget" name="wIDefaultJobSettings" native="true"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>425</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="pHeaderEditorGeneral">
        <layout class="QVBoxLayout" name="verticalLayout_29">
         <property name="leftMargin">
@@ -1633,6 +1662,12 @@
    <class>mtx::gui::Util::BasicTabWidget</class>
    <extends>QTabWidget</extends>
    <header>mkvtoolnix-gui/util/basic_tab_widget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Info::JobSettingsWidget</class>
+   <extends>QWidget</extends>
+   <header>mkvtoolnix-gui/info/job_settings_widget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

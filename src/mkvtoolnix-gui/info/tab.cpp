@@ -17,8 +17,13 @@
 #include "common/mm_io_x.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/info/tab.h"
+#include "mkvtoolnix-gui/info/info_config.h"
 #include "mkvtoolnix-gui/info/initial_scan.h"
+#include "mkvtoolnix-gui/info/job_settings.h"
+#include "mkvtoolnix-gui/info/job_settings_dialog.h"
 #include "mkvtoolnix-gui/info/tab.h"
+#include "mkvtoolnix-gui/jobs/info_job.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
@@ -45,7 +50,7 @@ public:
 
   mm_io_cptr m_file;
 
-  QString m_fileName;
+  QString m_fileName, m_savedFileName;
   QVector<QStandardItem *> m_treeInsertionPosition;
   QThread *m_queueThread{};
   Util::SerialWorkerQueue *m_queue{};
@@ -126,6 +131,38 @@ Tab::load(QString const &fileName) {
     qDebug() << "Info::Tab::load: kax_info exception:" << Q(ex.what());
 
   }
+}
+
+void
+Tab::save() {
+  auto p = p_func();
+
+  JobSettingsDialog dlg{this, p->m_savedFileName};
+  if (dlg.exec() == QDialog::Rejected)
+    return;
+
+  auto settings                    = dlg.settings();
+  auto newConfig                   = std::make_shared<InfoConfig>();
+
+  newConfig->m_sourceFileName      = p->m_fileName;
+  newConfig->m_destinationFileName = settings.m_fileName;
+  newConfig->m_calcChecksums       = settings.m_checksums;
+  newConfig->m_showSummary         = settings.m_mode == JobSettings::Mode::Summary;
+  newConfig->m_showHexdump         = settings.m_hexDumps != JobSettings::HexDumps::None;
+  newConfig->m_showSize            = true;
+  newConfig->m_showTrackInfo       = settings.m_trackInfo;
+  newConfig->m_hexPositions        = settings.m_hexPositions;
+  newConfig->m_verbose             = settings.m_mode      == JobSettings::Mode::Summary                 ? 4
+                                   : settings.m_verbosity == JobSettings::Verbosity::StopAtFirstCluster ? 1
+                                   :                                                                      4;
+  p->m_savedFileName               = settings.m_fileName;
+
+  auto job                         = std::make_shared<Jobs::InfoJob>(Jobs::Job::PendingAuto, newConfig);
+
+  job->setDateAdded(QDateTime::currentDateTime());
+  job->setDescription(job->displayableDescription());
+
+  MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 }
 
 void
