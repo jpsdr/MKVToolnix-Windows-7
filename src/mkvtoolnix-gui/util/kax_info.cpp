@@ -61,25 +61,15 @@ KaxInfo::ui_show_progress(int percentage,
   emit progress_changed(percentage, Q(text));
 }
 
-kax_info_c::result_e
-KaxInfo::process_file() {
-  emit started();
-
-  auto result = kax_info_c::process_file();
-
-  emit finished(result);
-
-  return result;
-}
-
 void
 KaxInfo::run() {
   auto p = p_func();
 
-  if (p->m_in)
-    process_file();
-  else
-    open_and_process_file(p->m_source_file_name);
+  emit started();
+
+  auto result = p->m_in ? process_file() : open_and_process_file(p->m_source_file_name);
+
+  emit finished(result);
 }
 
 void

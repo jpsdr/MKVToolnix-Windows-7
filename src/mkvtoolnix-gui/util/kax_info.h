@@ -30,8 +30,6 @@ public:
   KaxInfo(QString const &file_name);
   virtual ~KaxInfo();
 
-  virtual result_e process_file() override;
-
   virtual void ui_show_error(std::string const &error) override;
   virtual void ui_show_element_info(int level, std::string const &text, int64_t position, int64_t size) override;
   virtual void ui_show_element(EbmlElement &e) override;
