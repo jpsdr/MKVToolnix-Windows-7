@@ -37,10 +37,8 @@ namespace mtx { namespace gui { namespace Info {
 using namespace mtx::gui;
 
 namespace {
-int PositionRole    = Qt::UserRole + 1;
-int HeadSizeRole    = Qt::UserRole + 2;
-int ContentSizeRole = Qt::UserRole + 3;
-int EbmlIdRole      = Qt::UserRole + 4;
+int ElementRole = Qt::UserRole + 1;
+int EbmlIdRole  = Qt::UserRole + 2;
 }
 
 class TabPrivate {
@@ -184,6 +182,22 @@ Tab::retranslateUi() {
   model.horizontalHeaderItem(3)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   emit titleChanged();
+
+  if (!p->m_info)
+    return;
+
+  Util::walkTree(model, QModelIndex{}, [this, &model](QModelIndex const &idx) {
+    QList<QStandardItem *> items;
+    for (int columnIdx = 0, numColumns = model.columnCount(); columnIdx < numColumns; ++columnIdx)
+      items << model.itemFromIndex(idx.sibling(idx.row(), columnIdx));
+
+    auto element = reinterpret_cast<EbmlElement *>(items[0]->data(ElementRole).toULongLong());
+    if (!element)
+      return;
+
+    setItemsFromElement(items, *element);
+  });
+
 }
 
 void
@@ -204,7 +218,6 @@ Tab::showElement(int level,
 
   QList<QStandardItem *> items{ new QStandardItem{}, new QStandardItem{}, new QStandardItem{}, new QStandardItem{} };
   setItemsFromElement(items, *element);
-
 
   while (p->m_treeInsertionPosition.size() > (level + 1))
     p->m_treeInsertionPosition.removeLast();
@@ -244,10 +257,8 @@ Tab::setItemsFromElement(QList<QStandardItem *> &items,
   items[2]->setTextAlignment(Qt::AlignRight);
   items[3]->setTextAlignment(Qt::AlignRight);
 
-  items[0]->setData(static_cast<qint64>(element.GetElementPosition()), PositionRole);
-  items[0]->setData(static_cast<qint64>(element.HeadSize()),           HeadSizeRole);
-  items[0]->setData(static_cast<qint64>(element.GetSize()),            ContentSizeRole);
-  items[0]->setData(static_cast<qint64>(EbmlId(element).GetValue()),   EbmlIdRole);
+  items[0]->setData(reinterpret_cast<qulonglong>(&element),          ElementRole);
+  items[0]->setData(static_cast<qint64>(EbmlId(element).GetValue()), EbmlIdRole);
 }
 
 void
