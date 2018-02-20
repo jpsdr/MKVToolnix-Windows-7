@@ -29,10 +29,7 @@ KaxInfo::~KaxInfo() {
 
 void
 KaxInfo::ui_show_error(std::string const &error) {
-  if (!p_func()->m_use_gui)
-    kax_info_c::ui_show_error(error);
-  else
-    emit error_found(Q(error));
+  emit error_found(Q(error));
 }
 
 void
@@ -40,26 +37,22 @@ KaxInfo::ui_show_element_info(int level,
                               std::string const &text,
                               int64_t position,
                               int64_t size) {
-  auto p = p_func();
-
-  if (!p->m_use_gui || !p->m_destination_file_name.empty())
-    kax_info_c::ui_show_element_info(level, text, position, size);
-
-  else {
+  if (p_func()->m_use_gui)
     emit element_info_found(level, Q(text), position, size);
-  }
+
+  else
+    kax_info_c::ui_show_element_info(level, text, position, size);
 }
 
 void
 KaxInfo::ui_show_element(EbmlElement &e) {
   auto p = p_func();
 
-  if (!p->m_use_gui || !p->m_destination_file_name.empty())
-    kax_info_c::ui_show_element(e);
-
-  else {
+  if (p->m_use_gui)
     emit element_found(p->m_level, &e);
-  }
+
+  else
+    kax_info_c::ui_show_element(e);
 }
 
 void
