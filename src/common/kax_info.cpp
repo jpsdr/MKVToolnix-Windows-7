@@ -631,11 +631,9 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
   PRE(KaxCluster, ([this, p](EbmlElement &e) -> bool {
     p->m_cluster = static_cast<KaxCluster *>(&e);
-
-    if (p->m_use_gui)
-      ui_show_progress(100 * p->m_cluster->GetElementPosition() / p->m_file_size, Y("Parsing file"));
-
     p->m_cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(p->m_cluster), p->m_ts_scale);
+
+    ui_show_progress(100 * p->m_cluster->GetElementPosition() / p->m_file_size, Y("Parsing file"));
 
     return true;
   }));
