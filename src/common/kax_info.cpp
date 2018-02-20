@@ -97,6 +97,7 @@ unsigned int s_bf_format_binary_2                   = 0;
 unsigned int s_bf_block_group_block_summary         = 0;
 unsigned int s_bf_block_group_block_frame           = 0;
 unsigned int s_bf_block_group_summary_position      = 0;
+unsigned int s_bf_block_group_summary_position_hex  = 0;
 unsigned int s_bf_block_group_summary_with_duration = 0;
 unsigned int s_bf_block_group_summary_no_duration   = 0;
 unsigned int s_bf_block_group_summary_v2            = 0;
@@ -110,6 +111,7 @@ unsigned int s_bf_at_hex                            = 0;
 unsigned int s_bf_block_group_block_adler           = 0;
 unsigned int s_bf_simple_block_adler                = 0;
 unsigned int s_bf_simple_block_position             = 0;
+unsigned int s_bf_simple_block_position_hex         = 0;
 unsigned int s_bf_crc32_value                       = 0;
 unsigned int s_bf_element_size                      = 0;
 
@@ -218,6 +220,7 @@ kax_info_c::init_common_formats() {
   BF_ADD(s_bf_block_group_block_summary,         Y("track number %1%, %2% frame(s), timestamp %3%"));
   BF_ADD(s_bf_block_group_block_frame,           Y("Frame with size %1%%2%%3%"));
   BF_ADD(s_bf_block_group_summary_position,      Y(", position %1%"));
+  BF_ADD(s_bf_block_group_summary_position_hex,  Y(", position 0x%|1$x|"));
   BF_ADD(s_bf_block_group_summary_with_duration, Y("%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"));
   BF_ADD(s_bf_block_group_summary_no_duration,   Y("%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"));
   BF_ADD(s_bf_block_group_summary_v2,            Y("[%1% frame for track %2%, timestamp %3%]"));
@@ -231,9 +234,10 @@ kax_info_c::init_common_formats() {
   BF_ADD(s_bf_crc32_value,                         "0x%|1$08x|");
   BF_ADD(s_bf_element_size,                      Y("size %1%"));
 
-  s_bf_block_group_block_adler = s_bf_format_binary_2;
-  s_bf_simple_block_adler      = s_bf_format_binary_2;
-  s_bf_simple_block_position   = s_bf_block_group_summary_position;
+  s_bf_block_group_block_adler   = s_bf_format_binary_2;
+  s_bf_simple_block_adler        = s_bf_format_binary_2;
+  s_bf_simple_block_position     = s_bf_block_group_summary_position;
+  s_bf_simple_block_position_hex = s_bf_block_group_summary_position_hex;
 }
 
 #undef BF_ADD
@@ -951,7 +955,7 @@ kax_info_c::post_block_group(EbmlElement &e) {
 
     for (fidx = 0; fidx < p->m_frame_sizes.size(); fidx++) {
       if (1 <= p->m_verbose) {
-        position   = (s_common_formats[s_bf_block_group_summary_position] % frame_pos).str();
+        position   = ((p->m_hex_positions ? s_common_formats[s_bf_block_group_summary_position_hex] : s_common_formats[s_bf_block_group_summary_position]) % frame_pos).str();
         frame_pos += p->m_frame_sizes[fidx];
       }
 
@@ -1068,7 +1072,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
 
     for (int idx = 0; idx < num_frames; idx++) {
       if (1 <= p->m_verbose) {
-        position   = (s_common_formats[s_bf_simple_block_position] % frame_pos).str();
+        position   = ((p->m_hex_positions ? s_common_formats[s_bf_simple_block_position_hex] : s_common_formats[s_bf_simple_block_position]) % frame_pos).str();
         frame_pos += p->m_frame_sizes[idx];
       }
 

@@ -49,6 +49,7 @@
 * mkvmerge: Ogg Opus reader: mkvmerge will now emit a warning instead of
   aborting when it encounters an Ogg Opus page with no data in the
   packet. Fixes #2217.
+* mkvinfo: the `--hex-positions` parameter did nothing in summary mode.
 
 ## Build system changes
 
