@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-20 20:14+0100\n"
-"PO-Revision-Date: 2018-02-20 20:13+0100\n"
+"POT-Creation-Date: 2018-02-20 21:03+0100\n"
+"PO-Revision-Date: 2018-02-20 21:04+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -1601,7 +1601,7 @@ msgstr "&Hilfe"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:169
 msgid "&Hex dumps:"
-msgstr "&Hex-Speicherauszüge:"
+msgstr "&Hexdumps:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:520
@@ -2998,6 +2998,10 @@ msgstr "Alle Kapitel wurden aus der Datei »%1« entfernt."
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1761
 msgid "All destination files"
 msgstr "Alle Zieldateien"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
+msgid "All elements in a tree-like structure"
+msgstr "Alle Elemente in einer baumförmigen Struktur"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 msgid "All entries"
@@ -4744,6 +4748,10 @@ msgstr "Anzeigebreite/-höhe:"
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "Keinen Eintrag für Kapitel im Meta-Index erzeugen"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
+msgid "Do not show hex dumps"
+msgstr "Keine Hexdumps ausgeben"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -7554,6 +7562,10 @@ msgstr "Ein Kapitel pro angehängter Datei"
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
 msgstr "Eine der Optionen »--attachment-name«, »--attachment-description«, »--attachment-mime-type« oder »--attachment-uid« wurde benutzt, ohne dass eine dieser Optionen folgte: »--add-attachment«, »--replace-attachment« oder »--update-attachment«.\n"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
+msgid "One-line summaries for each track and frame"
+msgstr "Einzeilige Zusammenfassungen für jede Spur und jedes Bild"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
 msgid "Online check for updates"
@@ -8968,6 +8980,18 @@ msgstr "Für jede Spur am Ende eine &zusammenfassende Zeile mit Statistiken ausg
 msgid "Show all bytes of each frame as a hex dump."
 msgstr "Alle Byte aller Bilder als Hexdump anzeigen"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
+msgid "Show all bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Alle Bytes von Bildern und CodecPrivate-Elementen als Hexdumps anzeigen"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
+msgid "Show all elements"
+msgstr "Alle Elemente anzeigen"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
+msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Die ersten 16 Bytes jedes Bildes und CodecPrivate-Elements als Hexdumps anzeigen"
+
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
 #, no-c-format
 msgid "Show job output"
@@ -9269,6 +9293,10 @@ msgstr "Stereoskopie:"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
 msgid "Stop &after all running jobs have finished"
 msgstr "&Nach dem Beenden aller laufenden Jobs anhalten"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
+msgid "Stop at the first cluster"
+msgstr "Am ersten Cluster anhalten"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
@@ -12337,10 +12365,6 @@ msgstr "[%1%-Spur für Spur %2%, Zeitstempel %3%]"
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): ungetesteter Code (»size« ist ungerade). Falls Mkvmerge abstürzt oder die resultierende Datei nicht die vollständige und korrekte Audiospur enthält, dann wenden Sie sich bitte an den Autor Moritz Bunkus <moritz@bunkus.org>.\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
-msgid "all elements in a tree-like structure"
-msgstr "alle Elemente in einer baumförmigen Struktur"
-
 #: src/common/stereo_mode.cpp:59
 msgid "anaglyph (cyan/red)"
 msgstr "anaglyph (Zyan/Rot)"
@@ -12455,10 +12479,6 @@ msgstr "Anzeigehöhe: %1%"
 #, boost-format
 msgid "display width: %1%"
 msgstr "Anzeigebreite: %1%"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
-msgid "do not show hex dumps"
-msgstr "keine Hex-Speicherabzüge ausgeben"
 
 #: src/common/kax_info.cpp:800
 msgid "encryption"
@@ -12899,10 +12919,6 @@ msgstr "ogg_stream_init schlug für Datenstrom Nummer %1% fehl. Es wird versucht
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer schlug fehl\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-msgid "one-line summaries for each track and frame"
-msgstr "einzeilige Zusammenfassungen für jede Spur und jedes Bild"
-
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:129
 msgid "or"
@@ -12986,18 +13002,6 @@ msgstr "zeilenversetzt (rechts zuerst)"
 msgid "sampling freq: %1%"
 msgstr "Abtastfrequenz: %1%"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
-msgid "show all bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "alle Bytes von Bildern und CodecPrivate-Elementen als Hex-Speicherabzug anzeigen"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
-msgid "show all elements"
-msgstr "alle Elemente anzeigen"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
-msgid "show first 16 bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "die ersten 16 Bytes jedes Bildes und CodecPrivate-Elements als Hex-Speicherabzug anzeigen"
-
 #: src/common/stereo_mode.cpp:50
 msgid "side by side (left first)"
 msgstr "Seite an Seite (links zuerst)"
@@ -13018,10 +13022,6 @@ msgstr "unbekannte Größe"
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: ungültiges Format. Es wurde keine »Format«-Zeile im Abschnitt »[Events]« gefunden."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
-msgid "stop at the first cluster"
-msgstr "am ersten Cluster anhalten"
 
 #: src/input/r_matroska.cpp:113
 msgid "subtitle"

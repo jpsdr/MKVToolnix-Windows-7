@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-20 20:14+0100\n"
+"POT-Creation-Date: 2018-02-20 21:03+0100\n"
 "PO-Revision-Date: 2018-02-08 20:47+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -3005,6 +3005,10 @@ msgstr "Wszystkie rozdziały zostały usunięte z pliku \"%1\"."
 msgid "All destination files"
 msgstr "Do wszystkich plików docelowych"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
+msgid "All elements in a tree-like structure"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 msgid "All entries"
 msgstr "Wszystkie"
@@ -4797,6 +4801,10 @@ msgstr "Wyświetlana szerokość/wysokość:"
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "Nie dodaje wpisu o rozdziałach do elementu indeksu wyszukiwania."
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
+msgid "Do not show hex dumps"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -7634,6 +7642,11 @@ msgstr "Jeden rozdział dla każdego scalonego pliku"
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
 msgstr "Jedna z opcji \"--attachment-name\", \"--attachment-description\", \"--attachment-mime-type\" lub \"--attachment-uid\" została użyta bez następujących opcji: \"--add-attachment\",  \"--replace-attachment\" lub \"--update-attachment\".\n"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
+#, fuzzy
+msgid "One-line summaries for each track and frame"
+msgstr "Pokaż statystyki dla każdej ścieżki w trybie szczegółowym."
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
 msgid "Online check for updates"
@@ -9061,6 +9074,21 @@ msgstr "Pokaż statystyki dla każdej ścieżki w trybie szczegółowym."
 msgid "Show all bytes of each frame as a hex dump."
 msgstr "Pokaż wszystkie bajty każdej klatki jako zrzut heksadecymalny."
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
+#, fuzzy
+msgid "Show all bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Pokaż wszystkie bajty każdej klatki jako zrzut heksadecymalny."
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
+#, fuzzy
+msgid "Show all elements"
+msgstr "Pok&aż wszystkie elementy"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
+#, fuzzy
+msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Pokaż pierwsze 16 bajtów każdej klatki jako zrzut heksadecymalny."
+
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
 #, no-c-format
 msgid "Show job output"
@@ -9367,6 +9395,10 @@ msgstr "Stereoskopia:"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
 msgid "Stop &after all running jobs have finished"
 msgstr "Z&atrzymaj po zakończeniu wszystkich trwających zadań"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
+msgid "Stop at the first cluster"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
@@ -12463,10 +12495,6 @@ msgstr "[%1% klatka ścieżki %2%, kod czasowy %3%]"
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): Nietestowany kod (\"size\" jest nieparzysty). Jeśli mkvmerge ulegnie awarii lub plik wynikowy nie będzie zawierał kompletnej i prawidłowej ścieżki audio, proszę skontaktować się z autorem: Moritz Bunkus at moritz@bunkus.org.\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
-msgid "all elements in a tree-like structure"
-msgstr ""
-
 #: src/common/stereo_mode.cpp:59
 msgid "anaglyph (cyan/red)"
 msgstr "Anaglif (cyjan/czerwony)"
@@ -12583,10 +12611,6 @@ msgstr "wyświetlana wysokość: %1%"
 #, boost-format
 msgid "display width: %1%"
 msgstr "wyświetlana szerokość: %1%"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
-msgid "do not show hex dumps"
-msgstr ""
 
 #: src/common/kax_info.cpp:800
 msgid "encryption"
@@ -13037,11 +13061,6 @@ msgstr "ogg_stream_init dla ścieżki numer %1% zakończony niepowodzeniem. Dals
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer zakończono niepowodzeniem\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-#, fuzzy
-msgid "one-line summaries for each track and frame"
-msgstr "Pokaż statystyki dla każdej ścieżki w trybie szczegółowym."
-
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:129
 msgid "or"
@@ -13125,21 +13144,6 @@ msgstr "Poziomy przeplot (prawe pierwsze)"
 msgid "sampling freq: %1%"
 msgstr "częstotliwość próbkowania: %1%"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
-#, fuzzy
-msgid "show all bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Pokaż wszystkie bajty każdej klatki jako zrzut heksadecymalny."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
-#, fuzzy
-msgid "show all elements"
-msgstr "Pok&aż wszystkie elementy"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
-#, fuzzy
-msgid "show first 16 bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Pokaż pierwsze 16 bajtów każdej klatki jako zrzut heksadecymalny."
-
 #: src/common/stereo_mode.cpp:50
 msgid "side by side (left first)"
 msgstr "Obok siebie (lewe pierwsze)"
@@ -13160,10 +13164,6 @@ msgstr "nieznany rozmiar"
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Nieprawidłowy format. Nie można odnaleźć linii \"Format\" w sekcji \"[Events]\"."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
-msgid "stop at the first cluster"
-msgstr ""
 
 #: src/input/r_matroska.cpp:113
 msgid "subtitle"

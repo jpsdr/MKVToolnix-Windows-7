@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-20 20:14+0100\n"
+"POT-Creation-Date: 2018-02-20 21:03+0100\n"
 "PO-Revision-Date: 2018-02-06 01:15+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -3011,6 +3011,10 @@ msgstr "Uklonjena su sva poglavlja iz fajla '%1'."
 msgid "All destination files"
 msgstr "Sve odredišne fajlove"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
+msgid "All elements in a tree-like structure"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 msgid "All entries"
 msgstr "Sve stavke"
@@ -4796,6 +4800,10 @@ msgstr "Širina/Visina slike:"
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "Nemoj da dodaješ unos za poglavlja u meta seek element."
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
+msgid "Do not show hex dumps"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -7630,6 +7638,11 @@ msgstr "Jedno poglavlje za svaki pripojeni fajl"
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
 msgstr "Jedan od parametara '--attachment-name', '--attachment-description', '--attachment-mime-type' ili '--attachment-uid' je korišćen bez pratećeg '--add-attachment', '--replace-attachment' ili '--update-attachment' parametra.\n"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
+#, fuzzy
+msgid "One-line summaries for each track and frame"
+msgstr "Pokaži statistiku za svaku stazu u verbalnom režimu."
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
 msgid "Online check for updates"
@@ -9055,6 +9068,21 @@ msgstr "Pokaži statistiku za svaku stazu u verbalnom režimu."
 msgid "Show all bytes of each frame as a hex dump."
 msgstr "Pokaži sve bajtove svake slike u heksadecimalnom."
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
+#, fuzzy
+msgid "Show all bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Pokaži sve bajtove svake slike u heksadecimalnom."
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
+#, fuzzy
+msgid "Show all elements"
+msgstr "Pokaži &sve elemente"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
+#, fuzzy
+msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Pokaži prvih 16 bajtova svake slike u heksadecimalnom."
+
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
 #, no-c-format
 msgid "Show job output"
@@ -9358,6 +9386,10 @@ msgstr "Stereoskopija:"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
 msgid "Stop &after all running jobs have finished"
 msgstr "Zaustavi &kad se završe svi pokrenuti zadaci"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
+msgid "Stop at the first cluster"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
@@ -12452,10 +12484,6 @@ msgstr "[%1% slika za stazu %2%, vremenska oznaka %3%]"
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): Neproveren kod ('veličina' je čudna). Ako se mkvmerge sruši ili ako dobijen fajl ne sadrži kompletnu i ispravnu audio stazu, onda molim vas kontaktirajte autora Morica Bunkusa na <moritz@bunkus.org>.\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
-msgid "all elements in a tree-like structure"
-msgstr ""
-
 #: src/common/stereo_mode.cpp:59
 msgid "anaglyph (cyan/red)"
 msgstr "anaglif (cijan/crvena)"
@@ -12570,10 +12598,6 @@ msgstr "visina prikaza: %1%"
 #, boost-format
 msgid "display width: %1%"
 msgstr "širina prikaza: %1%"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
-msgid "do not show hex dumps"
-msgstr ""
 
 #: src/common/kax_info.cpp:800
 msgid "encryption"
@@ -13015,11 +13039,6 @@ msgstr "ogg_stream_init za potok broj %1% nije uspeo. Probaću da nastavim i da 
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer nije uspeo\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-#, fuzzy
-msgid "one-line summaries for each track and frame"
-msgstr "Pokaži statistiku za svaku stazu u verbalnom režimu."
-
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:129
 msgid "or"
@@ -13103,21 +13122,6 @@ msgstr "isprepletan red (desno prvo)"
 msgid "sampling freq: %1%"
 msgstr "učestalost uzorkovanja: %1%"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
-#, fuzzy
-msgid "show all bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Pokaži sve bajtove svake slike u heksadecimalnom."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
-#, fuzzy
-msgid "show all elements"
-msgstr "Pokaži &sve elemente"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
-#, fuzzy
-msgid "show first 16 bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Pokaži prvih 16 bajtova svake slike u heksadecimalnom."
-
 #: src/common/stereo_mode.cpp:50
 msgid "side by side (left first)"
 msgstr "jedna pored druge (levo prvo)"
@@ -13138,10 +13142,6 @@ msgstr "veličina je nepoznata"
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Nevažeći format. Ne mogu naći \"Format\" liniju u \"[Events]\" sekciji."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
-msgid "stop at the first cluster"
-msgstr ""
 
 #: src/input/r_matroska.cpp:113
 msgid "subtitle"

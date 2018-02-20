@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-20 20:14+0100\n"
+"POT-Creation-Date: 2018-02-20 21:03+0100\n"
 "PO-Revision-Date: 2018-02-16 15:16+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3052,6 +3052,10 @@ msgstr "S'han suprimit tots els capítols del fitxer «%1»."
 msgid "All destination files"
 msgstr "Tots els fitxers de destinació"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
+msgid "All elements in a tree-like structure"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 msgid "All entries"
 msgstr "Totes les entrades"
@@ -4802,6 +4806,10 @@ msgstr "Amplada/alçada de visualització:"
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "No afegeix una entrada pels capítols en l'element meta de cerca."
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
+msgid "Do not show hex dumps"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -7613,6 +7621,11 @@ msgstr "Un capítol per a cada fitxer annexat"
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
 msgstr "Una de les opcions «--attachment-name», «--attachment-description» o «--attachment-mime-type» o «--attachment-uid» ha estat emprada sense una de les opcions «--add-attachment», «--replace-attachment» o «--update-attachment».\n"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
+#, fuzzy
+msgid "One-line summaries for each track and frame"
+msgstr "Mostra les estadístiques per a cada pista en el mode loquaç."
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
 msgid "Online check for updates"
@@ -9024,6 +9037,21 @@ msgstr "Mostra les estadístiques per a cada pista en el mode loquaç."
 msgid "Show all bytes of each frame as a hex dump."
 msgstr "Mostra tots els bytes de cada fotograma com un bolcat hexadecimal."
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
+#, fuzzy
+msgid "Show all bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Mostra tots els bytes de cada fotograma com un bolcat hexadecimal."
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
+#, fuzzy
+msgid "Show all elements"
+msgstr "Mostra &tots els elements"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
+#, fuzzy
+msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Mostra els primers 16 bytes de cada fotograma com un bolcat hexadecimal."
+
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
 #, no-c-format
 msgid "Show job output"
@@ -9324,6 +9352,10 @@ msgstr "Estereoscòpia:"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
 msgid "Stop &after all running jobs have finished"
 msgstr "Atura &després de finalitzar les tasques en execució"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
+msgid "Stop at the first cluster"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
@@ -12389,10 +12421,6 @@ msgstr "[%1% fotogrames per pista %2%, codi de temps %3%]"
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): Codi sense provar (la «mida» és estranya). Si es bloca el «mkvmerge» o si el fitxer resultant no conté la pista d'àudio completa i correcta, llavors contacteu amb l'autor, en Moritz Bunkus a moritz@bunkus.org.\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
-msgid "all elements in a tree-like structure"
-msgstr ""
-
 #: src/common/stereo_mode.cpp:59
 msgid "anaglyph (cyan/red)"
 msgstr "Anaglifo (cian/vermell)"
@@ -12508,10 +12536,6 @@ msgstr "Alçada de visualització: %1%"
 #, boost-format
 msgid "display width: %1%"
 msgstr "Amplada de visualització: %1%"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
-msgid "do not show hex dumps"
-msgstr ""
 
 #: src/common/kax_info.cpp:800
 msgid "encryption"
@@ -12952,11 +12976,6 @@ msgstr "ogg_stream_init per al flux número %1% ha fallat. Es continuarà i igno
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer ha fallat\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-#, fuzzy
-msgid "one-line summaries for each track and frame"
-msgstr "Mostra les estadístiques per a cada pista en el mode loquaç."
-
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:129
 msgid "or"
@@ -13040,21 +13059,6 @@ msgstr "Fila intercalada (dreta primer)"
 msgid "sampling freq: %1%"
 msgstr "Freqüència de mostreig: %1%"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
-#, fuzzy
-msgid "show all bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Mostra tots els bytes de cada fotograma com un bolcat hexadecimal."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
-#, fuzzy
-msgid "show all elements"
-msgstr "Mostra &tots els elements"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
-#, fuzzy
-msgid "show first 16 bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Mostra els primers 16 bytes de cada fotograma com un bolcat hexadecimal."
-
 #: src/common/stereo_mode.cpp:50
 msgid "side by side (left first)"
 msgstr "Costat a costat (esquerra primer)"
@@ -13075,10 +13079,6 @@ msgstr "mida desconeguda"
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Format no vàlid. No es troba la línia «Format» a la secció «[Events]»."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
-msgid "stop at the first cluster"
-msgstr ""
 
 #: src/input/r_matroska.cpp:113
 msgid "subtitle"

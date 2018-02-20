@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-20 20:14+0100\n"
+"POT-Creation-Date: 2018-02-20 21:03+0100\n"
 "PO-Revision-Date: 2018-01-20 09:16+0000\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2998,6 +2998,10 @@ msgstr "Atal guztiak kendu dira '%1' agiritik"
 msgid "All destination files"
 msgstr "Helmuga agiri denak"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
+msgid "All elements in a tree-like structure"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 msgid "All entries"
 msgstr "Sarrera guztiak"
@@ -4749,6 +4753,10 @@ msgstr "Erakuspen zabalera/garaiera:"
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "Ez gehitu sarrera bat atalentzat meta bilaketa gaian."
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
+msgid "Do not show hex dumps"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -7570,6 +7578,11 @@ msgstr "Atal bat erantsitasko agiri bakoitzeko"
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
 msgstr "Aukera hauetako bat '--attachment-name', '--attachment-description', '--attachment-mime-type' edo '--attachment-uid' hurrengoetako bat gabe erabili da '--add-attachment', '--replace-attachment' edo '--update-attachment' aukera.\n"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
+#, fuzzy
+msgid "One-line summaries for each track and frame"
+msgstr "Erakutsi bide bakoitzaren estatistikak berritsukeri moduan."
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
 msgid "Online check for updates"
@@ -8989,6 +9002,21 @@ msgstr "Erakutsi bide bakoitzaren estatistikak berritsukeri moduan."
 msgid "Show all bytes of each frame as a hex dump."
 msgstr "Erakutsi frame bakoitzaren byte guztiak hex iraulketa bezala."
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
+#, fuzzy
+msgid "Show all bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Erakutsi frame bakoitzaren byte guztiak hex iraulketa bezala."
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
+#, fuzzy
+msgid "Show all elements"
+msgstr "Erakutsi &elementu guztiak"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
+#, fuzzy
+msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
+msgstr "Erakutsi frame bakoitzaren lehen 16 byteak hex iraulketa bezala."
+
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
 #, no-c-format
 msgid "Show job output"
@@ -9289,6 +9317,11 @@ msgstr "Estereoskopia:"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
 msgid "Stop &after all running jobs have finished"
 msgstr "Gelditu ekinean dauden lan guztiek amaitu &ondoren"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
+#, fuzzy
+msgid "Stop at the first cluster"
+msgstr "Lehenean bakarrik"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
@@ -12375,10 +12408,6 @@ msgstr "[%1% frame %2% bidearentzat, denbora-kodea %3%]"
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): Aztertu gabeko kodea ('neurria' arraroa da). mkvmerge matxuratzen bada edo emaitz agiriak ez badu audio bide osoa eta zuzen, mesedez jarri harremanetan egilearekin, Moritz Bunkus, en moritz@bunkus.org.\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
-msgid "all elements in a tree-like structure"
-msgstr ""
-
 #: src/common/stereo_mode.cpp:59
 msgid "anaglyph (cyan/red)"
 msgstr "Anaglifoa (zian/gorria)"
@@ -12494,10 +12523,6 @@ msgstr "erakuspen garaiera: %1%"
 #, boost-format
 msgid "display width: %1%"
 msgstr "erakuspen zabalera: %1%"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
-msgid "do not show hex dumps"
-msgstr ""
 
 #: src/common/kax_info.cpp:800
 msgid "encryption"
@@ -12940,11 +12965,6 @@ msgstr "ogg_stream_init %1% zenbaki jariorako hutsegitea. Saiatzen jarraitu eta 
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer hutsegitea\n"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-#, fuzzy
-msgid "one-line summaries for each track and frame"
-msgstr "Erakutsi bide bakoitzaren estatistikak berritsukeri moduan."
-
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:129
 msgid "or"
@@ -13028,21 +13048,6 @@ msgstr "lerro elkartatekatua (eskuina lehenik)"
 msgid "sampling freq: %1%"
 msgstr "laginketa maizt.: %1%"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
-#, fuzzy
-msgid "show all bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Erakutsi frame bakoitzaren byte guztiak hex iraulketa bezala."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
-#, fuzzy
-msgid "show all elements"
-msgstr "Erakutsi &elementu guztiak"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
-#, fuzzy
-msgid "show first 16 bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Erakutsi frame bakoitzaren lehen 16 byteak hex iraulketa bezala."
-
 #: src/common/stereo_mode.cpp:50
 msgid "side by side (left first)"
 msgstr "aldez-alde (ezkerra lehenik)"
@@ -13063,11 +13068,6 @@ msgstr "neurri ezezaguna"
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Heuskarri baliogabea. Ezinezkoa aurkitzea \"Format\" lerroa \"[Events]\" atalean."
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
-#, fuzzy
-msgid "stop at the first cluster"
-msgstr "Lehenean bakarrik"
 
 #: src/input/r_matroska.cpp:113
 msgid "subtitle"

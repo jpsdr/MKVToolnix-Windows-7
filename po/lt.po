@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-20 20:14+0100\n"
+"POT-Creation-Date: 2018-02-20 21:03+0100\n"
 "PO-Revision-Date: 2016-04-01 13:06+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/lt/)\n"
@@ -2912,6 +2912,10 @@ msgstr ""
 msgid "All destination files"
 msgstr "visų išeigų rinkmenoms"
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
+msgid "All elements in a tree-like structure"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 #, fuzzy
 msgid "All entries"
@@ -4757,6 +4761,10 @@ msgstr "Ekrano plotis ir aukštis:"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
+msgstr ""
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
+msgid "Do not show hex dumps"
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
@@ -7647,6 +7655,10 @@ msgstr "vienas skyrius kiekvienai prijungtai rinkmenai"
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
 msgstr ""
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
+msgid "One-line summaries for each track and frame"
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
 msgid "Online check for updates"
@@ -9108,6 +9120,19 @@ msgstr ""
 msgid "Show all bytes of each frame as a hex dump."
 msgstr ""
 
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
+msgid "Show all bytes of frames and CodecPrivate elements as hex dumps"
+msgstr ""
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
+#, fuzzy
+msgid "Show all elements"
+msgstr "Rodyti &visus elementus\tCtrl-A"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
+msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
 #, fuzzy, no-c-format
 msgid "Show job output"
@@ -9419,6 +9444,10 @@ msgstr "Stereoskopija:"
 #, fuzzy
 msgid "Stop &after all running jobs have finished"
 msgstr "Apdorojimą nutraukti po šio darbo"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
+msgid "Stop at the first cluster"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
@@ -12518,10 +12547,6 @@ msgstr ""
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
-msgid "all elements in a tree-like structure"
-msgstr ""
-
 #: src/common/stereo_mode.cpp:59
 msgid "anaglyph (cyan/red)"
 msgstr ""
@@ -12636,10 +12661,6 @@ msgstr "ekrano aukštis: %1%"
 #, boost-format
 msgid "display width: %1%"
 msgstr "ekrano plotis: %1%"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
-msgid "do not show hex dumps"
-msgstr ""
 
 #: src/common/kax_info.cpp:800
 msgid "encryption"
@@ -13078,10 +13099,6 @@ msgstr ""
 msgid "ogg_sync_buffer failed\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-msgid "one-line summaries for each track and frame"
-msgstr ""
-
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:129
 msgid "or"
@@ -13166,19 +13183,6 @@ msgstr "sluoksniavimas-eilėmis (dešinė pirma)"
 msgid "sampling freq: %1%"
 msgstr "atrankos dažnis: %1%"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
-msgid "show all bytes of frames and CodecPrivate elements as hex dumps"
-msgstr ""
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
-#, fuzzy
-msgid "show all elements"
-msgstr "Rodyti &visus elementus\tCtrl-A"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
-msgid "show first 16 bytes of frames and CodecPrivate elements as hex dumps"
-msgstr ""
-
 #: src/common/stereo_mode.cpp:50
 msgid "side by side (left first)"
 msgstr "šonas-šonas (kairė pirma)"
@@ -13199,10 +13203,6 @@ msgstr " nežinomas dydis"
 
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
-msgstr ""
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
-msgid "stop at the first cluster"
 msgstr ""
 
 #: src/input/r_matroska.cpp:113
