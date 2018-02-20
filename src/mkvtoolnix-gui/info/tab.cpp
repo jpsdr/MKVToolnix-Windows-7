@@ -97,9 +97,8 @@ Tab::load(QString const &fileName) {
 
   try {
     auto model         = static_cast<QStandardItemModel *>(p->m_ui->elements->model());
-    auto fileInfo      = QFileInfo{ fileName };
     p->m_fileName      = fileName;
-    p->m_savedFileName = QDir::toNativeSeparators( Q("%1/%2.txt").arg(fileInfo.absolutePath()).arg(fileInfo.completeBaseName()) );
+    p->m_savedFileName = QDir::toNativeSeparators( Q("%1.txt").arg(QFileInfo{ fileName }.absoluteFilePath().replace(QRegularExpression{Q("\\.[^.]*$")}, {})) );
     p->m_file          = std::static_pointer_cast<mm_io_c>(std::make_shared<mm_file_io_c>(to_utf8(fileName), MODE_READ));
     p->m_info          = std::make_unique<Util::KaxInfo>();
 
