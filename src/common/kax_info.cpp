@@ -1301,7 +1301,8 @@ kax_info_c::open_and_process_file() {
   }
 
   try {
-    process_file();
+    auto result = process_file();
+    return result;
 
   } catch (mtx::kax_info::exception &) {
     throw;
@@ -1314,8 +1315,6 @@ kax_info_c::open_and_process_file() {
     ui_show_error(Y("Caught exception"));
     return result_e::failed;
   }
-
-  return result_e::succeeded;
 }
 
 void
