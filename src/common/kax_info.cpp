@@ -1285,6 +1285,12 @@ kax_info_c::open_and_process_file() {
     return result_e::failed;
   }
 
+  at_scope_exit_c close_file([p]() {
+    if (p->m_out)
+      p->m_out->close();
+    p->m_out.reset();
+  });
+
   // open output file
   if (!p->m_destination_file_name.empty()) {
     try {
