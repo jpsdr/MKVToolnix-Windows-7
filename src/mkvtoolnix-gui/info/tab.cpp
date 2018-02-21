@@ -31,6 +31,7 @@
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/serial_worker_queue.h"
 #include "mkvtoolnix-gui/util/tree.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 namespace mtx { namespace gui { namespace Info {
 
@@ -160,6 +161,9 @@ Tab::save() {
 
   job->setDateAdded(QDateTime::currentDateTime());
   job->setDescription(job->displayableDescription());
+
+  if (Util::Settings::get().m_switchToJobOutputAfterStarting)
+    MainWindow::get()->switchToTool(MainWindow::watchJobTool());
 
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 }
