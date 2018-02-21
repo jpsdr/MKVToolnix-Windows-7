@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   checksum calculations – Adler32 implementation
+   checksum calculations – Adler-32 implementation
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */

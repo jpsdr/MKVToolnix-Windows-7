@@ -2877,8 +2877,8 @@
 * mkvmerge: bug fix: Fixed reading MPEG transport streams in which all PATs and/or
   PMTs have CRC errors. Fixes #1100.
 * all: bug fix: Re-wrote the whole checksum calculation code. This lead to a fix for the
-  Adler32 checksum algorithm that was triggered under certain circumstances.
-  Adler32 is used in mkvinfo's output (e.g. in summary mode or if checksums are
+  Adler-32 checksum algorithm that was triggered under certain circumstances.
+  Adler-32 is used in mkvinfo's output (e.g. in summary mode or if checksums are
   activated), in the h.265/HEVC bitstream and TrueAudio (TTA) file headers.
 * mkvmerge: bug fix: fixed handling of HE-AACv2 with object type "parametric
   stereo".
@@ -7324,7 +7324,7 @@
 
 ## New features and enhancements
 
-* mkvinfo: Added Adler32 calculation and display for frame contents with the -c
+* mkvinfo: Added Adler-32 calculation and display for frame contents with the -c
   option.
 
 ## Bug fixes
