@@ -123,10 +123,9 @@ Tool::appendTab(Tab *tab) {
 
 void
 Tool::selectAndOpenFile() {
-  auto &settings = Util::Settings::get();
-  auto fileName  = Util::getOpenFileName(this, QY("Open Matroska or WebM file"), settings.lastOpenDirPath(), QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
+  auto fileNames = Util::getOpenFileNames(this, QY("Open Matroska or WebM files"), Util::Settings::get().lastOpenDirPath(), QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
 
-  if (!fileName.isEmpty())
+  for (auto const &fileName : fileNames)
     openFile(fileName);
 }
 

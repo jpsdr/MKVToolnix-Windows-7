@@ -159,8 +159,7 @@ Tool::openFile(QString const &fileName) {
 
 void
 Tool::selectFileToOpen() {
-  auto fileNames = Util::getOpenFileNames(this, QY("Open files in header editor"), Util::Settings::get().lastOpenDirPath(),
-                                          QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
+  auto fileNames = Util::getOpenFileNames(this, QY("Open Matroska or WebM files"), Util::Settings::get().lastOpenDirPath(), QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
   if (fileNames.isEmpty())
     return;
 
