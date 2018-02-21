@@ -74,6 +74,7 @@ Tool::enableMenuActions() {
   auto tab    = currentTab();
   auto hasTab = tab && tab->isEnabled();
 
+  mwUi->actionInfoSave->setEnabled(hasTab);
   mwUi->actionInfoClose->setEnabled(hasTab);
   mwUi->actionInfoCloseAll->setEnabled(hasTab);
 }
