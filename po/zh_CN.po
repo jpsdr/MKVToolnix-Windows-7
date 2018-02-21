@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-02-20 21:03+0100\n"
-"PO-Revision-Date: 2018-02-09 08:53+0000\n"
+"PO-Revision-Date: 2018-02-21 03:34+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -1494,9 +1494,8 @@ msgid "&FAQ"
 msgstr "常见问题(&F)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:174
-#, fuzzy
 msgid "&File name:"
-msgstr "文件名:"
+msgstr "文件名(&F):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
 msgid "&First entry to renumber:"
@@ -1522,7 +1521,7 @@ msgstr "帮助(&H)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:169
 msgid "&Hex dumps:"
-msgstr ""
+msgstr "十六进制转储(&H):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:520
@@ -1576,9 +1575,8 @@ msgid "&Minimum playlist duration:"
 msgstr "播放列表最短时长(&M):"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:161
-#, fuzzy
 msgid "&Mode:"
-msgstr "模式"
+msgstr "模式(&M):"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:623
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:399
@@ -1868,7 +1866,7 @@ msgstr "验证数值(&V)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:165
 msgid "&Verbosity:"
-msgstr ""
+msgstr "“详细”程度(&V):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1412
 #: src/mkvtoolnix-gui/merge/input.cpp:1407
@@ -2362,9 +2360,9 @@ msgid ", position %1%"
 msgstr "，位置 %1%"
 
 #: src/common/kax_info.cpp:223
-#, fuzzy, boost-format
+#, boost-format
 msgid ", position 0x%|1$x|"
-msgstr "，位置 %1%"
+msgstr ", 位置 0x%|1$x|"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 #, no-c-format
@@ -2910,7 +2908,7 @@ msgstr "所有输出文件"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
 msgid "All elements in a tree-like structure"
-msgstr ""
+msgstr "树形结构显示所有元素"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 msgid "All entries"
@@ -3456,9 +3454,8 @@ msgid "C&reate option file"
 msgstr "创建选项文件(&R)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:176
-#, fuzzy
 msgid "Calculate Adler32 &checksums for each frame and binary element"
-msgstr "计算并显示帧内容的校验码。"
+msgstr "为所有帧及二进制元素计算 Adler32 校验码(&C)"
 
 #: src/info/info_cli_parser.cpp:38
 msgid "Calculate and display checksums and use verbosity level 4."
@@ -4416,9 +4413,8 @@ msgid "Default duration/FPS:"
 msgstr "默认帧时长或帧率:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1422
-#, fuzzy
 msgid "Default info job settings"
-msgstr "新建混流设置页面的默认值"
+msgstr "默认信息任务设置"
 
 #: src/common/kax_element_names.cpp:310
 msgid "Default language"
@@ -4659,7 +4655,7 @@ msgstr "不在元定位元素中添加章节项。"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
 msgid "Do not show hex dumps"
-msgstr ""
+msgstr "不要显示十六进制转储"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -4956,7 +4952,7 @@ msgstr "创建临时文件出错 (原因: %1)。"
 #: src/input/r_ogm.cpp:1218
 #, boost-format
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
-msgstr ""
+msgstr "解码 Ogg Opus 页面出错，位于 %1%; 将跳过页面: %2%\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:135
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:243
@@ -6044,9 +6040,8 @@ msgid "Info job"
 msgstr "信息任务"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:78
-#, fuzzy
 msgid "Info job settings"
-msgstr "无效设置"
+msgstr "信息任务设置"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:238
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:390
@@ -7471,9 +7466,8 @@ msgid "One of the options '--attachment-name', '--attachment-description', '--at
 msgstr "'--attachment-name'、'--attachment-description'、'--attachment-mime-type' 或 '--attachment-uid' 选项后缺少 '--add-attachment'、'--replace-attachment' 或 '--update-attachment' 选项。\n"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-#, fuzzy
 msgid "One-line summaries for each track and frame"
-msgstr "在详细模式下显示各轨道的统计信息。"
+msgstr "各轨道与帧的单行描述"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
@@ -7711,9 +7705,8 @@ msgid "Output"
 msgstr "输出"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:178
-#, fuzzy
 msgid "Output element positions in he&xadecimal"
-msgstr "以十六进制显示偏移值。"
+msgstr "以十六进制输出元素位置(&X)"
 
 #: src/common/cli_parser.cpp:183
 msgid "Output messages in this charset"
@@ -8858,28 +8851,24 @@ msgid "Show &output of all jobs instead of current job only"
 msgstr "显示所有任务的输出消息，而不是仅显示当前任务的(&O)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:177
-#, fuzzy
 msgid "Show a &summary line with statistics for each track at the end"
-msgstr "在详细模式下显示各轨道的统计信息。"
+msgstr "结束时显示各轨道的统计信息(&S)"
 
 #: src/info/info_cli_parser.cpp:42
 msgid "Show all bytes of each frame as a hex dump."
 msgstr "以十六进制形式显示各帧的所有字节。"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
-#, fuzzy
 msgid "Show all bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "以十六进制形式显示各帧的所有字节。"
+msgstr "以十六进制转储的形式显示帧与 CodecPrivate 元素的所有字节"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
-#, fuzzy
 msgid "Show all elements"
-msgstr "显示全部元素(&A)"
+msgstr "显示所有元素"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
-#, fuzzy
 msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "以十六进制形式显示各帧的前 16 字节。"
+msgstr "以十六进制转储的形式显示帧与 CodecPrivate 元素的前 16 字节"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
 #, no-c-format
@@ -9178,7 +9167,7 @@ msgstr "所有正在运行的任务结束后停止(&A)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
 msgid "Stop at the first cluster"
-msgstr ""
+msgstr "在第一个簇停止"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
