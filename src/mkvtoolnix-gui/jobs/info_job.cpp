@@ -157,6 +157,12 @@ InfoJob::displayableDescription()
   return QY("Listing content of file \"%1\" in directory \"%2\"").arg(info.fileName()).arg(QDir::toNativeSeparators(info.dir().path()));
 }
 
+bool
+InfoJob::isEditable()
+  const {
+  return false;
+}
+
 QString
 InfoJob::outputFolder()
   const {

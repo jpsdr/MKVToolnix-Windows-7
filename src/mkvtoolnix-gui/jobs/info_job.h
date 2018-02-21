@@ -37,6 +37,7 @@ public:
   virtual QString displayableType() const override;
   virtual QString displayableDescription() const override;
   virtual QString outputFolder() const override;
+  virtual bool isEditable() const override;
 
   virtual Info::InfoConfig const &config() const;
 

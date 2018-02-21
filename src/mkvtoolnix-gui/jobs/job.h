@@ -88,6 +88,7 @@ public:
   virtual QString displayableType() const = 0;
   virtual QString displayableDescription() const = 0;
   virtual QString outputFolder() const;
+  virtual bool isEditable() const = 0;
 
   void setPendingAuto();
   void setPendingManual();

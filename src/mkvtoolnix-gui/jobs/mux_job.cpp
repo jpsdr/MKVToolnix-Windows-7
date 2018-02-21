@@ -185,6 +185,12 @@ MuxJob::displayableDescription()
   return QY("Multiplexing to file \"%1\" in directory \"%2\"").arg(info.fileName()).arg(QDir::toNativeSeparators(info.dir().path()));
 }
 
+bool
+MuxJob::isEditable()
+  const {
+  return true;
+}
+
 QString
 MuxJob::outputFolder()
   const {

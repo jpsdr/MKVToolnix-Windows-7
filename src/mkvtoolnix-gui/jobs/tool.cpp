@@ -185,12 +185,16 @@ Tool::onJobQueueMenu() {
 void
 Tool::onContextMenu(QPoint pos) {
   auto hasNotRunning = false;
+  auto hasEditable   = false;
   auto numSelected   = 0;
 
-  m_model->withSelectedJobs(ui->jobs, [&numSelected, &hasNotRunning](Job const &job) {
+  m_model->withSelectedJobs(ui->jobs, [&numSelected, &hasNotRunning, &hasEditable](Job const &job) {
     ++numSelected;
     if (Job::Running != job.status())
       hasNotRunning = true;
+
+    if (job.isEditable())
+      hasEditable = true;
   });
 
   auto hasSelection = !!numSelected;
@@ -200,7 +204,7 @@ Tool::onContextMenu(QPoint pos) {
   m_viewOutputAction->setEnabled(hasSelection);
   m_removeAction->setEnabled(hasSelection);
   m_openFolderAction->setEnabled(hasSelection);
-  m_editAndRemoveAction->setEnabled(hasSelection);
+  m_editAndRemoveAction->setEnabled(hasEditable);
   m_startImmediatelyAction->setEnabled(hasNotRunning);
 
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
@@ -480,7 +484,7 @@ Tool::onEditAndRemove() {
     if (Job::Running == jobToEdit.status())
       emitRunningWarning = true;
 
-    else {
+    else if (jobToEdit.isEditable()) {
       auto idToEdit = jobToEdit.id();
 
       openJobInTool(jobToEdit);
