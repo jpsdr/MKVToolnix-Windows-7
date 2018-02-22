@@ -22,6 +22,7 @@
 #include "common/endian.h"
 #include "common/mm_io_x.h"
 #include "common/id_info.h"
+#include "common/strings/formatting.h"
 #include "input/r_flv.h"
 #include "merge/input_x.h"
 #include "output/p_aac.h"
@@ -279,10 +280,7 @@ flv_reader_c::read_headers() {
   auto video_track_valid = false;
 
   try {
-    while (   !(audio_track_valid && video_track_valid)
-           && !m_file_done
-           && (m_in->getFilePointer() < FLV_DETECT_SIZE)) {
-
+    while (!m_file_done && (m_in->getFilePointer() < FLV_DETECT_SIZE)) {
       if (process_tag(true))
         for (auto &track : m_tracks) {
           if (!track->is_valid())
@@ -316,8 +314,8 @@ flv_reader_c::read_headers() {
       m_audio_track_idx = idx - 1;
   }
 
-  mxdebug_if(m_debug, boost::format("Detection finished at %1%; audio valid? %2%; video valid? %3%; number valid tracks: %4%\n")
-             % m_in->getFilePointer() % audio_track_valid % video_track_valid % m_tracks.size());
+  mxdebug_if(m_debug, boost::format("Detection finished at %1%; audio valid? %2%; video valid? %3%; number valid tracks: %4%; min timestamp: %5%\n")
+             % m_in->getFilePointer() % audio_track_valid % video_track_valid % m_tracks.size() % format_timestamp(m_min_timestamp.value_or(0) * 1000000ll));
 
   m_in->setFilePointer(9, seek_beginning); // rewind file for later remux
   m_file_done = false;
@@ -769,19 +767,22 @@ flv_reader_c::process_tag(bool skip_payload) {
   else if (m_tag.is_video() && !process_video_tag(track))
     return false;
 
-  track->m_timestamp = m_tag.m_timestamp + (m_tag.m_timestamp_extended << 24);
+  auto timestamp = m_tag.m_timestamp + (m_tag.m_timestamp_extended << 24);
 
-  mxdebug_if(m_debug, boost::format("Data size after processing: %1%; timestamp in ms: %2%\n") % m_tag.m_data_size % track->m_timestamp);
+  mxdebug_if(m_debug, boost::format("Data size after processing: %1%; timestamp in ms: %2%\n") % m_tag.m_data_size % timestamp);
 
   if (!m_tag.m_data_size)
     return true;
 
-  track->m_payload = m_in->read(m_tag.m_data_size);
+  track->m_payload   = m_in->read(m_tag.m_data_size);
+  track->m_timestamp = timestamp;
 
   track->postprocess_header_data();
 
-  if (skip_payload)
+  if (skip_payload) {
     track->m_payload.reset();
+    m_min_timestamp = m_min_timestamp ? std::min(*m_min_timestamp, timestamp) : timestamp;
+  }
 
   return true;
 }
@@ -817,7 +818,7 @@ flv_reader_c::read(generic_packetizer_c *,
     return FILE_STATUS_MOREDATA;
 
   if (-1 != track->m_ptzr) {
-    track->m_timestamp = (track->m_timestamp + track->m_v_cts_offset) * 1000000ll;
+    track->m_timestamp = (track->m_timestamp + track->m_v_cts_offset - m_min_timestamp.value_or(0)) * 1000000ll;
     mxdebug_if(m_debug, boost::format(" PTS in nanoseconds: %1%\n") % track->m_timestamp);
 
     int64_t duration = -1;

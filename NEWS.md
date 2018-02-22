@@ -52,6 +52,7 @@
 * mkvinfo: the `--hex-positions` parameter did nothing in summary mode.
 * FLV reader: a single invalid AAC frame was written for AAC audio tracks with
   codec initialization data longer than five bytes.
+* FLV reader: timestamps will be normalized down to 0. Fixes #2220.
 
 ## Build system changes
 
