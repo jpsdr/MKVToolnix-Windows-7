@@ -50,6 +50,8 @@
   aborting when it encounters an Ogg Opus page with no data in the
   packet. Fixes #2217.
 * mkvinfo: the `--hex-positions` parameter did nothing in summary mode.
+* FLV reader: a single invalid AAC frame was written for AAC audio tracks with
+  codec initialization data longer than five bytes.
 
 ## Build system changes
 

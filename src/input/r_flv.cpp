@@ -505,17 +505,14 @@ flv_reader_c::process_audio_tag_sound_format(flv_track_cptr &track,
       return true;
     }
 
-    auto size = std::min<size_t>(m_tag.m_data_size, 5);
-    if (!size)
+    if (!m_tag.m_data_size)
       return false;
 
-    m_tag.m_data_size -= size;
-
-    unsigned char specific_codec_buf[5];
-    if (m_in->read(specific_codec_buf, size) != size)
+    auto specific_codec_buf = memory_c::alloc(m_tag.m_data_size);
+    if (m_in->read(specific_codec_buf, m_tag.m_data_size) != m_tag.m_data_size)
        return false;
 
-    auto audio_config = mtx::aac::parse_audio_specific_config(specific_codec_buf, size);
+    auto audio_config = mtx::aac::parse_audio_specific_config(specific_codec_buf->get_buffer(), specific_codec_buf->get_size());
     if (!audio_config)
       return false;
 
@@ -526,6 +523,7 @@ flv_reader_c::process_audio_tag_sound_format(flv_track_cptr &track,
     track->m_a_profile     = audio_config->sbr ? AAC_PROFILE_SBR : audio_config->profile;
     track->m_a_channels    = audio_config->channels;
     track->m_a_sample_rate = audio_config->sample_rate;
+    m_tag.m_data_size      = 0;
 
     return true;
   }
