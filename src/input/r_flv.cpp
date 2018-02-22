@@ -315,10 +315,11 @@ flv_reader_c::read_headers() {
   }
 
   mxdebug_if(m_debug, boost::format("Detection finished at %1%; audio valid? %2%; video valid? %3%; number valid tracks: %4%; min timestamp: %5%\n")
-             % m_in->getFilePointer() % audio_track_valid % video_track_valid % m_tracks.size() % format_timestamp(m_min_timestamp.value_or(0) * 1000000ll));
+             % m_in->getFilePointer() % audio_track_valid % video_track_valid % m_tracks.size() % format_timestamp(m_min_timestamp.get_value_or(0) * 1000000ll));
 
   m_in->setFilePointer(9, seek_beginning); // rewind file for later remux
-  m_file_done = false;
+  m_file_done     = false;
+  m_min_timestamp = m_min_timestamp.get_value_or(0);
 }
 
 void
@@ -818,7 +819,7 @@ flv_reader_c::read(generic_packetizer_c *,
     return FILE_STATUS_MOREDATA;
 
   if (-1 != track->m_ptzr) {
-    track->m_timestamp = (track->m_timestamp + track->m_v_cts_offset - m_min_timestamp.value_or(0)) * 1000000ll;
+    track->m_timestamp = (track->m_timestamp + track->m_v_cts_offset - *m_min_timestamp) * 1000000ll;
     mxdebug_if(m_debug, boost::format(" PTS in nanoseconds: %1%\n") % track->m_timestamp);
 
     int64_t duration = -1;
