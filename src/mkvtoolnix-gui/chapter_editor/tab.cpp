@@ -384,21 +384,18 @@ Tab::loadFromMatroskaFile() {
     return {};
   }
 
-  auto idx = p->analyzer->find(KaxChapters::ClassInfos.GlobalId);
-  if (-1 == idx) {
-    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) does not contain any chapters.").arg(p->fileName)).exec();
+  if (!readFileEndTimestampForMatroska()) {
     emit removeThisTab();
     return {};
   }
+
+  auto idx = p->analyzer->find(KaxChapters::ClassInfos.GlobalId);
+  if (-1 == idx)
+    return { std::make_shared<KaxChapters>(), true };
 
   auto chapters = p->analyzer->read_element(idx);
   if (!chapters) {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(p->fileName)).exec();
-    emit removeThisTab();
-    return {};
-  }
-
-  if (!readFileEndTimestampForMatroska()) {
     emit removeThisTab();
     return {};
   }
