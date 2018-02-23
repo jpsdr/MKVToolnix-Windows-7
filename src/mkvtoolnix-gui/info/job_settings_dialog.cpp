@@ -7,6 +7,8 @@
 #include "mkvtoolnix-gui/forms/info/job_settings_dialog.h"
 #include "mkvtoolnix-gui/info/job_settings.h"
 #include "mkvtoolnix-gui/info/job_settings_dialog.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -46,11 +48,15 @@ JobSettingsDialog::~JobSettingsDialog() {
 
 void
 JobSettingsDialog::accept() {
-  auto &ui = *p_func()->m_ui;
+  auto &ui      = *p_func()->m_ui;
+  auto settings = ui.settings->settings();
+
+  if (!MainWindow::jobTool()->checkIfOverwritingIsOK(settings.m_fileName))
+    return;
 
   if (ui.saveAsDefault->isChecked()) {
     auto &cfg                    = Util::Settings::get();
-    cfg.m_defaultInfoJobSettings = ui.settings->settings();
+    cfg.m_defaultInfoJobSettings = settings;
     cfg.save();
   }
 
