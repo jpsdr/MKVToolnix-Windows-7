@@ -197,13 +197,6 @@ MuxJob::isEditable()
   return true;
 }
 
-QString
-MuxJob::outputFolder()
-  const {
-  QFileInfo info{p_func()->config->m_destination};
-  return info.dir().path();
-}
-
 void
 MuxJob::saveJobInternal(Util::ConfigFile &settings)
   const {

@@ -275,7 +275,8 @@ Job::displayableStatus(Status status) {
 QString
 Job::outputFolder()
   const {
-  return {};
+  auto destination = destinationFileName();
+  return destination.isEmpty() ? QString{} : QFileInfo{destination}.dir().path();
 }
 
 void

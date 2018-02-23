@@ -169,13 +169,6 @@ InfoJob::isEditable()
   return false;
 }
 
-QString
-InfoJob::outputFolder()
-  const {
-  QFileInfo info{p_func()->config->m_destinationFileName};
-  return info.dir().path();
-}
-
 void
 InfoJob::saveJobInternal(Util::ConfigFile &settings)
   const {
