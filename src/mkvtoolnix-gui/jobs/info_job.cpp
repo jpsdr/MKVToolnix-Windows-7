@@ -145,6 +145,12 @@ InfoJob::showError(QString const &text) {
 }
 
 QString
+InfoJob::destinationFileName()
+  const {
+  return p_func()->config->m_destinationFileName;
+}
+
+QString
 InfoJob::displayableType()
   const {
   return QY("Info job");

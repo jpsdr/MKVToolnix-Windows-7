@@ -173,6 +173,12 @@ MuxJob::processError(QProcess::ProcessError error) {
 }
 
 QString
+MuxJob::destinationFileName()
+  const {
+  return p_func()->config->m_destination;
+}
+
+QString
 MuxJob::displayableType()
   const {
   return QY("Multiplex job");

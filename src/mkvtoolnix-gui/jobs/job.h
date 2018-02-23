@@ -85,6 +85,7 @@ public:
 
   virtual void start() = 0;
 
+  virtual QString destinationFileName() const = 0;
   virtual QString displayableType() const = 0;
   virtual QString displayableDescription() const = 0;
   virtual QString outputFolder() const;

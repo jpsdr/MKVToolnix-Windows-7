@@ -46,6 +46,8 @@ public:
   bool addDroppedFileAsJob(QString const &fileName);
   void loadAndStart();
 
+  bool checkIfOverwritingIsOK(QString const &newDestination, QString const &existingDestination = {});
+
 public slots:
   virtual void retranslateUi();
   void onStartAutomatically();
