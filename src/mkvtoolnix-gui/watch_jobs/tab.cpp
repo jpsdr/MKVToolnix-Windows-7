@@ -466,6 +466,7 @@ Tab::enableMoreActionsActions() {
   auto hasJob = std::numeric_limits<uint64_t>::max() != p->m_id;
 
   p->m_openFolderAction->setEnabled(hasJob);
+  p->m_saveOutputAction->setEnabled(!p->ui->output->toPlainText().isEmpty() || !p->ui->warnings->toPlainText().isEmpty() || !p->ui->errors->toPlainText().isEmpty());
 }
 
 void
