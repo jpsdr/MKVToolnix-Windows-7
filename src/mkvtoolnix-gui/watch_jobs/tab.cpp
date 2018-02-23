@@ -444,6 +444,7 @@ Tab::clearOutput() {
     return;
 
   p->m_currentJobDescription.clear();
+  p->m_id.reset();
 
   p->ui->progressBar->reset();
   p->ui->status->setText(QY("No job started yet"));
