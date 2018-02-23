@@ -11,7 +11,7 @@
   ignored when reading JSON files.
 * MKVToolNix GUI: an "info" tool has been added, replacing the functionality
   of mkvinfo's GUI. The functionality is not on par yet but will be for
-  release v22.
+  release v22. Implements most of the functionality of #2104.
 * MKVToolNix GUI: chapter editor: opening a Matroska file without chapters in
   it will now open the file in an empty chapter editor instead of showing an
   error message. Implements #2218.
