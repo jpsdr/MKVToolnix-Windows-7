@@ -114,8 +114,10 @@ int
 Tool::tabIndexForJobID(uint64_t id)
   const {
   for (int idx = 1, numTabs = ui->widgets->count(); idx < numTabs; ++idx) {
-    auto tab = static_cast<Tab *>(ui->widgets->widget(idx));
-    if (tab->id() == id)
+    auto tab   = static_cast<Tab *>(ui->widgets->widget(idx));
+    auto tabId = tab->id();
+
+    if (tabId && (*tabId == id))
       return idx;
   }
 

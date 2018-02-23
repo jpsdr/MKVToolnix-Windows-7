@@ -36,7 +36,8 @@ class TabPrivate {
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
   QStringList m_fullOutput;
-  uint64_t m_id, m_currentJobProgress, m_queueProgress;
+  boost::optional<uint64_t> m_id;
+  uint64_t m_currentJobProgress, m_queueProgress;
   QHash<Jobs::Job::LineType, bool> m_currentJobLineTypeSeen;
   Jobs::Job::Status m_currentJobStatus;
   QDateTime m_currentJobStartTime;
@@ -52,7 +53,6 @@ class TabPrivate {
 
   explicit TabPrivate(Tab *tab, bool forCurrentJob)
     : ui{new Ui::Tab}
-    , m_id{std::numeric_limits<uint64_t>::max()}
     , m_currentJobProgress{}
     , m_queueProgress{}
     , m_currentJobStatus{Jobs::Job::PendingManual}
@@ -168,7 +168,7 @@ Tab::disconnectFromJob(Jobs::Job const &job) {
 
   if (p->m_currentlyConnectedJob == &job) {
     p->m_currentlyConnectedJob = nullptr;
-    p->m_id                    = std::numeric_limits<uint64_t>::max();
+    p->m_id.reset();
   }
 
   disconnect(&job, &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged);
@@ -186,7 +186,7 @@ void
 Tab::onAbort() {
   auto p = p_func();
 
-  if (std::numeric_limits<uint64_t>::max() == p->m_id)
+  if (!p->m_id)
     return;
 
   if (   Util::Settings::get().m_warnBeforeAbortingJobs
@@ -198,7 +198,7 @@ Tab::onAbort() {
             .exec() == QMessageBox::No))
     return;
 
-  MainWindow::jobTool()->model()->withJob(p->m_id, [](Jobs::Job &job) { job.abort(); });
+  MainWindow::jobTool()->model()->withJob(*p->m_id, [](Jobs::Job &job) { job.abort(); });
 }
 
 void
@@ -216,7 +216,7 @@ Tab::onStatusChanged(uint64_t id,
     p->m_saveOutputAction->setEnabled(false);
     MainWindow::watchJobTool()->enableMenuActions();
 
-    p->m_id                 = std::numeric_limits<uint64_t>::max();
+    p->m_id.reset();
     p->m_currentJobProgress = 0;
     p->m_currentJobProgress = Jobs::Job::Aborted;
     updateRemainingTime();
@@ -405,7 +405,7 @@ Tab::onSaveOutput() {
   cfg.save();
 }
 
-uint64_t
+boost::optional<uint64_t>
 Tab::id()
   const {
   return p_func()->m_id;
@@ -427,7 +427,8 @@ void
 Tab::acknowledgeWarningsAndErrors() {
   auto p = p_func();
 
-  MainWindow::jobTool()->acknowledgeWarningsAndErrors(p->m_id);
+  if (p->m_id)
+    MainWindow::jobTool()->acknowledgeWarningsAndErrors(*p->m_id);
   p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
 }
 
@@ -457,13 +458,16 @@ Tab::clearOutput() {
 
 void
 Tab::openFolder() {
-  MainWindow::jobTool()->model()->withJob(p_func()->m_id, [](Jobs::Job &job) { job.openOutputFolder(); });
+  auto p = p_func();
+
+  if (p->m_id)
+    MainWindow::jobTool()->model()->withJob(*p->m_id, [](Jobs::Job &job) { job.openOutputFolder(); });
 }
 
 void
 Tab::enableMoreActionsActions() {
   auto p      = p_func();
-  auto hasJob = std::numeric_limits<uint64_t>::max() != p->m_id;
+  auto hasJob = !!p->m_id;
 
   p->m_openFolderAction->setEnabled(hasJob);
   p->m_saveOutputAction->setEnabled(!p->ui->output->toPlainText().isEmpty() || !p->ui->warnings->toPlainText().isEmpty() || !p->ui->errors->toPlainText().isEmpty());
