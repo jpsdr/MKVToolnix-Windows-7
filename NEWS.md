@@ -35,6 +35,10 @@
 * mkvmerge: FLV reader: a single invalid AAC frame was written for AAC audio
   tracks with codec initialization data longer than five bytes.
 * mkvmerge: FLV reader: timestamps will be normalized down to 0. Fixes #2220.
+* mkvmerge: MP4 reader: if an AAC track doesn't contain an AAC-specific
+  decoder configuration in the ESDS portion, then a default decoder
+  configuration will be generated based on the track's header data instead of
+  skipping the track. Fixes #2221.
 * mkvmerge: MP4 reader: fixed reading HEVC/h.265 video tracks if they're
   stored as Annex B byte streams inside MP4. Fixes #2215.
 * mkvmerge: Ogg Opus reader: mkvmerge will now emit a warning instead of

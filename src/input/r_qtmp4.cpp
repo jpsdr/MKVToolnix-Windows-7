@@ -2871,7 +2871,17 @@ qtmp4_demuxer_c::handle_subtitles_stsd_atom(uint64_t atom_size,
 void
 qtmp4_demuxer_c::parse_aac_esds_decoder_config() {
   if (!esds.decoder_config || (2 > esds.decoder_config->get_size())) {
-    mxwarn(boost::format(Y("Track %1%: AAC found, but decoder config data has length %2%.\n")) % id % (esds.decoder_config ? esds.decoder_config->get_size() : 0));
+    a_aac_audio_config                     = mtx::aac::audio_config_t{};
+    a_aac_audio_config->profile            = AAC_PROFILE_MAIN;
+    a_aac_audio_config->sample_rate        = a_samplerate;
+    a_aac_audio_config->output_sample_rate = a_samplerate;
+    a_aac_audio_config->channels           = a_channels;
+    esds.decoder_config                    = mtx::aac::create_audio_specific_config(*a_aac_audio_config);
+
+    mxdebug_if(m_debug_headers,
+               boost::format(" AAC: no decoder config in ESDS; generating default with profile: %1%, sample_rate: %2%, channels: %3%\n")
+               % a_aac_audio_config->profile % a_aac_audio_config->sample_rate % a_aac_audio_config->channels);
+
     return;
   }
 
