@@ -332,7 +332,7 @@ function build_dmg {
   ${RAKE} install prefix=${dmgcnt}
   test -f ${dmgmac}/mkvtoolnix-gui
 
-  strip ${dmgcnt}/MacOS/mkv{merge,info,info-gui,extract,propedit,toolnix-gui}
+  strip ${dmgcnt}/MacOS/mkv{merge,info,extract,propedit,toolnix-gui}
 
   mv ${dmgmac}/mkvtoolnix/sounds ${dmgmac}/sounds
   rmdir ${dmgmac}/mkvtoolnix
@@ -419,7 +419,7 @@ EOF
 
   for plugin (audio mediaservice platforms playlistformats) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
 
-  for FILE (${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui}) {
+  for FILE (${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvinfo,mkvtoolnix-gui}) {
     otool -L ${FILE} | \
       grep -v : | \
       grep -v @executable_path | \
