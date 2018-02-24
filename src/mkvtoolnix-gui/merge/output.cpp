@@ -165,7 +165,7 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(ui->segmentUIDs,
                    Q("<p>%1 %2</p><p>%3 %4 %5</p>")
                    .arg(QYH("Sets the segment UIDs to use."))
-                   .arg(QYH("This is a comma-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."))
+                   .arg(QYH("This is a comma-separated list of 128-bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."))
                    .arg(QYH("Each file created contains one segment, and each segment has one segment UID."))
                    .arg(QYH("If more segment UIDs are specified than segments are created then the surplus UIDs are ignored."))
                    .arg(QYH("If fewer UIDs are specified than segments are created then random UIDs will be created for them.")));
