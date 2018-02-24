@@ -9,53 +9,53 @@
   outside of strings (e.g. something like this: `// this is ignored`). Such
   comments, even though not part of the official JSON specifications, are now
   ignored when reading JSON files.
-* MKVToolNix GUI: an "info" tool has been added, replacing the functionality
-  of mkvinfo's GUI. The functionality is not on par yet but will be for
-  release v22. Implements most of the functionality of #2104.
 * MKVToolNix GUI: chapter editor: opening a Matroska file without chapters in
   it will now open the file in an empty chapter editor instead of showing an
   error message. Implements #2218.
+* MKVToolNix GUI: an "info" tool has been added, replacing the functionality
+  of mkvinfo's GUI. The functionality is not on par yet but will be for
+  release v22. Implements most of the functionality of #2104.
 
 ## Bug fixes
 
 * build system: `configure` was treating `--disable-ubsan` and
   `--disable-addrsan` the same as `--enable-ubsan` and
   `--enable-addrsan`. Fixes #2199.
-* mkvpropedit: adding track statistics tags: for tracks with content encoding
-  (compression) mkvpropedit is now accounting the uncompressed number of
-  bytes, not the encoded (compressed) number of bytes. Fixes #2200.
-* mkvinfo: Windows: line endings will be written as `\r\n` (carriage return &
-  line feed) again instead of just `\n` (line feed).
 * build system: an error message is output if a command to execute is not
   found instead of silently failing.
 * build system: in addition to looking for the `gettext` C function and
   library, `configure` now also verifies the presence of the `msgfmt` program
   instead of simply relying on it.
-* mkvmerge, mkvextract: Matroska parser: fixed a segmentation fault that
-  occurred whenever the first level 1 element after resyncing after an error
-  in the file structure isn't a cluster. Fixes #2211.
-* mkvmerge, MKVToolNix GUI multiplexer & header editor: fixed a crash during
-  file type detection for attachments if MKVToolNix is installed in a path
-  with non-ASCII characters (e.g. German Umlauts). Fixes #2212.
-* MKVToolNix GUI: multiplexer: the subtitle character set can now be set for
-  appended subtitle files, too. Fixes #2214.
-* MKVToolNix GUI: multiplexer: when appending, all tracks appended to disabled
-  tracks will start out disabled, too.
 * mkvmerge: appending files with additional parts at the same time was broken
   if more than one additional part was appended (e.g. when appending files
   from DVDs with something like `'(' VTS_01_1.VOB VTS_01_2.VOB ')' + '('
   VTS_02_1.VOB VTS_02_2.VOB ')'`). In such a situation the content from files
   `VTS_02_1.VOB` and `VTS_02_2.VOB` where laid out in parallel to the content
   from the earlier files.
+* mkvmerge: FLV reader: a single invalid AAC frame was written for AAC audio
+  tracks with codec initialization data longer than five bytes.
+* mkvmerge: FLV reader: timestamps will be normalized down to 0. Fixes #2220.
 * mkvmerge: MP4 reader: fixed reading HEVC/h.265 video tracks if they're
   stored as Annex B byte streams inside MP4. Fixes #2215.
 * mkvmerge: Ogg Opus reader: mkvmerge will now emit a warning instead of
   aborting when it encounters an Ogg Opus page with no data in the
   packet. Fixes #2217.
+* mkvmerge, mkvextract: Matroska parser: fixed a segmentation fault that
+  occurred whenever the first level 1 element after resyncing after an error
+  in the file structure isn't a cluster. Fixes #2211.
+* mkvmerge, MKVToolNix GUI multiplexer & header editor: fixed a crash during
+  file type detection for attachments if MKVToolNix is installed in a path
+  with non-ASCII characters (e.g. German Umlauts). Fixes #2212.
 * mkvinfo: the `--hex-positions` parameter did nothing in summary mode.
-* FLV reader: a single invalid AAC frame was written for AAC audio tracks with
-  codec initialization data longer than five bytes.
-* FLV reader: timestamps will be normalized down to 0. Fixes #2220.
+* mkvinfo: Windows: line endings will be written as `\r\n` (carriage return &
+  line feed) again instead of just `\n` (line feed).
+* mkvpropedit: adding track statistics tags: for tracks with content encoding
+  (compression) mkvpropedit is now accounting the uncompressed number of
+  bytes, not the encoded (compressed) number of bytes. Fixes #2200.
+* MKVToolNix GUI: multiplexer: the subtitle character set can now be set for
+  appended subtitle files, too. Fixes #2214.
+* MKVToolNix GUI: multiplexer: when appending, all tracks appended to disabled
+  tracks will start out disabled, too.
 
 ## Build system changes
 
