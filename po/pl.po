@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-02-21 19:51+0100\n"
-"PO-Revision-Date: 2018-02-08 20:47+0100\n"
+"PO-Revision-Date: 2018-02-23 22:56+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -962,7 +962,7 @@ msgstr "  US: ciąg znaków Unicode\n"
 
 #: src/propedit/propedit_cli_parser.cpp:166
 msgid "  X:  binary in hex\n"
-msgstr "  X:  liczba heksadecymalna\n"
+msgstr "  X:  liczba szesnastkowa\n"
 
 #: src/merge/mkvmerge.cpp:166
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
@@ -1574,9 +1574,8 @@ msgid "&FAQ"
 msgstr "&FAQ — Najczęściej zadawane pytania"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:174
-#, fuzzy
 msgid "&File name:"
-msgstr "Nazwa pliku:"
+msgstr "&Nazwa pliku:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
 msgid "&First entry to renumber:"
@@ -1602,7 +1601,7 @@ msgstr "&Pomoc"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:169
 msgid "&Hex dumps:"
-msgstr ""
+msgstr "&Zrzuty szesnastkowe:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:520
@@ -1656,9 +1655,8 @@ msgid "&Minimum playlist duration:"
 msgstr "&Minimalny czas trwania listy odtwarzania:"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:161
-#, fuzzy
 msgid "&Mode:"
-msgstr "Tryby"
+msgstr "&Tryb:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:623
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:399
@@ -1956,7 +1954,7 @@ msgstr "Sprawdź zgodność &wartości "
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:165
 msgid "&Verbosity:"
-msgstr ""
+msgstr "&Szczegółowość:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1412
 #: src/mkvtoolnix-gui/merge/input.cpp:1407
@@ -3007,7 +3005,7 @@ msgstr "Do wszystkich plików docelowych"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:162
 msgid "All elements in a tree-like structure"
-msgstr ""
+msgstr "Wszystkie elementy w strukturze przypominającej drzewo"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 msgid "All entries"
@@ -3410,7 +3408,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:156
 #, no-c-format
 msgid "Binary (displayed as hexadecimal numbers)"
-msgstr "Liczba binarna (wyświetlana w systemie heksadecymalnym)"
+msgstr "Liczba binarna (wyświetlana w systemie szesnastkowym)"
 
 #: src/common/kax_element_names.cpp:108
 msgid "Bit depth"
@@ -3560,9 +3558,8 @@ msgid "C&reate option file"
 msgstr "Utwó&rz plik opcji multipleksowania"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:176
-#, fuzzy
 msgid "Calculate Adler-32 &checksums for each frame and binary element"
-msgstr "Oblicz i wyświetl sumy kontrolne zawartości klatki."
+msgstr "&Oblicz sumy kontrolne Adler-32 dla każdej klatki i elementu binarnego"
 
 #: src/info/info_cli_parser.cpp:38
 msgid "Calculate and display checksums and use verbosity level 4."
@@ -4558,9 +4555,8 @@ msgid "Default duration/FPS:"
 msgstr "Domyślny czas trwania/FPS:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1422
-#, fuzzy
 msgid "Default info job settings"
-msgstr "Opcje dla nowych ustawień multipleksowania"
+msgstr "Ustawienia domyślne dla zadania informacyjnego"
 
 #: src/common/kax_element_names.cpp:310
 #, fuzzy
@@ -4804,7 +4800,7 @@ msgstr "Nie dodaje wpisu o rozdziałach do elementu indeksu wyszukiwania."
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
 msgid "Do not show hex dumps"
-msgstr ""
+msgstr "Nie pokazuj zrzutów szesnastkowych"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -4848,9 +4844,8 @@ msgid "Document type read version"
 msgstr "Minimalna wersja DocType, aby odczytać: %1%"
 
 #: src/common/kax_element_names.cpp:77
-#, fuzzy
 msgid "Document type version"
-msgstr "Wersja DocType: %1%"
+msgstr "Wersja typu dokumentu"
 
 #: src/common/file_types.cpp:33
 msgid "Dolby TrueHD"
@@ -6203,14 +6198,13 @@ msgid "Indexing (cues):"
 msgstr "Indeksowanie (cues):"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:150
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Info job"
-msgstr "Narzędzie informacyjne"
+msgstr "Zadanie informacyjne"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:78
-#, fuzzy
 msgid "Info job settings"
-msgstr "Nieprawidłowe ustawienia"
+msgstr "Ustawienia zadania informacyjnego"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:238
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:390
@@ -6442,7 +6436,7 @@ msgstr "Nieprawidłowy format identyfikacji w \"%1% %2%\".\n"
 
 #: src/common/xml/ebml_converter.cpp:269
 msgid "Invalid length of hexadecimal content: must be divisable by 2."
-msgstr "Nieprawidłowa długość liczby heksadecymalnej: musi być podzielna przez 2."
+msgstr "Nieprawidłowa długość liczby szesnastkowej: musi być podzielna przez 2."
 
 #: src/common/chapters/chapters.cpp:198
 #, boost-format
@@ -6820,9 +6814,9 @@ msgid "Listing configuration file names with the extension .mtxcfg causes the GU
 msgstr "Wyszczególnienie plików konfiguracyjnych (mających rozszerzenie .mtxcfg) spowoduje załadowanie ich do odpowiedniego narzędzia."
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:157
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Listing content of file \"%1\" in directory \"%2\""
-msgstr "Multipleksowanie do pliku »%1« w katalogu »%2«"
+msgstr "Zapisywanie zawartości pliku »%1« w katalogu »%2«"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:494
 #, no-c-format
@@ -7114,7 +7108,7 @@ msgstr "Brakuje nazwy pliku docelowego w parametrze \"%1%\".\n"
 
 #: src/common/bitvalue.cpp:80
 msgid "Missing one hex digit"
-msgstr "Brakuje jednej cyfry heksadecymalnej"
+msgstr "Brakuje jednej cyfry szesnastkowej"
 
 #: src/common/split_arg_parsing.cpp:33
 #, boost-format
@@ -7487,7 +7481,7 @@ msgstr "Na razie brak ostrzeżeń"
 
 #: src/common/xml/ebml_converter.cpp:266
 msgid "Non-hex digits encountered."
-msgstr "Natrafiono na cyfry nie będące heksadecymalnymi."
+msgstr "Natrafiono na cyfry nie będące szesnastkowymi."
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:301
 msgid "Nor&mal output:"
@@ -7531,7 +7525,7 @@ msgstr "Standardowo w widoku listowym wybrane pozycje mogą być przesuwane popr
 #: src/common/bitvalue.cpp:65
 #, boost-format
 msgid "Not a hex digit at position %1%"
-msgstr "Cyfra w pozycji %1% nie jest cyfrą heksadecymalną"
+msgstr "Cyfra w pozycji %1% nie jest cyfrą szesnastkową"
 
 #: src/common/kax_analyzer.cpp:292
 msgid "Not a valid Matroska file (no EBML head found)"
@@ -7643,9 +7637,8 @@ msgid "One of the options '--attachment-name', '--attachment-description', '--at
 msgstr "Jedna z opcji \"--attachment-name\", \"--attachment-description\", \"--attachment-mime-type\" lub \"--attachment-uid\" została użyta bez następujących opcji: \"--add-attachment\",  \"--replace-attachment\" lub \"--update-attachment\".\n"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-#, fuzzy
 msgid "One-line summaries for each track and frame"
-msgstr "Pokaż statystyki dla każdej ścieżki w trybie szczegółowym."
+msgstr "Podsumowania jednoliniowe dla każdej ścieżki i klatki"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
@@ -7746,9 +7739,9 @@ msgstr "Tylko v7 i nowsze wersje plików VobSub są obsługiwane. Jeśli twój p
 
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Open Matroska or WebM files"
-msgstr "Otwórz plik Matroski lub WebM"
+msgstr "Otwórz pliki Matroski lub WebM"
 
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:182
 msgid "Open a Matroska or WebM file via the \"header editor\" menu, the button below or drag & drop one here."
@@ -7890,7 +7883,7 @@ msgstr "► Wyjście"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:178
 msgid "Output element positions in he&xadecimal"
-msgstr ""
+msgstr "Zapisz pozycje &elementów w systemie szesnastkowym"
 
 #: src/common/cli_parser.cpp:183
 msgid "Output messages in this charset"
@@ -9062,28 +9055,24 @@ msgid "Show &output of all jobs instead of current job only"
 msgstr "Prezentuj p&ostęp wszystkich zadań zamiast tylko jednego (bieżącego) zadania"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:177
-#, fuzzy
 msgid "Show a &summary line with statistics for each track at the end"
-msgstr "Pokaż statystyki dla każdej ścieżki w trybie szczegółowym."
+msgstr "&Pokaż linię podsumowującą ze statystykami dla każdej ścieżki na końcu"
 
 #: src/info/info_cli_parser.cpp:42
 msgid "Show all bytes of each frame as a hex dump."
-msgstr "Pokaż wszystkie bajty każdej klatki jako zrzut heksadecymalny."
+msgstr "Pokaż wszystkie bajty każdej klatki jako zrzut szesnastkowy."
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:172
-#, fuzzy
 msgid "Show all bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Pokaż wszystkie bajty każdej klatki jako zrzut heksadecymalny."
+msgstr "Pokaż wszystkie bajty klatek i elementy CodecPrivate jako zrzuty szesnastkowe"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
-#, fuzzy
 msgid "Show all elements"
-msgstr "Pok&aż wszystkie elementy"
+msgstr "Pokaż wszystkie elementy"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:171
-#, fuzzy
 msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
-msgstr "Pokaż pierwsze 16 bajtów każdej klatki jako zrzut heksadecymalny."
+msgstr "Pokaż pierwsze 16 bajtów klatek i elementy CodecPrivate jako zrzuty szesnastkowe"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
 #, no-c-format
@@ -9097,7 +9086,7 @@ msgstr "Pokaż kolejkę zadań"
 
 #: src/info/info_cli_parser.cpp:43
 msgid "Show positions in hexadecimal."
-msgstr ""
+msgstr "Pokaż pozycje w systemie szesnastkowym."
 
 #: src/info/info_cli_parser.cpp:40
 msgid "Show statistics for each track in verbose mode."
@@ -9105,7 +9094,7 @@ msgstr "Pokaż statystyki dla każdej ścieżki w trybie szczegółowym."
 
 #: src/info/info_cli_parser.cpp:41
 msgid "Show the first 16 bytes of each frame as a hex dump."
-msgstr "Pokaż pierwsze 16 bajtów każdej klatki jako zrzut heksadecymalny."
+msgstr "Pokaż pierwsze 16 bajtów każdej klatki jako zrzut szesnastkowy."
 
 #: src/info/info_cli_parser.cpp:44
 msgid "Show the size of each element including its header."
@@ -9394,7 +9383,7 @@ msgstr "Z&atrzymaj po zakończeniu wszystkich trwających zadań"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
 msgid "Stop at the first cluster"
-msgstr ""
+msgstr "Zatrzymaj na pierwszym klastrze"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
@@ -11140,7 +11129,7 @@ msgstr "Ta funkcja nie została jeszcze zaimplementowana."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:168
 msgid "This is a comma-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."
-msgstr "Jest to lista 128-bitowych UID segmentu oddzielonych przecinkiem w standardowej formie UID: heksadecymalne numery z lub bez prefiksa \"0x\", ze spacjami lub bez. Składa się dokładnie z 32 cyfr."
+msgstr "Jest to lista 128-bitowych UID segmentu oddzielonych przecinkiem w standardowej formie UID: liczby szesnastkowe z lub bez prefiksa \"0x\", ze spacjami lub bez. Składa się dokładnie z 32 cyfr."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:219
 #, no-c-format
