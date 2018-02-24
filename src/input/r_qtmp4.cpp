@@ -123,6 +123,30 @@ read_qtmp4_atom(mm_io_c *read_from,
   return a;
 }
 
+static std::string
+displayable_esds_tag_name(uint8_t tag) {
+  return MP4DT_O                 == tag ? "O"
+       : MP4DT_IO                == tag ? "IO"
+       : MP4DT_ES                == tag ? "ES"
+       : MP4DT_DEC_CONFIG        == tag ? "DEC_CONFIG"
+       : MP4DT_DEC_SPECIFIC      == tag ? "DEC_SPECIFIC"
+       : MP4DT_SL_CONFIG         == tag ? "SL_CONFIG"
+       : MP4DT_CONTENT_ID        == tag ? "CONTENT_ID"
+       : MP4DT_SUPPL_CONTENT_ID  == tag ? "SUPPL_CONTENT_ID"
+       : MP4DT_IP_PTR            == tag ? "IP_PTR"
+       : MP4DT_IPMP_PTR          == tag ? "IPMP_PTR"
+       : MP4DT_IPMP              == tag ? "IPMP"
+       : MP4DT_REGISTRATION      == tag ? "REGISTRATION"
+       : MP4DT_ESID_INC          == tag ? "ESID_INC"
+       : MP4DT_ESID_REF          == tag ? "ESID_REF"
+       : MP4DT_FILE_IO           == tag ? "FILE_IO"
+       : MP4DT_FILE_O            == tag ? "FILE_O"
+       : MP4DT_EXT_PROFILE_LEVEL == tag ? "EXT_PROFILE_LEVEL"
+       : MP4DT_TAGS_START        == tag ? "TAGS_START"
+       : MP4DT_TAGS_END          == tag ? "TAGS_END"
+       :                                  "unknown";
+}
+
 int
 qtmp4_reader_c::probe_file(mm_io_c &in,
                            uint64_t) {
@@ -3043,10 +3067,10 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
   }
 
   tag = memio.read_uint8();
-  if (MP4DT_DEC_CONFIG != tag) {
-    mxdebug_if(m_debug_headers, boost::format("%1%tag is not DEC_CONFIG (0x%|2$02x|) but 0x%|3$02x|.\n") % space(lsp + 1) % MP4DT_DEC_CONFIG % tag);
+  mxdebug_if(m_debug_headers, boost::format("%1%tag is 0x%|2$02x| (%3%).\n") % space(lsp + 1) % static_cast<unsigned int>(tag) % displayable_esds_tag_name(tag));
+
+  if (MP4DT_DEC_CONFIG != tag)
     return false;
-  }
 
   auto len                = memio.read_mp4_descriptor_len();
 
@@ -3068,6 +3092,8 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
              % (esds.avg_bitrate / 1000.0));
 
   tag = memio.read_uint8();
+  mxdebug_if(m_debug_headers, boost::format("%1%tag is 0x%|2$02x| (%3%).\n") % space(lsp + 1) % static_cast<unsigned int>(tag) % displayable_esds_tag_name(tag));
+
   if (MP4DT_DEC_SPECIFIC == tag) {
     len = memio.read_mp4_descriptor_len();
     if (!len)
@@ -3085,10 +3111,10 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
       mxdebug(boost::format("%1%esds: decoder specific descriptor, len: %2%\n") % space(lsp + 1) % len);
       mxdebug(boost::format("%1%esds: dumping decoder specific descriptor\n") % space(lsp + 3));
       debugging_c::hexdump(esds.decoder_config->get_buffer(), esds.decoder_config->get_size());
+      mxdebug(boost::format("%1%tag is 0x%|2$02x| (%3%).\n") % space(lsp + 1) % static_cast<unsigned int>(tag) % displayable_esds_tag_name(tag));
     }
 
-  } else
-    mxdebug_if(m_debug_headers, boost::format("%1%tag is not DEC_SPECIFIC (0x%|2$02x|) but 0x%|3$02x|.\n") % space(lsp + 1) % MP4DT_DEC_SPECIFIC % tag);
+  }
 
   if (MP4DT_SL_CONFIG == tag) {
     len = memio.read_mp4_descriptor_len();
@@ -3103,8 +3129,7 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
 
     mxdebug_if(m_debug_headers, boost::format("%1%esds: sync layer config descriptor, len: %2%\n") % space(lsp + 1) % len);
 
-  } else
-    mxdebug_if(m_debug_headers, boost::format("%1%tag is not SL_CONFIG (0x%|2$02x|) but 0x%|3$02x|.\n") % space(lsp + 1) % MP4DT_SL_CONFIG % tag);
+  }
 
   return true;
 }
