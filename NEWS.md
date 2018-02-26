@@ -1,3 +1,12 @@
+# Version ?
+
+## Build system changes
+
+* A compilation database (in the form of a file `compile_commands.json`) can
+  be built automatically if the variable `BUILD_COMPILATION_DATABASE` is set
+  to `yes` (e.g. as `rake BUILD_COMPILATION_DATABASE=yes`).
+
+
 # Version 21.0.0 "Tardigrades Will Inherit The Earth" 2018-02-24
 
 ## New features and enhancements

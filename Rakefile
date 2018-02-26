@@ -11,10 +11,12 @@ if (version[0] < 2) && (version[1] < 9)
 end
 
 # Change to base directory before doing anything
+$source_dir = File.absolute_path(File.dirname(__FILE__))
+$build_dir  = $source_dir
+
 if FileUtils.pwd != File.dirname(__FILE__)
-  new_dir = File.absolute_path(File.dirname(__FILE__))
-  puts "Entering directory `#{new_dir}'"
-  Dir.chdir new_dir
+  puts "Entering directory `#{$source_dir}'"
+  Dir.chdir $source_dir
 end
 
 # Set number of threads to use if it is unset and we're running with
@@ -50,6 +52,7 @@ require_relative "rake.d/target"
 require_relative "rake.d/application"
 require_relative "rake.d/installer"
 require_relative "rake.d/library"
+require_relative "rake.d/compilation_database"
 require_relative "rake.d/format_string_verifier"
 require_relative "rake.d/pch"
 require_relative "rake.d/po"
@@ -271,6 +274,8 @@ cxx_compiler = lambda do |*args|
     "#{c(:CXX)} #{$flags[:cxxflags]}#{pchu}#{pchx} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} -x #{lang} #{source}",
     :allow_failure => true
   ]
+
+  Mtx::CompilationDatabase.add "directory" => $source_dir, "file" => source, "command" => args[2]
 
   if pchi.pretty_flags
     PCH.runq(*args[0..2], args[3].merge(pchi.pretty_flags))
@@ -887,7 +892,7 @@ end
 namespace :clean do
   desc "Remove all compiled and generated files ('tarball' clean)"
   task :dist => :clean do
-    run "rm -f config.h config.log config.cache build-config TAGS src/info/static_plugins.cpp src/mkvtoolnix-gui/static_plugins.cpp", :allow_failure => true
+    run "rm -f config.h config.log config.cache build-config TAGS src/mkvtoolnix-gui/static_plugins.cpp #{Mtx::CompilationDatabase.database_file_name}", :allow_failure => true
   end
 
   desc "Remove all compiled and generated files ('git' clean)"

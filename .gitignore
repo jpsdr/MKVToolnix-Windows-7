@@ -9,13 +9,15 @@
 *.o
 *.o-[0-9a-f]*
 *~
-.doconf.*
+/.cquery_cached_index
+/.doconf.*
 /Debug
 /Release
 /autom4te.cache
 /build-config
 /build-config.local
 /build-stamp
+/compile_commands.json
 /config.cache
 /config.guess
 /config.h
@@ -48,6 +50,7 @@
 /po/*.mo
 /po/mkvtoolnix.pot
 /po/qt/*.qm
+/rake.d/compilation_database.rb
 /rake.d/dependency.d
 /share/icons/*/*.h
 /src/*/qt_resources.cpp
@@ -79,9 +82,9 @@
 /tests/unit/common/common
 /tests/unit/merge/merge
 /tests/unit/propedit/propedit
+/tools/macos/unlock_keychain.sh
 BROWSE
 Makefile
 TAGS
 lib*.a
 .rsync-filter
-/tools/macos/unlock_keychain.sh
