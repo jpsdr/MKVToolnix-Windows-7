@@ -2789,8 +2789,10 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
              % get_uint32_be(&sv2_stsd.v2.samples_per_frame));
   }
 
-  if (m_debug_headers)
+  if (m_debug_headers) {
+    mxinfo(boost::format(" non-priv struct size: %1% priv struct size: %2%") % stsd_non_priv_struct_size % (size - std::min<unsigned int>(size, stsd_non_priv_struct_size)));
     mxinfo("\n");
+  }
 }
 
 void
@@ -2913,12 +2915,37 @@ qtmp4_demuxer_c::parse_vorbis_esds_decoder_config() {
 }
 
 void
+qtmp4_demuxer_c::parse_esds_audio_header_priv_atom(mm_io_c &io,
+                                                   int level) {
+  esds_parsed = parse_esds_atom(io, level + 1);
+
+  if (!esds_parsed)
+    return;
+
+  if (codec_c::look_up_object_type_id(esds.object_type_id).is(codec_c::type_e::A_AAC))
+    parse_aac_esds_decoder_config();
+
+  else if (codec_c::look_up_object_type_id(esds.object_type_id).is(codec_c::type_e::A_VORBIS))
+    parse_vorbis_esds_decoder_config();
+}
+
+void
 qtmp4_demuxer_c::parse_audio_header_priv_atoms(uint64_t atom_size,
                                                int level) {
   auto mem  = stsd->get_buffer() + stsd_non_priv_struct_size;
   auto size = atom_size - stsd_non_priv_struct_size;
 
   mm_mem_io_c mio(mem, size);
+
+  parse_audio_header_priv_atoms(mio, size, level);
+}
+
+void
+qtmp4_demuxer_c::parse_audio_header_priv_atoms(mm_mem_io_c &mio,
+                                               uint64_t size,
+                                               int level) {
+  if (size < 8)
+    return;
 
   try {
     while (!mio.eof() && (mio.getFilePointer() < (size - 8))) {
@@ -2930,24 +2957,15 @@ qtmp4_demuxer_c::parse_audio_header_priv_atoms(uint64_t atom_size,
         return;
       }
 
-      if (atom.fourcc != "esds") {
-        mio.setFilePointer(atom.pos + 4);
-        continue;
-      }
-
       mxdebug_if(m_debug_headers, boost::format("%1%Audio private data size: %2%, type: '%3%'\n") % space((level + 1) * 2 + 1) % atom.size % atom.fourcc);
 
-      if (!esds_parsed) {
-        mm_mem_io_c memio(mem + atom.pos + atom.hsize, atom.size - atom.hsize);
-        esds_parsed = parse_esds_atom(memio, level + 1);
+      if ((atom.fourcc == "esds") && !esds_parsed) {
+        mm_mem_io_c sub_io{mio.get_ro_buffer() + atom.pos + atom.hsize, std::min<uint64_t>(atom.size - atom.hsize, size - atom.pos - atom.hsize)};
+        parse_esds_audio_header_priv_atom(sub_io, level);
 
-        if (esds_parsed) {
-          if (codec_c::look_up_object_type_id(esds.object_type_id).is(codec_c::type_e::A_AAC))
-            parse_aac_esds_decoder_config();
-
-          else if (codec_c::look_up_object_type_id(esds.object_type_id).is(codec_c::type_e::A_VORBIS))
-            parse_vorbis_esds_decoder_config();
-        }
+      } else if (atom.fourcc == "wave") {
+        mm_mem_io_c sub_io{mio.get_ro_buffer() + atom.pos + atom.hsize, std::min<uint64_t>(atom.size - atom.hsize, size - atom.pos - atom.hsize)};
+        parse_audio_header_priv_atoms(sub_io, sub_io.get_size(), level + 1);
       }
 
       mio.setFilePointer(atom.pos + atom.size);
@@ -3056,39 +3074,39 @@ qtmp4_demuxer_c::parse_subtitles_header_priv_atoms(uint64_t atom_size,
 }
 
 bool
-qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
+qtmp4_demuxer_c::parse_esds_atom(mm_io_c &io,
                                  int level) {
   int lsp      = (level + 1) * 2;
-  esds.version = memio.read_uint8();
-  esds.flags   = memio.read_uint24_be();
-  auto tag     = memio.read_uint8();
+  esds.version = io.read_uint8();
+  esds.flags   = io.read_uint24_be();
+  auto tag     = io.read_uint8();
 
   mxdebug_if(m_debug_headers, boost::format("%1%esds: version: %2%, flags: %3%\n") % space(lsp + 1) % static_cast<unsigned int>(esds.version) % esds.flags);
 
   if (MP4DT_ES == tag) {
-    auto len             = memio.read_mp4_descriptor_len();
-    esds.esid            = memio.read_uint16_be();
-    esds.stream_priority = memio.read_uint8();
+    auto len             = io.read_mp4_descriptor_len();
+    esds.esid            = io.read_uint16_be();
+    esds.stream_priority = io.read_uint8();
     mxdebug_if(m_debug_headers, boost::format("%1%esds: id: %2%, stream priority: %3%, len: %4%\n") % space(lsp + 1) % static_cast<unsigned int>(esds.esid) % static_cast<unsigned int>(esds.stream_priority) % len);
 
   } else {
-    esds.esid = memio.read_uint16_be();
+    esds.esid = io.read_uint16_be();
     mxdebug_if(m_debug_headers, boost::format("%1%esds: id: %2%\n") % space(lsp + 1) % static_cast<unsigned int>(esds.esid));
   }
 
-  tag = memio.read_uint8();
+  tag = io.read_uint8();
   mxdebug_if(m_debug_headers, boost::format("%1%tag is 0x%|2$02x| (%3%).\n") % space(lsp + 1) % static_cast<unsigned int>(tag) % displayable_esds_tag_name(tag));
 
   if (MP4DT_DEC_CONFIG != tag)
     return false;
 
-  auto len                = memio.read_mp4_descriptor_len();
+  auto len                = io.read_mp4_descriptor_len();
 
-  esds.object_type_id     = memio.read_uint8();
-  esds.stream_type        = memio.read_uint8();
-  esds.buffer_size_db     = memio.read_uint24_be();
-  esds.max_bitrate        = memio.read_uint32_be();
-  esds.avg_bitrate        = memio.read_uint32_be();
+  esds.object_type_id     = io.read_uint8();
+  esds.stream_type        = io.read_uint8();
+  esds.buffer_size_db     = io.read_uint24_be();
+  esds.max_bitrate        = io.read_uint32_be();
+  esds.avg_bitrate        = io.read_uint32_be();
   esds.decoder_config.reset();
 
   mxdebug_if(m_debug_headers, boost::format("%1%esds: decoder config descriptor, len: %2%, object_type_id: %3%, "
@@ -3101,21 +3119,21 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
              % (esds.max_bitrate / 1000.0)
              % (esds.avg_bitrate / 1000.0));
 
-  tag = memio.read_uint8();
+  tag = io.read_uint8();
   mxdebug_if(m_debug_headers, boost::format("%1%tag is 0x%|2$02x| (%3%).\n") % space(lsp + 1) % static_cast<unsigned int>(tag) % displayable_esds_tag_name(tag));
 
   if (MP4DT_DEC_SPECIFIC == tag) {
-    len = memio.read_mp4_descriptor_len();
+    len = io.read_mp4_descriptor_len();
     if (!len)
       throw mtx::input::header_parsing_x();
 
     esds.decoder_config = memory_c::alloc(len);
-    if (memio.read(esds.decoder_config, len) != len) {
+    if (io.read(esds.decoder_config, len) != len) {
       esds.decoder_config.reset();
       throw mtx::input::header_parsing_x();
     }
 
-    tag = memio.read_uint8();
+    tag = io.read_uint8();
 
     if (m_debug_headers) {
       mxdebug(boost::format("%1%esds: decoder specific descriptor, len: %2%\n") % space(lsp + 1) % len);
@@ -3127,12 +3145,12 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
   }
 
   if (MP4DT_SL_CONFIG == tag) {
-    len = memio.read_mp4_descriptor_len();
+    len = io.read_mp4_descriptor_len();
     if (!len)
       throw mtx::input::header_parsing_x{};
 
     esds.sl_config     = memory_c::alloc(len);
-    if (memio.read(esds.sl_config, len) != len) {
+    if (io.read(esds.sl_config, len) != len) {
       esds.sl_config.reset();
       throw mtx::input::header_parsing_x();
     }

@@ -1,5 +1,10 @@
 # Version ?
 
+## Bug fixes
+
+* mkvmerge: MP4/QuickTime reader: fixed reading the ESDS audio header atom if
+  it is located inside a "wave" atom inside the "stsd" atom.
+
 ## Build system changes
 
 * A compilation database (in the form of a file `compile_commands.json`) can

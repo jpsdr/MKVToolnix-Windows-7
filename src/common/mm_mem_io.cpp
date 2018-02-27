@@ -169,6 +169,14 @@ mm_mem_io_c::get_buffer()
   return m_mem;
 }
 
+unsigned char const *
+mm_mem_io_c::get_ro_buffer()
+  const {
+  if (!m_read_only)
+    throw mtx::invalid_parameter_x();
+  return m_ro_mem;
+}
+
 unsigned char *
 mm_mem_io_c::get_and_lock_buffer() {
   m_free_mem = false;

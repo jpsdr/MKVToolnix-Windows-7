@@ -336,9 +336,11 @@ struct qtmp4_demuxer_c {
   void handle_colr_atom(memory_cptr const &atom_content, int level);
 
   void parse_audio_header_priv_atoms(uint64_t atom_size, int level);
+  void parse_audio_header_priv_atoms(mm_mem_io_c &mio, uint64_t size, int level);
   void parse_video_header_priv_atoms(uint64_t atom_size, int level);
   void parse_subtitles_header_priv_atoms(uint64_t atom_size, int level);
 
+  void parse_esds_audio_header_priv_atom(mm_io_c &io, int level);
   void parse_aac_esds_decoder_config();
   void parse_vorbis_esds_decoder_config();
 
@@ -378,8 +380,7 @@ private:
   void calculate_timestamps_constant_sample_size();
   void calculate_timestamps_variable_sample_size();
 
-  bool parse_esds_atom(mm_mem_io_c &memio, int level);
-  uint32_t read_esds_descr_len(mm_mem_io_c &memio);
+  bool parse_esds_atom(mm_io_c &io, int level);
 };
 using qtmp4_demuxer_cptr = std::shared_ptr<qtmp4_demuxer_c>;
 
