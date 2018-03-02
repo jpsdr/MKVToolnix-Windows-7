@@ -54,15 +54,48 @@ if [ -x /usr/bin/apt ]; then
   sudo apt -y upgrade
   sudo apt -y dist-upgrade
   sudo apt -y --no-install-recommends install \
-    git autoconf automake build-essential pkg-config wget ca-certificates git cmake \
-    p7zip-full fuse python python3 gettext rake docbook-xsl xsltproc chrpath \
-    libogg-dev libvorbis-dev libflac-dev libboost-all-dev libmagic-dev \
-    qt5-default qtbase5-dev qtbase5-dev-tools qtmultimedia5-dev
+    ca-certificates \
+    chrpath \
+    cmake \
+    debhelper \
+    docbook-xsl \
+    fakeroot \
+    fuse \
+    gettext \
+    git \
+    libboost-date-time-dev \
+    libboost-dev \
+    libboost-filesystem-dev \
+    libboost-math-dev \
+    libboost-regex-dev \
+    libboost-system-dev \
+    libbz2-dev \
+    libflac-dev \
+    libgtest-dev \
+    liblzo2-dev \
+    libmagic-dev \
+    libogg-dev \
+    libvorbis-dev \
+    p7zip-full \
+    pkg-config \
+    python \
+    python3 \
+    qt5-default \
+    qtbase5-dev \
+    qtbase5-dev-tools \
+    qtmultimedia5-dev \
+    rake \
+    ruby \
+    wget \
+    xsltproc \
+    zlib1g-dev
   sudo apt clean
 fi
 
-wget $cmurl -O libcmark-dev.deb
-sudo dpkg -i libcmark-dev.deb
+if ! dpkg -l libcmark-dev &> /dev/null; then
+  wget $cmurl -O libcmark-dev.deb
+  sudo dpkg -i libcmark-dev.deb
+fi
 
 if [ ! -e "$mtxdir/usr/bin/mkvtoolnix-gui" ]; then
   rm -rf $mtxdir
