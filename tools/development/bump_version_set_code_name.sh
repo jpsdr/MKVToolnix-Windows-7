@@ -77,6 +77,7 @@ function update_files {
   perl -pi -e 's/^Building MKVToolNix [0-9.]+/Building MKVToolNix '$TO'/i' Building.for.Windows.md
   perl -pi -e 's/define PRODUCT_VERSION .*/define PRODUCT_VERSION \"'$TO_NSI'\"/' installer/mkvtoolnix.nsi
   perl -pi -e "s{#define VERSIONNAME.*}{#define VERSIONNAME \"${CODENAME}\"}" src/common/version.cpp
+  perl -pi -e "s{^VERSION=.*}{VERSION=\"${TO}\"}" tools/appimage/build.sh
 }
 
 function update_docs {
