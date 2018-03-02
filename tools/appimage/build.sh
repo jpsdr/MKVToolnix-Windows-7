@@ -45,6 +45,11 @@ export LDFLAGS="-Wl,-z,relro -Wl,--as-needed -Wl,-rpath,XORIGIN/../lib"
 TOP="$(readlink -f "$0")"
 TOP="${TOP%/*}"
 
+if [[ ! -c /dev/fuse ]]; then
+  sudo mknod /dev/fuse c 10 229
+  sudo chmod 0666 /dev/fuse
+fi
+
 mkdir -p $APP
 cd $APP
 
