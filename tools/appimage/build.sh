@@ -42,7 +42,8 @@ cmurl="https://mkvtoolnix.download/ubuntu/xenial/binary/amd64/libcmark-dev_0.28.
 
 export LDFLAGS="-Wl,-z,relro -Wl,--as-needed -Wl,-rpath,XORIGIN/../lib"
 
-TOP="$PWD"
+TOP="$(readlink -f "$0")"
+TOP="${TOP%/*}"
 
 mkdir -p $APP
 cd $APP
