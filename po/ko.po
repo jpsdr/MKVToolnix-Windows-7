@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-24 14:50+0100\n"
+"POT-Creation-Date: 2018-03-03 10:04+0100\n"
 "PO-Revision-Date: 2018-02-22 02:27+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1445,7 +1445,7 @@ msgstr "모두 접기(&C)"
 msgid "&Command line:"
 msgstr "명령행(&C):"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:220
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "하위 챕터의 시작과 끝 타임스탬프를 그 부모의 시작과 끝 타임스탬프로 축소(&C)"
 
@@ -1619,7 +1619,7 @@ msgstr "모드(&M):"
 msgid "&Multiplexer"
 msgstr "합치기(&M)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:217
 msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "시작과 종료 타임스탬프를 다음 인수로 곱하기(&M):"
 
@@ -1767,6 +1767,11 @@ msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
 msgstr[0] "첨부 파일 삭제(&R)"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:223
+#, fuzzy
+msgid "&Remove end timestamps"
+msgstr "타임스탬프 축소 또는 확장(&O)"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1359
 #, no-c-format
 msgid "&Remove file"
@@ -1846,7 +1851,7 @@ msgstr "\"감추기\" 표시된 챕터 건너뛰기(&S)"
 msgid "&Skip file"
 msgstr "파일 건너뛰기(&S)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:218
 msgid "&Sort chapters by their start and end timestamps"
 msgstr "그 시작과 끝 타임스탬프 순서로 챕터 정렬(&S)"
 
@@ -3465,7 +3470,7 @@ msgstr "타임코드에 기반한 부분들로"
 msgid "C&onfiguration active"
 msgstr "설정 활성화하기(&O)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:219
 msgid "C&onstrict or expand timestamps"
 msgstr "타임스탬프 축소 또는 확장(&O)"
 
@@ -3676,7 +3681,7 @@ msgstr "챕터 언어"
 msgid "Chapter language (IETF)"
 msgstr "챕터 언어 (IETF)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 msgid "Chapter mass modification"
 msgstr "챕터 대규모 변경"
 
@@ -4527,7 +4532,7 @@ msgstr "하나 이상의 첨부 파일을 삭제합니다"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "아래 설정에 따라서 소스 파일의 언어가 '미정의' ('und') 상태이면, 이 언어도 사용될 수 있습니다."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
 msgstr "시작 타임스탬프에서 끝 타임스탬프 얻기(&E)"
 
@@ -4818,7 +4823,7 @@ msgstr "지금 실행(&X)"
 msgid "E&xit"
 msgstr "종료(&X)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:221
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "모든 하위 챕터의 최소/최대 타임스탬프를 포함하도록 챕터의 시작과 끝 타임스탬프 확장(&X)"
 
@@ -5437,7 +5442,7 @@ msgstr "파일/세그먼트 링크와 이 기능에 대한 자세한 설명은 m
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "비디오 트랙은 포함하지 않고 적어도 하나의 오디오 트랙을 포함하는 파일에 대해 mkvmerge는 모든 타임코드와 재생 시간이 한 개 샘플의 정밀도를 갖도록 타임코드 스케일 인수를 자동으로 선택합니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
 msgstr "대부분의 항목에 대해, 현재 챕터의 시작 타임스탬프보다 더 높은 동일한 레벨의 모든 챕터의 가장 작은 시작 타임스탬프가 끝 타임스탬프로 사용됩니다."
@@ -5787,8 +5792,8 @@ msgstr "시작 타임코드가 누락되어 있으면 이전 범위의 끝 타�
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "이 체크박스들 중 하나라도 체크되어 있으면, 상응하는 조건이 충족될 때 동작이 실행됩니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:78
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:80
 #, no-c-format
 msgid "If both shifting and multiplication are enabled then the shift will be performed before the multiplication."
 msgstr "이동하기와 곱셈을 모두 사용하면 곱셉 이전에 이동하기를 먼저 합니다."
@@ -5945,7 +5950,7 @@ msgstr "'아니오'로 설정하면 선택한 트랙은 대상 파일에 복사�
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
 msgstr "OGM 형식을 사용하고 파일의 문자셋을 제대로 인식하지 못하면 그것을 바로잡기 위해 이 옵션을 사용할 수 있습니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:86
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
 msgstr "Matroska 파일에서 챕터를 불러오면, 최상위 레벨의 맨 마지막 챕터에 대한 끝 타임스탬프는 파일의 재생시간에서 유추됩니다."
@@ -5960,7 +5965,7 @@ msgstr "마법의 값인 -1을 사용하면 mkvmerge는 비디오 트랙이 있�
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "숫자의 접미어가 'ms'이면 적어도 'n' 밀리초의 데이터를 각 클러스터에 넣습니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr "그런 챕터가 없다면, 부모 챕터의 끝 타임스탬프를 대신 사용합니다."
@@ -7105,7 +7110,7 @@ msgstr "이름:"
 msgid "Names"
 msgstr "이름"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:77
 #, no-c-format
 msgid "Negative values are allowed."
 msgstr "음수값을 사용할 수 있습니다."
@@ -7167,7 +7172,7 @@ msgstr "'--%2% %3%'에 %1%가 지정되어 있지 않습니다.\n"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "첫 프레임에서 AC-3 헤더를 찾지 못했습니다; 트랙을 건너뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3312
+#: src/input/r_qtmp4.cpp:3330
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "첫 프레임에서 DTS 헤더를 찾지 못했습니다; 트랙을 건너뜁니다.\n"
 
@@ -7885,12 +7890,12 @@ msgstr ""
 msgid "Please select its location below."
 msgstr "아래에서 그 위치를 선택하세요."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:91
 #, no-c-format
 msgid "Please select the actions to apply to all editions, chapters and sub-chapters."
 msgstr "모든 에디션, 챕터와 하위 챕터에 적용할 동작을 선택하세요."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:87
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
 #, no-c-format
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr "선택한 에디션이나 챕터와 그 모든 자손에 적용할 동작을 선택하세요."
@@ -8090,7 +8095,7 @@ msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 사운드 설명 atom을 �
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 스트림 설명 atom을 읽어올 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:2802
+#: src/input/r_qtmp4.cpp:2804
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 비디오 설명 atom을 읽어올 수 없습니다.\n"
@@ -8108,17 +8113,17 @@ msgstr "Quicktime/MP4 리더: 'mdat' atom를 찾을 수 없습니다. 동영상 
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 리더: %2%에 잘못된 청크 크기 %1%가 있습니다.\n"
 
-#: src/input/r_qtmp4.cpp:3362
+#: src/input/r_qtmp4.cpp:3380
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: MPEG4 part 10/AVC 트랙 %1%은 디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3388
+#: src/input/r_qtmp4.cpp:3406
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: MPEG4 트랙 %1%은 esds atom/디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3372
+#: src/input/r_qtmp4.cpp:3390
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "퀵타임/MP4 리더: MPEGH part 2/HEVC 트랙 %1%을 디코더 설정에 없습니다. 이 트랙을 건너뛰는 중.\n"
@@ -8137,17 +8142,17 @@ msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 스트림 설명 atom의 '
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 리더: 'time scale'의 매개변수가 0입니다. 이것은 지원되지 않습니다.\n"
 
-#: src/input/r_qtmp4.cpp:3330
+#: src/input/r_qtmp4.cpp:3348
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 AAC 트랙 %1%은 esds atom/디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3325
+#: src/input/r_qtmp4.cpp:3343
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 오디오 트랙 %1%은 'esds' atom에서 지원되지 않는 'object type id'의 %2%를 사용합니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3382
+#: src/input/r_qtmp4.cpp:3400
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 비디오 트랙 %1%은 ESDS atom이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
@@ -8172,16 +8177,16 @@ msgstr "Quicktime/MP4 리더: 이 파일은 압축 헤더를 사용하고 있지
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 리더: 이 파일은 압축 헤더를 사용하고 있지만, 압축을 해제할 수 없습니다. zlib 오류 코드: %1%. 중단합니다.\n"
 
-#: src/input/r_qtmp4.cpp:3281
-#: src/input/r_qtmp4.cpp:3300
-#: src/input/r_qtmp4.cpp:3343
-#: src/input/r_qtmp4.cpp:3406
+#: src/input/r_qtmp4.cpp:3299
+#: src/input/r_qtmp4.cpp:3318
+#: src/input/r_qtmp4.cpp:3361
+#: src/input/r_qtmp4.cpp:3424
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 리더: 트랙 %1%은 일부 데이터가 누락되어 있습니다. 헤더 atom이 손상됐을까요?\n"
 
 #: src/input/r_qtmp4.cpp:2731
-#: src/input/r_qtmp4.cpp:2809
+#: src/input/r_qtmp4.cpp:2811
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 리더: %1% 트랙 ID에는 하나 이상의 FourCC가 있습니다. 첫번째(%2%)만 사용하고 이것(%3%)은 사용하지 않습니다.\n"
@@ -8452,7 +8457,7 @@ msgstr "실행 중인 작업은 편집할 수 없습니다."
 msgid "Running jobs cannot be removed."
 msgstr "실행 중인 작업은 삭제할 수 없습니다."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
 msgid "S&hift start and end timestamps by the following amount:"
 msgstr "시작과 끝 타임스탬프를 다음 양만큼 이동하기(&H):"
 
@@ -8809,11 +8814,11 @@ msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attac
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attachment' 옵션에 사용할 UID를 설정하세요"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Set the chapter names' &languages:"
 msgstr "챕터 이름의 언어 설정(&L):"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
 msgid "Set the chapter names' co&untries"
 msgstr "챕터 이름의 국가 설정(&U)"
 
@@ -10139,7 +10144,7 @@ msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "주어진 값이 없으면 기본 형식은 %H:%M:%S입니다."
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:68
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:74
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/merge/output.cpp:208
 #: src/mkvtoolnix-gui/merge/output.cpp:348
 #: src/mkvtoolnix-gui/merge/output.cpp:363
@@ -11251,7 +11256,7 @@ msgstr "트랙 %1%: NAL이 너무 큼. 헤더 필드에 따른 크기: %2%, 패�
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "트랙 %1%:  %2% 자막 항목 번호에는 재생 시간이 누락되어 있습니다. 1초의 재생 시간으로 가정합니다.\n"
 
-#: src/input/r_qtmp4.cpp:2890
+#: src/input/r_qtmp4.cpp:2892
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "트랙 %1%: AAC 정보를 분석할 수 없습니다.\n"

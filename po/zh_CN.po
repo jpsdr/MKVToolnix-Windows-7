@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-24 14:50+0100\n"
+"POT-Creation-Date: 2018-03-03 10:04+0100\n"
 "PO-Revision-Date: 2018-02-22 02:12+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -1410,7 +1410,7 @@ msgstr "全部收起(&C)"
 msgid "&Command line:"
 msgstr "命令行(&C):"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:220
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "将子章节的起止时间戳收缩到上级章节范围之内(&C)"
 
@@ -1584,7 +1584,7 @@ msgstr "模式(&M):"
 msgid "&Multiplexer"
 msgstr "混流(&M)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:217
 msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "将起止时间戳乘以该系数(&M):"
 
@@ -1732,6 +1732,11 @@ msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
 msgstr[0] "移除附件(&R)"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:223
+#, fuzzy
+msgid "&Remove end timestamps"
+msgstr "收缩或扩展时间戳(&O)"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1359
 #, no-c-format
 msgid "&Remove file"
@@ -1811,7 +1816,7 @@ msgstr "跳过标记为“隐藏”的章节(&S)"
 msgid "&Skip file"
 msgstr "跳过文件(&S)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:218
 msgid "&Sort chapters by their start and end timestamps"
 msgstr "按章节的起止时间戳排序(&S)"
 
@@ -3429,7 +3434,7 @@ msgstr "按时间点分段"
 msgid "C&onfiguration active"
 msgstr "配置已启用(&O)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:219
 msgid "C&onstrict or expand timestamps"
 msgstr "收缩或扩展时间戳(&O)"
 
@@ -3640,7 +3645,7 @@ msgstr "章节语言"
 msgid "Chapter language (IETF)"
 msgstr "章节语言 (IETF)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 msgid "Chapter mass modification"
 msgstr "章节批量修改"
 
@@ -4491,7 +4496,7 @@ msgstr "删除一个或多个附件"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "根据下面的设置，可以在输入文件中的语言为“未指定”(“und”) 时使用此处设置的语言。"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
 msgstr "根据各起始时间戳推算终止时间戳(&E)"
 
@@ -4782,7 +4787,7 @@ msgstr "立即执行(&X)"
 msgid "E&xit"
 msgstr "退出(&X)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:221
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "将章节的起止时间戳扩展到包含其所有子章节的最小/最大时间戳(&X)"
 
@@ -5401,7 +5406,7 @@ msgstr "要获取文件/剪辑链接和本功能的详细说明，请阅读 mkvm
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "对于不包含视频轨道但包含至少一条音频轨道的文件，mkvmerge 将会自动选择一个时间码伸缩系数以使所有时间码和时长的精度为一个样本。"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
 msgstr "对于大多数条目，同一级别晚于当前章节的所有章节的最小起始时间戳，将用作当前章节的终止时间戳。"
@@ -5751,8 +5756,8 @@ msgstr "若起始时间码未指定，则将使用前一范围的终止时间码
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "若选中了这些复选框，则将在符合特定条件时执行对应操作。"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:78
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:80
 #, no-c-format
 msgid "If both shifting and multiplication are enabled then the shift will be performed before the multiplication."
 msgstr "若同时启用了平移与乘法选项，则将在乘法运算之前执行平移操作。"
@@ -5909,7 +5914,7 @@ msgstr "如果设为“否”，则选中的轨道将不会被复制到输出文
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
 msgstr "如果使用 OGM 格式且文件的字符集未能正确识别，可以使用该选项来修正。"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:86
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
 msgstr "若章节系加载自 Matroska 文件，最高级别最后一个章节的终止时间戳将根据文件时长推算得到。"
@@ -5924,7 +5929,7 @@ msgstr "如果使用了 -1 这一特殊数值，则即使在有视频轨道存�
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "如果数字后紧接着 ms 则表示在每个簇中最多置入 n 毫秒的数据。"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr "若没有此类章节，则将使用上级章节的终止时间戳。"
@@ -7069,7 +7074,7 @@ msgstr "名称:"
 msgid "Names"
 msgstr "名称"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:77
 #, no-c-format
 msgid "Negative values are allowed."
 msgstr "可以为负值。"
@@ -7131,7 +7136,7 @@ msgstr "'--%2% %3%' 中未指定 %1%。\n"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "初始帧中未发现 AC-3 头；此轨道将被跳过。\n"
 
-#: src/input/r_qtmp4.cpp:3312
+#: src/input/r_qtmp4.cpp:3330
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "初始帧中未发现 DTS 头; 该轨道将被跳过。\n"
 
@@ -7848,12 +7853,12 @@ msgstr ""
 msgid "Please select its location below."
 msgstr "请在下方选择其所在位置。"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:91
 #, no-c-format
 msgid "Please select the actions to apply to all editions, chapters and sub-chapters."
 msgstr "请选择应用到所有版本、章节和子章节的操作。"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:87
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
 #, no-c-format
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr "请选择应用到所选版本或章节及其子项的操作。"
@@ -8053,7 +8058,7 @@ msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID %1% 的音频描述单元
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID %1% 的流描述单元。\n"
 
-#: src/input/r_qtmp4.cpp:2802
+#: src/input/r_qtmp4.cpp:2804
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID %1% 的视频描述单元。\n"
@@ -8071,17 +8076,17 @@ msgstr "Quicktime/MP4 读取器: 未发现 'mdat' 单元。找不到影片数据
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 读取器: 位置 %2% 存在无效的块大小 %1%。\n"
 
-#: src/input/r_qtmp4.cpp:3362
+#: src/input/r_qtmp4.cpp:3380
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 part 10/AVC 轨道 %1% 缺少解码器配置信息。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3388
+#: src/input/r_qtmp4.cpp:3406
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 轨道 %1% 缺少 esds 单元 (解码器配置信息)。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3372
+#: src/input/r_qtmp4.cpp:3390
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEGH part 2/HEVC 轨道 %1% 缺少解码器配置信息。正在跳过该轨道。\n"
@@ -8100,17 +8105,17 @@ msgstr "Quicktime/MP4 读取器: 轨道 %1% 的流描述单元的 'size' 字段�
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 读取器: 'time scale' 参数为 0。这不被支持。\n"
 
-#: src/input/r_qtmp4.cpp:3330
+#: src/input/r_qtmp4.cpp:3348
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: AAC 轨道 %1% 缺少 esds 单元 (解码器配置信息)。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3325
+#: src/input/r_qtmp4.cpp:3343
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 音频轨道 %1% 的 'esds' 单元使用了不支持的 'object type id' %2%。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3382
+#: src/input/r_qtmp4.cpp:3400
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 视频轨道 %1% 缺少 ESDS 单元。正在跳过此轨道。\n"
@@ -8135,16 +8140,16 @@ msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法初始化 z
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法解压。zlib 错误代码: %1%。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:3281
-#: src/input/r_qtmp4.cpp:3300
-#: src/input/r_qtmp4.cpp:3343
-#: src/input/r_qtmp4.cpp:3406
+#: src/input/r_qtmp4.cpp:3299
+#: src/input/r_qtmp4.cpp:3318
+#: src/input/r_qtmp4.cpp:3361
+#: src/input/r_qtmp4.cpp:3424
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 读取器: 轨道 %1% 缺少一些数据。头部单元损坏？\n"
 
 #: src/input/r_qtmp4.cpp:2731
-#: src/input/r_qtmp4.cpp:2809
+#: src/input/r_qtmp4.cpp:2811
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 读取器: 轨道 ID %1% 有多于一个 FourCC。仅使用第一个 (%2%) 而非 (%3%)。\n"
@@ -8415,7 +8420,7 @@ msgstr "无法编辑正在运行的任务。"
 msgid "Running jobs cannot be removed."
 msgstr "无法移除正在运行的任务。"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
 msgid "S&hift start and end timestamps by the following amount:"
 msgstr "将起止时间戳平移如下数值(&H):"
 
@@ -8765,11 +8770,11 @@ msgstr "用于 '--add-attachment'、'--replace-attachment' 或 '--update-attachm
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "用于 '--add-attachment'、'--replace-attachment' 或 '--update-attachment' 之前，设置它们所指定文件的名称"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Set the chapter names' &languages:"
 msgstr "设置章节名称的语言(&L):"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
 msgid "Set the chapter names' co&untries"
 msgstr "设置章节名称的国家(&U):"
 
@@ -10093,7 +10098,7 @@ msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "如果没有给出格式，则默认使用 %H:%M:%S。"
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:68
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:74
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/merge/output.cpp:208
 #: src/mkvtoolnix-gui/merge/output.cpp:348
 #: src/mkvtoolnix-gui/merge/output.cpp:363
@@ -11205,7 +11210,7 @@ msgstr "轨道 %1%: NAL 过大。头部字段给出的大小: %2%，封包中可
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "轨道 %1%: 字幕编号 %2% 缺少时长。视作 1 秒处理。\n"
 
-#: src/input/r_qtmp4.cpp:2890
+#: src/input/r_qtmp4.cpp:2892
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "轨道 %1%: AAC 信息无法解析。\n"

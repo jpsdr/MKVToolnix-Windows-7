@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-24 14:50+0100\n"
+"POT-Creation-Date: 2018-03-03 10:04+0100\n"
 "PO-Revision-Date: 2018-02-23 22:56+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -1486,7 +1486,7 @@ msgstr "&Zwiń wszystko "
 msgid "&Command line:"
 msgstr "&Linia komend:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:220
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "Ograni&cz czasy początków i końców podrozdziałów, aby mieściły się w czasach swoich nadrzędnych rozdziałów"
 
@@ -1664,7 +1664,7 @@ msgstr "&Tryb:"
 msgid "&Multiplexer"
 msgstr "&Multiplekser"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:217
 msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "Po&mnóż czasy początków i końców rozdziałów o następujący współczynnik:"
 
@@ -1814,6 +1814,11 @@ msgstr[0] "&Usuń załącznik"
 msgstr[1] "&Usuń załączniki"
 msgstr[2] "&Usuń załączniki"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:223
+#, fuzzy
+msgid "&Remove end timestamps"
+msgstr "&Ogranicz lub rozszerz czasy"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1359
 #, no-c-format
 msgid "&Remove file"
@@ -1897,7 +1902,7 @@ msgstr "Pomiń rozdziały &oflagowane jako \"ukryte\""
 msgid "&Skip file"
 msgstr "&Pomiń plik"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:218
 msgid "&Sort chapters by their start and end timestamps"
 msgstr "Po&sortuj rozdziały według ich początków i końców"
 
@@ -3533,7 +3538,7 @@ msgstr "Na fragmenty o konkretnym początku i końcu na osi czasu"
 msgid "C&onfiguration active"
 msgstr "K&onfiguracja aktywna"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:219
 msgid "C&onstrict or expand timestamps"
 msgstr "&Ogranicz lub rozszerz czasy"
 
@@ -3750,7 +3755,7 @@ msgstr "Język rozdziałów"
 msgid "Chapter language (IETF)"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 msgid "Chapter mass modification"
 msgstr "Masowa modyfikacja rozdziałów"
 
@@ -4635,7 +4640,7 @@ msgstr "Usuń jeden lub więcej załączników"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "W zależności od ustawienia poniżej, język ten może być również użyty, jeśli język w pliku źródłowym jest nieokreślony (\"undetermined\" → \"und\")."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
 msgstr ""
 
@@ -4928,7 +4933,7 @@ msgstr "&Wykonaj teraz"
 msgid "E&xit"
 msgstr "Zamknij &program"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:221
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "&Rozszerz czasy początków i końców rozdziałów, aby uwzględnić w nich czasy minimalne/maksymalne wszystkich ich podrozdziałów"
 
@@ -5556,7 +5561,7 @@ msgstr "Dla głębszego zrozumienia funkcji łączenia plików/segmentów zapozn
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "Dla plików, które nie będą zawierały ścieżki wideo, ale przynajmniej jedną ścieżkę audio, mkvmerge automatycznie wybierze współczynnik skalowania kodów czasowych po to, aby wszystkie kody czasowe i czasy trwania miały precyzję jednego sampla."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
 msgstr ""
@@ -5914,8 +5919,8 @@ msgstr "Jeśli nie podamy czasu początkowego, wtedy użyty zostanie czas końco
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "Jeśli którekolwiek z tych pól wyboru jest zaznaczone, wtedy czynność zostanie wykonana po spełnieniu odpowiedniego warunku."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:78
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:80
 #, no-c-format
 msgid "If both shifting and multiplication are enabled then the shift will be performed before the multiplication."
 msgstr "Jeśli zarówno przesunięcie, jak i mnożenie są włączone, wtedy przesunięcie zostanie wykonane przed mnożeniem."
@@ -6072,7 +6077,7 @@ msgstr "Jeśli ustawione na \"nie\", wtedy oznaczone ścieżki nie zostaną skop
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
 msgstr "Jeśli w użyciu jest format OGM i zestaw znaków nie jest rozpoznawany poprawnie, wtedy użyj tej opcji, aby to poprawić."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:86
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
 msgstr ""
@@ -6087,7 +6092,7 @@ msgstr "Jeśli została użyta magiczna wartość -1, wtedy mkvmerge użyje dok�
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "Jeśli po liczbie występują jednostki \"ms\", wtedy dodaje do każdego klastra najwyżej \"n\" milisekund."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr ""
@@ -7240,7 +7245,7 @@ msgstr "Nazwa:"
 msgid "Names"
 msgstr "Nazwy"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:77
 #, no-c-format
 msgid "Negative values are allowed."
 msgstr "Wartości ujemne są dozwolone."
@@ -7302,7 +7307,7 @@ msgstr "Nie podano żadnego %1% w \"--%2% %3%\".\n"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Nie znaleziono nagłówka AC-3 w pierwszej klatce; ścieżka zostanie pominięta.\n"
 
-#: src/input/r_qtmp4.cpp:3312
+#: src/input/r_qtmp4.cpp:3330
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nie znaleziono nagłówka DTS w pierwszych klatkach; ścieżka zostanie pominięta.\n"
 
@@ -8035,12 +8040,12 @@ msgstr ""
 msgid "Please select its location below."
 msgstr "Proszę poniżej wybrać jego lokalizację."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:91
 #, no-c-format
 msgid "Please select the actions to apply to all editions, chapters and sub-chapters."
 msgstr "Proszę wybrać czynności, które zostaną wykonane dla wszystkich edycji, rozdziałów i podrozdziałów."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:87
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
 #, no-c-format
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr "Proszę wybrać czynności, które zostaną wykonane dla wszystkich zaznaczonych edycji lub rozdziałów i wszystkich ich podrzędnych pozycji."
@@ -8247,7 +8252,7 @@ msgstr "Moduł wczytujący Quicktime/MP4: Nie można wczytać atomu z informacj�
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Nie można wczytać atomu z informacją o strumieniu dla ścieżki z ID %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2802
+#: src/input/r_qtmp4.cpp:2804
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Nie można wczytać atomu z informacją o obrazie dla ścieżki z ID %1%.\n"
@@ -8265,17 +8270,17 @@ msgstr "Moduł wczytujący Quicktime/MP4: Nie znaleziono atomu \"mdat\". Brak da
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Nieprawidłowy rozmiar %1% przy %2%.\n"
 
-#: src/input/r_qtmp4.cpp:3362
+#: src/input/r_qtmp4.cpp:3380
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Ścieżka MPEG4 part 10/AVC %1% nie zawiera konfiguracji swojego dekodera. Pomijanie tej ścieżki.\n"
 
-#: src/input/r_qtmp4.cpp:3388
+#: src/input/r_qtmp4.cpp:3406
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Ścieżka MPEG4 %1% nie zawiera atomu esds/konfiguracji dekodera. Pomijanie tej ścieżki.\n"
 
-#: src/input/r_qtmp4.cpp:3372
+#: src/input/r_qtmp4.cpp:3390
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Ścieżka MPEGH part 2/HEVC %1% nie zawiera konfiguracji swojego dekodera. Pomijanie tej ścieżki.\n"
@@ -8294,17 +8299,17 @@ msgstr "Moduł wczytujący Quicktime/MP4: Pole \"size\" jest zbyt małe w atomie
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Parametr \"time scale\" wynosi 0. Nie jest to obsługiwane.\n"
 
-#: src/input/r_qtmp4.cpp:3330
+#: src/input/r_qtmp4.cpp:3348
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Ścieżka AAC %1% nie posiada atomu esds/konfiguracji dekodera. Pomijanie tej ścieżki.\n"
 
-#: src/input/r_qtmp4.cpp:3325
+#: src/input/r_qtmp4.cpp:3343
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Ścieżka dźwiękowa %1% zawiera nieobsługiwany id \"object type id\" w %2% w atomie \"esds\". Pomijanie tej ścieżki.\n"
 
-#: src/input/r_qtmp4.cpp:3382
+#: src/input/r_qtmp4.cpp:3400
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 reader: Ścieżka wideo %1% nie zawiera atomu ESDS. Pomijanie tej ścieżki.\n"
@@ -8329,16 +8334,16 @@ msgstr "Moduł wczytujący Quicktime/MP4: Ten plik zawiera skompresowane nagłó
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Ten plik zawiera skompresowane nagłówki, jednakże nie można było ich zdekompresować. Kod błędu zlib: %1%. Przerywanie.\n"
 
-#: src/input/r_qtmp4.cpp:3281
-#: src/input/r_qtmp4.cpp:3300
-#: src/input/r_qtmp4.cpp:3343
-#: src/input/r_qtmp4.cpp:3406
+#: src/input/r_qtmp4.cpp:3299
+#: src/input/r_qtmp4.cpp:3318
+#: src/input/r_qtmp4.cpp:3361
+#: src/input/r_qtmp4.cpp:3424
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Moduł wczytujący Quicktime/MP4: Ścieżka %1% nie zawiera pewnych danych. Czyżby błędne nagłówki atomów?\n"
 
 #: src/input/r_qtmp4.cpp:2731
-#: src/input/r_qtmp4.cpp:2809
+#: src/input/r_qtmp4.cpp:2811
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Moduł wczytujący Quicktime/MP4: ID ścieżki %1% posiada więcej niż jeden kod FourCC. Będzie użyty tylko pierwszy z nich (%2%), a nie ten (%3%).\n"
@@ -8610,7 +8615,7 @@ msgstr "Trwające zadania nie mogą być edytowane."
 msgid "Running jobs cannot be removed."
 msgstr "Trwające zadania nie mogą zostać usunięte."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
 msgid "S&hift start and end timestamps by the following amount:"
 msgstr "Przesuń czasy początków i &końców rozdziałów o następującą wielkość:"
 
@@ -8973,11 +8978,11 @@ msgstr "Ustawia typ MIME do użycia z opcją \"--add-attachment\", \"--replace-a
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "Ustawia UID dla użycia z opcją \"--add-attachment\", \"--replace-attachment\" lub \"--update-attachment\""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Set the chapter names' &languages:"
 msgstr "Usta&w język nazw rozdziałów:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
 msgid "Set the chapter names' co&untries"
 msgstr "&Ustaw państwo nazw rozdziałów:"
 
@@ -10329,7 +10334,7 @@ msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "Format przechodzi na domyślny %H:%M:%S, gdy żaden nie został podany."
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:68
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:74
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/merge/output.cpp:208
 #: src/mkvtoolnix-gui/merge/output.cpp:348
 #: src/mkvtoolnix-gui/merge/output.cpp:363
@@ -11448,7 +11453,7 @@ msgstr "Ścieżka %1%: Wartość NAL za duża. Rozmiar wg nagłówka: %2%, dost�
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Ścieżka %1%: Linia napisów o numerze %2% nie posiada czasu trwania. Zakłada się czas trwania 1s.\n"
 
-#: src/input/r_qtmp4.cpp:2890
+#: src/input/r_qtmp4.cpp:2892
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "Ścieżka %1%: Informacja o AAC nie może być wczytana.\n"

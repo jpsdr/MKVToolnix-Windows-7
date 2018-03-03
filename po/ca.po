@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-24 14:50+0100\n"
+"POT-Creation-Date: 2018-03-03 10:04+0100\n"
 "PO-Revision-Date: 2018-02-22 05:35+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1540,7 +1540,7 @@ msgstr "&Contrau-ho tot"
 msgid "&Command line:"
 msgstr "Línia d'&ordres:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:220
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "Re&dueix les marques de temps d'inici i final dels subcapítols a les marques de temps d'inici i finals dels fitxers pare"
 
@@ -1716,7 +1716,7 @@ msgstr "&Mode:"
 msgid "&Multiplexer"
 msgstr "&Multiplexador"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:217
 msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "&Multiplica l'inici i el final de les marques de temps pel següent factor:"
 
@@ -1865,6 +1865,11 @@ msgid_plural "&Remove attachments"
 msgstr[0] "Sup&rimeix l'adjunt"
 msgstr[1] "Sup&rimeix els adjunts"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:223
+#, fuzzy
+msgid "&Remove end timestamps"
+msgstr "Redueix &o amplia les marques de temps"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1359
 #, no-c-format
 msgid "&Remove file"
@@ -1946,7 +1951,7 @@ msgstr "O&met els capítols marcats com a «ocult»"
 msgid "&Skip file"
 msgstr "O&met el fitxer"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:218
 msgid "&Sort chapters by their start and end timestamps"
 msgstr "O&rdena els capítols per a les seves marques de temps d'inici i final"
 
@@ -3575,7 +3580,7 @@ msgstr "En parts segons els codis de temps"
 msgid "C&onfiguration active"
 msgstr "C&onfiguració activa"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:219
 msgid "C&onstrict or expand timestamps"
 msgstr "Redueix &o amplia les marques de temps"
 
@@ -3786,7 +3791,7 @@ msgstr "Idioma del capítol"
 msgid "Chapter language (IETF)"
 msgstr "Idioma del capítol (IETF)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 msgid "Chapter mass modification"
 msgstr "Modificació massiva dels capítols"
 
@@ -4640,7 +4645,7 @@ msgstr "Suprimeix un o més adjunts"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "Depenent del següent ajustament, aquest idioma també es podrà emprar si l'idioma al fitxer d'origen és «undetermined» («und»)."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
 msgstr "Deriva l&es marques de temps de final de les marques de temps d'inici"
 
@@ -4932,7 +4937,7 @@ msgstr "E&xecuta ara"
 msgid "E&xit"
 msgstr "&Surt"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:221
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "E&xpandeix les marques de temps d'inici i final del capítol per incloure les marques de temps mínima/màxims de tots els seus subcapítols"
 
@@ -5551,7 +5556,7 @@ msgstr "Per a una explicació més extensa de la vinculació de fitxers/segments
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "Pels fitxers que tot i no contenir una pista de vídeo almenys continguin una pista d'àudio, el «mkvmerge» triarà automàticament un factor d'escala pel codi de temps de manera que tots els codis de temps i durades tinguin la precisió d'una mostra."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
 msgstr "Per a la majoria d'entrades, la marca de temps d'inici més petita de tots els capítols en el mateix nivell superior que la marca de temps d'inici del capítol actual, s'usarà com a la seva marca de temps final."
@@ -5902,8 +5907,8 @@ msgstr "Si s'omet un codi de temps inicial, llavors s'emprarà el codi de temps 
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "Si es marca qualsevol d'aquestes caselles de selecció, l'acció s'executarà quan es compleixi la condició corresponent."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:78
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:80
 #, no-c-format
 msgid "If both shifting and multiplication are enabled then the shift will be performed before the multiplication."
 msgstr "Si estan habilitats tant el desplaçament com la multiplicació, llavors el desplaçament es realitzarà abans de la multiplicació."
@@ -6060,7 +6065,7 @@ msgstr "Si s'estableix a «no», llavors les pistes seleccionades no seran copia
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
 msgstr "Si s'usa el format OGM i el joc de caràcters del fitxer no és correctament reconegut, aquesta opció es pot usar per a corregir-ho."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:86
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
 msgstr "Si els capítols s'han carregat des d'un fitxer Matroska, la marca de temps final per al darrer capítol del nivell superior es derivarà de la durada del fitxer."
@@ -6075,7 +6080,7 @@ msgstr "Si s'usa el valor màgic -1, llavors el «mkvmerge» emprarà la precisi
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "Si posteriorment el nombre s'estableix amb «ms», llavors posarà almenys «n» mil·lisegons de dades en cada clúster."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr "Si no hi ha aquest capítol, s'usarà la marca de temps final del capítol pare."
@@ -7220,7 +7225,7 @@ msgstr "Nom:"
 msgid "Names"
 msgstr "Noms"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:77
 #, no-c-format
 msgid "Negative values are allowed."
 msgstr "Els valors negatius estan permesos."
@@ -7282,7 +7287,7 @@ msgstr "No s'ha especificat cap %1% a «--%2% %3%».\n"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera AC-3 al primer fotograma. La pista serà omesa.\n"
 
-#: src/input/r_qtmp4.cpp:3312
+#: src/input/r_qtmp4.cpp:3330
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera DTS en els primers fotogrames. La pista serà omesa.\n"
 
@@ -8008,12 +8013,12 @@ msgstr ""
 msgid "Please select its location below."
 msgstr "Seleccioneu la seva ubicació a sota."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:91
 #, no-c-format
 msgid "Please select the actions to apply to all editions, chapters and sub-chapters."
 msgstr "Si us plau, seleccioneu les accions a aplicar a totes les edicions, capítols i subcapítols."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:87
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
 #, no-c-format
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr "Si us plau, seleccioneu les accions a aplicar a totes les edicions o capítols seleccionats i als seus fills."
@@ -8214,7 +8219,7 @@ msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció 
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del flux per a l'ID de la pista %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2802
+#: src/input/r_qtmp4.cpp:2804
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del vídeo per a l'ID de la pista %1%.\n"
@@ -8232,17 +8237,17 @@ msgstr "Lector de Quicktime/MP4: No s'ha trobat l'àtom «mdat». No s'han troba
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Lector de Quicktime/MP4: Mida no vàlida del fragment d'informació %1% a %2%.\n"
 
-#: src/input/r_qtmp4.cpp:3362
+#: src/input/r_qtmp4.cpp:3380
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEG-4 part 10/AVC li falta la configuració del descodificador. S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3388
+#: src/input/r_qtmp4.cpp:3406
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEG-4 part 10/AVC li falta la configuració del descodificador/àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3372
+#: src/input/r_qtmp4.cpp:3390
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEGH part 2/HEVC li falta la configuració del descodificador. S'ometrà aquesta pista.\n"
@@ -8261,17 +8266,17 @@ msgstr "Lector de Quicktime/MP4: El camp «mida» és massa petit a l'àtom de d
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Lector de Quicktime/MP4: El paràmetre «escala de temps» ha estat 0. Això no és admès.\n"
 
-#: src/input/r_qtmp4.cpp:3330
+#: src/input/r_qtmp4.cpp:3348
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: Manca la pista AAC %1% a la configuració del descodificador/àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3325
+#: src/input/r_qtmp4.cpp:3343
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: La pista d'àudio %1% està usant un «ID del tipus d'objecte» no admès de %2% a l'àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3382
+#: src/input/r_qtmp4.cpp:3400
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: Manca la pista de vídeo %1% a l'àtom «ESDS». S'ometrà aquesta pista.\n"
@@ -8296,16 +8301,16 @@ msgstr "Lector de Quicktime/MP4: Aquest fitxer usa capçaleres comprimides, per�
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: Aquest fitxer usa capçaleres comprimides, però no es poden descomprimir. Codi d'error de «zlib»: %1%. S'està interrompent.\n"
 
-#: src/input/r_qtmp4.cpp:3281
-#: src/input/r_qtmp4.cpp:3300
-#: src/input/r_qtmp4.cpp:3343
-#: src/input/r_qtmp4.cpp:3406
+#: src/input/r_qtmp4.cpp:3299
+#: src/input/r_qtmp4.cpp:3318
+#: src/input/r_qtmp4.cpp:3361
+#: src/input/r_qtmp4.cpp:3424
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% li manquen algunes dades. Estan malmesos els àtoms de la capçalera?\n"
 
 #: src/input/r_qtmp4.cpp:2731
-#: src/input/r_qtmp4.cpp:2809
+#: src/input/r_qtmp4.cpp:2811
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Lector de Quicktime/MP4: L'ID de la pista %1% té més d'un FourCC. Només s'usarà el primer (%2%) i no aquest altre (%3%).\n"
@@ -8576,7 +8581,7 @@ msgstr "Les tasques en execució no es poden editar."
 msgid "Running jobs cannot be removed."
 msgstr "Les tasques en execució no es poden suprimir."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
 msgid "S&hift start and end timestamps by the following amount:"
 msgstr "Des&plaça l'inici i el final de les marques de temps en la següent quantitat:"
 
@@ -8936,11 +8941,11 @@ msgstr "Estableix el tipus MIME a usar per a les opcions «--add-attachment», �
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "Estableix l'UID a usar per a les opcions «--add-attachment», «--replace-attachment» o «--update-attachment»"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Set the chapter names' &languages:"
 msgstr "Estableix els i&diomes dels noms del capítol:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
 msgid "Set the chapter names' co&untries"
 msgstr "Estableix els &països dels noms del capítol"
 
@@ -10272,7 +10277,7 @@ msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "Si no s'indica, el format per omissió és %H:%M:%S."
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:68
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:74
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/merge/output.cpp:208
 #: src/mkvtoolnix-gui/merge/output.cpp:348
 #: src/mkvtoolnix-gui/merge/output.cpp:363
@@ -11397,7 +11402,7 @@ msgstr "Pista %1%: NAL massa gran. Mida segons el camp de la capçalera: %2%, by
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Pista %1%: Li manca la durada a l'entrada de subtítols número %2%. S'assumeix una durada d'1 s.\n"
 
-#: src/input/r_qtmp4.cpp:2890
+#: src/input/r_qtmp4.cpp:2892
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "Pista %1%: La informació AAC no s'ha pogut analitzar.\n"

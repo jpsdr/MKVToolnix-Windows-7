@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-02-24 14:50+0100\n"
+"POT-Creation-Date: 2018-03-03 10:04+0100\n"
 "PO-Revision-Date: 2018-02-06 01:15+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -1493,7 +1493,7 @@ msgstr "&Skupi sve"
 msgid "&Command line:"
 msgstr "&Komandna linija:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:220
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "Sabij početne i krajnje vremenske oznake pod-poglavlja u početne i krajnje vremenske oznake njihovog roditelja"
 
@@ -1672,7 +1672,7 @@ msgstr ""
 msgid "&Multiplexer"
 msgstr "&Multiplekser"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:217
 msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "Po&množi početne i krajnje vremenske oznake sledećim činiocem:"
 
@@ -1822,6 +1822,11 @@ msgstr[0] "&Ukloni prilog"
 msgstr[1] "&Ukloni priloge"
 msgstr[2] "&Ukloni priloge"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:223
+#, fuzzy
+msgid "&Remove end timestamps"
+msgstr "S&abij ili proširi vremenske oznake"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1359
 #, no-c-format
 msgid "&Remove file"
@@ -1905,7 +1910,7 @@ msgstr "Pr&eskoči poglavlja obeležena sa \"skriveno\""
 msgid "&Skip file"
 msgstr "&Preskoči fajl"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:218
 msgid "&Sort chapters by their start and end timestamps"
 msgstr "&Sortiraj poglavlja prema njihovim početnim i krajnjim vremenskim oznakama"
 
@@ -3537,7 +3542,7 @@ msgstr "Na delove na osnovu vremenskih oznaka"
 msgid "C&onfiguration active"
 msgstr "&Konfiguracija aktivna"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:219
 msgid "C&onstrict or expand timestamps"
 msgstr "S&abij ili proširi vremenske oznake"
 
@@ -3752,7 +3757,7 @@ msgstr "Jezik poglavlja"
 msgid "Chapter language (IETF)"
 msgstr "Jezik poglavlja (IETF)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 msgid "Chapter mass modification"
 msgstr "Masovna izmena poglavlja"
 
@@ -4636,7 +4641,7 @@ msgstr "Obriši jedan ili više priloga"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "U zavisnosti od postavke ispod, ova stavka se takođe može koristiti ako je jezik u izvornom fajlu 'neodređen' ('und')."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
 msgstr "Izvedi krajnje vremenske oznake iz početnih"
 
@@ -4930,7 +4935,7 @@ msgstr "&Izvrši odmah"
 msgid "E&xit"
 msgstr "Iz&ađi"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:221
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "Proširi početne i krajnje vremenske oznake poglavlja da obuhvati minimalnu/maksimalnu oznaku od svih njihovih pod-poglavlja"
 
@@ -5554,7 +5559,7 @@ msgstr "Za detaljno objašnjenje o povezivanju fajlova/segmenata i o ovoj funkci
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "Za fajlove koji neće sadržavati video stazu ali makar jednu audio stazu mkvmerge će automatski izabrati množitelj vremenske oznake tako da sve vremenske oznake i trajanja imaju preciznost od jednog uzorka."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
 msgstr ""
@@ -5910,8 +5915,8 @@ msgstr "Ako je početna vremenska oznaka izostavljena, onda je krajnja vremenska
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "Ako je neka od ovih postavki čekirana, radnja će biti izvršena kada je odgovarajući uslov ispunjen."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:78
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:80
 #, no-c-format
 msgid "If both shifting and multiplication are enabled then the shift will be performed before the multiplication."
 msgstr "Ako je omogućeno i pomeranje i množenje, onda će se pomeranje vršiti pre množenja."
@@ -6068,7 +6073,7 @@ msgstr "Ako je postavljeno 'ne' onda izabrane staze neće biti kopirane u odredi
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
 msgstr "Ako je korišćen OGM format i skup znakova fajla nije ispravno prepoznat tada ova opcija može biti korišćena da to popravi."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:86
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
 msgstr ""
@@ -6083,7 +6088,7 @@ msgstr "Ako se koristi magična vrednost -1 mkvmerge će koristiti preciznost je
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "Ako je broj postfiksiran sa 'ms' onda će staviti najviše 'n' milisekundi podataka u svaki klaster."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:83
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr ""
@@ -7242,7 +7247,7 @@ msgstr "Ime:"
 msgid "Names"
 msgstr "Imena"
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:77
 #, no-c-format
 msgid "Negative values are allowed."
 msgstr "Negativne vrednosti su dozvoljene."
@@ -7304,7 +7309,7 @@ msgstr "No %1% specified in '--%2% %3%'.\n"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Nije pronađeno AC-3 zaglavlje u prvom okviru; staza će biti preskočena.\n"
 
-#: src/input/r_qtmp4.cpp:3312
+#: src/input/r_qtmp4.cpp:3330
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nije pronađeno DTS zaglavlje u prvom okviru; staza će biti preskočena.\n"
 
@@ -8037,12 +8042,12 @@ msgstr ""
 msgid "Please select its location below."
 msgstr "Molim vas izaberite njegovu lokaciju ispod."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:91
 #, no-c-format
 msgid "Please select the actions to apply to all editions, chapters and sub-chapters."
 msgstr "Molim vas izaberite radnje koje se primenjuju za sve edicije, poglavlja i pod-poglavlja."
 
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:87
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:89
 #, no-c-format
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr "Molim vas izaberite radnje za primenu na izabrane edicije ili na poglavlje i sve njegove elemente."
@@ -8248,7 +8253,7 @@ msgstr "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis zvuka za stazu 
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis potoka za stazu sa ID %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2802
+#: src/input/r_qtmp4.cpp:2804
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis videa za stazu sa ID %1%.\n"
@@ -8266,17 +8271,17 @@ msgstr "Quicktime/MP4 čitač: Nije pronađen 'mdat' atom. Video podaci nisu na�
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 čitač: Nevažeća veličina parčeta %1% u %2%.\n"
 
-#: src/input/r_qtmp4.cpp:3362
+#: src/input/r_qtmp4.cpp:3380
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEG4 part 10/AVC stazi %1% nedostaje njena konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:3388
+#: src/input/r_qtmp4.cpp:3406
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEG4 stazi %1% nedostaje esds atom/konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:3372
+#: src/input/r_qtmp4.cpp:3390
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEGH part 2/HEVC stazi %1% nedostaje njena konfiguracija dekodera. Izostavljam ovu stazu.\n"
@@ -8295,17 +8300,17 @@ msgstr "Quicktime/MP4 čitač: Polje 'size' u atomu za opis potoka je previše m
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 čitač: Parametar 'time scale' je bila 0. Ovo nije podržano.\n"
 
-#: src/input/r_qtmp4.cpp:3330
+#: src/input/r_qtmp4.cpp:3348
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: AAC stazi %1% nedostaje esds atom/konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:3325
+#: src/input/r_qtmp4.cpp:3343
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: Audio staza %1% koristi nepodržan 'object type id' od %2% u 'esds' atomu. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:3382
+#: src/input/r_qtmp4.cpp:3400
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: Video stazi %1% nedostaje ESDS atom. Izostavljam ovu stazu.\n"
@@ -8330,16 +8335,16 @@ msgstr "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja, ali zli
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja, ali ona ne mogu biti nekompresovana. Kod greške iz zlib-a: %1%. Prekidam.\n"
 
-#: src/input/r_qtmp4.cpp:3281
-#: src/input/r_qtmp4.cpp:3300
-#: src/input/r_qtmp4.cpp:3343
-#: src/input/r_qtmp4.cpp:3406
+#: src/input/r_qtmp4.cpp:3299
+#: src/input/r_qtmp4.cpp:3318
+#: src/input/r_qtmp4.cpp:3361
+#: src/input/r_qtmp4.cpp:3424
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 čitač: Stazi %1% nedostaju neki podaci. Atomi iz zaglavlja oštećeni?\n"
 
 #: src/input/r_qtmp4.cpp:2731
-#: src/input/r_qtmp4.cpp:2809
+#: src/input/r_qtmp4.cpp:2811
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 čitač: Track ID %1% ima više od jednog FourCC. Koristim samo onaj prvi (%2%) a ne ovaj (%3%).\n"
@@ -8611,7 +8616,7 @@ msgstr "Započet zadatak se ne može izmeniti."
 msgid "Running jobs cannot be removed."
 msgstr "Započeti zadaci se ne mogu ukloniti."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
 msgid "S&hift start and end timestamps by the following amount:"
 msgstr "&Pomeri početne i krajnje vremenske oznake za sledeću vrednost:"
 
@@ -8974,11 +8979,11 @@ msgstr "Postavi MIME tip za upotrebu u sledećim parametrima '--add-attachment',
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "Postavi UID za upotrebu u sledećim parametrima '--add-attachment', '--replace-attachment' ili '--update-attachment'"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Set the chapter names' &languages:"
 msgstr "Postavi &jezik poglavlja:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
 msgid "Set the chapter names' co&untries"
 msgstr "Postavi &državu poglavlja"
 
@@ -10332,7 +10337,7 @@ msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "Ako ništa nije naznačeno, podrazumevani format je %H:%M:%S."
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:68
-#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:74
+#: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #: src/mkvtoolnix-gui/merge/output.cpp:208
 #: src/mkvtoolnix-gui/merge/output.cpp:348
 #: src/mkvtoolnix-gui/merge/output.cpp:363
@@ -11458,7 +11463,7 @@ msgstr "Staza %1%: NAL je previše veliki. Prema polju sa zaglavljem veličina j
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Staza %1%: Titlu sa brojem %2% nedostaje trajanje. Pretpostavljam trajanje od 1s.\n"
 
-#: src/input/r_qtmp4.cpp:2890
+#: src/input/r_qtmp4.cpp:2892
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "Staza %1%: AAC informacija ne može biti raščlanjena.\n"
