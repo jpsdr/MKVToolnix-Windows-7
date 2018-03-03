@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: chapter editor: added an option to remove all end timestamps
+  to the "additional modifications" dialog. Implements #2231.
+
 ## Bug fixes
 
 * mkvmerge: MP4/QuickTime reader: fixed reading the ESDS audio header atom if

@@ -171,6 +171,7 @@ protected:
   void setLanguages(QStandardItem *item, QString const &language);
   void setCountries(QStandardItem *item, QString const &country);
   void setEndTimestamps(QStandardItem *startItem);
+  void removeEndTimestamps(QStandardItem *startItem);
 
 protected:
   void setupToolTips();

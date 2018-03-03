@@ -1481,6 +1481,29 @@ Tab::setEndTimestamps(QStandardItem *startItem) {
 }
 
 void
+Tab::removeEndTimestamps(QStandardItem *startItem) {
+  auto chapterModel = p_func()->chapterModel;
+
+  if (!startItem)
+    return;
+
+  std::function<void(QStandardItem *)> setter = [chapterModel, &setter](QStandardItem *item) {
+    auto chapter = chapterModel->chapterFromItem(item);
+    if (chapter) {
+      DeleteChildren<KaxChapterTimeEnd>(*chapter);
+      chapterModel->updateRow(item->index());
+    }
+
+    for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+      setter(item->child(row));
+  };
+
+  setter(startItem);
+
+  setControlsFromStorage();
+}
+
+void
 Tab::massModify() {
   auto p = p_func();
 
@@ -1519,6 +1542,9 @@ Tab::massModify() {
 
   if (actions & MassModificationDialog::SetEndTimestamps)
     setEndTimestamps(item);
+
+  if (actions & MassModificationDialog::RemoveEndTimestamps)
+    removeEndTimestamps(item);
 
   setControlsFromStorage();
 }
