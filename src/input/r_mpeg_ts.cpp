@@ -1943,9 +1943,14 @@ reader_c::parse_packet(unsigned char *buf) {
   if (!track)
     track = handle_packet_for_pid_not_listed_in_pmt(hdr->get_pid());
 
+  if (   !track
+      || !hdr->has_payload())   // no ts_payload
+    return;
+
+  if (mtx::included_in(track->type, pid_type_e::video, pid_type_e::audio, pid_type_e::subtitles, pid_type_e::unknown))
+    handle_transport_errors(*track, *hdr);
+
   if (   hdr->has_transport_error() // corrupted packet
-      || !hdr->has_payload()        // no ts_payload
-      || !track
       || track->processed)
     return;
 
@@ -2035,8 +2040,6 @@ reader_c::handle_pes_payload(track_c &track,
                              packet_header_t &ts_header,
                              unsigned char *ts_payload,
                              std::size_t ts_payload_size) {
-  handle_transport_errors(track, ts_header);
-
   if (ts_header.is_payload_unit_start()) {
     if (track.is_pes_payload_size_unbounded() && track.pes_payload_read->get_size())
       parse_pes(track);

@@ -9,6 +9,9 @@
 
 * mkvmerge: MP4/QuickTime reader: fixed reading the ESDS audio header atom if
   it is located inside a "wave" atom inside the "stsd" atom.
+* MPEG TS reader: fixed wrong handling of the continuity counter for TS
+  packets that signal that TS payload is present but where the adaptation
+  field spans the whole TS packet.
 
 ## Build system changes
 
