@@ -422,7 +422,7 @@ using file_cptr = std::shared_ptr<file_t>;
 class reader_c: public generic_reader_c {
 protected:
   std::vector<file_cptr> m_files;
-  std::size_t m_current_file;
+  std::size_t m_current_file, m_packet_num{};
 
   std::vector<track_ptr> m_tracks, m_all_probed_tracks;
   std::map<generic_packetizer_c *, track_ptr> m_ptzr_to_track_map;

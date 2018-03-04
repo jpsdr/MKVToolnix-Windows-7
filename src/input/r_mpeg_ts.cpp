@@ -1228,6 +1228,8 @@ reader_c::reset_processing_state(processing_state_e new_state) {
 
   for (auto const &track : m_tracks)
     track->reset_processing_state();
+
+  m_packet_num = 0;
 }
 
 void
@@ -2008,14 +2010,15 @@ reader_c::handle_transport_errors(track_c &track,
 
   if (track.transport_error_detected(ts_header) && !track.m_skip_pes_payload) {
     mxdebug_if(m_debug_pes_headers,
-               boost::format("handle_transport_errors: error detected for track PID %1% (0x%|1$04x|) at %2% (%3%, expected continuity_counter %4% actual %5%); dropping current PES packet (expected size %6% read %7%)\n")
+               boost::format("handle_transport_errors: error detected for track PID %1% (0x%|1$04x|) at %2% packet num %8% (%3%, expected continuity_counter %4% actual %5%); dropping current PES packet (expected size %6% read %7%)\n")
                % track.pid
                % file().m_position
                % (ts_header.has_transport_error() ? "transport_error flag" : "wrong continuity_counter")
                % (track.m_expected_next_continuity_counter ? to_string(static_cast<unsigned int>(track.m_expected_next_continuity_counter.get())) : std::string{"—"})
                % static_cast<unsigned int>(ts_header.continuity_counter())
                % track.pes_payload_size_to_read
-               % track.pes_payload_read->get_size());
+               % track.pes_payload_read->get_size()
+               % m_packet_num);
 
     track.clear_pes_payload();
     track.m_skip_pes_payload = true;
@@ -2433,6 +2436,8 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
         continue;
       return finish();
     }
+
+    ++m_packet_num;
 
     parse_packet(buf);
   }
