@@ -156,6 +156,7 @@ public slots:
   virtual void onCroppingChanged(QString newValue);
   virtual void onAacIsSBRChanged(int newValue);
   virtual void onReduceAudioToCoreChanged(bool newValue);
+  virtual void onRemoveDialogNormalizationChanged(bool newValue);
   virtual void onSubtitleCharacterSetChanged(int newValue);
   virtual void onCuesChanged(int newValue);
   virtual void onAdditionalTrackOptionsChanged(QString newValue);
