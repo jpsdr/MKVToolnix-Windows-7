@@ -15,7 +15,6 @@
 
 #include "common/ac3.h"
 #include "common/codec.h"
-#include "common/checksums/base.h"
 #include "common/strings/formatting.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
