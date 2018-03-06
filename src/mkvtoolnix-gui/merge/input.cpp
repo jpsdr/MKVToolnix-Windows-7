@@ -1041,7 +1041,10 @@ Tab::onAacIsSBRChanged(int newValue) {
 
 void
 Tab::onReduceAudioToCoreChanged(bool newValue) {
-  withSelectedTracks([&newValue](auto &track) { track.m_reduceAudioToCore = newValue; });
+  withSelectedTracks([&newValue](auto &track) {
+    if (track.canReduceToAudioCore())
+      track.m_reduceAudioToCore = newValue;
+  });
 }
 
 void

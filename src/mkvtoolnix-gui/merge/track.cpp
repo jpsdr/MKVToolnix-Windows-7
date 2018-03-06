@@ -309,7 +309,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (m_aacSbrWasDetected || (0 != m_aacIsSBR))
       opt.options << Q("--aac-is-sbr") << Q("%1:%2").arg(sid).arg((1 == m_aacIsSBR) || ((0 == m_aacIsSBR) && m_aacSbrWasDetected) ? 1 : 0);
 
-    if (m_reduceAudioToCore)
+    if (canReduceToAudioCore() && m_reduceAudioToCore)
       opt.options << Q("--reduce-to-core") << sid;
 
   } else if (isVideo()) {
