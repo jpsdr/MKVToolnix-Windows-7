@@ -17,11 +17,14 @@
 
 #include "common/ac3.h"
 #include "common/bit_reader.h"
+#include "common/bit_writer.h"
 #include "common/bswap.h"
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
 #include "common/codec.h"
+#include "common/debugging.h"
 #include "common/endian.h"
+#include "common/strings/formatting.h"
 
 namespace mtx { namespace ac3 {
 
@@ -101,6 +104,18 @@ frame_c::decode_header_type_eac3(mtx::bits::reader_c &bc) {
 
   uint8_t acmod = bc.get_bits(3);
   uint8_t lfeon = bc.get_bit();
+  bc.skip_bits(5);              // bsid
+
+  m_dialog_normalization_bit_position = bc.get_bit_position();
+  m_dialog_normalization              = bc.get_bits(5);
+
+  if (acmod == 0x00) {          // dual mono mode
+    if (bc.get_bit())           // compre
+      bc.skip_bits(8);          // compr
+
+    m_dialog_normalization2_bit_position = bc.get_bit_position();
+    m_dialog_normalization2              = bc.get_bits(5);
+  }
 
   m_sample_rate = sample_rates[0x03 == fscod ? 3 + fscod2 : fscod];
   m_channels    = channels[acmod] + lfeon;
@@ -172,17 +187,32 @@ frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
     bc.skip_bits(2);            // surmixlev
   if (0x02 == acmod)
     bc.skip_bits(2);            // dsurmod
-  uint8_t lfeon      = bc.get_bit();
+  uint8_t lfeon                       = bc.get_bit();
 
-  uint8_t sr_shift   = std::max(m_bs_id, 8u) - 8;
+  uint8_t sr_shift                    = std::max(m_bs_id, 8u) - 8;
 
-  m_sample_rate      = sample_rates[fscod] >> sr_shift;
-  m_bit_rate         = (bit_rates[frmsizecod >> 1] * 1000) >> sr_shift;
-  m_channels         = channel_modes[acmod] + lfeon;
-  m_bytes            = frame_sizes[frmsizecod][fscod] << 1;
+  m_dialog_normalization_bit_position = bc.get_bit_position();
+  m_dialog_normalization              = bc.get_bits(5);
+  m_sample_rate                       = sample_rates[fscod] >> sr_shift;
+  m_bit_rate                          = (bit_rates[frmsizecod >> 1] * 1000) >> sr_shift;
+  m_channels                          = channel_modes[acmod] + lfeon;
+  m_bytes                             = frame_sizes[frmsizecod][fscod] << 1;
 
-  m_samples          = 1536;
-  m_frame_type       = EAC3_FRAME_TYPE_INDEPENDENT;
+  m_samples                           = 1536;
+  m_frame_type                        = EAC3_FRAME_TYPE_INDEPENDENT;
+
+  if (acmod == 0) {
+    // Dual-mono mode
+    if (bc.get_bit())           // compre
+      bc.skip_bits(8);          // compr
+    if (bc.get_bit())           // langcode
+      bc.skip_bits(8);          // langcod
+    if (bc.get_bit())           // audprodie
+      bc.skip_bits(5 + 2);      // mixlevel, roomtyp
+
+    m_dialog_normalization2_bit_position = bc.get_bit_position();
+    m_dialog_normalization2              = bc.get_bits(5);
+  }
 
   return m_bytes != 0;
 }
@@ -438,6 +468,18 @@ pow_poly(unsigned int a,
   return r;
 }
 
+static uint16_t
+calculate_crc1(unsigned char const *buf,
+               std::size_t frame_size) {
+  int frame_size_words = frame_size >> 1;
+  int frame_size_58    = (frame_size_words >> 1) + (frame_size_words >> 3);
+
+  uint16_t crc1        = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, buf + 4, 2 * frame_size_58 - 4));
+  unsigned int crc_inv = pow_poly((CRC16_POLY >> 1), (16 * frame_size_58) - 16, CRC16_POLY);
+
+  return mul_poly(crc_inv, crc1, CRC16_POLY);
+}
+
 bool
 verify_checksum1(unsigned char const *buf,
                  std::size_t size) {
@@ -450,15 +492,55 @@ verify_checksum1(unsigned char const *buf,
     return false;
 
   uint16_t expected_crc = get_uint16_be(&buf[2]);
-
-  int frame_size_words  = frame.m_bytes >> 1;
-  int frame_size_58     = (frame_size_words >> 1) + (frame_size_words >> 3);
-
-  uint16_t actual_crc   = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, buf + 4, 2 * frame_size_58 - 4));
-  unsigned int crc_inv  = pow_poly((CRC16_POLY >> 1), (16 * frame_size_58) - 16, CRC16_POLY);
-  actual_crc            = mul_poly(crc_inv, actual_crc, CRC16_POLY);
+  auto actual_crc       = calculate_crc1(buf, frame.m_bytes);
 
   return expected_crc == actual_crc;
+}
+
+void
+remove_dialog_normalization(unsigned char *buf,
+                            std::size_t size) {
+  static debugging_option_c s_debug{"ac3_remove_dialog_normalization|remove_dialog_normalization"};
+
+  frame_c frame;
+
+  if (!frame.decode_header(buf, size))
+    return;
+
+  if (size < frame.m_bytes)
+    return;
+
+  if (   (frame.m_dialog_normalization == 1)
+      && (   !frame.m_dialog_normalization2
+          || (*frame.m_dialog_normalization2 == 1))) {
+    mxdebug_if(s_debug, boost::format("no need to remove the dialog normalization, it's already set to 1\n"));
+    return;
+  }
+
+  mxdebug_if(s_debug, boost::format("removing dialog normalization of %1% (%2%)\n") % frame.m_dialog_normalization % (frame.m_dialog_normalization2 ? ::to_string(*frame.m_dialog_normalization2) : "—"));
+
+  mtx::bits::writer_c w{buf, size};
+
+  w.set_bit_position(frame.m_dialog_normalization_bit_position);
+  w.put_bits(5, 1);
+
+  if (frame.m_dialog_normalization2_bit_position) {
+    w.set_bit_position(*frame.m_dialog_normalization2_bit_position);
+    w.put_bits(5, 1);
+  }
+
+  put_uint16_be(&buf[2], calculate_crc1(buf, size));
+
+  auto &crcrsv_byte  = buf[size - 3];
+  crcrsv_byte       &= 0xfe;
+
+  auto crc2 = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, &buf[2], size - 4));
+  if (crc2 == AC3_SYNC_WORD) {
+    crcrsv_byte |= 0x01;
+    crc2         = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, &buf[2], size - 4));
+  }
+
+  put_uint16_be(&buf[size - 2], crc2);
 }
 
 }}                              // namespace mtx::ac3
