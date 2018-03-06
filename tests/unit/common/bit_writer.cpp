@@ -151,4 +151,23 @@ TEST(BitWriter, ExtendingTheBuffer) {
   EXPECT_EQ(0x89abcdefu, get_uint32_be(&buffer->get_buffer()[100]));
 }
 
+TEST(BitWriter, ProvidingABuffer) {
+  unsigned char buf[8] = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 };
+  auto b               = mtx::bits::writer_c{buf, 8};
+
+  for (int idx = 0; idx < 8; ++idx)
+    ASSERT_NO_THROW(b.put_bits(8, idx));
+
+  ASSERT_EQ(64, b.get_bit_position());
+
+  ASSERT_EQ(0x0001020304050607ull, get_uint64_be(buf));
+
+  ASSERT_THROW(b.put_bits(1, 1), std::invalid_argument);
+
+  auto buffer = b.get_buffer();
+
+  ASSERT_EQ(8, buffer->get_size());
+  ASSERT_EQ(0x0001020304050607ull, get_uint64_be(buffer->get_buffer()));
+}
+
 }

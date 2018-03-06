@@ -21,18 +21,28 @@ class writer_c {
 private:
   memory_cptr m_buffer;
   unsigned char *m_data{};
-  std::size_t m_size{}, m_byte_position{}, m_mask{0x80u};
+  std::size_t m_size{}, m_byte_position{}, m_mask{0x80u}, m_data_size{};
+  bool m_can_extend{};
 
 public:
   writer_c()
     : m_buffer{memory_c::alloc(100)}
     , m_data{m_buffer->get_buffer()}
+    , m_data_size{100}
+    , m_can_extend{true}
   {
     std::memset(m_buffer->get_buffer(), 0, m_buffer->get_size());
   }
 
+  writer_c(unsigned char *data, std::size_t size)
+    : m_data{data}
+    , m_size{size}
+    , m_data_size{size}
+  {
+  }
+
   inline memory_cptr get_buffer() {
-    return memory_c::clone(m_buffer->get_buffer(), m_size);
+    return memory_c::clone(m_data, m_size);
   }
 
   inline uint64_t copy_bits(std::size_t n, reader_c &src) {
@@ -117,11 +127,14 @@ public:
 
 protected:
   inline void extend_buffer_if_needed() {
-    if (m_byte_position < m_buffer->get_size())
+    if (m_byte_position < m_data_size)
       return;
 
-    auto new_size = (m_byte_position / 100 + 1) * 100;
-    m_buffer->resize(new_size);
+    if (!m_can_extend)
+      throw std::invalid_argument{"bit_writer_c: cannot extend provided buffer"};
+
+    m_data_size = (m_byte_position / 100 + 1) * 100;
+    m_buffer->resize(m_data_size);
     m_data = m_buffer->get_buffer();
 
     std::memset(&m_data[m_size], 0, m_buffer->get_size() - m_size);
