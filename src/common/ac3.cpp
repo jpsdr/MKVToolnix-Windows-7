@@ -453,8 +453,8 @@ pow_poly(unsigned int a,
 }
 
 bool
-verify_checksum(unsigned char const *buf,
-                std::size_t size) {
+verify_checksum1(unsigned char const *buf,
+                 std::size_t size) {
   frame_c frame;
 
   if (!frame.decode_header(buf, size))

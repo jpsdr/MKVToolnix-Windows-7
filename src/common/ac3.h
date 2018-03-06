@@ -96,6 +96,6 @@ public:
   void parse(bool end_of_stream);
 };
 
-bool verify_checksum(unsigned char const *buf, std::size_t size);
+bool verify_checksum1(unsigned char const *buf, std::size_t size);
 
 }}                              // namespace mtx::ac3
