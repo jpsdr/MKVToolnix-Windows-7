@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2018-02-04 18:33+0100\n"
-"PO-Revision-Date: 2018-02-09 08:49+0000\n"
+"PO-Revision-Date: 2018-03-03 12:50+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -637,7 +637,7 @@ msgstr "cue 表单将写入指定的输出文件。如果文件中没有发现�
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:391
 msgid "Timestamp extraction mode"
-msgstr "时间码提取模式"
+msgstr "时间戳提取模式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:394
@@ -647,7 +647,7 @@ msgstr "语法: <command>mkvextract <parameter>输入文件名</parameter> <opti
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:402
 msgid "Causes extraction of the timestamps for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
-msgstr "如果输入文件中存在 ID 为 <parameter>TID</parameter> 的轨道，则将其时间码提取为文件 <parameter>输出文件名</parameter>。本选项可多次给出。轨道 ID 与 &mkvmerge; 的 <option>--identify</option> 选项所输出的相同。"
+msgstr "如果输入文件中存在 ID 为 <parameter>TID</parameter> 的轨道，则将其时间戳提取为文件 <parameter>输出文件名</parameter>。本选项可多次给出。轨道 ID 与 &mkvmerge; 的 <option>--identify</option> 选项所输出的相同。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:408
@@ -701,12 +701,12 @@ msgstr "可用的关键词包括："
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:453
 msgid "timestamp"
-msgstr "时间码"
+msgstr "时间戳"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:455
 msgid "The cue point's timestamp with nanosecond precision. The format is <literal>HH:MM:SS.nnnnnnnnn</literal>. This element is always set."
-msgstr "cue point 的时间码，精确到纳秒。格式为 <literal>HH:MM:SS.nnnnnnnnn</literal>。该元素必有值。"
+msgstr "cue point 的时间戳，精确到纳秒。格式为 <literal>HH:MM:SS.nnnnnnnnn</literal>。该元素必有值。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:460
@@ -937,7 +937,7 @@ msgstr "A_TTA1"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:647
 msgid "<productname>TrueAudio</productname> tracks are written to <abbrev>TTA</abbrev> files. Please note that due to &matroska;'s limited timestamp precision the extracted file's header will be different regarding two fields: <varname>data_length</varname> (the total number of samples in the file) and the <abbrev>CRC</abbrev>."
-msgstr "<productname>TrueAudio</productname> 轨道将被输出为 <abbrev>TTA</abbrev> 文件。请注意，由于 &matroska; 时间码的精度限制，解开来的文件的头部有两个字段不同：<varname>data_length</varname> (文件的总采样数) 与 <abbrev>CRC</abbrev>。"
+msgstr "<productname>TrueAudio</productname> 轨道将被输出为 <abbrev>TTA</abbrev> 文件。请注意，由于 &matroska; 时间戳的精度限制，解开来的文件的头部有两个字段不同：<varname>data_length</varname> (文件的总采样数) 与 <abbrev>CRC</abbrev>。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:655
@@ -1145,12 +1145,12 @@ msgstr "章节将被转换为 &xml; 格式。此格式与 &mkvmerge; 所支持�
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:840
 msgid "Timestamps"
-msgstr "时间码"
+msgstr "时间戳"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:843
 msgid "Timestamps are first sorted and then output as a timestamp v2 format compliant file ready to be fed to &mkvmerge;.  The extraction to other formats (v1, v3 and v4) is not supported."
-msgstr "时间码会先被排序，然后以 timestamp v2 格式文件输出，该文件适用于 &mkvmerge;。不支持提取为其他格式 (v1, v3 或 v4)。"
+msgstr "时间戳会先被排序，然后以 timestamp v2 格式文件输出，该文件适用于 &mkvmerge;。不支持提取为其他格式 (v1, v3 或 v4)。"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:852
@@ -1873,12 +1873,12 @@ msgstr "<option>--timestamp-scale</option> <parameter>系数</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:488
 msgid "Forces the timestamp scale factor to <parameter>factor</parameter>. Valid values are in the range <constant>1000</constant>..<constant>10000000</constant> or the special value <constant>-1</constant>."
-msgstr "强制时间码缩放系数为 <parameter>系数</parameter>。有效值域为 <constant>1000</constant>..<constant>10000000</constant> 或特殊值 <constant>-1</constant>。"
+msgstr "强制时间戳缩放系数为 <parameter>系数</parameter>。有效值域为 <constant>1000</constant>..<constant>10000000</constant> 或特殊值 <constant>-1</constant>。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:493
 msgid "Normally &mkvmerge; will use a value of <constant>1000000</constant> which means that timestamps and durations will have a precision of 1ms. For files that will not contain a video track but at least one audio track &mkvmerge; will automatically chose a timestamp scale factor so that all timestamps and durations have a precision of one audio sample. This causes bigger overhead but allows precise seeking and extraction."
-msgstr "通常 &mkvmerge; 会使用数值 <constant>1000000</constant>，这样时间码和时长的精度为 1ms。对于不包含视频轨但含有至少一条音频轨的文件，&mkvmerge; 将自动选择一个时间码缩放系数以使各轨的音频采样精度相同。这将引起更大的额外开销，但将允许更为精确的定位与提取。"
+msgstr "通常 &mkvmerge; 会使用数值 <constant>1000000</constant>，这样时间戳和时长的精度为 1ms。对于不包含视频轨但含有至少一条音频轨的文件，&mkvmerge; 将自动选择一个时间戳缩放系数以使各轨的音频采样精度相同。这将引起更大的额外开销，但将允许更为精确的定位与提取。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:500
@@ -1958,7 +1958,7 @@ msgstr "为兼顾兼容性，'<literal>duration:</literal>' 前缀可以省略�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:578
 msgid "Splitting after specific timestamps."
-msgstr "在指定时间码后切割。"
+msgstr "在指定时间戳后切割。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:582
@@ -1973,7 +1973,7 @@ msgstr "示例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:590
 msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all have the same format as the ones used for the duration (see above). The list of timestamps is separated by commas.  After the input stream has reached the current split point's timestamp a new file is created. Then the next split point given in this list is used."
-msgstr "参数 <parameter>A</parameter>、<parameter>B</parameter>、<parameter>C</parameter> 等等的格式与按时长切割模式（见上文）所用的格式相同。时间码表以逗号分隔。 输入流达到当前切割点的时间码后将创建新的输出文件。然后将使用所给定的下一个切割点。"
+msgstr "参数 <parameter>A</parameter>、<parameter>B</parameter>、<parameter>C</parameter> 等等的格式与按时长切割模式（见上文）所用的格式相同。时间戳表以逗号分隔。 输入流达到当前切割点的时间戳后将创建新的输出文件。然后将使用所给定的下一个切割点。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:596
@@ -1983,7 +1983,7 @@ msgstr "'<literal>timestamps:</literal>' 前缀不得省略。"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:602
 msgid "Keeping specific parts by specifying timestamp ranges while discarding others."
-msgstr "通过指定时间码范围，保留特定部分，并丢弃其余部分。"
+msgstr "通过指定时间戳范围，保留特定部分，并丢弃其余部分。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:606
@@ -2014,22 +2014,22 @@ msgstr "示例: <placeholder type=\"orderedlist\" id=\"0\"/>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:619
 msgid "The <literal>parts</literal> mode tells &mkvmerge; to keep certain ranges of timestamps while discarding others. The ranges to keep have to be listed after the <literal>parts:</literal> keyword and be separated by commas. A range itself consists of a start and an end timestamp in the same format the other variations of <parameter>--split</parameter> accept (e.g. both <literal>00:01:20</literal> and <literal>80s</literal> refer to the same timestamp)."
-msgstr "<literal>parts</literal> 模式可以告诉 &mkvmerge; 保留特定时间码范围，而丢弃其余部分。要保留的范围需要在 <literal>parts:</literal> 关键词后列出，以逗号隔开。各分段由起始及终止时间码组成，格式与其他 <parameter>--split</parameter> 模式所能接受的相同 (如 <literal>00:01:20</literal> 与 <literal>80s</literal> 代表相同的时间码)。"
+msgstr "<literal>parts</literal> 模式可以告诉 &mkvmerge; 保留特定时间戳范围，而丢弃其余部分。要保留的范围需要在 <literal>parts:</literal> 关键词后列出，以逗号隔开。各分段由起始及终止时间戳组成，格式与其他 <parameter>--split</parameter> 模式所能接受的相同 (如 <literal>00:01:20</literal> 与 <literal>80s</literal> 代表相同的时间戳)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:626
 msgid "If a start timestamp is left out then it defaults to the previous range's end timestamp. If there was no previous range then it defaults to the start of the file (see example 3)."
-msgstr "若起始时间码留空，则默认为前一段的终止时间码。若不存在前一段，则默认为文件开头 (参见示例 3)。"
+msgstr "若起始时间戳留空，则默认为前一段的终止时间戳。若不存在前一段，则默认为文件开头 (参见示例 3)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:631
 msgid "If an end timestamp is left out then it defaults to the end of the source files which basically tells &mkvmerge; to keep the rest (see example 3)."
-msgstr "若终止时间码留空，则默认为输入文件末尾，亦即告诉 &mkvmerge; 保留其余部分 (参见示例 3)。"
+msgstr "若终止时间戳留空，则默认为输入文件末尾，亦即告诉 &mkvmerge; 保留其余部分 (参见示例 3)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:636
 msgid "Normally each range will be written to a new file. This can be changed so that consecutive ranges are written to the same file. For that the user has to prefix the start timestamp with a <literal>+</literal>. This tells &mkvmerge; not to create a new file and instead append the range to the same file the previous range was written to. Timestamps will be adjusted so that there will be no gap in the output file even if there was a gap in the two ranges in the input file."
-msgstr "通常每一段都会写入新的文件。该行为也可以调整，以便将连续的分段写入同一个文件。要实现这种效果，用户可以在起始时间码开头加上 <literal>+</literal> 前缀。这样可以告诉 &mkvmerge; 不要创建新文件，而是将该分段写入与之前一段相同的文件当中。时间码也会自动调整，确保即使输入文件中两分段不连续，输出文件中也不出现间隙。"
+msgstr "通常每一段都会写入新的文件。该行为也可以调整，以便将连续的分段写入同一个文件。要实现这种效果，用户可以在起始时间戳开头加上 <literal>+</literal> 前缀。这样可以告诉 &mkvmerge; 不要创建新文件，而是将该分段写入与之前一段相同的文件当中。时间戳也会自动调整，确保即使输入文件中两分段不连续，输出文件中也不出现间隙。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:643
@@ -2049,7 +2049,7 @@ msgstr "例 3 中 &mkvmerge; 将创建两个文件。第一个包含从输入文
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:661
 msgid "Note that &mkvmerge; only makes decisions about splitting at key frame positions. This applies to both the start and the end of each range. So even if an end timestamp is between two key frames &mkvmerge; will continue outputting the frames up to but excluding the following key frame."
-msgstr "请注意，&mkvmerge; 只在关键帧位置决定是否切割。每段切割区域的起始点与结束点均为关键帧。因此即使结束时间码介于两个关键帧之间，&mkvmerge; 也将继续输出帧，直到下一关键帧为止（不包括）。"
+msgstr "请注意，&mkvmerge; 只在关键帧位置决定是否切割。每段切割区域的起始点与结束点均为关键帧。因此即使结束时间戳介于两个关键帧之间，&mkvmerge; 也将继续输出帧，直到下一关键帧为止（不包括）。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:670
@@ -2094,7 +2094,7 @@ msgstr "若终止序号留空，则默认为文件末尾，亦即告诉 &mkvmerg
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:703
 msgid "Normally each range will be written to a new file. This can be changed so that consecutive ranges are written to the same file. For that the user has to prefix the start number with a <literal>+</literal>. This tells &mkvmerge; not to create a new file and instead append the range to the same file the previous range was written to. Timestamps will be adjusted so that there will be no gap in the output file even if there was a gap in the two ranges in the input file."
-msgstr "通常每一段都会写入新的文件。该行为也可以调整，以便将连续的分段写入同一个文件。要实现这种效果，用户可以在起始序号开头加上 <literal>+</literal> 前缀。这样可以告诉 &mkvmerge; 不要创建新文件，而是将该分段写入与之前一段相同的文件当中。时间码也会自动调整，确保即使输入文件中两分段不连续，输出文件中也不出现间隙。"
+msgstr "通常每一段都会写入新的文件。该行为也可以调整，以便将连续的分段写入同一个文件。要实现这种效果，用户可以在起始序号开头加上 <literal>+</literal> 前缀。这样可以告诉 &mkvmerge; 不要创建新文件，而是将该分段写入与之前一段相同的文件当中。时间戳也会自动调整，确保即使输入文件中两分段不连续，输出文件中也不出现间隙。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:711
@@ -2171,7 +2171,7 @@ msgstr "示例: <code>--split chapters:5,8</code>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:800
 msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all be positive integers.  Numbering starts at 1.  The list of chapter numbers is separated by commas.  Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed.  A chapter starting at 0s is never considered for splitting and discarded silently."
-msgstr "参数 <parameter>A</parameter>、<parameter>B</parameter>、<parameter>C</parameter> 等等必须全为正整数。编号从 1 开始。 章节编号列表以逗号分隔。 切割将在时间码等于或大于所列编号对应章节的起始时间码的首个关键帧之前进行。从 0s 开始的章节将不作考虑，并不作提示，直接丢弃。"
+msgstr "参数 <parameter>A</parameter>、<parameter>B</parameter>、<parameter>C</parameter> 等等必须全为正整数。编号从 1 开始。 章节编号列表以逗号分隔。 切割将在时间戳等于或大于所列编号对应章节的起始时间戳的首个关键帧之前进行。从 0s 开始的章节将不作考虑，并不作提示，直接丢弃。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:807
@@ -2231,12 +2231,12 @@ msgstr "<option>--append-mode</option> <parameter>模式</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:876
 msgid "Determines how timestamps are calculated when appending files.  The parameter <parameter>mode</parameter> can have two values: '<literal>file</literal>' which is also the default and '<literal>track</literal>'."
-msgstr "决定追加合并文件时如何计算时间码。 参数 <parameter>模式</parameter> 可以有两个数值: 默认的 '<literal>file（文件）</literal>' 和 '<literal>track（轨道）</literal>'。"
+msgstr "决定追加合并文件时如何计算时间戳。 参数 <parameter>模式</parameter> 可以有两个数值: 默认的 '<literal>file（文件）</literal>' 和 '<literal>track（轨道）</literal>'。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:881
 msgid "When mkvmerge appends a track (called '<literal>track2_1</literal>' from now on) from a second file (called '<literal>file2</literal>') to a track (called '<literal>track1_1</literal>') from the first file (called '<literal>file1</literal>')  then it has to offset all timestamps for '<literal>track2_1</literal>' by an amount.  For '<literal>file</literal>' mode this amount is the highest timestamp encountered in '<literal>file1</literal>' even if that timestamp was from a different track than '<literal>track1_1</literal>'. In track mode the offset is the highest timestamp of '<literal>track1_1</literal>'."
-msgstr "当 mkvmerge 将来自另一文件 (本段中假设为 '<literal>文件2</literal>') 的一条轨道 (假设为 '<literal>轨道2_1</literal>' ) 追加合并到首个文件 (假设为 '<literal>文件1</literal>')的一条轨道 (假设为 '<literal>轨道1_1</literal>') 时，它将为 '<literal>轨道2_1</literal>' 的所有时间码设定一定量的延时。 对于 '<literal>file（文件）</literal>' 模式此延时量是 '<literal>文件1</literal>' 中遇到的最大时间码，即使此时间码不属于轨道 '<literal>轨道1_1</literal>'。而在 track （轨道模式）下此延时为 '<literal>轨道1_1</literal>' 的最大时间码。"
+msgstr "当 mkvmerge 将来自另一文件 (本段中假设为 '<literal>文件2</literal>') 的一条轨道 (假设为 '<literal>轨道2_1</literal>' ) 追加合并到首个文件 (假设为 '<literal>文件1</literal>')的一条轨道 (假设为 '<literal>轨道1_1</literal>') 时，它将为 '<literal>轨道2_1</literal>' 的所有时间戳设定一定量的延时。 对于 '<literal>file（文件）</literal>' 模式此延时量是 '<literal>文件1</literal>' 中遇到的最大时间戳，即使此时间戳不属于轨道 '<literal>轨道1_1</literal>'。而在 track （轨道模式）下此延时为 '<literal>轨道1_1</literal>' 的最大时间戳。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:889
@@ -2630,7 +2630,7 @@ msgstr "<option>-y</option>, <option>--sync</option> <parameter>TID:d<optional>,
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1305
 msgid "Adjust the timestamps of the track with the id <parameter>TID</parameter> by <parameter>d</parameter> ms. The track IDs are the same as the ones given with <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>)."
-msgstr "将 id 为 <parameter>TID</parameter> 的轨道的时间码按 <parameter>d</parameter> ms 进行调整。轨道 ID 与 <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> 所给出的相同 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落)。"
+msgstr "将 id 为 <parameter>TID</parameter> 的轨道的时间戳按 <parameter>d</parameter> ms 进行调整。轨道 ID 与 <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> 所给出的相同 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1311
@@ -2770,7 +2770,7 @@ msgstr "<option>--timestamps</option> <parameter>TID:文件名</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1471
 msgid "Read the timestamps to be used for the specific track ID from <parameter>file-name</parameter>.  These timestamps forcefully override the timestamps that &mkvmerge; normally calculates. Read the section about <link linkend=\"mkvmerge.external_timestamp_files\">external timestamp files</link>."
-msgstr "从 <parameter>文件名</parameter> 读取要应用到指定轨道 ID 的时间码。 这些时间码将强制覆盖 &mkvmerge; 默认计算出的时间码。参阅关于 <link linkend=\"mkvmerge.external_timestamp_files\">外部时间码文件</link> 的章节。"
+msgstr "从 <parameter>文件名</parameter> 读取要应用到指定轨道 ID 的时间戳。 这些时间戳将强制覆盖 &mkvmerge; 默认计算出的时间戳。参阅关于 <link linkend=\"mkvmerge.external_timestamp_files\">外部时间戳文件</link> 的章节。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1479
@@ -2780,7 +2780,7 @@ msgstr "<option>--default-duration</option> <parameter>TID:x</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1482
 msgid "Forces the default duration of a given track to the specified value.  Also modifies the track's timestamps to match the default duration.  The argument <parameter>x</parameter> must be postfixed with '<literal>s</literal>', '<literal>ms</literal>', '<literal>us</literal>', '<literal>ns</literal>', '<literal>fps</literal>', '<literal>p</literal>' or '<literal>i</literal>' to specify the default duration in seconds, milliseconds, microseconds, nanoseconds, 'frames per second', 'progressive frames per second' or 'interlaced frames per second' respectively. The number <parameter>x</parameter> itself can be a floating point number or a fraction."
-msgstr "强制指定轨道的默认时长为指定数值。 将同时修改轨道的时间码以匹配该默认时长。 变量 <parameter>x</parameter> 必须有 '<literal>s</literal>', '<literal>ms</literal>', '<literal>us</literal>', '<literal>ns</literal>', '<literal>fps</literal>', '<literal>p</literal>' 或 '<literal>i</literal>' 作为后缀，分别以秒、毫秒、微秒、纳秒、“帧每秒”、“逐行帧每秒”或“隔行帧每秒”为单位指定默认时长。数字 <parameter>x</parameter> 本身可为浮点数或分数。"
+msgstr "强制指定轨道的默认时长为指定数值。 将同时修改轨道的时间戳以匹配该默认时长。 变量 <parameter>x</parameter> 必须有 '<literal>s</literal>', '<literal>ms</literal>', '<literal>us</literal>', '<literal>ns</literal>', '<literal>fps</literal>', '<literal>p</literal>' 或 '<literal>i</literal>' 作为后缀，分别以秒、毫秒、微秒、纳秒、“帧每秒”、“逐行帧每秒”或“隔行帧每秒”为单位指定默认时长。数字 <parameter>x</parameter> 本身可为浮点数或分数。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1491
@@ -2790,7 +2790,7 @@ msgstr "如果未强制指定默认时长，mkvmerge 将尝试继承容器中（
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1496
 msgid "This option can also be used to change the <abbrev>FPS</abbrev> of video tracks without having to use an external timestamp file."
-msgstr "此选项也可用于在不使用外部时间码文件的情况下更改视频轨的 <abbrev>FPS（帧率）</abbrev>。"
+msgstr "此选项也可用于在不使用外部时间戳文件的情况下更改视频轨的 <abbrev>FPS（帧率）</abbrev>。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1502
@@ -3884,7 +3884,7 @@ msgstr "各剪辑由唯一的 128 位宽的剪辑 UID 确定。此 UID 是由 &m
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2650
 msgid "If a file is split into several smaller ones and linking is used then the timestamps will not start at 0 again but will continue where the last file has left off. This way the absolute time is kept even if the previous files are not available (e.g. when streaming). If no linking is used then the timestamps should start at 0 for each file. By default &mkvmerge; does not use file linking. If you want that you can turn it on with the <option>--link</option> option. This option is only useful if splitting is activated as well."
-msgstr "如果文件被切割为多段，且启用了链接功能，则文件的时间码不会重新从 0 开始，而是会从上一个文件结束的地方继续计算。这样可以保留绝对时间，即使之前的文件不可用 (如进行流式处理时)。如果未使用链接功能，各文件的时间码应从 0 开始。&mkvmerge; 默认不启用文件链接。如果您希望启用，可以通过 <option>--link</option> 选项打开。此选项仅当同时启用切割功能时有用。"
+msgstr "如果文件被切割为多段，且启用了链接功能，则文件的时间戳不会重新从 0 开始，而是会从上一个文件结束的地方继续计算。这样可以保留绝对时间，即使之前的文件不可用 (如进行流式处理时)。如果未使用链接功能，各文件的时间戳应从 0 开始。&mkvmerge; 默认不启用文件链接。如果您希望启用，可以通过 <option>--link</option> 选项打开。此选项仅当同时启用切割功能时有用。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2657
@@ -3959,7 +3959,7 @@ msgstr "简单章节格式"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2731
 msgid "This formmat consists of pairs of lines that start with '<literal>CHAPTERxx=</literal>' and '<literal>CHAPTERxxNAME=</literal>' respectively. The first one contains the start timestamp while the second one contains the title. Here's an example:"
-msgstr "此格式由成对的相继以 '<literal>CHAPTERxx=</literal>' 与 '<literal>CHAPTERxxNAME=</literal>' 开头的行组成。单数行包含起始时间码，而双数行包含标题。这是一个示例："
+msgstr "此格式由成对的相继以 '<literal>CHAPTERxx=</literal>' 与 '<literal>CHAPTERxxNAME=</literal>' 开头的行组成。单数行包含起始时间戳，而双数行包含标题。这是一个示例："
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:2735
@@ -4151,7 +4151,7 @@ msgstr "一般性备注"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2834
 msgid "When splitting files &mkvmerge; will correctly adjust the chapters as well. This means that each file only includes the chapter entries that apply to it, and that the timestamps will be offset to match the new timestamps of each output file."
-msgstr "&mkvmerge; 切割文件时会同时适当调整章节。这意味着每个文件只包含应用到该文件的章节项，时间码也将被调整到与各输出文件相匹配。"
+msgstr "&mkvmerge; 切割文件时会同时适当调整章节。这意味着每个文件只包含应用到该文件的章节项，时间戳也将被调整到与各输出文件相匹配。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2839
@@ -4395,33 +4395,33 @@ msgstr "这也是纯音频文件的样子。"
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvmerge.xml:3059
 msgid "External timestamp files"
-msgstr "外部时间码文件"
+msgstr "外部时间戳文件"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3061
 msgid "&mkvmerge; allows the user to chose the timestamps for a specific track himself. This can be used in order to create files with variable frame rate video or include gaps in audio. A frame in this case is the unit that &mkvmerge; creates separately per &matroska; block. For video this is exactly one frame, for audio this is one packet of the specific audio type. E.g. for <abbrev>AC-3</abbrev> this would be a packet containing <constant>1536</constant> samples."
-msgstr "&mkvmerge; 允许用户为各轨道选择特定的时间码。这可用来创建包含可变帧率视频或音频中有空隙的文件。这种情况下的帧是 &mkvmerge; 创建各 &matroska; 块的单位。对视频来说恰好是一帧，对音频来说是相应音频类型的一个数据包。例如对 <abbrev>AC-3</abbrev> 来说是包含 <constant>1536</constant> 采样的一个数据包。"
+msgstr "&mkvmerge; 允许用户为各轨道选择特定的时间戳。这可用来创建包含可变帧率视频或音频中有空隙的文件。这种情况下的帧是 &mkvmerge; 创建各 &matroska; 块的单位。对视频来说恰好是一帧，对音频来说是相应音频类型的一个数据包。例如对 <abbrev>AC-3</abbrev> 来说是包含 <constant>1536</constant> 采样的一个数据包。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3068
 msgid "Timestamp files that are used when tracks are appended to each other must only be specified for the first part in a chain of tracks.  For example if you append two files, v1.avi and v2.avi, and want to use timestamps then your command line must look something like this:"
-msgstr "用于轨道追加合并的时间码必须只指定给一系列（同一）轨道的第一部分。例如当您追加合并两个文件，v1.avi 与 v2.avi，且希望使用时间码时，您的命令行必须像这样组织："
+msgstr "用于轨道追加合并的时间戳必须只指定给一系列（同一）轨道的第一部分。例如当您追加合并两个文件，v1.avi 与 v2.avi，且希望使用时间戳时，您的命令行必须像这样组织："
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:3072
 #, no-wrap
 msgid "$ mkvmerge ... --timestamps 0:my_timestamps.txt v1.avi +v2.avi"
-msgstr "$ mkvmerge ... --timestamps 0:我的时间码.txt v1.avi +v2.avi"
+msgstr "$ mkvmerge ... --timestamps 0:我的时间戳.txt v1.avi +v2.avi"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3075
 msgid "There are four formats that are recognized by &mkvmerge;. The first line always contains the version number. Empty lines, lines containing only whitespace and lines beginning with '<literal>#</literal>' are ignored."
-msgstr "&mkvmerge; 可识别四种格式的时间码。版本号在时间码文件的第一行内。空行，只含有空格的行，以及以 '<literal>#</literal>' 开头的行在处理时将被忽略。"
+msgstr "&mkvmerge; 可识别四种格式的时间戳。版本号在时间戳文件的第一行内。空行，只含有空格的行，以及以 '<literal>#</literal>' 开头的行在处理时将被忽略。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3080
 msgid "Timestamp file format v1"
-msgstr "时间码文件格式 v1"
+msgstr "时间戳文件格式 v1"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3082
@@ -4445,12 +4445,12 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3095
 msgid "Timestamp file format v2"
-msgstr "时间码文件格式 v2"
+msgstr "时间戳文件格式 v2"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3098
 msgid "In this format each line contains a timestamp for the corresponding frame.  This timestamp must be given in millisecond precision.  It can be a floating point number, but it doesn't have to be.  You <emphasis>have to</emphasis> give at least as many timestamp lines as there are frames in the track.  The timestamps in this file must be sorted.  Example for 25fps:"
-msgstr "此格式中每行包含相应帧的时间码。此时间码必须以毫秒为精度。可以使浮点数，但不强求。您指定的时间码行数 <emphasis>必须</emphasis> 不少于对应轨道的帧数。此类文件中的时间码必须经过排序。 以 25fps 为例："
+msgstr "此格式中每行包含相应帧的时间戳。此时间戳必须以毫秒为精度。可以使浮点数，但不强求。您指定的时间戳行数 <emphasis>必须</emphasis> 不少于对应轨道的帧数。此类文件中的时间戳必须经过排序。 以 25fps 为例："
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:3103
@@ -4469,12 +4469,12 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3110
 msgid "Timestamp file format v3"
-msgstr "时间码文件格式 v3"
+msgstr "时间戳文件格式 v3"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3112
 msgid "In this format each line contains a duration in seconds followed by an optional number of frames per second.  Both can be floating point numbers.  If the number of frames per second is not present the default one is used.  For audio you should let the codec calculate the frame timestamps itself.  For that you should be using <constant>0.0</constant> as the number of frames per second.  You can also create gaps in the stream by using the '<literal>gap</literal>' keyword followed by the duration of the gap.  Example for an audio file:"
-msgstr "此格式中各行包含时长（秒数），后接（可选）帧率。 二者均可为浮点数。 如果未提供帧率，则采用默认的帧率。 对于音频，您应当让编解码器自行计算各帧的时间码。 这样您应当使用 <constant>0.0</constant> 作为帧率。 您可以使用 '<literal>gap</literal>' 关键词后接空隙时长在流中创建空隙。 以音频文件为例："
+msgstr "此格式中各行包含时长（秒数），后接（可选）帧率。 二者均可为浮点数。 如果未提供帧率，则采用默认的帧率。 对于音频，您应当让编解码器自行计算各帧的时间戳。 这样您应当使用 <constant>0.0</constant> 作为帧率。 您可以使用 '<literal>gap</literal>' 关键词后接空隙时长在流中创建空隙。 以音频文件为例："
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:3118
@@ -4497,12 +4497,12 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3127
 msgid "Timestamp file format v4"
-msgstr "时间码文件格式 v4"
+msgstr "时间戳文件格式 v4"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3129
 msgid "This format is identical to the v2 format.  The only difference is that the timestamps do not have to be sorted.  This format should almost never be used."
-msgstr "此格式与 v2 格式相似。 唯一的不同在于时间码不必经过排序。 通常不应使用此格式。"
+msgstr "此格式与 v2 格式相似。 唯一的不同在于时间戳不必经过排序。 通常不应使用此格式。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3139
