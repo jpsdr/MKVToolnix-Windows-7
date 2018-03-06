@@ -26,25 +26,11 @@
 namespace mtx { namespace ac3 {
 
 frame_c::frame_c() {
-  init();
 }
 
 void
 frame_c::init() {
-  m_sample_rate     = 0;
-  m_bit_rate        = 0;
-  m_channels        = 0;
-  m_flags           = 0;
-  m_bytes           = 0;
-  m_bs_id           = 0;
-  m_samples         = 0;
-  m_frame_type      = 0;
-  m_sub_stream_id   = 0;
-  m_stream_position = 0;
-  m_garbage_size    = 0;
-  m_valid           = false;
-  m_data.reset();
-  m_dependent_frames.clear();
+  *this = frame_c{};
 }
 
 bool
