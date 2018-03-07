@@ -1,17 +1,5 @@
 #!/usr/bin/env ruby
 
-# Ruby 1.9.x introduce "require_relative" for local requires. 1.9.2
-# removes "." from $: and forces us to use "require_relative". 1.8.x
-# does not know "require_relative" yet though.
-begin
-  require_relative()
-rescue NoMethodError
-  def require_relative *args
-    require *args
-  end
-rescue Exception
-end
-
 require "json"
 require "pp"
 require "tempfile"
