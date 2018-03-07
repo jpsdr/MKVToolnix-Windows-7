@@ -334,8 +334,6 @@ class SimpleTest
   def json_schema_identification
     return @@json_schema_identification if @@json_schema_identification
 
-    require "json_schema"
-
     json_store = JsonSchema::DocumentStore.new
     parser     = JsonSchema::Parser.new
     expander   = JsonSchema::ReferenceExpander.new

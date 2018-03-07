@@ -1,5 +1,3 @@
-require 'digest/md5'
-
 $message_mutex = Mutex.new
 def show_message message
   $message_mutex.lock

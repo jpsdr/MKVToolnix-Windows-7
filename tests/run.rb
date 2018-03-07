@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
+require "digest/md5"
 require "json"
+require "json_schema"
 require "pp"
 require "tempfile"
 
