@@ -510,23 +510,25 @@ remove_dialog_normalization(unsigned char *buf,
   if (size < frame.m_bytes)
     return;
 
-  if (   (frame.m_dialog_normalization == 1)
+  unsigned int const removed_level = 31;
+
+  if (   (frame.m_dialog_normalization == removed_level)
       && (   !frame.m_dialog_normalization2
-          || (*frame.m_dialog_normalization2 == 1))) {
-    mxdebug_if(s_debug, boost::format("no need to remove the dialog normalization, it's already set to 1\n"));
+          || (*frame.m_dialog_normalization2 == removed_level))) {
+    mxdebug_if(s_debug, boost::format("no need to remove the dialog normalization, it's already set to %1%\n") % removed_level);
     return;
   }
 
-  mxdebug_if(s_debug, boost::format("removing dialog normalization of %1% (%2%)\n") % frame.m_dialog_normalization % (frame.m_dialog_normalization2 ? ::to_string(*frame.m_dialog_normalization2) : "—"));
+  mxdebug_if(s_debug, boost::format("changing dialog normalization from %1% (%2%) to %3%\n") % frame.m_dialog_normalization % (frame.m_dialog_normalization2 ? ::to_string(*frame.m_dialog_normalization2) : "—") % removed_level);
 
   mtx::bits::writer_c w{buf, size};
 
   w.set_bit_position(frame.m_dialog_normalization_bit_position);
-  w.put_bits(5, 1);
+  w.put_bits(5, removed_level);
 
   if (frame.m_dialog_normalization2_bit_position) {
     w.set_bit_position(*frame.m_dialog_normalization2_bit_position);
-    w.put_bits(5, 1);
+    w.put_bits(5, removed_level);
   }
 
   put_uint16_be(&buf[2], calculate_crc1(buf, size));
