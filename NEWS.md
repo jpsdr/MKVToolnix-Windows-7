@@ -4,8 +4,9 @@
 
 * MKVToolNix GUI: chapter editor: added an option to remove all end timestamps
   to the "additional modifications" dialog. Implements #2231.
-* mkvmerge: (E-)AC-3: added an option for removing/minimizing the dialog
-  normalization gain. Part of the implementation of #1981.
+* mkvmerge, MKVToolNix GUI multiplexer: AC-3, DTS: added an option for
+  removing/minimizing the dialog normalization gain for all supported types of
+  the mentioned codecs. Part of the implementation of #1981.
 
 ## Bug fixes
 
