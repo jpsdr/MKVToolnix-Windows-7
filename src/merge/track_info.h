@@ -363,7 +363,7 @@ public:
 
   item_selector_c<attach_mode_e> m_attach_mode_list; // As given on the command line
 
-  std::map<int64_t, bool> m_reduce_to_core, m_remove_dialog_normalization;
+  std::map<int64_t, bool> m_reduce_to_core, m_remove_dialog_normalization_gain;
 
   bool m_no_chapters, m_no_global_tags;
 

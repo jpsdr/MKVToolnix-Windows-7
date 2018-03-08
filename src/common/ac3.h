@@ -52,8 +52,8 @@ namespace ac3 {
 class frame_c {
 public:
   unsigned int m_sample_rate{}, m_bit_rate{}, m_channels{}, m_flags{}, m_bytes{}, m_bs_id{}, m_samples{}, m_frame_type{}, m_sub_stream_id{};
-  unsigned int m_dialog_normalization{}, m_dialog_normalization_bit_position{};
-  boost::optional<unsigned int> m_dialog_normalization2, m_dialog_normalization2_bit_position;
+  unsigned int m_dialog_normalization_gain{}, m_dialog_normalization_gain_bit_position{};
+  boost::optional<unsigned int> m_dialog_normalization_gain2, m_dialog_normalization_gain2_bit_position;
   uint64_t m_stream_position{}, m_garbage_size{};
   bool m_valid{};
   memory_cptr m_data;
@@ -99,6 +99,6 @@ public:
 };
 
 bool verify_checksum1(unsigned char const *buf, std::size_t size);
-void remove_dialog_normalization(unsigned char *buf, std::size_t size);
+void remove_dialog_normalization_gain(unsigned char *buf, std::size_t size);
 
 }}                              // namespace mtx::ac3

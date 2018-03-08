@@ -217,7 +217,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("cues",                       m_cues);
   settings.setValue("aacIsSBR",                   m_aacIsSBR);
   settings.setValue("reduceAudioToCore",          m_reduceAudioToCore);
-  settings.setValue("removeDialogNormalization",  m_removeDialogNormalization);
+  settings.setValue("removeDialogNormalizationGain", m_removeDialogNormalizationGain);
   settings.setValue("compression",                m_compression);
   settings.setValue("size",                       static_cast<qulonglong>(m_size));
   settings.setValue("attachmentDescription",      m_attachmentDescription);
@@ -263,7 +263,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_cues                       = l.settings.value("cues").toInt();
   m_aacIsSBR                   = l.settings.value("aacIsSBR").toInt();
   m_reduceAudioToCore          = l.settings.value("reduceAudioToCore").toBool();
-  m_removeDialogNormalization  = l.settings.value("removeDialogNormalization").toBool();
+  m_removeDialogNormalizationGain  = l.settings.value("removeDialogNormalizationGain").toBool();
   m_compression                = static_cast<Compression>(l.settings.value("compression").toInt());
   m_size                       = l.settings.value("size").toULongLong();
   m_attachmentDescription      = l.settings.value("attachmentDescription").toString();
@@ -314,8 +314,8 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (canReduceToAudioCore() && m_reduceAudioToCore)
       opt.options << Q("--reduce-to-core") << sid;
 
-    if (canRemoveDialogNormalization() && m_removeDialogNormalization)
-      opt.options << Q("--remove-dialog-normalization") << sid;
+    if (canRemoveDialogNormalizationGain() && m_removeDialogNormalizationGain)
+      opt.options << Q("--remove-dialog-normalization-gain") << sid;
 
   } else if (isVideo()) {
     if (!m_cropping.isEmpty())
@@ -440,7 +440,7 @@ Track::canReduceToAudioCore()
 }
 
 bool
-Track::canRemoveDialogNormalization()
+Track::canRemoveDialogNormalizationGain()
   const {
   return isAudio()
       && m_codec.contains(QRegularExpression{Q("ac-?3"), QRegularExpression::CaseInsensitiveOption});

@@ -106,15 +106,15 @@ frame_c::decode_header_type_eac3(mtx::bits::reader_c &bc) {
   uint8_t lfeon = bc.get_bit();
   bc.skip_bits(5);              // bsid
 
-  m_dialog_normalization_bit_position = bc.get_bit_position();
-  m_dialog_normalization              = bc.get_bits(5);
+  m_dialog_normalization_gain_bit_position = bc.get_bit_position();
+  m_dialog_normalization_gain              = bc.get_bits(5);
 
   if (acmod == 0x00) {          // dual mono mode
     if (bc.get_bit())           // compre
       bc.skip_bits(8);          // compr
 
-    m_dialog_normalization2_bit_position = bc.get_bit_position();
-    m_dialog_normalization2              = bc.get_bits(5);
+    m_dialog_normalization_gain2_bit_position = bc.get_bit_position();
+    m_dialog_normalization_gain2              = bc.get_bits(5);
   }
 
   m_sample_rate = sample_rates[0x03 == fscod ? 3 + fscod2 : fscod];
@@ -191,8 +191,8 @@ frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
 
   uint8_t sr_shift                    = std::max(m_bs_id, 8u) - 8;
 
-  m_dialog_normalization_bit_position = bc.get_bit_position();
-  m_dialog_normalization              = bc.get_bits(5);
+  m_dialog_normalization_gain_bit_position = bc.get_bit_position();
+  m_dialog_normalization_gain              = bc.get_bits(5);
   m_sample_rate                       = sample_rates[fscod] >> sr_shift;
   m_bit_rate                          = (bit_rates[frmsizecod >> 1] * 1000) >> sr_shift;
   m_channels                          = channel_modes[acmod] + lfeon;
@@ -210,8 +210,8 @@ frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
     if (bc.get_bit())           // audprodie
       bc.skip_bits(5 + 2);      // mixlevel, roomtyp
 
-    m_dialog_normalization2_bit_position = bc.get_bit_position();
-    m_dialog_normalization2              = bc.get_bits(5);
+    m_dialog_normalization_gain2_bit_position = bc.get_bit_position();
+    m_dialog_normalization_gain2              = bc.get_bits(5);
   }
 
   return m_bytes != 0;
@@ -498,9 +498,9 @@ verify_checksum1(unsigned char const *buf,
 }
 
 void
-remove_dialog_normalization(unsigned char *buf,
-                            std::size_t size) {
-  static debugging_option_c s_debug{"ac3_remove_dialog_normalization|remove_dialog_normalization"};
+remove_dialog_normalization_gain(unsigned char *buf,
+                                 std::size_t size) {
+  static debugging_option_c s_debug{"ac3_remove_dialog_normalization_gain|remove_dialog_normalization_gain"};
 
   frame_c frame;
 
@@ -512,22 +512,24 @@ remove_dialog_normalization(unsigned char *buf,
 
   unsigned int const removed_level = 31;
 
-  if (   (frame.m_dialog_normalization == removed_level)
-      && (   !frame.m_dialog_normalization2
-          || (*frame.m_dialog_normalization2 == removed_level))) {
-    mxdebug_if(s_debug, boost::format("no need to remove the dialog normalization, it's already set to %1%\n") % removed_level);
+  if (   (frame.m_dialog_normalization_gain == removed_level)
+      && (   !frame.m_dialog_normalization_gain2
+          || (*frame.m_dialog_normalization_gain2 == removed_level))) {
+    mxdebug_if(s_debug, boost::format("no need to remove the dialog normalization gain, it's already set to -%1% dB\n") % removed_level);
     return;
   }
 
-  mxdebug_if(s_debug, boost::format("changing dialog normalization from %1% (%2%) to %3%\n") % frame.m_dialog_normalization % (frame.m_dialog_normalization2 ? ::to_string(*frame.m_dialog_normalization2) : "—") % removed_level);
+  mxdebug_if(s_debug,
+             boost::format("changing dialog normalization gain from -%1% dB (%2%) to -%3% dB\n")
+             % frame.m_dialog_normalization_gain % (frame.m_dialog_normalization_gain2 ? (boost::format("-%1% dB") % *frame.m_dialog_normalization_gain2).str() : std::string{"—"}) % removed_level);
 
   mtx::bits::writer_c w{buf, size};
 
-  w.set_bit_position(frame.m_dialog_normalization_bit_position);
+  w.set_bit_position(frame.m_dialog_normalization_gain_bit_position);
   w.put_bits(5, removed_level);
 
-  if (frame.m_dialog_normalization2_bit_position) {
-    w.set_bit_position(*frame.m_dialog_normalization2_bit_position);
+  if (frame.m_dialog_normalization_gain2_bit_position) {
+    w.set_bit_position(*frame.m_dialog_normalization_gain2_bit_position);
     w.put_bits(5, removed_level);
   }
 

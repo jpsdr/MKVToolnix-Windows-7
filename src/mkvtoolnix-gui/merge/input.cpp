@@ -53,7 +53,7 @@ Tab::setupControlLists() {
   m_audioControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag << ui->forcedTrackFlagLabel << ui->forcedTrackFlag
                   << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
                   << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps << ui->audioPropertiesBox << ui->aacIsSBR << ui->aacIsSBRLabel
-                  << ui->cuesLabel << ui->cues << ui->propertiesLabel << ui->generalOptionsBox << ui->reduceToAudioCore << ui->removeDialogNormalization;
+                  << ui->cuesLabel << ui->cues << ui->propertiesLabel << ui->generalOptionsBox << ui->reduceToAudioCore << ui->removeDialogNormalizationGain;
 
   m_videoControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
                   << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
@@ -76,7 +76,7 @@ Tab::setupControlLists() {
                      << ui->videoPropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
                      << ui->stereoscopy << ui->croppingLabel << ui->cropping << ui->audioPropertiesBox << ui->aacIsSBR << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet
                      << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions
-                     << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore << ui->removeDialogNormalization << ui->naluSizeLengthLabel << ui->naluSizeLength;
+                     << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore << ui->removeDialogNormalizationGain << ui->naluSizeLengthLabel << ui->naluSizeLength;
 
   m_comboBoxControls << ui->muxThis << ui->trackLanguage << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->naluSizeLength << ui->aacIsSBR << ui->subtitleCharacterSet;
 
@@ -357,7 +357,7 @@ Tab::setupInputControls() {
   connect(ui->muxThis,                      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onMuxThisChanged);
   connect(ui->naluSizeLength,               static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onNaluSizeLengthChanged);
   connect(ui->reduceToAudioCore,            &QCheckBox::toggled,                                                                              this,                     &Tab::onReduceAudioToCoreChanged);
-  connect(ui->removeDialogNormalization,    &QCheckBox::toggled,                                                                              this,                     &Tab::onRemoveDialogNormalizationChanged);
+  connect(ui->removeDialogNormalizationGain, &QCheckBox::toggled,                                                                              this,                     &Tab::onRemoveDialogNormalizationGainChanged);
   connect(ui->setAspectRatio,               &QPushButton::clicked,                                                                            this,                     &Tab::onSetAspectRatio);
   connect(ui->setDisplayWidthHeight,        &QPushButton::clicked,                                                                            this,                     &Tab::onSetDisplayDimensions);
   connect(ui->startMuxing,                  &QPushButton::clicked,                                                                            this,                     [=]() { addToJobQueue(true); });
@@ -516,7 +516,7 @@ Tab::setupInputToolTips() {
                    Q("%1 %2")
                    .arg(QY("Drops the lossless extensions from an audio track and keeps only its lossy core."))
                    .arg(QY("This only works with DTS audio tracks.")));
-  Util::setToolTip(ui->removeDialogNormalization,
+  Util::setToolTip(ui->removeDialogNormalizationGain,
                    Q("%1 %2")
                    .arg(QY("Removes or at least minimizes the dialog normalization gain by modifying audio headers."))
                    .arg(QY("This only works with (E-)AC-3 audio tracks.")));
@@ -618,7 +618,7 @@ Tab::onTrackSelectionChanged() {
     Util::enableWidgets(m_audioControls, true);
     Util::enableWidgets({ ui->aacIsSBRLabel, ui->aacIsSBR }, track->canSetAacToSbr());
     ui->reduceToAudioCore->setEnabled(track->canReduceToAudioCore());
-    ui->removeDialogNormalization->setEnabled(track->canRemoveDialogNormalization());
+    ui->removeDialogNormalizationGain->setEnabled(track->canRemoveDialogNormalizationGain());
 
   } else if (track->isVideo())
     Util::enableWidgets(m_videoControls, true);
@@ -718,7 +718,7 @@ Tab::setInputControlValues(Track *track) {
   ui->setDisplayWidthHeight->setChecked(!track->m_setAspectRatio);
   ui->fixBitstreamTimingInfo->setChecked(track->m_fixBitstreamTimingInfo);
   ui->reduceToAudioCore->setChecked(     track->m_reduceAudioToCore);
-  ui->removeDialogNormalization->setChecked(track->m_removeDialogNormalization);
+  ui->removeDialogNormalizationGain->setChecked(track->m_removeDialogNormalizationGain);
 
   m_currentlySettingInputControlValues = false;
 }
@@ -1055,10 +1055,10 @@ Tab::onReduceAudioToCoreChanged(bool newValue) {
 }
 
 void
-Tab::onRemoveDialogNormalizationChanged(bool newValue) {
+Tab::onRemoveDialogNormalizationGainChanged(bool newValue) {
   withSelectedTracks([&newValue](auto &track) {
-    if (track.canRemoveDialogNormalization())
-      track.m_removeDialogNormalization = newValue;
+    if (track.canRemoveDialogNormalizationGain())
+      track.m_removeDialogNormalizationGain = newValue;
   });
 }
 

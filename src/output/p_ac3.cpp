@@ -34,7 +34,7 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
   , m_packet_duration{m_timestamp_calculator.get_duration(m_samples_per_packet).to_ns()}
   , m_stream_position{}
   , m_first_packet{true}
-  , m_remove_dialog_normalization{get_option_for_track(m_ti.m_remove_dialog_normalization, m_ti.m_id)}
+  , m_remove_dialog_normalization_gain{get_option_for_track(m_ti.m_remove_dialog_normalization_gain, m_ti.m_id)}
 {
   m_first_ac3_header.m_sample_rate = samples_per_sec;
   m_first_ac3_header.m_bs_id       = bsid;
@@ -127,8 +127,8 @@ ac3_packetizer_c::set_timestamp_and_add_packet(packet_cptr const &packet,
   // if (packet_stream_position)
   //   mxinfo(boost::format("  ts %1% position in %2% out %3%\n") % format_timestamp(packet->timestamp) % format_number(m_stream_position) % format_number(*packet_stream_position));
 
-  if (m_remove_dialog_normalization)
-    mtx::ac3::remove_dialog_normalization(packet->data->get_buffer(), packet->data->get_size());
+  if (m_remove_dialog_normalization_gain)
+    mtx::ac3::remove_dialog_normalization_gain(packet->data->get_buffer(), packet->data->get_size());
 
   add_packet(packet);
 

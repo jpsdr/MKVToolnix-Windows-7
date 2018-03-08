@@ -237,9 +237,9 @@ set_usage() {
   usage_text += Y("  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
                   "                           HD extensions instead of copying both the core\n"
                   "                           and the extensions.\n");
-  usage_text += Y("  --remove-dialog-normalization <TID>\n"
-                  "                           Removes or minimizes the dialog normalization by\n"
-                  "                           modifying audio frame headers.\n");
+  usage_text += Y("  --remove-dialog-normalization-gain <TID>\n"
+                  "                           Removes or minimizes the dialog normalization gain\n"
+                  "                           by modifying audio frame headers.\n");
   usage_text += Y("  --timestamps <TID:file>  Read the timestamps to be used from a file.\n");
   usage_text += Y("  --default-duration <TID:Xs|ms|us|ns|fps>\n"
                   "                           Force the default duration of a track to X.\n"
@@ -1644,14 +1644,14 @@ parse_arg_reduce_to_core(const std::string &s,
 }
 
 static void
-parse_arg_remove_dialog_normalization(const std::string &s,
-                                      track_info_c &ti) {
+parse_arg_remove_dialog_normalization_gain(const std::string &s,
+                                           track_info_c &ti) {
   int64_t id = 0;
 
   if (!parse_number(s, id))
-    mxerror(boost::format(Y("Invalid track ID specified in '%1% %2%'.\n")) % "--remove-dialog-normalization" % s);
+    mxerror(boost::format(Y("Invalid track ID specified in '%1% %2%'.\n")) % "--remove-dialog-normalization-gain" % s);
 
-  ti.m_remove_dialog_normalization[id] = true;
+  ti.m_remove_dialog_normalization_gain[id] = true;
 }
 
 /** \brief Parse the argument for \c --blockadd
@@ -2896,11 +2896,11 @@ parse_args(std::vector<std::string> args) {
       parse_arg_reduce_to_core(next_arg, *ti);
       sit++;
 
-    } else if (this_arg == "--remove-dialog-normalization") {
+    } else if (this_arg == "--remove-dialog-normalization-gain") {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
-      parse_arg_remove_dialog_normalization(next_arg, *ti);
+      parse_arg_remove_dialog_normalization_gain(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "+")

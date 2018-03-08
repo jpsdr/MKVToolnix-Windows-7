@@ -85,7 +85,7 @@ track_info_c::operator =(const track_info_c &src) {
   m_forced_track                   = src.m_forced_track;
 
   m_reduce_to_core                 = src.m_reduce_to_core;
-  m_remove_dialog_normalization    = src.m_remove_dialog_normalization;
+  m_remove_dialog_normalization_gain = src.m_remove_dialog_normalization_gain;
 
   m_enabled_track_flags            = src.m_enabled_track_flags;
   m_enabled_track                  = src.m_enabled_track;

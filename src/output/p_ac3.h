@@ -26,7 +26,7 @@ protected:
   timestamp_calculator_c m_timestamp_calculator;
   int64_t m_samples_per_packet, m_packet_duration;
   uint64_t m_stream_position;
-  bool m_first_packet, m_remove_dialog_normalization;
+  bool m_first_packet, m_remove_dialog_normalization_gain;
   std::vector<packet_extension_cptr> m_packet_extensions;
 
 public:
