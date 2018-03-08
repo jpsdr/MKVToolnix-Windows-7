@@ -190,6 +190,9 @@ struct header_t {
 
   // gain in dB to apply for dialog normalization
   int dialog_normalization_gain{};
+  unsigned int dialog_normalization_gain_bit_position{};
+
+  boost::optional<unsigned int> crc{};
 
   bool has_core{}, has_exss{};
   int exss_part_size{};
@@ -263,5 +266,8 @@ bool operator!=(header_t const &h1, header_t const &h2);
 void convert_14_to_16_bits(const unsigned short *src, unsigned long srcwords, unsigned short *dst);
 
 bool detect(const void *src_buf, int len, bool &convert_14_to_16, bool &swap_bytes);
+
+void remove_dialog_normalization_gain(unsigned char *buf, std::size_t size);
+
 
 }}

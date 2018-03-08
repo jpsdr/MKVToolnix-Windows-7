@@ -28,7 +28,7 @@ private:
   mtx::bytes::buffer_c m_packet_buffer;
 
   mtx::dts::header_t m_first_header, m_previous_header;
-  bool m_skipping_is_normal, m_reduce_to_core;
+  bool m_skipping_is_normal, m_reduce_to_core, m_remove_dialog_normalization_gain;
   timestamp_calculator_c m_timestamp_calculator;
   std::deque<header_and_packet_t> m_queued_packets;
   uint64_t m_stream_position, m_packet_position;

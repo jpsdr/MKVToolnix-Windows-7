@@ -32,6 +32,7 @@ dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
   , m_previous_header{dtsheader}
   , m_skipping_is_normal{}
   , m_reduce_to_core{get_option_for_track(m_ti.m_reduce_to_core, m_ti.m_id)}
+  , m_remove_dialog_normalization_gain{get_option_for_track(m_ti.m_remove_dialog_normalization_gain, m_ti.m_id)}
   , m_timestamp_calculator{static_cast<int64_t>(m_first_header.core_sampling_frequency)}
   , m_stream_position{}
   , m_packet_position{}
@@ -169,6 +170,9 @@ dts_packetizer_c::process_available_packets() {
     auto packet_position   = std::get<2>(header_and_packet);
     auto samples_in_packet = header.get_packet_length_in_core_samples();
     auto new_timestamp     = m_timestamp_calculator.get_next_timestamp(samples_in_packet, packet_position);
+
+    if (m_remove_dialog_normalization_gain)
+      mtx::dts::remove_dialog_normalization_gain(data->get_buffer(), data->get_size());
 
     add_packet(std::make_shared<packet_t>(data, new_timestamp.to_ns(), header.get_packet_length_in_nanoseconds().to_ns()));
   }

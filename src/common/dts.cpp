@@ -19,6 +19,7 @@
 #endif  // HAVE_UNISTD_H
 
 #include "common/bit_reader.h"
+#include "common/bit_writer.h"
 #include "common/dts.h"
 #include "common/endian.h"
 #include "common/list_utils.h"
@@ -459,7 +460,7 @@ header_t::decode_core_header(unsigned char const *buf,
     predictor_history_flag     = bc.get_bit();
 
     if (crc_present)
-       bc.skip_bits(16);
+      crc = bc.get_bits(16);
 
     multirate_interpolator     = static_cast<multirate_interpolator_e>(bc.get_bit());
     encoder_software_revision  = bc.get_bits(4);
@@ -500,16 +501,16 @@ header_t::decode_core_header(unsigned char const *buf,
         return false;
     }
 
-    front_sum_difference      = bc.get_bit();
-    surround_sum_difference   = bc.get_bit();
-    t                         = bc.get_bits(4);
-    dialog_normalization_gain = 7 == encoder_software_revision ? -t
-                              : 6 == encoder_software_revision ? -16 - t
-                              :                                  0;
-
-    has_core                  = true;
+    front_sum_difference                   = bc.get_bit();
+    surround_sum_difference                = bc.get_bit();
+    dialog_normalization_gain_bit_position = bc.get_bit_position();
+    t                                      = bc.get_bits(4);
+    dialog_normalization_gain              = 7 == encoder_software_revision ? -t
+                                           : 6 == encoder_software_revision ? -16 - t
+                                           :                                  0;
 
     // Detect DTS HD master audio / high resolution part
+    has_core         = true;
     has_exss         = false;
     exss_part_size   = 0;
     dts_type         = dts_type_e::normal;
@@ -980,6 +981,42 @@ detect(const void *src_buf,
   swap_bytes       = dts_swap_bytes != 0;
 
   return is_dts;
+}
+
+void
+remove_dialog_normalization_gain(unsigned char *buf,
+                                 std::size_t size) {
+  static debugging_option_c s_debug{"dts_remove_dialog_normalization_gain|remove_dialog_normalization_gain"};
+
+  header_t header;
+
+  if (!header.decode_core_header(buf, size, true))
+    return;
+
+  if (!header.has_core || !header.dialog_normalization_gain_bit_position || (size < header.frame_byte_size))
+    return;
+
+  unsigned int const removed_level = 0;
+
+  if (header.dialog_normalization_gain == removed_level) {
+    mxdebug_if(s_debug,
+               boost::format("no need to remove the dialog normalization, it's already set to %1% (%2% dB); CRC: %3%\n")
+               % removed_level % header.dialog_normalization_gain % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : std::string{"—"}));
+    return;
+  }
+
+  mtx::bits::reader_c r{buf, size};
+  mtx::bits::writer_c w{buf, size};
+
+  r.set_bit_position(header.dialog_normalization_gain_bit_position);
+  w.set_bit_position(header.dialog_normalization_gain_bit_position);
+
+  auto current_level = r.get_bits(4);
+  w.put_bits(4, removed_level);
+
+  mxdebug_if(s_debug,
+             boost::format("changing dialog normalization from %1% (%2% dB) to %3%; CRC: %4%\n")
+             % current_level % header.dialog_normalization_gain % removed_level % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : std::string{"—"}));
 }
 
 bool
