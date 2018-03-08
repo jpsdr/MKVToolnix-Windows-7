@@ -187,19 +187,19 @@ frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
     bc.skip_bits(2);            // surmixlev
   if (0x02 == acmod)
     bc.skip_bits(2);            // dsurmod
-  uint8_t lfeon                       = bc.get_bit();
+  uint8_t lfeon                            = bc.get_bit();
 
-  uint8_t sr_shift                    = std::max(m_bs_id, 8u) - 8;
+  uint8_t sr_shift                         = std::max(m_bs_id, 8u) - 8;
 
   m_dialog_normalization_gain_bit_position = bc.get_bit_position();
   m_dialog_normalization_gain              = bc.get_bits(5);
-  m_sample_rate                       = sample_rates[fscod] >> sr_shift;
-  m_bit_rate                          = (bit_rates[frmsizecod >> 1] * 1000) >> sr_shift;
-  m_channels                          = channel_modes[acmod] + lfeon;
-  m_bytes                             = frame_sizes[frmsizecod][fscod] << 1;
+  m_sample_rate                            = sample_rates[fscod] >> sr_shift;
+  m_bit_rate                               = (bit_rates[frmsizecod >> 1] * 1000) >> sr_shift;
+  m_channels                               = channel_modes[acmod] + lfeon;
+  m_bytes                                  = frame_sizes[frmsizecod][fscod] << 1;
 
-  m_samples                           = 1536;
-  m_frame_type                        = EAC3_FRAME_TYPE_INDEPENDENT;
+  m_samples                                = 1536;
+  m_frame_type                             = EAC3_FRAME_TYPE_INDEPENDENT;
 
   if (acmod == 0) {
     // Dual-mono mode
