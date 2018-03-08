@@ -1465,6 +1465,20 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
     </varlistentry>
 
     <varlistentry>
+     <term><option>--remove-dialog-normalization-gain</option> <parameter>TID</parameter></term>
+     <listitem>
+      <para>
+       Some audio codecs contain header fields that tell the decoder or player to apply a (usually negative) gain for dialog
+       normalization. This option tells &mkvmerge; to remove or minimize that gain by modifying the corresponding header fields.
+      </para>
+
+      <para>
+       Currently only <abbrev>AC-3</abbrev> and <abbrev>DTS</abbrev> tracks are affected by this option.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
      <term><option>--timestamps</option> <parameter>TID:file-name</parameter></term>
      <listitem>
       <para>
