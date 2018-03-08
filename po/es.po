@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2018-03-03 11:17+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -639,9 +639,9 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:240
 #, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Establecer las dimensiones de visualización\n"
@@ -4520,7 +4520,7 @@ msgstr "D&uplicar la edición o capítulo seleccionado"
 msgid "DTS"
 msgstr "DTS"
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr "¡La información de cabecera DTS ha cambiado! - Nuevo formato:\n"
 
@@ -8476,7 +8476,7 @@ msgstr "Eliminar tareas completadas más antiguas de x días:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #, fuzzy
-msgid "Remove dialog normalization"
+msgid "Remove dialog normalization gain"
 msgstr "Información del segmento"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -9184,7 +9184,7 @@ msgstr "Tamaño:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr "Omitiendo %1% bytes (se encontró una cabecera AAC no válida). Esto podría causar desincronización del audio/vídeo.\n"
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr "Omitiendo %1% bytes (se encontró una cabecera DTS no válida). Esto podría causar desincronización de audio/vídeo.\n"
@@ -11189,7 +11189,7 @@ msgstr "Esto debe ser una lista separada por comas de cuatro números que especi
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
 #, fuzzy, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
+msgid "This only works with AC-3 & DTS audio tracks."
 msgstr "Únicamente funciona con pistas de audio DTS."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
@@ -13918,6 +13918,9 @@ msgstr "– Establecer a ninguno –"
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr ""
 #~ "La información de la actualización no fue posible recuperar desde %1%.\n"
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "Únicamente funciona con pistas de audio DTS."
 
 #~ msgid "This program is licensed under the GPL v2 (see COPYING)."
 #~ msgstr "Este programa está licenciado conforme a GPL v2 (vea COPYING)."

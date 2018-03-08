@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2018-02-07 15:24+0000\n"
 "Last-Translator: Daniel <danny3@tutanota.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ro/)\n"
@@ -469,9 +469,9 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:240
 #, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr ""
 "  --default-duration <TID:Xs|ms|us|ns|fps>\n"
 "                           Forțează durata implicită a unei piste la X.\n"
@@ -4305,7 +4305,7 @@ msgstr ""
 msgid "DTS"
 msgstr ""
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr ""
 
@@ -8315,7 +8315,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #, fuzzy
-msgid "Remove dialog normalization"
+msgid "Remove dialog normalization gain"
 msgstr "Informații segment"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -9022,7 +9022,7 @@ msgstr "Dimensiune:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr ""
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr ""
@@ -11018,7 +11018,7 @@ msgstr "Aceasta trebuie să fie o listă de patru numere separate prin virgulă 
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
 #, fuzzy, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
+msgid "This only works with AC-3 & DTS audio tracks."
 msgstr "Aceasta funcționează doar cu piste audio DTS."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
@@ -13216,6 +13216,9 @@ msgstr "– Stabilește ca niciuna –"
 
 #~ msgid "The number of video pixels to remove on the top of the image."
 #~ msgstr "Numărul de pixeli video de eliminat din partea de sus a imaginii."
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "Aceasta funcționează doar cu piste audio DTS."
 
 #~ msgid "Title: %1%"
 #~ msgstr "Titlu: %1%"

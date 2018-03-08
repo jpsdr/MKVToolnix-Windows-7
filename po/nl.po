@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2017-11-07 02:53+0100\n"
 "Last-Translator: René Maassen <bmom43@hotmail.com>\n"
 "Language-Team: \n"
@@ -595,9 +595,9 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:240
 #, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Stelt scherm instellingen in door te berekenen de\n"
@@ -4511,7 +4511,7 @@ msgstr "D&upliceer geselecteerde editie of hoofdstuk"
 msgid "DTS"
 msgstr "DTS"
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr "DTS beginblok informatie gewijzigd! - Nieuw formaat:\n"
 
@@ -8535,7 +8535,7 @@ msgstr "Verwijder voltooide taken ouder dan x dagen"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #, fuzzy
-msgid "Remove dialog normalization"
+msgid "Remove dialog normalization gain"
 msgstr "Segment informatie"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -9259,7 +9259,7 @@ msgstr "Grootte:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr "Overslaan %1% bytes (geen geldige DTS beginblok gevonden). Dit kan audio/video de-synchronisatie veroorzaken.\n"
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr "Overslaan %1% bytes (geen geldige DTS beginblok gevonden). Dit kan audio/video de-synchronisatie veroorzaken.\n"
@@ -11265,7 +11265,7 @@ msgstr "Dit moet door komma's gescheiden lijst van vier nummers voor het uitsnij
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
 #, fuzzy, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
+msgid "This only works with AC-3 & DTS audio tracks."
 msgstr "Dit werkt alléén met DTS audio sporen."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
@@ -13974,6 +13974,9 @@ msgstr "– Zet naar niets –"
 
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr "Het opwaardeer bestand kon niet verkregen worden van (%1%).\n"
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "Dit werkt alléén met DTS audio sporen."
 
 #~ msgid "This program is licensed under the GPL v2 (see COPYING)."
 #~ msgstr "|Dit programma is gelicenseerd onder de GNU GPL v2 (zie kopiëren)"

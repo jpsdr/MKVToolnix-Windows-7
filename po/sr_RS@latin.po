@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2018-02-06 01:15+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -606,9 +606,9 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:240
 #, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Postavlja dimenzije prikaza računajući\n"
@@ -4507,7 +4507,7 @@ msgstr "&Dupliraj izabranu ediciju ili poglavlje"
 msgid "DTS"
 msgstr "DTS"
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr "Informacija DTS zaglavlja promenjena! - Novi format:\n"
 
@@ -8505,7 +8505,7 @@ msgstr "U&kloni završene zadatke starije od x dana:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #, fuzzy
-msgid "Remove dialog normalization"
+msgid "Remove dialog normalization gain"
 msgstr "Informacija o segmentu"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -9221,7 +9221,7 @@ msgstr "Veličina:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr "Preskačem %1% bajtova (nije nađeno važeće AAC zaglavlje). Ovo može prouzrokovati audio/video desinhronizaciju.\n"
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr "Preskačem %1% bajtova (nije nađeno važeće DTS zaglavlje). Ovo može prouzrokovati audio/video desinhronizaciju.\n"
@@ -11242,7 +11242,7 @@ msgstr "Mora biti zarezom odvojena lista od četiri broja koji se upotrebljavaju
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
 #, fuzzy, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
+msgid "This only works with AC-3 & DTS audio tracks."
 msgstr "Ovo radi samo sa DTS tipom staza."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
@@ -13947,6 +13947,9 @@ msgstr "– ništa –"
 
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr "Informacija o obnavljanju ne može biti dobijena od %1%.\n"
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "Ovo radi samo sa DTS tipom staza."
 
 #~ msgid "This program is licensed under the GPL v2 (see COPYING)."
 #~ msgstr "MKVToolNix je licenciran pod GNU GPL v2 (pogl. COPYING)."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2018-02-28 11:42+0000\n"
 "Last-Translator: Roman Horník <roman.hornik@debian-linux.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/cs/)\n"
@@ -611,9 +611,9 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:240
 #, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Nastaví rozměry zobrazení výpočtem\n"
@@ -4614,7 +4614,7 @@ msgstr "&Duplikovat vybraný střih nebo kapitolu"
 msgid "DTS"
 msgstr "DTS"
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr "Informace hlavičky DTS byla změněna! - Nový formát:\n"
 
@@ -8689,7 +8689,7 @@ msgstr "Odebrat &dokončené úlohy"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #, fuzzy
-msgid "Remove dialog normalization"
+msgid "Remove dialog normalization gain"
 msgstr "Informace o úsecích"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -9411,7 +9411,7 @@ msgstr "Velikost:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr ""
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr ""
@@ -11418,7 +11418,7 @@ msgstr "Musí to být čárkami oddělený seznam čtyř čísel použitých pro
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
 #, fuzzy, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
+msgid "This only works with AC-3 & DTS audio tracks."
 msgstr "Toto funguje pouze pro stopy DTS."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
@@ -13946,6 +13946,9 @@ msgstr "– nastavit na žádný –"
 
 #~ msgid "The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."
 #~ msgstr "Soubor byl změněn jiným program od jeho přečtení editorem hlaviček. Proto ho musíte znovu načíst. To bohužel znamená, že všechny vaše změny budou ztraceny."
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "Toto funguje pouze pro stopy DTS."
 
 #~ msgid "This program is licensed under the GPL v2 (see COPYING)."
 #~ msgstr "Tento program je licencován pod GPL v2 (viz COPYING)."

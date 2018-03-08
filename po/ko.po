@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2018-03-07 07:28+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -582,10 +582,11 @@ msgstr ""
 "                           유지합니다.\n"
 
 #: src/merge/mkvmerge.cpp:240
+#, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr ""
 "  --remove-dialog-normalization <TID>\n"
 "                           오디오 프레임 헤더를 수정하여\n"
@@ -4397,7 +4398,7 @@ msgstr "선택한 에디션이나 챕터 복제(&U)"
 msgid "DTS"
 msgstr "DTS"
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr "DTS 헤더 정보가 변경되었습니다! - 새로운 형식:\n"
 
@@ -8343,7 +8344,8 @@ msgid "Remove com&pleted jobs older than x days:"
 msgstr "x일보다 오래된 완료 작업 삭제(&P):"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
-msgid "Remove dialog normalization"
+#, fuzzy
+msgid "Remove dialog normalization gain"
 msgstr "대화 볼륨 노멀라이징 제거하기"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -9048,7 +9050,7 @@ msgstr "크기:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr "%1%바이트를 건너 뜁니다 (유효한 AAC 헤더를 찾지 못했습니다) 따라서 오디오/비디오 동기화에 영향을 미칠지도 모릅니다.\n"
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr "%1%바이트를 건너 뜁니다 (유효한 DTS 헤더를 찾지 못했습니다) 따라서 오디오/비디오 동기화에 영향을 미칠지도 모릅니다.\n"
@@ -11031,9 +11033,9 @@ msgid "This must be comma-separated list of four numbers for the cropping to be 
 msgstr "이것은 틀림없이 화면의 좌, 상, 우, 하단을 픽셀 단위로 잘라낼 때 사용하는 콤마로 분리한 네 가지 숫자 목록입니다. 예 '0,20,0,20'"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
-#, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
-msgstr "이것은 (E-)AC-3 오디오 트랙에서만 동작합니다."
+#, fuzzy, no-c-format
+msgid "This only works with AC-3 & DTS audio tracks."
+msgstr "이것은 DTS 오디오 트랙에서만 동작합니다."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
 #, no-c-format
@@ -13583,6 +13585,9 @@ msgstr "– 없음으로 설정 –"
 
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr "업데이트 정보를 %1%에서 읽을 수 없습니다.\n"
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "이것은 (E-)AC-3 오디오 트랙에서만 동작합니다."
 
 #~ msgid "This program is licensed under the GPL v2 (see COPYING)."
 #~ msgstr "이 프로그램의 라이센스는 GPV v2입니다 (COPYING 참고)."

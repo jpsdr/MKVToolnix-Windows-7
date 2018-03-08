@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 13 10.2017\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2017-10-13 12:03+0200\n"
 "Last-Translator: Bovirus <bovirus@gmail.com>\n"
 "Language-Team: bovirus <bovirus@gmail.com>\n"
@@ -601,9 +601,9 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:240
 #, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Imposta la dimensione di visualizzazione calcolando\n"
@@ -4518,7 +4518,7 @@ msgstr "D&uplica edizione o capitolo selezionato"
 msgid "DTS"
 msgstr "DTS"
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr "Informazione intestazione DTS modificata! - Nuovo formato:\n"
 
@@ -8542,7 +8542,7 @@ msgstr "Rimuovi attività com&pletate più vecchie di x giorni:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #, fuzzy
-msgid "Remove dialog normalization"
+msgid "Remove dialog normalization gain"
 msgstr "Informazione segmento"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -9266,7 +9266,7 @@ msgstr "Dimensione:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr "Ignorati %1% byte (nessuna intestazione AAC). Ciò può causare desincronizzazione audio/video.\n"
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr "Ignorati %1% byte (nessuna intestazione DTS). Ciò può causare desincronizzazione audio/video.\n"
@@ -11272,7 +11272,7 @@ msgstr "Deve essere un elenco, separato da virgole, di quattro numeri per il rit
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
 #, fuzzy, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
+msgid "This only works with AC-3 & DTS audio tracks."
 msgstr "Questo funziona solo con le tracce audio DTS."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
@@ -13995,6 +13995,9 @@ msgstr "-- Imposta a nessuno –"
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr ""
 #~ "Le informazioni di aggiornamento non possono essere recuperate da %1%.\n"
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "Questo funziona solo con le tracce audio DTS."
 
 #~ msgid "This program is licensed under the GPL v2 (see COPYING)."
 #~ msgstr "Questo programma è distribuito sotto licenza GPL v2 (vedi COPYING)."

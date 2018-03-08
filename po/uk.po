@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2017-10-04 19:50+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -616,9 +616,9 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:240
 #, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Встановлюється cпіввідношення сторін екрану відео шляхом розрахунку\n"
@@ -4571,7 +4571,7 @@ msgstr "&Дублювати вибрану редакцію або розділ"
 msgid "DTS"
 msgstr "DTS"
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr "Інформація DTS заголовку змінилася! - Новий формат:\n"
 
@@ -8623,7 +8623,7 @@ msgstr "Видалити заверш&ені завдання, що старіш
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #, fuzzy
-msgid "Remove dialog normalization"
+msgid "Remove dialog normalization gain"
 msgstr "Інформація сегмента"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -9350,7 +9350,7 @@ msgstr "Розмір:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr "Пропуск %1% байт (не знайдено корректного заголовку AAC). Це може призвести до розсинхронізації аудіо і відео.\n"
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr "Пропуск %1% байт (не знайдено корректного заголовку DTS). Це може призвести до розсинхронізації аудіо і відео.\n"
@@ -11381,7 +11381,7 @@ msgstr "Встановлюються параметри обрізки. Має �
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
 #, fuzzy, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
+msgid "This only works with AC-3 & DTS audio tracks."
 msgstr "Працює тільки для DTS аудіодоріжок."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
@@ -14146,6 +14146,9 @@ msgstr "– Нічого не обрано –"
 
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr "Інформацію про оновлення не вдається отримати від %1%.\n"
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "Працює тільки для DTS аудіодоріжок."
 
 #~ msgid "This program is licensed under the GPL v2 (see COPYING)."
 #~ msgstr "MKVToolNix розповсюджується під ліцензією GNU GPL v2"

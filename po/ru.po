@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-07 10:24+0100\n"
+"POT-Creation-Date: 2018-03-08 21:03+0100\n"
 "PO-Revision-Date: 2018-03-07 05:56+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -463,9 +463,9 @@ msgstr "  --reduce-to-core <TID> - Сохраняет только ядро зв
 #: src/merge/mkvmerge.cpp:240
 #, fuzzy
 msgid ""
-"  --remove-dialog-normalization <TID>\n"
-"                           Removes or minimizes the dialog normalization by\n"
-"                           modifying audio frame headers.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Removes or minimizes the dialog normalization gain\n"
+"                           by modifying audio frame headers.\n"
 msgstr "  --aspect-ratio <TID:f|a/b> - Устанавливает размеры изображения путём расчёта ширины и высоты для этих пропорций.\n"
 
 #: src/merge/mkvmerge.cpp:110
@@ -4272,7 +4272,7 @@ msgstr "Дублировать выбранный раздел или главу
 msgid "DTS"
 msgstr "DTS"
 
-#: src/output/p_dts.cpp:75
+#: src/output/p_dts.cpp:76
 msgid "DTS header information changed! - New format:\n"
 msgstr "Заголовок DTS изменился! - Новый формат:\n"
 
@@ -8251,7 +8251,7 @@ msgstr "Удалить завершённые задания старше чем
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #, fuzzy
-msgid "Remove dialog normalization"
+msgid "Remove dialog normalization gain"
 msgstr "Информация о сегментах"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
@@ -8963,7 +8963,7 @@ msgstr "Размер:"
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
 msgstr "Пропуск %1% байт (не найден правильный заголовок AAC). Это может привести к рассинхронизации аудио и видео.\n"
 
-#: src/output/p_dts.cpp:91
+#: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
 msgstr "Пропуск %1% байт (не найден правильный заголовок DTS). Это может привести к рассинхронизации аудио и видео.\n"
@@ -10975,9 +10975,9 @@ msgid "This must be comma-separated list of four numbers for the cropping to be 
 msgstr "Это должна быть последовательность из четырёх чисел, разделённых между собою запятыми и указывающих сколько пикселей будет обрезано слева, сверху, справа и снизу, например '0,20,0,20'."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
-#, no-c-format
-msgid "This only works with (E-)AC-3 audio tracks."
-msgstr "Работает только со звуковыми дорожками (E-)AC-3."
+#, fuzzy, no-c-format
+msgid "This only works with AC-3 & DTS audio tracks."
+msgstr "Работает только со звуковыми дорожками DTS."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
 #, no-c-format
@@ -13578,6 +13578,9 @@ msgstr "– Установлено в 'нет' –"
 
 #~ msgid "The update information could not be retrieved from %1%.\n"
 #~ msgstr "Информация об обновлениях не может быть получена из %1%.\n"
+
+#~ msgid "This only works with (E-)AC-3 audio tracks."
+#~ msgstr "Работает только со звуковыми дорожками (E-)AC-3."
 
 #~ msgid "This program is licensed under the GPL v2 (see COPYING)."
 #~ msgstr "MKVToolNix распространяется под лицензией GNU GPL v2 (см. COPYING.txt)."
