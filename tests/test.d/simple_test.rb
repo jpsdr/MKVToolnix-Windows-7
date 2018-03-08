@@ -76,7 +76,7 @@ class SimpleTest
   end
 
   def clean_tmp
-    File.unlink(@tmp) if File.exists?(@tmp) && (ENV["KEEP_TMPFILES"] != "1")
+    File.unlink(@tmp) if @tmp && File.exists?(@tmp) && !ENV["KEEP_TMPFILES"].nil? && (ENV["KEEP_TMPFILES"] != "1")
     @tmp = nil
   end
 
