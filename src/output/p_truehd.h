@@ -22,18 +22,18 @@
 class truehd_packetizer_c: public generic_packetizer_c {
 protected:
   bool m_first_frame;
-  truehd_frame_t m_first_truehd_header;
+  mtx::truehd::frame_t m_first_truehd_header;
 
   int64_t m_current_samples_per_frame, m_ref_timestamp;
   timestamp_calculator_c m_timestamp_calculator;
-  truehd_parser_c m_parser;
+  mtx::truehd::parser_c m_parser;
 
 public:
-  truehd_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, truehd_frame_t::codec_e codec, int sampling_rate, int channels);
+  truehd_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, mtx::truehd::frame_t::codec_e codec, int sampling_rate, int channels);
   virtual ~truehd_packetizer_c();
 
   virtual int process(packet_cptr packet);
-  virtual void process_framed(truehd_frame_cptr const &frame, int64_t provided_timestamp);
+  virtual void process_framed(mtx::truehd::frame_cptr const &frame, int64_t provided_timestamp);
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
@@ -43,7 +43,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
-  virtual void adjust_header_values(truehd_frame_cptr const &frame);
+  virtual void adjust_header_values(mtx::truehd::frame_cptr const &frame);
 
   virtual void flush_impl();
   virtual void flush_frames();

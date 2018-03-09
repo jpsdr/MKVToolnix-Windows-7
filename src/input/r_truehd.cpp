@@ -64,7 +64,7 @@ truehd_reader_c::read_headers() {
 
     m_in->setFilePointer(tag_size_start, seek_beginning);
 
-    truehd_parser_c parser;
+    mtx::truehd::parser_c parser;
     parser.add_data(m_chunk->get_buffer(), init_read_len);
 
 
@@ -193,7 +193,7 @@ truehd_reader_c::find_valid_headers(mm_io_c &in,
 
     int num_read = in.read(buf->get_buffer(), probe_range);
 
-    truehd_parser_c parser;
+    mtx::truehd::parser_c parser;
     parser.add_data(buf->get_buffer(), num_read);
 
     int num_sync_frames = 0;

@@ -24,7 +24,7 @@
 class truehd_reader_c: public generic_reader_c {
 private:
   memory_cptr m_chunk;
-  truehd_frame_cptr m_header;
+  mtx::truehd::frame_cptr m_header;
   int m_truehd_ptzr, m_ac3_ptzr;
   mtx::ac3::frame_c m_ac3_header;
   truehd_ac3_splitting_packet_converter_c m_converter;

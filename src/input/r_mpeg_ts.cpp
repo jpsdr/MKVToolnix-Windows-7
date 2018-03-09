@@ -438,7 +438,7 @@ track_c::new_stream_a_pcm() {
 int
 track_c::new_stream_a_truehd() {
   if (!m_truehd_parser)
-    m_truehd_parser = truehd_parser_cptr(new truehd_parser_c);
+    m_truehd_parser.reset(new mtx::truehd::parser_c);
 
   m_truehd_parser->add_data(pes_payload_read->get_buffer(), pes_payload_read->get_size());
   clear_pes_payload();
@@ -2292,7 +2292,7 @@ reader_c::create_pcm_audio_packetizer(track_ptr const &track) {
 
 void
 reader_c::create_truehd_audio_packetizer(track_ptr const &track) {
-  track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
+  track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, mtx::truehd::frame_t::truehd, track->a_sample_rate, track->a_channels));
 
   if (track->converter)
     dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_packetizer(PTZR(track->ptzr));

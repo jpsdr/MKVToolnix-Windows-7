@@ -876,14 +876,14 @@ mpeg_ps_reader_c::new_stream_a_truehd(mpeg_ps_id_t id,
                                       unsigned char *buf,
                                       unsigned int length,
                                       mpeg_ps_track_ptr &track) {
-  truehd_parser_c parser;
+  mtx::truehd::parser_c parser;
 
   parser.add_data(buf, length);
 
   while (1) {
     while (parser.frame_available()) {
-      truehd_frame_cptr frame = parser.get_next_frame();
-      if (truehd_frame_t::sync != frame->m_type)
+      mtx::truehd::frame_cptr frame = parser.get_next_frame();
+      if (mtx::truehd::frame_t::sync != frame->m_type)
         continue;
 
       mxdebug_if(m_debug_headers,
@@ -1250,7 +1250,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       show_packetizer_info(id, PTZR(track->ptzr));
 
     } else if (track->codec.is(codec_c::type_e::A_TRUEHD)) {
-      track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
+      track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, mtx::truehd::frame_t::truehd, track->a_sample_rate, track->a_channels));
       show_packetizer_info(id, PTZR(track->ptzr));
 
     } else if (track->codec.is(codec_c::type_e::A_PCM)) {

@@ -21,10 +21,12 @@
 #include "common/byte_buffer.h"
 #include "common/codec.h"
 
-#define TRUEHD_SYNC_WORD 0xf8726fba
-#define MLP_SYNC_WORD    0xf8726fbb
+namespace mtx { namespace truehd {
 
-struct truehd_frame_t {
+static constexpr uint32_t TRUEHD_SYNC_WORD = 0xf8726fba;
+static constexpr uint32_t MLP_SYNC_WORD    = 0xf8726fbb;
+
+struct frame_t {
   static int const ms_sampling_rates[16];
   static uint8_t const ms_mlp_channels[32];
 
@@ -91,9 +93,9 @@ public:
   static int decode_channel_map(int channel_map);
   static unsigned int decode_rate_bits(unsigned int rate_bits);
 };
-using truehd_frame_cptr = std::shared_ptr<truehd_frame_t>;
+using frame_cptr = std::shared_ptr<frame_t>;
 
-class truehd_parser_c {
+class parser_c {
 protected:
   enum {
     state_unsynced,
@@ -101,18 +103,20 @@ protected:
   } m_sync_state;
 
   mtx::bytes::buffer_c m_buffer;
-  std::deque<truehd_frame_cptr> m_frames;
+  std::deque<frame_cptr> m_frames;
 
 public:
-  truehd_parser_c();
-  virtual ~truehd_parser_c();
+  parser_c();
+  virtual ~parser_c();
 
   virtual void add_data(const unsigned char *new_data, unsigned int new_size);
   virtual void parse(bool end_of_stream = false);
   virtual bool frame_available();
-  virtual truehd_frame_cptr get_next_frame();
+  virtual frame_cptr get_next_frame();
 
 protected:
   virtual unsigned int resync(unsigned int offset);
 };
-using truehd_parser_cptr = std::shared_ptr<truehd_parser_c>;
+using parser_cptr = std::shared_ptr<parser_c>;
+
+}}

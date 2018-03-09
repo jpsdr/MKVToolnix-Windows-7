@@ -20,7 +20,7 @@
 
 class truehd_ac3_splitting_packet_converter_c: public packet_converter_c {
 protected:
-  truehd_parser_c m_parser;
+  mtx::truehd::parser_c m_parser;
   generic_packetizer_c *m_ac3_ptzr;
   int64_t m_truehd_timestamp, m_ac3_timestamp;
 

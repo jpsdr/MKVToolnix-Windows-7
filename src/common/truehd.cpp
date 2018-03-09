@@ -43,15 +43,17 @@
 // 232 | 00         | 3:? 5:summary_info
 // 240 | f6b3       | header_checksum
 
-int const truehd_frame_t::ms_sampling_rates[16]   = { 48000, 96000, 192000, 0, 0, 0, 0, 0, 44100, 88200, 176400, 0, 0, 0, 0, 0 };
-uint8_t const truehd_frame_t::ms_mlp_channels[32] = {     1,     2,      3, 4, 3, 4, 5, 3,     4,     5,      4, 5, 6, 4, 5, 4,
-                                                          5,     6,      5, 5, 6, 0, 0, 0,     0,     0,      0, 0, 0, 0, 0, 0 };
+namespace mtx { namespace truehd {
+
+int const frame_t::ms_sampling_rates[16]   = { 48000, 96000, 192000, 0, 0, 0, 0, 0, 44100, 88200, 176400, 0, 0, 0, 0, 0 };
+uint8_t const frame_t::ms_mlp_channels[32] = {     1,     2,      3, 4, 3, 4, 5, 3,     4,     5,      4, 5, 6, 4, 5, 4,
+                                                   5,     6,      5, 5, 6, 0, 0, 0,     0,     0,      0, 0, 0, 0, 0, 0 };
 
 constexpr std::size_t PARSER_MIN_HEADER_SIZE = 12;
 
 bool
-truehd_frame_t::parse_header(unsigned char const *data,
-                             std::size_t size) {
+frame_t::parse_header(unsigned char const *data,
+                      std::size_t size) {
   if (size < PARSER_MIN_HEADER_SIZE)
     return false;
 
@@ -72,20 +74,20 @@ truehd_frame_t::parse_header(unsigned char const *data,
 }
 
 bool
-truehd_frame_t::parse_ac3_header(unsigned char const *data,
-                                 std::size_t size) {
+frame_t::parse_ac3_header(unsigned char const *data,
+                          std::size_t size) {
   if (!m_ac3_header.decode_header(data, size))
     return false;
 
-  m_codec = truehd_frame_t::ac3;
-  m_type  = truehd_frame_t::sync;
+  m_codec = frame_t::ac3;
+  m_type  = frame_t::sync;
   m_size  = m_ac3_header.m_bytes;
 
   return size >= m_ac3_header.m_bytes ? mtx::ac3::verify_checksum1(data, size) : false;
 }
 
 unsigned int
-truehd_frame_t::decode_rate_bits(unsigned int rate_bits) {
+frame_t::decode_rate_bits(unsigned int rate_bits) {
   if (0xf == rate_bits)
     return 0;
 
@@ -93,8 +95,8 @@ truehd_frame_t::decode_rate_bits(unsigned int rate_bits) {
 }
 
 bool
-truehd_frame_t::parse_mlp_header(unsigned char const *data,
-                                 std::size_t) {
+frame_t::parse_mlp_header(unsigned char const *data,
+                          std::size_t) {
   m_sampling_rate     = decode_rate_bits(data[9] >> 4);
   m_samples_per_frame = 40 << ((data[9] >> 4) & 0x07);
   m_channels          = ms_mlp_channels[data[11] & 0x1f];
@@ -103,8 +105,8 @@ truehd_frame_t::parse_mlp_header(unsigned char const *data,
 }
 
 bool
-truehd_frame_t::parse_truehd_header(unsigned char const *data,
-                                    std::size_t size) {
+frame_t::parse_truehd_header(unsigned char const *data,
+                             std::size_t size) {
   static debugging_option_c s_debug{"truehd_atmos"};
 
   try {
@@ -149,10 +151,10 @@ truehd_frame_t::parse_truehd_header(unsigned char const *data,
   return false;
 }
 
-// Code for truehd_parser_c::decode_channel_map was taken from
+// Code for parser_c::decode_channel_map was taken from
 // the ffmpeg project, source file "libavcodec/mlp_parser.c".
 int
-truehd_frame_t::decode_channel_map(int channel_map) {
+frame_t::decode_channel_map(int channel_map) {
   static const int s_channel_count[13] = {
     //  LR    C   LFE  LRs LRvh  LRc LRrs  Cs   Ts  LRsd  LRw  Cvh  LFE2
          2,   1,   1,   2,   2,   2,   2,   1,   1,   2,   2,   1,   1
@@ -168,18 +170,18 @@ truehd_frame_t::decode_channel_map(int channel_map) {
 
 // ----------------------------------------------------------------------
 
-truehd_parser_c::truehd_parser_c()
+parser_c::parser_c()
   : m_sync_state(state_unsynced)
 {
 }
 
-truehd_parser_c::~truehd_parser_c()
+parser_c::~parser_c()
 {
 }
 
 void
-truehd_parser_c::add_data(const unsigned char *new_data,
-                          unsigned int new_size) {
+parser_c::add_data(unsigned char const *new_data,
+                   unsigned int new_size) {
   if (!new_data || (0 == new_size))
     return;
 
@@ -189,7 +191,7 @@ truehd_parser_c::add_data(const unsigned char *new_data,
 }
 
 void
-truehd_parser_c::parse(bool end_of_stream) {
+parser_c::parse(bool end_of_stream) {
   unsigned char *data = m_buffer.get_buffer();
   unsigned int size   = m_buffer.get_size();
   unsigned int offset = 0;
@@ -204,7 +206,7 @@ truehd_parser_c::parse(bool end_of_stream) {
   }
 
   while ((size - offset) >= PARSER_MIN_HEADER_SIZE) {
-    auto frame  = std::make_shared<truehd_frame_t>();
+    auto frame  = std::make_shared<frame_t>();
     auto result = frame->parse_header(&data[offset], size - offset);
 
     if (   !result
@@ -244,28 +246,28 @@ truehd_parser_c::parse(bool end_of_stream) {
 }
 
 bool
-truehd_parser_c::frame_available() {
+parser_c::frame_available() {
   return !m_frames.empty();
 }
 
-truehd_frame_cptr
-truehd_parser_c::get_next_frame() {
+frame_cptr
+parser_c::get_next_frame() {
   if (m_frames.empty())
-    return truehd_frame_cptr{};
+    return frame_cptr{};
 
-  truehd_frame_cptr frame = *m_frames.begin();
+  auto frame = *m_frames.begin();
   m_frames.pop_front();
 
   return frame;
 }
 
 unsigned int
-truehd_parser_c::resync(unsigned int offset) {
+parser_c::resync(unsigned int offset) {
   const unsigned char *data = m_buffer.get_buffer();
   unsigned int size         = m_buffer.get_size();
 
   m_sync_state              = state_unsynced;
-  auto frame                = truehd_frame_t{};
+  auto frame                = frame_t{};
 
   for (offset = offset + 4; (offset + 4) < size; ++offset) {
     uint32_t sync_word = get_uint32_be(&data[offset]);
@@ -279,3 +281,5 @@ truehd_parser_c::resync(unsigned int offset) {
 
   return 0;
 }
+
+}}

@@ -25,7 +25,7 @@ using namespace libmatroska;
 
 truehd_packetizer_c::truehd_packetizer_c(generic_reader_c *p_reader,
                                          track_info_c &p_ti,
-                                         truehd_frame_t::codec_e codec,
+                                         mtx::truehd::frame_t::codec_e codec,
                                          int sampling_rate,
                                          int channels)
   : generic_packetizer_c{p_reader, p_ti}
@@ -54,7 +54,7 @@ truehd_packetizer_c::set_headers() {
 }
 
 void
-truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame,
+truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
                                     int64_t provided_timestamp) {
   m_timestamp_calculator.add_timestamp(provided_timestamp);
 
@@ -93,7 +93,7 @@ truehd_packetizer_c::flush_frames() {
 }
 
 void
-truehd_packetizer_c::adjust_header_values(truehd_frame_cptr const &frame) {
+truehd_packetizer_c::adjust_header_values(mtx::truehd::frame_cptr const &frame) {
   if (!m_first_frame)
     return;
 
@@ -134,7 +134,7 @@ truehd_packetizer_c::flush_impl() {
 
 connection_result_e
 truehd_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                 std::string &error_message) {
+                                    std::string &error_message) {
   truehd_packetizer_c *asrc = dynamic_cast<truehd_packetizer_c *>(src);
   if (!asrc)
     return CAN_CONNECT_NO_FORMAT;

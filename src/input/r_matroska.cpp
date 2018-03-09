@@ -520,7 +520,7 @@ kax_reader_c::verify_truehd_audio_track(kax_track_t *t) {
   try {
     read_first_frames(t, 5);
 
-    truehd_parser_c parser;
+    mtx::truehd::parser_c parser;
     for (auto &frame : t->first_frames_data)
       parser.add_data(frame->get_buffer(), frame->get_size());
 
@@ -1871,7 +1871,7 @@ void
 kax_reader_c::create_truehd_audio_packetizer(kax_track_t *t,
                                              track_info_c &nti) {
   nti.m_private_data.reset();
-  set_track_packetizer(t, new truehd_packetizer_c(this, nti, t->codec.is(codec_c::type_e::A_TRUEHD) ? truehd_frame_t::truehd : truehd_frame_t::mlp, t->a_sfreq, t->a_channels));
+  set_track_packetizer(t, new truehd_packetizer_c(this, nti, t->codec.is(codec_c::type_e::A_TRUEHD) ? mtx::truehd::frame_t::truehd : mtx::truehd::frame_t::mlp, t->a_sfreq, t->a_channels));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 

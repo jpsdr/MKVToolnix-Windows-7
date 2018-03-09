@@ -328,7 +328,7 @@ public:
   mtx::bytes::buffer_cptr m_probe_data;
   mtx::avc::es_parser_cptr m_avc_parser;
   mtx::hevc::es_parser_cptr m_hevc_parser;
-  truehd_parser_cptr m_truehd_parser;
+  mtx::truehd::parser_cptr m_truehd_parser;
   std::shared_ptr<M2VParser> m_m2v_parser;
   mtx::vc1::es_parser_cptr m_vc1_parser;
 
