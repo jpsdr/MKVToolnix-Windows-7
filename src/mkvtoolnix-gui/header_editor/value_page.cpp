@@ -71,8 +71,10 @@ ValuePage::init() {
 
   if (m_present) {
     auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, m_callbacks.GlobalId);
-    if (semantic && semantic->Mandatory)
-      m_cbAddOrRemove->setEnabled(false);
+    if (semantic && semantic->Mandatory) {
+      std::unique_ptr<EbmlElement> elt(&semantic->Create());
+      m_cbAddOrRemove->setEnabled(elt->DefaultISset());
+    }
   }
 
   sizePolicy.setHeightForWidth(m_lStatus->sizePolicy().hasHeightForWidth());

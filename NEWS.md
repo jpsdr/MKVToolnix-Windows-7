@@ -15,6 +15,9 @@
 * MPEG TS reader: fixed wrong handling of the continuity counter for TS
   packets that signal that TS payload is present but where the adaptation
   field spans the whole TS packet.
+* mkvpropedit, MKVToolNix GUI header editor: mandatory elements can now be
+  deleted if there's a default value for them in the specifications. Fixes
+  #2241.
 
 ## Build system changes
 
