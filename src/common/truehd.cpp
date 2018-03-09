@@ -20,6 +20,29 @@
 #include "common/memory.h"
 #include "common/truehd.h"
 
+// TrueHD header fields
+// ====================
+
+// pos | value      | meaning
+// ----+------------+------------------------------------------------------------------------------
+//   0 | …          | size & other stuff
+//  32 | f8726fba   | TrueHD sync word
+//  64 | 0          | sample rate idx
+//  68 | 0          | ?
+//  72 | 5          | 2:ch_modifier_thd0 2:ch_modifier_thd1
+//  76 | 7a00f      | 5:channel_arrangement 2:ch_modifier_thd2 13:channel_arrangement
+//  96 | b752       | major_sync_info_signature
+// 112 | 0000       | flags
+// 128 | 0000       | ?
+// 144 | 83b6       | 1:is_vbr 15:coded_peak_bitrate
+// 160 | 2          | num_substreams
+// 164 | 0          | ?
+// 168 | 3c         | substream_info
+// 176 | 0000       | 5:fs 5:wordlength 6:channel_occupancy
+// 192 | 3d302306e3 | 2:? 5:dialnorm_2.0 6:? 5:dialnorm_5.1 11:? 5:dialnorm_7.1 6:?
+// 232 | 00         | 3:? 5:summary_info
+// 240 | f6b3       | header_checksum
+
 int const truehd_frame_t::ms_sampling_rates[16]   = { 48000, 96000, 192000, 0, 0, 0, 0, 0, 44100, 88200, 176400, 0, 0, 0, 0, 0 };
 uint8_t const truehd_frame_t::ms_mlp_channels[32] = {     1,     2,      3, 4, 3, 4, 5, 3,     4,     5,      4, 5, 6, 4, 5, 4,
                                                           5,     6,      5, 5, 6, 0, 0, 0,     0,     0,      0, 0, 0, 0, 0, 0 };
