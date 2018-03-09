@@ -14,6 +14,9 @@
 #include "common/common_pch.h"
 
 #include "common/bit_reader.h"
+#include "common/bit_writer.h"
+#include "common/bswap.h"
+#include "common/checksums/base_fwd.h"
 #include "common/debugging.h"
 #include "common/endian.h"
 #include "common/list_utils.h"
@@ -120,21 +123,24 @@ frame_t::parse_truehd_header(unsigned char const *data,
     auto chanmap_substream_1 = r.skip_get_bits(4, 5);
     auto chanmap_substream_2 = r.skip_get_bits(2, 13);
     m_channels               = decode_channel_map(chanmap_substream_2 ? chanmap_substream_2 : chanmap_substream_1);
+    m_header_size            = 32;
 
     // The rest is only for Atmos detection.
     auto is_vbr          = r.skip_get_bits(6 * 8, 1);
     auto maximum_bitrate = r.get_bits(15);
     auto num_substreams  = r.get_bits(4);
     auto has_extensions  = r.skip_get_bits(4 + 8 * 8 + 7, 1);
-    auto num_extensions  = (r.get_bits(4) * 2) + 1;
+    auto num_extensions  = r.get_bits(4);
     auto has_content     = !!r.get_bits(4);
 
     mxdebug_if(s_debug,
                boost::format("is_vbr %1% maximum_bitrate %2% num_substreams %3% has_extensions %4% num_extensions %5% has_content %6%\n")
-               % is_vbr % maximum_bitrate % num_substreams % has_extensions % num_substreams % has_content);
+               % is_vbr % maximum_bitrate % num_substreams % has_extensions % num_extensions % has_content);
 
     if (!has_extensions)
       return true;
+
+    m_header_size += 2 + num_extensions * 2;
 
     for (auto idx = 0u; idx < num_extensions; ++idx)
       if (r.get_bits(8))
@@ -281,5 +287,52 @@ parser_c::resync(unsigned int offset) {
 
   return 0;
 }
+
+// ----------------------------------------------------------------------
+
+void
+remove_dialog_normalization_gain(unsigned char *buf,
+                                 std::size_t size) {
+  if (size < 32)
+    return;
+
+  static debugging_option_c s_debug{"truehd_remove_dialog_normalization_gain|remove_dialog_normalization_gain"};
+
+  frame_t frame;
+  if (!frame.parse_header(buf, size) || !frame.is_truehd() || !frame.is_sync())
+    return;
+
+  unsigned int const removed_level = 31;
+
+  mtx::bits::reader_c r{buf, size};
+  r.set_bit_position(194);
+  auto current_level_2_0 = r.get_bits(5);
+  auto current_level_5_1 = r.skip_get_bits(6, 5);
+  auto current_level_7_1 = r.skip_get_bits(11, 5);
+
+  if ((current_level_2_0 == removed_level) && (current_level_5_1 == removed_level) && (current_level_7_1 == removed_level)) {
+    mxdebug_if(s_debug, boost::format("no need to remove the dialog normalization, it's already set to %1% for 2.0, 5.1 & 7.1\n") % removed_level);
+    return;
+  }
+
+  mtx::bits::writer_c w{buf, size};
+  w.set_bit_position(194);
+  w.put_bits(5, removed_level); // 2.0
+  w.skip_bits(6);
+  w.put_bits(5, removed_level); // 5.1
+  w.skip_bits(11);
+  w.put_bits(5, removed_level); // 7.1
+
+  mxdebug_if(s_debug, boost::format("changing dialog normalization from %1% (2.0), %2% (5.1) & %3% (7.1) to %4%\n") % current_level_2_0 % current_level_5_1 % current_level_7_1 % removed_level);
+
+  auto new_checksum = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_002d, buf + 4, frame.m_header_size - 4 - 2 - 2));
+  new_checksum     ^= get_uint16_be(&buf[frame.m_header_size - 2 - 2]);
+
+  // auto current = get_uint16_be(&buf[frame.m_header_size - 2]);
+  // mxinfo(boost::format("header size %4% new checksum 0x%|1$04x| current checksum 0x%|2$04x| %3%\n") % new_checksum % current % (new_checksum == current ? "✓" : "✗") % frame.m_header_size);
+
+  put_uint16_be(&buf[frame.m_header_size - 2], new_checksum);
+}
+
 
 }}

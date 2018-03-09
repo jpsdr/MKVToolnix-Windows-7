@@ -21,7 +21,7 @@
 
 class truehd_packetizer_c: public generic_packetizer_c {
 protected:
-  bool m_first_frame;
+  bool m_first_frame, m_remove_dialog_normalization_gain;
   mtx::truehd::frame_t m_first_truehd_header;
 
   int64_t m_current_samples_per_frame, m_ref_timestamp;

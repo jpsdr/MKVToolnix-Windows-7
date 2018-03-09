@@ -443,7 +443,7 @@ bool
 Track::canRemoveDialogNormalizationGain()
   const {
   return isAudio()
-      && m_codec.contains(QRegularExpression{Q("ac-?3|dts"), QRegularExpression::CaseInsensitiveOption});
+      && m_codec.contains(QRegularExpression{Q("ac-?3|dts|truehd"), QRegularExpression::CaseInsensitiveOption});
 }
 
 bool

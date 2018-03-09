@@ -35,6 +35,9 @@ for_algorithm(algorithm_e algorithm,
   else if (algorithm_e::crc16_ccitt == algorithm)
     return std::make_unique<crc16_ccitt_c>(initial_value);
 
+  else if (algorithm_e::crc16_002d == algorithm)
+    return std::make_unique<crc16_002d_c>(initial_value);
+
   else if (algorithm_e::crc32_ieee == algorithm)
     return std::make_unique<crc32_ieee_c>(initial_value);
 

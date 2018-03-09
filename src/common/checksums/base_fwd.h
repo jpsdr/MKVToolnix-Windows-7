@@ -22,6 +22,7 @@ enum class algorithm_e {
   , crc8_atm
   , crc16_ansi
   , crc16_ccitt
+  , crc16_002d
   , crc32_ieee
   , crc32_ieee_le
   , md5

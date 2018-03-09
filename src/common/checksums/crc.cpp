@@ -22,12 +22,13 @@
 
 namespace mtx { namespace checksum {
 
-crc_base_c::table_parameters_t const crc_base_c::ms_table_parameters[5] = {
+crc_base_c::table_parameters_t const crc_base_c::ms_table_parameters[6] = {
   { 0,  8,       0x07 },
   { 0, 16,     0x8005 },
   { 0, 16,     0x1021 },
   { 0, 32, 0x04C11DB7 },
   { 1, 32, 0xEDB88320 },
+  { 0, 16,     0x002d },
 };
 
 crc_base_c::crc_base_c(type_e type,
@@ -169,6 +170,18 @@ crc16_ccitt_c::crc16_ccitt_c(uint32_t initial_value)
 }
 
 crc16_ccitt_c::~crc16_ccitt_c() {
+}
+
+// ----------------------------------------------------------------------
+
+crc_base_c::table_t crc16_002d_c::ms_table;
+
+crc16_002d_c::crc16_002d_c(uint32_t initial_value)
+  : crc_base_c{crc_16_002d, ms_table, initial_value}
+{
+}
+
+crc16_002d_c::~crc16_002d_c() {
 }
 
 // ----------------------------------------------------------------------

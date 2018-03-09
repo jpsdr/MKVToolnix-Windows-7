@@ -519,7 +519,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->removeDialogNormalizationGain,
                    Q("%1 %2")
                    .arg(QY("Removes or at least minimizes the dialog normalization gain by modifying audio headers."))
-                   .arg(QY("This only works with AC-3 & DTS audio tracks.")));
+                   .arg(QY("This only works with AC-3, DTS & TrueHD audio tracks.")));
   Util::setToolTip(ui->subtitleCharacterSet,
                    Q("<p>%1 %2</p><p><ol><li>%3</li><li>%4</li></p>")
                    .arg(QYH("Selects the character set a subtitle file or chapter information was written with."))

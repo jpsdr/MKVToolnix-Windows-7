@@ -27,6 +27,7 @@ protected:
     crc_16_ccitt   = 2,
     crc_32_ieee    = 3,
     crc_32_ieee_le = 4,
+    crc_16_002d    = 5,
   };
 
   using table_t = std::vector<uint32_t>;
@@ -37,7 +38,7 @@ protected:
     uint32_t poly;
   };
 
-  static table_parameters_t const ms_table_parameters[5];
+  static table_parameters_t const ms_table_parameters[6];
 
 protected:
   type_e m_type;
@@ -92,6 +93,15 @@ protected:
 public:
   crc16_ccitt_c(uint32_t initial_value = 0);
   virtual ~crc16_ccitt_c();
+};
+
+class crc16_002d_c: public crc_base_c {
+protected:
+  static table_t ms_table;
+
+public:
+  crc16_002d_c(uint32_t initial_value = 0);
+  virtual ~crc16_002d_c();
 };
 
 class crc32_ieee_c: public crc_base_c {

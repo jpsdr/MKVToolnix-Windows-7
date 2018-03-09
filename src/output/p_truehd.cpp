@@ -30,6 +30,7 @@ truehd_packetizer_c::truehd_packetizer_c(generic_reader_c *p_reader,
                                          int channels)
   : generic_packetizer_c{p_reader, p_ti}
   , m_first_frame{true}
+  , m_remove_dialog_normalization_gain{get_option_for_track(m_ti.m_remove_dialog_normalization_gain, m_ti.m_id)}
   , m_current_samples_per_frame{}
   , m_ref_timestamp{}
   , m_timestamp_calculator{sampling_rate}
@@ -69,6 +70,9 @@ truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
   auto samples   = 0 == frame->m_samples_per_frame ? m_current_samples_per_frame : frame->m_samples_per_frame;
   auto timestamp = m_timestamp_calculator.get_next_timestamp(samples).to_ns();
   auto duration  = m_timestamp_calculator.get_duration(samples).to_ns();
+
+  if (frame->is_sync() && m_remove_dialog_normalization_gain)
+    mtx::truehd::remove_dialog_normalization_gain(frame->m_data->get_buffer(), frame->m_data->get_size());
 
   add_packet(std::make_shared<packet_t>(frame->m_data, timestamp, duration, frame->is_sync() ? -1 : m_ref_timestamp));
 
