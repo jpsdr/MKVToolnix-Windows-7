@@ -42,7 +42,7 @@ require_relative "rake.d/config"
 
 $config               = read_build_config
 $verbose              = ENV['V'].to_bool
-$run_show_start_stop  = !$verbose && ENV['RUN_SHOW_START_STOP'].to_bool
+$run_show_start_stop  = !$verbose && c?('RUN_SHOW_START_STOP')
 $build_system_modules = {}
 $have_gtest           = (c(:GTEST_TYPE) == "system") || (c(:GTEST_TYPE) == "internal")
 $gtest_apps           = []
