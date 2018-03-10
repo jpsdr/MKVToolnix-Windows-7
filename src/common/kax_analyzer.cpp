@@ -25,6 +25,7 @@
 
 #include "common/bitvalue.h"
 #include "common/construct.h"
+#include "common/doc_type_version_handler.h"
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/error.h"
@@ -249,6 +250,12 @@ kax_analyzer_c::set_throw_on_error(bool throw_on_error) {
 kax_analyzer_c &
 kax_analyzer_c::set_parser_start_position(uint64_t position) {
   m_parser_start_position.reset(position);
+  return *this;
+}
+
+kax_analyzer_c &
+kax_analyzer_c::set_doc_type_version_handler(mtx::doc_type_version_handler_c *handler) {
+  m_doc_type_version_handler = handler;
   return *this;
 }
 
@@ -795,6 +802,8 @@ kax_analyzer_c::remove_from_meta_seeks(EbmlId id) {
     // Overwrite the element itself and update its internal record.
     m_file->setFilePointer(m_data[data_idx]->m_pos);
     seek_head->Render(*m_file, true);
+    if (m_doc_type_version_handler)
+      m_doc_type_version_handler->account(*seek_head, true);
 
     m_data[data_idx]->m_size = new_size;
 
@@ -928,6 +937,8 @@ kax_analyzer_c::write_element(EbmlElement *e,
     // We've found our element. Overwrite it.
     m_file->setFilePointer(m_data[data_idx]->m_pos);
     e->Render(*m_file, write_defaults, false, true);
+    if (m_doc_type_version_handler)
+      m_doc_type_version_handler->account(*e, write_defaults);
 
     // Update the internal records.
     m_data[data_idx]->m_id   = EbmlId(*e);
@@ -944,6 +955,8 @@ kax_analyzer_c::write_element(EbmlElement *e,
   // and update the internal records.
   m_file->setFilePointer(0, seek_end);
   e->Render(*m_file, write_defaults, false, true);
+  if (m_doc_type_version_handler)
+    m_doc_type_version_handler->account(*e, write_defaults);
   m_data.push_back(kax_analyzer_data_c::create(EbmlId(*e), m_file->getFilePointer() - e->ElementSize(write_defaults), e->ElementSize(write_defaults)));
 
   // Adjust the segment's size.
@@ -1023,6 +1036,8 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
       // write a new void element.
       m_file->setFilePointer(data.m_pos);
       new_seek_head->Render(*m_file, true);
+      if (m_doc_type_version_handler)
+        m_doc_type_version_handler->account(*new_seek_head, true);
 
       data.m_size = needed_size;
       data.m_id   = EBML_ID(KaxSeekHead);
@@ -1083,6 +1098,8 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
     // Write the seek head.
     m_file->setFilePointer(m_data[data_idx]->m_pos);
     seek_head->Render(*m_file, true);
+    if (m_doc_type_version_handler)
+      m_doc_type_version_handler->account(*seek_head, true);
 
     // Update the internal record.
     m_data[data_idx]->m_size = seek_head->ElementSize(true);
@@ -1126,6 +1143,8 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e
   // …write the seek head at the end of the file…
   m_file->setFilePointer(0, seek_end);
   seek_head->Render(*m_file, true);
+  if (m_doc_type_version_handler)
+    m_doc_type_version_handler->account(*seek_head, true);
 
   // …and update the internal records.
   m_data.push_back(kax_analyzer_data_c::create(EBML_ID(KaxSeekHead), seek_head->GetElementPosition(), seek_head->ElementSize(true)));
@@ -1140,6 +1159,8 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e
 
   m_file->setFilePointer(m_data[first_seek_head_idx]->m_pos);
   forward_seek_head->Render(*m_file, true);
+  if (m_doc_type_version_handler)
+    m_doc_type_version_handler->account(*forward_seek_head, true);
 
   // Update the internal record to reflect that there's a new seek head.
   m_data[first_seek_head_idx]->m_size = forward_seek_head->ElementSize(true);
@@ -1168,6 +1189,8 @@ kax_analyzer_c::create_new_meta_seek_at_start(EbmlElement *e) {
     // We've found a suitable spot. Write the seek head.
     m_file->setFilePointer(m_data[data_idx]->m_pos);
     new_seek_head->Render(*m_file, true);
+    if (m_doc_type_version_handler)
+      m_doc_type_version_handler->account(*new_seek_head, true);
 
     // Adjust the internal records for the new seek head.
     m_data[data_idx]->m_size = new_seek_head->ElementSize(true);

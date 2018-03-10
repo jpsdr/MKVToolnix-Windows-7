@@ -24,7 +24,10 @@
 using namespace libebml;
 using namespace libmatroska;
 
-namespace mtx { namespace bits {
+namespace mtx {
+class doc_type_version_handler_c;
+
+namespace bits {
 class value_c;
 using value_cptr = std::shared_ptr<value_c>;
 }}
@@ -113,6 +116,7 @@ private:
   bool m_throw_on_error{};
   boost::optional<uint64_t> m_parser_start_position;
   bool m_is_webm{};
+  mtx::doc_type_version_handler_c *m_doc_type_version_handler{};
 
 public:                         // Static functions
   static bool probe(std::string file_name);
@@ -145,6 +149,7 @@ public:
   virtual kax_analyzer_c &set_open_mode(open_mode mode);
   virtual kax_analyzer_c &set_throw_on_error(bool throw_on_error);
   virtual kax_analyzer_c &set_parser_start_position(uint64_t position);
+  virtual kax_analyzer_c &set_doc_type_version_handler(mtx::doc_type_version_handler_c *handler);
 
   virtual bool process();
 
