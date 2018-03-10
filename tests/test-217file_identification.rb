@@ -21,7 +21,7 @@ class T_217file_identification < Test
       "data/ac3/misdetected_as_mpeges.ac3",
       "data/aac/v.aac",
       "data/ac3/v.ac3",
-      "data/simple/v.flac",
+      "data/flac/v.flac",
       "data/simple/v.mp3",
       "data/wav/v.wav",
       "data/subtitles/ssa-ass/fe.ssa",

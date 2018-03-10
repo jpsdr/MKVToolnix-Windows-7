@@ -3,7 +3,7 @@
 # T_593flac_with_picture_metadata
 describe "mkvmerge / FLAC with picture blocks treated as attachments"
 
-file = "data/simple/v-pictures.flac"
+file = "data/flac/v-pictures.flac"
 
 test_merge file
 test_merge file, :args => "-m 0"
