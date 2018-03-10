@@ -18,10 +18,8 @@ test "all versions" do
     command = command.join ' '
 
     merge command
-    output = info(tmp, :output => :return).join('')
 
-    type_version      = /Document type version:\s+(\d+)/.match(output)      ? $1 : '<undef>'
-    type_read_version = /Document type read version:\s+(\d+)/.match(output) ? $1 : '<undef>'
+    type_version, type_read_version = get_doc_type_versions(tmp)
 
     hashes << "#{type_version}+#{type_read_version}"
   end

@@ -268,7 +268,7 @@ class SimpleTest
     output  = "> #{output}" unless %r{^[>\|]}.match(output)
     output  = '' if options[:output] == :return
     command = "../src/mkvinfo --engage no_variable_data --ui-language en_US #{args.first} #{output}"
-    self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
+    self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result], :dont_record_command => options[:dont_record_command]
   end
 
   def extract *args
@@ -359,5 +359,13 @@ class SimpleTest
         gsub(%r{[:/+-]+}, "_")
       end.
       join("/")
+  end
+
+  def get_doc_type_versions file_name
+    output            = info(file_name, :output => :return, :dont_record_command => true).join('')
+    type_version      = /Document type version:\s+(\d+)/.match(output)      ? $1 : nil
+    type_read_version = /Document type read version:\s+(\d+)/.match(output) ? $1 : nil
+
+    return type_version, type_read_version
   end
 end
