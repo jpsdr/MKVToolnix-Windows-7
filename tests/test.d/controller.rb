@@ -171,12 +171,12 @@ class Controller
     entries = @dir_entries.collect do |entry|
       if (FileTest.file?(entry) && (entry =~ /^test-(\d+).*\.rb$/))
         class_name  = file_name_to_class_name entry
-        @results.status?(class_name) == :failed ? $1.to_i : nil
+        @results.status?(class_name) == :failed ? $1 : nil
       else
         nil
       end
     end
 
-    puts entries.reject(&:nil?).sort.map(&:to_s).join(" ")
+    puts entries.reject(&:nil?).sort_by(&:to_i).join(" ")
   end
 end
