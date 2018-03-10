@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-09 19:16+0100\n"
+"POT-Creation-Date: 2018-03-10 14:04+0100\n"
 "PO-Revision-Date: 2017-11-07 02:53+0100\n"
 "Last-Translator: René Maassen <bmom43@hotmail.com>\n"
 "Language-Team: \n"
@@ -23,7 +23,7 @@ msgstr ""
 "\n"
 "Het tijdelijke TTA bestand met spoor ID %1% wordt naar het uiteindelijke TTA bestand gekopieerd. Dit kan even duren. \n"
 
-#: src/merge/output_control.cpp:236
+#: src/merge/output_control.cpp:253
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -1090,10 +1090,10 @@ msgid_plural " days"
 msgstr[0] "dag"
 msgstr[1] "dagen"
 
-#: src/merge/output_control.cpp:244
-#: src/merge/output_control.cpp:253
 #: src/merge/output_control.cpp:261
-#: src/merge/output_control.cpp:268
+#: src/merge/output_control.cpp:271
+#: src/merge/output_control.cpp:279
+#: src/merge/output_control.cpp:286
 msgid " done\n"
 msgstr "klaar\n"
 
@@ -1384,7 +1384,7 @@ msgid "&Add attachment"
 msgstr "Bijl&ag toevoegen"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:309
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:325
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
@@ -1461,7 +1461,7 @@ msgid "&Close"
 msgstr "&Sluiten"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:261
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/merge/tool.cpp:217
 #, no-c-format
 msgid "&Close file"
@@ -1472,7 +1472,7 @@ msgid "&Code of Conduct"
 msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:199
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:308
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
 #, no-c-format
 msgid "&Collapse all"
 msgstr "&Alles inklappen"
@@ -1553,7 +1553,7 @@ msgid "&Escape arguments for:"
 msgstr "&Escape argumenten voor:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:307
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:323
 #, no-c-format
 msgid "&Expand all"
 msgstr "&All&es uitklappen"
@@ -1796,12 +1796,12 @@ msgid "&Reload"
 msgstr "&Opnieuw inladen"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #, no-c-format
 msgid "&Reload file"
 msgstr "&Bestand opnieuw inladen"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:310
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:326
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
@@ -1852,7 +1852,7 @@ msgstr "He&rstel deze waarde"
 msgid "&Save"
 msgstr "&Opslaan"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:311
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:327
 #, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "Sla bijlage inhoud op naar een bestand"
@@ -2565,6 +2565,13 @@ msgstr "Een komma gescheiden lijst van tijd code bereiken van te behouden inhoud
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "Een standaardindex met standaardinstellingen voor de breedte, hoogte en kleurenpalet worden in plaats daarvan gebruikt."
 
+#: src/merge/output_control.cpp:232
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/propedit/propedit.cpp:120
+#, no-c-format
+msgid "A generic read or write failure occurred."
+msgstr ""
+
 #: src/common/property_element.cpp:141
 msgid "A human-readable string specifying the codec."
 msgstr "Een menselijk-leesbare reeks specificeert de codec."
@@ -2813,7 +2820,7 @@ msgstr "Toevoegen als nieuwe bijlage a&an huidig bestand"
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "Voeg al&le bestanden toe volgens huidige samenvoeg instellingen"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -3012,7 +3019,7 @@ msgstr "Alle ingangen"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:312
@@ -3048,7 +3055,7 @@ msgstr "Alle volgende bestandsnamen zullen worden geopend in de kopstuk bewerker
 msgid "All following file names will be opened in the info tool."
 msgstr "Alle volgende bestandsnamen zullen worden geopend in de kopstuk bewerker."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
 #, no-c-format
 msgid "All header values are OK."
 msgstr "Alle 'kopstukken' zijn OK."
@@ -3186,7 +3193,7 @@ msgid "An exception occurred when writing the destination file."
 msgstr "Er is een uitzondering opgetreden bij het schrijven van het doelbestand."
 
 #: src/common/qt_kax_analyzer.cpp:111
-#: src/propedit/propedit.cpp:66
+#: src/propedit/propedit.cpp:69
 #, no-c-format
 msgid "An unknown error occured. The file has been modified."
 msgstr "Een onbekende fout. Het bestand is veranderd."
@@ -3200,7 +3207,7 @@ msgstr "Ongetekende integer werd verwacht."
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "Analyseert MPEG4 bit stromen, zet elk beeld in één Matroska blok, gebruik een juiste tijd indeling (I P B B = 0 120 40 80), gebruik V_MPEG4/ISO/... CodecIDs."
 
-#: src/merge/generic_packetizer.cpp:632
+#: src/merge/generic_packetizer.cpp:626
 #, boost-format
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "Een ander standaard spoor voor %1% sporen zijn al ingesteld. De 'standaard' markering voor spoor %2% of '%3%' wordt niet gemaakt.\n"
@@ -3229,7 +3236,7 @@ msgstr "Alle media bestanden bijvoegen"
 msgid "Append to an e&xisting source file"
 msgstr "Bijvo&egen aan een bestaand invoer bestand"
 
-#: src/merge/output_control.cpp:1772
+#: src/merge/output_control.cpp:1751
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "Bijvoegen %1% van bestand nr. %2% ('%3%') naar spoor %4% van bestand nr. %5% ('%6%').\n"
@@ -3580,7 +3587,7 @@ msgstr "Bereken statistieken voor alle spore en voegt nieuwe / actualiseert best
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:239
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:262
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:819
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:835
 #: src/mkvtoolnix-gui/jobs/tool.cpp:526
 #: src/mkvtoolnix-gui/jobs/tool.cpp:595
 #: src/mkvtoolnix-gui/jobs/tool.cpp:620
@@ -3937,7 +3944,7 @@ msgid "Close current settings"
 msgstr "Sluit huidige instellingen"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:259
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #: src/mkvtoolnix-gui/merge/tool.cpp:215
 #, no-c-format
 msgid "Close modified file"
@@ -4034,11 +4041,11 @@ msgstr "Codec-inherente vertraging"
 msgid "Codec/MIME type"
 msgstr "Codec/MIME type"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:505
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:521
 msgid "Colour information"
 msgstr "Kleur informatie"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:510
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:526
 msgid "Colour mastering meta information"
 msgstr "Informatie over beheersen van kleuren"
 
@@ -4077,7 +4084,7 @@ msgstr "Voltooid OK"
 msgid "Completed with warnings"
 msgstr "Voltooid met waarschuwingen"
 
-#: src/merge/generic_packetizer.cpp:1270
+#: src/merge/generic_packetizer.cpp:1260
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Compressie mislukt: %1%\n"
@@ -4166,7 +4173,7 @@ msgstr "Kon geen uittreksel maken van de opeenvolgende beginblok van dit MPEG-1/
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "Kan geen index vinden voor audio spoor %1% (fout code: %2%). Sla spoor over.\n"
 
-#: src/merge/output_control.cpp:1698
+#: src/merge/output_control.cpp:1677
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Kon gptzr niet vinden tijdens bijvoegen. %1%\n"
@@ -4754,7 +4761,7 @@ msgstr "Map ten opzichte van de map van het ee&rste bronbestand::"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
 #, no-c-format
 msgid "Directory:"
 msgstr "Map:"
@@ -4899,7 +4906,7 @@ msgstr "Bericht niet meer tonen"
 msgid "Done scanning playlists.\n"
 msgstr "Klaar met scannen afspeellijsten.\n"
 
-#: src/propedit/propedit.cpp:156
+#: src/propedit/propedit.cpp:176
 msgid "Done.\n"
 msgstr "Gedaan.\n"
 
@@ -4922,7 +4929,7 @@ msgid "Drops the lossless extensions from an audio track and keeps only its loss
 msgstr "Neemt niet de verliesvrije extensie van een audio spoor over maar behoudt alleen degene met verlies."
 
 #: src/common/qt_kax_analyzer.cpp:104
-#: src/propedit/propedit.cpp:59
+#: src/propedit/propedit.cpp:62
 #, no-c-format
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
 msgstr "Door de specifieke structuur van het bestand, kan deze situatie niet automatisch opgelost worden,"
@@ -5050,7 +5057,7 @@ msgstr "Herstel de fout of verwijder de configuratie voordat u het voorkeurenven
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
 msgstr "Aangeven van het woord 'all' welke alle hoofdstukken of een komma gescheiden lijst van hoofdstuknummers waarna er gesplitst moet worden."
 
-#: src/propedit/propedit.cpp:97
+#: src/propedit/propedit.cpp:100
 #, boost-format
 msgid "Element %1% is written.\n"
 msgstr "Element %1% is geschreven.\n"
@@ -5136,8 +5143,8 @@ msgstr "Fout bij het maken van een tijdelijk bestand (reden: %1)."
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, no-c-format
 msgid "Error details: %1."
 msgstr "Fout details: %1."
@@ -5192,7 +5199,7 @@ msgstr "Fout bij ontleden van markeringen '%1%': sommige verplichte elementen on
 msgid "Error reading Matroska file"
 msgstr "Fout bij lezen Matroska bestand"
 
-#: src/merge/output_control.cpp:765
+#: src/merge/output_control.cpp:739
 #, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "Fout bij lezen van bestand: '%1%'.\n"
@@ -5201,7 +5208,8 @@ msgstr "Fout bij lezen van bestand: '%1%'.\n"
 #: src/common/qt_kax_analyzer.cpp:72
 #: src/common/qt_kax_analyzer.cpp:92
 #: src/common/qt_kax_analyzer.cpp:100
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:255
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, no-c-format
 msgid "Error writing Matroska file"
 msgstr "Fout bij schrijven MATROSKA bestand"
@@ -5483,7 +5491,7 @@ msgstr "Bestand naam"
 msgid "File description"
 msgstr "Bestand beschrijving: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "File has not been modified"
 msgstr "Het bestand is niet veranderd."
@@ -5499,7 +5507,7 @@ msgstr "Bestand naam"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:320
 #, no-c-format
 msgid "File name:"
 msgstr "Bestandsnaam:"
@@ -5518,8 +5526,8 @@ msgstr "Bestand niet gevonden"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:553
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:120
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:146
 #, no-c-format
 msgid "File parsing failed"
 msgstr "Bestand ontcijferen niet gelukt"
@@ -5543,7 +5551,7 @@ msgstr "Bestandstypen zoals MPEG-programma en transportstromen (.vob, .m2ts) ver
 msgid "File/Segment linking"
 msgstr "Bestand/Segment gelinkt"
 
-#: src/merge/output_control.cpp:948
+#: src/merge/output_control.cpp:922
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Bestanden kunnen niet aan zichzelf bijgevoegd worden. Het argument voor '--append-to' was ongeldig.\n"
 
@@ -5834,9 +5842,9 @@ msgstr "Beginblok deel compressie verwijderen niet mogelijk omdat de buffer %1% 
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "Verwijderen beginblok compressie niet mogelijk omdat het buffer niet is gestart met de bytes die verwijderd moeten worden. Gezochte bytes:%1%; gevonden:%2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "Header validation"
 msgstr "Beginblok validation"
@@ -7184,7 +7192,7 @@ msgstr "Meer dan één bestandsnaam is opgegeven. ('%1%' and '%2%').\n"
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "Meer dan één naam is opgegeven voor een enkele bijlage. '%1%' wordt overgeslagen '%2%' daarvoor in de plaats gebruikt.\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:995
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "Meer dan één spoor wordt bijgevoegd aan het spoor %1% van bestand nr. %2% ('%3%'). Het argument voor, bijvoegen aan, '--append to' was ongeldig.\n"
@@ -7340,6 +7348,13 @@ msgstr "Nee"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "Geen %1% opgegeven in '--%2% %3%'.\n"
 
+#: src/merge/output_control.cpp:230
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:250
+#: src/propedit/propedit.cpp:118
+#, fuzzy, no-c-format
+msgid "No 'EBML head' element was found."
+msgstr "Geen EBML beginblok gevonden."
+
 #: src/input/r_qtmp4.cpp:1702
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Geen AC-3 beginblok gevonden in het eerste beeld; spoor wordt overgeslagen.\n"
@@ -7361,7 +7376,7 @@ msgstr "Geen MIME type is ingesteld voor de bijlage '%1%', en het kon niet gegis
 msgid "No actions have been added yet."
 msgstr "Er is nog geen acties toegevoegd."
 
-#: src/merge/output_control.cpp:980
+#: src/merge/output_control.cpp:954
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "Geen bijvoeg indeling ingegeven voor bestand nr. %1% ('%2%'). En standaard indeling van %3% wordt daarvoor in de plaats gebruikt. Hou in gedachten, dat als mkvmerge afbreekt met een fout bericht aangaande een ongeldig, bijgevoegd aan, '--append to' optie.\n"
@@ -7372,7 +7387,7 @@ msgstr "Geen bijvoeg indeling ingegeven voor bestand nr. %1% ('%2%'). En standaa
 msgid "No attachment matched the spec '%1%'.\n"
 msgstr "Bijlage specificatie klopte niet '%1%'.\n"
 
-#: src/propedit/propedit.cpp:159
+#: src/propedit/propedit.cpp:179
 msgid "No changes were made.\n"
 msgstr "Er werden geen veranderingen gemaakt\n"
 
@@ -7468,7 +7483,7 @@ msgstr "Nog geen uitvoer"
 msgid "No permission to read from, to write to or to create"
 msgstr "Geen rechten om van te lezen, te schrijven of te maken"
 
-#: src/common/kax_analyzer.cpp:1513
+#: src/common/kax_analyzer.cpp:1536
 #, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "Géén segment UID kon gevonden worden in dit bestand '%1%'."
@@ -7565,11 +7580,11 @@ msgstr "Normaal geselecteerde items in lijstweergave kunnen verplaatst worden me
 msgid "Not a hex digit at position %1%"
 msgstr "Geen hex nummer op positie %1%"
 
-#: src/common/kax_analyzer.cpp:292
+#: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "Geen geldig Matroska bestand (geen EBML beginblok gevonden)"
 
-#: src/common/kax_analyzer.cpp:311
+#: src/common/kax_analyzer.cpp:318
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr " (geen segment/niveau 0 element gevonden)"
 
@@ -7619,7 +7634,7 @@ msgstr "Opmerking dat meeste <MTX...> variabelen leeg zijn en verwijderd zullen 
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Opmerking: Dat in Windows voor en terugwaartse \"/ && \\\" ook kunnen worden gebruikt in locatienamen."
 
-#: src/merge/generic_packetizer.cpp:1629
+#: src/merge/generic_packetizer.cpp:1616
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Opmerking, dat de Matroska specificaties betreffende opslag van '%1%' nog niet is voltooid. mkvmerge's ondersteuning daarvoor is daarom aan verandering onderhevig en maakt gebruik van de CodecID '%2%/EXPERIMENTAL' i.p.v. '%2%'. Deze waarschuwing zal verdwijnen wanneer de specificaties zijn voltooid en mkvmerge dienovereenkomstig is bijgewerkt.\n"
@@ -7692,7 +7707,7 @@ msgstr[0] "Slechts %1% hoofdstuk gevonden in bron en hoofdstuk bestanden."
 msgstr[1] "Slechts %1% hoofdstukken gevonden in bron en hoofdstuk bestanden."
 
 #: src/merge/mkvmerge.cpp:1802
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:697
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7747,7 +7762,7 @@ msgstr "Alleen één segment info bestand is toegestaan in '%1% %2%'.\n"
 msgid "Only one source file is allowed.\n"
 msgstr "Alleen één bron bestand toegestaan.\n"
 
-#: src/merge/output_control.cpp:961
+#: src/merge/output_control.cpp:935
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Alleen een deel van het bijvoeg herplaatsen is gegeven voor bestand nr. %1% ('%2%'). Eén van beide, geef herplaatsen niet op (waarbij de standaard herplaatsing zal worden gebruikt) of specificeer herplaatsen voor alle sporen die worden gekopieerd.\n"
@@ -8113,10 +8128,10 @@ msgstr "Mogelijke oorzaken zijn dat het programma niet bestaat of dat je geen to
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:716
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:140
-#: src/propedit/propedit.cpp:47
-#: src/propedit/propedit.cpp:53
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:141
+#: src/propedit/propedit.cpp:50
+#: src/propedit/propedit.cpp:56
 #, no-c-format
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr "Mogelijke reden zijn: Het bestand is géén Matroska bestand, het bestand is schrijf beveiligd, het wordt vastgehouden door een ander proces, of je heb geen toegangsrechten voor het bestand"
@@ -8194,7 +8209,7 @@ msgstr "Voortgang:"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2939
-#: src/merge/output_control.cpp:340
+#: src/merge/output_control.cpp:358
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -8202,12 +8217,12 @@ msgstr "Voortgang:"
 msgid "Progress: %1%%%%2%"
 msgstr "Voortgang: %1%%%%2%"
 
-#: src/merge/output_control.cpp:315
+#: src/merge/output_control.cpp:333
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "Voortgang: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1579
+#: src/common/kax_analyzer.cpp:1602
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Voortgang: [%1%%2%] %3%%%"
@@ -8401,7 +8416,7 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "Ver&nummeren sub-hoofdstukken"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:312
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
 #, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "Vervang bijlage met een nieuw bestand"
@@ -8415,8 +8430,8 @@ msgstr "Lees het volledige NEWS.md bestand online"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Lezen van versleutelde VOB's niet ondersteunt.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:710
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
@@ -8490,7 +8505,7 @@ msgid "Reference virtual"
 msgstr "Virtuele referentie: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #, no-c-format
 msgid "Reload modified file"
 msgstr "Herladen gewijzigd bestand"
@@ -8581,7 +8596,7 @@ msgstr "Vervang bijlage met het bestand 'bestandsnaam'"
 msgid "Replace attachment"
 msgstr "Vervang bijlagen"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:313
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:329
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "Vervang bijlage met het bestan&d en ontleen naam && MIME type ervan"
@@ -8633,7 +8648,7 @@ msgstr "Rechts klikken voor acties voor alle items."
 msgid "Right-click for actions for editions and chapters"
 msgstr "Rechts klikken voor acties voor alle seditties en hoofdstukken."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:332
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:348
 #, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "Rechts klikken voor acties voor alle beginblok elementen en bijlagen"
@@ -8773,17 +8788,17 @@ msgstr "Bewaren mislukt"
 msgid "Saving the chapters failed."
 msgstr "Opslaan hoofdstukken mislukt."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:242
 #, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "Opslaan van de gewijzigde bijlage mislukt."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:217
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "Opslaan van de gewijzigde informatie segmentkop mislukt."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:225
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "Opslaan van de gewijzigde informatie segmentkop mislukt."
@@ -8879,7 +8894,7 @@ msgid "Segment info:"
 msgstr "Segment info:"
 
 #: src/common/kax_element_names.cpp:83
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:465
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:481
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
@@ -9284,7 +9299,7 @@ msgstr "Schuiven"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Sommige h.264 / AVC-sporen bevatten I-delen maar missen echte sleutelframes."
 
-#: src/merge/output_control.cpp:1317
+#: src/merge/output_control.cpp:1291
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "Sommige markeer elementen ontbreken (deze fout had niet mogen gebeuren - een soortgelijke fout had eerder moeten gebeuren). %1%\n"
@@ -9707,12 +9722,12 @@ msgstr "De Matroska inhoudsformaat kan het scherm breedte / hoogte voor een vide
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
 msgstr "Het Matroska bestand is veranderd, maar de meta zoek data kon niet opgewaardeerd worden. Dit betekend, dat af spelers moeite kunnen hebben dit element te vinden. Gebruik je favoriete af speler en controleer dit bestand."
 
-#: src/propedit/propedit.cpp:41
+#: src/propedit/propedit.cpp:44
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr "Het Matroska bestand is veranderd, maar de meta zoek data kon niet opgewaardeerd worden. Dit betekend, dat af spelers moeite kunnen hebben dit element te vinden. Gebruik je favoriete af speler en controleer dit bestand."
 
 #: src/common/qt_kax_analyzer.cpp:103
-#: src/propedit/propedit.cpp:58
+#: src/propedit/propedit.cpp:61
 #, no-c-format
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr "Het Matroska bestand laatste segment is ingesteld op een onbekende grootte."
@@ -9865,7 +9880,7 @@ msgstr "Het af te spelen audiobestand is nog niet ingesteld."
 msgid "The audio/video synchronization may have been lost."
 msgstr "De audio/video synchronisatie kan verloren zijn gegaan."
 
-#: src/propedit/propedit.cpp:152
+#: src/propedit/propedit.cpp:171
 msgid "The changes are written to the file.\n"
 msgstr "De veranderingen worden geschreven naar het bestand.\n"
 
@@ -9946,7 +9961,7 @@ msgstr "Het correctie bestandskop is niet correct gelezen.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "De landen die hier wordt gekozen, zal bovenaan worden getoond in de landen uitklaplijst van het programma."
 
-#: src/merge/output_control.cpp:1507
+#: src/merge/output_control.cpp:1483
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Volg document(en) (cue) ingangen (de index) worden geschreven...\n"
 
@@ -9968,12 +9983,12 @@ msgstr "De huidige mode kan worden veranderd met --multiplex, --edit-chapters or
 msgid "The current multiplex settings will be closed."
 msgstr "De huidige samenvoeg instellingen worden gesloten."
 
-#: src/merge/generic_packetizer.cpp:1347
+#: src/merge/generic_packetizer.cpp:1334
 #, boost-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Het huidige pakket tijd code is kleiner dan het voorafgaande pakket. Normaal gesproken betekent dit, dat het een Matroska bestand is welke niet 100%% juist is aangemaakt. De tijd codes worden bijgesteld met %1%ms om niets (wat dat dan ook) te verliezen. Dat kan de audio/video synchronisatie uitzetten, maar kunnen gecorrigeerd worden met mkvmerge's \"--sync\" optie. Gebruik je dit \"--sync\" reeds en je blijft deze melding houden geen probleem -- dit is normaal. Komt deze fout vaker voor en je krijgt dit bericht meer dan eens voor een specifiek spoor, dan is of de bron slecht beheerd of mkvmerge bevat een fout (bug). In dat geval dien je contact op te nemen met de auteur Moritz Bunkus <moritz@bunkus.org>.\n"
 
-#: src/common/kax_analyzer.cpp:175
+#: src/common/kax_analyzer.cpp:176
 msgid "The data in the file is corrupted and cannot be modified safely"
 msgstr "De gegevens in het bestand zijn beschadigd en kunnen niet veilig worden gewijzigd"
 
@@ -10058,7 +10073,7 @@ msgid "The edition UID must be a number if given."
 msgstr "De editie UID moet gezet worden met een cijfer indien gegeven."
 
 #: src/common/qt_kax_analyzer.cpp:67
-#: src/propedit/propedit.cpp:33
+#: src/propedit/propedit.cpp:36
 #, no-c-format
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "Het element is geschreven aan het einde van het bestand, maar de segment waarde kon niet opgewaardeerd worden. Daarom is dit element niet zichtbaar. Het proces wordt afgebroken. Het bestand is veranderd!"
@@ -10083,14 +10098,14 @@ msgid "The fifth mode tries to extract chapter information and tags and outputs 
 msgstr "De vijfde mode probeert het hoofdstuk informatie te achterhalen, markeert en voert ze uit als in een volg document(en) (cue). Dit is het omgekeerde dan het gebruik maken van een volg document(en) (cue) via mkvmerge's '--chapters' optie."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:260
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:810
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:826
 #: src/mkvtoolnix-gui/merge/tool.cpp:216
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
 msgstr "Het bestand \"%1\" is veranderd. Wil je het echt sluiten? Alle veranderingen gaan verloren."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:811
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:827
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "Het bestand \"%1\" is veranderd. Wil je het echt opnieuw inladen? Alle veranderingen gaan verloren."
@@ -10100,13 +10115,13 @@ msgstr "Het bestand \"%1\" is veranderd. Wil je het echt opnieuw inladen? Alle v
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "Het bestand '%1%' kan niet vastgemaakt worden het bestaat niet of kan niet gelezen worden.\n"
 
-#: src/propedit/propedit.cpp:134
+#: src/propedit/propedit.cpp:153
 #, boost-format
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "Het bestand '%1%' kon niet geopend worden voor het lezen en schrijven, of een lees/schrijf actie faalde: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1503
-#: src/common/kax_analyzer.cpp:1506
+#: src/common/kax_analyzer.cpp:1526
+#: src/common/kax_analyzer.cpp:1529
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "Het bestand '%1%' kon voor lezen niet geopend worden: (%2%)."
@@ -10135,17 +10150,17 @@ msgstr "Het bestand '%1%' kon voor schrijven niet geopend worden: (%2%).\n"
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:134
-#: src/merge/output_control.cpp:1341
+#: src/merge/output_control.cpp:1317
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Het bestand '%1%' kon voor schrijven niet geopend worden: (%2%).\n"
 
-#: src/common/kax_analyzer.cpp:1509
+#: src/common/kax_analyzer.cpp:1532
 #, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "Het bestand '%1%' kon niet geopend of ontleed worden."
 
-#: src/merge/output_control.cpp:1345
+#: src/merge/output_control.cpp:1321
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "Het bestand '%1%' is voor schrijven aangemaakt.\n"
@@ -10190,14 +10205,14 @@ msgstr "Het bestand '%1%' is geen opdrachtwachtrijbestand noch een instellingenb
 msgid "The file '%1' you've added is a playlist."
 msgstr "Het bestand '%1' dat je hebt toegevoegd is een afspeellijst."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:696
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:712
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, no-c-format
 msgid "The file (%1) is too big (%2)."
 msgstr "Het bestand (%1) is te groot (%2)."
 
 #: src/common/qt_kax_analyzer.cpp:105
-#: src/propedit/propedit.cpp:60
+#: src/propedit/propedit.cpp:63
 #, no-c-format
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "Het bestand kan gerepareerd worden door het bestand opnieuw samen te voegen met mkvmerge."
@@ -10212,13 +10227,13 @@ msgid "The file could not be opened for reading, or there was not enough data to
 msgstr "Het bestand kon voor schrijven en lezen niet geopend worden, of er was onvoldoende data om de beginblokken te ontleden."
 
 #: src/common/qt_kax_analyzer.cpp:87
-#: src/propedit/propedit.cpp:46
+#: src/propedit/propedit.cpp:49
 #, no-c-format
 msgid "The file could not be opened for reading."
 msgstr "Het bestand kon voor lezen niet geopend worden."
 
 #: src/common/qt_kax_analyzer.cpp:95
-#: src/propedit/propedit.cpp:52
+#: src/propedit/propedit.cpp:55
 #, no-c-format
 msgid "The file could not be opened for writing."
 msgstr "Het bestand kon voor schrijven niet geopend worden."
@@ -10229,14 +10244,14 @@ msgid "The file does not contain track ID %1%.\n"
 msgstr "Het i bestand bevat geen spoor ID %1%.\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:647
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:268
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "Het bestand is succesvol opgeslagen."
 
 #: src/common/qt_kax_analyzer.cpp:107
-#: src/propedit/propedit.cpp:62
-#: src/propedit/propedit.h:17
+#: src/propedit/propedit.cpp:65
+#: src/propedit/propedit.h:19
 #, no-c-format
 msgid "The file has not been modified."
 msgstr "Het bestand is niet veranderd."
@@ -10259,24 +10274,24 @@ msgid "The file is an unsupported container format (%1)."
 msgstr "Het bestand is een niet ondersteund inhoud formaat (%1)."
 
 #: src/common/qt_kax_analyzer.cpp:37
-#: src/propedit/propedit.cpp:122
+#: src/propedit/propedit.cpp:140
 #, no-c-format
 msgid "The file is being analyzed."
 msgstr "Het bestand is geanalyseerd."
 
-#: src/merge/output_control.cpp:240
+#: src/merge/output_control.cpp:257
 msgid "The file is being fixed, part 1/4..."
 msgstr "Het bestand wordt gerepareerd, deel 1/4..."
 
-#: src/merge/output_control.cpp:246
+#: src/merge/output_control.cpp:263
 msgid "The file is being fixed, part 2/4..."
 msgstr "Het bestand wordt gerepareerd, deel 2/4..."
 
-#: src/merge/output_control.cpp:255
+#: src/merge/output_control.cpp:273
 msgid "The file is being fixed, part 3/4..."
 msgstr "Het bestand wordt gerepareerd, deel 3/4..."
 
-#: src/merge/output_control.cpp:263
+#: src/merge/output_control.cpp:281
 msgid "The file is being fixed, part 4/4..."
 msgstr "Het bestand wordt gerepareerd, deel 4/4..."
 
@@ -10288,17 +10303,17 @@ msgstr "Het bestand is gelezen om spoor statistieken aan te maken.\n"
 msgid "The file name for this segment."
 msgstr "De bestandsnaam voor dit segment."
 
-#: src/merge/output_control.cpp:994
+#: src/merge/output_control.cpp:968
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "Het bestand nr. %1% ('%2%') bevat geen spoor met het ID %3%, of dat spoor kan niet gekopieerd worden. Het argument, bijvoegen aan, '--append to' is ongeldig.\n"
 
-#: src/merge/output_control.cpp:1000
+#: src/merge/output_control.cpp:974
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "Het bestand nr. %1% ('%2%') bevat geen spoor met het ID %3%, of dat spoor kan niet gekopieerd worden. Daarom kan er geen spoor aan bijgevoegd worden. Het argument, bijvoegen aan, '--append to' was ongeldig.\n"
 
-#: src/merge/output_control.cpp:940
+#: src/merge/output_control.cpp:914
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "Het bestand nr. %1% ('%2%') wordt niet toegevoegd. Het argument voor, bijvoegen aan, '--append to' was ongeldig.\n"
@@ -10326,8 +10341,8 @@ msgstr "Het bestand wordt verder niet uitgevoerd."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:398
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:715
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
@@ -10338,7 +10353,7 @@ msgstr "het bestand wat je probeerde te openen (%1) kon niet succesvol worden ge
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "Het bestand dat je probeerde te openen (%1) bevat geen hoofdstukken."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:117
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
 #, no-c-format
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "Het bestand wat je probeerde te openen (%1) is geen geldig Matroska/WebM bestand."
@@ -10398,7 +10413,7 @@ msgstr "De tijd codes kunnen worden ingegeven in de vorm HH:MM:SS.nnnnnnnnn of e
 msgid "The formats can be mixed, too."
 msgstr "De formaten kunnen ook gemixt worden."
 
-#: src/merge/output_control.cpp:1051
+#: src/merge/output_control.cpp:1025
 msgid "The formats do not match."
 msgstr "De formaten komen niet overeen."
 
@@ -10415,7 +10430,7 @@ msgstr "De gegenereerde bestandsnaam van het doel heeft dezelfde basisnaam als d
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "De gegeven tijd code schaal factor valt buiten een geldig bereik (1...10.000.000 of-1 voor 'voorbeeld precisie zelfs als een video spoor aanwezig is').\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "Geen van de beginblok velden is veranderd. Er is niets om op te slaan."
@@ -10514,7 +10529,7 @@ msgstr ""
 "niet in gebruik."
 
 #: src/common/qt_kax_analyzer.cpp:73
-#: src/propedit/propedit.cpp:37
+#: src/propedit/propedit.cpp:40
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "Het meta zoek element is geschreven aan het einde van het bestand, maar de segment grootte kon niet opgewaardeerd worden. Daarom is het element niet zichtbaar. Het proces wordt afgebroken. Het bestand is veranderd!"
@@ -10671,7 +10686,7 @@ msgid "The probe range percentage '%1%' is invalid.\n"
 msgstr "Het bereikpercentage van sonde '%1%' is ongeldig.\n"
 
 #: src/common/qt_kax_analyzer.cpp:106
-#: src/propedit/propedit.cpp:61
+#: src/propedit/propedit.cpp:64
 #, no-c-format
 msgid "The process will be aborted."
 msgstr "Het proces wordt afgebroken."
@@ -10721,7 +10736,7 @@ msgstr "De eigendomswaarde is geen geldig getekende geheel in '%1%'. %2%\n"
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "De eigendomswaarde is geen geldig ongetekend geheel in '%1%'. %2%\n"
 
-#: src/merge/output_control.cpp:1053
+#: src/merge/output_control.cpp:1027
 msgid "The reason is unknown."
 msgstr "De reden is onbekend."
 
@@ -10928,7 +10943,7 @@ msgstr "De tijdcodes refereren naar de gehele stroom en niet naar elk individuee
 msgid "The title for the whole movie."
 msgstr "De titel voor de hele film."
 
-#: src/merge/output_control.cpp:1010
+#: src/merge/output_control.cpp:984
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "Het spoor %1% van bestand nr. %2% ('%3%') is meer dan eens bijgevoegd. Het argument voor, bijvoegen-aan, '--append-to' was ongeldig.\n"
@@ -10938,17 +10953,17 @@ msgstr "Het spoor %1% van bestand nr. %2% ('%3%') is meer dan eens bijgevoegd. H
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "Het spoor ID %1% heeft geen geldige CodecID.\n"
 
-#: src/merge/output_control.cpp:690
+#: src/merge/output_control.cpp:664
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "De sporen beginblokken konden niet juist teruggegeven worden. %1%\n"
 
-#: src/merge/output_control.cpp:1042
+#: src/merge/output_control.cpp:1016
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "Spoor nummer %1% van bestand '%2%' kan waarschijnlijk niet worden bijgevoegd aan spoor nummer %3% van het bestand '%4%': %5% Wees er a.u.b. zeker van, dat het resulterende bestand de gehele tijd correct wordt afgespeeld. De auteur van dit programma zal waarschijnlijk geen ondersteuning voor afspeel kwesties met het resulterende bestand geven.\n"
 
-#: src/merge/output_control.cpp:1054
+#: src/merge/output_control.cpp:1028
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "Het spoornummer %1% van bestand '%2%' kan niet bijgevoegd worden aan dit spoor nummer %3% van bestand '%4%'. %5%\n"
@@ -10957,7 +10972,7 @@ msgstr "Het spoornummer %1% van bestand '%2%' kan niet bijgevoegd worden aan dit
 msgid "The track number as used in the Block Header."
 msgstr "Het spoornummer zoals gebruikt in de Blok beginblok."
 
-#: src/merge/output_control.cpp:1052
+#: src/merge/output_control.cpp:1026
 msgid "The track parameters do not match."
 msgstr "De spoor parameters komen niet overeen."
 
@@ -11034,8 +11049,8 @@ msgstr "Er is online een nieuwere versie beschikbaar."
 msgid "There is currently a job running."
 msgstr "Er is momenteel een taak bezig."
 
-#: src/merge/output_control.cpp:934
-#: src/merge/output_control.cpp:944
+#: src/merge/output_control.cpp:908
+#: src/merge/output_control.cpp:918
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "Er is geen bestand met ID '%1%'. Het argument voor, bijvoegen-aan, '--append-to' was ongeldig.\n"
@@ -11050,11 +11065,18 @@ msgstr "Geen vertaling beschikbaar voor '%1%'.\n"
 msgid "There was an error querying the update status."
 msgstr "Er was een fout bij opvragen van de opwaardeer status."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "Er waren fouten in de beginblok waarden waardoor deze niet bewaard konden worden. De eerste fout is geselecteerd."
+
+#: src/merge/output_control.cpp:231
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:251
+#: src/propedit/propedit.cpp:119
+#, no-c-format
+msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
@@ -11162,7 +11184,7 @@ msgid "This file contains coordinates in the timestamp lines. Such coordinates a
 msgstr "Dit bestand bevat coördinaten in de tijd code regels. Zulke coördinaten worden niet ondersteund door het Matroska SRT ondertitel formaat. De coördinaten worden automatisch verwijderd.\n"
 
 #: src/extract/mkvextract.cpp:67
-#: src/propedit/propedit.cpp:139
+#: src/propedit/propedit.cpp:158
 msgid "This file could not be opened or parsed.\n"
 msgstr "Dit bestand kon niet geopend of ontleed worden.\n"
 
@@ -11327,12 +11349,12 @@ msgstr "Dit eigendom is verplicht en kan niet worden verwijderd in '%1%'. %2%\n"
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "Dit eigendom is uniek. Meer zaken kunnen niet toegevoegd worden in '%1%'. %2%\n"
 
-#: src/merge/output_control.cpp:259
+#: src/merge/output_control.cpp:277
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "Dit zou ECHT niet mogen gebeuren. De gereserveerde ruimte voor het eerste meta zoek element is te klein. %1%\n"
 
-#: src/merge/output_control.cpp:1618
+#: src/merge/output_control.cpp:1594
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Dit zou ECHT niet mogen gebeuren. De gereserveerde ruimte voor het eerste meta zoek element is te klein. Heb nodig: %1%. %2%\n"
@@ -11789,10 +11811,17 @@ msgstr "Niet ondersteunt type voor dit spoor.\n"
 msgid "Update an attachment's properties"
 msgstr "Opwaarderen van bijlagen eigenschappen"
 
-#: src/propedit/propedit.cpp:28
+#: src/propedit/propedit.cpp:31
 #, boost-format
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "Opwaarderen het '%1%' element mislukt. Reden:"
+
+#: src/merge/output_control.cpp:234
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:253
+#: src/propedit/propedit.cpp:122
+#, no-c-format
+msgid "Updating the 'document type version' or 'document type read version' header fields failed."
+msgstr ""
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:41
 msgid "Usage"
@@ -12000,7 +12029,7 @@ msgstr "Video pixel breedte"
 msgid "Video projection"
 msgstr "Video projectie"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:515
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:531
 msgid "Video projection information"
 msgstr "Video projectie informatie"
 
@@ -12602,7 +12631,7 @@ msgstr "Kolom volgorde (rechts eerst)"
 msgid "compression"
 msgstr "compressie"
 
-#: src/merge/generic_packetizer.cpp:1648
+#: src/merge/generic_packetizer.cpp:1635
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num niet gevonden. %1%\n"
@@ -12651,7 +12680,7 @@ msgstr "versleuteling"
 msgid "equirectangular"
 msgstr "kwadratische platkaart"
 
-#: src/merge/output_control.cpp:413
+#: src/merge/output_control.cpp:431
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "filelist_t niet gevonden voor generic_packetizer_c. %1%\n"
@@ -13013,8 +13042,8 @@ msgstr "mkvmerge verwijdert normaal die laatste invoer als het tijdcode is binne
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "mkvmerge ondersteunt twee hoofdstuk formaten: Het OGM gelijkende tekst format en het volledige XML format."
 
-#: src/merge/output_control.cpp:234
-#: src/merge/output_control.cpp:276
+#: src/merge/output_control.cpp:251
+#: src/merge/output_control.cpp:294
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge werd onderbroken door SIGINT (Ctrl+C?)\n"
 

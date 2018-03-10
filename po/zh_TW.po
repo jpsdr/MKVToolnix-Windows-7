@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-09 19:16+0100\n"
+"POT-Creation-Date: 2018-03-10 14:04+0100\n"
 "PO-Revision-Date: 2017-10-04 19:50+0200\n"
 "Last-Translator: HULEN\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "第 %1% 軌的暫存 TTA 檔正被複製到最終 TTA 檔中。這可能需要些時間。\n"
 
-#: src/merge/output_control.cpp:236
+#: src/merge/output_control.cpp:253
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -1081,10 +1081,10 @@ msgid " day"
 msgid_plural " days"
 msgstr[0] " 天"
 
-#: src/merge/output_control.cpp:244
-#: src/merge/output_control.cpp:253
 #: src/merge/output_control.cpp:261
-#: src/merge/output_control.cpp:268
+#: src/merge/output_control.cpp:271
+#: src/merge/output_control.cpp:279
+#: src/merge/output_control.cpp:286
 msgid " done\n"
 msgstr " 完成\n"
 
@@ -1366,7 +1366,7 @@ msgid "&Add attachment"
 msgstr "加入附件(&A)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:309
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:325
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
@@ -1445,7 +1445,7 @@ msgid "&Close"
 msgstr "關閉(&C)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:261
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/merge/tool.cpp:217
 #, no-c-format
 msgid "&Close file"
@@ -1456,7 +1456,7 @@ msgid "&Code of Conduct"
 msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:199
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:308
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
 #, no-c-format
 msgid "&Collapse all"
 msgstr "收起全部項目(&C)"
@@ -1537,7 +1537,7 @@ msgid "&Escape arguments for:"
 msgstr "轉義參數(&E):"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:307
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:323
 #, no-c-format
 msgid "&Expand all"
 msgstr "展開全部項目(&E)"
@@ -1783,12 +1783,12 @@ msgid "&Reload"
 msgstr "重新載入(&R)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #, no-c-format
 msgid "&Reload file"
 msgstr "重新載入檔案(&R)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:310
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:326
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
@@ -1836,7 +1836,7 @@ msgstr "重設該值(&R)"
 msgid "&Save"
 msgstr "儲存(&S)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:311
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:327
 #, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "將附件內容儲存到檔案(&S)"
@@ -2551,6 +2551,13 @@ msgstr "用逗號區隔開要保留內容時間碼範圍的清單。"
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
 
+#: src/merge/output_control.cpp:232
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/propedit/propedit.cpp:120
+#, no-c-format
+msgid "A generic read or write failure occurred."
+msgstr ""
+
 #: src/common/property_element.cpp:141
 msgid "A human-readable string specifying the codec."
 msgstr "一個人類可讀的字串，描述編解碼器。"
@@ -2796,7 +2803,7 @@ msgstr "作為新附件加入到目前檔案(&A)"
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "加入所有檔案到目前合併設定"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -2997,7 +3004,7 @@ msgstr "所有項目"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:312
@@ -3034,7 +3041,7 @@ msgstr "其後所有檔名將在表頭編輯器中開啟。"
 msgid "All following file names will be opened in the info tool."
 msgstr "其後所有檔名將在表頭編輯器中開啟。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
 #, no-c-format
 msgid "All header values are OK."
 msgstr "所有表頭值正常。"
@@ -3171,7 +3178,7 @@ msgid "An exception occurred when writing the destination file."
 msgstr "寫入輸出檔案時發生異常狀況。"
 
 #: src/common/qt_kax_analyzer.cpp:111
-#: src/propedit/propedit.cpp:66
+#: src/propedit/propedit.cpp:69
 #, no-c-format
 msgid "An unknown error occured. The file has been modified."
 msgstr "發生未知錯誤。檔案已修改。"
@@ -3185,7 +3192,7 @@ msgstr "期待不帶正負號的整數。"
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "分析 MPEG4 位流，將每一畫格置於單獨的 Matroska 塊中，使用固有的時間戳記 (I P B B = 0 120 40 80)，使用形如 V_MPEG4/ISO/... 的 CodecID。"
 
-#: src/merge/generic_packetizer.cpp:632
+#: src/merge/generic_packetizer.cpp:626
 #, boost-format
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "軌道 %1% 的另一個預設軌已設定。「%3%」的 %2% 軌道的「預設軌」標記將不被設定。\n"
@@ -3216,7 +3223,7 @@ msgstr "追加媒體檔案"
 msgid "Append to an e&xisting source file"
 msgstr "追加到現有輸入檔案(&X)"
 
-#: src/merge/output_control.cpp:1772
+#: src/merge/output_control.cpp:1751
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "正在添加合併軌道 %1%（自檔案 %2% (「%3%」)）至軌道 %4%（自檔案 %5% (「%6%」)）。\n"
@@ -3570,7 +3577,7 @@ msgstr "計算所有軌道的統計資訊，並為其加入新的/更新現有�
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:239
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:262
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:819
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:835
 #: src/mkvtoolnix-gui/jobs/tool.cpp:526
 #: src/mkvtoolnix-gui/jobs/tool.cpp:595
 #: src/mkvtoolnix-gui/jobs/tool.cpp:620
@@ -3929,7 +3936,7 @@ msgid "Close current settings"
 msgstr "編解碼器設定: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:259
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #: src/mkvtoolnix-gui/merge/tool.cpp:215
 #, no-c-format
 msgid "Close modified file"
@@ -4026,12 +4033,12 @@ msgstr "編碼格式固有延遲"
 msgid "Codec/MIME type"
 msgstr "編解碼器/MIME 類型"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:505
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:521
 #, fuzzy
 msgid "Colour information"
 msgstr "視訊顏色資訊"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:510
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:526
 #, fuzzy
 msgid "Colour mastering meta information"
 msgstr "儲存資訊發生錯誤"
@@ -4071,7 +4078,7 @@ msgstr "完成，正常"
 msgid "Completed with warnings"
 msgstr "完成，有警告"
 
-#: src/merge/generic_packetizer.cpp:1270
+#: src/merge/generic_packetizer.cpp:1260
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "壓縮失敗: %1%\n"
@@ -4163,7 +4170,7 @@ msgstr "無法從該 MPEG-1/2 軌道提取序列表頭。\n"
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "找不到音軌 %1% 的索引 (avilib 錯誤訊息: %2%)。正在跳過此軌。\n"
 
-#: src/merge/output_control.cpp:1698
+#: src/merge/output_control.cpp:1677
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "添加時找不到 gptzr。 %1%\n"
@@ -4769,7 +4776,7 @@ msgstr "第一個輸入檔案所在目錄的相對目錄(&R)："
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
 #, no-c-format
 msgid "Directory:"
 msgstr "目錄:"
@@ -4915,7 +4922,7 @@ msgstr "不再顯示此訊息。"
 msgid "Done scanning playlists.\n"
 msgstr "掃描播放清單完成。\n"
 
-#: src/propedit/propedit.cpp:156
+#: src/propedit/propedit.cpp:176
 msgid "Done.\n"
 msgstr "完成。\n"
 
@@ -4938,7 +4945,7 @@ msgid "Drops the lossless extensions from an audio track and keeps only its loss
 msgstr "放棄音軌的無損擴充且保留本身的有損核心。"
 
 #: src/common/qt_kax_analyzer.cpp:104
-#: src/propedit/propedit.cpp:59
+#: src/propedit/propedit.cpp:62
 #, no-c-format
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
 msgstr "由於檔案結構特別，該狀況無法自動修復。"
@@ -5067,7 +5074,7 @@ msgstr ""
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
 msgstr "用逗號區隔開要在「所有」選擇章節之後分割的章節編號清單"
 
-#: src/propedit/propedit.cpp:97
+#: src/propedit/propedit.cpp:100
 #, boost-format
 msgid "Element %1% is written.\n"
 msgstr "元件 %1% 已寫入。\n"
@@ -5154,8 +5161,8 @@ msgstr "建立暫存檔時發生錯誤 (原因: %1)。"
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, fuzzy, no-c-format
 msgid "Error details: %1."
 msgstr "異常狀況詳細資訊:"
@@ -5210,7 +5217,7 @@ msgstr "解析「%1%」中的標籤發生錯誤: 缺少一些必須的元件。\
 msgid "Error reading Matroska file"
 msgstr "讀取 Matroska 檔案時發生錯誤"
 
-#: src/merge/output_control.cpp:765
+#: src/merge/output_control.cpp:739
 #, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "讀取檔案 '%1%' 發生錯誤。\n"
@@ -5219,7 +5226,8 @@ msgstr "讀取檔案 '%1%' 發生錯誤。\n"
 #: src/common/qt_kax_analyzer.cpp:72
 #: src/common/qt_kax_analyzer.cpp:92
 #: src/common/qt_kax_analyzer.cpp:100
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:255
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, no-c-format
 msgid "Error writing Matroska file"
 msgstr "寫入 Matroska 檔時發生錯誤"
@@ -5505,7 +5513,7 @@ msgstr "檔名"
 msgid "File description"
 msgstr "檔案描述: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "File has not been modified"
 msgstr "檔案尚未修改過"
@@ -5521,7 +5529,7 @@ msgstr "檔名"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:320
 #, no-c-format
 msgid "File name:"
 msgstr "檔名:"
@@ -5540,8 +5548,8 @@ msgstr "找不到檔案"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:553
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:120
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:146
 #, no-c-format
 msgid "File parsing failed"
 msgstr "解析檔案失敗"
@@ -5565,7 +5573,7 @@ msgstr ""
 msgid "File/Segment linking"
 msgstr "檔案/剪輯"
 
-#: src/merge/output_control.cpp:948
+#: src/merge/output_control.cpp:922
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "檔案不能被添加至自己上。「--append-to」的參數無效。\n"
 
@@ -5857,9 +5865,9 @@ msgstr "無法執行除頭壓縮，因為緩衝區包含小於要移除表頭大
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "無法執行移除表頭壓縮，因為緩衝區未以待移除的位元組起始。需要的位元組:%1%; 找到的是:%2%。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "Header validation"
 msgstr "表頭檢驗"
@@ -7220,7 +7228,7 @@ msgstr "指定多個檔名 (「%1%」和「%2%」)。\n"
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "單個附件被指定了多於一個名稱。「%1%」將被廢棄，並用「%2%」代替。\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:995
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "被添加至軌道 %1%（自檔案 %2% (「%3%」)）的軌道多於一條。「--append-to」的參數無效。\n"
@@ -7377,6 +7385,13 @@ msgstr ""
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "未指定 %1%，在「--%2% %3%」。\n"
 
+#: src/merge/output_control.cpp:230
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:250
+#: src/propedit/propedit.cpp:118
+#, fuzzy, no-c-format
+msgid "No 'EBML head' element was found."
+msgstr "未找到 EBML 表頭。"
+
 #: src/input/r_qtmp4.cpp:1702
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "第一個畫格未發現 AC-3 表頭; 此軌將被跳過。\n"
@@ -7399,7 +7414,7 @@ msgstr "附件「%1%」的 MIME 類型尚未設定，且無法猜測。\n"
 msgid "No actions have been added yet."
 msgstr "尚未加入程式。"
 
-#: src/merge/output_control.cpp:980
+#: src/merge/output_control.cpp:954
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "沒有為檔案 %1% (「%2%」) 指定添加對應。將使用預設對應 %3%。如果 mkvmerge 異常中止並輸出關於無效的「--append-to」選項的錯誤訊息，請留意。\n"
@@ -7410,7 +7425,7 @@ msgstr "沒有為檔案 %1% (「%2%」) 指定添加對應。將使用預設對�
 msgid "No attachment matched the spec '%1%'.\n"
 msgstr "沒有符合形式「%1%」的附件。\n"
 
-#: src/propedit/propedit.cpp:159
+#: src/propedit/propedit.cpp:179
 msgid "No changes were made.\n"
 msgstr "未作修改。\n"
 
@@ -7508,7 +7523,7 @@ msgstr "輸出"
 msgid "No permission to read from, to write to or to create"
 msgstr "沒有權限讀取、寫入或建立"
 
-#: src/common/kax_analyzer.cpp:1513
+#: src/common/kax_analyzer.cpp:1536
 #, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "檔案「%1%」中找不到剪輯 UID。"
@@ -7606,11 +7621,11 @@ msgstr "通常情況下，可以在列表檢視中透過拖曳和鍵盤快速鍵
 msgid "Not a hex digit at position %1%"
 msgstr "非十六進位數位，於 %1%"
 
-#: src/common/kax_analyzer.cpp:292
+#: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "不是有效的 Matroska 檔 (未發現 EBML 表頭)"
 
-#: src/common/kax_analyzer.cpp:311
+#: src/common/kax_analyzer.cpp:318
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "不是有效的 Matroska 檔 (未發現有效的 剪輯/0 層級元件)"
 
@@ -7660,7 +7675,7 @@ msgstr "注意，大多 <MTX_…> 變數為空，在本次試跑中將移除這�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "注意，在 Windows 平台，路徑名稱中的反斜線 (\\) 也可以用正斜線 (/) 代替。"
 
-#: src/merge/generic_packetizer.cpp:1629
+#: src/merge/generic_packetizer.cpp:1616
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "注意 Matroska 規範有關「%1%」的儲存方面尚未完成。mkvmerge 支援是因為改變主題且使用 CodecID '%2%/EXPERIMENTAL' 替代「%2%」。一旦規範完成會移除這個警告而 mkvmerge 也會相應地更新。\n"
@@ -7733,7 +7748,7 @@ msgid_plural "Only %1% chapters found in source files & chapter files."
 msgstr[0] "來源檔案及章節檔案中只有 %1% 個章節。"
 
 #: src/merge/mkvmerge.cpp:1802
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:697
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7790,7 +7805,7 @@ msgstr "僅允許有一個剪輯檔，在「%1% %2%」。\n"
 msgid "Only one source file is allowed.\n"
 msgstr "僅允許有一個輸入檔。\n"
 
-#: src/merge/output_control.cpp:961
+#: src/merge/output_control.cpp:935
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "只給出了檔案 %1% (「%2%」) 的部分添加對應。只有不指定任何對應 (此時將使用預設對應) 或為所有軌道指定對應時，才會複製所有軌道。\n"
@@ -8149,10 +8164,10 @@ msgstr "可能的原因包括：程式不存在，或您無權存取它或其目
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:716
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:140
-#: src/propedit/propedit.cpp:47
-#: src/propedit/propedit.cpp:53
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:141
+#: src/propedit/propedit.cpp:50
+#: src/propedit/propedit.cpp:56
 #, no-c-format
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr "可能的原因包括: 該檔案非 Matroska 檔案；檔案受寫入保護；檔案被其他處理程序鎖定；您沒有權限存取該檔案。"
@@ -8230,7 +8245,7 @@ msgstr "進度:"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2939
-#: src/merge/output_control.cpp:340
+#: src/merge/output_control.cpp:358
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -8238,12 +8253,12 @@ msgstr "進度:"
 msgid "Progress: %1%%%%2%"
 msgstr "進度: %1%%%%2%"
 
-#: src/merge/output_control.cpp:315
+#: src/merge/output_control.cpp:333
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "進度: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1579
+#: src/common/kax_analyzer.cpp:1602
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "進度: [%1%%2%] %3%%%"
@@ -8437,7 +8452,7 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "重新編號命名子章節(&N)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:312
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
 #, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "用新檔案取代附件(&P)"
@@ -8451,8 +8466,8 @@ msgstr "閱讀完整的線上變更日誌"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "不支援讀取加密的 VOB。\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:710
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
@@ -8527,7 +8542,7 @@ msgid "Reference virtual"
 msgstr "虛擬參考: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #, no-c-format
 msgid "Reload modified file"
 msgstr "重新載入已被修改的檔案"
@@ -8619,7 +8634,7 @@ msgstr "用此檔案的「檔名」取代附件"
 msgid "Replace attachment"
 msgstr "取代附件"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:313
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:329
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "用新檔案取代附件，並沿用其名稱及 MIME 類型(&D)"
@@ -8671,7 +8686,7 @@ msgstr "按一下右鍵開啟所有軌道的操作選項"
 msgid "Right-click for actions for editions and chapters"
 msgstr "按一下右鍵開啟所有軌道的操作選項"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:332
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:348
 #, fuzzy, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "按一下右鍵開啟所有軌道的操作選項"
@@ -8815,17 +8830,17 @@ msgstr "儲存失敗"
 msgid "Saving the chapters failed."
 msgstr "儲存章節失敗。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:242
 #, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "儲存修改後的附件失敗。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:217
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "儲存修改後的剪輯資訊表頭失敗。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:225
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "儲存修改後的軌道表頭失敗。"
@@ -8920,7 +8935,7 @@ msgid "Segment info:"
 msgstr "剪輯資訊檔:"
 
 #: src/common/kax_element_names.cpp:83
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:465
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:481
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
@@ -9322,7 +9337,7 @@ msgstr "切面"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
 
-#: src/merge/output_control.cpp:1317
+#: src/merge/output_control.cpp:1291
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "缺少某些標籤元件 (不該發生此錯誤 - 另一個類似的錯誤應該在早些時候發生過)。%1%\n"
@@ -9743,12 +9758,12 @@ msgstr "Matroska 容器格式能夠儲存視訊軌的顯示寬度/高度。"
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
 msgstr "Matroska 檔案已被修改過，但無法更新變換定位項目。這表示播放器可能很難找到該元件。請使用您喜歡的播放程式檢查此檔案。"
 
-#: src/propedit/propedit.cpp:41
+#: src/propedit/propedit.cpp:44
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr "Matroska 檔已經修改過，但變換定位項目無法更新。這表示播放器可能很難找到該元件。請使用您喜歡的播放器檢查此檔案。"
 
 #: src/common/qt_kax_analyzer.cpp:103
-#: src/propedit/propedit.cpp:58
+#: src/propedit/propedit.cpp:61
 #, no-c-format
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr "Matroska 檔案的最後一個元素所設定的尺寸未知。"
@@ -9909,7 +9924,7 @@ msgstr "選項檔已建立。"
 msgid "The audio/video synchronization may have been lost."
 msgstr "音訊/視訊可能發生不同步。"
 
-#: src/propedit/propedit.cpp:152
+#: src/propedit/propedit.cpp:171
 msgid "The changes are written to the file.\n"
 msgstr "將變更寫入檔案。\n"
 
@@ -9990,7 +10005,7 @@ msgstr "校正檔未能正常讀取。\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "這裡選擇的國家會顯示在全部國家下拉式選單的最頂端。"
 
-#: src/merge/output_control.cpp:1507
+#: src/merge/output_control.cpp:1483
 msgid "The cue entries (the index) are being written...\n"
 msgstr "正在寫入 cue 項目 (此索引)...\n"
 
@@ -10014,12 +10029,12 @@ msgstr "目前模式可以使用 --merge、--edit-chapters 或 --edit-headers �
 msgid "The current multiplex settings will be closed."
 msgstr "目前合併設定將會被關閉。"
 
-#: src/merge/generic_packetizer.cpp:1347
+#: src/merge/generic_packetizer.cpp:1334
 #, boost-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "目前套件的時間碼比前一個套件的小。這通常表明來源檔未正常 100%% 建立的 Matroska 檔案。所有套件的時間碼將以 %1%ms 調整以避免丟失任何資料。這可能導致音/視訊不同步，但可以透過 mkvmerge 的 \"--sync\" 選項修正。如果您已經使用了 \"--sync\" 但仍然收到本警告，請 *不要* 著急 -- 這是正常的。如果對於一個特定軌超過一次出現本錯誤且您超過一次收到本訊息，既可能是因為來源檔嚴重錯誤，也可能是因為 mkvmerge 包含了某個 bug。如果是這樣，請聯繫作者 Moritz Bunkus <moritz@bunkus.org>。\n"
 
-#: src/common/kax_analyzer.cpp:175
+#: src/common/kax_analyzer.cpp:176
 msgid "The data in the file is corrupted and cannot be modified safely"
 msgstr ""
 
@@ -10105,7 +10120,7 @@ msgid "The edition UID must be a number if given."
 msgstr "若想要給定版本 UID 那麼必須是數字。"
 
 #: src/common/qt_kax_analyzer.cpp:67
-#: src/propedit/propedit.cpp:33
+#: src/propedit/propedit.cpp:36
 #, no-c-format
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "元件已被寫至檔案結尾部，但剪輯大小無法更新。因此這些元件將不可見。處理處理程序將被中止。檔已被修改!"
@@ -10131,14 +10146,14 @@ msgid "The fifth mode tries to extract chapter information and tags and outputs 
 msgstr "第五種模式可試著提取章節資訊和標籤並將這些匯出成一個 CUE 表單。這和用 mkvmerge 的「--chapters」選項使用 CUE 表單相反。"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:260
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:810
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:826
 #: src/mkvtoolnix-gui/merge/tool.cpp:216
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
 msgstr "檔案 »%1« 已被修改過。您確定要關閉嗎？所有變更將會遺失。"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:811
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:827
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "檔案 »%1« 已被修改過。您確定要重新載入嗎？所有變更將會遺失。"
@@ -10148,13 +10163,13 @@ msgstr "檔案 »%1« 已被修改過。您確定要重新載入嗎？所有變�
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "無法附加檔案「%1%」，因為它不存在或無法讀取。\n"
 
-#: src/propedit/propedit.cpp:134
+#: src/propedit/propedit.cpp:153
 #, boost-format
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "無法開啟檔案「%1%」進行讀取和寫入，或是讀取/寫入的操作失敗: %2%。\n"
 
-#: src/common/kax_analyzer.cpp:1503
-#: src/common/kax_analyzer.cpp:1506
+#: src/common/kax_analyzer.cpp:1526
+#: src/common/kax_analyzer.cpp:1529
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "檔案「%1%」無法以讀取模式開啟：%2%。"
@@ -10183,17 +10198,17 @@ msgstr "無法開啟檔案「%1%」進行寫入: %2%。\n"
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:134
-#: src/merge/output_control.cpp:1341
+#: src/merge/output_control.cpp:1317
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "無法開啟檔案「%1%」進行寫入: %2%。\n"
 
-#: src/common/kax_analyzer.cpp:1509
+#: src/common/kax_analyzer.cpp:1532
 #, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "檔案「%1%」無法開啟或解析。"
 
-#: src/merge/output_control.cpp:1345
+#: src/merge/output_control.cpp:1321
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "檔案「%1%」已開啟以寫入。\n"
@@ -10238,14 +10253,14 @@ msgstr "檔案「%1」既非任務佇列檔案，亦非設定檔案。"
 msgid "The file '%1' you've added is a playlist."
 msgstr "您加入的檔案「%1」是播放清單。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:696
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:712
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, no-c-format
 msgid "The file (%1) is too big (%2)."
 msgstr "檔案 (%1) 太大 (%2)。"
 
 #: src/common/qt_kax_analyzer.cpp:105
-#: src/propedit/propedit.cpp:60
+#: src/propedit/propedit.cpp:63
 #, fuzzy, no-c-format
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "該檔案可透過使用 mkvmerge 重新混流來修復。"
@@ -10260,13 +10275,13 @@ msgid "The file could not be opened for reading, or there was not enough data to
 msgstr "無法開啟此檔案進行讀取，或者沒有足夠的資料進行分析該檔案的表頭。"
 
 #: src/common/qt_kax_analyzer.cpp:87
-#: src/propedit/propedit.cpp:46
+#: src/propedit/propedit.cpp:49
 #, no-c-format
 msgid "The file could not be opened for reading."
 msgstr "檔案無法以讀取模式開啟。"
 
 #: src/common/qt_kax_analyzer.cpp:95
-#: src/propedit/propedit.cpp:52
+#: src/propedit/propedit.cpp:55
 #, no-c-format
 msgid "The file could not be opened for writing."
 msgstr "無法開啟此檔案進行寫入。"
@@ -10277,14 +10292,14 @@ msgid "The file does not contain track ID %1%.\n"
 msgstr "此檔案不包含軌道 ID %1%。\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:647
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:268
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "儲存此檔案成功。"
 
 #: src/common/qt_kax_analyzer.cpp:107
-#: src/propedit/propedit.cpp:62
-#: src/propedit/propedit.h:17
+#: src/propedit/propedit.cpp:65
+#: src/propedit/propedit.h:19
 #, no-c-format
 msgid "The file has not been modified."
 msgstr "此檔案並沒有被修改過。"
@@ -10307,24 +10322,24 @@ msgid "The file is an unsupported container format (%1)."
 msgstr "此檔案為不支援的容器格式 (%1)。"
 
 #: src/common/qt_kax_analyzer.cpp:37
-#: src/propedit/propedit.cpp:122
+#: src/propedit/propedit.cpp:140
 #, no-c-format
 msgid "The file is being analyzed."
 msgstr "正在分析檔案。"
 
-#: src/merge/output_control.cpp:240
+#: src/merge/output_control.cpp:257
 msgid "The file is being fixed, part 1/4..."
 msgstr "正在修復檔案，第 1/4 步..."
 
-#: src/merge/output_control.cpp:246
+#: src/merge/output_control.cpp:263
 msgid "The file is being fixed, part 2/4..."
 msgstr "正在修復檔案，第 2/4 步..."
 
-#: src/merge/output_control.cpp:255
+#: src/merge/output_control.cpp:273
 msgid "The file is being fixed, part 3/4..."
 msgstr "正在修復檔案，第 3/4 步..."
 
-#: src/merge/output_control.cpp:263
+#: src/merge/output_control.cpp:281
 msgid "The file is being fixed, part 4/4..."
 msgstr "正在修復檔案，第 4/4 步..."
 
@@ -10336,17 +10351,17 @@ msgstr "要建立軌道統計資訊，需要讀取該檔案。\n"
 msgid "The file name for this segment."
 msgstr "此剪輯的檔名。"
 
-#: src/merge/output_control.cpp:994
+#: src/merge/output_control.cpp:968
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "檔案 %1% (「%2%」) 不含 ID 為 %3% 的軌道，或者沒選擇複製該軌道。選項「--append-to」的參數無效。\n"
 
-#: src/merge/output_control.cpp:1000
+#: src/merge/output_control.cpp:974
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "檔案 %1% (「%2%」) 不含 ID 為 %3% 的軌道，或者沒選擇複製該軌道。因此沒有軌道可以添加給它。選項「--append-to」的參數無效。\n"
 
-#: src/merge/output_control.cpp:940
+#: src/merge/output_control.cpp:914
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "此檔案 %1% (「%2%」) 未被添加。選項「--append-to」的參數無效。\n"
@@ -10374,8 +10389,8 @@ msgstr "無法更進一步處理檔案。"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:398
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:715
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
@@ -10386,7 +10401,7 @@ msgstr "您試著開啟的檔案 (%1) 無法讀取成功。"
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "您試著開啟的檔案 (%1) 不包含任何章節。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:117
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
 #, no-c-format
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "您試著開啟的檔案 (%1) 無法辨識為有效的 Matroska/WebM 檔。"
@@ -10447,7 +10462,7 @@ msgstr "格式可以是 'HH:MM:SS.nnnnnnnnn' 這種形式或單位為 's', 'ms' 
 msgid "The formats can be mixed, too."
 msgstr "也可以混用這些格式。"
 
-#: src/merge/output_control.cpp:1051
+#: src/merge/output_control.cpp:1025
 msgid "The formats do not match."
 msgstr "格式不符。"
 
@@ -10465,7 +10480,7 @@ msgstr "生成的輸出檔名有依據輸入檔案名稱的相同基本名稱，
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "給定的時間碼縮放比例超出有效範圍 (1...10000000 或 -1 代表「即使視訊軌已提供時的取樣精確度」)。\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "表頭數值尚未被修改。沒有任何改動可儲存。"
@@ -10562,7 +10577,7 @@ msgstr ""
 "如果設為 0, 將不使用參考偽快取系統。"
 
 #: src/common/qt_kax_analyzer.cpp:73
-#: src/propedit/propedit.cpp:37
+#: src/propedit/propedit.cpp:40
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "變換定位元件已被寫至檔案結尾部，但剪輯大小無法更新。因此這些元件不可見。處理處理程序將被中止。檔案已有改動！"
@@ -10710,7 +10725,7 @@ msgid "The probe range percentage '%1%' is invalid.\n"
 msgstr "探測百分比「%1%」無效。\n"
 
 #: src/common/qt_kax_analyzer.cpp:106
-#: src/propedit/propedit.cpp:61
+#: src/propedit/propedit.cpp:64
 #, no-c-format
 msgid "The process will be aborted."
 msgstr "處理程序將中止。"
@@ -10760,7 +10775,7 @@ msgstr "屬性值「%1%」不是有效的帶正負號整數。%2%\n"
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "此屬性值在「%1%」不是有效的不帶正負號整數。%2%\n"
 
-#: src/merge/output_control.cpp:1053
+#: src/merge/output_control.cpp:1027
 msgid "The reason is unknown."
 msgstr "原因不詳。"
 
@@ -10968,7 +10983,7 @@ msgstr "此時間碼涉及整個串流而與個別輸出檔無關。"
 msgid "The title for the whole movie."
 msgstr "整部影片的標題。"
 
-#: src/merge/output_control.cpp:1010
+#: src/merge/output_control.cpp:984
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "軌道 %1% （自檔案 %2% (「%3%」)）被添加超過一次。「--append-to」的參數無效。\n"
@@ -10978,17 +10993,17 @@ msgstr "軌道 %1% （自檔案 %2% (「%3%」)）被添加超過一次。「--a
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "軌道識別碼 %1% 無有效的 CodecID。\n"
 
-#: src/merge/output_control.cpp:690
+#: src/merge/output_control.cpp:664
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "軌道頭無法正確演算。%1%\n"
 
-#: src/merge/output_control.cpp:1042
+#: src/merge/output_control.cpp:1016
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "軌道編號 %1% （自檔案「%2%」）可能無法被正確添加至軌道編號 %3% （自檔「%4%」）: %5% 請確認生成的檔是否可以完整地正常播放。本程式的作者可能無法提供關於播放生成的檔案的支援。\n"
 
-#: src/merge/output_control.cpp:1054
+#: src/merge/output_control.cpp:1028
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "軌道編號 %1% （自檔案「%2%」）無法添加至軌道編號 %3% （自檔案「%4%」）。%5%\n"
@@ -10997,7 +11012,7 @@ msgstr "軌道編號 %1% （自檔案「%2%」）無法添加至軌道編號 %3%
 msgid "The track number as used in the Block Header."
 msgstr "區塊表頭使用的軌道編號。"
 
-#: src/merge/output_control.cpp:1052
+#: src/merge/output_control.cpp:1026
 msgid "The track parameters do not match."
 msgstr "軌道參數不符。"
 
@@ -11074,8 +11089,8 @@ msgstr "線上有新版本可更新。"
 msgid "There is currently a job running."
 msgstr "目前有一個任務正在執行。"
 
-#: src/merge/output_control.cpp:934
-#: src/merge/output_control.cpp:944
+#: src/merge/output_control.cpp:908
+#: src/merge/output_control.cpp:918
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "沒有檔案的 ID 為「%1%」。參數「--append-to」無效。\n"
@@ -11090,11 +11105,18 @@ msgstr "尚無「%1%」的翻譯。\n"
 msgid "There was an error querying the update status."
 msgstr "查詢更新狀態時發生錯誤。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "出現一些影響表頭資訊儲存的表頭值錯誤。第一處錯誤已被選中。"
+
+#: src/merge/output_control.cpp:231
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:251
+#: src/propedit/propedit.cpp:119
+#, no-c-format
+msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
@@ -11201,7 +11223,7 @@ msgid "This file contains coordinates in the timestamp lines. Such coordinates a
 msgstr "此檔案時間軸中含有座標。此類座標不受 Matroska SRT 字幕格式的支援。座標將被自動移除。\n"
 
 #: src/extract/mkvextract.cpp:67
-#: src/propedit/propedit.cpp:139
+#: src/propedit/propedit.cpp:158
 msgid "This file could not be opened or parsed.\n"
 msgstr "這個檔案無法開啟或解析。\n"
 
@@ -11366,12 +11388,12 @@ msgstr "這項屬性在「%1%」中是強制的且不能刪除的。%2%\n"
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "這名稱是唯一的。多數情況下無法被加入到「%1%」。%2%\n"
 
-#: src/merge/output_control.cpp:259
+#: src/merge/output_control.cpp:277
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "這 *真的* 不該發生。為第一個變換定位元件預留的空間過小。%1%\n"
 
-#: src/merge/output_control.cpp:1618
+#: src/merge/output_control.cpp:1594
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "這 *真的* 不該發生。為第一個變換定位元件預留的空間過小。需要的大小: %1%. %2%\n"
@@ -11830,10 +11852,17 @@ msgstr "不支援此軌道的軌道類型。\n"
 msgid "Update an attachment's properties"
 msgstr "更新附件屬性"
 
-#: src/propedit/propedit.cpp:28
+#: src/propedit/propedit.cpp:31
 #, boost-format
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "更新「%1%」元件失敗。原因:"
+
+#: src/merge/output_control.cpp:234
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:253
+#: src/propedit/propedit.cpp:122
+#, no-c-format
+msgid "Updating the 'document type version' or 'document type read version' header fields failed."
+msgstr ""
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:41
 msgid "Usage"
@@ -12042,7 +12071,7 @@ msgstr "視訊像素寬度"
 msgid "Video projection"
 msgstr "視訊屬性"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:515
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:531
 #, fuzzy
 msgid "Video projection information"
 msgstr "視訊顏色資訊"
@@ -12662,7 +12691,7 @@ msgstr "直欄交錯 (從右邊開始)"
 msgid "compression"
 msgstr "壓縮"
 
-#: src/merge/generic_packetizer.cpp:1648
+#: src/merge/generic_packetizer.cpp:1635
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num 未找到。 %1%\n"
@@ -12712,7 +12741,7 @@ msgstr "加密"
 msgid "equirectangular"
 msgstr ""
 
-#: src/merge/output_control.cpp:413
+#: src/merge/output_control.cpp:431
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "未找到 generic_packetizer_c 所需的 filelist_t。 %1%\n"
@@ -13085,8 +13114,8 @@ msgstr ""
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "mkvmerge 支援兩種章節格式: 類似 OGM 的文字格式和全功能的 XML 格式。"
 
-#: src/merge/output_control.cpp:234
-#: src/merge/output_control.cpp:276
+#: src/merge/output_control.cpp:251
+#: src/merge/output_control.cpp:294
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge 被 SIGINT 中止 (按了 Ctrl+C?)\n"
 

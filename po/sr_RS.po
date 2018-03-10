@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-09 19:16+0100\n"
+"POT-Creation-Date: 2018-03-10 14:04+0100\n"
 "PO-Revision-Date: 2017-10-04 19:49+0200\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "Привремена тта-датотека за запис ИБ %1% се умножава у завршну тта-датотеку, а то може да потраје.\n"
 
-#: src/merge/output_control.cpp:236
+#: src/merge/output_control.cpp:253
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -1132,10 +1132,10 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/merge/output_control.cpp:244
-#: src/merge/output_control.cpp:253
 #: src/merge/output_control.cpp:261
-#: src/merge/output_control.cpp:268
+#: src/merge/output_control.cpp:271
+#: src/merge/output_control.cpp:279
+#: src/merge/output_control.cpp:286
 msgid " done\n"
 msgstr " готово\n"
 
@@ -1443,7 +1443,7 @@ msgid "&Add attachment"
 msgstr "Додај прилоге"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:309
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:325
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, fuzzy, no-c-format
 msgid "&Add attachments"
@@ -1524,7 +1524,7 @@ msgid "&Close"
 msgstr "&Затвори"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:261
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/merge/tool.cpp:217
 #, no-c-format
 msgid "&Close file"
@@ -1535,7 +1535,7 @@ msgid "&Code of Conduct"
 msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:199
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:308
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
 #, no-c-format
 msgid "&Collapse all"
 msgstr "&Скупи све уносе"
@@ -1620,7 +1620,7 @@ msgid "&Escape arguments for:"
 msgstr "Аргум&енти истицања за:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:307
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:323
 #, no-c-format
 msgid "&Expand all"
 msgstr "&Рашири све"
@@ -1870,12 +1870,12 @@ msgid "&Reload"
 msgstr "&Учитај наново"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #, no-c-format
 msgid "&Reload file"
 msgstr "&Учитај датотеку наново"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:310
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:326
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, fuzzy, no-c-format
 msgid "&Remove attachment"
@@ -1930,7 +1930,7 @@ msgstr "Поништи ову в&редност"
 msgid "&Save"
 msgstr "&Сачувај"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:311
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:327
 #, fuzzy, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "Замењује прилог датотеком „filename“"
@@ -2656,6 +2656,13 @@ msgstr "Зарезом-одвојена листа опсега временск
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
 
+#: src/merge/output_control.cpp:232
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/propedit/propedit.cpp:120
+#, no-c-format
+msgid "A generic read or write failure occurred."
+msgstr ""
+
 #: src/common/property_element.cpp:141
 msgid "A human-readable string specifying the codec."
 msgstr "Уљуднија знаковна ниска за одређење кодека."
@@ -2913,7 +2920,7 @@ msgstr "У трећем режиму, издвајају се прилози и�
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "Подразумеван начин рада је додавање датотека за сједињавање"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -3115,7 +3122,7 @@ msgstr "све ставке"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:312
@@ -3152,7 +3159,7 @@ msgstr "Сваки наредни назив датотеке отвориће �
 msgid "All following file names will be opened in the info tool."
 msgstr "Сваки наредни назив датотеке отвориће се уредником заглавља."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
 #, no-c-format
 msgid "All header values are OK."
 msgstr "Ваљане су све вредности заглавља"
@@ -3295,7 +3302,7 @@ msgid "An exception occurred when writing the destination file."
 msgstr "Ухваћен је изузетак при упису исходишне датотеке."
 
 #: src/common/qt_kax_analyzer.cpp:111
-#: src/propedit/propedit.cpp:66
+#: src/propedit/propedit.cpp:69
 #, no-c-format
 msgid "An unknown error occured. The file has been modified."
 msgstr "Неочекивана грешка се догодила. Ова датотека је измењена."
@@ -3309,7 +3316,7 @@ msgstr "Очекиван је неозначени, цео број."
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "Анализирај Мпег4 битске токове, стави сваки кадар у један Матрошка-блок, употреби ваљано временско означавање (I P B B = 0 120 40 80), употреби V_MPEG4/ISO/... ИБ-еве за кодеке."
 
-#: src/merge/generic_packetizer.cpp:632
+#: src/merge/generic_packetizer.cpp:626
 #, boost-format
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "Већ је постављен други подразумеван запис за %1% записе. Белег „подразумевано“ неће бити постављен за запис %2% из „%3%“\n"
@@ -3340,7 +3347,7 @@ msgstr "Придружи медија-датотеке"
 msgid "Append to an e&xisting source file"
 msgstr "Придружи постојећој &улазној датотеци"
 
-#: src/merge/output_control.cpp:1772
+#: src/merge/output_control.cpp:1751
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "Придружујем запис %1% из датотеке број %2% („%3%“) запису %4% из датотеке број %5% („%6%“).\n"
@@ -3698,7 +3705,7 @@ msgstr ""
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:239
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:262
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:819
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:835
 #: src/mkvtoolnix-gui/jobs/tool.cpp:526
 #: src/mkvtoolnix-gui/jobs/tool.cpp:595
 #: src/mkvtoolnix-gui/jobs/tool.cpp:620
@@ -4059,7 +4066,7 @@ msgid "Close current settings"
 msgstr "Поставке кодека: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:259
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #: src/mkvtoolnix-gui/merge/tool.cpp:215
 #, no-c-format
 msgid "Close modified file"
@@ -4155,12 +4162,12 @@ msgstr ""
 msgid "Codec/MIME type"
 msgstr "Миме-врста"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:505
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:521
 #, fuzzy
 msgid "Colour information"
 msgstr "Дв-видео"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:510
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:526
 #, fuzzy
 msgid "Colour mastering meta information"
 msgstr "Грешка при чувању података"
@@ -4200,7 +4207,7 @@ msgstr "успешно завршено"
 msgid "Completed with warnings"
 msgstr "завршено уз упозорења"
 
-#: src/merge/generic_packetizer.cpp:1270
+#: src/merge/generic_packetizer.cpp:1260
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Није успело сажимање: %1%\n"
@@ -4292,7 +4299,7 @@ msgstr "Не могу да издвојим заглавље поретка из
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "Не могу да нађем индекс звучног записа %1% („avilib“-порука о грешци: %2%). Изостављам запис.\n"
 
-#: src/merge/output_control.cpp:1698
+#: src/merge/output_control.cpp:1677
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Не налазим „gptzr“ при придруживању. %1%\n"
@@ -4903,7 +4910,7 @@ msgstr "Директоријум — релативно у односу на д�
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
 #, no-c-format
 msgid "Directory:"
 msgstr "Директоријум:"
@@ -5052,7 +5059,7 @@ msgstr ""
 msgid "Done scanning playlists.\n"
 msgstr "Истраживање плеј-листа је готово.\n"
 
-#: src/propedit/propedit.cpp:156
+#: src/propedit/propedit.cpp:176
 msgid "Done.\n"
 msgstr "Завршено.\n"
 
@@ -5075,7 +5082,7 @@ msgid "Drops the lossless extensions from an audio track and keeps only its loss
 msgstr "Одбацује проширења без губитка квалитета у звучном запису и задржава само његово језгро са губитком квалитета."
 
 #: src/common/qt_kax_analyzer.cpp:104
-#: src/propedit/propedit.cpp:59
+#: src/propedit/propedit.cpp:62
 #, no-c-format
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
 msgstr ""
@@ -5205,7 +5212,7 @@ msgstr ""
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
 msgstr "Или реч „all“ (све) за одабир свих поглавља или зарезом-одвојена листа бројева поглавља чији ће почеци да буду и почеци добијаних парчади."
 
-#: src/propedit/propedit.cpp:97
+#: src/propedit/propedit.cpp:100
 #, boost-format
 msgid "Element %1% is written.\n"
 msgstr "Уписан је елеменат %1%.\n"
@@ -5293,8 +5300,8 @@ msgstr "Грешка при стварању привремене датотек
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, fuzzy, no-c-format
 msgid "Error details: %1."
 msgstr "Подаци за изузетак:"
@@ -5349,7 +5356,7 @@ msgstr "Грешка при рашчлањавању ознака у „%1%“: 
 msgid "Error reading Matroska file"
 msgstr "Грешка код уписа Матрошка-датотеке"
 
-#: src/merge/output_control.cpp:765
+#: src/merge/output_control.cpp:739
 #, fuzzy, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "Рашчлањивач је известио о грешци: %1"
@@ -5358,7 +5365,8 @@ msgstr "Рашчлањивач је известио о грешци: %1"
 #: src/common/qt_kax_analyzer.cpp:72
 #: src/common/qt_kax_analyzer.cpp:92
 #: src/common/qt_kax_analyzer.cpp:100
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:255
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, no-c-format
 msgid "Error writing Matroska file"
 msgstr "Грешка код уписа Матрошка-датотеке"
@@ -5645,7 +5653,7 @@ msgstr "Назив датотеке"
 msgid "File description"
 msgstr "Опис датотеке: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "File has not been modified"
 msgstr "Датотека није измењивана"
@@ -5661,7 +5669,7 @@ msgstr "Назив датотеке"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:320
 #, no-c-format
 msgid "File name:"
 msgstr "Назив датотеке:"
@@ -5680,8 +5688,8 @@ msgstr "датотека није пронађена"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:553
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:120
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:146
 #, no-c-format
 msgid "File parsing failed"
 msgstr "Неуспела обрада датотеке"
@@ -5705,7 +5713,7 @@ msgstr ""
 msgid "File/Segment linking"
 msgstr "Повезивање датотеке/одељка"
 
-#: src/merge/output_control.cpp:948
+#: src/merge/output_control.cpp:922
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Датотека се не може сама себи придруживати. Аргумент опције „--append-to“ није ваљан.\n"
 
@@ -6001,9 +6009,9 @@ msgstr "Сажимање засновано на уклањању заглављ
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "Сажимање засновано на уклањању заглавља није могуће јер бафер није започињао са бајтовима које је требало уклонити. Пожељни бајтови: %1%; нађено:%2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "Header validation"
 msgstr "Провера заглавља"
@@ -7363,7 +7371,7 @@ msgstr "Задато је више од једног назива датотек
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "Задато је више од једног назива за прилог. Одбацићу назив „%1%“, а употребићу назив „%2%“.\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:995
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "Више од једног записа треба да буде спојено са записом %1% из датотеке %2% („%3%“). Није Није ваљан аргумент за опцију „--append-to“.\n"
@@ -7521,6 +7529,13 @@ msgstr ""
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "„%1%“ није одређено у „--%2% %3%“.\n"
 
+#: src/merge/output_control.cpp:230
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:250
+#: src/propedit/propedit.cpp:118
+#, fuzzy, no-c-format
+msgid "No 'EBML head' element was found."
+msgstr "Нисам нашао ЕБМЛ-заглавље."
+
 #: src/input/r_qtmp4.cpp:1702
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Не нађох Ак3-заглавље у првом кадру; изоставићу овај запис.\n"
@@ -7543,7 +7558,7 @@ msgstr "Датом прилогу „%1%“ није одређена миме-�
 msgid "No actions have been added yet."
 msgstr "Нема започете радње."
 
-#: src/merge/output_control.cpp:980
+#: src/merge/output_control.cpp:954
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "Није дато мапирање придруживања за датотеку бр. %1% („%2%“). Уместо тога користиће се подразумевано мапирање од %3%. Имајте то у виду ако Мкв-спојница прекине са радом уз грешку у вези са неважећим „--append-to“ опцијама.\n"
@@ -7554,7 +7569,7 @@ msgstr "Није дато мапирање придруживања за дат�
 msgid "No attachment matched the spec '%1%'.\n"
 msgstr "Ниједан од прилога не одговара задатом „%1%“.\n"
 
-#: src/propedit/propedit.cpp:159
+#: src/propedit/propedit.cpp:179
 #, fuzzy
 msgid "No changes were made.\n"
 msgstr "Нема нађених кју-података.\n"
@@ -7653,7 +7668,7 @@ msgstr "нема исходишне датотеке"
 msgid "No permission to read from, to write to or to create"
 msgstr "Немам одговарајућу дозволу (за читање, за упис или за стварање)"
 
-#: src/common/kax_analyzer.cpp:1513
+#: src/common/kax_analyzer.cpp:1536
 #, fuzzy, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "Не може да се рашчлани ЈИБ одељка: %1"
@@ -7751,11 +7766,11 @@ msgstr "Уобичајено, одабране ставке у спискови�
 msgid "Not a hex digit at position %1%"
 msgstr "На положају %1% није хексадецимални број."
 
-#: src/common/kax_analyzer.cpp:292
+#: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "Није ваљана Матрошка-датотека (нема ЕБМЛ-заглавља)"
 
-#: src/common/kax_analyzer.cpp:311
+#: src/common/kax_analyzer.cpp:318
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "Није ваљана Матрошка-датотека (нема одељка/елемента нултог нивоа)"
 
@@ -7805,7 +7820,7 @@ msgstr ""
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr ""
 
-#: src/merge/generic_packetizer.cpp:1629
+#: src/merge/generic_packetizer.cpp:1616
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Знајте да Матрошка-одреднице које се односе на складиштење „%1%“ нису још увек завршене, па је подршка за њих у Мкв-спојници подложна изменама а употребљава се и ИБ-кодека „%2%/EXPERIMENTAL“ уместо „%2%“. Ово упозорење ће бити уклоњено по завршетку ових одредница (спецификација), те, потом, по надоградњи самог програма.\n"
@@ -7881,7 +7896,7 @@ msgstr[1] "У изворним и датотекама поглавља нађе
 msgstr[2] "У изворним и датотекама поглавља нађено је само %1% поглавље(а)"
 
 #: src/merge/mkvmerge.cpp:1802
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:697
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, fuzzy, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7938,7 +7953,7 @@ msgstr "Дозвољена је само једна датотека подат�
 msgid "Only one source file is allowed.\n"
 msgstr "Дозвољена је само једна улазна датотека.\n"
 
-#: src/merge/output_control.cpp:961
+#: src/merge/output_control.cpp:935
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Дата су само делимична мапирања за датотеку број %1% („%2%“). Не наводите мапирање уопште (тада се употребљава подразумевано мапирање) или наведите мапирање за све записе који се умножавају.\n"
@@ -8311,10 +8326,10 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:716
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:140
-#: src/propedit/propedit.cpp:47
-#: src/propedit/propedit.cpp:53
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:141
+#: src/propedit/propedit.cpp:50
+#: src/propedit/propedit.cpp:56
 #, no-c-format
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr ""
@@ -8394,7 +8409,7 @@ msgstr "Напредак:"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2939
-#: src/merge/output_control.cpp:340
+#: src/merge/output_control.cpp:358
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -8402,12 +8417,12 @@ msgstr "Напредак:"
 msgid "Progress: %1%%%%2%"
 msgstr "Напредак: %1%%%%2%"
 
-#: src/merge/output_control.cpp:315
+#: src/merge/output_control.cpp:333
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "Напредак: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1579
+#: src/common/kax_analyzer.cpp:1602
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Напредак: [%1%%2%] %3%%%"
@@ -8602,7 +8617,7 @@ msgstr "РСА"
 msgid "Re&number sub-chapters"
 msgstr "Додели нове бројеве потпоглављима"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:312
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
 #, fuzzy, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "Замењује прилог датотеком „filename“"
@@ -8616,8 +8631,8 @@ msgstr "Прикажи целу „ChangeLog“-датотеку са мреже
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Није подржано читање шифрованих Воб-датотека.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:710
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, fuzzy, no-c-format
@@ -8692,7 +8707,7 @@ msgid "Reference virtual"
 msgstr "Патворени указивач: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #, no-c-format
 msgid "Reload modified file"
 msgstr "Наново учитај измењену датотеку"
@@ -8786,7 +8801,7 @@ msgstr "Замењује прилог датотеком „filename“"
 msgid "Replace attachment"
 msgstr "прилог"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:313
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:329
 #, fuzzy, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "Замењује прилог датотеком „filename“"
@@ -8838,7 +8853,7 @@ msgstr "Доступне радње за све записе — притиса�
 msgid "Right-click for actions for editions and chapters"
 msgstr "Доступне радње за све записе — притисак десног тастера миша"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:332
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:348
 #, fuzzy, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "Доступне радње за све записе — притисак десног тастера миша"
@@ -8982,17 +8997,17 @@ msgstr "Није успело чување"
 msgid "Saving the chapters failed."
 msgstr "Није успело чување поглавља."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:242
 #, fuzzy, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "Није успело чување измењених заглавља записа."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:217
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "Није успело чување измењеног заглавља са подацима одељка."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:225
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "Није успело чување измењених заглавља записа."
@@ -9089,7 +9104,7 @@ msgid "Segment info:"
 msgstr "Подаци одељка:"
 
 #: src/common/kax_element_names.cpp:83
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:465
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:481
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
@@ -9503,7 +9518,7 @@ msgstr "Парчад"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
 
-#: src/merge/output_control.cpp:1317
+#: src/merge/output_control.cpp:1291
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "Недостају неки елементи ознака (ово није требало да се догоди — друга слична грешка је требало да се догоди раније). %1%\n"
@@ -9936,12 +9951,12 @@ msgstr "Формат Матрошка сандука може да чува по
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
 msgstr "Измењена је Матрошка-датотека, али ова ставка описа трага не може да се занови. То значи да ће програми за репродукцију предуго да траже овај елеменат. Проверите репродукцију исходишне датотеке у омиљеном програму за репродукцију."
 
-#: src/propedit/propedit.cpp:41
+#: src/propedit/propedit.cpp:44
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr "Измењена је Матрошка-датотека, али ова ставка описа трага не може да се занови. То значи да ће програми за репродукцију предуго да траже овај елеменат. Проверите репродукцију исходишне датотеке у омиљеном програму за репродукцију."
 
 #: src/common/qt_kax_analyzer.cpp:103
-#: src/propedit/propedit.cpp:58
+#: src/propedit/propedit.cpp:61
 #, no-c-format
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr ""
@@ -10107,7 +10122,7 @@ msgstr "Створена је датотека опција."
 msgid "The audio/video synchronization may have been lost."
 msgstr ""
 
-#: src/propedit/propedit.cpp:152
+#: src/propedit/propedit.cpp:171
 msgid "The changes are written to the file.\n"
 msgstr "Измене су записане у датотеку.\n"
 
@@ -10188,7 +10203,7 @@ msgstr "Заглавље датотеке исправки није правил
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Овде одабране земље ће се приказивати на врху падајуће листе доступних земаља у програму."
 
-#: src/merge/output_control.cpp:1507
+#: src/merge/output_control.cpp:1483
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Уписију се кју-уноси (индекс)...\n"
 
@@ -10212,12 +10227,12 @@ msgstr "Текући начин рада се може изменити једн
 msgid "The current multiplex settings will be closed."
 msgstr "Текуће поставке Мкв-спојнице биће затворене."
 
-#: src/merge/generic_packetizer.cpp:1347
+#: src/merge/generic_packetizer.cpp:1334
 #, boost-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Временска ознака текућег пакета започиње пре оне из претходног пакета, а то обично значи да изворна Матрошка-датотека није била створена 100%% исправно. Прилагодићу врем. ознаке свих пакета за %1%мс да не би сачували податке у потпуности. Ово може да доведе до неусклађености звука и слике, али се и то да исправити употребом опције Мкв-спојнице „--sync“. Ако већ употребљавате ову опцију, али ипак добијете ово упозорење, не морате да бринете, јер је то нормално. Ако се ова грешка дешава више но једном и добијате ову поруку више пута за појединачни запис, онда, или изворна датотека није ваљано створена, или се ради о програмској грешци Мкв-спојнице. У другом случају, обавестите творца програма, Морица Бункуса <moritz@bunkus.org>.\n"
 
-#: src/common/kax_analyzer.cpp:175
+#: src/common/kax_analyzer.cpp:176
 msgid "The data in the file is corrupted and cannot be modified safely"
 msgstr ""
 
@@ -10305,7 +10320,7 @@ msgid "The edition UID must be a number if given."
 msgstr "Ако се задаје, ЈИБ-издања мора бити број."
 
 #: src/common/qt_kax_analyzer.cpp:67
-#: src/propedit/propedit.cpp:33
+#: src/propedit/propedit.cpp:36
 #, no-c-format
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "Елеменат је уписан у сам крај датотеке, но величина одељка не може да се обнови, па овај елеменат неће бити видљив. Радња ће бити обустављена. Дтотека је измењена!"
@@ -10331,14 +10346,14 @@ msgid "The fifth mode tries to extract chapter information and tags and outputs 
 msgstr "У петом режиму, покушава се са издвајањем података поглавља и ознака, који се затим уписују као Кју-лист. Ово је обрнуто од употребе Кју-листа код опције Мкв-спојнице зване „--chapters“."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:260
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:810
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:826
 #: src/mkvtoolnix-gui/merge/tool.cpp:216
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
 msgstr "Измењена је датотека »%1«. Уколико је сада затворите, изгубићете све учињене измене! Да ли то желите?"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:811
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:827
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "Измењена је датотека »%1«. Уколико је учитате наново, изгубићете све учињене измене! Да ли то желите?"
@@ -10348,13 +10363,13 @@ msgstr "Измењена је датотека »%1«. Уколико је уч�
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "Не могу да приложим датотеку „%1%“ јер она, или не постоји, или не може да се прочита.\n"
 
-#: src/propedit/propedit.cpp:134
+#: src/propedit/propedit.cpp:153
 #, boost-format
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "Неуспело отварање датотеке „%1%“ за уписивање и читање, или је радња „читај/пиши“ над датотеком била неуспешна: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1503
-#: src/common/kax_analyzer.cpp:1506
+#: src/common/kax_analyzer.cpp:1526
+#: src/common/kax_analyzer.cpp:1529
 #, fuzzy, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "Неуспело отварање датотеке „%1%“ за читање: %2%.\n"
@@ -10383,17 +10398,17 @@ msgstr "Неуспело отварање датотеке „%1%“ за упи
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:134
-#: src/merge/output_control.cpp:1341
+#: src/merge/output_control.cpp:1317
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Неуспело отварање датотеке „%1%“ за уписивање: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1509
+#: src/common/kax_analyzer.cpp:1532
 #, fuzzy, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "Не могу да отворим или рашчланим ову датотеку.\n"
 
-#: src/merge/output_control.cpp:1345
+#: src/merge/output_control.cpp:1321
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "За уписивање је отворена датотека „%1%“.\n"
@@ -10438,14 +10453,14 @@ msgstr "За уписивање је отворена датотека „%1%“
 msgid "The file '%1' you've added is a playlist."
 msgstr "Додата датотека „%1“ је плеј-листа."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:696
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:712
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, fuzzy, no-c-format
 msgid "The file (%1) is too big (%2)."
 msgstr "У ИксМЛ-датотеци ознака „%1%“ постоји грешка: %2%\n"
 
 #: src/common/qt_kax_analyzer.cpp:105
-#: src/propedit/propedit.cpp:60
+#: src/propedit/propedit.cpp:63
 #, no-c-format
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr ""
@@ -10460,13 +10475,13 @@ msgid "The file could not be opened for reading, or there was not enough data to
 msgstr "Неуспело отварање датотеке при читању, или је недовољно података за рашчлањавање њеног заглавља."
 
 #: src/common/qt_kax_analyzer.cpp:87
-#: src/propedit/propedit.cpp:46
+#: src/propedit/propedit.cpp:49
 #, fuzzy, no-c-format
 msgid "The file could not be opened for reading."
 msgstr "Неуспело отварање датотеке при уписивању."
 
 #: src/common/qt_kax_analyzer.cpp:95
-#: src/propedit/propedit.cpp:52
+#: src/propedit/propedit.cpp:55
 #, no-c-format
 msgid "The file could not be opened for writing."
 msgstr "Неуспело отварање датотеке при уписивању."
@@ -10477,14 +10492,14 @@ msgid "The file does not contain track ID %1%.\n"
 msgstr "Датотека не садржи запис ИБ %1%.\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:647
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:268
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "Датотека је успешно сачувана."
 
 #: src/common/qt_kax_analyzer.cpp:107
-#: src/propedit/propedit.cpp:62
-#: src/propedit/propedit.h:17
+#: src/propedit/propedit.cpp:65
+#: src/propedit/propedit.h:19
 #, no-c-format
 msgid "The file has not been modified."
 msgstr "Датотека није измењена."
@@ -10507,24 +10522,24 @@ msgid "The file is an unsupported container format (%1)."
 msgstr "Датотека са неподржаном врстом сандука (%1)."
 
 #: src/common/qt_kax_analyzer.cpp:37
-#: src/propedit/propedit.cpp:122
+#: src/propedit/propedit.cpp:140
 #, no-c-format
 msgid "The file is being analyzed."
 msgstr "Анализирам датотеку."
 
-#: src/merge/output_control.cpp:240
+#: src/merge/output_control.cpp:257
 msgid "The file is being fixed, part 1/4..."
 msgstr "Опорављам датотеку, етапа 1/4..."
 
-#: src/merge/output_control.cpp:246
+#: src/merge/output_control.cpp:263
 msgid "The file is being fixed, part 2/4..."
 msgstr "Опорављам датотеку, етапа 2/4..."
 
-#: src/merge/output_control.cpp:255
+#: src/merge/output_control.cpp:273
 msgid "The file is being fixed, part 3/4..."
 msgstr "Опорављам датотеку, етапа 3/4..."
 
-#: src/merge/output_control.cpp:263
+#: src/merge/output_control.cpp:281
 msgid "The file is being fixed, part 4/4..."
 msgstr "Опорављам датотеку, етапа 1/4..."
 
@@ -10536,17 +10551,17 @@ msgstr ""
 msgid "The file name for this segment."
 msgstr "Назив датотеке овог одељка."
 
-#: src/merge/output_control.cpp:994
+#: src/merge/output_control.cpp:968
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "Датотека број %1% („%2%“) не садржи запис чији је ИБ %3%, или тај запис није за умножавање. Аргумент опције „--append-to“ није ваљан.\n"
 
-#: src/merge/output_control.cpp:1000
+#: src/merge/output_control.cpp:974
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "Датотека број %1% („%2%“) не садржи запис чији је ИБ %3%, или тај запис није за умножавање. Због тога, не може јој се придружити било који запис. Аргумент опције „--append-to“ није ваљан.\n"
 
-#: src/merge/output_control.cpp:940
+#: src/merge/output_control.cpp:914
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "Датотека број %1% („%2%“) неће се придруживати. Аргумент опције „--append-to“ није ваљан.\n"
@@ -10574,8 +10589,8 @@ msgstr "Надаље, нећу обрађивати ову датотеку."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:398
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:715
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
@@ -10586,7 +10601,7 @@ msgstr "Неуспешно читање датотеке коју сте пок�
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "Нема поглавља у датотеци коју сте покушали да отворите (%1)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:117
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
 #, no-c-format
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "Датотека коју сте покушали да отворите (%1) није ваљана Матрошка или ВебМ-датотека."
@@ -10648,7 +10663,7 @@ msgstr "Дозвољени облици су „ЧЧ:ММ:СС.хххххххх�
 msgid "The formats can be mixed, too."
 msgstr "Дозвољено је и мешање ових облика."
 
-#: src/merge/output_control.cpp:1051
+#: src/merge/output_control.cpp:1025
 msgid "The formats do not match."
 msgstr "Ови облици се не подударају."
 
@@ -10666,7 +10681,7 @@ msgstr "Назив исходишне датотеке ствара се од о
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "Задати чинилац временске ознаке је изван ваљаног опсега (1...10000000 или -1 за „прецизност узорка чак и код присуства видео-записа“).\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "Нису мењане вредности заглавља, па се нема шта ни да сачува."
@@ -10769,7 +10784,7 @@ msgstr ""
 "„псеудо-кеш“-систем неће употребљавати."
 
 #: src/common/qt_kax_analyzer.cpp:73
-#: src/propedit/propedit.cpp:37
+#: src/propedit/propedit.cpp:40
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "Елеменат описа трага је уписан у сам крај датотеке, но величина одељка не може да се обнови, па овај елеменат неће бити видљив. Радња ће бити обустављена. Дтотека је измењена!"
@@ -10926,7 +10941,7 @@ msgid "The probe range percentage '%1%' is invalid.\n"
 msgstr ""
 
 #: src/common/qt_kax_analyzer.cpp:106
-#: src/propedit/propedit.cpp:61
+#: src/propedit/propedit.cpp:64
 #, fuzzy, no-c-format
 msgid "The process will be aborted."
 msgstr "Текуће поставке Мкв-спојнице биће затворене."
@@ -10976,7 +10991,7 @@ msgstr "Вредност особине није ваљана означена �
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "Вредност особине није ваљана неозначена целобројна у „%1%“. %2%\n"
 
-#: src/merge/output_control.cpp:1053
+#: src/merge/output_control.cpp:1027
 msgid "The reason is unknown."
 msgstr "Није познат узрок."
 
@@ -11185,7 +11200,7 @@ msgstr "Временске ознаке се односе на цео ток, а
 msgid "The title for the whole movie."
 msgstr "Главни наслов овог филма."
 
-#: src/merge/output_control.cpp:1010
+#: src/merge/output_control.cpp:984
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "Покушано је вишеструко придруживање записа %1% из датотеке бр. %2% („%3%“). Није ваљана вредност опције „--append-to“.\n"
@@ -11195,17 +11210,17 @@ msgstr "Покушано је вишеструко придруживање за
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "Запис, ИБ %1%, не  садржи ваљан ИБ-кодека.\n"
 
-#: src/merge/output_control.cpp:690
+#: src/merge/output_control.cpp:664
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "Не могу ваљано да обрадим заглавља записа. %1%\n"
 
-#: src/merge/output_control.cpp:1042
+#: src/merge/output_control.cpp:1016
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "Највероватније, запис број %1% из датотеке „%2%“ не може да се ваљано придружити запису број %3% из датотеке „%4%“: %5% Уверите се да је ваљана репродукција исходишне датотеке од почетка до краја. За проблеме при репродукци исходишне датотеке, творац овог програма вероватно неће давати одговарајућу подршку.\n"
 
-#: src/merge/output_control.cpp:1054
+#: src/merge/output_control.cpp:1028
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "Запис број %1% из датотеке „%2%“ не може да се придружити записуброј %3% из датотеке „%4%“: %5%\n"
@@ -11214,7 +11229,7 @@ msgstr "Запис број %1% из датотеке „%2%“ не може д
 msgid "The track number as used in the Block Header."
 msgstr "Број записа упоребљен у заглављу блока (енг. „Block Header“)."
 
-#: src/merge/output_control.cpp:1052
+#: src/merge/output_control.cpp:1026
 msgid "The track parameters do not match."
 msgstr "Параметри овог записа се не слажу."
 
@@ -11291,8 +11306,8 @@ msgstr "Ново издање је доступно на мрежи."
 msgid "There is currently a job running."
 msgstr "Постоји радња која се тренутно извршава."
 
-#: src/merge/output_control.cpp:934
-#: src/merge/output_control.cpp:944
+#: src/merge/output_control.cpp:908
+#: src/merge/output_control.cpp:918
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "Нема датотеке чији је ИБ „%1%“. Није ваљана „--append-to“ вредност.\n"
@@ -11307,11 +11322,18 @@ msgstr "Нема доступног превода за „%1%“.\n"
 msgid "There was an error querying the update status."
 msgstr "Дошло је до грешке приликом провере стања надградњи."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "Неправилности у вредностима заглавља су спречиле чување заглавља и довеле до погрешака. Одабрана је прва грешка."
+
+#: src/merge/output_control.cpp:231
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:251
+#: src/propedit/propedit.cpp:119
+#, no-c-format
+msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
@@ -11420,7 +11442,7 @@ msgid "This file contains coordinates in the timestamp lines. Such coordinates a
 msgstr "Ова датотека садржи координате на месту временских ознака. Ове координате нису подржане у Матрошка-Срт врсти поднаписа па ћу их самостално и уклонити.\n"
 
 #: src/extract/mkvextract.cpp:67
-#: src/propedit/propedit.cpp:139
+#: src/propedit/propedit.cpp:158
 msgid "This file could not be opened or parsed.\n"
 msgstr "Не могу да отворим или рашчланим ову датотеку.\n"
 
@@ -11586,12 +11608,12 @@ msgstr "Ова особина је обавезна па се не може бр
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "Ова, јединствена особина, може да се појави само једном у „%1%“. %2%\n"
 
-#: src/merge/output_control.cpp:259
+#: src/merge/output_control.cpp:277
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "Заиста, ово није требало да се догоди. Одвојени простор за први елеменат елеменат описа трага је премален. %1%\n"
 
-#: src/merge/output_control.cpp:1618
+#: src/merge/output_control.cpp:1594
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Заиста, ово није требало да се догоди. Одвојен простор за први елеменат описа трага је премален. Нужна величина: %1%. %2%\n"
@@ -12051,10 +12073,17 @@ msgstr "Неподржана врста за овај запис.\n"
 msgid "Update an attachment's properties"
 msgstr "Особине поднаписа и поглавља"
 
-#: src/propedit/propedit.cpp:28
+#: src/propedit/propedit.cpp:31
 #, boost-format
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "Није успело занављање елемента „%1%“. Узрок:"
+
+#: src/merge/output_control.cpp:234
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:253
+#: src/propedit/propedit.cpp:122
+#, no-c-format
+msgid "Updating the 'document type version' or 'document type read version' header fields failed."
+msgstr ""
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:41
 msgid "Usage"
@@ -12266,7 +12295,7 @@ msgstr "Ширина"
 msgid "Video projection"
 msgstr "Видео-особине"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:515
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:531
 #, fuzzy
 msgid "Video projection information"
 msgstr "Дв-видео"
@@ -12892,7 +12921,7 @@ msgstr "испреплетен стуб (десно прво)"
 msgid "compression"
 msgstr "сажимање"
 
-#: src/merge/generic_packetizer.cpp:1648
+#: src/merge/generic_packetizer.cpp:1635
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "„create_track_number“: Није пронађен „file_num“. %1%\n"
@@ -12942,7 +12971,7 @@ msgstr "заштита"
 msgid "equirectangular"
 msgstr ""
 
-#: src/merge/output_control.cpp:413
+#: src/merge/output_control.cpp:431
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "Није пронађено „filelist_t“ за „generic_packetizer_c“. %1%\n"
@@ -13321,8 +13350,8 @@ msgstr "Мкв-спојница ће да уклони последњу став
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "Мкв-спојница има подршку за две врсте поглавља, Огм-сродну текстуалну врсту и потпуно уобличену ИксМЛ-врсту."
 
-#: src/merge/output_control.cpp:234
-#: src/merge/output_control.cpp:276
+#: src/merge/output_control.cpp:251
+#: src/merge/output_control.cpp:294
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "Мкв-спојницу је зауставио сигнал „SIGINT“ (Ctrl+C?)\n"
 

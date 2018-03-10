@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-09 19:16+0100\n"
+"POT-Creation-Date: 2018-03-10 14:04+0100\n"
 "PO-Revision-Date: 2018-03-04 18:26+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -30,7 +30,7 @@ msgstr ""
 "El fitxer temporal TTA per a la pista amb l'ID %1% s'està copiant al fitxer TTA final. Això durà algun temps.\n"
 "\n"
 
-#: src/merge/output_control.cpp:236
+#: src/merge/output_control.cpp:253
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -1159,10 +1159,10 @@ msgid_plural " days"
 msgstr[0] " dia"
 msgstr[1] " dies"
 
-#: src/merge/output_control.cpp:244
-#: src/merge/output_control.cpp:253
 #: src/merge/output_control.cpp:261
-#: src/merge/output_control.cpp:268
+#: src/merge/output_control.cpp:271
+#: src/merge/output_control.cpp:279
+#: src/merge/output_control.cpp:286
 msgid " done\n"
 msgstr " fet\n"
 
@@ -1455,7 +1455,7 @@ msgid "&Add attachment"
 msgstr "&Afegeix un adjunt"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:309
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:325
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
@@ -1532,7 +1532,7 @@ msgid "&Close"
 msgstr "Tan&ca"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:261
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/merge/tool.cpp:217
 #, no-c-format
 msgid "&Close file"
@@ -1543,7 +1543,7 @@ msgid "&Code of Conduct"
 msgstr "&Codi de conducta"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:199
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:308
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
 #, no-c-format
 msgid "&Collapse all"
 msgstr "&Contrau-ho tot"
@@ -1624,7 +1624,7 @@ msgid "&Escape arguments for:"
 msgstr "&Escapa els arguments per a:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:307
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:323
 #, no-c-format
 msgid "&Expand all"
 msgstr "&Expandeix-ho tot"
@@ -1864,12 +1864,12 @@ msgid "&Reload"
 msgstr "To&rna a carregar"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #, no-c-format
 msgid "&Reload file"
 msgstr "To&rna a carregar el fitxer"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:310
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:326
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
@@ -1919,7 +1919,7 @@ msgstr "&Reinicia aquest valor"
 msgid "&Save"
 msgstr "De&sa"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:311
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:327
 #, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "De&sa el contingut de l'adjunt a un fitxer"
@@ -2632,6 +2632,13 @@ msgstr "Una llista separada per comes dels intervals del codi de temps del conti
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "Un índex per omissió i amb els ajustaments per omissió que s'usaran per a l'amplada, alçada i color."
 
+#: src/merge/output_control.cpp:232
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/propedit/propedit.cpp:120
+#, no-c-format
+msgid "A generic read or write failure occurred."
+msgstr ""
+
 #: src/common/property_element.cpp:141
 msgid "A human-readable string specifying the codec."
 msgstr "Una cadena llegible especificant el còdec."
@@ -2880,7 +2887,7 @@ msgstr "Afegeix &adjunts nous al fitxer actual"
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "Afegeix com a fitxers d'origen nous als ajustaments de multiplexat actuals"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -3078,7 +3085,7 @@ msgstr "Totes les entrades"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:312
@@ -3113,7 +3120,7 @@ msgstr "Tots els següents noms de fitxer s'obriran a l'editor de la capçalera.
 msgid "All following file names will be opened in the info tool."
 msgstr "Tots els següents noms de fitxer s'obriran a l'eina d'informació."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
 #, no-c-format
 msgid "All header values are OK."
 msgstr "Tots els valors de capçalera estan bé."
@@ -3251,7 +3258,7 @@ msgid "An exception occurred when writing the destination file."
 msgstr "S'ha produït una excepció en escriure el fitxer de destinació."
 
 #: src/common/qt_kax_analyzer.cpp:111
-#: src/propedit/propedit.cpp:66
+#: src/propedit/propedit.cpp:69
 #, no-c-format
 msgid "An unknown error occured. The file has been modified."
 msgstr "S'ha produït un error desconegut. El fitxer ha estat modificat."
@@ -3265,7 +3272,7 @@ msgstr "S'esperava un enter sense signe."
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "Analitza fluxos de bits MPEG4, situa cada fotograma en un bloc de Matroska, usa marques de temps adequades (I P B B = 0 120 40 80) i usa els ID del còdec V_MPEG4/ISO/..."
 
-#: src/merge/generic_packetizer.cpp:632
+#: src/merge/generic_packetizer.cpp:626
 #, boost-format
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "Ja s'ha definit l'altra pista per omissió per a %1% pistes. No s'establirà l'etiqueta «omissió» per a la pista %2% de «%3%».\n"
@@ -3294,7 +3301,7 @@ msgstr "Annexa alguns fitxers de suports"
 msgid "Append to an e&xisting source file"
 msgstr "Annexa a un fitxer d'origen e&xistent"
 
-#: src/merge/output_control.cpp:1772
+#: src/merge/output_control.cpp:1751
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "S'està unint la pista %1% des del fitxer núm. %2% («%3%») a la pista %4% des del fitxer núm. %5% («%6%»).\n"
@@ -3632,7 +3639,7 @@ msgstr "Calcula les estadístiques per a totes les pistes i afegeix etiquetes no
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:239
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:262
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:819
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:835
 #: src/mkvtoolnix-gui/jobs/tool.cpp:526
 #: src/mkvtoolnix-gui/jobs/tool.cpp:595
 #: src/mkvtoolnix-gui/jobs/tool.cpp:620
@@ -3961,7 +3968,7 @@ msgid "Close current settings"
 msgstr "Tanca els ajustaments actuals"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:259
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #: src/mkvtoolnix-gui/merge/tool.cpp:215
 #, no-c-format
 msgid "Close modified file"
@@ -4050,11 +4057,11 @@ msgstr "Retard inherent del còdec"
 msgid "Codec/MIME type"
 msgstr "Tipus de còdec/MIME"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:505
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:521
 msgid "Colour information"
 msgstr "Informació del color"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:510
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:526
 msgid "Colour mastering meta information"
 msgstr "Meta informació sobre domini del color"
 
@@ -4088,7 +4095,7 @@ msgstr "S'ha completat amb èxit"
 msgid "Completed with warnings"
 msgstr "S'ha completat amb avisos"
 
-#: src/merge/generic_packetizer.cpp:1270
+#: src/merge/generic_packetizer.cpp:1260
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "La compressió ha fallat: %1%\n"
@@ -4177,7 +4184,7 @@ msgstr "No s'ha pogut extreure la capçalera de la seqüència des d'aquesta pis
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "No s'ha pogut trobar un índex per a la pista d'àudio %1% (Missatge d'error «avilib»: %2%). S'ha omès la pista.\n"
 
-#: src/merge/output_control.cpp:1698
+#: src/merge/output_control.cpp:1677
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "No s'ha pogut trobar «gptzr» en annexar. %1%\n"
@@ -4752,7 +4759,7 @@ msgstr "Directori &relatiu al directori del primer fitxer d'origen:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
 #, no-c-format
 msgid "Directory:"
 msgstr "Directori:"
@@ -4891,7 +4898,7 @@ msgstr "No tornis a mostrar aquest missatge."
 msgid "Done scanning playlists.\n"
 msgstr "S'han escanejat les llistes de reproducció.\n"
 
-#: src/propedit/propedit.cpp:156
+#: src/propedit/propedit.cpp:176
 msgid "Done.\n"
 msgstr "Fet.\n"
 
@@ -4914,7 +4921,7 @@ msgid "Drops the lossless extensions from an audio track and keeps only its loss
 msgstr "Descarta les extensions sense pèrdua d'una pista d'àudio i només manté el seu nucli amb pèrdua."
 
 #: src/common/qt_kax_analyzer.cpp:104
-#: src/propedit/propedit.cpp:59
+#: src/propedit/propedit.cpp:62
 #, no-c-format
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
 msgstr "A causa de la particular estructura del fitxer, aquesta situació no es pot solucionar de forma automàtica."
@@ -5035,7 +5042,7 @@ msgstr "Corregiu l'error o bé elimineu la configuració abans de tancar el dià
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
 msgstr "O bé la paraula «all» la qual selecciona tots els capítols o una llista separada per comes dels números dels capítols abans de realitzar la divisió."
 
-#: src/propedit/propedit.cpp:97
+#: src/propedit/propedit.cpp:100
 #, boost-format
 msgid "Element %1% is written.\n"
 msgstr "S'ha escrit l'element %1%.\n"
@@ -5118,8 +5125,8 @@ msgstr "Error en crear un fitxer temporal (motiu: %1)."
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr "Error en decodificar una pàgina Opus d'Ogg a la marca de temps de l'origen %1%; la pàgina serà omesa: %2%\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, no-c-format
 msgid "Error details: %1."
 msgstr "Detalls de l'error: %1."
@@ -5174,7 +5181,7 @@ msgstr "Error en analitzar les etiquetes a «%1%»: Falten alguns elements oblig
 msgid "Error reading Matroska file"
 msgstr "Error en llegir el fitxer Matroska"
 
-#: src/merge/output_control.cpp:765
+#: src/merge/output_control.cpp:739
 #, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "Error en llegir del fitxer «%1%».\n"
@@ -5183,7 +5190,8 @@ msgstr "Error en llegir del fitxer «%1%».\n"
 #: src/common/qt_kax_analyzer.cpp:72
 #: src/common/qt_kax_analyzer.cpp:92
 #: src/common/qt_kax_analyzer.cpp:100
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:255
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, no-c-format
 msgid "Error writing Matroska file"
 msgstr "Error en escriure el fitxer Matroska"
@@ -5460,7 +5468,7 @@ msgstr "Dades del fitxer"
 msgid "File description"
 msgstr "Descripció del fitxer"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "File has not been modified"
 msgstr "El fitxer no ha estat modificat"
@@ -5476,7 +5484,7 @@ msgstr "Nom del fitxer"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:320
 #, no-c-format
 msgid "File name:"
 msgstr "Nom del fitxer:"
@@ -5495,8 +5503,8 @@ msgstr "No s'ha trobat el fitxer"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:553
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:120
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:146
 #, no-c-format
 msgid "File parsing failed"
 msgstr "L'anàlisi del fitxer ha fallat"
@@ -5520,7 +5528,7 @@ msgstr "Tipus de fitxers com fluxos de programa i de transport MPEG (.vob, .m2ts
 msgid "File/Segment linking"
 msgstr "Vincula el fitxer/segment"
 
-#: src/merge/output_control.cpp:948
+#: src/merge/output_control.cpp:922
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Els fitxers no es poden annexar a si mateixos. L'argument per «--append-to» no és vàlid.\n"
 
@@ -5805,9 +5813,9 @@ msgstr "No és possible suprimir la compressió de la capçalera perquè la mem�
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "No és possible suprimir la compressió de la capçalera perquè la memòria cau no ha estat iniciada amb els bytes que s'hauran de suprimir. Bytes necessaris: %1%; trobats: %2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "Header validation"
 msgstr "Validació de la capçalera"
@@ -7141,7 +7149,7 @@ msgstr "S'ha indicat més d'un nom de fitxer («%1%» i «%2%»).\n"
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "S'ha donat més d'un nom per a un únic adjunt. «%1%» serà descartat i s'emparà «%2%» en el seu lloc.\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:995
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "Hi ha més d'una pista per annexar a la pista %1% des del fitxer núm. %2% («%3%»). L'argument per «--append-to» no és vàlid.\n"
@@ -7296,6 +7304,13 @@ msgstr "No"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "No s'ha especificat cap %1% a «--%2% %3%».\n"
 
+#: src/merge/output_control.cpp:230
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:250
+#: src/propedit/propedit.cpp:118
+#, fuzzy, no-c-format
+msgid "No 'EBML head' element was found."
+msgstr "No s'ha trobat cap capçalera EBML."
+
 #: src/input/r_qtmp4.cpp:1702
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera AC-3 al primer fotograma. La pista serà omesa.\n"
@@ -7317,7 +7332,7 @@ msgstr "No s'ha establert cap tipus MIME per a l'adjunt «%1%», i no es pot end
 msgid "No actions have been added yet."
 msgstr "Encara no s'ha afegit cap acció."
 
-#: src/merge/output_control.cpp:980
+#: src/merge/output_control.cpp:954
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "No s'ha donat cap assignació d'annexió pel fitxer núm. %1% («%2%»). En el seu lloc s'emparà una assignació d'annexió per omissió de %3%. Si us plau, tingueu-ho en compte per si el «mkvmerge» avorta amb un missatge d'error respecte a opcions no vàlides per «--append-to».\n"
@@ -7328,7 +7343,7 @@ msgstr "No s'ha donat cap assignació d'annexió pel fitxer núm. %1% («%2%»).
 msgid "No attachment matched the spec '%1%'.\n"
 msgstr "Cap adjunt coincideix amb l'especificació «%1%».\n"
 
-#: src/propedit/propedit.cpp:159
+#: src/propedit/propedit.cpp:179
 msgid "No changes were made.\n"
 msgstr "No s'ha realitzat cap canvi.\n"
 
@@ -7424,7 +7439,7 @@ msgstr "Encara sense sortida"
 msgid "No permission to read from, to write to or to create"
 msgstr "Sense permisos de lectura, escriptura o creació"
 
-#: src/common/kax_analyzer.cpp:1513
+#: src/common/kax_analyzer.cpp:1536
 #, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "No s'ha trobat l'UID del segment en el fitxer «%1%»."
@@ -7521,11 +7536,11 @@ msgstr "Normalment, les entrades seleccionades a la vista de llista es poden mou
 msgid "Not a hex digit at position %1%"
 msgstr "No hi ha un dígit hexadecimal a la posició %1%"
 
-#: src/common/kax_analyzer.cpp:292
+#: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "No és un fitxer de Matroska vàlid (no s'ha trobat la capçalera EBML)"
 
-#: src/common/kax_analyzer.cpp:311
+#: src/common/kax_analyzer.cpp:318
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "No és un fitxer de Matroska vàlid (no s'ha trobat cap element al segment/nivell 0)"
 
@@ -7575,7 +7590,7 @@ msgstr "Tingueu en compte que la majoria de les variables <MTX_…> estan buides
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Recordeu que al Windows també es poden emprar barres inclinades en lloc de barres invertides en els noms dels camins."
 
-#: src/merge/generic_packetizer.cpp:1629
+#: src/merge/generic_packetizer.cpp:1616
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Tingueu en compte que les especificacions de Matroska quant a l'emmagatzemament de «%1%» encara no han finalitzat. La implementació del «mkvmerge» està subjecta a canvis i usa el CodecID «%2%/EXPERIMENTAL» en comptes de «%2%». Aquest avís serà suprimit una vegada s'hagin finalitzat les especificacions i s'actualitzi el «mkvmerge».\n"
@@ -7647,7 +7662,7 @@ msgstr[0] "Només s'ha trobat %1% capítol als fitxers d'origen i de capítols."
 msgstr[1] "Només s'han trobat %1% capítols als fitxers d'origen i de capítols."
 
 #: src/merge/mkvmerge.cpp:1802
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:697
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7702,7 +7717,7 @@ msgstr "Només es permet un fitxer d'informació del segment a «%1% %2%».\n"
 msgid "Only one source file is allowed.\n"
 msgstr "Només es permet un fitxer d'origen.\n"
 
-#: src/merge/output_control.cpp:961
+#: src/merge/output_control.cpp:935
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Només s'ha donat una part de les assignacions d'annexió al fitxer núm. %1% («%2%»). O bé no especifiqueu cap assignació (en aquest cas s'usarà l'establerta com a predefinida) o en podeu establir una per a totes les pistes que es copiaran.\n"
@@ -8059,10 +8074,10 @@ msgstr "Les possibles causes són que el programa no existeix o que no esteu aut
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:716
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:140
-#: src/propedit/propedit.cpp:47
-#: src/propedit/propedit.cpp:53
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:141
+#: src/propedit/propedit.cpp:50
+#: src/propedit/propedit.cpp:56
 #, no-c-format
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr "Les possibles raons són: el fitxer no és un fitxer Matroska; el fitxer està protegit contra escriptura; el fitxer està blocat per un altre procés; no disposeu de permisos per accedir al fitxer."
@@ -8139,7 +8154,7 @@ msgstr "Progrés:"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2939
-#: src/merge/output_control.cpp:340
+#: src/merge/output_control.cpp:358
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -8147,12 +8162,12 @@ msgstr "Progrés:"
 msgid "Progress: %1%%%%2%"
 msgstr "Progrés: %1%%%%2%"
 
-#: src/merge/output_control.cpp:315
+#: src/merge/output_control.cpp:333
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "Progrés: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1579
+#: src/common/kax_analyzer.cpp:1602
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Progrés: [%1%%2%] %3%%%"
@@ -8341,7 +8356,7 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "Torna a &numerar els subcapítols"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:312
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
 #, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "Su&bstitueix l'adjunt amb un nom de fitxer nou"
@@ -8355,8 +8370,8 @@ msgstr "Llegeix tot el fitxer NEWS.md en línia"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "La lectura de VOB encriptats encara no està implementada.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:710
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
@@ -8425,7 +8440,7 @@ msgid "Reference virtual"
 msgstr "Referència virtual"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #, no-c-format
 msgid "Reload modified file"
 msgstr "Torna a carregar el fitxer modificat"
@@ -8516,7 +8531,7 @@ msgstr "Substitueix un adjunt amb el «nom_de_fitxer» del fitxer"
 msgid "Replace attachment"
 msgstr "Substitueix l'adjunt"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:313
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:329
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "Substitueix l'adjunt amb un nom de fitxer nou i o&btén el nom del tipus MIME"
@@ -8568,7 +8583,7 @@ msgstr "Clic dret per a les accions en tots els elements"
 msgid "Right-click for actions for editions and chapters"
 msgstr "Clic dret per a les accions en les edicions i els capítols"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:332
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:348
 #, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "Clic dret per a les accions en els elements de capçalera i adjunts"
@@ -8707,17 +8722,17 @@ msgstr "El desament ha fallat"
 msgid "Saving the chapters failed."
 msgstr "El desament dels capítols ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:242
 #, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "El desament dels adjunts modificats ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:217
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "El desament de la capçalera d'informació del segment modificat ha fallat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:225
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "El desament de les capçaleres de la pista modificada ha fallat."
@@ -8809,7 +8824,7 @@ msgid "Segment info:"
 msgstr "Informació del segment:"
 
 #: src/common/kax_element_names.cpp:83
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:465
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:481
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
@@ -9203,7 +9218,7 @@ msgstr "Talls"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Algunes pistes h.264/AVC contenen talls I, però falten els fotogrames clau reals."
 
-#: src/merge/output_control.cpp:1317
+#: src/merge/output_control.cpp:1291
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "Manquen alguns elements de l'etiqueta (aquest error no hauria d'haver succeït -ja deu haver succeït quelcom semblant anteriorment-). %1%\n"
@@ -9623,12 +9638,12 @@ msgstr "El format del contenidor Matroska pot emmagatzemar l'amplada/alçada de 
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
 msgstr "El fitxer Matroska ha estat modificat, però el registre meta de cerca no s'ha pogut actualitzar. Això vol dir que els reproductors podrien tenir dificultats en trobar aquest element. Si us plau, useu el vostre reproductor preferit per a comprovar aquest fitxer."
 
-#: src/propedit/propedit.cpp:41
+#: src/propedit/propedit.cpp:44
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr "El fitxer Matroska ha estat modificat, però el registre meta de cerca no s'ha pogut actualitzar. Això vol dir que els reproductors podrien tenir dificultats en trobar aquest element. Si us plau, useu el vostre reproductor preferit per a comprovar aquest fitxer."
 
 #: src/common/qt_kax_analyzer.cpp:103
-#: src/propedit/propedit.cpp:58
+#: src/propedit/propedit.cpp:61
 #, no-c-format
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr "L'últim element del fitxer Matroska s'estableix a una mida desconeguda."
@@ -9781,7 +9796,7 @@ msgstr "El fitxer d'àudio per reproduir encara no s'ha establert."
 msgid "The audio/video synchronization may have been lost."
 msgstr "La sincronització de l'àudio/vídeo es pot haver perdut."
 
-#: src/propedit/propedit.cpp:152
+#: src/propedit/propedit.cpp:171
 msgid "The changes are written to the file.\n"
 msgstr "Els canvis són escrits al fitxer.\n"
 
@@ -9862,7 +9877,7 @@ msgstr "La capçalera del fitxer de correcció no es pot llegir correctament.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Els països «seleccionats» aquí es mostraran a la part superior de les llistes desplegables de país en el programa."
 
-#: src/merge/output_control.cpp:1507
+#: src/merge/output_control.cpp:1483
 msgid "The cue entries (the index) are being written...\n"
 msgstr "S'estan escrivint les entrades de l'índex...\n"
 
@@ -9884,12 +9899,12 @@ msgstr "El mode actual es pot canviar amb --multiplex, --edit-chapters o --edit-
 msgid "The current multiplex settings will be closed."
 msgstr "Es tancaran els ajustaments de multiplexat actuals."
 
-#: src/merge/generic_packetizer.cpp:1347
+#: src/merge/generic_packetizer.cpp:1334
 #, boost-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "El codi de temps del paquet actual és més petit que el del paquet anterior. Normalment, vol dir que el fitxer d'origen és un fitxer Matroska que no ha estat creat correctament al 100%%. Els codis de temps de tots els paquets seran ajustats per %1% ms per tal de no perdre cap dada. Això pot desfer la sincronització de l'àudio/vídeo, però es pot corregir amb l'opció «--sync» del «mkvmerge». Si ja heu emprat «--sync» i encara obteniu aquest avís, NO us preocupeu, és normal. Si l'error succeeix més d'una vegada, tornant a obtenir aquest missatge per a una pista en particular, llavors el fitxer d'origen pot estar mal editat o el «mkvmerge» conté un error. En aquest cas hauríeu de contactar amb l'autor, en Moritz Bunkus <moritz@bunkus.org>.\n"
 
-#: src/common/kax_analyzer.cpp:175
+#: src/common/kax_analyzer.cpp:176
 msgid "The data in the file is corrupted and cannot be modified safely"
 msgstr "Les dades del fitxer estan corrompudes i no es poden modificar de manera segura"
 
@@ -9974,7 +9989,7 @@ msgid "The edition UID must be a number if given."
 msgstr "Si s'indica l'UID de l'edició, haurà de ser un número."
 
 #: src/common/qt_kax_analyzer.cpp:67
-#: src/propedit/propedit.cpp:33
+#: src/propedit/propedit.cpp:36
 #, no-c-format
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "L'element s'ha escrit al final del fitxer, però la mida del segment no s'ha pogut actualitzar. Pel que l'element no serà visible. El procés serà interromput. El fitxer ha estat canviat!"
@@ -9999,14 +10014,14 @@ msgid "The fifth mode tries to extract chapter information and tags and outputs 
 msgstr "El cinquè mode intenta extreure la informació dels capítols i les etiquetes, i dóna la sortida com un full de muntatge. Això és el contrari d'emprar un full de muntatge amb l'opció «--chapters» del «mkvmerge»."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:260
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:810
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:826
 #: src/mkvtoolnix-gui/merge/tool.cpp:216
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
 msgstr "El fitxer «%1» ha estat modificat. De veres el voleu tancar? Es perdran tots els canvis."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:811
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:827
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "El fitxer «%1» ha estat modificat. De veres el voleu tornar a carregar? Es perdran tots els canvis."
@@ -10016,13 +10031,13 @@ msgstr "El fitxer «%1» ha estat modificat. De veres el voleu tornar a carregar
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "El fitxer «%1%» no es pot adjuntar perquè no existeix o no es pot llegir.\n"
 
-#: src/propedit/propedit.cpp:134
+#: src/propedit/propedit.cpp:153
 #, boost-format
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura i escriptura, o una de les operacions ha fallat: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1503
-#: src/common/kax_analyzer.cpp:1506
+#: src/common/kax_analyzer.cpp:1526
+#: src/common/kax_analyzer.cpp:1529
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura: %2%."
@@ -10051,17 +10066,17 @@ msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:134
-#: src/merge/output_control.cpp:1341
+#: src/merge/output_control.cpp:1317
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1509
+#: src/common/kax_analyzer.cpp:1532
 #, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "El fitxer «%1%» no s'ha pogut obrir o analitzar."
 
-#: src/merge/output_control.cpp:1345
+#: src/merge/output_control.cpp:1321
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "El fitxer «%1%» ha estat obert per a escriptura.\n"
@@ -10106,14 +10121,14 @@ msgstr "El fitxer «%1» no és un fitxer de la cua de treball ni un fitxer d'aj
 msgid "The file '%1' you've added is a playlist."
 msgstr "El fitxer «%1» que heu afegit és una llista de reproducció."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:696
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:712
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, no-c-format
 msgid "The file (%1) is too big (%2)."
 msgstr "El fitxer (%1) és massa gran (%2)."
 
 #: src/common/qt_kax_analyzer.cpp:105
-#: src/propedit/propedit.cpp:60
+#: src/propedit/propedit.cpp:63
 #, no-c-format
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "El fitxer es pot arreglar tornant-lo a multiplexar amb el «mkvmerge»."
@@ -10128,13 +10143,13 @@ msgid "The file could not be opened for reading, or there was not enough data to
 msgstr "El fitxer no s'ha pogut obrir per a lectura, o no hi ha prou dades per analitzar les seves capçaleres."
 
 #: src/common/qt_kax_analyzer.cpp:87
-#: src/propedit/propedit.cpp:46
+#: src/propedit/propedit.cpp:49
 #, no-c-format
 msgid "The file could not be opened for reading."
 msgstr "El fitxer no s'ha pogut obrir per a lectura."
 
 #: src/common/qt_kax_analyzer.cpp:95
-#: src/propedit/propedit.cpp:52
+#: src/propedit/propedit.cpp:55
 #, no-c-format
 msgid "The file could not be opened for writing."
 msgstr "El fitxer no s'ha pogut obrir per a escriptura."
@@ -10145,14 +10160,14 @@ msgid "The file does not contain track ID %1%.\n"
 msgstr "El fitxer no conté l'ID de la pista %1%.\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:647
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:268
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "El fitxer ha estat desat amb èxit."
 
 #: src/common/qt_kax_analyzer.cpp:107
-#: src/propedit/propedit.cpp:62
-#: src/propedit/propedit.h:17
+#: src/propedit/propedit.cpp:65
+#: src/propedit/propedit.h:19
 #, no-c-format
 msgid "The file has not been modified."
 msgstr "El fitxer no ha estat modificat."
@@ -10175,24 +10190,24 @@ msgid "The file is an unsupported container format (%1)."
 msgstr "El fitxer està en un format de contenidor no admès (%1)."
 
 #: src/common/qt_kax_analyzer.cpp:37
-#: src/propedit/propedit.cpp:122
+#: src/propedit/propedit.cpp:140
 #, no-c-format
 msgid "The file is being analyzed."
 msgstr "S'està analitzant el fitxer."
 
-#: src/merge/output_control.cpp:240
+#: src/merge/output_control.cpp:257
 msgid "The file is being fixed, part 1/4..."
 msgstr "S'està arreglant el fitxer, part 1/4..."
 
-#: src/merge/output_control.cpp:246
+#: src/merge/output_control.cpp:263
 msgid "The file is being fixed, part 2/4..."
 msgstr "S'està arreglant el fitxer, part 2/4..."
 
-#: src/merge/output_control.cpp:255
+#: src/merge/output_control.cpp:273
 msgid "The file is being fixed, part 3/4..."
 msgstr "S'està arreglant el fitxer, part 3/4..."
 
-#: src/merge/output_control.cpp:263
+#: src/merge/output_control.cpp:281
 msgid "The file is being fixed, part 4/4..."
 msgstr "S'està arreglant el fitxer, part 4/4..."
 
@@ -10204,17 +10219,17 @@ msgstr "El fitxer es llegeix amb la finalitat de crear les estadístiques de la 
 msgid "The file name for this segment."
 msgstr "El nom de fitxer per aquest segment."
 
-#: src/merge/output_control.cpp:994
+#: src/merge/output_control.cpp:968
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no conté una pista amb l'ID %3%, o no s'ha copiat aquesta pista. L'argument per «--append-to» no és vàlid.\n"
 
-#: src/merge/output_control.cpp:1000
+#: src/merge/output_control.cpp:974
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no conté una pista amb l'ID %3%, o no s'ha copiat aquesta pista. De manera que no es pot annexar cap pista. L'argument per «--append-to» no és vàlid.\n"
 
-#: src/merge/output_control.cpp:940
+#: src/merge/output_control.cpp:914
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no serà annexat. L'argument per «--append-to» no és vàlid.\n"
@@ -10242,8 +10257,8 @@ msgstr "Aquest fitxer no es processarà més."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:398
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:715
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
@@ -10254,7 +10269,7 @@ msgstr "El fitxer que intenteu obrir (%1) no es pot llegir adequadament."
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "El fitxer que intenteu obrir (%1) no conté cap capítol."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:117
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
 #, no-c-format
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "El fitxer que intenteu obrir (%1) no és reconegut com un fitxer Matroska/WebM vàlid."
@@ -10314,7 +10329,7 @@ msgstr "El format segueix la forma HH:MM:SS.nnnnnnnnn o com un número seguit pe
 msgid "The formats can be mixed, too."
 msgstr "Els formats també es poden fusionar."
 
-#: src/merge/output_control.cpp:1051
+#: src/merge/output_control.cpp:1025
 msgid "The formats do not match."
 msgstr "Els formats no coincideixen."
 
@@ -10331,7 +10346,7 @@ msgstr "El nom del fitxer de destinació generat es basa en el nom del fitxer d'
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "El factor d'escala assignat al codi de temps es troba fora d'un interval vàlid (1... 10000000 o -1 per a «precisió de la mostra fins i tot si hi ha present una pista de vídeo»).\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "Els valors de la capçalera no han estat modificats. No hi ha res per desar."
@@ -10430,7 +10445,7 @@ msgstr ""
 "de pseudomemòria cau de referència."
 
 #: src/common/qt_kax_analyzer.cpp:73
-#: src/propedit/propedit.cpp:37
+#: src/propedit/propedit.cpp:40
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "L'element meta de cerca s'escriu al final del fitxer, però no s'ha pogut actualitzar la mida del segment. De manera que l'element no serà visible. El procés serà interromput. El fitxer ha estat modificat!"
@@ -10587,7 +10602,7 @@ msgid "The probe range percentage '%1%' is invalid.\n"
 msgstr "L'interval de prova del percentatge «%1%» no és vàlid.\n"
 
 #: src/common/qt_kax_analyzer.cpp:106
-#: src/propedit/propedit.cpp:61
+#: src/propedit/propedit.cpp:64
 #, no-c-format
 msgid "The process will be aborted."
 msgstr "El procés serà cancel·lat."
@@ -10637,7 +10652,7 @@ msgstr "El valor de la propietat no és un enter amb signe vàlid a «%1%». %2%
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "El valor de la propietat no és un enter sense signe vàlid a «%1%». %2%\n"
 
-#: src/merge/output_control.cpp:1053
+#: src/merge/output_control.cpp:1027
 msgid "The reason is unknown."
 msgstr "La raó és desconeguda."
 
@@ -10844,7 +10859,7 @@ msgstr "Els codis de temps es refereixen a tot el flux i no a cada fitxer de des
 msgid "The title for the whole movie."
 msgstr "El títol per a tota la pel·lícula."
 
-#: src/merge/output_control.cpp:1010
+#: src/merge/output_control.cpp:984
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "La pista %1% del fitxer núm. %2% («%3%») es pot annexar més d'una vegada. L'argument per «--append-to» no és vàlid.\n"
@@ -10854,17 +10869,17 @@ msgstr "La pista %1% del fitxer núm. %2% («%3%») es pot annexar més d'una ve
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "La pista amb l'ID %1% no té un ID de còdec vàlid.\n"
 
-#: src/merge/output_control.cpp:690
+#: src/merge/output_control.cpp:664
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "Les capçaleres de la pista no s'han pogut reproduir correctament. %1%\n"
 
-#: src/merge/output_control.cpp:1042
+#: src/merge/output_control.cpp:1016
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "El número de la pista %1% del fitxer «%2%» probablement no es pot annexar correctament al número de la pista %3% del fitxer «%4%»: %5% Si us plau, assegureu-vos que el fitxer resultant es reprodueix tot el temps de forma correcta. És poc probable que l'autor d'aquest programa proporcioni cap tipus de suport per a les errades de reproducció amb el fitxer resultant.\n"
 
-#: src/merge/output_control.cpp:1054
+#: src/merge/output_control.cpp:1028
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "El número de la pista %1% del fitxer «%2%» no es pot annexar al número de la pista %3% del fitxer «%4%». %5%\n"
@@ -10873,7 +10888,7 @@ msgstr "El número de la pista %1% del fitxer «%2%» no es pot annexar al núme
 msgid "The track number as used in the Block Header."
 msgstr "El número de la pista que s'usa a la capçalera del bloc."
 
-#: src/merge/output_control.cpp:1052
+#: src/merge/output_control.cpp:1026
 msgid "The track parameters do not match."
 msgstr "Els paràmetres de la pista no coincideixen."
 
@@ -10950,8 +10965,8 @@ msgstr "Hi ha disponible una nova versió."
 msgid "There is currently a job running."
 msgstr "Actualment hi ha una tasca en execució."
 
-#: src/merge/output_control.cpp:934
-#: src/merge/output_control.cpp:944
+#: src/merge/output_control.cpp:908
+#: src/merge/output_control.cpp:918
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "No és un fitxer amb l'ID «%1%». L'argument per «--append-to» no era vàlid.\n"
@@ -10966,11 +10981,18 @@ msgstr "No hi ha traducció disponible per a «%1%».\n"
 msgid "There was an error querying the update status."
 msgstr "S'ha produït un error en consultar l'estat de l'actualització."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "S'han produït errors en els valors de la capçalera que impedeixen desar les capçaleres. S'ha seleccionat el primer error."
+
+#: src/merge/output_control.cpp:231
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:251
+#: src/propedit/propedit.cpp:119
+#, no-c-format
+msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
@@ -11078,7 +11100,7 @@ msgid "This file contains coordinates in the timestamp lines. Such coordinates a
 msgstr "Aquest fitxer conté les coordenades a les línies del codi de temps. Algunes coordenades no són admeses pel format de subtítols SRT al Matroska. Les coordenades seran suprimides automàticament.\n"
 
 #: src/extract/mkvextract.cpp:67
-#: src/propedit/propedit.cpp:139
+#: src/propedit/propedit.cpp:158
 msgid "This file could not be opened or parsed.\n"
 msgstr "Aquest fitxer no s'ha pogut obrir o analitzar.\n"
 
@@ -11243,12 +11265,12 @@ msgstr "Aquesta propietat és obligatòria i no es pot suprimir a «%1%». %2%\n
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "Aquesta propietat és única. No es poden afegir més instàncies a «%1%». %2%\n"
 
-#: src/merge/output_control.cpp:259
+#: src/merge/output_control.cpp:277
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "REALMENT això no hauria d'haver succeït. L'espai reservat per al primer element meta de cerca és massa petit. %1%\n"
 
-#: src/merge/output_control.cpp:1618
+#: src/merge/output_control.cpp:1594
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "REALMENT això no hauria d'haver succeït. L'espai reservat per al primer element de meta de cerca és massa petit. Mida necessària: %1%. %2%\n"
@@ -11699,10 +11721,17 @@ msgstr "Tipus de pista no admès per aquesta pista.\n"
 msgid "Update an attachment's properties"
 msgstr "Actualitza les propietats d'un adjunt"
 
-#: src/propedit/propedit.cpp:28
+#: src/propedit/propedit.cpp:31
 #, boost-format
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "L'actualització de l'element «%1%» ha fallat. Raó:"
+
+#: src/merge/output_control.cpp:234
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:253
+#: src/propedit/propedit.cpp:122
+#, no-c-format
+msgid "Updating the 'document type version' or 'document type read version' header fields failed."
+msgstr ""
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:41
 msgid "Usage"
@@ -11907,7 +11936,7 @@ msgstr "Amplada del vídeo en píxels"
 msgid "Video projection"
 msgstr "Projecció del vídeo"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:515
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:531
 msgid "Video projection information"
 msgstr "Informació de la projecció del vídeo"
 
@@ -12507,7 +12536,7 @@ msgstr "Columna intercalada (primer dreta)"
 msgid "compression"
 msgstr "Compressió"
 
-#: src/merge/generic_packetizer.cpp:1648
+#: src/merge/generic_packetizer.cpp:1635
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: no es troba file_num. %1%\n"
@@ -12557,7 +12586,7 @@ msgstr "Encriptatge"
 msgid "equirectangular"
 msgstr "Equirectangular"
 
-#: src/merge/output_control.cpp:413
+#: src/merge/output_control.cpp:431
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "No es troba filelist_t per a generic_packetizer_c. %1%\n"
@@ -12919,8 +12948,8 @@ msgstr "Normalment, el «mkvmerge» suprimeix aquesta última entrada si el seu 
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "El «mkvmerge» admet dos formats de capítols: l'OGM com a format de text i XML amb totes les seves funcions."
 
-#: src/merge/output_control.cpp:234
-#: src/merge/output_control.cpp:276
+#: src/merge/output_control.cpp:251
+#: src/merge/output_control.cpp:294
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "El «mkvmerge» ha estat interromput per un SIGINT (Ctrl+C?)\n"
 

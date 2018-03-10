@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-09 19:16+0100\n"
+"POT-Creation-Date: 2018-03-10 14:04+0100\n"
 "PO-Revision-Date: 2018-03-07 07:28+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -26,7 +26,7 @@ msgstr ""
 "\n"
 "트랙 ID %1%의 임시 TTA 파일을 최종 TTA 파일로 복사 중입니다. 이 작업은 시간이 다소 걸릴 수 있습니다.\n"
 
-#: src/merge/output_control.cpp:236
+#: src/merge/output_control.cpp:253
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -1075,10 +1075,10 @@ msgid " day"
 msgid_plural " days"
 msgstr[0] " 일"
 
-#: src/merge/output_control.cpp:244
-#: src/merge/output_control.cpp:253
 #: src/merge/output_control.cpp:261
-#: src/merge/output_control.cpp:268
+#: src/merge/output_control.cpp:271
+#: src/merge/output_control.cpp:279
+#: src/merge/output_control.cpp:286
 msgid " done\n"
 msgstr " 완료\n"
 
@@ -1359,7 +1359,7 @@ msgid "&Add attachment"
 msgstr "첨부 파일 추가(&A)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:309
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:325
 #: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
@@ -1436,7 +1436,7 @@ msgid "&Close"
 msgstr "닫기(&C)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:261
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/merge/tool.cpp:217
 #, no-c-format
 msgid "&Close file"
@@ -1447,7 +1447,7 @@ msgid "&Code of Conduct"
 msgstr "행위 규범(&C)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:199
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:308
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
 #, no-c-format
 msgid "&Collapse all"
 msgstr "모두 접기(&C)"
@@ -1526,7 +1526,7 @@ msgid "&Escape arguments for:"
 msgstr "이스케이프 인수(&E):"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:198
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:307
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:323
 #, no-c-format
 msgid "&Expand all"
 msgstr "모두 확장(&E)"
@@ -1766,12 +1766,12 @@ msgid "&Reload"
 msgstr "다시 불러오기(&R)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:813
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #, no-c-format
 msgid "&Reload file"
 msgstr "파일 다시 불러오기(&R)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:310
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:326
 #: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
@@ -1818,7 +1818,7 @@ msgstr "이 값 초기화(&R)"
 msgid "&Save"
 msgstr "저장(&S)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:311
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:327
 #, no-c-format
 msgid "&Save attachment content to a file"
 msgstr "첨부 파일 내용물을 파일로 저장"
@@ -2530,6 +2530,13 @@ msgstr "유지할 내용의 타임코드 범위를 쉼표로 구분하여 열거
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "너비, 높이와 컬러 팔레트용 기본 설정값과 기본 인덱스가 대신 사용됩니다."
 
+#: src/merge/output_control.cpp:232
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/propedit/propedit.cpp:120
+#, no-c-format
+msgid "A generic read or write failure occurred."
+msgstr ""
+
 #: src/common/property_element.cpp:141
 msgid "A human-readable string specifying the codec."
 msgstr "인간이 읽을 수 있는 형식의 코덱을 지정하는 문자열입니다."
@@ -2773,7 +2780,7 @@ msgstr "현재 파일에 새 첨부 파일로 추가(&A)"
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "현재 합치기 설정에 새 소스 파일로 추가(&L)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
@@ -2971,7 +2978,7 @@ msgstr "모든 항목"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:646
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:312
@@ -3006,7 +3013,7 @@ msgstr "다음의 모든 파일명을 헤더 편집기에서 엽니다."
 msgid "All following file names will be opened in the info tool."
 msgstr "다음의 모든 파일명을 정보 도구에서 엽니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
 #, no-c-format
 msgid "All header values are OK."
 msgstr "모든 헤더 값에 이상이 없습니다."
@@ -3140,7 +3147,7 @@ msgid "An exception occurred when writing the destination file."
 msgstr "대상 파일에 기록할 때 예외가 발생했습니다."
 
 #: src/common/qt_kax_analyzer.cpp:111
-#: src/propedit/propedit.cpp:66
+#: src/propedit/propedit.cpp:69
 #, no-c-format
 msgid "An unknown error occured. The file has been modified."
 msgstr "알 수 없는 오류가 발생했습니다. 파일은 수정되었습니다."
@@ -3154,7 +3161,7 @@ msgstr "무부호 정수로 예측됩니다."
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "MPEG4 비트스트림을 분석하고, 각 프레임을 하나의 Matroska 블록에 저장하고, 적절한 타임스탬프(I P B B = 0 120 40 80)를 사용하고, V_MPEG4/ISO/... 코덱ID를 사용합니다."
 
-#: src/merge/generic_packetizer.cpp:632
+#: src/merge/generic_packetizer.cpp:626
 #, boost-format
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "%1% 트랙에는 이미 기본 트랙이 설정되어 있습니다. '%3%'의 트랙 %2%의 'default'플래그는 설정되지 않습니다.\n"
@@ -3183,7 +3190,7 @@ msgstr "미디어 파일 결합하기"
 msgid "Append to an e&xisting source file"
 msgstr "기존의 소스 파일에 결합하기(&X)"
 
-#: src/merge/output_control.cpp:1772
+#: src/merge/output_control.cpp:1751
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "%2% ('%3%') 파일 번호의 %1% 트랙을 %5% ('%6%') 파일 번호의 %4% 트랙에 결합합니다.\n"
@@ -3521,7 +3528,7 @@ msgstr "모든 트랙의 통계를 계산하고, 새로운 태그를 추가하�
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:239
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:262
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:819
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:835
 #: src/mkvtoolnix-gui/jobs/tool.cpp:526
 #: src/mkvtoolnix-gui/jobs/tool.cpp:595
 #: src/mkvtoolnix-gui/jobs/tool.cpp:620
@@ -3849,7 +3856,7 @@ msgid "Close current settings"
 msgstr "현재 설정 닫기"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:259
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #: src/mkvtoolnix-gui/merge/tool.cpp:215
 #, no-c-format
 msgid "Close modified file"
@@ -3937,11 +3944,11 @@ msgstr "코덱 고유의 지연 시간"
 msgid "Codec/MIME type"
 msgstr "코덱/MIME 형식"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:505
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:521
 msgid "Colour information"
 msgstr "색상 정보"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:510
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:526
 msgid "Colour mastering meta information"
 msgstr "색상 마스터링 메타 정보"
 
@@ -3975,7 +3982,7 @@ msgstr "완료 확인"
 msgid "Completed with warnings"
 msgstr "완료했으나 경고 있음"
 
-#: src/merge/generic_packetizer.cpp:1270
+#: src/merge/generic_packetizer.cpp:1260
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "압축 실패: %1%\n"
@@ -4064,7 +4071,7 @@ msgstr "이 MPEG-1/2 트랙에서는 시퀀스 헤더를 추출할 수 없습니
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "오디오 트랙 %1%의 인덱스를 찾을 수 없습니다 (avilib 오류 메시지: %2%). 트랙을 건너 뜁니다.\n"
 
-#: src/merge/output_control.cpp:1698
+#: src/merge/output_control.cpp:1677
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "결합시에 gptzr을 찾을 수 없습니다. %1%\n"
@@ -4638,7 +4645,7 @@ msgstr "첫 번째 소스 파일의 폴더에 상대적인 폴더(&R):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
 #, no-c-format
 msgid "Directory:"
 msgstr "폴더:"
@@ -4776,7 +4783,7 @@ msgstr "이 메시지를 다시 보지 않습니다."
 msgid "Done scanning playlists.\n"
 msgstr "재생목록 검색을 완료했습니다.\n"
 
-#: src/propedit/propedit.cpp:156
+#: src/propedit/propedit.cpp:176
 msgid "Done.\n"
 msgstr "완료.\n"
 
@@ -4799,7 +4806,7 @@ msgid "Drops the lossless extensions from an audio track and keeps only its loss
 msgstr "오디오 트랙에서 무손실 확장자를 빼고 손실 코어만 유지합니다."
 
 #: src/common/qt_kax_analyzer.cpp:104
-#: src/propedit/propedit.cpp:59
+#: src/propedit/propedit.cpp:62
 #, no-c-format
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
 msgstr "파일의 특정한 구조 때문에 이 상황은 자동으로 고칠 수 없습니다."
@@ -4920,7 +4927,7 @@ msgstr "환경설정 대화상자를 닫기 전에 오류를 고치거나 설정
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
 msgstr "모든 챕터를 선택하는 단어 '전부'나 콤마로 분리한 챕터 번호 목록."
 
-#: src/propedit/propedit.cpp:97
+#: src/propedit/propedit.cpp:100
 #, boost-format
 msgid "Element %1% is written.\n"
 msgstr "%1% 요소를 기록했습니다.\n"
@@ -5003,8 +5010,8 @@ msgstr "임시 파일 생성 오류 (원인: %1)."
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr "소스 타임스탬프 %1%에서 Ogg Opus 페이지 디코딩 오류; 페이지를 건너 뜁니다: %2%\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, no-c-format
 msgid "Error details: %1."
 msgstr "오류 세부 사항: %1."
@@ -5059,7 +5066,7 @@ msgstr "'%1%'에서 태그를 분석하는 동안 오류 발생: 필수 요소�
 msgid "Error reading Matroska file"
 msgstr "Matroska 파일 읽는 중 오류 발생"
 
-#: src/merge/output_control.cpp:765
+#: src/merge/output_control.cpp:739
 #, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "'%1%' 파일 읽는 중 오류가 발생했습니다.\n"
@@ -5068,7 +5075,8 @@ msgstr "'%1%' 파일 읽는 중 오류가 발생했습니다.\n"
 #: src/common/qt_kax_analyzer.cpp:72
 #: src/common/qt_kax_analyzer.cpp:92
 #: src/common/qt_kax_analyzer.cpp:100
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:255
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:259
 #, no-c-format
 msgid "Error writing Matroska file"
 msgstr "Matroska 파일을 기록하는 동안 오류 발생"
@@ -5345,7 +5353,7 @@ msgstr "파일 데이터"
 msgid "File description"
 msgstr "파일 설명"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "File has not been modified"
 msgstr "파일이 변경되지 않았습니다"
@@ -5361,7 +5369,7 @@ msgstr "파일 이름"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:509
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:320
 #, no-c-format
 msgid "File name:"
 msgstr "파일명:"
@@ -5380,8 +5388,8 @@ msgstr "파일이 없습니다"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:553
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:355
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:120
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:146
 #, no-c-format
 msgid "File parsing failed"
 msgstr "파일 분석 실패"
@@ -5405,7 +5413,7 @@ msgstr "MPEG 프로그램이나 트랜스포트 스트림과 같은 파일 형�
 msgid "File/Segment linking"
 msgstr "파일/세그먼트 링크"
 
-#: src/merge/output_control.cpp:948
+#: src/merge/output_control.cpp:922
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "파일을 그 파일 자체에 결합할 수 없습니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
@@ -5689,9 +5697,9 @@ msgstr "버퍼가 %1%바이트 밖에없고, 제거되어야하는 헤더 크기
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "버퍼가 제거되어야하는 바이트로 시작되지 않기 때문에, 헤더 제거 압축이 불가능합니다. 원하는 바이트: %1%; 찾음: %2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:578
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:594
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "Header validation"
 msgstr "헤더 검증"
@@ -7025,7 +7033,7 @@ msgstr "파일 이름이 하나 이상 지정되었습니다 ('%1%'와 '%2%').\n
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "하나의 첨부 파일에 여러개의 이름이 지정되었습니다. '%1%'는 버리고 대신 '%2%'를 사용합니다.\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:995
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "한 개 이상의 트랙을 %2% ('%3%') 파일 번호의 %1% 트랙에 결합하려고 합니다. '--append-to' 인수가 잘못되었습니다.\n"
@@ -7180,6 +7188,13 @@ msgstr "아니오"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "'--%2% %3%'에 %1%가 지정되어 있지 않습니다.\n"
 
+#: src/merge/output_control.cpp:230
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:250
+#: src/propedit/propedit.cpp:118
+#, fuzzy, no-c-format
+msgid "No 'EBML head' element was found."
+msgstr "EBML 헤더를 찾지 못했습니다."
+
 #: src/input/r_qtmp4.cpp:1702
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "첫 프레임에서 AC-3 헤더를 찾지 못했습니다; 트랙을 건너뜁니다.\n"
@@ -7201,7 +7216,7 @@ msgstr "첨부 파일 '%1%'에 MIME 유형이 설정되지 않았고, 이것을 
 msgid "No actions have been added yet."
 msgstr "아직 추가한 동작이 없습니다."
 
-#: src/merge/output_control.cpp:980
+#: src/merge/output_control.cpp:954
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "%1% ('%2%') 파일 번호에 주어진 결합 매핑이 없습니다. %3%의 기본 매핑을 대신 사용됩니다. 만약 mkvmerge가 잘못된 '--append-to' 옵션에 관한 오류 메시지로 중단되면 그것을 기억하십시오.\n"
@@ -7212,7 +7227,7 @@ msgstr "%1% ('%2%') 파일 번호에 주어진 결합 매핑이 없습니다. %3
 msgid "No attachment matched the spec '%1%'.\n"
 msgstr "'%1%' 사양과 일치하는 첨부 파일이 없습니다.\n"
 
-#: src/propedit/propedit.cpp:159
+#: src/propedit/propedit.cpp:179
 msgid "No changes were made.\n"
 msgstr "변경 사항이 없습니다.\n"
 
@@ -7308,7 +7323,7 @@ msgstr "아직 출력 없음"
 msgid "No permission to read from, to write to or to create"
 msgstr "읽기/쓰기 권한 또는 생성 권한이 없습니다"
 
-#: src/common/kax_analyzer.cpp:1513
+#: src/common/kax_analyzer.cpp:1536
 #, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "파일 '%1%'에서 세그먼트 UID를 찾을 수 없습니다."
@@ -7405,11 +7420,11 @@ msgstr "보통 목록 보기에서 선택한 항목은 드래그 & 드롭이나 
 msgid "Not a hex digit at position %1%"
 msgstr "%1% 위치에 16진수 수가 없습니다"
 
-#: src/common/kax_analyzer.cpp:292
+#: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "유효한 Matroska 파일이 아닙니다 (EBML 헤드를 찾지 못했습니다)"
 
-#: src/common/kax_analyzer.cpp:311
+#: src/common/kax_analyzer.cpp:318
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "유효한 Matroska 파일이 아닙니다 (세그먼트/수준 0 요소를 찾지 못했습니다)"
 
@@ -7459,7 +7474,7 @@ msgstr "주의: 대부분의 <MTX_…> 변수는 비어 있고 변수를 인수�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "주의: 윈도우상의 경로명에 슬래시는 역슬래시 대신으로도 사용할 수 있습니다."
 
-#: src/merge/generic_packetizer.cpp:1629
+#: src/merge/generic_packetizer.cpp:1616
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "'%1%' 저장에 대한 Matroska 사양은 아직 최종 결정되지 않았음에 유의하십시오. 따라서 mkvmerge 지원은 변경 될 수 있으며, '%2%'대신 '%2%/EXPERIMENTAL' 코덱ID를 사용합니다. 사양이 최종 결정되는대로 이 경고는 삭제되고 mkvmerge도 그에 따라 업데이트됩니다.\n"
@@ -7530,7 +7545,7 @@ msgid_plural "Only %1% chapters found in source files & chapter files."
 msgstr[0] "소스 파일과 챕터 파일에서 %1%개의 챕터만 찾았습니다."
 
 #: src/merge/mkvmerge.cpp:1802
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:697
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
@@ -7585,7 +7600,7 @@ msgstr "'%1% %2%'에는 단 한 개의 세그먼트 정보 파일만 허용되�
 msgid "Only one source file is allowed.\n"
 msgstr "소스 파일은 하나만 지정할 수 있습니다.\n"
 
-#: src/merge/output_control.cpp:961
+#: src/merge/output_control.cpp:935
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "%1% ('%2%') 파일 번호에 일부분의 결합 매핑만 주어졌습니다. 어떤 매핑도 지정하지 않거나(이 경우 기본 매핑이 사용됩니다), 복사될 모든 트랙의 매핑을 지정해야 합니다.\n"
@@ -7935,10 +7950,10 @@ msgstr "가능한 원인은 프로그램이 없거나 그 프로그램 또는 �
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:381
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:716
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:140
-#: src/propedit/propedit.cpp:47
-#: src/propedit/propedit.cpp:53
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:119
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:141
+#: src/propedit/propedit.cpp:50
+#: src/propedit/propedit.cpp:56
 #, no-c-format
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr "가능한 이유: 파일이 Matroska 파일이 아니다; 파일에 쓰기 방지가 되어 있다; 파일이 다른 프로세스에 의해 잠겨 있다; 그 파일에 접근할 권한이 없다."
@@ -8014,7 +8029,7 @@ msgstr "진행 상태:"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2939
-#: src/merge/output_control.cpp:340
+#: src/merge/output_control.cpp:358
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -8022,12 +8037,12 @@ msgstr "진행 상태:"
 msgid "Progress: %1%%%%2%"
 msgstr "진행 상태: %1%%%%2%"
 
-#: src/merge/output_control.cpp:315
+#: src/merge/output_control.cpp:333
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "진행 상태: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1579
+#: src/common/kax_analyzer.cpp:1602
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "진행 상태: [%1%%2%] %3%%%"
@@ -8216,7 +8231,7 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "하위 챕터 번호 다시 매기기(&N)"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:312
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
 #, no-c-format
 msgid "Re&place attachment with a new file"
 msgstr "첨부 파일을 새 파일로 교체(&P)"
@@ -8230,8 +8245,8 @@ msgstr "전체 NEWS.md 파일을 온라인으로 읽기"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "암호화된 VOB은 지원하지 않아 읽을 수 없습니다.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:694
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:710
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
@@ -8300,7 +8315,7 @@ msgid "Reference virtual"
 msgstr "참조 가상"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:812
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:828
 #, no-c-format
 msgid "Reload modified file"
 msgstr "변경한 파일 다시 불러오기"
@@ -8391,7 +8406,7 @@ msgstr "'filename'파일의 첨부 파일을 바꿉니다"
 msgid "Replace attachment"
 msgstr "첨부 파일 교체"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:313
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:329
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr "첨부 파일을 새 파일로 교체하고 첨부 파일에서 이름 && MIME 유형 얻기"
@@ -8443,7 +8458,7 @@ msgstr "모든 항목에 대한 동작은 우클릭하세요"
 msgid "Right-click for actions for editions and chapters"
 msgstr "에디션과 챕터에 대한 동작은 우클릭하세요"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:332
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:348
 #, no-c-format
 msgid "Right-click for actions for header elements and attachments"
 msgstr "헤더 요소와 첨부 파일에 대한 동작은 우클릭하세요"
@@ -8582,17 +8597,17 @@ msgstr "저장 실패"
 msgid "Saving the chapters failed."
 msgstr "챕터 파일을 저장에 실패했습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:242
 #, no-c-format
 msgid "Saving the modified attachments failed."
 msgstr "변경된 첨부 파일 저장에 실패했습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:217
 #, no-c-format
 msgid "Saving the modified segment information header failed."
 msgstr "변경된 세그먼트 정보 헤더 저장에 실패했습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:225
 #, no-c-format
 msgid "Saving the modified track headers failed."
 msgstr "변경된 트랙 헤더 저장에 실패했습니다."
@@ -8683,7 +8698,7 @@ msgid "Segment info:"
 msgstr "세그먼트 정보:"
 
 #: src/common/kax_element_names.cpp:83
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:465
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:481
 #: src/propedit/options.cpp:199
 #: src/propedit/propedit_cli_parser.cpp:156
 #: src/propedit/propedit_cli_parser.cpp:246
@@ -9075,7 +9090,7 @@ msgstr "조각"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr "몇몇 h.264/AVC 트랙은 l 조각들을 포함하지만 실제 키프레임은 없습니다."
 
-#: src/merge/output_control.cpp:1317
+#: src/merge/output_control.cpp:1291
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "태그 요소가 누락되어 있습니다 (이 오류는 발생하지 않아야 합니다 - 이전에 다른 유사한 오류가 발생했어야 합니다). %1%\n"
@@ -9490,12 +9505,12 @@ msgstr "Matroska 컨테이너 형식은 비디오 트랙에 대해 디스플레�
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
 msgstr "Matroska 파일을 변경했지만 메타 탐색 항목을 업데이트하지 못했습니다. 이것은 재생기가 요소를 찾는데 시간이 걸린다는 뜻입니다. 귀하가 즐겨쓰는 재생기로 이 파일을 확인해 보세요."
 
-#: src/propedit/propedit.cpp:41
+#: src/propedit/propedit.cpp:44
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr "Matroska 파일을 변경했지만 메타 탐색 항목을 업데이트하지 못했습니다. 이것은 재생기가 이 요소를 찾는데 시간이 걸린다는 뜻입니다. 귀하가 즐겨쓰는 재생기로 이 파일을 확인해 보세요."
 
 #: src/common/qt_kax_analyzer.cpp:103
-#: src/propedit/propedit.cpp:58
+#: src/propedit/propedit.cpp:61
 #, no-c-format
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr "Matroska 파일의 마지막 요소는 알 수 없는 크기로 설정되었습니다."
@@ -9648,7 +9663,7 @@ msgstr "재생할 오디오 파일을 아직 정하지 않았습니다."
 msgid "The audio/video synchronization may have been lost."
 msgstr "오디오/비디오 동기화를 놓쳐 버린 것 같습니다."
 
-#: src/propedit/propedit.cpp:152
+#: src/propedit/propedit.cpp:171
 msgid "The changes are written to the file.\n"
 msgstr "변경 사항을 파일에 기록합니다.\n"
 
@@ -9729,7 +9744,7 @@ msgstr "수정한 파일 헤더를 제대로 읽을 수 없습니다.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "오른쪽에서 '선택한' 목록의 나라들은 모든 국가 드롭 다운 상자의 맨 위쪽에 나타납니다."
 
-#: src/merge/output_control.cpp:1507
+#: src/merge/output_control.cpp:1483
 msgid "The cue entries (the index) are being written...\n"
 msgstr "큐(CUE) 항목(인덱스)을 쓰는 중입니다...\n"
 
@@ -9751,12 +9766,12 @@ msgstr "현재 모드는 --multiplex, --edit-chapters 나 --edit-headers로 바�
 msgid "The current multiplex settings will be closed."
 msgstr "현재 합치기 설정을 닫습니다."
 
-#: src/merge/generic_packetizer.cpp:1347
+#: src/merge/generic_packetizer.cpp:1334
 #, boost-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "현재 패킷의 타임코드는 이전 패킷의 타임코드보다 작습니다. 이것은 보통 소스 파일이 100%%정확하게 작성되지 않은 Matroska 파일임을 의미합니다. 데이터 손실을 피하기 위해 타임코드는 %1%밀리초 조정됩니다. 이 때문에 오디오/비디오 동기화에 영향을 미칠 수 있지만, mkvmerge의 \"--sync\"옵션으로 보정할 수 있습니다. 만약 이미 \"--sync\"옵션을 사용하고 있지만 여전히 이 경고가 표시되는 경우는 걱정할 필요가 없습니다 -- 이것은 정상입니다. 이 오류가 여러번 발생하고, 특정 트랙에서 이 메시지가 여러번 표시되는 경우, 원본 파일 자체에 문제가 있거나 mkvmerge의 자체 버그일 수 있습니다. 이런 경우, 제작자 Moritz Bunkus <moritz@bunkus.org>에게 문의하십시오.\n"
 
-#: src/common/kax_analyzer.cpp:175
+#: src/common/kax_analyzer.cpp:176
 msgid "The data in the file is corrupted and cannot be modified safely"
 msgstr "파일의 데이터가 깨져서 안전하게 수정할 수 없습니다"
 
@@ -9840,7 +9855,7 @@ msgid "The edition UID must be a number if given."
 msgstr "주어진 에디션 UID는 숫자여야 합니다."
 
 #: src/common/qt_kax_analyzer.cpp:67
-#: src/propedit/propedit.cpp:33
+#: src/propedit/propedit.cpp:36
 #, no-c-format
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "요소는 파일의 끝에 기록했지만, 세그먼트 크기를 업데이트할 수 없습니다. 따라서 요소는 보이지 않게됩니다. 처리는 중단됩니다. 파일은 변경되었습니다!"
@@ -9865,14 +9880,14 @@ msgid "The fifth mode tries to extract chapter information and tags and outputs 
 msgstr "다섯 번째 모드는 챕터 정보와 태그를 추출해서 큐 시트로 출력을 시도합니다. 이것은 큐 시트를 mkvmerge의 '--chapters' 옵션을 정반대로 사용하는 것입니다."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:260
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:810
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:826
 #: src/mkvtoolnix-gui/merge/tool.cpp:216
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
 msgstr "\"%1\" 파일을 변경했습니다. 정말 닫을까요? 모든 변경 사항을 잃게 됩니다."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:811
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:827
 #, no-c-format
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "\"%1\" 파일을 변경했습니다. 이 파일을 정말 다시 불러올까요? 모든 변경 사항을 잃게 됩니다."
@@ -9882,13 +9897,13 @@ msgstr "\"%1\" 파일을 변경했습니다. 이 파일을 정말 다시 불러�
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "파일이 존재하지 않거나 읽을 수 없기 때문에, 파일 '%1%'을 첨부할 수 없습니다.\n"
 
-#: src/propedit/propedit.cpp:134
+#: src/propedit/propedit.cpp:153
 #, boost-format
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "파일 '%1%'를 읽고 쓰기 위해 열 수 없거나, 읽기/쓰기 작업 실패: %2%\n"
 
-#: src/common/kax_analyzer.cpp:1503
-#: src/common/kax_analyzer.cpp:1506
+#: src/common/kax_analyzer.cpp:1526
+#: src/common/kax_analyzer.cpp:1529
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "'%1%' 파일을 읽기 위해 열 수 없습니다: %2%."
@@ -9917,17 +9932,17 @@ msgstr "'%1%' 파일을 쓰기 위해 열 수 없습니다: %2%."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:134
-#: src/merge/output_control.cpp:1341
+#: src/merge/output_control.cpp:1317
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "'%1%' 파일을 읽기 위해 열 수 없습니다: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1509
+#: src/common/kax_analyzer.cpp:1532
 #, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "'%1%' 파일을 열거나 분석할 수 없습니다."
 
-#: src/merge/output_control.cpp:1345
+#: src/merge/output_control.cpp:1321
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "'%1%'에 쓰기 위해 해당 파일을 열었습니다.\n"
@@ -9972,14 +9987,14 @@ msgstr "'%1' 파일은 작업 대기열 파일이나 설정 파일이 아닙니�
 msgid "The file '%1' you've added is a playlist."
 msgstr "귀하가 추가한 '%1' 파일은 재생목록입니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:696
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:712
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
 #, no-c-format
 msgid "The file (%1) is too big (%2)."
 msgstr "파일(%1)이 너무 큽니다(%2)."
 
 #: src/common/qt_kax_analyzer.cpp:105
-#: src/propedit/propedit.cpp:60
+#: src/propedit/propedit.cpp:63
 #, no-c-format
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "이 파일은 mkvmerge로 다시 합치기를 해서 고칠 수 있습니다."
@@ -9994,13 +10009,13 @@ msgid "The file could not be opened for reading, or there was not enough data to
 msgstr "파일을 읽을(열) 수 없거나, 이 파일은 헤더를 분석하기 위한 충분한 데이터를 가지고 있지 않습니다."
 
 #: src/common/qt_kax_analyzer.cpp:87
-#: src/propedit/propedit.cpp:46
+#: src/propedit/propedit.cpp:49
 #, no-c-format
 msgid "The file could not be opened for reading."
 msgstr "파일을 읽기 위해 열 수 없습니다."
 
 #: src/common/qt_kax_analyzer.cpp:95
-#: src/propedit/propedit.cpp:52
+#: src/propedit/propedit.cpp:55
 #, no-c-format
 msgid "The file could not be opened for writing."
 msgstr "파일 기록을 위해 열 수 없습니다."
@@ -10011,14 +10026,14 @@ msgid "The file does not contain track ID %1%.\n"
 msgstr "파일에 %1% 트랙 ID가 포함되어 있지 않습니다.\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:647
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:252
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:268
 #, no-c-format
 msgid "The file has been saved successfully."
 msgstr "파일을 성공적으로 저장했습니다."
 
 #: src/common/qt_kax_analyzer.cpp:107
-#: src/propedit/propedit.cpp:62
-#: src/propedit/propedit.h:17
+#: src/propedit/propedit.cpp:65
+#: src/propedit/propedit.h:19
 #, no-c-format
 msgid "The file has not been modified."
 msgstr "파일은 변경되지 않았습니다."
@@ -10041,24 +10056,24 @@ msgid "The file is an unsupported container format (%1)."
 msgstr "이 파일은 미지원 컨테이너 형식입니다 (%1)."
 
 #: src/common/qt_kax_analyzer.cpp:37
-#: src/propedit/propedit.cpp:122
+#: src/propedit/propedit.cpp:140
 #, no-c-format
 msgid "The file is being analyzed."
 msgstr "파일을 분석 중입니다."
 
-#: src/merge/output_control.cpp:240
+#: src/merge/output_control.cpp:257
 msgid "The file is being fixed, part 1/4..."
 msgstr "파일을 수정 중입니다, 1/4 부분 수정 중..."
 
-#: src/merge/output_control.cpp:246
+#: src/merge/output_control.cpp:263
 msgid "The file is being fixed, part 2/4..."
 msgstr "파일을 수정 중입니다, 2/4 부분 수정 중..."
 
-#: src/merge/output_control.cpp:255
+#: src/merge/output_control.cpp:273
 msgid "The file is being fixed, part 3/4..."
 msgstr "파일을 수정 중입니다, 3/4 부분 수정 중..."
 
-#: src/merge/output_control.cpp:263
+#: src/merge/output_control.cpp:281
 msgid "The file is being fixed, part 4/4..."
 msgstr "파일을 수정 중입니다, 4/4 부분 수정 중..."
 
@@ -10070,17 +10085,17 @@ msgstr "트랙 통계를 만들기 위해 파일을 읽었습니다.\n"
 msgid "The file name for this segment."
 msgstr "이 세그먼트에 대한 파일 이름입니다."
 
-#: src/merge/output_control.cpp:994
+#: src/merge/output_control.cpp:968
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "%1% ('%2%') 파일 번호는 %3% ID가 있는 트랙을 포함하지 않거나, 그 트랙은 복사되지 않습니다..'--append-to'의 인수가 잘못되었습니다.\n"
 
-#: src/merge/output_control.cpp:1000
+#: src/merge/output_control.cpp:974
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "%1% ('%2%') 파일 번호는 %3% ID가 있는 트랙을 포함하지 않거나, 그 트랙은 복사되지 않습니다. 그러므로 어떤 트랙도 그것에 결합될 수 없습니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
-#: src/merge/output_control.cpp:940
+#: src/merge/output_control.cpp:914
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "%1% ('%2%') 파일 번호는 결합되고 있지 않습니다. '--append-to'의 인수가 잘못되었습니다.\n"
@@ -10108,8 +10123,8 @@ msgstr "이 파일은 더 이상 처리하지 않습니다."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:398
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:715
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:706
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:722
 #: src/mkvtoolnix-gui/info/tab.cpp:127
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
@@ -10120,7 +10135,7 @@ msgstr "열려고 했던 파일(%1)을 성공적으로 읽을 수 없었습니�
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "열려고 했던 파일(%1)에 아무 챕터도 포함되어 있지 않습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:117
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
 #, no-c-format
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "열려고 했던 파일(%1)을 유효한 Matroska/WebM 파일로 인식하지 못했습니다."
@@ -10180,7 +10195,7 @@ msgstr "형식은 'HH:MM:SS.nnnnnnnnn' 형태거나 's', 'ms', 'us 유닛 중 �
 msgid "The formats can be mixed, too."
 msgstr "형식은 섞어서 사용할 수 있습니다."
 
-#: src/merge/output_control.cpp:1051
+#: src/merge/output_control.cpp:1025
 msgid "The formats do not match."
 msgstr "형식이 일치하지 않습니다."
 
@@ -10197,7 +10212,7 @@ msgstr "만들어진 대상 파일명은 소스 파일명과 같은 기반의 �
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "지정된 타임코드 스케일 계수는 유효 범위 [1 ~ 10000000 또는 -1(비디오 트랙이 있어도 샘플링 소리 정밀도를 사용하는 경우)]에서 벗어나 있습니다.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:194
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "헤더값을 변경하지 않았습니다. 저장할 내용이 없습니다."
@@ -10294,7 +10309,7 @@ msgstr ""
 "0을 지정하면 참조 유사-캐시 시스템은 사용되지 않습니다."
 
 #: src/common/qt_kax_analyzer.cpp:73
-#: src/propedit/propedit.cpp:37
+#: src/propedit/propedit.cpp:40
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "메타 탐색(Meta seek) 요소는 파일의 끝에 기록했지만, 세그먼트 크기를 업데이트할 수 없습니다. 따라서 요소는 보이지 않게됩니다. 처리는 중단됩니다. 파일은 변경되었습니다!"
@@ -10441,7 +10456,7 @@ msgid "The probe range percentage '%1%' is invalid.\n"
 msgstr "조사 범위 '%1%' 퍼센트는 무효합니다.\n"
 
 #: src/common/qt_kax_analyzer.cpp:106
-#: src/propedit/propedit.cpp:61
+#: src/propedit/propedit.cpp:64
 #, no-c-format
 msgid "The process will be aborted."
 msgstr "처리 중인 작업을 취소합니다."
@@ -10491,7 +10506,7 @@ msgstr "'%1%'에서 이 속성값은 유부호 정수가 아닙니다. %2%\n"
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "'%1%'에서 이 속성값은 무부호 정수가 아닙니다. %2%\n"
 
-#: src/merge/output_control.cpp:1053
+#: src/merge/output_control.cpp:1027
 msgid "The reason is unknown."
 msgstr "이유는 알 수 없습니다."
 
@@ -10698,7 +10713,7 @@ msgstr "타임코드는 각 개별 대상 파일이 아니라 전체 스트림�
 msgid "The title for the whole movie."
 msgstr "전체 동영상의 제목입니다."
 
-#: src/merge/output_control.cpp:1010
+#: src/merge/output_control.cpp:984
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "%2% ('%3%') 파일 번호의 %1% 트랙을 한 번 이상 결합하려고 합니다. '--append-to'의 인수가 잘못되었습니다.\n"
@@ -10708,17 +10723,17 @@ msgstr "%2% ('%3%') 파일 번호의 %1% 트랙을 한 번 이상 결합하려�
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "%1% 트랙 ID의 코덱ID가 잘못되었습니다.\n"
 
-#: src/merge/output_control.cpp:690
+#: src/merge/output_control.cpp:664
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "트랙 헤더를 제대로 렌더링할 수 없습니다. %1%\n"
 
-#: src/merge/output_control.cpp:1042
+#: src/merge/output_control.cpp:1016
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "'%2%' 파일의 %1% 트랙 번호를 '%4%' 파일의 %3% 트랙에 올바르게 결합할 수 없는 모양입니다: %5% 결과로 나오는 파일이 끝까지 맞게 잘 재생되는지 확인하세요. 이 프로그램의 제작자는 그 결과로 만들어진 파일에서 생기는 재생 문제는 아마도 지원해 주지 않습니다.\n"
 
-#: src/merge/output_control.cpp:1054
+#: src/merge/output_control.cpp:1028
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "'%2%' 파일의 %1% 트랙 번호를 '%4%' 파일의 %3% 트랙 번호에 결합할 수 없습니다. %5%\n"
@@ -10727,7 +10742,7 @@ msgstr "'%2%' 파일의 %1% 트랙 번호를 '%4%' 파일의 %3% 트랙 번호�
 msgid "The track number as used in the Block Header."
 msgstr "블록 헤더에서 사용되는 트랙 번호입니다."
 
-#: src/merge/output_control.cpp:1052
+#: src/merge/output_control.cpp:1026
 msgid "The track parameters do not match."
 msgstr "트랙 매개변수가 일치하지 않습니다."
 
@@ -10804,8 +10819,8 @@ msgstr "온라인상에 사용할 수 있는 새 버전이 있습니다."
 msgid "There is currently a job running."
 msgstr "현재 실행 중인 작업이 있습니다."
 
-#: src/merge/output_control.cpp:934
-#: src/merge/output_control.cpp:944
+#: src/merge/output_control.cpp:908
+#: src/merge/output_control.cpp:918
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "'%1%' ID를 가진 파일은 없습니다. '--append-to'의 인수가 잘못되었습니다.\n"
@@ -10820,11 +10835,18 @@ msgstr "'%1%'의 이용 가능한 번역이 없습니다.\n"
 msgid "There was an error querying the update status."
 msgstr "업데이트 상태를 확인하는 동안 오류가 발생했습니다."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:593
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:595
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:609
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:611
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "헤더 값에 오류가 있어 헤더를 저장할 수 없습니다. 첫 번째 오류가 선택되어 있습니다."
+
+#: src/merge/output_control.cpp:231
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:251
+#: src/propedit/propedit.cpp:119
+#, no-c-format
+msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
@@ -10931,7 +10953,7 @@ msgid "This file contains coordinates in the timestamp lines. Such coordinates a
 msgstr "이 파일은 타임코드 행에 좌표가 포함되어 있습니다. 이러한 좌표는 Matroska SRT 자막 형식은 지원하지 않습니다. 좌표는 자동으로 제거됩니다.\n"
 
 #: src/extract/mkvextract.cpp:67
-#: src/propedit/propedit.cpp:139
+#: src/propedit/propedit.cpp:158
 msgid "This file could not be opened or parsed.\n"
 msgstr "이 파일을 열거나 분석할 수 없습니다.\n"
 
@@ -11096,12 +11118,12 @@ msgstr "이 속성은 필수이며, '%1%'에서 제거할 수 없습니다. %2%\
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "이 속성은 유일한 것입니다. '%1%'에 추가할 수 없습니다. %2%\n"
 
-#: src/merge/output_control.cpp:259
+#: src/merge/output_control.cpp:277
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "이것은 정말로 (절대로) 발생해서는 안 됩니다. 처음 MetaSeek 요소를 위해 확보된 공간이 너무 작습니다. %1%\n"
 
-#: src/merge/output_control.cpp:1618
+#: src/merge/output_control.cpp:1594
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "이것은 정말로 (절대로) 발생해서는 안 됩니다. 처음 MetaSeek 요소를 위해 확보된 공간이 너무 작습니다. 필요한 크기: %1%. %2%\n"
@@ -11552,10 +11574,17 @@ msgstr "이 트랙은 지원되지 않는 트랙 유형입니다.\n"
 msgid "Update an attachment's properties"
 msgstr "첨부 파일의 속성 업데이트"
 
-#: src/propedit/propedit.cpp:28
+#: src/propedit/propedit.cpp:31
 #, boost-format
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "'%1%' 요소 업데이트 실패. 원인:"
+
+#: src/merge/output_control.cpp:234
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:253
+#: src/propedit/propedit.cpp:122
+#, no-c-format
+msgid "Updating the 'document type version' or 'document type read version' header fields failed."
+msgstr ""
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:41
 msgid "Usage"
@@ -11760,7 +11789,7 @@ msgstr "비디오 너비 (픽셀 단위)"
 msgid "Video projection"
 msgstr "비디오 투사"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:515
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:531
 msgid "Video projection information"
 msgstr "비디오 투사 정보"
 
@@ -12360,7 +12389,7 @@ msgstr "수직 인터리브 방식 (우안 먼저)"
 msgid "compression"
 msgstr "압축"
 
-#: src/merge/generic_packetizer.cpp:1648
+#: src/merge/generic_packetizer.cpp:1635
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "트랙_번호_만들기: file_num를 찾지 못했습니다. %1%\n"
@@ -12409,7 +12438,7 @@ msgstr "암호화"
 msgid "equirectangular"
 msgstr "equirectangular"
 
-#: src/merge/output_control.cpp:413
+#: src/merge/output_control.cpp:431
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "generic_packetizer_c의 filelist_t를 찾지 못했습니다. %1%\n"
@@ -12771,8 +12800,8 @@ msgstr "mkvmerge는 마지막 항목의 타임코드가 전체 재생 시간의 
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "mkvmerge가 지원하는 두 가지 챕터 형식: 텍스트 서식과 같은 OGM 형식 및 전체 기능의 XML 형식입니다."
 
-#: src/merge/output_control.cpp:234
-#: src/merge/output_control.cpp:276
+#: src/merge/output_control.cpp:251
+#: src/merge/output_control.cpp:294
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge가 인터럽트 신호 (Ctrl+C?)에 의해 중단되었습니다.\n"
 
