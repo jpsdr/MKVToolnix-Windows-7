@@ -19,6 +19,7 @@
 #include "common/codec.h"
 #include "common/flac.h"
 #include "common/id_info.h"
+#include "common/id3.h"
 #include "common/mime.h"
 #include "input/r_flac.h"
 #include "merge/input_x.h"
@@ -38,6 +39,7 @@ flac_reader_c::probe_file(mm_io_c &in,
   std::string data;
   try {
     in.setFilePointer(0, seek_beginning);
+    mtx::id3::skip_v2_tag(in);
     if (in.read(data, 4) != 4)
       return false;
     in.setFilePointer(0, seek_beginning);
@@ -75,7 +77,7 @@ flac_reader_c::read_headers() {
 
     block_size         = 0;
     for (current_block = blocks.begin(); (current_block != blocks.end()) && (FLAC_BLOCK_TYPE_HEADERS == current_block->type); current_block++) {
-      m_in->setFilePointer(current_block->filepos);
+      m_in->setFilePointer(current_block->filepos + tag_size_start);
       if (m_in->read(m_header->get_buffer() + block_size, current_block->len) != current_block->len)
         mxerror(Y("flac_reader: Could not read a header packet.\n"));
       block_size += current_block->len;
@@ -107,7 +109,12 @@ flac_reader_c::parse_file(bool for_identification_only) {
   bool ok;
 
   m_in->setFilePointer(0);
+
+  tag_size_start  = std::max<int64_t>(mtx::id3::skip_v2_tag(*m_in),        0);
+  tag_size_end    = std::max<int64_t>(mtx::id3::tag_present_at_end(*m_in), 0);
   metadata_parsed = false;
+
+  mxdebug_if(m_debug, boost::format("flac_reader: tag_size_start %1% tag_size_end %2% total size %3% size without tags %4%\n") % tag_size_start % tag_size_end % m_size % (m_size - tag_size_start - tag_size_end));
 
   if (!for_identification_only)
     mxinfo(Y("+-> Parsing the FLAC file. This can take a LONG time.\n"));
@@ -139,7 +146,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
   while (ok) {
     state = FLAC__stream_decoder_get_state(m_flac_decoder.get());
 
-    progress = m_in->getFilePointer() * 100 / m_size;
+    progress = m_in->getFilePointer() * 100 / (m_size - tag_size_end);
     if ((progress - old_progress) >= 5) {
       mxinfo(boost::format(Y("+-> Pre-parsing FLAC file: %1%%%%2%")) % progress % "\r");
       old_progress = progress;
@@ -169,7 +176,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
   if ((blocks.size() == 0) || (blocks[0].type != FLAC_BLOCK_TYPE_HEADERS))
     mxerror(Y("flac_reader: Could not read all header packets.\n"));
 
-  m_in->setFilePointer(0);
+  m_in->setFilePointer(tag_size_start);
   blocks[0].len     -= 4;
   blocks[0].filepos  = 4;
 
@@ -183,7 +190,7 @@ flac_reader_c::read(generic_packetizer_c *,
     return flush_packetizers();
 
   memory_cptr buf = memory_c::alloc(current_block->len);
-  m_in->setFilePointer(current_block->filepos);
+  m_in->setFilePointer(current_block->filepos + tag_size_start);
   if (m_in->read(buf, current_block->len) != current_block->len)
     return flush_packetizers();
 
@@ -328,6 +335,8 @@ flac_reader_c::flac_error_cb(FLAC__StreamDecoderErrorStatus status) {
 
 FLAC__StreamDecoderSeekStatus
 flac_reader_c::flac_seek_cb(uint64_t new_pos) {
+  new_pos += tag_size_start;
+
   m_in->setFilePointer(new_pos, seek_beginning);
   if (m_in->getFilePointer() == new_pos)
     return FLAC__STREAM_DECODER_SEEK_STATUS_OK;
@@ -336,19 +345,19 @@ flac_reader_c::flac_seek_cb(uint64_t new_pos) {
 
 FLAC__StreamDecoderTellStatus
 flac_reader_c::flac_tell_cb(uint64_t &absolute_byte_offset) {
-  absolute_byte_offset = m_in->getFilePointer();
+  absolute_byte_offset = std::max<int64_t>(m_in->getFilePointer(), tag_size_start) - tag_size_start;
   return FLAC__STREAM_DECODER_TELL_STATUS_OK;
 }
 
 FLAC__StreamDecoderLengthStatus
 flac_reader_c::flac_length_cb(uint64_t &stream_length) {
-  stream_length = m_size;
+  stream_length = m_size - tag_size_end - tag_size_start;
   return FLAC__STREAM_DECODER_LENGTH_STATUS_OK;
 }
 
 FLAC__bool
 flac_reader_c::flac_eof_cb() {
-  return m_in->getFilePointer() >= m_size;
+  return m_in->getFilePointer() >= (m_size - tag_size_end);
 }
 
 void

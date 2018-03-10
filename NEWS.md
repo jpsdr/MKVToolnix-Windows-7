@@ -7,6 +7,8 @@
 * mkvmerge, MKVToolNix GUI multiplexer: AC-3, DTS, TrueHD: added an option for
   removing/minimizing the dialog normalization gain for all supported types of
   the mentioned codecs. Implements #1981.
+* mkvmerge: FLAC: mkvmerge can now ignore ID3 tags in FLAC files which would
+  otherwise prevent mkvmerge from detecting the file type. Implements #2243.
 
 ## Bug fixes
 

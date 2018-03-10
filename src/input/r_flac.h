@@ -46,6 +46,7 @@ private:
   FLAC__StreamMetadata_StreamInfo stream_info;
   unsigned int m_attachment_id{};
   debugging_option_c m_debug{"flac_reader|flac"};
+  int64_t tag_size_start{}, tag_size_end{};
 
 public:
   flac_reader_c(const track_info_c &ti, const mm_io_cptr &in);
