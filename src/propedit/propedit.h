@@ -14,4 +14,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/doc_type_version_handler.h"
+
 #define FILE_NOT_MODIFIED Y("The file has not been modified.")
+
+extern std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;

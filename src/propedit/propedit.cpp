@@ -16,11 +16,14 @@
 #include <matroska/KaxTracks.h>
 
 #include "common/command_line.h"
+#include "common/doc_type_version_handler.h"
 #include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
 #include "propedit/propedit_cli_parser.h"
+
+std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
 
 static void
 display_update_element_result(const EbmlCallbacks &callbacks,
@@ -107,7 +110,22 @@ write_changes(options_cptr &options,
 }
 
 static void
+update_ebml_head(mm_io_c &file) {
+  auto result = g_doc_type_version_handler->update_ebml_head(file);
+  if (mtx::included_in(result, mtx::doc_type_version_handler_c::update_result_e::ok_updated, mtx::doc_type_version_handler_c::update_result_e::ok_no_update_needed))
+    return;
+
+  auto details = mtx::doc_type_version_handler_c::update_result_e::err_no_head_found    == result ? Y("No 'EBML head' element was found.")
+               : mtx::doc_type_version_handler_c::update_result_e::err_not_enough_space == result ? Y("There's not enough space at the beginning of the file to fit the updated 'EBML head' element in.")
+               :                                                                                    Y("A generic read or write failure occurred.");
+
+  mxwarn(boost::format("%1% %2%\n") % Y("Updating the 'document type version' or 'document type read version' header fields failed.") % details);
+}
+
+static void
 run(options_cptr &options) {
+  g_doc_type_version_handler.reset(new mtx::doc_type_version_handler_c);
+
   console_kax_analyzer_cptr analyzer;
 
   try {
@@ -129,6 +147,7 @@ run(options_cptr &options) {
       ->set_parse_mode(options->m_parse_mode)
       .set_open_mode(MODE_WRITE)
       .set_throw_on_error(true)
+      .set_doc_type_version_handler(g_doc_type_version_handler.get())
       .process();
   } catch (mtx::exception &ex) {
     mxerror(boost::format(Y("The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n")) % options->m_file_name % ex);
@@ -152,6 +171,7 @@ run(options_cptr &options) {
     mxinfo(Y("The changes are written to the file.\n"));
 
     write_changes(options, analyzer.get());
+    update_ebml_head(analyzer->get_file());
 
     mxinfo(Y("Done.\n"));
 
