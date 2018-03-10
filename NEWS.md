@@ -26,9 +26,10 @@
 * mkvmerge: the 'document type version' header field is now set to 4 correctly
   if any of the version 4 Matroska elements is written. Part of the fix for
   #2240.
-* mkvpropedit: the 'document type version' and 'document type read version'
-  header fields are now updated if elements written by the changes require
-  higher version numbers. Part of the fix for #2240.
+* mkvpropedit, MKVToolNix GUI header editor: the 'document type version' and
+  'document type read version' header fields are now updated if elements
+  written by the changes require higher version numbers. Part of the fix for
+  #2240.
 
 ## Build system changes
 
