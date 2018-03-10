@@ -23,6 +23,9 @@
   not on which features are active (e.g. if a `SimpleBlock` is never written,
   then the 'read version' won't be set to 2 anymore). Part of the fix for
   #2240.
+* mkvmerge: the 'document type version' header field is now set to 4 correctly
+  if any of the version 4 Matroska elements is written. Part of the fix for
+  #2240.
 
 ## Build system changes
 
