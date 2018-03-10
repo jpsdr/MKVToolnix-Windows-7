@@ -18,6 +18,11 @@
 * mkvpropedit, MKVToolNix GUI header editor: mandatory elements can now be
   deleted if there's a default value for them in the specifications. Fixes
   #2241.
+* mkvmerge: the 'document type version' and 'document type read version'
+  header fields are now set depending on which elements are actually written,
+  not on which features are active (e.g. if a `SimpleBlock` is never written,
+  then the 'read version' won't be set to 2 anymore). Part of the fix for
+  #2240.
 
 ## Build system changes
 

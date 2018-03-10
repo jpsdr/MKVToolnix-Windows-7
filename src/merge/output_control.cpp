@@ -52,9 +52,11 @@
 #include "common/container.h"
 #include "common/date_time.h"
 #include "common/debugging.h"
+#include "common/doc_type_version_handler.h"
 #include "common/ebml.h"
 #include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
+#include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/mm_null_io.h"
 #include "common/mm_proxy_io.h"
@@ -189,8 +191,7 @@ static std::unique_ptr<EbmlHead> s_head;
 static std::string s_muxing_app, s_writing_app;
 static boost::posix_time::ptime s_writing_date;
 
-static auto s_required_matroska_version      = 1u;
-static auto s_required_matroska_read_version = 1u;
+std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
 
 /** \brief Add a segment family UID to the list if it doesn't exist already.
 
@@ -215,6 +216,22 @@ family_uids_c::add_family_uid(const KaxSegmentFamily &family) {
 static int64_t
 calculate_file_duration() {
   return std::llround(static_cast<double>(g_cluster_helper->get_duration()) / static_cast<double>(g_timestamp_scale));
+}
+
+static void
+update_ebml_head() {
+  if (g_cluster_helper->discarding())
+    return;
+
+  auto result = g_doc_type_version_handler->update_ebml_head(*s_out);
+  if (mtx::included_in(result, mtx::doc_type_version_handler_c::update_result_e::ok_updated, mtx::doc_type_version_handler_c::update_result_e::ok_no_update_needed))
+    return;
+
+  auto details = mtx::doc_type_version_handler_c::update_result_e::err_no_head_found    == result ? Y("No 'EBML head' element was found.")
+               : mtx::doc_type_version_handler_c::update_result_e::err_not_enough_space == result ? Y("There's not enough space at the beginning of the file to fit the updated 'EBML head' element in.")
+               :                                                                                    Y("A generic read or write failure occurred.");
+
+  mxwarn(boost::format("%1% %2%\n") % Y("Updating the 'document type version' or 'document type read version' header fields failed.") % details);
 }
 
 /** \brief Fix the file after mkvmerge has been interrupted
@@ -248,7 +265,8 @@ sighandler(int /* signum */) {
   // as the file's duration.
   s_out->save_pos(s_kax_duration->GetElementPosition());
   s_kax_duration->SetValue(calculate_file_duration());
-  s_kax_duration->Render(*s_out);
+  g_doc_type_version_handler->render(*s_kax_duration, *s_out);
+  update_ebml_head();
   s_out->restore_pos();
   mxinfo(Y(" done\n"));
 
@@ -452,60 +470,16 @@ set_timestamp_scale() {
   mxdebug_if(debug, boost::format("timestamp_scale: %1% max ns per cluster: %2%\n") % g_timestamp_scale % g_max_ns_per_cluster);
 }
 
-bool
-set_required_matroska_version(unsigned int required_version) {
-  auto previous               = s_required_matroska_version;
-  s_required_matroska_version = std::max(s_required_matroska_version, required_version);
-  auto version_changed        = s_required_matroska_version != previous;
-
-  if (version_changed)
-    rerender_ebml_head();
-
-  return version_changed;
-}
-
-bool
-set_required_matroska_read_version(unsigned int required_read_version) {
-  auto previous                    = s_required_matroska_read_version;
-  s_required_matroska_read_version = std::max(s_required_matroska_read_version, required_read_version);
-
-  auto read_version_changed        = s_required_matroska_read_version != previous;
-  auto version_changed             = set_required_matroska_version(required_read_version);
-
-  if (read_version_changed && !version_changed)
-    rerender_ebml_head();
-
-  return read_version_changed;
-}
-
 static void
 render_ebml_head(mm_io_c *out) {
-  if (!hack_engaged(ENGAGE_NO_CUE_DURATION) || !hack_engaged(ENGAGE_NO_CUE_RELATIVE_POSITION))
-    set_required_matroska_version(4);
-
-  if (!hack_engaged(ENGAGE_NO_SIMPLE_BLOCKS))
-    set_required_matroska_read_version(2);
-
   if (!s_head)
     s_head = std::make_unique<EbmlHead>();
 
   GetChild<EDocType           >(*s_head).SetValue(outputting_webm() ? "webm" : "matroska");
-  GetChild<EDocTypeVersion    >(*s_head).SetValue(s_required_matroska_version);
-  GetChild<EDocTypeReadVersion>(*s_head).SetValue(s_required_matroska_read_version);
+  GetChild<EDocTypeVersion    >(*s_head).SetValue(1);
+  GetChild<EDocTypeReadVersion>(*s_head).SetValue(1);
 
   s_head->Render(*out, true);
-}
-
-void
-rerender_ebml_head() {
-  mm_io_c *out = g_cluster_helper->get_output();
-
-  if (!out || !s_head)
-    return;
-
-  out->save_pos(s_head->GetElementPosition());
-  render_ebml_head(out);
-  out->restore_pos();
 }
 
 static void
@@ -668,7 +642,7 @@ render_headers(mm_io_c *out) {
     } else
       set_timestamp_scale();
 
-    s_kax_infos->Render(*out, true);
+    g_doc_type_version_handler->render(*s_kax_infos, *out, true);
     g_kax_sh_main->IndexThis(*s_kax_infos, *g_kax_segment);
 
     if (!g_packetizers.empty()) {
@@ -676,7 +650,7 @@ render_headers(mm_io_c *out) {
       uint64_t full_header_size = g_kax_tracks->ElementSize(true);
       g_kax_tracks->UpdateSize(false);
 
-      g_kax_tracks->Render(*out, false);
+      g_doc_type_version_handler->render(*g_kax_tracks, *out);
       g_kax_sh_main->IndexThis(*g_kax_tracks, *g_kax_segment);
 
       // Reserve some small amount of space for header changes by the
@@ -778,7 +752,7 @@ relocate_written_data(uint64_t data_start_pos,
   if (s_kax_as) {
     mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]  re-writing attachments; old position %1% new %2%\n") % s_kax_as->GetElementPosition() % (s_kax_as->GetElementPosition() + delta));
     s_out->setFilePointer(s_kax_as->GetElementPosition() + delta);
-    s_kax_as->Render(*s_out);
+    g_doc_type_version_handler->render(*s_kax_as, *s_out);
   }
 
   if (s_kax_chapters_void) {
@@ -818,7 +792,7 @@ shrink_void_and_rerender_track_headers(int64_t new_void_size) {
 
   s_out->setFilePointer(g_kax_tracks->GetElementPosition());
 
-  g_kax_tracks->Render(*s_out, false);
+  g_doc_type_version_handler->render(*g_kax_tracks, *s_out);
   render_void(new_void_size);
 
   s_out->setFilePointer(0, seek_end);
@@ -878,7 +852,7 @@ rerender_track_headers() {
    happen when appending files.
 */
 static void
-render_attachments(IOCallback *out) {
+render_attachments(mm_io_c &out) {
   s_kax_as   = std::make_unique<KaxAttachments>();
   auto kax_a = static_cast<KaxAttached *>(nullptr);
 
@@ -909,7 +883,7 @@ render_attachments(IOCallback *out) {
   }
 
   if (s_kax_as->ListSize() != 0)
-    s_kax_as->Render(*out);
+    g_doc_type_version_handler->render(*s_kax_as, out);
   else
     // Delete the kax_as pointer so that it won't be referenced in a seek head.
     s_kax_as.reset();
@@ -1328,6 +1302,8 @@ prepare_tags_for_rendering() {
 */
 void
 create_next_output_file() {
+  g_doc_type_version_handler.reset(new mtx::doc_type_version_handler_c);
+
   auto s_debug = debugging_option_c{"splitting"};
   mxdebug_if(s_debug, boost::format("splitting: Create next destination file; splitting? %1% discarding? %2%\n") % g_cluster_helper->splitting() % g_cluster_helper->discarding());
 
@@ -1347,7 +1323,7 @@ create_next_output_file() {
   g_cluster_helper->set_output(s_out.get());
 
   render_headers(s_out.get());
-  render_attachments(s_out.get());
+  render_attachments(*s_out);
   render_chapter_void_placeholder();
   add_tags_from_cue_chapters();
   prepare_tags_for_rendering();
@@ -1451,7 +1427,7 @@ render_chapters() {
 
   if (!replaced) {
     s_out->setFilePointer(0, seek_end);
-    s_chapters_in_this_file->Render(*s_out);
+    g_doc_type_version_handler->render(*s_chapters_in_this_file, *s_out);
   }
 
   s_kax_chapters_void.reset();
@@ -1497,7 +1473,7 @@ finish_file(bool last_file,
   // Render the track headers a second time if the user has requested that.
   if (hack_engaged(ENGAGE_WRITE_HEADERS_TWICE)) {
     auto second_tracks = clone(g_kax_tracks);
-    second_tracks->Render(*s_out);
+    g_doc_type_version_handler->render(*second_tracks, *s_out);
     g_kax_sh_main->IndexThis(*second_tracks, *g_kax_segment);
   }
 
@@ -1512,7 +1488,7 @@ finish_file(bool last_file,
   // as the file's duration.
   s_out->save_pos(s_kax_duration->GetElementPosition());
   s_kax_duration->SetValue(calculate_file_duration());
-  s_kax_duration->Render(*s_out);
+  g_doc_type_version_handler->render(*s_kax_duration, *s_out);
 
   // If splitting is active and this is the last part then handle the
   // 'next segment UID'. If it was given on the command line then set it here.
@@ -1542,7 +1518,7 @@ finish_file(bool last_file,
     s_out->setFilePointer(s_kax_infos->GetElementPosition());
     s_kax_infos->UpdateSize(true);
     info_size -= s_kax_infos->ElementSize();
-    s_kax_infos->Render(*s_out, true);
+    g_doc_type_version_handler->render(*s_kax_infos, *s_out, true);
     if (2 == changed) {
       if (2 < info_size) {
         EbmlVoid void_after_infos;
@@ -1561,7 +1537,7 @@ finish_file(bool last_file,
 
   // Render the segment info a second time if the user has requested that.
   if (hack_engaged(ENGAGE_WRITE_HEADERS_TWICE)) {
-    s_kax_infos->Render(*s_out);
+    g_doc_type_version_handler->render(*s_kax_infos, *s_out);
     g_kax_sh_main->IndexThis(*s_kax_infos, *g_kax_segment);
   }
 
@@ -1570,7 +1546,7 @@ finish_file(bool last_file,
   // Render the meta seek information with the cues
   if (g_write_meta_seek_for_clusters && (g_kax_sh_cues->ListSize() > 0) && !hack_engaged(ENGAGE_NO_META_SEEK)) {
     g_kax_sh_cues->UpdateSize();
-    g_kax_sh_cues->Render(*s_out);
+    g_doc_type_version_handler->render(*g_kax_sh_cues, *s_out);
     g_kax_sh_main->IndexThis(*g_kax_sh_cues, *g_kax_segment);
   }
 
@@ -1595,7 +1571,7 @@ finish_file(bool last_file,
   if (tags_here) {
     fix_mandatory_elements(tags_here);
     tags_here->UpdateSize();
-    tags_here->Render(*s_out, true);
+    g_doc_type_version_handler->render(*tags_here, *s_out, true);
 
     g_kax_sh_main->IndexThis(*tags_here, *g_kax_segment);
     delete tags_here;
@@ -1624,6 +1600,8 @@ finish_file(bool last_file,
   if (g_kax_segment->ForceSize(final_file_size - g_kax_segment->GetElementPosition() - g_kax_segment->HeadSize()))
     g_kax_segment->OverwriteHead(*s_out);
 
+  update_ebml_head();
+
   s_out.reset();
 
   g_kax_segment.reset();
@@ -1632,6 +1610,7 @@ finish_file(bool last_file,
   s_void_after_track_headers.reset();
   g_kax_sh_cues.reset();
   s_head.reset();
+  g_doc_type_version_handler.reset();
 }
 
 void

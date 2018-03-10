@@ -502,8 +502,6 @@ generic_packetizer_c::set_track_seek_pre_roll(timestamp_c const &seek_pre_roll) 
   m_seek_pre_roll = seek_pre_roll;
   if (m_track_entry)
     GetChild<KaxSeekPreRoll>(m_track_entry).SetValue(seek_pre_roll.to_ns());
-
-  set_required_matroska_version(4);
 }
 
 void
@@ -511,8 +509,6 @@ generic_packetizer_c::set_codec_delay(timestamp_c const &codec_delay) {
   m_codec_delay = codec_delay;
   if (m_track_entry)
     GetChild<KaxCodecDelay>(m_track_entry).SetValue(codec_delay.to_ns());
-
-  set_required_matroska_version(4);
 }
 
 void
@@ -546,10 +542,8 @@ generic_packetizer_c::set_audio_bit_depth(int bit_depth) {
 void
 generic_packetizer_c::set_video_interlaced_flag(bool interlaced) {
   m_hvideo_interlaced_flag = interlaced ? 1 : 0;
-  if (m_track_entry) {
+  if (m_track_entry)
     GetChild<KaxVideoFlagInterlaced>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_interlaced_flag);
-    set_required_matroska_version(2);
-  }
 }
 
 void
@@ -940,10 +934,6 @@ void
 generic_packetizer_c::set_video_stereo_mode_impl(EbmlMaster &video,
                                                  stereo_mode_c::mode stereo_mode) {
   GetChild<KaxVideoStereoMode>(video).SetValue(stereo_mode);
-
-  if (   (stereo_mode_c::mono        != stereo_mode)
-      && (stereo_mode_c::unspecified != stereo_mode))
-    set_required_matroska_version(3);
 }
 
 void
@@ -1313,9 +1303,6 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
 
 void
 generic_packetizer_c::add_packet2(packet_cptr pack) {
-  if (pack->has_discard_padding())
-    set_required_matroska_version(4);
-
   pack->timestamp   = ADJUST_TIMESTAMP(pack->timestamp);
   if (pack->has_bref())
     pack->bref     = ADJUST_TIMESTAMP(pack->bref);

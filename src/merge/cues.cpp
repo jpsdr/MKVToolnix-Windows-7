@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/debugging.h"
+#include "common/doc_type_version_handler.h"
 #include "common/ebml.h"
 #include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
@@ -110,10 +111,8 @@ cues_c::write(mm_io_c &out,
     GetChild<KaxCueClusterPosition>(positions).SetValue(point.cluster_position);
 
     auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timestamp });
-    if (codec_state_position != m_codec_state_position_map.end()) {
+    if (codec_state_position != m_codec_state_position_map.end())
       GetChild<KaxCueCodecState>(positions).SetValue(codec_state_position->second);
-      set_required_matroska_version(2);
-    }
 
     if (point.relative_position)
       GetChild<KaxCueRelativePosition>(positions).SetValue(point.relative_position);
@@ -121,7 +120,7 @@ cues_c::write(mm_io_c &out,
     if (point.duration)
       GetChild<KaxCueDuration>(positions).SetValue(ROUND_TIMESTAMP_SCALE(point.duration) / g_timestamp_scale);
 
-    kc_point.Render(out);
+    g_doc_type_version_handler->render(kc_point, out);
   }
 
   m_points.clear();

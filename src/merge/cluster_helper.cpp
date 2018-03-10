@@ -14,6 +14,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/doc_type_version_handler.h"
 #include "common/ebml.h"
 #include "common/hacks.h"
 #include "common/math.h"
@@ -487,8 +488,6 @@ cluster_helper_c::render() {
       KaxCodecState *cstate = new KaxCodecState;
       bgroup.PushElement(*cstate);
       cstate->CopyBuffer(pack->codec_state->get_buffer(), pack->codec_state->get_size());
-
-      set_required_matroska_version(2);
     }
 
     if (-1 == m->first_timestamp_in_file)
@@ -560,6 +559,7 @@ cluster_helper_c::render() {
       m->cluster->set_max_timestamp(max_cl_timestamp - timestamp_offset);
 
       m->cluster->Render(*m->out, cues);
+      g_doc_type_version_handler->account(*m->cluster);
       m->bytes_in_file += m->cluster->ElementSize();
 
       if (g_kax_sh_cues)

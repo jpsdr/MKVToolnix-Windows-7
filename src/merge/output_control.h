@@ -40,6 +40,10 @@ namespace libmatroska {
 
 using namespace libmatroska;
 
+namespace mtx {
+class doc_type_version_handler_c;
+}
+
 class generic_packetizer_c;
 class track_info_c;
 struct filelist_t;
@@ -183,6 +187,8 @@ extern std::string g_splitting_by_chapters_arg;
 
 extern append_mode_e g_append_mode;
 
+extern std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
+
 void create_packetizers();
 void calc_attachment_sizes();
 void calc_max_chapter_size();
@@ -200,11 +206,7 @@ void create_next_output_file();
 void finish_file(bool last_file, bool create_new_file = false, bool previously_discarding = false);
 void force_close_output_file();
 void rerender_track_headers();
-void rerender_ebml_head();
 std::string create_output_name();
-
-bool set_required_matroska_version(unsigned int required_version);
-bool set_required_matroska_read_version(unsigned int required_version);
 
 int64_t add_attachment(attachment_cptr const &attachment);
 
