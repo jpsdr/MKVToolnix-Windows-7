@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-10 14:04+0100\n"
-"PO-Revision-Date: 2018-03-05 13:25+0000\n"
+"PO-Revision-Date: 2018-03-11 21:23+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -593,15 +593,14 @@ msgstr ""
 "                           le noyau et les extensions.\n"
 
 #: src/merge/mkvmerge.cpp:240
-#, fuzzy
 msgid ""
 "  --remove-dialog-normalization-gain <TID>\n"
 "                           Removes or minimizes the dialog normalization gain\n"
 "                           by modifying audio frame headers.\n"
 msgstr ""
-"  --aspect-ratio <TID:f|a/b>\n"
-"                           Définit les dimensions à l'écran (largeur et\n"
-"                           hauteur) relatives au ratio d'aspect indiqué.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Retire ou minimise le gain de normalisation des dialogues\n"
+"                           en modifiant les entêtes de trame audio.\n"
 
 #: src/merge/mkvmerge.cpp:110
 msgid ""
@@ -2574,7 +2573,7 @@ msgstr "Un index par défaut ainsi que les paramètres par défaut de la largeur
 #: src/propedit/propedit.cpp:120
 #, no-c-format
 msgid "A generic read or write failure occurred."
-msgstr ""
+msgstr "Un échec de lecture ou écriture est survenu."
 
 #: src/common/property_element.cpp:141
 msgid "A human-readable string specifying the codec."
@@ -7236,9 +7235,9 @@ msgstr "Aucun %1% spécifié dans « --%2% %3% ».\n"
 #: src/merge/output_control.cpp:230
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:250
 #: src/propedit/propedit.cpp:118
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "No 'EBML head' element was found."
-msgstr "Aucun entête EBML trouvé."
+msgstr "Aucun élément « entête EBML » trouvé."
 
 #: src/input/r_qtmp4.cpp:1702
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
@@ -8411,9 +8410,8 @@ msgid "Remove com&pleted jobs older than x days:"
 msgstr "Retirer les tâches effectuées &plus anciennes que x jours :"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
-#, fuzzy
 msgid "Remove dialog normalization gain"
-msgstr "Informations de segment"
+msgstr "Retirer le gain de normalisation des dialogues"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:179
 #, no-c-format
@@ -8427,7 +8425,7 @@ msgstr "Retirer les fichiers source"
 #: src/mkvtoolnix-gui/merge/input.cpp:521
 #, no-c-format
 msgid "Removes or at least minimizes the dialog normalization gain by modifying audio headers."
-msgstr ""
+msgstr "Retire ou au moins minimise le gain de normalisation des dialogues en modifiant les entêtes audio."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:361
@@ -10925,7 +10923,7 @@ msgstr "Les entêtes sont erronés de sorte qu'il n'ont pas pu être enregistré
 #: src/propedit/propedit.cpp:119
 #, no-c-format
 msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
-msgstr ""
+msgstr "Il n'y a pas assez d'espace au début du fichier pour y placer l'élément « entête EBML » mis à jour."
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
@@ -11135,9 +11133,9 @@ msgid "This must be comma-separated list of four numbers for the cropping to be 
 msgstr "Ce doit être une suite de quatre nombres séparés par une virgule et représentant le recadrage à gauche, en haut, à droite et en bas, par exemple « 0,20,0,20 »."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "This only works with AC-3, DTS & TrueHD audio tracks."
-msgstr "Ceci ne fonctionne qu'avec les pistes audio DTS."
+msgstr "Ceci ne fonctionne qu'avec les pistes audio AC-3, DTS et TrueHD."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
 #, no-c-format
@@ -11664,7 +11662,7 @@ msgstr "La mise à jour de l'élément « %1% » a échoué. Raison :"
 #: src/propedit/propedit.cpp:122
 #, no-c-format
 msgid "Updating the 'document type version' or 'document type read version' header fields failed."
-msgstr ""
+msgstr "La mise à jour des champs d'entêtes « version du type de document » ou « version de lecture du type de document » a échoué."
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:41
 msgid "Usage"
@@ -11704,7 +11702,7 @@ msgstr "Utile pour obtenir exactement deux fichiers, par exemple."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:649
 msgid "User forum/sub-&Reddit"
-msgstr ""
+msgstr "Forum des utilisateurs/sub-&Reddit"
 
 #: src/extract/extract_cli_parser.cpp:106
 msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
