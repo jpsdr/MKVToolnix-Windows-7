@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-10 14:04+0100\n"
-"PO-Revision-Date: 2018-03-07 08:12+0000\n"
+"PO-Revision-Date: 2018-03-11 11:23+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -967,7 +967,7 @@ msgstr "  US: Evrensel Kod dizgisi\n"
 
 #: src/propedit/propedit_cli_parser.cpp:166
 msgid "  X:  binary in hex\n"
-msgstr "  X:  hex içinde ikilik\n"
+msgstr "  X:  onaltılık içinde ikilik\n"
 
 #: src/merge/mkvmerge.cpp:166
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
@@ -1197,14 +1197,14 @@ msgstr[0] "%1 uyarı"
 msgstr[1] "%1 uyarı"
 
 #: src/common/kax_info.cpp:864
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% (%|2$.3f| frames/fields per second for a video track)"
-msgstr "Varsayılan süre: %|1$.3f|ms (görüntü izi için saniye başına %|2$.3f| kare/alan)"
+msgstr "%1% (görüntü izi için saniye başına %|2$.3f| kare/alan)"
 
 #: src/common/kax_info.cpp:847
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% (track ID for mkvmerge & mkvextract: %2%)"
-msgstr "İz numarası: %1% (mkvmerge ve mkvextract için iz ID'si: %2%)"
+msgstr "%1% (mkvmerge ve mkvextract için iz ID: %2%)"
 
 #: src/common/strings/formatting.cpp:321
 #, boost-format
@@ -1214,19 +1214,23 @@ msgstr[0] "%1% bayt"
 msgstr[1] "%1% bayt"
 
 #: src/common/kax_info.cpp:224
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"
-msgstr "%1% kare, iz %2%, zaman damgası %3% (%4%), boyut %5%, adler 0x%|6$08x|%7%%8%\n"
+msgstr ""
+"%1% kare, iz %2%, zaman damgası %3%, süre %4%, boyut %5%, adler 0x%|6$08x|%7%%8%\n"
+"\n"
 
 #: src/common/kax_info.cpp:229
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"
-msgstr "%1% kare, iz %2%, zaman damgası %3% (%4%), boyut %5%, adler 0x%|6$08x|%7%\n"
+msgstr ""
+"%1% kare, iz %2%, zaman damgası %3%, boyut %4%, adler, adler 0x%|5$08x|%6%\n"
+"\n"
 
 #: src/common/kax_info.cpp:225
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"
-msgstr "%1% kare, iz %2%, zaman damgası %3% (%4%), boyut %5%, adler 0x%|6$08x|%7%\n"
+msgstr "%1% kare, iz %2%, zaman damgası %3%, boyut %4%, adler 0x%|5$08x|%6%%7%\n"
 
 #: src/common/strings/formatting.cpp:315
 #, boost-format
@@ -1306,9 +1310,9 @@ msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: '%2% %3%' içinde eksik iz ID.\n"
 
 #: src/common/kax_info.cpp:227
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1%track number %2%, %3% frame(s), timestamp %4%"
-msgstr "Basit Blok (%1% iz numarası %2%, %3% kare, zaman damgası %|4$.3f|s = %5%)"
+msgstr "%1% iz numarası %2%, %3% kare, zaman damgası %4%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
@@ -2395,9 +2399,9 @@ msgid "'Track enabled' flag"
 msgstr "'İz etkinleştirildi\" işareti"
 
 #: src/common/kax_info.cpp:318
-#, fuzzy, boost-format
+#, boost-format
 msgid "(Known element, but invalid at this position: %1%; ID: 0x%2% size: %3%)"
-msgstr "(Bilinmeyen öğe: %1%; ID: 0x%2% boyut: %3%)"
+msgstr "(Bilinmeyen öğe, ancak bu konumda geçersiz: %1%; ID: 0x%2% boyut: %3%)"
 
 #: src/common/kax_info.cpp:217
 #, boost-format
@@ -2438,9 +2442,9 @@ msgid ", position %1%"
 msgstr ", konum %1%"
 
 #: src/common/kax_info.cpp:223
-#, fuzzy, boost-format
+#, boost-format
 msgid ", position 0x%|1$x|"
-msgstr ", konum %1%"
+msgstr ", konum 0x%|1$x|"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 #, no-c-format
@@ -2565,7 +2569,7 @@ msgstr "Bunun yerine varsayılan bir indeks ve bunla birlikte genişlik, yüksek
 #: src/propedit/propedit.cpp:120
 #, no-c-format
 msgid "A generic read or write failure occurred."
-msgstr ""
+msgstr "Genel bir okuma veya yazma hatası meydana geldi."
 
 #: src/common/property_element.cpp:141
 msgid "A human-readable string specifying the codec."
@@ -3691,18 +3695,16 @@ msgid "Chapter UID"
 msgstr "Bölüm UID"
 
 #: src/common/kax_element_names.cpp:271
-#, fuzzy
 msgid "Chapter atom"
-msgstr "Bölüm düzenleyici"
+msgstr "Bölüm atomu"
 
 #: src/common/kax_element_names.cpp:287
 msgid "Chapter country"
 msgstr "Bölüm ülkesi"
 
 #: src/common/kax_element_names.cpp:283
-#, fuzzy
 msgid "Chapter display"
-msgstr "Bölüm dosyası:"
+msgstr "Bölüm görüntüsü"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1425
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:241
@@ -3721,14 +3723,12 @@ msgid "Chapter file:"
 msgstr "Bölüm dosyası:"
 
 #: src/common/kax_element_names.cpp:277
-#, fuzzy
 msgid "Chapter flag enabled"
-msgstr "Bölüm dosyası:"
+msgstr "Bölüm işareti etkinleştirildi"
 
 #: src/common/kax_element_names.cpp:276
-#, fuzzy
 msgid "Chapter flag hidden"
-msgstr "\"Gizlendi\" olarak işaretlenmiş bölümleri &atla"
+msgstr "Bölüm işareti gizlendi"
 
 #: src/merge/cluster_helper.cpp:748
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
@@ -3739,9 +3739,8 @@ msgid "Chapter language"
 msgstr "Bölüm dili"
 
 #: src/common/kax_element_names.cpp:286
-#, fuzzy
 msgid "Chapter language (IETF)"
-msgstr "Bölüm Çevirme"
+msgstr "Bölüm dili (IETF)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 msgid "Chapter mass modification"
@@ -3759,96 +3758,79 @@ msgstr "Bölüm ayrıştırıcısı: YayınUID %1% benzersiz değil ve yeniden k
 
 #: src/common/kax_element_names.cpp:280
 msgid "Chapter physical equivalent"
-msgstr ""
+msgstr "Bölüm fiziksel eşdeğeri"
 
 #: src/common/kax_element_names.cpp:288
-#, fuzzy
 msgid "Chapter process"
-msgstr "Bölümler"
+msgstr "Bölüm işlemi"
 
 #: src/common/kax_element_names.cpp:289
-#, fuzzy
 msgid "Chapter process codec ID"
-msgstr "Bölüm Çevirme Kodeki: %1%"
+msgstr "Bölüm işlem kodek ID"
 
 #: src/common/kax_element_names.cpp:291
 msgid "Chapter process command"
-msgstr ""
+msgstr "Bölüm işlem komutu"
 
 #: src/common/kax_element_names.cpp:293
-#, fuzzy
 msgid "Chapter process data"
-msgstr "Bölüm Çevirme"
+msgstr "Bölüm işlem verileri"
 
 #: src/common/kax_element_names.cpp:290
-#, fuzzy
 msgid "Chapter process private"
-msgstr "Bölüm Çevirme"
+msgstr "Bölüm işlem özeli"
 
 #: src/common/kax_element_names.cpp:292
-#, fuzzy
 msgid "Chapter process time"
-msgstr "Bölüm Çevirme"
+msgstr "Bölüm işlem süresi"
 
 #: src/common/kax_element_names.cpp:278
-#, fuzzy
 msgid "Chapter segment UID"
-msgstr "Sonraki parça UID:"
+msgstr "Bölüm parça UID"
 
 #: src/common/kax_element_names.cpp:279
-#, fuzzy
 msgid "Chapter segment edition UID"
-msgstr "Pa&rça yayın UID:"
+msgstr "Bölüm parça yayın UID"
 
 #: src/common/kax_element_names.cpp:284
-#, fuzzy
 msgid "Chapter string"
-msgstr "Bölüm çıkartma"
+msgstr "Bölüm dizgisi"
 
 #: src/common/kax_element_names.cpp:273
-#, fuzzy
 msgid "Chapter string UID"
-msgstr "Bölüm çıkartma"
+msgstr "Bölüm dizgi UID"
 
 #: src/common/kax_element_names.cpp:275
-#, fuzzy
 msgid "Chapter time end"
-msgstr "Bölüm dosyası:"
+msgstr "Bölüm süre bitiş"
 
 #: src/common/kax_element_names.cpp:274
-#, fuzzy
 msgid "Chapter time start"
-msgstr "Bölüm düzenleyici"
+msgstr "Bölüm süre başlangıç"
 
 #: src/common/kax_element_names.cpp:281
-#, fuzzy
 msgid "Chapter track"
-msgstr "Bölüm çıkartma"
+msgstr "Bölüm izi"
 
 #: src/common/kax_element_names.cpp:282
-#, fuzzy
 msgid "Chapter track number"
-msgstr "Bölüm numaraları:"
+msgstr "Bölüm iz numarası"
 
 #: src/common/kax_element_names.cpp:98
-#, fuzzy
 msgid "Chapter translate"
-msgstr "Bölüm Çevirme"
+msgstr "Bölüm çeviri"
 
 #: src/common/kax_element_names.cpp:101
-#, fuzzy
 msgid "Chapter translate ID"
-msgstr "Bölüm Çevirme"
+msgstr "Bölüm çeviri ID"
 
 #: src/common/kax_element_names.cpp:100
-#, fuzzy
 msgid "Chapter translate codec"
-msgstr "Bölüm Çevirme Kodeki: %1%"
+msgstr "Bölüm çeviri kodeki"
 
 #: src/common/kax_element_names.cpp:99
-#, fuzzy
 msgid "Chapter translate edition UID"
-msgstr "Bölüm Çevirme Yayın UID: %1%"
+msgstr "Bölüm çeviri yayın UID"
 
 #: src/common/kax_element_names.cpp:265
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
@@ -3939,19 +3921,16 @@ msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "Küme uzunluğu '%1%' aralık dışında (100..32000).\n"
 
 #: src/common/kax_element_names.cpp:262
-#, fuzzy
 msgid "Cluster position"
-msgstr "Küme konumu: %1%"
+msgstr "Küme konumu"
 
 #: src/common/kax_element_names.cpp:263
-#, fuzzy
 msgid "Cluster previous size"
-msgstr "Küme önceki boyutu: %1%"
+msgstr "Küme önceki boyutu"
 
 #: src/common/kax_element_names.cpp:261
-#, fuzzy
 msgid "Cluster timestamp"
-msgstr "Küme zaman damgası: %|1$.3f|s"
+msgstr "Küme zaman damgası"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:45
@@ -3971,9 +3950,8 @@ msgid "Codec ID:"
 msgstr "Kodek ID:"
 
 #: src/common/kax_element_names.cpp:192
-#, fuzzy
 msgid "Codec decode all"
-msgstr "Kodek çözme tümü: %1%"
+msgstr "Kodek çözme tümü"
 
 #: src/common/kax_element_names.cpp:191
 msgid "Codec download URL"
@@ -4332,24 +4310,20 @@ msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #: src/common/kax_element_names.cpp:219
-#, fuzzy
 msgid "Cue block number"
-msgstr "Cue blok numarası: %1%"
+msgstr "Cue blok numarası"
 
 #: src/common/kax_element_names.cpp:216
-#, fuzzy
 msgid "Cue cluster position"
-msgstr "Cue küme konumu: %1%"
+msgstr "Cue küme konumu"
 
 #: src/common/kax_element_names.cpp:220
-#, fuzzy
 msgid "Cue codec state"
-msgstr "Cue kodek durumu: %1%"
+msgstr "Cue kodek durumu"
 
 #: src/common/kax_element_names.cpp:218
-#, fuzzy
 msgid "Cue duration"
-msgstr "Cue süresi: %1%"
+msgstr "Cue süresi"
 
 #: src/extract/extract_cli_parser.cpp:129
 msgid "Cue extraction"
@@ -4364,33 +4338,28 @@ msgid "Cue point"
 msgstr "Cue noktası"
 
 #: src/common/kax_element_names.cpp:223
-#, fuzzy
 msgid "Cue ref cluster"
-msgstr "Cue ref kümesi: %1%"
+msgstr "Cue ref kümesi"
 
 #: src/common/kax_element_names.cpp:225
-#, fuzzy
 msgid "Cue ref codec state"
-msgstr "Cue ref kodek durumu: %1%"
+msgstr "Cue ref kodek durumu"
 
 #: src/common/kax_element_names.cpp:224
-#, fuzzy
 msgid "Cue ref number"
-msgstr "Cue ref numarası: %1%"
+msgstr "Cue ref numarası"
 
 #: src/common/kax_element_names.cpp:222
-#, fuzzy
 msgid "Cue ref time"
-msgstr "Cue ref süresi: %|1$.3f|s"
+msgstr "Cue ref süresi"
 
 #: src/common/kax_element_names.cpp:221
 msgid "Cue reference"
 msgstr "Cue referansı"
 
 #: src/common/kax_element_names.cpp:217
-#, fuzzy
 msgid "Cue relative position"
-msgstr "Cue ilgili konumu: %1%"
+msgstr "Cue ilgili konumu"
 
 #: src/extract/extract_cli_parser.cpp:112
 msgid "Cue sheet extraction"
@@ -4417,14 +4386,12 @@ msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (curr
 msgstr "Cue sheet ayrıştırıcı:  Önceki İZ girişi (şu anki satır: %1%) için bulunan INDEKS girişi yok.\n"
 
 #: src/common/kax_element_names.cpp:213
-#, fuzzy
 msgid "Cue time"
-msgstr "Cue sheet dosyaları"
+msgstr "Cue süresi"
 
 #: src/common/kax_element_names.cpp:215
-#, fuzzy
 msgid "Cue track"
-msgstr "Cue izi: %1%"
+msgstr "Cue izi"
 
 #: src/common/kax_element_names.cpp:214
 msgid "Cue track positions"
@@ -4432,7 +4399,7 @@ msgstr "Cue iz konumları"
 
 #: src/common/kax_element_names.cpp:211
 msgid "Cues"
-msgstr ""
+msgstr "Cue'lar"
 
 #: src/common/kax_info.cpp:571
 msgid "Cues (subentries will be skipped)"
@@ -4940,9 +4907,8 @@ msgid "EBML version"
 msgstr "EBML sürümü"
 
 #: src/common/kax_element_names.cpp:79
-#, fuzzy
 msgid "EBML void"
-msgstr "EBML başı"
+msgstr "EBML geçersiz"
 
 #: src/merge/reader_detection_and_creation.cpp:420
 #, boost-format
@@ -4969,9 +4935,8 @@ msgstr "Özellikler için seçicileri düzenle"
 
 #: src/common/kax_element_names.cpp:267
 #: src/common/kax_element_names.cpp:299
-#, fuzzy
 msgid "Edition UID"
-msgstr "Yayın girişi"
+msgstr "Yayın UID"
 
 #: src/common/kax_element_names.cpp:266
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
@@ -4981,19 +4946,16 @@ msgid "Edition entry"
 msgstr "Yayın girişi"
 
 #: src/common/kax_element_names.cpp:269
-#, fuzzy
 msgid "Edition flag default"
-msgstr "Yayın girişi"
+msgstr "Yayın işareti varsayılanı"
 
 #: src/common/kax_element_names.cpp:268
-#, fuzzy
 msgid "Edition flag hidden"
-msgstr "Yayın girişi"
+msgstr "Yayın işareti gizlendi"
 
 #: src/common/kax_element_names.cpp:270
-#, fuzzy
 msgid "Edition flag ordered"
-msgstr "Yayın girişi"
+msgstr "Yayın işareti sıralanmış"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 #, no-c-format
@@ -5327,7 +5289,7 @@ msgstr "Theora görüntü üstbilgilerinden çıkartılan en-boy oranı bilgiler
 
 #: src/extract/extract_cli_parser.cpp:136
 msgid "Extracting multiple items at the same time"
-msgstr ""
+msgstr "Çoklu öğeler aynı anda çıkartılıyor"
 
 #: src/extract/tracks.cpp:137
 #, boost-format
@@ -5389,9 +5351,8 @@ msgid "Failed to parse the USF codec private data for track %1%: %2%\n"
 msgstr "%1% izi için USF kodek özel verisini ayrıştırma başarısız oldu: %2%\n"
 
 #: src/common/kax_element_names.cpp:90
-#, fuzzy
 msgid "Family UID"
-msgstr "Aile UID: %1%"
+msgstr "Aile UID"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:172
 msgid "Fi&le name:"
@@ -5402,9 +5363,8 @@ msgid "Fi&le title:"
 msgstr "Dosya baş&lığı:"
 
 #: src/common/kax_element_names.cpp:156
-#, fuzzy
 msgid "Field order"
-msgstr "Görüntü alanı sırası"
+msgstr "Alanı sırası"
 
 #: src/common/property_element.cpp:158
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
@@ -5421,9 +5381,8 @@ msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Dosya '%1%': desteklenmeyen kalıp: %2%\n"
 
 #: src/common/kax_element_names.cpp:233
-#, fuzzy
 msgid "File UID"
-msgstr "Dosya UID: %1%"
+msgstr "Dosya UID"
 
 #: src/input/r_real.cpp:430
 #: src/input/r_real.cpp:439
@@ -5432,14 +5391,12 @@ msgid "File contains fewer frames than expected or is corrupt after frame %1%.\n
 msgstr "Dosya beklenenden daha az kare içeriyor ya da %1% nolu kareden sonra bozulmuş.\n"
 
 #: src/common/kax_element_names.cpp:232
-#, fuzzy
 msgid "File data"
-msgstr "Dosya adı"
+msgstr "Dosya verisi"
 
 #: src/common/kax_element_names.cpp:229
-#, fuzzy
 msgid "File description"
-msgstr "Dosya tanımlaması: %1%"
+msgstr "Dosya tanımlaması"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:195
 #, no-c-format
@@ -5626,14 +5583,12 @@ msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: '%1% %2%' içindeki eksik iz ID.\n"
 
 #: src/common/kax_element_names.cpp:249
-#, fuzzy
 msgid "Frame number"
-msgstr "Kare numarası: %1%"
+msgstr "Kare numarası"
 
 #: src/common/kax_element_names.cpp:160
-#, fuzzy
 msgid "Frame rate"
-msgstr "Kare oranı: %1%"
+msgstr "Kare oranı"
 
 #: src/common/kax_info.cpp:221
 #: src/common/kax_info.cpp:228
@@ -5657,9 +5612,8 @@ msgid "GUI"
 msgstr "GKA"
 
 #: src/common/kax_element_names.cpp:154
-#, fuzzy
 msgid "Gamma"
-msgstr "Gama: %1%"
+msgstr "Gama"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
 #, no-c-format
@@ -6696,19 +6650,17 @@ msgid "Known &problems in recent releases"
 msgstr "Son yayınlarda bilinen &sorunlar"
 
 #: src/mkvtoolnix-gui/info/tab.cpp:252
-#, fuzzy, boost-format
+#, boost-format
 msgid "Known element, but invalid at this position: %1% (ID: 0x%2%)"
-msgstr "(Bilinmeyen öğe: %1%; ID: 0x%2% boyut: %3%)"
+msgstr "Bilinmeyen öğe, ancak bu konumda geçersiz: %1% (ID: 0x%2%)"
 
 #: src/common/kax_element_names.cpp:248
-#, fuzzy
 msgid "Lace number"
-msgstr "Bağlama numarası: %1%"
+msgstr "Bağlama numarası"
 
 #: src/common/kax_element_names.cpp:197
-#, fuzzy
 msgid "Lacing flag"
-msgstr "Bağlama işareti: %1%"
+msgstr "Bağlama işareti"
 
 #: src/common/kax_element_names.cpp:200
 #: src/common/property_element.cpp:139
@@ -6800,9 +6752,9 @@ msgid "Listing configuration file names with the extension .mtxcfg causes the GU
 msgstr "Yapılandırma dosyası adlarını .mtxcfg uzantısı ile listelemek, GKA'nın bu yapılandırma dosyalarını uygun araçta yüklemesine neden olur."
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:163
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Listing content of file \"%1\" in directory \"%2\""
-msgstr "\"%1\" dosyasına \"%2\" dizininde çoklanıyor"
+msgstr " \"%1\" dosyasının içeriği \"%2\" dizininde listeleniyor"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:494
 #, no-c-format
@@ -6967,14 +6919,12 @@ msgid "Matroska files can be played back without the cue data, but seeking will 
 msgstr "Matroska dosyaları cue verisi olmadan oynatılabilir ancak arama muhtemelen yavaş ve özensiz olacaktır."
 
 #: src/common/kax_element_names.cpp:74
-#, fuzzy
 msgid "Maximum EBML ID length"
-msgstr "EBML en fazla ID uzunluğu: %1%"
+msgstr "En fazla EBML ID uzunluğu"
 
 #: src/common/kax_element_names.cpp:75
-#, fuzzy
 msgid "Maximum EBML size length"
-msgstr "EBML en fazla boyut uzunluğu: %1%"
+msgstr "En fazla EBML boyut uzunluğu"
 
 #: src/common/xml/ebml_converter.cpp:228
 #, boost-format
@@ -7099,7 +7049,7 @@ msgstr "'--split %1%' içinde '--split' için eksik başlama/bitiş belirtmeleri
 
 #: src/extract/extract_cli_parser.cpp:49
 msgid "Modes"
-msgstr "Modlar"
+msgstr "Kipler"
 
 #: src/propedit/options.cpp:184
 #, boost-format
@@ -7247,9 +7197,8 @@ msgid "Next filename"
 msgstr "Sonraki dosya adı"
 
 #: src/common/kax_element_names.cpp:93
-#, fuzzy
 msgid "Next segment UID"
-msgstr "Sonraki parça UID:"
+msgstr "Sonraki parça UID"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1743
 msgid "Next segment UID:"
@@ -7288,9 +7237,9 @@ msgstr "'--%2% %3%' içinde belirtilmiş %1% yok.\n"
 #: src/merge/output_control.cpp:230
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:250
 #: src/propedit/propedit.cpp:118
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "No 'EBML head' element was found."
-msgstr "Bulunan EBML başı yok."
+msgstr "Hiç 'EBML başı' öğesi bulunamadı."
 
 #: src/input/r_qtmp4.cpp:1702
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
@@ -7627,9 +7576,8 @@ msgid "One of the options '--attachment-name', '--attachment-description', '--at
 msgstr "'--attachment-name', '--attachment-description', '--attachment-mime-type' veya '--attachment-uid' seçeneklerinden biri şurada belirtilen '--add-attachment', '--replace-attachment' veya '--update-attachment' seçeneği olmadan kullanıldı.\n"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
-#, fuzzy
 msgid "One-line summaries for each track and frame"
-msgstr "Her bir iz için istatistikleri ayrıntılı kipte göster."
+msgstr "Her iz ve kare için tek satır özetler"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
@@ -7868,9 +7816,8 @@ msgid "Output"
 msgstr "Çıktı"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:178
-#, fuzzy
 msgid "Output element positions in he&xadecimal"
-msgstr "Konumları onaltılık sayı biçiminde göster."
+msgstr "Öğe konumlarını &onaltılık biçimde çıkart"
 
 #: src/common/cli_parser.cpp:183
 msgid "Output messages in this charset"
@@ -8465,9 +8412,8 @@ msgid "Remove com&pleted jobs older than x days:"
 msgstr "x günden daha eski ta&mamlanmış işleri kaldır:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
-#, fuzzy
 msgid "Remove dialog normalization gain"
-msgstr "Parça bilgisi"
+msgstr "Konuşma normalleştirme kazancını kaldır"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:179
 #, no-c-format
@@ -8481,7 +8427,7 @@ msgstr "Kaynak dosyaları kaldır"
 #: src/mkvtoolnix-gui/merge/input.cpp:521
 #, no-c-format
 msgid "Removes or at least minimizes the dialog normalization gain by modifying audio headers."
-msgstr ""
+msgstr "Ses üst bilgilerini değiştirerek konuşma normalleştirmesi kazancını kaldırır ya da en aza indirir."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:361
@@ -8744,7 +8690,7 @@ msgstr "Oynatma listeleri tarama"
 
 #: src/common/kax_element_names.cpp:165
 msgid "Scope"
-msgstr ""
+msgstr "Kapsam"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:102
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
@@ -9038,9 +8984,8 @@ msgid "Show &output of all jobs instead of current job only"
 msgstr "Sadece şu anki iş yerine tüm işlerin çık&tısını göster"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:177
-#, fuzzy
 msgid "Show a &summary line with statistics for each track at the end"
-msgstr "Her bir iz için istatistikleri ayrıntılı kipte göster."
+msgstr "Her iz için s&onda istatistikler olan özet bir satır göster"
 
 #: src/info/info_cli_parser.cpp:42
 msgid "Show all bytes of each frame as a hex dump."
@@ -9070,7 +9015,7 @@ msgstr "İş kuyruğunu göster"
 
 #: src/info/info_cli_parser.cpp:43
 msgid "Show positions in hexadecimal."
-msgstr "Konumları onaltılık sayı biçiminde göster."
+msgstr "Konumları onaltılık biçimde göster."
 
 #: src/info/info_cli_parser.cpp:40
 msgid "Show statistics for each track in verbose mode."
@@ -9109,39 +9054,32 @@ msgid "Shut down the system in one minute:"
 msgstr "Sistemi bir dakika içinde kapat:"
 
 #: src/common/kax_element_names.cpp:176
-#, fuzzy
 msgid "Signature"
-msgstr "İmza: %1%"
+msgstr "İmza"
 
 #: src/common/kax_element_names.cpp:173
-#, fuzzy
 msgid "Signature algorithm"
-msgstr "imza algoritması yok"
+msgstr "İmza algoritması"
 
 #: src/common/kax_element_names.cpp:174
-#, fuzzy
 msgid "Signature hash algorithm"
-msgstr "imza adresleme algoritması yok"
+msgstr "İmza adresleme algoritması"
 
 #: src/common/kax_element_names.cpp:175
-#, fuzzy
 msgid "Signature key ID"
-msgstr "İmza anahtar ID: %1%"
+msgstr "İmza anahtar ID"
 
 #: src/common/kax_element_names.cpp:236
-#, fuzzy
 msgid "Silent track number"
-msgstr "Sessiz İz Numarası: %1%"
+msgstr "Sessiz iz numarası"
 
 #: src/common/kax_element_names.cpp:235
-#, fuzzy
 msgid "Silent tracks"
-msgstr "Parça izleri"
+msgstr "Sessiz izler"
 
 #: src/common/kax_element_names.cpp:304
-#, fuzzy
 msgid "Simple"
-msgstr "Basit Blok"
+msgstr "Basit"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
 #: src/mkvtoolnix-gui/merge/output.cpp:476
@@ -9228,9 +9166,9 @@ msgid "Source file name"
 msgstr "Kaynak dosya adı"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:101
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Source file name: %1"
-msgstr "Kaynak dosya adı"
+msgstr "Kaynak dosya adı: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
@@ -9344,9 +9282,8 @@ msgid "Status:"
 msgstr "Durum:"
 
 #: src/common/kax_element_names.cpp:157
-#, fuzzy
 msgid "Stereo mode"
-msgstr "Görüntü stereo kipi"
+msgstr "Stereo kipi"
 
 #: src/merge/mkvmerge.cpp:940
 #, boost-format
@@ -9367,7 +9304,7 @@ msgstr "Tüm çalışan işler tamamlandıktan &sonra durdur"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
 msgid "Stop at the first cluster"
-msgstr ""
+msgstr "İlk kümede durdur"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
@@ -9434,9 +9371,8 @@ msgid "Tab &position in tab widgets:"
 msgstr "Sekme parçacıklarındaki sekme &konumu:"
 
 #: src/common/kax_element_names.cpp:296
-#, fuzzy
 msgid "Tag"
-msgstr "Etiketler"
+msgstr "Etiket"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:391
 #, no-c-format
@@ -9448,13 +9384,12 @@ msgid "Tag extraction"
 msgstr "Etiket çıkartma"
 
 #: src/common/kax_element_names.cpp:308
-#, fuzzy
 msgid "Tag language"
-msgstr "Dil"
+msgstr "Etiket dili"
 
 #: src/common/kax_element_names.cpp:309
 msgid "Tag language (IETF)"
-msgstr ""
+msgstr "Etiket dili (IETF)"
 
 #: src/propedit/propedit_cli_parser.cpp:256
 msgid "Tag selectors"
@@ -9484,15 +9419,15 @@ msgstr "Etiketler:"
 
 #: src/common/kax_element_names.cpp:302
 msgid "Target type"
-msgstr ""
+msgstr "Hedef türü"
 
 #: src/common/kax_element_names.cpp:303
 msgid "Target type value"
-msgstr ""
+msgstr "Hedef türü değeri"
 
 #: src/common/kax_element_names.cpp:297
 msgid "Targets"
-msgstr ""
+msgstr "Hedefler"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 #, no-c-format
@@ -10043,9 +9978,9 @@ msgid "The file '%1%' could not be opened for reading: %2%.\n"
 msgstr "'%1%' dosyası okumak için açılamadı: %2%.\n"
 
 #: src/common/kax_info.cpp:1298
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%."
-msgstr "'%1%' dosyası yazmak için açılamadı: %2%.\n"
+msgstr "'%1%' dosyası yazmak için açılamadı: %2%."
 
 #: src/extract/attachments.cpp:121
 #: src/extract/cues.cpp:74
@@ -10324,9 +10259,8 @@ msgid "The formats do not match."
 msgstr "Biçimler uyuşmuyor."
 
 #: src/extract/extract_cli_parser.cpp:104
-#, fuzzy
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
-msgstr "Dördüncü kip bölümleri çıkartır ve bunları XML'e dönüştürür. Çıktı standart çıktıya yazılır. Çıktı mkvmerge için bir kaynak olarak kullanılabilir."
+msgstr "Dördüncü kip bölümleri çıkartır, bunları XML'e dönüştürür ve bunları bir çıktı dosyasına yazar."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:347
 #, no-c-format
@@ -10669,9 +10603,8 @@ msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "İki ses izinin örnekleme oranı farklı: %1% ve %2%"
 
 #: src/extract/extract_cli_parser.cpp:88
-#, fuzzy
 msgid "The second mode extracts the tags, converts them to XML and writes them to an output file."
-msgstr "İkinci kip etiketleri çıkartır ve bunları XML'e dönüştürür. Çıktı standart çıktıya yazılır. Çıktı mkvmerge için bir kaynak olarak kullanılabilir."
+msgstr "İkinci kip etiketleri çıkartır, bunları XML'e dönüştürür ve bunları bir çıktı dosyasına yazar."
 
 #: src/input/r_tta.cpp:92
 msgid "The seek table in this TTA file seems to be broken.\n"
@@ -11095,7 +11028,7 @@ msgstr "Bu dosya açılamadı veya ayrıştırılamadı.\n"
 
 #: src/common/kax_info.cpp:1218
 msgid "This file is probably not a Matroska file."
-msgstr ""
+msgstr "Bu dosya muhtemelen bir Matroska dosyası değil."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1903
 msgid "This function requires the application %1."
@@ -11191,9 +11124,9 @@ msgid "This must be comma-separated list of four numbers for the cropping to be 
 msgstr "Bu; solda, üstte, sağda ve altta kullanılacak olan kırpma için dört sayının virgülle ayrılmış listesi olmak zorundadır, örn. '0,20,0,20'."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "This only works with AC-3, DTS & TrueHD audio tracks."
-msgstr "Bu sadece DTS ses izleri ile çalışır."
+msgstr "Bu sadece AC-3, DTS ve TrueHD ses izleri ile çalışır."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
 #, no-c-format
@@ -11322,9 +11255,8 @@ msgstr "Zaman damgası dosyası:"
 
 #: src/common/kax_element_names.cpp:84
 #: src/common/kax_element_names.cpp:201
-#, fuzzy
 msgid "Timestamp scale"
-msgstr "Zaman damgası ölçeği: %1%"
+msgstr "Zaman damgası ölçütü"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1678
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1692
@@ -11356,9 +11288,8 @@ msgid "Trac&k name:"
 msgstr "İ&z adı:"
 
 #: src/common/kax_element_names.cpp:179
-#, fuzzy
 msgid "Track"
-msgstr "İzler:"
+msgstr "İz"
 
 #: src/extract/xtr_avc.cpp:137
 #: src/extract/xtr_hdmv_textst.cpp:44
@@ -11502,14 +11433,12 @@ msgid "Track overlay"
 msgstr "İz üstkaplamı"
 
 #: src/common/kax_element_names.cpp:182
-#, fuzzy
 msgid "Track type"
-msgstr "İz türü: %1%"
+msgstr "İz türü"
 
 #: src/common/kax_element_names.cpp:178
-#, fuzzy
 msgid "Tracks"
-msgstr "İzler:"
+msgstr "İzler"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:369
 #, no-c-format
@@ -11521,9 +11450,10 @@ msgid "Tracks with unsupported content encoding schemes (compression or encrypti
 msgstr "Desteklenmeyen içerik şifreleme şemalı (sıkıştırma veya şifreleme) izler çıkartılamaz.\n"
 
 #: src/propedit/tag_target.cpp:262
-#, fuzzy
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
-msgstr "Desteklenmeyen içerik şifreleme şemalı (sıkıştırma veya şifreleme) izler çıkartılamaz.\n"
+msgstr ""
+"Desteklenmeyen içerik şifreleme şemalı (sıkıştırma veya şifreleme) izler değiştirilemez.\n"
+"\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249
 msgid "Tracks:"
@@ -11610,9 +11540,9 @@ msgid "Unknown"
 msgstr "Bilinmiyor"
 
 #: src/mkvtoolnix-gui/info/tab.cpp:249
-#, fuzzy, boost-format
+#, boost-format
 msgid "Unknown (ID: 0x%1%)"
-msgstr "Bilinmeyen kip '%1%'.\n"
+msgstr "Bilinmiyor (ID: 0x%1%)"
 
 #: src/input/r_ogm.cpp:555
 #, boost-format
@@ -11844,19 +11774,16 @@ msgid "Version %1 \"%2\""
 msgstr "Sürüm %1 \"%2\""
 
 #: src/common/kax_element_names.cpp:128
-#, fuzzy
 msgid "Vertical Cb subsample"
-msgstr "Dikey Cb alt örneği: %1%"
+msgstr "Dikey Cb alt örneği"
 
 #: src/common/kax_element_names.cpp:130
-#, fuzzy
 msgid "Vertical chroma siting"
-msgstr "Dikey renk doygunluğu yerleşimi: %1%"
+msgstr "Dikey renk doygunluğu yerleşimi"
 
 #: src/common/kax_element_names.cpp:126
-#, fuzzy
 msgid "Vertical chroma subsample"
-msgstr "Dikey renk doygunluğu alt örneği: %1%"
+msgstr "Dikey renk doygunluğu alt örneği"
 
 #: src/output/p_video_for_windows.h:37
 msgid "VfW compatible video"
@@ -12228,14 +12155,12 @@ msgid "White colour chromaticity coordinate Y as defined by CIE 1931."
 msgstr "CIE 1931 tarafından tanımlanan beyaz renk renklilik koordinatı Y."
 
 #: src/common/kax_element_names.cpp:117
-#, fuzzy
 msgid "White colour coordinate x"
-msgstr "Beyaz renk x koordinatı: %1%"
+msgstr "Beyaz renk x koordinatı"
 
 #: src/common/kax_element_names.cpp:118
-#, fuzzy
 msgid "White colour coordinate y"
-msgstr "Beyaz renk y koordinatı: %1%"
+msgstr "Beyaz renk y koordinatı"
 
 #: src/common/property_element.cpp:147
 msgid "Width of the encoded video frames in pixels."
@@ -12470,9 +12395,8 @@ msgid "anaglyph (green/magenta)"
 msgstr "kabartmalı (yeşil/morumsu)"
 
 #: src/extract/extract_cli_parser.cpp:52
-#, fuzzy
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
-msgstr "mkvextract attachments <içtekiadı> [seçenekler] [AID1:out1 [AID2:out2 ...]]"
+msgstr "attachments [seçenekler] [AID1:out1 [AID2:out2 ...]]"
 
 #: src/common/kax_info.cpp:675
 #: src/common/kax_info.cpp:851
@@ -12514,7 +12438,7 @@ msgstr "kanal: %1%"
 
 #: src/extract/extract_cli_parser.cpp:53
 msgid "chapters [options] out.xml"
-msgstr ""
+msgstr "chapters [seçenekler] out.xml"
 
 #: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
@@ -12546,13 +12470,12 @@ msgid "cubemap"
 msgstr ""
 
 #: src/extract/extract_cli_parser.cpp:56
-#, fuzzy
 msgid "cues [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract cues <içtekiadı> [seçenekler] [TID1:out1 [TID2:out2 ...]]"
+msgstr "cues [seçenekler] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:54
 msgid "cuesheet [options] out.cue"
-msgstr ""
+msgstr "cuesheet [seçenekler] out.cue"
 
 #: src/common/kax_info.cpp:663
 #, boost-format
@@ -12833,53 +12756,44 @@ msgid "mkv&merge documentation"
 msgstr "mkv&merge belgeleri"
 
 #: src/extract/extract_cli_parser.cpp:101
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" attachments 4:cover.jpg"
-msgstr "mkvextract attachments \"a movie.mkv\" 4:kapak.jpg"
+msgstr "mkvextract \"film.mkv\" attachments 4:kapak.jpg"
 
 #: src/extract/extract_cli_parser.cpp:110
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" chapters movie_chapters.xml"
-msgstr "mkvextract bölümler \"film.mkv\" > film_bölümleri.xml"
+msgstr "mkvextract \"film.mkv\" chapters film_bölümleri.xml"
 
 #: src/extract/extract_cli_parser.cpp:134
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"
-msgstr "mkvextract cue'ları \"film.mkv\" 0:cues_track0.txt"
+msgstr "mkvextract \"film.mkv\" cues 0:cues_track0.txt"
 
 #: src/extract/extract_cli_parser.cpp:92
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tags movie_tags.xml"
-msgstr "mkvextract tags \"a film.mkv\" > film_etiketleri.xml"
+msgstr "mkvextract \"film.mkv\" tags film_etiketleri.xml"
 
 #: src/extract/extract_cli_parser.cpp:127
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
-msgstr "mkvextract timestamps_v2 \"film.mkv\" 1:zamandamgaları_iz1.txt"
+msgstr "mkvextract \"film.mkv\" timestamps_v2 1:timestamps_track1.txt"
 
 #: src/extract/extract_cli_parser.cpp:141
 msgid "mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"
-msgstr ""
+msgstr "mkvextract \"film.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters bölümler.xml tags etiketler.xml"
 
 #: src/extract/extract_cli_parser.cpp:84
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:subs.srt"
-msgstr "mkvextract tracks \"a film.mkv\" 2:ses.ogg -c ISO8859-1 3:altyazı.srt"
+msgstr "mkvextract \"film.mkv\" tracks 2:ses.ogg -c ISO8859-1 3:subs.srt"
 
 #: src/extract/extract_cli_parser.cpp:119
-#, fuzzy
 msgid "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
-msgstr "mkvextract cuesheet \"sesdosyası.mka\" > sesdosyası.cue"
+msgstr "mkvextract \"sesdosyası.mka\" cuesheet sesdosyası.cue"
 
 #: src/extract/extract_cli_parser.cpp:59
-#, fuzzy
 msgid "mkvextract <-h|--help|-V|--version>"
-msgstr "mkvextract <-h|-V>"
+msgstr "mkvextract <-h|--help|-V|--version>"
 
 #: src/extract/extract_cli_parser.cpp:47
-#, fuzzy
 msgid "mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"
-msgstr "mkvextract <kip> <kaynak-dosyaadı> [seçenekler] <çıkartma-belirt>"
+msgstr "mkvextract <source-filename> <mode1> [seçenekler] <extraction-spec1> [<mode2> [seçenekler] <extraction-spec2>…]"
 
 #: src/extract/mkvextract.cpp:94
 #, boost-format
@@ -12976,9 +12890,8 @@ msgid "mkvtoolnix-gui <configuration file names>"
 msgstr "mkvtoolnix-gui <yapılandırma dosyası adları>"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
-#, fuzzy
 msgid "mkvtoolnix-gui [--multiplex|--info|--edit-chapters|--edit-headers] <file names>"
-msgstr "mkvtoolnix-gui [--multiplex|--edit-chapters|--edit-headers] <dosya adları>"
+msgstr "mkvtoolnix-gui [--multiplex|--info|--edit-chapters|--edit-headers] <file names>"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:39
 msgid "mkvtoolnix-gui [options] [file names]"
@@ -13119,14 +13032,13 @@ msgid "side by side (right first)"
 msgstr "yan yana (önce sağ)"
 
 #: src/common/kax_info.cpp:235
-#, fuzzy, boost-format
+#, boost-format
 msgid "size %1%"
-msgstr " boyut %1%"
+msgstr "boyut %1%"
 
 #: src/common/kax_info.cpp:517
-#, fuzzy
 msgid "size unknown"
-msgstr " boyut bilinmiyor"
+msgstr "boyut bilinmiyor"
 
 #: src/input/subtitles.cpp:361
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
@@ -13143,7 +13055,7 @@ msgstr "altyazı"
 
 #: src/extract/extract_cli_parser.cpp:51
 msgid "tags [options] out.xml"
-msgstr ""
+msgstr "tags [seçenekler] out.xml"
 
 #: src/output/p_textsubs.h:38
 msgid "text subtitles"
@@ -13154,9 +13066,8 @@ msgid "timestamps"
 msgstr "zaman damgaları"
 
 #: src/extract/extract_cli_parser.cpp:55
-#, fuzzy
 msgid "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract timestamps_v2 <içtekiadı> [TID1:out1 [TID2:out2 ...]]"
+msgstr "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
@@ -13179,14 +13090,13 @@ msgid "track name"
 msgstr "iz adı"
 
 #: src/common/kax_info.cpp:220
-#, fuzzy, boost-format
+#, boost-format
 msgid "track number %1%, %2% frame(s), timestamp %3%"
-msgstr "Blok (iz numarası %1%, %2% kare, zaman damgası %|3$.3f|s = %4%)"
+msgstr "%1% iz numarası, %2% kare, zaman damgası %3%"
 
 #: src/extract/extract_cli_parser.cpp:50
-#, fuzzy
 msgid "tracks [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract tracks <içtekiadı> [seçenekler] [TID1:out1 [TID2:out2 ...]]"
+msgstr "tracks [seçenekler] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/input/r_tta.cpp:64
 #, boost-format
