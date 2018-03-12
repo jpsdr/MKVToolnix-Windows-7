@@ -300,6 +300,7 @@ Settings::load() {
   reg.endGroup();               // settings
 
   loadDefaults(reg, guiVersion);
+  loadDerivingTrackLanguagesSettings(reg);
   loadSplitterSizes(reg);
   loadDefaultInfoJobSettings(reg);
   loadRunProgramConfigurations(reg);
@@ -320,6 +321,20 @@ Settings::loadDefaults(QSettings &reg,
   m_defaultSubtitleCharset             = guiVersion.isEmpty() && (subtitleCharset == Q("ISO-8859-15")) ? Q("") : subtitleCharset; // Fix for a bug in versions prior to 8.2.0.
   m_defaultAdditionalMergeOptions      = reg.value("defaultAdditionalMergeOptions").toString();
   reg.endGroup();               // defaults
+}
+
+void
+Settings::loadDerivingTrackLanguagesSettings(QSettings &reg) {
+  reg.beginGroup("settings");
+  reg.beginGroup("derivingTrackLanguagesFromFileNames");
+
+  m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("audioPolicy",    static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
+  m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("videoPolicy",    static_cast<int>(DeriveLanguageFromFileNamePolicy::Never)).toInt());
+  m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("subtitlePolicy", static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
+  m_regexForDerivingTrackLanguagesFromFileNames   = reg.value("customRegex").toString();
+
+  reg.endGroup();
+  reg.endGroup();
 }
 
 void
@@ -563,6 +578,7 @@ Settings::save()
   reg.endGroup();               // settings
 
   saveDefaults(reg);
+  saveDerivingTrackLanguagesSettings(reg);
   saveSplitterSizes(reg);
   saveDefaultInfoJobSettings(reg);
   saveRunProgramConfigurations(reg);
@@ -581,6 +597,21 @@ Settings::saveDefaults(QSettings &reg)
   reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);
   reg.setValue("defaultAdditionalMergeOptions",      m_defaultAdditionalMergeOptions);
   reg.endGroup();               // defaults
+}
+
+void
+Settings::saveDerivingTrackLanguagesSettings(QSettings &reg)
+  const {
+  reg.beginGroup("settings");
+  reg.beginGroup("derivingTrackLanguagesFromFileNames");
+
+  reg.setValue("audioPolicy",    static_cast<int>(m_deriveAudioTrackLanguageFromFileNamePolicy));
+  reg.setValue("videoPolicy",    static_cast<int>(m_deriveVideoTrackLanguageFromFileNamePolicy));
+  reg.setValue("subtitlePolicy", static_cast<int>(m_deriveSubtitleTrackLanguageFromFileNamePolicy));
+  reg.setValue("customRegex",    m_regexForDerivingTrackLanguagesFromFileNames);
+
+  reg.endGroup();
+  reg.endGroup();
 }
 
 void

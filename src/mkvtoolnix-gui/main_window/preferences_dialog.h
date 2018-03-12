@@ -77,6 +77,7 @@ protected:
 
   void setupInterfaceLanguage();
   void setupTabPositions();
+  void setupDerivingTrackLanguagesFromFileName();
   void setupWhenToSetDefaultLanguage();
   void setupJobRemovalPolicy();
   void setupCommonLanguages();

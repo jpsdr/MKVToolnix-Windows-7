@@ -1,16 +1,23 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
+#include <QRegularExpression>
+
+#include "common/iso639.h"
 #include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mkvmerge_option_builder.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 #include <QDir>
 
 namespace mtx { namespace gui { namespace Merge {
 
 namespace {
+
+QString s_iso639_1CodesPattern, s_iso639_2CodesPattern, s_languageNamesPattern;
 
 template<typename T>
 void
@@ -28,6 +35,35 @@ fixAssociationsFor(char const *group,
   }
 
   l.settings.endGroup();
+}
+
+void
+setupLanguageDerivationSubPatterns() {
+  if (!s_iso639_1CodesPattern.isEmpty())
+    return;
+
+  QStringList codes1List, codes2List, namesList;
+
+  for (auto const &language : g_iso639_languages) {
+    codes1List << Q(language.iso639_1_code);
+    codes2List << Q(language.iso639_2_code);
+    namesList  << QRegularExpression::escape(Q(language.english_name));
+
+    if (!language.terminology_abbrev.empty())
+      codes2List << Q(language.terminology_abbrev);
+  }
+
+  s_iso639_1CodesPattern = codes1List.join(Q("|"));
+  s_iso639_2CodesPattern = codes2List.join(Q("|"));
+  s_languageNamesPattern = namesList .join(Q("|"));
+}
+
+QString
+replaceLanguageSubPatterns(QString pattern) {
+  return pattern
+    .replace(Q("<ISO_639_1_CODES>"), s_iso639_1CodesPattern)
+    .replace(Q("<ISO_639_2_CODES>"), s_iso639_2CodesPattern)
+    .replace(Q("<LANGUAGE_NAMES>"),  s_languageNamesPattern);
 }
 
 }
@@ -317,8 +353,10 @@ SourceFile::buildMkvmergeOptions(QStringList &options)
 
 void
 SourceFile::setDefaults() {
+  auto languageDerivedFromFileName = deriveLanguageFromFileName();
+
   for (auto const &track : m_tracks)
-    track->setDefaults();
+    track->setDefaults(languageDerivedFromFileName);
 
   for (auto const &appendedFile : m_appendedFiles)
     appendedFile->setDefaults();
@@ -336,6 +374,59 @@ SourceFile::setupProgramMapFromProperties() {
     if (programProps.contains(Q("program_number")))
       m_programMap.insert(programProps[Q("program_number")].toUInt(), { programProps[Q("service_provider")].toString(), programProps[Q("service_name")].toString() });
   }
+}
+
+QRegularExpression
+SourceFile::regexForDerivingLanguageFromFileName() {
+  static boost::optional<QRegularExpression> s_regex;
+
+  setupLanguageDerivationSubPatterns();
+
+  auto &cfg = Util::Settings::get();
+  if (!cfg.m_regexForDerivingTrackLanguagesFromFileNames.isEmpty())
+    return QRegularExpression(replaceLanguageSubPatterns(cfg.m_regexForDerivingTrackLanguagesFromFileNames), QRegularExpression::CaseInsensitiveOption);
+
+  if (s_regex)
+    return *s_regex;
+
+  auto pattern = replaceLanguageSubPatterns(Q("[[({.+=#-](<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]"));
+  s_regex      = QRegularExpression{pattern, QRegularExpression::CaseInsensitiveOption};
+
+  return *s_regex;
+}
+
+QString
+SourceFile::deriveLanguageFromFileName() {
+  auto matches = regexForDerivingLanguageFromFileName().match(QFileInfo{m_fileName}.fileName());
+
+  if (!matches.hasMatch()) {
+    qDebug() << "language could not be derived: no match found";
+    return {};
+  }
+
+  QString language;
+  auto allCaptures = matches.capturedTexts();
+
+  for (int captureIdx = 1, numCaptures = allCaptures.size(); captureIdx < numCaptures; ++captureIdx) {
+    auto &capture = allCaptures[captureIdx];
+
+    if (capture.isEmpty())
+      continue;
+
+    auto languageIdx = map_to_iso639_2_code(to_utf8(capture.toLower()));
+    if (languageIdx == -1)
+      continue;
+
+    language = Q(g_iso639_languages[languageIdx].iso639_2_code);
+
+    qDebug() << "derived language:" << language;
+
+    return language;
+  }
+
+  qDebug() << "language could not be derived: match found but no mapping to language:" << matches.capturedTexts();
+
+  return {};
 }
 
 }}}

@@ -80,7 +80,7 @@ public:
   virtual bool canRemoveDialogNormalizationGain() const;
   virtual bool canSetAacToSbr() const;
 
-  virtual void setDefaults();
+  virtual void setDefaults(QString const &languageDerivedFromFileName);
   virtual QString extractAudioDelayFromFileName() const;
 
   virtual void saveSettings(Util::ConfigFile &settings) const;

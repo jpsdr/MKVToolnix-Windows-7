@@ -53,6 +53,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupFont();
   setupInterfaceLanguage();
   setupTabPositions();
+  setupDerivingTrackLanguagesFromFileName();
   setupWhenToSetDefaultLanguage();
 
   ui->cbGuiUseDefaultJobDescription->setChecked(m_cfg.m_useDefaultJobDescription);
@@ -309,23 +310,42 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("The default is to always add all the files to the current multiplex settings."))
                    .arg(QY("The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those.")));
 
+  Util::setToolTip(ui->cbMDeriveAudioTrackLanguageFromFileName,
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
+                   .arg(QYH("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QYH("If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."))
+                   .arg(QYH("Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und').")));
+  Util::setToolTip(ui->cbMDeriveVideoTrackLanguageFromFileName,
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
+                   .arg(QYH("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QYH("If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."))
+                   .arg(QYH("Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und').")));
+  Util::setToolTip(ui->cbMDeriveSubtitleTrackLanguageFromFileName,
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
+                   .arg(QYH("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QYH("If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."))
+                   .arg(QYH("Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und').")));
+
   Util::setToolTip(ui->cbMDefaultAudioTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
-                   .arg(QYH("The language selected here is used for audio tracks for which their source file contains no such property."))
+                   .arg(QYH("The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->cbMDefaultVideoTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
-                   .arg(QYH("The language selected here is used for video tracks for which their source file contains no such property."))
+                   .arg(QYH("The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->cbMDefaultSubtitleTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
-                   .arg(QYH("The language selected here is used for subtitle tracks for which their source file contains no such property."))
+                   .arg(QYH("The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
 
   Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."));
@@ -597,6 +617,24 @@ PreferencesDialog::setupTabPositions() {
 }
 
 void
+PreferencesDialog::setupDerivingTrackLanguagesFromFileName() {
+  auto setupComboBox = [](QComboBox &cb, Util::Settings::DeriveLanguageFromFileNamePolicy policy) {
+    cb.clear();
+    cb.addItem(QY("Never"),                                          static_cast<int>(Util::Settings::DeriveLanguageFromFileNamePolicy::Never));
+    cb.addItem(QY("Only if the source doesn't contain a language"),  static_cast<int>(Util::Settings::DeriveLanguageFromFileNamePolicy::OnlyIfAbsent));
+    cb.addItem(QY("Also if the language is 'undetermined' ('und')"), static_cast<int>(Util::Settings::DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined));
+
+    Util::setComboBoxIndexIf(&cb, [policy](QString const &, QVariant const &data) {
+      return data.toInt() == static_cast<int>(policy);
+    });
+  };
+
+  setupComboBox(*ui->cbMDeriveAudioTrackLanguageFromFileName,    m_cfg.m_deriveAudioTrackLanguageFromFileNamePolicy);
+  setupComboBox(*ui->cbMDeriveVideoTrackLanguageFromFileName,    m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy);
+  setupComboBox(*ui->cbMDeriveSubtitleTrackLanguageFromFileName, m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy);
+}
+
+void
 PreferencesDialog::setupWhenToSetDefaultLanguage() {
   ui->cbMWhenToSetDefaultLanguage->clear();
   ui->cbMWhenToSetDefaultLanguage->addItem(QY("Only if the source doesn't contain a language"),  static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::OnlyIfAbsent));
@@ -683,6 +721,10 @@ PreferencesDialog::save() {
   m_cfg.m_priority                           = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
   m_cfg.m_defaultAdditionalMergeOptions      = ui->leMDefaultAdditionalCommandLineOptions->text();
   m_cfg.m_probeRangePercentage               = ui->cbMProbeRangePercentage->value();
+
+  m_cfg.m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveAudioTrackLanguageFromFileName   ->currentData().toInt());
+  m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveVideoTrackLanguageFromFileName   ->currentData().toInt());
+  m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveSubtitleTrackLanguageFromFileName->currentData().toInt());
 
   m_cfg.m_scanForPlaylistsPolicy             = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
   m_cfg.m_minimumPlaylistDuration            = ui->sbMMinPlaylistDuration->value();

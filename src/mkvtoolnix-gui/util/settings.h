@@ -69,6 +69,12 @@ public:
     IfAbsentOrUndetermined,
   };
 
+  enum class DeriveLanguageFromFileNamePolicy {
+    Never = 0,
+    OnlyIfAbsent,
+    IfAbsentOrUndetermined,
+  };
+
   enum class JobRemovalPolicy {
     Never,
     IfSuccessful,
@@ -128,6 +134,8 @@ public:
 
   QString m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage;
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
+  DeriveLanguageFromFileNamePolicy m_deriveAudioTrackLanguageFromFileNamePolicy, m_deriveVideoTrackLanguageFromFileNamePolicy, m_deriveSubtitleTrackLanguageFromFileNamePolicy;
+  QString m_regexForDerivingTrackLanguagesFromFileNames;
   QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   bool m_oftenUsedLanguagesOnly, m_oftenUsedCountriesOnly, m_oftenUsedCharacterSetsOnly;
@@ -195,11 +203,13 @@ public slots:
 
 protected:
   void loadDefaults(QSettings &reg, QString const &guiVersion);
+  void loadDerivingTrackLanguagesSettings(QSettings &reg);
   void loadSplitterSizes(QSettings &reg);
   void loadDefaultInfoJobSettings(QSettings &reg);
   void loadRunProgramConfigurations(QSettings &reg);
 
   void saveDefaults(QSettings &reg) const;
+  void saveDerivingTrackLanguagesSettings(QSettings &reg) const;
   void saveSplitterSizes(QSettings &reg) const;
   void saveDefaultInfoJobSettings(QSettings &reg) const;
   void saveRunProgramConfigurations(QSettings &reg) const;

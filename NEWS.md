@@ -9,6 +9,10 @@
   the mentioned codecs. Implements #1981.
 * mkvmerge: FLAC: mkvmerge can now ignore ID3 tags in FLAC files which would
   otherwise prevent mkvmerge from detecting the file type. Implements #2243.
+* MKVToolNix GUI: multiplexer: added options for deriving the track languages
+  from the file name by searching for ISO 639-1/639-2 language codes or
+  language names enclosed in non-word, non-space characters (e.g. "…[ger]…"
+  for German or "…+en+…" for English). Implements #1808.
 
 ## Bug fixes
 

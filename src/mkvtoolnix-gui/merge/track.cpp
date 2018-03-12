@@ -110,7 +110,7 @@ Track::isPropertySet(QString const &property)
 }
 
 void
-Track::setDefaults() {
+Track::setDefaults(QString const &languageDerivedFromFileName) {
   if (!isRegular())
     return;
 
@@ -134,6 +134,18 @@ Track::setDefaults() {
                                :                         Q("");
 
   auto language = m_properties.value("language").toString();
+
+  if (!languageDerivedFromFileName.isEmpty()) {
+    auto policy = isAudio()     ? settings.m_deriveAudioTrackLanguageFromFileNamePolicy
+                : isVideo()     ? settings.m_deriveVideoTrackLanguageFromFileNamePolicy
+                : isSubtitles() ? settings.m_deriveSubtitleTrackLanguageFromFileNamePolicy
+                :                 Util::Settings::DeriveLanguageFromFileNamePolicy::Never;
+
+    if (   ((policy != Util::Settings::DeriveLanguageFromFileNamePolicy::Never)                  && language.isEmpty())
+        || ((policy == Util::Settings::DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined) && (language == Q("und"))))
+      language = languageDerivedFromFileName;
+  }
+
   if (   language.isEmpty()
       || (   (Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined == settings.m_whenToSetDefaultLanguage)
           && (language == Q("und"))))

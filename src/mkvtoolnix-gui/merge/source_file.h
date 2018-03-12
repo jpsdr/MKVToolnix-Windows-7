@@ -65,6 +65,10 @@ public:
   virtual Track *findNthOrLastTrackOfType(Track::Type type, int nth) const;
 
   void buildMkvmergeOptions(QStringList &options) const;
+
+protected:
+  virtual QString deriveLanguageFromFileName();
+  virtual QRegularExpression regexForDerivingLanguageFromFileName();
 };
 
 }}}

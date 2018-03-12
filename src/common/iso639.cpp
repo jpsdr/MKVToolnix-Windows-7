@@ -608,10 +608,13 @@ map_to_iso639_2_code(std::string const &s,
     auto index               = lang->index();
 #endif
 
-    auto names = split(english_name, ";");
+    auto s_lower = balg::to_lower_copy(s);
+    auto names   = split(english_name, ";");
     strip(names);
-    if (brng::find(names, source) != names.end())
-      return index;
+
+    for (auto const &name : names)
+      if (balg::to_lower_copy(name) == s_lower)
+        return index;
   }
 
   if (!allow_short_english_name)
