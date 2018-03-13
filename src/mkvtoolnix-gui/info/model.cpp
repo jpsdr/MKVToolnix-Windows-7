@@ -219,12 +219,19 @@ Model::addChildrenOfLevel1Element(QModelIndex const &idx) {
   if (!idx.isValid())
     return;
 
-  auto master = dynamic_cast<EbmlMaster *>(elementFromIndex(idx));
-  auto parent = itemFromIndex(idx);
+  auto element = elementFromIndex(idx);
+  auto master  = dynamic_cast<EbmlMaster *>(element);
+  auto parent  = itemFromIndex(idx);
+  auto items   = itemsForRow(idx);
 
-  if (master)
-    for (auto child : *master)
-      addElementStructure(*parent, *child);
+  if (element)
+    setItemsFromElement(items, *element);
+
+  if (!master)
+    return;
+
+  for (auto child : *master)
+    addElementStructure(*parent, *child);
 }
 
 }}}

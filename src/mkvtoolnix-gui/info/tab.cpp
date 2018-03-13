@@ -234,6 +234,8 @@ Tab::readLevel1Element(QModelIndex const &idx) {
   if (!element || !item->data(DeferredLoadRole).toBool())
     return;
 
+  item->setText(QY("Loading…"));
+
   auto reader = new ElementReader(*p->m_file, *element, idx);
   connect(reader, &ElementReader::elementRead, p->m_model, &Model::addChildrenOfLevel1Element);
 
