@@ -50,16 +50,16 @@ void
 InfoJob::setupInfoJobConnections() {
   auto p = p_func();
 
-  connect(p->thread, &QThread::started,                       p->info,   &Util::KaxInfo::run);
-  connect(p->thread, &QThread::finished,                      p->info,   &QObject::deleteLater);
-  connect(p->thread, &QThread::finished,                      p->thread, &QObject::deleteLater);
+  connect(p->thread, &QThread::started,                p->info,   &Util::KaxInfo::run);
+  connect(p->thread, &QThread::finished,               p->info,   &QObject::deleteLater);
+  connect(p->thread, &QThread::finished,               p->thread, &QObject::deleteLater);
 
-  connect(p->info,   &Util::KaxInfo::started,            this,      &InfoJob::infoStarted);
-  connect(p->info,   &Util::KaxInfo::finished,           this,      &InfoJob::infoFinished);
-  connect(p->info,   &Util::KaxInfo::element_info_found, this,      &InfoJob::showElementInfo);
-  connect(p->info,   &Util::KaxInfo::element_found,      this,      &InfoJob::showElement);
-  connect(p->info,   &Util::KaxInfo::error_found,        this,      &InfoJob::showError);
-  connect(p->info,   &Util::KaxInfo::progress_changed,   this,      &InfoJob::updateProgress);
+  connect(p->info,   &Util::KaxInfo::runStarted,       this,      &InfoJob::infoStarted);
+  connect(p->info,   &Util::KaxInfo::runFinished,      this,      &InfoJob::infoFinished);
+  connect(p->info,   &Util::KaxInfo::elementInfoFound, this,      &InfoJob::showElementInfo);
+  connect(p->info,   &Util::KaxInfo::elementFound,     this,      &InfoJob::showElement);
+  connect(p->info,   &Util::KaxInfo::errorFound,       this,      &InfoJob::showError);
+  connect(p->info,   &Util::KaxInfo::progressChanged,  this,      &InfoJob::updateProgress);
 }
 
 void

@@ -112,12 +112,12 @@ Tab::load(QString const &fileName) {
     p->m_info->set_use_gui(true);
     p->m_info->set_retain_elements(true);
 
-    connect(p->m_info.get(), &Util::KaxInfo::started,            []() { MainWindow::get()->startStopQueueSpinner(true); });
-    connect(p->m_info.get(), &Util::KaxInfo::finished,           []() { MainWindow::get()->startStopQueueSpinner(false); });
-    connect(p->m_info.get(), &Util::KaxInfo::finished,           this, &Tab::expandImportantElements);
-    connect(p->m_info.get(), &Util::KaxInfo::element_info_found, this, &Tab::showElementInfo);
-    connect(p->m_info.get(), &Util::KaxInfo::element_found,      this, &Tab::showElement);
-    connect(p->m_info.get(), &Util::KaxInfo::error_found,        this, &Tab::showError);
+    connect(p->m_info.get(), &Util::KaxInfo::runStarted,       []() { MainWindow::get()->startStopQueueSpinner(true); });
+    connect(p->m_info.get(), &Util::KaxInfo::runFinished,      []() { MainWindow::get()->startStopQueueSpinner(false); });
+    connect(p->m_info.get(), &Util::KaxInfo::runFinished,      this, &Tab::expandImportantElements);
+    connect(p->m_info.get(), &Util::KaxInfo::elementInfoFound, this, &Tab::showElementInfo);
+    connect(p->m_info.get(), &Util::KaxInfo::elementFound,     this, &Tab::showElement);
+    connect(p->m_info.get(), &Util::KaxInfo::errorFound,       this, &Tab::showError);
 
     emit titleChanged();
 

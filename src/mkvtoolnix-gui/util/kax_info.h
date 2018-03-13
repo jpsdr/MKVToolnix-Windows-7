@@ -40,12 +40,13 @@ public slots:
   virtual void abort();
 
 signals:
-  void element_info_found(int level, QString const &text, int64_t position, int64_t size);
-  void element_found(int level, EbmlElement *e);
-  void error_found(const QString &message);
-  void progress_changed(int percentage, const QString &text);
-  void started();
-  void finished(mtx::kax_info_c::result_e result);
+  void elementInfoFound(int level, QString const &text, int64_t position, int64_t size);
+  void elementFound(int level, EbmlElement *e);
+  void errorFound(const QString &message);
+  void progressChanged(int percentage, const QString &text);
+
+  void runStarted();
+  void runFinished(mtx::kax_info_c::result_e result);
 };
 
 }}}
