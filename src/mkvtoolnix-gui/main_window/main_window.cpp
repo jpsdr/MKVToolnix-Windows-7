@@ -844,4 +844,14 @@ MainWindow::startStopQueueSpinner(bool start) {
   }
 }
 
+void
+MainWindow::startQueueSpinner() {
+  startStopQueueSpinner(true);
+}
+
+void
+MainWindow::stopQueueSpinner() {
+  startStopQueueSpinner(false);
+}
+
 }}

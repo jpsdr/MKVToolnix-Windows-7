@@ -50,16 +50,14 @@ void
 InfoJob::setupInfoJobConnections() {
   auto p = p_func();
 
-  connect(p->thread, &QThread::started,                p->info,   &Util::KaxInfo::run);
-  connect(p->thread, &QThread::finished,               p->info,   &QObject::deleteLater);
-  connect(p->thread, &QThread::finished,               p->thread, &QObject::deleteLater);
+  connect(p->thread, &QThread::started,                       p->info,   &Util::KaxInfo::scanStartOfFile);
+  connect(p->thread, &QThread::finished,                      p->info,   &QObject::deleteLater);
+  connect(p->thread, &QThread::finished,                      p->thread, &QObject::deleteLater);
 
-  connect(p->info,   &Util::KaxInfo::runStarted,       this,      &InfoJob::infoStarted);
-  connect(p->info,   &Util::KaxInfo::runFinished,      this,      &InfoJob::infoFinished);
-  connect(p->info,   &Util::KaxInfo::elementInfoFound, this,      &InfoJob::showElementInfo);
-  connect(p->info,   &Util::KaxInfo::elementFound,     this,      &InfoJob::showElement);
-  connect(p->info,   &Util::KaxInfo::errorFound,       this,      &InfoJob::showError);
-  connect(p->info,   &Util::KaxInfo::progressChanged,  this,      &InfoJob::updateProgress);
+  connect(p->info,   &Util::KaxInfo::startOfFileScanStarted,  this,      &InfoJob::infoStarted);
+  connect(p->info,   &Util::KaxInfo::startOfFileScanFinished, this,      &InfoJob::infoFinished);
+  connect(p->info,   &Util::KaxInfo::errorFound,              this,      &InfoJob::showError);
+  connect(p->info,   &Util::KaxInfo::progressChanged,         this,      &InfoJob::updateProgress);
 }
 
 void
@@ -118,25 +116,6 @@ void
 InfoJob::updateProgress(int percentage,
                         QString const &) {
   setProgress(percentage);
-}
-
-void
-InfoJob::showElementInfo(int level,
-                         QString const &text,
-                         int64_t position,
-                         int64_t size) {
-  emit lineRead(Q("level %1 position %2 size %3: %4").arg(level).arg(position).arg(size).arg(text), InfoLine);
-}
-
-void
-InfoJob::showElement(int level,
-                     EbmlElement *element) {
-  emit lineRead(Q("level %1 position %2 size %3: %4")
-                .arg(level)
-                .arg(element->GetElementPosition())
-                .arg(element->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*element)) + element->GetSize())
-                .arg(Q(kax_element_names_c::get(*element))),
-                InfoLine);
 }
 
 void

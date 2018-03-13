@@ -13,6 +13,9 @@
   from the file name by searching for ISO 639-1/639-2 language codes or
   language names enclosed in non-word, non-space characters (e.g. "…[ger]…"
   for German or "…+en+…" for English). Implements #1808.
+* MKVToolNix GUI: info tool: implemented reading all elements in the file
+  after the first cluster. Only top-level elements are shown; child elements
+  are only loaded on demand. Implements the rest of #2104.
 
 ## Bug fixes
 

@@ -22,11 +22,20 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class KaxInfoPrivate;
 class KaxInfo: public QObject, public ::mtx::kax_info_c {
   Q_OBJECT;
+protected:
+  MTX_DECLARE_PRIVATE(KaxInfoPrivate);
 
 public:
-  KaxInfo() = default;
+  enum class ScanType {
+    StartOfFile,
+    Level1Elements,
+  };
+
+public:
+  KaxInfo();
   KaxInfo(QString const &file_name);
   virtual ~KaxInfo();
 
@@ -36,17 +45,24 @@ public:
   virtual void ui_show_progress(int percentage, std::string const &text) override;
 
 public slots:
-  virtual void run();
+  virtual void runScan(ScanType type);
+  virtual void scanStartOfFile();
+  virtual void scanLevel1Elements();
   virtual void abort();
 
 signals:
   void elementInfoFound(int level, QString const &text, int64_t position, int64_t size);
-  void elementFound(int level, EbmlElement *e);
+  void elementFound(int level, EbmlElement *e, bool readFully);
   void errorFound(const QString &message);
   void progressChanged(int percentage, const QString &text);
 
-  void runStarted();
-  void runFinished(mtx::kax_info_c::result_e result);
+  void startOfFileScanStarted();
+  void startOfFileScanFinished(mtx::kax_info_c::result_e result);
+  void level1ElementsScanStarted();
+  void level1ElementsScanFinished(mtx::kax_info_c::result_e result);
+
+protected:
+  virtual mtx::kax_info_c::result_e doScanLevel1Elements();
 };
 
 }}}

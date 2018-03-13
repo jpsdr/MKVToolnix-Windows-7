@@ -5,22 +5,24 @@
 #include <QThread>
 #include <QVector>
 
-#include <ebml/EbmlDummy.h>
 #include <ebml/EbmlHead.h>
 #include <matroska/KaxSegment.h>
 #include <matroska/KaxInfo.h>
 
 #include "common/ebml.h"
-#include "common/kax_element_names.h"
 #include "common/list_utils.h"
 #include "common/mm_file_io.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_read_buffer_io.h"
 #include "common/mm_io_x.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/info/tab.h"
+#include "mkvtoolnix-gui/info/element_reader.h"
 #include "mkvtoolnix-gui/info/info_config.h"
 #include "mkvtoolnix-gui/info/initial_scan.h"
 #include "mkvtoolnix-gui/info/job_settings.h"
 #include "mkvtoolnix-gui/info/job_settings_dialog.h"
+#include "mkvtoolnix-gui/info/model.h"
 #include "mkvtoolnix-gui/info/tab.h"
 #include "mkvtoolnix-gui/jobs/info_job.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
@@ -28,7 +30,6 @@
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 #include "mkvtoolnix-gui/util/message_box.h"
-#include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/serial_worker_queue.h"
 #include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
@@ -37,22 +38,16 @@ namespace mtx { namespace gui { namespace Info {
 
 using namespace mtx::gui;
 
-namespace {
-int ElementRole = Qt::UserRole + 1;
-int EbmlIdRole  = Qt::UserRole + 2;
-}
-
 class TabPrivate {
 public:
   std::unique_ptr<Ui::Tab> m_ui{new Ui::Tab};
-  std::unique_ptr<Util::KaxInfo> m_info;
 
   mm_io_cptr m_file;
-
   QString m_fileName, m_savedFileName;
-  QVector<QStandardItem *> m_treeInsertionPosition;
   QThread *m_queueThread{};
   Util::SerialWorkerQueue *m_queue{};
+
+  Model *m_model{};
 };
 
 Tab::Tab(QWidget *parent)
@@ -64,11 +59,13 @@ Tab::Tab(QWidget *parent)
   // Setup UI controls.
   p->m_ui->setupUi(this);
 
-  auto model = new QStandardItemModel{};
-  model->setColumnCount(4);
-  p->m_ui->elements->setModel(model);
+  p->m_model = new Model{this};
+  p->m_ui->elements->setModel(p->m_model);
 
   Util::HeaderViewManager::create(*p->m_ui->elements, "Info::Elements");
+
+  connect(p->m_ui->elements, &QTreeView::expanded,  this,       &Tab::readLevel1Element);
+  connect(p->m_ui->elements, &QTreeView::collapsed, p->m_model, &Model::forgetLevel1ElementChildren);
 
   retranslateUi();
 
@@ -97,31 +94,32 @@ Tab::load(QString const &fileName) {
   auto p = p_func();
 
   try {
-    auto model         = static_cast<QStandardItemModel *>(p->m_ui->elements->model());
+    p->m_model->setInfo(std::make_unique<Util::KaxInfo>());
+    p->m_model->reset();
+
+    auto &info         = p->m_model->info();
     p->m_fileName      = fileName;
     p->m_savedFileName = QDir::toNativeSeparators( Q("%1.txt").arg(QFileInfo{ fileName }.absoluteFilePath().replace(QRegularExpression{Q("\\.[^.]*$")}, {})) );
-    p->m_file          = std::static_pointer_cast<mm_io_c>(std::make_shared<mm_file_io_c>(to_utf8(fileName), MODE_READ));
-    p->m_info          = std::make_unique<Util::KaxInfo>();
+    p->m_file          = std::static_pointer_cast<mm_io_c>(std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_file_io_c>(to_utf8(fileName), MODE_READ)));
 
-    model->removeRows(0, model->rowCount());
-    p->m_treeInsertionPosition.clear();
-    p->m_treeInsertionPosition << model->invisibleRootItem();
+    info.moveToThread(p->m_queueThread);
+    info.set_source_file(p->m_file);
+    info.set_use_gui(true);
+    info.set_retain_elements(true);
 
-    p->m_info->moveToThread(p->m_queueThread);
-    p->m_info->set_source_file(p->m_file);
-    p->m_info->set_use_gui(true);
-    p->m_info->set_retain_elements(true);
-
-    connect(p->m_info.get(), &Util::KaxInfo::runStarted,       []() { MainWindow::get()->startStopQueueSpinner(true); });
-    connect(p->m_info.get(), &Util::KaxInfo::runFinished,      []() { MainWindow::get()->startStopQueueSpinner(false); });
-    connect(p->m_info.get(), &Util::KaxInfo::runFinished,      this, &Tab::expandImportantElements);
-    connect(p->m_info.get(), &Util::KaxInfo::elementInfoFound, this, &Tab::showElementInfo);
-    connect(p->m_info.get(), &Util::KaxInfo::elementFound,     this, &Tab::showElement);
-    connect(p->m_info.get(), &Util::KaxInfo::errorFound,       this, &Tab::showError);
+    connect(&info, &Util::KaxInfo::startOfFileScanStarted,     MainWindow::get(), &MainWindow::startQueueSpinner);
+    connect(&info, &Util::KaxInfo::startOfFileScanFinished,    MainWindow::get(), &MainWindow::stopQueueSpinner);
+    connect(&info, &Util::KaxInfo::level1ElementsScanStarted,  MainWindow::get(), &MainWindow::startQueueSpinner);
+    connect(&info, &Util::KaxInfo::level1ElementsScanFinished, MainWindow::get(), &MainWindow::stopQueueSpinner);
+    connect(&info, &Util::KaxInfo::startOfFileScanFinished,    this,              &Tab::expandImportantElements);
+    connect(&info, &Util::KaxInfo::elementInfoFound,           this,              &Tab::showElementInfo);
+    connect(&info, &Util::KaxInfo::errorFound,                 this,              &Tab::showError);
+    connect(&info, &Util::KaxInfo::elementFound,               p->m_model,        &Model::addElement);
 
     emit titleChanged();
 
-    p->m_queue->add(new InitialScan{*p->m_info});
+    p->m_queue->add(new InitialScan{info, Util::KaxInfo::ScanType::StartOfFile});
+    p->m_queue->add(new InitialScan{info, Util::KaxInfo::ScanType::Level1Elements});
 
   } catch (mtx::mm_io::exception &ex) {
     Util::MessageBox::critical(this)->title(QY("Reading failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
@@ -173,36 +171,9 @@ Tab::retranslateUi() {
   auto p = p_func();
 
   p->m_ui->retranslateUi(this);
-
-  auto &model = *static_cast<QStandardItemModel *>(p->m_ui->elements->model());
-
-  Util::setDisplayableAndSymbolicColumnNames(model, {
-    { QY("Elements"), Q("elements") },
-    { QY("Content"),  Q("content")  },
-    { QY("Position"), Q("position") },
-    { QY("Size"),     Q("size")     },
-  });
-
-  model.horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-  model.horizontalHeaderItem(3)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  p->m_model->retranslateUi();
 
   emit titleChanged();
-
-  if (!p->m_info)
-    return;
-
-  Util::walkTree(model, QModelIndex{}, [this, &model](QModelIndex const &idx) {
-    QList<QStandardItem *> items;
-    for (int columnIdx = 0, numColumns = model.columnCount(); columnIdx < numColumns; ++columnIdx)
-      items << model.itemFromIndex(idx.sibling(idx.row(), columnIdx));
-
-    auto element = reinterpret_cast<EbmlElement *>(items[0]->data(ElementRole).toULongLong());
-    if (!element)
-      return;
-
-    setItemsFromElement(items, *element);
-  });
-
 }
 
 void
@@ -214,89 +185,59 @@ Tab::showElementInfo(int level,
 }
 
 void
-Tab::showElement(int level,
-                 EbmlElement *element) {
-  auto p = p_func();
-
-  if (!element)
-    return;
-
-  QList<QStandardItem *> items{ new QStandardItem{}, new QStandardItem{}, new QStandardItem{}, new QStandardItem{} };
-  setItemsFromElement(items, *element);
-
-  while (p->m_treeInsertionPosition.size() > (level + 1))
-    p->m_treeInsertionPosition.removeLast();
-
-  p->m_treeInsertionPosition.last()->appendRow(items);
-
-  p->m_treeInsertionPosition << items[0];
-}
-
-void
 Tab::showError(const QString &message) {
   Util::MessageBox::critical(this)->title(QY("Error reading Matroska file")).text(message).exec();
   emit removeThisTab();
 }
 
 void
-Tab::setItemsFromElement(QList<QStandardItem *> &items,
-                         EbmlElement &element) {
-  auto p    = p_func();
-  auto name = kax_element_names_c::get(element);
-  std::string content;
-
-  if (name.empty())
-    name = (boost::format(Y("Unknown (ID: 0x%1%)")) % p->m_info->format_ebml_id_as_hex(element)).str();
-
-  else if (dynamic_cast<EbmlDummy *>(&element))
-    name = (boost::format(Y("Known element, but invalid at this position: %1% (ID: 0x%2%)")) % name % p->m_info->format_ebml_id_as_hex(element)).str();
-
-  else
-    content = p->m_info->format_element_value(element);
-
-  items[0]->setText(Q(name));
-  items[1]->setText(Q(content));
-  items[2]->setText(Q("%1").arg(element.GetElementPosition()));
-  items[3]->setText(Q("%1").arg(element.HeadSize() + element.GetSize()));
-
-  items[2]->setTextAlignment(Qt::AlignRight);
-  items[3]->setTextAlignment(Qt::AlignRight);
-
-  items[0]->setData(reinterpret_cast<qulonglong>(&element),          ElementRole);
-  items[0]->setData(static_cast<qint64>(EbmlId(element).GetValue()), EbmlIdRole);
-}
-
-void
 Tab::expandImportantElements() {
   setUpdatesEnabled(false);
 
- auto p        = p_func();
+  auto p        = p_func();
 
- auto view     = p->m_ui->elements;
- auto model    = static_cast<QStandardItemModel *>(view->model());
- auto rootItem = model->invisibleRootItem();
+  auto view     = p->m_ui->elements;
+  auto rootItem = p->m_model->invisibleRootItem();
 
   for (int l0Row = 0, numL0Rows = rootItem->rowCount(); l0Row < numL0Rows; ++l0Row) {
     auto l0Item      = rootItem->child(l0Row);
     auto l0ElementId = l0Item->data(EbmlIdRole).toUInt();
 
     if (l0ElementId == EBML_ID(EbmlHead).GetValue())
-      Util::expandCollapseAll(view, true, model->indexFromItem(l0Item));
+      Util::expandCollapseAll(view, true, p->m_model->indexFromItem(l0Item));
 
     else if (l0ElementId == EBML_ID(KaxSegment).GetValue()) {
-      view->setExpanded(model->indexFromItem(l0Item), true);
+      view->setExpanded(p->m_model->indexFromItem(l0Item), true);
 
       for (int l1Row = 0, numL1Rows = l0Item->rowCount(); l1Row < numL1Rows; ++l1Row) {
         auto l1Item      = l0Item->child(l1Row);
         auto l1ElementId = l1Item->data(EbmlIdRole).toUInt();
 
         if (mtx::included_in(l1ElementId, EBML_ID(KaxInfo).GetValue(), EBML_ID(KaxTracks).GetValue()))
-          Util::expandCollapseAll(view, true, model->indexFromItem(l1Item));
+          Util::expandCollapseAll(view, true, p->m_model->indexFromItem(l1Item));
       }
     }
   }
 
   setUpdatesEnabled(true);
+}
+
+void
+Tab::readLevel1Element(QModelIndex const &idx) {
+  if (!idx.isValid())
+    return;
+
+  auto p       = p_func();
+  auto item    = p->m_model->itemFromIndex(idx);
+  auto element = p->m_model->elementFromIndex(idx);
+
+  if (!element || !item->data(DeferredLoadRole).toBool())
+    return;
+
+  auto reader = new ElementReader(*p->m_file, *element, idx);
+  connect(reader, &ElementReader::elementRead, p->m_model, &Model::addChildrenOfLevel1Element);
+
+  p->m_queue->add(reader);
 }
 
 }}}

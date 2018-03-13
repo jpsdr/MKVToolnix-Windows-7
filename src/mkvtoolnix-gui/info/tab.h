@@ -13,6 +13,7 @@ namespace Ui {
 class Tab;
 }
 
+class Model;
 class TabPrivate;
 class Tab : public QWidget {
   Q_OBJECT;
@@ -39,9 +40,9 @@ signals:
 public slots:
   void retranslateUi();
   void showElementInfo(int level, QString const &text, int64_t position, int64_t size);
-  void showElement(int level, EbmlElement *element);
   void showError(const QString &message);
   void expandImportantElements();
+  void readLevel1Element(QModelIndex const &idx);
 
 protected:
   void setItemsFromElement(QList<QStandardItem *> &items, EbmlElement &element);

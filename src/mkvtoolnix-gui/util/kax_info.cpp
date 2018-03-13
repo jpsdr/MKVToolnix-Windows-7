@@ -10,16 +10,37 @@
 
 #include "common/common_pch.h"
 
+#include <QDebug>
+#include <ebml/EbmlStream.h>
 #include <matroska/KaxCluster.h>
+#include <matroska/KaxSegment.h>
 
+#include "common/at_scope_exit.h"
+#include "common/ebml.h"
 #include "common/kax_element_names.h"
+#include "common/kax_file.h"
+#include "common/mm_io_x.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_read_buffer_io.h"
 #include "common/qt.h"
 #include "common/kax_info_p.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 
 namespace mtx { namespace gui { namespace Util {
 
+class KaxInfoPrivate: public mtx::kax_info::private_c {
+public:
+  KaxInfo::ScanType m_scanType{KaxInfo::ScanType::StartOfFile};
+  boost::optional<uint64_t> m_firstLevel1ElementPosition;
+};
+
+KaxInfo::KaxInfo()
+  : mtx::kax_info_c{*new KaxInfoPrivate}
+{
+}
+
 KaxInfo::KaxInfo(QString const &file_name)
+  : mtx::kax_info_c{*new KaxInfoPrivate}
 {
   set_source_file_name(to_utf8(file_name));
 }
@@ -48,10 +69,13 @@ void
 KaxInfo::ui_show_element(EbmlElement &e) {
   auto p = p_func();
 
-  if (p->m_use_gui)
-    emit elementFound(p->m_level, &e);
+  if (p->m_use_gui) {
+    if ((p->m_scanType == ScanType::StartOfFile) && Is<KaxCluster>(e))
+      p->m_firstLevel1ElementPosition = e.GetElementPosition();
+    else
+      emit elementFound(p->m_level, &e, p->m_scanType == ScanType::StartOfFile);
 
-  else
+  } else
     kax_info_c::ui_show_element(e);
 }
 
@@ -62,19 +86,91 @@ KaxInfo::ui_show_progress(int percentage,
 }
 
 void
-KaxInfo::run() {
-  auto p = p_func();
-
-  emit runStarted();
-
-  auto result = p->m_in ? process_file() : open_and_process_file(p->m_source_file_name);
-
-  emit runFinished(result);
+KaxInfo::abort() {
+  ::mtx::kax_info_c::abort();
 }
 
 void
-KaxInfo::abort() {
-  ::mtx::kax_info_c::abort();
+KaxInfo::runScan(ScanType type) {
+  auto p = p_func();
+
+  p->m_scanType = type;
+
+  if (type == ScanType::StartOfFile)
+    scanStartOfFile();
+
+  else if (type == ScanType::Level1Elements)
+    scanLevel1Elements();
+
+  else
+    qDebug() << "programming error: unknown type" << static_cast<int>(type);
+}
+
+void
+KaxInfo::scanStartOfFile() {
+  auto p = p_func();
+
+  emit startOfFileScanStarted();
+
+  p->m_firstLevel1ElementPosition.reset();
+  p->m_abort  = false;
+  auto result = p->m_in ? process_file() : open_and_process_file(p->m_source_file_name);
+
+  emit startOfFileScanFinished(result);
+}
+
+void
+KaxInfo::scanLevel1Elements() {
+  emit level1ElementsScanStarted();
+
+  auto result = doScanLevel1Elements();
+
+  emit level1ElementsScanFinished(result);
+}
+
+mtx::kax_info_c::result_e
+KaxInfo::doScanLevel1Elements() {
+  auto p     = p_func();
+  p->m_abort = false;
+  p->m_level = 1;
+
+  if (!p->m_firstLevel1ElementPosition || !p->m_in)
+    return result_e::succeeded;
+
+  try {
+    auto cache_io = dynamic_cast<mm_read_buffer_io_c *>(p->m_in.get());
+    if (cache_io)
+      cache_io->set_buffer_size(64);
+
+    at_scope_exit_c reset_buffer_size([cache_io]() {
+      if (cache_io)
+        cache_io->set_buffer_size();
+    });
+
+    p->m_in->setFilePointer(*p->m_firstLevel1ElementPosition);
+
+    while (!p->m_abort) {
+      auto upper_lvl_el = 0;
+      auto l1           = std::shared_ptr<EbmlElement>(p->m_es->FindNextElement(EBML_CLASS_CONTEXT(KaxSegment), upper_lvl_el, 0xFFFFFFFFL, true));
+
+      if (!l1)
+        break;
+
+      retain_element(l1);
+      ui_show_element(*l1);
+
+      if (upper_lvl_el)
+        break;
+
+      p->m_in->setFilePointer(l1->GetElementPosition() + kax_file_c::get_element_size(l1.get()));
+    }
+
+  } catch (mtx::mm_io::exception &ex) {
+    ui_show_error((boost::format("%1%: %2%") % Y("Caught exception") % ex.what()).str());
+    return result_e::failed;
+  }
+
+  return p->m_abort ? result_e::aborted : result_e::succeeded;
 }
 
 }}}
