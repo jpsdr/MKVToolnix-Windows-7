@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-12 23:28+0100\n"
+"POT-Creation-Date: 2018-03-13 22:40+0100\n"
 "PO-Revision-Date: 2017-10-04 19:49+0200\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -3756,6 +3756,7 @@ msgstr "Kategorija se ne završava NUL bajtom"
 #: src/common/kax_info.cpp:1311
 #: src/common/kax_info.cpp:1315
 #: src/extract/tracks.cpp:564
+#: src/mkvtoolnix-gui/util/kax_info.cpp:169
 msgid "Caught exception"
 msgstr "Ухваћен је изузетак"
 
@@ -4228,7 +4229,7 @@ msgstr "Сажимање:"
 msgid "Container"
 msgstr "Сандук"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:181
+#: src/mkvtoolnix-gui/info/model.cpp:77
 #, fuzzy, no-c-format
 msgid "Content"
 msgstr "Сандук"
@@ -4866,7 +4867,7 @@ msgstr "Назив исходишне датотеке"
 msgid "Destination file name"
 msgstr "Назив исходишне датотеке"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:102
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:100
 #, fuzzy, no-c-format
 msgid "Destination file name: %1"
 msgstr "Назив исходишне датотеке"
@@ -5239,7 +5240,7 @@ msgstr "Уписан је елеменат %1%.\n"
 msgid "Element types:\n"
 msgstr "Типови елемената:\n"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:180
+#: src/mkvtoolnix-gui/info/model.cpp:76
 #, no-c-format
 msgid "Elements"
 msgstr "Елементи"
@@ -5369,7 +5370,7 @@ msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "Грешка при рашчлањавању ознака у „%1%“: нема неких обавезних елемената.\n"
 
 #: src/common/qt_kax_analyzer.cpp:84
-#: src/mkvtoolnix-gui/info/tab.cpp:237
+#: src/mkvtoolnix-gui/info/tab.cpp:189
 #, fuzzy, no-c-format
 msgid "Error reading Matroska file"
 msgstr "Грешка код уписа Матрошка-датотеке"
@@ -6438,7 +6439,7 @@ msgstr ""
 msgid "Indexing (cues):"
 msgstr "Индексирање (кју-уноси):"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:156
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:135
 #, fuzzy, no-c-format
 msgid "Info job"
 msgstr "Алатка &обавештења"
@@ -6954,7 +6955,7 @@ msgstr "Задржи само Додате_блокове све до овог �
 msgid "Known &problems in recent releases"
 msgstr "Познати &проблеми у скорашњим издањима"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:252
+#: src/mkvtoolnix-gui/info/model.cpp:108
 #, fuzzy, boost-format
 msgid "Known element, but invalid at this position: %1% (ID: 0x%2%)"
 msgstr "(Непознат елеменат: %1%; ИБ: 0x%2%, величине: %3%)"
@@ -7058,10 +7059,15 @@ msgstr "Приказује све називе ваљаних особина и 
 msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."
 msgstr "Приказивање назива датотека подешавања са „.mtxcfg“ наставком у називу омогућава учитавање ових подешавања одговарајућим алатом графичког сучеља."
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:163
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:142
 #, fuzzy, no-c-format
 msgid "Listing content of file \"%1\" in directory \"%2\""
 msgstr "Сједињујем у датотеци „%1“, у месту „%2“"
+
+#: src/mkvtoolnix-gui/info/tab.cpp:237
+#, no-c-format
+msgid "Loading…"
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:514
 #, fuzzy, no-c-format
@@ -8343,7 +8349,7 @@ msgstr "Овде одаберите радње примењиве на изаб�
 msgid "Please select the character set the following file is encoded in."
 msgstr "Одаберите кодну страну којом је кодирана наредна датотека."
 
-#: src/mkvtoolnix-gui/info/tab.cpp:182
+#: src/mkvtoolnix-gui/info/model.cpp:78
 #, fuzzy, no-c-format
 msgid "Position"
 msgstr "Положај трага: %1%"
@@ -8669,7 +8675,7 @@ msgstr "Није подржано читање шифрованих Воб-да�
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:710
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:722
-#: src/mkvtoolnix-gui/info/tab.cpp:127
+#: src/mkvtoolnix-gui/info/tab.cpp:125
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, fuzzy, no-c-format
 msgid "Reading failed"
@@ -9510,7 +9516,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "Откривен је кадар са једним пољем пре заглавља „групе слика“ (енг. „GOP“). Поправите Мпег2-видео пре покушаја сједињавања.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/info/tab.cpp:183
+#: src/mkvtoolnix-gui/info/model.cpp:79
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:94
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
 #, no-c-format
@@ -9575,7 +9581,7 @@ msgstr "Изворна датотека"
 msgid "Source file name"
 msgstr "Назив изворне датотеке"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:101
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:99
 #, fuzzy, no-c-format
 msgid "Source file name: %1"
 msgstr "Назив изворне датотеке"
@@ -10627,7 +10633,7 @@ msgstr "Надаље, нећу обрађивати ову датотеку."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:722
-#: src/mkvtoolnix-gui/info/tab.cpp:127
+#: src/mkvtoolnix-gui/info/tab.cpp:125
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Неуспешно читање датотеке коју сте покушали да отворите (%1)."
@@ -12001,7 +12007,7 @@ msgstr "Неочекиван сликовни кадар након кадра �
 msgid "Unknown"
 msgstr "Непознато"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:249
+#: src/mkvtoolnix-gui/info/model.cpp:105
 #, fuzzy, boost-format
 msgid "Unknown (ID: 0x%1%)"
 msgstr "Непознат режим „%1%“.\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-12 23:28+0100\n"
+"POT-Creation-Date: 2018-03-13 22:40+0100\n"
 "PO-Revision-Date: 2018-02-23 22:56+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -3647,6 +3647,7 @@ msgstr "Kategoria nie jest zakończona znakiem NUL"
 #: src/common/kax_info.cpp:1311
 #: src/common/kax_info.cpp:1315
 #: src/extract/tracks.cpp:564
+#: src/mkvtoolnix-gui/util/kax_info.cpp:169
 msgid "Caught exception"
 msgstr "Wykryto wyjątek"
 
@@ -4102,7 +4103,7 @@ msgstr "Kompresja ścieżki:"
 msgid "Container"
 msgstr "Kontener"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:181
+#: src/mkvtoolnix-gui/info/model.cpp:77
 #, no-c-format
 msgid "Content"
 msgstr "Zawartość"
@@ -4712,7 +4713,7 @@ msgstr "Plik docelowy"
 msgid "Destination file name"
 msgstr "Nazwa pliku docelowego"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:102
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:100
 #, no-c-format
 msgid "Destination file name: %1"
 msgstr "Nazwa pliku docelowego: %1"
@@ -5071,7 +5072,7 @@ msgstr "Element %1% jest w trakcie zapisywania.\n"
 msgid "Element types:\n"
 msgstr "Typy elementów:\n"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:180
+#: src/mkvtoolnix-gui/info/model.cpp:76
 #, no-c-format
 msgid "Elements"
 msgstr "Elementy"
@@ -5197,7 +5198,7 @@ msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "Błąd analizy składniowej tagów w \"%1%\": brakuje niektórych wymaganych elementów.\n"
 
 #: src/common/qt_kax_analyzer.cpp:84
-#: src/mkvtoolnix-gui/info/tab.cpp:237
+#: src/mkvtoolnix-gui/info/tab.cpp:189
 #, no-c-format
 msgid "Error reading Matroska file"
 msgstr "Błąd podczas wczytywania pliku Matroski"
@@ -6248,7 +6249,7 @@ msgstr "Niezależnie od pól wyboru, każda aktywna konfiguracja może być wywo
 msgid "Indexing (cues):"
 msgstr "Indeksowanie (cues):"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:156
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:135
 #, no-c-format
 msgid "Info job"
 msgstr "Zadanie informacyjne"
@@ -6761,7 +6762,7 @@ msgstr "Zachowaj tylko BlockAdditions do obecnego poziomu (domyślnie: zachowaj 
 msgid "Known &problems in recent releases"
 msgstr "&Znane problemy w ostatnich wydaniach"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:252
+#: src/mkvtoolnix-gui/info/model.cpp:108
 #, fuzzy, boost-format
 msgid "Known element, but invalid at this position: %1% (ID: 0x%2%)"
 msgstr "(Nieznany element: %1%; ID: 0x%2% rozmiar: %3%)"
@@ -6865,10 +6866,15 @@ msgstr "Sporządź listę wszystkich nazw właściwości i wyjdź"
 msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."
 msgstr "Wyszczególnienie plików konfiguracyjnych (mających rozszerzenie .mtxcfg) spowoduje załadowanie ich do odpowiedniego narzędzia."
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:163
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:142
 #, no-c-format
 msgid "Listing content of file \"%1\" in directory \"%2\""
 msgstr "Zapisywanie zawartości pliku »%1« w katalogu »%2«"
+
+#: src/mkvtoolnix-gui/info/tab.cpp:237
+#, no-c-format
+msgid "Loading…"
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:514
 #, no-c-format
@@ -8118,7 +8124,7 @@ msgstr "Proszę wybrać czynności, które zostaną wykonane dla wszystkich zazn
 msgid "Please select the character set the following file is encoded in."
 msgstr "Proszę wybrać zestaw znaków, w którym zakodowany jest następujący plik."
 
-#: src/mkvtoolnix-gui/info/tab.cpp:182
+#: src/mkvtoolnix-gui/info/model.cpp:78
 #, no-c-format
 msgid "Position"
 msgstr "Pozycja"
@@ -8441,7 +8447,7 @@ msgstr "Zaszyfrowane pliki VOB nie są obsługiwane.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:710
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:722
-#: src/mkvtoolnix-gui/info/tab.cpp:127
+#: src/mkvtoolnix-gui/info/tab.cpp:125
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
 msgid "Reading failed"
@@ -9252,7 +9258,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "Wykryto pojedynczą klatkę przed nagłówkiem GOP. Napraw ścieżkę obrazu MPEG2, zanim zaczniesz ją multipleksować.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/info/tab.cpp:183
+#: src/mkvtoolnix-gui/info/model.cpp:79
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:94
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
 #, no-c-format
@@ -9316,7 +9322,7 @@ msgstr "Plik źródłowy"
 msgid "Source file name"
 msgstr "Nazwa pliku źródłowego"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:101
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:99
 #, no-c-format
 msgid "Source file name: %1"
 msgstr "Nazwa pliku źródłowego: %1"
@@ -10352,7 +10358,7 @@ msgstr "Plik nie może być dalej przetwarzany."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:722
-#: src/mkvtoolnix-gui/info/tab.cpp:127
+#: src/mkvtoolnix-gui/info/tab.cpp:125
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Plik, który próbujesz otworzyć (%1), nie mógł zostać wczytany pomyślnie."
@@ -11706,7 +11712,7 @@ msgstr "Nieoczekiwanie natrafiono na klatkę obrazu po wystąpieniu pojedynczego
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:249
+#: src/mkvtoolnix-gui/info/model.cpp:105
 #, fuzzy, boost-format
 msgid "Unknown (ID: 0x%1%)"
 msgstr "Nieznany tryb \"%1%\".\n"

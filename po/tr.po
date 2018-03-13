@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-12 23:28+0100\n"
+"POT-Creation-Date: 2018-03-13 22:40+0100\n"
 "PO-Revision-Date: 2018-03-11 11:23+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3622,6 +3622,7 @@ msgstr "Kategori NUL olarak sonlandırılmaz"
 #: src/common/kax_info.cpp:1311
 #: src/common/kax_info.cpp:1315
 #: src/extract/tracks.cpp:564
+#: src/mkvtoolnix-gui/util/kax_info.cpp:169
 msgid "Caught exception"
 msgstr "Yakalanan istisna"
 
@@ -4047,7 +4048,7 @@ msgstr "Sıkıştırma:"
 msgid "Container"
 msgstr "Kalıp"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:181
+#: src/mkvtoolnix-gui/info/model.cpp:77
 #, no-c-format
 msgid "Content"
 msgstr "İçerik"
@@ -4648,7 +4649,7 @@ msgstr "Hedef dosya"
 msgid "Destination file name"
 msgstr "Hedef dosya adı"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:102
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:100
 #, no-c-format
 msgid "Destination file name: %1"
 msgstr "Hedef dosya adı: %1"
@@ -5000,7 +5001,7 @@ msgstr "Öğe %1% yazılmakta.\n"
 msgid "Element types:\n"
 msgstr "Öğe türü:\n"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:180
+#: src/mkvtoolnix-gui/info/model.cpp:76
 #, no-c-format
 msgid "Elements"
 msgstr "Öğe"
@@ -5125,7 +5126,7 @@ msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "'%1%' içindeki etiketleri ayrıştırma hatası: bazı zorunlu öğeler eksik.\n"
 
 #: src/common/qt_kax_analyzer.cpp:84
-#: src/mkvtoolnix-gui/info/tab.cpp:237
+#: src/mkvtoolnix-gui/info/tab.cpp:189
 #, no-c-format
 msgid "Error reading Matroska file"
 msgstr "Matroska dosyası okuma hatası"
@@ -6167,7 +6168,7 @@ msgstr "Onay kutularının bağımsızlığı, her etkin yapılandırmanın \"i�
 msgid "Indexing (cues):"
 msgstr "İndeksleme (cue'lar):"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:156
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:135
 #, no-c-format
 msgid "Info job"
 msgstr "Bilgi işi"
@@ -6680,7 +6681,7 @@ msgstr "Sadece Blok İlavelerini bu seviyeye kadar tut (varsayılan: tüm seviye
 msgid "Known &problems in recent releases"
 msgstr "Son yayınlarda bilinen &sorunlar"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:252
+#: src/mkvtoolnix-gui/info/model.cpp:108
 #, boost-format
 msgid "Known element, but invalid at this position: %1% (ID: 0x%2%)"
 msgstr "Bilinmeyen öğe, ancak bu konumda geçersiz: %1% (ID: 0x%2%)"
@@ -6782,10 +6783,15 @@ msgstr "Tüm geçerli özellik adlarını ve çıkışı listele"
 msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."
 msgstr "Yapılandırma dosyası adlarını .mtxcfg uzantısı ile listelemek, GKA'nın bu yapılandırma dosyalarını uygun araçta yüklemesine neden olur."
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:163
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:142
 #, no-c-format
 msgid "Listing content of file \"%1\" in directory \"%2\""
 msgstr " \"%1\" dosyasının içeriği \"%2\" dizininde listeleniyor"
+
+#: src/mkvtoolnix-gui/info/tab.cpp:237
+#, no-c-format
+msgid "Loading…"
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:514
 #, no-c-format
@@ -8020,7 +8026,7 @@ msgstr "Lütfen seçilen yayın veya bölüm ve bunun alttakilerini uygulamak i�
 msgid "Please select the character set the following file is encoded in."
 msgstr "Lütfen aşağıdaki dosyanın kodlandığı karakter kümesini seçin."
 
-#: src/mkvtoolnix-gui/info/tab.cpp:182
+#: src/mkvtoolnix-gui/info/model.cpp:78
 #, no-c-format
 msgid "Position"
 msgstr "Konum"
@@ -8337,7 +8343,7 @@ msgstr "Şifrelenmiş VOB'ları okuma desteklenmiyor.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:710
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:722
-#: src/mkvtoolnix-gui/info/tab.cpp:127
+#: src/mkvtoolnix-gui/info/tab.cpp:125
 #: src/mkvtoolnix-gui/merge/attachments.cpp:217
 #, no-c-format
 msgid "Reading failed"
@@ -9138,7 +9144,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "GOP başlığından önce tek alan karesi saptandı. Çoklamak için denemeden önce MPEG2 görüntü akışını düzeltin.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/info/tab.cpp:183
+#: src/mkvtoolnix-gui/info/model.cpp:79
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:94
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
 #, no-c-format
@@ -9202,7 +9208,7 @@ msgstr "Kaynak dosya"
 msgid "Source file name"
 msgstr "Kaynak dosya adı"
 
-#: src/mkvtoolnix-gui/jobs/info_job.cpp:101
+#: src/mkvtoolnix-gui/jobs/info_job.cpp:99
 #, no-c-format
 msgid "Source file name: %1"
 msgstr "Kaynak dosya adı: %1"
@@ -10221,7 +10227,7 @@ msgstr "Dosya daha fazla işlenmeyecektir."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:722
-#: src/mkvtoolnix-gui/info/tab.cpp:127
+#: src/mkvtoolnix-gui/info/tab.cpp:125
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Açmaya çalıştığınız dosya (%1) başarılı olarak okunamadı."
@@ -11579,7 +11585,7 @@ msgstr "Tek alan karesinden sonra beklenmedik resim karesi. Çoklamak için dene
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:249
+#: src/mkvtoolnix-gui/info/model.cpp:105
 #, boost-format
 msgid "Unknown (ID: 0x%1%)"
 msgstr "Bilinmiyor (ID: 0x%1%)"
