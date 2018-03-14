@@ -47,9 +47,15 @@ Model::elementFromIndex(QModelIndex const &idx) {
 
   auto item = itemFromIndex(idx);
   if (item)
-    return reinterpret_cast<EbmlElement *>(item->data(ElementRole).toULongLong());
+    return elementFromItem(*item);
 
   return {};
+}
+
+EbmlElement *
+Model::elementFromItem(QStandardItem &item)
+  const {
+  return reinterpret_cast<EbmlElement *>(item.data(ElementRole).toULongLong());
 }
 
 QList<QStandardItem *>
@@ -189,7 +195,7 @@ Model::hasChildren(const QModelIndex &parent)
   if (!item->data(LoadedRole).toBool())
     return true;
 
-  auto element = reinterpret_cast<EbmlMaster *>(item->data(ElementRole).toULongLong());
+  auto element = dynamic_cast<EbmlMaster *>(elementFromItem(*item));
   return element ? !!element->ListSize() : false;
 }
 
@@ -205,7 +211,7 @@ Model::forgetLevel1ElementChildren(QModelIndex const &idx) {
   item->removeRows(0, item->rowCount());
   item->setData(false, LoadedRole);
 
-  auto element = reinterpret_cast<EbmlMaster *>(item->data(ElementRole).toULongLong());
+  auto element = dynamic_cast<EbmlMaster *>(elementFromItem(*item));
   if (!element)
     return;
 
