@@ -153,7 +153,7 @@ Model::addElement(int level,
   auto items = newItems();
   setItemsFromElement(items, *element);
 
-  if (!readFully) {
+  if (!readFully && dynamic_cast<EbmlMaster *>(element)) {
     items[0]->setData(true,  DeferredLoadRole);
     items[0]->setData(false, LoadedRole);
   }

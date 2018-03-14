@@ -40,6 +40,7 @@ public:
   Util::KaxInfo &info();
 
   EbmlElement *elementFromIndex(QModelIndex const &idx);
+  EbmlElement *elementFromItem(QStandardItem &item) const;
 
   QList<QStandardItem *> itemsForRow(QModelIndex const &idx);
   QList<QStandardItem *> newItems() const;
