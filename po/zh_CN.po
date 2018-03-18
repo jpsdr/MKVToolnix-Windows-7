@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-13 22:40+0100\n"
-"PO-Revision-Date: 2018-03-11 19:21+0000\n"
+"PO-Revision-Date: 2018-03-14 17:59+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -4525,18 +4525,16 @@ msgstr "根据下面的设置，可以在输入文件中的语言为“未指定
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
-#, fuzzy
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
-msgstr "根据下面的设置，可以在输入文件中的语言为“未指定”(“und”) 时使用此处设置的语言。"
+msgstr "根据此设置，源文件中语言为「未指定」('und') 时，语言也可从文件名称中推得。"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
 msgstr "根据各起始时间戳推算终止时间戳(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1450
-#, fuzzy
 msgid "Deriving track languages from file names"
-msgstr "轨道默认语言"
+msgstr "从文件名称推断轨道语言"
 
 #: src/common/property_element.cpp:195
 msgid "Describes the projection used for this video track (0 – 3)."
@@ -5970,15 +5968,15 @@ msgstr "如果数字后紧接着 ms 则表示在每个簇中最多置入 n 毫�
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "若源文件的字幕轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "若源文件的视频轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "若源文件的音频轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
@@ -6709,7 +6707,7 @@ msgstr "列出目录「%2」中文件「%1」的内容"
 #: src/mkvtoolnix-gui/info/tab.cpp:237
 #, no-c-format
 msgid "Loading…"
-msgstr ""
+msgstr "正在加载…"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:514
 #, no-c-format
@@ -7139,7 +7137,7 @@ msgstr "可以为负值。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:623
 #, no-c-format
 msgid "Never"
-msgstr ""
+msgstr "从不"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1480
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:146
@@ -10241,19 +10239,16 @@ msgid "The language for this track that players can use for automatic track sele
 msgstr "该轨道的语言，播放器可以用来进行自动轨道选择，及向用户显示。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:336
-#, fuzzy
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此处选择的语言用于输入文件不含该属性的音频轨道。"
+msgstr "此处选择的语言用于源文件中未指定语言属性、且无法从文件名中推断语言的音频轨道。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
-#, fuzzy
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此处选择的语言用于输入文件不含该属性的字幕轨道。"
+msgstr "此处选择的语言用于源文件中未指定语言属性、且无法从文件名中推断语言的字幕轨道。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
-#, fuzzy
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此处选择的语言用于输入文件不含该属性的视频轨道。"
+msgstr "此处选择的语言用于源文件中未指定语言属性、且无法从文件名中推断语言的视频轨道。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:184
 msgid "The language set here is also used when chapters are generated."
