@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2018-03-09 19:16+0100\n"
-"PO-Revision-Date: 2018-03-09 22:12+0000\n"
+"PO-Revision-Date: 2018-03-14 19:10+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
@@ -2431,7 +2431,7 @@ msgstr "<option>--attachment-name</option> <parameter>nombre</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1049
 msgid "Sets the name that will be stored in the output file for this attachment.  If this option is not given then the name will be derived from the file name of the attachment as given with the <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file</option></link> or the <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file-once</option></link> option."
-msgstr "Establece el nombre de este adjunto que será almacenado en el archivo de salida. Si esta opción no se especificación entonces el nombre será derivado del nombre del archivo del adjunto especificado con la opción <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file</option></link> o <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file-once</option></link>. "
+msgstr "Establece el nombre de este adjunto que será almacenado en el archivo de salida. Si no se especificó esta opción entonces el nombre será generado a partir del nombre del archivo del adjunto especificado con la opción <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file</option></link> o <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file-once</option></link>. "
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1059
@@ -2816,7 +2816,7 @@ msgstr "Fuerza la duración predeterminada de una pista a un valor específico. 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1505
 msgid "If the default duration is not forced then mkvmerge will try to derive the track's default duration from the container and/or the encoded bitstream for certain track types, e.g. AVC/h.264 or MPEG-2."
-msgstr "Si la duración predeterminada no se fuerza entonces mkvmerge intentará derivar la duración predeterminada de la pista a partir del contenedor y/o el bitstream codificado para ciertos tipos de pista, p.e. AVC/h.264 o MPEG-2."
+msgstr "Si no se fuerza la duración predeterminada entonces mkvmerge intentará generar la duración predeterminada de la pista a partir del contenedor y/o el bitstream codificado para ciertos tipos de pista, p.e. AVC/h.264 o MPEG-2."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1510
@@ -2831,7 +2831,7 @@ msgstr "<option>--fix-bitstream-timing-information</option> <parameter>TID<optio
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1519
 msgid "Normally &mkvmerge; does not change the timing information (frame/field rate) stored in the video bitstream. With this option that information is adjusted to match the container timing information. The container timing information can come from various sources: from the command line (see option <link linkend=\"mkvmerge.description.default_duration\"><option>--default-duration</option></link>), the source container or derived from the bitstream."
-msgstr "Por lo general, &mkvmerge; no cambia la información del tiempo (frecuencia de fotograma/campo) almacenada en el bitstream de video. Con esta opción esa información se ajusta para coincidir con la información del tiempo. La información del tiempo del contenedor puede provenir de varias fuentes: desde la línea de comandos (mire la sección <link linkend=\"mkvmerge.description.default_duration\"><option>--default-duration</option></link>), el contenedor de la fuente o derivado del bitstream. "
+msgstr "Por lo general, &mkvmerge; no cambia la información del tiempo (frecuencia de fotograma/campo) almacenada en el bitstream de video. Con esta opción esa información se ajusta para coincidir con la información del tiempo. La información del tiempo del contenedor puede provenir de varias fuentes: desde la línea de comandos (mire la sección <link linkend=\"mkvmerge.description.default_duration\"><option>--default-duration</option></link>), el contenedor de la fuente o generado a partir del bitstream. "
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><note><para>
 #: doc/man/mkvmerge.xml:1526
@@ -2946,7 +2946,7 @@ msgstr "<option>--colour-matrix</option> <parameter>TID:n</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1644
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries. The parameter <parameter>n</parameter> is an integer rangeing from <constant>0</constant> and <constant>10</constant>."
-msgstr "Establece los coeficientes matriciales del video para derivar los valores de luminancia y crominancia a partir de los colores primarios rojo, verde y azul. El parámetro <parameter>n</parameter> es un número entero entre <constant>0</constant> y <constant>10</constant>."
+msgstr "Establece los coeficientes matriciales del video para generar los valores de luminancia y crominancia a partir de los colores primarios rojo, verde y azul. El parámetro <parameter>n</parameter> es un número entero entre <constant>0</constant> y <constant>10</constant>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1649
@@ -3203,7 +3203,7 @@ msgstr "<option>--sub-charset</option> <parameter>TID:conjunto-caracteres</param
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1912
 msgid "Sets the character set for the conversion to UTF-8 for UTF-8 subtitles for the given track ID. If not specified the charset will be derived from the current locale settings. Note that a charset is not needed for subtitles read from &matroska; files or from Kate streams, as these are always stored in UTF-8. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\"> text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr "Establece el conjunto de caracteres para realizar la conversión a UTF-8 para los subtítulos UTF-8 de un ID de pista especificada. Si no se especifica el conjunto de caracteres será derivado de la configuración regional actual. Tenga en cuenta que un conjunto de caracteres no es necesario para leer subtítulos desde archivos &mkvmerge; o desde secuencias Kate, ya que estos siempre se almacenan en UTF-8. Mire la sección acerca de <link linkend=\"mkvmerge.text_files_and_charsets\">archivos de texto y conjunto de caracteres</link> para una explicación sobre cómo &mkvmerge; realiza la conversión entre conjunto de caracteres. "
+msgstr "Establece el conjunto de caracteres para realizar la conversión a UTF-8 para los subtítulos UTF-8 de un ID de pista especificada. Si no se especifica el conjunto de caracteres será generado a partir de la configuración regional actual. Tenga en cuenta que un conjunto de caracteres no es necesario para leer subtítulos desde archivos &mkvmerge; o desde secuencias Kate, ya que estos siempre se almacenan en UTF-8. Mire la sección acerca de <link linkend=\"mkvmerge.text_files_and_charsets\">archivos de texto y conjunto de caracteres</link> para una explicación sobre cómo &mkvmerge; realiza la conversión entre conjunto de caracteres. "
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:1927
@@ -4766,7 +4766,7 @@ msgstr "Añade un nuevo adjunto a <parameter>nombre-archivo</parameter>. "
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:220
 msgid "If the option <option>--attachment-name</option> has been used prior to this option then its value is used as the new attachment's name. Otherwise it is derived from <parameter>filename</parameter>."
-msgstr "Si la opción <option>--attachment-name</option> es usada antes de esta opción entonces su valor es usado como el nuevo nombre del adjunto. Por el contrario, se deriva del <parameter>nombre-archivo</parameter>. "
+msgstr "Si la opción <option>--attachment-name</option> es usada antes de esta opción entonces su valor es usado como el nuevo nombre del adjunto. Por el contrario, se generará a partir del <parameter>nombre-archivo</parameter>. "
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:225
