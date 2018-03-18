@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-13 22:40+0100\n"
-"PO-Revision-Date: 2018-02-23 22:56+0100\n"
+"PO-Revision-Date: 2018-03-17 00:31+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -603,14 +603,14 @@ msgid ""
 msgstr "  --reduce-to-core <TID>   Odrzuca rozszerzenie HD ze ścieżki DTS, zachowując wyłącznie stratny rdzeń (tzw. \"DTS Core\").\n"
 
 #: src/merge/mkvmerge.cpp:240
-#, fuzzy
 msgid ""
 "  --remove-dialog-normalization-gain <TID>\n"
 "                           Removes or minimizes the dialog normalization gain\n"
 "                           by modifying audio frame headers.\n"
 msgstr ""
-"  --aspect-ratio <TID:f|a/b>\n"
-"                           Ustala proporce obrazu na podstawie danego współczynnika.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Usuwa lub minimalizuje normalizację dialogów\n"
+"                           poprzez modyfikację nagłówków klatek audio.\n"
 
 #: src/merge/mkvmerge.cpp:110
 msgid ""
@@ -1228,19 +1228,19 @@ msgstr[1] "%1% bajty"
 msgstr[2] "%1% bajtów"
 
 #: src/common/kax_info.cpp:224
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"
-msgstr "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), rozmiar %5%, adler 0x%|6$08x|%7%%8%\n"
+msgstr "%1% klatka, ścieżka %2%, znacznik czasu %3%, czas trwania %4%, rozmiar %5%, adler 0x%|6$08x|%7%%8%\n"
 
 #: src/common/kax_info.cpp:229
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"
-msgstr "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), rozmiar %5%, adler 0x%|6$08x|%7%\n"
+msgstr "%1% klatka, ścieżka %2%, znacznik czasu %3%, rozmiar %4%, adler 0x%|5$08x|%6%\n"
 
 #: src/common/kax_info.cpp:225
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"
-msgstr "%1% klatka, ścieżka %2%, kody czasowe %3% (%4%), rozmiar %5%, adler 0x%|6$08x|%7%\n"
+msgstr "%1% klatka, ścieżka %2%, znacznik czasu %3%, rozmiar %4%, adler 0x%|5$08x|%6%%7%\n"
 
 #: src/common/strings/formatting.cpp:315
 #, boost-format
@@ -1322,9 +1322,9 @@ msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: brakuje ID ścieżki w \"%2% %3%\".\n"
 
 #: src/common/kax_info.cpp:227
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1%track number %2%, %3% frame(s), timestamp %4%"
-msgstr "SimpleBlock (%1%numer ściezki %2%, %3% klatka(ek/i), kod czasowy %|4$.3f|s = %5%)"
+msgstr "%1%numer ścieżki %2%, %3% klatka(-ek/-i), znacznik czasu %4%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
@@ -2464,9 +2464,9 @@ msgid ", position %1%"
 msgstr ", pozycja %1%"
 
 #: src/common/kax_info.cpp:223
-#, fuzzy, boost-format
+#, boost-format
 msgid ", position 0x%|1$x|"
-msgstr ", pozycja %1%"
+msgstr ", pozycja 0x%|1$x|"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 #, no-c-format
@@ -3116,7 +3116,7 @@ msgstr "Pozwala na przechowywanie strumienia AVC/h.264 w trybie kompatybilności
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:641
 #, no-c-format
 msgid "Also if the language is 'undetermined' ('und')"
-msgstr "Również wtedy, gdy język jest nieokreślony (\"undetermined\" → \"und\")"
+msgstr "Również wtedy, gdy język jest \"Undetermined (und)\" (nieokreślony)"
 
 #: src/extract/extract_cli_parser.cpp:76
 msgid "Also try to extract the cue sheet from the chapter information and tags for this track."
@@ -3447,9 +3447,8 @@ msgid "Bits per sample, mostly used for PCM."
 msgstr "Liczba bitów na próbkę, głównie stosowane dla PCM."
 
 #: src/common/kax_element_names.cpp:239
-#, fuzzy
 msgid "Block"
-msgstr "SimpleBlock"
+msgstr "Blok"
 
 #: src/common/kax_element_names.cpp:247
 #, fuzzy
@@ -3779,7 +3778,7 @@ msgstr "Język rozdziałów"
 
 #: src/common/kax_element_names.cpp:286
 msgid "Chapter language (IETF)"
-msgstr ""
+msgstr "Język rozdziałów (IETF)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 msgid "Chapter mass modification"
@@ -3984,9 +3983,8 @@ msgid "Cluster previous size"
 msgstr "Poprzedni rozmiar klastra"
 
 #: src/common/kax_element_names.cpp:261
-#, fuzzy
 msgid "Cluster timestamp"
-msgstr "Kod czasowy klastra: %|1$.3f|s"
+msgstr "Znacznik czasu klastra"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:45
@@ -4664,23 +4662,21 @@ msgstr "Usuń jeden lub więcej załączników"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:349
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
-msgstr "W zależności od ustawienia poniżej, język ten może być również użyty, jeśli język w pliku źródłowym jest nieokreślony (\"undetermined\" → \"und\")."
+msgstr "W zależności od ustawienia poniżej, język ten może być również użyty, jeśli język w pliku źródłowym jest \"Undetermined (und)\" (nieokreślony)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
-#, fuzzy
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
-msgstr "W zależności od ustawienia poniżej, język ten może być również użyty, jeśli język w pliku źródłowym jest nieokreślony (\"undetermined\" → \"und\")."
+msgstr "W zależności od tego ustawienia, język może również zostać pobrany z nazwy pliku, jeśli język w pliku źródłowym jest \"Undetermined (und)\" (nieokreślony)."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1450
-#, fuzzy
 msgid "Deriving track languages from file names"
-msgstr "Ustaw domyślne języki ścieżek"
+msgstr "Pobieranie języków ścieżek z nazw plików"
 
 #: src/common/property_element.cpp:195
 msgid "Describes the projection used for this video track (0 – 3)."
@@ -4821,9 +4817,8 @@ msgid "Display height"
 msgstr "Wyświetlana wysokość"
 
 #: src/common/kax_element_names.cpp:153
-#, fuzzy
 msgid "Display unit"
-msgstr "Jednostka wyświetlania: %1%%2%"
+msgstr "Jednostka wyświetlania"
 
 #: src/common/kax_element_names.cpp:147
 msgid "Display width"
@@ -6133,15 +6128,15 @@ msgstr "Jeśli po liczbie występują jednostki \"ms\", wtedy dodaje do każdego
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Jeżeli plik źródłowy nie zawiera takiej właściwości dla ścieżki napisów, wtedy język może zostać pobrany z nazwy pliku, jeśli pasuje do określonych wzorców (np. \"...[ger]...\" dla niemieckiego)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Jeżeli plik źródłowy nie zawiera takiej właściwości dla ścieżki wideo, wtedy język może zostać pobrany z nazwy pliku, jeśli pasuje do określonych wzorców (np. \"...[ger]...\" dla niemieckiego)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Jeżeli plik źródłowy nie zawiera takiej właściwości dla ścieżki audio, wtedy język może zostać pobrany z nazwy pliku, jeśli pasuje do określonych wzorców (np. \"...[ger]...\" dla niemieckiego)."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
@@ -6305,7 +6300,7 @@ msgstr "Błąd wewnętrzny programu"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1758
 msgid "Interval:"
-msgstr "Interwał (odstęp w czasie):"
+msgstr "Interwał:"
 
 #: src/merge/mkvmerge.cpp:1388
 #, boost-format
@@ -6874,7 +6869,7 @@ msgstr "Zapisywanie zawartości pliku »%1« w katalogu »%2«"
 #: src/mkvtoolnix-gui/info/tab.cpp:237
 #, no-c-format
 msgid "Loading…"
-msgstr ""
+msgstr "Wczytywanie..."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:514
 #, no-c-format
@@ -7310,7 +7305,7 @@ msgstr "Wartości ujemne są dozwolone."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:623
 #, no-c-format
 msgid "Never"
-msgstr ""
+msgstr "Nigdy"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1480
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:146
@@ -8560,9 +8555,8 @@ msgid "Remove com&pleted jobs older than x days:"
 msgstr "Usuń zakończone zadania starsze niż &x dni:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1712
-#, fuzzy
 msgid "Remove dialog normalization gain"
-msgstr "Informacje o segmencie"
+msgstr "Usuń normalizację dialogów"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:179
 #, no-c-format
@@ -8576,7 +8570,7 @@ msgstr "Usuń pliki źródłowe"
 #: src/mkvtoolnix-gui/merge/input.cpp:521
 #, no-c-format
 msgid "Removes or at least minimizes the dialog normalization gain by modifying audio headers."
-msgstr ""
+msgstr "Usuwa lub przynajmniej minimalizuje normalizację dialogów poprzez modyfikację nagłówków audio."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:361
@@ -8610,7 +8604,7 @@ msgstr "Zamień załącznik"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:329
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
-msgstr "Zamień załącznik na nowy plik i pobierz z niego nazwę oraz typ &MIME "
+msgstr "Zamień załącznik na nowy plik i pobierz z niego nazwę oraz typ &MIME"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:652
 msgid "Report a &bug"
@@ -9214,9 +9208,8 @@ msgid "Signature algorithm"
 msgstr "Algorytm sygnatury"
 
 #: src/common/kax_element_names.cpp:174
-#, fuzzy
 msgid "Signature hash algorithm"
-msgstr "brak algorytmu hasha sygnatury"
+msgstr "Algorytm hasha sygnatury"
 
 #: src/common/kax_element_names.cpp:175
 msgid "Signature key ID"
@@ -9244,9 +9237,8 @@ msgid "Simple OGM-style chapter files"
 msgstr "Proste pliki rozdziałów typu OGM"
 
 #: src/common/kax_element_names.cpp:258
-#, fuzzy
 msgid "Simple block"
-msgstr "SimpleBlock"
+msgstr "Blok prosty"
 
 #: src/common/chapters/chapters.cpp:56
 #, boost-format
@@ -9531,9 +9523,8 @@ msgid "Tab &position in tab widgets:"
 msgstr "&Położenie zakładek w kartach:"
 
 #: src/common/kax_element_names.cpp:296
-#, fuzzy
 msgid "Tag"
-msgstr "Tagi"
+msgstr "Tag"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:391
 #, no-c-format
@@ -9545,13 +9536,12 @@ msgid "Tag extraction"
 msgstr "Wyodrębnianie tagów"
 
 #: src/common/kax_element_names.cpp:308
-#, fuzzy
 msgid "Tag language"
-msgstr "Język"
+msgstr "Język tagów"
 
 #: src/common/kax_element_names.cpp:309
 msgid "Tag language (IETF)"
-msgstr ""
+msgstr "Język tagów (IETF)"
 
 #: src/propedit/propedit_cli_parser.cpp:256
 msgid "Tag selectors"
@@ -10478,19 +10468,16 @@ msgid "The language for this track that players can use for automatic track sele
 msgstr "Język zaznaczonej ścieżki, którą odtwarzacze mogą użyć jako automatyczny wybór i odtworzyć użytkownikowi."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:336
-#, fuzzy
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "Wybrany tutaj język zostanie użyty dla ścieżek audio, nie mających w pliku źródłowym takiej właściwości."
+msgstr "Wybrany tutaj język jest używany dla ścieżek audio, dla których ich plik źródłowy nie zawiera takiej właściwości i dla których język nie został pobrany z nazwy pliku."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
-#, fuzzy
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "Wybrany tutaj język zostanie użyty dla ścieżek napisów, nie mających w pliku źródłowym takiej właściwości."
+msgstr "Wybrany tutaj język jest używany dla ścieżek napisów, dla których ich plik źródłowy nie zawiera takiej właściwości i dla których język nie został pobrany z nazwy pliku."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
-#, fuzzy
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "Wybrany tutaj język zostanie użyty dla ścieżek wideo, nie mających w pliku źródłowym takiej właściwości."
+msgstr "Wybrany tutaj język jest używany dla ścieżek wideo, dla których ich plik źródłowy nie zawiera takiej właściwości i dla których język nie został pobrany z nazwy pliku."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:184
 msgid "The language set here is also used when chapters are generated."
@@ -11297,9 +11284,9 @@ msgid "This must be comma-separated list of four numbers for the cropping to be 
 msgstr "Musi to być lista czterech liczb oddzielonych przecinkiem, określających stopień obcięcia obrazu, poczynając od boku lewego, górnego, prawego i dolnego, np. \"0,20,0,20\"."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:522
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "This only works with AC-3, DTS & TrueHD audio tracks."
-msgstr "Ta opcja działa wyłącznie ze ścieżkami DTS."
+msgstr "Ta opcja działa wyłącznie ze ścieżkami AC-3, DTS i TrueHD."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
 #, no-c-format
@@ -11435,7 +11422,7 @@ msgstr "Skalowanie kodów czasowych: %1%"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1678
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1692
 msgid "Timestamps and default duration"
-msgstr "Kody czasowe i domyślny czas trwania"
+msgstr "Znaczniki czasu i domyślny czas trwania"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:358
 #, no-c-format
@@ -11870,7 +11857,7 @@ msgstr "Użyteczne, gdy np. chcesz dokładnie dwa pliki."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:649
 msgid "User forum/sub-&Reddit"
-msgstr ""
+msgstr "Forum użytkowników/sub-&Reddit"
 
 #: src/extract/extract_cli_parser.cpp:106
 msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
@@ -12788,7 +12775,7 @@ msgstr "inflateInit() zakończone niepowodzeniem. Wynik: %1%\n"
 
 #: src/common/kax_info.cpp:1028
 msgid "key, "
-msgstr "klucz,"
+msgstr "klucz, "
 
 #: src/common/kax_info.cpp:654
 #, boost-format
@@ -12995,9 +12982,8 @@ msgid "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
 msgstr "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
 
 #: src/extract/extract_cli_parser.cpp:59
-#, fuzzy
 msgid "mkvextract <-h|--help|-V|--version>"
-msgstr "mkvextract <-h|-V>"
+msgstr "mkvextract <-h|--help|-V|--version>"
 
 #: src/extract/extract_cli_parser.cpp:47
 #, fuzzy
@@ -13099,9 +13085,8 @@ msgid "mkvtoolnix-gui <configuration file names>"
 msgstr "mkvtoolnix-gui <nazwy plików konfiguracyjnych>"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
-#, fuzzy
 msgid "mkvtoolnix-gui [--multiplex|--info|--edit-chapters|--edit-headers] <file names>"
-msgstr "mkvtoolnix-gui [--multiplex|--edit-chapters|--edit-headers] <nazwy plików>"
+msgstr "mkvtoolnix-gui [--multiplex|--info|--edit-chapters|--edit-headers] <nazwy plików>"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:39
 msgid "mkvtoolnix-gui [options] [file names]"
@@ -13301,9 +13286,9 @@ msgid "track name"
 msgstr "nazwa ścieżki"
 
 #: src/common/kax_info.cpp:220
-#, fuzzy, boost-format
+#, boost-format
 msgid "track number %1%, %2% frame(s), timestamp %3%"
-msgstr "Blok (numer ścieżki %1%, %2% klatek, kod czasowy %|3$.3f|s = %4%)"
+msgstr "numer ścieżki %1%, %2% klatka(-ek/-i), znacznik czasu %3%"
 
 #: src/extract/extract_cli_parser.cpp:50
 #, fuzzy
