@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-13 22:40+0100\n"
-"PO-Revision-Date: 2018-03-11 21:23+0000\n"
+"PO-Revision-Date: 2018-03-19 14:43+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -239,7 +239,7 @@ msgid ""
 msgstr ""
 "  --colour-matrix-coefficients <TID:n>\n"
 "                           Définit les coefficients de matrice de la vidéo utilisés pour\n"
-"                           dériver les valeurs de luma et chroma depuis les couleurs  rouge, vert\n"
+"                           déduire les valeurs de luma et chroma depuis les couleurs  rouge, vert\n"
 "                           et bleu primaires.\n"
 
 #: src/merge/mkvmerge.cpp:297
@@ -4604,18 +4604,16 @@ msgstr "Suivant le paramètre ci-dessous, cette langue peut aussi être utilisé
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
-#, fuzzy
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
-msgstr "Suivant le paramètre ci-dessous, cette langue peut aussi être utilisée si la langue du fichier source est « undetermined » (« und »)."
+msgstr "Suivant ce paramètre, la langue peut aussi être déduite du nom de fichier si la langue du fichier source est « undetermined » (« und »)."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
-msgstr "Dériver les horodatages de &fin depuis les horodatages de début"
+msgstr "Déduire les horodatages de &fin depuis les horodatages de début"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1450
-#, fuzzy
 msgid "Deriving track languages from file names"
-msgstr "Langues par défaut à définir pour les pistes"
+msgstr "Déduction des langues de pistes depuis les noms de  fichiers"
 
 #: src/common/property_element.cpp:195
 msgid "Describes the projection used for this video track (0 – 3)."
@@ -6036,7 +6034,7 @@ msgstr "Si le format OGM est utilisé et si le jeu de caractères du fichier n'e
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:86
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
-msgstr "Si les chapitres ont été chargés depuis un fichier Matroska, l'horodatage de fin du dernier chapitre du niveau le plus élevé sera dérivé de la durée du fichier."
+msgstr "Si les chapitres ont été chargés depuis un fichier Matroska, l'horodatage de fin du dernier chapitre du niveau le plus élevé sera déduit de la durée du fichier."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
 #, no-c-format
@@ -6050,15 +6048,15 @@ msgstr "Si le nombre est suivi de « ms », mettre au plus « n » millisecondes
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Si le fichier source ne contient pas une telle propriété pour une piste de sous-titres, alors la langue pourra être déduite du nom de fichier si elle correspond à certains motifs (par ex. «…[fr]… » pour le Français)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Si le fichier source ne contient pas une telle propriété pour une piste vidéo, alors la langue pourra être déduite du nom de fichier si elle correspond à certains motifs (par ex. «…[fr]… » pour le Français)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Si le fichier source ne contient pas une telle propriété pour une piste audio, alors la langue pourra être déduite du nom de fichier si elle correspond à certains motifs (par ex. «…[fr]… » pour le Français)."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
@@ -6789,7 +6787,7 @@ msgstr "Listage du contenu du fichier « %1 » dans le dossier « %2 »"
 #: src/mkvtoolnix-gui/info/tab.cpp:237
 #, no-c-format
 msgid "Loading…"
-msgstr ""
+msgstr "Chargement…"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:514
 #, no-c-format
@@ -7219,7 +7217,7 @@ msgstr "Des valeurs négatives sont autorisées."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:623
 #, no-c-format
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1480
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:146
@@ -8986,7 +8984,7 @@ msgstr "Définit l'algorithme de compression sans perte à utiliser pour cette p
 
 #: src/common/property_element.cpp:165
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."
-msgstr "Définit les coefficients de matrice de la vidéo utilisés pour dériver les valeurs de luma et chroma depuis les couleurs primaires rouge, vert et bleu."
+msgstr "Définit les coefficients de matrice de la vidéo utilisés pour déduire les valeurs de luma et chroma depuis les couleurs primaires rouge, vert et bleu."
 
 #: src/common/property_element.cpp:167
 msgid "Sets the number of coded bits for a colour channel."
@@ -10353,19 +10351,16 @@ msgid "The language for this track that players can use for automatic track sele
 msgstr "La langue que les lecteurs utiliseront pour la sélection automatique et l'affichage pour cette piste."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:336
-#, fuzzy
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "La langue sélectionnée ici est utilisée pour les pistes audio dont le fichier source ne dispose pas de cette propriété."
+msgstr "La langue sélectionnée ici est utilisée pour les pistes audio dont le fichier source ne dispose pas de cette propriété et pour lequel la langue n'a pas été déduite du nom de fichier."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
-#, fuzzy
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "La langue sélectionnée ici est utilisée pour les pistes de sous-titres dont le fichier source ne dispose pas de cette propriété."
+msgstr "La langue sélectionnée ici est utilisée pour les pistes de sous-titres dont le fichier source ne dispose pas de cette propriété et pour lequel la langue n'a pas été déduite du nom de fichier."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
-#, fuzzy
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "La langue sélectionnée ici est utilisée pour les pistes vidéo dont le fichier source ne dispose pas de cette propriété."
+msgstr "La langue sélectionnée ici est utilisée pour les pistes vidéo dont le fichier source ne dispose pas de cette propriété et pour lequel la langue n'a pas été déduite du nom de fichier."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:184
 msgid "The language set here is also used when chapters are generated."
