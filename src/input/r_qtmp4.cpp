@@ -2894,10 +2894,11 @@ qtmp4_demuxer_c::parse_aac_esds_decoder_config() {
   }
 
   mxdebug_if(m_debug_headers,
-             boost::format(" AAC: profile: %1%, sample_rate: %2%, channels: %3%, output_sample_rate: %4%, sbr: %5%\n")
+             boost::format(" AAC audio-specific config: profile: %1%, sample_rate: %2%, channels: %3%, output_sample_rate: %4%, sbr: %5%\n")
              % a_aac_audio_config->profile % a_aac_audio_config->sample_rate % a_aac_audio_config->channels % a_aac_audio_config->output_sample_rate % a_aac_audio_config->sbr);
 
-  a_channels   = a_aac_audio_config->channels;
+  if ((a_channels != 8) || (a_aac_audio_config->channels != 7))
+    a_channels = a_aac_audio_config->channels;
   a_samplerate = a_aac_audio_config->sample_rate;
 }
 

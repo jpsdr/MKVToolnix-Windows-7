@@ -39,6 +39,9 @@
   'document type read version' header fields are now updated if elements
   written by the changes require higher version numbers. Part of the fix for
   #2240.
+* mkvmerge: MP4 reader: AAC audio tracks signalling eight channels in the
+  track headers but only seven in the codec-specific configuration will be
+  treated as having eight channels.
 
 ## Build system changes
 
