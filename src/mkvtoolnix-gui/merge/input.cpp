@@ -514,7 +514,7 @@ Tab::setupInputToolTips() {
                    .arg(QY("Not needed for AAC tracks read from other container formats like MP4 or Matroska files.")));
   Util::setToolTip(ui->reduceToAudioCore,
                    Q("%1 %2")
-                   .arg(QY("Drops the lossless extensions from an audio track and keeps only its lossy core."))
+                   .arg(QY("Drops all HD extensions from an audio track and keeps only its lossy core."))
                    .arg(QY("This only works with DTS audio tracks.")));
   Util::setToolTip(ui->removeDialogNormalizationGain,
                    Q("%1 %2")
