@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-22 21:15+0100\n"
-"PO-Revision-Date: 2018-03-17 00:31+0100\n"
+"PO-Revision-Date: 2018-03-23 16:40+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -600,7 +600,11 @@ msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
-msgstr "  --reduce-to-core <TID>   Odrzuca rozszerzenie HD ze ścieżki DTS, zachowując wyłącznie stratny rdzeń (tzw. \"DTS Core\").\n"
+msgstr ""
+"  --reduce-to-core <TID>   Zachowuje tylko rdzeń ze ścieżek audio, które wspierają \n"
+"                           rozszerzenia HD zamiast kopiowania zarówna rdzenia,\n"
+"                           jak i rozszerzeń.\n"
+"\n"
 
 #: src/merge/mkvmerge.cpp:240
 msgid ""
@@ -1499,7 +1503,7 @@ msgstr "&Linia komend:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:220
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "Ograni&cz czasy początków i końców podrozdziałów, aby mieściły się w czasach swoich nadrzędnych rozdziałów"
+msgstr "&Ogranicz czasy początkowe i końcowe podrozdziałów, aby mieściły się w czasach swoich nadrzędnych rozdziałów"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:587
 msgid "&Copy command line to clipboard"
@@ -1677,7 +1681,7 @@ msgstr "&Multiplekser"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:217
 msgid "&Multiply start and end timestamps by the following factor:"
-msgstr "Po&mnóż czasy początków i końców rozdziałów o następujący współczynnik:"
+msgstr "Po&mnóż czasy początkowe i końcowe o następujący współczynnik:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
@@ -1826,9 +1830,8 @@ msgstr[1] "&Usuń załączniki"
 msgstr[2] "&Usuń załączniki"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:223
-#, fuzzy
 msgid "&Remove end timestamps"
-msgstr "&Ogranicz lub rozszerz czasy"
+msgstr "Usuń czasy &końcowe"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1377
 #, no-c-format
@@ -1915,7 +1918,7 @@ msgstr "&Pomiń plik"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:218
 msgid "&Sort chapters by their start and end timestamps"
-msgstr "Po&sortuj rozdziały według ich początków i końców"
+msgstr "Po&sortuj rozdziały według ich czasów początkowych i końcowych"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
 msgid "&Start && end:"
@@ -3561,7 +3564,7 @@ msgstr "K&onfiguracja aktywna"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:219
 msgid "C&onstrict or expand timestamps"
-msgstr "&Ogranicz lub rozszerz czasy"
+msgstr "Ogr&anicz lub rozszerz czasy"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:128
 msgid "C&opy to clipboard"
@@ -4399,7 +4402,7 @@ msgstr "Format nazw z pliku cue:"
 
 #: src/common/kax_element_names.cpp:212
 msgid "Cue point"
-msgstr ""
+msgstr "Punkt cue"
 
 #: src/common/kax_element_names.cpp:223
 #, fuzzy
@@ -4467,7 +4470,7 @@ msgstr ""
 
 #: src/common/kax_element_names.cpp:211
 msgid "Cues"
-msgstr ""
+msgstr "Cues"
 
 #: src/common/kax_info.cpp:571
 msgid "Cues (subentries will be skipped)"
@@ -4672,7 +4675,7 @@ msgstr "W zależności od tego ustawienia, język może również zostać pobran
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
-msgstr ""
+msgstr "Pobi&erz czasy końcowe z początkowych"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1450
 msgid "Deriving track languages from file names"
@@ -4926,9 +4929,9 @@ msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
 msgstr "Odrzuć ostatni rozdział z listy odtwarzania &Blu-ray, jeśli ów rozdział jest umiejscowiony na samym końcu filmu"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:517
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Drops all HD extensions from an audio track and keeps only its lossy core."
-msgstr "Odrzuca rozszerzenie HD ze ścieżki audio i zachowuje jedynie stratny rdzeń (tzw. \"DTS Core\")."
+msgstr "Odrzuca wszystkie rozszerzenia HD ze ścieżki audio i zachowuje jedynie jej stratny rdzeń."
 
 #: src/common/qt_kax_analyzer.cpp:104
 #: src/propedit/propedit.cpp:62
@@ -4968,7 +4971,7 @@ msgstr "Zamknij &program"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:221
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
-msgstr "&Rozszerz czasy początków i końców rozdziałów, aby uwzględnić w nich czasy minimalne/maksymalne wszystkich ich podrozdziałów"
+msgstr "&Rozszerz czasy początkowe i końcowe rozdziałów, aby uwzględnić w nich czasy minimalne/maksymalne wszystkich ich podrozdziałów"
 
 #: src/common/kax_element_names.cpp:80
 msgid "EBML CRC-32"
@@ -5278,7 +5281,7 @@ msgstr "Przykłady: 01:00:00 (co godzinę) lub 1800s (co 1800 sekund)."
 #: src/mkvtoolnix-gui/merge/output.cpp:369
 #, no-c-format
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
-msgstr "Przykłady: 01:00:00,01:30:00 (po jednej godzinie oraz po jednej godzinie i 30 minutach) or 180s,300s,00:10:00 (po trzech, pięciu i dziesięciu minutach)."
+msgstr "Przykłady: 01:00:00,01:30:00 (po jednej godzinie oraz po jednej godzinie i 30 minutach) lub 180s,300s,00:10:00 (po trzech, pięciu i dziesięciu minutach)."
 
 #: src/merge/mkvmerge.cpp:3130
 msgid "Exception details:"
@@ -6175,7 +6178,7 @@ msgstr "Jeśli wiadomo, że ścieżki są obecne w pliku, ale nie zostały znale
 #: src/mkvtoolnix-gui/merge/output.cpp:367
 #, no-c-format
 msgid "If two or more timestamps are used then you have to separate them with commas."
-msgstr "Jeśli zostały podane dwa lub więcej kody czasowe, musisz oddzielić je przecinkami."
+msgstr "Jeśli zostały podane dwa lub więcej znaczniki czasu, musisz oddzielić je przecinkami."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:617
 #, no-c-format
@@ -6273,12 +6276,12 @@ msgstr "Zamiast tego, taki plik musi być ustawiony poprzez opcję \"Plik rozdzi
 #: src/mkvtoolnix-gui/merge/input.cpp:1157
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
-msgstr "Zamiast tego taki plik musi być ustawiony poprzez opcję \"tagi globalne\" na zakładce \"wyjście\"."
+msgstr "Zamiast tego, taki plik musi być ustawiony poprzez opcję \"Tagi globalne\" na zakładce \"Wyjście\"."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1139
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
-msgstr "Zamiast tego taki plik musi być ustawiony poprzez opcję \"informacje o segmencie\" na zakładce \"wyjście\"."
+msgstr "Zamiast tego, taki plik musi być ustawiony poprzez opcję \"Informacje o segmencie\" na zakładce \"Wyjście\"."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1406
 msgid "Interface &language:"
@@ -8691,7 +8694,7 @@ msgstr "Trwające zadania nie mogą zostać usunięte."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
 msgid "S&hift start and end timestamps by the following amount:"
-msgstr "Przesuń czasy początków i &końców rozdziałów o następującą wielkość:"
+msgstr "&Przesuń czasy początkowe i końcowe o następującą wielkość:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:586
 msgid "S&how command line"
@@ -8893,7 +8896,7 @@ msgstr "Nazwa segmentu"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1726
 msgid "Segment info:"
-msgstr "Informacja o segmencie:"
+msgstr "Informacje o segmencie:"
 
 #: src/common/kax_element_names.cpp:83
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:481
@@ -8988,7 +8991,7 @@ msgstr "Wybierz pliki tagów"
 #: src/mkvtoolnix-gui/merge/input.cpp:972
 #, no-c-format
 msgid "Select timestamp file"
-msgstr "Wybierz plik kodów czasowych"
+msgstr "Wybierz plik ze znacznikami czasu"
 
 #: src/mkvtoolnix-gui/forms/util/side_by_side_multi_select.h:129
 msgid "Selected:"
@@ -9054,11 +9057,11 @@ msgstr "Ustawia UID dla użycia z opcją \"--add-attachment\", \"--replace-attac
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:216
 msgid "Set the chapter names' &languages:"
-msgstr "Usta&w język nazw rozdziałów:"
+msgstr "&Ustaw język nazw rozdziałów:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
 msgid "Set the chapter names' co&untries"
-msgstr "&Ustaw państwo nazw rozdziałów:"
+msgstr "Usta&w państwo nazw rozdziałów:"
 
 #: src/propedit/propedit_cli_parser.cpp:235
 msgid "Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
@@ -9990,7 +9993,7 @@ msgstr "Bieżące ustawienia multipleksowania zostaną zamknięte."
 #: src/merge/generic_packetizer.cpp:1334
 #, boost-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
-msgstr "Obecny pakiet kodów czasowych jest mniejszy od poprzedniego. To przeważnie oznacza, że plik źródłowy Matroski nie został w 100%% poprawnie utworzony. Kody czasowe we wszystkich pakietach zostaną przesunięte o %1%ms, aby nie utracić żadnych danych. To może spowodować desynchronizację obrazu i dźwięku, co może być skorygowane przy pomocy opcji mkvmerge \"--sync\". Jeśli już używasz tej funkcji \"--sync\" i dalej otrzymujesz to ostrzeżenie, NIE przejmuj się — to jest normalne. Jeśli ten błąd pojawia się więcej niż jeden raz i Ty otrzymujesz tę wiadomość więcej niż jeden raz dla konkretnej ścieżki, wtedy może to oznaczać niedopracowany plik źródłowy lub błąd mkvmerge. W tym przypadku proszę skontaktować się z autorem programu: Moritz Bunkus <moritz@bunkus.org>.\n"
+msgstr "Obecny pakiet znaczników czasu jest mniejszy od poprzedniego. To przeważnie oznacza, że plik źródłowy Matroski nie został w 100%% poprawnie utworzony. Znaczniki czasu we wszystkich pakietach zostaną przesunięte o %1%ms, aby nie utracić żadnych danych. To może spowodować desynchronizację obrazu i dźwięku, co może być skorygowane przy pomocy opcji mkvmerge \"--sync\". Jeśli już używasz tej funkcji \"--sync\" i dalej otrzymujesz to ostrzeżenie, NIE przejmuj się — to jest normalne. Jeśli ten błąd pojawia się więcej niż jeden raz i Ty otrzymujesz tę wiadomość więcej niż jeden raz dla konkretnej ścieżki, wtedy może to oznaczać niedopracowany plik źródłowy lub błąd mkvmerge. W tym przypadku proszę skontaktować się z autorem programu: Moritz Bunkus <moritz@bunkus.org>.\n"
 
 #: src/common/kax_analyzer.cpp:176
 msgid "The data in the file is corrupted and cannot be modified safely"
@@ -10411,7 +10414,7 @@ msgstr "Format przechodzi na domyślny %H:%M:%S, gdy żaden nie został podany."
 #: src/mkvtoolnix-gui/merge/output.cpp:377
 #, no-c-format
 msgid "The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."
-msgstr "Wpisane wartości mogą być w formacie zarówno \"GG:MM:SS.nnnnnnnnn\", jak i liczbą z jednostkami \"s\", \"ms\" lub \"us\"."
+msgstr "Wpisane wartości mogą być w formacie zarówno \"HH:MM:SS.nnnnnnnnn\", jak i liczbą z jednostkami \"s\", \"ms\" lub \"us\"."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:368
 #, no-c-format
@@ -10880,17 +10883,17 @@ msgstr "Trzeci tryb wyodrębnia załączniki z pliku źródłowego."
 #: src/merge/timestamp_factory.cpp:66
 #, boost-format
 msgid "The timestamp file '%1%' contains an unsupported/unrecognized format (version %2%).\n"
-msgstr "Plik kodów czasowych \"%1%\" zawiera nieobsługiwany/nierozpoznany format (wersja %2%).\n"
+msgstr "Plik ze znacznikami czasu \"%1%\" zawiera nieobsługiwany/nierozpoznany format (wersja %2%).\n"
 
 #: src/merge/timestamp_factory.cpp:52
 #, boost-format
 msgid "The timestamp file '%1%' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"
-msgstr "Plik kodów czasowych \"%1%\" zawiera nieobsługiwany/nierozpoznany format linii. Pierwsza linia powinna wyglądać, jak \"# timestamp format v1\".\n"
+msgstr "Plik ze znacznikami czasu \"%1%\" zawiera nieobsługiwany/nierozpoznany format linii. Pierwsza linia musi wyglądać, jak \"# timestamp format v1\".\n"
 
 #: src/merge/timestamp_factory.cpp:35
 #, boost-format
 msgid "The timestamp file '%1%' could not be opened for reading.\n"
-msgstr "Plik kodów czasowych \"%1%\" nie może zostać otwarty w celu wczytania.\n"
+msgstr "Plik ze znacznikami czasu \"%1%\" nie może zostać otwarty w celu wczytania.\n"
 
 #: src/merge/timestamp_factory.cpp:89
 #: src/merge/timestamp_factory.cpp:97
@@ -10898,18 +10901,18 @@ msgstr "Plik kodów czasowych \"%1%\" nie może zostać otwarty w celu wczytania
 #: src/merge/timestamp_factory.cpp:305
 #, boost-format
 msgid "The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n"
-msgstr "Plik kodów czasowych \"%1%\" nie zawiera prawidłowej linii \"Assume\" z domyślną liczbą klatek na sekundę.\n"
+msgstr "Plik ze znacznikami czasu \"%1%\" nie zawiera prawidłowej linii \"Assume\" z domyślną liczbą klatek na sekundę.\n"
 
 #: src/merge/timestamp_factory.cpp:340
 #, boost-format
 msgid "The timestamp file '%1%' does not contain a valid 'Gap' line with the duration of the gap.\n"
-msgstr "Plik kodów czasowych \"%1%\" nie zawiera prawidłowej linii \"Gap\" zawierającej czas trwania przerwy.\n"
+msgstr "Plik ze znacznikami czasu \"%1%\" nie zawiera prawidłowej linii \"Gap\", zawierającej czas trwania przerwy.\n"
 
 #: src/merge/timestamp_factory.cpp:242
 #: src/merge/timestamp_factory.cpp:369
 #, boost-format
 msgid "The timestamp file '%1%' does not contain any valid entry.\n"
-msgstr "Plik kodów czasowych \"%1%\" nie zawiera żadnej poprawnej pozycji.\n"
+msgstr "Plik ze znacznikami czasu \"%1%\" nie zawiera żadnej poprawnej pozycji.\n"
 
 #: src/merge/timestamp_factory.cpp:218
 #, boost-format
@@ -10918,23 +10921,23 @@ msgid ""
 "\n"
 "If you really have to specify non-sorted timestamps then use the timestamp format v4. It is identical to format v2 but allows non-sorted timestamps.\n"
 msgstr ""
-"Plik kodów czasowych v2 \"%1%\" zawiera kody czasowe, które nie są uporządkowane. Było to wymuszone z powodu błędu w wersjach mkvmerge do wersji 1.5.0 włącznie, w ścieżkach, do których kody czasowe odnosiły się do klatek typu B. Rozpoczynając od wersji 1.5.1 mkvmerge traktuje taką sytuację poprawnie i kody czasowe w plikach muszą być uporządkowane. Na przykład, kolejność klatek \"IPBBP...\" przy 25 kl/s wymaga, aby kody czasowe  miały wartości \"0\", \"40\", \"80\", \"120\" itd., a nie \"0\", \"120\", \"40\", \"80\" itd.\n"
+"Plik ze znacznikami czasu v2 \"%1%\" zawiera znaczniki czasu, które nie są uporządkowane. Było to wymuszone z powodu błędu w wersjach mkvmerge do wersji 1.5.0 włącznie, w ścieżkach, do których znaczniki czasu odnosiły się do klatek typu B. Rozpoczynając od wersji 1.5.1, mkvmerge traktuje teraz taką sytuację poprawnie i znaczniki czasu w plikach muszą być uporządkowane. Na przykład, kolejność klatek \"IPBBP...\" przy 25 kl/s wymaga, aby znaczniki czasu miały wartości \"0\", \"40\", \"80\", \"120\" itd., a nie \"0\", \"120\", \"40\", \"80\" itd.\n"
 "\n"
-"Jeśli naprawdę musisz utworzyć nieuporządkowane kody czasowe, to użyj formatu pliku kodów czasowych w wersji v4. Jest on identyczny do formatu v2, ale pozwala na nieuporządkowane kody czasowe.\n"
+"Jeśli naprawdę musisz utworzyć nieuporządkowane znaczniki czasu, użyj formatu pliku ze znacznikami czasu w wersji v4. Jest on identyczny do formatu v2, ale pozwala na nieuporządkowane znaczniki czasu.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:360
 #, no-c-format
 msgid "The timestamps after which a new destination file is started."
-msgstr "Kody czasowe, po których rozpoczyna się nowy plik docelowy."
+msgstr "Znaczniki czasu, po których rozpoczyna się nowy plik docelowy."
 
 #: src/input/r_ogm.cpp:605
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
-msgstr "Kody czasowe dla tej ścieżki zostały zresetowane w środku pliku. To nie jest obsługiwane. Obecny pakiet zostanie pominięty.\n"
+msgstr "Znaczniki czasu dla tej ścieżki zostały zresetowane w środku pliku. To nie jest obsługiwane. Obecny pakiet zostanie pominięty.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:361
 #, no-c-format
 msgid "The timestamps refer to the whole stream and not to each individual destination file."
-msgstr "Kody czasowe odnoszą się do całego strumienia, a nie do każdego pojedynczego pliku docelowego."
+msgstr "Znaczniki czasu odnoszą się do całego strumienia, a nie do każdego pojedynczego pliku docelowego."
 
 #: src/common/property_element.cpp:109
 msgid "The title for the whole movie."
@@ -11407,11 +11410,11 @@ msgstr ""
 
 #: src/extract/extract_cli_parser.cpp:121
 msgid "Timestamp extraction"
-msgstr "Wyodrębnianie kodów czasowych"
+msgstr "Wyodrębnianie znaczników czasu"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1697
 msgid "Timestamp file:"
-msgstr "Plik z kodami czasowymi:"
+msgstr "Plik ze znacznikami czasu:"
 
 #: src/common/kax_element_names.cpp:84
 #: src/common/kax_element_names.cpp:201
@@ -11427,7 +11430,7 @@ msgstr "Znaczniki czasu i domyślny czas trwania"
 #: src/mkvtoolnix-gui/merge/output.cpp:358
 #, no-c-format
 msgid "Timestamps:"
-msgstr "Kody czasowe:"
+msgstr "Znaczniki czasu:"
 
 #: src/common/kax_element_names.cpp:96
 #: src/common/property_element.cpp:109
@@ -12528,7 +12531,7 @@ msgstr "Możesz określić do dziewięciu cyfr dla liczby nanosekund \"nnnnnnnnn
 #: src/mkvtoolnix-gui/merge/output.cpp:155
 #, no-c-format
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
-msgstr "Możesz dzielić na fragmenty o ustalonym czasie trwania, wg kodów czasowych, wg numerów klatek/pól lub wg numerów rozdziałów."
+msgstr "Możesz dzielić na fragmenty o ustalonym czasie trwania, wg znaczników czasu, wg numerów klatek/pól lub wg numerów rozdziałów."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1289
 #, no-c-format
@@ -12548,12 +12551,12 @@ msgstr "Musisz wprowadzić nazwę pliku docelowego, zanim rozpoczniesz multiplek
 #: src/mkvtoolnix-gui/merge/output.cpp:349
 #, no-c-format
 msgid "You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."
-msgstr "Możesz pominąć liczbę godzin \"GG\" i liczbę nanosekund \"nnnnnnnnn\"."
+msgstr "Możesz pominąć liczbę godzin \"HH\" i liczbę nanosekund \"nnnnnnnnn\"."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:364
 #, no-c-format
 msgid "You may omit the number of hours 'HH'."
-msgstr "Możesz pominąć liczbę godzin \"GG\"."
+msgstr "Możesz pominąć liczbę godzin \"HH\"."
 
 #: src/common/compression/zlib.cpp:51
 #: src/common/compression/zlib.cpp:88
