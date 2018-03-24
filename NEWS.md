@@ -42,6 +42,8 @@
 * mkvmerge: MP4 reader: AAC audio tracks signalling eight channels in the
   track headers but only seven in the codec-specific configuration will be
   treated as having eight channels.
+* source code: fixed a compilation error on FreeBSD with clang++ 5.0. Fixes
+  #2255.
 
 ## Build system changes
 

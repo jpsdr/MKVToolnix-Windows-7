@@ -96,7 +96,7 @@ strip_comments(nlohmann::json::string_t const &data)  {
   } catch (mtx::mm_io::exception &) {
   }
 
-  return std::string{reinterpret_cast<char *>(out.get_buffer()), out.getFilePointer()};
+  return std::string{reinterpret_cast<char *>(out.get_buffer()), static_cast<std::string::size_type>(out.getFilePointer())};
 }
 
 }
