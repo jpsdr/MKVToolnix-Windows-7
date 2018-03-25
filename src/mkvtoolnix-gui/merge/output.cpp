@@ -321,8 +321,10 @@ Tab::setupSplitModeLabelAndToolTips() {
 
   ui->splitOptionsLabel->setText(label);
 
-  if (MuxConfig::DoNotSplit == m_config.m_splitMode)
+  if (MuxConfig::DoNotSplit == m_config.m_splitMode) {
+    ui->splitOptions->setToolTip({});
     return;
+  }
 
   auto options = ui->splitOptions->currentText();
 
