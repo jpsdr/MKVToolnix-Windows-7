@@ -316,11 +316,16 @@ Tab::setupSplitModeLabelAndToolTips() {
                 .arg(QY("A chapter starting at 0s is never considered for splitting and discarded silently."))
                 .arg(QY("This mode only considers the top-most level of chapters across all edition entries.")));
 
-  }
+  } else
+    label    = QY("Options:");
+
+  ui->splitOptionsLabel->setText(label);
+
+  if (MuxConfig::DoNotSplit == m_config.m_splitMode)
+    return;
 
   auto options = ui->splitOptions->currentText();
 
-  ui->splitOptionsLabel->setText(label);
   ui->splitOptions->clear();
   ui->splitOptions->addItems(entries);
   ui->splitOptions->setCurrentText(options);
@@ -428,13 +433,7 @@ Tab::onSplitModeChanged(int newMode) {
   auto splitMode       = static_cast<MuxConfig::SplitMode>(newMode);
   m_config.m_splitMode = splitMode;
 
-  if (MuxConfig::DoNotSplit == splitMode) {
-    Util::enableWidgets(m_splitControls, false);
-    return;
-  }
-
-  Util::enableWidgets(m_splitControls, true);
-
+  Util::enableWidgets(m_splitControls, MuxConfig::DoNotSplit != splitMode);
   setupSplitModeLabelAndToolTips();
 }
 
