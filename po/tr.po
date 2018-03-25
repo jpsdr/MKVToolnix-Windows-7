@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-22 21:15+0100\n"
+"POT-Creation-Date: 2018-03-25 18:51+0200\n"
 "PO-Revision-Date: 2018-03-14 19:02+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2543,22 +2543,22 @@ msgstr "<Kaydedilmemiş dosya>"
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "İz numarası %2% için %1% zaman damgasında bir blok bulundu. Ancak, bu iz numarası için bulunan başlıklar yok. Blok atlanacaktır.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:417
+#: src/mkvtoolnix-gui/merge/output.cpp:316
 #, no-c-format
 msgid "A chapter starting at 0s is never considered for splitting and discarded silently."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:383
+#: src/mkvtoolnix-gui/merge/output.cpp:282
 #, no-c-format
 msgid "A comma-separated list of frame/field number ranges of content to keep."
 msgstr "Tutmak için içeriğin kare/alan numarası aralığının virgülle ayrılmış listesi."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:400
+#: src/mkvtoolnix-gui/merge/output.cpp:299
 #, no-c-format
 msgid "A comma-separated list of frame/field numbers after which to split."
 msgstr "Bölündükten sonraki kare/alan numaralarının virgülle ayrılmış listesi."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:373
+#: src/mkvtoolnix-gui/merge/output.cpp:272
 #, no-c-format
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "Tutmak için içeriğin zaman damgası aralığının virgülle ayrılmış listesi."
@@ -2607,8 +2607,8 @@ msgstr ""
 "Birçok diğerleri (128 bit) arasından şu anki parçayı tanımlamak\n"
 "için rastgele oluşturulmuş benzersiz ID."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:391
-#: src/mkvtoolnix-gui/merge/output.cpp:407
+#: src/mkvtoolnix-gui/merge/output.cpp:290
+#: src/mkvtoolnix-gui/merge/output.cpp:306
 #, no-c-format
 msgid "A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."
 msgstr "Tek bir Matroska bloğu ya tam bir kare (aşamalı içerik için) ya da tek bir alan (geçişli içerik için) içerir."
@@ -3082,7 +3082,7 @@ msgstr "Tüm diğer dizgiler tıpkı iz başlığı seçicileri gibi çalışır
 msgid "All supported media files"
 msgstr "Tüm destek. ortam dosyaları"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:333
+#: src/mkvtoolnix-gui/merge/output.cpp:232
 #, no-c-format
 msgid "All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 msgstr "Tüm birimler 1024'e (G = 1024^3, M = 1024^2, K = 1024) dayanır."
@@ -3213,8 +3213,8 @@ msgstr "MPEG4 bit akışlarını çözümler, her kareyi bir Matroska bloğu iç
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "%1% iz için başka bir varsayılan iz zaten ayarlandı. İz %2% / '%3%' için 'varsayılan' işareti ayarlanmayacaktır.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:217
 #: src/mkvtoolnix-gui/merge/output.cpp:218
+#: src/mkvtoolnix-gui/merge/output.cpp:219
 #, no-c-format
 msgid "Any option given here will be added at the end of the mkvmerge command line."
 msgstr "Burada verilen herhangi bir seçenek mkvmerge komut satırının sonuna eklenecektir."
@@ -3754,7 +3754,7 @@ msgstr "Bölüm dili (IETF)"
 msgid "Chapter mass modification"
 msgstr "Bölüm toplu değiştirme"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:411
+#: src/mkvtoolnix-gui/merge/output.cpp:310
 #, no-c-format
 msgid "Chapter numbers:"
 msgstr "Bölüm numaraları:"
@@ -4199,7 +4199,7 @@ msgstr "Ülke"
 msgid "Create WebM compliant file"
 msgstr "WebM uyumlu dosya oluştur"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:211
+#: src/mkvtoolnix-gui/merge/output.cpp:212
 msgid "Create a WebM compliant file."
 msgstr "WebM uyumlu dosya oluşturur."
 
@@ -4881,7 +4881,7 @@ msgid "Duration"
 msgstr "Süre"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:243
-#: src/mkvtoolnix-gui/merge/output.cpp:345
+#: src/mkvtoolnix-gui/merge/output.cpp:244
 #, no-c-format
 msgid "Duration:"
 msgstr "Süre:"
@@ -4933,16 +4933,16 @@ msgstr "EBML geçersiz"
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "KÖTÜ dahili hata! (bilinmeyen dosya türü). %1%\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:169
+#: src/mkvtoolnix-gui/merge/output.cpp:170
 msgid "Each file created contains one segment, and each segment has one segment UID."
 msgstr "Oluşturulmuş her dosya bir parça içerir ve her parça bir parça UID'sine sahiptir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:384
+#: src/mkvtoolnix-gui/merge/output.cpp:283
 #, no-c-format
 msgid "Each range consists of a start and end frame/field number with a '-' in the middle, e.g. '157-238'."
 msgstr "Her aralık tam ortada '-' ile başlama ve bitiş kare/alan numarasından oluşur, örneğin '157-238'."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:375
+#: src/mkvtoolnix-gui/merge/output.cpp:274
 #, no-c-format
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr "Her aralık tam ortada '-' ile başlama ve bitiş zaman damgasından oluşur, örneğin '00:01:15-00:03:20'."
@@ -4985,7 +4985,7 @@ msgstr "Yayın/Bölüm"
 msgid "Either fix the error or remove the configuration before closing the preferences dialog."
 msgstr "Tercihler iletisini kapatmadan önce ya hatayı düzeltin ya da yapılandırmayı kaldırın."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
 msgstr "Ya tüm bölümleri seçen 'tümü' kelimesi ya da bölünmeden önceki bölüm numaralarının virgülle ayrılmış listesi."
@@ -5017,7 +5017,7 @@ msgstr "İzlerin kopyalanmasını dillerine göre etkinleştirme"
 msgid "Enabled"
 msgstr "Etkinleştirildi"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:154
+#: src/mkvtoolnix-gui/merge/output.cpp:155
 #, no-c-format
 msgid "Enables splitting of the output into more than one file."
 msgstr "Çıktı dosyasını birden fazla dosyaya bölmeyi etkinleştirir."
@@ -5201,12 +5201,12 @@ msgstr "Örnek"
 msgid "Examples"
 msgstr "Örnekler"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:351
+#: src/mkvtoolnix-gui/merge/output.cpp:250
 #, no-c-format
 msgid "Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds)."
 msgstr "Örnekler: 01:00:00 (bir saat sonra) ya da 1800s (1800 saniye sonra)."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:369
+#: src/mkvtoolnix-gui/merge/output.cpp:268
 #, no-c-format
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Örnekler: 01:00:00,01:30:00 (bir saat sonra ve bir saat otuz dakika sonra) ya da 180s,300s,00:10:00 (üç, beş ve on dakika sonra)."
@@ -5512,9 +5512,9 @@ msgstr "Kayan noktalı sayı"
 msgid "For all frames"
 msgstr "Tüm kareler için"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:164
-#: src/mkvtoolnix-gui/merge/output.cpp:172
+#: src/mkvtoolnix-gui/merge/output.cpp:165
 #: src/mkvtoolnix-gui/merge/output.cpp:173
+#: src/mkvtoolnix-gui/merge/output.cpp:174
 #, no-c-format
 msgid "For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."
 msgstr "Dosya/parça bağlamasının geniş kapsamlı açıklaması ve bu özellik için lütfen mkvmerge'ün belgelerini okuyun."
@@ -5614,7 +5614,7 @@ msgstr "Kare oranı"
 msgid "Frame with size %1%%2%%3%"
 msgstr "Boyutu %1%%2%%3% olan kare"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:398
+#: src/mkvtoolnix-gui/merge/output.cpp:297
 #, no-c-format
 msgid "Frames/fields:"
 msgstr "Kareler/alanlar:"
@@ -5850,22 +5850,22 @@ msgstr "Eğer burada bir karakter kümesi seçilirse, kullanıcıya sormak yerin
 msgid "If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."
 msgstr "Eğer burada bir karakter kümesi seçilirse, program karakter kümesi girişini otomatik olarak yeni olarak eklenen metin altyazı izleri için bu değere ayarlar."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:395
+#: src/mkvtoolnix-gui/merge/output.cpp:294
 #, no-c-format
 msgid "If a range's start number is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
 msgstr "Eğer aralığın başlama numarası ön eki '+' ise o zaman içeriği önceki aralıktaki gibi aynı dosyaya yazılacaktır. Aksi halde bu aralık için yeni bir dosya oluşturulacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:378
+#: src/mkvtoolnix-gui/merge/output.cpp:277
 #, no-c-format
 msgid "If a range's start timestamp is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
 msgstr "Eğer aralığın başlama zaman damgası ön eki '+' ise o zaman içeriği önceki aralıktaki gibi aynı dosyaya yazılacaktır. Aksi halde bu aralık için yeni bir dosya oluşturulacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:293
 #, no-c-format
 msgid "If a start number is left out then the previous range's end number is used, or the start of the file if there was no previous range."
 msgstr "Eğer başlama numarası atlanırsa o zaman önceki aralığın bitiş numarası ya da önceki aralık olmadıysa dosyanın başlangıcı kullanılır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:376
+#: src/mkvtoolnix-gui/merge/output.cpp:275
 #, no-c-format
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
 msgstr "Eğer başlama zaman damgası atlanırsa o zaman önceki aralığın bitiş zaman damgası ya da önceki aralık olmadıysa dosyanın başlangıcı kullanılır."
@@ -5970,11 +5970,11 @@ msgstr "Eğer etkinleştirildiyse, tüm işlerin uyarı ve hata sayaçları ve d
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
 msgstr "Eğer etkinleştirildiyse, bu tür izler her zaman diline bakılmaksızın kopyalanması için ayarlanacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:171
+#: src/mkvtoolnix-gui/merge/output.cpp:172
 msgid "If fewer UIDs are specified than segments are created then random UIDs will be created for them."
 msgstr "Eğer oluşturulmuş parçalardan daha az UID'ler belirtildiyse onlar için rastgele UID'ler oluşturulacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:350
+#: src/mkvtoolnix-gui/merge/output.cpp:249
 #, no-c-format
 msgid "If given then you may use up to nine digits after the decimal point."
 msgstr "Eğer verilirse o zaman ondalık noktasından sonra dokuz rakama kadar kullanabilirsiniz."
@@ -5989,7 +5989,7 @@ msgstr "Eğer 'DELAY' kelimesinin ardında bir sayı içeriyorsa, dosya içinde 
 msgid "If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all."
 msgstr "Eğer boş bırakılırsa o zaman izin orijinal stereo kipi tutulacaktır ya da eğer birine sahip olmadıysa, hiçbir şekilde hiçbiri ayarlanmayacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:170
+#: src/mkvtoolnix-gui/merge/output.cpp:171
 msgid "If more segment UIDs are specified than segments are created then the surplus UIDs are ignored."
 msgstr "Eğer oluşturulmuş parçalardan daha fazla parça UID'leri belirtildiyse o zaman artan UID'ler yoksayılır."
 
@@ -5998,17 +5998,17 @@ msgstr "Eğer oluşturulmuş parçalardan daha fazla parça UID'leri belirtildiy
 msgid "If no unit is given, 'fps' will be used."
 msgstr "Eğer birim verilmezse, 'fps' kullanılacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:388
-#: src/mkvtoolnix-gui/merge/output.cpp:404
+#: src/mkvtoolnix-gui/merge/output.cpp:287
+#: src/mkvtoolnix-gui/merge/output.cpp:303
 #, no-c-format
 msgid "If no video track is output no splitting will occur."
 msgstr "Eğer çıktı olan görüntü izi yoksa bölme meydana gelmeyecek."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:207
+#: src/mkvtoolnix-gui/merge/output.cpp:208
 msgid "If nothing is entered the default 'Chapter <NUM:2>' will be used."
 msgstr "Eğer hiçbir şey girilmezse varsayılan 'Bölüm <NUM:2>' kullanılacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:196
+#: src/mkvtoolnix-gui/merge/output.cpp:197
 #, boost-format
 msgid "If nothing is entered then '%p - %t' will be used."
 msgstr "Eğer hiçbir şey girilmezse o zaman '%p - %t' kullanılacaktır."
@@ -6028,7 +6028,7 @@ msgstr "Eğer 'otomatik olarak belirle' ayarlıysa o zaman mkvmerge sıkıştır
 msgid "If set to 'no' then the selected tracks will not be copied to the destination file."
 msgstr "Eğer 'hayır' olarak ayarlanırsa o zaman seçilen izler hedef dosyaya kopyalanmayacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:188
+#: src/mkvtoolnix-gui/merge/output.cpp:189
 #, no-c-format
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
 msgstr "Eğer OGM biçimi kullanılırsa ve dosyanın karakter kümesi tanınmazsa o zaman bu seçenek bunu düzeltmek için kullanılabilir."
@@ -6094,7 +6094,7 @@ msgstr "Eğer bu seçenek etkinleştirilirse, GKA, son kaynak dosyası her kald�
 msgid "If tracks are known to be present but not found, the percentage to probe can be changed here."
 msgstr "Eğer izin mevcut olduğu biliniyorsa, ama bulunamadıysa, araştırma için yüzde burada değiştirilebilir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:367
+#: src/mkvtoolnix-gui/merge/output.cpp:266
 #, no-c-format
 msgid "If two or more timestamps are used then you have to separate them with commas."
 msgstr "Eğer iki veya daha fazla zaman damgası kullanıldıysa o zaman onları virgüllerle ayırmak zorundasınız."
@@ -6104,7 +6104,7 @@ msgstr "Eğer iki veya daha fazla zaman damgası kullanıldıysa o zaman onları
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "Eğer aynı hedef dosya ile başka bir iş eklerseniz, o zaman önceden oluşturulan dosyanın üzerine yazılacaktır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:160
+#: src/mkvtoolnix-gui/merge/output.cpp:161
 msgid "If you leave this empty then there is no limit for the number of files mkvmerge might create."
 msgstr "Eğer bunu boş bırakırsanız o zaman mkvmerge'ün oluşturabilir dosya sayısı için sınır yoktur."
 
@@ -6139,7 +6139,7 @@ msgstr "Dosyaların ve izlerin sağında &kaydırılabilir bir sütun içinde"
 msgid "In a tab &widget below the files and tracks"
 msgstr "Dosyaların ve izlerin yukarısında bir sekme &parçacığı içinde"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:202
+#: src/mkvtoolnix-gui/merge/output.cpp:203
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
 msgstr "Sabitlenmiş aralıklar içinde: bölümler sabitlenmiş aralıklar içinde oluşturulur, örn. her 30 saniye."
 
@@ -6603,8 +6603,8 @@ msgstr "Varsayılanı 4 bayttır, ancak 65535 bayttan daha büyük bir kare veya
 msgid "It does not consist of a track ID and a value separated by a colon."
 msgstr "Bu, bir iz ID'sinden ve iki nokta üst üste ile ayrılmış bir değerden meydana gelmez."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:183
-#: src/mkvtoolnix-gui/merge/output.cpp:189
+#: src/mkvtoolnix-gui/merge/output.cpp:184
+#: src/mkvtoolnix-gui/merge/output.cpp:190
 #, no-c-format
 msgid "It is ignored for XML chapter files."
 msgstr "Bu, XML bölüm dosyaları için yoksayılır."
@@ -6943,7 +6943,7 @@ msgstr "Matroska ses/görüntü dosyaları"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:703
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:182
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
-#: src/mkvtoolnix-gui/merge/output.cpp:277
+#: src/mkvtoolnix-gui/merge/output.cpp:390
 #, no-c-format
 msgid "Matroska files"
 msgstr "Matroska dosyaları"
@@ -7285,7 +7285,7 @@ msgstr "Hiç 'EBML başı' öğesi bulunamadı."
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "İlk karede bulunan AC-3 başlığı yok; iz atlanacaktır.\n"
 
-#: src/input/r_qtmp4.cpp:3330
+#: src/input/r_qtmp4.cpp:3331
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "İlk karede bulunan DTS başlığı yok; iz atlanacaktır.\n"
 
@@ -7904,8 +7904,8 @@ msgstr "İndekse güvenmek yerine bütün dosyayı ayrıştırın."
 msgid "Parsing file"
 msgstr "Dosya ayrıştırılıyor"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:372
-#: src/mkvtoolnix-gui/merge/output.cpp:381
+#: src/mkvtoolnix-gui/merge/output.cpp:271
+#: src/mkvtoolnix-gui/merge/output.cpp:280
 #, no-c-format
 msgid "Parts:"
 msgstr "Kısımlar:"
@@ -8234,17 +8234,17 @@ msgstr "Quicktime/MP4 okuyucusu: 'mdat' atomu bulunmadı. Bulunan film verisi yo
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 okuyucusu: %2%'de geçersiz iri parça boyutu %1%.\n"
 
-#: src/input/r_qtmp4.cpp:3380
+#: src/input/r_qtmp4.cpp:3381
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: MPEG4 kısım 10/AVC izi %1%, çözücü yapılandırmasında eksik. Bu iz atlanıyor.\n"
 
-#: src/input/r_qtmp4.cpp:3406
+#: src/input/r_qtmp4.cpp:3407
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: MPEG4 izi %1% eksik esds atomu/çözücü yapılandırması. Bu iz atlanıyor.\n"
 
-#: src/input/r_qtmp4.cpp:3390
+#: src/input/r_qtmp4.cpp:3391
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: MPEG4 kısım 2/HEVC izi %1%, çözücü yapılandırmasında eksik. Bu iz atlanıyor.\n"
@@ -8263,17 +8263,17 @@ msgstr "Quicktime/MP4 okuyucusu: İz ID %1% için akış tanımlama atomu içind
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 okuyucusu: 'Zaman ölçeği' parametresi 0'dır. Bu desteklenmez.\n"
 
-#: src/input/r_qtmp4.cpp:3348
+#: src/input/r_qtmp4.cpp:3349
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: AAC izi %1% eksik esds atomu/çözücü yapılandırması. Bu iz atlanıyor.\n"
 
-#: src/input/r_qtmp4.cpp:3343
+#: src/input/r_qtmp4.cpp:3344
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: Ses izi %1%, 'esds' atomu içinde desteklenmeyen %2% 'nesne türü id' kullanıyor. Bu iz atlanıyor.\n"
 
-#: src/input/r_qtmp4.cpp:3400
+#: src/input/r_qtmp4.cpp:3401
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: Görüntü izi %1%, ESDS atomu eksik. Bu iz atlanıyor.\n"
@@ -8298,10 +8298,10 @@ msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış başlıkları kul
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış başlıkları kullanıyor ama genişletilemediler. zlib'ten hata kodu: %1%. İptal ediliyor.\n"
 
-#: src/input/r_qtmp4.cpp:3299
-#: src/input/r_qtmp4.cpp:3318
-#: src/input/r_qtmp4.cpp:3361
-#: src/input/r_qtmp4.cpp:3424
+#: src/input/r_qtmp4.cpp:3300
+#: src/input/r_qtmp4.cpp:3319
+#: src/input/r_qtmp4.cpp:3362
+#: src/input/r_qtmp4.cpp:3425
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 okuyucusu: İz %1% bazı verisi eksik. Bozuk başlık atomları olabilir mi?\n"
@@ -8822,9 +8822,9 @@ msgid "Select all tracks of specific &type"
 msgstr "Belirli &türün tüm izlerini &seç"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:226
-#: src/mkvtoolnix-gui/merge/output.cpp:176
 #: src/mkvtoolnix-gui/merge/output.cpp:177
 #: src/mkvtoolnix-gui/merge/output.cpp:178
+#: src/mkvtoolnix-gui/merge/output.cpp:179
 #, no-c-format
 msgid "Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."
 msgstr "Varolan bir Matroska veya WebM dosyasını seçin ve GKA, soldaki girdi alanına parça UID'sini ekleyecek."
@@ -8834,7 +8834,7 @@ msgstr "Varolan bir Matroska veya WebM dosyasını seçin ve GKA, soldaki girdi 
 msgid "Select audio file"
 msgstr "Ses dosyası seç"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:473
+#: src/mkvtoolnix-gui/merge/output.cpp:479
 #, no-c-format
 msgid "Select chapter file"
 msgstr "Bölüm dosyası seç"
@@ -8850,7 +8850,7 @@ msgid "Select destination directory"
 msgstr "Hedef dizini seç"
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:93
-#: src/mkvtoolnix-gui/merge/output.cpp:278
+#: src/mkvtoolnix-gui/merge/output.cpp:391
 #, no-c-format
 msgid "Select destination file name"
 msgstr "Hedef dosya adını seç"
@@ -8870,13 +8870,13 @@ msgstr "Eklemek için dosya seçin"
 msgid "Select one of the ISO639-2 language codes."
 msgstr "ISO639-2 dil kodlarından birini seçin."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:308
+#: src/mkvtoolnix-gui/merge/output.cpp:421
 #, no-c-format
 msgid "Select segment info file"
 msgstr "Parça bilgisi dosyası seç"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:984
-#: src/mkvtoolnix-gui/merge/output.cpp:296
+#: src/mkvtoolnix-gui/merge/output.cpp:409
 #, no-c-format
 msgid "Select tags file"
 msgstr "Etiketler dosyası seç"
@@ -8952,7 +8952,8 @@ msgid "Set the chapter names' &languages:"
 msgstr "Bölüm adlarının &dillerini şuna ayarla:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
-msgid "Set the chapter names' co&untries"
+#, fuzzy
+msgid "Set the chapter names' co&untries:"
 msgstr "Bölüm adlarının ü&lkelerini şuna ayarla:"
 
 #: src/propedit/propedit_cli_parser.cpp:235
@@ -8992,7 +8993,7 @@ msgstr "Luma ve chroma değerlerini kırmızı, yeşil ve mavi renk öncelikleri
 msgid "Sets the number of coded bits for a colour channel."
 msgstr "Renk kanalı için birtakım kodlanmış bit'leri ayarlar."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:167
+#: src/mkvtoolnix-gui/merge/output.cpp:168
 msgid "Sets the segment UIDs to use."
 msgstr "Kullanmak için parça UID'lerini ayarlar."
 
@@ -9123,7 +9124,7 @@ msgid "Simple"
 msgstr "Basit"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
-#: src/mkvtoolnix-gui/merge/output.cpp:476
+#: src/mkvtoolnix-gui/merge/output.cpp:482
 #, no-c-format
 msgid "Simple OGM-style chapter files"
 msgstr "Basit OGM-stili bölüm dosyaları"
@@ -9151,7 +9152,7 @@ msgstr "Boyut"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:245
-#: src/mkvtoolnix-gui/merge/output.cpp:330
+#: src/mkvtoolnix-gui/merge/output.cpp:229
 #, no-c-format
 msgid "Size:"
 msgstr "Boyut:"
@@ -9255,7 +9256,7 @@ msgstr "Bölme kipi:"
 msgid "Splitting"
 msgstr "Bölme"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:415
+#: src/mkvtoolnix-gui/merge/output.cpp:314
 #, no-c-format
 msgid "Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed."
 msgstr "Bölme işlemi, numarası listelenen bölümler için zaman damgası eşit ya da  başlangıç zaman damgasından büyük olan ilk anahtar kareden önce meydana gelecek."
@@ -9384,7 +9385,7 @@ msgstr "Altyazılar"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:702
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:181
-#: src/mkvtoolnix-gui/merge/output.cpp:474
+#: src/mkvtoolnix-gui/merge/output.cpp:480
 #, no-c-format
 msgid "Supported file types"
 msgstr "Desteklenen dosya türleri"
@@ -9443,7 +9444,7 @@ msgstr "Etiket seçicileri"
 msgid "Tags"
 msgstr "Etiketler"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:215
+#: src/mkvtoolnix-gui/merge/output.cpp:216
 msgid "Tags are allowed, but chapters are not."
 msgstr "Etiketlere izin verilir ancak bölümlere verilmez."
 
@@ -9520,7 +9521,7 @@ msgstr "AAC profilleri farklı: %1% ve %2%"
 msgid "The CodecID of the two tracks is different: %1% and %2%"
 msgstr "İki izin KodekID'leri farklı: %1% ve %2%"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:216
+#: src/mkvtoolnix-gui/merge/output.cpp:217
 msgid "The DocType header item is changed to \"webm\"."
 msgstr "DocType başlığı öğesi \"webm\" olarak değiştirilir."
 
@@ -9939,7 +9940,7 @@ msgstr "İki izin görüntü genişliği farklı: %1% ve %2%"
 msgid "The drive may be full."
 msgstr "Sürücü dolu olabilir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:346
+#: src/mkvtoolnix-gui/merge/output.cpp:245
 #, no-c-format
 msgid "The duration after which a new destination file is started."
 msgstr "Yeni bir hedef dosya başlatıldıktan sonraki süre."
@@ -10267,7 +10268,7 @@ msgstr "İlk dosya ilave edilemez çünkü ilave edilecek dosya yok.\n"
 msgid "The first mode extracts some tracks to external files."
 msgstr "İlk kip bazı izleri harici dosyalara çıkartır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:200
+#: src/mkvtoolnix-gui/merge/output.cpp:201
 msgid "The following modes are supported:"
 msgstr "Aşağıdaki kipler desteklenir:"
 
@@ -10282,15 +10283,15 @@ msgstr "Eğer verilmezse biçim %H:%M:%S olarak varsayılandır."
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:68
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
-#: src/mkvtoolnix-gui/merge/output.cpp:208
-#: src/mkvtoolnix-gui/merge/output.cpp:348
-#: src/mkvtoolnix-gui/merge/output.cpp:363
-#: src/mkvtoolnix-gui/merge/output.cpp:377
+#: src/mkvtoolnix-gui/merge/output.cpp:209
+#: src/mkvtoolnix-gui/merge/output.cpp:247
+#: src/mkvtoolnix-gui/merge/output.cpp:262
+#: src/mkvtoolnix-gui/merge/output.cpp:276
 #, no-c-format
 msgid "The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."
 msgstr "Biçim ya 'HH:MM:SS.nnnnnnnnn' biçimindedir ya da 's', 'ms' veya 'us' birimlerinden birinin ardından geldiği bir sayıdır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:368
+#: src/mkvtoolnix-gui/merge/output.cpp:267
 #, no-c-format
 msgid "The formats can be mixed, too."
 msgstr "Biçimler de karıştırılabilir."
@@ -10335,7 +10336,7 @@ msgstr "İş, iş kuyruğuna eklendi."
 msgid "The language code '%1%' is not a valid ISO639-2 language code and will be ignored.\n"
 msgstr "Dil kodu '%1%' geçerli bir ISO639-2 dil kodu değil ve yoksayılacaktır.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:203
+#: src/mkvtoolnix-gui/merge/output.cpp:204
 msgid "The language for the newly created chapters is set via the chapter language control above."
 msgstr "Yeni olarak oluşturulan bölümler için dil, yukarıdaki bölüm dili denetimi aracılığıyla ayarlanır."
 
@@ -10356,7 +10357,7 @@ msgstr "Burada seçilen dil, kaynak dosyası böyle bir özellik içermeyen alty
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
 msgstr "Burada seçilen dil, kaynak dosyası böyle bir özellik içermeyen görüntü izleri ve dosya adından türetilmemiş dil için kullanılır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:184
+#: src/mkvtoolnix-gui/merge/output.cpp:185
 msgid "The language set here is also used when chapters are generated."
 msgstr "Burada ayarlanan dil aynı zamanda bölümler oluşturulduğunda kullanılır."
 
@@ -10375,7 +10376,7 @@ msgstr "Hata ile karşılaşılmadan önce işlenen son zaman damgası %1%.\n"
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
 msgstr "'Z' harfi, UTC'yi diğer bir deyişle Zulu saatini göstermek için UTC'den gelen saat diliminin karşılığının yerine kullanılabilir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:332
+#: src/mkvtoolnix-gui/merge/output.cpp:231
 #, no-c-format
 msgid "The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes respectively."
 msgstr "'G', 'M' ve 'K' harfleri sırasıyla giga/mega/kilo baytı göstermesi için kullanılabilir."
@@ -10394,7 +10395,7 @@ msgstr "Yerel dil düzgün olarak ayarlanamadı. LANG, LC_ALL ve LC_MESSAGES ort
 msgid "The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms."
 msgstr "Bir küme için mkvmerge'ün kabul ettiği en fazla uzunluk 60000 blok ve 32000ms'dir; en az uzunluk 100ms'dir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:158
+#: src/mkvtoolnix-gui/merge/output.cpp:159
 msgid "The maximum number of files that will be created even if the last file might contain more bytes/time than wanted."
 msgstr "Son dosya, istenenden daha fazla bayt/süre içerebilse bile oluşturulacak olan en fazla dosya sayısıdır."
 
@@ -10518,20 +10519,20 @@ msgstr ""
 "Resmin en üstündeki görüntü piksellerini\n"
 "kaldırmak için sayı."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:385
-#: src/mkvtoolnix-gui/merge/output.cpp:401
-#: src/mkvtoolnix-gui/merge/output.cpp:414
+#: src/mkvtoolnix-gui/merge/output.cpp:284
+#: src/mkvtoolnix-gui/merge/output.cpp:300
+#: src/mkvtoolnix-gui/merge/output.cpp:313
 #, no-c-format
 msgid "The numbering starts at 1."
 msgstr "Numaralandırma 1'den başlar."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:390
-#: src/mkvtoolnix-gui/merge/output.cpp:406
+#: src/mkvtoolnix-gui/merge/output.cpp:289
+#: src/mkvtoolnix-gui/merge/output.cpp:305
 #, no-c-format
 msgid "The numbers given with this argument are interpreted based on the number of Matroska blocks that are output."
 msgstr "Bu bağımsız değişken ile verilen sayılar çıktıdaki Matroska bloklarının sayısına dayanarak yorumlanır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:214
+#: src/mkvtoolnix-gui/merge/output.cpp:215
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "Sadece izin verilen kodekler VP8/VP9 görüntü ve Vorbis/Opus ses izleridir."
 
@@ -10626,7 +10627,7 @@ msgstr "Sebep bilinmiyor."
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
 msgstr "Tanınan biçim 'YYYY-mm-ddTHH:MM:SS+zz:zz': yıl, ay, gün, 'T' harfi, saat, dakika, saniye ve UTC'den gelen saat dilimi karşılığı; örnek: 2017-03-28T17:28-02:00."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:195
+#: src/mkvtoolnix-gui/merge/output.cpp:196
 msgid "The rest is copied as is."
 msgstr "Geri kalanı olduğu gibi kopyalanır."
 
@@ -10661,7 +10662,7 @@ msgstr "Parça UID ayrıştırılamadı: %1"
 msgid "The segment edition UID must be a positive number if given."
 msgstr "Eğer verildiyse parça yayın UID'si artı bir sayı olmak zorundadır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:194
+#: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."
 msgstr "'%p' dizisi iz'in SANATÇISI ile, '%t' dizisi iz'in BAŞLIĞI ile, '%n' iz'in numarası ile ve '%N' 10'dan küçük iz sayıları için başında 0 ile takviye edilmiş iz sayısı ile değiştirilir."
 
@@ -10674,7 +10675,7 @@ msgstr "Ayarlar dosyası '%1' geçersiz ayarlar içeriyor ve yüklenemedi."
 msgid "The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."
 msgstr "Altıncı kip bir iz için tüm blokların zaman damgalarını bulur ve bu zaman kodları ile zaman damgası s2 dosyasının çıktısını verir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:331
+#: src/mkvtoolnix-gui/merge/output.cpp:230
 #, no-c-format
 msgid "The size after which a new destination file is started."
 msgstr "Yeni bir hedef dosya başlatıldıktan sonraki boyut."
@@ -10804,7 +10805,7 @@ msgid ""
 "If you really have to specify non-sorted timestamps then use the timestamp format v4. It is identical to format v2 but allows non-sorted timestamps.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:360
+#: src/mkvtoolnix-gui/merge/output.cpp:259
 #, no-c-format
 msgid "The timestamps after which a new destination file is started."
 msgstr "Yeni bir hedef dosya başlatıldıktan sonraki zaman damgaları."
@@ -10813,7 +10814,7 @@ msgstr "Yeni bir hedef dosya başlatıldıktan sonraki zaman damgaları."
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
 msgstr "Bu akış için zaman damgaları dosyanın ortasında sıfırlandı. Bu desteklenmiyor. Şu anki paket atılacaktır.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:361
+#: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
 msgid "The timestamps refer to the whole stream and not to each individual destination file."
 msgstr "Zaman damgaları her bir tek hedef dosyayı değil bütün akışı ifade eder."
@@ -11085,7 +11086,7 @@ msgstr "Bu, \"iş çıktısı\" sekmesinde \"işi iptal et\" düğmesine tıklan
 msgid "This has not been implemented yet."
 msgstr "Bu henüz hayata geçirilmedi."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:168
+#: src/mkvtoolnix-gui/merge/output.cpp:169
 msgid "This is a comma-separated list of 128-bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."
 msgstr "Bu alışılmış UID biçimi içindeki 128-bit parça UID'lerinin virgülle ayrılmış listesidir: onaltılık sayılar, \"0x\"  ön ekiyle ya da ön eksiz, boşluklu ya da boşluksuz, tam olarak 32 rakam."
 
@@ -11123,7 +11124,7 @@ msgstr "Bu varsayılan kiptir."
 msgid "This is the language that newly added chapter names get assigned automatically."
 msgstr "Bu, yeni olarak eklenmiş bölüm adları otomatik olarak atanmış dildir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:151
+#: src/mkvtoolnix-gui/merge/output.cpp:152
 #, no-c-format
 msgid "This is the title that players may show as the 'main title' for this movie."
 msgstr "Bu, oynatıcının bu film için 'ana başlıkta' gösterebileceği başlıktır."
@@ -11141,13 +11142,13 @@ msgstr "Bu, aynı dizin içinde mevcut olan çok sayıda oynatma listesinde ve o
 msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
 msgstr "Bu, ya ters eğik çizgi çiftlenmek ya da bütün bağımsız değişken tek tırnak içinde kapatılmak zorunda olduğu anlamına gelir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:387
-#: src/mkvtoolnix-gui/merge/output.cpp:403
+#: src/mkvtoolnix-gui/merge/output.cpp:286
+#: src/mkvtoolnix-gui/merge/output.cpp:302
 #, no-c-format
 msgid "This mode considers only the first video track that is output."
 msgstr "Bu kip sadece çıktı olan ilk görüntü izini dikkate alır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:213
+#: src/mkvtoolnix-gui/merge/output.cpp:214
 msgid "This mode enforces several restrictions."
 msgstr "Bu kip birkaç kısıtlamayı zorla uygular."
 
@@ -11155,7 +11156,7 @@ msgstr "Bu kip birkaç kısıtlamayı zorla uygular."
 msgid "This mode extracts cue information for some tracks to external text files."
 msgstr "Bu kip bazı izler için cue bilgisini harici metin dosyalarına çıkartır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:418
+#: src/mkvtoolnix-gui/merge/output.cpp:317
 #, no-c-format
 msgid "This mode only considers the top-most level of chapters across all edition entries."
 msgstr "Bu kip sadece tüm yayın girişleri arasındaki bölümlerin en üst seviyesini dikkate alır."
@@ -11179,7 +11180,7 @@ msgstr "Bu sadece DTS ses izleri ile çalışır."
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
 msgstr "Bu seçenek mkvmerge'ün en-boy oranı bilgisini bitakışından kaldırmasına neden olur."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:193
+#: src/mkvtoolnix-gui/merge/output.cpp:194
 msgid "This option controls how the chapter names are created."
 msgstr "Bu seçenek, bölüm adlarının nasıl oluşturulduğunu denetler."
 
@@ -11198,7 +11199,7 @@ msgstr "Bu seçenek ilave bir bağımsız değişkene 'n' ihtiyaç duyar."
 msgid "This option prevents that behavior."
 msgstr "Bu seçenek bu davranışı engeller."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:182
+#: src/mkvtoolnix-gui/merge/output.cpp:183
 msgid "This option specifies the language to be associated with chapters if the OGM chapter format is used."
 msgstr "Bu seçenek, OGM bölüm biçimi kullanılırsa, bölümler ile ilişkilendirilmiş dili belirtir."
 
@@ -11304,7 +11305,7 @@ msgstr "Zaman damgası ölçütü"
 msgid "Timestamps and default duration"
 msgstr "Zaman damgaları ve varsayılan süre"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:358
+#: src/mkvtoolnix-gui/merge/output.cpp:257
 #, no-c-format
 msgid "Timestamps:"
 msgstr "Zaman damgaları:"
@@ -11706,7 +11707,7 @@ msgstr "Kullanım"
 msgid "Usage and examples"
 msgstr "Kullanım ve örnekler"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:163
+#: src/mkvtoolnix-gui/merge/output.cpp:164
 #, no-c-format
 msgid "Use 'segment linking' for the resulting files."
 msgstr "Sonuçta oluşan dosyalar için 'parça bağlama' kullanın."
@@ -11730,7 +11731,7 @@ msgstr "Sadece deneme için kullanın."
 msgid "Use this only for testing purposes."
 msgstr "Bunu sadece deneme amaçlı kullanın."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:159
+#: src/mkvtoolnix-gui/merge/output.cpp:160
 msgid "Useful e.g. when you want exactly two files."
 msgstr "Örneğin tam olarak iki dosya istediğinizde faydalıdır."
 
@@ -12111,7 +12112,7 @@ msgstr "WebM ses/görüntü dosyaları"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:704
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
-#: src/mkvtoolnix-gui/merge/output.cpp:277
+#: src/mkvtoolnix-gui/merge/output.cpp:390
 #, no-c-format
 msgid "WebM files"
 msgstr "WebM dosyaları"
@@ -12155,7 +12156,7 @@ msgstr "Bir dosya eklendiğinde adı taranır."
 msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "Kaynak dosyalar eklenirken, tüm izler normalde çıktı dosyası içine kopyalanması için ayarlanır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:201
+#: src/mkvtoolnix-gui/merge/output.cpp:202
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
 msgstr "İlave edildiğinde: başlangıçta bir bölüm oluşturulur ve bir tane de dosya ilave edildiğinde."
 
@@ -12294,18 +12295,18 @@ msgstr "Yanlış tanımlama dizgisi: '%|1$7s|' != 'kate\\0\\0\\0'"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:185
-#: src/mkvtoolnix-gui/merge/output.cpp:475
+#: src/mkvtoolnix-gui/merge/output.cpp:481
 #, no-c-format
 msgid "XML chapter files"
 msgstr "XML bölüm dosyaları"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:308
+#: src/mkvtoolnix-gui/merge/output.cpp:421
 #, no-c-format
 msgid "XML segment info files"
 msgstr "XML parça bilgisi dosyaları"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:984
-#: src/mkvtoolnix-gui/merge/output.cpp:296
+#: src/mkvtoolnix-gui/merge/output.cpp:409
 #, no-c-format
 msgid "XML tag files"
 msgstr "XML etiket dosyaları"
@@ -12379,12 +12380,12 @@ msgstr "'<NUM:basamaklar>' olan bölüm numaraları için en az basamak sayısı
 msgid "You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."
 msgstr "'s', 'ms', 'us', 'ns', 'fps', 'i' veya 'p' birimlerinden birini belirtebilirsiniz."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:365
+#: src/mkvtoolnix-gui/merge/output.cpp:264
 #, no-c-format
 msgid "You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' or none at all."
 msgstr "Nanosaniye sayısı 'nnnnnnnnn' için dokuz rakama kadar belirtebilirsiniz ya da hiç belirtmezsiniz."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:155
+#: src/mkvtoolnix-gui/merge/output.cpp:156
 #, no-c-format
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
 msgstr "Geçen sürenin miktarına, zaman damgalarına, kare/alan numaralarına ya da bölüm numaralarına dayanarak bölebilirsiniz."
@@ -12404,12 +12405,12 @@ msgstr "1000 ve 10000000 arasında bir değer ya da sihirli -1 değerini girmek 
 msgid "You have to set the destination file name before you can start multiplexing or add a job to the job queue."
 msgstr "Çoklamaya başlamadan ya da iş kuyruğuna bir iş eklemeden önce hedef dosyayı ayarlamak zorundasınız."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:349
+#: src/mkvtoolnix-gui/merge/output.cpp:248
 #, no-c-format
 msgid "You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."
 msgstr "Saat sayısını 'HH' ve nanosaniye sayısını 'nnnnnnnnn' atlayabilirsiniz."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:364
+#: src/mkvtoolnix-gui/merge/output.cpp:263
 #, no-c-format
 msgid "You may omit the number of hours 'HH'."
 msgstr "Saat sayısını 'HH' atlayabilirsiniz."
@@ -12852,15 +12853,15 @@ msgstr "mkvinfo [seçenekler] <ismen>"
 msgid "mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n"
 msgstr "mkvmerge -o out [genel seçenekler] [seçenek1] <dosya1> [@option-file.json] …\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:212
+#: src/mkvtoolnix-gui/merge/output.cpp:213
 msgid "mkvmerge also turns this on if the destination file name's extension is \"webm\"."
 msgstr "mkvmerge ayrıca hedef dosya adının uzantısı \"webm\" ise bunu açar."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:199
+#: src/mkvtoolnix-gui/merge/output.cpp:200
 msgid "mkvmerge can generate chapters automatically."
 msgstr "mkvmerge bölümleri otomatik olarak oluşturabilir."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:192
+#: src/mkvtoolnix-gui/merge/output.cpp:193
 msgid "mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."
 msgstr "mkvmerge, ses CD'leri için cue sheet'leri okuyabilir ve bunları otomatik olarak bölümlere dönüştürür."
 
@@ -12869,8 +12870,8 @@ msgstr "mkvmerge, ses CD'leri için cue sheet'leri okuyabilir ve bunları otomat
 msgid "mkvmerge command line"
 msgstr "mkvmerge komut satırı"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:392
-#: src/mkvtoolnix-gui/merge/output.cpp:408
+#: src/mkvtoolnix-gui/merge/output.cpp:291
+#: src/mkvtoolnix-gui/merge/output.cpp:307
 #, no-c-format
 msgid "mkvmerge does not distinguish between those two and simply counts the number of blocks."
 msgstr "mkvmerge bu ikisi ve blokların sayısını basit sayımları arasında ayırım yapmaz."
@@ -12907,10 +12908,10 @@ msgstr ""
 msgid "mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."
 msgstr "mkvmerge normalde, zaman damgası toplam sürenin beş saniye içinde ise bu son girişi kaldırır."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:174
 #: src/mkvtoolnix-gui/merge/output.cpp:175
-#: src/mkvtoolnix-gui/merge/output.cpp:181
-#: src/mkvtoolnix-gui/merge/output.cpp:187
+#: src/mkvtoolnix-gui/merge/output.cpp:176
+#: src/mkvtoolnix-gui/merge/output.cpp:182
+#: src/mkvtoolnix-gui/merge/output.cpp:188
 #, no-c-format
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "mkvmerge iki bölüm biçimini destekler: Metin biçimi gibi olan OGM ve tam özellikli XML biçimi."
