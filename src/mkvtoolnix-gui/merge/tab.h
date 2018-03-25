@@ -266,6 +266,7 @@ protected:
 
   virtual void setupInputToolTips();
   virtual void setupOutputToolTips();
+  virtual void setupSplitModeLabelAndToolTips();
   virtual void setupAttachmentsToolTips();
 
   virtual void retranslateInputUI();
