@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QLocale>
+
 #include <ebml/EbmlDummy.h>
 #include <matroska/KaxSegment.h>
 
@@ -103,8 +105,9 @@ Model::retranslateUi() {
 void
 Model::setItemsFromElement(QList<QStandardItem *> &items,
                            EbmlElement &element) {
-  auto p    = p_func();
-  auto name = kax_element_names_c::get(element);
+  auto p      = p_func();
+  auto name   = kax_element_names_c::get(element);
+  auto locale = QLocale::system();
   std::string content;
 
   if (name.empty())
@@ -118,8 +121,8 @@ Model::setItemsFromElement(QList<QStandardItem *> &items,
 
   items[0]->setText(Q(name));
   items[1]->setText(Q(content));
-  items[2]->setText(Q("%1").arg(element.GetElementPosition()));
-  items[3]->setText(Q("%1").arg(element.HeadSize() + element.GetSize()));
+  items[2]->setText(locale.toString(static_cast<quint64>(element.GetElementPosition())));
+  items[3]->setText(element.IsFiniteSize() ? locale.toString(static_cast<quint64>(element.HeadSize() + element.GetSize())) : QY("unknown"));
 
   items[2]->setTextAlignment(Qt::AlignRight);
   items[3]->setTextAlignment(Qt::AlignRight);
