@@ -20,6 +20,8 @@
 #include "common/kax_info.h"
 #include "mkvtoolnix-gui/util/runnable.h"
 
+class QMutex;
+
 namespace mtx { namespace gui { namespace Util {
 
 class KaxInfoPrivate;
@@ -43,6 +45,12 @@ public:
   virtual void ui_show_element_info(int level, std::string const &text, int64_t position, int64_t size) override;
   virtual void ui_show_element(EbmlElement &e) override;
   virtual void ui_show_progress(int percentage, std::string const &text) override;
+
+  virtual result_e open_and_process_file(std::string const &fileName) override;
+  virtual result_e open_and_process_file() override;
+  virtual result_e process_file() override;
+
+  virtual QMutex &mutex();
 
 public slots:
   virtual void runScan(ScanType type);

@@ -11,6 +11,9 @@
 #include "common/common_pch.h"
 
 #include <QDebug>
+#include <QMutex>
+#include <QMutexLocker>
+
 #include <ebml/EbmlStream.h>
 #include <matroska/KaxCluster.h>
 #include <matroska/KaxSegment.h>
@@ -32,6 +35,12 @@ class KaxInfoPrivate: public mtx::kax_info::private_c {
 public:
   KaxInfo::ScanType m_scanType{KaxInfo::ScanType::StartOfFile};
   boost::optional<uint64_t> m_firstLevel1ElementPosition;
+  QMutex m_mutex;
+
+  explicit KaxInfoPrivate()
+    : m_mutex{QMutex::Recursive}
+  {
+  }
 };
 
 KaxInfo::KaxInfo()
@@ -92,6 +101,8 @@ KaxInfo::abort() {
 
 void
 KaxInfo::runScan(ScanType type) {
+  QMutexLocker locker{&mutex()};
+
   auto p = p_func();
 
   p->m_scanType = type;
@@ -108,6 +119,8 @@ KaxInfo::runScan(ScanType type) {
 
 void
 KaxInfo::scanStartOfFile() {
+  QMutexLocker locker{&mutex()};
+
   auto p = p_func();
 
   emit startOfFileScanStarted();
@@ -130,6 +143,8 @@ KaxInfo::scanLevel1Elements() {
 
 mtx::kax_info_c::result_e
 KaxInfo::doScanLevel1Elements() {
+  QMutexLocker locker{&mutex()};
+
   auto p     = p_func();
   p->m_abort = false;
   p->m_level = 1;
@@ -171,6 +186,30 @@ KaxInfo::doScanLevel1Elements() {
   }
 
   return p->m_abort ? result_e::aborted : result_e::succeeded;
+}
+
+QMutex &
+KaxInfo::mutex() {
+  return p_func()->m_mutex;
+}
+
+kax_info_c::result_e
+KaxInfo::open_and_process_file(std::string const &fileName) {
+  return kax_info_c::open_and_process_file(fileName);
+}
+
+kax_info_c::result_e
+KaxInfo::open_and_process_file() {
+  QMutexLocker locker{&mutex()};
+
+  return kax_info_c::open_and_process_file();
+}
+
+kax_info_c::result_e
+KaxInfo::process_file() {
+  QMutexLocker locker{&mutex()};
+
+  return kax_info_c::process_file();
 }
 
 }}}
