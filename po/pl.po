@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-25 18:51+0200\n"
-"PO-Revision-Date: 2018-03-24 17:08+0100\n"
+"PO-Revision-Date: 2018-03-26 17:10+0200\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -40,8 +40,8 @@ msgid ""
 "  ( <file1> <file2> )      Treat file1 and file2 as if they were concatenated\n"
 "                           into a single big file.\n"
 msgstr ""
-"  ( <plik1> <plik2> )      Traktuje plik1 i plik2 jakby były połączone\n"
-"                                       w jeden duży plik.\n"
+"  ( <plik1> <plik2> )     Traktuje plik1 i plik2 jakby były połączone\n"
+"                            w jeden duży plik.\n"
 
 #: src/merge/mkvmerge.cpp:235
 msgid ""
@@ -60,7 +60,6 @@ msgstr ""
 "  --append-mode <file|track>\n"
 "                           Określa, jak mkvmerge ma obliczyć znaczniki czasu podczas\n"
 "                           scalania plików.\n"
-"\n"
 
 #: src/merge/mkvmerge.cpp:156
 msgid ""
@@ -101,7 +100,7 @@ msgstr ""
 msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
 "                           Matroska file.\n"
-msgstr "  --attach-file <plik>        Zapisuje załącznik do pliku Matroski.\n"
+msgstr "  --attach-file <plik>     Zapisuje załącznik do pliku Matroski.\n"
 
 #: src/merge/mkvmerge.cpp:182
 msgid ""
@@ -119,7 +118,7 @@ msgid ""
 "                           Description for the following attachment.\n"
 msgstr ""
 "  --attachment-description <opis>\n"
-"                                   Dodaje opis dla danego załącznika.\n"
+"                            Dodaje opis dla danego załącznika.\n"
 
 #: src/merge/mkvmerge.cpp:176
 msgid ""
@@ -379,7 +378,6 @@ msgid ""
 msgstr ""
 "  --field-order <TID:n>    Ustawia parametr kolejności pól obrazu\n"
 "                           (zobacz dokumentację dla prawidłowych wartości).\n"
-"\n"
 
 #: src/merge/mkvmerge.cpp:247
 msgid ""
@@ -462,7 +460,6 @@ msgstr ""
 "  --max-content-light <TID:n>\n"
 "                           Maksymalna jasność pojedynczego piksela w kandelach\n"
 "                           na metr kwadratowy (cd/m²).\n"
-"\n"
 
 #: src/merge/mkvmerge.cpp:302
 #, fuzzy
@@ -484,7 +481,6 @@ msgstr ""
 "  --max-luminance <TID:float>\n"
 "                           Maksymalna jasność w kandelach na metr kwadratowy\n"
 "                           (cd/m²).\n"
-"\n"
 
 #: src/merge/mkvmerge.cpp:314
 msgid ""
@@ -495,7 +491,6 @@ msgstr ""
 "  --min-luminance <TID:float>\n"
 "                           Minimalna jasność w kandelach na metr kwadratowy\n"
 "                           (cd/m²).\n"
-"\n"
 
 #: src/merge/mkvmerge.cpp:250
 msgid ""
@@ -522,7 +517,6 @@ msgid ""
 msgstr ""
 "  --no-date                Nie zapisuje pola \"data\" w nagłówkach\n"
 "                           informacji o segmencie.\n"
-"\n"
 
 #: src/merge/mkvmerge.cpp:212
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -547,7 +541,6 @@ msgstr ""
 "                            Ustawia maksymalny rozmiar do analizy dla ścieżek w procentach\n"
 "                            z całkowitego rozmiaru pliku dla niektórych typów plików\n"
 "                            (domyślnie: 0.3).\n"
-"\n"
 
 #: src/merge/mkvmerge.cpp:324
 #, fuzzy
@@ -605,7 +598,6 @@ msgstr ""
 "  --reduce-to-core <TID>   Zachowuje tylko rdzeń ze ścieżek audio, które wspierają \n"
 "                           rozszerzenia HD zamiast kopiowania zarówna rdzenia,\n"
 "                           jak i rozszerzeń.\n"
-"\n"
 
 #: src/merge/mkvmerge.cpp:240
 msgid ""
@@ -688,8 +680,7 @@ msgid ""
 msgstr ""
 "  --split timestamps:A[,B...]\n"
 "                           Dzieli po określonym czasie A, B\n"
-"                           itd..\n"
-"\n"
+"                           itd.\n"
 
 #: src/merge/mkvmerge.cpp:152
 msgid "  --split-max-files <n>    Create at most n files.\n"
@@ -821,7 +812,8 @@ msgid ""
 "                           audio tracks.\n"
 msgstr ""
 "  -a, --audio-tracks <n,m,...>\n"
-"                           Kopiuje ścieżki dźwiękowe n,m itd. Domyślnie: kopiuje wszystkie ścieżki.\n"
+"                           Kopiuje ścieżki audio n,m itd. Domyślnie: kopiuje wszystkie \n"
+"                           ścieżki audio.\n"
 
 #: src/merge/mkvmerge.cpp:199
 msgid ""
@@ -892,7 +884,8 @@ msgid ""
 "                           all subtitle tracks.\n"
 msgstr ""
 "  -s, --subtitle-tracks <n,m,...>\n"
-"                           Kopiuje ścieżki z napisami n,m itd. Domyślnie: kopiuje wszystkie ścieżki z napisami.\n"
+"                           Kopiuje ścieżki z napisami n,m itd. Domyślnie: kopiuje \n"
+"                           wszystkie ścieżki z napisami.\n"
 
 #: src/merge/mkvmerge.cpp:208
 msgid "  -t, --tags <TID:file>    Read tags for the track from an XML file.\n"
@@ -947,7 +940,6 @@ msgid ""
 msgstr ""
 "  @option-file.json        Wczytuje dodatkowe opcje linii komend z\n"
 "                           określonego pliku JSON (patrz dokumentacja).\n"
-"\n"
 
 #: src/propedit/propedit_cli_parser.cpp:163
 msgid "  B:  boolean (0 or 1)\n"
@@ -1466,7 +1458,7 @@ msgstr "&Zestawy znaków"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:145
 #, no-c-format
 msgid "&Clear output and reset progress"
-msgstr "Wy&czyść komunikaty i zresetuj wskaźnik(-i) postępu"
+msgstr "Wy&czyść dziennik zdarzeń i zresetuj wskaźnik(-i) postępu"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:599
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:617
@@ -9063,7 +9055,6 @@ msgid "Set the chapter names' &languages:"
 msgstr "&Ustaw język nazw rozdziałów:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
-#, fuzzy
 msgid "Set the chapter names' co&untries:"
 msgstr "Usta&w państwo nazw rozdziałów:"
 
@@ -11134,7 +11125,7 @@ msgstr "Ta ścieżka HEVC nie zaczyna się klatką kluczową. Pierwsze %1% klatk
 #: src/output/p_mp3.cpp:60
 #, boost-format
 msgid "This MPEG audio track contains %1% bytes of non-MP3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the garbage data.\n"
-msgstr "Ta ścieżka dźwiękowa MPEG zawiera na samym początku %1% bajtów danych nie będących MP3. To przekłada się na opóźnienie %2% ms. Zostanie zastosowane to opóźnienie zamiast danych śmieciowych.\n"
+msgstr "Ta ścieżka audio MPEG zawiera na samym początku %1% bajtów danych nie będących MP3. To przekłada się na opóźnienie %2% ms. Zostanie zastosowane to opóźnienie zamiast danych śmieciowych.\n"
 
 #: src/input/r_ogm.cpp:882
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
