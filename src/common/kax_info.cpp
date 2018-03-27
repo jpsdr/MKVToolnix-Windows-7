@@ -299,8 +299,13 @@ kax_info_c::show_element(EbmlElement *l,
 }
 
 std::string
+kax_info_c::format_ebml_id_as_hex(uint32_t id) {
+  return boost::regex_replace((boost::format("%|1$08x|") % id).str(), boost::regex{"^0+", boost::regex::perl}, "");
+}
+
+std::string
 kax_info_c::format_ebml_id_as_hex(EbmlId const &id) {
-  return (boost::format((boost::format("%%|1$0%1%x|") % EBML_ID_LENGTH(id)).str()) % EBML_ID_VALUE(id)).str();
+  return format_ebml_id_as_hex(EBML_ID_VALUE(id));
 }
 
 std::string

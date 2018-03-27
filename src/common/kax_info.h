@@ -87,8 +87,6 @@ public:
   std::string format_element_size(EbmlElement &e);
   std::string format_element_value(EbmlElement &e);
   std::string format_element_value_default(EbmlElement &e);
-  std::string format_ebml_id_as_hex(EbmlElement &e);
-  std::string format_ebml_id_as_hex(EbmlId const &id);
   std::string format_unsigned_integer_as_timestamp(EbmlElement &e);
   std::string format_unsigned_integer_as_scaled_timestamp(EbmlElement &e);
   std::string format_signed_integer_as_timestamp(EbmlElement &e);
@@ -133,6 +131,10 @@ protected:
 
 public:
   static void init_common_formats();
+
+  static std::string format_ebml_id_as_hex(EbmlElement &e);
+  static std::string format_ebml_id_as_hex(EbmlId const &id);
+  static std::string format_ebml_id_as_hex(uint32_t id);
 };
 using kax_info_cptr = std::shared_ptr<kax_info_c>;
 

@@ -16,6 +16,9 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="mtx::gui::Util::BasicTreeView" name="elements">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -33,6 +36,6 @@
    <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
   </customwidget>
  </customwidgets>
-<resources/>
+ <resources/>
  <connections/>
 </ui>

@@ -48,7 +48,8 @@ FORMS += \
     forms/info/tab.ui \
     forms/info/tool.ui \
     forms/info/job_settings_widget.ui \
-    forms/info/job_settings_dialog.ui
+    forms/info/job_settings_dialog.ui \
+    forms/info/element_viewer_dialog.ui
 
 RESOURCES += \
     qt_resources.qrc

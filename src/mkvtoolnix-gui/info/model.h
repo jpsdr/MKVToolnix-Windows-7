@@ -49,6 +49,7 @@ public:
   void reset();
 
   bool hasChildren(const QModelIndex &parent) const override;
+  std::pair<QString, bool> elementName(EbmlElement &element);
 
 public slots:
   void addElement(int level, EbmlElement *element, bool readFully);

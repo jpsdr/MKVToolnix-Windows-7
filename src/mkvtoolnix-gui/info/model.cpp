@@ -105,21 +105,12 @@ Model::retranslateUi() {
 void
 Model::setItemsFromElement(QList<QStandardItem *> &items,
                            EbmlElement &element) {
-  auto p      = p_func();
-  auto name   = kax_element_names_c::get(element);
-  auto locale = QLocale::system();
-  std::string content;
+  auto p             = p_func();
+  auto nameAndStatus = elementName(element);
+  auto locale        = QLocale::system();
+  auto content       = nameAndStatus.second ? p->m_info->format_element_value(element) : std::string{};
 
-  if (name.empty())
-    name = (boost::format(Y("Unknown (ID: 0x%1%)")) % p->m_info->format_ebml_id_as_hex(element)).str();
-
-  else if (dynamic_cast<EbmlDummy *>(&element))
-    name = (boost::format(Y("Known element, but invalid at this position: %1% (ID: 0x%2%)")) % name % p->m_info->format_ebml_id_as_hex(element)).str();
-
-  else
-    content = p->m_info->format_element_value(element);
-
-  items[0]->setText(Q(name));
+  items[0]->setText(nameAndStatus.first);
   items[1]->setText(Q(content));
   items[2]->setText(locale.toString(static_cast<quint64>(element.GetElementPosition())));
   items[3]->setText(element.IsFiniteSize() ? locale.toString(static_cast<quint64>(element.HeadSize() + element.GetSize())) : QY("unknown"));
@@ -241,6 +232,19 @@ Model::addChildrenOfLevel1Element(QModelIndex const &idx) {
 
   for (auto child : *master)
     addElementStructure(*parent, *child);
+}
+
+std::pair<QString, bool>
+Model::elementName(EbmlElement &element) {
+  auto name = kax_element_names_c::get(element);
+
+  if (name.empty())
+    return { Q((boost::format(Y("Unknown element (ID: 0x%1%)")) % kax_info_c::format_ebml_id_as_hex(element)).str()), false };
+
+  if (dynamic_cast<EbmlDummy *>(&element))
+    return { Q((boost::format(Y("Known element, but invalid at this position: %1% (ID: 0x%2%)")) % name % kax_info_c::format_ebml_id_as_hex(element)).str()), false };
+
+  return { Q(name), true };
 }
 
 }}}

@@ -16,6 +16,9 @@
 * MKVToolNix GUI: info tool: implemented reading all elements in the file
   after the first cluster. Only top-level elements are shown; child elements
   are only loaded on demand. Implements the rest of #2104.
+* MKVToolNix GUI: info tool: added a context menu with the option to show a
+  hex dump of the element with the bytes making up the EBML ID and the size
+  portion highlighted in different colors.
 
 ## Bug fixes
 

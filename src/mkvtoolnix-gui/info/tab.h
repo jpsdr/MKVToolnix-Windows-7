@@ -43,6 +43,8 @@ public slots:
   void showError(const QString &message);
   void expandImportantElements();
   void readLevel1Element(QModelIndex const &idx);
+  void showElementHexDumpInViewer();
+  void showContextMenu(QPoint const &pos);
 
 protected:
   void setItemsFromElement(QList<QStandardItem *> &items, EbmlElement &element);

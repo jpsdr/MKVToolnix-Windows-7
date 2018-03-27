@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
+#include <QAction>
 #include <QDebug>
+#include <QMenu>
 #include <QStandardItem>
 #include <QThread>
 #include <QVector>
@@ -10,6 +12,7 @@
 #include <matroska/KaxInfo.h>
 
 #include "common/ebml.h"
+#include "common/kax_element_names.h"
 #include "common/list_utils.h"
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
@@ -18,6 +21,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/info/tab.h"
 #include "mkvtoolnix-gui/info/element_reader.h"
+#include "mkvtoolnix-gui/info/element_viewer_dialog.h"
 #include "mkvtoolnix-gui/info/info_config.h"
 #include "mkvtoolnix-gui/info/initial_scan.h"
 #include "mkvtoolnix-gui/info/job_settings.h"
@@ -30,6 +34,7 @@
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 #include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/serial_worker_queue.h"
 #include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
@@ -48,6 +53,8 @@ public:
   Util::SerialWorkerQueue *m_queue{};
 
   Model *m_model{};
+
+  QAction *m_showHexDumpAction{};
 };
 
 Tab::Tab(QWidget *parent)
@@ -62,10 +69,14 @@ Tab::Tab(QWidget *parent)
   p->m_model = new Model{this};
   p->m_ui->elements->setModel(p->m_model);
 
+  p->m_showHexDumpAction = new QAction{this};
+
   Util::HeaderViewManager::create(*p->m_ui->elements, "Info::Elements");
 
-  connect(p->m_ui->elements, &QTreeView::expanded,  this,       &Tab::readLevel1Element);
-  connect(p->m_ui->elements, &QTreeView::collapsed, p->m_model, &Model::forgetLevel1ElementChildren);
+  connect(p->m_ui->elements,      &QTreeView::customContextMenuRequested, this,       &Tab::showContextMenu);
+  connect(p->m_ui->elements,      &QTreeView::expanded,                   this,       &Tab::readLevel1Element);
+  connect(p->m_ui->elements,      &QTreeView::collapsed,                  p->m_model, &Model::forgetLevel1ElementChildren);
+  connect(p->m_showHexDumpAction, &QAction::triggered,                    this,       &Tab::showElementHexDumpInViewer);
 
   retranslateUi();
 
@@ -173,6 +184,8 @@ Tab::retranslateUi() {
   p->m_ui->retranslateUi(this);
   p->m_model->retranslateUi();
 
+  p->m_showHexDumpAction->setText(QY("Show &hex dump"));
+
   emit titleChanged();
 }
 
@@ -240,6 +253,69 @@ Tab::readLevel1Element(QModelIndex const &idx) {
   connect(reader, &ElementReader::elementRead, p->m_model, &Model::addChildrenOfLevel1Element);
 
   p->m_queue->add(reader);
+}
+
+void
+Tab::showContextMenu(QPoint const &pos) {
+  auto p       = p_func();
+  auto idx     = Util::selectedRowIdx(p->m_ui->elements);
+  auto element = p->m_model->elementFromIndex(idx);
+
+  if (!element)
+    return;
+
+  QMenu menu{this};
+
+  menu.addAction(p->m_showHexDumpAction);
+
+  menu.exec(p->m_ui->elements->viewport()->mapToGlobal(pos));
+}
+
+void
+Tab::showElementHexDumpInViewer() {
+  auto p       = p_func();
+  auto idx     = Util::selectedRowIdx(p->m_ui->elements);
+  auto element = p->m_model->elementFromIndex(idx);
+
+  if (!element)
+    return;
+
+  memory_cptr mem;
+  boost::optional<uint64_t> signaledElementSize;
+  uint64_t effectiveElementSize{};
+
+  {
+    QMutexLocker{&p->m_model->info().mutex()};
+
+    p->m_file->setFilePointer(element->GetElementPosition());
+    if (element->IsFiniteSize())
+      signaledElementSize = element->HeadSize() + element->GetSize();
+
+    effectiveElementSize = signaledElementSize ? *signaledElementSize : p->m_file->get_size() - element->GetElementPosition();
+    auto dumpSize        = std::min<unsigned int>(10 * 1024, effectiveElementSize);
+
+    try {
+      mem = p->m_file->read(dumpSize);
+    } catch (mtx::mm_io::exception &) {
+    }
+  }
+
+  if (!mem)
+    return;
+
+  auto dlg    = new ElementViewerDialog{this};
+  auto result = dlg
+    ->setContent(*mem, ElementHighlighter::highlightsForElement(*mem))
+    .setId(EbmlId(*element).GetValue())
+    .setPosition(element->GetElementPosition())
+    .setSize(signaledElementSize, effectiveElementSize)
+    .exec();
+
+  if (result == ElementViewerDialog::DetachWindow)
+    dlg->detachWindow();
+
+  else
+    delete dlg;
 }
 
 }}}
