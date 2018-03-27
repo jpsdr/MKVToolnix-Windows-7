@@ -163,17 +163,21 @@ Model::addElement(int level,
 void
 Model::addElementStructure(QStandardItem &parent,
                            EbmlElement &element) {
+  auto p = p_func();
+
+  p->m_info->run_generic_pre_processors(element);
+
   auto items = newItems();
   setItemsFromElement(items, element);
 
   parent.appendRow(items);
 
   auto master = dynamic_cast<EbmlMaster *>(&element);
-  if (!master)
-    return;
+  if (master)
+    for (auto child : *master)
+      addElementStructure(*items[0], *child);
 
-  for (auto child : *master)
-    addElementStructure(*items[0], *child);
+  p->m_info->run_generic_post_processors(element);
 }
 
 bool
@@ -219,6 +223,7 @@ Model::addChildrenOfLevel1Element(QModelIndex const &idx) {
   if (!idx.isValid())
     return;
 
+  auto p       = p_func();
   auto element = elementFromIndex(idx);
   auto master  = dynamic_cast<EbmlMaster *>(element);
   auto parent  = itemFromIndex(idx);
@@ -230,8 +235,12 @@ Model::addChildrenOfLevel1Element(QModelIndex const &idx) {
   if (!master)
     return;
 
+  p->m_info->run_generic_pre_processors(*element);
+
   for (auto child : *master)
     addElementStructure(*parent, *child);
+
+  p->m_info->run_generic_post_processors(*element);
 }
 
 std::pair<QString, bool>

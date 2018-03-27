@@ -102,6 +102,9 @@ public:
   void post_block(EbmlElement &e);
   void post_simple_block(EbmlElement &e);
 
+  bool run_generic_pre_processors(EbmlElement &e);
+  void run_generic_post_processors(EbmlElement &e);
+
   virtual void ui_show_error(std::string const &error);
   virtual void ui_show_element_info(int level, std::string const &text, int64_t position, int64_t size);
   virtual void ui_show_element(EbmlElement &e);

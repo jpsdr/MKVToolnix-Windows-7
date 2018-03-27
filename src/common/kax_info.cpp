@@ -1141,17 +1141,41 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   return result_e::succeeded;
 }
 
+bool
+kax_info_c::run_generic_pre_processors(EbmlElement &e) {
+  auto p = p_func();
+
+  auto is_dummy = !!dynamic_cast<EbmlDummy *>(&e);
+  if (is_dummy)
+    return true;
+
+  auto pre_processor = p->m_custom_element_pre_processors.find(EbmlId(e).GetValue());
+  if (pre_processor != p->m_custom_element_pre_processors.end())
+    if (!pre_processor->second(e))
+      return false;
+
+  return true;
+}
+
+void
+kax_info_c::run_generic_post_processors(EbmlElement &e) {
+  auto p = p_func();
+
+  auto is_dummy = !!dynamic_cast<EbmlDummy *>(&e);
+  if (is_dummy)
+    return;
+
+  auto post_processor = p->m_custom_element_post_processors.find(EbmlId(e).GetValue());
+  if (post_processor != p->m_custom_element_post_processors.end())
+    post_processor->second(e);
+}
+
 void
 kax_info_c::handle_elements_generic(EbmlElement &e) {
   auto p = p_func();
 
-  auto is_dummy = !!dynamic_cast<EbmlDummy *>(&e);
-  if (!is_dummy) {
-    auto pre_processor = p->m_custom_element_pre_processors.find(EbmlId(e).GetValue());
-    if (pre_processor != p->m_custom_element_pre_processors.end())
-      if (!pre_processor->second(e))
-        return;
-  }
+  if (!run_generic_pre_processors(e))
+    return;
 
   ui_show_element(e);
 
@@ -1164,12 +1188,7 @@ kax_info_c::handle_elements_generic(EbmlElement &e) {
     --p->m_level;
   }
 
-  if (is_dummy)
-    return;
-
-  auto post_processor = p->m_custom_element_post_processors.find(EbmlId(e).GetValue());
-  if (post_processor != p->m_custom_element_post_processors.end())
-    post_processor->second(e);
+  run_generic_post_processors(e);
 }
 
 void
