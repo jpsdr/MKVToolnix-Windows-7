@@ -59,7 +59,7 @@ Model::elementFromIndex(QModelIndex const &idx) {
 EbmlElement *
 Model::elementFromItem(QStandardItem &item)
   const {
-  return reinterpret_cast<EbmlElement *>(item.data(ElementRole).toULongLong());
+  return reinterpret_cast<EbmlElement *>(item.data(Roles::Element).toULongLong());
 }
 
 QList<QStandardItem *>
@@ -120,8 +120,8 @@ Model::setItemsFromElement(QList<QStandardItem *> &items,
   items[2]->setTextAlignment(Qt::AlignRight);
   items[3]->setTextAlignment(Qt::AlignRight);
 
-  items[0]->setData(reinterpret_cast<qulonglong>(&element),          ElementRole);
-  items[0]->setData(static_cast<qint64>(EbmlId(element).GetValue()), EbmlIdRole);
+  items[0]->setData(reinterpret_cast<qulonglong>(&element),          Roles::Element);
+  items[0]->setData(static_cast<qint64>(EbmlId(element).GetValue()), Roles::EbmlId);
 }
 
 void
@@ -150,8 +150,8 @@ Model::addElement(int level,
   setItemsFromElement(items, *element);
 
   if (!readFully && dynamic_cast<EbmlMaster *>(element)) {
-    items[0]->setData(true,  DeferredLoadRole);
-    items[0]->setData(false, LoadedRole);
+    items[0]->setData(true,  Roles::DeferredLoad);
+    items[0]->setData(false, Roles::Loaded);
   }
 
   while (p->m_treeInsertionPosition.size() > (level + 1))
@@ -185,9 +185,11 @@ Model::addElementInfo(int level,
   items[3]->setTextAlignment(Qt::AlignRight);
 
   if (position)
-    items[0]->setData(static_cast<qint64>(*position), PositionRole);
+    items[0]->setData(static_cast<qint64>(*position), Roles::Position);
   if (size && (*size >= 0))
-    items[0]->setData(static_cast<qint64>(*size),     SizeRole);
+    items[0]->setData(static_cast<qint64>(*size),     Roles::Size);
+
+  items[0]->setData(static_cast<qint64>(PseudoTypes::Unknown), Roles::PseudoType);
 
   p->m_treeInsertionPosition.last()->appendRow(items);
 }
@@ -213,8 +215,9 @@ Model::addFrameInfo(DataBuffer &buffer,
   items[2]->setTextAlignment(Qt::AlignRight);
   items[3]->setTextAlignment(Qt::AlignRight);
 
-  items[0]->setData(static_cast<qint64>(position),      PositionRole);
-  items[0]->setData(static_cast<qint64>(buffer.Size()), SizeRole);
+  items[0]->setData(static_cast<qint64>(position),           Roles::Position);
+  items[0]->setData(static_cast<qint64>(buffer.Size()),      Roles::Size);
+  items[0]->setData(static_cast<qint64>(PseudoTypes::Frame), Roles::PseudoType);
 
   p->m_treeInsertionPosition.last()->appendRow(items);
 }
@@ -274,10 +277,10 @@ Model::hasChildren(const QModelIndex &parent)
     return QStandardItemModel::hasChildren(parent);
 
   auto item = itemFromIndex(parent);
-  if (!item->data(DeferredLoadRole).toBool())
+  if (!item->data(Roles::DeferredLoad).toBool())
     return QStandardItemModel::hasChildren(parent);
 
-  if (!item->data(LoadedRole).toBool())
+  if (!item->data(Roles::Loaded).toBool())
     return true;
 
   auto element = dynamic_cast<EbmlMaster *>(elementFromItem(*item));
@@ -290,11 +293,11 @@ Model::forgetLevel1ElementChildren(QModelIndex const &idx) {
     return;
 
   auto item = itemFromIndex(idx);
-  if (!item->data(DeferredLoadRole).toBool() || !item->data(DeferredLoadRole).toBool())
+  if (!item->data(Roles::DeferredLoad).toBool() || !item->data(Roles::DeferredLoad).toBool())
     return;
 
   item->removeRows(0, item->rowCount());
-  item->setData(false, LoadedRole);
+  item->setData(false, Roles::Loaded);
 
   auto element = dynamic_cast<EbmlMaster *>(elementFromItem(*item));
   if (!element)

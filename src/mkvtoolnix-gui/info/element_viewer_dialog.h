@@ -47,6 +47,7 @@ protected:
   QString createHexDump(memory_c const &mem, ElementHighlighter::Highlights const &highlights);
   QString createLegend(ElementHighlighter::Highlights const &highlights);
   QString createHtmlHead(ElementHighlighter::Highlights const &highlights, QString const &css = {});
+  QString elementName() const;
 };
 
 }}}

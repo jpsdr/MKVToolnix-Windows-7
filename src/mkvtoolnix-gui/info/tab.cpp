@@ -207,7 +207,7 @@ Tab::expandImportantElements() {
 
   for (int l0Row = 0, numL0Rows = rootItem->rowCount(); l0Row < numL0Rows; ++l0Row) {
     auto l0Item      = rootItem->child(l0Row);
-    auto l0ElementId = l0Item->data(EbmlIdRole).toUInt();
+    auto l0ElementId = l0Item->data(Roles::EbmlId).toUInt();
 
     if (l0ElementId == EBML_ID(EbmlHead).GetValue())
       Util::expandCollapseAll(view, true, p->m_model->indexFromItem(l0Item));
@@ -217,7 +217,7 @@ Tab::expandImportantElements() {
 
       for (int l1Row = 0, numL1Rows = l0Item->rowCount(); l1Row < numL1Rows; ++l1Row) {
         auto l1Item      = l0Item->child(l1Row);
-        auto l1ElementId = l1Item->data(EbmlIdRole).toUInt();
+        auto l1ElementId = l1Item->data(Roles::EbmlId).toUInt();
 
         if (mtx::included_in(l1ElementId, EBML_ID(KaxInfo).GetValue(), EBML_ID(KaxTracks).GetValue()))
           Util::expandCollapseAll(view, true, p->m_model->indexFromItem(l1Item));
@@ -237,7 +237,7 @@ Tab::readLevel1Element(QModelIndex const &idx) {
   auto item    = p->m_model->itemFromIndex(idx);
   auto element = p->m_model->elementFromIndex(idx);
 
-  if (!element || !item->data(DeferredLoadRole).toBool())
+  if (!element || !item->data(Roles::DeferredLoad).toBool())
     return;
 
   item->setText(QY("Loading…"));
@@ -253,8 +253,12 @@ Tab::showContextMenu(QPoint const &pos) {
   auto p       = p_func();
   auto idx     = Util::selectedRowIdx(p->m_ui->elements);
   auto element = p->m_model->elementFromIndex(idx);
+  auto items   = p->m_model->itemsForRow(idx);
 
-  if (!element)
+  if (   !element
+      && (   !items[0]->data(Roles::Position).isValid()
+          || !items[0]->data(Roles::Size).isValid()
+          || !items[0]->data(Roles::PseudoType).isValid()))
     return;
 
   QMenu menu{this};
@@ -266,29 +270,44 @@ Tab::showContextMenu(QPoint const &pos) {
 
 void
 Tab::showElementHexDumpInViewer() {
-  auto p       = p_func();
-  auto idx     = Util::selectedRowIdx(p->m_ui->elements);
-  auto element = p->m_model->elementFromIndex(idx);
+  auto p              = p_func();
+  auto idx            = Util::selectedRowIdx(p->m_ui->elements);
+  auto element        = p->m_model->elementFromIndex(idx);
+  auto items          = p->m_model->itemsForRow(idx);
+  auto storedPosition = items[0]->data(Roles::Position);
+  auto storedSize     = items[0]->data(Roles::Size);
+  auto pseudoType     = items[0]->data(Roles::PseudoType);
 
-  if (!element)
+  if (   !element
+      && (   !storedPosition.isValid()
+          || !storedSize.isValid()
+          || !pseudoType.isValid()))
     return;
 
   memory_cptr mem;
   boost::optional<uint64_t> signaledElementSize;
-  uint64_t effectiveElementSize{};
+  uint64_t effectiveElementSize{}, effectiveElementPosition{};
 
   {
     QMutexLocker{&p->m_model->info().mutex()};
 
-    p->m_file->setFilePointer(element->GetElementPosition());
-    if (element->IsFiniteSize())
-      signaledElementSize = element->HeadSize() + element->GetSize();
+    if (element) {
+      if (element->IsFiniteSize())
+        signaledElementSize = element->HeadSize() + element->GetSize();
 
-    effectiveElementSize = signaledElementSize ? *signaledElementSize : p->m_file->get_size() - element->GetElementPosition();
-    auto dumpSize        = std::min<unsigned int>(10 * 1024, effectiveElementSize);
+      effectiveElementPosition = element->GetElementPosition();
+      effectiveElementSize     = signaledElementSize ? *signaledElementSize : p->m_file->get_size() - effectiveElementPosition;
+
+    } else {
+      effectiveElementPosition = storedPosition.toLongLong();
+      effectiveElementSize     = storedSize.toLongLong();
+      signaledElementSize      = effectiveElementSize;
+    }
 
     try {
-      mem = p->m_file->read(dumpSize);
+      p->m_file->setFilePointer(effectiveElementPosition);
+      mem = p->m_file->read(std::min<unsigned int>(10 * 1024, effectiveElementSize));
+
     } catch (mtx::mm_io::exception &) {
     }
   }
@@ -298,9 +317,9 @@ Tab::showElementHexDumpInViewer() {
 
   auto dlg    = new ElementViewerDialog{this};
   auto result = dlg
-    ->setContent(*mem, ElementHighlighter::highlightsForElement(*mem))
-    .setId(EbmlId(*element).GetValue())
-    .setPosition(element->GetElementPosition())
+    ->setContent(*mem, element ? ElementHighlighter::highlightsForElement(*mem) : ElementHighlighter::Highlights{})
+    .setId(element ? EbmlId(*element).GetValue() : pseudoType.toUInt())
+    .setPosition(effectiveElementPosition)
     .setSize(signaledElementSize, effectiveElementSize)
     .exec();
 

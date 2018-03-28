@@ -20,13 +20,19 @@ class KaxInfo;
 
 namespace Info {
 
-namespace {
-constexpr int ElementRole       = Qt::UserRole + 1;
-constexpr int EbmlIdRole        = Qt::UserRole + 2;
-constexpr int DeferredLoadRole  = Qt::UserRole + 3;
-constexpr int LoadedRole        = Qt::UserRole + 4;
-constexpr int PositionRole      = Qt::UserRole + 5;
-constexpr int SizeRole          = Qt::UserRole + 6;
+namespace Roles {
+int constexpr Element      = Qt::UserRole + 1;
+int constexpr EbmlId       = Qt::UserRole + 2;
+int constexpr DeferredLoad = Qt::UserRole + 3;
+int constexpr Loaded       = Qt::UserRole + 4;
+int constexpr Position     = Qt::UserRole + 5;
+int constexpr Size         = Qt::UserRole + 6;
+int constexpr PseudoType   = Qt::UserRole + 7;
+}
+
+namespace PseudoTypes {
+uint32_t constexpr Unknown = 0xff000000u;
+uint32_t constexpr Frame   = 0xff000001u;
 }
 
 class ModelPrivate;

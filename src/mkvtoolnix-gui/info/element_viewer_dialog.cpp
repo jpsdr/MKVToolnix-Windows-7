@@ -11,6 +11,7 @@
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/forms/info/element_viewer_dialog.h"
 #include "mkvtoolnix-gui/info/element_viewer_dialog.h"
+#include "mkvtoolnix-gui/info/model.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 
 namespace mtx { namespace gui { namespace Info {
@@ -81,14 +82,27 @@ ElementViewerDialog::detachWindow() {
   restoreGeometry(geometry);
 }
 
+QString
+ElementViewerDialog::elementName()
+  const {
+  auto p = p_func();
+
+  if (p->m_elementId == PseudoTypes::Frame)
+    return QY("Frame");
+
+  auto name = Q(kax_element_names_c::get(p->m_elementId));
+
+  if (!name.isEmpty())
+    return name;
+
+  return Q(boost::format(Y("Unknown element (ID: 0x%1%)")) % kax_info_c::format_ebml_id_as_hex(p->m_elementId));
+}
+
 void
 ElementViewerDialog::retranslateUi() {
   auto p      = p_func();
-  auto name   = Q(kax_element_names_c::get(p->m_elementId));
+  auto name   = elementName();
   auto locale = QLocale::system();
-
-  if (name.isEmpty())
-    name = Q(boost::format(Y("Unknown element (ID: 0x%1%)")) % kax_info_c::format_ebml_id_as_hex(p->m_elementId));
 
   setWindowTitle(QY("Element viewer: %1").arg(name));
 
