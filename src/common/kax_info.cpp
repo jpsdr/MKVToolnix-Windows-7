@@ -96,6 +96,7 @@ unsigned int s_bf_format_binary_1                   = 0;
 unsigned int s_bf_format_binary_2                   = 0;
 unsigned int s_bf_block_group_block_summary         = 0;
 unsigned int s_bf_block_group_block_frame           = 0;
+unsigned int s_bf_block_group_block_frame_with_size = 0;
 unsigned int s_bf_block_group_summary_position      = 0;
 unsigned int s_bf_block_group_summary_position_hex  = 0;
 unsigned int s_bf_block_group_summary_with_duration = 0;
@@ -103,6 +104,7 @@ unsigned int s_bf_block_group_summary_no_duration   = 0;
 unsigned int s_bf_block_group_summary_v2            = 0;
 unsigned int s_bf_simple_block_basics               = 0;
 unsigned int s_bf_simple_block_frame                = 0;
+unsigned int s_bf_simple_block_frame_with_size      = 0;
 unsigned int s_bf_simple_block_summary              = 0;
 unsigned int s_bf_simple_block_summary_v2           = 0;
 unsigned int s_bf_at                                = 0;
@@ -219,6 +221,7 @@ kax_info_c::init_common_formats() {
   BF_ADD(s_bf_format_binary_2,                   Y(" (adler: 0x%|1$08x|)"));
   BF_ADD(s_bf_block_group_block_summary,         Y("track number %1%, %2% frame(s), timestamp %3%"));
   BF_ADD(s_bf_block_group_block_frame,           Y("Frame%1%%2%"));
+  BF_ADD(s_bf_block_group_block_frame_with_size, Y("Frame with size %1%%2%%3%"));
   BF_ADD(s_bf_block_group_summary_position,      Y(", position %1%"));
   BF_ADD(s_bf_block_group_summary_position_hex,  Y(", position 0x%|1$x|"));
   BF_ADD(s_bf_block_group_summary_with_duration, Y("%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"));
@@ -226,6 +229,7 @@ kax_info_c::init_common_formats() {
   BF_ADD(s_bf_block_group_summary_v2,            Y("[%1% frame for track %2%, timestamp %3%]"));
   BF_ADD(s_bf_simple_block_basics,               Y("%1%track number %2%, %3% frame(s), timestamp %4%"));
   BF_ADD(s_bf_simple_block_frame,                Y("Frame%1%%2%"));
+  BF_ADD(s_bf_simple_block_frame_with_size,      Y("Frame with size %1%%2%%3%"));
   BF_ADD(s_bf_simple_block_summary,              Y("%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"));
   BF_ADD(s_bf_simple_block_summary_v2,           Y("[%1% frame for track %2%, timestamp %3%]"));
   BF_ADD(s_bf_at,                                Y(" at %1%"));
@@ -933,7 +937,9 @@ kax_info_c::post_block(EbmlElement &e) {
     if (p->m_show_hexdump)
       hex = create_hexdump(data.Buffer(), data.Size());
 
-    show_element(nullptr, p->m_level + 1, s_common_formats[s_bf_block_group_block_frame] % adler_str % hex, frame_pos, data.Size());
+    auto text = p->m_show_size ? (s_common_formats[s_bf_block_group_block_frame]                         % adler_str % hex).str()
+              :                  (s_common_formats[s_bf_block_group_block_frame_with_size] % data.Size() % adler_str % hex).str();
+    show_element(nullptr, p->m_level + 1, text, frame_pos, data.Size());
 
     p->m_frame_sizes.push_back(data.Size());
     p->m_frame_adlers.push_back(adler);
@@ -1082,7 +1088,9 @@ kax_info_c::post_simple_block(EbmlElement &e) {
     if (p->m_show_hexdump)
       hex = create_hexdump(data.Buffer(), data.Size());
 
-    show_element(nullptr, p->m_level + 1, s_common_formats[s_bf_simple_block_frame] % adler_str % hex, frame_pos, data.Size());
+    auto text = p->m_show_size ? (s_common_formats[s_bf_simple_block_frame]                         % adler_str % hex).str()
+              :                  (s_common_formats[s_bf_simple_block_frame_with_size] % data.Size() % adler_str % hex).str();
+    show_element(nullptr, p->m_level + 1, text, frame_pos, data.Size());
 
     p->m_frame_sizes.push_back(data.Size());
     p->m_frame_adlers.push_back(adler);
