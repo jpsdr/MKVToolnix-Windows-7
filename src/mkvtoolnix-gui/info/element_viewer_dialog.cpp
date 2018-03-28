@@ -5,6 +5,7 @@
 #include <QFontDatabase>
 #include <QLocale>
 
+#include "common/checksums/base.h"
 #include "common/kax_element_names.h"
 #include "common/kax_info.h"
 #include "common/qt.h"
@@ -100,9 +101,10 @@ ElementViewerDialog::elementName()
 
 void
 ElementViewerDialog::retranslateUi() {
-  auto p      = p_func();
-  auto name   = elementName();
-  auto locale = QLocale::system();
+  auto p       = p_func();
+  auto name    = elementName();
+  auto locale  = QLocale::system();
+  auto haveAll = p->m_numBytesShown == p->m_effectiveSize;
 
   setWindowTitle(QY("Element viewer: %1").arg(name));
 
@@ -110,10 +112,12 @@ ElementViewerDialog::retranslateUi() {
   p->m_ui->size->setText(p->m_signaledSize ? locale.toString(static_cast<quint64>(*p->m_signaledSize)) : QY("unknown"));
   p->m_ui->name->setText(name);
 
-  if (p->m_numBytesShown < p->m_effectiveSize)
+  if (!haveAll)
     p->m_ui->limitedBytesShownLabel->setText(QY("Only the first %1 bytes are shown.").arg(locale.toString(static_cast<quint64>(p->m_numBytesShown))));
-  else
-    p->m_ui->limitedBytesShownLabel->hide();
+
+  p->m_ui->limitedBytesShownLabel->setVisible(!haveAll);
+  p->m_ui->adler32Label->setVisible(haveAll);
+  p->m_ui->adler32->setVisible(haveAll);
 }
 
 QString
@@ -258,6 +262,8 @@ ElementViewerDialog::setContent(memory_c const &mem,
 
   p->m_ui->content->setText(createHexDump(mem, highlights));
   p->m_ui->legend ->setHtml(createLegend(highlights));
+
+  p->m_ui->adler32->setText(Q(boost::format("0x%|1$08x|") % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, mem.get_buffer(), mem.get_size())));
 
   return *this;
 }
