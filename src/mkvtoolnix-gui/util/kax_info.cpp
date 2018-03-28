@@ -212,4 +212,13 @@ KaxInfo::process_file() {
   return kax_info_c::process_file();
 }
 
+void
+KaxInfo::disableFrameInfo() {
+  auto p = p_func();
+
+  p->m_custom_element_post_processors.erase(KaxBlock::ClassInfos.GlobalId.GetValue());
+  p->m_custom_element_post_processors.erase(KaxBlockGroup::ClassInfos.GlobalId.GetValue());
+  p->m_custom_element_post_processors.erase(KaxSimpleBlock::ClassInfos.GlobalId.GetValue());
+}
+
 }}}

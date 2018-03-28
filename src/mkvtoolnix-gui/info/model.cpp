@@ -1,10 +1,12 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QLocale>
 
 #include <ebml/EbmlDummy.h>
 #include <matroska/KaxSegment.h>
 
+#include "common/checksums/base.h"
 #include "common/kax_element_names.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/info/model.h"
@@ -161,6 +163,81 @@ Model::addElement(int level,
 }
 
 void
+Model::addElementInfo(int level,
+                      QString const &text,
+                      boost::optional<int64_t> position,
+                      boost::optional<int64_t> size) {
+  auto p = p_func();
+
+  if (p->m_treeInsertionPosition.isEmpty()) {
+    qDebug() << "showElementInfo: tree insert position is empty for " << level << (position ? *position : -1) << (size ? *size : -1) << text;
+    return;
+  }
+
+  auto items  = newItems();
+  auto locale = QLocale::system();
+
+  items[0]->setText(text);
+  items[2]->setText(position             ? locale.toString(static_cast<quint64>(*position)) : QY("unknown"));
+  items[3]->setText(size && (*size >= 0) ? locale.toString(static_cast<quint64>(*size))     : QY("unknown"));
+
+  items[2]->setTextAlignment(Qt::AlignRight);
+  items[3]->setTextAlignment(Qt::AlignRight);
+
+  if (position)
+    items[0]->setData(static_cast<qint64>(*position), PositionRole);
+  if (size && (*size >= 0))
+    items[0]->setData(static_cast<qint64>(*size),     SizeRole);
+
+  p->m_treeInsertionPosition.last()->appendRow(items);
+}
+
+void
+Model::addFrameInfo(DataBuffer &buffer,
+                    int64_t position) {
+  auto p = p_func();
+
+  if (p->m_treeInsertionPosition.isEmpty()) {
+    qDebug() << "addFrameInfo: tree insert position is empty for " << position << buffer.Size();
+    return;
+  }
+
+  auto items  = newItems();
+  auto locale = QLocale::system();
+
+  items[0]->setText(QY("Frame"));
+  items[1]->setText(Q(boost::format(Y("Adler-32: 0x%|1$08x|")) % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, buffer.Buffer(), buffer.Size())));
+  items[2]->setText(locale.toString(static_cast<quint64>(position)));
+  items[3]->setText(locale.toString(static_cast<quint64>(buffer.Size())));
+
+  items[2]->setTextAlignment(Qt::AlignRight);
+  items[3]->setTextAlignment(Qt::AlignRight);
+
+  items[0]->setData(static_cast<qint64>(position),      PositionRole);
+  items[0]->setData(static_cast<qint64>(buffer.Size()), SizeRole);
+
+  p->m_treeInsertionPosition.last()->appendRow(items);
+}
+
+template<typename T>
+void
+Model::addFrameInfoFor(T &block) {
+  auto framePos = block.GetElementPosition() + block.ElementSize();
+  int numFrames = block.NumberFrames();
+
+  for (int idx = 0; idx < numFrames; ++idx)
+    framePos -= block.GetBuffer(idx).Size();
+
+  for (int idx = 0; idx < numFrames; ++idx) {
+    auto &buffer = block.GetBuffer(idx);
+
+    addFrameInfo(buffer, framePos);
+
+    framePos += buffer.Size();
+  }
+}
+
+void
 Model::addElementStructure(QStandardItem &parent,
                            EbmlElement &element) {
   auto p = p_func();
@@ -172,12 +249,22 @@ Model::addElementStructure(QStandardItem &parent,
 
   parent.appendRow(items);
 
+  p->m_treeInsertionPosition << items[0];
+
   auto master = dynamic_cast<EbmlMaster *>(&element);
-  if (master)
+  if (master) {
     for (auto child : *master)
       addElementStructure(*items[0], *child);
 
+  } else if (dynamic_cast<KaxSimpleBlock *>(&element))
+    addFrameInfoFor(static_cast<KaxSimpleBlock &>(element));
+
+  else if (dynamic_cast<KaxBlock *>(&element))
+    addFrameInfoFor(static_cast<KaxBlock &>(element));
+
   p->m_info->run_generic_post_processors(element);
+
+  p->m_treeInsertionPosition.removeLast();
 }
 
 bool

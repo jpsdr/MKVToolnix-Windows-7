@@ -117,15 +117,16 @@ Tab::load(QString const &fileName) {
     info.set_source_file(p->m_file);
     info.set_use_gui(true);
     info.set_retain_elements(true);
+    info.disableFrameInfo();
 
     connect(&info, &Util::KaxInfo::startOfFileScanStarted,     MainWindow::get(), &MainWindow::startQueueSpinner);
     connect(&info, &Util::KaxInfo::startOfFileScanFinished,    MainWindow::get(), &MainWindow::stopQueueSpinner);
     connect(&info, &Util::KaxInfo::level1ElementsScanStarted,  MainWindow::get(), &MainWindow::startQueueSpinner);
     connect(&info, &Util::KaxInfo::level1ElementsScanFinished, MainWindow::get(), &MainWindow::stopQueueSpinner);
     connect(&info, &Util::KaxInfo::startOfFileScanFinished,    this,              &Tab::expandImportantElements);
-    connect(&info, &Util::KaxInfo::elementInfoFound,           this,              &Tab::showElementInfo);
     connect(&info, &Util::KaxInfo::errorFound,                 this,              &Tab::showError);
     connect(&info, &Util::KaxInfo::elementFound,               p->m_model,        &Model::addElement);
+    connect(&info, &Util::KaxInfo::elementInfoFound,           p->m_model,        &Model::addElementInfo);
 
     emit titleChanged();
 
@@ -187,14 +188,6 @@ Tab::retranslateUi() {
   p->m_showHexDumpAction->setText(QY("Show &hex dump"));
 
   emit titleChanged();
-}
-
-void
-Tab::showElementInfo(int level,
-                     QString const &text,
-                     boost::optional<int64_t> position,
-                     boost::optional<int64_t> size) {
-  qDebug() << "showElementInfo" << level << (position ? *position : -1) << (size ? *size : -1) << text;
 }
 
 void

@@ -52,6 +52,8 @@ public:
 
   virtual QMutex &mutex();
 
+  void disableFrameInfo();
+
 public slots:
   virtual void runScan(ScanType type);
   virtual void scanStartOfFile();
