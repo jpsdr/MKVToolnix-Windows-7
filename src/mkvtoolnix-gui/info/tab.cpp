@@ -317,7 +317,7 @@ Tab::showElementHexDumpInViewer() {
 
   auto dlg    = new ElementViewerDialog{this};
   auto result = dlg
-    ->setContent(*mem, element ? ElementHighlighter::highlightsForElement(*mem) : ElementHighlighter::Highlights{})
+    ->setContent(mem, !!element)
     .setId(element ? EbmlId(*element).GetValue() : pseudoType.toUInt())
     .setPosition(effectiveElementPosition)
     .setSize(signaledElementSize, effectiveElementSize)

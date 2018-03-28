@@ -31,7 +31,7 @@ public:
   explicit ElementViewerDialog(QWidget *parent);
   ~ElementViewerDialog();
 
-  ElementViewerDialog &setContent(memory_c const &mem, ElementHighlighter::Highlights const &highlights = {});
+  ElementViewerDialog &setContent(memory_cptr const &mem, bool isElement);
   ElementViewerDialog &setId(uint32_t id);
   ElementViewerDialog &setPosition(uint64_t position);
   ElementViewerDialog &setSize(boost::optional<uint64_t> signaledSize, uint64_t effectiveSize);

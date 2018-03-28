@@ -31,9 +31,10 @@ using namespace mtx::gui;
 class ElementViewerDialogPrivate {
 public:
   std::unique_ptr<Ui::ElementViewerDialog> m_ui;
-  ElementHighlighter::Highlights m_highlights;
+  memory_cptr m_mem;
+  bool m_isElement{};
   boost::optional<uint64_t> m_signaledSize;
-  uint64_t m_effectiveSize{}, m_numBytesShown{};
+  uint64_t m_effectiveSize{};
   uint32_t m_elementId{};
 
   ElementViewerDialogPrivate()
@@ -101,23 +102,28 @@ ElementViewerDialog::elementName()
 
 void
 ElementViewerDialog::retranslateUi() {
-  auto p       = p_func();
-  auto name    = elementName();
-  auto locale  = QLocale::system();
-  auto haveAll = p->m_numBytesShown == p->m_effectiveSize;
+  auto p          = p_func();
+  auto name       = elementName();
+  auto locale     = QLocale::system();
+  auto haveAll    = p->m_mem->get_size() == p->m_effectiveSize;
+  auto highlights = p->m_isElement ? ElementHighlighter::highlightsForElement(*p->m_mem) : ElementHighlighter::Highlights{};
 
   setWindowTitle(QY("Element viewer: %1").arg(name));
 
   p->m_ui->retranslateUi(this);
-  p->m_ui->size->setText(p->m_signaledSize ? locale.toString(static_cast<quint64>(*p->m_signaledSize)) : QY("unknown"));
-  p->m_ui->name->setText(name);
 
-  if (!haveAll)
-    p->m_ui->limitedBytesShownLabel->setText(QY("Only the first %1 bytes are shown.").arg(locale.toString(static_cast<quint64>(p->m_numBytesShown))));
+  p->m_ui->size                  ->setText(p->m_signaledSize ? locale.toString(static_cast<quint64>(*p->m_signaledSize)) : QY("unknown"));
+  p->m_ui->name                  ->setText(name);
+  p->m_ui->adler32               ->setText(Q(boost::format("0x%|1$08x|") % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, p->m_mem->get_buffer(), p->m_mem->get_size())));
+  p->m_ui->limitedBytesShownLabel->setText(QY("Only the first %1 bytes are shown.").arg(locale.toString(static_cast<quint64>(p->m_mem->get_size()))));
+  p->m_ui->content               ->setText(createHexDump(*p->m_mem, highlights));
+  p->m_ui->legend                ->setHtml(createLegend(highlights));
 
+  p->m_ui->adler32Label          ->setVisible( haveAll);
+  p->m_ui->adler32               ->setVisible( haveAll);
   p->m_ui->limitedBytesShownLabel->setVisible(!haveAll);
-  p->m_ui->adler32Label->setVisible(haveAll);
-  p->m_ui->adler32->setVisible(haveAll);
+  p->m_ui->legendLabel           ->setVisible(!highlights.isEmpty());
+  p->m_ui->legend                ->setVisible(!highlights.isEmpty());
 }
 
 QString
@@ -255,19 +261,11 @@ ElementViewerDialog::createLegend(ElementHighlighter::Highlights const &highligh
 }
 
 ElementViewerDialog &
-ElementViewerDialog::setContent(memory_c const &mem,
-                                ElementHighlighter::Highlights const &highlights) {
-  auto p             = p_func();
-  p->m_highlights    = highlights;
-  p->m_numBytesShown = mem.get_size();
-
-  p->m_ui->legend      ->setVisible(!highlights.isEmpty());
-  p->m_ui->legendLabel->setVisible(!highlights.isEmpty());
-
-  p->m_ui->content->setText(createHexDump(mem, highlights));
-  p->m_ui->legend ->setHtml(createLegend(highlights));
-
-  p->m_ui->adler32->setText(Q(boost::format("0x%|1$08x|") % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, mem.get_buffer(), mem.get_size())));
+ElementViewerDialog::setContent(memory_cptr const &mem,
+                                bool isElement) {
+  auto p         = p_func();
+  p->m_mem       = mem;
+  p->m_isElement = isElement;
 
   return *this;
 }
