@@ -18,7 +18,8 @@
   are only loaded on demand. Implements the rest of #2104.
 * MKVToolNix GUI: info tool: added a context menu with the option to show a
   hex dump of the element with the bytes making up the EBML ID and the size
-  portion highlighted in different colors.
+  portion highlighted in different colors. In-depth highlighting is done for
+  the data in `SimpleBlock` and `Block` elements.
 * mkvinfo: the size and positions of frames within "SimpleBlock" and
   "BlockGroup" elements are now shown the same way they're shown for other
   elements (by adding the `-v -v` and `-z` options).

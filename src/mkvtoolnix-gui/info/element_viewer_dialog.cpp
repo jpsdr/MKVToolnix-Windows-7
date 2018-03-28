@@ -237,17 +237,21 @@ ElementViewerDialog::createLegend(ElementHighlighter::Highlights const &highligh
     return {};
 
   auto idx    = 0;
-  auto legend = createHtmlHead(highlights, Q(".monospace { font-family: '%1'; }").arg(monospaceFontFamily()));
+  auto legend = createHtmlHead(highlights,
+                               Q(".monospace { font-family: '%1'; }\n"
+                                 "table { margin: 0px; }\n"
+                                 "td { vertical-align: top; }\n")
+                               .arg(monospaceFontFamily()));
 
-  legend += Q("<body><p>");
+  legend += Q("<body><table>");
 
   for (auto const &highlight : highlights) {
     if (!highlight.m_label.isEmpty())
-      legend += Q("<span class=\"monospace c%1\">....</span> %2<br>").arg(idx).arg(highlight.m_label);
+      legend += Q("<tr><td class=\"monospace c%1\">&nbsp;&nbsp;&nbsp;</td><td>%2</td></tr>").arg(idx).arg(highlight.m_label);
     ++idx;
   }
 
-  return legend + Q("</p></body></html>");
+  return legend + Q("</table></body></html>");
 }
 
 ElementViewerDialog &
