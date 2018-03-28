@@ -78,7 +78,7 @@ ElementViewerDialog::detachWindow() {
 
   setModal(false);
 
-  p->m_ui->detachWindowButton->hide();
+  p->m_ui->detachWindowButton->setEnabled(false);
   show();
   restoreGeometry(geometry);
 }
