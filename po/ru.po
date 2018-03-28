@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 22:57+0200\n"
+"POT-Creation-Date: 2018-03-28 23:21+0200\n"
 "PO-Revision-Date: 2018-03-28 23:03+0200\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -4373,10 +4373,6 @@ msgstr "Продолжительность по умолчанию"
 msgid "Default duration/FPS:"
 msgstr "Продолжительность по умолчанию/FPS:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
-msgid "Default info job settings"
-msgstr "Настройки \"Информации о задании\" по умолчанию"
-
 #: src/common/kax_element_names.cpp:310
 msgid "Default language"
 msgstr "Язык по умолчанию"
@@ -4407,6 +4403,10 @@ msgstr "Язык дорожек по умолчанию"
 #, no-c-format
 msgid "Default values"
 msgstr "Значения по умолчанию"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
+msgid "Defaults for jobs saving info tool output to text files"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -6077,10 +6077,6 @@ msgstr "Индексация (cues):"
 #, no-c-format
 msgid "Info job"
 msgstr "Информация о задании"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
-msgid "Info job settings"
-msgstr "Настройки \"Информации о задании\""
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:239
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:392
@@ -8632,9 +8628,13 @@ msgstr "Частота дискретизации (Гц)."
 msgid "Save as &XML file"
 msgstr "&Сохранить как XML-файл "
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 msgid "Save as &default for new multiplex jobs"
+msgstr "Сохранить как параметры по умолчанию для новых заданий слияния"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
+#, fuzzy
+msgid "Save as &default for saving output to text files"
 msgstr "Сохранить как параметры по умолчанию для новых заданий слияния"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -9003,6 +9003,10 @@ msgstr "В этой функции устанавливается стереор
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Settings"
 msgstr "Настройки"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
+msgid "Settings for saving output to a text file"
+msgstr ""
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -13496,6 +13500,9 @@ msgstr "– Установлено в 'нет' –"
 #~ msgid "Default flag"
 #~ msgstr "Флаг по умолчанию: %1%"
 
+#~ msgid "Default info job settings"
+#~ msgstr "Настройки \"Информации о задании\" по умолчанию"
+
 #~ msgid "Delay: %|1$.3f|ms"
 #~ msgstr "Задержка: %|1$.3f|ms"
 
@@ -13570,6 +13577,9 @@ msgstr "– Установлено в 'нет' –"
 
 #~ msgid "Info"
 #~ msgstr "Информация"
+
+#~ msgid "Info job settings"
+#~ msgstr "Настройки \"Информации о задании\""
 
 #~ msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"
 #~ msgstr "Неверный формат строки SSA ('%1%') на таймкоде %2%: найдено слишком много полей (%3% вместо 9). Эта запись будет пропущена.\n"

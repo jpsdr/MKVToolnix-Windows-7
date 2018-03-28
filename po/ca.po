@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 22:57+0200\n"
+"POT-Creation-Date: 2018-03-28 23:21+0200\n"
 "PO-Revision-Date: 2018-03-28 23:00+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -4613,10 +4613,6 @@ msgstr "Durada per omissió"
 msgid "Default duration/FPS:"
 msgstr "Durada/FPS per omissió:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
-msgid "Default info job settings"
-msgstr "Per omissió pels ajustaments de la tasca d'informació"
-
 #: src/common/kax_element_names.cpp:310
 msgid "Default language"
 msgstr "Idioma per omissió"
@@ -4647,6 +4643,10 @@ msgstr "Idiomes a establir com per omissió per a les pistes"
 #, no-c-format
 msgid "Default values"
 msgstr "Valors per omissió"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
+msgid "Defaults for jobs saving info tool output to text files"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -6316,10 +6316,6 @@ msgstr "Indexació (CUE):"
 #, no-c-format
 msgid "Info job"
 msgstr "Informació de la tasca"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
-msgid "Info job settings"
-msgstr "Ajustaments de la tasca d'informació"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:239
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:392
@@ -8852,9 +8848,13 @@ msgstr "Freqüència de mostreig en Hz."
 msgid "Save as &XML file"
 msgstr "Desa a un fitxer &XML"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 msgid "Save as &default for new multiplex jobs"
+msgstr "Desa com per &omissió per a les tasques de multiplexat noves"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
+#, fuzzy
+msgid "Save as &default for saving output to text files"
 msgstr "Desa com per &omissió per a les tasques de multiplexat noves"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -9219,6 +9219,10 @@ msgstr "Estableix el mode estèreo de la pista de vídeo a aquest valor."
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Settings"
 msgstr "Ajustaments"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
+msgid "Settings for saving output to a text file"
+msgstr ""
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -13721,6 +13725,9 @@ msgstr "– Establert a «no» –"
 #~ msgid "Default flag"
 #~ msgstr "Etiqueta per omissió: %1%"
 
+#~ msgid "Default info job settings"
+#~ msgstr "Per omissió pels ajustaments de la tasca d'informació"
+
 #~ msgid "Delay: %|1$.3f|ms"
 #~ msgstr "Retard: %|1$.3f|ms"
 
@@ -13800,6 +13807,9 @@ msgstr "– Establert a «no» –"
 
 #~ msgid "Info"
 #~ msgstr "Informació"
+
+#~ msgid "Info job settings"
+#~ msgstr "Ajustaments de la tasca d'informació"
 
 #~ msgid ""
 #~ "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields "

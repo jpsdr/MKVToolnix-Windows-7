@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 22:57+0200\n"
+"POT-Creation-Date: 2018-03-28 23:21+0200\n"
 "PO-Revision-Date: 2018-03-28 23:04+0200\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -4752,11 +4752,6 @@ msgstr "Подразумевано трајање"
 msgid "Default duration/FPS:"
 msgstr "Подразумевано трајање/КпС:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
-#, fuzzy
-msgid "Default info job settings"
-msgstr "Подразумевано за уносе новог поглавља:"
-
 #: src/common/kax_element_names.cpp:310
 #, fuzzy
 msgid "Default language"
@@ -4791,6 +4786,10 @@ msgstr "Подразумевани &језик записа је:"
 #, fuzzy, no-c-format
 msgid "Default values"
 msgstr "&Подразумевано"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
+msgid "Defaults for jobs saving info tool output to text files"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 #, fuzzy
@@ -6518,11 +6517,6 @@ msgstr "Индексирање (кју-уноси):"
 #, fuzzy, no-c-format
 msgid "Info job"
 msgstr "Алатка &обавештења"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
-#, fuzzy
-msgid "Info job settings"
-msgstr "&Отвори поставке"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:239
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:392
@@ -9126,10 +9120,14 @@ msgstr "Учестаност узорковања (у херцима)."
 msgid "Save as &XML file"
 msgstr "Сачувај у И&ксМЛ датотеци"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 #, fuzzy
 msgid "Save as &default for new multiplex jobs"
+msgstr "Сачувај као &подразумевано за нова сједињавања"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
+#, fuzzy
+msgid "Save as &default for saving output to text files"
 msgstr "Сачувај као &подразумевано за нова сједињавања"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -9506,6 +9504,10 @@ msgstr "Поставља стерео режим овог записа на ов
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Settings"
 msgstr "Поставке"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
+msgid "Settings for saving output to a text file"
+msgstr ""
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -14132,6 +14134,9 @@ msgstr "— не постављај —"
 #~ msgid "Default flag"
 #~ msgstr "Подразумева се: %1%"
 
+#~ msgid "Default info job settings"
+#~ msgstr "Подразумевано за уносе новог поглавља:"
+
 #~ msgid "Delay: %|1$.3f|ms"
 #~ msgstr "Кашњење: %|1$.3f|ms"
 
@@ -14208,6 +14213,9 @@ msgstr "— не постављај —"
 
 #~ msgid "Info"
 #~ msgstr "Мкв-обавештајац"
+
+#~ msgid "Info job settings"
+#~ msgstr "&Отвори поставке"
 
 #~ msgid ""
 #~ "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields "

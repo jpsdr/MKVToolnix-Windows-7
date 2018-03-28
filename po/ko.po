@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 22:57+0200\n"
+"POT-Creation-Date: 2018-03-28 23:21+0200\n"
 "PO-Revision-Date: 2018-03-28 23:02+0200\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -4499,10 +4499,6 @@ msgstr "기본 재생 시간"
 msgid "Default duration/FPS:"
 msgstr "기본 재생 시간/FPS:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
-msgid "Default info job settings"
-msgstr "기본 정보 작업 설정"
-
 #: src/common/kax_element_names.cpp:310
 msgid "Default language"
 msgstr "기본 언어"
@@ -4533,6 +4529,10 @@ msgstr "기본 트랙 언어 설정"
 #, no-c-format
 msgid "Default values"
 msgstr "기본값"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
+msgid "Defaults for jobs saving info tool output to text files"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -6200,10 +6200,6 @@ msgstr "인덱싱 (큐):"
 #, no-c-format
 msgid "Info job"
 msgstr "정보 작업"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
-msgid "Info job settings"
-msgstr "정보 작업 설정"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:239
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:392
@@ -8725,9 +8721,13 @@ msgstr "샘플링 주파수(Hz단위)입니다."
 msgid "Save as &XML file"
 msgstr "&XML 파일로 저장"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 msgid "Save as &default for new multiplex jobs"
+msgstr "새 합치기 작업의 기본값으로 저장하기(&D)"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
+#, fuzzy
+msgid "Save as &default for saving output to text files"
 msgstr "새 합치기 작업의 기본값으로 저장하기(&D)"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -9089,6 +9089,10 @@ msgstr "비디오 트랙의 스테레오 모드를 이 값으로 설정합니다
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Settings"
 msgstr "설정"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
+msgid "Settings for saving output to a text file"
+msgstr ""
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -13532,6 +13536,9 @@ msgstr "– 없음으로 설정 –"
 #~ msgid "Default flag"
 #~ msgstr "기본 플래그: %1%"
 
+#~ msgid "Default info job settings"
+#~ msgstr "기본 정보 작업 설정"
+
 #~ msgid "Delay: %|1$.3f|ms"
 #~ msgstr "지연: %|1$.3f|ms"
 
@@ -13603,6 +13610,9 @@ msgstr "– 없음으로 설정 –"
 
 #~ msgid "Info"
 #~ msgstr "정보"
+
+#~ msgid "Info job settings"
+#~ msgstr "정보 작업 설정"
 
 #~ msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"
 #~ msgstr "타임코드 %2%의 SSA 행('%1%')의 형식이 잘못됨: 너무 많은 필드의 수를 찾았습니다 (9개 대신 %3%). 이 항목을 건너 뜁니다.\n"

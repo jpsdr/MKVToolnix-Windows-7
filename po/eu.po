@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 22:57+0200\n"
+"POT-Creation-Date: 2018-03-28 23:21+0200\n"
 "PO-Revision-Date: 2018-03-28 23:01+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -4558,10 +4558,6 @@ msgstr "Berezko iraupena"
 msgid "Default duration/FPS:"
 msgstr "Berezko iraupena/FS-ko:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
-msgid "Default info job settings"
-msgstr "Berezko argibide lan ezarpenak"
-
 #: src/common/kax_element_names.cpp:310
 msgid "Default language"
 msgstr "Berezko hizkuntza"
@@ -4592,6 +4588,10 @@ msgstr "Berezko bide hizkuntzak ezartzeko"
 #, no-c-format
 msgid "Default values"
 msgstr "Berezko balioak"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
+msgid "Defaults for jobs saving info tool output to text files"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -6264,10 +6264,6 @@ msgstr "Aurkibidetzen (cue-ak):"
 #, no-c-format
 msgid "Info job"
 msgstr "Argibide lana"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
-msgid "Info job settings"
-msgstr "Argibide lan ezapenak"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:239
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:392
@@ -8805,9 +8801,13 @@ msgstr "Laginketa maiztasuna Hz-tan."
 msgid "Save as &XML file"
 msgstr "Gorde &XML agiri bezala"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 msgid "Save as &default for new multiplex jobs"
+msgstr "Gorde &berezko bezala multiplexatze lan berrientzat"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
+#, fuzzy
+msgid "Save as &default for saving output to text files"
 msgstr "Gorde &berezko bezala multiplexatze lan berrientzat"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -9177,6 +9177,11 @@ msgstr "Bideo bidearen estereo modua balio honetan ezartzen du."
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Settings"
 msgstr "Ezarpenak"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
+#, fuzzy
+msgid "Settings for saving output to a text file"
+msgstr "Gorde oraingo agiriaren argibieak idazki agiri batean"
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -14565,6 +14570,9 @@ msgstr "– Ezarri ezer ez bezala –"
 #~ msgid "Default flag"
 #~ msgstr "Berezko ikurra: %1%"
 
+#~ msgid "Default info job settings"
+#~ msgstr "Berezko argibide lan ezarpenak"
+
 #~ msgid "Default subtitle charset"
 #~ msgstr "Berezko azpidatzi hizki-kodea"
 
@@ -15144,6 +15152,9 @@ msgstr "– Ezarri ezer ez bezala –"
 
 #~ msgid "Info"
 #~ msgstr "Argibideak"
+
+#~ msgid "Info job settings"
+#~ msgstr "Argibide lan ezapenak"
 
 #~ msgid "Input"
 #~ msgstr "Sarrera"
@@ -15839,9 +15850,6 @@ msgstr "– Ezarri ezer ez bezala –"
 
 #~ msgid "Save the header values"
 #~ msgstr "Gorde idazburu balioak"
-
-#~ msgid "Saves the information from the current file to a text file"
-#~ msgstr "Gorde oraingo agiriaren argibieak idazki agiri batean"
 
 #~ msgid "Scan directory for other playlists:"
 #~ msgstr "Mihatu zuzenbidea beste irakur-zerrendentzat:"

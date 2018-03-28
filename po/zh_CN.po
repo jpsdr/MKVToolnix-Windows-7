@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 22:57+0200\n"
+"POT-Creation-Date: 2018-03-28 23:21+0200\n"
 "PO-Revision-Date: 2018-03-28 23:04+0200\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -4464,10 +4464,6 @@ msgstr "默认帧时长"
 msgid "Default duration/FPS:"
 msgstr "默认帧时长或帧率:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
-msgid "Default info job settings"
-msgstr "默认信息任务设置"
-
 #: src/common/kax_element_names.cpp:310
 msgid "Default language"
 msgstr "默认语言"
@@ -4498,6 +4494,10 @@ msgstr "轨道默认语言"
 #, no-c-format
 msgid "Default values"
 msgstr "默认值"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
+msgid "Defaults for jobs saving info tool output to text files"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -6163,10 +6163,6 @@ msgstr "索引 (cue):"
 #, no-c-format
 msgid "Info job"
 msgstr "信息任务"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
-msgid "Info job settings"
-msgstr "信息任务设置"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:239
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:392
@@ -8687,9 +8683,13 @@ msgstr "采样率，单位 Hz。"
 msgid "Save as &XML file"
 msgstr "保存为 &XML 文件"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 msgid "Save as &default for new multiplex jobs"
+msgstr "保存为新建混流任务的默认参数(&D)"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
+#, fuzzy
+msgid "Save as &default for saving output to text files"
 msgstr "保存为新建混流任务的默认参数(&D)"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -9044,6 +9044,10 @@ msgstr "设置该视频轨道的立体模式。"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Settings"
 msgstr "设置"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
+msgid "Settings for saving output to a text file"
+msgstr ""
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -13495,6 +13499,9 @@ msgstr "– 设为空 –"
 #~ msgid "Default flag"
 #~ msgstr "“默认”标记: %1%"
 
+#~ msgid "Default info job settings"
+#~ msgstr "默认信息任务设置"
+
 #~ msgid "Delay: %|1$.3f|ms"
 #~ msgstr "延迟: %|1$.3f|毫秒"
 
@@ -13566,6 +13573,9 @@ msgstr "– 设为空 –"
 
 #~ msgid "Info"
 #~ msgstr "信息"
+
+#~ msgid "Info job settings"
+#~ msgstr "信息任务设置"
 
 #~ msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"
 #~ msgstr "时间码 %2% 处的 SSA 行 ('%1%') 格式无效：存在过多字段 (%3% 而不是 9)。该条将被跳过。\n"

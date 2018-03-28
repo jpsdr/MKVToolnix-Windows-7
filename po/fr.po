@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 22:57+0200\n"
+"POT-Creation-Date: 2018-03-28 23:21+0200\n"
 "PO-Revision-Date: 2018-03-28 23:01+0200\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
@@ -4543,10 +4543,6 @@ msgstr "Durée par défaut"
 msgid "Default duration/FPS:"
 msgstr "Durée/Images par seconde par défaut :"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
-msgid "Default info job settings"
-msgstr "Paramètres d'infos de tâche par défaut"
-
 #: src/common/kax_element_names.cpp:310
 msgid "Default language"
 msgstr "Langue par défaut"
@@ -4577,6 +4573,10 @@ msgstr "Langues par défaut à définir pour les pistes"
 #, no-c-format
 msgid "Default values"
 msgstr "Valeurs par défaut"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
+msgid "Defaults for jobs saving info tool output to text files"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -6243,10 +6243,6 @@ msgstr "Indexage (données CUE) :"
 #, no-c-format
 msgid "Info job"
 msgstr "Tâche d'infos"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
-msgid "Info job settings"
-msgstr "Paramètres d'infos de tâche"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:239
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:392
@@ -8776,9 +8772,13 @@ msgstr "Fréquence d'échantillonnage en Hz."
 msgid "Save as &XML file"
 msgstr "Enregistrer en tant que fichier &XML…"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 msgid "Save as &default for new multiplex jobs"
+msgstr "Enregistrer en valeurs par défaut pour les nouvelles tâches de multiplexage"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
+#, fuzzy
+msgid "Save as &default for saving output to text files"
 msgstr "Enregistrer en valeurs par défaut pour les nouvelles tâches de multiplexage"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -9143,6 +9143,10 @@ msgstr "Définit le mode stéréo de la piste vidéo à cette valeur."
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Settings"
 msgstr "Paramètres"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
+msgid "Settings for saving output to a text file"
+msgstr ""
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -13624,6 +13628,9 @@ msgstr "– Défini à aucun –"
 #~ msgid "Default flag"
 #~ msgstr "Signal par défaut : %1%"
 
+#~ msgid "Default info job settings"
+#~ msgstr "Paramètres d'infos de tâche par défaut"
+
 #~ msgid "Delay: %|1$.3f|ms"
 #~ msgstr "Décalage : %|1$.3f| ms"
 
@@ -13695,6 +13702,9 @@ msgstr "– Défini à aucun –"
 
 #~ msgid "Info"
 #~ msgstr "Infos"
+
+#~ msgid "Info job settings"
+#~ msgstr "Paramètres d'infos de tâche"
 
 #~ msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"
 #~ msgstr "Format incorrect pour une ligne SSA (« %1% ») au code temporel %2% : trop de champs trouvés (%3% au lieu de 9). Cette entrée sera ignorée.\n"

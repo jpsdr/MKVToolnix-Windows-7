@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 22:57+0200\n"
+"POT-Creation-Date: 2018-03-28 23:21+0200\n"
 "PO-Revision-Date: 2018-03-28 23:02+0200\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -4648,11 +4648,6 @@ msgstr "デフォルトのフレーム持続期間"
 msgid "Default duration/FPS:"
 msgstr "デフォルトのフレーム持続期間・FPS："
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
-#, fuzzy
-msgid "Default info job settings"
-msgstr "新しいMUX設定のデフォルト値"
-
 #: src/common/kax_element_names.cpp:310
 #, fuzzy
 msgid "Default language"
@@ -4685,6 +4680,10 @@ msgstr "デフォルトで設定するトラックの言語"
 #, no-c-format
 msgid "Default values"
 msgstr "デフォルト値"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
+msgid "Defaults for jobs saving info tool output to text files"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -6405,11 +6404,6 @@ msgstr "インデックス（キュー）："
 #, fuzzy, no-c-format
 msgid "Info job"
 msgstr "Infoツール"
-
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
-#, fuzzy
-msgid "Info job settings"
-msgstr "設定ファイルを開く(&O)"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:239
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:392
@@ -8986,10 +8980,14 @@ msgstr "サンプリング周波数（Hz単位）です。"
 msgid "Save as &XML file"
 msgstr "XMLファイルとして保存(&X)"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 #, fuzzy
 msgid "Save as &default for new multiplex jobs"
+msgstr "新規のマージジョブのデフォルトとして保存する(&D)"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
+#, fuzzy
+msgid "Save as &default for saving output to text files"
 msgstr "新規のマージジョブのデフォルトとして保存する(&D)"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
@@ -9356,6 +9354,10 @@ msgstr "ビデオトラックのステレオモードをこの値に設定しま
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Settings"
 msgstr "設定"
+
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
+msgid "Settings for saving output to a text file"
+msgstr ""
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -13903,6 +13905,9 @@ msgstr "無しに設定"
 #~ msgid "Default flag"
 #~ msgstr "デフォルトフラグ：%1%"
 
+#~ msgid "Default info job settings"
+#~ msgstr "新しいMUX設定のデフォルト値"
+
 #~ msgid "Delay: %|1$.3f|ms"
 #~ msgstr "遅延：%|1$.3f|ms"
 
@@ -13974,6 +13979,9 @@ msgstr "無しに設定"
 
 #~ msgid "Info"
 #~ msgstr "Info"
+
+#~ msgid "Info job settings"
+#~ msgstr "設定ファイルを開く(&O)"
 
 #~ msgid "Invalid format for a SSA line ('%1%') at timestamp %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"
 #~ msgstr "タイムコード%2%のSSA行（'%1%'）が無効なフォーマットです：フィールドの数が多すぎます（正しくは9つですが%3%でした）。このエントリはスキップされます。\n"
