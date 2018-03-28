@@ -965,7 +965,10 @@ kax_info_c::post_block_group(EbmlElement &e) {
   if (p->m_show_summary) {
     std::string position;
     std::size_t fidx;
-    auto frame_pos = e.GetElementPosition() + e.HeadSize();
+    auto frame_pos = e.GetElementPosition() + e.ElementSize();
+
+    for (auto size : p->m_frame_sizes)
+      frame_pos -= size;
 
     for (fidx = 0; fidx < p->m_frame_sizes.size(); fidx++) {
       if (1 <= p->m_verbose) {

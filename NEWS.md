@@ -50,6 +50,10 @@
   treated as having eight channels.
 * source code: fixed a compilation error on FreeBSD with clang++ 5.0. Fixes
   #2255.
+* mkvinfo: summary mode: the file positions reported for frames in
+  `BlockGroup` elements did not take the bytes used for information such as
+  timestamp, track number flags or lace sizes into account. They were
+  therefore too low.
 
 ## Build system changes
 
