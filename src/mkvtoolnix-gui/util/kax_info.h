@@ -42,7 +42,7 @@ public:
   virtual ~KaxInfo();
 
   virtual void ui_show_error(std::string const &error) override;
-  virtual void ui_show_element_info(int level, std::string const &text, int64_t position, int64_t size) override;
+  virtual void ui_show_element_info(int level, std::string const &text, boost::optional<int64_t> position, boost::optional<int64_t> size) override;
   virtual void ui_show_element(EbmlElement &e) override;
   virtual void ui_show_progress(int percentage, std::string const &text) override;
 
@@ -59,7 +59,7 @@ public slots:
   virtual void abort();
 
 signals:
-  void elementInfoFound(int level, QString const &text, int64_t position, int64_t size);
+  void elementInfoFound(int level, QString const &text, boost::optional<int64_t> position, boost::optional<int64_t> size);
   void elementFound(int level, EbmlElement *e, bool readFully);
   void errorFound(const QString &message);
   void progressChanged(int percentage, const QString &text);

@@ -218,14 +218,14 @@ kax_info_c::init_common_formats() {
   BF_ADD(s_bf_format_binary_1,                   Y("length %1%, data: %2%"));
   BF_ADD(s_bf_format_binary_2,                   Y(" (adler: 0x%|1$08x|)"));
   BF_ADD(s_bf_block_group_block_summary,         Y("track number %1%, %2% frame(s), timestamp %3%"));
-  BF_ADD(s_bf_block_group_block_frame,           Y("Frame with size %1%%2%%3%"));
+  BF_ADD(s_bf_block_group_block_frame,           Y("Frame%1%%2%"));
   BF_ADD(s_bf_block_group_summary_position,      Y(", position %1%"));
   BF_ADD(s_bf_block_group_summary_position_hex,  Y(", position 0x%|1$x|"));
   BF_ADD(s_bf_block_group_summary_with_duration, Y("%1% frame, track %2%, timestamp %3%, duration %4%, size %5%, adler 0x%|6$08x|%7%%8%\n"));
   BF_ADD(s_bf_block_group_summary_no_duration,   Y("%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%%7%\n"));
   BF_ADD(s_bf_block_group_summary_v2,            Y("[%1% frame for track %2%, timestamp %3%]"));
   BF_ADD(s_bf_simple_block_basics,               Y("%1%track number %2%, %3% frame(s), timestamp %4%"));
-  BF_ADD(s_bf_simple_block_frame,                Y("Frame with size %1%%2%%3%"));
+  BF_ADD(s_bf_simple_block_frame,                Y("Frame%1%%2%"));
   BF_ADD(s_bf_simple_block_summary,              Y("%1% frame, track %2%, timestamp %3%, size %4%, adler 0x%|5$08x|%6%\n"));
   BF_ADD(s_bf_simple_block_summary_v2,           Y("[%1% frame for track %2%, timestamp %3%]"));
   BF_ADD(s_bf_at,                                Y(" at %1%"));
@@ -245,8 +245,8 @@ kax_info_c::init_common_formats() {
 void
 kax_info_c::ui_show_element_info(int level,
                                  std::string const &text,
-                                 int64_t position,
-                                 int64_t size) {
+                                 boost::optional<int64_t> position,
+                                 boost::optional<int64_t> size) {
   std::string level_buffer(level, ' ');
   level_buffer[0] = '|';
 
@@ -279,14 +279,18 @@ kax_info_c::ui_show_progress(int /* percentage */,
 void
 kax_info_c::show_element(EbmlElement *l,
                          int level,
-                         const std::string &info) {
+                         const std::string &info,
+                         boost::optional<int64_t> position,
+                         boost::optional<int64_t> size) {
   if (p_func()->m_show_summary)
     return;
 
   ui_show_element_info(level, info,
-                         !l                 ? -1
+                         position           ? *position
+                       : !l                 ? boost::optional<int64_t>{}
                        :                      static_cast<int64_t>(l->GetElementPosition()),
-                         !l                 ? -1
+                         size               ? *size
+                       : !l                 ? boost::optional<int64_t>{}
                        : !l->IsFiniteSize() ? -2
                        :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()));
 }
@@ -294,8 +298,10 @@ kax_info_c::show_element(EbmlElement *l,
 void
 kax_info_c::show_element(EbmlElement *l,
                          int level,
-                         boost::format const &info) {
-  show_element(l, level, info.str());
+                         boost::format const &info,
+                         boost::optional<int64_t> position,
+                         boost::optional<int64_t> size) {
+  show_element(l, level, info.str(), position, size);
 }
 
 std::string
@@ -325,18 +331,18 @@ kax_info_c::create_known_element_but_not_allowed_here_text(EbmlElement &e) {
 
 std::string
 kax_info_c::create_element_text(const std::string &text,
-                                int64_t position,
-                                int64_t size) {
+                                boost::optional<int64_t> position,
+                                boost::optional<int64_t> size) {
   auto p = p_func();
 
   std::string additional_text;
 
-  if ((1 < p->m_verbose) && (0 <= position))
-    additional_text += ((p->m_hex_positions ? s_common_formats[s_bf_at_hex] : s_common_formats[s_bf_at]) % position).str();
+  if ((1 < p->m_verbose) && position)
+    additional_text += ((p->m_hex_positions ? s_common_formats[s_bf_at_hex] : s_common_formats[s_bf_at]) % *position).str();
 
-  if (p->m_show_size && (-1 != size)) {
-    if (-2 != size)
-      additional_text += (s_common_formats[s_bf_size] % size).str();
+  if (p->m_show_size && size) {
+    if (-2 != *size)
+      additional_text += (s_common_formats[s_bf_size] % *size).str();
     else
       additional_text += Y(" size is unknown");
   }
@@ -908,9 +914,12 @@ kax_info_c::format_block(EbmlElement &e) {
 
 void
 kax_info_c::post_block(EbmlElement &e) {
-  auto p = p_func();
+  auto p         = p_func();
+  auto &block    = static_cast<KaxBlock &>(e);
+  auto frame_pos = e.GetElementPosition() + e.ElementSize();
 
-  auto &block = static_cast<KaxBlock &>(e);
+  for (int i = 0, num_frames = block.NumberFrames(); i < num_frames; ++i)
+    frame_pos -= block.GetBuffer(i).Size();
 
   for (int i = 0, num_frames = block.NumberFrames(); i < num_frames; ++i) {
     auto &data = block.GetBuffer(i);
@@ -924,11 +933,13 @@ kax_info_c::post_block(EbmlElement &e) {
     if (p->m_show_hexdump)
       hex = create_hexdump(data.Buffer(), data.Size());
 
-    show_element(nullptr, p->m_level + 1, s_common_formats[s_bf_block_group_block_frame] % data.Size() % adler_str % hex);
+    show_element(nullptr, p->m_level + 1, s_common_formats[s_bf_block_group_block_frame] % adler_str % hex, frame_pos, data.Size());
 
     p->m_frame_sizes.push_back(data.Size());
     p->m_frame_adlers.push_back(adler);
     p->m_frame_hexdumps.push_back(hex);
+
+    frame_pos += data.Size();
   }
 }
 
@@ -1049,7 +1060,12 @@ kax_info_c::post_simple_block(EbmlElement &e) {
   auto &tinfo       = p->m_track_info[block.TrackNum()];
   auto timestamp_ns = mtx::math::to_signed(block.GlobalTimecode());
   int num_frames    = block.NumberFrames();
-  int64_t frame_pos = block.GetElementPosition() + block.ElementSize();
+  auto frames_start = block.GetElementPosition() + block.ElementSize();
+
+  for (int idx = 0; idx < num_frames; ++idx)
+    frames_start -= block.GetBuffer(idx).Size();
+
+  auto frame_pos = frames_start;
 
   for (int idx = 0; idx < num_frames; ++idx) {
     auto &data = block.GetBuffer(idx);
@@ -1063,15 +1079,17 @@ kax_info_c::post_simple_block(EbmlElement &e) {
     if (p->m_show_hexdump)
       hex = create_hexdump(data.Buffer(), data.Size());
 
-    show_element(nullptr, p->m_level + 1, s_common_formats[s_bf_simple_block_frame] % data.Size() % adler_str % hex);
+    show_element(nullptr, p->m_level + 1, s_common_formats[s_bf_simple_block_frame] % adler_str % hex, frame_pos, data.Size());
 
     p->m_frame_sizes.push_back(data.Size());
     p->m_frame_adlers.push_back(adler);
-    frame_pos -= data.Size();
+
+    frame_pos += data.Size();
   }
 
   if (p->m_show_summary) {
     std::string position;
+    frame_pos = frames_start;
 
     for (int idx = 0; idx < num_frames; idx++) {
       if (1 <= p->m_verbose) {

@@ -76,7 +76,7 @@ public:
   virtual result_e process_file();
   void abort();
 
-  std::string create_element_text(std::string const &text, int64_t position, int64_t size);
+  std::string create_element_text(std::string const &text, boost::optional<int64_t> position, boost::optional<int64_t> size);
   std::string create_unknown_element_text(EbmlElement &e);
   std::string create_known_element_but_not_allowed_here_text(EbmlElement &e);
   std::string create_hexdump(unsigned char const *buf, int size);
@@ -106,7 +106,7 @@ public:
   void run_generic_post_processors(EbmlElement &e);
 
   virtual void ui_show_error(std::string const &error);
-  virtual void ui_show_element_info(int level, std::string const &text, int64_t position, int64_t size);
+  virtual void ui_show_element_info(int level, std::string const &text, boost::optional<int64_t> position, boost::optional<int64_t> size);
   virtual void ui_show_element(EbmlElement &e);
   virtual void ui_show_progress(int percentage, std::string const &text);
 
@@ -116,8 +116,8 @@ protected:
   void init();
   void init_custom_element_value_formatters_and_processors();
 
-  void show_element(EbmlElement *l, int level, std::string const &info);
-  void show_element(EbmlElement *l, int level, boost::format const &info);
+  void show_element(EbmlElement *l, int level, std::string const &info, boost::optional<int64_t> position = {}, boost::optional<int64_t> size = {});
+  void show_element(EbmlElement *l, int level, boost::format const &info, boost::optional<int64_t> position = {}, boost::optional<int64_t> size = {});
 
   void add_track(std::shared_ptr<kax_info::track_t> const &t);
   kax_info::track_t *find_track(int tnum);

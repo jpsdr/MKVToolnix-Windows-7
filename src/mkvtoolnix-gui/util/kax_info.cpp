@@ -65,8 +65,8 @@ KaxInfo::ui_show_error(std::string const &error) {
 void
 KaxInfo::ui_show_element_info(int level,
                               std::string const &text,
-                              int64_t position,
-                              int64_t size) {
+                              boost::optional<int64_t> position,
+                              boost::optional<int64_t> size) {
   if (p_func()->m_use_gui)
     emit elementInfoFound(level, Q(text), position, size);
 

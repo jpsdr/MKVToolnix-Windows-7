@@ -19,6 +19,9 @@
 * MKVToolNix GUI: info tool: added a context menu with the option to show a
   hex dump of the element with the bytes making up the EBML ID and the size
   portion highlighted in different colors.
+* mkvinfo: the size and positions of frames within "SimpleBlock" and
+  "BlockGroup" elements are now shown the same way they're shown for other
+  elements (by adding the `-v -v` and `-z` options).
 
 ## Bug fixes
 

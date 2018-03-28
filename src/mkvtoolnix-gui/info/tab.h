@@ -39,7 +39,7 @@ signals:
 
 public slots:
   void retranslateUi();
-  void showElementInfo(int level, QString const &text, int64_t position, int64_t size);
+  void showElementInfo(int level, QString const &text, boost::optional<int64_t> position, boost::optional<int64_t> size);
   void showError(const QString &message);
   void expandImportantElements();
   void readLevel1Element(QModelIndex const &idx);

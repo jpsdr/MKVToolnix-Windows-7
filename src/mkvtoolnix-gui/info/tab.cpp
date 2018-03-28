@@ -192,9 +192,9 @@ Tab::retranslateUi() {
 void
 Tab::showElementInfo(int level,
                      QString const &text,
-                     int64_t position,
-                     int64_t size) {
-  qDebug() << "showElementInfo" << level << position << size << text;
+                     boost::optional<int64_t> position,
+                     boost::optional<int64_t> size) {
+  qDebug() << "showElementInfo" << level << (position ? *position : -1) << (size ? *size : -1) << text;
 }
 
 void
