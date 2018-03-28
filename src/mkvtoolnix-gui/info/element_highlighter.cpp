@@ -186,7 +186,7 @@ highlightBlockOrSimpleBlock(mtx::bits::reader_c &r,
   lines   << Q("<span class=\"monospace\">&nbsp;.....%1%2.</span>&nbsp;%3").arg(flags & 0x04 ? 1 : 0).arg(flags & 0x02 ? 1 : 0).arg(lacingName.toHtmlEscaped());
   lines   << Q("<span class=\"monospace\">&nbsp;.......%1</span>&nbsp;%2") .arg(flags & 0x01 ? 1 : 0)                          .arg(flags & 0x01 ? QY("Discardable").toHtmlEscaped() : QY("Not discardable").toHtmlEscaped());
 
-  highlights << ElementHighlighter::Highlight{ r.get_bit_position() / 8u - 1u, 1, "#000000", "#ecd1ec", lines.join(Q("<br>")) };
+  highlights << ElementHighlighter::Highlight{ r.get_bit_position() / 8u - 1u, 1, "#000000", "#00cc00", lines.join(Q("<br>")) };
 
   if (lacingValue == 0x00) {
     highlights << ElementHighlighter::Highlight{ r.get_bit_position() / 8u, r.get_remaining_bits() / 8u, "#000000", frameColor(0), QY("Frame").toHtmlEscaped() };
