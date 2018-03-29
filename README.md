@@ -108,8 +108,7 @@ Other libraries are optional and only limit the features that are
 built. These include:
 
 - [Qt](http://www.qt.io/) v5.3 or newer — a cross-platform GUI
-  toolkit. You need this if you want to use the MKVToolNix GUI or
-  mkvinfo's GUI.
+  toolkit. You need this if you want to use the MKVToolNix GUI.
 
 - [cmark](https://github.com/commonmark/cmark) — the CommonMark
   parsing and rendering library in C is required when building the Qt
