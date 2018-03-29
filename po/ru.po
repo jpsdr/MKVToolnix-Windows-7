@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-28 23:21+0200\n"
-"PO-Revision-Date: 2018-03-28 23:03+0200\n"
+"PO-Revision-Date: 2018-03-29 06:35+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -386,7 +386,7 @@ msgid ""
 "  --nalu-size-length <TID:n>\n"
 "                           Force the NALU size length to n bytes with\n"
 "                           2 <= n <= 4 with 4 being the default.\n"
-msgstr "  --nalu-size-length <TID:n> - Принудительно устанавливает величину NALU в n байт, 2 <= n <= 4. По умолчанию равно 4.\n"
+msgstr "  --nalu-size-length <TID:n> - Принудительно устанавливает величину NALU в n байтов, 2 <= n <= 4. По умолчанию равно 4.\n"
 
 #: src/merge/mkvmerge.cpp:213
 msgid "  --no-chapters            Don't keep chapters from the source file.\n"
@@ -482,7 +482,7 @@ msgid ""
 "  --split <d[K,M,G]|HH:MM:SS|s>\n"
 "                           Create a new file after d bytes (KB, MB, GB)\n"
 "                           or after a specific time.\n"
-msgstr "  --split <d[K,M,G]|HH:MM:SS|s> - Указывает создавать новый файл после d байт (КБ, МБ, ГБ) или после определённого времени.\n"
+msgstr "  --split <d[K,M,G]|HH:MM:SS|s> - Указывает создавать новый файл после d байтов (КБ, МБ, ГБ) или после определённого времени.\n"
 
 #: src/merge/mkvmerge.cpp:149
 msgid ""
@@ -1281,9 +1281,8 @@ msgid "&Close file"
 msgstr "&Закрыть файл"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:231
-#, fuzzy
 msgid "&Close window"
-msgstr "&Закрыть файл"
+msgstr "&Закрыть окно"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:594
 msgid "&Code of Conduct"
@@ -1322,7 +1321,7 @@ msgstr "&Описание:"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:230
 msgid "&Detach window"
-msgstr ""
+msgstr "О&тсоединить окно"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1423
 #, no-c-format
@@ -2773,12 +2772,12 @@ msgstr "Добавляет свойство со значением, даже е
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:228
 msgid "Adler-32:"
-msgstr ""
+msgstr "Adler-32:"
 
 #: src/mkvtoolnix-gui/info/model.cpp:211
-#, fuzzy, boost-format
+#, boost-format
 msgid "Adler-32: 0x%|1$08x|"
-msgstr " (Контрольная сумма adler: 0x%|1$08x|)"
+msgstr "Adler-32: 0x%|1$08x|"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:319
 msgid "After a job completes &successfully or with warnings"
@@ -3131,7 +3130,7 @@ msgstr "Вложение"
 #: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
-msgstr "Идентификатор вложения %1%: тип '%2%', размер %3% байт"
+msgstr "Идентификатор вложения %1%: тип '%2%', размер %3% байтов"
 
 #: src/common/kax_element_names.cpp:301
 msgid "Attachment UID"
@@ -3919,9 +3918,9 @@ msgid "Content encryption"
 msgstr "Шифрование данных"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:231
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Content size:"
-msgstr "Содержимое"
+msgstr "Размер содержимого:"
 
 #: src/extract/extract_cli_parser.cpp:75
 msgid "Convert text subtitles to this charset (default: UTF-8)."
@@ -4406,7 +4405,7 @@ msgstr "Значения по умолчанию"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
 msgid "Defaults for jobs saving info tool output to text files"
-msgstr ""
+msgstr "По умолчанию задания сохраняют данные инструмента вывода в текстовые файлы"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -4598,9 +4597,9 @@ msgid "Discard padding"
 msgstr "Отменить отступы"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Discardable"
-msgstr "незащищённый, "
+msgstr "Удаляемое"
 
 #: src/merge/mkvmerge.cpp:684
 #: src/merge/mkvmerge.cpp:690
@@ -4776,9 +4775,9 @@ msgid "EBML head"
 msgstr "Заголовок EBML"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:177
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "EBML lacing"
-msgstr "Принудительно сшивать в стиле EBML."
+msgstr "EBML-сшивание"
 
 #: src/common/kax_element_names.cpp:73
 msgid "EBML read version"
@@ -4860,18 +4859,18 @@ msgid "Element %1% is written.\n"
 msgstr "Элемент %1% записан.\n"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:224
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Element ID:"
-msgstr "Элементы"
+msgstr "Идентификатор элемента:"
 
 #: src/propedit/propedit_cli_parser.cpp:160
 msgid "Element types:\n"
 msgstr "Типы элемента:\n"
 
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:109
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Element viewer: %1"
-msgstr "Элементы"
+msgstr "Просмотр элемента: %1"
 
 #: src/mkvtoolnix-gui/info/model.cpp:86
 #, no-c-format
@@ -5365,7 +5364,7 @@ msgstr "Исправить информацию о битовом потоке"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:176
 #, no-c-format
 msgid "Fixed-sized lacing"
-msgstr ""
+msgstr "Сшивание с фиксированным размером"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, no-c-format
@@ -5484,14 +5483,14 @@ msgstr "FourCC: отсутствует идентификатор дорожки
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:192
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:92
 #: src/mkvtoolnix-gui/info/model.cpp:210
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame"
-msgstr "Частота кадров"
+msgstr "Кадр"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:207
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame #%1"
-msgstr "Частота кадров"
+msgstr "Кадр #%1"
 
 #: src/common/kax_element_names.cpp:249
 msgid "Frame number"
@@ -5503,9 +5502,9 @@ msgstr "Частота кадров"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:113
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:142
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame size #%1: %2"
-msgstr "размер %1%"
+msgstr "Размер кадра #%1: %2"
 
 #: src/common/kax_info.cpp:224
 #: src/common/kax_info.cpp:232
@@ -5515,9 +5514,9 @@ msgstr "Кадр с размером %1%%2%%3%"
 
 #: src/common/kax_info.cpp:223
 #: src/common/kax_info.cpp:231
-#, fuzzy, boost-format
+#, boost-format
 msgid "Frame%1%%2%"
-msgstr "Кадр с размером %1%%2%%3%"
+msgstr "Кадр%1%%2%"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:297
 #, no-c-format
@@ -5661,12 +5660,12 @@ msgstr "Редактор заголовков"
 #: src/common/compression/header_removal.cpp:47
 #, boost-format
 msgid "Header removal compression not possible because the buffer contained %1% bytes which is less than the size of the headers that should be removed, %2%."
-msgstr "Сжатие удалением заголовка невозможно, так как буфер содержит %1% байт, что меньше, чем размер заголовков, которые должны быть удалены, %2%."
+msgstr "Сжатие удалением заголовка невозможно, так как буфер содержит %1% байтов, что меньше, чем размер заголовков, которые должны быть удалены, %2%."
 
 #: src/common/compression/header_removal.cpp:61
 #, boost-format
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
-msgstr "Сжатие удалением заголовка невозможно, так как буфер не начинаются с байт, которые должны быть удалены. Требуются байты:%1%; найдено:%2%."
+msgstr "Сжатие удалением заголовка невозможно, так как буфер не начинаются с байтов, которые должны быть удалены. Требуются байты:%1%; найдено:%2%."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:594
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:609
@@ -6086,9 +6085,8 @@ msgid "Info tool"
 msgstr "Информация"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
-#, fuzzy
 msgid "Information"
-msgstr "Информация о цвете"
+msgstr "Информация"
 
 #: src/common/bitvalue.cpp:69
 #, boost-format
@@ -6501,7 +6499,7 @@ msgstr "Недопустимый тип дорожки %1%."
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Invisible"
-msgstr ""
+msgstr "Не отображается"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:174
 #, no-c-format
@@ -6510,7 +6508,7 @@ msgstr "Он не может быть удалён, потому что явля
 
 #: src/mkvtoolnix-gui/merge/input.cpp:507
 msgid "It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."
-msgstr "По умолчанию это 4 байта, однако есть файлы, которые не содержат кадров или фрагментов, но имеют размер больше 65535 байт."
+msgstr "По умолчанию это 4 байта, однако есть файлы, которые не содержат кадров или фрагментов, но имеют размер больше 65535 байтов."
 
 #: src/merge/mkvmerge.cpp:971
 msgid "It does not consist of a track ID and a value separated by a colon."
@@ -6591,7 +6589,7 @@ msgstr "Сохранить BlockAdditions только до этого уров�
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
 #, no-c-format
 msgid "Key frame"
-msgstr ""
+msgstr "Ключевой кадр"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:651
 msgid "Known &problems in recent releases"
@@ -6648,16 +6646,16 @@ msgstr "Слева"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:229
 msgid "Legend:"
-msgstr ""
+msgstr "Легенда:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:69
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Length: %1 byte"
 msgid_plural "Length: %1 bytes"
-msgstr[0] "%1% байт"
-msgstr[1] "%1% байта"
-msgstr[2] "%1% байтов"
-msgstr[3] "%1% байтов"
+msgstr[0] "Длина: %1 байт"
+msgstr[1] "Длина: %1 байта"
+msgstr[2] "Длина: %1 байтов"
+msgstr[3] "Длина: %1 байтов"
 
 #: src/merge/timestamp_factory.cpp:358
 #, boost-format
@@ -7327,7 +7325,7 @@ msgstr "Задание ещё не запущено"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:174
 #, no-c-format
 msgid "No lacing"
-msgstr ""
+msgstr "Без сшивания"
 
 #: src/input/r_flac.cpp:128
 msgid "No metadata block found. This file is broken.\n"
@@ -7444,9 +7442,9 @@ msgid "Not a hex digit at position %1%"
 msgstr "В позиции %1% находится не шестнадцатеричная цифра"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not a key frame"
-msgstr "Для всех кадров"
+msgstr "Не ключевой кадр"
 
 #: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
@@ -7461,9 +7459,9 @@ msgid "Not a valid number or not positive."
 msgstr "Число  неправильное или не положительное."
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not discardable"
-msgstr "незащищённый, "
+msgstr "Не удаляемое"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:299
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:370
@@ -7534,9 +7532,9 @@ msgid "Number of chapters:"
 msgstr "Количество глав:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:197
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Number of frames: %1"
-msgstr "Количество глав:"
+msgstr "Количество кадров: %1"
 
 #: src/common/property_element.cpp:137
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -7657,9 +7655,9 @@ msgid "Only show summaries of the contents, not each element."
 msgstr "Показывать только обобщённую информацию, а не каждый элемент."
 
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:116
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Only the first %1 bytes are shown."
-msgstr "Показать первые 16 байтов каждого кадра шестнадцатеричном виде."
+msgstr "Отображаются только первые %1 байтов."
 
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, no-c-format
@@ -8007,9 +8005,8 @@ msgid "Position for the track properties on the \"input\" tab:"
 msgstr "Расположение панели свойств на вкладке \"Ввод\": "
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:226
-#, fuzzy
 msgid "Position:"
-msgstr "Позиция"
+msgstr "Позиция:"
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:200
 #, no-c-format
@@ -8389,9 +8386,9 @@ msgid "Reference virtual"
 msgstr "Опорный виртуал"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:168
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Relative timestamp: %1"
-msgstr "Метка времени кластера"
+msgstr "Относительная метка времени: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:828
@@ -8633,9 +8630,8 @@ msgid "Save as &default for new multiplex jobs"
 msgstr "Сохранить как параметры по умолчанию для новых заданий слияния"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
-#, fuzzy
 msgid "Save as &default for saving output to text files"
-msgstr "Сохранить как параметры по умолчанию для новых заданий слияния"
+msgstr "Сохранить как настройку по умолчанию, что вывод сохраняется в в текстовые файлы"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #, no-c-format
@@ -8949,9 +8945,8 @@ msgid "Set the chapter names' &languages:"
 msgstr "Задать названиям глав язык:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:214
-#, fuzzy
 msgid "Set the chapter names' co&untries:"
-msgstr "Задать названиям глав страну"
+msgstr "Задать страны названий г&лав:"
 
 #: src/propedit/propedit_cli_parser.cpp:235
 msgid "Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
@@ -9006,7 +9001,7 @@ msgstr "Настройки"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
 msgid "Settings for saving output to a text file"
-msgstr ""
+msgstr "Настройки сохранения вывода в текстовый файл"
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -9023,9 +9018,9 @@ msgid "Show &buttons for moving list view entries up and down"
 msgstr "Показывать кнопки \"вверх\" и \"вниз\" для перемещения дорожек в списке ввода"
 
 #: src/mkvtoolnix-gui/info/tab.cpp:188
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show &hex dump"
-msgstr "Не показывать в шестнадцатеричном виде"
+msgstr "Показать шестнадцатеричный дамп"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1496
 msgid "Show &output of all jobs instead of current job only"
@@ -9167,17 +9162,17 @@ msgstr "Размер:"
 #: src/output/p_aac.cpp:131
 #, boost-format
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
-msgstr "Пропуск %1% байт (не найден правильный заголовок AAC). Это может привести к рассинхронизации аудио и видео.\n"
+msgstr "Пропуск %1% байтов (не найден правильный заголовок AAC). Это может привести к рассинхронизации аудио и видео.\n"
 
 #: src/output/p_dts.cpp:92
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
-msgstr "Пропуск %1% байт (не найден правильный заголовок DTS). Это может привести к рассинхронизации аудио и видео.\n"
+msgstr "Пропуск %1% байтов (не найден правильный заголовок DTS). Это может привести к рассинхронизации аудио и видео.\n"
 
 #: src/input/r_mp3.cpp:79
 #, boost-format
 msgid "Skipping %1% bytes at the beginning (no valid MP3 header found).\n"
-msgstr "Пропуск %1% байт в начале (не найден правильный заголовок MP3).\n"
+msgstr "Пропуск %1% байтов в начале (не найден правильный заголовок MP3).\n"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
 #: src/mkvtoolnix-gui/util/settings.cpp:47
@@ -10396,7 +10391,7 @@ msgstr "Букву 'Z' можно использовать вместо смещ
 #: src/mkvtoolnix-gui/merge/output.cpp:231
 #, no-c-format
 msgid "The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes respectively."
-msgstr "Символы 'G', 'M' и 'K' могут использоваться, для указания гига/мега/килобайт соответственно."
+msgstr "Символы 'G', 'M' и 'K' могут использоваться для указания гига/мега/килобайт соответственно."
 
 #: src/merge/timestamp_factory.cpp:215
 #, boost-format
@@ -10414,7 +10409,7 @@ msgstr "Максимальная длина для кластера, котор�
 
 #: src/mkvtoolnix-gui/merge/output.cpp:159
 msgid "The maximum number of files that will be created even if the last file might contain more bytes/time than wanted."
-msgstr "Максимальное число файлов, которые будут созданы, даже если последний файл будет содержать больше байт/времени, чем указано."
+msgstr "Максимальное число файлов, которые будут созданы, даже если последний файл будет содержать больше байтов/времени, чем указано."
 
 #: src/common/property_element.cpp:135
 msgid ""
@@ -11001,7 +10996,7 @@ msgstr "Эта дорожка AAC не содержит правильных з�
 #: src/output/p_ac3.cpp:65
 #, boost-format
 msgid "This AC-3 track contains %1% bytes of non-AC-3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the non-AC-3 data.\n"
-msgstr "Эта дорожка AC-3 содержит %1% байт не-AC-3 данных в начале. Это соответствует задержке в %2% мс. Эта задержка будет использоваться вместо не-AC-3 данных.\n"
+msgstr "Эта дорожка AC-3 содержит %1% байтов не-AC-3 данных в начале, что соответствует задержке в %2% мс. Данная задержка будет использоваться вместо не-AC-3 данных.\n"
 
 #: src/output/p_avc_es.cpp:101
 #, boost-format
@@ -11030,7 +11025,7 @@ msgstr "Эта дорожка HEVC не начинается с ключевог
 #: src/output/p_mp3.cpp:60
 #, boost-format
 msgid "This MPEG audio track contains %1% bytes of non-MP3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the garbage data.\n"
-msgstr "Эта звуковая дорожка MPEG содержит %1% байт не-MP3 данных в начале. Это соответствует задержке в %2% мс. Эта задержка будет использоваться вместо мусорных данных.\n"
+msgstr "Эта звуковая дорожка MPEG содержит %1% байтов не-MP3 данных в начале, что соответствует задержке в %2% мс. Данная задержка будет использоваться вместо мусорных данных.\n"
 
 #: src/input/r_ogm.cpp:882
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
@@ -11493,9 +11488,9 @@ msgid "Track number for mkvpropedit:"
 msgstr "Номер дорожки для mkvpropedit:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:163
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Track number:"
-msgstr "Номер дорожки"
+msgstr "Номер дорожки:"
 
 #: src/common/kax_element_names.cpp:193
 msgid "Track overlay"
@@ -11627,9 +11622,9 @@ msgstr "Неизвестный элемент"
 
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:99
 #: src/mkvtoolnix-gui/info/model.cpp:341
-#, fuzzy, boost-format
+#, boost-format
 msgid "Unknown element (ID: 0x%1%)"
-msgstr "Неизвестно (ID: 0x%1%)"
+msgstr "Неизвестный элемент (ID: 0x%1%)"
 
 #: src/merge/mkvmerge.cpp:1754
 #, boost-format
@@ -11771,7 +11766,7 @@ msgstr "Использовать имена глав указанного язы
 
 #: src/merge/mkvmerge.cpp:1603
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
-msgstr "Использование длины размера NALU, равного 3-м байтам, может привести к невозможности декодирования дорожек некоторыми кодеками AVC/H.264.\n"
+msgstr "Использование длины размера NALU, равного 3 байтам, может привести к невозможности декодирования дорожек некоторыми кодеками AVC/H.264.\n"
 
 #: src/merge/generic_reader.h:45
 msgid "Using the demultiplexer for the format '%1%'.\n"
@@ -11822,9 +11817,9 @@ msgid "Value"
 msgstr "Значение"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:77
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Value: %1"
-msgstr "Значение"
+msgstr "Значение: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:235
 #, no-c-format
@@ -12061,7 +12056,7 @@ msgstr "Видео: точка белого Y"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Visible"
-msgstr ""
+msgstr "Отображается"
 
 #: src/common/file_types.cpp:104
 #: src/output/p_vobbtn.h:35
@@ -12348,9 +12343,9 @@ msgid "XML tag files"
 msgstr "XML-файлы тегов"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:175
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Xiph lacing"
-msgstr "Принудительно сшивать в стиле Xiph."
+msgstr "Xiph-сшивание"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
@@ -12575,7 +12570,7 @@ msgstr "deflateInit() окончился неудачно. Результат: %
 
 #: src/common/kax_info.cpp:1055
 msgid "discardable, "
-msgstr "незащищённый, "
+msgstr "удаляемое, "
 
 #: src/common/kax_info.cpp:664
 #, boost-format
@@ -12813,17 +12808,17 @@ msgstr "matroska_reader: неизвестный тип демультиплек�
 #: src/common/memory.cpp:150
 #, boost-format
 msgid "memory.cpp/safemalloc() called from file %1%, line %2%: malloc() returned nullptr for a size of %3% bytes.\n"
-msgstr "memory.cpp/safemalloc() вызван из файла %1%, строка %2%: malloc() вернул nullptr для размера %3% байт.\n"
+msgstr "memory.cpp/safemalloc() вызван из файла %1%, строка %2%: malloc() вернул nullptr для размера %3% байтов.\n"
 
 #: src/common/memory.cpp:138
 #, boost-format
 msgid "memory.cpp/safememdup() called from file %1%, line %2%: malloc() returned nullptr for a size of %3% bytes.\n"
-msgstr "memory.cpp/safememdup() вызван из файла %1%, строка %2%: malloc() вернул nullptr для размера %3% байт.\n"
+msgstr "memory.cpp/safememdup() вызван из файла %1%, строка %2%: malloc() вернул nullptr для размера %3% байтов.\n"
 
 #: src/common/memory.cpp:166
 #, boost-format
 msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n"
-msgstr "memory.cpp/saferealloc() вызван из файла %1%, строка %2%: realloc() вернул nullptr для размера %3% байт.\n"
+msgstr "memory.cpp/saferealloc() вызван из файла %1%, строка %2%: realloc() вернул nullptr для размера %3% байтов.\n"
 
 #: src/common/kax_info.cpp:749
 msgid "mesh"
