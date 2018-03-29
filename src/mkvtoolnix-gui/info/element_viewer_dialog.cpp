@@ -50,6 +50,8 @@ ElementViewerDialog::ElementViewerDialog(QWidget *parent)
   // Setup UI controls.
   p_ptr->m_ui->setupUi(this);
 
+  setWindowFlags(windowFlags() | Qt::WindowMaximizeButtonHint);
+
   connect(p_ptr->m_ui->closeButton,        &QPushButton::clicked,           this, &ElementViewerDialog::accept);
   connect(p_ptr->m_ui->detachWindowButton, &QPushButton::clicked,           this, &ElementViewerDialog::requestDetachingWindow);
   connect(MainWindow::get(),               &MainWindow::preferencesChanged, this, &ElementViewerDialog::retranslateUi);
@@ -78,6 +80,7 @@ ElementViewerDialog::detachWindow() {
   connect(this, &QDialog::finished, this, &QDialog::deleteLater);
 
   setModal(false);
+  setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint);
 
   p->m_ui->detachWindowButton->setEnabled(false);
   show();
