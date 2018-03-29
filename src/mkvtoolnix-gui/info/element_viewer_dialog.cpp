@@ -197,25 +197,19 @@ ElementViewerDialog::createHexDump(memory_c const &mem,
                  : htmlChars.contains(byte)     ? htmlChars.value(byte)
                  :                                QString::fromLatin1(reinterpret_cast<char const *>(&buffer[position]), 1);
 
-    hex << Q("%1%2%3%4")
-      .arg(spanStart)
-      .arg(hexChars[byte >> 4])
-      .arg(hexChars[byte & 0x0f])
-      .arg(spanEnd);
-
-    ascii += Q("%1%2%3")
-      .arg(spanStart)
-      .arg(oneChar)
-      .arg(spanEnd);
+    hex   << (spanStart + hexChars[byte >> 4] + hexChars[byte & 0x0f] + spanEnd);
+    ascii += (spanStart + oneChar                                     + spanEnd);
 
     if (!((position + 1) % 8)) {
       inLine  = false;
-      lines  << Q("%1  %2%3  %4%5<br>")
-        .arg(Q(boost::format("%|1$08x|") % (position - 7)))
-        .arg(hex.join(Q(" ")))
-        .arg(span.isEmpty() ? QString{} : endSpanTag)
-        .arg(ascii)
-        .arg(span.isEmpty() ? QString{} : endSpanTag);
+      spanEnd = span.isEmpty() ? QString{} : endSpanTag;
+      lines  << (  Q(boost::format("%|1$08x|  ") % (position - 7))
+                 + hex.join(Q(" "))
+                 + spanEnd
+                 + Q("  ")
+                 + ascii
+                 + spanEnd
+                 + Q("<br>"));
       hex.clear();
       ascii.clear();
     }
@@ -223,14 +217,16 @@ ElementViewerDialog::createHexDump(memory_c const &mem,
     ++position;
   }
 
-  if (inLine)
-    lines << Q("%1  %2%3%4  %5%6<br>")
-      .arg(Q(boost::format("%|1$08x|") % ((position / 8) * 8)))
-      .arg(hex.join(Q(" ")))
-      .arg(span.isEmpty() ? QString{} : endSpanTag)
-      .arg(Q(' '), (8 - hex.size()) * 3)
-      .arg(ascii)
-      .arg(span.isEmpty() ? QString{} : endSpanTag);
+  if (inLine) {
+    auto spanEnd = span.isEmpty() ? QString{} : endSpanTag;
+    lines       << (  Q(boost::format("%|1$08x|  ") % ((position / 8) * 8))
+                    + hex.join(Q(" "))
+                    + spanEnd
+                    + QString((8 - hex.size()) * 3 + 2, Q(' '))
+                    + ascii
+                    + spanEnd
+                    + Q("<br>"));
+  }
 
   lines << Q("</p></body></html>");
 
