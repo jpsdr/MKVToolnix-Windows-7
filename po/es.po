@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-03-28 23:21+0200\n"
-"PO-Revision-Date: 2018-03-28 23:01+0200\n"
+"PO-Revision-Date: 2018-03-29 00:33+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -1568,7 +1568,7 @@ msgstr "Línea de &comandos:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:220
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "&Constreñir las marcas de de tiempo inicial y final de los subcapítulos con respecto a las marcas de tiempo inicial y final de los capítulos"
+msgstr "&Constreñir los códigos de tiempo inicial y final de los subcapítulos con respecto a los códigos de tiempo inicial y final de los capítulos"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:587
 msgid "&Copy command line to clipboard"
@@ -1748,7 +1748,7 @@ msgstr "&Multiplexador"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:217
 msgid "&Multiply start and end timestamps by the following factor:"
-msgstr "&Multiplicar las marcas de tiempo inicial y final por el siguiente factor:"
+msgstr "&Multiplicar los códigos de tiempo inicial y final por el siguiente factor:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
@@ -1982,7 +1982,7 @@ msgstr "&Saltar archivo"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:218
 msgid "&Sort chapters by their start and end timestamps"
-msgstr "&Ordenar capítulos según sus marcas de tiempo inicial y final"
+msgstr "&Ordenar capítulos según sus códigos de tiempo inicial y final"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
 msgid "&Start && end:"
@@ -3024,12 +3024,12 @@ msgstr "Agrega una propiedad con el valor, incluso si dicha propiedad ya existe"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:228
 msgid "Adler-32:"
-msgstr ""
+msgstr "Adler-32:"
 
 #: src/mkvtoolnix-gui/info/model.cpp:211
-#, fuzzy, boost-format
+#, boost-format
 msgid "Adler-32: 0x%|1$08x|"
-msgstr " (adler: 0x%|1$08x|)"
+msgstr "Adler-32: 0x%|1$08x|"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:319
 msgid "After a job completes &successfully or with warnings"
@@ -3300,7 +3300,7 @@ msgstr "Se esperaba un entero sin signo."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
 #, no-c-format
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
-msgstr "Analizar cadenas de bits MPEG4, poner a cada fotograma (frame) en un bloque de Matroska, y utilizar marcas de tiempo adecuado (I P B B = 0 120 40 80), usa V_MPEG4/ISO/... ID del Códec."
+msgstr "Analizar cadenas de bits MPEG4, poner a cada fotograma (frame) en un bloque de Matroska, y utilizar código de tiempo adecuado (I P B B = 0 120 40 80), usa V_MPEG4/ISO/... ID del Códec."
 
 #: src/merge/generic_packetizer.cpp:626
 #, boost-format
@@ -3631,7 +3631,7 @@ msgstr "C&onfiguración activa"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:219
 msgid "C&onstrict or expand timestamps"
-msgstr "&Reducir o ampliar marcas de tiempo"
+msgstr "&Reducir o ampliar códigos de tiempo"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:128
 msgid "C&opy to clipboard"
@@ -4166,9 +4166,9 @@ msgid "Content encryption"
 msgstr "Contenido cifrado"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:231
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Content size:"
-msgstr "Contenido"
+msgstr "Tamaño del contenido:"
 
 #: src/extract/extract_cli_parser.cpp:75
 msgid "Convert text subtitles to this charset (default: UTF-8)."
@@ -4653,7 +4653,7 @@ msgstr "Valores predeterminados"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
 msgid "Defaults for jobs saving info tool output to text files"
-msgstr ""
+msgstr "Predeterminado para las tareas que almacenan la salida de la herramienta de información a archivos de textos"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -4682,7 +4682,7 @@ msgstr "Retraso incorporado en el códec durante la decodificación en ns."
 #: src/mkvtoolnix-gui/merge/input.cpp:457
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
-msgstr "Delay de las marcas de tiempo para esta pista por algunos ms."
+msgstr "Delay de los códigos de tiempo para esta pista por algunos ms."
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Delete all existing track statistics tags"
@@ -4710,7 +4710,7 @@ msgstr "Dependiendo de esta configuración, el idioma puede ser generado a parti
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:222
 msgid "Derive &end timestamps from start timestamps"
-msgstr "Generar marcas de tiempo &finales a partir de las iniciales"
+msgstr "Generar códigos de tiempo final&es a partir de las iniciales"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1450
 msgid "Deriving track languages from file names"
@@ -4845,9 +4845,9 @@ msgid "Discard padding"
 msgstr "Descartar padding"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Discardable"
-msgstr "descartable, "
+msgstr "Descartable,"
 
 #: src/merge/mkvmerge.cpp:684
 #: src/merge/mkvmerge.cpp:690
@@ -5010,7 +5010,7 @@ msgstr "S&alir"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:221
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
-msgstr "&Expandir las marcas de tiempo de inicio y fin del capítulo para incluir las máximas/mínimas marcas de tiempo de todos sus sub-capítulos"
+msgstr "&Expandir los códigos de tiempo de inicio y fin del capítulo para incluir las máximas/mínimas códigos de tiempo de todos sus sub-capítulos"
 
 #: src/common/kax_element_names.cpp:80
 msgid "EBML CRC-32"
@@ -5021,9 +5021,9 @@ msgid "EBML head"
 msgstr "Cabecera EBML"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:177
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "EBML lacing"
-msgstr "Establecer ataduras de estilo de EBML."
+msgstr "Ataduras EBML "
 
 #: src/common/kax_element_names.cpp:73
 msgid "EBML read version"
@@ -5105,9 +5105,9 @@ msgid "Element %1% is written.\n"
 msgstr "El elemento %1% está escrito.\n"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:224
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Element ID:"
-msgstr "Elementos"
+msgstr "ID de elemento:"
 
 #: src/propedit/propedit_cli_parser.cpp:160
 msgid "Element types:\n"
@@ -5610,7 +5610,7 @@ msgstr "Corregir la información de sincronización del bitstream"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:176
 #, no-c-format
 msgid "Fixed-sized lacing"
-msgstr ""
+msgstr "Tamaño-fijo ataduras"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, no-c-format
@@ -5729,14 +5729,14 @@ msgstr "FourCC: ID de pista ausente en '%1% %2%'.\n"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:192
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:92
 #: src/mkvtoolnix-gui/info/model.cpp:210
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame"
-msgstr "Tasa de cuadros"
+msgstr "Fotograma"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:207
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame #%1"
-msgstr "Tasa de cuadros"
+msgstr "Fotograma #%1"
 
 #: src/common/kax_element_names.cpp:249
 msgid "Frame number"
@@ -5744,13 +5744,13 @@ msgstr "Número de cuadro"
 
 #: src/common/kax_element_names.cpp:160
 msgid "Frame rate"
-msgstr "Tasa de cuadros"
+msgstr "Tasa de fotogramas"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:113
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:142
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame size #%1: %2"
-msgstr " tamaño %1%"
+msgstr "Tamaño fotograma #%1: %2"
 
 #: src/common/kax_info.cpp:224
 #: src/common/kax_info.cpp:232
@@ -5760,9 +5760,9 @@ msgstr "Fotograma con tamaño %1%%2%%3%"
 
 #: src/common/kax_info.cpp:223
 #: src/common/kax_info.cpp:231
-#, fuzzy, boost-format
+#, boost-format
 msgid "Frame%1%%2%"
-msgstr "Fotograma con tamaño %1%%2%%3%"
+msgstr "Fotograma%1%%2%"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:297
 #, no-c-format
@@ -6743,7 +6743,7 @@ msgstr "Tipo de pista no válida %1%."
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Invisible"
-msgstr ""
+msgstr "Invisible"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:174
 #, no-c-format
@@ -6833,7 +6833,7 @@ msgstr "Mantener sólo los BlockAdditions hasta este nivel (predefinido: mantene
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
 #, no-c-format
 msgid "Key frame"
-msgstr ""
+msgstr "Fotograma clave"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:651
 msgid "Known &problems in recent releases"
@@ -6893,11 +6893,11 @@ msgid "Legend:"
 msgstr "Legenda:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:69
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Length: %1 byte"
 msgid_plural "Length: %1 bytes"
-msgstr[0] "%1% byte"
-msgstr[1] "%1% bytes"
+msgstr[0] "Longitud: %1 byte"
+msgstr[1] "Longitud: %1 bytes"
 
 #: src/merge/timestamp_factory.cpp:358
 #, boost-format
@@ -6923,7 +6923,7 @@ msgstr "Línea %1%: Encontrado una marca de tiempo negativo. El registro será a
 #: src/input/r_vobsub.cpp:300
 #, boost-format
 msgid "Line %1%: The current timestamp (%2%) is smaller than the previous one (%3%). The entries will be sorted according to their timestamps. This might result in the wrong order for some subtitle entries. If this is the case then you have to fix the .idx file manually.\n"
-msgstr "Línea %1%: La actual marca de tiempo (%2%) es más pequeña que el anterior (%3%). Los registros serán ordenados conforme a sus marcas de tiempo. Esto podría dar a lugar un orden incorrecto de algunos registros de los subtítulos. Si este es tu caso, tienes que fijar el archivo IDX manualmente.\n"
+msgstr "Línea %1%: El actual código de tiempo (%2%) es más pequeño que el anterior (%3%). Los registros serán ordenados conforme a sus códigos de tiempo. Esto podría dar a lugar un orden incorrecto de algunos registros de los subtítulos. Si este es tu caso, tienes que fijar el archivo IDX manualmente.\n"
 
 #: src/input/r_vobsub.cpp:250
 #: src/input/r_vobsub.cpp:273
@@ -7337,7 +7337,7 @@ msgstr "El multiplexado tardó %1%.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:462
 msgid "Multiply this track's timestamps with a factor."
-msgstr "Multiplicar las marcas de tiempo de esta pista por un factor."
+msgstr "Multiplicar los códigos de tiempo de esta pista por un factor."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1702
 msgid "NALU size length:"
@@ -7567,7 +7567,7 @@ msgstr "Ninguna tarea ha comenzado"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:174
 #, no-c-format
 msgid "No lacing"
-msgstr ""
+msgstr "Sin ataduras"
 
 #: src/input/r_flac.cpp:128
 msgid "No metadata block found. This file is broken.\n"
@@ -7684,9 +7684,9 @@ msgid "Not a hex digit at position %1%"
 msgstr "No es un dígito hexadecimal en la posición %1%"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not a key frame"
-msgstr "Para todos los fotogramas"
+msgstr "Ningún fotograma clave"
 
 #: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
@@ -7701,9 +7701,9 @@ msgid "Not a valid number or not positive."
 msgstr "No es un número válido o no es positivo."
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not discardable"
-msgstr "descartable, "
+msgstr "No descartable"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:299
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:370
@@ -7774,9 +7774,9 @@ msgid "Number of chapters:"
 msgstr "Números de capítulos:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:197
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Number of frames: %1"
-msgstr "Números de capítulos:"
+msgstr "Número de fotogramas: %1"
 
 #: src/common/property_element.cpp:137
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -8613,9 +8613,9 @@ msgid "Reference virtual"
 msgstr "Referencia virtual"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:168
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Relative timestamp: %1"
-msgstr "Marca de tiempo del clúster"
+msgstr "Código de tiempo relativo: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:828
@@ -8798,7 +8798,7 @@ msgstr "Las tareas en ejecución no se pueden eliminar."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:215
 msgid "S&hift start and end timestamps by the following amount:"
-msgstr "Desp&lazar las marcas de tiempo inicial y final por la siguiente cantidad:"
+msgstr "Desp&lazar los códigos de tiempo inicial y final por la siguiente cantidad:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:586
 msgid "S&how command line"
@@ -8853,9 +8853,8 @@ msgid "Save as &default for new multiplex jobs"
 msgstr "Guardar por &defecto para las nuevas tareas de multiplexado"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
-#, fuzzy
 msgid "Save as &default for saving output to text files"
-msgstr "Guardar por &defecto para las nuevas tareas de multiplexado"
+msgstr "Por &defecto, guardar como la salida a archivos de texto"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #, no-c-format
@@ -9221,7 +9220,7 @@ msgstr "Ajustes"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
 msgid "Settings for saving output to a text file"
-msgstr ""
+msgstr "Ajustes para almacenar la salida a un archivo de texto"
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -11700,9 +11699,9 @@ msgid "Track number for mkvpropedit:"
 msgstr "El número de pista para mkvpropedit:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:163
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Track number:"
-msgstr "Número de pista"
+msgstr "Número de pista: %1"
 
 #: src/common/kax_element_names.cpp:193
 msgid "Track overlay"
@@ -12029,9 +12028,9 @@ msgid "Value"
 msgstr "Valor"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:77
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Value: %1"
-msgstr "Valor"
+msgstr "Valor: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:235
 #, no-c-format
@@ -12268,7 +12267,7 @@ msgstr "Video: cromaticidad Y blanco"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Visible"
-msgstr ""
+msgstr "Visible"
 
 #: src/common/file_types.cpp:104
 #: src/output/p_vobbtn.h:35
@@ -12555,9 +12554,9 @@ msgid "XML tag files"
 msgstr "Archivos XML de etiquetas"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:175
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Xiph lacing"
-msgstr "Establecer ataduras de estilo de Xiph."
+msgstr "Ataduras Xiph"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
@@ -12636,7 +12635,7 @@ msgstr "Puede especificar hasta nueve dígitos para el número de nanosegundos '
 #: src/mkvtoolnix-gui/merge/output.cpp:156
 #, no-c-format
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
-msgstr "Puede dividir según cierta cantidad de tiempo transcurrida, ya sea basándose en marcas de tiempo, números de fotogramas/campos o capítulos."
+msgstr "Puede dividir según cierta cantidad de tiempo transcurrida, ya sea basándose en códigos de tiempo, números de fotogramas/campos o capítulos."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1289
 #, no-c-format
@@ -12859,7 +12858,7 @@ msgstr "para archivos con información de capítulos (p.e. OGM, MP4) que mkvmerg
 
 #: src/mkvtoolnix-gui/merge/input.cpp:527
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
-msgstr "para archivos de subtítulos no usen marcas de orden por byte (BOM) y que no estén codificados con actual conjunto de caracteres del sistema (%1)"
+msgstr "para archivos de subtítulos no usar marcas de orden por byte (BOM) y que no estén codificados con actual conjunto de caracteres del sistema (%1)"
 
 #: src/output/p_generic_video.h:37
 msgid "generic video"
