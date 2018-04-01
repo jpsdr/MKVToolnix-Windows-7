@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: VobSub packetizer: whenever a VobSub packet doesn't contain a
+  duration on the container level, mkvmerge will now set it from the duration
+  in the SPU packets. Before it was accidentally setting the SPU-level
+  duration to 0 instead. Fixes #2260.
+
+
 # Version 22.0.0 "At The End Of The World" 2018-04-01
 
 ## New features and enhancements

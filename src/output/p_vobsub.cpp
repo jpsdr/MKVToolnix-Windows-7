@@ -69,8 +69,14 @@ void
 vobsub_packetizer_c::after_packet_timestamped(packet_t &packet) {
   static debugging_option_c debug{"spu|spu_duration"};
 
-  if (!packet.has_duration())
+  if (!packet.has_duration() || (0 == packet.duration)) {
+    auto new_duration = mtx::spu::get_duration(packet.data->get_buffer(), packet.data->get_size());
+    packet.duration   = new_duration.to_ns(0);
+
+    mxdebug_if(debug, boost::format("vobsub: no duration at the container level; setting to %1% from SPU packets\n") % format_timestamp(new_duration.to_ns(0)));
+
     return;
+  }
 
   auto current_duration = mtx::spu::get_duration(packet.data->get_buffer(), packet.data->get_size());
   auto diff             = current_duration.valid() ? (current_duration - timestamp_c::ns(packet.duration)).abs() : timestamp_c::ns(0);
