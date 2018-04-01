@@ -19,6 +19,7 @@
 #include "common/ivf.h"
 #include "common/id_info.h"
 #include "input/r_ivf.h"
+#include "output/p_av1.h"
 #include "output/p_vpx.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -34,10 +35,11 @@ ivf_reader_c::probe_file(mm_io_c &in,
   if (in.read(&header, sizeof(ivf::file_header_t)) < sizeof(ivf::file_header_t))
     return 0;
 
-  if (memcmp(header.file_magic, "DKIF", 4) || header.get_codec().is(codec_c::type_e::UNKNOWN))
+  if (memcmp(header.file_magic, "DKIF", 4))
     return 0;
 
-  return 1;
+  auto codec = header.get_codec();
+  return codec.is(codec_c::type_e::V_AV1) || codec.is(codec_c::type_e::V_VP8) || codec.is(codec_c::type_e::V_VP9);
 }
 
 ivf_reader_c::ivf_reader_c(const track_info_c &ti,
@@ -75,17 +77,32 @@ ivf_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('v', 0) || (NPTZR() != 0))
     return;
 
-  auto packetizer = new vpx_video_packetizer_c(this, m_ti, m_codec.get_type());
-  add_packetizer(packetizer);
+  if (m_codec.is(codec_c::type_e::V_AV1))
+    create_av1_packetizer();
+
+  else if (m_codec.is(codec_c::type_e::V_VP8) || m_codec.is(codec_c::type_e::V_VP9))
+    create_vpx_packetizer();
+
+  auto packetizer = PTZR0;
 
   packetizer->set_video_pixel_width(m_width);
   packetizer->set_video_pixel_height(m_height);
 
-  uint64_t default_duration = 1000000000ll * m_frame_rate_den / m_frame_rate_num;
+  auto default_duration = 1000000000ll * m_frame_rate_den / m_frame_rate_num;
   if (default_duration >= 1000000)
     packetizer->set_track_default_duration(default_duration);
 
   show_packetizer_info(0, packetizer);
+}
+
+void
+ivf_reader_c::create_av1_packetizer() {
+  add_packetizer(new av1_video_packetizer_c(this, m_ti));
+}
+
+void
+ivf_reader_c::create_vpx_packetizer() {
+  add_packetizer(new vpx_video_packetizer_c(this, m_ti, m_codec.get_type()));
 }
 
 file_status_e

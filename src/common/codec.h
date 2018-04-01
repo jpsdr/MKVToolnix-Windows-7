@@ -54,6 +54,7 @@
 #define MKV_A_VORBIS      "A_VORBIS"
 #define MKV_A_WAVPACK4    "A_WAVPACK4"
 
+#define MKV_V_AV1         "V_AV1"
 #define MKV_V_DIRAC       "V_DIRAC"
 #define MKV_V_MPEG1       "V_MPEG1"
 #define MKV_V_MPEG2       "V_MPEG2"
@@ -92,7 +93,8 @@ class codec_c {
 public:
   enum class type_e {
       UNKNOWN  = 0
-    , V_BITFIELDS = 0x1000
+    , V_AV1 = 0x1000
+    , V_BITFIELDS
     , V_CINEPAK
     , V_DIRAC
     , V_MPEG12

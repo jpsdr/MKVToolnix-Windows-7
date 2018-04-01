@@ -34,10 +34,15 @@ public:
     return mtx::file_type_e::ivf;
   }
 
-  virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
-  virtual void identify();
-  virtual void create_packetizer(int64_t id);
+  virtual void read_headers() override;
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual void identify() override;
+  virtual void create_packetizer(int64_t id) override;
 
+protected:
+  void create_av1_packetizer();
+  void create_vpx_packetizer();
+
+public:
   static int probe_file(mm_io_c &in, uint64_t size);
 };

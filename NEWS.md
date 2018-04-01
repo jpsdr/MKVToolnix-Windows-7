@@ -23,6 +23,8 @@
 * mkvinfo: the size and positions of frames within "SimpleBlock" and
   "BlockGroup" elements are now shown the same way they're shown for other
   elements (by adding the `-v -v` and `-z` options).
+* mkvmerge: added support for reading AV1 video from IVF, WebM and Matroska
+  files.
 
 ## Bug fixes
 

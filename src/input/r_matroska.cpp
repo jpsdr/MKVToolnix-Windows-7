@@ -68,6 +68,7 @@
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_alac.h"
+#include "output/p_av1.h"
 #include "output/p_avc.h"
 #include "output/p_avc_es.h"
 #include "output/p_dirac.h"
@@ -1694,6 +1695,12 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
   } else if (t->codec.is(codec_c::type_e::V_DIRAC)) {
     set_track_packetizer(t, new dirac_video_packetizer_c(this, nti));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
+
+  } else if (t->codec.is(codec_c::type_e::V_AV1)) {
+    set_track_packetizer(t, new av1_video_packetizer_c(this, nti));
+    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    t->handle_packetizer_pixel_dimensions();
+    t->handle_packetizer_default_duration();
 
   } else if (t->codec.is(codec_c::type_e::V_VP8) || t->codec.is(codec_c::type_e::V_VP9)) {
     set_track_packetizer(t, new vpx_video_packetizer_c(this, nti, t->codec.get_type()));
