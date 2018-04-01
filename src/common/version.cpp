@@ -22,7 +22,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Tardigrades Will Inherit The Earth"
+#define VERSIONNAME "At The End Of The World"
 
 version_number_t::version_number_t()
 {
