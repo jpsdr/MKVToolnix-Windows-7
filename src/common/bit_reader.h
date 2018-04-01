@@ -30,6 +30,10 @@ private:
   uint16_t m_rbsp_bytes;
 
 public:
+  reader_c() {
+    init(nullptr, 0);
+  }
+
   reader_c(unsigned char const *data, std::size_t len) {
     init(data, len);
   }
