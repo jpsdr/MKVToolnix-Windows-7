@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 23:21+0200\n"
+"POT-Creation-Date: 2018-04-01 16:55+0200\n"
 "PO-Revision-Date: 2018-03-28 23:04+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -1311,8 +1311,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: сталася виняткова ситуація (повідомлення: %2%; тип: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1573
-#: src/input/r_matroska.cpp:2256
+#: src/input/r_matroska.cpp:1574
+#: src/input/r_matroska.cpp:2263
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: сталася невідома виняткова ситуація."
@@ -2294,7 +2294,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Обробка наступних файлів, а також: %2%\n"
 
-#: src/input/r_matroska.cpp:1851
+#: src/input/r_matroska.cpp:1858
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%': Ви копіюєте доріжку Opus, що була мультиплекована в експериментальному режимі. Результуючий файл буде записано у фіналізованому режимі, але одна деталь не може бути відновлена з доріжки, мультиплекованої в експериментальному режимі: кінцева обрізка. Це означає, що декодер може давати на виході на кілька семплів більше, ніж оригінально задано. Вам необхідно робити повторне мультиплексування на основі оригінального файла Opus, якщо можливо.\n"
@@ -2595,8 +2595,8 @@ msgstr "<Не названо>"
 msgid "<Unsaved file>"
 msgstr "<Незбережений файл>"
 
-#: src/input/r_matroska.cpp:2278
-#: src/input/r_matroska.cpp:2404
+#: src/input/r_matroska.cpp:2285
+#: src/input/r_matroska.cpp:2411
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Блок був знайдений на позиції %1% для доріжки номер %2%. Тим не менше, заголовки не знайдені для цього номеру доріжки. Блок буде пропущено.\n"
@@ -2621,7 +2621,7 @@ msgstr "Список, розділених комою номерів кадрі�
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "Список, розділених комою діапазонів тайм-кодів контенту для обробки."
 
-#: src/input/r_matroska.cpp:765
+#: src/input/r_matroska.cpp:766
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
 
@@ -2765,6 +2765,11 @@ msgstr "Неспівпадіння розміру приватних даних 
 #, no-c-format
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "ASCII рядок (без спеціальних символів, як то Umlaute і т.д.)"
+
+#: src/output/p_av1.h:32
+#, fuzzy
+msgid "AV1"
+msgstr "AVI"
 
 #: src/common/file_types.cpp:74
 #: src/output/p_avc.h:34
@@ -5186,7 +5191,7 @@ msgstr "Елементи"
 msgid "Element types:\n"
 msgstr "Типи елемента:\n"
 
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:109
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:114
 #, fuzzy, no-c-format
 msgid "Element viewer: %1"
 msgstr "Елементи"
@@ -5224,6 +5229,10 @@ msgstr "Включення цієї опції зберігає цей оста�
 #, no-c-format
 msgid "Enabling tracks"
 msgstr "Ввімкнення доріжок за умови"
+
+#: src/common/av1.h:30
+msgid "Encountered OBUs with invalid data."
+msgstr ""
 
 #: src/common/kax_element_names.cpp:171
 #, fuzzy
@@ -5810,7 +5819,7 @@ msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: Відсутній ID доріжки в '%1% %2%'.\n"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:192
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:92
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:96
 #: src/mkvtoolnix-gui/info/model.cpp:210
 #, fuzzy, no-c-format
 msgid "Frame"
@@ -6074,13 +6083,11 @@ msgstr "ISO639-1 код"
 msgid "ISO639-2 code"
 msgstr "ISO639-2 код"
 
-#: src/common/file_types.cpp:87
-msgid "IVF (VP8/VP9)"
-msgstr "IVF (VP8/VP9)"
-
 #: src/common/file_types.cpp:41
-msgid "IVF with VP8 video files"
-msgstr "IVF з VP8 відеофайлами"
+#: src/common/file_types.cpp:87
+#, fuzzy
+msgid "IVF (AV1, VP8, VP9)"
+msgstr "IVF (VP8/VP9)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:256
 #, no-c-format
@@ -7176,12 +7183,12 @@ msgstr "MPLS Blu-ray список відтворення"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Зробити дану доріжку типовою доріжкою для даного типу даних (аудіо, відео, субтитри)."
 
-#: src/input/r_matroska.cpp:1739
-#: src/input/r_matroska.cpp:1756
+#: src/input/r_matroska.cpp:1746
+#: src/input/r_matroska.cpp:1763
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Знайдені неправильні дані ініціалізації кодека AAC.\n"
 
-#: src/input/r_matroska.cpp:1749
+#: src/input/r_matroska.cpp:1756
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Неправильно заданий ID кодека '%1%'.\n"
@@ -8016,7 +8023,7 @@ msgstr "Лише списки відтворення, чия триваліст�
 msgid "Only show summaries of the contents, not each element."
 msgstr "Відображення тільки короткого звіту про наповнення, не для кожного елемента."
 
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:116
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:121
 #, fuzzy, no-c-format
 msgid "Only the first %1 bytes are shown."
 msgstr "Відображення перших 16 байтів кожного кадру як шістнадцяткового дампа."
@@ -8669,6 +8676,10 @@ msgstr "RIFF CDXA"
 #: src/common/kax_info.cpp:848
 msgid "RSA"
 msgstr "RSA"
+
+#: src/common/av1.h:23
+msgid "Raw OBUs without a size field are not supported."
+msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:209
 #, no-c-format
@@ -10033,7 +10044,7 @@ msgstr "Заголовок ідентифікації Theora не може бу�
 msgid "The UID must not be left empty."
 msgstr "UID не може бути пустим."
 
-#: src/input/r_matroska.cpp:764
+#: src/input/r_matroska.cpp:765
 #, boost-format
 msgid "The VobSub subtitle track %1% does not contain its index in the CodecPrivate element."
 msgstr "Доріжка субтитрів VobSub %1% не містить її індексу у елементі CodecPrivate."
@@ -10633,8 +10644,8 @@ msgstr "Файл є непідтримуваним форматом контей
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1574
-#: src/input/r_matroska.cpp:2257
+#: src/input/r_matroska.cpp:1575
+#: src/input/r_matroska.cpp:2264
 msgid "The file will not be processed further."
 msgstr "Файл не буде оброблений далі."
 
@@ -11685,8 +11696,8 @@ msgstr "Цей трек містить SBR AAC/HE-AAC/AAC+дані."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1574
-#: src/input/r_matroska.cpp:2257
+#: src/input/r_matroska.cpp:1575
+#: src/input/r_matroska.cpp:2264
 msgid "This usually indicates a damaged file structure."
 msgstr "Це зазвичай є свідченням пошкодженої структури файлу."
 
@@ -11778,7 +11789,7 @@ msgstr "CodecPrivate доріжки %1% є дуже малим.\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "Доріжка %1% була стиснута невідомим/непідтримуваним алгоритмом стиснення (%2%).\n"
 
-#: src/input/r_matroska.cpp:1276
+#: src/input/r_matroska.cpp:1277
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Для доріжки %1% пропущено її елемент - UID доріжки, наявність якого обов'язкова згідно специфікації Matroska. Якщо файл містить теги, то вони можуть бути пошкоджені.\n"
@@ -12040,7 +12051,7 @@ msgstr "Невідомий тип кодування вмісту %1% для д�
 msgid "Unknown element"
 msgstr "Невідомий елемент"
 
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:99
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:103
 #: src/mkvtoolnix-gui/info/model.cpp:341
 #, fuzzy, boost-format
 msgid "Unknown element (ID: 0x%1%)"
@@ -12120,7 +12131,7 @@ msgstr "Непідтримуваний MPEG mpeg_version: 0x%|1$02x| в паке
 msgid "Unsupported file format"
 msgstr "Непідтримуваний формат"
 
-#: src/input/r_matroska.cpp:2065
+#: src/input/r_matroska.cpp:2072
 msgid "Unsupported track type for this track.\n"
 msgstr "Непідтримуваний тип для цієї доріжки.\n"
 
@@ -12192,7 +12203,7 @@ msgstr "Використання довжини поля розміру NALU у 
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Використання демультиплексора для формату '%1%'.\n"
 
-#: src/input/r_matroska.cpp:1603
+#: src/input/r_matroska.cpp:1604
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Використання вихідного модуля для доріжки типу '%1%'.\n"
@@ -12926,7 +12937,7 @@ msgstr "mkvextract attachments <inname> [опції] [AID1:out1 [AID2:out2 ...]]
 
 #: src/common/kax_info.cpp:690
 #: src/common/kax_info.cpp:866
-#: src/input/r_matroska.cpp:110
+#: src/input/r_matroska.cpp:111
 msgid "audio"
 msgstr "Аудіо"
 
@@ -12953,7 +12964,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:693
 #: src/common/kax_info.cpp:869
-#: src/input/r_matroska.cpp:111
+#: src/input/r_matroska.cpp:112
 msgid "buttons"
 msgstr "Кнопки"
 
@@ -13132,121 +13143,121 @@ msgstr "довжина %1%, дані: %2%"
 msgid "line %1%: The 'delay' timestamp could not be parsed.\n"
 msgstr "рядок %1%: часова мітка 'delay' не може бути зчитана.\n"
 
-#: src/input/r_matroska.cpp:430
+#: src/input/r_matroska.cpp:431
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (в MS режимі сумісності для треку %1%) на основі інформації структури Matroska можна сказати, що міститья %2% біт на семпл, але WAVEFORMATEX сповіщає, що їх %3%.\n"
 
-#: src/input/r_matroska.cpp:421
+#: src/input/r_matroska.cpp:422
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (в MS режимі сумісності для треку %1%) на основі інформації структури Matroska можна сказати, що є %2% канали(ів), але WAVEFORMATEX сповіщає, що їх %3%.\n"
 
-#: src/input/r_matroska.cpp:412
+#: src/input/r_matroska.cpp:413
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (в MS режимі сумісності для треку %1%) на основі інформації структури Matroska можна сказати, що є %2% семплів за секунду (частота дискретизації), але WAVEFORMATEX сповіщає, що їх %3%.\n"
 
-#: src/input/r_matroska.cpp:630
+#: src/input/r_matroska.cpp:631
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (в MS режимі сумісності для треку %1%) на основі інформації структури Matroska можна сказати, що висота відео становить %2%, але BITMAPINFOHEADER сповіщає, що висота - %3%.\n"
 
-#: src/input/r_matroska.cpp:621
+#: src/input/r_matroska.cpp:622
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (в MS режимі сумісності для треку %1%) на основі інформації структури Matroska можна сказати, що ширина відео становить %2%, але BITMAPINFOHEADER сповіщає, що ширина - %3%.\n"
 
-#: src/input/r_matroska.cpp:1265
+#: src/input/r_matroska.cpp:1266
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: У доріжки відсутній її номер.\n"
 
-#: src/input/r_matroska.cpp:1665
+#: src/input/r_matroska.cpp:1666
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: Не вдалося зберегти UID доріжки %1%, оскільки він вже зарезервований для нового файлу.\n"
 
-#: src/input/r_matroska.cpp:1513
-#: src/input/r_matroska.cpp:1518
+#: src/input/r_matroska.cpp:1514
+#: src/input/r_matroska.cpp:1519
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Не знайдено жодного сегмента.\n"
 
-#: src/input/r_matroska.cpp:1228
+#: src/input/r_matroska.cpp:1229
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Відсутня висота пікселя.\n"
 
-#: src/input/r_matroska.cpp:1226
+#: src/input/r_matroska.cpp:1227
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Відсутня ширина пікселя.\n"
 
-#: src/input/r_matroska.cpp:798
+#: src/input/r_matroska.cpp:799
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_reader: CodecID '%1%' для доріжки %2% є невідомим.\n"
 
-#: src/input/r_matroska.cpp:445
-#: src/input/r_matroska.cpp:490
-#: src/input/r_matroska.cpp:511
-#: src/input/r_matroska.cpp:694
-#: src/input/r_matroska.cpp:712
-#: src/input/r_matroska.cpp:733
+#: src/input/r_matroska.cpp:446
+#: src/input/r_matroska.cpp:491
+#: src/input/r_matroska.cpp:512
+#: src/input/r_matroska.cpp:695
+#: src/input/r_matroska.cpp:713
+#: src/input/r_matroska.cpp:734
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: CodecID для доріжки %1% - '%2%', але власні дані кодека не містять коректних заголовків.\n"
 
-#: src/input/r_matroska.cpp:609
+#: src/input/r_matroska.cpp:610
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: CodecID для доріжки %1% - '%2%', але не було знайдено структури BITMAPINFOHEADER. Тому не має FourCC для ідентифікації кодека відео.\n"
 
-#: src/input/r_matroska.cpp:390
+#: src/input/r_matroska.cpp:391
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: CodecID для доріжки %1% - '%2%', але не було знайдено структури WAVEFORMATEX. Тому не має ID формату для ідентифікації кодека аудіо.\n"
 
-#: src/input/r_matroska.cpp:649
+#: src/input/r_matroska.cpp:650
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "matroska_reader: CodecID для доріжки %1% - '%2%', але не було знайдено власних заголовків кодека.\n"
 
-#: src/input/r_matroska.cpp:751
+#: src/input/r_matroska.cpp:752
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader: CodecID для доріжки %1% - '%2%', але не було знайдено власних даних.\n"
 
-#: src/input/r_matroska.cpp:1322
+#: src/input/r_matroska.cpp:1323
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: Відсутній CodecID.\n"
 
-#: src/input/r_matroska.cpp:681
+#: src/input/r_matroska.cpp:682
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_reader: Висота доріжки %1% не була задана.\n"
 
-#: src/input/r_matroska.cpp:675
+#: src/input/r_matroska.cpp:676
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_reader: Ширина доріжки %1% не була задана.\n"
 
-#: src/input/r_matroska.cpp:836
+#: src/input/r_matroska.cpp:837
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader: З доріжкою %1% все гаразд.\n"
 
-#: src/input/r_matroska.cpp:1283
+#: src/input/r_matroska.cpp:1284
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: Тип доріжки не знайдено.\n"
 
-#: src/input/r_matroska.cpp:481
+#: src/input/r_matroska.cpp:482
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge не була скомпільована з підтримкою FLAC. Ігнорування доріжки %1%.\n"
 
-#: src/input/r_matroska.cpp:1500
+#: src/input/r_matroska.cpp:1501
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: не знайдено заголовку EBML.\n"
 
-#: src/input/r_matroska.cpp:831
+#: src/input/r_matroska.cpp:832
 #, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: невідомий тип демультиплексора для доріжки %1%: '%2%'\n"
@@ -13585,7 +13596,7 @@ msgstr " розмір невідомий"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Невірний формат. Не знайдено рядок \"Format\" у секції \"[Events]\"."
 
-#: src/input/r_matroska.cpp:113
+#: src/input/r_matroska.cpp:114
 msgid "subtitle"
 msgstr "субтитр"
 
@@ -13659,9 +13670,9 @@ msgstr "tta_reader: tag_size < 0 в c'tor. %1%\n"
 #: src/common/kax_info.cpp:859
 #: src/common/kax_info.cpp:870
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2731
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:112
+#: src/input/r_matroska.cpp:110
+#: src/input/r_matroska.cpp:2738
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:181
 #: src/mkvtoolnix-gui/info/model.cpp:182
@@ -13669,7 +13680,7 @@ msgstr "tta_reader: tag_size < 0 в c'tor. %1%\n"
 msgid "unknown"
 msgstr "невідомий"
 
-#: src/input/r_matroska.cpp:2715
+#: src/input/r_matroska.cpp:2722
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "невідомий, тег форматування 0x%|1$04x|"
@@ -13680,7 +13691,7 @@ msgstr "Не задано"
 
 #: src/common/kax_info.cpp:691
 #: src/common/kax_info.cpp:867
-#: src/input/r_matroska.cpp:112
+#: src/input/r_matroska.cpp:113
 msgid "video"
 msgstr "Відео"
 
@@ -14070,6 +14081,9 @@ msgstr "– Нічого не обрано –"
 
 #~ msgid "Hel&p"
 #~ msgstr "Доп&омога"
+
+#~ msgid "IVF with VP8 video files"
+#~ msgstr "IVF з VP8 відеофайлами"
 
 #~ msgid "Info"
 #~ msgstr "Інформація"

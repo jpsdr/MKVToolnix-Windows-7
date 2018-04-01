@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-03-28 23:21+0200\n"
+"POT-Creation-Date: 2018-04-01 16:55+0200\n"
 "PO-Revision-Date: 2018-03-28 23:04+0200\n"
 "Last-Translator: HULEN\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -1256,8 +1256,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: 異常狀況發生 (message: %2%; type: %3%)。"
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1573
-#: src/input/r_matroska.cpp:2256
+#: src/input/r_matroska.cpp:1574
+#: src/input/r_matroska.cpp:2263
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: 不明的異常狀況發生。"
@@ -2232,7 +2232,7 @@ msgstr "「%1%」: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "「%1%」: 正在處理下列檔案: %2%\n"
 
-#: src/input/r_matroska.cpp:1851
+#: src/input/r_matroska.cpp:1858
 #, fuzzy, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "「%1%」: 您正在重新合成於實驗模式中合成的 Opus 軌道。最後結果會用最終模式寫入，但是有一項詳細資訊無法從實驗模式合成的軌道中還原：末端裁剪。這表示解碼器可能會輸出比原本預期還少的取樣數。如果可以的話，您應該用原始的 Opus 檔案重新合成。\n"
@@ -2533,8 +2533,8 @@ msgstr "<未命名>"
 msgid "<Unsaved file>"
 msgstr "<未儲存的檔案>"
 
-#: src/input/r_matroska.cpp:2278
-#: src/input/r_matroska.cpp:2404
+#: src/input/r_matroska.cpp:2285
+#: src/input/r_matroska.cpp:2411
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "在時間戳記 %1% 處找到了軌道編號為 %2% 的區塊。然而，沒有找到符合該軌道編號的表頭資訊。此區塊將被跳過。\n"
@@ -2559,7 +2559,7 @@ msgstr "用逗號區隔開要在影格/圖場號碼之後分割的清單。"
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "用逗號區隔開要保留內容時間碼範圍的清單。"
 
-#: src/input/r_matroska.cpp:765
+#: src/input/r_matroska.cpp:766
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
 
@@ -2695,6 +2695,11 @@ msgstr "ALAC 私有專利資料大小不符合\n"
 #, no-c-format
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "ASCII 字串 (不能使用特殊字元，像德語變音符號等等)"
+
+#: src/output/p_av1.h:32
+#, fuzzy
+msgid "AV1"
+msgstr "AVI"
 
 #: src/common/file_types.cpp:74
 #: src/output/p_avc.h:34
@@ -5141,7 +5146,7 @@ msgstr "元件"
 msgid "Element types:\n"
 msgstr "元件類型:\n"
 
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:109
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:114
 #, fuzzy, no-c-format
 msgid "Element viewer: %1"
 msgstr "元件"
@@ -5180,6 +5185,10 @@ msgstr "啟用該選項使 mkvmerge 保留此項目。"
 #, no-c-format
 msgid "Enabling tracks"
 msgstr "啟用軌道"
+
+#: src/common/av1.h:30
+msgid "Encountered OBUs with invalid data."
+msgstr ""
 
 #: src/common/kax_element_names.cpp:171
 #, fuzzy
@@ -5769,7 +5778,7 @@ msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: 缺少軌道 ID 於「%1% %2%」。\n"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:192
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:92
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:96
 #: src/mkvtoolnix-gui/info/model.cpp:210
 #, fuzzy, no-c-format
 msgid "Frame"
@@ -6033,13 +6042,11 @@ msgstr "ISO639-1 碼"
 msgid "ISO639-2 code"
 msgstr "ISO639-2 碼"
 
-#: src/common/file_types.cpp:87
-msgid "IVF (VP8/VP9)"
-msgstr "IVF (VP8/VP9)"
-
 #: src/common/file_types.cpp:41
-msgid "IVF with VP8 video files"
-msgstr "含 VP8 視訊檔的 IVF"
+#: src/common/file_types.cpp:87
+#, fuzzy
+msgid "IVF (AV1, VP8, VP9)"
+msgstr "IVF (VP8/VP9)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:256
 #, no-c-format
@@ -7133,12 +7140,12 @@ msgstr "MPLS 藍光播放清單"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "將此軌道作為本身類型 (音訊、視訊、字幕) 的預設軌。"
 
-#: src/input/r_matroska.cpp:1739
-#: src/input/r_matroska.cpp:1756
+#: src/input/r_matroska.cpp:1746
+#: src/input/r_matroska.cpp:1763
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "發現不正常的 AAC 編解碼器初始化資料。\n"
 
-#: src/input/r_matroska.cpp:1749
+#: src/input/r_matroska.cpp:1756
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "不正常的編解碼器 id「%1%」。\n"
@@ -7977,7 +7984,7 @@ msgstr "只有播放清單的時間長度至少有一定長度並提供使用者
 msgid "Only show summaries of the contents, not each element."
 msgstr "僅顯示內容的摘要，而非所有元件。"
 
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:116
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:121
 #, fuzzy, no-c-format
 msgid "Only the first %1 bytes are shown."
 msgstr "以十六進位轉儲形式顯示每畫格的前 16 位元組。"
@@ -8616,6 +8623,10 @@ msgstr ""
 #: src/common/kax_info.cpp:848
 msgid "RSA"
 msgstr "RSA"
+
+#: src/common/av1.h:23
+msgid "Raw OBUs without a size field are not supported."
+msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:209
 #, no-c-format
@@ -9973,7 +9984,7 @@ msgstr "Theora 識別表頭無法解析 (%1%)。\n"
 msgid "The UID must not be left empty."
 msgstr "UID 不可以留空。"
 
-#: src/input/r_matroska.cpp:764
+#: src/input/r_matroska.cpp:765
 #, boost-format
 msgid "The VobSub subtitle track %1% does not contain its index in the CodecPrivate element."
 msgstr ""
@@ -10568,8 +10579,8 @@ msgstr "此檔案無法辨識為支援的格式 (離開碼: %1)。"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1574
-#: src/input/r_matroska.cpp:2257
+#: src/input/r_matroska.cpp:1575
+#: src/input/r_matroska.cpp:2264
 msgid "The file will not be processed further."
 msgstr "無法更進一步處理檔案。"
 
@@ -11607,8 +11618,8 @@ msgstr "此軌道包含 SBR AAC/HE-AAC/AAC+ 資料。"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1574
-#: src/input/r_matroska.cpp:2257
+#: src/input/r_matroska.cpp:1575
+#: src/input/r_matroska.cpp:2264
 msgid "This usually indicates a damaged file structure."
 msgstr "這通常用以表示損壞的檔案結構。"
 
@@ -11700,7 +11711,7 @@ msgstr "軌道 %1% CodecPrivate 過小。\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "軌道 %1% 被未知/不支援的壓縮演算法壓縮 (%2%)。\n"
 
-#: src/input/r_matroska.cpp:1276
+#: src/input/r_matroska.cpp:1277
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "軌道 %1% 遺失了本身軌道 UID 元件，在 Matroska 規範中有描述該元件是必須的。若檔案包含標籤那麼標籤可能會毀損。\n"
@@ -11962,7 +11973,7 @@ msgstr "未知內容編碼類型 %1%，用於軌道 %2%。\n"
 msgid "Unknown element"
 msgstr "未知元素"
 
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:99
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:103
 #: src/mkvtoolnix-gui/info/model.cpp:341
 #, fuzzy, boost-format
 msgid "Unknown element (ID: 0x%1%)"
@@ -12043,7 +12054,7 @@ msgstr "不支援 MPEG mpeg_version: 0x%|1$02x| 於資料套件 %2% 時間碼 %3
 msgid "Unsupported file format"
 msgstr "不支援的檔案格式"
 
-#: src/input/r_matroska.cpp:2065
+#: src/input/r_matroska.cpp:2072
 msgid "Unsupported track type for this track.\n"
 msgstr "不支援此軌道的軌道類型。\n"
 
@@ -12115,7 +12126,7 @@ msgstr "使用 3 位元組的 NALU 長可能會導致某些 AVC/h.264 編解碼�
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "此格式「%1%」使用多工解訊器。\n"
 
-#: src/input/r_matroska.cpp:1603
+#: src/input/r_matroska.cpp:1604
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "軌道類型「%1%」使用一般輸出模組。\n"
@@ -12848,7 +12859,7 @@ msgstr "mkvextract attachments <輸入檔名> [選項] [AID1:out1 [AID2:out2 ...
 
 #: src/common/kax_info.cpp:690
 #: src/common/kax_info.cpp:866
-#: src/input/r_matroska.cpp:110
+#: src/input/r_matroska.cpp:111
 msgid "audio"
 msgstr "音訊"
 
@@ -12875,7 +12886,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:693
 #: src/common/kax_info.cpp:869
-#: src/input/r_matroska.cpp:111
+#: src/input/r_matroska.cpp:112
 msgid "buttons"
 msgstr "按鈕"
 
@@ -13054,121 +13065,121 @@ msgstr "長 %1%, 資料: %2%"
 msgid "line %1%: The 'delay' timestamp could not be parsed.\n"
 msgstr "第 %1% 行:「延遲」時間戳記無法解析。\n"
 
-#: src/input/r_matroska.cpp:430
+#: src/input/r_matroska.cpp:431
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (微軟相容模式，軌道 %1%) Matroska 說每取樣為 %2% 比特，但這個波形格式項索引說有 %3% 比特。\n"
 
-#: src/input/r_matroska.cpp:421
+#: src/input/r_matroska.cpp:422
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (微軟相容模式，軌道 %1%) Matroska 說有 %2% 聲道，但這個波形格式項索引說有 %3% 聲道。\n"
 
-#: src/input/r_matroska.cpp:412
+#: src/input/r_matroska.cpp:413
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (微軟相容模式，軌道 %1%) Matroska 說每秒有 %2% 取樣，但這個波形格式項索引 說有 %3% 取樣。\n"
 
-#: src/input/r_matroska.cpp:630
+#: src/input/r_matroska.cpp:631
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (微軟相容模式, 軌道 %1%) Matroska 視訊高度為 %2%，但這個點陣圖資訊檔頭是 %3%。\n"
 
-#: src/input/r_matroska.cpp:621
+#: src/input/r_matroska.cpp:622
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (微軟相容模式, 軌道 %1%) Matrosa 視訊寬度為 %2%，但這個點陣圖資訊檔頭是 %3%。\n"
 
-#: src/input/r_matroska.cpp:1265
+#: src/input/r_matroska.cpp:1266
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: 有一個軌道缺少軌道編號。\n"
 
-#: src/input/r_matroska.cpp:1665
+#: src/input/r_matroska.cpp:1666
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: 無法保留軌道 UID %1%，因為它已被指派給了新檔案。\n"
 
-#: src/input/r_matroska.cpp:1513
-#: src/input/r_matroska.cpp:1518
+#: src/input/r_matroska.cpp:1514
+#: src/input/r_matroska.cpp:1519
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: 未發現剪輯。\n"
 
-#: src/input/r_matroska.cpp:1228
+#: src/input/r_matroska.cpp:1229
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: 像素高度遺失。\n"
 
-#: src/input/r_matroska.cpp:1226
+#: src/input/r_matroska.cpp:1227
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: 像素寬度遺失。\n"
 
-#: src/input/r_matroska.cpp:798
+#: src/input/r_matroska.cpp:799
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_reader: 軌 %2% 的 CodecID「%1%」未知。\n"
 
-#: src/input/r_matroska.cpp:445
-#: src/input/r_matroska.cpp:490
-#: src/input/r_matroska.cpp:511
-#: src/input/r_matroska.cpp:694
-#: src/input/r_matroska.cpp:712
-#: src/input/r_matroska.cpp:733
+#: src/input/r_matroska.cpp:446
+#: src/input/r_matroska.cpp:491
+#: src/input/r_matroska.cpp:512
+#: src/input/r_matroska.cpp:695
+#: src/input/r_matroska.cpp:713
+#: src/input/r_matroska.cpp:734
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: 軌道 %1% 的 CodecID 為「%2%」，但專屬的編解碼器資料沒有包含有效的表頭。\n"
 
-#: src/input/r_matroska.cpp:609
+#: src/input/r_matroska.cpp:610
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: 軌 %1% 的 CodecID 為「%2%」，但沒有出現 BITMAPINFOHEADER 點陣圖資訊表頭結構。因此我們沒有可標記視訊編碼的 FourCC。\n"
 
-#: src/input/r_matroska.cpp:390
+#: src/input/r_matroska.cpp:391
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: 軌 %1% 的 CodecID 為「%2%」，但沒有出現 WAVEFORMATEX 波形格式項索引結構。因此我們沒有可標記音訊編碼的 Format ID。\n"
 
-#: src/input/r_matroska.cpp:649
+#: src/input/r_matroska.cpp:650
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "matroska_reader: 軌 %1% 的 CodecID 為「%2%」，但沒有編解碼器專有表頭。\n"
 
-#: src/input/r_matroska.cpp:751
+#: src/input/r_matroska.cpp:752
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader: 軌 %1% 的 CodecID 為「%2%」，但沒發現專有資料。\n"
 
-#: src/input/r_matroska.cpp:1322
+#: src/input/r_matroska.cpp:1323
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: 遺失 CodecID。\n"
 
-#: src/input/r_matroska.cpp:681
+#: src/input/r_matroska.cpp:682
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_reader: 軌道 %1% 的高度未設定。\n"
 
-#: src/input/r_matroska.cpp:675
+#: src/input/r_matroska.cpp:676
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_reader: 軌道 %1% 的寬度未設定。\n"
 
-#: src/input/r_matroska.cpp:836
+#: src/input/r_matroska.cpp:837
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader: 軌道 %1% 應該是正常的。\n"
 
-#: src/input/r_matroska.cpp:1283
+#: src/input/r_matroska.cpp:1284
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: 軌道類型未找到。\n"
 
-#: src/input/r_matroska.cpp:481
+#: src/input/r_matroska.cpp:482
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge 編譯時沒有附加 FLAC 支援。已忽略軌道 %1%。\n"
 
-#: src/input/r_matroska.cpp:1500
+#: src/input/r_matroska.cpp:1501
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: 未發現 EBML 表頭。\n"
 
-#: src/input/r_matroska.cpp:831
+#: src/input/r_matroska.cpp:832
 #, fuzzy, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: 軌道 %1% 的未知分離器類型:「%2%」\n"
@@ -13506,7 +13517,7 @@ msgstr "大小不明"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: 無效格式。\"[Events]\" 區段中未找到 \"Format\" 這一行。"
 
-#: src/input/r_matroska.cpp:113
+#: src/input/r_matroska.cpp:114
 msgid "subtitle"
 msgstr "字幕"
 
@@ -13580,9 +13591,9 @@ msgstr "tta_reader: c'tor 中 tag_size < 0。 %1%\n"
 #: src/common/kax_info.cpp:859
 #: src/common/kax_info.cpp:870
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:109
-#: src/input/r_matroska.cpp:2731
-#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:112
+#: src/input/r_matroska.cpp:110
+#: src/input/r_matroska.cpp:2738
+#: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:181
 #: src/mkvtoolnix-gui/info/model.cpp:182
@@ -13590,7 +13601,7 @@ msgstr "tta_reader: c'tor 中 tag_size < 0。 %1%\n"
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2715
+#: src/input/r_matroska.cpp:2722
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "不明的格式標識 0x%|1$04x|"
@@ -13601,7 +13612,7 @@ msgstr "未指定"
 
 #: src/common/kax_info.cpp:691
 #: src/common/kax_info.cpp:867
-#: src/input/r_matroska.cpp:112
+#: src/input/r_matroska.cpp:113
 msgid "video"
 msgstr "視訊"
 
@@ -13940,6 +13951,9 @@ msgstr "- 設定為無 -"
 
 #~ msgid "Forced flag"
 #~ msgstr "「強制」標記: %1%"
+
+#~ msgid "IVF with VP8 video files"
+#~ msgstr "含 VP8 視訊檔的 IVF"
 
 #~ msgid "Info"
 #~ msgstr "mkvInfo"
