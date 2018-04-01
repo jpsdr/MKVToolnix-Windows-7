@@ -2,13 +2,16 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: chapter editor: added an option to remove all end timestamps
-  to the "additional modifications" dialog. Implements #2231.
 * mkvmerge, MKVToolNix GUI multiplexer: AC-3, DTS, TrueHD: added an option for
   removing/minimizing the dialog normalization gain for all supported types of
   the mentioned codecs. Implements #1981.
+* mkvmerge: AV1: added support for reading AV1 video from IVF, WebM and
+  Matroska files.
 * mkvmerge: FLAC: mkvmerge can now ignore ID3 tags in FLAC files which would
   otherwise prevent mkvmerge from detecting the file type. Implements #2243.
+* mkvinfo: the size and positions of frames within "SimpleBlock" and
+  "BlockGroup" elements are now shown the same way they're shown for other
+  elements (by adding the `-v -v` and `-z` options).
 * MKVToolNix GUI: multiplexer: added options for deriving the track languages
   from the file name by searching for ISO 639-1/639-2 language codes or
   language names enclosed in non-word, non-space characters (e.g. "…[ger]…"
@@ -20,22 +23,19 @@
   hex dump of the element with the bytes making up the EBML ID and the size
   portion highlighted in different colors. In-depth highlighting is done for
   the data in `SimpleBlock` and `Block` elements.
-* mkvinfo: the size and positions of frames within "SimpleBlock" and
-  "BlockGroup" elements are now shown the same way they're shown for other
-  elements (by adding the `-v -v` and `-z` options).
-* mkvmerge: added support for reading AV1 video from IVF, WebM and Matroska
-  files.
+* MKVToolNix GUI: chapter editor: added an option to remove all end timestamps
+  to the "additional modifications" dialog. Implements #2231.
 
 ## Bug fixes
 
-* mkvmerge: MP4/QuickTime reader: fixed reading the ESDS audio header atom if
-  it is located inside a "wave" atom inside the "stsd" atom.
-* MPEG TS reader: fixed wrong handling of the continuity counter for TS
-  packets that signal that TS payload is present but where the adaptation
+* mkvmerge: MP4 reader: fixed reading the ESDS audio header atom if it is
+  located inside a "wave" atom inside the "stsd" atom.
+* mkvmerge: MP4 reader: AAC audio tracks signalling eight channels in the
+  track headers but only seven in the codec-specific configuration will be
+  treated as having eight channels.
+* mkvmerge: MPEG TS reader: fixed wrong handling of the continuity counter for
+  TS packets that signal that TS payload is present but where the adaptation
   field spans the whole TS packet.
-* mkvpropedit, MKVToolNix GUI header editor: mandatory elements can now be
-  deleted if there's a default value for them in the specifications. Fixes
-  #2241.
 * mkvmerge: the 'document type version' and 'document type read version'
   header fields are now set depending on which elements are actually written,
   not on which features are active (e.g. if a `SimpleBlock` is never written,
@@ -44,19 +44,19 @@
 * mkvmerge: the 'document type version' header field is now set to 4 correctly
   if any of the version 4 Matroska elements is written. Part of the fix for
   #2240.
-* mkvpropedit, MKVToolNix GUI header editor: the 'document type version' and
-  'document type read version' header fields are now updated if elements
-  written by the changes require higher version numbers. Part of the fix for
-  #2240.
-* mkvmerge: MP4 reader: AAC audio tracks signalling eight channels in the
-  track headers but only seven in the codec-specific configuration will be
-  treated as having eight channels.
-* source code: fixed a compilation error on FreeBSD with clang++ 5.0. Fixes
-  #2255.
 * mkvinfo: summary mode: the file positions reported for frames in
   `BlockGroup` elements did not take the bytes used for information such as
   timestamp, track number flags or lace sizes into account. They were
   therefore too low.
+* mkvpropedit, MKVToolNix GUI header editor: the 'document type version' and
+  'document type read version' header fields are now updated if elements
+  written by the changes require higher version numbers. Part of the fix for
+  #2240.
+* mkvpropedit, MKVToolNix GUI header editor: mandatory elements can now be
+  deleted if there's a default value for them in the specifications. Fixes
+  #2241.
+* source code: fixed a compilation error on FreeBSD with clang++ 5.0. Fixes
+  #2255.
 
 ## Build system changes
 
