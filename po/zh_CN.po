@@ -325,7 +325,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:126
 msgid "  --disable-lacing         Do not use lacing.\n"
-msgstr "  --disable-lacing         不使用帧捆绑。\n"
+msgstr "  --disable-lacing         不使用紧缩。\n"
 
 #: src/merge/mkvmerge.cpp:129
 msgid ""
@@ -2875,12 +2875,12 @@ msgstr "以指定值添加属性，即使该属性已存在"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:228
 msgid "Adler-32:"
-msgstr ""
+msgstr "Adler-32:"
 
 #: src/mkvtoolnix-gui/info/model.cpp:211
-#, fuzzy, boost-format
+#, boost-format
 msgid "Adler-32: 0x%|1$08x|"
-msgstr " (adler: 0x%|1$08x|)"
+msgstr "Adler-32: 0x%|1$08x|"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:319
 msgid "After a job completes &successfully or with warnings"
@@ -4014,9 +4014,9 @@ msgid "Content encryption"
 msgstr "内容加密"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:231
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Content size:"
-msgstr "内容"
+msgstr "内容尺寸:"
 
 #: src/extract/extract_cli_parser.cpp:75
 msgid "Convert text subtitles to this charset (default: UTF-8)."
@@ -4501,7 +4501,7 @@ msgstr "默认值"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1483
 msgid "Defaults for jobs saving info tool output to text files"
-msgstr ""
+msgstr "将任务信息工具输出保存到文本文件时的默认值"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1489
 msgid "Defaults for new chapter entries"
@@ -4686,16 +4686,16 @@ msgstr "禁用"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 #, no-c-format
 msgid "Disables lacing for all tracks."
-msgstr "在所有轨道中禁用捆绑。"
+msgstr "在所有轨道中禁用紧缩。"
 
 #: src/common/kax_element_names.cpp:253
 msgid "Discard padding"
 msgstr "丢弃衬垫数据"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Discardable"
-msgstr "可丢弃，"
+msgstr "可丢弃"
 
 #: src/merge/mkvmerge.cpp:684
 #: src/merge/mkvmerge.cpp:690
@@ -4869,9 +4869,9 @@ msgid "EBML head"
 msgstr "EBML 头"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:177
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "EBML lacing"
-msgstr "强制 EBML 式捆绑。"
+msgstr "EBML 式紧缩"
 
 #: src/common/kax_element_names.cpp:73
 msgid "EBML read version"
@@ -4953,9 +4953,9 @@ msgid "Element %1% is written.\n"
 msgstr "元素 %1% 已写入。\n"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:224
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Element ID:"
-msgstr "元素"
+msgstr "元素 ID:"
 
 #: src/propedit/propedit_cli_parser.cpp:160
 msgid "Element types:\n"
@@ -5462,7 +5462,7 @@ msgstr "修正码流计时信息"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:176
 #, no-c-format
 msgid "Fixed-sized lacing"
-msgstr ""
+msgstr "固定尺寸式紧缩"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, no-c-format
@@ -5524,12 +5524,12 @@ msgstr "强制 4 字节"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:61
 #, no-c-format
 msgid "Force EBML style lacing."
-msgstr "强制 EBML 式捆绑。"
+msgstr "强制 EBML 式紧缩。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:60
 #, no-c-format
 msgid "Force Xiph style lacing."
-msgstr "强制 Xiph 式捆绑。"
+msgstr "强制 Xiph 式紧缩。"
 
 #: src/common/cli_parser.cpp:181
 msgid "Force the translations for 'code' to be used."
@@ -5581,14 +5581,14 @@ msgstr "FourCC: '%1% %2%' 中缺少轨道 ID。\n"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:192
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:96
 #: src/mkvtoolnix-gui/info/model.cpp:210
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame"
-msgstr "帧率"
+msgstr "帧"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:207
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame #%1"
-msgstr "帧率"
+msgstr "帧 #%1"
 
 #: src/common/kax_element_names.cpp:249
 msgid "Frame number"
@@ -5600,9 +5600,9 @@ msgstr "帧率"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:113
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:142
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame size #%1: %2"
-msgstr " 大小 %1%"
+msgstr "帧尺寸 #%1: %2"
 
 #: src/common/kax_info.cpp:224
 #: src/common/kax_info.cpp:232
@@ -5612,9 +5612,9 @@ msgstr "大小为 %1%%2%%3% 的帧"
 
 #: src/common/kax_info.cpp:223
 #: src/common/kax_info.cpp:231
-#, fuzzy, boost-format
+#, boost-format
 msgid "Frame%1%%2%"
-msgstr "大小为 %1%%2%%3% 的帧"
+msgstr "帧%1%%2%"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:297
 #, no-c-format
@@ -6592,7 +6592,7 @@ msgstr "轨道类型 %1% 无效。"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Invisible"
-msgstr ""
+msgstr "不可见"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:174
 #, no-c-format
@@ -6682,7 +6682,7 @@ msgstr "仅保留此层级及以上的附加区块 (默认: 保留所有层级)"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
 #, no-c-format
 msgid "Key frame"
-msgstr ""
+msgstr "关键帧"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:651
 msgid "Known &problems in recent releases"
@@ -6699,7 +6699,7 @@ msgstr "交错编号"
 
 #: src/common/kax_element_names.cpp:197
 msgid "Lacing flag"
-msgstr "交错标记"
+msgstr "紧缩标记"
 
 #: src/common/kax_element_names.cpp:200
 #: src/common/property_element.cpp:139
@@ -6742,10 +6742,10 @@ msgid "Legend:"
 msgstr "图例:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:69
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Length: %1 byte"
 msgid_plural "Length: %1 bytes"
-msgstr[0] "%1% 字节"
+msgstr[0] "长度: %1 字节"
 
 #: src/merge/timestamp_factory.cpp:358
 #, boost-format
@@ -7415,7 +7415,7 @@ msgstr "尚未启动任务"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:174
 #, no-c-format
 msgid "No lacing"
-msgstr ""
+msgstr "无紧缩"
 
 #: src/input/r_flac.cpp:128
 msgid "No metadata block found. This file is broken.\n"
@@ -7532,9 +7532,9 @@ msgid "Not a hex digit at position %1%"
 msgstr "非十六进制数字，位于 %1%"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not a key frame"
-msgstr "全部帧"
+msgstr "不是关键帧"
 
 #: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
@@ -7549,9 +7549,9 @@ msgid "Not a valid number or not positive."
 msgstr "编号无效或非正。"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not discardable"
-msgstr "可丢弃，"
+msgstr "不可丢弃"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:299
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:370
@@ -7622,9 +7622,9 @@ msgid "Number of chapters:"
 msgstr "章节数量:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:197
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Number of frames: %1"
-msgstr "章节数量:"
+msgstr "帧数: %1"
 
 #: src/common/property_element.cpp:137
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -8456,9 +8456,9 @@ msgid "Reference virtual"
 msgstr "参考实质"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:168
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Relative timestamp: %1"
-msgstr "簇时间戳"
+msgstr "相对时间戳: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:828
@@ -8696,9 +8696,8 @@ msgid "Save as &default for new multiplex jobs"
 msgstr "保存为新建混流任务的默认参数(&D)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
-#, fuzzy
 msgid "Save as &default for saving output to text files"
-msgstr "保存为新建混流任务的默认参数(&D)"
+msgstr "设为将输出保存到文本文件的默认值(&D)"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #, no-c-format
@@ -9054,7 +9053,7 @@ msgstr "设置"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
 msgid "Settings for saving output to a text file"
-msgstr ""
+msgstr "将输出保存到文本文件的相关设置"
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -9608,7 +9607,7 @@ msgstr "程序可以扫描这些文件，扫描结果包括每个播放列表的
 #: src/mkvtoolnix-gui/merge/input.cpp:1158
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
-msgstr "程序会将此文件的文件名填入相应控件中，该处此前指定的文件名将会被替换。"
+msgstr "程序会将拖入文件的名称填入相应控件中，在此之前指定的文件名将会被替换。"
 
 #: src/extract/extract_cli_parser.cpp:357
 #, boost-format
@@ -11510,9 +11509,9 @@ msgid "Track number for mkvpropedit:"
 msgstr "用于 mkvpropedit 的轨道编号:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:163
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Track number:"
-msgstr "轨道编号"
+msgstr "轨道号:"
 
 #: src/common/kax_element_names.cpp:193
 msgid "Track overlay"
@@ -11837,9 +11836,9 @@ msgid "Value"
 msgstr "值"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:77
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Value: %1"
-msgstr "值"
+msgstr "值: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:235
 #, no-c-format
@@ -12076,7 +12075,7 @@ msgstr "视频: 白点 Y"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Visible"
-msgstr ""
+msgstr "可见"
 
 #: src/common/file_types.cpp:104
 #: src/output/p_vobbtn.h:35
@@ -12363,9 +12362,9 @@ msgid "XML tag files"
 msgstr "XML 标签文件"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:175
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Xiph lacing"
-msgstr "强制 Xiph 式捆绑。"
+msgstr "Xiph 式紧缩"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
