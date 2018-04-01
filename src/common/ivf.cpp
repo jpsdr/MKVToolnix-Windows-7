@@ -27,10 +27,7 @@ file_header_t::file_header_t()
 codec_c
 file_header_t::get_codec()
   const {
-  auto f = fourcc_c{fourcc};
-  return codec_c::look_up(  f.equiv("VP80") ? codec_c::type_e::V_VP8
-                          : f.equiv("VP90") ? codec_c::type_e::V_VP9
-                          :                   codec_c::type_e::UNKNOWN);
+  return codec_c::look_up(fourcc_c{fourcc});
 }
 
 frame_header_t::frame_header_t()
