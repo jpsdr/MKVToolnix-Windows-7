@@ -6,6 +6,8 @@
   duration on the container level, mkvmerge will now set it from the duration
   in the SPU packets. Before it was accidentally setting the SPU-level
   duration to 0 instead. Fixes #2260.
+* MKVToolNix GUI: the central area is now scrollable, allowing the GUI to be
+  resized to almost arbitrary sizes. Fixes #2265.
 
 
 # Version 22.0.0 "At The End Of The World" 2018-04-01
