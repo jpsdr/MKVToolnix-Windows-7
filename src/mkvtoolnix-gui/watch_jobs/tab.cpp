@@ -439,6 +439,7 @@ Tab::clearOutput() {
   p->ui->output->clear();
   p->ui->warnings->clear();
   p->ui->errors->clear();
+  p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
 
   if (MainWindow::jobTool()->model()->isRunning())
     return;
