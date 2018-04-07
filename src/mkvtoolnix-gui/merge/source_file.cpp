@@ -44,7 +44,12 @@ setupLanguageDerivationSubPatterns() {
 
   QStringList codes1List, codes2List, namesList;
 
+  auto &cfg = Util::Settings::get();
+
   for (auto const &language : g_iso639_languages) {
+    if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(language.iso639_2_code)))
+      continue;
+
     codes1List << Q(language.iso639_1_code);
     codes2List << Q(language.iso639_2_code);
     namesList  << QRegularExpression::escape(Q(language.english_name));
@@ -436,6 +441,13 @@ SourceFile::deriveLanguageFromFileName() {
   qDebug() << "language could not be derived: match found but no mapping to language:" << matches.capturedTexts();
 
   return {};
+}
+
+void
+SourceFile::setupFromPreferences() {
+  s_iso639_1CodesPattern.clear();
+  s_iso639_2CodesPattern.clear();
+  s_languageNamesPattern.clear();
 }
 
 }}}

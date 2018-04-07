@@ -743,7 +743,7 @@
        </layout>
       </widget>
       <widget class="QWidget" name="pMergeDerivingTrackLanguageFromFileName">
-       <layout class="QVBoxLayout" name="verticalLayout_34">
+       <layout class="QVBoxLayout" name="verticalLayout_35" stretch="0,1">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -762,23 +762,13 @@
            <string>Deriving track languages from file names</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_8">
-           <item row="1" column="1">
-            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveVideoTrackLanguageFromFileName">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="lDeriveSubtitleTrackLanguageFromFileName">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lDeriveAudioTrackLanguageFromFileName">
              <property name="text">
-              <string>&amp;Subtitle tracks:</string>
+              <string>&amp;Audio tracks:</string>
              </property>
              <property name="buddy">
-              <cstring>cbMDeriveSubtitleTrackLanguageFromFileName</cstring>
+              <cstring>cbMDeriveAudioTrackLanguageFromFileName</cstring>
              </property>
             </widget>
            </item>
@@ -802,8 +792,8 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveSubtitleTrackLanguageFromFileName">
+           <item row="1" column="1">
+            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveVideoTrackLanguageFromFileName">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -812,13 +802,23 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="lDeriveAudioTrackLanguageFromFileName">
+           <item row="2" column="0">
+            <widget class="QLabel" name="lDeriveSubtitleTrackLanguageFromFileName">
              <property name="text">
-              <string>&amp;Audio tracks:</string>
+              <string>&amp;Subtitle tracks:</string>
              </property>
              <property name="buddy">
-              <cstring>cbMDeriveAudioTrackLanguageFromFileName</cstring>
+              <cstring>cbMDeriveSubtitleTrackLanguageFromFileName</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveSubtitleTrackLanguageFromFileName">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
             </widget>
            </item>
@@ -854,17 +854,16 @@
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacer_12">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+         <widget class="QGroupBox" name="groupBox_19">
+          <property name="title">
+           <string>Recognized languages</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>444</height>
-           </size>
-          </property>
-         </spacer>
+          <layout class="QVBoxLayout" name="verticalLayout_36">
+           <item>
+            <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbMDeriveTrackLanguageRecognizedLanguages" native="true"/>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </widget>

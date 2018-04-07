@@ -306,6 +306,34 @@ Settings::load() {
   loadDefaultInfoJobSettings(reg);
   loadRunProgramConfigurations(reg);
   addDefaultRunProgramConfigurations(reg);
+  setDefaults();
+}
+
+void
+Settings::setDefaults() {
+  if (m_oftenUsedLanguages.isEmpty())
+    for (auto const &languageCode : g_popular_language_codes)
+      m_oftenUsedLanguages << Q(languageCode);
+
+  if (m_oftenUsedCountries.isEmpty())
+    for (auto const &countryCode : g_popular_country_codes)
+      m_oftenUsedCountries << Util::mapToTopLevelCountryCode(Q(countryCode));
+
+  if (m_oftenUsedCharacterSets.isEmpty())
+    for (auto const &characterSet : g_popular_character_sets)
+      m_oftenUsedCharacterSets << Q(characterSet);
+
+  if (m_recognizedTrackLanguagesInFileNames.isEmpty())
+    for (auto const &languageCode : g_popular_language_codes)
+      m_recognizedTrackLanguagesInFileNames << Q(languageCode);
+
+  if (m_regexForDerivingTrackLanguagesFromFileNames.isEmpty())
+    m_regexForDerivingTrackLanguagesFromFileNames = mtx::gui::Merge::SourceFile::defaultRegexForDerivingLanguageFromFileName();
+
+  if (ToParentOfFirstInputFile == m_outputFileNamePolicy) {
+    m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
+    m_relativeOutputDir    = Q("..");
+  }
 }
 
 void
@@ -333,9 +361,7 @@ Settings::loadDerivingTrackLanguagesSettings(QSettings &reg) {
   m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("videoPolicy",    static_cast<int>(DeriveLanguageFromFileNamePolicy::Never)).toInt());
   m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("subtitlePolicy", static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
   m_regexForDerivingTrackLanguagesFromFileNames   = reg.value("customRegex").toString();
-
-  if (m_regexForDerivingTrackLanguagesFromFileNames.isEmpty())
-    m_regexForDerivingTrackLanguagesFromFileNames = mtx::gui::Merge::SourceFile::defaultRegexForDerivingLanguageFromFileName();
+  m_recognizedTrackLanguagesInFileNames           = reg.value("recognizedTrackLanguagesInFileNames").toStringList();
 
   reg.endGroup();
   reg.endGroup();
@@ -353,23 +379,6 @@ Settings::loadSplitterSizes(QSettings &reg) {
   }
 
   reg.endGroup();               // splitterSizes
-
-  if (m_oftenUsedLanguages.isEmpty())
-    for (auto const &languageCode : g_popular_language_codes)
-      m_oftenUsedLanguages << Q(languageCode);
-
-  if (m_oftenUsedCountries.isEmpty())
-    for (auto const &countryCode : g_popular_country_codes)
-      m_oftenUsedCountries << Util::mapToTopLevelCountryCode(Q(countryCode));
-
-  if (m_oftenUsedCharacterSets.isEmpty())
-    for (auto const &characterSet : g_popular_character_sets)
-      m_oftenUsedCharacterSets << Q(characterSet);
-
-  if (ToParentOfFirstInputFile == m_outputFileNamePolicy) {
-    m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
-    m_relativeOutputDir    = Q("..");
-  }
 }
 
 void
@@ -609,10 +618,11 @@ Settings::saveDerivingTrackLanguagesSettings(QSettings &reg)
   reg.beginGroup("settings");
   reg.beginGroup("derivingTrackLanguagesFromFileNames");
 
-  reg.setValue("audioPolicy",    static_cast<int>(m_deriveAudioTrackLanguageFromFileNamePolicy));
-  reg.setValue("videoPolicy",    static_cast<int>(m_deriveVideoTrackLanguageFromFileNamePolicy));
-  reg.setValue("subtitlePolicy", static_cast<int>(m_deriveSubtitleTrackLanguageFromFileNamePolicy));
-  reg.setValue("customRegex",    m_regexForDerivingTrackLanguagesFromFileNames);
+  reg.setValue("audioPolicy",                         static_cast<int>(m_deriveAudioTrackLanguageFromFileNamePolicy));
+  reg.setValue("videoPolicy",                         static_cast<int>(m_deriveVideoTrackLanguageFromFileNamePolicy));
+  reg.setValue("subtitlePolicy",                      static_cast<int>(m_deriveSubtitleTrackLanguageFromFileNamePolicy));
+  reg.setValue("customRegex",                         m_regexForDerivingTrackLanguagesFromFileNames);
+  reg.setValue("recognizedTrackLanguagesInFileNames", m_recognizedTrackLanguagesInFileNames);
 
   reg.endGroup();
   reg.endGroup();

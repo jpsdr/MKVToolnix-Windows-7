@@ -338,6 +338,8 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("The following placeholders can be used to match the list of recognized languages: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' and '<LANGUAGE_NAMES>'."))
                    .arg(QYH("Only English language names are supported.")));
   Util::setToolTip(ui->pbMDeriveTrackLanguageRevertCustomRegex, QY("Revert the regular expression to its default value."));
+  ui->tbMDeriveTrackLanguageRecognizedLanguages->setToolTips(QY("Only the languages in the 'selected' list on the right will be recognized as track languages in file names."),
+                                                             QY("Only the languages in the 'selected' list on the right will be recognized as track languages in file names."));
 
   Util::setToolTip(ui->cbMDefaultAudioTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
@@ -646,6 +648,9 @@ PreferencesDialog::setupDerivingTrackLanguagesFromFileName() {
   setupComboBox(*ui->cbMDeriveSubtitleTrackLanguageFromFileName, m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy);
 
   ui->leMDeriveTrackLanguageCustomRegex->setText(m_cfg.m_regexForDerivingTrackLanguagesFromFileNames);
+
+  ui->tbMDeriveTrackLanguageRecognizedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(App::iso639Languages())),
+                                                          m_cfg.m_recognizedTrackLanguagesInFileNames);
 }
 
 void
@@ -740,6 +745,7 @@ PreferencesDialog::save() {
   m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveVideoTrackLanguageFromFileName   ->currentData().toInt());
   m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveSubtitleTrackLanguageFromFileName->currentData().toInt());
   m_cfg.m_regexForDerivingTrackLanguagesFromFileNames   = ui->leMDeriveTrackLanguageCustomRegex->text();
+  m_cfg.m_recognizedTrackLanguagesInFileNames           = ui->tbMDeriveTrackLanguageRecognizedLanguages->selectedItemValues();
 
   m_cfg.m_scanForPlaylistsPolicy                        = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
   m_cfg.m_minimumPlaylistDuration                       = ui->sbMMinPlaylistDuration->value();
@@ -924,6 +930,18 @@ PreferencesDialog::verifyDeriveTrackLanguageSettings() {
     Util::MessageBox::critical(this)
       ->title(QY("Invalid settings"))
       .text(QY("The regular expression for deriving the track language from file names is invalid: %1").arg(regex.errorString()))
+      .exec();
+
+    return false;
+  }
+
+  if (ui->tbMDeriveTrackLanguageRecognizedLanguages->selectedItemValues().isEmpty()) {
+    showPage(Page::DeriveTrackLanguage);
+    ui->tbMDeriveTrackLanguageRecognizedLanguages->setFocus();
+
+    Util::MessageBox::critical(this)
+      ->title(QY("Invalid settings"))
+      .text(QY("The list of recognized track languages in file names must not be empty."))
       .exec();
 
     return false;

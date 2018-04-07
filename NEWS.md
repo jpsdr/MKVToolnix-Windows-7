@@ -9,6 +9,10 @@
 * MKVToolNix GUI: multiplexer: the regular expression used for deriving track
   languages from the file names can now be customized in the preferences. Part
   of the improvements for #2267.
+* MKVToolNix GUI: multiplexer: the user can now customize the list of track
+  languages the GUI recognizes in file names. This list defaults to a handful
+  of common languages instead of the full list of supported languages. Part of
+  the improvements for #2267.
 
 ## Bug fixes
 

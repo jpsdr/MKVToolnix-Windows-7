@@ -136,6 +136,7 @@ public:
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
   DeriveLanguageFromFileNamePolicy m_deriveAudioTrackLanguageFromFileNamePolicy, m_deriveVideoTrackLanguageFromFileNamePolicy, m_deriveSubtitleTrackLanguageFromFileNamePolicy;
   QString m_regexForDerivingTrackLanguagesFromFileNames;
+  QStringList m_recognizedTrackLanguagesInFileNames;
   QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   bool m_oftenUsedLanguagesOnly, m_oftenUsedCountriesOnly, m_oftenUsedCharacterSetsOnly;
@@ -217,6 +218,8 @@ protected:
   void addDefaultRunProgramConfigurations(QSettings &reg);
   void addDefaultRunProgramConfigurationForType(QSettings &reg, RunProgramType type, std::function<void(RunProgramConfig &)> const &modifier = nullptr);
   bool fixDefaultAudioFileNameBug();
+
+  void setDefaults();
 
 protected:
   static Settings s_settings;

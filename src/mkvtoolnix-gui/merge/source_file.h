@@ -72,6 +72,7 @@ protected:
 
 public:
   static QString defaultRegexForDerivingLanguageFromFileName();
+  static void setupFromPreferences();
 };
 
 }}}

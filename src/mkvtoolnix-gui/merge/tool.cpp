@@ -80,6 +80,7 @@ Tool::setupActions() {
 
   connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::setupTabPositions);
   connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
+  connect(mw,                                         &MainWindow::preferencesChanged,   this, []() { SourceFile::setupFromPreferences(); });
 
   connect(App::instance(),                            &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
   connect(App::instance(),                            &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
