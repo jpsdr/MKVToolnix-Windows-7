@@ -250,12 +250,16 @@ EOF
       old_wd="$PWD"
       cd "$qmake_dir"
 
-      "$QMAKE" -makefile -nocache dummy.pro > /dev/null
+      "$QMAKE" -makefile -nocache dummy.pro > /dev/null 2>&1
+      result=$?
 
       cd "$old_wd"
 
       makefile=""
-      if ! test -f "$qmake_dir/console_plugin_import.cpp"; then
+      if test x$result != x0; then
+        problem="qmake failed to create Makefile"
+
+      elif ! test -f "$qmake_dir/console_plugin_import.cpp"; then
         problem="static plugin list could not be generated via $QMAKE"
 
       elif test -f "$qmake_dir/Makefile.Release"; then
