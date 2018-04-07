@@ -14,12 +14,16 @@ namespace Ui {
 class SideBySideMultiSelect;
 }
 
+class SideBySideMultiSelectPrivate;
 class SideBySideMultiSelect : public QWidget {
   Q_OBJECT;
 
 protected:
-  // UI stuff:
-  std::unique_ptr<Ui::SideBySideMultiSelect> ui;
+  MTX_DECLARE_PRIVATE(SideBySideMultiSelectPrivate);
+
+  std::unique_ptr<SideBySideMultiSelectPrivate> const p_ptr;
+
+  explicit SideBySideMultiSelect(SideBySideMultiSelectPrivate &p);
 
 public:
   using Item     = std::pair<QString, QString>;

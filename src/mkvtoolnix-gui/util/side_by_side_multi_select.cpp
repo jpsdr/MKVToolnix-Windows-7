@@ -10,14 +10,22 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class SideBySideMultiSelectPrivate {
+  friend class SideBySideMultiSelect;
+
+  std::unique_ptr<Ui::SideBySideMultiSelect> ui{new Ui::SideBySideMultiSelect};
+};
+
 SideBySideMultiSelect::SideBySideMultiSelect(QWidget *parent)
   : QWidget{parent}
-  , ui{new Ui::SideBySideMultiSelect}
+  , p_ptr{new SideBySideMultiSelectPrivate}
 {
-  ui->setupUi(this);
+  auto p = p_func();
 
-  ui->moveToAvailableButton->setEnabled(false);
-  ui->moveToSelectedButton->setEnabled(false);
+  p->ui->setupUi(this);
+
+  p->ui->moveToAvailableButton->setEnabled(false);
+  p->ui->moveToSelectedButton->setEnabled(false);
 
   setupConnections();
 }
@@ -27,30 +35,36 @@ SideBySideMultiSelect::~SideBySideMultiSelect() {
 
 void
 SideBySideMultiSelect::retranslateUi() {
-  ui->retranslateUi(this);
+  p_func()->ui->retranslateUi(this);
 }
 
 void
 SideBySideMultiSelect::setToolTips(QString const &available,
                                    QString const &selected) {
-  Util::setToolTip(ui->available, available);
-  Util::setToolTip(ui->selected,  selected);
+  auto p = p_func();
+
+  Util::setToolTip(p->ui->available, available);
+  Util::setToolTip(p->ui->selected,  selected);
 }
 
 void
 SideBySideMultiSelect::setupConnections() {
-  connect(ui->available->selectionModel(), &QItemSelectionModel::selectionChanged, this, &SideBySideMultiSelect::availableSelectionChanged);
-  connect(ui->selected->selectionModel(),  &QItemSelectionModel::selectionChanged, this, &SideBySideMultiSelect::selectedSelectionChanged);
+  auto p = p_func();
 
-  connect(ui->moveToAvailableButton,       &QPushButton::clicked,                  this, &SideBySideMultiSelect::moveToAvailable);
-  connect(ui->moveToSelectedButton,        &QPushButton::clicked,                  this, &SideBySideMultiSelect::moveToSelected);
+  connect(p->ui->available->selectionModel(), &QItemSelectionModel::selectionChanged, this, &SideBySideMultiSelect::availableSelectionChanged);
+  connect(p->ui->selected->selectionModel(),  &QItemSelectionModel::selectionChanged, this, &SideBySideMultiSelect::selectedSelectionChanged);
+
+  connect(p->ui->moveToAvailableButton,       &QPushButton::clicked,                  this, &SideBySideMultiSelect::moveToAvailable);
+  connect(p->ui->moveToSelectedButton,        &QPushButton::clicked,                  this, &SideBySideMultiSelect::moveToSelected);
 }
 
 void
 SideBySideMultiSelect::setItems(ItemList const &all,
                                 QStringList const &selected) {
-  ui->available->clear();
-  ui->selected->clear();
+  auto p = p_func();
+
+  p->ui->available->clear();
+  p->ui->selected->clear();
 
   auto isSelected = QHash<QString, bool>{};
 
@@ -58,15 +72,15 @@ SideBySideMultiSelect::setItems(ItemList const &all,
     isSelected[item] = true;
 
   for (auto const &item : all) {
-    auto addTo  = isSelected[item.second] ? ui->selected : ui->available;
+    auto addTo  = isSelected[item.second] ? p->ui->selected : p->ui->available;
     auto lwItem = new QListWidgetItem{item.first};
 
     lwItem->setData(Qt::UserRole, item.second);
     addTo->addItem(lwItem);
   }
 
-  ui->moveToAvailableButton->setEnabled(false);
-  ui->moveToSelectedButton->setEnabled(false);
+  p->ui->moveToAvailableButton->setEnabled(false);
+  p->ui->moveToSelectedButton->setEnabled(false);
 }
 
 void
@@ -84,10 +98,12 @@ SideBySideMultiSelect::setItems(QStringList const &all,
 SideBySideMultiSelect::ItemList
 SideBySideMultiSelect::selectedItems()
   const {
+  auto p = p_func();
+
   auto list = ItemList{};
 
-  for (auto row = 0, numRows = ui->selected->count(); row < numRows; ++row) {
-    auto item = ui->selected->item(row);
+  for (auto row = 0, numRows = p->ui->selected->count(); row < numRows; ++row) {
+    auto item = p->ui->selected->item(row);
     list << std::make_pair(item->text(), item->data(Qt::UserRole).toString());
   }
 
@@ -97,10 +113,12 @@ SideBySideMultiSelect::selectedItems()
 QStringList
 SideBySideMultiSelect::selectedItemValues()
   const {
+  auto p = p_func();
+
   auto list = QStringList{};
 
-  for (auto row = 0, numRows = ui->selected->count(); row < numRows; ++row)
-    list << ui->selected->item(row)->data(Qt::UserRole).toString();
+  for (auto row = 0, numRows = p->ui->selected->count(); row < numRows; ++row)
+    list << p->ui->selected->item(row)->data(Qt::UserRole).toString();
 
   return list;
 }
@@ -119,24 +137,32 @@ SideBySideMultiSelect::moveSelectedListWidgetItems(QListWidget &from,
 
 void
 SideBySideMultiSelect::availableSelectionChanged() {
-  auto hasSelected = !ui->available->selectedItems().isEmpty();
-  ui->moveToSelectedButton->setEnabled(hasSelected);
+  auto p = p_func();
+
+  auto hasSelected = !p->ui->available->selectedItems().isEmpty();
+  p->ui->moveToSelectedButton->setEnabled(hasSelected);
 }
 
 void
 SideBySideMultiSelect::selectedSelectionChanged() {
-  auto hasSelected = !ui->selected->selectedItems().isEmpty();
-  ui->moveToAvailableButton->setEnabled(hasSelected);
+  auto p = p_func();
+
+  auto hasSelected = !p->ui->selected->selectedItems().isEmpty();
+  p->ui->moveToAvailableButton->setEnabled(hasSelected);
 }
 
 void
 SideBySideMultiSelect::moveToAvailable() {
-  moveSelectedListWidgetItems(*ui->selected, *ui->available);
+  auto p = p_func();
+
+  moveSelectedListWidgetItems(*p->ui->selected, *p->ui->available);
 }
 
 void
 SideBySideMultiSelect::moveToSelected() {
-  moveSelectedListWidgetItems(*ui->available, *ui->selected);
+  auto p = p_func();
+
+  moveSelectedListWidgetItems(*p->ui->available, *p->ui->selected);
 }
 
 }}}
