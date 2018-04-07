@@ -14,6 +14,8 @@ class SideBySideMultiSelectPrivate {
   friend class SideBySideMultiSelect;
 
   std::unique_ptr<Ui::SideBySideMultiSelect> ui{new Ui::SideBySideMultiSelect};
+  SideBySideMultiSelect::ItemList initiallyAvailableItems;
+  QStringList initiallySelectedItems;
 };
 
 SideBySideMultiSelect::SideBySideMultiSelect(QWidget *parent)
@@ -56,12 +58,16 @@ SideBySideMultiSelect::setupConnections() {
 
   connect(p->ui->moveToAvailableButton,       &QPushButton::clicked,                  this, &SideBySideMultiSelect::moveToAvailable);
   connect(p->ui->moveToSelectedButton,        &QPushButton::clicked,                  this, &SideBySideMultiSelect::moveToSelected);
+  connect(p->ui->revertButton,                &QPushButton::clicked,                  this, &SideBySideMultiSelect::revertLists);
 }
 
 void
 SideBySideMultiSelect::setItems(ItemList const &all,
                                 QStringList const &selected) {
   auto p = p_func();
+
+  p->initiallyAvailableItems = all;
+  p->initiallySelectedItems  = selected;
 
   p->ui->available->clear();
   p->ui->selected->clear();
@@ -163,6 +169,13 @@ SideBySideMultiSelect::moveToSelected() {
   auto p = p_func();
 
   moveSelectedListWidgetItems(*p->ui->available, *p->ui->selected);
+}
+
+void
+SideBySideMultiSelect::revertLists() {
+  auto p = p_func();
+
+  setItems(p->initiallyAvailableItems, p->initiallySelectedItems);
 }
 
 }}}

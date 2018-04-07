@@ -50,6 +50,7 @@ public slots:
 
   void moveToAvailable();
   void moveToSelected();
+  void revertLists();
 
 protected:
   void setupConnections();
