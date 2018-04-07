@@ -4,10 +4,12 @@ set -e
 # set -x
 
 setopt nullglob
+zmodload zsh/pcre
 
 src_dir=${${0:a}:h}/../..
 src_dir=${src_dir:a}
 no_strip=0
+is_shared=0
 
 if [[ -f ${src_dir}/tools/windows/conf.sh ]] source ${src_dir}/tools/windows/conf.sh
 
@@ -19,6 +21,7 @@ function fail {
 function setup_variables {
   host=$(awk '/^host *=/ { print $3 }' ${src_dir}/build-config)
   mxe_usr_dir=${mxe_dir}/usr/${host}
+  if [[ $host =~ shared ]] is_shared=1
 }
 
 function strip_files {
@@ -27,7 +30,7 @@ function strip_files {
   print -n -- "Stripping files…"
 
   cd ${tgt_dir}
-  ${host}-strip *.exe
+  ${host}-strip *.exe **/*.dll
 
   print -- " done"
 }
@@ -47,11 +50,46 @@ function sign_exes {
 }
 
 function create_directories {
-  print -- "Creating directories…"
+  print -n -- "Creating directories…"
 
   cd ${tgt_dir}
   rm -rf *
   mkdir -p examples data/sounds doc/licenses locale/libqt share/misc
+
+  print -- " done"
+}
+
+function copy_dlls {
+  if [[ $is_shared == 0 ]]; then
+    return
+  fi
+
+  print -n -- "Copying DLLs…"
+
+  local dll_src_dir=$(which ${host}-g++)
+  dll_src_dir=${dll_src_dir:a:h}/../${host}/bin
+
+  cd ${tgt_dir}
+
+  # copy Qt plugins
+  mkdir plugins
+  cp -R ${mxe_dir}/usr/${host}/qt5/plugins/{audio,iconengines,imageformats,mediaservice,platforms,styles} plugins/
+  rm -f plugins/platforms/{qminimal,qoffscreen}.dll
+
+  # copy basic DLLs
+  cp ${dll_src_dir}/lib{bz2,crypto-,gnurx-,harfbuzz-0,pcre-1,pcre2-16,png16-,ssl-}*.dll .
+
+  # copy dependencies
+  ${src_dir}/tools/windows/copy_dll_dependencies.rb *.exe **/*.dll
+
+  # fix permissions
+  chmod a+x **/*.dll
+
+  # create qt.conf
+  cat > qt.conf <<EOF
+[Paths]
+Plugins=./plugins
+EOF
 
   print -- " done"
 }
@@ -84,7 +122,7 @@ function copy_files {
   done
 
   local qt5trdir=${mxe_usr_dir}/qt5/translations
-  local qm
+  local qm=''
   for qm (${qt5trdir}/qt_*.qm) {
     if [[ ${qm} == *qt_help* ]] continue
 
@@ -99,7 +137,7 @@ function copy_files {
   for ts (po/qt/*.ts) {
     lang=${${${ts:t}:r}#qt_}
 
-    lrelease -qm ${tgt_dir}/locale/libqt/qt_${lang}.qm ${ts}
+    lrelease -qm ${tgt_dir}/locale/libqt/qt_${lang}.qm ${ts} > /dev/null
   }
 
   typeset -a translations
@@ -165,6 +203,7 @@ if [[ ( -n ${exe_signer} ) && ( ! -x ${exe_signer} ) ]] fail "The EXE signer can
 setup_variables
 create_directories
 copy_files
+copy_dlls
 strip_files
 sign_exes
 

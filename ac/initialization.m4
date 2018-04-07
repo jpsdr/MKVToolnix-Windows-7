@@ -15,6 +15,7 @@ AC_CHECK_TOOL(STRIP, strip, :)
 AC_CHECK_TOOL(AR, ar, :)
 AC_CHECK_TOOL(LD, ld, :)
 AC_CHECK_TOOL(STRINGS, strings, :)
+AC_CHECK_TOOL(OBJDUMP, objdump, :)
 PKG_PROG_PKG_CONFIG
 
 dnl Check for headers

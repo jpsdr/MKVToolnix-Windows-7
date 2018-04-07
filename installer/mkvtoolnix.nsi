@@ -159,6 +159,12 @@ Section "Program files" SEC01
   File /r "../locale"
   File /r "../share"
 
+!if ${MTX_LINK_TYPE} == "shared"
+  File "../*.dll"
+  File "../qt.conf"
+  File /r "../plugins"
+!endif
+
   # Delete files that might be present from older installation
   # if this is just an upgrade.
   Delete "$INSTDIR\mkv*.ico"
@@ -402,11 +408,16 @@ Section Uninstall
   Delete "$INSTDIR\mkvmerge.exe"
   Delete "$INSTDIR\mkvpropedit.exe"
   Delete "$INSTDIR\mkvtoolnix-gui.exe"
+  Delete "$INSTDIR\lib*.dll"
+  Delete "$INSTDIR\Qt5*.dll"
+  Delete "$INSTDIR\zlib1.dll"
+  Delete "$INSTDIR\qt.conf"
 
   RMDir /r "$INSTDIR\data"
   RMDir /r "$INSTDIR\doc"
   RMDir /r "$INSTDIR\examples"
   RMDir /r "$INSTDIR\locale"
+  RMDir /r "$INSTDIR\plugins"
   RMDir /r "$INSTDIR\share"
   RMDir "$INSTDIR"
 

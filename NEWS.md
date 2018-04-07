@@ -23,6 +23,12 @@
 * MKVToolNix GUI: the central area is now scrollable, allowing the GUI to be
   resized to almost arbitrary sizes. Fixes #2265.
 
+## Build system changes
+
+* Windows: linking against and installing shared version of the libraries with
+  MXE is now supported by setting `configure`'s `host` triplet accordingly,
+  e.g. `--host=x86_64-w64-mingw32.shared`.
+
 
 # Version 22.0.0 "At The End Of The World" 2018-04-01
 
