@@ -53,7 +53,9 @@ JOBS = ${PARALLEL}
 MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost file flac lzo ogg pthreads vorbis cmark
 MKVTOOLNIX_DEPENDENCIES+=qtbase qttranslations qtwinextras
 
-mkvtoolnix-deps: \$(MKVTOOLNIX_DEPENDENCIES)
+LOCAL_PKG_LIST=\$(MKVTOOLNIX_DEPENDENCIES)
+local-pkg-list: \$(LOCAL_PKG_LIST)
+mkvtoolnix-deps: local-pkg-list
 EOF
 }
 
@@ -115,7 +117,7 @@ function configure_mkvtoolnix {
 function build_libraries {
   echo Building the cross-compiler and the required libraries
   cd ${INSTALL_DIR}
-  make mkvtoolnix-deps >> $LOGFILE 2>&1
+  make >> $LOGFILE 2>&1
 }
 
 # main
