@@ -397,7 +397,15 @@ SourceFile::regexForDerivingLanguageFromFileName() {
 
 QString
 SourceFile::deriveLanguageFromFileName() {
-  auto matches = regexForDerivingLanguageFromFileName().match(QFileInfo{m_fileName}.fileName());
+  auto fileName = QFileInfo{m_fileName}.fileName();
+  auto matches  = QRegularExpression{Q("s\\d+e\\d{2,}(.+)"), QRegularExpression::CaseInsensitiveOption}.match(fileName);
+
+  if (matches.hasMatch()) {
+    fileName = matches.captured(1);
+    qDebug() << "found season/episode code; only using postfix:" << fileName;
+  }
+
+  matches = regexForDerivingLanguageFromFileName().match(fileName);
 
   if (!matches.hasMatch()) {
     qDebug() << "language could not be derived: no match found";

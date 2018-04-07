@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: when deriving track languages from the file
+  names is active and the file name contains the usual season/episode pattern
+  (e.g. "S02E14"), then only the part after the season/episode pattern will be
+  used for detecting the language. Part of the improvements for #2267.
+
 ## Bug fixes
 
 * mkvmerge: VobSub packetizer: whenever a VobSub packet doesn't contain a
