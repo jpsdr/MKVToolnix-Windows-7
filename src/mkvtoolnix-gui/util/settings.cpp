@@ -13,6 +13,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
+#include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -332,6 +333,9 @@ Settings::loadDerivingTrackLanguagesSettings(QSettings &reg) {
   m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("videoPolicy",    static_cast<int>(DeriveLanguageFromFileNamePolicy::Never)).toInt());
   m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("subtitlePolicy", static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
   m_regexForDerivingTrackLanguagesFromFileNames   = reg.value("customRegex").toString();
+
+  if (m_regexForDerivingTrackLanguagesFromFileNames.isEmpty())
+    m_regexForDerivingTrackLanguagesFromFileNames = mtx::gui::Merge::SourceFile::defaultRegexForDerivingLanguageFromFileName();
 
   reg.endGroup();
   reg.endGroup();

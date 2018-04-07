@@ -376,23 +376,19 @@ SourceFile::setupProgramMapFromProperties() {
   }
 }
 
+QString
+SourceFile::defaultRegexForDerivingLanguageFromFileName() {
+  return Q("[[({.+=#-](<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]");
+}
+
 QRegularExpression
 SourceFile::regexForDerivingLanguageFromFileName() {
-  static boost::optional<QRegularExpression> s_regex;
-
   setupLanguageDerivationSubPatterns();
 
-  auto &cfg = Util::Settings::get();
-  if (!cfg.m_regexForDerivingTrackLanguagesFromFileNames.isEmpty())
-    return QRegularExpression(replaceLanguageSubPatterns(cfg.m_regexForDerivingTrackLanguagesFromFileNames), QRegularExpression::CaseInsensitiveOption);
+  auto &cfg    = Util::Settings::get();
+  auto pattern = !cfg.m_regexForDerivingTrackLanguagesFromFileNames.isEmpty() ? cfg.m_regexForDerivingTrackLanguagesFromFileNames : defaultRegexForDerivingLanguageFromFileName();
 
-  if (s_regex)
-    return *s_regex;
-
-  auto pattern = replaceLanguageSubPatterns(Q("[[({.+=#-](<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]"));
-  s_regex      = QRegularExpression{pattern, QRegularExpression::CaseInsensitiveOption};
-
-  return *s_regex;
+  return QRegularExpression{replaceLanguageSubPatterns(pattern), QRegularExpression::CaseInsensitiveOption};
 }
 
 QString
@@ -405,7 +401,12 @@ SourceFile::deriveLanguageFromFileName() {
     qDebug() << "found season/episode code; only using postfix:" << fileName;
   }
 
-  matches = regexForDerivingLanguageFromFileName().match(fileName);
+  auto regex = regexForDerivingLanguageFromFileName();
+  if (!regex.isValid()) {
+    qDebug() << "regex for deriving language from file name is invalid:" << regex;
+  }
+
+  matches = regex.match(fileName);
 
   if (!matches.hasMatch()) {
     qDebug() << "language could not be derived: no match found";

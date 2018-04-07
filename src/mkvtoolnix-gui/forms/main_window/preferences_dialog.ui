@@ -643,75 +643,6 @@
             </layout>
            </item>
            <item>
-            <widget class="QGroupBox" name="groupBox_18">
-             <property name="title">
-              <string>Deriving track languages from file names</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_8">
-              <item row="0" column="0">
-               <widget class="QLabel" name="lDeriveAudioTrackLanguageFromFileName">
-                <property name="text">
-                 <string>&amp;Audio tracks:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>cbMDeriveAudioTrackLanguageFromFileName</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveAudioTrackLanguageFromFileName">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="lDeriveVideoTrackLanguageFromFileName">
-                <property name="text">
-                 <string>&amp;Video tracks:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>cbMDeriveVideoTrackLanguageFromFileName</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveVideoTrackLanguageFromFileName">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="lDeriveSubtitleTrackLanguageFromFileName">
-                <property name="text">
-                 <string>&amp;Subtitle tracks:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>cbMDeriveSubtitleTrackLanguageFromFileName</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveSubtitleTrackLanguageFromFileName">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
             <widget class="QGroupBox" name="groupBox_9">
              <property name="title">
               <string>Default track languages to set</string>
@@ -805,6 +736,132 @@
            <size>
             <width>20</width>
             <height>15</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pMergeDerivingTrackLanguageFromFileName">
+       <layout class="QVBoxLayout" name="verticalLayout_34">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="groupBox_18">
+          <property name="title">
+           <string>Deriving track languages from file names</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="1" column="1">
+            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveVideoTrackLanguageFromFileName">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lDeriveSubtitleTrackLanguageFromFileName">
+             <property name="text">
+              <string>&amp;Subtitle tracks:</string>
+             </property>
+             <property name="buddy">
+              <cstring>cbMDeriveSubtitleTrackLanguageFromFileName</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveAudioTrackLanguageFromFileName">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lDeriveVideoTrackLanguageFromFileName">
+             <property name="text">
+              <string>&amp;Video tracks:</string>
+             </property>
+             <property name="buddy">
+              <cstring>cbMDeriveVideoTrackLanguageFromFileName</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveSubtitleTrackLanguageFromFileName">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="lDeriveAudioTrackLanguageFromFileName">
+             <property name="text">
+              <string>&amp;Audio tracks:</string>
+             </property>
+             <property name="buddy">
+              <cstring>cbMDeriveAudioTrackLanguageFromFileName</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>&amp;Regular expression:</string>
+             </property>
+             <property name="buddy">
+              <cstring>leMDeriveTrackLanguageCustomRegex</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <layout class="QHBoxLayout" name="horizontalLayout_13">
+             <item>
+              <widget class="QLineEdit" name="leMDeriveTrackLanguageCustomRegex"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pbMDeriveTrackLanguageRevertCustomRegex">
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../../qt_resources.qrc">
+                 <normaloff>:/icons/16x16/edit-undo.png</normaloff>:/icons/16x16/edit-undo.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>444</height>
            </size>
           </property>
          </spacer>
@@ -1773,13 +1830,15 @@
   <tabstop>cbMDisableDefaultTrackForSubtitles</tabstop>
   <tabstop>cbMDisableCompressionForAllTrackTypes</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
-  <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>
-  <tabstop>cbMDeriveVideoTrackLanguageFromFileName</tabstop>
-  <tabstop>cbMDeriveSubtitleTrackLanguageFromFileName</tabstop>
   <tabstop>cbMDefaultAudioTrackLanguage</tabstop>
   <tabstop>cbMDefaultVideoTrackLanguage</tabstop>
   <tabstop>cbMDefaultSubtitleTrackLanguage</tabstop>
   <tabstop>cbMWhenToSetDefaultLanguage</tabstop>
+  <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>
+  <tabstop>cbMDeriveVideoTrackLanguageFromFileName</tabstop>
+  <tabstop>cbMDeriveSubtitleTrackLanguageFromFileName</tabstop>
+  <tabstop>leMDeriveTrackLanguageCustomRegex</tabstop>
+  <tabstop>pbMDeriveTrackLanguageRevertCustomRegex</tabstop>
   <tabstop>cbMAutoSetOutputFileName</tabstop>
   <tabstop>cbMAutoDestinationOnlyForVideoFiles</tabstop>
   <tabstop>rbMAutoSetSameDirectory</tabstop>

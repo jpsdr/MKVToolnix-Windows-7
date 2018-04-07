@@ -17,6 +17,7 @@
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
+#include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
@@ -185,6 +186,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
                    addItem(Page::OftenUsedSelections, pGui,    QY("Often used selections"));
   auto pMerge    = addItem(Page::Merge,               nullptr, QY("Multiplexer"),           "merge");
                    addItem(Page::DefaultValues,       pMerge,  QY("Default values"));
+                   addItem(Page::DeriveTrackLanguage, pMerge,  QY("Deriving track languages"));
                    addItem(Page::Output,              pMerge,  QY("Output"));
                    addItem(Page::EnablingTracks,      pMerge,  QY("Enabling tracks"));
                    addItem(Page::Playlists,           pMerge,  QY("Playlists"));
@@ -328,6 +330,14 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."))
                    .arg(QYH("Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und').")));
+  Util::setToolTip(ui->leMDeriveTrackLanguageCustomRegex,
+                   Q("<p>%1 %2 %3</p><p>%4</p><p>%5</p>")
+                   .arg(QYH("A regular expression is used for matching the file name against a list of recognized languages limited by characters such as '.' or '['…']'."))
+                   .arg(QYH("The expression must contain at least one pair of capturing parenthesis."))
+                   .arg(QYH("The first non-empty capturing parenthesis will be used as the language."))
+                   .arg(QYH("The following placeholders can be used to match the list of recognized languages: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' and '<LANGUAGE_NAMES>'."))
+                   .arg(QYH("Only English language names are supported.")));
+  Util::setToolTip(ui->pbMDeriveTrackLanguageRevertCustomRegex, QY("Revert the regular expression to its default value."));
 
   Util::setToolTip(ui->cbMDefaultAudioTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
@@ -435,6 +445,8 @@ PreferencesDialog::setupConnections() {
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
+
+  connect(ui->pbMDeriveTrackLanguageRevertCustomRegex,    &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameRegex);
 
   connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
   connect(ui->cbGuiRemoveOldJobs,                         &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
@@ -632,6 +644,8 @@ PreferencesDialog::setupDerivingTrackLanguagesFromFileName() {
   setupComboBox(*ui->cbMDeriveAudioTrackLanguageFromFileName,    m_cfg.m_deriveAudioTrackLanguageFromFileNamePolicy);
   setupComboBox(*ui->cbMDeriveVideoTrackLanguageFromFileName,    m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy);
   setupComboBox(*ui->cbMDeriveSubtitleTrackLanguageFromFileName, m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy);
+
+  ui->leMDeriveTrackLanguageCustomRegex->setText(m_cfg.m_regexForDerivingTrackLanguagesFromFileNames);
 }
 
 void
@@ -725,6 +739,7 @@ PreferencesDialog::save() {
   m_cfg.m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveAudioTrackLanguageFromFileName   ->currentData().toInt());
   m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveVideoTrackLanguageFromFileName   ->currentData().toInt());
   m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveSubtitleTrackLanguageFromFileName->currentData().toInt());
+  m_cfg.m_regexForDerivingTrackLanguagesFromFileNames   = ui->leMDeriveTrackLanguageCustomRegex->text();
 
   m_cfg.m_scanForPlaylistsPolicy                        = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
   m_cfg.m_minimumPlaylistDuration                       = ui->sbMMinPlaylistDuration->value();
@@ -886,7 +901,39 @@ PreferencesDialog::showPage(Page page) {
 }
 
 void
-PreferencesDialog::accept() {
+PreferencesDialog::revertDeriveTrackLanguageFromFileNameRegex() {
+  ui->leMDeriveTrackLanguageCustomRegex->setText(mtx::gui::Merge::SourceFile::defaultRegexForDerivingLanguageFromFileName());
+}
+
+bool
+PreferencesDialog::verifyDeriveTrackLanguageSettings() {
+  if (   (static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveAudioTrackLanguageFromFileName   ->currentData().toInt()) == Util::Settings::DeriveLanguageFromFileNamePolicy::Never)
+      && (static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveVideoTrackLanguageFromFileName   ->currentData().toInt()) == Util::Settings::DeriveLanguageFromFileNamePolicy::Never)
+      && (static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveSubtitleTrackLanguageFromFileName->currentData().toInt()) == Util::Settings::DeriveLanguageFromFileNamePolicy::Never))
+    return true;
+
+  auto pattern = ui->leMDeriveTrackLanguageCustomRegex->text();
+  if (pattern.isEmpty())
+    return true;
+
+  auto regex = QRegularExpression{pattern};
+  if (!regex.isValid()) {
+    showPage(Page::DeriveTrackLanguage);
+    ui->leMDeriveTrackLanguageCustomRegex->setFocus();
+
+    Util::MessageBox::critical(this)
+      ->title(QY("Invalid settings"))
+      .text(QY("The regular expression for deriving the track language from file names is invalid: %1").arg(regex.errorString()))
+      .exec();
+
+    return false;
+  }
+
+  return true;
+}
+
+bool
+PreferencesDialog::verifyRunProgramConfigurations() {
   for (auto tabIdx = 0, numTabs = ui->twJobsPrograms->count(); tabIdx < numTabs; ++tabIdx) {
     auto tab   = qobject_cast<PrefsRunProgramWidget *>(ui->twJobsPrograms->widget(tabIdx));
     auto error = tab->validate();
@@ -906,10 +953,17 @@ PreferencesDialog::accept() {
             .arg(QY("Either fix the error or remove the configuration before closing the preferences dialog.").toHtmlEscaped()))
       .exec();
 
-    return;
+    return false;
   }
 
-  QDialog::accept();
+  return true;
+}
+
+void
+PreferencesDialog::accept() {
+  if (   verifyDeriveTrackLanguageSettings()
+      && verifyRunProgramConfigurations())
+    QDialog::accept();
 }
 
 }}

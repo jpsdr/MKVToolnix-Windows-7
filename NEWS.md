@@ -6,6 +6,9 @@
   names is active and the file name contains the usual season/episode pattern
   (e.g. "S02E14"), then only the part after the season/episode pattern will be
   used for detecting the language. Part of the improvements for #2267.
+* MKVToolNix GUI: multiplexer: the regular expression used for deriving track
+  languages from the file names can now be customized in the preferences. Part
+  of the improvements for #2267.
 
 ## Bug fixes
 

@@ -24,6 +24,7 @@ public:
     OftenUsedSelections,
     Merge,
     DefaultValues,
+    DeriveTrackLanguage,
     Output,
     EnablingTracks,
     Playlists,
@@ -63,6 +64,7 @@ public slots:
   void setSendersTabTitleForRunProgramWidget();
   void adjustPlaylistControls();
   void adjustRemoveOldJobsControls();
+  void revertDeriveTrackLanguageFromFileNameRegex();
 
   void enableOftendUsedLanguagesOnly();
   void enableOftendUsedCountriesOnly();
@@ -98,6 +100,9 @@ protected:
   void setTabTitleForRunProgramWidget(int tabIdx, QString const &title);
 
   QModelIndex modelIndexForPage(int pageIndex);
+
+  bool verifyDeriveTrackLanguageSettings();
+  bool verifyRunProgramConfigurations();
 };
 
 }}

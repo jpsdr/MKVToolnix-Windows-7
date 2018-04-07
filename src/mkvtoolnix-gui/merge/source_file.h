@@ -69,6 +69,9 @@ public:
 protected:
   virtual QString deriveLanguageFromFileName();
   virtual QRegularExpression regexForDerivingLanguageFromFileName();
+
+public:
+  static QString defaultRegexForDerivingLanguageFromFileName();
 };
 
 }}}
