@@ -11,10 +11,14 @@ require "#{$mtx_dir}/rake.d/config"
 ENV['LC_MESSAGES'] = 'C'
 $title             = "CopyDLLDependencies"
 $config            = read_config_file("#{$mtx_dir}/build-config")
-$mxe_dir            = File.realpath(File.dirname(`which #{Shellwords.escape(c(:CXX))}`.chomp) + "/../#{c(:host)}")
+$mxe_dir           = File.realpath(File.dirname(`which #{Shellwords.escape(c(:CXX))}`.chomp) + "/../#{c(:host)}")
 $dll_locations     = {}
-$dependencies      = Hash[ *%w{advapi32 d3d9 dwmapi dxva2 evr gdi32 imm32 iphlpapi kernel32 mf mfplat msvcrt powrprof shell32 ole32 oleaut32 user32 uxtheme winmm ws2_32}.map { |e| [ "#{e}.dll", true ] }.flatten ]
-$dependencies["winspool.drv"] = true
+$dependencies      = {}
+
+%w{advapi32 d3d9 dwmapi dxva2 evr gdi32 imm32 iphlpapi kernel32 libmtxcommon.dll mf mfplat msvcrt powrprof shell32 ole32 oleaut32 user32 uxtheme winmm winspool.drv ws2_32}.each do |name|
+  name                += ".dll" unless %r{\.}.match(name)
+  $dependencies[name]  = true
+end
 
 def info text
   return unless (ENV["DEBUG"] || "0").to_i == 1

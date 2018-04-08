@@ -71,6 +71,9 @@ function copy_dlls {
 
   cd ${tgt_dir}
 
+  # copy MKVToolNix' own DLLs
+  cp ${src_dir}/src/common/libmtxcommon.dll .
+
   # copy Qt plugins
   mkdir plugins
   cp -R ${mxe_dir}/usr/${host}/qt5/plugins/{audio,iconengines,imageformats,mediaservice,platforms,styles} plugins/

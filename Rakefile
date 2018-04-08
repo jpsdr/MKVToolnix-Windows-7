@@ -119,6 +119,8 @@ def setup_globals
 
   $benchmark_sources       = FileList["src/benchmark/*.cpp"].to_a if c?(:GOOGLE_BENCHMARK)
 
+  $libmtxcommon_as_dll     = $building_for[:windows] && %r{shared}i.match(c(:host))
+
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
   cflags_common           += " #{c(:WNO_INCONSISTENT_MISSING_OVERRIDE)} #{c(:WNO_POTENTIALLY_EVALUATED_EXPRESSION)}"
   cflags_common           += " #{c(:OPTIMIZATION_CFLAGS)} -D_FILE_OFFSET_BITS=64"
@@ -932,6 +934,27 @@ end
 # src/output
 #
 
+# libraries required for all programs via mtxcommon
+$common_libs = [
+  :magic,
+  :flac,
+  :z,
+  :pugixml,
+  :intl,
+  :iconv,
+  :boost_regex,
+  :boost_filesystem,
+  :boost_system,
+]
+
+$common_libs += [:cmark] if c?(:USE_QT)
+if !$libmtxcommon_as_dll
+  $common_libs += [
+    :matroska,
+    :ebml,
+  ]
+end
+
 [ { :name => 'avi',         :dir => 'lib/avilib-0.6.10'                                                              },
   { :name => 'rmff',        :dir => 'lib/librmff'                                                                    },
   { :name => 'pugixml',     :dir => 'lib/pugixml/src'                                                                },
@@ -951,31 +974,14 @@ end
     only_if(c?(:USE_QT) && (lib[:name] == 'mtxcommon')).
     qt_dependencies_and_sources("common").
     end_if.
-    build_dll(lib[:name] == 'mtxcommon').
-    libraries(:iconv, :z, :matroska, :ebml, :rpcrt4).
+    only_if($libmtxcommon_as_dll && (lib[:name] == 'mtxcommon')).
+    build_dll(true).
+    libraries(:matroska, :ebml, $common_libs,:qt).
+    end_if.
     create
 end
 
-# libraries required for all programs via mtxcommon
-$common_libs = [
-  :mtxcommon,
-  :magic,
-  :matroska,
-  :ebml,
-  :z,
-  :pugixml,
-  :intl,
-  :iconv,
-  :boost_regex,
-  :boost_filesystem,
-  :boost_system,
-]
-
-if c?(:USE_QT)
-  $common_libs += [
-    :cmark,
-  ]
-end
+$common_libs.unshift(:mtxcommon)
 
 # custom libraries
 $custom_libs = [
@@ -991,7 +997,7 @@ Application.new("src/mkvmerge").
   aliases(:mkvmerge).
   sources("src/merge/mkvmerge.cpp").
   sources("src/merge/resources.o", :if => $building_for[:windows]).
-  libraries(:mtxmerge, :mtxinput, :mtxoutput, :mtxmerge, $common_libs, :avi, :rmff, :mpegparser, :flac, :vorbis, :ogg, $custom_libs).
+  libraries(:mtxmerge, :mtxinput, :mtxoutput, :mtxmerge, $common_libs, :avi, :rmff, :mpegparser, :vorbis, :ogg, $custom_libs).
   create
 
 #

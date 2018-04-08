@@ -138,7 +138,7 @@ class Target
 
     @dependencies += list.collect do |entry|
       case entry
-      when :mtxcommon   then "src/common/libmtxcommon.a"
+      when :mtxcommon   then "src/common/libmtxcommon.#{$libmtxcommon_as_dll ? "dll" : "a"}"
       when :mtxinput    then "src/input/libmtxinput.a"
       when :mtxoutput   then "src/output/libmtxoutput.a"
       when :mtxmerge    then "src/merge/libmtxmerge.a"
