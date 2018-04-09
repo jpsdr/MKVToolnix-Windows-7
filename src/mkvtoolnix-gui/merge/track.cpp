@@ -165,11 +165,14 @@ Track::setDefaults(QString const &languageDerivedFromFileName) {
     m_displayHeight = re_displayDimensions.cap(2);
   }
 
-  if (   !settings.m_enableMuxingTracksByLanguage
-      || !mtx::included_in(m_type, TrackType::Video, TrackType::Audio, TrackType::Subtitles)
-      || ((TrackType::Video     == m_type) && settings.m_enableMuxingAllVideoTracks)
-      || ((TrackType::Audio     == m_type) && settings.m_enableMuxingAllAudioTracks)
-      || ((TrackType::Subtitles == m_type) && settings.m_enableMuxingAllSubtitleTracks))
+  if (!settings.m_enableMuxingTracksByTheseTypes.contains(m_type))
+    m_muxThis = false;
+
+  else if (   !settings.m_enableMuxingTracksByLanguage
+           || !mtx::included_in(m_type, TrackType::Video, TrackType::Audio, TrackType::Subtitles)
+           || ((TrackType::Video     == m_type) && settings.m_enableMuxingAllVideoTracks)
+           || ((TrackType::Audio     == m_type) && settings.m_enableMuxingAllAudioTracks)
+           || ((TrackType::Subtitles == m_type) && settings.m_enableMuxingAllSubtitleTracks))
     m_muxThis = true;
 
   else {

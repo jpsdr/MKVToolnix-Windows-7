@@ -56,7 +56,7 @@
      </widget>
      <widget class="QStackedWidget" name="pages">
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="pGuiGeneral">
        <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -330,6 +330,18 @@
       </widget>
       <widget class="QWidget" name="pMergeGeneral">
        <layout class="QVBoxLayout" name="verticalLayout_22">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QGroupBox" name="groupBox_3">
           <property name="title">
@@ -1043,8 +1055,8 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="pMergeEnableTracksByLanguage">
-       <layout class="QVBoxLayout" name="verticalLayout_9">
+      <widget class="QWidget" name="pMergeEnableTracks">
+       <layout class="QVBoxLayout" name="verticalLayout_9" stretch="0,1">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -1057,6 +1069,34 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
+        <item>
+         <widget class="QGroupBox" name="groupBox_20">
+          <property name="title">
+           <string>Enable copying of tracks by their type</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_34">
+           <item>
+            <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbMEnableMuxingTracksByType" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item>
          <widget class="QGroupBox" name="groupBox_7">
           <property name="title">
@@ -1143,22 +1183,6 @@
            </item>
           </layout>
          </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>0</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </widget>
@@ -1272,6 +1296,18 @@
       </widget>
       <widget class="QWidget" name="pInfoGeneral">
        <layout class="QVBoxLayout" name="verticalLayout_33">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QGroupBox" name="groupBox_17">
           <property name="title">
@@ -1279,7 +1315,11 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_32">
            <item>
-            <widget class="mtx::gui::Info::JobSettingsWidget" name="wIDefaultJobSettings" native="true"/>
+            <widget class="mtx::gui::Info::JobSettingsWidget" name="wIDefaultJobSettings" native="true">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -1870,6 +1910,7 @@
   <tabstop>pbMBrowseAutoSetFixedDirectory</tabstop>
   <tabstop>cbMUniqueOutputFileNames</tabstop>
   <tabstop>cbMAutoClearOutputFileName</tabstop>
+  <tabstop>tbMEnableMuxingTracksByType</tabstop>
   <tabstop>cbMEnableMuxingTracksByLanguage</tabstop>
   <tabstop>cbMEnableMuxingAllVideoTracks</tabstop>
   <tabstop>cbMEnableMuxingAllAudioTracks</tabstop>

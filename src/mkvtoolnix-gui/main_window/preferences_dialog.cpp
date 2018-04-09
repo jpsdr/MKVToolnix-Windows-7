@@ -88,6 +88,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupProcessPriority();
   setupPlaylistScanningPolicy();
   setupOutputFileNamePolicy();
+  setupEnableMuxingTracksByType();
   setupEnableMuxingTracksByLanguage();
   setupMergeAddingAppendingFilesPolicy();
   setupTrackPropertiesLayout();
@@ -389,6 +390,8 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified destination file name.")));
   Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."));
 
+  ui->tbMEnableMuxingTracksByType->setToolTips(QY("Only tracks whose type is in the 'selected' list on the right will be set to be copied by default."),
+                                               QY("Only tracks whose type is in the 'selected' list on the right will be set to be copied by default."));
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("When adding source files all tracks are normally set to be copied into the destination file."))
@@ -564,6 +567,20 @@ PreferencesDialog::setupOutputFileNamePolicy() {
   ui->cbMAutoClearOutputFileName->setChecked(m_cfg.m_autoClearOutputFileName);
 
   enableOutputFileNameControls();
+}
+
+void
+PreferencesDialog::setupEnableMuxingTracksByType() {
+  auto allTypes      = Util::SideBySideMultiSelect::ItemList{};
+  auto selectedTypes = QStringList{};
+
+  for (auto type = static_cast<int>(Merge::TrackType::Min); type <= static_cast<int>(Merge::TrackType::Max); ++type)
+    allTypes << std::make_pair(Merge::Track::nameForType(static_cast<Merge::TrackType>(type)), QString::number(type));
+
+  for (auto type : m_cfg.m_enableMuxingTracksByTheseTypes)
+    selectedTypes << QString::number(static_cast<int>(type));
+
+  ui->tbMEnableMuxingTracksByType->setItems(allTypes, selectedTypes);
 }
 
 void
@@ -791,6 +808,10 @@ PreferencesDialog::save() {
     if (!cfg->m_active || cfg->isValid())
       m_cfg.m_runProgramConfigurations << cfg;
   }
+
+  m_cfg.m_enableMuxingTracksByTheseTypes.clear();
+  for (auto const &type : ui->tbMEnableMuxingTracksByType->selectedItemValues())
+    m_cfg.m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(type.toInt());
 
   m_cfg.save();
 }

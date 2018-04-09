@@ -10,6 +10,7 @@
 
 #include "common/translation.h"
 #include "mkvtoolnix-gui/info/job_settings.h"
+#include "mkvtoolnix-gui/merge/enums.h"
 
 class QSettings;
 class QSplitter;
@@ -172,6 +173,7 @@ public:
 
   bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks;
   QStringList m_enableMuxingTracksByTheseLanguages;
+  QList<Merge::TrackType> m_enableMuxingTracksByTheseTypes;
 
   QHash<QString, QList<int> > m_splitterSizes;
 
@@ -219,7 +221,7 @@ protected:
   void addDefaultRunProgramConfigurationForType(QSettings &reg, RunProgramType type, std::function<void(RunProgramConfig &)> const &modifier = nullptr);
   bool fixDefaultAudioFileNameBug();
 
-  void setDefaults();
+  void setDefaults(QVariant const &enableMuxingTracksByTheseTypes);
 
 protected:
   static Settings s_settings;

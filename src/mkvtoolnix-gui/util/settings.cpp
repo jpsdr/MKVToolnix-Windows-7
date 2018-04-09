@@ -13,6 +13,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
+#include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -266,6 +267,7 @@ Settings::load() {
   m_enableMuxingAllAudioTracks         = reg.value("enableMuxingAllAudioTracks", false).toBool();
   m_enableMuxingAllSubtitleTracks      = reg.value("enableMuxingAllSubtitleTracks", false).toBool();
   m_enableMuxingTracksByTheseLanguages = reg.value("enableMuxingTracksByTheseLanguages").toStringList();
+  auto enableMuxingTracksByTheseTypes  = reg.value("enableMuxingTracksByThesetypes");
 
   m_useDefaultJobDescription           = reg.value("useDefaultJobDescription",       false).toBool();
   m_showOutputOfAllJobs                = reg.value("showOutputOfAllJobs",            true).toBool();
@@ -306,11 +308,11 @@ Settings::load() {
   loadDefaultInfoJobSettings(reg);
   loadRunProgramConfigurations(reg);
   addDefaultRunProgramConfigurations(reg);
-  setDefaults();
+  setDefaults(enableMuxingTracksByTheseTypes);
 }
 
 void
-Settings::setDefaults() {
+Settings::setDefaults(QVariant const &enableMuxingTracksByTheseTypes) {
   if (m_oftenUsedLanguages.isEmpty())
     for (auto const &languageCode : g_popular_language_codes)
       m_oftenUsedLanguages << Q(languageCode);
@@ -333,6 +335,17 @@ Settings::setDefaults() {
   if (ToParentOfFirstInputFile == m_outputFileNamePolicy) {
     m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
     m_relativeOutputDir    = Q("..");
+  }
+
+  m_enableMuxingTracksByTheseTypes.clear();
+  if (!enableMuxingTracksByTheseTypes.isValid()) {
+    for (int type = static_cast<int>(Merge::TrackType::Min); type <= static_cast<int>(Merge::TrackType::Max); ++type)
+      m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(type);
+
+  } else {
+    auto list = enableMuxingTracksByTheseTypes.toList();
+    for (int idx = 0; idx < list.size(); ++idx)
+      m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(list[idx].toInt());
   }
 }
 
@@ -511,6 +524,10 @@ Settings::save()
   auto regPtr = registry();
   auto &reg   = *regPtr;
 
+  QVariantList enableMuxingTracksByTheseTypes;
+  for (auto type : m_enableMuxingTracksByTheseTypes)
+    enableMuxingTracksByTheseTypes << static_cast<int>(type);
+
   reg.beginGroup("info");
   reg.setValue("guiVersion",                         Q(get_current_version().to_string()));
   reg.endGroup();
@@ -558,6 +575,7 @@ Settings::save()
   reg.setValue("enableMuxingAllAudioTracks",         m_enableMuxingAllAudioTracks);
   reg.setValue("enableMuxingAllSubtitleTracks",      m_enableMuxingAllSubtitleTracks);
   reg.setValue("enableMuxingTracksByTheseLanguages", m_enableMuxingTracksByTheseLanguages);
+  reg.setValue("enableMuxingTracksByTheseTypes",     enableMuxingTracksByTheseTypes);
 
   reg.setValue("useDefaultJobDescription",           m_useDefaultJobDescription);
   reg.setValue("showOutputOfAllJobs",                m_showOutputOfAllJobs);

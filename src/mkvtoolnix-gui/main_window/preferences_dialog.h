@@ -89,6 +89,7 @@ protected:
   void setupPlaylistScanningPolicy();
   void setupOutputFileNamePolicy();
   void setupTrackPropertiesLayout();
+  void setupEnableMuxingTracksByType();
   void setupEnableMuxingTracksByLanguage();
   void setupMergeAddingAppendingFilesPolicy();
   void setupHeaderEditorDroppedFilesPolicy();

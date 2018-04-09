@@ -17,6 +17,8 @@
   entries, each spanning the file's duration as given in the movie header
   atom, then the second entry will now be ignored. Improves the handling of
   files with bogus data; see #2196 and #2270.
+* GUI: multiplexer: added options to only enable tracks of certain types by
+  default. Implements #2271.
 
 ## Bug fixes
 
