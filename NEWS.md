@@ -13,6 +13,10 @@
   languages the GUI recognizes in file names. This list defaults to a handful
   of common languages instead of the full list of supported languages. Part of
   the improvements for #2267.
+* mkvmerge: MP4 reader: if a track has an edit list with two identical
+  entries, each spanning the file's duration as given in the movie header
+  atom, then the second entry will now be ignored. Improves the handling of
+  files with bogus data; see #2196 and #2270.
 
 ## Bug fixes
 

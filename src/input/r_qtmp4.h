@@ -98,6 +98,13 @@ struct qt_chunkmap_t {
 struct qt_editlist_t {
   int64_t  segment_duration{}, media_time{};
   uint16_t media_rate_integer{}, media_rate_fraction{};
+
+  bool operator ==(qt_editlist_t const &other) const {
+    return (segment_duration    == other.segment_duration)
+        && (media_time          == other.media_time)
+        && (media_rate_integer  == other.media_rate_integer)
+        && (media_rate_fraction == other.media_rate_fraction);
+  };
 };
 
 struct qt_sample_t {
@@ -453,6 +460,7 @@ private:
   qtmp4_demuxer_c *m_track_for_fragment;
 
   bool m_timestamps_calculated;
+  boost::optional<uint64_t> m_duration;
 
   debugging_option_c m_debug_chapters, m_debug_headers, m_debug_tables, m_debug_tables_full, m_debug_interleaving, m_debug_resync;
 

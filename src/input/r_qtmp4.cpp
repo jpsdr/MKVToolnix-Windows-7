@@ -977,9 +977,13 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
   if (m_in->read(&mvhd, sizeof(mvhd_atom_t)) != sizeof(mvhd_atom_t))
     throw mtx::input::header_parsing_x();
 
-  m_time_scale = get_uint32_be(&mvhd.time_scale);
+  m_time_scale  = get_uint32_be(&mvhd.time_scale);
+  auto duration = get_uint32_be(&mvhd.duration);
 
-  mxdebug_if(m_debug_headers, boost::format("%1%Time scale: %2%\n") % space(level * 2 + 1) % m_time_scale);
+  if (duration != std::numeric_limits<uint32_t>::max())
+    m_duration = boost::rational_cast<uint64_t>(boost::rational<uint64_t>{duration, m_time_scale} * 1'000'000'000ull);
+
+  mxdebug_if(m_debug_headers, boost::format("%1%Time scale: %2% duration: %3%\n") % space(level * 2 + 1) % m_time_scale % (m_duration ? format_timestamp(*m_duration) : std::string{"—"}));
 }
 
 void
@@ -2446,6 +2450,17 @@ qtmp4_demuxer_c::apply_edit_list() {
       edit.media_time       = 0;
       edit.segment_duration = 0;
       mxdebug_if(m_debug_editlists, boost::format("  %1%: single edit with positive media_time; track start offset %2%; change to non-edit to copy the rest\n") % info % format_timestamp(timeline_cts));
+
+    } else if (   (num_edits       == 2)
+               && (entry_index     == 2)
+               && (edit            == editlist_table.front())
+               && (edit.media_time == 0)
+               && m_reader.m_duration
+               && ((timeline_cts - static_cast<int64_t>(*m_reader.m_duration)) >= timestamp_c::s(-60).to_ns())) {
+      mxdebug_if(m_debug_editlists,
+                 boost::format("  %1%: edit list with two identical entries, each spanning the whole file; ignoring the second one; total duration: %2% timeline CTS %3%\n")
+                 % info % format_timestamp(timeline_cts) % format_timestamp(*m_reader.m_duration));
+      continue;
     }
 
     // Determine first frame index whose CTS (composition timestamp)
