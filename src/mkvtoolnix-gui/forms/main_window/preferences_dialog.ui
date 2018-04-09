@@ -267,7 +267,11 @@
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_17">
             <item>
-             <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedLanguages" native="true"/>
+             <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedLanguages" native="true">
+              <property name="focusPolicy">
+               <enum>Qt::StrongFocus</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="cbOftenUsedLanguagesOnly">
@@ -284,7 +288,11 @@
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_18">
             <item>
-             <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedCountries" native="true"/>
+             <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedCountries" native="true">
+              <property name="focusPolicy">
+               <enum>Qt::StrongFocus</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="cbOftenUsedCountriesOnly">
@@ -301,7 +309,11 @@
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_19">
             <item>
-             <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedCharacterSets" native="true"/>
+             <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedCharacterSets" native="true">
+              <property name="focusPolicy">
+               <enum>Qt::StrongFocus</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="cbOftenUsedCharacterSetsOnly">
@@ -860,7 +872,11 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_36">
            <item>
-            <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbMDeriveTrackLanguageRecognizedLanguages" native="true"/>
+            <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbMDeriveTrackLanguageRecognizedLanguages" native="true">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -1119,6 +1135,9 @@
                <width>0</width>
                <height>150</height>
               </size>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
              </property>
             </widget>
            </item>
@@ -1810,9 +1829,10 @@
   <tabstop>cbGuiWarnBeforeAbortingJobs</tabstop>
   <tabstop>cbGuiWarnBeforeOverwriting</tabstop>
   <tabstop>tbOftenUsedXYZ</tabstop>
+  <tabstop>tbOftenUsedLanguages</tabstop>
+  <tabstop>tbOftenUsedCountries</tabstop>
+  <tabstop>tbOftenUsedCharacterSets</tabstop>
   <tabstop>cbOftenUsedLanguagesOnly</tabstop>
-  <tabstop>cbOftenUsedCountriesOnly</tabstop>
-  <tabstop>cbOftenUsedCharacterSetsOnly</tabstop>
   <tabstop>cbMClearMergeSettings</tabstop>
   <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
   <tabstop>cbMProcessPriority</tabstop>
@@ -1838,6 +1858,7 @@
   <tabstop>cbMDeriveSubtitleTrackLanguageFromFileName</tabstop>
   <tabstop>leMDeriveTrackLanguageCustomRegex</tabstop>
   <tabstop>pbMDeriveTrackLanguageRevertCustomRegex</tabstop>
+  <tabstop>tbMDeriveTrackLanguageRecognizedLanguages</tabstop>
   <tabstop>cbMAutoSetOutputFileName</tabstop>
   <tabstop>cbMAutoDestinationOnlyForVideoFiles</tabstop>
   <tabstop>rbMAutoSetSameDirectory</tabstop>
@@ -1853,8 +1874,10 @@
   <tabstop>cbMEnableMuxingAllVideoTracks</tabstop>
   <tabstop>cbMEnableMuxingAllAudioTracks</tabstop>
   <tabstop>cbMEnableMuxingAllSubtitleTracks</tabstop>
+  <tabstop>tbMEnableMuxingTracksByLanguage</tabstop>
   <tabstop>cbMScanPlaylistsPolicy</tabstop>
   <tabstop>sbMMinPlaylistDuration</tabstop>
+  <tabstop>wIDefaultJobSettings</tabstop>
   <tabstop>cbHEDroppedFilesPolicy</tabstop>
   <tabstop>cbCEDropLastFromBlurayPlaylist</tabstop>
   <tabstop>cbCETextFileCharacterSet</tabstop>
@@ -1870,6 +1893,8 @@
   <tabstop>cbGuiRemoveOldJobs</tabstop>
   <tabstop>sbGuiRemoveOldJobsDays</tabstop>
   <tabstop>pbJobsAddProgram</tabstop>
+  <tabstop>cbOftenUsedCharacterSetsOnly</tabstop>
+  <tabstop>cbOftenUsedCountriesOnly</tabstop>
   <tabstop>twJobsPrograms</tabstop>
  </tabstops>
  <resources>
