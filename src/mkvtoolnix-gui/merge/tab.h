@@ -315,7 +315,7 @@ protected:
 
   virtual QList<Track *> selectedTracks() const;
   virtual void selectTracks(QList<Track *> const &tracks);
-  virtual void selectAllTracksOfType(boost::optional<Track::Type> type);
+  virtual void selectAllTracksOfType(boost::optional<TrackType> type);
 
   virtual QList<Track *> selectedAttachedFiles() const;
   virtual QList<Attachment *> selectedAttachments() const;

@@ -27,6 +27,7 @@
 #include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.h"
+#include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/executable_location_dialog.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
@@ -690,14 +691,14 @@ Tab::setInputControlValues(Track *track) {
     return;
   }
 
-  Util::setComboBoxIndexIf(ui->muxThis,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);          });
-  Util::setComboBoxIndexIf(ui->defaultTrackFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag); });
-  Util::setComboBoxIndexIf(ui->forcedTrackFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);  });
-  Util::setComboBoxIndexIf(ui->compression,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_compression);      });
-  Util::setComboBoxIndexIf(ui->cues,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);             });
-  Util::setComboBoxIndexIf(ui->stereoscopy,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);      });
-  Util::setComboBoxIndexIf(ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);   });
-  Util::setComboBoxIndexIf(ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);         });
+  Util::setComboBoxIndexIf(ui->muxThis,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);                                });
+  Util::setComboBoxIndexIf(ui->defaultTrackFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag);                       });
+  Util::setComboBoxIndexIf(ui->forcedTrackFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);                        });
+  Util::setComboBoxIndexIf(ui->compression,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == static_cast<unsigned int>(track->m_compression)); });
+  Util::setComboBoxIndexIf(ui->cues,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);                                   });
+  Util::setComboBoxIndexIf(ui->stereoscopy,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);                            });
+  Util::setComboBoxIndexIf(ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
+  Util::setComboBoxIndexIf(ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
 
   ui->trackLanguage->setCurrentByData(track->m_language);
   ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
@@ -935,9 +936,9 @@ Tab::onCompressionChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  auto compression = 1 == newValue ? Track::CompNone
-                   : 2 == newValue ? Track::CompZlib
-                   :                 Track::CompDefault;
+  auto compression = 1 == newValue ? TrackCompression::None
+                   : 2 == newValue ? TrackCompression::Zlib
+                   :                 TrackCompression::Default;
 
   withSelectedTracks([compression](auto &track) { track.m_compression = compression; }, true);
 }
@@ -1256,7 +1257,7 @@ void
 Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
   auto &cfg = Util::Settings::get();
 
-  auto defaultFlagSet = QHash<Track::Type, bool>{};
+  auto defaultFlagSet = QHash<TrackType, bool>{};
   for (auto const &track : m_config.m_tracks)
     if (track->m_defaultTrackFlag == 1)
       defaultFlagSet[track->m_type] = true;
@@ -1264,7 +1265,7 @@ Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
   for (auto const &file : files)
     for (auto const &track : file->m_tracks) {
       if (cfg.m_disableCompressionForAllTrackTypes)
-        track->m_compression = Track::CompNone;
+        track->m_compression = TrackCompression::None;
 
       if (cfg.m_disableDefaultTrackForSubtitles && track->isSubtitles())
         track->m_defaultTrackFlag = 2;
@@ -1661,7 +1662,7 @@ Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames,
 }
 
 void
-Tab::selectAllTracksOfType(boost::optional<Track::Type> type) {
+Tab::selectAllTracksOfType(boost::optional<TrackType> type) {
   auto numRows = m_tracksModel->rowCount();
   if (!numRows)
     return;
@@ -1698,17 +1699,17 @@ Tab::selectAllTracks() {
 
 void
 Tab::selectAllVideoTracks() {
-  selectAllTracksOfType(Track::Video);
+  selectAllTracksOfType(TrackType::Video);
 }
 
 void
 Tab::selectAllAudioTracks() {
-  selectAllTracksOfType(Track::Audio);
+  selectAllTracksOfType(TrackType::Audio);
 }
 
 void
 Tab::selectAllSubtitlesTracks() {
-  selectAllTracksOfType(Track::Subtitles);
+  selectAllTracksOfType(TrackType::Subtitles);
 }
 
 void

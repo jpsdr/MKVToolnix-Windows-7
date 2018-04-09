@@ -296,7 +296,7 @@ SourceFile::fixAssociations(MuxConfig::Loader &l) {
 }
 
 Track *
-SourceFile::findNthOrLastTrackOfType(Track::Type type,
+SourceFile::findNthOrLastTrackOfType(TrackType type,
                                      int nth)
   const {
   auto nthFound   = -1;
@@ -327,7 +327,7 @@ SourceFile::buildMkvmergeOptions(QStringList &options)
   for (auto const &attachedFile : m_attachedFiles)
     attachedFile->buildMkvmergeOptions(opt);
 
-  auto buildTrackIdArg = [&options,&opt](Track::Type type, QString const &enabled, QString const &disabled) {
+  auto buildTrackIdArg = [&options,&opt](TrackType type, QString const &enabled, QString const &disabled) {
     if (!enabled.isEmpty() && !opt.enabledTrackIds[type].isEmpty() && (static_cast<unsigned int>(opt.enabledTrackIds[type].size()) < opt.numTracksOfType[type]))
       options << enabled << opt.enabledTrackIds[type].join(Q(","));
 
@@ -335,14 +335,14 @@ SourceFile::buildMkvmergeOptions(QStringList &options)
       options << disabled;
   };
 
-  buildTrackIdArg(Track::Audio,      Q("--audio-tracks"),    Q("--no-audio"));
-  buildTrackIdArg(Track::Video,      Q("--video-tracks"),    Q("--no-video"));
-  buildTrackIdArg(Track::Subtitles,  Q("--subtitle-tracks"), Q("--no-subtitles"));
-  buildTrackIdArg(Track::Buttons,    Q("--button-tracks"),   Q("--no-buttons"));
-  buildTrackIdArg(Track::Attachment, Q("--attachments"),     Q("--no-attachments"));
-  buildTrackIdArg(Track::Tags,       Q("--track-tags"),      Q("--no-track-tags"));
-  buildTrackIdArg(Track::GlobalTags, Q(""),                  Q("--no-global-tags"));
-  buildTrackIdArg(Track::Chapters,   Q(""),                  Q("--no-chapters"));
+  buildTrackIdArg(TrackType::Audio,      Q("--audio-tracks"),    Q("--no-audio"));
+  buildTrackIdArg(TrackType::Video,      Q("--video-tracks"),    Q("--no-video"));
+  buildTrackIdArg(TrackType::Subtitles,  Q("--subtitle-tracks"), Q("--no-subtitles"));
+  buildTrackIdArg(TrackType::Buttons,    Q("--button-tracks"),   Q("--no-buttons"));
+  buildTrackIdArg(TrackType::Attachment, Q("--attachments"),     Q("--no-attachments"));
+  buildTrackIdArg(TrackType::Tags,       Q("--track-tags"),      Q("--no-track-tags"));
+  buildTrackIdArg(TrackType::GlobalTags, Q(""),                  Q("--no-global-tags"));
+  buildTrackIdArg(TrackType::Chapters,   Q(""),                  Q("--no-chapters"));
 
   options += opt.options;
   if (m_appendedTo)

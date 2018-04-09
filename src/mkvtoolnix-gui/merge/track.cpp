@@ -5,6 +5,7 @@
 #include "common/iso639.h"
 #include "common/list_utils.h"
 #include "common/strings/editing.h"
+#include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/mkvmerge_option_builder.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
@@ -19,7 +20,7 @@ namespace mtx { namespace gui { namespace Merge {
 using namespace mtx::gui;
 
 Track::Track(SourceFile *file,
-             Track::Type type)
+             TrackType type)
   : m_file{file}
   , m_type{type}
 {
@@ -29,7 +30,7 @@ Track::~Track() {
 }
 
 bool
-Track::isType(Type type)
+Track::isType(TrackType type)
   const {
   return type == m_type;
 }
@@ -37,49 +38,49 @@ Track::isType(Type type)
 bool
 Track::isAudio()
   const {
-  return Audio == m_type;
+  return isType(TrackType::Audio);
 }
 
 bool
 Track::isVideo()
   const {
-  return Video == m_type;
+  return isType(TrackType::Video);
 }
 
 bool
 Track::isSubtitles()
   const {
-  return Subtitles == m_type;
+  return isType(TrackType::Subtitles);
 }
 
 bool
 Track::isButtons()
   const {
-  return Buttons == m_type;
+  return isType(TrackType::Buttons);
 }
 
 bool
 Track::isChapters()
   const {
-  return Chapters == m_type;
+  return isType(TrackType::Chapters);
 }
 
 bool
 Track::isGlobalTags()
   const {
-  return GlobalTags == m_type;
+  return isType(TrackType::GlobalTags);
 }
 
 bool
 Track::isTags()
   const {
-  return Tags == m_type;
+  return isType(TrackType::Tags);
 }
 
 bool
 Track::isAttachment()
   const {
-  return Attachment == m_type;
+  return isType(TrackType::Attachment);
 }
 
 bool
@@ -165,10 +166,10 @@ Track::setDefaults(QString const &languageDerivedFromFileName) {
   }
 
   if (   !settings.m_enableMuxingTracksByLanguage
-      || !mtx::included_in(m_type, Video, Audio, Subtitles)
-      || ((Video     == m_type) && settings.m_enableMuxingAllVideoTracks)
-      || ((Audio     == m_type) && settings.m_enableMuxingAllAudioTracks)
-      || ((Subtitles == m_type) && settings.m_enableMuxingAllSubtitleTracks))
+      || !mtx::included_in(m_type, TrackType::Video, TrackType::Audio, TrackType::Subtitles)
+      || ((TrackType::Video     == m_type) && settings.m_enableMuxingAllVideoTracks)
+      || ((TrackType::Audio     == m_type) && settings.m_enableMuxingAllAudioTracks)
+      || ((TrackType::Subtitles == m_type) && settings.m_enableMuxingAllSubtitleTracks))
     m_muxThis = true;
 
   else {
@@ -198,7 +199,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("objectID",                      reinterpret_cast<qulonglong>(this));
   settings.setValue("appendedTo",                    reinterpret_cast<qulonglong>(m_appendedTo));
   settings.setValue("appendedTracks",                appendedTracks);
-  settings.setValue("type",                          m_type);
+  settings.setValue("type",                          static_cast<int>(m_type));
   settings.setValue("id",                            static_cast<qulonglong>(m_id));
   settings.setValue("muxThis",                       m_muxThis);
   settings.setValue("setAspectRatio",                m_setAspectRatio);
@@ -230,7 +231,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("aacIsSBR",                      m_aacIsSBR);
   settings.setValue("reduceAudioToCore",             m_reduceAudioToCore);
   settings.setValue("removeDialogNormalizationGain", m_removeDialogNormalizationGain);
-  settings.setValue("compression",                   m_compression);
+  settings.setValue("compression",                   static_cast<int>(m_compression));
   settings.setValue("size",                          static_cast<qulonglong>(m_size));
   settings.setValue("attachmentDescription",         m_attachmentDescription);
 }
@@ -244,7 +245,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
     throw InvalidSettingsX{};
 
   l.objectIDToTrack[objectID]     = this;
-  m_type                          = static_cast<Type>(l.settings.value("type").toInt());
+  m_type                          = static_cast<TrackType>(l.settings.value("type").toInt());
   m_id                            = l.settings.value("id").toULongLong();
   m_muxThis                       = l.settings.value("muxThis").toBool();
   m_setAspectRatio                = l.settings.value("setAspectRatio").toBool();
@@ -276,12 +277,12 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_aacIsSBR                      = l.settings.value("aacIsSBR").toInt();
   m_reduceAudioToCore             = l.settings.value("reduceAudioToCore").toBool();
   m_removeDialogNormalizationGain = l.settings.value("removeDialogNormalizationGain").toBool();
-  m_compression                   = static_cast<Compression>(l.settings.value("compression").toInt());
+  m_compression                   = static_cast<TrackCompression>(l.settings.value("compression").toInt());
   m_size                          = l.settings.value("size").toULongLong();
   m_attachmentDescription         = l.settings.value("attachmentDescription").toString();
 
-  if (   (TypeMin > m_type)        || (TypeMax < m_type)
-      || (CompMin > m_compression) || (CompMax < m_compression))
+  if (   (TrackType::Min        > m_type)        || (TrackType::Max        < m_type)
+      || (TrackCompression::Min > m_compression) || (TrackCompression::Max < m_compression))
     throw InvalidSettingsX{};
 }
 
@@ -383,8 +384,8 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (m_naluSizeLength)
       opt.options << Q("--nalu-size-length") << Q("%1:%2").arg(sid).arg(m_naluSizeLength);
 
-    if (m_compression)
-      opt.options << Q("--compression") << Q("%1:%2").arg(sid).arg(1 == m_compression ? Q("none") : Q("zlib"));
+    if (m_compression != TrackCompression::Default)
+      opt.options << Q("--compression") << Q("%1:%2").arg(sid).arg(TrackCompression::None == m_compression ? Q("none") : Q("zlib"));
   }
 
   if (!m_delay.isEmpty() || !m_stretchBy.isEmpty()) {

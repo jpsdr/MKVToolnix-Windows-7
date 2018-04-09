@@ -197,7 +197,7 @@ FileIdentifier::parseOutput() {
 void
 FileIdentifier::parseAttachment(QVariantMap const &obj) {
   auto p                         = p_func();
-  auto track                     = std::make_shared<Merge::Track>(p->m_file.get(), Merge::Track::Attachment);
+  auto track                     = std::make_shared<Merge::Track>(p->m_file.get(), Merge::TrackType::Attachment);
   track->m_properties            = obj.value("properties").toMap();
   track->m_id                    = obj.value("id").toULongLong();
   track->m_codec                 = obj.value("content_type").toString();
@@ -212,7 +212,7 @@ FileIdentifier::parseAttachment(QVariantMap const &obj) {
 void
 FileIdentifier::parseChapters(QVariantMap const &obj) {
   auto p        = p_func();
-  auto track    = std::make_shared<Merge::Track>(p->m_file.get(), Merge::Track::Chapters);
+  auto track    = std::make_shared<Merge::Track>(p->m_file.get(), Merge::TrackType::Chapters);
   track->m_size = obj.value("num_entries").toULongLong();
 
   p->m_file->m_tracks << track;
@@ -254,7 +254,7 @@ FileIdentifier::parseContainer(QVariantMap const &obj) {
 void
 FileIdentifier::parseGlobalTags(QVariantMap const &obj) {
   auto p        = p_func();
-  auto track    = std::make_shared<Merge::Track>(p->m_file.get(), Merge::Track::GlobalTags);
+  auto track    = std::make_shared<Merge::Track>(p->m_file.get(), Merge::TrackType::GlobalTags);
   track->m_size = obj.value("num_entries").toULongLong();
 
   p->m_file->m_tracks << track;
@@ -265,7 +265,7 @@ FileIdentifier::parseGlobalTags(QVariantMap const &obj) {
 void
 FileIdentifier::parseTrackTags(QVariantMap const &obj) {
   auto p        = p_func();
-  auto track    = std::make_shared<Merge::Track>(p->m_file.get(), Merge::Track::Tags);
+  auto track    = std::make_shared<Merge::Track>(p->m_file.get(), Merge::TrackType::Tags);
   track->m_id   = obj.value("track_id").toULongLong();
   track->m_size = obj.value("num_entries").toULongLong();
 
@@ -285,10 +285,10 @@ void
 FileIdentifier::parseTrack(QVariantMap const &obj) {
   auto p              = p_func();
   auto typeStr        = obj.value("type").toString();
-  auto type           = typeStr == "audio"     ? Merge::Track::Audio
-                      : typeStr == "video"     ? Merge::Track::Video
-                      : typeStr == "subtitles" ? Merge::Track::Subtitles
-                      :                          Merge::Track::Buttons;
+  auto type           = typeStr == "audio"     ? Merge::TrackType::Audio
+                      : typeStr == "video"     ? Merge::TrackType::Video
+                      : typeStr == "subtitles" ? Merge::TrackType::Subtitles
+                      :                          Merge::TrackType::Buttons;
   auto track          = std::make_shared<Merge::Track>(p->m_file.get(), type);
   track->m_id         = obj.value("id").toULongLong();
   track->m_codec      = obj.value("codec").toString();

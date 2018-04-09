@@ -62,7 +62,7 @@ public:
   virtual void setDefaults();
   virtual void setupProgramMapFromProperties();
 
-  virtual Track *findNthOrLastTrackOfType(Track::Type type, int nth) const;
+  virtual Track *findNthOrLastTrackOfType(TrackType type, int nth) const;
 
   void buildMkvmergeOptions(QStringList &options) const;
 

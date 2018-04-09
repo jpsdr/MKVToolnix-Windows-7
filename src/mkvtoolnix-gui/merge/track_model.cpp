@@ -7,6 +7,7 @@
 
 #include "common/logger.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
@@ -214,7 +215,7 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
   auto lastTrack = boost::accumulate(*m_tracks, static_cast<Track *>(nullptr), [](Track *accu, Track *t) { return t->isRegular() ? t : accu; });
   Q_ASSERT(!!lastTrack);
 
-  auto trackOffsets = QHash<Track::Type, int>{};
+  auto trackOffsets = QHash<TrackType, int>{};
 
   for (auto &newTrack : tracks) {
     // Things like tags, chapters and attachments aren't appended to a
@@ -417,7 +418,7 @@ TrackModel::updateSelectionStatus() {
   m_nonRegularSelected           = false;
   m_appendedMultiParentsSelected = false;
   m_appendedMultiTypeSelected    = false;
-  m_selectedTrackType            = static_cast<Track::Type>(Track::TypeMax + 1);
+  m_selectedTrackType            = static_cast<TrackType>(static_cast<int>(TrackType::Max) + 1);
 
   auto appendedParent            = static_cast<Track *>(nullptr);
   auto selectionModel            = qobject_cast<QItemSelectionModel *>(QObject::sender());
@@ -438,7 +439,8 @@ TrackModel::updateSelectionStatus() {
       if (appendedParent && (appendedParent != track->m_appendedTo))
         m_appendedMultiParentsSelected = true;
 
-      if ((static_cast<int>(m_selectedTrackType) != (Track::TypeMax + 1)) && (m_selectedTrackType != track->m_type))
+      if (   (static_cast<int>(m_selectedTrackType) != (static_cast<int>(TrackType::Max) + 1))
+          && (m_selectedTrackType                   != track->m_type))
         m_appendedMultiTypeSelected = true;
 
       appendedParent      = track->m_appendedTo;
@@ -637,7 +639,7 @@ TrackModel::updateEffectiveDefaultTrackFlags() {
   if (!m_tracks)
     return;
 
-  auto isSet                = QHash<Track::Type, bool>{};
+  auto isSet                = QHash<TrackType, bool>{};
   auto regularEnabledTracks = QList<Track *>{};
 
   std::copy_if(m_tracks->begin(), m_tracks->end(), std::back_inserter(regularEnabledTracks),

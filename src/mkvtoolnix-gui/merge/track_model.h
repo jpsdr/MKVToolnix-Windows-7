@@ -38,7 +38,7 @@ protected:
   QList<Track *> *m_tracks;
   QIcon m_audioIcon, m_videoIcon, m_subtitleIcon, m_attachmentIcon, m_chaptersIcon, m_tagsIcon, m_genericIcon;
   bool m_ignoreTrackRemovals, m_nonAppendedSelected, m_appendedSelected, m_nonRegularSelected, m_appendedMultiParentsSelected, m_appendedMultiTypeSelected;
-  Track::Type m_selectedTrackType;
+  TrackType m_selectedTrackType;
 
   debugging_option_c m_debug;
 
