@@ -72,6 +72,9 @@ public:
   virtual std::string debugInfo() const;
 
   void buildMkvmergeOptions(MkvmergeOptionBuilder &opt) const;
+
+public:
+  static QString nameForType(TrackType type);
 };
 
 }}}

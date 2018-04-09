@@ -417,17 +417,22 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 }
 
 QString
+Track::nameForType(TrackType type) {
+  return TrackType::Audio      == type ? QY("Audio")
+       : TrackType::Video      == type ? QY("Video")
+       : TrackType::Subtitles  == type ? QY("Subtitles")
+       : TrackType::Buttons    == type ? QY("Buttons")
+       : TrackType::Attachment == type ? QY("Attachment")
+       : TrackType::Chapters   == type ? QY("Chapters")
+       : TrackType::Tags       == type ? QY("Tags")
+       : TrackType::GlobalTags == type ? QY("Global tags")
+       :                                 Q("INTERNAL ERROR");
+}
+
+QString
 Track::nameForType()
   const {
-  return isAudio()      ? QY("Audio")
-       : isVideo()      ? QY("Video")
-       : isSubtitles()  ? QY("Subtitles")
-       : isButtons()    ? QY("Buttons")
-       : isAttachment() ? QY("Attachment")
-       : isChapters()   ? QY("Chapters")
-       : isTags()       ? QY("Tags")
-       : isGlobalTags() ? QY("Global tags")
-       :                   Q("INTERNAL ERROR");
+  return nameForType(m_type);
 }
 
 bool
