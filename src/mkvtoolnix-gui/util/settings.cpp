@@ -219,6 +219,7 @@ Settings::load() {
   auto regPtr      = registry();
   auto &reg        = *regPtr;
   auto defaultFont = defaultUiFont();
+  boost::optional<QVariant> enableMuxingTracksByTheseTypes;
 
   reg.beginGroup("info");
   auto guiVersion                      = reg.value("guiVersion").toString();
@@ -267,7 +268,9 @@ Settings::load() {
   m_enableMuxingAllAudioTracks         = reg.value("enableMuxingAllAudioTracks", false).toBool();
   m_enableMuxingAllSubtitleTracks      = reg.value("enableMuxingAllSubtitleTracks", false).toBool();
   m_enableMuxingTracksByTheseLanguages = reg.value("enableMuxingTracksByTheseLanguages").toStringList();
-  auto enableMuxingTracksByTheseTypes  = reg.value("enableMuxingTracksByThesetypes");
+
+  if (reg.contains("enableMuxingTracksByThesetypes"))
+    enableMuxingTracksByTheseTypes     = reg.value("enableMuxingTracksByThesetypes");
 
   m_useDefaultJobDescription           = reg.value("useDefaultJobDescription",       false).toBool();
   m_showOutputOfAllJobs                = reg.value("showOutputOfAllJobs",            true).toBool();
@@ -312,7 +315,7 @@ Settings::load() {
 }
 
 void
-Settings::setDefaults(QVariant const &enableMuxingTracksByTheseTypes) {
+Settings::setDefaults(boost::optional<QVariant> enableMuxingTracksByTheseTypes) {
   if (m_oftenUsedLanguages.isEmpty())
     for (auto const &languageCode : g_popular_language_codes)
       m_oftenUsedLanguages << Q(languageCode);
@@ -338,15 +341,13 @@ Settings::setDefaults(QVariant const &enableMuxingTracksByTheseTypes) {
   }
 
   m_enableMuxingTracksByTheseTypes.clear();
-  if (!enableMuxingTracksByTheseTypes.isValid()) {
+  if (enableMuxingTracksByTheseTypes)
+    for (auto const &type : enableMuxingTracksByTheseTypes->toList())
+      m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(type.toInt());
+
+  else
     for (int type = static_cast<int>(Merge::TrackType::Min); type <= static_cast<int>(Merge::TrackType::Max); ++type)
       m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(type);
-
-  } else {
-    auto list = enableMuxingTracksByTheseTypes.toList();
-    for (int idx = 0; idx < list.size(); ++idx)
-      m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(list[idx].toInt());
-  }
 }
 
 void
