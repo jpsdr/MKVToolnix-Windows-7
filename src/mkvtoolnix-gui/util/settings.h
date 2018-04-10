@@ -146,6 +146,7 @@ public:
   QTabWidget::TabPosition m_tabPosition;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
   bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_autoClearFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
+  bool m_mergeEnableDialogNormGainRemoval;
   ClearMergeSettingsAction m_clearMergeSettings;
   MergeAddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
   HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;

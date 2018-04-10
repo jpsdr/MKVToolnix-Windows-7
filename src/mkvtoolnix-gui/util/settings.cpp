@@ -250,6 +250,7 @@ Settings::load() {
   m_clearMergeSettings                 = static_cast<ClearMergeSettingsAction>(reg.value("clearMergeSettings", static_cast<int>(ClearMergeSettingsAction::None)).toInt());
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
   m_disableDefaultTrackForSubtitles    = reg.value("disableDefaultTrackForSubtitles",    false).toBool();
+  m_mergeEnableDialogNormGainRemoval   = reg.value("mergeEnableDialogNormGainRemoval",   false).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls",  true).toBool();
   m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value("mergeTrackPropertiesLayout", static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
   m_mergeAddingAppendingFilesPolicy    = static_cast<MergeAddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
@@ -558,6 +559,7 @@ Settings::save()
   reg.setValue("clearMergeSettings",                 static_cast<int>(m_clearMergeSettings));
   reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
   reg.setValue("disableDefaultTrackForSubtitles",    m_disableDefaultTrackForSubtitles);
+  reg.setValue("mergeEnableDialogNormGainRemoval",   m_mergeEnableDialogNormGainRemoval);
   reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
   reg.setValue("mergeTrackPropertiesLayout",         static_cast<int>(m_mergeTrackPropertiesLayout));
   reg.setValue("mergeAddingAppendingFilesPolicy",    static_cast<int>(m_mergeAddingAppendingFilesPolicy));

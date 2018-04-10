@@ -76,6 +76,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
   ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
   ui->cbMDisableDefaultTrackForSubtitles->setChecked(m_cfg.m_disableDefaultTrackForSubtitles);
+  ui->cbMEnableDialogNormGainRemoval->setChecked(m_cfg.m_mergeEnableDialogNormGainRemoval);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
   ui->cbMDefaultAudioTrackLanguage->setAdditionalItems(m_cfg.m_defaultAudioTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultAudioTrackLanguage);
@@ -277,6 +278,8 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
                    .arg(QY("Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files.")));
+
+  Util::setToolTip(ui->cbMEnableDialogNormGainRemoval, QY("If enabled, removal of dialog normalization gain will be enabled for all audio tracks for which removal is supported."));
 
   Util::setToolTip(ui->cbMProbeRangePercentage,
                    Q("%1 %2 %3")
@@ -743,6 +746,7 @@ PreferencesDialog::save() {
   m_cfg.m_setAudioDelayFromFileName                     = ui->cbMSetAudioDelayFromFileName->isChecked();
   m_cfg.m_disableCompressionForAllTrackTypes            = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
   m_cfg.m_disableDefaultTrackForSubtitles               = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
+  m_cfg.m_mergeEnableDialogNormGainRemoval              = ui->cbMEnableDialogNormGainRemoval->isChecked();
   m_cfg.m_mergeAddingAppendingFilesPolicy               = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysShowOutputFileControls             = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_mergeTrackPropertiesLayout                    = ui->rbMTrackPropertiesLayoutHorizontalScrollArea->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalScrollArea

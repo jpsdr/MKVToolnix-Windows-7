@@ -175,6 +175,9 @@ Track::setDefaults(QString const &languageDerivedFromFileName) {
     m_displayHeight = re_displayDimensions.cap(2);
   }
 
+  if (canRemoveDialogNormalizationGain() && settings.m_mergeEnableDialogNormGainRemoval)
+    m_removeDialogNormalizationGain = true;
+
   if (!settings.m_enableMuxingTracksByTheseTypes.contains(m_type))
     m_muxThis = false;
 

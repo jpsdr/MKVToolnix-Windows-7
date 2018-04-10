@@ -19,6 +19,9 @@
   files with bogus data; see #2196 and #2270.
 * GUI: multiplexer: added options to only enable tracks of certain types by
   default. Implements #2271.
+* GUI: multiplexer: added an option to enable dialog normalization gain
+  removal by default for all audio tracks for which the operation is
+  supported. Implements #2272.
 
 ## Bug fixes
 
