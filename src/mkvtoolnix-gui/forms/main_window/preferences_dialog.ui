@@ -1096,6 +1096,12 @@
                <height>100</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>140</height>
+              </size>
+             </property>
              <property name="focusPolicy">
               <enum>Qt::StrongFocus</enum>
              </property>
@@ -1109,7 +1115,7 @@
           <property name="title">
            <string>Enable copying of tracks by their language</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_21">
+          <layout class="QVBoxLayout" name="verticalLayout_13">
            <item>
             <widget class="QCheckBox" name="cbMEnableMuxingTracksByLanguage">
              <property name="text">
@@ -1143,29 +1149,70 @@
               </spacer>
              </item>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_13">
-               <item>
-                <widget class="QCheckBox" name="cbMEnableMuxingAllVideoTracks">
-                 <property name="text">
-                  <string>&amp;Video</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="cbMEnableMuxingAllAudioTracks">
-                 <property name="text">
-                  <string>&amp;Audio</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="cbMEnableMuxingAllSubtitleTracks">
-                 <property name="text">
-                  <string>&amp;Subtitles</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <widget class="QCheckBox" name="cbMEnableMuxingAllVideoTracks">
+               <property name="text">
+                <string>&amp;Video</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cbMEnableMuxingAllAudioTracks">
+               <property name="text">
+                <string>&amp;Audio</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cbMEnableMuxingAllSubtitleTracks">
+               <property name="text">
+                <string>&amp;Subtitles</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </item>
