@@ -111,9 +111,19 @@ Track::isPropertySet(QString const &property)
 }
 
 void
+Track::setDefaultsNonRegular() {
+  auto &settings = Util::Settings::get();
+
+  if (!settings.m_enableMuxingTracksByTheseTypes.contains(m_type))
+    m_muxThis = false;
+}
+
+void
 Track::setDefaults(QString const &languageDerivedFromFileName) {
-  if (!isRegular())
+  if (!isRegular()) {
+    setDefaultsNonRegular();
     return;
+  }
 
   auto &settings = Util::Settings::get();
 

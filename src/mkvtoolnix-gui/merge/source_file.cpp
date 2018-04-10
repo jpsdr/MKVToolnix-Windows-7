@@ -363,6 +363,9 @@ SourceFile::setDefaults() {
   for (auto const &track : m_tracks)
     track->setDefaults(languageDerivedFromFileName);
 
+  for (auto const &attachedFile : m_attachedFiles)
+    attachedFile->setDefaults(languageDerivedFromFileName);
+
   for (auto const &appendedFile : m_appendedFiles)
     appendedFile->setDefaults();
 }

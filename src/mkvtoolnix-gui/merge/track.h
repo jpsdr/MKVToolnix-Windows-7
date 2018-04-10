@@ -61,6 +61,7 @@ public:
   virtual bool canSetAacToSbr() const;
 
   virtual void setDefaults(QString const &languageDerivedFromFileName);
+  virtual void setDefaultsNonRegular();
   virtual QString extractAudioDelayFromFileName() const;
 
   virtual void saveSettings(Util::ConfigFile &settings) const;
