@@ -13,7 +13,8 @@ set -e
 #
 
 # This defaults to a 64bit executable. If you need a 32bit executable
-# then change ARCHITECTURE to 32.
+# then change ARCHITECTURE to 32. Alternatively set the HOST variable
+# outside the script to something like "x86_64-w64-mingw32.static".
 ARCHITECTURE=${ARCHITECTURE:-64}
 # Installation defaults to ~/mxe.
 INSTALL_DIR=${INSTALL_DIR:-$HOME/mxe}
@@ -25,10 +26,12 @@ PARALLEL=${PARALLEL:-$(nproc --all)}
 # END OF SETUP -- usually no need to change anything else
 #
 
-if [[ "$ARCHITECTURE" == 32 ]]; then
-  HOST=i686-w64-mingw32.static
-else
-  HOST=x86_64-w64-mingw32.static
+if [[ -z $HOST ]]; then
+  if [[ "$ARCHITECTURE" == 32 ]]; then
+    HOST=i686-w64-mingw32.static
+  else
+    HOST=x86_64-w64-mingw32.static
+  fi
 fi
 
 SRCDIR=$(pwd)
