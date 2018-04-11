@@ -110,7 +110,7 @@ struct kax_track_t {
 
   mtx::dts::header_t dts_header;
 
-  uint32_t v_colour_space;
+  memory_cptr v_colour_space;
 
   kax_track_t()
     : tnum(0)

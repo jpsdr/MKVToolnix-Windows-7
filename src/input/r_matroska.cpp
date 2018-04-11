@@ -1173,9 +1173,9 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
   track->v_pctop        = FindChildValue<KaxVideoPixelCropTop>(ktvideo);
   track->v_pcbottom     = FindChildValue<KaxVideoPixelCropBottom>(ktvideo);
 
-  auto *colour_space = FindChild<KaxVideoColourSpace>(*ktvideo);
+  auto colour_space = FindChild<KaxVideoColourSpace>(*ktvideo);
   if (colour_space)
-    track->v_colour_space = *(uint32_t*)colour_space->GetBuffer();
+    track->v_colour_space = memory_c::clone(colour_space->GetBuffer(), colour_space->GetSize());
 
   auto colour           = FindChild<KaxVideoColour>(*ktvideo);
 
