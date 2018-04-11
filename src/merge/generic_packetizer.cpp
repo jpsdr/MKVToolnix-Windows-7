@@ -937,6 +937,16 @@ generic_packetizer_c::set_video_stereo_mode_impl(EbmlMaster &video,
 }
 
 void
+generic_packetizer_c::set_video_colour_space(uint32_t colour_space,
+                                             option_source_e source)
+{
+  m_ti.m_colour_space.set(colour_space, source);
+
+  if (m_track_entry)
+    GetChild<KaxVideoColourSpace>(m_track_entry).CopyBuffer((binary *)&colour_space, sizeof(colour_space));
+}
+
+void
 generic_packetizer_c::set_headers() {
   if (0 < m_connected_to) {
     mxerror(boost::format("generic_packetizer_c::set_headers(): connected_to > 0 (type: %1%). %2%\n") % typeid(*this).name() % BUGMSG);
@@ -1050,6 +1060,11 @@ generic_packetizer_c::set_headers() {
 
       GetChild<KaxVideoDisplayWidth >(video).SetDefaultSize(4);
       GetChild<KaxVideoDisplayHeight>(video).SetDefaultSize(4);
+
+      if (m_ti.m_colour_space) {
+        uint32_t colour_space = m_ti.m_colour_space.get();
+        GetChild<KaxVideoColourSpace>(video).CopyBuffer((binary *)&colour_space, sizeof(colour_space));
+      }
 
       if (m_ti.m_pixel_cropping) {
         auto crop = m_ti.m_pixel_cropping.get();

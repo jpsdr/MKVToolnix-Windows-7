@@ -110,6 +110,8 @@ struct kax_track_t {
 
   mtx::dts::header_t dts_header;
 
+  uint32_t v_colour_space;
+
   kax_track_t()
     : tnum(0)
     , track_number(0)
@@ -164,6 +166,7 @@ struct kax_track_t {
     , ptzr_ptr(nullptr)
     , headers_set(false)
     , ignore_duration_hack(false)
+    , v_colour_space(0)
   {
     memset(v_fourcc, 0, 5);
     memset(headers, 0, 3 * sizeof(unsigned char *));

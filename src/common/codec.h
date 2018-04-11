@@ -73,6 +73,7 @@
 #define MKV_V_THEORA      "V_THEORA"
 #define MKV_V_VP8         "V_VP8"
 #define MKV_V_VP9         "V_VP9"
+#define MKV_V_UNCOMPRESSED "V_UNCOMPRESSED"
 
 #define MKV_S_DVBSUB      "S_DVBSUB"
 #define MKV_S_HDMV_PGS    "S_HDMV/PGS"
