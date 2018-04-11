@@ -67,6 +67,12 @@ function create_run_configure_script {
 
   echo Creating \'run_configure.sh\' script
   qtbin=${INSTALL_DIR}/usr/${HOST}/qt5/bin
+
+  static_qt=""
+  if [[ $HOST == *static* ]]; then
+    static_qt="--enable-static-qt"
+  fi
+
   cat > run_configure.sh <<EOF
 #!/bin/bash
 
@@ -76,7 +82,7 @@ hash -r
 ./configure \\
   --host=${HOST} \\
   --with-boost="${INSTALL_DIR}/usr/${HOST}" \\
-  --enable-static-qt \\
+  ${static_qt} \\
   --with-moc=${qtbin}/moc --with-uic=${qtbin}/uic --with-rcc=${qtbin}/rcc \\
   "\$@"
 
