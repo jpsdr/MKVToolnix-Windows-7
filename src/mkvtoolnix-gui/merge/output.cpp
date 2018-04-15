@@ -619,7 +619,7 @@ Tab::onCopyTitleToOutputFileName() {
     return;
 
   auto info        = QFileInfo{ m_config.m_destination };
-  auto suffix      = info.completeSuffix();
+  auto suffix      = info.suffix();
   auto path        = info.path();
   auto newFileName = m_config.m_title;
 

@@ -31,6 +31,9 @@
   duration to 0 instead. Fixes #2260.
 * MKVToolNix GUI: the central area is now scrollable, allowing the GUI to be
   resized to almost arbitrary sizes. Fixes #2265.
+* MKVToolNix GUI: multiplexer: the "copy file title to destination file name"
+  functionality will now replace everything in the destination file name up to
+  the last period instead of only up to the first period. Fixes #2276.
 
 ## Build system changes
 
