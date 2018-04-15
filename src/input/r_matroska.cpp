@@ -180,6 +180,9 @@ kax_track_t::handle_packetizer_colour() {
     ptzr_ptr->set_video_projection_pose_pitch(*v_projection_pose_pitch, OPTION_SOURCE_CONTAINER);
   if (v_projection_pose_roll)
     ptzr_ptr->set_video_projection_pose_roll(*v_projection_pose_roll, OPTION_SOURCE_CONTAINER);
+
+  if (codec_id == MKV_V_UNCOMPRESSED)
+    ptzr_ptr->set_video_colour_space(v_colour_space, OPTION_SOURCE_CONTAINER);
 }
 
 void
@@ -1169,6 +1172,10 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
   track->v_pcright      = FindChildValue<KaxVideoPixelCropRight>(ktvideo);
   track->v_pctop        = FindChildValue<KaxVideoPixelCropTop>(ktvideo);
   track->v_pcbottom     = FindChildValue<KaxVideoPixelCropBottom>(ktvideo);
+
+  auto colour_space = FindChild<KaxVideoColourSpace>(*ktvideo);
+  if (colour_space)
+    track->v_colour_space = memory_c::clone(colour_space->GetBuffer(), colour_space->GetSize());
 
   auto colour           = FindChild<KaxVideoColour>(*ktvideo);
 

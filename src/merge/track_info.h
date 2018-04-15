@@ -355,6 +355,9 @@ public:
   std::map<int64_t, double> m_projection_pose_roll_list; // As given on the command line
   option_with_source_c<double> m_projection_pose_roll; // For this very track
 
+  std::map<int64_t, memory_cptr> m_colour_space_list; // As given on the command line
+  option_with_source_c<memory_cptr> m_colour_space; // For this very track
+
   std::map<int64_t, std::pair<int64_t, bool>> m_default_durations; // As given on the command line
   std::map<int64_t, int> m_max_blockadd_ids; // As given on the command line
 

@@ -71,6 +71,7 @@
 #define MKV_V_REALV3      "V_REAL/RV30"
 #define MKV_V_REALV4      "V_REAL/RV40"
 #define MKV_V_THEORA      "V_THEORA"
+#define MKV_V_UNCOMPRESSED "V_UNCOMPRESSED"
 #define MKV_V_VP8         "V_VP8"
 #define MKV_V_VP9         "V_VP9"
 

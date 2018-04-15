@@ -245,6 +245,8 @@ public:
       m_hcompression = method;
   }
 
+  virtual void set_video_colour_space(memory_cptr const &value, option_source_e source);
+
   virtual void force_duration_on_last_packet();
 
   virtual translatable_string_c get_format_name() const = 0;
