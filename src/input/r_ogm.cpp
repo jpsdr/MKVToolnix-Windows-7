@@ -287,12 +287,10 @@ extract_vorbis_comments(const memory_cptr &mem) {
 
     for (i = 0; i < n; i++) {
       len = in.read_uint32_le();
-      memory_cptr buffer(new memory_c((unsigned char *)safemalloc(len + 1), len + 1));
+      comments->emplace_back(' ', len);
 
-      if (in.read(buffer->get_buffer(), len) != len)
+      if (in.read(comments->back(), len) != len)
         throw false;
-
-      comments->push_back(std::string((char *)buffer->get_buffer(), len));
     }
   } catch(...) {
   }

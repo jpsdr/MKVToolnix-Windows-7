@@ -42,6 +42,8 @@
 * mkvmerge: chapter handling: removed a small, constant-size memory leak.
 * mkvmerge, mkvextract: AVI handling: removed a small, constant-size memory
   leak when dealing with indexes in AVIs.
+* mkvmerge: Ogg/OGM reader: removed a small, constant-size memory leak when
+  dealing with Vorbis comments.
 
 ## Build system changes
 
