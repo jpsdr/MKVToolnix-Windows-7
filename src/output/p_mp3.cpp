@@ -74,19 +74,16 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
     }));
 }
 
-unsigned char *
+memory_cptr
 mp3_packetizer_c::get_mp3_packet(mp3_header_t *mp3header) {
   if (m_byte_buffer.get_size() == 0)
-    return 0;
+    return {};
 
   int pos;
-  size_t size;
-  unsigned char *buf;
-
   while (1) {
-    buf  = m_byte_buffer.get_buffer();
-    size = m_byte_buffer.get_size();
-    pos  = find_mp3_header(buf, size);
+    auto buf  = m_byte_buffer.get_buffer();
+    auto size = m_byte_buffer.get_size();
+    pos       = find_mp3_header(buf, size);
 
     if (0 > pos)
       return nullptr;
@@ -159,7 +156,7 @@ mp3_packetizer_c::get_mp3_packet(mp3_header_t *mp3header) {
   if (mp3header->framesize > m_byte_buffer.get_size())
     return nullptr;
 
-  buf = (unsigned char *)safememdup(m_byte_buffer.get_buffer(), mp3header->framesize);
+  auto buf = memory_c::clone(m_byte_buffer.get_buffer(), mp3header->framesize);
 
   m_byte_buffer.remove(mp3header->framesize);
 
@@ -182,14 +179,14 @@ int
 mp3_packetizer_c::process(packet_cptr packet) {
   m_timestamp_calculator.add_timestamp(packet);
 
-  unsigned char *mp3_packet;
   mp3_header_t mp3header;
+  memory_cptr mp3_packet;
 
   m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   while ((mp3_packet = get_mp3_packet(&mp3header))) {
     auto new_timestamp = m_timestamp_calculator.get_next_timestamp(m_samples_per_frame);
-    auto packet        = std::make_shared<packet_t>(memory_c::clone(mp3_packet, mp3header.framesize), new_timestamp.to_ns(), m_packet_duration);
+    auto packet        = std::make_shared<packet_t>(mp3_packet, new_timestamp.to_ns(), m_packet_duration);
 
     packet->add_extensions(m_packet_extensions);
 

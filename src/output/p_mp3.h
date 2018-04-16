@@ -44,7 +44,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 private:
-  virtual unsigned char *get_mp3_packet(mp3_header_t *mp3header);
+  virtual memory_cptr get_mp3_packet(mp3_header_t *mp3header);
 
   virtual void handle_garbage(int64_t bytes);
 };

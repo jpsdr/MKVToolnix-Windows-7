@@ -34,6 +34,8 @@
 * MKVToolNix GUI: multiplexer: the "copy file title to destination file name"
   functionality will now replace everything in the destination file name up to
   the last period instead of only up to the first period. Fixes #2276.
+* mkvmerge: MP3 packetizer: removed a memory leak growing linearly with the
+  track's size.
 
 ## Build system changes
 
