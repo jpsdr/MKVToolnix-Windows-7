@@ -1951,6 +1951,15 @@ int AVI_close(avi_t *AVI)
    if(AVI->video_index) free(AVI->video_index);
    if(AVI->video_superindex) {
        if(AVI->video_superindex->aIndex) free(AVI->video_superindex->aIndex);
+       if (AVI->video_superindex->stdindex) {
+         for (j = 0; j < NR_IXNN_CHUNKS; j++)
+           if (AVI->video_superindex->stdindex[j]) {
+             if ((j < AVI->video_superindex->nEntriesInUse) && AVI->video_superindex->stdindex[j]->aIndex)
+               free(AVI->video_superindex->stdindex[j]->aIndex);
+             free(AVI->video_superindex->stdindex[j]);
+           }
+         free(AVI->video_superindex->stdindex);
+       }
        free(AVI->video_superindex);
    }
 

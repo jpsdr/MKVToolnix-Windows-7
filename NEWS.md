@@ -40,6 +40,8 @@
 * mkvpropedit: removed a small, constant-size memory leak when deleting
   properties.
 * mkvmerge: chapter handling: removed a small, constant-size memory leak.
+* mkvmerge, mkvextract: AVI handling: removed a small, constant-size memory
+  leak when dealing with indexes in AVIs.
 
 ## Build system changes
 
