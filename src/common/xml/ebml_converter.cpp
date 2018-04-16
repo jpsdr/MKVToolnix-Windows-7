@@ -16,6 +16,7 @@
 #include <ebml/EbmlVoid.h>
 #include <matroska/KaxSegment.h>
 
+#include "common/at_scope_exit.h"
 #include "common/base64.h"
 #include "common/ebml.h"
 #include "common/mm_io_x.h"
@@ -399,6 +400,8 @@ ebml_converter_c::convert_node_or_attribute_to_ebml(EbmlMaster &parent,
   std::string value = attribute ? attribute.value() : node.child_value();
   auto new_element  = verify_and_create_element(parent, name, node);
   auto limits       = m_limits.find(name);
+  auto is_ok        = false;
+  at_scope_exit_c cleanup([&new_element, &is_ok]() { if (!is_ok) delete new_element; });
 
   parser_context_t ctx { name, value, *new_element, node, handled_attributes, limits == m_limits.end() ? limits_t{} : limits->second };
 
@@ -420,6 +423,7 @@ ebml_converter_c::convert_node_or_attribute_to_ebml(EbmlMaster &parent,
   else if (!dynamic_cast<EbmlMaster *>(new_element))
     throw invalid_child_node_x{ name, get_tag_name(parent), node.offset_debug() };
 
+  is_ok = true;
   parent.PushElement(*new_element);
 
   return new_element;

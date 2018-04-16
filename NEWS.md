@@ -44,6 +44,8 @@
   leak when dealing with indexes in AVIs.
 * mkvmerge: Ogg/OGM reader: removed a small, constant-size memory leak when
   dealing with Vorbis comments.
+* mkvmerge: chapter & tag reader: removed a small, constant-size memory leak
+  in error cases.
 
 ## Build system changes
 
