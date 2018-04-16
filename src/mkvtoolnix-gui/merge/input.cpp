@@ -855,7 +855,7 @@ Tab::onMuxThisChanged(int selected) {
 
   auto tracks = selectedTracks();
   if (1 == tracks.count())
-    Util::setComboBoxIndexIf(ui->muxThis, [&tracks](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == tracks[0]->m_muxThis); });
+    Util::setComboBoxIndexIf(ui->muxThis, [&tracks](QString const &, QVariant const &eltData) { return eltData.isValid() && (eltData.toBool() == tracks[0]->m_muxThis); });
 }
 
 void

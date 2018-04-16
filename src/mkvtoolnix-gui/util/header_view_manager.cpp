@@ -148,7 +148,7 @@ HeaderViewManager::restoreVisualIndexes(QStringList const &columnOrder) {
     visualToLogical[visualIndex] = logicalIndex;
   }
 
-  for (int visualIndex = columnCount - 1; visualIndex > 0; --visualIndex) {
+  for (visualIndex = columnCount - 1; visualIndex > 0; --visualIndex) {
     if (!visualToLogical.contains(visualIndex))
       continue;
 

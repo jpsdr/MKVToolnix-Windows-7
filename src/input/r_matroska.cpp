@@ -1391,10 +1391,10 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
       if (!Is<KaxSeek>(l2))
         continue;
 
-      KaxSeek &seek = *static_cast<KaxSeek *>(l2);
-      int64_t pos   = FindChildValue<KaxSeekPosition, int64_t>(seek, -1);
+      auto &seek        = *static_cast<KaxSeek *>(l2);
+      auto new_seek_pos = FindChildValue<KaxSeekPosition, int64_t>(seek, -1);
 
-      if (-1 == pos)
+      if (-1 == new_seek_pos)
         continue;
 
       auto *k_id = FindChild<KaxSeekID>(seek);
@@ -1414,20 +1414,20 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
       if (dl1t_unknown == type)
         continue;
 
-      pos = static_cast<KaxSegment *>(l0)->GetGlobalPosition(pos);
+      new_seek_pos = static_cast<KaxSegment *>(l0)->GetGlobalPosition(new_seek_pos);
 
       if (dl1t_seek_head == type)
-        next_seek_head_positions.push_back(pos);
+        next_seek_head_positions.push_back(new_seek_pos);
       else
-        m_deferred_l1_positions[type].push_back(pos);
+        m_deferred_l1_positions[type].push_back(new_seek_pos);
     }
 
   } catch (...) {
     return;
   }
 
-  for (auto pos : next_seek_head_positions)
-    handle_seek_head(io, l0, pos);
+  for (auto new_seek_head_pos : next_seek_head_positions)
+    handle_seek_head(io, l0, new_seek_head_pos);
 }
 
 void

@@ -221,11 +221,11 @@ ebml_converter_c::parse_timestamp(parser_context_t &ctx) {
 
 void
 ebml_converter_c::parse_binary(parser_context_t &ctx) {
-  auto test_min_max = [&ctx](auto const &content) {
-    if (ctx.limits.has_min && (content.length() < static_cast<size_t>(ctx.limits.min)))
-      throw out_of_range_x{ ctx.name, ctx.node.offset_debug(), (boost::format(Y("Minimum allowed length: %1%, actual length: %2%")) % ctx.limits.min % content.length()).str() };
-    if (ctx.limits.has_max && (content.length() > static_cast<size_t>(ctx.limits.max)))
-      throw out_of_range_x{ ctx.name, ctx.node.offset_debug(), (boost::format(Y("Maximum allowed length: %1%, actual length: %2%")) % ctx.limits.max % content.length()).str() };
+  auto test_min_max = [&ctx](auto const &test_content) {
+    if (ctx.limits.has_min && (test_content.length() < static_cast<size_t>(ctx.limits.min)))
+      throw out_of_range_x{ ctx.name, ctx.node.offset_debug(), (boost::format(Y("Minimum allowed length: %1%, actual length: %2%")) % ctx.limits.min % test_content.length()).str() };
+    if (ctx.limits.has_max && (test_content.length() > static_cast<size_t>(ctx.limits.max)))
+      throw out_of_range_x{ ctx.name, ctx.node.offset_debug(), (boost::format(Y("Maximum allowed length: %1%, actual length: %2%")) % ctx.limits.max % test_content.length()).str() };
   };
 
   ctx.handled_attributes["format"] = true;

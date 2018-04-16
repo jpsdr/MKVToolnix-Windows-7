@@ -74,7 +74,6 @@ target_c::add_or_replace_all_master_elements(EbmlMaster *source) {
   m_level1_element->RemoveAll();
 
   if (source) {
-    size_t idx;
     for (idx = 0; source->ListSize() > idx; ++idx)
       m_level1_element->PushElement(*(*source)[idx]);
     source->RemoveAll();
