@@ -37,6 +37,8 @@
 * mkvmerge: MP3 packetizer: removed a memory leak growing linearly with the
   track's size.
 * mkvmerge: Vorbis packetizer: removed a small, constant-size memory leak.
+* mkvpropedit: removed a small, constant-size memory leak when deleting
+  properties.
 
 ## Build system changes
 

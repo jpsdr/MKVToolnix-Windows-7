@@ -245,6 +245,7 @@ change_c::execute_delete() {
   unsigned int num_deleted = 0;
   while (m_master->ListSize() > idx) {
     if (m_property.m_callbacks->GlobalId == (*m_master)[idx]->Generic().GlobalId) {
+      delete (*m_master)[idx];
       m_master->Remove(idx);
       ++num_deleted;
     } else
