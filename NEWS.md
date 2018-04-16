@@ -39,6 +39,7 @@
 * mkvmerge: Vorbis packetizer: removed a small, constant-size memory leak.
 * mkvpropedit: removed a small, constant-size memory leak when deleting
   properties.
+* mkvmerge: chapter handling: removed a small, constant-size memory leak.
 
 ## Build system changes
 

@@ -560,7 +560,10 @@ remove_entries(int64_t min_ts,
       , end(-1)
     {
     }
-  } *entries                = new chapter_entry_t[m.ListSize()];
+  };
+  std::vector<chapter_entry_t> entries;
+  entries.resize(m.ListSize());
+
   unsigned int last_atom_at = 0;
   bool last_atom_found      = false;
 
@@ -661,8 +664,6 @@ remove_entries(int64_t min_ts,
       m.Remove(i);
     }
   }
-
-  delete []entries;
 }
 
 /** \brief Merge all chapter atoms sharing the same UID
