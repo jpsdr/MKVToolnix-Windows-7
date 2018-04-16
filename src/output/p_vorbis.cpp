@@ -38,9 +38,9 @@ vorbis_packetizer_c::vorbis_packetizer_c(generic_reader_c *p_reader,
   , m_previous_timestamp(0)
   , m_timestamp_offset(0)
 {
-  m_headers.push_back(memory_cptr(new memory_c((unsigned char *)safememdup(d_header,     l_header),     l_header)));
-  m_headers.push_back(memory_cptr(new memory_c((unsigned char *)safememdup(d_comments,   l_comments),   l_comments)));
-  m_headers.push_back(memory_cptr(new memory_c((unsigned char *)safememdup(d_codecsetup, l_codecsetup), l_codecsetup)));
+  m_headers.push_back(memory_c::clone(d_header,     l_header));
+  m_headers.push_back(memory_c::clone(d_comments,   l_comments));
+  m_headers.push_back(memory_c::clone(d_codecsetup, l_codecsetup));
 
   ogg_packet ogg_headers[3];
   memset(ogg_headers, 0, 3 * sizeof(ogg_packet));

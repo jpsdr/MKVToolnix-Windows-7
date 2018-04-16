@@ -36,6 +36,7 @@
   the last period instead of only up to the first period. Fixes #2276.
 * mkvmerge: MP3 packetizer: removed a memory leak growing linearly with the
   track's size.
+* mkvmerge: Vorbis packetizer: removed a small, constant-size memory leak.
 
 ## Build system changes
 
