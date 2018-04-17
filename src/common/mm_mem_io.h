@@ -42,7 +42,7 @@ public:
 
   virtual unsigned char *get_buffer() const;
   virtual unsigned char const *get_ro_buffer() const;
-  virtual unsigned char *get_and_lock_buffer();
+  virtual memory_cptr get_and_lock_buffer();
   virtual std::string get_content() const;
 
 protected:

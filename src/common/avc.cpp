@@ -626,7 +626,7 @@ fix_sps_fps(memory_cptr const &buffer,
       new_avcc.write(nalu);
     }
 
-    return memory_cptr{new memory_c{new_avcc.get_and_lock_buffer(), static_cast<size_t>(new_avcc.getFilePointer()), true}};
+    return new_avcc.get_and_lock_buffer();
 
   } catch(...) {
     return memory_cptr{};

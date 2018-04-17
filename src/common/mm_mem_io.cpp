@@ -177,10 +177,10 @@ mm_mem_io_c::get_ro_buffer()
   return m_ro_mem;
 }
 
-unsigned char *
+memory_cptr
 mm_mem_io_c::get_and_lock_buffer() {
   m_free_mem = false;
-  return m_mem;
+  return std::make_shared<memory_c>(m_mem, getFilePointer(), true);
 }
 
 std::string
