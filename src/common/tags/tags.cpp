@@ -326,8 +326,10 @@ remove_elements_unsupported_by_webm(EbmlMaster &master) {
       if (sub_master)
         remove_elements_unsupported_by_webm(*sub_master);
 
-    } else
+    } else {
+      delete master[idx];
       master.Remove(idx);
+    }
   }
 }
 
