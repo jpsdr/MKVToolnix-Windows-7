@@ -22,6 +22,7 @@ TEST(TargetIdManager, Basics) {
                                      cons<KaxAttached>(),
                                      cons<KaxAttached>(),
                                      cons<KaxAttachments>());
+  auto af_master = std::shared_ptr<KaxAttachments>{master};
 
   target_id_manager_c<KaxAttached> mgr(master, 1);
 

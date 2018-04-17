@@ -92,14 +92,14 @@ TEST(FourCC, CreationFromMmIo) {
   EXPECT_EQ(big,    fourcc_c(mm_io_cptr{new mm_mem_io_c{little_m, 4}})                               .value(fourcc_c::little_endian));
   EXPECT_EQ(little, fourcc_c(mm_io_cptr{new mm_mem_io_c{little_m, 4}},       fourcc_c::little_endian).value(fourcc_c::little_endian));
 
-  EXPECT_EQ(big,    fourcc_c(           new mm_mem_io_c{big_m,    4})                                .value());
-  EXPECT_EQ(big,    fourcc_c(           new mm_mem_io_c{big_m,    4},        fourcc_c::big_endian)   .value());
-  EXPECT_EQ(big,    fourcc_c(           new mm_mem_io_c{big_m,    4})                                .value(fourcc_c::big_endian));
-  EXPECT_EQ(big,    fourcc_c(           new mm_mem_io_c{big_m,    4},        fourcc_c::big_endian)   .value(fourcc_c::big_endian));
-  EXPECT_EQ(little, fourcc_c(           new mm_mem_io_c{little_m, 4})                                .value());
-  EXPECT_EQ(big,    fourcc_c(           new mm_mem_io_c{little_m, 4},        fourcc_c::little_endian).value());
-  EXPECT_EQ(big,    fourcc_c(           new mm_mem_io_c{little_m, 4})                                .value(fourcc_c::little_endian));
-  EXPECT_EQ(little, fourcc_c(           new mm_mem_io_c{little_m, 4},        fourcc_c::little_endian).value(fourcc_c::little_endian));
+  EXPECT_EQ(big,    fourcc_c(mm_io_cptr{new mm_mem_io_c{big_m,    4}}.get())                         .value());
+  EXPECT_EQ(big,    fourcc_c(mm_io_cptr{new mm_mem_io_c{big_m,    4}}.get(), fourcc_c::big_endian)   .value());
+  EXPECT_EQ(big,    fourcc_c(mm_io_cptr{new mm_mem_io_c{big_m,    4}}.get())                         .value(fourcc_c::big_endian));
+  EXPECT_EQ(big,    fourcc_c(mm_io_cptr{new mm_mem_io_c{big_m,    4}}.get(), fourcc_c::big_endian)   .value(fourcc_c::big_endian));
+  EXPECT_EQ(little, fourcc_c(mm_io_cptr{new mm_mem_io_c{little_m, 4}}.get())                         .value());
+  EXPECT_EQ(big,    fourcc_c(mm_io_cptr{new mm_mem_io_c{little_m, 4}}.get(), fourcc_c::little_endian).value());
+  EXPECT_EQ(big,    fourcc_c(mm_io_cptr{new mm_mem_io_c{little_m, 4}}.get())                         .value(fourcc_c::little_endian));
+  EXPECT_EQ(little, fourcc_c(mm_io_cptr{new mm_mem_io_c{little_m, 4}}.get(), fourcc_c::little_endian).value(fourcc_c::little_endian));
 
   auto big_io    = mm_io_cptr{new mm_mem_io_c{big_m,    4}};
   auto little_io = mm_io_cptr{new mm_mem_io_c{little_m, 4}};
