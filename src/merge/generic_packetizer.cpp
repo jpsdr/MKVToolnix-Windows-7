@@ -1242,8 +1242,7 @@ generic_packetizer_c::set_headers() {
   set_tag_track_uid();
   if (m_ti.m_tags) {
     while (m_ti.m_tags->ListSize() != 0) {
-      KaxTag *tag = (KaxTag *)(*m_ti.m_tags)[0];
-      add_tags(tag);
+      add_tags(static_cast<KaxTag &>(*(*m_ti.m_tags)[0]));
       m_ti.m_tags->Remove(0);
     }
   }

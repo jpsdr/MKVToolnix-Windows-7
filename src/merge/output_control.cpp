@@ -364,14 +364,15 @@ display_progress(bool is_100percent = false) {
 /** \brief Add some tags to the list of all tags
 */
 void
-add_tags(KaxTag *tags) {
-  if (tags->ListSize() == 0)
+add_tags(KaxTag &tags) {
+  if (tags.ListSize() == 0) {
     return;
+  }
 
   if (!s_kax_tags)
     s_kax_tags = std::make_unique<KaxTags>();
 
-  s_kax_tags->PushElement(*tags);
+  s_kax_tags->PushElement(tags);
 }
 
 /** \brief Add an attachment

@@ -994,7 +994,7 @@ kax_reader_c::handle_tags(mm_io_c *io,
 
           if (contains_tag) {
             if (!track->tags)
-              track->tags = new KaxTags;
+              track->tags.reset(new KaxTags);
             track->tags->PushElement(*tag);
 
             delete_tag = false;
@@ -1598,7 +1598,7 @@ kax_reader_c::process_global_tags() {
     return;
 
   for (auto tag : *m_tags)
-    add_tags(static_cast<KaxTag *>(tag));
+    add_tags(static_cast<KaxTag &>(*tag));
 
   m_tags->RemoveAll();
 }

@@ -516,7 +516,7 @@ parse_and_add_tags(std::string const &file_name) {
     if (tag) {
       if (!tag->CheckMandatory())
         mxerror(boost::format(Y("Error parsing the tags in '%1%': some mandatory elements are missing.\n")) % file_name);
-      add_tags(tag);
+      add_tags(*tag);
     }
   }
 
