@@ -281,12 +281,10 @@ kax_track_t::discard_track_statistics_tags() {
   if (!tags)
     return;
 
-  mtx::tags::remove_track_statistics(tags, track_uid);
+  mtx::tags::remove_track_statistics(tags.get(), track_uid);
 
-  if (!tags->ListSize()) {
-    delete tags;
-    tags = nullptr;
-  }
+  if (!tags->ListSize())
+    tags.reset();
 }
 
 /*

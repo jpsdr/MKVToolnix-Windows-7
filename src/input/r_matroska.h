@@ -98,7 +98,7 @@ struct kax_track_t {
 
   content_decoder_c content_decoder;
 
-  KaxTags *tags;
+  std::shared_ptr<KaxTags> tags;
 
   int ptzr;
   generic_packetizer_c *ptzr_ptr;
@@ -171,11 +171,6 @@ struct kax_track_t {
     memset(v_fourcc, 0, 5);
     memset(headers, 0, 3 * sizeof(unsigned char *));
     memset(header_sizes, 0, 3 * sizeof(uint32_t));
-  }
-
-  ~kax_track_t() {
-    if (tags)
-      delete tags;
   }
 
   void handle_packetizer_display_dimensions();
