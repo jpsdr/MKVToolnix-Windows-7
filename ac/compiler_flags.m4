@@ -31,27 +31,17 @@ else
   WNO_MAYBE_UNINITIALIZED="-Wno-maybe-uninitialized"
   FSTACK_PROTECTOR="-fstack-protector"
 
+  if check_version 7.0.0 $COMPILER_VERSION ; then
+    WSHADOW_COMPATIBLE_LOCAL="-Wshadow-compatible-local"
+  fi
+
   if check_version 4.9.0 $COMPILER_VERSION ; then
     FSTACK_PROTECTOR="-fstack-protector-strong"
+  fi
 
-  elif check_version 4.8.0 $COMPILER_VERSION ; then
+  if check_version 4.8.0 $COMPILER_VERSION ; then
     WLOGICAL_OP="-Wlogical-op"
   fi
-fi
-
-AC_CACHE_CHECK([for compiler flag -Wshadow-compatible-local], [ax_cv_wshadow_compatible_local],[
-  AC_LANG_PUSH(C++)
-  CXXFLAGS_SAVED="$CXXFLAGS"
-  CXXFLAGS="$CXXFLAGS_SAVED -Wshadow-compatible-local"
-
-  AC_TRY_COMPILE([], [true;], [ax_cv_wshadow_compatible_local="yes"], [ax_cv_wshadow_compatible_local="no"])
-
-  AC_LANG_POP
-  CXXFLAGS="$CXXFLAGS_SAVED"
-])
-
-if test x"$ax_cv_wshadow_compatible_local" = xyes; then
-  WSHADOW_COMPATIBLE_LOCAL="-Wshadow-compatible-local"
 fi
 
 AC_SUBST(FSTACK_PROTECTOR)
