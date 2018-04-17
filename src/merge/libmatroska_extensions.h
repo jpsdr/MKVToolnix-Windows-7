@@ -30,6 +30,7 @@ public:
   kax_cluster_c(): KaxCluster() {
     PreviousTimecode = 0;
   }
+  virtual ~kax_cluster_c();
 
   void delete_non_blocks();
 

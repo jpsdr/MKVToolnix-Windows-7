@@ -46,13 +46,6 @@ cluster_helper_c::cluster_helper_c()
 }
 
 cluster_helper_c::~cluster_helper_c() {
-  // If rendering fails e.g. due to the file system being full, the
-  // cleanup code can run into access-after-free and
-  // free-multiple-times situations due to blocks still being present
-  // in the cluster. Therefore just dump them as cluster_helper_c is a
-  // singleton class.
-  if (m && m->cluster)
-    m->cluster->RemoveAll();
 }
 
 mm_io_c *
