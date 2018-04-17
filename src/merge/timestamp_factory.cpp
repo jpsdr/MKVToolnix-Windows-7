@@ -248,7 +248,6 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
   }
 
   dur_sum = -1;
-  std::pair<int64_t, int64_t> entry;
   for (auto entry : dur_map) {
     if ((0 > dur_sum) || (dur_map[dur_sum] < entry.second))
       dur_sum = entry.first;
@@ -300,7 +299,6 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
   std::string line;
   timestamp_duration_c t;
   std::vector<timestamp_duration_c>::iterator iit;
-  std::vector<timestamp_duration_c>::const_iterator pit;
 
   std::string err_msg_assume = (boost::format(Y("The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n")) % m_file_name).str();
 

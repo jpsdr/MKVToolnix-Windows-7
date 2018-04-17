@@ -899,7 +899,6 @@ render_attachments(mm_io_c &out) {
 */
 void
 check_append_mapping() {
-  std::vector<int64_t>::iterator id;
   std::vector<filelist_cptr>::iterator src_file, dst_file;
 
   for (auto &amap : g_append_mapping) {

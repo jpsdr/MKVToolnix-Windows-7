@@ -88,7 +88,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
   // };
 
   memory_cptr new_seq_hdr;
-  auto seq_hdr_copier = [this, &chunk_type, &seq_hdr_found, &buf, &start_code_pos, &pos, &new_seq_hdr, &size](bool at_end) {
+  auto seq_hdr_copier = [&chunk_type, &seq_hdr_found, &buf, &start_code_pos, &pos, &new_seq_hdr, &size](bool at_end) {
     if ((MPEGVIDEO_SEQUENCE_HEADER_START_CODE != chunk_type) && (MPEGVIDEO_EXT_START_CODE != chunk_type))
       return;
 
