@@ -139,7 +139,7 @@ def setup_globals
   cflags                   = "#{cflags_common} #{c(:USER_CFLAGS)}"
 
   cxxflags                 = "#{cflags_common} #{c(:STD_CXX)}"
-  cxxflags                += " -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-missing-field-initializers -Wshadow-compatible-local #{c(:WNO_MAYBE_UNINITIALIZED)}"
+  cxxflags                += " -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-missing-field-initializers #{c(:WSHADOW_COMPATIBLE_LOCAL)} #{c(:WNO_MAYBE_UNINITIALIZED)}"
   cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:USER_CXXFLAGS)}"
 
   ldflags                  = ""

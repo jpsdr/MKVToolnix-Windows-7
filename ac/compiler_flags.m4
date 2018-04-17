@@ -39,6 +39,21 @@ else
   fi
 fi
 
+AC_CACHE_CHECK([for compiler flag -Wshadow-compatible-local], [ax_cv_wshadow_compatible_local],[
+  AC_LANG_PUSH(C++)
+  CXXFLAGS_SAVED="$CXXFLAGS"
+  CXXFLAGS="$CXXFLAGS_SAVED -Wshadow-compatible-local"
+
+  AC_TRY_COMPILE([], [true;], [ax_cv_wshadow_compatible_local="yes"], [ax_cv_wshadow_compatible_local="no"])
+
+  AC_LANG_POP
+  CXXFLAGS="$CXXFLAGS_SAVED"
+])
+
+if test x"$ax_cv_wshadow_compatible_local" = xyes; then
+  WSHADOW_COMPATIBLE_LOCAL="-Wshadow-compatible-local"
+fi
+
 AC_SUBST(FSTACK_PROTECTOR)
 AC_SUBST(QUNUSED_ARGUMENTS)
 AC_SUBST(WNO_SELF_ASSIGN)
@@ -47,4 +62,5 @@ AC_SUBST(WLOGICAL_OP)
 AC_SUBST(WNO_INCONSISTENT_MISSING_OVERRIDE)
 AC_SUBST(WNO_POTENTIALLY_EVALUATED_EXPRESSION)
 AC_SUBST(WNO_MAYBE_UNINITIALIZED)
+AC_SUBST(WSHADOW_COMPATIBLE_LOCAL)
 AC_SUBST(LLVM_LLD)
