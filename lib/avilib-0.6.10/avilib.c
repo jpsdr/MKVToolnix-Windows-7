@@ -1972,6 +1972,15 @@ int AVI_close(avi_t *AVI)
        }
    }
 
+   for (j=0; j<AVI->tnum; j++) 
+   {
+       if(AVI->ttrack[j].audio_index) free(AVI->ttrack[j].audio_index);
+       if(AVI->ttrack[j].audio_superindex) {
+	   if(AVI->ttrack[j].audio_superindex->aIndex) free(AVI->ttrack[j].audio_superindex->aIndex);
+	   free(AVI->ttrack[j].audio_superindex);
+       }
+   }
+
    if (AVI->bitmap_info_header)
      free(AVI->bitmap_info_header);
    for (j = 0; j < AVI->anum; j++)
