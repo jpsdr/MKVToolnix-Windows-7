@@ -328,7 +328,7 @@ Tab::readFileEndTimestampForMatroska() {
   kax_file_c fileKax{fileIo};
   fileKax.enable_reporting(false);
 
-  auto cluster = std::shared_ptr<KaxCluster>(fileKax.read_next_cluster());
+  auto cluster = fileKax.read_next_cluster();
   if (!cluster) {
     qDebug() << "readFileEndTimestampForMatroska: no cluster found";
     return true;

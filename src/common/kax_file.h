@@ -42,13 +42,13 @@ public:
   virtual bool is_level1_element_id(vint_c id) const;
   virtual bool is_global_element_id(vint_c id) const;
 
-  virtual EbmlElement *read_next_level1_element(uint32_t wanted_id = 0, bool report_cluster_timestamp = false);
-  virtual KaxCluster *read_next_cluster();
+  virtual std::shared_ptr<EbmlElement> read_next_level1_element(uint32_t wanted_id = 0, bool report_cluster_timestamp = false);
+  virtual std::shared_ptr<KaxCluster> read_next_cluster();
 
-  virtual EbmlElement *resync_to_level1_element(uint32_t wanted_id = 0);
-  virtual KaxCluster *resync_to_cluster();
+  virtual std::shared_ptr<EbmlElement> resync_to_level1_element(uint32_t wanted_id = 0);
+  virtual std::shared_ptr<KaxCluster> resync_to_cluster();
 
-  static unsigned long get_element_size(EbmlElement *e);
+  static unsigned long get_element_size(EbmlElement &e);
 
   virtual void set_timestamp_scale(int64_t timestamp_scale);
   virtual void set_last_timestamp(int64_t last_timestamp);
@@ -58,10 +58,10 @@ public:
   virtual void enable_reporting(bool enable);
 
 protected:
-  virtual EbmlElement *read_one_element();
+  virtual std::shared_ptr<EbmlElement> read_one_element();
 
-  virtual EbmlElement *read_next_level1_element_internal(uint32_t wanted_id = 0);
-  virtual EbmlElement *resync_to_level1_element_internal(uint32_t wanted_id = 0);
+  virtual std::shared_ptr<EbmlElement> read_next_level1_element_internal(uint32_t wanted_id = 0);
+  virtual std::shared_ptr<EbmlElement> resync_to_level1_element_internal(uint32_t wanted_id = 0);
 
   virtual void report(boost::format const &message);
   virtual void report(std::string const &message);

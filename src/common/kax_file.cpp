@@ -42,7 +42,7 @@ kax_file_c::kax_file_c(mm_io_c &in)
 kax_file_c::~kax_file_c() {
 }
 
-EbmlElement *
+std::shared_ptr<EbmlElement>
 kax_file_c::read_next_level1_element(uint32_t wanted_id,
                                      bool report_cluster_timestamp) {
   try {
@@ -50,7 +50,7 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
 
     if (element && report_cluster_timestamp && (-1 != m_timestamp_scale) && (EBML_ID_VALUE(EBML_ID(KaxCluster)) == wanted_id))
       report(boost::format(Y("The first cluster timestamp after the resync is %1%.\n"))
-             % format_timestamp(FindChildValue<KaxClusterTimecode>(static_cast<KaxCluster *>(element)) * m_timestamp_scale));
+             % format_timestamp(FindChildValue<KaxClusterTimecode>(static_cast<KaxCluster *>(element.get())) * m_timestamp_scale));
 
     return element;
 
@@ -72,7 +72,7 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
   return nullptr;
 }
 
-EbmlElement *
+std::shared_ptr<EbmlElement>
 kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
   if (m_segment_end && (m_in.getFilePointer() >= m_segment_end))
     return nullptr;
@@ -113,15 +113,13 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
     auto l1 = read_one_element();
 
     if (l1) {
-      auto element_size = get_element_size(l1);
+      auto element_size = get_element_size(*l1);
       auto ok           = (0 != element_size) && m_in.setFilePointer2(l1->GetElementPosition() + element_size, seek_beginning);
 
       if (m_debug_read_next)
         mxinfo(boost::format("kax_file::read_next_level1_element(): other level 1 element %1% new pos %2% fsize %3% epos %4% esize %5%\n")
                % EBML_NAME(l1)  % (l1->GetElementPosition() + element_size) % m_file_size
                % l1->GetElementPosition() % element_size);
-
-      delete l1;
 
       return ok ? read_next_level1_element(wanted_id) : nullptr;
     }
@@ -134,16 +132,16 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
   return resync_to_level1_element(wanted_id);
 }
 
-EbmlElement *
+std::shared_ptr<EbmlElement>
 kax_file_c::read_one_element() {
   if (m_segment_end && (m_in.getFilePointer() >= m_segment_end))
     return nullptr;
 
   auto upper_lvl_el = 0;
-  auto l1           = m_es->FindNextElement(EBML_CLASS_CONTEXT(KaxSegment), upper_lvl_el, 0xFFFFFFFFL, true);
+  auto l1           = std::shared_ptr<EbmlElement>{m_es->FindNextElement(EBML_CLASS_CONTEXT(KaxSegment), upper_lvl_el, 0xFFFFFFFFL, true)};
 
   if (!l1)
-    return nullptr;
+    return {};
 
   auto callbacks = find_ebml_callbacks(EBML_INFO(KaxSegment), EbmlId(*l1));
   if (!callbacks)
@@ -152,15 +150,18 @@ kax_file_c::read_one_element() {
   auto l2 = static_cast<EbmlElement *>(nullptr);
   try {
     l1->Read(*m_es.get(), EBML_INFO_CONTEXT(*callbacks), upper_lvl_el, l2, true);
+    if (!found_in(*l1, l2))
+      delete l2;
 
   } catch (std::runtime_error &e) {
     mxdebug_if(m_debug_resync, boost::format("exception reading element data: %1%\n") % e.what());
     m_in.setFilePointer(l1->GetElementPosition() + 1);
-    delete l1;
-    return nullptr;
+    if (!found_in(*l1, l2))
+      delete l2;
+    return {};
   }
 
-  auto element_size = get_element_size(l1);
+  auto element_size = get_element_size(*l1);
   if (m_debug_resync)
     mxinfo(boost::format("kax_file::read_one_element(): read element at %1% calculated size %2% stored size %3%\n")
            % l1->GetElementPosition() % element_size % (l1->IsFiniteSize() ? (boost::format("%1%") % l1->ElementSize()).str() : std::string("unknown")));
@@ -185,21 +186,21 @@ kax_file_c::is_global_element_id(vint_c id) const {
     ||   (EBML_ID_VALUE(EBML_ID(EbmlCrc32)) == id.m_value);
 }
 
-EbmlElement *
+std::shared_ptr<EbmlElement>
 kax_file_c::resync_to_level1_element(uint32_t wanted_id) {
   try {
     return resync_to_level1_element_internal(wanted_id);
   } catch (...) {
     if (m_debug_resync)
       mxinfo("kax_file::resync_to_level1_element(): exception\n");
-    return nullptr;
+    return {};
   }
 }
 
-EbmlElement *
+std::shared_ptr<EbmlElement>
 kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
   if (m_segment_end && (m_in.getFilePointer() >= m_segment_end))
-    return nullptr;
+    return {};
 
   m_resynced         = true;
   m_resync_start_pos = m_in.getFilePointer();
@@ -284,17 +285,17 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
 
   report(Y("Resync failed: no valid Matroska level 1 element found.\n"));
 
-  return nullptr;
+  return {};
 }
 
-KaxCluster *
+std::shared_ptr<KaxCluster>
 kax_file_c::resync_to_cluster() {
-  return static_cast<KaxCluster *>(resync_to_level1_element(EBML_ID_VALUE(EBML_ID(KaxCluster))));
+  return std::static_pointer_cast<KaxCluster>(resync_to_level1_element(EBML_ID_VALUE(EBML_ID(KaxCluster))));
 }
 
-KaxCluster *
+std::shared_ptr<KaxCluster>
 kax_file_c::read_next_cluster() {
-  return static_cast<KaxCluster *>(read_next_level1_element(EBML_ID_VALUE(EBML_ID(KaxCluster))));
+  return std::static_pointer_cast<KaxCluster>(read_next_level1_element(EBML_ID_VALUE(EBML_ID(KaxCluster))));
 }
 
 bool
@@ -308,17 +309,17 @@ kax_file_c::get_resync_start_pos() const {
 }
 
 unsigned long
-kax_file_c::get_element_size(EbmlElement *e) {
-  auto m = dynamic_cast<EbmlMaster *>(e);
+kax_file_c::get_element_size(EbmlElement &e) {
+  auto m = dynamic_cast<EbmlMaster *>(&e);
 
-  if (!m || e->IsFiniteSize())
-    return e->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*e)) + e->GetSize();
+  if (!m || e.IsFiniteSize())
+    return e.GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(e)) + e.GetSize();
 
-  auto max_end_pos = e->GetElementPosition() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*e));
+  auto max_end_pos = e.GetElementPosition() + EBML_ID_LENGTH(static_cast<const EbmlId &>(e));
   for (int idx = 0, end = m->ListSize(); end > idx; ++idx)
-    max_end_pos = std::max(max_end_pos, (*m)[idx]->GetElementPosition() + get_element_size((*m)[idx]));
+    max_end_pos = std::max(max_end_pos, (*m)[idx]->GetElementPosition() + get_element_size(*(*m)[idx]));
 
-  return max_end_pos - e->GetElementPosition();
+  return max_end_pos - e.GetElementPosition();
 }
 
 void

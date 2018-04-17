@@ -1137,7 +1137,7 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   ui_show_element(*l0);
 
   auto p        = p_func();
-  auto l1       = static_cast<EbmlElement *>(nullptr);
+  auto l1       = std::shared_ptr<EbmlElement>{};
   auto kax_file = std::make_shared<kax_file_c>(*p->m_in);
   p->m_level    = 1;
 
@@ -1147,18 +1147,16 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   kax_file->set_timestamp_scale(-1);
 
   while ((l1 = kax_file->read_next_level1_element())) {
-    std::shared_ptr<EbmlElement> af_l1(l1);
+    retain_element(l1);
 
-    retain_element(af_l1);
-
-    if (Is<KaxCluster>(l1) && (p->m_verbose == 0) && !p->m_show_summary) {
+    if (Is<KaxCluster>(*l1) && (p->m_verbose == 0) && !p->m_show_summary) {
       ui_show_element(*l1);
       return result_e::succeeded;
 
     } else
       handle_elements_generic(*l1);
 
-    if (!p->m_in->setFilePointer2(l1->GetElementPosition() + kax_file->get_element_size(l1)))
+    if (!p->m_in->setFilePointer2(l1->GetElementPosition() + kax_file->get_element_size(*l1)))
       break;
     if (!in_parent(l0))
       break;

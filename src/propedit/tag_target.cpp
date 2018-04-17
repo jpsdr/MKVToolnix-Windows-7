@@ -354,7 +354,7 @@ tag_target_c::account_all_clusters() {
   mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 0 % "\r");
 
   while (true) {
-    auto cluster = std::unique_ptr<KaxCluster>{kax_file->read_next_cluster()};
+    auto cluster = kax_file->read_next_cluster();
     if (!cluster)
       break;
 

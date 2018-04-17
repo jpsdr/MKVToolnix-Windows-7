@@ -1533,7 +1533,7 @@ kax_reader_c::read_headers_internal() {
     m_tc_scale = TIMESTAMP_SCALE;
 
     while (m_in->getFilePointer() < m_in_file->get_segment_end()) {
-      auto l1 = ebml_element_cptr{ m_in_file->read_next_level1_element() };
+      auto l1 = m_in_file->read_next_level1_element();
       if (!l1)
         break;
 
@@ -2150,7 +2150,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
 
   try {
     while (true) {
-      auto cluster = std::unique_ptr<KaxCluster>{m_in_file->read_next_cluster()};
+      auto cluster = m_in_file->read_next_cluster();
       if (!cluster)
         return;
 
@@ -2232,7 +2232,7 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
   }
 
   try {
-    auto cluster = std::shared_ptr<KaxCluster>(m_in_file->read_next_cluster());
+    auto cluster = m_in_file->read_next_cluster();
     if (!cluster) {
       flush_packetizers();
 
@@ -2560,7 +2560,7 @@ kax_reader_c::determine_minimum_timestamps() {
 
   while (true) {
     try {
-      auto cluster = std::shared_ptr<KaxCluster>(m_in_file->read_next_cluster());
+      auto cluster = m_in_file->read_next_cluster();
       if (!cluster)
         return;
 

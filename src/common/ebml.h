@@ -446,3 +446,5 @@ std::shared_ptr<T>
 clone(std::unique_ptr<T> const &e) {
   return clone(*e);
 }
+
+bool found_in(EbmlElement &haystack, EbmlElement const *needle);

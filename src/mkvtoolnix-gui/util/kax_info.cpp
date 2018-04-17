@@ -177,7 +177,7 @@ KaxInfo::doScanLevel1Elements() {
       if (upper_lvl_el)
         break;
 
-      p->m_in->setFilePointer(l1->GetElementPosition() + kax_file_c::get_element_size(l1.get()));
+      p->m_in->setFilePointer(l1->GetElementPosition() + kax_file_c::get_element_size(*l1));
     }
 
   } catch (mtx::mm_io::exception &ex) {

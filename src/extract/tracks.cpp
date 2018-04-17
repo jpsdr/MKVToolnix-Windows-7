@@ -495,7 +495,7 @@ extract_tracks(kax_analyzer_c &analyzer,
     file->set_segment_end(*l0);
 
     while (true) {
-      auto cluster = std::unique_ptr<KaxCluster>{file->read_next_cluster()};
+      auto cluster = file->read_next_cluster();
       if (!cluster)
         break;
 

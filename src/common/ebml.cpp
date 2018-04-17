@@ -662,3 +662,27 @@ bool
 must_be_present_in_master(EbmlElement const &element) {
   return must_be_present_in_master(element.Generic());
 }
+
+bool
+found_in(EbmlElement &haystack,
+         EbmlElement const *needle) {
+  if (!needle)
+    return false;
+
+  if (needle == &haystack)
+    return true;
+
+  auto master = dynamic_cast<EbmlMaster *>(&haystack);
+  if (!master)
+    return false;
+
+  for (auto &child : *master) {
+    if (child == needle)
+      return true;
+
+    if (dynamic_cast<EbmlMaster *>(child) && found_in(*child, needle))
+      return true;
+  }
+
+  return false;
+}
