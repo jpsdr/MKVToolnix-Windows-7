@@ -960,6 +960,9 @@ kax_reader_c::handle_tags(mm_io_c *io,
   upper_lvl_el    = 0;
 
   tags->Read(*m_es, EBML_CLASS_CONTEXT(KaxTags), upper_lvl_el, l2, true);
+  if (l2)
+    delete l2;
+
 
   while (tags->ListSize() > 0) {
     if (!Is<KaxTag>((*tags)[0])) {
