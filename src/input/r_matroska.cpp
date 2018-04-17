@@ -872,6 +872,7 @@ kax_reader_c::handle_attachments(mm_io_c *io,
   upper_lvl_el               = 0;
 
   atts->Read(*m_es, EBML_CLASS_CONTEXT(KaxAttachments), upper_lvl_el, element_found, true);
+  delete element_found;
 
   for (auto l1_att : *atts) {
     auto att = dynamic_cast<KaxAttached *>(l1_att);
@@ -924,10 +925,11 @@ kax_reader_c::handle_chapters(mm_io_c *io,
   if (!tmp_chapters)
     return;
 
-  EbmlElement *l2 = nullptr;
-  upper_lvl_el    = 0;
+  EbmlElement *element_found = nullptr;
+  upper_lvl_el               = 0;
 
-  tmp_chapters->Read(*m_es, EBML_CLASS_CONTEXT(KaxChapters), upper_lvl_el, l2, true);
+  tmp_chapters->Read(*m_es, EBML_CLASS_CONTEXT(KaxChapters), upper_lvl_el, element_found, true);
+  delete element_found;
 
   if (m_regenerate_chapter_uids)
     mtx::chapters::regenerate_uids(*tmp_chapters);
@@ -956,13 +958,11 @@ kax_reader_c::handle_tags(mm_io_c *io,
   if (!tags)
     return;
 
-  EbmlElement *l2 = nullptr;
-  upper_lvl_el    = 0;
+  EbmlElement *element_found = nullptr;
+  upper_lvl_el               = 0;
 
-  tags->Read(*m_es, EBML_CLASS_CONTEXT(KaxTags), upper_lvl_el, l2, true);
-  if (l2)
-    delete l2;
-
+  tags->Read(*m_es, EBML_CLASS_CONTEXT(KaxTags), upper_lvl_el, element_found, true);
+  delete element_found;
 
   while (tags->ListSize() > 0) {
     if (!Is<KaxTag>((*tags)[0])) {
@@ -1040,10 +1040,11 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   if (!info)
     return;
 
-  EbmlElement *l2 = nullptr;
-  upper_lvl_el    = 0;
+  EbmlElement *element_found = nullptr;
+  upper_lvl_el               = 0;
 
-  info->Read(*m_es, EBML_CLASS_CONTEXT(KaxInfo), upper_lvl_el, l2, true);
+  info->Read(*m_es, EBML_CLASS_CONTEXT(KaxInfo), upper_lvl_el, element_found, true);
+  delete element_found;
 
   m_tc_scale          = FindChildValue<KaxTimecodeScale, uint64_t>(info, 1000000);
   m_segment_duration  = std::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
@@ -1250,20 +1251,20 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
 
   int upper_lvl_el = 0;
   io->save_pos(position);
-  EbmlElement *l1 = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true);
+  auto l1 = std::shared_ptr<EbmlElement>(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
 
-  if (!l1 || !Is<KaxTracks>(l1)) {
-    delete l1;
+  if (!l1 || !Is<KaxTracks>(*l1)) {
     io->restore_pos();
 
     return;
   }
 
-  EbmlElement *l2 = nullptr;
-  upper_lvl_el    = 0;
-  l1->Read(*m_es, EBML_CLASS_CONTEXT(KaxTracks), upper_lvl_el, l2, true);
+  EbmlElement *element_found = nullptr;
+  upper_lvl_el               = 0;
+  l1->Read(*m_es, EBML_CLASS_CONTEXT(KaxTracks), upper_lvl_el, element_found, true);
+  delete element_found;
 
-  KaxTrackEntry *ktentry = FindChild<KaxTrackEntry>(l1);
+  KaxTrackEntry *ktentry = FindChild<KaxTrackEntry>(*l1);
   while (ktentry) {
     // We actually found a track entry :) We're happy now.
     auto track = std::make_shared<kax_track_t>();
@@ -1359,7 +1360,6 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     ktentry = FindNextChild(static_cast<EbmlMaster &>(*l1), *ktentry);
   } // while (ktentry)
 
-  delete l1;
   io->restore_pos();
 }
 
@@ -1383,10 +1383,11 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
     if (!seek_head)
       return;
 
-    EbmlElement *l2 = nullptr;
-    upper_lvl_el    = 0;
+    EbmlElement *element_found = nullptr;
+    upper_lvl_el               = 0;
 
-    seek_head->Read(*m_es, EBML_CLASS_CONTEXT(KaxSeekHead), upper_lvl_el, l2, true);
+    seek_head->Read(*m_es, EBML_CLASS_CONTEXT(KaxSeekHead), upper_lvl_el, element_found, true);
+    delete element_found;
 
     for (auto l2 : *seek_head) {
       if (!Is<KaxSeek>(l2))
@@ -1504,7 +1505,7 @@ kax_reader_c::read_headers_internal() {
     m_in_file->enable_reporting(!g_identifying);
 
     // Find the EbmlHead element. Must be the first one.
-    EbmlElement *l0 = m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFFFFFFFFFLL);
+    auto l0 = std::shared_ptr<EbmlElement>(m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFFFFFFFFFLL));
     if (!l0) {
       mxwarn(Y("matroska_reader: no EBML head found.\n"));
       return false;
@@ -1512,17 +1513,15 @@ kax_reader_c::read_headers_internal() {
 
     // Don't verify its data for now.
     l0->SkipData(*m_es, EBML_CONTEXT(l0));
-    delete l0;
 
     // Next element must be a segment
-    l0 = m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL);
-    std::shared_ptr<EbmlElement> l0_cptr(l0);
+    l0.reset(m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL));
     if (!l0) {
       if (verbose)
         mxwarn(Y("matroska_reader: No segment found.\n"));
       return false;
     }
-    if (!Is<KaxSegment>(l0)) {
+    if (!Is<KaxSegment>(*l0)) {
       if (verbose)
         mxwarn(Y("matroska_reader: No segment found.\n"));
       return false;
@@ -1554,7 +1553,7 @@ kax_reader_c::read_headers_internal() {
         m_deferred_l1_positions[dl1t_tags].push_back(l1->GetElementPosition());
 
       else if (Is<KaxSeekHead>(*l1))
-        handle_seek_head(m_in.get(), l0, l1->GetElementPosition());
+        handle_seek_head(m_in.get(), l0.get(), l1->GetElementPosition());
 
       else if (Is<KaxCluster>(*l1))
         cluster = std::static_pointer_cast<KaxCluster>(l1);
@@ -2233,7 +2232,7 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
   }
 
   try {
-    KaxCluster *cluster = m_in_file->read_next_cluster();
+    auto cluster = std::shared_ptr<KaxCluster>(m_in_file->read_next_cluster());
     if (!cluster) {
       flush_packetizers();
 
@@ -2241,7 +2240,7 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
       return FILE_STATUS_DONE;
     }
 
-    auto cluster_ts = FindChildValue<KaxClusterTimecode>(cluster);
+    auto cluster_ts = FindChildValue<KaxClusterTimecode>(*cluster);
     cluster->InitTimecode(cluster_ts, m_tc_scale);
 
     if (-1 == m_first_timestamp) {
@@ -2258,13 +2257,11 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
       EbmlElement *element = (*cluster)[bgidx];
 
       if (Is<KaxSimpleBlock>(element))
-        process_simple_block(cluster, static_cast<KaxSimpleBlock *>(element));
+        process_simple_block(cluster.get(), static_cast<KaxSimpleBlock *>(element));
 
       else if (Is<KaxBlockGroup>(element))
-        process_block_group(cluster, static_cast<KaxBlockGroup *>(element));
+        process_block_group(cluster.get(), static_cast<KaxBlockGroup *>(element));
     }
-
-    delete cluster;
 
   } catch (...) {
     mxwarn(boost::format("%1% %2% %3%\n")
