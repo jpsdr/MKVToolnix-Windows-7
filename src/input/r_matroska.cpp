@@ -872,7 +872,8 @@ kax_reader_c::handle_attachments(mm_io_c *io,
   upper_lvl_el               = 0;
 
   atts->Read(*m_es, EBML_CLASS_CONTEXT(KaxAttachments), upper_lvl_el, element_found, true);
-  delete element_found;
+  if (!found_in(*atts, element_found))
+    delete element_found;
 
   for (auto l1_att : *atts) {
     auto att = dynamic_cast<KaxAttached *>(l1_att);
@@ -929,7 +930,8 @@ kax_reader_c::handle_chapters(mm_io_c *io,
   upper_lvl_el               = 0;
 
   tmp_chapters->Read(*m_es, EBML_CLASS_CONTEXT(KaxChapters), upper_lvl_el, element_found, true);
-  delete element_found;
+  if (!found_in(*tmp_chapters, element_found))
+    delete element_found;
 
   if (m_regenerate_chapter_uids)
     mtx::chapters::regenerate_uids(*tmp_chapters);
@@ -962,7 +964,8 @@ kax_reader_c::handle_tags(mm_io_c *io,
   upper_lvl_el               = 0;
 
   tags->Read(*m_es, EBML_CLASS_CONTEXT(KaxTags), upper_lvl_el, element_found, true);
-  delete element_found;
+  if (!found_in(*tags, element_found))
+    delete element_found;
 
   while (tags->ListSize() > 0) {
     if (!Is<KaxTag>((*tags)[0])) {
@@ -1044,7 +1047,8 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   upper_lvl_el               = 0;
 
   info->Read(*m_es, EBML_CLASS_CONTEXT(KaxInfo), upper_lvl_el, element_found, true);
-  delete element_found;
+  if (!found_in(*info, element_found))
+    delete element_found;
 
   m_tc_scale          = FindChildValue<KaxTimecodeScale, uint64_t>(info, 1000000);
   m_segment_duration  = std::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
@@ -1262,7 +1266,8 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
   EbmlElement *element_found = nullptr;
   upper_lvl_el               = 0;
   l1->Read(*m_es, EBML_CLASS_CONTEXT(KaxTracks), upper_lvl_el, element_found, true);
-  delete element_found;
+  if (!found_in(*l1, element_found))
+    delete element_found;
 
   KaxTrackEntry *ktentry = FindChild<KaxTrackEntry>(*l1);
   while (ktentry) {
@@ -1387,7 +1392,8 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
     upper_lvl_el               = 0;
 
     seek_head->Read(*m_es, EBML_CLASS_CONTEXT(KaxSeekHead), upper_lvl_el, element_found, true);
-    delete element_found;
+    if (!found_in(*seek_head, element_found))
+      delete element_found;
 
     for (auto l2 : *seek_head) {
       if (!Is<KaxSeek>(l2))
