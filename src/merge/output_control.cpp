@@ -366,6 +366,7 @@ display_progress(bool is_100percent = false) {
 void
 add_tags(KaxTag &tags) {
   if (tags.ListSize() == 0) {
+    delete &tags;
     return;
   }
 
