@@ -36,16 +36,8 @@
   the last period instead of only up to the first period. Fixes #2276.
 * mkvmerge: MP3 packetizer: removed a memory leak growing linearly with the
   track's size.
-* mkvmerge: Vorbis packetizer: removed a small, constant-size memory leak.
-* mkvpropedit: removed a small, constant-size memory leak when deleting
-  properties.
-* mkvmerge: chapter handling: removed a small, constant-size memory leak.
-* mkvmerge, mkvextract: AVI handling: removed a small, constant-size memory
-  leak when dealing with indexes in AVIs.
-* mkvmerge: Ogg/OGM reader: removed a small, constant-size memory leak when
-  dealing with Vorbis comments.
-* mkvmerge: chapter & tag reader: removed a small, constant-size memory leak
-  in error cases.
+* mkvmerge, mkvextract, mkvpropedit: removed several small, constant-size
+  memory leaks.
 
 ## Build system changes
 
