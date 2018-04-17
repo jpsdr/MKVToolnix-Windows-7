@@ -106,7 +106,8 @@ xtr_tta_c::finish_file() {
 
   mxinfo(boost::format(Y("\nThe temporary TTA file for track ID %1% is being copied into the final TTA file. This may take some time.\n")) % m_tid);
 
-  buffer = (unsigned char *)safemalloc(128000);
+  auto mem = memory_c::alloc(128000);
+  buffer   = mem->get_buffer();
   int nread;
   do {
     nread = in->read(buffer, 128000);
