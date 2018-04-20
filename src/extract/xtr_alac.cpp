@@ -53,21 +53,21 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
 
   xtr_base_c::create_file(master, track);
 
-  m_out->write("caff"s);                             // mFileType
-  m_out->write_uint16_be(1);                                     // mFileVersion
-  m_out->write_uint16_be(0);                                     // mFileFlags
+  m_out->write("caff"s);                                             // mFileType
+  m_out->write_uint16_be(1);                                         // mFileVersion
+  m_out->write_uint16_be(0);                                         // mFileFlags
 
-  m_out->write("desc"s);                             // Audio Description chunk
-  m_out->write_uint64_be(32ULL);                                 // mChunkSize
-  m_out->write_double(static_cast<int>(kt_get_a_sfreq(track)));  // mSampleRate
-  m_out->write("alac"s);                             // mFormatID
-  m_out->write_uint32_be(0);                                     // mFormatFlags
-  m_out->write_uint32_be(0);                                     // mBytesPerPacket
-  m_out->write_uint32_be(mtx::caf::defs::default_frames_per_packet);  // mFramesPerPacket
-  m_out->write_uint32_be(channels);                              // mChannelsPerFrame
-  m_out->write_uint32_be(0);                                     // mBitsPerChannel
+  m_out->write("desc"s);                                             // Audio Description chunk
+  m_out->write_uint64_be(32ULL);                                     // mChunkSize
+  m_out->write_double(static_cast<int>(kt_get_a_sfreq(track)));      // mSampleRate
+  m_out->write("alac"s);                                             // mFormatID
+  m_out->write_uint32_be(0);                                         // mFormatFlags
+  m_out->write_uint32_be(0);                                         // mBytesPerPacket
+  m_out->write_uint32_be(mtx::caf::defs::default_frames_per_packet); // mFramesPerPacket
+  m_out->write_uint32_be(channels);                                  // mChannelsPerFrame
+  m_out->write_uint32_be(0);                                         // mBitsPerChannel
 
-  auto kuki_size = 12 + 36 + 8 + (2 < channels ? 24 : 0);        // add the size of ALACChannelLayoutInfo for more than 2 channels
+  auto kuki_size = 12 + 36 + 8 + (2 < channels ? 24 : 0);            // add the size of ALACChannelLayoutInfo for more than 2 channels
   m_out->write("kuki"s);
   m_out->write_uint64_be(kuki_size);
   m_out->write_uint8('\0');
@@ -78,10 +78,10 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
   m_out->write("alac"s);
 
   m_out->write_uint32_be(12 + sizeof(mtx::alac::codec_config_t)); // ALAC Specific Info size = 36 (12 + sizeof(ALAXSpecificConfig))
-  m_out->write("alac"s);                             // ALAC Specific Info ID
-  m_out->write_uint32_be(0L);                                    // Version Flags
+  m_out->write("alac"s);                                          // ALAC Specific Info ID
+  m_out->write_uint32_be(0L);                                     // Version Flags
 
-  m_out->write(m_priv);                                          // audio specific config
+  m_out->write(m_priv);                                           // audio specific config
 
   auto alo = mtx::caf::channel_layout_t();
   if (2 < channels) {
@@ -128,12 +128,12 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
   }
 
   // Terminator atom
-  m_out->write_uint32_be(8);        // Channel Layout Info Size
-  m_out->write_uint32_be(0);        // Channel Layout Info ID
+  m_out->write_uint32_be(8);       // Channel Layout Info Size
+  m_out->write_uint32_be(0);       // Channel Layout Info ID
 
   if (2 < channels) {
-    m_out->write("chan"s); // 'chan' chunk immediately following the kuki
-    m_out->write_uint64_be(12ULL);     // = sizeof(ALACAudioChannelLayout)
+    m_out->write("chan"s);         // 'chan' chunk immediately following the kuki
+    m_out->write_uint64_be(12ULL); // = sizeof(ALACAudioChannelLayout)
 
     m_out->write_uint32_be(alo.channel_layout_tag);
     m_out->write_uint32_be(alo.channel_bitmap);
