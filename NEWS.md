@@ -44,6 +44,10 @@
 * Windows: linking against and installing shared version of the libraries with
   MXE is now supported by setting `configure`'s `host` triplet accordingly,
   e.g. `--host=x86_64-w64-mingw32.shared`.
+* build system: MKVToolNix now requires a compiler that supports the following
+  features of the C++14 standard: "user-defined literals for
+  `std::string`". For the GNU Compiler Collection (gcc) this means v5.x or
+  newer; for clang it means v3.4 or newer.
 
 
 # Version 22.0.0 "At The End Of The World" 2018-04-01
