@@ -349,6 +349,32 @@ AC_DEFUN([AX_CXX14_GENERIC_LAMBDAS],[
   fi
 ])
 
+AC_DEFUN([AX_CXX14_USER_DEFINED_LITERALS_FOR_STD_STRING],[
+  AC_CACHE_CHECK([for support for C++14 feature "User-defined literals for std::string"], [ax_cv_cxx14_user_defined_literals_for_std_string],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [
+#include <string>
+using namespace std::string_literals;
+      ],
+      [return "hello"s.length();],
+      [ax_cv_cxx14_user_defined_literals_for_std_string="yes"],
+      [ax_cv_cxx14_user_defined_literals_for_std_string="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx14_user_defined_literals_for_std_string" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * User-defined literals for std::string (C++14)"
+  fi
+])
+
 dnl AC_DEFUN([AX_CXX14_DEF_NAME],[
 dnl   AC_CACHE_CHECK([for support for C++14 feature "human"], [ax_cv_cxx14_def_name],[
 dnl
@@ -385,10 +411,11 @@ AX_CXX14_MAKE_UNIQUE
 AX_CXX14_DIGIT_SEPARATORS
 AX_CXX14_BINARY_LITERALS
 AX_CXX14_GENERIC_LAMBDAS
+AX_CXX14_USER_DEFINED_LITERALS_FOR_STD_STRING
 
 if test x"$missing_cxx_features" != x ; then
   printf "The following features of the C++11/C++14 standards are not supported by $CXX:$missing_cxx_features\n"
-  printf "If you are using the GNU C compiler collection (gcc) then you need\n"
-  printf "at least v4.9.x.\n"
+  printf "If you are using the GNU C compiler collection (gcc), you need\n"
+  printf "at least v5.x; for clang the 3.4 and newer should work.\n"
   AC_MSG_ERROR([support for required C++11/C++14 features incomplete])
 fi

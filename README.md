@@ -72,11 +72,11 @@ programs and libraries you absolutely need are:
 
 - A C++ compiler that supports several features of the C++11 and C++14
   standards: initializer lists, range-based `for` loops, right angle
-  brackets, the `auto` keyword, lambda functions, the `nullptr` keyword,
-  tuples, alias declarations, `std::make_unique()`, digit
-  separators, binary literals and generic lambdas. Others may be
-  needed, too. For GCC this means at least v4.9.x; for clang v3.4 or
-  later.
+  brackets, the `auto` keyword, lambda functions, the `nullptr`
+  keyword, tuples, alias declarations, `std::make_unique()`, digit
+  separators, binary literals, generic lambdas, user-defined literals
+  for `std::string`. Others may be needed, too. For GCC this means at
+  least v5.x; for clang v3.4 or later.
 
 - [libEBML v1.3.5](http://dl.matroska.org/downloads/libebml/) or later
   and [libMatroska v1.4.8](http://dl.matroska.org/downloads/libmatroska/)
