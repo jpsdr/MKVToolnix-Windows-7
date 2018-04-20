@@ -1124,7 +1124,7 @@ format_name_template(std::string const &name_template,
   });
 
   name = boost::regex_replace(name, timestamp_re, [=](boost::smatch const &match) {
-    auto format = match[1].length() ? match[1] : std::string{"%H:%M:%S"};
+    auto format = match[1].length() ? match[1] : "%H:%M:%S"s;
     return format_timestamp(start_timestamp.to_ns(), format);
   });
 

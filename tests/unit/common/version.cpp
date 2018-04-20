@@ -133,17 +133,17 @@ TEST(VersionNumberT, LessThan) {
 }
 
 TEST(VersionNumberT, Stringification) {
-  EXPECT_EQ(std::string{"<invalid>"},       version_number_t{}                                   .to_string());
-  EXPECT_EQ(std::string{"<invalid>"},       version_number_t{""}                                 .to_string());
-  EXPECT_EQ(std::string{"1.2.3"},           version_number_t{"1.2.3"}                            .to_string());
-  EXPECT_EQ(std::string{"1.2.3.0"},         version_number_t{"1.2.3.0"}                          .to_string());
-  EXPECT_EQ(std::string{"1.2.3.0"},         version_number_t{"1.2.3.0 build 0"}                  .to_string());
-  EXPECT_EQ(std::string{"1.2.3.4"},         version_number_t{"1.2.3.4"}                          .to_string());
-  EXPECT_EQ(std::string{"1.2.3 build 5"},   version_number_t{"1.2.3 build 5"}                    .to_string());
-  EXPECT_EQ(std::string{"1.2.3.0 build 5"}, version_number_t{"1.2.3.0 build 5"}                  .to_string());
-  EXPECT_EQ(std::string{"1.2.3.0 build 5"}, version_number_t{"mkvmerge v1.2.3.0-build20170422-5"}.to_string());
-  EXPECT_EQ(std::string{"11"},              version_number_t{"11"}                               .to_string());
-  EXPECT_EQ(std::string{"11 build 1213"},   version_number_t{"11 build 1213"}                    .to_string());
+  EXPECT_EQ("<invalid>"s,       version_number_t{}                                   .to_string());
+  EXPECT_EQ("<invalid>"s,       version_number_t{""}                                 .to_string());
+  EXPECT_EQ("1.2.3"s,           version_number_t{"1.2.3"}                            .to_string());
+  EXPECT_EQ("1.2.3.0"s,         version_number_t{"1.2.3.0"}                          .to_string());
+  EXPECT_EQ("1.2.3.0"s,         version_number_t{"1.2.3.0 build 0"}                  .to_string());
+  EXPECT_EQ("1.2.3.4"s,         version_number_t{"1.2.3.4"}                          .to_string());
+  EXPECT_EQ("1.2.3 build 5"s,   version_number_t{"1.2.3 build 5"}                    .to_string());
+  EXPECT_EQ("1.2.3.0 build 5"s, version_number_t{"1.2.3.0 build 5"}                  .to_string());
+  EXPECT_EQ("1.2.3.0 build 5"s, version_number_t{"mkvmerge v1.2.3.0-build20170422-5"}.to_string());
+  EXPECT_EQ("11"s,              version_number_t{"11"}                               .to_string());
+  EXPECT_EQ("11 build 1213"s,   version_number_t{"11 build 1213"}                    .to_string());
 }
 
 }

@@ -657,7 +657,7 @@ es_parser_c::get_most_often_used_duration()
 
   mxdebug_if(m_debug_timestamps, boost::format("Duration frequency. Result: %1%, diff %2%. Best before adjustment: %3%. All: %4%\n")
              % best.first % best.second % most_often->first
-             % boost::accumulate(m_duration_frequency, std::string(""), [](std::string const &accu, std::pair<int64_t, int64_t> const &pair) {
+             % boost::accumulate(m_duration_frequency, ""s, [](std::string const &accu, std::pair<int64_t, int64_t> const &pair) {
                  return accu + (boost::format(" <%1% %2%>") % pair.first % pair.second).str();
                }));
 
@@ -802,7 +802,7 @@ es_parser_c::calculate_frame_timestamps() {
   m_max_timestamp = m_frames.back().m_end;
 
   mxdebug_if(m_debug_timestamps, boost::format("CLEANUP frames <pres_ord dec_ord has_prov_ts tc dur>: %1%\n")
-             % boost::accumulate(m_frames, std::string(""), [](std::string const &accu, frame_t const &frame) {
+             % boost::accumulate(m_frames, ""s, [](std::string const &accu, frame_t const &frame) {
                  return accu + (boost::format(" <%1% %2% %3% %4% %5%>") % frame.m_presentation_order % frame.m_decode_order % frame.m_has_provided_timestamp % frame.m_start % (frame.m_end - frame.m_start)).str();
                }));
 

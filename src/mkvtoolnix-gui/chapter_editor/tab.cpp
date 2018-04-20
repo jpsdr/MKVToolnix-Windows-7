@@ -1039,7 +1039,7 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
   if (!display)
     return false;
 
-  auto language = Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"}));
+  auto language = Q(FindChildValue<KaxChapterLanguage>(display, "eng"s));
 
   p->ui->leChName->setText(Q(GetChildValue<KaxChapterString>(display)));
   p->ui->cbChNameLanguage->setAdditionalItems(usedNameLanguages())
@@ -1656,7 +1656,7 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
     if (!kDisplay)
       continue;
 
-    auto language = FindChildValue<KaxChapterLanguage>(kDisplay, std::string{"eng"});
+    auto language = FindChildValue<KaxChapterLanguage>(kDisplay, "eng"s);
     if (   (RenumberSubChaptersParametersDialog::NameMatch::All == nameMatchingMode)
         || (Q(language)                                         == languageOfNamesToReplace))
       GetChild<KaxChapterString>(*kDisplay).SetValue(name);

@@ -692,7 +692,7 @@ cluster_helper_c::dump_split_points()
   const {
   mxdebug_if(m->debug_splitting,
              boost::format("Split points:%1%\n")
-             % boost::accumulate(m->split_points, std::string(""), [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); }));
+             % boost::accumulate(m->split_points, ""s, [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); }));
 }
 
 void

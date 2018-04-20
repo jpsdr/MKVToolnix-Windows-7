@@ -179,7 +179,7 @@ parse_latest_release_version(mtx::xml::document_cptr const &doc) {
 
   for (auto arch : std::vector<std::string>{ "x86", "amd64" })
     for (auto package : std::vector<std::string>{ "installer", "portable" })
-      release.urls[std::string{"windows_"} + arch + "_" + package] = doc->select_node((std::string{"/mkvtoolnix-releases/latest-windows-binary/"} + package + "-url/" + arch).c_str()).node().child_value();
+      release.urls["windows_"s + arch + "_" + package] = doc->select_node(("/mkvtoolnix-releases/latest-windows-binary/"s + package + "-url/" + arch).c_str()).node().child_value();
 
   if (debugging_c::requested("version_check")) {
     std::stringstream urls;

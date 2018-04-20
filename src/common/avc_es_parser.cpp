@@ -661,7 +661,7 @@ es_parser_c::get_most_often_used_duration()
 
   mxdebug_if(m_debug_timestamps, boost::format("Duration frequency. Result: %1%, diff %2%. Best before adjustment: %3%. All: %4%\n")
              % best.first % best.second % most_often->first
-             % boost::accumulate(m_duration_frequency, std::string(""), [](std::string const &accu, std::pair<int64_t, int64_t> const &pair) {
+             % boost::accumulate(m_duration_frequency, ""s, [](std::string const &accu, std::pair<int64_t, int64_t> const &pair) {
                  return accu + (boost::format(" <%1% %2%>") % pair.first % pair.second).str();
                }));
 

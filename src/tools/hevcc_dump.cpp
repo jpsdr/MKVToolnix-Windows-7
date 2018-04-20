@@ -403,7 +403,7 @@ parse_vui_parameters(std::size_t indent,
 
   if (   (r.get_remaining_bits() >= 68)
       && (r.peek_bits(21) == 0x100000))
-    v(indent, "default_display_window_flag", std::string{"(invalid default display window)"});
+    v(indent, "default_display_window_flag", "(invalid default display window)"s);
   else
     v(indent, "default_display_window_flag",    default_display_window_flag = r.get_bits(1));
 

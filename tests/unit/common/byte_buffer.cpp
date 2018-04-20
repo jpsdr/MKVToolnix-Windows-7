@@ -19,7 +19,7 @@ TEST(ByteBuffer, Add) {
 
   auto s = std::string{reinterpret_cast<char *>(b.get_buffer()), b.get_size()};
 
-  ASSERT_EQ(std::string{"Helloworld!"}, s);
+  ASSERT_EQ("Helloworld!"s, s);
 }
 
 TEST(ByteBuffer, Remove) {
@@ -35,7 +35,7 @@ TEST(ByteBuffer, Remove) {
 
   auto s = std::string{reinterpret_cast<char *>(b.get_buffer()), b.get_size()};
 
-  ASSERT_EQ(std::string{"lo world"}, s);
+  ASSERT_EQ("lo world"s, s);
 
   b.remove(2, mtx::bytes::buffer_c::at_back);
 
@@ -43,7 +43,7 @@ TEST(ByteBuffer, Remove) {
 
   s = std::string{reinterpret_cast<char *>(b.get_buffer()), b.get_size()};
 
-  ASSERT_EQ(std::string{"lo wor"}, s);
+  ASSERT_EQ("lo wor"s, s);
 
   b.add(reinterpret_cast<unsigned char const *>("meow"), 4);
 
@@ -51,7 +51,7 @@ TEST(ByteBuffer, Remove) {
 
   s = std::string{reinterpret_cast<char *>(b.get_buffer()), b.get_size()};
 
-  ASSERT_EQ(std::string{"lo wormeow"}, s);
+  ASSERT_EQ("lo wormeow"s, s);
 }
 
 TEST(ByteBuffer, Prepend) {
@@ -71,7 +71,7 @@ TEST(ByteBuffer, Prepend) {
 
   auto s = std::string{reinterpret_cast<char *>(b.get_buffer()), b.get_size()};
 
-  ASSERT_EQ(std::string{"Hello world"}, s);
+  ASSERT_EQ("Hello world"s, s);
 }
 
 }

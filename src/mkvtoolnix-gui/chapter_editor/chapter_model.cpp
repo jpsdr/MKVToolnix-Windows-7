@@ -179,7 +179,7 @@ ChapterModel::chapterNameForLanguage(KaxChapterAtom &chapter,
     if (!kDisplay)
       continue;
 
-    auto actualLanguage = FindChildValue<KaxChapterLanguage>(kDisplay, std::string{"eng"});
+    auto actualLanguage = FindChildValue<KaxChapterLanguage>(kDisplay, "eng"s);
     if (language.empty() || (language == actualLanguage))
       return Q(FindChildValue<KaxChapterString>(kDisplay));
   }

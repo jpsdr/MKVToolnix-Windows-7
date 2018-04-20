@@ -110,13 +110,13 @@ get_simple_value(const std::string &name,
 std::string
 get_simple_name(const KaxTagSimple &tag) {
   KaxTagName *tname = FindChild<KaxTagName>(&tag);
-  return tname ? tname->GetValueUTF8() : std::string{""};
+  return tname ? tname->GetValueUTF8() : ""s;
 }
 
 std::string
 get_simple_value(const KaxTagSimple &tag) {
   KaxTagString *tstring = FindChild<KaxTagString>(&tag);
-  return tstring ? tstring->GetValueUTF8() : std::string{""};
+  return tstring ? tstring->GetValueUTF8() : ""s;
 }
 
 void

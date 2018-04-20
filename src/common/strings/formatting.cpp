@@ -295,7 +295,7 @@ to_hex(const unsigned char *buf,
 
   std::string hex;
   for (int idx = 0; idx < static_cast<int>(size); ++idx)
-    hex += (compact || hex.empty() ? std::string{""} : std::string{" "}) + ((compact ? s_bf_to_hex_compact : s_bf_to_hex) % static_cast<unsigned int>(buf[idx])).str();
+    hex += (compact || hex.empty() ? ""s : " "s) + ((compact ? s_bf_to_hex_compact : s_bf_to_hex) % static_cast<unsigned int>(buf[idx])).str();
 
   return hex;
 }

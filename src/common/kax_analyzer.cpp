@@ -131,7 +131,7 @@ kax_analyzer_c::_log_debug_message(const std::string &message) {
 
 bool
 kax_analyzer_c::analyzer_debugging_requested(const std::string &section) {
-  return m_debug || debugging_c::requested(std::string("kax_analyzer_") + section);
+  return m_debug || debugging_c::requested("kax_analyzer_"s + section);
 }
 
 void

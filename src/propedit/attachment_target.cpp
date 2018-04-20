@@ -182,7 +182,7 @@ void
 attachment_target_c::execute_add() {
   auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : mtx::mime::guess_type(m_file_name, true);
   auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : to_utf8(bfs::path{m_file_name}.filename().string());
-  auto description = m_options.m_description                        ? *m_options.m_description : std::string{""};
+  auto description = m_options.m_description                        ? *m_options.m_description : ""s;
   auto uid         = m_options.m_uid                                ? *m_options.m_uid         : create_unique_number(UNIQUE_ATTACHMENT_IDS);
 
   auto att          = mtx::construct::cons<KaxAttached>(new KaxFileName,                                         to_wide(file_name),

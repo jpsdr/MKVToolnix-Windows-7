@@ -367,7 +367,7 @@ kax_info_c::create_text_representation(EbmlElement &e) {
   else {
     auto value = format_element_value(e);
     if (!value.empty())
-      text += std::string{": "} + value;
+      text += ": "s + value;
   }
 
   return create_element_text(text, e.GetElementPosition(), e.HeadSize() + e.GetSize());

@@ -136,7 +136,7 @@ aac_reader_c::read(generic_packetizer_c *,
 void
 aac_reader_c::identify() {
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::aac_is_sbr,                      AAC_PROFILE_SBR == m_aacheader.config.profile ? std::string{"true"} : std::string{"unknown"});
+  info.add(mtx::id::aac_is_sbr,                      AAC_PROFILE_SBR == m_aacheader.config.profile ? "true"s : "unknown"s);
   info.add(mtx::id::audio_channels,                  m_aacheader.config.channels);
   info.add(mtx::id::audio_sampling_frequency,        m_aacheader.config.sample_rate);
   info.add(mtx::id::audio_output_sampling_frequency, m_aacheader.config.output_sample_rate);

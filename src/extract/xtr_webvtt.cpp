@@ -61,7 +61,7 @@ xtr_webvtt_c::handle_frame(xtr_frame_t &f) {
       auto lines   = split(chomp(normalize_line_endings(content)), "\n", 3);
 
       if ((lines.size() > 0) && !lines[0].empty())
-        settings_list = std::string{" "} + boost::trim_copy(lines[0]);
+        settings_list = " "s + boost::trim_copy(lines[0]);
 
       if ((lines.size() > 1) && !lines[1].empty())
         label = boost::trim_copy(lines[1]) + "\n";

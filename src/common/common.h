@@ -62,6 +62,8 @@ namespace badap = boost::adaptors;
 namespace bfs   = boost::filesystem;
 namespace brng  = boost::range;
 
+using namespace std::string_literals;
+
 #include "common/os.h"
 
 #include <ebml/c/libebml_t.h>

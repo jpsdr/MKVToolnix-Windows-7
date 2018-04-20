@@ -22,7 +22,7 @@ TrackTypePage::TrackTypePage(Tab &parent,
   , m_trackNumber{FindChildValue<KaxTrackNumber>(m_master)}
   , m_trackUid{FindChildValue<KaxTrackUID>(m_master)}
   , m_codecId{Q(FindChildValue<KaxCodecID>(m_master))}
-  , m_language{Q(FindChildValue<KaxTrackLanguage>(m_master, std::string{"eng"}))}
+  , m_language{Q(FindChildValue<KaxTrackLanguage>(m_master, "eng"s))}
   , m_name{Q(FindChildValue<KaxTrackName>(m_master))}
   , m_defaultTrackFlag{!!FindChildValue<KaxTrackFlagDefault>(m_master, 1u)}
   , m_forcedTrackFlag{!!FindChildValue<KaxTrackFlagForced>(m_master, 0u)}

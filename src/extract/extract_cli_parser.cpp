@@ -242,7 +242,7 @@ extract_cli_parser_c::extraction_mode_to_string(boost::optional<options_c::extra
     { options_c::em_cues,          "cues"          },
   };
 
-  return mode ? s_mode_map[*mode] : std::string{"<invalid>"};
+  return mode ? s_mode_map[*mode] : "<invalid>"s;
 }
 
 void

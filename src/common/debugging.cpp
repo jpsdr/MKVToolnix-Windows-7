@@ -70,7 +70,7 @@ debugging_c::request(const std::string &options,
     else if (!enable)
       ms_debugging_options.erase(parts[0]);
     else
-      ms_debugging_options[parts[0]] = 1 == parts.size() ? std::string("") : parts[1];
+      ms_debugging_options[parts[0]] = 1 == parts.size() ? ""s : parts[1];
   }
 
   debugging_option_c::invalidate_cache();

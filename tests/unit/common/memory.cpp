@@ -37,7 +37,7 @@ TEST(Memory, SpliceInsertionIsSmallerAtBeginning) {
   memory_c::splice(*buffer, 0, 5, *to_insert);
 
   ASSERT_EQ(8,                       buffer->get_size());
-  ASSERT_EQ(std::string{"qwe56789"}, buffer->to_string());
+  ASSERT_EQ("qwe56789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInsertionIsEqualAtBeginning) {
@@ -47,7 +47,7 @@ TEST(Memory, SpliceInsertionIsEqualAtBeginning) {
   memory_c::splice(*buffer, 0, 3, *to_insert);
 
   ASSERT_EQ(10,                        buffer->get_size());
-  ASSERT_EQ(std::string{"qwe3456789"}, buffer->to_string());
+  ASSERT_EQ("qwe3456789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInsertionIsBiggerAtBeginning) {
@@ -57,7 +57,7 @@ TEST(Memory, SpliceInsertionIsBiggerAtBeginning) {
   memory_c::splice(*buffer, 0, 3, *to_insert);
 
   ASSERT_EQ(12,                          buffer->get_size());
-  ASSERT_EQ(std::string{"qwert3456789"}, buffer->to_string());
+  ASSERT_EQ("qwert3456789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceNoRemovalAtBeginning) {
@@ -67,7 +67,7 @@ TEST(Memory, SpliceNoRemovalAtBeginning) {
   memory_c::splice(*buffer, 0, 0, *to_insert);
 
   ASSERT_EQ(15,                             buffer->get_size());
-  ASSERT_EQ(std::string{"qwert0123456789"}, buffer->to_string());
+  ASSERT_EQ("qwert0123456789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceNoInsertionAtBeginning) {
@@ -76,7 +76,7 @@ TEST(Memory, SpliceNoInsertionAtBeginning) {
   memory_c::splice(*buffer, 0, 3);
 
   ASSERT_EQ(7,                      buffer->get_size());
-  ASSERT_EQ(std::string{"3456789"}, buffer->to_string());
+  ASSERT_EQ("3456789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInsertionIsSmallerInMiddle) {
@@ -86,7 +86,7 @@ TEST(Memory, SpliceInsertionIsSmallerInMiddle) {
   memory_c::splice(*buffer, 2, 5, *to_insert);
 
   ASSERT_EQ(8,                       buffer->get_size());
-  ASSERT_EQ(std::string{"01qwe789"}, buffer->to_string());
+  ASSERT_EQ("01qwe789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInsertionIsEqualInMiddle) {
@@ -96,7 +96,7 @@ TEST(Memory, SpliceInsertionIsEqualInMiddle) {
   memory_c::splice(*buffer, 2, 3, *to_insert);
 
   ASSERT_EQ(10,                        buffer->get_size());
-  ASSERT_EQ(std::string{"01qwe56789"}, buffer->to_string());
+  ASSERT_EQ("01qwe56789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInsertionIsBiggerInMiddle) {
@@ -106,7 +106,7 @@ TEST(Memory, SpliceInsertionIsBiggerInMiddle) {
   memory_c::splice(*buffer, 2, 3, *to_insert);
 
   ASSERT_EQ(12,                          buffer->get_size());
-  ASSERT_EQ(std::string{"01qwert56789"}, buffer->to_string());
+  ASSERT_EQ("01qwert56789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceNoRemovalInMiddle) {
@@ -116,7 +116,7 @@ TEST(Memory, SpliceNoRemovalInMiddle) {
   memory_c::splice(*buffer, 2, 0, *to_insert);
 
   ASSERT_EQ(15,                             buffer->get_size());
-  ASSERT_EQ(std::string{"01qwert23456789"}, buffer->to_string());
+  ASSERT_EQ("01qwert23456789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceNoInsertionInMiddle) {
@@ -125,7 +125,7 @@ TEST(Memory, SpliceNoInsertionInMiddle) {
   memory_c::splice(*buffer, 2, 3);
 
   ASSERT_EQ(7,                      buffer->get_size());
-  ASSERT_EQ(std::string{"0156789"}, buffer->to_string());
+  ASSERT_EQ("0156789"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInsertionIsSmallerAtEnd) {
@@ -135,7 +135,7 @@ TEST(Memory, SpliceInsertionIsSmallerAtEnd) {
   memory_c::splice(*buffer, 5, 5, *to_insert);
 
   ASSERT_EQ(8,                       buffer->get_size());
-  ASSERT_EQ(std::string{"01234qwe"}, buffer->to_string());
+  ASSERT_EQ("01234qwe"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInsertionIsEqualAtEnd) {
@@ -145,7 +145,7 @@ TEST(Memory, SpliceInsertionIsEqualAtEnd) {
   memory_c::splice(*buffer, 7, 3, *to_insert);
 
   ASSERT_EQ(10,                        buffer->get_size());
-  ASSERT_EQ(std::string{"0123456qwe"}, buffer->to_string());
+  ASSERT_EQ("0123456qwe"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInsertionIsBiggerAtEnd) {
@@ -155,7 +155,7 @@ TEST(Memory, SpliceInsertionIsBiggerAtEnd) {
   memory_c::splice(*buffer, 7, 3, *to_insert);
 
   ASSERT_EQ(12,                          buffer->get_size());
-  ASSERT_EQ(std::string{"0123456qwert"}, buffer->to_string());
+  ASSERT_EQ("0123456qwert"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceNoRemovalAtEnd) {
@@ -165,7 +165,7 @@ TEST(Memory, SpliceNoRemovalAtEnd) {
   memory_c::splice(*buffer, 10, 0, *to_insert);
 
   ASSERT_EQ(15,                             buffer->get_size());
-  ASSERT_EQ(std::string{"0123456789qwert"}, buffer->to_string());
+  ASSERT_EQ("0123456789qwert"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceNoInsertionAtEnd) {
@@ -174,7 +174,7 @@ TEST(Memory, SpliceNoInsertionAtEnd) {
   memory_c::splice(*buffer, 7, 3);
 
   ASSERT_EQ(7,                      buffer->get_size());
-  ASSERT_EQ(std::string{"0123456"}, buffer->to_string());
+  ASSERT_EQ("0123456"s, buffer->to_string());
 }
 
 TEST(Memory, SpliceInvalidParameters) {

@@ -2019,7 +2019,7 @@ reader_c::handle_transport_errors(track_c &track,
                % track.pid
                % file().m_position
                % (ts_header.has_transport_error() ? "transport_error flag" : "wrong continuity_counter")
-               % (track.m_expected_next_continuity_counter ? to_string(static_cast<unsigned int>(track.m_expected_next_continuity_counter.get())) : std::string{"—"})
+               % (track.m_expected_next_continuity_counter ? to_string(static_cast<unsigned int>(track.m_expected_next_continuity_counter.get())) : "—"s)
                % static_cast<unsigned int>(ts_header.continuity_counter())
                % track.pes_payload_size_to_read
                % track.pes_payload_read->get_size()

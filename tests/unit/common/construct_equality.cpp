@@ -43,7 +43,7 @@ TEST(ConstructAndEquality, MultipleLevels) {
 }
 
 TEST(ConstructAndEquality, MasterAtTheFront) {
-  auto a = ebml_master_cptr{ cons<KaxTracks>(cons<KaxTrackEntry>(), new KaxCodecID, std::string{"Stuff"}) };
+  auto a = ebml_master_cptr{ cons<KaxTracks>(cons<KaxTrackEntry>(), new KaxCodecID, "Stuff"s) };
   auto b = ebml_master_cptr{ master<KaxTracks>() };
   b->PushElement(*master<KaxTrackEntry>());
   b->PushElement(*new KaxCodecID);
@@ -83,10 +83,10 @@ TEST(ConstructAndEquality, NoMaster) {
 
 TEST(ConstructAndEquality, AllTypes) {
   auto a = ebml_master_cptr{ cons<KaxTracks>(cons<KaxTrackEntry>(new KaxCodecID,     "Stuff",
-                                                                 new KaxCodecID,     std::string{"Stuff"},
+                                                                 new KaxCodecID,     "Stuff"s,
                                                                  new KaxCodecName,   L"UniStuffAsWcharString",
                                                                  new KaxCodecName,   std::wstring{L"UniStuffAsStdWString"},
-                                                                 new KaxCodecName,   std::string{"UniStuffAsStdString"},
+                                                                 new KaxCodecName,   "UniStuffAsStdString"s,
                                                                  new KaxCodecName,   "UniStuffAsCharString",
                                                                  new KaxTrackNumber,  4254,
                                                                  new KaxTrackOffset,   -22,

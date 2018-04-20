@@ -53,14 +53,14 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
 
   xtr_base_c::create_file(master, track);
 
-  m_out->write(std::string{"caff"});                             // mFileType
+  m_out->write("caff"s);                             // mFileType
   m_out->write_uint16_be(1);                                     // mFileVersion
   m_out->write_uint16_be(0);                                     // mFileFlags
 
-  m_out->write(std::string{"desc"});                             // Audio Description chunk
+  m_out->write("desc"s);                             // Audio Description chunk
   m_out->write_uint64_be(32ULL);                                 // mChunkSize
   m_out->write_double(static_cast<int>(kt_get_a_sfreq(track)));  // mSampleRate
-  m_out->write(std::string{"alac"});                             // mFormatID
+  m_out->write("alac"s);                             // mFormatID
   m_out->write_uint32_be(0);                                     // mFormatFlags
   m_out->write_uint32_be(0);                                     // mBytesPerPacket
   m_out->write_uint32_be(mtx::caf::defs::default_frames_per_packet);  // mFramesPerPacket
@@ -68,17 +68,17 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
   m_out->write_uint32_be(0);                                     // mBitsPerChannel
 
   auto kuki_size = 12 + 36 + 8 + (2 < channels ? 24 : 0);        // add the size of ALACChannelLayoutInfo for more than 2 channels
-  m_out->write(std::string{"kuki"});
+  m_out->write("kuki"s);
   m_out->write_uint64_be(kuki_size);
   m_out->write_uint8('\0');
   m_out->write_uint8('\0');
   m_out->write_uint8('\0');
   m_out->write_uint8('\14');
-  m_out->write(std::string{"frma"});
-  m_out->write(std::string{"alac"});
+  m_out->write("frma"s);
+  m_out->write("alac"s);
 
   m_out->write_uint32_be(12 + sizeof(mtx::alac::codec_config_t)); // ALAC Specific Info size = 36 (12 + sizeof(ALAXSpecificConfig))
-  m_out->write(std::string{"alac"});                             // ALAC Specific Info ID
+  m_out->write("alac"s);                             // ALAC Specific Info ID
   m_out->write_uint32_be(0L);                                    // Version Flags
 
   m_out->write(m_priv);                                          // audio specific config
@@ -132,7 +132,7 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
   m_out->write_uint32_be(0);        // Channel Layout Info ID
 
   if (2 < channels) {
-    m_out->write(std::string{"chan"}); // 'chan' chunk immediately following the kuki
+    m_out->write("chan"s); // 'chan' chunk immediately following the kuki
     m_out->write_uint64_be(12ULL);     // = sizeof(ALACAudioChannelLayout)
 
     m_out->write_uint32_be(alo.channel_layout_tag);
@@ -147,12 +147,12 @@ xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
   memset(free_chunk->get_buffer(), 0, sizeof(m_free_chunk_size));
 
   // the 'free' chunk
-  m_out->write(std::string{"free"});
+  m_out->write("free"s);
   m_out->write_uint64_be(m_free_chunk_size);
   m_out->write(free_chunk);
 
   m_data_chunk_offset = m_out->getFilePointer();
-  m_out->write(std::string{"data"}); // Audio Data Chunk
+  m_out->write("data"s); // Audio Data Chunk
   m_out->write_uint64_be(-1LL);      // mChunkSize (= -1 if unknown)
   m_out->write_uint32_be(1);         // mEditCount
 }
@@ -163,7 +163,7 @@ xtr_alac_c::finish_file() {
   uint64_t const outsize               = 4 + 8 + 8 + 8 + 4 + 4 + m_pkt_sizes.size();
   auto tdiff                           = static_cast<int64_t>(m_data_chunk_offset) - static_cast<int64_t>(m_free_chunk_offset + outsize);
   auto write_pakt                      = [this]() {
-    m_out->write(std::string{"pakt"});
+    m_out->write("pakt"s);
     m_out->write_uint64_be(table_header_size + m_pkt_sizes.size());
     m_out->write_uint64_be(m_packets_written);
     m_out->write_uint64_be(m_frames_written);
@@ -183,7 +183,7 @@ xtr_alac_c::finish_file() {
 
     // regenerate a 'free' chunk to fill the interstitium between the 'pakt' and 'data' chunks
     if (tdiff && (16 <= tdiff)) {
-      m_out->write(std::string{"free"});
+      m_out->write("free"s);
       m_out->write_uint64_be(tdiff - 12);
 
       auto free_chunk = memory_c::alloc(tdiff - 12);

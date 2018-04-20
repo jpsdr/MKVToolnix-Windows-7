@@ -260,7 +260,7 @@ flac_reader_c::attachment_name_from_metadata(FLAC__StreamMetadata_Picture const 
   auto extension = mtx::mime::primary_file_extension_for_type(mime_type);
 
   if (!extension.empty())
-    name += std::string{"."} + extension;
+    name += "."s + extension;
 
   return name;
 }

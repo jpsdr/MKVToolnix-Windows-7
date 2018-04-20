@@ -355,7 +355,7 @@ xtr_usf_c::finish_track() {
   subtitles.append_child("language").append_attribute("code").set_value(m_language.c_str());
 
   for (auto &entry : m_entries) {
-    std::string text = std::string{"<subtitle>"} + entry.m_text + "</subtitle>";
+    std::string text = "<subtitle>"s + entry.m_text + "</subtitle>";
     strip(text, true);
 
     std::stringstream text_in(text);

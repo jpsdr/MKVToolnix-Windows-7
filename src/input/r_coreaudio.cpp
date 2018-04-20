@@ -114,7 +114,7 @@ coreaudio_reader_c::dump_headers()
                         )
           % m_ti.m_fname
           % m_codec_name % m_supported % m_sample_rate % m_flags % m_bytes_per_packet % m_frames_per_packet % m_channels % m_bits_per_sample
-          % (m_magic_cookie ? (boost::format("present, size %1%") % m_magic_cookie->get_size()).str() : std::string{"not present"})
+          % (m_magic_cookie ? (boost::format("present, size %1%") % m_magic_cookie->get_size()).str() : "not present"s)
           );
 
   if (m_codec.is(codec_c::type_e::A_ALAC) && m_magic_cookie && (m_magic_cookie->get_size() >= sizeof(mtx::alac::codec_config_t))) {

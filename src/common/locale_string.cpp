@@ -50,13 +50,13 @@ locale_string_c::str(eval_type_e type) {
   std::string locale = m_language;
 
   if ((type & territory) && !m_territory.empty())
-    locale += std::string("_") + m_territory;
+    locale += "_"s + m_territory;
 
   if ((type & codeset) && !m_codeset.empty())
-    locale += std::string(".") + m_codeset;
+    locale += "."s + m_codeset;
 
   if ((type & modifier) && !m_modifier.empty())
-    locale += std::string("@") + m_modifier;
+    locale += "@"s + m_modifier;
 
   return locale;
 }

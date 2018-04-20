@@ -309,7 +309,7 @@ test_replace(std::string const &custom_message,
   attachment_target_c::options_t opt;
   local_setup(*l1_b, opt);
 
-  auto message = std::string{"replace by "} + custom_message;
+  auto message = "replace by "s + custom_message;
 
   ASSERT_NO_THROW(at.parse_spec(attachment_target_c::ac_replace, spec + ":tests/unit/data/text/chunky_bacon.txt", opt)) << message;
   ASSERT_NO_THROW(at.validate())                                                                                        << message;

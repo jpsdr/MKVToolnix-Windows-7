@@ -126,11 +126,11 @@ mm_text_io_c::get_encoding(byte_order_e byte_order) {
   if (BO_NONE == byte_order)
     return {};
 
-  return BO_UTF8     == byte_order ? std::string{"UTF-8"}
-       : BO_UTF16_LE == byte_order ? std::string{"UTF-16LE"}
-       : BO_UTF16_BE == byte_order ? std::string{"UTF-16BE"}
-       : BO_UTF32_LE == byte_order ? std::string{"UTF-32LE"}
-       :                             std::string{"UTF-32BE"};
+  return BO_UTF8     == byte_order ? "UTF-8"s
+       : BO_UTF16_LE == byte_order ? "UTF-16LE"s
+       : BO_UTF16_BE == byte_order ? "UTF-16BE"s
+       : BO_UTF32_LE == byte_order ? "UTF-32LE"s
+       :                             "UTF-32BE"s;
 }
 
 // 1 byte: 0xxxxxxx,

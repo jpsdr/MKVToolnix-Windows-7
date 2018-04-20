@@ -851,13 +851,13 @@ ogm_reader_c::handle_stream_comments() {
             // auto cleaned = std::string{};
             // balg::copy_if(chapter_string, [](char c) { return c >= 0; }, std::back_inserter(cleaned));
             brng::remove_erase_if(chapter_string, [](char c) { return c < 0; });
-            out->puts(chapter_string + std::string{"\n"});
+            out->puts(chapter_string + "\n"s);
           }
 
         } else {
           out->write_bom("UTF-8");
           for (auto &chapter_string : chapter_strings)
-            out->puts(cch->utf8(chapter_string) + std::string{"\n"});
+            out->puts(cch->utf8(chapter_string) + "\n"s);
         }
 
         out->set_file_name(m_ti.m_fname);

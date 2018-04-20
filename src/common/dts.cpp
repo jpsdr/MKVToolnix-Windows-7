@@ -1001,7 +1001,7 @@ remove_dialog_normalization_gain(unsigned char *buf,
   if (header.dialog_normalization_gain == removed_level) {
     mxdebug_if(s_debug,
                boost::format("no need to remove the dialog normalization, it's already set to %1% (%2% dB); CRC: %3%\n")
-               % removed_level % header.dialog_normalization_gain % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : std::string{"—"}));
+               % removed_level % header.dialog_normalization_gain % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : "—"s));
     return;
   }
 
@@ -1016,7 +1016,7 @@ remove_dialog_normalization_gain(unsigned char *buf,
 
   mxdebug_if(s_debug,
              boost::format("changing dialog normalization from %1% (%2% dB) to %3%; CRC: %4%\n")
-             % current_level % header.dialog_normalization_gain % removed_level % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : std::string{"—"}));
+             % current_level % header.dialog_normalization_gain % removed_level % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : "—"s));
 }
 
 bool

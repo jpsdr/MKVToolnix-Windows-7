@@ -62,7 +62,7 @@ xtr_hdmv_textst_c::create_file(xtr_base_c *master,
   if (mpriv->get_size() < static_cast<uint64_t>(3 + style_segment_size + (old_style ? 1 + 2 : 0)))
     mxerror(boost::format(Y("Track %1% CodecPrivate is too small.\n")) % m_tid);
 
-  m_out->write(std::string{"TextST"});
+  m_out->write("TextST"s);
 
   // The dialog style segment.
   m_out->write(&buf[style_segment_start], 3 + style_segment_size);

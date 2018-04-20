@@ -504,7 +504,7 @@ ebml_converter_c::dump_semantics_recursively(int level,
     else
       limits_str = (boost::format("%2% <= %1%")                               % limits->second.max % label).str();
 
-    limits_str = std::string{", valid range: "} + limits_str;
+    limits_str = ", valid range: "s + limits_str;
   }
 
   auto type = dynamic_cast<EbmlMaster        *>(&element) ? "master"

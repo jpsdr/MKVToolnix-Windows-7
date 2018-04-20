@@ -297,7 +297,7 @@ get_local_charset() {
 
   lc_charset = nl_langinfo(CODESET);
   if (parse_number(lc_charset, i))
-    lc_charset = std::string("ISO") + lc_charset + std::string("-US");
+    lc_charset = "ISO"s + lc_charset + "-US"s;
 #elif HAVE_NL_LANGINFO
   lc_charset = nl_langinfo(CODESET);
 #elif HAVE_LOCALE_CHARSET
@@ -311,8 +311,8 @@ std::string
 get_local_console_charset() {
 #if defined(SYS_WINDOWS)
   if (mtx::sys::get_windows_version() >= WINDOWS_VERSION_VISTA)
-    return std::string("CP") + to_string(GetACP());
-  return std::string("CP") + to_string(GetOEMCP());
+    return "CP"s + to_string(GetACP());
+  return "CP"s + to_string(GetOEMCP());
 #else
   return get_local_charset();
 #endif

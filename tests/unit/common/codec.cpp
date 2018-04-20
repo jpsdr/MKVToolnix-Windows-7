@@ -240,7 +240,7 @@ TEST(Codec, LookUpObjectTypeId) {
 
 TEST(Codec, LookUpOverloading) {
   EXPECT_TRUE(codec_c::look_up("kate").is(codec_c::type_e::S_KATE));
-  EXPECT_TRUE(codec_c::look_up(std::string{"kate"}).is(codec_c::type_e::S_KATE));
+  EXPECT_TRUE(codec_c::look_up("kate"s).is(codec_c::type_e::S_KATE));
   EXPECT_TRUE(codec_c::look_up(fourcc_c{"kate"}).is(codec_c::type_e::S_KATE));
   EXPECT_TRUE(codec_c::look_up(codec_c::type_e::S_KATE).is(codec_c::type_e::S_KATE));
 }

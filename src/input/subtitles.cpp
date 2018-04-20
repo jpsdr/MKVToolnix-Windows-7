@@ -367,7 +367,7 @@ ssa_parser_c::parse() {
         // Split the line into fields.
         std::vector<std::string> fields = split(line.c_str(), ",", m_format.size());
         while (fields.size() < m_format.size())
-          fields.push_back(std::string(""));
+          fields.push_back(""s);
 
         // Parse the start time.
         std::string stime = get_element("Start", fields);
@@ -451,7 +451,7 @@ ssa_parser_c::get_element(const char *index,
     if (m_format[i] == index)
       return fields[i];
 
-  return std::string("");
+  return ""s;
 }
 
 int64_t

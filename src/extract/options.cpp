@@ -27,7 +27,7 @@ options_c::mode_options_c::dump(std::string const &prefix)
                        "%1%simple chapter language: %3%\n"
                        "%1%extraction mode:         %4%\n"
                        "%1%num track specs:         %5%\n")
-         % prefix % m_simple_chapter_format % (m_simple_chapter_language ? *m_simple_chapter_language : std::string{"<none>"}) % static_cast<int>(m_extraction_mode) % m_tracks.size());
+         % prefix % m_simple_chapter_format % (m_simple_chapter_language ? *m_simple_chapter_language : "<none>"s) % static_cast<int>(m_extraction_mode) % m_tracks.size());
 
 
   for (auto idx = 0u; idx < m_tracks.size(); ++idx) {

@@ -222,7 +222,7 @@ mpeg_ps_reader_c::sort_tracks() {
   if (!m_debug_headers)
     return;
 
-  auto info = std::string{"mpeg_ps: Supported streams, sorted by ID: "};
+  auto info = "mpeg_ps: Supported streams, sorted by ID: "s;
   for (i = 0; tracks.size() > i; ++i)
     info += (boost::format("0x%|1$02x|(0x%|2$02x|) ") % tracks[i]->id.id % tracks[i]->id.sub_id).str();
 
@@ -977,7 +977,7 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
     mxdebug_if(m_debug_timestamps && packet.has_pts(),
                boost::format("Timestamp for track %1%: %2% [%3%] (DTS: %4%)\n")
                % id % format_timestamp(packet.pts()) % (packet.pts() * 90 / 1000000ll)
-               % (packet.has_dts() ? (boost::format("%1% [%2%]") % format_timestamp(packet.dts()) % (packet.dts() * 90 / 1000000ll)).str() : std::string{"none"}));
+               % (packet.has_dts() ? (boost::format("%1% [%2%]") % format_timestamp(packet.dts()) % (packet.dts() * 90 / 1000000ll)).str() : "none"s));
 
     if (mtx::includes(blacklisted_ids, id.idx()))
       return;

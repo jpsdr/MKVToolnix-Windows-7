@@ -45,7 +45,7 @@ handle_atom(KaxChapterAtom const &atom,
     if (!display)
       continue;
 
-    auto language = FindChildValue<KaxChapterLanguage>(display, std::string{"eng"});
+    auto language = FindChildValue<KaxChapterLanguage>(display, "eng"s);
     if (language_to_extract && (*language_to_extract != language))
       continue;
 

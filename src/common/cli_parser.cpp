@@ -72,7 +72,7 @@ parser_c::option_t::format_text() {
     return format_paragraph(description, INDENT_DEFAULT == m_indent ? INDENT_COLUMN_OPTION_DESCRIPTION : m_indent, std::string(INDENT_COLUMN_OPTION_NAME, ' ') + m_name);
 
   else if (parser_c::option_t::ot_section_header == m_type)
-    return std::string("\n") + format_paragraph(description + ":", INDENT_DEFAULT == m_indent ? INDENT_COLUMN_SECTION_HEADER : m_indent);
+    return "\n"s + format_paragraph(description + ":", INDENT_DEFAULT == m_indent ? INDENT_COLUMN_SECTION_HEADER : m_indent);
 
   return format_paragraph(description, INDENT_DEFAULT == m_indent ? 0 : m_indent);
 }
@@ -136,7 +136,7 @@ parser_c::add_option(std::string const &spec,
   for (auto &name : names) {
     auto full_name = '@' == name[0]       ? name
                    : 1   == name.length() ? std::string( "-") + name
-                   :                        std::string("--") + name;
+                   :                        "--"s + name;
 
     if (mtx::includes(m_option_map, full_name))
       mxerror(boost::format("parser_c::add_option(): Programming error: option '%1%' is already used for spec '%2%' "

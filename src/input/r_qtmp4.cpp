@@ -983,7 +983,7 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
   if (duration != std::numeric_limits<uint32_t>::max())
     m_duration = boost::rational_cast<uint64_t>(boost::rational<uint64_t>{duration, static_cast<uint64_t>(m_time_scale)} * 1'000'000'000ull);
 
-  mxdebug_if(m_debug_headers, boost::format("%1%Time scale: %2% duration: %3%\n") % space(level * 2 + 1) % m_time_scale % (m_duration ? format_timestamp(*m_duration) : std::string{"—"}));
+  mxdebug_if(m_debug_headers, boost::format("%1%Time scale: %2% duration: %3%\n") % space(level * 2 + 1) % m_time_scale % (m_duration ? format_timestamp(*m_duration) : "—"s));
 }
 
 void

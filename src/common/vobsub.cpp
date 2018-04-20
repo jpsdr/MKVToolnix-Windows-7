@@ -19,7 +19,7 @@ std::string
 create_default_index(unsigned int width,
                      unsigned int height,
                      std::string const &palette) {
-  auto palette_to_use = palette.empty() ? std::string{"bebebe, 171717, 5f5f5f, e7e7e7, 828282, 828282, 828282, 828282, 828282, 828282, 828282, 828282, bebebe, 000000, f6f6f6, 828282"} : palette;
+  auto palette_to_use = palette.empty() ? "bebebe, 171717, 5f5f5f, e7e7e7, 828282, 828282, 828282, 828282, 828282, 828282, 828282, 828282, bebebe, 000000, f6f6f6, 828282"s : palette;
 
   return (boost::format("# VobSub index file, v7 (do not modify this line!)\n"
                         "#\n"

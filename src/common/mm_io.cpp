@@ -98,7 +98,7 @@ mm_io_c::puts(const std::string &s) {
       num_written += write(std::string{&cs[prev_pos], static_cast<std::string::size_type>(cur_pos - prev_pos)});
 
     if (insert_cr)
-      num_written += write(std::string{"\r"});
+      num_written += write("\r"s);
 
     prev_pos = cur_pos + (keep_char ? 0 : 1);
   }

@@ -521,7 +521,7 @@ remove_dialog_normalization_gain(unsigned char *buf,
 
   mxdebug_if(s_debug,
              boost::format("changing dialog normalization gain from -%1% dB (%2%) to -%3% dB\n")
-             % frame.m_dialog_normalization_gain % (frame.m_dialog_normalization_gain2 ? (boost::format("-%1% dB") % *frame.m_dialog_normalization_gain2).str() : std::string{"—"}) % removed_level);
+             % frame.m_dialog_normalization_gain % (frame.m_dialog_normalization_gain2 ? (boost::format("-%1% dB") % *frame.m_dialog_normalization_gain2).str() : "—"s) % removed_level);
 
   mtx::bits::writer_c w{buf, size};
 
