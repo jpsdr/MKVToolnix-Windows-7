@@ -41,7 +41,7 @@ mtxut::init_suite(char const *argv0) {
   set_mxmsg_handler(MXMSG_WARNING, mxmsg_handler);
   set_mxmsg_handler(MXMSG_ERROR,   mxmsg_handler);
 
-  engage_hack(ENGAGE_NO_VARIABLE_DATA);
+  mtx::hacks::engage(mtx::hacks::NO_VARIABLE_DATA);
 }
 
 void

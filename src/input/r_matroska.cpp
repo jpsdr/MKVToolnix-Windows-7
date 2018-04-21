@@ -1492,7 +1492,7 @@ kax_reader_c::read_deferred_level1_elements(KaxSegment &segment) {
   for (auto position : m_deferred_l1_positions[dl1t_tags])
     handle_tags(m_in.get(), &segment, position);
 
-  if (!hack_engaged(ENGAGE_KEEP_TRACK_STATISTICS_TAGS))
+  if (!mtx::hacks::is_engaged(mtx::hacks::KEEP_TRACK_STATISTICS_TAGS))
     discard_track_statistics_tags();
 
   if (!m_ti.m_no_global_tags)
@@ -1682,7 +1682,7 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
 void
 kax_reader_c::create_video_packetizer(kax_track_t *t,
                                       track_info_c &nti) {
-  if (t->codec.is(codec_c::type_e::V_MPEG4_P10) && t->ms_compat && !hack_engaged(ENGAGE_ALLOW_AVC_IN_VFW_MODE))
+  if (t->codec.is(codec_c::type_e::V_MPEG4_P10) && t->ms_compat && !mtx::hacks::is_engaged(mtx::hacks::ALLOW_AVC_IN_VFW_MODE))
     create_avc_es_video_packetizer(t, nti);
 
   else if (t->codec.is(codec_c::type_e::V_MPEG12)) {
@@ -2057,7 +2057,7 @@ kax_reader_c::create_packetizer(int64_t tid) {
   if (t->tags && demuxing_requested('T', t->tnum))
     nti.m_tags       = clone(t->tags);
 
-  if (hack_engaged(ENGAGE_FORCE_PASSTHROUGH_PACKETIZER)) {
+  if (mtx::hacks::is_engaged(mtx::hacks::FORCE_PASSTHROUGH_PACKETIZER)) {
     init_passthrough_packetizer(t, nti);
     set_packetizer_headers(t);
 

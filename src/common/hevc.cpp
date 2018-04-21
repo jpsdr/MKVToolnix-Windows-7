@@ -557,7 +557,7 @@ parse_sps(memory_cptr const &buffer,
   mtx::bits::writer_c w{};
   unsigned int i;
 
-  keep_ar_info = !hack_engaged(ENGAGE_REMOVE_BITSTREAM_AR_INFO);
+  keep_ar_info = !mtx::hacks::is_engaged(mtx::hacks::REMOVE_BITSTREAM_AR_INFO);
 
   memset(&sps, 0, sizeof(sps));
 

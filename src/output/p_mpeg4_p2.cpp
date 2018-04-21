@@ -35,7 +35,7 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
   , m_previous_timestamp(0)
   , m_aspect_ratio_extracted(false)
   , m_input_is_native(input_is_native)
-  , m_output_is_native(hack_engaged(ENGAGE_NATIVE_MPEG4) || input_is_native)
+  , m_output_is_native(mtx::hacks::is_engaged(mtx::hacks::NATIVE_MPEG4) || input_is_native)
   , m_size_extracted(false)
 {
   if (!m_output_is_native)

@@ -64,7 +64,7 @@ xtr_oggbase_c::create_file(xtr_base_c *master,
 
   xtr_base_c::create_file(master, track);
 
-  ogg_stream_init(&m_os, hack_engaged(ENGAGE_NO_VARIABLE_DATA) ? 1804289383 : random_c::generate_32bits() & 0x7ffff'ffff);
+  ogg_stream_init(&m_os, mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA) ? 1804289383 : random_c::generate_32bits() & 0x7ffff'ffff);
 }
 
 void
@@ -371,7 +371,7 @@ xtr_oggopus_c::create_file(xtr_base_c *master,
 void
 xtr_oggopus_c::header_packets_unlaced(std::vector<memory_cptr> &header_packets) {
   auto signature = "OpusTags"s;
-  auto version   = "unknown encoder; extracted from Matroska with "s + (!hack_engaged(ENGAGE_NO_VARIABLE_DATA) ? get_version_info("mkvextract") : "mkvextract"s);
+  auto version   = "unknown encoder; extracted from Matroska with "s + (!mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA) ? get_version_info("mkvextract") : "mkvextract"s);
   auto ver_len   = version.length();
   auto mem       = memory_c::alloc(8 + 4 + ver_len + 4);
   auto buffer    = reinterpret_cast<char *>(mem->get_buffer());

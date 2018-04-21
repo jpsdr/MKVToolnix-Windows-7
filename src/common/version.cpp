@@ -195,7 +195,7 @@ segment_info_data_t
 get_default_segment_info_data(std::string const &application) {
   segment_info_data_t data{};
 
-  if (!hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
+  if (!mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA)) {
     data.muxing_app   = (boost::format("libebml v%1% + libmatroska v%2%") % EbmlCodeVersion % KaxCodeVersion).str();
     data.writing_app  = get_version_info(application, static_cast<version_info_flags_e>(vif_full | vif_untranslated));
     data.writing_date = boost::posix_time::second_clock::universal_time();

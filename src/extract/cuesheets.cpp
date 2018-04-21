@@ -139,7 +139,7 @@ write_cuesheet(std::string file_name,
   if (chapters.ListSize() == 0)
     return;
 
-  if (hack_engaged(ENGAGE_NO_VARIABLE_DATA))
+  if (mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA))
     file_name = "no-variable-data";
 
   out.write_bom("UTF-8");

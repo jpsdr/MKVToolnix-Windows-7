@@ -169,7 +169,7 @@ GuiCliParser::enableDebugging() {
 
 void
 GuiCliParser::enableHack() {
-  engage_hacks(m_next_arg);
+  mtx::hacks::engage(m_next_arg);
 }
 
 QStringList const &

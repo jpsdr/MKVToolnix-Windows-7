@@ -189,7 +189,7 @@ mtx_common_init(std::string const &program_name,
   matroska_init();
 
   debugging_c::init();
-  init_hacks();
+  mtx::hacks::init();
 
   init_locales();
 

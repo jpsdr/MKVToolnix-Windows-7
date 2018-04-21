@@ -271,7 +271,7 @@ sighandler(int /* signum */) {
   mxinfo(Y(" done\n"));
 
   mxinfo(Y("The file is being fixed, part 3/4..."));
-  if ((g_kax_sh_main->ListSize() > 0) && !hack_engaged(ENGAGE_NO_META_SEEK)) {
+  if ((g_kax_sh_main->ListSize() > 0) && !mtx::hacks::is_engaged(mtx::hacks::NO_META_SEEK)) {
     g_kax_sh_main->UpdateSize();
     if (s_kax_sh_void->ReplaceWith(*g_kax_sh_main, *s_out, true) == INVALID_FILEPOS_T)
       mxwarn(boost::format(Y("This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n")) % BUGMSG);
@@ -389,7 +389,7 @@ add_attachment(attachment_cptr const &attachment) {
   if (0 != attachment->id) {
     for (auto &ex_attachment : g_attachments)
       if ((   (ex_attachment->id == attachment->id)
-           && !hack_engaged(ENGAGE_NO_VARIABLE_DATA))
+           && !mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA))
           ||
           (   (ex_attachment->name             == attachment->name)
            && (ex_attachment->description      == attachment->description)
@@ -490,7 +490,7 @@ generate_segment_uids() {
     return;
 
   // Generate the segment UIDs.
-  if (hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
+  if (mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA)) {
     s_seguid_current.zero_content();
     s_seguid_next.zero_content();
     s_seguid_prev.zero_content();
@@ -1472,7 +1472,7 @@ finish_file(bool last_file,
     mxinfo("\n");
 
   // Render the track headers a second time if the user has requested that.
-  if (hack_engaged(ENGAGE_WRITE_HEADERS_TWICE)) {
+  if (mtx::hacks::is_engaged(mtx::hacks::WRITE_HEADERS_TWICE)) {
     auto second_tracks = clone(g_kax_tracks);
     g_doc_type_version_handler->render(*second_tracks, *s_out);
     g_kax_sh_main->IndexThis(*second_tracks, *g_kax_segment);
@@ -1537,7 +1537,7 @@ finish_file(bool last_file,
   s_out->restore_pos();
 
   // Render the segment info a second time if the user has requested that.
-  if (hack_engaged(ENGAGE_WRITE_HEADERS_TWICE)) {
+  if (mtx::hacks::is_engaged(mtx::hacks::WRITE_HEADERS_TWICE)) {
     g_doc_type_version_handler->render(*s_kax_infos, *s_out);
     g_kax_sh_main->IndexThis(*s_kax_infos, *g_kax_segment);
   }
@@ -1545,7 +1545,7 @@ finish_file(bool last_file,
   render_chapters();
 
   // Render the meta seek information with the cues
-  if (g_write_meta_seek_for_clusters && (g_kax_sh_cues->ListSize() > 0) && !hack_engaged(ENGAGE_NO_META_SEEK)) {
+  if (g_write_meta_seek_for_clusters && (g_kax_sh_cues->ListSize() > 0) && !mtx::hacks::is_engaged(mtx::hacks::NO_META_SEEK)) {
     g_kax_sh_cues->UpdateSize();
     g_doc_type_version_handler->render(*g_kax_sh_cues, *s_out);
     g_kax_sh_main->IndexThis(*g_kax_sh_cues, *g_kax_segment);
@@ -1579,7 +1579,7 @@ finish_file(bool last_file,
   }
 
   if (s_chapters_in_this_file) {
-    if (!hack_engaged(ENGAGE_NO_CHAPTERS_IN_META_SEEK))
+    if (!mtx::hacks::is_engaged(mtx::hacks::NO_CHAPTERS_IN_META_SEEK))
       g_kax_sh_main->IndexThis(*s_chapters_in_this_file, *g_kax_segment);
     s_chapters_in_this_file.reset();
   }
@@ -1589,7 +1589,7 @@ finish_file(bool last_file,
     s_kax_as.reset();
   }
 
-  if ((g_kax_sh_main->ListSize() > 0) && !hack_engaged(ENGAGE_NO_META_SEEK)) {
+  if ((g_kax_sh_main->ListSize() > 0) && !mtx::hacks::is_engaged(mtx::hacks::NO_META_SEEK)) {
     g_kax_sh_main->UpdateSize();
     if (s_kax_sh_void->ReplaceWith(*g_kax_sh_main, *s_out, true) == INVALID_FILEPOS_T)
       mxwarn(boost::format(Y("This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"))

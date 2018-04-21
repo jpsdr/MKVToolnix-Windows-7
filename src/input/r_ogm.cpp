@@ -527,7 +527,7 @@ ogm_reader_c::handle_new_stream(ogg_page *og) {
     if (!strncmp(sth->streamtype, "video", 5)) {
       memcpy(buf, (char *)sth->subtype, 4);
 
-      if (mtx::avc::is_avc_fourcc(buf) && !hack_engaged(ENGAGE_ALLOW_AVC_IN_VFW_MODE))
+      if (mtx::avc::is_avc_fourcc(buf) && !mtx::hacks::is_engaged(mtx::hacks::ALLOW_AVC_IN_VFW_MODE))
         dmx = new ogm_v_avc_demuxer_c(this);
       else
         dmx = new ogm_v_mscomp_demuxer_c(this);

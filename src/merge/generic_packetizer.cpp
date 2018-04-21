@@ -1331,7 +1331,7 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
   // 'timestamp < safety_last_timestamp' may only occur for B frames. In this
   // case we have the coding order, e.g. IPB1B2 and the timestamps
   // I: 0, P: 120, B1: 40, B2: 80.
-  if (!m_relaxed_timestamp_checking && (pack->timestamp < m_safety_last_timestamp) && (0 > pack->fref) && hack_engaged(ENGAGE_ENABLE_TIMESTAMP_WARNING)) {
+  if (!m_relaxed_timestamp_checking && (pack->timestamp < m_safety_last_timestamp) && (0 > pack->fref) && mtx::hacks::is_engaged(mtx::hacks::ENABLE_TIMESTAMP_WARNING)) {
     if (track_audio == m_htrack_type) {
       int64_t needed_timestamp_offset  = m_safety_last_timestamp + m_safety_last_duration - pack->timestamp;
       m_correction_timestamp_offset   += needed_timestamp_offset;
@@ -1539,7 +1539,7 @@ int64_t
 generic_packetizer_c::calculate_avi_audio_sync(int64_t num_bytes,
                                                int64_t samples_per_packet,
                                                int64_t packet_duration) {
-  if (!m_ti.m_avi_audio_sync_enabled || hack_engaged(ENGAGE_NO_DELAY_FOR_GARBAGE_IN_AVI))
+  if (!m_ti.m_avi_audio_sync_enabled || mtx::hacks::is_engaged(mtx::hacks::NO_DELAY_FOR_GARBAGE_IN_AVI))
     return -1;
 
   if (m_ti.m_avi_audio_data_rate)

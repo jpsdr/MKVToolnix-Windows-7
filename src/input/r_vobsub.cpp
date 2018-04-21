@@ -360,7 +360,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
     // Some players ignore sub-pictures if there is no stop display command.
     // Add a stop display command only if 1 command chain exists and the hack is enabled.
 
-    if ((dcsq == dcsq2) && hack_engaged(ENGAGE_VOBSUB_SUBPIC_STOP_CMDS)) {
+    if ((dcsq == dcsq2) && mtx::hacks::is_engaged(mtx::hacks::VOBSUB_SUBPIC_STOP_CMDS)) {
       dcsq         += 2;        // points to first command chain
       dcsq2        += 4;        // find end of first command chain
       bool unknown  = false;
@@ -569,7 +569,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
             break;
           }
 
-          if (hack_engaged(ENGAGE_VOBSUB_SUBPIC_STOP_CMDS)) {
+          if (mtx::hacks::is_engaged(mtx::hacks::VOBSUB_SUBPIC_STOP_CMDS)) {
             // Space for the stop display command and padding
             dst_buf = (unsigned char *)saferealloc(dst_buf, dst_size + packet_size + 6);
             memset(dst_buf + dst_size + packet_size, 0xff, 6);

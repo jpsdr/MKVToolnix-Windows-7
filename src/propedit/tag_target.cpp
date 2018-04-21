@@ -374,7 +374,7 @@ tag_target_c::account_all_clusters() {
 
 void
 tag_target_c::create_track_statistics_tags() {
-  auto no_variable_data = hack_engaged(ENGAGE_NO_VARIABLE_DATA);
+  auto no_variable_data = mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA);
   auto writing_app      = no_variable_data ? "no_variable_data"         : get_version_info("mkvpropedit", static_cast<version_info_flags_e>(vif_full | vif_untranslated));
   auto writing_date     = no_variable_data ? boost::posix_time::ptime{} : boost::posix_time::second_clock::universal_time();
 

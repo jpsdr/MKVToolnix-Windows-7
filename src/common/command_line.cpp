@@ -183,7 +183,7 @@ handle_common_args(std::vector<std::string> &args,
       if ((i + 1) == args.size())
         mxerror(Y("'--engage' lacks its argument.\n"));
 
-      engage_hacks(args[i + 1]);
+      mtx::hacks::engage(args[i + 1]);
       args.erase(args.begin() + i, args.begin() + i + 2);
 
     } else if (args[i] == "--gui-mode") {

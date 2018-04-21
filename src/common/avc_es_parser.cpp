@@ -55,7 +55,7 @@ es_parser_c::es_parser_c()
   , m_discard_actual_frames(false)
   , m_simple_picture_order{}
   , m_first_cleanup{true}
-  , m_all_i_slices_are_key_frames{hack_engaged(ENGAGE_ALL_I_SLICES_ARE_KEY_FRAMES)}
+  , m_all_i_slices_are_key_frames{mtx::hacks::is_engaged(mtx::hacks::ALL_I_SLICES_ARE_KEY_FRAMES)}
   , m_debug_keyframe_detection{"avc_parser|avc_keyframe_detection"}
   , m_debug_nalu_types{        "avc_parser|avc_nalu_types"}
   , m_debug_timestamps{        "avc_parser|avc_timestamps"}

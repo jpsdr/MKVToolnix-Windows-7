@@ -378,9 +378,9 @@ cluster_helper_c::render() {
   kax_cues_with_cleanup_c cues;
   cues.SetGlobalTimecodeScale(g_timestamp_scale);
 
-  bool use_simpleblock     = !hack_engaged(ENGAGE_NO_SIMPLE_BLOCKS);
+  bool use_simpleblock     = !mtx::hacks::is_engaged(mtx::hacks::NO_SIMPLE_BLOCKS);
 
-  LacingType lacing_type   = hack_engaged(ENGAGE_LACING_XIPH) ? LACING_XIPH : hack_engaged(ENGAGE_LACING_EBML) ? LACING_EBML : LACING_AUTO;
+  LacingType lacing_type   = mtx::hacks::is_engaged(mtx::hacks::LACING_XIPH) ? LACING_XIPH : mtx::hacks::is_engaged(mtx::hacks::LACING_EBML) ? LACING_EBML : LACING_AUTO;
 
   int64_t min_cl_timestamp = std::numeric_limits<int64_t>::max();
   int64_t max_cl_timestamp = 0;

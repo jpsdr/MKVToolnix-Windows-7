@@ -106,7 +106,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
     else
       new_seq_hdr->add(&buf[start_code_pos], bytes_to_copy);
 
-    if (!hack_engaged(ENGAGE_USE_CODEC_STATE_ONLY))
+    if (!mtx::hacks::is_engaged(mtx::hacks::USE_CODEC_STATE_ONLY))
       return;
 
     memmove(&buf[start_code_pos], &buf[pos - 4], size - pos + 4);

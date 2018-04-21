@@ -470,7 +470,7 @@ parser_c::parse_chapters() {
     m_chapters.push_back(timestamp - play_item.in_time + play_item.relative_in_time);
   }
 
-  if (   !hack_engaged(ENGAGE_KEEP_LAST_CHAPTER_IN_MPLS)
+  if (   !mtx::hacks::is_engaged(mtx::hacks::KEEP_LAST_CHAPTER_IN_MPLS)
       && m_drop_last_entry_if_at_end
       && (0 < num_chapters)
       && (timestamp_c::s(5) >= (m_playlist.duration - m_chapters.back())))

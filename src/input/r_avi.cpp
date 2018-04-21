@@ -229,7 +229,7 @@ avi_reader_c::create_video_packetizer() {
   if (DIVX_TYPE_MPEG4 == m_divx_type)
     create_mpeg4_p2_packetizer();
 
-  else if (mtx::avc::is_avc_fourcc(codec) && !hack_engaged(ENGAGE_ALLOW_AVC_IN_VFW_MODE))
+  else if (mtx::avc::is_avc_fourcc(codec) && !mtx::hacks::is_engaged(mtx::hacks::ALLOW_AVC_IN_VFW_MODE))
     create_mpeg4_p10_packetizer();
 
   else if (mpeg1_2::is_fourcc(get_uint32_le(codec)))

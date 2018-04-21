@@ -29,8 +29,8 @@ cues_cptr cues_c::s_cues;
 
 cues_c::cues_c()
   : m_num_cue_points_postprocessed{}
-  , m_no_cue_duration{hack_engaged(ENGAGE_NO_CUE_DURATION)}
-  , m_no_cue_relative_position{hack_engaged(ENGAGE_NO_CUE_RELATIVE_POSITION)}
+  , m_no_cue_duration{mtx::hacks::is_engaged(mtx::hacks::NO_CUE_DURATION)}
+  , m_no_cue_relative_position{mtx::hacks::is_engaged(mtx::hacks::NO_CUE_RELATIVE_POSITION)}
   , m_debug_cue_duration{         "cues|cues_cue_duration"}
   , m_debug_cue_relative_position{"cues|cues_cue_relative_position"}
 {
