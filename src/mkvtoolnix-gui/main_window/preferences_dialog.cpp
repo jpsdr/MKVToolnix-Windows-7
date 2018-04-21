@@ -188,7 +188,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
   auto pMerge    = addItem(Page::Merge,               nullptr, QY("Multiplexer"),           "merge");
                    addItem(Page::DefaultValues,       pMerge,  QY("Default values"));
                    addItem(Page::DeriveTrackLanguage, pMerge,  QY("Deriving track languages"));
-                   addItem(Page::Output,              pMerge,  QY("Output"));
+                   addItem(Page::Output,              pMerge,  QY("Destination file name"));
                    addItem(Page::EnablingTracks,      pMerge,  QY("Enabling tracks"));
                    addItem(Page::Playlists,           pMerge,  QY("Playlists"));
                    addItem(Page::Info,                nullptr, QY("Info tool"),             "document-preview-archive");
