@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-04-10 20:30+0200\n"
-"PO-Revision-Date: 2018-03-28 23:02+0200\n"
+"PO-Revision-Date: 2018-04-11 00:40+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -1770,7 +1770,7 @@ msgstr "이전 합치기 설정(&P)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1555
 msgid "&Regular expression:"
-msgstr ""
+msgstr "정규식(&R):"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:628
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
@@ -2585,7 +2585,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:339
 msgid "A regular expression is used for matching the file name against a list of recognized languages limited by characters such as '.' or '['…']'."
-msgstr ""
+msgstr "정규식은 파일 이름을 '.' 또는 '['...']'와 같은 문자로 제한되어 있는 인식된 언어 목록과 비교하는데 사용됩니다."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:290
 #: src/mkvtoolnix-gui/merge/output.cpp:306
@@ -2683,9 +2683,8 @@ msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "아스키 문자열 (움라우트같은 특수 문자 아님)"
 
 #: src/output/p_av1.h:32
-#, fuzzy
 msgid "AV1"
-msgstr "AVI"
+msgstr "AV1"
 
 #: src/common/file_types.cpp:74
 #: src/output/p_avc.h:34
@@ -2920,12 +2919,12 @@ msgstr "해당 속성이 이미 존재하는 경우에도 지정한 값으로 �
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:228
 msgid "Adler-32:"
-msgstr ""
+msgstr "Adler-32:"
 
 #: src/mkvtoolnix-gui/info/model.cpp:211
-#, fuzzy, boost-format
+#, boost-format
 msgid "Adler-32: 0x%|1$08x|"
-msgstr " (아들러: 0x%|1$08x|)"
+msgstr "Adler-32: 0x%|1$08x|"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:319
 msgid "After a job completes &successfully or with warnings"
@@ -4057,9 +4056,9 @@ msgid "Content encryption"
 msgstr "내용 암호화"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:231
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Content size:"
-msgstr "컨텐츠"
+msgstr "내용 크기:"
 
 #: src/extract/extract_cli_parser.cpp:75
 msgid "Convert text subtitles to this charset (default: UTF-8)."
@@ -4544,7 +4543,7 @@ msgstr "기본값"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1582
 msgid "Defaults for jobs saving info tool output to text files"
-msgstr ""
+msgstr "정보 도구 출력을 텍스트 파일로 저장하는 작업에 대한 기본값"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1588
 msgid "Defaults for new chapter entries"
@@ -4604,9 +4603,9 @@ msgid "Derive &end timestamps from start timestamps"
 msgstr "시작 타임스탬프에서 끝 타임스탬프 얻기(&E)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:191
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Deriving track languages"
-msgstr "파일명에서 트랙 언어 얻는 중"
+msgstr "트랙 언어 유추 중"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1551
 msgid "Deriving track languages from file names"
@@ -4741,9 +4740,9 @@ msgid "Discard padding"
 msgstr "패딩 제거"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Discardable"
-msgstr "버릴 수 있음 "
+msgstr "폐기 가능"
 
 #: src/merge/mkvmerge.cpp:684
 #: src/merge/mkvmerge.cpp:690
@@ -4917,9 +4916,9 @@ msgid "EBML head"
 msgstr "EBML 헤드"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:177
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "EBML lacing"
-msgstr "EBML 방식으로 강제로 묶습니다."
+msgstr "EBML 묶기"
 
 #: src/common/kax_element_names.cpp:73
 msgid "EBML read version"
@@ -5001,9 +5000,9 @@ msgid "Element %1% is written.\n"
 msgstr "%1% 요소를 기록했습니다.\n"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:224
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Element ID:"
-msgstr "요소"
+msgstr "요소 ID:"
 
 #: src/propedit/propedit_cli_parser.cpp:160
 msgid "Element types:\n"
@@ -5029,14 +5028,12 @@ msgid "Enable copying of tracks by their language"
 msgstr "트랙의 언어로 트랙을 복사하기"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1568
-#, fuzzy
 msgid "Enable copying of tracks by their type"
-msgstr "트랙의 언어로 트랙을 복사하기"
+msgstr "트랙의 형식으로 트랙을 복사하기"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1544
-#, fuzzy
 msgid "Enable dialog &normalization gain removal for audio tracks"
-msgstr "대화 볼륨 노멀라이징 게인 제거하기"
+msgstr "오디오 트랙의 대화 정규화 게인 제거 사용하기(&N)"
 
 #: src/common/kax_element_names.cpp:183
 msgid "Enabled"
@@ -5059,7 +5056,7 @@ msgstr "기본 사용 트랙"
 
 #: src/common/av1.h:30
 msgid "Encountered OBUs with invalid data."
-msgstr ""
+msgstr "무효한 데이터가 있는 OBU가 발생했습니다."
 
 #: src/common/kax_element_names.cpp:171
 msgid "Encryption algorithm"
@@ -5520,7 +5517,7 @@ msgstr "비트스트림 타이밍 정보 고치기"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:176
 #, no-c-format
 msgid "Fixed-sized lacing"
-msgstr ""
+msgstr "고정된 크기로 묶기"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, no-c-format
@@ -5639,14 +5636,14 @@ msgstr "FourCC: '%1% %2%'에 누락된 트랙 ID가 있습니다.\n"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:192
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:96
 #: src/mkvtoolnix-gui/info/model.cpp:210
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame"
-msgstr "프레임 속도"
+msgstr "프레임"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:207
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame #%1"
-msgstr "프레임 속도"
+msgstr "프레임 #%1"
 
 #: src/common/kax_element_names.cpp:249
 msgid "Frame number"
@@ -5658,9 +5655,9 @@ msgstr "프레임 속도"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:113
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:142
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Frame size #%1: %2"
-msgstr " 크기 %1%"
+msgstr "프레임 크기 #%1: %2"
 
 #: src/common/kax_info.cpp:224
 #: src/common/kax_info.cpp:232
@@ -5670,9 +5667,9 @@ msgstr "프레임 크기: %1%%2%%3%"
 
 #: src/common/kax_info.cpp:223
 #: src/common/kax_info.cpp:231
-#, fuzzy, boost-format
+#, boost-format
 msgid "Frame%1%%2%"
-msgstr "프레임 크기: %1%%2%%3%"
+msgstr "프레임%1%%2%"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:297
 #, no-c-format
@@ -5893,9 +5890,8 @@ msgstr "ISO639-2 코드"
 
 #: src/common/file_types.cpp:41
 #: src/common/file_types.cpp:87
-#, fuzzy
 msgid "IVF (AV1, VP8, VP9)"
-msgstr "IVF (VP8/VP9)"
+msgstr "IVF (AV1, VP8, VP9)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:260
 #, no-c-format
@@ -5982,7 +5978,7 @@ msgstr "이 옵션 사용시 모든 자막 트랙을 추가시에 그 \"기본 �
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:282
 #, no-c-format
 msgid "If enabled, removal of dialog normalization gain will be enabled for all audio tracks for which removal is supported."
-msgstr ""
+msgstr "이 옵션을 사용하면 제거가 지원되는 모든 오디오 트랙에 대해 대화 정규화 게인이 제거됩니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:239
 #, no-c-format
@@ -6657,7 +6653,7 @@ msgstr "무효한 트랙 유형 %1%."
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Invisible"
-msgstr ""
+msgstr "보이지 않는"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:174
 #, no-c-format
@@ -6747,7 +6743,7 @@ msgstr "이 수준까지만 BlockAddition을 유지합니다. (기본값: 모든
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
 #, no-c-format
 msgid "Key frame"
-msgstr ""
+msgstr "키 프레임"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:672
 msgid "Known &problems in recent releases"
@@ -6807,10 +6803,10 @@ msgid "Legend:"
 msgstr "범례:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:69
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Length: %1 byte"
 msgid_plural "Length: %1 bytes"
-msgstr[0] "%1% 바이트"
+msgstr[0] "길이: %1 바이트"
 
 #: src/merge/timestamp_factory.cpp:358
 #, boost-format
@@ -7480,7 +7476,7 @@ msgstr "아직 시작한 작업이 없습니다"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:174
 #, no-c-format
 msgid "No lacing"
-msgstr ""
+msgstr "묶기 없음"
 
 #: src/input/r_flac.cpp:128
 msgid "No metadata block found. This file is broken.\n"
@@ -7597,9 +7593,9 @@ msgid "Not a hex digit at position %1%"
 msgstr "%1% 위치에 16진수 수가 없습니다"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not a key frame"
-msgstr "모든 프레임용"
+msgstr "키 프레임이 아님"
 
 #: src/common/kax_analyzer.cpp:299
 msgid "Not a valid Matroska file (no EBML head found)"
@@ -7614,9 +7610,9 @@ msgid "Not a valid number or not positive."
 msgstr "유효한 숫자가 아니거나 양수가 아닙니다."
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not discardable"
-msgstr "버릴 수 있음 "
+msgstr "폐기 불가"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:299
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:370
@@ -7687,9 +7683,9 @@ msgid "Number of chapters:"
 msgstr "챕터 수:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:197
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Number of frames: %1"
-msgstr "챕터 수:"
+msgstr "프레임 수: %1"
 
 #: src/common/property_element.cpp:137
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -7736,9 +7732,8 @@ msgid_plural "Only %1% chapters found in source files & chapter files."
 msgstr[0] "소스 파일과 챕터 파일에서 %1%개의 챕터만 찾았습니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
-#, fuzzy
 msgid "Only English language names are supported."
-msgstr "영어 언어 이름"
+msgstr "영어 언어 이름만 지원됩니다."
 
 #: src/merge/mkvmerge.cpp:1802
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:713
@@ -8503,9 +8498,8 @@ msgid "RealMedia audio/video files"
 msgstr "RealMedia 오디오/비디오 파일"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1556
-#, fuzzy
 msgid "Recognized languages"
-msgstr "태그 언어"
+msgstr "인식된 언어"
 
 #: src/common/property_element.cpp:182
 msgid "Red X chromaticity coordinate as defined by CIE 1931."
@@ -8544,9 +8538,9 @@ msgid "Reference virtual"
 msgstr "참조 가상"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:168
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Relative timestamp: %1"
-msgstr "클러스터 타임스탬프"
+msgstr "상대적인 타임스탬프: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:828
@@ -8789,9 +8783,8 @@ msgid "Save as &default for new multiplex jobs"
 msgstr "새 합치기 작업의 기본값으로 저장하기(&D)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:77
-#, fuzzy
 msgid "Save as &default for saving output to text files"
-msgstr "새 합치기 작업의 기본값으로 저장하기(&D)"
+msgstr "출력을 텍스트 파일로 저장시의 기본값으로 저장하기(&D)"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 #, no-c-format
@@ -9154,7 +9147,7 @@ msgstr "설정"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:76
 msgid "Settings for saving output to a text file"
-msgstr ""
+msgstr "출력을 텍스트 파일로 저장시의 설정"
 
 #: src/input/r_real.cpp:555
 #, boost-format
@@ -11634,9 +11627,9 @@ msgid "Track number for mkvpropedit:"
 msgstr "mkvpropedit용 트랙 번호:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:163
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Track number:"
-msgstr "트랙 번호"
+msgstr "트랙 번호:"
 
 #: src/common/kax_element_names.cpp:193
 msgid "Track overlay"
@@ -11963,9 +11956,9 @@ msgid "Value"
 msgstr "값"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:77
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Value: %1"
-msgstr "값"
+msgstr "값: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:235
 #, no-c-format
@@ -12202,7 +12195,7 @@ msgstr "비디오: 백색점 Y"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Visible"
-msgstr ""
+msgstr "보이는"
 
 #: src/common/file_types.cpp:104
 #: src/output/p_vobbtn.h:35
@@ -12489,9 +12482,9 @@ msgid "XML tag files"
 msgstr "XML 태그 파일"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:175
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Xiph lacing"
-msgstr "Xiph 방식으로 강제로 묶습니다."
+msgstr "Xiph 묶기"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
