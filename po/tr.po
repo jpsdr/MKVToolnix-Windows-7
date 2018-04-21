@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-04-10 20:30+0200\n"
-"PO-Revision-Date: 2018-04-01 18:03+0000\n"
+"PO-Revision-Date: 2018-04-11 10:18+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -765,15 +765,14 @@ msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           Bu dosyadan herhangi bir görüntü izini kopyalama.\n"
 
 #: src/merge/mkvmerge.cpp:343
-#, fuzzy
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
 "                           ('text' or 'json'; default is 'text').\n"
 msgstr ""
-"  -F, --identification-format <biçim>\n"
+"  -F, --identification-format <format>\n"
 "                           Tanımlama sonuçları biçimini\n"
-"                           ('text', 'verbose-text', 'json') ayarlar.\n"
+"                           ('text' veya 'json'; varsayılan 'text') ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:341
 msgid ""
@@ -1078,9 +1077,9 @@ msgid " at %1%"
 msgstr " bulunma yeri %1%"
 
 #: src/common/kax_info.cpp:237
-#, fuzzy, boost-format
+#, boost-format
 msgid " at 0x%|1$x|"
-msgstr " (adler: 0x%|1$08x|)"
+msgstr " bulunma yeri 0x%|1$x|"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:916
 #, no-c-format
@@ -1801,7 +1800,7 @@ msgstr "Ö&nceki çoklama ayarları"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1555
 msgid "&Regular expression:"
-msgstr ""
+msgstr "&Düzenli ifade:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:628
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
@@ -2621,7 +2620,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:339
 msgid "A regular expression is used for matching the file name against a list of recognized languages limited by characters such as '.' or '['…']'."
-msgstr ""
+msgstr "Bir düzenli ifade, '.' veya '['…']' gibi karakterler tarafından sınırlandırılan bir tanınan diller listesine karşı dosya adıyla eşleşmesi için kullanılır."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:290
 #: src/mkvtoolnix-gui/merge/output.cpp:306
@@ -4588,7 +4587,7 @@ msgstr "Varsayılan değerler"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1582
 msgid "Defaults for jobs saving info tool output to text files"
-msgstr ""
+msgstr "Bilgi aracı çıktısını metin dosyalarına kaydeden işler için varsayılanlar"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1588
 msgid "Defaults for new chapter entries"
@@ -4648,9 +4647,9 @@ msgid "Derive &end timestamps from start timestamps"
 msgstr "Bitiş zaman damgalarını başlangıç ​​zaman damgalarından tür&et"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:191
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Deriving track languages"
-msgstr "İz dilleri dosya adlarından türetiliyor"
+msgstr "İz dilleri türetme"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1551
 msgid "Deriving track languages from file names"
@@ -5074,14 +5073,12 @@ msgid "Enable copying of tracks by their language"
 msgstr "İzlerin kopyalanmasını dillerine göre etkinleştirme"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1568
-#, fuzzy
 msgid "Enable copying of tracks by their type"
-msgstr "İzlerin kopyalanmasını dillerine göre etkinleştirme"
+msgstr "İzlerin kopyalanmasını türüne göre etkinleştirme"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1544
-#, fuzzy
 msgid "Enable dialog &normalization gain removal for audio tracks"
-msgstr "Konuşma normalleştirme kazancını kaldır"
+msgstr "Ses izleri için konuşma &normalleştirme boşluğunu kaldırmayı etkinleştir"
 
 #: src/common/kax_element_names.cpp:183
 msgid "Enabled"
@@ -5100,11 +5097,11 @@ msgstr "Bu seçeneği etkinleştirmek mkvmerge'ün bu son girişi tutmasına ned
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:193
 #, no-c-format
 msgid "Enabling tracks"
-msgstr "Etkinleştirilen izler"
+msgstr "İzleri etkinleştirme"
 
 #: src/common/av1.h:30
 msgid "Encountered OBUs with invalid data."
-msgstr ""
+msgstr "Geçersiz verileri olan OBU'larla karşılaşıldı."
 
 #: src/common/kax_element_names.cpp:171
 msgid "Encryption algorithm"
@@ -5145,7 +5142,7 @@ msgstr "Geçici bir dosya oluştururken hata (sebep: %1)."
 #: src/input/r_ogm.cpp:1218
 #, boost-format
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
-msgstr ""
+msgstr "%1% kaynak zaman damgasındaki bir Ogg Opus sayfası çözülürken hata oldu; sayfa atlanacaktır: %2%\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:136
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:259
@@ -6027,7 +6024,7 @@ msgstr "Eğer etkinleştirildiyse, tüm altyazı izleri eklendikleri zaman \"hay
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:282
 #, no-c-format
 msgid "If enabled, removal of dialog normalization gain will be enabled for all audio tracks for which removal is supported."
-msgstr ""
+msgstr "Eğer etkinleştirildiyse, kaldırılması desteklenen ses izleri için konuşma normalleştirme boşluğunun kaldırılmasını etkinleştirecektir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:239
 #, no-c-format
@@ -6157,15 +6154,15 @@ msgstr "Eğer sayı son eki 'ms' ise o zaman her küme içine verinin en çok 'n
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:335
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Eğer kaynak dosya bir altyazı izi için böyle bir özellik içermiyorsa, o zaman dil belli örneklerle eşleşiyorsa (örn. Türkçe için '…[tur]…' ) dosya adından türetilebilir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Eğer kaynak dosya bir görüntü izi için böyle bir özellik içermiyorsa, o zaman dil belli örneklerle eşleşiyorsa (örn. Türkçe için '…[tur]…' ) dosya adından türetilebilir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr ""
+msgstr "Eğer kaynak dosya bir ses izi için böyle bir özellik içermiyorsa, o zaman dil belli örneklerle eşleşiyorsa (örn. Türkçe için '…[tur]…' ) dosya adından türetilebilir."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:85
 #, no-c-format
@@ -7783,9 +7780,8 @@ msgstr[0] "Kaynak dosyalarda ve bölüm dosyalarında sadece %1% bölüm bulundu
 msgstr[1] "Kaynak dosyalarda ve bölüm dosyalarında sadece %1% bölüm bulundu."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
-#, fuzzy
 msgid "Only English language names are supported."
-msgstr "İngilizce dil adı"
+msgstr "Sadece İngilizce dil adları desteklenir."
 
 #: src/merge/mkvmerge.cpp:1802
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:713
@@ -7865,9 +7861,9 @@ msgstr "Sadece ilk %1 bayt gösterilir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:345
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:346
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Only the languages in the 'selected' list on the right will be recognized as track languages in file names."
-msgstr "Sağdaki 'seçilen' listesindeki diller, programdaki tüm aşağı açılır dil listesinin en üstünde gösterilecektir."
+msgstr "Sadece sağdaki 'seçilen' listesindeki diller, dosya adlarındaki iz dilleri olarak tanınacaktır."
 
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, no-c-format
@@ -8501,7 +8497,7 @@ msgstr "RSA"
 
 #: src/common/av1.h:23
 msgid "Raw OBUs without a size field are not supported."
-msgstr ""
+msgstr "Boyut alanı olmayan ham OBU'lar desteklenmiyor."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:209
 #, no-c-format
@@ -8556,9 +8552,8 @@ msgid "RealMedia audio/video files"
 msgstr "RealMedia ses/görüntü dosyası"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1556
-#, fuzzy
 msgid "Recognized languages"
-msgstr "Etiket dili"
+msgstr "Tanınan diller"
 
 #: src/common/property_element.cpp:182
 msgid "Red X chromaticity coordinate as defined by CIE 1931."
@@ -8732,7 +8727,7 @@ msgstr "Yeniden eşitleme %1% konumunda başarılı.\n"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:344
 #, no-c-format
 msgid "Revert the regular expression to its default value."
-msgstr ""
+msgstr "Düzenli ifadeyi varsayılan değerine döndürür."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:646
 #, no-c-format
@@ -10183,7 +10178,7 @@ msgstr "Bitiş zamanı başlangıç zamanından büyük olmak zorundadır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:340
 msgid "The expression must contain at least one pair of capturing parenthesis."
-msgstr ""
+msgstr "İfade, yakalama parantezlerinin en az bir eşlemesini içermek zorundadır."
 
 #: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
@@ -10484,7 +10479,7 @@ msgstr "İlk kip bazı izleri harici dosyalara çıkartır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 msgid "The first non-empty capturing parenthesis will be used as the language."
-msgstr ""
+msgstr "İlk boş olmayan yakalama parantezleri dil olarak kullanılacaktır."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
 msgid "The following modes are supported:"
@@ -10492,7 +10487,7 @@ msgstr "Aşağıdaki kipler desteklenir:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 msgid "The following placeholders can be used to match the list of recognized languages: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' and '<LANGUAGE_NAMES>'."
-msgstr ""
+msgstr "Şurada belirtilen yer tutucular tanınan dillerin listesiyle eşleşmesi için kullanılabilir: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' ve '<LANGUAGE_NAMES>'."
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:199
 #, no-c-format
@@ -10611,7 +10606,7 @@ msgstr "%2%' zaman damgası dosyasının '%1%' satırı geçerli bir kayan nokta
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:969
 #, no-c-format
 msgid "The list of recognized track languages in file names must not be empty."
-msgstr ""
+msgstr "Dosya adlarındaki tanınan iz dillerinin listesi boş olmamak zorundadır."
 
 #: src/common/translation.cpp:368
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
@@ -10855,9 +10850,9 @@ msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, da
 msgstr "Tanınan biçim 'YYYY-mm-ddTHH:MM:SS+zz:zz': yıl, ay, gün, 'T' harfi, saat, dakika, saniye ve UTC'den gelen saat dilimi karşılığı; örnek: 2017-03-28T17:28-02:00."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:957
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The regular expression for deriving the track language from file names is invalid: %1"
-msgstr "İz dilleri dosya adlarından türetiliyor"
+msgstr "Dosya adlarından türetilen iz dilleri için düzenli ifade geçersiz: %1"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:196
 msgid "The rest is copied as is."
@@ -11935,7 +11930,7 @@ msgstr "'%1%' öğesini güncelleme başarısız oldu. Sebebi:"
 #: src/propedit/propedit.cpp:122
 #, no-c-format
 msgid "Updating the 'document type version' or 'document type read version' header fields failed."
-msgstr ""
+msgstr "'Belge türü sürümü' veya 'belge türü okuma sürümü' başlığı alanını güncelleme başarısız oldu."
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:41
 msgid "Usage"
