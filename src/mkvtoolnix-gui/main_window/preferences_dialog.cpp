@@ -45,7 +45,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
 
   // GUI page
   ui->cbGuiCheckForUpdates->setChecked(m_cfg.m_checkForUpdates);
-  ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
   ui->cbGuiShowToolSelector->setChecked(m_cfg.m_showToolSelector);
   ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
@@ -217,7 +216,6 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("This is done at startup and at most once within 24 hours."))
                    .arg(QY("No information is transmitted to the server.")));
 
-  Util::setToolTip(ui->cbGuiDisableAnimations, QY("If checked, several short animations used throughout the program as visual clues for the user will be disabled."));
   Util::setToolTip(ui->cbGuiWarnBeforeClosingModifiedTabs,
                    Q("%1 %2")
                    .arg(QY("If checked, the program will ask for confirmation before closing or reloading tabs that have been modified."))
@@ -719,7 +717,6 @@ PreferencesDialog::save() {
   m_cfg.m_uiFontFamily                                  = ui->fcbGuiFontFamily->currentFont().family();
   m_cfg.m_uiFontPointSize                               = ui->sbGuiFontPointSize->value();
   m_cfg.m_checkForUpdates                               = ui->cbGuiCheckForUpdates->isChecked();
-  m_cfg.m_disableAnimations                             = ui->cbGuiDisableAnimations->isChecked();
   m_cfg.m_showToolSelector                              = ui->cbGuiShowToolSelector->isChecked();
   m_cfg.m_warnBeforeClosingModifiedTabs                 = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
   m_cfg.m_warnBeforeAbortingJobs                        = ui->cbGuiWarnBeforeAbortingJobs->isChecked();

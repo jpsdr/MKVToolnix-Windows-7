@@ -33,7 +33,6 @@
 #include "mkvtoolnix-gui/util/cache.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/message_box.h"
-#include "mkvtoolnix-gui/util/moving_pixmap_overlay.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/waiting_spinner_widget.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -59,7 +58,6 @@ class MainWindowPrivate {
   ChapterEditor::Tool *toolChapterEditor{};
   WatchJobs::Tool *watchJobTool{};
   QList<QAction *> toolSelectionActions;
-  std::unique_ptr<Util::MovingPixmapOverlay> movingPixmapOverlay;
   bool queueIsRunning{};
   int spinnerIsSpinning{};
 
@@ -155,8 +153,6 @@ MainWindow::createNotImplementedWidget() {
 void
 MainWindow::setupAuxiliaryWidgets() {
   auto p = p_func();
-
-  p->movingPixmapOverlay = std::make_unique<Util::MovingPixmapOverlay>(centralWidget());
 
   p->statusBarProgress = new StatusBarProgressWidget{this};
   p->ui->statusBar->addPermanentWidget(p->statusBarProgress);
@@ -545,38 +541,6 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
   dlg.exec();
 }
 #endif  // HAVE_UPDATE_CHECK
-
-void
-MainWindow::showIconMovingToTool(QString const &pixmapName,
-                                 ToolBase const &tool) {
-  auto p = p_func();
-
-  if (Util::Settings::get().m_disableAnimations)
-    return;
-
-  for (auto idx = 0, count = p->ui->tool->count(); idx < count; ++idx)
-    if (&tool == p->ui->tool->widget(idx)) {
-      auto size = 32;
-      auto rect = p->ui->tool->tabBar()->tabRect(idx);
-
-      auto from = centralWidget()->mapFromGlobal(QCursor::pos());
-      auto to   = QPoint{rect.x() + (rect.width()  - size) / 2,
-                         rect.y() + (rect.height() - size) / 2};
-      to        = centralWidget()->mapFromGlobal(p->ui->tool->tabBar()->mapToGlobal(to));
-
-      p->movingPixmapOverlay->addMovingPixmap(Q(":/icons/%1x%1/%2").arg(size).arg(pixmapName), from, to);
-
-      return;
-    }
-}
-
-void
-MainWindow::resizeEvent(QResizeEvent *event) {
-  auto p = p_func();
-
-  p->movingPixmapOverlay->resize(event->size());
-  event->accept();
-}
 
 void
 MainWindow::visitHelpURL() {

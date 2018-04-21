@@ -168,7 +168,7 @@ public:
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;
 
-  bool m_disableAnimations, m_showToolSelector, m_warnBeforeClosingModifiedTabs, m_warnBeforeAbortingJobs, m_warnBeforeOverwriting, m_showMoveUpDownButtons;
+  bool m_showToolSelector, m_warnBeforeClosingModifiedTabs, m_warnBeforeAbortingJobs, m_warnBeforeOverwriting, m_showMoveUpDownButtons;
   QString m_uiLocale, m_uiFontFamily;
   int m_uiFontPointSize;
 

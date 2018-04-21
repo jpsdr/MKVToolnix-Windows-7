@@ -281,7 +281,6 @@ Settings::load() {
   m_removeOldJobs                      = reg.value("removeOldJobs",                                  true).toBool();
   m_removeOldJobsDays                  = reg.value("removeOldJobsDays",                              14).toInt();
 
-  m_disableAnimations                  = reg.value("disableAnimations", false).toBool();
   m_showToolSelector                   = reg.value("showToolSelector", true).toBool();
   m_warnBeforeClosingModifiedTabs      = reg.value("warnBeforeClosingModifiedTabs", true).toBool();
   m_warnBeforeAbortingJobs             = reg.value("warnBeforeAbortingJobs", true).toBool();
@@ -588,7 +587,6 @@ Settings::save()
   reg.setValue("removeOldJobs",                      m_removeOldJobs);
   reg.setValue("removeOldJobsDays",                  m_removeOldJobsDays);
 
-  reg.setValue("disableAnimations",                  m_disableAnimations);
   reg.setValue("showToolSelector",                   m_showToolSelector);
   reg.setValue("warnBeforeClosingModifiedTabs",      m_warnBeforeClosingModifiedTabs);
   reg.setValue("warnBeforeAbortingJobs",             m_warnBeforeAbortingJobs);

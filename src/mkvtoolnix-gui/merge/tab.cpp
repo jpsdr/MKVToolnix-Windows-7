@@ -415,14 +415,8 @@ Tab::addToJobQueue(bool startNow,
       job->setDescription(newDescription);
     }
 
-    MainWindow::get()->showIconMovingToTool(Q("task-delegate.png"), *MainWindow::jobTool());
-
-  } else {
-    if (cfg.m_switchToJobOutputAfterStarting)
-      MainWindow::get()->switchToTool(MainWindow::watchJobTool());
-    else
-      MainWindow::get()->showIconMovingToTool(Q("media-playback-start.png"), *MainWindow::watchJobTool());
-  }
+  } else if (cfg.m_switchToJobOutputAfterStarting)
+    MainWindow::get()->switchToTool(MainWindow::watchJobTool());
 
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 

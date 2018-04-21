@@ -36,9 +36,6 @@ class Tool;
 namespace Ui {
 class MainWindow;
 }
-namespace Util {
-class MovingPixmapOverlay;
-}
 namespace WatchJobs {
 class Tab;
 class Tool;
@@ -62,10 +59,6 @@ public:
   virtual void showTheseMenusOnly(QList<QMenu *> const &menus);
   virtual void showAndEnableMenu(QMenu &menu, bool show);
   virtual void retranslateUi();
-
-  virtual void showIconMovingToTool(QString const &pixmapName, ToolBase const &tool);
-
-  virtual void resizeEvent(QResizeEvent *event) override;
 
   virtual void switchToTool(ToolBase *tool);
 
