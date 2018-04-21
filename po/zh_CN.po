@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-04-10 20:30+0200\n"
-"PO-Revision-Date: 2018-04-02 17:23+0000\n"
+"PO-Revision-Date: 2018-04-11 16:43+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -1652,7 +1652,7 @@ msgstr "要重新编号的条目数目(&N):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1570
 msgid "&Only enable copying of tracks with specific languages by default"
-msgstr "默认只选中特定语言的轨道用于复制(&O)"
+msgstr "默认只将特定语言的轨道选中用于复制(&O)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1513
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1515
@@ -1736,7 +1736,7 @@ msgstr "上一个混流设置页面(&P)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1555
 msgid "&Regular expression:"
-msgstr ""
+msgstr "正则表达式(&R):"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:628
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
@@ -2551,7 +2551,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:339
 msgid "A regular expression is used for matching the file name against a list of recognized languages limited by characters such as '.' or '['…']'."
-msgstr ""
+msgstr "正则表达式由「.」「[...]」等限定字符构成，用于将文件名与可识别的语言代码相匹配。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:290
 #: src/mkvtoolnix-gui/merge/output.cpp:306
@@ -3079,7 +3079,7 @@ msgstr "总是询问用户"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1571
 msgid "Always enable copying for all tracks of the following types regardless of their language:"
-msgstr "总是启用以下类型的轨道，而不考虑其语言:"
+msgstr "总将以下类型的轨道选中用于复制，而不考虑其语言:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1578
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:145
@@ -4568,9 +4568,9 @@ msgid "Derive &end timestamps from start timestamps"
 msgstr "根据各起始时间戳推算终止时间戳(&E)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:191
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Deriving track languages"
-msgstr "从文件名称推断轨道语言"
+msgstr "推得的轨道语言"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1551
 msgid "Deriving track languages from file names"
@@ -4990,17 +4990,15 @@ msgstr "类别 '%1%' 中的元素 ('--edit %2%'): \n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1569
 msgid "Enable copying of tracks by their language"
-msgstr "根据语言启用要复制的轨道"
+msgstr "按语言选中要复制的轨道"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1568
-#, fuzzy
 msgid "Enable copying of tracks by their type"
-msgstr "根据语言启用要复制的轨道"
+msgstr "按类型选中要复制的轨道"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1544
-#, fuzzy
 msgid "Enable dialog &normalization gain removal for audio tracks"
-msgstr "移除对白正规化增益"
+msgstr "为音频轨道启用对白正常化增益移除(&N)"
 
 #: src/common/kax_element_names.cpp:183
 msgid "Enabled"
@@ -5945,7 +5943,7 @@ msgstr "如果勾选该选项，添加时所有字幕轨道的“默认轨道”
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:282
 #, no-c-format
 msgid "If enabled, removal of dialog normalization gain will be enabled for all audio tracks for which removal is supported."
-msgstr ""
+msgstr "若启用，则将为所有支持增益移除的音频轨道启用对白正规化增益移除。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:239
 #, no-c-format
@@ -7699,9 +7697,8 @@ msgid_plural "Only %1% chapters found in source files & chapter files."
 msgstr[0] "输入文件及章节文件中只有 %1% 个章节。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
-#, fuzzy
 msgid "Only English language names are supported."
-msgstr "语言名称 (以英语表示)"
+msgstr "仅支持英语标注的语言名称。"
 
 #: src/merge/mkvmerge.cpp:1802
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:713
@@ -7781,9 +7778,9 @@ msgstr "仅显示开头 %1 字节。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:345
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:346
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Only the languages in the 'selected' list on the right will be recognized as track languages in file names."
-msgstr "右侧“选中”列表中的语言将会显示在程序中所有语言下拉列表的顶部。"
+msgstr "只有右侧「选中」列表范围内的语言可从文件名中识别为轨道语言。"
 
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, no-c-format
@@ -7792,9 +7789,9 @@ msgstr "仅首个输出文件"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:396
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:397
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Only tracks whose type is in the 'selected' list on the right will be set to be copied by default."
-msgstr "只有语言在此列表中的轨道将默认用于复制。"
+msgstr "只有右侧「选中」列表范围内类型的轨道会默认选中用于复制。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:408
 #, no-c-format
@@ -8465,9 +8462,8 @@ msgid "RealMedia audio/video files"
 msgstr "RealMedia 音频/视频文件"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1556
-#, fuzzy
 msgid "Recognized languages"
-msgstr "标签语言"
+msgstr "已识别的语言"
 
 #: src/common/property_element.cpp:182
 msgid "Red X chromaticity coordinate as defined by CIE 1931."
@@ -8641,7 +8637,7 @@ msgstr "成功重新同步于 %1%。\n"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:344
 #, no-c-format
 msgid "Revert the regular expression to its default value."
-msgstr ""
+msgstr "将正则表达式恢复为默认值。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:646
 #, no-c-format
@@ -10076,7 +10072,7 @@ msgstr "终止时间必须大于起始时间。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:340
 msgid "The expression must contain at least one pair of capturing parenthesis."
-msgstr ""
+msgstr "表达式至少应不含一组捕获圆括号。"
 
 #: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
@@ -10377,7 +10373,7 @@ msgstr "第一种模式用于将指定轨道提取到外部文件。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 msgid "The first non-empty capturing parenthesis will be used as the language."
-msgstr ""
+msgstr "第一个非空的捕获圆括号将作为语言。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
 msgid "The following modes are supported:"
@@ -10385,7 +10381,7 @@ msgstr "支持以下模式:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 msgid "The following placeholders can be used to match the list of recognized languages: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' and '<LANGUAGE_NAMES>'."
-msgstr ""
+msgstr "以下占位符可用于匹配可识别的语言列表: 「<ISO_639_1_CODES>」「<ISO_639_2_CODES>」以及「<LANGUAGE_NAMES>」。"
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:199
 #, no-c-format
@@ -10504,7 +10500,7 @@ msgstr "时间戳文件 '%2%' 的第 %1% 行不包含有效的浮点数。\n"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:969
 #, no-c-format
 msgid "The list of recognized track languages in file names must not be empty."
-msgstr ""
+msgstr "文件名中可识别轨道语言的列表不能为空。"
 
 #: src/common/translation.cpp:368
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
@@ -10736,9 +10732,9 @@ msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, da
 msgstr "可以识别的格式为“YYYY-mm-ddTHH:MM:SS+zz:zz”: 年，月，日，字母“T”，时，分，秒，UTC 时区偏移; 例如: 2017-03-28T17:28-02:00。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:957
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The regular expression for deriving the track language from file names is invalid: %1"
-msgstr "从文件名称推断轨道语言"
+msgstr "用于从文件名推断轨道语言的正则表达式无效: %1"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:196
 msgid "The rest is copied as is."
