@@ -81,20 +81,22 @@ using memory_cptr = std::shared_ptr<memory_c>;
 using memories_c  = std::vector<memory_cptr>;
 
 class memory_c {
-public:
-  explicit memory_c(void *p = nullptr,
-                    size_t s = 0,
-                    bool take_ownership = false) // allocate a new counter
-    : its_counter(nullptr)
+private:
+  explicit memory_c(void *p,
+                    size_t s,
+                    bool take_ownership) // allocate a new counter
   {
     if (p)
       its_counter = new counter(static_cast<unsigned char *>(p), s, take_ownership);
   }
 
   explicit memory_c(size_t s)
-    : its_counter(new counter(static_cast<unsigned char *>(safemalloc(s)), s, true))
+    : its_counter{new counter(static_cast<unsigned char *>(safemalloc(s)), s, true)}
   {
   }
+
+public:
+  memory_c() {}
 
   ~memory_c() {
     release();
@@ -175,25 +177,35 @@ public:
   }
 
 public:
+  static inline memory_cptr
+  take_ownership(void *buffer, std::size_t length) {
+    return memory_cptr{ new memory_c(reinterpret_cast<unsigned char *>(buffer), length, true) };
+  }
+
+  static inline memory_cptr
+  borrow(void *buffer, std::size_t length) {
+    return memory_cptr{ new memory_c(reinterpret_cast<unsigned char *>(buffer), length, false) };
+  }
+
+  static inline memory_cptr
+  borrow(std::string &buffer) {
+    return borrow(&buffer[0], buffer.length());
+  }
+
   static memory_cptr
   alloc(size_t size) {
-    return memory_cptr(new memory_c(static_cast<unsigned char *>(safemalloc(size)), size, true));
+    return take_ownership(safemalloc(size), size);
   };
 
   static inline memory_cptr
   clone(const void *buffer,
         size_t size) {
-    return memory_cptr(new memory_c(static_cast<unsigned char *>(safememdup(buffer, size)), size, true));
+    return take_ownership(safememdup(buffer, size), size);
   }
 
   static inline memory_cptr
   clone(std::string const &buffer) {
     return clone(buffer.c_str(), buffer.length());
-  }
-
-  static inline memory_cptr
-  point_to(std::string &buffer) {
-    return std::make_shared<memory_c>(reinterpret_cast<unsigned char *>(&buffer[0]), buffer.length(), false);
   }
 
   static memory_c & splice(memory_c &buffer, std::size_t offset, std::size_t to_remove, boost::optional<memory_c const &> to_insert = boost::none);
@@ -216,7 +228,7 @@ private:
       , count(c)
       , offset(0)
     { }
-  } *its_counter;
+  } *its_counter{};
 
   void acquire(counter *c) throw() { // increment the count
     its_counter = c;
@@ -231,7 +243,7 @@ private:
           free(its_counter->ptr);
         delete its_counter;
       }
-      its_counter = 0;
+      its_counter = nullptr;
     }
   }
 };

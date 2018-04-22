@@ -63,7 +63,7 @@ xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
     if (static_cast<int>(nalu_pos.first->get_size()) <= m_nal_size_size)
       return false;
 
-    auto nalu = std::make_shared<memory_c>(nalu_pos.first->get_buffer() + m_nal_size_size, nalu_pos.first->get_size() - m_nal_size_size);
+    auto nalu = memory_c::borrow(nalu_pos.first->get_buffer() + m_nal_size_size, nalu_pos.first->get_size() - m_nal_size_size);
     auto type = nalu_pos.second;
 
     mxdebug_if(m_debug_access_unit_delimiters, boost::format(" type %1%\n") % static_cast<unsigned int>(type));
@@ -147,7 +147,7 @@ xtr_avc_c::create_file(xtr_base_c *master,
     if (!write_nal(buf, pos, mpriv->get_size(), 2))
       break;
 
-    m_parser.handle_sps_nalu(std::make_shared<memory_c>(&buf[previous_pos + 2], pos - previous_pos - 2));
+    m_parser.handle_sps_nalu(memory_c::borrow(&buf[previous_pos + 2], pos - previous_pos - 2));
   }
 
   if (mpriv->get_size() <= pos)
@@ -159,7 +159,7 @@ xtr_avc_c::create_file(xtr_base_c *master,
     auto previous_pos = pos;
     write_nal(buf, pos, mpriv->get_size(), 2);
 
-    m_parser.handle_pps_nalu(std::make_shared<memory_c>(&buf[previous_pos + 2], pos - previous_pos - 2));
+    m_parser.handle_pps_nalu(memory_c::borrow(&buf[previous_pos + 2], pos - previous_pos - 2));
   }
 }
 
@@ -174,7 +174,7 @@ xtr_avc_c::find_nal_units(binary *buf,
     auto nal_size              = get_uint_be(&buf[pos], m_nal_size_size);
     auto actual_nal_unit_type  = get_nalu_type(&buf[pos + m_nal_size_size], nal_size);
 
-    list.emplace_back(std::make_shared<memory_c>(&buf[pos], m_nal_size_size + nal_size, false), actual_nal_unit_type);
+    list.emplace_back(memory_c::borrow(&buf[pos], m_nal_size_size + nal_size), actual_nal_unit_type);
 
     pos += m_nal_size_size + nal_size;
   }

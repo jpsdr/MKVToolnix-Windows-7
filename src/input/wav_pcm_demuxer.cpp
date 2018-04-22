@@ -49,7 +49,7 @@ wav_pcm_demuxer_c::process(int64_t len) {
   if (0 >= len)
     return;
 
-  m_ptzr->process(new packet_t(new memory_c(m_buffer->get_buffer(), len, false)));
+  m_ptzr->process(new packet_t(memory_c::borrow(m_buffer->get_buffer(), len)));
 }
 
 unsigned int

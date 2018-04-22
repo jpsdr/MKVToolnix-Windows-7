@@ -414,7 +414,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
   }
 
   if (duration.valid())
-    ptzr->process(new packet_t(new memory_c(buf, size, true), timestamp, duration.to_ns()));
+    ptzr->process(new packet_t(memory_c::take_ownership(buf, size), timestamp, duration.to_ns()));
   else
     safefree(buf);
 

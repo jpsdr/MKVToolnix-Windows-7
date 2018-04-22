@@ -445,7 +445,7 @@ kax_info_c::create_codec_dependent_private_info(KaxCodecPrivate &c_priv,
     return (boost::format(Y(" (format tag: 0x%|1$04x|)")) % get_uint16_le(&wfe->w_format_tag)).str();
 
   } else if ((codec_id == MKV_V_MPEG4_AVC) && ('v' == track_type) && (c_priv.GetSize() >= 4)) {
-    auto avcc = mtx::avc::avcc_c::unpack(memory_cptr{new memory_c(c_priv.GetBuffer(), c_priv.GetSize(), false)});
+    auto avcc = mtx::avc::avcc_c::unpack(memory_c::borrow(c_priv.GetBuffer(), c_priv.GetSize()));
 
     return (boost::format(Y(" (h.264 profile: %1% @L%2%.%3%)"))
             % (  avcc.m_profile_idc ==  44 ? "CAVLC 4:4:4 Intra"
@@ -464,7 +464,7 @@ kax_info_c::create_codec_dependent_private_info(KaxCodecPrivate &c_priv,
                :                             Y("Unknown"))
             % (avcc.m_level_idc / 10) % (avcc.m_level_idc % 10)).str();
   } else if ((codec_id == MKV_V_MPEGH_HEVC) && ('v' == track_type) && (c_priv.GetSize() >= 4)) {
-    auto hevcc = mtx::hevc::hevcc_c::unpack(std::make_shared<memory_c>(c_priv.GetBuffer(), c_priv.GetSize(), false));
+    auto hevcc = mtx::hevc::hevcc_c::unpack(memory_c::borrow(c_priv.GetBuffer(), c_priv.GetSize()));
 
     return (boost::format(Y(" (HEVC profile: %1% @L%2%.%3%)"))
             % (  hevcc.m_general_profile_idc == 1 ? "Main"

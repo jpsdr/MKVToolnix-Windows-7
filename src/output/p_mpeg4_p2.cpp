@@ -277,7 +277,7 @@ mpeg4_p2_video_packetizer_c::flush_frames(bool end_of_file) {
     // The first frame in the file. Only apply the timestamp, nothing else.
     if (-1 == frame.timestamp) {
       get_next_timestamp_and_duration(frame.timestamp, frame.duration);
-      add_packet(new packet_t(new memory_c(frame.data, frame.size, true), frame.timestamp, frame.duration));
+      add_packet(new packet_t(memory_c::take_ownership(frame.data, frame.size), frame.timestamp, frame.duration));
     }
     return;
   }
@@ -289,9 +289,9 @@ mpeg4_p2_video_packetizer_c::flush_frames(bool end_of_file) {
     get_next_timestamp_and_duration(frame.timestamp, frame.duration);
   get_next_timestamp_and_duration(fref_frame.timestamp, fref_frame.duration);
 
-  add_packet(new packet_t(new memory_c(fref_frame.data, fref_frame.size, true), fref_frame.timestamp, fref_frame.duration, FRAME_TYPE_P == fref_frame.type ? bref_frame.timestamp : VFT_IFRAME));
+  add_packet(new packet_t(memory_c::take_ownership(fref_frame.data, fref_frame.size), fref_frame.timestamp, fref_frame.duration, FRAME_TYPE_P == fref_frame.type ? bref_frame.timestamp : VFT_IFRAME));
   for (auto &frame : m_b_frames)
-    add_packet(new packet_t(new memory_c(frame.data, frame.size, true), frame.timestamp, frame.duration, bref_frame.timestamp, fref_frame.timestamp));
+    add_packet(new packet_t(memory_c::take_ownership(frame.data, frame.size), frame.timestamp, frame.duration, bref_frame.timestamp, fref_frame.timestamp));
 
   m_ref_frames.pop_front();
   m_b_frames.clear();

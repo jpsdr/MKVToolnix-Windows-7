@@ -118,7 +118,7 @@ unlace_memory_xiph(memory_cptr &buffer) {
     if ((ptr + sizes[i]) > end)
       throw mtx::mem::lacing_x("End-of-buffer while assigning the blocks");
 
-    blocks.push_back(memory_cptr(new memory_c(ptr, sizes[i], false)));
+    blocks.push_back(memory_c::borrow(ptr, sizes[i]));
     ptr += sizes[i];
   }
 

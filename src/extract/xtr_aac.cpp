@@ -41,7 +41,7 @@ xtr_aac_c::create_file(xtr_base_c *master,
     if (!priv)
       mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 
-    memory_cptr mem(new memory_c(priv->GetBuffer(), priv->GetSize(), false));
+    auto mem = memory_c::borrow(priv->GetBuffer(), priv->GetSize());
     m_content_decoder.reverse(mem, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
 
     auto audio_config = mtx::aac::parse_audio_specific_config(mem->get_buffer(), mem->get_size());

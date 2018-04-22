@@ -104,7 +104,7 @@ mp3_reader_c::read(generic_packetizer_c *,
   if (0 >= nread)
     return flush_packetizers();
 
-  PTZR0->process(new packet_t(new memory_c(m_chunk->get_buffer(), nread, false)));
+  PTZR0->process(new packet_t(memory_c::borrow(m_chunk->get_buffer(), nread)));
 
   return FILE_STATUS_MOREDATA;
 }

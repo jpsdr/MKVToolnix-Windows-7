@@ -120,14 +120,13 @@ tta_reader_c::read(generic_packetizer_c *,
   if (seek_points.size() <= pos)
     return flush_packetizers();
 
-  unsigned char *buf = (unsigned char *)safemalloc(seek_points[pos]);
-  int nread          = m_in->read(buf, seek_points[pos]);
+  auto mem  = memory_c::alloc(seek_points[pos]);
+  int nread = m_in->read(mem->get_buffer(), seek_points[pos]);
 
-  if (0 >= nread)
+  if (nread != static_cast<int>(seek_points[pos]))
     return flush_packetizers();
   pos++;
 
-  memory_cptr mem(new memory_c(buf, nread, true));
   if (seek_points.size() <= pos) {
     double samples_left = (double)get_uint32_le(&header.data_length) - (seek_points.size() - 1) * TTA_FRAME_TIME * get_uint32_le(&header.sample_rate);
     mxverb(2, boost::format("tta: samples_left %1%\n") % samples_left);

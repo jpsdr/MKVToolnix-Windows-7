@@ -180,7 +180,7 @@ mm_mem_io_c::get_ro_buffer()
 memory_cptr
 mm_mem_io_c::get_and_lock_buffer() {
   m_free_mem = false;
-  return std::make_shared<memory_c>(m_mem, getFilePointer(), true);
+  return memory_c::take_ownership(m_mem, getFilePointer());
 }
 
 std::string

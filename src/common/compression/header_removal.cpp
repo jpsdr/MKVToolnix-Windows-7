@@ -25,44 +25,45 @@ header_removal_compressor_c::header_removal_compressor_c()
 }
 
 memory_cptr
-header_removal_compressor_c::do_decompress(memory_cptr const &buffer) {
+header_removal_compressor_c::do_decompress(unsigned char const *buffer,
+                                           std::size_t size) {
   if (!m_bytes || (0 == m_bytes->get_size()))
-    return buffer;
+    return memory_c::clone(buffer, size);
 
-  memory_cptr new_buffer = memory_c::alloc(buffer->get_size() + m_bytes->get_size());
+  memory_cptr new_buffer = memory_c::alloc(size + m_bytes->get_size());
 
   memcpy(new_buffer->get_buffer(),                       m_bytes->get_buffer(), m_bytes->get_size());
-  memcpy(new_buffer->get_buffer() + m_bytes->get_size(), buffer->get_buffer(),  buffer->get_size());
+  memcpy(new_buffer->get_buffer() + m_bytes->get_size(), buffer,                size);
 
   return new_buffer;
 }
 
 memory_cptr
-header_removal_compressor_c::do_compress(memory_cptr const &buffer) {
+header_removal_compressor_c::do_compress(unsigned char const *buffer,
+                                         std::size_t size) {
   if (!m_bytes || (0 == m_bytes->get_size()))
-    return buffer;
+    return memory_c::clone(buffer, size);
 
-  size_t size = m_bytes->get_size();
-  if (buffer->get_size() < size)
+  size_t to_remove_size = m_bytes->get_size();
+  if (size < to_remove_size)
     throw mtx::compression_x(boost::format(Y("Header removal compression not possible because the buffer contained %1% bytes "
-                                             "which is less than the size of the headers that should be removed, %2%.")) % buffer->get_size() % size);
+                                             "which is less than the size of the headers that should be removed, %2%.")) % size % to_remove_size);
 
-  unsigned char *buffer_ptr = buffer->get_buffer();
-  unsigned char *bytes_ptr  = m_bytes->get_buffer();
+  auto bytes_ptr = m_bytes->get_buffer();
 
-  if (memcmp(buffer_ptr, bytes_ptr, size)) {
+  if (memcmp(buffer, bytes_ptr, to_remove_size)) {
     std::string b_buffer, b_bytes;
     size_t i;
 
-    for (i = 0; size > i; ++i) {
-      b_buffer += (boost::format(" %|1$02x|") % static_cast<unsigned int>(buffer_ptr[i])).str();
+    for (i = 0; to_remove_size > i; ++i) {
+      b_buffer += (boost::format(" %|1$02x|") % static_cast<unsigned int>(buffer[i])).str();
       b_bytes  += (boost::format(" %|1$02x|") % static_cast<unsigned int>(bytes_ptr[i])).str();
     }
     throw mtx::compression_x(boost::format(Y("Header removal compression not possible because the buffer did not start with the bytes that should be removed. "
                                              "Wanted bytes:%1%; found:%2%.")) % b_bytes % b_buffer);
   }
 
-  return memory_c::clone(buffer->get_buffer() + size, buffer->get_size() - size);
+  return memory_c::clone(buffer + size, size - to_remove_size);
 }
 
 void
@@ -95,31 +96,32 @@ analyze_header_removal_compressor_c::~analyze_header_removal_compressor_c() {
 }
 
 memory_cptr
-analyze_header_removal_compressor_c::do_decompress(memory_cptr const &buffer) {
+analyze_header_removal_compressor_c::do_decompress(unsigned char const *,
+                                                   std::size_t) {
   mxerror("analyze_header_removal_compressor_c::do_decompress(): not supported\n");
-  return buffer;
+  return {};
 }
 
 memory_cptr
-analyze_header_removal_compressor_c::do_compress(memory_cptr const &buffer) {
+analyze_header_removal_compressor_c::do_compress(unsigned char const *buffer,
+                                                 std::size_t size) {
   ++m_packet_counter;
 
   if (!m_bytes) {
-    m_bytes = buffer->clone();
-    return buffer;
+    m_bytes = memory_c::clone(buffer, size);
+    return memory_c::clone(buffer, size);
   }
 
-  unsigned char *current = buffer->get_buffer();
-  unsigned char *saved   = m_bytes->get_buffer();
-  size_t i, new_size     = 0;
+  auto saved         = m_bytes->get_buffer();
+  size_t i, new_size = 0;
 
-  for (i = 0; i < std::min(buffer->get_size(), m_bytes->get_size()); ++i, ++new_size)
-    if (current[i] != saved[i])
+  for (i = 0; i < std::min(size, m_bytes->get_size()); ++i, ++new_size)
+    if (buffer[i] != saved[i])
       break;
 
   m_bytes->set_size(new_size);
 
-  return buffer;
+  return memory_c::clone(buffer, size);
 }
 
 void

@@ -368,7 +368,7 @@ kax_reader_c::unlace_vorbis_private_data(kax_track_t *t,
                                          unsigned char *buffer,
                                          int size) {
   try {
-    memory_cptr temp(new memory_c(buffer, size, false));
+    auto temp = memory_c::borrow(buffer, size);
     std::vector<memory_cptr> blocks = unlace_memory_xiph(temp);
     if (blocks.size() != 3)
       return false;
@@ -2143,7 +2143,7 @@ kax_reader_c::create_vc1_video_packetizer(kax_track_t *t,
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 
   if (t->private_data && (sizeof(alBITMAPINFOHEADER) < t->private_data->get_size()))
-    t->ptzr_ptr->process(new packet_t(new memory_c(t->private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), t->private_data->get_size() - sizeof(alBITMAPINFOHEADER), false)));
+    t->ptzr_ptr->process(new packet_t(memory_c::borrow(t->private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), t->private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
 }
 
 void
@@ -2182,7 +2182,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
               continue;
 
             DataBuffer &data_buffer = block_simple->GetBuffer(frame_idx);
-            block_track->first_frames_data.push_back(memory_cptr(new memory_c(data_buffer.Buffer(), data_buffer.Size())));
+            block_track->first_frames_data.push_back(memory_c::borrow(data_buffer.Buffer(), data_buffer.Size()));
             block_track->content_decoder.reverse(block_track->first_frames_data.back(), CONTENT_ENCODING_SCOPE_BLOCK);
             block_track->first_frames_data.back()->take_ownership();
           }
@@ -2207,7 +2207,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
               continue;
 
             DataBuffer &data_buffer = block->GetBuffer(frame_idx);
-            block_track->first_frames_data.push_back(memory_cptr(new memory_c(data_buffer.Buffer(), data_buffer.Size())));
+            block_track->first_frames_data.push_back(memory_cptr(memory_c::borrow(data_buffer.Buffer(), data_buffer.Size())));
             block_track->content_decoder.reverse(block_track->first_frames_data.back(), CONTENT_ENCODING_SCOPE_BLOCK);
             block_track->first_frames_data.back()->take_ownership();
           }
@@ -2337,7 +2337,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
     size_t i;
     for (i = 0; block_simple->NumberFrames() > i; ++i) {
       DataBuffer &data_buffer = block_simple->GetBuffer(i);
-      memory_cptr data(new memory_c(data_buffer.Buffer(), data_buffer.Size(), false));
+      auto data = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
       packet_cptr packet(new packet_t(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref));
@@ -2351,7 +2351,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
     size_t i;
     for (i = 0; i < block_simple->NumberFrames(); i++) {
       DataBuffer &data_buffer = block_simple->GetBuffer(i);
-      memory_cptr data(new memory_c(data_buffer.Buffer(), data_buffer.Size(), false));
+      auto data = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
       if (('s' == block_track->type) && ('t' == block_track->sub_type)) {
@@ -2399,7 +2399,7 @@ kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
 
     auto blockmore     = static_cast<KaxBlockMore *>(child);
     auto blockadd_data = &GetChild<KaxBlockAdditional>(*blockmore);
-    auto blockadded    = std::make_shared<memory_c>(blockadd_data->GetBuffer(), blockadd_data->GetSize(), false);
+    auto blockadded    = memory_c::borrow(blockadd_data->GetBuffer(), blockadd_data->GetSize());
     block_track.content_decoder.reverse(blockadded, CONTENT_ENCODING_SCOPE_BLOCK);
 
     packet->data_adds.push_back(blockadded);
@@ -2481,7 +2481,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
     size_t i;
     for (i = 0; i < block->NumberFrames(); i++) {
       auto &data_buffer = block->GetBuffer(i);
-      auto data         = std::make_shared<memory_c>(data_buffer.Buffer(), data_buffer.Size(), false);
+      auto data         = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
       auto packet                = std::make_shared<packet_t>(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref);
@@ -2502,7 +2502,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
   for (auto block_idx = 0u, num_frames = block->NumberFrames(); block_idx < num_frames; ++block_idx) {
     auto &data_buffer = block->GetBuffer(block_idx);
-    auto data         = std::make_shared<memory_c>(data_buffer.Buffer(), data_buffer.Size(), false);
+    auto data         = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
     block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
     if (('s' == block_track->type) && ('t' == block_track->sub_type)) {

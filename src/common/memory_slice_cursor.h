@@ -59,7 +59,7 @@ public:
     if (0 == size)
       return;
 
-    add_slice(std::make_shared<memory_c>(buffer, size, false));
+    add_slice(memory_c::borrow(buffer, size));
   }
 
   inline unsigned char get_char() {

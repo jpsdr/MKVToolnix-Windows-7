@@ -158,7 +158,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
     databuffer += block_size;
   }
 
-  packet_cptr packet(new packet_t(new memory_c(chunk, data_size, true)));
+  packet_cptr packet(new packet_t(memory_c::take_ownership(chunk, data_size)));
 
   // find the if there is a correction file data corresponding
   if (!m_in_correc) {
@@ -202,7 +202,8 @@ wavpack_reader_c::read(generic_packetizer_c *,
   else
     data_size += sizeof(uint32_t);
 
-  uint8_t *chunk_correc    = (uint8_t *)safemalloc(data_size);
+  auto mem                 = memory_c::alloc(data_size);
+  auto chunk_correc        = mem->get_buffer();
   // only keep the CRC in the header
   dummy_meta.channel_count = 0;
   databuffer               = chunk_correc;
@@ -221,7 +222,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
     databuffer += block_size;
   }
 
-  packet->data_adds.push_back(memory_cptr(new memory_c(chunk_correc, data_size, true)));
+  packet->data_adds.push_back(mem);
 
   PTZR0->process(packet);
 

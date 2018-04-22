@@ -218,9 +218,9 @@ ogm_a_flac_demuxer_c::process_page(int64_t granulepos) {
     nh_packet_data.clear();
 
     if (-1 == last_granulepos)
-      reader->m_reader_packetizers[ptzr]->process(new packet_t(new memory_c(op.packet, op.bytes, false), -1));
+      reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes), -1));
     else {
-      reader->m_reader_packetizers[ptzr]->process(new packet_t(new memory_c(op.packet, op.bytes, false), last_granulepos * 1000000000 / sample_rate));
+      reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes), last_granulepos * 1000000000 / sample_rate));
       last_granulepos = granulepos;
     }
   }

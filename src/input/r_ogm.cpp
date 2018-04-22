@@ -55,7 +55,7 @@
 #define BUFFER_SIZE 4096
 
 struct ogm_frame_t {
-  memory_c *mem;
+  memory_cptr mem;
   int64_t duration;
   unsigned char flags;
 };
@@ -956,7 +956,7 @@ ogm_demuxer_c::process_page(int64_t /* granulepos */) {
     int duration_len;
     get_duration_and_len(op, duration, duration_len);
 
-    memory_c *mem = new memory_c(&op.packet[duration_len + 1], op.bytes - 1 - duration_len, false);
+    auto mem = memory_c::borrow(&op.packet[duration_len + 1], op.bytes - 1 - duration_len);
     reader->m_reader_packetizers[ptzr]->process(new packet_t(mem));
     units_processed += op.bytes - 1;
   }
@@ -1164,7 +1164,7 @@ ogm_a_vorbis_demuxer_c::process_page(int64_t /* granulepos */) {
     if (((*op.packet & 3) == PACKET_TYPE_HEADER) || ((*op.packet & 3) == PACKET_TYPE_COMMENT))
       continue;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(new memory_c(op.packet, op.bytes, false)));
+    reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes)));
   }
 }
 
@@ -1259,7 +1259,7 @@ ogm_s_text_demuxer_c::process_page(int64_t granulepos) {
     get_duration_and_len(op, duration, duration_len);
 
     if (((op.bytes - 1 - duration_len) > 2) || ((op.packet[duration_len + 1] != ' ') && (op.packet[duration_len + 1] != 0) && !iscr(op.packet[duration_len + 1]))) {
-      memory_c *mem = new memory_c(&op.packet[duration_len + 1], op.bytes - 1 - duration_len, false);
+      auto mem = memory_c::borrow(&op.packet[duration_len + 1], op.bytes - 1 - duration_len);
       reader->m_reader_packetizers[ptzr]->process(new packet_t(mem, granulepos * 1000000, (int64_t)duration * 1000000));
     }
   }
@@ -1384,7 +1384,7 @@ ogm_v_mscomp_demuxer_c::process_page(int64_t granulepos) {
       duration = 1;
 
     ogm_frame_t frame = {
-      new memory_c(&op.packet[duration_len + 1], op.bytes - 1 - duration_len, false),
+      memory_c::clone(&op.packet[duration_len + 1], op.bytes - 1 - duration_len),
       duration * default_duration,
       op.packet[0],
     };
@@ -1467,7 +1467,7 @@ ogm_v_theora_demuxer_c::process_page(int64_t granulepos) {
 
     ++units_processed;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(new memory_c(op.packet, op.bytes, false), timestamp, duration, bref, VFT_NOBFRAME));
+    reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes), timestamp, duration, bref, VFT_NOBFRAME));
 
     mxverb(3,
            boost::format("Theora track %1% kfgshift %2% granulepos 0x%|3$08x| %|4$08x|%5%\n")
@@ -1648,7 +1648,7 @@ ogm_s_kate_demuxer_c::process_page(int64_t /* granulepos */) {
     if ((0 == op.bytes) || (0 != (op.packet[0] & 0x80)))
       continue;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(new memory_c(op.packet, op.bytes, false)));
+    reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes)));
 
     ++units_processed;
 

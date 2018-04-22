@@ -29,8 +29,8 @@ public:
     m_bytes->take_ownership();
   }
 
-  virtual memory_cptr do_decompress(memory_cptr const &buffer);
-  virtual memory_cptr do_compress(memory_cptr const &buffer);
+  virtual memory_cptr do_compress(unsigned char const *buffer, std::size_t size) override;
+  virtual memory_cptr do_decompress(unsigned char const *buffer, std::size_t size) override;
 
   virtual void set_track_headers(KaxContentEncoding &c_encoding);
 };
@@ -44,8 +44,8 @@ public:
   analyze_header_removal_compressor_c();
   virtual ~analyze_header_removal_compressor_c();
 
-  virtual memory_cptr do_decompress(memory_cptr const &buffer);
-  virtual memory_cptr do_compress(memory_cptr const &buffer);
+  virtual memory_cptr do_compress(unsigned char const *buffer, std::size_t size) override;
+  virtual memory_cptr do_decompress(unsigned char const *buffer, std::size_t size) override;
 
   virtual void set_track_headers(KaxContentEncoding &c_encoding);
 };

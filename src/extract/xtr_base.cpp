@@ -110,7 +110,7 @@ xtr_base_c::headers_done() {
 
 memory_cptr
 xtr_base_c::decode_codec_private(KaxCodecPrivate *priv) {
-  memory_cptr mpriv(new memory_c(priv->GetBuffer(), priv->GetSize()));
+  auto mpriv = memory_c::borrow(priv->GetBuffer(), priv->GetSize());
   m_content_decoder.reverse(mpriv, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
 
   return mpriv;
@@ -216,7 +216,7 @@ xtr_fullraw_c::create_file(xtr_base_c *master,
   KaxCodecPrivate *priv = FindChild<KaxCodecPrivate>(&track);
 
   if (priv && (0 != priv->GetSize())) {
-    memory_cptr mem(new memory_c(priv->GetBuffer(), priv->GetSize(), false));
+    auto mem = memory_c::borrow(priv->GetBuffer(), priv->GetSize());
     m_content_decoder.reverse(mem, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
     m_out->write(mem);
   }

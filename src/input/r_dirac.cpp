@@ -105,7 +105,7 @@ dirac_es_reader_c::read(generic_packetizer_c *,
 
   int num_read = m_in->read(m_buffer->get_buffer(), READ_SIZE);
   if (0 < num_read)
-    PTZR0->process(new packet_t(new memory_c(m_buffer->get_buffer(), num_read)));
+    PTZR0->process(new packet_t(memory_c::borrow(m_buffer->get_buffer(), num_read)));
 
   return ((READ_SIZE != num_read) || (m_in->getFilePointer() >= m_size)) ? flush_packetizers() : FILE_STATUS_MOREDATA;
 }

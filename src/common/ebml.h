@@ -361,7 +361,7 @@ FindChildValue(EbmlMaster const &master,
   auto child = FindChild<T>(master);
   return !child ? memory_cptr()
        : clone  ? memory_c::clone(child->GetBuffer(), child->GetSize())
-       :          memory_cptr(new memory_c(child->GetBuffer(), child->GetSize(), false));
+       :          memory_c::borrow(child->GetBuffer(), child->GetSize());
 }
 
 template<typename T>

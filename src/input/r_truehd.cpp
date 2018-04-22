@@ -149,7 +149,7 @@ truehd_reader_c::read(generic_packetizer_c *,
   auto num_read = m_in->read(m_chunk->get_buffer(), read_len);
 
   if (0 < num_read)
-    m_converter.convert(std::make_shared<packet_t>(new memory_c(m_chunk->get_buffer(), num_read, false)));
+    m_converter.convert(std::make_shared<packet_t>(memory_c::borrow(m_chunk->get_buffer(), num_read)));
 
   if (num_read == read_len)
     return FILE_STATUS_MOREDATA;

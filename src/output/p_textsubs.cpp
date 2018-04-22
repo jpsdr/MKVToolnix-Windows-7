@@ -92,7 +92,7 @@ textsubs_packetizer_c::process(packet_cptr packet) {
   if (m_cc_utf8)
     subs = m_cc_utf8->utf8(subs);
 
-  packet->data = memory_cptr(new memory_c((unsigned char *)subs.c_str(), subs.length(), false));
+  packet->data = memory_c::borrow(subs);
 
   add_packet(packet);
 

@@ -304,7 +304,7 @@ tag_target_c::account_block_group(KaxBlockGroup &block_group,
 
   for (int idx = 0; idx < static_cast<int>(num_frames); ++idx) {
     auto &data_buffer = block->GetBuffer(idx);
-    account_frame(block->TrackNum(), first_timestamp + idx * frame_duration, frame_duration, std::make_shared<memory_c>(data_buffer.Buffer(), data_buffer.Size(), false));
+    account_frame(block->TrackNum(), first_timestamp + idx * frame_duration, frame_duration, memory_c::borrow(data_buffer.Buffer(), data_buffer.Size()));
   }
 }
 
@@ -324,7 +324,7 @@ tag_target_c::account_simple_block(KaxSimpleBlock &simple_block,
 
   for (int idx = 0; idx < static_cast<int>(num_frames); ++idx) {
     auto &data_buffer = simple_block.GetBuffer(idx);
-    account_frame(simple_block.TrackNum(), first_timestamp + idx * frame_duration, frame_duration, std::make_shared<memory_c>(data_buffer.Buffer(), data_buffer.Size(), false));
+    account_frame(simple_block.TrackNum(), first_timestamp + idx * frame_duration, frame_duration, memory_c::borrow(data_buffer.Buffer(), data_buffer.Size()));
   }
 }
 

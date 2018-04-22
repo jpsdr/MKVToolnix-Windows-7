@@ -160,7 +160,7 @@ dts_reader_c::read(generic_packetizer_c *,
 
   int num_to_output = decode_buffer(num_read);
 
-  PTZR0->process(new packet_t(new memory_c(m_buf[m_cur_buf], num_to_output, false)));
+  PTZR0->process(new packet_t(memory_c::borrow(m_buf[m_cur_buf], num_to_output)));
 
   if (m_in->eof() || (num_read < bytes_to_read))
     return flush_packetizers();

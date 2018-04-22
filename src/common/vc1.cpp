@@ -319,7 +319,7 @@ es_parser_c::add_bytes(unsigned char *buffer,
         if (-1 != previous_pos) {
           int new_size = cursor.get_position() - 4 - previous_pos;
 
-          memory_cptr packet(new memory_c(safemalloc(new_size), new_size, true));
+          memory_cptr packet(memory_c::alloc(new_size));
           cursor.copy(packet->get_buffer(), previous_pos, new_size);
 
           handle_packet(packet);

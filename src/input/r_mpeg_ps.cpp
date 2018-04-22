@@ -1355,7 +1355,7 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
 
       if (0 < track->buffer_size) {
         if (((track->buffer_usage + packet.m_length) > track->buffer_size)) {
-          packet_t *new_packet = new packet_t(new memory_c(track->buffer, track->buffer_usage, false));
+          auto new_packet = std::make_shared<packet_t>(memory_c::borrow(track->buffer, track->buffer_usage));
 
           if (!track->multiple_timestamps_packet_extension->empty()) {
             new_packet->extensions.push_back(packet_extension_cptr(track->multiple_timestamps_packet_extension));

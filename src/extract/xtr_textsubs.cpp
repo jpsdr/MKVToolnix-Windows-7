@@ -175,8 +175,8 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   int64_t start =         f.timestamp / 1000000;
   int64_t end   = start + f.duration / 1000000;
 
-  char *s       = (char *)safemalloc(f.frame->get_size() + 1);
-  memory_c af_s((unsigned char *)s, 0, true);
+  auto af_s     = memory_c::alloc(f.frame->get_size() + 1);
+  char *s       = reinterpret_cast<char *>(af_s->get_buffer());
   memcpy(s, f.frame->get_buffer(), f.frame->get_size());
   s[f.frame->get_size()] = 0;
 

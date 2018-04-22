@@ -431,8 +431,8 @@ real_reader_c::read(generic_packetizer_c *,
     return finish();
   }
 
-  memory_c mem(size);
-  rmff_frame_t *frame = rmff_read_next_frame(file, mem.get_buffer());
+  auto mem   = memory_c::alloc(size);
+  auto frame = rmff_read_next_frame(file, mem->get_buffer());
 
   if (!frame) {
     if (file->num_packets_read < file->num_packets_in_chunk)
@@ -468,10 +468,10 @@ real_reader_c::read(generic_packetizer_c *,
       PTZR(dmx->ptzr)->set_displacement_maybe(timestamp);
     }
 
-    deliver_aac_frames(dmx, mem);
+    deliver_aac_frames(dmx, *mem);
 
   } else
-    queue_audio_frames(dmx, mem, timestamp, frame->flags);
+    queue_audio_frames(dmx, *mem, timestamp, frame->flags);
 
   rmff_release_frame(frame);
 
@@ -572,7 +572,7 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
   int data_idx = 2 + num_sub_packets * 2;
   for (i = 0; i < num_sub_packets; i++) {
     int sub_length = get_uint16_be(&chunk[2 + i * 2]);
-    PTZR(dmx->ptzr)->process(new packet_t(new memory_c(&chunk[data_idx], sub_length, false)));
+    PTZR(dmx->ptzr)->process(new packet_t(memory_c::borrow(&chunk[data_idx], sub_length)));
     data_idx += sub_length;
   }
 }
@@ -621,8 +621,11 @@ real_reader_c::assemble_video_packet(real_demuxer_cptr dmx,
     if (!dmx->rv_dimensions)
       set_dimensions(dmx, assembled->data, assembled->size);
 
-    packet_t *packet = new packet_t(new memory_c(assembled->data, assembled->size, true), (int64_t)assembled->timecode * 1000000, 0,
-                                    (assembled->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME);
+    auto packet = std::make_shared<packet_t>(memory_c::take_ownership(assembled->data, assembled->size),
+                                             (int64_t)assembled->timecode * 1000000,
+                                             0,
+                                             (assembled->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC,
+                                             VFT_NOBFRAME);
     PTZR(dmx->ptzr)->process(packet);
 
     assembled->allocated_by_rmff = 0;
