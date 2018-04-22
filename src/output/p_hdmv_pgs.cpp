@@ -53,7 +53,7 @@ hdmv_pgs_packetizer_c::process(packet_cptr packet) {
 
   if (!m_aggregated) {
     m_aggregated = packet;
-    m_aggregated->data->grab();
+    m_aggregated->data->take_ownership();
 
   } else
     m_aggregated->data->add(packet->data);

@@ -26,7 +26,7 @@ public:
 
   virtual void set_bytes(memory_cptr &bytes) {
     m_bytes = bytes;
-    m_bytes->grab();
+    m_bytes->take_ownership();
   }
 
   virtual memory_cptr do_decompress(memory_cptr const &buffer);

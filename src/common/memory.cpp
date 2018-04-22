@@ -26,16 +26,16 @@ memory_c::resize(size_t new_size)
   if (new_size == its_counter->size)
     return;
 
-  if (its_counter->is_free) {
+  if (its_counter->is_owned) {
     its_counter->ptr  = (unsigned char *)saferealloc(its_counter->ptr, new_size + its_counter->offset);
     its_counter->size = new_size + its_counter->offset;
 
   } else {
     auto tmp = (unsigned char *)safemalloc(new_size);
     memcpy(tmp, its_counter->ptr + its_counter->offset, std::min(new_size, its_counter->size - its_counter->offset));
-    its_counter->ptr     = tmp;
-    its_counter->is_free = true;
-    its_counter->size    = new_size;
+    its_counter->ptr      = tmp;
+    its_counter->is_owned = true;
+    its_counter->size     = new_size;
   }
 }
 

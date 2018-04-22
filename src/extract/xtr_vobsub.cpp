@@ -68,7 +68,7 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
   init_content_decoder(track);
 
   m_private_data = decode_codec_private(priv);
-  m_private_data->grab();
+  m_private_data->take_ownership();
 
   m_master   = master;
   m_language = kt_get_language(track);

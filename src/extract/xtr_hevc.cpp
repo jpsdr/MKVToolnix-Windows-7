@@ -29,7 +29,7 @@ xtr_hevc_c::create_file(xtr_base_c *master,
   if (m_decoded_codec_private->get_size() < 23)
     mxerror(boost::format(Y("Track %1% CodecPrivate is too small.\n")) % m_tid);
 
-  m_decoded_codec_private->grab();
+  m_decoded_codec_private->take_ownership();
 
   unwrap_write_hevcc(false);
 }

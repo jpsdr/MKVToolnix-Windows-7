@@ -84,11 +84,11 @@ class memory_c {
 public:
   explicit memory_c(void *p = nullptr,
                     size_t s = 0,
-                    bool f = false) // allocate a new counter
+                    bool take_ownership = false) // allocate a new counter
     : its_counter(nullptr)
   {
     if (p)
-      its_counter = new counter(static_cast<unsigned char *>(p), s, f);
+      its_counter = new counter(static_cast<unsigned char *>(p), s, take_ownership);
   }
 
   explicit memory_c(size_t s)
@@ -143,23 +143,23 @@ public:
     return memory_c::clone(get_buffer(), get_size());
   }
 
-  bool is_free() const {
-    return its_counter && its_counter->is_free;
+  bool is_owned() const {
+    return its_counter && its_counter->is_owned;
   }
 
-  void grab() {
-    if (!its_counter || its_counter->is_free)
+  void take_ownership() {
+    if (!its_counter || its_counter->is_owned)
       return;
 
     its_counter->ptr      = static_cast<unsigned char *>(safememdup(get_buffer(), get_size()));
-    its_counter->is_free  = true;
+    its_counter->is_owned  = true;
     its_counter->size    -= its_counter->offset;
     its_counter->offset   = 0;
   }
 
   void lock() {
     if (its_counter)
-      its_counter->is_free = false;
+      its_counter->is_owned = false;
   }
 
   void resize(size_t new_size) throw();
@@ -202,7 +202,7 @@ private:
   struct counter {
     unsigned char *ptr;
     size_t size;
-    bool is_free;
+    bool is_owned;
     unsigned count;
     size_t offset;
 
@@ -212,7 +212,7 @@ private:
             unsigned c = 1)
       : ptr(p)
       , size(s)
-      , is_free(f)
+      , is_owned(f)
       , count(c)
       , offset(0)
     { }
@@ -227,7 +227,7 @@ private:
   void release() { // decrement the count, delete if it is 0
     if (its_counter) {
       if (--its_counter->count == 0) {
-        if (its_counter->is_free)
+        if (its_counter->is_owned)
           free(its_counter->ptr);
         delete its_counter;
       }

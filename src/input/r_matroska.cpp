@@ -2184,7 +2184,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
             DataBuffer &data_buffer = block_simple->GetBuffer(frame_idx);
             block_track->first_frames_data.push_back(memory_cptr(new memory_c(data_buffer.Buffer(), data_buffer.Size())));
             block_track->content_decoder.reverse(block_track->first_frames_data.back(), CONTENT_ENCODING_SCOPE_BLOCK);
-            block_track->first_frames_data.back()->grab();
+            block_track->first_frames_data.back()->take_ownership();
           }
 
         } else if (Is<KaxBlockGroup>((*cluster)[bgidx])) {
@@ -2209,7 +2209,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
             DataBuffer &data_buffer = block->GetBuffer(frame_idx);
             block_track->first_frames_data.push_back(memory_cptr(new memory_c(data_buffer.Buffer(), data_buffer.Size())));
             block_track->content_decoder.reverse(block_track->first_frames_data.back(), CONTENT_ENCODING_SCOPE_BLOCK);
-            block_track->first_frames_data.back()->grab();
+            block_track->first_frames_data.back()->take_ownership();
           }
         }
       }

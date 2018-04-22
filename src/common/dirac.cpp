@@ -345,7 +345,7 @@ dirac::es_parser_c::handle_picture_unit(memory_cptr packet) {
 
   m_current_frame        = frame_cptr(new frame_t);
   m_current_frame->data  = packet;
-  m_current_frame->data->grab();
+  m_current_frame->data->take_ownership();
 }
 
 void

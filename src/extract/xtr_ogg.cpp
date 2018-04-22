@@ -176,7 +176,7 @@ xtr_oggbase_c::queue_frame(memory_cptr &frame,
 
   m_queued_granulepos = granulepos;
   m_queued_frame      = frame;
-  m_queued_frame->grab();
+  m_queued_frame->take_ownership();
 }
 
 void

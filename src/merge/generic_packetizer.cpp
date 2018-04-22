@@ -1293,9 +1293,9 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
       && (pack->data_adds.size()  > static_cast<size_t>(m_htrack_max_add_block_ids)))
     pack->data_adds.resize(m_htrack_max_add_block_ids);
 
-  pack->data->grab();
+  pack->data->take_ownership();
   for (auto &data_add : pack->data_adds)
-    data_add->grab();
+    data_add->take_ownership();
 
   pack->source = this;
 

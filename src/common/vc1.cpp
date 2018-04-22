@@ -432,7 +432,7 @@ es_parser_c::handle_frame_packet(memory_cptr packet) {
 
   m_current_frame        = std::make_shared<frame_t>(frame_header);
   m_current_frame->data  = packet;
-  m_current_frame->data->grab();
+  m_current_frame->data->take_ownership();
 
   if (!m_timestamps.empty())
     mxverb(2,
@@ -501,7 +501,7 @@ es_parser_c::postpone_processing(memory_cptr &packet) {
   if (m_seqhdr_found)
     return false;
 
-  packet->grab();
+  packet->take_ownership();
   m_unparsed_packets.push_back(packet);
   return true;
 }
