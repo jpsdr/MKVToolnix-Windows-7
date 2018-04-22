@@ -471,7 +471,7 @@ real_reader_c::read(generic_packetizer_c *,
     deliver_aac_frames(dmx, *mem);
 
   } else
-    queue_audio_frames(dmx, *mem, timestamp, frame->flags);
+    queue_audio_frames(dmx, mem, timestamp, frame->flags);
 
   rmff_release_frame(frame);
 
@@ -482,23 +482,23 @@ real_reader_c::read(generic_packetizer_c *,
 
 void
 real_reader_c::queue_one_audio_frame(real_demuxer_cptr dmx,
-                                     memory_c &mem,
+                                     memory_cptr const &mem,
                                      uint64_t timestamp,
                                      uint32_t flags) {
   rv_segment_cptr segment(new rv_segment_t);
 
-  segment->data  = memory_cptr(new memory_c(mem));
+  segment->data  = mem;
   segment->flags = flags;
   dmx->segments.push_back(segment);
 
   dmx->last_timestamp = timestamp;
 
-  mxverb_tid(2, m_ti.m_fname, dmx->track->id, boost::format("enqueueing one length %1% timestamp %2% flags 0x%|3$08x|\n") % mem.get_size() % timestamp % flags);
+  mxverb_tid(2, m_ti.m_fname, dmx->track->id, boost::format("enqueueing one length %1% timestamp %2% flags 0x%|3$08x|\n") % mem->get_size() % timestamp % flags);
 }
 
 void
 real_reader_c::queue_audio_frames(real_demuxer_cptr dmx,
-                                  memory_c &mem,
+                                  memory_cptr const &mem,
                                   uint64_t timestamp,
                                   uint32_t flags) {
   // Enqueue the packets if no packets are in the queue or if the current

@@ -82,16 +82,16 @@ using memories_c  = std::vector<memory_cptr>;
 
 class memory_c {
 private:
-  explicit memory_c(void *p,
-                    size_t s,
-                    bool take_ownership) // allocate a new counter
-  {
-    if (p)
-      its_counter = new counter(static_cast<unsigned char *>(p), s, take_ownership);
-  }
+  unsigned char *m_ptr{};
+  std::size_t m_size{}, m_offset{};
+  bool m_is_owned{};
 
-  explicit memory_c(size_t s)
-    : its_counter{new counter(static_cast<unsigned char *>(safemalloc(s)), s, true)}
+  explicit memory_c(void *ptr,
+                    std::size_t size,
+                    bool take_ownership) // allocate a new counter
+    : m_ptr{static_cast<unsigned char *>(ptr)}
+    , m_size{size}
+    , m_is_owned{take_ownership}
   {
   }
 
@@ -99,46 +99,33 @@ public:
   memory_c() {}
 
   ~memory_c() {
-    release();
+    if (m_is_owned && m_ptr)
+      free(m_ptr);
   }
 
-  memory_c(const memory_c &r) throw() {
-    acquire(r.its_counter);
-  }
-
-  memory_c &operator=(const memory_c &r) {
-    if (this != &r) {
-      release();
-      acquire(r.its_counter);
-    }
-    return *this;
-  }
+  memory_c(const memory_c &r) = delete;
+  memory_c &operator=(const memory_c &r) = delete;
 
   unsigned char *get_buffer() const {
-    return its_counter ? its_counter->ptr + its_counter->offset : nullptr;
+    return m_ptr ? m_ptr + m_offset : nullptr;
   }
 
   size_t get_size() const {
-    return its_counter ? its_counter->size - its_counter->offset: 0;
+    return m_size >= m_offset ? m_size - m_offset: 0;
   }
 
-  void set_size(size_t new_size) {
-    if (its_counter)
-      its_counter->size = new_size;
+  void set_size(std::size_t new_size) {
+    m_size = new_size;
   }
 
-  void set_offset(size_t new_offset) {
-    if (!its_counter || (new_offset > its_counter->size))
+  void set_offset(std::size_t new_offset) {
+    if (new_offset > m_size)
       throw false;
-    its_counter->offset = new_offset;
-  }
-
-  bool is_unique() const throw() {
-    return its_counter ? its_counter->count == 1 : true;
+    m_offset = new_offset;
   }
 
   bool is_allocated() const throw() {
-    return its_counter && its_counter->ptr;
+    return m_ptr;
   }
 
   memory_cptr clone() const {
@@ -146,26 +133,25 @@ public:
   }
 
   bool is_owned() const {
-    return its_counter && its_counter->is_owned;
+    return m_is_owned;
   }
 
   void take_ownership() {
-    if (!its_counter || its_counter->is_owned)
+    if (m_is_owned)
       return;
 
-    its_counter->ptr      = static_cast<unsigned char *>(safememdup(get_buffer(), get_size()));
-    its_counter->is_owned  = true;
-    its_counter->size    -= its_counter->offset;
-    its_counter->offset   = 0;
+    m_ptr       = static_cast<unsigned char *>(safememdup(get_buffer(), get_size()));
+    m_is_owned  = true;
+    m_size     -= m_offset;
+    m_offset    = 0;
   }
 
   void lock() {
-    if (its_counter)
-      its_counter->is_owned = false;
+    m_is_owned = false;
   }
 
-  void resize(size_t new_size) throw();
-  void add(unsigned char const *new_buffer, size_t new_size);
+  void resize(std::size_t new_size) throw();
+  void add(unsigned char const *new_buffer, std::size_t new_size);
   void add(memory_cptr const &new_buffer) {
     add(new_buffer->get_buffer(), new_buffer->get_size());
   }
@@ -193,13 +179,13 @@ public:
   }
 
   static memory_cptr
-  alloc(size_t size) {
+  alloc(std::size_t size) {
     return take_ownership(safemalloc(size), size);
   };
 
   static inline memory_cptr
   clone(const void *buffer,
-        size_t size) {
+        std::size_t size) {
     return take_ownership(safememdup(buffer, size), size);
   }
 
@@ -209,43 +195,6 @@ public:
   }
 
   static memory_c & splice(memory_c &buffer, std::size_t offset, std::size_t to_remove, boost::optional<memory_c const &> to_insert = boost::none);
-
-private:
-  struct counter {
-    unsigned char *ptr;
-    size_t size;
-    bool is_owned;
-    unsigned count;
-    size_t offset;
-
-    counter(unsigned char *p = nullptr,
-            size_t s = 0,
-            bool f = false,
-            unsigned c = 1)
-      : ptr(p)
-      , size(s)
-      , is_owned(f)
-      , count(c)
-      , offset(0)
-    { }
-  } *its_counter{};
-
-  void acquire(counter *c) throw() { // increment the count
-    its_counter = c;
-    if (c)
-      ++c->count;
-  }
-
-  void release() { // decrement the count, delete if it is 0
-    if (its_counter) {
-      if (--its_counter->count == 0) {
-        if (its_counter->is_owned)
-          free(its_counter->ptr);
-        delete its_counter;
-      }
-      its_counter = nullptr;
-    }
-  }
 };
 
 inline bool

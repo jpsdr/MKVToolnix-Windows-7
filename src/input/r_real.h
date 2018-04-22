@@ -115,8 +115,8 @@ protected:
   virtual void set_dimensions(real_demuxer_cptr dmx, unsigned char *buffer, int size);
   virtual void get_information_from_data();
   virtual void deliver_aac_frames(real_demuxer_cptr dmx, memory_c &mem);
-  virtual void queue_audio_frames(real_demuxer_cptr dmx, memory_c &mem, uint64_t timestamp, uint32_t flags);
-  virtual void queue_one_audio_frame(real_demuxer_cptr dmx, memory_c &mem, uint64_t timestamp, uint32_t flags);
+  virtual void queue_audio_frames(real_demuxer_cptr dmx, memory_cptr const &mem, uint64_t timestamp, uint32_t flags);
+  virtual void queue_one_audio_frame(real_demuxer_cptr dmx, memory_cptr const &mem, uint64_t timestamp, uint32_t flags);
   virtual void deliver_audio_frames(real_demuxer_cptr dmx, uint64_t duration);
 
   virtual void create_audio_packetizer(real_demuxer_cptr dmx);

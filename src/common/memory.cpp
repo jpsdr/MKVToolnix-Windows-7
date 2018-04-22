@@ -20,22 +20,19 @@ void
 memory_c::resize(size_t new_size)
   throw()
 {
-  if (!its_counter)
-    its_counter = new counter(nullptr, 0, false);
-
-  if (new_size == its_counter->size)
+  if (new_size == m_size)
     return;
 
-  if (its_counter->is_owned) {
-    its_counter->ptr  = (unsigned char *)saferealloc(its_counter->ptr, new_size + its_counter->offset);
-    its_counter->size = new_size + its_counter->offset;
+  if (m_is_owned) {
+    m_ptr  = static_cast<unsigned char *>(saferealloc(m_ptr, new_size + m_offset));
+    m_size = new_size + m_offset;
 
   } else {
-    auto tmp = (unsigned char *)safemalloc(new_size);
-    memcpy(tmp, its_counter->ptr + its_counter->offset, std::min(new_size, its_counter->size - its_counter->offset));
-    its_counter->ptr      = tmp;
-    its_counter->is_owned = true;
-    its_counter->size     = new_size;
+    auto tmp = static_cast<unsigned char *>(safemalloc(new_size));
+    std::memcpy(tmp, m_ptr + m_offset, std::min(new_size, m_size - m_offset));
+    m_ptr      = tmp;
+    m_is_owned = true;
+    m_size     = new_size;
   }
 }
 
@@ -45,9 +42,9 @@ memory_c::add(unsigned char const *new_buffer,
   if ((0 == new_size) || !new_buffer)
     return;
 
-  size_t previous_size = get_size();
+  auto previous_size = get_size();
   resize(previous_size + new_size);
-  memcpy(get_buffer() + previous_size, new_buffer, new_size);
+  std::memcpy(get_buffer() + previous_size, new_buffer, new_size);
 }
 
 memory_cptr
