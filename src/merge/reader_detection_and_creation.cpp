@@ -118,6 +118,49 @@ do_probe(Tio &io,
   return result;
 }
 
+using prober_t = std::function<int(mm_io_cptr&, int64_t)>;
+static std::map<mtx::file_type_e, prober_t> type_probe_map;
+
+static prober_t
+prober_for_type(mtx::file_type_e type) {
+  if (type_probe_map.empty()) {
+    type_probe_map[mtx::file_type_e::asf]         = &do_probe<asf_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::avc_es]      = &do_probe<avc_es_reader_c,        mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::avi]         = &do_probe<avi_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::cdxa]        = &do_probe<cdxa_reader_c,          mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::coreaudio]   = &do_probe<coreaudio_reader_c,     mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::dirac]       = &do_probe<dirac_es_reader_c,      mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::dts]         = &do_probe<dts_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::dv]          = &do_probe<dv_reader_c,            mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::flac]        = &do_probe<flac_reader_c,          mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::flv]         = &do_probe<flv_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::hdmv_textst] = &do_probe<hdmv_textst_reader_c,   mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::hdsub]       = &do_probe<hdsub_reader_c,         mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::hevc_es]     = &do_probe<hevc_es_reader_c,       mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::ivf]         = &do_probe<ivf_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::matroska]    = &do_probe<kax_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::mpeg_es]     = &do_probe<mpeg_es_reader_c,       mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::mpeg_ps]     = &do_probe<mpeg_ps_reader_c,       mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::mpeg_ts]     = &do_probe<mtx::mpeg_ts::reader_c, mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::ogm]         = &do_probe<ogm_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::pgssup]      = &do_probe<pgssup_reader_c,        mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::qtmp4]       = &do_probe<qtmp4_reader_c,         mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::real]        = &do_probe<real_reader_c,          mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::truehd]      = &do_probe<truehd_reader_c,        mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::tta]         = &do_probe<tta_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::vc1]         = &do_probe<vc1_es_reader_c,        mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::vobbtn]      = &do_probe<vobbtn_reader_c,        mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::wav]         = &do_probe<wav_reader_c,           mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::wavpack4]    = &do_probe<wavpack_reader_c,       mm_io_cptr, int64_t>;
+  }
+
+  auto res = type_probe_map.find(type);
+  if (res == type_probe_map.end()) {
+    return {};
+  }
+  return (*res).second;
+}
+
 static mtx::file_type_e
 detect_text_file_formats(filelist_t const &file) {
   auto text_io = mm_text_io_cptr{};
@@ -163,6 +206,17 @@ get_file_type_internal(filelist_t &file) {
 
   if (is_playlist)
     io = file.playlist_mpls_in;
+
+  // Prefer types hinted by extension
+  auto extension = boost::filesystem::extension(file.name);
+  if (!extension.empty()) {
+    for (auto type : mtx::file_type_t::by_extension(extension.substr(1))) {
+      auto p = prober_for_type(type);
+      if (p && p(io, size)) {
+        return { type, size };
+      }
+    }
+  }
 
   // File types that can be detected unambiguously but are not supported
   if (do_probe<aac_adif_reader_c>(io, size))
