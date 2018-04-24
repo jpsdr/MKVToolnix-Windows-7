@@ -22,6 +22,8 @@
 * MKVToolNix GUI: multiplexer: added an option to enable dialog normalization
   gain removal by default for all audio tracks for which the operation is
   supported. Implements #2272.
+* mkvmerge: input: Format detection uses file-extension to improve performance
+  and to give preferrence when several formats matches.
 
 ## Bug fixes
 

@@ -72,14 +72,17 @@ enum class file_type_e {
 };
 
 struct file_type_t {
+  file_type_e id;
   std::string title, extensions;
 
-  file_type_t(const std::string &p_title, const std::string &p_extensions)
-    : title(p_title)
+  file_type_t(file_type_e p_id, const std::string &p_title, const std::string &p_extensions)
+    : id(p_id)
+    , title(p_title)
     , extensions(p_extensions)
   {
   }
 
+  static std::set<file_type_e> by_extension(const std::string &ext);
   static std::vector<file_type_t> &get_supported();
   static translatable_string_c get_name(file_type_e type);
 };
