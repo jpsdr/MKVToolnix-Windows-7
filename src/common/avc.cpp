@@ -479,7 +479,7 @@ parse_sps(memory_cptr const &buffer,
     sps.timing_info.is_present        = true;
     sps.timing_info.num_units_in_tick = num_units_in_tick;
     sps.timing_info.time_scale        = time_scale;
-    sps.timing_info.fixed_frame_rate  = 1;
+    sps.timing_info.fixed_frame_rate  = true;
 
     w.put_bit(0);                      // nal_hrd_parameters_present_flag
     w.put_bit(0);                      // vcl_hrd_parameters_present_flag

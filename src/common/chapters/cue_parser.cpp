@@ -105,18 +105,18 @@ cue_entries_to_name(std::string &performer,
 }
 
 struct cue_parser_args_t {
-  int num;
-  int64_t start_of_track;
+  int num{};
+  int64_t start_of_track{-1};
   std::vector<int64_t> start_indices;
-  bool index00_missing;
-  int64_t end;
-  int64_t min_ts;
-  int64_t max_ts;
-  int64_t offset;
-  KaxChapters *chapters;
-  KaxEditionEntry *edition;
-  KaxChapterAtom *atom;
-  bool do_convert;
+  bool index00_missing{};
+  int64_t end{};
+  int64_t min_ts{};
+  int64_t max_ts{};
+  int64_t offset{};
+  KaxChapters *chapters{};
+  KaxEditionEntry *edition{};
+  KaxChapterAtom *atom{};
+  bool do_convert{};
   std::string global_catalog;
   std::string global_performer;
   std::string performer;
@@ -134,24 +134,8 @@ struct cue_parser_args_t {
   std::vector<std::string> global_comment;
   std::vector<std::string> comment;
   std::string language;
-  int line_num;
+  int line_num{};
   charset_converter_cptr cc_utf8;
-
-  cue_parser_args_t()
-    : num(0)
-    , start_of_track(-1)
-    , index00_missing(false)
-    , end(0)
-    , min_ts(0)
-    , max_ts(0)
-    , offset(0)
-    , chapters(nullptr)
-    , edition(nullptr)
-    , atom(nullptr)
-    , do_convert(false)
-    , line_num(0)
-  {
-  }
 };
 
 static UTFstring
@@ -164,7 +148,7 @@ static KaxTagSimple *
 create_simple_tag(cue_parser_args_t &a,
                   const std::string &name,
                   const std::string &value) {
-  KaxTagSimple *simple = new KaxTagSimple;
+  auto simple = new KaxTagSimple;
 
   GetChild<KaxTagName>(*simple).SetValue(cue_str_internal_to_utf(a, name));
   GetChild<KaxTagString>(*simple).SetValue(cue_str_internal_to_utf(a, value));
@@ -189,11 +173,11 @@ add_tag_for_cue_entry(cue_parser_args_t &a,
   if (!*tags)
     *tags = std::make_unique<KaxTags>();
 
-  KaxTag *tag            = new KaxTag;
-  KaxTagTargets *targets = &GetChild<KaxTagTargets>(*tag);
-  GetChild<KaxTagChapterUID>(*targets).SetValue(cuid);
-  GetChild<KaxTagTargetTypeValue>(*targets).SetValue(mtx::tags::Track);
-  GetChild<KaxTagTargetType>(*targets).SetValue("track");
+  auto tag      = new KaxTag;
+  auto &targets = GetChild<KaxTagTargets>(*tag);
+  GetChild<KaxTagChapterUID>(targets).SetValue(cuid);
+  GetChild<KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Track);
+  GetChild<KaxTagTargetType>(targets).SetValue("track");
 
   create_tag1(a.title, "TITLE");
   tag->PushElement(*create_simple_tag(a, "PART_NUMBER", to_string(a.num)));
@@ -225,11 +209,11 @@ add_tag_for_global_cue_settings(cue_parser_args_t &a,
   if (!*tags)
     *tags = std::make_unique<KaxTags>();
 
-  KaxTag *tag            = new KaxTag;
-  KaxTagTargets *targets = &GetChild<KaxTagTargets>(*tag);
+  auto tag      = new KaxTag;
+  auto &targets = GetChild<KaxTagTargets>(*tag);
 
-  GetChild<KaxTagTargetTypeValue>(*targets).SetValue(mtx::tags::Album);
-  GetChild<KaxTagTargetType>(*targets).SetValue("album");
+  GetChild<KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Album);
+  GetChild<KaxTagTargetType>(targets).SetValue("album");
 
   create_tag1(a.global_performer, "ARTIST");
   create_tag1(a.global_title,     "TITLE");

@@ -109,7 +109,7 @@ decode(std::string const &src) {
     unsigned int in_pos = 0;
 
     while ((src.size() > pos) && (4 > in_pos)) {
-      unsigned char c = (unsigned char)src[pos];
+      auto c = static_cast<unsigned char>(src[pos]);
       ++pos;
 
       if ((('A' <= c) && ('Z' >= c)) || (('a' <= c) && ('z' >= 'c')) || (('0' <= c) && ('9' >= c)) || ('+' == c) || ('/' == c)) {

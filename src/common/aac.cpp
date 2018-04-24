@@ -876,10 +876,6 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
 
 // ------------------------------------------------------------
 
-header_c::header_c()
-{
-}
-
 std::string
 header_c::to_string()
   const {

@@ -72,8 +72,6 @@ protected:
   mtx::bits::reader_c *m_bc{};
 
 public:
-  header_c();
-
   std::string to_string() const;
 
 public:

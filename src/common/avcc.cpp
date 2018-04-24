@@ -30,14 +30,14 @@ avcc_c::avcc_c()
 }
 
 avcc_c::avcc_c(unsigned int nalu_size_length,
-               std::vector<memory_cptr> const &sps_list,
-               std::vector<memory_cptr> const &pps_list)
+               std::vector<memory_cptr> sps_list,
+               std::vector<memory_cptr> pps_list)
   : m_profile_idc{}
   , m_profile_compat{}
   , m_level_idc{}
   , m_nalu_size_length{nalu_size_length}
-  , m_sps_list{sps_list}
-  , m_pps_list{pps_list}
+  , m_sps_list{std::move(sps_list)}
+  , m_pps_list{std::move(pps_list)}
 {
 }
 

@@ -28,9 +28,6 @@
 
 namespace mtx { namespace ac3 {
 
-frame_c::frame_c() {
-}
-
 void
 frame_c::init() {
   *this = frame_c{};

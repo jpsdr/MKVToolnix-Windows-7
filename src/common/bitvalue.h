@@ -42,7 +42,7 @@ public:
   value_c(const value_c &src);
   value_c(std::string s, unsigned int allowed_bitlength = 0);
   value_c(const EbmlBinary &elt);
-  virtual ~value_c();
+  virtual ~value_c() = default;
 
   value_c &operator =(const value_c &src);
   bool operator ==(const value_c &cmp) const;

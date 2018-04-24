@@ -47,7 +47,6 @@ protected:
 public:
   content_decoder_c();
   content_decoder_c(KaxTrackEntry &ktentry);
-  ~content_decoder_c();
 
   bool initialize(KaxTrackEntry &ktentry);
   void reverse(memory_cptr &data, content_encoding_scope_e scope);

@@ -91,7 +91,7 @@ compressor_c::create(const char *method) {
     return compressor_ptr(new analyze_header_removal_compressor_c());
 
   if (!strcasecmp(method, "none"))
-    return compressor_ptr(new compressor_c(COMPRESSION_NONE));
+    return std::make_shared<compressor_c>(COMPRESSION_NONE);
 
   return compressor_ptr();
 }
@@ -104,5 +104,5 @@ compressor_c::create_from_file_name(std::string const &file_name) {
   if (ext == "gz")
     return compressor_ptr(new zlib_compressor_c());
 
-  return compressor_ptr(new compressor_c(COMPRESSION_NONE));
+  return std::make_shared<compressor_c>(COMPRESSION_NONE);
 }

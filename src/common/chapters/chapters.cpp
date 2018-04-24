@@ -403,7 +403,7 @@ parse(mm_text_io_c *in,
 int64_t
 get_start(KaxChapterAtom &atom,
           int64_t value_if_not_found) {
-  KaxChapterTimeStart *start = FindChild<KaxChapterTimeStart>(&atom);
+  auto start = FindChild<KaxChapterTimeStart>(&atom);
 
   return !start ? value_if_not_found : static_cast<int64_t>(start->GetValue());
 }
@@ -422,7 +422,7 @@ get_start(KaxChapterAtom &atom,
 int64_t
 get_end(KaxChapterAtom &atom,
         int64_t value_if_not_found) {
-  KaxChapterTimeEnd *end = FindChild<KaxChapterTimeEnd>(&atom);
+  auto end = FindChild<KaxChapterTimeEnd>(&atom);
 
   return !end ? value_if_not_found : static_cast<int64_t>(end->GetValue());
 }
@@ -438,11 +438,11 @@ get_end(KaxChapterAtom &atom,
 */
 std::string
 get_name(KaxChapterAtom &atom) {
-  KaxChapterDisplay *display = FindChild<KaxChapterDisplay>(&atom);
+  auto display = FindChild<KaxChapterDisplay>(&atom);
   if (!display)
     return "";
 
-  KaxChapterString *name = FindChild<KaxChapterString>(display);
+  auto name = FindChild<KaxChapterString>(display);
   if (!name)
     return "";
 
@@ -460,7 +460,7 @@ get_name(KaxChapterAtom &atom) {
 */
 int64_t
 get_uid(KaxChapterAtom &atom) {
-  KaxChapterUID *uid = FindChild<KaxChapterUID>(&atom);
+  auto uid = FindChild<KaxChapterUID>(&atom);
 
   return !uid ? -1 : static_cast<int64_t>(uid->GetValue());
 }
@@ -549,17 +549,8 @@ remove_entries(int64_t min_ts,
     return;
 
   struct chapter_entry_t {
-    bool remove, spans, is_atom;
-    int64_t start, end;
-
-    chapter_entry_t()
-      : remove(false)
-      , spans(false)
-      , is_atom(false)
-      , start(0)
-      , end(-1)
-    {
-    }
+    bool remove{}, spans{}, is_atom{};
+    int64_t start{}, end{-1};
   };
   std::vector<chapter_entry_t> entries;
   entries.resize(m.ListSize());
@@ -571,7 +562,7 @@ remove_entries(int64_t min_ts,
   // the start and end timestamps.
   size_t i;
   for (i = 0; m.ListSize() > i; ++i) {
-    KaxChapterAtom *atom = dynamic_cast<KaxChapterAtom *>(m[i]);
+    auto atom = dynamic_cast<KaxChapterAtom *>(m[i]);
     if (!atom)
       continue;
 
@@ -579,12 +570,12 @@ remove_entries(int64_t min_ts,
     last_atom_found    = true;
     entries[i].is_atom = true;
 
-    KaxChapterTimeStart *cts = static_cast<KaxChapterTimeStart *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeStart), false));
+    auto cts = static_cast<KaxChapterTimeStart *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeStart), false));
 
     if (cts)
       entries[i].start = cts->GetValue();
 
-    KaxChapterTimeEnd *cte = static_cast<KaxChapterTimeEnd *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeEnd), false));
+    auto cte = static_cast<KaxChapterTimeEnd *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeEnd), false));
 
     if (cte)
       entries[i].end = cte->GetValue();
@@ -595,7 +586,7 @@ remove_entries(int64_t min_ts,
     return;
 
   for (i = 0; m.ListSize() > i; ++i) {
-    KaxChapterAtom *atom = dynamic_cast<KaxChapterAtom *>(m[i]);
+    auto atom = dynamic_cast<KaxChapterAtom *>(m[i]);
     if (!atom)
       continue;
 
@@ -632,8 +623,8 @@ remove_entries(int64_t min_ts,
     if (entries[i].remove && !entries[i].spans)
       continue;
 
-    KaxChapterTimeStart *cts = static_cast<KaxChapterTimeStart *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeStart), false));
-    KaxChapterTimeEnd *cte   = static_cast<KaxChapterTimeEnd *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeEnd), false));
+    auto cts = static_cast<KaxChapterTimeStart *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeStart), false));
+    auto cte = static_cast<KaxChapterTimeEnd *>(atom->FindFirstElt(EBML_INFO(KaxChapterTimeEnd), false));
 
     if (entries[i].spans)
       cts->SetValue(min_ts);
@@ -650,7 +641,7 @@ remove_entries(int64_t min_ts,
       cte->SetValue(end_ts);
     }
 
-    EbmlMaster *m2 = dynamic_cast<EbmlMaster *>(m[i]);
+    auto m2 = dynamic_cast<EbmlMaster *>(m[i]);
     if (m2)
       remove_entries(min_ts, max_ts, offset, *m2);
   }
@@ -684,7 +675,7 @@ merge_entries(EbmlMaster &master) {
   // Iterate over all children of the atomaster.
   for (master_idx = 0; master.ListSize() > master_idx; ++master_idx) {
     // Not every child is a chapter atomaster. Skip those.
-    KaxChapterAtom *atom = dynamic_cast<KaxChapterAtom *>(master[master_idx]);
+    auto atom = dynamic_cast<KaxChapterAtom *>(master[master_idx]);
     if (!atom)
       continue;
 
@@ -704,7 +695,7 @@ merge_entries(EbmlMaster &master) {
     while (true) {
       KaxChapterAtom *merge_this = nullptr;
       for (; master.ListSize() > merge_idx; ++merge_idx) {
-        KaxChapterAtom *cmp_atom = dynamic_cast<KaxChapterAtom *>(master[merge_idx]);
+        auto cmp_atom = dynamic_cast<KaxChapterAtom *>(master[merge_idx]);
         if (!cmp_atom)
           continue;
 
@@ -762,7 +753,7 @@ merge_entries(EbmlMaster &master) {
 
   // Recusively merge atoms.
   for (master_idx = 0; master.ListSize() > master_idx; ++master_idx) {
-    EbmlMaster *merge_master = dynamic_cast<EbmlMaster *>(master[master_idx]);
+    auto merge_master = dynamic_cast<EbmlMaster *>(master[master_idx]);
     if (merge_master)
       merge_entries(*merge_master);
   }
@@ -813,7 +804,7 @@ select_in_timeframe(KaxChapters *chapters,
   // any atom in them.
   master_idx = 0;
   while (chapters->ListSize() > master_idx) {
-    KaxEditionEntry *eentry = dynamic_cast<KaxEditionEntry *>((*chapters)[master_idx]);
+    auto eentry = dynamic_cast<KaxEditionEntry *>((*chapters)[master_idx]);
     if (!eentry) {
       master_idx++;
       continue;
@@ -853,11 +844,11 @@ find_edition_with_uid(KaxChapters &chapters,
 
   size_t eentry_idx;
   for (eentry_idx = 0; chapters.ListSize() > eentry_idx; eentry_idx++) {
-    KaxEditionEntry *eentry = dynamic_cast<KaxEditionEntry *>(chapters[eentry_idx]);
+    auto eentry = dynamic_cast<KaxEditionEntry *>(chapters[eentry_idx]);
     if (!eentry)
       continue;
 
-    KaxEditionUID *euid = FindChild<KaxEditionUID>(eentry);
+    auto euid = FindChild<KaxEditionUID>(eentry);
     if (euid && (euid->GetValue() == uid))
       return eentry;
   }
@@ -879,7 +870,7 @@ KaxChapterAtom *
 find_chapter_with_uid(KaxChapters &chapters,
                       uint64_t uid) {
   if (0 == uid) {
-    KaxEditionEntry *eentry = FindChild<KaxEditionEntry>(&chapters);
+    auto eentry = FindChild<KaxEditionEntry>(&chapters);
     if (!eentry)
       return nullptr;
     return FindChild<KaxChapterAtom>(eentry);
@@ -887,17 +878,17 @@ find_chapter_with_uid(KaxChapters &chapters,
 
   size_t eentry_idx;
   for (eentry_idx = 0; chapters.ListSize() > eentry_idx; eentry_idx++) {
-    KaxEditionEntry *eentry = dynamic_cast<KaxEditionEntry *>(chapters[eentry_idx]);
+    auto eentry = dynamic_cast<KaxEditionEntry *>(chapters[eentry_idx]);
     if (!eentry)
       continue;
 
     size_t atom_idx;
     for (atom_idx = 0; eentry->ListSize() > atom_idx; atom_idx++) {
-      KaxChapterAtom *atom = dynamic_cast<KaxChapterAtom *>((*eentry)[atom_idx]);
+      auto atom = dynamic_cast<KaxChapterAtom *>((*eentry)[atom_idx]);
       if (!atom)
         continue;
 
-      KaxChapterUID *cuid = FindChild<KaxChapterUID>(atom);
+      auto cuid = FindChild<KaxChapterUID>(atom);
       if (cuid && (cuid->GetValue() == uid))
         return atom;
     }
@@ -925,13 +916,13 @@ move_by_edition(KaxChapters &dst,
                 KaxChapters &src) {
   size_t src_idx;
   for (src_idx = 0; src.ListSize() > src_idx; src_idx++) {
-    EbmlMaster *m = dynamic_cast<EbmlMaster *>(src[src_idx]);
+    auto m = dynamic_cast<EbmlMaster *>(src[src_idx]);
     if (!m)
       continue;
 
     // Find an edition to which these atoms will be added.
     KaxEditionEntry *ee_dst = nullptr;
-    KaxEditionUID *euid_src = FindChild<KaxEditionUID>(m);
+    auto euid_src = FindChild<KaxEditionUID>(m);
     if (euid_src)
       ee_dst = find_edition_with_uid(dst, euid_src->GetValue());
 
@@ -977,9 +968,9 @@ adjust_timestamps(EbmlMaster &master,
     if (!Is<KaxChapterAtom>(master[master_idx]))
       continue;
 
-    KaxChapterAtom *atom       = static_cast<KaxChapterAtom *>(master[master_idx]);
-    KaxChapterTimeStart *start = FindChild<KaxChapterTimeStart>(atom);
-    KaxChapterTimeEnd *end     = FindChild<KaxChapterTimeEnd>(atom);
+    auto atom  = static_cast<KaxChapterAtom *>(master[master_idx]);
+    auto start = FindChild<KaxChapterTimeStart>(atom);
+    auto end   = FindChild<KaxChapterTimeEnd>(atom);
 
     if (start)
       start->SetValue(std::max<int64_t>(static_cast<int64_t>(start->GetValue()) + offset, 0));
@@ -989,7 +980,7 @@ adjust_timestamps(EbmlMaster &master,
   }
 
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
-    EbmlMaster *work_master = dynamic_cast<EbmlMaster *>(master[master_idx]);
+    auto work_master = dynamic_cast<EbmlMaster *>(master[master_idx]);
     if (work_master)
       adjust_timestamps(*work_master, offset);
   }
@@ -1040,7 +1031,7 @@ align_uids(KaxChapters *chapters) {
 
   size_t idx;
   for (idx = 0; chapters->ListSize() > idx; ++idx) {
-    KaxEditionEntry *edition_entry = dynamic_cast<KaxEditionEntry *>((*chapters)[idx]);
+    auto edition_entry = dynamic_cast<KaxEditionEntry *>((*chapters)[idx]);
     if (!edition_entry)
       continue;
 
@@ -1053,7 +1044,7 @@ align_uids(KaxChapters &reference,
            KaxChapters &modify) {
   size_t reference_idx = 0, modify_idx = 0;
 
-  while (1) {
+  while (true) {
     KaxEditionEntry *ee_reference = nullptr;;
     while ((reference.ListSize() > reference_idx) && !(ee_reference = dynamic_cast<KaxEditionEntry *>(reference[reference_idx])))
       ++reference_idx;

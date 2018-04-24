@@ -93,12 +93,6 @@ calculate_as_uint(algorithm_e algorithm,
 
 // ----------------------------------------------------------------------
 
-base_c::base_c() {
-}
-
-base_c::~base_c() {
-}
-
 base_c &
 base_c::add(void const *buffer,
             size_t size) {
@@ -118,14 +112,6 @@ base_c::finish() {
 }
 
 // ----------------------------------------------------------------------
-
-uint_result_c::~uint_result_c() {
-}
-
-// ----------------------------------------------------------------------
-
-set_initial_value_c::~set_initial_value_c() {
-}
 
 void
 set_initial_value_c::set_initial_value(uint64_t initial_value) {

@@ -31,7 +31,7 @@ public:
 
 public:
   avcc_c();
-  avcc_c(unsigned int nalu_size_len, std::vector<memory_cptr> const &sps_list, std::vector<memory_cptr> const &pps_list);
+  avcc_c(unsigned int nalu_size_len, std::vector<memory_cptr> sps_list, std::vector<memory_cptr> pps_list);
 
   explicit operator bool() const;
 

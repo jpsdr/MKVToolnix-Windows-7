@@ -79,7 +79,7 @@ public:
     }
   }
 
-  inline void put_bit(bool bit) {
+  inline void put_bit(int bit) {
     extend_buffer_if_needed();
 
     if (bit)

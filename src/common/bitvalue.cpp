@@ -98,9 +98,6 @@ value_c::operator =(const value_c &src) {
   return *this;
 }
 
-value_c::~value_c() {
-}
-
 bool
 value_c::operator ==(const value_c &cmp)
   const {

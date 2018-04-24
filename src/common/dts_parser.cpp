@@ -18,7 +18,7 @@
 
 namespace mtx { namespace dts {
 
-parser_c::impl_t::~impl_t() {
+parser_c::impl_t::~impl_t() {   // NOLINT(modernize-use-equals-default) Need to tell compiler where to put code for this function.
 }
 
 void
@@ -40,7 +40,7 @@ parser_c::parser_c()
   m->reset();
 }
 
-parser_c::~parser_c() {
+parser_c::~parser_c() {         // NOLINT(modernize-use-equals-default) Need to tell compiler where to put code for this function.
 }
 
 void

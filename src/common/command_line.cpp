@@ -237,8 +237,8 @@ handle_common_args(std::vector<std::string> &args,
 
       if (args[i + 1] == "list") {
         mxinfo(Y("Available translations:\n"));
-        std::vector<translation_c>::iterator translation = translation_c::ms_available_translations.begin();
-        while (translation != translation_c::ms_available_translations.end()) {
+        auto translation = translation_c::ms_available_translations.begin(), end = translation_c::ms_available_translations.end();
+        while (translation != end) {
           mxinfo(boost::format("  %1% (%2%)\n") % translation->get_locale() % translation->m_english_name);
           ++translation;
         }

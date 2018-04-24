@@ -53,7 +53,7 @@ protected:
   void init_table();
 
 public:
-  virtual ~crc_base_c();
+  virtual ~crc_base_c() = default;
 
   virtual memory_cptr get_result() const;
   virtual uint64_t get_result_as_uint() const;
@@ -74,7 +74,7 @@ protected:
 
 public:
   crc8_atm_c(uint32_t initial_value = 0);
-  virtual ~crc8_atm_c();
+  virtual ~crc8_atm_c() = default;
 };
 
 class crc16_ansi_c: public crc_base_c {
@@ -83,7 +83,7 @@ protected:
 
 public:
   crc16_ansi_c(uint32_t initial_value = 0);
-  virtual ~crc16_ansi_c();
+  virtual ~crc16_ansi_c() = default;
 };
 
 class crc16_ccitt_c: public crc_base_c {
@@ -92,7 +92,7 @@ protected:
 
 public:
   crc16_ccitt_c(uint32_t initial_value = 0);
-  virtual ~crc16_ccitt_c();
+  virtual ~crc16_ccitt_c() = default;
 };
 
 class crc16_002d_c: public crc_base_c {
@@ -101,7 +101,7 @@ protected:
 
 public:
   crc16_002d_c(uint32_t initial_value = 0);
-  virtual ~crc16_002d_c();
+  virtual ~crc16_002d_c() = default;
 };
 
 class crc32_ieee_c: public crc_base_c {
@@ -110,7 +110,7 @@ protected:
 
 public:
   crc32_ieee_c(uint32_t initial_value = 0);
-  virtual ~crc32_ieee_c();
+  virtual ~crc32_ieee_c() = default;
 };
 
 class crc32_ieee_le_c: public crc_base_c {
@@ -119,7 +119,7 @@ protected:
 
 public:
   crc32_ieee_le_c(uint32_t initial_value = 0);
-  virtual ~crc32_ieee_le_c();
+  virtual ~crc32_ieee_le_c() = default;
 };
 
 }} // namespace mtx { namespace checksum {

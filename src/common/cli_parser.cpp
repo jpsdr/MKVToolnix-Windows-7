@@ -30,33 +30,33 @@ parser_c::option_t::option_t()
 }
 
 parser_c::option_t::option_t(parser_c::option_t::option_type_e type,
-                             translatable_string_c const &description,
+                             translatable_string_c description,
                              int indent)
   : m_type{type}
-  , m_description{description}
+  , m_description{std::move(description)}
   , m_needs_arg{}
   , m_indent{indent}
 {
 }
 
-parser_c::option_t::option_t(std::string const &name,
-                             translatable_string_c const &description)
+parser_c::option_t::option_t(std::string name,
+                             translatable_string_c description)
   : m_type{parser_c::option_t::ot_informational_option}
-  , m_name{name}
-  , m_description{description}
+  , m_name{std::move(name)}
+  , m_description{std::move(description)}
   , m_needs_arg{}
   , m_indent{INDENT_DEFAULT}
 {
 }
 
-parser_c::option_t::option_t(std::string const &spec,
-                             translatable_string_c const &description,
-                             parser_cb_t const &callback,
+parser_c::option_t::option_t(std::string spec,
+                             translatable_string_c description,
+                             parser_cb_t callback,
                              bool needs_arg)
   : m_type{parser_c::option_t::ot_option}
-  , m_spec{spec}
-  , m_description{description}
-  , m_callback{callback}
+  , m_spec{std::move(spec)}
+  , m_description{std::move(description)}
+  , m_callback{std::move(callback)}
   , m_needs_arg{needs_arg}
   , m_indent{INDENT_DEFAULT}
 {
@@ -79,8 +79,8 @@ parser_c::option_t::format_text() {
 
 // ------------------------------------------------------------
 
-parser_c::parser_c(std::vector<std::string> const &args)
-  : m_args{args}
+parser_c::parser_c(std::vector<std::string> args)
+  : m_args{std::move(args)}
   , m_no_common_cli_args{}
 {
   m_hooks[parser_c::ht_common_options_parsed] = std::vector<parser_cb_t>();
@@ -120,17 +120,17 @@ parser_c::parse_args() {
 
 void
 parser_c::add_informational_option(std::string const &name,
-                                   translatable_string_c const &description) {
-  m_options.emplace_back(name, description);
+                                   translatable_string_c description) {
+  m_options.emplace_back(name, std::move(description));
 }
 
 void
 parser_c::add_option(std::string const &spec,
                      parser_cb_t const &callback,
-                     translatable_string_c const &description) {
+                     translatable_string_c description) {
   auto parts     = split(spec, "=", 2);
   auto needs_arg = parts.size() == 2;
-  auto option    = parser_c::option_t{spec, description, callback, needs_arg};
+  auto option    = parser_c::option_t{spec, std::move(description), callback, needs_arg};
   auto names     = split(parts[0], "|");
 
   for (auto &name : names) {

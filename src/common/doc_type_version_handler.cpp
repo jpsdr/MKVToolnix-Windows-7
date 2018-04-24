@@ -35,7 +35,7 @@ doc_type_version_handler_c::doc_type_version_handler_c()
   doc_type_version_handler_private_c::init_tables();
 }
 
-doc_type_version_handler_c::~doc_type_version_handler_c() {
+doc_type_version_handler_c::~doc_type_version_handler_c() { // NOLINT(modernize-use-equals-default) Need to tell compiler where to put code for this function.
 }
 
 EbmlElement &

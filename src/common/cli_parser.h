@@ -38,9 +38,9 @@ protected:
     int m_indent;
 
     option_t();
-    option_t(option_type_e type, translatable_string_c const &description, int indent = INDENT_DEFAULT);
-    option_t(std::string const &spec, translatable_string_c const &description, parser_cb_t const &callback, bool needs_arg);
-    option_t(std::string const &name, translatable_string_c const &description);
+    option_t(option_type_e type, translatable_string_c description, int indent = INDENT_DEFAULT);
+    option_t(std::string spec, translatable_string_c description, parser_cb_t callback, bool needs_arg);
+    option_t(std::string name, translatable_string_c description);
 
     std::string format_text();
   };
@@ -61,10 +61,10 @@ protected:
   bool m_no_common_cli_args;
 
 protected:
-  parser_c(std::vector<std::string> const &args);
+  parser_c(std::vector<std::string> args);
 
-  void add_option(std::string const &spec, parser_cb_t const &callback, translatable_string_c const &description);
-  void add_informational_option(std::string const &name, translatable_string_c const &description);
+  void add_option(std::string const &spec, parser_cb_t const &callback, translatable_string_c description);
+  void add_informational_option(std::string const &name, translatable_string_c description);
   void add_section_header(translatable_string_c const &title, int indent = INDENT_DEFAULT);
   void add_information(translatable_string_c const &information, int indent = INDENT_DEFAULT);
   void add_separator();

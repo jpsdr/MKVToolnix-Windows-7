@@ -60,7 +60,6 @@ public:
   std::vector<frame_c> m_dependent_frames;
 
 public:
-  frame_c();
   void init();
   bool is_eac3() const;
   codec_c get_codec() const;

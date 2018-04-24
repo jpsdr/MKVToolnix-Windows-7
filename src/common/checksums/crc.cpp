@@ -44,9 +44,6 @@ crc_base_c::crc_base_c(type_e type,
     init_table();
 }
 
-crc_base_c::~crc_base_c() {
-}
-
 #ifdef COMP_MSC
 #pragma warning(disable:4146)	//unary minus operator applied to unsigned type, result still unsigned
 #endif
@@ -145,9 +142,6 @@ crc8_atm_c::crc8_atm_c(uint32_t initial_value)
 {
 }
 
-crc8_atm_c::~crc8_atm_c() {
-}
-
 // ----------------------------------------------------------------------
 
 crc_base_c::table_t crc16_ansi_c::ms_table;
@@ -155,9 +149,6 @@ crc_base_c::table_t crc16_ansi_c::ms_table;
 crc16_ansi_c::crc16_ansi_c(uint32_t initial_value)
   : crc_base_c{crc_16_ansi, ms_table, initial_value}
 {
-}
-
-crc16_ansi_c::~crc16_ansi_c() {
 }
 
 // ----------------------------------------------------------------------
@@ -169,9 +160,6 @@ crc16_ccitt_c::crc16_ccitt_c(uint32_t initial_value)
 {
 }
 
-crc16_ccitt_c::~crc16_ccitt_c() {
-}
-
 // ----------------------------------------------------------------------
 
 crc_base_c::table_t crc16_002d_c::ms_table;
@@ -179,9 +167,6 @@ crc_base_c::table_t crc16_002d_c::ms_table;
 crc16_002d_c::crc16_002d_c(uint32_t initial_value)
   : crc_base_c{crc_16_002d, ms_table, initial_value}
 {
-}
-
-crc16_002d_c::~crc16_002d_c() {
 }
 
 // ----------------------------------------------------------------------
@@ -193,9 +178,6 @@ crc32_ieee_c::crc32_ieee_c(uint32_t initial_value)
 {
 }
 
-crc32_ieee_c::~crc32_ieee_c() {
-}
-
 // ----------------------------------------------------------------------
 
 crc_base_c::table_t crc32_ieee_le_c::ms_table;
@@ -203,9 +185,6 @@ crc_base_c::table_t crc32_ieee_le_c::ms_table;
 crc32_ieee_le_c::crc32_ieee_le_c(uint32_t initial_value)
   : crc_base_c{crc_32_ieee_le, ms_table, initial_value}
 {
-}
-
-crc32_ieee_le_c::~crc32_ieee_le_c() {
 }
 
 }} // namespace mtx { namespace checksum {

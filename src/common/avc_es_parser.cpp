@@ -126,7 +126,7 @@ es_parser_c::add_bytes(unsigned char *buffer,
                     | (unsigned int)cursor.get_char() <<  8
                     | (unsigned int)cursor.get_char();
 
-    while (1) {
+    while (true) {
       if (NALU_START_CODE == marker)
         marker_size = 4;
       else if (NALU_START_CODE == (marker & 0x00ffffff))
@@ -452,7 +452,7 @@ es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
 
     r.skip_bits(8);
 
-    while (1) {
+    while (true) {
       int ptype = 0;
       int value;
       while ((value = r.get_bits(8)) == 0xff)

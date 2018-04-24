@@ -40,14 +40,11 @@ content_decoder_c::content_decoder_c(KaxTrackEntry &ktentry)
   initialize(ktentry);
 }
 
-content_decoder_c::~content_decoder_c() {
-}
-
 bool
 content_decoder_c::initialize(KaxTrackEntry &ktentry) {
   encodings.clear();
 
-  KaxContentEncodings *kcencodings = FindChild<KaxContentEncodings>(&ktentry);
+  auto kcencodings = FindChild<KaxContentEncodings>(&ktentry);
   if (!kcencodings)
     return true;
 

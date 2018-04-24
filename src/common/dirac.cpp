@@ -219,9 +219,6 @@ dirac::es_parser_c::es_parser_c()
 {
 }
 
-dirac::es_parser_c::~es_parser_c() {
-}
-
 void
 dirac::es_parser_c::add_bytes(unsigned char *buffer,
                               size_t size) {
@@ -238,7 +235,7 @@ dirac::es_parser_c::add_bytes(unsigned char *buffer,
   if (3 <= cursor.get_remaining_size()) {
     uint32_t marker = (1 << 24) | ((unsigned int)cursor.get_char() << 16) | ((unsigned int)cursor.get_char() << 8) | (unsigned int)cursor.get_char();
 
-    while (1) {
+    while (true) {
       if (DIRAC_SYNC_WORD == marker) {
         if (!previous_found) {
           previous_found = true;
@@ -343,7 +340,7 @@ dirac::es_parser_c::handle_picture_unit(memory_cptr packet) {
   if (!m_seqhdr_found)
     return;
 
-  m_current_frame        = frame_cptr(new frame_t);
+  m_current_frame        = std::make_shared<frame_t>();
   m_current_frame->data  = packet;
   m_current_frame->data->take_ownership();
 }

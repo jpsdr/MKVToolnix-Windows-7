@@ -28,7 +28,7 @@ protected:
 
 public:
   md5_c();
-  virtual ~md5_c();
+  virtual ~md5_c() = default;
 
   virtual memory_cptr get_result() const;
   virtual base_c &finish();

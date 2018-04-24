@@ -21,8 +21,8 @@ namespace mtx { namespace checksum {
 
 class base_c {
 public:
-  base_c();
-  virtual ~base_c();
+  base_c() = default;
+  virtual ~base_c() = default;
 
   base_c &add(void const *buffer, size_t size);
   base_c &add(memory_c const &buffer);
@@ -36,7 +36,7 @@ protected:
 
 class set_initial_value_c {
 public:
-  virtual ~set_initial_value_c();
+  virtual ~set_initial_value_c() = default;
   virtual void set_initial_value(uint64_t initial_value);
   virtual void set_initial_value(memory_c const &initial_value);
   virtual void set_initial_value(unsigned char const *buffer, size_t size);
@@ -48,7 +48,7 @@ protected:
 
 class uint_result_c {
 public:
-  virtual ~uint_result_c();
+  virtual ~uint_result_c() = default;
   virtual uint64_t get_result_as_uint() const = 0;
 };
 

@@ -72,14 +72,11 @@ program_stream_t::dump() {
          % language);
 }
 
-parser_c::parser_c(const std::string &file_name)
-  : m_file_name(file_name)
-  , m_ok(false)
+parser_c::parser_c(std::string file_name)
+  : m_file_name{std::move(file_name)}
+  , m_ok{}
   , m_debug{"clpi|clpi_parser"}
 {
-}
-
-parser_c::~parser_c() {
 }
 
 void

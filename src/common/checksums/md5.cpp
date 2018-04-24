@@ -46,9 +46,6 @@ md5_c::md5_c()
 {
 }
 
-md5_c::~md5_c() {
-}
-
 // This processes one or more 64-byte data blocks, but does NOT update
 // the bit counters.  There are no alignment requirements.
 unsigned char const *

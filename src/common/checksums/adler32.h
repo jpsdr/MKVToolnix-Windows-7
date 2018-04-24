@@ -26,7 +26,7 @@ protected:
 
 public:
   adler32_c();
-  virtual ~adler32_c();
+  virtual ~adler32_c() = default;
 
   virtual memory_cptr get_result() const;
   virtual uint64_t get_result_as_uint() const;

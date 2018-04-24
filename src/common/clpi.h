@@ -66,8 +66,8 @@ namespace mtx { namespace bluray { namespace clpi {
     std::vector<program_cptr> m_programs;
 
   public:
-    parser_c(const std::string &file_name);
-    virtual ~parser_c();
+    parser_c(std::string file_name);
+    virtual ~parser_c() = default;
 
     virtual bool parse();
     virtual bool is_ok() {

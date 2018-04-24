@@ -24,9 +24,6 @@ adler32_c::adler32_c()
 {
 }
 
-adler32_c::~adler32_c() {
-}
-
 memory_cptr
 adler32_c::get_result()
   const {

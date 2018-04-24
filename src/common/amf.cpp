@@ -58,7 +58,7 @@ script_parser_c::read_string(data_type_e type) {
 
 void
 script_parser_c::read_properties(std::unordered_map<std::string, value_type_t> &properties) {
-  while (1) {
+  while (true) {
     auto key   = read_string(TYPE_STRING);
     auto value = read_value();
 
