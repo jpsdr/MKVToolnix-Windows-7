@@ -40,6 +40,8 @@
   track's size.
 * mkvmerge, mkvextract, mkvpropedit: removed several small, constant-size
   memory leaks.
+* mkvextract: fixed a crash when mkvextract with a non-Matroska file as the
+  source file. Fixes #2281.
 
 ## Build system changes
 

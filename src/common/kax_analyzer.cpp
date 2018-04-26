@@ -295,7 +295,7 @@ kax_analyzer_c::process_internal() {
 
   // Find the EbmlHead element. Must be the first one.
   m_ebml_head.reset(static_cast<EbmlHead *>(m_stream->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL)));
-  if (!m_ebml_head)
+  if (!m_ebml_head || !Is<EbmlHead>(*m_ebml_head))
     throw mtx::kax_analyzer_x(Y("Not a valid Matroska file (no EBML head found)"));
 
   EbmlElement *l0{};
