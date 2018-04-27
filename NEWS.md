@@ -42,6 +42,9 @@
   memory leaks.
 * mkvextract: fixed a crash when mkvextract with a non-Matroska file as the
   source file. Fixes #2281.
+* mkvmerge: track statistics tags: if writing the `Date` element is
+  deactivated via `--no-date`, the `_STATISTICS_WRITING_DATE_UTC` isn't
+  written either anymore. Fixes #2286.
 
 ## Build system changes
 

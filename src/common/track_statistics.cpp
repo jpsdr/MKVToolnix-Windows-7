@@ -19,11 +19,10 @@
 void
 track_statistics_c::create_tags(KaxTags &tags,
                                 std::string const &writing_app,
-                                boost::posix_time::ptime const &writing_date)
+                                boost::optional<boost::posix_time::ptime> writing_date)
   const {
-  auto writing_date_str = !writing_date.is_not_a_date_time() ? mtx::date_time::to_string(writing_date, "%Y-%m-%d %H:%M:%S") : "1970-01-01 00:00:00";
-  auto bps              = get_bits_per_second();
-  auto duration         = get_duration();
+  auto bps      = get_bits_per_second();
+  auto duration = get_duration();
 
   mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, m_track_uid, "BPS");
   mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, m_track_uid, "DURATION");
@@ -39,8 +38,12 @@ track_statistics_c::create_tags(KaxTags &tags,
   mtx::tags::set_simple(*tag, "NUMBER_OF_FRAMES", ::to_string(m_num_frames));
   mtx::tags::set_simple(*tag, "NUMBER_OF_BYTES",  ::to_string(m_num_bytes));
 
-  mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_APP",      writing_app);
-  mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_DATE_UTC", writing_date_str);
-  mtx::tags::set_simple(*tag, "_STATISTICS_TAGS",             "BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES");
+  mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_APP", writing_app);
 
+  if (writing_date) {
+    auto writing_date_str = !writing_date->is_not_a_date_time() ? mtx::date_time::to_string(*writing_date, "%Y-%m-%d %H:%M:%S") : "1970-01-01 00:00:00";
+    mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_DATE_UTC", writing_date_str);
+  }
+
+  mtx::tags::set_simple(*tag, "_STATISTICS_TAGS", "BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES");
 }

@@ -699,10 +699,12 @@ void
 cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
                                                    std::string const &writing_app,
                                                    boost::posix_time::ptime const &writing_date) {
+  auto actual_writing_date = g_write_date ? boost::optional<boost::posix_time::ptime>{writing_date} : boost::optional<boost::posix_time::ptime>{};
+
   for (auto const &ptzr : g_packetizers) {
     auto track_uid = ptzr.packetizer->get_uid();
 
-    m->track_statistics[track_uid].set_track_uid(track_uid).create_tags(tags, writing_app, writing_date);
+    m->track_statistics[track_uid].set_track_uid(track_uid).create_tags(tags, writing_app, actual_writing_date);
   }
 
   m->track_statistics.clear();

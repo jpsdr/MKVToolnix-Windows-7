@@ -87,5 +87,5 @@ public:
             % (bps                          ? *bps                          : -1)).str();
   }
 
-  void create_tags(KaxTags &tags, std::string const &writing_app, boost::posix_time::ptime const &writing_date) const;
+  void create_tags(KaxTags &tags, std::string const &writing_app, boost::optional<boost::posix_time::ptime> writing_date) const;
 };
