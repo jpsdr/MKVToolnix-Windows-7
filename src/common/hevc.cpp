@@ -351,10 +351,10 @@ vui_parameters_copy(mtx::bits::reader_c &r,
     unsigned int ar_type = r.get_bits(8);   // aspect_ratio_idc
 
     if (keep_ar_info) {
-      w.put_bit(1);                         // aspect_ratio_info_present_flag
+      w.put_bit(true);                      // aspect_ratio_info_present_flag
       w.put_bits(8, ar_type);               // aspect_ratio_idc
     } else
-      w.put_bit(0);                         // aspect_ratio_info_present_flag
+      w.put_bit(false);                     // aspect_ratio_info_present_flag
 
     sps.ar_found = true;
 
@@ -374,7 +374,7 @@ vui_parameters_copy(mtx::bits::reader_c &r,
 
   } else {
     sps.ar_found = false;
-    w.put_bit(0);
+    w.put_bit(false);
   }
 
   // copy the rest
@@ -393,7 +393,7 @@ vui_parameters_copy(mtx::bits::reader_c &r,
 
   if (   (r.get_remaining_bits() >= 68)
       && (r.peek_bits(21) == 0x100000))
-    w.put_bit(0);                    // invalid default display window, signal no default_display_window_flag
+    w.put_bit(false);                // invalid default display window, signal no default_display_window_flag
   else if (w.copy_bits(1, r) == 1) { // default_display_window_flag
     w.copy_unsigned_golomb(r);               // def_disp_win_left_offset
     w.copy_unsigned_golomb(r);               // def_disp_win_right_offset
@@ -534,7 +534,7 @@ parse_vps(memory_cptr const &buffer,
     while (r.get_remaining_bits())
       w.copy_bits(1, r);        // vps_extension_data_flag
 
-  w.put_bit(1);
+  w.put_bit(true);
   w.byte_align();
 
   // Given we don't change the NALU while writing to w,
@@ -665,7 +665,7 @@ parse_sps(memory_cptr const &buffer,
     while (r.get_remaining_bits())
       w.copy_bits(1, r);  // sps_extension_data_flag
 
-  w.put_bit(1);
+  w.put_bit(true);
   w.byte_align();
 
   // We potentially changed the NALU data with regards to the handling of keep_ar_info.

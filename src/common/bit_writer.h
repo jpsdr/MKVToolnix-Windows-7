@@ -56,11 +56,11 @@ public:
     int n = 0;
 
     while (r.get_bit() == 0) {
-      put_bit(0);
+      put_bit(false);
       ++n;
     }
 
-    put_bit(1);
+    put_bit(true);
 
     auto bits = copy_bits(n, r);
 
@@ -74,12 +74,12 @@ public:
 
   inline void put_bits(std::size_t n, uint64_t value) {
     while (0 < n) {
-      put_bit(value & (1ull << (n - 1)));
+      put_bit((value & (1ull << (n - 1))) != 0);
       --n;
     }
   }
 
-  inline void put_bit(int bit) {
+  inline void put_bit(bool bit) {
     extend_buffer_if_needed();
 
     if (bit)
@@ -99,7 +99,7 @@ public:
 
   inline void byte_align() {
     while (0x80 != m_mask)
-      put_bit(0);
+      put_bit(false);
   }
 
   inline void set_bit_position(std::size_t pos) {

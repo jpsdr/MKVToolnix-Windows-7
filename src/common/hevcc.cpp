@@ -199,7 +199,7 @@ hevcc_c::parse_sei_list() {
       w.put_bits(8, data[idx]);
   }
 
-  w.put_bit(1);
+  w.put_bit(true);
   w.byte_align();
 
   m_sei_list.push_back(mpeg::rbsp_to_nalu(w.get_buffer()));

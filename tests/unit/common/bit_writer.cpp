@@ -15,25 +15,25 @@ TEST(BitWriter, PutBit) {
   auto b = mtx::bits::writer_c{};
 
   // f
-  EXPECT_NO_THROW(b.put_bit(1));
-  EXPECT_NO_THROW(b.put_bit(1));
-  EXPECT_NO_THROW(b.put_bit(1));
-  EXPECT_NO_THROW(b.put_bit(1));
+  EXPECT_NO_THROW(b.put_bit(true));
+  EXPECT_NO_THROW(b.put_bit(true));
+  EXPECT_NO_THROW(b.put_bit(true));
+  EXPECT_NO_THROW(b.put_bit(true));
   // 7
-  EXPECT_NO_THROW(b.put_bit(0));
-  EXPECT_NO_THROW(b.put_bit(1));
-  EXPECT_NO_THROW(b.put_bit(1));
-  EXPECT_NO_THROW(b.put_bit(1));
+  EXPECT_NO_THROW(b.put_bit(false));
+  EXPECT_NO_THROW(b.put_bit(true));
+  EXPECT_NO_THROW(b.put_bit(true));
+  EXPECT_NO_THROW(b.put_bit(true));
   // 2
-  EXPECT_NO_THROW(b.put_bit(0));
-  EXPECT_NO_THROW(b.put_bit(0));
-  EXPECT_NO_THROW(b.put_bit(1));
-  EXPECT_NO_THROW(b.put_bit(0));
+  EXPECT_NO_THROW(b.put_bit(false));
+  EXPECT_NO_THROW(b.put_bit(false));
+  EXPECT_NO_THROW(b.put_bit(true));
+  EXPECT_NO_THROW(b.put_bit(false));
   // 3
-  EXPECT_NO_THROW(b.put_bit(0));
-  EXPECT_NO_THROW(b.put_bit(0));
-  EXPECT_NO_THROW(b.put_bit(1));
-  EXPECT_NO_THROW(b.put_bit(1));
+  EXPECT_NO_THROW(b.put_bit(false));
+  EXPECT_NO_THROW(b.put_bit(false));
+  EXPECT_NO_THROW(b.put_bit(true));
+  EXPECT_NO_THROW(b.put_bit(true));
 
   EXPECT_EQ(16, b.get_bit_position());
 
@@ -125,7 +125,7 @@ TEST(BitWriter, SetBitPosition) {
 
   ASSERT_EQ(0, b.get_buffer()->get_size());
 
-  EXPECT_NO_THROW(b.put_bit(1));
+  EXPECT_NO_THROW(b.put_bit(true));
   auto buffer = b.get_buffer();
   ASSERT_EQ(4,          buffer->get_size());
   EXPECT_EQ(0x00000001, get_uint32_be(buffer->get_buffer()));

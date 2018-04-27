@@ -349,17 +349,17 @@ parse_sps(memory_cptr const &buffer,
   sps.vui_present = r.get_bit();
   mxdebug_if(s_debug_fix_bitstream_timing_info || s_debug_remove_bistream_ar_info, boost::format("VUI present? %1%\n") % sps.vui_present);
   if (sps.vui_present) {
-    w.put_bit(1);
+    w.put_bit(true);
     bool ar_info_present = r.get_bit();
     mxdebug_if(s_debug_remove_bistream_ar_info, boost::format("ar_info_present? %1%\n") % ar_info_present);
     if (ar_info_present) {     // ar_info_present
       int ar_type = r.get_bits(8);
 
       if (keep_ar_info) {
-        w.put_bit(1);
+        w.put_bit(true);
         w.put_bits(8, ar_type);
       } else
-        w.put_bit(0);
+        w.put_bit(false);
 
       sps.ar_found = true;
 
@@ -384,7 +384,7 @@ parse_sps(memory_cptr const &buffer,
                  % keep_ar_info % ar_type % sps.par_num % sps.par_den);
 
     } else
-      w.put_bit(0);             // ar_info_present
+      w.put_bit(false);         // ar_info_present
 
     // copy the rest
     if (w.copy_bits(1, r) == 1)   // overscan_info_present
@@ -421,10 +421,10 @@ parse_sps(memory_cptr const &buffer,
                % sps.timing_info.is_present % sps.timing_info.num_units_in_tick % sps.timing_info.time_scale % sps.timing_info.fixed_frame_rate);
 
     if (fix_bitstream_frame_rate) {                      // write the new timing info
-      w.put_bit(1);                                      // timing_info_present
+      w.put_bit(true);                                   // timing_info_present
       w.put_bits(32, num_units_in_tick);                 // num_units_in_tick
       w.put_bits(32, time_scale);                        // time_scale
-      w.put_bit(1);                                      // fixed_frame_rate
+      w.put_bit(true);                                   // fixed_frame_rate
 
       sps.timing_info.is_present        = true;
       sps.timing_info.num_units_in_tick = num_units_in_tick;
@@ -432,13 +432,13 @@ parse_sps(memory_cptr const &buffer,
       sps.timing_info.fixed_frame_rate  = true;
 
     } else if (sps.timing_info.is_present) {             // copy the old timing info
-      w.put_bit(1);                                      // timing_info_present
+      w.put_bit(true);                                   // timing_info_present
       w.put_bits(32, sps.timing_info.num_units_in_tick); // num_units_in_tick
       w.put_bits(32, sps.timing_info.time_scale);        // time_scale
       w.put_bit(sps.timing_info.fixed_frame_rate);       // fixed_frame_rate
 
     } else
-      w.put_bit(0);                                      // timing_info_present
+      w.put_bit(false);                                  // timing_info_present
 
     bool f = false;
     if (w.copy_bits(1, r) == 1) { // nal_hrd_parameters_present
@@ -464,32 +464,32 @@ parse_sps(memory_cptr const &buffer,
     }
 
   } else if (fix_bitstream_frame_rate) { // vui_present == 0: build new video usability information
-    w.put_bit(1);                        // vui_present
-    w.put_bit(0);                        // aspect_ratio_info_present_flag
-    w.put_bit(0);                        // overscan_info_present_flag
-    w.put_bit(0);                        // video_signal_type_present_flag
-    w.put_bit(0);                        // chroma_loc_info_present_flag
+    w.put_bit(true);                     // vui_present
+    w.put_bit(false);                    // aspect_ratio_info_present_flag
+    w.put_bit(false);                    // overscan_info_present_flag
+    w.put_bit(false);                    // video_signal_type_present_flag
+    w.put_bit(false);                    // chroma_loc_info_present_flag
 
                                          // Timing info
-    w.put_bit(1);                        // timing_info_present
+    w.put_bit(true);                     // timing_info_present
     w.put_bits(32, num_units_in_tick);   // num_units_in_tick
     w.put_bits(32, time_scale);          // time_scale
-    w.put_bit(1);                        // fixed_frame_rate
+    w.put_bit(true);                     // fixed_frame_rate
 
     sps.timing_info.is_present        = true;
     sps.timing_info.num_units_in_tick = num_units_in_tick;
     sps.timing_info.time_scale        = time_scale;
     sps.timing_info.fixed_frame_rate  = true;
 
-    w.put_bit(0);                      // nal_hrd_parameters_present_flag
-    w.put_bit(0);                      // vcl_hrd_parameters_present_flag
-    w.put_bit(0);                      // pic_struct_present_flag
-    w.put_bit(0);                      // bitstream_restriction_flag
+    w.put_bit(false);                  // nal_hrd_parameters_present_flag
+    w.put_bit(false);                  // vcl_hrd_parameters_present_flag
+    w.put_bit(false);                  // pic_struct_present_flag
+    w.put_bit(false);                  // bitstream_restriction_flag
 
   } else
-    w.put_bit(0);
+    w.put_bit(false);
 
-  w.put_bit(1);
+  w.put_bit(true);
   w.byte_align();
 
   auto new_sps = w.get_buffer();
