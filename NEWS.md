@@ -6,6 +6,8 @@
   and to give preference when several formats match.
 * mkvmerge: AV1: added support for reading AV1 video from Open Bitstream Unit
   files.
+* mkvmerge: AV1: adjusted the code for the AV1 bitstream format changes made
+  up to 2018-05-02 (git revision d14e878).
 * mkvmerge: MP4 reader: if a track has an edit list with two identical
   entries, each spanning the file's duration as given in the movie header
   atom, then the second entry will now be ignored. Improves the handling of
