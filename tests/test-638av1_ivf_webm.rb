@@ -5,8 +5,8 @@ describe "mkvmerge / reading AV1 from IVF, WebM; writing Matroska, WebM"
 
 base = "data/av1/av1."
 
-test_merge "#{base}ivf"
-test_merge "#{base}webm"
+test_merge "#{base}ivf",  :args => "--engage enable_av1"
+test_merge "#{base}webm", :args => "--engage enable_av1"
 
-test_merge "#{base}ivf",  :args => "--webm"
-test_merge "#{base}webm", :args => "--webm"
+test_merge "#{base}ivf",  :args => "--engage enable_av1 --webm"
+test_merge "#{base}webm", :args => "--engage enable_av1 --webm"

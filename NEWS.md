@@ -56,6 +56,12 @@
   MXE is now supported by setting `configure`'s `host` triplet accordingly,
   e.g. `--host=x86_64-w64-mingw32.shared`.
 
+## Other changes
+
+* mkvmerge: AV1: support for AV1 must be activated manually by adding
+  `--engage enable_av1` as the AV1 bitstream specification hasn't been
+  finalized yet.
+
 
 # Version 22.0.0 "At The End Of The World" 2018-04-01
 

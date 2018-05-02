@@ -15,6 +15,7 @@
 
 #include "common/av1.h"
 #include "common/codec.h"
+#include "common/hacks.h"
 #include "merge/connection_checks.h"
 #include "output/p_av1.h"
 
@@ -24,6 +25,9 @@ av1_video_packetizer_c::av1_video_packetizer_c(generic_reader_c *p_reader,
                                                track_info_c &p_ti)
   : generic_packetizer_c{p_reader, p_ti}
 {
+  if (!mtx::hacks::is_engaged(mtx::hacks::ENABLE_AV1))
+    mxerror(Y("Support for AV1 is currently experimental and must be enabled with '--engage enable_av1' as the AV1 bitstream specification hasn't been finalized yet.\n"));
+
   m_timestamp_factory_application_mode = TFA_SHORT_QUEUEING;
 
   set_track_type(track_video);
