@@ -412,7 +412,7 @@ parser_c::parse_obu() {
     return true;
   }
 
-  mtx::bits::reader_c sub_r{p->buffer.get_buffer() + (r.get_bit_position() / 8), *obu_size};
+  mtx::bits::reader_c sub_r{p->buffer.get_buffer() + (r.get_bit_position() / 8), static_cast<std::size_t>(*obu_size)};
 
   if (p->obu_type == OBU_SEQUENCE_HEADER) {
     parse_sequence_header_obu(sub_r);
