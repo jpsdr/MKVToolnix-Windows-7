@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-04-24 18:58+0200\n"
+"POT-Creation-Date: 2018-05-02 17:38+0200\n"
 "PO-Revision-Date: 2018-03-28 23:01+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2081,7 +2081,7 @@ msgstr "'%1%' ez da eremu hurrenkera baliozko bat."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' ez da agiri ID baliozko bat hemen: '--track-order %2%'.\n"
 
-#: src/common/hacks.cpp:102
+#: src/common/hacks.cpp:103
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' ez da ebaketa baliozko bat.\n"
@@ -2693,7 +2693,7 @@ msgstr "A&udio agiria:"
 msgid "A/52 (aka AC-3)"
 msgstr "A/52 (aka AC-3)"
 
-#: src/common/file_types.cpp:72
+#: src/common/file_types.cpp:73
 #: src/output/p_aac.h:45
 msgid "AAC"
 msgstr "AAC"
@@ -2710,7 +2710,7 @@ msgstr "AAC da SBR/HE-AAC/AAC+:"
 msgid "AAC with ADIF headers"
 msgstr "AAC ADIF idazburuekin"
 
-#: src/common/file_types.cpp:73
+#: src/common/file_types.cpp:74
 #: src/output/p_ac3.h:41
 msgid "AC-3"
 msgstr "AC-3"
@@ -2732,12 +2732,16 @@ msgstr "ALAC datu pribatu neurria ez dator bat\n"
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "ASCII katea (ez Umlaute etab. bezalako hizki berezirik)"
 
-#: src/output/p_av1.h:32
+#: src/output/p_av1.h:35
 #, fuzzy
 msgid "AV1"
 msgstr "AVI"
 
-#: src/common/file_types.cpp:75
+#: src/common/file_types.cpp:52
+msgid "AV1 Open Bitstream Units stream"
+msgstr ""
+
+#: src/common/file_types.cpp:76
 #: src/output/p_avc.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2750,7 +2754,7 @@ msgstr "AVC/h.264 (framegabetuta)"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/h.264 ohinarrizko jarioak"
 
-#: src/common/file_types.cpp:76
+#: src/common/file_types.cpp:77
 msgid "AVI"
 msgstr "AVI"
 
@@ -3779,7 +3783,7 @@ msgstr "Atalaren ikurra gaituta"
 msgid "Chapter flag hidden"
 msgstr "Atalaren ikurra ezkutuan"
 
-#: src/merge/cluster_helper.cpp:741
+#: src/merge/cluster_helper.cpp:743
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "Atal sortzea gutxienez bideo edo audio bide bat kopiatzen denean bakarrik egin daiteke. \n"
 
@@ -4152,7 +4156,7 @@ msgstr "Kopiatu agiriaren &izenburua helmuga agiriaren izenera"
 msgid "Copy item"
 msgstr "Kopiatu gaia"
 
-#: src/common/file_types.cpp:79
+#: src/common/file_types.cpp:80
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4425,17 +4429,17 @@ msgstr "CUE orri aterapena"
 msgid "Cue sheet files"
 msgstr "Cue orri agiriak"
 
-#: src/common/chapters/cue_parser.cpp:395
+#: src/common/chapters/cue_parser.cpp:379
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX entry in line %1%.\n"
 msgstr "Cue orri aztertzailea: AURKIBIDE sarrera baliogabea %1% lerroan.\n"
 
-#: src/common/chapters/cue_parser.cpp:414
+#: src/common/chapters/cue_parser.cpp:398
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%.\n"
 msgstr "Cue orri aztertzailea: AURKIBIDE zenbaki baliogabea (lortua %1%, itxarondakoa %2%) %3% lerroan.\n"
 
-#: src/common/chapters/cue_parser.cpp:276
+#: src/common/chapters/cue_parser.cpp:260
 #, boost-format
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
 msgstr "Cue orri aztertzailea: Ez da AURKIBIDE sarrerarik aurkitu aurreko BIDE sarrerarentzat (oraingo lerroa: %1%)\n"
@@ -4499,7 +4503,7 @@ msgstr "Gaur egun azpidatzi heuskarri batzuk besterik ez dira zlib algoritmoarek
 msgid "D&uplicate selected edition or chapter"
 msgstr "&Bikoiztu hautaturiko edizioa edo atala"
 
-#: src/common/file_types.cpp:81
+#: src/common/file_types.cpp:82
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
@@ -4512,7 +4516,7 @@ msgstr "DTS idazburu argibideak aldatuta! - Heuskarri berria:\n"
 msgid "DTS/DTS-HD (Digital Theater System)"
 msgstr "DTS/DTS-HD (Zinema Digital Sistema)"
 
-#: src/common/file_types.cpp:82
+#: src/common/file_types.cpp:83
 msgid "DV video format"
 msgstr "DV bideo heuskarria"
 
@@ -4743,7 +4747,7 @@ msgid "Di&sable all attachments"
 msgstr "E&zgaitu eranskin guztiak"
 
 #: src/common/file_types.cpp:33
-#: src/common/file_types.cpp:80
+#: src/common/file_types.cpp:81
 #: src/output/p_dirac.h:37
 msgid "Dirac"
 msgstr "Dirac"
@@ -4990,7 +4994,7 @@ msgstr "EBML bertsioa"
 msgid "EBML void"
 msgstr "EBML hutsunea"
 
-#: src/merge/reader_detection_and_creation.cpp:474
+#: src/merge/reader_detection_and_creation.cpp:481
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "ARRAIOAK barne akatsa! (agiri mota ezezaguna). %1%\n"
@@ -5099,6 +5103,11 @@ msgstr "Kendu elkarrizketa normalizazio irabazia"
 msgid "Enabled"
 msgstr "Gaituta"
 
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#, no-c-format
+msgid "Enables AV1 video support even though the AV1 bitstream specification hasn't been finalized yet."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:155
 #, no-c-format
 msgid "Enables splitting of the output into more than one file."
@@ -5114,7 +5123,7 @@ msgstr "Aukera hau gaitzeak mkvmergek azken sarrerari heustea eragiten du."
 msgid "Enabling tracks"
 msgstr "Bideak gaitzen"
 
-#: src/common/av1.h:30
+#: src/common/av1.h:43
 msgid "Encountered OBUs with invalid data."
 msgstr ""
 
@@ -5410,7 +5419,7 @@ msgstr "%1% bidea '%2%' Kodek ID-arekin ateratzea ez dago sostengaturik.\n"
 msgid "Extraction tool"
 msgstr "Ateratze tresna"
 
-#: src/common/file_types.cpp:83
+#: src/common/file_types.cpp:84
 #: src/output/p_flac.h:38
 msgid "FLAC"
 msgstr "FLAC"
@@ -5591,7 +5600,7 @@ msgstr "Ikurrak"
 msgid "Flags:"
 msgstr "Ikurrak:"
 
-#: src/common/file_types.cpp:84
+#: src/common/file_types.cpp:85
 msgid "Flash Video"
 msgstr "Flash Video"
 
@@ -5824,7 +5833,7 @@ msgstr "Margo orlegiaren x ardatza"
 msgid "Green colour coordinate y"
 msgstr "Margo orlegiaren y ardatza"
 
-#: src/common/file_types.cpp:87
+#: src/common/file_types.cpp:88
 msgid "HD-DVD subtitles"
 msgstr "HD-DVD azpidatziak"
 
@@ -5837,12 +5846,12 @@ msgstr "HDMV PGS"
 msgid "HDMV TextST"
 msgstr "HDMV TextST"
 
-#: src/common/file_types.cpp:85
+#: src/common/file_types.cpp:86
 #: src/extract/xtr_hdmv_textst.h:33
 msgid "HDMV TextST subtitles"
 msgstr "HDMV TextST azpidatziak"
 
-#: src/common/file_types.cpp:86
+#: src/common/file_types.cpp:87
 #: src/output/p_hevc.h:32
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
@@ -5950,7 +5959,7 @@ msgid "ISO639-2 code"
 msgstr "ISO639-2 kodea"
 
 #: src/common/file_types.cpp:42
-#: src/common/file_types.cpp:88
+#: src/common/file_types.cpp:89
 #, fuzzy
 msgid "IVF (AV1, VP8, VP9)"
 msgstr "IVF (VP8/VP9)"
@@ -6984,7 +6993,7 @@ msgstr "MKVToolNix EIG-ren ezarpen zuzenbidea"
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "MKVToolNix aukera agiriak (JSON-heuskarrian)"
 
-#: src/common/file_types.cpp:91
+#: src/common/file_types.cpp:92
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -7000,7 +7009,7 @@ msgstr "MP4 audio/bideo agiriak"
 msgid "MPEG audio files"
 msgstr "MPEG audio agiriak"
 
-#: src/common/file_types.cpp:93
+#: src/common/file_types.cpp:94
 msgid "MPEG program stream"
 msgstr "MPEG programa jarioa"
 
@@ -7008,7 +7017,7 @@ msgstr "MPEG programa jarioa"
 msgid "MPEG program streams"
 msgstr "MPEG programa jarioak"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:95
 msgid "MPEG transport stream"
 msgstr "MPEG garraio jarioa"
 
@@ -7016,7 +7025,7 @@ msgstr "MPEG garraio jarioa"
 msgid "MPEG transport streams"
 msgstr "MPEG garraio jarioak"
 
-#: src/common/file_types.cpp:92
+#: src/common/file_types.cpp:93
 msgid "MPEG video elementary stream"
 msgstr "MPEG bideo ohinarrizko jarioa "
 
@@ -7063,7 +7072,7 @@ msgstr "Lerro hondatua? (%1%)\n"
 msgid "Mark this track as 'forced'."
 msgstr "Markatu bide hau 'behartuta' bezala."
 
-#: src/common/file_types.cpp:89
+#: src/common/file_types.cpp:90
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -7157,7 +7166,7 @@ msgstr "Oroimen esleipen akatsa: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "RealAudio/RealVideo frame oroimena ezin da esleitu.\n"
 
-#: src/common/file_types.cpp:90
+#: src/common/file_types.cpp:91
 msgid "MicroDVD"
 msgstr "MicroDVD"
 
@@ -7509,7 +7518,7 @@ msgstr "Ez da agiri izenik zerrendatu '%1%' eta '%2%' artean.\n"
 msgid "No filename found after the '@'."
 msgstr "Ez da agirizenik aurktiu '@'-ren ondoren."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:89
 #, no-c-format
 msgid "No help available."
 msgstr "Ez dago laguntzarik eskuragarri."
@@ -7758,11 +7767,11 @@ msgstr "Bideko kanal zenbatekoa"
 msgid "Often used selections"
 msgstr "Maiz erabilitako hautapenak"
 
-#: src/common/file_types.cpp:95
+#: src/common/file_types.cpp:97
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
-#: src/common/file_types.cpp:52
+#: src/common/file_types.cpp:53
 msgid "Ogg/OGM audio/video files"
 msgstr "ogg/OGM audio/bideo agiriak"
 
@@ -7897,6 +7906,10 @@ msgstr "Zerrendako hizkuntza bat duten bideak bakarrik ezarriko dira berez kopia
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "v7 eta VobSub agiri berrienak bakarrik sostengatzen dira. Bertsio zaharragoren bat baduzu erabili VSConv tresna, http://sourceforge.net/projects/guliverkli/ agiri hauek v7 agirietara bihurtzeko.\n"
 
+#: src/common/file_types.cpp:96
+msgid "Open Bitstream Units stream"
+msgstr ""
+
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #, no-c-format
@@ -7988,7 +8001,7 @@ msgstr "Aukerak:"
 msgid "Opus"
 msgstr "Opus"
 
-#: src/common/file_types.cpp:53
+#: src/common/file_types.cpp:54
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus (Ogg-an) audio agiriak"
 
@@ -8060,7 +8073,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP azpidatziak"
 
-#: src/common/file_types.cpp:96
+#: src/common/file_types.cpp:98
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -8367,7 +8380,7 @@ msgstr "QuickTime audio/bideo agiriak"
 msgid "QuickTime compatible video"
 msgstr "QuickTime bideo bateragarria"
 
-#: src/common/file_types.cpp:97
+#: src/common/file_types.cpp:99
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -8497,7 +8510,7 @@ msgstr "Quicktime/MP4 irakurgailua: %1% bideak ez ditu datu batzuk. Hautsitako a
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 irakurgailua: %1% ID-dun bideak FourCC bat baino gehiago ditu. Lehen hau bakarrik erabiltzen (%2%), eta ez beste hau (%3%).\n"
 
-#: src/common/file_types.cpp:77
+#: src/common/file_types.cpp:78
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
@@ -8505,7 +8518,7 @@ msgstr "RIFF CDXA"
 msgid "RSA"
 msgstr "RSA"
 
-#: src/common/av1.h:23
+#: src/common/av1.h:36
 msgid "Raw OBUs without a size field are not supported."
 msgstr ""
 
@@ -8553,11 +8566,11 @@ msgstr "Egizko irteera lagin maiztasun Hz-tan."
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/common/file_types.cpp:98
+#: src/common/file_types.cpp:100
 msgid "RealMedia"
 msgstr "RealMedia"
 
-#: src/common/file_types.cpp:54
+#: src/common/file_types.cpp:55
 msgid "RealMedia audio/video files"
 msgstr "RealMedia audio/bideo agiriak"
 
@@ -8807,19 +8820,19 @@ msgstr "&Gelditu lan lerroa"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/common/file_types.cpp:99
+#: src/common/file_types.cpp:101
 msgid "SRT subtitles"
 msgstr "SRT azpidatziak"
 
-#: src/common/file_types.cpp:55
+#: src/common/file_types.cpp:56
 msgid "SRT text subtitles"
 msgstr "SRT idazki azpidatziak"
 
-#: src/common/file_types.cpp:100
+#: src/common/file_types.cpp:102
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS azpidatziak"
 
-#: src/common/file_types.cpp:56
+#: src/common/file_types.cpp:57
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS idazki azpidatziak"
 
@@ -9610,6 +9623,10 @@ msgstr "%1% azpidatzi bideak ez ditu iraupen osagai batzuk. Mesedez egiaztatu em
 msgid "Subtitles"
 msgstr "Azpidatziak"
 
+#: src/output/p_av1.cpp:29
+msgid "Support for AV1 is currently experimental and must be enabled with '--engage enable_av1' as the AV1 bitstream specification hasn't been finalized yet.\n"
+msgstr ""
+
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:702
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:181
 #: src/mkvtoolnix-gui/merge/output.cpp:481
@@ -9626,12 +9643,12 @@ msgstr "Sostengaturiko agiri motak:\n"
 msgid "Suppress status output."
 msgstr "Ezeztatu egoera irteera."
 
-#: src/common/file_types.cpp:102
+#: src/common/file_types.cpp:104
 #: src/output/p_tta.h:33
 msgid "TTA"
 msgstr "TTA"
 
-#: src/common/file_types.cpp:57
+#: src/common/file_types.cpp:58
 msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA (Galeragabeko True Audio kodeka)"
 
@@ -10135,11 +10152,11 @@ msgstr "'%1%' berezko hizkuntza kodea ez da ISO639-2 hizkuntza kode baliozko bat
 msgid "The default mode is adding files for multiplexing."
 msgstr "Berezko moduak multiplexatzeko agiriak gehitzen ari da."
 
-#: src/merge/reader_detection_and_creation.cpp:489
-#: src/merge/reader_detection_and_creation.cpp:492
-#: src/merge/reader_detection_and_creation.cpp:495
-#: src/merge/reader_detection_and_creation.cpp:498
-#: src/merge/reader_detection_and_creation.cpp:501
+#: src/merge/reader_detection_and_creation.cpp:496
+#: src/merge/reader_detection_and_creation.cpp:499
+#: src/merge/reader_detection_and_creation.cpp:502
+#: src/merge/reader_detection_and_creation.cpp:505
+#: src/merge/reader_detection_and_creation.cpp:508
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -10254,8 +10271,8 @@ msgstr "'%1%' agiria ezin da irakurtzeko ireki: %2%."
 #: src/common/command_line.cpp:49
 #: src/extract/mkvextract.cpp:59
 #: src/extract/mkvextract.cpp:63
-#: src/merge/reader_detection_and_creation.cpp:86
-#: src/merge/reader_detection_and_creation.cpp:187
+#: src/merge/reader_detection_and_creation.cpp:87
+#: src/merge/reader_detection_and_creation.cpp:189
 #: src/propedit/attachment_target.cpp:66
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -10342,12 +10359,12 @@ msgstr "(%1) agiria handiegia da (%2)."
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "Agiria mkvmergerekin berriro multiplexatuz zuzendu daiteke."
 
-#: src/merge/reader_detection_and_creation.cpp:495
+#: src/merge/reader_detection_and_creation.cpp:502
 msgid "The file content does not match its format type and was not recognized."
 msgstr "Agiriaren edukia ez dator bat heuskarri motarekin eta ez da ezagutzen."
 
-#: src/merge/reader_detection_and_creation.cpp:489
-#: src/merge/reader_detection_and_creation.cpp:492
+#: src/merge/reader_detection_and_creation.cpp:496
+#: src/merge/reader_detection_and_creation.cpp:499
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "Agiria ezin da irakurtzeko ireki, edo ez du nahikoa datu bere idazburuak aztertzeko."
 
@@ -10389,7 +10406,7 @@ msgstr "Agiri idazburua laburregia da.\n"
 msgid "The file header was not read correctly.\n"
 msgstr "Agiri idazburua ezin da zuzen irakurri.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:498
+#: src/merge/reader_detection_and_creation.cpp:505
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Agiri idazburuak ezin dira aztertu, adib. osatugabeak, baliogabeak edo hondatuta daudelako."
 
@@ -10945,8 +10962,8 @@ msgstr "Helmuga agiri berria neurri honen ondoren hasiko da."
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "'%1%' eranskinaren neurria da 0.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:90
-#: src/merge/reader_detection_and_creation.cpp:190
+#: src/merge/reader_detection_and_creation.cpp:91
+#: src/merge/reader_detection_and_creation.cpp:192
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "'%1%' iturburu agiria ez da ongi ireki, edo bere neurria berreskuratzea amaiera arte bilatuz ez da ongi irten.\n"
@@ -11604,7 +11621,7 @@ msgstr "Bidea"
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "Kodek-Pribatuaren %1% bidea txikiegia da.\n"
 
-#: src/common/content_decoder.cpp:109
+#: src/common/content_decoder.cpp:106
 #, boost-format
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "%1% bidea konprimitua izan da ezezaguna/sostengugabea den konpresio algoritmo batez (%2%).\n"
@@ -11614,7 +11631,7 @@ msgstr "%1% bidea konprimitua izan da ezezaguna/sostengugabea den konpresio algo
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "%1% bidea ez dago eta bere bide UID elementoa beharrezkoa da egotea Matroska berezitasunerako. Agiriak etiketak baditu badaiteke etiketa hauek hautsita egotea.\n"
 
-#: src/common/content_decoder.cpp:100
+#: src/common/content_decoder.cpp:97
 #, boost-format
 msgid "Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n"
 msgstr "%1% bidea '%2%' algoritmoarekin konprimitua izan zen zeina ez dago jadanik sostengatua.\n"
@@ -11722,7 +11739,7 @@ msgstr "Bide idazburuak"
 msgid "Track number"
 msgstr "Bide zenbakia"
 
-#: src/common/content_decoder.cpp:84
+#: src/common/content_decoder.cpp:81
 #, boost-format
 msgid "Track number %1% has been encrypted and decryption has not yet been implemented.\n"
 msgstr "%1% zenbakiko bidea enkriptaketa eta desenkriptaketa oraindik ez dago gehituta.\n"
@@ -11768,7 +11785,7 @@ msgstr "Eduki kodeaketa eskema sostengatu gabeko bideak (konpresioa edo enkripta
 msgid "Tracks:"
 msgstr "Bideak:"
 
-#: src/common/file_types.cpp:101
+#: src/common/file_types.cpp:103
 #: src/output/p_truehd.h:40
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -11823,11 +11840,11 @@ msgstr "UID"
 msgid "UID:"
 msgstr "UID-a:"
 
-#: src/common/file_types.cpp:103
+#: src/common/file_types.cpp:105
 msgid "USF subtitles"
 msgstr "USF azpidatziak"
 
-#: src/common/file_types.cpp:58
+#: src/common/file_types.cpp:59
 msgid "USF text subtitles"
 msgstr "USF idazki azpidatziak"
 
@@ -11858,7 +11875,7 @@ msgstr "Audio jario mota ezezaguna 0x%|1$04x|. %2% ID-dun jarioa ezikusi egingo 
 msgid "Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n"
 msgstr "Atal agiri heuskarri ezezaguna hemen: '%1%'. Ez du sostengaturiko atal heuskarri bat.\n"
 
-#: src/common/content_decoder.cpp:90
+#: src/common/content_decoder.cpp:87
 #, boost-format
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "Eduki kodeaketa mota ezezaguna %1% %2% bidearentzat.\n"
@@ -12028,17 +12045,17 @@ msgstr "Irteera modulo generikoa erabiltzen '%1%' bide motarako.\n"
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Irteera moduloa erabiltzen '%1%' heuskarrirako.\n"
 
-#: src/merge/cluster_helper.cpp:743
+#: src/merge/cluster_helper.cpp:745
 #, boost-format
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
 msgstr "ID %1% duen bidea erabiltzen '%2%' agiritik atal sortze zehaztasun bezala.\n"
 
-#: src/common/file_types.cpp:104
+#: src/common/file_types.cpp:106
 #: src/output/p_vc1.h:36
 msgid "VC-1"
 msgstr "VC-1"
 
-#: src/common/file_types.cpp:59
+#: src/common/file_types.cpp:60
 msgid "VC-1 elementary streams"
 msgstr "VC-1 ohinarrizko jarioak"
 
@@ -12050,7 +12067,7 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "Baliozko heuskarri kodeak dira:"
 
-#: src/common/hacks.cpp:80
+#: src/common/hacks.cpp:81
 msgid "Valid hacks are:\n"
 msgstr "Baliozko aldaketak dira:\n"
 
@@ -12305,21 +12322,21 @@ msgstr "Bideoa: zuri puntua Y"
 msgid "Visible"
 msgstr "Ikusgarria"
 
-#: src/common/file_types.cpp:105
+#: src/common/file_types.cpp:107
 #: src/output/p_vobbtn.h:35
 msgid "VobBtn"
 msgstr "VobBtn"
 
-#: src/common/file_types.cpp:60
+#: src/common/file_types.cpp:61
 msgid "VobButtons"
 msgstr "Vob-Botoiak"
 
-#: src/common/file_types.cpp:106
+#: src/common/file_types.cpp:108
 #: src/output/p_vobsub.h:30
 msgid "VobSub"
 msgstr "VobSub"
 
-#: src/common/file_types.cpp:61
+#: src/common/file_types.cpp:62
 msgid "VobSub subtitles"
 msgstr "VobSub azpidatziak"
 
@@ -12327,19 +12344,19 @@ msgstr "VobSub azpidatziak"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/common/file_types.cpp:107
+#: src/common/file_types.cpp:109
 msgid "WAV"
 msgstr "WAV"
 
-#: src/common/file_types.cpp:62
+#: src/common/file_types.cpp:63
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (konprimitu gabeko PCM audioa)"
 
-#: src/common/file_types.cpp:108
+#: src/common/file_types.cpp:110
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
-#: src/common/file_types.cpp:63
+#: src/common/file_types.cpp:64
 msgid "WAVPACK v4 audio"
 msgstr "WAVPACK v4 audioa"
 
@@ -12384,7 +12401,7 @@ msgstr "Kontuz-oharrak/Akatsak"
 msgid "Warnings:"
 msgstr "Kontuz-oharrak:"
 
-#: src/common/file_types.cpp:64
+#: src/common/file_types.cpp:65
 msgid "WebM audio/video files"
 msgstr "WebM audio/bideo agiriak"
 
@@ -12395,8 +12412,8 @@ msgstr "WebM audio/bideo agiriak"
 msgid "WebM files"
 msgstr "WebM agiriak"
 
-#: src/common/file_types.cpp:65
-#: src/common/file_types.cpp:109
+#: src/common/file_types.cpp:66
+#: src/common/file_types.cpp:111
 #: src/extract/xtr_webvtt.h:31
 #: src/output/p_webvtt.h:28
 msgid "WebVTT subtitles"
@@ -12497,7 +12514,7 @@ msgstr "Erakusteko bideo framen zabalera."
 msgid "Windows (cmd.exe)"
 msgstr "Windows (cmd.exe)"
 
-#: src/common/file_types.cpp:74
+#: src/common/file_types.cpp:75
 msgid "Windows Media (ASF/WMV)"
 msgstr "Windows Media (ASF/WMV)"
 
@@ -13431,7 +13448,7 @@ msgstr "bideak [options] [TID1:out1 [TID2:out2 ...]]"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: neurria_etiketa < 0 c'tor. %1%\n"
 
-#: src/common/file_types.cpp:110
+#: src/common/file_types.cpp:112
 #: src/common/fs_sys_helpers/windows.cpp:168
 #: src/common/kax_info.cpp:694
 #: src/common/kax_info.cpp:750

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-04-24 18:58+0200\n"
+"POT-Creation-Date: 2018-05-02 17:38+0200\n"
 "PO-Revision-Date: 2018-03-28 23:04+0200\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -2160,7 +2160,7 @@ msgstr "„%1%“ није ваљан „ccTLD“ кôд земље (Најви�
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "„%1%“ није ваљан ИБ-датотеке у „--track-order %2%“.\n"
 
-#: src/common/hacks.cpp:102
+#: src/common/hacks.cpp:103
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "„%1%“ није ваљан хак.\n"
@@ -2778,7 +2778,7 @@ msgstr "&Додај датотеке"
 msgid "A/52 (aka AC-3)"
 msgstr "А/52 (називан и „Ак3“; енг. „AC-3“)"
 
-#: src/common/file_types.cpp:72
+#: src/common/file_types.cpp:73
 #: src/output/p_aac.h:45
 msgid "AAC"
 msgstr "Аак"
@@ -2795,7 +2795,7 @@ msgstr "Аак је Сбр/Хе-Аак/Аак+:"
 msgid "AAC with ADIF headers"
 msgstr "Аак са АДИФ заглављима"
 
-#: src/common/file_types.cpp:73
+#: src/common/file_types.cpp:74
 #: src/output/p_ac3.h:41
 msgid "AC-3"
 msgstr "Ак3 (енг. „AC-3“)"
@@ -2817,12 +2817,16 @@ msgstr "Не слаже се величина Алак-приватних под
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "АСКИ ниска (без посебних знакова као „Umlaute“, итд.)"
 
-#: src/output/p_av1.h:32
+#: src/output/p_av1.h:35
 #, fuzzy
 msgid "AV1"
 msgstr "Ави"
 
-#: src/common/file_types.cpp:75
+#: src/common/file_types.cpp:52
+msgid "AV1 Open Bitstream Units stream"
+msgstr ""
+
+#: src/common/file_types.cpp:76
 #: src/output/p_avc.h:34
 msgid "AVC/h.264"
 msgstr "Авк/Х.264"
@@ -2836,7 +2840,7 @@ msgstr "Авк/Х.264 (без кадрова)"
 msgid "AVC/h.264 elementary streams"
 msgstr "Авк/Х.264 основни токови"
 
-#: src/common/file_types.cpp:76
+#: src/common/file_types.cpp:77
 msgid "AVI"
 msgstr "Ави"
 
@@ -3911,7 +3915,7 @@ msgstr "Датотека поглавља:"
 msgid "Chapter flag hidden"
 msgstr "Датотека поглавља:"
 
-#: src/merge/cluster_helper.cpp:741
+#: src/merge/cluster_helper.cpp:743
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr ""
 
@@ -4326,7 +4330,7 @@ msgstr "Одаберите назив исходишне датотеке"
 msgid "Copy item"
 msgstr ""
 
-#: src/common/file_types.cpp:79
+#: src/common/file_types.cpp:80
 msgid "CoreAudio"
 msgstr "Коре-аудијо"
 
@@ -4619,17 +4623,17 @@ msgstr "Издвајање кју-листа"
 msgid "Cue sheet files"
 msgstr "Текст-датотеке"
 
-#: src/common/chapters/cue_parser.cpp:395
+#: src/common/chapters/cue_parser.cpp:379
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX entry in line %1%.\n"
 msgstr "Рашчлањивач кју-листа: Није ваљан унос индекса у линији %1%.\n"
 
-#: src/common/chapters/cue_parser.cpp:414
+#: src/common/chapters/cue_parser.cpp:398
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%.\n"
 msgstr "Рашчлањивач кју-листа: Није ваљан број индекса (добијено %1%, очекивано %2%) у линији %3%,\n"
 
-#: src/common/chapters/cue_parser.cpp:276
+#: src/common/chapters/cue_parser.cpp:260
 #, boost-format
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
 msgstr "Рашчлањивач кју-листа: Није нађен унос индекса за претходни унос записа (тренутна линија: %1%)\n"
@@ -4695,7 +4699,7 @@ msgstr "За сада, само одређене врсте поднаписа �
 msgid "D&uplicate selected edition or chapter"
 msgstr "&Удвостручи одабрано издање или поглавље"
 
-#: src/common/file_types.cpp:81
+#: src/common/file_types.cpp:82
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "ДТС"
@@ -4708,7 +4712,7 @@ msgstr "Измењени су подаци ДТС-заглавља! - Нов ф�
 msgid "DTS/DTS-HD (Digital Theater System)"
 msgstr "ДТС/ДТС-ХД (Дигитални Театарски Систем)"
 
-#: src/common/file_types.cpp:82
+#: src/common/file_types.cpp:83
 msgid "DV video format"
 msgstr "Дв-видео"
 
@@ -4951,7 +4955,7 @@ msgid "Di&sable all attachments"
 msgstr "Одабери &све записе"
 
 #: src/common/file_types.cpp:33
-#: src/common/file_types.cpp:80
+#: src/common/file_types.cpp:81
 #: src/output/p_dirac.h:37
 msgid "Dirac"
 msgstr "Дирак"
@@ -5212,7 +5216,7 @@ msgstr "ЕБМЛ-издање: %1%"
 msgid "EBML void"
 msgstr "ЕБМЛ-заглавље"
 
-#: src/merge/reader_detection_and_creation.cpp:474
+#: src/merge/reader_detection_and_creation.cpp:481
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "Опасна унутрашња грешка! (непозната врста датотеке). %1%\n"
@@ -5327,6 +5331,11 @@ msgstr "Подаци о одељку"
 msgid "Enabled"
 msgstr "О&могућено"
 
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#, no-c-format
+msgid "Enables AV1 video support even though the AV1 bitstream specification hasn't been finalized yet."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:155
 #, no-c-format
 msgid "Enables splitting of the output into more than one file."
@@ -5342,7 +5351,7 @@ msgstr "Укључењем ове опције, програм ће да зад�
 msgid "Enabling tracks"
 msgstr "О&могући све записе"
 
-#: src/common/av1.h:30
+#: src/common/av1.h:43
 msgid "Encountered OBUs with invalid data."
 msgstr ""
 
@@ -5644,7 +5653,7 @@ msgstr "Није подржано издвајање записа, ИБ=%1% (И�
 msgid "Extraction tool"
 msgstr "Мкв-&издвојница"
 
-#: src/common/file_types.cpp:83
+#: src/common/file_types.cpp:84
 #: src/output/p_flac.h:38
 msgid "FLAC"
 msgstr "Флак"
@@ -5832,7 +5841,7 @@ msgstr "Белези:"
 msgid "Flags:"
 msgstr "Белези:"
 
-#: src/common/file_types.cpp:84
+#: src/common/file_types.cpp:85
 msgid "Flash Video"
 msgstr "Флеш-video"
 
@@ -6073,7 +6082,7 @@ msgstr "Кју-указивач стања кодека: %1%"
 msgid "Green colour coordinate y"
 msgstr "Кју-указивач стања кодека: %1%"
 
-#: src/common/file_types.cpp:87
+#: src/common/file_types.cpp:88
 msgid "HD-DVD subtitles"
 msgstr "Хд-Двд поднаписи"
 
@@ -6087,13 +6096,13 @@ msgstr "Хдмв Пгс"
 msgid "HDMV TextST"
 msgstr "Хдмв Пгс"
 
-#: src/common/file_types.cpp:85
+#: src/common/file_types.cpp:86
 #: src/extract/xtr_hdmv_textst.h:33
 #, fuzzy
 msgid "HDMV TextST subtitles"
 msgstr "текст-поднаписи"
 
-#: src/common/file_types.cpp:86
+#: src/common/file_types.cpp:87
 #: src/output/p_hevc.h:32
 msgid "HEVC/h.265"
 msgstr "Хевк/Х.265"
@@ -6205,7 +6214,7 @@ msgid "ISO639-2 code"
 msgstr "ИСО639-2 кôд"
 
 #: src/common/file_types.cpp:42
-#: src/common/file_types.cpp:88
+#: src/common/file_types.cpp:89
 #, fuzzy
 msgid "IVF (AV1, VP8, VP9)"
 msgstr "Ивф (Вп8/Вп9)"
@@ -7248,7 +7257,7 @@ msgstr "Датотеке графичких поставки Мкв-алатни
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "Датотеке поставки Мкв-алатнице"
 
-#: src/common/file_types.cpp:91
+#: src/common/file_types.cpp:92
 msgid "MP2/MP3"
 msgstr "Мп2/Мп3"
 
@@ -7264,7 +7273,7 @@ msgstr "Мп4 зв./видео датотеке"
 msgid "MPEG audio files"
 msgstr "Мпег звучне датотеке"
 
-#: src/common/file_types.cpp:93
+#: src/common/file_types.cpp:94
 msgid "MPEG program stream"
 msgstr "Мпег-програмски ток"
 
@@ -7272,7 +7281,7 @@ msgstr "Мпег-програмски ток"
 msgid "MPEG program streams"
 msgstr "Мпег-програмски токови"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:95
 msgid "MPEG transport stream"
 msgstr "Мпег-ток за пренос"
 
@@ -7280,7 +7289,7 @@ msgstr "Мпег-ток за пренос"
 msgid "MPEG transport streams"
 msgstr "Мпег-ток за пренос"
 
-#: src/common/file_types.cpp:92
+#: src/common/file_types.cpp:93
 msgid "MPEG video elementary stream"
 msgstr "Основни мпег-видео ток"
 
@@ -7327,7 +7336,7 @@ msgstr "Неправилна линија? (%1%)\n"
 msgid "Mark this track as 'forced'."
 msgstr "Стави белег запису „присиљава се“."
 
-#: src/common/file_types.cpp:89
+#: src/common/file_types.cpp:90
 msgid "Matroska"
 msgstr "Матрошка"
 
@@ -7435,7 +7444,7 @@ msgstr "Грешка при додели меморије: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Не може да се додели меморија за рил-аудио/рил-видео кадар.\n"
 
-#: src/common/file_types.cpp:90
+#: src/common/file_types.cpp:91
 msgid "MicroDVD"
 msgstr "Микро-ДВД"
 
@@ -7794,7 +7803,7 @@ msgstr "Задато је више од једног назива датотек
 msgid "No filename found after the '@'."
 msgstr "Није нађен назив датотеке након „@“."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:89
 #, no-c-format
 msgid "No help available."
 msgstr "Нема доступне помоћи."
@@ -8045,11 +8054,11 @@ msgstr "Број канала у запису."
 msgid "Often used selections"
 msgstr "&Најчешће одабирано"
 
-#: src/common/file_types.cpp:95
+#: src/common/file_types.cpp:97
 msgid "Ogg/OGM"
 msgstr "Огг/Огм"
 
-#: src/common/file_types.cpp:52
+#: src/common/file_types.cpp:53
 msgid "Ogg/OGM audio/video files"
 msgstr "Огг/Огм зв./видео датотеке"
 
@@ -8190,6 +8199,10 @@ msgstr "Само записи са поставком за језик из ов�
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "Воб-суб датотеке су подржане од њ. издања 7. Уколико имате старија издања ових датотека можете да их претворите у издање 7 помоћу програма „VSConv“ (посетите http://sourceforge.net/projects/guliverkli/).\n"
 
+#: src/common/file_types.cpp:96
+msgid "Open Bitstream Units stream"
+msgstr ""
+
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #, fuzzy, no-c-format
@@ -8288,7 +8301,7 @@ msgstr "Опције:"
 msgid "Opus"
 msgstr "Опус"
 
-#: src/common/file_types.cpp:53
+#: src/common/file_types.cpp:54
 msgid "Opus (in Ogg) audio files"
 msgstr "Опус зв. датотеке (Огг контејнер)"
 
@@ -8362,7 +8375,7 @@ msgstr "ИКМ (енг. „PCM“)"
 msgid "PGS/SUP subtitles"
 msgstr "Пгс/Суп поднаписи"
 
-#: src/common/file_types.cpp:96
+#: src/common/file_types.cpp:98
 msgid "PGSSUP"
 msgstr "Пгс-Суп"
 
@@ -8684,7 +8697,7 @@ msgstr "Квик-тајм  зв./видео датотеке"
 msgid "QuickTime compatible video"
 msgstr "Квик-тајм сагласан видео"
 
-#: src/common/file_types.cpp:97
+#: src/common/file_types.cpp:99
 msgid "QuickTime/MP4"
 msgstr "Квик-тајм/Мп4"
 
@@ -8814,7 +8827,7 @@ msgstr "Читач за Квик-тајм/Мп4: Запис %1% не садрж�
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Читач за Квик-тајм/Мп4: Запис, ИБ %1%, садржи више но један Фоур-ЦЦ. Ја ћу употребити само онај први (%2%), а изоставићу овај (%3%).\n"
 
-#: src/common/file_types.cpp:77
+#: src/common/file_types.cpp:78
 #, fuzzy
 msgid "RIFF CDXA"
 msgstr "Рифф-ЦДИксА"
@@ -8823,7 +8836,7 @@ msgstr "Рифф-ЦДИксА"
 msgid "RSA"
 msgstr "РСА"
 
-#: src/common/av1.h:23
+#: src/common/av1.h:36
 msgid "Raw OBUs without a size field are not supported."
 msgstr ""
 
@@ -8872,11 +8885,11 @@ msgstr "Стварна излазна учестаност узорковања 
 msgid "RealAudio"
 msgstr "Рил-аудијо"
 
-#: src/common/file_types.cpp:98
+#: src/common/file_types.cpp:100
 msgid "RealMedia"
 msgstr "Рил-медија"
 
-#: src/common/file_types.cpp:54
+#: src/common/file_types.cpp:55
 msgid "RealMedia audio/video files"
 msgstr "Рил-медија зв./видео датотеке"
 
@@ -9136,19 +9149,19 @@ msgstr "Заус&тави заказане радње"
 msgid "SHA1-160"
 msgstr "СХА1-160"
 
-#: src/common/file_types.cpp:99
+#: src/common/file_types.cpp:101
 msgid "SRT subtitles"
 msgstr "Срт поднаписи"
 
-#: src/common/file_types.cpp:55
+#: src/common/file_types.cpp:56
 msgid "SRT text subtitles"
 msgstr "Срт текст. поднаписи"
 
-#: src/common/file_types.cpp:100
+#: src/common/file_types.cpp:102
 msgid "SSA/ASS subtitles"
 msgstr "Сса/Асс поднаписи"
 
-#: src/common/file_types.cpp:56
+#: src/common/file_types.cpp:57
 msgid "SSA/ASS text subtitles"
 msgstr "Сса/Асс текст. поднаписи"
 
@@ -9969,6 +9982,10 @@ msgstr "недостају неки временски елементи запи
 msgid "Subtitles"
 msgstr "Поднаписи"
 
+#: src/output/p_av1.cpp:29
+msgid "Support for AV1 is currently experimental and must be enabled with '--engage enable_av1' as the AV1 bitstream specification hasn't been finalized yet.\n"
+msgstr ""
+
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:702
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:181
 #: src/mkvtoolnix-gui/merge/output.cpp:481
@@ -9985,12 +10002,12 @@ msgstr "Подржане врсте датотека:\n"
 msgid "Suppress status output."
 msgstr "Сажето извештава у току рада."
 
-#: src/common/file_types.cpp:102
+#: src/common/file_types.cpp:104
 #: src/output/p_tta.h:33
 msgid "TTA"
 msgstr "Тта"
 
-#: src/common/file_types.cpp:57
+#: src/common/file_types.cpp:58
 msgid "TTA (The lossless True Audio codec)"
 msgstr "Тта (The lossless True Audio codec)"
 
@@ -10506,11 +10523,11 @@ msgstr "Подразумевани језички код „%1%“ није ва
 msgid "The default mode is adding files for multiplexing."
 msgstr "Подразумеван начин рада је додавање датотека за сједињавање"
 
-#: src/merge/reader_detection_and_creation.cpp:489
-#: src/merge/reader_detection_and_creation.cpp:492
-#: src/merge/reader_detection_and_creation.cpp:495
-#: src/merge/reader_detection_and_creation.cpp:498
-#: src/merge/reader_detection_and_creation.cpp:501
+#: src/merge/reader_detection_and_creation.cpp:496
+#: src/merge/reader_detection_and_creation.cpp:499
+#: src/merge/reader_detection_and_creation.cpp:502
+#: src/merge/reader_detection_and_creation.cpp:505
+#: src/merge/reader_detection_and_creation.cpp:508
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -10626,8 +10643,8 @@ msgstr "Неуспело отварање датотеке „%1%“ за чит
 #: src/common/command_line.cpp:49
 #: src/extract/mkvextract.cpp:59
 #: src/extract/mkvextract.cpp:63
-#: src/merge/reader_detection_and_creation.cpp:86
-#: src/merge/reader_detection_and_creation.cpp:187
+#: src/merge/reader_detection_and_creation.cpp:87
+#: src/merge/reader_detection_and_creation.cpp:189
 #: src/propedit/attachment_target.cpp:66
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -10714,12 +10731,12 @@ msgstr "У ИксМЛ-датотеци ознака „%1%“ постоји г�
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr ""
 
-#: src/merge/reader_detection_and_creation.cpp:495
+#: src/merge/reader_detection_and_creation.cpp:502
 msgid "The file content does not match its format type and was not recognized."
 msgstr "Није препознат садржај датотеке јер се не слаже са њ. врстом формата."
 
-#: src/merge/reader_detection_and_creation.cpp:489
-#: src/merge/reader_detection_and_creation.cpp:492
+#: src/merge/reader_detection_and_creation.cpp:496
+#: src/merge/reader_detection_and_creation.cpp:499
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "Неуспело отварање датотеке при читању, или је недовољно података за рашчлањавање њеног заглавља."
 
@@ -10761,7 +10778,7 @@ msgstr "Заглавље датотеке је прекратко.\n"
 msgid "The file header was not read correctly.\n"
 msgstr "Заглавље датотеке није прочитано исправно.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:498
+#: src/merge/reader_detection_and_creation.cpp:505
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Ова заглавља датотеке не могу да рашчланим (можда нису кломплетна или ваљана, а можда су и оштећена)."
 
@@ -11325,8 +11342,8 @@ msgstr "Величина после које се уписује у нову и�
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "Величина прилога „%1%“ је 0.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:90
-#: src/merge/reader_detection_and_creation.cpp:190
+#: src/merge/reader_detection_and_creation.cpp:91
+#: src/merge/reader_detection_and_creation.cpp:192
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "Неуспешно отварање изворна датотеке „%1%“, или је покушај добијања њене величине трагањем за крајем датотеке било неуспешно.\n"
@@ -11989,7 +12006,7 @@ msgstr "Записи:"
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "„Кодек_приватно“ у запису %1% је премали.\n"
 
-#: src/common/content_decoder.cpp:109
+#: src/common/content_decoder.cpp:106
 #, boost-format
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "За запис %1% је употребљен непознат/неподржан алгоритам сажимања (%2%).\n"
@@ -11999,7 +12016,7 @@ msgstr "За запис %1% је употребљен непознат/непо�
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Запис %1% нема свој елеменат ЈИБ-записа чије је присуство по матрошка-спецификацији обавезно. Ако ова датотека садржи ознаке онда оне могу да буду оштећене.\n"
 
-#: src/common/content_decoder.cpp:100
+#: src/common/content_decoder.cpp:97
 #, boost-format
 msgid "Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n"
 msgstr ""
@@ -12107,7 +12124,7 @@ msgstr "Заглавља записа"
 msgid "Track number"
 msgstr "Број записа"
 
-#: src/common/content_decoder.cpp:84
+#: src/common/content_decoder.cpp:81
 #, boost-format
 msgid "Track number %1% has been encrypted and decryption has not yet been implemented.\n"
 msgstr "Запис број %1% је шифрован. На жалост, дешифровање још није примењено у програму.\n"
@@ -12156,7 +12173,7 @@ msgstr "Записи неподржаних шема кодирања садрж
 msgid "Tracks:"
 msgstr "Записи:"
 
-#: src/common/file_types.cpp:101
+#: src/common/file_types.cpp:103
 #: src/output/p_truehd.h:40
 msgid "TrueHD"
 msgstr "Тру-ХД"
@@ -12212,11 +12229,11 @@ msgstr "ИБ"
 msgid "UID:"
 msgstr "&ЈИБ:"
 
-#: src/common/file_types.cpp:103
+#: src/common/file_types.cpp:105
 msgid "USF subtitles"
 msgstr "УСФ поднаписи"
 
-#: src/common/file_types.cpp:58
+#: src/common/file_types.cpp:59
 msgid "USF text subtitles"
 msgstr "УСФ текст-поднаписи"
 
@@ -12247,7 +12264,7 @@ msgstr "Непозната врста звучног тока 0x%|1$04x|. ИБ-�
 msgid "Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n"
 msgstr "Непозната врста датотеке поглавља у „%1%“. Она не садржи подржане врсте поглавља.\n"
 
-#: src/common/content_decoder.cpp:90
+#: src/common/content_decoder.cpp:87
 #, boost-format
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "Непозната врста кодирања садржаја %1% за запис %2%.\n"
@@ -12419,17 +12436,17 @@ msgstr "Употребљавам општи изл. модул за врсту �
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Употребљавам изл. модул за формат „%1%“.\n"
 
-#: src/merge/cluster_helper.cpp:743
+#: src/merge/cluster_helper.cpp:745
 #, boost-format
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
 msgstr ""
 
-#: src/common/file_types.cpp:104
+#: src/common/file_types.cpp:106
 #: src/output/p_vc1.h:36
 msgid "VC-1"
 msgstr "ВК1"
 
-#: src/common/file_types.cpp:59
+#: src/common/file_types.cpp:60
 msgid "VC-1 elementary streams"
 msgstr "ВК1-основни токови"
 
@@ -12442,7 +12459,7 @@ msgstr "Вп8/Вп9"
 msgid "Valid format codes are:"
 msgstr "Ваљана хаковања су:\n"
 
-#: src/common/hacks.cpp:80
+#: src/common/hacks.cpp:81
 msgid "Valid hacks are:\n"
 msgstr "Ваљана хаковања су:\n"
 
@@ -12714,22 +12731,22 @@ msgstr ""
 msgid "Visible"
 msgstr ""
 
-#: src/common/file_types.cpp:105
+#: src/common/file_types.cpp:107
 #: src/output/p_vobbtn.h:35
 #, fuzzy
 msgid "VobBtn"
 msgstr "Воб-дугме"
 
-#: src/common/file_types.cpp:60
+#: src/common/file_types.cpp:61
 msgid "VobButtons"
 msgstr "Воб-дугмад"
 
-#: src/common/file_types.cpp:106
+#: src/common/file_types.cpp:108
 #: src/output/p_vobsub.h:30
 msgid "VobSub"
 msgstr "Воб-суб"
 
-#: src/common/file_types.cpp:61
+#: src/common/file_types.cpp:62
 msgid "VobSub subtitles"
 msgstr "Воб-суб поднаписи"
 
@@ -12737,19 +12754,19 @@ msgstr "Воб-суб поднаписи"
 msgid "Vorbis"
 msgstr "Ворбис"
 
-#: src/common/file_types.cpp:107
+#: src/common/file_types.cpp:109
 msgid "WAV"
 msgstr "Вав"
 
-#: src/common/file_types.cpp:62
+#: src/common/file_types.cpp:63
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "Ваве (ПЦМ-звук — несажет)"
 
-#: src/common/file_types.cpp:108
+#: src/common/file_types.cpp:110
 msgid "WAVPACK"
 msgstr "Вав-пак"
 
-#: src/common/file_types.cpp:63
+#: src/common/file_types.cpp:64
 msgid "WAVPACK v4 audio"
 msgstr "Вав-пак звук изд.4"
 
@@ -12795,7 +12812,7 @@ msgstr "Упозорења"
 msgid "Warnings:"
 msgstr "Упозорења:"
 
-#: src/common/file_types.cpp:64
+#: src/common/file_types.cpp:65
 msgid "WebM audio/video files"
 msgstr "ВебМ зв./видео датотеке"
 
@@ -12806,8 +12823,8 @@ msgstr "ВебМ зв./видео датотеке"
 msgid "WebM files"
 msgstr "ВебМ-датотеке"
 
-#: src/common/file_types.cpp:65
-#: src/common/file_types.cpp:109
+#: src/common/file_types.cpp:66
+#: src/common/file_types.cpp:111
 #: src/extract/xtr_webvtt.h:31
 #: src/output/p_webvtt.h:28
 #, fuzzy
@@ -12916,7 +12933,7 @@ msgstr "Ширина приказа видео-кадрова."
 msgid "Windows (cmd.exe)"
 msgstr "Виндоуз („cmd.exe“)"
 
-#: src/common/file_types.cpp:74
+#: src/common/file_types.cpp:75
 msgid "Windows Media (ASF/WMV)"
 msgstr "Виндоуз-медиј (Асф/Вмв)"
 
@@ -13883,7 +13900,7 @@ msgstr "mkvextract tracks <ул_назив> [опције] [ЗИБ1:изл1 [З�
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "„tta_reader“: „tag_size“ < 0 у овом „c'tor.“ %1%\n"
 
-#: src/common/file_types.cpp:110
+#: src/common/file_types.cpp:112
 #: src/common/fs_sys_helpers/windows.cpp:168
 #: src/common/kax_info.cpp:694
 #: src/common/kax_info.cpp:750

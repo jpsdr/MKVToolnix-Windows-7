@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-04-24 18:58+0200\n"
+"POT-Creation-Date: 2018-05-02 17:38+0200\n"
 "PO-Revision-Date: 2018-04-26 18:43+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2146,7 +2146,7 @@ msgstr "'%1%' no es un orden de campos válido."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' no es un ID de archivo válido en '--track-order %2%'.\n"
 
-#: src/common/hacks.cpp:102
+#: src/common/hacks.cpp:103
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' no es un corte válido.\n"
@@ -2760,7 +2760,7 @@ msgstr "Archivo de a&udio:"
 msgid "A/52 (aka AC-3)"
 msgstr "A/52 (AC-3)"
 
-#: src/common/file_types.cpp:72
+#: src/common/file_types.cpp:73
 #: src/output/p_aac.h:45
 msgid "AAC"
 msgstr "AAC"
@@ -2777,7 +2777,7 @@ msgstr "AAC es SBR/HE-AAC/AAC+:"
 msgid "AAC with ADIF headers"
 msgstr "AAC con cabeceras ADIF"
 
-#: src/common/file_types.cpp:73
+#: src/common/file_types.cpp:74
 #: src/output/p_ac3.h:41
 msgid "AC-3"
 msgstr "AC-3"
@@ -2799,11 +2799,15 @@ msgstr "No coincide el tamaño de los datos particulares de ALAC\n"
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "Cadena de caracteres ASCII (no caracteres especiales como Umlaute, etc.)"
 
-#: src/output/p_av1.h:32
+#: src/output/p_av1.h:35
 msgid "AV1"
 msgstr "AV1"
 
-#: src/common/file_types.cpp:75
+#: src/common/file_types.cpp:52
+msgid "AV1 Open Bitstream Units stream"
+msgstr ""
+
+#: src/common/file_types.cpp:76
 #: src/output/p_avc.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2816,7 +2820,7 @@ msgstr "AVC/h.264 (unframed)"
 msgid "AVC/h.264 elementary streams"
 msgstr "Secuencias básicas AVC/h.264"
 
-#: src/common/file_types.cpp:76
+#: src/common/file_types.cpp:77
 msgid "AVI"
 msgstr "AVI"
 
@@ -3844,7 +3848,7 @@ msgstr "Marcador de capítulo activada"
 msgid "Chapter flag hidden"
 msgstr "Marcador de capítulo oculta"
 
-#: src/merge/cluster_helper.cpp:741
+#: src/merge/cluster_helper.cpp:743
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "La generación de capítulos sólo es posible si al menos se copia una pista de vídeo o audio.\n"
 
@@ -4217,7 +4221,7 @@ msgstr "Copiar el &título del archivo al nombre del archivo de destino"
 msgid "Copy item"
 msgstr "Copiar objeto"
 
-#: src/common/file_types.cpp:79
+#: src/common/file_types.cpp:80
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4490,17 +4494,17 @@ msgstr "Extracción de hojas de distribución de pistas (CUE Sheet)"
 msgid "Cue sheet files"
 msgstr "Hoja de distribución de pistas"
 
-#: src/common/chapters/cue_parser.cpp:395
+#: src/common/chapters/cue_parser.cpp:379
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX entry in line %1%.\n"
 msgstr "Analizador de hoja de distribución de pistas (Cue Sheet): Registro del ÍNDICE no válido en la línea %1%.\n"
 
-#: src/common/chapters/cue_parser.cpp:414
+#: src/common/chapters/cue_parser.cpp:398
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%.\n"
 msgstr "Analizador de hoja de distribución de pistas (Cue Sheet): Número de ÍNDICE no válido (obtenido %1%, esperado %2%) en línea %3%,\n"
 
-#: src/common/chapters/cue_parser.cpp:276
+#: src/common/chapters/cue_parser.cpp:260
 #, boost-format
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
 msgstr "Analizador de hoja de distribución de pistas (Cue Sheet): Ningún registro del ÍNDICE fue encontrado para el registro de la PISTA previa (línea actual: %1%)\n"
@@ -4564,7 +4568,7 @@ msgstr "Actualmente sólo algunos formatos de subtítulos son comprimidos con el
 msgid "D&uplicate selected edition or chapter"
 msgstr "D&uplicar la edición o capítulo seleccionado"
 
-#: src/common/file_types.cpp:81
+#: src/common/file_types.cpp:82
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
@@ -4577,7 +4581,7 @@ msgstr "¡La información de cabecera DTS ha cambiado! - Nuevo formato:\n"
 msgid "DTS/DTS-HD (Digital Theater System)"
 msgstr "DTS/DTS-HD (Sistema de Teatro Digital)"
 
-#: src/common/file_types.cpp:82
+#: src/common/file_types.cpp:83
 msgid "DV video format"
 msgstr "Formato de vídeo DV"
 
@@ -4807,7 +4811,7 @@ msgid "Di&sable all attachments"
 msgstr "De&shabilitar todos los adjuntos"
 
 #: src/common/file_types.cpp:33
-#: src/common/file_types.cpp:80
+#: src/common/file_types.cpp:81
 #: src/output/p_dirac.h:37
 msgid "Dirac"
 msgstr "Dirac"
@@ -5052,7 +5056,7 @@ msgstr "Versión de EBML"
 msgid "EBML void"
 msgstr "EBML void"
 
-#: src/merge/reader_detection_and_creation.cpp:474
+#: src/merge/reader_detection_and_creation.cpp:481
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "¡DIABLOS, hay un error interno! (Tipo de archivo desconocido). %1%\n"
@@ -5159,6 +5163,11 @@ msgstr "Habilita la eliminación de ganancia por la &normalización de diálogo 
 msgid "Enabled"
 msgstr "Activado"
 
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#, no-c-format
+msgid "Enables AV1 video support even though the AV1 bitstream specification hasn't been finalized yet."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:155
 #, no-c-format
 msgid "Enables splitting of the output into more than one file."
@@ -5174,7 +5183,7 @@ msgstr "Habilitar esta opción provoca que mkvmerge mantenga ese último registr
 msgid "Enabling tracks"
 msgstr "Habilitar las pistas"
 
-#: src/common/av1.h:30
+#: src/common/av1.h:43
 msgid "Encountered OBUs with invalid data."
 msgstr "Encontrado OBUs con datos erróneos."
 
@@ -5470,7 +5479,7 @@ msgstr "La extracción de la pista con ID %1% y CodecID '%2%', no es compatible.
 msgid "Extraction tool"
 msgstr "Extractor"
 
-#: src/common/file_types.cpp:83
+#: src/common/file_types.cpp:84
 #: src/output/p_flac.h:38
 msgid "FLAC"
 msgstr "FLAC"
@@ -5651,7 +5660,7 @@ msgstr "Marcadores"
 msgid "Flags:"
 msgstr "Marcadores:"
 
-#: src/common/file_types.cpp:84
+#: src/common/file_types.cpp:85
 msgid "Flash Video"
 msgstr "Flash Video"
 
@@ -5884,7 +5893,7 @@ msgstr "Color verde, coordenada X"
 msgid "Green colour coordinate y"
 msgstr "Color verde, coordenada Y"
 
-#: src/common/file_types.cpp:87
+#: src/common/file_types.cpp:88
 msgid "HD-DVD subtitles"
 msgstr "Subtítulos HD-DVD"
 
@@ -5897,12 +5906,12 @@ msgstr "HDMV PGS"
 msgid "HDMV TextST"
 msgstr "HDMV TextST"
 
-#: src/common/file_types.cpp:85
+#: src/common/file_types.cpp:86
 #: src/extract/xtr_hdmv_textst.h:33
 msgid "HDMV TextST subtitles"
 msgstr "Subtítulos HDMV TextST"
 
-#: src/common/file_types.cpp:86
+#: src/common/file_types.cpp:87
 #: src/output/p_hevc.h:32
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
@@ -6010,7 +6019,7 @@ msgid "ISO639-2 code"
 msgstr "Código ISO639-2"
 
 #: src/common/file_types.cpp:42
-#: src/common/file_types.cpp:88
+#: src/common/file_types.cpp:89
 msgid "IVF (AV1, VP8, VP9)"
 msgstr "IVF (AV1, VP8, VP9)"
 
@@ -7043,7 +7052,7 @@ msgstr "Carpeta de instalación de la GUI de MKVToolNix"
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "Archivos de opciones de MKVToolNix (formato-JSON)"
 
-#: src/common/file_types.cpp:91
+#: src/common/file_types.cpp:92
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -7059,7 +7068,7 @@ msgstr "Archivos de audio/vídeo MP4"
 msgid "MPEG audio files"
 msgstr "Archivos de audio MPEG"
 
-#: src/common/file_types.cpp:93
+#: src/common/file_types.cpp:94
 msgid "MPEG program stream"
 msgstr "Secuencia de programa MPEG"
 
@@ -7067,7 +7076,7 @@ msgstr "Secuencia de programa MPEG"
 msgid "MPEG program streams"
 msgstr "Archivos de programa MPEG"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:95
 msgid "MPEG transport stream"
 msgstr "Secuencia de transporte MPEG"
 
@@ -7075,7 +7084,7 @@ msgstr "Secuencia de transporte MPEG"
 msgid "MPEG transport streams"
 msgstr "Flujos de transporte MPEG"
 
-#: src/common/file_types.cpp:92
+#: src/common/file_types.cpp:93
 msgid "MPEG video elementary stream"
 msgstr "Secuencia básica de vídeo MPEG"
 
@@ -7122,7 +7131,7 @@ msgstr "¿Línea errónea? (%1%)\n"
 msgid "Mark this track as 'forced'."
 msgstr "Marca esta pista como 'forzada'."
 
-#: src/common/file_types.cpp:89
+#: src/common/file_types.cpp:90
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -7216,7 +7225,7 @@ msgstr "Error de asignación de memoria: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "La memoria para un fotograma (frame) de un RealAudio/RealVideo no puede ser asignada.\n"
 
-#: src/common/file_types.cpp:90
+#: src/common/file_types.cpp:91
 msgid "MicroDVD"
 msgstr "MicroDVD"
 
@@ -7568,7 +7577,7 @@ msgstr "Ninguno de los nombres del archivo fueron relacionados entre '%1%' y '%2
 msgid "No filename found after the '@'."
 msgstr "No se encontró ningún nombre para el archivo después de la @."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:89
 #, no-c-format
 msgid "No help available."
 msgstr "Ayuda no disponible."
@@ -7817,11 +7826,11 @@ msgstr "Número de canales en la pista."
 msgid "Often used selections"
 msgstr "Selecciones frecuentes"
 
-#: src/common/file_types.cpp:95
+#: src/common/file_types.cpp:97
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
-#: src/common/file_types.cpp:52
+#: src/common/file_types.cpp:53
 msgid "Ogg/OGM audio/video files"
 msgstr "Archivos de audio/vídeo ogg/OGM"
 
@@ -7955,6 +7964,10 @@ msgstr "Por defecto, sólo las pistas con un idioma de la lista serán configura
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "Solo v7 y los archivos VobSub más actuales son compatibles. Si tienes una versión antigua, usa la herramienta VSConv, que puede descargar en http://sourceforge.net/projects/guliverkli/ y así convertir estos archivos al formato v7.\n"
 
+#: src/common/file_types.cpp:96
+msgid "Open Bitstream Units stream"
+msgstr ""
+
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #, no-c-format
@@ -8046,7 +8059,7 @@ msgstr "Opciones:"
 msgid "Opus"
 msgstr "Opus"
 
-#: src/common/file_types.cpp:53
+#: src/common/file_types.cpp:54
 msgid "Opus (in Ogg) audio files"
 msgstr "Archivos de audio Opus (en Ogg)"
 
@@ -8118,7 +8131,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "Subtítulos PGS/SUP"
 
-#: src/common/file_types.cpp:96
+#: src/common/file_types.cpp:98
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -8423,7 +8436,7 @@ msgstr "Archivos de audio/vídeo QuickTime"
 msgid "QuickTime compatible video"
 msgstr "Video compatible QuickTime"
 
-#: src/common/file_types.cpp:97
+#: src/common/file_types.cpp:99
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -8553,7 +8566,7 @@ msgstr "Lector de Quicktime/MP4: La pista %1% tiene ausente alguna información.
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Lector de Quicktime/MP4: El ID de la pista %1% tiene más de un FourCC. Sólo utilizará el primero (%2%) y no este otro (%3%).\n"
 
-#: src/common/file_types.cpp:77
+#: src/common/file_types.cpp:78
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
@@ -8561,7 +8574,7 @@ msgstr "RIFF CDXA"
 msgid "RSA"
 msgstr "RSA"
 
-#: src/common/av1.h:23
+#: src/common/av1.h:36
 msgid "Raw OBUs without a size field are not supported."
 msgstr "Raw OBUs con un tamaño de campo no admitido."
 
@@ -8609,11 +8622,11 @@ msgstr "Frecuencia real de muestreo creado en Hz."
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/common/file_types.cpp:98
+#: src/common/file_types.cpp:100
 msgid "RealMedia"
 msgstr "RealMedia"
 
-#: src/common/file_types.cpp:54
+#: src/common/file_types.cpp:55
 msgid "RealMedia audio/video files"
 msgstr "Archivos de audio y vídeo de RealMedia"
 
@@ -8862,19 +8875,19 @@ msgstr "&Detener la lista de tareas"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/common/file_types.cpp:99
+#: src/common/file_types.cpp:101
 msgid "SRT subtitles"
 msgstr "Subtítulos SRT"
 
-#: src/common/file_types.cpp:55
+#: src/common/file_types.cpp:56
 msgid "SRT text subtitles"
 msgstr "Subtítulos de texto SRT"
 
-#: src/common/file_types.cpp:100
+#: src/common/file_types.cpp:102
 msgid "SSA/ASS subtitles"
 msgstr "Subtítulos SSA/ASS"
 
-#: src/common/file_types.cpp:56
+#: src/common/file_types.cpp:57
 msgid "SSA/ASS text subtitles"
 msgstr "Subtítulos de texto SSA/ASS"
 
@@ -9656,6 +9669,10 @@ msgstr "La pista del subtítulo %1%, tiene algunos elementos de duración ausent
 msgid "Subtitles"
 msgstr "Subtítulos"
 
+#: src/output/p_av1.cpp:29
+msgid "Support for AV1 is currently experimental and must be enabled with '--engage enable_av1' as the AV1 bitstream specification hasn't been finalized yet.\n"
+msgstr ""
+
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:702
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:181
 #: src/mkvtoolnix-gui/merge/output.cpp:481
@@ -9672,12 +9689,12 @@ msgstr "Tipos de archivos compatibles:\n"
 msgid "Suppress status output."
 msgstr "Suprime el estado creado."
 
-#: src/common/file_types.cpp:102
+#: src/common/file_types.cpp:104
 #: src/output/p_tta.h:33
 msgid "TTA"
 msgstr "TTA"
 
-#: src/common/file_types.cpp:57
+#: src/common/file_types.cpp:58
 msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA (The lossless True Audio codec)"
 
@@ -10171,11 +10188,11 @@ msgstr "El código del idioma predefinido '%1%' no es un código de idioma ISO63
 msgid "The default mode is adding files for multiplexing."
 msgstr "El modo por defecto es añadir archivos para multiplexar."
 
-#: src/merge/reader_detection_and_creation.cpp:489
-#: src/merge/reader_detection_and_creation.cpp:492
-#: src/merge/reader_detection_and_creation.cpp:495
-#: src/merge/reader_detection_and_creation.cpp:498
-#: src/merge/reader_detection_and_creation.cpp:501
+#: src/merge/reader_detection_and_creation.cpp:496
+#: src/merge/reader_detection_and_creation.cpp:499
+#: src/merge/reader_detection_and_creation.cpp:502
+#: src/merge/reader_detection_and_creation.cpp:505
+#: src/merge/reader_detection_and_creation.cpp:508
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -10289,8 +10306,8 @@ msgstr "El archivo '%1%' no se pudo abrir para su lectura: %2%."
 #: src/common/command_line.cpp:49
 #: src/extract/mkvextract.cpp:59
 #: src/extract/mkvextract.cpp:63
-#: src/merge/reader_detection_and_creation.cpp:86
-#: src/merge/reader_detection_and_creation.cpp:187
+#: src/merge/reader_detection_and_creation.cpp:87
+#: src/merge/reader_detection_and_creation.cpp:189
 #: src/propedit/attachment_target.cpp:66
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -10377,12 +10394,12 @@ msgstr "El archivo (%1) es demasiado grande (%2)."
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "El archivo se puede arreglar volviendo a multiplexarlo con mkvmerge."
 
-#: src/merge/reader_detection_and_creation.cpp:495
+#: src/merge/reader_detection_and_creation.cpp:502
 msgid "The file content does not match its format type and was not recognized."
 msgstr "El contenido del archivo no coincide con su tipo de formato, y no fue reconocido."
 
-#: src/merge/reader_detection_and_creation.cpp:489
-#: src/merge/reader_detection_and_creation.cpp:492
+#: src/merge/reader_detection_and_creation.cpp:496
+#: src/merge/reader_detection_and_creation.cpp:499
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "El archivo no se pudo abrir para su lectura, o no había datos suficientes para analizar sus cabeceras."
 
@@ -10424,7 +10441,7 @@ msgstr "La cabecera del archivo es demasiado corta.\n"
 msgid "The file header was not read correctly.\n"
 msgstr "La cabecera no se leyó correctamente.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:498
+#: src/merge/reader_detection_and_creation.cpp:505
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Los cabeceras del archvo no pudieron ser analizados, p.e. porque están incompletos, dañados o son inválidos."
 
@@ -10982,8 +10999,8 @@ msgstr "El tamaño después de que se inicie un nuevo archivo de destino."
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "El tamaño del archivo adjunto '%1%' es 0.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:90
-#: src/merge/reader_detection_and_creation.cpp:190
+#: src/merge/reader_detection_and_creation.cpp:91
+#: src/merge/reader_detection_and_creation.cpp:192
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "El archivo de origen '%1%' no fue posible abrir correctamente, o recuperar su tamaño buscando hasta el final.\n"
@@ -11641,7 +11658,7 @@ msgstr "Pista"
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "Las pista %1% de códec particular es demasiado pequeña.\n"
 
-#: src/common/content_decoder.cpp:109
+#: src/common/content_decoder.cpp:106
 #, boost-format
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "Las pista %1% ha sido comprimida con un algoritmo de compresión desconocido/incompatible (%2%).\n"
@@ -11651,7 +11668,7 @@ msgstr "Las pista %1% ha sido comprimida con un algoritmo de compresión descono
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "A la pista %1% le falta el elemento UID que es necesario según la especificación de Matroska. Si el archivo contiene etiquetas entonces éstas podrían quedar inservibles.\n"
 
-#: src/common/content_decoder.cpp:100
+#: src/common/content_decoder.cpp:97
 #, boost-format
 msgid "Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n"
 msgstr "La pista %1% fue comprimida con el algoritmo '%2%' que ya no será compatible.\n"
@@ -11759,7 +11776,7 @@ msgstr "Cabecera de pista"
 msgid "Track number"
 msgstr "Número de pista"
 
-#: src/common/content_decoder.cpp:84
+#: src/common/content_decoder.cpp:81
 #, boost-format
 msgid "Track number %1% has been encrypted and decryption has not yet been implemented.\n"
 msgstr "La pista con número %1% ha sido cifrada y el desencriptado no ha sido aplicado todavía.\n"
@@ -11804,7 +11821,7 @@ msgstr "Las pistas con esquemas de codificación de contenido no compatibles (co
 msgid "Tracks:"
 msgstr "Pistas:"
 
-#: src/common/file_types.cpp:101
+#: src/common/file_types.cpp:103
 #: src/output/p_truehd.h:40
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -11859,11 +11876,11 @@ msgstr "UID"
 msgid "UID:"
 msgstr "UID:"
 
-#: src/common/file_types.cpp:103
+#: src/common/file_types.cpp:105
 msgid "USF subtitles"
 msgstr "Subtítulos USF"
 
-#: src/common/file_types.cpp:58
+#: src/common/file_types.cpp:59
 msgid "USF text subtitles"
 msgstr "Subtítulos de texto USF"
 
@@ -11894,7 +11911,7 @@ msgstr "Tipo de pista de audio desconocida 0x%|1$04x|. El ID del archivo %2% ser
 msgid "Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n"
 msgstr "Formato del archivo de capítulos desconocido en '%1%'. No contiene ningún formato de capítulo compatible.\n"
 
-#: src/common/content_decoder.cpp:90
+#: src/common/content_decoder.cpp:87
 #, boost-format
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "Contenido codificado de tipo desconocido %1% para la pista %2%.\n"
@@ -12064,17 +12081,17 @@ msgstr "Usando el módulo de salida genérico, para el tipo de pista '%1%'.\n"
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Usando el módulo de salida para el formato '%1%'.\n"
 
-#: src/merge/cluster_helper.cpp:743
+#: src/merge/cluster_helper.cpp:745
 #, boost-format
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
 msgstr "Utiliza la pista con ID %1% del archivo '%2%' como referencia para la generación de capítulos.\n"
 
-#: src/common/file_types.cpp:104
+#: src/common/file_types.cpp:106
 #: src/output/p_vc1.h:36
 msgid "VC-1"
 msgstr "VC-1"
 
-#: src/common/file_types.cpp:59
+#: src/common/file_types.cpp:60
 msgid "VC-1 elementary streams"
 msgstr "Secuencias básicas VC-1"
 
@@ -12086,7 +12103,7 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "Los códigos válidos de formatos son:"
 
-#: src/common/hacks.cpp:80
+#: src/common/hacks.cpp:81
 msgid "Valid hacks are:\n"
 msgstr "Las modificaciones validas son:\n"
 
@@ -12341,21 +12358,21 @@ msgstr "Video: cromaticidad Y blanco"
 msgid "Visible"
 msgstr "Visible"
 
-#: src/common/file_types.cpp:105
+#: src/common/file_types.cpp:107
 #: src/output/p_vobbtn.h:35
 msgid "VobBtn"
 msgstr "VobBtn"
 
-#: src/common/file_types.cpp:60
+#: src/common/file_types.cpp:61
 msgid "VobButtons"
 msgstr "Botones VOB"
 
-#: src/common/file_types.cpp:106
+#: src/common/file_types.cpp:108
 #: src/output/p_vobsub.h:30
 msgid "VobSub"
 msgstr "VobSub"
 
-#: src/common/file_types.cpp:61
+#: src/common/file_types.cpp:62
 msgid "VobSub subtitles"
 msgstr "Subtítulos VobSub"
 
@@ -12363,19 +12380,19 @@ msgstr "Subtítulos VobSub"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/common/file_types.cpp:107
+#: src/common/file_types.cpp:109
 msgid "WAV"
 msgstr "WAV"
 
-#: src/common/file_types.cpp:62
+#: src/common/file_types.cpp:63
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (audio PCM sin comprimir)"
 
-#: src/common/file_types.cpp:108
+#: src/common/file_types.cpp:110
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
-#: src/common/file_types.cpp:63
+#: src/common/file_types.cpp:64
 msgid "WAVPACK v4 audio"
 msgstr "Audio WAVPACK v4"
 
@@ -12420,7 +12437,7 @@ msgstr "Advertencias/Errores"
 msgid "Warnings:"
 msgstr "Advertencias:"
 
-#: src/common/file_types.cpp:64
+#: src/common/file_types.cpp:65
 msgid "WebM audio/video files"
 msgstr "Archivos de audio/vídeo WebM"
 
@@ -12431,8 +12448,8 @@ msgstr "Archivos de audio/vídeo WebM"
 msgid "WebM files"
 msgstr "Archivos WebM"
 
-#: src/common/file_types.cpp:65
-#: src/common/file_types.cpp:109
+#: src/common/file_types.cpp:66
+#: src/common/file_types.cpp:111
 #: src/extract/xtr_webvtt.h:31
 #: src/output/p_webvtt.h:28
 msgid "WebVTT subtitles"
@@ -12533,7 +12550,7 @@ msgstr "Anchura de los fotogramas del vídeo para visualizar."
 msgid "Windows (cmd.exe)"
 msgstr "Windows (cmd.exe)"
 
-#: src/common/file_types.cpp:74
+#: src/common/file_types.cpp:75
 msgid "Windows Media (ASF/WMV)"
 msgstr "Windows Media (ASF/WMV)"
 
@@ -13467,7 +13484,7 @@ msgstr "tracks [opciones] [TID1:salida1 [TID2:salida2 ...]]"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tamaño_etiqueta < 0 en el c'tor. %1%\n"
 
-#: src/common/file_types.cpp:110
+#: src/common/file_types.cpp:112
 #: src/common/fs_sys_helpers/windows.cpp:168
 #: src/common/kax_info.cpp:694
 #: src/common/kax_info.cpp:750

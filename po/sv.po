@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-04-24 18:58+0200\n"
+"POT-Creation-Date: 2018-05-02 17:38+0200\n"
 "PO-Revision-Date: 2017-10-04 19:49+0200\n"
 "Last-Translator: Kristoffer Grundström <hamnisdude@gmail.com>\n"
 "Language-Team: Swedish <moritz@bunkus.org>\n"
@@ -1908,7 +1908,7 @@ msgstr "'%1%' är inte en giltig ccTLD-landskod."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr ""
 
-#: src/common/hacks.cpp:102
+#: src/common/hacks.cpp:103
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' är inte ett giltigt hack.\n"
@@ -2516,7 +2516,7 @@ msgstr "&Lägg till filer"
 msgid "A/52 (aka AC-3)"
 msgstr "A/52 (även känd som AC-3)"
 
-#: src/common/file_types.cpp:72
+#: src/common/file_types.cpp:73
 #: src/output/p_aac.h:45
 msgid "AAC"
 msgstr "AAC"
@@ -2533,7 +2533,7 @@ msgstr "AAC är SBR/HE-AAC/AAC+"
 msgid "AAC with ADIF headers"
 msgstr ""
 
-#: src/common/file_types.cpp:73
+#: src/common/file_types.cpp:74
 #: src/output/p_ac3.h:41
 msgid "AC-3"
 msgstr "AC-3"
@@ -2555,12 +2555,16 @@ msgstr ""
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "ASCII-sträng (inga speciella tecken så som Umlate osv.)"
 
-#: src/output/p_av1.h:32
+#: src/output/p_av1.h:35
 #, fuzzy
 msgid "AV1"
 msgstr "AVI"
 
-#: src/common/file_types.cpp:75
+#: src/common/file_types.cpp:52
+msgid "AV1 Open Bitstream Units stream"
+msgstr ""
+
+#: src/common/file_types.cpp:76
 #: src/output/p_avc.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2573,7 +2577,7 @@ msgstr ""
 msgid "AVC/h.264 elementary streams"
 msgstr ""
 
-#: src/common/file_types.cpp:76
+#: src/common/file_types.cpp:77
 msgid "AVI"
 msgstr "AVI"
 
@@ -3645,7 +3649,7 @@ msgstr "Kapitelfil:"
 msgid "Chapter flag hidden"
 msgstr "&Hoppa över kapitel som flaggas som \"gömt\""
 
-#: src/merge/cluster_helper.cpp:741
+#: src/merge/cluster_helper.cpp:743
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr ""
 
@@ -4059,7 +4063,7 @@ msgstr "Välj filnamnet för utmatningen"
 msgid "Copy item"
 msgstr ""
 
-#: src/common/file_types.cpp:79
+#: src/common/file_types.cpp:80
 msgid "CoreAudio"
 msgstr ""
 
@@ -4343,17 +4347,17 @@ msgstr ""
 msgid "Cue sheet files"
 msgstr "Textfiler"
 
-#: src/common/chapters/cue_parser.cpp:395
+#: src/common/chapters/cue_parser.cpp:379
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX entry in line %1%.\n"
 msgstr ""
 
-#: src/common/chapters/cue_parser.cpp:414
+#: src/common/chapters/cue_parser.cpp:398
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%.\n"
 msgstr ""
 
-#: src/common/chapters/cue_parser.cpp:276
+#: src/common/chapters/cue_parser.cpp:260
 #, boost-format
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
 msgstr ""
@@ -4419,7 +4423,7 @@ msgstr ""
 msgid "D&uplicate selected edition or chapter"
 msgstr ""
 
-#: src/common/file_types.cpp:81
+#: src/common/file_types.cpp:82
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
@@ -4432,7 +4436,7 @@ msgstr ""
 msgid "DTS/DTS-HD (Digital Theater System)"
 msgstr "DTS/DTS-HD (Digitalt Teatersystem)"
 
-#: src/common/file_types.cpp:82
+#: src/common/file_types.cpp:83
 #, fuzzy
 msgid "DV video format"
 msgstr "Video-formatet DV"
@@ -4678,7 +4682,7 @@ msgid "Di&sable all attachments"
 msgstr "In&aktivera alla bifogade filer"
 
 #: src/common/file_types.cpp:33
-#: src/common/file_types.cpp:80
+#: src/common/file_types.cpp:81
 #: src/output/p_dirac.h:37
 msgid "Dirac"
 msgstr "Dirac"
@@ -4936,7 +4940,7 @@ msgstr "EBML-version: %1%"
 msgid "EBML void"
 msgstr "EBML-huvud"
 
-#: src/merge/reader_detection_and_creation.cpp:474
+#: src/merge/reader_detection_and_creation.cpp:481
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "ONDSKEFULL intern bugg! (okänd filtyp). %1%\n"
@@ -5049,6 +5053,11 @@ msgstr "Segmentets information"
 msgid "Enabled"
 msgstr "&Aktiverad"
 
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#, no-c-format
+msgid "Enables AV1 video support even though the AV1 bitstream specification hasn't been finalized yet."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:155
 #, no-c-format
 msgid "Enables splitting of the output into more than one file."
@@ -5064,7 +5073,7 @@ msgstr ""
 msgid "Enabling tracks"
 msgstr "Aktiverar spår"
 
-#: src/common/av1.h:30
+#: src/common/av1.h:43
 msgid "Encountered OBUs with invalid data."
 msgstr ""
 
@@ -5367,7 +5376,7 @@ msgstr ""
 msgid "Extraction tool"
 msgstr "&Verktyg för extrahering"
 
-#: src/common/file_types.cpp:83
+#: src/common/file_types.cpp:84
 #: src/output/p_flac.h:38
 msgid "FLAC"
 msgstr "FLAC"
@@ -5558,7 +5567,7 @@ msgstr "Flaggor"
 msgid "Flags:"
 msgstr "Flaggor:"
 
-#: src/common/file_types.cpp:84
+#: src/common/file_types.cpp:85
 msgid "Flash Video"
 msgstr "Flash-video"
 
@@ -5798,7 +5807,7 @@ msgstr ""
 msgid "Green colour coordinate y"
 msgstr ""
 
-#: src/common/file_types.cpp:87
+#: src/common/file_types.cpp:88
 #, fuzzy
 msgid "HD-DVD subtitles"
 msgstr " HD-DVD-undertexter"
@@ -5813,13 +5822,13 @@ msgstr "HDMV PGS"
 msgid "HDMV TextST"
 msgstr "HDMV PGS"
 
-#: src/common/file_types.cpp:85
+#: src/common/file_types.cpp:86
 #: src/extract/xtr_hdmv_textst.h:33
 #, fuzzy
 msgid "HDMV TextST subtitles"
 msgstr "SRT-undertexter"
 
-#: src/common/file_types.cpp:86
+#: src/common/file_types.cpp:87
 #: src/output/p_hevc.h:32
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
@@ -5928,7 +5937,7 @@ msgid "ISO639-2 code"
 msgstr "Kod ISO639-2"
 
 #: src/common/file_types.cpp:42
-#: src/common/file_types.cpp:88
+#: src/common/file_types.cpp:89
 #, fuzzy
 msgid "IVF (AV1, VP8, VP9)"
 msgstr "IVF (VP8/VP9)"
@@ -6972,7 +6981,7 @@ msgstr ""
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "Alternativ-filer för MKVToolNix"
 
-#: src/common/file_types.cpp:91
+#: src/common/file_types.cpp:92
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -6988,7 +6997,7 @@ msgstr "MP4 ljud/Video-filer"
 msgid "MPEG audio files"
 msgstr "MPEG ljud-filer"
 
-#: src/common/file_types.cpp:93
+#: src/common/file_types.cpp:94
 msgid "MPEG program stream"
 msgstr "MPEG-programström"
 
@@ -6996,7 +7005,7 @@ msgstr "MPEG-programström"
 msgid "MPEG program streams"
 msgstr "MPEG-programströmmar"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:95
 msgid "MPEG transport stream"
 msgstr "MPEG-transportström"
 
@@ -7004,7 +7013,7 @@ msgstr "MPEG-transportström"
 msgid "MPEG transport streams"
 msgstr "MPEG-transportströmmar"
 
-#: src/common/file_types.cpp:92
+#: src/common/file_types.cpp:93
 msgid "MPEG video elementary stream"
 msgstr "Elementär MPEG-videoström"
 
@@ -7051,7 +7060,7 @@ msgstr ""
 msgid "Mark this track as 'forced'."
 msgstr "Markera det här spåret som 'tvingat'."
 
-#: src/common/file_types.cpp:89
+#: src/common/file_types.cpp:90
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -7151,7 +7160,7 @@ msgstr "Fel vid minnesallokering: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Minnet för en RealAudio/RealVideo-bildruta kunde inte allokeras.\n"
 
-#: src/common/file_types.cpp:90
+#: src/common/file_types.cpp:91
 msgid "MicroDVD"
 msgstr "MicroDVD"
 
@@ -7511,7 +7520,7 @@ msgstr ""
 msgid "No filename found after the '@'."
 msgstr "Inget filnamn hittades efter '@'."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:89
 #, no-c-format
 msgid "No help available."
 msgstr "Ingen hjälp tillgänglig."
@@ -7764,11 +7773,11 @@ msgstr "Antalet kanaler i spåret."
 msgid "Often used selections"
 msgstr "Ofta använda val"
 
-#: src/common/file_types.cpp:95
+#: src/common/file_types.cpp:97
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
-#: src/common/file_types.cpp:52
+#: src/common/file_types.cpp:53
 msgid "Ogg/OGM audio/video files"
 msgstr "Ogg/OGM-ljud/video-filer"
 
@@ -7907,6 +7916,10 @@ msgstr ""
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr ""
 
+#: src/common/file_types.cpp:96
+msgid "Open Bitstream Units stream"
+msgstr ""
+
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
 #, fuzzy, no-c-format
@@ -8000,7 +8013,7 @@ msgstr "Alternativen:"
 msgid "Opus"
 msgstr "Opus"
 
-#: src/common/file_types.cpp:53
+#: src/common/file_types.cpp:54
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus (i Ogg)-ljudfiler"
 
@@ -8074,7 +8087,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP-undertexter"
 
-#: src/common/file_types.cpp:96
+#: src/common/file_types.cpp:98
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -8389,7 +8402,7 @@ msgstr "QuickTime ljud/video-filer"
 msgid "QuickTime compatible video"
 msgstr "QuickTime-kompatibel video"
 
-#: src/common/file_types.cpp:97
+#: src/common/file_types.cpp:99
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -8519,7 +8532,7 @@ msgstr ""
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr ""
 
-#: src/common/file_types.cpp:77
+#: src/common/file_types.cpp:78
 msgid "RIFF CDXA"
 msgstr ""
 
@@ -8527,7 +8540,7 @@ msgstr ""
 msgid "RSA"
 msgstr "RSA"
 
-#: src/common/av1.h:23
+#: src/common/av1.h:36
 msgid "Raw OBUs without a size field are not supported."
 msgstr ""
 
@@ -8576,11 +8589,11 @@ msgstr ""
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/common/file_types.cpp:98
+#: src/common/file_types.cpp:100
 msgid "RealMedia"
 msgstr "RealMedia"
 
-#: src/common/file_types.cpp:54
+#: src/common/file_types.cpp:55
 msgid "RealMedia audio/video files"
 msgstr "RealMedia ljud/video-filer"
 
@@ -8843,19 +8856,19 @@ msgstr "&Lägg till i jobbkön"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/common/file_types.cpp:99
+#: src/common/file_types.cpp:101
 msgid "SRT subtitles"
 msgstr "SRT-undertexter"
 
-#: src/common/file_types.cpp:55
+#: src/common/file_types.cpp:56
 msgid "SRT text subtitles"
 msgstr ""
 
-#: src/common/file_types.cpp:100
+#: src/common/file_types.cpp:102
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS-undertexter"
 
-#: src/common/file_types.cpp:56
+#: src/common/file_types.cpp:57
 msgid "SSA/ASS text subtitles"
 msgstr ""
 
@@ -9663,6 +9676,10 @@ msgstr ""
 msgid "Subtitles"
 msgstr "Undertexter"
 
+#: src/output/p_av1.cpp:29
+msgid "Support for AV1 is currently experimental and must be enabled with '--engage enable_av1' as the AV1 bitstream specification hasn't been finalized yet.\n"
+msgstr ""
+
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:702
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:181
 #: src/mkvtoolnix-gui/merge/output.cpp:481
@@ -9679,12 +9696,12 @@ msgstr "Filtyper som stöds:\n"
 msgid "Suppress status output."
 msgstr ""
 
-#: src/common/file_types.cpp:102
+#: src/common/file_types.cpp:104
 #: src/output/p_tta.h:33
 msgid "TTA"
 msgstr "TTA"
 
-#: src/common/file_types.cpp:57
+#: src/common/file_types.cpp:58
 msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA (Den sanna förlustfria ljudkodeken)"
 
@@ -10181,11 +10198,11 @@ msgstr "Standard språkkoden '%1%' är inte en giltig ISO639-2 språkkod och kom
 msgid "The default mode is adding files for multiplexing."
 msgstr ""
 
-#: src/merge/reader_detection_and_creation.cpp:489
-#: src/merge/reader_detection_and_creation.cpp:492
-#: src/merge/reader_detection_and_creation.cpp:495
-#: src/merge/reader_detection_and_creation.cpp:498
-#: src/merge/reader_detection_and_creation.cpp:501
+#: src/merge/reader_detection_and_creation.cpp:496
+#: src/merge/reader_detection_and_creation.cpp:499
+#: src/merge/reader_detection_and_creation.cpp:502
+#: src/merge/reader_detection_and_creation.cpp:505
+#: src/merge/reader_detection_and_creation.cpp:508
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -10297,8 +10314,8 @@ msgstr "Filen '%1%' kunde inte öppnas för läsning: %2%.\n"
 #: src/common/command_line.cpp:49
 #: src/extract/mkvextract.cpp:59
 #: src/extract/mkvextract.cpp:63
-#: src/merge/reader_detection_and_creation.cpp:86
-#: src/merge/reader_detection_and_creation.cpp:187
+#: src/merge/reader_detection_and_creation.cpp:87
+#: src/merge/reader_detection_and_creation.cpp:189
 #: src/propedit/attachment_target.cpp:66
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -10385,12 +10402,12 @@ msgstr "XML-taggfilen '%1%' innehåller ett fel: %2%\n"
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr ""
 
-#: src/merge/reader_detection_and_creation.cpp:495
+#: src/merge/reader_detection_and_creation.cpp:502
 msgid "The file content does not match its format type and was not recognized."
 msgstr ""
 
-#: src/merge/reader_detection_and_creation.cpp:489
-#: src/merge/reader_detection_and_creation.cpp:492
+#: src/merge/reader_detection_and_creation.cpp:496
+#: src/merge/reader_detection_and_creation.cpp:499
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr ""
 
@@ -10432,7 +10449,7 @@ msgstr ""
 msgid "The file header was not read correctly.\n"
 msgstr ""
 
-#: src/merge/reader_detection_and_creation.cpp:498
+#: src/merge/reader_detection_and_creation.cpp:505
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr ""
 
@@ -10974,8 +10991,8 @@ msgstr ""
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "Storleken för bilagan '%1%' är 0.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:90
-#: src/merge/reader_detection_and_creation.cpp:190
+#: src/merge/reader_detection_and_creation.cpp:91
+#: src/merge/reader_detection_and_creation.cpp:192
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr ""
@@ -11636,7 +11653,7 @@ msgstr "Spår:"
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr ""
 
-#: src/common/content_decoder.cpp:109
+#: src/common/content_decoder.cpp:106
 #, boost-format
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr ""
@@ -11646,7 +11663,7 @@ msgstr ""
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr ""
 
-#: src/common/content_decoder.cpp:100
+#: src/common/content_decoder.cpp:97
 #, boost-format
 msgid "Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n"
 msgstr ""
@@ -11754,7 +11771,7 @@ msgstr ""
 msgid "Track number"
 msgstr "Spårnummer"
 
-#: src/common/content_decoder.cpp:84
+#: src/common/content_decoder.cpp:81
 #, boost-format
 msgid "Track number %1% has been encrypted and decryption has not yet been implemented.\n"
 msgstr ""
@@ -11802,7 +11819,7 @@ msgstr ""
 msgid "Tracks:"
 msgstr "Spår:"
 
-#: src/common/file_types.cpp:101
+#: src/common/file_types.cpp:103
 #: src/output/p_truehd.h:40
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -11856,11 +11873,11 @@ msgstr "ID"
 msgid "UID:"
 msgstr "UID:"
 
-#: src/common/file_types.cpp:103
+#: src/common/file_types.cpp:105
 msgid "USF subtitles"
 msgstr "USF-undertexter"
 
-#: src/common/file_types.cpp:58
+#: src/common/file_types.cpp:59
 msgid "USF text subtitles"
 msgstr ""
 
@@ -11891,7 +11908,7 @@ msgstr ""
 msgid "Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n"
 msgstr ""
 
-#: src/common/content_decoder.cpp:90
+#: src/common/content_decoder.cpp:87
 #, boost-format
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr ""
@@ -12063,17 +12080,17 @@ msgstr ""
 msgid "Using the output module for the format '%1%'.\n"
 msgstr ""
 
-#: src/merge/cluster_helper.cpp:743
+#: src/merge/cluster_helper.cpp:745
 #, boost-format
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
 msgstr ""
 
-#: src/common/file_types.cpp:104
+#: src/common/file_types.cpp:106
 #: src/output/p_vc1.h:36
 msgid "VC-1"
 msgstr "VC-1"
 
-#: src/common/file_types.cpp:59
+#: src/common/file_types.cpp:60
 msgid "VC-1 elementary streams"
 msgstr ""
 
@@ -12085,7 +12102,7 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr ""
 
-#: src/common/hacks.cpp:80
+#: src/common/hacks.cpp:81
 msgid "Valid hacks are:\n"
 msgstr ""
 
@@ -12351,21 +12368,21 @@ msgstr ""
 msgid "Visible"
 msgstr ""
 
-#: src/common/file_types.cpp:105
+#: src/common/file_types.cpp:107
 #: src/output/p_vobbtn.h:35
 msgid "VobBtn"
 msgstr "VobBtn"
 
-#: src/common/file_types.cpp:60
+#: src/common/file_types.cpp:61
 msgid "VobButtons"
 msgstr "Vob-knappar"
 
-#: src/common/file_types.cpp:106
+#: src/common/file_types.cpp:108
 #: src/output/p_vobsub.h:30
 msgid "VobSub"
 msgstr "VobSub"
 
-#: src/common/file_types.cpp:61
+#: src/common/file_types.cpp:62
 msgid "VobSub subtitles"
 msgstr "VobSub-undertexter"
 
@@ -12373,19 +12390,19 @@ msgstr "VobSub-undertexter"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/common/file_types.cpp:107
+#: src/common/file_types.cpp:109
 msgid "WAV"
 msgstr "WAV"
 
-#: src/common/file_types.cpp:62
+#: src/common/file_types.cpp:63
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (O-komprimerat PCM-ljud)"
 
-#: src/common/file_types.cpp:108
+#: src/common/file_types.cpp:110
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
-#: src/common/file_types.cpp:63
+#: src/common/file_types.cpp:64
 msgid "WAVPACK v4 audio"
 msgstr "WAVPACK v4-ljud"
 
@@ -12433,7 +12450,7 @@ msgstr "Varningar:"
 msgid "Warnings:"
 msgstr "Varningar:"
 
-#: src/common/file_types.cpp:64
+#: src/common/file_types.cpp:65
 msgid "WebM audio/video files"
 msgstr "WebM ljud/video-filer"
 
@@ -12444,8 +12461,8 @@ msgstr "WebM ljud/video-filer"
 msgid "WebM files"
 msgstr "WebM ljud/video-filer"
 
-#: src/common/file_types.cpp:65
-#: src/common/file_types.cpp:109
+#: src/common/file_types.cpp:66
+#: src/common/file_types.cpp:111
 #: src/extract/xtr_webvtt.h:31
 #: src/output/p_webvtt.h:28
 #, fuzzy
@@ -12550,7 +12567,7 @@ msgstr ""
 msgid "Windows (cmd.exe)"
 msgstr ""
 
-#: src/common/file_types.cpp:74
+#: src/common/file_types.cpp:75
 msgid "Windows Media (ASF/WMV)"
 msgstr ""
 
@@ -13486,7 +13503,7 @@ msgstr ""
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr ""
 
-#: src/common/file_types.cpp:110
+#: src/common/file_types.cpp:112
 #: src/common/fs_sys_helpers/windows.cpp:168
 #: src/common/kax_info.cpp:694
 #: src/common/kax_info.cpp:750
