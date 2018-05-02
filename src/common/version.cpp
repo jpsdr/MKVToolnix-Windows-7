@@ -22,7 +22,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "At The End Of The World"
+#define VERSIONNAME "The Bride Said No"
 
 version_number_t::version_number_t()
 {
