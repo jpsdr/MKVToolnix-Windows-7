@@ -2,6 +2,17 @@
 
 ## New features and enhancements
 
+* mkvmerge: input: format detection uses file-extension to improve performance
+  and to give preference when several formats match.
+* mkvmerge: MP4 reader: if a track has an edit list with two identical
+  entries, each spanning the file's duration as given in the movie header
+  atom, then the second entry will now be ignored. Improves the handling of
+  files with bogus data; see #2196 and #2270.
+* MKVToolNix GUI: multiplexer: added options to only enable tracks of certain
+  types by default. Implements #2271.
+* MKVToolNix GUI: multiplexer: added an option to enable dialog normalization
+  gain removal by default for all audio tracks for which the operation is
+  supported. Implements #2272.
 * MKVToolNix GUI: multiplexer: when deriving track languages from the file
   names is active and the file name contains the usual season/episode pattern
   (e.g. "S02E14"), then only the part after the season/episode pattern will be
@@ -13,48 +24,37 @@
   languages the GUI recognizes in file names. This list defaults to a handful
   of common languages instead of the full list of supported languages. Part of
   the improvements for #2267.
-* mkvmerge: MP4 reader: if a track has an edit list with two identical
-  entries, each spanning the file's duration as given in the movie header
-  atom, then the second entry will now be ignored. Improves the handling of
-  files with bogus data; see #2196 and #2270.
-* MKVToolNix GUI: multiplexer: added options to only enable tracks of certain
-  types by default. Implements #2271.
-* MKVToolNix GUI: multiplexer: added an option to enable dialog normalization
-  gain removal by default for all audio tracks for which the operation is
-  supported. Implements #2272.
-* mkvmerge: input: format detection uses file-extension to improve performance
-  and to give preference when several formats match.
 
 ## Bug fixes
 
+* mkvmerge: MP3 packetizer: removed a memory leak growing linearly with the
+  track's size.
 * mkvmerge: VobSub packetizer: whenever a VobSub packet doesn't contain a
   duration on the container level, mkvmerge will now set it from the duration
   in the SPU packets. Before it was accidentally setting the SPU-level
   duration to 0 instead. Fixes #2260.
+* mkvmerge: track statistics tags: if writing the `Date` element is
+  deactivated via `--no-date`, the `_STATISTICS_WRITING_DATE_UTC` isn't
+  written either anymore. Fixes #2286.
+* mkvmerge, mkvextract, mkvpropedit: removed several small, constant-size
+  memory leaks.
+* mkvextract: fixed a crash when mkvextract with a non-Matroska file as the
+  source file. Fixes #2281.
 * MKVToolNix GUI: the central area is now scrollable, allowing the GUI to be
   resized to almost arbitrary sizes. Fixes #2265.
 * MKVToolNix GUI: multiplexer: the "copy file title to destination file name"
   functionality will now replace everything in the destination file name up to
   the last period instead of only up to the first period. Fixes #2276.
-* mkvmerge: MP3 packetizer: removed a memory leak growing linearly with the
-  track's size.
-* mkvmerge, mkvextract, mkvpropedit: removed several small, constant-size
-  memory leaks.
-* mkvextract: fixed a crash when mkvextract with a non-Matroska file as the
-  source file. Fixes #2281.
-* mkvmerge: track statistics tags: if writing the `Date` element is
-  deactivated via `--no-date`, the `_STATISTICS_WRITING_DATE_UTC` isn't
-  written either anymore. Fixes #2286.
 
 ## Build system changes
 
-* Windows: linking against and installing shared version of the libraries with
-  MXE is now supported by setting `configure`'s `host` triplet accordingly,
-  e.g. `--host=x86_64-w64-mingw32.shared`.
 * build system: MKVToolNix now requires a compiler that supports the following
   features of the C++14 standard: "user-defined literals for
   `std::string`". For the GNU Compiler Collection (gcc) this means v5.x or
   newer; for clang it means v3.4 or newer.
+* Windows: linking against and installing shared version of the libraries with
+  MXE is now supported by setting `configure`'s `host` triplet accordingly,
+  e.g. `--host=x86_64-w64-mingw32.shared`.
 
 
 # Version 22.0.0 "At The End Of The World" 2018-04-01
