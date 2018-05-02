@@ -28,6 +28,8 @@ av1_video_packetizer_c::av1_video_packetizer_c(generic_reader_c *p_reader,
   if (!mtx::hacks::is_engaged(mtx::hacks::ENABLE_AV1))
     mxerror(Y("Support for AV1 is currently experimental and must be enabled with '--engage enable_av1' as the AV1 bitstream specification hasn't been finalized yet.\n"));
 
+  m_parser.set_parse_sequence_header_obus_only(true);
+
   m_timestamp_factory_application_mode = TFA_SHORT_QUEUEING;
 
   set_track_type(track_video);
@@ -47,6 +49,8 @@ av1_video_packetizer_c::process(packet_cptr packet) {
 void
 av1_video_packetizer_c::process_framed(packet_cptr packet) {
   m_parser.debug_obu_types(*packet->data);
+
+  m_parser.parse(*packet->data);
 
   packet->bref         = m_parser.is_keyframe(*packet->data) ? -1 : m_previous_timestamp;
   m_previous_timestamp = packet->timestamp;
@@ -85,6 +89,7 @@ av1_video_packetizer_c::flush_frames() {
 void
 av1_video_packetizer_c::set_is_unframed() {
   m_is_framed = false;
+  m_parser.set_parse_sequence_header_obus_only(false);
 }
 
 connection_result_e

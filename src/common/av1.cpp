@@ -29,7 +29,7 @@ class parser_private_c {
 
   mtx::bits::reader_c r;
 
-  bool sequence_header_found{}, reduced_still_picture_header{};
+  bool sequence_header_found{}, reduced_still_picture_header{}, parse_sequence_header_obus_only{};
 
   unsigned int obu_type{};
   bool obu_extension_flag{}, obu_has_size_field{}, seen_frame_header{};
@@ -74,6 +74,11 @@ parser_c::get_obu_type_name(unsigned int obu_type) {
 void
 parser_c::set_default_duration(boost::rational<uint64_t> default_duration) {
   p->forced_default_duration = default_duration;
+}
+
+void
+parser_c::set_parse_sequence_header_obus_only(bool parse_sequence_header_obus_only) {
+  p->parse_sequence_header_obus_only = parse_sequence_header_obus_only;
 }
 
 uint64_t
@@ -351,7 +356,7 @@ parser_c::parse_obu() {
   auto &r                 = p->r;
   auto start_bit_position = r.get_bit_position();
   auto obu_size           = parse_obu_common_data();
-  auto keep_obu           = true;
+  auto keep_obu           = !p->parse_sequence_header_obus_only;
 
   if (!obu_size)
     throw obu_without_size_unsupported_x{};
@@ -415,6 +420,9 @@ parser_c::parse_obu() {
 
     return true;
   }
+
+  if (p->parse_sequence_header_obus_only)
+    return true;
 
   if ((p->obu_type == OBU_FRAME) || (p->obu_type == OBU_FRAME_HEADER)) {
     if (p->reduced_still_picture_header) {
@@ -510,7 +518,11 @@ parser_c::is_keyframe(unsigned char const *buffer,
         continue;
       }
 
-      if (p->r.get_bit()) {     // show_existing_frame
+      if (p->reduced_still_picture_header) {
+        mxdebug_if(p->debug_is_keyframe, "is_keyframe:   true due to reduced_still_picture_header == 1\n");
+        return true;
+
+      } else if (p->r.get_bit()) {     // show_existing_frame
         mxdebug_if(p->debug_is_keyframe, "is_keyframe:   false due to show_existing_frame == 1\n");
         return false;
       }
