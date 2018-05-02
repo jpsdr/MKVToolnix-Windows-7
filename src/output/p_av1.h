@@ -22,11 +22,14 @@ class av1_video_packetizer_c: public generic_packetizer_c {
 protected:
   int64_t m_previous_timestamp{-1};
   mtx::av1::parser_c m_parser;
+  bool m_is_framed{true};
 
 public:
   av1_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
 
   virtual int process(packet_cptr packet) override;
+
+  virtual void set_is_unframed();
 
   virtual translatable_string_c get_format_name() const override {
     return YT("AV1");
@@ -34,4 +37,11 @@ public:
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
   virtual bool is_compatible_with(output_compatibility_e compatibility) override;
+
+protected:
+  virtual void flush_impl() override;
+  virtual void flush_frames();
+
+  virtual void process_framed(packet_cptr packet);
+  virtual void process_unframed(packet_cptr packet);
 };

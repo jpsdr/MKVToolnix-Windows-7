@@ -49,6 +49,7 @@ file_type_t::get_supported() {
   s_supported_file_types.emplace_back(file_type_e::matroska,    Y("Matroska audio/video files"),          "mka mks mkv mk3d webm webmv webma");
   s_supported_file_types.emplace_back(file_type_e::pgssup,      Y("PGS/SUP subtitles"),                   "sup");
   s_supported_file_types.emplace_back(file_type_e::qtmp4,       Y("QuickTime audio/video files"),         "mov");
+  s_supported_file_types.emplace_back(file_type_e::obu,         Y("AV1 Open Bitstream Units stream"),     "av1 obu");
   s_supported_file_types.emplace_back(file_type_e::ogm,         Y("Ogg/OGM audio/video files"),           "ogg ogm ogv");
   s_supported_file_types.emplace_back(file_type_e::ogm,         Y("Opus (in Ogg) audio files"),           "opus ogg");
   s_supported_file_types.emplace_back(file_type_e::real,        Y("RealMedia audio/video files"),         "ra ram rm rmvb rv");
@@ -92,6 +93,7 @@ file_type_t::get_name(file_type_e type) {
        : file_type_e::mpeg_es     == type ? YT("MPEG video elementary stream")
        : file_type_e::mpeg_ps     == type ? YT("MPEG program stream")
        : file_type_e::mpeg_ts     == type ? YT("MPEG transport stream")
+       : file_type_e::obu         == type ? YT("Open Bitstream Units stream")
        : file_type_e::ogm         == type ? YT("Ogg/OGM")
        : file_type_e::pgssup      == type ? YT("PGSSUP")
        : file_type_e::qtmp4       == type ? YT("QuickTime/MP4")

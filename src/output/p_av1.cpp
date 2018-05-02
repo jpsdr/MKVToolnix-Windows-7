@@ -36,12 +36,55 @@ av1_video_packetizer_c::av1_video_packetizer_c(generic_reader_c *p_reader,
 
 int
 av1_video_packetizer_c::process(packet_cptr packet) {
+  if (m_is_framed)
+    process_framed(packet);
+  else
+    process_unframed(packet);
+
+  return FILE_STATUS_MOREDATA;
+}
+
+void
+av1_video_packetizer_c::process_framed(packet_cptr packet) {
+  m_parser.debug_obu_types(*packet->data);
+
   packet->bref         = m_parser.is_keyframe(*packet->data) ? -1 : m_previous_timestamp;
   m_previous_timestamp = packet->timestamp;
 
   add_packet(packet);
+}
 
-  return FILE_STATUS_MOREDATA;
+void
+av1_video_packetizer_c::process_unframed(packet_cptr packet) {
+  m_parser.debug_obu_types(*packet->data);
+
+  m_parser.parse(*packet->data);
+  flush_frames();
+}
+
+void
+av1_video_packetizer_c::flush_impl() {
+  if (m_is_framed)
+    return;
+
+  m_parser.flush();
+  flush_frames();
+}
+
+void
+av1_video_packetizer_c::flush_frames() {
+  while (m_parser.frame_available()) {
+    auto frame           = m_parser.get_next_frame();
+    auto bref            = frame.is_keyframe ? -1 : m_previous_timestamp;
+    m_previous_timestamp = frame.timestamp;
+
+    add_packet(std::make_shared<packet_t>(frame.mem, frame.timestamp, -1, bref));
+  }
+}
+
+void
+av1_video_packetizer_c::set_is_unframed() {
+  m_is_framed = false;
 }
 
 connection_result_e

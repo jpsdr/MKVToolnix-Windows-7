@@ -4,6 +4,8 @@
 
 * mkvmerge: input: format detection uses file-extension to improve performance
   and to give preference when several formats match.
+* mkvmerge: AV1: added support for reading AV1 video from Open Bitstream Unit
+  files.
 * mkvmerge: MP4 reader: if a track has an edit list with two identical
   entries, each spanning the file's duration as given in the movie header
   atom, then the second entry will now be ignored. Improves the handling of

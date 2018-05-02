@@ -43,6 +43,7 @@
 #include "input/r_mpeg_es.h"
 #include "input/r_mpeg_ps.h"
 #include "input/r_mpeg_ts.h"
+#include "input/r_obu.h"
 #include "input/r_ogm.h"
 #include "input/r_pgssup.h"
 #include "input/r_qtmp4.h"
@@ -142,6 +143,7 @@ prober_for_type(mtx::file_type_e type) {
     type_probe_map[mtx::file_type_e::mpeg_es]     = &do_probe<mpeg_es_reader_c,       mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::mpeg_ps]     = &do_probe<mpeg_ps_reader_c,       mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::mpeg_ts]     = &do_probe<mtx::mpeg_ts::reader_c, mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::obu]         = &do_probe<obu_reader_c,           mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::ogm]         = &do_probe<ogm_reader_c,           mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::pgssup]      = &do_probe<pgssup_reader_c,        mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::qtmp4]       = &do_probe<qtmp4_reader_c,         mm_io_cptr, int64_t>;
@@ -284,6 +286,8 @@ get_file_type_internal(filelist_t &file) {
     return { mtx::file_type_e::mpeg_ts, size };
   if (do_probe<mpeg_ps_reader_c>(io, size))
     return { mtx::file_type_e::mpeg_ps, size };
+  if (do_probe<obu_reader_c>(io, size))
+    return { mtx::file_type_e::obu, size };
 
   // File types which are the same in raw format and in other container formats.
   // Detection requires 20 or more consecutive packets.
@@ -424,6 +428,9 @@ create_readers() {
           break;
         case mtx::file_type_e::mpeg_ts:
           file->reader.reset(new mtx::mpeg_ts::reader_c(*file->ti, input_file));
+          break;
+        case mtx::file_type_e::obu:
+          file->reader.reset(new obu_reader_c(*file->ti, input_file));
           break;
         case mtx::file_type_e::ogm:
           file->reader.reset(new ogm_reader_c(*file->ti, input_file));

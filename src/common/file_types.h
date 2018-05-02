@@ -68,7 +68,8 @@ enum class file_type_e {
   wavpack4,
   webvtt,
   hdmv_textst,
-  max = hdmv_textst,
+  obu,
+  max = obu
 };
 
 struct file_type_t {
