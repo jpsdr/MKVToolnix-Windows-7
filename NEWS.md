@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: preferences: on macOS & Linux the setting "enable copying
+  tracks by their type" wasn't restored on program start. Fixes #2297.
+
+
 # Version 23.0.0 "The Bride Said No" 2018-05-02
 
 ## New features and enhancements

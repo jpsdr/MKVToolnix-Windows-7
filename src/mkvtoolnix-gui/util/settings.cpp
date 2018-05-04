@@ -270,8 +270,8 @@ Settings::load() {
   m_enableMuxingAllSubtitleTracks      = reg.value("enableMuxingAllSubtitleTracks", false).toBool();
   m_enableMuxingTracksByTheseLanguages = reg.value("enableMuxingTracksByTheseLanguages").toStringList();
 
-  if (reg.contains("enableMuxingTracksByThesetypes"))
-    enableMuxingTracksByTheseTypes     = reg.value("enableMuxingTracksByThesetypes");
+  if (reg.contains("enableMuxingTracksByTheseTypes"))
+    enableMuxingTracksByTheseTypes     = reg.value("enableMuxingTracksByTheseTypes");
 
   m_useDefaultJobDescription           = reg.value("useDefaultJobDescription",       false).toBool();
   m_showOutputOfAllJobs                = reg.value("showOutputOfAllJobs",            true).toBool();
