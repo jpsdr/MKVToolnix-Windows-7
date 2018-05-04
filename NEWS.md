@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvextract: VobSub extraction: empty SPU packets will now be dropped during
+  extraction as other tools such as MP4Box cannot handle them
+  correctly. Implements #2293.
+
 ## Bug fixes
 
 * MKVToolNix GUI: preferences: on macOS & Linux the setting "enable copying

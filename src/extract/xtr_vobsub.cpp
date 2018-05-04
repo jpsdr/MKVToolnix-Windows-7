@@ -128,6 +128,9 @@ xtr_vobsub_c::handle_frame(xtr_frame_t &f) {
   unsigned char *data = f.frame->get_buffer();
   size_t size         = f.frame->get_size();
 
+  if (size < 4)
+    return;
+
   m_positions.push_back(vmaster->m_out->getFilePointer());
   m_timestamps.push_back(f.timestamp);
 
