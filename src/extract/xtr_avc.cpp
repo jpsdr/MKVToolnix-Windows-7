@@ -45,10 +45,12 @@ xtr_avc_c::write_nal(binary *data,
     return false;
   }
 
-  m_out->write(ms_start_code, 4);
-  m_out->write(data + pos, nal_size);
+  if (nal_size) {
+    m_out->write(ms_start_code, 4);
+    m_out->write(data + pos, nal_size);
 
-  pos += nal_size;
+    pos += nal_size;
+  }
 
   return true;
 }
