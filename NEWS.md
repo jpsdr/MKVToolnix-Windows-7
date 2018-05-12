@@ -14,6 +14,10 @@
 * MKVToolNix GUI: multiplexer: when scanning playlists, all playlists were
   offered for selection regardless of the value of the "minimum playlist
   duration" setting. Fixes #2299.
+* MKVToolNix GUI: multiplexer: deriving track languages from file names: the
+  regular sub-expressions for ISO 639-1 codes could match on empty strings,
+  too, causing matches in wrong places and hence no language being recognized
+  in certain situations. Fixes #2298.
 
 
 # Version 23.0.0 "The Bride Said No" 2018-05-02

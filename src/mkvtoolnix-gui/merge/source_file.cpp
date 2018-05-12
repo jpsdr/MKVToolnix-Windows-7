@@ -50,12 +50,16 @@ setupLanguageDerivationSubPatterns() {
     if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(language.iso639_2_code)))
       continue;
 
-    codes1List << Q(language.iso639_1_code);
-    codes2List << Q(language.iso639_2_code);
-    namesList  << QRegularExpression::escape(Q(language.english_name));
+    if (!language.iso639_1_code.empty())
+      codes1List << Q(language.iso639_1_code);
 
+    if (!language.iso639_2_code.empty())
+      codes2List << Q(language.iso639_2_code);
     if (!language.terminology_abbrev.empty())
       codes2List << Q(language.terminology_abbrev);
+
+    for (auto const &name : Q(language.english_name).split(QRegularExpression{Q(" *; *")}, QString::SkipEmptyParts))
+      namesList  << QRegularExpression::escape(name);
   }
 
   s_iso639_1CodesPattern = codes1List.join(Q("|"));
