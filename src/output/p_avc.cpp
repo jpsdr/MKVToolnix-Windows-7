@@ -233,7 +233,8 @@ avc_video_packetizer_c::process_nalus(memory_c &data)
 
     auto const nalu_type = ptr[idx + m_nalu_size_len_dst] & 0x1f;
 
-    if (mtx::included_in(nalu_type, NALU_TYPE_FILLER_DATA, NALU_TYPE_ACCESS_UNIT)) {
+    if (   (static_cast<int>(nalu_size) == m_nalu_size_len_dst) // empty NALU?
+        || mtx::included_in(nalu_type, NALU_TYPE_FILLER_DATA, NALU_TYPE_ACCESS_UNIT)) {
       memory_c::splice(data, idx, nalu_size);
       total_size -= nalu_size;
       ptr         = data.get_buffer();
@@ -265,4 +266,8 @@ avc_video_packetizer_c::process_nalus(memory_c &data)
 
     idx += nalu_size;
   }
+
+  // empty NALU at the end?
+  if (total_size == (idx + m_nalu_size_len_dst))
+    data.set_size(idx);
 }
