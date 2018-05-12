@@ -5,6 +5,7 @@
 * mkvextract: VobSub extraction: empty SPU packets will now be dropped during
   extraction as other tools such as MP4Box cannot handle them
   correctly. Implements #2293.
+* mkvmerge, mkvextract: AVC/h.264: empty NALUs will now be removed.
 
 ## Bug fixes
 
