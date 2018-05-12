@@ -11,6 +11,9 @@
 
 * MKVToolNix GUI: preferences: on macOS & Linux the setting "enable copying
   tracks by their type" wasn't restored on program start. Fixes #2297.
+* MKVToolNix GUI: multiplexer: when scanning playlists, all playlists were
+  offered for selection regardless of the value of the "minimum playlist
+  duration" setting. Fixes #2299.
 
 
 # Version 23.0.0 "The Bride Said No" 2018-05-02

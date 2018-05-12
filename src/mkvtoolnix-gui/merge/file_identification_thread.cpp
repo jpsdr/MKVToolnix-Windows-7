@@ -9,6 +9,7 @@
 #include <QTimer>
 
 #include "common/qt.h"
+#include "common/timestamp.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
@@ -211,12 +212,16 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
   emit playlistScanStarted(numFiles);
 
   QList<SourceFilePtr> identifiedPlaylists;
+  auto minimumPlaylistDuration = timestamp_c::s(Util::Settings::get().m_minimumPlaylistDuration);
 
   for (auto idx = 0; idx < numFiles; ++idx) {
     Util::FileIdentifier identifier{files[idx].filePath()};
-    if (identifier.identify())
-      identifiedPlaylists << identifier.file();
-    else
+    if (identifier.identify()) {
+      auto file = identifier.file();
+      if (timestamp_c::ns(file->m_playlistDuration) >= minimumPlaylistDuration)
+        identifiedPlaylists << file;
+
+    } else
       qDebug() << "the error of my ways" << identifier.errorTitle() << identifier.errorText();
 
     if (p->m_abortPlaylistScan) {
