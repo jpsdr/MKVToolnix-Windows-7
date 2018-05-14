@@ -18,6 +18,9 @@
   regular sub-expressions for ISO 639-1 codes could match on empty strings,
   too, causing matches in wrong places and hence no language being recognized
   in certain situations. Fixes #2298.
+* mkvmerge: Matroska reader: fixed mkvmerge buffering the whole file if a
+  video track is multiplexed that consists of only one or a few frames. Fixes
+  #2304.
 
 
 # Version 23.0.0 "The Bride Said No" 2018-05-02

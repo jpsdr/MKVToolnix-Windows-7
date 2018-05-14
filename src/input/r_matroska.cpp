@@ -2233,7 +2233,7 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
     auto requested_ptzr_track = m_ptzr_to_track_map[requested_ptzr];
     if (   !requested_ptzr_track
         || (!force && ('a' != requested_ptzr_track->type) && ('v' != requested_ptzr_track->type))
-        || ( force && (128 * 1024 * 1024 >= num_queued_bytes)))
+        || (128 * 1024 * 1024 < num_queued_bytes))
       return FILE_STATUS_HOLDING;
   }
 
