@@ -6,6 +6,9 @@
   extraction as other tools such as MP4Box cannot handle them
   correctly. Implements #2293.
 * mkvmerge, mkvextract: AVC/h.264: empty NALUs will now be removed.
+* mkvmerge: MP4 reader: improved the detection of edit lists consisting of two
+  identical entries, each spanning the file's duration as given in the movie
+  header atom. The second entry is ignored in such cases. See #2306.
 
 ## Bug fixes
 

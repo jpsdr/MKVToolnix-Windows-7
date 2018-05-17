@@ -2451,10 +2451,9 @@ qtmp4_demuxer_c::apply_edit_list() {
       edit.segment_duration = 0;
       mxdebug_if(m_debug_editlists, boost::format("  %1%: single edit with positive media_time; track start offset %2%; change to non-edit to copy the rest\n") % info % format_timestamp(timeline_cts));
 
-    } else if (   (num_edits       == 2)
-               && (entry_index     == 2)
-               && (edit            == editlist_table.front())
-               && (edit.media_time == 0)
+    } else if (   (num_edits   == 2)
+               && (entry_index == 2)
+               && (edit        == editlist_table.front())
                && m_reader.m_duration
                && ((timeline_cts - static_cast<int64_t>(*m_reader.m_duration)) >= timestamp_c::s(-60).to_ns())) {
       mxdebug_if(m_debug_editlists,
