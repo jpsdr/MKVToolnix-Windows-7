@@ -134,19 +134,16 @@ built. These include:
 This is optional as MKVToolNix comes with its own set of the
 libraries. It will use them if no version is found on the system.
 
-Start with the two libraries. Either download releases of
-[libEBML v1.3.5](http://dl.matroska.org/downloads/libebml/) and
-[libMatroska v1.4.8](http://dl.matroska.org/downloads/libmatroska/) or
-get a fresh copy from the git repository:
+Start by either downloading releases of [libEBML
+v1.3.5](http://dl.matroska.org/downloads/libebml/) and [libMatroska
+v1.4.8](http://dl.matroska.org/downloads/libmatroska/) or by getting
+fresh copies from their git repositories:
 
     git clone https://github.com/Matroska-Org/libebml.git
     git clone https://github.com/Matroska-Org/libmatroska.git
 
-First change to libEBML's directory and run `./configure` followed by
-`make`. Now install libEBML by running `make install` as root
-(e.g. via `sudo`). Change to libMatroska's directory and go through
-the same steps: first `./configure` followed by `make` as a normal
-user and lastly `make install` as root.
+First build and install libEBML according to the included
+instructions. Afterwards do the same for libMatroska.
 
 ## 2.4. Building MKVToolNix
 
@@ -217,14 +214,16 @@ do this, you have to follow these steps:
    file to download was "googletest-release-1.8.0.tar.gz")
 
 2. Extract the archive somewhere and create a symbolic link to its
-   `googletest-release-1.8.0/googletest/include/gtest` sub-directory
-   inside MKVToolNix' "lib" directory.
+   `googletest-release-1.8.0/googletest` sub-directory
+   inside MKVToolNix' `lib` directory and call it `gtest`, e.g. like this:
+
+   `ln -s /path/to/googletest-release-1.8.0/googletest lib/gtest`
 
 3. Configure MKVToolNix normally.
 
 4. Build the unit test executable and run it with
 
-        rake tests:unit
+        rake tests:run_unit
 
 
 # 3. Reporting bugs
