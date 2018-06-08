@@ -48,11 +48,20 @@ AC_CACHE_CHECK([nlohmann's json-cpp],[ac_cv_nlohmann_jsoncpp],[
 
 if test x"$ac_cv_nlohmann_jsoncpp" = xno; then
   AC_MSG_NOTICE([Using the internal version of nlohmann json-cpp])
+
+  NLOHMANN_JSON_INTERNAL=yes
+  AC_DEFINE([HAVE_NLOHMANN_JSONCPP],[0],[Define if nlohmann's json-cpp is available.])
+
 else
   AC_MSG_NOTICE([Using the system version of nlohmann json-cpp])
+
   if test x"$ac_cv_nlohmann_jsoncpp" = xyes; then
     AC_DEFINE([HAVE_NLOHMANN_JSONCPP],[1],[Define if nlohmann's json-cpp is available.])
   else
     AC_DEFINE([HAVE_NLOHMANN_JSONCPP],[2],[Define if nlohmann's json-cpp is available.])
   fi
+
+  NLOHMANN_JSON_INTERNAL=no
 fi
+
+AC_SUBST(NLOHMANN_JSON_INTERNAL)

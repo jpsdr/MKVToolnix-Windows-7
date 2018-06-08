@@ -29,6 +29,8 @@
 
 ## Other changes
 
+* Niels Lohmann's JSON library: the bundled version has been updated from
+  v1.1.0 (git revision 54d3cab) to v3.1.1 (git revision g183390c1).
 * pugixml library: the bundled version has been updated from v1.8 to v1.9 (git
   revision e584ea3).
 

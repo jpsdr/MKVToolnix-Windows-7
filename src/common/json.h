@@ -13,9 +13,7 @@
 
 #include "common/common_pch.h"
 
-#if !defined(HAVE_NLOHMANN_JSONCPP)
-# include "nlohmann-json/src/json.hpp"
-#elif HAVE_NLOHMANN_JSONCPP == 1
+#if HAVE_NLOHMANN_JSONCPP != 2 // 0 == internal, 1 == system in subdirectory, 2 == system without subdirectory
 # include <nlohmann/json.hpp>
 #else
 # include <json.hpp>
