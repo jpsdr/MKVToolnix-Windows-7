@@ -219,7 +219,7 @@ Tab::save() {
       }
     }
 
-    if (tracksModified && m_eTracks) {
+    if (ok && tracksModified && m_eTracks) {
       auto result = m_analyzer->update_element(m_eTracks, true);
       if (kax_analyzer_c::uer_success != result) {
         QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
@@ -227,7 +227,7 @@ Tab::save() {
       }
     }
 
-    if (attachmentsModified) {
+    if (ok && attachmentsModified) {
       auto attachments = std::make_shared<KaxAttachments>();
 
       for (auto const &attachedFilePage : m_attachmentsPage->m_children)
@@ -244,15 +244,17 @@ Tab::save() {
       }
     }
 
-    auto result = doc_type_version_handler.update_ebml_head(m_analyzer->get_file());
-    if (!mtx::included_in(result, mtx::doc_type_version_handler_c::update_result_e::ok_updated, mtx::doc_type_version_handler_c::update_result_e::ok_no_update_needed)) {
-      ok           = false;
-      auto details = mtx::doc_type_version_handler_c::update_result_e::err_no_head_found    == result ? QY("No 'EBML head' element was found.")
-                   : mtx::doc_type_version_handler_c::update_result_e::err_not_enough_space == result ? QY("There's not enough space at the beginning of the file to fit the updated 'EBML head' element in.")
-                   :                                                                                    QY("A generic read or write failure occurred.");
-      auto message = Q("%1 %2").arg(QY("Updating the 'document type version' or 'document type read version' header fields failed.")).arg(details);
+    if (ok) {
+      auto result = doc_type_version_handler.update_ebml_head(m_analyzer->get_file());
+      if (!mtx::included_in(result, mtx::doc_type_version_handler_c::update_result_e::ok_updated, mtx::doc_type_version_handler_c::update_result_e::ok_no_update_needed)) {
+        ok           = false;
+        auto details = mtx::doc_type_version_handler_c::update_result_e::err_no_head_found    == result ? QY("No 'EBML head' element was found.")
+                     : mtx::doc_type_version_handler_c::update_result_e::err_not_enough_space == result ? QY("There's not enough space at the beginning of the file to fit the updated 'EBML head' element in.")
+                     :                                                                                    QY("A generic read or write failure occurred.");
+        auto message = Q("%1 %2").arg(QY("Updating the 'document type version' or 'document type read version' header fields failed.")).arg(details);
 
-      QMessageBox::warning(this, QY("Error writing Matroska file"), message);
+        QMessageBox::warning(this, QY("Error writing Matroska file"), message);
+      }
     }
 
   } catch (mtx::kax_analyzer_x &ex) {

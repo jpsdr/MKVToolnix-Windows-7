@@ -24,6 +24,8 @@
 * mkvmerge: Matroska reader: fixed mkvmerge buffering the whole file if a
   video track is multiplexed that consists of only one or a few frames. Fixes
   #2304.
+* MKVToolNix GUI: header editor: fixed a crash when saving the file fails
+  (e.g. because it isn't writable). Fixes #2319.
 
 
 # Version 23.0.0 "The Bride Said No" 2018-05-02
