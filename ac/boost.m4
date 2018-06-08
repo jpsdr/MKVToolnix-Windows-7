@@ -41,9 +41,12 @@ AX_BOOST_CHECK_HEADERS([boost/lexical_cast.hpp],,[
   AC_MSG_ERROR([Boost's lexical_cast library is required but wasn't found])
 ])
 
-AX_BOOST_CHECK_HEADERS([boost/math/common_factor.hpp],,[
-  AC_MSG_ERROR([Boost's math library is required but its headers weren't found])
-])
+AX_BOOST_CHECK_HEADERS([boost/integer/common_factor.hpp])
+if test x"$ac_cv_header_boost_integer_common_factor_hpp" != xyes; then
+  AX_BOOST_CHECK_HEADERS([boost/math/common_factor.hpp],,[
+    AC_MSG_ERROR([Boost's math library is required but its headers weren't found])
+  ])
+fi
 
 AX_BOOST_CHECK_HEADERS([boost/range.hpp],,[
   AC_MSG_ERROR([Boost's Range library is required but wasn't found])

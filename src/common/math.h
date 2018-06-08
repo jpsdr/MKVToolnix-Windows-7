@@ -19,7 +19,11 @@
 # include <intrin.h>
 #endif
 
-#include <boost/math/common_factor.hpp>
+#if HAVE_BOOST_INTEGER_COMMON_FACTOR_HPP
+# include <boost/integer/common_factor.hpp>
+#else
+# include <boost/math/common_factor.hpp>
+#endif
 
 #include "common/math_fwd.h"
 
