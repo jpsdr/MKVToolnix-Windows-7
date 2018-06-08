@@ -27,6 +27,11 @@
 * MKVToolNix GUI: header editor: fixed a crash when saving the file fails
   (e.g. because it isn't writable). Fixes #2319.
 
+## Other changes
+
+* pugixml library: the bundled version has been updated from v1.8 to v1.9 (git
+  revision e584ea3).
+
 
 # Version 23.0.0 "The Bride Said No" 2018-05-02
 
