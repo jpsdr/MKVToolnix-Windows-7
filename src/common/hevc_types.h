@@ -173,137 +173,127 @@ Bytes                                    Bits
 */
 
 struct codec_private_t {
-  unsigned char configuration_version;
+  unsigned char configuration_version{};
 
   // vps data
-  unsigned int profile_space;
-  unsigned int tier_flag;
-  unsigned int profile_idc;
-  unsigned int profile_compatibility_flag;
-  unsigned int progressive_source_flag;
-  unsigned int interlaced_source_flag;
-  unsigned int non_packed_constraint_flag;
-  unsigned int frame_only_constraint_flag;
-  unsigned int level_idc;
+  unsigned int profile_space{};
+  unsigned int tier_flag{};
+  unsigned int profile_idc{};
+  unsigned int profile_compatibility_flag{};
+  unsigned int progressive_source_flag{};
+  unsigned int interlaced_source_flag{};
+  unsigned int non_packed_constraint_flag{};
+  unsigned int frame_only_constraint_flag{};
+  unsigned int level_idc{};
 
   // sps data
-  unsigned int  min_spatial_segmentation_idc;
-  unsigned char chroma_format_idc;
-  unsigned char bit_depth_luma_minus8;
-  unsigned char bit_depth_chroma_minus8;
-  unsigned int  max_sub_layers_minus1;
-  unsigned int  temporal_id_nesting_flag;
+  unsigned int  min_spatial_segmentation_idc{};
+  unsigned char chroma_format_idc{};
+  unsigned char bit_depth_luma_minus8{};
+  unsigned char bit_depth_chroma_minus8{};
+  unsigned int  max_sub_layers_minus1{};
+  unsigned int  temporal_id_nesting_flag{};
 
-  unsigned char num_parameter_sets;
-  unsigned char parallelism_type;
+  unsigned char num_parameter_sets{};
+  unsigned char parallelism_type{};
 
-  int vps_data_id;
-  int sps_data_id;
+  int vps_data_id{-1};
+  int sps_data_id{-1};
 
-  codec_private_t() {
-    memset(this, 0, sizeof(*this));
-
-    vps_data_id = -1;
-    sps_data_id = -1;
-  }
+  void clear();
 };
 
 struct vps_info_t {
-  unsigned int id;
+  unsigned int id{};
 
-  unsigned int profile_space;
-  unsigned int tier_flag;
-  unsigned int profile_idc;
-  unsigned int profile_compatibility_flag;
-  unsigned int progressive_source_flag;
-  unsigned int interlaced_source_flag;
-  unsigned int non_packed_constraint_flag;
-  unsigned int frame_only_constraint_flag;
-  unsigned int level_idc;
+  unsigned int profile_space{};
+  unsigned int tier_flag{};
+  unsigned int profile_idc{};
+  unsigned int profile_compatibility_flag{};
+  unsigned int progressive_source_flag{};
+  unsigned int interlaced_source_flag{};
+  unsigned int non_packed_constraint_flag{};
+  unsigned int frame_only_constraint_flag{};
+  unsigned int level_idc{};
 
-  unsigned int max_sub_layers_minus1;
+  unsigned int max_sub_layers_minus1{};
 
-  uint32_t checksum;
+  uint32_t checksum{};
 
-  vps_info_t() {
-    memset(this, 0, sizeof(*this));
-  }
+  void clear();
 };
 
 struct short_term_ref_pic_set_t {
-  int inter_ref_pic_set_prediction_flag;
-  int delta_idx;
-  int delta_rps_sign;
-  int abs_delta_rps;
+  int inter_ref_pic_set_prediction_flag{};
+  int delta_idx{};
+  int delta_rps_sign{};
+  int abs_delta_rps{};
 
-  int delta_poc[16+1];
-  int used[16+1];
-  int ref_id[16+1];
+  int delta_poc[16+1]{};
+  int used[16+1]{};
+  int ref_id[16+1]{};
 
-  int num_ref_id;
-  int num_pics;
-  int num_negative_pics;
-  int num_positive_pics;
+  int num_ref_id{};
+  int num_pics{};
+  int num_negative_pics{};
+  int num_positive_pics{};
+
+  void clear();
 };
 
 struct sps_info_t {
-  unsigned int id;
-  unsigned int vps_id;
-  unsigned int max_sub_layers_minus1;
-  unsigned int temporal_id_nesting_flag;
+  unsigned int id{};
+  unsigned int vps_id{};
+  unsigned int max_sub_layers_minus1{};
+  unsigned int temporal_id_nesting_flag{};
 
-  short_term_ref_pic_set_t short_term_ref_pic_sets[64];
+  short_term_ref_pic_set_t short_term_ref_pic_sets[64]{};
 
-  unsigned int chroma_format_idc;
-  unsigned int bit_depth_luma_minus8;
-  unsigned int bit_depth_chroma_minus8;
-  unsigned int separate_colour_plane_flag;
-  unsigned int log2_min_luma_coding_block_size_minus3;
-  unsigned int log2_diff_max_min_luma_coding_block_size;
-  unsigned int log2_max_pic_order_cnt_lsb;
+  unsigned int chroma_format_idc{};
+  unsigned int bit_depth_luma_minus8{};
+  unsigned int bit_depth_chroma_minus8{};
+  unsigned int separate_colour_plane_flag{};
+  unsigned int log2_min_luma_coding_block_size_minus3{};
+  unsigned int log2_diff_max_min_luma_coding_block_size{};
+  unsigned int log2_max_pic_order_cnt_lsb{};
 
-  bool conformance_window_flag;
-  unsigned int conf_win_left_offset, conf_win_right_offset, conf_win_top_offset, conf_win_bottom_offset;
+  bool conformance_window_flag{};
+  unsigned int conf_win_left_offset{}, conf_win_right_offset{}, conf_win_top_offset{}, conf_win_bottom_offset{};
 
   // vui:
-  bool vui_present, ar_found;
-  unsigned int par_num, par_den;
-  unsigned int min_spatial_segmentation_idc;
+  bool vui_present{}, ar_found{};
+  unsigned int par_num{}, par_den{};
+  unsigned int min_spatial_segmentation_idc{};
 
   // timing_info:
-  bool timing_info_present;
-  unsigned int num_units_in_tick, time_scale;
+  bool timing_info_present{};
+  unsigned int num_units_in_tick{}, time_scale{};
 
-  unsigned int width, height;
+  unsigned int width{}, height{};
 
-  unsigned int vps;
+  unsigned int vps{};
 
-  uint32_t checksum;
-
-  sps_info_t() {
-    memset(this, 0, sizeof(*this));
-  }
+  uint32_t checksum{};
 
   void dump();
 
   bool timing_info_valid() const;
   int64_t default_duration() const;
+
+  void clear();
 };
 
 struct pps_info_t {
-  unsigned id;
-  unsigned sps_id;
+  unsigned id{};
+  unsigned sps_id{};
 
-  bool dependent_slice_segments_enabled_flag;
-  bool output_flag_present_flag;
-  unsigned int num_extra_slice_header_bits;
+  bool dependent_slice_segments_enabled_flag{};
+  bool output_flag_present_flag{};
+  unsigned int num_extra_slice_header_bits{};
 
-  uint32_t checksum;
+  uint32_t checksum{};
 
-  pps_info_t() {
-    memset(this, 0, sizeof(*this));
-  }
-
+  void clear();
   void dump();
 };
 

@@ -312,7 +312,6 @@ struct qtmp4_demuxer_c {
     , m_debug_indexes{         "qtmp4_full|qtmp4_indexes|qtmp4_indexes_full"}
     , m_debug_indexes_full{                             "qtmp4_indexes_full"}
   {
-    memset(&esds, 0, sizeof(esds_t));
   }
 
   ~qtmp4_demuxer_c() {

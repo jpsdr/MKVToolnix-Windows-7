@@ -20,70 +20,47 @@
 namespace mtx { namespace hevc {
 
 struct slice_info_t {
-  unsigned char nalu_type;
-  unsigned char type;
-  unsigned char pps_id;
-  bool first_slice_segment_in_pic_flag;
-  unsigned int pic_order_cnt_lsb;
+  unsigned char nalu_type{};
+  unsigned char type{};
+  unsigned char pps_id{};
+  bool first_slice_segment_in_pic_flag{};
+  unsigned int pic_order_cnt_lsb{};
 
-  unsigned int sps;
-  unsigned int pps;
-
-  slice_info_t() {
-    clear();
-  }
+  unsigned int sps{};
+  unsigned int pps{};
 
   void dump() const;
-  void clear() {
-    memset(this, 0, sizeof(*this));
-  }
+  void clear();
 };
 
 struct frame_t {
-  memory_cptr m_data;
-  int64_t m_start, m_end, m_ref1, m_ref2;
-  uint64_t m_position;
-  bool m_keyframe, m_has_provided_timestamp;
-  slice_info_t m_si;
-  int m_presentation_order, m_decode_order;
+  memory_cptr m_data{};
+  int64_t m_start{}, m_end{}, m_ref1{}, m_ref2{};
+  uint64_t m_position{};
+  bool m_keyframe{}, m_has_provided_timestamp{};
+  slice_info_t m_si{};
+  int m_presentation_order{}, m_decode_order{};
 
-  frame_t() {
-    clear();
-  }
-
-  void clear() {
-    m_start                 = 0;
-    m_end                   = 0;
-    m_ref1                  = 0;
-    m_ref2                  = 0;
-    m_position              = 0;
-    m_keyframe              = false;
-    m_has_provided_timestamp = false;
-    m_presentation_order    = 0;
-    m_decode_order          = 0;
-    m_data.reset();
-
-    m_si.clear();
-  }
+  void clear();
 };
 
 class es_parser_c {
 protected:
-  int m_nalu_size_length;
+  int m_nalu_size_length{4};
 
-  bool m_keep_ar_info;
-  bool m_hevcc_ready, m_hevcc_changed;
+  bool m_keep_ar_info{true};
+  bool m_hevcc_ready{}, m_hevcc_changed{};
 
-  int64_t m_stream_default_duration, m_forced_default_duration, m_container_default_duration;
-  int m_frame_number, m_num_skipped_frames;
-  bool m_first_keyframe_found, m_recovery_point_valid, m_b_frames_since_keyframe, m_first_cleanup;
+  int64_t m_stream_default_duration{-1}, m_forced_default_duration{-1}, m_container_default_duration{-1};
+  int m_frame_number{}, m_num_skipped_frames{};
+  bool m_first_keyframe_found{}, m_recovery_point_valid{}, m_b_frames_since_keyframe{}, m_first_cleanup{true};
 
-  bool m_par_found;
-  int64_rational_c m_par;
+  bool m_par_found{};
+  int64_rational_c m_par{};
 
   std::deque<frame_t> m_frames, m_frames_out;
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
-  int64_t m_max_timestamp;
+  int64_t m_max_timestamp{};
   std::map<int64_t, int64_t> m_duration_frequency;
 
   std::vector<memory_cptr> m_vps_list,
@@ -97,31 +74,24 @@ protected:
   codec_private_t m_codec_private;
 
   memory_cptr m_unparsed_buffer;
-  uint64_t m_stream_position, m_parsed_position;
+  uint64_t m_stream_position{}, m_parsed_position{};
 
   frame_t m_incomplete_frame;
-  bool m_have_incomplete_frame;
+  bool m_have_incomplete_frame{};
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
-  bool m_simple_picture_order, m_ignore_nalu_size_length_errors, m_discard_actual_frames;
+  bool m_simple_picture_order{}, m_ignore_nalu_size_length_errors{}, m_discard_actual_frames{};
 
-  bool m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamp_statistics, m_debug_timestamps, m_debug_sps_info;
+  bool m_debug_keyframe_detection{}, m_debug_nalu_types{}, m_debug_timestamp_statistics{}, m_debug_timestamps{}, m_debug_sps_info{};
   static std::unordered_map<int, std::string> ms_nalu_names_by_type;
 
   struct stats_t {
     std::vector<int> num_slices_by_type, num_nalus_by_type;
-    size_t num_frames_out, num_frames_discarded, num_timestamps_in, num_timestamps_generated, num_timestamps_discarded, num_field_slices, num_frame_slices;
+    size_t num_frames_out{}, num_frames_discarded{}, num_timestamps_in{}, num_timestamps_generated{}, num_timestamps_discarded{}, num_field_slices{}, num_frame_slices{};
 
     stats_t()
       : num_slices_by_type(3, 0)
       , num_nalus_by_type(64, 0)
-      , num_frames_out{}
-      , num_frames_discarded{}
-      , num_timestamps_in{}
-      , num_timestamps_generated{}
-      , num_timestamps_discarded{}
-      , num_field_slices{}
-      , num_frame_slices{}
     {
     }
   } m_stats;

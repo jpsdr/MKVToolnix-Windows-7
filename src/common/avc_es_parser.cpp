@@ -541,7 +541,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
     mtx::bits::reader_c r(nalu->get_buffer(), nalu->get_size());
     r.enable_rbsp_mode();
 
-    memset(&si, 0, sizeof(si));
+    si = slice_info_t{};
 
     r.skip_bit();                   // forbidden_zero_bit
     si.nal_ref_idc = r.get_bits(2); // nal_ref_idc

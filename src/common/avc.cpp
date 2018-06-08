@@ -237,8 +237,7 @@ parse_sps(memory_cptr const &buffer,
 
   keep_ar_info = !mtx::hacks::is_engaged(mtx::hacks::REMOVE_BITSTREAM_AR_INFO);
 
-  memset(&sps, 0, sizeof(sps));
-
+  sps          = sps_info_t{};
   sps.par_num  = 1;
   sps.par_den  = 1;
   sps.ar_found = false;
@@ -504,7 +503,7 @@ parse_pps(memory_cptr const &buffer,
   try {
     mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
 
-    memset(&pps, 0, sizeof(pps));
+    pps = pps_info_t{};
 
     r.skip_bits(3);             // forbidden_zero_bit, nal_ref_idc
     if (r.get_bits(5) != 8)     // nal_unit_type

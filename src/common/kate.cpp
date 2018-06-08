@@ -17,10 +17,6 @@
 #include "common/bit_reader.h"
 #include "common/kate.h"
 
-kate_identification_header_t::kate_identification_header_t() {
-  memset(this, 0, sizeof(kate_identification_header_t));
-}
-
 static int32_t
 get_bits32_le(mtx::bits::reader_c &bc) {
   int32_t v = 0;

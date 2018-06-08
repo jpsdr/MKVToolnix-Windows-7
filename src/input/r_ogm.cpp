@@ -1418,8 +1418,6 @@ ogm_v_theora_demuxer_c::ogm_v_theora_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
   codec = codec_c::look_up(codec_c::type_e::V_THEORA);
-
-  memset(&theora, 0, sizeof(theora_identification_header_t));
 }
 
 void
@@ -1614,8 +1612,6 @@ ogm_s_kate_demuxer_c::ogm_s_kate_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
   codec = codec_c::look_up(codec_c::type_e::S_KATE);
-
-  memset(&kate, 0, sizeof(kate_identification_header_t));
 }
 
 void

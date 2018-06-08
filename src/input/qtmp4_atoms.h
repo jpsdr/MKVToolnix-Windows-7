@@ -199,15 +199,15 @@ struct PACKED_STRUCTURE qt_image_description_t {
 
 // MPEG4 esds structure
 typedef struct {
-  uint8_t        version;
-  uint32_t       flags;
-  uint16_t       esid;
-  uint8_t        stream_priority;
-  uint8_t        object_type_id;
-  uint8_t        stream_type;
-  uint32_t       buffer_size_db;
-  uint32_t       max_bitrate;
-  uint32_t       avg_bitrate;
+  uint8_t        version{};
+  uint32_t       flags{};
+  uint16_t       esid{};
+  uint8_t        stream_priority{};
+  uint8_t        object_type_id{};
+  uint8_t        stream_type{};
+  uint32_t       buffer_size_db{};
+  uint32_t       max_bitrate{};
+  uint32_t       avg_bitrate{};
   memory_cptr    decoder_config;
   memory_cptr    sl_config;
 } esds_t;

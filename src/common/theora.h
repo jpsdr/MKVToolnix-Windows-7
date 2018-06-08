@@ -39,38 +39,36 @@ namespace mtx {
 }
 
 struct theora_identification_header_t {
-  uint8_t headertype;
-  char theora_string[6];
+  uint8_t headertype{};
+  char theora_string[6]{};
 
-  uint8_t vmaj;
-  uint8_t vmin;
-  uint8_t vrev;
+  uint8_t vmaj{};
+  uint8_t vmin{};
+  uint8_t vrev{};
 
-  uint16_t fmbw;
-  uint16_t fmbh;
+  uint16_t fmbw{};
+  uint16_t fmbh{};
 
-  uint32_t picw;
-  uint32_t pich;
-  uint8_t picx;
-  uint8_t picy;
+  uint32_t picw{};
+  uint32_t pich{};
+  uint8_t picx{};
+  uint8_t picy{};
 
-  uint32_t frn;
-  uint32_t frd;
+  uint32_t frn{};
+  uint32_t frd{};
 
-  uint32_t parn;
-  uint32_t pard;
+  uint32_t parn{};
+  uint32_t pard{};
 
-  uint8_t cs;
-  uint8_t pf;
+  uint8_t cs{};
+  uint8_t pf{};
 
-  uint32_t nombr;
-  uint8_t qual;
+  uint32_t nombr{};
+  uint8_t qual{};
 
-  uint8_t kfgshift;
+  uint8_t kfgshift{};
 
-  int display_width, display_height;
-
-  theora_identification_header_t();
+  int display_width{}, display_height{};
 };
 
 void theora_parse_identification_header(unsigned char *buffer, int size, theora_identification_header_t &header);

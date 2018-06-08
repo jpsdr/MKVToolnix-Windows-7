@@ -466,6 +466,16 @@ sps_info_t::default_duration()
 }
 
 void
+sps_info_t::clear() {
+  *this = sps_info_t{};
+}
+
+void
+pps_info_t::clear() {
+  *this = pps_info_t{};
+}
+
+void
 pps_info_t::dump() {
   mxinfo(boost::format("pps_info dump:\n"
                        "id: %1%\n"
@@ -476,6 +486,11 @@ pps_info_t::dump() {
          % checksum);
 }
 
+void
+vps_info_t::clear() {
+  *this = vps_info_t{};
+}
+
 bool
 parse_vps(memory_cptr const &buffer,
           vps_info_t &vps) {
@@ -484,7 +499,7 @@ parse_vps(memory_cptr const &buffer,
   mtx::bits::writer_c w{};
   unsigned int i, j;
 
-  memset(&vps, 0, sizeof(vps));
+  vps.clear();
 
   w.copy_bits(1, r);            // forbidden_zero_bit
   if (w.copy_bits(6, r) != HEVC_NALU_TYPE_VIDEO_PARAM)  // nal_unit_type
@@ -559,8 +574,7 @@ parse_sps(memory_cptr const &buffer,
 
   keep_ar_info = !mtx::hacks::is_engaged(mtx::hacks::REMOVE_BITSTREAM_AR_INFO);
 
-  memset(&sps, 0, sizeof(sps));
-
+  sps.clear();
   sps.par_num  = 1;
   sps.par_den  = 1;
   sps.ar_found = false;
@@ -692,7 +706,7 @@ parse_pps(memory_cptr const &buffer,
   try {
     mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
 
-    memset(&pps, 0, sizeof(pps));
+    pps.clear();
 
     r.skip_bits(1);                                // forbidden_zero_bit
     if (r.get_bits(6) != HEVC_NALU_TYPE_PIC_PARAM) // nal_unit_type

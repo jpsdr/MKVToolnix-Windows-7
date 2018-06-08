@@ -18,10 +18,6 @@
 #include "common/bit_reader.h"
 #include "common/theora.h"
 
-theora_identification_header_t::theora_identification_header_t() {
-  memset(this, 0, sizeof(theora_identification_header_t));
-}
-
 void
 theora_parse_identification_header(unsigned char *buffer,
                                    int size,

@@ -58,36 +58,32 @@ struct timing_info_t {
 };
 
 struct sps_info_t {
-  unsigned int id;
+  unsigned int id{};
 
-  unsigned int profile_idc;
-  unsigned int profile_compat;
-  unsigned int level_idc;
-  unsigned int chroma_format_idc;
-  unsigned int log2_max_frame_num;
-  unsigned int pic_order_cnt_type;
-  unsigned int log2_max_pic_order_cnt_lsb;
-  unsigned int offset_for_non_ref_pic;
-  unsigned int offset_for_top_to_bottom_field;
-  unsigned int num_ref_frames_in_pic_order_cnt_cycle;
-  bool delta_pic_order_always_zero_flag;
-  bool frame_mbs_only;
+  unsigned int profile_idc{};
+  unsigned int profile_compat{};
+  unsigned int level_idc{};
+  unsigned int chroma_format_idc{};
+  unsigned int log2_max_frame_num{};
+  unsigned int pic_order_cnt_type{};
+  unsigned int log2_max_pic_order_cnt_lsb{};
+  unsigned int offset_for_non_ref_pic{};
+  unsigned int offset_for_top_to_bottom_field{};
+  unsigned int num_ref_frames_in_pic_order_cnt_cycle{};
+  bool delta_pic_order_always_zero_flag{};
+  bool frame_mbs_only{};
 
   // vui:
-  bool vui_present, ar_found;
-  unsigned int par_num, par_den;
+  bool vui_present{}, ar_found{};
+  unsigned int par_num{}, par_den{};
 
   // timing_info:
-  timing_info_t timing_info;
+  timing_info_t timing_info{};
 
-  unsigned int crop_left, crop_top, crop_right, crop_bottom;
-  unsigned int width, height;
+  unsigned int crop_left{}, crop_top{}, crop_right{}, crop_bottom{};
+  unsigned int width{}, height{};
 
-  uint32_t checksum;
-
-  sps_info_t() {
-    memset(this, 0, sizeof(*this));
-  }
+  uint32_t checksum{};
 
   void dump();
 
@@ -95,43 +91,35 @@ struct sps_info_t {
 };
 
 struct pps_info_t {
-  unsigned id;
-  unsigned sps_id;
+  unsigned id{};
+  unsigned sps_id{};
 
-  bool pic_order_present;
+  bool pic_order_present{};
 
-  uint32_t checksum;
-
-  pps_info_t() {
-    memset(this, 0, sizeof(*this));
-  }
+  uint32_t checksum{};
 
   void dump();
 };
 
 struct slice_info_t {
-  unsigned char nalu_type;
-  unsigned char nal_ref_idc;
-  unsigned char type;
-  unsigned char pps_id;
-  unsigned int frame_num;
-  bool field_pic_flag, bottom_field_flag;
-  unsigned int idr_pic_id;
-  unsigned int pic_order_cnt_lsb;
-  unsigned int delta_pic_order_cnt_bottom;
-  unsigned int delta_pic_order_cnt[2];
-  unsigned int first_mb_in_slice;
+  unsigned char nalu_type{};
+  unsigned char nal_ref_idc{};
+  unsigned char type{};
+  unsigned char pps_id{};
+  unsigned int frame_num{};
+  bool field_pic_flag{}, bottom_field_flag{};
+  unsigned int idr_pic_id{};
+  unsigned int pic_order_cnt_lsb{};
+  unsigned int delta_pic_order_cnt_bottom{};
+  unsigned int delta_pic_order_cnt[2]{};
+  unsigned int first_mb_in_slice{};
 
-  unsigned int sps;
-  unsigned int pps;
-
-  slice_info_t() {
-    clear();
-  }
+  unsigned int sps{};
+  unsigned int pps{};
 
   void dump() const;
   void clear() {
-    memset(this, 0, sizeof(*this));
+    *this = slice_info_t{};
   }
 };
 

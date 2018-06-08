@@ -33,6 +33,11 @@ namespace mtx { namespace hevc {
 std::unordered_map<int, std::string> es_parser_c::ms_nalu_names_by_type;
 
 void
+slice_info_t::clear() {
+  *this = slice_info_t{};
+}
+
+void
 slice_info_t::dump()
   const {
   mxinfo(boost::format("slice_info dump:\n"
@@ -50,29 +55,13 @@ slice_info_t::dump()
          % pps);
 }
 
+void
+frame_t::clear() {
+  *this = frame_t{};
+}
+
 es_parser_c::es_parser_c()
-  : m_nalu_size_length(4)
-  , m_keep_ar_info(true)
-  , m_hevcc_ready(false)
-  , m_hevcc_changed(false)
-  , m_stream_default_duration(-1)
-  , m_forced_default_duration(-1)
-  , m_container_default_duration(-1)
-  , m_frame_number(0)
-  , m_num_skipped_frames(0)
-  , m_first_keyframe_found(false)
-  , m_recovery_point_valid(false)
-  , m_b_frames_since_keyframe(false)
-  , m_first_cleanup{true}
-  , m_par_found(false)
-  , m_max_timestamp(0)
-  , m_stream_position(0)
-  , m_parsed_position(0)
-  , m_have_incomplete_frame(false)
-  , m_simple_picture_order{}
-  , m_ignore_nalu_size_length_errors(false)
-  , m_discard_actual_frames(false)
-  , m_debug_keyframe_detection(debugging_c::requested("hevc_parser|hevc_keyframe_detection"))
+  : m_debug_keyframe_detection(debugging_c::requested("hevc_parser|hevc_keyframe_detection"))
   , m_debug_nalu_types(        debugging_c::requested("hevc_parser|hevc_nalu_types"))
   , m_debug_timestamps(        debugging_c::requested("hevc_parser|hevc_timestamps"))
   , m_debug_sps_info(          debugging_c::requested("hevc_parser|hevc_sps|hevc_sps_info"))
@@ -533,7 +522,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
 
     unsigned int i;
 
-    memset(&si, 0, sizeof(si));
+    si.clear();
 
     r.get_bits(1);                // forbidden_zero_bit
     si.nalu_type = r.get_bits(6); // nal_unit_type
