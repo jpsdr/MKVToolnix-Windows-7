@@ -399,7 +399,7 @@ static int avi_add_odml_index_entry_core(avi_t *AVI, long flags, int64_t pos, un
 
 static int avi_add_odml_index_entry(avi_t *AVI, unsigned char *tag, long flags, int64_t pos, unsigned long len) 
 {
-    char fcc[5];
+    char fcc[16];
 
     int audio = (strchr ((char *)tag, 'w')?1:0);
     int video = !audio;
@@ -1739,7 +1739,7 @@ static int avi_write_data(avi_t *AVI, char *data, unsigned long length, int audi
 {
    int n = 0;
 
-   unsigned char astr[5];
+   unsigned char astr[16];
    
    // transcode core itself checks for the size -- unneeded and 
    // does harm to xvid 2pass encodes where the first pass can get 
