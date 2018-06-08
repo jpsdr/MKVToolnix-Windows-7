@@ -32,15 +32,7 @@ public:
     set(numerator, denominator);
   }
 
-  void set(int64_t numerator, int64_t denominator) {
-    if (0 == denominator)
-      return;
-
-    int64_t gcd   = boost::math::gcd(numerator, denominator);
-
-    m_numerator   = numerator   / gcd;
-    m_denominator = denominator / gcd;
-  }
+  void set(int64_t numerator, int64_t denominator);
 
   inline int64_t operator *(int64_t v1) {
     return v1 * *this;

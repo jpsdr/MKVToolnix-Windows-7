@@ -54,6 +54,7 @@
 #include "common/iso639.h"
 #include "common/ivf.h"
 #include "common/kax_analyzer.h"
+#include "common/math.h"
 #include "common/mm_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -237,7 +238,7 @@ kax_track_t::fix_display_dimension_parameters() {
   if ((0 != v_display_unit) || ((8 * v_dwidth) > v_width) || ((8 * v_dheight) > v_height))
     return;
 
-  if (boost::math::gcd(v_dwidth, v_dheight) != 1)
+  if (boost::gcd(v_dwidth, v_dheight) != 1)
     return;
 
   // max shrinking was applied, ie x264 style

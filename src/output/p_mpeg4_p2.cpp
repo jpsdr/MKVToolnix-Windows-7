@@ -17,7 +17,6 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"
-#include "common/math.h"
 #include "common/strings/formatting.h"
 #include "merge/generic_reader.h"
 #include "merge/output_control.h"

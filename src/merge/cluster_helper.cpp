@@ -17,7 +17,6 @@
 #include "common/doc_type_version_handler.h"
 #include "common/ebml.h"
 #include "common/hacks.h"
-#include "common/math.h"
 #include "common/strings/formatting.h"
 #include "common/tags/tags.h"
 #include "common/translation.h"

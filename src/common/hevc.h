@@ -16,7 +16,6 @@
 #include "common/common_pch.h"
 
 #include "common/hevc_types.h"
-#include "common/math.h"
 
 namespace mtx { namespace hevc {
 

@@ -15,7 +15,6 @@
 #include "common/codec.h"
 #include "common/ebml.h"
 #include "common/endian.h"
-#include "common/math.h"
 #include "extract/xtr_ivf.h"
 
 xtr_ivf_c::xtr_ivf_c(const std::string &codec_id,
@@ -35,7 +34,7 @@ xtr_ivf_c::create_file(xtr_base_c *master,
 
   uint64_t default_duration = kt_get_default_duration(track);
   default_duration          = 0 == default_duration ? 1 : default_duration;
-  uint64_t gcd              = boost::math::gcd(static_cast<uint64_t>(100000000), default_duration);
+  uint64_t gcd              = boost::gcd(static_cast<uint64_t>(100000000), default_duration);
   m_frame_rate_num          = 1000000000ull    / gcd;
   m_frame_rate_den          = default_duration / gcd;
 

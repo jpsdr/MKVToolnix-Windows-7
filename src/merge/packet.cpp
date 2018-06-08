@@ -13,7 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include "common/math.h"
 #include "common/track_statistics.h"
 #include "merge/cluster_helper.h"
 #include "merge/output_control.h"

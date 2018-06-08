@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/math.h"
+#include "common/math_fwd.h"
 
 namespace mtx { namespace frame_timing {
 

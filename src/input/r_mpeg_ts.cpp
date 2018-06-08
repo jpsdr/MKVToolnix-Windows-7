@@ -25,7 +25,6 @@
 #include "common/endian.h"
 #include "common/file.h"
 #include "common/hdmv_textst.h"
-#include "common/math.h"
 #include "common/mp3.h"
 #include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"

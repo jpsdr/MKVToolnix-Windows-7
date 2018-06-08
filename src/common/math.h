@@ -19,6 +19,10 @@
 # include <intrin.h>
 #endif
 
+#include <boost/math/common_factor.hpp>
+
+#include "common/math_fwd.h"
+
 namespace mtx { namespace math {
 
 inline std::size_t
@@ -62,5 +66,3 @@ to_signed(Tsigned const &s) {
 }
 
 }}
-
-using int64_rational_c = boost::rational<int64_t>;

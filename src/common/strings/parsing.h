@@ -19,7 +19,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "common/math.h"
+#include "common/math_fwd.h"
 #include "common/strings/editing.h"
 #include "common/timestamp.h"
 

@@ -18,7 +18,6 @@
 #include "common/ebml.h"
 #include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
-#include "common/math.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
 #include "merge/generic_packetizer.h"

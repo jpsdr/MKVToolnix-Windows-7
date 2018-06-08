@@ -16,8 +16,6 @@
 
 #include "common/common_pch.h"
 
-#include "common/math.h"
-
 #define NALU_START_CODE 0x00000001
 
 #define NALU_TYPE_NON_IDR_SLICE  0x01

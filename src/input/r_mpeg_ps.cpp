@@ -19,7 +19,6 @@
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/id_info.h"
-#include "common/math.h"
 #include "common/mp3.h"
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"

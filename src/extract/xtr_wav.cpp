@@ -42,7 +42,7 @@ xtr_wav_c::create_file(xtr_base_c *master,
   auto channels    = kt_get_a_channels(track);
   auto sfreq       = static_cast<int>(kt_get_a_sfreq(track));
   auto bps         = kt_get_a_bps(track);
-  auto block_align = bps * channels / boost::math::gcd(8, bps);
+  auto block_align = bps * channels / boost::gcd(8, bps);
 
 
   if (-1 == bps)

@@ -19,10 +19,10 @@
 
 #include "common/file_types.h"
 #include "common/chapters/chapters.h"
+#include "common/math_fwd.h"
 #include "common/translation.h"
 #include "merge/file_status.h"
 #include "merge/id_result.h"
-#include "common/math.h"
 #include "merge/packet.h"
 #include "merge/timestamp_factory.h"
 #include "merge/track_info.h"

@@ -16,7 +16,6 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"
-#include "common/math.h"
 #include "common/strings/formatting.h"
 #include "common/theora.h"
 #include "output/p_theora.h"

@@ -17,7 +17,6 @@
 #include "common/codec.h"
 #include "common/hacks.h"
 #include "common/hevc.h"
-#include "common/math.h"
 #include "common/mpeg.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"

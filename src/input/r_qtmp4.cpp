@@ -1139,7 +1139,7 @@ qtmp4_reader_c::read_chapter_track() {
     return;
 
   std::vector<qtmp4_chapter_entry_t> entries;
-  uint64_t pts_scale_gcd = boost::math::gcd(static_cast<uint64_t>(1000000000ull), static_cast<uint64_t>((*chapter_dmx_itr)->time_scale));
+  uint64_t pts_scale_gcd = boost::gcd(static_cast<uint64_t>(1000000000ull), static_cast<uint64_t>((*chapter_dmx_itr)->time_scale));
   uint64_t pts_scale_num = 1000000000ull                                         / pts_scale_gcd;
   uint64_t pts_scale_den = static_cast<uint64_t>((*chapter_dmx_itr)->time_scale) / pts_scale_gcd;
 

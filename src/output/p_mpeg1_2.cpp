@@ -16,7 +16,6 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"
-#include "common/math.h"
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
 #include "common/strings/formatting.h"

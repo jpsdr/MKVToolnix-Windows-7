@@ -19,6 +19,7 @@
 #include "common/checksums/base.h"
 #include "common/endian.h"
 #include "common/hacks.h"
+#include "common/math.h"
 #include "common/mm_io.h"
 #include "common/mpeg.h"
 #include "common/hevc.h"

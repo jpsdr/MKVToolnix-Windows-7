@@ -45,7 +45,6 @@
 #include <boost/format.hpp>
 #include <boost/function.hpp>
 #include <boost/logic/tribool.hpp>
-#include <boost/math/common_factor.hpp>
 #include <boost/range.hpp>
 #include <boost/range/adaptor/filtered.hpp>
 #include <boost/range/adaptor/indexed.hpp>

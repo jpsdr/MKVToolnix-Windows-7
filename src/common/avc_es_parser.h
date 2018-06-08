@@ -17,6 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/avc.h"
+#include "common/math_fwd.h"
 
 namespace mtx { namespace avc {
 
