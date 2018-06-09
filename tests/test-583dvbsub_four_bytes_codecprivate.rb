@@ -5,5 +5,11 @@ describe "mkvmerge / DVB subtitles in Matroska with CodecPrivate missing the sub
 
 file = "data/subtitles/dvbsub/codecprivate_four_bytes.mkv"
 
-test_identify file
-test_merge file
+test "codec private length" do
+  identify_json(file)["tracks"].
+    select { |t| t["codec"] == "DVBSUB" }.
+    map    { |t| t["properties"]["codec_private_length"].to_s }.
+    join('+')
+end
+
+test_merge file, :args => "-A -D"

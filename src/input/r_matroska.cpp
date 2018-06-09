@@ -698,14 +698,6 @@ kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
     return false;
   }
 
-  if (t->private_data->get_size() == 4) {
-    // The subtitling type byte is missing. Add it. From ETSI EN 300 468 table 26:
-    // 0x10 = DVB subtitles (normal) with no monitor aspect ratio criticality
-
-    t->private_data->resize(5);
-    t->private_data->get_buffer()[4] = 0x10;
-  }
-
   return true;
 }
 
@@ -1978,6 +1970,22 @@ kax_reader_c::create_audio_packetizer(kax_track_t *t,
 }
 
 void
+kax_reader_c::create_dvbsub_subtitle_packetizer(kax_track_t &t,
+                                                track_info_c &nti) {
+  if (t.private_data->get_size() == 4) {
+    // The subtitling type byte is missing. Add it. From ETSI EN 300 468 table 26:
+    // 0x10 = DVB subtitles (normal) with no monitor aspect ratio criticality
+
+    t.private_data->resize(5);
+    t.private_data->get_buffer()[4] = 0x10;
+  }
+
+  set_track_packetizer(&t, new dvbsub_packetizer_c(this, nti, t.private_data));
+  show_packetizer_info(t.tnum, t.ptzr_ptr);
+  t.sub_type = 'p';
+}
+
+void
 kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
                                          track_info_c &nti) {
   if (t->codec.is(codec_c::type_e::S_VOBSUB)) {
@@ -1986,12 +1994,10 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
 
     t->sub_type = 'v';
 
-  } else if (t->codec.is(codec_c::type_e::S_DVBSUB)) {
-    set_track_packetizer(t, new dvbsub_packetizer_c(this, nti, t->private_data));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
-    t->sub_type = 'p';
+  } else if (t->codec.is(codec_c::type_e::S_DVBSUB))
+    create_dvbsub_subtitle_packetizer(*t, nti);
 
-  } else if (t->codec.is(codec_c::type_e::S_WEBVTT)) {
+  else if (t->codec.is(codec_c::type_e::S_WEBVTT)) {
     set_track_packetizer(t, new webvtt_packetizer_c(this, nti));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
 

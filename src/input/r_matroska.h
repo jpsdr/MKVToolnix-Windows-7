@@ -314,6 +314,8 @@ protected:
   virtual void create_avc_video_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_avc_es_video_packetizer(kax_track_t *t, track_info_c &nti);
 
+  virtual void create_dvbsub_subtitle_packetizer(kax_track_t &t, track_info_c &nti);
+
   virtual void read_headers_info(mm_io_c *io, EbmlElement *l0, int64_t position);
   virtual void read_headers_info_writing_app(KaxWritingApp *&kwriting_app);
   virtual void read_headers_track_audio(kax_track_t *track, KaxTrackAudio *ktaudio);
