@@ -39,7 +39,7 @@ public:
   QLabel *m_lTitle{}, *m_lTypeLabel{}, *m_lType{}, *m_lDescriptionLabel{}, *m_lDescription{}, *m_lStatusLabel{}, *m_lStatus{}, *m_lOriginalValueLabel{}, *m_lOriginalValue{}, *m_lValueLabel{};
 
   EbmlElement *m_element{};
-  bool m_present{};
+  bool m_present{}, m_mayBeRemoved{};
 
   PageBase &m_topLevelPage;
 

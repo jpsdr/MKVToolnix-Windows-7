@@ -26,6 +26,9 @@
   #2304.
 * MKVToolNix GUI: header editor: fixed a crash when saving the file fails
   (e.g. because it isn't writable). Fixes #2319.
+* MKVToolNix GUI: header editor: the editor was wrongfully claiming that
+  mandatory elements with default values cannot be removed in the "status"
+  text. Fixes #2320.
 
 ## Other changes
 

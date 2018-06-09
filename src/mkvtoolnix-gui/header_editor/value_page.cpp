@@ -73,8 +73,10 @@ ValuePage::init() {
     auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, m_callbacks.GlobalId);
     if (semantic && semantic->Mandatory) {
       std::unique_ptr<EbmlElement> elt(&semantic->Create());
-      m_cbAddOrRemove->setEnabled(elt->DefaultISset());
+      m_mayBeRemoved = elt->DefaultISset();
     }
+
+    m_cbAddOrRemove->setEnabled(m_mayBeRemoved);
   }
 
   sizePolicy.setHeightForWidth(m_lStatus->sizePolicy().hasHeightForWidth());
@@ -169,8 +171,7 @@ ValuePage::retranslateUi() {
 
   m_lStatusLabel->setText(QY("Status:"));
   if (m_present) {
-    auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, m_callbacks.GlobalId);
-    if (semantic && semantic->Mandatory)
+    if (!m_mayBeRemoved)
       m_lStatus->setText(Q("%1 %2").arg(QY("This element is currently present in the file.")).arg(QY("It cannot be removed because it is a mandatory header field.")));
     else
       m_lStatus->setText(Q("%1 %2").arg(QY("This element is currently present in the file.")).arg(QY("You can let the header editor remove the element from the file.")));
