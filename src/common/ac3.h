@@ -51,11 +51,11 @@ namespace ac3 {
 
 class frame_c {
 public:
-  unsigned int m_sample_rate{}, m_bit_rate{}, m_channels{}, m_flags{}, m_bytes{}, m_bs_id{}, m_samples{}, m_frame_type{}, m_sub_stream_id{};
+  unsigned int m_sample_rate{}, m_bit_rate{}, m_channels{}, m_channel_layout{}, m_flags{}, m_bytes{}, m_bs_id{}, m_samples{}, m_frame_type{}, m_sub_stream_id{};
   unsigned int m_dialog_normalization_gain{}, m_dialog_normalization_gain_bit_position{};
   boost::optional<unsigned int> m_dialog_normalization_gain2, m_dialog_normalization_gain2_bit_position;
   uint64_t m_stream_position{}, m_garbage_size{};
-  bool m_valid{};
+  bool m_valid{}, m_lfeon{};
   memory_cptr m_data;
   std::vector<frame_c> m_dependent_frames;
 
@@ -67,6 +67,9 @@ public:
   bool decode_header(unsigned char const *buffer, std::size_t buffer_size);
   bool decode_header_type_eac3(mtx::bits::reader_c &bc);
   bool decode_header_type_ac3(mtx::bits::reader_c &bc);
+
+  uint64_t get_effective_channel_layout() const;
+  int get_effective_number_of_channels() const;
 
   std::string to_string(bool verbose) const;
 

@@ -20,13 +20,48 @@
 #include "common/bit_writer.h"
 #include "common/bswap.h"
 #include "common/byte_buffer.h"
+#include "common/channels.h"
 #include "common/checksums/base.h"
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/endian.h"
+#include "common/math.h"
 #include "common/strings/formatting.h"
 
 namespace mtx { namespace ac3 {
+
+namespace {
+uint64_t s_acmod_to_channel_layout[8] = {
+  mtx::channels::front_left | mtx::channels::front_right,
+                                                           mtx::channels::front_center,
+  mtx::channels::front_left | mtx::channels::front_right,
+  mtx::channels::front_left | mtx::channels::front_right | mtx::channels::front_center,
+  mtx::channels::front_left | mtx::channels::front_right |                               mtx::channels::back_center,
+  mtx::channels::front_left | mtx::channels::front_right | mtx::channels::front_center | mtx::channels::back_center,
+  mtx::channels::front_left | mtx::channels::front_right |                               mtx::channels::side_left | mtx::channels::side_right,
+  mtx::channels::front_left | mtx::channels::front_right | mtx::channels::front_center | mtx::channels::side_left | mtx::channels::side_right,
+};
+
+uint64_t s_custom_channel_map_to_layout[16] = {
+  mtx::channels::front_left,
+  mtx::channels::front_center,
+  mtx::channels::front_right,
+  mtx::channels::side_left,
+  mtx::channels::side_right,
+  mtx::channels::front_left_of_center | mtx::channels::front_right_of_center,
+  mtx::channels::back_left | mtx::channels::back_right,
+  mtx::channels::back_center,
+  mtx::channels::top_center,
+  mtx::channels::surround_direct_left | mtx::channels::surround_direct_right,
+  mtx::channels::wide_left | mtx::channels::wide_right,
+  mtx::channels::top_front_left | mtx::channels::top_front_right,
+  mtx::channels::top_front_center,
+  mtx::channels::top_back_left | mtx::channels::top_back_right,
+  mtx::channels::low_frequency_2,
+  mtx::channels::low_frequency,
+};
+
+}
 
 void
 frame_c::init() {
@@ -51,6 +86,8 @@ frame_c::add_dependent_frame(frame_c const &frame,
                              std::size_t buffer_size) {
   m_data->add(buffer, buffer_size);
   m_dependent_frames.push_back(frame);
+
+  m_channels = get_effective_number_of_channels();
 }
 
 bool
@@ -79,7 +116,6 @@ frame_c::decode_header(unsigned char const *buffer,
 bool
 frame_c::decode_header_type_eac3(mtx::bits::reader_c &bc) {
   static const int sample_rates[] = { 48000, 44100, 32000, 24000, 22050, 16000 };
-  static const int channels[]     = {     2,     1,     2,     3,     3,     4,     4,     5 };
   static const int samples[]      = {   256,   512,   768,  1536 };
 
   m_frame_type = bc.get_bits(2);
@@ -106,17 +142,34 @@ frame_c::decode_header_type_eac3(mtx::bits::reader_c &bc) {
   m_dialog_normalization_gain_bit_position = bc.get_bit_position();
   m_dialog_normalization_gain              = bc.get_bits(5);
 
-  if (acmod == 0x00) {          // dual mono mode
-    if (bc.get_bit())           // compre
-      bc.skip_bits(8);          // compr
+  if (bc.get_bit())             // compre
+    bc.skip_bits(8);            // compr
 
+  if (acmod == 0x00) {          // dual mono mode
     m_dialog_normalization_gain2_bit_position = bc.get_bit_position();
     m_dialog_normalization_gain2              = bc.get_bits(5);
+
+    if (bc.get_bit())           // compr2e
+      bc.skip_bits(8);          // compr2
   }
 
+  if ((m_frame_type == EAC3_FRAME_TYPE_DEPENDENT) && bc.get_bit()) { // chanmape
+    auto chanmap     = bc.get_bits(16);
+    m_channel_layout = 0;
+
+    for (auto idx = 0; idx < 16; ++idx) {
+      auto mask = 1 << (15 - idx);
+      if (chanmap & mask)
+        m_channel_layout |= s_custom_channel_map_to_layout[idx];
+    }
+
+  } else
+    m_channel_layout = s_acmod_to_channel_layout[acmod];
+
   m_sample_rate = sample_rates[0x03 == fscod ? 3 + fscod2 : fscod];
-  m_channels    = channels[acmod] + lfeon;
+  m_lfeon       = lfeon;
   m_samples     = (0x03 == fscod) ? 1536 : samples[fscod2];
+  m_channels    = get_effective_number_of_channels();
 
   return true;
 }
@@ -124,7 +177,6 @@ frame_c::decode_header_type_eac3(mtx::bits::reader_c &bc) {
 bool
 frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
   static const uint16_t sample_rates[]     = { 48000, 44100, 32000 };
-  static const uint8_t channel_modes[]     = {  2,  1,  2,  3,  3,  4,  4,   5 };
   static const uint16_t bit_rates[]        = { 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 384, 448, 512, 576, 640 };
   static const uint16_t frame_sizes[38][3] = {
     { 64,   69,   96   },
@@ -192,7 +244,9 @@ frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
   m_dialog_normalization_gain              = bc.get_bits(5);
   m_sample_rate                            = sample_rates[fscod] >> sr_shift;
   m_bit_rate                               = (bit_rates[frmsizecod >> 1] * 1000) >> sr_shift;
-  m_channels                               = channel_modes[acmod] + lfeon;
+  m_lfeon                                  = lfeon;
+  m_channel_layout                         = s_acmod_to_channel_layout[acmod];
+  m_channels                               = get_effective_number_of_channels();
   m_bytes                                  = frame_sizes[frmsizecod][fscod] << 1;
 
   m_samples                                = 1536;
@@ -228,6 +282,28 @@ frame_c::find_in(unsigned char const *buffer,
   return -1;
 }
 
+uint64_t
+frame_c::get_effective_channel_layout()
+  const {
+  auto channel_layout = m_channel_layout;
+
+  for (auto const &dependent_frame : m_dependent_frames)
+    channel_layout |= dependent_frame.m_channel_layout;
+
+  return channel_layout;
+}
+
+int
+frame_c::get_effective_number_of_channels()
+  const {
+  auto num_channels = mtx::math::count_1_bits(get_effective_channel_layout()) + (m_lfeon ? 1 : 0);
+  for (auto const &dependent_frame : m_dependent_frames)
+    if (dependent_frame.m_lfeon)
+      ++num_channels;
+
+  return num_channels;
+}
+
 std::string
 frame_c::to_string(bool verbose)
   const {
@@ -241,7 +317,7 @@ frame_c::to_string(bool verbose)
                                 : m_frame_type == EAC3_FRAME_TYPE_RESERVED    ? "reserved"
                                 :                                               "unknown";
 
-  std::string output = (boost::format("position %1% size %3% garbage %2% BS ID %4% E-AC-3 %15% sample rate %5% bit rate %6% channels %7% flags %8% samples %9% type %10% (%13%) "
+  std::string output = (boost::format("position %1% size %3% garbage %2% BS ID %4% E-AC-3 %15% sample rate %5% bit rate %6% channels %7% (effective layout 0x%|16$08x|) flags %8% samples %9% type %10% (%13%) "
                                       "sub stream ID %11% has dependent frames %12% total size %14%")
                         % m_stream_position
                         % m_garbage_size
@@ -258,6 +334,7 @@ frame_c::to_string(bool verbose)
                         % frame_type
                         % (m_data ? m_data->get_size() : 0)
                         % is_eac3()
+                        % get_effective_channel_layout()
                         ).str();
 
   for (auto &frame : m_dependent_frames)

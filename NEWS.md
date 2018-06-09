@@ -34,6 +34,8 @@
   text. Fixes #2320.
 * mkvmerge: the "display unit" video track property will now be kept if it is
   set in the source file. Fixes #2317.
+* mkvmerge: E-AC-3 parser: fixed determining the number of channels for
+  streams that contain an AC-3 core with dependent E-AC-3 frames. Fixes #2283.
 
 ## Other changes
 
