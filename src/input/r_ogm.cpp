@@ -1533,8 +1533,7 @@ ogm_v_vp8_demuxer_c::create_packetizer() {
 
   ptzr_obj->set_video_pixel_width(pixel_width);
   ptzr_obj->set_video_pixel_height(pixel_height);
-  ptzr_obj->set_video_display_width(display_width);
-  ptzr_obj->set_video_display_height(display_height);
+  ptzr_obj->set_video_display_dimensions(display_width, display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
   ptzr_obj->set_track_default_duration(default_duration);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);

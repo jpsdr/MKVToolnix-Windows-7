@@ -70,13 +70,10 @@ vc1_video_packetizer_c::set_headers() {
              boost::format("vc1: display width %1% height %2% aspect_ratio_flag %3% ar_num %4% ar_den %5%\n")
              % m_seqhdr.display_width % m_seqhdr.display_height % m_seqhdr.aspect_ratio_flag % m_seqhdr.aspect_ratio_width % m_seqhdr.aspect_ratio_height);
 
-      set_video_display_width(display_width);
-      set_video_display_height(display_height);
+      set_video_display_dimensions(display_width, display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
-    } else {
-      set_video_display_width(m_seqhdr.pixel_width);
-      set_video_display_height(m_seqhdr.pixel_height);
-    }
+    } else
+      set_video_display_dimensions(m_seqhdr.pixel_width, m_seqhdr.pixel_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
     if (m_default_duration_forced)
       m_parser.set_default_duration(get_track_default_duration());

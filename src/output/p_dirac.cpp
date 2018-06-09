@@ -53,8 +53,7 @@ dirac_video_packetizer_c::set_headers() {
         display_height = std::llround(display_height * m_seqhdr.aspect_ratio_denominator / m_seqhdr.aspect_ratio_numerator);
     }
 
-    set_video_display_width(display_width);
-    set_video_display_height(display_height);
+    set_video_display_dimensions(display_width, display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
     if (m_default_duration_forced)
       m_parser.set_default_duration(get_track_default_duration());
