@@ -32,6 +32,8 @@
 * MKVToolNix GUI: header editor: the editor was wrongfully claiming that
   mandatory elements with default values cannot be removed in the "status"
   text. Fixes #2320.
+* mkvmerge: the "display unit" video track property will now be kept if it is
+  set in the source file. Fixes #2317.
 
 ## Other changes
 
