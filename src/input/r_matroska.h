@@ -58,6 +58,7 @@ struct kax_track_t {
 
   // Parameters for video tracks
   uint64_t v_width, v_height, v_dwidth, v_dheight;
+  boost::optional<uint64_t> v_dunit;
   unsigned int v_display_unit;
   uint64_t v_pcleft, v_pctop, v_pcright, v_pcbottom;
   int64_t v_colour_matrix, v_bits_per_channel;

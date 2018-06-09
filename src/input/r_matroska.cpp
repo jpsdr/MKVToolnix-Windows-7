@@ -1166,6 +1166,7 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
   track->v_height       = FindChildValue<KaxVideoPixelHeight>(ktvideo);
   track->v_dwidth       = FindChildValue<KaxVideoDisplayWidth>(ktvideo,  track->v_width);
   track->v_dheight      = FindChildValue<KaxVideoDisplayHeight>(ktvideo, track->v_height);
+  track->v_dunit        = FindChildValue<KaxVideoDisplayUnit>(ktvideo,   generic_packetizer_c::ddu_pixels);
 
   track->v_pcleft       = FindChildValue<KaxVideoPixelCropLeft>(ktvideo);
   track->v_pcright      = FindChildValue<KaxVideoPixelCropRight>(ktvideo);
@@ -2701,6 +2702,9 @@ kax_reader_c::identify() {
 
     if ((0 != track->v_dwidth) && (0 != track->v_dheight))
       info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % track->v_dwidth % track->v_dheight);
+
+    if (track->v_dunit)
+      info.set(mtx::id::display_unit, *track->v_dunit);
 
     if ((0 != track->v_pcleft) || (0 != track->v_pctop) || (0 != track->v_pcright) || (0 != track->v_pcbottom))
       info.add(mtx::id::cropping, boost::format("%1%,%2%,%3%,%4%") % track->v_pcleft % track->v_pctop % track->v_pcright % track->v_pcbottom);

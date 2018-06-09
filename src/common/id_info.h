@@ -34,6 +34,7 @@ char const * const date_utc                        = "date_utc";                
 char const * const default_duration                = "default_duration";                // track unsigned-integer
 char const * const default_track                   = "default_track";                   // track boolean
 char const * const display_dimensions              = "display_dimensions";              // track ascii-string format:^\d+x\d+$
+char const * const display_unit                    = "display_unit";                    // track unsigned-integer
 char const * const duration                        = "duration";                        // container unsigned-integer
 char const * const encoding                        = "encoding";                        // track ascii-string
 char const * const enabled_track                   = "enabled_track";                   // track boolean

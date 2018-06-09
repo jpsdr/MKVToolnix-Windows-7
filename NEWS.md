@@ -9,6 +9,9 @@
 * mkvmerge: MP4 reader: improved the detection of edit lists consisting of two
   identical entries, each spanning the file's duration as given in the movie
   header atom. The second entry is ignored in such cases. See #2306.
+* mkvmerge: JSON identification: the "display unit" video track property is
+  now reported as `display_unit`. The JSON schema has been bumped to v11 for
+  this change.
 
 ## Bug fixes
 
