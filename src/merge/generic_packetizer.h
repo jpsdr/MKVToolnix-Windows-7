@@ -44,6 +44,15 @@ enum connection_result_e {
 using packet_cptr_di = std::deque<packet_cptr>::iterator;
 
 class generic_packetizer_c {
+public:
+  enum display_dimensions_unit_e {
+    ddu_pixels       = 0,
+    ddu_centimeters  = 1,
+    ddu_inches       = 2,
+    ddu_aspect_ratio = 3,
+    ddu_unknown      = 4,
+  };
+
 protected:
   int m_num_packets;
   std::deque<packet_cptr> m_packet_queue, m_deferred_packets;
@@ -71,7 +80,7 @@ protected:
   float m_haudio_sampling_freq, m_haudio_output_sampling_freq;
   int m_haudio_channels, m_haudio_bit_depth;
 
-  int m_hvideo_interlaced_flag, m_hvideo_pixel_width, m_hvideo_pixel_height, m_hvideo_display_width, m_hvideo_display_height;
+  int m_hvideo_interlaced_flag, m_hvideo_pixel_width, m_hvideo_pixel_height, m_hvideo_display_width, m_hvideo_display_height, m_hvideo_display_unit;
 
   compression_method_e m_hcompression;
   compressor_ptr m_compressor;
@@ -207,7 +216,8 @@ public:
   virtual void set_video_pixel_dimensions(int width, int height);
   virtual void set_video_display_width(int width);
   virtual void set_video_display_height(int height);
-  virtual void set_video_display_dimensions(int width, int height, option_source_e source);
+  virtual void set_video_display_unit(int unit);
+  virtual void set_video_display_dimensions(int width, int height, int unit, option_source_e source);
   virtual void set_video_aspect_ratio(double aspect_ratio, bool is_factor, option_source_e source);
   virtual void set_video_pixel_cropping(int left, int top, int right, int bottom, option_source_e source);
   virtual void set_video_pixel_cropping(const pixel_crop_t &cropping, option_source_e source);

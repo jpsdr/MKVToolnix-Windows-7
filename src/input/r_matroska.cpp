@@ -128,7 +128,7 @@ kax_track_t::handle_packetizer_display_dimensions() {
   // these and signal the packetizer not to extract the dimensions
   // from the bitstream.
   if ((0 != v_dwidth) && (0 != v_dheight))
-    ptzr_ptr->set_video_display_dimensions(v_dwidth, v_dheight, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_display_dimensions(v_dwidth, v_dheight, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_CONTAINER);
 }
 
 void

@@ -94,6 +94,7 @@ avc_video_packetizer_c::extract_aspect_ratio() {
 
   set_video_display_dimensions(1 <= par ? std::llround(m_width * par) : m_width,
                                1 <= par ? m_height                    : std::llround(m_height / par),
+                               generic_packetizer_c::ddu_pixels,
                                OPTION_SOURCE_BITSTREAM);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,

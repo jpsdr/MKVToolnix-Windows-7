@@ -42,7 +42,7 @@ mpeg1_2_video_packetizer_c(generic_reader_c *p_reader,
   set_codec_id((boost::format("V_MPEG%1%") % version).str());
   if (!display_dimensions_or_aspect_ratio_set()) {
     if ((0 < dwidth) && (0 < dheight))
-      set_video_display_dimensions(dwidth, dheight, OPTION_SOURCE_BITSTREAM);
+      set_video_display_dimensions(dwidth, dheight, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
     else
       m_aspect_ratio_extracted = false;
   }
@@ -274,7 +274,7 @@ mpeg1_2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
   if (!mpeg1_2::extract_ar(buffer, size, ar))
     return;
 
-  set_video_display_dimensions((0 >= ar) || (1 == ar) ? m_width : (int)(m_height * ar), m_height, OPTION_SOURCE_BITSTREAM);
+  set_video_display_dimensions((0 >= ar) || (1 == ar) ? m_width : (int)(m_height * ar), m_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
   rerender_track_headers();
   m_aspect_ratio_extracted = true;

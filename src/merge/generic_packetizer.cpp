@@ -82,6 +82,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_hvideo_pixel_height{-1}
   , m_hvideo_display_width{-1}
   , m_hvideo_display_height{-1}
+  , m_hvideo_display_unit{ddu_pixels}
   , m_hcompression{COMPRESSION_UNSPECIFIED}
   , m_timestamp_factory_application_mode{TFA_AUTOMATIC}
   , m_last_cue_timestamp{-1}
@@ -183,7 +184,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   if (-2 != i) {
     display_properties_t &dprop = m_ti.m_display_properties[i];
     if (0 > dprop.aspect_ratio) {
-      set_video_display_dimensions(dprop.width, dprop.height, OPTION_SOURCE_COMMAND_LINE);
+      set_video_display_dimensions(dprop.width, dprop.height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_COMMAND_LINE);
     } else {
       set_video_aspect_ratio(dprop.aspect_ratio, dprop.ar_factor, OPTION_SOURCE_COMMAND_LINE);
       m_ti.m_aspect_ratio_given = true;
@@ -582,21 +583,32 @@ generic_packetizer_c::set_video_display_height(int height) {
 }
 
 void
+generic_packetizer_c::set_video_display_unit(int unit) {
+  m_hvideo_display_unit = unit;
+  if (   m_track_entry
+      && (   (unit != ddu_pixels)
+          || (unit != FindChildValue<KaxVideoDisplayUnit>(GetChild<KaxTrackVideo>(*m_track_entry), ddu_pixels))))
+    GetChild<KaxVideoDisplayUnit>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_unit);
+}
+
+void
 generic_packetizer_c::set_video_display_dimensions(int width,
                                                    int height,
+                                                   int unit,
                                                    option_source_e source) {
   if (display_dimensions_or_aspect_ratio_set() && (m_ti.m_display_dimensions_source >= source))
     return;
 
   m_ti.m_display_width             = width;
   m_ti.m_display_height            = height;
+  m_ti.m_display_unit              = unit;
   m_ti.m_display_dimensions_source = source;
   m_ti.m_display_dimensions_given  = true;
   m_ti.m_aspect_ratio_given        = false;
 
   set_video_display_width(width);
   set_video_display_height(height);
-
+  set_video_display_unit(unit);
 }
 
 void
@@ -608,6 +620,7 @@ generic_packetizer_c::set_video_aspect_ratio(double aspect_ratio,
 
   m_ti.m_aspect_ratio              = aspect_ratio;
   m_ti.m_aspect_ratio_is_factor    = is_factor;
+  m_ti.m_display_unit              = ddu_pixels;
   m_ti.m_display_dimensions_source = source;
   m_ti.m_display_dimensions_given  = false;
   m_ti.m_aspect_ratio_given        = true;
@@ -1059,6 +1072,9 @@ generic_packetizer_c::set_headers() {
 
       GetChild<KaxVideoDisplayWidth >(video).SetDefaultSize(4);
       GetChild<KaxVideoDisplayHeight>(video).SetDefaultSize(4);
+
+      if (m_hvideo_display_unit != ddu_pixels)
+        GetChild<KaxVideoDisplayUnit>(video).SetValue(m_hvideo_display_unit);
 
       if (m_ti.m_colour_space)
         GetChild<KaxVideoColourSpace>(video).CopyBuffer(m_ti.m_colour_space.get()->get_buffer(), m_ti.m_colour_space.get()->get_size());

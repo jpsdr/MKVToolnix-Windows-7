@@ -16,6 +16,7 @@
 #include <matroska/KaxTags.h>
 
 #include "common/ebml.h"
+#include "merge/generic_packetizer.h"
 #include "merge/track_info.h"
 
 track_info_c::track_info_c()
@@ -24,6 +25,7 @@ track_info_c::track_info_c()
   , m_aspect_ratio{}
   , m_display_width{}
   , m_display_height{}
+  , m_display_unit{generic_packetizer_c::ddu_pixels}
   , m_aspect_ratio_given{}
   , m_aspect_ratio_is_factor{}
   , m_display_dimensions_given{}

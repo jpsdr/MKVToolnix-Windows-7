@@ -129,7 +129,7 @@ hevc_es_video_packetizer_c::handle_aspect_ratio() {
     return;
 
   auto dimensions = m_parser.get_display_dimensions(m_hvideo_pixel_width, m_hvideo_pixel_height);
-  set_video_display_dimensions(dimensions.first, dimensions.second, OPTION_SOURCE_BITSTREAM);
+  set_video_display_dimensions(dimensions.first, dimensions.second, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,
              boost::format(Y("Extracted the aspect ratio information from the HEVC video data "

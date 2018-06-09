@@ -2690,7 +2690,7 @@ qtmp4_demuxer_c::set_packetizer_display_dimensions() {
       && (display_height != 0)
       && (   (v_width  != display_width)
           || (v_height != display_height)))
-    m_reader.m_reader_packetizers[ptzr]->set_video_display_dimensions(display_width, display_height, OPTION_SOURCE_CONTAINER);
+    m_reader.m_reader_packetizers[ptzr]->set_video_display_dimensions(display_width, display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_CONTAINER);
 }
 
 void

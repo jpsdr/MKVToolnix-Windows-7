@@ -243,7 +243,7 @@ public:
   std::string m_fourcc;
   std::map<int64_t, display_properties_t> m_display_properties;
   float m_aspect_ratio;
-  int m_display_width, m_display_height;
+  int m_display_width, m_display_height, m_display_unit;
   bool m_aspect_ratio_given, m_aspect_ratio_is_factor, m_display_dimensions_given;
   option_source_e m_display_dimensions_source;
 
