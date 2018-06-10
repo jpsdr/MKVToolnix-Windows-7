@@ -189,7 +189,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
                    addItem(Page::DefaultValues,       pMerge,  QY("Default values"));
                    addItem(Page::DeriveTrackLanguage, pMerge,  QY("Deriving track languages"));
                    addItem(Page::Output,              pMerge,  QY("Destination file name"));
-                   addItem(Page::EnablingTracks,      pMerge,  QY("Enabling tracks"));
+                   addItem(Page::EnablingTracks,      pMerge,  QY("Enabling items"));
                    addItem(Page::Playlists,           pMerge,  QY("Playlists"));
                    addItem(Page::Info,                nullptr, QY("Info tool"),             "document-preview-archive");
                    addItem(Page::HeaderEditor,        nullptr, QY("Header editor"),         "document-edit");
@@ -391,8 +391,8 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified destination file name.")));
   Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."));
 
-  ui->tbMEnableMuxingTracksByType->setToolTips(QY("Only tracks whose type is in the 'selected' list on the right will be set to be copied by default."),
-                                               QY("Only tracks whose type is in the 'selected' list on the right will be set to be copied by default."));
+  ui->tbMEnableMuxingTracksByType->setToolTips(QY("Only items whose type is in the 'selected' list on the right will be set to be copied by default."),
+                                               QY("Only items whose type is in the 'selected' list on the right will be set to be copied by default."));
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("When adding source files all tracks are normally set to be copied into the destination file."))
