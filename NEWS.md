@@ -2,21 +2,26 @@
 
 ## New features and enhancements
 
-* mkvextract: VobSub extraction: empty SPU packets will now be dropped during
-  extraction as other tools such as MP4Box cannot handle them
-  correctly. Implements #2293.
-* mkvmerge, mkvextract: AVC/h.264: empty NALUs will now be removed.
 * mkvmerge: MP4 reader: improved the detection of edit lists consisting of two
   identical entries, each spanning the file's duration as given in the movie
   header atom. The second entry is ignored in such cases. See #2306.
 * mkvmerge: JSON identification: the "display unit" video track property is
   now reported as `display_unit`. The JSON schema has been bumped to v11 for
   this change.
+* mkvmerge, mkvextract: AVC/h.264: empty NALUs will now be removed.
+* mkvextract: VobSub extraction: empty SPU packets will now be dropped during
+  extraction as other tools such as MP4Box cannot handle them
+  correctly. Implements #2293.
 
 ## Bug fixes
 
-* MKVToolNix GUI: preferences: on macOS & Linux the setting "enable copying
-  tracks by their type" wasn't restored on program start. Fixes #2297.
+* mkvmerge: E-AC-3 parser: fixed determining the number of channels for
+  streams that contain an AC-3 core with dependent E-AC-3 frames. Fixes #2283.
+* mkvmerge: Matroska reader: fixed mkvmerge buffering the whole file if a
+  video track is multiplexed that consists of only one or a few frames. Fixes
+  #2304.
+* mkvmerge: the "display unit" video track property will now be kept if it is
+  set in the source file. Fixes #2317.
 * MKVToolNix GUI: multiplexer: when scanning playlists, all playlists were
   offered for selection regardless of the value of the "minimum playlist
   duration" setting. Fixes #2299.
@@ -24,18 +29,13 @@
   regular sub-expressions for ISO 639-1 codes could match on empty strings,
   too, causing matches in wrong places and hence no language being recognized
   in certain situations. Fixes #2298.
-* mkvmerge: Matroska reader: fixed mkvmerge buffering the whole file if a
-  video track is multiplexed that consists of only one or a few frames. Fixes
-  #2304.
 * MKVToolNix GUI: header editor: fixed a crash when saving the file fails
   (e.g. because it isn't writable). Fixes #2319.
 * MKVToolNix GUI: header editor: the editor was wrongfully claiming that
   mandatory elements with default values cannot be removed in the "status"
   text. Fixes #2320.
-* mkvmerge: the "display unit" video track property will now be kept if it is
-  set in the source file. Fixes #2317.
-* mkvmerge: E-AC-3 parser: fixed determining the number of channels for
-  streams that contain an AC-3 core with dependent E-AC-3 frames. Fixes #2283.
+* MKVToolNix GUI: preferences: on macOS & Linux the setting "enable copying
+  tracks by their type" wasn't restored on program start. Fixes #2297.
 
 ## Other changes
 
