@@ -33,7 +33,7 @@ JOBS=4
 CXX="g++"
 
 #VERSION="git"
-VERSION="23.0.0"
+VERSION="24.0.0"
 
 mtxdir="mkvtoolnix-$VERSION"
 mtxurl="https://mkvtoolnix.download/sources/${mtxdir}.tar.xz"

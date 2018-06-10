@@ -1,4 +1,4 @@
-# Version ?
+# Version 24.0.0 "Beyond The Pale" 2018-06-10
 
 ## New features and enhancements
 
