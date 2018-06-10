@@ -340,8 +340,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("The following placeholders can be used to match the list of recognized languages: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' and '<LANGUAGE_NAMES>'."))
                    .arg(QYH("Only English language names are supported.")));
   Util::setToolTip(ui->pbMDeriveTrackLanguageRevertCustomRegex, QY("Revert the regular expression to its default value."));
-  ui->tbMDeriveTrackLanguageRecognizedLanguages->setToolTips(QY("Only the languages in the 'selected' list on the right will be recognized as track languages in file names."),
-                                                             QY("Only the languages in the 'selected' list on the right will be recognized as track languages in file names."));
+  ui->tbMDeriveTrackLanguageRecognizedLanguages->setToolTips(QY("Only the languages in the 'selected' list on the right will be recognized as track languages in file names."));
 
   Util::setToolTip(ui->cbMDefaultAudioTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
@@ -391,8 +390,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified destination file name.")));
   Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."));
 
-  ui->tbMEnableMuxingTracksByType->setToolTips(QY("Only items whose type is in the 'selected' list on the right will be set to be copied by default."),
-                                               QY("Only items whose type is in the 'selected' list on the right will be set to be copied by default."));
+  ui->tbMEnableMuxingTracksByType->setToolTips(QY("Only items whose type is in the 'selected' list on the right will be set to be copied by default."));
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("When adding source files all tracks are normally set to be copied into the destination file."))
@@ -406,22 +404,19 @@ PreferencesDialog::setupToolTips() {
                                                    QY("Only tracks with a language in this list will be set to be copied by default."));
 
   // Often used XYZ page
-  ui->tbOftenUsedLanguages->setToolTips(QY("The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."),
-                                        QY("The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."));
+  ui->tbOftenUsedLanguages->setToolTips(QY("The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedLanguagesOnly,
                    Q("%1 %2")
                    .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
-  ui->tbOftenUsedCountries->setToolTips(QY("The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."),
-                                        QY("The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."));
+  ui->tbOftenUsedCountries->setToolTips(QY("The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedCountriesOnly,
                    Q("%1 %2")
                    .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
-  ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."),
-                                            QY("The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."));
+  ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedCharacterSetsOnly,
                    Q("%1 %2")
                    .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))

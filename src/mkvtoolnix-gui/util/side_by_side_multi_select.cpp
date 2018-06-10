@@ -46,7 +46,7 @@ SideBySideMultiSelect::setToolTips(QString const &available,
   auto p = p_func();
 
   Util::setToolTip(p->ui->available, available);
-  Util::setToolTip(p->ui->selected,  selected);
+  Util::setToolTip(p->ui->selected,  selected.isEmpty() ? available : selected);
 }
 
 void
