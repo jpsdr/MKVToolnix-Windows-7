@@ -74,7 +74,9 @@ ValuePage::init() {
     if (semantic && semantic->Mandatory) {
       std::unique_ptr<EbmlElement> elt(&semantic->Create());
       m_mayBeRemoved = elt->DefaultISset();
-    }
+
+    } else if (semantic && !semantic->Mandatory)
+      m_mayBeRemoved = true;
 
     m_cbAddOrRemove->setEnabled(m_mayBeRemoved);
   }
