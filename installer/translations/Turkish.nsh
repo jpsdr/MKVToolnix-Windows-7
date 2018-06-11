@@ -8,9 +8,9 @@
 !insertmacro LANG_STRING STRING_MFF_MORE_INFORMATION "More information"
 # The next entry needs translations:
 !insertmacro LANG_STRING STRING_MFF_NOT_FOUND "Your Windows installation seems to lack Microsoft's 'Media Foundation' framework. This framework is required by MKVToolNix. Please install it and run the MKVToolNix installer again."
-!insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "GKA tarafýndan oluþturulan iþ dosyalarý da silinsin mi?"
-!insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "Gerçekten $(^Name) uygulamasýný ve tüm bileþenlerini kaldýrmak istiyor musunuz?"
-!insertmacro LANG_STRING STRING_UNINSTALLED_OK "$(^Name) baþarýlý olarak kaldýrýldý."
+!insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "GKA tarafÄ±ndan oluÅŸturulan iÅŸ dosyalarÄ± da silinsin mi?"
+!insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "GerÃ§ekten $(^Name) uygulamasÄ±nÄ± ve tÃ¼m bileÅŸenlerini kaldÄ±rmak istiyor musunuz?"
+!insertmacro LANG_STRING STRING_UNINSTALLED_OK "$(^Name) baÅŸarÄ±lÄ± olarak kaldÄ±rÄ±ldÄ±."
 
 # Local Variables:
 # mode: nsis

@@ -17,5 +17,4 @@
 
 # Local Variables:
 # mode: nsis
-# coding: cp950
 # End:
