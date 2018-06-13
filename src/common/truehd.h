@@ -105,6 +105,7 @@ protected:
 
   mtx::bytes::buffer_c m_buffer;
   std::deque<frame_cptr> m_frames;
+  frame_t::codec_e m_sync_codec{frame_t::truehd};
 
 public:
   parser_c();

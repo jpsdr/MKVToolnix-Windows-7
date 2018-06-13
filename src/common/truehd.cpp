@@ -235,6 +235,13 @@ parser_c::parse(bool end_of_stream) {
 
     frame->m_data = memory_c::clone(&data[offset], frame->m_size);
 
+    if (frame->is_truehd() || frame->is_mlp()) {
+      if (frame->is_sync())
+        m_sync_codec = frame->m_codec;
+
+      else
+        frame->m_codec = m_sync_codec;
+    }
 
     mxdebug_if(s_debug,
                boost::format("codec %7% type %1% offset %2% size %3% channels %4% sampling_rate %5% samples_per_frame %6%\n")
