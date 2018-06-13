@@ -13,6 +13,9 @@
   is the HEVC analog to what was fixed for AVC in #2325.
 * mkvmerge: MLP code: fixed various issues preventing MLP from being parsed
   correctly. Fixes #2326.
+* mkvmerge: TrueHD/MLP packetizer; dialog volume normalization removal isn't
+  attempted if the track is an MLP track as the operation is only supported
+  for TrueHD, not MLP.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10

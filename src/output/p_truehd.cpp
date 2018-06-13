@@ -71,7 +71,7 @@ truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
   auto timestamp = m_timestamp_calculator.get_next_timestamp(samples).to_ns();
   auto duration  = m_timestamp_calculator.get_duration(samples).to_ns();
 
-  if (frame->is_sync() && m_remove_dialog_normalization_gain)
+  if (frame->is_sync() && frame->is_truehd() && m_remove_dialog_normalization_gain)
     mtx::truehd::remove_dialog_normalization_gain(frame->m_data->get_buffer(), frame->m_data->get_size());
 
   add_packet(std::make_shared<packet_t>(frame->m_data, timestamp, duration, frame->is_sync() ? -1 : m_ref_timestamp));
