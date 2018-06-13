@@ -5,6 +5,9 @@
 * MKVToolNix GUI: header editor: non-mandatory elements couldn't be removed
   anymore due to a regression while fixing #2320. They can now be removed
   again. Fixes #2322.
+* mkvmerge: AVC/h.264: fixed file identification failing for certain
+  elementary streams due to internal buffers not being cleared properly. Fixes
+  #2325.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10

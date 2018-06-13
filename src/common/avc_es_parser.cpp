@@ -190,6 +190,13 @@ es_parser_c::flush() {
 }
 
 void
+es_parser_c::clear() {
+  m_unparsed_buffer.reset();
+  m_have_incomplete_frame = false;
+  m_parsed_position       = 0;
+}
+
+void
 es_parser_c::add_timestamp(int64_t timestamp) {
   m_provided_timestamps.emplace_back(timestamp, m_stream_position);
   ++m_stats.num_timestamps_in;
