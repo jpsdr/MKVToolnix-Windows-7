@@ -8,6 +8,9 @@
 * mkvmerge: AVC/h.264: fixed file identification failing for certain
   elementary streams due to internal buffers not being cleared properly. Fixes
   #2325.
+* mkvmerge: HEVC/h.265: fixed file identification failing for certain
+  elementary streams due to internal buffers not being cleared properly. This
+  is the HEVC analog to what was fixed for AVC in #2325.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10

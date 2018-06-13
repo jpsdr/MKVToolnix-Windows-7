@@ -89,13 +89,12 @@ hevc_es_reader_c::read_headers() {
         break;
     }
 
-    if (parser.headers_parsed())
-      parser.flush();
-
     m_width  = parser.get_width();
     m_height = parser.get_height();
 
     m_in->setFilePointer(0, seek_beginning);
+
+    parser.clear();
 
   } catch (...) {
     throw mtx::input::open_x();

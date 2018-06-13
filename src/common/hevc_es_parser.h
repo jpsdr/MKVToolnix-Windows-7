@@ -119,6 +119,7 @@ public:
   }
 
   void flush();
+  void clear();
 
   bool frame_available() {
     return !m_frames_out.empty();
