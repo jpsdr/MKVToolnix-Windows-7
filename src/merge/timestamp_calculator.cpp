@@ -45,8 +45,15 @@ timestamp_calculator_c::add_timestamp(timestamp_c const &timestamp,
 void
 timestamp_calculator_c::add_timestamp(int64_t timestamp,
                                       boost::optional<uint64_t> stream_position) {
-  if (-1 != timestamp)
+  if (0 <= timestamp)
     add_timestamp(timestamp_c::ns(timestamp), stream_position);
+}
+
+void
+timestamp_calculator_c::add_timestamp(boost::optional<int64_t> const &timestamp,
+                                      boost::optional<uint64_t> stream_position) {
+  if (timestamp && (0 <= *timestamp))
+    add_timestamp(timestamp_c::ns(*timestamp), stream_position);
 }
 
 void

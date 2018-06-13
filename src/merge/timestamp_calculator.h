@@ -34,6 +34,7 @@ private:
 public:
   timestamp_calculator_c(int64_t samples_per_second);
 
+  void add_timestamp(boost::optional<int64_t> const &timestamp, boost::optional<uint64_t> stream_position = boost::none);
   void add_timestamp(timestamp_c const &timestamp, boost::optional<uint64_t> stream_position = boost::none);
   void add_timestamp(int64_t timestamp, boost::optional<uint64_t> stream_position = boost::none);
   void add_timestamp(packet_cptr const &packet, boost::optional<uint64_t> stream_position = boost::none);
