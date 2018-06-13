@@ -198,6 +198,8 @@ parser_c::add_data(unsigned char const *new_data,
 
 void
 parser_c::parse(bool end_of_stream) {
+  static debugging_option_c s_debug{"truehd_parser"};
+
   unsigned char *data = m_buffer.get_buffer();
   unsigned int size   = m_buffer.get_size();
   unsigned int offset = 0;
@@ -233,15 +235,17 @@ parser_c::parse(bool end_of_stream) {
 
     frame->m_data = memory_c::clone(&data[offset], frame->m_size);
 
-    mxverb(3,
-           boost::format("codec %7% type %1% offset %2% size %3% channels %4% sampling_rate %5% samples_per_frame %6%\n")
-           % (  frame->is_sync()   ? "S"
-              : frame->is_normal() ? "n"
-              : frame->is_ac3()    ? "A"
-              :                      "x")
-           % offset % frame->m_size % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame
-           % (  frame->is_truehd() ? "TrueHD"
-              :                      "MLP"));
+
+    mxdebug_if(s_debug,
+               boost::format("codec %7% type %1% offset %2% size %3% channels %4% sampling_rate %5% samples_per_frame %6%\n")
+               % (  frame->is_sync()   ? "S"
+                  : frame->is_normal() ? "n"
+                  : frame->is_ac3()    ? "A"
+                  :                      "x")
+               % offset % frame->m_size % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame
+               % (  frame->is_truehd() ? "TrueHD"
+                  : frame->is_mlp()    ? "MLP"
+                  :                      "AC-3"));
 
     m_frames.push_back(frame);
 
