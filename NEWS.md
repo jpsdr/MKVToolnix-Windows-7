@@ -11,6 +11,8 @@
 * mkvmerge: HEVC/h.265: fixed file identification failing for certain
   elementary streams due to internal buffers not being cleared properly. This
   is the HEVC analog to what was fixed for AVC in #2325.
+* mkvmerge: MLP code: fixed various issues preventing MLP from being parsed
+  correctly. Fixes #2326.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10
