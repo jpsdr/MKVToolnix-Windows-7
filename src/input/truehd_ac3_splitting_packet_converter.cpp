@@ -62,7 +62,7 @@ truehd_ac3_splitting_packet_converter_c::process_frames() {
   while (m_parser.frame_available()) {
     auto frame = m_parser.get_next_frame();
 
-    if (frame->is_truehd() && m_ptzr) {
+    if ((frame->is_truehd() || frame->is_mlp()) && m_ptzr) {
       static_cast<truehd_packetizer_c *>(m_ptzr)->process_framed(frame, m_truehd_timestamp);
       m_truehd_timestamp = -1;
 
