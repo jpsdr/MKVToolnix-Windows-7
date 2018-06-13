@@ -65,7 +65,7 @@ struct frame_t {
   }
 
   bool is_normal() const {
-    return sync == m_type;
+    return normal == m_type;
   }
 
   bool is_ac3() const {
