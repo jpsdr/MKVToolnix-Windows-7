@@ -33,7 +33,7 @@ public:
   virtual ~truehd_packetizer_c();
 
   virtual int process(packet_cptr packet);
-  virtual void process_framed(mtx::truehd::frame_cptr const &frame, int64_t provided_timestamp);
+  virtual void process_framed(mtx::truehd::frame_cptr const &frame, boost::optional<int64_t> provided_timestamp = {});
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {

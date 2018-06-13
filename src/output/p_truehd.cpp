@@ -56,7 +56,7 @@ truehd_packetizer_c::set_headers() {
 
 void
 truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
-                                    int64_t provided_timestamp) {
+                                    boost::optional<int64_t> provided_timestamp) {
   m_timestamp_calculator.add_timestamp(provided_timestamp);
 
   if (frame->is_ac3())
@@ -93,7 +93,7 @@ truehd_packetizer_c::process(packet_cptr packet) {
 void
 truehd_packetizer_c::flush_frames() {
   while (m_parser.frame_available())
-    process_framed(m_parser.get_next_frame(), -1);
+    process_framed(m_parser.get_next_frame());
 }
 
 void
