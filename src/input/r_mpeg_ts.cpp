@@ -112,7 +112,7 @@ track_c::track_c(reader_c &p_reader,
   , skip_packet_data_bytes{}
   , m_debug_delivery{}
   , m_debug_timestamp_wrapping{}
-  , m_debug_headers{"mpeg_ts|headers"}
+  , m_debug_headers{"mpeg_ts|mpeg_ts_headers"}
 {
 }
 
@@ -527,11 +527,11 @@ track_c::set_pid(uint16_t new_pid) {
 
   std::string arg;
   m_debug_delivery = debugging_c::requested("mpeg_ts")
-                  || (   debugging_c::requested("delivery", &arg)
+                  || (   debugging_c::requested("mpeg_ts_delivery", &arg)
                       && (arg.empty() || (arg == to_string(pid))));
 
   m_debug_timestamp_wrapping = debugging_c::requested("mpeg_ts")
-                            || (   debugging_c::requested("timestamp_wrapping", &arg)
+                            || (   debugging_c::requested("mpeg_ts_timestamp_wrapping", &arg)
                                 && (arg.empty() || (arg == to_string(pid))));
 }
 
@@ -1056,15 +1056,15 @@ reader_c::reader_c(const track_info_c &ti,
                    const mm_io_cptr &in)
   : generic_reader_c(ti, in)
   , m_current_file{}
-  , m_dont_use_audio_pts{      "mpeg_ts|dont_use_audio_pts"}
-  , m_debug_resync{            "mpeg_ts|resync"}
-  , m_debug_pat_pmt{           "mpeg_ts|pat|pmt|headers"}
-  , m_debug_sdt{               "mpeg_ts|sdt|headers"}
-  , m_debug_headers{           "mpeg_ts|headers"}
-  , m_debug_pes_headers{       "mpeg_ts|headers|pes_headers"}
-  , m_debug_packet{            "mpeg_ts|packet"}
-  , m_debug_aac{               "mpeg_ts|mpeg_aac"}
-  , m_debug_timestamp_wrapping{"mpeg_ts|timestamp_wrapping"}
+  , m_dont_use_audio_pts{      "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
+  , m_debug_resync{            "mpeg_ts|mpeg_ts_resync"}
+  , m_debug_pat_pmt{           "mpeg_ts|mpeg_ts_pat|mpeg_ts_headers|mpeg_ts_pmt"}
+  , m_debug_sdt{               "mpeg_ts|mpeg_ts_sdt|mpeg_ts_headers"}
+  , m_debug_headers{           "mpeg_ts|mpeg_ts_headers"}
+  , m_debug_pes_headers{       "mpeg_ts|mpeg_ts_headers|mpeg_ts_pes_headers"}
+  , m_debug_packet{            "mpeg_ts|mpeg_ts_packet"}
+  , m_debug_aac{               "mpeg_ts|mpeg_ts_aac"}
+  , m_debug_timestamp_wrapping{"mpeg_ts|mpeg_ts_timestamp_wrapping"}
   , m_debug_clpi{              "mpeg_ts|mpeg_ts_clpi|clpi"}
   , m_debug_mpls{              "mpeg_ts|mpeg_ts_mpls|mpls"}
 {
