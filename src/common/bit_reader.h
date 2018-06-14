@@ -194,11 +194,11 @@ public:
   }
 
   int get_bit_position() const {
-    return (m_byte_position - m_start_of_data) * 8 + 8 - m_bits_valid;
+    return (m_byte_position - m_start_of_data) * 8 + (m_bits_valid ? 8 - m_bits_valid : 0);
   }
 
   int get_remaining_bits() const {
-    return (m_end_of_data - m_byte_position) * 8 - 8 + m_bits_valid;
+    return (m_end_of_data - m_byte_position) * 8 - (m_bits_valid ? 8 - m_bits_valid : 0);
   }
 
   void skip_bits(std::size_t num) {

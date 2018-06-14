@@ -20,6 +20,15 @@ TEST(BitReader, Initialization) {
   EXPECT_FALSE(b.eof());
 }
 
+TEST(BitReader, InitializationEmpty) {
+  unsigned char value{};
+  auto b = mtx::bits::reader_c{&value, 0};
+
+  EXPECT_EQ(0, b.get_bit_position());
+  EXPECT_EQ(0, b.get_remaining_bits());
+  EXPECT_TRUE(b.eof());
+}
+
 TEST(BitReader, GetBit) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
