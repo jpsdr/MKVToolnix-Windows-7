@@ -16,6 +16,10 @@
 * mkvmerge: TrueHD/MLP packetizer; dialog volume normalization removal isn't
   attempted if the track is an MLP track as the operation is only supported
   for TrueHD, not MLP.
+* mkvmerge: MPEG TS reader: when reading MPLS mkvmerge will now compare the
+  MPLS's start and end timestamps against the transport stream's PTS instead
+  of its DTS. Otherwise the first key frame of a video track might be dropped
+  if it isn't the first in presentation order. Fixes #2321.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10

@@ -130,7 +130,7 @@ track_c::send_to_packetizer() {
                           : m_apply_dts_timestamp_fix && (m_previous_timestamp == m_timestamp) ? timestamp_c{}
                           :                                                                      std::max(m_timestamp, f.m_global_timestamp_offset);
 
-  auto timestamp_to_check = timestamp_to_use.valid() ? timestamp_to_use : f.m_stream_timestamp;
+  auto timestamp_to_check = f.m_stream_timestamp.valid() ? f.m_stream_timestamp : timestamp_c::ns(0);
   auto const &min         = f.m_timestamp_restriction_min;
   auto const &max         = f.m_timestamp_restriction_max;
   auto use_packet         = ptzr != -1;
@@ -139,13 +139,11 @@ track_c::send_to_packetizer() {
       || (max.valid() && (timestamp_to_check > max)))
     use_packet = false;
 
-  if (timestamp_to_use.valid()) {
-    f.m_stream_timestamp  = timestamp_to_use;
-    timestamp_to_use     -= std::max(f.m_global_timestamp_offset, min.valid() ? min : timestamp_c::ns(0));
-  }
+  if (timestamp_to_use.valid() && f.m_global_timestamp_offset.valid())
+    timestamp_to_use -= std::min(timestamp_to_use, f.m_global_timestamp_offset);
 
-  mxdebug_if(m_debug_delivery, boost::format("send_to_packetizer: PID %1% expected %2% actual %3% timestamp_to_use %4% m_previous_timestamp %5%\n")
-             % pid % pes_payload_size_to_read % pes_payload_read->get_size() % timestamp_to_use % m_previous_timestamp);
+  mxdebug_if(m_debug_delivery, boost::format("send_to_packetizer: PID %1% expected %2% actual %3% timestamp_to_use %4% m_previous_timestamp %5% stream_timestamp %6% restriction %7%/%8% use? %9%\n")
+             % pid % pes_payload_size_to_read % pes_payload_read->get_size() % timestamp_to_use % m_previous_timestamp % f.m_stream_timestamp % min % max % use_packet);
 
   if (use_packet) {
     auto bytes_to_skip = std::min<size_t>(pes_payload_read->get_size(), skip_packet_data_bytes);
@@ -1888,6 +1886,7 @@ reader_c::parse_pes(track_c &track) {
 
   if (pts.valid()) {
     track.m_previous_valid_timestamp = pts;
+    f.m_stream_timestamp             = pts;
 
     if (   mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video)
         && (   !f.m_global_timestamp_offset.valid()
