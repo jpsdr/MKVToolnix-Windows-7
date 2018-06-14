@@ -1267,6 +1267,10 @@ reader_c::determine_global_timestamp_offset() {
   f.m_in->clear_eof();
 
   reset_processing_state(processing_state_e::muxing);
+
+  if (debugging_c::requested("mpeg_ts_dont_offset_timestamps"))
+    for (auto const &file : m_files)
+      file->m_global_timestamp_offset = timestamp_c::ns(0);
 }
 
 void
