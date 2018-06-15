@@ -99,18 +99,18 @@ xio_lseek(int fd,
           int64_t offset,
           int whence) {
   uint64_t expected_pos;
-  seek_mode smode;
+  libebml::seek_mode smode;
 
   if ((fd < 0) || (fd >= MAX_INSTANCES) || (instances[fd] == NULL))
     return (int64_t)-1;
   if (whence == SEEK_SET) {
-    smode = seek_beginning;
+    smode = libebml::seek_beginning;
     expected_pos = offset;
   } else if (whence == SEEK_END) {
-    smode = seek_end;
+    smode = libebml::seek_end;
     expected_pos = instances[fd]->get_size() - offset;
   } else {
-    smode = seek_current;
+    smode = libebml::seek_current;
     expected_pos = instances[fd]->getFilePointer() + offset;
   }
   instances[fd]->setFilePointer(offset, smode);

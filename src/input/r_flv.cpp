@@ -317,7 +317,7 @@ flv_reader_c::read_headers() {
   mxdebug_if(m_debug, boost::format("Detection finished at %1%; audio valid? %2%; video valid? %3%; number valid tracks: %4%; min timestamp: %5%\n")
              % m_in->getFilePointer() % audio_track_valid % video_track_valid % m_tracks.size() % format_timestamp(m_min_timestamp.get_value_or(0) * 1000000ll));
 
-  m_in->setFilePointer(9, seek_beginning); // rewind file for later remux
+  m_in->setFilePointer(9); // rewind file for later remux
   m_file_done     = false;
   m_min_timestamp = m_min_timestamp.get_value_or(0);
 }

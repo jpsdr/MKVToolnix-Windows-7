@@ -31,7 +31,7 @@ mm_read_buffer_io_c::mm_read_buffer_io_c(mm_io_cptr const &in,
   , m_debug_seek{"read_buffer_io|read_buffer_io_read"}
   , m_debug_read{"read_buffer_io|read_buffer_io_read"}
 {
-  setFilePointer(in->getFilePointer(), seek_beginning);
+  setFilePointer(in->getFilePointer());
 }
 
 mm_read_buffer_io_c::~mm_read_buffer_io_c() {
@@ -45,7 +45,7 @@ mm_read_buffer_io_c::getFilePointer() {
 
 void
 mm_read_buffer_io_c::setFilePointer(int64 offset,
-                                    seek_mode mode) {
+                                    libebml::seek_mode mode) {
   if (!m_buffering) {
     m_proxy_io->setFilePointer(offset, mode);
     return;
@@ -58,17 +58,17 @@ mm_read_buffer_io_c::setFilePointer(int64 offset,
   m_eof = false;
 
   switch (mode) {
-    case seek_beginning:
+    case libebml::seek_beginning:
       new_pos = offset;
       break;
 
-    case seek_current:
+    case libebml::seek_current:
       new_pos  = m_offset;
       new_pos += m_cursor;
       new_pos += offset;
       break;
 
-    case seek_end:
+    case libebml::seek_end:
       new_pos = static_cast<int64_t>(get_size()) + offset; // offsets from the end are negative already
       break;
 
@@ -86,7 +86,7 @@ mm_read_buffer_io_c::setFilePointer(int64 offset,
   int64_t previous_pos = m_proxy_io->getFilePointer();
 
   // Actual seeking
-  m_proxy_io->setFilePointer(std::min(new_pos, get_size()), seek_beginning);
+  m_proxy_io->setFilePointer(std::min(new_pos, get_size()));
 
   // Get the actual offset from the underlying stream
   // Better be safe than sorry and use this instead of just taking

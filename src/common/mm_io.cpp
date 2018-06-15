@@ -66,7 +66,8 @@ mm_io_c::getline2(std::string &s,
 }
 
 bool
-mm_io_c::setFilePointer2(int64 offset, seek_mode mode) {
+mm_io_c::setFilePointer2(int64 offset,
+                         libebml::seek_mode mode) {
   try {
     setFilePointer(offset, mode);
     return true;
@@ -423,7 +424,7 @@ mm_io_c::write_bom(const std::string &charset_) {
   } else
     return false;
 
-  setFilePointer(0, seek_beginning);
+  setFilePointer(0);
 
   m_bom_written = write(bom, bom_len) == bom_len;
 
@@ -440,7 +441,7 @@ int64_t
 mm_io_c::get_size() {
   if (-1 == m_cached_size) {
     save_pos();
-    setFilePointer(0, seek_end);
+    setFilePointer(0, libebml::seek_end);
     m_cached_size = getFilePointer();
     restore_pos();
   }

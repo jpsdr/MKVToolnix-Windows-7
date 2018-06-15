@@ -33,10 +33,10 @@ xtr_avi_c::xtr_avi_c(const std::string &codec_id,
 
 void
 xtr_avi_c::create_file(xtr_base_c *master,
-                       KaxTrackEntry &track) {
+                       libmatroska::KaxTrackEntry &track) {
   init_content_decoder(track);
 
-  KaxCodecPrivate *priv = FindChild<KaxCodecPrivate>(&track);
+  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 

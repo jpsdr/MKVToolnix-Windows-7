@@ -334,7 +334,7 @@ change_c::validate_deletion_of_mandatory() {
 
 const EbmlSemantic *
 change_c::get_semantic() {
-  return find_ebml_semantic(KaxSegment::ClassInfos, m_property.m_callbacks->GlobalId);
+  return find_ebml_semantic(libmatroska::KaxSegment::ClassInfos, m_property.m_callbacks->GlobalId);
 }
 
 change_cptr

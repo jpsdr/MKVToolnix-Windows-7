@@ -18,7 +18,7 @@ namespace Ui {
 class Tab;
 }
 
-using KaxAttachedPtr  = std::shared_ptr<KaxAttached>;
+using KaxAttachedPtr  = std::shared_ptr<libmatroska::KaxAttached>;
 
 class AttachmentsPage;
 class TopLevelPage;

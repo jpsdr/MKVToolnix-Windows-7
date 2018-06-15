@@ -19,9 +19,10 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
-
+using namespace libmatroska;
 using namespace mtx::gui;
+
+namespace mtx { namespace gui { namespace HeaderEditor {
 
 AttachedFilePage::AttachedFilePage(Tab &parent,
                                    PageBase &topLevelPage,

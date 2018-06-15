@@ -15,8 +15,8 @@ namespace Ui {
 class AttachmentsPage;
 }
 
-using KaxAttachedPtr  = std::shared_ptr<KaxAttached>;
-using KaxAttachedList = QList< std::shared_ptr<KaxAttached> >;
+using KaxAttachedPtr  = std::shared_ptr<libmatroska::KaxAttached>;
+using KaxAttachedList = QList<KaxAttachedPtr>;
 
 class AttachmentsPage: public TopLevelPage {
   Q_OBJECT;

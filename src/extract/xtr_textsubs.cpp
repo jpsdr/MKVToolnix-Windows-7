@@ -37,7 +37,7 @@ xtr_srt_c::xtr_srt_c(const std::string &codec_id,
 
 void
 xtr_srt_c::create_file(xtr_base_c *master,
-                       KaxTrackEntry &track) {
+                       libmatroska::KaxTrackEntry &track) {
   xtr_base_c::create_file(master, track);
   m_out->write_bom(m_sub_charset);
 }
@@ -87,8 +87,8 @@ xtr_ssa_c::xtr_ssa_c(const std::string &codec_id,
 
 void
 xtr_ssa_c::create_file(xtr_base_c *master,
-                       KaxTrackEntry &track) {
-  KaxCodecPrivate *priv = FindChild<KaxCodecPrivate>(&track);
+                       libmatroska::KaxTrackEntry &track) {
+  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 
@@ -265,8 +265,8 @@ xtr_usf_c::xtr_usf_c(const std::string &codec_id,
 
 void
 xtr_usf_c::create_file(xtr_base_c *master,
-                       KaxTrackEntry &track) {
-  KaxCodecPrivate *priv = FindChild<KaxCodecPrivate>(&track);
+                       libmatroska::KaxTrackEntry &track) {
+  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 
@@ -275,7 +275,7 @@ xtr_usf_c::create_file(xtr_base_c *master,
   memory_cptr new_priv = decode_codec_private(priv);
   m_codec_private.append((const char *)new_priv->get_buffer(), new_priv->get_size());
 
-  KaxTrackLanguage *language = FindChild<KaxTrackLanguage>(&track);
+  auto language = FindChild<libmatroska::KaxTrackLanguage>(&track);
   if (!language)
     m_language = "eng";
   else

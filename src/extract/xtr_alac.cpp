@@ -39,11 +39,12 @@ xtr_alac_c::xtr_alac_c(std::string const &codec_id,
 }
 
 void
-xtr_alac_c::create_file(xtr_base_c *master, KaxTrackEntry &track) {
+xtr_alac_c::create_file(xtr_base_c *master,
+                        libmatroska::KaxTrackEntry &track) {
   init_content_decoder(track);
 
   auto channels = kt_get_a_channels(track);
-  auto priv     = FindChild<KaxCodecPrivate>(&track);
+  auto priv     = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 

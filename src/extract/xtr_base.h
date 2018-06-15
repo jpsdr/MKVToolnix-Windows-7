@@ -21,11 +21,9 @@
 #include "common/timestamp.h"
 #include "extract/mkvextract.h"
 
-using namespace libmatroska;
-
 struct xtr_frame_t {
   memory_cptr &frame;
-  KaxBlockAdditions *additions;
+  libmatroska::KaxBlockAdditions *additions;
   int64_t timestamp, duration, bref, fref;
   bool keyframe, discardable, references_valid;
   timestamp_c discard_duration;
@@ -52,7 +50,7 @@ public:
 
   void decode_and_handle_frame(xtr_frame_t &f);
 
-  virtual void create_file(xtr_base_c *_master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *_master, libmatroska::KaxTrackEntry &track);
   virtual void handle_frame(xtr_frame_t &f);
   virtual void handle_codec_state(memory_cptr &/* codec_state */) {
   };
@@ -68,8 +66,8 @@ public:
     return m_container_name.c_str();
   };
 
-  virtual void init_content_decoder(KaxTrackEntry &track);
-  virtual memory_cptr decode_codec_private(KaxCodecPrivate *priv);
+  virtual void init_content_decoder(libmatroska::KaxTrackEntry &track);
+  virtual memory_cptr decode_codec_private(libmatroska::KaxCodecPrivate *priv);
 
   static std::shared_ptr<xtr_base_c> create_extractor(const std::string &new_codec_id, int64_t new_tid, track_spec_t &tspec);
 };
@@ -78,6 +76,6 @@ class xtr_fullraw_c : public xtr_base_c {
 public:
   xtr_fullraw_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec):
     xtr_base_c(codec_id, tid, tspec) {}
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track);
   virtual void handle_codec_state(memory_cptr &codec_state);
 };

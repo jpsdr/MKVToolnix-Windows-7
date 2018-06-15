@@ -31,7 +31,7 @@ ivf_reader_c::probe_file(mm_io_c &in,
     return 0;
 
   ivf::file_header_t header;
-  in.setFilePointer(0, seek_beginning);
+  in.setFilePointer(0);
   if (in.read(&header, sizeof(ivf::file_header_t)) < sizeof(ivf::file_header_t))
     return 0;
 

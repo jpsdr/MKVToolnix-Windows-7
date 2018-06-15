@@ -32,7 +32,7 @@ coreaudio_reader_c::probe_file(mm_io_c &in,
     if (8 > size)
       return false;
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     std::string magic;
     return (4 == in.read(magic, 4)) && (balg::to_lower_copy(magic) == "caff") ? 1 : 0;
@@ -173,7 +173,7 @@ coreaudio_reader_c::read(generic_packetizer_c *,
     return FILE_STATUS_DONE;
 
   try {
-    m_in->setFilePointer(m_current_packet->m_position, seek_beginning);
+    m_in->setFilePointer(m_current_packet->m_position);
     auto mem = memory_c::alloc(m_current_packet->m_size);
     if (m_in->read(mem, m_current_packet->m_size) != m_current_packet->m_size)
       throw false;

@@ -30,7 +30,7 @@ vobbtn_reader_c::probe_file(mm_io_c &in,
   unsigned char chunk[23];
 
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(chunk, 23) != 23)
       return 0;
     if (strncasecmp((char*)chunk, "butonDVD", 8))
@@ -39,7 +39,7 @@ vobbtn_reader_c::probe_file(mm_io_c &in,
       return 0;
     if ((0x03 != chunk[0x14]) || (0xD4 != chunk[0x15]) || (0x00 != chunk[0x16]))
       return 0;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
   } catch (...) {
     return 0;
   }
@@ -55,11 +55,11 @@ vobbtn_reader_c::vobbtn_reader_c(const track_info_c &ti,
 void
 vobbtn_reader_c::read_headers() {
   // read the width & height
-  m_in->setFilePointer(8, seek_beginning);
+  m_in->setFilePointer(8);
   width  = m_in->read_uint16_be();
   height = m_in->read_uint16_be();
   // get ready to read
-  m_in->setFilePointer(16, seek_beginning);
+  m_in->setFilePointer(16);
 
   show_demuxer_info();
 }

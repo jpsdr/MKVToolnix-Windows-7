@@ -309,10 +309,10 @@ ogm_reader_c::probe_file(mm_io_c &in,
   if (4 > size)
     return 0;
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(data, 4) != 4)
       return 0;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
   } catch (...) {
     return 0;
   }
@@ -668,7 +668,7 @@ ogm_reader_c::read_headers_internal() {
     }
   }
 
-  m_in->setFilePointer(0, seek_beginning);
+  m_in->setFilePointer(0);
   ogg_sync_clear(&oy);
   ogg_sync_init(&oy);
 

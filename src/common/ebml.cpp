@@ -34,6 +34,7 @@
 #include "common/version.h"
 
 using namespace libebml;
+using namespace libmatroska;
 
 EbmlElement *
 empty_ebml_master(EbmlElement *e) {

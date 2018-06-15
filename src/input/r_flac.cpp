@@ -38,11 +38,11 @@ flac_reader_c::probe_file(mm_io_c &in,
 
   std::string data;
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     mtx::id3::skip_v2_tag(in);
     if (in.read(data, 4) != 4)
       return false;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     return data == "fLaC";
   } catch (...) {
@@ -337,7 +337,7 @@ FLAC__StreamDecoderSeekStatus
 flac_reader_c::flac_seek_cb(uint64_t new_pos) {
   new_pos += tag_size_start;
 
-  m_in->setFilePointer(new_pos, seek_beginning);
+  m_in->setFilePointer(new_pos);
   if (m_in->getFilePointer() == new_pos)
     return FLAC__STREAM_DECODER_SEEK_STATUS_OK;
   return FLAC__STREAM_DECODER_SEEK_STATUS_ERROR;
@@ -383,10 +383,10 @@ flac_reader_c::probe_file(mm_io_c &in,
 
   std::string data;
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(data, 4) != 4)
       return false;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     if (data == "fLaC")
       id_result_container_unsupported(in.get_file_name(), "FLAC");

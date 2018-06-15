@@ -33,10 +33,10 @@ mm_null_io_c::getFilePointer() {
 
 void
 mm_null_io_c::setFilePointer(int64 offset,
-                             seek_mode mode) {
-  m_pos = seek_beginning == mode ? offset
-        : seek_end       == mode ? 0
-        :                          m_pos + offset;
+                             libebml::seek_mode mode) {
+  m_pos = libebml::seek_beginning == mode ? offset
+        : libebml::seek_end       == mode ? 0
+        :                                   m_pos + offset;
 }
 
 uint32

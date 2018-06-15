@@ -15,7 +15,7 @@ namespace Ui {
 class AttachedFilePage;
 }
 
-using KaxAttachedPtr = std::shared_ptr<KaxAttached>;
+using KaxAttachedPtr = std::shared_ptr<libmatroska::KaxAttached>;
 
 class AttachedFilePage: public PageBase {
   Q_OBJECT;

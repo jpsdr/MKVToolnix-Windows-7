@@ -27,6 +27,8 @@
 #include "common/mm_io_x.h"
 #include "common/stereo_mode.h"
 
+using namespace libmatroska;
+
 namespace mtx {
 
 doc_type_version_handler_c::doc_type_version_handler_c()

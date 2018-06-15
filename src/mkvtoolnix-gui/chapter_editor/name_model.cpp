@@ -7,9 +7,10 @@
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
-
+using namespace libmatroska;
 using namespace mtx::gui;
+
+namespace mtx { namespace gui { namespace ChapterEditor {
 
 NameModel::NameModel(QObject *parent)
   : QStandardItemModel{parent}

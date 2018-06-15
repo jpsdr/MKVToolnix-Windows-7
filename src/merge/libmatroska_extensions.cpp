@@ -18,6 +18,8 @@
 
 #include "merge/libmatroska_extensions.h"
 
+using namespace libmatroska;
+
 kax_reference_block_c::kax_reference_block_c():
   KaxReferenceBlock(), m_value(-1) {
 }

@@ -34,8 +34,8 @@ xtr_flac_c::xtr_flac_c(const std::string &_codec_id,
 
 void
 xtr_flac_c::create_file(xtr_base_c *_master,
-                        KaxTrackEntry &track) {
-  KaxCodecPrivate *priv = FindChild<KaxCodecPrivate>(&track);
+                        libmatroska::KaxTrackEntry &track) {
+  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 
@@ -59,7 +59,7 @@ xtr_oggbase_c::xtr_oggbase_c(const std::string &codec_id,
 
 void
 xtr_oggbase_c::create_file(xtr_base_c *master,
-                           KaxTrackEntry &track) {
+                           libmatroska::KaxTrackEntry &track) {
   m_sfreq = (int)kt_get_a_sfreq(track);
 
   xtr_base_c::create_file(master, track);
@@ -69,9 +69,9 @@ xtr_oggbase_c::create_file(xtr_base_c *master,
 
 void
 xtr_oggbase_c::create_standard_file(xtr_base_c *master,
-                                    KaxTrackEntry &track,
-                                    LacingType lacing) {
-  KaxCodecPrivate *priv = FindChild<KaxCodecPrivate>(&track);
+                                    libmatroska::KaxTrackEntry &track,
+                                    libmatroska::LacingType lacing) {
+  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 
@@ -81,7 +81,7 @@ xtr_oggbase_c::create_standard_file(xtr_base_c *master,
   std::vector<memory_cptr> header_packets;
 
   try {
-    if (lacing == LACING_NONE)
+    if (lacing == libmatroska::LACING_NONE)
       header_packets.push_back(mpriv);
 
     else {
@@ -222,8 +222,8 @@ xtr_oggvorbis_c::~xtr_oggvorbis_c() {
 
 void
 xtr_oggvorbis_c::create_file(xtr_base_c *master,
-                             KaxTrackEntry &track) {
-  create_standard_file(master, track, LACING_AUTO);
+                             libmatroska::KaxTrackEntry &track) {
+  create_standard_file(master, track, libmatroska::LACING_AUTO);
 }
 
 void
@@ -271,8 +271,8 @@ xtr_oggkate_c::xtr_oggkate_c(const std::string &codec_id,
 
 void
 xtr_oggkate_c::create_file(xtr_base_c *master,
-                           KaxTrackEntry &track) {
-  create_standard_file(master, track, LACING_AUTO);
+                           libmatroska::KaxTrackEntry &track) {
+  create_standard_file(master, track, libmatroska::LACING_AUTO);
 }
 
 void
@@ -324,8 +324,8 @@ xtr_oggtheora_c::xtr_oggtheora_c(const std::string &codec_id,
 
 void
 xtr_oggtheora_c::create_file(xtr_base_c *master,
-                             KaxTrackEntry &track) {
-  create_standard_file(master, track, LACING_AUTO);
+                             libmatroska::KaxTrackEntry &track) {
+  create_standard_file(master, track, libmatroska::LACING_AUTO);
 }
 
 void
@@ -364,8 +364,8 @@ xtr_oggopus_c::xtr_oggopus_c(const std::string &codec_id,
 
 void
 xtr_oggopus_c::create_file(xtr_base_c *master,
-                           KaxTrackEntry &track) {
-  create_standard_file(master, track, LACING_NONE);
+                           libmatroska::KaxTrackEntry &track) {
+  create_standard_file(master, track, libmatroska::LACING_NONE);
 }
 
 void

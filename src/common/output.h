@@ -23,8 +23,6 @@
 #include "common/locale.h"
 #include "common/mm_io.h"
 
-using namespace libebml;
-
 using mxmsg_handler_t = std::function<void(unsigned int level, std::string const &)>;
 void set_mxmsg_handler(unsigned int level, mxmsg_handler_t const &handler);
 

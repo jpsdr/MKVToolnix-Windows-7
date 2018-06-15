@@ -43,9 +43,10 @@
 #include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
-
+using namespace libmatroska;
 using namespace mtx::gui;
+
+namespace mtx { namespace gui { namespace ChapterEditor {
 
 TabPrivate::TabPrivate(Tab &tab,
                        QString const &pFileName)

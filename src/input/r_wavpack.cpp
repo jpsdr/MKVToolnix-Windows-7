@@ -30,10 +30,10 @@ wavpack_reader_c::probe_file(mm_io_c &in,
   wavpack_header_t header;
 
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(&header, sizeof(wavpack_header_t)) != sizeof(wavpack_header_t))
       return 0;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
   } catch (...) {
     return 0;
   }
@@ -62,7 +62,7 @@ wavpack_reader_c::read_headers() {
     throw mtx::input::open_x();
   }
 
-  m_in->setFilePointer(m_in->getFilePointer() - sizeof(wavpack_header_t), seek_beginning);
+  m_in->setFilePointer(m_in->getFilePointer() - sizeof(wavpack_header_t));
 
   // correction file if applies
   meta.has_correction = false;
@@ -74,7 +74,7 @@ wavpack_reader_c::read_headers() {
       if (0 > packet_size)
         mxerror_fn(m_ti.m_fname, Y("The correction file header was not read correctly.\n"));
 
-      m_in_correc->setFilePointer(m_in_correc->getFilePointer() - sizeof(wavpack_header_t), seek_beginning);
+      m_in_correc->setFilePointer(m_in_correc->getFilePointer() - sizeof(wavpack_header_t));
       meta.has_correction = true;
     }
   } catch (...) {

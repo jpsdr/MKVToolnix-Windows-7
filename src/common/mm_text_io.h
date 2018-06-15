@@ -24,7 +24,7 @@ protected:
 public:
   mm_text_io_c(mm_io_cptr const &in);
 
-  virtual void setFilePointer(int64 offset, seek_mode mode=seek_beginning);
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode=libebml::seek_beginning);
   virtual std::string getline(boost::optional<std::size_t> max_chars = boost::none);
   virtual std::string read_next_codepoint();
   virtual byte_order_e get_byte_order() const {

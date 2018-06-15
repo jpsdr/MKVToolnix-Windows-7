@@ -1388,7 +1388,7 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
 
   m_meta_seeks_by_position[pos] = true;
 
-  m_file->setFilePointer(pos, seek_beginning);
+  m_file->setFilePointer(pos);
 
   int upper_lvl_el = 0;
   EbmlElement *l1  = m_stream->FindNextElement(EBML_CONTEXT(m_segment), upper_lvl_el, 0xFFFFFFFFL, true, 1);

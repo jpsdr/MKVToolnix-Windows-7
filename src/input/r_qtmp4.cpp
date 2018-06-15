@@ -151,7 +151,7 @@ int
 qtmp4_reader_c::probe_file(mm_io_c &in,
                            uint64_t) {
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     while (1) {
       uint64_t atom_pos  = in.getFilePointer();
@@ -1149,7 +1149,7 @@ qtmp4_reader_c::read_chapter_track() {
     if (2 >= sample.size)
       continue;
 
-    m_in->setFilePointer(sample.pos, seek_beginning);
+    m_in->setFilePointer(sample.pos);
     memory_cptr chunk(memory_c::alloc(sample.size));
     if (m_in->read(chunk->get_buffer(), sample.size) != sample.size)
       continue;

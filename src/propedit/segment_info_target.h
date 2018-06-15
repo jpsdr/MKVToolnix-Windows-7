@@ -15,8 +15,6 @@
 #include "propedit/change.h"
 #include "propedit/target.h"
 
-using namespace libebml;
-
 class segment_info_target_c: public target_c {
 public:
   std::vector<change_cptr> m_changes;

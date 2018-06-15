@@ -64,10 +64,10 @@ avi_reader_c::probe_file(mm_io_c &in,
 
   std::string data;
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(data, 12) != 12)
       return false;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
   } catch (...) {
     return false;
   }

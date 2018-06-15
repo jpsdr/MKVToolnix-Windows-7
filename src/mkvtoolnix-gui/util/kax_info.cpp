@@ -29,6 +29,8 @@
 #include "common/kax_info_p.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 
+using namespace libmatroska;
+
 namespace mtx { namespace gui { namespace Util {
 
 class KaxInfoPrivate: public mtx::kax_info::private_c {

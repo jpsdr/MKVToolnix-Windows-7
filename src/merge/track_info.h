@@ -276,7 +276,7 @@ public:
 
   std::map<int64_t, std::string> m_all_tags;     // As given on the command line
   std::string m_tags_file_name;        // For this very track
-  std::shared_ptr<KaxTags> m_tags;     // For this very track
+  std::shared_ptr<libmatroska::KaxTags> m_tags;     // For this very track
 
   std::map<int64_t, bool> m_all_aac_is_sbr; // For AAC+/HE-AAC/SBR
 

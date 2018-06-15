@@ -356,13 +356,13 @@ Tool::removeChaptersFromExistingMatroskaFile() {
     return;
   }
 
-  auto idx = analyzer->find(KaxChapters::ClassInfos.GlobalId);
+  auto idx = analyzer->find(libmatroska::KaxChapters::ClassInfos.GlobalId);
   if (-1 == idx) {
     Util::MessageBox::information(this)->title(QY("Removing chapters from existing Matroska file")).text(QY("The file you tried to open (%1) does not contain any chapters.").arg(fileName)).exec();
     return;
   }
 
-  auto result = analyzer->remove_elements(EBML_ID(KaxChapters));
+  auto result = analyzer->remove_elements(EBML_ID(libmatroska::KaxChapters));
 
   if (kax_analyzer_c::uer_success != result) {
     QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Removing the chapters failed."));

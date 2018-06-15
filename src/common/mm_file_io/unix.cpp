@@ -66,10 +66,10 @@ mm_file_io_c::mm_file_io_c(const std::string &path,
 
 void
 mm_file_io_c::setFilePointer(int64 offset,
-                             seek_mode mode) {
-  int whence = mode == seek_beginning ? SEEK_SET
-             : mode == seek_end       ? SEEK_END
-             :                          SEEK_CUR;
+                             libebml::seek_mode mode) {
+  int whence = mode == libebml::seek_beginning ? SEEK_SET
+             : mode == libebml::seek_end       ? SEEK_END
+             :                                   SEEK_CUR;
 
   if (fseeko((FILE *)m_file, offset, whence) != 0)
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};

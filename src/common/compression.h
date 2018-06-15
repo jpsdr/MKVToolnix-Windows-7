@@ -86,7 +86,7 @@ public:
     return do_decompress(buffer, size);
   }
 
-  virtual void set_track_headers(KaxContentEncoding &c_encoding);
+  virtual void set_track_headers(libmatroska::KaxContentEncoding &c_encoding);
 
   static compressor_ptr create(compression_method_e method);
   static compressor_ptr create(const char *method);

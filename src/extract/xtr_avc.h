@@ -32,7 +32,7 @@ protected:
 public:
   xtr_avc_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track) override;
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track) override;
   virtual void handle_frame(xtr_frame_t &f) override;
   virtual bool write_nal(binary *data, size_t &pos, size_t data_size, size_t nal_size_size);
 

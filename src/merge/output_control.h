@@ -38,8 +38,6 @@ namespace libmatroska {
   class KaxInfo;
 };
 
-using namespace libmatroska;
-
 namespace mtx {
 class doc_type_version_handler_c;
 }
@@ -125,7 +123,7 @@ enum class identification_output_format_e {
 
 class family_uids_c: public std::vector<mtx::bits::value_c> {
 public:
-  bool add_family_uid(const KaxSegmentFamily &family);
+  bool add_family_uid(const libmatroska::KaxSegmentFamily &family);
 };
 
 extern std::vector<packetizer_t> g_packetizers;
@@ -153,12 +151,12 @@ extern std::string g_chapter_charset;
 
 extern std::string g_segmentinfo_file_name;
 
-extern std::unique_ptr<KaxTags> g_tags_from_cue_chapters;
+extern std::unique_ptr<libmatroska::KaxTags> g_tags_from_cue_chapters;
 
-extern std::unique_ptr<KaxSegment> g_kax_segment;
-extern std::unique_ptr<KaxTracks> g_kax_tracks;
-extern KaxTrackEntry *g_kax_last_entry;
-extern std::unique_ptr<KaxSeekHead> g_kax_sh_main, g_kax_sh_cues;
+extern std::unique_ptr<libmatroska::KaxSegment> g_kax_segment;
+extern std::unique_ptr<libmatroska::KaxTracks> g_kax_tracks;
+extern libmatroska::KaxTrackEntry *g_kax_last_entry;
+extern std::unique_ptr<libmatroska::KaxSeekHead> g_kax_sh_main, g_kax_sh_cues;
 extern mtx::chapters::kax_cptr g_kax_chapters;
 extern int64_t g_tags_size;
 extern std::string g_segment_title;
@@ -199,7 +197,7 @@ void cleanup();
 void main_loop();
 
 void add_packetizer_globally(generic_packetizer_c *packetizer);
-void add_tags(KaxTag &tags);
+void add_tags(libmatroska::KaxTag &tags);
 void add_chapter_atom(timestamp_c const &start_timestamp, std::string const &name, std::string const &language);
 
 void create_next_output_file();

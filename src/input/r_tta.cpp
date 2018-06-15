@@ -35,13 +35,13 @@ tta_reader_c::probe_file(mm_io_c &in,
   if (26 > size)
     return 0;
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     int tag_size = mtx::id3::skip_v2_tag(in);
     if (-1 == tag_size)
       return 0;
     if (in.read(buf, 4) != 4)
       return 0;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
   } catch (...) {
     return 0;
   }

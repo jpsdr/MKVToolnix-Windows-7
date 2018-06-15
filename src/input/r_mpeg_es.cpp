@@ -41,13 +41,13 @@ mpeg_es_reader_c::probe_file(mm_io_c &in,
   try {
     memory_cptr af_buf = memory_c::alloc(READ_SIZE);
     unsigned char *buf = af_buf->get_buffer();
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     int num_read = in.read(buf, READ_SIZE);
 
     if (4 > num_read)
       return 0;
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     // MPEG TS starts with 0x47.
     if (0x47 == buf[0])

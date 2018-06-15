@@ -25,7 +25,7 @@ protected:
 public:
   xtr_hdmv_textst_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track);
   virtual void finish_file();
   virtual void handle_frame(xtr_frame_t &f);
 

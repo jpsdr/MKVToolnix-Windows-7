@@ -66,12 +66,12 @@ mp3_reader_c::read_headers() {
     if (0 > pos)
       throw mtx::input::header_parsing_x();
 
-    m_in->setFilePointer(tag_size_start + pos, seek_beginning);
+    m_in->setFilePointer(tag_size_start + pos);
     m_in->read(m_chunk->get_buffer(), 4);
 
     decode_mp3_header(m_chunk->get_buffer(), &m_mp3header);
 
-    m_in->setFilePointer(tag_size_start + pos, seek_beginning);
+    m_in->setFilePointer(tag_size_start + pos);
 
     show_demuxer_info();
 
@@ -124,7 +124,7 @@ mp3_reader_c::find_valid_headers(mm_io_c &io,
                                  int64_t probe_range,
                                  int num_headers) {
   try {
-    io.setFilePointer(0, seek_beginning);
+    io.setFilePointer(0);
     mtx::id3::skip_v2_tag(io);
 
     memory_cptr buf = memory_c::alloc(probe_range);
@@ -137,11 +137,11 @@ mp3_reader_c::find_valid_headers(mm_io_c &io,
     //   probe_range += header.framesize;
     //   buf->resize(probe_range);
 
-    //   io.setFilePointer(0, seek_beginning);
+    //   io.setFilePointer(0);
     //   nread = io.read(buf->get_buffer(), probe_range);
     // }
 
-    io.setFilePointer(0, seek_beginning);
+    io.setFilePointer(0);
 
     return find_consecutive_mp3_headers(buf->get_buffer(), nread, num_headers);
     // auto result = find_consecutive_mp3_headers(buf->get_buffer(), nread, num_headers);

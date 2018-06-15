@@ -45,7 +45,7 @@ public:
   int m_level{};
   std::vector<std::string> m_summary;
   std::shared_ptr<track_t> m_track;
-  KaxCluster *m_cluster{};
+  libmatroska::KaxCluster *m_cluster{};
   std::vector<int> m_frame_sizes;
   std::vector<uint32_t> m_frame_adlers;
   std::vector<std::string> m_frame_hexdumps;

@@ -19,8 +19,6 @@ class EbmlElement;
 
 class mm_io_c;
 
-using namespace libebml;
-
 namespace mtx {
 
 class doc_type_version_handler_private_c;
@@ -46,8 +44,8 @@ public:
   doc_type_version_handler_c();
   virtual ~doc_type_version_handler_c();
 
-  EbmlElement &account(EbmlElement &element, bool with_default = false);
-  EbmlElement &render(EbmlElement &element, mm_io_c &file, bool with_default = false);
+  libebml::EbmlElement &account(libebml::EbmlElement &element, bool with_default = false);
+  libebml::EbmlElement &render(libebml::EbmlElement &element, mm_io_c &file, bool with_default = false);
 
   update_result_e update_ebml_head(mm_io_c &file);
 

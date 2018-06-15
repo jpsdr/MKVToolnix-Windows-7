@@ -21,12 +21,10 @@
 
 #include "common/mm_io_fwd.h"
 
-using namespace libebml;
-
 class charset_converter_c;
 using charset_converter_cptr = std::shared_ptr<charset_converter_c>;
 
-class mm_io_c: public IOCallback {
+class mm_io_c: public libebml::IOCallback {
 protected:
   bool m_dos_style_newlines, m_bom_written;
   std::stack<int64_t> m_positions;
@@ -44,8 +42,8 @@ public:
   virtual ~mm_io_c() { }
 
   virtual uint64 getFilePointer() = 0;
-  virtual void setFilePointer(int64 offset, seek_mode mode = seek_beginning) = 0;
-  virtual bool setFilePointer2(int64 offset, seek_mode mode = seek_beginning);
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning) = 0;
+  virtual bool setFilePointer2(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
   virtual memory_cptr read(size_t size);
   virtual uint32 read(void *buffer, size_t size);
   virtual uint32_t read(std::string &buffer, size_t size, size_t offset = 0);

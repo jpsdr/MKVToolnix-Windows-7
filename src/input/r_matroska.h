@@ -33,9 +33,6 @@
 #include <matroska/KaxCluster.h>
 #include <matroska/KaxContentEncoding.h>
 
-using namespace libebml;
-using namespace libmatroska;
-
 namespace mtx { namespace id {
 class info_c;
 }}
@@ -99,7 +96,7 @@ struct kax_track_t {
 
   content_decoder_c content_decoder;
 
-  std::shared_ptr<KaxTags> tags;
+  std::shared_ptr<libmatroska::KaxTags> tags;
 
   int ptzr;
   generic_packetizer_c *ptzr_ptr;
@@ -209,7 +206,7 @@ private:
 
   kax_file_cptr m_in_file;
 
-  std::shared_ptr<EbmlStream> m_es;
+  std::shared_ptr<libebml::EbmlStream> m_es;
 
   int64_t m_segment_duration, m_last_timestamp, m_first_timestamp, m_global_timestamp_offset;
   std::string m_title;
@@ -225,7 +222,7 @@ private:
 
   int64_t m_attachment_id;
 
-  std::shared_ptr<KaxTags> m_tags;
+  std::shared_ptr<libmatroska::KaxTags> m_tags;
 
   file_status_e m_file_status;
 
@@ -280,10 +277,10 @@ protected:
   virtual void verify_tracks();
 
   virtual bool packets_available();
-  virtual void handle_attachments(mm_io_c *io, EbmlElement *l0, int64_t pos);
-  virtual void handle_chapters(mm_io_c *io, EbmlElement *l0, int64_t pos);
-  virtual void handle_seek_head(mm_io_c *io, EbmlElement *l0, int64_t pos);
-  virtual void handle_tags(mm_io_c *io, EbmlElement *l0, int64_t pos);
+  virtual void handle_attachments(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
+  virtual void handle_chapters(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
+  virtual void handle_seek_head(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
+  virtual void handle_tags(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
   virtual void process_global_tags();
   virtual void discard_track_statistics_tags();
 
@@ -317,18 +314,18 @@ protected:
 
   virtual void create_dvbsub_subtitle_packetizer(kax_track_t &t, track_info_c &nti);
 
-  virtual void read_headers_info(mm_io_c *io, EbmlElement *l0, int64_t position);
-  virtual void read_headers_info_writing_app(KaxWritingApp *&kwriting_app);
-  virtual void read_headers_track_audio(kax_track_t *track, KaxTrackAudio *ktaudio);
-  virtual void read_headers_track_video(kax_track_t *track, KaxTrackVideo *ktvideo);
-  virtual void read_headers_tracks(mm_io_c *io, EbmlElement *l0, int64_t position);
+  virtual void read_headers_info(mm_io_c *io, libebml::EbmlElement *l0, int64_t position);
+  virtual void read_headers_info_writing_app(libmatroska::KaxWritingApp *&kwriting_app);
+  virtual void read_headers_track_audio(kax_track_t *track, libmatroska::KaxTrackAudio *ktaudio);
+  virtual void read_headers_track_video(kax_track_t *track, libmatroska::KaxTrackVideo *ktvideo);
+  virtual void read_headers_tracks(mm_io_c *io, libebml::EbmlElement *l0, int64_t position);
   virtual bool read_headers_internal();
-  virtual void read_deferred_level1_elements(KaxSegment &segment);
+  virtual void read_deferred_level1_elements(libmatroska::KaxSegment &segment);
   virtual void find_level1_elements_via_analyzer();
 
-  virtual void process_simple_block(KaxCluster *cluster, KaxSimpleBlock *block_simple);
-  virtual void process_block_group(KaxCluster *cluster, KaxBlockGroup *block_group);
-  virtual void process_block_group_common(KaxBlockGroup *block_group, packet_t *packet, kax_track_t &track);
+  virtual void process_simple_block(libmatroska::KaxCluster *cluster, libmatroska::KaxSimpleBlock *block_simple);
+  virtual void process_block_group(libmatroska::KaxCluster *cluster, libmatroska::KaxBlockGroup *block_group);
+  virtual void process_block_group_common(libmatroska::KaxBlockGroup *block_group, packet_t *packet, kax_track_t &track);
 
   void init_l1_position_storage(deferred_positions_t &storage);
   virtual bool has_deferred_element_been_processed(deferred_l1_type_e type, int64_t position);

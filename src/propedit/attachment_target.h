@@ -19,10 +19,7 @@
 #include "propedit/target.h"
 #include "propedit/target_id_manager.h"
 
-using namespace libebml;
-using namespace libmatroska;
-
-using attachment_id_manager_c    = target_id_manager_c<KaxAttached>;
+using attachment_id_manager_c    = target_id_manager_c<libmatroska::KaxAttached>;
 using attachment_id_manager_cptr = std::shared_ptr<attachment_id_manager_c>;
 
 class attachment_target_c: public target_c {
@@ -109,9 +106,9 @@ protected:
 
   virtual bool replace_by_id();
   virtual bool replace_by_uid_name_mime_type();
-  virtual void replace_attachment_values(KaxAttached &att);
+  virtual void replace_attachment_values(libmatroska::KaxAttached &att);
 
-  virtual bool matches_by_uid_name_or_mime_type(KaxAttached &att);
+  virtual bool matches_by_uid_name_or_mime_type(libmatroska::KaxAttached &att);
 
   virtual std::string unescape_colon(std::string arg);
 };

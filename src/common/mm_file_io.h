@@ -35,7 +35,7 @@ public:
 #if defined(SYS_WINDOWS)
   virtual uint64 get_real_file_pointer();
 #endif
-  virtual void setFilePointer(int64 offset, seek_mode mode = seek_beginning);
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
   virtual void close();
   virtual bool eof();
   virtual void clear_eof();

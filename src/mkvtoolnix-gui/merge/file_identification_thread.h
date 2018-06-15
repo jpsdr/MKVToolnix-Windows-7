@@ -11,8 +11,6 @@
 
 namespace mtx { namespace gui { namespace Merge {
 
-using namespace mtx::gui;
-
 class SourceFile;
 
 class FileIdentificationWorkerPrivate;

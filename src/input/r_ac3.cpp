@@ -33,7 +33,7 @@ ac3_reader_c::probe_file(mm_io_c &in,
                          int num_headers,
                          bool require_zero_offset) {
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     mtx::id3::skip_v2_tag(in);
     int offset = find_valid_headers(in, probe_size, num_headers);
 
@@ -67,7 +67,7 @@ ac3_reader_c::read_headers() {
     if (m_in->read(m_chunk->get_buffer(), init_read_len) != init_read_len)
       throw mtx::input::header_parsing_x();
 
-    m_in->setFilePointer(tag_size_start, seek_beginning);
+    m_in->setFilePointer(tag_size_start);
 
     mtx::ac3::parser_c parser;
     parser.add_bytes(m_chunk->get_buffer(), init_read_len);
@@ -126,14 +126,14 @@ ac3_reader_c::find_valid_headers(mm_io_c &in,
   try {
     memory_cptr buf(memory_c::alloc(probe_range));
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     mtx::id3::skip_v2_tag(in);
 
     mtx::ac3::parser_c parser;
     int num_read = in.read(buf->get_buffer(), probe_range);
     int pos      = parser.find_consecutive_frames(buf->get_buffer(), num_read, num_headers);
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     return pos;
 

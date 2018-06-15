@@ -60,11 +60,11 @@ mm_multi_file_io_c::getFilePointer() {
 
 void
 mm_multi_file_io_c::setFilePointer(int64 offset,
-                                   seek_mode mode) {
+                                   libebml::seek_mode mode) {
   int64_t new_pos
-    = seek_beginning == mode ? offset
-    : seek_end       == mode ? m_total_size  + offset // offsets from the end are negative already
-    :                          m_current_pos + offset;
+    = libebml::seek_beginning == mode ? offset
+    : libebml::seek_end       == mode ? m_total_size  + offset // offsets from the end are negative already
+    :                                   m_current_pos + offset;
 
   if ((0 > new_pos) || (static_cast<int64_t>(m_total_size) < new_pos))
     throw mtx::mm_io::seek_x();
@@ -78,7 +78,7 @@ mm_multi_file_io_c::setFilePointer(int64 offset,
 
     m_current_pos       = new_pos;
     m_current_local_pos = new_pos - file.m_global_start;
-    file.m_file->setFilePointer(m_current_local_pos, seek_beginning);
+    file.m_file->setFilePointer(m_current_local_pos);
     break;
   }
 }
@@ -107,7 +107,7 @@ mm_multi_file_io_c::_read(void *buffer,
     if ((m_current_local_pos >= file.m_size) && (m_files.size() > (m_current_file + 1))) {
       ++m_current_file;
       m_current_local_pos = 0;
-      m_files[m_current_file].m_file->setFilePointer(0, seek_beginning);
+      m_files[m_current_file].m_file->setFilePointer(0);
     }
   }
 

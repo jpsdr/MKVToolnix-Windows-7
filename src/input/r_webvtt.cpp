@@ -25,7 +25,7 @@ int
 webvtt_reader_c::probe_file(mm_text_io_c &in,
                             uint64_t) {
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     auto line = in.getline(100);
 
     return line.find("WEBVTT") == 0;
@@ -59,7 +59,7 @@ webvtt_reader_c::read_headers() {
 
 void
 webvtt_reader_c::parse_file() {
-  m_text_in->setFilePointer(0, seek_beginning);
+  m_text_in->setFilePointer(0);
 
   auto size    = m_text_in->get_size() - m_text_in->getFilePointer();
   auto content = m_text_in->read(size);

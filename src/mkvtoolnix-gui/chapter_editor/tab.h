@@ -29,7 +29,7 @@ class NameModel;
 class TabPrivate;
 
 struct ChapterAtomData {
-  KaxChapterAtom *atom, *parentAtom;
+  libmatroska::KaxChapterAtom *atom, *parentAtom;
   timestamp_c start, end, calculatedEnd;
   QString primaryName;
   int level;
@@ -148,7 +148,7 @@ protected:
   bool setNameControlsFromStorage(QModelIndex const &idx);
   void enableNameWidgets(bool enable);
 
-  void withSelectedName(std::function<void(QModelIndex const &, KaxChapterDisplay &)> const &worker);
+  void withSelectedName(std::function<void(QModelIndex const &, libmatroska::KaxChapterDisplay &)> const &worker);
 
   void selectChapterRow(QModelIndex const &idx, bool ignoreSelectionChanges);
   bool handleChapterDeselection(QItemSelection const &deselected);
@@ -182,7 +182,7 @@ protected:
   QStringList usedNameLanguages(QStandardItem *parentItem = nullptr);
   QStringList usedNameCountryCodes(QStandardItem *parentItem = nullptr);
   ChaptersPtr timestampsToChapters(std::vector<timestamp_c> const &timestamps) const;
-  QHash<KaxChapterAtom *, ChapterAtomDataPtr> collectChapterAtomDataForEdition(QStandardItem *item);
+  QHash<libmatroska::KaxChapterAtom *, ChapterAtomDataPtr> collectChapterAtomDataForEdition(QStandardItem *item);
   QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimestamp) const;
   bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace,
                          bool skipHidden);

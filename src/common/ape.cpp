@@ -27,7 +27,7 @@ tag_present_at_end(mm_io_c &io) {
   io.save_pos();
   at_scope_exit_c restore([&io]() { io.restore_pos(); });
 
-  if (io.setFilePointer2(-32, seek_end) == false)
+  if (io.setFilePointer2(-32, libebml::seek_end) == false)
     return 0;
   if (io.read(buffer, 24) != 24)
     return 0;

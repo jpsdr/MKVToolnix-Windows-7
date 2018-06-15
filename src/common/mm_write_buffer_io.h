@@ -31,7 +31,7 @@ public:
   virtual ~mm_write_buffer_io_c();
 
   virtual uint64 getFilePointer();
-  virtual void setFilePointer(int64 offset, seek_mode mode = seek_beginning);
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
   virtual void flush();
   virtual void close();
   virtual void discard_buffer();

@@ -899,7 +899,7 @@ hevcc_to_nalus(const unsigned char *buffer,
     if (0x01 != mem.read_uint8())
       throw false;
 
-    mem.setFilePointer(4, seek_beginning);
+    mem.setFilePointer(4);
     size_t nal_size_size = 1 + (mem.read_uint8() & 3);
     if (2 > nal_size_size)
       throw false;

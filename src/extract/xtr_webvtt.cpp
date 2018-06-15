@@ -19,6 +19,8 @@
 #include "common/strings/formatting.h"
 #include "extract/xtr_webvtt.h"
 
+using namespace libmatroska;
+
 xtr_webvtt_c::xtr_webvtt_c(const std::string &codec_id,
                      int64_t tid,
                      track_spec_t &tspec)

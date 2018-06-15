@@ -1017,7 +1017,7 @@ reader_c::detect_packet_size(mm_io_c &in,
 
     mxdebug_if(debug, boost::format("detect_packet_size: size to probe %1% num required startcodes %2%\n") % size % num_startcodes_required);
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     size = in.read(mem, size);
 
     std::vector<int> positions;
@@ -1160,7 +1160,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
   mxdebug_if(m_debug_headers, boost::format("read_headers: Detection done on %1% bytes\n") % f.m_in->getFilePointer());
 
-  f.m_in->setFilePointer(0, seek_beginning); // rewind file for later remux
+  f.m_in->setFilePointer(0); // rewind file for later remux
 
   // Run probe_packet_complete() for track-type detection once for
   // each track. This way tracks that don't actually need their

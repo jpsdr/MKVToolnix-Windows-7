@@ -23,8 +23,6 @@ namespace libmatroska {
   class KaxCluster;
 };
 
-using namespace libmatroska;
-
 class generic_packetizer_c;
 class track_statistics_c;
 
@@ -52,9 +50,9 @@ struct packet_t {
   std::vector<memory_cptr> data_adds;
   memory_cptr codec_state;
 
-  KaxBlockBlob *group;
-  KaxBlock *block;
-  KaxCluster *cluster;
+  libmatroska::KaxBlockBlob *group;
+  libmatroska::KaxBlock *block;
+  libmatroska::KaxCluster *cluster;
   int ref_priority, time_factor;
   int64_t timestamp, bref, fref, duration, assigned_timestamp;
   int64_t timestamp_before_factory;

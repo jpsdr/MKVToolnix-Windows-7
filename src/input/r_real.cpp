@@ -31,6 +31,8 @@
 #include "output/p_realaudio.h"
 #include "output/p_generic_video.h"
 
+using namespace libmatroska;
+
 /*
    Description of the RealMedia file format:
    http://www.pcisys.net/~melanson/codecs/rmff.htm
@@ -65,9 +67,9 @@ mm_io_file_seek(void *file,
   if (!file)
     return -1;
 
-  seek_mode smode = SEEK_END == whence ? seek_end
-                  : SEEK_CUR == whence ? seek_current
-                  :                      seek_beginning;
+  seek_mode smode = SEEK_END == whence ? libebml::seek_end
+                  : SEEK_CUR == whence ? libebml::seek_current
+                  :                      libebml::seek_beginning;
   return static_cast<mm_io_c *>(file)->setFilePointer2(offset, smode) ? 0 : -1;
 }
 
@@ -105,10 +107,10 @@ real_reader_c::probe_file(mm_io_c &in,
     return 0;
 
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(data, 4) != 4)
       return 0;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
   } catch (...) {
     return 0;
@@ -135,7 +137,7 @@ real_reader_c::read_headers() {
     else
       throw mtx::input::open_x();
   }
-  m_in->setFilePointer(0, seek_beginning);
+  m_in->setFilePointer(0);
 
   done = false;
 
@@ -783,7 +785,7 @@ real_reader_c::get_information_from_data() {
     }
   }
 
-  m_in->setFilePointer(old_pos, seek_beginning);
+  m_in->setFilePointer(old_pos);
   file->num_packets_read = 0;
 }
 

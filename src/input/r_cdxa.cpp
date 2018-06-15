@@ -27,7 +27,7 @@ cdxa_reader_c::probe_file(mm_io_c &in,
 
     unsigned char buffer[12];
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(buffer, 12) != 12)
       return false;
 

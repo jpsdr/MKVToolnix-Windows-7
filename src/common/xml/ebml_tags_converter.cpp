@@ -19,6 +19,8 @@
 #include "common/strings/formatting.h"
 #include "common/xml/ebml_tags_converter.h"
 
+using namespace libmatroska;
+
 namespace mtx { namespace xml {
 
 ebml_tags_converter_c::ebml_tags_converter_c()

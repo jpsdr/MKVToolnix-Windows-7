@@ -107,7 +107,7 @@ vint_c::read_ebml_id(mm_io_cptr const &in) {
   return read(*in, rm_ebml_id);
 }
 
-vint_c::operator EbmlId()
+vint_c::operator libebml::EbmlId()
   const {
   return { static_cast<uint32>(m_value), static_cast<unsigned int>(m_coded_size) };
 }

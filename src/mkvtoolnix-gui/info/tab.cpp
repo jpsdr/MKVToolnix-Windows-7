@@ -39,9 +39,10 @@
 #include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
-namespace mtx { namespace gui { namespace Info {
-
+using namespace libmatroska;
 using namespace mtx::gui;
+
+namespace mtx { namespace gui { namespace Info {
 
 class TabPrivate {
 public:

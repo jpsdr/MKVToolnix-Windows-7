@@ -34,7 +34,7 @@ vc1_es_reader_c::probe_file(mm_io_c &in,
     if (PROBESIZE > size)
       return 0;
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     memory_cptr buf = memory_c::alloc(READ_SIZE);
     int num_read    = in.read(buf->get_buffer(), READ_SIZE);
@@ -78,7 +78,7 @@ vc1_es_reader_c::read_headers() {
 
     parser.get_sequence_header(m_seqhdr);
 
-    m_in->setFilePointer(0, seek_beginning);
+    m_in->setFilePointer(0);
 
   } catch (...) {
     throw mtx::input::open_x();

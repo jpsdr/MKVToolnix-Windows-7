@@ -26,6 +26,8 @@
 #include "common/strings/utf8.h"
 #include "common/xml/ebml_converter.h"
 
+using namespace libmatroska;
+
 namespace mtx { namespace xml {
 
 ebml_converter_c::limits_t::limits_t()

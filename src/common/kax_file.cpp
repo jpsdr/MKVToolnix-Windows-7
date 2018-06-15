@@ -25,6 +25,8 @@
 #include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
 
+using namespace libmatroska;
+
 kax_file_c::kax_file_c(mm_io_c &in)
   : m_in(in)
   , m_resynced{}
@@ -83,7 +85,7 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
   // Read the next ID.
   auto search_start_pos = m_in.getFilePointer();
   auto actual_id        = vint_c::read_ebml_id(m_in);
-  m_in.setFilePointer(search_start_pos, seek_beginning);
+  m_in.setFilePointer(search_start_pos);
 
   if (m_debug_read_next)
     mxinfo(boost::format("kax_file::read_next_level1_element(): search at %1% for %|4$x| act id %|2$x| is_valid %3%\n") % search_start_pos % actual_id.m_value % actual_id.is_valid() % wanted_id);
@@ -109,12 +111,12 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
   // other level 1 or special elements. If that files fallback to a
   // byte-for-byte search for the ID.
   if ((0 != wanted_id) && (is_level1_element_id(actual_id) || is_global_element_id(actual_id))) {
-    m_in.setFilePointer(search_start_pos, seek_beginning);
+    m_in.setFilePointer(search_start_pos);
     auto l1 = read_one_element();
 
     if (l1) {
       auto element_size = get_element_size(*l1);
-      auto ok           = (0 != element_size) && m_in.setFilePointer2(l1->GetElementPosition() + element_size, seek_beginning);
+      auto ok           = (0 != element_size) && m_in.setFilePointer2(l1->GetElementPosition() + element_size);
 
       if (m_debug_read_next)
         mxinfo(boost::format("kax_file::read_next_level1_element(): other level 1 element %1% new pos %2% fsize %3% epos %4% esize %5%\n")
@@ -128,7 +130,7 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
   // Last case: no valid ID found. Try a byte-for-byte search for the
   // next wanted/level 1 ID. Also try to locate at least three valid
   // ID/sizes, not just one ID.
-  m_in.setFilePointer(search_start_pos, seek_beginning);
+  m_in.setFilePointer(search_start_pos);
   return resync_to_level1_element(wanted_id);
 }
 
@@ -165,7 +167,7 @@ kax_file_c::read_one_element() {
   if (m_debug_resync)
     mxinfo(boost::format("kax_file::read_one_element(): read element at %1% calculated size %2% stored size %3%\n")
            % l1->GetElementPosition() % element_size % (l1->IsFiniteSize() ? (boost::format("%1%") % l1->ElementSize()).str() : "unknown"s));
-  m_in.setFilePointer(l1->GetElementPosition() + element_size, seek_beginning);
+  m_in.setFilePointer(l1->GetElementPosition() + element_size);
 
   return l1;
 }
@@ -256,7 +258,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
 
         if (   !length.is_valid()
             || ((element_pos + length.m_value + length.m_coded_size + 2 * 4) >= m_file_size)
-            || !m_in.setFilePointer2(element_pos + 4 + length.m_value + length.m_coded_size, seek_beginning))
+            || !m_in.setFilePointer2(element_pos + 4 + length.m_value + length.m_coded_size))
           break;
 
         element_pos  = m_in.getFilePointer();
@@ -276,11 +278,11 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
 
     if ((4 == num_headers) || valid_unknown_size) {
       report(boost::format(Y("Resyncing successful at position %1%.\n")) % current_start_pos);
-      m_in.setFilePointer(current_start_pos, seek_beginning);
+      m_in.setFilePointer(current_start_pos);
       return read_next_level1_element(wanted_id, is_cluster_id);
     }
 
-    m_in.setFilePointer(current_start_pos + 4, seek_beginning);
+    m_in.setFilePointer(current_start_pos + 4);
   }
 
   report(Y("Resync failed: no valid Matroska level 1 element found.\n"));

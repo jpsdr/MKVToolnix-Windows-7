@@ -7,9 +7,10 @@
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
-
+using namespace libmatroska;
 using namespace mtx::gui;
+
+namespace mtx { namespace gui { namespace HeaderEditor {
 
 TrackTypePage::TrackTypePage(Tab &parent,
                              EbmlMaster &master,

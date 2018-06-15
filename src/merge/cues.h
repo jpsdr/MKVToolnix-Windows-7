@@ -45,10 +45,10 @@ protected:
 public:
   cues_c();
 
-  void add(KaxCues &cues);
-  void add(KaxCuePoint &point);
-  void write(mm_io_c &out, KaxSeekHead &seek_head);
-  void postprocess_cues(KaxCues &cues, KaxCluster &cluster);
+  void add(libmatroska::KaxCues &cues);
+  void add(libmatroska::KaxCuePoint &point);
+  void write(mm_io_c &out, libmatroska::KaxSeekHead &seek_head);
+  void postprocess_cues(libmatroska::KaxCues &cues, libmatroska::KaxCluster &cluster);
   void set_duration_for_id_timestamp(uint64_t id, uint64_t timestamp, uint64_t duration);
   void adjust_positions(uint64_t old_position, uint64_t delta);
 
@@ -57,7 +57,7 @@ public:
 
 protected:
   void sort();
-  std::multimap<id_timestamp_t, uint64_t> calculate_block_positions(KaxCluster &cluster) const;
+  std::multimap<id_timestamp_t, uint64_t> calculate_block_positions(libmatroska::KaxCluster &cluster) const;
   uint64_t calculate_total_size() const;
   uint64_t calculate_point_size(cue_point_t const &point) const;
   uint64_t calculate_bytes_for_uint(uint64_t value) const;

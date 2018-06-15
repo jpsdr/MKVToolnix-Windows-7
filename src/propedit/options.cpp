@@ -21,6 +21,8 @@
 #include "propedit/tag_target.h"
 #include "propedit/track_target.h"
 
+using namespace libmatroska;
+
 options_c::options_c()
   : m_show_progress(false)
   , m_parse_mode(kax_analyzer_c::parse_mode_fast)

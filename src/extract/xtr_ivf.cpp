@@ -29,7 +29,7 @@ xtr_ivf_c::xtr_ivf_c(const std::string &codec_id,
 
 void
 xtr_ivf_c::create_file(xtr_base_c *master,
-                       KaxTrackEntry &track) {
+                       libmatroska::KaxTrackEntry &track) {
   xtr_base_c::create_file(master, track);
 
   uint64_t default_duration = kt_get_default_duration(track);
@@ -88,6 +88,6 @@ void
 xtr_ivf_c::finish_file() {
   put_uint32_le(&m_file_header.frame_count, m_frame_count);
 
-  m_out->setFilePointer(0, seek_beginning);
+  m_out->setFilePointer(0);
   m_out->write(&m_file_header, sizeof(m_file_header));
 }

@@ -21,9 +21,9 @@ int
 skip_v2_tag(mm_io_c &io) {
   unsigned char buffer[10];
 
-  io.setFilePointer(0, seek_beginning);
+  io.setFilePointer(0);
   if (io.read(buffer, 10) != 10) {
-    io.setFilePointer(0, seek_beginning);
+    io.setFilePointer(0);
     return -1;
   }
 
@@ -31,7 +31,7 @@ skip_v2_tag(mm_io_c &io) {
       (buffer[3] == 0xff) || (buffer[4] == 0xff) ||
       (buffer[6] >= 0x80) || (buffer[7] >= 0x80) ||
       (buffer[7] >= 0x80) || (buffer[8] >= 0x80)) {
-    io.setFilePointer(0, seek_beginning);
+    io.setFilePointer(0);
     return 0;
   }
 
@@ -40,11 +40,11 @@ skip_v2_tag(mm_io_c &io) {
   if ((buffer[5] & 0x10) != 0)
     tag_size += 10;             // footer present
 
-  io.setFilePointer(tag_size, seek_beginning);
+  io.setFilePointer(tag_size);
   if (io.getFilePointer() == tag_size)
     return tag_size;
 
-  io.setFilePointer(0, seek_beginning);
+  io.setFilePointer(0);
   return -1;
 }
 
@@ -54,7 +54,7 @@ v2_tag_present_at_end(mm_io_c &io) {
   int tag_size;
 
   io.save_pos();
-  io.setFilePointer(-10, seek_end);
+  io.setFilePointer(-10, libebml::seek_end);
   if (io.read(buffer, 10) != 10) {
     io.restore_pos();
     return 0;
@@ -85,7 +85,7 @@ v1_tag_present_at_end(mm_io_c &io) {
   if (io.get_size() < 128)
     return 0;
   io.save_pos();
-  io.setFilePointer(-128, seek_end);
+  io.setFilePointer(-128, libebml::seek_end);
   if (io.read(buffer, 3) != 3) {
     io.restore_pos();
     return 0;

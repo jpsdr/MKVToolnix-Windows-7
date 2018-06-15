@@ -46,7 +46,7 @@ public slots:
   void showContextMenu(QPoint const &pos);
 
 protected:
-  void setItemsFromElement(QList<QStandardItem *> &items, EbmlElement &element);
+  void setItemsFromElement(QList<QStandardItem *> &items, libebml::EbmlElement &element);
 };
 
 }}}

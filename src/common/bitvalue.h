@@ -41,7 +41,7 @@ public:
   value_c(int size);
   value_c(const value_c &src);
   value_c(std::string s, unsigned int allowed_bitlength = 0);
-  value_c(const EbmlBinary &elt);
+  value_c(const libebml::EbmlBinary &elt);
   virtual ~value_c() = default;
 
   value_c &operator =(const value_c &src);

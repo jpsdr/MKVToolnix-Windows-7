@@ -48,7 +48,7 @@ subtitles_c::process(generic_packetizer_c *p) {
 bool
 srt_parser_c::probe(mm_text_io_c &io) {
   try {
-    io.setFilePointer(0, seek_beginning);
+    io.setFilePointer(0);
     std::string s;
     do {
       s = io.getline(10);
@@ -65,7 +65,7 @@ srt_parser_c::probe(mm_text_io_c &io) {
       return false;
 
     s = io.getline();
-    io.setFilePointer(0, seek_beginning);
+    io.setFilePointer(0);
 
   } catch (...) {
     return false;
@@ -100,7 +100,7 @@ srt_parser_c::parse() {
   unsigned int timestamp_number  = 0;
   std::string subtitles;
 
-  m_io->setFilePointer(0, seek_beginning);
+  m_io->setFilePointer(0);
 
   while (1) {
     std::string s;
@@ -251,7 +251,7 @@ ssa_parser_c::probe(mm_text_io_c &io) {
 
   try {
     int line_number = 0;
-    io.setFilePointer(0, seek_beginning);
+    io.setFilePointer(0);
 
     std::string line;
     while (io.getline2(line, 1000)) {
@@ -308,7 +308,7 @@ ssa_parser_c::parse() {
 
   std::string attachment_name, attachment_data_uu;
 
-  m_io->setFilePointer(0, seek_beginning);
+  m_io->setFilePointer(0);
 
   while (!m_io->eof()) {
     std::string line;

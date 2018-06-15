@@ -67,11 +67,11 @@ header_removal_compressor_c::do_compress(unsigned char const *buffer,
 }
 
 void
-header_removal_compressor_c::set_track_headers(KaxContentEncoding &c_encoding) {
+header_removal_compressor_c::set_track_headers(libmatroska::KaxContentEncoding &c_encoding) {
   compressor_c::set_track_headers(c_encoding);
 
   // Set compression parameters.
-  GetChild<KaxContentCompSettings>(GetChild<KaxContentCompression>(c_encoding)).CopyBuffer(m_bytes->get_buffer(), m_bytes->get_size());
+  GetChild<libmatroska::KaxContentCompSettings>(GetChild<libmatroska::KaxContentCompression>(c_encoding)).CopyBuffer(m_bytes->get_buffer(), m_bytes->get_size());
 }
 
 // ------------------------------------------------------------
@@ -125,7 +125,7 @@ analyze_header_removal_compressor_c::do_compress(unsigned char const *buffer,
 }
 
 void
-analyze_header_removal_compressor_c::set_track_headers(KaxContentEncoding &) {
+analyze_header_removal_compressor_c::set_track_headers(libmatroska::KaxContentEncoding &) {
 }
 
 // ------------------------------------------------------------

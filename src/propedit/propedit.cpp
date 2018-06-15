@@ -23,6 +23,8 @@
 #include "common/version.h"
 #include "propedit/propedit_cli_parser.h"
 
+using namespace libmatroska;
+
 std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
 
 static void

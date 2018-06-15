@@ -93,12 +93,12 @@ wav_reader_c::determine_type(mm_io_c &in,
     wave_header wheader;
     wave64_header_t w64_header;
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     if (in.read(&w64_header, sizeof(w64_header)) != sizeof(w64_header))
       return type_e::unknown;
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     std::memcpy(&wheader.riff, &w64_header, sizeof(wheader.riff));
 
@@ -141,7 +141,7 @@ wav_reader_c::parse_fmt_chunk() {
     throw mtx::input::header_parsing_x();
 
   try {
-    m_in->setFilePointer(m_chunks[*chunk_idx].pos, seek_beginning);
+    m_in->setFilePointer(m_chunks[*chunk_idx].pos);
 
     if (static_cast<uint64_t>(m_chunks[*chunk_idx].len) >= sizeof(alWAVEFORMATEXTENSIBLE)) {
       alWAVEFORMATEXTENSIBLE format;
@@ -177,7 +177,7 @@ wav_reader_c::parse_file() {
   if (debugging_c::requested("wav_reader|wav_reader_headers"))
     dump_headers();
 
-  m_in->setFilePointer(m_chunks[*m_cur_data_chunk_idx].pos, seek_beginning);
+  m_in->setFilePointer(m_chunks[*m_cur_data_chunk_idx].pos);
 
   m_remaining_bytes_in_current_data_chunk = m_chunks[*m_cur_data_chunk_idx].len;
 }
@@ -273,7 +273,7 @@ wav_reader_c::read(generic_packetizer_c *,
     if (!m_cur_data_chunk_idx)
       return flush_packetizers();
 
-    m_in->setFilePointer(m_chunks[*m_cur_data_chunk_idx].pos, seek_beginning);
+    m_in->setFilePointer(m_chunks[*m_cur_data_chunk_idx].pos);
 
     m_remaining_bytes_in_current_data_chunk = m_chunks[*m_cur_data_chunk_idx].len;
   }

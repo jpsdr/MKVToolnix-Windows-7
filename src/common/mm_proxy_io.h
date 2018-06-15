@@ -28,7 +28,7 @@ public:
     close();
   }
 
-  virtual void setFilePointer(int64 offset, seek_mode mode=seek_beginning) {
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode=libebml::seek_beginning) {
     return m_proxy_io->setFilePointer(offset, mode);
   }
   virtual uint64 getFilePointer() {

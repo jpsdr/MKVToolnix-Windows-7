@@ -20,8 +20,6 @@
 
 #include "common/compression.h"
 
-using namespace libmatroska;
-
 enum content_encoding_scope_e {
   CONTENT_ENCODING_SCOPE_BLOCK = 1,
   CONTENT_ENCODING_SCOPE_CODECPRIVATE = 2
@@ -46,9 +44,9 @@ protected:
 
 public:
   content_decoder_c();
-  content_decoder_c(KaxTrackEntry &ktentry);
+  content_decoder_c(libmatroska::KaxTrackEntry &ktentry);
 
-  bool initialize(KaxTrackEntry &ktentry);
+  bool initialize(libmatroska::KaxTrackEntry &ktentry);
   void reverse(memory_cptr &data, content_encoding_scope_e scope);
   bool is_ok() {
     return ok;

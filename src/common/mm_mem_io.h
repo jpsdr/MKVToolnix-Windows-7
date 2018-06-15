@@ -30,7 +30,7 @@ public:
   ~mm_mem_io_c();
 
   virtual uint64 getFilePointer();
-  virtual void setFilePointer(int64 offset, seek_mode mode = seek_beginning);
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
   virtual void close();
   virtual bool eof();
   virtual std::string get_file_name() const {

@@ -46,7 +46,7 @@ dts_reader_c::probe_file(mm_io_c &in,
     unsigned char buf[READ_SIZE];
     auto bytes_to_read = std::min<uint64_t>(strmdata_chunk->data_size, READ_SIZE);
 
-    in.setFilePointer(strmdata_chunk->data_start, seek_beginning);
+    in.setFilePointer(strmdata_chunk->data_start);
     if (in.read(buf, bytes_to_read) != bytes_to_read)
       return 0;
 
@@ -199,7 +199,7 @@ dts_reader_c::scan_chunks(mm_io_c &in) {
   try {
     auto const file_size = static_cast<uint64_t>(in.get_size());
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     auto type = static_cast<chunk_type_e>(in.read_uint64_be());
 
     if (type != chunk_type_e::dtshdhdr) {

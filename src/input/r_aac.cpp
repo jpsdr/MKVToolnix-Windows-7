@@ -60,7 +60,7 @@ aac_reader_c::read_headers() {
     if (m_in->read(m_chunk, init_read_len) != init_read_len)
       throw mtx::input::header_parsing_x();
 
-    m_in->setFilePointer(tag_size_start, seek_beginning);
+    m_in->setFilePointer(tag_size_start);
 
     m_parser.copy_data(false);
     m_parser.add_bytes(m_chunk->get_buffer(), init_read_len);
@@ -150,10 +150,10 @@ aac_reader_c::find_valid_headers(mm_io_c &in,
                                  int64_t probe_range,
                                  int num_headers) {
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     auto buf      = memory_c::alloc(probe_range);
     auto num_read = in.read(buf->get_buffer(), probe_range);
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     return mtx::aac::parser_c::find_consecutive_frames(buf->get_buffer(), num_read, num_headers);
   } catch (...) {

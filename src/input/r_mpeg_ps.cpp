@@ -42,14 +42,14 @@ mpeg_ps_reader_c::probe_file(mm_io_c &in,
   try {
     unsigned char buf[4];
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(buf, 4) != 4)
       return 0;
 
     if (get_uint32_be(buf) == MPEGVIDEO_PACKET_START_CODE)
       return 1;
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     auto mem      = memory_c::alloc(32 * 1024);
     auto num_read = in.read(mem, mem->get_size());
@@ -189,7 +189,7 @@ mpeg_ps_reader_c::read_headers() {
   sort_tracks();
   calculate_global_timestamp_offset();
 
-  m_in->setFilePointer(0, seek_beginning);
+  m_in->setFilePointer(0);
 
   if (verbose) {
     show_demuxer_info();

@@ -30,8 +30,6 @@ namespace libmatroska {
 class KaxTrackEntry;
 }
 
-using namespace libmatroska;
-
 class generic_reader_c;
 
 enum connection_result_e {
@@ -61,7 +59,7 @@ protected:
   int64_t m_free_refs, m_next_free_refs, m_enqueued_bytes;
   int64_t m_safety_last_timestamp, m_safety_last_duration;
 
-  KaxTrackEntry *m_track_entry;
+  libmatroska::KaxTrackEntry *m_track_entry;
 
   // Header entries. Can be set via set_XXX and will be 'rendered'
   // by set_headers().
@@ -162,7 +160,7 @@ public:
     m_last_cue_timestamp = timestamp;
   }
 
-  virtual KaxTrackEntry *get_track_entry() const {
+  virtual libmatroska::KaxTrackEntry *get_track_entry() const {
     return m_track_entry;
   }
   virtual int get_track_num() const {
@@ -242,7 +240,7 @@ public:
   virtual void set_video_projection_pose_roll(double value, option_source_e source);
   virtual void set_video_field_order(uint64_t order, option_source_e source);
   virtual void set_video_stereo_mode(stereo_mode_c::mode stereo_mode, option_source_e source);
-  virtual void set_video_stereo_mode_impl(EbmlMaster &video, stereo_mode_c::mode stereo_mode);
+  virtual void set_video_stereo_mode_impl(libebml::EbmlMaster &video, stereo_mode_c::mode stereo_mode);
 
   virtual void set_as_default_track(int type, int priority);
 

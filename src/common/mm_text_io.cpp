@@ -30,18 +30,18 @@ mm_text_io_c::mm_text_io_c(mm_io_cptr const &in)
   , m_uses_newlines(false)
   , m_eol_style_detected(false)
 {
-  in->setFilePointer(0, seek_beginning);
+  in->setFilePointer(0);
 
   unsigned char buffer[4];
   int num_read = in->read(buffer, 4);
   if (2 > num_read) {
-    in->setFilePointer(0, seek_beginning);
+    in->setFilePointer(0);
     return;
   }
 
   detect_byte_order_marker(buffer, num_read, m_byte_order, m_bom_len);
 
-  in->setFilePointer(m_bom_len, seek_beginning);
+  in->setFilePointer(m_bom_len);
 }
 
 void
@@ -253,6 +253,6 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
 
 void
 mm_text_io_c::setFilePointer(int64 offset,
-                             seek_mode mode) {
-  mm_proxy_io_c::setFilePointer(((0 == offset) && (seek_beginning == mode)) ? m_bom_len : offset, mode);
+                             libebml::seek_mode mode) {
+  mm_proxy_io_c::setFilePointer(((0 == offset) && (libebml::seek_beginning == mode)) ? m_bom_len : offset, mode);
 }

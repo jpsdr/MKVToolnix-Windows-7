@@ -17,7 +17,4 @@
 
 #include <matroska/KaxInfo.h>
 
-using namespace libebml;
-using namespace libmatroska;
-
-using kax_info_cptr = std::shared_ptr<KaxInfo>;
+using kax_info_cptr = std::shared_ptr<libmatroska::KaxInfo>;

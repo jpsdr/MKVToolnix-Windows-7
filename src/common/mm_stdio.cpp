@@ -30,7 +30,7 @@ mm_stdio_c::getFilePointer() {
 
 void
 mm_stdio_c::setFilePointer(int64,
-                           seek_mode) {
+                           libebml::seek_mode) {
 }
 
 uint32

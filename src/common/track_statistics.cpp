@@ -16,6 +16,8 @@
 #include "common/tags/tags.h"
 #include "common/track_statistics.h"
 
+using namespace libmatroska;
+
 void
 track_statistics_c::create_tags(KaxTags &tags,
                                 std::string const &writing_app,

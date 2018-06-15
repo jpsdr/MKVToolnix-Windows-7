@@ -13,8 +13,8 @@
 namespace {
 
 TEST(EbmlChaptersConverter, ToXmlAndEbmlVoid) {
-  KaxChapters chapters;
-  chapters.PushElement(*new EbmlVoid);
+  libmatroska::KaxChapters chapters;
+  chapters.PushElement(*new libebml::EbmlVoid);
   mm_mem_io_c mem_io{nullptr, 0, 1000};
 
   ASSERT_NO_THROW(mtx::xml::ebml_chapters_converter_c::write_xml(chapters, mem_io));

@@ -26,7 +26,7 @@ microdvd_reader_c::probe_file(mm_text_io_c &in,
   try {
     boost::regex re("^\\{\\d+?\\}\\{\\d+?\\}.+$", boost::regex::perl);
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     std::string line;
     auto line_num = 0u;

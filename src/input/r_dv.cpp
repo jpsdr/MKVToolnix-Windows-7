@@ -32,7 +32,7 @@ dv_reader_c::probe_file(mm_io_c &in,
     uint64_t probe_size = std::min(size, static_cast<uint64_t>(20 * 1024 * 1024));
     memory_cptr mem     = memory_c::alloc(probe_size);
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(mem, probe_size) != probe_size)
       return 0;
 

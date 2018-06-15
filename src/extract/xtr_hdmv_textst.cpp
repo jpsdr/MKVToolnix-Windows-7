@@ -31,10 +31,10 @@ xtr_hdmv_textst_c::xtr_hdmv_textst_c(const std::string &codec_id,
 
 void
 xtr_hdmv_textst_c::create_file(xtr_base_c *master,
-                               KaxTrackEntry &track) {
+                               libmatroska::KaxTrackEntry &track) {
   xtr_base_c::create_file(master, track);
 
-  auto priv = FindChild<KaxCodecPrivate>(&track);
+  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 

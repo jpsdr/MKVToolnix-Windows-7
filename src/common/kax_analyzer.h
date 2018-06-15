@@ -21,9 +21,6 @@
 #include "common/ebml.h"
 #include "common/mm_io.h"
 
-using namespace libebml;
-using namespace libmatroska;
-
 namespace mtx {
 class doc_type_version_handler_c;
 
@@ -37,18 +34,18 @@ using kax_analyzer_data_cptr = std::shared_ptr<kax_analyzer_data_c>;
 
 class kax_analyzer_data_c {
 public:
-  EbmlId m_id;
+  libebml::EbmlId m_id;
   uint64_t m_pos;
   int64_t m_size;
   bool m_size_known;
 
 public:                         // Static functions
-  static kax_analyzer_data_cptr create(const EbmlId id, uint64_t pos, int64_t size, bool size_known = true) {
+  static kax_analyzer_data_cptr create(const libebml::EbmlId id, uint64_t pos, int64_t size, bool size_known = true) {
     return std::make_shared<kax_analyzer_data_c>(id, pos, size, size_known);
   }
 
 public:
-  kax_analyzer_data_c(const EbmlId id, uint64_t pos, int64_t size, bool size_known)
+  kax_analyzer_data_c(const libebml::EbmlId id, uint64_t pos, int64_t size, bool size_known)
     : m_id{id}
     , m_pos{pos}
     , m_size{size}
@@ -105,11 +102,11 @@ private:
   std::string m_file_name;
   mm_io_cptr m_file;
   bool m_close_file{true};
-  std::shared_ptr<KaxSegment> m_segment;
-  std::shared_ptr<EbmlHead> m_ebml_head;
+  std::shared_ptr<libmatroska::KaxSegment> m_segment;
+  std::shared_ptr<libebml::EbmlHead> m_ebml_head;
   uint64_t m_segment_end{};
   std::map<int64_t, bool> m_meta_seeks_by_position;
-  std::shared_ptr<EbmlStream> m_stream;
+  std::shared_ptr<libebml::EbmlStream> m_stream;
   debugging_option_c m_debug{"kax_analyzer"};
   parse_mode_e m_parse_mode{parse_mode_full};
   open_mode m_open_mode{MODE_WRITE};
@@ -126,20 +123,20 @@ public:
   kax_analyzer_c(mm_io_cptr const &file);
   virtual ~kax_analyzer_c();
 
-  virtual update_element_result_e update_element(EbmlElement *e, bool write_defaults = false, bool add_mandatory_elements_if_missing = true);
+  virtual update_element_result_e update_element(libebml::EbmlElement *e, bool write_defaults = false, bool add_mandatory_elements_if_missing = true);
   virtual update_element_result_e update_element(ebml_element_cptr const &e, bool write_defaults = false, bool add_mandatory_elements_if_missing = true);
 
-  virtual update_element_result_e remove_elements(EbmlId const &id);
+  virtual update_element_result_e remove_elements(libebml::EbmlId const &id);
 
-  virtual ebml_master_cptr read_all(const EbmlCallbacks &callbacks);
+  virtual ebml_master_cptr read_all(const libebml::EbmlCallbacks &callbacks);
   virtual ebml_element_cptr read_element(kax_analyzer_data_c const &element_data);
   virtual ebml_element_cptr read_element(kax_analyzer_data_cptr const &element_data);
   virtual ebml_element_cptr read_element(unsigned int pos);
 
-  virtual void with_elements(const EbmlId &id, std::function<void(kax_analyzer_data_c const &)> worker) const;
-  virtual int find(EbmlId const &id);
+  virtual void with_elements(const libebml::EbmlId &id, std::function<void(kax_analyzer_data_c const &)> worker) const;
+  virtual int find(libebml::EbmlId const &id);
 
-  virtual EbmlHead &get_ebml_head();
+  virtual libebml::EbmlHead &get_ebml_head();
   virtual bool is_webm() const;
 
   virtual uint64_t get_segment_pos() const;
@@ -178,7 +175,7 @@ public:
     return *m_file;
   }
 
-  static placement_strategy_e get_placement_strategy_for(EbmlElement *e);
+  static placement_strategy_e get_placement_strategy_for(libebml::EbmlElement *e);
   static placement_strategy_e get_placement_strategy_for(ebml_element_cptr e) {
     return get_placement_strategy_for(e.get());
   }
@@ -188,14 +185,14 @@ public:
 protected:
   virtual void _log_debug_message(const std::string &message);
 
-  virtual void remove_from_meta_seeks(EbmlId id);
-  virtual void overwrite_all_instances(EbmlId id);
+  virtual void remove_from_meta_seeks(libebml::EbmlId id);
+  virtual void overwrite_all_instances(libebml::EbmlId id);
   virtual void merge_void_elements();
-  virtual void write_element(EbmlElement *e, bool write_defaults, placement_strategy_e strategy);
-  virtual void add_to_meta_seek(EbmlElement *e);
-  virtual std::pair<bool, int> try_adding_to_existing_meta_seek(EbmlElement *e);
-  virtual void move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e, int first_seek_head_idx);
-  virtual bool create_new_meta_seek_at_start(EbmlElement *e);
+  virtual void write_element(libebml::EbmlElement *e, bool write_defaults, placement_strategy_e strategy);
+  virtual void add_to_meta_seek(libebml::EbmlElement *e);
+  virtual std::pair<bool, int> try_adding_to_existing_meta_seek(libebml::EbmlElement *e);
+  virtual void move_seek_head_to_end_and_create_new_one_at_start(libebml::EbmlElement *e, int first_seek_head_idx);
+  virtual bool create_new_meta_seek_at_start(libebml::EbmlElement *e);
   virtual bool move_level1_element_before_cluster_to_end_of_file();
   virtual int ensure_front_seek_head_links_to(unsigned int seek_head_idx);
 

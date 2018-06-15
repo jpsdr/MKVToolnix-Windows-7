@@ -34,6 +34,8 @@
 #include <matroska/KaxCuesData.h>
 #include <matroska/KaxSeekHead.h>
 
+using namespace libmatroska;
+
 debugging_option_c render_groups_c::ms_gap_detection{"cluster_helper_gap_detection"};
 
 cluster_helper_c::impl_t::~impl_t() {

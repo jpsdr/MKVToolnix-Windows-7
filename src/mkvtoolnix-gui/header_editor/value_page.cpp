@@ -70,7 +70,7 @@ ValuePage::init() {
   m_cbAddOrRemove = new QCheckBox{this};
 
   if (m_present) {
-    auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, m_callbacks.GlobalId);
+    auto semantic = find_ebml_semantic(libmatroska::KaxSegment::ClassInfos, m_callbacks.GlobalId);
     if (semantic && semantic->Mandatory) {
       std::unique_ptr<EbmlElement> elt(&semantic->Create());
       m_mayBeRemoved = elt->DefaultISset();

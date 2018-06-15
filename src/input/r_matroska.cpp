@@ -300,10 +300,10 @@ kax_reader_c::probe_file(mm_io_c &in,
   if (4 > size)
     return 0;
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(data, 4) != 4)
       return 0;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
   } catch (...) {
     return 0;
   }
@@ -1583,11 +1583,11 @@ kax_reader_c::read_headers_internal() {
   }
 
   auto cluster_pos = cluster ? cluster->GetElementPosition() : m_in->get_size();
-  m_in->setFilePointer(cluster_pos, seek_beginning);
+  m_in->setFilePointer(cluster_pos);
 
   verify_tracks();
 
-  m_in->setFilePointer(cluster_pos, seek_beginning);
+  m_in->setFilePointer(cluster_pos);
 
   return true;
 }

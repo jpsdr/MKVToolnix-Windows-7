@@ -85,14 +85,14 @@ mm_mem_io_c::getFilePointer() {
 
 void
 mm_mem_io_c::setFilePointer(int64 offset,
-                            seek_mode mode) {
+                            libebml::seek_mode mode) {
   if (!m_mem && !m_ro_mem && (0 == m_mem_size))
     throw mtx::invalid_parameter_x();
 
   int64_t new_pos
-    = seek_beginning == mode ? offset
-    : seek_end       == mode ? m_mem_size + offset // offsets from the end are negative already
-    :                          m_pos      + offset;
+    = libebml::seek_beginning == mode ? offset
+    : libebml::seek_end       == mode ? m_mem_size + offset // offsets from the end are negative already
+    :                                   m_pos      + offset;
 
   if ((0 <= new_pos) && (static_cast<int64_t>(m_mem_size) >= new_pos))
     m_pos = new_pos;

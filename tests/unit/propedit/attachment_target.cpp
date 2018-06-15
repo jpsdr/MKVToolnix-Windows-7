@@ -13,6 +13,7 @@
 
 namespace {
 
+using namespace libmatroska;
 using namespace mtx::construct;
 using namespace mtxut;
 

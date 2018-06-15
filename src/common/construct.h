@@ -26,12 +26,10 @@
 namespace mtx {
 namespace construct {
 
-using namespace libebml;
-
 template<typename Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<EbmlDate, Tobject>::value >::type
-cons_impl(EbmlMaster *master,
+inline typename std::enable_if< std::is_base_of<libebml::EbmlDate, Tobject>::value >::type
+cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
   if (!object)
@@ -41,8 +39,8 @@ cons_impl(EbmlMaster *master,
 
 template<typename Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<EbmlUInteger, Tobject>::value >::type
-cons_impl(EbmlMaster *master,
+inline typename std::enable_if< std::is_base_of<libebml::EbmlUInteger, Tobject>::value >::type
+cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
   if (!object)
@@ -52,8 +50,8 @@ cons_impl(EbmlMaster *master,
 
 template<typename Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<EbmlSInteger, Tobject>::value >::type
-cons_impl(EbmlMaster *master,
+inline typename std::enable_if< std::is_base_of<libebml::EbmlSInteger, Tobject>::value >::type
+cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
   if (!object)
@@ -63,8 +61,8 @@ cons_impl(EbmlMaster *master,
 
 template<typename Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<EbmlFloat, Tobject>::value >::type
-cons_impl(EbmlMaster *master,
+inline typename std::enable_if< std::is_base_of<libebml::EbmlFloat, Tobject>::value >::type
+cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
   if (!object)
@@ -74,8 +72,8 @@ cons_impl(EbmlMaster *master,
 
 template<typename Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<EbmlString, Tobject>::value >::type
-cons_impl(EbmlMaster *master,
+inline typename std::enable_if< std::is_base_of<libebml::EbmlString, Tobject>::value >::type
+cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
   if (!object)
@@ -85,8 +83,8 @@ cons_impl(EbmlMaster *master,
 
 template<typename Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<EbmlUnicodeString, Tobject>::value >::type
-cons_impl(EbmlMaster *master,
+inline typename std::enable_if< std::is_base_of<libebml::EbmlUnicodeString, Tobject>::value >::type
+cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
   if (!object)
@@ -96,8 +94,8 @@ cons_impl(EbmlMaster *master,
 
 template<typename Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<EbmlBinary, Tobject>::value >::type
-cons_impl(EbmlMaster *master,
+inline typename std::enable_if< std::is_base_of<libebml::EbmlBinary, Tobject>::value >::type
+cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
   if (!object)
@@ -107,8 +105,8 @@ cons_impl(EbmlMaster *master,
 }
 
 inline void
-cons_impl(EbmlMaster *master,
-          EbmlMaster *sub_master) {
+cons_impl(libebml::EbmlMaster *master,
+          libebml::EbmlMaster *sub_master) {
   if (!sub_master)
     return;
   master->PushElement(*sub_master);
@@ -116,8 +114,8 @@ cons_impl(EbmlMaster *master,
 
 template<typename... Targs>
 inline void
-cons_impl(EbmlMaster *master,
-          EbmlMaster *sub_master,
+cons_impl(libebml::EbmlMaster *master,
+          libebml::EbmlMaster *sub_master,
           Targs... args) {
   if (sub_master)
     master->PushElement(*sub_master);
@@ -127,8 +125,8 @@ cons_impl(EbmlMaster *master,
 template<typename Tobject,
          typename Tvalue,
          typename... Targs>
-inline typename std::enable_if< !std::is_convertible<Tobject *, EbmlMaster *>::value >::type
-cons_impl(EbmlMaster *master,
+inline typename std::enable_if< !std::is_convertible<Tobject *, libebml::EbmlMaster *>::value >::type
+cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value,
           Targs... args) {

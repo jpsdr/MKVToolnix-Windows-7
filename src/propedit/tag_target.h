@@ -17,8 +17,6 @@
 #include "propedit/change.h"
 #include "propedit/track_target.h"
 
-using namespace libebml;
-
 namespace libmatroska {
 class KaxBlockGroup;
 class KaxSimpleBlock;
@@ -39,7 +37,7 @@ public:
   };
 
   tag_operation_mode_e m_operation_mode;
-  std::shared_ptr<KaxTags> m_new_tags;
+  std::shared_ptr<libmatroska::KaxTags> m_new_tags;
   bool m_tags_modified{};
 
   std::unordered_map<uint64_t, uint64_t> m_default_durations_by_number;
@@ -66,8 +64,8 @@ public:
   virtual bool add_mandatory_elements_if_missing() const override;
 
 protected:
-  virtual void add_or_replace_global_tags(KaxTags *tags);
-  virtual void add_or_replace_track_tags(KaxTags *tags);
+  virtual void add_or_replace_global_tags(libmatroska::KaxTags *tags);
+  virtual void add_or_replace_track_tags(libmatroska::KaxTags *tags);
   virtual void add_or_replace_track_statistics_tags();
   virtual void delete_track_statistics_tags();
 
@@ -77,9 +75,9 @@ protected:
 
   virtual bool read_segment_info_and_tracks();
   virtual void account_frame(uint64_t track_num, uint64_t timestamp, uint64_t duration, memory_cptr frame);
-  virtual void account_block_group(KaxBlockGroup &block_group, KaxCluster &cluster);
-  virtual void account_simple_block(KaxSimpleBlock &simple_block, KaxCluster &cluster);
-  virtual void account_one_cluster(KaxCluster &cluster);
+  virtual void account_block_group(libmatroska::KaxBlockGroup &block_group, libmatroska::KaxCluster &cluster);
+  virtual void account_simple_block(libmatroska::KaxSimpleBlock &simple_block, libmatroska::KaxCluster &cluster);
+  virtual void account_one_cluster(libmatroska::KaxCluster &cluster);
   virtual void account_all_clusters();
   virtual void create_track_statistics_tags();
 };

@@ -53,22 +53,22 @@ public:
   void setInfo(std::unique_ptr<Util::KaxInfo> info);
   Util::KaxInfo &info();
 
-  EbmlElement *elementFromIndex(QModelIndex const &idx);
-  EbmlElement *elementFromItem(QStandardItem &item) const;
+  libebml::EbmlElement *elementFromIndex(QModelIndex const &idx);
+  libebml::EbmlElement *elementFromItem(QStandardItem &item) const;
 
   QList<QStandardItem *> itemsForRow(QModelIndex const &idx);
   QList<QStandardItem *> newItems() const;
-  void setItemsFromElement(QList<QStandardItem *> &items, EbmlElement &element);
+  void setItemsFromElement(QList<QStandardItem *> &items, libebml::EbmlElement &element);
 
   void reset();
 
   bool hasChildren(const QModelIndex &parent) const override;
-  std::pair<QString, bool> elementName(EbmlElement &element);
+  std::pair<QString, bool> elementName(libebml::EbmlElement &element);
 
 public slots:
-  void addElement(int level, EbmlElement *element, bool readFully);
+  void addElement(int level, libebml::EbmlElement *element, bool readFully);
   void addElementInfo(int level, QString const &text, boost::optional<int64_t> position, boost::optional<int64_t> size);
-  void addElementStructure(QStandardItem &parent, EbmlElement &element);
+  void addElementStructure(QStandardItem &parent, libebml::EbmlElement &element);
 
   void addChildrenOfLevel1Element(QModelIndex const &idx);
   void forgetLevel1ElementChildren(QModelIndex const &idx);

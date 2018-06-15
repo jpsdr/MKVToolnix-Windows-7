@@ -24,6 +24,8 @@
 #include "merge/libmatroska_extensions.h"
 #include "merge/output_control.h"
 
+using namespace libmatroska;
+
 cues_cptr cues_c::s_cues;
 
 cues_c::cues_c()

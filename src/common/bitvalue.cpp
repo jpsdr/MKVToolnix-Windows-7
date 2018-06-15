@@ -86,7 +86,7 @@ value_c::value_c(std::string s,
     buffer[i / 2] = hextodec(s2[i]) << 4 | hextodec(s2[i + 1]);
 }
 
-value_c::value_c(const EbmlBinary &elt)
+value_c::value_c(libebml::EbmlBinary const &elt)
   : m_value(memory_c::clone(static_cast<const void *>(elt.GetBuffer()), elt.GetSize()))
 {
 }

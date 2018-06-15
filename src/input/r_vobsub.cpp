@@ -54,12 +54,12 @@ vobsub_reader_c::probe_file(mm_io_c &in,
   char chunk[80];
 
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(chunk, 80) != 80)
       return 0;
     if (strncasecmp(chunk, id_string.c_str(), id_string.length()))
       return 0;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
   } catch (...) {
     return 0;
   }
@@ -177,7 +177,7 @@ vobsub_reader_c::parse_headers() {
   num_indices            = 0;
   indices_processed      = 0;
 
-  m_idx_file->setFilePointer(0, seek_beginning);
+  m_idx_file->setFilePointer(0);
 
   while (1) {
     if (!m_idx_file->getline2(line))
@@ -549,7 +549,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
               pts = ((int64_t)((buf[0] & 0x0e) << 29 | buf[1] << 22 | (buf[2] & 0xfe) << 14 | buf[3] << 7 | (buf[4] >> 1))) * 100000 / 9;
           }
 
-          m_sub_file->setFilePointer2(dataidx + extraction_start_pos, seek_beginning);
+          m_sub_file->setFilePointer2(dataidx + extraction_start_pos);
           packet_aid = m_sub_file->getch();
           if (0 > packet_aid) {
             mxwarn_fn(m_ti.m_fname, boost::format(Y("Bogus aid %1%\n")) % packet_aid);

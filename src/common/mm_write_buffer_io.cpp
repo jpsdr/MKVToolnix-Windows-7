@@ -48,11 +48,11 @@ mm_write_buffer_io_c::getFilePointer() {
 
 void
 mm_write_buffer_io_c::setFilePointer(int64 offset,
-                                     seek_mode mode) {
+                                     libebml::seek_mode mode) {
   int64_t new_pos
-    = seek_beginning == mode ? offset
-    : seek_end       == mode ? m_proxy_io->get_size() + offset // offsets from the end are negative already
-    :                          getFilePointer()       + offset;
+    = libebml::seek_beginning == mode ? offset
+    : libebml::seek_end       == mode ? m_proxy_io->get_size() + offset // offsets from the end are negative already
+    :                                   getFilePointer()       + offset;
 
   if (new_pos == static_cast<int64_t>(getFilePointer()))
     return;

@@ -25,7 +25,7 @@ class xtr_flac_c: public xtr_base_c {
 public:
   xtr_flac_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track);
 };
 
 class xtr_oggbase_c: public xtr_base_c {
@@ -41,7 +41,7 @@ public:
   xtr_oggbase_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
   virtual ~xtr_oggbase_c();
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track);
   virtual void handle_frame(xtr_frame_t &f);
   virtual void finish_file();
 
@@ -49,7 +49,7 @@ public:
   virtual void flush_pages();
 
 protected:
-  virtual void create_standard_file(xtr_base_c *master, KaxTrackEntry &track, LacingType lacing);
+  virtual void create_standard_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track, libmatroska::LacingType lacing);
   virtual void header_packets_unlaced(std::vector<memory_cptr> &header_packets);
 
   virtual void queue_frame(memory_cptr &frame, int64_t granulepos);
@@ -66,7 +66,7 @@ public:
   xtr_oggvorbis_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
   virtual ~xtr_oggvorbis_c();
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track);
   virtual void handle_frame(xtr_frame_t &f);
   virtual void header_packets_unlaced(std::vector<memory_cptr> &header_packets);
 
@@ -82,7 +82,7 @@ private:
 public:
   xtr_oggkate_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track);
   virtual void handle_frame(xtr_frame_t &f);
 
   virtual const char *get_container_name() {
@@ -101,7 +101,7 @@ private:
 public:
   xtr_oggtheora_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track);
   virtual void handle_frame(xtr_frame_t &f);
   virtual void finish_file();
 
@@ -120,7 +120,7 @@ private:
 public:
   xtr_oggopus_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+  virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track);
   virtual void handle_frame(xtr_frame_t &f);
   virtual void finish_file();
 

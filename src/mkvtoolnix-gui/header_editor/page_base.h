@@ -12,8 +12,6 @@
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
-using namespace libebml;
-
 class Tab;
 
 class PageBase: public QWidget {

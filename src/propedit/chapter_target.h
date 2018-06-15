@@ -15,8 +15,6 @@
 #include "common/chapters/chapters.h"
 #include "propedit/target.h"
 
-using namespace libebml;
-
 class chapter_target_c: public target_c {
 protected:
   mtx::chapters::kax_cptr m_new_chapters;

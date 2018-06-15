@@ -50,7 +50,7 @@ public:
   void set_output(mm_io_c *out);
   mm_io_c *get_output();
   void prepare_new_cluster();
-  KaxCluster *get_cluster();
+  libmatroska::KaxCluster *get_cluster();
   void add_packet(packet_cptr packet);
   int64_t get_timestamp();
   int render();
@@ -74,7 +74,7 @@ public:
   void discard_queued_packets();
   bool is_splitting_and_processed_fully() const;
 
-  void create_tags_for_track_statistics(KaxTags &tags, std::string const &writing_app, boost::posix_time::ptime const &writing_date);
+  void create_tags_for_track_statistics(libmatroska::KaxTags &tags, std::string const &writing_app, boost::posix_time::ptime const &writing_date);
 
   void register_new_packetizer(generic_packetizer_c &ptzr);
 

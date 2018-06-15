@@ -36,7 +36,7 @@ xtr_wav_c::xtr_wav_c(const std::string &codec_id,
 
 void
 xtr_wav_c::create_file(xtr_base_c *master,
-                       KaxTrackEntry &track) {
+                       libmatroska::KaxTrackEntry &track) {
   init_content_decoder(track);
 
   auto channels    = kt_get_a_channels(track);
@@ -103,12 +103,12 @@ xtr_wavpack4_c::xtr_wavpack4_c(const std::string &codec_id,
 
 void
 xtr_wavpack4_c::create_file(xtr_base_c *master,
-                            KaxTrackEntry &track) {
+                            libmatroska::KaxTrackEntry &track) {
   memory_cptr mpriv;
 
   init_content_decoder(track);
 
-  KaxCodecPrivate *priv = FindChild<KaxCodecPrivate>(&track);
+  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (priv)
     mpriv = decode_codec_private(priv);
 
@@ -193,12 +193,12 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
 
   // support hybrid mode data
   if (m_corr_out && (f.additions)) {
-    KaxBlockMore *block_more = FindChild<KaxBlockMore>(f.additions);
+    auto block_more = FindChild<libmatroska::KaxBlockMore>(f.additions);
 
     if (!block_more)
       return;
 
-    KaxBlockAdditional *block_addition = FindChild<KaxBlockAdditional>(block_more);
+    auto block_addition = FindChild<libmatroska::KaxBlockAdditional>(block_more);
     if (!block_addition)
       return;
 

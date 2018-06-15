@@ -15,8 +15,6 @@
 #include "propedit/change.h"
 #include "propedit/target.h"
 
-using namespace libebml;
-
 class track_target_c: public target_c {
 public:
   enum selection_mode_e {

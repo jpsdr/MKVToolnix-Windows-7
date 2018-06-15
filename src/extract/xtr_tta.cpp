@@ -38,7 +38,7 @@ xtr_tta_c::xtr_tta_c(const std::string &codec_id,
 
 void
 xtr_tta_c::create_file(xtr_base_c *,
-                       KaxTrackEntry &track) {
+                       libmatroska::KaxTrackEntry &track) {
   try {
     m_out = mm_write_buffer_io_c::open(m_temp_file_name, 5 * 1024 * 1024);
   } catch (mtx::mm_io::exception &ex) {

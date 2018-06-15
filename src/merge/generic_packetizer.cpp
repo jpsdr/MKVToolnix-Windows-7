@@ -38,6 +38,8 @@
 #include "merge/output_control.h"
 #include "merge/webm.h"
 
+using namespace libmatroska;
+
 #define TRACK_TYPE_TO_DEFTRACK_TYPE(track_type)      \
   (  track_audio == track_type ? DEFTRACK_TYPE_AUDIO \
    : track_video == track_type ? DEFTRACK_TYPE_VIDEO \

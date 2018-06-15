@@ -42,7 +42,7 @@ hevc_es_reader_c::probe_file(mm_io_c &in,
     parser.ignore_nalu_size_length_errors();
     parser.set_nalu_size_length(4);
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     for (i = 0; MAX_PROBE_BUFFERS > i; ++i) {
       num_read = in.read(buf->get_buffer(), READ_SIZE);
       if (4 > num_read)
@@ -92,7 +92,7 @@ hevc_es_reader_c::read_headers() {
     m_width  = parser.get_width();
     m_height = parser.get_height();
 
-    m_in->setFilePointer(0, seek_beginning);
+    m_in->setFilePointer(0);
 
     parser.clear();
 

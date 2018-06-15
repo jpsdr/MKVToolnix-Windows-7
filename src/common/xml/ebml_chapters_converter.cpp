@@ -25,6 +25,8 @@
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_chapters_converter.h"
 
+using namespace libmatroska;
+
 namespace mtx { namespace xml {
 
 ebml_chapters_converter_c::ebml_chapters_converter_c()

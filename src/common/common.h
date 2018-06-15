@@ -93,15 +93,6 @@ using namespace std::string_literals;
 #include "common/mm_io.h"
 #include "common/output.h"
 
-namespace libebml {
-class EbmlBinary;
-};
-
-namespace libmatroska { };
-
-using namespace libebml;
-using namespace libmatroska;
-
 #define BUGMSG Y("This should not have happened. Please contact the author " \
                  "Moritz Bunkus <moritz@bunkus.org> with this error/warning " \
                  "message, a description of what you were trying to do, " \

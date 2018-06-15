@@ -8,8 +8,6 @@
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
-using namespace libebml;
-
 class EmptyPage: public PageBase {
   Q_OBJECT;
 

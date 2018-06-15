@@ -20,16 +20,13 @@
 
 #include "common/vint.h"
 
-using namespace libebml;
-using namespace libmatroska;
-
 class kax_file_c {
 protected:
   mm_io_c &m_in;
   bool m_resynced, m_reporting_enabled{true};
   uint64_t m_resync_start_pos, m_file_size, m_segment_end;
   int64_t m_timestamp_scale, m_last_timestamp;
-  std::shared_ptr<EbmlStream> m_es;
+  std::shared_ptr<libebml::EbmlStream> m_es;
 
   debugging_option_c m_debug_read_next, m_debug_resync;
 
@@ -42,26 +39,26 @@ public:
   virtual bool is_level1_element_id(vint_c id) const;
   virtual bool is_global_element_id(vint_c id) const;
 
-  virtual std::shared_ptr<EbmlElement> read_next_level1_element(uint32_t wanted_id = 0, bool report_cluster_timestamp = false);
-  virtual std::shared_ptr<KaxCluster> read_next_cluster();
+  virtual std::shared_ptr<libebml::EbmlElement> read_next_level1_element(uint32_t wanted_id = 0, bool report_cluster_timestamp = false);
+  virtual std::shared_ptr<libmatroska::KaxCluster> read_next_cluster();
 
-  virtual std::shared_ptr<EbmlElement> resync_to_level1_element(uint32_t wanted_id = 0);
-  virtual std::shared_ptr<KaxCluster> resync_to_cluster();
+  virtual std::shared_ptr<libebml::EbmlElement> resync_to_level1_element(uint32_t wanted_id = 0);
+  virtual std::shared_ptr<libmatroska::KaxCluster> resync_to_cluster();
 
-  static unsigned long get_element_size(EbmlElement &e);
+  static unsigned long get_element_size(libebml::EbmlElement &e);
 
   virtual void set_timestamp_scale(int64_t timestamp_scale);
   virtual void set_last_timestamp(int64_t last_timestamp);
-  virtual void set_segment_end(EbmlElement const &segment);
+  virtual void set_segment_end(libebml::EbmlElement const &segment);
   virtual uint64_t get_segment_end() const;
 
   virtual void enable_reporting(bool enable);
 
 protected:
-  virtual std::shared_ptr<EbmlElement> read_one_element();
+  virtual std::shared_ptr<libebml::EbmlElement> read_one_element();
 
-  virtual std::shared_ptr<EbmlElement> read_next_level1_element_internal(uint32_t wanted_id = 0);
-  virtual std::shared_ptr<EbmlElement> resync_to_level1_element_internal(uint32_t wanted_id = 0);
+  virtual std::shared_ptr<libebml::EbmlElement> read_next_level1_element_internal(uint32_t wanted_id = 0);
+  virtual std::shared_ptr<libebml::EbmlElement> resync_to_level1_element_internal(uint32_t wanted_id = 0);
 
   virtual void report(boost::format const &message);
   virtual void report(std::string const &message);

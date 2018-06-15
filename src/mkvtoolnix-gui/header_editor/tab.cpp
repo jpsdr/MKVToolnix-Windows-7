@@ -49,9 +49,10 @@
 #include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
-
+using namespace libmatroska;
 using namespace mtx::gui;
+
+namespace mtx { namespace gui { namespace HeaderEditor {
 
 Tab::Tab(QWidget *parent,
          QString const &fileName)

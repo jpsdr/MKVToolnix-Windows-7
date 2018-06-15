@@ -34,7 +34,7 @@ public:
   virtual ~mm_read_buffer_io_c();
 
   virtual uint64 getFilePointer();
-  virtual void setFilePointer(int64 offset, seek_mode mode = seek_beginning);
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
   virtual int64_t get_size();
   inline virtual bool eof() { return m_eof; }
   virtual void clear_eof() { m_eof = false; }

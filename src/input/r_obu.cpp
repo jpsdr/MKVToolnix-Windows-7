@@ -28,7 +28,7 @@ bool
 obu_reader_c::probe_file(mm_io_c &in,
                          uint64_t size) {
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     size     = std::min<uint64_t>(size, READ_SIZE);
     auto buf = in.read(size);
 
@@ -57,7 +57,7 @@ obu_reader_c::obu_reader_c(track_info_c const &ti,
 void
 obu_reader_c::read_headers() {
   try {
-    m_in->setFilePointer(0, seek_beginning);
+    m_in->setFilePointer(0);
     m_buffer      = memory_c::alloc(READ_SIZE);
     auto to_read  = std::min<uint64_t>(READ_SIZE, m_in->get_size());
 

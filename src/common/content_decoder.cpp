@@ -18,6 +18,8 @@
 #include "common/list_utils.h"
 #include "common/strings/formatting.h"
 
+using namespace libmatroska;
+
 kax_content_encoding_t::kax_content_encoding_t()
   : order{}
   , type{}

@@ -11,33 +11,31 @@
 
 Q_DECLARE_METATYPE(libmatroska::KaxChapterDisplay *);
 
-using namespace libmatroska;
-
 namespace mtx { namespace gui { namespace ChapterEditor {
 
 class NameModel: public QStandardItemModel {
   Q_OBJECT;
 
 protected:
-  KaxChapterAtom *m_chapter{};
-  QHash<qulonglong, KaxChapterDisplay *> m_displayRegistry;
+  libmatroska::KaxChapterAtom *m_chapter{};
+  QHash<qulonglong, libmatroska::KaxChapterDisplay *> m_displayRegistry;
   qulonglong m_nextDisplayRegistryIdx{};
 
 public:
   NameModel(QObject *parent);
   virtual ~NameModel();
 
-  void append(KaxChapterDisplay &display);
+  void append(libmatroska::KaxChapterDisplay &display);
   void addNew();
   void remove(QModelIndex const &idx);
   void updateRow(int row);
 
-  void populate(KaxChapterAtom &chapter);
+  void populate(libmatroska::KaxChapterAtom &chapter);
   void reset();
   void retranslateUi();
 
-  KaxChapterDisplay *displayFromIndex(QModelIndex const &idx);
-  KaxChapterDisplay *displayFromItem(QStandardItem *item);
+  libmatroska::KaxChapterDisplay *displayFromIndex(QModelIndex const &idx);
+  libmatroska::KaxChapterDisplay *displayFromItem(QStandardItem *item);
 
   virtual Qt::DropActions supportedDropActions() const override;
   virtual Qt::ItemFlags flags(QModelIndex const &index) const override;
@@ -48,7 +46,7 @@ public:
 protected:
   void setRowText(QList<QStandardItem *> const &rowItems);
   QList<QStandardItem *> itemsForRow(int row);
-  qulonglong registerDisplay(KaxChapterDisplay &display);
+  qulonglong registerDisplay(libmatroska::KaxChapterDisplay &display);
   qulonglong registryIdFromItem(QStandardItem *item);
 
 protected:

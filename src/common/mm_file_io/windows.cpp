@@ -100,11 +100,11 @@ mm_file_io_c::get_real_file_pointer() {
 
 void
 mm_file_io_c::setFilePointer(int64 offset,
-                             seek_mode mode) {
-  DWORD method = seek_beginning == mode ? FILE_BEGIN
-               : seek_current   == mode ? FILE_CURRENT
-               : seek_end       == mode ? FILE_END
-               :                          FILE_BEGIN;
+                             libebml::seek_mode mode) {
+  DWORD method = libebml::seek_beginning == mode ? FILE_BEGIN
+               : libebml::seek_current   == mode ? FILE_CURRENT
+               : libebml::seek_end       == mode ? FILE_END
+               :                                   FILE_BEGIN;
   LONG high    = (LONG)(offset >> 32);
   DWORD low    = SetFilePointer((HANDLE)m_file, (LONG)(offset & 0xffffffff), &high, method);
 

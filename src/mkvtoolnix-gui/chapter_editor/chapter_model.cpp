@@ -10,9 +10,10 @@
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
-
+using namespace libmatroska;
 using namespace mtx::gui;
+
+namespace mtx { namespace gui { namespace ChapterEditor {
 
 static auto const s_numColumns = 4;
 

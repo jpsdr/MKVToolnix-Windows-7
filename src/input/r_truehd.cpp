@@ -29,7 +29,7 @@ int
 truehd_reader_c::probe_file(mm_io_c &in,
                             uint64_t /* size */) {
   try {
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     mtx::id3::skip_v2_tag(in);
     return find_valid_headers(in, TRUEHD_READ_SIZE, 2) ? 1 : 0;
 
@@ -62,7 +62,7 @@ truehd_reader_c::read_headers() {
     if (m_in->read(m_chunk->get_buffer(), init_read_len) != init_read_len)
       throw mtx::input::header_parsing_x();
 
-    m_in->setFilePointer(tag_size_start, seek_beginning);
+    m_in->setFilePointer(tag_size_start);
 
     mtx::truehd::parser_c parser;
     parser.add_data(m_chunk->get_buffer(), init_read_len);
@@ -188,7 +188,7 @@ truehd_reader_c::find_valid_headers(mm_io_c &in,
   try {
     memory_cptr buf(memory_c::alloc(probe_range));
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     mtx::id3::skip_v2_tag(in);
 
     int num_read = in.read(buf->get_buffer(), probe_range);

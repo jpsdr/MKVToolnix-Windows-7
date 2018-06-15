@@ -28,8 +28,6 @@
 #include "merge/track_info.h"
 #include "merge/webm.h"
 
-using namespace libmatroska;
-
 class generic_packetizer_c;
 
 #define DEFTRACK_TYPE_AUDIO 0

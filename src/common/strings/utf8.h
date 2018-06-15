@@ -41,7 +41,7 @@ to_wide(::libebml::UTFstring const &source) {
 
 inline ::libebml::UTFstring
 to_utfstring(std::wstring const &source) {
-  return UTFstring{source};
+  return libebml::UTFstring{source};
 }
 
 inline ::libebml::UTFstring
@@ -51,7 +51,7 @@ to_utfstring(boost::wformat const &source) {
 
 inline ::libebml::UTFstring
 to_utfstring(std::string const &source) {
-  auto u = UTFstring{};
+  auto u = libebml::UTFstring{};
   u.SetUTF8(source);
   return u;
 }

@@ -32,7 +32,7 @@ public:
   virtual memory_cptr do_compress(unsigned char const *buffer, std::size_t size) override;
   virtual memory_cptr do_decompress(unsigned char const *buffer, std::size_t size) override;
 
-  virtual void set_track_headers(KaxContentEncoding &c_encoding);
+  virtual void set_track_headers(libmatroska::KaxContentEncoding &c_encoding);
 };
 
 class analyze_header_removal_compressor_c: public compressor_c {
@@ -47,7 +47,7 @@ public:
   virtual memory_cptr do_compress(unsigned char const *buffer, std::size_t size) override;
   virtual memory_cptr do_decompress(unsigned char const *buffer, std::size_t size) override;
 
-  virtual void set_track_headers(KaxContentEncoding &c_encoding);
+  virtual void set_track_headers(libmatroska::KaxContentEncoding &c_encoding);
 };
 
 class mpeg4_p2_compressor_c: public header_removal_compressor_c {

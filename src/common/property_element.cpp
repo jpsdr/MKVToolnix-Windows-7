@@ -33,6 +33,8 @@
 #include "common/property_element.h"
 #include "common/translation.h"
 
+using namespace libmatroska;
+
 std::map<uint32_t, std::vector<property_element_c> > property_element_c::s_properties;
 std::map<uint32_t, std::vector<property_element_c> > property_element_c::s_composed_properties;
 

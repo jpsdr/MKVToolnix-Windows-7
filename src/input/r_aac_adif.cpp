@@ -27,10 +27,10 @@ aac_adif_reader_c::probe_file(mm_io_c &in,
 
     unsigned char buf[4];
 
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
     if (in.read(buf, 4) != 4)
       return 0;
-    in.setFilePointer(0, seek_beginning);
+    in.setFilePointer(0);
 
     if (FOURCC('A', 'D', 'I', 'F') == get_uint32_be(buf)) {
       id_result_container_unsupported(in.get_file_name(), Y("AAC with ADIF headers"));
