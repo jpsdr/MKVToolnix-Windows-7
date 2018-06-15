@@ -21,6 +21,7 @@
 #include "common/mm_mem_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/strings/utf8.h"
 
 namespace mtx { namespace json {
 
@@ -99,6 +100,21 @@ strip_comments(nlohmann::json::string_t const &data)  {
   return std::string{reinterpret_cast<char *>(out.get_buffer()), static_cast<std::string::size_type>(out.getFilePointer())};
 }
 
+void
+fix_invalid_utf8_recursively(nlohmann::json &json) {
+  if (json.type() == nlohmann::json::value_t::string)
+    json = fix_invalid_utf8(json.get<std::string>());
+
+  else if (json.type() == nlohmann::json::value_t::array) {
+    for (auto &sub_json : json)
+      fix_invalid_utf8_recursively(sub_json);
+
+  } else if (json.type() == nlohmann::json::value_t::object) {
+    for (auto it = json.begin(), end = json.end(); it != end; ++it)
+      fix_invalid_utf8_recursively(it.value());
+  }
+}
+
 }
 
 nlohmann::json
@@ -116,7 +132,10 @@ dump(nlohmann::json const &json,
   auto old_locale = std::string{::setlocale(LC_NUMERIC, "C")};
   at_scope_exit_c restore_locale{ [&old_locale]() { ::setlocale(LC_NUMERIC, old_locale.c_str()); } };
 
-  return json.dump(indentation);
+  auto json_fixed = json;
+  fix_invalid_utf8_recursively(json_fixed);
+
+  return json_fixed.dump(indentation);
 }
 
 }} // namespace mtx::json

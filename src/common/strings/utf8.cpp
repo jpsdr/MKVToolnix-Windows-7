@@ -40,6 +40,14 @@ to_utf8(const std::wstring &source) {
   return destination;
 }
 
+std::string
+fix_invalid_utf8(std::string const &str) {
+  std::string temp;
+
+  ::utf8::replace_invalid(str.begin(), str.end(), std::back_inserter(temp));
+  return temp;
+}
+
 size_t
 get_width_in_em(const std::wstring &s) {
   size_t width = 0;

@@ -16,6 +16,8 @@ std::vector<int> utf32result;
 std::vector<unsigned char> utf8result;
 utf8::utf8to32(s.begin(),s.end(),std::back_inserter(utf32result));
 utf8::utf32to8(utf32result.begin(),utf32result.end(),std::back_inserter(utf8result));
+std::string temp;
+utf8::replace_invalid(s.begin(), s.end(), std::back_inserter(temp));
 ])],[ac_cv_utf8cpp=yes],[ac_cv_utf8cpp=no])
 fi
 
