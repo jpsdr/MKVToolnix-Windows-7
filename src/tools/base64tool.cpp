@@ -88,7 +88,7 @@ main(int argc,
   }
 
   in->save_pos();
-  in->setFilePointer(0, seek_end);
+  in->setFilePointer(0, libebml::seek_end);
   size = in->getFilePointer();
   in->restore_pos();
 
