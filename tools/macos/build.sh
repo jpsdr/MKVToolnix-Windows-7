@@ -5,6 +5,7 @@ set -x
 
 export SCRIPT_PATH=${0:a:h}
 source ${SCRIPT_PATH}/config.sh
+source ${SCRIPT_PATH}/specs.sh
 
 if type -p drake &> /dev/null; then
   RAKE=drake
@@ -12,9 +13,57 @@ else
   RAKE=rake
 fi
 
+if [[ ${spec_qtbase[1]} == *everywhere* ]]; then
+  QTTYPE=everywhere
+else
+  QTTYPE=opensource
+fi
+
 function fail {
   echo $@
   exit 1
+}
+
+function verify_checksum {
+  local file=$1
+  local expected_checksum=$2
+  local allow_failure=$3
+  local actual_checksum
+
+  actual_checksum=$(openssl dgst -sha256 < ${file} | sed -e 's/.* //')
+
+  if [[ ${actual_checksum} != ${expected_checksum} ]]; then
+    if [[ ${allow_failure:-0} == 1 ]]; then
+      return 1
+    fi
+
+    fail "File checksum failed: ${file} SHA256 expected ${expected_checksum} actual ${actual_checksum}"
+  fi
+}
+
+function retrieve_file {
+  local spec_name="spec_$1"
+  local -a spec=(${(P)spec_name})
+  local file=${spec[1]}
+  local url=${spec[2]}
+  local expected_checksum=${spec[3]}
+
+  file=${SRCDIR}/${file}
+
+  if [[ -f ${file} ]]; then
+    if verify_checksum ${file} ${expected_checksum} 1; then
+      return
+    fi
+
+    echo "Warning: file ${file} exists but has the wrong checksum; retrieving anew"
+    rm ${file}
+  fi
+
+  if [[ ! -f ${file} ]]; then
+    curl -L ${url} > ${file}
+  fi
+
+  verify_checksum ${file} ${expected_checksum}
 }
 
 function build_tarball {
@@ -24,7 +73,12 @@ function build_tarball {
 }
 
 function build_package {
-  local FILE=$1
+  retrieve_file $1
+
+  local FUNC_NAME=$1
+  local SPEC_NAME="spec_$1"
+  local -a SPEC=(${(P)SPEC_NAME})
+  local FILE=${SPEC[1]}
   shift
   local PACKAGE=${${FILE%.*}%.tar}
   local DIR=${DIR:-$PACKAGE}
@@ -45,67 +99,138 @@ function build_package {
 
   $DEBUG cd ${DIR}
 
-  if [[ -z $NO_CONFIGURE ]]; then
-    $DEBUG ${CONFIGURE:-./configure} $@
+  local patch_dir=${SCRIPT_PATH}/${FUNC_NAME}-patches
+  if [[ -d ${patch_dir} ]]; then
+    for PART in ${patch_dir}/*.patch ; do
+      patch -p1 < ${PART}
+    done
+  fi
 
-    if [[ -z $NO_MAKE ]]; then
-      $DEBUG make
-      build_tarball
+  if [[ -z $NO_CONFIGURE ]]; then
+    saved_CFLAGS=${CFLAGS}
+    saved_CXXFLAGS=${CXXFLAGS}
+    saved_LDFLAGS=${LDFLAGS}
+
+    export CFLAGS="${CFLAGS} -I${TARGET}/include"
+    export LDFLAGS="${LDFLAGS} -L${TARGET}/lib"
+
+    if [[ ( -n ${CONFIGURE} ) || ( -x ./configure ) ]]; then
+      $DEBUG ${CONFIGURE:-./configure} $@
+
+      if [[ -z $NO_MAKE ]]; then
+        $DEBUG make
+        build_tarball
+      fi
+
+    else
+      mkdir mtx-build
+      cd mtx-build
+
+      $DEBUG cmake .. $@
+
+      if [[ -z $NO_MAKE ]]; then
+        $DEBUG make
+        build_tarball command "make DESTDIR=TMPDIR install"
+      fi
+
+      cd ..
+
     fi
+
+    CFLAGS=${saved_CFLAGS}
+    CXXFLAGS=${saved_CXXFLAGS}
+    LDFLAGS=${saved_LDFLAGS}
   fi
 }
 
 mkdir -p $CMPL
 
 function build_autoconf {
-  build_package autoconf-2.69.tar.xz --prefix=${TARGET}
+  build_package autoconf --prefix=${TARGET}
 }
 
 function build_automake {
-  build_package automake-1.14.1.tar.gz --prefix=${TARGET}
+  build_package automake --prefix=${TARGET}
 }
 
 function build_pkgconfig {
-  build_package pkg-config-0.28.tar.gz --prefix=${TARGET} \
-     --with-pc-path=${TARGET}/lib/pkgconfig --with-internal-glib \
-     --enable-static --enable-shared=no
+  build_package pkgconfig \
+    --prefix=${TARGET} \
+    --with-pc-path=${TARGET}/lib/pkgconfig \
+    --with-internal-glib \
+    --enable-static \
+    --enable-shared=no
+}
+
+function build_libiconv {
+  build_package libiconv \
+    ac_cv_prog_AWK=/usr/bin/awk \
+    ac_cv_path_GREP=/usr/bin/grep \
+    ac_cv_path_SED=/usr/bin/sed \
+    --prefix=${TARGET} \
+    --enable-static \
+    --docdir=${prefix}/share/doc/${name} \
+    --without-libiconv-prefix \
+    --without-libintl-prefix \
+    --disable-nls \
+    --enable-extra-encodings \
+    --enable-shared=no
 }
 
 function build_cmake {
-  build_package cmake-3.10.0.tar.gz --prefix=${TARGET}
+  build_package cmake --prefix=${TARGET}
 }
 
 function build_ogg {
-  build_package libogg-1.3.2.tar.gz --prefix=${TARGET} \
-    --disable-shared --enable-static
+  build_package ogg \
+    --prefix=${TARGET} \
+    --disable-shared \
+    --enable-static
 }
 
 function build_vorbis {
-  build_package libvorbis-1.3.5.tar.gz --prefix=${TARGET} \
-    --with-ogg-libraries=${TARGET}/lib --with-ogg-includes=${TARGET}/include/ \
-    --enable-static --disable-shared
+  build_package vorbis \
+    --prefix=${TARGET} \
+    --with-ogg-libraries=${TARGET}/lib \
+    --with-ogg-includes=${TARGET}/include/ \
+    --enable-static \
+    --disable-shared
 }
 
 function build_flac {
-  build_package flac-1.3.1.tar.xz --prefix=${TARGET} \
-    --disable-asm-optimizations --disable-xmms-plugin \
-    --with-ogg-libraries=${TARGET}/lib --with-ogg-includes=${TARGET}/include/ \
-    --enable-static --disable-shared
+  build_package flac \
+    --prefix=${TARGET} \
+    --disable-asm-optimizations \
+    --disable-xmms-plugin \
+    --with-ogg-libraries=${TARGET}/lib \
+    --with-ogg-includes=${TARGET}/include/ \
+    --with-libiconv-prefix=${TARGET} \
+    --enable-static \
+    --disable-shared
 }
 
 function build_zlib {
-  build_package zlib-1.2.8.tar.xz --prefix=${TARGET} --static
+  build_package zlib \
+    --prefix=${TARGET} \
+    --static
 }
 
 function build_gettext {
-  NO_MAKE=1 build_package gettext-0.19.8.1.tar.gz --prefix=${TARGET} \
+  build_package gettext \
+    --prefix=${TARGET} \
+    --disable-csharp \
+    --disable-native-java \
+    --disable-openmp \
+    --without-emacs \
     --without-libexpat-prefix \
     --without-libxml2-prefix \
-    --without-emacs \
-    --enable-static --disable-shared
-
-  make -C gettext-runtime/intl install
-  make -C gettext-tools install
+    --with-included-gettext \
+    --with-included-glib \
+    --with-included-libcroco \
+    --with-included-libunistring \
+    --with-included-libxml \
+    --enable-static \
+    --disable-shared
 }
 
 function build_ruby {
@@ -121,29 +246,58 @@ function build_boost {
   if [[ -n $CXXFLAGS ]] properties+=(cxxflags="${(q)CXXFLAGS}")
   if [[ -n $LDFLAGS  ]] properties+=(linkflags="${(q)LDFLAGS}")
 
-  NO_MAKE=1 CONFIGURE=./bootstrap.sh build_package boost_1_60_0.tar.bz2 \
+  NO_MAKE=1 CONFIGURE=./bootstrap.sh build_package boost \
     --with-toolset=clang
   build_tarball command "./b2 ${args} ${properties} install"
 }
 
 function build_cmark {
-  NO_CONFIGURE=1 build_package cmark-0.28.3.tar.gz
-
-  for PATCH in ${SCRIPT_PATH}/cmark-patches/*.patch; do
-    patch -p1 < ${PATCH}
-  done
-
-  mkdir build
-  cd build
-
-  $DEBUG cmake .. \
+  build_package cmark \
     -DCMAKE_INSTALL_PREFIX=${TARGET} \
     -DCMARK_TESTS=OFF \
     -DCMARK_STATIC=ON \
     -DCMARK_SHARED=OFF
-  $DEBUG make
+}
 
-  build_tarball command "make DESTDIR=TMPDIR install"
+function build_openssl {
+  NO_CONFIGURE=1 build_package openssl
+
+  ./Configure \
+    --prefix=${TARGET} \
+    -L${TARGET}/lib \
+    no-krb5 \
+    --openssldir=${TARGET}/etc/openssl \
+    shared \
+    zlib \
+    darwin64-x86_64-cc
+
+  make
+  $DEBUG build_tarball command "make INSTALL_PREFIX=TMPDIR install"
+}
+
+function build_curl {
+  build_package curl \
+    --prefix=${TARGET} \
+    --disable-silent-rules \
+    --enable-ipv6 \
+    --without-brotli \
+    --without-cyassl \
+    --without-gnutls \
+    --without-gssapi \
+    --without-libmetalink \
+    --without-librtmp \
+    --without-libssh2 \
+    --without-nghttp2 \
+    --without-nss \
+    --without-polarssl \
+    --without-spnego \
+    --without-darwinssl \
+    --disable-ares \
+    --disable-ldap \
+    --disable-ldaps \
+    --with-zlib=${TARGET} \
+    --with-ssl=${TARGET} \
+    --with-ca-path=${TARGET}/etc/openssl/certs
 }
 
 function build_qtbase {
@@ -158,14 +312,13 @@ function build_qtbase {
   args+=(-no-framework)
   if [[ -z $SHARED_QT ]] args+=(-static)
 
-  local package=qtbase-opensource-src-${QTVER}
+  local package=qtbase-${QTTYPE}-src-${QTVER}
   local saved_CXXFLAGS=$CXXFLAGS
   export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
-  NO_CONFIGURE=1 build_package ${package}.tar.xz
+  NO_CONFIGURE=1 build_package qtbase
 
-  if [[ $QTVER == 5.7.0 ]] patch -p2 < ${SCRIPT_PATH}/qt-patches/002-xcrun-xcode-8.patch
   $DEBUG ./configure ${args}
 
   # find . -name Makefile| xargs perl -pi -e 's{-fvisibility=hidden|-fvisibility-inlines-hidden}{}g'
@@ -183,12 +336,12 @@ function build_qttools {
   tools=(linguist/lrelease linguist/lconvert linguist/lupdate macdeployqt)
   to_install=()
 
-  local package=qttools-opensource-src-${QTVER}
+  local package=qttools-${QTTYPE}-src-${QTVER}
   local saved_CXXFLAGS=$CXXFLAGS
   export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
-  CONFIGURE=qmake NO_MAKE=1 build_package ${package}.tar.xz
+  CONFIGURE=qmake NO_MAKE=1 build_package qttools
 
   for tool ($tools) {
     to_install+=($PWD/bin/${tool##*/})
@@ -209,7 +362,7 @@ function build_qttranslations {
   export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
-  CONFIGURE=qmake NO_MAKE=1 build_package qttranslations-opensource-src-${QTVER}.tar.xz
+  CONFIGURE=qmake NO_MAKE=1 build_package qttranslations
   $DEBUG make
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
 
@@ -221,7 +374,7 @@ function build_qtmacextras {
   export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
-  CONFIGURE=qmake NO_MAKE=1 build_package qtmacextras-opensource-src-${QTVER}.tar.xz
+  CONFIGURE=qmake NO_MAKE=1 build_package qtmacextras
   $DEBUG make
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
 
@@ -233,7 +386,7 @@ function build_qtmultimedia {
   export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
-  CONFIGURE=qmake NO_MAKE=1 build_package qtmultimedia-opensource-src-${QTVER}.tar.xz
+  CONFIGURE=qmake NO_MAKE=1 build_package qtmultimedia
   $DEBUG make
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
 
@@ -245,7 +398,7 @@ function build_qtsvg {
   export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
-  CONFIGURE=qmake NO_MAKE=1 build_package qtsvg-opensource-src-${QTVER}.tar.xz
+  CONFIGURE=qmake NO_MAKE=1 build_package qtsvg
   $DEBUG make
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
 
@@ -257,7 +410,7 @@ function build_qtimageformats {
   export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
-  CONFIGURE=qmake NO_MAKE=1 build_package qtimageformats-opensource-src-${QTVER}.tar.xz
+  CONFIGURE=qmake NO_MAKE=1 build_package qtimageformats
   $DEBUG make
   build_tarball command "make INSTALL_ROOT=TMPDIR install"
 
@@ -282,8 +435,11 @@ function build_configured_mkvtoolnix {
 
   local -a args
   args=(
-    --prefix=$dmgmac --bindir=$dmgmac --datarootdir=$dmgmac
-    --with-extra-libs=${TARGET}/lib --with-extra-includes=${TARGET}/include
+    --prefix=$dmgmac
+    --bindir=$dmgmac
+    --datarootdir=$dmgmac
+    --with-extra-libs=${TARGET}/lib
+    --with-extra-includes=${TARGET}/include
     --with-boost-libdir=${TARGET}/lib
     --with-docbook-xsl-root=${DOCBOOK_XSL_ROOT_DIR}
     --disable-debug
@@ -475,6 +631,7 @@ if [[ -z $@ ]]; then
   build_autoconf
   build_automake
   build_pkgconfig
+  build_libiconv
   build_cmake
   build_ogg
   build_vorbis
