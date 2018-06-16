@@ -374,6 +374,8 @@ init_locales(std::string locale) {
 
 #  if defined(MTX_APPIMAGE)
   locale_dir = (mtx::sys::get_installation_path() / ".." / "share" / "locale").string();
+#  elif defined(SYS_APPLE)
+  locale_dir = (mtx::sys::get_installation_path() / "locale").string();
 #  else
   locale_dir = MTX_LOCALE_DIR;
 #  endif  // MTX_APPIMAGE

@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* macOS: translations: updated the `build.sh` script to build `libiconv` and a
+  complete `gettext`. Together with an additional fix to how translation files
+  are located, MKVToolNix can now use all interface languages on macOS,
+  too. Fixes #2110, #2307, #2323.
+
 ## Bug fixes
 
 * MKVToolNix GUI: header editor: non-mandatory elements couldn't be removed
