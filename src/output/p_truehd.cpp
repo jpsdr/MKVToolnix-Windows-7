@@ -67,14 +67,16 @@ truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
     m_current_samples_per_frame = frame->m_samples_per_frame;
   }
 
-  auto samples   = 0 == frame->m_samples_per_frame ? m_current_samples_per_frame : frame->m_samples_per_frame;
-  auto timestamp = m_timestamp_calculator.get_next_timestamp(samples).to_ns();
-  auto duration  = m_timestamp_calculator.get_duration(samples).to_ns();
+  auto samples            = 0 == frame->m_samples_per_frame ? m_current_samples_per_frame : frame->m_samples_per_frame;
+  auto timestamp          = m_timestamp_calculator.get_next_timestamp(samples).to_ns();
+  auto duration           = m_timestamp_calculator.get_duration(samples).to_ns();
+  auto packet             = std::make_shared<packet_t>(frame->m_data, timestamp, duration, frame->is_sync() ? -1 : m_ref_timestamp);
+  packet->discard_padding = m_discard_padding.get_next().get_value_or({});
 
   if (frame->is_sync() && frame->is_truehd() && m_remove_dialog_normalization_gain)
     mtx::truehd::remove_dialog_normalization_gain(frame->m_data->get_buffer(), frame->m_data->get_size());
 
-  add_packet(std::make_shared<packet_t>(frame->m_data, timestamp, duration, frame->is_sync() ? -1 : m_ref_timestamp));
+  add_packet(packet);
 
   m_ref_timestamp = timestamp;
 }
@@ -82,6 +84,7 @@ truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
 int
 truehd_packetizer_c::process(packet_cptr packet) {
   m_timestamp_calculator.add_timestamp(packet);
+  m_discard_padding.add_maybe(packet->discard_padding);
 
   m_parser.add_data(packet->data->get_buffer(), packet->data->get_size());
 

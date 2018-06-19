@@ -178,6 +178,7 @@ mp3_packetizer_c::set_headers() {
 int
 mp3_packetizer_c::process(packet_cptr packet) {
   m_timestamp_calculator.add_timestamp(packet);
+  m_discard_padding.add_maybe(packet->discard_padding);
 
   mp3_header_t mp3header;
   memory_cptr mp3_packet;
@@ -189,6 +190,7 @@ mp3_packetizer_c::process(packet_cptr packet) {
     auto packet        = std::make_shared<packet_t>(mp3_packet, new_timestamp.to_ns(), m_packet_duration);
 
     packet->add_extensions(m_packet_extensions);
+    packet->discard_padding = m_discard_padding.get_next().get_value_or({});
 
     add_packet(packet);
 

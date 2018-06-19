@@ -102,8 +102,9 @@ int
 aac_packetizer_c::process_headerless(packet_cptr packet) {
   handle_parsed_audio_config();
 
-  packet->timestamp = m_timestamp_calculator.get_next_timestamp(m_config.samples_per_frame).to_ns();
-  packet->duration  = m_packet_duration;
+  packet->timestamp       = m_timestamp_calculator.get_next_timestamp(m_config.samples_per_frame).to_ns();
+  packet->duration        = m_packet_duration;
+  packet->discard_padding = m_discard_padding.get_next().get_value_or({});
 
   add_packet(packet);
 
@@ -113,6 +114,7 @@ aac_packetizer_c::process_headerless(packet_cptr packet) {
 int
 aac_packetizer_c::process(packet_cptr packet) {
   m_timestamp_calculator.add_timestamp(packet);
+  m_discard_padding.add_maybe(packet->discard_padding);
 
   if (m_mode == mode_e::headerless)
     return process_headerless(packet);

@@ -109,6 +109,7 @@ ac3_packetizer_c::process(packet_cptr packet) {
   // mxinfo(boost::format("tc %1% size %2%\n") % format_timestamp(packet->timestamp) % packet->data->get_size());
 
   m_timestamp_calculator.add_timestamp(packet, m_stream_position);
+  m_discard_padding.add_maybe(packet->discard_padding, m_stream_position);
   m_stream_position += packet->data->get_size();
 
   add_to_buffer(packet->data->get_buffer(), packet->data->get_size());
@@ -155,6 +156,7 @@ ac3_packetizer_c::flush_packets() {
 
     auto packet = std::make_shared<packet_t>(frame.m_data);
     packet->add_extensions(m_packet_extensions);
+    packet->discard_padding = m_discard_padding.get_next(frame.m_stream_position).get_value_or({});
 
     set_timestamp_and_add_packet(packet, frame.m_stream_position);
 

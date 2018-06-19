@@ -17,6 +17,7 @@
 
 #include "common/ac3.h"
 #include "merge/generic_packetizer.h"
+#include "merge/stream_property_preserver.h"
 #include "merge/timestamp_calculator.h"
 
 class ac3_packetizer_c: public generic_packetizer_c {
@@ -24,6 +25,7 @@ protected:
   mtx::ac3::frame_c m_first_ac3_header;
   mtx::ac3::parser_c m_parser;
   timestamp_calculator_c m_timestamp_calculator;
+  stream_property_preserver_c<timestamp_c> m_discard_padding;
   int64_t m_samples_per_packet, m_packet_duration;
   uint64_t m_stream_position;
   bool m_first_packet, m_remove_dialog_normalization_gain;

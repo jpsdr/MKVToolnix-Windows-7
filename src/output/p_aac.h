@@ -17,6 +17,7 @@
 
 #include "common/aac.h"
 #include "merge/generic_packetizer.h"
+#include "merge/stream_property_preserver.h"
 #include "merge/timestamp_calculator.h"
 
 class aac_packetizer_c: public generic_packetizer_c {
@@ -31,6 +32,7 @@ private:
   mode_e m_mode;
   mtx::aac::parser_c m_parser;
   timestamp_calculator_c m_timestamp_calculator;
+  stream_property_preserver_c<timestamp_c> m_discard_padding;
   int64_t m_packet_duration;
   bool m_first_packet;
 

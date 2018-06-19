@@ -31,6 +31,8 @@
   to the JSON output modules are valid UTF-8 encoded strings by replacing
   invalid bytes with placeholder characters. This avoids the JSON library
   throwing an exception and mkvmerge aborting on such data. Fixes #2327.
+* mkvmerge: audio packetizers: mkvmerge will now keep discard padding values
+  if they're present for packets read from Matroska files. Fixes #2296.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10

@@ -17,6 +17,7 @@
 
 #include "common/truehd.h"
 #include "merge/generic_packetizer.h"
+#include "merge/stream_property_preserver.h"
 #include "merge/timestamp_calculator.h"
 
 class truehd_packetizer_c: public generic_packetizer_c {
@@ -26,6 +27,7 @@ protected:
 
   int64_t m_current_samples_per_frame, m_ref_timestamp;
   timestamp_calculator_c m_timestamp_calculator;
+  stream_property_preserver_c<timestamp_c> m_discard_padding;
   mtx::truehd::parser_c m_parser;
 
 public:

@@ -127,6 +127,7 @@ dts_packetizer_c::set_headers() {
 int
 dts_packetizer_c::process(packet_cptr packet) {
   m_timestamp_calculator.add_timestamp(packet, m_stream_position);
+  m_discard_padding.add_maybe(packet->discard_padding, m_stream_position);
   m_stream_position += packet->data->get_size();
 
   m_packet_buffer.add(packet->data->get_buffer(), packet->data->get_size());
@@ -165,16 +166,18 @@ dts_packetizer_c::process_available_packets() {
     return;
 
   for (auto const &header_and_packet : m_queued_packets) {
-    auto &header           = std::get<0>(header_and_packet);
-    auto &data             = std::get<1>(header_and_packet);
-    auto packet_position   = std::get<2>(header_and_packet);
-    auto samples_in_packet = header.get_packet_length_in_core_samples();
-    auto new_timestamp     = m_timestamp_calculator.get_next_timestamp(samples_in_packet, packet_position);
+    auto &header            = std::get<0>(header_and_packet);
+    auto &data              = std::get<1>(header_and_packet);
+    auto packet_position    = std::get<2>(header_and_packet);
+    auto samples_in_packet  = header.get_packet_length_in_core_samples();
+    auto new_timestamp      = m_timestamp_calculator.get_next_timestamp(samples_in_packet, packet_position);
+    auto packet             = std::make_shared<packet_t>(data, new_timestamp.to_ns(), header.get_packet_length_in_nanoseconds().to_ns());
+    packet->discard_padding = m_discard_padding.get_next(packet_position).get_value_or({});
 
     if (m_remove_dialog_normalization_gain)
       mtx::dts::remove_dialog_normalization_gain(data->get_buffer(), data->get_size());
 
-    add_packet(std::make_shared<packet_t>(data, new_timestamp.to_ns(), header.get_packet_length_in_nanoseconds().to_ns()));
+    add_packet(packet);
   }
 
   m_queued_packets.clear();
