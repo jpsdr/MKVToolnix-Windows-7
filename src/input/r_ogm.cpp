@@ -1297,7 +1297,7 @@ ogm_s_text_demuxer_c::ogm_s_text_demuxer_c(ogm_reader_c *p_reader)
 
 generic_packetizer_c *
 ogm_s_text_demuxer_c::create_packetizer() {
-  generic_packetizer_c *ptzr_obj = new textsubs_packetizer_c(reader, m_ti, MKV_S_TEXTUTF8, true, false);
+  auto ptzr_obj = new textsubs_packetizer_c(reader, m_ti, MKV_S_TEXTUTF8, true);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 

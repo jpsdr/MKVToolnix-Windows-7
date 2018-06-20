@@ -172,7 +172,7 @@ usf_reader_c::create_packetizer(int64_t tid) {
 
   m_ti.m_private_data = memory_c::clone(m_private_data);
   m_ti.m_language     = track->m_language;
-  track->m_ptzr       = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUSF, false, true));
+  track->m_ptzr       = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUSF));
   show_packetizer_info(tid, PTZR(track->m_ptzr));
 }
 

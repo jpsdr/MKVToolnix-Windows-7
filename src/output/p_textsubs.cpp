@@ -28,12 +28,11 @@ using namespace libmatroska;
 textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
                                              track_info_c &p_ti,
                                              const char *codec_id,
-                                             bool recode,
-                                             bool is_utf8)
+                                             bool recode)
   : generic_packetizer_c(p_reader, p_ti)
   , m_codec_id{codec_id}
 {
-  if (recode && !is_utf8)
+  if (recode)
     m_cc_utf8 = charset_converter_c::init(m_ti.m_sub_charset);
 
   set_track_type(track_subtitle);

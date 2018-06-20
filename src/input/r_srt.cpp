@@ -60,8 +60,8 @@ srt_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('s', 0) || (NPTZR() != 0))
     return;
 
-  bool is_utf8 = m_text_in->get_byte_order() != BO_NONE;
-  add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, true, is_utf8));
+  auto need_recoding = m_text_in->get_byte_order() == BO_NONE;
+  add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, need_recoding));
 
   show_packetizer_info(0, PTZR0);
 }

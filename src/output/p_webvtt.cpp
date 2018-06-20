@@ -20,7 +20,7 @@
 
 webvtt_packetizer_c::webvtt_packetizer_c(generic_reader_c *p_reader,
                                          track_info_c &p_ti)
-  : textsubs_packetizer_c{p_reader, p_ti, MKV_S_TEXTWEBVTT, false, true}
+  : textsubs_packetizer_c{p_reader, p_ti, MKV_S_TEXTWEBVTT}
 {
   m_line_ending_style = line_ending_style_e::lf;
 }

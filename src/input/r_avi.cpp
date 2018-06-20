@@ -390,8 +390,8 @@ avi_reader_c::create_srt_packetizer(int idx) {
 
   parser->parse();
 
-  bool is_utf8   = demuxer.m_text_io->get_byte_order() != BO_NONE;
-  demuxer.m_ptzr = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, true, is_utf8));
+  auto need_recoding = demuxer.m_text_io->get_byte_order() == BO_NONE;
+  demuxer.m_ptzr     = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, need_recoding));
 
   show_packetizer_info(id, PTZR(demuxer.m_ptzr));
 }
@@ -414,7 +414,7 @@ avi_reader_c::create_ssa_packetizer(int idx) {
   parser->parse();
 
   m_ti.m_private_data = memory_c::clone(parser->get_global());
-  demuxer.m_ptzr      = add_packetizer(new textsubs_packetizer_c(this, m_ti, parser->is_ass() ?  MKV_S_TEXTASS : MKV_S_TEXTSSA, false, false));
+  demuxer.m_ptzr      = add_packetizer(new textsubs_packetizer_c(this, m_ti, parser->is_ass() ?  MKV_S_TEXTASS : MKV_S_TEXTSSA));
 
   show_packetizer_info(id, PTZR(demuxer.m_ptzr));
 }

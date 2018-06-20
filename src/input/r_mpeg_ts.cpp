@@ -2343,7 +2343,7 @@ reader_c::create_hdmv_textst_subtitles_packetizer(track_ptr const &track) {
 
 void
 reader_c::create_srt_subtitles_packetizer(track_ptr const &track) {
-  track->ptzr = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, false, true));
+  track->ptzr = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8));
 
   auto &converter = dynamic_cast<teletext_to_srt_packet_converter_c &>(*track->converter);
 

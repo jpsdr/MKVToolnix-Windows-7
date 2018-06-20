@@ -27,7 +27,7 @@ protected:
   line_ending_style_e m_line_ending_style{line_ending_style_e::cr_lf};
 
 public:
-  textsubs_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, const char *codec_id, bool recode, bool is_utf8);
+  textsubs_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, const char *codec_id, bool recode = false);
   virtual ~textsubs_packetizer_c();
 
   virtual int process(packet_cptr packet);
