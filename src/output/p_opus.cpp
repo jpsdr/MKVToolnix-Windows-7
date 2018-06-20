@@ -53,7 +53,6 @@ int
 opus_packetizer_c::process(packet_cptr packet) {
   try {
     auto toc = mtx::opus::toc_t::decode(packet->data);
-    mxdebug_if(m_debug, boost::format("TOC: %1% discard_padding %2%\n") % toc % packet->discard_padding);
 
     if (!packet->has_timestamp() || (timestamp_c::ns(packet->timestamp) == m_previous_provided_timestamp))
       packet->timestamp             = m_next_calculated_timestamp.to_ns();
@@ -62,6 +61,8 @@ opus_packetizer_c::process(packet_cptr packet) {
 
     packet->duration                = toc.packet_duration.to_ns();
     m_next_calculated_timestamp     = timestamp_c::ns(packet->timestamp + packet->duration);
+
+    mxdebug_if(m_debug, boost::format("TOC: %1% discard_padding %2% final timestamp %3% duration %4%\n") % toc % packet->discard_padding % format_timestamp(packet->timestamp) % format_timestamp(packet->duration));
 
     if (packet->discard_padding.valid())
       packet->duration_mandatory = true;
