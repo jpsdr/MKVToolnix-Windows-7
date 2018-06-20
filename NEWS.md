@@ -33,6 +33,29 @@
   throwing an exception and mkvmerge aborting on such data. Fixes #2327.
 * mkvmerge: audio packetizers: mkvmerge will now keep discard padding values
   if they're present for packets read from Matroska files. Fixes #2296.
+* mkvmerge: Ogg Opus reader: packet timestamps aren't calculated by summing up
+  the duration of all packets starting with timestamp 0 anymore. Instead the
+  algorithm is based on the Ogg page's granule position and which packet
+  number is currently timestamped (special handling for the first and last
+  packets in the stream).
+
+  * This fixes the first timestamp if the first Ogg packet's granule position
+    is larger than the number of samples in the first packet (= if the first
+    sample's timestamp is bigger than 0). mkvmerge will keep those offsets now
+    and inserts "discard padding" only where it's actually needed.
+  * It also improves handling of invalid files where the first Ogg packet's
+    granule position is smaller than the number of samples in the first packet
+    (= the first sample's timestamp is smaller than 0). mkvmerge will now
+    shift all timestamps up to 0 in such a case instead of inserting "discard
+    padding" elements all over the place.
+  * mkvmerge will no longer insert "discard padding" elements if the
+    difference between a) the calculated number of samples in the packet
+    according to the granule position and b) the actual number of samples as
+    calculated from the bitstream is one sample or less and if the packet
+    isn't the last one in the stream. This circumvents certain rounding
+    errors.
+
+  Fixes #2280.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10

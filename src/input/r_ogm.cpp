@@ -123,7 +123,7 @@ public:
 
 class ogm_a_opus_demuxer_c: public ogm_demuxer_c {
 protected:
-  timestamp_c m_calculated_end_timestamp;
+  timestamp_c m_previous_page_end_timestamp, m_timestamp_shift;
 
   static debugging_option_c ms_debug;
 
@@ -1172,7 +1172,7 @@ ogm_a_vorbis_demuxer_c::process_page(int64_t /* granulepos */) {
 
 ogm_a_opus_demuxer_c::ogm_a_opus_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
-  , m_calculated_end_timestamp{timestamp_c::ns(0)}
+  , m_timestamp_shift{timestamp_c::ns(0)}
 {
   codec = codec_c::look_up(codec_c::type_e::A_OPUS);
 }
@@ -1191,31 +1191,93 @@ void
 ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
   ogg_packet op;
 
-  auto ogg_timestamp = timestamp_c::ns(granulepos * 1000000000 / 48000);
+  auto page_end_timestamp = timestamp_c::ns(granulepos * 1000000000 / 48000);
+  auto page_duration      = timestamp_c::ns(0);
+  auto packets            = std::vector<std::pair<packet_cptr, mtx::opus::toc_t>>{};
+  auto eos_here           = false;
 
   while (ogg_stream_packetout(&os, &op) == 1) {
-    eos |= op.e_o_s;
+    if (op.e_o_s) {
+      eos      = 1;
+      eos_here = true;
+    }
 
     if ((4 <= op.bytes) && !memcmp(op.packet, "Opus", 4))
       continue;
 
     try {
-      auto packet                = std::make_shared<packet_t>(memory_c::clone(op.packet, op.bytes));
-      auto toc                   = mtx::opus::toc_t::decode(packet->data);
-      m_calculated_end_timestamp += toc.packet_duration;
+      auto packet    = std::make_shared<packet_t>(memory_c::clone(op.packet, op.bytes));
+      auto toc       = mtx::opus::toc_t::decode(packet->data);
+      page_duration += toc.packet_duration;
 
-      if (m_calculated_end_timestamp > ogg_timestamp) {
-        packet->discard_padding = m_calculated_end_timestamp - ogg_timestamp;
-        mxdebug_if(ms_debug,
-                   boost::format("Opus discard padding calculated %1% Ogg timestamp %2% diff %3% samples %4% (Ogg page's granulepos %5%)\n")
-                   % m_calculated_end_timestamp % ogg_timestamp % packet->discard_padding % (packet->discard_padding.to_ns() * 48000 / 1000000000) % granulepos);
-      }
+      packets.emplace_back(packet, toc);
 
-      reader->m_reader_packetizers[ptzr]->process(packet);
     } catch (mtx::opus::decode_error &ex) {
-      mxwarn_fn(m_ti.m_fname, boost::format(Y("Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n")) % format_timestamp(ogg_timestamp) % ex);
+      mxwarn_fn(m_ti.m_fname, boost::format(Y("Error decoding an Ogg Opus page at Ogg page end timestamp %1%; page will be skipped: %2%\n")) % page_end_timestamp % ex);
     }
   }
+
+  if (packets.empty())
+    return;
+
+  mxdebug_if(ms_debug,
+             boost::format("process_page: granulepos %1% = %2% previous page end timestamp %3% page duration %4%\n")
+             % granulepos % page_end_timestamp % m_previous_page_end_timestamp % page_duration);
+
+  if (!eos_here && !m_previous_page_end_timestamp.valid()) {
+    // First page in Ogg stream. Streams must not start at 0. If they
+    // don't, this is signaled by the page containing less samples
+    // than the difference between the page's granulepos-indicated end
+    // timestamp and 0.
+    auto current_timestamp = page_end_timestamp;
+    auto idx               = packets.size();
+
+    while (idx > 0) {
+      --idx;
+
+      current_timestamp             -= packets[idx].second.packet_duration;
+      packets[idx].first->timestamp  = (current_timestamp + m_timestamp_shift).to_ns();
+    }
+
+    if (current_timestamp != timestamp_c::ns(0)) {
+      if (current_timestamp < timestamp_c::ns(0)) {
+        m_timestamp_shift = current_timestamp.negate();
+        for (auto const &pair : packets)
+          pair.first->timestamp += m_timestamp_shift.to_ns();
+      }
+
+      mxdebug_if(ms_debug,
+                 boost::format("Opus first packet's timestamp is not zero; Ogg page end timestamp %1% page duration %2% first timestamp %3% (Ogg page's granulepos %4%) shift %5%\n")
+                 % page_end_timestamp % page_duration % format_timestamp(packets.front().first->timestamp) % granulepos % m_timestamp_shift);
+    }
+
+  } else {
+    // Calculate discard padding based on previous end timestamp and
+    // number of samples in this page.
+
+    auto current_timestamp = m_previous_page_end_timestamp;
+
+    for (auto const &pair : packets) {
+      pair.first->timestamp  = (current_timestamp + m_timestamp_shift).to_ns();
+      current_timestamp     += pair.second.packet_duration;
+    }
+
+    auto &packet      = *packets.back().first;
+    auto samples_over = (current_timestamp - page_end_timestamp).to_ns() * 48'000 / 1'000'000'000;
+
+    if (samples_over > (eos_here ? 0 : 1)) {
+      packet.discard_padding = current_timestamp - page_end_timestamp;
+
+      mxdebug_if(ms_debug,
+                 boost::format("Opus discard padding calculated: previous Ogg page end timestamp %1% current Ogg page end timestamp %2% discard padding %3% in samples %4% (Ogg page's granulepos %5%)\n")
+                 % m_previous_page_end_timestamp % page_end_timestamp % packet.discard_padding % samples_over % granulepos);
+    }
+  }
+
+   m_previous_page_end_timestamp = page_end_timestamp;
+
+   for (auto const &packet : packets)
+      reader->m_reader_packetizers[ptzr]->process(packet.first);
 }
 
 void
