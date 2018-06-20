@@ -9,8 +9,8 @@
 * mkvmerge: SRT/ASS/SSA text subtitles: for files for which no encoding has
   been specified, mkvmerge will try UTF-8 first before falling back to the
   system's default encoding. Part of the implementation of #2246.
-* mkvmerge: SRT/WebVTT text subtitles: a warning is now emitted if invalid
-  8-bit characters are encountered outside valid multi-byte UTF-8
+* mkvmerge: SRT/ASS/SSA/WebVTT text subtitles: a warning is now emitted if
+  invalid 8-bit characters are encountered outside valid multi-byte UTF-8
   sequences. Part of the implementation of #2246.
 
 ## Bug fixes

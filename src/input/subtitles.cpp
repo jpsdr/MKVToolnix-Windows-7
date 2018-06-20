@@ -510,7 +510,17 @@ ssa_parser_c::recode(std::string const &s,
   if (m_try_utf8 && !mtx::utf8::is_valid(s))
     m_try_utf8 = false;
 
-  return m_try_utf8 ? s : m_cc_utf8->utf8(s);
+  auto recoded = m_try_utf8 ? s : m_cc_utf8->utf8(s);
+
+  if (mtx::utf8::is_valid(recoded))
+    return recoded;
+
+  if (!m_invalid_utf8_warned) {
+    m_invalid_utf8_warned = true;
+    mxwarn_tid(m_file_name, m_tid, boost::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
+  }
+
+  return mtx::utf8::fix_invalid(recoded, replacement_marker);
 }
 
 void
@@ -544,7 +554,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
     short_name.erase(0, pos + 1);
 
   attachment.ui_id        = m_attachment_id;
-  attachment.name         = recode(name);
+  attachment.name         = recode(name, static_cast<uint32_t>('_'));
   attachment.description  = (boost::format(SSA_SECTION_FONTS == section ? Y("Imported font from %1%") : Y("Imported picture from %1%")) % short_name).str();
   attachment.to_all_files = true;
   attachment.source_file  = m_file_name;
