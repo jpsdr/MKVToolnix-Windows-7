@@ -34,8 +34,9 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
   , m_codec_id{codec_id}
 {
   if (recode) {
-    m_cc_utf8  = charset_converter_c::init(m_ti.m_sub_charset);
-    m_try_utf8 = m_ti.m_sub_charset.empty();
+    m_cc_utf8           = charset_converter_c::init(m_ti.m_sub_charset);
+    m_converter_is_utf8 = charset_converter_c::is_utf8_charset_name(m_cc_utf8->get_charset());
+    m_try_utf8          = m_ti.m_sub_charset.empty();
   }
 
   set_track_type(track_subtitle);
@@ -94,8 +95,21 @@ textsubs_packetizer_c::process(packet_cptr packet) {
   if (m_try_utf8 && !mtx::utf8::is_valid(subs))
     m_try_utf8 = false;
 
-  if (!m_try_utf8 && m_cc_utf8)
+  auto emit_invalid_utf8_warning = false;
+
+  if (!m_try_utf8 && m_cc_utf8) {
+    if (!m_invalid_utf8_warned && m_converter_is_utf8 && !mtx::utf8::is_valid(subs))
+      emit_invalid_utf8_warning = true;
+
     subs = m_cc_utf8->utf8(subs);
+
+  } else if (!m_invalid_utf8_warned && !mtx::utf8::is_valid(subs))
+    emit_invalid_utf8_warning = true;
+
+  if (emit_invalid_utf8_warning) {
+    m_invalid_utf8_warned = true;
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
+  }
 
   packet->data = memory_c::borrow(subs);
 

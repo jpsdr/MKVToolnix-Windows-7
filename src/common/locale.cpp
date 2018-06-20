@@ -91,7 +91,7 @@ charset_converter_c::init(const std::string &charset,
 
 bool
 charset_converter_c::is_utf8_charset_name(const std::string &charset) {
-  return ((charset == "UTF8") || (charset == "UTF-8"));
+  return boost::regex_match(charset, boost::regex{"^utf-?8$", boost::regex::perl | boost::regex::icase});
 }
 
 void
