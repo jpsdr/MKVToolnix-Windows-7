@@ -149,7 +149,7 @@ public:
   };
 };
 
-debugging_option_c ogm_a_opus_demuxer_c::ms_debug{"opus"};
+debugging_option_c ogm_a_opus_demuxer_c::ms_debug{"opus|opus_reader|ogm_opus_reader"};
 
 class ogm_a_vorbis_demuxer_c: public ogm_demuxer_c {
 public:
