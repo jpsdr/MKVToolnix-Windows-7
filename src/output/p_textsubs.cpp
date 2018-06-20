@@ -18,6 +18,7 @@
 #include "common/codec.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
+#include "common/strings/utf8.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
 #include "merge/packet_extensions.h"
@@ -32,8 +33,10 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
   : generic_packetizer_c(p_reader, p_ti)
   , m_codec_id{codec_id}
 {
-  if (recode)
-    m_cc_utf8 = charset_converter_c::init(m_ti.m_sub_charset);
+  if (recode) {
+    m_cc_utf8  = charset_converter_c::init(m_ti.m_sub_charset);
+    m_try_utf8 = m_ti.m_sub_charset.empty();
+  }
 
   set_track_type(track_subtitle);
   if (m_codec_id == MKV_S_TEXTUSF)
@@ -88,7 +91,10 @@ textsubs_packetizer_c::process(packet_cptr packet) {
   auto subs = std::string{reinterpret_cast<char *>(packet->data->get_buffer()), packet->data->get_size()};
   subs      = chomp(normalize_line_endings(subs, m_line_ending_style));
 
-  if (m_cc_utf8)
+  if (m_try_utf8 && !mtx::utf8::is_valid(subs))
+    m_try_utf8 = false;
+
+  if (!m_try_utf8 && m_cc_utf8)
     subs = m_cc_utf8->utf8(subs);
 
   packet->data = memory_c::borrow(subs);
