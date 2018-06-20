@@ -103,7 +103,7 @@ strip_comments(nlohmann::json::string_t const &data)  {
 void
 fix_invalid_utf8_recursively(nlohmann::json &json) {
   if (json.type() == nlohmann::json::value_t::string)
-    json = fix_invalid_utf8(json.get<std::string>());
+    json = mtx::utf8::fix_invalid(json.get<std::string>());
 
   else if (json.type() == nlohmann::json::value_t::array) {
     for (auto &sub_json : json)

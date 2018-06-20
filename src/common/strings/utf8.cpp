@@ -22,6 +22,24 @@
 
 #include "common/strings/utf8.h"
 
+namespace mtx { namespace utf8 {
+
+std::string
+fix_invalid(std::string const &str,
+            uint32_t replacement_marker) {
+  std::string temp;
+
+  ::utf8::replace_invalid(str.begin(), str.end(), std::back_inserter(temp), replacement_marker);
+  return temp;
+}
+
+bool
+is_valid(std::string const &str) {
+  return ::utf8::is_valid(str.begin(), str.end());
+}
+
+}}
+
 std::wstring
 to_wide(const std::string &source) {
   std::wstring destination;
@@ -38,14 +56,6 @@ to_utf8(const std::wstring &source) {
   ::utf8::utf32to8(source.begin(), source.end(), back_inserter(destination));
 
   return destination;
-}
-
-std::string
-fix_invalid_utf8(std::string const &str) {
-  std::string temp;
-
-  ::utf8::replace_invalid(str.begin(), str.end(), std::back_inserter(temp));
-  return temp;
 }
 
 size_t

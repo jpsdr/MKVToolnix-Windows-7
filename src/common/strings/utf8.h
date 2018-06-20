@@ -83,7 +83,12 @@ to_utf8(::libebml::UTFstring const &source) {
   return source.GetUTF8();
 }
 
-std::string fix_invalid_utf8(std::string const &source);
-
 size_t get_width_in_em(wchar_t c);
 size_t get_width_in_em(const std::wstring &s);
+
+namespace mtx { namespace utf8 {
+
+std::string fix_invalid(std::string const &str, uint32_t replacement_marker = 0xfffdu);
+bool is_valid(std::string const &str);
+
+}}
