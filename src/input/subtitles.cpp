@@ -19,6 +19,7 @@
 #include "common/mm_text_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
+#include "common/strings/utf8.h"
 #include "input/subtitles.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
@@ -293,6 +294,18 @@ ssa_parser_c::ssa_parser_c(generic_reader_c &reader,
 }
 
 void
+ssa_parser_c::set_charset_converter(charset_converter_cptr const &cc_utf8) {
+  if (cc_utf8)
+    m_cc_utf8 = cc_utf8;
+
+  else {
+    m_cc_utf8  = g_cc_local_utf8;
+    m_try_utf8 = true;
+  }
+}
+
+
+void
 ssa_parser_c::parse() {
   boost::regex sec_styles_ass_re("^\\s*\\[V4\\+\\s+Styles\\]", boost::regex::perl | boost::regex::icase);
   boost::regex sec_styles_re(    "^\\s*\\[V4\\s+Styles\\]",    boost::regex::perl | boost::regex::icase);
@@ -404,7 +417,7 @@ ssa_parser_c::parse() {
           + get_element("MarginR", fields)          + comma
           + get_element("MarginV", fields)          + comma
           + get_element("Effect", fields)           + comma
-          + recode_text(fields);
+          + recode(get_element("Text", fields));
 
         add(start, end, num, line);
         num++;
@@ -492,8 +505,12 @@ ssa_parser_c::parse_time(std::string &stime) {
 }
 
 std::string
-ssa_parser_c::recode_text(std::vector<std::string> &fields) {
-  return m_cc_utf8->utf8(get_element("Text", fields));
+ssa_parser_c::recode(std::string const &s,
+                     uint32_t replacement_marker) {
+  if (m_try_utf8 && !mtx::utf8::is_valid(s))
+    m_try_utf8 = false;
+
+  return m_try_utf8 ? s : m_cc_utf8->utf8(s);
 }
 
 void
@@ -527,7 +544,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
     short_name.erase(0, pos + 1);
 
   attachment.ui_id        = m_attachment_id;
-  attachment.name         = m_cc_utf8->utf8(name);
+  attachment.name         = recode(name);
   attachment.description  = (boost::format(SSA_SECTION_FONTS == section ? Y("Imported font from %1%") : Y("Imported picture from %1%")) % short_name).str();
   attachment.to_all_files = true;
   attachment.source_file  = m_file_name;

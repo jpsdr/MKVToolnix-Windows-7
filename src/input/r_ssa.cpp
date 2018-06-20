@@ -49,10 +49,10 @@ ssa_reader_c::read_headers() {
   if (!ssa_reader_c::probe_file(*text_in, 0))
     throw mtx::input::invalid_format_x();
 
-  charset_converter_cptr cc_utf8 = text_in->get_byte_order() != BO_NONE   ? charset_converter_c::init("UTF-8")
-                                 : mtx::includes(m_ti.m_sub_charsets,  0) ? charset_converter_c::init(m_ti.m_sub_charsets[ 0])
-                                 : mtx::includes(m_ti.m_sub_charsets, -1) ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
-                                 :                                          g_cc_local_utf8;
+  auto  cc_utf8 = text_in->get_byte_order() != BO_NONE   ? charset_converter_c::init("UTF-8")
+                : mtx::includes(m_ti.m_sub_charsets,  0) ? charset_converter_c::init(m_ti.m_sub_charsets[ 0])
+                : mtx::includes(m_ti.m_sub_charsets, -1) ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
+                :                                          charset_converter_cptr{};
 
   m_ti.m_id  = 0;
   m_subs     = std::make_shared<ssa_parser_c>(*this, text_in, m_ti.m_fname, 0);
