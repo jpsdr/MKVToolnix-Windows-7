@@ -6,8 +6,7 @@ class T_275srt_mixed_eol_styles < Test
   end
 
   def run
-    merge "'data/subtitles/srt/Space Buddies (2009) AVCHD 1080p DTS.srt'"
+    merge "--sub-charset 0:cp1250 'data/subtitles/srt/Space Buddies (2009) AVCHD 1080p DTS.srt'"
     return hash_tmp
   end
 end
-

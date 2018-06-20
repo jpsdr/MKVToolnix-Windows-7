@@ -8,4 +8,4 @@ test "identification" do
   identify_json(the_file)["tracks"].collect { |t| t["properties"]["language"] }.compact.sort.join('+')
 end
 
-test_merge the_file
+test_merge the_file, :exit_code => :warning
