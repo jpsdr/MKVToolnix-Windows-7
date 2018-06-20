@@ -1213,7 +1213,7 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
       packets.emplace_back(packet, toc);
 
     } catch (mtx::opus::decode_error &ex) {
-      mxwarn_fn(m_ti.m_fname, boost::format(Y("Error decoding an Ogg Opus page at Ogg page end timestamp %1%; page will be skipped: %2%\n")) % page_end_timestamp % ex);
+      mxwarn_fn(m_ti.m_fname, boost::format(Y("Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n")) % page_end_timestamp % ex);
     }
   }
 
