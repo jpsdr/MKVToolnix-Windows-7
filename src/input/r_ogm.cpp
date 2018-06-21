@@ -1198,8 +1198,16 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
   auto eos_here           = false;
   auto gap_here           = false;
 
+  while (true) {
+    auto result = ogg_stream_packetout(&os, &op);
+    if (result == 0)
+      break;
 
-  while (ogg_stream_packetout(&os, &op) == 1) {
+    if (result == -1) {
+      gap_here = true;
+      continue;
+    }
+
     if (op.e_o_s) {
       eos      = 1;
       eos_here = true;
@@ -1227,11 +1235,17 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
   if (packets.empty())
     return;
 
-  if (!eos_here && is_first_packet) {
-    // First page in Ogg stream. Streams must not start at 0. If they
-    // don't, this is signaled by the page containing less samples
-    // than the difference between the page's granulepos-indicated end
-    // timestamp and 0.
+  if (!eos_here && (is_first_packet || gap_here)) {
+    // Two possible situations that require calculating the start
+    // timestamps backwards from the granule position:
+
+    // 1. First page in Ogg stream. Streams must not start at 0. If
+    //    they don't, this is signaled by the page containing less
+    //    samples than the difference between the page's
+    //    granulepos-indicated end timestamp and 0.
+
+    // 2. If there was a gap, the calculated prior end timestamp is
+    //    the one before the gap and must therefore not be used.
     auto current_timestamp = page_end_timestamp;
     auto idx               = packets.size();
 
@@ -1242,7 +1256,13 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
       packets[idx].first->timestamp  = (current_timestamp + m_timestamp_shift).to_ns();
     }
 
-    if (current_timestamp != timestamp_c::ns(0)) {
+
+    if (gap_here) {
+      mxdebug_if(ms_debug,
+                 boost::format("Opus packet after gap; Ogg page end timestamp %1% page duration %2% first timestamp %3%\n")
+                 % page_end_timestamp % page_duration % format_timestamp(packets.front().first->timestamp));
+
+    } else if (current_timestamp != timestamp_c::ns(0)) {
       if (current_timestamp < timestamp_c::ns(0)) {
         m_timestamp_shift = current_timestamp.negate();
         for (auto const &pair : packets)
@@ -1256,7 +1276,10 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
 
   } else {
     // Calculate discard padding based on previous end timestamp and
-    // number of samples in this page.
+    // number of samples in this page. This is done so that streams
+    // that aren't strictly spec-compliant (gaps in the middle =
+    // discard padding present not just on the very last packet) can
+    // be handled gracefully, too.
 
     auto current_timestamp = m_previous_page_end_timestamp;
 

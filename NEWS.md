@@ -60,6 +60,9 @@
     calculated from the bitstream is one sample or less and if the packet
     isn't the last one in the stream. This circumvents certain rounding
     errors.
+  * The timestamp of the first packet after a gap in the middle of the stream
+    is now calculated based on the Ogg page the packet belongs to, and not
+    based on the timestamps before the gap.
 
   Fixes #2280.
 
