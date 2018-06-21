@@ -456,7 +456,8 @@ Track::canChangeSubCharset()
   const {
   if (   isSubtitles()
       && m_properties.value(Q("text_subtitles")).toBool()
-      && m_properties.value(Q("encoding")).toString().isEmpty())
+      && (   m_properties.value(Q("encoding")).toString().isEmpty()
+          || mtx::included_in(m_file->m_type, mtx::file_type_e::matroska, mtx::file_type_e::mpeg_ts)))
     return true;
 
   if (   isChapters()
