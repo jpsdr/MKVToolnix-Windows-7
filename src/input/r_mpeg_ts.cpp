@@ -2343,9 +2343,10 @@ reader_c::create_hdmv_textst_subtitles_packetizer(track_ptr const &track) {
 
 void
 reader_c::create_srt_subtitles_packetizer(track_ptr const &track) {
-  track->ptzr = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8));
+  auto recoding_requested = mtx::includes(m_ti.m_sub_charsets, track->m_id) || mtx::includes(m_ti.m_sub_charsets, track->m_id);
+  track->ptzr             = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, recoding_requested));
 
-  auto &converter = dynamic_cast<teletext_to_srt_packet_converter_c &>(*track->converter);
+  auto &converter         = dynamic_cast<teletext_to_srt_packet_converter_c &>(*track->converter);
 
   converter.demux_page(*track->m_ttx_wanted_page, PTZR(track->ptzr));
   converter.override_encoding(*track->m_ttx_wanted_page, track->language);

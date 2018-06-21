@@ -2007,7 +2007,8 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
   } else if (balg::starts_with(t->codec_id, "S_TEXT") || (t->codec_id == "S_SSA") || (t->codec_id == "S_ASS")) {
     std::string new_codec_id = ((t->codec_id == "S_SSA") || (t->codec_id == "S_ASS")) ? "S_TEXT/"s + std::string(&t->codec_id[2]) : t->codec_id;
 
-    set_track_packetizer(t, new textsubs_packetizer_c(this, nti, new_codec_id.c_str()));
+    auto recoding_requested = mtx::includes(m_ti.m_sub_charsets, t->tnum) || mtx::includes(m_ti.m_sub_charsets, t->tnum);
+    set_track_packetizer(t, new textsubs_packetizer_c(this, nti, new_codec_id.c_str(), recoding_requested));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
 
     t->sub_type = 't';

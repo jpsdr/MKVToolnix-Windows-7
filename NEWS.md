@@ -12,6 +12,9 @@
 * mkvmerge: SRT/ASS/SSA/WebVTT text subtitles: a warning is now emitted if
   invalid 8-bit characters are encountered outside valid multi-byte UTF-8
   sequences. Part of the implementation of #2246.
+* mkvmerge: Matroska & MPEG transport stream readers: the encoding of text
+  subtitles read from Matroska files can now be changed with the
+  `--sub-charset` parameter.
 
 ## Bug fixes
 
