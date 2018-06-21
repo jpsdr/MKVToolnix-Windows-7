@@ -1194,7 +1194,10 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
   auto page_end_timestamp = timestamp_c::ns(granulepos * 1000000000 / 48000);
   auto page_duration      = timestamp_c::ns(0);
   auto packets            = std::vector<std::pair<packet_cptr, mtx::opus::toc_t>>{};
+  auto is_first_packet    = !m_previous_page_end_timestamp.valid();
   auto eos_here           = false;
+  auto gap_here           = false;
+
 
   while (ogg_stream_packetout(&os, &op) == 1) {
     if (op.e_o_s) {
@@ -1217,14 +1220,14 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
     }
   }
 
+  mxdebug_if(ms_debug,
+             boost::format("process_page: granulepos %1% = %2% previous page end timestamp %3% page duration %4% is_first_packet %5% eos_here %6% gap_here %7% num packets %8%\n")
+             % granulepos % page_end_timestamp % m_previous_page_end_timestamp % page_duration % is_first_packet % eos_here % gap_here % packets.size());
+
   if (packets.empty())
     return;
 
-  mxdebug_if(ms_debug,
-             boost::format("process_page: granulepos %1% = %2% previous page end timestamp %3% page duration %4%\n")
-             % granulepos % page_end_timestamp % m_previous_page_end_timestamp % page_duration);
-
-  if (!eos_here && !m_previous_page_end_timestamp.valid()) {
+  if (!eos_here && is_first_packet) {
     // First page in Ogg stream. Streams must not start at 0. If they
     // don't, this is signaled by the page containing less samples
     // than the difference between the page's granulepos-indicated end
