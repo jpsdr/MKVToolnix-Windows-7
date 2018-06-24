@@ -1,191 +1,133 @@
 #!/bin/bash
-# This is free and unencumbered software released into the public domain.
-#
-# Anyone is free to copy, modify, publish, use, compile, sell, or
-# distribute this software, either in source code form or as a compiled
-# binary, for any purpose, commercial or non-commercial, and by any
-# means.
-#
-# In jurisdictions that recognize copyright laws, the author or authors
-# of this software dedicate any and all copyright interest in the
-# software to the public domain. We make this dedication for the benefit
-# of the public at large and to the detriment of our heirs and
-# successors. We intend this dedication to be an overt act of
-# relinquishment in perpetuity of all present and future rights to this
-# software under copyright law.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#
-# For more information, please refer to <http://unlicense.org/>
 
-set -e
-set -x
+# This only works on CentOS 7 so far. At least the following packages
+# must be installed:
 
-APP=MKVToolNix
-LOWERAPP=${APP,,}
-JOBS=4
-CXX="g++"
+#   boost-devel
+#   cmark-devel
+#   desktop-file-utils
+#   devtoolset-6-gcc-c++
+#   docbook-style-xsl
+#   fdupes
+#   file-devel
+#   flac
+#   flac-devel
+#   fuse
+#   fuse-libs
+#   gettext-devel
+#   glibc-devel
+#   gtest-devel
+#   libogg-devel
+#   libstdc++-devel
+#   libvorbis-devel
+#   libxslt
+#   make
+#   pkgconfig
+#   po4a
+#   qt5-qtbase-devel
+#   qt5-qtmultimedia-devel
+#   rubygem-drake
+#   wget
+#   zlib-devel
 
-#VERSION="git"
-VERSION="24.0.0"
+# This must be run from inside an unpacked MKVToolNix source
+# directory. You can run it from inside a git checkout, but make sure
+# to that submodules have been initialized and updated.
 
-mtxdir="mkvtoolnix-$VERSION"
-mtxurl="https://mkvtoolnix.download/sources/${mtxdir}.tar.xz"
-giturl="https://gitlab.com/mbunkus/mkvtoolnix"
-cmurl="https://mkvtoolnix.download/ubuntu/xenial/binary/amd64/libcmark-dev_0.28.3-1~bunkus01_amd64.deb"
+set -e set -x
 
-export LDFLAGS="-Wl,-z,relro -Wl,--as-needed -Wl,-rpath,XORIGIN/../lib"
-
-TOP="$(readlink -f "$0")"
-TOP="${TOP%/*}"
-
-if [[ ! -c /dev/fuse ]]; then
-  sudo mknod /dev/fuse c 10 229
-  sudo chmod 0666 /dev/fuse
+if [[ ! -e /dev/fuse ]]; then
+  sudo mknod --mode=0666 /dev/fuse c 10 229
 fi
 
-mkdir -p $APP
-cd $APP
+TOP_DIR="$(readlink -f ${0})"
+TOP_DIR="${TOP_DIR%/*}/../.."
+cd "${TOP_DIR}"
+TOP_DIR="${PWD}"
 
-# build-dependencies
-if [ -x /usr/bin/apt ]; then
-  sudo apt update
-  sudo apt -y upgrade
-  sudo apt -y dist-upgrade
-  sudo apt -y --no-install-recommends install \
-    ca-certificates \
-    chrpath \
-    cmake \
-    debhelper \
-    docbook-xsl \
-    fakeroot \
-    fuse \
-    gettext \
-    git \
-    libboost-date-time-dev \
-    libboost-dev \
-    libboost-filesystem-dev \
-    libboost-math-dev \
-    libboost-regex-dev \
-    libboost-system-dev \
-    libbz2-dev \
-    libflac-dev \
-    libgtest-dev \
-    liblzo2-dev \
-    libmagic-dev \
-    libogg-dev \
-    libvorbis-dev \
-    p7zip-full \
-    pkg-config \
-    python \
-    python3 \
-    qt5-default \
-    qtbase5-dev \
-    qtbase5-dev-tools \
-    qtmultimedia5-dev \
-    rake \
-    ruby \
-    wget \
-    xsltproc \
-    zlib1g-dev
-  sudo apt clean
+QTVERSION="5.11.1"
+QTDIR="${HOME}/opt/qt/${QTVERSION}/gcc_64"
+
+APP="mkvtoolnix-gui"
+VERSION="$(perl -ne 'next unless m/^AC_INIT/; s{.*?,\[}{}; s{\].*}{}; print; exit' ${TOP_DIR}/configure.ac)"
+JOBS=$(nproc)
+
+wget -O "${TOP_DIR}/tools/appimage/functions.sh" -q https://raw.githubusercontent.com/AppImage/AppImages/master/functions.sh
+. "${TOP_DIR}/tools/appimage/functions.sh"
+
+if [[ ! -f configure ]]; then
+  ./autogen.sh
 fi
 
-if ! dpkg -l libcmark-dev &> /dev/null; then
-  wget $cmurl -O libcmark-dev.deb
-  sudo dpkg -i libcmark-dev.deb
+if [[ -f /etc/centos-release ]]; then
+  export CC=/opt/rh/devtoolset-6/root/bin/gcc
+  export CXX=/opt/rh/devtoolset-6/root/bin/g++
 fi
 
-if [ ! -e "$mtxdir/usr/bin/mkvtoolnix-gui" ]; then
-  rm -rf $mtxdir
-  if [ "$VERSION" = "git" ]; then
-    git clone $giturl $mtxdir
-    cd $mtxdir
-    git describe --always | tail -c+9 > version
-    git submodule init
-    git submodule update
-    ./autogen.sh
-  else
-    wget -c $mtxurl
-    tar xf ${mtxdir}.tar.xz
-    cd $mtxdir
-  fi
-  ./configure --prefix=/usr --disable-debug --enable-appimage
-  rake JOBS=$JOBS
-  rake install DESTDIR="$PWD"
-  cd -
-fi
+export PKG_CONFIG_PATH="${QTDIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+export LD_LIBRARY_PATH="${QTDIR}/lib:${LD_LIBRARY_PATH}"
+export LDFLAGS="-L${QTDIR}/lib ${LDFLAGS}"
 
-wget -q https://github.com/probonopd/AppImages/raw/master/functions.sh -O ./functions.sh
-. ./functions.sh
+./configure \
+  --prefix=/usr \
+  --enable-appimage \
+  --enable-optimization \
+  --with-moc="${QTDIR}/bin/moc" \
+  --with-uic="${QTDIR}/bin/uic" \
+  --with-rcc="${QTDIR}/bin/rcc" \
+  --with-qmake="${QTDIR}/bin/qmake"
 
-rm -rf ${APP}.AppDir
-mkdir ${APP}.AppDir
-cd ${APP}.AppDir
+drake clean
+rm -rf appimage out
 
-cp -r ../$mtxdir/usr .
-strip --strip-all ./usr/bin/*
-chrpath -k -r '$ORIGIN/../lib' ./usr/bin/*
+drake -j${JOBS} apps:mkvtoolnix-gui
+# exit $?
+drake -j${JOBS}
+drake install DESTDIR="${TOP_DIR}/appimage/${APP}.AppDir"
 
-mkdir -p ./usr/share/file
-if [ -e /usr/share/file/magic.mgc ]; then
-  cp /usr/share/file/magic.mgc ./usr/share/file
-elif [ -e /usr/share/misc/magic.mgc ]; then
-  cp /usr/share/misc/magic.mgc ./usr/share/file
-elif [ -e /usr/lib/file/magic.mgc ]; then
-  cp /usr/lib/file/magic.mgc ./usr/share/file
-fi
+cd appimage/${APP}.AppDir/usr
+strip ./bin/*
 
-mkdir -p ./usr/lib
-cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins ./usr/lib/qtplugins
+mkdir -p lib lib64
+chmod u+rwx lib lib64
 
 copy_deps
-move_lib
-mv ./usr/lib/x86_64-linux-gnu/* ./usr/lib
+
+find
+
+find -type d -exec chmod u+w {} \+
+
+mkdir all_libs
+mv ./home all_libs
+mv ./lib* all_libs
+mv ./usr all_libs
+mkdir lib
+mv `find all_libs -type f` lib
+rm -rf all_libs
+
+# dlopen()ed by libQt5Network
+if [[ -f /etc/centos-release ]]; then
+  cp -f /lib64/libssl.so.* lib/
+  cp -f /lib64/libcrypto.so.* lib/
+else
+  cp -f /lib/x86_64-linux-gnu/libssl.so.1.0.0 lib
+  cp -f /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 lib
+fi
+
 delete_blacklisted
 
-cp ./usr/share/icons/hicolor/256x256/apps/mkvtoolnix-gui.png ${LOWERAPP}.png
-cp "$TOP/mtx.desktop" ${LOWERAPP}.desktop
-
-cp "$TOP/mtxlaunch.sh" ./usr/bin
-ln -s usr/bin/mtxlaunch.sh AppRun
-chmod a+x ./usr/bin/*
-
-cat <<EOF> ./usr/bin/qt.conf
-[Paths]
-Plugins = ../lib/qtplugins
-lib = ../lib
-EOF
-
-url="$mtxurl"
-if [ "$VERSION" = "git" ]; then
-  url="$giturl  $(cat ../$mtxdir/version)"
+mkdir ./share/file
+if [[ -f /etc/centos-release ]]; then
+  cp /usr/share/misc/magic.mgc ./share/file
+else
+  cp /usr/share/file/magic.mgc ./share/file
 fi
 
-cat <<EOF> SOURCES
-MKVToolNix: $url
-libcmark: $cmurl
-          https://github.com/commonmark/cmark
+cd ..
+cp ./usr/share/applications/org.bunkus.mkvtoolnix-gui.desktop mkvtoolnix-gui.desktop
+fix_desktop mkvtoolnix-gui.desktop
+cp ./usr/share/icons/hicolor/256x256/apps/mkvtoolnix-gui.png .
 
-Build system:
-$(lsb_release -irc)
-$(uname -mo)
-
-Package repositories:
-$(cat /etc/apt/sources.list /etc/apt/sources.list.d/* | grep '^deb ')
-
-EOF
-
-GLIBC_NEEDED=$(glibc_needed)
-if [ "$VERSION" = "git" ]; then
-  VERSION=$(cat ../$mtxdir/version)
-fi
-
+get_apprun
 cd ..
 generate_type2_appimage
