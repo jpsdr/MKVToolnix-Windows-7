@@ -34,7 +34,8 @@
 # directory. You can run it from inside a git checkout, but make sure
 # to that submodules have been initialized and updated.
 
-set -e set -x
+set -e
+set -x
 
 if [[ ! -e /dev/fuse ]]; then
   sudo mknod --mode=0666 /dev/fuse c 10 229
