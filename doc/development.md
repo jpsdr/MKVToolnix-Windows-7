@@ -299,14 +299,14 @@ there yourself.
 
 This is a TODO list for adding a new translation (a .po file) to MKVToolNix:
 
-* Add new entry to translation_c::initialize_available_translations()
-  in src/common/translation.cpp
-* Copy .po file to po/ sub-directory
-* Add entry in mkvtoolnix.spec
-* Add installation and removal entries in packaging/windows/installer/mkvtoolnix.nsi
-* Add new language file to packaging/windows/installer/translations/
-* Include translation's author in AUTHORS
-* Include message in NEWS.md
-* Either re-run configure or add the new translation in build-config
-  to TRANSLATIONS; afterwards verify the format strings with »rake
-  translations:verify-format-strings«
+* Add new entry to `translation_c::initialize_available_translations()`
+  in `src/common/translation.cpp`
+* Copy `.po` file to `po/` sub-directory
+* Add entry in `packaging/centos-fedora-opensuse/mkvtoolnix.spec`
+* Add installation and removal entries in `packaging/windows/installer/mkvtoolnix.nsi`
+* Add new language file to `packaging/windows/installer/translations/`
+* Include translation's author in `AUTHORS`
+* Include message in `NEWS.md`
+* Either re-run `configure` or add the new translation in `build-config`
+  to `TRANSLATIONS`; afterwards verify the format strings with `rake
+  translations:verify-format-strings`
