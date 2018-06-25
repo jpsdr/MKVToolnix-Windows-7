@@ -20,7 +20,7 @@ SetCompressorDictSize 64
 
 # MUI Settings
 !define MUI_ABORTWARNING
-!define MUI_ICON "../packaging/windows/installer/mkvtoolnix-gui.ico"
+!define MUI_ICON "mkvtoolnix-gui.ico"
 
 # Language Selection Dialog Settings
 !define MUI_LANGDLL_REGISTRY_ROOT "HKCU"
