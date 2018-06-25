@@ -68,32 +68,41 @@ export PKG_CONFIG_PATH="${QTDIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 export LD_LIBRARY_PATH="${QTDIR}/lib:${LD_LIBRARY_PATH}"
 export LDFLAGS="-L${QTDIR}/lib ${LDFLAGS}"
 
-./configure \
-  --prefix=/usr \
-  --enable-appimage \
-  --enable-optimization \
-  --with-moc="${QTDIR}/bin/moc" \
-  --with-uic="${QTDIR}/bin/uic" \
-  --with-rcc="${QTDIR}/bin/rcc" \
-  --with-qmake="${QTDIR}/bin/qmake"
+if [[ "$NO_BUILD" != 1 ]]; then
+  ./configure \
+    --prefix=/usr \
+    --enable-appimage \
+    --enable-optimization \
+    --with-moc="${QTDIR}/bin/moc" \
+    --with-uic="${QTDIR}/bin/uic" \
+    --with-rcc="${QTDIR}/bin/rcc" \
+    --with-qmake="${QTDIR}/bin/qmake"
 
-drake clean
+  drake clean
+
+  drake -j${JOBS} apps:mkvtoolnix-gui
+  # exit $?
+  drake -j${JOBS}
+fi
+
 rm -rf appimage out
 
-drake -j${JOBS} apps:mkvtoolnix-gui
-# exit $?
-drake -j${JOBS}
 drake install DESTDIR="${TOP_DIR}/appimage/${APP}.AppDir"
 
 cd appimage/${APP}.AppDir/usr
-strip ./bin/*
+
+# Qt plugins
+mkdir -p bin/{audio,mediaservice,platforms}
+cp ${QTDIR}/plugins/audio/*.so bin/audio/
+cp ${QTDIR}/plugins/mediaservice/libgst{audiodecoder,mediaplayer}*.so bin/mediaservice/
+cp ${QTDIR}/plugins/platforms/libq{minimal,offscreen,wayland,xcb}*.so bin/platforms/
+
+find bin -type f -exec strip {} \+
 
 mkdir -p lib lib64
 chmod u+rwx lib lib64
 
 copy_deps
-
-find
 
 find -type d -exec chmod u+w {} \+
 
