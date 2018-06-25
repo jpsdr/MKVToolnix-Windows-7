@@ -45,12 +45,28 @@ TOP_DIR="$(readlink -f ${0})"
 TOP_DIR="${TOP_DIR%/*}/../.."
 cd "${TOP_DIR}"
 TOP_DIR="${PWD}"
-
+RELEASE_VERSION=0
 QTVERSION="5.11.1"
+
+while [[ -n $1 ]]; do
+  case $1 in
+    -B|--no-build)        NO_BUILD=1           ;;
+    -q|--qt)              QTVERSION=$2 ; shift ;;
+    -r|--release-version) RELEASE_VERSION=1    ;;
+  esac
+
+  shift
+done
+
 QTDIR="${HOME}/opt/qt/${QTVERSION}/gcc_64"
+NO_GLIBC_VERSION=1
 
 APP="mkvtoolnix-gui"
-VERSION="$(perl -ne 'next unless m/^AC_INIT/; s{.*?,\[}{}; s{\].*}{}; print; exit' ${TOP_DIR}/configure.ac)"
+if [[ ( -d .git ) && ( $RELEASE_VERSION == 0 ) ]]; then
+  VERSION="$(git describe | sed -e 's/release-//')"
+else
+  VERSION="$(perl -ne 'next unless m/^AC_INIT/; s{.*?,\[}{}; s{\].*}{}; print; exit' ${TOP_DIR}/configure.ac)"
+fi
 JOBS=$(nproc)
 
 wget -O "${TOP_DIR}/packaging/appimage/functions.sh" -q https://raw.githubusercontent.com/AppImage/AppImages/master/functions.sh
@@ -69,7 +85,7 @@ export PKG_CONFIG_PATH="${QTDIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 export LD_LIBRARY_PATH="${QTDIR}/lib:${LD_LIBRARY_PATH}"
 export LDFLAGS="-L${QTDIR}/lib ${LDFLAGS}"
 
-if [[ "$NO_BUILD" != 1 ]]; then
+if [[ ( ! -f build-config ) && ( "$NO_BUILD" != 1 ) ]]; then
   ./configure \
     --prefix=/usr \
     --enable-appimage \
@@ -80,14 +96,12 @@ if [[ "$NO_BUILD" != 1 ]]; then
     --with-qmake="${QTDIR}/bin/qmake"
 
   drake clean
-
-  drake -j${JOBS} apps:mkvtoolnix-gui
-  # exit $?
-  drake -j${JOBS}
 fi
 
 rm -rf appimage out
 
+drake -j${JOBS} apps:mkvtoolnix-gui
+drake -j${JOBS}
 drake install DESTDIR="${TOP_DIR}/appimage/${APP}.AppDir"
 
 cd appimage/${APP}.AppDir/usr
