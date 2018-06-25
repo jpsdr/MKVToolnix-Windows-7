@@ -47,12 +47,37 @@ cd "${TOP_DIR}"
 TOP_DIR="${PWD}"
 RELEASE_VERSION=0
 QTVERSION="5.11.1"
+APP="mkvtoolnix-gui"
+APP_DIR="${TOP_DIR}/appimage/${APP}.AppDir"
+
+function display_help {
+  cat <<EOF
+MKVToolNix AppImage build script
+
+Syntax:
+
+  build.sh [-B|--no-build] [-q|--qt <Qt version>] [-r|--release-version]
+           [-h|--help]
+
+Parameters:
+
+  --no-build         don't run 'configure' and 'drake clean'; only
+                     possible if 'build-run' exists
+  --qt <Qt version>  build against this Qt version (default: $QTVERSION)
+  --release-version  don't built the version number via 'git describe'
+                     even if '.git' directory is present
+  --help             display help
+EOF
+
+  exit 0
+}
 
 while [[ -n $1 ]]; do
   case $1 in
     -B|--no-build)        NO_BUILD=1           ;;
     -q|--qt)              QTVERSION=$2 ; shift ;;
     -r|--release-version) RELEASE_VERSION=1    ;;
+    -h|--help)            display_help         ;;
   esac
 
   shift
@@ -61,7 +86,6 @@ done
 QTDIR="${HOME}/opt/qt/${QTVERSION}/gcc_64"
 NO_GLIBC_VERSION=1
 
-APP="mkvtoolnix-gui"
 if [[ ( -d .git ) && ( $RELEASE_VERSION == 0 ) ]]; then
   VERSION="$(git describe | sed -e 's/release-//')"
 else
@@ -98,11 +122,11 @@ if [[ ( ! -f build-config ) && ( "$NO_BUILD" != 1 ) ]]; then
   drake clean
 fi
 
-rm -rf appimage out
+rm -rf "${APP_DIR}" out
 
 drake -j${JOBS} apps:mkvtoolnix-gui
 drake -j${JOBS}
-drake install DESTDIR="${TOP_DIR}/appimage/${APP}.AppDir"
+drake install DESTDIR="${APP_DIR}"
 
 cd appimage/${APP}.AppDir/usr
 
@@ -113,6 +137,9 @@ cp ${QTDIR}/plugins/mediaservice/libgst{audiodecoder,mediaplayer}*.so bin/medias
 cp ${QTDIR}/plugins/platforms/libq{minimal,offscreen,wayland,xcb}*.so bin/platforms/
 
 find bin -type f -exec strip {} \+
+
+cp "${TOP_DIR}/packaging/appimage/select-binary.sh" bin/
+chmod 0755 bin/select-binary.sh
 
 mkdir -p lib lib64
 chmod u+rwx lib lib64
@@ -148,9 +175,12 @@ else
 fi
 
 cd ..
-cp ./usr/share/applications/org.bunkus.mkvtoolnix-gui.desktop mkvtoolnix-gui.desktop
-fix_desktop mkvtoolnix-gui.desktop
+
 cp ./usr/share/icons/hicolor/256x256/apps/mkvtoolnix-gui.png .
+cp ./usr/share/applications/org.bunkus.mkvtoolnix-gui.desktop mkvtoolnix-gui.desktop
+
+fix_desktop mkvtoolnix-gui.desktop
+sed -i -e 's/^Exec=.*/Exec=select-binary.sh %F/' mkvtoolnix-gui.desktop
 
 get_apprun
 cd ..
