@@ -55,9 +55,9 @@ module Mtx::Installer
   end
 
   def self.update_all_translation_files
-    english = self.read_translation_file "installer/translations/English.nsh"
+    english = self.read_translation_file "packaging/windows/installer/translations/English.nsh"
 
-    FileList["installer/translations/*.nsh"].to_a.sort.each do |file_name|
+    FileList["packaging/windows/installer/translations/*.nsh"].to_a.sort.each do |file_name|
       next if %r{/English\.nsh$}.match file_name
       # next unless %r{German}.match file_name
       self.update_one_translation_file file_name, english

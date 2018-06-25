@@ -2,10 +2,11 @@
 
 setopt nullglob
 
-src_dir=${${0:a}:h}/../..
+script_dir=${${0:a}:h}
+src_dir=${script_dir}/../..
 src_dir=${src_dir:a}
 
-if [[ -f ${src_dir}/tools/windows/conf.sh ]] source ${src_dir}/tools/windows/conf.sh
+if [[ -f ${script_dir}/conf.sh ]] source ${script_dir}/conf.sh
 
 function fail {
   print -- $@
@@ -14,7 +15,7 @@ function fail {
 
 tmp_dir=$(mktemp -d)
 
-if ! ${src_dir}/tools/windows/populate_installer_dir.sh -t ${tmp_dir}; then
+if ! ${script_dir}/populate_installer_dir.sh -t ${tmp_dir}; then
   rm -rf ${tmp_dir}
   echo "populate_installer_dir.sh failed"
   exit 1

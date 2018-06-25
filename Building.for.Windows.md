@@ -48,8 +48,8 @@ you'll find instructions for manual compilation in section 1.3.
 
 ### 1.2.1. Script configuration
 
-The script is called `tools/windows/setup_cross_compilation_env.sh`. It
-contains the following variables that can be adjusted to fit your
+The script is called `packaging/windows/setup_cross_compilation_env.sh`.
+It contains the following variables that can be adjusted to fit your
 needs:
 
     ARCHITECTURE=64
@@ -71,7 +71,7 @@ of cores available if left empty.
 
 From the MKVToolNix source directory run:
 
-    ./tools/windows/setup_cross_compilation_env.sh
+    ./packaging/windows/setup_cross_compilation_env.sh
 
 If everything works fine, you'll end up with a configured MKVToolNix
 source tree. You just have to run `rake` afterwards.

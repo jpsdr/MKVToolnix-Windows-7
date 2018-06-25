@@ -472,7 +472,7 @@ function build_mkvtoolnix {
 function build_dmg {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
-  if [[ -f tools/macos/unlock_keychain.sh ]] tools/macos/unlock_keychain.sh
+  if [[ -f packaging/macos/unlock_keychain.sh ]] packaging/macos/unlock_keychain.sh
 
   dmgbase=${CMPL}/dmg-${MTX_VER}
   dmgapp=$dmgbase/MKVToolNix-${MTX_VER}.app

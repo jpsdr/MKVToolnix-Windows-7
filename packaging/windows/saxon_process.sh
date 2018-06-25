@@ -1,10 +1,11 @@
 #!/bin/zsh
 
-src_dir=${${0:a}:h}/../..
+script_dir=${${0:a}:h}
+src_dir=${script_dir}/../..
 src_dir=${src_dir:a}
 no_strip=0
 
-if [[ -f ${src_dir}/tools/windows/conf.sh ]] source ${src_dir}/tools/windows/conf.sh
+if [[ -f ${script_dir}/conf.sh ]] source ${script_dir}/conf.sh
 
 tmpi=$(mktemp)
 src_file=${1}

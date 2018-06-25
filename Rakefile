@@ -179,7 +179,7 @@ def setup_overrides
 end
 
 def setup_macos_specifics
-  $macos_config = read_config_file("tools/macos/config.sh")
+  $macos_config = read_config_file("packaging/macos/config.sh")
 
   if ENV['MACOSX_DEPLOYMENT_TARGET'].to_s.empty? && !$macos_config[:MACOSX_DEPLOYMENT_TARGET].to_s.empty?
     ENV['MACOSX_DEPLOYMENT_TARGET'] = $macos_config[:MACOSX_DEPLOYMENT_TARGET]

@@ -52,8 +52,8 @@ APP="mkvtoolnix-gui"
 VERSION="$(perl -ne 'next unless m/^AC_INIT/; s{.*?,\[}{}; s{\].*}{}; print; exit' ${TOP_DIR}/configure.ac)"
 JOBS=$(nproc)
 
-wget -O "${TOP_DIR}/tools/appimage/functions.sh" -q https://raw.githubusercontent.com/AppImage/AppImages/master/functions.sh
-. "${TOP_DIR}/tools/appimage/functions.sh"
+wget -O "${TOP_DIR}/packaging/appimage/functions.sh" -q https://raw.githubusercontent.com/AppImage/AppImages/master/functions.sh
+. "${TOP_DIR}/packaging/appimage/functions.sh"
 
 if [[ ! -f configure ]]; then
   ./autogen.sh

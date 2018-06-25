@@ -6,12 +6,13 @@ set -e
 setopt nullglob
 zmodload zsh/pcre
 
-src_dir=${${0:a}:h}/../..
+script_dir=${${0:a}:h}
+src_dir=${script_dir}/../..
 src_dir=${src_dir:a}
 no_strip=0
 is_shared=0
 
-if [[ -f ${src_dir}/tools/windows/conf.sh ]] source ${src_dir}/tools/windows/conf.sh
+if [[ -f ${script_dir}/conf.sh ]] source ${script_dir}/conf.sh
 
 function fail {
   print -- $@
@@ -83,7 +84,7 @@ function copy_dlls {
   cp ${dll_src_dir}/lib{bz2,crypto-,gnurx-,harfbuzz-0,pcre-1,pcre2-16,png16-,ssl-}*.dll .
 
   # copy dependencies
-  ${src_dir}/tools/windows/copy_dll_dependencies.rb *.exe **/*.dll
+  ${script_dir}/copy_dll_dependencies.rb *.exe **/*.dll
 
   # fix permissions
   chmod a+x **/*.dll
@@ -105,7 +106,7 @@ function copy_files {
 
   cp -R installer examples ${tgt_dir}/
   rm -rf ${tgt_dir}/examples/stylesheets
-  cp src/*.exe src/mkvtoolnix-gui/*.exe installer/*.url ${tgt_dir}/
+  cp src/*.exe src/mkvtoolnix-gui/*.exe packaging/windows/installer/*.url ${tgt_dir}/
   cp share/icons/windows/mkvtoolnix-gui.ico ${tgt_dir}/installer/
 
   cp ${mxe_usr_dir}/share/misc/magic.mgc ${tgt_dir}/share/misc/
@@ -168,7 +169,7 @@ function copy_files {
       dst_file=${man_dest}/$(basename ${src_file} .xml).html
       expected_files+=(${dst_file})
 
-      echo ${src_dir}/tools/windows/saxon_process.sh ${lang_dir}/${src_file} ${dst_file} ${src_dir}/doc/stylesheets/docbook-to-html.xsl >> ${commands}
+      echo ${script_dir}/saxon_process.sh ${lang_dir}/${src_file} ${dst_file} ${src_dir}/doc/stylesheets/docbook-to-html.xsl >> ${commands}
     }
   }
 
