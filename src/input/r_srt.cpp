@@ -50,6 +50,8 @@ srt_reader_c::read_headers() {
   show_demuxer_info();
 
   m_subs->parse();
+
+  m_bytes_to_process = m_subs->get_total_byte_size();
 }
 
 srt_reader_c::~srt_reader_c() {
@@ -69,17 +71,22 @@ srt_reader_c::create_packetizer(int64_t) {
 file_status_e
 srt_reader_c::read(generic_packetizer_c *,
                    bool) {
-  if (!m_subs->empty())
+  if (!m_subs->empty()) {
+    m_bytes_processed += m_subs->get_next_byte_size();
     m_subs->process(PTZR0);
+  }
 
   return m_subs->empty() ? flush_packetizers() : FILE_STATUS_MOREDATA;
 }
 
-int
+int64_t
 srt_reader_c::get_progress() {
-  int num_entries = m_subs->get_num_entries();
+  return m_bytes_processed;
+}
 
-  return 0 == num_entries ? 100 : 100 * m_subs->get_num_processed() / num_entries;
+int64_t
+srt_reader_c::get_maximum_progress() {
+  return m_bytes_to_process;
 }
 
 void

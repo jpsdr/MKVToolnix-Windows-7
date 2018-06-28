@@ -461,6 +461,8 @@ private:
   bool m_timestamps_calculated;
   boost::optional<uint64_t> m_duration;
 
+  int64_t m_bytes_to_process{}, m_bytes_processed{};
+
   debugging_option_c m_debug_chapters, m_debug_headers, m_debug_tables, m_debug_tables_full, m_debug_interleaving, m_debug_resync;
 
   friend class qtmp4_demuxer_c;
@@ -474,7 +476,8 @@ public:
   }
 
   virtual void read_headers();
-  virtual int get_progress();
+  virtual int64_t get_progress() override;
+  virtual int64_t get_maximum_progress() override;
   virtual void identify();
   virtual void create_packetizers();
   virtual void create_packetizer(int64_t tid);
@@ -489,6 +492,8 @@ protected:
   virtual void verify_track_parameters_and_update_indexes();
   virtual void calculate_timestamps();
   virtual boost::optional<int64_t> calculate_global_min_timestamp() const;
+  virtual void calculate_num_bytes_to_process();
+
   virtual qt_atom_t read_atom(mm_io_c *read_from = nullptr, bool exit_on_error = true);
   virtual bool resync_to_top_level_atom(uint64_t start_pos);
   virtual void parse_itunsmpb(std::string data);

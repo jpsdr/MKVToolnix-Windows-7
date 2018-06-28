@@ -22,6 +22,7 @@ class ssa_reader_c: public generic_reader_c {
 private:
   ssa_parser_cptr m_subs;
   boost::optional<std::string> m_encoding;
+  int64_t m_bytes_to_process{}, m_bytes_processed{};
 
 public:
   ssa_reader_c(const track_info_c &ti, const mm_io_cptr &in);
@@ -34,7 +35,8 @@ public:
   virtual void read_headers();
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
-  virtual int get_progress();
+  virtual int64_t get_progress() override;
+  virtual int64_t get_maximum_progress() override;
   virtual bool is_simple_subtitle_container() {
     return true;
   }

@@ -238,7 +238,6 @@ public:
 
   virtual void read_headers();
 
-  virtual int get_progress();
   virtual void set_headers();
   virtual void identify();
   virtual void create_packetizers();
@@ -249,6 +248,7 @@ public:
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e finish_file();
 
   virtual void set_track_packetizer(kax_track_t *t, generic_packetizer_c *ptzr);
   virtual void init_passthrough_packetizer(kax_track_t *t, track_info_c &nti);

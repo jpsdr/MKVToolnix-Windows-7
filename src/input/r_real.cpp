@@ -579,11 +579,6 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
   }
 }
 
-int
-real_reader_c::get_progress() {
-  return 100 * file->num_packets_read / file->num_packets_in_chunk;
-}
-
 void
 real_reader_c::identify() {
   id_result_container();

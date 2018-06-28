@@ -2248,12 +2248,8 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
 
   try {
     auto cluster = m_in_file->read_next_cluster();
-    if (!cluster) {
-      flush_packetizers();
-
-      m_file_status = FILE_STATUS_DONE;
-      return FILE_STATUS_DONE;
-    }
+    if (!cluster)
+      return finish_file();
 
     auto cluster_ts = FindChildValue<KaxClusterTimecode>(*cluster);
     cluster->InitTimecode(cluster_ts, m_tc_scale);
@@ -2282,11 +2278,20 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
     mxwarn(boost::format("%1% %2% %3%\n")
            % (boost::format(Y("%1%: an unknown exception occurred.")) % "kax_reader_c::read()")
            % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
-    flush_packetizers();
-    return FILE_STATUS_DONE;
+    return finish_file();
   }
 
   return FILE_STATUS_MOREDATA;
+}
+
+file_status_e
+kax_reader_c::finish_file() {
+  flush_packetizers();
+
+  m_in->setFilePointer(0, seek_end);
+  m_file_status = FILE_STATUS_DONE;
+
+  return FILE_STATUS_DONE;
 }
 
 void
@@ -2537,14 +2542,6 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
   block_track->previous_timestamp  = m_last_timestamp;
   block_track->units_processed    += block->NumberFrames();
-}
-
-int
-kax_reader_c::get_progress() {
-  if (0 != m_segment_duration)
-    return std::min(m_last_timestamp, m_segment_duration) * 100 / m_segment_duration;
-
-  return 100 * m_in->getFilePointer() / m_size;
 }
 
 void

@@ -153,7 +153,10 @@ vobsub_reader_c::create_packetizer(int64_t tid) {
     avg_duration /= (track->entries.size() - 1);
   track->entries[track->entries.size() - 1].duration = avg_duration;
 
-  num_indices += track->entries.size();
+  for (int idx = 0, end = track->entries.size(); idx < end; ++idx) {
+    auto end_position   = (idx + 1) < end ? track->entries[idx + 1].position : m_in->get_size();
+    m_bytes_to_process += end_position - track->entries[idx].position;
+  }
 
   m_ti.m_language = "";
   show_packetizer_info(tid, PTZR(track->ptzr));
@@ -174,8 +177,6 @@ vobsub_reader_c::parse_headers() {
   int64_t line_no        = 0;
   int64_t last_timestamp = 0;
   bool sort_required     = false;
-  num_indices            = 0;
-  indices_processed      = 0;
 
   m_idx_file->setFilePointer(0);
 
@@ -443,6 +444,8 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
   unsigned int spu_len          = 0;
   bool spu_len_valid            = false;
 
+  m_bytes_processed            += extraction_end_pos - extraction_start_pos;
+
   m_sub_file->setFilePointer(extraction_start_pos);
   track->packet_num++;
 
@@ -642,14 +645,18 @@ vobsub_reader_c::read(generic_packetizer_c *ptzr,
 
   extract_one_spu_packet(id);
   track->idx++;
-  indices_processed++;
 
   return track->idx >= track->entries.size() ? flush_packetizers() : FILE_STATUS_MOREDATA;
 }
 
-int
+int64_t
 vobsub_reader_c::get_progress() {
-  return 100 * indices_processed / num_indices;
+  return m_bytes_processed;
+}
+
+int64_t
+vobsub_reader_c::get_maximum_progress() {
+  return m_bytes_to_process;
 }
 
 void

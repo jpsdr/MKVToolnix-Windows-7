@@ -1688,7 +1688,7 @@ generic_packetizer_c::create_track_number() {
 
 file_status_e
 generic_packetizer_c::read(bool force) {
-  return m_reader->read(this, force);
+  return m_reader->read_next(this, force);
 }
 
 void

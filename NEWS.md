@@ -68,6 +68,11 @@
     based on the timestamps before the gap.
 
   Fixes #2280.
+* mkvmerge: complete rewrite of the progress handling. It's now based upon the
+  total size of all source files and the current position within them instead
+  of the number of frames/blocks to be processed. This simplifies calculation
+  when appending files and fixes rare cases of when progress report was
+  obvious wrong (e.g. stuck at 0% right until the end). Fixes #2150 and #2330.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10

@@ -42,16 +42,12 @@ struct usf_entry_t {
 };
 
 struct usf_track_t {
-  int m_ptzr;
+  int m_ptzr{-1};
 
   std::string m_language;
   std::vector<usf_entry_t> m_entries;
   std::vector<usf_entry_t>::const_iterator m_current_entry;
-
-  usf_track_t()
-    : m_ptzr(-1)
-  {
-  }
+  int64_t m_byte_size{};
 };
 using usf_track_cptr = std::shared_ptr<usf_track_t>;
 
@@ -60,6 +56,7 @@ private:
   std::vector<usf_track_cptr> m_tracks;
   std::string m_private_data, m_default_language;
   usf_track_cptr m_longest_track;
+  int64_t m_bytes_to_process{}, m_bytes_processed{};
 
 public:
   usf_reader_c(const track_info_c &ti, const mm_io_cptr &in);
@@ -73,7 +70,8 @@ public:
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
   virtual void create_packetizers();
-  virtual int get_progress();
+  virtual int64_t get_progress() override;
+  virtual int64_t get_maximum_progress() override;
   virtual bool is_simple_subtitle_container() {
     return true;
   }

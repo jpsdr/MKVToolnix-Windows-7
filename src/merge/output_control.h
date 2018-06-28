@@ -199,6 +199,7 @@ void main_loop();
 void add_packetizer_globally(generic_packetizer_c *packetizer);
 void add_tags(libmatroska::KaxTag &tags);
 void add_chapter_atom(timestamp_c const &start_timestamp, std::string const &name, std::string const &language);
+int64_t add_attachment(attachment_cptr const &attachment);
 
 void create_next_output_file();
 void finish_file(bool last_file, bool create_new_file = false, bool previously_discarding = false);
@@ -206,7 +207,7 @@ void force_close_output_file();
 void rerender_track_headers();
 std::string create_output_name();
 
-int64_t add_attachment(attachment_cptr const &attachment);
+void add_to_progress(int64_t num_bytes_processed);
 
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
 void sighandler(int signum);

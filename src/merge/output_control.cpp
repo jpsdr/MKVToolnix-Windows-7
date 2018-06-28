@@ -182,14 +182,13 @@ static mm_io_cptr s_out;
 
 static mtx::bits::value_c s_seguid_prev(128), s_seguid_current(128), s_seguid_next(128);
 
-static int s_display_files_done           = 0;
-static int s_display_path_length          = 1;
-static generic_reader_c *s_display_reader = nullptr;
-
 static std::unique_ptr<EbmlHead> s_head;
 
 static std::string s_muxing_app, s_writing_app;
 static boost::posix_time::ptime s_writing_date;
+
+static boost::optional<int64_t> s_maximum_progress;
+int64_t s_current_progress{};
 
 std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
 
@@ -295,24 +294,17 @@ sighandler(int /* signum */) {
 }
 #endif
 
-static generic_reader_c *
-determine_display_reader() {
-  if (g_video_packetizer)
-    return g_video_packetizer->m_reader;
+void
+add_to_progress(int64_t num_bytes_processed) {
+  s_current_progress += num_bytes_processed;
+}
 
-  auto winner = static_cast<filelist_t const *>(nullptr);
-  for (auto &current : g_files)
-    if (!current->appending && (0 != current->reader->get_num_packetizers()) && (!winner || (current->size > winner->size)))
-      winner = current.get();
+static int64_t
+get_maximum_progress() {
+  if (!s_maximum_progress)
+    s_maximum_progress = boost::accumulate(g_files, 0ull, [](int64_t num, auto const &file) { return num + file->reader->get_maximum_progress(); });
 
-  if (winner)
-    return winner->reader.get();
-
-  for (auto &current : g_files)
-    if (!current->appending && (!winner || (current->size > winner->size)))
-      winner = current.get();
-
-  return winner->reader.get();
+  return *s_maximum_progress;
 }
 
 /** \brief Selects a reader for displaying its progress information
@@ -334,11 +326,9 @@ display_progress(bool is_100percent = false) {
     return;
   }
 
-  if (!s_display_reader)
-    s_display_reader = determine_display_reader();
-
   bool display_progress  = false;
-  int current_percentage = (s_display_reader->get_progress() + s_display_files_done * 100) / s_display_path_length;
+  auto maximum_progress  = get_maximum_progress();
+  int current_percentage = maximum_progress ? (s_current_progress * 100) / maximum_progress : 0;
   int64_t current_time   = mtx::sys::get_current_time_millis();
 
   if (   (-1 == s_previous_percentage)
@@ -1061,9 +1051,6 @@ check_append_mapping() {
           break;
         }
     } while (cmp_amap != amap_end);
-
-    if (path_length > s_display_path_length)
-      s_display_path_length = path_length;
   }
 }
 
@@ -1751,13 +1738,6 @@ append_track(packetizer_t &ptzr,
 
   mxinfo(boost::format(Y("Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"))
          % (*gptzr)->m_ti.m_id % amap.src_file_id % (*gptzr)->m_ti.m_fname % ptzr.packetizer->m_ti.m_id % amap.dst_file_id % ptzr.packetizer->m_ti.m_fname);
-
-  // Is the current file currently used for displaying the progress? If yes
-  // then replace it with the next one.
-  if (s_display_reader == dst_file.reader.get()) {
-    s_display_files_done++;
-    s_display_reader = src_file.reader.get();
-  }
 
   // Also fix the ptzr structure and reset the ptzr's state to "I want more".
   generic_packetizer_c *old_packetizer = ptzr.packetizer;

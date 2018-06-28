@@ -104,7 +104,13 @@ generic_reader_c::read_all() {
 file_status_e
 generic_reader_c::read_next(generic_packetizer_c *ptzr,
                             bool force) {
-  return read(ptzr, force);
+  auto prior_progrss = get_progress();
+  auto result        = read(ptzr, force);
+  auto new_progress  = get_progress();
+
+  add_to_progress(new_progress - prior_progrss);
+
+  return result;
 }
 
 bool
@@ -440,9 +446,14 @@ generic_reader_c::add_available_track_id_range(int64_t start,
     add_available_track_id(id);
 }
 
-int
+int64_t
 generic_reader_c::get_progress() {
-  return 100 * m_in->getFilePointer() / m_size;
+  return m_in->getFilePointer();
+}
+
+int64_t
+generic_reader_c::get_maximum_progress() {
+  return m_in->get_size();
 }
 
 mm_io_c *

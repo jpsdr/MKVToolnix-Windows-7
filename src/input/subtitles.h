@@ -61,6 +61,16 @@ public:
   bool empty() {
     return current == entries.end();
   }
+
+  int64_t get_total_byte_size() {
+    return boost::accumulate(entries, 0ull, [](int64_t num, auto const &entry) { return num + entry.subs.length(); });
+  }
+
+  int64_t get_next_byte_size() {
+    if (empty() || (entries.end() == current))
+      return 0;
+    return current->subs.length();
+  }
 };
 using subtitles_cptr = std::shared_ptr<subtitles_c>;
 

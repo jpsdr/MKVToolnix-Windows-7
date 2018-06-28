@@ -97,7 +97,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual int get_progress();
   virtual void identify();
   virtual void create_packetizers();
   virtual void create_packetizer(int64_t tid);

@@ -429,6 +429,8 @@ protected:
 
   std::vector<timestamp_c> m_chapter_timestamps;
 
+  int64_t m_bytes_to_process{}, m_bytes_processed{};
+
   debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_sdt, m_debug_headers, m_debug_pes_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi, m_debug_mpls;
 
 protected:
@@ -451,6 +453,9 @@ public:
   virtual void add_available_track_ids();
 
   virtual void parse_packet(unsigned char *buf);
+
+  virtual int64_t get_progress() override;
+  virtual int64_t get_maximum_progress() override;
 
   static timestamp_c read_timestamp(unsigned char *p);
   static int detect_packet_size(mm_io_c &in, uint64_t size);

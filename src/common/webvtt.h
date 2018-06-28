@@ -46,7 +46,7 @@ public:
 
   unsigned int get_current_cue_number() const;
   unsigned int get_total_number_of_cues() const;
-  unsigned int get_progress_percentage() const;
+  unsigned int get_total_number_of_bytes() const;
 
 protected:
   void add_block();

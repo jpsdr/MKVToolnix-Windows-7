@@ -55,7 +55,8 @@ private:
   mm_text_io_cptr m_idx_file;
   mm_file_io_cptr m_sub_file;
   int version;
-  int64_t num_indices, indices_processed, delay;
+  int64_t delay;
+  int64_t m_bytes_to_process{}, m_bytes_processed{};
   std::string idx_data;
 
   std::vector<vobsub_track_c *> tracks;
@@ -76,7 +77,8 @@ public:
   virtual void create_packetizers();
   virtual void create_packetizer(int64_t tid);
   virtual void add_available_track_ids();
-  virtual int get_progress();
+  virtual int64_t get_progress() override;
+  virtual int64_t get_maximum_progress() override;
   virtual bool is_simple_subtitle_container() {
     return true;
   }

@@ -220,6 +220,13 @@ qtmp4_reader_c::read_headers() {
 qtmp4_reader_c::~qtmp4_reader_c() {
 }
 
+void
+qtmp4_reader_c::calculate_num_bytes_to_process() {
+  for (auto const &dmx : m_demuxers)
+    if (demuxing_requested(dmx->type, dmx->id, dmx->language))
+      m_bytes_to_process += boost::accumulate(dmx->m_index, 0ull, [](int64_t num, auto const &entry) { return num + entry.size; });
+}
+
 qt_atom_t
 qtmp4_reader_c::read_atom(mm_io_c *read_from,
                           bool exit_on_error) {
@@ -337,8 +344,10 @@ qtmp4_reader_c::parse_headers() {
 
   detect_interleaving();
 
-  if (!g_identifying)
+  if (!g_identifying) {
     calculate_timestamps();
+    calculate_num_bytes_to_process();
+  }
 
   mxdebug_if(m_debug_headers, boost::format("Number of valid tracks found: %1%\n") % m_demuxers.size());
 }
@@ -1668,6 +1677,8 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
   PTZR(dmx.ptzr)->process(new packet_t(buffer, index.timestamp, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
   ++dmx.pos;
 
+  m_bytes_processed += index.size;
+
   if (dmx.pos < dmx.m_index.size())
     return FILE_STATUS_MOREDATA;
 
@@ -1973,15 +1984,14 @@ qtmp4_reader_c::create_packetizers() {
     create_packetizer(m_demuxers[i]->id);
 }
 
-int
+int64_t
 qtmp4_reader_c::get_progress() {
-  if (-1 == m_main_dmx)
-    return 100;
+  return m_bytes_processed;
+}
 
-  auto &dmx       = *m_demuxers[m_main_dmx];
-  auto max_chunks = (0 == dmx.sample_size) ? dmx.sample_table.size() : dmx.chunk_table.size();
-
-  return 100 * dmx.pos / max_chunks;
+int64_t
+qtmp4_reader_c::get_maximum_progress() {
+  return m_bytes_to_process;
 }
 
 void

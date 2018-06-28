@@ -68,6 +68,8 @@ webvtt_reader_c::parse_file() {
 
   m_parser->add_joined_lines(*content);
   m_parser->flush();
+
+  m_bytes_to_process = m_parser->get_total_number_of_bytes();
 }
 
 void
@@ -93,17 +95,26 @@ webvtt_reader_c::read(generic_packetizer_c *,
   auto cue    = m_parser->get_cue();
   auto packet = std::make_shared<packet_t>(cue->m_content, cue->m_start.to_ns(), cue->m_duration.to_ns());
 
-  if (cue->m_addition)
+  if (cue->m_addition) {
+    m_bytes_processed += cue->m_addition->get_size();
     packet->data_adds.emplace_back(cue->m_addition);
+  }
+
+  m_bytes_processed += cue->m_content->get_size();
 
   PTZR0->process(packet);
 
   return FILE_STATUS_MOREDATA;
 }
 
-int
+int64_t
 webvtt_reader_c::get_progress() {
-  return m_parser->get_progress_percentage();
+  return m_bytes_processed;
+}
+
+int64_t
+webvtt_reader_c::get_maximum_progress() {
+  return m_bytes_to_process;
 }
 
 void

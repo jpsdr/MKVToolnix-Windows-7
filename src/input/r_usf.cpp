@@ -145,6 +145,7 @@ usf_reader_c::parse_subtitles(mtx::xml::document_cptr &doc) {
       entry.m_text = out.str();
 
       track->m_entries.push_back(entry);
+      track->m_byte_size += entry.m_text.size();
     }
   }
 }
@@ -170,6 +171,7 @@ usf_reader_c::create_packetizer(int64_t tid) {
   if (!demuxing_requested('s', tid, track->m_language) || (-1 != track->m_ptzr))
     return;
 
+  m_bytes_to_process += track->m_byte_size;
   m_ti.m_private_data = memory_c::clone(m_private_data);
   m_ti.m_language     = track->m_language;
   track->m_ptzr       = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUSF));
@@ -200,17 +202,22 @@ usf_reader_c::read(generic_packetizer_c *ptzr,
   PTZR(track->m_ptzr)->process(new packet_t(memory_c::clone(entry.m_text), entry.m_start, entry.m_end - entry.m_start));
   ++track->m_current_entry;
 
+  m_bytes_processed += entry.m_text.size();
+
   if (track->m_entries.end() == track->m_current_entry)
     return flush_packetizer(track->m_ptzr);
 
   return FILE_STATUS_MOREDATA;
 }
 
-int
+int64_t
 usf_reader_c::get_progress() {
-  if (!m_longest_track || m_longest_track->m_entries.empty())
-    return 0;
-  return 100 - std::distance(m_longest_track->m_current_entry, std::vector<usf_entry_t>::const_iterator(m_longest_track->m_entries.end())) * 100 / m_longest_track->m_entries.size();
+  return m_bytes_processed;
+}
+
+int64_t
+usf_reader_c::get_maximum_progress() {
+  return m_bytes_to_process;
 }
 
 int64_t

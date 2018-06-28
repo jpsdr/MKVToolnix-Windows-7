@@ -24,7 +24,7 @@ public:
   std::vector<std::string> current_block, global_blocks, local_blocks;
   bool parsing_global_data{true};
   std::deque<webvtt_parser_c::cue_cptr> cues;
-  unsigned int current_cue_number{}, total_number_of_cues{};
+  unsigned int current_cue_number{}, total_number_of_cues{}, total_number_of_bytes{};
   debugging_option_c debug{"webvtt_parser"};
 
   boost::regex timestamp_line_re{"^" RE_TIMESTAMP " --> " RE_TIMESTAMP "(?: ([^\\n]+))?$", boost::regex::perl};
@@ -124,6 +124,8 @@ webvtt_parser_c::add_block() {
   m->local_blocks.clear();
   m->current_block.clear();
 
+  m->total_number_of_bytes += cue->m_content->get_size() + (cue->m_addition ? cue->m_addition->get_size() : 0);
+
   m->cues.emplace_back(cue);
 }
 
@@ -165,11 +167,9 @@ webvtt_parser_c::get_total_number_of_cues()
 }
 
 unsigned int
-webvtt_parser_c::get_progress_percentage()
+webvtt_parser_c::get_total_number_of_bytes()
   const {
-  if (!m->total_number_of_cues)
-    return 100;
-  return m->current_cue_number * 100 / m->total_number_of_cues;
+  return m->total_number_of_bytes;
 }
 
 std::string

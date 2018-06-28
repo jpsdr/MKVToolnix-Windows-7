@@ -1098,6 +1098,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
   try {
     auto file_size           = f.m_in->get_size();
+    m_bytes_to_process      += file_size;
     f.m_probe_range          = calculate_probe_range(file_size, 10 * 1024 * 1024);
     auto size_to_probe       = std::min<uint64_t>(file_size,     f.m_probe_range);
     auto min_size_to_probe   = std::min<uint64_t>(size_to_probe, 5 * 1024 * 1024);
@@ -1177,6 +1178,8 @@ void
 reader_c::read_headers() {
   for (int idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
     read_headers_for_file(idx);
+
+  mxinfo(boost::format("total file size %1%\n") % m_bytes_to_process);
 
   m_tracks = std::move(m_all_probed_tracks);
 
@@ -2384,8 +2387,10 @@ reader_c::all_files_done()
 
 file_status_e
 reader_c::finish() {
-  if (all_files_done())
+  if (all_files_done()) {
+    m_bytes_processed = m_bytes_to_process;
     return flush_packetizers();
+  }
 
   for (auto &track : m_tracks) {
     if (track->m_file_num != m_current_file)
@@ -2428,6 +2433,7 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
   }
 
   f.m_packet_sent_to_packetizer = false;
+  auto prior_position           = f.m_in->getFilePointer();
 
   unsigned char buf[TS_MAX_PACKET_SIZE + 1];
 
@@ -2447,6 +2453,8 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
 
     parse_packet(buf);
   }
+
+  m_bytes_processed += f.m_in->getFilePointer() - prior_position;
 
   return FILE_STATUS_MOREDATA;
 }
@@ -2652,6 +2660,16 @@ reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
       mxdebug_if(m_debug_mpls, boost::format("add_external_files_from_mpls: could not open %1%: %2%\n") % m2ts.string() % ex.error());
     }
   }
+}
+
+int64_t
+reader_c::get_progress() {
+  return m_bytes_processed;
+}
+
+int64_t
+reader_c::get_maximum_progress() {
+  return m_bytes_to_process;
 }
 
 }}

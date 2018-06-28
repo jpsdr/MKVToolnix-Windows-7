@@ -802,9 +802,14 @@ avi_reader_c::read(generic_packetizer_c *ptzr,
   return flush_packetizers();
 }
 
-int
+int64_t
 avi_reader_c::get_progress() {
-  return 0 == m_bytes_to_process ? 0 : 100 * m_bytes_processed / m_bytes_to_process;
+  return 0 == m_bytes_to_process ? m_in->getFilePointer() : m_bytes_processed;
+}
+
+int64_t
+avi_reader_c::get_maximum_progress() {
+  return 0 == m_bytes_to_process ? m_in->get_size() : m_bytes_to_process;
 }
 
 void
