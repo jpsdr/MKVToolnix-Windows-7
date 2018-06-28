@@ -62,13 +62,14 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
 
   static int probe_file(mm_io_c &in, uint64_t size);
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   void scan_chunks();
   coreaudio_chunk_itr find_chunk(std::string const &type, bool throw_on_error, coreaudio_chunk_itr start);
 

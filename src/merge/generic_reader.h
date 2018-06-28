@@ -81,7 +81,7 @@ public:
   virtual timestamp_c const &get_timestamp_restriction_max() const;
 
   virtual void read_headers() = 0;
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) = 0;
+  virtual file_status_e read_next(generic_packetizer_c *ptzr, bool force = false);
   virtual void read_all();
   virtual int get_progress();
   virtual void set_headers();
@@ -126,6 +126,8 @@ public:
 
 public:
   static void set_probe_range_percentage(int64_rational_c const &probe_range_percentage);
+
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) = 0;
 
 protected:
   virtual bool demuxing_requested(char type, int64_t id, boost::optional<std::string> const &language = boost::none) const;

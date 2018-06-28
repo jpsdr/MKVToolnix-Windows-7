@@ -95,7 +95,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
   virtual bool is_providing_timestamps() const {
@@ -106,6 +105,8 @@ public:
 
 protected:
   static type_e determine_type(mm_io_c &in, uint64_t size);
+
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
 
   boost::optional<std::size_t> find_chunk(const char *id, int start_idx = 0, bool allow_empty = true);
 

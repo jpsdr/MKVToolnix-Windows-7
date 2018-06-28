@@ -445,7 +445,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *requested_ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
   virtual void create_packetizers();
@@ -457,6 +456,8 @@ public:
   static int detect_packet_size(mm_io_c &in, uint64_t size);
 
 private:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   void read_headers_for_file(std::size_t file_num);
 
   track_ptr find_track_for_pid(uint16_t pid) const;

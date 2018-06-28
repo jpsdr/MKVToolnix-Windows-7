@@ -57,7 +57,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizer(int64_t id);
   virtual bool is_providing_timestamps() const {
@@ -75,6 +74,8 @@ public:
   virtual FLAC__bool flac_eof_cb();
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   virtual bool parse_file(bool for_identification_only);
   virtual void handle_picture_metadata(FLAC__StreamMetadata const *metadata);
   virtual void handle_stream_info_metadata(FLAC__StreamMetadata const *metadata);

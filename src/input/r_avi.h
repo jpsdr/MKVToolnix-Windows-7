@@ -81,7 +81,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual int get_progress();
   virtual void identify();
   virtual void create_packetizers();
@@ -92,6 +91,7 @@ public:
 
 protected:
   virtual void add_audio_demuxer(int aid);
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
   virtual file_status_e read_video();
   virtual file_status_e read_audio(avi_demuxer_t &demuxer);
   virtual file_status_e read_subtitles(avi_subs_demuxer_t &demuxer);

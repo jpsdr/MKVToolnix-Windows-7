@@ -146,7 +146,6 @@ public:
   virtual bool new_stream_v_avc(flv_track_cptr &track, memory_cptr const &data);
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
   virtual void create_packetizers();
@@ -159,6 +158,8 @@ public:
   }
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   bool process_tag(bool skip_payload = false);
   bool process_script_tag();
   bool process_audio_tag(flv_track_cptr &track);

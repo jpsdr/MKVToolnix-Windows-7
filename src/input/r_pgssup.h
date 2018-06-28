@@ -32,7 +32,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizer(int64_t id);
   virtual bool is_simple_subtitle_container() {
@@ -40,4 +39,7 @@ public:
   }
 
   static int probe_file(mm_io_c &in, uint64_t size);
+
+protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
 };

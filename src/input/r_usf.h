@@ -70,7 +70,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
   virtual void create_packetizers();
@@ -82,6 +81,8 @@ public:
   static int probe_file(mm_text_io_c &in, uint64_t size);
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   virtual int64_t try_to_parse_timestamp(const char *s);
   virtual void parse_metadata(mtx::xml::document_cptr &doc);
   virtual void parse_subtitles(mtx::xml::document_cptr &doc);

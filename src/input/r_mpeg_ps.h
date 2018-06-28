@@ -216,7 +216,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *requested_ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizer(int64_t id);
   virtual void create_packetizers();
@@ -235,6 +234,8 @@ public:
   static int probe_file(mm_io_c &in, uint64_t size);
 
 private:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   virtual void new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
   virtual void new_stream_v_mpeg_1_2(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
   virtual void new_stream_v_avc(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);

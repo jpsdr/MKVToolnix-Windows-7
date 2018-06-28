@@ -474,7 +474,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual int get_progress();
   virtual void identify();
   virtual void create_packetizers();
@@ -484,6 +483,8 @@ public:
   static int probe_file(mm_io_c &in, uint64_t size);
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   virtual void parse_headers();
   virtual void verify_track_parameters_and_update_indexes();
   virtual void calculate_timestamps();

@@ -38,7 +38,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizers();
   virtual void create_packetizer(int64_t tid);
@@ -50,5 +49,7 @@ public:
   static int probe_file(mm_io_c &in, uint64_t size);
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   static bool find_valid_headers(mm_io_c &in, int64_t probe_range, int num_headers);
 };

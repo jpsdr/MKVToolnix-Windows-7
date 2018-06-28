@@ -91,7 +91,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual void identify();
   virtual void create_packetizers();
   virtual void create_packetizer(int64_t tid);
@@ -101,6 +100,7 @@ public:
 
 private:
   virtual ogm_demuxer_cptr find_demuxer(int serialno);
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
   virtual int read_page(ogg_page *);
   virtual void handle_new_stream(ogg_page *);
   virtual void handle_new_stream_and_packets(ogg_page *);

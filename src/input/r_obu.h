@@ -30,7 +30,6 @@ public:
   }
 
   virtual void read_headers() override;
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
   virtual void identify() override;
   virtual void create_packetizer(int64_t id) override;
   virtual bool is_providing_timestamps() const override {
@@ -38,4 +37,7 @@ public:
   }
 
   static bool probe_file(mm_io_c &in, uint64_t size);
+
+protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
 };

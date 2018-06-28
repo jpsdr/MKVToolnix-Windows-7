@@ -35,11 +35,12 @@ public:
   }
 
   virtual void read_headers() override;
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
   virtual void identify() override;
   virtual void create_packetizer(int64_t id) override;
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   void create_av1_packetizer();
   void create_vpx_packetizer();
 

@@ -237,7 +237,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
 
   virtual int get_progress();
   virtual void set_headers();
@@ -249,6 +248,8 @@ public:
   static int probe_file(mm_io_c &in, uint64_t size);
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   virtual void set_track_packetizer(kax_track_t *t, generic_packetizer_c *ptzr);
   virtual void init_passthrough_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void set_packetizer_headers(kax_track_t *t);

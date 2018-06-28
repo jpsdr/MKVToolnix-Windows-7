@@ -101,6 +101,12 @@ generic_reader_c::read_all() {
       ;
 }
 
+file_status_e
+generic_reader_c::read_next(generic_packetizer_c *ptzr,
+                            bool force) {
+  return read(ptzr, force);
+}
+
 bool
 generic_reader_c::demuxing_requested(char type,
                                      int64_t id,

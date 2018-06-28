@@ -97,7 +97,6 @@ public:
   }
 
   virtual void read_headers();
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false);
   virtual int get_progress();
   virtual void identify();
   virtual void create_packetizers();
@@ -107,6 +106,8 @@ public:
   static int probe_file(mm_io_c &in, uint64_t size);
 
 protected:
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+
   virtual void parse_headers();
   virtual real_demuxer_cptr find_demuxer(unsigned int id);
   virtual void assemble_video_packet(real_demuxer_cptr dmx, rmff_frame_t *frame);
