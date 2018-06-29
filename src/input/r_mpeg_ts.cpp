@@ -1179,8 +1179,6 @@ reader_c::read_headers() {
   for (int idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
     read_headers_for_file(idx);
 
-  mxinfo(boost::format("total file size %1%\n") % m_bytes_to_process);
-
   m_tracks = std::move(m_all_probed_tracks);
 
   for (int idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
