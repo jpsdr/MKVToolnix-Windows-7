@@ -15,6 +15,9 @@
 * mkvmerge: Matroska & MPEG transport stream readers: the encoding of text
   subtitles read from Matroska files can now be changed with the
   `--sub-charset` parameter.
+* Linux: starting with release 25 an AppImage will be provided which should
+  run on any Linux distribution released around the time of CentOS 7/Ubuntu
+  14.04 or later.
 
 ## Bug fixes
 
