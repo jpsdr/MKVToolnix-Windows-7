@@ -2,10 +2,6 @@
 
 ## New features and enhancements
 
-* macOS: translations: updated the `build.sh` script to build `libiconv` and a
-  complete `gettext`. Together with an additional fix to how translation files
-  are located, MKVToolNix can now use all interface languages on macOS,
-  too. Fixes #2110, #2307, #2323.
 * mkvmerge: SRT/ASS/SSA text subtitles: for files for which no encoding has
   been specified, mkvmerge will try UTF-8 first before falling back to the
   system's default encoding. Part of the implementation of #2246.
@@ -18,12 +14,13 @@
 * Linux: starting with release 25 an AppImage will be provided which should
   run on any Linux distribution released around the time of CentOS 7/Ubuntu
   14.04 or later.
+* macOS: translations: updated the `build.sh` script to build `libiconv` and a
+  complete `gettext`. Together with an additional fix to how translation files
+  are located, MKVToolNix can now use all interface languages on macOS,
+  too. Fixes #2110, #2307, #2323.
 
 ## Bug fixes
 
-* MKVToolNix GUI: header editor: non-mandatory elements couldn't be removed
-  anymore due to a regression while fixing #2320. They can now be removed
-  again. Fixes #2322.
 * mkvmerge: AVC/h.264: fixed file identification failing for certain
   elementary streams due to internal buffers not being cleared properly. Fixes
   #2325.
@@ -76,6 +73,9 @@
   of the number of frames/blocks to be processed. This simplifies calculation
   when appending files and fixes rare cases of when progress report was
   obvious wrong (e.g. stuck at 0% right until the end). Fixes #2150 and #2330.
+* MKVToolNix GUI: header editor: non-mandatory elements couldn't be removed
+  anymore due to a regression while fixing #2320. They can now be removed
+  again. Fixes #2322.
 
 
 # Version 24.0.0 "Beyond The Pale" 2018-06-10
