@@ -1,4 +1,4 @@
-# Version ?
+# Version 25.0.0 "Prog Noir" 2018-07-12
 
 ## New features and enhancements
 

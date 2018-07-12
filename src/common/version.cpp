@@ -22,7 +22,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Beyond The Pale"
+#define VERSIONNAME "Prog Noir"
 
 version_number_t::version_number_t()
 {
