@@ -73,12 +73,19 @@ function build_tarball {
 }
 
 function build_package {
-  retrieve_file $1
+  local FUNC_NAME=$1 FILE
+  case $1 in
+    */*)
+      FILE=${1//*\//}
+      ;;
+    *)
+      retrieve_file $1
 
-  local FUNC_NAME=$1
-  local SPEC_NAME="spec_$1"
-  local -a SPEC=(${(P)SPEC_NAME})
-  local FILE=${SPEC[1]}
+      local SPEC_NAME="spec_$1"
+      local -a SPEC=(${(P)SPEC_NAME})
+      FILE=${SPEC[1]}
+      ;;
+  esac
   shift
   local PACKAGE=${${FILE%.*}%.tar}
   local DIR=${DIR:-$PACKAGE}
@@ -462,7 +469,7 @@ function build_mkvtoolnix {
   dmgcnt=$dmgbase/MKVToolNix-${MTX_VER}.app/Contents
   dmgmac=$dmgcnt/MacOS
 
-  NO_MAKE=1 NO_CONFIGURE=1 build_package mkvtoolnix-${MTX_VER}.tar.xz
+  NO_MAKE=1 NO_CONFIGURE=1 build_package /mkvtoolnix-${MTX_VER}.tar.xz
   build_configured_mkvtoolnix
 
   ${RAKE} clean
