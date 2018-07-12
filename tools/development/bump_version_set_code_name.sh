@@ -63,7 +63,7 @@ function update_spec {
     s/^(\\%changelog.*)/\${1}
 * ${date} Moritz Bunkus <moritz\\@bunkus.org> ${TO}-1
 - New version
-/" mkvtoolnix.spec
+/" packaging/centos-fedora-opensuse/mkvtoolnix.spec
 }
 
 function update_files {
