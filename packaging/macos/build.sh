@@ -580,18 +580,9 @@ EOF
   mkdir -p ${dmgmac}/libs
   cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
 
-  for plugin (audio mediaservice platforms playlistformats) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
+  for plugin (audio mediaservice platforms playlistformats styles) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
 
-  for FILE (${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvinfo,mkvtoolnix-gui}) {
-    otool -L ${FILE} | \
-      grep -v : | \
-      grep -v @executable_path | \
-      awk '/libQt/ { print $1 }' | { \
-      while read LIB ; do
-        install_name_tool -change ${LIB} @executable_path/libs/${LIB:t} ${FILE}
-      done
-    }
-  }
+  ${SCRIPT_PATH}/fix_library_paths.sh ${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvinfo,mkvtoolnix-gui}
 
   if [[ -n ${SIGNATURE_IDENTITY} ]]; then
     typeset -a non_executables
