@@ -504,14 +504,16 @@ function build_dmg {
   cp COPYING $dmgbase/COPYING.txt
   cp NEWS.md $dmgbase/NEWS.txt
 
-  cat > $dmgbase/README.MacOS.txt <<EOF
-MKVToolNix – Mac OS specific notes
+  cat > $dmgbase/README.macOS.txt <<EOF
+MKVToolNix – macOS specific notes
 ========================================
 
 Configuration files are stored in ~/.config/bunkus.org and temporary
 files are stored in the folder automatically set via TMPDIR.
 
-This build works only with Mac OS X 10.9 and higher.
+This build works only with macOS 10.11 "El Capitan" or newer. Older
+releases that work on older macOS versions can be found at
+https://mkvtoolnix.download/downloads.html#macosx-old
 
 If you need the command line tools then copy mkvextract, mkvinfo,
 mkvmerge and mkvproedit from ./MKVToolNix-${MTX_VER}/Contents/MacOS/
