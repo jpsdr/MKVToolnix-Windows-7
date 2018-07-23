@@ -546,19 +546,21 @@ EOF
       <key>LANG</key>
       <string>en_US.UTF-8</string>
     </dict>
-    <key>CFBundleDevelopmentRegion</key> <string>English</string>
-    <key>CFBundleExecutable</key>        <string>mkvtoolnix-gui</string>
     <key>Properties</key>
-      <dict>
-        <key>file.encoding</key> <string>UTF-8</string>
-      </dict>
-    <key>CFBundleInfoDictionaryVersion</key> <string>${MTX_VER}</string>
+    <dict>
+      <key>file.encoding</key> <string>UTF-8</string>
+    </dict>
+    <key>CFBundleDevelopmentRegion</key>     <string>en-US</string>
+    <key>CFBundleIdentifier</key>            <string>download.mkvtoolnix.MKVToolNix</string>
+    <key>CFBundleExecutable</key>            <string>mkvtoolnix-gui</string>
+    <key>CFBundleInfoDictionaryVersion</key> <string>6.0</string>
     <key>CFBundlePackageType</key>           <string>APPL</string>
     <key>CSResourcesFileMapped</key>         <true/>
-    <key>CFBundleVersion</key>               <string>MKVToolNix-${MTX_VER}</string>
+    <key>CFBundleVersion</key>               <string>${MTX_VER}</string>
     <key>CFBundleShortVersionString</key>    <string>${MTX_VER}</string>
     <key>NSPrincipalClass</key>              <string>NSApplication</string>
     <key>LSMinimumSystemVersion</key>        <string>${MACOSX_DEPLOYMENT_TARGET}</string>
+    <key>CFBundleDisplayName</key>           <string>MKVToolNix</string>
     <key>CFBundleName</key>                  <string>MKVToolNix</string>
     <key>CFBundleIconFile</key>              <string>MKVToolNix.icns</string>
     <key>CFBundleDocumentTypes</key>
