@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: Matroska reader: fixed wrong timestamps when appending Matroska
+  files where the second Matroska file's first timestamp is bigger
+  than 0. Fixes #2345.
+
+
 # Version 25.0.0 "Prog Noir" 2018-07-12
 
 ## New features and enhancements

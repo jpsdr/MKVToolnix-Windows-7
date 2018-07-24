@@ -317,7 +317,6 @@ kax_reader_c::kax_reader_c(const track_info_c &ti,
   : generic_reader_c(ti, in)
   , m_segment_duration(0)
   , m_last_timestamp(0)
-  , m_first_timestamp(-1)
   , m_global_timestamp_offset{}
   , m_writing_app_ver(-1)
   , m_attachment_id(0)
@@ -1439,8 +1438,15 @@ kax_reader_c::read_headers() {
 
   determine_minimum_timestamps();
   determine_global_timestamp_offset_to_apply();
+  adjust_chapter_timestamps();
 
   show_demuxer_info();
+}
+
+void
+kax_reader_c::adjust_chapter_timestamps() {
+  if (m_chapters && (0 < m_global_timestamp_offset))
+    mtx::chapters::adjust_timestamps(*m_chapters, -m_global_timestamp_offset);
 }
 
 void
@@ -2254,15 +2260,6 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
     auto cluster_ts = FindChildValue<KaxClusterTimecode>(*cluster);
     cluster->InitTimecode(cluster_ts, m_tc_scale);
 
-    if (-1 == m_first_timestamp) {
-      m_first_timestamp = cluster_ts * m_tc_scale;
-
-      // If we're appending this file to another one then the core
-      // needs the timestamps shifted to zero.
-      if (m_appending && m_chapters && (0 < m_first_timestamp))
-        mtx::chapters::adjust_timestamps(*m_chapters, -m_first_timestamp);
-    }
-
     size_t bgidx;
     for (bgidx = 0; bgidx < cluster->ListSize(); bgidx++) {
       EbmlElement *element = (*cluster)[bgidx];
@@ -2338,11 +2335,6 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
   m_last_timestamp = block_timestamp;
   if (0 < block_simple->NumberFrames())
     m_in_file->set_last_timestamp(m_last_timestamp + (block_simple->NumberFrames() - 1) * frame_duration);
-
-  // If we're appending this file to another one then the core
-  // needs the timestamps shifted to zero.
-  if (m_appending)
-    m_last_timestamp -= m_first_timestamp;
 
   if ((-1 != block_track->ptzr) && block_track->passthrough) {
     // The handling for passthrough is a bit different. We don't have
@@ -2447,11 +2439,6 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
   if (0 < block->NumberFrames())
     m_in_file->set_last_timestamp(m_last_timestamp + (block->NumberFrames() - 1) * frame_duration);
-
-  // If we're appending this file to another one then the core
-  // needs the timestamps shifted to zero.
-  if (m_appending)
-    m_last_timestamp -= m_first_timestamp;
 
   if (-1 == block_track->ptzr)
     return;

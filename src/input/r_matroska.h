@@ -208,7 +208,7 @@ private:
 
   std::shared_ptr<libebml::EbmlStream> m_es;
 
-  int64_t m_segment_duration, m_last_timestamp, m_first_timestamp, m_global_timestamp_offset;
+  int64_t m_segment_duration, m_last_timestamp, m_global_timestamp_offset;
   std::string m_title;
 
   using deferred_positions_t = std::map<deferred_l1_type_e, std::vector<int64_t> >;
@@ -333,4 +333,5 @@ protected:
 
   virtual void determine_minimum_timestamps();
   virtual void determine_global_timestamp_offset_to_apply();
+  virtual void adjust_chapter_timestamps();
 };
