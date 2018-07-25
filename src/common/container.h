@@ -56,4 +56,18 @@ includes(Tcontainer const &container,
   return brng::find(container, key) != container.end();
 }
 
+template<typename Tcontainer>
+auto
+keys(Tcontainer const &container,
+     typename std::enable_if< is_associative_container<Tcontainer>::value , bool >::type = {})
+  -> std::vector< typename Tcontainer::key_type >
+{
+  std::vector< typename Tcontainer::key_type > the_keys;
+
+  for (auto const &pair : container)
+    the_keys.emplace_back(pair.first);
+
+  return the_keys;
+}
+
 }

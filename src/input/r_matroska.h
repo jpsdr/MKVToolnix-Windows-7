@@ -228,6 +228,8 @@ private:
 
   bool m_opus_experimental_warning_shown, m_regenerate_chapter_uids;
 
+  debugging_option_c m_debug_minimum_timestamp;
+
 public:
   kax_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~kax_reader_c();

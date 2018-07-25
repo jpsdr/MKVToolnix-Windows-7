@@ -46,6 +46,7 @@
 #include "common/at_scope_exit.h"
 #include "common/chapters/chapters.h"
 #include "common/codec.h"
+#include "common/container.h"
 #include "common/date_time.h"
 #include "common/debugging.h"
 #include "common/ebml.h"
@@ -323,6 +324,7 @@ kax_reader_c::kax_reader_c(const track_info_c &ti,
   , m_file_status(FILE_STATUS_MOREDATA)
   , m_opus_experimental_warning_shown{}
   , m_regenerate_chapter_uids{}
+  , m_debug_minimum_timestamp{"kax_reader|kax_reader_minimum_timestamp"}
 {
   init_l1_position_storage(m_deferred_l1_positions);
   init_l1_position_storage(m_handled_l1_positions);
@@ -2561,7 +2563,7 @@ kax_reader_c::determine_minimum_timestamps() {
     try {
       auto cluster = m_in_file->read_next_cluster();
       if (!cluster)
-        return;
+        break;
 
       auto cluster_ts = FindChildValue<KaxClusterTimecode>(*cluster);
       cluster->InitTimecode(cluster_ts, m_tc_scale);
@@ -2593,7 +2595,7 @@ kax_reader_c::determine_minimum_timestamps() {
           first_timestamp = last_timestamp;
 
         if ((last_timestamp - first_timestamp) >= probe_time_limit)
-          return;
+          break;
 
         auto &track = tracks_by_number[track_number];
         if (!track)
@@ -2609,13 +2611,24 @@ kax_reader_c::determine_minimum_timestamps() {
 
         tracks_by_number.erase(track_number);
         if (tracks_by_number.empty())
-          return;
+          break;
       }
 
     } catch (...) {
       break;
     }
   }
+
+  if (!m_debug_minimum_timestamp)
+    return;
+
+  auto track_numbers = mtx::keys(m_minimum_timestamps_by_track_number);
+  brng::sort(track_numbers);
+
+  mxdebug("Minimum timestamps by track number:\n");
+
+  for (auto const &track_number : track_numbers)
+    mxdebug(boost::format("  %1%: %2%\n") % track_number % m_minimum_timestamps_by_track_number[track_number]);
 }
 
 void
@@ -2630,8 +2643,12 @@ kax_reader_c::determine_global_timestamp_offset_to_apply() {
       global_minimum_timestamp = pair.second;
   }
 
-  if (global_minimum_timestamp.valid() && (global_minimum_timestamp < timestamp_c::ns(0)))
+  auto use_value = global_minimum_timestamp.valid() && (global_minimum_timestamp < timestamp_c::ns(0));
+
+  if (use_value)
     m_global_timestamp_offset = global_minimum_timestamp.abs().to_ns();
+
+  mxdebug_if(m_debug_minimum_timestamp, boost::format("Global minimum timestamp: %1%; %2%using it\n") % global_minimum_timestamp % (use_value ? "" : "not "));
 }
 
 void
