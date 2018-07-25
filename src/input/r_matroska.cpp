@@ -1447,7 +1447,7 @@ kax_reader_c::read_headers() {
 
 void
 kax_reader_c::adjust_chapter_timestamps() {
-  if (m_chapters && (0 < m_global_timestamp_offset))
+  if (m_chapters && (0 != m_global_timestamp_offset))
     mtx::chapters::adjust_timestamps(*m_chapters, -m_global_timestamp_offset);
 }
 
@@ -2302,7 +2302,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
 
   block_simple->SetParent(*cluster);
   auto block_track     = find_track_by_num(block_simple->TrackNum());
-  auto block_timestamp = mtx::math::to_signed(block_simple->GlobalTimecode()) + m_global_timestamp_offset;
+  auto block_timestamp = mtx::math::to_signed(block_simple->GlobalTimecode()) - m_global_timestamp_offset;
 
   if (!block_track) {
     mxwarn_fn(m_ti.m_fname,
@@ -2423,7 +2423,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
   block->SetParent(*cluster);
   auto block_track     = find_track_by_num(block->TrackNum());
-  auto block_timestamp = mtx::math::to_signed(block->GlobalTimecode()) + m_global_timestamp_offset;
+  auto block_timestamp = mtx::math::to_signed(block->GlobalTimecode()) - m_global_timestamp_offset;
 
   if (!block_track) {
     mxwarn_fn(m_ti.m_fname,
@@ -2643,10 +2643,11 @@ kax_reader_c::determine_global_timestamp_offset_to_apply() {
       global_minimum_timestamp = pair.second;
   }
 
-  auto use_value = global_minimum_timestamp.valid() && (global_minimum_timestamp < timestamp_c::ns(0));
+  auto use_value = global_minimum_timestamp.valid()
+                && ((global_minimum_timestamp < timestamp_c::ns(0)) || m_appending);
 
   if (use_value)
-    m_global_timestamp_offset = global_minimum_timestamp.abs().to_ns();
+    m_global_timestamp_offset = global_minimum_timestamp.to_ns();
 
   mxdebug_if(m_debug_minimum_timestamp, boost::format("Global minimum timestamp: %1%; %2%using it\n") % global_minimum_timestamp % (use_value ? "" : "not "));
 }

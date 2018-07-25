@@ -482,6 +482,7 @@ create_readers() {
           break;
       }
 
+      file->reader->m_appending = file->appending;
       file->reader->read_headers();
       file->reader->set_timestamp_restrictions(file->restricted_timestamp_min, file->restricted_timestamp_max);
 
