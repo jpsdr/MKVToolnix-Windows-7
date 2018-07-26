@@ -2555,11 +2555,12 @@ kax_reader_c::determine_minimum_timestamps() {
   timestamp_c first_timestamp, last_timestamp;
   auto probe_time_limit = timestamp_c::s(10);
   auto video_time_limit = timestamp_c::s(1);
+  auto done             = false;
 
   for (auto &track : m_tracks)
     tracks_by_number[track->track_number] = track;
 
-  while (true) {
+  while (!done) {
     try {
       auto cluster = m_in_file->read_next_cluster();
       if (!cluster)
@@ -2594,8 +2595,10 @@ kax_reader_c::determine_minimum_timestamps() {
         if (!first_timestamp.valid())
           first_timestamp = last_timestamp;
 
-        if ((last_timestamp - first_timestamp) >= probe_time_limit)
+        if ((last_timestamp - first_timestamp) >= probe_time_limit) {
+          done = true;
           break;
+        }
 
         auto &track = tracks_by_number[track_number];
         if (!track)
@@ -2610,8 +2613,10 @@ kax_reader_c::determine_minimum_timestamps() {
           continue;
 
         tracks_by_number.erase(track_number);
-        if (tracks_by_number.empty())
+        if (tracks_by_number.empty()) {
+          done = true;
           break;
+        }
       }
 
     } catch (...) {
