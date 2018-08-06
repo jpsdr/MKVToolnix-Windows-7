@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2018-06-09 20:50+0200\n"
-"PO-Revision-Date: 2018-06-09 19:39+0000\n"
+"PO-Revision-Date: 2018-07-24 22:50+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
@@ -287,7 +287,7 @@ msgstr "<option>-f</option>, <option>--parse-fully</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:95
 msgid "Sets the parse mode to 'full'. The default mode does not parse the whole file but uses the meta seek elements for locating the required elements of a source file. In 99% of all cases this is enough. But for files that do not contain meta seek elements or which are damaged the user might have to use this mode. A full scan of a file can take a couple of minutes while a fast scan only takes seconds."
-msgstr "Estableix el mode d'anàlisi a «full» (Completa). El mode per omissió no analitzarà tot el fitxer ja que empra la meta de cerca dels elements per a localitzar els elements requerits d'un fitxer d'origen. En el 99% dels casos n'hi ha prou. Però per a fitxers que no contenen elements meta de cerca o que estan malmesos, l'usuari hauria d'emprar aquest mode. L'anàlisi completa d'un fitxer pot requerir força temps, mentre que una anàlisi ràpida només porta segons."
+msgstr "Estableix el mode d'anàlisi a «full» (Completa). El mode per omissió no analitzarà tot el fitxer, ja que empra la meta de cerca dels elements per a localitzar els elements requerits d'un fitxer d'origen. En el 99% dels casos n'hi ha prou. Però per a fitxers que no contenen elements meta de cerca o que estan malmesos, l'usuari hauria d'emprar aquest mode. L'anàlisi completa d'un fitxer pot requerir força temps, mentre que una anàlisi ràpida només porta segons."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:104
@@ -594,7 +594,7 @@ msgstr "<option>--simple-language</option> <parameter>idioma</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:349
 msgid "If the simple format is enabled then &mkvextract; will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name.  By default &mkvextract; will use the first chapter name found for each atom regardless of its language."
-msgstr "Si el format simple està habilitat, llavors el &mkvextract; simplement mostrarà una única entrada per a cada àtom de capítol trobat, fins i tot si un àtom de capítol conté més d'un nom de capítol. Per omissió, el &mkvextract; emprarà el primer nom de capítol trobat per a cada àtom, independentment del seu idioma."
+msgstr "Si el format senzill està habilitat, llavors el &mkvextract; simplement mostrarà una única entrada per a cada àtom de capítol trobat, fins i tot si un àtom de capítol conté més d'un nom de capítol. Per omissió, el &mkvextract; emprarà el primer nom de capítol trobat per a cada àtom, independentment del seu idioma."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:354
@@ -687,7 +687,7 @@ msgstr "Causa l'extracció dels índexs per a la pista amb l'ID <parameter>TID</
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:438
 msgid "The format output is a simple text format: one line per <classname>CuePoint</classname> element with <literal>key=value</literal> pairs. If an optional element is not present in a <classname>CuePoint</classname> (e.g. <classname>CueDuration</classname>) then a dash will be output as the value."
-msgstr "El format de la sortida és un simple format de text: una línia per a cada element <classname>CuePoint</classname> amb un parell <literal>clau=valor</literal>. Si un element opcional no és present en un <classname>CuePoint</classname> (p. ex., <classname>CueDuration</classname>), llavors es retornarà un guió com a valor."
+msgstr "El format de la sortida és un senzill format de text: una línia per a cada element <classname>CuePoint</classname> amb un parell <literal>clau=valor</literal>. Si un element opcional no és present en un <classname>CuePoint</classname> (p. ex., <classname>CueDuration</classname>), llavors es retornarà un guió com a valor."
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:447
@@ -1009,7 +1009,7 @@ msgstr "S_TEXT/UTF8, S_TEXT/ASCII"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:713
 msgid "Simple text subtitles will be written as <abbrev>SRT</abbrev> files."
-msgstr "Els subtítols de text simple s'escriuran com a fitxers <abbrev>SRT</abbrev>."
+msgstr "Els subtítols de text senzill s'escriuran com a fitxers <abbrev>SRT</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:719
@@ -1355,7 +1355,7 @@ msgstr "L'opció <link linkend=\"mkvinfo.description.verbose\"><option>-v</optio
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:242
 msgid "At level 0 &mkvinfo; will print only the track headers it finds and their types. &mkvinfo; will exit as soon as the headers are parsed completely (more technical: as soon as the first cluster is encountered). In this level the seek head entries and the cues will not be displayed -- even if they're located in front of the track information."
-msgstr "En el nivell 0, el &mkvinfo; només imprimirà les capçaleres de la pista que troba i els seus tipus. El &mkvinfo; sortirà tan aviat s'hagin analitzat completament les capçaleres (més tècnic: tan aviat com es trobi el primer clúster). En aquest nivell, la cerca d'entrades de capçalera i els índexs no seràn mostrats -encara que es trobin al capdavant de la informació de la pista-."
+msgstr "En el nivell 0, el &mkvinfo; només imprimirà les capçaleres de la pista que troba i els seus tipus. El &mkvinfo; sortirà tan aviat com s'hagin analitzat completament les capçaleres (més tècnic: tan aviat com es trobi el primer clúster). En aquest nivell, la cerca d'entrades de capçalera i els índexs no seràn mostrats -encara que es trobin al capdavant de la informació de la pista-."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:248
@@ -1546,7 +1546,7 @@ msgstr "<option>--segment-uid</option> <parameter>SID1,SID2...</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:162
 msgid "Sets the segment UIDs to use. This is a comma-separated list of 128-bit segment UIDs in the usual UID form: hex numbers with or without the &quot;0x&quot; prefix, with or without spaces, exactly 32 digits."
-msgstr "Estableix els UID dels segments a emprar. Aquesta és una llista separada per comes dels UID dels segments de 128 bits en la forma usual de l'UID: nombres hexadecimals, amb el «0x» com a prefix o sense, amb espais o sense, exactament 32 dígits."
+msgstr "Estableix els UID dels segments a emprar. Aquesta és una llista separada per comes dels UID dels segments de 128 bits en la forma usual de l'UID: nombres hexadecimals, amb el prefix «0x» o sense, amb espais o sense, exactament 32 dígits."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:167
@@ -2383,7 +2383,7 @@ msgstr "Cada paràmetre entre parèntesis s'interpretarà com un nom de fitxer. 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:1007
 msgid "Some shells treat parenthesis as special characters. Hence you must escape or quote them as shown in the example above."
-msgstr "Alguns intèrprets d'ordres tracten els parèntesis com a caràcters especials. Per tant, s'hauran d'escapar o posar entre cometes simples tal com es mostra en l'exemple anterior."
+msgstr "Alguns intèrprets d'ordres tracten els parèntesis com a caràcters especials. Per tant, s'hauran d'escapar o posar entre cometes senzilles tal com es mostra en l'exemple anterior."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:1018
@@ -2787,7 +2787,7 @@ msgstr "<option>--timestamps</option> <parameter>TID:nom_fitxer</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1485
 msgid "Read the timestamps to be used for the specific track ID from <parameter>file-name</parameter>.  These timestamps forcefully override the timestamps that &mkvmerge; normally calculates. Read the section about <link linkend=\"mkvmerge.external_timestamp_files\">external timestamp files</link>."
-msgstr "Llegeix els codis de temps que s'empraran per a l'ID de la pista específica des del <parameter>nom_fitxer</parameter>. Aquests codis de temps substitueixen de manera forçosa els codis de temps que normalment calcula el &mkvmerge;. Llegiu la secció sobre <link linkend=\"mkvmerge.external_timestamp_files\">els fitxers externs pels codis de temps</link>."
+msgstr "Llegeix els codis de temps que s'empraran per a l'ID específic de la pista des del <parameter>nom_fitxer</parameter>. Aquests codis de temps substitueixen de manera forçosa els codis de temps que normalment calcula el &mkvmerge;. Llegiu la secció sobre <link linkend=\"mkvmerge.external_timestamp_files\">els fitxers externs pels codis de temps</link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1493
@@ -3189,7 +3189,7 @@ msgstr "<option>--sub-charset</option> <parameter>TID:joc_de_caràcters</paramet
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1912
 msgid "Sets the character set for the conversion to UTF-8 for UTF-8 subtitles for the given track ID. If not specified the charset will be derived from the current locale settings. Note that a charset is not needed for subtitles read from &matroska; files or from Kate streams, as these are always stored in UTF-8. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\"> text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr "Estableix el joc de caràcters per a la conversió a UTF-8 dels subtítols per a un ID de pista indicat. Si no s'especifica el joc de caràcters, aquest derivarà dels ajustaments per a la configuració regional. Tingueu en compte que no és necessari un joc de caràcters per a llegir els subtítols des de fitxers &matroska; o des de fluxos Kate, ja que aquests sempre s'emmagatzemen en UTF-8. Vegeu la secció sobre <link linkend=\"mkvmerge.text_files_and_charsets\">la conversió per a fitxers de text i jocs de caràcters</link>, per a una explicació sobre com realitza el &mkvmerge; la conversió entre els jocs de caràcters."
+msgstr "Estableix el joc de caràcters per a la conversió a UTF-8 dels subtítols per a un ID indicat de pista. Si no s'especifica el joc de caràcters, aquest derivarà dels ajustaments per a la configuració regional. Tingueu en compte que no és necessari un joc de caràcters per a llegir els subtítols des de fitxers &matroska; o des de fluxos Kate, ja que aquests sempre s'emmagatzemen en UTF-8. Vegeu la secció sobre <link linkend=\"mkvmerge.text_files_and_charsets\">la conversió per a fitxers de text i jocs de caràcters</link>, per a una explicació sobre com realitza el &mkvmerge; la conversió entre els jocs de caràcters."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:1927
@@ -3460,7 +3460,7 @@ msgstr "Ara obriu el <productname>mplayer</productname> i gaudiu-ne. Si teniu m�
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2264
 msgid "If you need an audio track synchronized you can do that easily. First find out which track ID the Vorbis track has with"
-msgstr "Si necessiteu una pista d'àudio sincronitzada ho podeu fer amb facilitat. El primer és esbrinar quin ID de pista té la pista Vorbis, amb:"
+msgstr "Si necessiteu una pista d'àudio sincronitzada, ho podeu fer amb facilitat. El primer és esbrinar quin ID de pista té la pista Vorbis, amb:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:2267
@@ -4069,7 +4069,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2798
 msgid "With this format three things are possible that are not possible with the simple chapter format:"
-msgstr "Amb aquest format es poden realitzar tres coses que no es poden amb el format simple:"
+msgstr "Amb aquest format es poden realitzar tres coses que no es poden amb el format de capítol senzill:"
 
 #. type: Content of: <refentry><refsect1><refsect2><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2802
@@ -4178,7 +4178,7 @@ msgstr "El &mkvmerge; és capaç de copiar els capítols des de fitxers d'origen
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2871
 msgid "&matroska; supports an extensive set of tags that is deprecated and a new, simpler system like it is is used in most other containers: <parameter>KEY=VALUE</parameter>. However, in &matroska; these tags can also be nested, and both the <parameter>KEY</parameter> and the <parameter>VALUE</parameter> are elements of their own. The example file <filename>example-tags-2.xml</filename> shows how to use this new system."
-msgstr "&matroska; admet un ampli conjunt d'etiquetes que estan obsoletes, així com un nou sistema, més simple, que s'empra en la majoria d'altres contenidors: <parameter>CLAU=VALOR</parameter>. No obstant això, al &matroska;, aquestes etiquetes també es poden aniuar, i tant la <parameter>CLAU</parameter> com el <parameter>VALOR</parameter> són elements propis. El fitxer d'exemple <filename>example-tags-2.xml</filename> mostra com emprar aquest nou sistema."
+msgstr "El &matroska; admet un ampli conjunt d'etiquetes que estan obsoletes, així com un nou sistema, més senzill, que s'empra en la majoria d'altres contenidors: <parameter>CLAU=VALOR</parameter>. No obstant això, al &matroska;, aquestes etiquetes també es poden aniuar, i tant la <parameter>CLAU</parameter> com el <parameter>VALOR</parameter> són elements propis. El fitxer d'exemple <filename>example-tags-2.xml</filename> mostra com emprar aquest nou sistema."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2879
@@ -4254,7 +4254,7 @@ msgstr "Tipus de dades"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2943
 msgid "The new &matroska; tagging system only knows two data types, a UTF-8 string and a binary type. The first is used for the tag's name and the <classname>&lt;String&gt;</classname> element while the binary type is used for the <classname>&lt;Binary&gt;</classname> element."
-msgstr "El nou sistema d'etiquetatge del &matroska; només reconeix dos tipus de dades, una cadena en UTF-8 i un tipus binari. La primera s'empra pel nom de l'etiqueta i l'element <classname>&lt;String&gt;</classname>, mentre que el tipus binari s'empra per a l'element <classname>&lt;Binary&gt;</classname>."
+msgstr "El nou sistema d'etiquetatge del &matroska; només reconeix dos tipus de dades, una cadena en UTF-8 i un tipus binari. La primera s'empra per al nom de l'etiqueta i l'element <classname>&lt;String&gt;</classname>, mentre que el tipus binari s'empra per a l'element <classname>&lt;Binary&gt;</classname>."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2948
@@ -4491,7 +4491,7 @@ msgstr " Format v3 pel fitxer del codi de temps"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3126
 msgid "In this format each line contains a duration in seconds followed by an optional number of frames per second.  Both can be floating point numbers.  If the number of frames per second is not present the default one is used.  For audio you should let the codec calculate the frame timestamps itself.  For that you should be using <constant>0.0</constant> as the number of frames per second.  You can also create gaps in the stream by using the '<literal>gap</literal>' keyword followed by the duration of the gap.  Example for an audio file:"
-msgstr "En aquest format cada línia conté una durada en segons seguida per un nombre opcional de fotogrames per segon. Ambdós camps poden ser nombres decimals. Si no s'especifica el nombre de fotogrames per segon s'emprarà el valor per omissió. Per a l'àudio s'hauria de deixar calcular al còdec els codis de temps dels fotogrames. Per això, haureu d'emprar <constant>0.0</constant> com el nombre de fotogrames per segon. També podeu crear discontinuïtats en el flux emprant la paraula clau «<literal>gap</literal>» seguida per la durada de la discontinuïtat. Un exemple per a un fitxer d'àudio:"
+msgstr "En aquest format cada línia conté una durada en segons seguida per un nombre opcional de fotogrames per segon. Ambdós camps poden ser nombres decimals. Si no s'especifica el nombre de fotogrames per segon, s'emprarà el valor per omissió. Per a l'àudio s'hauria de deixar calcular al còdec els codis de temps dels fotogrames. Per això, haureu d'emprar <constant>0.0</constant> com el nombre de fotogrames per segon. També podeu crear discontinuïtats en el flux emprant la paraula clau «<literal>gap</literal>» seguida per la durada de la discontinuïtat. Un exemple per a un fitxer d'àudio:"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:3132
@@ -4675,7 +4675,7 @@ msgstr "Suprimeix totes les ocurrències de la propietat <parameter>nom</paramet
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:151
 msgid "Actions that deal with tags and chapters:"
-msgstr "Accions que tenen a veure amb etiquetes i capítols:"
+msgstr "Accions que tenen a veure amb les etiquetes i capítols:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:156
@@ -4962,7 +4962,7 @@ msgstr "Un selector per a l'adjunt s'empra amb les dues accions <link linkend=\"
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:583
 msgid "Selection by attachment ID. In this form the selector is simply a number, the attachment's ID as output by &mkvmerge;'s identification command."
-msgstr "Selecció mitjançant l'ID de l'adjunt. D'aquesta forma, el selector és un simple número, l'ID de l'adjunt tal com surt amb l'ordre d'identificació del &mkvmerge;."
+msgstr "Selecció mitjançant l'ID de l'adjunt. D'aquesta forma, el selector és un senzill número, l'ID de l'adjunt tal com surt amb l'ordre d'identificació del &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:590
