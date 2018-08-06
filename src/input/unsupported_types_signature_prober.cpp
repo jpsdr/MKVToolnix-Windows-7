@@ -56,11 +56,13 @@ signature_t::match(mm_io_c &in)
 int
 unsupported_types_signature_prober_c::probe_file(mm_io_c &in) {
   std::vector<signature_t> signatures{
-    { { { 0u, { 0x41, 0x44, 0x49, 0x46 } } }, YT("AAC with ADIF headers") },
-    { { { 0u, { 0x30, 0x26, 0xb2, 0x75 } } }, mtx::file_type_t::get_name(mtx::file_type_e::asf) },
-    { { { 0u, { 0x52, 0x49, 0x46, 0x46 } },
-        { 8u, { 0x43, 0x44, 0x58, 0x41 } } }, mtx::file_type_t::get_name(mtx::file_type_e::cdxa) },
-    { { { 0u, { 0x53, 0x50 },            } }, mtx::file_type_t::get_name(mtx::file_type_e::hdsub) },
+    { { { 0u, { 0x41, 0x44, 0x49, 0x46                          } } }, YT("AAC with ADIF headers") },
+    { { { 0u, { 0x30, 0x26, 0xb2, 0x75                          } } }, mtx::file_type_t::get_name(mtx::file_type_e::asf) },
+    { { { 0u, { 0x52, 0x49, 0x46, 0x46                          } },
+        { 8u, { 0x43, 0x44, 0x58, 0x41                          } } }, mtx::file_type_t::get_name(mtx::file_type_e::cdxa) },
+    { { { 0u, { 0x53, 0x50                                      } } }, mtx::file_type_t::get_name(mtx::file_type_e::hdsub) },
+    { { { 0u, { 0xb7, 0xd8, 0x00, 0x20, 0x37, 0x49, 0xda, 0x11,
+                0xa6, 0x4e, 0x00, 0x07, 0xe9, 0x5e, 0xad, 0x8d  } } }, YT("Windows Television DVR") },
   };
 
   for (auto const &signature : signatures)

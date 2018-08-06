@@ -7,6 +7,7 @@ describe "mkvmerge / various file formats that are recognized but not supported"
   'asf-wmv/welcome3.wmv',
   'aac/aac_adif.aac',
   'subtitles/hddvd/1.sup',
+  'wtv/issue2347.wtv',
 ].each do |file|
   test_merge_unsupported "data/#{file}"
 end
