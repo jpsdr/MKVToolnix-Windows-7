@@ -1,6 +1,6 @@
 !define PRODUCT_NAME "MKVToolNix"
 !define PRODUCT_VERSION "25.0.0"
-!define PRODUCT_VERSION_BUILD ""
+!define PRODUCT_VERSION_BUILD " [revision-017-g6e52bd696]"
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
 !define PRODUCT_WEB_SITE "https://www.bunkus.org/videotools/mkvtoolnix/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\mkvtoolnix-gui.exe"
@@ -51,6 +51,7 @@ Var Dialog
 Var Label1
 Var Link1
 Var Link2
+Var Link3
 Var CheckBox1
 Var CheckBox1_State
 
@@ -342,8 +343,12 @@ Function showExternalLinks
   ${NSD_CreateLink} 0 48u 100% 16u "MKVcleaver"
   Pop $Link2
 
+  ${NSD_CreateLink} 0 64u 100% 16u "Inviska MKV Extract"
+  Pop $Link3
+
   ${NSD_OnClick} $Link1 onClickExternalLinkgMKVExtractGUI
   ${NSD_OnClick} $Link2 onClickExternalLinkMKVcleaver
+  ${NSD_OnClick} $Link3 onClickExternalLinkInviskaMKVExtract
 
   nsDialogs::Show
 FunctionEnd
@@ -356,6 +361,11 @@ FunctionEnd
 Function onClickExternalLinkMKVcleaver
   Pop $0
   ExecShell "open" "https://blogs.sapib.ca/apps/mkvcleaver/"
+FunctionEnd
+
+Function onClickExternalLinkInviskaMKVExtract
+  Pop $0
+  ExecShell "open" "https://www.inviska.com/mkvextract/"
 FunctionEnd
 
 var unRemoveJobs
