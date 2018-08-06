@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definitions for the RIFF CDXA demultiplexer module
+   Simple signature-based prober for unsupported file types.
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -17,7 +17,7 @@
 
 #include "common/mm_io.h"
 
-class cdxa_reader_c {
+class unsupported_types_signature_prober_c {
 public:
-  static bool probe_file(mm_io_c &in, uint64_t size);
+  static int probe_file(mm_io_c &io);
 };

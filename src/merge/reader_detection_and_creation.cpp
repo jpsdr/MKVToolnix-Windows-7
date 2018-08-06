@@ -21,19 +21,15 @@
 #include "common/strings/formatting.h"
 #include "common/xml/xml.h"
 #include "input/r_aac.h"
-#include "input/r_aac_adif.h"
 #include "input/r_ac3.h"
-#include "input/r_asf.h"
 #include "input/r_avc.h"
 #include "input/r_avi.h"
-#include "input/r_cdxa.h"
 #include "input/r_coreaudio.h"
 #include "input/r_dirac.h"
 #include "input/r_dts.h"
 #include "input/r_dv.h"
 #include "input/r_flac.h"
 #include "input/r_flv.h"
-#include "input/r_hdsub.h"
 #include "input/r_hdmv_textst.h"
 #include "input/r_hevc.h"
 #include "input/r_ivf.h"
@@ -59,6 +55,7 @@
 #include "input/r_wav.h"
 #include "input/r_wavpack.h"
 #include "input/r_webvtt.h"
+#include "input/unsupported_types_signature_prober.h"
 #include "merge/filelist.h"
 #include "merge/input_x.h"
 #include "merge/reader_detection_and_creation.h"
@@ -125,10 +122,8 @@ static std::map<mtx::file_type_e, prober_t> type_probe_map;
 static prober_t
 prober_for_type(mtx::file_type_e type) {
   if (type_probe_map.empty()) {
-    type_probe_map[mtx::file_type_e::asf]         = &do_probe<asf_reader_c,           mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::avc_es]      = &do_probe<avc_es_reader_c,        mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::avi]         = &do_probe<avi_reader_c,           mm_io_cptr, int64_t>;
-    type_probe_map[mtx::file_type_e::cdxa]        = &do_probe<cdxa_reader_c,          mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::coreaudio]   = &do_probe<coreaudio_reader_c,     mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::dirac]       = &do_probe<dirac_es_reader_c,      mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::dts]         = &do_probe<dts_reader_c,           mm_io_cptr, int64_t>;
@@ -136,7 +131,6 @@ prober_for_type(mtx::file_type_e type) {
     type_probe_map[mtx::file_type_e::flac]        = &do_probe<flac_reader_c,          mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::flv]         = &do_probe<flv_reader_c,           mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::hdmv_textst] = &do_probe<hdmv_textst_reader_c,   mm_io_cptr, int64_t>;
-    type_probe_map[mtx::file_type_e::hdsub]       = &do_probe<hdsub_reader_c,         mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::hevc_es]     = &do_probe<hevc_es_reader_c,       mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::ivf]         = &do_probe<ivf_reader_c,           mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::matroska]    = &do_probe<kax_reader_c,           mm_io_cptr, int64_t>;
@@ -220,21 +214,15 @@ get_file_type_internal(filelist_t &file) {
     }
   }
 
-  // File types that can be detected unambiguously but are not supported
-  if (do_probe<aac_adif_reader_c>(io, size))
-    return { mtx::file_type_e::aac, size };
-  if (do_probe<asf_reader_c>(io, size))
-    return { mtx::file_type_e::asf, size };
-  if (do_probe<cdxa_reader_c>(io, size))
-    return { mtx::file_type_e::cdxa, size };
-  if (do_probe<flv_reader_c>(io, size))
-    return { mtx::file_type_e::flv, size };
-  if (do_probe<hdsub_reader_c>(io, size))
-    return { mtx::file_type_e::hdsub, size };
+  // File types that can be detected unambiguously but are not
+  // supported. The prober does not return if it detects the type.
+  do_probe<unsupported_types_signature_prober_c>(io);
 
   // File types that can be detected unambiguously
   if (do_probe<avi_reader_c>(io, size))
     return { mtx::file_type_e::avi, size };
+  if (do_probe<flv_reader_c>(io, size))
+    return { mtx::file_type_e::flv, size };
   if (do_probe<kax_reader_c>(io, size))
     return { mtx::file_type_e::matroska, size };
   if (do_probe<wav_reader_c>(io, size))
