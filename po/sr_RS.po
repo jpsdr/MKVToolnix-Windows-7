@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-06-20 22:42+0200\n"
+"POT-Creation-Date: 2018-08-06 21:01+0200\n"
 "PO-Revision-Date: 2018-03-28 23:04+0200\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "Привремена тта-датотека за запис ИБ %1% се умножава у завршну тта-датотеку, а то може да потраје.\n"
 
-#: src/merge/output_control.cpp:253
+#: src/merge/output_control.cpp:252
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -1132,10 +1132,10 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/merge/output_control.cpp:261
-#: src/merge/output_control.cpp:271
-#: src/merge/output_control.cpp:279
-#: src/merge/output_control.cpp:286
+#: src/merge/output_control.cpp:260
+#: src/merge/output_control.cpp:270
+#: src/merge/output_control.cpp:278
+#: src/merge/output_control.cpp:285
 msgid " done\n"
 msgstr " готово\n"
 
@@ -1333,8 +1333,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: десио се изузетак (порука: %2%; врста: %3%)."
 
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1581
-#: src/input/r_matroska.cpp:2282
+#: src/input/r_matroska.cpp:1589
+#: src/input/r_matroska.cpp:2278
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: десио се непознат изузетак."
@@ -2339,7 +2339,7 @@ msgstr "„%1%“: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "„%1%“: Обрађујем и наредне датотеке: %2%\n"
 
-#: src/input/r_matroska.cpp:1865
+#: src/input/r_matroska.cpp:1873
 #, fuzzy, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "„%1%“: Покушавате поново да сједините Опус-запис претходно сједињаван у огледном режиму. Добијени запис ће бити уписан у завршном режиму, али један детаљ не може да се опорави из записа сједињеног у огледном режиму: скраћивање на крају. Ово значи да декодер може да избаци неколико узорака више него што је испрва намеравано. Ако је то могуће, наново сједињујете из изворне Опус-датотеке.\n"
@@ -2534,12 +2534,12 @@ msgstr "+-> Припрема Флак-датотеке: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Припрема Флак-датотеке: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:344
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", опис „%1%“"
 
-#: src/merge/generic_reader.cpp:335
+#: src/merge/generic_reader.cpp:347
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", назив датотеке „%1%“"
@@ -2642,7 +2642,7 @@ msgstr "<без назива>"
 msgid "<Unsaved file>"
 msgstr "<несачувана датотека>"
 
-#: src/input/r_matroska.cpp:2304
+#: src/input/r_matroska.cpp:2309
 #: src/input/r_matroska.cpp:2430
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
@@ -2668,11 +2668,11 @@ msgstr "Зарезом-одвојена листа бројева кадрова
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "Зарезом-одвојена листа опсега временских ознака садржаја за чување."
 
-#: src/input/r_matroska.cpp:760
+#: src/input/r_matroska.cpp:761
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
 
-#: src/merge/output_control.cpp:232
+#: src/merge/output_control.cpp:231
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:254
 #: src/propedit/propedit.cpp:122
 #, no-c-format
@@ -2723,7 +2723,7 @@ msgstr ""
 msgid "A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."
 msgstr "Један Матрошка-блок садржи или цео кадар (прогресиван видео) или једно поље - полукадар (испреплитан видео)."
 
-#: src/merge/generic_reader.cpp:206
+#: src/merge/generic_reader.cpp:218
 #, boost-format
 msgid "A track with the ID %1% was requested but not found in the file. The corresponding option will be ignored.\n"
 msgstr "Захтевани запис ИБ %1% није пронађен у овој датотеци, па ћу занемарити њему одговарајућу опцију.\n"
@@ -2791,7 +2791,7 @@ msgstr "Аак (енг. „AAC — Advanced Audio Coding“)"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "Аак је Сбр/Хе-Аак/Аак+:"
 
-#: src/input/r_aac_adif.cpp:36
+#: src/input/unsupported_types_signature_prober.cpp:59
 msgid "AAC with ADIF headers"
 msgstr "Аак са АДИФ заглављима"
 
@@ -3386,7 +3386,7 @@ msgstr "Придружи медија-датотеке"
 msgid "Append to an e&xisting source file"
 msgstr "Придружи постојећој &улазној датотеци"
 
-#: src/merge/output_control.cpp:1752
+#: src/merge/output_control.cpp:1739
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "Придружујем запис %1% из датотеке број %2% („%3%“) запису %4% из датотеке број %5% („%6%“).\n"
@@ -3436,7 +3436,7 @@ msgstr "Приложено"
 msgid "Attachment"
 msgstr "Прилози"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:341
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Прилог ИБ %1%: врста '%2%', величине %3% битова"
@@ -3649,7 +3649,7 @@ msgstr "Кју-указивач стања кодека: %1%"
 msgid "Blue colour coordinate y"
 msgstr "Кју-указивач стања кодека: %1%"
 
-#: src/input/r_vobsub.cpp:555
+#: src/input/r_vobsub.cpp:558
 #, fuzzy, boost-format
 msgid "Bogus aid %1%\n"
 msgstr "Лажна помоћ %1%\n"
@@ -4050,7 +4050,7 @@ msgstr "Поглавља"
 msgid "Chapters in fixed intervals"
 msgstr "Уредник поглавља"
 
-#: src/merge/generic_reader.cpp:341
+#: src/merge/generic_reader.cpp:353
 #, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -4348,7 +4348,7 @@ msgstr "Не могу да издвојим заглавље поретка из
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "Не могу да нађем индекс звучног записа %1% („avilib“-порука о грешци: %2%). Изостављам запис.\n"
 
-#: src/merge/output_control.cpp:1678
+#: src/merge/output_control.cpp:1665
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Не налазим „gptzr“ при придруживању. %1%\n"
@@ -5216,7 +5216,7 @@ msgstr "ЕБМЛ-издање: %1%"
 msgid "EBML void"
 msgstr "ЕБМЛ-заглавље"
 
-#: src/merge/reader_detection_and_creation.cpp:481
+#: src/merge/reader_detection_and_creation.cpp:469
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "Опасна унутрашња грешка! (непозната врста датотеке). %1%\n"
@@ -5394,7 +5394,7 @@ msgstr "Грешка %1%\n"
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "Грешка при стварању привремене датотеке (разлог: %1)."
 
-#: src/input/r_ogm.cpp:1216
+#: src/input/r_ogm.cpp:1227
 #, boost-format
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr ""
@@ -5455,7 +5455,7 @@ msgstr "Грешка при рашчлањавању ознака у „%1%“: 
 msgid "Error reading Matroska file"
 msgstr "Грешка код уписа Матрошка-датотеке"
 
-#: src/merge/output_control.cpp:741
+#: src/merge/output_control.cpp:731
 #, fuzzy, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "Рашчлањивач је известио о грешци: %1"
@@ -5721,7 +5721,7 @@ msgstr "Ширина"
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr "3д-стерео-режим видеа (0–11, видите документацију)."
 
-#: src/merge/generic_reader.cpp:320
+#: src/merge/generic_reader.cpp:332
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Датотека „%1%“: сандук: %2%"
@@ -5812,7 +5812,7 @@ msgstr ""
 msgid "File/Segment linking"
 msgstr "Повезивање датотеке/одељка"
 
-#: src/merge/output_control.cpp:923
+#: src/merge/output_control.cpp:913
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Датотека се не може сама себи придруживати. Аргумент опције „--append-to“ није ваљан.\n"
 
@@ -6056,7 +6056,7 @@ msgstr "Опште ознаке:"
 msgid "Global tags:"
 msgstr "Опште ознаке:"
 
-#: src/merge/generic_reader.cpp:347
+#: src/merge/generic_reader.cpp:359
 #, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -6778,7 +6778,7 @@ msgstr "Неважећи облик: нађен непознат знак „%1%
 msgid "Invalid frame for '--split' in '--split %1%'.\n"
 msgstr "Неважећи кадар за „--split“ у „--split %1%“.\n"
 
-#: src/input/r_vobsub.cpp:538
+#: src/input/r_vobsub.cpp:541
 #, boost-format
 msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "Неважећа дужина заглавља: %1% (укупно: %2%, „idx“: %3%, „dataidx“: %4%)\n"
@@ -6844,7 +6844,7 @@ msgstr "Неважећи почетни број кадра/поља за „--s
 msgid "Invalid start frame/field number for '--split' in '--split %1%' (current part: %2%). The start number must be bigger than or equal to the previous part's end number.\n"
 msgstr "Неважећи почетни број кадра/поља за „--split“ у „--split %1%“ (тренутни део: %2%). Почетни број мора бити већи или једнак завршном броју претходног дела.\n"
 
-#: src/input/r_usf.cpp:221
+#: src/input/r_usf.cpp:228
 msgid "Invalid start or stop timestamp"
 msgstr "Није ваљана временска ознака почетка или свршетка"
 
@@ -6972,7 +6972,7 @@ msgstr "Дат је неважећи ИБ-записа у „--sub-charset %1%�
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "Неважећа одредница ИБ-записа/назив датотеке у аргументу „%1%“.\n"
 
-#: src/merge/generic_reader.cpp:117
+#: src/merge/generic_reader.cpp:129
 #, boost-format
 msgid "Invalid track type %1%."
 msgstr "Неважећа врста записа %1%."
@@ -7160,18 +7160,18 @@ msgstr "Не може да се рашчлани линија „%1%“ у да�
 msgid "Line %1%: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "Линија %1%: Наиђох на негативну временску ознаку. Изменићу овај унос тако да његов почетак буде у 00:00:00.000.\n"
 
-#: src/input/r_vobsub.cpp:300
+#: src/input/r_vobsub.cpp:301
 #, boost-format
 msgid "Line %1%: The current timestamp (%2%) is smaller than the previous one (%3%). The entries will be sorted according to their timestamps. This might result in the wrong order for some subtitle entries. If this is the case then you have to fix the .idx file manually.\n"
 msgstr "Линија %1%: Трнутна временска ознака (%2%) је нижа од претходне (%3%). Пресложићу уносе према њима одговарајућим врем. ознакама. Ово може дада проузрокује неправилан редослед неких поднаписа, а ако се то догоди, самостално уредите одговарајућу „.idx“ датотеку.\n"
 
-#: src/input/r_vobsub.cpp:250
-#: src/input/r_vobsub.cpp:273
+#: src/input/r_vobsub.cpp:251
+#: src/input/r_vobsub.cpp:274
 #, boost-format
 msgid "Line %1%: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"
 msgstr "Линија %1%: Иако ова линија изгледа као унос поднаписа, не може бити правилно препозната, па ће, због тога, бити и изостављена.\n"
 
-#: src/input/r_vobsub.cpp:290
+#: src/input/r_vobsub.cpp:291
 #, boost-format
 msgid "Line %1%: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
 msgstr "Линија %1%: Изгледа да је линија унос из поднаписа и да садржи временску ознаку негативне вредности, чак и након постављања кашњења за запис. Овај унос ћу изоставити јер Матрошка не подржава негативне вредности.\n"
@@ -7314,12 +7314,12 @@ msgstr "Мплс-блуреј листа"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Учини овај запис подразумеваним за ову врсту (звук, видео, поднаписи)."
 
-#: src/input/r_matroska.cpp:1753
-#: src/input/r_matroska.cpp:1770
+#: src/input/r_matroska.cpp:1761
+#: src/input/r_matroska.cpp:1778
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Пронађени су неправилни подаци за отварање Аак-кодека.\n"
 
-#: src/input/r_matroska.cpp:1763
+#: src/input/r_matroska.cpp:1771
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Неправилан ИБ-кодека „%1%“.\n"
@@ -7540,7 +7540,7 @@ msgstr "Задато је више од једног назива датотек
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "Задато је више од једног назива за прилог. Одбацићу назив „%1%“, а употребићу назив „%2%“.\n"
 
-#: src/merge/output_control.cpp:996
+#: src/merge/output_control.cpp:986
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "Више од једног записа треба да буде спојено са записом %1% из датотеке %2% („%3%“). Није Није ваљан аргумент за опцију „--append-to“.\n"
@@ -7704,18 +7704,18 @@ msgstr ""
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "„%1%“ није одређено у „--%2% %3%“.\n"
 
-#: src/merge/output_control.cpp:230
+#: src/merge/output_control.cpp:229
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:252
 #: src/propedit/propedit.cpp:120
 #, fuzzy, no-c-format
 msgid "No 'EBML head' element was found."
 msgstr "Нисам нашао ЕБМЛ-заглавље."
 
-#: src/input/r_qtmp4.cpp:1706
+#: src/input/r_qtmp4.cpp:1717
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Не нађох Ак3-заглавље у првом кадру; изоставићу овај запис.\n"
 
-#: src/input/r_qtmp4.cpp:3345
+#: src/input/r_qtmp4.cpp:3355
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Не нађох ДТС-заглавље у првом кадру; изоставићу овај запис.\n"
 
@@ -7733,7 +7733,7 @@ msgstr "Датом прилогу „%1%“ није одређена миме-�
 msgid "No actions have been added yet."
 msgstr "Нема започете радње."
 
-#: src/merge/output_control.cpp:955
+#: src/merge/output_control.cpp:945
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "Није дато мапирање придруживања за датотеку бр. %1% („%2%“). Уместо тога користиће се подразумевано мапирање од %3%. Имајте то у виду ако Мкв-спојница прекине са радом уз грешку у вези са неважећим „--append-to“ опцијама.\n"
@@ -8159,7 +8159,7 @@ msgstr "Дозвољена је само једна датотека подат�
 msgid "Only one source file is allowed.\n"
 msgstr "Дозвољена је само једна улазна датотека.\n"
 
-#: src/merge/output_control.cpp:936
+#: src/merge/output_control.cpp:926
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Дата су само делимична мапирања за датотеку број %1% („%2%“). Не наводите мапирање уопште (тада се употребљава подразумевано мапирање) или наведите мапирање за све записе који се умножавају.\n"
@@ -8377,7 +8377,7 @@ msgstr "Пгс/Суп поднаписи"
 msgid "PGSSUP"
 msgstr "Пгс-Суп"
 
-#: src/input/r_vobsub.cpp:546
+#: src/input/r_vobsub.cpp:549
 #, boost-format
 msgid "PTS error: 0x%|1$02x| %|2$02x|%|3$02x| %|4$02x|%|5$02x|\n"
 msgstr "ПТС грешка: 0x%|1$02x| %|2$02x|%|3$02x| %|4$02x|%|5$02x|\n"
@@ -8631,7 +8631,7 @@ msgstr "Напредак:"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2939
-#: src/merge/output_control.cpp:358
+#: src/merge/output_control.cpp:348
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -8639,7 +8639,7 @@ msgstr "Напредак:"
 msgid "Progress: %1%%%%2%"
 msgstr "Напредак: %1%%%%2%"
 
-#: src/merge/output_control.cpp:333
+#: src/merge/output_control.cpp:325
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "Напредак: 100%%%1%"
@@ -8699,46 +8699,46 @@ msgstr "Квик-тајм сагласан видео"
 msgid "QuickTime/MP4"
 msgstr "Квик-тајм/Мп4"
 
-#: src/input/r_qtmp4.cpp:428
+#: src/input/r_qtmp4.cpp:437
 #, boost-format
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
 msgstr "Читач за Квик-тајм/Мп4: Атом „%1%“ је премален. Очекивана величина: >= %2%. Тренутна величина: %3%.\n"
 
-#: src/input/r_qtmp4.cpp:2335
+#: src/input/r_qtmp4.cpp:2345
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Читач за Квик-тајм/Мп4: Константна величина узорка и променљиво трајање још увек нису подржани. Обавестите аутора ако имате такву датотеку.\n"
 
-#: src/input/r_qtmp4.cpp:1662
+#: src/input/r_qtmp4.cpp:1671
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
 msgstr "Читач за Квик-тајм/Мп4: Не могу да прочитам број комада %1%/%2%, величине %3% и на положају %4%. Прекидам.\n"
 
-#: src/input/r_qtmp4.cpp:2770
-#: src/input/r_qtmp4.cpp:2784
+#: src/input/r_qtmp4.cpp:2780
+#: src/input/r_qtmp4.cpp:2794
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
 msgstr "Читач за Квик-тајм/Мп4: Не могу да прочитам атом ширег описа звука за запис ИБ %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2737
+#: src/input/r_qtmp4.cpp:2747
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
 msgstr "Читач за Квик-тајм/Мп4: Не могу да прочитам атом описа звука за запис ИБ %1%.\n"
 
-#: src/input/r_qtmp4.cpp:1351
+#: src/input/r_qtmp4.cpp:1360
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Читач за Квик-тајм/Мп4: Не могу да прочитам атом описа тока за запис ИБ %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2818
+#: src/input/r_qtmp4.cpp:2828
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Читач за Квик-тајм/Мп4: Не могу да прочитам атом описа видеа за запис ИБ %1%.\n"
 
-#: src/input/r_qtmp4.cpp:327
+#: src/input/r_qtmp4.cpp:334
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
 msgstr "Читач за Квик-тајм/Мп4: Никакви атоми заглавља нису нађени.\n"
 
-#: src/input/r_qtmp4.cpp:330
+#: src/input/r_qtmp4.cpp:337
 msgid "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
 msgstr "Читач за Квик-тајм/Мп4: Атом „mdat“ није пронађен, као ни видео-подаци.\n"
 
@@ -8747,80 +8747,80 @@ msgstr "Читач за Квик-тајм/Мп4: Атом „mdat“ није п
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Читач за Квик-тајм/Мп4: Није ваљана величина комада %1% u %2%.\n"
 
-#: src/input/r_qtmp4.cpp:3395
+#: src/input/r_qtmp4.cpp:3405
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Читач за Квик-тајм/Мп4: „Мпег4 парт 10/Авк“ запис %1% нема своју поставку декодера. Изостављам овај запис.\n"
 
-#: src/input/r_qtmp4.cpp:3421
+#: src/input/r_qtmp4.cpp:3431
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Читач за Квик-тајм/Мп4: Мпег4 запис %1% нема своју „esds atom“/ поставку декодера. Изостављам овај запис.\n"
 
-#: src/input/r_qtmp4.cpp:3405
+#: src/input/r_qtmp4.cpp:3415
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Читач за Квик-тајм/Мп4: „Мпег4 парт 2/Хевк“ запис %1% нема своју поставку декодера. Изостављам овај запис.\n"
 
-#: src/input/r_qtmp4.cpp:687
+#: src/input/r_qtmp4.cpp:696
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version %1%.\n"
 msgstr "Читач за Квик-тајм/Мп4: Атом „заглавље медија“ (енг. „mdhd“) употребљава неподржано издање %1%.\n"
 
-#: src/input/r_qtmp4.cpp:1344
+#: src/input/r_qtmp4.cpp:1353
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID %1%.\n"
 msgstr "Читач за Квик-тајм/Мп4: Код записа ИБ %1%, поље „величина“ (енг. „size“) у атому описа тока је премалено.\n"
 
-#: src/input/r_qtmp4.cpp:692
+#: src/input/r_qtmp4.cpp:701
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Читач за Квик-тајм/Мп4: Параметар „временски опсег“ (енг. „time scale“) је имао вредност 0, а то није подржано.\n"
 
-#: src/input/r_qtmp4.cpp:3363
+#: src/input/r_qtmp4.cpp:3373
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Читач за Квик-тајм/Мп4: Аак запис %1% нема своју „esds atom“/поставку декодера. Изостављам овај запис.\n"
 
-#: src/input/r_qtmp4.cpp:3358
+#: src/input/r_qtmp4.cpp:3368
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Читач за Квик-тајм/Мп4: Звучни запис %1% употребљава неподржан „ИБ врсте објекта“ %2% у „есдс-атому“. Изостављам овај запис.\n"
 
-#: src/input/r_qtmp4.cpp:3415
+#: src/input/r_qtmp4.cpp:3425
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Читач за Квик-тајм/Мп4: Видео-запис %1% нема свој „ЕСДС-атом“ (енг. „ESDS atom“). Изостављам овај запис.\n"
 
-#: src/input/r_qtmp4.cpp:460
+#: src/input/r_qtmp4.cpp:469
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '%1%'. Aborting.\n"
 msgstr "Читач за Квик-тајм/Мп4: Ова датотека садржи заглавља сажимана непознатим или неподржаним алгоритмимом „%1%“. Прекидам.\n"
 
-#: src/input/r_qtmp4.cpp:493
+#: src/input/r_qtmp4.cpp:502
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size (%1%) was not what is available after uncompressing (%2%).\n"
 msgstr "Читач за Квик-тајм/Мп4: Ова датотека садржи сажимана заглавља, али очекивана величина несажетих заглавља (%1%) не одговара оној доступној после њихових распакивања (%2%).\n"
 
-#: src/input/r_qtmp4.cpp:484
+#: src/input/r_qtmp4.cpp:493
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: %1%. Aborting.\n"
 msgstr "Читач за Квик-тајм/Мп4: Ова датотека садржи сажимана заглавља, али не могу да покренем програмску Злиб-библиотеку, која шаље поруку: %1%. Прекидам.\n"
 
-#: src/input/r_qtmp4.cpp:489
+#: src/input/r_qtmp4.cpp:498
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Читач за Квик-тајм/Мп4: Ова датотека садржи сажимана заглавља, али не могу да их распакујем. Злиб шаље поруку о грешци: %1%. Прекидам.\n"
 
-#: src/input/r_qtmp4.cpp:3314
-#: src/input/r_qtmp4.cpp:3333
-#: src/input/r_qtmp4.cpp:3376
-#: src/input/r_qtmp4.cpp:3439
+#: src/input/r_qtmp4.cpp:3324
+#: src/input/r_qtmp4.cpp:3343
+#: src/input/r_qtmp4.cpp:3386
+#: src/input/r_qtmp4.cpp:3449
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Читач за Квик-тајм/Мп4: Запис %1% не садржи неке податке. Да ли су можда оштећени атоми заглавља?\n"
 
-#: src/input/r_qtmp4.cpp:2745
-#: src/input/r_qtmp4.cpp:2825
+#: src/input/r_qtmp4.cpp:2755
+#: src/input/r_qtmp4.cpp:2835
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Читач за Квик-тајм/Мп4: Запис, ИБ %1%, садржи више но један Фоур-ЦЦ. Ја ћу употребити само онај први (%2%), а изоставићу овај (%3%).\n"
@@ -9774,7 +9774,7 @@ msgstr "Парчад"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
 
-#: src/merge/output_control.cpp:1292
+#: src/merge/output_control.cpp:1279
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "Недостају неки елементи ознака (ово није требало да се догоди — друга слична грешка је требало да се догоди раније). %1%\n"
@@ -10052,7 +10052,7 @@ msgstr "Ознаке"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Дозвољене су ознаке али не и поглавља."
 
-#: src/merge/generic_reader.cpp:350
+#: src/merge/generic_reader.cpp:362
 #, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -10108,7 +10108,7 @@ msgstr "Говори Мкв-спојници да стави највише „�
 msgid "Text files"
 msgstr "Текст-датотеке"
 
-#: src/input/r_vobsub.cpp:243
+#: src/input/r_vobsub.cpp:244
 msgid "The .idx file does not contain an 'id: ...' line to indicate the language.\n"
 msgstr "У „.idx“-датотеци нема линије „id: ...“ која би указала на језик.\n"
 
@@ -10176,7 +10176,7 @@ msgstr "Овај ИБ „%1%“ је употребљаван раније за 
 msgid "The JSON output generated by mkvmerge could not be parsed (parser's error message: %1)."
 msgstr ""
 
-#: src/input/r_ogm.cpp:1684
+#: src/input/r_ogm.cpp:1710
 #, boost-format
 msgid "The Kate identification header could not be parsed (%1%).\n"
 msgstr "Не може да се рашчлани заглавље кејт-указивача (%1%).\n"
@@ -10195,7 +10195,7 @@ msgstr ""
 msgid "The MKVToolNix Code of Conduct"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:1206
+#: src/input/r_qtmp4.cpp:1215
 #, boost-format
 msgid "The MP4 file '%1%' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "Мп4-датотека „%1%“ садржи поглавља непознатог формата. Ово се најчешће догађа ако поглавља нису кодирана УТФ-8 кодном страном. Да подесите ваљану кодну страну употребите опцију „--chapter-charset“.\n"
@@ -10226,7 +10226,7 @@ msgstr ""
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length %1%'.\n"
 msgstr "НАЛУ-величина је број између 2 и 4 укључено у „--nalu-size-length %1%“.\n"
 
-#: src/input/r_ogm.cpp:1494
+#: src/input/r_ogm.cpp:1520
 #, boost-format
 msgid "The Theora identification header could not be parsed (%1%).\n"
 msgstr "Не може да се рашчлани заглавље теора-указивача (%1%).\n"
@@ -10236,7 +10236,7 @@ msgstr "Не може да се рашчлани заглавље теора-у�
 msgid "The UID must not be left empty."
 msgstr ""
 
-#: src/input/r_matroska.cpp:759
+#: src/input/r_matroska.cpp:760
 #, boost-format
 msgid "The VobSub subtitle track %1% does not contain its index in the CodecPrivate element."
 msgstr ""
@@ -10412,7 +10412,7 @@ msgstr "Одабрана НАЛУ-величина %1% је премала. По
 msgid "The closing character '%1%' is missing.\n"
 msgstr "Недостаје затворена заграда „)“.\n"
 
-#: src/merge/generic_reader.cpp:142
+#: src/merge/generic_reader.cpp:154
 #, boost-format
 msgid "The codec type '%1%' cannot be used in a WebM compliant file.\n"
 msgstr "Врста кодека „%1%“ је неупотребљива у ВебМ-сагласној датотеци.\n"
@@ -10461,7 +10461,7 @@ msgstr "Заглавље датотеке исправки није правил
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Овде одабране земље ће се приказивати на врху падајуће листе доступних земаља у програму."
 
-#: src/merge/output_control.cpp:1484
+#: src/merge/output_control.cpp:1471
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Уписију се кју-уноси (индекс)...\n"
 
@@ -10519,11 +10519,11 @@ msgstr "Подразумевани језички код „%1%“ није ва
 msgid "The default mode is adding files for multiplexing."
 msgstr "Подразумеван начин рада је додавање датотека за сједињавање"
 
-#: src/merge/reader_detection_and_creation.cpp:496
-#: src/merge/reader_detection_and_creation.cpp:499
-#: src/merge/reader_detection_and_creation.cpp:502
-#: src/merge/reader_detection_and_creation.cpp:505
-#: src/merge/reader_detection_and_creation.cpp:508
+#: src/merge/reader_detection_and_creation.cpp:485
+#: src/merge/reader_detection_and_creation.cpp:488
+#: src/merge/reader_detection_and_creation.cpp:491
+#: src/merge/reader_detection_and_creation.cpp:494
+#: src/merge/reader_detection_and_creation.cpp:497
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -10639,8 +10639,8 @@ msgstr "Неуспело отварање датотеке „%1%“ за чит
 #: src/common/command_line.cpp:49
 #: src/extract/mkvextract.cpp:59
 #: src/extract/mkvextract.cpp:63
-#: src/merge/reader_detection_and_creation.cpp:87
-#: src/merge/reader_detection_and_creation.cpp:189
+#: src/merge/reader_detection_and_creation.cpp:84
+#: src/merge/reader_detection_and_creation.cpp:183
 #: src/propedit/attachment_target.cpp:66
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -10660,7 +10660,7 @@ msgstr "Неуспело отварање датотеке „%1%“ за упи
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:134
-#: src/merge/output_control.cpp:1318
+#: src/merge/output_control.cpp:1305
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Неуспело отварање датотеке „%1%“ за уписивање: %2%.\n"
@@ -10670,7 +10670,7 @@ msgstr "Неуспело отварање датотеке „%1%“ за упи
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "Не могу да отворим или рашчланим ову датотеку.\n"
 
-#: src/merge/output_control.cpp:1322
+#: src/merge/output_control.cpp:1309
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "За уписивање је отворена датотека „%1%“.\n"
@@ -10727,12 +10727,12 @@ msgstr "У ИксМЛ-датотеци ознака „%1%“ постоји г�
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr ""
 
-#: src/merge/reader_detection_and_creation.cpp:502
+#: src/merge/reader_detection_and_creation.cpp:491
 msgid "The file content does not match its format type and was not recognized."
 msgstr "Није препознат садржај датотеке јер се не слаже са њ. врстом формата."
 
-#: src/merge/reader_detection_and_creation.cpp:496
-#: src/merge/reader_detection_and_creation.cpp:499
+#: src/merge/reader_detection_and_creation.cpp:485
+#: src/merge/reader_detection_and_creation.cpp:488
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "Неуспело отварање датотеке при читању, или је недовољно података за рашчлањавање њеног заглавља."
 
@@ -10774,7 +10774,7 @@ msgstr "Заглавље датотеке је прекратко.\n"
 msgid "The file header was not read correctly.\n"
 msgstr "Заглавље датотеке није прочитано исправно.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:505
+#: src/merge/reader_detection_and_creation.cpp:494
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Ова заглавља датотеке не могу да рашчланим (можда нису кломплетна или ваљана, а можда су и оштећена)."
 
@@ -10789,19 +10789,19 @@ msgstr "Датотека са неподржаном врстом сандука
 msgid "The file is being analyzed."
 msgstr "Анализирам датотеку."
 
-#: src/merge/output_control.cpp:257
+#: src/merge/output_control.cpp:256
 msgid "The file is being fixed, part 1/4..."
 msgstr "Опорављам датотеку, етапа 1/4..."
 
-#: src/merge/output_control.cpp:263
+#: src/merge/output_control.cpp:262
 msgid "The file is being fixed, part 2/4..."
 msgstr "Опорављам датотеку, етапа 2/4..."
 
-#: src/merge/output_control.cpp:273
+#: src/merge/output_control.cpp:272
 msgid "The file is being fixed, part 3/4..."
 msgstr "Опорављам датотеку, етапа 3/4..."
 
-#: src/merge/output_control.cpp:281
+#: src/merge/output_control.cpp:280
 msgid "The file is being fixed, part 4/4..."
 msgstr "Опорављам датотеку, етапа 1/4..."
 
@@ -10813,17 +10813,17 @@ msgstr ""
 msgid "The file name for this segment."
 msgstr "Назив датотеке овог одељка."
 
-#: src/merge/output_control.cpp:969
+#: src/merge/output_control.cpp:959
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "Датотека број %1% („%2%“) не садржи запис чији је ИБ %3%, или тај запис није за умножавање. Аргумент опције „--append-to“ није ваљан.\n"
 
-#: src/merge/output_control.cpp:975
+#: src/merge/output_control.cpp:965
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "Датотека број %1% („%2%“) не садржи запис чији је ИБ %3%, или тај запис није за умножавање. Због тога, не може јој се придружити било који запис. Аргумент опције „--append-to“ није ваљан.\n"
 
-#: src/merge/output_control.cpp:915
+#: src/merge/output_control.cpp:905
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "Датотека број %1% („%2%“) неће се придруживати. Аргумент опције „--append-to“ није ваљан.\n"
@@ -10840,8 +10840,8 @@ msgstr "Ова датотека није на списку подржаних в
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1582
-#: src/input/r_matroska.cpp:2283
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2279
 msgid "The file will not be processed further."
 msgstr "Надаље, нећу обрађивати ову датотеку."
 
@@ -10933,7 +10933,7 @@ msgstr "Дозвољени облици су „ЧЧ:ММ:СС.хххххххх�
 msgid "The formats can be mixed, too."
 msgstr "Дозвољено је и мешање ових облика."
 
-#: src/merge/output_control.cpp:1026
+#: src/merge/output_control.cpp:1016
 msgid "The formats do not match."
 msgstr "Ови облици се не подударају."
 
@@ -11265,7 +11265,7 @@ msgstr "Вредност особине није ваљана означена �
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "Вредност особине није ваљана неозначена целобројна у „%1%“. %2%\n"
 
-#: src/merge/output_control.cpp:1028
+#: src/merge/output_control.cpp:1018
 msgid "The reason is unknown."
 msgstr "Није познат узрок."
 
@@ -11337,8 +11337,8 @@ msgstr "Величина после које се уписује у нову и�
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "Величина прилога „%1%“ је 0.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:91
-#: src/merge/reader_detection_and_creation.cpp:192
+#: src/merge/reader_detection_and_creation.cpp:88
+#: src/merge/reader_detection_and_creation.cpp:186
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "Неуспешно отварање изворна датотеке „%1%“, или је покушај добијања њене величине трагањем за крајем датотеке било неуспешно.\n"
@@ -11479,7 +11479,7 @@ msgstr "Временске ознаке се односе на цео ток, а
 msgid "The title for the whole movie."
 msgstr "Главни наслов овог филма."
 
-#: src/merge/output_control.cpp:985
+#: src/merge/output_control.cpp:975
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "Покушано је вишеструко придруживање записа %1% из датотеке бр. %2% („%3%“). Није ваљана вредност опције „--append-to“.\n"
@@ -11489,17 +11489,17 @@ msgstr "Покушано је вишеструко придруживање за
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "Запис, ИБ %1%, не  садржи ваљан ИБ-кодека.\n"
 
-#: src/merge/output_control.cpp:666
+#: src/merge/output_control.cpp:656
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "Не могу ваљано да обрадим заглавља записа. %1%\n"
 
-#: src/merge/output_control.cpp:1017
+#: src/merge/output_control.cpp:1007
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "Највероватније, запис број %1% из датотеке „%2%“ не може да се ваљано придружити запису број %3% из датотеке „%4%“: %5% Уверите се да је ваљана репродукција исходишне датотеке од почетка до краја. За проблеме при репродукци исходишне датотеке, творац овог програма вероватно неће давати одговарајућу подршку.\n"
 
-#: src/merge/output_control.cpp:1029
+#: src/merge/output_control.cpp:1019
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "Запис број %1% из датотеке „%2%“ не може да се придружити записуброј %3% из датотеке „%4%“: %5%\n"
@@ -11508,7 +11508,7 @@ msgstr "Запис број %1% из датотеке „%2%“ не може д
 msgid "The track number as used in the Block Header."
 msgstr "Број записа упоребљен у заглављу блока (енг. „Block Header“)."
 
-#: src/merge/output_control.cpp:1027
+#: src/merge/output_control.cpp:1017
 msgid "The track parameters do not match."
 msgstr "Параметри овог записа се не слажу."
 
@@ -11585,8 +11585,8 @@ msgstr "Ново издање је доступно на мрежи."
 msgid "There is currently a job running."
 msgstr "Постоји радња која се тренутно извршава."
 
+#: src/merge/output_control.cpp:899
 #: src/merge/output_control.cpp:909
-#: src/merge/output_control.cpp:919
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "Нема датотеке чији је ИБ „%1%“. Није ваљана „--append-to“ вредност.\n"
@@ -11607,7 +11607,7 @@ msgstr "Дошло је до грешке приликом провере ста
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "Неправилности у вредностима заглавља су спречиле чување заглавља и довеле до погрешака. Одабрана је прва грешка."
 
-#: src/merge/output_control.cpp:231
+#: src/merge/output_control.cpp:230
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:253
 #: src/propedit/propedit.cpp:121
 #, no-c-format
@@ -11887,12 +11887,12 @@ msgstr "Ова особина је обавезна па се не може бр
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "Ова, јединствена особина, може да се појави само једном у „%1%“. %2%\n"
 
-#: src/merge/output_control.cpp:277
+#: src/merge/output_control.cpp:276
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "Заиста, ово није требало да се догоди. Одвојени простор за први елеменат елеменат описа трага је премален. %1%\n"
 
-#: src/merge/output_control.cpp:1595
+#: src/merge/output_control.cpp:1582
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Заиста, ово није требало да се догоди. Одвојен простор за први елеменат описа трага је премален. Нужна величина: %1%. %2%\n"
@@ -11918,8 +11918,8 @@ msgstr "Овај запис садржи Сбр Аак/Хе-Аак/Аак+ по�
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1582
-#: src/input/r_matroska.cpp:2283
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2279
 msgid "This usually indicates a damaged file structure."
 msgstr "Ово обично указује на оштећење устројства датотеке."
 
@@ -12011,7 +12011,7 @@ msgstr "„Кодек_приватно“ у запису %1% је премал�
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "За запис %1% је употребљен непознат/неподржан алгоритам сажимања (%2%).\n"
 
-#: src/input/r_matroska.cpp:1285
+#: src/input/r_matroska.cpp:1286
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Запис %1% нема свој елеменат ЈИБ-записа чије је присуство по матрошка-спецификацији обавезно. Ако ова датотека садржи ознаке онда оне могу да буду оштећене.\n"
@@ -12081,7 +12081,7 @@ msgstr "Запис %1%: Превелик „НАЛ“. Величина у по�
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Запис %1%: За ставку бр. %2% поднаписа нема трајања. Произвољно ћу поставити вредност на 1 секунду.\n"
 
-#: src/input/r_qtmp4.cpp:2906
+#: src/input/r_qtmp4.cpp:2916
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "Запис %1%: Не могу да рашчланим Аак-податак.\n"
@@ -12092,7 +12092,7 @@ msgstr "Запис %1%: Не могу да рашчланим Аак-подат�
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Запис, ИБ %1%, садржи непознату Аак врсту.\n"
 
-#: src/merge/generic_reader.cpp:324
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Запис ИБ %1%: %2% (%3%)"
@@ -12299,7 +12299,7 @@ msgstr "Непозната врста за ЈИБ-одељка „%3%“ у „%
 msgid "Unknown format in '%1% %2%'.\n"
 msgstr "Непознат режим рашчлањавања у „%1% %2%“.\n"
 
-#: src/input/r_vobsub.cpp:616
+#: src/input/r_vobsub.cpp:619
 #, boost-format
 msgid "Unknown header 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgstr "Непознато заглавље 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
@@ -12344,7 +12344,7 @@ msgstr "Врста датотеке није подржана"
 msgid "Unsigned integer"
 msgstr "Неозначена целобројна"
 
-#: src/input/r_vobsub.cpp:485
+#: src/input/r_vobsub.cpp:488
 #, boost-format
 msgid "Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timestamp %3%, assuming MPEG2. No further warnings will be printed for this track.\n"
 msgstr "Неподржан Мпег mpeg_version: 0x%|1$02x| у пакету %2% за врем.ознаку %3%, претпостављам Мпег2. Нећу пружати даља упозорења за овај запис.\n"
@@ -12354,7 +12354,7 @@ msgstr "Неподржан Мпег mpeg_version: 0x%|1$02x| у пакету %2%
 msgid "Unsupported file format"
 msgstr "Неподржана врста датотеке"
 
-#: src/input/r_matroska.cpp:2093
+#: src/input/r_matroska.cpp:2102
 msgid "Unsupported track type for this track.\n"
 msgstr "Неподржана врста за овај запис.\n"
 
@@ -12368,7 +12368,7 @@ msgstr "Особине поднаписа и поглавља"
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "Није успело занављање елемента „%1%“. Узрок:"
 
-#: src/merge/output_control.cpp:234
+#: src/merge/output_control.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:255
 #: src/propedit/propedit.cpp:124
 #, no-c-format
@@ -12427,7 +12427,7 @@ msgstr "Употреба НАЛУ-величине од 3 бајта може д
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Употребљавам демултиплексер за формат „%1%“.\n"
 
-#: src/input/r_matroska.cpp:1611
+#: src/input/r_matroska.cpp:1619
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Употребљавам општи изл. модул за врсту записа „%1%“.\n"
@@ -12572,7 +12572,7 @@ msgstr "Ширина"
 msgid "Video interlaced flag"
 msgstr "Белег „испреплитан видео“"
 
-#: src/input/r_real.cpp:617
+#: src/input/r_real.cpp:612
 #, boost-format
 msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "Sastavljanje video paketa nije uspelo. Kod greške: %1% (%2%)\n"
@@ -12937,6 +12937,10 @@ msgstr "Виндоуз („cmd.exe“)"
 msgid "Windows Media (ASF/WMV)"
 msgstr "Виндоуз-медиј (Асф/Вмв)"
 
+#: src/input/unsupported_types_signature_prober.cpp:65
+msgid "Windows Television DVR"
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:309
 #, fuzzy
 msgid "With \"close current settings\" the current multiplex settings will be closed without opening new ones."
@@ -13169,7 +13173,7 @@ msgstr "mkvextract attachments <ул_назив> [опције] [ПИБ1:изл1
 
 #: src/common/kax_info.cpp:690
 #: src/common/kax_info.cpp:866
-#: src/input/r_matroska.cpp:112
+#: src/input/r_matroska.cpp:113
 msgid "audio"
 msgstr "звук"
 
@@ -13196,7 +13200,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:693
 #: src/common/kax_info.cpp:869
-#: src/input/r_matroska.cpp:113
+#: src/input/r_matroska.cpp:114
 msgid "buttons"
 msgstr "дугмад"
 
@@ -13279,7 +13283,7 @@ msgstr "заштита"
 msgid "equirectangular"
 msgstr ""
 
-#: src/merge/output_control.cpp:433
+#: src/merge/output_control.cpp:423
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "Није пронађено „filelist_t“ за „generic_packetizer_c“. %1%\n"
@@ -13370,126 +13374,126 @@ msgstr "језик: %1%"
 msgid "length %1%, data: %2%"
 msgstr "дужина %1%, подаци: %2%"
 
-#: src/input/r_vobsub.cpp:237
+#: src/input/r_vobsub.cpp:238
 #, boost-format
 msgid "line %1%: The 'delay' timestamp could not be parsed.\n"
 msgstr "линија %1%: Не могу да рашчланим временску ознаку за кашњење.\n"
 
-#: src/input/r_matroska.cpp:433
+#: src/input/r_matroska.cpp:434
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, постоји %2% бита по узорку, а по „WAVEFORMATEX“, њих је %3%.\n"
 
-#: src/input/r_matroska.cpp:424
+#: src/input/r_matroska.cpp:425
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, постоји %2% канала, а по „WAVEFORMATEX“, њих је %3%.\n"
 
-#: src/input/r_matroska.cpp:415
+#: src/input/r_matroska.cpp:416
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, постоји %2% узорака по секунди, а по „WAVEFORMATEX“, њих је %3%.\n"
 
-#: src/input/r_matroska.cpp:633
+#: src/input/r_matroska.cpp:634
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, висина видеа је %2%, а по „BITMAPINFOHEADER“, она је %3%.\n"
 
-#: src/input/r_matroska.cpp:624
+#: src/input/r_matroska.cpp:625
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, ширина видеа је %2%, а по „BITMAPINFOHEADER“, она је %3%.\n"
 
-#: src/input/r_matroska.cpp:1274
+#: src/input/r_matroska.cpp:1275
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "„matroska_reader“: Запис нема сопствени број.\n"
 
-#: src/input/r_matroska.cpp:1673
+#: src/input/r_matroska.cpp:1681
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "„matroska_reader“: Задршка ЈИБ-записа %1% није могућа јер је он намењен за употребу у новој датотеци.\n"
 
-#: src/input/r_matroska.cpp:1521
-#: src/input/r_matroska.cpp:1526
+#: src/input/r_matroska.cpp:1529
+#: src/input/r_matroska.cpp:1534
 msgid "matroska_reader: No segment found.\n"
 msgstr "„matroska_reader“: Нема пронађеног одељка.\n"
 
-#: src/input/r_matroska.cpp:1236
+#: src/input/r_matroska.cpp:1237
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "„matroska_reader“: Недостаје висина (у пикселима).\n"
 
-#: src/input/r_matroska.cpp:1234
+#: src/input/r_matroska.cpp:1235
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "„matroska_reader“: Недостаје ширина (у пикселима).\n"
 
-#: src/input/r_matroska.cpp:793
+#: src/input/r_matroska.cpp:794
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "„matroska_reader“: Није познат ИБ-кодека „%1%“ (запис %2%).\n"
 
-#: src/input/r_matroska.cpp:448
-#: src/input/r_matroska.cpp:493
-#: src/input/r_matroska.cpp:514
-#: src/input/r_matroska.cpp:697
-#: src/input/r_matroska.cpp:707
-#: src/input/r_matroska.cpp:728
+#: src/input/r_matroska.cpp:449
+#: src/input/r_matroska.cpp:494
+#: src/input/r_matroska.cpp:515
+#: src/input/r_matroska.cpp:698
+#: src/input/r_matroska.cpp:708
+#: src/input/r_matroska.cpp:729
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "„matroska_reader“: За запис %1%, ИБ-кодека је „%2%“, али у овим приватним подацима нема ваљаног заглавља.\n"
 
-#: src/input/r_matroska.cpp:612
+#: src/input/r_matroska.cpp:613
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "„matroska_reader“: За запис %1%, ИБ-кодека је „%2%“, али не постоји „BITMAPINFOHEADER“-устројство. Зато нема Фоур-ЦЦ за одређивање употребљеног видео-кодера.\n"
 
-#: src/input/r_matroska.cpp:393
+#: src/input/r_matroska.cpp:394
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "„matroska_reader“: За запис %1%, ИБ-кодека је „%2%“, али не постоји „WAVEFORMATEX“-устројство. Зато нема ИБ-формата за одређивање употребљеног звучног-кодера.\n"
 
-#: src/input/r_matroska.cpp:652
+#: src/input/r_matroska.cpp:653
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "„matroska_reader“: За запис %1%, ИБ-кодека је „%2%“, али нема приватних заглавља кодека.\n"
 
-#: src/input/r_matroska.cpp:746
+#: src/input/r_matroska.cpp:747
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "„matroska_reader“: За запис %1%, ИБ-кодека је „%2%“, али нема приватних података.\n"
 
-#: src/input/r_matroska.cpp:1331
+#: src/input/r_matroska.cpp:1332
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "„matroska_reader“: Недостаје ИБ-кодека.\n"
 
-#: src/input/r_matroska.cpp:684
+#: src/input/r_matroska.cpp:685
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "„matroska_reader“: За запис %1% није постављена висина.\n"
 
-#: src/input/r_matroska.cpp:678
+#: src/input/r_matroska.cpp:679
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "„matroska_reader“: За запис %1% није постављена ширина.\n"
 
-#: src/input/r_matroska.cpp:831
+#: src/input/r_matroska.cpp:832
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "„matroska_reader“: Изгледа да је запис %1% ваљан.\n"
 
-#: src/input/r_matroska.cpp:1292
+#: src/input/r_matroska.cpp:1293
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "„matroska_reader“: Није нађена врста записа.\n"
 
-#: src/input/r_matroska.cpp:484
+#: src/input/r_matroska.cpp:485
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "„matroska_reader“: Код превођења програмског кода Мкв-спојнице није укључена подршка за Флак-кодек. Занемарићу запис %1%.\n"
 
-#: src/input/r_matroska.cpp:1510
+#: src/input/r_matroska.cpp:1518
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "„matroska_reader“: нема ЕБМЛ-заглавља.\n"
 
-#: src/input/r_matroska.cpp:826
+#: src/input/r_matroska.cpp:827
 #, fuzzy, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "„matroska_reader“: непозната врста демуксера за запис %1%: „%2%“\n"
@@ -13658,8 +13662,8 @@ msgstr "Мкв-спојница ће да уклони последњу став
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "Мкв-спојница има подршку за две врсте поглавља, Огм-сродну текстуалну врсту и потпуно уобличену ИксМЛ-врсту."
 
-#: src/merge/output_control.cpp:251
-#: src/merge/output_control.cpp:294
+#: src/merge/output_control.cpp:250
+#: src/merge/output_control.cpp:293
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "Мкв-спојницу је зауставио сигнал „SIGINT“ (Ctrl+C?)\n"
 
@@ -13839,7 +13843,7 @@ msgstr " величина је непозната"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "„ssa_reader“: Формат није ваљан. Не могу да нађем линију „Format“ у одељку „[Events]“."
 
-#: src/input/r_matroska.cpp:115
+#: src/input/r_matroska.cpp:116
 msgid "subtitle"
 msgstr "поднапис"
 
@@ -13913,8 +13917,8 @@ msgstr "„tta_reader“: „tag_size“ < 0 у овом „c'tor.“ %1%\n"
 #: src/common/kax_info.cpp:859
 #: src/common/kax_info.cpp:870
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:111
-#: src/input/r_matroska.cpp:2760
+#: src/input/r_matroska.cpp:112
+#: src/input/r_matroska.cpp:2768
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:181
@@ -13923,7 +13927,7 @@ msgstr "„tta_reader“: „tag_size“ < 0 у овом „c'tor.“ %1%\n"
 msgid "unknown"
 msgstr "непознато"
 
-#: src/input/r_matroska.cpp:2744
+#: src/input/r_matroska.cpp:2752
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "непознато, облик ознаке 0x%|1$04x|"
@@ -13934,11 +13938,11 @@ msgstr ""
 
 #: src/common/kax_info.cpp:691
 #: src/common/kax_info.cpp:867
-#: src/input/r_matroska.cpp:114
+#: src/input/r_matroska.cpp:115
 msgid "video"
 msgstr "видео"
 
-#: src/input/r_vobsub.cpp:582
+#: src/input/r_vobsub.cpp:585
 msgid "vobsub_reader: sub file read failure"
 msgstr "„vobsub_reader“: грешка при читању датотеке поднаписа"
 

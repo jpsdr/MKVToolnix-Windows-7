@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-06-20 22:42+0200\n"
+"POT-Creation-Date: 2018-08-06 21:01+0200\n"
 "PO-Revision-Date: 2018-03-28 23:04+0200\n"
 "Last-Translator: HULEN\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "第 %1% 軌的暫存 TTA 檔正被複製到最終 TTA 檔中。這可能需要些時間。\n"
 
-#: src/merge/output_control.cpp:253
+#: src/merge/output_control.cpp:252
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -1081,10 +1081,10 @@ msgid " day"
 msgid_plural " days"
 msgstr[0] " 天"
 
-#: src/merge/output_control.cpp:261
-#: src/merge/output_control.cpp:271
-#: src/merge/output_control.cpp:279
-#: src/merge/output_control.cpp:286
+#: src/merge/output_control.cpp:260
+#: src/merge/output_control.cpp:270
+#: src/merge/output_control.cpp:278
+#: src/merge/output_control.cpp:285
 msgid " done\n"
 msgstr " 完成\n"
 
@@ -1256,8 +1256,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: 異常狀況發生 (message: %2%; type: %3%)。"
 
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1581
-#: src/input/r_matroska.cpp:2282
+#: src/input/r_matroska.cpp:1589
+#: src/input/r_matroska.cpp:2278
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: 不明的異常狀況發生。"
@@ -2236,7 +2236,7 @@ msgstr "「%1%」: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "「%1%」: 正在處理下列檔案: %2%\n"
 
-#: src/input/r_matroska.cpp:1865
+#: src/input/r_matroska.cpp:1873
 #, fuzzy, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "「%1%」: 您正在重新合成於實驗模式中合成的 Opus 軌道。最後結果會用最終模式寫入，但是有一項詳細資訊無法從實驗模式合成的軌道中還原：末端裁剪。這表示解碼器可能會輸出比原本預期還少的取樣數。如果可以的話，您應該用原始的 Opus 檔案重新合成。\n"
@@ -2429,12 +2429,12 @@ msgstr "+-> 預先解析 FLAC 檔案: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> 預先解析 FLAC 檔案: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:344
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", 描述 「%1%」"
 
-#: src/merge/generic_reader.cpp:335
+#: src/merge/generic_reader.cpp:347
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", 檔名「%1%」"
@@ -2537,7 +2537,7 @@ msgstr "<未命名>"
 msgid "<Unsaved file>"
 msgstr "<未儲存的檔案>"
 
-#: src/input/r_matroska.cpp:2304
+#: src/input/r_matroska.cpp:2309
 #: src/input/r_matroska.cpp:2430
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
@@ -2563,11 +2563,11 @@ msgstr "用逗號區隔開要在影格/圖場號碼之後分割的清單。"
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "用逗號區隔開要保留內容時間碼範圍的清單。"
 
-#: src/input/r_matroska.cpp:760
+#: src/input/r_matroska.cpp:761
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
 
-#: src/merge/output_control.cpp:232
+#: src/merge/output_control.cpp:231
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:254
 #: src/propedit/propedit.cpp:122
 #, no-c-format
@@ -2614,7 +2614,7 @@ msgstr ""
 msgid "A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."
 msgstr "單一 Matroska 區塊可包含完整影格 (漸進式內容) 或單一圖場 (交錯式內容)。"
 
-#: src/merge/generic_reader.cpp:206
+#: src/merge/generic_reader.cpp:218
 #, boost-format
 msgid "A track with the ID %1% was requested but not found in the file. The corresponding option will be ignored.\n"
 msgstr "ID 為 %1% 的軌道被要求但在檔案中沒有找到。相應的選項將被忽略。\n"
@@ -2678,7 +2678,7 @@ msgstr "AAC (進階音訊編碼)"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC 是 SBR/HE-AAC/AAC+:"
 
-#: src/input/r_aac_adif.cpp:36
+#: src/input/unsupported_types_signature_prober.cpp:59
 msgid "AAC with ADIF headers"
 msgstr "含 ADIF 表頭的 AAC"
 
@@ -3262,7 +3262,7 @@ msgstr "追加媒體檔案"
 msgid "Append to an e&xisting source file"
 msgstr "追加到現有輸入檔案(&X)"
 
-#: src/merge/output_control.cpp:1752
+#: src/merge/output_control.cpp:1739
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "正在添加合併軌道 %1%（自檔案 %2% (「%3%」)）至軌道 %4%（自檔案 %5% (「%6%」)）。\n"
@@ -3311,7 +3311,7 @@ msgstr "附加的檔案"
 msgid "Attachment"
 msgstr "附件"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:341
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "附件 ID %1%: 類型「%2%」, 大小 %3% 位元組"
@@ -3521,7 +3521,7 @@ msgstr "藍色座標 x: %1%"
 msgid "Blue colour coordinate y"
 msgstr "藍色座標 y: %1%"
 
-#: src/input/r_vobsub.cpp:555
+#: src/input/r_vobsub.cpp:558
 #, boost-format
 msgid "Bogus aid %1%\n"
 msgstr "無效 aid %1%\n"
@@ -3923,7 +3923,7 @@ msgstr "章節"
 msgid "Chapters in fixed intervals"
 msgstr "按固定間距建立章節"
 
-#: src/merge/generic_reader.cpp:341
+#: src/merge/generic_reader.cpp:353
 #, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -4219,7 +4219,7 @@ msgstr "無法從該 MPEG-1/2 軌道提取序列表頭。\n"
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "找不到音軌 %1% 的索引 (avilib 錯誤訊息: %2%)。正在跳過此軌。\n"
 
-#: src/merge/output_control.cpp:1678
+#: src/merge/output_control.cpp:1665
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "添加時找不到 gptzr。 %1%\n"
@@ -5080,7 +5080,7 @@ msgstr "EBML 版本: %1%"
 msgid "EBML void"
 msgstr "EBML 表頭"
 
-#: src/merge/reader_detection_and_creation.cpp:481
+#: src/merge/reader_detection_and_creation.cpp:469
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "*邪惡的* 內部錯誤! (未知的檔案類型)。 %1%\n"
@@ -5257,7 +5257,7 @@ msgstr "錯誤 %1%\n"
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "建立暫存檔時發生錯誤 (原因: %1)。"
 
-#: src/input/r_ogm.cpp:1216
+#: src/input/r_ogm.cpp:1227
 #, boost-format
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr ""
@@ -5318,7 +5318,7 @@ msgstr "解析「%1%」中的標籤發生錯誤: 缺少一些必須的元件。\
 msgid "Error reading Matroska file"
 msgstr "讀取 Matroska 檔案時發生錯誤"
 
-#: src/merge/output_control.cpp:741
+#: src/merge/output_control.cpp:731
 #, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "讀取檔案 '%1%' 發生錯誤。\n"
@@ -5583,7 +5583,7 @@ msgstr "視訊場序"
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr "立體 3D 影片模式 (0 - 11，請見文件)。"
 
-#: src/merge/generic_reader.cpp:320
+#: src/merge/generic_reader.cpp:332
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "檔案「%1%」: 容器: %2%"
@@ -5674,7 +5674,7 @@ msgstr ""
 msgid "File/Segment linking"
 msgstr "檔案/剪輯"
 
-#: src/merge/output_control.cpp:923
+#: src/merge/output_control.cpp:913
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "檔案不能被添加至自己上。「--append-to」的參數無效。\n"
 
@@ -5917,7 +5917,7 @@ msgstr "總體標籤:"
 msgid "Global tags:"
 msgstr "總體標籤:"
 
-#: src/merge/generic_reader.cpp:347
+#: src/merge/generic_reader.cpp:359
 #, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -6637,7 +6637,7 @@ msgstr "格式無效: 發現未知字元「%1%」"
 msgid "Invalid frame for '--split' in '--split %1%'.\n"
 msgstr "在「--split %1%」中「--split」的影格無效。\n"
 
-#: src/input/r_vobsub.cpp:538
+#: src/input/r_vobsub.cpp:541
 #, boost-format
 msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "表頭長度無效: %1% (總長: %2%, 索引: %3%, 資料索引: %4%)\n"
@@ -6703,7 +6703,7 @@ msgstr "在「--split %1%」(目前部分: %2%) 中「--split' in」指定的起
 msgid "Invalid start frame/field number for '--split' in '--split %1%' (current part: %2%). The start number must be bigger than or equal to the previous part's end number.\n"
 msgstr "在「--split %1%」(目前部分: %2%) 中「--split' in」的結束影格/圖場號碼無效。起始數字必須大於或等於上一個部分的結束數字。\n"
 
-#: src/input/r_usf.cpp:221
+#: src/input/r_usf.cpp:228
 msgid "Invalid start or stop timestamp"
 msgstr "無效的開始或終止時間碼"
 
@@ -6831,7 +6831,7 @@ msgstr "無效的軌道 ID 指定，在「--sub-charset %1%」。\n"
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "在參數「%1%」中指定的軌道 ID 或檔名無效。\n"
 
-#: src/merge/generic_reader.cpp:117
+#: src/merge/generic_reader.cpp:129
 #, boost-format
 msgid "Invalid track type %1%."
 msgstr "無效軌道類型 %1%。"
@@ -7017,18 +7017,18 @@ msgstr "無法解析時間碼檔案「%2%」中的第 %1% 行。\n"
 msgid "Line %1%: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "第 %1% 行: 遇到負的時間戳記。此項目會調整為從 00:00:00.000 開始。\n"
 
-#: src/input/r_vobsub.cpp:300
+#: src/input/r_vobsub.cpp:301
 #, boost-format
 msgid "Line %1%: The current timestamp (%2%) is smaller than the previous one (%3%). The entries will be sorted according to their timestamps. This might result in the wrong order for some subtitle entries. If this is the case then you have to fix the .idx file manually.\n"
 msgstr "第 %1% 行: 目前時間戳記 (%2%) 比前一個早 (%3%)。各條將按時間戳記重新排序。這可能導致某些字幕項目順序發生錯誤。如果是這樣，您需要手動修正 .idx 檔案。\n"
 
-#: src/input/r_vobsub.cpp:250
-#: src/input/r_vobsub.cpp:273
+#: src/input/r_vobsub.cpp:251
+#: src/input/r_vobsub.cpp:274
 #, boost-format
 msgid "Line %1%: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"
 msgstr "第 %1% 行: 這一行似乎是字幕項目但格式無法識別。此條將被跳過。\n"
 
-#: src/input/r_vobsub.cpp:290
+#: src/input/r_vobsub.cpp:291
 #, boost-format
 msgid "Line %1%: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
 msgstr "第 %1% 行: 這一行似乎是字幕項目但時間碼為負即使添加了軌道延遲。負的時間碼不受 Matroska 的支援。此條將被跳過。\n"
@@ -7171,12 +7171,12 @@ msgstr "MPLS 藍光播放清單"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "將此軌道作為本身類型 (音訊、視訊、字幕) 的預設軌。"
 
-#: src/input/r_matroska.cpp:1753
-#: src/input/r_matroska.cpp:1770
+#: src/input/r_matroska.cpp:1761
+#: src/input/r_matroska.cpp:1778
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "發現不正常的 AAC 編解碼器初始化資料。\n"
 
-#: src/input/r_matroska.cpp:1763
+#: src/input/r_matroska.cpp:1771
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "不正常的編解碼器 id「%1%」。\n"
@@ -7397,7 +7397,7 @@ msgstr "指定多個檔名 (「%1%」和「%2%」)。\n"
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "單個附件被指定了多於一個名稱。「%1%」將被廢棄，並用「%2%」代替。\n"
 
-#: src/merge/output_control.cpp:996
+#: src/merge/output_control.cpp:986
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "被添加至軌道 %1%（自檔案 %2% (「%3%」)）的軌道多於一條。「--append-to」的參數無效。\n"
@@ -7560,18 +7560,18 @@ msgstr ""
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "未指定 %1%，在「--%2% %3%」。\n"
 
-#: src/merge/output_control.cpp:230
+#: src/merge/output_control.cpp:229
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:252
 #: src/propedit/propedit.cpp:120
 #, fuzzy, no-c-format
 msgid "No 'EBML head' element was found."
 msgstr "未找到 EBML 表頭。"
 
-#: src/input/r_qtmp4.cpp:1706
+#: src/input/r_qtmp4.cpp:1717
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "第一個畫格未發現 AC-3 表頭; 此軌將被跳過。\n"
 
-#: src/input/r_qtmp4.cpp:3345
+#: src/input/r_qtmp4.cpp:3355
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "第一個畫格中未找到 AC-3 表頭; 將會略過此軌道。\n"
 
@@ -7589,7 +7589,7 @@ msgstr "附件「%1%」的 MIME 類型尚未設定，且無法猜測。\n"
 msgid "No actions have been added yet."
 msgstr "尚未加入程式。"
 
-#: src/merge/output_control.cpp:955
+#: src/merge/output_control.cpp:945
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "沒有為檔案 %1% (「%2%」) 指定添加對應。將使用預設對應 %3%。如果 mkvmerge 異常中止並輸出關於無效的「--append-to」選項的錯誤訊息，請留意。\n"
@@ -8011,7 +8011,7 @@ msgstr "僅允許有一個剪輯檔，在「%1% %2%」。\n"
 msgid "Only one source file is allowed.\n"
 msgstr "僅允許有一個輸入檔。\n"
 
-#: src/merge/output_control.cpp:936
+#: src/merge/output_control.cpp:926
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "只給出了檔案 %1% (「%2%」) 的部分添加對應。只有不指定任何對應 (此時將使用預設對應) 或為所有軌道指定對應時，才會複製所有軌道。\n"
@@ -8220,7 +8220,7 @@ msgstr "PGS/SUP 字幕"
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
-#: src/input/r_vobsub.cpp:546
+#: src/input/r_vobsub.cpp:549
 #, boost-format
 msgid "PTS error: 0x%|1$02x| %|2$02x|%|3$02x| %|4$02x|%|5$02x|\n"
 msgstr "PTS 錯誤: 0x%|1$02x| %|2$02x|%|3$02x| %|4$02x|%|5$02x|\n"
@@ -8467,7 +8467,7 @@ msgstr "進度:"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2939
-#: src/merge/output_control.cpp:358
+#: src/merge/output_control.cpp:348
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -8475,7 +8475,7 @@ msgstr "進度:"
 msgid "Progress: %1%%%%2%"
 msgstr "進度: %1%%%%2%"
 
-#: src/merge/output_control.cpp:333
+#: src/merge/output_control.cpp:325
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "進度: 100%%%1%"
@@ -8535,46 +8535,46 @@ msgstr "QuickTime 相容視訊"
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
-#: src/input/r_qtmp4.cpp:428
+#: src/input/r_qtmp4.cpp:437
 #, boost-format
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
 msgstr "Quicktime/MP4 讀取器:「%1%」單元過小。預期大小: >= %2%。實際大小: %3%。\n"
 
-#: src/input/r_qtmp4.cpp:2335
+#: src/input/r_qtmp4.cpp:2345
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 讀取器: 尚不支援固定取樣大小與可變時間長度。如果您有這樣的樣本檔案，請聯繫作者。\n"
 
-#: src/input/r_qtmp4.cpp:1662
+#: src/input/r_qtmp4.cpp:1671
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取塊號 %1%/%2% 大小 %3% 位置 %4%。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:2770
-#: src/input/r_qtmp4.cpp:2784
+#: src/input/r_qtmp4.cpp:2780
+#: src/input/r_qtmp4.cpp:2794
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 %1% 的擴展音訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:2737
+#: src/input/r_qtmp4.cpp:2747
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 %1% 的音訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:1351
+#: src/input/r_qtmp4.cpp:1360
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 %1% 的流描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:2818
+#: src/input/r_qtmp4.cpp:2828
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 %1% 的視訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:327
+#: src/input/r_qtmp4.cpp:334
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
 msgstr "Quicktime/MP4 讀取器: 未發現任何表頭單元。\n"
 
-#: src/input/r_qtmp4.cpp:330
+#: src/input/r_qtmp4.cpp:337
 msgid "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
 msgstr "Quicktime/MP4 讀取器: 未發現「mdat」單元。找不到影片資料。\n"
 
@@ -8583,80 +8583,80 @@ msgstr "Quicktime/MP4 讀取器: 未發現「mdat」單元。找不到影片資�
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 讀取器: 無效的區塊大小 %1% 於 %2%。\n"
 
-#: src/input/r_qtmp4.cpp:3395
+#: src/input/r_qtmp4.cpp:3405
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEG4 part 10/AVC 軌道 %1% 缺少解碼器設定資訊。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:3421
+#: src/input/r_qtmp4.cpp:3431
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEG4 軌 %1% 缺少 esds 單元/解碼器設定資訊。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:3405
+#: src/input/r_qtmp4.cpp:3415
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEGH part 2/HEVC 軌道 %1% 缺少解碼器設定。正在略過該軌道。\n"
 
-#: src/input/r_qtmp4.cpp:687
+#: src/input/r_qtmp4.cpp:696
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 「media header」媒體表頭單元 (「mdhd」) 使用了不受支援的版本 %1%。\n"
 
-#: src/input/r_qtmp4.cpp:1344
+#: src/input/r_qtmp4.cpp:1353
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 %1% 的媒體流描述單元的「size」欄位過小。\n"
 
-#: src/input/r_qtmp4.cpp:692
+#: src/input/r_qtmp4.cpp:701
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 讀取器: 「time scale」時間縮放參數為 0。這是不支援的。\n"
 
-#: src/input/r_qtmp4.cpp:3363
+#: src/input/r_qtmp4.cpp:3373
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 該 AAC 軌道 %1% 缺少 esds 單元/解碼器設定資訊。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:3358
+#: src/input/r_qtmp4.cpp:3368
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 音軌 %1% 的「esds」單元使用了不支援的「object type id」物件類別號 %2%。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:3415
+#: src/input/r_qtmp4.cpp:3425
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 視訊軌 %1% 遺失 ESDS 單元。正在跳過此軌。\n"
 
-#: src/input/r_qtmp4.cpp:460
+#: src/input/r_qtmp4.cpp:469
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '%1%'. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 此檔案用不明或不支援的壓縮演算法「%1%」壓縮表頭。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:493
+#: src/input/r_qtmp4.cpp:502
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size (%1%) was not what is available after uncompressing (%2%).\n"
 msgstr "Quicktime/MP4 讀取器: 此檔案的表頭經過壓縮，但預期的解壓縮後大小 (%1%) 與解壓縮得到的大小不符 (%2%)。\n"
 
-#: src/input/r_qtmp4.cpp:484
+#: src/input/r_qtmp4.cpp:493
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 此檔按的表頭經過壓縮，但無法初始化 zlib 庫。zlib 錯誤碼: %1%。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:489
+#: src/input/r_qtmp4.cpp:498
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 此檔按的表頭經過壓縮，但無法解壓。zlib 錯誤碼: %1%。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:3314
-#: src/input/r_qtmp4.cpp:3333
-#: src/input/r_qtmp4.cpp:3376
-#: src/input/r_qtmp4.cpp:3439
+#: src/input/r_qtmp4.cpp:3324
+#: src/input/r_qtmp4.cpp:3343
+#: src/input/r_qtmp4.cpp:3386
+#: src/input/r_qtmp4.cpp:3449
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 %1% 缺少一些資料。表頭單元損壞?\n"
 
-#: src/input/r_qtmp4.cpp:2745
-#: src/input/r_qtmp4.cpp:2825
+#: src/input/r_qtmp4.cpp:2755
+#: src/input/r_qtmp4.cpp:2835
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 ID %1% 有多個 FourCC。只會使用第一個 (%2%) 而不是這個 (%3%)。\n"
@@ -9593,7 +9593,7 @@ msgstr "切面"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
 
-#: src/merge/output_control.cpp:1292
+#: src/merge/output_control.cpp:1279
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "缺少某些標籤元件 (不該發生此錯誤 - 另一個類似的錯誤應該在早些時候發生過)。%1%\n"
@@ -9861,7 +9861,7 @@ msgstr "標籤"
 msgid "Tags are allowed, but chapters are not."
 msgstr "允許標籤，但不允許章節。"
 
-#: src/merge/generic_reader.cpp:350
+#: src/merge/generic_reader.cpp:362
 #, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -9915,7 +9915,7 @@ msgstr "告訴 mkvmerge 將大部分的「n」資料區塊放到每個叢集中�
 msgid "Text files"
 msgstr "純文字檔"
 
-#: src/input/r_vobsub.cpp:243
+#: src/input/r_vobsub.cpp:244
 msgid "The .idx file does not contain an 'id: ...' line to indicate the language.\n"
 msgstr "此 .idx 檔案不包含指明語言的第「id: ...」行。\n"
 
@@ -9983,7 +9983,7 @@ msgstr "另一個輸出檔案已經使用該識別碼「%1%」。\n"
 msgid "The JSON output generated by mkvmerge could not be parsed (parser's error message: %1)."
 msgstr "mkvmerge 產生的 JSON 輸出無法解析 (解析器提供的錯誤訊息: %1)。"
 
-#: src/input/r_ogm.cpp:1684
+#: src/input/r_ogm.cpp:1710
 #, boost-format
 msgid "The Kate identification header could not be parsed (%1%).\n"
 msgstr "無法解析 Kate 辨識表頭 (%1%)。\n"
@@ -10002,7 +10002,7 @@ msgstr "MIME 類型不可以留空。"
 msgid "The MKVToolNix Code of Conduct"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:1206
+#: src/input/r_qtmp4.cpp:1215
 #, boost-format
 msgid "The MP4 file '%1%' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "此 MP4 檔「%1%」含有無法辨識格式的章節。若章節不是用 UTF-8 編碼時常發生這個情形。使用「--chapter-charset」選項來指定要使用的字元編碼集。\n"
@@ -10033,7 +10033,7 @@ msgstr "Matroska 檔案的最後一個元素所設定的尺寸未知。"
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length %1%'.\n"
 msgstr "NALU 長度大小必須為 2 與 4 之間（含 2 與 4）的數字，在「--nalu-size-length %1%」中。\n"
 
-#: src/input/r_ogm.cpp:1494
+#: src/input/r_ogm.cpp:1520
 #, boost-format
 msgid "The Theora identification header could not be parsed (%1%).\n"
 msgstr "Theora 識別表頭無法解析 (%1%)。\n"
@@ -10043,7 +10043,7 @@ msgstr "Theora 識別表頭無法解析 (%1%)。\n"
 msgid "The UID must not be left empty."
 msgstr "UID 不可以留空。"
 
-#: src/input/r_matroska.cpp:759
+#: src/input/r_matroska.cpp:760
 #, boost-format
 msgid "The VobSub subtitle track %1% does not contain its index in the CodecPrivate element."
 msgstr ""
@@ -10214,7 +10214,7 @@ msgstr "選擇的 NALU 長度大小 %1% 過小。請嘗試使用「4」。\n"
 msgid "The closing character '%1%' is missing.\n"
 msgstr "缺少閉合字元「%1%」。\n"
 
-#: src/merge/generic_reader.cpp:142
+#: src/merge/generic_reader.cpp:154
 #, boost-format
 msgid "The codec type '%1%' cannot be used in a WebM compliant file.\n"
 msgstr "此編解碼器類型「%1%」無法用在 WebM 遵循檔。\n"
@@ -10263,7 +10263,7 @@ msgstr "校正檔未能正常讀取。\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "這裡選擇的國家會顯示在全部國家下拉式選單的最頂端。"
 
-#: src/merge/output_control.cpp:1484
+#: src/merge/output_control.cpp:1471
 msgid "The cue entries (the index) are being written...\n"
 msgstr "正在寫入 cue 項目 (此索引)...\n"
 
@@ -10321,11 +10321,11 @@ msgstr "預設語言碼「%1%」不是有效的 ISO639-2 語言碼，將被忽�
 msgid "The default mode is adding files for multiplexing."
 msgstr "預設模式為將檔案加入到合併工具。"
 
-#: src/merge/reader_detection_and_creation.cpp:496
-#: src/merge/reader_detection_and_creation.cpp:499
-#: src/merge/reader_detection_and_creation.cpp:502
-#: src/merge/reader_detection_and_creation.cpp:505
-#: src/merge/reader_detection_and_creation.cpp:508
+#: src/merge/reader_detection_and_creation.cpp:485
+#: src/merge/reader_detection_and_creation.cpp:488
+#: src/merge/reader_detection_and_creation.cpp:491
+#: src/merge/reader_detection_and_creation.cpp:494
+#: src/merge/reader_detection_and_creation.cpp:497
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -10439,8 +10439,8 @@ msgstr "檔案「%1%」無法以讀取模式開啟：%2%。"
 #: src/common/command_line.cpp:49
 #: src/extract/mkvextract.cpp:59
 #: src/extract/mkvextract.cpp:63
-#: src/merge/reader_detection_and_creation.cpp:87
-#: src/merge/reader_detection_and_creation.cpp:189
+#: src/merge/reader_detection_and_creation.cpp:84
+#: src/merge/reader_detection_and_creation.cpp:183
 #: src/propedit/attachment_target.cpp:66
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -10460,7 +10460,7 @@ msgstr "無法開啟檔案「%1%」進行寫入: %2%。\n"
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:134
-#: src/merge/output_control.cpp:1318
+#: src/merge/output_control.cpp:1305
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "無法開啟檔案「%1%」進行寫入: %2%。\n"
@@ -10470,7 +10470,7 @@ msgstr "無法開啟檔案「%1%」進行寫入: %2%。\n"
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "檔案「%1%」無法開啟或解析。"
 
-#: src/merge/output_control.cpp:1322
+#: src/merge/output_control.cpp:1309
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "檔案「%1%」已開啟以寫入。\n"
@@ -10527,12 +10527,12 @@ msgstr "檔案 (%1) 太大 (%2)。"
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "該檔案可透過使用 mkvmerge 重新混流來修復。"
 
-#: src/merge/reader_detection_and_creation.cpp:502
+#: src/merge/reader_detection_and_creation.cpp:491
 msgid "The file content does not match its format type and was not recognized."
 msgstr "檔案內容不符合本身的格式類型而無法辨認。"
 
-#: src/merge/reader_detection_and_creation.cpp:496
-#: src/merge/reader_detection_and_creation.cpp:499
+#: src/merge/reader_detection_and_creation.cpp:485
+#: src/merge/reader_detection_and_creation.cpp:488
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "無法開啟此檔案進行讀取，或者沒有足夠的資料進行分析該檔案的表頭。"
 
@@ -10574,7 +10574,7 @@ msgstr "檔頭太短。\n"
 msgid "The file header was not read correctly.\n"
 msgstr "檔頭讀取異常。\n"
 
-#: src/merge/reader_detection_and_creation.cpp:505
+#: src/merge/reader_detection_and_creation.cpp:494
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "無法解析此檔案表頭，可能是因為檔案不完整、無效或已損壞。"
 
@@ -10589,19 +10589,19 @@ msgstr "此檔案為不支援的容器格式 (%1)。"
 msgid "The file is being analyzed."
 msgstr "正在分析檔案。"
 
-#: src/merge/output_control.cpp:257
+#: src/merge/output_control.cpp:256
 msgid "The file is being fixed, part 1/4..."
 msgstr "正在修復檔案，第 1/4 步..."
 
-#: src/merge/output_control.cpp:263
+#: src/merge/output_control.cpp:262
 msgid "The file is being fixed, part 2/4..."
 msgstr "正在修復檔案，第 2/4 步..."
 
-#: src/merge/output_control.cpp:273
+#: src/merge/output_control.cpp:272
 msgid "The file is being fixed, part 3/4..."
 msgstr "正在修復檔案，第 3/4 步..."
 
-#: src/merge/output_control.cpp:281
+#: src/merge/output_control.cpp:280
 msgid "The file is being fixed, part 4/4..."
 msgstr "正在修復檔案，第 4/4 步..."
 
@@ -10613,17 +10613,17 @@ msgstr "要建立軌道統計資訊，需要讀取該檔案。\n"
 msgid "The file name for this segment."
 msgstr "此剪輯的檔名。"
 
-#: src/merge/output_control.cpp:969
+#: src/merge/output_control.cpp:959
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "檔案 %1% (「%2%」) 不含 ID 為 %3% 的軌道，或者沒選擇複製該軌道。選項「--append-to」的參數無效。\n"
 
-#: src/merge/output_control.cpp:975
+#: src/merge/output_control.cpp:965
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "檔案 %1% (「%2%」) 不含 ID 為 %3% 的軌道，或者沒選擇複製該軌道。因此沒有軌道可以添加給它。選項「--append-to」的參數無效。\n"
 
-#: src/merge/output_control.cpp:915
+#: src/merge/output_control.cpp:905
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "此檔案 %1% (「%2%」) 未被添加。選項「--append-to」的參數無效。\n"
@@ -10640,8 +10640,8 @@ msgstr "此檔案無法辨識為支援的格式 (離開碼: %1)。"
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1582
-#: src/input/r_matroska.cpp:2283
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2279
 msgid "The file will not be processed further."
 msgstr "無法更進一步處理檔案。"
 
@@ -10732,7 +10732,7 @@ msgstr "格式可以是 'HH:MM:SS.nnnnnnnnn' 這種形式或單位為 's', 'ms' 
 msgid "The formats can be mixed, too."
 msgstr "也可以混用這些格式。"
 
-#: src/merge/output_control.cpp:1026
+#: src/merge/output_control.cpp:1016
 msgid "The formats do not match."
 msgstr "格式不符。"
 
@@ -11052,7 +11052,7 @@ msgstr "屬性值「%1%」不是有效的帶正負號整數。%2%\n"
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "此屬性值在「%1%」不是有效的不帶正負號整數。%2%\n"
 
-#: src/merge/output_control.cpp:1028
+#: src/merge/output_control.cpp:1018
 msgid "The reason is unknown."
 msgstr "原因不詳。"
 
@@ -11124,8 +11124,8 @@ msgstr "新輸出檔啟動後的大小。"
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "附件「%1%」的大小為 0。\n"
 
-#: src/merge/reader_detection_and_creation.cpp:91
-#: src/merge/reader_detection_and_creation.cpp:192
+#: src/merge/reader_detection_and_creation.cpp:88
+#: src/merge/reader_detection_and_creation.cpp:186
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "來源檔案「%1%」無法成功開啟，或者無法透過定位至末端檢索。\n"
@@ -11265,7 +11265,7 @@ msgstr "此時間碼涉及整個串流而與個別輸出檔無關。"
 msgid "The title for the whole movie."
 msgstr "整部影片的標題。"
 
-#: src/merge/output_control.cpp:985
+#: src/merge/output_control.cpp:975
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "軌道 %1% （自檔案 %2% (「%3%」)）被添加超過一次。「--append-to」的參數無效。\n"
@@ -11275,17 +11275,17 @@ msgstr "軌道 %1% （自檔案 %2% (「%3%」)）被添加超過一次。「--a
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "軌道識別碼 %1% 無有效的 CodecID。\n"
 
-#: src/merge/output_control.cpp:666
+#: src/merge/output_control.cpp:656
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "軌道頭無法正確演算。%1%\n"
 
-#: src/merge/output_control.cpp:1017
+#: src/merge/output_control.cpp:1007
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "軌道編號 %1% （自檔案「%2%」）可能無法被正確添加至軌道編號 %3% （自檔「%4%」）: %5% 請確認生成的檔是否可以完整地正常播放。本程式的作者可能無法提供關於播放生成的檔案的支援。\n"
 
-#: src/merge/output_control.cpp:1029
+#: src/merge/output_control.cpp:1019
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "軌道編號 %1% （自檔案「%2%」）無法添加至軌道編號 %3% （自檔案「%4%」）。%5%\n"
@@ -11294,7 +11294,7 @@ msgstr "軌道編號 %1% （自檔案「%2%」）無法添加至軌道編號 %3%
 msgid "The track number as used in the Block Header."
 msgstr "區塊表頭使用的軌道編號。"
 
-#: src/merge/output_control.cpp:1027
+#: src/merge/output_control.cpp:1017
 msgid "The track parameters do not match."
 msgstr "軌道參數不符。"
 
@@ -11371,8 +11371,8 @@ msgstr "線上有新版本可更新。"
 msgid "There is currently a job running."
 msgstr "目前有一個任務正在執行。"
 
+#: src/merge/output_control.cpp:899
 #: src/merge/output_control.cpp:909
-#: src/merge/output_control.cpp:919
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "沒有檔案的 ID 為「%1%」。參數「--append-to」無效。\n"
@@ -11393,7 +11393,7 @@ msgstr "查詢更新狀態時發生錯誤。"
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "出現一些影響表頭資訊儲存的表頭值錯誤。第一處錯誤已被選中。"
 
-#: src/merge/output_control.cpp:231
+#: src/merge/output_control.cpp:230
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:253
 #: src/propedit/propedit.cpp:121
 #, no-c-format
@@ -11670,12 +11670,12 @@ msgstr "這項屬性在「%1%」中是強制的且不能刪除的。%2%\n"
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "這名稱是唯一的。多數情況下無法被加入到「%1%」。%2%\n"
 
-#: src/merge/output_control.cpp:277
+#: src/merge/output_control.cpp:276
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "這 *真的* 不該發生。為第一個變換定位元件預留的空間過小。%1%\n"
 
-#: src/merge/output_control.cpp:1595
+#: src/merge/output_control.cpp:1582
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "這 *真的* 不該發生。為第一個變換定位元件預留的空間過小。需要的大小: %1%. %2%\n"
@@ -11701,8 +11701,8 @@ msgstr "此軌道包含 SBR AAC/HE-AAC/AAC+ 資料。"
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1582
-#: src/input/r_matroska.cpp:2283
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2279
 msgid "This usually indicates a damaged file structure."
 msgstr "這通常用以表示損壞的檔案結構。"
 
@@ -11794,7 +11794,7 @@ msgstr "軌道 %1% CodecPrivate 過小。\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "軌道 %1% 被未知/不支援的壓縮演算法壓縮 (%2%)。\n"
 
-#: src/input/r_matroska.cpp:1285
+#: src/input/r_matroska.cpp:1286
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "軌道 %1% 遺失了本身軌道 UID 元件，在 Matroska 規範中有描述該元件是必須的。若檔案包含標籤那麼標籤可能會毀損。\n"
@@ -11864,7 +11864,7 @@ msgstr "軌道 %1%: NAL 太大。根據檔頭字段的大小: %2%，封包可用
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "軌道 %1%: 字幕編號 %2% 缺少時間長度。假定為 1 秒。\n"
 
-#: src/input/r_qtmp4.cpp:2906
+#: src/input/r_qtmp4.cpp:2916
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "軌道 %1%: AAC 資訊無法解析。\n"
@@ -11875,7 +11875,7 @@ msgstr "軌道 %1%: AAC 資訊無法解析。\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "軌道 ID %1% 的 AAC 類型未知。\n"
 
-#: src/merge/generic_reader.cpp:324
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "軌道 ID %1%: %2% (%3%)"
@@ -12082,7 +12082,7 @@ msgstr "此剪輯 UID「%3%」的格式不明，在「%1% %2%」。\n"
 msgid "Unknown format in '%1% %2%'.\n"
 msgstr "未知的解析模式「%1% %2%」。\n"
 
-#: src/input/r_vobsub.cpp:616
+#: src/input/r_vobsub.cpp:619
 #, boost-format
 msgid "Unknown header 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgstr "未知的表頭 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
@@ -12127,7 +12127,7 @@ msgstr "無法辨識的檔案格式"
 msgid "Unsigned integer"
 msgstr "不帶正負號的整數"
 
-#: src/input/r_vobsub.cpp:485
+#: src/input/r_vobsub.cpp:488
 #, boost-format
 msgid "Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timestamp %3%, assuming MPEG2. No further warnings will be printed for this track.\n"
 msgstr "不支援 MPEG mpeg_version: 0x%|1$02x| 於資料套件 %2% 時間碼 %3% 處，假定為 MPEG2。不會再對此軌輸出警告。\n"
@@ -12137,7 +12137,7 @@ msgstr "不支援 MPEG mpeg_version: 0x%|1$02x| 於資料套件 %2% 時間碼 %3
 msgid "Unsupported file format"
 msgstr "不支援的檔案格式"
 
-#: src/input/r_matroska.cpp:2093
+#: src/input/r_matroska.cpp:2102
 msgid "Unsupported track type for this track.\n"
 msgstr "不支援此軌道的軌道類型。\n"
 
@@ -12150,7 +12150,7 @@ msgstr "更新附件屬性"
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "更新「%1%」元件失敗。原因:"
 
-#: src/merge/output_control.cpp:234
+#: src/merge/output_control.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:255
 #: src/propedit/propedit.cpp:124
 #, no-c-format
@@ -12209,7 +12209,7 @@ msgstr "使用 3 位元組的 NALU 長可能會導致某些 AVC/h.264 編解碼�
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "此格式「%1%」使用多工解訊器。\n"
 
-#: src/input/r_matroska.cpp:1611
+#: src/input/r_matroska.cpp:1619
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "軌道類型「%1%」使用一般輸出模組。\n"
@@ -12351,7 +12351,7 @@ msgstr "視訊場序"
 msgid "Video interlaced flag"
 msgstr "視訊交錯標記"
 
-#: src/input/r_real.cpp:617
+#: src/input/r_real.cpp:612
 #, boost-format
 msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "視訊套件彙編失敗。錯誤碼: %1% (%2%)\n"
@@ -12711,6 +12711,10 @@ msgstr "Windows (cmd.exe)"
 msgid "Windows Media (ASF/WMV)"
 msgstr ""
 
+#: src/input/unsupported_types_signature_prober.cpp:65
+msgid "Windows Television DVR"
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:309
 #, fuzzy
 msgid "With \"close current settings\" the current multiplex settings will be closed without opening new ones."
@@ -12942,7 +12946,7 @@ msgstr "mkvextract attachments <輸入檔名> [選項] [AID1:out1 [AID2:out2 ...
 
 #: src/common/kax_info.cpp:690
 #: src/common/kax_info.cpp:866
-#: src/input/r_matroska.cpp:112
+#: src/input/r_matroska.cpp:113
 msgid "audio"
 msgstr "音訊"
 
@@ -12969,7 +12973,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:693
 #: src/common/kax_info.cpp:869
-#: src/input/r_matroska.cpp:113
+#: src/input/r_matroska.cpp:114
 msgid "buttons"
 msgstr "按鈕"
 
@@ -13052,7 +13056,7 @@ msgstr "加密"
 msgid "equirectangular"
 msgstr ""
 
-#: src/merge/output_control.cpp:433
+#: src/merge/output_control.cpp:423
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "未找到 generic_packetizer_c 所需的 filelist_t。 %1%\n"
@@ -13143,126 +13147,126 @@ msgstr "語言: %1%"
 msgid "length %1%, data: %2%"
 msgstr "長 %1%, 資料: %2%"
 
-#: src/input/r_vobsub.cpp:237
+#: src/input/r_vobsub.cpp:238
 #, boost-format
 msgid "line %1%: The 'delay' timestamp could not be parsed.\n"
 msgstr "第 %1% 行:「延遲」時間戳記無法解析。\n"
 
-#: src/input/r_matroska.cpp:433
+#: src/input/r_matroska.cpp:434
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (微軟相容模式，軌道 %1%) Matroska 說每取樣為 %2% 比特，但這個波形格式項索引說有 %3% 比特。\n"
 
-#: src/input/r_matroska.cpp:424
+#: src/input/r_matroska.cpp:425
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (微軟相容模式，軌道 %1%) Matroska 說有 %2% 聲道，但這個波形格式項索引說有 %3% 聲道。\n"
 
-#: src/input/r_matroska.cpp:415
+#: src/input/r_matroska.cpp:416
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (微軟相容模式，軌道 %1%) Matroska 說每秒有 %2% 取樣，但這個波形格式項索引 說有 %3% 取樣。\n"
 
-#: src/input/r_matroska.cpp:633
+#: src/input/r_matroska.cpp:634
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (微軟相容模式, 軌道 %1%) Matroska 視訊高度為 %2%，但這個點陣圖資訊檔頭是 %3%。\n"
 
-#: src/input/r_matroska.cpp:624
+#: src/input/r_matroska.cpp:625
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (微軟相容模式, 軌道 %1%) Matrosa 視訊寬度為 %2%，但這個點陣圖資訊檔頭是 %3%。\n"
 
-#: src/input/r_matroska.cpp:1274
+#: src/input/r_matroska.cpp:1275
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: 有一個軌道缺少軌道編號。\n"
 
-#: src/input/r_matroska.cpp:1673
+#: src/input/r_matroska.cpp:1681
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: 無法保留軌道 UID %1%，因為它已被指派給了新檔案。\n"
 
-#: src/input/r_matroska.cpp:1521
-#: src/input/r_matroska.cpp:1526
+#: src/input/r_matroska.cpp:1529
+#: src/input/r_matroska.cpp:1534
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: 未發現剪輯。\n"
 
-#: src/input/r_matroska.cpp:1236
+#: src/input/r_matroska.cpp:1237
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: 像素高度遺失。\n"
 
-#: src/input/r_matroska.cpp:1234
+#: src/input/r_matroska.cpp:1235
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: 像素寬度遺失。\n"
 
-#: src/input/r_matroska.cpp:793
+#: src/input/r_matroska.cpp:794
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_reader: 軌 %2% 的 CodecID「%1%」未知。\n"
 
-#: src/input/r_matroska.cpp:448
-#: src/input/r_matroska.cpp:493
-#: src/input/r_matroska.cpp:514
-#: src/input/r_matroska.cpp:697
-#: src/input/r_matroska.cpp:707
-#: src/input/r_matroska.cpp:728
+#: src/input/r_matroska.cpp:449
+#: src/input/r_matroska.cpp:494
+#: src/input/r_matroska.cpp:515
+#: src/input/r_matroska.cpp:698
+#: src/input/r_matroska.cpp:708
+#: src/input/r_matroska.cpp:729
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: 軌道 %1% 的 CodecID 為「%2%」，但專屬的編解碼器資料沒有包含有效的表頭。\n"
 
-#: src/input/r_matroska.cpp:612
+#: src/input/r_matroska.cpp:613
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: 軌 %1% 的 CodecID 為「%2%」，但沒有出現 BITMAPINFOHEADER 點陣圖資訊表頭結構。因此我們沒有可標記視訊編碼的 FourCC。\n"
 
-#: src/input/r_matroska.cpp:393
+#: src/input/r_matroska.cpp:394
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: 軌 %1% 的 CodecID 為「%2%」，但沒有出現 WAVEFORMATEX 波形格式項索引結構。因此我們沒有可標記音訊編碼的 Format ID。\n"
 
-#: src/input/r_matroska.cpp:652
+#: src/input/r_matroska.cpp:653
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "matroska_reader: 軌 %1% 的 CodecID 為「%2%」，但沒有編解碼器專有表頭。\n"
 
-#: src/input/r_matroska.cpp:746
+#: src/input/r_matroska.cpp:747
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader: 軌 %1% 的 CodecID 為「%2%」，但沒發現專有資料。\n"
 
-#: src/input/r_matroska.cpp:1331
+#: src/input/r_matroska.cpp:1332
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: 遺失 CodecID。\n"
 
-#: src/input/r_matroska.cpp:684
+#: src/input/r_matroska.cpp:685
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_reader: 軌道 %1% 的高度未設定。\n"
 
-#: src/input/r_matroska.cpp:678
+#: src/input/r_matroska.cpp:679
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_reader: 軌道 %1% 的寬度未設定。\n"
 
-#: src/input/r_matroska.cpp:831
+#: src/input/r_matroska.cpp:832
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader: 軌道 %1% 應該是正常的。\n"
 
-#: src/input/r_matroska.cpp:1292
+#: src/input/r_matroska.cpp:1293
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: 軌道類型未找到。\n"
 
-#: src/input/r_matroska.cpp:484
+#: src/input/r_matroska.cpp:485
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge 編譯時沒有附加 FLAC 支援。已忽略軌道 %1%。\n"
 
-#: src/input/r_matroska.cpp:1510
+#: src/input/r_matroska.cpp:1518
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: 未發現 EBML 表頭。\n"
 
-#: src/input/r_matroska.cpp:826
+#: src/input/r_matroska.cpp:827
 #, fuzzy, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: 軌道 %1% 的未知分離器類型:「%2%」\n"
@@ -13425,8 +13429,8 @@ msgstr ""
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "mkvmerge 支援兩種章節格式: 類似 OGM 的文字格式和全功能的 XML 格式。"
 
-#: src/merge/output_control.cpp:251
-#: src/merge/output_control.cpp:294
+#: src/merge/output_control.cpp:250
+#: src/merge/output_control.cpp:293
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge 被 SIGINT 中止 (按了 Ctrl+C?)\n"
 
@@ -13600,7 +13604,7 @@ msgstr "大小不明"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: 無效格式。\"[Events]\" 區段中未找到 \"Format\" 這一行。"
 
-#: src/input/r_matroska.cpp:115
+#: src/input/r_matroska.cpp:116
 msgid "subtitle"
 msgstr "字幕"
 
@@ -13674,8 +13678,8 @@ msgstr "tta_reader: c'tor 中 tag_size < 0。 %1%\n"
 #: src/common/kax_info.cpp:859
 #: src/common/kax_info.cpp:870
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:111
-#: src/input/r_matroska.cpp:2760
+#: src/input/r_matroska.cpp:112
+#: src/input/r_matroska.cpp:2768
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:181
@@ -13684,7 +13688,7 @@ msgstr "tta_reader: c'tor 中 tag_size < 0。 %1%\n"
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2744
+#: src/input/r_matroska.cpp:2752
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "不明的格式標識 0x%|1$04x|"
@@ -13695,11 +13699,11 @@ msgstr "未指定"
 
 #: src/common/kax_info.cpp:691
 #: src/common/kax_info.cpp:867
-#: src/input/r_matroska.cpp:114
+#: src/input/r_matroska.cpp:115
 msgid "video"
 msgstr "視訊"
 
-#: src/input/r_vobsub.cpp:582
+#: src/input/r_vobsub.cpp:585
 msgid "vobsub_reader: sub file read failure"
 msgstr "vobsub_reader: sub_file 讀取失敗"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-06-20 22:42+0200\n"
+"POT-Creation-Date: 2018-08-06 21:01+0200\n"
 "PO-Revision-Date: 2018-07-24 22:50+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -30,7 +30,7 @@ msgstr ""
 "El fitxer temporal TTA per a la pista amb l'ID %1% s'està copiant al fitxer TTA final. Això durà algun temps.\n"
 "\n"
 
-#: src/merge/output_control.cpp:253
+#: src/merge/output_control.cpp:252
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -1158,10 +1158,10 @@ msgid_plural " days"
 msgstr[0] " dia"
 msgstr[1] " dies"
 
-#: src/merge/output_control.cpp:261
-#: src/merge/output_control.cpp:271
-#: src/merge/output_control.cpp:279
-#: src/merge/output_control.cpp:286
+#: src/merge/output_control.cpp:260
+#: src/merge/output_control.cpp:270
+#: src/merge/output_control.cpp:278
+#: src/merge/output_control.cpp:285
 msgid " done\n"
 msgstr " fet\n"
 
@@ -1344,8 +1344,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: s'ha produït una excepció (missatge: %2%; tipus: %3%)."
 
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1581
-#: src/input/r_matroska.cpp:2282
+#: src/input/r_matroska.cpp:1589
+#: src/input/r_matroska.cpp:2278
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: s'ha produït una excepció desconeguda."
@@ -2315,7 +2315,7 @@ msgstr "«%1%»: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "«%1%»: està processant els següents fitxers com a bons: %2%\n"
 
-#: src/input/r_matroska.cpp:1865
+#: src/input/r_matroska.cpp:1873
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "«%1%»: Esteu tornant a copiar una pista Opus que fou escrita en el mode experimental. La pista resultant s'escriurà seguint el mode final, però no es podrà recuperar el detall a partir d'una pista escrita en el mode experimental: el tall final. Això significa que un descodificador podria generar unes quantes mostres més del que tenia inicialment previst. Si és possible, hauríeu de tornar a multiplexar partint del fitxer Opus original.\n"
@@ -2508,12 +2508,12 @@ msgstr "+-> S'està fent una anàlisi prèvia del fitxer FLAC: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> S'està fent una anàlisi prèvia del fitxer FLAC: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:344
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", descripció «%1%»"
 
-#: src/merge/generic_reader.cpp:335
+#: src/merge/generic_reader.cpp:347
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", nom de fitxer «%1%»"
@@ -2616,7 +2616,7 @@ msgstr "<Sense nom>"
 msgid "<Unsaved file>"
 msgstr "<Fitxer sense desar>"
 
-#: src/input/r_matroska.cpp:2304
+#: src/input/r_matroska.cpp:2309
 #: src/input/r_matroska.cpp:2430
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
@@ -2642,11 +2642,11 @@ msgstr "Una llista separada per comes dels números de fotogrames/camps després
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "Una llista separada per comes dels intervals del codi de temps del contingut a mantenir."
 
-#: src/input/r_matroska.cpp:760
+#: src/input/r_matroska.cpp:761
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "Un índex per omissió i amb els ajustaments per omissió que s'usaran per a l'amplada, alçada i color."
 
-#: src/merge/output_control.cpp:232
+#: src/merge/output_control.cpp:231
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:254
 #: src/propedit/propedit.cpp:122
 #, no-c-format
@@ -2696,7 +2696,7 @@ msgstr "S'usa una expressió regular per a fer coincidir el nom del fitxer amb u
 msgid "A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."
 msgstr "Un únic bloc de Matroska conté un fotograma complet (pel contingut progressiu) o un sol camp (pel contingut entrellaçat)."
 
-#: src/merge/generic_reader.cpp:206
+#: src/merge/generic_reader.cpp:218
 #, boost-format
 msgid "A track with the ID %1% was requested but not found in the file. The corresponding option will be ignored.\n"
 msgstr "S'ha requerit una pista amb l'ID %1%, però no s'ha trobat al fitxer. L'opció corresponent serà omesa.\n"
@@ -2763,7 +2763,7 @@ msgstr "AAC (codificació avançada de l'àudio)"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC és SBR/HE-AAC/AAC+:"
 
-#: src/input/r_aac_adif.cpp:36
+#: src/input/unsupported_types_signature_prober.cpp:59
 msgid "AAC with ADIF headers"
 msgstr "AAC amb capçaleres ADIF"
 
@@ -3337,7 +3337,7 @@ msgstr "Annexa alguns fitxers de suports"
 msgid "Append to an e&xisting source file"
 msgstr "Annexa a un fitxer d'origen e&xistent"
 
-#: src/merge/output_control.cpp:1752
+#: src/merge/output_control.cpp:1739
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "S'està unint la pista %1% des del fitxer núm. %2% («%3%») a la pista %4% des del fitxer núm. %5% («%6%»).\n"
@@ -3385,7 +3385,7 @@ msgstr "Adjuntat"
 msgid "Attachment"
 msgstr "Adjunt"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:341
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID %1% de l'adjunt: tipus «%2%», mida %3% bytes"
@@ -3582,7 +3582,7 @@ msgstr "Coordenades de «x» pel color blau"
 msgid "Blue colour coordinate y"
 msgstr "Coordenades de «y» pel color blau"
 
-#: src/input/r_vobsub.cpp:555
+#: src/input/r_vobsub.cpp:558
 #, boost-format
 msgid "Bogus aid %1%\n"
 msgstr "AID %1% erroni\n"
@@ -3953,7 +3953,7 @@ msgstr "Capítols"
 msgid "Chapters in fixed intervals"
 msgstr "Capítols en intervals fixos"
 
-#: src/merge/generic_reader.cpp:341
+#: src/merge/generic_reader.cpp:353
 #, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -4230,7 +4230,7 @@ msgstr "No s'ha pogut extreure la capçalera de la seqüència des d'aquesta pis
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "No s'ha pogut trobar un índex per a la pista d'àudio %1% (Missatge d'error «avilib»: %2%). S'ha omès la pista.\n"
 
-#: src/merge/output_control.cpp:1678
+#: src/merge/output_control.cpp:1665
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "No s'ha pogut trobar «gptzr» en annexar. %1%\n"
@@ -5049,7 +5049,7 @@ msgstr "Versió de l'EBML"
 msgid "EBML void"
 msgstr "EBML buit"
 
-#: src/merge/reader_detection_and_creation.cpp:481
+#: src/merge/reader_detection_and_creation.cpp:469
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "CARAM, un error intern! (tipus de fitxer desconegut). %1%\n"
@@ -5216,7 +5216,7 @@ msgstr "Error %1%\n"
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "Error en crear un fitxer temporal (motiu: %1)."
 
-#: src/input/r_ogm.cpp:1216
+#: src/input/r_ogm.cpp:1227
 #, boost-format
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr "Error en decodificar una pàgina Opus d'Ogg a la marca de temps de l'origen %1%; la pàgina serà omesa: %2%\n"
@@ -5277,7 +5277,7 @@ msgstr "Error en analitzar les etiquetes a «%1%»: Falten alguns elements oblig
 msgid "Error reading Matroska file"
 msgstr "Error en llegir el fitxer Matroska"
 
-#: src/merge/output_control.cpp:741
+#: src/merge/output_control.cpp:731
 #, boost-format
 msgid "Error reading from the file '%1%'.\n"
 msgstr "Error en llegir del fitxer «%1%».\n"
@@ -5536,7 +5536,7 @@ msgstr "Ordre del camp"
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr "Ordre del camp (0, 1, 2, 6, 9 o 14, vegeu la documentació)."
 
-#: src/merge/generic_reader.cpp:320
+#: src/merge/generic_reader.cpp:332
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Fitxer «%1%»: contenidor: %2%"
@@ -5624,7 +5624,7 @@ msgstr "Tipus de fitxers com fluxos de programa i de transport MPEG (.vob, .m2ts
 msgid "File/Segment linking"
 msgstr "Vincula el fitxer/segment"
 
-#: src/merge/output_control.cpp:923
+#: src/merge/output_control.cpp:913
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Els fitxers no es poden annexar a si mateixos. L'argument per «--append-to» no és vàlid.\n"
 
@@ -5863,7 +5863,7 @@ msgstr "Etiquetes globals"
 msgid "Global tags:"
 msgstr "Etiquetes globals:"
 
-#: src/merge/generic_reader.cpp:347
+#: src/merge/generic_reader.cpp:359
 #, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -6569,7 +6569,7 @@ msgstr "El format no és vàlid: s'ha trobat el caràcter desconegut «%1%»"
 msgid "Invalid frame for '--split' in '--split %1%'.\n"
 msgstr "Fotograma no vàlid per «--split» a «--split %1%».\n"
 
-#: src/input/r_vobsub.cpp:538
+#: src/input/r_vobsub.cpp:541
 #, boost-format
 msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "La longitud de la capçalera no és vàlida: %1% (longitud total: %2%, idx: %3%, dataidx: %4%)\n"
@@ -6635,7 +6635,7 @@ msgstr "El número del fotograma/camp d'inici no és vàlid per «--split» a «
 msgid "Invalid start frame/field number for '--split' in '--split %1%' (current part: %2%). The start number must be bigger than or equal to the previous part's end number.\n"
 msgstr "El número del fotograma/camp d'inici no és vàlid per «--split» a «--split %1%» (part actual: %2%). El número d'inici ha de ser més gran o igual que el número de final de la part anterior.\n"
 
-#: src/input/r_usf.cpp:221
+#: src/input/r_usf.cpp:228
 msgid "Invalid start or stop timestamp"
 msgstr "Codi de temps d'inici o final no vàlid"
 
@@ -6763,7 +6763,7 @@ msgstr "S'ha especificat un ID de la pista no vàlid a «--sub-charset %1%».\n"
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "Especificació de l'ID o nom de fitxer per a la pista no vàlida a l'argument «%1%».\n"
 
-#: src/merge/generic_reader.cpp:117
+#: src/merge/generic_reader.cpp:129
 #, boost-format
 msgid "Invalid track type %1%."
 msgstr "Tipus de pista no vàlid %1%."
@@ -6948,18 +6948,18 @@ msgstr "No es pot analitzar la línia %1% del fitxer «%2%» pel codi de temps.\
 msgid "Line %1%: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "Línia %1%: S'ha trobat una marca de temps negativa. L'entrada serà ajustada a començar des de «00:00:00.000».\n"
 
-#: src/input/r_vobsub.cpp:300
+#: src/input/r_vobsub.cpp:301
 #, boost-format
 msgid "Line %1%: The current timestamp (%2%) is smaller than the previous one (%3%). The entries will be sorted according to their timestamps. This might result in the wrong order for some subtitle entries. If this is the case then you have to fix the .idx file manually.\n"
 msgstr "Línia %1%: La marca de temps actual (%2%) és més petita que l'anterior (%3%). Les entrades seran ordenades conforme als seus codis de temps. Això podria donar lloc a un ordre incorrecte d'algunes entrades de subtítols. Si és aquest el cas, haureu d'arreglar manualment el fitxer «.idx».\n"
 
-#: src/input/r_vobsub.cpp:250
-#: src/input/r_vobsub.cpp:273
+#: src/input/r_vobsub.cpp:251
+#: src/input/r_vobsub.cpp:274
 #, boost-format
 msgid "Line %1%: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"
 msgstr "Línia %1%: La línia sembla una entrada de subtítols, però no es pot reconèixer el format. Aquesta entrada serà omesa.\n"
 
-#: src/input/r_vobsub.cpp:290
+#: src/input/r_vobsub.cpp:291
 #, boost-format
 msgid "Line %1%: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
 msgstr "Línia %1%: La línia sembla una entrada de subtítols, però el codi de temps era negatiu, fins i tot després d'afegir el retard de la pista. Els codis de temps negatius no són admesos per Matroska. Aquesta entrada serà omesa.\n"
@@ -7102,12 +7102,12 @@ msgstr "Llista de reproducció Blu-ray en MPLS"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Converteix aquesta pista en la predefinida per a cadascun dels seus tipus (àudio, vídeo, subtítols)."
 
-#: src/input/r_matroska.cpp:1753
-#: src/input/r_matroska.cpp:1770
+#: src/input/r_matroska.cpp:1761
+#: src/input/r_matroska.cpp:1778
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "S'han trobat dades d'inicialització del còdec AAC mal formades.\n"
 
-#: src/input/r_matroska.cpp:1763
+#: src/input/r_matroska.cpp:1771
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "ID del còdec amb format incorrecte «%1%».\n"
@@ -7313,7 +7313,7 @@ msgstr "S'ha indicat més d'un nom de fitxer («%1%» i «%2%»).\n"
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "S'ha donat més d'un nom per a un únic adjunt. «%1%» serà descartat i s'emparà «%2%» en el seu lloc.\n"
 
-#: src/merge/output_control.cpp:996
+#: src/merge/output_control.cpp:986
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr "Hi ha més d'una pista per annexar a la pista %1% des del fitxer núm. %2% («%3%»). L'argument per «--append-to» no és vàlid.\n"
@@ -7474,18 +7474,18 @@ msgstr "No"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "No s'ha especificat cap %1% a «--%2% %3%».\n"
 
-#: src/merge/output_control.cpp:230
+#: src/merge/output_control.cpp:229
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:252
 #: src/propedit/propedit.cpp:120
 #, no-c-format
 msgid "No 'EBML head' element was found."
 msgstr "No s'ha trobat cap element «EBML head»."
 
-#: src/input/r_qtmp4.cpp:1706
+#: src/input/r_qtmp4.cpp:1717
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera AC-3 al primer fotograma. La pista serà omesa.\n"
 
-#: src/input/r_qtmp4.cpp:3345
+#: src/input/r_qtmp4.cpp:3355
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera DTS en els primers fotogrames. La pista serà omesa.\n"
 
@@ -7502,7 +7502,7 @@ msgstr "No s'ha establert cap tipus MIME per a l'adjunt «%1%», i no es pot end
 msgid "No actions have been added yet."
 msgstr "Encara no s'ha afegit cap acció."
 
-#: src/merge/output_control.cpp:955
+#: src/merge/output_control.cpp:945
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "No s'ha donat cap assignació d'annexió pel fitxer núm. %1% («%2%»). En el seu lloc s'emparà una assignació d'annexió per omissió de %3%. Si us plau, tingueu-ho en compte per si el «mkvmerge» avorta amb un missatge d'error respecte a opcions no vàlides per «--append-to».\n"
@@ -7917,7 +7917,7 @@ msgstr "Només es permet un fitxer d'informació del segment a «%1% %2%».\n"
 msgid "Only one source file is allowed.\n"
 msgstr "Només es permet un fitxer d'origen.\n"
 
-#: src/merge/output_control.cpp:936
+#: src/merge/output_control.cpp:926
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Només s'ha donat una part de les assignacions d'annexió al fitxer núm. %1% («%2%»). O bé no especifiqueu cap assignació (en aquest cas s'usarà l'establerta com a predefinida) o en podeu establir una per a totes les pistes que es copiaran.\n"
@@ -8127,7 +8127,7 @@ msgid "PGSSUP"
 msgstr "PGSSUP"
 
 # skip-rule: t-sp_tpc
-#: src/input/r_vobsub.cpp:546
+#: src/input/r_vobsub.cpp:549
 #, boost-format
 msgid "PTS error: 0x%|1$02x| %|2$02x|%|3$02x| %|4$02x|%|5$02x|\n"
 msgstr "Error de PTS: 0x%|1$02x| %|2$02x|%|3$02x| %|4$02x|%|5$02x|\n"
@@ -8369,7 +8369,7 @@ msgstr "Progrés:"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2939
-#: src/merge/output_control.cpp:358
+#: src/merge/output_control.cpp:348
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -8377,7 +8377,7 @@ msgstr "Progrés:"
 msgid "Progress: %1%%%%2%"
 msgstr "Progrés: %1%%%%2%"
 
-#: src/merge/output_control.cpp:333
+#: src/merge/output_control.cpp:325
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "Progrés: 100%%%1%"
@@ -8432,46 +8432,46 @@ msgstr "Vídeo conforme amb QuickTime"
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
-#: src/input/r_qtmp4.cpp:428
+#: src/input/r_qtmp4.cpp:437
 #, boost-format
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
 msgstr "Lector de Quicktime/MP4: l'àtom «%1%» és massa petit. Mida esperada: >= %2%. Mida real: %3%.\n"
 
-#: src/input/r_qtmp4.cpp:2335
+#: src/input/r_qtmp4.cpp:2345
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Lector de Quicktime/MP4: La mida del flux constant i de la durada variable encara no són admeses. Contacteu amb l'autor si teniu algun fitxer de mostra.\n"
 
-#: src/input/r_qtmp4.cpp:1662
+#: src/input/r_qtmp4.cpp:1671
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir el fragment d'informació número %1%/%2% amb la mida %3% des de la posició %4%. S'està interrompent.\n"
 
-#: src/input/r_qtmp4.cpp:2770
-#: src/input/r_qtmp4.cpp:2784
+#: src/input/r_qtmp4.cpp:2780
+#: src/input/r_qtmp4.cpp:2794
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció estesa del so per a l'ID de la pista %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2737
+#: src/input/r_qtmp4.cpp:2747
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del so per a l'ID de la pista %1%.\n"
 
-#: src/input/r_qtmp4.cpp:1351
+#: src/input/r_qtmp4.cpp:1360
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del flux per a l'ID de la pista %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2818
+#: src/input/r_qtmp4.cpp:2828
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del vídeo per a l'ID de la pista %1%.\n"
 
-#: src/input/r_qtmp4.cpp:327
+#: src/input/r_qtmp4.cpp:334
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha trobat cap àtom de capçalera.\n"
 
-#: src/input/r_qtmp4.cpp:330
+#: src/input/r_qtmp4.cpp:337
 msgid "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha trobat l'àtom «mdat». No s'han trobat les dades de la pel·lícula.\n"
 
@@ -8480,80 +8480,80 @@ msgstr "Lector de Quicktime/MP4: No s'ha trobat l'àtom «mdat». No s'han troba
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Lector de Quicktime/MP4: Mida no vàlida del fragment d'informació %1% a %2%.\n"
 
-#: src/input/r_qtmp4.cpp:3395
+#: src/input/r_qtmp4.cpp:3405
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEG-4 part 10/AVC li falta la configuració del descodificador. S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3421
+#: src/input/r_qtmp4.cpp:3431
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEG-4 part 10/AVC li falta la configuració del descodificador/àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3405
+#: src/input/r_qtmp4.cpp:3415
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEGH part 2/HEVC li falta la configuració del descodificador. S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:687
+#: src/input/r_qtmp4.cpp:696
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version %1%.\n"
 msgstr "Lector de Quicktime/MP4: L'àtom «media header» («mdhd») usa una versió %1% no admesa.\n"
 
-#: src/input/r_qtmp4.cpp:1344
+#: src/input/r_qtmp4.cpp:1353
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: El camp «mida» és massa petit a l'àtom de descripció del fitxer per a l'ID de la pista %1%.\n"
 
-#: src/input/r_qtmp4.cpp:692
+#: src/input/r_qtmp4.cpp:701
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Lector de Quicktime/MP4: El paràmetre «escala de temps» ha estat 0. Això no és admès.\n"
 
-#: src/input/r_qtmp4.cpp:3363
+#: src/input/r_qtmp4.cpp:3373
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: Manca la pista AAC %1% a la configuració del descodificador/àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3358
+#: src/input/r_qtmp4.cpp:3368
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: La pista d'àudio %1% està usant un «ID del tipus d'objecte» no admès de %2% a l'àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3415
+#: src/input/r_qtmp4.cpp:3425
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: Manca la pista de vídeo %1% a l'àtom «ESDS». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:460
+#: src/input/r_qtmp4.cpp:469
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '%1%'. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: Aquest fitxer usa capçaleres comprimides amb un algorisme de compressió desconegut o no admès «%1%». S'està interrompent.\n"
 
-#: src/input/r_qtmp4.cpp:493
+#: src/input/r_qtmp4.cpp:502
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size (%1%) was not what is available after uncompressing (%2%).\n"
 msgstr "Lector de Quicktime/MP4: Aquest fitxer usa capçaleres comprimides, però la mida sense comprimir esperada (%1%) no és la que s'obté després de la descompressió (%2%).\n"
 
-#: src/input/r_qtmp4.cpp:484
+#: src/input/r_qtmp4.cpp:493
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: %1%. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: Aquest fitxer usa capçaleres comprimides, però la biblioteca «zlib» no es pot inicialitzar. El codi d'error de «zlib»: %1%. S'està interrompent.\n"
 
-#: src/input/r_qtmp4.cpp:489
+#: src/input/r_qtmp4.cpp:498
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: Aquest fitxer usa capçaleres comprimides, però no es poden descomprimir. Codi d'error de «zlib»: %1%. S'està interrompent.\n"
 
-#: src/input/r_qtmp4.cpp:3314
-#: src/input/r_qtmp4.cpp:3333
-#: src/input/r_qtmp4.cpp:3376
-#: src/input/r_qtmp4.cpp:3439
+#: src/input/r_qtmp4.cpp:3324
+#: src/input/r_qtmp4.cpp:3343
+#: src/input/r_qtmp4.cpp:3386
+#: src/input/r_qtmp4.cpp:3449
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% li manquen algunes dades. Estan malmesos els àtoms de la capçalera?\n"
 
-#: src/input/r_qtmp4.cpp:2745
-#: src/input/r_qtmp4.cpp:2825
+#: src/input/r_qtmp4.cpp:2755
+#: src/input/r_qtmp4.cpp:2835
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Lector de Quicktime/MP4: L'ID de la pista %1% té més d'un FourCC. Només s'usarà el primer (%2%) i no aquest altre (%3%).\n"
@@ -9464,7 +9464,7 @@ msgstr "Talls"
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Algunes pistes h.264/AVC contenen talls I, però falten els fotogrames clau reals."
 
-#: src/merge/output_control.cpp:1292
+#: src/merge/output_control.cpp:1279
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "Manquen alguns elements de l'etiqueta (aquest error no hauria d'haver succeït -ja deu haver succeït quelcom semblant anteriorment-). %1%\n"
@@ -9731,7 +9731,7 @@ msgstr "Etiquetes"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Les etiquetes estan permeses, però els capítols no."
 
-#: src/merge/generic_reader.cpp:350
+#: src/merge/generic_reader.cpp:362
 #, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -9786,7 +9786,7 @@ msgstr "Li indica al «mkvmerge» que posi la majoria dels blocs de dades «n» 
 msgid "Text files"
 msgstr "Fitxers de text"
 
-#: src/input/r_vobsub.cpp:243
+#: src/input/r_vobsub.cpp:244
 msgid "The .idx file does not contain an 'id: ...' line to indicate the language.\n"
 msgstr "El fitxer «.idx» no conté una línia «id: ...» per indicar l'idioma.\n"
 
@@ -9853,7 +9853,7 @@ msgstr "L'ID «%1%» ja s'està emprant per a un altre fitxer de destinació.\n"
 msgid "The JSON output generated by mkvmerge could not be parsed (parser's error message: %1)."
 msgstr "La sortida JSON generada pel «mkvmerge» no s'ha pogut analitzar (missatge d'error de l'analitzador: %1)."
 
-#: src/input/r_ogm.cpp:1684
+#: src/input/r_ogm.cpp:1710
 #, boost-format
 msgid "The Kate identification header could not be parsed (%1%).\n"
 msgstr "La capçalera d'identificació del Kate no es pot analitzar (%1%).\n"
@@ -9872,7 +9872,7 @@ msgstr "El tipus MIME no pot estar buit."
 msgid "The MKVToolNix Code of Conduct"
 msgstr "El codi de conducta del MKVToolNix"
 
-#: src/input/r_qtmp4.cpp:1206
+#: src/input/r_qtmp4.cpp:1215
 #, boost-format
 msgid "The MP4 file '%1%' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "El fitxer MP4 «%1%» conté capítols en què el format no es reconeix. Això succeeix quan els capítols no estan codificats en UTF-8. Useu l'opció «--chapter-charset» per especificar el joc de caràcters a usar.\n"
@@ -9903,7 +9903,7 @@ msgstr "L'últim element del fitxer Matroska s'estableix a una mida desconeguda.
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length %1%'.\n"
 msgstr "La longitud de la mida NALU ha de ser un número entre el 2 i el 4 inclusivament a «--nalu-size-length %1%».\n"
 
-#: src/input/r_ogm.cpp:1494
+#: src/input/r_ogm.cpp:1520
 #, boost-format
 msgid "The Theora identification header could not be parsed (%1%).\n"
 msgstr "La capçalera d'identificació Theora no s'ha pogut analitzar (%1%).\n"
@@ -9913,7 +9913,7 @@ msgstr "La capçalera d'identificació Theora no s'ha pogut analitzar (%1%).\n"
 msgid "The UID must not be left empty."
 msgstr "L'UID no pot estar buit."
 
-#: src/input/r_matroska.cpp:759
+#: src/input/r_matroska.cpp:760
 #, boost-format
 msgid "The VobSub subtitle track %1% does not contain its index in the CodecPrivate element."
 msgstr "La pista %1% de subtítols VobSub no conté el seu índex a l'element CodecPrivate."
@@ -10076,7 +10076,7 @@ msgstr "La longitud de la mida NALU escollida de %1% és massa petita. Intenteu 
 msgid "The closing character '%1%' is missing.\n"
 msgstr "Manca el caràcter de tancament «%1%».\n"
 
-#: src/merge/generic_reader.cpp:142
+#: src/merge/generic_reader.cpp:154
 #, boost-format
 msgid "The codec type '%1%' cannot be used in a WebM compliant file.\n"
 msgstr "El tipus de còdec «%1%» no es pot emprar en un fitxer conforme amb WebM.\n"
@@ -10125,7 +10125,7 @@ msgstr "La capçalera del fitxer de correcció no es pot llegir correctament.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Els països «seleccionats» aquí es mostraran a la part superior de les llistes desplegables de país en el programa."
 
-#: src/merge/output_control.cpp:1484
+#: src/merge/output_control.cpp:1471
 msgid "The cue entries (the index) are being written...\n"
 msgstr "S'estan escrivint les entrades de l'índex...\n"
 
@@ -10179,11 +10179,11 @@ msgstr "El codi «%1%» de l'idioma per omissió no és un codi d'idioma ISO639-
 msgid "The default mode is adding files for multiplexing."
 msgstr "El mode per omissió és afegir fitxers pel multiplexat."
 
-#: src/merge/reader_detection_and_creation.cpp:496
-#: src/merge/reader_detection_and_creation.cpp:499
-#: src/merge/reader_detection_and_creation.cpp:502
-#: src/merge/reader_detection_and_creation.cpp:505
-#: src/merge/reader_detection_and_creation.cpp:508
+#: src/merge/reader_detection_and_creation.cpp:485
+#: src/merge/reader_detection_and_creation.cpp:488
+#: src/merge/reader_detection_and_creation.cpp:491
+#: src/merge/reader_detection_and_creation.cpp:494
+#: src/merge/reader_detection_and_creation.cpp:497
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -10297,8 +10297,8 @@ msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura: %2%."
 #: src/common/command_line.cpp:49
 #: src/extract/mkvextract.cpp:59
 #: src/extract/mkvextract.cpp:63
-#: src/merge/reader_detection_and_creation.cpp:87
-#: src/merge/reader_detection_and_creation.cpp:189
+#: src/merge/reader_detection_and_creation.cpp:84
+#: src/merge/reader_detection_and_creation.cpp:183
 #: src/propedit/attachment_target.cpp:66
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -10318,7 +10318,7 @@ msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:134
-#: src/merge/output_control.cpp:1318
+#: src/merge/output_control.cpp:1305
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%.\n"
@@ -10328,7 +10328,7 @@ msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%.\n"
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "El fitxer «%1%» no s'ha pogut obrir o analitzar."
 
-#: src/merge/output_control.cpp:1322
+#: src/merge/output_control.cpp:1309
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "El fitxer «%1%» ha estat obert per a escriptura.\n"
@@ -10385,12 +10385,12 @@ msgstr "El fitxer (%1) és massa gran (%2)."
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "El fitxer es pot arreglar tornant-lo a multiplexar amb el «mkvmerge»."
 
-#: src/merge/reader_detection_and_creation.cpp:502
+#: src/merge/reader_detection_and_creation.cpp:491
 msgid "The file content does not match its format type and was not recognized."
 msgstr "El contingut del fitxer no coincideix amb el seu tipus de format i no ha estat reconegut."
 
-#: src/merge/reader_detection_and_creation.cpp:496
-#: src/merge/reader_detection_and_creation.cpp:499
+#: src/merge/reader_detection_and_creation.cpp:485
+#: src/merge/reader_detection_and_creation.cpp:488
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "El fitxer no s'ha pogut obrir per a lectura, o no hi ha prou dades per analitzar les seves capçaleres."
 
@@ -10432,7 +10432,7 @@ msgstr "La capçalera del fitxer és massa curta.\n"
 msgid "The file header was not read correctly.\n"
 msgstr "La capçalera no ha estat llegida correctament.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:505
+#: src/merge/reader_detection_and_creation.cpp:494
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Les capçaleres del fitxer no s'han pogut analitzar, p. ex., perquè estan incompletes, no són vàlides o estan malmeses."
 
@@ -10447,19 +10447,19 @@ msgstr "El fitxer està en un format de contenidor no admès (%1)."
 msgid "The file is being analyzed."
 msgstr "S'està analitzant el fitxer."
 
-#: src/merge/output_control.cpp:257
+#: src/merge/output_control.cpp:256
 msgid "The file is being fixed, part 1/4..."
 msgstr "S'està arreglant el fitxer, part 1/4..."
 
-#: src/merge/output_control.cpp:263
+#: src/merge/output_control.cpp:262
 msgid "The file is being fixed, part 2/4..."
 msgstr "S'està arreglant el fitxer, part 2/4..."
 
-#: src/merge/output_control.cpp:273
+#: src/merge/output_control.cpp:272
 msgid "The file is being fixed, part 3/4..."
 msgstr "S'està arreglant el fitxer, part 3/4..."
 
-#: src/merge/output_control.cpp:281
+#: src/merge/output_control.cpp:280
 msgid "The file is being fixed, part 4/4..."
 msgstr "S'està arreglant el fitxer, part 4/4..."
 
@@ -10471,17 +10471,17 @@ msgstr "El fitxer es llegeix amb la finalitat de crear les estadístiques de la 
 msgid "The file name for this segment."
 msgstr "El nom de fitxer per aquest segment."
 
-#: src/merge/output_control.cpp:969
+#: src/merge/output_control.cpp:959
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no conté una pista amb l'ID %3%, o no s'ha copiat aquesta pista. L'argument per «--append-to» no és vàlid.\n"
 
-#: src/merge/output_control.cpp:975
+#: src/merge/output_control.cpp:965
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no conté una pista amb l'ID %3%, o no s'ha copiat aquesta pista. De manera que no es pot annexar cap pista. L'argument per «--append-to» no és vàlid.\n"
 
-#: src/merge/output_control.cpp:915
+#: src/merge/output_control.cpp:905
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "El fitxer núm. %1% («%2%») no serà annexat. L'argument per «--append-to» no és vàlid.\n"
@@ -10498,8 +10498,8 @@ msgstr "El fitxer no ha estat reconegut com un format admès (codi de sortida: %
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1582
-#: src/input/r_matroska.cpp:2283
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2279
 msgid "The file will not be processed further."
 msgstr "Aquest fitxer no es processarà més."
 
@@ -10589,7 +10589,7 @@ msgstr "El format segueix la forma HH:MM:SS.nnnnnnnnn o com un número seguit pe
 msgid "The formats can be mixed, too."
 msgstr "Els formats també es poden fusionar."
 
-#: src/merge/output_control.cpp:1026
+#: src/merge/output_control.cpp:1016
 msgid "The formats do not match."
 msgstr "Els formats no coincideixen."
 
@@ -10916,7 +10916,7 @@ msgstr "El valor de la propietat no és un enter amb signe vàlid a «%1%». %2%
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "El valor de la propietat no és un enter sense signe vàlid a «%1%». %2%\n"
 
-#: src/merge/output_control.cpp:1028
+#: src/merge/output_control.cpp:1018
 msgid "The reason is unknown."
 msgstr "La raó és desconeguda."
 
@@ -10987,8 +10987,8 @@ msgstr "La mida després de la qual es començarà un nou fitxer de destinació.
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "La mida de l'adjunt «%1%» és 0.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:91
-#: src/merge/reader_detection_and_creation.cpp:192
+#: src/merge/reader_detection_and_creation.cpp:88
+#: src/merge/reader_detection_and_creation.cpp:186
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "El fitxer d'origen «%1%» no s'ha pogut obrir correctament, o recuperar la seva mida cercant fins al final.\n"
@@ -11128,7 +11128,7 @@ msgstr "Els codis de temps es refereixen a tot el flux i no a cada fitxer de des
 msgid "The title for the whole movie."
 msgstr "El títol per a tota la pel·lícula."
 
-#: src/merge/output_control.cpp:985
+#: src/merge/output_control.cpp:975
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "La pista %1% del fitxer núm. %2% («%3%») es pot annexar més d'una vegada. L'argument per «--append-to» no és vàlid.\n"
@@ -11138,17 +11138,17 @@ msgstr "La pista %1% del fitxer núm. %2% («%3%») es pot annexar més d'una ve
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "La pista amb l'ID %1% no té un ID de còdec vàlid.\n"
 
-#: src/merge/output_control.cpp:666
+#: src/merge/output_control.cpp:656
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "Les capçaleres de la pista no s'han pogut reproduir correctament. %1%\n"
 
-#: src/merge/output_control.cpp:1017
+#: src/merge/output_control.cpp:1007
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "El número de la pista %1% del fitxer «%2%» probablement no es pot annexar correctament al número de la pista %3% del fitxer «%4%»: %5% Si us plau, assegureu-vos que el fitxer resultant es reprodueix tot el temps de forma correcta. És poc probable que l'autor d'aquest programa proporcioni cap tipus de suport per a les errades de reproducció amb el fitxer resultant.\n"
 
-#: src/merge/output_control.cpp:1029
+#: src/merge/output_control.cpp:1019
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr "El número de la pista %1% del fitxer «%2%» no es pot annexar al número de la pista %3% del fitxer «%4%». %5%\n"
@@ -11157,7 +11157,7 @@ msgstr "El número de la pista %1% del fitxer «%2%» no es pot annexar al núme
 msgid "The track number as used in the Block Header."
 msgstr "El número de la pista que s'usa a la capçalera del bloc."
 
-#: src/merge/output_control.cpp:1027
+#: src/merge/output_control.cpp:1017
 msgid "The track parameters do not match."
 msgstr "Els paràmetres de la pista no coincideixen."
 
@@ -11234,8 +11234,8 @@ msgstr "Hi ha disponible una nova versió."
 msgid "There is currently a job running."
 msgstr "Actualment hi ha una tasca en execució."
 
+#: src/merge/output_control.cpp:899
 #: src/merge/output_control.cpp:909
-#: src/merge/output_control.cpp:919
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr "No és un fitxer amb l'ID «%1%». L'argument per «--append-to» no era vàlid.\n"
@@ -11256,7 +11256,7 @@ msgstr "S'ha produït un error en consultar l'estat de l'actualització."
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "S'han produït errors en els valors de la capçalera que impedeixen desar les capçaleres. S'ha seleccionat el primer error."
 
-#: src/merge/output_control.cpp:231
+#: src/merge/output_control.cpp:230
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:253
 #: src/propedit/propedit.cpp:121
 #, no-c-format
@@ -11534,12 +11534,12 @@ msgstr "Aquesta propietat és obligatòria i no es pot suprimir a «%1%». %2%\n
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr "Aquesta propietat és única. No es poden afegir més instàncies a «%1%». %2%\n"
 
-#: src/merge/output_control.cpp:277
+#: src/merge/output_control.cpp:276
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr "REALMENT això no hauria d'haver succeït. L'espai reservat per al primer element meta de cerca és massa petit. %1%\n"
 
-#: src/merge/output_control.cpp:1595
+#: src/merge/output_control.cpp:1582
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "REALMENT això no hauria d'haver succeït. L'espai reservat per al primer element de meta de cerca és massa petit. Mida necessària: %1%. %2%\n"
@@ -11565,8 +11565,8 @@ msgstr "Aquesta pista conté dades AAC/HE-AAC/AAC+ en SBR."
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1582
-#: src/input/r_matroska.cpp:2283
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2279
 msgid "This usually indicates a damaged file structure."
 msgstr "Això normalment significa una estructura de fitxers malmesa."
 
@@ -11656,7 +11656,7 @@ msgstr "Les privades del còdec de la pista %1% són massa petites.\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "La pista %1% ha estat comprimida amb un algorisme de compressió desconegut/no admès (%2%).\n"
 
-#: src/input/r_matroska.cpp:1285
+#: src/input/r_matroska.cpp:1286
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "A la pista %1% li manca el seu element UID de la pista, el qual és necessari segons l'especificació de Matroska. Si el fitxer conté etiquetes, llavors aquestes podrien quedar malmeses.\n"
@@ -11726,7 +11726,7 @@ msgstr "Pista %1%: NAL massa gran. Mida segons el camp de la capçalera: %2%, by
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Pista %1%: Li manca la durada a l'entrada de subtítols número %2%. S'assumeix una durada d'1 s.\n"
 
-#: src/input/r_qtmp4.cpp:2906
+#: src/input/r_qtmp4.cpp:2916
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "Pista %1%: La informació AAC no s'ha pogut analitzar.\n"
@@ -11737,7 +11737,7 @@ msgstr "Pista %1%: La informació AAC no s'ha pogut analitzar.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "L'ID de la pista %1% té un tipus AAC desconegut.\n"
 
-#: src/merge/generic_reader.cpp:324
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "ID de la pista %1%: %2% (%3%)"
@@ -11939,7 +11939,7 @@ msgstr "Format desconegut per a l'UID del segment «%3%» a «%1% %2%».\n"
 msgid "Unknown format in '%1% %2%'.\n"
 msgstr "Format desconegut a «%1% %2%».\n"
 
-#: src/input/r_vobsub.cpp:616
+#: src/input/r_vobsub.cpp:619
 #, boost-format
 msgid "Unknown header 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgstr "Capçalera desconeguda 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
@@ -11983,7 +11983,7 @@ msgstr "Format de fitxer no reconegut"
 msgid "Unsigned integer"
 msgstr "Enter sense signe"
 
-#: src/input/r_vobsub.cpp:485
+#: src/input/r_vobsub.cpp:488
 #, boost-format
 msgid "Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timestamp %3%, assuming MPEG2. No further warnings will be printed for this track.\n"
 msgstr "mpeg_version de MPEG no admesa: 0x%|1$02x| en el paquet %2% pel codi de temps %3%, assumint MPEG2. No es mostrarà cap avís més per aquesta pista.\n"
@@ -11993,7 +11993,7 @@ msgstr "mpeg_version de MPEG no admesa: 0x%|1$02x| en el paquet %2% pel codi de 
 msgid "Unsupported file format"
 msgstr "Format de fitxer no implementat"
 
-#: src/input/r_matroska.cpp:2093
+#: src/input/r_matroska.cpp:2102
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipus de pista no admès per aquesta pista.\n"
 
@@ -12006,7 +12006,7 @@ msgstr "Actualitza les propietats d'un adjunt"
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "L'actualització de l'element «%1%» ha fallat. Raó:"
 
-#: src/merge/output_control.cpp:234
+#: src/merge/output_control.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:255
 #: src/propedit/propedit.cpp:124
 #, no-c-format
@@ -12065,7 +12065,7 @@ msgstr "Emprar una longitud de mida NALU de 3 bytes hauria de donar lloc a piste
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Emprant el demultiplexador pel format «%1%».\n"
 
-#: src/input/r_matroska.cpp:1611
+#: src/input/r_matroska.cpp:1619
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Emprant el mòdul de sortida genèric pel tipus de pista «%1%».\n"
@@ -12204,7 +12204,7 @@ msgstr "Ordre del camp de vídeo"
 msgid "Video interlaced flag"
 msgstr "Etiqueta d'entrellaçat del vídeo"
 
-#: src/input/r_real.cpp:617
+#: src/input/r_real.cpp:612
 #, boost-format
 msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "El muntatge del paquet del vídeo ha fallat. Codi d'error: %1% (%2%)\n"
@@ -12547,6 +12547,10 @@ msgstr "Windows (cmd.exe)"
 msgid "Windows Media (ASF/WMV)"
 msgstr "Windows Media (ASF/WMV)"
 
+#: src/input/unsupported_types_signature_prober.cpp:65
+msgid "Windows Television DVR"
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:309
 msgid "With \"close current settings\" the current multiplex settings will be closed without opening new ones."
 msgstr "Amb «Tanca els ajustaments actuals», aquests seran tancats sense necessitat d'obrir-ne de nous."
@@ -12774,7 +12778,7 @@ msgstr "attachments [opcions] [AID1:sortida1 [AID2:sortida2 ...]]"
 
 #: src/common/kax_info.cpp:690
 #: src/common/kax_info.cpp:866
-#: src/input/r_matroska.cpp:112
+#: src/input/r_matroska.cpp:113
 msgid "audio"
 msgstr "Àudio"
 
@@ -12801,7 +12805,7 @@ msgstr "El camp inferior es mostra primer, el camp superior s'emmagatzema primer
 
 #: src/common/kax_info.cpp:693
 #: src/common/kax_info.cpp:869
-#: src/input/r_matroska.cpp:113
+#: src/input/r_matroska.cpp:114
 msgid "buttons"
 msgstr "Botons"
 
@@ -12884,7 +12888,7 @@ msgstr "Encriptatge"
 msgid "equirectangular"
 msgstr "Equirectangular"
 
-#: src/merge/output_control.cpp:433
+#: src/merge/output_control.cpp:423
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "No es troba filelist_t per a generic_packetizer_c. %1%\n"
@@ -12975,126 +12979,126 @@ msgstr "Idioma: %1%"
 msgid "length %1%, data: %2%"
 msgstr "durada %1%, data: %2%"
 
-#: src/input/r_vobsub.cpp:237
+#: src/input/r_vobsub.cpp:238
 #, boost-format
 msgid "line %1%: The 'delay' timestamp could not be parsed.\n"
 msgstr "línia %1%: La marca de temps «retard» no s'ha pogut analitzar.\n"
 
-#: src/input/r_matroska.cpp:433
+#: src/input/r_matroska.cpp:434
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que hi ha %2% bits per mostra, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:424
+#: src/input/r_matroska.cpp:425
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que hi ha %2% canals, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:415
+#: src/input/r_matroska.cpp:416
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que hi ha %2% mostres per segon, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:633
+#: src/input/r_matroska.cpp:634
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que l'alçada és de %2%, però el BITMAPINFOHEADER diu que és de %3%.\n"
 
-#: src/input/r_matroska.cpp:624
+#: src/input/r_matroska.cpp:625
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu que l'amplada és de %2%, però el BITMAPINFOHEADER diu que és de %3%.\n"
 
-#: src/input/r_matroska.cpp:1274
+#: src/input/r_matroska.cpp:1275
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: A una pista li manca el seu número de pista.\n"
 
-#: src/input/r_matroska.cpp:1673
+#: src/input/r_matroska.cpp:1681
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: No ha pogut mantenir l'UID de la pista %1% perquè ja està assignat al fitxer nou.\n"
 
-#: src/input/r_matroska.cpp:1521
-#: src/input/r_matroska.cpp:1526
+#: src/input/r_matroska.cpp:1529
+#: src/input/r_matroska.cpp:1534
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: No s'ha trobat cap segment.\n"
 
-#: src/input/r_matroska.cpp:1236
+#: src/input/r_matroska.cpp:1237
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Manca l'alçada en píxels.\n"
 
-#: src/input/r_matroska.cpp:1234
+#: src/input/r_matroska.cpp:1235
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Manca l'amplada en píxels.\n"
 
-#: src/input/r_matroska.cpp:793
+#: src/input/r_matroska.cpp:794
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_reader: L'ID del còdec «%1%» per a la pista «%2%» és desconegut.\n"
 
-#: src/input/r_matroska.cpp:448
-#: src/input/r_matroska.cpp:493
-#: src/input/r_matroska.cpp:514
-#: src/input/r_matroska.cpp:697
-#: src/input/r_matroska.cpp:707
-#: src/input/r_matroska.cpp:728
+#: src/input/r_matroska.cpp:449
+#: src/input/r_matroska.cpp:494
+#: src/input/r_matroska.cpp:515
+#: src/input/r_matroska.cpp:698
+#: src/input/r_matroska.cpp:708
+#: src/input/r_matroska.cpp:729
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però les dades privades del còdec no contenen capçaleres vàlides.\n"
 
-#: src/input/r_matroska.cpp:612
+#: src/input/r_matroska.cpp:613
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no estava present l'estructura BITMAPINFOHEADER. Pel que no tenim un FourCC per identificar el còdec de vídeo emprat.\n"
 
-#: src/input/r_matroska.cpp:393
+#: src/input/r_matroska.cpp:394
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no estava present l'estructura WAVEFORMATEX. Pel que no tenim un FourCC per identificar el còdec d'àudio emprat.\n"
 
-#: src/input/r_matroska.cpp:652
+#: src/input/r_matroska.cpp:653
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no hi havia capçaleres privades del còdec.\n"
 
-#: src/input/r_matroska.cpp:746
+#: src/input/r_matroska.cpp:747
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no s'han trobat dades privades del còdec.\n"
 
-#: src/input/r_matroska.cpp:1331
+#: src/input/r_matroska.cpp:1332
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: Manca l'ID del còdec.\n"
 
-#: src/input/r_matroska.cpp:684
+#: src/input/r_matroska.cpp:685
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_reader: No s'ha establert l'alçada per a la pista %1%.\n"
 
-#: src/input/r_matroska.cpp:678
+#: src/input/r_matroska.cpp:679
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_reader: No s'ha establert l'amplada per a la pista %1%.\n"
 
-#: src/input/r_matroska.cpp:831
+#: src/input/r_matroska.cpp:832
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader: La pista %1% sembla estar bé.\n"
 
-#: src/input/r_matroska.cpp:1292
+#: src/input/r_matroska.cpp:1293
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: No s'ha trobat el tipus de la pista.\n"
 
-#: src/input/r_matroska.cpp:484
+#: src/input/r_matroska.cpp:485
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: El «mkvmerge» no ha estat compilat amb la implementació per a fitxers FLAC. La pista %1% serà ignorada.\n"
 
-#: src/input/r_matroska.cpp:1510
+#: src/input/r_matroska.cpp:1518
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: No s'ha trobat la capçalera EBML.\n"
 
-#: src/input/r_matroska.cpp:826
+#: src/input/r_matroska.cpp:827
 #, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: tipus de demultiplexió desconegut per a la pista %1%: «%2%»\n"
@@ -13246,8 +13250,8 @@ msgstr "Normalment, el «mkvmerge» suprimeix aquesta última entrada si el seu 
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "El «mkvmerge» admet dos formats de capítols: l'OGM com a format de text i XML amb totes les seves funcions."
 
-#: src/merge/output_control.cpp:251
-#: src/merge/output_control.cpp:294
+#: src/merge/output_control.cpp:250
+#: src/merge/output_control.cpp:293
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "El «mkvmerge» ha estat interromput per un SIGINT (Ctrl+C?)\n"
 
@@ -13419,7 +13423,7 @@ msgstr "mida desconeguda"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Format no vàlid. No es troba la línia «Format» a la secció «[Events]»."
 
-#: src/input/r_matroska.cpp:115
+#: src/input/r_matroska.cpp:116
 msgid "subtitle"
 msgstr "Subtítol"
 
@@ -13492,8 +13496,8 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. %1%\n"
 #: src/common/kax_info.cpp:859
 #: src/common/kax_info.cpp:870
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:111
-#: src/input/r_matroska.cpp:2760
+#: src/input/r_matroska.cpp:112
+#: src/input/r_matroska.cpp:2768
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:181
@@ -13502,7 +13506,7 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. %1%\n"
 msgid "unknown"
 msgstr "Desconegut"
 
-#: src/input/r_matroska.cpp:2744
+#: src/input/r_matroska.cpp:2752
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "Desconegut, format de l'etiqueta 0x%|1$04x|"
@@ -13513,11 +13517,11 @@ msgstr "Sense especificar"
 
 #: src/common/kax_info.cpp:691
 #: src/common/kax_info.cpp:867
-#: src/input/r_matroska.cpp:114
+#: src/input/r_matroska.cpp:115
 msgid "video"
 msgstr "Vídeo"
 
-#: src/input/r_vobsub.cpp:582
+#: src/input/r_vobsub.cpp:585
 msgid "vobsub_reader: sub file read failure"
 msgstr "vobsub_reader: ha fallat la lectura del fitxer de subtítols"
 
