@@ -23,6 +23,13 @@ namespace {
 struct sub_signature_t {
   unsigned int offset{};
   std::vector<uint8_t> bytes;
+
+  sub_signature_t(unsigned int _offset,
+                  std::vector<uint8_t> const &_bytes)
+    : offset{_offset}
+    , bytes{_bytes}
+  {
+  }
 };
 
 struct signature_t {
