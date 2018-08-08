@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-08-06 21:01+0200\n"
-"PO-Revision-Date: 2018-06-11 18:03+0200\n"
+"PO-Revision-Date: 2018-08-08 18:43+0200\n"
 "Last-Translator: Jan Mazurczyk <remuxer32@protonmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -771,7 +771,6 @@ msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           Nie kopiuje żadnej ścieżki wideo z tego pliku.\n"
 
 #: src/merge/mkvmerge.cpp:343
-#, fuzzy
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
@@ -779,7 +778,7 @@ msgid ""
 msgstr ""
 "  -F, --identification-format <format>\n"
 "                           Ustawia format dla wyniku identyfikacji\n"
-"                           (\"text\", \"verbose-text\", \"json\").\n"
+"                           (\"text\" lub \"json\"; domyślnym jest \"text\").\n"
 
 #: src/merge/mkvmerge.cpp:341
 msgid ""
@@ -7488,9 +7487,9 @@ msgstr "Nie podano żadnego %1% w \"--%2% %3%\".\n"
 #: src/merge/output_control.cpp:229
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:252
 #: src/propedit/propedit.cpp:120
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "No 'EBML head' element was found."
-msgstr "Nie znaleziono nagłówka EBML."
+msgstr "Nie znaleziono elementu \"Nagłówek EBML\"."
 
 #: src/input/r_qtmp4.cpp:1717
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
@@ -7573,9 +7572,11 @@ msgid "No file name given.\n"
 msgstr "Nie podano nazwy pliku.\n"
 
 #: src/merge/mkvmerge.cpp:2012
-#, fuzzy, boost-format
+#, boost-format
 msgid "No file names were listed between '%1%' and '%2%'.\n"
-msgstr "Więcej niż jedna nazwa pliku została podana (\"%1%\" oraz \"%2%\").\n"
+msgstr ""
+"Nie podano nazw plików pomiędzy \"%1%\" a \"%2%\".\n"
+"\n"
 
 #: src/common/xml/ebml_converter.cpp:240
 msgid "No filename found after the '@'."
@@ -11237,9 +11238,9 @@ msgid "The values are only stored in the track headers."
 msgstr "Wartości są przechowywane w nagłówkach ścieżek."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:672
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The version line reported by mkvmerge ('%1') could not be recognized."
-msgstr "Ten typ pliku \"%1%\" nie mógł zostać rozpoznany.\n"
+msgstr "Linia wersji zgłoszona przez mkvmerge (\"%1\") nie mogła zostać rozpoznana."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:676
 #, no-c-format
@@ -11591,7 +11592,7 @@ msgstr "Ten szablon zostanie użyty dla nowo tworzonych rozdziałów."
 #: src/input/subtitles.cpp:520
 #: src/output/p_textsubs.cpp:111
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
-msgstr ""
+msgstr "Ta ścieżka napisów tekstowych zawiera nieprawidłowe 8-bitowe znaki poza poprawnymi wielobajtowymi sekwencjami UTF-8. Proszę podać poprawne kodowanie dla tej ścieżki.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:513
 #, no-c-format
@@ -11838,7 +11839,7 @@ msgstr "Ścieżki"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:403
 #, no-c-format
 msgid "Tracks with a language in this list will be set not to be copied by default."
-msgstr "Ścieżki z językiem będącym na tej liście nie będą przeznaczone do kopiowania."
+msgstr "Ścieżki z językiem obecnym na tej liście nie będą domyślnie przeznaczone do kopiowania."
 
 #: src/extract/xtr_base.cpp:125
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
@@ -12604,7 +12605,7 @@ msgstr "Windows Media (ASF/WMV)"
 
 #: src/input/unsupported_types_signature_prober.cpp:65
 msgid "Windows Television DVR"
-msgstr ""
+msgstr "Windows Television DVR"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:309
 msgid "With \"close current settings\" the current multiplex settings will be closed without opening new ones."
@@ -12833,9 +12834,8 @@ msgid "anaglyph (green/magenta)"
 msgstr "Anaglif (zielony/magenta)"
 
 #: src/extract/extract_cli_parser.cpp:52
-#, fuzzy
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
-msgstr "mkvextract attachments <nazwa pliku> [opcje] [AID1:out1 [AID2:out2 ...]]"
+msgstr "attachments [opcje] [AID1:aut1 [AID2:aut2 ...]]"
 
 #: src/common/kax_info.cpp:690
 #: src/common/kax_info.cpp:866
@@ -12877,7 +12877,7 @@ msgstr "kanały: %1%"
 
 #: src/extract/extract_cli_parser.cpp:53
 msgid "chapters [options] out.xml"
-msgstr ""
+msgstr "chapters [opcje] aut.xml"
 
 #: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
@@ -12909,13 +12909,12 @@ msgid "cubemap"
 msgstr ""
 
 #: src/extract/extract_cli_parser.cpp:56
-#, fuzzy
 msgid "cues [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract cues <nazwa pliku> [opcje] [TID1:out1 [TID2:out2 ...]]"
+msgstr "cues [opcje] [TID1:aut1 [TID2:aut2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:54
 msgid "cuesheet [options] out.cue"
-msgstr ""
+msgstr "cuesheet [opcje] aut.cue"
 
 #: src/common/kax_info.cpp:678
 #, boost-format
@@ -13196,52 +13195,44 @@ msgid "mkv&merge documentation"
 msgstr "&Dokumentacja mkvmerge"
 
 #: src/extract/extract_cli_parser.cpp:101
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" attachments 4:cover.jpg"
-msgstr "mkvextract attachments \"a movie.mkv\" 4:cover.jpg"
+msgstr "mkvextract \"film.mkv\" attachments 4:okładka.jpg"
 
 #: src/extract/extract_cli_parser.cpp:110
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" chapters movie_chapters.xml"
-msgstr "mkvextract chapters \"a movie.mkv\" > movie_chapters.xml"
+msgstr "mkvextract \"film.mkv\" chapters film_rozdziały.xml"
 
 #: src/extract/extract_cli_parser.cpp:134
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"
-msgstr "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
+msgstr "mkvextract \"film.mkv\" cues 0:cues_ścieżka0.txt"
 
 #: src/extract/extract_cli_parser.cpp:92
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tags movie_tags.xml"
-msgstr "mkvextract tags \"a movie.mkv\" > movie_tags.xml"
+msgstr "mkvextract \"film.mkv\" tags film_tagi.xml"
 
 #: src/extract/extract_cli_parser.cpp:127
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
-msgstr "mkvextract timestamps_v2 \"a movie.mkv\" 1:timestamps_track1.txt"
+msgstr "mkvextract \"film.mkv\" timestamps_v2 1:znaczniki czasu_ścieżka1.txt"
 
 #: src/extract/extract_cli_parser.cpp:141
 msgid "mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"
-msgstr ""
+msgstr "mkvextract \"film.mkv\" tracks 0:wideo.h264 1:audio.aac timestamps_v2 0:znaczniki czasu.wideo.txt chapters rozdziały.xml tags tagi.xml"
 
 #: src/extract/extract_cli_parser.cpp:84
-#, fuzzy
 msgid "mkvextract \"a movie.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:subs.srt"
-msgstr "mkvextract tracks \"a movie.mkv\" 2:audio.ogg -c ISO8859-1 3:subs.srt"
+msgstr "mkvextract \"film.mkv\" tracks 2:audio.ogg -c ISO8859-1 3:napisy.srt"
 
 #: src/extract/extract_cli_parser.cpp:119
-#, fuzzy
 msgid "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
-msgstr "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
+msgstr "mkvextract \"plik audio.mka\" cuesheet plik audio.cue"
 
 #: src/extract/extract_cli_parser.cpp:59
 msgid "mkvextract <-h|--help|-V|--version>"
 msgstr "mkvextract <-h|--help|-V|--version>"
 
 #: src/extract/extract_cli_parser.cpp:47
-#, fuzzy
 msgid "mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"
-msgstr "mkvextract <tryb> <źródło-nazwa pliku> [opcje] <wyodrębnianie-ścieżki>"
+msgstr "mkvextract <źródło-nazwa pliku> <tryb1> [opcje] <wyodrębnianie-spec1> [<tryb2> [opcje] <wyodrębnianie-spec2>…]"
 
 #: src/extract/mkvextract.cpp:94
 #, boost-format
@@ -13503,7 +13494,7 @@ msgstr "napisy"
 
 #: src/extract/extract_cli_parser.cpp:51
 msgid "tags [options] out.xml"
-msgstr ""
+msgstr "tags [opcje] aut.xml"
 
 #: src/output/p_textsubs.h:39
 msgid "text subtitles"
@@ -13514,9 +13505,8 @@ msgid "timestamps"
 msgstr "znaczniki czasu"
 
 #: src/extract/extract_cli_parser.cpp:55
-#, fuzzy
 msgid "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract timestamps_v2 <nazwa pliku> [TID1:out1 [TID2:out2 ...]]"
+msgstr "timestamps_v2 [TID1:aut1 [TID2:aut2 ...]]"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
@@ -13544,9 +13534,8 @@ msgid "track number %1%, %2% frame(s), timestamp %3%"
 msgstr "numer ścieżki %1%, %2% klatka(-ek/-i), znacznik czasu %3%"
 
 #: src/extract/extract_cli_parser.cpp:50
-#, fuzzy
 msgid "tracks [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract tracks <nazwa pliku> [opcje] [TID1:out1 [TID2:out2 ...]]"
+msgstr "tracks [opcje] [TID1:aut1 [TID2:aut2 ...]]"
 
 #: src/input/r_tta.cpp:64
 #, boost-format
