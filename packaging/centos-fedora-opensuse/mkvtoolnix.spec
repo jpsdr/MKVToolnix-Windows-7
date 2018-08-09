@@ -121,6 +121,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %{_bindir}/*
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/*/*.png
+%{_datadir}/metainfo/*.xml
 %{_datadir}/mime/packages/*.xml
 %lang(ca) %{_datadir}/locale/ca/*/*.mo
 %lang(cs) %{_datadir}/locale/cs/*/*.mo

@@ -802,7 +802,9 @@ namespace :install do
     install_dir :desktopdir, :mimepackagesdir
     install_data :mimepackagesdir, FileList[ "#{$top_srcdir}/share/mime/*.xml" ]
     if c?(:USE_QT)
+      install_dir :appdatadir
       install_data :desktopdir, "#{$top_srcdir}/share/desktop/org.bunkus.mkvtoolnix-gui.desktop"
+      install_data :appdatadir, "#{$top_srcdir}/share/metainfo/org.bunkus.mkvtoolnix-gui.appdata.xml"
     end
 
     wanted_apps     = %w{mkvmerge mkvtoolnix-gui mkvinfo mkvextract mkvpropedit}.collect { |e| "#{e}.png" }.to_hash_by

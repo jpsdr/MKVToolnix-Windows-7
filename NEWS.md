@@ -9,6 +9,10 @@
   file type. This prevents mis-detection as MPEG-2 with an accompanying flood
   of error messages. Fixes #2347.
 
+## Build system changes
+
+* An AppStream metadata file will be installed in `$prefix/share/metainfo`.
+
 
 # Version 25.0.0 "Prog Noir" 2018-07-12
 
