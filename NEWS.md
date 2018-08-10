@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: the font size in the tool selector on the left will scale
+  with the font size the user selects in the preferences.
+
 ## Bug fixes
 
 * mkvmerge: Matroska reader: fixed wrong timestamps when appending Matroska

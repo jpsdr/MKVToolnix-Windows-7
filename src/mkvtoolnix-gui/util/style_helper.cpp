@@ -29,6 +29,12 @@
 #include <QtWidgets/QStyleOption>
 #include <QtWidgets/QWidget>
 
+#include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/widget.h"
+
+// libintl.h #defines sprintf to libintl_sprintf on mingw.
+#undef sprintf
+
 // Note, this is exported but in a private header as qtopengl depends on it.
 // We should consider adding this as a public helper function.
 void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
@@ -65,10 +71,13 @@ StyleHelper::mergedColors(QColor const &colorA,
 
 qreal
 StyleHelper::sidebarFontSize() {
+  auto defaultFont  = mtx::gui::Util::defaultUiFont();
+  auto userFontSize = mtx::gui::Util::Settings::get().m_uiFontPointSize;
+
 #if defined(Q_WS_MAC)
-  return 10;
+  return userFontSize * 10.0 / defaultFont.pointSizeF();
 #else
-  return 7.5;
+  return userFontSize *  7.5 / defaultFont.pointSizeF();
 #endif
 }
 
