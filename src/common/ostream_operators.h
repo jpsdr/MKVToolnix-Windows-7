@@ -21,7 +21,7 @@ operator <<(std::basic_ostream<CharT, TraitsT> &out,
             std::vector<ContT> const &vec) {
   out << "<";
   bool first = true;
-  for (auto element : vec) {
+  for (auto const &element : vec) {
     if (first)
       first = false;
     else
@@ -38,23 +38,6 @@ std::basic_ostream<CharT, TraitsT> &
 operator <<(std::basic_ostream<CharT, TraitsT> &out,
             std::pair<PairT1, PairT2> const &p) {
   out << "(" << p.first << "/" << p.second << ")";
-  return out;
-}
-
-template<typename ElementT>
-std::ostream &
-operator <<(std::ostream &out,
-            ElementT const &e) {
-  return e.streamify(out);
-}
-
-template<typename ElementT>
-std::wostream &
-operator <<(std::wostream &out,
-            ElementT const &e) {
-  std::stringstream temp;
-  e.streamify(temp);
-  out << to_wide(temp.str());
   return out;
 }
 
