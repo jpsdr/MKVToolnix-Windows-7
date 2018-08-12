@@ -53,3 +53,10 @@ public:
 
   std::string str() const;
 };
+
+inline std::ostream &
+operator <<(std::ostream &out,
+            split_point_c const &sp) {
+  out << sp.str();
+  return out;
+}
