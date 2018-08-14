@@ -134,18 +134,15 @@ def handle_deps(target, exit_code, skip_abspath=false)
 
   create_dependency_dirs
 
+  re_source_dir = Regexp.new("^" + Regexp::escape($source_dir) + "/*")
+
   File.open("#{$dependency_dir}/" + target.gsub(/[\/\.]/, '_') + '.dep', "w") do |out|
-    line = IO.readlines(dep_file).collect { |l| l.chomp }.join(" ").gsub(/\\/, ' ').gsub(/\s+/, ' ')
-    if /(.+?):\s*([^\s].*)/.match(line)
-      target  = $1
-      sources = $2.gsub(/^\s+/, '').gsub(/\s+$/, '').split(/\s+/)
+    sources = IO.readlines(dep_file).
+      map { |l| l.chomp.gsub(%r{.*:}, '').gsub(%r{^\s+}, '').gsub(%r{\s*\\\s*$}, '').gsub(re_source_dir, '') }.
+      reject(&:empty?).
+      reject { |l| skip_abspath && %r{^/}.match(l) }
 
-      if skip_abspath
-        sources.delete_if { |entry| entry.start_with? '/' }
-      end
-
-      out.puts(([ target ] + sources).join("\n"))
-    end
+    out.puts(([ target ] + sources).join("\n"))
   end
 
   get_out.call
