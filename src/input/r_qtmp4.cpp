@@ -989,7 +989,7 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
   m_time_scale  = get_uint32_be(&mvhd.time_scale);
   auto duration = get_uint32_be(&mvhd.duration);
 
-  if (duration != std::numeric_limits<uint32_t>::max())
+  if ((duration != std::numeric_limits<uint32_t>::max()) && (m_time_scale != 0))
     m_duration = boost::rational_cast<uint64_t>(boost::rational<uint64_t>{duration, static_cast<uint64_t>(m_time_scale)} * 1'000'000'000ull);
 
   mxdebug_if(m_debug_headers, boost::format("%1%Time scale: %2% duration: %3%\n") % space(level * 2 + 1) % m_time_scale % (m_duration ? format_timestamp(*m_duration) : "—"s));
@@ -2174,7 +2174,11 @@ qtmp4_demuxer_c::calculate_frame_rate() {
 int64_t
 qtmp4_demuxer_c::to_nsecs(int64_t value,
                           boost::optional<int64_t> time_scale_to_use) {
-  return boost::rational_cast<int64_t>(int64_rational_c{value, time_scale_to_use ? *time_scale_to_use : time_scale} * int64_rational_c{1'000'000'000ll, 1});
+  auto actual_time_scale = time_scale_to_use ? *time_scale_to_use : time_scale;
+  if (!actual_time_scale)
+    return 0;
+
+  return boost::rational_cast<int64_t>(int64_rational_c{value, actual_time_scale} * int64_rational_c{1'000'000'000ll, 1});
 }
 
 void

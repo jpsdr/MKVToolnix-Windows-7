@@ -13,6 +13,8 @@
 * mkvmerge: Windows Television DVR files are now recognized as an unsupported
   file type. This prevents mis-detection as MPEG-2 with an accompanying flood
   of error messages. Fixes #2347.
+* mkvmerge: MP4 reader: fixed division by zero errors during file
+  identification if the timescale is 0 in the `MVHD` atom.
 
 ## Build system changes
 
