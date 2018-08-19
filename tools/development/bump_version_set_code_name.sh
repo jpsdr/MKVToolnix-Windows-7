@@ -97,10 +97,16 @@ function update_docs {
   drake
 }
 
+function update_appstream_metainfo {
+  perl -pi -e "s{<releases>\\n}{<releases>\\n    <release version=\"${TO}\" date=\"${MANDATE}\"></release>\\n}" \
+    share/metainfo/org.bunkus.mkvtoolnix-gui.appdata.xml
+}
+
 update_news
 update_files
 update_debian_changelog
 update_spec
+update_appstream_metainfo
 update_docs
 
 echo "Done setting the new version."
