@@ -582,9 +582,9 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   }));
 
   PRE(KaxCues, ([this, p](EbmlElement &e) -> bool {
-    if (p->m_verbose < 2)
+    if ((p->m_verbose < 2) && !p->m_use_gui)
       show_element(&e, p->m_level, Y("Cues (subentries will be skipped)"));
-    return p->m_verbose >= 2;
+    return (p->m_verbose >= 2) || p->m_use_gui;
   }));
 
   PRE(KaxTrackEntry, [p](EbmlElement &e) -> bool {

@@ -15,6 +15,9 @@
   of error messages. Fixes #2347.
 * mkvmerge: MP4 reader: fixed division by zero errors during file
   identification if the timescale is 0 in the `MVHD` atom.
+* MKVToolNix GUI: info tool: under certain circumstances "cues" were shown at
+  the wrong level (inside the previous master element instead of on level
+  1). Fixes #2361.
 
 ## Build system changes
 
