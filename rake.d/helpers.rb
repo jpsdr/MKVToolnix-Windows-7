@@ -138,9 +138,12 @@ def handle_deps(target, exit_code, skip_abspath=false)
 
   File.open("#{$dependency_dir}/" + target.gsub(/[\/\.]/, '_') + '.dep', "w") do |out|
     sources = IO.readlines(dep_file).
-      map { |l| l.chomp.gsub(%r{.*:}, '').gsub(%r{^\s+}, '').gsub(%r{\s*\\\s*$}, '').gsub(re_source_dir, '') }.
+      map { |l| l.chomp.split(%r{ +}) }.
+      flatten.
+      map{ |l| l.gsub(%r{.*:}, '').gsub(%r{^\s+}, '').gsub(%r{\s*\\\s*$}, '').gsub(re_source_dir, '') }.
       reject(&:empty?).
-      reject { |l| skip_abspath && %r{^/}.match(l) }
+      reject { |l| skip_abspath && %r{^/}.match(l) }.
+      sort
 
     out.puts(([ target ] + sources).join("\n"))
   end
