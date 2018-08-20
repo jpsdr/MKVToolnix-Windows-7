@@ -59,8 +59,6 @@ Tool::loadAndStart() {
   Model::convertJobQueueToSeparateIniFiles();
   m_model->loadJobs();
 
-  resizeColumnsToContents();
-
   m_model->start();
 }
 
@@ -77,7 +75,7 @@ Tool::setupUi() {
   setupMoveJobsButtons();
 
   Util::preventScrollingWithoutFocus(this);
-  Util::HeaderViewManager::create(*ui->jobs, "Jobs::Jobs");
+  Util::HeaderViewManager::create(*ui->jobs, "Jobs::Jobs").setDefaultSizes({ { Q("status"), 150 }, { Q("description"), 300 }, { Q("dateAdded"), 130 }, { Q("dateStarted"), 130 }, { Q("dateFinished"), 130 } });
 
   m_jobsMenu->addAction(m_viewOutputAction);
   m_jobsMenu->addAction(m_openFolderAction);
@@ -339,16 +337,9 @@ Tool::onStopQueueImmediately() {
 }
 
 void
-Tool::resizeColumnsToContents()
-  const {
-  Util::resizeViewColumnsToContents(ui->jobs);
-}
-
-void
 Tool::addJob(JobPtr const &job) {
   job->saveQueueFile();
   m_model->add(job);
-  resizeColumnsToContents();
 }
 
 bool

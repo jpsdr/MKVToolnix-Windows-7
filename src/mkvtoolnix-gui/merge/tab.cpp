@@ -310,11 +310,6 @@ Tab::setControlValuesFromConfig() {
   ui->attachedFiles->sortByColumn(0, Qt::AscendingOrder);
   m_attachedFilesModel->sort(0, Qt::AscendingOrder);
 
-  resizeFilesColumnsToContents();
-  resizeTracksColumnsToContents();
-  resizeAttachedFilesColumnsToContents();
-  resizeAttachmentsColumnsToContents();
-
   onTrackSelectionChanged();
   setOutputControlValues();
   onAttachmentSelectionChanged();

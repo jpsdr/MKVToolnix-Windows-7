@@ -25,6 +25,7 @@ class HeaderViewManagerPrivate {
   QString name;
   bool preventSaving{true};
   QTimer delayedSaveState{};
+  QHash<QString, int> defaultSizes;
 };
 
 HeaderViewManager::HeaderViewManager(QObject *parent)
@@ -47,6 +48,12 @@ HeaderViewManager::manage(QTreeView &treeView,
   p->treeView->header()->setContextMenuPolicy(Qt::CustomContextMenu);
 
   QTimer::singleShot(0, this, SLOT(restoreState()));
+}
+
+HeaderViewManager &
+HeaderViewManager::setDefaultSizes(QHash<QString, int> const &defaultSizes) {
+  p_func()->defaultSizes = defaultSizes;
+  return *this;
 }
 
 void
@@ -182,19 +189,26 @@ HeaderViewManager::restoreSizes(QStringList const &columnSizes) {
   mtx::sort::by(logicalIndexesInVisualOrder.begin(), logicalIndexesInVisualOrder.end(), [headerView](int logicalIndex) { return headerView->visualIndex(logicalIndex); });
 
   for (int logicalIndex : logicalIndexesInVisualOrder) {
+    if (headerView->isSectionHidden(logicalIndex))
+      continue;
+
     auto name = symbolicColumnName(logicalIndex);
-    if (sizeMap.contains(name) && !headerView->isSectionHidden(logicalIndex))
-      headerView->resizeSection(logicalIndex, sizeMap[name]);
+    auto size = sizeMap.contains(name)         ? sizeMap[name]
+              : p->defaultSizes.contains(name) ? p->defaultSizes[name]
+              :                                  0;
+
+    if (size != 0)
+      headerView->resizeSection(logicalIndex, size);
   }
 }
 
-HeaderViewManager *
+HeaderViewManager &
 HeaderViewManager::create(QTreeView &treeView,
                           QString const &name) {
   auto manager = new HeaderViewManager{&treeView};
   manager->manage(treeView, name);
 
-  return manager;
+  return *manager;
 }
 
 void
