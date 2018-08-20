@@ -169,8 +169,6 @@ public slots:
 
   virtual void addToJobQueue(bool startNow, boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings = boost::none);
 
-  virtual void resizeFilesColumnsToContents() const;
-  virtual void resizeTracksColumnsToContents() const;
   virtual void reinitFilesTracksControls();
 
   virtual void onFileRowsInserted(QModelIndex const &parentIdx, int first, int last);
@@ -248,9 +246,6 @@ public slots:
   virtual void enableDisableAllAttachedFiles(bool enable);
   virtual void enableDisableSelectedAttachedFiles(bool enable);
   virtual void attachedFileItemChanged(QStandardItem *item);
-
-  virtual void resizeAttachedFilesColumnsToContents() const;
-  virtual void resizeAttachmentsColumnsToContents() const;
 
   virtual void retranslateUi();
   virtual void handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action);

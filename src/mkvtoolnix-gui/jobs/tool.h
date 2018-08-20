@@ -70,8 +70,6 @@ public slots:
   void setupMoveJobsButtons();
   void enableMoveJobsButtons();
 
-  void resizeColumnsToContents() const;
-
   virtual void toolShown() override;
 
   void acknowledgeSelectedWarnings();

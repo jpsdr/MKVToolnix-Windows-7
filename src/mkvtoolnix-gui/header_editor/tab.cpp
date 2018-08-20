@@ -158,8 +158,6 @@ Tab::load() {
     ui->elements->setExpanded(page->m_pageIdx, expansionStatus[key]);
   }
 
-  Util::resizeViewColumnsToContents(ui->elements);
-
   if (selectedRows.isEmpty())
     return;
 
@@ -282,7 +280,7 @@ Tab::setupUi() {
   ui->elements->setModel(m_model);
   ui->elements->acceptDroppedFiles(true);
 
-  Util::HeaderViewManager::create(*ui->elements, "HeaderEditor::Elements");
+  Util::HeaderViewManager::create(*ui->elements, "HeaderEditor::Elements").setDefaultSizes({ { Q("type"), 250 }, { Q("codec"), 100 }, { Q("language"), 120 }, { Q("properties"), 120 } });
   Util::preventScrollingWithoutFocus(this);
 
   connect(ui->elements,                              &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showTreeContextMenu);
@@ -342,8 +340,6 @@ Tab::retranslateUi() {
     page->retranslateUi();
 
   m_model->retranslateUi();
-
-  Util::resizeViewColumnsToContents(ui->elements);
 }
 
 void

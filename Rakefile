@@ -95,8 +95,7 @@ def setup_globals
   $gui_ui_files            = FileList["src/mkvtoolnix-gui/forms/**/*.ui"].to_a
   $gui_ui_h_files          = $gui_ui_files.collect { |file| file.ext 'h' }
 
-  $top_srcdir              = c(:top_srcdir)
-  $dependency_dir          = "#{$top_srcdir}/rake.d/dependency.d"
+  $dependency_dir          = "#{$source_dir}/rake.d/dependency.d"
   $dependency_tmp_dir      = "#{$dependency_dir}/tmp"
 
   $languages               =  {
@@ -110,8 +109,8 @@ def setup_globals
   }
 
   $available_languages     =  {
-    :programs              => FileList[ "#{$top_srcdir }/po/*.po"              ].collect { |name| File.basename name, '.po'        },
-    :manpages              => FileList[ "#{$top_srcdir }/doc/man/po4a/po/*.po" ].collect { |name| File.basename name, '.po'        },
+    :programs              => FileList[ "#{$source_dir }/po/*.po"              ].collect { |name| File.basename name, '.po'        },
+    :manpages              => FileList[ "#{$source_dir }/doc/man/po4a/po/*.po" ].collect { |name| File.basename name, '.po'        },
   }
 
   $unwrapped_po            = %{ca es eu it nl uk pl sr_RS@latin tr}
@@ -522,7 +521,7 @@ EOT
 
   [ :programs, :manpages ].each { |type| task type => $translations[type] }
 
-  task :qt => FileList[ "#{$top_srcdir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
+  task :qt => FileList[ "#{$source_dir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
   if c?(:PO4A_WORKS)
     filter = lambda do |code, lines|
@@ -800,16 +799,16 @@ namespace :install do
 
   task :shared do
     install_dir :desktopdir, :mimepackagesdir
-    install_data :mimepackagesdir, FileList[ "#{$top_srcdir}/share/mime/*.xml" ]
+    install_data :mimepackagesdir, FileList[ "#{$source_dir}/share/mime/*.xml" ]
     if c?(:USE_QT)
       install_dir :appdatadir
-      install_data :desktopdir, "#{$top_srcdir}/share/desktop/org.bunkus.mkvtoolnix-gui.desktop"
-      install_data :appdatadir, "#{$top_srcdir}/share/metainfo/org.bunkus.mkvtoolnix-gui.appdata.xml"
+      install_data :desktopdir, "#{$source_dir}/share/desktop/org.bunkus.mkvtoolnix-gui.desktop"
+      install_data :appdatadir, "#{$source_dir}/share/metainfo/org.bunkus.mkvtoolnix-gui.appdata.xml"
     end
 
     wanted_apps     = %w{mkvmerge mkvtoolnix-gui mkvinfo mkvextract mkvpropedit}.collect { |e| "#{e}.png" }.to_hash_by
     wanted_dirs     = %w{16x16 24x24 32x32 48x48 64x64 96x96 128x128 256x256}.to_hash_by
-    dirs_to_install = FileList[ "#{$top_srcdir}/share/icons/*"   ].select { |dir|  wanted_dirs[ dir.gsub(/.*icons\//, '').gsub(/\/.*/, '') ] }.sort.uniq
+    dirs_to_install = FileList[ "#{$source_dir}/share/icons/*"   ].select { |dir|  wanted_dirs[ dir.gsub(/.*icons\//, '').gsub(/\/.*/, '') ] }.sort.uniq
 
     dirs_to_install.each do |dir|
       dest_dir = "#{c(:icondir)}/#{dir.gsub(/.*icons\//, '')}/apps"
@@ -821,7 +820,7 @@ namespace :install do
       sounds_dir ="#{c(:pkgdatadir)}/sounds"
 
       install_dir  sounds_dir
-      install_data sounds_dir, FileList["#{$top_srcdir}/share/sounds/*"]
+      install_data sounds_dir, FileList["#{$source_dir}/share/sounds/*"]
     end
   end
 

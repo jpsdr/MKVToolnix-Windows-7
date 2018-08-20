@@ -122,8 +122,8 @@ Tab::setupUi() {
   Util::fixScrollAreaBackground(p->ui->scrollArea);
   Util::fixComboBoxViewWidth(*p->ui->cbChNameLanguage);
   Util::fixComboBoxViewWidth(*p->ui->cbChNameCountry);
-  Util::HeaderViewManager::create(*p->ui->elements,  "ChapterEditor::Elements");
-  Util::HeaderViewManager::create(*p->ui->tvChNames, "ChapterEditor::ChapterNames");
+  Util::HeaderViewManager::create(*p->ui->elements,  "ChapterEditor::Elements")    .setDefaultSizes({ { Q("editionChapter"), 200 }, { Q("start"),    130 }, { Q("end"), 130 } });
+  Util::HeaderViewManager::create(*p->ui->tvChNames, "ChapterEditor::ChapterNames").setDefaultSizes({ { Q("name"),           200 }, { Q("language"), 150 } });
 
   p->addEditionBeforeAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-above.png")});
   p->addEditionAfterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-below.png")});
@@ -214,8 +214,6 @@ Tab::retranslateUi() {
   p->chapterModel->retranslateUi();
   p->nameModel->retranslateUi();
 
-  resizeChapterColumnsToContents();
-
   emit titleChanged();
 }
 
@@ -225,22 +223,6 @@ Tab::setupToolTips() {
 
   Util::setToolTip(p->ui->elements, QY("Right-click for actions for editions and chapters"));
   Util::setToolTip(p->ui->pbBrowseSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
-}
-
-void
-Tab::resizeChapterColumnsToContents()
-  const {
-  auto p = p_func();
-
-  Util::resizeViewColumnsToContents(p->ui->elements);
-}
-
-void
-Tab::resizeNameColumnsToContents()
-  const {
-  auto p = p_func();
-
-  Util::resizeViewColumnsToContents(p->ui->tvChNames);
 }
 
 QString
@@ -276,8 +258,6 @@ Tab::newFile() {
   auto parentIdx = p->chapterModel->index(0, 0);
   selection      = QItemSelection{p->chapterModel->index(0, 0, parentIdx), p->chapterModel->index(0, p->chapterModel->columnCount() - 1, parentIdx)};
   selectionModel->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
-
-  resizeChapterColumnsToContents();
 
   p->ui->leChStart->selectAll();
   p->ui->leChStart->setFocus();
@@ -596,7 +576,6 @@ Tab::chaptersLoaded(ChaptersPtr const &chapters,
     p->savedState = currentState();
 
   expandAll();
-  resizeChapterColumnsToContents();
 
   connect(p->chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
 
@@ -1049,8 +1028,6 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
   p->ui->cbChNameCountry->setAdditionalItems(usedNameCountryCodes())
     .reInitializeIfNecessary()
     .setCurrentByData(Q(FindChildValue<KaxChapterCountry>(display)));
-
-  resizeNameColumnsToContents();
 
   return true;
 }
@@ -1615,7 +1592,6 @@ Tab::generateSubChapters() {
   }
 
   expandCollapseAll(true, selectedIdx);
-  resizeNameColumnsToContents();
 
   emit numberOfEntriesChanged();
 }
@@ -1726,8 +1702,6 @@ Tab::renumberSubChapters() {
       ++chapterNumber;
     ++row;
   }
-
-  resizeNameColumnsToContents();
 }
 
 void

@@ -424,8 +424,8 @@ Tab::setupInputControls() {
   enableMoveFilesButtons();
   onTrackSelectionChanged();
 
-  Util::HeaderViewManager::create(*ui->files,  "Merge::Files");
-  Util::HeaderViewManager::create(*ui->tracks, "Merge::Tracks");
+  Util::HeaderViewManager::create(*ui->files,  "Merge::Files") .setDefaultSizes({ { Q("fileName"), 200 }, { Q("container"), 100 }, { Q("fileSize"),  60 } });
+  Util::HeaderViewManager::create(*ui->tracks, "Merge::Tracks").setDefaultSizes({ { Q("codec"),    150 }, { Q("type"),       80 }, { Q("name"),     150 }, { Q("properties"), 150 } });
 }
 
 void
@@ -1330,22 +1330,7 @@ Tab::onRemoveAllFiles() {
 
 void
 Tab::reinitFilesTracksControls() {
-  resizeFilesColumnsToContents();
-  resizeTracksColumnsToContents();
-  resizeAttachedFilesColumnsToContents();
   onTrackSelectionChanged();
-}
-
-void
-Tab::resizeFilesColumnsToContents()
-  const {
-  Util::resizeViewColumnsToContents(ui->files);
-}
-
-void
-Tab::resizeTracksColumnsToContents()
-  const {
-  Util::resizeViewColumnsToContents(ui->tracks);
 }
 
 void
@@ -1403,9 +1388,6 @@ void
 Tab::retranslateInputUI() {
   m_filesModel->retranslateUi();
   m_tracksModel->retranslateUi();
-
-  resizeFilesColumnsToContents();
-  resizeTracksColumnsToContents();
 
   m_addFilesAction ->setText(QY("&Add files"));
   m_addFilesAction2->setText(QY("&Add files"));

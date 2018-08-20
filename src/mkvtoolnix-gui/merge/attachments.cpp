@@ -54,7 +54,7 @@ Tab::setupAttachmentsControls() {
   auto &cfg = Util::Settings::get();
   cfg.handleSplitterSizes(ui->mergeAttachmentsSplitter);
 
-  Util::HeaderViewManager::create(*ui->attachedFiles, "Merge::AttachedFiles");
+  Util::HeaderViewManager::create(*ui->attachedFiles, "Merge::AttachedFiles").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("size"), 100 } });
 
   m_enableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
   m_disableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
@@ -97,7 +97,7 @@ Tab::setupAttachmentsControls() {
 
   onAttachmentSelectionChanged();
 
-  Util::HeaderViewManager::create(*ui->attachments, "Merge::Attachments");
+  Util::HeaderViewManager::create(*ui->attachments, "Merge::Attachments").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("attachTo"), 130 }, { Q("size"), 100 } });
 }
 
 void
@@ -243,7 +243,6 @@ Tab::addAttachments(QStringList const &fileNames) {
   }
 
   m_attachmentsModel->addAttachments(attachmentsToAdd);
-  resizeAttachmentsColumnsToContents();
 }
 
 void
@@ -286,18 +285,6 @@ Tab::onSelectAllAttachments() {
   selection.select(m_attachmentsModel->index(0, 0), m_attachmentsModel->index(numRows - 1, m_attachmentsModel->columnCount() - 1));
 
   ui->attachments->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
-}
-
-void
-Tab::resizeAttachedFilesColumnsToContents()
-  const {
-  Util::resizeViewColumnsToContents(ui->attachedFiles);
-}
-
-void
-Tab::resizeAttachmentsColumnsToContents()
-  const {
-  Util::resizeViewColumnsToContents(ui->attachments);
 }
 
 void
@@ -398,9 +385,6 @@ void
 Tab::retranslateAttachmentsUI() {
   m_attachedFilesModel->retranslateUi();
   m_attachmentsModel->retranslateUi();
-
-  resizeAttachedFilesColumnsToContents();
-  resizeAttachmentsColumnsToContents();
 
   m_enableAllAttachedFilesAction->setText(QY("E&nable all attachments"));
   m_disableAllAttachedFilesAction->setText(QY("Di&sable all attachments"));

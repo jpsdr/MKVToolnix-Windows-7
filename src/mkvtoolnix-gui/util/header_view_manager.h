@@ -28,6 +28,8 @@ public:
 
   void manage(QTreeView &treeView, QString const &name);
 
+  HeaderViewManager &setDefaultSizes(QHash<QString, int> const &defaultSizes);
+
 public slots:
   void saveState();
   void restoreState();
@@ -37,7 +39,7 @@ public slots:
   void resetColumns();
 
 public:
-  static HeaderViewManager *create(QTreeView &treeView, QString const &name);
+  static HeaderViewManager &create(QTreeView &treeView, QString const &name);
 
 protected:
   void restoreHidden(QStringList const &hiddenColumns);
