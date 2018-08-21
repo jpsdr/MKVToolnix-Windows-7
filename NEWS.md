@@ -23,6 +23,9 @@
   be passed to mkvmerge in situations when mkvmerge will generate chapters
   (either because automatic generation is enabled or if chapters are generated
   for MPLS playlists). Part of the implementation of #2275.
+* MKVToolNix GUI: chapter editor: if the chapter name template is empty,
+  chapters will be generated without names. Part of the implementation of
+  #2275.
 
 ## Bug fixes
 

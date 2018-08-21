@@ -1192,17 +1192,19 @@ Tab::createEmptyChapter(int64_t startTime,
                         boost::optional<QString> const &nameTemplate,
                         boost::optional<QString> const &language,
                         boost::optional<QString> const &country) {
-  auto &cfg     = Util::Settings::get();
-  auto chapter  = std::make_shared<KaxChapterAtom>();
-  auto &display = GetChild<KaxChapterDisplay>(*chapter);
-  auto name     = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber, timestamp_c::ns(startTime));
+  auto &cfg    = Util::Settings::get();
+  auto chapter = std::make_shared<KaxChapterAtom>();
+  auto name    = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber, timestamp_c::ns(startTime));
 
   GetChild<KaxChapterUID>(*chapter).SetValue(0);
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
-  GetChild<KaxChapterString>(display).SetValue(to_wide(name));
-  GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(language ? *language : cfg.m_defaultChapterLanguage));
-  if ((country && !country->isEmpty()) || !cfg.m_defaultChapterCountry.isEmpty())
-    GetChild<KaxChapterCountry>(display).SetValue(to_utf8((country && !country->isEmpty()) ? *country : cfg.m_defaultChapterCountry));
+  if (!name.isEmpty()) {
+    auto &display = GetChild<KaxChapterDisplay>(*chapter);
+    GetChild<KaxChapterString>(display).SetValue(to_wide(name));
+    GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(language ? *language : cfg.m_defaultChapterLanguage));
+    if ((country && !country->isEmpty()) || !cfg.m_defaultChapterCountry.isEmpty())
+      GetChild<KaxChapterCountry>(display).SetValue(to_utf8((country && !country->isEmpty()) ? *country : cfg.m_defaultChapterCountry));
+  }
 
   return chapter;
 }

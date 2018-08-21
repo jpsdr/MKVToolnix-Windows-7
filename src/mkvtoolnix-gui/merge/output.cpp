@@ -202,10 +202,7 @@ Tab::setupOutputToolTips() {
                    .arg(QYH("When appending: one chapter is created at the start and one whenever a file is appended."))
                    .arg(QYH("In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."))
                    .arg(QYH("The language for the newly created chapters is set via the chapter language control above.")));
-  Util::setToolTip(ui->chapterGenerationNameTemplate,
-                   Q("%1<p>%2</p>")
-                   .arg(ChapterEditor::Tool::chapterNameTemplateToolTip())
-                   .arg(QYH("If nothing is entered, chapters will be generated but no name will be set.")));
+  Util::setToolTip(ui->chapterGenerationNameTemplate, ChapterEditor::Tool::chapterNameTemplateToolTip());
   Util::setToolTip(ui->chapterGenerationInterval, QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."));
   Util::setToolTip(ui->webmMode,
                    Q("<p>%1 %2</p><p>%3 %4 %5</p><p>%6<p>")
