@@ -3103,9 +3103,6 @@ main(int argc,
 
   if (!g_identifying) {
     create_packetizers();
-    if (g_packetizers.empty() && !g_files.empty())
-      mxerror(Y("No streams to output were found. Aborting.\n"));
-
     check_track_id_validity();
     create_append_mappings_for_playlists();
     check_append_mapping();

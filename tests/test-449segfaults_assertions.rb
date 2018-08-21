@@ -6,7 +6,7 @@ describe "mkvmerge & mkvinfo / segfaults and assertions"
 dir = "data/segfaults-assertions"
 
 test_merge "#{dir}/1089-1.mkv", :exit_code => :error
-test_merge "#{dir}/1089-2.mkv", :exit_code => :error
+test_merge "#{dir}/1089-2.mkv", :exit_code => :warning
 test_merge "#{dir}/1089-3.mkv", :result_type => :exit_code
 
 test_info "#{dir}/1089-1.mkv", :args => "-v -v", :exit_code => :error
