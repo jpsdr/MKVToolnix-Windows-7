@@ -1383,9 +1383,11 @@ prepare_additional_chapter_atoms_for_rendering() {
 
   for (auto const &additional_chapter : s_additional_chapter_atoms) {
     auto atom = cons<KaxChapterAtom>(new KaxChapterUID,       create_unique_number(UNIQUE_CHAPTER_IDS),
-                                     new KaxChapterTimeStart, (std::get<0>(additional_chapter) - offset).to_ns(),
-                                     cons<KaxChapterDisplay>(new KaxChapterString,   std::get<1>(additional_chapter),
-                                                             new KaxChapterLanguage, std::get<2>(additional_chapter)));
+                                     new KaxChapterTimeStart, (std::get<0>(additional_chapter) - offset).to_ns());
+    if (!std::get<1>(additional_chapter).empty())
+      atom->PushElement(*cons<KaxChapterDisplay>(new KaxChapterString,   std::get<1>(additional_chapter),
+                                                 new KaxChapterLanguage, std::get<2>(additional_chapter)));
+
     edition.PushElement(*atom);
   }
 

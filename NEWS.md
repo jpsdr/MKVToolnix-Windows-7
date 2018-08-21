@@ -7,6 +7,10 @@
 * MKVToolNix GUI: the GUI will no longer automatically resize the columns in
   tree and list views to match the content size. Instead it remembers and
   restores the widths set by the user. Implements #2353.
+* mkvmerge: chapter generation: if the name template given by
+  `--generate-chapters-name-template` is empty, no names (`ChapterDisplay`
+  master elements with `ChapterString`/`ChapterLanguage` children) will be
+  generated for the chapter atoms. Part of the implementation of #2275.
 
 ## Bug fixes
 
