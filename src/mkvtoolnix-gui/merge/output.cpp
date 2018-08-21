@@ -205,7 +205,7 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(ui->chapterGenerationNameTemplate,
                    Q("%1<p>%2</p>")
                    .arg(ChapterEditor::Tool::chapterNameTemplateToolTip())
-                   .arg(QYH("If nothing is entered the default 'Chapter <NUM:2>' will be used.")));
+                   .arg(QYH("If nothing is entered, chapters will be generated but no name will be set.")));
   Util::setToolTip(ui->chapterGenerationInterval, QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."));
   Util::setToolTip(ui->webmMode,
                    Q("<p>%1 %2</p><p>%3 %4 %5</p><p>%6<p>")
@@ -647,11 +647,8 @@ Tab::hasDestinationFileName()
 void
 Tab::onChapterGenerationModeChanged() {
   m_config.m_chapterGenerationMode = static_cast<MuxConfig::ChapterGenerationMode>(ui->chapterGenerationMode->currentIndex());
-  auto isEnabled                   = MuxConfig::ChapterGenerationMode::None      != m_config.m_chapterGenerationMode;
   auto isInterval                  = MuxConfig::ChapterGenerationMode::Intervals == m_config.m_chapterGenerationMode;
 
-  ui->chapterGenerationNameTemplate->setEnabled(isEnabled);
-  ui->chapterGenerationNameTemplateLabel->setEnabled(isEnabled);
   ui->chapterGenerationInterval->setEnabled(isInterval);
   ui->chapterGenerationIntervalLabel->setEnabled(isInterval);
 }

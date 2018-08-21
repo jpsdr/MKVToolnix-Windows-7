@@ -17,6 +17,12 @@
 * mkvmerge: mkvmerge will no longer abort with an error message if no audio,
   video and subtitle tracks should be multiplexed. This allows copying of
   chapters from non-chapter source files (e.g. Matroska or MP4 files).
+* MKVToolNix GUI: multiplexer: the chapter name template will now be set
+  automatically to the name template in the preferences' "chapter editor"
+  section. Additionally the option `--generate-chapters-name-template …` will
+  be passed to mkvmerge in situations when mkvmerge will generate chapters
+  (either because automatic generation is enabled or if chapters are generated
+  for MPLS playlists). Part of the implementation of #2275.
 
 ## Bug fixes
 

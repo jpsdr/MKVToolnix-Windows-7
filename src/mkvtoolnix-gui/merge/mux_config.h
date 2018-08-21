@@ -97,6 +97,7 @@ public:
   QStringList buildMkvmergeOptions() const;
 
   virtual bool hasSourceFileWithTitle() const;
+  virtual bool needChapterNameTemplateAndLanguage() const;
 
   virtual void debugDumpFileList() const;
   virtual void debugDumpTrackList() const;

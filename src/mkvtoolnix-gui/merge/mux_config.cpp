@@ -82,8 +82,10 @@ MuxConfig::MuxConfig(QString const &fileName)
   , m_linkFiles{false}
   , m_webmMode{false}
 {
-  auto &settings      = Util::Settings::get();
-  m_additionalOptions = settings.m_defaultAdditionalMergeOptions;
+  auto &settings                  = Util::Settings::get();
+  m_additionalOptions             = settings.m_defaultAdditionalMergeOptions;
+  m_chapterGenerationNameTemplate = settings.m_chapterNameTemplate;
+  m_chapterLanguage               = settings.m_defaultChapterLanguage;
 }
 
 MuxConfig::~MuxConfig() {
@@ -492,10 +494,12 @@ MuxConfig::buildMkvmergeOptions()
     options << Q("--chapters") << m_chapters;
   }
 
-  if (ChapterGenerationMode::None != m_chapterGenerationMode) {
-    add(Q("--chapter-language"),                m_chapterLanguage);
-    add(Q("--generate-chapters-name-template"), m_chapterGenerationNameTemplate);
+  if (needChapterNameTemplateAndLanguage()) {
+    add(Q("--chapter-language"), m_chapterLanguage);
+    options << Q("--generate-chapters-name-template") << m_chapterGenerationNameTemplate;
+  }
 
+  if (ChapterGenerationMode::None != m_chapterGenerationMode) {
     options << Q("--generate-chapters");
 
     if (ChapterGenerationMode::WhenAppending == m_chapterGenerationMode)
@@ -573,6 +577,25 @@ MuxConfig::debugDumpSpecificTrackList(QList<Track *> const &tracks) {
 QString
 MuxConfig::settingsType() {
   return Q("MuxConfig");
+}
+
+bool
+MuxConfig::needChapterNameTemplateAndLanguage()
+  const {
+  if (ChapterGenerationMode::None != m_chapterGenerationMode)
+    return true;
+
+  for (auto const &file : m_files) {
+    // Check for MPLS playlists with chapters.
+    if (!file->m_isPlaylist)
+      continue;
+
+    for (auto const &track : file->m_tracks)
+      if (track->m_muxThis && track->isChapters())
+        return true;
+  }
+
+  return false;
 }
 
 }}}
