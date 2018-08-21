@@ -22,6 +22,7 @@
 #include "common/checksums/crc.h"
 #include "common/checksums/base_fwd.h"
 #include "common/clpi.h"
+#include "common/construct.h"
 #include "common/endian.h"
 #include "common/file.h"
 #include "common/hdmv_textst.h"
@@ -38,12 +39,15 @@
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
 #include "common/strings/formatting.h"
+#include "common/unique_numbers.h"
 #include "input/aac_framing_packet_converter.h"
 #include "input/bluray_pcm_channel_removal_packet_converter.h"
 #include "input/dvbsub_pes_framing_removal_packet_converter.h"
 #include "input/r_mpeg_ts.h"
 #include "input/teletext_to_srt_packet_converter.h"
 #include "input/truehd_ac3_splitting_packet_converter.h"
+#include "merge/cluster_helper.h"
+#include "merge/output_control.h"
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_avc_es.h"
@@ -1279,31 +1283,31 @@ reader_c::process_chapter_entries() {
 
   std::stable_sort(m_chapter_timestamps.begin(), m_chapter_timestamps.end());
 
-  auto af_out = std::make_shared<mm_mem_io_c>(nullptr, 0, 1000);
-  auto &out   = *af_out;
-  out.set_file_name(m_ti.m_fname);
-  out.write_bom("UTF-8");
+  m_chapters.reset(new libmatroska::KaxChapters);
+  auto name_template  = g_cluster_helper->get_chapter_generation_name_template();
+  auto chapter_number = 0;
+  auto &edition       = GetChild<libmatroska::KaxEditionEntry>(*m_chapters);
+  auto language       = !m_ti.m_chapter_language.empty() ? m_ti.m_chapter_language
+                      : !g_default_language.empty()      ? g_default_language
+                      :                                    std::string{"eng"};
 
-  size_t idx = 0;
-  for (auto &timestamp : m_chapter_timestamps) {
-    ++idx;
-    auto ms = timestamp.to_ms();
-    out.puts(boost::format("CHAPTER%|1$02d|=%|2$02d|:%|3$02d|:%|4$02d|.%|5$03d|\n"
-                           "CHAPTER%|1$02d|NAME=Chapter %1%\n")
-             % idx
-             % ( ms / 60 / 60 / 1000)
-             % ((ms      / 60 / 1000) %   60)
-             % ((ms           / 1000) %   60)
-             % ( ms                   % 1000));
+  GetChild<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+
+  for (auto const &timestamp : m_chapter_timestamps) {
+    ++chapter_number;
+
+    auto name = mtx::chapters::format_name_template(name_template, chapter_number, timestamp);
+    auto atom = mtx::construct::cons<libmatroska::KaxChapterAtom>(new libmatroska::KaxChapterUID,       create_unique_number(UNIQUE_CHAPTER_IDS),
+                                                                  new libmatroska::KaxChapterTimeStart, timestamp.to_ns());
+
+    if (!name.empty())
+      atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   name,
+                                                                              new libmatroska::KaxChapterLanguage, language));
+
+    edition.PushElement(*atom);
   }
 
-  mm_text_io_c text_out(af_out);
-  try {
-    m_chapters = mtx::chapters::parse(&text_out, 0, -1, 0, m_ti.m_chapter_language, "", true);
-    mtx::chapters::align_uids(m_chapters.get());
-
-  } catch (mtx::chapters::parser_x &ex) {
-  }
+  mtx::chapters::align_uids(m_chapters.get());
 }
 
 reader_c::~reader_c() {

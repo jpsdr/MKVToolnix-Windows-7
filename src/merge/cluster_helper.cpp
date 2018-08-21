@@ -734,6 +734,12 @@ cluster_helper_c::set_chapter_generation_name_template(std::string const &name_t
   m->chapter_generation_name_template.override(name_template);
 }
 
+std::string
+cluster_helper_c::get_chapter_generation_name_template()
+  const {
+  return m->chapter_generation_name_template.get_translated();
+}
+
 void
 cluster_helper_c::verify_and_report_chapter_generation_parameters()
   const {

@@ -11,6 +11,9 @@
   `--generate-chapters-name-template` is empty, no names (`ChapterDisplay`
   master elements with `ChapterString`/`ChapterLanguage` children) will be
   generated for the chapter atoms. Part of the implementation of #2275.
+* mkvmerge: chapters: chapter names generated from MPLS files will now use the
+  name template if one is set via `--generate-chapters-name-template`. Part of
+  the implementation of #2275.
 * mkvmerge: mkvmerge will no longer abort with an error message if no audio,
   video and subtitle tracks should be multiplexed. This allows copying of
   chapters from non-chapter source files (e.g. Matroska or MP4 files).
