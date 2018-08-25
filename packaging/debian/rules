@@ -42,7 +42,7 @@ endif
 override_dh_install:
 	rake install DESTDIR=$(CURDIR)/debian/tmp
 
-	dh_install --list-missing -Xmkvtoolnix.xml
+	dh_install --list-missing -Xorg.bunkus.mkvtoolnix-gui.xml
 
 override_dh_strip:
 	dh_strip -pmkvtoolnix     --dbg-package=mkvtoolnix-dbg
