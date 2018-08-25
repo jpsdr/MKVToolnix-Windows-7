@@ -40,6 +40,10 @@
 * MKVToolNix GUI: info tool: under certain circumstances "cues" were shown at
   the wrong level (inside the previous master element instead of on level
   1). Fixes #2361.
+* MKVToolNix GUI: job queue: fixed invalid memory handling and consequent
+  crashes when using the "edit in corresponding tool & remove from job queue"
+  option if one of the files in that job contained attached files. Fixes
+  #2368.
 
 ## Build system changes
 

@@ -125,11 +125,15 @@ SourceFile::operator =(SourceFile const &other) {
   m_additionalParts.clear();
   m_appendedFiles.clear();
 
-  for (auto const &track : other.m_tracks)
+  for (auto const &track : other.m_tracks) {
     m_tracks << std::make_shared<Track>(*track);
+    m_tracks.back()->m_file = this;
+  }
 
-  for (auto const &attachedFile : other.m_attachedFiles)
+  for (auto const &attachedFile : other.m_attachedFiles) {
     m_attachedFiles << std::make_shared<Track>(*attachedFile);
+    m_attachedFiles.back()->m_file = this;
+  }
 
   for (auto const &file : other.m_additionalParts)
     m_additionalParts << std::make_shared<SourceFile>(*file);
