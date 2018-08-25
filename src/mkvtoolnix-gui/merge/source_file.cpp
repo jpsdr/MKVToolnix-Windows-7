@@ -105,24 +105,25 @@ SourceFile::operator =(SourceFile const &other) {
   if (this == &other)
     return *this;
 
-  m_properties           = other.m_properties;
-  m_fileName             = other.m_fileName;
-  m_type                 = other.m_type;
-  m_appended             = other.m_appended;
-  m_additionalPart       = other.m_additionalPart;
-  m_isPlaylist           = other.m_isPlaylist;
-  m_playlistDuration     = other.m_playlistDuration;
-  m_playlistSize         = other.m_playlistSize;
-  m_playlistChapters     = other.m_playlistChapters;
-  m_playlistFiles        = other.m_playlistFiles;
-  m_appendedTo           = other.m_appendedTo;
-  m_probeRangePercentage = other.m_probeRangePercentage;
+  m_properties                = other.m_properties;
+  m_programMap                = other.m_programMap;
+  m_fileName                  = other.m_fileName;
+  m_type                      = other.m_type;
+  m_playlistFiles             = other.m_playlistFiles;
+  m_appended                  = other.m_appended;
+  m_additionalPart            = other.m_additionalPart;
+  m_isPlaylist                = other.m_isPlaylist;
+  m_dontScanForOtherPlaylists = other.m_dontScanForOtherPlaylists;
+  m_appendedTo                = other.m_appendedTo;
+  m_playlistDuration          = other.m_playlistDuration;
+  m_playlistSize              = other.m_playlistSize;
+  m_playlistChapters          = other.m_playlistChapters;
+  m_probeRangePercentage      = other.m_probeRangePercentage;
 
   m_tracks.clear();
   m_attachedFiles.clear();
   m_additionalParts.clear();
   m_appendedFiles.clear();
-  m_playlistFiles.clear();
 
   for (auto const &track : other.m_tracks)
     m_tracks << std::make_shared<Track>(*track);
