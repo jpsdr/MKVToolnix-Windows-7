@@ -393,7 +393,7 @@ JobPtr
 Job::loadJob(Util::ConfigFile &settings) {
   auto jobType = settings.value("jobType").toString();
 
-  if (jobType.isEmpty())
+  if (jobType.isEmpty() && settings.childKeys().contains("muxConfig"))
     // Older versions didn't write a jobType attribute and only
     // supported MuxJobs.
     jobType = "MuxJob";

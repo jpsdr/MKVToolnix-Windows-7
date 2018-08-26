@@ -22,7 +22,7 @@ protected:
   QString m_fileName;
 
 public:
-  static unsigned int const MtxCfgVersion = 1;
+  static unsigned int const MtxCfgVersion = 2;
 
 public:
   ConfigFile(QString const &fileName);

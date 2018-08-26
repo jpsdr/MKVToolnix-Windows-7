@@ -155,6 +155,52 @@ MuxConfig::operator =(MuxConfig const &other) {
 }
 
 void
+MuxConfig::setSettingsVersion(Util::ConfigFile &settings,
+                              unsigned int version)
+  const {
+  settings.beginGroup(App::settingsBaseGroupName());
+  settings.setValue("version", version);
+  settings.setValue("type",    settingsType());
+  settings.endGroup();
+}
+
+void
+MuxConfig::fixOlderVersions(Util::ConfigFile &settings) {
+  // Config files written until 8.0.0 didn't use that group.
+  if (!settings.childGroups().contains(App::settingsBaseGroupName()))
+    setSettingsVersion(settings, 0);
+
+  // Check supported config file version
+  settings.beginGroup(App::settingsBaseGroupName());
+  auto version = settings.value("version", std::numeric_limits<unsigned int>::max()).toUInt();
+  auto type    = settings.value("type").toString();
+  settings.endGroup();
+
+  if (   (version >  Util::ConfigFile::MtxCfgVersion)
+      || (type    != settingsType()))
+    throw InvalidSettingsX{};
+
+  if (version < 2)
+    fixOldVersion1(settings);
+}
+
+void
+MuxConfig::fixOldVersion1(Util::ConfigFile &settings) {
+  // Starting with MKVToolNix v26/settings file version 2, the chapter
+  // name template being empty means not to generate chapter names at
+  // all. The prior behavior was to fall back to the default name template.
+  settings.beginGroup("global");
+
+  auto nameTemplate = settings.value("chapterGenerationNameTemplate").toString();
+  if (nameTemplate.isEmpty())
+    settings.setValue("chapterGenerationNameTemplate", "Chapter <NUM:2>");
+
+  settings.endGroup();
+
+  setSettingsVersion(settings, 2);
+}
+
+void
 MuxConfig::loadProperties(Util::ConfigFile &settings,
                           QVariantMap &properties) {
   properties.clear();
@@ -197,17 +243,7 @@ void
 MuxConfig::load(Util::ConfigFile &settings) {
   reset();
 
-  // Check supported config file version
-  if (settings.childGroups().contains(App::settingsBaseGroupName())) {
-    settings.beginGroup(App::settingsBaseGroupName());
-    if (   (settings.value("version", std::numeric_limits<unsigned int>::max()).toUInt() > Util::ConfigFile::MtxCfgVersion)
-        || (settings.value("type").toString() != settingsType()))
-      throw InvalidSettingsX{};
-    settings.endGroup();
-
-  } else if (settings.value("version", std::numeric_limits<unsigned int>::max()).toUInt() > Util::ConfigFile::MtxCfgVersion)
-    // Config files written until 8.0.0 didn't use that group.
-    throw InvalidSettingsX{};
+  fixOlderVersions(settings);
 
   settings.beginGroup("input");
 
@@ -289,10 +325,7 @@ MuxConfig::saveProperties(Util::ConfigFile &settings,
 void
 MuxConfig::save(Util::ConfigFile &settings)
   const {
-  settings.beginGroup(App::settingsBaseGroupName());
-  settings.setValue("version", Util::ConfigFile::MtxCfgVersion);
-  settings.setValue("type",    settingsType());
-  settings.endGroup();
+  setSettingsVersion(settings, Util::ConfigFile::MtxCfgVersion);
 
   settings.beginGroup("input");
   saveSettingsGroup("files",       m_files,       settings);

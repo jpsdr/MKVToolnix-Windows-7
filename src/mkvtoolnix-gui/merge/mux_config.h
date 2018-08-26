@@ -107,6 +107,11 @@ protected:
   QStringList buildTrackOrder(QHash<SourceFile *, unsigned int> const &fileNumbers) const;
   QStringList buildAppendToMapping(QHash<SourceFile *, unsigned int> const &fileNumbers) const;
 
+  virtual void fixOlderVersions(Util::ConfigFile &settings);
+  virtual void fixOldVersion1(Util::ConfigFile &settings);
+
+  virtual void setSettingsVersion(Util::ConfigFile &settings, unsigned int version) const;
+
 public:
   static MuxConfigPtr loadSettings(QString const &fileName);
   static void saveProperties(Util::ConfigFile &settings, QVariantMap const &properties);
