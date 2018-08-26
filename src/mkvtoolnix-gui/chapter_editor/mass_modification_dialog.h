@@ -24,6 +24,7 @@ public:
     Multiply            = 0x0040,
     SetEndTimestamps    = 0x0080,
     RemoveEndTimestamps = 0x0100,
+    RemoveNames         = 0x0200,
   };
   Q_DECLARE_FLAGS(Actions, Action);
 

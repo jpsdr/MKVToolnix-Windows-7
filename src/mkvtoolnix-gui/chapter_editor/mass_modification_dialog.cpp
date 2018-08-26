@@ -105,6 +105,7 @@ MassModificationDialog::actions()
   if (m_ui->cbMultiply->isChecked())                                                        result |= Action::Multiply;
   if (m_ui->cbSetEndTimestamps->isEnabled() && m_ui->cbSetEndTimestamps->isChecked())       result |= Action::SetEndTimestamps;
   if (m_ui->cbRemoveEndTimestamps->isEnabled() && m_ui->cbRemoveEndTimestamps->isChecked()) result |= Action::RemoveEndTimestamps;
+  if (m_ui->cbRemoveNames->isChecked())                                                     result |= Action::RemoveNames;
 
   return result;
 }

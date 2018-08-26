@@ -1484,6 +1484,29 @@ Tab::removeEndTimestamps(QStandardItem *startItem) {
 }
 
 void
+Tab::removeNames(QStandardItem *startItem) {
+  auto chapterModel = p_func()->chapterModel;
+
+  if (!startItem)
+    return;
+
+  std::function<void(QStandardItem *)> worker = [chapterModel, &worker](QStandardItem *item) {
+    auto chapter = chapterModel->chapterFromItem(item);
+    if (chapter) {
+      DeleteChildren<KaxChapterDisplay>(*chapter);
+      chapterModel->updateRow(item->index());
+    }
+
+    for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+      worker(item->child(row));
+  };
+
+  worker(startItem);
+
+  setControlsFromStorage();
+}
+
+void
 Tab::massModify() {
   auto p = p_func();
 
@@ -1525,6 +1548,9 @@ Tab::massModify() {
 
   if (actions & MassModificationDialog::RemoveEndTimestamps)
     removeEndTimestamps(item);
+
+  if (actions & MassModificationDialog::RemoveNames)
+    removeNames(item);
 
   setControlsFromStorage();
 }

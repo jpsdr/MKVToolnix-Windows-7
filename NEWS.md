@@ -26,6 +26,9 @@
 * MKVToolNix GUI: chapter editor: if the chapter name template is empty,
   chapters will be generated without names. Part of the implementation of
   #2275.
+* MKVToolNix GUI: chapter editor: added an option to remove all chapter names
+  to the "additional modifications" dialog. Part of the implementation of
+  #2275.
 
 ## Bug fixes
 
