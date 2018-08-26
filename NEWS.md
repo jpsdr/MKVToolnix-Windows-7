@@ -1,4 +1,4 @@
-# Version ?
+# Version 26.0.0 "In The Game" 2018-08-26
 
 ## New features and enhancements
 
