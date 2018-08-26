@@ -2,11 +2,6 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: the font size in the tool selector on the left will scale
-  with the font size the user selects in the preferences.
-* MKVToolNix GUI: the GUI will no longer automatically resize the columns in
-  tree and list views to match the content size. Instead it remembers and
-  restores the widths set by the user. Implements #2353.
 * mkvmerge: chapter generation: if the name template given by
   `--generate-chapters-name-template` is empty, no names (`ChapterDisplay`
   master elements with `ChapterString`/`ChapterLanguage` children) will be
@@ -17,6 +12,11 @@
 * mkvmerge: mkvmerge will no longer abort with an error message if no audio,
   video and subtitle tracks should be multiplexed. This allows copying of
   chapters from non-chapter source files (e.g. Matroska or MP4 files).
+* MKVToolNix GUI: the font size in the tool selector on the left will scale
+  with the font size the user selects in the preferences.
+* MKVToolNix GUI: the GUI will no longer automatically resize the columns in
+  tree and list views to match the content size. Instead it remembers and
+  restores the widths set by the user. Implements #2353.
 * MKVToolNix GUI: multiplexer: the chapter name template will now be set
   automatically to the name template in the preferences' "chapter editor"
   section. Additionally the option `--generate-chapters-name-template …` will
@@ -35,11 +35,11 @@
 * mkvmerge: Matroska reader: fixed wrong timestamps when appending Matroska
   files where the second Matroska file's first timestamp is bigger
   than 0. Fixes #2345.
+* mkvmerge: MP4 reader: fixed division by zero errors during file
+  identification if the timescale is 0 in the `MVHD` atom.
 * mkvmerge: Windows Television DVR files are now recognized as an unsupported
   file type. This prevents mis-detection as MPEG-2 with an accompanying flood
   of error messages. Fixes #2347.
-* mkvmerge: MP4 reader: fixed division by zero errors during file
-  identification if the timescale is 0 in the `MVHD` atom.
 * MKVToolNix GUI: info tool: under certain circumstances "cues" were shown at
   the wrong level (inside the previous master element instead of on level
   1). Fixes #2361.
