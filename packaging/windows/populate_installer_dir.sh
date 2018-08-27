@@ -9,8 +9,8 @@ zmodload zsh/pcre
 script_dir=${${0:a}:h}
 src_dir=${script_dir}/../..
 src_dir=${src_dir:a}
-no_strip=0
-is_shared=0
+no_strip=${no_strip:-0}
+is_shared=${is_shared:-0}
 
 if [[ -f ${script_dir}/conf.sh ]] source ${script_dir}/conf.sh
 
