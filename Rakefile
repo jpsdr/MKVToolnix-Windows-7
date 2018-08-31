@@ -201,6 +201,13 @@ def setup_compiler_specifics
 end
 
 def define_default_task
+  if !c(:DEFAULT_TARGET).empty?
+    desc "Build target '#{c(:DEFAULT_TARGET)}' by default"
+    task :default => c(:DEFAULT_TARGET)
+
+    return
+  end
+
   desc "Build everything"
 
   # The applications themselves
