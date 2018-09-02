@@ -160,8 +160,10 @@ Section "Program files" SEC01
   File /r "../locale"
   File /r "../share"
 
+  ; Both if Qt is linked shared and if Dr. MinGW is used:
+  File /nonfatal "../*.dll"
+
 !if ${MTX_LINK_TYPE} == "shared"
-  File "../*.dll"
   File "../qt.conf"
   File /r "../plugins"
 !endif

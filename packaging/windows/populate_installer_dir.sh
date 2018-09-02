@@ -98,6 +98,28 @@ EOF
   print -- " done"
 }
 
+function copy_drmingw_dlls {
+  local drmingw_dir
+
+  cd ${src_dir}
+
+  if [[ -f build-config.local ]]; then
+    drmingw_dir="$(awk -F= '/^DRMINGW_PATH/ { gsub("^ +| +$", "", $2); print $2 }' < build-config.local)"
+  fi
+
+  if [[ -z ${drmingw_dir} ]]; then
+    drmingw_dir="$(awk -F= '/^DRMINGW_PATH/ { gsub("^ +| +$", "", $2); print $2 }' < build-config)"
+  fi
+
+  if [[ -z ${drmingw_dir} ]] return
+
+  print -n -- "Copying Dr. MinGW DLLs…"
+
+  cp ${drmingw_dir}/bin/*.dll ${tgt_dir}/
+
+  echo " done"
+}
+
 function copy_files {
   local qt5trdir lang baseqm mo qm
   print -n -- "Copying files…"
@@ -208,6 +230,7 @@ setup_variables
 create_directories
 copy_files
 copy_dlls
+copy_drmingw_dlls
 strip_files
 sign_exes
 

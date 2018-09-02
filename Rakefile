@@ -134,6 +134,7 @@ def setup_globals
   cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
   cflags_common           += " -fPIC "                                                   if c?(:USE_QT) && !$building_for[:windows]
   cflags_common           += " -DQT_STATICPLUGIN"                                        if c?(:USE_QT) &&  $building_for[:windows]
+  cflags_common           += " -DUSE_DRMINGW -I#{c(:DRMINGW_PATH)}/include"              if c?(:USE_DRMINGW) &&  $building_for[:windows]
   cflags_common           += " -DMTX_APPIMAGE"                                           if c?(:APPIMAGE_BUILD) && !$building_for[:windows]
 
   cflags                   = "#{cflags_common} #{c(:USER_CFLAGS)}"
@@ -148,6 +149,7 @@ def setup_globals
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
   ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
   ldflags                 += " -Wl,--dynamicbase,--nxcompat"               if $building_for[:windows]
+  ldflags                 += " -L#{c(:DRMINGW_PATH)}/lib"                  if c?(:USE_DRMINGW) &&  $building_for[:windows]
   ldflags                 += " -fsanitize=undefined"                       if c?(:UBSAN)
   ldflags                 += " -fsanitize=address -fno-omit-frame-pointer" if c?(:ADDRSAN)
   ldflags                 += " #{c(:FSTACK_PROTECTOR)}"
@@ -951,6 +953,7 @@ $common_libs = [
 ]
 
 $common_libs += [:cmark] if c?(:USE_QT)
+$common_libs += [:exchndl] if c?(:USE_DRMINGW) && $building_for[:windows]
 if !$libmtxcommon_as_dll
   $common_libs += [
     :matroska,

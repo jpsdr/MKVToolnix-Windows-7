@@ -35,6 +35,12 @@
 #include "common/strings/editing.h"
 #include "common/translation.h"
 
+#if defined(USE_DRMINGW)
+extern "C" {
+# include "exchndl.h"
+}
+#endif
+
 #if defined(SYS_WINDOWS)
 #include "common/fs_sys_helpers.h"
 
@@ -174,6 +180,10 @@ set_process_priority(int priority) {
 void
 mtx_common_init(std::string const &program_name,
                 char const *argv0) {
+#if defined(USE_DRMINGW)
+  ExcHndlInit();
+#endif
+
   random_c::init();
 
   g_cc_local_utf8 = charset_converter_c::init("");
