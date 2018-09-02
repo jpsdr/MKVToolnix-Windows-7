@@ -15,7 +15,7 @@ fi
 
 AC_ARG_WITH(po4a_translate,
   AC_HELP_STRING([--with-po4a-translate=prog],[use prog instead of looking for po4a-translate]),
-  [ PO4A-TRANSLATE="$with_po4a_translate" ],)
+  [ PO4A_TRANSLATE="$with_po4a_translate" ],)
 
 if ! test -z "$PO4A_TRANSLATE"; then
   AC_MSG_CHECKING(for po4a-translate)
