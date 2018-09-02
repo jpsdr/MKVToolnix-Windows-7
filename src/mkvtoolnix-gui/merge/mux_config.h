@@ -99,6 +99,8 @@ public:
   virtual bool hasSourceFileWithTitle() const;
   virtual bool needChapterNameTemplateAndLanguage() const;
 
+  virtual void verifyStructure() const;
+
   virtual void debugDumpFileList() const;
   virtual void debugDumpTrackList() const;
 
@@ -111,6 +113,8 @@ protected:
   virtual void fixOldVersion1(Util::ConfigFile &settings);
 
   virtual void setSettingsVersion(Util::ConfigFile &settings, unsigned int version) const;
+
+  virtual QString findErrorInStructure() const;
 
 public:
   static MuxConfigPtr loadSettings(QString const &fileName);

@@ -1215,6 +1215,8 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
 
   setTitleMaybe(identifiedFiles);
   setOutputFileNameMaybe();
+
+  m_config.verifyStructure();
 }
 
 void

@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/track.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QDir>
@@ -151,7 +152,136 @@ MuxConfig::operator =(MuxConfig const &other) {
     m_tracks << newTrack;
   }
 
+  verifyStructure();
+
   return *this;
+}
+
+QString
+MuxConfig::findErrorInStructure()
+  const {
+  auto isTrackValid = [this](Track *track) -> bool {
+    for (auto const &l1File : m_files) {
+      for (auto const &l1FileTrack : l1File->m_tracks)
+        if (l1FileTrack.get() == track)
+          return true;
+
+      for (auto const &l2File : l1File->m_appendedFiles)
+        for (auto const &l2FileTrack : l2File->m_tracks)
+          if (l2FileTrack.get() == track)
+            return true;
+    }
+
+    return false;
+  };
+
+  auto isSourceFileValid = [this](SourceFile *file) -> bool {
+    for (auto const &l1File : m_files) {
+      if (l1File.get() == file)
+        return true;
+
+      for (auto const &l2File : file->m_appendedFiles)
+        if (l2File.get() == file)
+          return true;
+    }
+
+    return false;
+  };
+
+  std::function<QString(SourceFile &, int)> checkFile;
+  checkFile = [this, &checkFile, &isSourceFileValid, &isTrackValid](SourceFile &file, int level) -> QString {
+    if (file.m_appendedTo) {
+      if (level != 2)
+        return Q("file->m_appendedTo != nullptr in level %1 file").arg(level);
+
+      if (!isSourceFileValid(file.m_appendedTo))
+        return Q("file->m_appendedTo is not valid in level %1 file").arg(level);
+    }
+
+    for (auto const &track : file.m_tracks) {
+      if ((level == 1) && !m_tracks.contains(track.get()))
+        return Q("config->m_tracks does not contain track from level %1 file").arg(level);
+
+      if (!track->m_file)
+        return Q("track->m_file == nullptr in level %1 file").arg(level);
+
+      if (track->m_file != &file)
+        return Q("track->m_file != current file in level %1 file").arg(level);
+
+      if (track->m_appendedTo && !isTrackValid(track->m_appendedTo))
+        return Q("track->m_appendedTo is not valid in level %1 file").arg(level);
+
+      for (auto const &appendedTrack : track->m_appendedTracks) {
+        if (!appendedTrack)
+          return Q("track->m_appendedTrack[idx] == nullptr in level %1 file").arg(level);
+
+        if (!isTrackValid(appendedTrack))
+          return Q("track->m_appendedTrack[idx] is not valid in level %1 file").arg(level);
+      }
+    }
+
+    for (auto const &attachedFile : file.m_attachedFiles) {
+      if (!attachedFile->m_file)
+        return Q("attachedFile->m_file == nullptr in level %1 file").arg(level);
+
+      if (attachedFile->m_file != &file)
+        return Q("attachedFile->m_file != current file in level %1 file").arg(level);
+
+      if (attachedFile->m_appendedTo)
+        return Q("attachedFile->m_appendedTo != nullptr in level %1 file").arg(level);
+
+      if (!attachedFile->m_appendedTracks.isEmpty())
+        return Q("attachedFile->m_appendedTracks is not empty in level %1 file").arg(level);
+    }
+
+    if (level == 1) {
+      for (auto const &appendedFile : file.m_appendedFiles) {
+        auto error = checkFile(*appendedFile, 2);
+        if (!error.isEmpty())
+          return error;
+      }
+
+    } else {
+      for (auto const &appendedFile : file.m_appendedFiles)
+        if (!appendedFile->m_appendedFiles.isEmpty())
+          return Q("m_appendedFiles is not empty on level 2");
+    }
+
+    return {};
+  };
+
+  for (auto const &track : m_tracks)
+    if (!isTrackValid(track))
+      return Q("m_tracks[idx] is not valid");
+
+  for (auto const &file : m_files) {
+    auto error = checkFile(*file, 1);
+    if (!error.isEmpty())
+      return error;
+  }
+
+  return {};
+}
+
+void
+MuxConfig::verifyStructure()
+  const {
+  auto error = findErrorInStructure();
+  if (error.isEmpty())
+    return;
+
+  auto message = QStringList{}
+    << Q("MuxConfig::verifyStructure:")
+    << QY("The following non-recoverable error was found: %1.").arg(error)
+    << Q(BUGMSG)
+    << QY("The application will terminate now.");
+
+  Util::MessageBox::critical(nullptr)
+    ->text(message.join(Q(" ")))
+    .title(QY("Error"))
+    .exec();
+
+  mxexit(4);
 }
 
 void
