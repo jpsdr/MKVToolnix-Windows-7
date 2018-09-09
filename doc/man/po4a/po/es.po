@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
-"POT-Creation-Date: 2018-06-09 20:50+0200\n"
+"POT-Creation-Date: 2018-09-09 22:16+0200\n"
 "PO-Revision-Date: 2018-06-10 11:07+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
@@ -37,7 +37,9 @@ msgstr "26.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-msgid "2018-05-02"
+#, fuzzy
+#| msgid "2018-05-02"
+msgid "2018-08-26"
 msgstr "2018-05-02"
 
 #. type: Content of the mkvmerge entity
@@ -1159,7 +1161,7 @@ msgstr "Los códigos de tiempo se ordenan de principio a fin, y entonces se gene
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:852
 #: doc/man/mkvinfo.xml:274
-#: doc/man/mkvmerge.xml:3150
+#: doc/man/mkvmerge.xml:3149
 #: doc/man/mkvpropedit.xml:688
 msgid "Exit codes"
 msgstr "Códigos de salida"
@@ -1187,7 +1189,7 @@ msgstr "<constant>2</constant> -- Este código de salida es usado después de qu
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:883
 #: doc/man/mkvinfo.xml:304
-#: doc/man/mkvmerge.xml:3181
+#: doc/man/mkvmerge.xml:3180
 #: doc/man/mkvpropedit.xml:728
 msgid "Environment variables"
 msgstr "Variables de entorno"
@@ -1220,7 +1222,7 @@ msgstr "El contenido se trata como si se hubiese pasado a través de la opción 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:910
 #: doc/man/mkvinfo.xml:331
-#: doc/man/mkvmerge.xml:3208
+#: doc/man/mkvmerge.xml:3207
 #: doc/man/mkvpropedit.xml:755
 #: doc/man/mkvtoolnix-gui.xml:132
 msgid "See also"
@@ -1234,7 +1236,7 @@ msgstr "&mkvmerge;, &mkvinfo;, &mkvpropedit;, &mtxgui;"
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:917
 #: doc/man/mkvinfo.xml:338
-#: doc/man/mkvmerge.xml:3215
+#: doc/man/mkvmerge.xml:3214
 #: doc/man/mkvpropedit.xml:762
 #: doc/man/mkvtoolnix-gui.xml:139
 msgid "WWW"
@@ -1243,7 +1245,7 @@ msgstr "WWW"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:919
 #: doc/man/mkvinfo.xml:340
-#: doc/man/mkvmerge.xml:3217
+#: doc/man/mkvmerge.xml:3216
 #: doc/man/mkvpropedit.xml:764
 #: doc/man/mkvtoolnix-gui.xml:141
 msgid "The latest version can always be found at <ulink url=\"https://mkvtoolnix.download/\">the MKVToolNix homepage</ulink>."
@@ -4107,8 +4109,8 @@ msgstr "La distribución mkvtoolnix contiene algunos archivos a modo de ejemplo 
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2812
-#: doc/man/mkvmerge.xml:2969
-#: doc/man/mkvmerge.xml:3012
+#: doc/man/mkvmerge.xml:2968
+#: doc/man/mkvmerge.xml:3011
 msgid "The following lists the supported XML tags, their data types and, where appropriate, the valid range for their values:"
 msgstr "A continuación, se muestran las etiquetas soportadas por XML, sus tipos de datos y, en dónde corresponda, el rango válido para sus valores: "
 
@@ -4191,107 +4193,109 @@ msgstr "&mkvmerge; es capaz de copiar los capítulos de los archivos de entrada 
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2871
-msgid "&matroska; supports an extensive set of tags that is deprecated and a new, simpler system like it is is used in most other containers: <parameter>KEY=VALUE</parameter>. However, in &matroska; these tags can also be nested, and both the <parameter>KEY</parameter> and the <parameter>VALUE</parameter> are elements of their own. The example file <filename>example-tags-2.xml</filename> shows how to use this new system."
+#, fuzzy
+#| msgid "&matroska; supports an extensive set of tags that is deprecated and a new, simpler system like it is is used in most other containers: <parameter>KEY=VALUE</parameter>. However, in &matroska; these tags can also be nested, and both the <parameter>KEY</parameter> and the <parameter>VALUE</parameter> are elements of their own. The example file <filename>example-tags-2.xml</filename> shows how to use this new system."
+msgid "&matroska;'s tag system is similar to that of other containers: a set of <parameter>KEY=VALUE</parameter> pairs. However, in &matroska; these tags can also be nested, and both the <parameter>KEY</parameter> and the <parameter>VALUE</parameter> are elements of their own. The example file <filename>example-tags-2.xml</filename> shows how to use this system."
 msgstr "&matroska; admite un amplio conjunto de etiquetas que están en desuso así como un nuevo sistema, más simple, como se utiliza en la mayoría de los contenedores: <parameter>CLAVE=VALOR</parameter>. Sin embargo, en &matroska; estas etiquetas también se pueden anidar, y tanto la <parameter>CLAVE</parameter> como el <parameter>VALOR</parameter> son elementos propios. El archivo de ejemplo <filename>example-tags-2.xml</filename> muestra cómo usar este nuevo sistema. "
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:2879
+#: doc/man/mkvmerge.xml:2878
 msgid "Scope of the tags"
 msgstr "Alcance de las etiquetas"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2882
+#: doc/man/mkvmerge.xml:2881
 msgid "&matroska; tags do not automatically apply to the complete file. They can, but they also may apply to different parts of the file: to one or more tracks, to one or more chapters, or even to a combination of both. The <ulink url=\"http://matroska.org/technical/specs/index.html\">the &matroska; specification</ulink> gives more details about this fact."
 msgstr "Las etiquetas &matroska; no se aplican automáticamente al archivo entero. Es posible hacerlo, y también a partes diferentes del archivo: a una o más pistas, a una o más capítulos, o incluso a una combinación de ambas. <ulink url=\"http://matroska.org/technical/specs/index.html\">La especificación de Matroska</ulink> proporciona más detalles sobre esto. "
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2888
+#: doc/man/mkvmerge.xml:2887
 msgid "One important fact is that tags are linked to tracks or chapters with the <classname>Targets</classname> &matroska; tag element, and that the UIDs used for this linking are <emphasis>not</emphasis> the track IDs &mkvmerge; uses everywhere. Instead the numbers used are the UIDs which &mkvmerge; calculates automatically (if the track is taken from a file format other than &matroska;) or which are copied from the source file if the track's source file is a &matroska; file. Therefore it is difficult to know which UIDs to use in the tag file before the file is handed over to &mkvmerge;."
 msgstr "Una cosa importante es que las etiquetas están vinculadas a pistas o capítulos con el elemento de etiquetas <classname>Targets</classname> de &matroska;, además los UIDs usados para vincularlos <emphasis>no</emphasis> son los IDs de la pista que &mkvmerge; utiliza en todas partes. En cambio, los números usados son los UIDs que &mkvmerge; calcula automáticamente (si la pista se toma de otro formato de archivo que no sea &matroska; o que se copian desde el archivo de origen si el archivo de origen de la pista es un archivo &matroska;. Por lo tanto, es complicado saber que UIDs se van a usar en el archivo de etiquetas antes de que el archivo se proporcione a &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2896
+#: doc/man/mkvmerge.xml:2895
 msgid "&mkvmerge; knows two options with which you can add tags to &matroska; files: The <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link> and the <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link> options. The difference is that the former option, <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link>, will make the tags apply to the complete file by removing any of those <classname>Targets</classname> elements mentioned above.  The latter option, <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>, automatically inserts the UID that &mkvmerge; generates for the tag specified with the <parameter>TID</parameter> part of the <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link> option."
 msgstr "&mkvmerge; tiene dos opciones con las que se pueden añadir etiquetas a los archivos &matroska;: las opciones <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link> y <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>. La diferencia es que la opción anterior, <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link>, hará que las etiquetas se apliquen al archivo entero mediante la eliminación de cualquiera de los elementos <classname>Targets</classname> mencionados anteriormente. La última opción, <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>, inserta automáticamente el UID que &mkvmerge; genera para la etiqueta especificada con la parte <parameter>TID</parameter> de la opción <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:2908
+#: doc/man/mkvmerge.xml:2907
 msgid "Example"
 msgstr "Ejemplo"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2910
+#: doc/man/mkvmerge.xml:2909
 msgid "Let's say that you want to add tags to a video track read from an <abbrev>AVI</abbrev>. <command>mkvmerge --identify file.avi</command> tells you that the video track's ID (do not mix this ID with the UID!) is 0. So you create your tag file, leave out all <classname>Targets</classname> elements and call &mkvmerge;:"
 msgstr "Supongamos que necesitas añadir etiquetas a una pista de video leída desde un archivo <abbrev>AVI</abbrev>. <command>Mkvmerge --identify archivo.avi</command> informa que el ID de la pista de video (¡No confundir este ID con el UID!) es 0. Así que creará el archivo de etiquetas, dejando a un lado todos los elementos <classname>Targets</classname> e invocar a &mkvmerge;:"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
-#: doc/man/mkvmerge.xml:2915
+#: doc/man/mkvmerge.xml:2914
 #, no-wrap
 msgid "$ mkvmerge -o file.mkv --tags 0:tags.xml file.avi"
 msgstr "mkvmerge -o archivo.mkv --tags 0:etiquetas.xml archivo.avi"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:2919
+#: doc/man/mkvmerge.xml:2918
 msgid "Tag file format"
 msgstr "Formato del archivo de etiquetas"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2921
+#: doc/man/mkvmerge.xml:2920
 msgid "&mkvmerge; supports a &xml; based tag file format. The format is very closely modeled after <ulink url=\"http://matroska.org/technical/specs/index.html\">the &matroska; specification</ulink>. Both the binary and the source distributions of MKVToolNix come with a sample file called <filename>example-tags-2.xml</filename> which simply lists all known tags and which can be used as a basis for real life tag files."
 msgstr "&mkvmerge; admite el formato de archivos de etiquetas basadas en &xml;. El formato es muy similar al modelo de <ulink url=\"http://matroska.org/technical/specs/index.html\">la especificación Matroska</ulink>. Tanto la distribución binaria como la fuente de MKVToolNix vienen acompañadas de un archivo de ejemplo llamado <filename>example-tags-2.xml</filename> que enumera simplemente todas las etiquetas conocidas y que se puede usar como base para las etiquetas de la vida real. "
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2928
+#: doc/man/mkvmerge.xml:2927
 msgid "The basics are:"
 msgstr "Las básicas son:"
 
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
-#: doc/man/mkvmerge.xml:2932
+#: doc/man/mkvmerge.xml:2931
 msgid "The outermost element must be <classname>&lt;Tags&gt;</classname>."
 msgstr "El elemento más externo debe ser <classname>&lt;Tags&gt;</classname>."
 
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
-#: doc/man/mkvmerge.xml:2934
+#: doc/man/mkvmerge.xml:2933
 msgid "One logical tag is contained inside one pair of <classname>&lt;Tag&gt;</classname> &xml; tags."
 msgstr "Una etiqueta lógica está contenido dentro de un par de etiquetas XML <classname>&lt;Tag&gt;</classname>."
 
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
-#: doc/man/mkvmerge.xml:2936
+#: doc/man/mkvmerge.xml:2935
 msgid "White spaces directly before and after tag contents are ignored."
 msgstr "Los espacios en blanco, directamente antes y después del contenido de la etiqueta, se ignoran."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:2941
+#: doc/man/mkvmerge.xml:2940
 msgid "Data types"
 msgstr "Tipos de datos"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2943
+#: doc/man/mkvmerge.xml:2942
 msgid "The new &matroska; tagging system only knows two data types, a UTF-8 string and a binary type. The first is used for the tag's name and the <classname>&lt;String&gt;</classname> element while the binary type is used for the <classname>&lt;Binary&gt;</classname> element."
 msgstr "El nuevo sistema de etiquetado de &matroska; sólo conoce dos tipos de datos, una cadena de texto UTF-8 y un tipo binario. El primero se usa para el nombre de la etiqueta junto con el elemento <classname>&lt;String&gt;</classname> mientras que el tipo binario se usa para el elemento <classname>&lt;Binary&gt;</classname>."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2948
+#: doc/man/mkvmerge.xml:2947
 msgid "As binary data itself would not fit into a &xml; file &mkvmerge; supports two other methods of storing binary data. If the contents of a &xml; tag starts with '<literal>@</literal>' then the following text is treated as a file name. The corresponding file's content is copied into the &matroska; element."
 msgstr "Como dato binario, en si mismo, no tendría sentido en un archivo &xml;, &mkvmerge; admite otros dos métodos para almacenar datos binarios. Si el contenido de una etiqueta &xml; comienza con '<literal>@</literal>' entonces el texto siguiente se trata como un nombre de archivo. El contenido del archivo correspondiente se copia en el elemento &matroska;."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2954
+#: doc/man/mkvmerge.xml:2953
 msgid "Otherwise the data is expected to be <foreignphrase>Base64</foreignphrase> encoded. This is an encoding that transforms binary data into a limited set of <abbrev>ASCII</abbrev> characters and is used e.g. in email programs. &mkvextract; will output <foreignphrase>Base64</foreignphrase> encoded data for binary elements."
 msgstr "De lo contrario, se espera que la información se codifique en <foreignphrase>Base64</foreignphrase>. Esta es una codificación que transforma datos binarios en un conjunto limitado de caracteres <abbrev>ASCII</abbrev> y p.e. se usa en programas de mensajería. &mkvextract; generará datos codificados en <foreignphrase>Base64</foreignphrase> para elementos binarios. "
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:2960
+#: doc/man/mkvmerge.xml:2959
 msgid "The deprecated tagging system knows some more data types which can be found in the official &matroska; tag specs. As &mkvmerge; does not support this system anymore these types aren't described here."
 msgstr "El obsoleto sistema de etiquetado conoce más tipos de datos que se pueden encontrar en las especificaciones oficiales de etiquetas &matroska;. Como &mkvmerge; ya no admite este sistema estos tipos no serán descritos. "
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:2966
+#: doc/man/mkvmerge.xml:2965
 msgid "Known tags for the XML file format"
 msgstr "Etiquetas conocidas para el formato de archivos XML"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
-#: doc/man/mkvmerge.xml:2972
+#: doc/man/mkvmerge.xml:2971
 #, no-wrap
 msgid ""
 "Tags (master)\n"
@@ -4329,27 +4333,27 @@ msgstr ""
 "      Binary (binario)"
 
 #. type: Content of: <refentry><refsect1><title>
-#: doc/man/mkvmerge.xml:2992
+#: doc/man/mkvmerge.xml:2991
 msgid "The segment info XML files"
 msgstr "Archivos XML de información del segmento"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:2995
+#: doc/man/mkvmerge.xml:2994
 msgid "With a segment info XML file it is possible to set certain values in the &quot;segment information&quot; header field of a &matroska; file. All of these values cannot be set via other command line options."
 msgstr "Con archivos XML de información del segmento es posible establecer ciertos valores en el campo del encabezado de &quot;información del segmento&quot; de un archivo &matroska;. Todos estos valores no se pueden establecer a través de otras opciones de la línea de comandos. "
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3000
+#: doc/man/mkvmerge.xml:2999
 msgid "Other &quot;segment information&quot; header fields can be set via command line options but not via the XML file. This includes e.g. the <option><link linkend=\"mkvmerge.description.title\">--title</link></option> and the <option><link linkend=\"mkvmerge.description.timestamp_scale\">--timestamp-scale</link></option> options."
 msgstr "Otros campos del encabezado de &quot;información del segmento&quot; se pueden establecer a través de las opciones de la línea de comandos pero no mediante archivos XML. Eso afecta p.e. las opciones <option><link linkend=\"mkvmerge.description.title\">--title</link></option> y <option><link linkend=\"mkvmerge.description.timestamp_scale\">--timestamp-scale</link></option>."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3006
+#: doc/man/mkvmerge.xml:3005
 msgid "There are other elements that can be set neither via command line options nor via the XML files. These include the following elements: <varname>DateUTC</varname> (also known as the &quot;muxing date&quot;), <varname>MuxingApp</varname>, <varname>WritingApp</varname> and <varname>Duration</varname>. They're always set by &mkvmerge; itself."
 msgstr "Hay otros elementos que no pueden establecerse a través de la línea de comandos ni mediante archivos XML. Eso afecta a los siguientes elementos: <varname>DateUTC</varname> (también conocido como &quot;fecha multiplexado&quot;), <varname>MuxingApp</varname>, <varname>WritingApp</varname> y <varname>Duration</varname>. Estas siempre se establecen mediante &mkvmerge;, en si mismo. "
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvmerge.xml:3015
+#: doc/man/mkvmerge.xml:3014
 #, no-wrap
 msgid ""
 "Info (master)\n"
@@ -4379,88 +4383,88 @@ msgstr ""
 "    ChapterTranslateID (binario)"
 
 #. type: Content of: <refentry><refsect1><title>
-#: doc/man/mkvmerge.xml:3030
+#: doc/man/mkvmerge.xml:3029
 msgid "&matroska; file layout"
 msgstr "Diseño de archivo matroska"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3032
+#: doc/man/mkvmerge.xml:3031
 msgid "The &matroska; file layout is quite flexible. &mkvmerge; will render a file in a predefined way. The resulting file looks like this:"
 msgstr "El diseño de archivo &matroska; es bastante flexible. &mkvmerge; realizará un archivo de una manera concreta. El archivo creado tendrá una apariencia como esta: "
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3036
+#: doc/man/mkvmerge.xml:3035
 msgid "[EBML head] [segment {meta seek #1} [segment information] [track information] {attachments} {chapters} [cluster 1] {cluster 2} ...  {cluster n} {cues} {meta seek #2} {tags}]"
 msgstr "[Encabezado EBML] [segmento {meta seek #1} [información segmento] [información pista] {adjuntos} {capítulos} [clúster 1] {clúster 2} ... {clúster n} {índices} {meta seek #2} {etiquetas}] "
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3041
+#: doc/man/mkvmerge.xml:3040
 msgid "The elements in curly braces are optional and depend on the contents and options used. A couple of notes:"
 msgstr "Los elementos que están entre llaves son opcionales, y dependen del contexto y opciones utilizadas. Unos cuantos apuntes: "
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvmerge.xml:3047
+#: doc/man/mkvmerge.xml:3046
 msgid "meta seek #1 includes only a small number of level 1 elements, and only if they actually exist: attachments, chapters, cues, tags, meta seek #2. Older versions of &mkvmerge; used to put the clusters into this meta seek element as well. Therefore some imprecise guessing was necessary to reserve enough space. It often failed. Now only the clusters are stored in meta seek #2, and meta seek #1 refers to the meta seek element #2."
 msgstr "meta seek #1 sólo incluye un pequeño número de elementos de nivel 1, y sólo si realmente existen: adjuntos, capítulos, índices, etiquetas, meta seek #2. Las versiones anteriores de mkvmerge(1) también colocan los clústers en estos elementos meta seek. Por lo tanto, en algunos casos imprecisos era necesario reservar suficiente espacio. Esto a veces fallaba. Ahora sólo los clústeres son almacenados en meta seek#2, y meta seek #1 se refiere al elemento meta seek #2. "
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvmerge.xml:3055
+#: doc/man/mkvmerge.xml:3054
 msgid "Attachment, chapter and tag elements are only present if they were added."
 msgstr "Los elementos de adjuntos, capítulos y etiquetas sólo están presentes si se han añadidos."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3060
+#: doc/man/mkvmerge.xml:3059
 msgid "The shortest possible &matroska; file would look like this:"
 msgstr "El archivo &matroska; más corto posible se parecería a esto: "
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3064
+#: doc/man/mkvmerge.xml:3063
 msgid "[EBML head] [segment [segment information] [track information] [cluster 1]]"
 msgstr "[Encabezado EBML] [segmento [información segmento] [información pista] [clúster 1]] "
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3068
+#: doc/man/mkvmerge.xml:3067
 msgid "This might be the case for audio-only files."
 msgstr "Este podría ser el caso para archivos de audio. "
 
 #. type: Content of: <refentry><refsect1><title>
-#: doc/man/mkvmerge.xml:3073
+#: doc/man/mkvmerge.xml:3072
 msgid "External timestamp files"
 msgstr "Archivos de códigos de tiempo externos"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3075
+#: doc/man/mkvmerge.xml:3074
 msgid "&mkvmerge; allows the user to chose the timestamps for a specific track himself. This can be used in order to create files with variable frame rate video or include gaps in audio. A frame in this case is the unit that &mkvmerge; creates separately per &matroska; block. For video this is exactly one frame, for audio this is one packet of the specific audio type. E.g. for <abbrev>AC-3</abbrev> this would be a packet containing <constant>1536</constant> samples."
 msgstr "&mkvmerge; permite al usuario elegir los códigos de tiempo para una pista en concreto. Se puede usar para crear archivos con video de tasa de fotogramas variable (VFR) o incluir discontinuidades en el audio. En este caso, un fotograma es la unidad que &mkvmerge; utiliza por cada bloque &matroska; creado. Para el video es exactamente un fotograma, para audio esto es un paquete de un especifico tipo de audio. P.e. para <abbrev>AC-3</abbrev> esto sería un paquete que contiene <constant>1536</constant> muestras. "
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3082
+#: doc/man/mkvmerge.xml:3081
 msgid "Timestamp files that are used when tracks are appended to each other must only be specified for the first part in a chain of tracks.  For example if you append two files, v1.avi and v2.avi, and want to use timestamps then your command line must look something like this:"
 msgstr "Los archivos de códigos de tiempo que se utilizan cuando las pistas se unen a otras, sólo se deben especificar a la primera parte de una sucesión de pistas. Por ejemplo, si unes dos archivos, video1.avi y video2.avi, y deseas usar códigos de tiempo entonces tu línea de comandos se debería parecer a esto: "
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvmerge.xml:3086
+#: doc/man/mkvmerge.xml:3085
 #, no-wrap
 msgid "$ mkvmerge ... --timestamps 0:my_timestamps.txt v1.avi +v2.avi"
 msgstr "mkvmerge ... --timestamps 0:códigos_tiempo.txt video1.avi +video2.avi"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3089
+#: doc/man/mkvmerge.xml:3088
 msgid "There are four formats that are recognized by &mkvmerge;. The first line always contains the version number. Empty lines, lines containing only whitespace and lines beginning with '<literal>#</literal>' are ignored."
 msgstr "Hay cuatro formatos que son reconocidos por &mkvmerge;. La primera línea siempre contiene el número de la versión. Las líneas vacías, con sólo espacios y las que comienzan con '<literal>#</literal>' se ignoran. "
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:3094
+#: doc/man/mkvmerge.xml:3093
 msgid "Timestamp file format v1"
 msgstr "Formato de archivo de código de tiempo v1"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:3096
+#: doc/man/mkvmerge.xml:3095
 msgid "This format starts with the version line. The second line declares the default number of frames per second.  All following lines contain three numbers separated by commas: the start frame (<constant>0</constant> is the first frame), the end frame and the number of frames in this range. The <abbrev>FPS</abbrev> is a floating point number with the dot '<literal>.</literal>' as the decimal point. The ranges can contain gaps for which the default <abbrev>FPS</abbrev> is used. An example:"
 msgstr "Este formato comienza la línea de la versión. La segunda línea declara el número por defecto de fotogramas por segundo. El resto de líneas contienen tres números separados por comas: el fotograma inicial (<constant>0</constant> es el primer fotograma), el último fotograma y el número de fotogramas para este rango. Los Fotogramas Por Segundo (<abbrev>FPS</abbrev>) es un número con un punto decimal '<literal>.</literal>'. Los rangos pueden contener discontinuidades para el <abbrev>FPS</abbrev> usado por defecto. Un ejemplo: "
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
-#: doc/man/mkvmerge.xml:3102
+#: doc/man/mkvmerge.xml:3101
 #, no-wrap
 msgid ""
 "# timestamp format v1\n"
@@ -4474,17 +4478,17 @@ msgstr ""
 "1500,1700,30"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:3109
+#: doc/man/mkvmerge.xml:3108
 msgid "Timestamp file format v2"
 msgstr "Formato de archivo de código de tiempo v2"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:3112
+#: doc/man/mkvmerge.xml:3111
 msgid "In this format each line contains a timestamp for the corresponding frame.  This timestamp must be given in millisecond precision.  It can be a floating point number, but it doesn't have to be.  You <emphasis>have to</emphasis> give at least as many timestamp lines as there are frames in the track.  The timestamps in this file must be sorted.  Example for 25fps:"
 msgstr "En este formato cada línea contiene un código de tiempo para el fotograma correspondiente. Este código de tiempo se debe especificar con una precisión de milisegundos. Puede ser un número decimal o no. Se <emphasis>deben</emphasis> especificar como mínimo tantas líneas de códigos de tiempo como fotogramas tiene la pista. Los códigos de tiempo deben estar ordenados. Por ejemplo para 25fps: "
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
-#: doc/man/mkvmerge.xml:3117
+#: doc/man/mkvmerge.xml:3116
 #, no-wrap
 msgid ""
 "# timestamp format v2\n"
@@ -4498,17 +4502,17 @@ msgstr ""
 "80"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:3124
+#: doc/man/mkvmerge.xml:3123
 msgid "Timestamp file format v3"
 msgstr "Formato de archivo de código de tiempo v3"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:3126
+#: doc/man/mkvmerge.xml:3125
 msgid "In this format each line contains a duration in seconds followed by an optional number of frames per second.  Both can be floating point numbers.  If the number of frames per second is not present the default one is used.  For audio you should let the codec calculate the frame timestamps itself.  For that you should be using <constant>0.0</constant> as the number of frames per second.  You can also create gaps in the stream by using the '<literal>gap</literal>' keyword followed by the duration of the gap.  Example for an audio file:"
 msgstr "En este formato cada línea contiene una duración en segundos seguida por un número opcional de fotogramas por segundo. Ambos campos pueden ser números decimales. Si el número de fotogramas por segundo no se especifica se utiliza el valor predeterminado. Para el audio se debería dejar al códec calcular, por si mismo, el código de tiempo del fotograma. Para eso, debería utilizar <constant>0.0</constant> como el número de fotogramas por segundo. También es posible crear discontinuidades en la secuencia usando la palabra clave '<literal>gap</literal>' seguida por la duración de la discontinuidad. Un ejemplo para el archivo de audio: "
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
-#: doc/man/mkvmerge.xml:3132
+#: doc/man/mkvmerge.xml:3131
 #, no-wrap
 msgid ""
 "# timestamp format v3\n"
@@ -4526,62 +4530,62 @@ msgstr ""
 "2.000,38.236"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvmerge.xml:3141
+#: doc/man/mkvmerge.xml:3140
 msgid "Timestamp file format v4"
 msgstr "Formato de archivo de código de tiempo v4"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvmerge.xml:3143
+#: doc/man/mkvmerge.xml:3142
 msgid "This format is identical to the v2 format.  The only difference is that the timestamps do not have to be sorted.  This format should almost never be used."
 msgstr "Este formato es idéntico al formato v2. La única diferencia es que los códigos de tiempo no tiene que estar ordenados. Este formato casi nunca se debería utilizar. "
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3153
+#: doc/man/mkvmerge.xml:3152
 msgid "&mkvmerge; exits with one of three exit codes:"
 msgstr "&mkvmerge; finaliza con uno de estos tres códigos de salida: "
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvmerge.xml:3159
+#: doc/man/mkvmerge.xml:3158
 msgid "<constant>0</constant> -- This exit codes means that muxing has completed successfully."
 msgstr "<constant>0</constant> -- Este código de salida significa que la extracción se ha realizado correctamente. "
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvmerge.xml:3165
+#: doc/man/mkvmerge.xml:3164
 msgid "<constant>1</constant> -- In this case &mkvmerge; has output at least one warning, but muxing did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting file might be ok or not.  The user is urged to check both the warning and the resulting file."
 msgstr "<constant>1</constant> -- En este caso &mkvmerge; genera una salida con al menos una advertencia, pero la la extracción continuó. Una advertencia es prefijada con el texto '<literal>Advertencia:</literal>'. Dependiendo de los fallos involucrados los archivos creados serán correctos o no. El usuario es instado a que revise tanto las advertencias como los archivos creados. "
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvmerge.xml:3173
+#: doc/man/mkvmerge.xml:3172
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvmerge; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
 msgstr "<constant>2</constant> -- Este código de salida es usado después de que ocurra un error. &mkvmerge; aborta el proceso justo después de mostrar el mensaje de error. El rango de los mensajes de error va desde los argumentos de la línea de comandos, por delante de los errores de lectura/escritura, hasta los archivos erróneos. "
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3184
+#: doc/man/mkvmerge.xml:3183
 msgid "&mkvmerge; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
 msgstr "&mkvmerge; usa las variables predefinidas que se determinan en la configuración local del sistema (p.e. <varname>LANG</varname> y la familia <varname>LC_*</varname>). Variables adicionales: "
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvmerge.xml:3190
+#: doc/man/mkvmerge.xml:3189
 msgid "<varname>MKVMERGE_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgstr "<varname>MKVMERGE_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> y su forma abreviada <varname>MTX_DEBUG</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvmerge.xml:3192
+#: doc/man/mkvmerge.xml:3191
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.debug\"><option>--debug</option></link> option."
 msgstr "El contenido se trata como si se hubiese pasado a través de la opción <link linkend=\"mkvmerge.description.debug\"><option>--debug</option></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvmerge.xml:3198
+#: doc/man/mkvmerge.xml:3197
 msgid "<varname>MKVMERGE_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgstr "<varname>MKVMERGE_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> y su forma abreviada <varname>MTX_ENGAGE</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvmerge.xml:3200
+#: doc/man/mkvmerge.xml:3199
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgstr "El contenido se trata como si se hubiese pasado a través de la opción <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link>."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvmerge.xml:3210
+#: doc/man/mkvmerge.xml:3209
 msgid "&mkvinfo;, &mkvextract;, &mkvpropedit;, &mtxgui;"
 msgstr "&mkvinfo;, &mkvextract;, &mkvpropedit;, &mtxgui;"
 
