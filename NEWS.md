@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: fixed a leak of Windows font resources leading to a general
+  slowdown and subsequent crash. Fixes #2372.
+
+
 # Version 26.0.0 "In The Game" 2018-08-26
 
 ## New features and enhancements

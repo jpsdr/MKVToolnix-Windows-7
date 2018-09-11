@@ -47,6 +47,10 @@ logFontToQFont(LOGFONTW const &logFont) {
 
 QFont
 defaultUiFont() {
+  static boost::optional<QFont> s_font;
+  if (s_font)
+    return *s_font;
+
   try {
     NONCLIENTMETRICSW nonClientMetrics;
 
@@ -57,13 +61,14 @@ defaultUiFont() {
     if (!SystemParametersInfoW(SPI_GETNONCLIENTMETRICS, size, &nonClientMetrics, 0))
       throw false;
 
-    return logFontToQFont(nonClientMetrics.lfMessageFont);
+    s_font.reset(logFontToQFont(nonClientMetrics.lfMessageFont));
 
   } catch (bool) {
     qDebug() << "Windows default font query failed; returning application font";
+    s_font.reset(App::font());
   }
 
-  return App::font();
+  return *s_font;
 }
 
 }}}

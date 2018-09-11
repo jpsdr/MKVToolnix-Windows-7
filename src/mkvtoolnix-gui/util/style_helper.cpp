@@ -71,14 +71,21 @@ StyleHelper::mergedColors(QColor const &colorA,
 
 qreal
 StyleHelper::sidebarFontSize() {
+  static boost::optional<qreal> s_fontSize;
+
+  if (s_fontSize)
+    return *s_fontSize;
+
   auto defaultFont  = mtx::gui::Util::defaultUiFont();
   auto userFontSize = mtx::gui::Util::Settings::get().m_uiFontPointSize;
 
 #if defined(Q_WS_MAC)
-  return userFontSize * 10.0 / defaultFont.pointSizeF();
+  s_fontSize.reset(userFontSize * 10.0 / defaultFont.pointSizeF());
 #else
-  return userFontSize *  7.5 / defaultFont.pointSizeF();
+  s_fontSize.reset(userFontSize *  7.5 / defaultFont.pointSizeF());
 #endif
+
+  return *s_fontSize;
 }
 
 QPalette
