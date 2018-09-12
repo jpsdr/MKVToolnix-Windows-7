@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: the GUI can now ask for confirmation when the
+  user is about to create a file that won't contain audio tracks. It does this
+  by default if at least one source file contains an audio track. Implements
+  #2380.
+
 ## Bug fixes
 
 * MKVToolNix GUI: fixed a leak of Windows font resources leading to a general

@@ -319,6 +319,7 @@ protected:
 
   virtual bool isReadyForMerging();
   virtual bool checkIfOverwritingIsOK();
+  virtual bool checkIfMissingAudioTrackIsOK();
   virtual QString findExistingDestination() const;
 
   virtual void setTitleMaybe(QList<SourceFilePtr> const &files);

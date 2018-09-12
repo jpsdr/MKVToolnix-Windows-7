@@ -380,13 +380,49 @@ Tab::checkIfOverwritingIsOK() {
   return MainWindow::jobTool()->checkIfOverwritingIsOK(m_config.m_destination, findExistingDestination());
 }
 
+bool
+Tab::checkIfMissingAudioTrackIsOK() {
+  auto policy = Util::Settings::get().m_mergeWarnMissingAudioTrack;
+  if (policy == Util::Settings::MergeMissingAudioTrackPolicy::Never)
+    return true;
+
+  auto haveAudioTrack = false;
+
+  for (auto const &file : m_config.m_files)
+    for (auto const &track : file->m_tracks) {
+      if (!track->isAudio())
+        continue;
+
+      if (track->m_muxThis)
+        return true;
+
+      haveAudioTrack = true;
+    }
+
+  if (!haveAudioTrack && (policy == Util::Settings::MergeMissingAudioTrackPolicy::IfAudioTrackPresent))
+    return true;
+
+  auto answer = Util::MessageBox::question(this)
+    ->title(QY("Create file without audio track"))
+    .text(Q("%1 %2")
+          .arg(QY("With the current multiplex settings the destination file will not contain an audio track."))
+          .arg(QY("Do you want to continue?")))
+    .buttonLabel(QMessageBox::Yes, QY("&Create file without audio track"))
+    .buttonLabel(QMessageBox::No,  QY("Cancel"))
+    .exec();
+
+  return answer == QMessageBox::Yes;
+}
+
 void
 Tab::addToJobQueue(bool startNow,
                    boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings) {
   updateConfigFromControlValues();
   setOutputFileNameMaybe();
 
-  if (!isReadyForMerging() || !checkIfOverwritingIsOK())
+  if (   !isReadyForMerging()
+      || !checkIfOverwritingIsOK()
+      || !checkIfMissingAudioTrackIsOK())
     return;
 
   auto &cfg      = Util::Settings::get();

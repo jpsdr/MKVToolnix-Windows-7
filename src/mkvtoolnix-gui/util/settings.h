@@ -111,6 +111,12 @@ public:
     VerticalTabWidget,
   };
 
+  enum class MergeMissingAudioTrackPolicy {
+    Never,
+    IfAudioTrackPresent,
+    Always,
+  };
+
   class RunProgramConfig {
   public:
     RunProgramType m_type{RunProgramType::ExecuteProgram};
@@ -151,6 +157,7 @@ public:
   MergeAddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
   HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;
+  MergeMissingAudioTrackPolicy m_mergeWarnMissingAudioTrack;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
   bool m_autoDestinationOnlyForVideoFiles;

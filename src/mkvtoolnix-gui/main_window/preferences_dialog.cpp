@@ -91,6 +91,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupEnableMuxingTracksByType();
   setupEnableMuxingTracksByLanguage();
   setupMergeAddingAppendingFilesPolicy();
+  setupMergeWarnMissingAudioTrack();
   setupTrackPropertiesLayout();
 
   // Info tool page
@@ -313,6 +314,8 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."))
                    .arg(QY("The default is to always add all the files to the current multiplex settings."))
                    .arg(QY("The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those.")));
+
+  Util::setToolTip(ui->cbMWarnMissingAudioTrack, QY("The GUI can ask for confirmation when you're about to create a file without audio tracks in it."));
 
   Util::setToolTip(ui->cbMDeriveAudioTrackLanguageFromFileName,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
@@ -609,6 +612,19 @@ PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
 }
 
 void
+PreferencesDialog::setupMergeWarnMissingAudioTrack() {
+  ui->cbMWarnMissingAudioTrack->addItem(QY("Never"),                                           static_cast<int>(Util::Settings::MergeMissingAudioTrackPolicy::Never));
+  ui->cbMWarnMissingAudioTrack->addItem(QY("If audio tracks are present but none is enabled"), static_cast<int>(Util::Settings::MergeMissingAudioTrackPolicy::IfAudioTrackPresent));
+  ui->cbMWarnMissingAudioTrack->addItem(QY("Even if no audio tracks are present"),             static_cast<int>(Util::Settings::MergeMissingAudioTrackPolicy::Always));
+
+  Util::setComboBoxIndexIf(ui->cbMWarnMissingAudioTrack, [this](QString const &, QVariant const &data) {
+    return data.isValid() && (static_cast<Util::Settings::MergeMissingAudioTrackPolicy>(data.toInt()) == m_cfg.m_mergeWarnMissingAudioTrack);
+  });
+
+  Util::fixComboBoxViewWidth(*ui->cbMWarnMissingAudioTrack);
+}
+
+void
 PreferencesDialog::setupHeaderEditorDroppedFilesPolicy() {
   ui->cbHEDroppedFilesPolicy->addItem(QY("Always ask the user"),                                 static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Ask));
   ui->cbHEDroppedFilesPolicy->addItem(QY("Open all files as tabs in the header editor"),         static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Open));
@@ -741,6 +757,7 @@ PreferencesDialog::save() {
   m_cfg.m_mergeEnableDialogNormGainRemoval              = ui->cbMEnableDialogNormGainRemoval->isChecked();
   m_cfg.m_mergeAddingAppendingFilesPolicy               = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysShowOutputFileControls             = ui->cbMAlwaysShowOutputFileControls->isChecked();
+  m_cfg.m_mergeWarnMissingAudioTrack                    = static_cast<Util::Settings::MergeMissingAudioTrackPolicy>(ui->cbMWarnMissingAudioTrack->currentData().toInt());
   m_cfg.m_mergeTrackPropertiesLayout                    = ui->rbMTrackPropertiesLayoutHorizontalScrollArea->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalScrollArea
                                                         : ui->rbMTrackPropertiesLayoutHorizontalTwoColumns->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns
                                                         :                                                                 Util::Settings::TrackPropertiesLayout::VerticalTabWidget;
