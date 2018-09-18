@@ -217,6 +217,32 @@
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvmerge.description.chapter_sync">
+     <term><option>--chapter-sync</option> <parameter>d<optional>,o<optional>/p</optional></optional></parameter></term>
+     <listitem>
+      <para>
+       Adjust the timestamps of the chapters in the following source file by <parameter>d</parameter> ms. Alternatively you can use the
+       <option>--sync</option> option with the special track ID <constant>-2</constant> (see section <link
+       linkend="mkvmerge.track_ids.special_ids">special track IDs</link>).
+      </para>
+
+      <para>
+       <parameter>o</parameter>/<parameter>p</parameter>: adjust the timestamps by <parameter>o</parameter>/<parameter>p</parameter> to fix
+       linear drifts. <parameter>p</parameter> defaults to 1 if omitted. Both <parameter>o</parameter> and <parameter>p</parameter> can be
+       floating point numbers.
+      </para>
+
+      <para>
+       Defaults: no manual sync correction (which is the same as <parameter>d</parameter> = <constant>0</constant> and
+       <parameter>o</parameter>/<parameter>p</parameter> = <constant>1.0</constant>).
+      </para>
+
+      <para>
+       This option can be used multiple times for an input file applying to several tracks by selecting different track IDs each time.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.generate_chapters">
      <term><option>--generate-chapters</option> <parameter>mode</parameter></term>
      <listitem>
@@ -2371,63 +2397,80 @@ $ mkvmerge -o MM-complete.mkv MyMovie-with-sound.mkv MyMovie-add-audio.ogg</scre
  <refsect1 id="mkvmerge.track_ids">
   <title>Track IDs</title>
 
-  <para>
-   Some of the options for &mkvmerge; need a track ID to specify which track they should be applied to.  Those track IDs are printed by the
-   readers when demuxing the current input file, or if &mkvmerge; is called with the <link
-   linkend="mkvmerge.description.identify"><option>--identify</option></link> option.  An example for such output:
-  </para>
+  <refsect2 id="mkvmerge.track_ids.regular_ids">
+   <title>Regular track IDs</title>
 
-  <screen>$ mkvmerge -i v.mkv
+   <para>
+    Some of the options for &mkvmerge; need a track ID to specify which track they should be applied to.  Those track IDs are printed by the
+    readers when demuxing the current input file, or if &mkvmerge; is called with the <link
+    linkend="mkvmerge.description.identify"><option>--identify</option></link> option.  An example for such output:
+   </para>
+
+   <screen>$ mkvmerge -i v.mkv
 File 'v.mkv': container: &matroska;
 Track ID 0: video (V_MS/VFW/FOURCC, DIV3)
 Track ID 1: audio (A_MPEG/L3)</screen>
 
-  <para>
-   Do not confuse the track IDs that are assigned to the tracks that are placed in the output MKV file with the track IDs of the input
-   files. Only the input file track IDs are used for options needing these values.
-  </para>
+   <para>
+    Do not confuse the track IDs that are assigned to the tracks that are placed in the output MKV file with the track IDs of the input
+    files. Only the input file track IDs are used for options needing these values.
+   </para>
 
-  <para>
-   Also note that each input file has its own set of track IDs. Therefore the track IDs for file '<filename>file1.ext</filename>' as
-   reported by '<literal>mkvmerge --identify</literal>' do not change no matter how many other input files are there or in which position
-   '<filename>file1.ext</filename>' is used.
-  </para>
+   <para>
+    Also note that each input file has its own set of track IDs. Therefore the track IDs for file '<filename>file1.ext</filename>' as
+    reported by '<literal>mkvmerge --identify</literal>' do not change no matter how many other input files are there or in which position
+    '<filename>file1.ext</filename>' is used.
+   </para>
 
-  <para>
-   Track IDs are assigned like this:
-  </para>
+   <para>
+    Track IDs are assigned like this:
+   </para>
 
-  <itemizedlist>
-   <listitem>
-    <para>
-     <abbrev>AVI</abbrev> files: The video track has the ID 0. The audio tracks get IDs in ascending order starting at 1.
-    </para>
-   </listitem>
+   <itemizedlist>
+    <listitem>
+     <para>
+      <abbrev>AVI</abbrev> files: The video track has the ID 0. The audio tracks get IDs in ascending order starting at 1.
+     </para>
+    </listitem>
 
-   <listitem>
-    <para>
-     <abbrev>AAC</abbrev>, <abbrev>AC-3</abbrev>, <abbrev>MP3</abbrev>, <abbrev>SRT</abbrev> and <abbrev>WAV</abbrev> files: The one 'track'
-     in that file gets the ID 0.
-    </para>
-   </listitem>
+    <listitem>
+     <para>
+      <abbrev>AAC</abbrev>, <abbrev>AC-3</abbrev>, <abbrev>MP3</abbrev>, <abbrev>SRT</abbrev> and <abbrev>WAV</abbrev> files: The one 'track'
+      in that file gets the ID 0.
+     </para>
+    </listitem>
 
-   <listitem>
-    <para>
-     Most other files: The track IDs are assigned in order the tracks are found in the file starting at 0.
-    </para>
-   </listitem>
-  </itemizedlist>
+    <listitem>
+     <para>
+      Most other files: The track IDs are assigned in order the tracks are found in the file starting at 0.
+     </para>
+    </listitem>
+   </itemizedlist>
 
-  <para>
-   The special track ID '<constant>-1</constant>' is a wild card and applies the given switch to all tracks that are read from an input
-   file.
-  </para>
+   <para>
+    The options that use the track IDs are the ones whose description contains '<literal>TID</literal>'.  The following options use track IDs
+    as well: <option>--audio-tracks</option>, <option>--video-tracks</option>, <option>--subtitle-tracks</option>,
+    <option>--button-tracks</option> and <option>--track-tags</option>.
+   </para>
+  </refsect2>
 
-  <para>
-   The options that use the track IDs are the ones whose description contains '<literal>TID</literal>'.  The following options use track IDs
-   as well: <option>--audio-tracks</option>, <option>--video-tracks</option>, <option>--subtitle-tracks</option>,
-   <option>--button-tracks</option> and <option>--track-tags</option>.
-  </para>
+  <refsect2 id="mkvmerge.track_ids.special_ids">
+   <title>Special track IDs</title>
+
+   <para>
+    There are several IDs that have special meaning and do not occur in the identification output.
+   </para>
+
+   <para>
+    The special track ID '<constant>-1</constant>' is a wild card and applies the given switch to all tracks that are read from an input
+    file.
+   </para>
+
+   <para>
+    The special track ID '<constant>-2</constant>' refers to the chapters in a source file. Currently only the <option>--sync</option> uses
+    this special ID. As an alternative to <option>--sync 2:…</option> the option <option>--chapter-sync …</option> can be used.
+   </para>
+  </refsect2>
  </refsect1>
 
  <refsect1 id="mkvmerge.text_files_and_charsets">
