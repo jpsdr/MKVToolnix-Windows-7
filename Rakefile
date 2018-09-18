@@ -189,10 +189,15 @@ def setup_macos_specifics
 end
 
 def setup_compiler_specifics
-  # ccache and certain versions of zapcc don't seem to be playing well
-  # together. As zapcc's servers do the caching already, disable
-  # ccache if compiling with zapcc.
-  ENV['CCACHE_DISABLE'] = "1" if %r{zapcc}.match(c(:CXX) + c(:CC))
+  if %r{zapcc}.match(c(:CXX) + c(:CC))
+    # ccache and certain versions of zapcc don't seem to be playing well
+    # together. As zapcc's servers do the caching already, disable
+    # ccache if compiling with zapcc.
+    ENV['CCACHE_DISABLE'] = "1"
+
+    # zapcc doesn't support pre-compiled headers.
+    ENV['USE_PRECOMPILED_HEADERS'] = "0"
+  end
 end
 
 def define_default_task
