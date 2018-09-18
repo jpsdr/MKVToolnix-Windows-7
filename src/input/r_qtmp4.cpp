@@ -1211,6 +1211,11 @@ qtmp4_reader_c::process_chapter_entries(int level,
     m_chapters = mtx::chapters::parse(&text_out, 0, -1, 0, m_ti.m_chapter_language, "", true);
     mtx::chapters::align_uids(m_chapters.get());
 
+    auto const &sync = mtx::includes(m_ti.m_timestamp_syncs, track_info_c::chapter_track_id) ? m_ti.m_timestamp_syncs[track_info_c::chapter_track_id]
+                     : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
+                     :                                                                         timestamp_sync_t{};
+    mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.numerator, sync.denominator);
+
   } catch (mtx::chapters::parser_x &ex) {
     mxerror(boost::format(Y("The MP4 file '%1%' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n")) % m_ti.m_fname);
   }
@@ -2039,6 +2044,9 @@ qtmp4_reader_c::add_available_track_ids() {
 
   for (i = 0; i < m_demuxers.size(); ++i)
     add_available_track_id(m_demuxers[i]->id);
+
+  if (m_chapters)
+    add_available_track_id(track_info_c::chapter_track_id);
 }
 
 std::string

@@ -1308,6 +1308,11 @@ reader_c::process_chapter_entries() {
   }
 
   mtx::chapters::align_uids(m_chapters.get());
+
+  auto const &sync = mtx::includes(m_ti.m_timestamp_syncs, track_info_c::chapter_track_id) ? m_ti.m_timestamp_syncs[track_info_c::chapter_track_id]
+                   : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
+                   :                                                                         timestamp_sync_t{};
+  mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.numerator, sync.denominator);
 }
 
 reader_c::~reader_c() {
@@ -2375,6 +2380,9 @@ reader_c::create_packetizers() {
 void
 reader_c::add_available_track_ids() {
   add_available_track_id_range(0, m_tracks.size() - 1);
+
+  if (m_chapters)
+    add_available_track_id(track_info_c::chapter_track_id);
 }
 
 bool

@@ -93,6 +93,13 @@ set_usage() {
   usage_text += Y("  --chapters <file>        Read chapter information from the file.\n");
   usage_text += Y("  --chapter-language <lng> Set the 'language' element in chapter entries.\n");
   usage_text += Y("  --chapter-charset <cset> Charset for a simple chapter file.\n");
+  usage_text += Y("  --chapter-sync <d[,o[/p]]>\n"
+                  "                           Synchronize, adjust the chapters's timestamps\n"
+                  "                           by 'd' ms.\n"
+                  "                           'o/p': Adjust the timestamps by multiplying with\n"
+                  "                           'o/p' to fix linear drifts. 'p' defaults to\n"
+                  "                           1 if omitted. Both 'o' and 'p' can be\n"
+                  "                           floating point numbers.\n");
   usage_text += Y("  --cue-chapter-name-format <format>\n"
                   "                           Pattern for the conversion from cue sheet\n"
                   "                           entries to chapter names.\n");
@@ -563,24 +570,31 @@ parse_arg_tracks(std::string s,
 static void
 parse_arg_sync(std::string s,
                std::string const &opt,
-               track_info_c &ti) {
+               track_info_c &ti,
+               boost::optional<int64_t> force_track_id) {
   timestamp_sync_t tcsync;
 
   // Extract the track number.
-  std::string orig               = s;
-  std::vector<std::string> parts = split(s, ":", 2);
-  if (parts.size() != 2)
-    mxerror(boost::format(Y("Invalid sync option. No track ID specified in '%1% %2%'.\n")) % opt % s);
-
+  auto orig  = s;
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
-    mxerror(boost::format(Y("Invalid track ID specified in '%1% %2%'.\n")) % opt % s);
 
-  s = parts[1];
-  if (s.size() == 0)
-    mxerror(boost::format(Y("Invalid sync option specified in '%1% %2%'.\n")) % opt % orig);
+  if (!force_track_id) {
+    auto parts = split(s, ":", 2);
+    if (parts.size() != 2)
+      mxerror(boost::format(Y("Invalid sync option. No track ID specified in '%1% %2%'.\n")) % opt % s);
 
-  if (parts[1] == "reset") {
+    if (!parse_number(parts[0], id))
+      mxerror(boost::format(Y("Invalid track ID specified in '%1% %2%'.\n")) % opt % s);
+
+    s = parts[1];
+
+    if (s.size() == 0)
+      mxerror(boost::format(Y("Invalid sync option specified in '%1% %2%'.\n")) % opt % orig);
+
+  } else
+    id = *force_track_id;
+
+  if (s == "reset") {
     ti.m_reset_timestamps_specs[id] = true;
     return;
   }
@@ -1860,13 +1874,23 @@ parse_arg_chapter_charset(const std::string &arg,
 
 static void
 parse_arg_chapters(const std::string &param,
-                   const std::string &arg) {
+                   const std::string &arg,
+                   track_info_c &ti) {
   if (g_chapter_file_name != "")
     mxerror(boost::format(Y("Only one chapter file allowed in '%1% %2%'.\n")) % param % arg);
 
   auto format         = mtx::chapters::format_e::xml;
   g_chapter_file_name = arg;
   g_kax_chapters      = mtx::chapters::parse(g_chapter_file_name, 0, -1, 0, g_chapter_language.c_str(), g_chapter_charset.c_str(), false, &format, &g_tags_from_cue_chapters);
+
+  auto sync = ti.m_timestamp_syncs.find(track_info_c::chapter_track_id);
+  if (sync == ti.m_timestamp_syncs.end())
+    sync = ti.m_timestamp_syncs.find(track_info_c::all_tracks_id);
+
+  if (sync != ti.m_timestamp_syncs.end()) {
+    mtx::chapters::adjust_timestamps(*g_kax_chapters, sync->second.displacement, sync->second.numerator, sync->second.denominator);
+    ti.m_timestamp_syncs.erase(sync);
+  }
 
   if (g_segment_title_set || !g_tags_from_cue_chapters || (mtx::chapters::format_e::cue != format))
     return;
@@ -2450,6 +2474,13 @@ parse_args(std::vector<std::string> args) {
       parse_arg_chapter_charset(next_arg, *ti);
       sit++;
 
+    } else if (this_arg == "--chapter-sync") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the delay.\n")) % this_arg);
+
+      parse_arg_sync(next_arg, this_arg, *ti, track_info_c::chapter_track_id);
+      sit++;
+
     } else if (this_arg == "--cue-chapter-name-format") {
       if (no_next_arg)
         mxerror(Y("'--cue-chapter-name-format' lacks the format.\n"));
@@ -2464,7 +2495,7 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(Y("'--chapters' lacks the file name.\n"));
 
-      parse_arg_chapters(this_arg, next_arg);
+      parse_arg_chapters(this_arg, next_arg, *ti);
       sit++;
 
       inputs_found = true;
@@ -2757,7 +2788,7 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(boost::format(Y("'%1%' lacks the delay.\n")) % this_arg);
 
-      parse_arg_sync(next_arg, this_arg, *ti);
+      parse_arg_sync(next_arg, this_arg, *ti, boost::none);
       sit++;
 
     } else if (this_arg == "--cues") {

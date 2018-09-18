@@ -6,6 +6,10 @@
   user is about to create a file that won't contain audio tracks. It does this
   by default if at least one source file contains an audio track. Implements
   #2380.
+* mkvmerge: chapters: the timestamps of chapters read from containers or from
+  chapter files can be adjusted (multiplication and addition) with the new
+  `--chapter-sync` option or using the special track ID `-2` for the existing
+  `--sync` option. Part of the implementation of #2358.
 
 ## Bug fixes
 

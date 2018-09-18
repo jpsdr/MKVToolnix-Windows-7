@@ -867,6 +867,11 @@ ogm_reader_c::handle_stream_comments() {
         chapters_set  = true;
 
         mtx::chapters::align_uids(m_chapters.get());
+
+        auto const &sync = mtx::includes(m_ti.m_timestamp_syncs, track_info_c::chapter_track_id) ? m_ti.m_timestamp_syncs[track_info_c::chapter_track_id]
+                         : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
+                         :                                                                         timestamp_sync_t{};
+        mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.numerator, sync.denominator);
       } catch (...) {
         exception_parsing_chapters = true;
       }
@@ -893,6 +898,9 @@ ogm_reader_c::handle_stream_comments() {
 void
 ogm_reader_c::add_available_track_ids() {
   add_available_track_id_range(sdemuxers.size());
+
+  if (m_chapters)
+    add_available_track_id(track_info_c::chapter_track_id);
 }
 
 // -----------------------------------------------------------

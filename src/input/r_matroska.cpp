@@ -1447,8 +1447,15 @@ kax_reader_c::read_headers() {
 
 void
 kax_reader_c::adjust_chapter_timestamps() {
-  if (m_chapters && (0 != m_global_timestamp_offset))
-    mtx::chapters::adjust_timestamps(*m_chapters, -m_global_timestamp_offset);
+  if (!m_chapters)
+    return;
+
+  auto const &sync = mtx::includes(m_ti.m_timestamp_syncs, track_info_c::chapter_track_id) ? m_ti.m_timestamp_syncs[track_info_c::chapter_track_id]
+                   : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
+                   :                                                                         timestamp_sync_t{};
+
+  mtx::chapters::adjust_timestamps(*m_chapters, -m_global_timestamp_offset);
+  mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.numerator, sync.denominator);
 }
 
 void
@@ -2787,6 +2794,9 @@ void
 kax_reader_c::add_available_track_ids() {
   for (auto &track : m_tracks)
     add_available_track_id(track->tnum);
+
+  if (m_chapters)
+    add_available_track_id(track_info_c::chapter_track_id);
 }
 
 void

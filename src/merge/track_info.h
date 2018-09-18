@@ -228,6 +228,11 @@ protected:
   bool m_initialized;
 
 public:
+  enum special_track_id_e {
+    all_tracks_id    = -1,
+    chapter_track_id = -2,
+  };
+
   // The track ID.
   int64_t m_id;
 

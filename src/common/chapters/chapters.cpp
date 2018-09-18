@@ -962,7 +962,9 @@ move_by_edition(KaxChapters &dst,
 */
 void
 adjust_timestamps(EbmlMaster &master,
-                  int64_t offset) {
+                  int64_t offset,
+                  int64_t numerator,
+                  int64_t denominator) {
   size_t master_idx;
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
     if (!Is<KaxChapterAtom>(master[master_idx]))
@@ -973,16 +975,16 @@ adjust_timestamps(EbmlMaster &master,
     auto end   = FindChild<KaxChapterTimeEnd>(atom);
 
     if (start)
-      start->SetValue(std::max<int64_t>(static_cast<int64_t>(start->GetValue()) + offset, 0));
+      start->SetValue(std::max<int64_t>(static_cast<int64_t>((start->GetValue()) * numerator / denominator) + offset, 0));
 
     if (end)
-      end->SetValue(std::max<int64_t>(static_cast<int64_t>(end->GetValue()) + offset, 0));
+      end->SetValue(std::max<int64_t>(static_cast<int64_t>((end->GetValue()) * numerator / denominator) + offset, 0));
   }
 
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
     auto work_master = dynamic_cast<EbmlMaster *>(master[master_idx]);
     if (work_master)
-      adjust_timestamps(*work_master, offset);
+      adjust_timestamps(*work_master, offset, numerator, denominator);
   }
 }
 
