@@ -168,6 +168,7 @@ def setup_globals
   }
 
   setup_macos_specifics if $building_for[:macos]
+  setup_compiler_specifics
 
   $build_system_modules.values.each { |bsm| bsm[:setup].call if bsm[:setup] }
 end
@@ -185,6 +186,13 @@ def setup_macos_specifics
   if ENV['MACOSX_DEPLOYMENT_TARGET'].to_s.empty? && !$macos_config[:MACOSX_DEPLOYMENT_TARGET].to_s.empty?
     ENV['MACOSX_DEPLOYMENT_TARGET'] = $macos_config[:MACOSX_DEPLOYMENT_TARGET]
   end
+end
+
+def setup_compiler_specifics
+  # ccache and certain versions of zapcc don't seem to be playing well
+  # together. As zapcc's servers do the caching already, disable
+  # ccache if compiling with zapcc.
+  ENV['CCACHE_DISABLE'] = "1" if %r{zapcc}.match(c(:CXX) + c(:CC))
 end
 
 def define_default_task
