@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-09-12 19:52+0200\n"
+"POT-Creation-Date: 2018-09-23 12:23+0200\n"
 "PO-Revision-Date: 2018-04-11 00:40+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -34,7 +34,7 @@ msgstr ""
 "\n"
 "mkvmerge는 SIGINT를 받았습니다 (아마도 사용자가 Ctrl+C 키를 누른 것 같습니다). 출력 파일을 제대로 닫으려고 시도 중입니다. 만약 이 과정에서 mkvmerge가 중단된 경우, 수동으로 프로세스를 강제 종료하시기 바랍니다.\n"
 
-#: src/merge/mkvmerge.cpp:170
+#: src/merge/mkvmerge.cpp:177
 msgid ""
 "  ( <file1> <file2> )      Treat file1 and file2 as if they were concatenated\n"
 "                           into a single big file.\n"
@@ -42,7 +42,7 @@ msgstr ""
 "  ( <file1> <file2> )      file1과 file2를 하나의 큰 파일로 연결되어 있는 것\n"
 "                           처럼 취급합니다.\n"
 
-#: src/merge/mkvmerge.cpp:235
+#: src/merge/mkvmerge.cpp:242
 msgid ""
 "  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
 "                           or not. The value ':1' can be omitted.\n"
@@ -50,7 +50,7 @@ msgstr ""
 "  --aac-is-sbr <TID[:0|1]> 그 ID의 트랙이 HE-AAC/AAC+/SBR-AAC 인지 여부를\n"
 "                           지정합니다. 값이 ':1'이면 생략할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:161
+#: src/merge/mkvmerge.cpp:168
 msgid ""
 "  --append-mode <file|track>\n"
 "                           Selects how mkvmerge calculates timestamps when\n"
@@ -60,7 +60,7 @@ msgstr ""
 "                           파일 결합시에 mkvmerge가 타임코드를 계산하는\n"
 "                           방법을 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:156
+#: src/merge/mkvmerge.cpp:163
 msgid ""
 "  --append-to <SFID1:STID1:DFID1:DTID1,SFID2:STID2:DFID2:DTID2,...>\n"
 "                           A comma separated list of file and track IDs\n"
@@ -73,7 +73,7 @@ msgstr ""
 "                           결합되는지를 조정하는 쉼표로 구분한 파일과\n"
 "                           트랙 ID 목록.\n"
 
-#: src/merge/mkvmerge.cpp:257
+#: src/merge/mkvmerge.cpp:264
 msgid ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Sets the display dimensions by calculating\n"
@@ -83,7 +83,7 @@ msgstr ""
 "                           이 화면 비율로 가로(너비)와 세로(높이)의 크기를\n"
 "                           계산하여 화면 해상도를 설정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:260
+#: src/merge/mkvmerge.cpp:267
 msgid ""
 "  --aspect-ratio-factor <TID:f|a/b>\n"
 "                           First calculates the aspect ratio by multi-\n"
@@ -95,7 +95,7 @@ msgstr ""
 "                           처음에 이 계수를 비디오의 원래 종횡비에 곱하여\n"
 "                           비율을 계산하고 화면 해상도를 계산합니다.\n"
 
-#: src/merge/mkvmerge.cpp:180
+#: src/merge/mkvmerge.cpp:187
 msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
 "                           Matroska file.\n"
@@ -103,7 +103,7 @@ msgstr ""
 "  --attach-file <file>     Matroska 파일의 내부에 첨부 파일을\n"
 "                           만듭니다.\n"
 
-#: src/merge/mkvmerge.cpp:182
+#: src/merge/mkvmerge.cpp:189
 msgid ""
 "  --attach-file-once <file>\n"
 "                           Creates a file attachment inside the\n"
@@ -112,7 +112,7 @@ msgstr ""
 "  --attach-file-once <file>\n"
 "                           처음 작성한 Matroska 파일에 첨부 파일을 만듭니다.\n"
 
-#: src/merge/mkvmerge.cpp:174
+#: src/merge/mkvmerge.cpp:181
 msgid ""
 "  --attachment-description <desc>\n"
 "                           Description for the following attachment.\n"
@@ -120,7 +120,7 @@ msgstr ""
 "  --attachment-description <desc>\n"
 "                           다음 첨부 파일에 대한 설명입니다.\n"
 
-#: src/merge/mkvmerge.cpp:176
+#: src/merge/mkvmerge.cpp:183
 msgid ""
 "  --attachment-mime-type <mime type>\n"
 "                           Mime type for the following attachment.\n"
@@ -128,7 +128,7 @@ msgstr ""
 "  --attachment-mime-type <mime type>\n"
 "                           다음 첨부 파일에 대한 MIME 유형입니다.\n"
 
-#: src/merge/mkvmerge.cpp:178
+#: src/merge/mkvmerge.cpp:185
 msgid ""
 "  --attachment-name <name> The name should be stored for the \n"
 "                           following attachment.\n"
@@ -136,7 +136,7 @@ msgstr ""
 "  --attachment-name <name> 이름을 다음 첨부 파일명으로\n"
 "                           저장해야 합니다.\n"
 
-#: src/merge/mkvmerge.cpp:227
+#: src/merge/mkvmerge.cpp:234
 msgid ""
 "  --blockadd <TID:x>       Sets the max number of block additional\n"
 "                           levels for this track.\n"
@@ -144,11 +144,11 @@ msgstr ""
 "  --blockadd <TID:x>       이 트랙에 대해 추가 블록 수준의\n"
 "                           쵀대 숫자를 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:353
+#: src/merge/mkvmerge.cpp:360
 msgid "  --capabilities           Lists optional features mkvmerge was compiled with.\n"
 msgstr "  --capabilities           mkvmerge가 컴파일 시 사용되는 옵션 기능을 열거합니다.\n"
 
-#: src/merge/mkvmerge.cpp:287
+#: src/merge/mkvmerge.cpp:294
 msgid ""
 "  --cb-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cb channel\n"
@@ -169,11 +169,30 @@ msgstr "  --chapter-charset <cset> 단순 챕터 파일의 문자 인코딩을 �
 msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
 msgstr "  --chapter-language <lng> 챕터 항목의 'language'요소를 지정합니다.\n"
 
+#: src/merge/mkvmerge.cpp:96
+#, fuzzy
+msgid ""
+"  --chapter-sync <d[,o[/p]]>\n"
+"                           Synchronize, adjust the chapters's timestamps\n"
+"                           by 'd' ms.\n"
+"                           'o/p': Adjust the timestamps by multiplying with\n"
+"                           'o/p' to fix linear drifts. 'p' defaults to\n"
+"                           1 if omitted. Both 'o' and 'p' can be\n"
+"                           floating point numbers.\n"
+msgstr ""
+"  -y, --sync <TID:d[,o[/p]]>\n"
+"                           동기화를 위해 id TID로 표시된 트랙의 타임코드를\n"
+"                           'd'밀리초 조정합니다.\n"
+"                           'o/p': 직선 이동(Linear Drift)을 해결하기 위해,\n"
+"                           'o/p'를 곱하여 타임코드를 조정합니다.\n"
+"                           'p'는 생략하면 기본값 1이 사용됩니다.\n"
+"                           'o'와 'p' 모두 부동 소수점 수를 취할 수 있습니다.\n"
+
 #: src/merge/mkvmerge.cpp:93
 msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr "  --chapters <file>        파일에서 챕터 정보를 읽습니다.\n"
 
-#: src/merge/mkvmerge.cpp:292
+#: src/merge/mkvmerge.cpp:299
 msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
@@ -181,7 +200,7 @@ msgstr ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            크로마를 수평/수직으로 어떻게 위치시킬지.\n"
 
-#: src/merge/mkvmerge.cpp:283
+#: src/merge/mkvmerge.cpp:290
 msgid ""
 "  --chroma-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cr and Cb\n"
@@ -192,7 +211,7 @@ msgstr ""
 "                           수평과 수직으로 제거하지 않은 모든 픽셀에 대해\n"
 "                           Cr과 Cb 채널에서 제거할 픽셀의 양.\n"
 
-#: src/merge/mkvmerge.cpp:305
+#: src/merge/mkvmerge.cpp:312
 msgid ""
 "  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
 "                           Red/Green/Blue chromaticity coordinates as defined\n"
@@ -201,7 +220,7 @@ msgstr ""
 "  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
 "                           CIE 1931에 의해 정의된 적/녹/청 색도 좌표.\n"
 
-#: src/merge/mkvmerge.cpp:118
+#: src/merge/mkvmerge.cpp:125
 msgid ""
 "  --cluster-length <n[ms]> Put at most n data blocks into each cluster.\n"
 "                           If the number is postfixed with 'ms' then\n"
@@ -212,11 +231,11 @@ msgstr ""
 "                           만약 숫자 뒤에 ms가 붙어 있으면,\n"
 "                           각 클러스터에 최대 n밀리초 데이터를 배치합니다.\n"
 
-#: src/merge/mkvmerge.cpp:123
+#: src/merge/mkvmerge.cpp:130
 msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
 msgstr "  --clusters-in-meta-seek  클러스터의 메타 검색 데이터를 기록합니다.\n"
 
-#: src/merge/mkvmerge.cpp:279
+#: src/merge/mkvmerge.cpp:286
 msgid ""
 "  --colour-bits-per-channel <TID:n>\n"
 "                           Sets the number of coded bits for a colour \n"
@@ -227,7 +246,7 @@ msgstr ""
 "                           색상 채널당 코드화된 비트 수를 정합니다.\n"
 "                           0의 값은 그 수가 미지정임을 나타냅니다.\n"
 
-#: src/merge/mkvmerge.cpp:275
+#: src/merge/mkvmerge.cpp:282
 msgid ""
 "  --colour-matrix-coefficients <TID:n>\n"
 "                           Sets the matrix coefficients of the video used\n"
@@ -238,7 +257,7 @@ msgstr ""
 "                           적/녹/청 삼원색에서 루마와 크로마값을 얻기\n"
 "                           위해 사용된 비디오 매트릭스 계수를 정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:297
+#: src/merge/mkvmerge.cpp:304
 msgid ""
 "  --colour-primaries <TID:n>\n"
 "                           The colour primaries of the video.\n"
@@ -246,11 +265,11 @@ msgstr ""
 "  --colour-primaries <TID:n>\n"
 "                           비디오의 원색(기초 색상).\n"
 
-#: src/merge/mkvmerge.cpp:294
+#: src/merge/mkvmerge.cpp:301
 msgid "  --colour-range <TID:n>   Clipping of the color ranges.\n"
 msgstr "  --colour-range <TID:n>   색상 범위 잘라내기.\n"
 
-#: src/merge/mkvmerge.cpp:295
+#: src/merge/mkvmerge.cpp:302
 msgid ""
 "  --colour-transfer-characteristics <TID:n>\n"
 "                           The transfer characteristics of the video.\n"
@@ -258,7 +277,7 @@ msgstr ""
 "  --colour-transfer-characteristics <TID:n>\n"
 "                           비디오 전송 특성.\n"
 
-#: src/merge/mkvmerge.cpp:356
+#: src/merge/mkvmerge.cpp:363
 msgid ""
 "  --command-line-charset <charset>\n"
 "                           Charset for strings on the command line\n"
@@ -266,7 +285,7 @@ msgstr ""
 "  --command-line-charset <charset>\n"
 "                           명령행 문자 인코딩을 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:335
+#: src/merge/mkvmerge.cpp:342
 msgid ""
 "  --compression <TID:method>\n"
 "                           Sets the compression method used for the\n"
@@ -276,7 +295,7 @@ msgstr ""
 "                           트랙에서 사용되는 압축 방법을 지정합니다.\n"
 "                           ('none'또는 'zlib')\n"
 
-#: src/merge/mkvmerge.cpp:267
+#: src/merge/mkvmerge.cpp:274
 msgid ""
 "  --cropping <TID:left,top,right,bottom>\n"
 "                           Sets the cropping parameters.\n"
@@ -284,7 +303,7 @@ msgstr ""
 "  --cropping <TID:left,top,right,bottom>\n"
 "                           잘라내기 매개변수를 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:96
+#: src/merge/mkvmerge.cpp:103
 msgid ""
 "  --cue-chapter-name-format <format>\n"
 "                           Pattern for the conversion from cue sheet\n"
@@ -294,7 +313,7 @@ msgstr ""
 "                           큐 시트 항목을 챕터 이름으로 변환하는 규칙을\n"
 "                           지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:230
+#: src/merge/mkvmerge.cpp:237
 msgid ""
 "  --cues <TID:none|iframes|all>\n"
 "                           Create cue (index) entries for this track:\n"
@@ -305,11 +324,11 @@ msgstr ""
 "                           'none'은 전혀 없음, 'iframes'은 I프레임만,\n"
 "                           'all'은 모든 프레임이 대상입니다.\n"
 
-#: src/merge/mkvmerge.cpp:361
+#: src/merge/mkvmerge.cpp:368
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
 msgstr "  --debug <topic>          'topic'에 대한 디버그 출력을 활성화합니다.\n"
 
-#: src/merge/mkvmerge.cpp:244
+#: src/merge/mkvmerge.cpp:251
 msgid ""
 "  --default-duration <TID:Xs|ms|us|ns|fps>\n"
 "                           Force the default duration of a track to X.\n"
@@ -319,7 +338,7 @@ msgstr ""
 "                           트랙의 기본 재생 시간을 X로 강제 설정합니다.\n"
 "                           X는 부동 소수점 수와 분수를 받을 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:99
+#: src/merge/mkvmerge.cpp:106
 msgid ""
 "  --default-language <lng> Use this language for all tracks unless\n"
 "                           overridden with the --language option.\n"
@@ -327,7 +346,7 @@ msgstr ""
 "  --default-language <lng> --language 옵션을 덮어 쓰지 않으면 모든 트랙에 대해\n"
 "                           이 언어를 사용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:221
+#: src/merge/mkvmerge.cpp:228
 msgid ""
 "  --default-track <TID[:bool]>\n"
 "                           Sets the 'default' flag for this track or\n"
@@ -337,11 +356,11 @@ msgstr ""
 "                           이 트랙에 '기본' 플래그를 설정합니다.\n"
 "                           bool이 0으로 지정되면 플래그를 설정하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:126
+#: src/merge/mkvmerge.cpp:133
 msgid "  --disable-lacing         Do not use lacing.\n"
 msgstr "  --disable-lacing         레이싱(lacing)을 사용하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:129
+#: src/merge/mkvmerge.cpp:136
 msgid ""
 "  --disable-track-statistics-tags\n"
 "                           Do not write tags with track statistics.\n"
@@ -349,7 +368,7 @@ msgstr ""
 "  --disable-track-statistics-tags\n"
 "                           트랙 통계는 태그에 기록하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:265
+#: src/merge/mkvmerge.cpp:272
 msgid ""
 "  --display-dimensions <TID:width>x<height>\n"
 "                           Explicitly set the display dimensions.\n"
@@ -357,15 +376,15 @@ msgstr ""
 "  --display-dimensions <TID:width>x<height>\n"
 "                           화면 해상도를 명확하게 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:127
+#: src/merge/mkvmerge.cpp:134
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       모든 블록의 재생 시간을 기록합니다.\n"
 
-#: src/merge/mkvmerge.cpp:362
+#: src/merge/mkvmerge.cpp:369
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <feature>      실험적인 기능 'feature'를 활성화합니다.\n"
 
-#: src/merge/mkvmerge.cpp:269
+#: src/merge/mkvmerge.cpp:276
 msgid ""
 "  --field-order <TID:n>    Sets the video field order parameter\n"
 "                           (see documentation for valid values).\n"
@@ -373,7 +392,7 @@ msgstr ""
 "  --field-order <TID:n>    비디오 필드 순서 매개변수를 설정합니다\n"
 "                           (유효한 값은 문서를 참조하세요).\n"
 
-#: src/merge/mkvmerge.cpp:247
+#: src/merge/mkvmerge.cpp:254
 msgid ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
 "                           Adjust the frame/field rate stored in the video\n"
@@ -383,7 +402,7 @@ msgstr ""
 "                           비디오 비트스트림에 기록된 프레임/필드 레이트를\n"
 "                           트랙의 기본 재생 시간에 맞춰 조정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:224
+#: src/merge/mkvmerge.cpp:231
 msgid ""
 "  --forced-track <TID[:bool]>\n"
 "                           Sets the 'forced' flag for this track or\n"
@@ -393,7 +412,7 @@ msgstr ""
 "                           이 트랙에 '강제' 플래그를 설정합니다.\n"
 "                           bool이 0으로 지정되면 플래그를 설정하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:101
+#: src/merge/mkvmerge.cpp:108
 msgid ""
 "  --generate-chapters <mode>\n"
 "                           Automatically generate chapters according to\n"
@@ -403,7 +422,7 @@ msgstr ""
 "                           모드에 따라서 자동으로 챕터를 만듭니다\n"
 "                           ('결합할 때'나 '간격:<재생시간>').\n"
 
-#: src/merge/mkvmerge.cpp:104
+#: src/merge/mkvmerge.cpp:111
 msgid ""
 "  --generate-chapters-name-template <template>\n"
 "                           Template for newly generated chapter names\n"
@@ -417,7 +436,7 @@ msgstr ""
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
 msgstr "  --global-tags <file>     XML 파일에서 전역 태그를 읽습니다.\n"
 
-#: src/merge/mkvmerge.cpp:233
+#: src/merge/mkvmerge.cpp:240
 msgid ""
 "  --language <TID:lang>    Sets the language for the track (ISO639-2\n"
 "                           code, see --list-languages).\n"
@@ -425,25 +444,25 @@ msgstr ""
 "  --language <TID:lang>    트랙 언어를 지정합니다.\n"
 "                           (ISO639-2 코드. --list-languages를 참조하십시오.)\n"
 
-#: src/merge/mkvmerge.cpp:153
+#: src/merge/mkvmerge.cpp:160
 msgid "  --link                   Link splitted files.\n"
 msgstr "  --link                   분할 파일을 링크합니다.\n"
 
-#: src/merge/mkvmerge.cpp:155
+#: src/merge/mkvmerge.cpp:162
 msgid "  --link-to-next <SID>     Link the last file to the given SID.\n"
 msgstr "  --link-to-next <SID>     마지막 출력 파일을 지정한 SID에 링크합니다.\n"
 
-#: src/merge/mkvmerge.cpp:154
+#: src/merge/mkvmerge.cpp:161
 msgid "  --link-to-previous <SID> Link the first file to the given SID.\n"
 msgstr "  --link-to-previous <SID> 첫 번째 출력 파일을 지정한 SID에 링크합니다.\n"
 
-#: src/merge/mkvmerge.cpp:351
+#: src/merge/mkvmerge.cpp:358
 msgid ""
 "  --list-languages         Lists all ISO639 languages and their\n"
 "                           ISO639-2 codes.\n"
 msgstr "  --list-languages         모든 ISO639 언어와 ISO639-2 코드를 열거합니다.\n"
 
-#: src/merge/mkvmerge.cpp:299
+#: src/merge/mkvmerge.cpp:306
 msgid ""
 "  --max-content-light <TID:n>\n"
 "                           Maximum brightness of a single pixel in candelas\n"
@@ -453,7 +472,7 @@ msgstr ""
 "                           제곱 미터당 칸델라 단위에서 단일 픽셀의 최대 밝기\n"
 "                           (cd/m²).\n"
 
-#: src/merge/mkvmerge.cpp:302
+#: src/merge/mkvmerge.cpp:309
 msgid ""
 "  --max-frame-light <TID:n>\n"
 "                           Maximum frame-average light level in candelas per\n"
@@ -463,7 +482,7 @@ msgstr ""
 "                           제곱 미터당 칸델라 단위에서 최대 프레임 평균 밝기\n"
 "                           수준 (cd/m²).\n"
 
-#: src/merge/mkvmerge.cpp:311
+#: src/merge/mkvmerge.cpp:318
 msgid ""
 "  --max-luminance <TID:float>\n"
 "                           Maximum luminance in candelas per square meter\n"
@@ -472,7 +491,7 @@ msgstr ""
 "  --max-luminance <TID:float>\n"
 "                           제곱 미터당 칸델라 단위에서 최대 휘도 (cd/m²).\n"
 
-#: src/merge/mkvmerge.cpp:314
+#: src/merge/mkvmerge.cpp:321
 msgid ""
 "  --min-luminance <TID:float>\n"
 "                           Minimum luminance in candelas per square meter\n"
@@ -481,7 +500,7 @@ msgstr ""
 "  --min-luminance <TID:float>\n"
 "                           제곱 미터당 칸델라 단위에서 최소 휘도 (cd/m²).\n"
 
-#: src/merge/mkvmerge.cpp:250
+#: src/merge/mkvmerge.cpp:257
 msgid ""
 "  --nalu-size-length <TID:n>\n"
 "                           Force the NALU size length to n bytes with\n"
@@ -491,33 +510,33 @@ msgstr ""
 "                           NALU 크기 길이를 n바이트 너비로 강제 설정합니다.\n"
 "                           (2 <= n <= 4) 기본값은 4입니다.\n"
 
-#: src/merge/mkvmerge.cpp:213
+#: src/merge/mkvmerge.cpp:220
 msgid "  --no-chapters            Don't keep chapters from the source file.\n"
 msgstr "  --no-chapters            소스 파일에서 챕터를 유지하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:122
+#: src/merge/mkvmerge.cpp:129
 msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                큐 데이터(인덱스)를 기록하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:124
+#: src/merge/mkvmerge.cpp:131
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
 msgstr "--no-date 세그먼트 정보 헤더에 '날짜' 필드를 쓰지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:212
+#: src/merge/mkvmerge.cpp:219
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
 msgstr "  --no-global-tags         소스 파일에서 전역 태그를 유지하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:358
+#: src/merge/mkvmerge.cpp:365
 msgid "  --output-charset <cset>  Output messages in this charset\n"
 msgstr "  --output-charset <cset>  출력 메시지의 문자 인코딩을 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:354
+#: src/merge/mkvmerge.cpp:361
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priority>    mkvmerge의 실행 우선 순위를 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:346
+#: src/merge/mkvmerge.cpp:353
 msgid ""
 "  --probe-range-percentage <percent>\n"
 "                           Sets maximum size to probe for tracks in percent\n"
@@ -529,7 +548,7 @@ msgstr ""
 "                           트랙을 조사할 최대 크기를 정합니다.\n"
 "                           (기본값: 0.3)\n"
 
-#: src/merge/mkvmerge.cpp:324
+#: src/merge/mkvmerge.cpp:331
 msgid ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           A pitch rotation to the projection.\n"
@@ -537,7 +556,7 @@ msgstr ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           투사에 대한 피치(pitch) 회전.\n"
 
-#: src/merge/mkvmerge.cpp:326
+#: src/merge/mkvmerge.cpp:333
 msgid ""
 "  --projection-pose-roll <TID:float>\n"
 "                           A roll rotation to the projection.\n"
@@ -545,7 +564,7 @@ msgstr ""
 "  --projection-pose-roll <TID:float>\n"
 "                           투사에 대한 롤(roll) 회전.\n"
 
-#: src/merge/mkvmerge.cpp:322
+#: src/merge/mkvmerge.cpp:329
 msgid ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           A yaw rotation to the projection.\n"
@@ -553,7 +572,7 @@ msgstr ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           투사에 대한 요(yaw) 회전.\n"
 
-#: src/merge/mkvmerge.cpp:319
+#: src/merge/mkvmerge.cpp:326
 msgid ""
 "  --projection-private <TID:data>\n"
 "                           Private data that only applies to a specific\n"
@@ -563,7 +582,7 @@ msgstr ""
 "                           특정한 투사에만 적용되는 전용 데이터\n"
 "                           (16 진수로).\n"
 
-#: src/merge/mkvmerge.cpp:317
+#: src/merge/mkvmerge.cpp:324
 msgid ""
 "  --projection-type <TID:method>\n"
 "                           Projection method used (0–3).\n"
@@ -571,7 +590,7 @@ msgstr ""
 "  --projection-type <TID:method>\n"
 "                           사용된 투사 방법 (0–3).\n"
 
-#: src/merge/mkvmerge.cpp:237
+#: src/merge/mkvmerge.cpp:244
 msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
 "                           HD extensions instead of copying both the core\n"
@@ -581,7 +600,7 @@ msgstr ""
 "                           HD 확장자를 지원하는 코어 오디오 트랙만 \n"
 "                           유지합니다.\n"
 
-#: src/merge/mkvmerge.cpp:240
+#: src/merge/mkvmerge.cpp:247
 msgid ""
 "  --remove-dialog-normalization-gain <TID>\n"
 "                           Removes or minimizes the dialog normalization gain\n"
@@ -591,7 +610,7 @@ msgstr ""
 "                           오디오 프레임 헤더를 수정하여\n"
 "                           대화 볼륨 노멀라이징 게인을 제거 또는 최소화합니다.\n"
 
-#: src/merge/mkvmerge.cpp:110
+#: src/merge/mkvmerge.cpp:117
 msgid ""
 "  --segment-uid <SID1,[SID2...]>\n"
 "                           Set the segment UIDs to SID1, SID2 etc.\n"
@@ -599,11 +618,11 @@ msgstr ""
 "  --segment-uid <SID1,[SID2...]>\n"
 "                           세그먼트 UID를 SID1, SID2 ...로 설정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:109
+#: src/merge/mkvmerge.cpp:116
 msgid "  --segmentinfo <file>     Read segment information from the file.\n"
 msgstr "  --segmentinfo <file>     파일에서 세그먼트 정보를 읽습니다.\n"
 
-#: src/merge/mkvmerge.cpp:133
+#: src/merge/mkvmerge.cpp:140
 msgid ""
 "  --split <d[K,M,G]|HH:MM:SS|s>\n"
 "                           Create a new file after d bytes (KB, MB, GB)\n"
@@ -613,7 +632,7 @@ msgstr ""
 "                           d바이트(KB, MB, GB) 또는 지정된 시간 이후로 파일을\n"
 "                           분할 생성합니다.\n"
 
-#: src/merge/mkvmerge.cpp:149
+#: src/merge/mkvmerge.cpp:156
 msgid ""
 "  --split chapters:all|A[,B...]\n"
 "                           Create a new file before each chapter (with 'all')\n"
@@ -623,7 +642,7 @@ msgstr ""
 "                           각 챕터 ('all' 포함) 또는 챕터 번호 A, B 등 이전으로\n"
 "                           파일을 분할 생성합니다.\n"
 
-#: src/merge/mkvmerge.cpp:146
+#: src/merge/mkvmerge.cpp:153
 msgid ""
 "  --split frames:A[,B...]\n"
 "                           Create a new file after each frame/field A, B\n"
@@ -632,7 +651,7 @@ msgstr ""
 "  --split frames:A[,B...]\n"
 "                           각 프레임/필드 A, B 등 이후로 파일을 분할 생성합니다.\n"
 
-#: src/merge/mkvmerge.cpp:143
+#: src/merge/mkvmerge.cpp:150
 msgid ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
 "                           Same as 'parts:', but 'startN'/'endN' are frame/\n"
@@ -642,7 +661,7 @@ msgstr ""
 "                           'parts:'은 같지만, 'startN'/'endN'은 타임코드\n"
 "                           대신에 프레임/필드 번호입니다.\n"
 
-#: src/merge/mkvmerge.cpp:139
+#: src/merge/mkvmerge.cpp:146
 msgid ""
 "  --split parts:start1-end1[,[+]start2-end2,...]\n"
 "                           Keep ranges of timestamps start-end, either in\n"
@@ -654,7 +673,7 @@ msgstr ""
 "                           경우 ('+'접두사가 있을 시) start-end의 타임코드\n"
 "                           범위를 유지합니다.\n"
 
-#: src/merge/mkvmerge.cpp:136
+#: src/merge/mkvmerge.cpp:143
 msgid ""
 "  --split timestamps:A[,B...]\n"
 "                           Create a new file after each timestamp A, B\n"
@@ -663,11 +682,11 @@ msgstr ""
 "  --split timestamps:A[,B...]\n"
 "                           각 타임코드 A, B등의 이후 파일을 분할합니다.\n"
 
-#: src/merge/mkvmerge.cpp:152
+#: src/merge/mkvmerge.cpp:159
 msgid "  --split-max-files <n>    Create at most n files.\n"
 msgstr "  --split-max-files <n>    파일 최대 분할 수 n를 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:271
+#: src/merge/mkvmerge.cpp:278
 msgid ""
 "  --stereo-mode <TID:n|keyword>\n"
 "                           Sets the stereo mode parameter. It can\n"
@@ -679,7 +698,7 @@ msgstr ""
 "                           이것은 0~14까지의 숫자나 키워드를 취할 수 있습니다.\n"
 "                           (문서 전체 목록을 참조하십시오.).\n"
 
-#: src/merge/mkvmerge.cpp:330
+#: src/merge/mkvmerge.cpp:337
 msgid ""
 "  --sub-charset <TID:charset>\n"
 "                           Determines the charset the text subtitles are\n"
@@ -689,11 +708,11 @@ msgstr ""
 "                           UTF-8로 변환을 위해 텍스트 자막을 어떤 문자 인코딩\n"
 "                           으로 읽을지 여부를 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:128
+#: src/merge/mkvmerge.cpp:135
 msgid "  --timestamp-scale <n>    Force the timestamp scale factor to n.\n"
 msgstr "  --timestamp-scale <n>    타임코드 스케일 계수를 n으로 강제 설정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:243
+#: src/merge/mkvmerge.cpp:250
 msgid "  --timestamps <TID:file>  Read the timestamps to be used from a file.\n"
 msgstr "  --timestamps <TID:file>  파일에서 사용되는 타임코드를 읽습니다.\n"
 
@@ -701,11 +720,11 @@ msgstr "  --timestamps <TID:file>  파일에서 사용되는 타임코드를 읽
 msgid "  --title <title>          Title for this destination file.\n"
 msgstr "  --title <제목>          이 대상 파일의 제목을 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:229
+#: src/merge/mkvmerge.cpp:236
 msgid "  --track-name <TID:name>  Sets the name for a track.\n"
 msgstr "  --track-name <TID:name>  트랙의 이름을 설정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:114
+#: src/merge/mkvmerge.cpp:121
 msgid ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           A comma separated list of both file IDs\n"
@@ -717,7 +736,7 @@ msgstr ""
 "                           파일ID:트랙ID 형식을 사용하되 쉼표로 \n"
 "                           그 순서를 구분합니다.\n"
 
-#: src/merge/mkvmerge.cpp:209
+#: src/merge/mkvmerge.cpp:216
 msgid ""
 "  --track-tags <n,m,...>   Copy the tags for tracks n,m etc. Default: copy\n"
 "                           tags for all tracks.\n"
@@ -725,14 +744,14 @@ msgstr ""
 "  --track-tags <n,m,...>   n,m,... 트랙의 태그를 복사합니다.\n"
 "                           기본값: 모든 트랙의 태그를 복사합니다\n"
 
-#: src/merge/mkvmerge.cpp:355
+#: src/merge/mkvmerge.cpp:362
 msgid "  --ui-language <code>     Force the translations for 'code' to be used.\n"
 msgstr ""
 "  --ui-language <code>    mkvmerge의 UI언어를 지정한 '코드'로 강제 표시합니다.\n"
 "                           (예: 명령행에 --ui-language en 옵션 추가 시 UI가\n"
 "                           '한글'로 강제 표시됩니다.)\n"
 
-#: src/merge/mkvmerge.cpp:308
+#: src/merge/mkvmerge.cpp:315
 msgid ""
 "  --white-colour-coordinates <TID:x,y>\n"
 "                           White colour chromaticity coordinates as defined\n"
@@ -741,19 +760,19 @@ msgstr ""
 "  --white-colour-coordinates <TID:x,y>\n"
 "                           CIE 1931에 정의된 흰색 색도 좌표.\n"
 
-#: src/merge/mkvmerge.cpp:190
+#: src/merge/mkvmerge.cpp:197
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
 msgstr "  -A, --no-audio           이 파일에서 오디오 트랙을 복사하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:202
+#: src/merge/mkvmerge.cpp:209
 msgid "  -B, --no-buttons         Don't copy any buttons track from this file.\n"
 msgstr "  -B, --no-buttons         이 파일에서 버튼 트랙을 복사하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:194
+#: src/merge/mkvmerge.cpp:201
 msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           이 파일에서 비디오 트랙을 복사하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:343
+#: src/merge/mkvmerge.cpp:350
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
@@ -763,7 +782,7 @@ msgstr ""
 "                           식별 결과의 형식을 정합니다\n"
 "                           ('text' 또는 'json'; 기본값은 'text').\n"
 
-#: src/merge/mkvmerge.cpp:341
+#: src/merge/mkvmerge.cpp:348
 msgid ""
 "  -J <file>                This is a convenient alias for\n"
 "                           \"--identification-format json --identify file\".\n"
@@ -771,23 +790,23 @@ msgstr ""
 "  -J <파일>                이것은 다음의 편리한 별명입니다:\n"
 "                           \"--identification-format json --identify 파일\".\n"
 
-#: src/merge/mkvmerge.cpp:207
+#: src/merge/mkvmerge.cpp:214
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
 msgstr "  -M, --no-attachments     소스 파일에서 첨부 파일을 복사하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:198
+#: src/merge/mkvmerge.cpp:205
 msgid "  -S, --no-subtitles       Don't copy any subtitle track from this file.\n"
 msgstr "  -S, --no-subtitles       이 파일에서 자막 트랙을 복사하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:211
+#: src/merge/mkvmerge.cpp:218
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
 msgstr "  -T, --no-track-tags      소스 파일에서 트랙의 태그를 복사하지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:366
+#: src/merge/mkvmerge.cpp:373
 msgid "  -V, --version            Show version information.\n"
 msgstr "  -V, --version            버전 정보를 표시합니다.\n"
 
-#: src/merge/mkvmerge.cpp:187
+#: src/merge/mkvmerge.cpp:194
 msgid ""
 "  -a, --audio-tracks <n,m,...>\n"
 "                           Copy audio tracks n,m etc. Default: copy all\n"
@@ -797,7 +816,7 @@ msgstr ""
 "                           n,m,... 오디오 트랙을 복사합니다.\n"
 "                           기본값: 모든 오디오 트랙을 복사합니다.\n"
 
-#: src/merge/mkvmerge.cpp:199
+#: src/merge/mkvmerge.cpp:206
 msgid ""
 "  -b, --button-tracks <n,m,...>\n"
 "                           Copy buttons tracks n,m etc. Default: copy\n"
@@ -807,7 +826,7 @@ msgstr ""
 "                           n,m,... 버튼 트랙을 복사합니다.\n"
 "                           기본값: 모든 버튼 트랙을 복사합니다.\n"
 
-#: src/merge/mkvmerge.cpp:191
+#: src/merge/mkvmerge.cpp:198
 msgid ""
 "  -d, --video-tracks <n,m,...>\n"
 "                           Copy video tracks n,m etc. Default: copy all\n"
@@ -817,7 +836,7 @@ msgstr ""
 "                           n,m,... 비디오 트랙을 복사합니다.\n"
 "                           기본값: 모든 비디오 트랙을 복사합니다.\n"
 
-#: src/merge/mkvmerge.cpp:255
+#: src/merge/mkvmerge.cpp:262
 msgid ""
 "  -f, --fourcc <FOURCC>    Forces the FourCC to the specified value.\n"
 "                           Works only for video tracks.\n"
@@ -825,19 +844,19 @@ msgstr ""
 "  -f, --fourcc <FOURCC>    FourCC를 지정된 값으로 강제 설정합니다.\n"
 "                           비디오 트랙에만 유효합니다.\n"
 
-#: src/merge/mkvmerge.cpp:365
+#: src/merge/mkvmerge.cpp:372
 msgid "  -h, --help               Show this help.\n"
 msgstr "  -h, --help               이 도움말을 표시합니다.\n"
 
-#: src/merge/mkvmerge.cpp:340
+#: src/merge/mkvmerge.cpp:347
 msgid "  -i, --identify <file>    Print information about the source file.\n"
 msgstr "  -i, --identify <file>    소스 파일의 정보를 표시합니다.\n"
 
-#: src/merge/mkvmerge.cpp:350
+#: src/merge/mkvmerge.cpp:357
 msgid "  -l, --list-types         Lists supported source file types.\n"
 msgstr "  -l, --list-types         지원되는 소스 파일 형식을 열거합니다.\n"
 
-#: src/merge/mkvmerge.cpp:203
+#: src/merge/mkvmerge.cpp:210
 msgid ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
 "                           Copy the attachments with the IDs n, m etc. to\n"
@@ -853,7 +872,7 @@ msgstr ""
 msgid "  -o, --output out         Write to the file 'out'.\n"
 msgstr "  -o, --output out         출력 파일을 지정합니다.\n"
 
-#: src/merge/mkvmerge.cpp:359
+#: src/merge/mkvmerge.cpp:366
 msgid ""
 "  -r, --redirect-output <file>\n"
 "                           Redirects all messages into this file.\n"
@@ -861,7 +880,7 @@ msgstr ""
 "  -r, --redirect-output <file>\n"
 "                           모든 메시지를 이 파일로 다시 보냅니다.\n"
 
-#: src/merge/mkvmerge.cpp:195
+#: src/merge/mkvmerge.cpp:202
 msgid ""
 "  -s, --subtitle-tracks <n,m,...>\n"
 "                           Copy subtitle tracks n,m etc. Default: copy\n"
@@ -871,7 +890,7 @@ msgstr ""
 "                           n,m,... 자막 트랙을 복사합니다.\n"
 "                           기본값: 모든 자막 트랙을 복사합니다.\n"
 
-#: src/merge/mkvmerge.cpp:208
+#: src/merge/mkvmerge.cpp:215
 msgid "  -t, --tags <TID:file>    Read tags for the track from an XML file.\n"
 msgstr "  -t, --tags <TID:file>    이 트랙의 태그를 XML 파일에서 읽습니다.\n"
 
@@ -879,7 +898,7 @@ msgstr "  -t, --tags <TID:file>    이 트랙의 태그를 XML 파일에서 읽�
 msgid "  -w, --webm               Create WebM compliant file.\n"
 msgstr "  -w, --webm               WebM 호환 파일을 만듭니다.\n"
 
-#: src/merge/mkvmerge.cpp:214
+#: src/merge/mkvmerge.cpp:221
 msgid ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
 "                           Synchronize, adjust the track's timestamps with\n"
@@ -897,15 +916,15 @@ msgstr ""
 "                           'p'는 생략하면 기본값 1이 사용됩니다.\n"
 "                           'o'와 'p' 모두 부동 소수점 수를 취할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:164
+#: src/merge/mkvmerge.cpp:171
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
 msgstr "  <file1> + <file2>        file1에 file2를 결합합니다.\n"
 
-#: src/merge/mkvmerge.cpp:165
+#: src/merge/mkvmerge.cpp:172
 msgid "  <file1> +<file2>         Same as \"<file1> + <file2>\".\n"
 msgstr "  <file1> +<file2>         \"<file1> + <file2>\"와 같습니다.\n"
 
-#: src/merge/mkvmerge.cpp:167
+#: src/merge/mkvmerge.cpp:174
 msgid ""
 "  = <file>                 Don't look for and concatenate files with the same\n"
 "                           base name but with a different trailing number.\n"
@@ -913,11 +932,11 @@ msgstr ""
 "  = <file>                 동일한 기본 이름을 가지지만, 일련번호가 다른 파일을\n"
 "                           찾고 연결하지는 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:169
+#: src/merge/mkvmerge.cpp:176
 msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<file>                  \"= <file>\"와 같습니다.\n"
 
-#: src/merge/mkvmerge.cpp:363
+#: src/merge/mkvmerge.cpp:370
 msgid ""
 "  @option-file.json        Reads additional command line options from\n"
 "                           the specified JSON file (see man page).\n"
@@ -955,7 +974,7 @@ msgstr "  US: 유니코드 문자열\n"
 msgid "  X:  binary in hex\n"
 msgstr "  X:  16진수 바이너리\n"
 
-#: src/merge/mkvmerge.cpp:166
+#: src/merge/mkvmerge.cpp:173
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <file1> <file2> ]      \"<file1> + <file2>\"와 같습니다.\n"
 
@@ -1013,7 +1032,7 @@ msgstr " (화면 비율 유지)"
 msgid " (pixels)"
 msgstr " (픽셀)"
 
-#: src/merge/mkvmerge.cpp:173
+#: src/merge/mkvmerge.cpp:180
 msgid " Attachment support (more global options):\n"
 msgstr " 첨부 파일 지원 (추가 전역 옵션):\n"
 
@@ -1021,11 +1040,11 @@ msgstr " 첨부 파일 지원 (추가 전역 옵션):\n"
 msgid " Chapter handling:\n"
 msgstr " 챕터 처리: \n"
 
-#: src/merge/mkvmerge.cpp:132
+#: src/merge/mkvmerge.cpp:139
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
 msgstr " 파일 분할, 링크, 결합 및 연결 (추가 전역 옵션):\n"
 
-#: src/merge/mkvmerge.cpp:113
+#: src/merge/mkvmerge.cpp:120
 msgid " General output control (advanced global options):\n"
 msgstr " 일반 출력 제어 (고급 전역 옵션):\n"
 
@@ -1033,27 +1052,27 @@ msgstr " 일반 출력 제어 (고급 전역 옵션):\n"
 msgid " Global options:\n"
 msgstr " 전역 옵션:\n"
 
-#: src/merge/mkvmerge.cpp:186
+#: src/merge/mkvmerge.cpp:193
 msgid " Options for each source file:\n"
 msgstr " 각 소스 파일용 옵션:\n"
 
-#: src/merge/mkvmerge.cpp:334
+#: src/merge/mkvmerge.cpp:341
 msgid " Options that only apply to VobSub subtitle tracks:\n"
 msgstr " VobSub자막 트랙에만 적용되는 옵션:\n"
 
-#: src/merge/mkvmerge.cpp:329
+#: src/merge/mkvmerge.cpp:336
 msgid " Options that only apply to text subtitle tracks:\n"
 msgstr " 텍스트 자막 트랙에만 적용되는 옵션:\n"
 
-#: src/merge/mkvmerge.cpp:254
+#: src/merge/mkvmerge.cpp:261
 msgid " Options that only apply to video tracks:\n"
 msgstr " 비디오 트랙에만 적용되는 옵션:\n"
 
-#: src/merge/mkvmerge.cpp:339
+#: src/merge/mkvmerge.cpp:346
 msgid " Other options:\n"
 msgstr " 기타 옵션:\n"
 
-#: src/merge/mkvmerge.cpp:108
+#: src/merge/mkvmerge.cpp:115
 msgid " Segment info handling:\n"
 msgstr " 세그먼트 정보 처리:\n"
 
@@ -1097,7 +1116,7 @@ msgid " size is unknown"
 msgstr " 크기를 알 수 없음"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1686
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:76
 #, no-c-format
 msgid "\"Default track\" flag:"
@@ -1109,7 +1128,7 @@ msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "\"자동 결정\"은 대부분의 모든 상황에서 좋은 선택입니다."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1687
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1713
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
 #, no-c-format
 msgid "\"Forced track\" flag:"
@@ -1249,33 +1268,33 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: 예외 사항 발생 (메시지: %2%; 형식: %3%)."
 
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1589
-#: src/input/r_matroska.cpp:2278
+#: src/input/r_matroska.cpp:1596
+#: src/input/r_matroska.cpp:2285
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: 알 수 없는 예외 사항 발생."
 
-#: src/merge/mkvmerge.cpp:666
+#: src/merge/mkvmerge.cpp:680
 #, boost-format
 msgid "%1%: divisor is 0 in '%2% %3%'.\n"
 msgstr "%1%: '%2% %3%'에 0으로 나누기가 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:641
+#: src/merge/mkvmerge.cpp:655
 #, boost-format
 msgid "%1%: invalid track ID in '%2% %3%'.\n"
 msgstr "%1%: '%2% %3%'에 잘못된 트랙 ID가 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:658
+#: src/merge/mkvmerge.cpp:672
 #, boost-format
 msgid "%1%: missing dividend in '%2% %3%'.\n"
 msgstr "%1%: '%2% %3%'에 누락된 피제수가 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:661
+#: src/merge/mkvmerge.cpp:675
 #, boost-format
 msgid "%1%: missing divisor in '%2% %3%'.\n"
 msgstr "%1%: '%2% %3%'에 누락된 제수가 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:637
+#: src/merge/mkvmerge.cpp:651
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: '%2% %3%'에 누락된 트랙 ID가 있습니다.\n"
@@ -1370,7 +1389,7 @@ msgstr "첨부 파일 추가(&A)"
 msgid "&Add files"
 msgstr "파일 추가(&A)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1773
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1801
 msgid "&Add source files"
 msgstr "소스 파일 추가(&A)"
 
@@ -1482,7 +1501,7 @@ msgid "&Default"
 msgstr "기본값(&D)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:171
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1765
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1793
 msgid "&Description:"
 msgstr "설명(&D):"
 
@@ -1594,7 +1613,7 @@ msgstr "숨김(&H)"
 msgid "&Info tool"
 msgstr "정보 도구(&I)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1718
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1744
 msgid "&Input"
 msgstr "입력(&I)"
 
@@ -1616,7 +1635,7 @@ msgstr "교체할 챕터 이름의 언어(&L):"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:192
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1607
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1685
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1711
 msgid "&Language:"
 msgstr "언어(&L):"
 
@@ -1625,7 +1644,7 @@ msgid "&Languages"
 msgstr "언어(&L)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:173
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1766
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1794
 msgid "&MIME type:"
 msgstr "&MIME 형식:"
 
@@ -1649,7 +1668,7 @@ msgstr "시작과 종료 타임스탬프를 다음 인수로 곱하기(&M):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:527
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:323
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1764
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1792
 msgid "&Name:"
 msgstr "이름(&N):"
 
@@ -1734,7 +1753,7 @@ msgstr "설정 열기(&O)"
 msgid "&Ordered"
 msgstr "정렬(&O)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1758
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1786
 msgid "&Output"
 msgstr "출력(&O)"
 
@@ -1911,7 +1930,7 @@ msgstr "자막(&S)"
 msgid "&Tag editor"
 msgstr "태그 편집기(&T)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1673
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 msgid "&Tracks, chapters and tags:"
 msgstr "트랙, 챕터와 태그(&T):"
 
@@ -1961,17 +1980,17 @@ msgstr "언어 설정시(&W):"
 msgid "&Window"
 msgstr "윈도우(&W)"
 
-#: src/merge/mkvmerge.cpp:2237
+#: src/merge/mkvmerge.cpp:2261
 #, boost-format
 msgid "'%1%' can only be used with a file name. No further options are allowed if this option is used.\n"
 msgstr "'%1%'는 파일 이름을 지정할 때만 사용할 수 있습니다. 이 옵션을 사용할 때 다른 옵션의 사용은 허용되지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1356
+#: src/merge/mkvmerge.cpp:1370
 #, boost-format
 msgid "'%1%' is an unsupported argument for --compression. Available compression methods are: %2%\n"
 msgstr "'%1%'는 --compression 인수로 지원되지 않습니다. 사용 가능한 압축 방식: %2%\n"
 
-#: src/merge/mkvmerge.cpp:1311
+#: src/merge/mkvmerge.cpp:1325
 #, boost-format
 msgid "'%1%' is an unsupported argument for --cues.\n"
 msgstr "'%1%'는 --cues 인수로 지원되지 않습니다.\n"
@@ -1981,18 +2000,18 @@ msgstr "'%1%'는 --cues 인수로 지원되지 않습니다.\n"
 msgid "'%1%' is missing the file name.\n"
 msgstr "'%1%'는 파일 이름이 누락되어 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1841
+#: src/merge/mkvmerge.cpp:1855
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--chapter-language %1%'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'--chapter-language %1%'의 '%1%'는 유효한 ISO639-2 또는 ISO639-1 코드가 아닙니다. 모든 언어와 ISO639-2 코드의 목록은 'mkvmerge --list-languages'를 참조하십시오\n"
 
-#: src/merge/mkvmerge.cpp:1943
+#: src/merge/mkvmerge.cpp:1967
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--default-language %1%'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'--default-language %1%'의 '%1%'는 유효한 ISO639-2 또는 ISO639-1 코드가 아닙니다. 모든 언어와 ISO639-2 코드의 목록은 'mkvmerge --list-languages'를 참조하십시오\n"
 
 #: src/extract/extract_cli_parser.cpp:207
-#: src/merge/mkvmerge.cpp:1392
+#: src/merge/mkvmerge.cpp:1406
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'%1%'는 유효한 ISO639-2 또는 ISO639-1 코드가 아닙니다. 모든 언어와 ISO639-2 코드의 목록은 'mkvmerge --list-languages​​'를 참조하십시오.\n"
@@ -2013,12 +2032,12 @@ msgstr "'%1%'는 CHAPTERxxNAME=... 행이 아닙니다."
 msgid "'%1%' is not a valid ISO639-2 language code."
 msgstr "'%1%'는 유효한 ISO639-2 언어 코드가 아닙니다."
 
-#: src/merge/mkvmerge.cpp:1549
+#: src/merge/mkvmerge.cpp:1563
 #, boost-format
 msgid "'%1%' is not a valid append mode in '--append-mode %1%'.\n"
 msgstr "'--append-mode %1%'의 '%1%'는 유효한 결합 모드가 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1675
+#: src/merge/mkvmerge.cpp:1689
 #, boost-format
 msgid "'%1%' is not a valid block additional max in '--blockadd %2%'.\n"
 msgstr "'%1%'는 '--blockadd %2%'에서 유효한 최대 추가 블록이 아닙니다.\n"
@@ -2028,13 +2047,13 @@ msgstr "'%1%'는 '--blockadd %2%'에서 유효한 최대 추가 블록이 아닙
 msgid "'%1%' is not a valid ccTLD country code."
 msgstr "'%1%'는 유효한 ccTLD 국가 코드가 아닙니다."
 
-#: src/merge/mkvmerge.cpp:983
+#: src/merge/mkvmerge.cpp:997
 #, boost-format
 msgid "'%1%' is not a valid field order."
 msgstr "'%1%'는 유효한 필드 순서가 아닙니다."
 
-#: src/merge/mkvmerge.cpp:1491
-#: src/merge/mkvmerge.cpp:1494
+#: src/merge/mkvmerge.cpp:1505
+#: src/merge/mkvmerge.cpp:1508
 #, boost-format
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'--track-order %2%'의 '%1%'는 유효한 파일ID가 아닙니다.\n"
@@ -2044,57 +2063,57 @@ msgstr "'--track-order %2%'의 '%1%'는 유효한 파일ID가 아닙니다.\n"
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%'는 유효한 해킹이 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1534
+#: src/merge/mkvmerge.cpp:1548
 #, boost-format
 msgid "'%1%' is not a valid mapping of file and track IDs in '--append-to %2%'.\n"
 msgstr "'--append-to %2%'의 '%1%'는 유효한 파일 및 트랙 ID 매핑이 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1488
+#: src/merge/mkvmerge.cpp:1502
 #, boost-format
 msgid "'%1%' is not a valid pair of file ID and track ID in '--track-order %2%'.\n"
 msgstr "'--track-order %2%'의 '%1%'는 유효한 파일ID와 트랙 ID 조합이 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1591
+#: src/merge/mkvmerge.cpp:1605
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and NALU size length in '--nalu-size-length %1%'.\n"
 msgstr "'%1%'은 '--nalu-size-length %1%'에서 유효한 한 쌍의 트랙 ID와 NALU 크기 길이가 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1667
+#: src/merge/mkvmerge.cpp:1681
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and block additional in '--blockadd %1%'.\n"
 msgstr "'%1%'는 '--blockadd %1%'에서 트랙 ID와 추가 블록의 유효한 한 쌍이 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1563
+#: src/merge/mkvmerge.cpp:1577
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and default duration in '--default-duration %1%'.\n"
 msgstr "'%1%'은 '--default-duration %1%'에서 유효한 한 쌍의 트랙 ID와 기본 재생시간이 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1712
+#: src/merge/mkvmerge.cpp:1726
 #, boost-format
 msgid "'%1%' is not a valid priority class.\n"
 msgstr "'%1%'는 유효한 우선 순위 클래스가 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1671
+#: src/merge/mkvmerge.cpp:1685
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--blockadd %2%'.\n"
 msgstr "'%1%'는 '--blockadd %2%'에서 유효한 트랙 ID가 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1567
+#: src/merge/mkvmerge.cpp:1581
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--default-duration %2%'.\n"
 msgstr "'--default-duration %2%'의 '%1%'는 유효한 트랙 ID가 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1595
+#: src/merge/mkvmerge.cpp:1609
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'--nalu-size-length %2%'의 '%1%'는 유효한 트랙 ID가 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:977
+#: src/merge/mkvmerge.cpp:991
 #, boost-format
 msgid "'%1%' is not a valid track ID."
 msgstr "'%1%'는 유효한 트랙 ID가 아닙니다."
 
-#: src/merge/mkvmerge.cpp:1571
+#: src/merge/mkvmerge.cpp:1585
 #, boost-format
 msgid "'%1%' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n"
 msgstr "'%1%'은 유효한 숫자 형식으로 인식되지 않거나 '%2%'에 유효한 유닛('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i')을 포함하지 않습니다.\n"
@@ -2109,90 +2128,91 @@ msgstr "'%1%'는 챕터 추출 시에만 사용할 수 있습니다.\n"
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "'%1%'는 트랙 추출 시에만 사용할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2258
+#: src/merge/mkvmerge.cpp:2282
 #, boost-format
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2127
-#: src/merge/mkvmerge.cpp:2147
-#: src/merge/mkvmerge.cpp:2212
-#: src/merge/mkvmerge.cpp:2307
-#: src/merge/mkvmerge.cpp:2503
-#: src/merge/mkvmerge.cpp:2517
-#: src/merge/mkvmerge.cpp:2751
-#: src/merge/mkvmerge.cpp:2765
-#: src/merge/mkvmerge.cpp:2772
-#: src/merge/mkvmerge.cpp:2779
-#: src/merge/mkvmerge.cpp:2786
-#: src/merge/mkvmerge.cpp:2793
-#: src/merge/mkvmerge.cpp:2800
-#: src/merge/mkvmerge.cpp:2807
-#: src/merge/mkvmerge.cpp:2821
-#: src/merge/mkvmerge.cpp:2828
-#: src/merge/mkvmerge.cpp:2835
-#: src/merge/mkvmerge.cpp:2842
-#: src/merge/mkvmerge.cpp:2849
+#: src/merge/mkvmerge.cpp:2151
+#: src/merge/mkvmerge.cpp:2171
+#: src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2331
+#: src/merge/mkvmerge.cpp:2534
+#: src/merge/mkvmerge.cpp:2548
+#: src/merge/mkvmerge.cpp:2782
+#: src/merge/mkvmerge.cpp:2796
+#: src/merge/mkvmerge.cpp:2803
+#: src/merge/mkvmerge.cpp:2810
+#: src/merge/mkvmerge.cpp:2817
+#: src/merge/mkvmerge.cpp:2824
+#: src/merge/mkvmerge.cpp:2831
+#: src/merge/mkvmerge.cpp:2838
+#: src/merge/mkvmerge.cpp:2852
 #: src/merge/mkvmerge.cpp:2859
 #: src/merge/mkvmerge.cpp:2866
 #: src/merge/mkvmerge.cpp:2873
 #: src/merge/mkvmerge.cpp:2880
-#: src/merge/mkvmerge.cpp:2887
-#: src/merge/mkvmerge.cpp:2894
-#: src/merge/mkvmerge.cpp:2901
+#: src/merge/mkvmerge.cpp:2890
+#: src/merge/mkvmerge.cpp:2897
+#: src/merge/mkvmerge.cpp:2904
+#: src/merge/mkvmerge.cpp:2911
+#: src/merge/mkvmerge.cpp:2918
+#: src/merge/mkvmerge.cpp:2925
+#: src/merge/mkvmerge.cpp:2932
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%'에 인수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2576
+#: src/merge/mkvmerge.cpp:2607
 #, boost-format
 msgid "'%1%' lacks the FourCC.\n"
 msgstr "'%1%'에 FourCC가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2758
+#: src/merge/mkvmerge.cpp:2479
+#: src/merge/mkvmerge.cpp:2789
 #, boost-format
 msgid "'%1%' lacks the delay.\n"
 msgstr "'%1%'에 지연이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2422
+#: src/merge/mkvmerge.cpp:2446
 #, boost-format
 msgid "'%1%' lacks the file name.\n"
 msgstr "'%1%'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2611
-#: src/merge/mkvmerge.cpp:2618
-#: src/merge/mkvmerge.cpp:2625
-#: src/merge/mkvmerge.cpp:2632
-#: src/merge/mkvmerge.cpp:2639
-#: src/merge/mkvmerge.cpp:2646
-#: src/merge/mkvmerge.cpp:2653
-#: src/merge/mkvmerge.cpp:2660
-#: src/merge/mkvmerge.cpp:2667
-#: src/merge/mkvmerge.cpp:2674
-#: src/merge/mkvmerge.cpp:2681
-#: src/merge/mkvmerge.cpp:2688
-#: src/merge/mkvmerge.cpp:2695
-#: src/merge/mkvmerge.cpp:2702
-#: src/merge/mkvmerge.cpp:2709
-#: src/merge/mkvmerge.cpp:2716
-#: src/merge/mkvmerge.cpp:2723
-#: src/merge/mkvmerge.cpp:2730
-#: src/merge/mkvmerge.cpp:2737
-#: src/merge/mkvmerge.cpp:2744
+#: src/merge/mkvmerge.cpp:2642
+#: src/merge/mkvmerge.cpp:2649
+#: src/merge/mkvmerge.cpp:2656
+#: src/merge/mkvmerge.cpp:2663
+#: src/merge/mkvmerge.cpp:2670
+#: src/merge/mkvmerge.cpp:2677
+#: src/merge/mkvmerge.cpp:2684
+#: src/merge/mkvmerge.cpp:2691
+#: src/merge/mkvmerge.cpp:2698
+#: src/merge/mkvmerge.cpp:2705
+#: src/merge/mkvmerge.cpp:2712
+#: src/merge/mkvmerge.cpp:2719
+#: src/merge/mkvmerge.cpp:2726
+#: src/merge/mkvmerge.cpp:2733
+#: src/merge/mkvmerge.cpp:2740
+#: src/merge/mkvmerge.cpp:2747
+#: src/merge/mkvmerge.cpp:2754
+#: src/merge/mkvmerge.cpp:2761
+#: src/merge/mkvmerge.cpp:2768
+#: src/merge/mkvmerge.cpp:2775
 #, boost-format
 msgid "'%1%' lacks the parameter.\n"
 msgstr "'%1%'에 변수가 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2814
+#: src/merge/mkvmerge.cpp:2845
 #, boost-format
 msgid "'%1%' lacks the track ID.\n"
 msgstr "'%1%'에 트랙 ID가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2541
-#: src/merge/mkvmerge.cpp:2548
-#: src/merge/mkvmerge.cpp:2555
-#: src/merge/mkvmerge.cpp:2562
-#: src/merge/mkvmerge.cpp:2569
+#: src/merge/mkvmerge.cpp:2572
+#: src/merge/mkvmerge.cpp:2579
+#: src/merge/mkvmerge.cpp:2586
+#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2600
 #, boost-format
 msgid "'%1%' lacks the track numbers.\n"
 msgstr "'%1%'은 트랙 번호가 없습니다.\n"
@@ -2218,64 +2238,64 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': 후속 파일을 마찬가지로 처리: %2%\n"
 
-#: src/input/r_matroska.cpp:1873
+#: src/input/r_matroska.cpp:1880
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%': 실험적 모드에서 기록되었던 Opus 트랙을 복사 중입니다. 그 결과로 나오는 트랙은 최종 모드로 기록이 될 것이지만 하나의 세부 항목(끝부분 잘라내기)은 실험적 모드에서 기록된 트랙에서 복원할 수 없습니다. 다시 말해서 디코더가 원래 의도한 것보다 몇 개의 샘플을 더 출력하게 됩니다. 그래서 가능하면 원래의 Opus에서 다시 합치기를 하세요.\n"
 
-#: src/merge/mkvmerge.cpp:2583
+#: src/merge/mkvmerge.cpp:2614
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio'에 비율이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2590
+#: src/merge/mkvmerge.cpp:2621
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor'에 화면 비율의 계수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2393
+#: src/merge/mkvmerge.cpp:2417
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description'에 설명이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2402
+#: src/merge/mkvmerge.cpp:2426
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type'에 MIME 유형이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2412
+#: src/merge/mkvmerge.cpp:2436
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name'에 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2448
+#: src/merge/mkvmerge.cpp:2472
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset'에 문자 인코딩이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1852
+#: src/merge/mkvmerge.cpp:1866
 #, boost-format
 msgid "'--chapter-charset' may only be given once in '--chapter-charset %1%'.\n"
 msgstr "'--chapter-charset'는 '--chapter-charset %1%'에 한 번만 지정할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1855
+#: src/merge/mkvmerge.cpp:1869
 #, boost-format
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset %1%'.\n"
 msgstr "'--chapter-charset %1%'에서 '--chapter-charset'는 '--chapters' 앞에 지정되어야 합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2441
+#: src/merge/mkvmerge.cpp:2465
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language'에 언어가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1834
+#: src/merge/mkvmerge.cpp:1848
 #, boost-format
 msgid "'--chapter-language' may only be given once in '--chapter-language %1%'.\n"
 msgstr "'--chapter-language'는 '--chapter-language %1%'에 한 번만 지정할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1837
+#: src/merge/mkvmerge.cpp:1851
 #, boost-format
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language %1%'.\n"
 msgstr "'--chapter-language %1%'에서 '--chapter-language'는 '--chapters' 앞에 지정되어야 합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2465
+#: src/merge/mkvmerge.cpp:2496
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2368
+#: src/merge/mkvmerge.cpp:2392
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length'에 길이가 지정되어 있지 않습니다.\n"
 
@@ -2283,19 +2303,19 @@ msgstr "'--cluster-length'에 길이가 지정되어 있지 않습니다.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset'는 인수가 누락되어 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2604
+#: src/merge/mkvmerge.cpp:2635
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping'에 잘라내기 매개변수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2455
+#: src/merge/mkvmerge.cpp:2486
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format'에 형식이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2458
+#: src/merge/mkvmerge.cpp:2489
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format'는 '--chapters' 앞에 한 번만 지정할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2597
+#: src/merge/mkvmerge.cpp:2628
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions'에 해상도가 지정되어 있지 않습니다.\n"
 
@@ -2303,71 +2323,71 @@ msgstr "'--display-dimensions'에 해상도가 지정되어 있지 않습니다.
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage'에 인수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2474
+#: src/merge/mkvmerge.cpp:2505
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters'에 모드가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2481
+#: src/merge/mkvmerge.cpp:2512
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template'에 name template이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2432
+#: src/merge/mkvmerge.cpp:2456
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2920
+#: src/merge/mkvmerge.cpp:2951
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link'는 '--split'와 함께 사용시에만 유용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2354
+#: src/merge/mkvmerge.cpp:2378
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next'에 다음 UID가 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2347
+#: src/merge/mkvmerge.cpp:2371
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous'에 이전 UID가 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2361
+#: src/merge/mkvmerge.cpp:2385
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid'에 세그먼트 UID가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2488
+#: src/merge/mkvmerge.cpp:2519
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2328
+#: src/merge/mkvmerge.cpp:2352
 msgid "'--split' lacks the size.\n"
 msgstr "'--split'에 크기가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2335
+#: src/merge/mkvmerge.cpp:2359
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files'에 파일 수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1922
+#: src/merge/mkvmerge.cpp:1946
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale'가 두 번 이상 사용되고 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2320
+#: src/merge/mkvmerge.cpp:2344
 msgid "'--title' lacks the title.\n"
 msgstr "'--title'에 제목이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2852
+#: src/merge/mkvmerge.cpp:2883
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order'는 한 번만 지정할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2043
+#: src/merge/mkvmerge.cpp:2067
 msgid "'-A' and '-a' used on the same source file.\n"
 msgstr "'-A'와 '-a'는 동일한 소스 파일에서 사용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2052
+#: src/merge/mkvmerge.cpp:2076
 msgid "'-B' and '-b' used on the same source file.\n"
 msgstr "'-B'와 '-b'는 동일한 소스 파일에서 사용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2046
+#: src/merge/mkvmerge.cpp:2070
 msgid "'-D' and '-d' used on the same source file.\n"
 msgstr "'-D'와 '-d'는 동일한 소스 파일에서 사용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2049
+#: src/merge/mkvmerge.cpp:2073
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S'와 '-s'는 동일한 소스 파일에서 사용합니다.\n"
 
@@ -2519,28 +2539,28 @@ msgstr "<이름 없음>"
 msgid "<Unsaved file>"
 msgstr "<미저장 파일>"
 
-#: src/input/r_matroska.cpp:2309
-#: src/input/r_matroska.cpp:2430
+#: src/input/r_matroska.cpp:2316
+#: src/input/r_matroska.cpp:2437
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "트랙 번호 %2%에 대한 타임스탬프 %1%의 블록을 찾았지만, 그 트랙 번호의 헤더는 찾지 못했습니다. 이 블록은 건너 뜁니다.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:313
+#: src/mkvtoolnix-gui/merge/output.cpp:320
 #, no-c-format
 msgid "A chapter starting at 0s is never considered for splitting and discarded silently."
 msgstr "0초 시작점 챕터는 결코 분할을 고려하지 않고 그냥 조용히 폐기됩니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:279
+#: src/mkvtoolnix-gui/merge/output.cpp:286
 #, no-c-format
 msgid "A comma-separated list of frame/field number ranges of content to keep."
 msgstr "유지할 내용의 프레임/필드 번호 범위를 쉼표로 구분하여 열거하여 지정합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:296
+#: src/mkvtoolnix-gui/merge/output.cpp:303
 #, no-c-format
 msgid "A comma-separated list of frame/field numbers after which to split."
 msgstr "분할할 다음 프레임/필드 번호룰 쉼표로 구분하여 열거하여 지정합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:269
+#: src/mkvtoolnix-gui/merge/output.cpp:276
 #, no-c-format
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "유지할 내용의 타임코드 범위를 쉼표로 구분하여 열거하여 지정합니다."
@@ -2592,8 +2612,8 @@ msgstr ""
 msgid "A regular expression is used for matching the file name against a list of recognized languages limited by characters such as '.' or '['…']'."
 msgstr "정규식은 파일 이름을 '.' 또는 '['...']'와 같은 문자로 제한되어 있는 인식된 언어 목록과 비교하는데 사용됩니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:287
-#: src/mkvtoolnix-gui/merge/output.cpp:303
+#: src/mkvtoolnix-gui/merge/output.cpp:294
+#: src/mkvtoolnix-gui/merge/output.cpp:310
 #, no-c-format
 msgid "A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."
 msgstr "하나의 Matroska 블록은 전체 프레임(프로그레시브 컨텐츠) 또는 하나의 필드(인터레이스 컨텐츠)에 포함되어 있습니다."
@@ -2657,7 +2677,7 @@ msgstr "AAC"
 msgid "AAC (Advanced Audio Coding)"
 msgstr "AAC [고급 오디오 부호화](Advanced Audio Coding)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1709
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1735
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC는 SBR/HE-AAC/AAC+:"
 
@@ -2877,7 +2897,7 @@ msgstr "새 첨부 파일로 'filename' 파일 추가"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:608
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:712
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1775
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1803
 msgid "Add to job &queue"
 msgstr "작업 대기열에 추가(&Q)"
 
@@ -2913,8 +2933,8 @@ msgstr "추가 변경(&M)"
 msgid "Additional command line options"
 msgstr "추가 명령행 옵션"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1717
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1735
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1743
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1761
 msgid "Additional options:"
 msgstr "추가 옵션:"
 
@@ -2943,22 +2963,22 @@ msgstr "작업을 성공적으로 또는 경고로 완료 후"
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr "작업이 오류로 종료하거나 사용자가 작업을 취소한 후"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:144
+#: src/mkvtoolnix-gui/merge/output.cpp:146
 #, no-c-format
 msgid "After frame/field numbers"
 msgstr "프레임/필드 번호 이후"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:143
+#: src/mkvtoolnix-gui/merge/output.cpp:145
 #, no-c-format
 msgid "After output duration"
 msgstr "출력 재생 시간 이후"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:143
+#: src/mkvtoolnix-gui/merge/output.cpp:145
 #, no-c-format
 msgid "After output size"
 msgstr "출력 크기 이후"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:143
+#: src/mkvtoolnix-gui/merge/output.cpp:145
 #, no-c-format
 msgid "After specific timestamps"
 msgstr "지정 타임코드 이후"
@@ -3000,7 +3020,7 @@ msgstr "알고리즘"
 msgid "All chapters have been removed from the file '%1'."
 msgstr "'%1' 파일에서 모든 챕터를 제거했습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1768
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1796
 msgid "All destination files"
 msgstr "모든 대상 파일"
 
@@ -3080,7 +3100,7 @@ msgstr "다른 모든 문자열은 트랙 헤더 선택기와 마찬가지로 �
 msgid "All supported media files"
 msgstr "모든 지원 미디어 파일"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:229
+#: src/mkvtoolnix-gui/merge/output.cpp:236
 #, no-c-format
 msgid "All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 msgstr "모든 유닛은 1024에 기반을 둡니다 (G = 1024^3, M = 1024^2, K = 1024)."
@@ -3167,7 +3187,7 @@ msgstr "ID %1%의 첨부 파일을 찾지 못했습니다.\n"
 msgid "An attachment with the name '%1' is already present."
 msgstr "'%1' 이름의 첨부 파일이 이미 있습니다."
 
-#: src/merge/mkvmerge.cpp:2034
+#: src/merge/mkvmerge.cpp:2058
 msgid "An empty file name is not valid.\n"
 msgstr "빈 파일 이름이 잘못되었습니다.\n"
 
@@ -3183,7 +3203,7 @@ msgid ""
 "the previous segment."
 msgstr "이전 세그먼트에 해당하는 이스케이프 파일 이름입니다."
 
-#: src/merge/mkvmerge.cpp:3127
+#: src/merge/mkvmerge.cpp:3158
 msgid "An exception occurred when writing the destination file."
 msgstr "대상 파일에 기록할 때 예외가 발생했습니다."
 
@@ -3207,8 +3227,8 @@ msgstr "MPEG4 비트스트림을 분석하고, 각 프레임을 하나의 Matros
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "%1% 트랙에는 이미 기본 트랙이 설정되어 있습니다. '%3%'의 트랙 %2%의 'default'플래그는 설정되지 않습니다.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:215
-#: src/mkvtoolnix-gui/merge/output.cpp:216
+#: src/mkvtoolnix-gui/merge/output.cpp:222
+#: src/mkvtoolnix-gui/merge/output.cpp:223
 #, no-c-format
 msgid "Any option given here will be added at the end of the mkvmerge command line."
 msgstr "여기에 적은 옵션은 mkvmerge 명령행의 끝에 추가됩니다."
@@ -3236,11 +3256,11 @@ msgstr "기존의 소스 파일에 결합하기(&X)"
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "%2% ('%3%') 파일 번호의 %1% 트랙을 %5% ('%6%') 파일 번호의 %4% 트랙에 결합합니다.\n"
 
-#: src/merge/mkvmerge.cpp:632
+#: src/merge/mkvmerge.cpp:646
 msgid "Aspect ratio"
 msgstr "화면 비율"
 
-#: src/merge/mkvmerge.cpp:632
+#: src/merge/mkvmerge.cpp:646
 msgid "Aspect ratio factor"
 msgstr "화면 비율 계수"
 
@@ -3252,15 +3272,15 @@ msgstr "화면 비율 유형"
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "적어도 하나의 <ChapterAtom> 요소가 필요합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1771
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1799
 msgid "Atta&chments"
 msgstr "첨부 파일(&C)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1760
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1788
 msgid "Atta&chments to add:"
 msgstr "추가할 첨부 파일(&C):"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1767
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1795
 msgid "Attach &to:"
 msgstr "첨부하기(&T):"
 
@@ -3274,7 +3294,7 @@ msgid "Attached"
 msgstr "첨부 파일"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:169
-#: src/mkvtoolnix-gui/merge/track.cpp:441
+#: src/mkvtoolnix-gui/merge/track.cpp:432
 #, no-c-format
 msgid "Attachment"
 msgstr "첨부 파일"
@@ -3308,12 +3328,12 @@ msgstr "같은 이름의 첨부 파일이 존재합니다"
 msgid "Attachments"
 msgstr "첨부 파일"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1759
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1787
 msgid "Attachments from &source files:"
 msgstr "소스 파일의 첨부 파일(&S):"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:48
-#: src/mkvtoolnix-gui/merge/track.cpp:437
+#: src/mkvtoolnix-gui/merge/track.cpp:428
 #, no-c-format
 msgid "Audio"
 msgstr "오디오"
@@ -3335,7 +3355,7 @@ msgstr "오디오 파일"
 msgid "Audio output sampling frequency"
 msgstr "오디오 출력 샘플링 주파수"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1708
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1734
 msgid "Audio properties"
 msgstr "오디오 속성"
 
@@ -3352,11 +3372,11 @@ msgstr "오디오 트랙"
 msgid "Audio track %1"
 msgstr "오디오 트랙 %1"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1679
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1705
 msgid "Audio, subtitle, chapter properties"
 msgstr "오디오, 자막, 챕터 속성"
 
-#: src/merge/mkvmerge.cpp:391
+#: src/merge/mkvmerge.cpp:398
 #, boost-format
 msgid "Automatic MIME type recognition for '%1%': %2%\n"
 msgstr "'%1%'의 MIME 유형 자동 인식: %2%\n"
@@ -3369,7 +3389,7 @@ msgstr "마지막 파일이 삭제될 때 자동으로 대상 파일명 지우�
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "마지막 파일이 삭제될 때 자동으로 파일 제목 지우기(&R)"
 
-#: src/merge/mkvmerge.cpp:2277
+#: src/merge/mkvmerge.cpp:2301
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "대상 파일 이름의 확장자에 따라 표준 WebM 호환 모드를 자동으로 활성화합니다.\n"
 
@@ -3393,7 +3413,7 @@ msgstr "사용가능 버전:"
 msgid "Available:"
 msgstr "이용가능:"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:144
+#: src/mkvtoolnix-gui/merge/output.cpp:146
 #, no-c-format
 msgid "Before chapters"
 msgstr "챕터 앞에"
@@ -3505,7 +3525,7 @@ msgid "Button track %1"
 msgstr "버튼 트랙 %1"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:51
-#: src/mkvtoolnix-gui/merge/track.cpp:440
+#: src/mkvtoolnix-gui/merge/track.cpp:431
 #, no-c-format
 msgid "Buttons"
 msgstr "버튼"
@@ -3515,12 +3535,12 @@ msgstr "버튼"
 msgid "By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."
 msgstr "자동으로 인식하지 못하는 파일을 열 때는 어떤 문자셋을 사용할 것인지 사용자에게 항상 묻는 것이 기본값입니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:144
+#: src/mkvtoolnix-gui/merge/output.cpp:146
 #, no-c-format
 msgid "By parts based on frame/field numbers"
 msgstr "프레임/필드 번호에 기반한 부분들로"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:144
+#: src/mkvtoolnix-gui/merge/output.cpp:146
 #, no-c-format
 msgid "By parts based on timestamps"
 msgstr "타임코드에 기반한 부분들로"
@@ -3721,7 +3741,7 @@ msgstr "챕터 편집기"
 msgid "Chapter extraction"
 msgstr "챕터 추출"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1746
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1772
 msgid "Chapter file:"
 msgstr "챕터 파일:"
 
@@ -3749,7 +3769,7 @@ msgstr "챕터 언어 (IETF)"
 msgid "Chapter mass modification"
 msgstr "챕터 대규모 변경"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:307
+#: src/mkvtoolnix-gui/merge/output.cpp:314
 #, no-c-format
 msgid "Chapter numbers:"
 msgstr "챕터 번호:"
@@ -3837,14 +3857,14 @@ msgstr "챕터 번역 에디션 UID"
 
 #: src/common/kax_element_names.cpp:265
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:237
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1744
-#: src/mkvtoolnix-gui/merge/track.cpp:442
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1770
+#: src/mkvtoolnix-gui/merge/track.cpp:433
 #: src/propedit/options.cpp:215
 #, no-c-format
 msgid "Chapters"
 msgstr "챕터"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1755
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1781
 msgid "Chapters in fixed intervals"
 msgstr "고정된 간격의 챕터"
 
@@ -3859,8 +3879,8 @@ msgstr[0] "챕터: %1% 항목"
 msgid "Character set"
 msgstr "문자셋"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1713
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1749
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1739
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1775
 msgid "Character set:"
 msgstr "문자셋:"
 
@@ -3912,12 +3932,12 @@ msgstr "변경한 파일 닫기"
 msgid "Cluster"
 msgstr "클러스터"
 
-#: src/merge/mkvmerge.cpp:1785
+#: src/merge/mkvmerge.cpp:1799
 #, boost-format
 msgid "Cluster length '%1%' out of range (0..65535).\n"
 msgstr "클러스터의 길이 '%1%'가 범위(0 ~ 65535)에서 벗어나 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1778
+#: src/merge/mkvmerge.cpp:1792
 #, boost-format
 msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "클러스터의 길이 '%1%'가 범위(100 ~ 32000)에서 벗어나 있습니다.\n"
@@ -4033,7 +4053,7 @@ msgstr "완료했으나 경고 있음"
 msgid "Compression failed: %1%\n"
 msgstr "압축 실패: %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1688
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1714
 msgid "Compression:"
 msgstr "압축:"
 
@@ -4079,7 +4099,7 @@ msgstr "텍스트 자막을 이 문자 인코딩으로 변환합니다. (기본�
 msgid "Converting the chapters to XML failed: %1"
 msgstr "챕터를 XML로 변환 실패: %1"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1683
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1709
 msgid "Cop&y this item:"
 msgstr "이 항목 복사(&Y):"
 
@@ -4195,11 +4215,11 @@ msgstr "대상 파일에 기록할 수 없습니다: %1% (%2%)\n"
 msgid "Country"
 msgstr "국가"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1734
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1760
 msgid "Create WebM compliant file"
 msgstr "WebM 호환 파일 만들기"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:209
+#: src/mkvtoolnix-gui/merge/output.cpp:216
 msgid "Create a WebM compliant file."
 msgstr "WebM 호환 파일을 만듭니다."
 
@@ -4244,12 +4264,12 @@ msgstr "'%1%' 폴더를 만들지 못했습니다: %2%"
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
 msgstr "파일 생성에 실패했습니다. 그 폴더에 쓰기 권한을 소유하고 있는지, 그 드라이브가 꽉 차지 않았는지 확인하세요."
 
-#: src/merge/mkvmerge.cpp:709
+#: src/merge/mkvmerge.cpp:723
 #, boost-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '%1%').\n"
 msgstr "잘라내기 매개변수: <TID>:<left>,<top>,<right>,<bottom> (예: 0:10,5,10,5)의 형태로 지정되어 있지 않습니다 (인수는 '%1%'입니다).\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1706
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1732
 msgid "Cropping:"
 msgstr "잘라내기:"
 
@@ -4342,7 +4362,7 @@ msgstr "큐 지속시간"
 msgid "Cue extraction"
 msgstr "Cue 추출"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1752
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1778
 msgid "Cue name format:"
 msgstr "CUE 이름 형식:"
 
@@ -4521,7 +4541,7 @@ msgstr "기본 추가 명령행 옵션(&M):"
 msgid "Default duration"
 msgstr "기본 재생 시간"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1694
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 msgid "Default duration/FPS:"
 msgstr "기본 재생 시간/FPS:"
 
@@ -4576,13 +4596,19 @@ msgstr "새로 추가한 트랙의 기본값"
 msgid "Delay"
 msgstr "시간 지연"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1692
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1718
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1784
 msgid "Delay (in ms):"
 msgstr "지연 (ms 단위):"
 
 #: src/common/property_element.cpp:144
 msgid "Delay built into the codec during decoding in ns."
 msgstr "디코딩하는 동안 코덱에 들어 있는 지연 시간, 단위는 ns."
+
+#: src/mkvtoolnix-gui/merge/output.cpp:200
+#, fuzzy, no-c-format
+msgid "Delay the chapters' timestamps by a couple of ms."
+msgstr "이 트랙의 타임스탬프를 몇 ms 정도 지연시킵니다."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:458
 #, no-c-format
@@ -4649,7 +4675,7 @@ msgstr "설명:"
 msgid "Destination directory"
 msgstr "대상 폴더"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1772
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1800
 msgid "Destination file"
 msgstr "대상 파일"
 
@@ -4674,7 +4700,7 @@ msgstr "대상 파일 폴더"
 msgid "Destination file's name"
 msgstr "대상 파일의 이름"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1721
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1747
 msgid "Destination file:"
 msgstr "대상 파일:"
 
@@ -4757,8 +4783,8 @@ msgstr "패딩 제거"
 msgid "Discardable"
 msgstr "폐기 가능"
 
-#: src/merge/mkvmerge.cpp:684
-#: src/merge/mkvmerge.cpp:690
+#: src/merge/mkvmerge.cpp:698
+#: src/merge/mkvmerge.cpp:704
 #, boost-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '%1%').\n"
 msgstr "화면 해상도: \"<TID>:<width>x<height>\" (예: \"1:640x480\")의 형태로 지정되어 있지 않습니다 (인수는 '%1%'입니다).\n"
@@ -4775,7 +4801,7 @@ msgstr "표시 단위"
 msgid "Display width"
 msgstr "표시 너비"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1705
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1731
 msgid "Display width/height:"
 msgstr "해상도 (가로 X 세로):"
 
@@ -4788,7 +4814,7 @@ msgstr "메타 탐색(Meta seek) 요소에 챕터 항목을 추가하지 않습�
 msgid "Do not show hex dumps"
 msgstr "16진수 덤프 표시 안 함"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:143
+#: src/mkvtoolnix-gui/merge/output.cpp:145
 #, no-c-format
 msgid "Do not split"
 msgstr "분할하지 않기"
@@ -4850,7 +4876,7 @@ msgstr "변경 않기"
 msgid "Don't escape"
 msgstr "이스케이프 않기"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1753
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1779
 msgid "Don't generate chapters"
 msgstr "챕터 만들지 않기"
 
@@ -4859,7 +4885,7 @@ msgstr "챕터 만들지 않기"
 msgid "Don't show this message again."
 msgstr "이 메시지를 다시 보지 않습니다."
 
-#: src/merge/mkvmerge.cpp:3035
+#: src/merge/mkvmerge.cpp:3066
 msgid "Done scanning playlists.\n"
 msgstr "재생목록 검색을 완료했습니다.\n"
 
@@ -4898,7 +4924,7 @@ msgid "Duration"
 msgstr "재생 시간"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:241
-#: src/mkvtoolnix-gui/merge/output.cpp:241
+#: src/mkvtoolnix-gui/merge/output.cpp:248
 #, no-c-format
 msgid "Duration:"
 msgstr "재생 시간:"
@@ -4955,16 +4981,16 @@ msgstr "EBML 없음"
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "악의적인 내부 버그입니다! (알 수 없는 파일 유형입니다.) %1%\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:170
+#: src/mkvtoolnix-gui/merge/output.cpp:172
 msgid "Each file created contains one segment, and each segment has one segment UID."
 msgstr "만든 각 파일에는 하나의 세그먼트가 있고, 각 세그먼트에는 하나의 세그먼트 UID가 있습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:280
+#: src/mkvtoolnix-gui/merge/output.cpp:287
 #, no-c-format
 msgid "Each range consists of a start and end frame/field number with a '-' in the middle, e.g. '157-238'."
 msgstr "각 범위는 '-'을 중앙에 두고 시작과 끝 프레임/필드 번호로 구성됩니다, 예: '157-238'."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:271
+#: src/mkvtoolnix-gui/merge/output.cpp:278
 #, no-c-format
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr "각 범위는 '-'를 중앙에 두고 시작과 끝의 타임코드로 구성됩니다. 예) '00:01:15-00:03:20'"
@@ -5007,7 +5033,7 @@ msgstr "에디션/챕터"
 msgid "Either fix the error or remove the configuration before closing the preferences dialog."
 msgstr "환경설정 대화상자를 닫기 전에 오류를 고치거나 설정을 제거하세요."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:309
+#: src/mkvtoolnix-gui/merge/output.cpp:316
 #, no-c-format
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
 msgstr "모든 챕터를 선택하는 단어 '전부'나 콤마로 분리한 챕터 번호 목록."
@@ -5063,7 +5089,7 @@ msgstr "활성화됨"
 msgid "Enables AV1 video support even though the AV1 bitstream specification hasn't been finalized yet."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:155
+#: src/mkvtoolnix-gui/merge/output.cpp:157
 #, no-c-format
 msgid "Enables splitting of the output into more than one file."
 msgstr "출력을 하나 이상의 파일로 자르기를 사용합니다."
@@ -5108,7 +5134,7 @@ msgstr "파일 이름이 유일한지 확인하기(&U)"
 msgid "Enter job description"
 msgstr "작업 설명을 적으세요"
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:281
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:283
 #, no-c-format
 msgid "Error"
 msgstr "오류"
@@ -5123,7 +5149,7 @@ msgstr "오류 %1%\n"
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "임시 파일 생성 오류 (원인: %1)."
 
-#: src/input/r_ogm.cpp:1227
+#: src/input/r_ogm.cpp:1235
 #, boost-format
 msgid "Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n"
 msgstr "소스 타임스탬프 %1%에서 Ogg Opus 페이지 디코딩 오류; 페이지를 건너 뜁니다: %2%\n"
@@ -5172,7 +5198,7 @@ msgstr "MPEG PS 패킷을 분석 중에 헤더를 읽어오는 단계에서 오�
 msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.\n"
 msgstr "'%1%'에서 챕터를 분석하는 동안 오류 발생: 필수 요소의 일부가 누락되어 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:518
+#: src/merge/mkvmerge.cpp:525
 #: src/propedit/tag_target.cpp:171
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
@@ -5217,7 +5243,7 @@ msgstr "오류: %1% 소스 파일을 열 수 없습니다 (%2%)."
 msgid "Error: No EBML head found."
 msgstr "오류: EBML 헤드를 찾지 못했습니다."
 
-#: src/merge/mkvmerge.cpp:2271
+#: src/merge/mkvmerge.cpp:2295
 msgid ""
 "Error: no destination file name was given.\n"
 "\n"
@@ -5261,17 +5287,17 @@ msgstr "예)"
 msgid "Examples"
 msgstr "예"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:247
+#: src/mkvtoolnix-gui/merge/output.cpp:254
 #, no-c-format
 msgid "Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds)."
 msgstr "예: 01:00:00 (한 시간 이후) 또는 1800s (1800 초 이후)."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:265
+#: src/mkvtoolnix-gui/merge/output.cpp:272
 #, no-c-format
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "예: 01:00:00,01:30:00 (한 시간 이후, 한 시간 30분 이후) 또는 180s,300s,00:10:00 (3, 5, 10분)."
 
-#: src/merge/mkvmerge.cpp:3127
+#: src/merge/mkvmerge.cpp:3158
 msgid "Exception details:"
 msgstr "예외 세부 사항:"
 
@@ -5436,7 +5462,7 @@ msgstr "패밀리 UID"
 msgid "Fi&le name:"
 msgstr "파일명(&L):"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1720
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1746
 msgid "Fi&le title:"
 msgstr "파일 제목(&L):"
 
@@ -5532,7 +5558,7 @@ msgstr "파일 구조 경고"
 msgid "File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."
 msgstr "MPEG 프로그램이나 트랜스포트 스트림과 같은 파일 형식(.vob, m2ts)은 파일에 포함된 모든 트랙을 감지하기 위해 데이터의 특정한 양을 분석할 필요가 있습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1737
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1763
 msgid "File/Segment linking"
 msgstr "파일/세그먼트 링크"
 
@@ -5544,7 +5570,7 @@ msgstr "파일을 그 파일 자체에 결합할 수 없습니다. '--append-to'
 msgid "Finished at:"
 msgstr "완료:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1698
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1724
 msgid "Fix bitstream timing info"
 msgstr "비트스트림 타이밍 정보 고치기"
 
@@ -5579,9 +5605,9 @@ msgstr "부동 소수점"
 msgid "For all frames"
 msgstr "모든 프레임용"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:165
-#: src/mkvtoolnix-gui/merge/output.cpp:173
-#: src/mkvtoolnix-gui/merge/output.cpp:174
+#: src/mkvtoolnix-gui/merge/output.cpp:167
+#: src/mkvtoolnix-gui/merge/output.cpp:175
+#: src/mkvtoolnix-gui/merge/output.cpp:176
 #, no-c-format
 msgid "For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."
 msgstr "파일/세그먼트 링크와 이 기능에 대한 자세한 설명은 mkvmerge 문서를 참고하세요."
@@ -5657,12 +5683,12 @@ msgstr "타임코드 스케일 인수를 주어진 값으로 사용하도록 합
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Non Closed GOP에서 두번째 참조 없는 B 프레임을 적어도 한 개 찾았습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1464
+#: src/merge/mkvmerge.cpp:1478
 #, boost-format
 msgid "FourCC: Invalid track ID in '%1% %2%'.\n"
 msgstr "FourCC: '%1% %2%'에 잘못된 트랙 ID가 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1460
+#: src/merge/mkvmerge.cpp:1474
 #, boost-format
 msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: '%1% %2%'에 누락된 트랙 ID가 있습니다.\n"
@@ -5705,7 +5731,7 @@ msgstr "프레임 크기: %1%%2%%3%"
 msgid "Frame%1%%2%"
 msgstr "프레임%1%%2%"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:294
+#: src/mkvtoolnix-gui/merge/output.cpp:301
 #, no-c-format
 msgid "Frames/fields:"
 msgstr "프레임/필드:"
@@ -5729,14 +5755,14 @@ msgstr "감마"
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
 msgstr "AVI 파일에서 오디오 트랙의 시작 부분에 있는 쓰레기는 보통 그 트랙을 지연시키기 위해 사용됩니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1719
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1745
 msgid "General"
 msgstr "일반"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1517
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1535
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1676
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1682
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1702
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1708
 msgid "General options"
 msgstr "일반 옵션"
 
@@ -5753,7 +5779,7 @@ msgstr "하위 챕터 만들기"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "몇 개의 챕터를 균등한 간격으로 두어서 만드는 중"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1750
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1776
 msgid "Generating chapters:"
 msgstr "챕터 만들기:"
 
@@ -5766,12 +5792,12 @@ msgstr "전역 옵션"
 msgid "Global output control"
 msgstr "전역 출력 제어"
 
-#: src/mkvtoolnix-gui/merge/track.cpp:444
+#: src/mkvtoolnix-gui/merge/track.cpp:435
 #, no-c-format
 msgid "Global tags"
 msgstr "전역 태그"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1723
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1749
 msgid "Global tags:"
 msgstr "전역 태그:"
 
@@ -5937,22 +5963,22 @@ msgstr "여기에서 문자셋을 선택하면 사용자에게 묻는 대신 그
 msgid "If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."
 msgstr "문자셋을 여기에서 선택하면 프로그램은 새로 추가한 텍스트 자막 트랙의 문자셋 입력을 여기의 값으로 자동 설정합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:291
+#: src/mkvtoolnix-gui/merge/output.cpp:298
 #, no-c-format
 msgid "If a range's start number is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
 msgstr "범위의 시작 번호에 '+' 접두사가 있을 경우, 그 내용은 이전 범위와 마찬가지로 동일한 파일에 기록됩니다. 그렇지 않으면('+' 접두사가 없으면) 이 범위에 대한 새 파일이 만들어집니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:274
+#: src/mkvtoolnix-gui/merge/output.cpp:281
 #, no-c-format
 msgid "If a range's start timestamp is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
 msgstr "범위의 시작 타임코드에 '+' 접두사가 있을 경우, 그 내용은 이전 범위와 마찬가지로 동일한 파일에 기록됩니다. 그렇지 않으면('+' 접두사가 없으면) 이 범위에 대한 새 파일이 만들어집니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:290
+#: src/mkvtoolnix-gui/merge/output.cpp:297
 #, no-c-format
 msgid "If a start number is left out then the previous range's end number is used, or the start of the file if there was no previous range."
 msgstr "시작 번호가 누락되어 있으면 이전 범위의 끝 타임코드를 사용하거나 이전 범위가 없으면 파일의 시작으로 사용합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:272
+#: src/mkvtoolnix-gui/merge/output.cpp:279
 #, no-c-format
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
 msgstr "시작 타임코드가 누락되어 있으면 이전 범위의 끝 타임코드를 사용하거나 이전 범위가 없으면 파일의 시작으로 사용합니다."
@@ -6062,11 +6088,11 @@ msgstr "이 옵션 사용시 프로그램 종료할 때 상태바에 표시되�
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
 msgstr "이 옵션 사용시 이 형식의 트랙은 언어에 상관 없이 항상 복사하도록 설정됩니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:172
+#: src/mkvtoolnix-gui/merge/output.cpp:174
 msgid "If fewer UIDs are specified than segments are created then random UIDs will be created for them."
 msgstr "세그먼트가 생성되는 것보다 더 적은 수의 UID를 지정하면 세그먼트에 대해서 무작위 UID를 생성합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:246
+#: src/mkvtoolnix-gui/merge/output.cpp:253
 #, no-c-format
 msgid "If given then you may use up to nine digits after the decimal point."
 msgstr "소수점 이후에 아홉 자리까지 사용할 수 있습니다."
@@ -6081,7 +6107,7 @@ msgstr "숫자가 붙은 'DELAY' 단어를 포함하면 이 숫자는 파일에�
 msgid "If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all."
 msgstr "빈 상태로 놓아 두면 트랙의 원래 스테레오 모드를 유지합니다. 스테레오 모드가 없으면 아무 설정도 하지 않습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:171
+#: src/mkvtoolnix-gui/merge/output.cpp:173
 msgid "If more segment UIDs are specified than segments are created then the surplus UIDs are ignored."
 msgstr "세그먼트가 생성되는 것보다 더 많은 수의 세그먼트 UID를 지정하면 잉여의 UID는 무시됩니다."
 
@@ -6090,13 +6116,13 @@ msgstr "세그먼트가 생성되는 것보다 더 많은 수의 세그먼트 UI
 msgid "If no unit is given, 'fps' will be used."
 msgstr "단위를 지정하지 않으면, 'fps'를 사용합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:284
-#: src/mkvtoolnix-gui/merge/output.cpp:300
+#: src/mkvtoolnix-gui/merge/output.cpp:291
+#: src/mkvtoolnix-gui/merge/output.cpp:307
 #, no-c-format
 msgid "If no video track is output no splitting will occur."
 msgstr "비디오 트랙이 출력되지 않는 경우는 분할되지 않습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:197
+#: src/mkvtoolnix-gui/merge/output.cpp:199
 #, boost-format
 msgid "If nothing is entered then '%p - %t' will be used."
 msgstr "아무 입력이 없으면 '%p - %t'를 사용합니다."
@@ -6121,7 +6147,7 @@ msgstr "'자동으로 결정하기'로 설정하면 mkvmerge는 압축 여부와
 msgid "If set to 'no' then the selected tracks will not be copied to the destination file."
 msgstr "'아니오'로 설정하면 선택한 트랙은 대상 파일에 복사하지 않습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:189
+#: src/mkvtoolnix-gui/merge/output.cpp:191
 #, no-c-format
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
 msgstr "OGM 형식을 사용하고 파일의 문자셋을 제대로 인식하지 못하면 그것을 바로잡기 위해 이 옵션을 사용할 수 있습니다."
@@ -6187,7 +6213,7 @@ msgstr "이 옵션 사용시 GUI는 마지막 소스 파일이 삭제될 때마�
 msgid "If tracks are known to be present but not found, the percentage to probe can be changed here."
 msgstr "트랙이 분명히 있는데 찾을 수 없다면, 조사할 퍼센트를 여기에서 바꿀 수 있습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:263
+#: src/mkvtoolnix-gui/merge/output.cpp:270
 #, no-c-format
 msgid "If two or more timestamps are used then you have to separate them with commas."
 msgstr "두 개나 그 이상의 타임코드 사용시 콤마로 타임코드를 분리해야 합니다."
@@ -6197,7 +6223,7 @@ msgstr "두 개나 그 이상의 타임코드 사용시 콤마로 타임코드�
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "동일한 대상 파일에 다른 작업을 추가하면 이전에 만든 파일에 덮어씁니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:161
+#: src/mkvtoolnix-gui/merge/output.cpp:163
 msgid "If you leave this empty then there is no limit for the number of files mkvmerge might create."
 msgstr "이것을 빈 채로 놔두면 mkvmerge가 만드는 파일 개수에 제한이 없습니다."
 
@@ -6232,7 +6258,7 @@ msgstr "파일과 트랙의 오른쪽에 있는 스크롤할 수 있는 세로�
 msgid "In a tab &widget below the files and tracks"
 msgstr "파일과 트랙 아래쪽의 탭 위젯에서(&W)"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:203
+#: src/mkvtoolnix-gui/merge/output.cpp:210
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
 msgstr "고정 간격으로: 예를 들어 매 30초마다 고정 간격으로 챕터를 만듭니다."
 
@@ -6255,7 +6281,7 @@ msgstr "보다 자세한 정보를 표시합니다."
 msgid "Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."
 msgstr "체크박스와는 별도로, 모든 활성 환경설정은 \"작업 출력\" 도구에서 직접 작동시킬 수 있습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1716
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1742
 msgid "Indexing (cues):"
 msgstr "인덱싱 (큐):"
 
@@ -6313,11 +6339,11 @@ msgstr "내부 버그: tracks.cpp SSA #1. %1%"
 msgid "Internal program error"
 msgstr "내부 프로그램 오류"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1757
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1783
 msgid "Interval:"
 msgstr "간격:"
 
-#: src/merge/mkvmerge.cpp:1388
+#: src/merge/mkvmerge.cpp:1402
 #, boost-format
 msgid "Invalid %1% specified in '--%2% %3%'.\n"
 msgstr "'--%2% %3%'에서 잘못된 %1%가 지정되었습니다.\n"
@@ -6355,22 +6381,22 @@ msgstr "인수 '%1%'에서 지정된 '첨부 파일ID/파일 이름'이 잘못�
 msgid "Invalid attribute '%1%' in node '%2%' at position %3%"
 msgstr "위치 '%3%'에서 노드 '%2%'에 속성 '%1%'이 잘못되었습니다."
 
-#: src/merge/mkvmerge.cpp:1251
+#: src/merge/mkvmerge.cpp:1265
 #, boost-format
 msgid "Invalid boolean option specified in '--default-track %1%'.\n"
 msgstr "'--default-track %1%'에서 잘못된 논리값(boolean)이 지정되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1629
+#: src/merge/mkvmerge.cpp:1643
 #, boost-format
 msgid "Invalid boolean option specified in '--fix-bitstream-timing-information %1%'.\n"
 msgstr "'--fix-bitstream-timing-information %1%'에 무효한 불린(boolean) 옵션을 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1277
+#: src/merge/mkvmerge.cpp:1291
 #, boost-format
 msgid "Invalid boolean option specified in '--forced-track %1%'.\n"
 msgstr "'--forced-track %1%'에서 잘못된 논리값(boolean)이 지정되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1696
+#: src/merge/mkvmerge.cpp:1710
 #, boost-format
 msgid "Invalid boolean specified in '--aac-is-sbr %1%'.\n"
 msgstr "'--aac-is-sbr %1%'에서 잘못된 논리값(boolean)이 지정되었습니다.\n"
@@ -6380,28 +6406,28 @@ msgstr "'--aac-is-sbr %1%'에서 잘못된 논리값(boolean)이 지정되었습
 msgid "Invalid change spec (%3%) in '%1% %2%'.\n"
 msgstr "'%1% %2%'에서 변경 지정(%3%)이 잘못되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1064
-#: src/merge/mkvmerge.cpp:1103
+#: src/merge/mkvmerge.cpp:1078
+#: src/merge/mkvmerge.cpp:1117
 #, boost-format
 msgid "Invalid chapter number '%1%' for '--split' in '--split %2%': %3%\n"
 msgstr "'--split %2%'의 '--split'에 대해 무효한 챕터 번호 '%1%': %3%\n"
 
-#: src/merge/mkvmerge.cpp:1332
+#: src/merge/mkvmerge.cpp:1346
 #, boost-format
 msgid "Invalid compression option specified in '--compression %1%'.\n"
 msgstr "'--compression %1%'에서 잘못된 압축 옵션이 지정되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1325
+#: src/merge/mkvmerge.cpp:1339
 #, boost-format
 msgid "Invalid compression option. No track ID specified in '--compression %1%'.\n"
 msgstr "잘못된 압축 옵션입니다. '--compression %1%'에서 트랙 ID가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1302
+#: src/merge/mkvmerge.cpp:1316
 #, boost-format
 msgid "Invalid cues option specified in '--cues %1%'.\n"
 msgstr "'--cues %1%'에서 잘못된 큐(CUE) 옵션이 지정되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1295
+#: src/merge/mkvmerge.cpp:1309
 #, boost-format
 msgid "Invalid cues option. No track ID specified in '--cues %1%'.\n"
 msgstr "잘못된 큐(CUE) 옵션입니다. '--cues %1%'에서 트랙 ID가 지정되어 있지 않습니다.\n"
@@ -6430,7 +6456,7 @@ msgstr "'--split %1%'(현재 부분: %2%)에서 '--split'의 끝 시간이 잘�
 msgid "Invalid end time for '--split' in '--split %1%' (current part: %2%). The end time must be bigger than the start time.\n"
 msgstr "'--split %1%'(현재 부분: %2%)에서 '--split'의 끝 시간이 잘못되었습니다. 끝 시간은 시작 시간 보다 커야 합니다.\n"
 
-#: src/merge/mkvmerge.cpp:1180
+#: src/merge/mkvmerge.cpp:1194
 #, boost-format
 msgid "Invalid format for '--split' in '--split %1%'.\n"
 msgstr "'--split %1%'에서 잘못된 '--split'형식이 지정되었습니다.\n"
@@ -6481,7 +6507,7 @@ msgstr "무효한 형식: 문자열이 비어 있습니다."
 msgid "Invalid format: unknown character '%1%' found"
 msgstr "잘못된 형식: 알 수 없는 문자 '%1%'을 찼았습니다"
 
-#: src/merge/mkvmerge.cpp:1044
+#: src/merge/mkvmerge.cpp:1058
 #, boost-format
 msgid "Invalid frame for '--split' in '--split %1%'.\n"
 msgstr "'--split' in '--split %1%'에 대해 무효한 프레임.\n"
@@ -6491,7 +6517,7 @@ msgstr "'--split' in '--split %1%'에 대해 무효한 프레임.\n"
 msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "잘못된 헤더 길이: %1% (전체 길이: %2%, idx: %3%, dataidx: %4%)\n"
 
-#: src/merge/mkvmerge.cpp:2139
+#: src/merge/mkvmerge.cpp:2163
 #, boost-format
 msgid "Invalid identification format in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 무효한 식별 형식.\n"
@@ -6537,7 +6563,7 @@ msgstr "'%1% %2%'에서 잘못된 선택이 지정되었습니다.\n"
 msgid "Invalid settings"
 msgstr "무효한 설정"
 
-#: src/merge/mkvmerge.cpp:1134
+#: src/merge/mkvmerge.cpp:1148
 #, boost-format
 msgid "Invalid split size in '--split %1%'.\n"
 msgstr "'--split %1%'에서 잘못된 분할 크기가 있습니다.\n"
@@ -6571,106 +6597,106 @@ msgstr "'--split %1%'(현재 부분: %2%)에서 '--split'의 시작 시간이 �
 msgid "Invalid start/end specification for '--split' in '--split %1%' (current part: %2%).\n"
 msgstr "'--split %1%'(현재 부분: %2%)에서 '--split'의 시작/끝 지정이 잘못되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1412
+#: src/merge/mkvmerge.cpp:1426
 #, boost-format
 msgid "Invalid sub charset option. No track ID specified in '--sub-charset %1%'.\n"
 msgstr "잘못된 자막 문자 인코딩 옵션입니다. '--sub-charset %1%'에서 트랙 ID가 지정되지 않았습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1419
+#: src/merge/mkvmerge.cpp:1433
 #, boost-format
 msgid "Invalid sub charset specified in '--sub-charset %1%'.\n"
 msgstr "'--sub-charset %1%'에서 잘못된 자막 문자 인코딩으로 지정되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:581
-#: src/merge/mkvmerge.cpp:615
+#: src/merge/mkvmerge.cpp:592
+#: src/merge/mkvmerge.cpp:629
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'.\n"
 msgstr "'%1% %2%'에서 잘못된 동기화 옵션이 지정되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:604
+#: src/merge/mkvmerge.cpp:618
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'. The divisor is zero.\n"
 msgstr "'%1% %2%'에서 잘못된 동기화 옵션이 지정되었습니다. 제수가 0입니다.\n"
 
-#: src/merge/mkvmerge.cpp:610
+#: src/merge/mkvmerge.cpp:624
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'. The linear sync value may not be equal to or smaller than zero.\n"
 msgstr "'%1% %2%'에서 잘못된 동기화 옵션이 지정되었습니다. 길이 동기화 값은 0을 포함한 음수는 사용할 수 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:573
+#: src/merge/mkvmerge.cpp:584
 #, boost-format
 msgid "Invalid sync option. No track ID specified in '%1% %2%'.\n"
 msgstr "잘못된 동기화 옵션입니다. '%1% %2%'에서 트랙 ID가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1443
+#: src/merge/mkvmerge.cpp:1457
 #, boost-format
 msgid "Invalid tags file name specified in '%1% %2%'.\n"
 msgstr "'%1% %2%'에서 잘못된 태그 파일 이름이 지정되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1436
+#: src/merge/mkvmerge.cpp:1450
 #, boost-format
 msgid "Invalid tags option. No track ID specified in '%1% %2%'.\n"
 msgstr "잘못된 태그 옵션입니다. '%1% %2%'에서 트랙 ID가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1002
+#: src/merge/mkvmerge.cpp:1016
 #, boost-format
 msgid "Invalid time for '--split' in '--split %1%'. Additional error message: %2%\n"
 msgstr "'--split %1%'에서 '--split'의 잘못된 시간이 지정되었습니다. 추가 오류 메시지: %2%\n"
 
-#: src/merge/mkvmerge.cpp:1023
+#: src/merge/mkvmerge.cpp:1037
 #, boost-format
 msgid "Invalid time for '--split' in '--split %1%'. Additional error message: %2%.\n"
 msgstr "'--split %1%'에서 '--split'의 잘못된 시간이 지정되었습니다. 추가 오류 메시지: %2%.\n"
 
-#: src/merge/mkvmerge.cpp:551
+#: src/merge/mkvmerge.cpp:558
 #, boost-format
 msgid "Invalid track ID or language code in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 무효한 트랙 ID 또는 언어 코드.\n"
 
-#: src/merge/mkvmerge.cpp:577
-#: src/merge/mkvmerge.cpp:1440
-#: src/merge/mkvmerge.cpp:1641
-#: src/merge/mkvmerge.cpp:1652
+#: src/merge/mkvmerge.cpp:587
+#: src/merge/mkvmerge.cpp:1454
+#: src/merge/mkvmerge.cpp:1655
+#: src/merge/mkvmerge.cpp:1666
 #, boost-format
 msgid "Invalid track ID specified in '%1% %2%'.\n"
 msgstr "'%1% %2%'에서 잘못된 트랙 ID를 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1384
+#: src/merge/mkvmerge.cpp:1398
 #, boost-format
 msgid "Invalid track ID specified in '--%1% %2%'.\n"
 msgstr "'--%1% %2%'에서 잘못된 트랙 ID를 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1693
+#: src/merge/mkvmerge.cpp:1707
 #, boost-format
 msgid "Invalid track ID specified in '--aac-is-sbr %1%'.\n"
 msgstr "'--aac-is-sbr %1%'에서 잘못된 트랙 ID를 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1329
+#: src/merge/mkvmerge.cpp:1343
 #, boost-format
 msgid "Invalid track ID specified in '--compression %1%'.\n"
 msgstr "'--compression %1%'에서 잘못된 트랙 ID를 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1299
+#: src/merge/mkvmerge.cpp:1313
 #, boost-format
 msgid "Invalid track ID specified in '--cues %1%'.\n"
 msgstr "'--cues %1%'에서 잘못된 트랙 ID를 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1245
+#: src/merge/mkvmerge.cpp:1259
 #, boost-format
 msgid "Invalid track ID specified in '--default-track %1%'.\n"
 msgstr "'--default-track %1%'에서 잘못된 트랙 ID를 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1623
+#: src/merge/mkvmerge.cpp:1637
 #, boost-format
 msgid "Invalid track ID specified in '--fix-bitstream-timing-information %1%'.\n"
 msgstr "'--fix-bitstream-timing-information %1%'에서 무효한 트랙 ID를 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1271
+#: src/merge/mkvmerge.cpp:1285
 #, boost-format
 msgid "Invalid track ID specified in '--forced-track %1%'.\n"
 msgstr "'--forced-track %1%'에서 잘못된 트랙 ID를 지정했습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1416
+#: src/merge/mkvmerge.cpp:1430
 #, boost-format
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "'--sub-charset %1%'에서 잘못된 트랙 ID를 지정했습니다.\n"
@@ -6699,12 +6725,12 @@ msgstr "필수적인 헤더 필드라서 제거할 수 없습니다."
 msgid "It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."
 msgstr "기본값은 4 바이트이지만 65535 바이트(0xFFFF)보다 큰 프레임이나 조각을 포함하지 않는 파일이 있습니다."
 
-#: src/merge/mkvmerge.cpp:971
+#: src/merge/mkvmerge.cpp:985
 msgid "It does not consist of a track ID and a value separated by a colon."
 msgstr "그것은 트랙 ID와 콜론으로 분리된 값으로 되어 있지 않습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:184
-#: src/mkvtoolnix-gui/merge/output.cpp:190
+#: src/mkvtoolnix-gui/merge/output.cpp:186
+#: src/mkvtoolnix-gui/merge/output.cpp:192
 #, no-c-format
 msgid "It is ignored for XML chapter files."
 msgstr "XML 챕터 파일에서는 무시합니다."
@@ -6812,7 +6838,7 @@ msgid "Language is not NUL terminated"
 msgstr "언어가 NUL로 끝나지 않습니다."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1748
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1774
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:70
 #, no-c-format
 msgid "Language:"
@@ -6880,7 +6906,7 @@ msgstr "%1%번째 행: 이 행은 자막 항목인 것 같습니다만 형식을
 msgid "Line %1%: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
 msgstr "%1%번째 행: 이 행은 자막 항목인 것 같습니다만 타임코드가 트랙 지연을 추가한 이후에도 음수 입니다. 음수 타임코드는 Matroska에서 지원하지 않습니다. 이 항목은 건너 뜁니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1731
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1757
 msgid "Link files"
 msgstr "파일 링크"
 
@@ -7018,12 +7044,12 @@ msgstr "MPLS Blu-ray 재생목록"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "이 트랙을 그 유형(오디오, 비디오, 자막)의 기본 트랙으로 만듭니다."
 
-#: src/input/r_matroska.cpp:1761
-#: src/input/r_matroska.cpp:1778
+#: src/input/r_matroska.cpp:1768
+#: src/input/r_matroska.cpp:1785
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "잘못된 형식의 AAC 코덱 초기화 데이터를 찾았습니다.\n"
 
-#: src/input/r_matroska.cpp:1771
+#: src/input/r_matroska.cpp:1778
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "잘못된 형식의 코덱 ID '%1%'입니다.\n"
@@ -7058,7 +7084,7 @@ msgstr "Matroska 오디오/비디오 파일"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:683
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:182
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:401
 #, no-c-format
 msgid "Matroska files"
 msgstr "Matroska 파일"
@@ -7121,7 +7147,7 @@ msgstr "최대 휘도"
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
 msgstr "최대 휘도 (평방 미터당 칸델라, cd/m²)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1729
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1755
 msgid "Maximum number of files:"
 msgstr "최대 파일 개수:"
 
@@ -7163,9 +7189,9 @@ msgstr "최소 휘도"
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
 msgstr "최소 휘도 (평방 미터당 칸델라, cd/m²)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1680
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1715
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1733
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1706
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1741
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1759
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -7210,12 +7236,12 @@ msgstr "섹션 '%1%'의 속성 변경을 요청했지만, 파일에서 수준 1 
 msgid "More"
 msgstr "More"
 
-#: src/merge/mkvmerge.cpp:2405
+#: src/merge/mkvmerge.cpp:2429
 #, boost-format
 msgid "More than one MIME type was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "하나의 첨부 파일에 하나 이상의 MIME 유형이 지정되었습니다. '%1%'는 버리고 대신 '%2%'를 사용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2396
+#: src/merge/mkvmerge.cpp:2420
 msgid "More than one description was given for a single attachment.\n"
 msgstr "하나의 첨부 파일에 여러개의 설명이 지정되었습니다.\n"
 
@@ -7224,7 +7250,7 @@ msgstr "하나의 첨부 파일에 여러개의 설명이 지정되었습니다.
 msgid "More than one file name has been given ('%1%' and '%2%').\n"
 msgstr "파일 이름이 하나 이상 지정되었습니다 ('%1%'와 '%2%').\n"
 
-#: src/merge/mkvmerge.cpp:2415
+#: src/merge/mkvmerge.cpp:2439
 #, boost-format
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "하나의 첨부 파일에 여러개의 이름이 지정되었습니다. '%1%'는 버리고 대신 '%2%'를 사용합니다.\n"
@@ -7274,16 +7300,21 @@ msgstr "합치기 응용프로그램"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "\"%1\" 파일을 \"%2\" 폴더에서 합치기"
 
-#: src/merge/mkvmerge.cpp:3131
+#: src/merge/mkvmerge.cpp:3162
 #, boost-format
 msgid "Multiplexing took %1%.\n"
 msgstr "합치기 작업에 걸린 시간: %1%\n"
+
+#: src/mkvtoolnix-gui/merge/output.cpp:203
+#, fuzzy
+msgid "Multiply the chapters' timestamps with a factor."
+msgstr "이 트랙의 타임코드를 인수로 곱합니다."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:463
 msgid "Multiply this track's timestamps with a factor."
 msgstr "이 트랙의 타임코드를 인수로 곱합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1701
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1727
 msgid "NALU size length:"
 msgstr "NALU 크기 길이:"
 
@@ -7307,7 +7338,7 @@ msgstr "이름"
 msgid "Name tem&plate:"
 msgstr "이름 템플릿(&P):"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1745
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1771
 msgid "Name template:"
 msgstr "이름 템플릿:"
 
@@ -7357,7 +7388,7 @@ msgstr "다음 파일명"
 msgid "Next segment UID"
 msgstr "다음 세그먼트 UID"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1742
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1768
 msgid "Next segment UID:"
 msgstr "다음 세그먼트 UID:"
 
@@ -7386,7 +7417,7 @@ msgstr "다음 세그먼트의 고유 ID"
 msgid "No"
 msgstr "아니오"
 
-#: src/merge/mkvmerge.cpp:1378
+#: src/merge/mkvmerge.cpp:1392
 #, boost-format
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "'--%2% %3%'에 %1%가 지정되어 있지 않습니다.\n"
@@ -7398,11 +7429,11 @@ msgstr "'--%2% %3%'에 %1%가 지정되어 있지 않습니다.\n"
 msgid "No 'EBML head' element was found."
 msgstr "'EBML 헤드' 요소를 찾지 못했습니다."
 
-#: src/input/r_qtmp4.cpp:1717
+#: src/input/r_qtmp4.cpp:1722
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "첫 프레임에서 AC-3 헤더를 찾지 못했습니다; 트랙을 건너뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3359
+#: src/input/r_qtmp4.cpp:3367
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "첫 프레임에서 DTS 헤더를 찾지 못했습니다; 트랙을 건너뜁니다.\n"
 
@@ -7410,7 +7441,7 @@ msgstr "첫 프레임에서 DTS 헤더를 찾지 못했습니다; 트랙을 건�
 msgid "No EBML head found."
 msgstr "EBML 헤더를 찾지 못했습니다."
 
-#: src/merge/mkvmerge.cpp:395
+#: src/merge/mkvmerge.cpp:402
 #, boost-format
 msgid "No MIME type has been set for the attachment '%1%', and it could not be guessed.\n"
 msgstr "첨부 파일 '%1%'에 MIME 유형이 설정되지 않았고, 이것을 추정할 수 없습니다.\n"
@@ -7434,13 +7465,13 @@ msgstr "'%1%' 사양과 일치하는 첨부 파일이 없습니다.\n"
 msgid "No changes were made.\n"
 msgstr "변경 사항이 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1069
+#: src/merge/mkvmerge.cpp:1083
 #, boost-format
 msgid "No chapter numbers listed after '--split %1%'.\n"
 msgstr "'--split %1%' 뒤에 챕터 번호가 열거되지 않았습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1073
-#: src/merge/mkvmerge.cpp:1099
+#: src/merge/mkvmerge.cpp:1087
+#: src/merge/mkvmerge.cpp:1113
 msgid "No chapters in source files or chapter files found to split by.\n"
 msgstr "분할하기 위한 소스 파일 또는 챕터 파일에 챕터가 없습니다.\n"
 
@@ -7478,7 +7509,7 @@ msgstr "아직 연 파일이 없습니다."
 msgid "No file name given.\n"
 msgstr "파일 이름을 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2012
+#: src/merge/mkvmerge.cpp:2036
 #, boost-format
 msgid "No file names were listed between '%1%' and '%2%'.\n"
 msgstr "'%1%'과 '%2%' 사이에 나열된 파일명이 없습니다.\n"
@@ -7540,7 +7571,7 @@ msgstr "파일 '%1%'에서 세그먼트 UID를 찾을 수 없습니다."
 msgid "No segment/level 0 element found."
 msgstr "세그먼트/수준 0 요소를 찾지 못했습니다."
 
-#: src/merge/mkvmerge.cpp:2923
+#: src/merge/mkvmerge.cpp:2954
 msgid "No source files were given.\n"
 msgstr "소스 파일을 지정하지 않았습니다.\n"
 
@@ -7548,7 +7579,7 @@ msgstr "소스 파일을 지정하지 않았습니다.\n"
 msgid "No space left to write to"
 msgstr "기록할 여유 공간이 없음"
 
-#: src/merge/mkvmerge.cpp:1375
+#: src/merge/mkvmerge.cpp:1389
 #, boost-format
 msgid "No track ID specified in '--%1% %2%'.\n"
 msgstr "'--%1% %2%'에 트랙 ID가 지정되어 있지 않습니다.\n"
@@ -7637,7 +7668,7 @@ msgstr "유효한 Matroska 파일이 아닙니다 (EBML 헤드를 찾지 못했�
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "유효한 Matroska 파일이 아닙니다 (세그먼트/수준 0 요소를 찾지 못했습니다)"
 
-#: src/merge/mkvmerge.cpp:1064
+#: src/merge/mkvmerge.cpp:1078
 msgid "Not a valid number or not positive."
 msgstr "유효한 숫자가 아니거나 양수가 아닙니다."
 
@@ -7740,7 +7771,7 @@ msgstr "Ogg/OGM"
 msgid "Ogg/OGM audio/video files"
 msgstr "Ogg/OGM 오디오/비디오 파일"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1754
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1780
 msgid "One chapter for each appended file"
 msgstr "결합한 각 파일마다 한 개의 챕터"
 
@@ -7757,7 +7788,7 @@ msgstr "각 트랙 및 프레임에 대한 한 줄 요약"
 msgid "Online check for updates"
 msgstr "온라인 업데이트 확인"
 
-#: src/merge/mkvmerge.cpp:1105
+#: src/merge/mkvmerge.cpp:1119
 #, boost-format
 msgid "Only %1% chapter found in source files & chapter files."
 msgid_plural "Only %1% chapters found in source files & chapter files."
@@ -7767,7 +7798,7 @@ msgstr[0] "소스 파일과 챕터 파일에서 %1%개의 챕터만 찾았습니
 msgid "Only English language names are supported."
 msgstr "영어 언어 이름만 지원됩니다."
 
-#: src/merge/mkvmerge.cpp:1802
+#: src/merge/mkvmerge.cpp:1816
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:712
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, no-c-format
@@ -7803,12 +7834,12 @@ msgstr "이 파일에 대해서 SBR AAC를 자동으로 감지할 수 없기 때
 msgid "Only needed in certain situations:"
 msgstr "특정 상황에만 필요:"
 
-#: src/merge/mkvmerge.cpp:1865
+#: src/merge/mkvmerge.cpp:1880
 #, boost-format
 msgid "Only one chapter file allowed in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 챕터 파일은 하나만 지정할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2261
+#: src/merge/mkvmerge.cpp:2285
 msgid "Only one destination file allowed.\n"
 msgstr "대상 파일은 하나만 지정할 수 있습니다.\n"
 
@@ -7820,7 +7851,7 @@ msgstr "%3% 위치의 <%2%> 아래에 오직 한 개의 <%1%>만 실행할 수 �
 msgid "Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time."
 msgstr "<Simple> 아래에 <String>과 <Binary> 중 하나만을 사용할 수 있습니다."
 
-#: src/merge/mkvmerge.cpp:1911
+#: src/merge/mkvmerge.cpp:1935
 #, boost-format
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "'%1% %2%'에는 단 한 개의 세그먼트 정보 파일만 허용되어 있습니다.\n"
@@ -7948,8 +7979,8 @@ msgstr "옵션"
 msgid "Options"
 msgstr "옵션"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1732
-#: src/mkvtoolnix-gui/merge/output.cpp:317
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1758
+#: src/mkvtoolnix-gui/merge/output.cpp:324
 #, no-c-format
 msgid "Options:"
 msgstr "옵션:"
@@ -8052,8 +8083,8 @@ msgstr "인덱스를 신뢰하는 대신에 파일의 전체를 분석합니다.
 msgid "Parsing file"
 msgstr "파일 분석 중"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:268
-#: src/mkvtoolnix-gui/merge/output.cpp:277
+#: src/mkvtoolnix-gui/merge/output.cpp:275
+#: src/mkvtoolnix-gui/merge/output.cpp:284
 #, no-c-format
 msgid "Parts:"
 msgstr "부분:"
@@ -8143,7 +8174,7 @@ msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
 msgstr[0] "MKVToolNix를 재설치하거나 그 문제를 직접 고치세요."
 
-#: src/merge/mkvmerge.cpp:368
+#: src/merge/mkvmerge.cpp:375
 msgid ""
 "Please read the man page/the HTML documentation to mkvmerge. It\n"
 "explains several details in great length which are not obvious from\n"
@@ -8219,7 +8250,7 @@ msgstr "이전 파일명"
 msgid "Previous segment UID"
 msgstr "이전 세그먼트 UID"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1740
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1766
 msgid "Previous segment UID:"
 msgstr "이전 세그먼트 UID:"
 
@@ -8272,7 +8303,7 @@ msgstr "진행 상태:"
 
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
-#: src/merge/mkvmerge.cpp:2939
+#: src/merge/mkvmerge.cpp:2970
 #: src/merge/output_control.cpp:348
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
@@ -8318,7 +8349,7 @@ msgid "Properties"
 msgstr "속성"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:282
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1681
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1707
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:84
 #, no-c-format
 msgid "Properties:"
@@ -8341,32 +8372,32 @@ msgstr "QuickTime/MP4"
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
 msgstr "Quicktime/MP4 리더: '%1%' atom이 너무 작습니다. 예상 크기: %2% 이상. 실제 크기: %3%.\n"
 
-#: src/input/r_qtmp4.cpp:2349
+#: src/input/r_qtmp4.cpp:2357
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 리더: 일정 샘플 크기 및 가변 재생 시간은 아직 지원되지 않습니다. 이 같은 샘플을 가지고 있다면 제작자에게 보내주세요\n"
 
-#: src/input/r_qtmp4.cpp:1671
+#: src/input/r_qtmp4.cpp:1676
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
 msgstr "Quicktime/MP4 리더: 위치 %4%에서 크기 %3%, 청크 번호 %1%/%2%를 읽어올 수 없습니다. 중단합니다.\n"
 
-#: src/input/r_qtmp4.cpp:2784
-#: src/input/r_qtmp4.cpp:2798
+#: src/input/r_qtmp4.cpp:2792
+#: src/input/r_qtmp4.cpp:2806
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 확장 사운드 설명 atom을 읽어올 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:2751
+#: src/input/r_qtmp4.cpp:2759
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 사운드 설명 atom을 읽어올 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:1360
+#: src/input/r_qtmp4.cpp:1365
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 스트림 설명 atom을 읽어올 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:2832
+#: src/input/r_qtmp4.cpp:2840
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 비디오 설명 atom을 읽어올 수 없습니다.\n"
@@ -8384,17 +8415,17 @@ msgstr "Quicktime/MP4 리더: 'mdat' atom를 찾을 수 없습니다. 동영상 
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 리더: %2%에 잘못된 청크 크기 %1%가 있습니다.\n"
 
-#: src/input/r_qtmp4.cpp:3409
+#: src/input/r_qtmp4.cpp:3417
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: MPEG4 part 10/AVC 트랙 %1%은 디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3435
+#: src/input/r_qtmp4.cpp:3443
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: MPEG4 트랙 %1%은 esds atom/디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3419
+#: src/input/r_qtmp4.cpp:3427
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "퀵타임/MP4 리더: MPEGH part 2/HEVC 트랙 %1%을 디코더 설정에 없습니다. 이 트랙을 건너뛰는 중.\n"
@@ -8404,7 +8435,7 @@ msgstr "퀵타임/MP4 리더: MPEGH part 2/HEVC 트랙 %1%을 디코더 설정�
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version %1%.\n"
 msgstr "Quicktime/MP4 리더: 'media header' atom ('mdhd')이 지원되지 않는 버전 %1%을 사용합니다.\n"
 
-#: src/input/r_qtmp4.cpp:1353
+#: src/input/r_qtmp4.cpp:1358
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 스트림 설명 atom의 'size'필드가 너무 작습니다.\n"
@@ -8413,17 +8444,17 @@ msgstr "Quicktime/MP4 리더: 트랙 ID %1%에 대한 스트림 설명 atom의 '
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 리더: 'time scale'의 매개변수가 0입니다. 이것은 지원되지 않습니다.\n"
 
-#: src/input/r_qtmp4.cpp:3377
+#: src/input/r_qtmp4.cpp:3385
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 AAC 트랙 %1%은 esds atom/디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3372
+#: src/input/r_qtmp4.cpp:3380
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 오디오 트랙 %1%은 'esds' atom에서 지원되지 않는 'object type id'의 %2%를 사용합니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3429
+#: src/input/r_qtmp4.cpp:3437
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 비디오 트랙 %1%은 ESDS atom이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
@@ -8448,16 +8479,16 @@ msgstr "Quicktime/MP4 리더: 이 파일은 압축 헤더를 사용하고 있지
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 리더: 이 파일은 압축 헤더를 사용하고 있지만, 압축을 해제할 수 없습니다. zlib 오류 코드: %1%. 중단합니다.\n"
 
-#: src/input/r_qtmp4.cpp:3328
-#: src/input/r_qtmp4.cpp:3347
-#: src/input/r_qtmp4.cpp:3390
-#: src/input/r_qtmp4.cpp:3453
+#: src/input/r_qtmp4.cpp:3336
+#: src/input/r_qtmp4.cpp:3355
+#: src/input/r_qtmp4.cpp:3398
+#: src/input/r_qtmp4.cpp:3461
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 리더: 트랙 %1%은 일부 데이터가 누락되어 있습니다. 헤더 atom이 손상됐을까요?\n"
 
-#: src/input/r_qtmp4.cpp:2759
-#: src/input/r_qtmp4.cpp:2839
+#: src/input/r_qtmp4.cpp:2767
+#: src/input/r_qtmp4.cpp:2847
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 리더: %1% 트랙 ID에는 하나 이상의 FourCC가 있습니다. 첫번째(%2%)만 사용하고 이것(%3%)은 사용하지 않습니다.\n"
@@ -8550,7 +8581,7 @@ msgstr "빨간색 좌표 y"
 msgid "Redirects all messages into this file."
 msgstr "이 파일로 모든 메시지를 재전송합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1710
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1736
 msgid "Reduce to core"
 msgstr "코어로 축소하기"
 
@@ -8620,7 +8651,7 @@ msgstr "모든 작업 삭제(&L)"
 msgid "Remove com&pleted jobs older than x days:"
 msgstr "x일보다 오래된 완료 작업 삭제(&P):"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1711
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 msgid "Remove dialog normalization gain"
 msgstr "대화 볼륨 노멀라이징 게인 제거하기"
 
@@ -8889,7 +8920,7 @@ msgstr "다른 재생목록이 있는지 폴더를 검색합니다"
 msgid "Scanned Files"
 msgstr "검색한 파일"
 
-#: src/merge/mkvmerge.cpp:2995
+#: src/merge/mkvmerge.cpp:3026
 #, boost-format
 msgid "Scanning %1% files in %2% playlist.\n"
 msgid_plural "Scanning %1% files in %2% playlists.\n"
@@ -8949,7 +8980,7 @@ msgstr "세그먼트"
 msgid "Segment UID"
 msgstr "세그먼트 UID"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1738
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 msgid "Segment UIDs:"
 msgstr "세그먼트 UID:"
 
@@ -8962,7 +8993,7 @@ msgstr "세그먼트 에디션 UID(&D):"
 msgid "Segment filename"
 msgstr "세그먼트 파일 이름"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1725
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1751
 msgid "Segment info:"
 msgstr "세그먼트 정보:"
 
@@ -8995,9 +9026,9 @@ msgid "Select all tracks of specific &type"
 msgstr "특정한 형식의 모든 트랙 선택(&T)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:225
-#: src/mkvtoolnix-gui/merge/output.cpp:177
-#: src/mkvtoolnix-gui/merge/output.cpp:178
 #: src/mkvtoolnix-gui/merge/output.cpp:179
+#: src/mkvtoolnix-gui/merge/output.cpp:180
+#: src/mkvtoolnix-gui/merge/output.cpp:181
 #, no-c-format
 msgid "Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."
 msgstr "기존의 Matroska나 WebM파일을 선택하면 GUI에서 그 세그먼트 UID를 왼쪽의 입력 필드에 추가합니다."
@@ -9007,7 +9038,7 @@ msgstr "기존의 Matroska나 WebM파일을 선택하면 GUI에서 그 세그먼
 msgid "Select audio file"
 msgstr "오디오 파일 선택"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:477
+#: src/mkvtoolnix-gui/merge/output.cpp:484
 #, no-c-format
 msgid "Select chapter file"
 msgstr "챕터 파일 선택"
@@ -9023,7 +9054,7 @@ msgid "Select destination directory"
 msgstr "대상 폴더 선택"
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:93
-#: src/mkvtoolnix-gui/merge/output.cpp:395
+#: src/mkvtoolnix-gui/merge/output.cpp:402
 #, no-c-format
 msgid "Select destination file name"
 msgstr "대상 파일명 선택"
@@ -9043,13 +9074,13 @@ msgstr "추가할 파일 선택"
 msgid "Select one of the ISO639-2 language codes."
 msgstr "ISO639-2 언어 코드 중 하나를 선택하세요."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:425
+#: src/mkvtoolnix-gui/merge/output.cpp:432
 #, no-c-format
 msgid "Select segment info file"
 msgstr "세그먼트 정보 파일 선택"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:985
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:420
 #, no-c-format
 msgid "Select tags file"
 msgstr "태그 파일 선택"
@@ -9072,7 +9103,7 @@ msgstr "mkvmerge가 인덱스 항목(큐 항목)을 생성할 블럭을 선택�
 msgid "Selects the character set a subtitle file or chapter information was written with."
 msgstr "자막 파일이나 챕터 파일을 기록할 문자셋을 선택하세요."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1702
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1728
 msgid "Set aspect ratio:"
 msgstr "화면 비율 설정:"
 
@@ -9165,7 +9196,7 @@ msgstr "적/녹/청 삼원색에서 루마와 크로마값을 얻기 위해 사�
 msgid "Sets the number of coded bits for a colour channel."
 msgstr "색상 채널의 코딩된 비트 수를 설정합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:168
+#: src/mkvtoolnix-gui/merge/output.cpp:170
 msgid "Sets the segment UIDs to use."
 msgstr "세그먼트 UID를 사용하도록 설정합니다."
 
@@ -9175,7 +9206,7 @@ msgid "Sets the stereo mode of the video track to this value."
 msgstr "비디오 트랙의 스테레오 모드를 이 값으로 설정합니다."
 
 #: src/common/kax_element_names.cpp:169
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1763
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1791
 msgid "Settings"
 msgstr "설정"
 
@@ -9305,7 +9336,7 @@ msgid "Simple"
 msgstr "단순"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
-#: src/mkvtoolnix-gui/merge/output.cpp:480
+#: src/mkvtoolnix-gui/merge/output.cpp:487
 #, no-c-format
 msgid "Simple OGM-style chapter files"
 msgstr "단순 OGM 스타일 챕터 파일"
@@ -9334,7 +9365,7 @@ msgstr "크기"
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:172
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:243
-#: src/mkvtoolnix-gui/merge/output.cpp:226
+#: src/mkvtoolnix-gui/merge/output.cpp:233
 #, no-c-format
 msgid "Size:"
 msgstr "크기:"
@@ -9374,7 +9405,7 @@ msgstr "몇몇 h.264/AVC 트랙은 l 조각들을 포함하지만 실제 키프�
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "태그 요소가 누락되어 있습니다 (이 오류는 발생하지 않아야 합니다 - 이전에 다른 유사한 오류가 발생했어야 합니다). %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1670
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1696
 msgid "Source &files:"
 msgstr "소스 파일(&F):"
 
@@ -9430,15 +9461,15 @@ msgstr ""
 "화면 비율에 대한 수정 가능한 설정을 지정합니다.\n"
 "(0: 자유 크기, 1: 화면 비율 유지, 2: 고정)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1728
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1754
 msgid "Split mode:"
 msgstr "분할 모드:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1727
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1753
 msgid "Splitting"
 msgstr "파일 분할"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:311
+#: src/mkvtoolnix-gui/merge/output.cpp:318
 #, no-c-format
 msgid "Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed."
 msgstr "번호가 열거 된 챕터의 시작 타임코드와 같거나 그것보다 큰 타임코드의 첫 번째 키 프레임 직전에 분할이 이루어집니다."
@@ -9447,7 +9478,7 @@ msgstr "번호가 열거 된 챕터의 시작 타임코드와 같거나 그것�
 msgid "Sta&rt all pending jobs"
 msgstr "모든 미완료 작업 시작(&R)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1774
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1802
 msgid "Sta&rt multiplexing"
 msgstr "합치기 시작(&R)"
 
@@ -9507,7 +9538,7 @@ msgstr "상태:"
 msgid "Stereo mode"
 msgstr "스테레오 모드"
 
-#: src/merge/mkvmerge.cpp:940
+#: src/merge/mkvmerge.cpp:954
 #, boost-format
 msgid "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and %1% or one of these keywords: %2% (argument was '%3%').\n"
 msgstr "스테레오 모드 매개변수: <TID>: <n|keyword>의 n이 0 ~ %1% 사이의 숫자가 아니거나 keyword가 %2%중 하나가 아닙니다. (인수는 '%3%'입니다)\n"
@@ -9516,7 +9547,7 @@ msgstr "스테레오 모드 매개변수: <TID>: <n|keyword>의 n이 0 ~ %1% 사
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "스테레오 3D 비디오 모드 (0 ~ 11, 문서를 참조하세요)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1707
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1733
 msgid "Stereoscopy:"
 msgstr "3D 영상 방식:"
 
@@ -9533,7 +9564,8 @@ msgstr "첫 클러스터에서 중지"
 msgid "Store changes in CodecPrivate data in CodecState elements instead of the frames."
 msgstr "CodecPrivate 데이터의 변경사항을 프레임 대신 CodecState 요소에 저장합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1693
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1719
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1785
 msgid "Stretch by:"
 msgstr "늘이기:"
 
@@ -9543,7 +9575,7 @@ msgstr "늘이기:"
 msgid "String"
 msgstr "문자열"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1712
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1738
 msgid "Subtitle and chapter properties"
 msgstr "자막과 챕터 속성"
 
@@ -9558,7 +9590,7 @@ msgid "Subtitle track %1% is missing some duration elements. Please check the re
 msgstr "자막 트랙 %1%은 어떤 누락된 재생 시간 요소가 있습니다. 동일한 시작 시간과 종료 시간이있는지 출력되는 SSA/ASS 파일의 항목을 확인하십시오.\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
-#: src/mkvtoolnix-gui/merge/track.cpp:439
+#: src/mkvtoolnix-gui/merge/track.cpp:430
 #, no-c-format
 msgid "Subtitles"
 msgstr "자막"
@@ -9569,12 +9601,12 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:682
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:181
-#: src/mkvtoolnix-gui/merge/output.cpp:478
+#: src/mkvtoolnix-gui/merge/output.cpp:485
 #, no-c-format
 msgid "Supported file types"
 msgstr "지원 파일 유형"
 
-#: src/merge/mkvmerge.cpp:437
+#: src/merge/mkvmerge.cpp:444
 msgid "Supported file types:\n"
 msgstr "지원 파일 유형:\n"
 
@@ -9622,13 +9654,13 @@ msgid "Tag selectors"
 msgstr "태그 선택기"
 
 #: src/common/kax_element_names.cpp:295
-#: src/mkvtoolnix-gui/merge/track.cpp:443
+#: src/mkvtoolnix-gui/merge/track.cpp:434
 #: src/propedit/options.cpp:206
 #, no-c-format
 msgid "Tags"
 msgstr "태그"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:213
+#: src/mkvtoolnix-gui/merge/output.cpp:220
 msgid "Tags are allowed, but chapters are not."
 msgstr "태그는 허용, 챕터는 비허용."
 
@@ -9638,7 +9670,7 @@ msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
 msgstr[0] "트랙 ID %1%: %2% 항목의 태그"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1689
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1715
 msgid "Tags:"
 msgstr "태그:"
 
@@ -9704,7 +9736,7 @@ msgstr "AAC 프로필이 서로 다름: %1% - %2%"
 msgid "The CodecID of the two tracks is different: %1% and %2%"
 msgstr "2개의 트랙의 코덱ID가 서로 다름: %1% - %2%"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:214
+#: src/mkvtoolnix-gui/merge/output.cpp:221
 msgid "The DocType header item is changed to \"webm\"."
 msgstr "DocType 헤더 항목을 \"webm\"으로 변경했습니다."
 
@@ -9717,7 +9749,7 @@ msgstr "FLAC 헤더 (구문)를 분석할 수 없음: 스트림 정보 구조를
 msgid "The FPS is 0.0 but the reader did not provide a timestamp for a packet. %1%\n"
 msgstr "FPS는 0.0이지만, 리더는 패킷의 타임코드를 전달하지 못했습니다. %1%\n"
 
-#: src/merge/mkvmerge.cpp:1467
+#: src/merge/mkvmerge.cpp:1481
 #, boost-format
 msgid "The FourCC must be exactly four characters long in '%1% %2%'.\n"
 msgstr "FourCC 4문자 길이로 정확하게 입력해야 합니다 ('%1% %2%'의 매개변수).\n"
@@ -9758,7 +9790,7 @@ msgstr "'%1%' ID를 이미 다른 대상 파일에서 사용 중입니다.\n"
 msgid "The JSON output generated by mkvmerge could not be parsed (parser's error message: %1)."
 msgstr "mkvmerge가 만들어낸 JSON 출력은 분석하지 못했습니다 (분석기의 오류 메시지: %1)."
 
-#: src/input/r_ogm.cpp:1710
+#: src/input/r_ogm.cpp:1718
 #, boost-format
 msgid "The Kate identification header could not be parsed (%1%).\n"
 msgstr "케이트 식별 헤더를 분석하지 못했습니다 (%1%).\n"
@@ -9777,7 +9809,7 @@ msgstr "MIME 유형은 비워두면 안 됩니다."
 msgid "The MKVToolNix Code of Conduct"
 msgstr "MKVToolNix 행위 규범"
 
-#: src/input/r_qtmp4.cpp:1215
+#: src/input/r_qtmp4.cpp:1220
 #, boost-format
 msgid "The MP4 file '%1%' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "MP4 파일 '%1%'은 알 수없는 형식의 챕터가 포함되어 있습니다. 이것은 챕터가 UTF-8로 인코딩 되지 않은 경우의 주된 사례입니다. '--chapter-charset' 옵션으로 챕터에서 사용될 문자 인코딩을 지정하십시오.\n"
@@ -9803,12 +9835,12 @@ msgstr "Matroska 파일을 변경했지만 메타 탐색 항목을 업데이트�
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr "Matroska 파일의 마지막 요소는 알 수 없는 크기로 설정되었습니다."
 
-#: src/merge/mkvmerge.cpp:1599
+#: src/merge/mkvmerge.cpp:1613
 #, boost-format
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length %1%'.\n"
 msgstr "'--nalu-size-length %1%'에 포괄적인 NALU 크기 길이는 2 ~ 4 사이여야 합니다.\n"
 
-#: src/input/r_ogm.cpp:1520
+#: src/input/r_ogm.cpp:1528
 #, boost-format
 msgid "The Theora identification header could not be parsed (%1%).\n"
 msgstr "Theora 식별 헤더를 분석할 수 없습니다 (%1%).\n"
@@ -9895,39 +9927,39 @@ msgstr "수평으로 제거되지 않은 모든 픽셀에 대해 Cr 및 Cb 채�
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."
 msgstr "수직으로 제거되지 않은 모든 픽셀에 대해 Cr 및 Cb 채널에서 제거할 픽셀의 양."
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:277
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:279
 #, no-c-format
 msgid "The application will terminate now."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2205
+#: src/merge/mkvmerge.cpp:2229
 #, boost-format
 msgid "The argument '%1%' is not allowed in identification mode.\n"
 msgstr "인수 '%1%'은 식별 모드에서 허용되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:970
-#: src/merge/mkvmerge.cpp:976
-#: src/merge/mkvmerge.cpp:982
+#: src/merge/mkvmerge.cpp:984
+#: src/merge/mkvmerge.cpp:990
+#: src/merge/mkvmerge.cpp:996
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid."
 msgstr "'%2%'에 대한 인수 '%1%'이 무효합니다."
 
-#: src/merge/mkvmerge.cpp:1972
+#: src/merge/mkvmerge.cpp:1996
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: '%3%' is not a valid track ID.\n"
 msgstr "'%2%'에 대한 인수 '%1%'가 잘못됨: '%3%'는 유효한 트랙 ID가 아닙니다.\n"
 
-#: src/merge/mkvmerge.cpp:1981
+#: src/merge/mkvmerge.cpp:2005
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: '%3%' must be either 'all' or 'first'.\n"
 msgstr "'%2%'에 대한 인수 '%1%'가 잘못됨: '%3%'는 'all' 또는 'first'이어야 합니다.\n"
 
-#: src/merge/mkvmerge.cpp:1968
+#: src/merge/mkvmerge.cpp:1992
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: too many colons in element '%3%'.\n"
 msgstr "'%2%'에 대한 인수 '%1%'가 잘못됨: 요소 '%3%'에 콜론이 너무 많습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1926
+#: src/merge/mkvmerge.cpp:1950
 msgid "The argument to '--timestamp-scale' must be a number.\n"
 msgstr "'--timestamp-scale'에 대한 인수는 숫자가 아니면 안 됩니다.\n"
 
@@ -9936,12 +9968,12 @@ msgstr "'--timestamp-scale'에 대한 인수는 숫자가 아니면 안 됩니�
 msgid "The attachment #%1%, ID %2%, MIME type %3%, size %4%, is written to '%5%'.\n"
 msgstr "첨부 파일(#%1%, ID %2%, MIME 유형 %3%, 크기 %4% )은 '%5%'에 기록되었습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1824
+#: src/merge/mkvmerge.cpp:1838
 #, boost-format
 msgid "The attachment '%1%' could not be read.\n"
 msgstr "첨부 파일 '%1%'을 읽을 수 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:1801
+#: src/merge/mkvmerge.cpp:1815
 #, boost-format
 msgid "The attachment (%1%) is too big (%2%)."
 msgstr "첨부 파일(%1%)이 너무 큽니다 (%2%)."
@@ -9981,7 +10013,7 @@ msgstr "오른쪽에서 '선택한' 목록의 문자셋은 프로그램의 모�
 msgid "The chosen NALU size length of %1% is too small. Try using '4'.\n"
 msgstr "선택된 NALU 크기 길이 '%1%'는 너무 작습니다. '4'를 시도하십시오.\n"
 
-#: src/merge/mkvmerge.cpp:2009
+#: src/merge/mkvmerge.cpp:2033
 #, boost-format
 msgid "The closing character '%1%' is missing.\n"
 msgstr "닫는 문자인 '%1%'가 없습니다.\n"
@@ -10126,11 +10158,11 @@ msgstr "2개의 트랙이 세로(높이) 해상도가 서로 다름: %1% - %2%"
 msgid "The display width of the two tracks is different: %1% and %2%"
 msgstr "2개의 트랙이 가로(너비) 해상도가 서로 다름: %1% - %2%"
 
-#: src/merge/mkvmerge.cpp:3127
+#: src/merge/mkvmerge.cpp:3158
 msgid "The drive may be full."
 msgstr "드라이브가 꽉 찼을지 모릅니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:242
+#: src/mkvtoolnix-gui/merge/output.cpp:249
 #, no-c-format
 msgid "The duration after which a new destination file is started."
 msgstr "지정한 재생 시간 이후에 새 대상 파일을 시작합니다."
@@ -10187,7 +10219,7 @@ msgstr "\"%1\" 파일을 변경했습니다. 정말 닫을까요? 모든 변경 
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "\"%1\" 파일을 변경했습니다. 이 파일을 정말 다시 불러올까요? 모든 변경 사항을 잃게 됩니다."
 
-#: src/merge/mkvmerge.cpp:1805
+#: src/merge/mkvmerge.cpp:1819
 #, boost-format
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "파일이 존재하지 않거나 읽을 수 없기 때문에, 파일 '%1%'을 첨부할 수 없습니다.\n"
@@ -10407,8 +10439,8 @@ msgstr "이 파일을 지원하는 형식으로 인식하지 못했습니다 (�
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1590
-#: src/input/r_matroska.cpp:2279
+#: src/input/r_matroska.cpp:1597
+#: src/input/r_matroska.cpp:2286
 msgid "The file will not be processed further."
 msgstr "이 파일은 더 이상 처리하지 않습니다."
 
@@ -10450,11 +10482,11 @@ msgstr "첫 번째 인수는 소스 파일의 이름이어야 합니다."
 msgid "The first cluster timestamp after the resync is %1%.\n"
 msgstr "재동기화 이후의 첫 클러스터 타임코드는 %1%입니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1769
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1797
 msgid "The first destination file only"
 msgstr "처음 대상 파일만"
 
-#: src/merge/mkvmerge.cpp:2073
+#: src/merge/mkvmerge.cpp:2097
 msgid "The first file cannot be appended because there are no files to append to.\n"
 msgstr "결합할 파일이 없기 때문에 첫 번째 파일을 결합할 수 없습니다.\n"
 
@@ -10466,11 +10498,11 @@ msgstr "첫 번째 모드에서는 트랙을 외부 파일로 추출합니다."
 msgid "The first non-empty capturing parenthesis will be used as the language."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:201
+#: src/mkvtoolnix-gui/merge/output.cpp:208
 msgid "The following modes are supported:"
 msgstr "다음 모드를 지원합니다:"
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:275
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:277
 #, no-c-format
 msgid "The following non-recoverable error was found: %1."
 msgstr ""
@@ -10490,15 +10522,15 @@ msgstr "주어진 값이 없으면 기본 형식은 %H:%M:%S입니다."
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:68
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
-#: src/mkvtoolnix-gui/merge/output.cpp:206
-#: src/mkvtoolnix-gui/merge/output.cpp:244
-#: src/mkvtoolnix-gui/merge/output.cpp:259
-#: src/mkvtoolnix-gui/merge/output.cpp:273
+#: src/mkvtoolnix-gui/merge/output.cpp:213
+#: src/mkvtoolnix-gui/merge/output.cpp:251
+#: src/mkvtoolnix-gui/merge/output.cpp:266
+#: src/mkvtoolnix-gui/merge/output.cpp:280
 #, no-c-format
 msgid "The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."
 msgstr "형식은 'HH:MM:SS.nnnnnnnnn' 형태거나 's', 'ms', 'us 유닛 중 하나가 뒤에 붙는 숫자입니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:264
+#: src/mkvtoolnix-gui/merge/output.cpp:271
 #, no-c-format
 msgid "The formats can be mixed, too."
 msgstr "형식은 섞어서 사용할 수 있습니다."
@@ -10516,7 +10548,7 @@ msgstr "네 번째 모드는 챕터를 추출하고 XML로 변환한 후 출력 
 msgid "The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file."
 msgstr "만들어진 대상 파일명은 소스 파일명과 같은 기반의 이름이지만 파일에 있는 트랙 형식에 기반한 확장자를 가지고 있습니다."
 
-#: src/merge/mkvmerge.cpp:1932
+#: src/merge/mkvmerge.cpp:1956
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "지정된 타임코드 스케일 계수는 유효 범위 [1 ~ 10000000 또는 -1(비디오 트랙이 있어도 샘플링 소리 정밀도를 사용하는 경우)]에서 벗어나 있습니다.\n"
 
@@ -10543,7 +10575,7 @@ msgstr "작업을 작업 대기열에 추가했습니다."
 msgid "The language code '%1%' is not a valid ISO639-2 language code and will be ignored.\n"
 msgstr "언어 코드 '%1%'는 유효한 ISO639-2 언어 코드가 아니므로 무시합니다.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:204
+#: src/mkvtoolnix-gui/merge/output.cpp:211
 msgid "The language for the newly created chapters is set via the chapter language control above."
 msgstr "새로 생성한 챕터의 언어는 위의 챕터 언어 제어로 설정합니다."
 
@@ -10564,7 +10596,7 @@ msgstr "여기에서 선택한 언어는 해당 소스 파일에 그런 속성�
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
 msgstr "여기에서 선택한 언어는 해당 소스 파일에 그런 속성이 없고 그 언어가 파일명에서 비롯되지 않은 비디오 트랙에 사용됩니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:185
+#: src/mkvtoolnix-gui/merge/output.cpp:187
 msgid "The language set here is also used when chapters are generated."
 msgstr "여기에서 설정한 언어는 챕터를 만들어 낼 때에도 사용합니다."
 
@@ -10582,7 +10614,7 @@ msgstr "오류를 만나기 전에 처리한 마지막 타임코드는 %1%입니
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
 msgstr "글자 'Z'는 줄루 시각(그리니치 표준시)이라고 알려진 UTC를 나타내기 위해 UTC로부터 표준 시간대의 오프셋 대신 사용할 수 있습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:228
+#: src/mkvtoolnix-gui/merge/output.cpp:235
 #, no-c-format
 msgid "The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes respectively."
 msgstr "'G', 'M'과 'K'는 기가/메가/킬로 바이트를 각각 나타내기 위해 사용할 수 있습니다."
@@ -10606,7 +10638,7 @@ msgstr "로케일을 올바르게 설정할 수 없습니다. LANG, LC_ALL, LC_M
 msgid "The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms."
 msgstr "mkvmerge가 받아들이는 클러스터의 최대 길이는 60000 블럭과 32000ms입니다; 최소 길이는 100ms입니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:159
+#: src/mkvtoolnix-gui/merge/output.cpp:161
 msgid "The maximum number of files that will be created even if the last file might contain more bytes/time than wanted."
 msgstr "마지막 파일이 원하는 것보다 더 많은 바이트/시간을 포함하고 있어도 생성될 파일의 최대 숫자."
 
@@ -10666,12 +10698,12 @@ msgstr "파일을 합치는데 사용된 응용프로그램이나 라이브러�
 msgid "The name of the application or library used for writing the file."
 msgstr "파일을 쓰는데 사용된 응용프로그램이나 라이브러리의 이름"
 
-#: src/merge/mkvmerge.cpp:2038
+#: src/merge/mkvmerge.cpp:2062
 #, boost-format
 msgid "The name of the destination file '%1%' and of one of the source files is the same."
 msgstr "대상 파일 '%1%'의 이름이 소스 파일 중 하나와 같습니다."
 
-#: src/merge/mkvmerge.cpp:1749
+#: src/merge/mkvmerge.cpp:1763
 #, boost-format
 msgid "The next UID was already given in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 이미 다음 UID는 지정되어 있습니다.\n"
@@ -10718,24 +10750,24 @@ msgid ""
 "on the top of the image."
 msgstr "이미지 상단 부분에서 제거될 비디오 픽셀 수 입니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:281
-#: src/mkvtoolnix-gui/merge/output.cpp:297
-#: src/mkvtoolnix-gui/merge/output.cpp:310
+#: src/mkvtoolnix-gui/merge/output.cpp:288
+#: src/mkvtoolnix-gui/merge/output.cpp:304
+#: src/mkvtoolnix-gui/merge/output.cpp:317
 #, no-c-format
 msgid "The numbering starts at 1."
 msgstr "번호는 1에서 시작됩니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:286
-#: src/mkvtoolnix-gui/merge/output.cpp:302
+#: src/mkvtoolnix-gui/merge/output.cpp:293
+#: src/mkvtoolnix-gui/merge/output.cpp:309
 #, no-c-format
 msgid "The numbers given with this argument are interpreted based on the number of Matroska blocks that are output."
 msgstr "이 인수에 주어진 숫자는 출력되는 Matroska 블록 수를 기반으로 해석됩니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:212
+#: src/mkvtoolnix-gui/merge/output.cpp:219
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "여기서 사용할 수 있는 코덱은 VP8/VP9과 Vorbis/Opus 오디오 트랙입니다."
 
-#: src/merge/mkvmerge.cpp:2512
+#: src/merge/mkvmerge.cpp:2543
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "'--meta-seek-size'옵션은 더 이상 지원되지 않습니다. mkvmerge의 문서, 특히 MATROSKA FILE LAYOUT 섹션을 읽어보십시오.\n"
 
@@ -10757,12 +10789,12 @@ msgstr "다양한 옵션의 순서는 중요하지 않습니다."
 msgid "The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."
 msgstr "사용 가능한 다른 두 레이아웃: 오른쪽에 두 개의 고정된 세로줄 또는 파일과 트랙 목록 아래의 탭 위젯."
 
-#: src/merge/mkvmerge.cpp:1736
+#: src/merge/mkvmerge.cpp:1750
 #, boost-format
 msgid "The previous UID was already given in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 이미 이전 UID는 지정되어 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2154
+#: src/merge/mkvmerge.cpp:2178
 #, boost-format
 msgid "The probe range percentage '%1%' is invalid.\n"
 msgstr "조사 범위 '%1%' 퍼센트는 무효합니다.\n"
@@ -10831,7 +10863,7 @@ msgstr "알려진 형식은 'YYYY-mm-ddTHH:MM:SS+zz:zz'입니다: 년, 월, 일,
 msgid "The regular expression for deriving the track language from file names is invalid: %1"
 msgstr "파일명에서 트랙 언어 얻는 중"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:196
+#: src/mkvtoolnix-gui/merge/output.cpp:198
 msgid "The rest is copied as is."
 msgstr "나머지는 그대로 복사합니다."
 
@@ -10866,7 +10898,7 @@ msgstr "세그먼트 UID를 분석할 수 없습니다: %1"
 msgid "The segment edition UID must be a positive number if given."
 msgstr "주어진 세그먼트 에디션 UID는 양수여야 합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:195
+#: src/mkvtoolnix-gui/merge/output.cpp:197
 msgid "The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."
 msgstr "'%p' 시퀀스는 트랙의 연주자, '%t' 시퀀스는 트랙의 제목, '%n'은 트랙의 번호, '%N'은 10보다 작은 트랙 번호일 때 앞에 0을 덧붙인 트랙 번호로 대체합니다."
 
@@ -10879,12 +10911,12 @@ msgstr "'%1' 설정 파일에 무효한 설정이 포함되어 있어서 불러�
 msgid "The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."
 msgstr "여섯 번째 모드에서는 트랙의 모든 블록의 타임코드를 찾고 이 타임코드에 맞춰 timestamp v2 파일을 출력합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:227
+#: src/mkvtoolnix-gui/merge/output.cpp:234
 #, no-c-format
 msgid "The size after which a new destination file is started."
 msgstr "지정한 크기 이후 새 대상 파일을 시작합니다."
 
-#: src/merge/mkvmerge.cpp:1818
+#: src/merge/mkvmerge.cpp:1832
 #, boost-format
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "첨부 파일 '%1%'의 크기가 0입니다.\n"
@@ -11012,7 +11044,7 @@ msgstr ""
 "\n"
 "만약에 정말로 정렬이 안 된 타임코드를 지정해야 하면 타임코드 형식 v4를 사용하세요. 이것은 형식 v2와 동일하고 정렬되지 않은 타임코드를 허용합니다.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:256
+#: src/mkvtoolnix-gui/merge/output.cpp:263
 #, no-c-format
 msgid "The timestamps after which a new destination file is started."
 msgstr "지정한 타임코드 이후 새 대상 파일을 시작합니다."
@@ -11021,7 +11053,7 @@ msgstr "지정한 타임코드 이후 새 대상 파일을 시작합니다."
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
 msgstr "이 스트림에 대한 타임코드는 파일의 중간이 재설정되어 있습니다. 이것은 지원되지 않습니다. 현재 패킷을 버립니다.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:257
+#: src/mkvtoolnix-gui/merge/output.cpp:264
 #, no-c-format
 msgid "The timestamps refer to the whole stream and not to each individual destination file."
 msgstr "타임코드는 각 개별 대상 파일이 아니라 전체 스트림을 나타냅니다."
@@ -11067,13 +11099,13 @@ msgstr "트랙 매개변수가 일치하지 않습니다."
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
 msgstr "\"입력\" 탭의 트랙 속성은 다른 작업 흐름을 제공하기 위해 세 가지 다른 방법으로 배치할 수 있습니다."
 
-#: src/merge/mkvmerge.cpp:2084
-#: src/merge/mkvmerge.cpp:2962
+#: src/merge/mkvmerge.cpp:2108
+#: src/merge/mkvmerge.cpp:2993
 #, boost-format
 msgid "The type of file '%1%' could not be recognized.\n"
 msgstr " '%1%' 파일의 형식을 인식할 수 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:464
+#: src/merge/mkvmerge.cpp:471
 #, boost-format
 msgid "The type of file '%1%' is not supported.\n"
 msgstr " '%1%' 파일의 형식은 지원되지 않습니다.\n"
@@ -11090,6 +11122,7 @@ msgstr "'%1%' 값은 숫자가 아닙니다.\n"
 #: src/mkvtoolnix-gui/merge/input.cpp:464
 #: src/mkvtoolnix-gui/merge/input.cpp:469
 #: src/mkvtoolnix-gui/merge/input.cpp:483
+#: src/mkvtoolnix-gui/merge/output.cpp:204
 #, no-c-format
 msgid "The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."
 msgstr "값은 12.345같은 부동 소수점 수나 123/456같은 정수값의 분수로 줄 수 있습니다."
@@ -11219,11 +11252,11 @@ msgstr "이 HEVC 트랙은 키프레임으로 시작하지 않습니다. 첫번�
 msgid "This MPEG audio track contains %1% bytes of non-MP3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the garbage data.\n"
 msgstr "이 MPEG 오디오 트랙은 MP3가 아닌 %1%바이트의 데이터가 포함되어 있습니다. 이것은 %2%밀리초의 지연에 해당합니다. MP3가 아닌 그 쓰레기 데이터 대신에 이 지연이 사용됩니다.\n"
 
-#: src/input/r_ogm.cpp:880
+#: src/input/r_ogm.cpp:885
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
 msgstr "이 Ogg/OGM 파일은 챕터 또는 제목 정보가 포함되어 있습니다. 불행히도 이 정보를 저장하는데 사용되는 문자 인코딩을 명확하게 확인할 수 없습니다. 이 프로그램은 시스템의 현재 문자 인코딩이 적절하다고 추측합니다. 이것은 '--chapter-charset <charset>' 스위치로 덮어쓸 수 있습니다.\n"
 
-#: src/input/r_ogm.cpp:887
+#: src/input/r_ogm.cpp:892
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
 msgstr "이 Ogg/OGM 파일은 챕터를 포함하고 있지만 분석할 수 없습니다. 챕터 문자셋이 제대로 설정되지 않았거나 챕터 항목이 예상했던 SRT 스타일의 형식과 일치하지 않기 때문입니다.\n"
 
@@ -11292,7 +11325,7 @@ msgstr "이것은 \"작업 출력\" 탭의 \"작업 취소\" 버튼을 누르거
 msgid "This has not been implemented yet."
 msgstr "이 기능은 아직 없습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:169
+#: src/mkvtoolnix-gui/merge/output.cpp:171
 msgid "This is a comma-separated list of 128-bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."
 msgstr "이것은 통상적인 UID 형식의 콤마로 분리된 128비트 세그먼트 UID 목록입니다: \"0x\" 접두어가 붙거나 붙지 않는 16진수, 공백이 있거나 없는, 정확한 32 자리 숫자."
 
@@ -11330,7 +11363,7 @@ msgstr "이것이 기본 모드입니다."
 msgid "This is the language that newly added chapter names get assigned automatically."
 msgstr "이것은 새로 추가된 챕터 이름에 자동으로 할당하는 언어입니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:152
+#: src/mkvtoolnix-gui/merge/output.cpp:154
 #, no-c-format
 msgid "This is the title that players may show as the 'main title' for this movie."
 msgstr "이 동영상의 메인 제목으로서 플레이어(재생기)에 표시될 제목을 지정합니다."
@@ -11348,13 +11381,13 @@ msgstr "이것은 다수의 재생목록이 같은 폴더에 존재하고 재생
 msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
 msgstr "이것은 역슬래시를 중복 사용하거나 전체 인수를 작은 따옴표로 둘러싸야만 한다는 것을 의미합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:283
-#: src/mkvtoolnix-gui/merge/output.cpp:299
+#: src/mkvtoolnix-gui/merge/output.cpp:290
+#: src/mkvtoolnix-gui/merge/output.cpp:306
 #, no-c-format
 msgid "This mode considers only the first video track that is output."
 msgstr "이 모드에서는 출력되는 첫 번째 비디오 트랙만을 고려합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:211
+#: src/mkvtoolnix-gui/merge/output.cpp:218
 msgid "This mode enforces several restrictions."
 msgstr "이 모드에는 몇 가지 제한이 걸려 있습니다."
 
@@ -11362,7 +11395,7 @@ msgstr "이 모드에는 몇 가지 제한이 걸려 있습니다."
 msgid "This mode extracts cue information for some tracks to external text files."
 msgstr "이 모드는 몇몇 트랙의 큐 정보를 외부 텍스트 파일로 추출합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:314
+#: src/mkvtoolnix-gui/merge/output.cpp:321
 #, no-c-format
 msgid "This mode only considers the top-most level of chapters across all edition entries."
 msgstr "이 모드에서는 모든 판(Edition) 항목에 걸쳐 가장 높은 수준의 챕터만을 고려합니다."
@@ -11386,7 +11419,7 @@ msgstr "이것은 DTS 오디오 트랙에서만 동작합니다."
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
 msgstr "이 옵션은 mkvmerge가 비트스트림에서 화면 비율 정보를 제거하도록 합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:194
+#: src/mkvtoolnix-gui/merge/output.cpp:196
 msgid "This option controls how the chapter names are created."
 msgstr "이 옵션은 챕터 이름을 어떻게 만들지 제어합니다."
 
@@ -11405,7 +11438,7 @@ msgstr "이 옵션은 추가적인 인수 'n'이 필요합니다."
 msgid "This option prevents that behavior."
 msgstr "이 옵션은 그 동작을 방지합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:183
+#: src/mkvtoolnix-gui/merge/output.cpp:185
 msgid "This option specifies the language to be associated with chapters if the OGM chapter format is used."
 msgstr "이 옵션은 OGM 챕터 형식을 사용하는 경우에 챕터와 관련된 언어를 지정합니다."
 
@@ -11466,8 +11499,8 @@ msgstr "이 트랙에는 SBR AAC/HE-AAC/AAC+ 데이터가 포함되어 있습니
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1590
-#: src/input/r_matroska.cpp:2279
+#: src/input/r_matroska.cpp:1597
+#: src/input/r_matroska.cpp:2286
 msgid "This usually indicates a damaged file structure."
 msgstr "이것은 대게 손상된 파일 구조를 나타냅니다."
 
@@ -11490,7 +11523,7 @@ msgstr "이것은 비디오와 자막 트랙에는 잘 동작하지만 오디오
 msgid "This works with all track types."
 msgstr "이것은 모든 트랙 유형에 동작합니다."
 
-#: src/merge/mkvmerge.cpp:2039
+#: src/merge/mkvmerge.cpp:2063
 msgid "This would cause mkvmerge to overwrite one of your source files."
 msgstr "이것은 mkvmerge가 귀하의 소스 파일 중 하나를 덮어쓰도록 합니다."
 
@@ -11502,7 +11535,7 @@ msgstr "타임 조각"
 msgid "Timestamp extraction"
 msgstr "타임코드 추출"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1696
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1722
 msgid "Timestamp file:"
 msgstr "타임코드 파일:"
 
@@ -11511,12 +11544,12 @@ msgstr "타임코드 파일:"
 msgid "Timestamp scale"
 msgstr "타임스탬프 스케일"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1677
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1691
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1703
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1717
 msgid "Timestamps and default duration"
 msgstr "타임코드와 기본 재생 시간"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:254
+#: src/mkvtoolnix-gui/merge/output.cpp:261
 #, no-c-format
 msgid "Timestamps:"
 msgstr "타임코드:"
@@ -11536,7 +11569,7 @@ msgstr "모든 대상 파일로"
 msgid "Top"
 msgstr "상단"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1684
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1710
 msgid "Trac&k name:"
 msgstr "트랙 이름(&K):"
 
@@ -11627,7 +11660,7 @@ msgstr "트랙 %1%: NAL이 너무 큼. 헤더 필드에 따른 크기: %2%, 패�
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "트랙 %1%:  %2% 자막 항목 번호에는 재생 시간이 누락되어 있습니다. 1초의 재생 시간으로 가정합니다.\n"
 
-#: src/input/r_qtmp4.cpp:2920
+#: src/input/r_qtmp4.cpp:2928
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "트랙 %1%: AAC 정보를 분석할 수 없습니다.\n"
@@ -11820,22 +11853,22 @@ msgstr "알 수 없는 요소"
 msgid "Unknown element (ID: 0x%1%)"
 msgstr "알 수 없는 요소 (ID: 0x%1%)"
 
-#: src/merge/mkvmerge.cpp:1754
+#: src/merge/mkvmerge.cpp:1768
 #, boost-format
 msgid "Unknown format for the next UID in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 다음 UID가 알 수 없는 형식입니다.\n"
 
-#: src/merge/mkvmerge.cpp:1741
+#: src/merge/mkvmerge.cpp:1755
 #, boost-format
 msgid "Unknown format for the previous UID in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 이전 UID가 알 수 없는 형식입니다.\n"
 
-#: src/merge/mkvmerge.cpp:1766
+#: src/merge/mkvmerge.cpp:1780
 #, boost-format
 msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "'%1% %2%'에 세그먼트 UID '%3%'가 알 수 없는 형식입니다.\n"
 
-#: src/merge/mkvmerge.cpp:907
+#: src/merge/mkvmerge.cpp:921
 #, boost-format
 msgid "Unknown format in '%1% %2%'.\n"
 msgstr "'%1% %2%'의 알 수 없는 형식입니다.\n"
@@ -11865,7 +11898,7 @@ msgstr "'%1% %2%'에서 알 수 없는 분석 모드가 지정되었습니다.\n
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "이 트랙의 오디오 형식 0x%|1$04x|는 알 수 없거나 지원되지 않습니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1730
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1756
 msgid "Unlimited"
 msgstr "무제한"
 
@@ -11894,7 +11927,7 @@ msgstr "지원되지 않는 MPEG_버전: 0x%|1$02x|(패킷 %2%, 타임코드 %3%
 msgid "Unsupported file format"
 msgstr "미지원 파일 형식"
 
-#: src/input/r_matroska.cpp:2102
+#: src/input/r_matroska.cpp:2109
 msgid "Unsupported track type for this track.\n"
 msgstr "이 트랙은 지원되지 않는 트랙 유형입니다.\n"
 
@@ -11922,7 +11955,7 @@ msgstr "사용법"
 msgid "Usage and examples"
 msgstr "사용법과 예"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:164
+#: src/mkvtoolnix-gui/merge/output.cpp:166
 #, no-c-format
 msgid "Use 'segment linking' for the resulting files."
 msgstr "결과로 나오는 파일에 '세그먼트 링크'를 사용합니다."
@@ -11946,7 +11979,7 @@ msgstr "테스트 용도로만 사용하세요."
 msgid "Use this only for testing purposes."
 msgstr "이것은 테스트 목적으로만 사용하세요."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:160
+#: src/mkvtoolnix-gui/merge/output.cpp:162
 msgid "Useful e.g. when you want exactly two files."
 msgstr "예를 들어 정확히 두 개의 파일을 원할 때 유용합니다."
 
@@ -11958,7 +11991,7 @@ msgstr "사용자 포럼/부-레딧(&R)"
 msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
 msgstr "추출시 발견한 첫 번째 챕터 이름 대신 지정한 언어의 챕터 이름을 사용합니다."
 
-#: src/merge/mkvmerge.cpp:1603
+#: src/merge/mkvmerge.cpp:1617
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
 msgstr "NALU 크기가 3바이트면 특정 AVC/h.264 코덱의 트랙을 디코딩할 수 없게 될수도 있습니다.\n"
 
@@ -11966,7 +11999,7 @@ msgstr "NALU 크기가 3바이트면 특정 AVC/h.264 코덱의 트랙을 디코
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr " '%1%'용 디멀티플렉서를 사용 중입니다.\n"
 
-#: src/input/r_matroska.cpp:1619
+#: src/input/r_matroska.cpp:1626
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "트랙 형식 '%1%'용 일반 출력 모듈을 사용 중입니다.\n"
@@ -12052,7 +12085,7 @@ msgid "VfW compatible video"
 msgstr "VfW 호환 비디오"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:49
-#: src/mkvtoolnix-gui/merge/track.cpp:438
+#: src/mkvtoolnix-gui/merge/track.cpp:429
 #, no-c-format
 msgid "Video"
 msgstr "비디오"
@@ -12126,8 +12159,8 @@ msgstr "비디오 투사"
 msgid "Video projection information"
 msgstr "비디오 투사 정보"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1678
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1699
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1704
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1725
 msgid "Video properties"
 msgstr "비디오 속성"
 
@@ -12341,7 +12374,7 @@ msgstr "WebM 오디오/비디오 파일"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:684
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:401
 #, no-c-format
 msgid "WebM files"
 msgstr "WebM 파일"
@@ -12385,7 +12418,7 @@ msgstr "파일 추가시 그 이름을 검색합니다."
 msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "소스 파일 추가시, 대게는 모든 트랙을 대상 파일에 복사하도록 되어 있습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:202
+#: src/mkvtoolnix-gui/merge/output.cpp:209
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
 msgstr "결합할 때: 시작 부분에 한 개의 챕터를 만들고 파일을 결합할 때마다 한 개의 챕터를 만듭니다."
 
@@ -12511,7 +12544,7 @@ msgstr "잘못된 Kate 버전: %1%.%2% > %3%.x"
 msgid "Wrong Theora version: %1%.%2%.%3% != 3.2.x"
 msgstr "잘못된 Theora 버전: %1%.%2%.%3% != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2338
+#: src/merge/mkvmerge.cpp:2362
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "'--split-max-files' 인수가 잘못되었습니다.\n"
 
@@ -12533,18 +12566,18 @@ msgstr "잘못된 식별 문자열: '%|1$7s|' != 'kate\\0\\0\\0'"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:642
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:185
-#: src/mkvtoolnix-gui/merge/output.cpp:479
+#: src/mkvtoolnix-gui/merge/output.cpp:486
 #, no-c-format
 msgid "XML chapter files"
 msgstr "XML 챕터 파일"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:425
+#: src/mkvtoolnix-gui/merge/output.cpp:432
 #, no-c-format
 msgid "XML segment info files"
 msgstr "XML 세그먼트 정보 파일"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:985
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:420
 #, no-c-format
 msgid "XML tag files"
 msgstr "XML 태그 파일"
@@ -12623,12 +12656,12 @@ msgstr "'<NUM:자릿수>'로 챕터 번호의 최소 자리 숫자를 지정할 
 msgid "You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."
 msgstr "지정할 수 있는 단위: 's', 'ms', 'us', 'ns', 'fps', 'i',  'p'"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:261
+#: src/mkvtoolnix-gui/merge/output.cpp:268
 #, no-c-format
 msgid "You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' or none at all."
 msgstr "나노초 'nnnnnnnnn' 숫자는 아홉자리까지 지정할 수 있고 지정 안해도 됩니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:156
+#: src/mkvtoolnix-gui/merge/output.cpp:158
 #, no-c-format
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
 msgstr "경과 시간의 양, 타임스탬프, 프레임/필드 번호나 챕터 번호에 기반해서 자를 수 있습니다."
@@ -12648,12 +12681,12 @@ msgstr "1000에서 10000000 사이의 값이나 마법의 값인 -1을 입력해
 msgid "You have to set the destination file name before you can start multiplexing or add a job to the job queue."
 msgstr "합치기를 시작하기 전이나 작업 대기열에 작업을 추가하기 전에, 대상 파일명을 설정해야 합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:245
+#: src/mkvtoolnix-gui/merge/output.cpp:252
 #, no-c-format
 msgid "You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."
 msgstr "시간 숫자 'HH'와 나노초 숫자 'nnnnnnnnn'를 빠뜨린 것 같습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:260
+#: src/mkvtoolnix-gui/merge/output.cpp:267
 #, no-c-format
 msgid "You may omit the number of hours 'HH'."
 msgstr "시간 숫자 'HH'를 빠뜨린 것 같습니다."
@@ -12922,13 +12955,13 @@ msgstr "matroska_리더: (트랙 %1%, MS 호환 모드) Matroska에 따르면 �
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_리더: 트랙에 트랙 번호가 누락되어 있습니다.\n"
 
-#: src/input/r_matroska.cpp:1681
+#: src/input/r_matroska.cpp:1688
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_리더: 새 파일에 이미 할당되었기 때문에, 트랙UID %1%를 유지할 수 없습니다.\n"
 
-#: src/input/r_matroska.cpp:1529
-#: src/input/r_matroska.cpp:1534
+#: src/input/r_matroska.cpp:1536
+#: src/input/r_matroska.cpp:1541
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_리더: 세그먼트를 찾지 못했습니다.\n"
 
@@ -13003,7 +13036,7 @@ msgstr "matroska_리더: 트랙 유형을 찾지 못했습니다.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_리더: mkvmerge는 FLAC 지원 없이 컴파일되었습니다.  %1% 트랙을 무시합니다.\n"
 
-#: src/input/r_matroska.cpp:1518
+#: src/input/r_matroska.cpp:1525
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_리더: EBML 헤드를 찾지 못했습니다.\n"
 
@@ -13096,15 +13129,15 @@ msgstr "mkvinfo [옵션] <입력 파일명>"
 msgid "mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n"
 msgstr "mkvmerge -o out [전역 옵션] [옵션1] <파일1> [@옵션-파일.json] …\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:210
+#: src/mkvtoolnix-gui/merge/output.cpp:217
 msgid "mkvmerge also turns this on if the destination file name's extension is \"webm\"."
 msgstr "대상 파일의 확장자가 \"webm\"이면 mkvmerge는 이것 또한 사용합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:200
+#: src/mkvtoolnix-gui/merge/output.cpp:207
 msgid "mkvmerge can generate chapters automatically."
 msgstr "mkvmerge는 챕터를 자동으로 만들 수 있습니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:193
+#: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."
 msgstr "mkvmerge는 오디오 CD용 큐 시트를 읽어서 챕터로 변환하는 것을 자동으로 할 수 있습니다."
 
@@ -13113,8 +13146,8 @@ msgstr "mkvmerge는 오디오 CD용 큐 시트를 읽어서 챕터로 변환하�
 msgid "mkvmerge command line"
 msgstr "mkvmerge 명령행"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:288
-#: src/mkvtoolnix-gui/merge/output.cpp:304
+#: src/mkvtoolnix-gui/merge/output.cpp:295
+#: src/mkvtoolnix-gui/merge/output.cpp:311
 #, no-c-format
 msgid "mkvmerge does not distinguish between those two and simply counts the number of blocks."
 msgstr "mkvmerge는 그 둘을 구분하지 않고 단순히 블록의 수를 계산합니다."
@@ -13151,10 +13184,10 @@ msgstr "mkvmerge는 보통 표시된 지연시간을 계산하고 모든 트랙�
 msgid "mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."
 msgstr "mkvmerge는 마지막 항목의 타임코드가 전체 재생 시간의 5초 내에 있으면 마지막 항목을 보통 삭제합니다."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:175
-#: src/mkvtoolnix-gui/merge/output.cpp:176
-#: src/mkvtoolnix-gui/merge/output.cpp:182
-#: src/mkvtoolnix-gui/merge/output.cpp:188
+#: src/mkvtoolnix-gui/merge/output.cpp:177
+#: src/mkvtoolnix-gui/merge/output.cpp:178
+#: src/mkvtoolnix-gui/merge/output.cpp:184
+#: src/mkvtoolnix-gui/merge/output.cpp:190
 #, no-c-format
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "mkvmerge가 지원하는 두 가지 챕터 형식: 텍스트 서식과 같은 OGM 형식 및 전체 기능의 XML 형식입니다."
@@ -13349,7 +13382,7 @@ msgstr "tags [옵션] out.xml"
 msgid "text subtitles"
 msgstr "텍스트 자막"
 
-#: src/merge/mkvmerge.cpp:2844
+#: src/merge/mkvmerge.cpp:2875
 msgid "timestamps"
 msgstr "타임코드"
 
@@ -13373,7 +13406,7 @@ msgstr "상단 필드 먼저 출력, 하단 필드 먼저 저장"
 msgid "top field displayed first, top field stored first"
 msgstr "상단 필드 먼저 출력, 상단 필드 먼저 저장"
 
-#: src/merge/mkvmerge.cpp:2837
+#: src/merge/mkvmerge.cpp:2868
 msgid "track name"
 msgstr "트랙 이름"
 
@@ -13405,7 +13438,7 @@ msgstr "tta_리더: c'tor에서 tag_size가 0보다 작습니다. %1%\n"
 #: src/common/kax_info.cpp:870
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:112
-#: src/input/r_matroska.cpp:2768
+#: src/input/r_matroska.cpp:2775
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:181
@@ -13414,7 +13447,7 @@ msgstr "tta_리더: c'tor에서 tag_size가 0보다 작습니다. %1%\n"
 msgid "unknown"
 msgstr "알 수 없음"
 
-#: src/input/r_matroska.cpp:2752
+#: src/input/r_matroska.cpp:2759
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "알 수 없는 형식 태그 0x%|1$04x|"
@@ -13441,7 +13474,7 @@ msgstr "wavpack_리더: 비 오디오 블록 발견\n"
 msgid "wavpack_reader: unknown sample rate!\n"
 msgstr "wavpack_리더: 알 수 없는 샘플 속도입니다!\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1700
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1726
 msgid "x"
 msgstr "x"
 
