@@ -404,17 +404,8 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
       opt.options << Q("--compression") << Q("%1:%2").arg(sid).arg(TrackCompression::None == m_compression ? Q("none") : Q("zlib"));
   }
 
-  if (!m_delay.isEmpty() || !m_stretchBy.isEmpty()) {
-    auto arg = Q("%1:%2").arg(sid).arg(m_delay.isEmpty() ? Q("0") : m_delay);
-
-    if (!m_stretchBy.isEmpty()) {
-      arg += Q(",%1").arg(m_stretchBy);
-      if (!m_stretchBy.contains('/'))
-        arg += Q("/1");
-    }
-
-    opt.options << Q("--sync") << arg;
-  }
+  if (!m_delay.isEmpty() || !m_stretchBy.isEmpty())
+    opt.options << Q("--sync") << Q("%1:%2").arg(sid).arg(MuxConfig::formatDelayAndStretchBy(m_delay, m_stretchBy));
 
   if (!m_defaultDuration.isEmpty()) {
     auto unit = m_defaultDuration.contains(QRegExp{"\\d$"}) ? Q("fps") : Q("");

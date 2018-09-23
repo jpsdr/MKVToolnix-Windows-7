@@ -10,6 +10,9 @@
   chapter files can be adjusted (multiplication and addition) with the new
   `--chapter-sync` option or using the special track ID `-2` for the existing
   `--sync` option. Part of the implementation of #2358.
+* MKVToolNix GUI: multiplexer: adjusted & added controls for mkvmerge's new
+  feature of being able to adjust chapter timestamps. Part of the
+  implementation of #2358.
 
 ## Bug fixes
 

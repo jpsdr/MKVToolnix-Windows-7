@@ -55,6 +55,8 @@ Tab::setupOutputControls() {
   connect(ui->browseSegmentUID,              &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentUID);
   connect(ui->chapterCharacterSet,           static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this, &Tab::onChapterCharacterSetChanged);
   connect(ui->chapterCharacterSetPreview,    &QPushButton::clicked,                                                                            this, &Tab::onPreviewChapterCharacterSet);
+  connect(ui->chapterDelay,                  &QLineEdit::textChanged,                                                                          this, &Tab::onChapterDelayChanged);
+  connect(ui->chapterStretchBy,              &QLineEdit::textChanged,                                                                          this, &Tab::onChapterStretchByChanged);
   connect(ui->chapterCueNameFormat,          &QLineEdit::textChanged,                                                                          this, &Tab::onChapterCueNameFormatChanged);
   connect(ui->chapterLanguage,               static_cast<void (Util::LanguageComboBox::*)(int)>(&Util::LanguageComboBox::currentIndexChanged), this, &Tab::onChapterLanguageChanged);
   connect(ui->chapters,                      &QLineEdit::textChanged,                                                                          this, &Tab::onChaptersChanged);
@@ -195,6 +197,11 @@ Tab::setupOutputToolTips() {
                    .arg(QYH("The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."))
                    .arg(QYH("The rest is copied as is."))
                    .arg(QYH("If nothing is entered then '%p - %t' will be used.")));
+  Util::setToolTip(ui->chapterDelay, QY("Delay the chapters' timestamps by a couple of ms."));
+  Util::setToolTip(ui->chapterStretchBy,
+                   Q("%1 %2")
+                   .arg(QYH("Multiply the chapters' timestamps with a factor."))
+                   .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
   Util::setToolTip(ui->chapterGenerationMode,
                    Q("<p>%1 %2</p><ol><li>%3</li><li>%4</li></ol><p>%5</p>")
                    .arg(QYH("mkvmerge can generate chapters automatically."))
@@ -498,6 +505,16 @@ Tab::onChapterCharacterSetChanged(QString newValue) {
 }
 
 void
+Tab::onChapterDelayChanged(QString newValue) {
+  m_config.m_chapterDelay = newValue;
+}
+
+void
+Tab::onChapterStretchByChanged(QString newValue) {
+  m_config.m_chapterStretchBy = newValue;
+}
+
+void
 Tab::onChapterCueNameFormatChanged(QString newValue) {
   m_config.m_chapterCueNameFormat = newValue;
 }
@@ -545,6 +562,8 @@ Tab::setOutputControlValues() {
   ui->previousSegmentUID->setText(m_config.m_previousSegmentUID);
   ui->nextSegmentUID->setText(m_config.m_nextSegmentUID);
   ui->chapters->setText(m_config.m_chapters);
+  ui->chapterDelay->setText(m_config.m_chapterDelay);
+  ui->chapterStretchBy->setText(m_config.m_chapterStretchBy);
   ui->chapterCueNameFormat->setText(m_config.m_chapterCueNameFormat);
   ui->additionalOptions->setText(m_config.m_additionalOptions);
   ui->webmMode->setChecked(m_config.m_webmMode);

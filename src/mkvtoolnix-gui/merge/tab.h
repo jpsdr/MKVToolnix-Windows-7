@@ -221,6 +221,8 @@ public slots:
   virtual void onBrowseChapters();
   virtual void onChapterLanguageChanged(int newValue);
   virtual void onChapterCharacterSetChanged(QString newValue);
+  virtual void onChapterDelayChanged(QString newValue);
+  virtual void onChapterStretchByChanged(QString newValue);
   virtual void onChapterCueNameFormatChanged(QString newValue);
   virtual void onWebmClicked(bool newValue);
   virtual void onAdditionalOptionsChanged(QString newValue);

@@ -116,6 +116,8 @@ MuxConfig::operator =(MuxConfig const &other) {
   m_chapters                      = other.m_chapters;
   m_chapterLanguage               = other.m_chapterLanguage;
   m_chapterCharacterSet           = other.m_chapterCharacterSet;
+  m_chapterDelay                  = other.m_chapterDelay;
+  m_chapterStretchBy              = other.m_chapterStretchBy;
   m_chapterCueNameFormat          = other.m_chapterCueNameFormat;
   m_additionalOptions             = other.m_additionalOptions;
   m_splitMode                     = other.m_splitMode;
@@ -429,6 +431,8 @@ MuxConfig::load(Util::ConfigFile &settings) {
   m_chapters                      = QDir::toNativeSeparators(settings.value("chapters").toString());
   m_chapterLanguage               = settings.value("chapterLanguage").toString();
   m_chapterCharacterSet           = settings.value("chapterCharacterSet").toString();
+  m_chapterDelay                  = settings.value("chapterDelay").toString();
+  m_chapterStretchBy              = settings.value("chapterStretchBy").toString();
   m_chapterCueNameFormat          = settings.value("chapterCueNameFormat").toString();
   m_additionalOptions             = settings.value("additionalOptions").toString();
   m_splitMode                     = static_cast<SplitMode>(settings.value("splitMode").toInt());
@@ -478,6 +482,8 @@ MuxConfig::save(Util::ConfigFile &settings)
   settings.setValue("chapters",                      m_chapters);
   settings.setValue("chapterLanguage",               m_chapterLanguage);
   settings.setValue("chapterCharacterSet",           m_chapterCharacterSet);
+  settings.setValue("chapterDelay",                  m_chapterDelay);
+  settings.setValue("chapterStretchBy",              m_chapterStretchBy);
   settings.setValue("chapterCueNameFormat",          m_chapterCueNameFormat);
   settings.setValue("additionalOptions",             m_additionalOptions);
   settings.setValue("splitMode",                     m_splitMode);
@@ -654,6 +660,10 @@ MuxConfig::buildMkvmergeOptions()
     add(Q("--chapter-language"),        m_chapterLanguage);
     add(Q("--chapter-charset"),         m_chapterCharacterSet);
     add(Q("--cue-chapter-name-format"), m_chapterCueNameFormat);
+
+    if (!m_chapterDelay.isEmpty() || !m_chapterStretchBy.isEmpty())
+      options << Q("--chapter-sync") << formatDelayAndStretchBy(m_chapterDelay, m_chapterStretchBy);
+
     options << Q("--chapters") << m_chapters;
   }
 
@@ -759,6 +769,20 @@ MuxConfig::needChapterNameTemplateAndLanguage()
   }
 
   return false;
+}
+
+QString
+MuxConfig::formatDelayAndStretchBy(QString const &delay,
+                                   QString const &stretchBy) {
+  auto arg = delay.isEmpty() ? Q("0") : delay;
+
+  if (!stretchBy.isEmpty()) {
+    arg += Q(",%1").arg(stretchBy);
+    if (!stretchBy.contains('/'))
+      arg += Q("/1");
+  }
+
+  return arg;
 }
 
 }}}
