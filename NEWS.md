@@ -18,6 +18,10 @@
 
 * MKVToolNix GUI: fixed a leak of Windows font resources leading to a general
   slowdown and subsequent crash. Fixes #2372.
+* mkvmerge: AC-3: dialog normalization gain removal was broken for
+  E-AC-3. First, the routines didn't process all AC-3 frames in a Matroska
+  block but only the first one. Second, it broke E-AC-3 frame headers by
+  writing a CRC in a place where it doesn't belong. Fixes #2386.
 
 
 # Version 26.0.0 "In The Game" 2018-08-26

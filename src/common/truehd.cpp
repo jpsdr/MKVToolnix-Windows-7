@@ -86,7 +86,7 @@ frame_t::parse_ac3_header(unsigned char const *data,
   m_type  = frame_t::sync;
   m_size  = m_ac3_header.m_bytes;
 
-  return size >= m_ac3_header.m_bytes ? mtx::ac3::verify_checksum1(data, size) : false;
+  return size >= m_ac3_header.m_bytes ? mtx::ac3::verify_checksums(data, size) : false;
 }
 
 unsigned int

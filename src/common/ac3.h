@@ -100,7 +100,7 @@ public:
   void parse(bool end_of_stream);
 };
 
-bool verify_checksum1(unsigned char const *buf, std::size_t size);
+bool verify_checksums(unsigned char const *buf, std::size_t size, bool full_buffer = false);
 void remove_dialog_normalization_gain(unsigned char *buf, std::size_t size);
 
 }}                              // namespace mtx::ac3

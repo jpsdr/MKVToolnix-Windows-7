@@ -30,6 +30,7 @@ protected:
   uint64_t m_stream_position;
   bool m_first_packet, m_remove_dialog_normalization_gain;
   std::vector<packet_extension_cptr> m_packet_extensions;
+  debugging_option_c m_verify_checksums;
 
 public:
   ac3_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, int bsid);

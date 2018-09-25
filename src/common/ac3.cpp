@@ -554,35 +554,57 @@ calculate_crc1(unsigned char const *buf,
   return mul_poly(crc_inv, crc1, CRC16_POLY);
 }
 
-bool
-verify_checksum1(unsigned char const *buf,
-                 std::size_t size) {
-  frame_c frame;
-
-  if (!frame.decode_header(buf, size))
-    return false;
-
-  if (size < frame.m_bytes)
-    return false;
-
-  uint16_t expected_crc = get_uint16_be(&buf[2]);
-  auto actual_crc       = calculate_crc1(buf, frame.m_bytes);
-
-  return expected_crc == actual_crc;
+static uint16_t
+calculate_crc2(unsigned char const *buf,
+               std::size_t frame_size) {
+  return mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, &buf[2], frame_size - 4));
 }
 
-void
-remove_dialog_normalization_gain(unsigned char *buf,
-                                 std::size_t size) {
+bool
+verify_checksums(unsigned char const *buf,
+                 std::size_t size,
+                 bool full_buffer) {
+  while (size) {
+    frame_c frame;
+
+    auto res = frame.decode_header(buf, size);
+
+    if (!res)
+      return false;
+
+    if (size < frame.m_bytes)
+      return false;
+
+    // crc1 is not present in E-AC-3.
+    if (!frame.is_eac3()) {
+      uint16_t expected_crc1 = get_uint16_be(&buf[2]);
+      auto actual_crc1       = calculate_crc1(buf, frame.m_bytes);
+
+      if (expected_crc1 != actual_crc1)
+        return false;
+    }
+
+    auto expected_crc2 = get_uint16_be(&buf[frame.m_bytes - 2]);
+    auto actual_crc2   = calculate_crc2(buf, frame.m_bytes);
+
+    if (expected_crc2 != actual_crc2)
+      return false;
+
+    if (!full_buffer)
+      break;
+
+    buf  += frame.m_bytes;
+    size -= frame.m_bytes;
+  }
+
+  return true;
+}
+
+static void
+remove_dialog_normalization_gain_impl(unsigned char *buf,
+                                      frame_c &frame) {
   static debugging_option_c s_debug{"ac3_remove_dialog_normalization_gain|remove_dialog_normalization_gain"};
 
-  frame_c frame;
-
-  if (!frame.decode_header(buf, size))
-    return;
-
-  if (size < frame.m_bytes)
-    return;
 
   unsigned int const removed_level = 31;
 
@@ -597,7 +619,7 @@ remove_dialog_normalization_gain(unsigned char *buf,
              boost::format("changing dialog normalization gain from -%1% dB (%2%) to -%3% dB\n")
              % frame.m_dialog_normalization_gain % (frame.m_dialog_normalization_gain2 ? (boost::format("-%1% dB") % *frame.m_dialog_normalization_gain2).str() : "—"s) % removed_level);
 
-  mtx::bits::writer_c w{buf, size};
+  mtx::bits::writer_c w{buf, frame.m_bytes};
 
   w.set_bit_position(frame.m_dialog_normalization_gain_bit_position);
   w.put_bits(5, removed_level);
@@ -607,18 +629,39 @@ remove_dialog_normalization_gain(unsigned char *buf,
     w.put_bits(5, removed_level);
   }
 
-  put_uint16_be(&buf[2], calculate_crc1(buf, size));
+  // crc1 is not present in E-AC-3.
+  if (!frame.is_eac3())
+    put_uint16_be(&buf[2], calculate_crc1(buf, frame.m_bytes));
 
-  auto &crcrsv_byte  = buf[size - 3];
+  auto &crcrsv_byte  = buf[frame.m_bytes - 3];
   crcrsv_byte       &= 0xfe;
 
-  auto crc2 = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, &buf[2], size - 4));
+  auto crc2 = calculate_crc2(buf, frame.m_bytes);
   if (crc2 == AC3_SYNC_WORD) {
     crcrsv_byte |= 0x01;
-    crc2         = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, &buf[2], size - 4));
+    crc2         = calculate_crc2(buf, frame.m_bytes);
   }
 
-  put_uint16_be(&buf[size - 2], crc2);
+  put_uint16_be(&buf[frame.m_bytes - 2], crc2);
+}
+
+void
+remove_dialog_normalization_gain(unsigned char *buf,
+                                 std::size_t size) {
+  while (true) {
+    frame_c frame;
+
+    if (!frame.decode_header(buf, size))
+      return;
+
+    if (size < frame.m_bytes)
+      return;
+
+    remove_dialog_normalization_gain_impl(buf, frame);
+
+    buf  += frame.m_bytes;
+    size -= frame.m_bytes;
+  }
 }
 
 }}                              // namespace mtx::ac3

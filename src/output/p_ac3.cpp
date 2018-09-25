@@ -35,6 +35,7 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
   , m_stream_position{}
   , m_first_packet{true}
   , m_remove_dialog_normalization_gain{get_option_for_track(m_ti.m_remove_dialog_normalization_gain, m_ti.m_id)}
+  , m_verify_checksums{"ac3_verify_checksums"}
 {
   m_first_ac3_header.m_sample_rate = samples_per_sec;
   m_first_ac3_header.m_bs_id       = bsid;
@@ -128,8 +129,18 @@ ac3_packetizer_c::set_timestamp_and_add_packet(packet_cptr const &packet,
   // if (packet_stream_position)
   //   mxinfo(boost::format("  ts %1% position in %2% out %3%\n") % format_timestamp(packet->timestamp) % format_number(m_stream_position) % format_number(*packet_stream_position));
 
-  if (m_remove_dialog_normalization_gain)
+  auto ok_before = m_verify_checksums ? mtx::ac3::verify_checksums(packet->data->get_buffer(), packet->data->get_size(), true) : true;
+  auto ok_after  = -1;
+
+  if (m_remove_dialog_normalization_gain) {
     mtx::ac3::remove_dialog_normalization_gain(packet->data->get_buffer(), packet->data->get_size());
+    if (m_verify_checksums)
+      ok_after = mtx::ac3::verify_checksums(packet->data->get_buffer(), packet->data->get_size(), true) ? 1 : 0;
+  }
+
+  mxdebug_if(m_verify_checksums,
+             boost::format("AC-3 packetizer checksum verification at %1% / %2%: before/after removal: %3%/%4%\n")
+             % format_timestamp(packet->timestamp) % format_number(m_stream_position) % ok_before % (ok_after == -1 ? "n/a" : ok_after ? "1" : "0"));
 
   add_packet(packet);
 
