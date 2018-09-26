@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-09-23 12:23+0200\n"
-"PO-Revision-Date: 2018-09-14 20:59+0000\n"
+"PO-Revision-Date: 2018-09-24 08:35+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -142,7 +142,6 @@ msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.
 msgstr "  --chapter-language <lng> - Устанавливает элемент 'язык' в записях глав.\n"
 
 #: src/merge/mkvmerge.cpp:96
-#, fuzzy
 msgid ""
 "  --chapter-sync <d[,o[/p]]>\n"
 "                           Synchronize, adjust the chapters's timestamps\n"
@@ -151,7 +150,7 @@ msgid ""
 "                           'o/p' to fix linear drifts. 'p' defaults to\n"
 "                           1 if omitted. Both 'o' and 'p' can be\n"
 "                           floating point numbers.\n"
-msgstr "  -y, --sync <TID:d[,o[/p]]> - Синхронизация, подстройка меткок времени дорожки с TID на 'd' миллисекунд. 'o/p': Метки времени подстраиваются путём умножения на 'o/p' для исправления линейных сдвигов. 'p' по умолчанию 1, если не указан. И 'o', и 'p' могут быть числами с плавающей запятой.\n"
+msgstr "  --chapter-sync <d[,o[/p]]> - Синхронизация, подстройка меток времени глав по 'd' миллисекунд. Параметры 'o/p' служат регулирования временных меток умножением их на значения 'o/p' для исправления линейных смещений. Значение 'p' по умолчанию равно 1, если не задано. Параметры 'o' и 'p' могут быть числами с плавающей запятой.\n"
 
 #: src/merge/mkvmerge.cpp:93
 msgid "  --chapters <file>        Read chapter information from the file.\n"
@@ -714,7 +713,7 @@ msgid ""
 "                           'o/p' to fix linear drifts. 'p' defaults to\n"
 "                           1 if omitted. Both 'o' and 'p' can be\n"
 "                           floating point numbers.\n"
-msgstr "  -y, --sync <TID:d[,o[/p]]> - Синхронизация, подстройка меткок времени дорожки с TID на 'd' миллисекунд. 'o/p': Метки времени подстраиваются путём умножения на 'o/p' для исправления линейных сдвигов. 'p' по умолчанию 1, если не указан. И 'o', и 'p' могут быть числами с плавающей запятой.\n"
+msgstr "  -y, --sync <TID:d[,o[/p]]> - Синхронизация, подстройка меток времени дорожки с TID по 'd' миллисекунд. Параметры 'o/p' служат регулирования временных меток умножением их на значения 'o/p' для исправления линейных смещений. Значение 'p' по умолчанию равно 1, если не задано. Параметры 'o' и 'p' могут быть числами с плавающей запятой.\n"
 
 #: src/merge/mkvmerge.cpp:171
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
@@ -4471,14 +4470,14 @@ msgid "Delay built into the codec during decoding in ns."
 msgstr "Задержка, встроенная в кодек, во время декодирования, в наносекундах."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:200
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Delay the chapters' timestamps by a couple of ms."
-msgstr "Задержите метки времени этой дорожки на пару мс."
+msgstr "Задержка меток времени глав на пару миллисекунд."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:458
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
-msgstr "Задержите метки времени этой дорожки на пару мс."
+msgstr "Задержка меток времени этой дорожки на пару миллисекунд."
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Delete all existing track statistics tags"
@@ -7177,9 +7176,8 @@ msgid "Multiplexing took %1%.\n"
 msgstr "Слияние %1%.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:203
-#, fuzzy
 msgid "Multiply the chapters' timestamps with a factor."
-msgstr "Умножает метки времени этой дорожки на коэффициент."
+msgstr "Умножение меток времени глав на коэффициент."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:463
 msgid "Multiply this track's timestamps with a factor."
