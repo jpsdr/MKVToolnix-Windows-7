@@ -2,10 +2,6 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: multiplexer: the GUI can now ask for confirmation when the
-  user is about to create a file that won't contain audio tracks. It does this
-  by default if at least one source file contains an audio track. Implements
-  #2380.
 * mkvmerge: chapters: the timestamps of chapters read from containers or from
   chapter files can be adjusted (multiplication and addition) with the new
   `--chapter-sync` option or using the special track ID `-2` for the existing
@@ -13,15 +9,19 @@
 * MKVToolNix GUI: multiplexer: adjusted & added controls for mkvmerge's new
   feature of being able to adjust chapter timestamps. Part of the
   implementation of #2358.
+* MKVToolNix GUI: multiplexer: the GUI can now ask for confirmation when the
+  user is about to create a file that won't contain audio tracks. It does this
+  by default if at least one source file contains an audio track. Implements
+  #2380.
 
 ## Bug fixes
 
-* MKVToolNix GUI: fixed a leak of Windows font resources leading to a general
-  slowdown and subsequent crash. Fixes #2372.
 * mkvmerge: AC-3: dialog normalization gain removal was corrupting E-AC-3
   frames irreversibly by writing checksums in places where they didn't
   belong. Additionally only the first E-AC-3 frame in a Matroska was processed
   but not additional dependent frames in the same block. Fixes #2386.
+* MKVToolNix GUI: fixed a leak of Windows font resources leading to a general
+  slowdown and subsequent crash. Fixes #2372.
 
 
 # Version 26.0.0 "In The Game" 2018-08-26
