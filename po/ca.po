@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-09-23 12:23+0200\n"
-"PO-Revision-Date: 2018-09-13 10:21+0000\n"
+"PO-Revision-Date: 2018-09-24 10:53+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/ca/)\n"
@@ -194,7 +194,6 @@ msgstr ""
 "                           del capítol.\n"
 
 #: src/merge/mkvmerge.cpp:96
-#, fuzzy
 msgid ""
 "  --chapter-sync <d[,o[/p]]>\n"
 "                           Synchronize, adjust the chapters's timestamps\n"
@@ -204,9 +203,9 @@ msgid ""
 "                           1 if omitted. Both 'o' and 'p' can be\n"
 "                           floating point numbers.\n"
 msgstr ""
-"  -y, --sync <TID:d[,o[/p]]>\n"
-"                           Sincronitza, ajusta els codis de temps de la\n"
-"                           pista amb l'ID TID mitjançant «d» mil·lisegons.\n"
+"  --chapter-sync <d[,o[/p]]>\n"
+"                           Sincronitza, ajusta els codis de temps dels\n"
+"                           capítols amb «d» mil·lisegons.\n"
 "                           «o/p»: ajusta els codis de temps multiplicant\n"
 "                           «o/p» per a corregir la deriva lineal.\n"
 "                           «p» és predefinit a 1 si és omès.\n"
@@ -4720,9 +4719,9 @@ msgid "Delay built into the codec during decoding in ns."
 msgstr "Retard en nanosegons, serà passat al còdec mentre es descodifica."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:200
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Delay the chapters' timestamps by a couple of ms."
-msgstr "Retarda les marques de temps d'aquesta pista per alguns ms."
+msgstr "Retarda les marques de temps dels capítols per alguns ms."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:458
 #, no-c-format
@@ -7421,9 +7420,8 @@ msgid "Multiplexing took %1%.\n"
 msgstr "El multiplexat ha pres %1%.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:203
-#, fuzzy
 msgid "Multiply the chapters' timestamps with a factor."
-msgstr "Multiplica les marques de temps d'aquesta pista per un factor."
+msgstr "Multiplica les marques de temps dels capítols per un factor."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:463
 msgid "Multiply this track's timestamps with a factor."
