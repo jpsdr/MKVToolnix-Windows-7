@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2018-09-23 12:38+0200\n"
-"PO-Revision-Date: 2018-09-10 11:17+0000\n"
+"PO-Revision-Date: 2018-09-24 11:03+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
@@ -1604,17 +1604,13 @@ msgstr "Aquest ajustament també s'aplica als capítols que es copien des de cer
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:221
-#, fuzzy
-#| msgid "<option>-y</option>, <option>--sync</option> <parameter>TID:d<optional>,o<optional>/p</optional></optional></parameter>"
 msgid "<option>--chapter-sync</option> <parameter>d<optional>,o<optional>/p</optional></optional></parameter>"
-msgstr "<option>-y</option>, <option>--sync</option> <parameter>TID:d<optional>,o<optional>/p</optional></optional></parameter>"
+msgstr "<option>--chapter-sync</option> <parameter>d<optional>,o<optional>/p</optional></optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:224
-#, fuzzy
-#| msgid "Adjust the timestamps of the track with the id <parameter>TID</parameter> by <parameter>d</parameter> ms. The track IDs are the same as the ones given with <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>)."
 msgid "Adjust the timestamps of the chapters in the following source file by <parameter>d</parameter> ms. Alternatively you can use the <option>--sync</option> option with the special track ID <constant>-2</constant> (see section <link linkend=\"mkvmerge.track_ids.special_ids\">special track IDs</link>)."
-msgstr "Ajusta els codis de temps de la pista amb l'ID <parameter>TID</parameter> per <parameter>d</parameter> ms. Els ID de les pistes són els mateixos que es mostren amb l'opció <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>)."
+msgstr "Ajusta els codis de temps dels capítols en el fitxer d'origen per <parameter>d</parameter> ms. De manera alternativa, podeu utilitzar l'opció <option>--sync</option> amb l'ID <constant>-2</constant> de pista especial (vegeu la secció de els <link linkend=\"mkvmerge.track_ids.special_ids\">ID de pista especial</link>)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:230
@@ -3643,10 +3639,8 @@ msgstr "Els ID de les pistes"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2401
-#, fuzzy
-#| msgid "Track IDs"
 msgid "Regular track IDs"
-msgstr "Els ID de les pistes"
+msgstr "Els ID de pista normal"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2404
@@ -3704,15 +3698,13 @@ msgstr "Les opcions que empren els ID de les pistes són aquelles en què la des
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2458
-#, fuzzy
-#| msgid "Track IDs"
 msgid "Special track IDs"
-msgstr "Els ID de les pistes"
+msgstr "Els ID de pista normal"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2461
 msgid "There are several IDs that have special meaning and do not occur in the identification output."
-msgstr ""
+msgstr "Hi ha diversos ID que tenen un significat especial i que no apareixen a la sortida d'identificació."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2465
@@ -3722,7 +3714,7 @@ msgstr "L'ID de pista especial «<constant>-1</constant>» és un comodí i apli
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2470
 msgid "The special track ID '<constant>-2</constant>' refers to the chapters in a source file. Currently only the <option>--sync</option> option uses this special ID. As an alternative to <option>--sync -2:…</option> the option <option>--chapter-sync …</option> can be used."
-msgstr ""
+msgstr "L'ID «<constant>-2</constant>» de pista especial fa referència als capítols en un fitxer d'origen. Actualment només l'opció <option>--sync</option> utilitza aquest ID especial. Com a alternativa a <option>--sync -2:«...»</option>, es pot utilitzar l'opció <option>--chapter-sync «...»</option>."
 
 #. type: Content of: <refentry><refsect1><note><para>
 #: doc/man/mkvmerge.xml:2480
