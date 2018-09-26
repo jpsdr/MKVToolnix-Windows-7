@@ -1,4 +1,4 @@
-# Version ?
+# Version 27.0.0 "Metropolis" 2018-09-26
 
 ## New features and enhancements
 
