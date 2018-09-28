@@ -1,16 +1,15 @@
 # translation of mkvtoolnix.pot to Italian
-# Copyright (C) 2011-2016 Roberto Boriotti <Roberto.Boriotti@canon-europe.com>
+# Copyright (C) 2011-2018 Roberto Boriotti <Roberto.Boriotti@canon-europe.com>
 # Copyright (C) 2011-2013 Stefano Codari <l.stickell@yahoo.it>
 # This file is distributed under the same license as the mkvtoolnix package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MKVToolNix Italian translation 21.09.2018\n"
+"Project-Id-Version: MKVToolNix Italian translation 27.09.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2018-09-23 12:23+0200\n"
-"PO-Revision-Date: 2018-09-21 12:10+0200\n"
-"Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
-"Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
-"language/it/)\n"
+"PO-Revision-Date: 2018-09-27 10:12+0200\n"
+"Last-Translator: Roberto Boriotti <Roberto.Boriotti@canon-europe.com>\n"
+"Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -177,7 +176,6 @@ msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.
 msgstr "  --chapter-language <lng> Imposta l'elemento 'lingua' negli elementi di capitolo.\n"
 
 #: src/merge/mkvmerge.cpp:96
-#, fuzzy
 msgid ""
 "  --chapter-sync <d[,o[/p]]>\n"
 "                           Synchronize, adjust the chapters's timestamps\n"
@@ -187,11 +185,11 @@ msgid ""
 "                           1 if omitted. Both 'o' and 'p' can be\n"
 "                           floating point numbers.\n"
 msgstr ""
-"  -y, --sync <TID:d[,o[/p]]>\n"
-"                          Sincronizza, adatta il timestamp delle tracce con\n"
-"                           l'id TID di 'd' ms.\n"
-"                           'o/p': adatta il timestamp per multipli di\n"
-"                           'o/p' per fissare derive lineari. 'p' predefinito a\n"
+"  --chapter-sync <d[,o[/p]]>\n"
+"                          Sincronizza, adatta 'data/ora' capitolo\n"
+"                           di 'd' ms.\n"
+"                           'o/p': regola 'data/ora' motliplicandoli per\n"
+"                           'o/p' per correggere derive lineari. 'p' è predefinito a\n"
 "                           1 se omesso. Entrambi 'o' e 'p' possono essere\n"
 "                           numeri decimali.\n"
 
@@ -4654,9 +4652,9 @@ msgid "Delay built into the codec during decoding in ns."
 msgstr "Ritardo interno in ns nel codec durante la decodifica."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:200
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Delay the chapters' timestamps by a couple of ms."
-msgstr "Ritarda questo timbro data traccia di 2 ms."
+msgstr "Ritarda 'data/ora' capitolo di 2 ms."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:458
 #, no-c-format
@@ -7354,9 +7352,8 @@ msgid "Multiplexing took %1%.\n"
 msgstr "Il multiplexing ha richiesto %1%.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:203
-#, fuzzy
 msgid "Multiply the chapters' timestamps with a factor."
-msgstr "Moltiplica questi dati data/ora tracce con un fattore."
+msgstr "Moltiplica 'data/ora' capitolo per un fattore."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:463
 msgid "Multiply this track's timestamps with a factor."
