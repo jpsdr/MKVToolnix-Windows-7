@@ -130,7 +130,6 @@ Tab::setupUi() {
   p->addChapterBeforeAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-above.png")});
   p->addChapterAfterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-below.png")});
   p->addSubChapterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-under.png")});
-  p->generateSubChaptersAction->setIcon(QIcon{Q(":/icons/16x16/.png")});
   p->duplicateAction->setIcon(QIcon{Q(":/icons/16x16/tab-duplicate.png")});
   p->removeElementAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
   p->renumberSubChaptersAction->setIcon(QIcon{Q(":/icons/16x16/format-list-ordered.png")});
