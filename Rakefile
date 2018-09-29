@@ -712,32 +712,62 @@ namespace :dev do
     task "update-qt-resources" do
       require 'rexml/document'
 
-      qrc      = "src/mkvtoolnix-gui/qt_resources.qrc"
-      doc      = REXML::Document.new File.new(qrc)
-      existing = Hash.new
+      qrc = "src/mkvtoolnix-gui/qt_resources.qrc"
+      puts_action "UPDATE", :target => qrc
 
-      doc.elements.to_a("/RCC/qresource/file").each do |node|
-        if File.exists? "src/mkvtoolnix-gui/#{node.text}"
-          existing[node.text] = true
-        else
-          puts "Removing <file> for non-existing #{node.text}"
-          node.remove
-        end
-      end
+      doc = REXML::Document.new File.new(qrc)
 
-      parent = doc.elements.to_a("/RCC/qresource")[0]
-      FileList["share/icons/*/*.png"].select { |file| !existing["../../#{file}"] }.each do |file|
-        puts "Adding <file> for #{file}"
+      doc.elements.to_a("/RCC/qresource/file").select { |node| %r{icons/}.match(node.text) }.each(&:remove)
+
+      parent   = doc.elements.to_a("/RCC/qresource")[0]
+      icons    = FileList["share/icons/*/*.png"].sort
+      seen     = Hash.new
+      add_node = lambda do |name_to_add, name_alias|
         node                     = REXML::Element.new "file"
-        node.attributes["alias"] = file.gsub(/share\//, '')
-        node.text                = "../../#{file}"
+        node.attributes["alias"] = name_alias.gsub(/share\//, '')
+        node.text                = "../../#{name_to_add}"
         parent << node
       end
 
+      icons.each do |file|
+        add_node.call(file, file)
+
+        base_name   = file.gsub(%r{.*/|\.png$},      '')
+        size        = file.gsub(%r{.*/(\d+)x\d+/.*}, '\1').to_i
+        name_alias  = file.gsub(%r{\.png},           '@2x.png')
+        double_size = size * 2
+        double_file = "share/icons/#{double_size}x#{double_size}/#{base_name}.png"
+
+        next unless FileTest.exists?(double_file)
+
+        add_node.call(double_file, name_alias)
+        seen[file.gsub(%r{.*/icons}, 'icons')] = true
+      end
+
+      output            = ""
       formatter         = REXML::Formatters::Pretty.new 1
       formatter.compact = true
       formatter.width   = 9999999
-      formatter.write doc, File.open(qrc, "w")
+      formatter.write doc, output
+      File.open(qrc, "w").write(output.gsub(%r{ +\n}, "\n"))
+
+      warned = Hash.new
+      files  = read_files( %w{ui cpp}.map { |ext| FileList["src/mkvtoolnix-gui/**/*.#{ext}"].to_a.reject { |name| %r{qt_resources\.cpp$}.match(name) } }.flatten )
+      files.each do |file, lines|
+        line_num = 0
+
+        lines.each do |line|
+          line_num += 1
+
+          line.scan(%r{icons/\d+x\d+/.*?\.png}) do |icon|
+            next if seen[icon] || warned[icon]
+            next if %r{%}.match(icon)
+
+            puts "Warning: no double-sized variant found for '#{icon}' (found first in '#{file}:#{line_num}')"
+            warned[icon] = true
+          end
+        end
+      end
     end
 
     desc "Update Qt project file"
