@@ -4,6 +4,9 @@
 
 * MKVToolNix GUI: automatic scaling for high DPI displays is activated if the
   GUI is compiled with Qt ≥ 5.6.0. Fixes #1996 and #2383.
+* MKVToolNix GUI: added a menu item ("Help" → "System information") for
+  displaying information about the system MKVToolNix is running on in order to
+  make debugging easier.
 
 
 # Version 27.0.0 "Metropolis" 2018-09-26

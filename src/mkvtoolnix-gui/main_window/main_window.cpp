@@ -33,6 +33,7 @@
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/system_information.h"
 #include "mkvtoolnix-gui/util/text_display_dialog.h"
 #include "mkvtoolnix-gui/util/waiting_spinner_widget.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -187,6 +188,7 @@ MainWindow::setupConnections() {
   connect(p->ui->actionHelpMkvmergeDocumentation, &QAction::triggered,                                    this,                 &MainWindow::visitMkvmergeDocumentation);
   connect(p->ui->actionHelpWebSite,               &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpReportBug,             &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
+  connect(p->ui->actionHelpSystemInformation,     &QAction::triggered,                                    this,                 &MainWindow::showSystemInformation);
   connect(p->ui->actionHelpForumSubReddit,        &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpCodeOfConduct,         &QAction::triggered,                                    this,                 &MainWindow::showCodeOfConduct);
 
@@ -597,6 +599,15 @@ MainWindow::showCodeOfConduct() {
     dlg.setText(Q(std::string{coc.readAll().constData()}), Util::TextDisplayDialog::Format::Markdown);
 
   dlg.exec();
+}
+
+void
+MainWindow::showSystemInformation() {
+  Util::TextDisplayDialog dlg{this};
+
+  dlg.setTitle(QY("System information"))
+    .setText(Util::gatherSystemInformation(), Util::TextDisplayDialog::Format::Markdown)
+    .exec();
 }
 
 void

@@ -23,19 +23,19 @@ InstallationChecker::~InstallationChecker() {
 
 void
 InstallationChecker::runChecks() {
-  auto problems    = Problems{};
+  m_problems.clear();
   auto mkvmergeExe = Util::Settings::get().actualMkvmergeExe();
   auto versionRE   = QRegularExpression{Q("^mkvmerge [[:space:]]+ v ( [[:digit:].]+ )"), QRegularExpression::ExtendedPatternSyntaxOption};
   auto guiVersion  = Q(get_current_version().to_string());
 
   if (mkvmergeExe.isEmpty() || !QFileInfo{mkvmergeExe}.exists())
-    problems << Problem{ ProblemType::MkvmergeNotFound, {} };
+    m_problems << Problem{ ProblemType::MkvmergeNotFound, {} };
 
   else {
     auto process = Process::execute(mkvmergeExe, { Q("--version") });
 
     if (process->hasError())
-      problems << Problem{ ProblemType::MkvmergeCannotBeExecuted, {} };
+      m_problems << Problem{ ProblemType::MkvmergeCannotBeExecuted, {} };
 
     else {
       // mkvmerge v9.7.1 ('Pandemonium') 64bit
@@ -43,22 +43,25 @@ InstallationChecker::runChecks() {
       auto match  = versionRE.match(output);
 
       if (!match.hasMatch())
-        problems << Problem{ ProblemType::MkvmergeVersionNotRecognized, output };
+        m_problems << Problem{ ProblemType::MkvmergeVersionNotRecognized, output };
 
-      else if (guiVersion != match.captured(1))
-        problems << Problem{ ProblemType::MkvmergeVersionDiffers, match.captured(1) };
+      else {
+        m_mkvmergeVersion = match.captured(1);
+        if (guiVersion != match.captured(1))
+          m_problems << Problem{ ProblemType::MkvmergeVersionDiffers, match.captured(1) };
+      }
     }
   }
 
 #if defined(SYS_WINDOWS)
   auto magicFile = App::applicationDirPath() + "/share/misc/magic.mgc";
   if (!QFileInfo{magicFile}.exists())
-    problems << Problem{ ProblemType::FileNotFound, Q("share\\misc\\magic.mgc") };
+    m_problems << Problem{ ProblemType::FileNotFound, Q("share\\misc\\magic.mgc") };
 
 #endif  // SYS_WINDOWS
 
-  if (!problems.isEmpty())
-    emit problemsFound(problems);
+  if (!m_problems.isEmpty())
+    emit problemsFound(m_problems);
 
   emit finished();
 }
@@ -78,5 +81,16 @@ InstallationChecker::checkInstallation() {
   thread->start();
 }
 
+QString
+InstallationChecker::mkvmergeVersion()
+  const {
+  return m_mkvmergeVersion;
+}
+
+InstallationChecker::Problems
+InstallationChecker::problems()
+  const {
+  return m_problems;
+}
 
 }}}

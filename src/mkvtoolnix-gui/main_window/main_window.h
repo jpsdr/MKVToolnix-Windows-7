@@ -81,6 +81,7 @@ public slots:
   virtual void visitHelpURL();
   virtual void visitMkvmergeDocumentation();
   virtual void showCodeOfConduct();
+  virtual void showSystemInformation();
   virtual void setToolSelectorVisibility();
   virtual void raiseAndActivate();
 
