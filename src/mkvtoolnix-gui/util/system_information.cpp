@@ -110,7 +110,7 @@ void
 gatherQtInfo(QStringList &info) {
   info << Q("") << Q("# Qt") << Q("");
 
-  info << Q("* Version: %1.%2.%3").arg(QT_VERSION_MAJOR).arg(QT_VERSION_MINOR).arg(QT_VERSION_PATCH);
+  info << Q("* Version: %1.%2.%3").arg((QT_VERSION >> 16) & 0xff).arg((QT_VERSION >> 8) & 0xff).arg(QT_VERSION & 0xff);
 
   info << Q("") << Q("## Environment variables") << Q("");
 
