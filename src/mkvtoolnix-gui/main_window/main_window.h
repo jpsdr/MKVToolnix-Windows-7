@@ -80,6 +80,7 @@ public slots:
   virtual void editRunProgramConfigurations();
   virtual void visitHelpURL();
   virtual void visitMkvmergeDocumentation();
+  virtual void showCodeOfConduct();
   virtual void setToolSelectorVisibility();
   virtual void raiseAndActivate();
 

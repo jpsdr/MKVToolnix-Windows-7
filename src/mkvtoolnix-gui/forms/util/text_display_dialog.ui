@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>mtx::gui::CodeOfConductDialog</class>
- <widget class="QDialog" name="mtx::gui::CodeOfConductDialog">
+ <class>mtx::gui::Util::TextDisplayDialog</class>
+ <widget class="QDialog" name="mtx::gui::TextDisplayDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>The MKVToolNix Code of Conduct</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTextBrowser" name="codeOfConduct">
+    <widget class="QTextBrowser" name="text">
      <property name="html">
       <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -41,7 +41,7 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <tabstops>
-  <tabstop>codeOfConduct</tabstop>
+  <tabstop>text</tabstop>
  </tabstops>
  <resources/>
  <connections/>

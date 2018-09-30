@@ -44,7 +44,7 @@ FORMS += \
     forms/header_editor/attachments_page.ui \
     forms/header_editor/attached_file_page.ui \
     forms/header_editor/action_for_dropped_files_dialog.ui \
-    forms/main_window/code_of_conduct_dialog.ui \
+    forms/util/text_display_dialog.ui \
     forms/info/tab.ui \
     forms/info/tool.ui \
     forms/info/job_settings_widget.ui \

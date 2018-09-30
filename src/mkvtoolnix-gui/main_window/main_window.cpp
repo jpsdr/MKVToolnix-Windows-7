@@ -22,7 +22,6 @@
 #include "mkvtoolnix-gui/info/tool.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
-#include "mkvtoolnix-gui/main_window/code_of_conduct_dialog.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
@@ -34,6 +33,7 @@
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/text_display_dialog.h"
 #include "mkvtoolnix-gui/util/waiting_spinner_widget.h"
 #include "mkvtoolnix-gui/util/widget.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
@@ -188,7 +188,7 @@ MainWindow::setupConnections() {
   connect(p->ui->actionHelpWebSite,               &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpReportBug,             &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpForumSubReddit,        &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
-  connect(p->ui->actionHelpCodeOfConduct,         &QAction::triggered,                                    this,                 [this]() { CodeOfConductDialog{this}.exec(); });
+  connect(p->ui->actionHelpCodeOfConduct,         &QAction::triggered,                                    this,                 &MainWindow::showCodeOfConduct);
 
   connect(p->ui->actionWindowNext,                &QAction::triggered,                                    this,                 [this]() { showNextOrPreviousSubWindow(1);  });
   connect(p->ui->actionWindowPrevious,            &QAction::triggered,                                    this,                 [this]() { showNextOrPreviousSubWindow(-1); });
@@ -584,6 +584,19 @@ MainWindow::visitMkvmergeDocumentation() {
     url = p->helpURLs[p->ui->actionHelpMkvmergeDocumentation];
 
   QDesktopServices::openUrl(url);
+}
+
+void
+MainWindow::showCodeOfConduct() {
+  Util::TextDisplayDialog dlg{this};
+
+  dlg.setTitle(QY("The MKVToolNix Code of Conduct"));
+
+  QFile coc{Q(":/CODE_OF_CONDUCT.md")};
+  if (coc.open(QIODevice::ReadOnly))
+    dlg.setText(Q(std::string{coc.readAll().constData()}), Util::TextDisplayDialog::Format::Markdown);
+
+  dlg.exec();
 }
 
 void
