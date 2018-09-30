@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QClipboard>
+
 #include "common/markdown.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/util/text_display_dialog.h"
@@ -7,14 +9,29 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class TextDisplayDialogPrivate {
+  friend class TextDisplayDialog;
+
+  std::unique_ptr<Ui::TextDisplayDialog> ui;
+  QString m_text;
+
+  TextDisplayDialogPrivate()
+    : ui{new Ui::TextDisplayDialog}
+  {
+  }
+};
+
 TextDisplayDialog::TextDisplayDialog(QWidget *parent)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
-  , ui{new Ui::TextDisplayDialog}
+  , p_ptr{new TextDisplayDialogPrivate}
 {
-  // Setup UI controls.
-  ui->setupUi(this);
+  auto p = p_func();
 
-  connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &TextDisplayDialog::accept);
+  // Setup UI controls.
+  p->ui->setupUi(this);
+
+  connect(p->ui->pbClose,           &QPushButton::clicked, this, &TextDisplayDialog::accept);
+  connect(p->ui->pbCopyToClipboard, &QPushButton::clicked, this, &TextDisplayDialog::copyToClipboard);
 }
 
 TextDisplayDialog::~TextDisplayDialog() {
@@ -29,21 +46,30 @@ TextDisplayDialog::setTitle(QString const &title) {
 TextDisplayDialog &
 TextDisplayDialog::setText(QString const &text,
                            Format format) {
+  auto p = p_func();
+
   switch (format) {
     case Format::Plain:
-      ui->text->setText(text.toHtmlEscaped());
+      p->ui->text->setText(text.toHtmlEscaped());
       break;
 
     case Format::HTML:
-      ui->text->setText(text);
+      p->ui->text->setText(text);
       break;
 
     case Format::Markdown:
-      ui->text->setText(Q(mtx::markdown::to_html(to_utf8(text))));
+      p->ui->text->setText(Q(mtx::markdown::to_html(to_utf8(text))));
       break;
   }
 
+  p->m_text = text;
+
   return *this;
+}
+
+void
+TextDisplayDialog::copyToClipboard() {
+  QApplication::clipboard()->setText(p_func()->m_text);
 }
 
 }}}

@@ -6,15 +6,14 @@
 
 namespace mtx { namespace gui { namespace Util {
 
-namespace Ui {
-class TextDisplayDialog;
-}
-
+class TextDisplayDialogPrivate;
 class TextDisplayDialog : public QDialog {
   Q_OBJECT;
 
 protected:
-  std::unique_ptr<Ui::TextDisplayDialog> ui;
+  MTX_DECLARE_PRIVATE(TextDisplayDialogPrivate);
+
+  std::unique_ptr<TextDisplayDialogPrivate> const p_ptr;
 
 public:
   enum class Format {
@@ -29,6 +28,9 @@ public:
 
   TextDisplayDialog &setTitle(QString const &title);
   TextDisplayDialog &setText(QString const &text, Format format);
+
+public slots:
+  virtual void copyToClipboard();
 };
 
 }}}
