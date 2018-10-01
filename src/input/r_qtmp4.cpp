@@ -3332,6 +3332,11 @@ qtmp4_demuxer_c::verify_audio_parameters() {
   else if (codec.is(codec_c::type_e::A_VORBIS))
     return derive_track_params_from_vorbis_private_data();
 
+  else if (codec.is(codec_c::type_e::A_PCM)) {
+    if (fourcc == "in24")
+      a_bitdepth = 24;
+  }
+
   if ((0 == a_channels) || (0.0 == a_samplerate)) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n")) % id);
     return false;

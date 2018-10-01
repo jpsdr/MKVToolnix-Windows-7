@@ -8,6 +8,11 @@
   displaying information about the system MKVToolNix is running on in order to
   make debugging easier.
 
+## Bug fixes
+
+* mkvmerge: MP4/QuickTime reader: fixed handling of PCM audio with FourCC
+  `in24`. Fixes #2391.
+
 
 # Version 27.0.0 "Metropolis" 2018-09-26
 
