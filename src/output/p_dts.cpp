@@ -100,7 +100,7 @@ dts_packetizer_c::get_dts_packet(bool flushing) {
       && dtsheader.has_core
       && dtsheader.has_exss
       && (dtsheader.exss_part_size > 0)
-      && (dtsheader.exss_part_size < static_cast<int>(dtsheader.frame_byte_size))) {
+      && (dtsheader.exss_part_size < dtsheader.frame_byte_size)) {
     dtsheader.frame_byte_size -= dtsheader.exss_part_size;
     dtsheader.has_exss         = false;
   }

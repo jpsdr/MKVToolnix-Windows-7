@@ -524,12 +524,11 @@ header_t::decode_core_header(unsigned char const *buf,
                                            :                                  0;
 
     // Detect DTS HD master audio / high resolution part
-    has_core         = true;
-    has_exss         = false;
-    exss_part_size   = 0;
-    dts_type         = dts_type_e::normal;
-
-    auto exss_offset = frame_byte_size;
+    has_core       = true;
+    has_exss       = false;
+    exss_part_size = 0;
+    exss_offset    = frame_byte_size;
+    dts_type       = dts_type_e::normal;
 
     if (extended_coding && mtx::included_in(extension_audio_descriptor, extension_audio_descriptor_e::x96k, extension_audio_descriptor_e::xch_x96k))
       dts_type = dts_type_e::x96_24;
@@ -708,8 +707,10 @@ header_t::decode_asset(mtx::bits::reader_c &bc,
   if (drc_present)
     bc.skip_bits(8);            // dynamic range coefficients
 
-  if (bc.get_bit())             // dialog normalization presence flag
-    bc.skip_bits(5);            // dialog normalization code
+  if (bc.get_bit()) {           // dialog normalization presence flag
+    extension_dialog_normalization_gain_bit_position = bc.get_bit_position();
+    extension_dialog_normalization_gain              = bc.get_bits(5) * -1;
+  }
 
   if (drc_present && asset.embedded_stereo)
     bc.skip_bits(8);            // DRC for stereo downmix
@@ -850,7 +851,7 @@ header_t::decode_exss_header(unsigned char const *buf,
       substream_size_bits = 20;
     }
 
-    auto header_size           = bc.get_bits(header_size_bits)    + 1; // header size
+    exss_header_size           = bc.get_bits(header_size_bits)    + 1; // header size
     exss_part_size             = bc.get_bits(substream_size_bits) + 1; // extension substream size
     frame_byte_size           += exss_part_size;
     has_exss                   = true;
@@ -891,7 +892,7 @@ header_t::decode_exss_header(unsigned char const *buf,
 
     substream_assets.resize(num_assets);
 
-    auto offset = header_size;
+    auto offset = exss_header_size;
     for (auto asset_idx = 0u; asset_idx < num_assets; ++asset_idx) {
       auto &asset         = substream_assets[asset_idx];
       asset.asset_offset  = offset;
@@ -997,40 +998,88 @@ detect(const void *src_buf,
   return is_dts;
 }
 
+namespace {
+debugging_option_c s_debug_dng_removal{"dts_remove_dialog_normalization_gain|remove_dialog_normalization_gain"};
+unsigned int const s_dng_removed_level = 0;
+
 void
-remove_dialog_normalization_gain(unsigned char *buf,
-                                 std::size_t size) {
-  static debugging_option_c s_debug{"dts_remove_dialog_normalization_gain|remove_dialog_normalization_gain"};
-
-  header_t header;
-
-  if (!header.decode_core_header(buf, size, true))
+remove_dialog_normalization_gain_from_core(unsigned char *buf,
+                                           header_t &header) {
+  if (!header.has_core || !header.dialog_normalization_gain_bit_position)
     return;
 
-  if (!header.has_core || !header.dialog_normalization_gain_bit_position || (size < header.frame_byte_size))
-    return;
-
-  unsigned int const removed_level = 0;
-
-  if (header.dialog_normalization_gain == removed_level) {
-    mxdebug_if(s_debug,
-               boost::format("no need to remove the dialog normalization, it's already set to %1% (%2% dB); CRC: %3%\n")
-               % removed_level % header.dialog_normalization_gain % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : "—"s));
+  if (header.dialog_normalization_gain == s_dng_removed_level) {
+    mxdebug_if(s_debug_dng_removal,
+               boost::format("DTS core: no need to remove the dialog normalization, it's already set to %1% (%2% dB); CRC: %3%\n")
+               % s_dng_removed_level % header.dialog_normalization_gain % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : "—"s));
     return;
   }
 
-  mtx::bits::reader_c r{buf, size};
-  mtx::bits::writer_c w{buf, size};
+  mtx::bits::reader_c r{buf, header.frame_byte_size};
+  mtx::bits::writer_c w{buf, header.frame_byte_size};
 
   r.set_bit_position(header.dialog_normalization_gain_bit_position);
   w.set_bit_position(header.dialog_normalization_gain_bit_position);
 
   auto current_level = r.get_bits(4);
-  w.put_bits(4, removed_level);
+  w.put_bits(4, s_dng_removed_level);
 
-  mxdebug_if(s_debug,
-             boost::format("changing dialog normalization from %1% (%2% dB) to %3%; CRC: %4%\n")
-             % current_level % header.dialog_normalization_gain % removed_level % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : "—"s));
+  mxdebug_if(s_debug_dng_removal,
+             boost::format("DTS core: changing dialog normalization from %1% (%2% dB) to %3%; CRC: %4%\n")
+             % current_level % header.dialog_normalization_gain % s_dng_removed_level % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : "—"s));
+}
+
+void
+remove_dialog_normalization_gain_from_extension(unsigned char *buf,
+                                                header_t &header) {
+  if (!header.has_exss || !header.extension_dialog_normalization_gain_bit_position)
+    return;
+
+  auto old_crc = get_uint16_be(&buf[header.exss_offset + header.exss_header_size - 2]);
+
+  if (header.extension_dialog_normalization_gain == s_dng_removed_level) {
+    mxdebug_if(s_debug_dng_removal,
+               boost::format("DTS extension: no need to remove the dialog normalization, it's already set to %1% (%2% dB); CRC: %|3$04x|\n")
+               % s_dng_removed_level % header.dialog_normalization_gain % old_crc);
+    return;
+  }
+
+  mtx::bits::reader_c r{&buf[header.exss_offset], header.exss_header_size};
+  mtx::bits::writer_c w{&buf[header.exss_offset], header.exss_header_size};
+
+  r.set_bit_position(header.extension_dialog_normalization_gain_bit_position);
+  w.set_bit_position(header.extension_dialog_normalization_gain_bit_position);
+
+  auto current_level = r.get_bits(5);
+  w.put_bits(5, s_dng_removed_level);
+
+  auto new_crc = calculate_crc(&buf[header.exss_offset + 4 + 1], header.exss_header_size - 4 - 1 - 2);
+  put_uint16_be(&buf[header.exss_offset + header.exss_header_size - 2], new_crc);
+
+  mxdebug_if(s_debug_dng_removal,
+             boost::format("DTS extension: changing dialog normalization from %1% (%2% dB) to %3%; old CRC: %|4$04x| new CRC: %|5$04x|\n")
+             % current_level % header.extension_dialog_normalization_gain % s_dng_removed_level % old_crc % new_crc);
+}
+}
+
+void
+remove_dialog_normalization_gain(unsigned char *buf,
+                                 std::size_t size) {
+  while (size > 0) {
+    header_t header;
+
+    if (!header.decode_core_header(buf, size, true))
+      return;
+
+    if (size < header.frame_byte_size)
+      return;
+
+    remove_dialog_normalization_gain_from_core(buf, header);
+    remove_dialog_normalization_gain_from_extension(buf, header);
+
+    buf  += header.frame_byte_size;
+    size -= header.frame_byte_size;
+  }
 }
 
 bool

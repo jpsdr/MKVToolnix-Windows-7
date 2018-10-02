@@ -7,6 +7,8 @@
 * MKVToolNix GUI: added a menu item ("Help" → "System information") for
   displaying information about the system MKVToolNix is running on in order to
   make debugging easier.
+* mkvmerge: DTS: implemented dialog normalization gain removal for extension
+  substreams. Implements #2377.
 
 ## Bug fixes
 

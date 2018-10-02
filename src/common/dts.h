@@ -189,13 +189,13 @@ struct header_t {
   bool surround_sum_difference{};
 
   // gain in dB to apply for dialog normalization
-  int dialog_normalization_gain{};
-  unsigned int dialog_normalization_gain_bit_position{};
+  int dialog_normalization_gain{}, extension_dialog_normalization_gain{};
+  unsigned int dialog_normalization_gain_bit_position{}, extension_dialog_normalization_gain_bit_position{};
 
   boost::optional<unsigned int> crc{};
 
   bool has_core{}, has_exss{};
-  int exss_part_size{};
+  unsigned int exss_offset{}, exss_header_size{}, exss_part_size{};
 
   dts_type_e dts_type{ dts_type_e::normal };
 
