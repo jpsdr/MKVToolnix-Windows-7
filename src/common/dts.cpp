@@ -29,12 +29,14 @@
 
 namespace mtx { namespace dts {
 
+namespace {
+
 struct channel_arrangement {
   int num_channels;
   const char * description;
 };
 
-static const channel_arrangement channel_arrangements[16] = {
+channel_arrangement const channel_arrangements[16] = {
   { 1, "A (mono)"                                                                                                                                    },
   { 2, "A, B (dual mono)"                                                                                                                            },
   { 2, "L, R (left, right)"                                                                                                                          },
@@ -54,19 +56,19 @@ static const channel_arrangement channel_arrangements[16] = {
   // other modes are not defined as of yet
 };
 
-static unsigned int const s_substream_sample_rates[16] = {
+unsigned int const s_substream_sample_rates[16] = {
     8000,  16000,  32000,  64000,
   128000,  22050,  44100,  88200,
   176400, 352800,  12000,  24000,
    48000,  96000, 192000, 384000
 };
 
-static const int core_samplefreqs[16] = {
+int const core_samplefreqs[16] = {
      -1, 8000, 16000, 32000,    -1,    -1, 11025, 22050,
   44100,   -1,    -1, 12000, 24000, 48000,    -1,    -1
 };
 
-static const int transmission_bitrates[32] = {
+int const transmission_bitrates[32] = {
     32000,     56000,     64000,     96000,
    112000,    128000,    192000,    224000,
    256000,    320000,    384000,    448000,
@@ -82,35 +84,12 @@ static const int transmission_bitrates[32] = {
 
 #define SPEAKER_PAIR_ALL_2 0xae66
 
-static unsigned int
+unsigned int
 count_channels_for_mask(unsigned int mask) {
   return mtx::math::count_1_bits(mask) + mtx::math::count_1_bits(mask & SPEAKER_PAIR_ALL_2);
 }
 
 int
-find_sync_word(unsigned char const *buf,
-               size_t size) {
-  if (4 > size)
-    // not enough data for one header
-    return -1;
-
-  unsigned int offset = 0;
-  auto sync_word      = static_cast<sync_word_e>(get_uint32_be(buf));
-  auto sync_word_ok   = false;
-
-  while ((offset + 4) < size) {
-    sync_word_ok = (sync_word_e::core == sync_word) || (sync_word_e::exss == sync_word);
-    if (sync_word_ok)
-      break;
-
-    sync_word = static_cast<sync_word_e>((static_cast<uint32_t>(sync_word) << 8) | buf[offset + 4]);
-    ++offset;
-  }
-
-  return sync_word_ok ? offset : -1;
-}
-
-static int
 find_header_internal(unsigned char const *buf,
                      size_t size,
                      header_t &header,
@@ -137,6 +116,31 @@ find_header_internal(unsigned char const *buf,
   }
 
   return offset;
+}
+
+} // anonymous namespace
+
+int
+find_sync_word(unsigned char const *buf,
+               size_t size) {
+  if (4 > size)
+    // not enough data for one header
+    return -1;
+
+  unsigned int offset = 0;
+  auto sync_word      = static_cast<sync_word_e>(get_uint32_be(buf));
+  auto sync_word_ok   = false;
+
+  while ((offset + 4) < size) {
+    sync_word_ok = (sync_word_e::core == sync_word) || (sync_word_e::exss == sync_word);
+    if (sync_word_ok)
+      break;
+
+    sync_word = static_cast<sync_word_e>((static_cast<uint32_t>(sync_word) << 8) | buf[offset + 4]);
+    ++offset;
+  }
+
+  return sync_word_ok ? offset : -1;
 }
 
 int
