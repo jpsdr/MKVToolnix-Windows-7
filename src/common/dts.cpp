@@ -20,6 +20,8 @@
 
 #include "common/bit_reader.h"
 #include "common/bit_writer.h"
+#include "common/bswap.h"
+#include "common/checksums/base.h"
 #include "common/dts.h"
 #include "common/endian.h"
 #include "common/list_utils.h"
@@ -30,6 +32,14 @@
 namespace mtx { namespace dts {
 
 namespace {
+
+uint16_t
+calculate_crc(unsigned char const *buf,
+              std::size_t size) {
+  // See ETSI TS 102 114 Annex B
+  return mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ccitt, buf, size, 0xffff));
+}
+
 
 struct channel_arrangement {
   int num_channels;
