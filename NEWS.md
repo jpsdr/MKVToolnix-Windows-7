@@ -16,6 +16,9 @@
 
 * mkvmerge: MP4/QuickTime reader: fixed handling of PCM audio with FourCC
   `in24`. Fixes #2391.
+* mkvmerge: MPEG transport stream reader: allow more data to be buffered when
+  looking for subtitle packets. This reduces the likelihood that teletext
+  subtitle frames will be interleaved wrongly. Workaround for #2393.
 
 
 # Version 27.0.0 "Metropolis" 2018-09-26
