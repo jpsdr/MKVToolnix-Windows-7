@@ -79,18 +79,45 @@ textsubs_packetizer_c::set_line_ending_style(line_ending_style_e line_ending_sty
 
 int
 textsubs_packetizer_c::process(packet_cptr packet) {
+  if (m_buffered_packet) {
+    m_buffered_packet->duration = packet->timestamp - m_buffered_packet->timestamp;
+    process_one_packet(m_buffered_packet);
+    m_buffered_packet.reset();
+  }
+
+  auto subs = std::string{reinterpret_cast<char *>(packet->data->get_buffer()), packet->data->get_size()};
+  subs      = normalize_line_endings(subs, m_line_ending_style);
+
+  strip_back(subs);
+
+  if (subs.empty())
+    return FILE_STATUS_MOREDATA;
+
+  packet->data = memory_c::clone(subs);
+
+  if (packet->duration)
+    process_one_packet(packet);
+
+  else {
+    m_buffered_packet = packet;
+    m_buffered_packet->data->take_ownership();
+  }
+
+  return FILE_STATUS_MOREDATA;
+}
+
+void
+textsubs_packetizer_c::process_one_packet(packet_cptr const &packet) {
   ++m_packetno;
 
   if (0 > packet->duration) {
     subtitle_number_packet_extension_c *extension = dynamic_cast<subtitle_number_packet_extension_c *>(packet->find_extension(packet_extension_c::SUBTITLE_NUMBER));
     mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Ignoring an entry which starts after it ends (%1%).\n")) % (extension ? extension->get_number() : static_cast<unsigned int>(m_packetno)));
-    return FILE_STATUS_MOREDATA;
+    return;
   }
 
   packet->duration_mandatory = true;
-
-  auto subs = std::string{reinterpret_cast<char *>(packet->data->get_buffer()), packet->data->get_size()};
-  subs      = chomp(normalize_line_endings(subs, m_line_ending_style));
+  auto subs                  = std::string{reinterpret_cast<char const *>(packet->data->get_buffer()), packet->data->get_size()};
 
   if (m_try_utf8 && !mtx::utf8::is_valid(subs))
     m_try_utf8 = false;
@@ -121,8 +148,6 @@ textsubs_packetizer_c::process(packet_cptr packet) {
     set_codec_private(codec_private);
     rerender_track_headers();
   }
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

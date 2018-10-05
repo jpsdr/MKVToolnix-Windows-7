@@ -2369,21 +2369,11 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
       auto data = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
-      if (('s' == block_track->type) && ('t' == block_track->sub_type)) {
-        if ((2 < data->get_size()) || ((0 < data->get_size()) && (' ' != *data->get_buffer()) && (0 != *data->get_buffer()) && !iscr(*data->get_buffer()))) {
-          auto packet              = std::make_shared<packet_t>(data, m_last_timestamp, block_duration, block_bref, block_fref);
-          packet->key_flag         = key_flag;
-          packet->discardable_flag = discardable_flag;
+      auto packet              = std::make_shared<packet_t>(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref);
+      packet->key_flag         = key_flag;
+      packet->discardable_flag = discardable_flag;
 
-          PTZR(block_track->ptzr)->process(packet);
-        }
-
-      } else {
-        packet_cptr packet(new packet_t(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref));
-        packet->key_flag         = key_flag;
-        packet->discardable_flag = discardable_flag;
-        PTZR(block_track->ptzr)->process(packet);
-      }
+      PTZR(block_track->ptzr)->process(packet);
     }
   }
 
@@ -2515,25 +2505,14 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
     auto data         = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
     block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
-    if (('s' == block_track->type) && ('t' == block_track->sub_type)) {
-      if ((2 < data->get_size()) || ((0 < data->get_size()) && (' ' != *data->get_buffer()) && (0 != *data->get_buffer()) && !iscr(*data->get_buffer()))) {
-        auto packet = std::make_shared<packet_t>(data, m_last_timestamp, block_duration, block_bref, block_fref);
+    auto packet = std::make_shared<packet_t>(data, m_last_timestamp + block_idx * frame_duration, block_duration, block_bref, block_fref);
 
-        process_block_group_common(block_group, packet.get(), *block_track);
+    if (duration && !duration->GetValue())
+      packet->duration_mandatory = true;
 
-        PTZR(block_track->ptzr)->process(packet);
-      }
+    process_block_group_common(block_group, packet.get(), *block_track);
 
-    } else {
-      auto packet = std::make_shared<packet_t>(data, m_last_timestamp + block_idx * frame_duration, block_duration, block_bref, block_fref);
-
-      if ((duration) && !duration->GetValue())
-        packet->duration_mandatory = true;
-
-      process_block_group_common(block_group, packet.get(), *block_track);
-
-      PTZR(block_track->ptzr)->process(packet);
-    }
+    PTZR(block_track->ptzr)->process(packet);
   }
 
   block_track->previous_timestamp  = m_last_timestamp;

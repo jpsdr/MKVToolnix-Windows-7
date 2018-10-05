@@ -26,6 +26,7 @@ protected:
   bool m_try_utf8{}, m_invalid_utf8_warned{}, m_converter_is_utf8{};
   std::string m_codec_id;
   line_ending_style_e m_line_ending_style{line_ending_style_e::cr_lf};
+  packet_cptr m_buffered_packet;
 
 public:
   textsubs_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, const char *codec_id, bool recode = false);
@@ -39,4 +40,7 @@ public:
     return YT("text subtitles");
   }
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
+
+protected:
+  virtual void process_one_packet(packet_cptr const &packet);
 };
