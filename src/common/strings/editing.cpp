@@ -46,36 +46,27 @@ split(std::string const &text,
 void
 strip_back(std::string &s,
            bool newlines) {
-  const char *c = s.c_str();
-  int len       = s.length();
-  int i         = 0;
+  auto c  = s.c_str();
+  int idx = 0, len = s.length();
 
-  if (newlines)
-    while ((i < len) && (isblanktab(c[len - i - 1]) || iscr(c[len - i - 1])))
-      ++i;
-  else
-    while ((i < len) && isblanktab(c[len - i - 1]))
-      ++i;
+  while ((idx < len) && (!c[len - idx - 1] || isblanktab(c[len - idx - 1]) || (newlines && iscr(c[len - idx - 1]))))
+    ++idx;
 
-  if (i > 0)
-    s.erase(len - i, i);
+  if (idx > 0)
+    s.erase(len - idx, idx);
 }
 
 void
 strip(std::string &s,
       bool newlines) {
-  const char *c = s.c_str();
-  int i         = 0;
+  auto c  = s.c_str();
+  int idx = 0, len = s.length();
 
-  if (newlines)
-    while ((c[i] != 0) && (isblanktab(c[i]) || iscr(c[i])))
-      i++;
-  else
-    while ((c[i] != 0) && isblanktab(c[i]))
-      i++;
+  while ((idx < len) && (!c[idx] || isblanktab(c[idx]) || (newlines && iscr(c[idx]))))
+    ++idx;
 
-  if (i > 0)
-    s.erase(0, i);
+  if (idx > 0)
+    s.erase(0, idx);
 
   strip_back(s, newlines);
 }
