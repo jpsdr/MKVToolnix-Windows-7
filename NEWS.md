@@ -9,6 +9,9 @@
   make debugging easier.
 * mkvmerge: DTS: implemented dialog normalization gain removal for extension
   substreams. Implements #2377.
+* mkvextract: simple text subtitles: added a workaround for simple text
+  subtitle tracks that don't contain a duration. Part of the implementation of
+  #2397.
 
 ## Bug fixes
 

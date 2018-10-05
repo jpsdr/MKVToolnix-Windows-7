@@ -23,6 +23,11 @@ public:
   std::string m_sub_charset;
   charset_converter_cptr m_conv;
 
+  struct {
+    int64_t m_timestamp{}, m_duration{};
+    std::string m_text;
+  } m_entry;
+
 public:
   xtr_srt_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
@@ -32,6 +37,8 @@ public:
   virtual const char *get_container_name() {
     return "SRT text subtitles";
   };
+
+  virtual void flush_entry();
 };
 
 class xtr_ssa_c: public xtr_base_c {

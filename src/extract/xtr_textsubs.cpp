@@ -44,32 +44,40 @@ xtr_srt_c::create_file(xtr_base_c *master,
 
 void
 xtr_srt_c::handle_frame(xtr_frame_t &f) {
-  if (-1 == f.duration) {
-    mxwarn(boost::format(Y("Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n")) % m_tid % (m_num_entries + 1));
-    f.duration = 1000000000;
+  if (!m_entry.m_text.empty()) {
+    m_entry.m_duration = std::abs(f.timestamp - m_entry.m_timestamp);
+    flush_entry();
   }
 
-  int64_t start =         f.timestamp / 1000000;
-  int64_t end   = start + f.duration / 1000000;
+  m_entry.m_timestamp = f.timestamp;
+  m_entry.m_duration  = f.duration;
+  m_entry.m_text      = m_conv->native(std::string{reinterpret_cast<char const *>(f.frame->get_buffer()), f.frame->get_size()});
+  m_entry.m_text      = strip_copy(boost::regex_replace(m_entry.m_text, boost::regex{"\r+", boost::regex::perl}, ""), true);
 
+  if (m_entry.m_duration && !m_entry.m_text.empty())
+    flush_entry();
+}
+
+void
+xtr_srt_c::flush_entry() {
   ++m_num_entries;
-  char *text = new char[f.frame->get_size() + 1];
-  memcpy(text, f.frame->get_buffer(), f.frame->get_size());
-  text[f.frame->get_size()] = 0;
 
-  std::string buffer =
+  auto start =  m_entry.m_timestamp                       / 1'000'000;
+  auto end   = (m_entry.m_timestamp + m_entry.m_duration) / 1'000'000;
+  auto text  =
     (boost::format("%1%\n"
                    "%|2$02d|:%|3$02d|:%|4$02d|,%|5$03d| --> %|6$02d|:%|7$02d|:%|8$02d|,%|9$03d|\n"
                    "%10%\n\n")
      % m_num_entries
-     % (start / 1000 / 60 / 60) % ((start / 1000 / 60) % 60) % ((start / 1000) % 60) % (start % 1000)
-     % (end   / 1000 / 60 / 60) % ((end   / 1000 / 60) % 60) % ((end   / 1000) % 60) % (end   % 1000)
-     % m_conv->native(text)
+     % (start / 1'000 / 60 / 60) % ((start / 1'000 / 60) % 60) % ((start / 1'000) % 60) % (start % 1'000)
+     % (end   / 1'000 / 60 / 60) % ((end   / 1'000 / 60) % 60) % ((end   / 1'000) % 60) % (end   % 1'000)
+     % m_entry.m_text
      ).str();
 
-  m_out->puts(buffer);
+  m_out->puts(text);
   m_out->flush();
-  delete []text;
+
+  m_entry.m_text.clear();
 }
 
 // ------------------------------------------------------------------------
