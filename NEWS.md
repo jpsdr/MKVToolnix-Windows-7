@@ -19,6 +19,8 @@
 * mkvmerge: MPEG transport stream reader: allow more data to be buffered when
   looking for subtitle packets. This reduces the likelihood that teletext
   subtitle frames will be interleaved wrongly. Workaround for #2393.
+* mkvmerge: JSON identification: fixed a bug when removing invalid UTF-8 data
+  from strings before they're output as JSON. Fixes #2398.
 
 
 # Version 27.0.0 "Metropolis" 2018-09-26

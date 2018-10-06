@@ -29,7 +29,12 @@ fix_invalid(std::string const &str,
             uint32_t replacement_marker) {
   std::string temp;
 
-  ::utf8::replace_invalid(str.begin(), str.end(), std::back_inserter(temp), replacement_marker);
+  try {
+    ::utf8::replace_invalid(str.begin(), str.end(), std::back_inserter(temp), replacement_marker);
+
+  } catch (::utf8::not_enough_room const &) {
+  }
+
   return temp;
 }
 
