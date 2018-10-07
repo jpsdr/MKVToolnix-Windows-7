@@ -45,6 +45,7 @@ ivf_reader_c::probe_file(mm_io_c &in,
 ivf_reader_c::ivf_reader_c(const track_info_c &ti,
                            const mm_io_cptr &in)
   : generic_reader_c(ti, in)
+  , m_debug{"ivf_reader"}
 {
 }
 
@@ -130,7 +131,7 @@ ivf_reader_c::read(generic_packetizer_c *,
 
   int64_t timestamp = get_uint64_le(&header.timestamp) * 1000000000ull * m_frame_rate_den / m_frame_rate_num;
 
-  mxverb(3, boost::format("r_ivf.cpp: key %5% header.ts %1% num %2% den %3% res %4%\n") % get_uint64_le(&header.timestamp) % m_frame_rate_num % m_frame_rate_den % timestamp % ivf::is_keyframe(buffer, m_codec.get_type()));
+  mxdebug_if(m_debug, boost::format("key %5% header.ts %1% num %2% den %3% res %4%\n") % get_uint64_le(&header.timestamp) % m_frame_rate_num % m_frame_rate_den % timestamp % ivf::is_keyframe(buffer, m_codec.get_type()));
 
   PTZR0->process(new packet_t(buffer, timestamp));
 
