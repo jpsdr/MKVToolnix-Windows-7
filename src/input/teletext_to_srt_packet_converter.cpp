@@ -324,23 +324,21 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
              boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% not subtitle? %5% flags %|7$02x|\n")
              % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % not_subtitle % format_timestamp(m_current_packet_timestamp) % static_cast<unsigned int>(page_data.flags));
 
-  deliver_queued_content();
+  auto const page_content = page_to_string();
+
+  deliver_queued_content(page_content);
 
   if (!page_data.erase_flag)
     return;
 
-  auto const prev_content = page_to_string();
-
   for (auto &line : page_data.page_buffer)
     line.clear();
 
-  m_current_track->m_page_changed = page_to_string() != prev_content;
+  m_current_track->m_page_changed = page_to_string() != page_content;
 }
 
 void
-teletext_to_srt_packet_converter_c::deliver_queued_content() {
-  auto content = page_to_string();
-
+teletext_to_srt_packet_converter_c::deliver_queued_content(std::string const &content) {
   if (content.empty() || !m_current_track->m_queued_timestamp.valid()) {
     m_current_track->m_queued_timestamp.reset();
     return;
