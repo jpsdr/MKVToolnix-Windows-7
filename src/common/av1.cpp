@@ -496,6 +496,15 @@ parser_c::get_pixel_dimensions()
   return { p->max_frame_width, p->max_frame_height };
 }
 
+int64_rational_c
+parser_c::get_frame_duration()
+  const {
+  if (!p->sequence_header_obu || !p->time_scale)
+    return {};
+
+  return { p->num_units_in_display_tick * 1'000'000'000ll, p->time_scale };
+}
+
 bool
 parser_c::headers_parsed()
   const {

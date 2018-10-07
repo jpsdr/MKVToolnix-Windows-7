@@ -15,6 +15,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/math_fwd.h"
+
 namespace mtx {
 
 namespace bits {
@@ -106,6 +108,7 @@ public:
   void debug_obu_types(memory_c const &buffer);
 
   std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
+  int64_rational_c get_frame_duration() const;
   bool headers_parsed() const;
   memory_cptr get_av1c() const;
 

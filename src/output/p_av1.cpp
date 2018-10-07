@@ -64,6 +64,12 @@ av1_video_packetizer_c::set_header_parameters() {
     need_to_rerender = true;
   }
 
+  auto frame_duration = m_parser.get_frame_duration();
+  if ((m_htrack_default_duration <= 0) && frame_duration) {
+    set_track_default_duration(boost::rational_cast<int64_t>(frame_duration));
+    need_to_rerender = true;
+  }
+
   if (need_to_rerender)
     rerender_track_headers();
 
