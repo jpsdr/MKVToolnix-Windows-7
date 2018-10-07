@@ -48,6 +48,7 @@
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_alac.h"
+#include "output/p_av1.h"
 #include "output/p_avc.h"
 #include "output/p_dts.h"
 #include "output/p_hevc.h"
@@ -1775,6 +1776,17 @@ qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
 }
 
 void
+qtmp4_reader_c::create_video_packetizer_av1(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = dmx.priv.empty() || (4 > dmx.priv[0]->get_size()) ? memory_cptr{} : dmx.priv[0];
+  dmx.ptzr            = add_packetizer(new av1_video_packetizer_c(this, m_ti));
+
+  if (dmx.frame_rate)
+    PTZR(dmx.ptzr)->set_track_default_duration(boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator() * 1'000'000'000ll, dmx.frame_rate.numerator()}));
+
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+}
+
+void
 qtmp4_reader_c::create_video_packetizer_avc(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() ? dmx.priv[0] : memory_cptr{};
   dmx.ptzr            = add_packetizer(new avc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
@@ -1930,6 +1942,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
     else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2))
       create_video_packetizer_mpegh_p2(dmx);
+
+    else if (dmx.codec.is(codec_c::type_e::V_AV1))
+      create_video_packetizer_av1(dmx);
 
     else if (dmx.codec.is(codec_c::type_e::V_SVQ1))
       create_video_packetizer_svq1(dmx);
@@ -3017,7 +3032,12 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
   auto mem  = stsd->get_buffer() + stsd_non_priv_struct_size;
   auto size = atom_size - stsd_non_priv_struct_size;
 
-  if (!codec.is(codec_c::type_e::V_MPEG4_P10) && !codec.is(codec_c::type_e::V_MPEGH_P2) && size && !fourcc.equiv("mp4v") && !fourcc.equiv("xvid")) {
+  if (   !codec.is(codec_c::type_e::V_MPEG4_P10)
+      && !codec.is(codec_c::type_e::V_MPEGH_P2)
+      && !codec.is(codec_c::type_e::V_AV1)
+      && size
+      && !fourcc.equiv("mp4v")
+      && !fourcc.equiv("xvid")) {
     priv.clear();
     priv.emplace_back(memory_c::clone(mem, size));
     return;
@@ -3037,7 +3057,7 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
 
       mxdebug_if(m_debug_headers, boost::format("%1%Video private data size: %2%, type: '%3%'\n") % space((level + 1) * 2 + 1) % atom.size % atom.fourcc);
 
-      if ((atom.fourcc == "esds") || (atom.fourcc == "avcC") || (atom.fourcc == "hvcC")) {
+      if (mtx::included_in(atom.fourcc, "esds", "avcC", "hvcC", "av1C")) {
         if (priv.empty()) {
           priv.emplace_back(memory_c::alloc(atom.size - atom.hsize));
 

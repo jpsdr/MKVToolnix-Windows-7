@@ -23,7 +23,7 @@ void
 codec_c::initialize() {
   if (!ms_codecs.empty())
     return;
-  ms_codecs.emplace_back("AV1",                     type_e::V_AV1,          track_video,    "V_AV1", fourcc_c{"AV01"});
+  ms_codecs.emplace_back("AV1",                     type_e::V_AV1,          track_video,    "av01|V_AV1", fourcc_c{"AV01"});
   ms_codecs.emplace_back("Bitfields",               type_e::V_BITFIELDS,    track_video,    "", fourcc_c{0x03000000u});
   ms_codecs.emplace_back("Cinepak",                 type_e::V_CINEPAK,      track_video,    "cvid");
   ms_codecs.emplace_back("Dirac",                   type_e::V_DIRAC,        track_video,    "drac|V_DIRAC");

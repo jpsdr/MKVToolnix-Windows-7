@@ -547,6 +547,7 @@ protected:
   virtual void create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_vorbis(qtmp4_demuxer_c &dmx);
 
+  virtual void create_video_packetizer_av1(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_avc(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx);
