@@ -85,7 +85,7 @@ textsubs_packetizer_c::process(packet_cptr packet) {
     m_buffered_packet.reset();
   }
 
-  auto subs = std::string{reinterpret_cast<char *>(packet->data->get_buffer()), packet->data->get_size()};
+  auto subs = packet->data->to_string();
   subs      = normalize_line_endings(subs, m_line_ending_style);
 
   strip_back(subs);
@@ -117,7 +117,7 @@ textsubs_packetizer_c::process_one_packet(packet_cptr const &packet) {
   }
 
   packet->duration_mandatory = true;
-  auto subs                  = std::string{reinterpret_cast<char const *>(packet->data->get_buffer()), packet->data->get_size()};
+  auto subs                  = packet->data->to_string();
 
   if (m_try_utf8 && !mtx::utf8::is_valid(subs))
     m_try_utf8 = false;

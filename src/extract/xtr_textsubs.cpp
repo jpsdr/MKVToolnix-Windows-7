@@ -51,7 +51,7 @@ xtr_srt_c::handle_frame(xtr_frame_t &f) {
 
   m_entry.m_timestamp = f.timestamp;
   m_entry.m_duration  = f.duration;
-  m_entry.m_text      = m_conv->native(std::string{reinterpret_cast<char const *>(f.frame->get_buffer()), f.frame->get_size()});
+  m_entry.m_text      = m_conv->native(f.frame->to_string());
   m_entry.m_text      = strip_copy(boost::regex_replace(m_entry.m_text, boost::regex{"\r+", boost::regex::perl}, ""), true);
 
   if (m_entry.m_duration && !m_entry.m_text.empty())

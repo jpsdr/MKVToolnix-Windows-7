@@ -62,7 +62,7 @@ webvtt_parser_c::add_joined_lines(memory_c const &mem) {
   if (!mem.get_size())
     return;
 
-  add_joined_lines(std::string{reinterpret_cast<char const *>(mem.get_buffer()), static_cast<std::string::size_type>(mem.get_size())});
+  add_joined_lines(mem.to_string());
 }
 
 void

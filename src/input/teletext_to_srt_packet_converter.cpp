@@ -356,10 +356,8 @@ teletext_to_srt_packet_converter_c::deliver_queued_content() {
 
 void
 teletext_to_srt_packet_converter_c::queue_packet(packet_cptr const &new_packet) {
-  auto old_content = m_current_track->m_queued_packet
-                   ? std::string{reinterpret_cast<char const *>(m_current_track->m_queued_packet->data->get_buffer()), m_current_track->m_queued_packet->data->get_size()}
-                   : std::string{};
-  auto new_content = std::string{reinterpret_cast<char const *>(new_packet->data->get_buffer()), new_packet->data->get_size()};
+  auto old_content = m_current_track->m_queued_packet ? m_current_track->m_queued_packet->data->to_string() : std::string{};
+  auto new_content = new_packet->data->to_string();
 
   if (m_current_track->m_queued_packet) {
     auto prev_timestamp = timestamp_c::ns(m_current_track->m_queued_packet->timestamp);
@@ -394,7 +392,7 @@ teletext_to_srt_packet_converter_c::flush() {
     if (!data->m_queued_packet)
       continue;
 
-    auto old_content = std::string{reinterpret_cast<char const *>(data->m_queued_packet->data->get_buffer()), data->m_queued_packet->data->get_size()};
+    auto old_content = data->m_queued_packet->data->to_string();
 
     mxdebug_if(m_debug, boost::format("  queue: flushing packet %1% duration %2% content %3%\n") % format_timestamp(data->m_queued_packet->timestamp) % format_timestamp(data->m_queued_packet->duration) % old_content);
 
