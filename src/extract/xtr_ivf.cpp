@@ -12,6 +12,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/av1.h"
 #include "common/codec.h"
 #include "common/ebml.h"
 #include "common/endian.h"
@@ -21,9 +22,7 @@ xtr_ivf_c::xtr_ivf_c(const std::string &codec_id,
                      int64_t tid,
                      track_spec_t &tspec)
   : xtr_base_c(codec_id, tid, tspec)
-  , m_frame_rate_num(0)
-  , m_frame_rate_den(0)
-  , m_frame_count(0)
+  , m_is_av1{codec_id == MKV_V_AV1}
 {
 }
 
@@ -52,7 +51,9 @@ xtr_ivf_c::create_file(xtr_base_c *master,
                             "track %4% with the CodecID '%5%' is already being written to the same file.\n"))
             % m_tid % m_codec_id % m_file_name % master->m_tid % master->m_codec_id);
 
-  auto fourcc = m_codec_id == MKV_V_VP8 ? "VP80" : "VP90";
+  auto fourcc = m_is_av1                ? "AV01"
+              : m_codec_id == MKV_V_VP8 ? "VP80"
+              :                           "VP90";
 
   memcpy(m_file_header.file_magic, "DKIF", 4);
   memcpy(m_file_header.fourcc,     fourcc, 4);
@@ -74,6 +75,8 @@ xtr_ivf_c::handle_frame(xtr_frame_t &f) {
          % f.timestamp % m_frame_rate_num % m_frame_rate_den % frame_number
          % (frame_number * 1000000000ull * m_frame_rate_den / m_frame_rate_num));
 
+  av1_prepend_temporal_delimiter_obu_if_needed(*f.frame);
+
   ivf::frame_header_t frame_header;
   put_uint32_le(&frame_header.frame_size, f.frame->get_size());
   put_uint32_le(&frame_header.timestamp,  frame_number);
@@ -90,4 +93,25 @@ xtr_ivf_c::finish_file() {
 
   m_out->setFilePointer(0);
   m_out->write(&m_file_header, sizeof(m_file_header));
+}
+
+void
+xtr_ivf_c::av1_prepend_temporal_delimiter_obu_if_needed(memory_c &frame) {
+  if (!m_is_av1 || !frame.get_size())
+    return;
+
+  auto type = (frame.get_buffer()[0] & 0x74) >> 3;
+
+  if (type == mtx::av1::OBU_TEMPORAL_DELIMITER)
+    return;
+
+  auto old_size = frame.get_size();
+
+  frame.resize(old_size + 2);
+
+  auto buffer = frame.get_buffer();
+
+  std::memmove(&buffer[2], &buffer[0], old_size);
+  buffer[0] = 0x12;             // type = OBU_TEMPORAL_DELIMITER, extension not present, OBU size field present
+  buffer[1] = 0x00;             // OBU size
 }

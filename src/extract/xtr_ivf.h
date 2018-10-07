@@ -19,9 +19,10 @@
 
 class xtr_ivf_c: public xtr_base_c {
 public:
-  uint64_t m_frame_rate_num, m_frame_rate_den;
-  uint32_t m_frame_count;
+  uint64_t m_frame_rate_num{}, m_frame_rate_den{};
+  uint32_t m_frame_count{};
   ivf::file_header_t m_file_header;
+  bool m_is_av1{};
 
 public:
   xtr_ivf_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
@@ -33,4 +34,7 @@ public:
   virtual const char *get_container_name() {
     return "IVF";
   };
+
+protected:
+  virtual void av1_prepend_temporal_delimiter_obu_if_needed(memory_c &frame);
 };
