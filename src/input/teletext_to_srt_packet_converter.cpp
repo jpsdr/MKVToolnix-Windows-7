@@ -329,11 +329,12 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
   page_data.national_set            = (page_data.flags >> 21) & 0x07;
   auto not_subtitle                 = (page_data.flags >> 15) & 0x03;
 
-  mxdebug_if(m_debug,
-             boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% not subtitle? %5% flags %|7$02x|\n")
-             % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % not_subtitle % format_timestamp(m_current_packet_timestamp) % static_cast<unsigned int>(page_data.flags));
+  auto const page_content           = page_to_string();
 
-  auto const page_content = page_to_string();
+  mxdebug_if(m_debug,
+             boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% not subtitle? %5% flags %|7$02x| queued timestamp %8% queued content size %9%\n")
+             % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % not_subtitle % format_timestamp(m_current_packet_timestamp) % static_cast<unsigned int>(page_data.flags)
+             % m_current_track->m_queued_timestamp % page_content.size());
 
   queue_page_content(page_content);
 
@@ -348,6 +349,9 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
 
 void
 teletext_to_srt_packet_converter_c::queue_page_content(std::string const &content) {
+  if (!m_current_track->m_queued_timestamp.valid() && m_current_track->m_page_data.erase_flag)
+    deliver_queued_packet();
+
   if (content.empty() || !m_current_track->m_queued_timestamp.valid()) {
     m_current_track->m_queued_timestamp.reset();
     return;

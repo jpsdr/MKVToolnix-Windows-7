@@ -2435,7 +2435,7 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
   auto &f               = file();
   auto num_queued_bytes = f.get_queued_bytes();
 
-  if (!force && (50 * 1024 * 1024 < num_queued_bytes)) {
+  if (!force && (20 * 1024 * 1024 < num_queued_bytes)) {
     if (   !requested_ptzr_track
         || !mtx::included_in(requested_ptzr_track->type, pid_type_e::audio, pid_type_e::video)
         || (512 * 1024 * 1024 < num_queued_bytes))
