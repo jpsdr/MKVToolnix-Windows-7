@@ -90,10 +90,7 @@ obu_reader_c::create_packetizer(int64_t) {
     return;
 
   auto ptzr = new av1_video_packetizer_c{this, m_ti};
-
   ptzr->set_is_unframed();
-  ptzr->set_video_pixel_width(m_width);
-  ptzr->set_video_pixel_height(m_height);
 
   add_packetizer(ptzr);
 

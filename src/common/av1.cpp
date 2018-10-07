@@ -16,6 +16,7 @@
 #include "common/at_scope_exit.h"
 #include "common/av1.h"
 #include "common/bit_reader.h"
+#include "common/bit_writer.h"
 #include "common/byte_buffer.h"
 #include "common/debugging.h"
 #include "common/endian.h"
@@ -29,18 +30,23 @@ class parser_private_c {
 
   mtx::bits::reader_c r;
 
-  bool sequence_header_found{}, reduced_still_picture_header{}, parse_sequence_header_obus_only{};
+  bool frame_found{}, reduced_still_picture_header{}, parse_sequence_header_obus_only{};
 
   unsigned int obu_type{};
-  bool obu_extension_flag{}, obu_has_size_field{}, seen_frame_header{};
+  bool obu_extension_flag{}, obu_has_size_field{}, seen_frame_header{}, frame_id_numbers_present_flag{}, equal_picture_interval{}, high_bitdepth{}, twelve_bit{}, mono_chrome{}, seq_tier_0{};
+  bool chroma_subsampling_x{}, chroma_subsampling_y{}, current_frame_contains_sequence_header{};
   boost::optional<unsigned int> temporal_id, spatial_id;
-  unsigned int operating_point_idc{}, seq_profile{}, max_frame_width{}, max_frame_height{}, encoder_decoder_buffer_delay_length{1};
+  unsigned int operating_point_idc{}, seq_profile{}, seq_level_idx_0{}, max_frame_width{}, max_frame_height{}, buffer_delay_length{1}, chroma_sample_position{};
+  unsigned int color_primaries{}, transfer_characteristics{}, matrix_coefficients{};
 
   mtx::bytes::buffer_c buffer;
   frame_t current_frame;
   std::deque<frame_t> frames;
-  uint64_t frame_number{}, num_units_in_tick{}, time_scale{}, num_ticks_per_picture{};
+  uint64_t frame_number{}, num_units_in_display_tick{}, time_scale{}, num_ticks_per_picture{};
   boost::rational<uint64_t> forced_default_duration, bitstream_default_duration{1'000'000'000ull, 25};
+
+  memory_cptr sequence_header_obu;
+  std::vector<memory_cptr> metadata_obus;
 
   debugging_option_c debug_is_keyframe{"av1|av1_is_keyframe"}, debug_obu_types{"av1|av1_obu_types"}, debug_timing_info{"av1|av1_timing_info"}, debug_parser{"av1|av1_parser"};
 };
@@ -58,12 +64,13 @@ parser_c::get_obu_type_name(unsigned int obu_type) {
 
   if (s_type_names.empty()) {
     s_type_names[OBU_SEQUENCE_HEADER]        = "sequence_header";
-    s_type_names[OBU_TD]                     = "td";
+    s_type_names[OBU_TEMPORAL_DELIMITER]     = "temporal_delimiter";
     s_type_names[OBU_FRAME_HEADER]           = "frame_header";
-    s_type_names[OBU_TITLE_GROUP]            = "title_group";
+    s_type_names[OBU_TILE_GROUP]             = "tile_group";
     s_type_names[OBU_METADATA]               = "metadata";
     s_type_names[OBU_FRAME]                  = "frame";
     s_type_names[OBU_REDUNDANT_FRAME_HEADER] = "redundant_frame_header";
+    s_type_names[OBU_TILE_LIST]              = "tile_list";
     s_type_names[OBU_PADDING]                = "padding";
   }
 
@@ -161,53 +168,55 @@ parser_c::parse_obu_common_data() {
 
 void
 parser_c::parse_color_config(mtx::bits::reader_c &r) {
-  auto high_bitdepth = r.get_bit();
+  p->high_bitdepth = r.get_bit();
   auto bit_depth     = 0u;
 
-  if ((p->seq_profile == 2) && high_bitdepth)
-    bit_depth = r.get_bit()   ? 12 : 10;
-  else
-    bit_depth = high_bitdepth ? 10 :  8;
+  if ((p->seq_profile == 2) && p->high_bitdepth) {
+    p->twelve_bit = r.get_bit();
+    bit_depth     = p->twelve_bit ? 12 : 10;
+  } else
+    bit_depth     = p->high_bitdepth ? 10 :  8;
 
-  auto mono_chrome = (p->seq_profile != 1) ? r.get_bit() : false;
-
-  unsigned int color_primaries, transfer_characteristics, matrix_coefficients;
+  p->mono_chrome = (p->seq_profile != 1) ? r.get_bit() : false;
 
   if (r.get_bit()) {            // color_description_present_flag
-    color_primaries          = r.get_bits(8);
-    transfer_characteristics = r.get_bits(8);
-    matrix_coefficients      = r.get_bits(8);
+    p->color_primaries          = r.get_bits(8);
+    p->transfer_characteristics = r.get_bits(8);
+    p->matrix_coefficients      = r.get_bits(8);
   } else {
-    color_primaries          = CP_UNSPECIFIED;
-    transfer_characteristics = TC_UNSPECIFIED;
-    matrix_coefficients      = MC_UNSPECIFIED;
+    p->color_primaries          = CP_UNSPECIFIED;
+    p->transfer_characteristics = TC_UNSPECIFIED;
+    p->matrix_coefficients      = MC_UNSPECIFIED;
   }
 
-  if (mono_chrome) {
+  if (p->mono_chrome) {
     r.skip_bits(1);             // color_range
     return;
 
-  } else if ((color_primaries == CP_BT_709) && (transfer_characteristics == TC_SRGB) && (matrix_coefficients == MC_IDENTITY)) {
+  } else if (   (p->color_primaries          == CP_BT_709)
+             && (p->transfer_characteristics == TC_SRGB)
+             && (p->matrix_coefficients      == MC_IDENTITY)) {
   } else {
     r.skip_bits(1);             // color_range
 
-    auto subsampling_x = false, subsampling_y = false;
+    p->chroma_subsampling_x = false;
+    p->chroma_subsampling_y = false;
 
     if (p->seq_profile == 0) {
-      subsampling_x = true;
-      subsampling_y = true;
+      p->chroma_subsampling_x = true;
+      p->chroma_subsampling_y = true;
 
     } else if (p->seq_profile > 1) {
       if (bit_depth == 12) {
-        subsampling_x = r.get_bit();
-        if (subsampling_x)
-          subsampling_y = r.get_bit();
+        p->chroma_subsampling_x = r.get_bit();
+        if (p->chroma_subsampling_x)
+          p->chroma_subsampling_y = r.get_bit();
       } else
-        subsampling_x = true;
+        p->chroma_subsampling_x = true;
     }
 
-    if (subsampling_x && subsampling_y)
-      r.skip_bits(2);           // chroma_sample_position
+    if (p->chroma_subsampling_x && p->chroma_subsampling_y)
+      p->chroma_sample_position = r.get_bits(2);
   }
 
   r.skip_bits(1);               // separate_uv_delta_q
@@ -215,35 +224,39 @@ parser_c::parse_color_config(mtx::bits::reader_c &r) {
 
 void
 parser_c::parse_timing_info(mtx::bits::reader_c &r) {
-  p->num_units_in_tick     = r.get_bits(32);
-  p->time_scale            = r.get_bits(32);
-  p->num_ticks_per_picture = r.get_bit() ? read_uvlc(r) + 1 : 1; // equal_picture_interval
+  p->num_units_in_display_tick = r.get_bits(32);
+  p->time_scale                = r.get_bits(32);
+  p->equal_picture_interval    = r.get_bit();
 
-  if (p->num_units_in_tick && p->time_scale && p->num_ticks_per_picture)
-    p->bitstream_default_duration.assign(1'000'000'000ull * p->num_units_in_tick * p->num_ticks_per_picture, p->time_scale);
+  if (p->equal_picture_interval)
+    p->num_ticks_per_picture = read_uvlc(r) + 1;
+  else
+    p->num_ticks_per_picture = 1;
+
+  if (p->num_units_in_display_tick && p->time_scale && p->num_ticks_per_picture)
+    p->bitstream_default_duration.assign(1'000'000'000ull * p->num_units_in_display_tick * p->num_ticks_per_picture, p->time_scale);
 
   mxdebug_if(p->debug_timing_info,
-             boost::format("parse_timing_info: num_units_in_tick %1% num_ticks_per_picture %2% time_scale %3% bitstream_default_duration %4%\n")
-             % p->num_units_in_tick
-             % p->num_ticks_per_picture
+             boost::format("parse_timing_info: num_units_in_display_tick %1% time_scale %2% equal_picture_interval %3% num_ticks_per_picture %4% bitstream_default_duration %5%\n")
+             % p->num_units_in_display_tick
              % p->time_scale
+             % p->equal_picture_interval
+             % p->num_ticks_per_picture
              % format_timestamp(boost::rational_cast<uint64_t>(p->bitstream_default_duration)));
 }
 
 void
 parser_c::parse_decoder_model_info(mtx::bits::reader_c &r) {
-  r.skip_bits(4 + 4);           // bitrate_scale, buffer_size_scale
-  p->encoder_decoder_buffer_delay_length = r.get_bits(5) + 1;
-  r.skip_bits(32 + 5 + 5);      // num_units_in_decoding_tick, buffer_removal_delay_length_minus1, frame_presentation_delay_length_minus1
+  p->buffer_delay_length = r.get_bits(5) + 1;
+  r.skip_bits(  32              // num_units_in_decoding_tick
+              +  5              // buffer_removal_time_length_minus_1
+              +  5);            // frame_presentation_time_length_minus_1
 }
 
 void
 parser_c::parse_operating_parameters_info(mtx::bits::reader_c &r) {
-  read_uvlc(r);                                            // bitrate_minus1
-  read_uvlc(r);                                            // buffer_size_minus1
-  r.get_bits(1);                                           // cbr_flag
-  r.skip_bits(2 * p->encoder_decoder_buffer_delay_length); // decoder_buffer_delay, encoder_buffer_delay
-  r.skip_bits(1);                                          // low_delay_mode_flag
+  r.skip_bits(2 * p->buffer_delay_length); // decoder_buffer_delay, encoder_buffer_delay
+  r.skip_bits(1);                          // low_delay_mode_flag
 }
 
 void
@@ -252,17 +265,46 @@ parser_c::parse_sequence_header_obu(mtx::bits::reader_c &r) {
   p->reduced_still_picture_header = r.skip_get_bits(1, 1); // still_picture
 
   if (p->reduced_still_picture_header)
-    r.skip_bits(4);             // level[0]
+    p->seq_level_idx_0 = r.get_bits(5);
 
   else {
-    auto operating_points_count = r.get_bits(5) + 1; // still_picture
+    auto timing_info_present_flag        = r.get_bit();
+    auto decoder_model_info_present_flag = false;
+
+    if (timing_info_present_flag) {
+      parse_timing_info(r);
+
+      decoder_model_info_present_flag = r.get_bit();
+      if (decoder_model_info_present_flag)
+        parse_decoder_model_info(r);
+    } else
+      mxdebug_if(p->debug_timing_info, boost::format("parse_timing_info: no timing info in sequence header\n"));
+
+    auto initial_display_delay_present_flag = r.get_bit();
+    auto operating_points_count             = r.get_bits(5) + 1;
 
     for (auto idx = 0u; idx < operating_points_count; ++idx) {
       auto operating_point_idc = r.get_bits(12);
-      if (!idx)
-        p->operating_point_idc = operating_point_idc;
+      auto seq_level_idx       = r.get_bits(5);
+      auto seq_tier            = seq_level_idx > 7 ? r.get_bit() : false;
 
-      r.skip_bits(4);             // level
+      if (!idx) {
+        p->operating_point_idc = operating_point_idc;
+        p->seq_level_idx_0     = seq_level_idx;
+        p->seq_tier_0          = seq_tier;
+      }
+
+      if (decoder_model_info_present_flag) {
+        auto decoder_model_present_for_this_op = r.get_bit();
+        if (decoder_model_present_for_this_op)
+          parse_operating_parameters_info(r);
+      }
+
+      if (initial_display_delay_present_flag) {
+        auto initial_display_delay_present_for_this_op = r.get_bit();
+        if (initial_display_delay_present_for_this_op)
+          r.skip_bits(4);       // initial_display_delay_minus_1[idx]
+      }
     }
   }
 
@@ -272,10 +314,13 @@ parser_c::parse_sequence_header_obu(mtx::bits::reader_c &r) {
   p->max_frame_width     = r.get_bits(frame_width_bits)  + 1;
   p->max_frame_height    = r.get_bits(frame_height_bits) + 1;
 
-  if (!p->reduced_still_picture_header && r.get_bit()) // frame_id_numbers_present_flag
+  if (!p->reduced_still_picture_header) {
+    p->frame_id_numbers_present_flag = r.get_bit();
     r.skip_bits(4 + 3);         // delta_frame_id_length_minus2, additional_frame_id_length_minus1
+  }
 
   r.skip_bits(3);               // use_12x128_superblock, enable_filter_intra, enable_intra_edge_filter
+
   if (!p->reduced_still_picture_header) {
     r.skip_bits(4);             // enable_interintra_compound, enable_masked_compound, enable_warped_motion, enable_dual_filter
     auto enable_order_hint = r.get_bit();
@@ -297,35 +342,30 @@ parser_c::parse_sequence_header_obu(mtx::bits::reader_c &r) {
 
   parse_color_config(r);
 
-  auto decoder_model_info_present_flag = false;
-
-  if (!p->reduced_still_picture_header && r.get_bit()) { // timing_info_present_flag
-    parse_timing_info(r);
-
-    decoder_model_info_present_flag = r.get_bit();
-    if (decoder_model_info_present_flag)
-      parse_decoder_model_info(r);
-
-  } else
-    mxdebug_if(p->debug_timing_info, boost::format("parse_timing_info: no timing info in sequence header\n"));
-
-  if (r.get_bit()) {            //
-    auto operating_points_decoder_model = r.get_bits(5) + 1;
-
-    for (auto idx = 0u; idx < operating_points_decoder_model; ++idx) {
-      r.skip_bits(12);          // decoder_model_operating_point_idc
-
-      if (r.get_bit())          // display_model_param_present_flag
-        r.skip_bits(4);         // initial_display_delay_minus1
-
-      else if (decoder_model_info_present_flag && r.get_bit()) // decoder_model_param_present_flag
-        parse_operating_parameters_info(r);
-    }
-  }
-
   r.skip_bits(1);               // film_grain_params_present
 
   mxdebug_if(p->debug_parser, boost::format("debug_parser:     remaining bits at end of sequence header parsing: %1%\n") % r.get_remaining_bits());
+}
+
+void
+parser_c::parse_frame_header_obu(mtx::bits::reader_c &r) {
+  if (p->reduced_still_picture_header) {
+    p->current_frame.is_keyframe = true;
+    mxdebug_if(p->debug_is_keyframe, "is_keyframe:   true due to reduced_still_picture_header == 1\n");
+
+    return;
+  }
+
+  if (r.get_bit()) { // show_existing_frame
+    p->current_frame.is_keyframe = false;
+    mxdebug_if(p->debug_is_keyframe, "is_keyframe:   false due to show_existing_frame == 1\n");
+
+    return;
+  }
+
+  auto frame_type              = r.get_bits(2);
+  p->current_frame.is_keyframe = (frame_type == FRAME_TYPE_KEY); // || (frame_type == FRAME_TYPE_INTRA_ONLY);
+  mxdebug_if(p->debug_is_keyframe, boost::format("is_keyframe:   %1%\n") % p->current_frame.is_keyframe);
 }
 
 void
@@ -375,7 +415,7 @@ parser_c::parse_obu() {
     return false;
   }
 
-  at_scope_exit_c copy_current_and_seek_to_next_obu([this, start_bit_position, next_obu_bit_position, keep_obu]() {
+  at_scope_exit_c copy_current_and_seek_to_next_obu([this, start_bit_position, next_obu_bit_position, &keep_obu]() {
     p->r.set_bit_position(next_obu_bit_position);
     if (!keep_obu)
       return;
@@ -387,9 +427,13 @@ parser_c::parse_obu() {
       p->current_frame.mem->add(start, size);
     else
       p->current_frame.mem = memory_c::clone(start, size);
+
+    if (p->obu_type == OBU_SEQUENCE_HEADER)
+      p->current_frame_contains_sequence_header = true;
   });
 
   if (   (p->obu_type            != OBU_SEQUENCE_HEADER)
+      && (p->obu_type            != OBU_TEMPORAL_DELIMITER)
       && (p->operating_point_idc != 0)
       && p->obu_extension_flag) {
     auto in_temporal_layer = !!((p->operating_point_idc >> *p->temporal_id)      & 1);
@@ -401,22 +445,24 @@ parser_c::parse_obu() {
     }
   }
 
-  if (p->obu_type == OBU_PADDING) {
+  if (mtx::included_in(p->obu_type, OBU_PADDING, OBU_REDUNDANT_FRAME_HEADER)) {
     keep_obu = false;
     return true;
   }
 
-  if (p->obu_type == OBU_TD) {
+  if (p->obu_type == OBU_TEMPORAL_DELIMITER) {
     flush();
     p->seen_frame_header = false;
+    keep_obu             = false;
     return true;
   }
 
-  mtx::bits::reader_c sub_r{p->buffer.get_buffer() + (r.get_bit_position() / 8), static_cast<std::size_t>(*obu_size)};
+  auto obu = memory_c::borrow(p->buffer.get_buffer() + (r.get_bit_position() / 8), static_cast<std::size_t>(*obu_size));
+  mtx::bits::reader_c sub_r{obu->get_buffer(), obu->get_size()};
 
   if (p->obu_type == OBU_SEQUENCE_HEADER) {
     parse_sequence_header_obu(sub_r);
-    p->sequence_header_found = true;
+    p->sequence_header_obu = obu->clone();
 
     return true;
   }
@@ -424,20 +470,19 @@ parser_c::parse_obu() {
   if (p->parse_sequence_header_obus_only)
     return true;
 
-  if ((p->obu_type == OBU_FRAME) || (p->obu_type == OBU_FRAME_HEADER)) {
-    if (p->reduced_still_picture_header) {
-      p->current_frame.is_keyframe = true;
-      mxdebug_if(p->debug_is_keyframe, "is_keyframe:   true due to reduced_still_picture_header == 1\n");
+  if (mtx::included_in(p->obu_type, OBU_FRAME, OBU_FRAME_HEADER)) {
+    if (!p->sequence_header_obu)
+      return false;
 
-    } else if (sub_r.get_bit()) { // show_existing_frame
-      p->current_frame.is_keyframe = false;
-      mxdebug_if(p->debug_is_keyframe, "is_keyframe:   false due to show_existing_frame == 1\n");
+    parse_frame_header_obu(sub_r);
+    p->frame_found = true;
 
-    } else {
-      auto frame_type              = sub_r.get_bits(2);
-      p->current_frame.is_keyframe = (frame_type == FRAME_TYPE_KEY); // || (frame_type == FRAME_TYPE_INTRA_ONLY);
-      mxdebug_if(p->debug_is_keyframe, boost::format("is_keyframe:   %1%\n") % (p->current_frame.is_keyframe ? "true" : "false"));
-    }
+    return true;
+  }
+
+  if (p->obu_type == OBU_METADATA) {
+    if (!p->frame_found)
+      p->metadata_obus.emplace_back(obu->clone());
 
     return true;
   }
@@ -454,7 +499,7 @@ parser_c::get_pixel_dimensions()
 bool
 parser_c::headers_parsed()
   const {
-  return p->sequence_header_found;
+  return p->sequence_header_obu && p->frame_found;
 }
 
 bool
@@ -471,16 +516,70 @@ parser_c::get_next_frame() {
   return frame;
 }
 
+memory_cptr
+parser_c::get_av1c()
+  const {
+  // See https://github.com/Matroska-Org/matroska-specification/blob/master/codec/av1.md#codecprivate-1
+
+  auto size = 4 + (p->sequence_header_obu ? p->sequence_header_obu->get_size() : 0);
+  for (auto const &obu : p->metadata_obus)
+    size += obu->get_size();
+
+  auto av1c = memory_c::alloc(size);
+
+  mtx::bits::writer_c w{av1c->get_buffer(), 4};
+
+  w.put_bits(1, 1);             // marker
+  w.put_bits(7, 1);             // version
+
+  w.put_bits(3, p->seq_profile);
+  w.put_bits(5, p->seq_level_idx_0);
+
+  w.put_bits(1, p->seq_tier_0);
+  w.put_bits(1, p->high_bitdepth);
+  w.put_bits(1, p->twelve_bit);
+  w.put_bits(1, p->mono_chrome);
+  w.put_bits(1, p->chroma_subsampling_x);
+  w.put_bits(1, p->chroma_subsampling_y);
+  w.put_bits(2, p->chroma_sample_position);
+
+  w.put_bits(3, 0);             // reserved
+  w.put_bits(1, 0);             // initial_presentation_delay_present
+  w.put_bits(4, 0);             // initial_presentation_delay_minus_one
+
+  auto dst = av1c->get_buffer() + 4;
+  if (p->sequence_header_obu) {
+    std::memcpy(dst, p->sequence_header_obu->get_buffer(), p->sequence_header_obu->get_size());
+    dst += p->sequence_header_obu->get_size();
+  }
+
+  for (auto const &obu : p->metadata_obus) {
+    std::memcpy(dst, obu->get_buffer(), obu->get_size());
+    dst += obu->get_size();
+  }
+
+  return av1c;
+}
+
 void
 parser_c::flush() {
   auto &frame = p->current_frame;
 
   if (frame.mem) {
     frame.timestamp = get_next_timestamp();
+
+    if (frame.is_keyframe && !p->current_frame_contains_sequence_header) {
+      auto old_size = frame.mem->get_size();
+      frame.mem->resize(old_size + p->sequence_header_obu->get_size());
+      std::memmove(frame.mem->get_buffer() + p->sequence_header_obu->get_size(), frame.mem->get_buffer(), old_size);
+      std::memcpy(frame.mem->get_buffer(), p->sequence_header_obu->get_buffer(), p->sequence_header_obu->get_size());
+    }
+
     p->frames.push_back(frame);
   }
 
-  frame = frame_t{};
+  frame                                     = frame_t{};
+  p->current_frame_contains_sequence_header = false;
 }
 
 bool
@@ -575,6 +674,9 @@ parser_c::debug_obu_types(unsigned char const *buffer,
                  % p->obu_type
                  % get_obu_type_name(p->obu_type)
                  % (obu_size ? static_cast<int>(*obu_size) : -1));
+
+      if (!obu_size)
+        return;
 
       p->r.skip_bits(*obu_size * 8);
     }

@@ -22,7 +22,7 @@ class av1_video_packetizer_c: public generic_packetizer_c {
 protected:
   int64_t m_previous_timestamp{-1};
   mtx::av1::parser_c m_parser;
-  bool m_is_framed{true};
+  bool m_is_framed{true}, m_header_parameters_set{};
 
 public:
   av1_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
@@ -43,5 +43,7 @@ protected:
   virtual void flush_frames();
 
   virtual void process_framed(packet_cptr packet);
-  virtual void process_unframed(packet_cptr packet);
+  virtual void process_unframed();
+
+  virtual void set_header_parameters();
 };

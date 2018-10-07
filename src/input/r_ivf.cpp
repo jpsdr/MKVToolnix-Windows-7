@@ -98,7 +98,10 @@ ivf_reader_c::create_packetizer(int64_t) {
 
 void
 ivf_reader_c::create_av1_packetizer() {
-  add_packetizer(new av1_video_packetizer_c(this, m_ti));
+  auto av1_ptzr = new av1_video_packetizer_c(this, m_ti);
+  av1_ptzr->set_is_unframed();
+
+  add_packetizer(av1_ptzr);
 }
 
 void
