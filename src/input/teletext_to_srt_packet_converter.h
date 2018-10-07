@@ -85,8 +85,10 @@ protected:
   bool decode_line(unsigned char const *buffer, unsigned int row_number);
   void process_single_row(unsigned int row_number);
   void decode_page_data(unsigned char ttx_header_magazine);
-  void deliver_queued_content(std::string const &content);
+  void queue_page_content(std::string const &content);
   void queue_packet(packet_cptr const &new_packet);
+  void deliver_queued_packet();
+  bool maybe_merge_queued_and_new_packet(packet_t const &new_packet);
 
 protected:
   static int ttx_to_page(int ttx);

@@ -18,6 +18,15 @@
 #include "input/teletext_to_srt_packet_converter.h"
 #include "merge/generic_packetizer.h"
 
+namespace {
+auto s_merge_allowed_within = timestamp_c::ms(40);
+
+std::string
+displayable_packet_content(memory_c const &mem) {
+  return boost::regex_replace(mem.to_string(), boost::regex{"\\n", boost::regex::perl}, "\\\\n");
+}
+}
+
 std::vector<teletext_to_srt_packet_converter_c::char_map_t> teletext_to_srt_packet_converter_c::ms_char_maps;
 
 static unsigned char invtab[256] = {
@@ -326,7 +335,7 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
 
   auto const page_content = page_to_string();
 
-  deliver_queued_content(page_content);
+  queue_page_content(page_content);
 
   if (!page_data.erase_flag)
     return;
@@ -338,7 +347,7 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
 }
 
 void
-teletext_to_srt_packet_converter_c::deliver_queued_content(std::string const &content) {
+teletext_to_srt_packet_converter_c::queue_page_content(std::string const &content) {
   if (content.empty() || !m_current_track->m_queued_timestamp.valid()) {
     m_current_track->m_queued_timestamp.reset();
     return;
@@ -353,33 +362,56 @@ teletext_to_srt_packet_converter_c::deliver_queued_content(std::string const &co
 }
 
 void
-teletext_to_srt_packet_converter_c::queue_packet(packet_cptr const &new_packet) {
-  auto old_content = m_current_track->m_queued_packet ? m_current_track->m_queued_packet->data->to_string() : std::string{};
-  auto new_content = new_packet->data->to_string();
+teletext_to_srt_packet_converter_c::deliver_queued_packet() {
+  if (!m_current_track->m_queued_packet)
+    return;
 
-  if (m_current_track->m_queued_packet) {
-    auto prev_timestamp = timestamp_c::ns(m_current_track->m_queued_packet->timestamp);
-    auto prev_end       = prev_timestamp + timestamp_c::ns(m_current_track->m_queued_packet->duration);
-    auto diff           = timestamp_c::ns(new_packet->timestamp) - prev_end;
+  auto &packet = m_current_track->m_queued_packet;
 
-    if ((diff.abs().to_ms() <= 40) && (old_content == new_content)) {
-      m_current_track->m_queued_packet->duration = (timestamp_c::ns(new_packet->timestamp + new_packet->duration) - prev_timestamp).abs().to_ns();
-      mxdebug_if(m_debug,
-                 boost::format("  queue: merging packet with previous, now %1% duration %2% content %3%\n")
-                 % format_timestamp(prev_timestamp) % format_timestamp(m_current_track->m_queued_packet->duration) % new_content);
-      return;
-    }
+  mxdebug_if(m_debug,
+             boost::format("  queue: delivering packet %1% duration %2% content %3%\n")
+             % format_timestamp(packet->timestamp) % format_timestamp(packet->duration) % displayable_packet_content(*packet->data));
 
-    mxdebug_if(m_debug,
-               boost::format("  queue: delivering packet %1% duration %2% content %3% (could not merge: diff %4%, content== %5%)\n")
-               % format_timestamp(prev_timestamp) % format_timestamp(m_current_track->m_queued_packet->duration) % old_content % format_timestamp(diff) % (old_content == new_content));
-    m_current_track->m_ptzr->process(m_current_track->m_queued_packet);
-    m_current_track->m_queued_packet.reset();
+  m_current_track->m_ptzr->process(packet);
+  packet.reset();
+}
+
+bool
+teletext_to_srt_packet_converter_c::maybe_merge_queued_and_new_packet(packet_t const &new_packet) {
+  if (!m_current_track->m_queued_packet)
+    return false;
+
+  auto const &old_content = *m_current_track->m_queued_packet->data;
+  auto const &new_content = *new_packet.data;
+  auto const same_content = old_content == new_content;
+
+  auto prev_timestamp     = timestamp_c::ns(m_current_track->m_queued_packet->timestamp);
+  auto prev_end           = prev_timestamp + timestamp_c::ns(m_current_track->m_queued_packet->duration);
+  auto diff               = timestamp_c::ns(new_packet.timestamp) - prev_end;
+
+  if (!same_content || (diff.abs() > s_merge_allowed_within)) {
+    mxdebug_if(m_debug, boost::format("  queue: not possible to merge; diff: %1% same content? %2%\n") % diff % same_content);
+    return false;
   }
+
+  m_current_track->m_queued_packet->duration = (timestamp_c::ns(new_packet.timestamp + new_packet.duration) - prev_timestamp).abs().to_ns();
+  mxdebug_if(m_debug,
+             boost::format("  queue: merging packet with previous, now %1% duration %2% content %3%\n")
+             % format_timestamp(prev_timestamp) % format_timestamp(m_current_track->m_queued_packet->duration) % displayable_packet_content(new_content));
+
+  return true;
+}
+
+void
+teletext_to_srt_packet_converter_c::queue_packet(packet_cptr const &new_packet) {
+  if (maybe_merge_queued_and_new_packet(*new_packet))
+    return;
+
+  deliver_queued_packet();
 
   mxdebug_if(m_debug,
              boost::format("  queue: queueing packet %1% duration %2% content %3%\n")
-             % format_timestamp(new_packet->timestamp) % format_timestamp(new_packet->duration) % new_content);
+             % format_timestamp(new_packet->timestamp) % format_timestamp(new_packet->duration) % displayable_packet_content(*new_packet->data));
   m_current_track->m_queued_packet = new_packet;
 }
 
@@ -390,9 +422,9 @@ teletext_to_srt_packet_converter_c::flush() {
     if (!data->m_queued_packet)
       continue;
 
-    auto old_content = data->m_queued_packet->data->to_string();
-
-    mxdebug_if(m_debug, boost::format("  queue: flushing packet %1% duration %2% content %3%\n") % format_timestamp(data->m_queued_packet->timestamp) % format_timestamp(data->m_queued_packet->duration) % old_content);
+    mxdebug_if(m_debug,
+               boost::format("  queue: flushing packet %1% duration %2% content %3%\n")
+               % format_timestamp(data->m_queued_packet->timestamp) % format_timestamp(data->m_queued_packet->duration) % displayable_packet_content(*data->m_queued_packet->data));
 
     data->m_ptzr->process(data->m_queued_packet);
     data->m_queued_packet.reset();
