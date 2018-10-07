@@ -43,8 +43,7 @@ constexpr unsigned int NO_DELAY_FOR_GARBAGE_IN_AVI  = 18;
 constexpr unsigned int KEEP_LAST_CHAPTER_IN_MPLS    = 19;
 constexpr unsigned int KEEP_TRACK_STATISTICS_TAGS   = 20;
 constexpr unsigned int ALL_I_SLICES_ARE_KEY_FRAMES  = 21;
-constexpr unsigned int ENABLE_AV1                   = 22;
-constexpr unsigned int MAX_IDX                      = 22;
+constexpr unsigned int MAX_IDX                      = 21;
 }
 
 void engage(const std::string &hacks);
