@@ -113,7 +113,9 @@ teletext_to_srt_packet_converter_c::teletext_to_srt_packet_converter_c()
   , m_page_re1{" *\\n[ \\n]+",      boost::regex::perl}
   , m_page_re2{" +",                boost::regex::perl}
   , m_page_re3{"^[ \\n]+|[ \\n]+$", boost::regex::perl}
-  , m_debug{"teletext_to_srt|teletext_to_srt_packet_converter"}
+  , m_debug{           "teletext_to_srt_all|teletext_to_srt"}
+  , m_debug_packet{    "teletext_to_srt_all|teletext_to_srt_packet"}
+  , m_debug_conversion{"teletext_to_srt_all|teletext_to_srt_conversion"}
 {
   setup_character_maps();
 }
@@ -280,7 +282,7 @@ teletext_to_srt_packet_converter_c::process_single_row(unsigned int row_number) 
   remove_parity(&m_buf[m_pos + 6], m_data_length + 2 - 6);
   if (decode_line(&m_buf[m_pos + 6], row_number)) {
     m_current_track->m_page_changed = true;
-    mxdebug_if(m_debug, boost::format("  new content of row %1%: %2%\n") % row_number % m_current_track->m_page_data.page_buffer[row_number - 1]);
+    mxdebug_if(m_debug_packet, boost::format("  new content of row %1%: %2%\n") % row_number % m_current_track->m_page_data.page_buffer[row_number - 1]);
   }
 }
 
@@ -408,7 +410,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
 
   if (!mtx::included_in(data_unit_id, 0x02, 0x03) || (0xe4 != start_byte)) {
     if (0xff != data_unit_id)
-      mxdebug_if(m_debug, boost::format("unsupported data_unit_id/start_byte; m_pos %1% data_unit_id 0x%|2$02x| start_byte 0x%|3$02x|\n") % m_pos % static_cast<unsigned int>(data_unit_id) % static_cast<unsigned int>(start_byte));
+      mxdebug_if(m_debug_packet, boost::format("unsupported data_unit_id/start_byte; m_pos %1% data_unit_id 0x%|2$02x| start_byte 0x%|3$02x|\n") % m_pos % static_cast<unsigned int>(data_unit_id) % static_cast<unsigned int>(start_byte));
 
     return;
   }
@@ -424,7 +426,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
   if (!ttx_header_magazine)
     ttx_header_magazine = 8;
 
-  mxdebug_if(m_debug, boost::format(" m_pos %1% packet_id/row_number %2% magazine %3%\n") % m_pos % static_cast<unsigned int>(row_number) % ttx_header_magazine);
+  mxdebug_if(m_debug_packet, boost::format(" m_pos %1% packet_id/row_number %2% magazine %3%\n") % m_pos % static_cast<unsigned int>(row_number) % ttx_header_magazine);
 
   if (row_number == 0) {
     decode_page_data(ttx_header_magazine);
@@ -458,7 +460,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
   m_pos                      = 1;                // skip sub ID
   m_current_packet_timestamp = timestamp_c::ns(packet->timestamp);
 
-  mxdebug_if(m_debug, boost::format("Starting conversion on packet with length %1% timestamp %2%\n") % m_in_size % format_timestamp(packet->timestamp));
+  mxdebug_if(m_debug_conversion, boost::format("Starting conversion on packet with length %1% timestamp %2%\n") % m_in_size % format_timestamp(packet->timestamp));
 
   //
   // PES teletext payload (payload_index) packet length = 44 + 2 = 46
@@ -477,7 +479,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
       break;
 
     if (m_data_length != 0x2c) {
-      mxdebug_if(m_debug, boost::format("pos %1% invalid data length %2% != %3%\n") % m_data_length % 0x2c);
+      mxdebug_if(m_debug_conversion, boost::format("pos %1% invalid data length %2% != %3%\n") % m_data_length % 0x2c);
       m_pos = m_pos + 2 + 0x2c;
       continue;
     }

@@ -67,7 +67,7 @@ protected:
 
   boost::regex m_page_re1, m_page_re2, m_page_re3;
 
-  debugging_option_c m_debug;
+  debugging_option_c m_debug, m_debug_packet, m_debug_conversion;
 
 public:
   teletext_to_srt_packet_converter_c();
