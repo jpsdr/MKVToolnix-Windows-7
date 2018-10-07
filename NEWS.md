@@ -11,6 +11,17 @@
   substreams. Implements #2377.
 * mkvmerge, mkvextract: simple text subtitles: added a workaround for simple
   text subtitle tracks that don't contain a duration. Implements #2397.
+* mkvmerge: AV1 parser: updated the code for the finalized AV1 bitstream
+  specification. Part of the implementation of #2261.
+* mkvmerge: AV1 packetizer: updated the code for the finalized AV1-in-Matroska
+  & WebM mapping specification. Part of the implementation of #2261.
+* mkvmerge: AV1 support: the `--engage enable_av1` option has been removed
+  again. Part of the implementation of #2261.
+* mkvmerge: MP4 reader: added support for AV1. Part of the implementation of
+  #2261.
+* mkvextract: added support for extracting AV1 to IVF. Part of the
+  implementation of #2261.
+
 
 ## Bug fixes
 
