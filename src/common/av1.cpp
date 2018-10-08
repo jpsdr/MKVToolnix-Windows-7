@@ -502,7 +502,7 @@ parser_c::get_frame_duration()
   if (!p->sequence_header_obu || !p->time_scale)
     return {};
 
-  return { p->num_units_in_display_tick * 1'000'000'000ll, p->time_scale };
+  return { static_cast<int64_t>(p->num_units_in_display_tick) * 1'000'000'000ll, static_cast<int64_t>(p->time_scale) };
 }
 
 bool
