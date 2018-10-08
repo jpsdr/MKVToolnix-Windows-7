@@ -19,7 +19,7 @@
 #include "extract/xtr_ivf.h"
 
 namespace {
-const unsigned char const s_av1_temporal_delimiter_obu[2] = {
+unsigned char const s_av1_temporal_delimiter_obu[2] = {
   0x12,                         // type = OBU_TEMPORAL_DELIMITER, extension not present, OBU size field present
   0x00,                         // OBU size
 };
