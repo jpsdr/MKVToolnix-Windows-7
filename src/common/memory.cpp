@@ -47,6 +47,21 @@ memory_c::add(unsigned char const *new_buffer,
   std::memcpy(get_buffer() + previous_size, new_buffer, new_size);
 }
 
+void
+memory_c::prepend(unsigned char const *new_buffer,
+                  size_t new_size) {
+  if ((0 == new_size) || !new_buffer)
+    return;
+
+  auto previous_size = get_size();
+  resize(previous_size + new_size);
+
+  auto buffer = get_buffer();
+
+  std::memmove(&buffer[new_size], &buffer[0],     previous_size);
+  std::memcpy( &buffer[0],        &new_buffer[0], new_size);
+}
+
 memory_cptr
 lace_memory_xiph(const std::vector<memory_cptr> &blocks) {
   size_t i, size = 1;

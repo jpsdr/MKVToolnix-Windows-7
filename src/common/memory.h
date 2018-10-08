@@ -152,8 +152,19 @@ public:
 
   void resize(std::size_t new_size) throw();
   void add(unsigned char const *new_buffer, std::size_t new_size);
+  void add(memory_c const &new_buffer) {
+    add(new_buffer.get_buffer(), new_buffer.get_size());
+  }
   void add(memory_cptr const &new_buffer) {
-    add(new_buffer->get_buffer(), new_buffer->get_size());
+    add(*new_buffer);
+  }
+
+  void prepend(unsigned char const *new_buffer, std::size_t new_size);
+  void prepend(memory_c const &new_buffer) {
+    prepend(new_buffer.get_buffer(), new_buffer.get_size());
+  }
+  void prepend(memory_cptr const &new_buffer) {
+    prepend(*new_buffer);
   }
 
   std::string to_string() const {

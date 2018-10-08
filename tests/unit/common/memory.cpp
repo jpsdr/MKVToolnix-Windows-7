@@ -184,4 +184,62 @@ TEST(Memory, SpliceInvalidParameters) {
   ASSERT_NO_THROW(memory_c::splice(*memory_c::clone("0123456789"), 10, 0));
 }
 
+TEST(Memory, Add) {
+  auto buffer1 = memory_c::clone("0123456");
+  auto buffer2 = memory_c::clone("789");
+
+  buffer1->add(buffer2);
+
+  ASSERT_EQ(10,            buffer1->get_size());
+  ASSERT_EQ("0123456789"s, buffer1->to_string());
+}
+
+TEST(Memory, AddNothing) {
+  auto buffer = memory_c::clone("0123456");
+
+  buffer->add(nullptr, 0);
+
+  ASSERT_EQ(7,          buffer->get_size());
+  ASSERT_EQ("0123456"s, buffer->to_string());
+
+  buffer->add(nullptr, 2);
+
+  ASSERT_EQ(7,          buffer->get_size());
+  ASSERT_EQ("0123456"s, buffer->to_string());
+
+  buffer->add(reinterpret_cast<unsigned char const *>("789"), 0);
+
+  ASSERT_EQ(7,          buffer->get_size());
+  ASSERT_EQ("0123456"s, buffer->to_string());
+}
+
+TEST(Memory, Prepend) {
+  auto buffer1 = memory_c::clone("0123456");
+  auto buffer2 = memory_c::clone("789");
+
+  buffer1->prepend(buffer2);
+
+  ASSERT_EQ(10,            buffer1->get_size());
+  ASSERT_EQ("7890123456"s, buffer1->to_string());
+}
+
+TEST(Memory, PrependNothing) {
+  auto buffer = memory_c::clone("0123456");
+
+  buffer->prepend(nullptr, 0);
+
+  ASSERT_EQ(7,          buffer->get_size());
+  ASSERT_EQ("0123456"s, buffer->to_string());
+
+  buffer->prepend(nullptr, 2);
+
+  ASSERT_EQ(7,          buffer->get_size());
+  ASSERT_EQ("0123456"s, buffer->to_string());
+
+  buffer->prepend(reinterpret_cast<unsigned char const *>("789"), 0);
+
+  ASSERT_EQ(7,          buffer->get_size());
+  ASSERT_EQ("0123456"s, buffer->to_string());
+}
+
 }
