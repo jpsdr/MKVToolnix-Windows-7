@@ -18,6 +18,13 @@
 #include "common/endian.h"
 #include "extract/xtr_ivf.h"
 
+namespace {
+const unsigned char const s_av1_temporal_delimiter_obu[2] = {
+  0x12,                         // type = OBU_TEMPORAL_DELIMITER, extension not present, OBU size field present
+  0x00,                         // OBU size
+};
+}
+
 xtr_ivf_c::xtr_ivf_c(const std::string &codec_id,
                      int64_t tid,
                      track_spec_t &tspec)
@@ -102,16 +109,6 @@ xtr_ivf_c::av1_prepend_temporal_delimiter_obu_if_needed(memory_c &frame) {
 
   auto type = (frame.get_buffer()[0] & 0x74) >> 3;
 
-  if (type == mtx::av1::OBU_TEMPORAL_DELIMITER)
-    return;
-
-  auto old_size = frame.get_size();
-
-  frame.resize(old_size + 2);
-
-  auto buffer = frame.get_buffer();
-
-  std::memmove(&buffer[2], &buffer[0], old_size);
-  buffer[0] = 0x12;             // type = OBU_TEMPORAL_DELIMITER, extension not present, OBU size field present
-  buffer[1] = 0x00;             // OBU size
+  if (type != mtx::av1::OBU_TEMPORAL_DELIMITER)
+    frame.prepend(s_av1_temporal_delimiter_obu, 2);
 }

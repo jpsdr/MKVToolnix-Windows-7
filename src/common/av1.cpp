@@ -577,12 +577,8 @@ parser_c::flush() {
   if (frame.mem) {
     frame.timestamp = get_next_timestamp();
 
-    if (frame.is_keyframe && !p->current_frame_contains_sequence_header) {
-      auto old_size = frame.mem->get_size();
-      frame.mem->resize(old_size + p->sequence_header_obu->get_size());
-      std::memmove(frame.mem->get_buffer() + p->sequence_header_obu->get_size(), frame.mem->get_buffer(), old_size);
-      std::memcpy(frame.mem->get_buffer(), p->sequence_header_obu->get_buffer(), p->sequence_header_obu->get_size());
-    }
+    if (frame.is_keyframe && !p->current_frame_contains_sequence_header)
+      frame.mem->prepend(p->sequence_header_obu);
 
     p->frames.push_back(frame);
   }
