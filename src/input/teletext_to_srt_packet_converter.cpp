@@ -318,22 +318,20 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
   page_data.subpage                 = ((ttx_packet_0_header[2] << 8) | (ttx_packet_0_header[1])) & 0x3f7f;
   page_data.subpage                 = ttx_to_page(page_data.subpage);
 
-  page_data.flags                   =  (ttx_packet_0_header[1]       & 0x80)
-                                    | ((ttx_packet_0_header[3] << 4) & 0x10)
-                                    | ((ttx_packet_0_header[3] << 2) & 0x08)
-                                    | ((ttx_packet_0_header[3] >> 0) & 0x04)
-                                    | ((ttx_packet_0_header[3] >> 1) & 0x02)
-                                    | ((ttx_packet_0_header[3] >> 4) & 0x01);
+  page_data.flags                   = ((ttx_packet_0_header[1] >> 7) & 0x01)  // C4 Erase Page flag
+                                    | ((ttx_packet_0_header[2] >> 5) & 0x06)  // C5 Newsflash + C6 Subtitle flags
+                                    |  (ttx_packet_0_header[3] << 3);         // C7-C14: Suppress Header, Update Indicator, Interrupted Sequence
+                                                                              // Inhibit Display, Magazine Serial, National Option Character Subset (3 bits)
 
-  page_data.erase_flag              = !!(page_data.flags & 0x80);
-  page_data.national_set            = (page_data.flags >> 21) & 0x07;
-  auto not_subtitle                 = (page_data.flags >> 15) & 0x03;
+  page_data.erase_flag              = page_data.flags & 0x01;
+  page_data.national_set            = page_data.flags >> 8;
+  auto subtitle                     = (page_data.flags >> 2) & 0x01;
 
   auto const page_content           = page_to_string();
 
   mxdebug_if(m_debug,
-             boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% not subtitle? %5% flags %|7$02x| queued timestamp %8% queued content size %9%\n")
-             % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % not_subtitle % format_timestamp(m_current_packet_timestamp) % static_cast<unsigned int>(page_data.flags)
+             boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% subtitle? %5% flags %|7$02x| queued timestamp %8% queued content size %9%\n")
+             % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % subtitle % format_timestamp(m_current_packet_timestamp) % static_cast<unsigned int>(page_data.flags)
              % m_current_track->m_queued_timestamp % page_content.size());
 
   queue_page_content(page_content);
