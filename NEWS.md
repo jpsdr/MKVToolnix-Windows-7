@@ -30,7 +30,7 @@
 * mkvmerge: MPEG transport stream reader, teletext subtitles: the decision
   whether or not to keep frames around in order to potentially merge them with
   the following frame is made sooner. That avoids problems if there are large
-  large gaps between teletext subtitle frames which could lead to frames being
+  gaps between teletext subtitle frames which could lead to frames being
   interleaved too late. Fixes #2393.
 * mkvmerge: JSON identification: fixed a bug when removing invalid UTF-8 data
   from strings before they're output as JSON. Fixes #2398.
