@@ -37,6 +37,7 @@
 #include "mkvtoolnix-gui/header_editor/time_value_page.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
+#include "mkvtoolnix-gui/header_editor/track_name_page.h"
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -454,6 +455,7 @@ Tab::createValuePage(TopLevelPage &parentPage,
   auto const type = element.m_type;
 
   page = element.m_callbacks == &KaxTrackLanguage::ClassInfos     ? new LanguageValuePage{       *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
+       : element.m_callbacks == &KaxTrackName::ClassInfos         ? new TrackNamePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        : type                == property_element_c::EBMLT_BOOL    ? new BoolValuePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        : type                == property_element_c::EBMLT_BINARY  ? new BitValuePage{            *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description, element.m_bit_length}
        : type                == property_element_c::EBMLT_FLOAT   ? new FloatValuePage{          *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}

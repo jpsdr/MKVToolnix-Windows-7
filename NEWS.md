@@ -21,9 +21,9 @@
   #2261.
 * mkvextract: added support for extracting AV1 to IVF. Part of the
   implementation of #2261.
-* MKVToolNix GUI: multiplexer: the user can enter a list of predefined track
-  names in the preferences. She can later select from them in "track name"
-  combo box. Implements #2230.
+* MKVToolNix GUI: multiplexer, header editor: the user can enter a list of
+  predefined track names in the preferences. She can later select from them in
+  "track name" combo box. Implements #2230.
 
 
 ## Bug fixes

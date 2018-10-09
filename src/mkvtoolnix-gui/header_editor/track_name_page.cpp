@@ -1,0 +1,79 @@
+#include "common/common_pch.h"
+
+#include <QComboBox>
+
+#include "mkvtoolnix-gui/header_editor/track_name_page.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
+
+namespace mtx { namespace gui { namespace HeaderEditor {
+
+using namespace mtx::gui;
+
+TrackNamePage::TrackNamePage(Tab &parent,
+                             PageBase &topLevelPage,
+                             EbmlMaster &master,
+                             EbmlCallbacks const &callbacks,
+                             translatable_string_c const &title,
+                             translatable_string_c const &description)
+  : ValuePage{parent, topLevelPage, master, callbacks, ValueType::String, title, description}
+{
+}
+
+TrackNamePage::~TrackNamePage() {
+}
+
+QWidget *
+TrackNamePage::createInputControl() {
+  if (m_element)
+    m_originalValue = Q(static_cast<EbmlUnicodeString *>(m_element)->GetValue());
+
+  m_cbTrackName = new QComboBox{this};
+  m_cbTrackName->setEditable(true);
+  m_cbTrackName->setCurrentText(m_originalValue);
+
+  connect(MainWindow::get(), &MainWindow::preferencesChanged, this, &TrackNamePage::setupPredefinedTrackNames);
+
+  setupPredefinedTrackNames();
+
+  return m_cbTrackName;
+}
+
+QString
+TrackNamePage::originalValueAsString()
+  const {
+  return m_originalValue;
+}
+
+QString
+TrackNamePage::currentValueAsString()
+  const {
+  return m_cbTrackName->currentText();
+}
+
+void
+TrackNamePage::resetValue() {
+  m_cbTrackName->setCurrentText(m_originalValue);
+}
+
+bool
+TrackNamePage::validateValue()
+  const {
+  return true;
+}
+
+void
+TrackNamePage::copyValueToElement() {
+  static_cast<EbmlUnicodeString *>(m_element)->SetValue(to_wide(m_cbTrackName->currentText()));
+}
+
+void
+TrackNamePage::setupPredefinedTrackNames() {
+  auto name = m_cbTrackName->currentText();
+
+  m_cbTrackName->clear();
+  m_cbTrackName->addItems(Util::Settings::get().m_mergePredefinedTrackNames);
+  m_cbTrackName->setCurrentText(name);
+
+}
+
+}}}
