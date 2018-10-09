@@ -69,6 +69,10 @@ public slots:
   void enableOftendUsedLanguagesOnly();
   void enableOftendUsedCountriesOnly();
   void enableOftendUsedCharacterSetsOnly();
+  void enablePredefinedTrackNameControls();
+
+  void addPredefinedTrackName();
+  void removePredefinedTrackNames();
 
   virtual void accept() override;
 
@@ -93,6 +97,7 @@ protected:
   void setupEnableMuxingTracksByLanguage();
   void setupMergeAddingAppendingFilesPolicy();
   void setupMergeWarnMissingAudioTrack();
+  void setupMergePredefinedTrackNames();
   void setupHeaderEditorDroppedFilesPolicy();
   void setupJobsRunPrograms();
   void setupFont();

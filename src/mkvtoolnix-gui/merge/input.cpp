@@ -202,6 +202,7 @@ Tab::setupInputControls() {
   setupControlLists();
   setupMoveUpDownButtons();
   setupInputLayout();
+  setupPredefinedTrackNames();
 
   ui->files->setModel(m_filesModel);
   ui->tracks->setModel(m_tracksModel);
@@ -368,7 +369,7 @@ Tab::setupInputControls() {
   connect(ui->subtitleCharacterSetPreview,   &QPushButton::clicked,                                                                            this,                     &Tab::onPreviewSubtitleCharacterSet);
   connect(ui->timestamps,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onTimestampsChanged);
   connect(ui->trackLanguage,                 static_cast<void (Util::LanguageComboBox::*)(int)>(&Util::LanguageComboBox::currentIndexChanged), this,                     &Tab::onTrackLanguageChanged);
-  connect(ui->trackName,                     &QLineEdit::textChanged,                                                                          this,                     &Tab::onTrackNameChanged);
+  connect(ui->trackName,                     &QComboBox::editTextChanged,                                                                      this,                     &Tab::onTrackNameChanged);
   connect(ui->trackTags,                     &QLineEdit::textChanged,                                                                          this,                     &Tab::onTrackTagsChanged);
   connect(ui->tracks,                        &QTreeView::doubleClicked,                                                                        this,                     &Tab::toggleMuxThisForSelectedTracks);
   connect(ui->tracks,                        &Util::BasicTreeView::allSelectedActivated,                                                       this,                     &Tab::toggleMuxThisForSelectedTracks);
@@ -416,6 +417,7 @@ Tab::setupInputControls() {
 
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupMoveUpDownButtons);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupInputLayout);
+  connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupPredefinedTrackNames);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->trackLanguage,        &Util::ComboBoxBase::reInitialize);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->chapterLanguage,      &Util::ComboBoxBase::reInitialize);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->subtitleCharacterSet, &Util::ComboBoxBase::reInitialize);
@@ -539,6 +541,16 @@ Tab::setupInputToolTips() {
 }
 
 void
+Tab::setupPredefinedTrackNames() {
+  auto name = ui->trackName->currentText();
+
+  ui->trackName->clear();
+  ui->trackName->addItems(Util::Settings::get().m_mergePredefinedTrackNames);
+  ui->trackName->setCurrentText(name);
+
+}
+
+void
 Tab::setupFileIdentificationThread() {
   auto &worker = m_identifier->worker();
 
@@ -657,11 +669,11 @@ Tab::clearInputControlValues() {
   for (auto comboBox : m_comboBoxControls)
     comboBox->setCurrentIndex(0);
 
-  for (auto control : std::vector<QLineEdit *>{ui->trackName, ui->trackTags, ui->delay, ui->stretchBy, ui->timestamps, ui->displayWidth, ui->displayHeight, ui->cropping, ui->additionalTrackOptions})
+  for (auto control : std::vector<QLineEdit *>{ui->trackTags, ui->delay, ui->stretchBy, ui->timestamps, ui->displayWidth, ui->displayHeight, ui->cropping, ui->additionalTrackOptions})
     control->setText(Q(""));
 
-  ui->defaultDuration->setEditText(Q(""));
-  ui->aspectRatio->setEditText(Q(""));
+  for (auto control : std::vector<QComboBox *>{ui->trackName, ui->defaultDuration, ui->aspectRatio})
+    control->setEditText(Q(""));
 
   ui->setAspectRatio->setChecked(false);
   ui->setDisplayWidthHeight->setChecked(false);
@@ -703,7 +715,7 @@ Tab::setInputControlValues(Track *track) {
   ui->trackLanguage->setCurrentByData(track->m_language);
   ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
 
-  ui->trackName->setText(                        track->m_name);
+  ui->trackName->setEditText(                    track->m_name);
   ui->trackTags->setText(                        track->m_tags);
   ui->delay->setText(                            track->m_delay);
   ui->stretchBy->setText(                        track->m_stretchBy);

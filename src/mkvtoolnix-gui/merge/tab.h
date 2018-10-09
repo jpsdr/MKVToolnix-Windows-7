@@ -260,6 +260,7 @@ protected:
   virtual void setupControlLists();
   virtual void setupInputControls();
   virtual void setupOutputControls();
+  virtual void setupPredefinedTrackNames();
 
   virtual void setupInputToolTips();
   virtual void setupOutputToolTips();
