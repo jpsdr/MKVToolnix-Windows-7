@@ -45,6 +45,7 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   m_frame_rate_den          = default_duration / gcd;
 
   if ((0xffff < m_frame_rate_num) || (0xffff < m_frame_rate_den)) {
+    mxdebug_if(m_debug, boost::format("frame rate determination: values too big for 16 bit; default duration %1% numerator %2% denominator %3%\n") % default_duration % m_frame_rate_num % m_frame_rate_den);
     uint64_t scale   = std::max(m_frame_rate_num, m_frame_rate_den) / 0xffff + 1;
     m_frame_rate_num = 1000000000ull    / scale;
     m_frame_rate_den = default_duration / scale;
@@ -52,6 +53,8 @@ xtr_ivf_c::create_file(xtr_base_c *master,
     if (0 == m_frame_rate_den)
       m_frame_rate_den = 1;
   }
+
+  mxdebug_if(m_debug, boost::format("frame rate determination: default duration %1% numerator %2% denominator %3%\n") % default_duration % m_frame_rate_num % m_frame_rate_den);
 
   if (master)
     mxerror(boost::format(Y("Cannot write track %1% with the CodecID '%2%' to the file '%3%' because "
@@ -78,9 +81,9 @@ void
 xtr_ivf_c::handle_frame(xtr_frame_t &f) {
   uint64_t frame_number = f.timestamp * m_frame_rate_num / m_frame_rate_den / 1000000000ull;
 
-  mxverb(2, boost::format("timestamp %1% num %2% den %3% frame_number %4% calculated back %5%\n")
-         % f.timestamp % m_frame_rate_num % m_frame_rate_den % frame_number
-         % (frame_number * 1000000000ull * m_frame_rate_den / m_frame_rate_num));
+  mxdebug_if(m_debug, boost::format("handle frame: timestamp %1% num %2% den %3% frame_number %4% calculated back %5%\n")
+             % f.timestamp % m_frame_rate_num % m_frame_rate_den % frame_number
+             % (frame_number * 1000000000ull * m_frame_rate_den / m_frame_rate_num));
 
   av1_prepend_temporal_delimiter_obu_if_needed(*f.frame);
 

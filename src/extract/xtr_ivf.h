@@ -23,6 +23,7 @@ public:
   uint32_t m_frame_count{};
   ivf::file_header_t m_file_header;
   bool m_is_av1{};
+  debugging_option_c m_debug{"ivf|xtr_ivf"};
 
 public:
   xtr_ivf_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
