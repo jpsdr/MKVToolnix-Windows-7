@@ -24,6 +24,9 @@
 * MKVToolNix GUI: multiplexer, header editor: the user can enter a list of
   predefined track names in the preferences. She can later select from them in
   "track name" combo box. Implements #2230.
+* mkvextract: IVF extractor (AV1, VP8, VP9): precise values will be used for
+  the frame rate numerator & denominator header fields for certain well-known
+  values of the track's default duration.
 
 
 ## Bug fixes

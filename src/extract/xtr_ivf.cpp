@@ -16,6 +16,7 @@
 #include "common/codec.h"
 #include "common/ebml.h"
 #include "common/endian.h"
+#include "common/frame_timing.h"
 #include "extract/xtr_ivf.h"
 
 namespace {
@@ -38,11 +39,12 @@ xtr_ivf_c::create_file(xtr_base_c *master,
                        libmatroska::KaxTrackEntry &track) {
   xtr_base_c::create_file(master, track);
 
-  uint64_t default_duration = kt_get_default_duration(track);
-  default_duration          = 0 == default_duration ? 1 : default_duration;
-  uint64_t gcd              = boost::gcd(static_cast<uint64_t>(100000000), default_duration);
-  m_frame_rate_num          = 1000000000ull    / gcd;
-  m_frame_rate_den          = default_duration / gcd;
+  auto default_duration = std::max<uint64_t>(kt_get_default_duration(track), 1);
+  auto rate             = mtx::frame_timing::determine_frame_rate(default_duration);
+  if (!rate)
+    rate                = int64_rational_c{1'000'000'000ll, default_duration};
+  m_frame_rate_num      = rate.numerator();
+  m_frame_rate_den      = rate.denominator();
 
   if ((0xffff < m_frame_rate_num) || (0xffff < m_frame_rate_den)) {
     mxdebug_if(m_debug, boost::format("frame rate determination: values too big for 16 bit; default duration %1% numerator %2% denominator %3%\n") % default_duration % m_frame_rate_num % m_frame_rate_den);
