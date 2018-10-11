@@ -46,9 +46,9 @@ xtr_ivf_c::create_file(xtr_base_c *master,
 
   if ((0xffff < m_frame_rate_num) || (0xffff < m_frame_rate_den)) {
     mxdebug_if(m_debug, boost::format("frame rate determination: values too big for 16 bit; default duration %1% numerator %2% denominator %3%\n") % default_duration % m_frame_rate_num % m_frame_rate_den);
-    uint64_t scale   = std::max(m_frame_rate_num, m_frame_rate_den) / 0xffff + 1;
-    m_frame_rate_num = 1000000000ull    / scale;
-    m_frame_rate_den = default_duration / scale;
+    uint64_t scale    = std::max(m_frame_rate_num, m_frame_rate_den) / 0xffff + 1;
+    m_frame_rate_num /= scale;
+    m_frame_rate_den /= scale;
 
     if (0 == m_frame_rate_den)
       m_frame_rate_den = 1;

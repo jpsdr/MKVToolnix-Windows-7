@@ -37,6 +37,9 @@
   interleaved too late. Fixes #2393.
 * mkvmerge: JSON identification: fixed a bug when removing invalid UTF-8 data
   from strings before they're output as JSON. Fixes #2398.
+* mkvextract: IVF extractor (AV1, VP8, VP8): the frame rate header fields
+  weren't clamped to 16 bits properly causing wrong frame rates to be written
+  in certain situations.
 
 
 # Version 27.0.0 "Metropolis" 2018-09-26
