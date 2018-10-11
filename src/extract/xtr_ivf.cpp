@@ -17,6 +17,7 @@
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/frame_timing.h"
+#include "common/math.h"
 #include "extract/xtr_ivf.h"
 
 namespace {
@@ -39,22 +40,14 @@ xtr_ivf_c::create_file(xtr_base_c *master,
                        libmatroska::KaxTrackEntry &track) {
   xtr_base_c::create_file(master, track);
 
-  auto default_duration = std::max<uint64_t>(kt_get_default_duration(track), 1);
+  auto default_duration = FindChildValue<libmatroska::KaxTrackDefaultDuration>(track, 1'000'000'000 / 25); // Default to 25 FPS if unknown.
   auto rate             = mtx::frame_timing::determine_frame_rate(default_duration);
   if (!rate)
     rate                = int64_rational_c{1'000'000'000ll, static_cast<int64_t>(default_duration)};
+  rate                  = mtx::math::clamp_values_to(rate, std::numeric_limits<uint16_t>::max());
+
   m_frame_rate_num      = rate.numerator();
   m_frame_rate_den      = rate.denominator();
-
-  if ((0xffff < m_frame_rate_num) || (0xffff < m_frame_rate_den)) {
-    mxdebug_if(m_debug, boost::format("frame rate determination: values too big for 16 bit; default duration %1% numerator %2% denominator %3%\n") % default_duration % m_frame_rate_num % m_frame_rate_den);
-    uint64_t scale    = std::max(m_frame_rate_num, m_frame_rate_den) / 0xffff + 1;
-    m_frame_rate_num /= scale;
-    m_frame_rate_den /= scale;
-
-    if (0 == m_frame_rate_den)
-      m_frame_rate_den = 1;
-  }
 
   mxdebug_if(m_debug, boost::format("frame rate determination: default duration %1% numerator %2% denominator %3%\n") % default_duration % m_frame_rate_num % m_frame_rate_den);
 
