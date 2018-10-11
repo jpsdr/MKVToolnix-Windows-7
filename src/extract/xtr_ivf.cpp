@@ -42,7 +42,7 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   auto default_duration = std::max<uint64_t>(kt_get_default_duration(track), 1);
   auto rate             = mtx::frame_timing::determine_frame_rate(default_duration);
   if (!rate)
-    rate                = int64_rational_c{1'000'000'000ll, default_duration};
+    rate                = int64_rational_c{1'000'000'000ll, static_cast<int64_t>(default_duration)};
   m_frame_rate_num      = rate.numerator();
   m_frame_rate_den      = rate.denominator();
 
