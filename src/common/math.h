@@ -41,6 +41,7 @@ count_1_bits(uint64_t value) {
 uint64_t round_to_nearest_pow2(uint64_t value);
 int int_log2(uint64_t value);
 double int_to_double(int64_t value);
+int64_rational_c clamp_values_to(int64_rational_c const &r, int64_t max_value);
 
 // Converting unsigned int types to signed ints assuming the
 // underlying bits in memory should represent the 2's complement of a
