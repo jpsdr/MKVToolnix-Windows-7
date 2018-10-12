@@ -268,6 +268,12 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
   Util::setToolTip(ui->cbMAutoClearFileTitle, QY("If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."));
 
+  Util::setToolTip(ui->lwMPredefinedTrackNames,
+                   Q("%1 %2 %3")
+                   .arg(QY("If you often use the same names for tracks, you can enter them here."))
+                   .arg(QY("The names will be available for easy selection in both the multiplexer and the header editor."))
+                   .arg(QY("You can still enter track names not present in this list manually in both tools.")));
+
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
                    Q("%1 %2")
                    .arg(QY("When a file is added its name is scanned."))
