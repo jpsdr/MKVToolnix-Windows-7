@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-10-09 20:39+0200\n"
+"POT-Creation-Date: 2018-10-12 09:57+0200\n"
 "PO-Revision-Date: 2018-08-26 13:51+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -1050,7 +1050,7 @@ msgstr " (位置 %1%)"
 msgid " at 0x%|1$x|"
 msgstr " 位于 0x%|1$x|"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:963
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:978
 #, no-c-format
 msgid " day"
 msgid_plural " days"
@@ -1063,7 +1063,7 @@ msgstr[0] " 天"
 msgid " done\n"
 msgstr " 完成\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:957
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:972
 #, no-c-format
 msgid " second"
 msgid_plural " seconds"
@@ -2572,7 +2572,7 @@ msgstr ""
 "随机生成的唯一 ID (128 位)，\n"
 "用来在众多剪辑中识别当前剪辑。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
 msgid "A regular expression is used for matching the file name against a list of recognized languages limited by characters such as '.' or '['…']'."
 msgstr "正则表达式由「.」「[...]」等限定字符构成，用于将文件名与可识别的语言代码相匹配。"
 
@@ -2770,12 +2770,12 @@ msgstr "添加变量(&V)"
 msgid "Add additional command line options for mkvmerge"
 msgstr "添加 mkvmerge 的额外命令行选项"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:643
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:654
 #, no-c-format
 msgid "Add all files as new attachments to the current tab"
 msgstr "全部作为新的附件添加到当前标签页"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:609
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:615
 #, no-c-format
 msgid "Add all files to the current multiplex settings"
 msgstr "全部作为输入文件添加到当前混流设置页面"
@@ -3071,8 +3071,8 @@ msgstr "所有单位均以 1024 为底 (G = 1024^3，M = 1024^2，K = 1024)。"
 msgid "Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
 msgstr "允许以 Video-for-Windows 兼容模式存储 AVC/h.264 视频，例如从 AVI 文件中读取时。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:680
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:701
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:691
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:712
 #, no-c-format
 msgid "Also if the language is 'undetermined' ('und')"
 msgstr "语言为“未指定”('und') 时也使用该语言"
@@ -3098,8 +3098,8 @@ msgstr "启动任务后立刻切换到“任务输出”工具(&S)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1640
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:144
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:105
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:608
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:641
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:614
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:652
 #, no-c-format
 msgid "Always ask the user"
 msgstr "总是询问用户"
@@ -3198,7 +3198,7 @@ msgstr "此处的所有选项将被添加到 mkvmerge 命令行的末尾。"
 msgid "Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode."
 msgstr "根据当前模式的不同，其余文件名将作为混流的输入文件添加，或在章节编辑器或头部编辑器中打开。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:435
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:441
 #, no-c-format
 msgid "Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab."
 msgstr "除了每次均询问以外，您可以选择让 GUI 总是将拖入的文件在新标签页打开，或作为新的附件添加到当前标签页。"
@@ -3477,7 +3477,7 @@ msgstr "不能同时设置宽高比 和 '--display-dimensions'。\n"
 msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
 msgstr "不能同时使用宽高比系数和 '--display-dimensions'。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:665
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:676
 #, no-c-format
 msgid "Bottom"
 msgstr "底部"
@@ -3588,7 +3588,7 @@ msgstr "无法将 CodecID 为 '%2%' 的轨道 %1% 写入文件 '%3%'，因为 Co
 
 #: src/extract/xtr_avi.cpp:50
 #: src/extract/xtr_base.cpp:73
-#: src/extract/xtr_ivf.cpp:57
+#: src/extract/xtr_ivf.cpp:55
 #: src/extract/xtr_textsubs.cpp:295
 #, boost-format
 msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because track %4% with the CodecID '%5%' is already being written to the same file.\n"
@@ -3624,12 +3624,12 @@ msgstr "使 mkvmerge 向不包含时长字段的 VobSub 字幕包添加“停止
 msgid "Certain file formats have 'title' property."
 msgstr "某些文件格式拥有“标题”属性。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:336
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:352
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:358
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:364
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:370
 msgid "Certain file formats have a 'language' property for their tracks."
 msgstr "某些文件格式中的轨道拥有“语言”属性。"
 
@@ -3864,7 +3864,7 @@ msgstr "检查可用更新"
 msgid "Check online for available &updates"
 msgstr "联机检查可用更新(&U)"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:281
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:287
 #, no-c-format
 msgid "Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files."
 msgstr "选择该选项后，添加文件时程序会默认将所有轨道的压缩方式设为 none (不做额外压缩)。"
@@ -4208,12 +4208,12 @@ msgstr "为每个文件新建混流设置页面(&E)"
 msgid "Create new settings"
 msgstr "新建设置"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:610
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:616
 #, no-c-format
 msgid "Create one new multiplex settings tab and add all files there"
 msgstr "新建一个混流设置标签页，并添加所有文件"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:611
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:617
 #, no-c-format
 msgid "Create one new multiplex settings tab for each file"
 msgstr "为每个文件新建一个混流设置标签页"
@@ -4591,15 +4591,15 @@ msgstr "删除该属性的所有条目"
 msgid "Delete one or more attachments"
 msgstr "删除一个或多个附件"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:355
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:361
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:367
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:373
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "根据下面的设置，可以在输入文件中的语言为“未指定”(“und”) 时使用此处设置的语言。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:327
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:333
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:339
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:345
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
 msgstr "根据此设置，源文件中语言为「未指定」('und') 时，语言也可从文件名称中推得。"
 
@@ -4992,7 +4992,7 @@ msgstr "版本标记有序"
 msgid "Edition/Chapter"
 msgstr "版本/章节"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1043
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1058
 #, no-c-format
 msgid "Either fix the error or remove the configuration before closing the preferences dialog."
 msgstr "关闭偏好设置对话框前，请先修正错误，或将配置移除。"
@@ -5097,7 +5097,7 @@ msgstr "确保文件名唯一(&U)"
 msgid "Enter job description"
 msgstr "输入任务描述"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:885
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:896
 #, no-c-format
 msgid "Enter predefined track name"
 msgstr ""
@@ -5227,7 +5227,7 @@ msgstr "错误: vorbis_packetizer: 无法从初始封包中提取流参数。\n"
 msgid "Errors:"
 msgstr "错误消息:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:624
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:630
 #, no-c-format
 msgid "Even if no audio tracks are present"
 msgstr ""
@@ -5521,7 +5521,7 @@ msgstr "文件大小"
 msgid "File structure warning"
 msgstr "文件结构警告"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:287
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:293
 #, no-c-format
 msgid "File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."
 msgstr "部分文件类型，如 MPEG 节目流及传输流 (.vob, .m2ts)，需要解析一定量的数据，方可侦测出文件中所包含的所有轨道。"
@@ -5872,12 +5872,12 @@ msgstr "休眠计算机"
 msgid "Hidden"
 msgstr "隐藏"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:533
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:539
 #, no-c-format
 msgid "Higher priority"
 msgstr "较高优先级"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:532
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:538
 #, no-c-format
 msgid "Highest priority"
 msgstr "最高优先级"
@@ -5926,7 +5926,7 @@ msgstr "IVF (AV1, VP8, VP9)"
 msgid "If a character set is selected here, it will be used instead of asking the user."
 msgstr "若此处选中了字符集，则将使用指定值而不会去询问用户。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:369
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:375
 #, no-c-format
 msgid "If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."
 msgstr "如果在此处选择了一个字符集，程序会自动将其设置为新添加的文本字幕轨道的字符集。"
@@ -5956,7 +5956,7 @@ msgstr "若起始时间戳未指定，则将使用前一范围的终止时间戳
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "若选中了这些复选框，则将在符合特定条件时执行对应操作。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:623
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:629
 #, no-c-format
 msgid "If audio tracks are present but none is enabled"
 msgstr ""
@@ -5972,13 +5972,13 @@ msgstr "若同时启用了平移与乘法选项，则将在乘法运算之前执
 msgid "If checked, additional buttons for moving selected entries up and down will be shown next to several list views."
 msgstr "如果勾选该选项，一些列表视图旁将会显示额外的上移下移按钮。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:415
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:421
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:427
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:433
 msgid "If checked, only the list of often used entries will be included in the selections in the program."
 msgstr "若选中本项，则程序中各处下拉菜单将只包含常用条目。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:394
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:400
 #, no-c-format
 msgid "If checked, the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."
 msgstr "如果勾选该选项，程序将确保默认的输出文件名唯一，必要时将在文件名末尾添加数字，如“ (1)”。"
@@ -5998,12 +5998,12 @@ msgstr "如果勾选该选项，程序在关闭或重新加载已被修改的标
 msgid "If disabled, the GUI will let you enter a description for a job when adding it to the queue."
 msgstr "如果取消勾选，将任务添加到队列时程序将要求您输入任务描述。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:276
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:282
 #, no-c-format
 msgid "If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."
 msgstr "如果勾选该选项，添加时所有字幕轨道的“默认轨道”标记将被设置为“否”。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:283
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:289
 #, no-c-format
 msgid "If enabled, removal of dialog normalization gain will be enabled for all audio tracks for which removal is supported."
 msgstr "若启用，则将为所有支持增益移除的音频轨道启用对白正规化增益移除。"
@@ -6019,7 +6019,7 @@ msgstr "如果勾选该选项，每当启动任务时 (如点击“开始混流�
 msgid "If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."
 msgstr "若启用本项，GUI 将移除早于已配置天数的已完成任务，并且不考虑其退出状态码。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:293
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:299
 #, no-c-format
 msgid "If enabled, the destination file name controls will always be visible no matter which tab is currently shown."
 msgstr "如果勾选该选项，无论当前显示的是哪个选项卡，输出文件名控件将总是可见。"
@@ -6049,9 +6049,9 @@ msgstr "如果勾选该选项，程序将联网检查主页上是否有 MKVToolN
 msgid "If enabled, the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."
 msgstr "如果勾选该选项，所有任务的警告与错误计数器及状态栏中的全局计数器将在程序退出时被清零。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:405
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:406
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:411
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:412
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:413
 #, no-c-format
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
 msgstr "如果勾选该选项，此类型的轨道总被选中用于复制，不论何种语言。"
@@ -6065,7 +6065,7 @@ msgstr "如果提供的 UID 数量少于生成的剪辑数，则将为剩余剪�
 msgid "If given then you may use up to nine digits after the decimal point."
 msgstr "如果给出，则小数点后最多可以使用九位数。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:274
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:280
 #, no-c-format
 msgid "If it contains the word 'DELAY' followed by a number, this number is automatically put into the 'delay' input field for any audio track found in the file."
 msgstr "如果包含单词“DELAY”且后面接着一个数字，这个数字将被自动填写到该文件中的所有音频轨道的“延迟”输入框。"
@@ -6134,15 +6134,15 @@ msgstr "如果使用了 -1 这一特殊数值，则即使在有视频轨道存�
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "如果数字后紧接着 ms 则表示在每个簇中最多置入 n 毫秒的数据。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:338
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:344
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
 msgstr "若源文件的字幕轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:332
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:338
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
 msgstr "若源文件的视频轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:326
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:332
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
 msgstr "若源文件的音频轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
 
@@ -6151,21 +6151,21 @@ msgstr "若源文件的音频轨道没有此属性，但文件名匹配特定规
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr "若没有此类章节，则将使用上级章节的终止时间戳。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:384
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:390
 #, no-c-format
 msgid "If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."
 msgstr "如果勾选该选项且当前没有设置输出文件名，程序会在添加输入文件时自动填写输出文件名。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:389
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:395
 #, no-c-format
 msgid "If this option is enabled, only source files containing video tracks will be used for setting the destination file name."
 msgstr "如果勾选该选项，则只有包含视频轨道的输入文件才被用于设置输出文件名称。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:402
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:408
 msgid "If this option is enabled, only those tracks will be set to be copied whose language is selected below."
 msgstr "如果勾选该选项，则只有下面选中语言的轨道将被选中用于复制。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:396
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:402
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."
 msgstr "若启用本项，GUI 将在最后一个输入文件被移除时自动清除“输出文件名”输入框。"
@@ -6175,7 +6175,7 @@ msgstr "若启用本项，GUI 将在最后一个输入文件被移除时自动�
 msgid "If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."
 msgstr "若启用本项，GUI 将在最后一个输入文件被移除时自动清空“文件标题”输入框。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:289
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:295
 #, no-c-format
 msgid "If tracks are known to be present but not found, the percentage to probe can be changed here."
 msgstr "如果已知轨道存在，但未能找到，可以在此更改探测百分比。"
@@ -6193,6 +6193,11 @@ msgstr "如果再添加一个相同输出文件的任务，则先前任务创建
 #: src/mkvtoolnix-gui/merge/output.cpp:163
 msgid "If you leave this empty then there is no limit for the number of files mkvmerge might create."
 msgstr "如果该项留空，则 mkvmerge 生成的文件数量不受限制。"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:273
+#, no-c-format
+msgid "If you often use the same names for tracks, you can enter them here."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:160
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
@@ -6229,7 +6234,7 @@ msgstr "文件及轨道列表下方的选项卡面板(&W)"
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
 msgstr "按固定间距: 章节按固定间距生成，如每 30 秒为一章。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:301
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:307
 msgid "In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."
 msgstr "最精简的布局下，轨道属性控件位于文件及轨道列表的右侧，可滚动的一列。"
 
@@ -6523,9 +6528,9 @@ msgstr "秒值无效: %1%"
 msgid "Invalid selector in '%1% %2%'.\n"
 msgstr "'%1% %2%' 中的选择器无效。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1003
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1015
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1038
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1018
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1030
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1053
 #, no-c-format
 msgid "Invalid settings"
 msgstr "无效设置"
@@ -6821,7 +6826,7 @@ msgstr "布局"
 msgid "Leave additional space (EbmlVoid) in the destination file after the chapters."
 msgstr "在输出文件的章节后预留额外的空隙 (EbmlVoid)。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:666
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:677
 #, no-c-format
 msgid "Left"
 msgstr "左侧"
@@ -6899,12 +6904,12 @@ msgstr "列出目录「%2」中文件「%1」的内容"
 msgid "Loading…"
 msgstr "正在加载…"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:536
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:542
 #, no-c-format
 msgid "Lower priority"
 msgstr "较低优先级"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:537
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:543
 #, no-c-format
 msgid "Lowest priority"
 msgstr "最低优先级"
@@ -7232,7 +7237,7 @@ msgstr "多于一条的轨道被追加到文件 %2% ('%3%') 中的轨道 %1%。'
 msgid "More than one track with the track number %1% found.\n"
 msgstr "轨道编号为 %1% 的轨道多于一条。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:311
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
 msgid "Most of the other settings on the output tab will be kept intact, though."
 msgstr "而“输出”选项卡中的多数其他设置将会保留。"
 
@@ -7330,8 +7335,8 @@ msgstr "名称"
 msgid "Negative values are allowed."
 msgstr "可以为负值。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:622
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:678
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:628
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:689
 #, no-c-format
 msgid "Never"
 msgstr "从不"
@@ -7582,7 +7587,7 @@ msgstr "遇到非十六进制数字。"
 msgid "Nor&mal output:"
 msgstr "普通消息(&M):"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:535
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:541
 #, no-c-format
 msgid "Normal priority"
 msgstr "常规优先级"
@@ -7602,7 +7607,7 @@ msgstr "通常 mkvmerge 不会更改存储在视频码流中的计时信息 (帧
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
 msgstr "通常 mkvmerge 会保留 MPEG4 视频码流中的宽高比信息并将此信息置于容器中。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:280
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:286
 #, no-c-format
 msgid "Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."
 msgstr "通常 mkvmerge 会对特定编码的字幕轨道进行额外的无损压缩。"
@@ -7691,7 +7696,7 @@ msgstr "注意，在 Windows 平台，路径名称中的反斜杠 (\\) 也可以
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "注意，与 '%1%' 存储相关的 Matroska 规范尚未定稿。因此 mkvmerge 对它的支持可能发生变动，在此采用 CodecID '%2%/EXPERIMENTAL' 代替 '%2%'。本警告消息将在规范定稿且 mkvmerge 随之更新后取消。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:404
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:410
 msgid "Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files)."
 msgstr "注意，无法确定语言的轨道 (如从 SRT 文件读取的字幕) 会被作为 'Undetermined (und)' 对待。"
 
@@ -7761,7 +7766,7 @@ msgid "Only %1% chapter found in source files & chapter files."
 msgid_plural "Only %1% chapters found in source files & chapter files."
 msgstr[0] "输入文件及章节文件中只有 %1% 个章节。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:346
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:352
 msgid "Only English language names are supported."
 msgstr "仅支持英语标注的语言名称。"
 
@@ -7781,13 +7786,13 @@ msgstr "仅 I 帧"
 msgid "Only if the job completed successfully"
 msgstr "仅在成功完成后移除"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:679
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:700
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:690
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:711
 #, no-c-format
 msgid "Only if the source doesn't contain a language"
 msgstr "仅当输入文件中不含语言信息时"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:398
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:404
 #, no-c-format
 msgid "Only items whose type is in the 'selected' list on the right will be set to be copied by default."
 msgstr "只有右侧「选中」列表范围内类型的项目会默认选中用于复制。"
@@ -7832,7 +7837,7 @@ msgstr "仅允许有一个输入文件。\n"
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "为文件 %1% ('%2%') 指定的追加映射不完整。请完整指定需要复制的所有轨道的映射，或不指定任何映射 (此时将使用默认映射)。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:380
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:386
 #, no-c-format
 msgid "Only playlists whose duration are at least this long are considered and offered to the user for selection."
 msgstr "只将时长大于或等于该长度的播放列表提供给用户进行选择。"
@@ -7846,7 +7851,7 @@ msgstr "仅显示内容的摘要，而不显示每个元素。"
 msgid "Only the first %1 bytes are shown."
 msgstr "仅显示开头 %1 字节。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:354
 #, no-c-format
 msgid "Only the languages in the 'selected' list on the right will be recognized as track languages in file names."
 msgstr "只有右侧「选中」列表范围内的语言可从文件名中识别为轨道语言。"
@@ -7856,7 +7861,7 @@ msgstr "只有右侧「选中」列表范围内的语言可从文件名中识别
 msgid "Only to the first destination file"
 msgstr "仅首个输出文件"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:409
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:415
 #, no-c-format
 msgid "Only tracks with a language in this list will be set to be copied by default."
 msgstr "只有语言在此列表中的轨道将默认用于复制。"
@@ -7887,7 +7892,7 @@ msgstr "通过「信息工具」菜单、下方按钮打开 Matroska 或 WebM �
 msgid "Open a file via the \"chapter editor\" menu, the buttons below or drag & drop one here."
 msgstr "通过“章节编辑器”菜单、下方的按钮或拖放来打开文件。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:642
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:653
 #, no-c-format
 msgid "Open all files as tabs in the header editor"
 msgstr "在头部编辑器中将所有文件作为新标签页打开"
@@ -7976,7 +7981,7 @@ msgstr "有序"
 msgid "Original value:"
 msgstr "原始值:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:390
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:396
 #, no-c-format
 msgid "Other files are ignored when they're added."
 msgstr "添加时将忽略其他文件。"
@@ -7991,13 +7996,13 @@ msgstr "其他选项"
 msgid "Other parts of the file (e.g. a subtitle track) may refer to this attachment via this name."
 msgstr "文件的其他部分 (如: 字幕轨) 可通过该名称引用此附件。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:416
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:422
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:428
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:434
 msgid "Otherwise the often used entries will be included first and the full list of all entries afterwards."
 msgstr "否则常用条目将排在前面，包含所有条目的完整列表将排在后面。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:294
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:300
 #, no-c-format
 msgid "Otherwise they're shown on the 'output' tab."
 msgstr "否则它们会在“输出”选项卡中显示。"
@@ -8135,7 +8140,7 @@ msgstr[0] "长度小于 %1 秒的播放列表将会被忽略。"
 msgid "Please enter the new job's description."
 msgstr "请输入新任务的描述。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:885
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:896
 #, fuzzy, no-c-format
 msgid "Please enter the new predefined track name."
 msgstr "请输入新任务的描述。"
@@ -8710,12 +8715,12 @@ msgstr "重新同步失败: 未发现有效的 Matroska 1 层级元素。\n"
 msgid "Resyncing successful at position %1%.\n"
 msgstr "成功重新同步于 %1%。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:347
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:353
 #, no-c-format
 msgid "Revert the regular expression to its default value."
 msgstr "将正则表达式恢复为默认值。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:667
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:678
 #, no-c-format
 msgid "Right"
 msgstr "右侧"
@@ -9028,7 +9033,7 @@ msgstr "选择章节文件"
 msgid "Select character set"
 msgstr "选择字符集"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:898
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:913
 #, no-c-format
 msgid "Select destination directory"
 msgstr "选择输出目录"
@@ -9726,17 +9731,17 @@ msgstr "FPS 为 0.0 且读取器未提供封包的时间戳。%1%\n"
 msgid "The FourCC must be exactly four characters long in '%1% %2%'.\n"
 msgstr "'%1% %2%' 中的 FourCC 长度必须为 4 个字符。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
 #, no-c-format
 msgid "The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those."
 msgstr "GUI 也可以每次都询问用户执行什么操作，例如追加而非添加，或新建混流设置页面并将文件添加进去。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:320
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:326
 #, no-c-format
 msgid "The GUI can ask for confirmation when you're about to create a file without audio tracks in it."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:307
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 msgid "The GUI can help you start your next multiplex settings after having started a job or having added a one to the job queue."
 msgstr "在任务启动或已添加到队列时，GUI 可为您准备下一个混流设置页面。"
 
@@ -9975,7 +9980,7 @@ msgstr "如果指定了章节 UID，则必须为数字。"
 msgid "The chapter editor needs to know the character set a text chapter file uses in order to display all characters properly."
 msgstr "章节编辑器需要知道文本章节文件所用的字符集方可正确显示所有字符。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:424
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:430
 #, no-c-format
 msgid "The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."
 msgstr "右侧“选中”列表中的字符集将会显示在程序中所有字符集下拉列表的顶部。"
@@ -10035,7 +10040,7 @@ msgstr "配置已保存。"
 msgid "The correction file header was not read correctly.\n"
 msgstr "校正文件头部未能正确读取。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:418
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:424
 #, no-c-format
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "右侧“选中”列表中的国家将会显示在程序中所有国家下拉列表的顶部。"
@@ -10058,7 +10063,7 @@ msgstr "轨道 %1% 的索引将被写入到 '%2%'。\n"
 msgid "The current mode can be changed with --multiplex, --edit-chapters or --edit-headers."
 msgstr "可以使用 --multiplex、 --edit-chapters 或 --edit-headers 更改当前模式。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:309
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:315
 msgid "The current multiplex settings will be closed."
 msgstr "当前混流设置页面将被关闭。"
 
@@ -10075,12 +10080,12 @@ msgstr "文件中的数据已损坏，无法安全修改"
 msgid "The date the file was created."
 msgstr "文件创建的日期。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
 #, no-c-format
 msgid "The default is to always add all the files to the current multiplex settings."
 msgstr "默认为总将全部文件添加到当前混流设置页面。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:434
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:440
 #, no-c-format
 msgid "The default is to ask the user what to do with the dropped files."
 msgstr "默认询问用户如何处理正被拖入的文件。"
@@ -10166,7 +10171,7 @@ msgstr "无法解析终止时间: %1"
 msgid "The end time must be greater than the start time."
 msgstr "终止时间必须大于起始时间。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:349
 msgid "The expression must contain at least one pair of capturing parenthesis."
 msgstr "表达式至少应不含一组捕获圆括号。"
 
@@ -10467,7 +10472,7 @@ msgstr "首个文件不能作为追加文件，因为没有文件供其追加。
 msgid "The first mode extracts some tracks to external files."
 msgstr "第一种模式用于将指定轨道提取到外部文件。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:344
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:350
 msgid "The first non-empty capturing parenthesis will be used as the language."
 msgstr "第一个非空的捕获圆括号将作为语言。"
 
@@ -10480,7 +10485,7 @@ msgstr "支持以下模式:"
 msgid "The following non-recoverable error was found: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:345
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:351
 msgid "The following placeholders can be used to match the list of recognized languages: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' and '<LANGUAGE_NAMES>'."
 msgstr "以下占位符可用于匹配可识别的语言列表: 「<ISO_639_1_CODES>」「<ISO_639_2_CODES>」以及「<LANGUAGE_NAMES>」。"
 
@@ -10516,7 +10521,7 @@ msgstr "格式不匹配。"
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
 msgstr "第四种模式用于提取章节，并将其转换为 XML，写入到输出文件中。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:385
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:391
 #, no-c-format
 msgid "The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file."
 msgstr "生成的输出文件名的名称部分（基本文件名）与输入文件相同，扩展名根据文件中的轨道类型决定。"
@@ -10534,7 +10539,7 @@ msgstr "头部数值未被修改。无需保存。"
 msgid "The height of the two tracks is different: %1% and %2%"
 msgstr "两条轨道的高度不同: %1% 与 %2%"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:303
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:309
 msgid "The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window."
 msgstr "水平的固定两列布局，其窗口较宽；纵向的选项卡布局，其窗口较长。"
 
@@ -10557,15 +10562,15 @@ msgstr "新创建章节的语言可通过上方的章节语言控件设置。"
 msgid "The language for this track that players can use for automatic track selection and display for the user."
 msgstr "该轨道的语言，播放器可以用来进行自动轨道选择，及向用户显示。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:354
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:360
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
 msgstr "此处选择的语言用于源文件中未指定语言属性、且无法从文件名中推断语言的音频轨道。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:366
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:372
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
 msgstr "此处选择的语言用于源文件中未指定语言属性、且无法从文件名中推断语言的字幕轨道。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:360
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:366
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
 msgstr "此处选择的语言用于源文件中未指定语言属性、且无法从文件名中推断语言的视频轨道。"
 
@@ -10573,7 +10578,7 @@ msgstr "此处选择的语言用于源文件中未指定语言属性、且无法
 msgid "The language set here is also used when chapters are generated."
 msgstr "这里设置的语言也将在生成章节时使用。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:412
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:418
 #, no-c-format
 msgid "The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."
 msgstr "右侧“选中”列表中的语言将会显示在程序中所有语言下拉列表的顶部。"
@@ -10597,7 +10602,7 @@ msgstr "可以使用字母 'G'、'M' 和 'K' 分别表示吉/兆/千字节。"
 msgid "The line %1% of the timestamp file '%2%' does not contain a valid floating point number.\n"
 msgstr "时间戳文件 '%2%' 的第 %1% 行不包含有效的浮点数。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1016
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1031
 #, no-c-format
 msgid "The list of recognized track languages in file names must not be empty."
 msgstr "文件名中可识别轨道语言的列表不能为空。"
@@ -10676,6 +10681,11 @@ msgstr "写入文件所用的应用程序或库的名称。"
 msgid "The name of the destination file '%1%' and of one of the source files is the same."
 msgstr "输出文件“%1%”的名称与输入文件之一相同。"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:274
+#, no-c-format
+msgid "The names will be available for easy selection in both the multiplexer and the header editor."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:1763
 #, boost-format
 msgid "The next UID was already given in '%1% %2%'.\n"
@@ -10749,7 +10759,7 @@ msgstr "选项 '--meta-seek-size' 已不受支持。请阅读 mkvmerge 的文档
 msgid "The option file has been created."
 msgstr "选项文件已创建。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:371
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:377
 #, no-c-format
 msgid "The options entered here are set for all new multiplex jobs by default."
 msgstr "此处输入的选项将默认应用到所有新建的混流任务。"
@@ -10758,7 +10768,7 @@ msgstr "此处输入的选项将默认应用到所有新建的混流任务。"
 msgid "The order of the various options is not important."
 msgstr "不必在意各选项的顺序。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:302
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:308
 msgid "The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."
 msgstr "另外还有两种布局可选: 文件及轨道列表右侧固定两列，或位于下方的选项卡面板。"
 
@@ -10831,7 +10841,7 @@ msgstr "原因未知。"
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."
 msgstr "可以识别的格式为“YYYY-mm-ddTHH:MM:SS+zz:zz”: 年，月，日，字母“T”，时，分，秒，UTC 时区偏移; 例如: 2017-03-28T17:28-02:00。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1004
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1019
 #, no-c-format
 msgid "The regular expression for deriving the track language from file names is invalid: %1"
 msgstr "用于从文件名推断轨道语言的正则表达式无效: %1"
@@ -11068,7 +11078,7 @@ msgstr "区块头部中使用的轨道编号。"
 msgid "The track parameters do not match."
 msgstr "轨道参数不匹配。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:300
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:306
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
 msgstr "“输入”选项卡的轨道属性控件，可以以三种不同的方式排列，以适应不同的工作流程。"
 
@@ -11083,7 +11093,7 @@ msgstr "文件“%1%”的类型无法识别。\n"
 msgid "The type of file '%1%' is not supported.\n"
 msgstr "文件“%1%”的类型不受支持。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:376
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:382
 msgid "The user can then select which playlist to actually add."
 msgstr "之后用户可以选择添加哪个播放列表。"
 
@@ -11233,7 +11243,7 @@ msgstr "该 Ogg/OGM 文件包含章节或标题信息。但文件中存储这些
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
 msgstr "该 Ogg/OGM 文件包含章节但无法解析。这可能是由于没有正确设置字符集，或章节条目与预期的 SRT 风格格式不匹配。\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:288
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:294
 #, no-c-format, no-boost-format
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
 msgstr "探测数据量为输入文件大小的 0.3% 或 10 MB，取其中较高者。"
@@ -11250,7 +11260,7 @@ msgstr[0] "该音频轨道在时间戳 %2% 之前包含 %1% 字节的无效数�
 msgid "This causes bigger overhead but allows precise seeking and extraction."
 msgstr "这会增大开销，但能够允许精确跳转定位和提取。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1041
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1056
 #, no-c-format
 msgid "This configuration is currently invalid."
 msgstr "该配置目前无效。"
@@ -11317,7 +11327,7 @@ msgstr "GUI 用来准确定位该配置的字面名称。"
 msgid "This is done at startup and at most once within 24 hours."
 msgstr "新版本检查在程序启动时进行，每 24 小时至多检查一次。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:395
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:401
 #, no-c-format
 msgid "This is done only if there is already a file whose name matches the unmodified destination file name."
 msgstr "仅当已存在同名文件时会添加。"
@@ -11346,7 +11356,7 @@ msgstr "这是播放器将作为此影片的“主标题”显示的标题。"
 msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers."
 msgstr "该元素在 MPEG-1/-2 视频轨道等处用于存储序列头部。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:377
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:383
 msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "该功能在同目录下存在较多播放列表且无法快速判断播放列表包含的内容 (正片、花絮等) 时比较有用，例如蓝光影碟。"
 
@@ -11537,7 +11547,7 @@ msgstr "标题"
 msgid "To all destination files"
 msgstr "所有输出文件"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:664
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:675
 #, no-c-format
 msgid "Top"
 msgstr "顶部"
@@ -11703,7 +11713,7 @@ msgstr "轨道类型"
 msgid "Tracks"
 msgstr "轨道"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:408
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:414
 #, no-c-format
 msgid "Tracks with a language in this list will be set not to be copied by default."
 msgstr "语言在此列表中的轨道默认设为不复制。"
@@ -12379,12 +12389,12 @@ msgstr "当拖放文件时(&D):"
 msgid "When &finished…"
 msgstr "完成时(&F)…"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:273
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
 #, no-c-format
 msgid "When a file is added its name is scanned."
 msgstr "当文件被添加时，其文件名会被扫描。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:401
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
 msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "添加输入文件时，通常所有轨道都会设为将要复制到输出文件。"
 
@@ -12396,21 +12406,21 @@ msgstr "在追加文件时: 文件开头为第一章，随后每追加一个文�
 msgid "When the user adds a file containing such a title, the program will copy the title into the \"file title\" input box if this option is enabled."
 msgstr "如果勾选该选项，当用户添加包含该属性的文件时，程序会将标题复制到“文件标题”输入框中。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:325
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:331
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:337
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:353
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:359
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:365
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:371
 msgid "When the user adds such a file the track's language input is set to the language property from the source file."
 msgstr "用户添加此类文件时，轨道语言信息将从输入文件的语言属性中获取。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:433
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:439
 #, no-c-format
 msgid "When the user drags & drops files from an external application onto a header editor tab the GUI can take different actions."
 msgstr "当用户将文件从外部应用程序拖放到头部编辑器标签页时，GUI 可以执行不同的操作。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:316
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:322
 #, no-c-format
 msgid "When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."
 msgstr "当用户从外部程序中拖放文件到混流工具时，程序可以进行不同的操作。"
@@ -12419,7 +12429,7 @@ msgstr "当用户从外部程序中拖放文件到混流工具时，程序可以
 msgid "When to execute:"
 msgstr "执行条件:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:375
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:381
 msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr "当用户添加播放列表时，程序可以在文件所在目录扫描其他播放列表，并显示扫描到的播放列表的详细信息。"
 
@@ -12459,15 +12469,15 @@ msgstr "Windows 媒体 (ASF/WMV)"
 msgid "Windows Television DVR"
 msgstr "Windows 电视录像（DVR）"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:312
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 msgid "With \"close current settings\" the current multiplex settings will be closed without opening new ones."
 msgstr "若设为“关闭当前设置页”，当前混流设置页面将被关闭，并且不会打开新页面。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:308
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:314
 msgid "With \"create new settings\" a new set of multiplex settings will be added."
 msgstr "若设为“新建设置页”，将新建一组混流设置。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:310
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:316
 msgid "With \"remove source files\" all source files will be removed."
 msgstr "若设为“移除输入文件”，所有输入文件将会被移除。"
 
@@ -12598,7 +12608,7 @@ msgstr "可以使用 <START:格式> 来控制起始时间戳的格式。"
 msgid "You can download the application from the following URL:"
 msgstr "您可以从以下地址下载该应用程序:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:403
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:409
 msgid "You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."
 msgstr "可以在通过勾选相应复选框解除对某些类型轨道的限制，如视频轨道。"
 
@@ -12635,6 +12645,11 @@ msgstr "'nnnnnnnnn' 最多可以指定九位数字获得纳秒精度，或省略
 #, no-c-format
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
 msgstr "可以基于时长、时间戳、帧/场编号或章节编号进行分割。"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:275
+#, no-c-format
+msgid "You can still enter track names not present in this list manually in both tools."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1304
 #, no-c-format
