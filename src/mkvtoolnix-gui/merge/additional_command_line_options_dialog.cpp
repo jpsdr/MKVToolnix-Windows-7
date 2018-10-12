@@ -85,7 +85,6 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   add(Q("--engage all_i_slices_are_key_frames"),  false, hacks,
       { QY("Some h.264/AVC tracks contain I slices but lack real key frames."),
         QY("This option forces mkvmerge to treat all of those I slices as key frames.") });
-  add(Q("--engage enable_av1"),                   false, hacks, { QY("Enables AV1 video support even though the AV1 bitstream specification hasn't been finalized yet.") });
   add(Q("--engage cow"),                          false, hacks, { QY("No help available.") });
 
   m_ui->gbGlobalOutputControl->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
