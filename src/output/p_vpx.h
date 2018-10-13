@@ -22,6 +22,7 @@ class vpx_video_packetizer_c: public generic_packetizer_c {
 protected:
   int64_t m_previous_timestamp;
   codec_c::type_e m_codec;
+  bool m_is_vp9{};
 
 public:
   vpx_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, codec_c::type_e p_codec);
@@ -35,4 +36,7 @@ public:
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
   virtual bool is_compatible_with(output_compatibility_e compatibility);
+
+protected:
+  virtual void vp9_determine_codec_private(memory_c const &mem);
 };

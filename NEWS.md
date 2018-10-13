@@ -27,6 +27,8 @@
 * mkvextract: IVF extractor (AV1, VP8, VP9): precise values will be used for
   the frame rate numerator & denominator header fields for certain well-known
   values of the track's default duration.
+* mkvmerge: VP9: mkvmerge will now create codec private data according to the
+  VP9 codec mapping described in the WebM specifications. Implements #2379.
 
 
 ## Bug fixes
