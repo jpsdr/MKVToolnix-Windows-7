@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-10-12 17:22+0200\n"
+"POT-Creation-Date: 2018-10-13 16:54+0200\n"
 "PO-Revision-Date: 2018-09-24 11:02+0000\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -6302,12 +6302,12 @@ msgstr "Eranstea edo zati gehigarri bezala gehitzea nahi badituzu zein iturburu 
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "Ezikusten amaiera ondoren hasten den sarrera bat (%1%).\n"
 
-#: src/input/subtitles.cpp:558
+#: src/input/subtitles.cpp:550
 #, boost-format
 msgid "Imported font from %1%"
 msgstr "Hizkia hemendik inportaturik: %1%"
 
-#: src/input/subtitles.cpp:558
+#: src/input/subtitles.cpp:550
 #, boost-format
 msgid "Imported picture from %1%"
 msgstr "Irudia hemendik inportaturik: %1%"
@@ -7120,13 +7120,6 @@ msgstr "AAC kodek abiarazpen datu hondatuak aurkitu dira.\n"
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Kodek id hondatua: '%1%'.\n"
-
-#: src/input/subtitles.cpp:389
-#: src/input/subtitles.cpp:397
-#: src/input/subtitles.cpp:402
-#, boost-format
-msgid "Malformed line? (%1%)\n"
-msgstr "Lerro hondatua? (%1%)\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:451
 #, no-c-format
@@ -8913,6 +8906,11 @@ msgstr "SSA/ASS azpidatziak"
 #: src/common/file_types.cpp:57
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS idazki azpidatziak"
+
+#: src/input/subtitles.cpp:394
+#, boost-format
+msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: %1%\n"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1624
 msgid "Sa&me directory as the first source file"
@@ -11626,7 +11624,7 @@ msgstr "Hau ez litzake gertatu behar. Mesedez jarri harremanetan egilearekin, Mo
 msgid "This template will be used for new chapter entries."
 msgstr "Eredu hau atal sarrera berrientzat erabiliko da."
 
-#: src/input/subtitles.cpp:520
+#: src/input/subtitles.cpp:512
 #: src/output/p_textsubs.cpp:138
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -15506,6 +15504,9 @@ msgstr "– Ezarri ezer ez bezala –"
 #~ "Bide hau berezko bide egiten du bere motentzat (audioa, bideoa, "
 #~ "azpidatziak). Irakurgailuek berezko bide ikurra ezarrita duten bideak "
 #~ "hobetsi beharko lituzkete."
+
+#~ msgid "Malformed line? (%1%)\n"
+#~ msgstr "Lerro hondatua? (%1%)\n"
 
 #~ msgid "Mark this track as 'forced'. Players must play this track."
 #~ msgstr ""

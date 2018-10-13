@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 27.09.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-10-12 17:22+0200\n"
+"POT-Creation-Date: 2018-10-13 16:54+0200\n"
 "PO-Revision-Date: 2018-09-27 10:12+0200\n"
 "Last-Translator: Roberto Boriotti <Roberto.Boriotti@canon-europe.com>\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -6289,12 +6289,12 @@ msgstr "Se vuoi appenderli o aggiungerli come parti aggiuntive devi selezionare 
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "Ignora un elemento che inizia dopo la sua fine (%1%).\n"
 
-#: src/input/subtitles.cpp:558
+#: src/input/subtitles.cpp:550
 #, boost-format
 msgid "Imported font from %1%"
 msgstr "Font importata da %1%"
 
-#: src/input/subtitles.cpp:558
+#: src/input/subtitles.cpp:550
 #, boost-format
 msgid "Imported picture from %1%"
 msgstr "Immagine importata da %1%"
@@ -7107,13 +7107,6 @@ msgstr "Rilevati dati errati inizializzazione codec AAC.\n"
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "ID errato codec '%1%'.\n"
-
-#: src/input/subtitles.cpp:389
-#: src/input/subtitles.cpp:397
-#: src/input/subtitles.cpp:402
-#, boost-format
-msgid "Malformed line? (%1%)\n"
-msgstr "Linea errata? (%1%)\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:451
 #, no-c-format
@@ -8897,6 +8890,11 @@ msgstr "Sottotitoli SSA/ASS"
 #: src/common/file_types.cpp:57
 msgid "SSA/ASS text subtitles"
 msgstr "Sottotitoli SSA/ASS"
+
+#: src/input/subtitles.cpp:394
+#, boost-format
+msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: %1%\n"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1624
 msgid "Sa&me directory as the first source file"
@@ -11590,7 +11588,7 @@ msgstr "Questo non doveva succedere. Contatta l'autore Moritz Bunkus <moritz@bun
 msgid "This template will be used for new chapter entries."
 msgstr "Questo modello verrà usato per i nuovi elementi capitolo."
 
-#: src/input/subtitles.cpp:520
+#: src/input/subtitles.cpp:512
 #: src/output/p_textsubs.cpp:138
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr "Questa traccia testo sottotitoli contiene caratteri a 8 bit non validi all'esterno di sequenze UTF-8 multi-byte valide. Specifica la codifica corretta per questa traccia.\n"
@@ -13989,6 +13987,9 @@ msgstr "-- Imposta a nessuno –"
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "File opzioni MKVToolNix (vecchio formato)"
+
+#~ msgid "Malformed line? (%1%)\n"
+#~ msgstr "Linea errata? (%1%)\n"
 
 #~ msgid "Max BlockAddition ID: %1%"
 #~ msgstr "ID MaxBlocchiAggiunti: %1%"
