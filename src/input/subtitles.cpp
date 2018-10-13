@@ -383,23 +383,15 @@ ssa_parser_c::parse() {
           fields.push_back(""s);
 
         // Parse the start time.
-        std::string stime = get_element("Start", fields);
-        int64_t start     = parse_time(stime);
-        if (0 > start) {
-          mxwarn_tid(m_file_name, m_tid, boost::format(Y("Malformed line? (%1%)\n")) % orig_line);
-          continue;
-        }
+        auto stime = get_element("Start", fields);
+        auto start = parse_time(stime);
+        stime      = get_element("End", fields);
+        auto end   = parse_time(stime);
 
-        // Parse the end time.
-        stime       = get_element("End", fields);
-        int64_t end = parse_time(stime);
-        if (0 > end) {
-          mxwarn_tid(m_file_name, m_tid, boost::format(Y("Malformed line? (%1%)\n")) % orig_line);
-          continue;
-        }
-
-        if (end < start) {
-          mxwarn_tid(m_file_name, m_tid, boost::format(Y("Malformed line? (%1%)\n")) % orig_line);
+        if (   (0     > start)
+            || (0     > end)
+            || (start > end)) {
+          mxwarn_tid(m_file_name, m_tid, boost::format(Y("SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: %1%\n")) % orig_line);
           continue;
         }
 
