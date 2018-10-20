@@ -1,4 +1,4 @@
-# Version ?
+# Version 28.0.0 "Voice In My Head" 2018-10-20
 
 ## New features and enhancements
 
