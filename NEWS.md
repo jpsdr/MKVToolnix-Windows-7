@@ -45,6 +45,10 @@
 * mkvextract: IVF extractor (AV1, VP8, VP8): the frame rate header fields
   weren't clamped to 16 bits properly causing wrong frame rates to be written
   in certain situations.
+* mkvpropedit, MKVToolNix GUI's header editor: fixed file corruption when a
+  one-byte space must be covered with a new EBML void element but all
+  surrounding elements have a "size length" field that's eight bytes long
+  already. Fixes #2406.
 
 
 # Version 27.0.0 "Metropolis" 2018-09-26

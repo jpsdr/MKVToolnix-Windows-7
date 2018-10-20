@@ -603,6 +603,14 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     // front and extend the following element's size field by one
     // byte.
 
+    // If the following element's coded size length is 8 bytes
+    // already, we can make the head smaller instead and move it one
+    // byte up. That leaves a gap of two bytes which we can fill with
+    // an empty new EBML Void element. The variable `move_up` reflects
+    // this; it is true the coded size length is less than 8 bytes and
+    // the element's head can be moved up and false if we have to
+    // shrink it and fill the space with a new EBML void.
+
     ebml_element_cptr e = read_element(m_data[data_idx + 1]);
 
     if (!e) {
@@ -610,82 +618,40 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
       return false;
     }
 
-    // However, this might not work if the element's size was already
-    // eight bytes long.
-    if (8 == e->GetSizeLength()) {
-      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1: following element's size length is 8 bytes already; re-trying with previous element instead\n") % data_idx);
-
-      // In this case try doing the same with the previous
-      // element. The whole element has be moved one byte to the back.
-      e = read_element(m_data[data_idx]);
-      if (!e) {
-        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: could not read previous element\n") % data_idx);
-        return false;
-      }
-
-      std::shared_ptr<EbmlElement> af_e(e);
-
-      // Again the test for maximum size length.
-      if (8 == e->GetSizeLength()) {
-        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: previous element's size length is 8 bytes, too; giving up\n") % data_idx);
-        return false;
-      }
-
-      // Copy the content one byte to the back.
-      unsigned int id_length = EBML_ID_LENGTH(static_cast<const EbmlId &>(*e));
-      uint64_t content_pos   = m_data[data_idx]->m_pos + id_length + e->GetSizeLength();
-      uint64_t content_size  = m_data[data_idx + 1]->m_pos - content_pos - 1;
-      memory_cptr buffer     = memory_c::alloc(content_size);
-
-      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: id_length %2% current_pos %3% content_size %4%\n") % data_idx % id_length % content_pos % content_size);
-
-      m_file->setFilePointer(content_pos);
-      if (m_file->read(buffer, content_size) != content_size) {
-        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: could not read data portion\n") % data_idx);
-        return false;
-      }
-
-      m_file->setFilePointer(content_pos + 1);
-      if (m_file->write(buffer) != content_size) {
-        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: could not write data portion\n") % data_idx);
-        return false;
-      }
-
-      // Prepare the new codec size and write it.
-      binary head[8];           // Class D + 64 bits coded size
-      int coded_size = CodedSizeLength(content_size, e->GetSizeLength() + 1, true);
-      CodedValueLength(content_size, coded_size, head);
-      m_file->setFilePointer(m_data[data_idx]->m_pos + id_length);
-      if (m_file->write(head, coded_size) != static_cast<unsigned int>(coded_size)) {
-        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: could not write new coded size\n") % data_idx);
-        return false;
-      }
-
-      // Update internal structures.
-      m_data[data_idx]->m_size += 1;
-
-      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: all done, new size %2%\n") % data_idx % m_data[data_idx]->m_size);
-
-      return true;
-    }
+    auto move_up = e->GetSizeLength() < 8;
+    auto new_pos = m_data[data_idx + 1]->m_pos + (move_up ? -1 : 1);
 
     binary head[4 + 8];         // Class D + 64 bits coded size
     unsigned int head_size = EBML_ID_LENGTH(static_cast<const EbmlId &>(*e));
     EbmlId(*e).Fill(head);
 
-    int coded_size = CodedSizeLength(e->GetSize(), e->GetSizeLength() + 1, true);
+    int coded_size = CodedSizeLength(e->GetSize(), move_up ? e->GetSizeLength() + 1 : 7, true);
     CodedValueLength(e->GetSize(), coded_size, &head[head_size]);
     head_size += coded_size;
 
     mxdebug_if(s_debug_void,
                boost::format("handle_void_elements(%1%): void_size == 1: writing %2% header bytes at position %3% (ID length %4% coded size length %5% previous size length %6% element size %7%); bytes: %8%\n")
-               % data_idx % head_size % (m_data[data_idx + 1]->m_pos - 1) % (head_size - coded_size) % coded_size % e->GetSizeLength() % e->GetSize() % to_hex(head, head_size));
+               % data_idx % head_size % new_pos % (head_size - coded_size) % coded_size % e->GetSizeLength() % e->GetSize() % to_hex(head, head_size));
 
-    m_file->setFilePointer(m_data[data_idx + 1]->m_pos - 1);
+    m_file->setFilePointer(new_pos);
     m_file->write(head, head_size);
 
-    --m_data[data_idx + 1]->m_pos;
-    ++m_data[data_idx + 1]->m_size;
+    m_data[data_idx + 1]->m_pos   = new_pos;
+    m_data[data_idx + 1]->m_size += move_up ? 1 : -1;
+
+    if (!move_up) {
+      // Need to add an empty new EBML void element.
+      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1: adding new two-byte EBML void element at position %2%\n") % data_idx % (new_pos - 2));
+
+      m_file->setFilePointer(new_pos - 2);
+
+      EbmlVoid evoid;
+      evoid.SetSize(0);
+      evoid.Render(*m_file);
+
+      m_data.insert(m_data.begin() + data_idx + 1, kax_analyzer_data_c::create(EBML_ID(EbmlVoid), new_pos - 2, 2));
+      ++data_idx;
+    }
 
     // Update meta seek indices for m_data[data_idx]'s new position.
     e = read_element(m_data[data_idx + 1]);
