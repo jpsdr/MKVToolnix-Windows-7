@@ -36,6 +36,7 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_read_buffer_io.h"
 #include "common/strings/editing.h"
+#include "common/strings/formatting.h"
 
 using namespace libebml;
 using namespace libmatroska;
@@ -551,10 +552,13 @@ kax_analyzer_c::adjust_segment_size() {
  */
 bool
 kax_analyzer_c::handle_void_elements(size_t data_idx) {
+  static debugging_option_c s_debug_void{"kax_analyzer_handle_void_elements"};
+
   // Is the element at the end of the file? If so truncate the file
   // and remove the element from the data structure if that was
   // requested. Then we're done.
   if (m_data.size() == (data_idx + 1)) {
+    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): element is at end; truncating file\n") % data_idx);
     m_file->truncate(m_data[data_idx]->m_pos + m_data[data_idx]->m_size);
     adjust_segment_size();
     if (0 == m_data[data_idx]->m_size)
@@ -567,11 +571,14 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
   while ((m_data.size() > end_idx) && Is<EbmlVoid>(m_data[end_idx]->m_id))
     ++end_idx;
 
-  if (end_idx > data_idx + 1)
+  if (end_idx > data_idx + 1) {
+    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): %2% void element(s) following; merging\n") % data_idx % (end_idx - data_idx - 1));
+
     // Yes, there is at least one. Remove these elements from the list
     // in order to create a new EbmlVoid element covering their space
     // as well.
     m_data.erase(m_data.begin() + data_idx + 1, m_data.begin() + end_idx);
+  }
 
   // Calculate how much space we have to cover with a void
   // element. This is the difference between the next element's
@@ -580,13 +587,17 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
   int void_size    = m_data[data_idx + 1]->m_pos - void_pos;
 
   // If the difference is 0 then we have nothing to do.
-  if (0 == void_size)
+  if (0 == void_size) {
+    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 0, nothing further to do\n") % data_idx);
     return false;
+  }
 
   // See if we have enough space to fit an EbmlVoid element in. An
   // EbmlVoid element needs at least two bytes (one for the ID, one
   // for the size).
   if (1 == void_size) {
+    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1; move next element's head down one byte & enlarge its size portion\n") % data_idx);
+
     // No. The most compatible way to deal with this situation is to
     // move the element ID of the following element one byte to the
     // front and extend the following element's size field by one
@@ -594,23 +605,31 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
     ebml_element_cptr e = read_element(m_data[data_idx + 1]);
 
-    if (!e)
+    if (!e) {
+      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1: could not read following element\n") % data_idx);
       return false;
+    }
 
     // However, this might not work if the element's size was already
     // eight bytes long.
     if (8 == e->GetSizeLength()) {
+      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1: following element's size length is 8 bytes already; re-trying with previous element instead\n") % data_idx);
+
       // In this case try doing the same with the previous
       // element. The whole element has be moved one byte to the back.
       e = read_element(m_data[data_idx]);
-      if (!e)
+      if (!e) {
+        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: could not read previous element\n") % data_idx);
         return false;
+      }
 
       std::shared_ptr<EbmlElement> af_e(e);
 
       // Again the test for maximum size length.
-      if (8 == e->GetSizeLength())
+      if (8 == e->GetSizeLength()) {
+        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: previous element's size length is 8 bytes, too; giving up\n") % data_idx);
         return false;
+      }
 
       // Copy the content one byte to the back.
       unsigned int id_length = EBML_ID_LENGTH(static_cast<const EbmlId &>(*e));
@@ -618,24 +637,34 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
       uint64_t content_size  = m_data[data_idx + 1]->m_pos - content_pos - 1;
       memory_cptr buffer     = memory_c::alloc(content_size);
 
+      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: id_length %2% current_pos %3% content_size %4%\n") % data_idx % id_length % content_pos % content_size);
+
       m_file->setFilePointer(content_pos);
-      if (m_file->read(buffer, content_size) != content_size)
+      if (m_file->read(buffer, content_size) != content_size) {
+        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: could not read data portion\n") % data_idx);
         return false;
+      }
 
       m_file->setFilePointer(content_pos + 1);
-      if (m_file->write(buffer) != content_size)
+      if (m_file->write(buffer) != content_size) {
+        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: could not write data portion\n") % data_idx);
         return false;
+      }
 
       // Prepare the new codec size and write it.
       binary head[8];           // Class D + 64 bits coded size
       int coded_size = CodedSizeLength(content_size, e->GetSizeLength() + 1, true);
       CodedValueLength(content_size, coded_size, head);
       m_file->setFilePointer(m_data[data_idx]->m_pos + id_length);
-      if (m_file->write(head, coded_size) != static_cast<unsigned int>(coded_size))
+      if (m_file->write(head, coded_size) != static_cast<unsigned int>(coded_size)) {
+        mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: could not write new coded size\n") % data_idx);
         return false;
+      }
 
       // Update internal structures.
       m_data[data_idx]->m_size += 1;
+
+      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1, previous element: all done, new size %2%\n") % data_idx % m_data[data_idx]->m_size);
 
       return true;
     }
@@ -648,6 +677,10 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     CodedValueLength(e->GetSize(), coded_size, &head[head_size]);
     head_size += coded_size;
 
+    mxdebug_if(s_debug_void,
+               boost::format("handle_void_elements(%1%): void_size == 1: writing %2% header bytes at position %3% (ID length %4% coded size length %5% previous size length %6% element size %7%); bytes: %8%\n")
+               % data_idx % head_size % (m_data[data_idx + 1]->m_pos - 1) % (head_size - coded_size) % coded_size % e->GetSizeLength() % e->GetSize() % to_hex(head, head_size));
+
     m_file->setFilePointer(m_data[data_idx + 1]->m_pos - 1);
     m_file->write(head, head_size);
 
@@ -656,6 +689,8 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
     // Update meta seek indices for m_data[data_idx]'s new position.
     e = read_element(m_data[data_idx + 1]);
+
+    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1: element re-read; now removing from meta seeks, merging void elements etc.\n") % data_idx);
 
     remove_from_meta_seeks(EbmlId(*e));
     merge_void_elements();
