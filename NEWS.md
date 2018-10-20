@@ -2,15 +2,6 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: automatic scaling for high DPI displays is activated if the
-  GUI is compiled with Qt ≥ 5.6.0. Fixes #1996 and #2383.
-* MKVToolNix GUI: added a menu item ("Help" → "System information") for
-  displaying information about the system MKVToolNix is running on in order to
-  make debugging easier.
-* mkvmerge: DTS: implemented dialog normalization gain removal for extension
-  substreams. Implements #2377.
-* mkvmerge, mkvextract: simple text subtitles: added a workaround for simple
-  text subtitle tracks that don't contain a duration. Implements #2397.
 * mkvmerge: AV1 parser: updated the code for the finalized AV1 bitstream
   specification. Part of the implementation of #2261.
 * mkvmerge: AV1 packetizer: updated the code for the finalized AV1-in-Matroska
@@ -19,20 +10,31 @@
   again. Part of the implementation of #2261.
 * mkvmerge: MP4 reader: added support for AV1. Part of the implementation of
   #2261.
+* mkvmerge: DTS: implemented dialog normalization gain removal for extension
+  substreams. Implements #2377.
+* mkvmerge, mkvextract: simple text subtitles: added a workaround for simple
+  text subtitle tracks that don't contain a duration. Implements #2397.
 * mkvextract: added support for extracting AV1 to IVF. Part of the
   implementation of #2261.
-* MKVToolNix GUI: multiplexer, header editor: the user can enter a list of
-  predefined track names in the preferences. She can later select from them in
-  "track name" combo box. Implements #2230.
 * mkvextract: IVF extractor (AV1, VP8, VP9): precise values will be used for
   the frame rate numerator & denominator header fields for certain well-known
   values of the track's default duration.
 * mkvmerge: VP9: mkvmerge will now create codec private data according to the
   VP9 codec mapping described in the WebM specifications. Implements #2379.
+* MKVToolNix GUI: automatic scaling for high DPI displays is activated if the
+  GUI is compiled with Qt ≥ 5.6.0. Fixes #1996 and #2383.
+* MKVToolNix GUI: added a menu item ("Help" → "System information") for
+  displaying information about the system MKVToolNix is running on in order to
+  make debugging easier.
+* MKVToolNix GUI: multiplexer, header editor: the user can enter a list of
+  predefined track names in the preferences. She can later select from them in
+  "track name" combo box. Implements #2230.
 
 
 ## Bug fixes
 
+* mkvmerge: JSON identification: fixed a bug when removing invalid UTF-8 data
+  from strings before they're output as JSON. Fixes #2398.
 * mkvmerge: MP4/QuickTime reader: fixed handling of PCM audio with FourCC
   `in24`. Fixes #2391.
 * mkvmerge: MPEG transport stream reader, teletext subtitles: the decision
@@ -40,8 +42,6 @@
   the following frame is made sooner. That avoids problems if there are large
   gaps between teletext subtitle frames which could lead to frames being
   interleaved too late. Fixes #2393.
-* mkvmerge: JSON identification: fixed a bug when removing invalid UTF-8 data
-  from strings before they're output as JSON. Fixes #2398.
 * mkvextract: IVF extractor (AV1, VP8, VP8): the frame rate header fields
   weren't clamped to 16 bits properly causing wrong frame rates to be written
   in certain situations.
