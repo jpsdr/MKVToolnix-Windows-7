@@ -105,6 +105,8 @@
 
 using namespace libmatroska;
 
+#define MTX_WRITING_APP_VER(major, minor, patchlevel, errata) ((major << 24) | (minor << 16) | (patchlevel << 8) | (errata))
+
 #define MAP_TRACK_TYPE(c) (  (c) == 'a' ? track_audio   \
                            : (c) == 'b' ? track_buttons \
                            : (c) == 'v' ? track_video   \
@@ -502,7 +504,7 @@ kax_reader_c::verify_vorbis_audio_track(kax_track_t *t) {
   // are used and add up to too large a value. The result is the
   // usual "timestamp < m_last_timestamp" message.
   // Workaround: do not use durations for such m_tracks.
-  if ((m_writing_app == "mkvmerge") && (-1 != m_writing_app_ver) && (0x07000000 > m_writing_app_ver))
+  if ((m_writing_app == "mkvmerge") && (-1 != m_writing_app_ver) && (MTX_WRITING_APP_VER(7, 0, 0, 0) > m_writing_app_ver))
     t->ignore_duration_hack = true;
 
   return true;
