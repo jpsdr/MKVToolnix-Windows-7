@@ -9,6 +9,9 @@
   Private element the sequence header OBU wasn't copied completely: its common
   data (type field & OBU size among others) was missing. Part of the fix for
   #2410.
+* Matroska reader, AV1: mkvmerge will try to re-create the `av1C` data stored
+  in Codec Private when reading AV1 from Matroska or WebM files created by
+  mkvmerge v28.0.0. Part of the fix for #2410.
 
 
 # Version 28.0.0 "Voice In My Head" 2018-10-20

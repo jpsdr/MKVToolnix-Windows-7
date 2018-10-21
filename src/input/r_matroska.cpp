@@ -1720,13 +1720,10 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
     set_track_packetizer(t, new dirac_video_packetizer_c(this, nti));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
 
-  } else if (t->codec.is(codec_c::type_e::V_AV1)) {
-    set_track_packetizer(t, new av1_video_packetizer_c(this, nti));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
-    t->handle_packetizer_pixel_dimensions();
-    t->handle_packetizer_default_duration();
+  } else if (t->codec.is(codec_c::type_e::V_AV1))
+    create_av1_video_packetizer(t, nti);
 
-  } else if (t->codec.is(codec_c::type_e::V_VP8) || t->codec.is(codec_c::type_e::V_VP9)) {
+  else if (t->codec.is(codec_c::type_e::V_VP8) || t->codec.is(codec_c::type_e::V_VP9)) {
     set_track_packetizer(t, new vpx_video_packetizer_c(this, nti, t->codec.get_type()));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
     t->handle_packetizer_pixel_dimensions();
@@ -1841,6 +1838,22 @@ kax_reader_c::create_flac_audio_packetizer(kax_track_t *t,
 }
 
 #endif  // HAVE_FLAC_FORMAT_H
+
+void
+kax_reader_c::create_av1_video_packetizer(kax_track_t *t,
+                                          track_info_c &nti) {
+  if (   (m_writing_app     == "mkvmerge")
+      && (m_writing_app_ver != -1)
+      && (m_writing_app_ver <= MTX_WRITING_APP_VER(28, 0, 0, 0))) {
+    // mkvmerge 28.0.0 created invalid av1C CodecPrivate data. Let's rebuild it.
+    nti.m_private_data.reset();
+  }
+
+  set_track_packetizer(t, new av1_video_packetizer_c(this, nti));
+  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  t->handle_packetizer_pixel_dimensions();
+  t->handle_packetizer_default_duration();
+}
 
 void
 kax_reader_c::create_hevc_es_video_packetizer(kax_track_t *t,
