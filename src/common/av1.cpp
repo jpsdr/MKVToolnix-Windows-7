@@ -416,18 +416,19 @@ parser_c::parse_obu() {
     return false;
   }
 
-  at_scope_exit_c copy_current_and_seek_to_next_obu([this, start_bit_position, next_obu_bit_position, &keep_obu]() {
+  auto obu = memory_c::borrow(p->buffer.get_buffer() + (start_bit_position / 8), (next_obu_bit_position - start_bit_position) / 8);
+  mtx::bits::reader_c sub_r{obu->get_buffer(), obu->get_size()};
+  sub_r.set_bit_position(r.get_bit_position() - start_bit_position);
+
+  at_scope_exit_c copy_current_and_seek_to_next_obu([this, start_bit_position, next_obu_bit_position, &obu, &keep_obu]() {
     p->r.set_bit_position(next_obu_bit_position);
     if (!keep_obu)
       return;
 
-    auto start = p->buffer.get_buffer() + (start_bit_position / 8);
-    auto size  = (next_obu_bit_position - start_bit_position) / 8;
-
     if (p->current_frame.mem)
-      p->current_frame.mem->add(start, size);
+      p->current_frame.mem->add(*obu);
     else
-      p->current_frame.mem = memory_c::clone(start, size);
+      p->current_frame.mem = obu->clone();
 
     if (p->obu_type == OBU_SEQUENCE_HEADER)
       p->current_frame_contains_sequence_header = true;
@@ -457,9 +458,6 @@ parser_c::parse_obu() {
     keep_obu             = false;
     return true;
   }
-
-  auto obu = memory_c::borrow(p->buffer.get_buffer() + (r.get_bit_position() / 8), static_cast<std::size_t>(*obu_size));
-  mtx::bits::reader_c sub_r{obu->get_buffer(), obu->get_size()};
 
   if (p->obu_type == OBU_SEQUENCE_HEADER) {
     parse_sequence_header_obu(sub_r);
