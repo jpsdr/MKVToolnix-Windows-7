@@ -316,7 +316,8 @@ parser_c::parse_sequence_header_obu(mtx::bits::reader_c &r) {
 
   if (!p->reduced_still_picture_header) {
     p->frame_id_numbers_present_flag = r.get_bit();
-    r.skip_bits(4 + 3);         // delta_frame_id_length_minus2, additional_frame_id_length_minus1
+    if (p->frame_id_numbers_present_flag)
+      r.skip_bits(4 + 3);       // delta_frame_id_length_minus2, additional_frame_id_length_minus1
   }
 
   r.skip_bits(3);               // use_12x128_superblock, enable_filter_intra, enable_intra_edge_filter

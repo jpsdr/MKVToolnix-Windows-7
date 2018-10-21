@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: AV1 parser: fixed an error in the sequence header parser if
+  neither the `reduced_still_picture_header` nor the
+  `frame_id_numbers_present_flag` is set. Part of the fix for #2410.
+
+
 # Version 28.0.0 "Voice In My Head" 2018-10-20
 
 ## New features and enhancements
