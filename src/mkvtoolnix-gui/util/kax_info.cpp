@@ -176,7 +176,7 @@ KaxInfo::doScanLevel1Elements() {
       retain_element(l1);
       ui_show_element(*l1);
 
-      if (upper_lvl_el)
+      if (upper_lvl_el && !kax_file_c::is_global_element_id(EbmlId(*l1)))
         break;
 
       p->m_in->setFilePointer(l1->GetElementPosition() + kax_file_c::get_element_size(*l1));
