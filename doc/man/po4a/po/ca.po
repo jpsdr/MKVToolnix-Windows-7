@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2018-09-23 12:38+0200\n"
-"PO-Revision-Date: 2018-10-12 19:07+0000\n"
+"PO-Revision-Date: 2018-10-22 12:09+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
@@ -2226,7 +2226,7 @@ msgstr "El format de fitxer &matroska; admet estructures de capítols arbitràri
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:850
 msgid "For this splitting mode the output filename is treated differently than for the normal operation. It may contain a <function>printf</function> like expression '<code>%d</code>' including an optional field width, e.g. '<code>%02d</code>'. If it does then the current file number will be formatted appropriately and inserted at that point in the filename.  If there is no such pattern then a pattern of '<code>-%03d</code>' is assumed right before the file's extension: '<code>-o output.mkv</code>' would result in '<code>output-001.mkv</code>' and so on. If there's no extension then '<code>-%03d</code>' will be appended to the name."
-msgstr "En aquest mode de divisió, el nom del fitxer de sortida serà tractat de manera diferent que amb el funcionament normal. Pot contenir un <function>printf</function> com l'expressió «<code>%d</code>», incloent una amplada de camp opcional, p. ex., «<code>%02d</code>». Si es fa després del número del fitxer actual, serà formatat adequadament i inserit en aquest punt del nom del fitxer. Si no hi ha aquest patró, llavors s'assumirà «<code>-%03d</code>» com a patró just abans de l'extensió del fitxer: «<code>-o sortida.mkv</code>» resultaria en «<code>sortida-001.mkv</code>» i així en endavant. Si no hi ha extensió, llavors s'annexarà «<code>-%03d</code>» al nom."
+msgstr "En aquest mode de divisió, el nom del fitxer de sortida serà tractat de manera diferent que amb el funcionament normal. Pot contenir un <function>printf</function> com l'expressió «<code>%d</code>», incloent-hi una amplada de camp opcional, p. ex., «<code>%02d</code>». Si es fa després del número del fitxer actual, serà formatat adequadament i inserit en aquest punt del nom del fitxer. Si no hi ha aquest patró, llavors s'assumirà «<code>-%03d</code>» com a patró just abans de l'extensió del fitxer: «<code>-o sortida.mkv</code>» resultaria en «<code>sortida-001.mkv</code>» i així en endavant. Si no hi ha extensió, llavors s'annexarà «<code>-%03d</code>» al nom."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:861
@@ -2972,7 +2972,7 @@ msgstr "Estableix el nombre de bits codificats per a un canal de color. Un valor
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1698
 msgid "<option>--chroma-subsample</option> <parameter>TID:hori,vert</parameter>"
-msgstr "<option>--chroma-subsample</option> <parameter>TID:hori,vert</parameter>"
+msgstr "<option>--chroma-subsample</option> <parameter>TID:horit,vert</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1701
@@ -2987,7 +2987,7 @@ msgstr "Exemple: Per al vídeo amb submostreig cromàtic 4:2:0, el paràmetre s'
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1712
 msgid "<option>--cb-subsample</option> <parameter>TID:hori,vert</parameter>"
-msgstr "<option>--cb-subsample</option> <parameter>TID:hori,vert</parameter>"
+msgstr "<option>--cb-subsample</option> <parameter>TID:horit,vert</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1715
@@ -3002,7 +3002,7 @@ msgstr "Exemple: Per al vídeo amb submostreig cromàtic 4:2:1, el paràmetre <o
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1728
 msgid "<option>--chroma-siting</option> <parameter>TID:hori,vert</parameter>"
-msgstr "<option>--chroma-siting</option> <parameter>TID:hori,vert</parameter>"
+msgstr "<option>--chroma-siting</option> <parameter>TID:horit,vert</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1731
@@ -3398,7 +3398,7 @@ msgstr "$ mkvmerge -o sortida.mkv --title 'Això i allò' entrada.avi --title 'Q
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2240
 msgid "The following example shows that using the <option>--language</option> option twice is OK because they're used in different scopes. Even though they apply to the same track ID they apply to different input files and therefore have different scopes:"
-msgstr "El següent exemple mostra com emprar dues vegades l'opció <option>--language</option>, és correcte ja que són emprades en àmbits diferents. Tot i que apliquen al mateix ID de pista, aquestes s'apliquen a fitxers d'entrada diferents i per tant tenen àmbits diferents:"
+msgstr "El següent exemple mostra com emprar dues vegades l'opció <option>--language</option>, és correcte perquè són emprades en àmbits diferents. Tot i que apliquen al mateix ID de pista, aquestes s'apliquen a fitxers d'entrada diferents i per tant tenen àmbits diferents:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:2244
@@ -4647,7 +4647,7 @@ msgstr "<option>-p</option>, <option>--parse-mode</option> <parameter>mode</para
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:85
 msgid "Sets the parse mode. The parameter '<parameter>mode</parameter>' can either be '<literal>fast</literal>' (which is also the default)  or '<literal>full</literal>'. The '<literal>fast</literal>' mode does not parse the whole file but uses the meta seek elements for locating the required elements of a source file. In 99% of all cases this is enough. But for files that do not contain meta seek elements or which are damaged the user might have to set the '<literal>full</literal>' parse mode. A full scan of a file can take a couple of minutes while a fast scan only takes seconds."
-msgstr "Estableix el mode d'anàlisi. El paràmetre «<parameter>mode</parameter>» pot ser «<literal>fast</literal>» (Ràpida) (el qual és el predeterminat) o «<literal>full</literal>» (Completa). El mode «<literal>fast</literal>» no analitzarà tot el fitxer però emprarà els elements meta de cerca per a localitzar els elements requerits d'un fitxer d'origen. En el 99% dels casos n'hi haurà prou. No obstant això, pels fitxers que no contenen elements meta de cerca o que estan malmesos, l'usuari hauria d'emprar el mode d'anàlisi «<literal>full</literal>». L'anàlisi completa d'un fitxer pot trigar alguns minuts, mentre que una anàlisi ràpida només portarà alguns segons."
+msgstr "Estableix el mode d'anàlisi. El paràmetre «<parameter>mode</parameter>» pot ser «<literal>fast</literal>» (ràpida, el qual és el predeterminat) o «<literal>full</literal>» (completa). El mode «<literal>fast</literal>» no analitzarà tot el fitxer però emprarà els elements meta de cerca per a localitzar els elements requerits d'un fitxer d'origen. En el 99% dels casos n'hi haurà prou. No obstant això, pels fitxers que no contenen elements meta de cerca o que estan malmesos, l'usuari hauria d'emprar el mode d'anàlisi «<literal>full</literal>». L'anàlisi completa d'un fitxer pot trigar alguns minuts, mentre que una anàlisi ràpida només prendrà alguns segons."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:96
