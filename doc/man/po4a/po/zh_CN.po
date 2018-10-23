@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2018-09-23 12:38+0200\n"
-"PO-Revision-Date: 2018-09-30 17:49+0000\n"
+"PO-Revision-Date: 2018-10-21 12:26+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -1607,10 +1607,8 @@ msgstr "<option>--chapter-sync</option> <parameter>d<optional>,o<optional>/p</op
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:224
-#, fuzzy
-#| msgid "Adjust the timestamps of the track with the id <parameter>TID</parameter> by <parameter>d</parameter> ms. The track IDs are the same as the ones given with <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>)."
 msgid "Adjust the timestamps of the chapters in the following source file by <parameter>d</parameter> ms. Alternatively you can use the <option>--sync</option> option with the special track ID <constant>-2</constant> (see section <link linkend=\"mkvmerge.track_ids.special_ids\">special track IDs</link>)."
-msgstr "将 id 为 <parameter>TID</parameter> 的轨道的时间戳按 <parameter>d</parameter> ms 进行调整。轨道 ID 与 <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> 所给出的相同 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落)。"
+msgstr "将章节的时间戳平移 <parameter>d</parameter> ms。您也可以使用 <option>--sync</option> 选项操作特殊轨道 ID <constant>-2</constant> (参见 <link linkend=\"mkvmerge.track_ids.special_ids\">特殊轨道 ID</link> 段落)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:230
@@ -3639,10 +3637,8 @@ msgstr "轨道 ID"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2401
-#, fuzzy
-#| msgid "Track IDs"
 msgid "Regular track IDs"
-msgstr "轨道 ID"
+msgstr "常规轨道 ID"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2404
@@ -3700,15 +3696,13 @@ msgstr "使用轨道 ID 的选项的描述中均含有 '<literal>TID</literal>'�
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2458
-#, fuzzy
-#| msgid "Track IDs"
 msgid "Special track IDs"
-msgstr "轨道 ID"
+msgstr "特殊轨道 ID"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2461
 msgid "There are several IDs that have special meaning and do not occur in the identification output."
-msgstr ""
+msgstr "一些 ID 具有特殊含义，不会出现在 id 输出结果中。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2465
@@ -3718,7 +3712,7 @@ msgstr "特殊的轨道 ID '<constant>-1</constant>' 是个百搭号，它将使
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2470
 msgid "The special track ID '<constant>-2</constant>' refers to the chapters in a source file. Currently only the <option>--sync</option> option uses this special ID. As an alternative to <option>--sync -2:…</option> the option <option>--chapter-sync …</option> can be used."
-msgstr ""
+msgstr "特殊轨道 ID '<constant>-2</constant>' 指输入文件中的章节。目前只有 <option>--sync</option> 选项会用到此特殊 ID。<option>--sync -2:…</option> 与 <option>--chapter-sync …</option> 等效。"
 
 #. type: Content of: <refentry><refsect1><note><para>
 #: doc/man/mkvmerge.xml:2480
@@ -4214,10 +4208,8 @@ msgstr "&mkvmerge; 能够从 &matroska; 输入文件中复制章节，除非使�
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2914
-#, fuzzy
-#| msgid "&matroska; supports an extensive set of tags that is deprecated and a new, simpler system like it is is used in most other containers: <parameter>KEY=VALUE</parameter>. However, in &matroska; these tags can also be nested, and both the <parameter>KEY</parameter> and the <parameter>VALUE</parameter> are elements of their own. The example file <filename>example-tags-2.xml</filename> shows how to use this new system."
 msgid "&matroska;'s tag system is similar to that of other containers: a set of <parameter>KEY=VALUE</parameter> pairs. However, in &matroska; these tags can also be nested, and both the <parameter>KEY</parameter> and the <parameter>VALUE</parameter> are elements of their own. The example file <filename>example-tags-2.xml</filename> shows how to use this system."
-msgstr "&matroska; 广泛支持废弃标签，还支持一种新式的、类似其他大多数容器使用的较简单的标签系统: <parameter>KEY=VALUE</parameter>。然而，在 &matroska; 中这些标签也可以嵌套，<parameter>KEY</parameter> 与 <parameter>VALUE</parameter> 都是属于它们自身的元素。示例文件 <filename>example-tags-2.xml</filename> 展示了如何使用这个新系统。"
+msgstr "&matroska; 的标签系统与其他容器类似: 一组 <parameter>键=值</parameter> 对。不过，&matroska; 中的标签还可以嵌套，<parameter>键</parameter> 与 <parameter>值</parameter> 都是属于它们自身的元素。示例文件 <filename>example-tags-2.xml</filename> 展示了如何使用该系统。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2921
