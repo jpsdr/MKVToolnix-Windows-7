@@ -88,6 +88,9 @@ NO_GLIBC_VERSION=1
 
 if [[ ( -d .git ) && ( $RELEASE_VERSION == 0 ) ]]; then
   VERSION="$(git describe --tags | sed -e 's/release-//')"
+  if [[ $VERSION != *-*-* ]]; then
+    VERSION=${VERSION}-0
+  fi
   NUM=${VERSION%-*}
   NUM=${NUM##*-}
   VERSION="${VERSION%%-*}-revision-$(printf '%03d' ${NUM})-${VERSION##*-}"
