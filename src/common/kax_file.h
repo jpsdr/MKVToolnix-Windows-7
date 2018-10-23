@@ -36,16 +36,12 @@ public:
 
   virtual bool was_resynced() const;
   virtual int64_t get_resync_start_pos() const;
-  virtual bool is_level1_element_id(vint_c id) const;
-  virtual bool is_global_element_id(vint_c id) const;
 
   virtual std::shared_ptr<libebml::EbmlElement> read_next_level1_element(uint32_t wanted_id = 0, bool report_cluster_timestamp = false);
   virtual std::shared_ptr<libmatroska::KaxCluster> read_next_cluster();
 
   virtual std::shared_ptr<libebml::EbmlElement> resync_to_level1_element(uint32_t wanted_id = 0);
   virtual std::shared_ptr<libmatroska::KaxCluster> resync_to_cluster();
-
-  static unsigned long get_element_size(libebml::EbmlElement &e);
 
   virtual void set_timestamp_scale(int64_t timestamp_scale);
   virtual void set_last_timestamp(int64_t last_timestamp);
@@ -62,5 +58,10 @@ protected:
 
   virtual void report(boost::format const &message);
   virtual void report(std::string const &message);
+
+public:
+  static bool is_level1_element_id(vint_c id);
+  static bool is_global_element_id(vint_c id);
+  static unsigned long get_element_size(libebml::EbmlElement &e);
 };
 using kax_file_cptr = std::shared_ptr<kax_file_c>;

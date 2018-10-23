@@ -173,7 +173,7 @@ kax_file_c::read_one_element() {
 }
 
 bool
-kax_file_c::is_level1_element_id(vint_c id) const {
+kax_file_c::is_level1_element_id(vint_c id) {
   auto &context = EBML_CLASS_CONTEXT(KaxSegment);
   for (int segment_idx = 0, end = EBML_CTX_SIZE(context); end > segment_idx; ++segment_idx)
     if (EBML_ID_VALUE(EBML_CTX_IDX_ID(context,segment_idx)) == id.m_value)
@@ -183,7 +183,7 @@ kax_file_c::is_level1_element_id(vint_c id) const {
 }
 
 bool
-kax_file_c::is_global_element_id(vint_c id) const {
+kax_file_c::is_global_element_id(vint_c id) {
   return (EBML_ID_VALUE(EBML_ID(EbmlVoid))  == id.m_value)
     ||   (EBML_ID_VALUE(EBML_ID(EbmlCrc32)) == id.m_value);
 }
