@@ -22,7 +22,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Voice In My Head"
+#define VERSIONNAME "Morning Child"
 
 version_number_t::version_number_t()
 {
