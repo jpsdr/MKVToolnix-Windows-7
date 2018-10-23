@@ -33,6 +33,7 @@ public:
 
   vint_c();
   vint_c(int64_t value, int coded_size);
+  vint_c(libebml::EbmlId const &id);
   bool is_unknown();
   bool is_valid();
 

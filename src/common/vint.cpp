@@ -31,6 +31,13 @@ vint_c::vint_c(int64_t value,
 {
 }
 
+vint_c::vint_c(libebml::EbmlId const &id)
+  : m_value{id.Value}
+  , m_coded_size{static_cast<int>(id.Length)}
+  , m_is_set{true}
+{
+}
+
 bool
 vint_c::is_unknown() {
   return !is_valid()
