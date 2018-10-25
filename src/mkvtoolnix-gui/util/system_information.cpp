@@ -5,6 +5,7 @@
 # include <QOperatingSystemVersion>
 #endif
 #include <QScreen>
+#include <QSettings>
 #include <QString>
 #include <QStringList>
 
@@ -104,6 +105,16 @@ gatherScreenInfo(QStringList &info) {
     info << Q("* Virtual size: %1x%2").arg(screen->virtualSize().width()).arg(screen->virtualSize().height());
     info << Q("* Geometry: %1x%2@%3x%4").arg(screen->geometry().width()).arg(screen->geometry().height()).arg(screen->geometry().x()).arg(screen->geometry().y());
   }
+
+#if defined(SYS_WINDOWS)
+  QSettings reg{Q("HKEY_CURRENT_USER\\Control Panel\\Desktop"), QSettings::NativeFormat};
+
+  info << Q("") << Q("### Desktop scaling settings") << Q("");
+
+  info << Q("* Scaling mode (`Win8DpiScaling`): %1").arg(reg.value("Win8DpiScaling", "not set").toString());
+  info << Q("* Scaling override (`DesktopDPIOverride`): %1").arg(reg.value("DesktopDPIOverride", "not set").toString());
+  info << Q("* System-wide scale factor (`LogPixels`): %1").arg(reg.value("LogPixels", "not set").toString());
+#endif
 }
 
 void
