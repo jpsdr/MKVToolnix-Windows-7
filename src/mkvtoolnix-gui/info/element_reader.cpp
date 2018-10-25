@@ -46,7 +46,8 @@ ElementReader::run() {
 
     m_element.Read(es, EBML_INFO_CONTEXT(*callbacks), upper_lvl, upper_lvl_el, true);
 
-    delete upper_lvl_el;
+    if (upper_lvl)
+      delete upper_lvl_el;
 
   } catch (mtx::mm_io::exception &) {
   }

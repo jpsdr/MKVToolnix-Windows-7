@@ -152,13 +152,13 @@ kax_file_c::read_one_element() {
   auto l2 = static_cast<EbmlElement *>(nullptr);
   try {
     l1->Read(*m_es.get(), EBML_INFO_CONTEXT(*callbacks), upper_lvl_el, l2, true);
-    if (!found_in(*l1, l2))
+    if (upper_lvl_el && !found_in(*l1, l2))
       delete l2;
 
   } catch (std::runtime_error &e) {
     mxdebug_if(m_debug_resync, boost::format("exception reading element data: %1%\n") % e.what());
     m_in.setFilePointer(l1->GetElementPosition() + 1);
-    if (!found_in(*l1, l2))
+    if (upper_lvl_el && !found_in(*l1, l2))
       delete l2;
     return {};
   }

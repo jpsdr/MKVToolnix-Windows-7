@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge, mkvinfo, mkvextract, mkvpropedit, MKVToolNix GUI's info tool &
+  chapter editor: fixed a case of memory being accessed after it had been
+  freed earlier. This can be triggered by specially crafted Matroska files and
+  lead to arbitrary code execution. The vulnerability was reported as Cisco
+  TALOS 2018-0694 on 2018-10-25.
+
+
 # Version 28.1.0 "Morning Child" 2018-10-23
 
 ## Bug fixes
