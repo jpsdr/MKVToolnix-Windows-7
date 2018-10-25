@@ -1,4 +1,4 @@
-# Version ?
+# Version 28.2.0 "The Awakening" 2018-10-25
 
 ## Bug fixes
 
