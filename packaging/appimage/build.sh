@@ -87,9 +87,11 @@ QTDIR="${HOME}/opt/qt/${QTVERSION}/gcc_64"
 NO_GLIBC_VERSION=1
 
 if [[ ( -d .git ) && ( $RELEASE_VERSION == 0 ) ]]; then
+  # If revision is a tag: release-28.2.0
+  # If it isn't: release-28.1.0-7-g558fbc986
   VERSION="$(git describe --tags | sed -e 's/release-//')"
-  if [[ $VERSION != *-*-* ]]; then
-    VERSION=${VERSION}-0
+  if [[ $VERSION != *-*-*-* ]]; then
+    VERSION=${VERSION}-0-g0
   fi
   NUM=${VERSION%-*}
   NUM=${NUM##*-}
