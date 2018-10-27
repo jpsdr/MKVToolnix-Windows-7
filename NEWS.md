@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: Windows: the application manifest is now included properly
+  so that Windows actually recognizes it. See #2415.
+
+
 # Version 28.2.0 "The Awakening" 2018-10-25
 
 ## Bug fixes
