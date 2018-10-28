@@ -327,12 +327,16 @@ rule '.o' => '.rc' do |t|
   runq "windres", t.source, "#{c(:WINDRES)} #{$flags[:windres]} -o #{t.name} #{t.sources.join(" ")}"
 end
 
+rule '.xml' => '.xml.erb' do |t|
+  process_erb(t)
+end
+
 # Resources depend on the manifest.xml file for Windows builds.
 if $building_for[:windows]
   $programs.each do |program|
-    path = program.gsub(/^mkv/, '')
+    path = FileTest.directory?("src/#{program}") ? program : program.gsub(/^mkv/, '')
     icon = program == 'mkvinfo' ? 'share/icons/windows/mkvinfo.ico' : 'share/icons/windows/mkvtoolnix-gui.ico'
-    file "src/#{path}/resources.o" => [ "src/#{path}/manifest-#{c(:MINGW_PROCESSOR_ARCH)}.xml", "src/#{path}/resources.rc", icon ]
+    file "src/#{path}/resources.o" => [ "src/#{path}/manifest.xml", "src/#{path}/resources.rc", icon ]
   end
 end
 
@@ -922,6 +926,7 @@ task :clean do
     **/*.o
     **/*.pot
     **/*.qm
+    **/manifest.xml
     doc/man/*.1
     doc/man/*.html
     doc/man/*/*.1

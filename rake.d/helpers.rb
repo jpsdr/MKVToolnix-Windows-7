@@ -203,6 +203,16 @@ def list_targets? *targets
   targets.any? { |target| %r{\b#{target}\b}.match spec }
 end
 
+def process_erb t
+  puts_action "ERB", :target => t.name
+
+  template = IO.readlines(t.prerequisites[0]).
+    map { |line| line.gsub(%r{\{\{(.+?)\}\}}) { |match| (variables[$1] || ENV[$1]).to_s } }.
+    join("")
+
+  File.open(t.name, 'w') { |file| file.puts(ERB.new(template).result) }
+end
+
 class Rake::Task
   def mo_all_prerequisites
     todo   = [name]
