@@ -100,7 +100,7 @@ protected:
   void setupMergePredefinedTrackNames();
   void setupHeaderEditorDroppedFilesPolicy();
   void setupJobsRunPrograms();
-  void setupFont();
+  void setupFontAndScaling();
 
   void showPage(Page page);
 

@@ -12,8 +12,31 @@
 #include "mkvtoolnix-gui/main_window/update_checker.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 using namespace mtx::gui;
+
+namespace {
+
+void
+enableOrDisableHighDPIScaling() {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+  if (!Util::Settings::get().m_uiDisableHighDPIScaling)
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
+}
+
+void
+initiateSettings() {
+  QCoreApplication::setOrganizationName("bunkus.org");
+  QCoreApplication::setOrganizationDomain("bunkus.org");
+  QCoreApplication::setApplicationName("mkvtoolnix-gui");
+
+  Util::Settings::migrateFromRegistry();
+  Util::Settings::get().load();
+}
+
+}
 
 Q_DECLARE_METATYPE(std::shared_ptr<Merge::SourceFile>);
 Q_DECLARE_METATYPE(QList<std::shared_ptr<Merge::SourceFile>>);
@@ -41,9 +64,9 @@ registerMetaTypes() {
 int
 main(int argc,
      char **argv) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-  QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
+  initiateSettings();
+
+  enableOrDisableHighDPIScaling();
 
   registerMetaTypes();
 

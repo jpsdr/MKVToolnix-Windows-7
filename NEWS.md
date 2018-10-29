@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: added an option in the preferences for disabling automatic
+  scaling for high DPI displays. Implements #2415.
+
 ## Bug fixes
 
 * MKVToolNix GUI: Windows: the application manifest is now included properly

@@ -172,6 +172,7 @@ public:
   int m_removeOldJobsDays;
   bool m_useDefaultJobDescription, m_showOutputOfAllJobs, m_switchToJobOutputAfterStarting, m_resetJobWarningErrorCountersOnExit;
 
+  bool m_uiDisableHighDPIScaling;
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;
 

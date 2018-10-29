@@ -51,7 +51,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   ui->cbGuiWarnBeforeOverwriting->setChecked(m_cfg.m_warnBeforeOverwriting);
   ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
-  setupFont();
+  setupFontAndScaling();
   setupInterfaceLanguage();
   setupTabPositions();
   setupDerivingTrackLanguagesFromFileName();
@@ -213,6 +213,11 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
 void
 PreferencesDialog::setupToolTips() {
   // GUI page
+  Util::setToolTip(ui->cbGuiDisableHighDPIScaling,
+                   Q("%1 %2")
+                   .arg(QY("If enabled, automatic scaling for high DPI displays will be disabled."))
+                   .arg(QY("Changes to this option will only take effect the next time the application is started.")));
+
   Util::setToolTip(ui->cbGuiCheckForUpdates,
                    Q("%1 %2 %3")
                    .arg(QY("If enabled, the program will check online whether or not a new release of MKVToolNix is available on the home page."))
@@ -737,10 +742,15 @@ PreferencesDialog::setupJobsRunPrograms() {
 }
 
 void
-PreferencesDialog::setupFont() {
+PreferencesDialog::setupFontAndScaling() {
   auto font = App::font();
   ui->fcbGuiFontFamily->setCurrentFont(font);
   ui->sbGuiFontPointSize->setValue(font.pointSize());
+
+  ui->cbGuiDisableHighDPIScaling->setChecked(m_cfg.m_uiDisableHighDPIScaling);
+#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
+  ui->cbGuiDisableHighDPIScaling->setVisible(false);
+#endif
 }
 
 void
@@ -750,6 +760,7 @@ PreferencesDialog::save() {
   m_cfg.m_tabPosition                                   = static_cast<QTabWidget::TabPosition>(ui->cbGuiTabPositions->currentData().toInt());
   m_cfg.m_uiFontFamily                                  = ui->fcbGuiFontFamily->currentFont().family();
   m_cfg.m_uiFontPointSize                               = ui->sbGuiFontPointSize->value();
+  m_cfg.m_uiDisableHighDPIScaling                       = ui->cbGuiDisableHighDPIScaling->isChecked();
   m_cfg.m_checkForUpdates                               = ui->cbGuiCheckForUpdates->isChecked();
   m_cfg.m_showToolSelector                              = ui->cbGuiShowToolSelector->isChecked();
   m_cfg.m_warnBeforeClosingModifiedTabs                 = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();

@@ -8,6 +8,7 @@
 #include <QStandardPaths>
 
 #include "common/extern_data.h"
+#include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
 #include "common/version.h"
@@ -94,7 +95,11 @@ QString
 Settings::iniFileLocation() {
 #if defined(SYS_WINDOWS)
   if (!App::isInstalled())
-    return App::applicationDirPath();
+    // QApplication::applicationDirPath() cannot be used here as the
+    // Util::Settings class might be used before QCoreApplication's
+    // been instantiated, which QApplication::applicationDirPath()
+    // requires.
+    return Q(mtx::sys::get_current_exe_path("").string());
 
   return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 #else
@@ -298,6 +303,7 @@ Settings::load() {
 #if defined(HAVE_LIBINTL_H)
   m_uiLocale                           = reg.value("uiLocale").toString();
 #endif
+  m_uiDisableHighDPIScaling            = reg.value("uiDisableHighDPIScaling").toBool();
   m_uiFontFamily                       = reg.value("uiFontFamily",    defaultFont.family()).toString();
   m_uiFontPointSize                    = reg.value("uiFontPointSize", defaultFont.pointSize()).toInt();
 
@@ -602,6 +608,7 @@ Settings::save()
   reg.setValue("ceTextFileCharacterSet",             m_ceTextFileCharacterSet);
 
   reg.setValue("uiLocale",                           m_uiLocale);
+  reg.setValue("uiDisableHighDPIScaling",            m_uiDisableHighDPIScaling);
   reg.setValue("uiFontFamily",                       m_uiFontFamily);
   reg.setValue("uiFontPointSize",                    m_uiFontPointSize);
 

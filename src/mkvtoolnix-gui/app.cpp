@@ -71,16 +71,9 @@ App::App(int &argc,
   ignore_unique_numbers(UNIQUE_CHAPTER_IDS);
   ignore_unique_numbers(UNIQUE_EDITION_IDS);
 
-  QCoreApplication::setOrganizationName("bunkus.org");
-  QCoreApplication::setOrganizationDomain("bunkus.org");
-  QCoreApplication::setApplicationName("mkvtoolnix-gui");
-
 #ifdef SYS_WINDOWS
   QApplication::setStyle(Q("windowsvista"));
 #endif
-
-  Util::Settings::migrateFromRegistry();
-  Util::Settings::get().load();
 
   setupInstanceCommunicator();
   setupNetworkAccessManager();
