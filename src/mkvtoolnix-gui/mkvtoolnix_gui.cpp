@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QProcess>
+#include <QSettings>
 
 #include "common/fs_sys_helpers.h"
 #include "common/kax_info.h"
@@ -21,7 +22,13 @@ namespace {
 void
 enableOrDisableHighDPIScaling() {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-  if (!Util::Settings::get().m_uiDisableHighDPIScaling)
+  // Get this one setting from the ini file directly without
+  // instantiating & loading Util::Settings as that requires
+  // Application to be instantiated — which in turn requires that the
+  // DPI setting's been set.
+  auto reg = Util::Settings::registry();
+  reg->beginGroup("settings");
+  if (!reg->value(Q("uiDisableHighDPIScaling")).toBool())
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 }
@@ -31,9 +38,6 @@ initiateSettings() {
   QCoreApplication::setOrganizationName("bunkus.org");
   QCoreApplication::setOrganizationDomain("bunkus.org");
   QCoreApplication::setApplicationName("mkvtoolnix-gui");
-
-  Util::Settings::migrateFromRegistry();
-  Util::Settings::get().load();
 }
 
 }

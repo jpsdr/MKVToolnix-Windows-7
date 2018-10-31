@@ -75,6 +75,9 @@ App::App(int &argc,
   QApplication::setStyle(Q("windowsvista"));
 #endif
 
+  Util::Settings::migrateFromRegistry();
+  Util::Settings::get().load();
+
   setupInstanceCommunicator();
   setupNetworkAccessManager();
 
