@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#if !defined(SYS_WINDOWS)
-
 #include <stdlib.h>
 #include <sys/time.h>
 
@@ -141,5 +139,3 @@ get_memory_usage() {
 }
 
 }}
-
-#endif  // !SYS_WINDOWS

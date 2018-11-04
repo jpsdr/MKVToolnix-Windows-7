@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#if !defined(SYS_WINDOWS)
-
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
@@ -129,5 +127,3 @@ mm_file_io_c::truncate(int64_t pos) {
 void
 mm_file_io_c::setup() {
 }
-
-#endif  // !defined(SYS_WINDOWS)

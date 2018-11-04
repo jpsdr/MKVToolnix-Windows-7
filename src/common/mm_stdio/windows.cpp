@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#if defined(SYS_WINDOWS)
-
 #include <fcntl.h>
 #include <io.h>
 #include <windows.h>
@@ -59,5 +57,3 @@ mm_stdio_c::_write(const void *buffer,
 
   return bytes_written;
 }
-
-#endif  // defined(SYS_WINDOWS)

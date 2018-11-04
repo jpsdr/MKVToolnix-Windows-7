@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#if defined(SYS_WINDOWS)
-
 #include <io.h>
 #include <windows.h>
 #include <winreg.h>
@@ -175,5 +173,3 @@ format_windows_message(uint64_t message_id) {
 }
 
 }}
-
-#endif  // SYS_WINDOWS

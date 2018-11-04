@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#if defined(SYS_WINDOWS)
-
 #include <direct.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -184,5 +182,3 @@ mm_file_io_c::truncate(int64_t pos) {
 void
 mm_file_io_c::setup() {
 }
-
-#endif  // defined(SYS_WINDOWS)
