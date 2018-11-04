@@ -85,6 +85,10 @@ debugging_c::init() {
     if (value)
       request(value);
   }
+
+#if defined(SYS_WINDOWS)
+  send_to_logger(true);
+#endif
 }
 
 void
