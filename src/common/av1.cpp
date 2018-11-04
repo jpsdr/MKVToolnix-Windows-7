@@ -420,7 +420,7 @@ parser_c::parse_obu() {
   mtx::bits::reader_c sub_r{obu->get_buffer(), obu->get_size()};
   sub_r.set_bit_position(r.get_bit_position() - start_bit_position);
 
-  at_scope_exit_c copy_current_and_seek_to_next_obu([this, start_bit_position, next_obu_bit_position, &obu, &keep_obu]() {
+  at_scope_exit_c copy_current_and_seek_to_next_obu([this, next_obu_bit_position, &obu, &keep_obu]() {
     p->r.set_bit_position(next_obu_bit_position);
     if (!keep_obu)
       return;
