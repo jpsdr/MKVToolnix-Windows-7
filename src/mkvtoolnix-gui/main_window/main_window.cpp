@@ -33,6 +33,7 @@
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/sleep_inhibitor.h"
 #include "mkvtoolnix-gui/util/system_information.h"
 #include "mkvtoolnix-gui/util/text_display_dialog.h"
 #include "mkvtoolnix-gui/util/waiting_spinner_widget.h"
@@ -61,6 +62,7 @@ class MainWindowPrivate {
   QList<QAction *> toolSelectionActions;
   bool queueIsRunning{};
   int spinnerIsSpinning{};
+  std::unique_ptr<Util::BasicSleepInhibitor> sleepInhibitor{Util::BasicSleepInhibitor::create()};
 
   QHash<QObject *, QString> helpURLs;
   QHash<ToolBase *, QTabWidget *> subWindowWidgets;
@@ -215,6 +217,7 @@ MainWindow::setupConnections() {
   connect(jobModel,                               &Jobs::Model::jobStatsChanged,                          p->statusBarProgress, &StatusBarProgressWidget::setJobStats);
   connect(jobModel,                               &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, p->statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
   connect(jobModel,                               &Jobs::Model::queueStatusChanged,                       this,                 &MainWindow::startStopQueueSpinnerForQueue);
+  connect(jobModel,                               &Jobs::Model::queueStatusChanged,                       this,                 &MainWindow::inhibitSleepWhileQueueIsRunning);
   connect(currentJobTab,                          &WatchJobs::Tab::watchCurrentJobTabCleared,             p->statusBarProgress, &StatusBarProgressWidget::reset);
 
   // Auxiliary actions:
@@ -814,6 +817,16 @@ MainWindow::startStopQueueSpinnerForQueue(Jobs::QueueStatus status) {
 
   p->queueIsRunning = newQueueIsRunning;
   startStopQueueSpinner(newQueueIsRunning);
+}
+
+void
+MainWindow::inhibitSleepWhileQueueIsRunning(Jobs::QueueStatus status) {
+  auto p = p_func();
+
+  if (status == Jobs::QueueStatus::Running)
+    p->sleepInhibitor->inhibit();
+  else
+    p->sleepInhibitor->uninhibit();
 }
 
 void

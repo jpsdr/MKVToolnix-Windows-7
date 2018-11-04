@@ -160,6 +160,8 @@ if test x"$enable_qt" = "xyes" -a \
 
     if test x"$MINGW" = x1; then
       with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5WinExtras"
+    elif ! echo "$host" | grep -q -i apple ; then
+      with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5DBus"
     fi
 
     PKG_CHECK_EXISTS([$with_qt_pkg_config_modules],,[ok=0])

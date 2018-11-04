@@ -96,6 +96,7 @@ public slots:
   virtual void showNextOrPreviousSubWindow(int delta);
   virtual void showSubWindow(unsigned int tabIdx);
   virtual void startStopQueueSpinnerForQueue(Jobs::QueueStatus status);
+  virtual void inhibitSleepWhileQueueIsRunning(Jobs::QueueStatus status);
   virtual void startStopQueueSpinner(bool start);
   virtual void startQueueSpinner();
   virtual void stopQueueSpinner();
