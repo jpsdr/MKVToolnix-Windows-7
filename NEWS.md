@@ -5,9 +5,9 @@
 * MKVToolNix GUI: added an option in the preferences for disabling automatic
   scaling for high DPI displays. Implements #2415.
 * MKVToolNix GUI: the GUI will now prevent the system from going to sleep
-  while the job queue is running. This feature is implemented for Linux/Unix
-  systems where the `org.freedesktop.login1.Manager` D-Bus interface is
-  available as well as for Windows. Implements #2411.
+  while the job queue is running. This feature is implemented for macOS,
+  Windows and Linux/Unix systems where the `org.freedesktop.login1.Manager`
+  D-Bus interface is available. Implements #2411.
 
 ## Bug fixes
 

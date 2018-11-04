@@ -1109,6 +1109,7 @@ if $build_mkvtoolnix_gui
     sources("src/mkvtoolnix-gui/resources.o", :if => $building_for[:windows]).
     libraries($common_libs, :qt).
     libraries("-mwindows", :powrprof, :if => $building_for[:windows]).
+    libraries("-framework IOKit", :if => $building_for[:macos]).
     libraries($custom_libs).
     create
 end

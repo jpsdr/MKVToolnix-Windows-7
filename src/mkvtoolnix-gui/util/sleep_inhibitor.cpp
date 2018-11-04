@@ -4,7 +4,9 @@
 #include "mkvtoolnix-gui/util/sleep_inhibitor_p.h"
 #if defined(SYS_WINDOWS)
 # include "mkvtoolnix-gui/util/sleep_inhibitor/windows.h"
-#elif !defined(SYS_APPLE)
+#elif defined(SYS_APPLE)
+# include "mkvtoolnix-gui/util/sleep_inhibitor/macos.h"
+#else
 # include "mkvtoolnix-gui/util/sleep_inhibitor/linux_logind.h"
 #endif
 
@@ -62,7 +64,9 @@ BasicSleepInhibitor::create() {
 
 #if defined(SYS_WINDOWS)
   inhibitor->addInhibitor(std::make_shared<WindowsSleepInhibitor>());
-#elif !defined(SYS_APPLE)
+#elif defined(SYS_APPLE)
+  inhibitor->addInhibitor(std::make_shared<MacOSSleepInhibitor>());
+#else
   inhibitor->addInhibitor(std::make_shared<LogindSleepInhibitor>());
 #endif
 
