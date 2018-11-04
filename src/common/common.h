@@ -103,7 +103,6 @@ using namespace std::string_literals;
 #define MXMSG_ERROR    5
 #define MXMSG_WARNING 10
 #define MXMSG_INFO    15
-#define MXMSG_DEBUG   20
 
 #if !defined(FOURCC)
 #define FOURCC(a, b, c, d) (uint32_t)((((unsigned char)a) << 24) + \

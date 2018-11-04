@@ -137,9 +137,6 @@ mxmsg(unsigned int level,
   } else if (level == MXMSG_WARNING)
     g_mm_stdio->puts(mtx::cli::g_gui_mode ? "#GUI#warning " : (boost::format("%1%%2% ") % prefix % Y("Warning:")).str());
 
-  else if (level == MXMSG_DEBUG)
-    g_mm_stdio->puts(Y("Debug> "));
-
   size_t idx_cr = message.rfind('\r');
   if (std::string::npos != idx_cr) {
     size_t idx_nl = message.rfind('\n');
