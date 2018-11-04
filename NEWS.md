@@ -7,7 +7,7 @@
 * MKVToolNix GUI: the GUI will now prevent the system from going to sleep
   while the job queue is running. This feature is implemented for Linux/Unix
   systems where the `org.freedesktop.login1.Manager` D-Bus interface is
-  available. Part of the implementation of #2411.
+  available as well as for Windows. Implements #2411.
 
 ## Bug fixes
 

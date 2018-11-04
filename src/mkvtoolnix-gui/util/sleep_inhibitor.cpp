@@ -2,8 +2,10 @@
 
 #include "mkvtoolnix-gui/util/sleep_inhibitor.h"
 #include "mkvtoolnix-gui/util/sleep_inhibitor_p.h"
-#if !defined(SYS_WINDOWS) && !defined(SYS_APPLE)
-#include "mkvtoolnix-gui/util/sleep_inhibitor/linux_logind.h"
+#if defined(SYS_WINDOWS)
+# include "mkvtoolnix-gui/util/sleep_inhibitor/windows.h"
+#elif !defined(SYS_APPLE)
+# include "mkvtoolnix-gui/util/sleep_inhibitor/linux_logind.h"
 #endif
 
 namespace mtx { namespace gui { namespace Util {
@@ -58,7 +60,9 @@ std::unique_ptr<BasicSleepInhibitor>
 BasicSleepInhibitor::create() {
   auto inhibitor = std::make_unique<BasicSleepInhibitor>();
 
-#if !defined(SYS_WINDOWS) && !defined(SYS_APPLE)
+#if defined(SYS_WINDOWS)
+  inhibitor->addInhibitor(std::make_shared<WindowsSleepInhibitor>());
+#elif !defined(SYS_APPLE)
   inhibitor->addInhibitor(std::make_shared<LogindSleepInhibitor>());
 #endif
 
