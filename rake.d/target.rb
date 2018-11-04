@@ -77,7 +77,7 @@ class Target
     list           = list.collect { |e| e.respond_to?(:to_a) ? e.to_a : e }.flatten
     file_mode      = (options[:type] || :file) == :file
     except         = !file_mode && options[:except].is_a?(Array) ? options[:except].collect { |file| list.collect { |dir| "#{dir}/#{file}" } }.flatten.to_hash_by : {}
-    new_sources    = list.collect { |entry| file_mode ? (entry.respond_to?(:to_a) ? entry.to_a : entry) : FileList["#{entry}/*.c", "#{entry}/*.cpp", "#{entry}/*.cc"].to_a }.flatten.select { |file| !except[file] }
+    new_sources    = list.collect { |entry| file_mode ? (entry.respond_to?(:to_a) ? entry.to_a : entry) : FileList["#{entry}/*.c", "#{entry}/*.cpp", "#{entry}/*.cc"].to_a }.flatten.select { |file| !except[file] }.for_target!
     new_deps       = new_sources.collect { |file| [ file.ext(ext_map[ file.pathmap('%x') ] || 'o'), file ] }
     new_file_deps  = new_deps.reject { |src, tgt| no_file_deps_re.match src }
     new_file_deps += new_sources.select { |file| %r{\.moc$}.match file }.map { |file| [ file, file.ext('h') ] }
