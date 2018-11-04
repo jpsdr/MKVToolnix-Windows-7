@@ -12,8 +12,6 @@
 
 #include "common/common_pch.h"
 
-#if defined(SYS_WINDOWS)
-
 #include "common/logger.h"
 
 namespace mtx { namespace log {
@@ -31,5 +29,3 @@ public:
 };
 
 }}
-
-#endif // SYS_WINDOWS

@@ -16,7 +16,7 @@
 
 #include "common/logger.h"
 #if defined(SYS_WINDOWS)
-# include "common/logger_win.h"
+# include "common/logger/windows.h"
 #endif // SYS_WINDOWS
 #include "common/fs_sys_helpers.h"
 #include "common/mm_io_x.h"

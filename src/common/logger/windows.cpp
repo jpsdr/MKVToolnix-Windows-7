@@ -10,11 +10,9 @@
 
 #include "common/common_pch.h"
 
-#if defined(SYS_WINDOWS)
-
 #include <windows.h>
 
-#include "common/logger_win.h"
+#include "common/logger/windows.h"
 
 namespace mtx { namespace log {
 
@@ -38,5 +36,3 @@ windows_debug_target_c::activate() {
 }
 
 }}
-
-#endif // SYS_WINDOWS
