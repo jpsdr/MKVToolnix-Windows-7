@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#if defined(HAVE_QTDBUS)
+
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
@@ -85,3 +87,5 @@ LogindSleepInhibitor::isInhibited()
 }
 
 }}}
+
+#endif  // defined(HAVE_QTDBUS)

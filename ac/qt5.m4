@@ -160,8 +160,6 @@ if test x"$enable_qt" = "xyes" -a \
 
     if test x"$MINGW" = x1; then
       with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5WinExtras"
-    elif ! echo "$host" | grep -q -i apple ; then
-      with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5DBus"
     fi
 
     PKG_CHECK_EXISTS([$with_qt_pkg_config_modules],,[ok=0])
@@ -169,6 +167,11 @@ if test x"$enable_qt" = "xyes" -a \
 
     if test $ok = 0; then
       AC_MSG_RESULT(no: not found by pkg-config)
+    fi
+
+    if test x"$MINGW" != x1 && ! echo "$host" | grep -q -i apple ; then
+      PKG_CHECK_EXISTS([Qt5DBus],[with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5DBus"])
+      AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
     fi
 
     with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/,/ /g'`"
