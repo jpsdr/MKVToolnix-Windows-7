@@ -142,11 +142,7 @@ get_version_info(const std::string &program,
   info.push_back((boost::format("v%1% ('%2%')") % PACKAGE_VERSION % VERSIONNAME).str());
 
   if (flags & vif_architecture)
-#if defined(ARCH_64BIT)
-    info.push_back("64-bit");
-#else
-    info.push_back("32-bit");
-#endif
+    info.push_back((boost::format("%1%-bit") % (__SIZEOF_POINTER__ * 8)).str());
 
   return boost::join(info, " ");
 }
