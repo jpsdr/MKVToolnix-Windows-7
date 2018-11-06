@@ -507,19 +507,19 @@
    Extracting both chapters and tags in their respective &xml; formats at the same time:
   </para>
 
-  <screen>$ mkvmerge movie.mkv chapters movie-chapters.xml tags movie-tags.xml</screen>
+  <screen>$ mkvextract movie.mkv chapters movie-chapters.xml tags movie-tags.xml</screen>
 
   <para>
    Extracting a couple of tracks and their respective timestamps at the same time:
   </para>
 
-  <screen>$ mkvmerge "Another Movie.mkv" tracks 0:video.h265 "1:main audio.aac" "2:director's comments.aac" timestamps_v2 "0:timestamps video.txt" "1:timestamps main audio.txt" "2:timestamps director's comments.txt"</screen>
+  <screen>$ mkvextract "Another Movie.mkv" tracks 0:video.h265 "1:main audio.aac" "2:director's comments.aac" timestamps_v2 "0:timestamps video.txt" "1:timestamps main audio.txt" "2:timestamps director's comments.txt"</screen>
 
   <para>
    Extracting chapters in the Ogg/OGM format and re-encoding a text subtitle track to another character set:
   </para>
 
-  <screen>$ mkvmerge "My Movie.mkv" chapters --simple "My Chapters.txt" tracks -c MS-ANSI "2:My Subtitles.srt"</screen>
+  <screen>$ mkvextract "My Movie.mkv" chapters --simple "My Chapters.txt" tracks -c MS-ANSI "2:My Subtitles.srt"</screen>
  </refsect1>
 
  <refsect1 id="mkvextract.text_files_and_charsets">
