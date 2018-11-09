@@ -14,10 +14,6 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_UNISTD_H)
-# include <unistd.h>
-#endif  // HAVE_UNISTD_H
-
 #include "common/bit_reader.h"
 #include "common/bit_writer.h"
 #include "common/bswap.h"
@@ -970,7 +966,7 @@ detect(const void *src_buf,
     memcpy(buf[cur_buf], src_buf, len);
 
     if (dts_swap_bytes) {
-      swab((char *)buf[cur_buf], (char *)buf[cur_buf^1], len);
+      mtx::bytes::swap_buffer(reinterpret_cast<unsigned char const *>(buf[cur_buf]), reinterpret_cast<unsigned char *>(buf[cur_buf ^ 1]), len, 2);
       cur_buf ^= 1;
     }
 

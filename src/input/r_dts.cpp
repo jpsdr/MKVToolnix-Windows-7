@@ -14,10 +14,7 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_UNISTD_H)
-# include <unistd.h>
-#endif  // HAVE_UNISTD_H
-
+#include "common/bswap.h"
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/dts.h"
@@ -116,7 +113,7 @@ dts_reader_c::~dts_reader_c() {
 int
 dts_reader_c::decode_buffer(size_t length) {
   if (m_swap_bytes) {
-    swab(reinterpret_cast<char *>(m_buf[m_cur_buf]), reinterpret_cast<char *>(m_buf[m_cur_buf ^ 1]), length);
+    mtx::bytes::swap_buffer(reinterpret_cast<unsigned char const *>(m_buf[m_cur_buf]), reinterpret_cast<unsigned char *>(m_buf[m_cur_buf ^ 1]), length, 2);
     m_cur_buf ^= 1;
   }
 
