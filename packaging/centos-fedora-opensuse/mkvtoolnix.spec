@@ -13,7 +13,7 @@ Requires: hicolor-icon-theme
 BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0, cmark-devel, po4a
 
 %if 0%{?centos}
-BuildRequires: devtoolset-6-gcc-c++, rubygem-drake
+BuildRequires: devtoolset-7-gcc-c++, rubygem-drake
 %endif
 
 %if 0%{?suse_version}
@@ -55,8 +55,8 @@ export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 
 %if 0%{?centos}
-export CC=/opt/rh/devtoolset-6/root/bin/gcc
-export CXX=/opt/rh/devtoolset-6/root/bin/g++
+export CC=/opt/rh/devtoolset-7/root/bin/gcc
+export CXX=/opt/rh/devtoolset-7/root/bin/g++
 %endif
 
 %if 0%{?suse_version}
