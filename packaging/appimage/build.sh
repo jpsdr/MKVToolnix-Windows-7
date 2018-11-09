@@ -6,7 +6,7 @@
 #   boost-devel
 #   cmark-devel
 #   desktop-file-utils
-#   devtoolset-6-gcc-c++
+#   devtoolset-7-gcc-c++
 #   docbook-style-xsl
 #   fdupes
 #   file-devel
@@ -109,8 +109,8 @@ if [[ ! -f configure ]]; then
 fi
 
 if [[ -f /etc/centos-release ]]; then
-  export CC=/opt/rh/devtoolset-6/root/bin/gcc
-  export CXX=/opt/rh/devtoolset-6/root/bin/g++
+  export CC=/opt/rh/devtoolset-7/root/bin/gcc
+  export CXX=/opt/rh/devtoolset-7/root/bin/g++
 fi
 
 export PKG_CONFIG_PATH="${QTDIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
