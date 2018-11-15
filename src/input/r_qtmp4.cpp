@@ -448,6 +448,9 @@ qtmp4_reader_c::process_atom(qt_atom_t const &parent,
     auto atom = read_atom();
     mxdebug_if(m_debug_headers, boost::format("%1%'%2%' atom, size %3%, at %4%–%5%\n") % space(2 * level + 1) % atom.fourcc % atom.size % atom.pos % (atom.pos + atom.size));
 
+    if (atom.size > parent_size)
+      break;
+
     handler(atom);
 
     skip_atom();

@@ -13,6 +13,8 @@
 
 * MKVToolNix GUI: Windows: the application manifest is now included properly
   so that Windows actually recognizes it. See #2415.
+* mkvmerge: MP4 reader: fixed handling of atoms whose size exceeds the parent
+  atom's size. Fixes #2431.
 
 ## Build system changes
 
