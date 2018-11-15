@@ -439,25 +439,34 @@ qtmp4_reader_c::handle_audio_encoder_delay(qtmp4_demuxer_c &dmx) {
           % name % sizeof(type) % atom.size);
 
 void
+qtmp4_reader_c::process_atom(qt_atom_t const &parent,
+                             int level,
+                             std::function<void(qt_atom_t const &)> const &handler) {
+  auto parent_size = parent.size;
+
+  while (8 <= parent_size) {
+    auto atom = read_atom();
+    mxdebug_if(m_debug_headers, boost::format("%1%'%2%' atom, size %3%, at %4%–%5%\n") % space(2 * level + 1) % atom.fourcc % atom.size % atom.pos % (atom.pos + atom.size));
+
+    handler(atom);
+
+    skip_atom();
+    parent_size -= atom.size;
+  }
+}
+
+void
 qtmp4_reader_c::handle_cmov_atom(qt_atom_t parent,
                                  int level) {
   m_compression_algorithm = fourcc_c{};
 
-  while (parent.size > 0) {
-    qt_atom_t atom;
-
-    atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "dcom")
       handle_dcom_atom(atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "cmvd")
       handle_cmvd_atom(atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
@@ -706,10 +715,7 @@ void
 qtmp4_reader_c::handle_mdia_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
-  while (parent.size > 0) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "mdhd")
       handle_mdhd_atom(dmx, atom.to_parent(), level + 1);
 
@@ -718,38 +724,26 @@ qtmp4_reader_c::handle_mdia_atom(qtmp4_demuxer_c &dmx,
 
     else if (atom.fourcc == "minf")
       handle_minf_atom(dmx, atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
 qtmp4_reader_c::handle_minf_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
-  while (0 < parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "hdlr")
       handle_hdlr_atom(dmx, atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "stbl")
       handle_stbl_atom(dmx, atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
 qtmp4_reader_c::handle_moov_atom(qt_atom_t parent,
                                  int level) {
-  while (parent.size > 0) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "cmov")
       handle_cmov_atom(atom.to_parent(), level + 1);
 
@@ -771,25 +765,16 @@ qtmp4_reader_c::handle_moov_atom(qt_atom_t parent,
       if ((!dmx->is_unknown() && dmx->codec) || dmx->is_subtitles() || dmx->is_video() || dmx->is_audio())
         m_demuxers.push_back(dmx);
     }
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
 qtmp4_reader_c::handle_mvex_atom(qt_atom_t parent,
                                  int level) {
-  while (8 <= parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "trex")
       handle_trex_atom(atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
@@ -815,25 +800,16 @@ qtmp4_reader_c::handle_moof_atom(qt_atom_t parent,
   m_moof_offset              = moof_atom.pos;
   m_fragment_implicit_offset = moof_atom.pos;
 
-  while (8 <= parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "traf")
       handle_traf_atom(atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
 qtmp4_reader_c::handle_traf_atom(qt_atom_t parent,
                                  int level) {
-  while (8 <= parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "tfhd")
       handle_tfhd_atom(atom.to_parent(), level + 1);
 
@@ -845,9 +821,7 @@ qtmp4_reader_c::handle_traf_atom(qt_atom_t parent,
         handle_edts_atom(*m_track_for_fragment, atom.to_parent(), level + 1);
     }
 
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 
   m_fragment           = nullptr;
   m_track_for_fragment = nullptr;
@@ -999,19 +973,13 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
 void
 qtmp4_reader_c::handle_udta_atom(qt_atom_t parent,
                                  int level) {
-  while (8 <= parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "chpl")
       handle_chpl_atom(atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "meta")
       handle_meta_atom(atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
@@ -1053,31 +1021,19 @@ qtmp4_reader_c::handle_meta_atom(qt_atom_t parent,
                                  int level) {
   m_in->skip(1 + 3);        // version & flags
 
-  while (8 <= parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "ilst")
       handle_ilst_atom(atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
 qtmp4_reader_c::handle_ilst_atom(qt_atom_t parent,
                                  int level) {
-  while (8 <= parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "----")
       handle_4dashes_atom(atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 std::string
@@ -1100,10 +1056,7 @@ qtmp4_reader_c::handle_4dashes_atom(qt_atom_t parent,
                                     int level) {
   std::string name, mean, data;
 
-  while (8 <= parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "name")
       name = read_string_atom(atom, 4);
 
@@ -1112,10 +1065,7 @@ qtmp4_reader_c::handle_4dashes_atom(qt_atom_t parent,
 
     else if (atom.fourcc == "data")
       data = read_string_atom(atom, 8);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 
   mxdebug_if(m_debug_headers, boost::format("'----' content: name=%1% mean=%2% data=%3%\n") % name % mean % data);
 
@@ -1226,10 +1176,7 @@ void
 qtmp4_reader_c::handle_stbl_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
-  while (0 < parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "stts")
       handle_stts_atom(dmx, atom.to_parent(), level + 1);
 
@@ -1259,10 +1206,7 @@ qtmp4_reader_c::handle_stbl_atom(qtmp4_demuxer_c &dmx,
 
     else if (atom.fourcc == "sbgp")
       handle_sbgp_atom(dmx, atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
@@ -1499,16 +1443,10 @@ void
 qtmp4_reader_c::handle_edts_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
-  while (0 < parent.size) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "elst")
       handle_elst_atom(dmx, atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 }
 
 void
@@ -1573,10 +1511,9 @@ void
 qtmp4_reader_c::handle_tref_atom(qtmp4_demuxer_c &/* dmx */,
                                  qt_atom_t parent,
                                  int level) {
-  while (parent.size > 0) {
-    qt_atom_t atom = read_atom();
-    if ((atom.size > parent.size) || (12 > atom.size))
-      break;
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
+    if (12 > atom.size)
+      return;
 
     std::vector<uint32_t> track_ids;
     for (auto idx = (atom.size - 4) / 8; 0 < idx; --idx)
@@ -1586,26 +1523,21 @@ qtmp4_reader_c::handle_tref_atom(qtmp4_demuxer_c &/* dmx */,
       for (auto track_id : track_ids)
         m_chapter_track_ids[track_id] = true;
 
-    if (m_debug_headers) {
-      std::string message;
-      for (auto track_id : track_ids)
-        message += (boost::format(" %1%") % track_id).str();
-      mxdebug(boost::format("%1%Reference type: %2%; track IDs:%3%\n") % space(level * 2 + 1) % atom.fourcc % message);
-    }
+    if (!m_debug_headers)
+      return;
 
-    skip_atom();
-    parent.size -= atom.size;
-  }
+    std::string message;
+    for (auto track_id : track_ids)
+      message += (boost::format(" %1%") % track_id).str();
+    mxdebug(boost::format("%1%Reference type: %2%; track IDs:%3%\n") % space(level * 2 + 1) % atom.fourcc % message);
+  });
 }
 
 void
 qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t parent,
                                  int level) {
-  while (parent.size > 0) {
-    qt_atom_t atom = read_atom();
-    print_basic_atom_info();
-
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "tkhd")
       handle_tkhd_atom(dmx, atom.to_parent(), level + 1);
 
@@ -1617,10 +1549,7 @@ qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_c &dmx,
 
     else if (atom.fourcc == "tref")
       handle_tref_atom(dmx, atom.to_parent(), level + 1);
-
-    skip_atom();
-    parent.size -= atom.size;
-  }
+  });
 
   dmx.determine_codec();
   mxdebug_if(m_debug_headers, boost::format("%1%Codec determination result: %2%\n") % space(level * 2 + 1) % dmx.codec);

@@ -404,7 +404,7 @@ struct qt_atom_t {
   {
   }
 
-  qt_atom_t to_parent() {
+  qt_atom_t to_parent() const {
     qt_atom_t parent;
 
     parent.fourcc = fourcc;
@@ -569,4 +569,6 @@ protected:
   virtual void detect_interleaving();
 
   virtual std::string read_string_atom(qt_atom_t atom, size_t num_skipped);
+
+  virtual void process_atom(qt_atom_t const &parent, int level, std::function<void(qt_atom_t const &)> const &handler);
 };
