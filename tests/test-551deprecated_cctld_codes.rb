@@ -7,6 +7,6 @@ test_merge "data/subtitles/srt/ven.srt", :args => "--chapters data/chapters/uk-a
 test_merge "data/mkv/chapters-uk-and-gb.mks"
 
 test "fix during extraction" do
-  extract "data/mkv/chapters-uk-and-gb.mks > #{tmp}", :mode => :chapters
+  extract "data/mkv/chapters-uk-and-gb.mks", :args => tmp, :mode => :chapters
   hash_tmp
 end

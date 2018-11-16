@@ -6,7 +6,7 @@ file = "data/mkv/complex.mkv"
 
 describe "mkvextract / write BOMs only once with --redirect-output"
 test "extraction via shell redirection" do
-  extract(file, :mode => :chapters).
+  extract(file, :mode => :chapters, :args => "-").
     slice(0..-2).
     join('').
     md5

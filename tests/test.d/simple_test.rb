@@ -276,7 +276,8 @@ class SimpleTest
     fail ArgumentError if args.empty?
 
     mode     = options[:mode] || :tracks
-    command  = "../src/mkvextract --engage no_variable_data #{mode} #{args.first} " + options.keys.select { |key| key.is_a?(Numeric) }.sort.collect { |key| "#{key}:#{options[key]}" }.join(' ')
+    command  = "../src/mkvextract --engage no_variable_data #{args.first} #{mode} " + options.keys.select { |key| key.is_a?(Numeric) }.sort.collect { |key| "#{key}:#{options[key]}" }.join(' ')
+    command += options[:args] if options.key?(:args)
 
     self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
   end

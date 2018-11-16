@@ -4,6 +4,6 @@
 describe "mkvextract / extract chapters with EbmlVoid elements"
 
 test 'extraction' do
-  output = extract("data/mkv/chapters-with-ebmlvoid.mkv", :mode => :chapters).join('')
+  output = extract("data/mkv/chapters-with-ebmlvoid.mkv", :mode => :chapters, :args => "-").join('')
   /ebml.?void/i.match(output) ? 'BAD' : 'ok'
 end
