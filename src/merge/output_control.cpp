@@ -1375,7 +1375,12 @@ prepare_additional_chapter_atoms_for_rendering() {
   if (!s_chapters_in_this_file)
     s_chapters_in_this_file = std::make_shared<KaxChapters>();
 
-  auto offset   = timestamp_c::ns(g_no_linking ? g_cluster_helper->get_first_timestamp_in_file() + g_cluster_helper->get_discarded_duration() : 0);
+  static timestamp_c s_first_file_minimum_timestamp;
+
+  if (!s_first_file_minimum_timestamp.valid())
+    s_first_file_minimum_timestamp = timestamp_c::ns(g_no_linking ? g_cluster_helper->get_first_timestamp_in_file() + g_cluster_helper->get_discarded_duration() : 0);
+
+  auto offset   = timestamp_c::ns(g_no_linking ? g_cluster_helper->get_first_timestamp_in_file() + g_cluster_helper->get_discarded_duration() : 0) - s_first_file_minimum_timestamp;
   auto &edition = GetChild<KaxEditionEntry>(*s_chapters_in_this_file);
 
   if (!FindChild<KaxEditionUID>(edition))

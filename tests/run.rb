@@ -4,6 +4,7 @@ require "digest/md5"
 require "json"
 require "json_schema"
 require "pp"
+require "rexml/document"
 require "tempfile"
 
 require_relative "test.d/controller.rb"

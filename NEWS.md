@@ -15,6 +15,9 @@
   so that Windows actually recognizes it. See #2415.
 * mkvmerge: MP4 reader: fixed handling of atoms whose size exceeds the parent
   atom's size. Fixes #2431.
+* mkvmerge: chapter generation: the start timestamps of chapters generated in
+  intervals was wrong for files whose smallest video timestamp was bigger than
+  0. Fixes #2432.
 
 ## Build system changes
 
