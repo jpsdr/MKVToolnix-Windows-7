@@ -1005,6 +1005,7 @@ $common_libs = [
   :boost_regex,
   :boost_filesystem,
   :boost_system,
+  :fmt,
 ]
 
 $common_libs += [:cmark] if c?(:USE_QT)
