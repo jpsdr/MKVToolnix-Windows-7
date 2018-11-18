@@ -308,7 +308,7 @@ std::string
 frame_c::to_string(bool verbose)
   const {
   if (!verbose)
-    return (boost::format("position %1% BS ID %2% size %3% E-AC-3 %4%") % m_stream_position % m_bs_id % m_bytes % is_eac3()).str();
+    return fmt::format("position {0} BS ID {1} size {2} E-AC-3 {3}", m_stream_position, m_bs_id, m_bytes, is_eac3());
 
   const std::string &frame_type = !is_eac3()                                  ? "---"
                                 : m_frame_type == EAC3_FRAME_TYPE_INDEPENDENT ? "independent"
@@ -317,28 +317,27 @@ frame_c::to_string(bool verbose)
                                 : m_frame_type == EAC3_FRAME_TYPE_RESERVED    ? "reserved"
                                 :                                               "unknown";
 
-  std::string output = (boost::format("position %1% size %3% garbage %2% BS ID %4% E-AC-3 %15% sample rate %5% bit rate %6% channels %7% (effective layout 0x%|16$08x|) flags %8% samples %9% type %10% (%13%) "
-                                      "sub stream ID %11% has dependent frames %12% total size %14%")
-                        % m_stream_position
-                        % m_garbage_size
-                        % m_bytes
-                        % m_bs_id
-                        % m_sample_rate
-                        % m_bit_rate
-                        % m_channels
-                        % m_flags
-                        % m_samples
-                        % m_frame_type
-                        % m_sub_stream_id
-                        % m_dependent_frames.size()
-                        % frame_type
-                        % (m_data ? m_data->get_size() : 0)
-                        % is_eac3()
-                        % get_effective_channel_layout()
-                        ).str();
+  auto output = fmt::format("position {0} size {2} garbage {1} BS ID {3} E-AC-3 {14} sample rate {4} bit rate {5} channels {6} (effective layout 0x{15:08x}) flags {7} samples {8} type {9} ({12}) "
+                            "sub stream ID {10} has dependent frames {11} total size {13}",
+                            m_stream_position,
+                            m_garbage_size,
+                            m_bytes,
+                            m_bs_id,
+                            m_sample_rate,
+                            m_bit_rate,
+                            m_channels,
+                            m_flags,
+                            m_samples,
+                            m_frame_type,
+                            m_sub_stream_id,
+                            m_dependent_frames.size(),
+                            frame_type,
+                            m_data ? m_data->get_size() : 0,
+                            is_eac3(),
+                            get_effective_channel_layout());
 
   for (auto &frame : m_dependent_frames)
-    output += (boost::format(" { %1% }") % frame.to_string(verbose)).str();
+    output += fmt::format(" { {0} }", frame.to_string(verbose));
 
   return output;
 }
@@ -447,7 +446,7 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
   std::size_t base = 0;
 
   do {
-    mxdebug_if(s_debug, boost::format("Starting search for %2% headers with base %1%, buffer size %3%\n") % base % num_required_headers % buffer_size);
+    mxdebug_if(s_debug, fmt::format("Starting search for {1} headers with base {0}, buffer size {2}\n", base, num_required_headers, buffer_size));
 
     std::size_t position = base;
 
@@ -455,7 +454,7 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
     while (((position + 8) < buffer_size) && !first_frame.decode_header(&buffer[position], buffer_size - position))
       ++position;
 
-    mxdebug_if(s_debug, boost::format("First frame at %1% valid %2%\n") % position % first_frame.m_valid);
+    mxdebug_if(s_debug, fmt::format("First frame at {0} valid {1}\n", position, first_frame.m_valid));
 
     if (!first_frame.m_valid)
       return -1;
@@ -471,7 +470,7 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
         break;
 
       if (8 > current_frame.m_bytes) {
-        mxdebug_if(s_debug, boost::format("Current frame at %1% has invalid size %2%\n") % offset % current_frame.m_bytes);
+        mxdebug_if(s_debug, fmt::format("Current frame at {0} has invalid size {1}\n", offset, current_frame.m_bytes));
         break;
       }
 
@@ -479,19 +478,19 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
           && (current_frame.m_channels    != first_frame.m_channels)
           && (current_frame.m_sample_rate != first_frame.m_sample_rate)) {
         mxdebug_if(s_debug,
-                   boost::format("Current frame at %7% differs from first frame. (first/current) BS ID: %1%/%2% channels: %3%/%4% sample rate: %5%/%6%\n")
-                   % first_frame.m_bs_id % current_frame.m_bs_id % first_frame.m_channels % current_frame.m_channels % first_frame.m_sample_rate % current_frame.m_sample_rate % offset);
+                   fmt::format("Current frame at {6} differs from first frame. (first/current) BS ID: {0}/{1} channels: {2}/{3} sample rate: {4}/{5}\n",
+                               first_frame.m_bs_id, current_frame.m_bs_id, first_frame.m_channels, current_frame.m_channels, first_frame.m_sample_rate, current_frame.m_sample_rate, offset));
         break;
       }
 
-      mxdebug_if(s_debug, boost::format("Current frame at %1% equals first frame, found %2%\n") % offset % (num_headers_found + 1));
+      mxdebug_if(s_debug, fmt::format("Current frame at {0} equals first frame, found {1}\n", offset, num_headers_found + 1));
 
       ++num_headers_found;
       offset += current_frame.m_bytes;
     }
 
     if (num_headers_found == num_required_headers) {
-      mxdebug_if(s_debug, boost::format("Found required number of headers at %1%\n") % position);
+      mxdebug_if(s_debug, fmt::format("Found required number of headers at {0}\n", position));
       return position;
     }
 
@@ -611,13 +610,13 @@ remove_dialog_normalization_gain_impl(unsigned char *buf,
   if (   (frame.m_dialog_normalization_gain == removed_level)
       && (   !frame.m_dialog_normalization_gain2
           || (*frame.m_dialog_normalization_gain2 == removed_level))) {
-    mxdebug_if(s_debug, boost::format("no need to remove the dialog normalization gain, it's already set to -%1% dB\n") % removed_level);
+    mxdebug_if(s_debug, fmt::format("no need to remove the dialog normalization gain, it's already set to -{0} dB\n", removed_level));
     return;
   }
 
   mxdebug_if(s_debug,
-             boost::format("changing dialog normalization gain from -%1% dB (%2%) to -%3% dB\n")
-             % frame.m_dialog_normalization_gain % (frame.m_dialog_normalization_gain2 ? (boost::format("-%1% dB") % *frame.m_dialog_normalization_gain2).str() : "—"s) % removed_level);
+             fmt::format("changing dialog normalization gain from -{0} dB ({1}) to -{2} dB\n",
+                         frame.m_dialog_normalization_gain, frame.m_dialog_normalization_gain2 ? fmt::format("-{0} dB", *frame.m_dialog_normalization_gain2) : "—"s, removed_level));
 
   mtx::bits::writer_c w{buf, frame.m_bytes};
 
