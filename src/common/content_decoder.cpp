@@ -80,13 +80,13 @@ content_decoder_c::initialize(KaxTrackEntry &ktentry) {
     }
 
     if (1 == enc.type) {
-      mxwarn(boost::format(Y("Track number %1% has been encrypted and decryption has not yet been implemented.\n")) % tid);
+      mxwarn(fmt::format(Y("Track number {0} has been encrypted and decryption has not yet been implemented.\n"), tid));
       ok = false;
       break;
     }
 
     if (0 != enc.type) {
-      mxerror(boost::format(Y("Unknown content encoding type %1% for track %2%.\n")) % enc.type % tid);
+      mxerror(fmt::format(Y("Unknown content encoding type {0} for track {1}.\n"), enc.type, tid));
       ok = false;
       break;
     }
@@ -96,7 +96,7 @@ content_decoder_c::initialize(KaxTrackEntry &ktentry) {
 
     else if (mtx::included_in(enc.comp_algo, 1u, 2u)) {
       auto algorithm = 1u == enc.comp_algo ? "bzlib" : "lzo1x";
-      mxwarn(boost::format(Y("Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n")) % tid % algorithm);
+      mxwarn(fmt::format(Y("Track {0} was compressed with the algorithm '{1}' which is not supported anymore.\n"), tid, algorithm));
       ok = false;
       break;
 
@@ -105,7 +105,7 @@ content_decoder_c::initialize(KaxTrackEntry &ktentry) {
       std::static_pointer_cast<header_removal_compressor_c>(enc.compressor)->set_bytes(enc.comp_settings);
 
     } else {
-      mxwarn(boost::format(Y("Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n")) % tid % enc.comp_algo);
+      mxwarn(fmt::format(Y("Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"), tid, enc.comp_algo));
       ok = false;
       break;
     }

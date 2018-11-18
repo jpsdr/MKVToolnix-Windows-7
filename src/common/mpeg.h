@@ -32,7 +32,7 @@ public:
   }
 
   virtual std::string error() const throw() {
-    return (boost::format("length of the 'NALU size' field too small: need at least %1% bytes") % m_required_length).str();
+    return fmt::format("length of the 'NALU size' field too small: need at least {0} bytes", m_required_length);
   }
 
   virtual std::size_t get_required_length() const {

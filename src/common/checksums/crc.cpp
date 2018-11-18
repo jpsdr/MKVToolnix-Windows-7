@@ -73,8 +73,7 @@ crc_base_c::init_table() {
   }
 
   // for (auto row = 0u; row < (256u / 4); ++row)
-  //   mxinfo(boost::format("0x%|1$08x| 0x%|2$08x| 0x%|3$08x| 0x%|4$08x|\n")
-  //          % m_table[row * 4 + 0] % m_table[row * 4 + 1] % m_table[row * 4 + 2] % m_table[row * 4 + 3]);
+  //   mxinfo(fmt::format("0x{0:08x} 0x{1:08x} 0x{2:08x} 0x{3:08x}\n", m_table[row * 4 + 0], m_table[row * 4 + 1], m_table[row * 4 + 2], m_table[row * 4 + 3]));
 }
 
 memory_cptr

@@ -237,12 +237,12 @@ parser_c::parse_timing_info(mtx::bits::reader_c &r) {
     p->bitstream_default_duration.assign(1'000'000'000ull * p->num_units_in_display_tick * p->num_ticks_per_picture, p->time_scale);
 
   mxdebug_if(p->debug_timing_info,
-             boost::format("parse_timing_info: num_units_in_display_tick %1% time_scale %2% equal_picture_interval %3% num_ticks_per_picture %4% bitstream_default_duration %5%\n")
-             % p->num_units_in_display_tick
-             % p->time_scale
-             % p->equal_picture_interval
-             % p->num_ticks_per_picture
-             % format_timestamp(boost::rational_cast<uint64_t>(p->bitstream_default_duration)));
+             fmt::format("parse_timing_info: num_units_in_display_tick {0} time_scale {1} equal_picture_interval {2} num_ticks_per_picture {3} bitstream_default_duration {4}\n",
+                         p->num_units_in_display_tick,
+                         p->time_scale,
+                         p->equal_picture_interval,
+                         p->num_ticks_per_picture,
+                         format_timestamp(boost::rational_cast<uint64_t>(p->bitstream_default_duration))));
 }
 
 void
@@ -278,7 +278,7 @@ parser_c::parse_sequence_header_obu(mtx::bits::reader_c &r) {
       if (decoder_model_info_present_flag)
         parse_decoder_model_info(r);
     } else
-      mxdebug_if(p->debug_timing_info, boost::format("parse_timing_info: no timing info in sequence header\n"));
+      mxdebug_if(p->debug_timing_info, fmt::format("parse_timing_info: no timing info in sequence header\n"));
 
     auto initial_display_delay_present_flag = r.get_bit();
     auto operating_points_count             = r.get_bits(5) + 1;
@@ -345,7 +345,7 @@ parser_c::parse_sequence_header_obu(mtx::bits::reader_c &r) {
 
   r.skip_bits(1);               // film_grain_params_present
 
-  mxdebug_if(p->debug_parser, boost::format("debug_parser:     remaining bits at end of sequence header parsing: %1%\n") % r.get_remaining_bits());
+  mxdebug_if(p->debug_parser, fmt::format("debug_parser:     remaining bits at end of sequence header parsing: {0}\n", r.get_remaining_bits()));
 }
 
 void
@@ -366,7 +366,7 @@ parser_c::parse_frame_header_obu(mtx::bits::reader_c &r) {
 
   auto frame_type              = r.get_bits(2);
   p->current_frame.is_keyframe = (frame_type == FRAME_TYPE_KEY); // || (frame_type == FRAME_TYPE_INTRA_ONLY);
-  mxdebug_if(p->debug_is_keyframe, boost::format("is_keyframe:   %1%\n") % p->current_frame.is_keyframe);
+  mxdebug_if(p->debug_is_keyframe, fmt::format("is_keyframe:   {0}\n", p->current_frame.is_keyframe));
 }
 
 void
@@ -383,7 +383,7 @@ parser_c::parse(unsigned char const *buffer,
 
   r.init(p->buffer.get_buffer(), p->buffer.get_size());
 
-  mxdebug_if(p->debug_parser, boost::format("debug_parser: start on size %1%\n") % buffer_size);
+  mxdebug_if(p->debug_parser, fmt::format("debug_parser: start on size {0}\n", buffer_size));
 
   while (r.get_remaining_bits() > 0)
     if (!parse_obu())
@@ -403,12 +403,12 @@ parser_c::parse_obu() {
     throw obu_without_size_unsupported_x{};
 
   mxdebug_if(p->debug_parser,
-             boost::format("debug_parser:   at %1% type %2% (%3%) size %4% remaining %5%\n")
-             % (start_bit_position / 8)
-             % p->obu_type
-             % get_obu_type_name(p->obu_type)
-             % *obu_size
-             % (r.get_remaining_bits() / 8));
+             fmt::format("debug_parser:   at {0} type {1} ({2}) size {3} remaining {4}\n",
+                         start_bit_position / 8,
+                         p->obu_type,
+                         get_obu_type_name(p->obu_type),
+                         *obu_size,
+                         r.get_remaining_bits() / 8));
 
   auto next_obu_bit_position = r.get_bit_position() + (*obu_size * 8);
   if ((*obu_size * 8) > static_cast<uint64_t>(r.get_remaining_bits())) {
@@ -594,7 +594,7 @@ parser_c::is_keyframe(memory_c const &buffer) {
 bool
 parser_c::is_keyframe(unsigned char const *buffer,
                       uint64_t buffer_size) {
-  mxdebug_if(p->debug_is_keyframe, boost::format("is_keyframe: start on size %1%\n") % buffer_size);
+  mxdebug_if(p->debug_is_keyframe, fmt::format("is_keyframe: start on size {0}\n", buffer_size));
 
   p->r.init(buffer, buffer_size);
 
@@ -604,11 +604,11 @@ parser_c::is_keyframe(unsigned char const *buffer,
       auto obu_size = parse_obu_common_data();
 
       mxdebug_if(p->debug_is_keyframe,
-                 boost::format("is_keyframe:   at %1% type %2% (%3%) size %4%\n")
-                 % position
-                 % p->obu_type
-                 % get_obu_type_name(p->obu_type)
-                 % (obu_size ? static_cast<int>(*obu_size) : -1));
+                 fmt::format("is_keyframe:   at {0} type {1} ({2}) size {3}\n",
+                             position,
+                             p->obu_type,
+                             get_obu_type_name(p->obu_type),
+                             obu_size ? static_cast<int>(*obu_size) : -1));
 
       if (!mtx::included_in(p->obu_type, OBU_FRAME, OBU_FRAME_HEADER)) {
         if (!obu_size) {
@@ -634,13 +634,13 @@ parser_c::is_keyframe(unsigned char const *buffer,
       auto result     = (frame_type == FRAME_TYPE_KEY); // || (frame_type == FRAME_TYPE_INTRA_ONLY);
 
       mxdebug_if(p->debug_is_keyframe,
-                 boost::format("is_keyframe:   %1% due to frame_type == %2% (%3%)\n")
-                 % (result ? "true" : "false")
-                 % frame_type
-                 % (  frame_type == FRAME_TYPE_KEY        ? "key"
-                    : frame_type == FRAME_TYPE_INTER      ? "inter"
-                    : frame_type == FRAME_TYPE_INTRA_ONLY ? "intra-only"
-                    :                                       "switch"));
+                 fmt::format("is_keyframe:   {0} due to frame_type == {1} ({2})\n",
+                             result ? "true" : "false",
+                             frame_type,
+                               frame_type == FRAME_TYPE_KEY        ? "key"
+                             : frame_type == FRAME_TYPE_INTER      ? "inter"
+                             : frame_type == FRAME_TYPE_INTRA_ONLY ? "intra-only"
+                             :                                       "switch"));
 
       return result;
     }
@@ -663,7 +663,7 @@ parser_c::debug_obu_types(unsigned char const *buffer,
   if (!p->debug_obu_types)
     return;
 
-  mxdebug_if(p->debug_obu_types, boost::format("debug_obu_types: start on size %1%\n") % buffer_size);
+  mxdebug_if(p->debug_obu_types, fmt::format("debug_obu_types: start on size {0}\n", buffer_size));
 
   p->r.init(buffer, buffer_size);
 
@@ -673,11 +673,11 @@ parser_c::debug_obu_types(unsigned char const *buffer,
       auto obu_size = parse_obu_common_data();
 
       mxdebug_if(p->debug_obu_types,
-                 boost::format("debug_obu_types:   at %1% type %2% (%3%) size %4%\n")
-                 % position
-                 % p->obu_type
-                 % get_obu_type_name(p->obu_type)
-                 % (obu_size ? static_cast<int>(*obu_size) : -1));
+                 fmt::format("debug_obu_types:   at {0} type {1} ({2}) size {3}\n",
+                             position,
+                             p->obu_type,
+                             get_obu_type_name(p->obu_type),
+                             obu_size ? static_cast<int>(*obu_size) : -1));
 
       if (!obu_size)
         return;

@@ -46,8 +46,8 @@ header_removal_compressor_c::do_compress(unsigned char const *buffer,
 
   size_t to_remove_size = m_bytes->get_size();
   if (size < to_remove_size)
-    throw mtx::compression_x(boost::format(Y("Header removal compression not possible because the buffer contained %1% bytes "
-                                             "which is less than the size of the headers that should be removed, %2%.")) % size % to_remove_size);
+    throw mtx::compression_x(fmt::format(Y("Header removal compression not possible because the buffer contained {0} bytes "
+                                           "which is less than the size of the headers that should be removed, {1}."), size, to_remove_size));
 
   auto bytes_ptr = m_bytes->get_buffer();
 
@@ -56,11 +56,11 @@ header_removal_compressor_c::do_compress(unsigned char const *buffer,
     size_t i;
 
     for (i = 0; to_remove_size > i; ++i) {
-      b_buffer += (boost::format(" %|1$02x|") % static_cast<unsigned int>(buffer[i])).str();
-      b_bytes  += (boost::format(" %|1$02x|") % static_cast<unsigned int>(bytes_ptr[i])).str();
+      b_buffer += fmt::format(" {0:02x}", static_cast<unsigned int>(buffer[i]));
+      b_bytes  += fmt::format(" {0:02x}", static_cast<unsigned int>(bytes_ptr[i]));
     }
-    throw mtx::compression_x(boost::format(Y("Header removal compression not possible because the buffer did not start with the bytes that should be removed. "
-                                             "Wanted bytes:%1%; found:%2%.")) % b_bytes % b_buffer);
+    throw mtx::compression_x(fmt::format(Y("Header removal compression not possible because the buffer did not start with the bytes that should be removed. "
+                                           "Wanted bytes:{0}; found:{1}."), b_bytes, b_buffer));
   }
 
   return memory_c::clone(buffer + size, size - to_remove_size);
@@ -90,7 +90,7 @@ analyze_header_removal_compressor_c::~analyze_header_removal_compressor_c() {
     mxinfo("Analysis complete but no similarities found.\n");
 
   else {
-    mxinfo(boost::format("Analysis complete. %1% identical byte(s) at the start of each of the %2% packet(s). Hex dump of the content:\n") % m_bytes->get_size() % m_packet_counter);
+    mxinfo(fmt::format("Analysis complete. {0} identical byte(s) at the start of each of the {1} packet(s). Hex dump of the content:\n", m_bytes->get_size(), m_packet_counter));
     debugging_c::hexdump(m_bytes->get_buffer(), m_bytes->get_size());
   }
 }

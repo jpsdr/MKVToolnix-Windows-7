@@ -180,7 +180,7 @@ find_consecutive_headers(unsigned char const *buf,
   unsigned int base = pos;
 
   do {
-    mxdebug_if(s_debug, boost::format("find_cons_dts_h: starting with base at %1%\n") % base);
+    mxdebug_if(s_debug, fmt::format("find_cons_dts_h: starting with base at {0}\n", base));
 
     int offset = header.frame_byte_size;
     unsigned int i;
@@ -191,7 +191,7 @@ find_consecutive_headers(unsigned char const *buf,
       pos = find_header(&buf[base + offset], size - base - offset, new_header, false);
       if (0 == pos) {
         if (new_header == header) {
-          mxdebug_if(s_debug, boost::format("find_cons_dts_h: found good header %1%\n") % i);
+          mxdebug_if(s_debug, fmt::format("find_cons_dts_h: found good header {0}\n", i));
           offset += new_header.frame_byte_size;
           continue;
         } else
@@ -227,33 +227,33 @@ header_t::print()
   if (frametype == frametype_e::normal) {
     mxinfo("normal");
   } else {
-    mxinfo(boost::format("termination, deficit sample count = %1%") % deficit_sample_count);
+    mxinfo(fmt::format("termination, deficit sample count = {0}", deficit_sample_count));
   }
   mxinfo("\n");
 
-  mxinfo(boost::format("CRC available          : %1%\n") % (crc_present ? "yes" : "no"));
+  mxinfo(fmt::format("CRC available          : {0}\n", crc_present ? "yes" : "no"));
 
-  mxinfo(boost::format("Frame Size             : PCM core samples=32*%1%=%2%, %3% milliseconds, %4% byte\n")
-         % num_pcm_sample_blocks % (num_pcm_sample_blocks * 32) % ((num_pcm_sample_blocks * 32000.0) / core_sampling_frequency) % frame_byte_size);
+  mxinfo(fmt::format("Frame Size             : PCM core samples=32*{0}={1}, {2} milliseconds, {3} byte\n",
+                     num_pcm_sample_blocks, num_pcm_sample_blocks * 32, (num_pcm_sample_blocks * 32000.0) / core_sampling_frequency, frame_byte_size));
 
-  mxinfo(boost::format("Audio Channels         : %1%%2%, arrangement: %3%\n")
-         % audio_channels % (source_surround_in_es ? " ES" : "") % audio_channel_arrangement);
+  mxinfo(fmt::format("Audio Channels         : {0}{1}, arrangement: {2}\n",
+                     audio_channels, source_surround_in_es ? " ES" : "", audio_channel_arrangement));
 
-  mxinfo(boost::format("Core sampling frequency: %1%\n") % core_sampling_frequency);
+  mxinfo(fmt::format("Core sampling frequency: {0}\n", core_sampling_frequency));
 
   if ((-1 < transmission_bitrate) || (-3 > transmission_bitrate))
-    mxinfo(boost::format("Transmission bitrate   : %1%\n") % transmission_bitrate);
+    mxinfo(fmt::format("Transmission bitrate   : {0}\n", transmission_bitrate));
   else
-    mxinfo(boost::format("Transmission_bitrate   : %1%\n")
-           % (  transmission_bitrate == -1 ? "open"
-              : transmission_bitrate == -2 ? "variable"
-              :                              "lossless"));
+    mxinfo(fmt::format("Transmission_bitrate   : {0}\n",
+                         transmission_bitrate == -1 ? "open"
+                       : transmission_bitrate == -2 ? "variable"
+                       :                              "lossless"));
 
-  mxinfo(boost::format("Embedded Down Mix      : %1%\n") % (embedded_down_mix      ? "yes" : "no"));
-  mxinfo(boost::format("Embedded Dynamic Range : %1%\n") % (embedded_dynamic_range ? "yes" : "no"));
-  mxinfo(boost::format("Embedded Time Stamp    : %1%\n") % (embedded_time_stamp    ? "yes" : "no"));
-  mxinfo(boost::format("Embedded Auxiliary Data: %1%\n") % (auxiliary_data         ? "yes" : "no"));
-  mxinfo(boost::format("HDCD Master            : %1%\n") % (hdcd_master            ? "yes" : "no"));
+  mxinfo(fmt::format("Embedded Down Mix      : {0}\n", embedded_down_mix      ? "yes" : "no"));
+  mxinfo(fmt::format("Embedded Dynamic Range : {0}\n", embedded_dynamic_range ? "yes" : "no"));
+  mxinfo(fmt::format("Embedded Time Stamp    : {0}\n", embedded_time_stamp    ? "yes" : "no"));
+  mxinfo(fmt::format("Embedded Auxiliary Data: {0}\n", auxiliary_data         ? "yes" : "no"));
+  mxinfo(fmt::format("HDCD Master            : {0}\n", hdcd_master            ? "yes" : "no"));
 
   mxinfo("Extended Coding        : ");
   if (extended_coding) {
@@ -275,7 +275,7 @@ header_t::print()
     mxinfo("no");
   mxinfo("\n");
 
-  mxinfo(boost::format("Audio Sync in sub-subs : %1%\n") % (audio_sync_word_in_sub_sub ? "yes" : "no"));
+  mxinfo(fmt::format("Audio Sync in sub-subs : {0}\n", audio_sync_word_in_sub_sub ? "yes" : "no"));
 
   mxinfo("Low Frequency Effects  : ");
   switch (lfe_type) {
@@ -294,16 +294,16 @@ header_t::print()
   }
   mxinfo("\n");
 
-  mxinfo(boost::format("Predictor History used : %1%\n") % (predictor_history_flag ? "yes" : "no"));
+  mxinfo(fmt::format("Predictor History used : {0}\n", predictor_history_flag ? "yes" : "no"));
 
-  mxinfo(boost::format("Multirate Interpolator : %1%\n") % (multirate_interpolator == multirate_interpolator_e::non_perfect ? "non perfect" : "perfect"));
+  mxinfo(fmt::format("Multirate Interpolator : {0}\n", multirate_interpolator == multirate_interpolator_e::non_perfect ? "non perfect" : "perfect"));
 
-  mxinfo(boost::format("Encoder Software Vers. : %1%\n") % encoder_software_revision);
-  mxinfo(boost::format("Copy History Bits      : %1%\n") % copy_history);
-  mxinfo(boost::format("Source PCM Resolution  : %1%\n") % source_pcm_resolution);
-  mxinfo(boost::format("Front Encoded as Diff. : %1%\n") % (front_sum_difference    ? "yes" : "no"));
-  mxinfo(boost::format("Surr. Encoded as Diff. : %1%\n") % (surround_sum_difference ? "yes" : "no"));
-  mxinfo(boost::format("Dialog Normaliz. Gain  : %1%\n") % dialog_normalization_gain);
+  mxinfo(fmt::format("Encoder Software Vers. : {0}\n", encoder_software_revision));
+  mxinfo(fmt::format("Copy History Bits      : {0}\n", copy_history));
+  mxinfo(fmt::format("Source PCM Resolution  : {0}\n", source_pcm_resolution));
+  mxinfo(fmt::format("Front Encoded as Diff. : {0}\n", front_sum_difference    ? "yes" : "no"));
+  mxinfo(fmt::format("Surr. Encoded as Diff. : {0}\n", surround_sum_difference ? "yes" : "no"));
+  mxinfo(fmt::format("Dialog Normaliz. Gain  : {0}\n", dialog_normalization_gain));
 
   if (!has_exss)
     mxinfo("Extension substream    : no\n");
@@ -315,7 +315,7 @@ header_t::print()
                   : dts_type_e::x96_24          == dts_type ? "96/24"
                   :                                           "unknown";
 
-    mxinfo(boost::format("Extension substream    : %1%, size %2%\n\n") % type_str % exss_part_size);
+    mxinfo(fmt::format("Extension substream    : {0}, size {1}\n\n", type_str, exss_part_size));
   }
 }
 
@@ -821,7 +821,7 @@ header_t::decode_x96_header(unsigned char const *buf,
     bc.skip_bits(32);             // sync word
 
     auto x96_size = bc.peek_bits(12) + 1;
-    mxinfo(boost::format("x96 size %1%\n") % x96_size);
+    mxinfo(fmt::format("x96 size {0}\n", x96_size));
     bc.skip_bits((x96_size - 4) * 8);
     dts_type = dts_type_e::x96_24;
 
@@ -1006,8 +1006,8 @@ remove_dialog_normalization_gain_from_core(unsigned char *buf,
 
   if (header.dialog_normalization_gain == s_dng_removed_level) {
     mxdebug_if(s_debug_dng_removal,
-               boost::format("DTS core: no need to remove the dialog normalization, it's already set to %1% (%2% dB); CRC: %3%\n")
-               % s_dng_removed_level % header.dialog_normalization_gain % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : "—"s));
+               fmt::format("DTS core: no need to remove the dialog normalization, it's already set to {0} ({1} dB); CRC: {2}\n",
+                           s_dng_removed_level, header.dialog_normalization_gain, header.crc ? fmt::format("{0:04x}", *header.crc) : "—"s));
     return;
   }
 
@@ -1021,8 +1021,8 @@ remove_dialog_normalization_gain_from_core(unsigned char *buf,
   w.put_bits(4, s_dng_removed_level);
 
   mxdebug_if(s_debug_dng_removal,
-             boost::format("DTS core: changing dialog normalization from %1% (%2% dB) to %3%; CRC: %4%\n")
-             % current_level % header.dialog_normalization_gain % s_dng_removed_level % (header.crc ? (boost::format("%|1$04x|") % *header.crc).str() : "—"s));
+             fmt::format("DTS core: changing dialog normalization from {0} ({1} dB) to {2}; CRC: {3}\n",
+                         current_level, header.dialog_normalization_gain, s_dng_removed_level, header.crc ? fmt::format("{0:04x}", *header.crc) : "—"s));
 }
 
 void
@@ -1035,8 +1035,8 @@ remove_dialog_normalization_gain_from_extension(unsigned char *buf,
 
   if (header.extension_dialog_normalization_gain == s_dng_removed_level) {
     mxdebug_if(s_debug_dng_removal,
-               boost::format("DTS extension: no need to remove the dialog normalization, it's already set to %1% (%2% dB); CRC: %|3$04x|\n")
-               % s_dng_removed_level % header.dialog_normalization_gain % old_crc);
+               fmt::format("DTS extension: no need to remove the dialog normalization, it's already set to {0} ({1} dB); CRC: {2:04x}\n",
+                           s_dng_removed_level, header.dialog_normalization_gain, old_crc));
     return;
   }
 
@@ -1053,8 +1053,8 @@ remove_dialog_normalization_gain_from_extension(unsigned char *buf,
   put_uint16_be(&buf[header.exss_offset + header.exss_header_size - 2], new_crc);
 
   mxdebug_if(s_debug_dng_removal,
-             boost::format("DTS extension: changing dialog normalization from %1% (%2% dB) to %3%; old CRC: %|4$04x| new CRC: %|5$04x|\n")
-             % current_level % header.extension_dialog_normalization_gain % s_dng_removed_level % old_crc % new_crc);
+             fmt::format("DTS extension: changing dialog normalization from {0} ({1} dB) to {2}; old CRC: {3:04x} new CRC: {4:04x}\n",
+                         current_level, header.extension_dialog_normalization_gain, s_dng_removed_level, old_crc, new_crc));
 }
 }
 

@@ -78,13 +78,13 @@ public:
   std::string to_string() const {
     auto duration = get_duration();
     auto bps      = get_bits_per_second();
-    return (boost::format("<#b:%1% #f:%2% min:%3% max:%4% dur:%5% bps:%6%>")
-            % m_num_bytes
-            % m_num_frames
-            % (m_min_timestamp              ? *m_min_timestamp              : -1)
-            % (m_max_timestamp_and_duration ? *m_max_timestamp_and_duration : -1)
-            % (duration                     ? *duration                     : -1)
-            % (bps                          ? *bps                          : -1)).str();
+    return fmt::format("<#b:{0} #f:{1} min:{2} max:{3} dur:{4} bps:{5}>",
+                       m_num_bytes,
+                       m_num_frames,
+                       m_min_timestamp              ? *m_min_timestamp              : -1,
+                       m_max_timestamp_and_duration ? *m_max_timestamp_and_duration : -1,
+                       duration                     ? *duration                     : -1,
+                       bps                          ? *bps                          : -1);
   }
 
   void create_tags(libmatroska::KaxTags &tags, std::string const &writing_app, boost::optional<boost::posix_time::ptime> writing_date) const;

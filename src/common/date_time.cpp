@@ -58,7 +58,7 @@ format_epoch_time(time_t const epoch_time,
 
   auto result = GetTimeZoneInformation(&time_zone_info);
   auto bias   = -1 * (time_zone_info.Bias + (result == TIME_ZONE_ID_DAYLIGHT ? time_zone_info.DaylightBias : 0));
-  auto offset = (boost::format("%1%%|2$02d|%|3$02d|") % (bias >= 0 ? '+' : '-') % (std::abs(bias) / 60) % (std::abs(bias) % 60)).str();
+  auto offset = fmt::format("{0}{1:02}{2:02}", bias >= 0 ? '+' : '-', std::abs(bias) / 60, std::abs(bias) % 60);
 
   boost::replace_all(format_string, "%z", offset);
 #endif

@@ -147,7 +147,7 @@ _safememdup(const void *s,
 
   unsigned char *copy = reinterpret_cast<unsigned char *>(malloc(size));
   if (!copy)
-    mxerror(boost::format(Y("memory.cpp/safememdup() called from file %1%, line %2%: malloc() returned nullptr for a size of %3% bytes.\n")) % file % line % size);
+    mxerror(fmt::format(Y("memory.cpp/safememdup() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
   memcpy(copy, s, size);
 
   return copy;
@@ -159,7 +159,7 @@ _safemalloc(size_t size,
             int line) {
   unsigned char *mem = reinterpret_cast<unsigned char *>(malloc(size));
   if (!mem)
-    mxerror(boost::format(Y("memory.cpp/safemalloc() called from file %1%, line %2%: malloc() returned nullptr for a size of %3% bytes.\n")) % file % line % size);
+    mxerror(fmt::format(Y("memory.cpp/safemalloc() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
 
   return mem;
 }
@@ -175,7 +175,7 @@ _saferealloc(void *mem,
 
   mem = realloc(mem, size);
   if (!mem)
-    mxerror(boost::format(Y("memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n")) % file % line % size);
+    mxerror(fmt::format(Y("memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
 
   return reinterpret_cast<unsigned char *>(mem);
 }
@@ -190,7 +190,7 @@ memory_c::splice(memory_c &buffer,
   auto size = buffer.get_size();
 
   if ((offset + to_remove) > size)
-    throw std::invalid_argument{(boost::format("splice: (offset + to_remove) > buffer_size: (%1% + %2%) >= %3%") % offset % to_remove % size).str()};
+    throw std::invalid_argument{fmt::format("splice: (offset + to_remove) > buffer_size: ({0} + {1}) >= {2}", offset, to_remove, size)};
 
   auto insert_size = to_insert ? to_insert->get_size() : 0;
   auto diff        = static_cast<int64_t>(to_remove) - static_cast<int64_t>(insert_size);

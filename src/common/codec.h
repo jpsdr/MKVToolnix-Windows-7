@@ -189,7 +189,7 @@ public:
   }
 
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, uint16_t audio_format = 0u)
-    : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
+    : m_match_re{fmt::format("(?:{0})", match_re), boost::regex::perl | boost::regex::icase}
     , m_name{name}
     , m_type{type}
     , m_track_type{p_track_type}
@@ -199,7 +199,7 @@ public:
   }
 
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, fourcc_c const &fourcc)
-    : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
+    : m_match_re{fmt::format("(?:{0})", match_re), boost::regex::perl | boost::regex::icase}
     , m_name{name}
     , m_type{type}
     , m_track_type{p_track_type}
@@ -208,7 +208,7 @@ public:
   }
 
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<uint16_t> audio_formats)
-    : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
+    : m_match_re{fmt::format("(?:{0})", match_re), boost::regex::perl | boost::regex::icase}
     , m_name{name}
     , m_type{type}
     , m_track_type{p_track_type}
@@ -217,7 +217,7 @@ public:
   }
 
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<fourcc_c> fourccs)
-    : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
+    : m_match_re{fmt::format("(?:{0})", match_re), boost::regex::perl | boost::regex::icase}
     , m_name{name}
     , m_type{type}
     , m_track_type{p_track_type}
@@ -283,7 +283,7 @@ inline std::ostream &
 operator <<(std::ostream &out,
             codec_c const &codec) {
   if (codec)
-    out << (boost::format("%1% (0x%|2$04x|)") % codec.get_name() % static_cast<unsigned int>(codec.get_type()));
+    out << fmt::format("{0} (0x{1:04x})", codec.get_name(), static_cast<unsigned int>(codec.get_type()));
   else
     out << "<invalid-codec>";
 

@@ -32,7 +32,7 @@ version_number_t::version_number_t(const std::string &s)
   : valid{}
 {
   if (debugging_c::requested("version_check"))
-    mxinfo(boost::format("version check: Parsing %1%\n") % s);
+    mxinfo(fmt::format("version check: Parsing {0}\n", s));
 
   // Match the following:
   // 4.4.0
@@ -75,7 +75,7 @@ version_number_t::version_number_t(const std::string &s)
     valid = false;
 
   if (debugging_c::requested("version_check"))
-    mxinfo(boost::format("version check: parse OK; result: %1%\n") % to_string());
+    mxinfo(fmt::format("version check: parse OK; result: {0}\n", to_string()));
 }
 
 int
@@ -139,10 +139,10 @@ get_version_info(const std::string &program,
 
   if (!program.empty())
     info.push_back(program);
-  info.push_back((boost::format("v%1% ('%2%')") % PACKAGE_VERSION % VERSIONNAME).str());
+  info.push_back(fmt::format("v{0} ('{1}')", PACKAGE_VERSION, VERSIONNAME));
 
   if (flags & vif_architecture)
-    info.push_back((boost::format("%1%-bit") % (__SIZEOF_POINTER__ * 8)).str());
+    info.push_back(fmt::format("{0}-bit", __SIZEOF_POINTER__ * 8));
 
   return boost::join(info, " ");
 }
@@ -165,9 +165,9 @@ parse_latest_release_version(mtx::xml::document_cptr const &doc) {
   mtx_release_version_t release;
 
   release.latest_source             = version_number_t{doc->select_node("/mkvtoolnix-releases/latest-source/version").node().child_value()};
-  release.latest_windows_build      = version_number_t{(boost::format("%1% build %2%")
-                                                        % doc->select_node("/mkvtoolnix-releases/latest-windows-pre/version").node().child_value()
-                                                        % doc->select_node("/mkvtoolnix-releases/latest-windows-pre/build").node().child_value()).str()};
+  release.latest_windows_build      = version_number_t{fmt::format("{0} build {1}",
+                                                                   doc->select_node("/mkvtoolnix-releases/latest-windows-pre/version").node().child_value(),
+                                                                   doc->select_node("/mkvtoolnix-releases/latest-windows-pre/build").node().child_value())};
   release.valid                     = release.latest_source.valid;
   release.urls["general"]           = doc->select_node("/mkvtoolnix-releases/latest-source/url").node().child_value();
   release.urls["source_code"]       = doc->select_node("/mkvtoolnix-releases/latest-source/source-code-url").node().child_value();
@@ -180,8 +180,8 @@ parse_latest_release_version(mtx::xml::document_cptr const &doc) {
   if (debugging_c::requested("version_check")) {
     std::stringstream urls;
     brng::for_each(release.urls, [&urls](auto const &kv) { urls << " " << kv.first << ":" << kv.second; });
-    mxdebug(boost::format("update check: current %1% latest source %2% latest winpre %3% URLs%4%\n")
-            % release.current_version.to_string() % release.latest_source.to_string() % release.latest_windows_build.to_string() % urls.str());
+    mxdebug(fmt::format("update check: current {0} latest source {1} latest winpre {2} URLs{3}\n",
+                        release.current_version.to_string(), release.latest_source.to_string(), release.latest_windows_build.to_string(), urls.str()));
   }
 
   return release;
@@ -192,7 +192,7 @@ get_default_segment_info_data(std::string const &application) {
   segment_info_data_t data{};
 
   if (!mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA)) {
-    data.muxing_app   = (boost::format("libebml v%1% + libmatroska v%2%") % libebml::EbmlCodeVersion % libmatroska::KaxCodeVersion).str();
+    data.muxing_app   = fmt::format("libebml v{0} + libmatroska v{1}", libebml::EbmlCodeVersion, libmatroska::KaxCodeVersion);
     data.writing_app  = get_version_info(application, static_cast<version_info_flags_e>(vif_full | vif_untranslated));
     data.writing_date = boost::posix_time::second_clock::universal_time();
 

@@ -114,7 +114,7 @@ public:
     return "create_directory() failed";
   }
   virtual std::string error() const throw() {
-    return (boost::format(Y("Creating directory '%1%' failed: %2%")) % m_path % code().message()).str();
+    return fmt::format(Y("Creating directory '{0}' failed: {1}"), m_path, code().message());
   }
 };
 
@@ -143,7 +143,7 @@ public:
   }
 
   virtual std::string error() const throw() {
-    return (boost::format(Y("Invalid UTF-8 char. First byte: 0x%|1$02x|")) % static_cast<unsigned int>(m_first_char)).str();
+    return fmt::format(Y("Invalid UTF-8 char. First byte: 0x{0:02x}"), static_cast<unsigned int>(m_first_char));
   }
 };
 

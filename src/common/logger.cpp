@@ -49,7 +49,7 @@ target_c::format_line(std::string const &message) {
   char timestamp[30];
   std::strftime(timestamp, 30, "%Y-%m-%d %H:%M:%S", std::localtime(&tnow));
 
-  auto line = (boost::format("[mtx] %1% +%2%ms %3%") % timestamp % std::chrono::duration_cast<std::chrono::milliseconds>(diff).count() % message).str();
+  auto line = fmt::format("[mtx] {0} +{1}ms {2}", timestamp, std::chrono::duration_cast<std::chrono::milliseconds>(diff).count(), message);
   if (message.size() && (message[message.size() - 1] != '\n'))
     line += "\n";
 

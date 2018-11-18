@@ -424,31 +424,31 @@ vui_parameters_copy(mtx::bits::reader_c &r,
 
 void
 sps_info_t::dump() {
-  mxinfo(boost::format("sps_info dump:\n"
-                       "  id:                                    %1%\n"
-                       "  log2_max_pic_order_cnt_lsb:            %2%\n"
-                       "  vui_present:                           %3%\n"
-                       "  ar_found:                              %4%\n"
-                       "  par_num:                               %5%\n"
-                       "  par_den:                               %6%\n"
-                       "  timing_info_present:                   %7%\n"
-                       "  num_units_in_tick:                     %8%\n"
-                       "  time_scale:                            %9%\n"
-                       "  width:                                 %10%\n"
-                       "  height:                                %11%\n"
-                       "  checksum:                              %|12$08x|\n")
-         % id
-         % log2_max_pic_order_cnt_lsb
-         % vui_present
-         % ar_found
-         % par_num
-         % par_den
-         % timing_info_present
-         % num_units_in_tick
-         % time_scale
-         % width
-         % height
-         % checksum);
+  mxinfo(fmt::format("sps_info dump:\n"
+                     "  id:                                    {0}\n"
+                     "  log2_max_pic_order_cnt_lsb:            {1}\n"
+                     "  vui_present:                           {2}\n"
+                     "  ar_found:                              {3}\n"
+                     "  par_num:                               {4}\n"
+                     "  par_den:                               {5}\n"
+                     "  timing_info_present:                   {6}\n"
+                     "  num_units_in_tick:                     {7}\n"
+                     "  time_scale:                            {8}\n"
+                     "  width:                                 {9}\n"
+                     "  height:                                {10}\n"
+                     "  checksum:                              {11:08x}\n",
+                     id,
+                     log2_max_pic_order_cnt_lsb,
+                     vui_present,
+                     ar_found,
+                     par_num,
+                     par_den,
+                     timing_info_present,
+                     num_units_in_tick,
+                     time_scale,
+                     width,
+                     height,
+                     checksum));
 }
 
 bool
@@ -477,13 +477,13 @@ pps_info_t::clear() {
 
 void
 pps_info_t::dump() {
-  mxinfo(boost::format("pps_info dump:\n"
-                       "id: %1%\n"
-                       "sps_id: %2%\n"
-                       "checksum: %|3$08x|\n")
-         % id
-         % sps_id
-         % checksum);
+  mxinfo(fmt::format("pps_info dump:\n"
+                     "id: {0}\n"
+                     "sps_id: {1}\n"
+                     "checksum: {2:08x}\n",
+                     id,
+                     sps_id,
+                     checksum));
 }
 
 void

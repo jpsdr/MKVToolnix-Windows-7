@@ -34,7 +34,7 @@
 int
 mpeg1_2::extract_fps_idx(const unsigned char *buffer,
                          int buffer_size) {
-  mxverb(3, boost::format("mpeg_video_fps: start search in %1% bytes\n") % buffer_size);
+  mxverb(3, fmt::format("mpeg_video_fps: start search in {0} bytes\n", buffer_size));
   if (buffer_size < 8) {
     mxverb(3, "mpeg_video_fps: sequence header too small\n");
     return -1;
@@ -52,7 +52,7 @@ mpeg1_2::extract_fps_idx(const unsigned char *buffer,
     return -1;
   }
 
-  mxverb(3, boost::format("mpeg_video_fps: found sequence header start code at %1%\n") % (idx - 4));
+  mxverb(3, fmt::format("mpeg_video_fps: found sequence header start code at {0}\n", idx - 4));
 
   return buffer[idx + 3] & 0x0f;
 }
@@ -75,7 +75,7 @@ mpeg1_2::extract_ar(const unsigned char *buffer,
   uint32_t marker;
   int idx;
 
-  mxverb(3, boost::format("mpeg_video_ar: start search in %1% bytes\n") % buffer_size);
+  mxverb(3, fmt::format("mpeg_video_ar: start search in {0} bytes\n", buffer_size));
   if (buffer_size < 8) {
     mxverb(3, "mpeg_video_ar: sequence header too small\n");
     return false;
@@ -92,7 +92,7 @@ mpeg1_2::extract_ar(const unsigned char *buffer,
     return false;
   }
 
-  mxverb(3, boost::format("mpeg_video_ar: found sequence header start code at %1%\n") % (idx - 4));
+  mxverb(3, fmt::format("mpeg_video_ar: found sequence header start code at {0}\n", idx - 4));
   idx += 3;                     // width and height
   if (idx >= buffer_size) {
     mxverb(3, "mpeg_video_ar: sequence header too small\n");

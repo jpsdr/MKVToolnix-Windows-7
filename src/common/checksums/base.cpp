@@ -48,7 +48,7 @@ for_algorithm(algorithm_e algorithm,
     return std::make_unique<md5_c>();
 
   else
-    mxerror(boost::format("Programming error: unknown checksum algorithm %1%\n") % static_cast<int>(algorithm));
+    mxerror(fmt::format("Programming error: unknown checksum algorithm {0}\n", static_cast<int>(algorithm)));
 
   return {};
 }

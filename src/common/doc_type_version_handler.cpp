@@ -58,12 +58,12 @@ doc_type_version_handler_c::account(EbmlElement &element,
   auto id = EbmlId(element).GetValue();
 
   if (p->s_version_by_element[id] > p->version) {
-    mxdebug_if(p->debug, boost::format("account: bumping version from %1% to %2% due to ID 0x%|3$x|\n") % p->version % p->s_version_by_element[id] % id);
+    mxdebug_if(p->debug, fmt::format("account: bumping version from {0} to {1} due to ID 0x{2:x}\n", p->version, p->s_version_by_element[id], id));
     p->version = p->s_version_by_element[id];
   }
 
   if (p->s_read_version_by_element[id] > p->read_version) {
-    mxdebug_if(p->debug, boost::format("account: bumping read_version from %1% to %2% due to ID 0x%|3$x|\n") % p->read_version % p->s_read_version_by_element[id] % id);
+    mxdebug_if(p->debug, fmt::format("account: bumping read_version from {0} to {1} due to ID 0x{2:x}\n", p->read_version, p->s_read_version_by_element[id], id));
     p->read_version = p->s_read_version_by_element[id];
   }
 
@@ -75,7 +75,7 @@ doc_type_version_handler_c::account(EbmlElement &element,
   } else if (dynamic_cast<KaxVideoStereoMode *>(&element)) {
     auto value = static_cast<KaxVideoStereoMode &>(element).GetValue();
     if (!mtx::included_in(static_cast<stereo_mode_c::mode>(value), stereo_mode_c::mono, stereo_mode_c::unspecified) && (p->version < 3)) {
-      mxdebug_if(p->debug, boost::format("account: bumping version from %1% to 3 due to KaxVideoStereoMode value %2%\n") % p->version % value);
+      mxdebug_if(p->debug, fmt::format("account: bumping version from {0} to 3 due to KaxVideoStereoMode value {1}\n", p->version, value));
       p->version = 3;
     }
   }
@@ -88,7 +88,7 @@ doc_type_version_handler_c::update_ebml_head(mm_io_c &file) {
   auto p      = p_func();
   auto result = do_update_ebml_head(file);
 
-  mxdebug_if(p->debug, boost::format("update_ebml_head: result %1%\n") % static_cast<unsigned int>(result));
+  mxdebug_if(p->debug, fmt::format("update_ebml_head: result {0}\n", static_cast<unsigned int>(result)));
 
   return result;
 }
@@ -133,8 +133,8 @@ doc_type_version_handler_c::do_update_ebml_head(mm_io_c &file) {
     }
 
     mxdebug_if(p->debug,
-               boost::format("do_update_ebml_head: account version %1% read_version %2%, file version %3% read_version %4%, changed %5%\n")
-               % p->version % p->read_version % file_version % file_read_version % changed);
+               fmt::format("do_update_ebml_head: account version {0} read_version {1}, file version {2} read_version {3}, changed {4}\n",
+                           p->version, p->read_version, file_version, file_read_version, changed));
 
     if (!changed)
       return update_result_e::ok_no_update_needed;

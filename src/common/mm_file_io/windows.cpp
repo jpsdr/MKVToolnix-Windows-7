@@ -142,7 +142,7 @@ mm_file_io_c::_write(const void *buffer,
   if (bytes_written != size) {
     auto error          = GetLastError();
     auto error_msg_utf8 = mtx::sys::format_windows_message(error);
-    mxerror(boost::format(Y("Could not write to the destination file: %1% (%2%)\n")) % error % error_msg_utf8);
+    mxerror(fmt::format(Y("Could not write to the destination file: {0} ({1})\n"), error, error_msg_utf8));
   }
 
   m_current_position += bytes_written;

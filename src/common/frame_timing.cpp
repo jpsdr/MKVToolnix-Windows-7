@@ -48,7 +48,7 @@ determine_frame_rate(int64_t duration,
   }
 
   if (potentials.empty()) {
-    mxdebug_if(s_debug, boost::format("determine_frame_rate: duration %1% max_difference %2%: no match found\n") % duration % max_difference);
+    mxdebug_if(s_debug, fmt::format("determine_frame_rate: duration {0} max_difference {1}: no match found\n", duration, max_difference));
     return {};
   }
 
@@ -57,8 +57,8 @@ determine_frame_rate(int64_t duration,
   });
 
   mxdebug_if(s_debug,
-             boost::format("determine_frame_rate: duration %1% max_difference %2%: %3% match(es) found returning %4% Δ %5%\n")
-             % duration % max_difference % potentials.size() % potentials[0].second.frame_rate % potentials[0].first);
+             fmt::format("determine_frame_rate: duration {0} max_difference {1}: {2} match(es) found returning {3} Δ {4}\n",
+                         duration, max_difference, potentials.size(), potentials[0].second.frame_rate, potentials[0].first));
 
   return potentials[0].second.frame_rate;
 }

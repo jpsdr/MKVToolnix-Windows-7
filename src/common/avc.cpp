@@ -110,61 +110,61 @@ timing_info_t::is_valid()
 
 void
 sps_info_t::dump() {
-  mxinfo(boost::format("sps_info dump:\n"
-                       "  id:                                    %1%\n"
-                       "  profile_idc:                           %2%\n"
-                       "  profile_compat:                        %3%\n"
-                       "  level_idc:                             %4%\n"
-                       "  log2_max_frame_num:                    %5%\n"
-                       "  pic_order_cnt_type:                    %6%\n"
-                       "  log2_max_pic_order_cnt_lsb:            %7%\n"
-                       "  offset_for_non_ref_pic:                %8%\n"
-                       "  offset_for_top_to_bottom_field:        %9%\n"
-                       "  num_ref_frames_in_pic_order_cnt_cycle: %10%\n"
-                       "  delta_pic_order_always_zero_flag:      %11%\n"
-                       "  frame_mbs_only:                        %12%\n"
-                       "  vui_present:                           %13%\n"
-                       "  ar_found:                              %14%\n"
-                       "  par_num:                               %15%\n"
-                       "  par_den:                               %16%\n"
-                       "  timing_info_present:                   %17%\n"
-                       "  num_units_in_tick:                     %18%\n"
-                       "  time_scale:                            %19%\n"
-                       "  fixed_frame_rate:                      %20%\n"
-                       "  crop_left:                             %21%\n"
-                       "  crop_top:                              %22%\n"
-                       "  crop_right:                            %23%\n"
-                       "  crop_bottom:                           %24%\n"
-                       "  width:                                 %25%\n"
-                       "  height:                                %26%\n"
-                       "  checksum:                              %|27$08x|\n")
-         % id
-         % profile_idc
-         % profile_compat
-         % level_idc
-         % log2_max_frame_num
-         % pic_order_cnt_type
-         % log2_max_pic_order_cnt_lsb
-         % offset_for_non_ref_pic
-         % offset_for_top_to_bottom_field
-         % num_ref_frames_in_pic_order_cnt_cycle
-         % delta_pic_order_always_zero_flag
-         % frame_mbs_only
-         % vui_present
-         % ar_found
-         % par_num
-         % par_den
-         % timing_info.is_present
-         % timing_info.num_units_in_tick
-         % timing_info.time_scale
-         % timing_info.fixed_frame_rate
-         % crop_left
-         % crop_top
-         % crop_right
-         % crop_bottom
-         % width
-         % height
-         % checksum);
+  mxinfo(fmt::format("sps_info dump:\n"
+                     "  id:                                    {0}\n"
+                     "  profile_idc:                           {1}\n"
+                     "  profile_compat:                        {2}\n"
+                     "  level_idc:                             {3}\n"
+                     "  log2_max_frame_num:                    {4}\n"
+                     "  pic_order_cnt_type:                    {5}\n"
+                     "  log2_max_pic_order_cnt_lsb:            {6}\n"
+                     "  offset_for_non_ref_pic:                {7}\n"
+                     "  offset_for_top_to_bottom_field:        {8}\n"
+                     "  num_ref_frames_in_pic_order_cnt_cycle: {9}\n"
+                     "  delta_pic_order_always_zero_flag:      {10}\n"
+                     "  frame_mbs_only:                        {11}\n"
+                     "  vui_present:                           {12}\n"
+                     "  ar_found:                              {13}\n"
+                     "  par_num:                               {14}\n"
+                     "  par_den:                               {15}\n"
+                     "  timing_info_present:                   {16}\n"
+                     "  num_units_in_tick:                     {17}\n"
+                     "  time_scale:                            {18}\n"
+                     "  fixed_frame_rate:                      {19}\n"
+                     "  crop_left:                             {20}\n"
+                     "  crop_top:                              {21}\n"
+                     "  crop_right:                            {22}\n"
+                     "  crop_bottom:                           {23}\n"
+                     "  width:                                 {24}\n"
+                     "  height:                                {25}\n"
+                     "  checksum:                              {26:08x}\n",
+                     id,
+                     profile_idc,
+                     profile_compat,
+                     level_idc,
+                     log2_max_frame_num,
+                     pic_order_cnt_type,
+                     log2_max_pic_order_cnt_lsb,
+                     offset_for_non_ref_pic,
+                     offset_for_top_to_bottom_field,
+                     num_ref_frames_in_pic_order_cnt_cycle,
+                     delta_pic_order_always_zero_flag,
+                     frame_mbs_only,
+                     vui_present,
+                     ar_found,
+                     par_num,
+                     par_den,
+                     timing_info.is_present,
+                     timing_info.num_units_in_tick,
+                     timing_info.time_scale,
+                     timing_info.fixed_frame_rate,
+                     crop_left,
+                     crop_top,
+                     crop_right,
+                     crop_bottom,
+                     width,
+                     height,
+                     checksum));
 }
 
 bool
@@ -175,49 +175,49 @@ sps_info_t::timing_info_valid()
 
 void
 pps_info_t::dump() {
-  mxinfo(boost::format("pps_info dump:\n"
-                       "id: %1%\n"
-                       "sps_id: %2%\n"
-                       "pic_order_present: %3%\n"
-                       "checksum: %|4$08x|\n")
-         % id
-         % sps_id
-         % pic_order_present
-         % checksum);
+  mxinfo(fmt::format("pps_info dump:\n"
+                     "id: {0}\n"
+                     "sps_id: {1}\n"
+                     "pic_order_present: {2}\n"
+                     "checksum: {3:08x}\n",
+                     id,
+                     sps_id,
+                     pic_order_present,
+                     checksum));
 }
 
 void
 slice_info_t::dump()
   const {
-  mxinfo(boost::format("slice_info dump:\n"
-                       "  nalu_type:                  %1%\n"
-                       "  nal_ref_idc:                %2%\n"
-                       "  type:                       %3%\n"
-                       "  pps_id:                     %4%\n"
-                       "  frame_num:                  %5%\n"
-                       "  field_pic_flag:             %6%\n"
-                       "  bottom_field_flag:          %7%\n"
-                       "  idr_pic_id:                 %8%\n"
-                       "  pic_order_cnt_lsb:          %9%\n"
-                       "  delta_pic_order_cnt_bottom: %10%\n"
-                       "  delta_pic_order_cnt:        %11%\n"
-                       "  first_mb_in_slice:          %12%\n"
-                       "  sps:                        %13%\n"
-                       "  pps:                        %14%\n")
-         % static_cast<unsigned int>(nalu_type)
-         % static_cast<unsigned int>(nal_ref_idc)
-         % static_cast<unsigned int>(type)
-         % static_cast<unsigned int>(pps_id)
-         % frame_num
-         % field_pic_flag
-         % bottom_field_flag
-         % idr_pic_id
-         % pic_order_cnt_lsb
-         % delta_pic_order_cnt_bottom
-         % (delta_pic_order_cnt[0] << 8 | delta_pic_order_cnt[1])
-         % first_mb_in_slice
-         % sps
-         % pps);
+  mxinfo(fmt::format("slice_info dump:\n"
+                     "  nalu_type:                  {0}\n"
+                     "  nal_ref_idc:                {1}\n"
+                     "  type:                       {2}\n"
+                     "  pps_id:                     {3}\n"
+                     "  frame_num:                  {4}\n"
+                     "  field_pic_flag:             {5}\n"
+                     "  bottom_field_flag:          {6}\n"
+                     "  idr_pic_id:                 {7}\n"
+                     "  pic_order_cnt_lsb:          {8}\n"
+                     "  delta_pic_order_cnt_bottom: {9}\n"
+                     "  delta_pic_order_cnt:        {10}\n"
+                     "  first_mb_in_slice:          {11}\n"
+                     "  sps:                        {12}\n"
+                     "  pps:                        {13}\n",
+                     static_cast<unsigned int>(nalu_type),
+                     static_cast<unsigned int>(nal_ref_idc),
+                     static_cast<unsigned int>(type),
+                     static_cast<unsigned int>(pps_id),
+                     frame_num,
+                     field_pic_flag,
+                     bottom_field_flag,
+                     idr_pic_id,
+                     pic_order_cnt_lsb,
+                     delta_pic_order_cnt_bottom,
+                     delta_pic_order_cnt[0] << 8 | delta_pic_order_cnt[1],
+                     first_mb_in_slice,
+                     sps,
+                     pps));
 }
 
 memory_cptr
@@ -260,7 +260,7 @@ parse_sps(memory_cptr const &buffer,
     time_scale        = frame_rate.numerator();
   }
 
-  mxdebug_if(s_debug_fix_bitstream_timing_info, boost::format("fix_bitstream_timing_info: duration %1%: units/tick: %2% time_scale: %3%\n") % duration % num_units_in_tick % time_scale);
+  mxdebug_if(s_debug_fix_bitstream_timing_info, fmt::format("fix_bitstream_timing_info: duration {0}: units/tick: {1} time_scale: {2}\n", duration, num_units_in_tick, time_scale));
 
   w.copy_bits(3, r);            // forbidden_zero_bit, nal_ref_idc
   if (w.copy_bits(5, r) != 7)   // nal_unit_type
@@ -346,11 +346,11 @@ parse_sps(memory_cptr const &buffer,
   }
 
   sps.vui_present = r.get_bit();
-  mxdebug_if(s_debug_fix_bitstream_timing_info || s_debug_remove_bistream_ar_info, boost::format("VUI present? %1%\n") % sps.vui_present);
+  mxdebug_if(s_debug_fix_bitstream_timing_info || s_debug_remove_bistream_ar_info, fmt::format("VUI present? {0}\n", sps.vui_present));
   if (sps.vui_present) {
     w.put_bit(true);
     bool ar_info_present = r.get_bit();
-    mxdebug_if(s_debug_remove_bistream_ar_info, boost::format("ar_info_present? %1%\n") % ar_info_present);
+    mxdebug_if(s_debug_remove_bistream_ar_info, fmt::format("ar_info_present? {0}\n", ar_info_present));
     if (ar_info_present) {     // ar_info_present
       int ar_type = r.get_bits(8);
 
@@ -379,8 +379,8 @@ parse_sps(memory_cptr const &buffer,
         sps.ar_found = false;
 
       mxdebug_if(s_debug_remove_bistream_ar_info,
-                 boost::format("keep_ar_info %1% ar_type %2% par_num %3% par_den %4%\n")
-                 % keep_ar_info % ar_type % sps.par_num % sps.par_den);
+                 fmt::format("keep_ar_info {0} ar_type {1} par_num {2} par_den {3}\n",
+                             keep_ar_info, ar_type, sps.par_num, sps.par_den));
 
     } else
       w.put_bit(false);         // ar_info_present
@@ -408,16 +408,16 @@ parse_sps(memory_cptr const &buffer,
       if (   sps.timing_info.is_valid()
           && (sps.timing_info.default_duration() < 5'000ll)) {
         mxdebug_if(s_debug_fix_bitstream_timing_info,
-                   boost::format("timing info present && bogus values detected (#units %2% time_scale %3%); defaulting to 25 FPS (default duration 20'000'000)\n")
-                   % sps.timing_info.is_present % sps.timing_info.num_units_in_tick % sps.timing_info.time_scale);
+                   fmt::format("timing info present && bogus values detected (#units {1} time_scale {2}); defaulting to 25 FPS (default duration 20'000'000)\n",
+                               sps.timing_info.is_present, sps.timing_info.num_units_in_tick, sps.timing_info.time_scale));
         sps.timing_info.num_units_in_tick = 1;
         sps.timing_info.time_scale        = 50;
       }
     }
 
     mxdebug_if(s_debug_fix_bitstream_timing_info,
-               boost::format("timing info present? %1% #units %2% time_scale %3% fixed rate %4%\n")
-               % sps.timing_info.is_present % sps.timing_info.num_units_in_tick % sps.timing_info.time_scale % sps.timing_info.fixed_frame_rate);
+               fmt::format("timing info present? {0} #units {1} time_scale {2} fixed rate {3}\n",
+                           sps.timing_info.is_present, sps.timing_info.num_units_in_tick, sps.timing_info.time_scale, sps.timing_info.fixed_frame_rate));
 
     if (fix_bitstream_frame_rate) {                      // write the new timing info
       w.put_bit(true);                                   // timing_info_present
@@ -597,7 +597,7 @@ fix_sps_fps(memory_cptr const &buffer,
     unsigned int num_sps = avcc.read_uint8();
     new_avcc.write_uint8(num_sps);
     num_sps &= 0x1f;
-    mxdebug_if(s_debug_fix_bitstream_timing_info, boost::format("p_mpeg4_p10_fix_sps_fps: num_sps %1%\n") % num_sps);
+    mxdebug_if(s_debug_fix_bitstream_timing_info, fmt::format("p_mpeg4_p10_fix_sps_fps: num_sps {0}\n", num_sps));
 
     unsigned int sps;
     for (sps = 0; sps < num_sps; sps++) {

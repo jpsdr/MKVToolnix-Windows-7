@@ -134,16 +134,13 @@ fourcc_c::str()
 std::string
 fourcc_c::description()
   const {
-  static auto s_id_fmt   = boost::format("0x%|1$08x| \"%2%%3%%4%%5%\"");
-  static auto s_name_fmt = boost::format(": %1%");
-
   unsigned char buffer[4];
   put_uint32_be(buffer, m_value);
 
-  auto result = (s_id_fmt % m_value % C(0) % C(1) % C(2) % C(3)).str();
+  auto result = fmt::format("0x{0:08x} \"{1}{2}{3}{4}\"", m_value, C(0), C(1), C(2), C(3));
   auto codec  = codec_c::look_up(*this);
   if (codec.valid())
-    result += (s_name_fmt % codec.get_name()).str();
+    result += fmt::format(": {0}", codec.get_name());
 
   return result;
 }

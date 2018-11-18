@@ -107,9 +107,6 @@ debugging_c::output(std::string const &msg) {
 void
 debugging_c::hexdump(const void *buffer_to_dump,
                      size_t length) {
-  static auto s_fmt_line = boost::format{"Debug> %|1$08x|  "};
-  static auto s_fmt_byte = boost::format{"%|1$02x| "};
-
   std::stringstream dump, ascii;
   auto buffer     = static_cast<const unsigned char *>(buffer_to_dump);
   auto buffer_idx = 0u;
@@ -120,7 +117,7 @@ debugging_c::hexdump(const void *buffer_to_dump,
         dump << " [" << ascii.str() << "]\n";
         ascii.str("");
       }
-      dump << (s_fmt_line % buffer_idx);
+      dump << fmt::format("Debug> {0:08x}  ", buffer_idx);
 
     } else if ((buffer_idx % 8) == 0) {
       dump  << ' ';
@@ -128,7 +125,7 @@ debugging_c::hexdump(const void *buffer_to_dump,
     }
 
     ascii << (((32 <= buffer[buffer_idx]) && (127 > buffer[buffer_idx])) ? static_cast<char>(buffer[buffer_idx]) : '.');
-    dump  << (s_fmt_byte % static_cast<unsigned int>(buffer[buffer_idx]));
+    dump  << fmt::format("{0:02x} ", static_cast<unsigned int>(buffer[buffer_idx]));
 
     ++buffer_idx;
   }
@@ -200,12 +197,12 @@ ebml_dumper_c::to_string(EbmlElement const *element)
        : dynamic_cast<EbmlUnicodeString const *>(element) ?             static_cast<EbmlUnicodeString const *>(element)->GetValueUTF8()
        : dynamic_cast<EbmlString        const *>(element) ?             static_cast<EbmlString        const *>(element)->GetValue()
        : dynamic_cast<EbmlDate          const *>(element) ? ::to_string(static_cast<EbmlDate          const *>(element)->GetEpochDate())
-       : (boost::format("(type: %1% size: %2%)") %
-          (  dynamic_cast<EbmlBinary const *>(element)    ? "binary"
-           : dynamic_cast<EbmlMaster const *>(element)    ? "master"
-           : dynamic_cast<EbmlVoid   const *>(element)    ? "void"
-           :                                                "unknown")
-          % element->GetSize()).str();
+       : fmt::format("(type: {0} size: {1})",
+                       dynamic_cast<EbmlBinary const *>(element)    ? "binary"
+                     : dynamic_cast<EbmlMaster const *>(element)    ? "master"
+                     : dynamic_cast<EbmlVoid   const *>(element)    ? "void"
+                     :                                                "unknown",
+                     element->GetSize());
 }
 
 
@@ -277,7 +274,7 @@ ebml_dumper_c::dump_impl(EbmlElement const *element,
   m_buffer << EBML_NAME(element);
 
   if (m_addresses)
-    m_buffer << (boost::format(" @%1%") % element);
+    m_buffer << fmt::format(" @{0}", static_cast<void const *>(element));
 
   if (m_values)
     m_buffer << " " << to_string(element);

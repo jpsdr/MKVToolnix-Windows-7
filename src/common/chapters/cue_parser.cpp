@@ -248,7 +248,7 @@ add_subchapters_for_index_entries(cue_parser_args_t &a) {
     GetChild<KaxChapterPhysicalEquiv>(*atom).SetValue(CHAPTER_PHYSEQUIV_INDEX);
 
     auto &display = GetChild<KaxChapterDisplay>(*atom);
-    GetChild<KaxChapterString>(display).SetValueUTF8((boost::format("INDEX %|1$02d|") % (i + offset)).str());
+    GetChild<KaxChapterString>(display).SetValueUTF8(fmt::format("INDEX {0:02}", i + offset));
     GetChild<KaxChapterLanguage>(display).SetValue("eng");
   }
 }
@@ -257,7 +257,7 @@ static void
 add_elements_for_cue_entry(cue_parser_args_t &a,
                            std::unique_ptr<KaxTags> *tags) {
   if (a.start_indices.empty())
-    mxerror(boost::format(Y("Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n")) % a.line_num);
+    mxerror(fmt::format(Y("Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: {0})\n"), a.line_num));
 
   if (!((a.start_indices[0] >= a.min_ts) && ((a.start_indices[0] <= a.max_ts) || (a.max_ts == -1))))
     return;
@@ -376,7 +376,7 @@ parse_cue(mm_text_io_c *in,
       line.erase(0, 6);
       strip(line);
       if (sscanf(line.c_str(), "%u %u:%u:%u", &index, &min, &sec, &frames) < 4)
-        mxerror(boost::format(Y("Cue sheet parser: Invalid INDEX entry in line %1%.\n")) % a.line_num);
+        mxerror(fmt::format(Y("Cue sheet parser: Invalid INDEX entry in line {0}.\n"), a.line_num));
 
       bool index_ok = false;
       if (99 >= index) {
@@ -395,7 +395,7 @@ parse_cue(mm_text_io_c *in,
       }
 
       if (!index_ok)
-        mxerror(boost::format(Y("Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%.\n")) % index % a.start_indices.size() % a.line_num);
+        mxerror(fmt::format(Y("Cue sheet parser: Invalid INDEX number (got {0}, expected {1}) in line {2}.\n"), index, a.start_indices.size(), a.line_num));
 
     } else if (balg::istarts_with(line, "track ")) {
       if ((line.length() < 5) || strcasecmp(&line[line.length() - 5], "audio"))

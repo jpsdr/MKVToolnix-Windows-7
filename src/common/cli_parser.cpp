@@ -107,14 +107,14 @@ parser_c::parse_args() {
 
       if (option.m_needs_arg) {
         if (no_next_arg)
-          mxerror(boost::format(Y("Missing argument to '%1%'.\n")) % m_current_arg);
+          mxerror(fmt::format(Y("Missing argument to '{0}'.\n"), m_current_arg));
         ++sit;
       }
 
       option.m_callback();
 
     } else if (!run_hooks(parser_c::ht_unknown_option))
-      mxerror(boost::format(Y("Unknown option '%1%'.\n")) % m_current_arg);
+      mxerror(fmt::format(Y("Unknown option '{0}'.\n"), m_current_arg));
   }
 }
 
@@ -139,8 +139,7 @@ parser_c::add_option(std::string const &spec,
                    :                        "--"s + name;
 
     if (mtx::includes(m_option_map, full_name))
-      mxerror(boost::format("parser_c::add_option(): Programming error: option '%1%' is already used for spec '%2%' "
-                            "and cannot be used for spec '%3%'.\n") % full_name % m_option_map[full_name].m_spec % spec);
+      mxerror(fmt::format("parser_c::add_option(): Programming error: option '{0}' is already used for spec '{1}' and cannot be used for spec '{2}'.\n", full_name, m_option_map[full_name].m_spec, spec));
 
     m_option_map[full_name] = option;
 

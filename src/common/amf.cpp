@@ -62,7 +62,7 @@ script_parser_c::read_properties(std::unordered_map<std::string, value_type_t> &
     auto key   = read_string(TYPE_STRING);
     auto value = read_value();
 
-    mxdebug_if(m_debug, boost::format("%1%Property key: %2%; value read: %3%; value: %4%\n") % level_spacer() % key % value.second % boost::apply_visitor(value_to_string_c(), value.first));
+    mxdebug_if(m_debug, fmt::format("{0}Property key: {1}; value read: {2}; value: {3}\n", level_spacer(), key, value.second, boost::apply_visitor(value_to_string_c(), value.first)));
 
     if (key.empty() || !value.second)
       break;
@@ -78,7 +78,7 @@ script_parser_c::read_value() {
   value_type_t value;
   auto data_type = static_cast<data_type_e>(m_data.read_uint8());
 
-  mxdebug_if(m_debug, boost::format("%1%Data type @ %2%: %3%\n") % level_spacer() % (m_data.getFilePointer() - 1) % static_cast<unsigned int>(data_type));
+  mxdebug_if(m_debug, fmt::format("{0}Data type @ {1}: {2}\n", level_spacer(), m_data.getFilePointer() - 1, static_cast<unsigned int>(data_type)));
 
   bool data_read = true;
 
@@ -122,7 +122,7 @@ script_parser_c::read_value() {
       read_value();
 
   } else {
-    mxdebug_if(m_debug, boost::format("%1%Unknown script data type: %2% position: %3%\n") % level_spacer() % static_cast<unsigned int>(data_type) % (m_data.getFilePointer() - 1));
+    mxdebug_if(m_debug, fmt::format("{0}Unknown script data type: {1} position: {2}\n", level_spacer(), static_cast<unsigned int>(data_type), m_data.getFilePointer() - 1));
     data_read = false;
   }
 

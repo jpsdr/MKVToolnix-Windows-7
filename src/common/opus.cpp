@@ -21,12 +21,12 @@ namespace mtx { namespace opus {
 id_header_t
 id_header_t::decode(memory_cptr const &mem) {
   if (!mem || (sizeof(packed_id_header_t) > mem->get_size()))
-    throw decode_error{boost::format("Size of memory too small: %1% < %2%") % (mem ? mem->get_size() : 0) % sizeof(packed_id_header_t)};
+    throw decode_error{fmt::format("Size of memory too small: {0} < {1}", mem ? mem->get_size() : 0, sizeof(packed_id_header_t))};
 
   auto *packed_header = reinterpret_cast<packed_id_header_t *>(mem->get_buffer());
   auto identifier     = std::string{packed_header->identifier, 8};
   if (identifier != "OpusHead")
-    throw decode_error{boost::format("Identifier not 'OpusHead': %1%") % identifier};
+    throw decode_error{fmt::format("Identifier not 'OpusHead': {0}", identifier)};
 
   auto header              = id_header_t();
 

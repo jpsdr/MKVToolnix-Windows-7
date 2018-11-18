@@ -138,19 +138,19 @@ wv_parse_frame(mm_io_c &in,
         if (wphdr.flags & WV_FINAL_BLOCK) {
           can_leave = true;
           mxverb(3,
-                 boost::format("wavpack_reader: %1% block: %2%, %3% bytes\n")
-                 % (wphdr.flags & WV_MONO_FLAG   ? "mono"   : "stereo")
-                 % (wphdr.flags & WV_HYBRID_FLAG ? "hybrid" : "lossless")
-                 % (wphdr.ck_size + 8));
+                 fmt::format("wavpack_reader: {0} block: {1}, {2} bytes\n",
+                             wphdr.flags & WV_MONO_FLAG   ? "mono"   : "stereo",
+                             wphdr.flags & WV_HYBRID_FLAG ? "hybrid" : "lossless",
+                             wphdr.ck_size + 8));
         }
       } else {
         if (wphdr.flags & WV_FINAL_BLOCK) {
           can_leave = true;
           mxverb(2,
-                 boost::format("wavpack_reader: %1% chans, mode: %2%, %3% bytes\n")
-                 % meta.channel_count
-                 % (wphdr.flags & WV_HYBRID_FLAG ? "hybrid" : "lossless")
-                 % (wphdr.ck_size + 8));
+                 fmt::format("wavpack_reader: {0} chans, mode: {1}, {2} bytes\n",
+                             meta.channel_count,
+                             wphdr.flags & WV_HYBRID_FLAG ? "hybrid" : "lossless",
+                             wphdr.ck_size + 8));
         }
       }
     } else

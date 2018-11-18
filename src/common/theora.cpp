@@ -27,19 +27,19 @@ theora_parse_identification_header(unsigned char *buffer,
 
   header.headertype = bc.get_bits(8);
   if (THEORA_HEADERTYPE_IDENTIFICATION != header.headertype)
-    throw mtx::theora::header_parsing_x(boost::format(Y("Wrong header type: 0x%|1$02x| != 0x%|2$02x|")) % header.headertype % THEORA_HEADERTYPE_IDENTIFICATION);
+    throw mtx::theora::header_parsing_x(fmt::format(Y("Wrong header type: 0x{0:02x} != 0x{1:02x}"), header.headertype, THEORA_HEADERTYPE_IDENTIFICATION));
 
   for (i = 0; 6 > i; ++i)
     header.theora_string[i] = bc.get_bits(8);
   if (strncmp(header.theora_string, "theora", 6))
-    throw mtx::theora::header_parsing_x(boost::format(Y("Wrong identification string: '%|1$6s|' != 'theora'")) % header.theora_string);
+    throw mtx::theora::header_parsing_x(fmt::format(Y("Wrong identification string: '{0:6s}' != 'theora'"), header.theora_string));
 
   header.vmaj = bc.get_bits(8);
   header.vmin = bc.get_bits(8);
   header.vrev = bc.get_bits(8);
 
   if ((3 != header.vmaj) || (2 != header.vmin))
-    throw mtx::theora::header_parsing_x(boost::format(Y("Wrong Theora version: %1%.%2%.%3% != 3.2.x")) % header.vmaj % header.vmin % header.vrev);
+    throw mtx::theora::header_parsing_x(fmt::format(Y("Wrong Theora version: {0}.{1}.{2} != 3.2.x"), header.vmaj, header.vmin, header.vrev));
 
   header.fmbw = bc.get_bits(16) * 16;
   header.fmbh = bc.get_bits(16) * 16;

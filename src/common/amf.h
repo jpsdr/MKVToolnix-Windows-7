@@ -28,7 +28,7 @@ using meta_data_t  = std::unordered_map<std::string, value_type_t>;
 class value_to_string_c: public boost::static_visitor<std::string> {
 public:
   std::string operator ()(double value) const {
-    return (boost::format("%1%") % value).str();
+    return fmt::format("{0}", value);
   }
 
   std::string operator ()(bool value) const {

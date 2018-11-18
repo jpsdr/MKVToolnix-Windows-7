@@ -134,8 +134,8 @@ frame_t::parse_truehd_header(unsigned char const *data,
     auto has_content     = !!r.get_bits(4);
 
     mxdebug_if(s_debug,
-               boost::format("is_vbr %1% maximum_bitrate %2% num_substreams %3% has_extensions %4% num_extensions %5% has_content %6%\n")
-               % is_vbr % maximum_bitrate % num_substreams % has_extensions % num_extensions % has_content);
+               fmt::format("is_vbr {0} maximum_bitrate {1} num_substreams {2} has_extensions {3} num_extensions {4} has_content {5}\n",
+                           is_vbr, maximum_bitrate, num_substreams, has_extensions, num_extensions, has_content));
 
     if (!has_extensions)
       return true;
@@ -244,15 +244,15 @@ parser_c::parse(bool end_of_stream) {
     }
 
     mxdebug_if(s_debug,
-               boost::format("codec %7% type %1% offset %2% size %3% channels %4% sampling_rate %5% samples_per_frame %6%\n")
-               % (  frame->is_sync()   ? "S"
-                  : frame->is_normal() ? "n"
-                  : frame->is_ac3()    ? "A"
-                  :                      "x")
-               % offset % frame->m_size % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame
-               % (  frame->is_truehd() ? "TrueHD"
-                  : frame->is_mlp()    ? "MLP"
-                  :                      "AC-3"));
+               fmt::format("codec {6} type {0} offset {1} size {2} channels {3} sampling_rate {4} samples_per_frame {5}\n",
+                             frame->is_sync()   ? "S"
+                           : frame->is_normal() ? "n"
+                           : frame->is_ac3()    ? "A"
+                           :                      "x",
+                           offset, frame->m_size, frame->m_channels, frame->m_sampling_rate, frame->m_samples_per_frame,
+                             frame->is_truehd() ? "TrueHD"
+                           : frame->is_mlp()    ? "MLP"
+                           :                      "AC-3"));
 
     m_frames.push_back(frame);
 
@@ -322,7 +322,7 @@ remove_dialog_normalization_gain(unsigned char *buf,
   auto current_level_7_1 = r.skip_get_bits(11, 5);
 
   if ((current_level_2_0 == removed_level) && (current_level_5_1 == removed_level) && (current_level_7_1 == removed_level)) {
-    mxdebug_if(s_debug, boost::format("no need to remove the dialog normalization, it's already set to %1% for 2.0, 5.1 & 7.1\n") % removed_level);
+    mxdebug_if(s_debug, fmt::format("no need to remove the dialog normalization, it's already set to {0} for 2.0, 5.1 & 7.1\n", removed_level));
     return;
   }
 
@@ -334,13 +334,13 @@ remove_dialog_normalization_gain(unsigned char *buf,
   w.skip_bits(11);
   w.put_bits(5, removed_level); // 7.1
 
-  mxdebug_if(s_debug, boost::format("changing dialog normalization from %1% (2.0), %2% (5.1) & %3% (7.1) to %4%\n") % current_level_2_0 % current_level_5_1 % current_level_7_1 % removed_level);
+  mxdebug_if(s_debug, fmt::format("changing dialog normalization from {0} (2.0), {1} (5.1) & {2} (7.1) to {3}\n", current_level_2_0, current_level_5_1, current_level_7_1, removed_level));
 
   auto new_checksum = mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_002d, buf + 4, frame.m_header_size - 4 - 2 - 2));
   new_checksum     ^= get_uint16_be(&buf[frame.m_header_size - 2 - 2]);
 
   // auto current = get_uint16_be(&buf[frame.m_header_size - 2]);
-  // mxinfo(boost::format("header size %4% new checksum 0x%|1$04x| current checksum 0x%|2$04x| %3%\n") % new_checksum % current % (new_checksum == current ? "✓" : "✗") % frame.m_header_size);
+  // mxinfo(fmt::format("header size {3} new checksum 0x{0:04x} current checksum 0x{1:04x} {2}\n", new_checksum, current, new_checksum == current ? "✓" : "✗", frame.m_header_size));
 
   put_uint16_be(&buf[frame.m_header_size - 2], new_checksum);
 }

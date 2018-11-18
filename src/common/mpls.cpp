@@ -30,21 +30,21 @@ mpls_time_to_timestamp(uint64_t value) {
 void
 header_t::dump()
   const {
-  mxinfo(boost::format("  header dump\n"
-                       "    type_indicator1 & 2:          %1% / %2%\n"
-                       "    playlist / chapter / ext pos: %3% / %4% / %5%\n")
-         % type_indicator1 % type_indicator2
-         % playlist_pos % chapter_pos % ext_pos);
+  mxinfo(fmt::format("  header dump\n"
+                     "    type_indicator1 & 2:          {0} / {1}\n"
+                     "    playlist / chapter / ext pos: {2} / {3} / {4}\n",
+                     type_indicator1, type_indicator2,
+                     playlist_pos, chapter_pos, ext_pos));
 }
 
 void
 playlist_t::dump()
   const {
-  mxinfo(boost::format("  playlist dump\n"
-                       "    list_count / sub_count: %1% / %2%\n"
-                       "    duration:               %3%\n")
-         % list_count % sub_count
-         % duration);
+  mxinfo(fmt::format("  playlist dump\n"
+                     "    list_count / sub_count: {0} / {1}\n"
+                     "    duration:               {2}\n",
+                     list_count, sub_count,
+                     duration));
 
   for (auto &item : items)
     item.dump();
@@ -56,17 +56,17 @@ playlist_t::dump()
 void
 play_item_t::dump()
   const {
-  mxinfo(boost::format("    play item dump\n"
-                       "      clip_id / codec_id:      %1% / %2%\n"
-                       "      connection_condition:    %3%\n"
-                       "      is_multi_angle / stc_id: %4% / %5%\n"
-                       "      in_time / out_time:      %6% / %7%\n"
-                       "      relative_in_time:        %8%\n")
-         % clip_id % codec_id
-         % connection_condition
-         % is_multi_angle % stc_id
-         % in_time % out_time
-         % relative_in_time);
+  mxinfo(fmt::format("    play item dump\n"
+                     "      clip_id / codec_id:      {0} / {1}\n"
+                     "      connection_condition:    {2}\n"
+                     "      is_multi_angle / stc_id: {3} / {4}\n"
+                     "      in_time / out_time:      {5} / {6}\n"
+                     "      relative_in_time:        {7}\n",
+                     clip_id, codec_id,
+                     connection_condition,
+                     is_multi_angle, stc_id,
+                     in_time, out_time,
+                     relative_in_time));
 
   stn.dump();
 }
@@ -82,9 +82,9 @@ sub_path_t::dump()
                  : sub_path_type_e::in_mux_synchronous_picture_in_picture      == type ? "in_mux_synchronous_picture_in_picture"
                  :                                                                       "reserved";
 
-  mxinfo(boost::format("    sub path dump\n"
-                       "      type / is_repeat:        %1% [%2%] / %3%\n")
-         % static_cast<unsigned int>(type) % type_name % is_repeat_sub_path);
+  mxinfo(fmt::format("    sub path dump\n"
+                     "      type / is_repeat:        {0} [{1}] / {2}\n",
+                     static_cast<unsigned int>(type), type_name, is_repeat_sub_path));
 
   for (auto const &item : items)
     item.dump();
@@ -93,17 +93,17 @@ sub_path_t::dump()
 void
 sub_play_item_t::dump()
   const {
-  mxinfo(boost::format("      sub play item dump\n"
-                       "        clip_id / codec_id:    %1% / %2%\n"
-                       "        conn_con / sync_pi_id: %3% / %4%\n"
-                       "        ref_to_stc_id / multi: %5% / %6%\n"
-                       "        in_time / out_time:    %7% / %8%\n"
-                       "        sync_start_pts:        %9%\n")
-         % clpi_file_name       % codec_id
-         % connection_condition % sync_playitem_id
-         % ref_to_stc_id        % is_multi_clip_entries
-         % in_time              % out_time
-         % sync_start_pts_of_playitem);
+  mxinfo(fmt::format("      sub play item dump\n"
+                     "        clip_id / codec_id:    {0} / {1}\n"
+                     "        conn_con / sync_pi_id: {2} / {3}\n"
+                     "        ref_to_stc_id / multi: {4} / {5}\n"
+                     "        in_time / out_time:    {6} / {7}\n"
+                     "        sync_start_pts:        {8}\n",
+                     clpi_file_name       , codec_id,
+                     connection_condition, sync_playitem_id,
+                     ref_to_stc_id        , is_multi_clip_entries,
+                     in_time              , out_time,
+                     sync_start_pts_of_playitem));
 
   for (auto const &clip : clips)
     clip.dump();
@@ -112,21 +112,21 @@ sub_play_item_t::dump()
 void
 sub_play_item_clip_t::dump()
   const {
-  mxinfo(boost::format("        sub play item clip dump\n"
-                       "          clip_id / codec_id:  %1% / %2%\n"
-                       "        ref_to_stc_id:         %3%\n")
-         % clpi_file_name % codec_id
-         % ref_to_stc_id);
+  mxinfo(fmt::format("        sub play item clip dump\n"
+                     "          clip_id / codec_id:  {0} / {1}\n"
+                     "        ref_to_stc_id:         {2}\n",
+                     clpi_file_name, codec_id,
+                     ref_to_stc_id));
 }
 
 void
 stn_t::dump()
   const {
-  mxinfo(boost::format("      stn dump\n"
-                       "        num_video / num_audio / num_pg / num_ig:    %1% / %2% / %3% / %4%\n"
-                       "        num_sec_video / num_sec_audio / num_pip_pg: %5% / %6% / %7%\n")
-         % num_video % num_audio % num_pg % num_ig
-         % num_secondary_video % num_secondary_audio % num_pip_pg);
+  mxinfo(fmt::format("      stn dump\n"
+                     "        num_video / num_audio / num_pg / num_ig:    {0} / {1} / {2} / {3}\n"
+                     "        num_sec_video / num_sec_audio / num_pip_pg: {4} / {5} / {6}\n",
+                     num_video, num_audio, num_pg, num_ig,
+                     num_secondary_video, num_secondary_audio, num_pip_pg));
 
   for (auto &stream : video_streams)
     stream.dump("video");
@@ -163,18 +163,18 @@ stream_t::dump(std::string const &type)
                         : stream_coding_type_e::text_subtitles                    == coding_type ? "text_subtitles"
                         :                                                                          "reserved";
 
-  mxinfo(boost::format("        %1% stream dump\n"
-                       "          stream_type:                     %2% [%3%]\n"
-                       "          sub_path_id / sub_clip_id / pid: %4% / %5% / %|6$04x|\n"
-                       "          coding_type:                     %|7$02x| [%8%]\n"
-                       "          format / rate:                   %9% / %10%\n"
-                       "          char_code / language:            %11% / %12%\n")
-         % type
-         % static_cast<unsigned int>(stream_type) % stream_type_name
-         % sub_path_id % sub_clip_id % pid
-         % static_cast<unsigned int>(coding_type) % coding_type_name
-         % format % rate
-         % char_code % language);
+  mxinfo(fmt::format("        {0} stream dump\n"
+                     "          stream_type:                     {1} [{2}]\n"
+                     "          sub_path_id / sub_clip_id / pid: {3} / {4} / {5:04x}\n"
+                     "          coding_type:                     {6:02x} [{7}]\n"
+                     "          format / rate:                   {8} / {9}\n"
+                     "          char_code / language:            {10} / {11}\n",
+                     type,
+                     static_cast<unsigned int>(stream_type), stream_type_name,
+                     sub_path_id, sub_clip_id, pid,
+                     static_cast<unsigned int>(coding_type), coding_type_name,
+                     format, rate,
+                     char_code, language));
 }
 
 parser_c::parser_c()
@@ -200,7 +200,7 @@ parser_c::parse(mm_io_c &file) {
     int64_t file_size = file.get_size();
 
     if ((4 * 5 > file_size) || (10 * 1024 * 1024 < file_size))
-      throw mtx::bluray::mpls::exception(boost::format("File too small or too big: %1%") % file_size);
+      throw mtx::bluray::mpls::exception(fmt::format("File too small or too big: {0}", file_size));
 
     auto content = file.read(4 * 5);
     m_bc         = std::make_shared<mtx::bits::reader_c>(content->get_buffer(), 4 * 5);
@@ -219,9 +219,9 @@ parser_c::parse(mm_io_c &file) {
     m_ok = true;
 
   } catch (mtx::bluray::mpls::exception &ex) {
-    mxdebug_if(m_debug, boost::format("MPLS exception: %1%\n") % ex.what());
+    mxdebug_if(m_debug, fmt::format("MPLS exception: {0}\n", ex.what()));
   } catch (mtx::mm_io::exception &ex) {
-    mxdebug_if(m_debug, boost::format("I/O exception: %1%\n") % ex.what());
+    mxdebug_if(m_debug, fmt::format("I/O exception: {0}\n", ex.what()));
   }
 
   if (m_debug)
@@ -242,7 +242,7 @@ parser_c::parse_header() {
 
   if (   (m_header.type_indicator1 != fourcc_c{"MPLS"})
       || !mtx::included_in(m_header.type_indicator2, fourcc_c{"0100"}, fourcc_c{"0200"}, fourcc_c{"0300"}))
-    throw exception{boost::format("Wrong type indicator 1 (%1%) or 2 (%2%)") % m_header.type_indicator1 % m_header.type_indicator2};
+    throw exception{fmt::format("Wrong type indicator 1 ({0}) or 2 ({1})", m_header.type_indicator1, m_header.type_indicator2)};
 }
 
 void
@@ -407,7 +407,7 @@ parser_c::parse_stream() {
     str.pid         = m_bc->get_bits(16);
 
   } else if (m_debug)
-    mxdebug(boost::format("Unknown stream type %1%\n") % static_cast<unsigned int>(str.stream_type));
+    mxdebug(fmt::format("Unknown stream type {0}\n", static_cast<unsigned int>(str.stream_type)));
 
   m_bc->set_bit_position((length + position) * 8);
 
@@ -436,7 +436,7 @@ parser_c::parse_stream() {
     str.language  = read_string(3);
 
   } else
-    mxdebug_if(m_debug, boost::format("Unrecognized coding type %|1$02x|\n") % static_cast<unsigned int>(str.coding_type));
+    mxdebug_if(m_debug, fmt::format("Unrecognized coding type {0:02x}\n", static_cast<unsigned int>(str.coding_type)));
 
   m_bc->set_bit_position((position + length) * 8);
 
@@ -488,12 +488,12 @@ parser_c::read_string(unsigned int length) {
 void
 parser_c::dump()
   const {
-  mxinfo(boost::format("MPLS class dump\n"
-                       "  ok:           %1%\n"
-                       "  num_chapters: %2%\n")
-         % m_ok % m_chapters.size());
+  mxinfo(fmt::format("MPLS class dump\n"
+                     "  ok:           {0}\n"
+                     "  num_chapters: {1}\n",
+                     m_ok, m_chapters.size()));
   for (auto &timestamp : m_chapters)
-    mxinfo(boost::format("    %1%\n") % timestamp);
+    mxinfo(fmt::format("    {0}\n", timestamp));
 
   m_header.dump();
   m_playlist.dump();

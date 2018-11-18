@@ -86,7 +86,7 @@ property_element_c::derive_type() {
          :                                        EBMLT_SKIP;
 
   if (EBMLT_SKIP == m_type)
-    mxerror(boost::format("property_element_c::derive_type(): programming error: unknown type for EBML ID %|1$08x|\n") % m_callbacks->GlobalId.Value);
+    mxerror(fmt::format("property_element_c::derive_type(): programming error: unknown type for EBML ID {0:08x}\n", m_callbacks->GlobalId.Value));
 
   if ((EBMLT_UINT == m_type) && (m_name.find("flag") != std::string::npos))
     m_type = EBMLT_BOOL;
@@ -224,7 +224,7 @@ property_element_c::get_table_for(const EbmlCallbacks &master_callbacks,
 
   std::map<uint32_t, std::vector<property_element_c> >::iterator src_map_it = s_properties.find(master_callbacks.GlobalId.Value);
   if (s_properties.end() == src_map_it)
-    mxerror(boost::format("property_element_c::get_table_for(): programming error: no table found for EBML ID %|1$08x|\n") % master_callbacks.GlobalId.Value);
+    mxerror(fmt::format("property_element_c::get_table_for(): programming error: no table found for EBML ID {0:08x}\n", master_callbacks.GlobalId.Value));
 
   if (full_table)
     return src_map_it->second;

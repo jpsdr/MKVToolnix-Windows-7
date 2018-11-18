@@ -53,7 +53,7 @@ std::string g_default_country;
 */
 inline void
 chapter_error(const std::string &error) {
-  throw parser_x(boost::format(Y("Simple chapter parser: %1%\n")) % error);
+  throw parser_x(fmt::format(Y("Simple chapter parser: {0}\n"), error));
 }
 
 inline void
@@ -186,7 +186,7 @@ parse_simple(mm_text_io_c *in,
 
     if (0 == mode) {
       if (!boost::regex_match(line, matches, timestamp_line_re))
-        chapter_error(boost::format(Y("'%1%' is not a CHAPTERxx=... line.")) % line);
+        chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
       int64_t hour = 0, minute = 0, second = 0, msecs = 0;
       parse_number(matches[1].str(), hour);
@@ -195,21 +195,21 @@ parse_simple(mm_text_io_c *in,
       parse_number(matches[4].str(), msecs);
 
       if (59 < minute)
-        chapter_error(boost::format(Y("Invalid minute: %1%")) % minute);
+        chapter_error(fmt::format(Y("Invalid minute: {0}"), minute));
       if (59 < second)
-        chapter_error(boost::format(Y("Invalid second: %1%")) % second);
+        chapter_error(fmt::format(Y("Invalid second: {0}"), second));
 
       start = msecs + second * 1000 + minute * 1000 * 60 + hour * 1000 * 60 * 60;
       mode  = 1;
 
       if (!boost::regex_match(line, matches, timestamp_re))
-        chapter_error(boost::format(Y("'%1%' is not a CHAPTERxx=... line.")) % line);
+        chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
       timestamp_as_string = matches[1].str();
 
     } else {
       if (!boost::regex_match(line, matches, name_line_re))
-        chapter_error(boost::format(Y("'%1%' is not a CHAPTERxxNAME=... line.")) % line);
+        chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxxNAME=... line."), line));
 
       std::string name = matches[1].str();
       if (name.empty())
@@ -291,13 +291,13 @@ parse(const std::string &file_name,
   } catch (parser_x &e) {
     if (exception_on_error)
       throw;
-    mxerror(boost::format(Y("Could not parse the chapters in '%1%': %2%\n")) % file_name % e.error());
+    mxerror(fmt::format(Y("Could not parse the chapters in '{0}': {1}\n"), file_name, e.error()));
 
   } catch (...) {
     if (exception_on_error)
-      throw parser_x(boost::format(Y("Could not open '%1%' for reading.\n")) % file_name);
+      throw parser_x(fmt::format(Y("Could not open '{0}' for reading.\n"), file_name));
     else
-      mxerror(boost::format(Y("Could not open '%1%' for reading.\n")) % file_name);
+      mxerror(fmt::format(Y("Could not open '{0}' for reading.\n"), file_name));
   }
 
   return {};
@@ -369,15 +369,15 @@ parse(mm_text_io_c *in,
       return select_in_timeframe(chapters.get(), min_ts, max_ts, offset) ? chapters : nullptr;
     }
 
-    error = (boost::format(Y("Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n")) % in->get_file_name()).str();
+    error = fmt::format(Y("Unknown chapter file format in '{0}'. It does not contain a supported chapter format.\n"), in->get_file_name());
   } catch (mtx::chapters::parser_x &e) {
     error = e.error();
   } catch (mtx::mm_io::exception &ex) {
-    error = (boost::format(Y("The XML chapter file '%1%' could not be read.\n")) % in->get_file_name()).str();
+    error = fmt::format(Y("The XML chapter file '{0}' could not be read.\n"), in->get_file_name());
   } catch (mtx::xml::xml_parser_x &ex) {
-    error = (boost::format(Y("The XML chapter file '%1%' contains an error at position %3%: %2%\n")) % in->get_file_name() % ex.result().description() % ex.result().offset).str();
+    error = fmt::format(Y("The XML chapter file '{0}' contains an error at position {2}: {1}\n"), in->get_file_name(), ex.result().description(), ex.result().offset);
   } catch (mtx::xml::exception &ex) {
-    error = (boost::format(Y("The XML chapter file '%1%' contains an error: %2%\n")) % in->get_file_name() % ex.what()).str();
+    error = fmt::format(Y("The XML chapter file '{0}' contains an error: {1}\n"), in->get_file_name(), ex.what());
   }
 
   if (!error.empty()) {
@@ -614,8 +614,8 @@ remove_entries(int64_t min_ts,
       entries[i].spans = true;
 
     mxverb(3,
-           boost::format("remove_chapters: entries[%1%]: remove %2% spans %3% start %4% end %5%\n")
-           % i % entries[i].remove % entries[i].spans % entries[i].start % entries[i].end);
+           fmt::format("remove_chapters: entries[{0}]: remove {1} spans {2} start {3} end {4}\n",
+                       i, entries[i].remove, entries[i].spans, entries[i].start, entries[i].end));
 
     // Spanning entries must be kept, and their start timestamp must be
     // adjusted. Entries that are to be deleted will be deleted later and
@@ -687,7 +687,7 @@ merge_entries(EbmlMaster &master) {
     int64_t start_ts = get_start(*atom, 0);
     int64_t end_ts   = get_end(*atom);
 
-    mxverb(3, boost::format("chapters: merge_entries: looking for %1% with %2%, %3%\n") % uid % start_ts % end_ts);
+    mxverb(3, fmt::format("chapters: merge_entries: looking for {0} with {1}, {2}\n", uid, start_ts, end_ts));
 
     // Now iterate over all remaining atoms and find those with the same
     // UID.
@@ -736,7 +736,7 @@ merge_entries(EbmlMaster &master) {
           ++merge_child_idx;
       }
 
-      mxverb(3, boost::format("chapters: merge_entries:   found one at %1% with %2%, %3%; merged to %4%, %5%\n") % merge_idx % merge_start_ts % merge_end_ts % start_ts % end_ts);
+      mxverb(3, fmt::format("chapters: merge_entries:   found one at {0} with {1}, {2}; merged to {3}, {4}\n", merge_idx, merge_start_ts, merge_end_ts, start_ts, end_ts));
 
       // Finally remove the entry itself.
       delete master[merge_idx];
@@ -1104,7 +1104,7 @@ format_name_template(std::string const &name_template,
   auto appended_file_name_p = bfs::path{appended_file_name};
 
   name = boost::regex_replace(name, number_re, [=](boost::smatch const &match) {
-    auto number_str    = (boost::format("%1%") % chapter_number).str();
+    auto number_str    = fmt::format("{0}", chapter_number);
     auto wanted_length = 1u;
 
     if (match[1].length() && !parse_number(match[1].str(), wanted_length))

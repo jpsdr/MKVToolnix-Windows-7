@@ -65,7 +65,7 @@ parser_c::detect(unsigned char const *buffer,
 
       auto offset = mtx::dts::find_consecutive_headers(m->decode_buffer.get_buffer(), m->decode_buffer.get_size(), num_required_headers);
 
-      mxdebug_if(m->debug, boost::format("dts::parser::detect: in: size %1% #req headers %2%; result: swap %3% 14/16 %4% offset %5%\n") % size % num_required_headers % m->swap_bytes % m->pack_14_16 % offset);
+      mxdebug_if(m->debug, fmt::format("dts::parser::detect: in: size {0} #req headers {1}; result: swap {2} 14/16 {3} offset {4}\n", size, num_required_headers, m->swap_bytes, m->pack_14_16, offset));
 
       if (offset < 0)
         continue;

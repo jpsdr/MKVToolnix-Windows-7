@@ -29,12 +29,12 @@ program_t::program_t()
 
 void
 program_t::dump() {
-  mxinfo(boost::format("Program dump:\n"
-                       "  spn_program_sequence_start: %1%\n"
-                       "  program_map_pid:            %2%\n"
-                       "  num_streams:                %3%\n"
-                       "  num_groups:                 %4%\n")
-         % spn_program_sequence_start %program_map_pid % static_cast<unsigned int>(num_streams) % static_cast<unsigned int>(num_groups));
+  mxinfo(fmt::format("Program dump:\n"
+                     "  spn_program_sequence_start: {0}\n"
+                     "  program_map_pid:            {1}\n"
+                     "  num_streams:                {2}\n"
+                     "  num_groups:                 {3}\n",
+                     spn_program_sequence_start,program_map_pid, static_cast<unsigned int>(num_streams), static_cast<unsigned int>(num_groups)));
 
   for (auto &program_stream : program_streams)
     program_stream->dump();
@@ -53,23 +53,23 @@ program_stream_t::program_stream_t()
 
 void
 program_stream_t::dump() {
-  mxinfo(boost::format("Program stream dump:\n"
-                       "  pid:         %1%\n"
-                       "  coding_type: %2%\n"
-                       "  format:      %3%\n"
-                       "  rate:        %4%\n"
-                       "  aspect:      %5%\n"
-                       "  oc_flag:     %6%\n"
-                       "  char_code:   %7%\n"
-                       "  language:    %8%\n")
-         % pid
-         % static_cast<unsigned int>(coding_type)
-         % static_cast<unsigned int>(format)
-         % static_cast<unsigned int>(rate)
-         % static_cast<unsigned int>(aspect)
-         % static_cast<unsigned int>(oc_flag)
-         % static_cast<unsigned int>(char_code)
-         % language);
+  mxinfo(fmt::format("Program stream dump:\n"
+                     "  pid:         {0}\n"
+                     "  coding_type: {1}\n"
+                     "  format:      {2}\n"
+                     "  rate:        {3}\n"
+                     "  aspect:      {4}\n"
+                     "  oc_flag:     {5}\n"
+                     "  char_code:   {6}\n"
+                     "  language:    {7}\n",
+                     pid,
+                     static_cast<unsigned int>(coding_type),
+                     static_cast<unsigned int>(format),
+                     static_cast<unsigned int>(rate),
+                     static_cast<unsigned int>(aspect),
+                     static_cast<unsigned int>(oc_flag),
+                     static_cast<unsigned int>(char_code),
+                     language));
 }
 
 parser_c::parser_c(std::string file_name)
@@ -81,10 +81,10 @@ parser_c::parser_c(std::string file_name)
 
 void
 parser_c::dump() {
-  mxinfo(boost::format("Parser dump:\n"
-                       "  sequence_info_start: %1%\n"
-                       "  program_info_start:  %2%\n")
-         % m_sequence_info_start % m_program_info_start);
+  mxinfo(fmt::format("Parser dump:\n"
+                     "  sequence_info_start: {0}\n"
+                     "  program_info_start:  {1}\n",
+                     m_sequence_info_start, m_program_info_start));
 
   for (auto &program : m_programs)
     program->dump();
@@ -124,12 +124,12 @@ parser_c::parse_header(mtx::bits::reader_c &bc) {
   bc.set_bit_position(0);
 
   uint32_t magic = bc.get_bits(32);
-  mxdebug_if(m_debug, boost::format("File magic 1: 0x%|1$08x|\n") % magic);
+  mxdebug_if(m_debug, fmt::format("File magic 1: 0x{0:08x}\n", magic));
   if (CLPI_FILE_MAGIC != magic)
     throw false;
 
   magic = bc.get_bits(32);
-  mxdebug_if(m_debug, boost::format("File magic 2: 0x%|1$08x|\n") % magic);
+  mxdebug_if(m_debug, fmt::format("File magic 2: 0x{0:08x}\n", magic));
   if ((CLPI_FILE_MAGIC2A != magic) && (CLPI_FILE_MAGIC2B != magic) && (CLPI_FILE_MAGIC2C != magic))
     throw false;
 
@@ -144,7 +144,7 @@ parser_c::parse_program_info(mtx::bits::reader_c &bc) {
   bc.skip_bits(40);            // 32 bits length, 8 bits reserved
   size_t num_program_streams = bc.get_bits(8), program_idx, stream_idx;
 
-  mxdebug_if(m_debug, boost::format("num_program_streams: %1%\n") % num_program_streams);
+  mxdebug_if(m_debug, fmt::format("num_program_streams: {0}\n", num_program_streams));
 
   for (program_idx = 0; program_idx < num_program_streams; ++program_idx) {
     program_cptr program(new program_t);
@@ -222,7 +222,7 @@ parser_c::parse_program_stream(mtx::bits::reader_c &bc,
       break;
 
     default:
-      mxdebug_if(m_debug, boost::format("mtx::bluray::clpi::parser_c::parse_program_stream: Unknown coding type %1%\n") % static_cast<unsigned int>(stream->coding_type));
+      mxdebug_if(m_debug, fmt::format("mtx::bluray::clpi::parser_c::parse_program_stream: Unknown coding type {0}\n", static_cast<unsigned int>(stream->coding_type)));
       break;
   }
 

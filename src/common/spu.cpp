@@ -42,7 +42,7 @@ find_stop_display_position(unsigned char const *data,
 
     auto off = start_off + 4;
     for (auto type = data[off++]; type != 0xff; type = data[off++]) {
-      auto info    = (boost::format("spu_extraction_duration: cmd = %|1$02x| ") % static_cast<unsigned int>(type)).str();
+      auto info    = fmt::format("spu_extraction_duration: cmd = {0:02x} ", static_cast<unsigned int>(type));
       auto unknown = false;
       switch(type) {
         case 0x00:
@@ -56,7 +56,7 @@ find_stop_display_position(unsigned char const *data,
         case 0x02: {
           // Stop display
           auto date = timestamp_c::mpeg(static_cast<int64_t>(get_uint16_be(&data[start_off])) * 1024);
-          info     += (boost::format("stop display: %1%\n") % format_timestamp(date)).str();
+          info     += fmt::format("stop display: {0}\n", format_timestamp(date));
           mxdebug_if(debug, info);
           return start_off;
         }
@@ -83,10 +83,10 @@ find_stop_display_position(unsigned char const *data,
           info += "done";
           return {};
         default:
-          info += (boost::format("unknown (0x%|1$02x|), skipping %2% bytes.") % type % (next_off - off)).str();
+          info += fmt::format("unknown (0x{0:02x}), skipping {1} bytes.", type, next_off - off);
           unknown = true;
       }
-      mxdebug_if(debug, boost::format("%1%\n") % info);
+      mxdebug_if(debug, fmt::format("{0}\n", info));
       if (unknown)
         break;
     }

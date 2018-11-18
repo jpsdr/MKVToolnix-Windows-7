@@ -26,7 +26,7 @@ windows_debug_target_c::~windows_debug_target_c() {
 
 void
 windows_debug_target_c::log_line(std::string const &message) {
-  auto line = to_wide((boost::format("[mtx] +%1%ms %2%") % runtime() % message).str());
+  auto line = to_wide(fmt::format("[mtx] +{0}ms {1}", runtime(), message));
   OutputDebugStringW(line.c_str());
 }
 

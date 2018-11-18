@@ -62,12 +62,10 @@ kax_analyzer_data_c::to_string() const {
   if (callbacks)
     name = EBML_INFO_NAME(*callbacks);
 
-  else {
-    std::string format = (boost::format("0x%%|0%1%x|") % (EBML_ID_LENGTH(m_id) * 2)).str();
-    name               = (boost::format(format)        %  EBML_ID_VALUE(m_id)).str();
-  }
+  else
+    name = fmt::format("0x{0:0{1}x}", EBML_ID_VALUE(m_id), EBML_ID_LENGTH(m_id) * 2);
 
-  return (boost::format("%1% size %2%%4% at %3%") % name % m_size % m_pos % (m_size_known ? "" : " (unknown)")).str();
+  return fmt::format("{0} size {1}{3} at {2}", name, m_size, m_pos, m_size_known ? "" : " (unknown)");
 }
 
 kax_analyzer_c::kax_analyzer_c(std::string file_name)
@@ -139,7 +137,7 @@ void
 kax_analyzer_c::debug_dump_elements() {
   size_t i;
   for (i = 0; i < m_data.size(); i++)
-    log_debug_message(boost::format("%1%: %2%\n") % i % m_data[i]->to_string());
+    log_debug_message(fmt::format("{0}: {1}\n", i, m_data[i]->to_string()));
 }
 
 void
@@ -147,7 +145,7 @@ kax_analyzer_c::debug_dump_elements_maybe(const std::string &hook_name) {
   if (!analyzer_debugging_requested(hook_name))
     return;
 
-  log_debug_message(boost::format("kax_analyzer_%1% dumping elements:\n") % hook_name);
+  log_debug_message(fmt::format("kax_analyzer_{0} dumping elements:\n", hook_name));
   debug_dump_elements();
 }
 
@@ -162,10 +160,10 @@ kax_analyzer_c::validate_data_structures(const std::string &hook_name) {
 
   for (i = 0; m_data.size() -1 > i; i++) {
     if ((m_data[i]->m_pos + m_data[i]->m_size) > m_data[i + 1]->m_pos) {
-      log_debug_message(boost::format("kax_analyzer_%1%: Interal data structure corruption at pos %2% (size + position > next position); dumping elements\n") % hook_name % i);
+      log_debug_message(fmt::format("kax_analyzer_{0}: Interal data structure corruption at pos {1} (size + position > next position); dumping elements\n", hook_name, i));
       ok = false;
     } else if (gap_debugging && ((m_data[i]->m_pos + m_data[i]->m_size) < m_data[i + 1]->m_pos)) {
-      log_debug_message(boost::format("kax_analyzer_%1%: Gap found at pos %2% (size + position < next position); dumping elements\n") % hook_name % i);
+      log_debug_message(fmt::format("kax_analyzer_{0}: Gap found at pos {1} (size + position < next position); dumping elements\n", hook_name, i));
       ok = false;
     }
   }
@@ -206,11 +204,10 @@ kax_analyzer_c::verify_data_structures_against_file(const std::string &hook_name
   if (ok)
     return;
 
-  log_debug_message(boost::format("verify_data_structures_against_file(%1%) failed. Dumping this on the left, actual on the right.\n") % hook_name);
-  std::string format = (boost::format("%%1%% %%|2$-%1%s| %%3%%\n") % max_info_len).str();
+  log_debug_message(fmt::format("verify_data_structures_against_file({0}) failed. Dumping this on the left, actual on the right.\n", hook_name));
 
   for (i = 0; num_items > i; ++i)
-    log_debug_message(boost::format(format) % info_markings[i] % info_this[i] % info_actual[i]);
+    log_debug_message(fmt::format("{0} {1:<{2}s} {3}\n", info_markings[i], info_this[i], max_info_len, info_actual[i]));
 
   debug_abort_process();
 }
@@ -264,12 +261,12 @@ bool
 kax_analyzer_c::process() {
   try {
     auto result = process_internal();
-    mxdebug_if(m_debug, boost::format("kax_analyzer: parsing file '%1%' result %2%\n") % m_file->get_file_name() % result);
+    mxdebug_if(m_debug, fmt::format("kax_analyzer: parsing file '{0}' result {1}\n", m_file->get_file_name(), result));
 
     return result;
 
   } catch (...) {
-    mxdebug_if(m_debug, boost::format("kax_analyzer: parsing file '%1%' failed with an exception\n") % m_file->get_file_name());
+    mxdebug_if(m_debug, fmt::format("kax_analyzer: parsing file '{0}' failed with an exception\n", m_file->get_file_name()));
 
     show_progress_done();
 
@@ -465,7 +462,7 @@ kax_analyzer_c::update_element(EbmlElement *e,
     return result;
 
   } catch (mtx::mm_io::exception &ex) {
-    mxdebug_if(m_debug, boost::format("I/O exception: %1%\n") % ex.what());
+    mxdebug_if(m_debug, fmt::format("I/O exception: {0}\n", ex.what()));
     return uer_error_unknown;
   }
 
@@ -558,7 +555,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
   // and remove the element from the data structure if that was
   // requested. Then we're done.
   if (m_data.size() == (data_idx + 1)) {
-    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): element is at end; truncating file\n") % data_idx);
+    mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): element is at end; truncating file\n", data_idx));
     m_file->truncate(m_data[data_idx]->m_pos + m_data[data_idx]->m_size);
     adjust_segment_size();
     if (0 == m_data[data_idx]->m_size)
@@ -572,7 +569,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     ++end_idx;
 
   if (end_idx > data_idx + 1) {
-    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): %2% void element(s) following; merging\n") % data_idx % (end_idx - data_idx - 1));
+    mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): {1} void element(s) following; merging\n", data_idx, end_idx - data_idx - 1));
 
     // Yes, there is at least one. Remove these elements from the list
     // in order to create a new EbmlVoid element covering their space
@@ -588,7 +585,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
   // If the difference is 0 then we have nothing to do.
   if (0 == void_size) {
-    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 0, nothing further to do\n") % data_idx);
+    mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): void_size == 0, nothing further to do\n", data_idx));
     return false;
   }
 
@@ -596,7 +593,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
   // EbmlVoid element needs at least two bytes (one for the ID, one
   // for the size).
   if (1 == void_size) {
-    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1; move next element's head down one byte & enlarge its size portion\n") % data_idx);
+    mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): void_size == 1; move next element's head down one byte & enlarge its size portion\n", data_idx));
 
     // No. The most compatible way to deal with this situation is to
     // move the element ID of the following element one byte to the
@@ -614,7 +611,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     ebml_element_cptr e = read_element(m_data[data_idx + 1]);
 
     if (!e) {
-      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1: could not read following element\n") % data_idx);
+      mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): void_size == 1: could not read following element\n", data_idx));
       return false;
     }
 
@@ -630,8 +627,8 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     head_size += coded_size;
 
     mxdebug_if(s_debug_void,
-               boost::format("handle_void_elements(%1%): void_size == 1: writing %2% header bytes at position %3% (ID length %4% coded size length %5% previous size length %6% element size %7%); bytes: %8%\n")
-               % data_idx % head_size % new_pos % (head_size - coded_size) % coded_size % e->GetSizeLength() % e->GetSize() % to_hex(head, head_size));
+               fmt::format("handle_void_elements({0}): void_size == 1: writing {1} header bytes at position {2} (ID length {3} coded size length {4} previous size length {5} element size {6}); bytes: {7}\n",
+                           data_idx, head_size, new_pos, head_size - coded_size, coded_size, e->GetSizeLength(), e->GetSize(), to_hex(head, head_size)));
 
     m_file->setFilePointer(new_pos);
     m_file->write(head, head_size);
@@ -641,7 +638,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
     if (!move_up) {
       // Need to add an empty new EBML void element.
-      mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1: adding new two-byte EBML void element at position %2%\n") % data_idx % (new_pos - 2));
+      mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): void_size == 1: adding new two-byte EBML void element at position {1}\n", data_idx, new_pos - 2));
 
       m_file->setFilePointer(new_pos - 2);
 
@@ -656,7 +653,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     // Update meta seek indices for m_data[data_idx]'s new position.
     e = read_element(m_data[data_idx + 1]);
 
-    mxdebug_if(s_debug_void, boost::format("handle_void_elements(%1%): void_size == 1: element re-read; now removing from meta seeks, merging void elements etc.\n") % data_idx);
+    mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): void_size == 1: element re-read; now removing from meta seeks, merging void elements etc.\n", data_idx));
 
     remove_from_meta_seeks(EbmlId(*e));
     merge_void_elements();
@@ -973,7 +970,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
   // If this seek head is located at the front then we've got nothing
   // to do. At the same time look for a seek head at the start.
 
-  mxdebug_if(m_debug, boost::format("ensure_front_seek_head_links_to start\n"));
+  mxdebug_if(m_debug, fmt::format("ensure_front_seek_head_links_to start\n"));
 
   boost::optional<unsigned int> first_seek_head_idx;
 
@@ -998,7 +995,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
 
   // Our seek head is at the end and there's no seek head at the
   // start.
-  mxdebug_if(m_debug, boost::format("  no seek head at start but one at the end\n"));
+  mxdebug_if(m_debug, fmt::format("  no seek head at start but one at the end\n"));
 
   auto seek_head_position = m_segment->GetRelativePosition(m_data[seek_head_idx]->m_pos);
   auto seek_head_id       = memory_c::alloc(4);
@@ -1015,7 +1012,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
   auto first_time  = true;
 
   while (first_time) {
-    mxdebug_if(m_debug, boost::format("  looking for place for the new seek head at the start…\n"));
+    mxdebug_if(m_debug, fmt::format("  looking for place for the new seek head at the start…\n"));
     // Find a place at the front with enough space.
     for (int data_idx = 0, end = m_data.size(); data_idx < end; ++data_idx) {
       auto &data = *m_data[data_idx];
@@ -1032,7 +1029,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
       if ((data.m_size != needed_size) && (data.m_size < (needed_size + 2)))
         continue;
 
-      mxdebug_if(m_debug, boost::format("  got one! writing at file position %1%\n") % data.m_pos);
+      mxdebug_if(m_debug, fmt::format("  got one! writing at file position {0}\n", data.m_pos));
       // Got a place. Write the seek head, update the internal record &
       // write a new void element.
       m_file->setFilePointer(data.m_pos);
@@ -1048,7 +1045,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
       return data_idx;
     }
 
-    mxdebug_if(m_debug, boost::format("  no place, moving level 1 elements and trying again\n"));
+    mxdebug_if(m_debug, fmt::format("  no place, moving level 1 elements and trying again\n"));
     // We haven't found a spot. Move an existing level 1 element to the
     // end if we haven't done that yet and try again. Otherwise fail.
     if (first_time && !move_level1_element_before_cluster_to_end_of_file())
@@ -1240,7 +1237,7 @@ kax_analyzer_c::move_level1_element_before_cluster_to_end_of_file() {
   auto const to_move_idx = candidates_for_moving.front().second;
   auto const &to_move    = *m_data[to_move_idx];
 
-  mxdebug_if(m_debug, boost::format("Moving level 1 at index %1% to the end (%2%)\n") % to_move_idx % to_move.to_string());
+  mxdebug_if(m_debug, fmt::format("Moving level 1 at index {0} to the end ({1})\n", to_move_idx, to_move.to_string()));
 
   // We read the element and write it again at the end of the file.
   m_file->setFilePointer(to_move.m_pos);
@@ -1449,7 +1446,7 @@ kax_analyzer_c::fix_unknown_size_for_last_level1_element() {
   if (data.m_size_known)
     return;
 
-  mxinfo(boost::format("chunky bacon! data %1% seg end %2%\n") % data.to_string() % m_segment_end);
+  mxinfo(fmt::format("chunky bacon! data {0} seg end {1}\n", data.to_string(), m_segment_end));
 
   auto elt = read_element(m_data.size() - 1);
   if (!elt)
@@ -1468,7 +1465,7 @@ kax_analyzer_c::fix_unknown_size_for_last_level1_element() {
   data.m_size       = actual_size + head_size;
   data.m_size_known = true;
 
-  log_debug_message(boost::format("fix_unknown_size_for_last_level1_element: element fixed to new payload size %1% head size %2% segment end %3%\n") % actual_size % head_size % m_segment_end);
+  log_debug_message(fmt::format("fix_unknown_size_for_last_level1_element: element fixed to new payload size {0} head size {1} segment end {2}\n", actual_size, head_size, m_segment_end));
 }
 
 kax_analyzer_c::placement_strategy_e
@@ -1524,17 +1521,17 @@ kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
     }
 
   } catch (mtx::mm_io::exception &ex) {
-    throw mtx::kax_analyzer_x{boost::format(Y("The file '%1%' could not be opened for reading: %2%.")) % file_name % ex};
+    throw mtx::kax_analyzer_x{fmt::format(Y("The file '{0}' could not be opened for reading: {1}."), file_name, ex)};
 
   } catch (mtx::kax_analyzer_x &ex) {
-    throw mtx::kax_analyzer_x{boost::format(Y("The file '%1%' could not be opened for reading: %2%.")) % file_name % ex};
+    throw mtx::kax_analyzer_x{fmt::format(Y("The file '{0}' could not be opened for reading: {1}."), file_name, ex)};
 
   } catch (...) {
-    throw mtx::kax_analyzer_x{boost::format(Y("The file '%1%' could not be opened or parsed.")) % file_name};
+    throw mtx::kax_analyzer_x{fmt::format(Y("The file '{0}' could not be opened or parsed."), file_name)};
 
   }
 
-  throw mtx::kax_analyzer_x{boost::format(Y("No segment UID could be found in the file '%1%'.")) % file_name};
+  throw mtx::kax_analyzer_x{fmt::format(Y("No segment UID could be found in the file '{0}'."), file_name)};
 }
 
 int
@@ -1600,7 +1597,7 @@ console_kax_analyzer_c::show_progress_running(int percentage) {
   std::string full_bar(        percentage  * CONSOLE_PERCENTAGE_WIDTH / 100, '=');
   std::string empty_bar((100 - percentage) * CONSOLE_PERCENTAGE_WIDTH / 100, ' ');
 
-  mxinfo(boost::format(Y("Progress: [%1%%2%] %3%%%")) % full_bar % empty_bar % percentage);
+  mxinfo(fmt::format(Y("Progress: [{0}{1}] {2}%"), full_bar, empty_bar, percentage));
   mxinfo("\r");
 
   m_previous_percentage = percentage;
