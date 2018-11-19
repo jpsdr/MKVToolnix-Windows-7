@@ -47,31 +47,30 @@ write_cues(std::vector<track_spec_t> const &tracks,
   for (auto const &track : tracks) {
     auto track_number_itr = track_number_map.find(track.tid);
     if (track_number_itr == track_number_map.end())
-      mxerror(boost::format(Y("The file does not contain track ID %1%.\n")) % track.tid);
+      mxerror(fmt::format(Y("The file does not contain track ID {0}.\n"), track.tid));
 
     auto cue_points_itr = cue_points.find(track_number_itr->second);
     if (cue_points_itr == cue_points.end())
-      mxerror(boost::format(Y("There are no cues for track ID %1%.\n")) % track.tid);
+      mxerror(fmt::format(Y("There are no cues for track ID {0}.\n"), track.tid));
 
     auto &track_cue_points = cue_points_itr->second;
 
     try {
-      mxinfo(boost::format(Y("The cues for track %1% are written to '%2%'.\n")) % track.tid % track.out_name);
+      mxinfo(fmt::format(Y("The cues for track {0} are written to '{1}'.\n"), track.tid, track.out_name));
 
       auto out = mm_file_io_c{track.out_name, MODE_CREATE};
 
       for (auto const &p : track_cue_points) {
-        auto line = (boost::format("timestamp=%1% duration=%2% cluster_position=%3% relative_position=%4%\n")
-                     % format_timestamp(p.timestamp * timestamp_scale, 9)
-                     % (p.duration          ? format_timestamp(p.duration.get() * timestamp_scale, 9)      : "-")
-                     % (p.cluster_position  ? to_string(p.cluster_position.get() + segment_data_start_pos) : "-")
-                     % (p.relative_position ? to_string(p.relative_position.get())                         : "-")
-                     ).str();
+        auto line = fmt::format("timestamp={0} duration={1} cluster_position={2} relative_position={3}\n",
+                                format_timestamp(p.timestamp * timestamp_scale, 9),
+                                p.duration          ? format_timestamp(p.duration.get() * timestamp_scale, 9)      : "-",
+                                p.cluster_position  ? to_string(p.cluster_position.get() + segment_data_start_pos) : "-",
+                                p.relative_position ? to_string(p.relative_position.get())                         : "-");
         out.puts(line);
       }
 
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % track.out_name % ex);
+      mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), track.out_name, ex));
     }
   }
 }

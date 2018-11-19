@@ -33,7 +33,7 @@ xtr_webvtt_c::create_file(xtr_base_c *master,
                           KaxTrackEntry &track) {
   auto priv = FindChild<KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   xtr_base_c::create_file(master, track);
 
@@ -48,7 +48,7 @@ xtr_webvtt_c::handle_frame(xtr_frame_t &f) {
   ++m_num_entries;
 
   if (-1 == f.duration) {
-    mxwarn(boost::format(Y("Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n")) % m_tid % m_num_entries);
+    mxwarn(fmt::format(Y("Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"), m_tid, m_num_entries));
     f.duration = 1000000000;
   }
 
@@ -75,10 +75,10 @@ xtr_webvtt_c::handle_frame(xtr_frame_t &f) {
 
   auto content = chomp(normalize_line_endings(f.frame->to_string())) + "\n";
   content      = webvtt_parser_c::adjust_embedded_timestamps(content, timestamp_c::ns(f.timestamp));
-  content      = (boost::format("\n%1%%2%%3% --> %4%%5%\n%6%")
-                  % local_blocks % label
-                  % format_timestamp(f.timestamp, 3) % format_timestamp(f.timestamp + f.duration, 3)
-                  % settings_list % content).str();
+  content      = fmt::format("\n{0}{1}{2} --> {3}{4}\n{5}",
+                             local_blocks, label,
+                             format_timestamp(f.timestamp, 3), format_timestamp(f.timestamp + f.duration, 3),
+                             settings_list, content);
 
   m_out->write(content);
 }

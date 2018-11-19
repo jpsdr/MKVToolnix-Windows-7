@@ -46,7 +46,7 @@ xtr_wav_c::create_file(xtr_base_c *master,
 
 
   if (-1 == bps)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   xtr_base_c::create_file(master, track);
 
@@ -113,7 +113,7 @@ xtr_wavpack4_c::create_file(xtr_base_c *master,
     mpriv = decode_codec_private(priv);
 
   if (!priv || (2 > mpriv->get_size()))
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
   memcpy(m_version, mpriv->get_buffer(), 2);
 
   xtr_base_c::create_file(master, track);
@@ -131,7 +131,7 @@ xtr_wavpack4_c::create_file(xtr_base_c *master,
     try {
       m_corr_out = mm_write_buffer_io_c::open(corr_name, 5 * 1024 * 1024);
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % corr_name % ex);
+      mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), corr_name, ex));
     }
   }
 }

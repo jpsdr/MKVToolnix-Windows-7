@@ -41,7 +41,7 @@ xtr_avc_c::write_nal(binary *data,
     nal_size = (nal_size << 8) | data[pos++];
 
   if ((pos + nal_size) > data_size) {
-    mxwarn(boost::format(Y("Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n")) % m_tid % nal_size % (data_size - pos));
+    mxwarn(fmt::format(Y("Track {0}: NAL too big. Size according to header field: {1}, available bytes in packet: {2}. This NAL is defect and will be skipped.\n"), m_tid, nal_size, data_size - pos));
     return false;
   }
 
@@ -68,7 +68,7 @@ xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
     auto nalu = memory_c::borrow(nalu_pos.first->get_buffer() + m_nal_size_size, nalu_pos.first->get_size() - m_nal_size_size);
     auto type = nalu_pos.second;
 
-    mxdebug_if(m_debug_access_unit_delimiters, boost::format(" type %1%\n") % static_cast<unsigned int>(type));
+    mxdebug_if(m_debug_access_unit_delimiters, fmt::format(" type {0}\n", static_cast<unsigned int>(type)));
 
     if (type == NALU_TYPE_SEQ_PARAM) {
       m_parser.handle_sps_nalu(nalu);
@@ -105,7 +105,7 @@ xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
       return false;
     }
 
-    mxdebug_if(m_debug_access_unit_delimiters, boost::format("  IDR slice parsing OK current ID %1% prev ID %2%\n") % si.idr_pic_id % (m_previous_idr_pic_id ? static_cast<int>(*m_previous_idr_pic_id) : -1));
+    mxdebug_if(m_debug_access_unit_delimiters, fmt::format("  IDR slice parsing OK current ID {0} prev ID {1}\n", si.idr_pic_id, m_previous_idr_pic_id ? static_cast<int>(*m_previous_idr_pic_id) : -1));
 
     auto result           = m_previous_idr_pic_id && (*m_previous_idr_pic_id == si.idr_pic_id);
     m_previous_idr_pic_id = si.idr_pic_id;
@@ -118,7 +118,7 @@ xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
 
 void
 xtr_avc_c::write_access_unit_delimiter() {
-  mxdebug_if(m_debug_access_unit_delimiters, boost::format("writing access unit delimiter\n"));
+  mxdebug_if(m_debug_access_unit_delimiters, fmt::format("writing access unit delimiter\n"));
 
   m_out->write(ms_start_code, 4);
   m_out->write(ms_aud_nalu,   2);
@@ -131,12 +131,12 @@ xtr_avc_c::create_file(xtr_base_c *master,
 
   auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   memory_cptr mpriv = decode_codec_private(priv);
 
   if (mpriv->get_size() < 6)
-    mxerror(boost::format(Y("Track %1% CodecPrivate is too small.\n")) % m_tid);
+    mxerror(fmt::format(Y("Track {0} CodecPrivate is too small.\n"), m_tid));
 
   binary *buf     = mpriv->get_buffer();
   m_nal_size_size = 1 + (buf[4] & 3);

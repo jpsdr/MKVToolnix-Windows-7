@@ -150,10 +150,10 @@ extract_cli_parser_c::init_parser() {
 void
 extract_cli_parser_c::assert_mode(options_c::extraction_mode_e mode) {
   if      ((options_c::em_tracks   == mode) && (m_current_mode->m_extraction_mode != mode))
-    mxerror(boost::format(Y("'%1%' is only allowed when extracting tracks.\n"))   % m_current_arg);
+    mxerror(fmt::format(Y("'{0}' is only allowed when extracting tracks.\n"),   m_current_arg));
 
   else if ((options_c::em_chapters == mode) && (m_current_mode->m_extraction_mode != mode))
-    mxerror(boost::format(Y("'%1%' is only allowed when extracting chapters.\n")) % m_current_arg);
+    mxerror(fmt::format(Y("'{0}' is only allowed when extracting chapters.\n"), m_current_arg));
 }
 
 void
@@ -177,7 +177,7 @@ void
 extract_cli_parser_c::set_blockadd() {
   assert_mode(options_c::em_tracks);
   if (!parse_number(m_next_arg, m_extract_blockadd_level) || (-1 > m_extract_blockadd_level))
-    mxerror(boost::format(Y("Invalid BlockAddition level in argument '%1%'.\n")) % m_next_arg);
+    mxerror(fmt::format(Y("Invalid BlockAddition level in argument '{0}'.\n"), m_next_arg));
 }
 
 void
@@ -204,7 +204,7 @@ extract_cli_parser_c::set_simple_language() {
 
   auto language_idx = map_to_iso639_2_code(m_next_arg);
   if (0 > language_idx)
-    mxerror(boost::format(Y("'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n")) % m_next_arg);
+    mxerror(fmt::format(Y("'{0}' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"), m_next_arg));
 
   m_current_mode->m_simple_chapter_language.reset(g_iso639_languages[language_idx].iso639_2_code);
 }
@@ -250,28 +250,28 @@ extract_cli_parser_c::set_cli_mode() {
   auto mode = extraction_mode_from_string(m_current_arg);
 
   mxdebug_if(m_debug,
-             boost::format("set_cli_mode: current mode %1% new mode %2% current arg %3%\n")
-             % extraction_mode_to_string(m_current_mode->m_extraction_mode) % extraction_mode_to_string(mode) % m_current_arg);
+             fmt::format("set_cli_mode: current mode {0} new mode {1} current arg {2}\n",
+                         extraction_mode_to_string(m_current_mode->m_extraction_mode), extraction_mode_to_string(mode), m_current_arg));
 
   if (mode) {
     m_cli_type                        = cli_type_e::single;
     m_current_mode->m_extraction_mode = *mode;
 
-    mxdebug_if(m_debug, boost::format("set_cli_mode: new mode is single\n"));
+    mxdebug_if(m_debug, fmt::format("set_cli_mode: new mode is single\n"));
 
   } else if (bfs::exists(bfs::path{m_current_arg})) {
     m_cli_type            = cli_type_e::multiple;
     m_options.m_file_name = m_current_arg;
 
-    mxdebug_if(m_debug, boost::format("set_cli_mode: new mode is multiple\n"));
+    mxdebug_if(m_debug, fmt::format("set_cli_mode: new mode is multiple\n"));
 
   } else
-    mxerror(boost::format(Y("Unknown mode '%1%'.\n")) % m_current_arg);
+    mxerror(fmt::format(Y("Unknown mode '{0}'.\n"), m_current_arg));
 }
 
 void
 extract_cli_parser_c::handle_unknown_arg_single_mode() {
-  mxdebug_if(m_debug, boost::format("handle_unknown_arg_single_mode: num unknown %1% current %2%\n") % m_num_unknown_args % m_current_arg);
+  mxdebug_if(m_debug, fmt::format("handle_unknown_arg_single_mode: num unknown {0} current {1}\n", m_num_unknown_args, m_current_arg));
 
   if (2 == m_num_unknown_args)
     m_options.m_file_name = m_current_arg;
@@ -290,8 +290,8 @@ extract_cli_parser_c::handle_unknown_arg_multiple_mode() {
   auto new_mode = extraction_mode_from_string(m_current_arg);
 
   mxdebug_if(m_debug,
-             boost::format("handle_unknown_arg_multiple_mode: current mode %1% new mode %2% current arg %3% num modes %4%\n")
-             % extraction_mode_to_string(m_current_mode->m_extraction_mode) % extraction_mode_to_string(new_mode) % m_current_arg % m_options.m_modes.size());
+             fmt::format("handle_unknown_arg_multiple_mode: current mode {0} new mode {1} current arg {2} num modes {3}\n",
+                         extraction_mode_to_string(m_current_mode->m_extraction_mode), extraction_mode_to_string(new_mode), m_current_arg, m_options.m_modes.size()));
 
   if (!new_mode) {
     if (mtx::included_in(m_current_mode->m_extraction_mode, options_c::em_chapters, options_c::em_cuesheet, options_c::em_tags))
@@ -315,11 +315,11 @@ extract_cli_parser_c::handle_unknown_arg() {
   ++m_num_unknown_args;
 
   mxdebug_if(m_debug,
-             boost::format("handle_unknown_arg: num unknown %1% cli type %2%\n")
-             % m_num_unknown_args
-             % (  m_cli_type == cli_type_e::unknown ? "unknown"
-                : m_cli_type == cli_type_e::single  ? "single"
-                :                                     "multiple"));
+             fmt::format("handle_unknown_arg: num unknown {0} cli type {1}\n",
+                         m_num_unknown_args,
+                           m_cli_type == cli_type_e::unknown ? "unknown"
+                         : m_cli_type == cli_type_e::single  ? "single"
+                         :                                     "multiple"));
 
   if (cli_type_e::unknown == m_cli_type)
     set_cli_mode();
@@ -337,16 +337,16 @@ extract_cli_parser_c::add_extraction_spec() {
       && (options_c::em_cues          != m_current_mode->m_extraction_mode)
       && (options_c::em_timestamps_v2 != m_current_mode->m_extraction_mode)
       && (options_c::em_attachments   != m_current_mode->m_extraction_mode))
-    mxerror(boost::format(Y("Unrecognized command line option '%1%'.\n")) % m_current_arg);
+    mxerror(fmt::format(Y("Unrecognized command line option '{0}'.\n"), m_current_arg));
 
   boost::regex s_track_id_re("^(\\d+)(:(.+))?$", boost::regex::perl);
 
   boost::smatch matches;
   if (!boost::regex_search(m_current_arg, matches, s_track_id_re)) {
     if (options_c::em_attachments == m_current_mode->m_extraction_mode)
-      mxerror(boost::format(Y("Invalid attachment ID/file name specification in argument '%1%'.\n")) % m_current_arg);
+      mxerror(fmt::format(Y("Invalid attachment ID/file name specification in argument '{0}'.\n"), m_current_arg));
     else
-      mxerror(boost::format(Y("Invalid track ID/file name specification in argument '%1%'.\n")) % m_current_arg);
+      mxerror(fmt::format(Y("Invalid track ID/file name specification in argument '{0}'.\n"), m_current_arg));
   }
 
   track_spec_t track;
@@ -354,7 +354,7 @@ extract_cli_parser_c::add_extraction_spec() {
   parse_number(matches[1].str(), track.tid);
 
   if (m_used_tids[m_current_mode->m_extraction_mode][track.tid])
-    mxerror(boost::format(Y("The ID '%1%' has already been used for another destination file.\n")) % track.tid);
+    mxerror(fmt::format(Y("The ID '{0}' has already been used for another destination file.\n"), track.tid));
   m_used_tids[m_current_mode->m_extraction_mode][track.tid] = true;
 
   std::string output_file_name;
@@ -365,7 +365,7 @@ extract_cli_parser_c::add_extraction_spec() {
     if (options_c::em_attachments == m_current_mode->m_extraction_mode)
       mxinfo(Y("No destination file name specified, will use attachment name.\n"));
     else
-      mxerror(boost::format(Y("Missing destination file name in argument '%1%'.\n")) % m_current_arg);
+      mxerror(fmt::format(Y("Missing destination file name in argument '{0}'.\n"), m_current_arg));
   }
 
   track.out_name               = output_file_name;
@@ -389,7 +389,7 @@ extract_cli_parser_c::verify_options_multiple_mode() {
                    :                                                            "cuesheet";
 
     if (mode_options.m_output_file_name.empty())
-      mxerror(boost::format(Y("Missing destination file name in argument '%1%'.\n")) % mode_name);
+      mxerror(fmt::format(Y("Missing destination file name in argument '{0}'.\n"), mode_name));
   }
 }
 

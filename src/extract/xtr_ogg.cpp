@@ -37,7 +37,7 @@ xtr_flac_c::create_file(xtr_base_c *_master,
                         libmatroska::KaxTrackEntry &track) {
   auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   xtr_base_c::create_file(_master, track);
 
@@ -73,7 +73,7 @@ xtr_oggbase_c::create_standard_file(xtr_base_c *master,
                                     libmatroska::LacingType lacing) {
   auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   init_content_decoder(track);
   memory_cptr mpriv = decode_codec_private(priv);
@@ -94,7 +94,7 @@ xtr_oggbase_c::create_standard_file(xtr_base_c *master,
     header_packets_unlaced(header_packets);
 
   } catch (...) {
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' does not contain valid headers.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' does not contain valid headers.\n"), m_tid, m_codec_id));
   }
 
   xtr_oggbase_c::create_file(master, track);
@@ -388,13 +388,13 @@ void
 xtr_oggopus_c::handle_frame(xtr_frame_t &f) {
   try {
     auto toc = mtx::opus::toc_t::decode(f.frame);
-    mxdebug_if(m_debug, boost::format("Position: %1% discard_duration: %2% TOC: %3%\n") % m_position % f.discard_duration % toc);
+    mxdebug_if(m_debug, fmt::format("Position: {0} discard_duration: {1} TOC: {2}\n", m_position, f.discard_duration, toc));
 
     m_position = m_position + toc.packet_duration - f.discard_duration;
     queue_frame(f.frame, m_position.to_samples(48000));
 
   } catch (mtx::opus::exception &ex) {
-    mxdebug_if(m_debug, boost::format("Exception: %1%\n") % ex.what());
+    mxdebug_if(m_debug, fmt::format("Exception: {0}\n", ex.what()));
   }
 }
 

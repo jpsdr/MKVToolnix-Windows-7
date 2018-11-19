@@ -38,32 +38,32 @@ xtr_avi_c::create_file(xtr_base_c *master,
 
   auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   m_default_duration = kt_get_default_duration(track);
   if (0 >= m_default_duration)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"default duration\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"default duration\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   m_fps = (double)1000000000.0 / (double)m_default_duration;
 
   if (master)
-    mxerror(boost::format(Y("Cannot write track %1% with the CodecID '%2%' to the file '%3%' because "
-                            "track %4% with the CodecID '%5%' is already being written to the same file.\n"))
-            % m_tid % m_codec_id % m_file_name % master->m_tid % master->m_codec_id);
+    mxerror(fmt::format(Y("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because "
+                          "track {3} with the CodecID '{4}' is already being written to the same file.\n"),
+                        m_tid, m_codec_id, m_file_name, master->m_tid, master->m_codec_id));
 
   try {
     m_out = mm_file_io_c::open(m_file_name.c_str(), MODE_CREATE);
     m_avi = AVI_open_output_file(m_out.get());
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % m_file_name % ex);
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), m_file_name, ex));
   }
 
   if (!m_avi)
-    mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % m_file_name % AVI_strerror());
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), m_file_name, AVI_strerror()));
 
   std::string writing_app = "mkvextract";
   if (!mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA))
-    writing_app += (boost::format(" %1%") % PACKAGE_VERSION).str();
+    writing_app += fmt::format(" {0}", PACKAGE_VERSION);
   m_avi->writing_app = safestrdup(writing_app.c_str());
 
   char ccodec[5];

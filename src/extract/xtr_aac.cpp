@@ -39,14 +39,14 @@ xtr_aac_c::create_file(xtr_base_c *master,
   if (m_codec_id == MKV_A_AAC) {
     auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
     if (!priv)
-      mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+      mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
     auto mem = memory_c::borrow(priv->GetBuffer(), priv->GetSize());
     m_content_decoder.reverse(mem, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
 
     auto audio_config = mtx::aac::parse_audio_specific_config(mem->get_buffer(), mem->get_size());
     if (!audio_config)
-      mxerror(boost::format(Y("Track %1% with the CodecID '%2%' contains invalid \"codec private\" data for AAC.\n")) % m_tid % m_codec_id);
+      mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' contains invalid \"codec private\" data for AAC.\n"), m_tid, m_codec_id));
 
     m_id       = 0;
     m_channels = audio_config->channels;
@@ -60,7 +60,7 @@ xtr_aac_c::create_file(xtr_base_c *master,
     else if (m_codec_id[10] == '2')
       m_id = 1;
     else
-      mxerror(boost::format(Y("Track ID %1% has an unknown AAC type.\n")) % m_tid);
+      mxerror(fmt::format(Y("Track ID {0} has an unknown AAC type.\n"), m_tid));
 
     if (!strcmp(&m_codec_id[12], "MAIN"))
       m_profile = 0;
@@ -72,7 +72,7 @@ xtr_aac_c::create_file(xtr_base_c *master,
     else if (!strcmp(&m_codec_id[12], "LTP"))
       m_profile = 3;
     else
-      mxerror(boost::format(Y("Track ID %1% has an unknown AAC type.\n")) % m_tid);
+      mxerror(fmt::format(Y("Track ID {0} has an unknown AAC type.\n"), m_tid));
   }
 
   if (92017 <= sfreq)

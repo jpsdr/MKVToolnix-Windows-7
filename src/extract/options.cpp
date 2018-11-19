@@ -23,15 +23,15 @@ options_c::mode_options_c::mode_options_c()
 void
 options_c::mode_options_c::dump(std::string const &prefix)
   const {
-  mxinfo(boost::format("%1%simple chapter format:   %2%\n"
-                       "%1%simple chapter language: %3%\n"
-                       "%1%extraction mode:         %4%\n"
-                       "%1%num track specs:         %5%\n")
-         % prefix % m_simple_chapter_format % (m_simple_chapter_language ? *m_simple_chapter_language : "<none>"s) % static_cast<int>(m_extraction_mode) % m_tracks.size());
+  mxinfo(fmt::format("{0}simple chapter format:   {1}\n"
+                     "{0}simple chapter language: {2}\n"
+                     "{0}extraction mode:         {3}\n"
+                     "{0}num track specs:         {4}\n",
+                     prefix, m_simple_chapter_format, m_simple_chapter_language ? *m_simple_chapter_language : "<none>"s, static_cast<int>(m_extraction_mode), m_tracks.size()));
 
 
   for (auto idx = 0u; idx < m_tracks.size(); ++idx) {
-    mxinfo(boost::format("\n%1%track spec #%2%:\n") % prefix % idx);
+    mxinfo(fmt::format("\n{0}track spec #{1}:\n", prefix, idx));
     m_tracks[idx].dump(prefix + "  ");
   }
 }
@@ -45,14 +45,14 @@ options_c::options_c()
 void
 options_c::dump()
   const {
-  mxinfo(boost::format("options dump:\n"
-                       "  file name:  %1%\n"
-                       "  parse mode: %2%\n"
-                       "  num modes:  %3%\n")
-         % m_file_name % (m_parse_mode == kax_analyzer_c::parse_mode_full ? "full" : "fast") % m_modes.size());
+  mxinfo(fmt::format("options dump:\n"
+                     "  file name:  {0}\n"
+                     "  parse mode: {1}\n"
+                     "  num modes:  {2}\n",
+                     m_file_name, m_parse_mode == kax_analyzer_c::parse_mode_full ? "full" : "fast", m_modes.size()));
 
   for (auto idx = 0u; idx < m_modes.size(); ++idx) {
-    mxinfo(boost::format("\n  mode #%1%:\n") % idx);
+    mxinfo(fmt::format("\n  mode #{0}:\n", idx));
     m_modes[idx].dump("    ");
   }
 }

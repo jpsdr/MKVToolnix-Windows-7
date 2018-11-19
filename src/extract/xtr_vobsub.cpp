@@ -63,7 +63,7 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
                           libmatroska::KaxTrackEntry &track) {
   auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   init_content_decoder(track);
 
@@ -77,19 +77,19 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
     try {
       m_out = mm_write_buffer_io_c::open(m_sub_file_name.string(), 128 * 1024);
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(boost::format(Y("Failed to create the VobSub data file '%1%': %2%\n")) % m_sub_file_name.string() % ex);
+      mxerror(fmt::format(Y("Failed to create the VobSub data file '{0}': {1}\n"), m_sub_file_name.string(), ex));
     }
 
   } else {
     xtr_vobsub_c *vmaster = dynamic_cast<xtr_vobsub_c *>(m_master);
 
     if (!vmaster)
-      mxerror(boost::format(Y("Cannot extract tracks of different kinds to the same file. This was requested for the tracks %1% and %2%.\n"))
-              % m_tid % m_master->m_tid);
+      mxerror(fmt::format(Y("Cannot extract tracks of different kinds to the same file. This was requested for the tracks {0} and {1}.\n"),
+                          m_tid, m_master->m_tid));
 
     if ((m_private_data->get_size() != vmaster->m_private_data->get_size()) || memcmp(priv->GetBuffer(), vmaster->m_private_data->get_buffer(), m_private_data->get_size()))
-      mxerror(boost::format(Y("Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. "
-                              "This is not the case for the tracks %1% and %2%.\n")) % m_tid % m_master->m_tid);
+      mxerror(fmt::format(Y("Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. "
+                            "This is not the case for the tracks {0} and {1}.\n"), m_tid, m_master->m_tid));
 
     vmaster->m_slaves.push_back(this);
     m_stream_id = vmaster->m_stream_id + 1;
@@ -111,8 +111,8 @@ xtr_vobsub_c::fix_spu_duration(memory_c &buffer,
 
   if (diff >= timestamp_c::ms(1)) {
     mxdebug_if(debug,
-               boost::format("vobsub: setting SPU duration to %1% (existing duration: %2%, difference: %3%)\n")
-               % format_timestamp(duration) % format_timestamp(current_duration.to_ns(0)) % format_timestamp(diff));
+               fmt::format("vobsub: setting SPU duration to {0} (existing duration: {1}, difference: {2})\n",
+                           format_timestamp(duration), format_timestamp(current_duration.to_ns(0)), format_timestamp(diff)));
     mtx::spu::set_duration(buffer.get_buffer(), buffer.get_size(), duration);
   }
 }
@@ -232,7 +232,7 @@ xtr_vobsub_c::finish_file() {
     m_out.reset();
 
     mm_write_buffer_io_c idx(std::make_shared<mm_file_io_c>(m_idx_file_name.string(), MODE_CREATE), 128 * 1024);
-    mxinfo(boost::format(Y("Writing the VobSub index file '%1%'.\n")) % m_idx_file_name.string());
+    mxinfo(fmt::format(Y("Writing the VobSub index file '{0}'.\n"), m_idx_file_name.string()));
 
     auto buffer = reinterpret_cast<char const *>(m_private_data->get_buffer());
     auto size   = m_private_data->get_size();
@@ -257,7 +257,7 @@ xtr_vobsub_c::finish_file() {
       m_slaves[slave]->write_idx(idx, slave + 1);
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("Failed to create the file '%1%': %2%\n")) % m_idx_file_name.string() % ex);
+    mxerror(fmt::format(Y("Failed to create the file '{0}': {1}\n"), m_idx_file_name.string(), ex));
   }
 }
 
@@ -265,19 +265,19 @@ void
 xtr_vobsub_c::write_idx(mm_io_c &idx,
                         int index) {
   auto iso639_1 = map_iso639_2_to_iso639_1(m_language);
-  idx.puts(boost::format("\nid: %1%, index: %2%\n") % (iso639_1.empty() ? "en" : iso639_1) % index);
+  idx.puts(fmt::format("\nid: {0}, index: {1}\n", iso639_1.empty() ? "en" : iso639_1, index));
 
   size_t i;
   for (i = 0; i < m_positions.size(); i++) {
     int64_t timestamp = m_timestamps[i] / 1000000;
 
-    idx.puts(boost::format("timestamp: %|1$02d|:%|2$02d|:%|3$02d|:%|4$03d|, filepos: %|5$1x|%|6$08x|\n")
-             % ((timestamp / 60 / 60 / 1000) % 60)
-             % ((timestamp / 60 / 1000) % 60)
-             % ((timestamp / 1000) % 60)
-             % (timestamp % 1000)
-             % (m_positions[i] >> 32)
-             % (m_positions[i] & 0xffffffff));
+    idx.puts(fmt::format("timestamp: {0:02}:{1:02}:{2:02}:{3:03}, filepos: {4:1x}{5:08x}\n",
+                         (timestamp / 60 / 60 / 1'000) % 60,
+                         (timestamp / 60 / 1'000) % 60,
+                         (timestamp / 1'000) % 60,
+                         timestamp % 1'000,
+                         m_positions[i] >> 32,
+                         m_positions[i] & 0xffffffff));
   }
 }
 

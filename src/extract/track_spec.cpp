@@ -27,15 +27,15 @@ track_spec_t::track_spec_t()
 void
 track_spec_t::dump(std::string const &prefix)
   const {
-  mxinfo(boost::format("%1%tid, tuid:        %2% / %3%\n"
-                       "%1%out name:         %4%\n"
-                       "%1%sub charset:      %5%\n"
-                       "%1%extract cuesheet: %6%\n"
-                       "%1%blackadd level:   %7%\n"
-                       "%1%target mdoe:      %8%\n")
-         % prefix % tid % tuid % out_name % sub_charset % extract_cuesheet % extract_blockadd_level
-         % (  target_mode == tm_normal   ? "normal"
-            : target_mode == tm_raw      ? "raw"
-            : target_mode == tm_full_raw ? "full raw"
-            :                              "timestamps"));
+  mxinfo(fmt::format("{0}tid, tuid:        {1} / {2}\n"
+                     "{0}out name:         {3}\n"
+                     "{0}sub charset:      {4}\n"
+                     "{0}extract cuesheet: {5}\n"
+                     "{0}blackadd level:   {6}\n"
+                     "{0}target mdoe:      {7}\n",
+                     prefix, tid, tuid, out_name, sub_charset, extract_cuesheet, extract_blockadd_level,
+                       target_mode == tm_normal   ? "normal"
+                     : target_mode == tm_raw      ? "raw"
+                     : target_mode == tm_full_raw ? "full raw"
+                     :                              "timestamps"));
 }

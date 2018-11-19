@@ -23,11 +23,11 @@ xtr_hevc_c::create_file(xtr_base_c *master,
 
   auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   m_decoded_codec_private = decode_codec_private(priv);
   if (m_decoded_codec_private->get_size() < 23)
-    mxerror(boost::format(Y("Track %1% CodecPrivate is too small.\n")) % m_tid);
+    mxerror(fmt::format(Y("Track {0} CodecPrivate is too small.\n"), m_tid));
 
   m_decoded_codec_private->take_ownership();
 
@@ -82,7 +82,7 @@ xtr_hevc_c::write_nal(binary *data,
   pos           += write_nal_size_size;
 
   if ((pos + nal_size) > data_size) {
-    mxwarn(boost::format(Y("Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n")) % m_tid % nal_size % (data_size - pos));
+    mxwarn(fmt::format(Y("Track {0}: NAL too big. Size according to header field: {1}, available bytes in packet: {2}. This NAL is defect and will be skipped.\n"), m_tid, nal_size, data_size - pos));
     return false;
   }
 

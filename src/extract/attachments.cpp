@@ -106,19 +106,19 @@ handle_attachments(KaxAttachments *atts,
     attachment_t attachment = attachments[ track.tid ];
 
     if (!attachment.valid)
-      mxerror(boost::format(Y("An attachment with the ID %1% was not found.\n")) % track.tid);
+      mxerror(fmt::format(Y("An attachment with the ID {0} was not found.\n"), track.tid));
 
     // check for output name
     if (track.out_name.empty())
       track.out_name = attachment.name;
 
-    mxinfo(boost::format(Y("The attachment #%1%, ID %2%, MIME type %3%, size %4%, is written to '%5%'.\n"))
-           % track.tid % attachment.id % attachment.type % attachment.size % track.out_name);
+    mxinfo(fmt::format(Y("The attachment #{0}, ID {1}, MIME type {2}, size {3}, is written to '{4}'.\n"),
+                       track.tid, attachment.id, attachment.type, attachment.size, track.out_name));
     try {
       mm_file_io_c out(track.out_name, MODE_CREATE);
       out.write(attachment.fdata->GetBuffer(), attachment.fdata->GetSize());
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % track.out_name % ex);
+      mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), track.out_name, ex));
     }
   }
 }

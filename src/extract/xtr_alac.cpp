@@ -46,11 +46,11 @@ xtr_alac_c::create_file(xtr_base_c *master,
   auto channels = kt_get_a_channels(track);
   auto priv     = FindChild<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
+    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   m_priv = decode_codec_private(priv);
   if (m_priv->get_size() != sizeof(mtx::alac::codec_config_t))
-    mxerror(boost::format(Y("ALAC private data size mismatch\n")));
+    mxerror(fmt::format(Y("ALAC private data size mismatch\n")));
 
   xtr_base_c::create_file(master, track);
 

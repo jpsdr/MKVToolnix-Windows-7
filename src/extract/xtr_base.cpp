@@ -70,15 +70,15 @@ xtr_base_c::create_file(xtr_base_c *master,
   auto actual_file_name = get_file_name().string();
 
   if (master)
-    mxerror(boost::format(Y("Cannot write track %1% with the CodecID '%2%' to the file '%3%' because "
-                            "track %4% with the CodecID '%5%' is already being written to the same file.\n"))
-            % m_tid % m_codec_id % actual_file_name % master->m_tid % master->m_codec_id);
+    mxerror(fmt::format(Y("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because "
+                          "track {3} with the CodecID '{4}' is already being written to the same file.\n"),
+                        m_tid, m_codec_id, actual_file_name, master->m_tid, master->m_codec_id));
 
   try {
     init_content_decoder(track);
     m_out = mm_write_buffer_io_c::open(actual_file_name, 5 * 1024 * 1024);
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("Failed to create the file '%1%': %2% (%3%)\n")) % actual_file_name % errno % ex);
+    mxerror(fmt::format(Y("Failed to create the file '{0}': {1} ({2})\n"), actual_file_name, errno, ex));
   }
 
   m_default_duration = kt_get_default_duration(track);

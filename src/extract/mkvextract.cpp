@@ -56,11 +56,11 @@ open_and_analyze(std::string const &file_name,
     return ok ? analyzer : kax_analyzer_cptr{};
 
   } catch (mtx::mm_io::exception &ex) {
-    show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
+    show_error(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), file_name, ex));
     return {};
 
   } catch (mtx::kax_analyzer_x &ex) {
-    show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
+    show_error(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), file_name, ex));
     return {};
 
   } catch (...) {
@@ -79,7 +79,7 @@ open_output_file(std::string const &file_name) {
     return mm_write_buffer_io_c::open(file_name, 128 * 1024);
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % file_name % ex);
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), file_name, ex));
   }
 
   // Shut up the compiler.
@@ -91,7 +91,7 @@ show_element(EbmlElement *l,
              int level,
              const std::string &info) {
   if (9 < level)
-    mxerror(boost::format(Y("mkvextract.cpp/show_element(): level > 9: %1%")) % level);
+    mxerror(fmt::format(Y("mkvextract.cpp/show_element(): level > 9: {0}"), level));
 
   if (0 == verbose)
     return;
@@ -101,15 +101,15 @@ show_element(EbmlElement *l,
   level_buffer[0]     = '|';
   level_buffer[level] = 0;
 
-  mxinfo(boost::format("(%1%) %2%+ %3%") % NAME % level_buffer % info);
+  mxinfo(fmt::format("({0}) {1}+ {2}", NAME, level_buffer, info));
   if (l)
-    mxinfo(boost::format(Y(" at %1%")) % l->GetElementPosition());
+    mxinfo(fmt::format(Y(" at {0}"), l->GetElementPosition()));
   mxinfo("\n");
 }
 
 void
 show_error(const std::string &error) {
-  mxerror(boost::format("(%1%) %2%\n") % NAME % error);
+  mxerror(fmt::format("({0}) {1}\n", NAME, error));
 }
 
 static void

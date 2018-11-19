@@ -49,12 +49,12 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   m_frame_rate_num      = rate.numerator();
   m_frame_rate_den      = rate.denominator();
 
-  mxdebug_if(m_debug, boost::format("frame rate determination: default duration %1% numerator %2% denominator %3%\n") % default_duration % m_frame_rate_num % m_frame_rate_den);
+  mxdebug_if(m_debug, fmt::format("frame rate determination: default duration {0} numerator {1} denominator {2}\n", default_duration, m_frame_rate_num, m_frame_rate_den));
 
   if (master)
-    mxerror(boost::format(Y("Cannot write track %1% with the CodecID '%2%' to the file '%3%' because "
-                            "track %4% with the CodecID '%5%' is already being written to the same file.\n"))
-            % m_tid % m_codec_id % m_file_name % master->m_tid % master->m_codec_id);
+    mxerror(fmt::format(Y("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because "
+                          "track {3} with the CodecID '{4}' is already being written to the same file.\n"),
+                        m_tid, m_codec_id, m_file_name, master->m_tid, master->m_codec_id));
 
   auto fourcc = m_is_av1                ? "AV01"
               : m_codec_id == MKV_V_VP8 ? "VP80"
@@ -74,11 +74,12 @@ xtr_ivf_c::create_file(xtr_base_c *master,
 
 void
 xtr_ivf_c::handle_frame(xtr_frame_t &f) {
-  uint64_t frame_number = f.timestamp * m_frame_rate_num / m_frame_rate_den / 1000000000ull;
+  uint64_t frame_number = f.timestamp * m_frame_rate_num / m_frame_rate_den / 1'000'000'000ull;
 
-  mxdebug_if(m_debug, boost::format("handle frame: timestamp %1% num %2% den %3% frame_number %4% calculated back %5%\n")
-             % f.timestamp % m_frame_rate_num % m_frame_rate_den % frame_number
-             % (frame_number * 1000000000ull * m_frame_rate_den / m_frame_rate_num));
+  mxdebug_if(m_debug,
+             fmt::format("handle frame: timestamp {0} num {1} den {2} frame_number {3} calculated back {4}\n",
+                         f.timestamp, m_frame_rate_num, m_frame_rate_den, frame_number,
+                         frame_number * 1'000'000'000ull * m_frame_rate_den / m_frame_rate_num));
 
   av1_prepend_temporal_delimiter_obu_if_needed(*f.frame);
 
