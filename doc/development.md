@@ -44,17 +44,17 @@ nanosecond precision.
 # Outputting messages to the user #
 
 There are basically four functions that output stuff: `mxinfo()`,
-`mxverb()`, `mxwarn()` and `mxerror()`. Each takes either a string or
-an argument produced by `boost::format()` (see
-[the Boost::Format documentation](http://www.boost.org/doc/libs/1_47_0/libs/format/doc/format.html)
-if you're not familiar with it), and `mxverb()` also takes a verbosity
-level argument.
+`mxverb()`, `mxwarn()` and `mxerror()`. Each takes a
+string. Formatting is done via the `fmt::format()` if required (see
+[the fmt documentation](http://fmtlib.net/latest/index.html) if you're
+not familiar with it), and `mxverb()` also takes a verbosity level
+argument.
 
 `mxinfo()` is supposed to be used for messages that are always
-output. Its messages must be translatable by using the `_()` macro,
+output. Its messages must be translatable by using the `Y()` macro,
 Example:
 
-    mxinfo(boost::format(_("Hello, %1%\n")) % user_name);
+    mxinfo(fmt::format(Y("Hello, {0}\n")) % user_name);
 
 The same applies to `mxwarn()` and `mxerror()`. However, both prefix
 their messages with "Warning:" and "Error:" respectively. Also they
