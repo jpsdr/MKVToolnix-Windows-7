@@ -153,6 +153,7 @@ class Target
       when :matroska    then c?("EBML_MATROSKA_INTERNAL") ? "lib/libmatroska/src/libmatroska.a" : nil
       when :gtest       then $gtest_internal              ? "lib/gtest/src/libgtest.a"          : nil
       when :pugixml     then c?(:PUGIXML_INTERNAL)        ? "lib/pugixml/src/libpugixml.a"      : nil
+      when :fmt         then c?(:FMT_INTERNAL)            ? "lib/fmt/src/libfmt.a"              : nil
       else                   nil
       end
     end.compact

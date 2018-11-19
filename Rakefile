@@ -129,6 +129,7 @@ def setup_globals
   cflags_common           += " -fsanitize=address -fno-omit-frame-pointer"               if c?(:ADDRSAN)
   cflags_common           += " -Ilib/libebml -Ilib/libmatroska"                          if c?(:EBML_MATROSKA_INTERNAL)
   cflags_common           += " -Ilib/nlohmann-json/include"                              if c?(:NLOHMANN_JSON_INTERNAL)
+  cflags_common           += " -Ilib/fmt/include"                                        if c?(:FMT_INTERNAL)
   cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:CMARK_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:DEBUG_CFLAGS)} #{c(:PROFILING_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0601 -D_WIN32_WINNT=0x0601 " if $building_for[:windows] # 0x0601 = Windows 7/Server 2008 R2
   cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
@@ -147,6 +148,7 @@ def setup_globals
   ldflags                  = ""
   ldflags                 += " -fuse-ld=lld"                            if (c(:COMPILER_TYPE) == "clang") && !c(:LLVM_LLD).empty?
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
+  ldflags                 += " -Llib/fmt/src"                           if c?(:FMT_INTERNAL)
   ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
   ldflags                 += " -Wl,--dynamicbase,--nxcompat"               if $building_for[:windows]
   ldflags                 += " -L#{c(:DRMINGW_PATH)}/lib"                  if c?(:USE_DRMINGW) &&  $building_for[:windows]
@@ -1018,6 +1020,7 @@ if !$libmtxcommon_as_dll
 end
 
 [ { :name => 'avi',         :dir => 'lib/avilib-0.6.10'                                                              },
+  { :name => 'fmt',         :dir => 'lib/fmt/src'                                                                    },
   { :name => 'rmff',        :dir => 'lib/librmff'                                                                    },
   { :name => 'pugixml',     :dir => 'lib/pugixml/src'                                                                },
   { :name => 'mpegparser',  :dir => 'src/mpegparser'                                                                 },
