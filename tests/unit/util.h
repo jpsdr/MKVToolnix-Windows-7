@@ -43,7 +43,6 @@ public:
   bool compare_impl(EbmlElement &a, EbmlElement &b);
   std::string get_error() const;
   bool set_error(std::string const &error, EbmlElement *cmp = nullptr);
-  bool set_error(boost::format const &error, EbmlElement *cmp = nullptr);
 
 public:
   static bool check(EbmlElement &a, EbmlElement &b, std::string &error);

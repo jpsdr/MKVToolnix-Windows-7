@@ -47,11 +47,11 @@ dump(EbmlElement *element,
       value_str = to_string(static_cast<EbmlDate *>(element)->GetEpochDate());
 
     else
-      value_str = (boost::format("(type: %1%)") %
-                   (  dynamic_cast<EbmlBinary *>(element) ? "binary"
-                    : dynamic_cast<EbmlMaster *>(element) ? "master"
-                    : dynamic_cast<EbmlVoid *>(element)   ? "void"
-                    :                                       "unknown")).str();
+      value_str = fmt::format("(type: {0})",
+                                dynamic_cast<EbmlBinary *>(element) ? "binary"
+                              : dynamic_cast<EbmlMaster *>(element) ? "master"
+                              : dynamic_cast<EbmlVoid *>(element)   ? "void"
+                              :                                       "unknown");
 
     value_str = " " + value_str;
   }
@@ -102,14 +102,8 @@ ebml_equals_c::set_error(std::string const &error,
   if (cmp)
     full_path.push_back(EBML_NAME(cmp));
 
-  m_error = (boost::format("%1% path: %2%") % error % boost::join(full_path, " -> ")).str();
+  m_error = fmt::format("{0} path: {1}", error, boost::join(full_path, " -> "));
   return false;
-}
-
-bool
-ebml_equals_c::set_error(boost::format const &error,
-                         EbmlElement *cmp) {
-  return set_error(error.str(), cmp);
 }
 
 bool
@@ -129,7 +123,7 @@ ebml_equals_c::compare_impl(EbmlElement &a,
     return true;
 
   if (std::string{EBML_NAME(&a)} != std::string{EBML_NAME(&b)})
-    return set_error(boost::format("types are differing: %1% vs %2%") % EBML_NAME(&a) % EBML_NAME(&b));
+    return set_error(fmt::format("types are differing: {0} vs {1}", EBML_NAME(&a), EBML_NAME(&b)));
 
   EbmlUInteger *ui_a;
   EbmlSInteger *si_a;
@@ -142,33 +136,33 @@ ebml_equals_c::compare_impl(EbmlElement &a,
 
   if ((ui_a = dynamic_cast<EbmlUInteger *>(&a))) {
     auto val_b = uint64(*dynamic_cast<EbmlUInteger *>(&b));
-    return uint64(*ui_a) == val_b ? true : set_error(boost::format("UInteger values differ: %1% vs %2%") % uint64(*ui_a) % val_b, &a);
+    return uint64(*ui_a) == val_b ? true : set_error(fmt::format("UInteger values differ: {0} vs {1}", uint64(*ui_a), val_b), &a);
 
   } else if ((si_a = dynamic_cast<EbmlSInteger *>(&a))) {
     auto val_b = int64(*dynamic_cast<EbmlSInteger *>(&b));
-    return int64(*si_a) == val_b ? true : set_error(boost::format("SInteger values differ: %1% vs %2%") % int64(*si_a) % val_b, &a);
+    return int64(*si_a) == val_b ? true : set_error(fmt::format("SInteger values differ: {0} vs {1}", int64(*si_a), val_b), &a);
 
   } else if ((d_a = dynamic_cast<EbmlDate *>(&a))) {
     auto val_a = d_a->GetEpochDate();
     auto val_b = dynamic_cast<EbmlDate *>(&b)->GetEpochDate();
-    return val_a == val_b ? true : set_error(boost::format("Date values differ: %1% vs %2%") % val_a % val_b, &a);
+    return val_a == val_b ? true : set_error(fmt::format("Date values differ: {0} vs {1}", val_a, val_b), &a);
 
   } else if ((f_a = dynamic_cast<EbmlFloat *>(&a))) {
     auto val_b = double(*dynamic_cast<EbmlFloat *>(&b));
-    return double(*f_a) == val_b ? true : set_error(boost::format("Float values differ: %1% vs %2%") % double(*f_a) % val_b, &a);
+    return double(*f_a) == val_b ? true : set_error(fmt::format("Float values differ: {0} vs {1}", double(*f_a), val_b), &a);
 
   } else if ((str_a = dynamic_cast<EbmlString *>(&a))) {
     auto val_b = std::string(*dynamic_cast<EbmlString *>(&b));
-    return std::string(*str_a) == val_b ? true : set_error(boost::format("String values differ: %1% vs %2%") % std::string(*str_a) % val_b, &a);
+    return std::string(*str_a) == val_b ? true : set_error(fmt::format("String values differ: {0} vs {1}", std::string(*str_a), val_b), &a);
 
   } else if ((ustr_a = dynamic_cast<EbmlUnicodeString *>(&a))) {
     auto val_a = UTFstring(*dynamic_cast<EbmlUnicodeString *>(&a)).GetUTF8();
     auto val_b = UTFstring(*dynamic_cast<EbmlUnicodeString *>(&b)).GetUTF8();
-    return val_a == val_b ? true : set_error(boost::format("UnicodeString values differ: %1% vs %2%") % val_a % val_b, &a);
+    return val_a == val_b ? true : set_error(fmt::format("UnicodeString values differ: {0} vs {1}", val_a, val_b), &a);
 
   } else if ((b_a = dynamic_cast<EbmlBinary *>(&a))) {
     auto b_b = dynamic_cast<EbmlBinary *>(&b);
-    return *b_a == *b_b ? true : set_error(boost::format("Binary values differ; sizes %1% vs %2%") % b_a->GetSize() % b_b->GetSize(), &a);
+    return *b_a == *b_b ? true : set_error(fmt::format("Binary values differ; sizes {0} vs {1}", b_a->GetSize(), b_b->GetSize()), &a);
 
   } else if ((m_a = dynamic_cast<EbmlMaster *>(&a))) {
     m_path.push_back(EBML_NAME(&a));
@@ -194,14 +188,14 @@ ebml_equals_c::compare_impl(EbmlElement &a,
       with_more = m_b;
     }
 
-    std::stringstream error{ (boost::format("LHS contains %1% elements than RHS (%2% vs %3%):") % op % m_a->ListSize() % m_b->ListSize()).str() };
+    std::stringstream error{ fmt::format("LHS contains {0} elements than RHS ({1} vs {2}):", op, m_a->ListSize(), m_b->ListSize()) };
     for (auto i = with_less->ListSize(); i < with_more->ListSize(); ++i)
       error << " " << EBML_NAME((*with_more)[i]);
 
     return set_error(error.str());
 
   } else
-    return set_error(boost::format("unsupported types: %1% and %2%") % EBML_NAME(&a) % EBML_NAME(&b));
+    return set_error(fmt::format("unsupported types: {0} and {1}", EBML_NAME(&a), EBML_NAME(&b)));
 }
 
 }
