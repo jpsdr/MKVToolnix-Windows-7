@@ -103,10 +103,10 @@ parse_file(const std::string &file_name) {
 
       if (g_opt_checksum) {
         uint32_t adler32  = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data);
-        output           += (boost::format(" checksum 0x%|1$08x|") % adler32).str();
+        output           += fmt::format(" checksum 0x{0:08x}", adler32);
       }
 
-      mxinfo(boost::format("%1%\n") % output);
+      mxinfo(fmt::format("{0}\n", output));
     }
 
   } while (num_read == buf_size);

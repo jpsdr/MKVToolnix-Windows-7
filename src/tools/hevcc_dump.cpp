@@ -17,11 +17,12 @@
 #include "common/mm_file_io.h"
 #include "common/mpeg.h"
 #include "common/strings/parsing.h"
+#include "common/version.h"
 
 static void
 v(std::string::size_type indent,
   std::string const &label) {
-  mxinfo(boost::format("%1%%2%\n") % std::string(indent, ' ') % label);
+  mxinfo(fmt::format("{0}{1}\n", std::string(indent, ' '), label));
 }
 
 static void
@@ -29,15 +30,14 @@ v(std::string::size_type indent,
   std::string const &label,
   std::string const &value) {
   auto width = 60 - indent;
-  auto fmt   = (boost::format("%%1%%%%|2$-%1%s| %%3%%\n") % width).str();
-  mxinfo(boost::format(fmt) % std::string(indent, ' ') % (label + ':') % value);
+  mxinfo(fmt::format("{0}{1:<{2}} {3}\n", std::string(indent, ' '), label + ':', width, value));
 }
 
 static void
 v(std::string::size_type indent,
   std::string const &label,
   uint64_t value) {
-  v(indent, label, (boost::format("%1%") % value).str());
+  v(indent, label, fmt::format("{0}", value));
 }
 
 static void
@@ -45,7 +45,7 @@ v(std::string::size_type indent,
   std::size_t sub_idx,
   std::string const &label,
   std::string const &value) {
-  v(indent, (boost::format("%1%[%2%]") % label % sub_idx).str(), value);
+  v(indent, fmt::format("{0}[{1}]", label, sub_idx), value);
 }
 
 static void
@@ -53,7 +53,7 @@ v(std::string::size_type indent,
   std::size_t sub_idx,
   std::string const &label,
   uint64_t value) {
-  v(indent, sub_idx, label, (boost::format("%1%") % value).str());
+  v(indent, sub_idx, label, fmt::format("{0}", value));
 }
 
 static void
@@ -62,7 +62,7 @@ v(std::string::size_type indent,
   std::size_t sub_idx2,
   std::string const &label,
   std::string const &value) {
-  v(indent, (boost::format("%1%[%2%][%3%]") % label % sub_idx1 % sub_idx2).str(), value);
+  v(indent, fmt::format("{0}[{1}][{2}]", label, sub_idx1, sub_idx2), value);
 }
 
 static void
@@ -71,7 +71,7 @@ v(std::string::size_type indent,
   std::size_t sub_idx2,
   std::string const &label,
   uint64_t value) {
-  v(indent, sub_idx1, sub_idx2, label, (boost::format("%1%") % value).str());
+  v(indent, sub_idx1, sub_idx2, label, fmt::format("{0}", value));
 }
 
 static void
@@ -81,7 +81,7 @@ v(std::string::size_type indent,
   std::size_t sub_idx3,
   std::string const &label,
   std::string const &value) {
-  v(indent, (boost::format("%1%[%2%][%3%][%4%]") % label % sub_idx1 % sub_idx2 % sub_idx3).str(), value);
+  v(indent, fmt::format("{0}[{1}][{2}][{3}]", label, sub_idx1, sub_idx2, sub_idx3), value);
 }
 
 static void
@@ -91,31 +91,25 @@ v(std::string::size_type indent,
   std::size_t sub_idx3,
   std::string const &label,
   uint64_t value) {
-  v(indent, sub_idx1, sub_idx2, sub_idx3, label, (boost::format("%1%") % value).str());
+  v(indent, sub_idx1, sub_idx2, sub_idx3, label, fmt::format("{0}", value));
 }
 
 static std::string
 x(std::size_t width,
   uint64_t value) {
-  auto fmt = (boost::format("0x%%|1$0%1%x|") % width).str();
-  return (boost::format(fmt) % value).str();
+  return fmt::format("0x{0:0{1}x}", value, width);
 }
 
 static void
-show_help() {
-  mxinfo("hevcc_dump [options] input_file_name position_in_file\n"
-         "\n"
-         "General options:\n"
-         "\n"
-         "  -h, --help             This help text\n"
-         "  -V, --version          Print version information\n");
-  mxexit();
-}
-
-static void
-show_version() {
-  mxinfo("hevcc_dump v" PACKAGE_VERSION "\n");
-  mxexit();
+setup() {
+  mtx::cli::g_version_info = get_version_info("hevcc_dump", vif_full);
+  mtx::cli::g_usage_text   =
+    "hevcc_dump [options] input_file_name position_in_file size\n"
+    "\n"
+    "General options:\n"
+    "\n"
+    "  -h, --help             This help text\n"
+    "  -V, --version          Print version information\n";
 }
 
 static std::tuple<std::string, uint64_t, uint64_t>
@@ -125,13 +119,7 @@ parse_args(std::vector<std::string> &args) {
   uint64_t size    = 0;
 
   for (auto const &arg: args) {
-    if ((arg == "-h") || (arg == "--help"))
-      show_help();
-
-    else if ((arg == "-V") || (arg == "--version"))
-      show_version();
-
-    else if (file_name.empty())
+    if (file_name.empty())
       file_name = arg;
 
     else if (size != 0)
@@ -320,7 +308,7 @@ parse_short_term_reference_picture_set(std::size_t indent,
                                        mtx::bits::reader_c &r,
                                        unsigned int pic_set_idx,
                                        unsigned int num_short_term_ref_pic_sets) {
-  v(indent, (boost::format("short-term reference picture set %1%") % pic_set_idx).str());
+  v(indent, fmt::format("short-term reference picture set {0}", pic_set_idx));
   indent += 2;
 
   mxerror("parse_short_term_reference_picture_set NOT IMPLEMENTED YET!\n");
@@ -604,7 +592,7 @@ parse_sps(mtx::bits::reader_c &r) {
     parse_sps_extension_4bits(6, r);
 
   v(6, "rbsp_stop_one_bit", r.get_bits(1));
-  v(4, (boost::format("Remaining bits: %1%") % r.get_remaining_bits()).str());
+  v(4, fmt::format("Remaining bits: {0}", r.get_remaining_bits()));
 }
 
 static void
@@ -649,10 +637,10 @@ parse_hevcc(mtx::bits::reader_c &r) {
                         :                                      "unknown";
     auto nal_unit_count = r.get_bits(16);
 
-    v(0, (boost::format("parameter set array %1%") % array_idx).str());
+    v(0, fmt::format("parameter set array {0}", array_idx));
     v(2, "array_completeness", (byte & 0x80) >> 7);
     v(2, "reserved",           (byte & 0x40) >> 6);
-    v(2, "nal_unit_type",      (boost::format("%1% (%2%)") % type % type_name).str());
+    v(2, "nal_unit_type",      fmt::format("{0} ({1})", type, type_name));
     v(2, "nal_unit_count",     nal_unit_count);
 
     for (auto nal_unit_idx = 0u; nal_unit_idx < nal_unit_count; ++nal_unit_idx) {
@@ -663,8 +651,8 @@ parse_hevcc(mtx::bits::reader_c &r) {
 
       data = mtx::mpeg::nalu_to_rbsp(data);
 
-      v(2, (boost::format("NAL unit %1%") % nal_unit_idx).str());
-      v(4, "nal_unit_size", (boost::format("%1% (RBSP size: %2%)") % nal_unit_size % data->get_size()).str());
+      v(2, fmt::format("NAL unit {0}", nal_unit_idx));
+      v(4, "nal_unit_size", fmt::format("{0} (RBSP size: {1})", nal_unit_size, data->get_size()));
 
       mtx::bits::reader_c nalu_r{data->get_buffer(), data->get_size()};
 
@@ -673,7 +661,7 @@ parse_hevcc(mtx::bits::reader_c &r) {
     }
   }
 
-  v(0, (boost::format("Remaining bits: %1%") % r.get_remaining_bits()).str());
+  v(0, fmt::format("Remaining bits: {0}", r.get_remaining_bits()));
 }
 
 static void
@@ -693,6 +681,8 @@ int
 main(int argc,
      char **argv) {
   mtx_common_init("hevcc_dump", argv[0]);
+
+  setup();
 
   auto args = mtx::cli::args_in_utf8(argc, argv);
   while (mtx::cli::handle_common_args(args, "-r"))

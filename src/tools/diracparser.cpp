@@ -45,31 +45,31 @@ protected:
 void
 dirac_info_c::handle_auxiliary_data_unit(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Auxiliary data at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Auxiliary data at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 dirac_info_c::handle_end_of_sequence_unit(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("End of sequence at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("End of sequence at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 dirac_info_c::handle_padding_unit(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Padding at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Padding at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 dirac_info_c::handle_picture_unit(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Picture at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Picture at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 dirac_info_c::handle_sequence_header_unit(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Sequence header at %1% size %2%%3%\n" )) %m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Sequence header at {0} size {1}{2}\n" ),m_stream_pos, packet->get_size(), checksum));
 
   m_seqhdr_found = dirac::parse_sequence_header(packet->get_buffer(), packet->get_size(), m_seqhdr);
 
@@ -84,7 +84,7 @@ dirac_info_c::handle_sequence_header_unit(memory_cptr packet) {
 void
 dirac_info_c::handle_unknown_unit(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Unknown (0x%|1$02x|) at %2% size %3%%4%\n")) % (int)packet->get_buffer()[4] % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Unknown (0x{0:02x}) at {1} size {2}{3}\n"), static_cast<int>(packet->get_buffer()[4]), m_stream_pos, packet->get_size(), checksum));
 }
 
 std::string
@@ -92,48 +92,48 @@ dirac_info_c::create_checksum_info(memory_cptr packet) {
   if (!g_opt_checksum)
     return "";
 
-  return (boost::format(Y(" checksum 0x%|1$08x|")) % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *packet)).str();
+  return fmt::format(Y(" checksum 0x{0:08x}"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *packet));
 }
 
 void
 dirac_info_c::dump_sequence_header(dirac::sequence_header_t &seqhdr) {
-  mxinfo(boost::format(Y("  Sequence header dump:\n"
-                         "    major_version:            %1%\n"
-                         "    minor_version:            %2%\n"
-                         "    profile:                  %3%\n"
-                         "    level:                    %4%\n"
-                         "    base_video_format:        %5%\n"
-                         "    pixel_width:              %6%\n"
-                         "    pixel_height:             %7%\n"
-                         "    chroma_format:            %8%\n"
-                         "    interlaced:               %9%\n"
-                         "    top_field_first:          %10%\n"
-                         "    frame_rate_numerator:     %11%\n"
-                         "    frame_rate_denominator:   %12%\n"
-                         "    aspect_ratio_numerator:   %13%\n"
-                         "    aspect_ratio_denominator: %14%\n"
-                         "    clean_width:              %15%\n"
-                         "    clean_height:             %16%\n"
-                         "    left_offset:              %17%\n"
-                         "    top_offset:               %18%\n"))
-         % seqhdr.major_version
-         % seqhdr.minor_version
-         % seqhdr.profile
-         % seqhdr.level
-         % seqhdr.base_video_format
-         % seqhdr.pixel_width
-         % seqhdr.pixel_height
-         % seqhdr.chroma_format
-         % seqhdr.interlaced
-         % seqhdr.top_field_first
-         % seqhdr.frame_rate_numerator
-         % seqhdr.frame_rate_denominator
-         % seqhdr.aspect_ratio_numerator
-         % seqhdr.aspect_ratio_denominator
-         % seqhdr.clean_width
-         % seqhdr.clean_height
-         % seqhdr.left_offset
-         % seqhdr.top_offset);
+  mxinfo(fmt::format(Y("  Sequence header dump:\n"
+                       "    major_version:            {0}\n"
+                       "    minor_version:            {1}\n"
+                       "    profile:                  {2}\n"
+                       "    level:                    {3}\n"
+                       "    base_video_format:        {4}\n"
+                       "    pixel_width:              {5}\n"
+                       "    pixel_height:             {6}\n"
+                       "    chroma_format:            {7}\n"
+                       "    interlaced:               {8}\n"
+                       "    top_field_first:          {9}\n"
+                       "    frame_rate_numerator:     {10}\n"
+                       "    frame_rate_denominator:   {11}\n"
+                       "    aspect_ratio_numerator:   {12}\n"
+                       "    aspect_ratio_denominator: {13}\n"
+                       "    clean_width:              {14}\n"
+                       "    clean_height:             {15}\n"
+                       "    left_offset:              {16}\n"
+                       "    top_offset:               {17}\n"),
+                     seqhdr.major_version,
+                     seqhdr.minor_version,
+                     seqhdr.profile,
+                     seqhdr.level,
+                     seqhdr.base_video_format,
+                     seqhdr.pixel_width,
+                     seqhdr.pixel_height,
+                     seqhdr.chroma_format,
+                     seqhdr.interlaced,
+                     seqhdr.top_field_first,
+                     seqhdr.frame_rate_numerator,
+                     seqhdr.frame_rate_denominator,
+                     seqhdr.aspect_ratio_numerator,
+                     seqhdr.aspect_ratio_denominator,
+                     seqhdr.clean_width,
+                     seqhdr.clean_height,
+                     seqhdr.left_offset,
+                     seqhdr.top_offset));
 }
 
 static void

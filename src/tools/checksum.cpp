@@ -105,28 +105,28 @@ parse_args(std::vector<std::string> &args) {
 
     else if (arg == "--chunk-size") {
       if (next_arg.empty())
-        mxerror(boost::format("Missing argument to %1%\n") % arg);
+        mxerror(fmt::format("Missing argument to {0}\n", arg));
 
       if (!parse_number(next_arg, options.m_chunk_size))
-        mxerror(boost::format("Invalid argument to %1%: %2%\n") % arg % next_arg);
+        mxerror(fmt::format("Invalid argument to {0}: {1}\n", arg, next_arg));
 
       ++current;
 
     } else if (arg == "--initial-value") {
       if (next_arg.empty())
-        mxerror(boost::format("Missing argument to %1%\n") % arg);
+        mxerror(fmt::format("Missing argument to {0}\n", arg));
 
       if (!parse_number(next_arg, options.m_initial_value))
-        mxerror(boost::format("Invalid argument to %1%: %2%\n") % arg % next_arg);
+        mxerror(fmt::format("Invalid argument to {0}: {1}\n", arg, next_arg));
 
       ++current;
 
     } else if (arg == "--xor-result") {
       if (next_arg.empty())
-        mxerror(boost::format("Missing argument to %1%\n") % arg);
+        mxerror(fmt::format("Missing argument to {0}\n", arg));
 
       if (!parse_number(next_arg, options.m_xor_result))
-        mxerror(boost::format("Invalid argument to %1%: %2%\n") % arg % next_arg);
+        mxerror(fmt::format("Invalid argument to {0}: {1}\n", arg, next_arg));
 
       ++current;
 
@@ -182,9 +182,9 @@ parse_file(cli_options_c const &options) {
   std::string output;
 
   for (auto idx = 0u; idx < res_size; idx++)
-    output += (boost::format("%|1$02x|") % static_cast<unsigned int>(ptr[idx])).str();
+    output += fmt::format("{0:02x}", static_cast<unsigned int>(ptr[idx]));
 
-  mxinfo(boost::format("%1%  %2%\n") % output % options.m_file_name);
+  mxinfo(fmt::format("{0}  {1}\n", output, options.m_file_name));
 }
 
 int

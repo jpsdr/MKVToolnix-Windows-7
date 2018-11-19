@@ -88,8 +88,8 @@ parse_file(const std::string &file_name) {
     pos -= marker_size;
 
     if (-1 != previous_pos)
-      mxinfo(boost::format("NALU type 0x%|1$02x| (%2%) size %3% marker size %4% at %5%\n")
-             % previous_type % mtx::hevc::es_parser_c::get_nalu_type_name(previous_type) % (pos - previous_pos - previous_marker_size) % previous_marker_size % previous_pos);
+      mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2} marker size {3} at {4}\n",
+                         previous_type, mtx::hevc::es_parser_c::get_nalu_type_name(previous_type), pos - previous_pos - previous_marker_size, previous_marker_size, previous_pos));
 
     previous_pos         = pos;
     previous_marker_size = marker_size;

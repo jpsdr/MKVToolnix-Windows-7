@@ -50,13 +50,13 @@ protected:
 void
 vc1_info_c::handle_end_of_sequence_packet(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("End of sequence at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("End of sequence at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 vc1_info_c::handle_entrypoint_packet(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Entrypoint at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Entrypoint at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 
   if (!g_opt_entrypoints)
     return;
@@ -74,13 +74,13 @@ vc1_info_c::handle_entrypoint_packet(memory_cptr packet) {
 void
 vc1_info_c::handle_field_packet(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Field at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Field at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 vc1_info_c::handle_frame_packet(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Frame at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Frame at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 
   if (!g_opt_frames)
     return;
@@ -98,7 +98,7 @@ vc1_info_c::handle_frame_packet(memory_cptr packet) {
 void
 vc1_info_c::handle_sequence_header_packet(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Sequence header at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Sequence header at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 
   m_seqhdr_found = mtx::vc1::parse_sequence_header(packet->get_buffer(), packet->get_size(), m_seqhdr);
 
@@ -113,14 +113,14 @@ vc1_info_c::handle_sequence_header_packet(memory_cptr packet) {
 void
 vc1_info_c::handle_slice_packet(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Slice at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Slice at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 vc1_info_c::handle_unknown_packet(uint32_t marker,
                                   memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(boost::format(Y("Unknown (0x%|1$08x|) at %2% size %3%%4%\n")) % marker % m_stream_pos % packet->get_size() % checksum);
+  mxinfo(fmt::format(Y("Unknown (0x{0:08x}) at {1} size {2}{3}\n"), marker, m_stream_pos, packet->get_size(), checksum));
 }
 
 std::string
@@ -128,131 +128,131 @@ vc1_info_c::create_checksum_info(memory_cptr packet) {
   if (!g_opt_checksum)
     return "";
 
-  return (boost::format(Y(" checksum 0x%|1$08x|")) % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *packet)).str();
+  return fmt::format(Y(" checksum 0x{0:08x}"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *packet));
 }
 
 void
 vc1_info_c::dump_sequence_header(mtx::vc1::sequence_header_t &seqhdr) {
   static const char *profile_names[4] = { "Simple", "Main", "Complex", "Advanced" };
 
-  mxinfo(boost::format(Y("  Sequence header dump:\n"
-                         "    profile:               %1% (%2%)\n"
-                         "    level:                 %3%\n"
-                         "    chroma_format:         %4%\n"
-                         "    frame_rtq_postproc:    %5%\n"
-                         "    bit_rtq_postproc:      %6%\n"
-                         "    postproc_flag:         %7%\n"
-                         "    pixel_width:           %8%\n"
-                         "    pixel_height:          %9%\n"
-                         "    pulldown_flag:         %10%\n"
-                         "    interlace_flag:        %11%\n"
-                         "    tf_counter_flag:       %12%\n"
-                         "    f_inter_p_flag:        %13%\n"
-                         "    psf_mode_flag:         %14%\n"
-                         "    display_info_flag:     %15%\n"
-                         "    display_width:         %16%\n"
-                         "    display_height:        %17%\n"
-                         "    aspect_ratio_flag:     %18%\n"
-                         "    aspect_ratio_width:    %19%\n"
-                         "    aspect_ratio_height:   %20%\n"
-                         "    framerate_flag:        %21%\n"
-                         "    framerate_num:         %22%\n"
-                         "    framerate_den:         %23%\n"
-                         "    hrd_param_flag:        %24%\n"
-                         "    hrd_num_leaky_buckets: %25%\n"))
-         % seqhdr.profile % profile_names[seqhdr.profile]
-         % seqhdr.level
-         % seqhdr.chroma_format
-         % seqhdr.frame_rtq_postproc
-         % seqhdr.bit_rtq_postproc
-         % seqhdr.postproc_flag
-         % seqhdr.pixel_width
-         % seqhdr.pixel_height
-         % seqhdr.pulldown_flag
-         % seqhdr.interlace_flag
-         % seqhdr.tf_counter_flag
-         % seqhdr.f_inter_p_flag
-         % seqhdr.psf_mode_flag
-         % seqhdr.display_info_flag
-         % seqhdr.display_width
-         % seqhdr.display_height
-         % seqhdr.aspect_ratio_flag
-         % seqhdr.aspect_ratio_width
-         % seqhdr.aspect_ratio_height
-         % seqhdr.framerate_flag
-         % seqhdr.framerate_num
-         % seqhdr.framerate_den
-         % seqhdr.hrd_param_flag
-         % seqhdr.hrd_num_leaky_buckets);
+  mxinfo(fmt::format(Y("  Sequence header dump:\n"
+                       "    profile:               {0} ({1})\n"
+                       "    level:                 {2}\n"
+                       "    chroma_format:         {3}\n"
+                       "    frame_rtq_postproc:    {4}\n"
+                       "    bit_rtq_postproc:      {5}\n"
+                       "    postproc_flag:         {6}\n"
+                       "    pixel_width:           {7}\n"
+                       "    pixel_height:          {8}\n"
+                       "    pulldown_flag:         {9}\n"
+                       "    interlace_flag:        {10}\n"
+                       "    tf_counter_flag:       {11}\n"
+                       "    f_inter_p_flag:        {12}\n"
+                       "    psf_mode_flag:         {13}\n"
+                       "    display_info_flag:     {14}\n"
+                       "    display_width:         {15}\n"
+                       "    display_height:        {16}\n"
+                       "    aspect_ratio_flag:     {17}\n"
+                       "    aspect_ratio_width:    {18}\n"
+                       "    aspect_ratio_height:   {19}\n"
+                       "    framerate_flag:        {20}\n"
+                       "    framerate_num:         {21}\n"
+                       "    framerate_den:         {22}\n"
+                       "    hrd_param_flag:        {23}\n"
+                       "    hrd_num_leaky_buckets: {24}\n"),
+                     seqhdr.profile, profile_names[seqhdr.profile],
+                     seqhdr.level,
+                     seqhdr.chroma_format,
+                     seqhdr.frame_rtq_postproc,
+                     seqhdr.bit_rtq_postproc,
+                     seqhdr.postproc_flag,
+                     seqhdr.pixel_width,
+                     seqhdr.pixel_height,
+                     seqhdr.pulldown_flag,
+                     seqhdr.interlace_flag,
+                     seqhdr.tf_counter_flag,
+                     seqhdr.f_inter_p_flag,
+                     seqhdr.psf_mode_flag,
+                     seqhdr.display_info_flag,
+                     seqhdr.display_width,
+                     seqhdr.display_height,
+                     seqhdr.aspect_ratio_flag,
+                     seqhdr.aspect_ratio_width,
+                     seqhdr.aspect_ratio_height,
+                     seqhdr.framerate_flag,
+                     seqhdr.framerate_num,
+                     seqhdr.framerate_den,
+                     seqhdr.hrd_param_flag,
+                     seqhdr.hrd_num_leaky_buckets));
 }
 
 void
 vc1_info_c::dump_entrypoint(mtx::vc1::entrypoint_t &entrypoint) {
-  mxinfo(boost::format(Y("  Entrypoint dump:\n"
-                         "    broken_link_flag:      %1%\n"
-                         "    closed_entry_flag:     %2%\n"
-                         "    pan_scan_flag:         %3%\n"
-                         "    refdist_flag:          %4%\n"
-                         "    loop_filter_flag:      %5%\n"
-                         "    fast_uvmc_flag:        %6%\n"
-                         "    extended_mv_flag:      %7%\n"
-                         "    dquant:                %8%\n"
-                         "    vs_transform_flag:     %9%\n"
-                         "    overlap_flag:          %10%\n"
-                         "    quantizer_mode:        %11%\n"
-                         "    coded_dimensions_flag: %12%\n"
-                         "    coded_width:           %13%\n"
-                         "    coded_height:          %14%\n"
-                         "    extended_dmv_flag:     %15%\n"
-                         "    luma_scaling_flag:     %16%\n"
-                         "    luma_scaling:          %17%\n"
-                         "    chroma_scaling_flag:   %18%\n"
-                         "    chroma_scaling:        %19%\n"))
-         % entrypoint.broken_link_flag
-         % entrypoint.closed_entry_flag
-         % entrypoint.pan_scan_flag
-         % entrypoint.refdist_flag
-         % entrypoint.loop_filter_flag
-         % entrypoint.fast_uvmc_flag
-         % entrypoint.extended_mv_flag
-         % entrypoint.dquant
-         % entrypoint.vs_transform_flag
-         % entrypoint.overlap_flag
-         % entrypoint.quantizer_mode
-         % entrypoint.coded_dimensions_flag
-         % entrypoint.coded_width
-         % entrypoint.coded_height
-         % entrypoint.extended_dmv_flag
-         % entrypoint.luma_scaling_flag
-         % entrypoint.luma_scaling
-         % entrypoint.chroma_scaling_flag
-         % entrypoint.chroma_scaling);
+  mxinfo(fmt::format(Y("  Entrypoint dump:\n"
+                       "    broken_link_flag:      {0}\n"
+                       "    closed_entry_flag:     {1}\n"
+                       "    pan_scan_flag:         {2}\n"
+                       "    refdist_flag:          {3}\n"
+                       "    loop_filter_flag:      {4}\n"
+                       "    fast_uvmc_flag:        {5}\n"
+                       "    extended_mv_flag:      {6}\n"
+                       "    dquant:                {7}\n"
+                       "    vs_transform_flag:     {8}\n"
+                       "    overlap_flag:          {9}\n"
+                       "    quantizer_mode:        {10}\n"
+                       "    coded_dimensions_flag: {11}\n"
+                       "    coded_width:           {12}\n"
+                       "    coded_height:          {13}\n"
+                       "    extended_dmv_flag:     {14}\n"
+                       "    luma_scaling_flag:     {15}\n"
+                       "    luma_scaling:          {16}\n"
+                       "    chroma_scaling_flag:   {17}\n"
+                       "    chroma_scaling:        {18}\n"),
+                     entrypoint.broken_link_flag,
+                     entrypoint.closed_entry_flag,
+                     entrypoint.pan_scan_flag,
+                     entrypoint.refdist_flag,
+                     entrypoint.loop_filter_flag,
+                     entrypoint.fast_uvmc_flag,
+                     entrypoint.extended_mv_flag,
+                     entrypoint.dquant,
+                     entrypoint.vs_transform_flag,
+                     entrypoint.overlap_flag,
+                     entrypoint.quantizer_mode,
+                     entrypoint.coded_dimensions_flag,
+                     entrypoint.coded_width,
+                     entrypoint.coded_height,
+                     entrypoint.extended_dmv_flag,
+                     entrypoint.luma_scaling_flag,
+                     entrypoint.luma_scaling,
+                     entrypoint.chroma_scaling_flag,
+                     entrypoint.chroma_scaling));
 }
 
 void
 vc1_info_c::dump_frame_header(mtx::vc1::frame_header_t &frame_header) {
-  mxinfo(boost::format(Y("  Frame header dump:\n"
-                         "    fcm:                     %1% (%2%)\n"
-                         "    frame_type:              %3%\n"
-                         "    tf_counter:              %4%\n"
-                         "    repeat_frame:            %5%\n"
-                         "    top_field_first_flag:    %6%\n"
-                         "    repeat_first_field_flag: %7%\n"))
-         % frame_header.fcm
-         % (  frame_header.fcm        == 0x00                           ? Y("progressive")
+  mxinfo(fmt::format(Y("  Frame header dump:\n"
+                       "    fcm:                     {0} ({1})\n"
+                       "    frame_type:              {2}\n"
+                       "    tf_counter:              {3}\n"
+                       "    repeat_frame:            {4}\n"
+                       "    top_field_first_flag:    {5}\n"
+                       "    repeat_first_field_flag: {6}\n"),
+                     frame_header.fcm,
+                       frame_header.fcm        == 0x00                           ? Y("progressive")
             : frame_header.fcm        == 0x10                           ? Y("frame-interlace")
             : frame_header.fcm        == 0x11                           ? Y("field-interlace")
-            :                                                             Y("unknown"))
-         % (  frame_header.frame_type == mtx::vc1::FRAME_TYPE_I         ? Y("I")
+            :                                                             Y("unknown"),
+                       frame_header.frame_type == mtx::vc1::FRAME_TYPE_I         ? Y("I")
             : frame_header.frame_type == mtx::vc1::FRAME_TYPE_P         ? Y("P")
             : frame_header.frame_type == mtx::vc1::FRAME_TYPE_B         ? Y("B")
             : frame_header.frame_type == mtx::vc1::FRAME_TYPE_BI        ? Y("BI")
             : frame_header.frame_type == mtx::vc1::FRAME_TYPE_P_SKIPPED ? Y("P (skipped)")
-              :                                                           Y("unknown"))
-         % frame_header.tf_counter
-         % frame_header.repeat_frame
-         % frame_header.top_field_first_flag
-         % frame_header.repeat_first_field_flag);
+              :                                                           Y("unknown"),
+                     frame_header.tf_counter,
+                     frame_header.repeat_frame,
+                     frame_header.top_field_first_flag,
+                     frame_header.repeat_first_field_flag));
 }
 
 static void

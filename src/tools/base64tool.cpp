@@ -60,7 +60,7 @@ main(int argc,
   else if (!strcmp(argv[1], "decode"))
     mode = 'd';
   else
-    mxerror(boost::format(Y("Invalid mode '%1%'.\n")) % argv[1]);
+    mxerror(fmt::format(Y("Invalid mode '{0}'.\n"), argv[1]));
 
   maxlen = 72;
   if ((argc == 5) && (mode == 'e')) {
@@ -77,14 +77,14 @@ main(int argc,
     if (mode != 'e')
       intext = std::make_shared<mm_text_io_c>(in);
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % argv[2] % ex);
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), argv[2], ex));
   }
 
   mm_io_cptr out;
   try {
     out = mm_write_buffer_io_c::open(argv[3], 128 * 1024);
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % argv[3] % ex);
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), argv[3], ex));
   }
 
   in->save_pos();
