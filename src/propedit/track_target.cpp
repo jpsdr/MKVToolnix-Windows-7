@@ -69,17 +69,17 @@ track_target_c::add_change(change_c::change_type_e type,
 void
 track_target_c::dump_info()
   const {
-  mxinfo(boost::format("  track_target:\n"
-                       "    selection_mode:       %1%\n"
-                       "    selection_param:      %2%\n"
-                       "    selection_track_type: %3%\n"
-                       "    track_uid:            %4%\n"
-                       "    file_name:            %5%\n")
-         % static_cast<int>(m_selection_mode)
-         % m_selection_param
-         % m_selection_track_type
-         % m_track_uid
-         % m_file_name);
+  mxinfo(fmt::format("  track_target:\n"
+                     "    selection_mode:       {0}\n"
+                     "    selection_param:      {1}\n"
+                     "    selection_track_type: {2}\n"
+                     "    track_uid:            {3}\n"
+                     "    file_name:            {4}\n",
+                     static_cast<int>(m_selection_mode),
+                     m_selection_param,
+                     m_selection_track_type,
+                     m_track_uid,
+                     m_file_name));
 
   for (auto &change : m_changes)
     change->dump_info();
@@ -196,7 +196,7 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
     return;
   }
 
-  mxerror(boost::format(Y("No track corresponding to the edit specification '%1%' was found. %2%\n")) % m_spec % FILE_NOT_MODIFIED);
+  mxerror(fmt::format(Y("No track corresponding to the edit specification '{0}' was found. {1}\n"), m_spec, FILE_NOT_MODIFIED));
 }
 
 void

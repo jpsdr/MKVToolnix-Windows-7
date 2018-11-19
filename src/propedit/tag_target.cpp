@@ -100,19 +100,19 @@ void
 tag_target_c::dump_info()
   const
 {
-  mxinfo(boost::format("  tag_target:\n"
-                       "    operation_mode:       %1%\n"
-                       "    selection_mode:       %2%\n"
-                       "    selection_param:      %3%\n"
-                       "    selection_track_type: %4%\n"
-                       "    track_uid:            %5%\n"
-                       "    file_name:            %6%\n")
-         % static_cast<int>(m_operation_mode)
-         % static_cast<int>(m_selection_mode)
-         % m_selection_param
-         % m_selection_track_type
-         % m_track_uid
-         % m_file_name);
+  mxinfo(fmt::format("  tag_target:\n"
+                     "    operation_mode:       {0}\n"
+                     "    selection_mode:       {1}\n"
+                     "    selection_param:      {2}\n"
+                     "    selection_track_type: {3}\n"
+                     "    track_uid:            {4}\n"
+                     "    file_name:            {5}\n",
+                     static_cast<int>(m_operation_mode),
+                     static_cast<int>(m_selection_mode),
+                     m_selection_param,
+                     m_selection_track_type,
+                     m_track_uid,
+                     m_file_name));
 
   for (auto &change : m_changes)
     change->dump_info();
@@ -168,7 +168,7 @@ tag_target_c::execute() {
 
   fix_mandatory_elements(m_level1_element);
   if (!m_level1_element->CheckMandatory())
-    mxerror(boost::format(Y("Error parsing the tags in '%1%': some mandatory elements are missing.\n")) % m_file_name);
+    mxerror(fmt::format(Y("Error parsing the tags in '{0}': some mandatory elements are missing.\n"), m_file_name));
 
   if (m_analyzer->is_webm())
     mtx::tags::remove_elements_unsupported_by_webm(*m_level1_element);
@@ -351,7 +351,7 @@ tag_target_c::account_all_clusters() {
   file.setFilePointer(m_analyzer->get_segment_data_start_pos());
 
   mxinfo(Y("The file is read in order to create track statistics.\n"));
-  mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 0 % "\r");
+  mxinfo(fmt::format(Y("Progress: {0}%{1}"), 0, "\r"));
 
   while (true) {
     auto cluster = kax_file->read_next_cluster();
@@ -364,12 +364,12 @@ tag_target_c::account_all_clusters() {
 
     auto current_progress = std::lround(file.getFilePointer() * 100ull / static_cast<double>(file_size));
     if (current_progress != previous_progress) {
-      mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_progress % "\r");
+      mxinfo(fmt::format(Y("Progress: {0}%{1}"), current_progress, "\r"));
       previous_progress = current_progress;
     }
   }
 
-  mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 100 % "\n");
+  mxinfo(fmt::format(Y("Progress: {0}%{1}"), 100, "\n"));
 }
 
 void

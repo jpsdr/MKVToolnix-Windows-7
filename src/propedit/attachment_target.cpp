@@ -63,35 +63,35 @@ attachment_target_c::validate() {
   try {
     m_file_content = mm_file_io_c::slurp(m_file_name);
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % m_file_name % ex.what());
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), m_file_name, ex.what()));
   }
 }
 
 void
 attachment_target_c::dump_info()
   const {
-  mxinfo(boost::format("  attachment target:\n"
-                       "    file_name: %1%\n"
-                       "    command: %2% (%3%)\n"
-                       "    options: %4%\n"
-                       "    selector_type: %5% (%6%)\n"
-                       "    selector_num_arg: %7%\n"
-                       "    selector_string_arg: %8%\n")
-         % m_file_name
-         % m_command
-         % (  ac_add     == m_command ? "add"
-            : ac_delete  == m_command ? "delete"
-            : ac_replace == m_command ? "replace"
-            : ac_update  == m_command ? "update"
-            :                           "unknown")
-         % m_options
-         % m_selector_type
-         % (  st_id        == m_selector_type ? "ID"
-            : st_uid       == m_selector_type ? "UID"
-            : st_name      == m_selector_type ? "name"
-            : st_mime_type == m_selector_type ? "MIME type"
-            :                                   "unknown")
-         % m_selector_num_arg % m_selector_string_arg);
+  mxinfo(fmt::format("  attachment target:\n"
+                     "    file_name: {0}\n"
+                     "    command: {1} ({2})\n"
+                     "    options: {3}\n"
+                     "    selector_type: {4} ({5})\n"
+                     "    selector_num_arg: {6}\n"
+                     "    selector_string_arg: {7}\n",
+                     m_file_name,
+                     m_command,
+                       ac_add     == m_command ? "add"
+                     : ac_delete  == m_command ? "delete"
+                     : ac_replace == m_command ? "replace"
+                     : ac_update  == m_command ? "update"
+                     :                           "unknown",
+                     m_options,
+                     m_selector_type,
+                       st_id        == m_selector_type ? "ID"
+                     : st_uid       == m_selector_type ? "UID"
+                     : st_name      == m_selector_type ? "name"
+                     : st_mime_type == m_selector_type ? "MIME type"
+                     :                                   "unknown",
+                     m_selector_num_arg, m_selector_string_arg));
 }
 
 bool
@@ -201,7 +201,7 @@ attachment_target_c::execute_delete() {
   bool deleted_something = st_id == m_selector_type ? delete_by_id() : delete_by_uid_name_mime_type();
 
   if (!deleted_something)
-    mxwarn(boost::format(Y("No attachment matched the spec '%1%'.\n")) % m_spec);
+    mxwarn(fmt::format(Y("No attachment matched the spec '{0}'.\n"), m_spec));
 
   else
     m_attachments_modified = true;
@@ -212,7 +212,7 @@ attachment_target_c::execute_replace() {
   bool replaced_something = st_id == m_selector_type ? replace_by_id() : replace_by_uid_name_mime_type();
 
   if (!replaced_something)
-    mxwarn(boost::format(Y("No attachment matched the spec '%1%'.\n")) % m_spec);
+    mxwarn(fmt::format(Y("No attachment matched the spec '{0}'.\n"), m_spec));
 
   else
     m_attachments_modified = true;

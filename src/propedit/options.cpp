@@ -127,7 +127,7 @@ options_c::add_delete_track_statistics_tags(tag_target_c::tag_operation_mode_e o
 void
 options_c::set_file_name(const std::string &file_name) {
   if (!m_file_name.empty())
-    mxerror(boost::format(Y("More than one file name has been given ('%1%' and '%2%').\n")) % m_file_name % file_name);
+    mxerror(fmt::format(Y("More than one file name has been given ('{0}' and '{1}').\n"), m_file_name, file_name));
 
   m_file_name = file_name;
 }
@@ -148,13 +148,13 @@ void
 options_c::dump_info()
   const
 {
-  mxinfo(boost::format("options:\n"
-                       "  file_name:     %1%\n"
-                       "  show_progress: %2%\n"
-                       "  parse_mode:    %3%\n")
-         % m_file_name
-         % m_show_progress
-         % static_cast<int>(m_parse_mode));
+  mxinfo(fmt::format("options:\n"
+                     "  file_name:     {0}\n"
+                     "  show_progress: {1}\n"
+                     "  parse_mode:    {2}\n",
+                     m_file_name,
+                     m_show_progress,
+                     static_cast<int>(m_parse_mode)));
 
   for (auto &target : m_targets)
     target->dump_info();
@@ -183,7 +183,7 @@ read_element(kax_analyzer_c *analyzer,
     e = analyzer->read_element(index);
 
   if (require_existance && (!e || !dynamic_cast<T *>(e.get())))
-    mxerror(boost::format(Y("Modification of properties in the section '%1%' was requested, but no corresponding level 1 element was found in the file. %2%\n")) % category % FILE_NOT_MODIFIED);
+    mxerror(fmt::format(Y("Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"), category, FILE_NOT_MODIFIED));
 
   return e;
 }
@@ -263,8 +263,8 @@ options_c::merge_targets() {
 
     existing_target_it->second->merge_changes(*track_target);
 
-    mxwarn(boost::format(Y("The edit specifications '%1%' and '%2%' resolve to the same track with the UID %3%.\n"))
-           % existing_target_it->second->get_spec() % track_target->get_spec() % track_uid);
+    mxwarn(fmt::format(Y("The edit specifications '{0}' and '{1}' resolve to the same track with the UID {2}.\n"),
+                       existing_target_it->second->get_spec(), track_target->get_spec(), track_uid));
   }
 
   m_targets.swap(targets_to_keep);

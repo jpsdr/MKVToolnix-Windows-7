@@ -58,7 +58,7 @@ segment_info_target_c::add_change(change_c::change_type_e type,
 void
 segment_info_target_c::dump_info()
   const {
-  mxinfo(boost::format("  segment_info_target:\n"));
+  mxinfo(fmt::format("  segment_info_target:\n"));
 
   for (auto &change : m_changes)
     change->dump_info();

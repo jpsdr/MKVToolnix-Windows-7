@@ -50,7 +50,7 @@ change_c::change_c(change_c::change_type_e type,
 void
 change_c::validate() {
   if (m_property.m_name.empty())
-    mxerror(boost::format(Y("The name '%1%' is not a valid property name for the current edit specification in '%2%'.\n")) % m_name % get_spec());
+    mxerror(fmt::format(Y("The name '{0}' is not a valid property name for the current edit specification in '{1}'.\n"), m_name, get_spec()));
 
   if (change_c::ct_delete == m_type)
     validate_deletion_of_mandatory();
@@ -60,21 +60,21 @@ change_c::validate() {
 
 std::string
 change_c::get_spec() {
-  return change_c::ct_delete == m_type ? (boost::format("--delete %1%")                                                 % m_name          ).str()
-       :                                 (boost::format("--%1% %2%=%3%") % (change_c::ct_add == m_type ? "add" : "set") % m_name % m_value).str();
+  return change_c::ct_delete == m_type ? fmt::format("--delete {0}",                                                 m_name          )
+       :                                 fmt::format("--{0} {1}={2}", change_c::ct_add == m_type ? "add" : "set", m_name, m_value);
 }
 
 void
 change_c::dump_info()
   const
 {
-  mxinfo(boost::format("    change:\n"
-                       "      type:  %1%\n"
-                       "      name:  %2%\n"
-                       "      value: %3%\n")
-         % static_cast<int>(m_type)
-         % m_name
-         % m_value);
+  mxinfo(fmt::format("    change:\n"
+                     "      type:  {0}\n"
+                     "      name:  {1}\n"
+                     "      value: {2}\n",
+                     static_cast<int>(m_type),
+                     m_name,
+                     m_value));
 }
 
 bool
@@ -108,7 +108,7 @@ change_c::parse_ascii_string() {
   size_t i;
   for (i = 0; m_value.length() > i; ++i)
     if (127 < static_cast<unsigned char>(m_value[i]))
-      mxerror(boost::format(Y("The property value contains non-ASCII characters, but the property is not a Unicode string in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+      mxerror(fmt::format(Y("The property value contains non-ASCII characters, but the property is not a Unicode string in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 
   m_s_value = m_value;
 }
@@ -121,13 +121,13 @@ change_c::parse_unicode_string() {
 void
 change_c::parse_unsigned_integer() {
   if (!parse_number(m_value, m_ui_value))
-    mxerror(boost::format(Y("The property value is not a valid unsigned integer in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+    mxerror(fmt::format(Y("The property value is not a valid unsigned integer in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 }
 
 void
 change_c::parse_signed_integer() {
   if (!parse_number(m_value, m_si_value))
-    mxerror(boost::format(Y("The property value is not a valid signed integer in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+    mxerror(fmt::format(Y("The property value is not a valid signed integer in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 }
 
 void
@@ -135,14 +135,14 @@ change_c::parse_boolean() {
   try {
     m_b_value = parse_bool(m_value);
   } catch (...) {
-    mxerror(boost::format(Y("The property value is not a valid boolean in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+    mxerror(fmt::format(Y("The property value is not a valid boolean in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
   }
 }
 
 void
 change_c::parse_floating_point_number() {
   if (!parse_number(m_value, m_fp_value))
-    mxerror(boost::format(Y("The property value is not a valid floating point number in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+    mxerror(fmt::format(Y("The property value is not a valid floating point number in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 }
 
 void
@@ -151,8 +151,8 @@ change_c::parse_binary() {
     m_x_value = mtx::bits::value_c(m_value, m_property.m_bit_length);
   } catch (...) {
     if (m_property.m_bit_length)
-      mxerror(boost::format(Y("The property value is not a valid binary spec or it is not exactly %3% bits long in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED % m_property.m_bit_length);
-    mxerror(boost::format(Y("The property value is not a valid binary spec in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+      mxerror(fmt::format(Y("The property value is not a valid binary spec or it is not exactly {2} bits long in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED, m_property.m_bit_length));
+    mxerror(fmt::format(Y("The property value is not a valid binary spec in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
   }
 }
 
@@ -215,11 +215,11 @@ change_c::parse_date_time() {
     }
   }
 
-  mxerror(boost::format("%1% %2% %3% %4%\n")
-          % (boost::format(Y("The property value is not a valid date & time string in '%1%'.")) % get_spec()).str()
-          % Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00.")
-          % Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time.")
-          % FILE_NOT_MODIFIED);
+  mxerror(fmt::format("{0} {1} {2} {3}\n",
+                      fmt::format(Y("The property value is not a valid date & time string in '{0}'."), get_spec()),
+                      Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."),
+                      Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."),
+                      FILE_NOT_MODIFIED));
 }
 
 void
@@ -253,7 +253,7 @@ change_c::execute_delete() {
   }
 
   if (1 < verbose)
-    mxinfo(boost::format(Y("Change for '%1%' executed. Number of entries deleted: %2%\n")) % get_spec() % num_deleted);
+    mxinfo(fmt::format(Y("Change for '{0}' executed. Number of entries deleted: {1}\n"), get_spec(), num_deleted));
 }
 
 void
@@ -273,24 +273,24 @@ change_c::execute_add_or_set() {
   if (0 == num_found) {
     do_add_element();
     if (1 < verbose)
-      mxinfo(boost::format(Y("Change for '%1%' executed. No property of this type found. One entry added.\n")) % get_spec());
+      mxinfo(fmt::format(Y("Change for '{0}' executed. No property of this type found. One entry added.\n"), get_spec()));
     return;
   }
 
   if (change_c::ct_set == m_type) {
     if (1 < verbose)
-      mxinfo(boost::format(Y("Change for '%1%' executed. Number of entries set: %2%.\n")) % get_spec() % num_found);
+      mxinfo(fmt::format(Y("Change for '{0}' executed. Number of entries set: {1}.\n"), get_spec(), num_found));
     return;
   }
 
   const EbmlSemantic *semantic = get_semantic();
   if (semantic && semantic->Unique)
-    mxerror(boost::format(Y("This property is unique. More instances cannot be added in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+    mxerror(fmt::format(Y("This property is unique. More instances cannot be added in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 
   do_add_element();
 
  if (1 < verbose)
-    mxinfo(boost::format(Y("Change for '%1%' executed. One entry added.\n")) % get_spec());
+    mxinfo(fmt::format(Y("Change for '{0}' executed. One entry added.\n"), get_spec()));
 }
 
 void
@@ -329,7 +329,7 @@ change_c::validate_deletion_of_mandatory() {
   std::unique_ptr<EbmlElement> elt(&semantic->Create());
 
   if (!elt->DefaultISset())
-    mxerror(boost::format(Y("This property is mandatory and cannot be deleted in '%1%'. %2%\n")) % get_spec() % FILE_NOT_MODIFIED);
+    mxerror(fmt::format(Y("This property is mandatory and cannot be deleted in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 }
 
 const EbmlSemantic *
@@ -360,7 +360,7 @@ change_c::parse_spec(change_c::change_type_e type,
       && (name == "language")) {
     auto idx = map_to_iso639_2_code(value);
     if (-1 == idx)
-      throw std::runtime_error{(boost::format(("invalid ISO 639-2 language code '%1%'")) % value).str()};
+      throw std::runtime_error{fmt::format(("invalid ISO 639-2 language code '{0}'"), value)};
 
     value = g_iso639_languages[idx].iso639_2_code;
   }

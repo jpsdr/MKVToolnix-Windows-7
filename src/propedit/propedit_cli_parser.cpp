@@ -31,7 +31,7 @@ propedit_cli_parser_c::set_parse_mode() {
   try {
     m_options->set_parse_mode(m_next_arg);
   } catch (...) {
-    mxerror(boost::format(Y("Unknown parse mode in '%1% %2%'.\n")) % m_current_arg % m_next_arg);
+    mxerror(fmt::format(Y("Unknown parse mode in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -40,7 +40,7 @@ propedit_cli_parser_c::add_target() {
   try {
     m_target = m_options->add_track_or_segmentinfo_target(m_next_arg);
   } catch (...) {
-    mxerror(boost::format(Y("Invalid selector in '%1% %2%'.\n")) % m_current_arg % m_next_arg);
+    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -52,7 +52,7 @@ propedit_cli_parser_c::add_change() {
                                  :                                                         change_c::ct_delete;
     m_target->add_change(type, m_next_arg);
   } catch (std::runtime_error &error) {
-    mxerror(boost::format(Y("Invalid change spec (%3%) in '%1% %2%'.\n")) % m_current_arg % m_next_arg % error.what());
+    mxerror(fmt::format(Y("Invalid change spec ({2}) in '{0} {1}'.\n"), m_current_arg, m_next_arg, error.what()));
   }
 }
 
@@ -61,7 +61,7 @@ propedit_cli_parser_c::add_tags() {
   try {
     m_options->add_tags(m_next_arg);
   } catch (...) {
-    mxerror(boost::format(Y("Invalid selector in '%1% %2%'.\n")) % m_current_arg % m_next_arg);
+    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -70,7 +70,7 @@ propedit_cli_parser_c::add_chapters() {
   try {
     m_options->add_chapters(m_next_arg);
   } catch (...) {
-    mxerror(boost::format(Y("Invalid selector in '%1% %2%'.\n")) % m_current_arg % m_next_arg);
+    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -93,7 +93,7 @@ void
 propedit_cli_parser_c::set_attachment_uid() {
   auto uid = uint64_t{};
   if (!parse_number(m_next_arg, uid))
-    mxerror(boost::format(Y("The value '%1%' is not a number.\n")) % m_next_arg);
+    mxerror(fmt::format(Y("The value '{0}' is not a number.\n"), m_next_arg));
 
   m_attachment.m_uid.reset(uid);
 }
@@ -104,7 +104,7 @@ propedit_cli_parser_c::add_attachment() {
     m_options->add_attachment_command(attachment_target_c::ac_add, m_next_arg, m_attachment);
     m_attachment = attachment_target_c::options_t();
   } catch (...) {
-    mxerror(boost::format(Y("Invalid selector in '%1% %2%'.\n")) % m_current_arg % m_next_arg);
+    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -113,7 +113,7 @@ propedit_cli_parser_c::delete_attachment() {
   try {
     m_options->add_attachment_command(attachment_target_c::ac_delete, m_next_arg, m_attachment);
   } catch (...) {
-    mxerror(boost::format(Y("Invalid selector in '%1% %2%'.\n")) % m_current_arg % m_next_arg);
+    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -123,7 +123,7 @@ propedit_cli_parser_c::replace_attachment() {
     m_options->add_attachment_command(m_current_arg == "--update-attachment" ? attachment_target_c::ac_update : attachment_target_c::ac_replace, m_next_arg, m_attachment);
     m_attachment = attachment_target_c::options_t();
   } catch (...) {
-    mxerror(boost::format(Y("Invalid selector in '%1% %2%'.\n")) % m_current_arg % m_next_arg);
+    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -179,17 +179,16 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
   auto max_name_len = boost::accumulate(table, 0u, [](size_t a, const property_element_c &e) { return std::max(a, e.m_name.length()); });
 
   static boost::regex s_newline_re("\\s*\\n\\s*", boost::regex::perl);
-  boost::format format((boost::format("%%|1$-%1%s| | %%|2$-2s| |") % max_name_len).str());
   std::string indent_string = std::string(max_name_len, ' ') + " |    | ";
 
   mxinfo("\n");
-  mxinfo(boost::format(Y("Elements in the category '%1%' ('--edit %2%'):\n")) % title % edit_spec);
+  mxinfo(fmt::format(Y("Elements in the category '{0}' ('--edit {1}'):\n"), title, edit_spec));
 
   for (auto &property : table) {
-    std::string name        = (format % property.m_name % ebml_type_map[property.m_type]).str();
-    std::string description = property.m_title.get_translated()
-                            + ": "
-                            + boost::regex_replace(property.m_description.get_translated(), s_newline_re, " ",  boost::match_default | boost::match_single_line);
+    auto name        = fmt::format("{0:<{1}} | {2:<2} |", property.m_name, max_name_len, ebml_type_map[property.m_type]);
+    auto description = property.m_title.get_translated()
+                     + ": "
+                     + boost::regex_replace(property.m_description.get_translated(), s_newline_re, " ",  boost::match_default | boost::match_single_line);
     mxinfo(format_paragraph(description, max_name_len + 8, name, indent_string));
   }
 }

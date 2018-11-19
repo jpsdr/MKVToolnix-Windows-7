@@ -41,9 +41,9 @@ chapter_target_c::validate() {
 void
 chapter_target_c::dump_info()
   const {
-  mxinfo(boost::format("  chapter target:\n"
-                       "    file_name: %1%\n")
-         % m_file_name);
+  mxinfo(fmt::format("  chapter target:\n"
+                     "    file_name: {0}\n",
+                     m_file_name));
 }
 
 bool
@@ -66,7 +66,7 @@ chapter_target_c::execute() {
 
   fix_mandatory_elements(m_level1_element);
   if (!m_level1_element->CheckMandatory())
-    mxerror(boost::format(Y("Error parsing the chapters in '%1%': some mandatory elements are missing.\n")) % m_file_name);
+    mxerror(fmt::format(Y("Error parsing the chapters in '{0}': some mandatory elements are missing.\n"), m_file_name));
 
   if (m_analyzer->is_webm())
     mtx::chapters::remove_elements_unsupported_by_webm(*m_level1_element);
