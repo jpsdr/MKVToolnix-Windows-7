@@ -38,8 +38,7 @@ class parser_x: public exception {
 protected:
   std::string m_message;
 public:
-  parser_x(const std::string &message)  : m_message(message)       { }
-  parser_x(const boost::format &message): m_message(message.str()) { }
+  parser_x(const std::string &message) : m_message{message} { }
   virtual ~parser_x() throw() { }
 
   virtual const char *what() const throw() {

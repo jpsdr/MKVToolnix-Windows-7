@@ -30,18 +30,7 @@
 
 // Helper functions in mkvextract.cpp
 void show_element(libebml::EbmlElement *l, int level, const std::string &message);
-inline void
-show_element(libebml::EbmlElement *l,
-             int level,
-             const boost::format &format) {
-  show_element(l, level, format.str());
-}
-
 void show_error(const std::string &error);
-inline void
-show_error(const boost::format &format) {
-  show_error(format.str());
-}
 
 void find_and_verify_track_uids(libmatroska::KaxTracks &tracks, std::vector<track_spec_t> &tspecs);
 void write_cuesheet(std::string file_name, libmatroska::KaxChapters &chapters, libmatroska::KaxTags &tags, int64_t tuid, mm_io_c &out);

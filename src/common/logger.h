@@ -30,9 +30,6 @@ public:
   void log(std::string const &message) {
     log_line(message);
   }
-  void log(boost::format const &message) {
-    log_line(message.str());
-  }
 
 protected:
   virtual std::string format_line(std::string const &message);

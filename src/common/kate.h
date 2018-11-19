@@ -26,8 +26,7 @@ namespace mtx {
     protected:
       std::string m_message;
     public:
-      header_parsing_x(const std::string &message)  : m_message(message)       { }
-      header_parsing_x(const boost::format &message): m_message(message.str()) { }
+      header_parsing_x(const std::string &message) : m_message{message} { }
       virtual ~header_parsing_x() throw() { }
 
       virtual const char *what() const throw() {

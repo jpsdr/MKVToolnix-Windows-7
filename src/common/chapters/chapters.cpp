@@ -56,11 +56,6 @@ chapter_error(const std::string &error) {
   throw parser_x(fmt::format(Y("Simple chapter parser: {0}\n"), error));
 }
 
-inline void
-chapter_error(const boost::format &format) {
-  chapter_error(format.str());
-}
-
 /** \brief Reads the start of a file and checks for OGM style comments.
 
    The first lines are read. OGM style comments are recognized if the first

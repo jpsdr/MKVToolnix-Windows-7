@@ -22,8 +22,7 @@ namespace mtx {
   protected:
     std::string m_format;
   public:
-    locale_string_format_x(const std::string &format)  : m_format(format)       { }
-    locale_string_format_x(const boost::format &format): m_format(format.str()) { }
+    locale_string_format_x(const std::string &format) : m_format{format} { }
     virtual ~locale_string_format_x() throw() { }
 
     virtual const char *what() const throw() {

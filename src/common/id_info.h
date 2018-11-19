@@ -105,12 +105,6 @@ public:
     return *this;
   }
 
-  info_c &
-  add(std::string const &key,
-      boost::format const &value) {
-    return add(key, value.str());
-  }
-
   verbose_info_t const &get() const {
     return m_info;
   }

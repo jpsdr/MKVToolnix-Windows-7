@@ -27,8 +27,7 @@ namespace mtx {
     protected:
       std::string m_message;
     public:
-      vorbis_x(const std::string &message)  : m_message(message)       { }
-      vorbis_x(const boost::format &message): m_message(message.str()) { }
+      vorbis_x(const std::string &message) : m_message{message} { }
       virtual ~vorbis_x() throw() { }
 
       virtual const char *what() const throw() {

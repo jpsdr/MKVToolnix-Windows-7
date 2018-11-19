@@ -30,11 +30,6 @@ to_wide(std::wstring const &source) {
 }
 
 inline std::wstring
-to_wide(boost::wformat const &source) {
-  return source.str();
-}
-
-inline std::wstring
 to_wide(::libebml::UTFstring const &source) {
   return source.c_str();
 }
@@ -45,20 +40,10 @@ to_utfstring(std::wstring const &source) {
 }
 
 inline ::libebml::UTFstring
-to_utfstring(boost::wformat const &source) {
-  return to_utfstring(source.str());
-}
-
-inline ::libebml::UTFstring
 to_utfstring(std::string const &source) {
   auto u = libebml::UTFstring{};
   u.SetUTF8(source);
   return u;
-}
-
-inline ::libebml::UTFstring
-to_utfstring(boost::format const &source) {
-  return to_utfstring(source.str());
 }
 
 std::string to_utf8(const std::wstring &source);
@@ -71,11 +56,6 @@ to_utf8(char const *source) {
 inline std::string
 to_utf8(std::string const &source) {
   return source;
-}
-
-inline std::string
-to_utf8(boost::format const &source) {
-  return source.str();
 }
 
 inline std::string

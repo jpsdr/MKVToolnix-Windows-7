@@ -11,8 +11,7 @@ class ProcessX : public mtx::exception {
 protected:
   std::string m_message;
 public:
-  explicit ProcessX(std::string const &message)  : m_message(message)       { }
-  explicit ProcessX(boost::format const &message): m_message(message.str()) { }
+  explicit ProcessX(std::string const &message) : m_message{message} { }
   virtual ~ProcessX() throw() { }
 
   virtual char const *what() const throw() {

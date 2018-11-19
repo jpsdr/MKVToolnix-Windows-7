@@ -25,12 +25,6 @@ set_tcp_error(const std::string &error) {
   return false;
 }
 
-inline bool
-set_tcp_error(const boost::format &error) {
-  timestamp_parser_error = error.str();
-  return false;
-}
-
 bool
 parse_number_as_rational(std::string const &string,
                          int64_rational_c &value) {

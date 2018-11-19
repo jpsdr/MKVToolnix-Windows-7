@@ -29,9 +29,6 @@ protected:
 public:
   static void send_to_logger(bool enable);
   static void output(std::string const &msg);
-  static void output(boost::format const &msg) {
-    output(msg.str());
-  }
 
   static void hexdump(const void *buffer_to_dump, size_t lenth);
   static void hexdump(memory_c const &buffer_to_dump, boost::optional<std::size_t> max_length = boost::none);

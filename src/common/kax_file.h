@@ -56,7 +56,6 @@ protected:
   virtual std::shared_ptr<libebml::EbmlElement> read_next_level1_element_internal(uint32_t wanted_id = 0);
   virtual std::shared_ptr<libebml::EbmlElement> resync_to_level1_element_internal(uint32_t wanted_id = 0);
 
-  virtual void report(boost::format const &message);
   virtual void report(std::string const &message);
 
 public:

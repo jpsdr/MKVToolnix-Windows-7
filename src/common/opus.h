@@ -31,8 +31,7 @@ class decode_error: public exception {
 protected:
   std::string m_message;
 public:
-  explicit decode_error(std::string const &message)  : m_message(message)       { }
-  explicit decode_error(boost::format const &message): m_message(message.str()) { }
+  explicit decode_error(std::string const &message) : m_message{message} { }
   virtual ~decode_error() throw() { }
 
   virtual char const *what() const throw() {

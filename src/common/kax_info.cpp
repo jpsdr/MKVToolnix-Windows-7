@@ -229,15 +229,6 @@ kax_info_c::show_element(EbmlElement *l,
                        :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()));
 }
 
-void
-kax_info_c::show_element(EbmlElement *l,
-                         int level,
-                         boost::format const &info,
-                         boost::optional<int64_t> position,
-                         boost::optional<int64_t> size) {
-  show_element(l, level, info.str(), position, size);
-}
-
 std::string
 kax_info_c::format_ebml_id_as_hex(uint32_t id) {
   return boost::regex_replace(fmt::format("{0:08x}", id), boost::regex{"^0+", boost::regex::perl}, "");

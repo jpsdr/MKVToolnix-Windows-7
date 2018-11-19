@@ -65,8 +65,7 @@ class exception: public mtx::exception {
 protected:
   std::string m_message;
 public:
-  explicit exception(std::string const &message)  : m_message(message)       { }
-  explicit exception(boost::format const &message): m_message(message.str()) { }
+  explicit exception(std::string const &message) : m_message{message} { }
   virtual ~exception() throw() { }
 
   virtual char const *what() const throw() {

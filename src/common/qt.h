@@ -46,11 +46,6 @@ to_qs(std::wstring const &source) {
 }
 
 inline QString
-to_qs(boost::format const &source) {
-  return QString::fromUtf8(source.str().c_str());
-}
-
-inline QString
 to_qs(::libebml::EbmlString const &s) {
   return to_qs(static_cast<std::string const &>(s));
 }

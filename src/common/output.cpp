@@ -165,11 +165,6 @@ mxinfo(const std::wstring &info) {
   mxinfo(to_utf8(info));
 }
 
-void
-mxinfo(const boost::wformat &info) {
-  mxinfo(to_utf8(info.str()));
-}
-
 static void
 default_mxwarn(unsigned int,
                std::string const &warning) {

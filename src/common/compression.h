@@ -38,8 +38,7 @@ namespace mtx {
   protected:
     std::string m_message;
   public:
-    compression_x(const std::string &message)  : m_message(message)       { }
-    compression_x(const boost::format &message): m_message(message.str()) { }
+    compression_x(const std::string &message) : m_message{message} { }
     virtual ~compression_x() throw() { }
 
     virtual const char *what() const throw() {

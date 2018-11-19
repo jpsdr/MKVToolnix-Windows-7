@@ -31,8 +31,7 @@ class conversion_x: public exception {
 protected:
   std::string m_message;
 public:
-  conversion_x(std::string const &message)  : m_message(message)       { }
-  conversion_x(boost::format const &message): m_message(message.str()) { }
+  conversion_x(std::string const &message) : m_message{message} { }
   virtual ~conversion_x() throw() { }
 
   virtual char const *what() const throw() {

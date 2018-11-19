@@ -49,8 +49,7 @@ namespace mtx {
     protected:
       std::string m_message;
     public:
-      extended_x(const std::string &message)  : m_message(message)       { }
-      extended_x(const boost::format &message): m_message(message.str()) { }
+      extended_x(const std::string &message) : m_message{message} { }
       virtual ~extended_x() throw() { }
 
       virtual const char *what() const throw() {

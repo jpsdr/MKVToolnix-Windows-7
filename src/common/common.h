@@ -45,7 +45,6 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/format.hpp>
 #include <boost/function.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/range.hpp>
