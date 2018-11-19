@@ -46,8 +46,8 @@ operator <<(std::ostream &out,
             flv_header_t const &h) {
   // "Cannot bind packed field to unsigned int &" if "data_offset" is used directly.
   auto local_data_offset = h.data_offset;
-  out << (boost::format("[file version: %1% data offset: %2% video track present: %3% audio track present: %4%]")
-          % static_cast<unsigned int>(h.version) % local_data_offset % h.has_video() % h.has_audio()).str();
+  out << fmt::format("[file version: {0} data offset: {1} video track present: {2} audio track present: {3}]",
+                     static_cast<unsigned int>(h.version), local_data_offset, h.has_video(), h.has_audio());
   return out;
 }
 
@@ -87,8 +87,8 @@ public:
 inline std::ostream &
 operator <<(std::ostream &out,
             flv_tag_c const &t) {
-  out << (boost::format("[prev size: %1% flags: %2% data size: %3% timestamp+ex: %4%/%5% next pos: %6% ok: %7%]")
-          % t.m_previous_tag_size % static_cast<unsigned int>(t.m_flags) % t.m_data_size % t.m_timestamp % t.m_timestamp_extended % t.m_next_position % t.m_ok).str();
+  out << fmt::format("[prev size: {0} flags: {1} data size: {2} timestamp+ex: {3}/{4} next pos: {5} ok: {6}]",
+                     t.m_previous_tag_size, static_cast<unsigned int>(t.m_flags), t.m_data_size, t.m_timestamp, t.m_timestamp_extended, t.m_next_position, t.m_ok);
   return out;
 }
 

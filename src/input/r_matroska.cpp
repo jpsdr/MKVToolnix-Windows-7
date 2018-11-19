@@ -275,7 +275,7 @@ kax_track_t::add_track_tags_to_identification(mtx::id::info_c &info) {
       auto value = mtx::tags::get_simple_value(*simple_tag);
 
       if (!name.empty())
-        info.add((boost::format("tag_%1%") % balg::to_lower_copy(name)).str(), value);
+        info.add(fmt::format("tag_{0}", balg::to_lower_copy(name)), value);
 }
   }
 }
@@ -393,8 +393,8 @@ bool
 kax_reader_c::verify_acm_audio_track(kax_track_t *t) {
   if (!t->private_data || (sizeof(alWAVEFORMATEX) > t->private_data->get_size())) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. "
-                             "Therefore we don't have a format ID to identify the audio codec used.\n")) % t->tnum % MKV_A_ACM);
+      mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. "
+                           "Therefore we don't have a format ID to identify the audio codec used.\n"), t->tnum, MKV_A_ACM));
     return false;
 
   }
@@ -415,8 +415,8 @@ kax_reader_c::verify_acm_audio_track(kax_track_t *t) {
 
   if (static_cast<uint32_t>(t->a_sfreq) != u) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, "
-                             "but WAVEFORMATEX says that there are %3%.\n")) % t->tnum % static_cast<int>(t->a_sfreq) % u);
+      mxwarn(fmt::format(Y("matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, "
+                           "but WAVEFORMATEX says that there are {2}.\n"), t->tnum, static_cast<int>(t->a_sfreq), u));
     if (0.0 == t->a_sfreq)
       t->a_sfreq = static_cast<double>(u);
   }
@@ -424,8 +424,8 @@ kax_reader_c::verify_acm_audio_track(kax_track_t *t) {
   u = get_uint16_le(&wfe->n_channels);
   if (t->a_channels != u) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, "
-                             "but the WAVEFORMATEX says that there are %3%.\n")) % t->tnum % t->a_channels % u);
+      mxwarn(fmt::format(Y("matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, "
+                           "but the WAVEFORMATEX says that there are {2}.\n"), t->tnum, t->a_channels, u));
     if (0 == t->a_channels)
       t->a_channels = u;
   }
@@ -433,8 +433,8 @@ kax_reader_c::verify_acm_audio_track(kax_track_t *t) {
   u = get_uint16_le(&wfe->w_bits_per_sample);
   if (t->a_bps != u) {
     if (verbose && t->codec.is(codec_c::type_e::A_PCM))
-      mxwarn(boost::format(Y("matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, "
-                             "but the WAVEFORMATEX says that there are %3%.\n")) % t->tnum % t->a_bps % u);
+      mxwarn(fmt::format(Y("matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, "
+                           "but the WAVEFORMATEX says that there are {2}.\n"), t->tnum, t->a_bps, u));
     if (0 == t->a_bps)
       t->a_bps = u;
   }
@@ -448,7 +448,7 @@ kax_reader_c::verify_alac_audio_track(kax_track_t *t) {
     return true;
 
   if (verbose)
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % MKV_A_VORBIS);
+    mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"), t->tnum, MKV_A_VORBIS));
 
   return false;
 }
@@ -484,7 +484,7 @@ kax_reader_c::verify_flac_audio_track(kax_track_t *) {
 
 bool
 kax_reader_c::verify_flac_audio_track(kax_track_t *t) {
-  mxwarn(boost::format(Y("matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n")) % t->tnum);
+  mxwarn(fmt::format(Y("matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"), t->tnum));
   return false;
 }
 #endif
@@ -493,7 +493,7 @@ bool
 kax_reader_c::verify_vorbis_audio_track(kax_track_t *t) {
   if (!t->private_data || !unlace_vorbis_private_data(t, t->private_data->get_buffer(), t->private_data->get_size())) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % MKV_A_VORBIS);
+      mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"), t->tnum, MKV_A_VORBIS));
     return false;
   }
 
@@ -514,7 +514,7 @@ bool
 kax_reader_c::verify_opus_audio_track(kax_track_t *t) {
   if (!t->private_data || !t->private_data->get_size()) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % MKV_A_OPUS);
+      mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"), t->tnum, MKV_A_OPUS));
     return false;
   }
 
@@ -612,9 +612,9 @@ bool
 kax_reader_c::verify_mscomp_video_track(kax_track_t *t) {
   if (!t->private_data || (sizeof(alBITMAPINFOHEADER) > t->private_data->get_size())) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. "
-                             "Therefore we don't have a FourCC to identify the video codec used.\n"))
-             % t->tnum % MKV_V_MSCOMP);
+      mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. "
+                           "Therefore we don't have a FourCC to identify the video codec used.\n"),
+                         t->tnum, MKV_V_MSCOMP));
     return false;
   }
 
@@ -624,8 +624,8 @@ kax_reader_c::verify_mscomp_video_track(kax_track_t *t) {
 
   if (t->v_width != u) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"))
-             % t->tnum % t->v_width % u);
+      mxwarn(fmt::format(Y("matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"),
+                         t->tnum, t->v_width, u));
     if (0 == t->v_width)
       t->v_width = u;
   }
@@ -633,8 +633,8 @@ kax_reader_c::verify_mscomp_video_track(kax_track_t *t) {
   u = get_uint32_le(&bih->bi_height);
   if (t->v_height != u) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"))
-             % t->tnum % t->v_height % u);
+      mxwarn(fmt::format(Y("matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"),
+                         t->tnum, t->v_height, u));
     if (0 == t->v_height)
       t->v_height = u;
   }
@@ -652,7 +652,7 @@ kax_reader_c::verify_theora_video_track(kax_track_t *t) {
     return true;
 
   if (verbose)
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n")) % t->tnum % MKV_V_THEORA);
+    mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"), t->tnum, MKV_V_THEORA));
 
   return false;
 }
@@ -678,13 +678,13 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 
   if (0 == t->v_width) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: The width for track %1% was not set.\n")) % t->tnum);
+      mxwarn(fmt::format(Y("matroska_reader: The width for track {0} was not set.\n"), t->tnum));
     return;
   }
 
   if (0 == t->v_height) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: The height for track %1% was not set.\n")) % t->tnum);
+      mxwarn(fmt::format(Y("matroska_reader: The height for track {0} was not set.\n"), t->tnum));
     return;
   }
 
@@ -697,7 +697,7 @@ kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
   if (   !t->private_data
       || (t->private_data->get_size() < 4)
       || (t->private_data->get_size() > 5)) {
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % t->codec_id);
+    mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"), t->tnum, t->codec_id));
     return false;
   }
 
@@ -707,7 +707,7 @@ kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
 bool
 kax_reader_c::verify_hdmv_textst_subtitle_track(kax_track_t *t) {
   if (!t->private_data || (t->private_data->get_size() < 4)) {
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->tnum % t->codec_id);
+    mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"), t->tnum, t->codec_id));
     return false;
   }
 
@@ -728,7 +728,7 @@ kax_reader_c::verify_hdmv_textst_subtitle_track(kax_track_t *t) {
   auto style_segment_size  = get_uint16_be(&buf[style_segment_start + 1]);
 
   if (t->private_data->get_size() < static_cast<unsigned int>(3 + style_segment_size + (old_style ? 1 + 2 : 0))) {
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
+    mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"), t->codec_id));
     return false;
   }
 
@@ -746,7 +746,7 @@ kax_reader_c::verify_kate_subtitle_track(kax_track_t *t) {
     return true;
 
   if (verbose)
-    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n")) % t->tnum % t->codec_id);
+    mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"), t->tnum, t->codec_id));
 
   return false;
 }
@@ -758,9 +758,9 @@ kax_reader_c::verify_vobsub_subtitle_track(kax_track_t *t) {
 
   if (!g_identifying && verbose)
     mxwarn_fn(m_ti.m_fname,
-              boost::format("%1% %2%\n")
-              % (boost::format(Y("The VobSub subtitle track %1% does not contain its index in the CodecPrivate element.")) % t->tnum)
-              % Y("A default index and with it default settings for the width, height and color palette will be used instead."));
+              fmt::format("{0} {1}\n",
+                          fmt::format(Y("The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."), t->tnum),
+                          Y("A default index and with it default settings for the width, height and color palette will be used instead.")));
 
   t->private_data = memory_c::clone(mtx::vobsub::create_default_index(720, 576, {}));
 
@@ -793,7 +793,7 @@ kax_reader_c::verify_button_track(kax_track_t *t) {
 
   if (!t->codec.is(codec_c::type_e::B_VOBBTN)) {
     if (verbose)
-      mxwarn(boost::format(Y("matroska_reader: The CodecID '%1%' for track %2% is unknown.\n")) % t->codec_id % t->tnum);
+      mxwarn(fmt::format(Y("matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"), t->codec_id, t->tnum));
     return;
   }
 
@@ -826,12 +826,12 @@ kax_reader_c::verify_tracks() {
 
       default:                  // unknown track type!? error in demuxer...
         if (verbose)
-          mxwarn(boost::format(Y("matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n")) % t->tnum % t->type);
+          mxwarn(fmt::format(Y("matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"), t->tnum, t->type));
         continue;
     }
 
     if (t->ok && (1 < verbose))
-      mxinfo(boost::format(Y("matroska_reader: Track %1% seems to be ok.\n")) % t->tnum);
+      mxinfo(fmt::format(Y("matroska_reader: Track {0} seems to be ok.\n"), t->tnum));
   }
 }
 
@@ -1285,8 +1285,8 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     auto ktuid = FindChild<KaxTrackUID>(ktentry);
     if (!ktuid)
       mxwarn_fn(m_ti.m_fname,
-                boost::format(Y("Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"))
-                % track->tnum);
+                fmt::format(Y("Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"),
+                            track->tnum));
     else
       track->track_uid = ktuid->GetValue();
 
@@ -1594,9 +1594,9 @@ kax_reader_c::read_headers_internal() {
     read_deferred_level1_elements(static_cast<KaxSegment &>(*l0));
 
   } catch (...) {
-    mxwarn(boost::format("%1% %2% %3%\n")
-           % (boost::format(Y("%1%: an unknown exception occurred.")) % "kax_reader_c::read_headers_internal()")
-           % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
+    mxwarn(fmt::format("{0} {1} {2}\n",
+                       fmt::format(Y("{0}: an unknown exception occurred."), "kax_reader_c::read_headers_internal()"),
+                       Y("This usually indicates a damaged file structure."), Y("The file will not be processed further.")));
   }
 
   auto cluster_pos = cluster ? cluster->GetElementPosition() : m_in->get_size();
@@ -1625,7 +1625,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   passthrough_packetizer_c *ptzr;
 
-  mxinfo_tid(m_ti.m_fname, t->tnum, boost::format(Y("Using the generic output module for track type '%1%'.\n")) % MAP_TRACK_TYPE_STRING(t->type));
+  mxinfo_tid(m_ti.m_fname, t->tnum, fmt::format(Y("Using the generic output module for track type '{0}'.\n"), MAP_TRACK_TYPE_STRING(t->type)));
 
   ptzr                      = new passthrough_packetizer_c(this, nti);
   t->ptzr                   = add_packetizer(ptzr);
@@ -1687,7 +1687,7 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
     PTZR(t->ptzr)->set_track_enabled_flag(t->enabled_track);
 
   if ((0 != t->track_uid) && !PTZR(t->ptzr)->set_uid(t->track_uid))
-    mxwarn(boost::format(Y("matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n")) % t->track_uid);
+    mxwarn(fmt::format(Y("matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"), t->track_uid));
 }
 
 void
@@ -1774,7 +1774,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
     } else {
       int id = 0, profile = 0;
       if (!mtx::aac::parse_codec_id(t->codec_id, id, profile))
-        mxerror_tid(m_ti.m_fname, t->tnum, boost::format(Y("Malformed codec id '%1%'.\n")) % t->codec_id);
+        mxerror_tid(m_ti.m_fname, t->tnum, fmt::format(Y("Malformed codec id '{0}'.\n"), t->codec_id));
       audio_config.profile = profile;
     }
 
@@ -1892,11 +1892,11 @@ kax_reader_c::create_opus_audio_packetizer(kax_track_t *t,
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 
   if (!m_opus_experimental_warning_shown && (t->codec_id == std::string{MKV_A_OPUS} + "/EXPERIMENTAL")) {
-    mxwarn(boost::format(Y("'%1%': You're copying an Opus track that was written in experimental mode. "
-                           "The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. "
-                           "This means that a decoder might output a few samples more than originally intended. "
-                           "You should re-multiplex from the original Opus file if possible.\n"))
-           % m_ti.m_fname);
+    mxwarn(fmt::format(Y("'{0}': You're copying an Opus track that was written in experimental mode. "
+                         "The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. "
+                         "This means that a decoder might output a few samples more than originally intended. "
+                         "You should re-multiplex from the original Opus file if possible.\n"),
+                       m_ti.m_fname));
     m_opus_experimental_warning_shown = true;
   }
 }
@@ -2296,9 +2296,9 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
     }
 
   } catch (...) {
-    mxwarn(boost::format("%1% %2% %3%\n")
-           % (boost::format(Y("%1%: an unknown exception occurred.")) % "kax_reader_c::read()")
-           % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
+    mxwarn(fmt::format("{0} {1} {2}\n",
+                       fmt::format(Y("{0}: an unknown exception occurred."), "kax_reader_c::read()"),
+                       Y("This usually indicates a damaged file structure."), Y("The file will not be processed further.")));
     return finish_file();
   }
 
@@ -2328,8 +2328,8 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
 
   if (!block_track) {
     mxwarn_fn(m_ti.m_fname,
-              boost::format(Y("A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. "
-                              "The block will be skipped.\n")) % format_timestamp(block_timestamp) % block_simple->TrackNum());
+              fmt::format(Y("A block was found at timestamp {0} for track number {1}. However, no headers where found for that track number. "
+                            "The block will be skipped.\n"), format_timestamp(block_timestamp), block_simple->TrackNum()));
     return;
   }
 
@@ -2439,8 +2439,8 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
   if (!block_track) {
     mxwarn_fn(m_ti.m_fname,
-              boost::format(Y("A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. "
-                              "The block will be skipped.\n")) % format_timestamp(block_timestamp) % block->TrackNum());
+              fmt::format(Y("A block was found at timestamp {0} for track number {1}. However, no headers where found for that track number. "
+                            "The block will be skipped.\n"), format_timestamp(block_timestamp), block->TrackNum()));
     return;
   }
 
@@ -2634,7 +2634,7 @@ kax_reader_c::determine_minimum_timestamps() {
   mxdebug("Minimum timestamps by track number:\n");
 
   for (auto const &track_number : track_numbers)
-    mxdebug(boost::format("  %1%: %2%\n") % track_number % m_minimum_timestamps_by_track_number[track_number]);
+    mxdebug(fmt::format("  {0}: {1}\n", track_number, m_minimum_timestamps_by_track_number[track_number]));
 }
 
 void
@@ -2655,7 +2655,7 @@ kax_reader_c::determine_global_timestamp_offset_to_apply() {
   if (use_value)
     m_global_timestamp_offset = global_minimum_timestamp.to_ns();
 
-  mxdebug_if(m_debug_minimum_timestamp, boost::format("Global minimum timestamp: %1%; %2%using it\n") % global_minimum_timestamp % (use_value ? "" : "not "));
+  mxdebug_if(m_debug_minimum_timestamp, fmt::format("Global minimum timestamp: {0}; {1}using it\n", global_minimum_timestamp, use_value ? "" : "not "));
 }
 
 void
@@ -2707,16 +2707,16 @@ kax_reader_c::identify() {
       info.add(mtx::id::codec_private_data, to_hex(track->private_data->get_buffer(), track->private_data->get_size(), true));
 
     if ((0 != track->v_width) && (0 != track->v_height))
-      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
+      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", track->v_width, track->v_height));
 
     if ((0 != track->v_dwidth) && (0 != track->v_dheight))
-      info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % track->v_dwidth % track->v_dheight);
+      info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", track->v_dwidth, track->v_dheight));
 
     if (track->v_dunit)
       info.set(mtx::id::display_unit, *track->v_dunit);
 
     if ((0 != track->v_pcleft) || (0 != track->v_pctop) || (0 != track->v_pcright) || (0 != track->v_pcbottom))
-      info.add(mtx::id::cropping, boost::format("%1%,%2%,%3%,%4%") % track->v_pcleft % track->v_pctop % track->v_pcright % track->v_pcbottom);
+      info.add(mtx::id::cropping, fmt::format("{0},{1},{2},{3}", track->v_pcleft, track->v_pctop, track->v_pcright, track->v_pcbottom));
 
     if (track->codec.is(codec_c::type_e::V_MPEG4_P10))
       info.add(mtx::id::packetizer, track->ms_compat ? mtx::id::mpeg4_p10_es_video : mtx::id::mpeg4_p10_video);
@@ -2750,7 +2750,7 @@ kax_reader_c::identify() {
         codec_info = fourcc_c{track->v_fourcc}.description();
 
       } else
-        codec_info = (boost::format(Y("unknown, format tag 0x%|1$04x|")) % track->a_formattag).str();
+        codec_info = fmt::format(Y("unknown, format tag 0x{0:04x}"), track->a_formattag);
 
     } else
       codec_info = track->codec_id;

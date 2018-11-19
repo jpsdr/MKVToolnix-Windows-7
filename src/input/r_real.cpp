@@ -216,7 +216,7 @@ real_reader_c::parse_headers() {
         p++;
 
         if (4 != slen) {
-          mxwarn(boost::format(Y("real_reader: Couldn't find RealAudio FourCC for id %1% (description length: %2%) Skipping track.\n")) % track->id % slen);
+          mxwarn(fmt::format(Y("real_reader: Couldn't find RealAudio FourCC for id {0} (description length: {1}) Skipping track.\n"), track->id, slen));
           ok = false;
 
         } else {
@@ -240,12 +240,12 @@ real_reader_c::parse_headers() {
           dmx->extra_data = memory_c::clone(reinterpret_cast<unsigned char *>(dmx->ra5p) + 4 + sizeof(real_audio_v5_props_t), ts_size - 4 - sizeof(real_audio_v5_props_t));
 
       } else {
-        mxwarn(boost::format(Y("real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID %1% uses version %2% and will be skipped.\n"))
-               % track->id % version);
+        mxwarn(fmt::format(Y("real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"),
+                           track->id, version));
         ok = false;
       }
 
-      mxverb(2, boost::format("real_reader: extra_data_size: %1%\n") % dmx->extra_data->get_size());
+      mxverb(2, fmt::format("real_reader: extra_data_size: {0}\n", dmx->extra_data->get_size()));
 
       if (ok) {
         dmx->private_data = memory_c::clone(ts_data, ts_size);
@@ -258,7 +258,7 @@ real_reader_c::parse_headers() {
 void
 real_reader_c::create_video_packetizer(real_demuxer_cptr dmx) {
   m_ti.m_private_data  = dmx->private_data;
-  std::string codec_id = (boost::format("V_REAL/%1%") % dmx->fourcc).str();
+  std::string codec_id = fmt::format("V_REAL/{0}", dmx->fourcc);
   dmx->ptzr            = add_packetizer(new generic_video_packetizer_c(this, m_ti, codec_id.c_str(), 0.0, dmx->width, dmx->height));
 
   if (strcmp(dmx->fourcc, "RV40"))
@@ -283,7 +283,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
   if ((dmx->extra_data) && (4 < dmx->extra_data->get_size())) {
     const unsigned char *extra_data = dmx->extra_data->get_buffer();
     uint32_t extra_len              = get_uint32_be(extra_data);
-    mxverb(2, boost::format("real_reader: extra_len: %1%\n") % extra_len);
+    mxverb(2, fmt::format("real_reader: extra_len: {0}\n", extra_len));
 
     if ((4 + extra_len) <= dmx->extra_data->get_size()) {
       auto parsed_audio_config = mtx::aac::parse_audio_specific_config(&extra_data[4 + 1], extra_len - 1);
@@ -293,8 +293,8 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
       audio_config = *parsed_audio_config;
 
       mxverb(2,
-             boost::format("real_reader: 1. profile: %1%, channels: %2%, sample_rate: %3%, output_sample_rate: %4%, sbr: %5%\n")
-             % audio_config.profile % audio_config.channels % audio_config.sample_rate % audio_config.output_sample_rate % audio_config.sbr);
+             fmt::format("real_reader: 1. profile: {0}, channels: {1}, sample_rate: {2}, output_sample_rate: {3}, sbr: {4}\n",
+                         audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr));
 
       if (audio_config.sbr)
         audio_config.profile = AAC_PROFILE_SBR;
@@ -331,8 +331,8 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
     audio_config.profile = detected_profile;
 
   mxverb(2,
-         boost::format("real_reader: 2. profile: %1%, channels: %2%, sample_rate: %3%, output_sample_rate: %4%, sbr: %5%\n")
-         % audio_config.profile % audio_config.channels % audio_config.sample_rate % audio_config.output_sample_rate % audio_config.sbr);
+         fmt::format("real_reader: 2. profile: {0}, channels: {1}, sample_rate: {2}, output_sample_rate: {3}, sbr: {4}\n",
+                     audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr));
 
   dmx->is_aac = true;
   dmx->ptzr   = add_packetizer(new aac_packetizer_c(this, m_ti, audio_config, aac_packetizer_c::headerless));
@@ -429,7 +429,7 @@ real_reader_c::read(generic_packetizer_c *,
   int size = rmff_get_next_frame_size(file);
   if (0 >= size) {
     if (file->num_packets_read < file->num_packets_in_chunk)
-      mxwarn_fn(m_ti.m_fname, boost::format(Y("File contains fewer frames than expected or is corrupt after frame %1%.\n")) % file->num_packets_read);
+      mxwarn_fn(m_ti.m_fname, fmt::format(Y("File contains fewer frames than expected or is corrupt after frame {0}.\n"), file->num_packets_read));
     return finish();
   }
 
@@ -438,7 +438,7 @@ real_reader_c::read(generic_packetizer_c *,
 
   if (!frame) {
     if (file->num_packets_read < file->num_packets_in_chunk)
-      mxwarn_fn(m_ti.m_fname, boost::format(Y("File contains fewer frames than expected or is corrupt after frame %1%.\n")) % file->num_packets_read);
+      mxwarn_fn(m_ti.m_fname, fmt::format(Y("File contains fewer frames than expected or is corrupt after frame {0}.\n"), file->num_packets_read));
     return finish();
   }
 
@@ -495,7 +495,7 @@ real_reader_c::queue_one_audio_frame(real_demuxer_cptr dmx,
 
   dmx->last_timestamp = timestamp;
 
-  mxverb_tid(2, m_ti.m_fname, dmx->track->id, boost::format("enqueueing one length %1% timestamp %2% flags 0x%|3$08x|\n") % mem->get_size() % timestamp % flags);
+  mxverb_tid(2, m_ti.m_fname, dmx->track->id, fmt::format("enqueueing one length {0} timestamp {1} flags 0x{2:08x}\n", mem->get_size(), timestamp, flags));
 }
 
 void
@@ -528,8 +528,8 @@ real_reader_c::deliver_audio_frames(real_demuxer_cptr dmx,
   for (i = 0; i < dmx->segments.size(); i++) {
     rv_segment_cptr segment = dmx->segments[i];
     mxverb_tid(2, m_ti.m_fname, dmx->track->id,
-               boost::format("delivering audio length %1% timestamp %2% flags 0x%|3$08x| duration %4%\n")
-               % segment->data->get_size() % dmx->last_timestamp % segment->flags % duration);
+               fmt::format("delivering audio length {0} timestamp {1} flags 0x{2:08x} duration {3}\n",
+                           segment->data->get_size(), dmx->last_timestamp, segment->flags, duration));
 
     PTZR(dmx->ptzr)->process(new packet_t(segment->data, dmx->last_timestamp, duration,
                                           (segment->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? -1 : dmx->ref_timestamp));
@@ -547,14 +547,14 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
   unsigned char *chunk = mem.get_buffer();
   int length           = mem.get_size();
   if (2 > length) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, boost::format(Y("Short AAC audio packet (length: %1% < 2)\n")) % length);
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Short AAC audio packet (length: {0} < 2)\n"), length));
     return;
   }
 
   int num_sub_packets = chunk[1] >> 4;
-  mxverb(2, boost::format("real_reader: num_sub_packets = %1%\n") % num_sub_packets);
+  mxverb(2, fmt::format("real_reader: num_sub_packets = {0}\n", num_sub_packets));
   if ((2 + num_sub_packets * 2) > length) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, boost::format(Y("Short AAC audio packet (length: %1% < %2%)\n")) % length % (2 + num_sub_packets * 2));
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Short AAC audio packet (length: {0} < {1})\n"), length, 2 + num_sub_packets * 2));
     return;
   }
 
@@ -563,11 +563,11 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
     int sub_length  = get_uint16_be(&chunk[2 + i * 2]);
     len_check      += sub_length;
 
-    mxverb(2, boost::format("real_reader: %1%: length %2%\n") % i % sub_length);
+    mxverb(2, fmt::format("real_reader: {0}: length {1}\n", i, sub_length));
   }
 
   if (len_check != length) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, boost::format(Y("Inconsistent AAC audio packet (length: %1% != %2%)\n")) % length % len_check);
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Inconsistent AAC audio packet (length: {0} != {1})\n"), length, len_check));
     return;
   }
 
@@ -592,7 +592,7 @@ real_reader_c::identify() {
     info.set(mtx::id::number, demuxer->track->id);
 
     if (RMFF_TRACK_TYPE_VIDEO == demuxer->track->type)
-      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % demuxer->width % demuxer->height);
+      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", demuxer->width, demuxer->height));
 
     else if (RMFF_TRACK_TYPE_AUDIO == demuxer->track->type) {
       info.add(mtx::id::audio_channels,           demuxer->channels);
@@ -609,7 +609,7 @@ real_reader_c::assemble_video_packet(real_demuxer_cptr dmx,
                                      rmff_frame_t *frame) {
   int result = rmff_assemble_packed_video_frame(dmx->track, frame);
   if (0 > result) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, boost::format(Y("Video packet assembly failed. Error code: %1% (%2%)\n")) % rmff_last_error % rmff_last_error_msg);
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Video packet assembly failed. Error code: {0} ({1})\n"), rmff_last_error, rmff_last_error_msg));
     return;
   }
 

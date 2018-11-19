@@ -248,7 +248,7 @@ void M2VParser::UpdateFrame(MPEGFrame* frame){
 int32_t M2VParser::OrderFrame(MPEGFrame* frame){
   MPEGFrame *p = frame;
 
-  // mxinfo(boost::format("picStr %1% frame type %2% qt tc %3%\n") % p->timestamp % static_cast<int>(p->pictureStructure) % p->frameType);
+  // mxinfo(fmt::format("picStr {0} frame type {1} qt tc {2}\n", p->timestamp, static_cast<int>(p->pictureStructure), p->frameType));
 
   if (waitSecondField && (p->pictureStructure == MPEG2_PICTURE_TYPE_FRAME)){
     auto error = Y("Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n");
@@ -270,7 +270,7 @@ int32_t M2VParser::OrderFrame(MPEGFrame* frame){
 
 void
 M2VParser::TimestampWaitingFrames() {
-  // mxinfo(boost::format("  flushing %1%\n") % waitQueue.size());
+  // mxinfo(fmt::format("  flushing {0}\n", waitQueue.size()));
 
   for (int idx = 0, numFrames = waitQueue.size(); idx < numFrames; ++idx)
     waitQueue[idx]->decodingOrder = idx;

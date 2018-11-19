@@ -32,7 +32,7 @@ timestamp_factory_c::create(std::string const &file_name,
   try {
     in = std::make_shared<mm_text_io_c>(std::make_shared<mm_file_io_c>(file_name));
   } catch(...) {
-    mxerror(boost::format(Y("The timestamp file '%1%' could not be opened for reading.\n")) % file_name);
+    mxerror(fmt::format(Y("The timestamp file '{0}' could not be opened for reading.\n"), file_name));
   }
 
   std::string line;
@@ -49,8 +49,8 @@ timestamp_factory_c::create(std::string const &file_name,
   }
 
   if (!ok)
-    mxerror(boost::format(Y("The timestamp file '%1%' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"))
-            % file_name);
+    mxerror(fmt::format(Y("The timestamp file '{0}' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"),
+                        file_name));
 
   timestamp_factory_c *factory = nullptr; // avoid gcc warning
   if (1 == version)
@@ -63,7 +63,7 @@ timestamp_factory_c::create(std::string const &file_name,
     factory = new timestamp_factory_v3_c(file_name, source_name, tid);
 
   else
-    mxerror(boost::format(Y("The timestamp file '%1%' contains an unsupported/unrecognized format (version %2%).\n")) % file_name % version);
+    mxerror(fmt::format(Y("The timestamp file '{0}' contains an unsupported/unrecognized format (version {1}).\n"), file_name, version));
 
   factory->parse(*in);
 
@@ -86,7 +86,7 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
   int line_no = 1;
   do {
     if (!in.getline2(line))
-      mxerror(boost::format(Y("The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n")) % m_file_name);
+      mxerror(fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"), m_file_name));
     line_no++;
     strip(line);
     if (!line.empty() && ('#' != line[0]))
@@ -94,13 +94,13 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
   } while (true);
 
   if (!balg::istarts_with(line, "assume "))
-    mxerror(boost::format(Y("The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n")) % m_file_name);
+    mxerror(fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"), m_file_name));
 
   line.erase(0, 6);
   strip(line);
 
   if (!parse_number(line.c_str(), m_default_fps))
-    mxerror(boost::format(Y("The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n")) % m_file_name);
+    mxerror(fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"), m_file_name));
 
   while (in.getline2(line)) {
     line_no++;
@@ -113,20 +113,20 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
         || !parse_number(parts[0], t.start_frame)
         || !parse_number(parts[1], t.end_frame)
         || !parse_number(parts[2], t.fps)) {
-      mxwarn(boost::format(Y("Line %1% of the timestamp file '%2%' could not be parsed.\n")) % line_no % m_file_name);
+      mxwarn(fmt::format(Y("Line {0} of the timestamp file '{1}' could not be parsed.\n"), line_no, m_file_name));
       continue;
     }
 
     if ((t.fps <= 0) || (t.end_frame < t.start_frame)) {
-      mxwarn(boost::format(Y("Line %1% of the timestamp file '%2%' contains inconsistent data (e.g. the start frame number is bigger than the end frame "
-                             "number, or some values are smaller than zero).\n")) % line_no % m_file_name);
+      mxwarn(fmt::format(Y("Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the start frame number is bigger than the end frame "
+                           "number, or some values are smaller than zero).\n"), line_no, m_file_name));
       continue;
     }
 
     m_ranges.push_back(t);
   }
 
-  mxdebug_if(m_debug, boost::format("ext_timestamps: Version 1, default fps %1%, %2% entries.\n") % m_default_fps % m_ranges.size());
+  mxdebug_if(m_debug, fmt::format("ext_timestamps: Version 1, default fps {0}, {1} entries.\n", m_default_fps, m_ranges.size()));
 
   if (m_ranges.size() == 0)
     t.start_frame = 0;
@@ -168,7 +168,7 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
     iit->base_timestamp = pit->base_timestamp + ((double)pit->end_frame - (double)pit->start_frame + 1) * 1000000000.0 / pit->fps;
 
   for (iit = m_ranges.begin(); iit < m_ranges.end(); iit++)
-    mxdebug_if(m_debug, boost::format("ranges: entry %1% -> %2% at %3% with %4%\n") % iit->start_frame % iit->end_frame % iit->fps % iit->base_timestamp);
+    mxdebug_if(m_debug, fmt::format("ranges: entry {0} -> {1} at {2} with {3}\n", iit->start_frame, iit->end_frame, iit->fps, iit->base_timestamp));
 }
 
 bool
@@ -181,7 +181,7 @@ timestamp_factory_v1_c::get_next(packet_cptr &packet) {
   if ((m_frameno > m_ranges[m_current_range].end_frame) && (m_current_range < (m_ranges.size() - 1)))
     m_current_range++;
 
-  mxdebug_if(m_debug, boost::format("ext_timestamps v1: tc %1% dur %2% for %3%\n") % packet->assigned_timestamp % packet->duration % (m_frameno - 1));
+  mxdebug_if(m_debug, fmt::format("ext_timestamps v1: tc {0} dur {1} for {2}\n", packet->assigned_timestamp, packet->duration, m_frameno - 1));
 
   return false;
 }
@@ -212,18 +212,18 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
 
     double timestamp;
     if (!parse_number(line.c_str(), timestamp))
-      mxerror(boost::format(Y("The line %1% of the timestamp file '%2%' does not contain a valid floating point number.\n")) % line_no % m_file_name);
+      mxerror(fmt::format(Y("The line {0} of the timestamp file '{1}' does not contain a valid floating point number.\n"), line_no, m_file_name));
 
     if ((2 == m_version) && (timestamp < previous_timestamp))
-      mxerror(boost::format(Y("The timestamp v2 file '%1%' contains timestamps that are not ordered. "
-                              "Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary "
-                              "if the track to which the timestamp file was applied contained B frames. "
-                              "Starting with v1.5.1 mkvmerge now handles this correctly, and the timestamps in the timestamp file must be ordered normally. "
-                              "For example, the frame sequence 'IPBBP...' at 25 FPS requires a timestamp file with "
-                              "the first timestamps being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n\n"
-                              "If you really have to specify non-sorted timestamps then use the timestamp format v4. "
-                              "It is identical to format v2 but allows non-sorted timestamps.\n"))
-              % in.get_file_name());
+      mxerror(fmt::format(Y("The timestamp v2 file '{0}' contains timestamps that are not ordered. "
+                            "Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary "
+                            "if the track to which the timestamp file was applied contained B frames. "
+                            "Starting with v1.5.1 mkvmerge now handles this correctly, and the timestamps in the timestamp file must be ordered normally. "
+                            "For example, the frame sequence 'IPBBP...' at 25 FPS requires a timestamp file with "
+                            "the first timestamps being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n\n"
+                            "If you really have to specify non-sorted timestamps then use the timestamp format v4. "
+                            "It is identical to format v2 but allows non-sorted timestamps.\n"),
+                          in.get_file_name()));
 
     previous_timestamp = timestamp;
     m_timestamps.push_back((int64_t)(timestamp * 1000000));
@@ -239,7 +239,7 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
   }
 
   if (m_timestamps.empty())
-    mxerror(boost::format(Y("The timestamp file '%1%' does not contain any valid entry.\n")) % m_file_name);
+    mxerror(fmt::format(Y("The timestamp file '{0}' does not contain any valid entry.\n"), m_file_name));
 
   if (m_debug) {
     mxdebug("Absolute probablities with maximum in separate line:\n");
@@ -251,11 +251,11 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
   for (auto entry : dur_map) {
     if ((0 > dur_sum) || (dur_map[dur_sum] < entry.second))
       dur_sum = entry.first;
-    mxdebug_if(m_debug, boost::format("%|1$ 9lld| | %|2$ 9lld|\n") % entry.first % entry.second);
+    mxdebug_if(m_debug, fmt::format("{0: 9} | {1: 9}\n", entry.first, entry.second));
   }
 
   mxdebug_if(m_debug, "Max-------+---------------------\n");
-  mxdebug_if(m_debug, boost::format("%|1$ 9lld| | %|2$ 9lld|\n") % dur_sum % dur_map[dur_sum]);
+  mxdebug_if(m_debug, fmt::format("{0: 9} | {1: 9}\n", dur_sum, dur_map[dur_sum]));
 
   if (0 < dur_sum)
     m_default_duration = dur_sum;
@@ -267,9 +267,9 @@ bool
 timestamp_factory_v2_c::get_next(packet_cptr &packet) {
   if ((static_cast<size_t>(m_frameno) >= m_timestamps.size()) && !m_warning_printed) {
     mxwarn_tid(m_source_name, m_tid,
-               boost::format(Y("The number of external timestamps %1% is smaller than the number of frames in this track. "
-                               "The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"))
-               % m_timestamps.size());
+               fmt::format(Y("The number of external timestamps {0} is smaller than the number of frames in this track. "
+                             "The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"),
+                           m_timestamps.size()));
     m_warning_printed = true;
 
     if (m_timestamps.empty()) {
@@ -300,7 +300,7 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
   timestamp_duration_c t;
   std::vector<timestamp_duration_c>::iterator iit;
 
-  std::string err_msg_assume = (boost::format(Y("The timestamp file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n")) % m_file_name).str();
+  std::string err_msg_assume = fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"), m_file_name);
 
   int line_no = 1;
   do {
@@ -335,7 +335,7 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
       t.fps    = m_default_fps;
 
       if (!parse_number(line.c_str(), dur))
-        mxerror(boost::format(Y("The timestamp file '%1%' does not contain a valid 'Gap' line with the duration of the gap.\n")) % m_file_name);
+        mxerror(fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Gap' line with the duration of the gap.\n"), m_file_name));
       t.duration = (int64_t)(1000000000.0 * dur);
 
     } else {
@@ -346,25 +346,25 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
         t.fps = m_default_fps;
 
       else if ((2 != parts.size()) || !parse_number(parts[1], t.fps)) {
-        mxwarn(boost::format(Y("Line %1% of the timestamp file '%2%' could not be parsed.\n")) % line_no % m_file_name);
+        mxwarn(fmt::format(Y("Line {0} of the timestamp file '{1}' could not be parsed.\n"), line_no, m_file_name));
         continue;
       }
       t.duration = (int64_t)(1000000000.0 * dur);
     }
 
     if ((t.fps < 0) || (t.duration <= 0)) {
-      mxwarn(boost::format(Y("Line %1% of the timestamp file '%2%' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"))
-             % line_no % m_file_name);
+      mxwarn(fmt::format(Y("Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"),
+                         line_no, m_file_name));
       continue;
     }
 
     m_durations.push_back(t);
   }
 
-  mxdebug_if(m_debug, boost::format("ext_timestamps: Version 3, default fps %1%, %2% entries.\n") % m_default_fps % m_durations.size());
+  mxdebug_if(m_debug, fmt::format("ext_timestamps: Version 3, default fps {0}, {1} entries.\n", m_default_fps, m_durations.size()));
 
   if (m_durations.size() == 0)
-    mxwarn(boost::format(Y("The timestamp file '%1%' does not contain any valid entry.\n")) % m_file_name);
+    mxwarn(fmt::format(Y("The timestamp file '{0}' does not contain any valid entry.\n"), m_file_name));
 
   t.duration = 0xfffffffffffffffll;
   t.is_gap   = false;
@@ -372,7 +372,7 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
   m_durations.push_back(t);
 
   for (iit = m_durations.begin(); iit < m_durations.end(); iit++)
-    mxdebug_if(m_debug, boost::format("durations:%1% entry for %2% with %3% FPS\n") % (iit->is_gap ? " gap" : "") % iit->duration % iit->fps);
+    mxdebug_if(m_debug, fmt::format("durations:{0} entry for {1} with {2} FPS\n", iit->is_gap ? " gap" : "", iit->duration, iit->fps));
 }
 
 bool
@@ -405,7 +405,7 @@ timestamp_factory_v3_c::get_next(packet_cptr &packet) {
     m_current_duration++;
   }
 
-  mxdebug_if(m_debug, boost::format("ext_timestamps v3: tc %1% dur %2%\n") % packet->assigned_timestamp % packet->duration);
+  mxdebug_if(m_debug, fmt::format("ext_timestamps v3: tc {0} dur {1}\n", packet->assigned_timestamp, packet->duration));
 
   return result;
 }

@@ -119,8 +119,8 @@ vorbis_packetizer_c::process(packet_cptr packet) {
   m_previous_samples_sum += samples_here;
 
   mxverb(2,
-         boost::format("Vorbis: samples_here at %1% (orig %2% expected %3%): %4% (m_previous_samples_sum: %5%)\n")
-         % chosen_timestamp % packet->timestamp % expected_timestamp % samples_here % m_previous_samples_sum);
+         fmt::format("Vorbis: samples_here at {0} (orig {1} expected {2}): {3} (m_previous_samples_sum: {4})\n",
+                     chosen_timestamp, packet->timestamp, expected_timestamp, samples_here, m_previous_samples_sum));
   packet->timestamp = chosen_timestamp;
   add_packet(packet);
 

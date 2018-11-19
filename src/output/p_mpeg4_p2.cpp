@@ -67,15 +67,15 @@ mpeg4_p2_video_packetizer_c::~mpeg4_p2_video_packetizer_c() {
   if (!debugging_c::requested("mpeg4_p2_statistics"))
     return;
 
-  mxinfo(boost::format("mpeg4_p2_video_packetizer_c statistics:\n"
-                       "  # I frames:            %1%\n"
-                       "  # P frames:            %2%\n"
-                       "  # B frames:            %3%\n"
-                       "  # NVOPs:               %4%\n"
-                       "  # generated timestamps: %5%\n"
-                       "  # dropped timestamps:   %6%\n")
-         % m_statistics.m_num_i_frames % m_statistics.m_num_p_frames % m_statistics.m_num_b_frames % m_statistics.m_num_n_vops
-         % m_statistics.m_num_generated_timestamps % m_statistics.m_num_dropped_timestamps);
+  mxinfo(fmt::format("mpeg4_p2_video_packetizer_c statistics:\n"
+                     "  # I frames:            {0}\n"
+                     "  # P frames:            {1}\n"
+                     "  # B frames:            {2}\n"
+                     "  # NVOPs:               {3}\n"
+                     "  # generated timestamps: {4}\n"
+                     "  # dropped timestamps:   {5}\n",
+                     m_statistics.m_num_i_frames, m_statistics.m_num_p_frames, m_statistics.m_num_b_frames, m_statistics.m_num_n_vops,
+                     m_statistics.m_num_generated_timestamps, m_statistics.m_num_dropped_timestamps));
 }
 
 int
@@ -248,7 +248,7 @@ mpeg4_p2_video_packetizer_c::generate_timestamp_and_duration() {
     m_previous_timestamp = (int64_t)(m_previous_timestamp + 1000000000.0 / m_fps);
     m_available_timestamps.push_back(timestamp_duration_t(m_previous_timestamp, (int64_t)(1000000000.0 / m_fps)));
 
-    mxverb(3, boost::format("mpeg4_p2::flush_frames(): Needed new timestamp %1%\n") % m_previous_timestamp);
+    mxverb(3, fmt::format("mpeg4_p2::flush_frames(): Needed new timestamp {0}\n", m_previous_timestamp));
     ++m_statistics.m_num_generated_timestamps;
   }
 }
@@ -323,8 +323,8 @@ mpeg4_p2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
     generic_packetizer_c::set_headers();
     rerender_track_headers();
     mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-               boost::format(Y("Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to %1%/%2%.\n"))
-               % m_hvideo_display_width % m_hvideo_display_height);
+               fmt::format(Y("Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to {0}/{1}.\n"),
+                           m_hvideo_display_width, m_hvideo_display_height));
 
   } else if (50 <= m_frames_output)
     m_aspect_ratio_extracted = true;
@@ -364,8 +364,8 @@ mpeg4_p2_video_packetizer_c::extract_size(const unsigned char *buffer,
       rerender_track_headers();
 
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format(Y("The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values "
-                                 "in the source container. The ones from the video data bitstream (%1%x%2%) will be used.\n")) % xtr_width % xtr_height);
+                 fmt::format(Y("The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values "
+                               "in the source container. The ones from the video data bitstream ({0}x{1}) will be used.\n"), xtr_width, xtr_height));
     }
 
   } else if (50 <= m_frames_output)

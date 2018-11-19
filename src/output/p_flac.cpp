@@ -72,7 +72,7 @@ flac_packetizer_c::process(packet_cptr packet) {
   packet->duration = mtx::flac::get_num_samples(packet->data->get_buffer(), packet->data->get_size(), m_stream_info);
 
   if (-1 == packet->duration) {
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Packet number %1% contained an invalid FLAC header and is being skipped.\n")) % m_num_packets);
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Packet number {0} contained an invalid FLAC header and is being skipped.\n"), m_num_packets));
     return FILE_STATUS_MOREDATA;
   }
 
@@ -97,7 +97,7 @@ flac_packetizer_c::can_connect_to(generic_packetizer_c *src,
       || !m_header
       || !fsrc->m_header
       || memcmp(m_header->get_buffer(), fsrc->m_header->get_buffer(), m_header->get_size())) {
-    error_message = (boost::format(Y("The codec's private data does not match (lengths: %1% and %2%).")) % m_header->get_size() % fsrc->m_header->get_size()).str();
+    error_message = fmt::format(Y("The codec's private data does not match (lengths: {0} and {1})."), m_header->get_size(), fsrc->m_header->get_size());
     return CAN_CONNECT_MAYBE_CODECPRIVATE;
   }
 

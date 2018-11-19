@@ -60,7 +60,7 @@ wavpack_packetizer_c::process(packet_cptr packet) {
   if (-1 == packet->duration)
     packet->duration = std::llround(samples * 1000000000 / m_sample_rate);
   else
-    mxverb(2, boost::format("wavpack_packetizer: incomplete block with duration %1%\n") % packet->duration);
+    mxverb(2, fmt::format("wavpack_packetizer: incomplete block with duration {0}\n", packet->duration));
 
   if (-1 == packet->timestamp)
     packet->timestamp = std::llround((double)m_samples_output * 1000000000 / m_sample_rate);

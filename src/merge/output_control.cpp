@@ -230,7 +230,7 @@ update_ebml_head() {
                : mtx::doc_type_version_handler_c::update_result_e::err_not_enough_space == result ? Y("There's not enough space at the beginning of the file to fit the updated 'EBML head' element in.")
                :                                                                                    Y("A generic read or write failure occurred.");
 
-  mxwarn(boost::format("%1% %2%\n") % Y("Updating the 'document type version' or 'document type read version' header fields failed.") % details);
+  mxwarn(fmt::format("{0} {1}\n", Y("Updating the 'document type version' or 'document type read version' header fields failed."), details));
 }
 
 /** \brief Fix the file after mkvmerge has been interrupted
@@ -273,7 +273,7 @@ sighandler(int /* signum */) {
   if ((g_kax_sh_main->ListSize() > 0) && !mtx::hacks::is_engaged(mtx::hacks::NO_META_SEEK)) {
     g_kax_sh_main->UpdateSize();
     if (s_kax_sh_void->ReplaceWith(*g_kax_sh_main, *s_out, true) == INVALID_FILEPOS_T)
-      mxwarn(boost::format(Y("This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n")) % BUGMSG);
+      mxwarn(fmt::format(Y("This should REALLY not have happened. The space reserved for the first meta seek element was too small. {0}\n"), BUGMSG));
   }
   mxinfo(Y(" done\n"));
 
@@ -320,9 +320,9 @@ display_progress(bool is_100percent = false) {
 
   if (is_100percent) {
     if (mtx::cli::g_gui_mode)
-      mxinfo(boost::format("#GUI#progress 100%%\n"));
+      mxinfo(fmt::format("#GUI#progress 100%\n"));
     else
-      mxinfo(boost::format(Y("Progress: 100%%%1%")) % "\r");
+      mxinfo(fmt::format(Y("Progress: 100%{0}"), "\r"));
     return;
   }
 
@@ -343,9 +343,9 @@ display_progress(bool is_100percent = false) {
   //   exit(42);
 
   if (mtx::cli::g_gui_mode)
-    mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
+    mxinfo(fmt::format("#GUI#progress {0}%\n", current_percentage));
   else
-    mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
+    mxinfo(fmt::format(Y("Progress: {0}%{1}"), current_percentage, "\r"));
 
   s_previous_percentage  = current_percentage;
   s_previous_progress_on = current_time;
@@ -420,7 +420,7 @@ add_packetizer_globally(generic_packetizer_c *packetizer) {
       ++idx;
 
   if (-1 == pack.file)
-    mxerror(boost::format(Y("filelist_t not found for generic_packetizer_c. %1%\n")) % BUGMSG);
+    mxerror(fmt::format(Y("filelist_t not found for generic_packetizer_c. {0}\n"), BUGMSG));
 
   g_packetizers.push_back(pack);
 }
@@ -442,12 +442,12 @@ set_timestamp_scale() {
 
   bool debug = debugging_c::requested("set_timestamp_scale|timestamp_scale");
   mxdebug_if(debug,
-             boost::format("timestamp_scale: %1% audio present: %2% video present: %3% highest sample rate: %4%\n")
-             % (  TIMESTAMP_SCALE_MODE_NORMAL == g_timestamp_scale_mode ? "normal"
-                : TIMESTAMP_SCALE_MODE_FIXED  == g_timestamp_scale_mode ? "fixed"
-                : TIMESTAMP_SCALE_MODE_AUTO   == g_timestamp_scale_mode ? "auto"
-                :                                                         "unknown")
-             % audio_present % video_present % highest_sample_rate);
+             fmt::format("timestamp_scale: {0} audio present: {1} video present: {2} highest sample rate: {3}\n",
+                           TIMESTAMP_SCALE_MODE_NORMAL == g_timestamp_scale_mode ? "normal"
+                         : TIMESTAMP_SCALE_MODE_FIXED  == g_timestamp_scale_mode ? "fixed"
+                         : TIMESTAMP_SCALE_MODE_AUTO   == g_timestamp_scale_mode ? "auto"
+                         :                                                         "unknown",
+                         audio_present, video_present, highest_sample_rate));
 
   if (   (TIMESTAMP_SCALE_MODE_FIXED != g_timestamp_scale_mode)
       && audio_present
@@ -459,7 +459,7 @@ set_timestamp_scale() {
   g_max_ns_per_cluster = std::min<int64_t>(32700 * g_timestamp_scale, g_max_ns_per_cluster);
   GetChild<KaxTimecodeScale>(*s_kax_infos).SetValue(g_timestamp_scale);
 
-  mxdebug_if(debug, boost::format("timestamp_scale: %1% max ns per cluster: %2%\n") % g_timestamp_scale % g_max_ns_per_cluster);
+  mxdebug_if(debug, fmt::format("timestamp_scale: {0} max ns per cluster: {1}\n", g_timestamp_scale, g_max_ns_per_cluster));
 }
 
 static void
@@ -653,7 +653,7 @@ render_headers(mm_io_c *out) {
     }
 
   } catch (...) {
-    mxerror(boost::format(Y("The track headers could not be rendered correctly. %1%\n")) % BUGMSG);
+    mxerror(fmt::format(Y("The track headers could not be rendered correctly. {0}\n"), BUGMSG));
   }
 }
 
@@ -704,8 +704,8 @@ relocate_written_data(uint64_t data_start_pos,
   auto buffer           = af_buffer->get_buffer();
 
   mxdebug_if(s_debug_rerender_track_headers,
-             boost::format("[rerender] relocate_written_data: void pos %1% void size %2% = data_start_pos %3% s_out size %4% delta %5% to_relocate %6% rel_pos_from_end %7%\n")
-             % s_void_after_track_headers->GetElementPosition() % s_void_after_track_headers->ElementSize(true) % data_start_pos % s_out->get_size() % delta % to_relocate % rel_pos_from_end);
+             fmt::format("[rerender] relocate_written_data: void pos {0} void size {1} = data_start_pos {2} s_out size {3} delta {4} to_relocate {5} rel_pos_from_end {6}\n",
+                         s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(true), data_start_pos, s_out->get_size(), delta, to_relocate, rel_pos_from_end));
 
   // Extend the file's size. Setting the file pointer to beyond the
   // end and starting to write from there won't work with most of the
@@ -722,33 +722,33 @@ relocate_written_data(uint64_t data_start_pos,
     auto src_pos = data_start_pos + to_relocate - relocated - to_copy;
     auto dst_pos = src_pos + delta;
 
-    mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]   relocating %1% bytes from %2% to %3%\n") % to_copy % src_pos % dst_pos);
+    mxdebug_if(s_debug_rerender_track_headers, fmt::format("[rerender]   relocating {0} bytes from {1} to {2}\n", to_copy, src_pos, dst_pos));
 
     s_out->setFilePointer(src_pos);
     auto num_read = s_out->read(buffer, to_copy);
 
     if (num_read != to_copy) {
-      mxinfo(boost::format(Y("Error reading from the file '%1%'.\n")) % s_out->get_file_name());
-      mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]   relocation failed; read only %1% bytes\n") % num_read);
+      mxinfo(fmt::format(Y("Error reading from the file '{0}'.\n"), s_out->get_file_name()));
+      mxdebug_if(s_debug_rerender_track_headers, fmt::format("[rerender]   relocation failed; read only {0} bytes\n", num_read));
     }
 
     s_out->setFilePointer(dst_pos);
     auto num_written = s_out->write(buffer, num_read);
 
     if (num_written != num_read)
-      mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]   relocation failed; wrote only %1% of %2% bytes\n") % num_written % num_read);
+      mxdebug_if(s_debug_rerender_track_headers, fmt::format("[rerender]   relocation failed; wrote only {0} of {1} bytes\n", num_written, num_read));
 
     relocated += to_copy;
   }
 
   if (s_kax_as) {
-    mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]  re-writing attachments; old position %1% new %2%\n") % s_kax_as->GetElementPosition() % (s_kax_as->GetElementPosition() + delta));
+    mxdebug_if(s_debug_rerender_track_headers, fmt::format("[rerender]  re-writing attachments; old position {0} new {1}\n", s_kax_as->GetElementPosition(), s_kax_as->GetElementPosition() + delta));
     s_out->setFilePointer(s_kax_as->GetElementPosition() + delta);
     g_doc_type_version_handler->render(*s_kax_as, *s_out);
   }
 
   if (s_kax_chapters_void) {
-    mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]  re-writing chapter placeholder; old position %1% new %2%\n") % s_kax_chapters_void->GetElementPosition() % (s_kax_chapters_void->GetElementPosition() + delta));
+    mxdebug_if(s_debug_rerender_track_headers, fmt::format("[rerender]  re-writing chapter placeholder; old position {0} new {1}\n", s_kax_chapters_void->GetElementPosition(), s_kax_chapters_void->GetElementPosition() + delta));
     s_out->setFilePointer(s_kax_chapters_void->GetElementPosition() + delta);
     s_kax_chapters_void->Render(*s_out);
   }
@@ -772,7 +772,7 @@ render_void(int64_t new_size) {
   if (static_cast<int64_t>(s_void_after_track_headers->ElementSize()) < new_size)
     s_void_after_track_headers->SetSizeLength(new_size - actual_size - 1);
 
-  mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender] render_void new_size %1% actual_size %2% size_length %3%\n") % new_size % actual_size % (new_size - actual_size - 1));
+  mxdebug_if(s_debug_rerender_track_headers, fmt::format("[rerender] render_void new_size {0} actual_size {1} size_length {2}\n", new_size, actual_size, new_size - actual_size - 1));
 
   s_void_after_track_headers->Render(*s_out);
 }
@@ -790,16 +790,16 @@ shrink_void_and_rerender_track_headers(int64_t new_void_size) {
   s_out->setFilePointer(0, seek_end);
 
   mxdebug_if(s_debug_rerender_track_headers,
-             boost::format("[rerender] Normal case, only shrinking void down to %1%, new position %2% projected %9% new full size %3% new end %4% s_out size %5% old void start pos %6% tracks pos %7% tracks size %8%\n")
-             % new_void_size                                                                                  // 1
-             % s_void_after_track_headers->GetElementPosition()                                               // 2
-             % s_void_after_track_headers->ElementSize()                                                      // 3
-             % (s_void_after_track_headers->GetElementPosition() + s_void_after_track_headers->ElementSize()) // 4
-             % s_out->get_size()                                                                              // 5
-             % old_void_pos                                                                                   // 6
-             % g_kax_tracks->GetElementPosition()                                                             // 7
-             % g_kax_tracks->ElementSize()                                                                    // 8
-             % projected_new_void_pos);                                                                       // 9
+             fmt::format("[rerender] Normal case, only shrinking void down to {0}, new position {1} projected {8} new full size {2} new end {3} s_out size {4} old void start pos {5} tracks pos {6} tracks size {7}\n",
+                         new_void_size,
+                         s_void_after_track_headers->GetElementPosition(),
+                         s_void_after_track_headers->ElementSize(),
+                         s_void_after_track_headers->GetElementPosition() + s_void_after_track_headers->ElementSize(),
+                         s_out->get_size(),
+                         old_void_pos,
+                         g_kax_tracks->GetElementPosition(),
+                         g_kax_tracks->ElementSize(),
+                         projected_new_void_pos));
 }
 
 /** \brief Overwrites the track headers with current values
@@ -819,8 +819,8 @@ rerender_track_headers() {
   auto new_void_size      = data_start_pos >= (new_tracks_end_pos + 4) ? data_start_pos - new_tracks_end_pos : 1024;
 
   mxdebug_if(s_debug_rerender_track_headers,
-             boost::format("[rerender] track_headers: new_tracks_end_pos %1% data_start_pos %2% data_size %3% old void at %4% size %5% new_void_size %6%\n")
-             % new_tracks_end_pos % data_start_pos % data_size % s_void_after_track_headers->GetElementPosition() % s_void_after_track_headers->ElementSize(true) % new_void_size);
+             fmt::format("[rerender] track_headers: new_tracks_end_pos {0} data_start_pos {1} data_size {2} old void at {3} size {4} new_void_size {5}\n",
+                         new_tracks_end_pos, data_start_pos, data_size, s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(true), new_void_size));
 
   if (data_size  && (new_tracks_end_pos >= (data_start_pos - 3))) {
     auto delta      = 1024 + new_tracks_end_pos - data_start_pos;
@@ -833,9 +833,9 @@ rerender_track_headers() {
   shrink_void_and_rerender_track_headers(new_void_size);
 
   mxdebug_if(s_debug_rerender_track_headers,
-             boost::format("[rerender] track_headers:   position_before %1% file_size_before %2% (diff %3%) position_after %4% file_size_after %5% (diff %6%) void now at %7% size %8%\n")
-             % position_before % file_size_before % (file_size_before - position_before) % s_out->getFilePointer() % s_out->get_size() % (s_out->get_size() - s_out->getFilePointer())
-             % s_void_after_track_headers->GetElementPosition() % s_void_after_track_headers->ElementSize(true));
+             fmt::format("[rerender] track_headers:   position_before {0} file_size_before {1} (diff {2}) position_after {3} file_size_after {4} (diff {5}) void now at {6} size {7}\n",
+                         position_before, file_size_before, file_size_before - position_before, s_out->getFilePointer(), s_out->get_size(), s_out->get_size() - s_out->getFilePointer(),
+                         s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(true)));
 }
 
 /** \brief Render all attachments into the output file at the current position
@@ -896,17 +896,17 @@ check_append_mapping() {
 
     // 1. Is there a file with the src_file_id?
     if (g_files.size() <= amap.src_file_id)
-      mxerror(boost::format(Y("There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n")) % amap.src_file_id);
+      mxerror(fmt::format(Y("There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"), amap.src_file_id));
 
     // 2. Is the "source" file in "append mode", meaning does its file name
     // start with a '+'?
     src_file = g_files.begin() + amap.src_file_id;
     if (!(*src_file)->appending)
-      mxerror(boost::format(Y("The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n")) % amap.src_file_id % (*src_file)->name);
+      mxerror(fmt::format(Y("The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"), amap.src_file_id, (*src_file)->name));
 
     // 3. Is there a file with the dst_file_id?
     if (g_files.size() <= amap.dst_file_id)
-      mxerror(boost::format(Y("There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n")) % amap.dst_file_id);
+      mxerror(fmt::format(Y("There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"), amap.dst_file_id));
 
     // 4. G_Files cannot be appended to itself.
     if (amap.src_file_id == amap.dst_file_id)
@@ -923,8 +923,8 @@ check_append_mapping() {
     size_t count = boost::count_if(g_append_mapping, [&src_file](auto const &e) { return e.src_file_id == src_file->id; });
 
     if ((0 < count) && (src_file-> reader->m_used_track_ids.size() > count))
-      mxerror(boost::format(Y("Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the "
-                              "default mapping will be used) or specify a mapping for all tracks that are to be copied.\n")) % src_file-> id % src_file-> name);
+      mxerror(fmt::format(Y("Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the "
+                            "default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"), src_file-> id, src_file-> name));
     else if (0 == count) {
       std::string missing_mappings;
 
@@ -940,11 +940,11 @@ check_append_mapping() {
 
         if (!missing_mappings.empty())
           missing_mappings += ",";
-        missing_mappings += (boost::format("%1%:%2%:%3%:%4%") % new_amap.src_file_id % new_amap.src_track_id % new_amap.dst_file_id % new_amap.dst_track_id).str();
+        missing_mappings += fmt::format("{0}:{1}:{2}:{3}", new_amap.src_file_id, new_amap.src_track_id, new_amap.dst_file_id, new_amap.dst_track_id);
       }
-      mxinfo(boost::format(Y("No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. "
-                             "Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"))
-             % src_file-> id % src_file-> name % missing_mappings);
+      mxinfo(fmt::format(Y("No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. "
+                           "Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"),
+                         src_file-> id, src_file-> name, missing_mappings));
     }
   }
 
@@ -956,14 +956,14 @@ check_append_mapping() {
     // 5. Does the "source" file have a track with the src_track_id, and is
     // that track selected for copying?
     if (!mtx::includes((*src_file)->reader->m_used_track_ids, amap.src_track_id))
-      mxerror(boost::format(Y("The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. "
-                              "The argument for '--append-to' was invalid.\n")) % amap.src_file_id % (*src_file)->name % amap.src_track_id);
+      mxerror(fmt::format(Y("The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. "
+                            "The argument for '--append-to' was invalid.\n"), amap.src_file_id, (*src_file)->name, amap.src_track_id));
 
     // 6. Does the "destination" file have a track with the dst_track_id, and
     // that track selected for copying?
     if (!mtx::includes((*dst_file)->reader->m_used_track_ids, amap.dst_track_id))
-      mxerror(boost::format(Y("The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no "
-                              "track can be appended to it. The argument for '--append-to' was invalid.\n")) % amap.dst_file_id % (*dst_file)->name % amap.dst_track_id);
+      mxerror(fmt::format(Y("The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no "
+                            "track can be appended to it. The argument for '--append-to' was invalid.\n"), amap.dst_file_id, (*dst_file)->name, amap.dst_track_id));
 
     // 7. Is this track already mapped to somewhere else?
     for (auto &cmp_amap : g_append_mapping) {
@@ -972,8 +972,8 @@ check_append_mapping() {
 
       if (   (cmp_amap.src_file_id  == amap.src_file_id)
           && (cmp_amap.src_track_id == amap.src_track_id))
-        mxerror(boost::format(Y("The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"))
-                % amap.src_track_id % amap.src_file_id % (*src_file)->name);
+        mxerror(fmt::format(Y("The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"),
+                            amap.src_track_id, amap.src_file_id, (*src_file)->name));
     }
 
     // 8. Is there another track that is being appended to the dst_track_id?
@@ -983,8 +983,8 @@ check_append_mapping() {
 
       if (   (cmp_amap.dst_file_id  == amap.dst_file_id)
           && (cmp_amap.dst_track_id == amap.dst_track_id))
-        mxerror(boost::format(Y("More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"))
-                % amap.dst_track_id % amap.dst_file_id % (*dst_file)->name);
+        mxerror(fmt::format(Y("More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"),
+                            amap.dst_track_id, amap.dst_file_id, (*dst_file)->name));
     }
   }
 
@@ -998,28 +998,28 @@ check_append_mapping() {
     auto dst_ptzr = (*dst_file)->reader->find_packetizer_by_id(amap.dst_track_id);
 
     if (!src_ptzr || !dst_ptzr)
-      mxerror(boost::format("(!src_ptzr || !dst_ptzr). %1%\n") % BUGMSG);
+      mxerror(fmt::format("(!src_ptzr || !dst_ptzr). {0}\n", BUGMSG));
 
     // And now try to connect the packetizers.
     std::string error_message;
     auto result = src_ptzr->can_connect_to(dst_ptzr, error_message);
     if (CAN_CONNECT_MAYBE_CODECPRIVATE == result)
-      mxwarn(boost::format(Y("The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% "
-                             "Please make sure that the resulting file plays correctly the whole time. "
-                             "The author of this program will probably not give support for playback issues with the resulting file.\n"))
-             % amap.src_track_id % g_files[amap.src_file_id]->name
-             % amap.dst_track_id % g_files[amap.dst_file_id]->name
-             % error_message);
+      mxwarn(fmt::format(Y("The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} "
+                           "Please make sure that the resulting file plays correctly the whole time. "
+                           "The author of this program will probably not give support for playback issues with the resulting file.\n"),
+                         amap.src_track_id, g_files[amap.src_file_id]->name,
+                         amap.dst_track_id, g_files[amap.dst_file_id]->name,
+                         error_message));
 
     else if (CAN_CONNECT_YES != result) {
       if (error_message.empty())
         error_message = (  result == CAN_CONNECT_NO_FORMAT     ? Y("The formats do not match.")
                          : result == CAN_CONNECT_NO_PARAMETERS ? Y("The track parameters do not match.")
                          :                                       Y("The reason is unknown."));
-      mxerror(boost::format(Y("The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"))
-              % amap.src_track_id % g_files[amap.src_file_id]->name
-              % amap.dst_track_id % g_files[amap.dst_file_id]->name
-              % error_message);
+      mxerror(fmt::format(Y("The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"),
+                          amap.src_track_id, g_files[amap.src_file_id]->name,
+                          amap.dst_track_id, g_files[amap.dst_file_id]->name,
+                          error_message));
     }
 
     src_ptzr->connect(dst_ptzr);
@@ -1157,7 +1157,6 @@ check_track_id_validity() {
 std::string
 create_output_name() {
   std::string s = g_outfile;
-  int p2   = 0;
   // First possibility: %d
   int p    = s.find("%d");
   if (0 <= p) {
@@ -1167,24 +1166,11 @@ create_output_name() {
   }
 
   // Now search for something like %02d
-  p = s.find("%");
-  if (0 <= p) {
-    p2 = s.find("d", p + 1);
-    if (0 <= p2) {
-      int i;
-      for (i = p + 1; i < p2; i++)
-        if (!isdigit(s[i]))
-          break;
+  auto converted = boost::regex_replace(s, boost::regex{"%(\\d+)d", boost::regex::perl}, "{0:\\1}");
+  if (converted != s)
+    return fmt::format(converted, g_file_num);
 
-      std::string format(&s.c_str()[p]);
-      format.erase(p2 - p + 1);
-      s.replace(p, format.size(), (boost::format(format) % g_file_num).str());
-
-      return s;
-    }
-  }
-
-  std::string buffer = (boost::format("-%|1$03d|") % g_file_num).str();
+  std::string buffer = fmt::format("-{0:03}", g_file_num);
 
   // See if we can find a '.'.
   p = s.rfind(".");
@@ -1276,7 +1262,7 @@ prepare_tags_for_rendering() {
   fix_mandatory_elements(s_kax_tags.get());
   sort_ebml_master(s_kax_tags.get());
   if (!s_kax_tags->CheckMandatory())
-    mxerror(boost::format(Y("Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n")) % BUGMSG);
+    mxerror(fmt::format(Y("Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). {0}\n"), BUGMSG));
 
   s_kax_tags->UpdateSize();
   g_tags_size = s_kax_tags->ElementSize();
@@ -1293,7 +1279,7 @@ create_next_output_file() {
   g_doc_type_version_handler.reset(new mtx::doc_type_version_handler_c);
 
   auto s_debug = debugging_option_c{"splitting"};
-  mxdebug_if(s_debug, boost::format("splitting: Create next destination file; splitting? %1% discarding? %2%\n") % g_cluster_helper->splitting() % g_cluster_helper->discarding());
+  mxdebug_if(s_debug, fmt::format("splitting: Create next destination file; splitting? {0} discarding? {1}\n", g_cluster_helper->splitting(), g_cluster_helper->discarding()));
 
   auto this_outfile   = g_cluster_helper->split_mode_produces_many_files() ? create_output_name() : g_outfile;
   g_kax_segment       = std::make_unique<KaxSegment>();
@@ -1302,11 +1288,11 @@ create_next_output_file() {
   try {
     s_out = !g_cluster_helper->discarding() ? mm_write_buffer_io_c::open(this_outfile, 20 * 1024 * 1024) : mm_io_cptr{ new mm_null_io_c{this_outfile} };
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for writing: %2%.\n")) % this_outfile % ex);
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), this_outfile, ex));
   }
 
   if (verbose && !g_cluster_helper->discarding())
-    mxinfo(boost::format(Y("The file '%1%' has been opened for writing.\n")) % this_outfile);
+    mxinfo(fmt::format(Y("The file '{0}' has been opened for writing.\n"), this_outfile));
 
   g_cluster_helper->set_output(s_out.get());
 
@@ -1330,7 +1316,7 @@ static void
 add_chapters_for_current_part() {
   auto s_debug = debugging_option_c{"splitting_chapters"};
 
-  mxdebug_if(s_debug, boost::format("Adding chapters. have_global? %1% splitting? %2%\n") % !!g_kax_chapters % g_cluster_helper->splitting());
+  mxdebug_if(s_debug, fmt::format("Adding chapters. have_global? {0} splitting? {1}\n", !!g_kax_chapters, g_cluster_helper->splitting()));
 
   if (!g_cluster_helper->splitting()) {
     s_chapters_in_this_file = clone(g_kax_chapters);
@@ -1346,7 +1332,7 @@ add_chapters_for_current_part() {
   auto chapters_here              = clone(g_kax_chapters);
   bool have_chapters_in_timeframe = mtx::chapters::select_in_timeframe(chapters_here.get(), start, end, offset);
 
-  mxdebug_if(s_debug, boost::format("offset %1% start %2% end %3% have chapters in timeframe? %4% chapters in this file? %5%\n") % offset % start % end % have_chapters_in_timeframe % !!s_chapters_in_this_file);
+  mxdebug_if(s_debug, fmt::format("offset {0} start {1} end {2} have chapters in timeframe? {3} chapters in this file? {4}\n", offset, start, end, have_chapters_in_timeframe, !!s_chapters_in_this_file));
 
   if (!have_chapters_in_timeframe)
     return;
@@ -1586,8 +1572,8 @@ finish_file(bool last_file,
   if ((g_kax_sh_main->ListSize() > 0) && !mtx::hacks::is_engaged(mtx::hacks::NO_META_SEEK)) {
     g_kax_sh_main->UpdateSize();
     if (s_kax_sh_void->ReplaceWith(*g_kax_sh_main, *s_out, true) == INVALID_FILEPOS_T)
-      mxwarn(boost::format(Y("This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"))
-             % g_kax_sh_main->ElementSize() % BUGMSG);
+      mxwarn(fmt::format(Y("This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"),
+                         g_kax_sh_main->ElementSize(), BUGMSG));
   }
 
   // Set the correct size for the segment.
@@ -1669,7 +1655,7 @@ append_track(packetizer_t &ptzr,
   });
 
   if (src_file.reader->m_reader_packetizers.end() == gptzr)
-    mxerror(boost::format(Y("Could not find gptzr when appending. %1%\n")) % BUGMSG);
+    mxerror(fmt::format(Y("Could not find gptzr when appending. {0}\n"), BUGMSG));
 
   // If we're dealing with a subtitle track or if the appending file contains
   // chapters then we have to suck the previous file dry. See below for the
@@ -1711,10 +1697,10 @@ append_track(packetizer_t &ptzr,
   }
 
   if (s_debug_appending) {
-    mxdebug(boost::format("appending: reader m_max_timestamp_seen %1% and ptzr to append is %2% ptzr appended to is %3% src_file.appending %4% src_file.appended_to %5% dst_file.appending %6% dst_file.appended_to %7%\n")
-            % dst_file.reader->m_max_timestamp_seen % static_cast<void *>(*gptzr) % static_cast<void *>(ptzr.packetizer) % src_file.appending % src_file.appended_to % dst_file.appending % dst_file.appended_to);
+    mxdebug(fmt::format("appending: reader m_max_timestamp_seen {0} and ptzr to append is {1} ptzr appended to is {2} src_file.appending {3} src_file.appended_to {4} dst_file.appending {5} dst_file.appended_to {6}\n",
+                        dst_file.reader->m_max_timestamp_seen, static_cast<void *>(*gptzr), static_cast<void *>(ptzr.packetizer), src_file.appending, src_file.appended_to, dst_file.appending, dst_file.appended_to));
     for (auto &rep_ptzr : dst_file.reader->m_reader_packetizers)
-      mxdebug(boost::format("  ptzr @ %1% connected_to %2% max_timestamp_seen %3%\n") % static_cast<void *>(rep_ptzr) % rep_ptzr->m_connected_to % rep_ptzr->m_max_timestamp_seen);
+      mxdebug(fmt::format("  ptzr @ {0} connected_to {1} max_timestamp_seen {2}\n", static_cast<void *>(rep_ptzr), rep_ptzr->m_connected_to, rep_ptzr->m_max_timestamp_seen));
   }
 
   // In rare cases (e.g. empty tracks) a whole file could be skipped
@@ -1734,17 +1720,17 @@ append_track(packetizer_t &ptzr,
     if (s_debug_appending) {
       std::string result;
       for (auto &out_ptzr : not_connected_ptzrs)
-        result += (boost::format(" %1%") % static_cast<void *>(out_ptzr)).str();
+        result += fmt::format(" {0}", static_cast<void *>(out_ptzr));
 
-      mxdebug(boost::format("appending: check for connection on dst file's packetizers; these are not connected: %1%\n") % result);
+      mxdebug(fmt::format("appending: check for connection on dst file's packetizers; these are not connected: {0}\n", result));
     }
 
     if (!not_connected_ptzrs.empty())
       return;
   }
 
-  mxinfo(boost::format(Y("Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"))
-         % (*gptzr)->m_ti.m_id % amap.src_file_id % (*gptzr)->m_ti.m_fname % ptzr.packetizer->m_ti.m_id % amap.dst_file_id % ptzr.packetizer->m_ti.m_fname);
+  mxinfo(fmt::format(Y("Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"),
+                     (*gptzr)->m_ti.m_id, amap.src_file_id, (*gptzr)->m_ti.m_fname, ptzr.packetizer->m_ti.m_id, amap.dst_file_id, ptzr.packetizer->m_ti.m_fname));
 
   // Also fix the ptzr structure and reset the ptzr's state to "I want more".
   generic_packetizer_c *old_packetizer = ptzr.packetizer;
@@ -1807,12 +1793,12 @@ append_track(packetizer_t &ptzr,
   }
 
   if ((APPEND_MODE_FILE_BASED == g_append_mode) || (ptzr.packetizer->get_track_type() == track_subtitle)) {
-    mxdebug_if(s_debug_appending, boost::format("appending: new timestamp_adjustment for append_mode == FILE_BASED or subtitle track: %1% for %2%\n") % format_timestamp(timestamp_adjustment) % ptzr.packetizer->m_ti.m_id);
+    mxdebug_if(s_debug_appending, fmt::format("appending: new timestamp_adjustment for append_mode == FILE_BASED or subtitle track: {0} for {1}\n", format_timestamp(timestamp_adjustment), ptzr.packetizer->m_ti.m_id));
     // The actual connection.
     ptzr.packetizer->connect(old_packetizer, timestamp_adjustment);
 
   } else {
-    mxdebug_if(s_debug_appending, boost::format("appending: new timestamp_adjustment for append_mode == TRACK_BASED and NON subtitle track: %1% for %2%\n") % format_timestamp(timestamp_adjustment) % ptzr.packetizer->m_ti.m_id);
+    mxdebug_if(s_debug_appending, fmt::format("appending: new timestamp_adjustment for append_mode == TRACK_BASED and NON subtitle track: {0} for {1}\n", format_timestamp(timestamp_adjustment), ptzr.packetizer->m_ti.m_id));
     // The actual connection.
     ptzr.packetizer->connect(old_packetizer);
   }

@@ -130,7 +130,7 @@ aac_packetizer_c::process(packet_cptr packet) {
     process_headerless(std::make_shared<packet_t>(frame.m_data));
 
     if (verbose && frame.m_garbage_size)
-      mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n")) % frame.m_garbage_size);
+      mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Skipping {0} bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"), frame.m_garbage_size));
   }
 
   return FILE_STATUS_MOREDATA;
@@ -146,7 +146,7 @@ aac_packetizer_c::can_connect_to(generic_packetizer_c *src,
   connect_check_a_samplerate(m_config.sample_rate, asrc->m_config.sample_rate);
   connect_check_a_channels(m_config.channels, asrc->m_config.channels);
   if (m_config.profile != asrc->m_config.profile) {
-    error_message = (boost::format(Y("The AAC profiles are different: %1% and %2%")) % m_config.profile % asrc->m_config.profile).str();
+    error_message = fmt::format(Y("The AAC profiles are different: {0} and {1}"), m_config.profile, asrc->m_config.profile);
     return CAN_CONNECT_NO_PARAMETERS;
   }
 

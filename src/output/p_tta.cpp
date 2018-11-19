@@ -58,7 +58,7 @@ tta_packetizer_c::process(packet_cptr packet) {
     m_samples_output += std::llround(m_sample_rate * TTA_FRAME_TIME);
 
   } else {
-    mxverb(2, boost::format("tta_packetizer: incomplete block with duration %1%\n") % packet->duration);
+    mxverb(2, fmt::format("tta_packetizer: incomplete block with duration {0}\n", packet->duration));
     m_samples_output += std::llround(packet->duration * m_sample_rate / 1000000000ll);
   }
 

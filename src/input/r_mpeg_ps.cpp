@@ -116,7 +116,7 @@ mpeg_ps_reader_c::read_headers() {
 
       switch (header) {
         case MPEGVIDEO_PACKET_START_CODE:
-          mxdebug_if(m_debug_headers, boost::format("mpeg_ps: packet start at %1%\n") % (m_in->getFilePointer() - 4));
+          mxdebug_if(m_debug_headers, fmt::format("mpeg_ps: packet start at {0}\n", m_in->getFilePointer() - 4));
 
           if (-1 == version) {
             byte = m_in->read_uint8();
@@ -137,7 +137,7 @@ mpeg_ps_reader_c::read_headers() {
           break;
 
         case MPEGVIDEO_SYSTEM_HEADER_START_CODE:
-          mxdebug_if(m_debug_headers, boost::format("mpeg_ps: system header start code at %1%\n") % (m_in->getFilePointer() - 4));
+          mxdebug_if(m_debug_headers, fmt::format("mpeg_ps: system header start code at {0}\n", m_in->getFilePointer() - 4));
 
           m_in->skip(2 * 4);   // system header
           byte = m_in->read_uint8();
@@ -160,7 +160,7 @@ mpeg_ps_reader_c::read_headers() {
 
         default:
           if (!mpeg_is_start_code(header)) {
-            mxdebug_if(m_debug_headers, boost::format("mpeg_ps: unknown header 0x%|1$08x| at %2%\n") % header % (m_in->getFilePointer() - 4));
+            mxdebug_if(m_debug_headers, fmt::format("mpeg_ps: unknown header 0x{0:08x} at {1}\n", header, m_in->getFilePointer() - 4));
             done = !resync_stream(header);
             break;
           }
@@ -171,7 +171,7 @@ mpeg_ps_reader_c::read_headers() {
           m_in->restore_pos();
           pes_packet_length = m_in->read_uint16_be();
 
-          mxdebug_if(m_debug_headers, boost::format("mpeg_ps: id 0x%|1$02x| len %2% at %3%\n") % static_cast<unsigned int>(stream_id) % pes_packet_length % (m_in->getFilePointer() - 4 - 2));
+          mxdebug_if(m_debug_headers, fmt::format("mpeg_ps: id 0x{0:02x} len {1} at {2}\n", static_cast<unsigned int>(stream_id), pes_packet_length, m_in->getFilePointer() - 4 - 2));
 
           m_in->skip(pes_packet_length);
 
@@ -223,7 +223,7 @@ mpeg_ps_reader_c::sort_tracks() {
 
   auto info = "mpeg_ps: Supported streams, sorted by ID: "s;
   for (i = 0; tracks.size() > i; ++i)
-    info += (boost::format("0x%|1$02x|(0x%|2$02x|) ") % tracks[i]->id.id % tracks[i]->id.sub_id).str();
+    info += fmt::format("0x{0:02x}(0x{1:02x}) ", tracks[i]->id.id, tracks[i]->id.sub_id);
 
   mxdebug(info + "\n");
 }
@@ -246,9 +246,9 @@ mpeg_ps_reader_c::calculate_global_timestamp_offset() {
   if (!m_debug_timestamps)
     return;
 
-  std::string output = (boost::format("mpeg_ps: Timestamp offset: min was %1% ") % global_timestamp_offset).str();
+  std::string output = fmt::format("mpeg_ps: Timestamp offset: min was {0} ", global_timestamp_offset);
   for (auto const &track : tracks)
-    output += (boost::format("%1%=%2% ") % track->id % track->timestamp_offset).str();
+    output += fmt::format("{0}={1} ", track->id, track->timestamp_offset);
   mxdebug(output + "\n");
 }
 
@@ -345,12 +345,12 @@ mpeg_ps_reader_c::parse_packet(mpeg_ps_id_t id,
       m_in->setFilePointer(pos + packet.m_length);
 
     else {
-      mxdebug_if(m_debug_packets, boost::format("mpeg_ps: [begin] padding stream length incorrect at %1%, find next header...\n") % (pos - 6));
+      mxdebug_if(m_debug_packets, fmt::format("mpeg_ps: [begin] padding stream length incorrect at {0}, find next header...\n", pos - 6));
       m_in->setFilePointer(pos);
       header = 0xffffffff;
       if (resync_stream(header)) {
         packet.m_full_length = m_in->getFilePointer() - pos - 4;
-        mxdebug_if(m_debug_packets, boost::format("mpeg_ps: [end] padding stream length adjusted from %1% to %2%\n") % packet.m_length % packet.m_full_length);
+        mxdebug_if(m_debug_packets, fmt::format("mpeg_ps: [end] padding stream length adjusted from {0} to {1}\n", packet.m_length, packet.m_full_length));
         m_in->setFilePointer(pos + packet.m_full_length);
       }
     }
@@ -682,7 +682,7 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
   }
 
   if ((MPV_PARSER_STATE_FRAME != state) || !found_i_frame || !m2v_parser->GetMPEGVersion() || !seq_hdr.width || !seq_hdr.height) {
-    mxdebug_if(m_debug_headers, boost::format("MPEG PS: blacklisting id 0x%|1$02x|(%|2$02x|) for supposed type MPEG1/2\n") % id.id % id.sub_id);
+    mxdebug_if(m_debug_headers, fmt::format("MPEG PS: blacklisting id 0x{0:02x}({1:02x}) for supposed type MPEG1/2\n", id.id, id.sub_id));
     blacklisted_ids[id.idx()] = true;
     throw false;
   }
@@ -697,8 +697,8 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
   track->timestamp_b_frame_offset = 1000000000ll * num_leading_b_fields / seq_hdr.frameOrFieldRate / 2;
 
   mxdebug_if(m_debug_timestamps,
-             boost::format("Leading B fields %1% rate %2% progressive? %3% calculated_offset %4% found_i? %5% found_non_b? %6%\n")
-             % num_leading_b_fields % seq_hdr.frameOrFieldRate % !!seq_hdr.progressiveSequence % track->timestamp_b_frame_offset % found_i_frame % found_non_b_frame);
+             fmt::format("Leading B fields {0} rate {1} progressive? {2} calculated_offset {3} found_i? {4} found_non_b? {5}\n",
+                         num_leading_b_fields, seq_hdr.frameOrFieldRate, !!seq_hdr.progressiveSequence, track->timestamp_b_frame_offset, found_i_frame, found_non_b_frame));
 
   if ((0 >= track->v_aspect_ratio) || (1 == track->v_aspect_ratio))
     track->v_dwidth = track->v_width;
@@ -809,7 +809,7 @@ mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t id,
                                    unsigned char *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
-  mxdebug_if(m_debug_headers, boost::format("new_stream_a_ac3 for ID %1% buf len %2%\n") % id % length);
+  mxdebug_if(m_debug_headers, fmt::format("new_stream_a_ac3 for ID {0} buf len {1}\n", id, length));
 
   mtx::bytes::buffer_c buffer;
 
@@ -820,8 +820,8 @@ mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t id,
 
     if (-1 != header.find_in(buffer.get_buffer(), buffer.get_size())) {
       mxdebug_if(m_debug_headers,
-                 boost::format("new_stream_a_ac3 first AC-3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
-                 % header.m_bs_id % header.m_channels % header.m_sample_rate % header.m_bytes % header.m_samples);
+                 fmt::format("new_stream_a_ac3 first AC-3 header bsid {0} channels {1} sample_rate {2} bytes {3} samples {4}\n",
+                             header.m_bs_id, header.m_channels, header.m_sample_rate, header.m_bytes, header.m_samples));
 
       track->a_channels    = header.m_channels;
       track->a_sample_rate = header.m_sample_rate;
@@ -886,8 +886,8 @@ mpeg_ps_reader_c::new_stream_a_truehd(mpeg_ps_id_t id,
         continue;
 
       mxdebug_if(m_debug_headers,
-                 boost::format("first TrueHD header channels %1% sampling_rate %2% samples_per_frame %3%\n")
-                 % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame);
+                 fmt::format("first TrueHD header channels {0} sampling_rate {1} samples_per_frame {2}\n",
+                             frame->m_channels, frame->m_sampling_rate, frame->m_samples_per_frame));
 
       track->codec         = frame->codec();
       track->a_channels    = frame->m_channels;
@@ -955,7 +955,7 @@ mpeg_ps_reader_c::new_stream_a_pcm(mpeg_ps_id_t,
 
 void
 mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
-  mxdebug_if(m_debug_headers, boost::format("MPEG PS: new stream id 0x%|1$02x|\n") % id.id);
+  mxdebug_if(m_debug_headers, fmt::format("MPEG PS: new stream id 0x{0:02x}\n", id.id));
 
   if (((0xc0 > id.id) || (0xef < id.id)) && (0xbd != id.id) && (0xfd != id.id))
     return;
@@ -968,15 +968,15 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
     id = packet.m_id;
 
     if (0xbd == id.id) {        // DVD audio substream
-      mxdebug_if(m_debug_headers, boost::format("MPEG PS:   audio substream id 0x%|1$02x|\n") % id.sub_id);
+      mxdebug_if(m_debug_headers, fmt::format("MPEG PS:   audio substream id 0x{0:02x}\n", id.sub_id));
       if (0 == id.sub_id)
         return;
     }
 
     mxdebug_if(m_debug_timestamps && packet.has_pts(),
-               boost::format("Timestamp for track %1%: %2% [%3%] (DTS: %4%)\n")
-               % id % format_timestamp(packet.pts()) % (packet.pts() * 90 / 1000000ll)
-               % (packet.has_dts() ? (boost::format("%1% [%2%]") % format_timestamp(packet.dts()) % (packet.dts() * 90 / 1000000ll)).str() : "none"s));
+               fmt::format("Timestamp for track {0}: {1} [{2}] (DTS: {3})\n",
+                           id, format_timestamp(packet.pts()), packet.pts() * 90 / 1000000ll,
+                           packet.has_dts() ? fmt::format("{0} [{1}]", format_timestamp(packet.dts()), packet.dts() * 90 / 1000000ll) : "none"s));
 
     if (mtx::includes(blacklisted_ids, id.idx()))
       return;
@@ -1201,7 +1201,7 @@ mpeg_ps_reader_c::find_next_packet_for_id(mpeg_ps_id_t id,
 
 bool
 mpeg_ps_reader_c::resync_stream(uint32_t &header) {
-  mxdebug_if(m_debug_resync, boost::format("MPEG PS: synchronisation lost at %1%; looking for start code\n") % m_in->getFilePointer());
+  mxdebug_if(m_debug_resync, fmt::format("MPEG PS: synchronisation lost at {0}; looking for start code\n", m_in->getFilePointer()));
 
   try {
     while (1) {
@@ -1211,7 +1211,7 @@ mpeg_ps_reader_c::resync_stream(uint32_t &header) {
         break;
     }
 
-    mxdebug_if(m_debug_resync, boost::format("resync succeeded at %1%, header 0x%|2$08x|\n") % (m_in->getFilePointer() - 4) % header);
+    mxdebug_if(m_debug_resync, fmt::format("resync succeeded at {0}, header 0x{1:08x}\n", m_in->getFilePointer() - 4, header));
 
     return true;
 
@@ -1257,7 +1257,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       show_packetizer_info(id, PTZR(track->ptzr));
 
     } else
-      mxerror(boost::format(Y("mpeg_ps_reader: Should not have happened #1. %1%")) % BUGMSG);
+      mxerror(fmt::format(Y("mpeg_ps_reader: Should not have happened #1. {0}"), BUGMSG));
 
   } else {                      // if (track->type == 'a')
     if (track->codec.is(codec_c::type_e::V_MPEG12)) {
@@ -1280,7 +1280,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       show_packetizer_info(id, PTZR(track->ptzr));
 
     } else
-      mxerror(boost::format(Y("mpeg_ps_reader: Should not have happened #2. %1%")) % BUGMSG);
+      mxerror(fmt::format(Y("mpeg_ps_reader: Should not have happened #2. {0}"), BUGMSG));
   }
 
   if (-1 != track->timestamp_offset)
@@ -1325,7 +1325,7 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
       if (!packet) {
         if (    (0xbe != new_id.id)       // padding stream
              && (0xbf != new_id.id))      // private 2 stream (navigation data)
-          mxdebug_if(m_debug_packets, boost::format("mpeg_ps: parse_packet failed at %1%, skipping %2%\n") % packet_pos % packet.m_full_length);
+          mxdebug_if(m_debug_packets, fmt::format("mpeg_ps: parse_packet failed at {0}, skipping {1}\n", packet_pos, packet.m_full_length));
         m_in->setFilePointer(packet_pos + 4 + 2 + packet.m_full_length);
         continue;
       }
@@ -1335,7 +1335,7 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
         continue;
       }
 
-      mxdebug_if(m_debug_packets, boost::format("mpeg_ps: packet at %1%: %2%\n") % packet_pos % packet);
+      mxdebug_if(m_debug_packets, fmt::format("mpeg_ps: packet at {0}: {1}\n", packet_pos, packet));
 
       auto track = tracks[id2idx[new_id.idx()]];
 
@@ -1437,7 +1437,7 @@ mpeg_ps_reader_c::identify() {
     info.add(mtx::id::sub_stream_id, track->id.sub_id);
 
     if ((0 != track->v_dwidth) && (0 != track->v_dheight))
-      info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % track->v_dwidth % track->v_dheight);
+      info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", track->v_dwidth, track->v_dheight));
 
     if ('a' == track->type) {
       info.add(mtx::id::audio_channels,           track->a_channels);
@@ -1445,7 +1445,7 @@ mpeg_ps_reader_c::identify() {
       info.add(mtx::id::audio_bits_per_sample,    track->a_bits_per_sample);
 
     } else if ('v' == track->type)
-      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
+      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", track->v_width, track->v_height));
 
     id_result_track(i, 'a' == track->type ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO, track->codec.get_name(), info.get());
   }

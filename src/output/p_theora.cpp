@@ -69,8 +69,8 @@ theora_video_packetizer_c::extract_aspect_ratio() {
       set_video_display_dimensions(theora.display_width, theora.display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format(Y("Extracted the aspect ratio information from the Theora video headers and set the display dimensions to %1%/%2%.\n"))
-                 % theora.display_width % theora.display_height);
+                 fmt::format(Y("Extracted the aspect ratio information from the Theora video headers and set the display dimensions to {0}/{1}.\n"),
+                             theora.display_width, theora.display_height));
     } catch (...) {
     }
 

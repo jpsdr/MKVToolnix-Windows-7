@@ -71,7 +71,7 @@ mpeg_es_reader_c::probe_file(mm_io_c &in,
     int i;
     for (i = 4; i < num_read - 1; i++) {
       if (mpeg_is_start_code(value)) {
-        mxdebug_if(debug, boost::format("mpeg_es_detection: start code found; fourth byte: 0x%|1$02x|\n") % (value & 0xff));
+        mxdebug_if(debug, fmt::format("mpeg_es_detection: start code found; fourth byte: 0x{0:02x}\n", value & 0xff));
 
         if (MPEGVIDEO_SEQUENCE_HEADER_START_CODE == value)
           sequence_start_code_found = true;
@@ -103,8 +103,8 @@ mpeg_es_reader_c::probe_file(mm_io_c &in,
     }
 
     mxdebug_if(debug,
-               boost::format("mpeg_es_detection: sequence %1% picture %2% gop %3% ext %4% #slice %5% start code at beginning %6%; examined %7% bytes\n")
-               % sequence_start_code_found % picture_start_code_found % gop_start_code_found % ext_start_code_found % num_slice_start_codes_found % start_code_at_beginning % i);
+               fmt::format("mpeg_es_detection: sequence {0} picture {1} gop {2} ext {3} #slice {4} start code at beginning {5}; examined {6} bytes\n",
+                           sequence_start_code_found, picture_start_code_found, gop_start_code_found, ext_start_code_found, num_slice_start_codes_found, start_code_at_beginning, i));
 
     if (!ok)
       return 0;
@@ -161,7 +161,7 @@ mpeg_es_reader_c::read_headers() {
     else
       m_ti.m_private_data.reset();
 
-    mxverb(2, boost::format("mpeg_es_reader: version %1% width %2% height %3% FPS %4% AR %5%\n") % version % width % height % frame_rate % aspect_ratio);
+    mxverb(2, fmt::format("mpeg_es_reader: version {0} width {1} height {2} FPS {3} AR {4}\n", version, width, height, frame_rate, aspect_ratio));
 
   } catch (mtx::mm_io::exception &) {
     throw mtx::input::open_x();
@@ -238,9 +238,9 @@ mpeg_es_reader_c::read_frame(M2VParser &parser,
 
 void
 mpeg_es_reader_c::identify() {
-  auto codec = (boost::format("mpg%1%") % version).str();
+  auto codec = fmt::format("mpg{0}", version);
   auto info  = mtx::id::info_c{};
-  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % width % height);
+  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", width, height));
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec, codec), info.get());

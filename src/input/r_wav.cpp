@@ -184,32 +184,32 @@ wav_reader_c::parse_file() {
 
 void
 wav_reader_c::dump_headers() {
-  mxinfo(boost::format("File '%1%' header dump (mode: %2%)\n") % m_ti.m_fname % (m_type == type_e::wave ? "WAV" : "Wave64"));
+  mxinfo(fmt::format("File '{0}' header dump (mode: {1})\n", m_ti.m_fname, m_type == type_e::wave ? "WAV" : "Wave64"));
 
   if (m_type == type_e::wave)
-    mxinfo(boost::format("  riff:\n"
-                         "    id:      %1%%2%%3%%4%\n"
-                         "    len:     %5%\n"
-                         "    wave_id: %6%%7%%8%%9%\n")
-           % char(m_wheader.riff.id[0]) % char(m_wheader.riff.id[1]) % char(m_wheader.riff.id[2]) % char(m_wheader.riff.id[3])
-           % get_uint32_le(&m_wheader.riff.len)
-           % char(m_wheader.riff.wave_id[0]) % char(m_wheader.riff.wave_id[1]) % char(m_wheader.riff.wave_id[2]) % char(m_wheader.riff.wave_id[3]));
+    mxinfo(fmt::format("  riff:\n"
+                       "    id:      {0}{1}{2}{3}\n"
+                       "    len:     {4}\n"
+                       "    wave_id: {5}{6}{7}{8}\n",
+                       char(m_wheader.riff.id[0]), char(m_wheader.riff.id[1]), char(m_wheader.riff.id[2]), char(m_wheader.riff.id[3]),
+                       get_uint32_le(&m_wheader.riff.len),
+                       char(m_wheader.riff.wave_id[0]), char(m_wheader.riff.wave_id[1]), char(m_wheader.riff.wave_id[2]), char(m_wheader.riff.wave_id[3])));
 
-  mxinfo(boost::format("  common:\n"
-                       "    wFormatTag:       %|1$04x|\n"
-                       "    wChannels:        %2%\n"
-                       "    dwSamplesPerSec:  %3%\n"
-                       "    dwAvgBytesPerSec: %4%\n"
-                       "    wBlockAlign:      %5%\n"
-                       "    wBitsPerSample:   %6%\n"
-                       "  actual format_tag:  %7%\n")
-         % get_uint16_le(&m_wheader.common.wFormatTag)
-         % get_uint16_le(&m_wheader.common.wChannels)
-         % get_uint32_le(&m_wheader.common.dwSamplesPerSec)
-         % get_uint32_le(&m_wheader.common.dwAvgBytesPerSec)
-         % get_uint16_le(&m_wheader.common.wBlockAlign)
-         % get_uint16_le(&m_wheader.common.wBitsPerSample)
-         % m_format_tag);
+  mxinfo(fmt::format("  common:\n"
+                     "    wFormatTag:       {0:04x}\n"
+                     "    wChannels:        {1}\n"
+                     "    dwSamplesPerSec:  {2}\n"
+                     "    dwAvgBytesPerSec: {3}\n"
+                     "    wBlockAlign:      {4}\n"
+                     "    wBitsPerSample:   {5}\n"
+                     "  actual format_tag:  {6}\n",
+                     get_uint16_le(&m_wheader.common.wFormatTag),
+                     get_uint16_le(&m_wheader.common.wChannels),
+                     get_uint32_le(&m_wheader.common.dwSamplesPerSec),
+                     get_uint32_le(&m_wheader.common.dwAvgBytesPerSec),
+                     get_uint16_le(&m_wheader.common.wBlockAlign),
+                     get_uint16_le(&m_wheader.common.wBitsPerSample),
+                     m_format_tag));
 }
 
 void
@@ -312,7 +312,7 @@ wav_reader_c::scan_chunks_wave() {
       new_chunk.id  = memory_c::clone(id, 4);
       new_chunk.len = m_in->read_uint32_le();
 
-      mxdebug_if(debug_chunks, boost::format("wav_reader_c::scan_chunks() new chunk at %1% type %2% length %3%\n") % new_chunk.pos % get_displayable_string(id, 4) % new_chunk.len);
+      mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() new chunk at {0} type {1} length {2}\n", new_chunk.pos, get_displayable_string(id, 4), new_chunk.len));
 
       if (!strncasecmp(id, "data", 4))
         m_bytes_in_data_chunks += new_chunk.len;
@@ -326,7 +326,7 @@ wav_reader_c::scan_chunks_wave() {
         m_bytes_in_data_chunks      += this_chunk_len;
         previous_chunk.len           = this_chunk_len;
 
-        mxdebug_if(debug_chunks, boost::format("wav_reader_c::scan_chunks() hugh data chunk with wrong length at %1%; re-calculated from file size; new length %2%\n") % previous_chunk.pos % previous_chunk.len);
+        mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() hugh data chunk with wrong length at {0}; re-calculated from file size; new length {1}\n", previous_chunk.pos, previous_chunk.len));
 
         break;
       }
@@ -357,7 +357,7 @@ wav_reader_c::scan_chunks_wave64() {
 
       new_chunk.len -= sizeof(wave64_chunk_t);
 
-      mxdebug_if(debug_chunks, boost::format("wav_reader_c::scan_chunks() new chunk at %1% type %2% length %3%\n") % new_chunk.pos % get_displayable_string(reinterpret_cast<char *>(new_chunk.id->get_buffer()), 4) % new_chunk.len);
+      mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() new chunk at {0} type {1} length {2}\n", new_chunk.pos, get_displayable_string(reinterpret_cast<char *>(new_chunk.id->get_buffer()), 4), new_chunk.len));
 
       if (!strncasecmp(reinterpret_cast<char *>(new_chunk.id->get_buffer()), "data", 4))
         m_bytes_in_data_chunks += new_chunk.len;
@@ -385,7 +385,7 @@ void
 wav_reader_c::identify() {
   if (!m_demuxer) {
     uint16_t format_tag = get_uint16_le(&m_wheader.common.wFormatTag);
-    id_result_container_unsupported(m_in->get_file_name(), (boost::format("RIFF WAVE (wFormatTag = 0x%|1$04x|)") % format_tag).str());
+    id_result_container_unsupported(m_in->get_file_name(), fmt::format("RIFF WAVE (wFormatTag = 0x{0:04x})", format_tag));
     return;
   }
 

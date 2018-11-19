@@ -63,7 +63,7 @@ avc_es_reader_c::probe_file(mm_io_c &in,
     }
 
   } catch (mtx::exception &e) {
-    mxdebug_if(ms_debug, (boost::format(Y("Error %1%\n")) % e.error()));
+    mxdebug_if(ms_debug, fmt::format(Y("Error {0}\n"), e.error()));
 
   } catch (...) {
     mxdebug_if(ms_debug, Y("have an xcptn\n"));

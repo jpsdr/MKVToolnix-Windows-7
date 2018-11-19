@@ -39,7 +39,7 @@ mpeg1_2_video_packetizer_c(generic_reader_c *p_reader,
   , m_debug_stuffing_removal{"mpeg1_2|mpeg1_2_stuffing_removal"}
 {
 
-  set_codec_id((boost::format("V_MPEG%1%") % version).str());
+  set_codec_id(fmt::format("V_MPEG{0}", version));
   if (!display_dimensions_or_aspect_ratio_set()) {
     if ((0 < dwidth) && (0 < dheight))
       set_video_display_dimensions(dwidth, dheight, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
@@ -53,12 +53,12 @@ mpeg1_2_video_packetizer_c(generic_reader_c *p_reader,
 }
 
 mpeg1_2_video_packetizer_c::~mpeg1_2_video_packetizer_c() {
-  mxdebug_if(m_debug_stuffing_removal, boost::format("Total number of stuffing bytes removed: %1%\n") % m_num_removed_stuffing_bytes);
+  mxdebug_if(m_debug_stuffing_removal, fmt::format("Total number of stuffing bytes removed: {0}\n", m_num_removed_stuffing_bytes));
 }
 
 void
 mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr packet) {
-  mxdebug_if(m_debug_stuffing_removal, boost::format("Starting stuff removal, frame size %1%, timestamp %2%\n") % packet->data->get_size() % format_timestamp(packet->timestamp));
+  mxdebug_if(m_debug_stuffing_removal, fmt::format("Starting stuff removal, frame size {0}, timestamp {1}\n", packet->data->get_size(), format_timestamp(packet->timestamp)));
 
   auto buf              = packet->data->get_buffer();
   auto size             = packet->data->get_size();
@@ -83,7 +83,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
   //   pos  -= num_stuffing_bytes;
   //   size -= num_stuffing_bytes;
 
-  //   mxdebug_if(m_debug_stuffing_removal, boost::format("    Stuffing in the middle: %1%\n") % num_stuffing_bytes);
+  //   mxdebug_if(m_debug_stuffing_removal, fmt::format("    Stuffing in the middle: {0}\n", num_stuffing_bytes));
   // };
 
   memory_cptr new_seq_hdr;
@@ -115,7 +115,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
 
   while (pos < size) {
     if ((MPEGVIDEO_SLICE_START_CODE_LOWER <= marker) && (MPEGVIDEO_SLICE_START_CODE_UPPER >= marker)) {
-      mxdebug_if(m_debug_stuffing_removal, boost::format("  Slice start code at %1%\n") % (pos - 4));
+      mxdebug_if(m_debug_stuffing_removal, fmt::format("  Slice start code at {0}\n", pos - 4));
 
       // mid_remover();
       seq_hdr_copier(false);
@@ -125,7 +125,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
       start_code_pos = pos - 4;
 
     } else if ((marker & 0xffffff00) == 0x00000100) {
-      mxdebug_if(m_debug_stuffing_removal, boost::format("  Non-slice start code 0x%|2$08x| at %1%\n") % (pos - 4) % marker);
+      mxdebug_if(m_debug_stuffing_removal, fmt::format("  Non-slice start code 0x{1:08x} at {0}\n", pos - 4, marker));
 
       // mid_remover();
       seq_hdr_copier(false);
@@ -135,7 +135,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
       start_code_pos = pos - 4;
 
     } else if ((MPEGVIDEO_SLICE_START_CODE_LOWER == chunk_type) && !stuffing_start && (marker == 0x00000000)) {
-      mxdebug_if(m_debug_stuffing_removal, boost::format("    Start at %1%\n") % (pos - 3));
+      mxdebug_if(m_debug_stuffing_removal, fmt::format("    Start at {0}\n", pos - 3));
 
       stuffing_start = pos - 3;
     }
@@ -150,7 +150,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
     // mid_remover();
 
   // } else if (stuffing_start && (stuffing_start < size)) {
-  //   mxdebug_if(m_debug_stuffing_removal, boost::format("    Stuffing at the end: chunk_type 0x%|1$08x| stuffing_start %2% stuffing_size %3%\n") % chunk_type % stuffing_start % (stuffing_start ? size - stuffing_start : 0));
+  //   mxdebug_if(m_debug_stuffing_removal, fmt::format("    Stuffing at the end: chunk_type 0x{0:08x} stuffing_start {1} stuffing_size {2}\n", chunk_type, stuffing_start, stuffing_start ? size - stuffing_start : 0));
 
   //   m_num_removed_stuffing_bytes += size - stuffing_start;
   //   size                          = stuffing_start;

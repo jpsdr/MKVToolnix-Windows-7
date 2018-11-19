@@ -35,11 +35,11 @@ timestamp_calculator_c::add_timestamp(timestamp_c const &timestamp,
 
   if (   (!m_last_timestamp_returned.valid() || (timestamp > m_last_timestamp_returned)           || (m_allow_smaller_timestamps && (timestamp < m_last_timestamp_returned)))
       && (m_available_timestamps.empty()     || (timestamp > m_available_timestamps.back().first) || (m_allow_smaller_timestamps && (timestamp < m_available_timestamps.back().first)))) {
-    mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timestamp: adding %1%\n") % format_timestamp(timestamp));
+    mxdebug_if(m_debug, fmt::format("timestamp_calculator::add_timestamp: adding {0}\n", format_timestamp(timestamp)));
     m_available_timestamps.emplace_back(timestamp, stream_position);
 
   } else
-    mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timestamp: dropping %1%\n") % format_timestamp(timestamp));
+    mxdebug_if(m_debug, fmt::format("timestamp_calculator::add_timestamp: dropping {0}\n", format_timestamp(timestamp)));
 }
 
 void
@@ -96,7 +96,7 @@ timestamp_calculator_c::fetch_next_available_timestamp(int64_t samples_in_frame)
 
   m_available_timestamps.pop_front();
 
-  mxdebug_if(m_debug, boost::format("timestamp_calculator_c::get_next_timestamp: returning available %1%\n") % format_timestamp(m_last_timestamp_returned));
+  mxdebug_if(m_debug, fmt::format("timestamp_calculator_c::get_next_timestamp: returning available {0}\n", format_timestamp(m_last_timestamp_returned)));
 
   return m_last_timestamp_returned;
 }
@@ -109,7 +109,7 @@ timestamp_calculator_c::calculate_next_timestamp(int64_t samples_in_frame) {
   m_last_timestamp_returned           = m_reference_timestamp + timestamp_c::ns(m_samples_to_timestamp * m_samples_since_reference_timestamp);
   m_samples_since_reference_timestamp += samples_in_frame;
 
-  mxdebug_if(m_debug, boost::format("timestamp_calculator_c::get_next_timestamp: returning calculated %1%\n") % format_timestamp(m_last_timestamp_returned));
+  mxdebug_if(m_debug, fmt::format("timestamp_calculator_c::get_next_timestamp: returning calculated {0}\n", format_timestamp(m_last_timestamp_returned)));
 
   return m_last_timestamp_returned;
 }

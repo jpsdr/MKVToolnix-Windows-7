@@ -125,7 +125,7 @@ srt_parser_c::parse() {
 
     if (STATE_INITIAL == state) {
       if (!boost::regex_match(s, number_re)) {
-        mxwarn_tid(m_file_name, m_tid, boost::format(Y("Error in line %1%: expected subtitle number and found some text.\n")) % line_number);
+        mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Error in line {0}: expected subtitle number and found some text.\n"), line_number));
         break;
       }
       state = STATE_TIME;
@@ -134,7 +134,7 @@ srt_parser_c::parse() {
     } else if (STATE_TIME == state) {
       boost::smatch matches;
       if (!boost::regex_search(s, matches, timestamp_re)) {
-        mxwarn_tid(m_file_name, m_tid, boost::format(Y("Error in line %1%: expected a SRT timestamp line but found something else. Aborting this file.\n")) % line_number);
+        mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"), line_number));
         break;
       }
 
@@ -196,7 +196,7 @@ srt_parser_c::parse() {
 
       if (0 > start) {
         mxwarn_tid(m_file_name, m_tid,
-                   boost::format(Y("Line %1%: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n")) % line_number);
+                   fmt::format(Y("Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"), line_number));
         end   -= start;
         start  = 0;
         if (0 > end)
@@ -208,8 +208,8 @@ srt_parser_c::parse() {
       // of this function, but warn the user that the original order is being
       // changed.
       if (!timestamp_warning_printed && (start < previous_start)) {
-        mxwarn_tid(m_file_name, m_tid, boost::format(Y("Warning in line %1%: The start timestamp is smaller than that of the previous entry. "
-                                                       "All entries from this file will be sorted by their start time.\n")) % line_number);
+        mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Warning in line {0}: The start timestamp is smaller than that of the previous entry. "
+                                                     "All entries from this file will be sorted by their start time.\n"), line_number));
         timestamp_warning_printed = true;
       }
 
@@ -391,7 +391,7 @@ ssa_parser_c::parse() {
         if (   (0     > start)
             || (0     > end)
             || (start > end)) {
-          mxwarn_tid(m_file_name, m_tid, boost::format(Y("SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: %1%\n")) % orig_line);
+          mxwarn_tid(m_file_name, m_tid, fmt::format(Y("SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"), orig_line));
           continue;
         }
 
@@ -509,7 +509,7 @@ ssa_parser_c::recode(std::string const &s,
 
   if (!m_invalid_utf8_warned) {
     m_invalid_utf8_warned = true;
-    mxwarn_tid(m_file_name, m_tid, boost::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
+    mxwarn_tid(m_file_name, m_tid, fmt::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
   }
 
   return mtx::utf8::fix_invalid(recoded, replacement_marker);
@@ -547,7 +547,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
 
   attachment.ui_id        = m_attachment_id;
   attachment.name         = recode(name, static_cast<uint32_t>('_'));
-  attachment.description  = (boost::format(SSA_SECTION_FONTS == section ? Y("Imported font from %1%") : Y("Imported picture from %1%")) % short_name).str();
+  attachment.description  = fmt::format(SSA_SECTION_FONTS == section ? Y("Imported font from {0}") : Y("Imported picture from {0}"), short_name);
   attachment.to_all_files = true;
   attachment.source_file  = m_file_name;
 

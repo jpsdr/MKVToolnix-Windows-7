@@ -130,8 +130,6 @@ protected:
   void retain_element(std::shared_ptr<libebml::EbmlElement> const &element);
 
 public:
-  static void init_common_formats();
-
   static std::string format_ebml_id_as_hex(libebml::EbmlElement &e);
   static std::string format_ebml_id_as_hex(libebml::EbmlId const &id);
   static std::string format_ebml_id_as_hex(uint32_t id);

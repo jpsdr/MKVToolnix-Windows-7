@@ -113,7 +113,7 @@ avi_reader_c::~avi_reader_c() {
   if (m_avi)
     AVI_close(m_avi);
 
-  mxverb(2, boost::format("avi_reader_c: Dropped video frames: %1%\n") % m_dropped_video_frames);
+  mxverb(2, fmt::format("avi_reader_c: Dropped video frames: {0}\n", m_dropped_video_frames));
 }
 
 void
@@ -201,16 +201,16 @@ avi_reader_c::create_video_packetizer() {
 
   for (i = 0; i < m_max_video_frames; i++) {
     m_bytes_to_process += AVI_frame_size(m_avi, i);
-    mxverb(4, boost::format("  %1%: %2%\n") % i % AVI_frame_size(m_avi, i));
+    mxverb(4, fmt::format("  {0}: {1}\n", i, AVI_frame_size(m_avi, i)));
   }
 
   if (m_avi->bitmap_info_header) {
     m_ti.m_private_data = memory_c::clone(m_avi->bitmap_info_header, sizeof(alBITMAPINFOHEADER) + m_avi->extradata_size);
 
-    mxverb(4, boost::format("track extra data size: %1%\n") % (m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER)));
+    mxverb(4, fmt::format("track extra data size: {0}\n", m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER)));
 
     if (sizeof(alBITMAPINFOHEADER) < m_ti.m_private_data->get_size())
-      mxverb(4, boost::format("  %1%\n") % to_hex(m_ti.m_private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER)));
+      mxverb(4, fmt::format("  {0}\n", to_hex(m_ti.m_private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
   }
 
   const char *codec = AVI_video_compressor(m_avi);
@@ -427,7 +427,7 @@ avi_reader_c::add_audio_demuxer(int aid) {
 
   AVI_set_audio_track(m_avi, aid);
   if (AVI_read_audio_chunk(m_avi, nullptr) < 0) {
-    mxwarn(boost::format(Y("Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n")) % (aid + 1) % AVI_strerror());
+    mxwarn(fmt::format(Y("Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"), aid + 1, AVI_strerror()));
     return;
   }
 
@@ -481,7 +481,7 @@ avi_reader_c::add_audio_demuxer(int aid) {
     packetizer = create_vorbis_packetizer(aid);
 
   else
-    mxerror_tid(m_ti.m_fname, aid + 1, boost::format(Y("Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n")) % audio_format);
+    mxerror_tid(m_ti.m_fname, aid + 1, fmt::format(Y("Unknown/unsupported audio format 0x{0:04x} for this audio track.\n"), audio_format));
 
   packetizer->enable_avi_audio_sync(true);
 
@@ -628,7 +628,7 @@ avi_reader_c::create_vorbis_packetizer(int aid) {
     return new vorbis_packetizer_c(this, m_ti, headers[0], header_sizes[0], headers[1], header_sizes[1], headers[2], header_sizes[2]);
 
   } catch (mtx::exception &e) {
-    mxerror_tid(m_ti.m_fname, aid + 1, boost::format("%1%\n") % e.error());
+    mxerror_tid(m_ti.m_fname, aid + 1, fmt::format("{0}\n", e.error()));
 
     // Never reached, but make the compiler happy:
     return nullptr;
@@ -838,7 +838,7 @@ avi_reader_c::extended_identify_mpeg4_l2(mtx::id::info_c &info) {
       disp_height = std::llround(m_video_width / aspect_ratio);
     }
 
-    info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % disp_width % disp_height);
+    info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", disp_width, disp_height));
   }
 }
 
@@ -866,7 +866,7 @@ avi_reader_c::identify_video() {
   else if (codec.is(codec_c::type_e::V_MPEG4_P10))
     info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
 
-  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % m_video_width % m_video_height);
+  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_video_width, m_video_height));
 
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), info.get());
 }
@@ -891,7 +891,7 @@ avi_reader_c::identify_audio() {
     }
 
     auto codec = codec_c::look_up_audio_format(audio_format);
-    id_result_track(i + 1, ID_RESULT_TRACK_AUDIO, codec.get_name((boost::format("unsupported (0x%|1$04x|)") % audio_format).str()), info.get());
+    id_result_track(i + 1, ID_RESULT_TRACK_AUDIO, codec.get_name(fmt::format("unsupported (0x{0:04x})", audio_format)), info.get());
   }
 }
 
@@ -946,11 +946,11 @@ void
 avi_reader_c::debug_dump_video_index() {
   int num_video_frames = AVI_video_frames(m_avi), i;
 
-  mxinfo(boost::format("AVI video index dump: %1% entries; frame rate: %2%\n") % num_video_frames % m_fps);
+  mxinfo(fmt::format("AVI video index dump: {0} entries; frame rate: {1}\n", num_video_frames, m_fps));
   for (i = 0; num_video_frames > i; ++i) {
     int key = 0;
     AVI_read_frame(m_avi, nullptr, &key);
-    mxinfo(boost::format("  %1%: %2% bytes; key: %3%\n") % i % AVI_frame_size(m_avi, i) % key);
+    mxinfo(fmt::format("  {0}: {1} bytes; key: {2}\n", i, AVI_frame_size(m_avi, i), key));
   }
 
   AVI_set_video_position(m_avi, 0);

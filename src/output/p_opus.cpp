@@ -27,7 +27,7 @@ opus_packetizer_c::opus_packetizer_c(generic_reader_c *reader,
   , m_next_calculated_timestamp{timestamp_c::ns(0)}
   , m_id_header(mtx::opus::id_header_t::decode(ti.m_private_data))
 {
-  mxdebug_if(m_debug, boost::format("ID header: %1%\n") % m_id_header);
+  mxdebug_if(m_debug, fmt::format("ID header: {0}\n", m_id_header));
 
   set_track_type(track_audio);
   set_codec_private(m_ti.m_private_data);
@@ -38,7 +38,7 @@ opus_packetizer_c::~opus_packetizer_c() {
 
 void
 opus_packetizer_c::set_headers() {
-  set_codec_id((boost::format("%1%") % MKV_A_OPUS).str());
+  set_codec_id(fmt::format("{0}", MKV_A_OPUS));
 
   set_codec_delay(timestamp_c::samples(m_id_header.pre_skip, 48000));
   set_track_seek_pre_roll(timestamp_c::ms(80));
@@ -62,7 +62,7 @@ opus_packetizer_c::process(packet_cptr packet) {
     packet->duration                = toc.packet_duration.to_ns();
     m_next_calculated_timestamp     = timestamp_c::ns(packet->timestamp + packet->duration);
 
-    mxdebug_if(m_debug, boost::format("TOC: %1% discard_padding %2% final timestamp %3% duration %4%\n") % toc % packet->discard_padding % format_timestamp(packet->timestamp) % format_timestamp(packet->duration));
+    mxdebug_if(m_debug, fmt::format("TOC: {0} discard_padding {1} final timestamp {2} duration {3}\n", toc, packet->discard_padding, format_timestamp(packet->timestamp), format_timestamp(packet->duration)));
 
     if (packet->discard_padding.valid())
       packet->duration_mandatory = true;
@@ -70,7 +70,7 @@ opus_packetizer_c::process(packet_cptr packet) {
     add_packet(packet);
 
   } catch (mtx::opus::exception &ex) {
-    mxdebug_if(m_debug, boost::format("Exception: %1%\n") % ex.what());
+    mxdebug_if(m_debug, fmt::format("Exception: {0}\n", ex.what()));
   }
 
   return FILE_STATUS_MOREDATA;

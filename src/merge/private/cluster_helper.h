@@ -43,8 +43,8 @@ public:
     auto result = diff > timestamp_c::ms(2);
 
     mxdebug_if(ms_gap_detection,
-               boost::format("follows gap %1% expected next: %2% assigned %3%  %4%\n")
-               % result % format_timestamp(m_expected_next_timestamp) % format_timestamp(pack.assigned_timestamp) % diff);
+               fmt::format("follows gap {0} expected next: {1} assigned {2}  {3}\n",
+                           result, format_timestamp(m_expected_next_timestamp), format_timestamp(pack.assigned_timestamp), diff));
 
     return result;
   }

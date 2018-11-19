@@ -131,7 +131,7 @@ void
 hevc_es_reader_c::identify() {
   auto info = mtx::id::info_c{};
   info.add(mtx::id::packetizer,       mtx::id::mpegh_p2_es_video);
-  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % m_width % m_height);
+  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_width, m_height));
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEGH_P2, "HEVC"), info.get());

@@ -50,7 +50,7 @@ public:
     , m_attribute(attribute)
     , m_position(position)
   {
-    m_message = (boost::format(Y("Invalid attribute '%1%' in node '%2%' at position %3%")) % m_attribute % m_node % m_position).str();
+    m_message = fmt::format(Y("Invalid attribute '{0}' in node '{1}' at position {2}"), m_attribute, m_node, m_position);
   }
   virtual ~invalid_attribute_x() throw() { }
 
@@ -69,7 +69,7 @@ public:
     , m_parent(parent)
     , m_position(position)
   {
-    m_message = (boost::format(Y("<%1%> is not a valid child element of <%2%> at position %3%.")) % m_node % m_parent % m_position).str();
+    m_message = fmt::format(Y("<{0}> is not a valid child element of <{1}> at position {2}."), m_node, m_parent, m_position);
   }
   virtual ~invalid_child_node_x() throw() { }
 
@@ -88,7 +88,7 @@ public:
     , m_parent(parent)
     , m_position(position)
   {
-    m_message = (boost::format(Y("Only one instance of <%1%> is allowed beneath <%2%> at position %3%.")) % m_node % m_parent % m_position).str();
+    m_message = fmt::format(Y("Only one instance of <{0}> is allowed beneath <{1}> at position {2}."), m_node, m_parent, m_position);
   }
   virtual ~duplicate_child_node_x() throw() { }
 
@@ -106,7 +106,7 @@ public:
     : m_node(node)
     , m_position(position)
   {
-    m_message = (boost::format(Y("The tag or attribute '%1%' at position %2% contains invalid or mal-formed data.")) % m_node % m_position).str();
+    m_message = fmt::format(Y("The tag or attribute '{0}' at position {1} contains invalid or mal-formed data."), m_node, m_position);
     if (!details.empty())
       m_message += " " + details;
   }
@@ -126,7 +126,7 @@ public:
     : m_node(node)
     , m_position(position)
   {
-    m_message = (boost::format(Y("The tag or attribute '%1%' at position %2% contains data that is outside its allowed range.")) % m_node % m_position).str();
+    m_message = fmt::format(Y("The tag or attribute '{0}' at position {1} contains data that is outside its allowed range."), m_node, m_position);
     if (!details.empty())
       m_message += " " + details;
   }

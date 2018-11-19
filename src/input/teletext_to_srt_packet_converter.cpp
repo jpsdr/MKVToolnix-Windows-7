@@ -172,7 +172,7 @@ teletext_to_srt_packet_converter_c::override_encoding(int page,
   else if (mtx::included_in(iso639_2_code, "tur"))
     itr->second->m_forced_char_map_idx.reset(12);
 
-  mxdebug_if(m_debug, boost::format("Overriding encoding for ISO639-2 code %1%; result: %2%\n") % iso639_2_code % (itr->second->m_forced_char_map_idx ? *itr->second->m_forced_char_map_idx : -1));
+  mxdebug_if(m_debug, fmt::format("Overriding encoding for ISO639-2 code {0}; result: {1}\n", iso639_2_code, itr->second->m_forced_char_map_idx ? *itr->second->m_forced_char_map_idx : -1));
 }
 
 void
@@ -291,7 +291,7 @@ teletext_to_srt_packet_converter_c::process_single_row(unsigned int row_number) 
   remove_parity(&m_buf[m_pos + 6], m_data_length + 2 - 6);
   if (decode_line(&m_buf[m_pos + 6], row_number)) {
     m_current_track->m_page_changed = true;
-    mxdebug_if(m_debug_packet, boost::format("  new content of row %1%: %2%\n") % row_number % m_current_track->m_page_data.page_buffer[row_number - 1]);
+    mxdebug_if(m_debug_packet, fmt::format("  new content of row {0}: {1}\n", row_number, m_current_track->m_page_data.page_buffer[row_number - 1]));
   }
 }
 
@@ -330,9 +330,9 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
   auto const page_content           = page_to_string();
 
   mxdebug_if(m_debug,
-             boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% subtitle? %5% flags %|7$02x| queued timestamp %8% queued content size %9%\n")
-             % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % subtitle % format_timestamp(m_current_packet_timestamp) % static_cast<unsigned int>(page_data.flags)
-             % m_current_track->m_queued_timestamp % page_content.size());
+             fmt::format("  ttx page {0} at {5} subpage {1} erase? {2} national set {3} subtitle? {4} flags {6:02x} queued timestamp {7} queued content size {8}\n",
+                         page_data.page, page_data.subpage, page_data.erase_flag, page_data.national_set, subtitle, format_timestamp(m_current_packet_timestamp), static_cast<unsigned int>(page_data.flags),
+                         m_current_track->m_queued_timestamp, page_content.size()));
 
   queue_page_content(page_content);
 
@@ -371,8 +371,8 @@ teletext_to_srt_packet_converter_c::deliver_queued_packet() {
   auto &packet = m_current_track->m_queued_packet;
 
   mxdebug_if(m_debug,
-             boost::format("  queue: delivering packet %1% duration %2% content %3%\n")
-             % format_timestamp(packet->timestamp) % format_timestamp(packet->duration) % displayable_packet_content(*packet->data));
+             fmt::format("  queue: delivering packet {0} duration {1} content {2}\n",
+                         format_timestamp(packet->timestamp), format_timestamp(packet->duration), displayable_packet_content(*packet->data)));
 
   m_current_track->m_ptzr->process(packet);
   packet.reset();
@@ -392,14 +392,14 @@ teletext_to_srt_packet_converter_c::maybe_merge_queued_and_new_packet(packet_t c
   auto diff               = timestamp_c::ns(new_packet.timestamp) - prev_end;
 
   if (!same_content || (diff.abs() > s_merge_allowed_within)) {
-    mxdebug_if(m_debug, boost::format("  queue: not possible to merge; diff: %1% same content? %2%\n") % diff % same_content);
+    mxdebug_if(m_debug, fmt::format("  queue: not possible to merge; diff: {0} same content? {1}\n", diff, same_content));
     return false;
   }
 
   m_current_track->m_queued_packet->duration = (timestamp_c::ns(new_packet.timestamp + new_packet.duration) - prev_timestamp).abs().to_ns();
   mxdebug_if(m_debug,
-             boost::format("  queue: merging packet with previous, now %1% duration %2% content %3%\n")
-             % format_timestamp(prev_timestamp) % format_timestamp(m_current_track->m_queued_packet->duration) % displayable_packet_content(new_content));
+             fmt::format("  queue: merging packet with previous, now {0} duration {1} content {2}\n",
+                         format_timestamp(prev_timestamp), format_timestamp(m_current_track->m_queued_packet->duration), displayable_packet_content(new_content)));
 
   return true;
 }
@@ -412,8 +412,8 @@ teletext_to_srt_packet_converter_c::queue_packet(packet_cptr const &new_packet) 
   deliver_queued_packet();
 
   mxdebug_if(m_debug,
-             boost::format("  queue: queueing packet %1% duration %2% content %3%\n")
-             % format_timestamp(new_packet->timestamp) % format_timestamp(new_packet->duration) % displayable_packet_content(*new_packet->data));
+             fmt::format("  queue: queueing packet {0} duration {1} content {2}\n",
+                         format_timestamp(new_packet->timestamp), format_timestamp(new_packet->duration), displayable_packet_content(*new_packet->data)));
   m_current_track->m_queued_packet = new_packet;
 }
 
@@ -425,8 +425,8 @@ teletext_to_srt_packet_converter_c::flush() {
       continue;
 
     mxdebug_if(m_debug,
-               boost::format("  queue: flushing packet %1% duration %2% content %3%\n")
-               % format_timestamp(data->m_queued_packet->timestamp) % format_timestamp(data->m_queued_packet->duration) % displayable_packet_content(*data->m_queued_packet->data));
+               fmt::format("  queue: flushing packet {0} duration {1} content {2}\n",
+                           format_timestamp(data->m_queued_packet->timestamp), format_timestamp(data->m_queued_packet->duration), displayable_packet_content(*data->m_queued_packet->data)));
 
     data->m_ptzr->process(data->m_queued_packet);
     data->m_queued_packet.reset();
@@ -440,7 +440,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
 
   if (!mtx::included_in(data_unit_id, 0x02, 0x03) || (0xe4 != start_byte)) {
     if (0xff != data_unit_id)
-      mxdebug_if(m_debug_packet, boost::format("unsupported data_unit_id/start_byte; m_pos %1% data_unit_id 0x%|2$02x| start_byte 0x%|3$02x|\n") % m_pos % static_cast<unsigned int>(data_unit_id) % static_cast<unsigned int>(start_byte));
+      mxdebug_if(m_debug_packet, fmt::format("unsupported data_unit_id/start_byte; m_pos {0} data_unit_id 0x{1:02x} start_byte 0x{2:02x}\n", m_pos, static_cast<unsigned int>(data_unit_id), static_cast<unsigned int>(start_byte)));
 
     return;
   }
@@ -456,7 +456,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
   if (!ttx_header_magazine)
     ttx_header_magazine = 8;
 
-  mxdebug_if(m_debug_packet, boost::format(" m_pos %1% packet_id/row_number %2% magazine %3%\n") % m_pos % static_cast<unsigned int>(row_number) % ttx_header_magazine);
+  mxdebug_if(m_debug_packet, fmt::format(" m_pos {0} packet_id/row_number {1} magazine {2}\n", m_pos, static_cast<unsigned int>(row_number), ttx_header_magazine));
 
   if (row_number == 0) {
     decode_page_data(ttx_header_magazine);
@@ -490,7 +490,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
   m_pos                      = 1;                // skip sub ID
   m_current_packet_timestamp = timestamp_c::ns(packet->timestamp);
 
-  mxdebug_if(m_debug_conversion, boost::format("Starting conversion on packet with length %1% timestamp %2%\n") % m_in_size % format_timestamp(packet->timestamp));
+  mxdebug_if(m_debug_conversion, fmt::format("Starting conversion on packet with length {0} timestamp {1}\n", m_in_size, format_timestamp(packet->timestamp)));
 
   //
   // PES teletext payload (payload_index) packet length = 44 + 2 = 46
@@ -509,7 +509,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
       break;
 
     if (m_data_length != 0x2c) {
-      mxdebug_if(m_debug_conversion, boost::format("pos %1% invalid data length %2% != %3%\n") % m_data_length % 0x2c);
+      mxdebug_if(m_debug_conversion, fmt::format("pos {0} invalid data length {1} != {2}\n", m_data_length, 0x2c));
       m_pos = m_pos + 2 + 0x2c;
       continue;
     }

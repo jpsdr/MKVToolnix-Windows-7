@@ -195,9 +195,9 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
 
   if (m_ti.m_aspect_ratio_given && m_ti.m_display_dimensions_given) {
     if (m_ti.m_aspect_ratio_is_factor)
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Both the aspect ratio factor and '--display-dimensions' were given.\n")));
+      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Both the aspect ratio factor and '--display-dimensions' were given.\n")));
     else
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Both the aspect ratio and '--display-dimensions' were given.\n")));
+      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Both the aspect ratio and '--display-dimensions' were given.\n")));
   }
 
   // Let's see if the user has specified a FourCC for this track.
@@ -376,8 +376,8 @@ generic_packetizer_c::set_tag_track_uid() {
     fix_mandatory_elements(tag);
 
     if (!tag->CheckMandatory())
-      mxerror(boost::format(Y("The tags in '%1%' could not be parsed: some mandatory elements are missing.\n"))
-              % (m_ti.m_tags_file_name != "" ? m_ti.m_tags_file_name : m_ti.m_fname));
+      mxerror(fmt::format(Y("The tags in '{0}' could not be parsed: some mandatory elements are missing.\n"),
+                          m_ti.m_tags_file_name != "" ? m_ti.m_tags_file_name : m_ti.m_fname));
   }
 }
 
@@ -638,8 +638,8 @@ generic_packetizer_c::set_as_default_track(int type,
   } else if (   (DEFAULT_TRACK_PRIORITY_CMDLINE == priority)
              && (g_default_tracks[type] != m_hserialno)
              && !m_default_track_warning_printed) {
-    mxwarn(boost::format(Y("Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"))
-           % (DEFTRACK_TYPE_AUDIO == type ? "audio" : DEFTRACK_TYPE_VIDEO == type ? "video" : "subtitle") % m_ti.m_id % m_ti.m_fname);
+    mxwarn(fmt::format(Y("Another default track for {0} tracks has already been set. The 'default' flag for track {1} of '{2}' will not be set.\n"),
+                       DEFTRACK_TYPE_AUDIO == type ? "audio" : DEFTRACK_TYPE_VIDEO == type ? "video" : "subtitle", m_ti.m_id, m_ti.m_fname));
     m_default_track_warning_printed = true;
   }
 }
@@ -963,7 +963,7 @@ generic_packetizer_c::set_video_colour_space(memory_cptr const &value,
 void
 generic_packetizer_c::set_headers() {
   if (0 < m_connected_to) {
-    mxerror(boost::format("generic_packetizer_c::set_headers(): connected_to > 0 (type: %1%). %2%\n") % typeid(*this).name() % BUGMSG);
+    mxerror(fmt::format("generic_packetizer_c::set_headers(): connected_to > 0 (type: {0}). {1}\n", typeid(*this).name(), BUGMSG));
     return;
   }
 
@@ -1286,7 +1286,7 @@ generic_packetizer_c::compress_packet(packet_t &packet) {
       packet.data_adds[i] = m_compressor->compress(packet.data_adds[i]);
 
   } catch (mtx::compression_x &e) {
-    mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Compression failed: %1%\n")) % e.error());
+    mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Compression failed: {0}\n"), e.error()));
   }
 }
 
@@ -1360,20 +1360,20 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
         pack->fref += needed_timestamp_offset;
 
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format(Y("The current packet's timestamp is smaller than that of the previous packet. "
-                                 "This usually means that the source file is a Matroska file that has not been created 100%% correctly. "
-                                 "The timestamps of all packets will be adjusted by %1%ms in order not to lose any data. "
-                                 "This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. "
-                                 "If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. "
-                                 "If this error happens more than once and you get this message more than once for a particular track "
-                                 "then either is the source file badly mastered, or mkvmerge contains a bug. "
-                                 "In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"))
-                 % ((needed_timestamp_offset + 500000) / 1000000));
+                 fmt::format(Y("The current packet's timestamp is smaller than that of the previous packet. "
+                               "This usually means that the source file is a Matroska file that has not been created 100% correctly. "
+                               "The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. "
+                               "This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. "
+                               "If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. "
+                               "If this error happens more than once and you get this message more than once for a particular track "
+                               "then either is the source file badly mastered, or mkvmerge contains a bug. "
+                               "In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"),
+                             (needed_timestamp_offset + 500000) / 1000000));
 
     } else
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format("generic_packetizer_c::add_packet2: timestamp < last_timestamp (%1% < %2%). %3%\n")
-                 % format_timestamp(pack->timestamp) % format_timestamp(m_safety_last_timestamp) % BUGMSG);
+                 fmt::format("generic_packetizer_c::add_packet2: timestamp < last_timestamp ({0} < {1}). {2}\n",
+                             format_timestamp(pack->timestamp), format_timestamp(m_safety_last_timestamp), BUGMSG));
   }
 
   m_safety_last_timestamp        = pack->timestamp;
@@ -1428,8 +1428,8 @@ generic_packetizer_c::apply_factory_once(packet_cptr &packet) {
   packet->factory_applied      = true;
 
   mxverb(4,
-         boost::format("apply_factory_once(): source %1% t %2% tbf %3% at %4%\n")
-         % packet->source->get_source_track_num() % packet->timestamp % packet->timestamp_before_factory % packet->assigned_timestamp);
+         fmt::format("apply_factory_once(): source {0} t {1} tbf {2} at {3}\n",
+                     packet->source->get_source_track_num(), packet->timestamp, packet->timestamp_before_factory, packet->assigned_timestamp));
 
   m_max_timestamp_seen           = std::max(m_max_timestamp_seen, packet->assigned_timestamp + packet->duration);
   m_reader->m_max_timestamp_seen = std::max(m_max_timestamp_seen, m_reader->m_max_timestamp_seen);
@@ -1550,7 +1550,7 @@ generic_packetizer_c::force_duration_on_last_packet() {
   packet_cptr &packet        = m_packet_queue.back();
   packet->duration_mandatory = true;
   mxverb_tid(3, m_ti.m_fname, m_ti.m_id,
-             boost::format("force_duration_on_last_packet: forcing at %1% with %|2$.3f|ms\n") % format_timestamp(packet->timestamp) % (packet->duration / 1000.0));
+             fmt::format("force_duration_on_last_packet: forcing at {0} with {1:.3f}ms\n", format_timestamp(packet->timestamp), packet->duration / 1000.0));
 }
 
 int64_t
@@ -1642,10 +1642,10 @@ generic_packetizer_c::show_experimental_status_version(std::string const &codec_
     return;
 
   s_experimental_status_warning_shown[idx] = true;
-  mxwarn(boost::format(Y("Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. "
-                         "mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. "
-                         "This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"))
-         % get_format_name().get_translated() % codec_id);
+  mxwarn(fmt::format(Y("Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. "
+                       "mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. "
+                       "This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"),
+                     get_format_name().get_translated(), codec_id));
 }
 
 int64_t
@@ -1661,7 +1661,7 @@ generic_packetizer_c::create_track_number() {
     }
 
   if (file_num == -1)
-    mxerror(boost::format(Y("create_track_number: file_num not found. %1%\n")) % BUGMSG);
+    mxerror(fmt::format(Y("create_track_number: file_num not found. {0}\n"), BUGMSG));
 
   // Determine current track's track number regarding --track-order
   // and look up the pair in g_track_order.

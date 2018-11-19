@@ -68,8 +68,8 @@ hevc_video_packetizer_c::extract_aspect_ratio() {
                                OPTION_SOURCE_BITSTREAM);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-             boost::format(Y("Extracted the aspect ratio information from the HEVC video data and set the display dimensions to %1%/%2%.\n"))
-             % m_ti.m_display_width % m_ti.m_display_height);
+             fmt::format(Y("Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"),
+                         m_ti.m_display_width, m_ti.m_display_height));
 }
 
 int
@@ -101,7 +101,7 @@ hevc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
     return result;
 
   if (m_ti.m_private_data && vsrc->m_ti.m_private_data && memcmp(m_ti.m_private_data->get_buffer(), vsrc->m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size())) {
-    error_message = (boost::format(Y("The codec's private data does not match. Both have the same length (%1%) but different content.")) % m_ti.m_private_data->get_size()).str();
+    error_message = fmt::format(Y("The codec's private data does not match. Both have the same length ({0}) but different content."), m_ti.m_private_data->get_size());
     return CAN_CONNECT_MAYBE_CODECPRIVATE;
   }
 
@@ -126,7 +126,7 @@ hevc_video_packetizer_c::setup_nalu_size_len_change() {
 
   set_codec_private(m_ti.m_private_data);
 
-  mxverb(2, boost::format("HEVC: Adjusting NALU size length from %1% to %2%\n") % m_nalu_size_len_src % m_nalu_size_len_dst);
+  mxverb(2, fmt::format("HEVC: Adjusting NALU size length from {0} to {1}\n", m_nalu_size_len_src, m_nalu_size_len_dst));
 }
 
 void
@@ -155,7 +155,7 @@ hevc_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
       nalu_size = size - src_pos - m_nalu_size_len_src;
 
     if (nalu_size > m_max_nalu_size)
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("The chosen NALU size length of %1% is too small. Try using '4'.\n")) % m_nalu_size_len_dst);
+      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("The chosen NALU size length of {0} is too small. Try using '4'.\n"), m_nalu_size_len_dst));
 
     src_pos += m_nalu_size_len_src + nalu_size;
 

@@ -81,11 +81,11 @@ open_input_file(filelist_t &file) {
     }
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file.name % ex);
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), file.name, ex));
     return mm_io_cptr{};
 
   } catch (...) {
-    mxerror(boost::format(Y("The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n")) % file.name);
+    mxerror(fmt::format(Y("The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"), file.name));
     return mm_io_cptr{};
   }
 }
@@ -109,9 +109,9 @@ template<typename Treader,
 int
 do_probe(Tio &io,
          Targs && ...args) {
-  // log_it(boost::format("%1%: probe start") % typeid(Treader).name());
+  // log_it(fmt::format("{0}: probe start", typeid(Treader).name()));
   auto result = Treader::probe_file(*io, std::forward<Targs>(args)...);
-  // log_it(boost::format("%1%: probe done") % typeid(Treader).name());
+  // log_it(fmt::format("{0}: probe done", typeid(Treader).name()));
 
   return result;
 }
@@ -180,10 +180,10 @@ detect_text_file_formats(filelist_t const &file) {
       return mtx::file_type_e::microdvd;
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file.name % ex);
+    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), file.name, ex));
 
   } catch (...) {
-    mxerror(boost::format(Y("The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n")) % file.name);
+    mxerror(fmt::format(Y("The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"), file.name));
   }
 
   return mtx::file_type_e::is_unknown;
@@ -466,7 +466,7 @@ create_readers() {
           file->reader.reset(new webvtt_reader_c(*file->ti, input_file));
           break;
         default:
-          mxerror(boost::format(Y("EVIL internal bug! (unknown file type). %1%\n")) % BUGMSG);
+          mxerror(fmt::format(Y("EVIL internal bug! (unknown file type). {0}\n"), BUGMSG));
           break;
       }
 
@@ -479,22 +479,22 @@ create_readers() {
       file->size = file->reader->get_file_size();
 
       mxdebug_if(s_debug_timestamp_restrictions,
-                 boost::format("Timestamp restrictions for %3%: min %1% max %2%\n") % file->restricted_timestamp_min % file->restricted_timestamp_max % file->ti->m_fname);
+                 fmt::format("Timestamp restrictions for {2}: min {0} max {1}\n", file->restricted_timestamp_min, file->restricted_timestamp_max, file->ti->m_fname));
 
     } catch (mtx::mm_io::open_x &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % Y("The file could not be opened for reading, or there was not enough data to parse its headers."));
+      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file could not be opened for reading, or there was not enough data to parse its headers.")));
 
     } catch (mtx::input::open_x &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % Y("The file could not be opened for reading, or there was not enough data to parse its headers."));
+      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file could not be opened for reading, or there was not enough data to parse its headers.")));
 
     } catch (mtx::input::invalid_format_x &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % Y("The file content does not match its format type and was not recognized."));
+      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file content does not match its format type and was not recognized.")));
 
     } catch (mtx::input::header_parsing_x &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % Y("The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."));
+      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged.")));
 
     } catch (mtx::input::exception &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % error.error());
+      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, error.error()));
     }
   }
 }

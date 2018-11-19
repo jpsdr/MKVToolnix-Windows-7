@@ -211,7 +211,6 @@ App::reinitializeLanguageLists() {
 
   initializeLanguageLists();
 
-  ::mtx::kax_info_c::init_common_formats();
   kax_element_names_c::reset();
 }
 

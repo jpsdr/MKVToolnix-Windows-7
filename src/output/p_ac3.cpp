@@ -63,10 +63,10 @@ ac3_packetizer_c::get_frame() {
 
     if (0 < offset) {
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format(Y("This AC-3 track contains %1% bytes of non-AC-3 data at the beginning. "
-                                 "This corresponds to a delay of %2%ms. "
-                                 "This delay will be used instead of the non-AC-3 data.\n"))
-                 % frame.m_garbage_size % (offset / 1000000));
+                 fmt::format(Y("This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. "
+                               "This corresponds to a delay of {1}ms. "
+                               "This delay will be used instead of the non-AC-3 data.\n"),
+                             frame.m_garbage_size, offset / 1000000));
 
       warning_printed             = true;
       m_ti.m_tcsync.displacement += offset;
@@ -77,10 +77,11 @@ ac3_packetizer_c::get_frame() {
     auto bytes = frame.m_garbage_size;
     m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timestamp_offset) {
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format("%1% %2%\n")
-                 % (boost::format(NY("This audio track contains %1% byte of invalid data which was skipped before timestamp %2%.",
-                                     "This audio track contains %1% bytes of invalid data which were skipped before timestamp %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timestamp - timestamp_offset))
-                 % Y("The audio/video synchronization may have been lost."));
+                 fmt::format("{0} {1}\n",
+                             fmt::format(NY("This audio track contains {0} byte of invalid data which was skipped before timestamp {1}.",
+                                            "This audio track contains {0} bytes of invalid data which were skipped before timestamp {1}.", bytes),
+                                         bytes, format_timestamp(packet->assigned_timestamp - timestamp_offset)),
+                             Y("The audio/video synchronization may have been lost.")));
     }));
   }
 
@@ -107,7 +108,7 @@ ac3_packetizer_c::set_headers() {
 
 int
 ac3_packetizer_c::process(packet_cptr packet) {
-  // mxinfo(boost::format("tc %1% size %2%\n") % format_timestamp(packet->timestamp) % packet->data->get_size());
+  // mxinfo(fmt::format("tc {0} size {1}\n", format_timestamp(packet->timestamp), packet->data->get_size()));
 
   m_timestamp_calculator.add_timestamp(packet, m_stream_position);
   m_discard_padding.add_maybe(packet->discard_padding, m_stream_position);
@@ -127,7 +128,7 @@ ac3_packetizer_c::set_timestamp_and_add_packet(packet_cptr const &packet,
   packet->duration  = m_packet_duration;
 
   // if (packet_stream_position)
-  //   mxinfo(boost::format("  ts %1% position in %2% out %3%\n") % format_timestamp(packet->timestamp) % format_number(m_stream_position) % format_number(*packet_stream_position));
+  //   mxinfo(fmt::format("  ts {0} position in {1} out {2}\n", format_timestamp(packet->timestamp), format_number(m_stream_position), format_number(*packet_stream_position)));
 
   auto ok_before = m_verify_checksums ? mtx::ac3::verify_checksums(packet->data->get_buffer(), packet->data->get_size(), true) : true;
   auto ok_after  = -1;
@@ -139,8 +140,8 @@ ac3_packetizer_c::set_timestamp_and_add_packet(packet_cptr const &packet,
   }
 
   mxdebug_if(m_verify_checksums,
-             boost::format("AC-3 packetizer checksum verification at %1% / %2%: before/after removal: %3%/%4%\n")
-             % format_timestamp(packet->timestamp) % format_number(m_stream_position) % ok_before % (ok_after == -1 ? "n/a" : ok_after ? "1" : "0"));
+             fmt::format("AC-3 packetizer checksum verification at {0} / {1}: before/after removal: {2}/{3}\n",
+                         format_timestamp(packet->timestamp), format_number(m_stream_position), ok_before, ok_after == -1 ? "n/a" : ok_after ? "1" : "0"));
 
   add_packet(packet);
 

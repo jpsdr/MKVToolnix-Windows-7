@@ -88,6 +88,6 @@ protected:
 
   generic_packetizer_c *create_alac_packetizer();
 
-  void debug_error_and_throw(boost::format const &format) const;
+  void debug_error_and_throw(std::string const &message) const;
   void dump_headers() const;
 };

@@ -111,10 +111,10 @@ cluster_helper_c::render_before_adding_if_necessary(packet_cptr &packet) {
   timestamp_delay          = (int64_t)(timestamp_delay / g_timestamp_scale);
 
   mxdebug_if(m->debug_packets,
-             boost::format("cluster_helper_c::add_packet(): new packet { source %1%/%2% "
-                           "timestamp: %3% duration: %4% bref: %5% fref: %6% assigned_timestamp: %7% timestamp_delay: %8% }\n")
-             % packet->source->m_ti.m_id % packet->source->m_ti.m_fname % packet->timestamp          % packet->duration
-             % packet->bref              % packet->fref                 % packet->assigned_timestamp % format_timestamp(timestamp_delay));
+             fmt::format("cluster_helper_c::add_packet(): new packet { source {0}/{1} "
+                         "timestamp: {2} duration: {3} bref: {4} fref: {5} assigned_timestamp: {6} timestamp_delay: {7} }\n",
+                         packet->source->m_ti.m_id, packet->source->m_ti.m_fname, packet->timestamp,          packet->duration,
+                         packet->bref,              packet->fref,                 packet->assigned_timestamp, format_timestamp(timestamp_delay)));
 
   bool is_video_keyframe = (packet->source == g_video_packetizer) && packet->is_key_frame();
   bool do_render         = (std::numeric_limits<int16_t>::max() < timestamp_delay)
@@ -130,9 +130,9 @@ cluster_helper_c::render_before_adding_if_necessary(packet_cptr &packet) {
     m->first_video_keyframe_seen = true;
 
   mxdebug_if(m->debug_rendering,
-             boost::format("render check cur_ts %9% min_ts_ic %1% prev_cl_ts %2% test %3% is_vid_and_key %4% tc_delay %5% gap_following_and_not_empty %6% cur_ts>min_ts_ic %8% first_video_key_seen %10% do_render %7%\n")
-             % m->min_timestamp_in_cluster % m->previous_cluster_ts % (std::max<int64_t>(0, m->min_timestamp_in_cluster) > m->previous_cluster_ts) % is_video_keyframe
-             % timestamp_delay % (packet->gap_following && !m->packets.empty()) % do_render % (packet->assigned_timestamp > m->min_timestamp_in_cluster) % packet->assigned_timestamp % m->first_video_keyframe_seen);
+             fmt::format("render check cur_ts {8} min_ts_ic {0} prev_cl_ts {1} test {2} is_vid_and_key {3} tc_delay {4} gap_following_and_not_empty {5} cur_ts>min_ts_ic {7} first_video_key_seen {9} do_render {6}\n",
+                         m->min_timestamp_in_cluster, m->previous_cluster_ts, std::max<int64_t>(0, m->min_timestamp_in_cluster) > m->previous_cluster_ts, is_video_keyframe,
+                         timestamp_delay, packet->gap_following && !m->packets.empty(), do_render, packet->assigned_timestamp > m->min_timestamp_in_cluster, packet->assigned_timestamp, m->first_video_keyframe_seen));
 
   if (!do_render)
     return;
@@ -176,8 +176,8 @@ cluster_helper_c::split_if_necessary(packet_cptr &packet) {
     additional_size += 18 * m->num_cue_elements;
 
     mxdebug_if(m->debug_splitting,
-               boost::format("cluster_helper split decision: header_overhead: %1%, additional_size: %2%, bytes_in_file: %3%, sum: %4%\n")
-               % m->header_overhead % additional_size % m->bytes_in_file % (m->header_overhead + additional_size + m->bytes_in_file));
+               fmt::format("cluster_helper split decision: header_overhead: {0}, additional_size: {1}, bytes_in_file: {2}, sum: {3}\n",
+                           m->header_overhead, additional_size, m->bytes_in_file, m->header_overhead + additional_size + m->bytes_in_file));
     if ((m->header_overhead + additional_size + m->bytes_in_file) >= m->current_split_point->m_point)
       split_now = true;
 
@@ -211,7 +211,7 @@ cluster_helper_c::split(packet_cptr &packet) {
   bool create_new_file       = m->current_split_point->m_create_new_file;
   bool previously_discarding = m->discarding;
 
-  mxdebug_if(m->debug_splitting, boost::format("Splitting: splitpoint %1% reached before timestamp %2%, create new? %3%.\n") % m->current_split_point->str() % format_timestamp(packet->assigned_timestamp) % create_new_file);
+  mxdebug_if(m->debug_splitting, fmt::format("Splitting: splitpoint {0} reached before timestamp {1}, create new? {2}.\n", m->current_split_point->str(), format_timestamp(packet->assigned_timestamp), create_new_file));
 
   finish_file(false, create_new_file, previously_discarding);
 
@@ -220,7 +220,7 @@ cluster_helper_c::split(packet_cptr &packet) {
         && (   (split_point_c::parts             == m->current_split_point->m_type)
             || (split_point_c::parts_frame_field == m->current_split_point->m_type))
         && (m->split_points.end() == (m->current_split_point + 1))) {
-      mxdebug_if(m->debug_splitting, boost::format("Splitting: Last part in 'parts:' splitting mode finished\n"));
+      mxdebug_if(m->debug_splitting, fmt::format("Splitting: Last part in 'parts:' splitting mode finished\n"));
       m->splitting_and_processed_fully = true;
     }
 
@@ -312,8 +312,8 @@ cluster_helper_c::set_duration(render_groups_c *rg) {
   for (i = 0; rg->m_durations.size() > i; ++i)
     block_duration += rg->m_durations[i];
   mxdebug_if(m->debug_duration,
-             boost::format("cluster_helper::set_duration: block_duration %1% rounded duration %2% def_duration %3% use_durations %4% rg->m_duration_mandatory %5%\n")
-             % block_duration % ROUND_TIMESTAMP_SCALE(block_duration) % def_duration % (g_use_durations ? 1 : 0) % (rg->m_duration_mandatory ? 1 : 0));
+             fmt::format("cluster_helper::set_duration: block_duration {0} rounded duration {1} def_duration {2} use_durations {3} rg->m_duration_mandatory {4}\n",
+                         block_duration, ROUND_TIMESTAMP_SCALE(block_duration), def_duration, g_use_durations ? 1 : 0, rg->m_duration_mandatory ? 1 : 0));
 
   if (rg->m_duration_mandatory) {
     if (   (0 == block_duration)
@@ -348,8 +348,8 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
         || (   (0 < block_duration)
             && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration)))) {
       // if (!rg)
-      //   mxinfo(boost::format("YOYO 1 np mand %1% blodu %2% defdur %3% bloduRND %4% defdurRND %5% groupsize %6% ts %7%\n") % new_packet->duration_mandatory % block_duration % ((group_size + 1) * def_duration)
-      //          % ROUND_TIMESTAMP_SCALE(block_duration) % ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration) % group_size % format_timestamp(new_packet->assigned_timestamp));
+      //   mxinfo(fmt::format("YOYO 1 np mand {0} blodu {1} defdur {2} bloduRND {3} defdurRND {4} groupsize {5} ts {6}\n", new_packet->duration_mandatory, block_duration, (group_size + 1) * def_duration,
+      //          ROUND_TIMESTAMP_SCALE(block_duration), ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration), group_size, format_timestamp(new_packet->assigned_timestamp)));
       return true;
     }
 
@@ -358,8 +358,8 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
              && (0 < block_duration)
              && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration))) {
     // if (!rg)
-    //   mxinfo(boost::format("YOYO 1 np blodu %1% defdur %2% bloduRND %3% defdurRND %4% ts %5%\n") % block_duration % def_duration % ROUND_TIMESTAMP_SCALE(block_duration) % ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration)
-    //          % format_timestamp(new_packet->assigned_timestamp));
+    //   mxinfo(fmt::format("YOYO 1 np blodu {0} defdur {1} bloduRND {2} defdurRND {3} ts {4}\n", block_duration, def_duration, ROUND_TIMESTAMP_SCALE(block_duration), ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration),
+    //          format_timestamp(new_packet->assigned_timestamp)));
     return true;
   }
 
@@ -613,8 +613,8 @@ cluster_helper_c::get_duration()
   const {
   auto result = m->max_timestamp_and_duration - m->min_timestamp_in_file.to_ns(0) - m->discarded_duration;
   mxdebug_if(m->debug_duration,
-             boost::format("cluster_helper_c::get_duration(): max_tc_and_dur %1% - min_tc_in_file %2% - discarded_duration %3% = %4% ; first_tc_in_file = %5%\n")
-             % m->max_timestamp_and_duration % m->min_timestamp_in_file.to_ns(0) % m->discarded_duration % result % m->first_timestamp_in_file);
+             fmt::format("cluster_helper_c::get_duration(): max_tc_and_dur {0} - min_tc_in_file {1} - discarded_duration {2} = {3} ; first_tc_in_file = {4}\n",
+                         m->max_timestamp_and_duration, m->min_timestamp_in_file.to_ns(0), m->discarded_duration, result, m->first_timestamp_in_file));
   return result;
 }
 
@@ -631,8 +631,8 @@ cluster_helper_c::handle_discarded_duration(bool create_new_file,
 
   if (create_new_file) { // || (!previously_discarding && m->discarding)) {
     mxdebug_if(m->debug_splitting,
-               boost::format("RESETTING discarded duration of %1%, create_new_file %2% previously_discarding %3% m->discarding %4%\n")
-               % format_timestamp(m->discarded_duration) % create_new_file % previously_discarding % m->discarding);
+               fmt::format("RESETTING discarded duration of {0}, create_new_file {1} previously_discarding {2} m->discarding {3}\n",
+                           format_timestamp(m->discarded_duration), create_new_file, previously_discarding, m->discarding));
     m->discarded_duration = 0;
 
   } else if (previously_discarding && !m->discarding) {
@@ -640,13 +640,13 @@ cluster_helper_c::handle_discarded_duration(bool create_new_file,
     m->discarded_duration += diff;
 
     mxdebug_if(m->debug_splitting,
-               boost::format("ADDING to discarded duration TC at %1% / %2% diff %3% new total %4% create_new_file %5% previously_discarding %6% m->discarding %7%\n")
-               % format_timestamp(m->first_discarded_timestamp) % format_timestamp(m->last_discarded_timestamp_and_duration) % format_timestamp(diff) % format_timestamp(m->discarded_duration)
-               % create_new_file % previously_discarding % m->discarding);
+               fmt::format("ADDING to discarded duration TC at {0} / {1} diff {2} new total {3} create_new_file {4} previously_discarding {5} m->discarding {6}\n",
+                           format_timestamp(m->first_discarded_timestamp), format_timestamp(m->last_discarded_timestamp_and_duration), format_timestamp(diff), format_timestamp(m->discarded_duration),
+                           create_new_file, previously_discarding, m->discarding));
   } else
     mxdebug_if(m->debug_splitting,
-               boost::format("KEEPING discarded duration at %1%, create_new_file %2% previously_discarding %3% m->discarding %4%\n")
-               % format_timestamp(m->discarded_duration) % create_new_file % previously_discarding % m->discarding);
+               fmt::format("KEEPING discarded duration at {0}, create_new_file {1} previously_discarding {2} m->discarding {3}\n",
+                           format_timestamp(m->discarded_duration), create_new_file, previously_discarding, m->discarding));
 
   m->first_discarded_timestamp             = -1;
   m->last_discarded_timestamp_and_duration =  0;
@@ -692,8 +692,8 @@ void
 cluster_helper_c::dump_split_points()
   const {
   mxdebug_if(m->debug_splitting,
-             boost::format("Split points:%1%\n")
-             % boost::accumulate(m->split_points, ""s, [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); }));
+             fmt::format("Split points:{0}\n",
+                         boost::accumulate(m->split_points, ""s, [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); })));
 }
 
 void
@@ -749,8 +749,8 @@ cluster_helper_c::verify_and_report_chapter_generation_parameters()
   if (!m->chapter_generation_reference_track)
     mxerror(Y("Chapter generation is only possible if at least one video or audio track is copied.\n"));
 
-  mxinfo(boost::format(Y("Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"))
-         % m->chapter_generation_reference_track->m_ti.m_id % m->chapter_generation_reference_track->m_ti.m_fname);
+  mxinfo(fmt::format(Y("Using the track with the ID {0} from the file '{1}' as the reference for chapter generation.\n"),
+                     m->chapter_generation_reference_track->m_ti.m_id, m->chapter_generation_reference_track->m_ti.m_fname));
 }
 
 void

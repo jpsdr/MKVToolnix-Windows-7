@@ -82,7 +82,7 @@ pgssup_reader_c::read(generic_packetizer_c *,
                       bool) {
   try {
     if (m_debug)
-      mxinfo(boost::format("pgssup_reader_c::read(): ---------- start read at %1%\n") % m_in->getFilePointer());
+      mxinfo(fmt::format("pgssup_reader_c::read(): ---------- start read at {0}\n", m_in->getFilePointer()));
 
     if (PGSSUP_FILE_MAGIC != m_in->read_uint16_be())
       return flush_packetizers();
@@ -101,7 +101,7 @@ pgssup_reader_c::read(generic_packetizer_c *,
       return flush_packetizers();
 
     if (m_debug)
-      mxinfo(boost::format("pgssup_reader_c::read(): type %|1$02x| size %2% at %3%\n") % static_cast<unsigned int>(frame->get_buffer()[0]) % segment_size % (m_in->getFilePointer() - 10 - 3));
+      mxinfo(fmt::format("pgssup_reader_c::read(): type {0:02x} size {1} at {2}\n", static_cast<unsigned int>(frame->get_buffer()[0]), segment_size, m_in->getFilePointer() - 10 - 3));
 
     PTZR0->process(new packet_t(frame, timestamp));
 

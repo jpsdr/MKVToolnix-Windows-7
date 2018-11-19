@@ -114,7 +114,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
   tag_size_end    = std::max<int64_t>(mtx::id3::tag_present_at_end(*m_in), 0);
   metadata_parsed = false;
 
-  mxdebug_if(m_debug, boost::format("flac_reader: tag_size_start %1% tag_size_end %2% total size %3% size without tags %4%\n") % tag_size_start % tag_size_end % m_size % (m_size - tag_size_start - tag_size_end));
+  mxdebug_if(m_debug, fmt::format("flac_reader: tag_size_start {0} tag_size_end {1} total size {2} size without tags {3}\n", tag_size_start, tag_size_end, m_size, m_size - tag_size_start - tag_size_end));
 
   if (!for_identification_only)
     mxinfo(Y("+-> Parsing the FLAC file. This can take a LONG time.\n"));
@@ -122,7 +122,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
   init_flac_decoder();
   result = FLAC__stream_decoder_process_until_end_of_metadata(m_flac_decoder.get());
 
-  mxdebug_if(m_debug, boost::format("flac_reader: extract->metadata, result: %1%, mdp: %2%, num blocks: %3%\n") % result % metadata_parsed % blocks.size());
+  mxdebug_if(m_debug, fmt::format("flac_reader: extract->metadata, result: {0}, mdp: {1}, num blocks: {2}\n", result, metadata_parsed, blocks.size()));
 
   if (!metadata_parsed)
     mxerror_fn(m_ti.m_fname, Y("No metadata block found. This file is broken.\n"));
@@ -139,7 +139,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
 
   blocks.push_back(block);
 
-  mxdebug_if(m_debug, boost::format("flac_reader: headers: block at %1% with size %2%\n") % block.filepos % block.len);
+  mxdebug_if(m_debug, fmt::format("flac_reader: headers: block at {0} with size {1}\n", block.filepos, block.len));
 
   old_progress = -5;
   ok = FLAC__stream_decoder_skip_single_frame(m_flac_decoder.get());
@@ -148,7 +148,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
 
     progress = m_in->getFilePointer() * 100 / (m_size - tag_size_end);
     if ((progress - old_progress) >= 5) {
-      mxinfo(boost::format(Y("+-> Pre-parsing FLAC file: %1%%%%2%")) % progress % "\r");
+      mxinfo(fmt::format(Y("+-> Pre-parsing FLAC file: {0}%{1}"), progress, "\r"));
       old_progress = progress;
     }
 
@@ -159,7 +159,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
       old_pos       = u;
       blocks.push_back(block);
 
-      mxdebug_if(m_debug, boost::format("flac_reader: skip/decode frame, block at %1% with size %2%\n") % block.filepos % block.len);
+      mxdebug_if(m_debug, fmt::format("flac_reader: skip/decode frame, block at {0} with size {1}\n", block.filepos, block.len));
     }
 
     if (state > FLAC__STREAM_DECODER_READ_FRAME)
@@ -224,10 +224,10 @@ flac_reader_c::handle_stream_info_metadata(FLAC__StreamMetadata const *metadata)
   bits_per_sample = metadata->data.stream_info.bits_per_sample;
   metadata_parsed = true;
 
-  mxdebug_if(m_debug, boost::format("flac_reader: STREAMINFO block (%1% bytes):\n") % metadata->length);
-  mxdebug_if(m_debug, boost::format("flac_reader:   sample_rate: %1% Hz\n")         % metadata->data.stream_info.sample_rate);
-  mxdebug_if(m_debug, boost::format("flac_reader:   channels: %1%\n")               % metadata->data.stream_info.channels);
-  mxdebug_if(m_debug, boost::format("flac_reader:   bits_per_sample: %1%\n")        % metadata->data.stream_info.bits_per_sample);
+  mxdebug_if(m_debug, fmt::format("flac_reader: STREAMINFO block ({0} bytes):\n", metadata->length));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   sample_rate: {0} Hz\n",         metadata->data.stream_info.sample_rate));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   channels: {0}\n",               metadata->data.stream_info.channels));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   bits_per_sample: {0}\n",        metadata->data.stream_info.bits_per_sample));
 }
 
 std::string
@@ -281,13 +281,13 @@ flac_reader_c::handle_picture_metadata(FLAC__StreamMetadata const *metadata) {
 
   auto attach_mode        = attachment_requested(m_attachment_id);
 
-  mxdebug_if(m_debug, boost::format("flac_reader: PICTURE block\n"));
-  mxdebug_if(m_debug, boost::format("flac_reader:   description: %1%\n") % attachment->description);
-  mxdebug_if(m_debug, boost::format("flac_reader:   name:        %1%\n") % attachment->name);
-  mxdebug_if(m_debug, boost::format("flac_reader:   MIME type:   %1%\n") % attachment->mime_type);
-  mxdebug_if(m_debug, boost::format("flac_reader:   data length: %1%\n") % picture.data_length);
-  mxdebug_if(m_debug, boost::format("flac_reader:   ID:          %1%\n") % m_attachment_id);
-  mxdebug_if(m_debug, boost::format("flac_reader:   mode:        %1%\n") % attach_mode);
+  mxdebug_if(m_debug, fmt::format("flac_reader: PICTURE block\n"));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   description: {0}\n", attachment->description));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   name:        {0}\n", attachment->name));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   MIME type:   {0}\n", attachment->mime_type));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   data length: {0}\n", picture.data_length));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   ID:          {0}\n", m_attachment_id));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   mode:        {0}\n", attach_mode));
 
   if (attachment->mime_type.empty() || attachment->name.empty())
     return;
@@ -316,21 +316,21 @@ flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
 
     default:
       mxdebug_if(m_debug,
-                 boost::format("%1% (%2%) block (%3% bytes)\n")
-                 % (  metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
-                    : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
-                    : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
-                    : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
-                    : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
-                    :                                                        "UNDEFINED")
-                 % metadata->type % metadata->length);
+                 fmt::format("{0} ({1}) block ({2} bytes)\n",
+                               metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
+                             : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
+                             : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
+                             : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
+                             : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
+                             :                                                        "UNDEFINED",
+                             metadata->type, metadata->length));
       break;
   }
 }
 
 void
 flac_reader_c::flac_error_cb(FLAC__StreamDecoderErrorStatus status) {
-  mxerror(boost::format(Y("flac_reader: Error parsing the file: %1%\n")) % static_cast<int>(status));
+  mxerror(fmt::format(Y("flac_reader: Error parsing the file: {0}\n"), static_cast<int>(status)));
 }
 
 FLAC__StreamDecoderSeekStatus

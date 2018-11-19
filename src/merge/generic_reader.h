@@ -40,9 +40,9 @@ class generic_packetizer_c;
 
 #define show_demuxer_info() \
   if (verbose) \
-    mxinfo_fn(m_ti.m_fname, boost::format(Y("Using the demultiplexer for the format '%1%'.\n")) % get_format_name());
+    mxinfo_fn(m_ti.m_fname, fmt::format(Y("Using the demultiplexer for the format '{0}'.\n"), get_format_name()));
 #define show_packetizer_info(track_id, packetizer) \
-  mxinfo_tid(m_ti.m_fname, track_id, boost::format(Y("Using the output module for the format '%1%'.\n")) % packetizer->get_format_name());
+  mxinfo_tid(m_ti.m_fname, track_id, fmt::format(Y("Using the output module for the format '{0}'.\n"), packetizer->get_format_name()));
 
 class generic_reader_c {
 public:

@@ -471,7 +471,7 @@ ogm_reader_c::handle_new_stream(ogg_page *og) {
   ogg_packet op;
 
   if (ogg_stream_init(&os, ogg_page_serialno(og))) {
-    mxwarn_fn(m_ti.m_fname, boost::format(Y("ogg_stream_init for stream number %1% failed. Will try to continue and ignore this stream.\n")) % sdemuxers.size());
+    mxwarn_fn(m_ti.m_fname, fmt::format(Y("ogg_stream_init for stream number {0} failed. Will try to continue and ignore this stream.\n"), sdemuxers.size()));
     return;
   }
 
@@ -550,7 +550,7 @@ ogm_reader_c::handle_new_stream(ogg_page *og) {
         dmx = new ogm_a_aac_demuxer_c(this);
 
       else
-        mxwarn_fn(m_ti.m_fname, boost::format(Y("Unknown audio stream type 0x%|1$04x|. Stream ID %2% will be ignored.\n")) % codec_id % sdemuxers.size());
+        mxwarn_fn(m_ti.m_fname, fmt::format(Y("Unknown audio stream type 0x{0:04x}. Stream ID {1} will be ignored.\n"), codec_id, sdemuxers.size()));
 
     } else if (!strncmp(sth->streamtype, "text", 4))
       dmx = new ogm_s_text_demuxer_c(this);
@@ -733,7 +733,7 @@ ogm_reader_c::identify() {
       info.add(mtx::id::track_name, sdemuxers[i]->title);
 
     if ((0 != sdemuxers[i]->display_width) && (0 != sdemuxers[i]->display_height))
-      info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % sdemuxers[i]->display_width % sdemuxers[i]->display_height);
+      info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", sdemuxers[i]->display_width, sdemuxers[i]->display_height));
 
     if (dynamic_cast<ogm_s_text_demuxer_c *>(sdemuxers[i].get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(sdemuxers[i].get())) {
       info.add(mtx::id::text_subtitles, true);
@@ -742,7 +742,7 @@ ogm_reader_c::identify() {
 
     auto pixel_dimensions = sdemuxers[i]->get_pixel_dimensions();
     if (pixel_dimensions.first && pixel_dimensions.second)
-      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % pixel_dimensions.first % pixel_dimensions.second);
+      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", pixel_dimensions.first, pixel_dimensions.second));
 
     info.add(mtx::id::audio_channels,           sdemuxers[i]->channels);
     info.add(mtx::id::audio_sampling_frequency, sdemuxers[i]->sample_rate);
@@ -776,7 +776,7 @@ ogm_reader_c::handle_stream_comments() {
 
     size_t j;
     for (j = 0; comments->size() > j; j++) {
-      mxverb(2, boost::format("ogm_reader: commment for #%1% for %2%: %3%\n") % j % i % (*comments)[j]);
+      mxverb(2, fmt::format("ogm_reader: commment for #{0} for {1}: {2}\n", j, i, (*comments)[j]));
       std::vector<std::string> comment = split((*comments)[j], "=", 2);
       if (comment.size() != 2)
         continue;
@@ -1030,8 +1030,8 @@ ogm_a_aac_demuxer_c::initialize() {
   }
 
   mxverb(2,
-         boost::format("ogm_reader: %1%/%2%: profile %3%, channels %4%, sample_rate %5%, sbr %6%, output_sample_rate %7%\n")
-         % m_ti.m_id % m_ti.m_fname % audio_config.profile % audio_config.channels % audio_config.sample_rate % audio_config.sbr % audio_config.output_sample_rate);
+         fmt::format("ogm_reader: {0}/{1}: profile {2}, channels {3}, sample_rate {4}, sbr {5}, output_sample_rate {6}\n",
+                     m_ti.m_id, m_ti.m_fname, audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.sbr, audio_config.output_sample_rate));
 }
 
 generic_packetizer_c *
@@ -1232,13 +1232,13 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
       packets.emplace_back(packet, toc);
 
     } catch (mtx::opus::decode_error &ex) {
-      mxwarn_fn(m_ti.m_fname, boost::format(Y("Error decoding an Ogg Opus page at source timestamp %1%; page will be skipped: %2%\n")) % page_end_timestamp % ex);
+      mxwarn_fn(m_ti.m_fname, fmt::format(Y("Error decoding an Ogg Opus page at source timestamp {0}; page will be skipped: {1}\n"), page_end_timestamp, ex));
     }
   }
 
   mxdebug_if(ms_debug,
-             boost::format("process_page: granulepos %1% = %2% previous page end timestamp %3% page duration %4% is_first_packet %5% eos_here %6% gap_here %7% num packets %8%\n")
-             % granulepos % page_end_timestamp % m_previous_page_end_timestamp % page_duration % is_first_packet % eos_here % gap_here % packets.size());
+             fmt::format("process_page: granulepos {0} = {1} previous page end timestamp {2} page duration {3} is_first_packet {4} eos_here {5} gap_here {6} num packets {7}\n",
+                         granulepos, page_end_timestamp, m_previous_page_end_timestamp, page_duration, is_first_packet, eos_here, gap_here, packets.size()));
 
   if (packets.empty())
     return;
@@ -1267,8 +1267,8 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
 
     if (gap_here) {
       mxdebug_if(ms_debug,
-                 boost::format("Opus packet after gap; Ogg page end timestamp %1% page duration %2% first timestamp %3%\n")
-                 % page_end_timestamp % page_duration % format_timestamp(packets.front().first->timestamp));
+                 fmt::format("Opus packet after gap; Ogg page end timestamp {0} page duration {1} first timestamp {2}\n",
+                             page_end_timestamp, page_duration, format_timestamp(packets.front().first->timestamp)));
 
     } else if (current_timestamp != timestamp_c::ns(0)) {
       if (current_timestamp < timestamp_c::ns(0)) {
@@ -1278,8 +1278,8 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
       }
 
       mxdebug_if(ms_debug,
-                 boost::format("Opus first packet's timestamp is not zero; Ogg page end timestamp %1% page duration %2% first timestamp %3% (Ogg page's granulepos %4%) shift %5%\n")
-                 % page_end_timestamp % page_duration % format_timestamp(packets.front().first->timestamp) % granulepos % m_timestamp_shift);
+                 fmt::format("Opus first packet's timestamp is not zero; Ogg page end timestamp {0} page duration {1} first timestamp {2} (Ogg page's granulepos {3}) shift {4}\n",
+                             page_end_timestamp, page_duration, format_timestamp(packets.front().first->timestamp), granulepos, m_timestamp_shift));
     }
 
   } else {
@@ -1303,8 +1303,8 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
       packet.discard_padding = current_timestamp - page_end_timestamp;
 
       mxdebug_if(ms_debug,
-                 boost::format("Opus discard padding calculated: previous Ogg page end timestamp %1% current Ogg page end timestamp %2% discard padding %3% in samples %4% (Ogg page's granulepos %5%)\n")
-                 % m_previous_page_end_timestamp % page_end_timestamp % packet.discard_padding % samples_over % granulepos);
+                 fmt::format("Opus discard padding calculated: previous Ogg page end timestamp {0} current Ogg page end timestamp {1} discard padding {2} in samples {3} (Ogg page's granulepos {4})\n",
+                             m_previous_page_end_timestamp, page_end_timestamp, packet.discard_padding, samples_over, granulepos));
     }
   }
 
@@ -1525,7 +1525,7 @@ ogm_v_theora_demuxer_c::initialize() {
     display_width  = theora.display_width;
     display_height = theora.display_height;
   } catch (mtx::theora::header_parsing_x &e) {
-    mxerror_tid(reader->m_ti.m_fname, track_id, boost::format(Y("The Theora identification header could not be parsed (%1%).\n")) % e.error());
+    mxerror_tid(reader->m_ti.m_fname, track_id, fmt::format(Y("The Theora identification header could not be parsed ({0}).\n"), e.error()));
   }
 }
 
@@ -1564,8 +1564,8 @@ ogm_v_theora_demuxer_c::process_page(int64_t granulepos) {
     reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes), timestamp, duration, bref, VFT_NOBFRAME));
 
     mxverb(3,
-           boost::format("Theora track %1% kfgshift %2% granulepos 0x%|3$08x| %|4$08x|%5%\n")
-           % track_id % theora.kfgshift % (granulepos >> 32) % (granulepos & 0xffffffff) % (is_keyframe ? " key" : ""));
+           fmt::format("Theora track {0} kfgshift {1} granulepos 0x{2:08x} {3:08x}{4}\n",
+                       track_id, theora.kfgshift, granulepos >> 32, granulepos & 0xffffffff, is_keyframe ? " key" : ""));
   }
 }
 
@@ -1674,9 +1674,9 @@ ogm_v_vp8_demuxer_c::process_page(int64_t granulepos) {
     reader->m_reader_packetizers[ptzr]->process(new packet_t(data, timestamp, default_duration, bref, VFT_NOBFRAME));
 
     mxdebug_if(debug,
-               boost::format("VP8 track %1% size %10% #proc %11% frame# %12% fr_num %2% fr_den %3% granulepos 0x%|4$08x| %|5$08x| pts %6% inv_count %7% distance %8%%9%\n")
-               % track_id % frame_rate_num % frame_rate_den % pts % (last_granulepos & 0xffffffff)
-               % pts % inv_count % distance % (is_keyframe ? " key" : "") % data->get_size() % units_processed % frame_num);
+               fmt::format("VP8 track {0} size {9} #proc {10} frame# {11} fr_num {1} fr_den {2} granulepos 0x{3:08x} {4:08x} pts {5} inv_count {6} distance {7}{8}\n",
+                           track_id, frame_rate_num, frame_rate_den, pts, last_granulepos & 0xffffffff,
+                           pts, inv_count, distance, is_keyframe ? " key" : "", data->get_size(), units_processed, frame_num));
   }
 }
 
@@ -1715,7 +1715,7 @@ ogm_s_kate_demuxer_c::initialize() {
     memory_cptr &mem = packet_data[0];
     kate_parse_identification_header(mem->get_buffer(), mem->get_size(), kate);
   } catch (mtx::kate::header_parsing_x &e) {
-    mxerror_tid(reader->m_ti.m_fname, track_id, boost::format(Y("The Kate identification header could not be parsed (%1%).\n")) % e.error());
+    mxerror_tid(reader->m_ti.m_fname, track_id, fmt::format(Y("The Kate identification header could not be parsed ({0}).\n"), e.error()));
   }
 }
 

@@ -134,7 +134,7 @@ ivf_reader_c::read(generic_packetizer_c *,
 
   int64_t timestamp = get_uint64_le(&header.timestamp) * 1000000000ull * m_frame_rate_den / m_frame_rate_num;
 
-  mxdebug_if(m_debug, boost::format("key %5% header.ts %1% num %2% den %3% res %4%\n") % get_uint64_le(&header.timestamp) % m_frame_rate_num % m_frame_rate_den % timestamp % ivf::is_keyframe(buffer, m_codec.get_type()));
+  mxdebug_if(m_debug, fmt::format("key {4} header.ts {0} num {1} den {2} res {3}\n", get_uint64_le(&header.timestamp), m_frame_rate_num, m_frame_rate_den, timestamp, ivf::is_keyframe(buffer, m_codec.get_type())));
 
   PTZR0->process(new packet_t(buffer, timestamp));
 
@@ -144,7 +144,7 @@ ivf_reader_c::read(generic_packetizer_c *,
 void
 ivf_reader_c::identify() {
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % m_width % m_height);
+  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_width, m_height));
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, m_codec.get_name(), info.get());

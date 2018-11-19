@@ -417,7 +417,7 @@ struct qt_atom_t {
 inline std::ostream &
 operator <<(std::ostream &out,
             qt_atom_t const &atom) {
-  out << (boost::format("<%1% at %2% size %3% hsize %4%>") % atom.fourcc % atom.pos % atom.size % atom.hsize);
+  out << fmt::format("<{0} at {1} size {2} hsize {3}>", atom.fourcc, atom.pos, atom.size, atom.hsize);
   return out;
 }
 

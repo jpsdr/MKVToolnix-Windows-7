@@ -118,13 +118,13 @@ ebml_tags_converter_c::parse_file(std::string const &file_name,
     return parse();
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("The XML tag file '%1%' could not be read.\n")) % file_name);
+    mxerror(fmt::format(Y("The XML tag file '{0}' could not be read.\n"), file_name));
 
   } catch (mtx::xml::xml_parser_x &ex) {
-    mxerror(boost::format(Y("The XML tag file '%1%' contains an error at position %3%: %2%\n")) % file_name % ex.result().description() % ex.result().offset);
+    mxerror(fmt::format(Y("The XML tag file '{0}' contains an error at position {2}: {1}\n"), file_name, ex.result().description(), ex.result().offset));
 
   } catch (mtx::xml::exception &ex) {
-    mxerror(boost::format(Y("The XML tag file '%1%' contains an error: %2%\n")) % file_name % ex.what());
+    mxerror(fmt::format(Y("The XML tag file '{0}' contains an error: {1}\n"), file_name, ex.what()));
   }
 
   return {};

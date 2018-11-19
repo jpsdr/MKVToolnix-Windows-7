@@ -67,10 +67,10 @@ avc_video_packetizer_c::set_headers() {
     m_track_default_duration /= divisor;
 
   mxdebug_if(m_debug_fix_bistream_timing_info,
-             boost::format("fix_bitstream_timing_info [AVCC]: factory default_duration %1% default_duration_forced? %2% htrack_default_duration %3% fps %4% m_track_default_duration %5%\n")
-             % (m_timestamp_factory ? m_timestamp_factory->get_default_duration(-1) : -2)
-             % m_default_duration_forced % m_htrack_default_duration
-             % m_fps % m_track_default_duration);
+             fmt::format("fix_bitstream_timing_info [AVCC]: factory default_duration {0} default_duration_forced? {1} htrack_default_duration {2} fps {3} m_track_default_duration {4}\n",
+                         m_timestamp_factory ? m_timestamp_factory->get_default_duration(-1) : -2,
+                         m_default_duration_forced, m_htrack_default_duration,
+                         m_fps, m_track_default_duration));
 
   if (   m_ti.m_private_data
       && m_ti.m_private_data->get_size()
@@ -98,8 +98,8 @@ avc_video_packetizer_c::extract_aspect_ratio() {
                                OPTION_SOURCE_BITSTREAM);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-             boost::format(Y("Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to %1%/%2%.\n"))
-             % m_ti.m_display_width % m_ti.m_display_height);
+             fmt::format(Y("Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"),
+                         m_ti.m_display_width, m_ti.m_display_height));
 }
 
 int
@@ -133,7 +133,7 @@ avc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
     return result;
 
   if (m_ti.m_private_data && vsrc->m_ti.m_private_data && memcmp(m_ti.m_private_data->get_buffer(), vsrc->m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size())) {
-    error_message = (boost::format(Y("The codec's private data does not match. Both have the same length (%1%) but different content.")) % m_ti.m_private_data->get_size()).str();
+    error_message = fmt::format(Y("The codec's private data does not match. Both have the same length ({0}) but different content."), m_ti.m_private_data->get_size());
     return CAN_CONNECT_MAYBE_CODECPRIVATE;
   }
 
@@ -158,7 +158,7 @@ avc_video_packetizer_c::setup_nalu_size_len_change() {
 
   set_codec_private(m_ti.m_private_data);
 
-  mxverb(2, boost::format("mpeg4_p10: Adjusting NALU size length from %1% to %2%\n") % m_nalu_size_len_src % m_nalu_size_len_dst);
+  mxverb(2, fmt::format("mpeg4_p10: Adjusting NALU size length from {0} to {1}\n", m_nalu_size_len_src, m_nalu_size_len_dst));
 }
 
 void
@@ -182,7 +182,7 @@ avc_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
     nalu_size     = std::min<int>(nalu_size, size - src_pos - m_nalu_size_len_src);
 
     if (nalu_size > m_max_nalu_size)
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("The chosen NALU size length of %1% is too small. Try using '4'.\n")) % m_nalu_size_len_dst);
+      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("The chosen NALU size length of {0} is too small. Try using '4'.\n"), m_nalu_size_len_dst));
 
     src_pos += m_nalu_size_len_src + nalu_size;
 
@@ -245,7 +245,7 @@ avc_video_packetizer_c::process_nalus(memory_c &data)
     if (   (nalu_type == NALU_TYPE_SEQ_PARAM)
         && m_ti.m_fix_bitstream_frame_rate
         && (-1 != m_track_default_duration)) {
-      mxdebug_if(m_debug_fix_bistream_timing_info, boost::format("fix_bitstream_timing_info [NALU]: m_track_default_duration %1%\n") % m_track_default_duration);
+      mxdebug_if(m_debug_fix_bistream_timing_info, fmt::format("fix_bitstream_timing_info [NALU]: m_track_default_duration {0}\n", m_track_default_duration));
 
       mtx::avc::sps_info_t sps_info;
       auto parsed_nalu = mtx::avc::parse_sps(mtx::mpeg::nalu_to_rbsp(memory_c::clone(&ptr[idx + m_nalu_size_len_dst], nalu_size - m_nalu_size_len_dst)), sps_info, true, true, m_track_default_duration);

@@ -61,12 +61,12 @@ avc_es_video_packetizer_c(generic_reader_c *p_reader,
     m_parser.force_default_duration(factory_default_duration);
     set_track_default_duration(factory_default_duration);
     m_default_duration_forced = true;
-    mxdebug_if(m_debug_timestamps, boost::format("Forcing default duration due to timestamp factory to %1%\n") % m_htrack_default_duration);
+    mxdebug_if(m_debug_timestamps, fmt::format("Forcing default duration due to timestamp factory to {0}\n", m_htrack_default_duration));
 
   } else if (m_default_duration_forced && (-1 != m_htrack_default_duration)) {
     m_default_duration_for_interlaced_content = m_htrack_default_duration / 2;
     m_parser.force_default_duration(m_default_duration_for_interlaced_content);
-    mxdebug_if(m_debug_timestamps, boost::format("Forcing default duration due to --default-duration to %1%\n") % m_htrack_default_duration);
+    mxdebug_if(m_debug_timestamps, fmt::format("Forcing default duration due to --default-duration to {0}\n", m_htrack_default_duration));
   }
 }
 
@@ -97,16 +97,16 @@ avc_es_video_packetizer_c::process(packet_cptr packet) {
 
   } catch (mtx::mpeg::nalu_size_length_x &error) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id,
-                boost::format(Y("This AVC/h.264 contains frames that are too big for the current maximum NALU size. "
-                                "You have to re-run mkvmerge and set the maximum NALU size to %1% for this track "
-                                "(command line parameter '--nalu-size-length %2%:%1%').\n"))
-                % error.get_required_length() % m_ti.m_id);
+                fmt::format(Y("This AVC/h.264 contains frames that are too big for the current maximum NALU size. "
+                              "You have to re-run mkvmerge and set the maximum NALU size to {0} for this track "
+                              "(command line parameter '--nalu-size-length {1}:{0}').\n"),
+                            error.get_required_length(), m_ti.m_id));
 
   } catch (mtx::exception &error) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id,
-                boost::format(Y("mkvmerge encountered broken or unparsable data in this AVC/h.264 video track. "
-                                "Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. "
-                                "The error message was:\n%1%\n")) % error.error());
+                fmt::format(Y("mkvmerge encountered broken or unparsable data in this AVC/h.264 video track. "
+                              "Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. "
+                              "The error message was:\n{0}\n"), error.error()));
   }
 
   return FILE_STATUS_MOREDATA;
@@ -115,7 +115,7 @@ avc_es_video_packetizer_c::process(packet_cptr packet) {
 void
 avc_es_video_packetizer_c::handle_delayed_headers() {
   if (0 < m_parser.get_num_skipped_frames())
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("This AVC/h.264 track does not start with a key frame. The first %1% frames have been skipped.\n")) % m_parser.get_num_skipped_frames());
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("This AVC/h.264 track does not start with a key frame. The first {0} frames have been skipped.\n"), m_parser.get_num_skipped_frames()));
 
   set_codec_private(m_parser.get_avcc());
 
@@ -137,7 +137,7 @@ avc_es_video_packetizer_c::handle_delayed_headers() {
 
 void
 avc_es_video_packetizer_c::handle_aspect_ratio() {
-  mxdebug_if(m_debug_aspect_ratio, boost::format("already set? %1% has par been found? %2%\n") % display_dimensions_or_aspect_ratio_set() % m_parser.has_par_been_found());
+  mxdebug_if(m_debug_aspect_ratio, fmt::format("already set? {0} has par been found? {1}\n", display_dimensions_or_aspect_ratio_set(), m_parser.has_par_been_found()));
 
   if (display_dimensions_or_aspect_ratio_set() || !m_parser.has_par_been_found())
     return;
@@ -146,17 +146,18 @@ avc_es_video_packetizer_c::handle_aspect_ratio() {
   set_video_display_dimensions(dimensions.first, dimensions.second, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-             boost::format(Y("Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data "
-                             "and set the display dimensions to %1%/%2%.\n")) % m_ti.m_display_width % m_ti.m_display_height);
+             fmt::format(Y("Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data "
+                           "and set the display dimensions to {0}/{1}.\n"), m_ti.m_display_width, m_ti.m_display_height));
 
-  mxdebug_if(m_debug_aspect_ratio, boost::format("PAR %1% pixel_width/hgith %2%/%3% display_width/height %4%/%5%\n")
-             % boost::rational_cast<double>(m_parser.get_par()) % m_hvideo_pixel_width % m_hvideo_pixel_height % m_ti.m_display_width % m_ti.m_display_height);
+  mxdebug_if(m_debug_aspect_ratio,
+             fmt::format("PAR {0} pixel_width/hgith {1}/{2} display_width/height {3}/{4}\n",
+                         boost::rational_cast<double>(m_parser.get_par()), m_hvideo_pixel_width, m_hvideo_pixel_height, m_ti.m_display_width, m_ti.m_display_height));
 }
 
 void
 avc_es_video_packetizer_c::handle_actual_default_duration() {
   int64_t actual_default_duration = m_parser.get_most_often_used_duration();
-  mxdebug_if(m_debug_timestamps, boost::format("Most often used duration: %1% forced? %2% current default duration: %3%\n") % actual_default_duration % m_default_duration_forced % m_htrack_default_duration);
+  mxdebug_if(m_debug_timestamps, fmt::format("Most often used duration: {0} forced? {1} current default duration: {2}\n", actual_default_duration, m_default_duration_forced, m_htrack_default_duration));
 
   if (   !m_default_duration_forced
       && (0 < actual_default_duration)

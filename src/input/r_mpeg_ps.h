@@ -41,7 +41,7 @@ struct mpeg_ps_id_t {
 inline std::ostream &
 operator <<(std::ostream &out,
             mpeg_ps_id_t const &id) {
-  out << (boost::format("%|1$02x|.%|2$02x|") % id.id % id.sub_id);
+  out << fmt::format("{0:02x}.{1:02x}", id.id, id.sub_id);
 
   return out;
 }
@@ -93,12 +93,12 @@ public:
 inline std::ostream &
 operator <<(std::ostream &out,
             mpeg_ps_packet_c const &p) {
-  out << (boost::format("[ID %1% PTS %2% DTS %3% length %4% full_length %5% valid? %6% read? %7%]")
-          % p.m_id
-          % (p.has_pts() ? format_timestamp(p.pts()) : "none"s)
-          % (p.has_dts() ? format_timestamp(p.dts()) : "none"s)
-          % p.m_length % p.m_full_length % p.m_valid
-          % (p.has_been_read() ? "yes, fully" : p.m_buffer ? "only partially" : "no"));
+  out << fmt::format("[ID {0} PTS {1} DTS {2} length {3} full_length {4} valid? {5} read? {6}]",
+                     p.m_id,
+                     p.has_pts() ? format_timestamp(p.pts()) : "none"s,
+                     p.has_dts() ? format_timestamp(p.dts()) : "none"s,
+                     p.m_length, p.m_full_length, p.m_valid,
+                     p.has_been_read() ? "yes, fully" : p.m_buffer ? "only partially" : "no");
 
   return out;
 }

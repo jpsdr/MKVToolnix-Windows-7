@@ -92,7 +92,7 @@ dts_reader_c::read_headers() {
 
   mtx::dts::detect(m_buf[m_cur_buf], READ_SIZE, m_dts14_to_16, m_swap_bytes);
 
-  mxdebug_if(m_debug, boost::format("DTS: 14->16 %1% swap %2%\n") % m_dts14_to_16 % m_swap_bytes);
+  mxdebug_if(m_debug, fmt::format("DTS: 14->16 {0} swap {1}\n", m_dts14_to_16, m_swap_bytes));
 
   decode_buffer(READ_SIZE);
   int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), READ_SIZE, m_dtsheader);
@@ -220,7 +220,7 @@ dts_reader_c::scan_chunks(mm_io_c &in) {
 
   if (s_debug)
     for (auto const &chunk : chunks)
-      mxinfo(boost::format("DTS chunk type %|1$16x| at %2% data size %3% data end %4%\n") % static_cast<uint64_t>(chunk.type) % (chunk.data_start - 16) % chunk.data_size % chunk.data_end);
+      mxinfo(fmt::format("DTS chunk type {0:16x} at {1} data size {2} data end {3}\n", static_cast<uint64_t>(chunk.type), chunk.data_start - 16, chunk.data_size, chunk.data_end));
 
   return chunks;
 }

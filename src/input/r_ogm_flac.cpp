@@ -40,7 +40,7 @@ fhe_read_cb(const FLAC__StreamDecoder *,
       return FLAC__STREAM_DECODER_READ_STATUS_ABORT;
 
   if (*bytes < static_cast<size_t>(op.bytes))
-    mxerror(boost::format(Y("flac_header_extraction: bytes (%1%) < op.bytes (%2%). Could not read the FLAC headers.\n")) % *bytes % op.bytes);
+    mxerror(fmt::format(Y("flac_header_extraction: bytes ({0}) < op.bytes ({1}). Could not read the FLAC headers.\n"), *bytes, op.bytes));
 
   int offset = 0;
 
@@ -51,7 +51,7 @@ fhe_read_cb(const FLAC__StreamDecoder *,
   *bytes = op.bytes - offset;
 
   fhe->num_packets++;
-  mxverb(2, boost::format("flac_header_extraction: read packet number %1% with %2% bytes and offset %3%\n") % fhe->num_packets % op.bytes % offset);
+  mxverb(2, fmt::format("flac_header_extraction: read packet number {0} with {1} bytes and offset {2}\n", fhe->num_packets, op.bytes, offset));
 
   return FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
 }
@@ -84,22 +84,22 @@ fhe_metadata_cb(const FLAC__StreamDecoder *,
       fhe->bits_per_sample = metadata->data.stream_info.bits_per_sample;
       fhe->metadata_parsed = true;
 
-      mxverb(2, boost::format("flac_header_extraction: STREAMINFO block (%1% bytes):\n") % metadata->length);
-      mxverb(2, boost::format("flac_header_extraction:   sample_rate: %1% Hz\n")         % metadata->data.stream_info.sample_rate);
-      mxverb(2, boost::format("flac_header_extraction:   channels: %1%\n")               % metadata->data.stream_info.channels);
-      mxverb(2, boost::format("flac_header_extraction:   bits_per_sample: %1%\n")        % metadata->data.stream_info.bits_per_sample);
+      mxverb(2, fmt::format("flac_header_extraction: STREAMINFO block ({0} bytes):\n", metadata->length));
+      mxverb(2, fmt::format("flac_header_extraction:   sample_rate: {0} Hz\n",         metadata->data.stream_info.sample_rate));
+      mxverb(2, fmt::format("flac_header_extraction:   channels: {0}\n",               metadata->data.stream_info.channels));
+      mxverb(2, fmt::format("flac_header_extraction:   bits_per_sample: {0}\n",        metadata->data.stream_info.bits_per_sample));
       break;
 
     default:
       mxverb(2,
-             boost::format("%1% (%2%) block (%3% bytes)\n")
-             % (  metadata->type == FLAC__METADATA_TYPE_PADDING       ? "PADDING"
-               : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
-               : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
-               : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
-               : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
-               :                                                        "UNDEFINED")
-             % metadata->type % metadata->length);
+             fmt::format("{0} ({1}) block ({2} bytes)\n",
+                           metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
+                         : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
+                         : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
+                         : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
+                         : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
+                         :                                                        "UNDEFINED",
+                         metadata->type, metadata->length));
       break;
   }
 }
@@ -109,7 +109,7 @@ fhe_error_cb(const FLAC__StreamDecoder *,
              FLAC__StreamDecoderErrorStatus status,
              void *client_data) {
   ((flac_header_extractor_c *)client_data)->done = true;
-  mxverb(2, boost::format("flac_header_extraction: error (%1%)\n") % (int)status);
+  mxverb(2, fmt::format("flac_header_extraction: error ({0})\n", static_cast<int>(status)));
 }
 
 flac_header_extractor_c::flac_header_extractor_c(const std::string &file_name,
@@ -155,7 +155,7 @@ flac_header_extractor_c::extract() {
 
   int result = (int)FLAC__stream_decoder_process_until_end_of_stream(decoder);
 
-  mxverb(2, boost::format("flac_header_extraction: extract, result: %1%, mdp: %2%, num_header_packets: %3%\n") % result % metadata_parsed % num_header_packets);
+  mxverb(2, fmt::format("flac_header_extraction: extract, result: {0}, mdp: {1}, num_header_packets: {2}\n", result, metadata_parsed, num_header_packets));
 
   return metadata_parsed;
 }

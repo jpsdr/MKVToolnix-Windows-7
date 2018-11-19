@@ -70,7 +70,7 @@ generic_video_packetizer_c::set_headers() {
 int
 generic_video_packetizer_c::process(packet_cptr packet) {
   if ((0.0 == m_fps) && (-1 == packet->timestamp))
-    mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("The FPS is 0.0 but the reader did not provide a timestamp for a packet. %1%\n")) % BUGMSG);
+    mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("The FPS is 0.0 but the reader did not provide a timestamp for a packet. {0}\n"), BUGMSG));
 
   if (-1 == packet->timestamp)
     packet->timestamp = (int64_t)(1000000000.0 * m_frames_output / m_fps) + m_duration_shift;

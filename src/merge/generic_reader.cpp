@@ -126,7 +126,7 @@ generic_reader_c::demuxing_requested(char type,
                      :               nullptr;
 
   if (!tracks)
-    mxerror(boost::format("generic_reader_c::demuxing_requested: %2%") % (boost::format(Y("Invalid track type %1%.")) % type));
+    mxerror(fmt::format("generic_reader_c::demuxing_requested: {1}", fmt::format(Y("Invalid track type {0}."), type)));
 
   return tracks->selected(id, language);
 }
@@ -151,7 +151,7 @@ generic_reader_c::attachment_requested(int64_t id) {
 int
 generic_reader_c::add_packetizer(generic_packetizer_c *ptzr) {
   if (outputting_webm() && !ptzr->is_compatible_with(OC_WEBM))
-    mxerror(boost::format(Y("The codec type '%1%' cannot be used in a WebM compliant file.\n")) % ptzr->get_format_name());
+    mxerror(fmt::format(Y("The codec type '{0}' cannot be used in a WebM compliant file.\n"), ptzr->get_format_name()));
 
   m_reader_packetizers.push_back(ptzr);
   m_used_track_ids.push_back(ptzr->m_ti.m_id);
@@ -215,8 +215,8 @@ generic_reader_c::check_track_ids_and_packetizers() {
 
     if (!found)
       mxwarn_fn(m_ti.m_fname,
-                boost::format(Y("A track with the ID %1% was requested but not found in the file. The corresponding option will be ignored.\n"))
-                % m_requested_track_ids[r]);
+                fmt::format(Y("A track with the ID {0} was requested but not found in the file. The corresponding option will be ignored.\n"),
+                            m_requested_track_ids[r]));
   }
 }
 
@@ -329,37 +329,37 @@ generic_reader_c::display_identification_results() {
 
 void
 generic_reader_c::display_identification_results_as_text() {
-  mxinfo(boost::format(Y("File '%1%': container: %2%")) % m_ti.m_fname % m_id_results_container.info);
+  mxinfo(fmt::format(Y("File '{0}': container: {1}"), m_ti.m_fname, m_id_results_container.info));
   mxinfo("\n");
 
   for (auto &result : m_id_results_tracks) {
-    mxinfo(boost::format(Y("Track ID %1%: %2% (%3%)")) % result.id % result.type % result.info);
+    mxinfo(fmt::format(Y("Track ID {0}: {1} ({2})"), result.id, result.type, result.info));
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_attachments) {
-    mxinfo(boost::format(Y("Attachment ID %1%: type '%2%', size %3% bytes")) % result.id % result.type % result.size);
+    mxinfo(fmt::format(Y("Attachment ID {0}: type '{1}', size {2} bytes"), result.id, result.type, result.size));
 
     if (!result.description.empty())
-      mxinfo(boost::format(Y(", description '%1%'")) % result.description);
+      mxinfo(fmt::format(Y(", description '{0}'"), result.description));
 
     if (!result.info.empty())
-      mxinfo(boost::format(Y(", file name '%1%'")) % result.info);
+      mxinfo(fmt::format(Y(", file name '{0}'"), result.info));
 
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_chapters) {
-    mxinfo(boost::format(NY("Chapters: %1% entry", "Chapters: %1% entries", result.size)) % result.size);
+    mxinfo(fmt::format(NY("Chapters: {0} entry", "Chapters: {0} entries", result.size), result.size));
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_tags) {
     if (ID_RESULT_GLOBAL_TAGS_ID == result.id)
-      mxinfo(boost::format(NY("Global tags: %1% entry", "Global tags: %1% entries", result.size)) % result.size);
+      mxinfo(fmt::format(NY("Global tags: {0} entry", "Global tags: {0} entries", result.size), result.size));
 
     else
-      mxinfo(boost::format(NY("Tags for track ID %1%: %2% entry", "Tags for track ID %1%: %2% entries", result.size)) % result.id % result.size);
+      mxinfo(fmt::format(NY("Tags for track ID {0}: {1} entry", "Tags for track ID {0}: {1} entries", result.size), result.id, result.size));
 
     mxinfo("\n");
   }
@@ -483,8 +483,8 @@ generic_reader_c::calculate_probe_range(int64_t file_size,
   auto to_use      = std::max(fixed_minimum, probe_range);
 
   mxdebug_if(s_debug,
-             boost::format("calculate_probe_range: calculated %1% based on file size %2% fixed minimum %3% percentage %4%/%5% percentage of size %6%\n")
-             % to_use % file_size % fixed_minimum % s_probe_range_percentage.numerator() % s_probe_range_percentage.denominator() % probe_range);
+             fmt::format("calculate_probe_range: calculated {0} based on file size {1} fixed minimum {2} percentage {3}/{4} percentage of size {5}\n",
+                         to_use, file_size, fixed_minimum, s_probe_range_percentage.numerator(), s_probe_range_percentage.denominator(), probe_range));
 
   return to_use;
 }

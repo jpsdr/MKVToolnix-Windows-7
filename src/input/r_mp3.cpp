@@ -76,7 +76,7 @@ mp3_reader_c::read_headers() {
     show_demuxer_info();
 
     if ((0 < pos) && verbose)
-      mxwarn_fn(m_ti.m_fname, boost::format(Y("Skipping %1% bytes at the beginning (no valid MP3 header found).\n")) % pos);
+      mxwarn_fn(m_ti.m_fname, fmt::format(Y("Skipping {0} bytes at the beginning (no valid MP3 header found).\n"), pos));
 
     m_ti.m_id = 0;        // ID for this track.
 

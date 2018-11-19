@@ -129,7 +129,7 @@ cues_c::write(mm_io_c &out,
   m_num_cue_points_postprocessed = 0;
 
   // auto end_all = mtx::sys::get_current_time_millis();
-  // mxinfo(boost::format("dur sort %1% write %2% total %3%\n") % (end_sort - start) % (end_all - end_sort) % (end_all - start));
+  // mxinfo(fmt::format("dur sort {0} write {1} total {2}\n", end_sort - start, end_all - end_sort, end_all - start));
 }
 
 void
@@ -208,8 +208,8 @@ cues_c::postprocess_cues(KaxCues &cues,
       point->relative_position = relative_position;
 
       mxdebug_if(m_debug_cue_relative_position,
-                 boost::format("cue_relative_position: looking for <%1%:%2%>: cluster_data_start_pos %3% position %4%\n")
-                 % point->track_num % point->timestamp % cluster_data_start_pos % relative_position);
+                 fmt::format("cue_relative_position: looking for <{0}:{1}>: cluster_data_start_pos {2} position {3}\n",
+                             point->track_num, point->timestamp, cluster_data_start_pos, relative_position));
     }
 
     // Set CueDuration if the packetizer wants them.
@@ -233,8 +233,8 @@ cues_c::postprocess_cues(KaxCues &cues,
       point->duration = duration_itr->second;
 
     mxdebug_if(m_debug_cue_duration,
-               boost::format("cue_duration: looking for <%1%:%2%>: %3%\n")
-               % point->track_num % point->timestamp % (duration_itr == m_id_timestamp_duration_multimap.end() ? static_cast<int64_t>(-1) : duration_itr->second));
+               fmt::format("cue_duration: looking for <{0}:{1}>: {2}\n",
+                           point->track_num, point->timestamp, duration_itr == m_id_timestamp_duration_multimap.end() ? static_cast<int64_t>(-1) : duration_itr->second));
   }
 
   m_num_cue_points_postprocessed = m_points.size();
@@ -288,8 +288,8 @@ cues_c::adjust_positions(uint64_t old_position,
     return;
 
   mxdebug_if(s_debug_rerender_track_headers,
-             boost::format("[rerender] cues_c::adjust_positions: old_position %1% delta %2% num_points %3% first point's position %4%\n")
-             % old_position % delta % m_points.size() % (!m_points.empty() ? m_points[0].cluster_position : 0));
+             fmt::format("[rerender] cues_c::adjust_positions: old_position {0} delta {1} num_points {2} first point's position {3}\n",
+                         old_position, delta, m_points.size(), !m_points.empty() ? m_points[0].cluster_position : 0));
 
   for (auto &point : m_points)
     if (point.cluster_position >= old_position)

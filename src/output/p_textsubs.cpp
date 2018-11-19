@@ -56,7 +56,7 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
   parse_number(tid_and_packetno[1], packetno);
   m_force_rerender_track_headers_on_packetno.reset(packetno);
 
-  mxdebug(boost::format("textsubs_packetizer_c: track %1%: forcing rerendering of track headers after packet %2%\n") % tid % packetno);
+  mxdebug(fmt::format("textsubs_packetizer_c: track {0}: forcing rerendering of track headers after packet {1}\n", tid, packetno));
 }
 
 textsubs_packetizer_c::~textsubs_packetizer_c() {
@@ -112,7 +112,7 @@ textsubs_packetizer_c::process_one_packet(packet_cptr const &packet) {
 
   if (0 > packet->duration) {
     subtitle_number_packet_extension_c *extension = dynamic_cast<subtitle_number_packet_extension_c *>(packet->find_extension(packet_extension_c::SUBTITLE_NUMBER));
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Ignoring an entry which starts after it ends (%1%).\n")) % (extension ? extension->get_number() : static_cast<unsigned int>(m_packetno)));
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Ignoring an entry which starts after it ends ({0}).\n"), extension ? extension->get_number() : static_cast<unsigned int>(m_packetno)));
     return;
   }
 
@@ -135,7 +135,7 @@ textsubs_packetizer_c::process_one_packet(packet_cptr const &packet) {
 
   if (emit_invalid_utf8_warning) {
     m_invalid_utf8_warned = true;
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
   }
 
   packet->data = memory_c::borrow(subs);

@@ -125,7 +125,7 @@ flv_tag_c::read(mm_io_cptr const &in) {
     m_next_position      = in->getFilePointer() + m_data_size;
     m_ok                 = true;
 
-    mxdebug_if(m_debug, boost::format("Tag @ %1%: %2%\n") % position % *this);
+    mxdebug_if(m_debug, fmt::format("Tag @ {0}: {1}\n", position, *this));
 
     return true;
 
@@ -274,7 +274,7 @@ flv_reader_c::read_headers() {
   flv_header_t header;
   header.read(m_in);
 
-  mxdebug_if(m_debug, boost::format("Header dump: %1%\n") % header);
+  mxdebug_if(m_debug, fmt::format("Header dump: {0}\n", header));
 
   auto audio_track_valid = false;
   auto video_track_valid = false;
@@ -314,8 +314,8 @@ flv_reader_c::read_headers() {
       m_audio_track_idx = idx - 1;
   }
 
-  mxdebug_if(m_debug, boost::format("Detection finished at %1%; audio valid? %2%; video valid? %3%; number valid tracks: %4%; min timestamp: %5%\n")
-             % m_in->getFilePointer() % audio_track_valid % video_track_valid % m_tracks.size() % format_timestamp(m_min_timestamp.get_value_or(0) * 1000000ll));
+  mxdebug_if(m_debug, fmt::format("Detection finished at {0}; audio valid? {1}; video valid? {2}; number valid tracks: {3}; min timestamp: {4}\n",
+                                  m_in->getFilePointer(), audio_track_valid, video_track_valid, m_tracks.size(), format_timestamp(m_min_timestamp.get_value_or(0) * 1'000'000ll)));
 
   m_in->setFilePointer(9); // rewind file for later remux
   m_file_done     = false;
@@ -334,7 +334,7 @@ flv_reader_c::identify() {
       info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_video);
 
     if (track->is_video())
-      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->m_v_width % track->m_v_height);
+      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", track->m_v_width, track->m_v_height));
 
     else if (track->is_audio()) {
       info.add(mtx::id::audio_channels,           track->m_a_channels);
@@ -458,7 +458,7 @@ flv_reader_c::new_stream_v_avc(flv_track_cptr &track,
   } catch (mtx::mm_io::exception &) {
   }
 
-  mxdebug_if(m_debug, boost::format("new_stream_v_avc: video width: %1%, height: %2%, frame rate: %3%\n") % track->m_v_width % track->m_v_height % track->m_v_frame_rate);
+  mxdebug_if(m_debug, fmt::format("new_stream_v_avc: video width: {0}, height: {1}, frame rate: {2}\n", track->m_v_width, track->m_v_height, track->m_v_frame_rate));
 
   return true;
 }
@@ -484,11 +484,11 @@ flv_reader_c::process_audio_tag_sound_format(flv_track_cptr &track,
   };
 
   if (15 < sound_format) {
-    mxdebug_if(m_debug, boost::format("Sound format: not handled (%1%)\n") % static_cast<unsigned int>(sound_format));
+    mxdebug_if(m_debug, fmt::format("Sound format: not handled ({0})\n", static_cast<unsigned int>(sound_format)));
     return true;
   }
 
-  mxdebug_if(m_debug, boost::format("Sound format: %1%\n") % s_formats[sound_format]);
+  mxdebug_if(m_debug, fmt::format("Sound format: {0}\n", s_formats[sound_format]));
 
   // AAC
   if (10 == sound_format) {
@@ -500,7 +500,7 @@ flv_reader_c::process_audio_tag_sound_format(flv_track_cptr &track,
     m_tag.m_data_size--;
     if (aac_packet_type != 0) {
       // Raw AAC
-      mxdebug_if(m_debug, boost::format("  AAC sub type: raw\n"));
+      mxdebug_if(m_debug, fmt::format("  AAC sub type: raw\n"));
       return true;
     }
 
@@ -516,8 +516,8 @@ flv_reader_c::process_audio_tag_sound_format(flv_track_cptr &track,
       return false;
 
     mxdebug_if(m_debug,
-               boost::format("  AAC sub type: sequence header (profile: %1%, channels: %2%, s_rate: %3%, out_s_rate: %4%, sbr %5%)\n")
-               % audio_config->profile % audio_config->channels % audio_config->sample_rate % audio_config->output_sample_rate % audio_config->sbr);
+               fmt::format("  AAC sub type: sequence header (profile: {0}, channels: {1}, s_rate: {2}, out_s_rate: {3}, sbr {4})\n",
+                           audio_config->profile, audio_config->channels, audio_config->sample_rate, audio_config->output_sample_rate, audio_config->sbr));
 
     track->m_a_profile     = audio_config->sbr ? AAC_PROFILE_SBR : audio_config->profile;
     track->m_a_channels    = audio_config->channels;
@@ -545,7 +545,7 @@ flv_reader_c::process_audio_tag(flv_track_cptr &track) {
   uint8_t size            = (audiotag_header & 0x02) >> 1;
   uint8_t type            =  audiotag_header & 0x01;
 
-  mxdebug_if(m_debug, boost::format("Audio packet found\n"));
+  mxdebug_if(m_debug, fmt::format("Audio packet found\n"));
 
   if (!m_tag.m_data_size)
     return false;
@@ -563,9 +563,7 @@ flv_reader_c::process_audio_tag(flv_track_cptr &track) {
 
   track->m_headers_read = true;
 
-  mxdebug_if(m_debug,
-             boost::format("  sampling frequency: %1%; sample size: %2%; channels: %3%\n")
-             % track->m_a_sample_rate % (0 == size ? "8 bits" : "16 bits") % track->m_a_channels);
+  mxdebug_if(m_debug, fmt::format("  sampling frequency: {0}; sample size: {1}; channels: {2}\n", track->m_a_sample_rate, 0 == size ? "8 bits" : "16 bits", track->m_a_channels));
 
   return true;
 }
@@ -588,7 +586,7 @@ flv_reader_c::process_video_tag_avc(flv_track_cptr &track) {
   if (0 != avc_packet_type)
     return true;
 
-  mxdebug_if(m_debug, boost::format("  AVC sequence header at %1%\n") % m_in->getFilePointer());
+  mxdebug_if(m_debug, fmt::format("  AVC sequence header at {0}\n", m_in->getFilePointer()));
 
   auto data         = m_in->read(m_tag.m_data_size);
   m_tag.m_data_size = 0;
@@ -642,7 +640,7 @@ flv_reader_c::process_video_tag(flv_track_cptr &track) {
     , { "video info/command frame", false }
   };
 
-  mxdebug_if(m_debug, boost::format("Video packet found\n"));
+  mxdebug_if(m_debug, fmt::format("Video packet found\n"));
 
   if (!m_tag.m_data_size)
     return false;
@@ -654,10 +652,10 @@ flv_reader_c::process_video_tag(flv_track_cptr &track) {
 
   if ((1 <= frame_type) && (5 >= frame_type)) {
     auto type = s_frame_types[frame_type - 1];
-    mxdebug_if(m_debug, boost::format("  Frame type: %1%\n") % type.name);
+    mxdebug_if(m_debug, fmt::format("  Frame type: {0}\n", type.name));
     track->m_v_frame_type = type.is_key ? 'I' : 'P';
   } else {
-    mxdebug_if(m_debug, boost::format("  Frame type unknown (%1%)\n") % static_cast<unsigned int>(frame_type));
+    mxdebug_if(m_debug, fmt::format("  Frame type unknown ({0})\n", static_cast<unsigned int>(frame_type)));
     track->m_v_frame_type = 'P';
   }
 
@@ -673,7 +671,7 @@ flv_reader_c::process_video_tag(flv_track_cptr &track) {
   auto codec_id = static_cast<flv_tag_c::codec_type_e>(video_tag_header & 0x0f);
 
   if ((flv_tag_c::CODEC_SORENSON_H263 <= codec_id) && (flv_tag_c::CODEC_H264 >= codec_id)) {
-    mxdebug_if(m_debug, boost::format("  Codec type: %1%\n") % s_codecs[codec_id - flv_tag_c::CODEC_SORENSON_H263]);
+    mxdebug_if(m_debug, fmt::format("  Codec type: {0}\n", s_codecs[codec_id - flv_tag_c::CODEC_SORENSON_H263]));
 
     if (flv_tag_c::CODEC_H264 == codec_id)
       return process_video_tag_avc(track);
@@ -687,7 +685,7 @@ flv_reader_c::process_video_tag(flv_track_cptr &track) {
       track->m_headers_read = true;
 
   } else {
-    mxdebug_if(m_debug, boost::format("  Codec type unknown (%1%)\n") % static_cast<unsigned int>(codec_id));
+    mxdebug_if(m_debug, fmt::format("  Codec type unknown ({0})\n", static_cast<unsigned int>(codec_id)));
     track->m_headers_read = true;
   }
 
@@ -710,17 +708,17 @@ flv_reader_c::process_script_tag() {
 
     if ((number = parser.get_meta_data_value<double>("framerate"))) {
       m_tracks[m_video_track_idx]->m_v_frame_rate = *number;
-      mxdebug_if(m_debug, boost::format("Video frame rate from meta data: %1%\n") % *number);
+      mxdebug_if(m_debug, fmt::format("Video frame rate from meta data: {0}\n", *number));
     }
 
     if ((number = parser.get_meta_data_value<double>("width"))) {
       m_tracks[m_video_track_idx]->m_v_width = *number;
-      mxdebug_if(m_debug, boost::format("Video width from meta data: %1%\n") % *number);
+      mxdebug_if(m_debug, fmt::format("Video width from meta data: {0}\n", *number));
     }
 
     if ((number = parser.get_meta_data_value<double>("height"))) {
       m_tracks[m_video_track_idx]->m_v_height = *number;
-      mxdebug_if(m_debug, boost::format("Video height from meta data: %1%\n") % *number);
+      mxdebug_if(m_debug, fmt::format("Video height from meta data: {0}\n", *number));
     }
 
   } catch (mtx::mm_io::exception &) {
@@ -770,7 +768,7 @@ flv_reader_c::process_tag(bool skip_payload) {
 
   auto timestamp = m_tag.m_timestamp + (m_tag.m_timestamp_extended << 24);
 
-  mxdebug_if(m_debug, boost::format("Data size after processing: %1%; timestamp in ms: %2%\n") % m_tag.m_data_size % timestamp);
+  mxdebug_if(m_debug, fmt::format("Data size after processing: {0}; timestamp in ms: {1}\n", m_tag.m_data_size, timestamp));
 
   if (!m_tag.m_data_size)
     return true;
@@ -798,7 +796,7 @@ flv_reader_c::read(generic_packetizer_c *,
   try {
     tag_processed = process_tag();
   } catch (mtx::mm_io::exception &ex) {
-    mxdebug_if(m_debug, boost::format("Exception: %1%\n") % ex);
+    mxdebug_if(m_debug, fmt::format("Exception: {0}\n", ex));
     m_tag.m_ok = false;
   }
 
@@ -820,7 +818,7 @@ flv_reader_c::read(generic_packetizer_c *,
 
   if (-1 != track->m_ptzr) {
     track->m_timestamp = (track->m_timestamp + track->m_v_cts_offset - *m_min_timestamp) * 1000000ll;
-    mxdebug_if(m_debug, boost::format(" PTS in nanoseconds: %1%\n") % track->m_timestamp);
+    mxdebug_if(m_debug, fmt::format(" PTS in nanoseconds: {0}\n", track->m_timestamp));
 
     int64_t duration = -1;
     if (track->m_v_frame_rate && track->m_fourcc.equiv("AVC1"))
