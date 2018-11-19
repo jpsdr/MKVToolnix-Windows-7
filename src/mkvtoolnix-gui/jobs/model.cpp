@@ -136,7 +136,7 @@ Model::setRowText(QList<QStandardItem *> const &items,
   items.at(StatusColumn)      ->setText(Job::displayableStatus(job.status()));
   items.at(DescriptionColumn) ->setText(job.description());
   items.at(TypeColumn)        ->setText(job.displayableType());
-  items.at(ProgressColumn)    ->setText(to_qs(boost::format("%1%%%") % job.progress()));
+  items.at(ProgressColumn)    ->setText(to_qs(fmt::format("{0}%", job.progress())));
   items.at(DateAddedColumn)   ->setText(Util::displayableDate(job.dateAdded()));
   items.at(DateStartedColumn) ->setText(Util::displayableDate(job.dateStarted()));
   items.at(DateFinishedColumn)->setText(Util::displayableDate(job.dateFinished()));
@@ -349,7 +349,7 @@ Model::onProgressChanged(uint64_t id,
 
   auto row = rowFromId(id);
   if (row < rowCount()) {
-    item(row, ProgressColumn)->setText(to_qs(boost::format("%1%%%") % progress));
+    item(row, ProgressColumn)->setText(to_qs(fmt::format("{0}%", progress)));
     updateProgress();
   }
 }

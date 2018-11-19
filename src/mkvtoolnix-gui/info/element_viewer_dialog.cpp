@@ -100,7 +100,7 @@ ElementViewerDialog::elementName()
   if (!name.isEmpty())
     return name;
 
-  return Q(boost::format(Y("Unknown element (ID: 0x%1%)")) % kax_info_c::format_ebml_id_as_hex(p->m_elementId));
+  return Q(fmt::format(Y("Unknown element (ID: 0x{0})"), kax_info_c::format_ebml_id_as_hex(p->m_elementId)));
 }
 
 void
@@ -117,7 +117,7 @@ ElementViewerDialog::retranslateUi() {
 
   p->m_ui->size                  ->setText(p->m_signaledSize ? locale.toString(static_cast<quint64>(*p->m_signaledSize)) : QY("unknown"));
   p->m_ui->name                  ->setText(name);
-  p->m_ui->adler32               ->setText(Q(boost::format("0x%|1$08x|") % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, p->m_mem->get_buffer(), p->m_mem->get_size())));
+  p->m_ui->adler32               ->setText(Q(fmt::format("0x{0:08x}", mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, p->m_mem->get_buffer(), p->m_mem->get_size()))));
   p->m_ui->limitedBytesShownLabel->setText(QY("Only the first %1 bytes are shown.").arg(locale.toString(static_cast<quint64>(p->m_mem->get_size()))));
   p->m_ui->content               ->setText(createHexDump(*p->m_mem, highlights));
   p->m_ui->legend                ->setHtml(createLegend(highlights));
@@ -206,7 +206,7 @@ ElementViewerDialog::createHexDump(memory_c const &mem,
     if (!((position + 1) % 8)) {
       inLine  = false;
       spanEnd = span.isEmpty() ? QString{} : endSpanTag;
-      lines  << (  Q(boost::format("%|1$08x|  ") % (position - 7))
+      lines  << (  Q(fmt::format("{0:08x}  ", position - 7))
                  + hex.join(Q(" "))
                  + spanEnd
                  + Q("  ")
@@ -222,7 +222,7 @@ ElementViewerDialog::createHexDump(memory_c const &mem,
 
   if (inLine) {
     auto spanEnd = span.isEmpty() ? QString{} : endSpanTag;
-    lines       << (  Q(boost::format("%|1$08x|  ") % ((position / 8) * 8))
+    lines       << (  Q(fmt::format("{0:08x}  ", (position / 8) * 8))
                     + hex.join(Q(" "))
                     + spanEnd
                     + QString((8 - hex.size()) * 3 + 2, Q(' '))

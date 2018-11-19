@@ -322,7 +322,7 @@ Track::fixAssociations(MuxConfig::Loader &l) {
 std::string
 Track::debugInfo()
   const {
-  return (boost::format("%1%/%2%:%3%@%4%") % static_cast<unsigned int>(m_type) % m_id % m_codec % this).str();
+  return fmt::format("{0}/{1}:{2}@{3}", static_cast<unsigned int>(m_type), m_id, m_codec, static_cast<void const *>(this));
 }
 
 void

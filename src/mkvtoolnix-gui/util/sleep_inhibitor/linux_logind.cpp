@@ -33,17 +33,17 @@ bool
 LogindSleepInhibitor::inhibit() {
   auto p = p_func();
 
-  mxdebug_if(p->ms_debug, boost::format("logind sleep inhibitor: starting\n"));
+  mxdebug_if(p->ms_debug, fmt::format("logind sleep inhibitor: starting\n"));
 
   if (p->m_fd) {
-    mxdebug_if(p->ms_debug, boost::format("logind sleep inhibitor: already inhibited\n"));
+    mxdebug_if(p->ms_debug, fmt::format("logind sleep inhibitor: already inhibited\n"));
     return true;
   }
 
   auto bus = QDBusConnection::systemBus();
 
   if (!bus.isConnected()) {
-    mxdebug_if(p->ms_debug, boost::format("logind sleep inhibitor: error: D-Bus system bus is not connected\n"));
+    mxdebug_if(p->ms_debug, fmt::format("logind sleep inhibitor: error: D-Bus system bus is not connected\n"));
     return false;
   }
 
@@ -51,18 +51,18 @@ LogindSleepInhibitor::inhibit() {
   QDBusReply<QDBusUnixFileDescriptor> const reply    {interface.call("Inhibit", "shutdown:idle", "MKVToolNix GUI", "Jobs in progress.", "block")};
 
   if (!reply.isValid()) {
-    mxdebug_if(p->ms_debug, boost::format("logind sleep inhibitor: error: call failed: %1%\n") % to_utf8(reply.error().message()));
+    mxdebug_if(p->ms_debug, fmt::format("logind sleep inhibitor: error: call failed: {0}\n", to_utf8(reply.error().message())));
     return false;
   }
 
   auto const fd = reply.value();
   if (!fd.isValid()) {
-    mxdebug_if(p->ms_debug, boost::format("logind sleep inhibitor: error: call returned an invalid file descriptor\n"));
+    mxdebug_if(p->ms_debug, fmt::format("logind sleep inhibitor: error: call returned an invalid file descriptor\n"));
     return false;
   }
 
   p->m_fd = fd.fileDescriptor();
-  mxdebug_if(p->ms_debug, boost::format("logind sleep inhibitor: success: file descriptor: %1%\n") % *p->m_fd);
+  mxdebug_if(p->ms_debug, fmt::format("logind sleep inhibitor: success: file descriptor: {0}\n", *p->m_fd));
 
   return true;
 }
@@ -71,7 +71,7 @@ void
 LogindSleepInhibitor::uninhibit() {
   auto p = p_func();
 
-  mxdebug_if(p->ms_debug, boost::format("logind sleep inhibitor: uninhibiting: %1%\n") % (p->m_fd ? (boost::format("file descriptor %1%") % *p->m_fd).str() : "nothing to do"));
+  mxdebug_if(p->ms_debug, fmt::format("logind sleep inhibitor: uninhibiting: {0}\n", p->m_fd ? fmt::format("file descriptor {0}", *p->m_fd) : "nothing to do"));
 
   if (!p->m_fd)
     return;

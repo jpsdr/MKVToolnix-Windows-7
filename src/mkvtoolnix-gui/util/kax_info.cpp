@@ -183,7 +183,7 @@ KaxInfo::doScanLevel1Elements() {
     }
 
   } catch (mtx::mm_io::exception &ex) {
-    ui_show_error((boost::format("%1%: %2%") % Y("Caught exception") % ex.what()).str());
+    ui_show_error(fmt::format("{0}: {1}", Y("Caught exception"), ex.what()));
     return result_e::failed;
   }
 

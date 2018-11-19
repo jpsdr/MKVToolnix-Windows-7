@@ -139,7 +139,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   auto reNewlines        = boost::regex{"\r?\n", boost::regex::perl | boost::regex::icase};
   auto bugFormatter      = [](boost::smatch const &matches) -> std::string {
     auto number_str = matches[1].str().substr(1);
-    return (boost::format("<a href=\"https://gitlab.com/mbunkus/mkvtoolnix/issues/%1%\">#%1%</a>") % number_str).str();
+    return fmt::format("<a href=\"https://gitlab.com/mbunkus/mkvtoolnix/issues/{0}\">#{0}</a>", number_str);
   };
 
   releases.sort();

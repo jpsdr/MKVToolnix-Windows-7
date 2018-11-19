@@ -44,15 +44,15 @@ GuiCliParser::initParser() {
 
   add_separator();
 
-  add_information((boost::format("%1% %2% %3% %4%")
-                   % YT("Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool.")
-                   % YT("Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode.")
-                   % YT("The current mode can be changed with --multiplex, --edit-chapters or --edit-headers.")
-                   % YT("The default mode is adding files for multiplexing.")).str());
+  add_information(fmt::format("{0} {1} {2} {3}",
+                              YT("Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."),
+                              YT("Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode."),
+                              YT("The current mode can be changed with --multiplex, --edit-chapters or --edit-headers."),
+                              YT("The default mode is adding files for multiplexing.")));
 
   add_section_header(YT("Options"));
 
-  OPT("multiplex|merge", setMergeMode,    (boost::format("%1% %2%") % YT("All following file names will be added as source files to the current multiplex settings.") % YT("This is the default mode.")).str());
+  OPT("multiplex|merge", setMergeMode,    fmt::format("{0} {1}", YT("All following file names will be added as source files to the current multiplex settings."), YT("This is the default mode.")));
   OPT("info",            setInfoMode,     YT("All following file names will be opened in the info tool."));
   OPT("edit-chapters",   setChaptersMode, YT("All following file names will be opened in the chapter editor."));
   OPT("edit-headers",    setHeadersMode,  YT("All following file names will be opened in the header editor."));
@@ -127,7 +127,7 @@ void
 GuiCliParser::displayHelp() {
   auto p = p_func();
 
-  mxinfo(boost::format("%1%\n") % mtx::cli::g_usage_text);
+  mxinfo(fmt::format("{0}\n", mtx::cli::g_usage_text));
   p->exitAfterParsing = true;
 }
 
@@ -135,7 +135,7 @@ void
 GuiCliParser::displayVersion() {
   auto p = p_func();
 
-  mxinfo(boost::format("%1%\n") % mtx::cli::g_version_info);
+  mxinfo(fmt::format("{0}\n", mtx::cli::g_version_info));
   p->exitAfterParsing = true;
 }
 

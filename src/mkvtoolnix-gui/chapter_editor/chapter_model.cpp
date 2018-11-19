@@ -403,9 +403,9 @@ ChapterModel::flags(QModelIndex const &idx)
     effectiveFlags    = selectedIsChapter ? defaultFlags | Qt::ItemIsDropEnabled : defaultFlags;
   }
 
-  // log_it(boost::format("sele is %1%/%2% (%3%/%4%) seleIsChap %5% flags %|6$04x| %7%\n")
-  //        % m_selectedIdx.row() % m_selectedIdx.column() % m_selectedIdx.parent().row() % m_selectedIdx.parent().column() % selectedIsChapter %
-  //        effectiveFlags % Util::itemFlagsToString(effectiveFlags));
+  // log_it(fmt::format("sele is {0}/{1} ({2}/{3}) seleIsChap {4} flags {5:04x} {6}\n",
+  //        m_selectedIdx.row(), m_selectedIdx.column(), m_selectedIdx.parent().row(), m_selectedIdx.parent().column(), selectedIsChapter,
+  //        effectiveFlags, Util::itemFlagsToString(effectiveFlags)));
 
   return effectiveFlags;
 }

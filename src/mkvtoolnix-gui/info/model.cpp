@@ -208,7 +208,7 @@ Model::addFrameInfo(DataBuffer &buffer,
   auto locale = QLocale::system();
 
   items[0]->setText(QY("Frame"));
-  items[1]->setText(Q(boost::format(Y("Adler-32: 0x%|1$08x|")) % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, buffer.Buffer(), buffer.Size())));
+  items[1]->setText(Q(fmt::format(Y("Adler-32: 0x{0:08x}"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, buffer.Buffer(), buffer.Size()))));
   items[2]->setText(locale.toString(static_cast<quint64>(position)));
   items[3]->setText(locale.toString(static_cast<quint64>(buffer.Size())));
 
@@ -338,10 +338,10 @@ Model::elementName(EbmlElement &element) {
   auto name = kax_element_names_c::get(element);
 
   if (name.empty())
-    return { Q((boost::format(Y("Unknown element (ID: 0x%1%)")) % kax_info_c::format_ebml_id_as_hex(element)).str()), false };
+    return { Q(fmt::format(Y("Unknown element (ID: 0x{0})"), kax_info_c::format_ebml_id_as_hex(element))), false };
 
   if (dynamic_cast<EbmlDummy *>(&element))
-    return { Q((boost::format(Y("Known element, but invalid at this position: %1% (ID: 0x%2%)")) % name % kax_info_c::format_ebml_id_as_hex(element)).str()), false };
+    return { Q(fmt::format(Y("Known element, but invalid at this position: {0} (ID: 0x{1})"), name, kax_info_c::format_ebml_id_as_hex(element))), false };
 
   return { Q(name), true };
 }

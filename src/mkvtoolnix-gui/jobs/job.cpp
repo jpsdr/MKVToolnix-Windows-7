@@ -404,7 +404,7 @@ Job::loadJob(Util::ConfigFile &settings) {
   if (jobType == "InfoJob")
     return InfoJob::loadInfoJob(settings);
 
-  log_it(boost::format("MTX Job::loadJob: Unknown job type encountered (%1%) in %2%") % jobType % settings.fileName());
+  log_it(fmt::format("MTX Job::loadJob: Unknown job type encountered ({0}) in {1}", jobType, settings.fileName()));
   throw Merge::InvalidSettingsX{};
 }
 

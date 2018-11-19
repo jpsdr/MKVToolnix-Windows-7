@@ -26,10 +26,10 @@ bool
 MacOSSleepInhibitor::inhibit() {
   auto p = p_func();
 
-  mxdebug_if(p->ms_debug, boost::format("macOS sleep inhibitor: starting\n"));
+  mxdebug_if(p->ms_debug, fmt::format("macOS sleep inhibitor: starting\n"));
 
   if (p->m_assertionID) {
-    mxdebug_if(p->ms_debug, boost::format("macOS sleep inhibitor: already inhibited\n"));
+    mxdebug_if(p->ms_debug, fmt::format("macOS sleep inhibitor: already inhibited\n"));
     return true;
   }
 
@@ -38,12 +38,12 @@ MacOSSleepInhibitor::inhibit() {
   auto result = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, reason, &assertionID);
 
   if (result != kIOReturnSuccess) {
-    mxdebug_if(p->ms_debug, boost::format("macOS sleep inhibitor: error: IOPM assertion could not be created\n"));
+    mxdebug_if(p->ms_debug, fmt::format("macOS sleep inhibitor: error: IOPM assertion could not be created\n"));
     return false;
   }
 
   p->m_assertionID = assertionID;
-  mxdebug_if(p->ms_debug, boost::format("macOS sleep inhibitor: success: assertion ID: %1%\n") % *p->m_assertionID);
+  mxdebug_if(p->ms_debug, fmt::format("macOS sleep inhibitor: success: assertion ID: {0}\n", *p->m_assertionID));
 
   return true;
 }
@@ -52,7 +52,7 @@ void
 MacOSSleepInhibitor::uninhibit() {
   auto p = p_func();
 
-  mxdebug_if(p->ms_debug, boost::format("macOS sleep inhibitor: uninhibiting: %1%\n") % (p->m_assertionID ? (boost::format("assertion ID %1%") % *p->m_assertionID).str() : "nothing to do"));
+  mxdebug_if(p->ms_debug, fmt::format("macOS sleep inhibitor: uninhibiting: {0}\n", p->m_assertionID ? fmt::format("assertion ID {0}", *p->m_assertionID) : "nothing to do"));
 
   if (!p->m_assertionID)
     return;

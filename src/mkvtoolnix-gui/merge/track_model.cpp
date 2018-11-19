@@ -276,17 +276,17 @@ void
 TrackModel::dumpTracks(QString const &label)
   const {
   auto dumpIt = [](std::string const &prefix, Track const *track) {
-    log_it(boost::format("%1%%2% : %3% : %4% : %5% : %6% : %7%:\n")
-           % prefix
-           % (track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec)
-           % track->nameForType()
-           % (track->m_muxThis ? QY("Yes") : QY("No"))
-           % track->m_language
-           % track->m_name
-           % QFileInfo{ track->m_file->m_fileName }.fileName());
+    log_it(fmt::format("{0}{1} : {2} : {3} : {4} : {5} : {6}:\n",
+                       prefix,
+                       track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec,
+                       track->nameForType(),
+                       track->m_muxThis ? QY("Yes") : QY("No"),
+                       track->m_language,
+                       track->m_name,
+                       QFileInfo{ track->m_file->m_fileName }.fileName()));
   };
 
-  log_it(boost::format("Dumping tracks %1%\n") % label);
+  log_it(fmt::format("Dumping tracks {0}\n", label));
 
   for (auto const &track : *m_tracks) {
     dumpIt("  ", track);
@@ -478,7 +478,7 @@ TrackModel::updateTrackLists() {
   }
 
   if (m_debug) {
-    log_it(boost::format("### AFTER drag & drop ###\n"));
+    log_it(fmt::format("### AFTER drag & drop ###\n"));
     MuxConfig::debugDumpSpecificTrackList(*m_tracks);
   }
 

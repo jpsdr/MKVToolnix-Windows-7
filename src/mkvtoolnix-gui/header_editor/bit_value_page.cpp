@@ -45,7 +45,7 @@ BitValuePage::originalValueAsString()
 
   if (data)
     for (auto end = data + m_originalValue.byte_size(); data < end; ++data)
-      value += (boost::format("%|1$02x|") % static_cast<unsigned int>(*data)).str();
+      value += fmt::format("{0:02x}", static_cast<unsigned int>(*data));
 
   return Q(value);
 }

@@ -1751,7 +1751,7 @@ Tab::formatEbmlBinary(EbmlBinary *binary) {
 
   if (data)
     for (auto end = data + binary->GetSize(); data < end; ++data)
-      value += (boost::format("%|1$02x|") % static_cast<unsigned int>(*data)).str();
+      value += fmt::format("{0:02x}", static_cast<unsigned int>(*data));
 
   return Q(value);
 }
@@ -2102,14 +2102,14 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
   // Output debug info.
   for (auto const &data : atomList)
     qDebug() <<
-      Q((boost::format("collectChapterAtomData: data %1%%2% start %3% end %4% [%5%] atom %6% parent %7%")
-         % std::string(data->level * 2, ' ')
-         % to_utf8(data->primaryName)
-         % data->start
-         % data->end
-         % data->calculatedEnd
-         % data->atom
-         % data->parentAtom));
+      Q(fmt::format("collectChapterAtomData: data {0}{1} start {2} end {3} [{4}] atom {5} parent {6}",
+                    std::string(data->level * 2, ' '),
+                    to_utf8(data->primaryName),
+                    data->start,
+                    data->end,
+                    data->calculatedEnd,
+                    static_cast<void *>(data->atom),
+                    static_cast<void *>(data->parentAtom)));
 
   return allAtoms;
 }

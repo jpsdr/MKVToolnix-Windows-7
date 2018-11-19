@@ -395,10 +395,10 @@ void
 SourceFileModel::dumpSourceFiles(QString const &label)
   const {
   auto dumpIt = [](std::string const &prefix, SourceFilePtr const &sourceFile) {
-    log_it(boost::format("%1%%2%\n") % prefix % sourceFile->m_fileName);
+    log_it(fmt::format("{0}{1}\n", prefix, sourceFile->m_fileName));
   };
 
-  log_it(boost::format("Dumping source files %1%\n") % label);
+  log_it(fmt::format("Dumping source files {0}\n", label));
 
   for (auto const &sourceFile : *m_sourceFiles) {
     dumpIt("  ", sourceFile);

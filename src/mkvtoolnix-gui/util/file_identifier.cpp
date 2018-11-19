@@ -312,7 +312,7 @@ FileIdentifier::addProbeRangePercentageArg(QStringList &args,
   if (   (integerPart != 0)
       || (   (decimalPart !=  0)
           && (decimalPart != 30)))
-    args << "--probe-range-percentage" << Q(boost::format("%1%.%|2$02d|") % integerPart % decimalPart);
+    args << "--probe-range-percentage" << Q(fmt::format("{0}.{1:02}", integerPart, decimalPart));
 }
 
 QString

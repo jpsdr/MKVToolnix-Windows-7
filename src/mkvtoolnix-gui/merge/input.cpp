@@ -1205,7 +1205,7 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
     return;
 
   if (m_debugTrackModel) {
-    log_it(boost::format("### BEFORE adding/appending ###\n"));
+    log_it(fmt::format("### BEFORE adding/appending ###\n"));
     m_config.debugDumpFileList();
     m_config.debugDumpTrackList();
   }
@@ -1215,7 +1215,7 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
   m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
 
   if (m_debugTrackModel) {
-    log_it(boost::format("### AFTER adding/appending ###\n"));
+    log_it(fmt::format("### AFTER adding/appending ###\n"));
     m_config.debugDumpFileList();
     m_config.debugDumpTrackList();
   }
