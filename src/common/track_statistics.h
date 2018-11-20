@@ -17,7 +17,6 @@
 #include "common/common_pch.h"
 
 #include <boost/date_time/posix_time/ptime.hpp>
-#include <boost/optional.hpp>
 
 namespace libmatroska {
 class KaxTags;

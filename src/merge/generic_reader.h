@@ -15,8 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include <boost/optional.hpp>
-
 #include "common/file_types.h"
 #include "common/chapters/chapters.h"
 #include "common/math_fwd.h"

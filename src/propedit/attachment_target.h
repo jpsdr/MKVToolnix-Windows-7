@@ -12,8 +12,6 @@
 
 #include "common/common_pch.h"
 
-#include <boost/optional.hpp>
-
 #include <matroska/KaxAttached.h>
 
 #include "propedit/target.h"

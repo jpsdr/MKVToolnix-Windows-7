@@ -15,8 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include <boost/optional.hpp>
-
 enum option_source_e {
     OPTION_SOURCE_NONE         =  0
   , OPTION_SOURCE_BITSTREAM    = 10

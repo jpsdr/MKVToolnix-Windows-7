@@ -7,8 +7,6 @@
 #include <QThread>
 #include <QTranslator>
 
-#include <boost/optional.hpp>
-
 #include "common/command_line.h"
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"

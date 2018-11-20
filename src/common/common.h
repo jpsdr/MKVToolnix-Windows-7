@@ -47,6 +47,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/function.hpp>
 #include <boost/logic/tribool.hpp>
+#include <boost/optional.hpp>
 #include <boost/range.hpp>
 #include <boost/range/adaptor/filtered.hpp>
 #include <boost/range/adaptor/indexed.hpp>

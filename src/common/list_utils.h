@@ -13,8 +13,6 @@
 
 #pragma once
 
-#include <boost/optional.hpp>
-
 namespace mtx {
 
 template<typename Tneedle,
