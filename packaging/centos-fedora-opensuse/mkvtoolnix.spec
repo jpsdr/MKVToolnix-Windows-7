@@ -65,8 +65,8 @@ export CXX=/usr/bin/g++-7
 %endif
 
 %configure \
+  --enable-optimization \
   --enable-debug \
-  --disable-optimization
 
 %build
 %if 0%{?suse_version}
