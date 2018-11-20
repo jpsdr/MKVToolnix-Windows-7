@@ -1,5 +1,11 @@
 # Version ?
 
+## Important notes
+
+* The string formatting library used was switched from `boost::format` to
+  [`fmt`](http://fmtlib.net/). See the section "Build system changes" for
+  details.
+
 ## New features and enhancements
 
 * MKVToolNix GUI: added an option in the preferences for disabling automatic
@@ -23,6 +29,13 @@
 
 * Qt's D-Bus implementation is now required for building on systems other than
   macOS and Windows,
+* The `boost::format` library is not used anymore.
+* The [`fmt` library](http://fmtlib.net/) is now required. Versions 3 and
+  newer are supported. As not all Linux distributions include packages for the
+  library, its release 5.2.1 comes bundled with MKVToolNix. The `configure`
+  script will check for a system version of the library and use it if present
+  and recent enough. Otherwise it will fall back to the bundled version and
+  link that statically.
 
 
 # Version 28.2.0 "The Awakening" 2018-10-25
