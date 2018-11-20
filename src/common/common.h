@@ -87,8 +87,6 @@ using namespace std::string_literals;
 #undef NY
 #define Y(s)                            gettext(u8##s)
 #define NY(s_singular, s_plural, count) ngettext(u8##s_singular, u8##s_plural, count)
-#define YF(s)        Y(s)
-#define NYF(s, p, c) NY(s, p, c)
 
 #include "common/debugging.h"
 #include "common/error.h"

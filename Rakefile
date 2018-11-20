@@ -432,22 +432,18 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   sources   = (t.prerequisites.dup - %w{Rakefile}).sort.uniq
 
   keywords  = %w{--keyword=Y --keyword=NY:1,2}   # singular & plural forms returning std::string
-  keywords += %w{--keyword=YF --keyword=NYF:1,2} # singular & plural forms returning std::string which aren't format strings
   keywords += %w{--keyword=YT}                   # singular form returning translatable_string_c
   keywords += %w{--keyword=QTR}                  # singular form returning QString, used by uic
   keywords += %w{--keyword=QY --keyword=QNY:1,2} # singular & plural forms returning QString
   keywords += %w{--keyword=QYH}                  # singular form returning HTML-escaped QString
 
-  flags     = %w{--flag=QY:1:no-c-format  --flag=QY:1:no-boost-format}
-  flags    += %w{--flag=QNY:1:no-c-format --flag=QNY:1:no-boost-format}
-  flags    += %w{--flag=YF:1:no-c-format  --flag=YF:1:no-boost-format}
-  flags    += %w{--flag=NYF:1:no-c-format --flag=NYF:1:no-boost-format}
+  flags     = %w{Y NY YT QTR QY QNY QYH}.map { |func| "--flag=#{func}:1:no-c-format --flag=#{func}:1:no-boost-format" }.join(" ")
 
   options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output}
   options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]
   options  += ["'--copyright-holder=Moritz Bunkus <moritz@bunkus.org>'", "--package-name=MKVToolNix", "--package-version=#{c(:PACKAGE_VERSION)}", "--foreign-user"]
 
-  runq "xgettext", t.name, "xgettext #{keywords.join(" ")} #{flags.join(" ")} #{options.join(" ")} -o #{t.name} #{sources.join(" ")}"
+  runq "xgettext", t.name, "xgettext #{keywords.join(" ")} #{flags} #{options.join(" ")} -o #{t.name} #{sources.join(" ")}"
 end
 
 task :manpages => $manpages
