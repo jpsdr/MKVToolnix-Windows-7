@@ -438,11 +438,12 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   keywords += %w{--keyword=QY --keyword=QNY:1,2} # singular & plural forms returning QString
   keywords += %w{--keyword=QYH}                  # singular form returning HTML-escaped QString
 
-  flags     = %w{--flag=QY:1:no-c-format --flag=QNY:1:no-c-format}
-  flags    += %w{--flag=YF:1:no-c-format --flag=YF:1:no-boost-format}
+  flags     = %w{--flag=QY:1:no-c-format  --flag=QY:1:no-boost-format}
+  flags    += %w{--flag=QNY:1:no-c-format --flag=QNY:1:no-boost-format}
+  flags    += %w{--flag=YF:1:no-c-format  --flag=YF:1:no-boost-format}
   flags    += %w{--flag=NYF:1:no-c-format --flag=NYF:1:no-boost-format}
 
-  options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output --boost}
+  options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output}
   options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]
   options  += ["'--copyright-holder=Moritz Bunkus <moritz@bunkus.org>'", "--package-name=MKVToolNix", "--package-version=#{c(:PACKAGE_VERSION)}", "--foreign-user"]
 
