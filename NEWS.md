@@ -24,6 +24,11 @@
 * mkvmerge: chapter generation: the start timestamps of chapters generated in
   intervals was wrong for files whose smallest video timestamp was bigger than
   0. Fixes #2432.
+* mkvextract: AAC: mkvextract will now write the program config element (PCE)
+  before the first AAC raw data packet if the PCE is present in the
+  `AudioSpecificConfig` structure in the `Codec Private` Matroska element. The
+  PCE carries vital information about the number of channels and is required
+  in certain cases. Fixes #2205 and #2433.
 
 ## Build system changes
 

@@ -13,6 +13,8 @@
 #include "common/common_pch.h"
 
 #include "common/aac.h"
+#include "common/bit_reader.h"
+#include "common/bit_writer.h"
 #include "common/codec.h"
 #include "common/ebml.h"
 #include "extract/xtr_aac.h"
@@ -51,6 +53,23 @@ xtr_aac_c::create_file(xtr_base_c *master,
     m_id       = 0;
     m_channels = audio_config->channels;
     m_profile  = audio_config->profile;
+
+    if (audio_config->ga_specific_config_contains_program_config_element) {
+      mtx::bits::reader_c r{audio_config->ga_specific_config->get_buffer(), audio_config->ga_specific_config->get_size()};
+      mtx::bits::writer_c w{};
+
+      w.put_bits(3, AAC_ID_PCE);
+
+      r.skip_bits(1);           // frame_length_flag
+      if (r.get_bit())          // depends_on_core_coder
+        r.skip_bits(14);        // core_coder_delay
+      r.skip_bits(1);           // extension_flag
+
+      mtx::aac::copy_program_config_element(r, w);
+
+      m_program_config_element            = w.get_buffer();
+      m_program_config_element_bit_length = w.get_bit_position();
+    }
 
   } else {
     // A_AAC/MPEG4/MAIN
@@ -105,8 +124,42 @@ xtr_aac_c::create_file(xtr_base_c *master,
 #pragma warning(disable:4309)	//truncation of constant data. 0xff is an int.
 #endif
 
+memory_cptr
+xtr_aac_c::handle_program_config_element(xtr_frame_t &f) {
+  if (!m_program_config_element || !f.frame->get_size())
+    return f.frame;
+
+  mxdebug_if(m_debug, fmt::format("Program config element present in CodecPrivate; PCE bit length {0}\n", m_program_config_element_bit_length));
+
+  auto id_syn_ele = mtx::bits::reader_c{*f.frame}.get_bits(3);
+
+  if (id_syn_ele == AAC_ID_PCE) {
+    mxdebug(fmt::format("Program config element already present in first packet\n"));
+    m_program_config_element.reset();
+
+    return f.frame;
+  }
+
+  mxdebug_if(m_debug, fmt::format("No program config element in first packet; prepending\n"));
+
+  mtx::bits::reader_c r{*m_program_config_element};
+  mtx::bits::writer_c w{};
+
+  w.copy_bits(m_program_config_element_bit_length, r);
+  w.byte_align();
+
+  r = mtx::bits::reader_c{*f.frame};
+  w.copy_bits(f.frame->get_size() * 8, r);
+
+  m_program_config_element.reset();
+
+  return w.get_buffer();
+}
+
 void
 xtr_aac_c::handle_frame(xtr_frame_t &f) {
+  auto data = handle_program_config_element(f);
+
   // Recreate the ADTS headers. What a fun. Like runing headlong into
   // a solid wall. But less painful. Well such is life, you know.
   // But then again I've just seen a beautiful girl walking by my
@@ -147,7 +200,7 @@ xtr_aac_c::handle_frame(xtr_frame_t &f) {
   // copyright id start, 1 bit = 0 (ASSUMPTION!)
 
   // frame length, 13 bits
-  int len  = f.frame->get_size() + 7;
+  int len  = data->get_size() + 7;
   adts[3] |= len >> 11;
   adts[4]  = (len >> 3) & 0xff;
   adts[5]  = (len & 7) << 5;
@@ -160,5 +213,5 @@ xtr_aac_c::handle_frame(xtr_frame_t &f) {
 
   // Write the ADTS header and the data itself.
   m_out->write(adts, 56 / 8);
-  m_out->write(f.frame);
+  m_out->write(data);
 }

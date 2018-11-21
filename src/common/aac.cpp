@@ -137,6 +137,38 @@ create_audio_specific_config(audio_config_t const &audio_config) {
   return w.get_buffer();
 }
 
+void
+copy_program_config_element(mtx::bits::reader_c &r,
+                            mtx::bits::writer_c &w) {
+  w.copy_bits(4 + 2 + 4, r);    // element_instance_tag, object_type, sample_rate_idx
+
+  int num_front_chan = w.copy_bits(4, r);
+  int num_side_chan  = w.copy_bits(4, r);
+  int num_back_chan  = w.copy_bits(4, r);
+  int num_lfe_chan   = w.copy_bits(2, r);
+  int num_assoc_data = w.copy_bits(3, r);
+  int num_valid_cc   = w.copy_bits(4, r);
+
+  if (w.copy_bits(1, r))        // mono_mixdown_present_flag
+    w.copy_bits(4, r);          // mono_mixdown_element_number
+  if (w.copy_bits(1, r))        // stereo_mixdown_present_flag
+    w.copy_bits(4, r);          // stereo_mixdown_element_number
+  if (w.copy_bits(1, r))        // matrix_mixdown_idx_present_flag
+    w.copy_bits(2 + 1, r);      // matrix_mixdown_idx, pseudo_surround_enable
+
+  for (int idx = 0; idx < (num_front_chan + num_side_chan + num_back_chan); ++idx)
+    w.copy_bits(1 + 4, r);      // *_element_is_cpe, *_element_tag_select
+
+  w.copy_bits(num_lfe_chan   *       4, r); //                       lfe_element_tag_select
+  w.copy_bits(num_assoc_data *       4, r); //                       assoc_data_element_tag_select
+  w.copy_bits(num_valid_cc   * (1 + 4), r); // cc_element_is_ind_sw, valid_cc_element_tag_select
+
+  r.byte_align();
+  w.byte_align();
+
+  w.copy_bits(w.copy_bits(8, r) * 8, r); // comment_field_bytes, comment_field_data
+}
+
 // ------------------------------------------------------------
 
 latm_parser_c::latm_parser_c()
@@ -571,7 +603,7 @@ parser_c::decode_adts_header(unsigned char const *buffer,
       return { failure, 1 };
 
     auto data_start_position = bc.get_bit_position();
-    if (bc.get_bits(3) == 0x05)
+    if (bc.get_bits(3) == AAC_ID_PCE)
       frame.m_header.parse_program_config_element(bc);
     bc.set_bit_position(data_start_position);
 
@@ -1014,6 +1046,8 @@ header_c::read_program_config_element() {
 
   m_bc->byte_align();
   m_bc->skip_bits(m_bc->get_bits(8) * 8);    // comment_field_bytes, comment_field_data
+
+  config.ga_specific_config_contains_program_config_element = true;
 }
 
 void

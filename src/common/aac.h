@@ -40,8 +40,11 @@
 #define AAC_LOAS_SYNC_WORD_MASK  0xffe000 // first 11 of 24 bits
 #define AAC_LOAS_FRAME_SIZE_MASK 0x001fff // last 13 of 24 bits
 
+#define AAC_ID_PCE               0x05 // Table 4.71 "Syntactic elements"
+
 namespace mtx { namespace bits {
 class reader_c;
+class writer_c;
 }}
 
 namespace mtx { namespace aac {
@@ -51,11 +54,13 @@ struct audio_config_t {
   bool sbr{};
   memory_cptr ga_specific_config;
   unsigned int ga_specific_config_bit_size{};
+  bool ga_specific_config_contains_program_config_element{};
 };
 
 unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
 bool parse_codec_id(const std::string &codec_id, int &id, int &profile);
 boost::optional<audio_config_t> parse_audio_specific_config(unsigned char const *data, std::size_t size);
+void copy_program_config_element(mtx::bits::reader_c &r, mtx::bits::writer_c &w);
 memory_cptr create_audio_specific_config(audio_config_t const &audio_config);
 
 class header_c {

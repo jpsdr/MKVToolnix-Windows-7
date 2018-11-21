@@ -19,6 +19,9 @@
 class xtr_aac_c: public xtr_base_c {
 public:
   int m_channels, m_id, m_profile, m_srate_idx;
+  memory_cptr m_program_config_element;
+  unsigned int m_program_config_element_bit_length{};
+  debugging_option_c m_debug{"xtr_aac"};
 
 public:
   xtr_aac_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
@@ -29,4 +32,7 @@ public:
   virtual const char *get_container_name() {
     return "raw AAC file with ADTS headers";
   };
+
+protected:
+  virtual memory_cptr handle_program_config_element(xtr_frame_t &f);
 };
