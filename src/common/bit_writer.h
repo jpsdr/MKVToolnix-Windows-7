@@ -41,6 +41,13 @@ public:
   {
   }
 
+  writer_c(memory_c &data)
+    : m_data{data.get_buffer()}
+    , m_size{data.get_size()}
+    , m_data_size{data.get_size()}
+  {
+  }
+
   inline memory_cptr get_buffer() {
     return memory_c::clone(m_data, m_size);
   }

@@ -38,6 +38,10 @@ public:
     init(data, len);
   }
 
+  reader_c(memory_c &data) {
+    init(data.get_buffer(), data.get_size());
+  }
+
   void init(const unsigned char *data, std::size_t len) {
     m_end_of_data   = data + len;
     m_byte_position = data;
