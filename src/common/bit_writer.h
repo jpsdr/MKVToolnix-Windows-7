@@ -53,8 +53,14 @@ public:
   }
 
   inline uint64_t copy_bits(std::size_t n, reader_c &src) {
-    uint64_t value = src.get_bits(n);
-    put_bits(n, value);
+    uint64_t value{};
+
+    while (n) {
+      auto to_copy = std::min<std::size_t>(n, 64);
+      n           -= to_copy;
+      value        = src.get_bits(to_copy);
+      put_bits(to_copy, value);
+    }
 
     return value;
   }
