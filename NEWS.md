@@ -29,6 +29,11 @@
   `AudioSpecificConfig` structure in the `Codec Private` Matroska element. The
   PCE carries vital information about the number of channels and is required
   in certain cases. Fixes #2205 and #2433.
+* mkvpropedit, MKVToolNix GUI's header editor: in situations when a one-byte
+  space must be covered by a new EBML void element the following element must
+  be moved up instead. If that moved element is a cluster, the corresponding
+  cue entries will now be updated to reflect the cluster's new position. Fixes
+  #2408.
 
 ## Build system changes
 

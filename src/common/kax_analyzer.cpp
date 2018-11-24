@@ -19,6 +19,8 @@
 #include <ebml/EbmlSubHead.h>
 #include <ebml/EbmlVoid.h>
 #include <matroska/KaxCluster.h>
+#include <matroska/KaxCues.h>
+#include <matroska/KaxCuesData.h>
 #include <matroska/KaxSeekHead.h>
 #include <matroska/KaxSegment.h>
 #include <matroska/KaxTags.h>
@@ -633,6 +635,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     m_file->setFilePointer(new_pos);
     m_file->write(head, head_size);
 
+    auto original_position        = m_data[data_idx + 1]->m_pos;
     m_data[data_idx + 1]->m_pos   = new_pos;
     m_data[data_idx + 1]->m_size += move_up ? 1 : -1;
 
@@ -659,6 +662,13 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     merge_void_elements();
     add_to_meta_seek(e.get());
     merge_void_elements();
+
+    if (Is<KaxCluster>(*e)) {
+      mxdebug_if(s_debug_void,
+                 fmt::format("handle_void_elements({0}): shifted element is cluster; adjusting cues; original relative position {1} new relative position {2}\n",
+                             data_idx, m_segment->GetRelativePosition(original_position), m_segment->GetRelativePosition(e->GetElementPosition())));
+      adjust_cues_for_cluster(static_cast<KaxCluster &>(*e), m_segment->GetRelativePosition(original_position));
+    }
 
     return false;
   }
@@ -725,6 +735,44 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     m_data.erase(m_data.begin() + data_idx);
 
   return true;
+}
+
+void
+kax_analyzer_c::adjust_cues_for_cluster(KaxCluster const &cluster,
+                                        uint64_t original_relative_position) {
+  static debugging_option_c s_debug_cues{"kax_analyzer_adjust_cues_for_cluster"};
+
+  auto cues = read_all(EBML_INFO(KaxCues));
+  if (!cues) {
+    mxdebug_if(s_debug_cues, fmt::format("adjust_cues_for_cluster: no cues found\n"));
+    return;
+  }
+
+  mxdebug_if(s_debug_cues, fmt::format("adjust_cues_for_cluster: cues found; looking for relative position {0}, rewriting to new position {1}\n", original_relative_position, m_segment->GetRelativePosition(cluster)));
+
+  auto modified = false;
+
+  for (auto const &potential_cue_point : *cues) {
+    if (!dynamic_cast<KaxCuePoint *>(potential_cue_point))
+      continue;
+
+    for (auto const &potential_track_positions : static_cast<KaxCuePoint &>(*potential_cue_point)) {
+      if (!dynamic_cast<KaxCueTrackPositions *>(potential_track_positions))
+        continue;
+
+      auto cluster_position = FindChild<KaxCueClusterPosition>(static_cast<KaxCueTrackPositions &>(*potential_track_positions));
+      if (!cluster_position || (cluster_position->GetValue() != original_relative_position))
+        continue;
+
+      cluster_position->SetValue(m_segment->GetRelativePosition(cluster));
+      modified = true;
+    }
+  }
+
+  mxdebug_if(s_debug_cues, fmt::format("adjust_cues_for_cluster: modifed? {0}\n", modified));
+
+  if (modified)
+    update_element(cues);
 }
 
 /** \brief Removes all seek entries for a specific element

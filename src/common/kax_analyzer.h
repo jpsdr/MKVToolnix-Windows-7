@@ -21,6 +21,10 @@
 #include "common/ebml.h"
 #include "common/mm_io.h"
 
+namespace libmatroska {
+class KaxCluster;
+}
+
 namespace mtx {
 class doc_type_version_handler_c;
 
@@ -205,6 +209,7 @@ protected:
   virtual void read_meta_seek(uint64_t pos, std::map<int64_t, bool> &positions_found);
   virtual void fix_element_sizes(uint64_t file_size);
   virtual void fix_unknown_size_for_last_level1_element();
+  virtual void adjust_cues_for_cluster(libmatroska::KaxCluster const &cluster, uint64_t original_relative_position);
 
   virtual void determine_webm();
 
