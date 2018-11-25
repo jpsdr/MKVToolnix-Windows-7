@@ -7,6 +7,7 @@
 #include <QSplitter>
 #include <QStandardPaths>
 
+#include "common/chapters/chapters.h"
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
@@ -320,6 +321,8 @@ Settings::load() {
   loadRunProgramConfigurations(reg);
   addDefaultRunProgramConfigurations(reg);
   setDefaults(enableMuxingTracksByTheseTypes);
+
+  mtx::chapters::g_chapter_generation_name_template.override(to_utf8(m_chapterNameTemplate));
 }
 
 void

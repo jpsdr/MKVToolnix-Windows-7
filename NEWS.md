@@ -34,6 +34,9 @@
   be moved up instead. If that moved element is a cluster, the corresponding
   cue entries will now be updated to reflect the cluster's new position. Fixes
   #2408.
+* mkvmerge, MKVToolNix GUI's chapter editor: the chapter name template will
+  now also be used when reading Ogg-style chapter files with empty chapter
+  names. Fixes #2441.
 
 ## Build system changes
 

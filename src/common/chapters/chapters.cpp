@@ -174,7 +174,7 @@ parse_simple(mm_text_io_c *in,
   boost::regex name_line_re{     SIMCHAP_RE_NAME_LINE,      boost::regex::perl};
   boost::smatch matches;
 
-  std::string line, timestamp_as_string;
+  std::string line;
 
   while (in->getline2(line)) {
     strip(line);
@@ -202,15 +202,13 @@ parse_simple(mm_text_io_c *in,
       if (!boost::regex_match(line, matches, timestamp_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
-      timestamp_as_string = matches[1].str();
-
     } else {
       if (!boost::regex_match(line, matches, name_line_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxxNAME=... line."), line));
 
       std::string name = matches[1].str();
       if (name.empty())
-        name = timestamp_as_string;
+        name = format_name_template(g_chapter_generation_name_template.get_translated(), num + 1, timestamp_c::ms(start));
 
       mode = 0;
 

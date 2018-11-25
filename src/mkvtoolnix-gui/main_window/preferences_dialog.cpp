@@ -9,6 +9,7 @@
 #include <QTabWidget>
 #include <QVector>
 
+#include "common/chapters/chapters.h"
 #include "common/extern_data.h"
 #include "common/qt.h"
 #include "common/translation.h"
@@ -869,6 +870,8 @@ PreferencesDialog::save() {
   }
 
   m_cfg.save();
+
+  mtx::chapters::g_chapter_generation_name_template.override(to_utf8(m_cfg.m_chapterNameTemplate));
 }
 
 void
