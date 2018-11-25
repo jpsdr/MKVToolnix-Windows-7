@@ -70,7 +70,6 @@ public:
   bool discarding{}, splitting_and_processed_fully{};
 
   chapter_generation_mode_e chapter_generation_mode{chapter_generation_mode_e::none};
-  translatable_string_c chapter_generation_name_template{YT("Chapter <NUM:2>")};
   timestamp_c chapter_generation_interval, chapter_generation_last_generated;
   generic_packetizer_c *chapter_generation_reference_track{};
   unsigned int chapter_generation_number{};

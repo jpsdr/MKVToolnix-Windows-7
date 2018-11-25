@@ -43,6 +43,8 @@ std::string g_default_language;
 /** The default country for all chapter entries that don't have their own. */
 std::string g_default_country;
 
+translatable_string_c g_chapter_generation_name_template{YT("Chapter <NUM:2>")};
+
 #define SIMCHAP_RE_TIMESTAMP_LINE "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d+)"
 #define SIMCHAP_RE_TIMESTAMP      "^\\s*CHAPTER\\d+\\s*=(.*)"
 #define SIMCHAP_RE_NAME_LINE      "^\\s*CHAPTER\\d+NAME\\s*=(.*)"

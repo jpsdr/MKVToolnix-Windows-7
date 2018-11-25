@@ -2287,6 +2287,13 @@ parse_args(std::vector<std::string> args) {
       g_outfile = next_arg;
       sit++;
 
+    } else if (this_arg == "--generate-chapters-name-template") {
+      if (no_next_arg)
+        mxerror(Y("'--generate-chapters-name-template' lacks the name template.\n"));
+
+      mtx::chapters::g_chapter_generation_name_template.override(next_arg);
+      sit++;
+
     } else if ((this_arg == "-w") || (this_arg == "--webm"))
       set_output_compatibility(OC_WEBM);
   }
@@ -2313,10 +2320,7 @@ parse_args(std::vector<std::string> args) {
     auto next_arg        = !no_next_arg ? *sit_next : "";
 
     // Ignore the options we took care of in the first step.
-    if (   (this_arg == "-o")
-        || (this_arg == "--output")
-        || (this_arg == "--command-line-charset")
-        || (this_arg == "--engage")) {
+    if (mtx::included_in(this_arg, "-o", "--output", "--command-line-charset", "--engage", "--generate-chapters-name-template")) {
       sit++;
       continue;
     }
@@ -2505,13 +2509,6 @@ parse_args(std::vector<std::string> args) {
         mxerror(Y("'--generate-chapters' lacks the mode.\n"));
 
       parse_arg_generate_chapters(next_arg);
-      sit++;
-
-    } else if (this_arg == "--generate-chapters-name-template") {
-      if (no_next_arg)
-        mxerror(Y("'--generate-chapters-name-template' lacks the name template.\n"));
-
-      g_cluster_helper->set_chapter_generation_name_template(next_arg);
       sit++;
 
     } else if (this_arg == "--segmentinfo") {

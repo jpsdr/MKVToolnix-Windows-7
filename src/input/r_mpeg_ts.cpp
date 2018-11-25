@@ -1284,7 +1284,7 @@ reader_c::process_chapter_entries() {
   std::stable_sort(m_chapter_timestamps.begin(), m_chapter_timestamps.end());
 
   m_chapters.reset(new libmatroska::KaxChapters);
-  auto name_template  = g_cluster_helper->get_chapter_generation_name_template();
+  auto name_template  = mtx::chapters::g_chapter_generation_name_template.get_translated();
   auto chapter_number = 0;
   auto &edition       = GetChild<libmatroska::KaxEditionEntry>(*m_chapters);
   auto language       = !m_ti.m_chapter_language.empty() ? m_ti.m_chapter_language

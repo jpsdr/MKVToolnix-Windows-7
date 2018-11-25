@@ -18,6 +18,7 @@
 #include <ebml/EbmlElement.h>
 
 #include "common/timestamp.h"
+#include "common/translation.h"
 
 namespace libebml {
   class EbmlMaster;
@@ -64,6 +65,7 @@ bool probe_simple(mm_text_io_c *in);
 mtx::chapters::kax_cptr parse_simple(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, const std::string &language, const std::string &charset);
 
 extern std::string g_cue_name_format, g_default_language, g_default_country;
+extern translatable_string_c g_chapter_generation_name_template;
 
 bool probe_cue(mm_text_io_c *in);
 mtx::chapters::kax_cptr parse_cue(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, const std::string &language, const std::string &charset, std::unique_ptr<libmatroska::KaxTags> *tags = nullptr);

@@ -81,8 +81,6 @@ public:
   void enable_chapter_generation(chapter_generation_mode_e mode, std::string const &language = "");
   chapter_generation_mode_e get_chapter_generation_mode() const;
   void set_chapter_generation_interval(timestamp_c const &interval);
-  void set_chapter_generation_name_template(std::string const &name_template);
-  std::string get_chapter_generation_name_template() const;
   void verify_and_report_chapter_generation_parameters() const;
 
 private:

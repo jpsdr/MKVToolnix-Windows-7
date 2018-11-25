@@ -730,17 +730,6 @@ cluster_helper_c::set_chapter_generation_interval(timestamp_c const &interval) {
 }
 
 void
-cluster_helper_c::set_chapter_generation_name_template(std::string const &name_template) {
-  m->chapter_generation_name_template.override(name_template);
-}
-
-std::string
-cluster_helper_c::get_chapter_generation_name_template()
-  const {
-  return m->chapter_generation_name_template.get_translated();
-}
-
-void
 cluster_helper_c::verify_and_report_chapter_generation_parameters()
   const {
   if (chapter_generation_mode_e::none == m->chapter_generation_mode)
@@ -820,7 +809,7 @@ cluster_helper_c::generate_one_chapter(timestamp_c const &timestamp) {
   auto appended_file_name               = chapter_generation_mode_e::when_appending == m->chapter_generation_mode ? m->chapter_generation_reference_track->m_reader->m_ti.m_fname : std::string{};
   m->chapter_generation_number         += 1;
   m->chapter_generation_last_generated  = timestamp;
-  auto name                             = mtx::chapters::format_name_template(m->chapter_generation_name_template.get_translated(), m->chapter_generation_number, timestamp, appended_file_name);
+  auto name                             = mtx::chapters::format_name_template(mtx::chapters::g_chapter_generation_name_template.get_translated(), m->chapter_generation_number, timestamp, appended_file_name);
 
   add_chapter_atom(timestamp, name, m->chapter_generation_language);
 }
