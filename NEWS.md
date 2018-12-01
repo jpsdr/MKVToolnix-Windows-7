@@ -17,13 +17,14 @@
 
 ## Bug fixes
 
-* MKVToolNix GUI: Windows: the application manifest is now included properly
-  so that Windows actually recognizes it. See #2415.
-* mkvmerge: MP4 reader: fixed handling of atoms whose size exceeds the parent
-  atom's size. Fixes #2431.
 * mkvmerge: chapter generation: the start timestamps of chapters generated in
   intervals was wrong for files whose smallest video timestamp was bigger than
   0. Fixes #2432.
+* mkvmerge: MP4 reader: fixed handling of atoms whose size exceeds the parent
+  atom's size. Fixes #2431.
+* mkvmerge, MKVToolNix GUI's chapter editor: the chapter name template will
+  now also be used when reading Ogg-style chapter files with empty chapter
+  names. Fixes #2441.
 * mkvextract: AAC: mkvextract will now write the program config element (PCE)
   before the first AAC raw data packet if the PCE is present in the
   `AudioSpecificConfig` structure in the `Codec Private` Matroska element. The
@@ -34,9 +35,8 @@
   be moved up instead. If that moved element is a cluster, the corresponding
   cue entries will now be updated to reflect the cluster's new position. Fixes
   #2408.
-* mkvmerge, MKVToolNix GUI's chapter editor: the chapter name template will
-  now also be used when reading Ogg-style chapter files with empty chapter
-  names. Fixes #2441.
+* MKVToolNix GUI: Windows: the application manifest is now included properly
+  so that Windows actually recognizes it. See #2415.
 
 ## Build system changes
 
