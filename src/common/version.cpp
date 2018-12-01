@@ -22,7 +22,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "The Awakening"
+#define VERSIONNAME "Like It Or Not"
 
 version_number_t::version_number_t()
 {
