@@ -343,6 +343,12 @@ if $building_for[:windows]
 end
 
 rule '.mo' => '.po' do |t|
+  if !%r{doc/man}.match(t.sources[0])
+    runq_code "VERIFY-PO-FMT", :target => t.sources[0] do
+      FormatStringVerifier.new.verify t.sources[0]
+    end
+  end
+
   runq "msgfmt", t.source, "#{c(:MSGFMT)} -c -o #{t.name} #{t.sources.join(" ")}"
 end
 

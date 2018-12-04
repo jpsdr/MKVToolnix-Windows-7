@@ -5,7 +5,7 @@ require "fileutils"
 
 $git_mutex     = Mutex.new
 $message_mutex = Mutex.new
-$action_width  = 12
+$action_width  = 14
 
 def puts(message)
   $message_mutex.synchronize {
@@ -107,6 +107,21 @@ end
 
 def runq_git(msg, cmdline, options = {})
   runq "git #{cmdline.split(/\s+/)[0]}", "#{msg}", "git #{cmdline}", :mutex => $git_mutex
+end
+
+def runq_code(action, options = {})
+  start = Time.now
+
+  puts_action action, :target => options[:target], :prefix => $run_show_start_stop ? "[start          ]" : nil
+
+  ok       = yield
+  duration = Time.now - start
+
+  if $run_show_start_stop
+    puts_action action, :target => options[:target], :prefix => sprintf("[%s  %02d:%02d.%03d]", ok ? "done" : "fail", (duration / 60).to_i, duration.to_i % 60, (duration * 1000).to_i % 1000)
+  end
+
+  exit 1 if !ok
 end
 
 def ensure_dir dir

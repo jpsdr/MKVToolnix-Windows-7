@@ -152,8 +152,9 @@ def write_po file_name, items
 end
 
 def normalize_po file
-  puts_action "NORMALIZE-PO", :target => file
-  write_po file, read_po(file)
+  runq_code "NORMALIZE-PO", :target => file do
+    write_po file, read_po(file)
+  end
 end
 
 def replace_po_meta_info orig_metas, transifex_meta, key
@@ -219,13 +220,13 @@ def transifex_pull_and_merge resource, language
 
   runq "tx pull", po_file, "tx pull -f -r mkvtoolnix.#{resource} -l #{language} > /dev/null"
 
-  puts_qaction "merge", :target => po_file
+  runq_code "merge", :target => po_file do
+    transifex_items = read_po(po_file)
+    merged_items    = merge_po orig_items, transifex_items
+    fixed_items     = fix_po_msgstr_plurals merged_items
 
-  transifex_items = read_po(po_file)
-  merged_items    = merge_po orig_items, transifex_items
-  fixed_items     = fix_po_msgstr_plurals merged_items
-
-  write_po po_file, fixed_items
+    write_po po_file, fixed_items
+  end
 end
 
 def transifex_remove_fuzzy_and_push resource, language
