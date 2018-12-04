@@ -47,6 +47,7 @@ $build_system_modules = {}
 $have_gtest           = (c(:GTEST_TYPE) == "system") || (c(:GTEST_TYPE) == "internal")
 $gtest_apps           = []
 
+require_relative "rake.d/digest"
 require_relative "rake.d/helpers"
 require_relative "rake.d/target"
 require_relative "rake.d/application"

@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require "digest"
-
 class FormatStringVerifier
   def verify file_name
     language  = file_name.gsub(%r{.*/|\.po$}, '')
@@ -35,7 +33,7 @@ class FormatStringVerifier
           reject(&:nil?).
           each do |msgid|
             format_types.each do |type|
-              sha1 = Digest::SHA1.hexdigest "#{type}:#{msgid}:#{msgstr}"
+              sha1 = sha1_hexdigest "#{type}:#{msgid}:#{msgstr}"
 
               next if to_ignore.key?(language) && to_ignore[language].include?(sha1)
 
