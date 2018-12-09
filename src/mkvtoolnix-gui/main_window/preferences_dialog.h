@@ -69,10 +69,6 @@ public slots:
   void enableOftendUsedLanguagesOnly();
   void enableOftendUsedCountriesOnly();
   void enableOftendUsedCharacterSetsOnly();
-  void enablePredefinedTrackNameControls();
-
-  void addPredefinedTrackName();
-  void removePredefinedTrackNames();
 
   virtual void accept() override;
 

@@ -553,55 +553,9 @@
           <property name="title">
            <string>Predefined track names</string>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <layout class="QVBoxLayout" name="verticalLayout_21">
            <item>
-            <widget class="QListWidget" name="lwMPredefinedTrackNames">
-             <property name="selectionMode">
-              <enum>QAbstractItemView::ExtendedSelection</enum>
-             </property>
-             <property name="sortingEnabled">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_21">
-             <item>
-              <widget class="QPushButton" name="pbMAddPredefinedTrackName">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="../../qt_resources.qrc">
-                 <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pbMRemovePredefinedTrackNames">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="../../qt_resources.qrc">
-                 <normaloff>:/icons/16x16/list-remove.png</normaloff>:/icons/16x16/list-remove.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="verticalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
+            <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedTrackNames" native="true"/>
            </item>
           </layout>
          </widget>
@@ -1966,6 +1920,12 @@
    <header>mkvtoolnix-gui/info/job_settings_widget.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::StringListConfigurationWidget</class>
+   <extends>QWidget</extends>
+   <header>mkvtoolnix-gui/util/string_list_configuration_widget.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>pageSelector</tabstop>
@@ -1994,9 +1954,6 @@
   <tabstop>rbMTrackPropertiesLayoutHorizontalScrollArea</tabstop>
   <tabstop>rbMTrackPropertiesLayoutHorizontalTwoColumns</tabstop>
   <tabstop>rbMTrackPropertiesLayoutVerticalTabWidget</tabstop>
-  <tabstop>lwMPredefinedTrackNames</tabstop>
-  <tabstop>pbMAddPredefinedTrackName</tabstop>
-  <tabstop>pbMRemovePredefinedTrackNames</tabstop>
   <tabstop>leMDefaultAdditionalCommandLineOptions</tabstop>
   <tabstop>pbMEditDefaultAdditionalCommandLineOptions</tabstop>
   <tabstop>cbMAutoSetFileTitle</tabstop>

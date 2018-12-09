@@ -104,7 +104,7 @@ setToolTip(QWidget *widget,
   // automatically if the format is recognized to be Rich Text. See
   // http://doc.qt.io/qt-5/qstandarditem.html
 
-  widget->setToolTip(toolTip.startsWith('<') ? toolTip : Q("<span>%1</span>").arg(toolTip.toHtmlEscaped()));
+  widget->setToolTip(toolTip.isEmpty() || toolTip.startsWith('<') ? toolTip : Q("<span>%1</span>").arg(toolTip.toHtmlEscaped()));
 }
 
 void

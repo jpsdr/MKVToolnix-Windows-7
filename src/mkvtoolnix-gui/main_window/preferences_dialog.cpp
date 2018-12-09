@@ -24,6 +24,7 @@
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/side_by_side_multi_select.h"
+#include "mkvtoolnix-gui/util/string_list_configuration_widget.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui {
@@ -274,11 +275,12 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
   Util::setToolTip(ui->cbMAutoClearFileTitle, QY("If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."));
 
-  Util::setToolTip(ui->lwMPredefinedTrackNames,
-                   Q("%1 %2 %3")
-                   .arg(QY("If you often use the same names for tracks, you can enter them here."))
-                   .arg(QY("The names will be available for easy selection in both the multiplexer and the header editor."))
-                   .arg(QY("You can still enter track names not present in this list manually in both tools.")));
+
+  ui->lwMPredefinedTrackNames->setToolTips(Q("%1 %2 %3")
+                                           .arg(QY("If you often use the same names for tracks, you can enter them here."))
+                                           .arg(QY("The names will be available for easy selection in both the multiplexer and the header editor."))
+                                           .arg(QY("You can still enter track names not present in this list manually in both tools.")));
+  ui->lwMPredefinedTrackNames->setAddItemDialogTexts(QY("Enter predefined track name"), QY("Please enter the new predefined track name."));
 
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
                    Q("%1 %2")
@@ -466,10 +468,6 @@ PreferencesDialog::setupConnections() {
 
   connect(ui->pbMDeriveTrackLanguageRevertCustomRegex,    &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameRegex);
 
-  connect(ui->lwMPredefinedTrackNames,                    &QListWidget::itemSelectionChanged,                            this,                                 &PreferencesDialog::enablePredefinedTrackNameControls);
-  connect(ui->pbMAddPredefinedTrackName,                  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::addPredefinedTrackName);
-  connect(ui->pbMRemovePredefinedTrackNames,              &QPushButton::clicked,                                         this,                                 &PreferencesDialog::removePredefinedTrackNames);
-
   connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
   connect(ui->cbGuiRemoveOldJobs,                         &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
   connect(ui->sbGuiRemoveOldJobsDays,                     static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
@@ -644,13 +642,7 @@ PreferencesDialog::setupMergeWarnMissingAudioTrack() {
 
 void
 PreferencesDialog::setupMergePredefinedTrackNames() {
-  ui->lwMPredefinedTrackNames->addItems(Util::Settings::get().m_mergePredefinedTrackNames);
-  ui->pbMRemovePredefinedTrackNames->setEnabled(false);
-
-  for (int row = 0, numRows = ui->lwMPredefinedTrackNames->count(); row < numRows; ++row) {
-    auto item = ui->lwMPredefinedTrackNames->item(row);
-    item->setFlags(item->flags() | Qt::ItemIsEditable);
-  }
+  ui->lwMPredefinedTrackNames->setItems(Util::Settings::get().m_mergePredefinedTrackNames);
 }
 
 void
@@ -861,13 +853,7 @@ PreferencesDialog::save() {
   for (auto const &type : ui->tbMEnableMuxingTracksByType->selectedItemValues())
     m_cfg.m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(type.toInt());
 
-  // Predefined track names:
-  m_cfg.m_mergePredefinedTrackNames.clear();
-  for (int row = 0, numRows = ui->lwMPredefinedTrackNames->count(); row < numRows; ++row) {
-    auto name = ui->lwMPredefinedTrackNames->item(row)->text();
-    if (!name.isEmpty())
-      m_cfg.m_mergePredefinedTrackNames << name;
-  }
+  m_cfg.m_mergePredefinedTrackNames = ui->lwMPredefinedTrackNames->items();
 
   m_cfg.save();
 
@@ -898,28 +884,6 @@ PreferencesDialog::enableOutputFileNameControls() {
   Util::enableWidgets(QList<QWidget *>{} << ui->gbDestinationDirectory   << ui->cbMUniqueOutputFileNames << ui->cbMAutoDestinationOnlyForVideoFiles, isChecked);
   Util::enableWidgets(QList<QWidget *>{} << ui->leMAutoSetFixedDirectory << ui->pbMBrowseAutoSetFixedDirectory, isChecked && fixedSelected);
   ui->leMAutoSetRelativeDirectory->setEnabled(isChecked && relativeSelected);
-}
-
-void
-PreferencesDialog::enablePredefinedTrackNameControls() {
-  ui->pbMRemovePredefinedTrackNames->setEnabled(!ui->lwMPredefinedTrackNames->selectedItems().isEmpty());
-}
-
-void
-PreferencesDialog::addPredefinedTrackName() {
-  auto newName = QInputDialog::getText(this, QY("Enter predefined track name"), QY("Please enter the new predefined track name."));
-  if (newName.isEmpty())
-    return;
-
-  auto newItem = new QListWidgetItem{newName};
-  newItem->setFlags(newItem->flags() | Qt::ItemIsEditable);
-  ui->lwMPredefinedTrackNames->addItem(newItem);
-}
-
-void
-PreferencesDialog::removePredefinedTrackNames() {
-  for (auto const &item : ui->lwMPredefinedTrackNames->selectedItems())
-    delete item;
 }
 
 void
