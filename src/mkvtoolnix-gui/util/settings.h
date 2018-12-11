@@ -143,7 +143,7 @@ public:
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
   DeriveLanguageFromFileNamePolicy m_deriveAudioTrackLanguageFromFileNamePolicy, m_deriveVideoTrackLanguageFromFileNamePolicy, m_deriveSubtitleTrackLanguageFromFileNamePolicy;
   QString m_regexForDerivingTrackLanguagesFromFileNames;
-  QStringList m_recognizedTrackLanguagesInFileNames, m_mergePredefinedTrackNames;
+  QStringList m_recognizedTrackLanguagesInFileNames, m_mergePredefinedTrackNames, m_mergePredefinedSplitSizes, m_mergePredefinedSplitDurations;
   QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   bool m_oftenUsedLanguagesOnly, m_oftenUsedCountriesOnly, m_oftenUsedCharacterSetsOnly;

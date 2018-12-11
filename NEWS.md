@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: the predefined split sizes and durations can
+  now be customized in the preferences.
+
+
 # Version 29.0.0 "Like It Or Not" 2018-12-01
 
 ## Important notes

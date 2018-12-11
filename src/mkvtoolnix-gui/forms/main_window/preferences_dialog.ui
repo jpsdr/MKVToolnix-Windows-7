@@ -329,19 +329,7 @@
        </layout>
       </widget>
       <widget class="QWidget" name="pMergeGeneral">
-       <layout class="QVBoxLayout" name="verticalLayout_22">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_37">
         <item>
          <widget class="QGroupBox" name="groupBox_3">
           <property name="title">
@@ -549,16 +537,44 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="gpMPredefinedTrackNames">
-          <property name="title">
-           <string>Predefined track names</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_21">
-           <item>
-            <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedTrackNames" native="true"/>
-           </item>
-          </layout>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <item>
+           <widget class="QGroupBox" name="gpMPredefinedTrackNames">
+            <property name="title">
+             <string>Predefined track names</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_21">
+             <item>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedTrackNames" native="true"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="gbMPredefinedSplitSizes">
+            <property name="title">
+             <string>Predefined split sizes</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_22">
+             <item>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedSplitSizes" native="true"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="gbMPredefinedSplitDurations">
+            <property name="title">
+             <string>Predefined split durations</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_38">
+             <item>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedSplitDurations" native="true"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>

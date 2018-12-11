@@ -95,7 +95,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupEnableMuxingTracksByLanguage();
   setupMergeAddingAppendingFilesPolicy();
   setupMergeWarnMissingAudioTrack();
-  setupMergePredefinedTrackNames();
+  setupMergePredefinedItems();
   setupTrackPropertiesLayout();
 
   // Info tool page
@@ -281,6 +281,18 @@ PreferencesDialog::setupToolTips() {
                                            .arg(QY("The names will be available for easy selection in both the multiplexer and the header editor."))
                                            .arg(QY("You can still enter track names not present in this list manually in both tools.")));
   ui->lwMPredefinedTrackNames->setAddItemDialogTexts(QY("Enter predefined track name"), QY("Please enter the new predefined track name."));
+
+  ui->lwMPredefinedSplitSizes->setToolTips(Q("%1 %2 %3")
+                                           .arg(QY("If you often use the same values when splitting by size, you can enter them here."))
+                                           .arg(QY("The values will be available for easy selection in the multiplexer."))
+                                           .arg(QY("You can still enter values not present in this list manually in the multiplexer.")));
+  ui->lwMPredefinedSplitSizes->setAddItemDialogTexts(QY("Enter predefined split size"), QY("Please enter the new predefined split size."));
+
+  ui->lwMPredefinedSplitDurations->setToolTips(Q("%1 %2 %3")
+                                               .arg(QY("If you often use the same values when splitting by duration, you can enter them here."))
+                                               .arg(QY("The values will be available for easy selection in the multiplexer."))
+                                               .arg(QY("You can still enter values not present in this list manually in the multiplexer.")));
+  ui->lwMPredefinedSplitDurations->setAddItemDialogTexts(QY("Enter predefined split duration"), QY("Please enter the new predefined split duration."));
 
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
                    Q("%1 %2")
@@ -641,8 +653,12 @@ PreferencesDialog::setupMergeWarnMissingAudioTrack() {
 }
 
 void
-PreferencesDialog::setupMergePredefinedTrackNames() {
-  ui->lwMPredefinedTrackNames->setItems(Util::Settings::get().m_mergePredefinedTrackNames);
+PreferencesDialog::setupMergePredefinedItems() {
+  auto &cfg = Util::Settings::get();
+
+  ui->lwMPredefinedTrackNames->setItems(cfg.m_mergePredefinedTrackNames);
+  ui->lwMPredefinedSplitSizes->setItems(cfg.m_mergePredefinedSplitSizes);
+  ui->lwMPredefinedSplitDurations->setItems(cfg.m_mergePredefinedSplitDurations);
 }
 
 void
@@ -853,7 +869,9 @@ PreferencesDialog::save() {
   for (auto const &type : ui->tbMEnableMuxingTracksByType->selectedItemValues())
     m_cfg.m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(type.toInt());
 
-  m_cfg.m_mergePredefinedTrackNames = ui->lwMPredefinedTrackNames->items();
+  m_cfg.m_mergePredefinedTrackNames     = ui->lwMPredefinedTrackNames->items();
+  m_cfg.m_mergePredefinedSplitSizes     = ui->lwMPredefinedSplitSizes->items();
+  m_cfg.m_mergePredefinedSplitDurations = ui->lwMPredefinedSplitDurations->items();
 
   m_cfg.save();
 

@@ -234,15 +234,8 @@ Tab::setupSplitModeLabelAndToolTips() {
     tooltip << QY("The size after which a new destination file is started.")
             << QY("The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes respectively.")
             << QY("All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024).");
-    entries << Q("")
-            << Q("350M")
-            << Q("650M")
-            << Q("700M")
-            << Q("703M")
-            << Q("800M")
-            << Q("1000M")
-            << Q("4483M")
-            << Q("8142M");
+    entries << Q("");
+    entries += Util::Settings::get().m_mergePredefinedSplitSizes;
 
   } else if (MuxConfig::SplitAfterDuration == m_config.m_splitMode) {
     label    = QY("Duration:");
@@ -252,10 +245,8 @@ Tab::setupSplitModeLabelAndToolTips() {
                 .arg(QY("You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."))
                 .arg(QY("If given then you may use up to nine digits after the decimal point.")))
             << QY("Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds).");
-
-    entries << Q("")
-            << Q("01:00:00")
-            << Q("1800s");
+    entries << Q("");
+    entries += Util::Settings::get().m_mergePredefinedSplitDurations;
 
   } else if (MuxConfig::SplitAfterTimestamps == m_config.m_splitMode) {
     label    = QY("Timestamps:");

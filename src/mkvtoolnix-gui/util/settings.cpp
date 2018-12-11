@@ -259,6 +259,8 @@ Settings::load() {
   m_mergeEnableDialogNormGainRemoval   = reg.value("mergeEnableDialogNormGainRemoval",   false).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls",  true).toBool();
   m_mergePredefinedTrackNames          = reg.value("mergePredefinedTrackNames").toStringList();
+  m_mergePredefinedSplitSizes          = reg.value("mergePredefinedSplitSizes").toStringList();
+  m_mergePredefinedSplitDurations      = reg.value("mergePredefinedSplitDurations").toStringList();
   m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value("mergeTrackPropertiesLayout", static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
   m_mergeAddingAppendingFilesPolicy    = static_cast<MergeAddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
   m_mergeLastAddingAppendingDecision   = static_cast<MergeAddingAppendingFilesPolicy>(reg.value("mergeLastAddingAppendingDecision", static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
@@ -359,6 +361,22 @@ Settings::setDefaults(boost::optional<QVariant> enableMuxingTracksByTheseTypes) 
   else
     for (int type = static_cast<int>(Merge::TrackType::Min); type <= static_cast<int>(Merge::TrackType::Max); ++type)
       m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(type);
+
+  if (m_mergePredefinedSplitSizes.isEmpty())
+    m_mergePredefinedSplitSizes
+      << Q("350M")
+      << Q("650M")
+      << Q("700M")
+      << Q("703M")
+      << Q("800M")
+      << Q("1000M")
+      << Q("4483M")
+      << Q("8142M");
+
+  if (m_mergePredefinedSplitDurations.isEmpty())
+    m_mergePredefinedSplitDurations
+      << Q("01:00:00")
+      << Q("1800s");
 }
 
 void
@@ -572,6 +590,8 @@ Settings::save()
   reg.setValue("mergeEnableDialogNormGainRemoval",   m_mergeEnableDialogNormGainRemoval);
   reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
   reg.setValue("mergePredefinedTrackNames",          m_mergePredefinedTrackNames);
+  reg.setValue("mergePredefinedSplitSizes",          m_mergePredefinedSplitSizes);
+  reg.setValue("mergePredefinedSplitDurations",      m_mergePredefinedSplitDurations);
   reg.setValue("mergeTrackPropertiesLayout",         static_cast<int>(m_mergeTrackPropertiesLayout));
   reg.setValue("mergeAddingAppendingFilesPolicy",    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
   reg.setValue("mergeLastAddingAppendingDecision",   static_cast<int>(m_mergeLastAddingAppendingDecision));

@@ -93,7 +93,7 @@ protected:
   void setupEnableMuxingTracksByLanguage();
   void setupMergeAddingAppendingFilesPolicy();
   void setupMergeWarnMissingAudioTrack();
-  void setupMergePredefinedTrackNames();
+  void setupMergePredefinedItems();
   void setupHeaderEditorDroppedFilesPolicy();
   void setupJobsRunPrograms();
   void setupFontAndScaling();
