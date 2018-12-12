@@ -603,12 +603,22 @@ EOF
 
   volumename=MKVToolNix-${MTX_VER}
   if [[ $DMG_PRE == 1 ]]; then
-    local build_number_file=$HOME/net/home/prog/video/mingw/src/uc/build-number
-    local build=$(< $build_number_file)
-    let build=$build+1
-    echo $build > $build_number_file
+    # Ziel: 29.0.0-revision-008-gb71b2b27c-01808
+    # describe: release-29.0.0-8-gb71b2b27c
+    local build_number_file=$HOME/net/home/prog/mac/build-number
+    local build_number=$(< $build_number_file)
+    let build_number=$build_number+1
+    echo $build_number > $build_number_file
+    build_number=$(printf '%05d' $build_number)
+    local build=$(git describe --tags)
+    while [[ $build != *-*-*-* ]]; do
+      build=${build}-0
+    done
+    num=${${${build#release-}#*-}%-*}
+    hash=${build##*-}
+    revision="revision-$(printf '%03d' ${num})-${hash}-${build_number}"
 
-    volumename=MKVToolNix-${MTX_VER}-build$(date '+%Y%m%d')-${build}-$(git rev-parse --short HEAD)
+    volumename=MKVToolNix-${MTX_VER}-${revision}
   fi
 
   dmgname=${CMPL}/MKVToolNix-${MTX_VER}.dmg
