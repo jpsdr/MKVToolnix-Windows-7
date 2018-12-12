@@ -5,7 +5,7 @@ dnl
 qt_min_ver=5.3.0
 
 AC_ARG_ENABLE([qt],
-  AC_HELP_STRING([--enable-qt],[compile the Qt version of the GUIs (yes)]),
+  AC_HELP_STRING([--enable-qt],[compile the Qt-based MKVToolNix GUI (yes)]),
   [],[enable_qt=yes])
 AC_ARG_ENABLE([static_qt],
   AC_HELP_STRING([--enable-static-qt],[link to static versions of the Qt library (no)]))
@@ -293,7 +293,7 @@ EOF
      AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
      have_qt=yes
      USE_QT=yes
-     opt_features_yes="$opt_features_yes\n   * GUIs"
+     opt_features_yes="$opt_features_yes\n   * MKVToolNix GUI"
      AC_MSG_RESULT(yes)
     else
       AC_MSG_RESULT(no: $problem)
@@ -309,7 +309,7 @@ else
 fi
 
 if test x"$have_qt" != "xyes" ; then
-  opt_features_no="$opt_features_no\n   * GUIs"
+  opt_features_no="$opt_features_no\n   * MKVToolNix GUI"
   QT_CFLAGS=
   QT_LIBS=
   MOC=
