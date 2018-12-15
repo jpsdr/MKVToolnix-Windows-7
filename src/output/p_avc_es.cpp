@@ -46,7 +46,7 @@ avc_es_video_packetizer_c(generic_reader_c *p_reader,
   set_codec_id(MKV_V_MPEG4_AVC);
 
   m_parser.set_keep_ar_info(false);
-  m_parser.set_fix_bitstream_frame_rate(m_ti.m_fix_bitstream_frame_rate);
+  m_parser.set_fix_bitstream_frame_rate(static_cast<bool>(m_ti.m_fix_bitstream_frame_rate));
 
   // If no external timestamp file has been specified then mkvmerge
   // might have created a factory due to the --default-duration

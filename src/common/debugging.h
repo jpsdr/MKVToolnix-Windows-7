@@ -57,7 +57,7 @@ class debugging_option_c {
       if (boost::logic::indeterminate(m_requested))
         m_requested = debugging_c::requested(m_option);
 
-      return m_requested;
+      return static_cast<bool>(m_requested);
     }
   };
 

@@ -5,6 +5,11 @@
 * MKVToolNix GUI: multiplexer: the predefined split sizes and durations can
   now be customized in the preferences.
 
+## Bug fixes
+
+* source code: fixed compilation with Boost 1.69.0 after API-breaking change
+  to the `boost::tribool` class. Fixes #2460.
+
 
 # Version 29.0.0 "Like It Or Not" 2018-12-01
 

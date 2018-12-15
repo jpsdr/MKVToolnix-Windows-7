@@ -1684,7 +1684,7 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
     PTZR(t->ptzr)->set_track_forced_flag(true);
 
   if (boost::logic::indeterminate(PTZR(t->ptzr)->m_ti.m_enabled_track))
-    PTZR(t->ptzr)->set_track_enabled_flag(t->enabled_track);
+    PTZR(t->ptzr)->set_track_enabled_flag(static_cast<bool>(t->enabled_track));
 
   if ((0 != t->track_uid) && !PTZR(t->ptzr)->set_uid(t->track_uid))
     mxwarn(fmt::format(Y("matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"), t->track_uid));
