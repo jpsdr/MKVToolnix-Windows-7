@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/strings/formatting.h"
 #include "merge/packet.h"
 #include "merge/timestamp_calculator.h"
 
