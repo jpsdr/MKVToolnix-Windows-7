@@ -12,6 +12,8 @@
 
 * source code: fixed compilation with Boost 1.69.0 after API-breaking change
   to the `boost::tribool` class. Fixes #2460.
+* MKVToolNix GUI: multiplexer: removing a file added as an "additional part"
+  will no longer cause a crash. Fixes #2461.
 
 
 # Version 29.0.0 "Like It Or Not" 2018-12-01

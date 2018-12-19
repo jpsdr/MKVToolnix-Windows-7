@@ -226,7 +226,6 @@ SourceFileModel::addAdditionalParts(QModelIndex const &fileToAddToIdx,
   for (auto &fileName : actualFileNames) {
     auto additionalPart              = std::make_shared<SourceFile>(fileName);
     additionalPart->m_additionalPart = true;
-    additionalPart->m_appendedTo     = fileToAddTo.get();
 
     createAndAppendRow(itemToAddTo, additionalPart, fileToAddTo->m_additionalParts.size());
 
@@ -273,13 +272,19 @@ SourceFileModel::removeFile(SourceFile *fileToBeRemoved) {
   m_sourceFileMap.remove(reinterpret_cast<quint64>(fileToBeRemoved));
 
   if (fileToBeRemoved->isAdditionalPart()) {
-    auto row           = Util::findPtr(fileToBeRemoved,               fileToBeRemoved->m_appendedTo->m_additionalParts);
-    auto parentFileRow = Util::findPtr(fileToBeRemoved->m_appendedTo, *m_sourceFiles);
+    auto row = -1, parentFileRow = -1;
+    auto numParentRows = m_sourceFiles->count();
+
+    for (parentFileRow = 0; parentFileRow < numParentRows; ++parentFileRow) {
+      row = Util::findPtr(fileToBeRemoved, (*m_sourceFiles)[parentFileRow]->m_additionalParts);
+      if (row != -1)
+        break;
+    }
 
     Q_ASSERT((-1 != row) && (-1 != parentFileRow));
 
     item(parentFileRow)->removeRow(row);
-    fileToBeRemoved->m_appendedTo->m_additionalParts.removeAt(row);
+    (*m_sourceFiles)[parentFileRow]->m_additionalParts.removeAt(row);
 
     return;
   }
