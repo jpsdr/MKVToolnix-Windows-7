@@ -56,16 +56,6 @@ struct wav_chunk_t {
   memory_cptr id;
 };
 
-struct wave64_chunk_t {
-  unsigned char guid[16];
-  uint64_t size;
-};
-
-struct wave64_header_t {
-  wave64_chunk_t riff;
-  unsigned char wave_guid[16];
-};
-
 class wav_reader_c: public generic_reader_c {
 public:
   enum class type_e {

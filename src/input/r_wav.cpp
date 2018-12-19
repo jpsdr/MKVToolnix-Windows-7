@@ -23,6 +23,7 @@
 #include "common/id_info.h"
 #include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
+#include "common/w64.h"
 #include "input/r_wav.h"
 #include "input/wav_ac3acm_demuxer.h"
 #include "input/wav_ac3wav_demuxer.h"
@@ -41,36 +42,6 @@ wav_demuxer_c::wav_demuxer_c(wav_reader_c *reader,
 
 // ----------------------------------------------------------
 
-static unsigned char const s_wave64_guid_riff[16] = {
-  'r', 'i', 'f', 'f',
-  0x2e, 0x91, 0xcf, 0x11, 0xa5, 0xd6, 0x28, 0xdb, 0x04, 0xc1, 0x00, 0x00
-};
-
-static unsigned char const s_wave64_guid_wave[16] = {
-  'w', 'a', 'v', 'e',
-  0xf3, 0xac, 0xd3, 0x11, 0x8c, 0xd1, 0x00, 0xc0, 0x4f, 0x8e, 0xdb, 0x8a
-};
-
-// static unsigned char const s_wave64_guid_fmt [16] = {
-//   'f', 'm', 't', ' ',
-//   0xf3, 0xac, 0xd3, 0x11, 0x8c, 0xd1, 0x00, 0xc0, 0x4f, 0x8e, 0xdb, 0x8a
-// };
-
-// static unsigned char const s_wave64_guid_fact[16] = {
-//   'f', 'a', 'c', 't',
-//   0xf3, 0xac, 0xd3, 0x11, 0x8c, 0xd1, 0x00, 0xc0, 0x4f, 0x8e, 0xdb, 0x8a
-// };
-
-// static unsigned char const s_wave64_guid_data[16] = {
-//   'd', 'a', 't', 'a',
-//   0xf3, 0xac, 0xd3, 0x11, 0x8c, 0xd1, 0x00, 0xc0, 0x4f, 0x8e, 0xdb, 0x8a
-// };
-
-// static unsigned char const s_wave64_guid_summarylist[16] = {
-//   0xbc, 0x94, 0x5f, 0x92,
-//   0x5a, 0x52, 0xd2, 0x11, 0x86, 0xdc, 0x00, 0xc0, 0x4f, 0x8e, 0xdb, 0x8a
-// };
-
 wav_reader_c::wav_reader_c(const track_info_c &ti,
                            const mm_io_cptr &in)
   : generic_reader_c{ti, in}
@@ -86,12 +57,12 @@ wav_reader_c::~wav_reader_c() {
 wav_reader_c::type_e
 wav_reader_c::determine_type(mm_io_c &in,
                              uint64_t size) {
-  if (sizeof(wave64_header_t) > size)
+  if (sizeof(mtx::w64::header_t) > size)
     return type_e::unknown;
 
   try {
     wave_header wheader;
-    wave64_header_t w64_header;
+    mtx::w64::header_t w64_header;
 
     in.setFilePointer(0);
 
@@ -106,8 +77,8 @@ wav_reader_c::determine_type(mm_io_c &in,
         && !std::memcmp(&wheader.riff.wave_id, "WAVE", 4))
       return type_e::wave;
 
-    if (   !std::memcmp(w64_header.riff.guid, s_wave64_guid_riff, 16)
-        && !std::memcmp(w64_header.wave_guid, s_wave64_guid_wave, 16))
+    if (   !std::memcmp(w64_header.riff.guid, mtx::w64::g_guid_riff, 16)
+        && !std::memcmp(w64_header.wave_guid, mtx::w64::g_guid_wave, 16))
       return type_e::wave64;
 
   } catch (mtx::mm_io::exception &) {
@@ -344,18 +315,18 @@ wav_reader_c::scan_chunks_wave64() {
   wav_chunk_t new_chunk;
   bool debug_chunks = debugging_c::requested("wav_reader|wav_reader_chunks");
 
-  m_in->setFilePointer(sizeof(wave64_header_t));
+  m_in->setFilePointer(sizeof(mtx::w64::header_t));
 
   try {
     while (true) {
-      new_chunk.pos = m_in->getFilePointer() + sizeof(wave64_chunk_t);
+      new_chunk.pos = m_in->getFilePointer() + sizeof(mtx::w64::chunk_t);
       new_chunk.id  = m_in->read(16);
       new_chunk.len = m_in->read_uint64_le();
 
-      if (!new_chunk.id || (new_chunk.len < sizeof(wave64_chunk_t)))
+      if (!new_chunk.id || (new_chunk.len < sizeof(mtx::w64::chunk_t)))
         return;
 
-      new_chunk.len -= sizeof(wave64_chunk_t);
+      new_chunk.len -= sizeof(mtx::w64::chunk_t);
 
       mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() new chunk at {0} type {1} length {2}\n", new_chunk.pos, get_displayable_string(reinterpret_cast<char *>(new_chunk.id->get_buffer()), 4), new_chunk.len));
 
