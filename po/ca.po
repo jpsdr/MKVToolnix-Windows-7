@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-12-11 19:44+0100\n"
+"POT-Creation-Date: 2018-12-19 18:55+0100\n"
 "PO-Revision-Date: 2018-12-12 15:32+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -11481,7 +11481,7 @@ msgstr "El fitxer «{0}» no s'ha pogut obrir per a escriptura: {1}."
 #: src/extract/xtr_avi.cpp:62
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
-#: src/extract/xtr_wav.cpp:134
+#: src/extract/xtr_wav.cpp:194
 #: src/merge/output_control.cpp:1291
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
@@ -11506,6 +11506,11 @@ msgstr "El fitxer {0} és d'un tipus de fitxer no admès ({1}).\n"
 #, no-c-format
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "El fitxer «{0}» no és un fitxer Matroska o no s'ha pogut trobar.\n"
+
+#: src/extract/xtr_wav.cpp:134
+#, no-c-format
+msgid "The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"
+msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
@@ -13011,7 +13016,7 @@ msgstr "La pista {0} amb l'ID del còdec «{1}» no conté dades «privades del 
 msgid "Track {0} with the CodecID '{1}' does not contain valid headers.\n"
 msgstr "La pista {0} amb l'ID del còdec «{1}» no conté capçaleres vàlides.\n"
 
-#: src/extract/xtr_wav.cpp:49
+#: src/extract/xtr_wav.cpp:48
 #, no-c-format
 msgid "Track {0} with the CodecID '{1}' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "La pista {0} amb l'ID del còdec «{1}» li manca l'element «bits per segon (bps)» i no es pot extreure.\n"
@@ -13028,7 +13033,7 @@ msgstr "La pista {0} amb l'ID del còdec «{1}» li manca l'element «bits per s
 #: src/extract/xtr_textsubs.cpp:100
 #: src/extract/xtr_textsubs.cpp:276
 #: src/extract/xtr_vobsub.cpp:66
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:176
 #: src/extract/xtr_webvtt.cpp:36
 #, no-c-format
 msgid "Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"

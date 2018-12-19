@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-12-11 19:44+0100\n"
+"POT-Creation-Date: 2018-12-19 18:55+0100\n"
 "PO-Revision-Date: 2018-04-11 00:40+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -11351,7 +11351,7 @@ msgstr "'{0}' 파일을 쓰기 위해 열 수 없습니다: {1}."
 #: src/extract/xtr_avi.cpp:62
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
-#: src/extract/xtr_wav.cpp:134
+#: src/extract/xtr_wav.cpp:194
 #: src/merge/output_control.cpp:1291
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
@@ -11376,6 +11376,11 @@ msgstr "파일 '{0}'은 지원되지 않는 파일 유형입니다 ({1}).\n"
 #, fuzzy, no-c-format
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "파일이 존재하지 않거나 읽을 수 없기 때문에, 파일 '{0}'을 첨부할 수 없습니다.\n"
+
+#: src/extract/xtr_wav.cpp:134
+#, no-c-format
+msgid "The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"
+msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
@@ -12868,7 +12873,7 @@ msgstr "코덱ID '{1}'의 트랙 {0}은 AAC에 대한 잘못된 \"codec private\
 msgid "Track {0} with the CodecID '{1}' does not contain valid headers.\n"
 msgstr "코덱ID '{1}'의 트랙 {0}은 유효한 헤더가 포함되어 있지 않습니다.\n"
 
-#: src/extract/xtr_wav.cpp:49
+#: src/extract/xtr_wav.cpp:48
 #, no-c-format
 msgid "Track {0} with the CodecID '{1}' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "코덱ID '{1}'의 트랙 {0}은 \"bits per second (bps)\"요소가 누락되어 추출할 수 없습니다.\n"
@@ -12885,7 +12890,7 @@ msgstr "코덱ID '{1}'의 트랙 {0}은 \"bits per second (bps)\"요소가 누�
 #: src/extract/xtr_textsubs.cpp:100
 #: src/extract/xtr_textsubs.cpp:276
 #: src/extract/xtr_vobsub.cpp:66
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:176
 #: src/extract/xtr_webvtt.cpp:36
 #, no-c-format
 msgid "Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"

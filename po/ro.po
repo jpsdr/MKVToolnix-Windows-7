@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2018-12-11 19:44+0100\n"
+"POT-Creation-Date: 2018-12-19 18:55+0100\n"
 "PO-Revision-Date: 2018-02-07 15:24+0000\n"
 "Last-Translator: Daniel <danny3@tutanota.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ro/)\n"
@@ -11202,7 +11202,7 @@ msgstr "Fișierul „{0}” nu a putut fi deschis pentru scriere: {1}.\n"
 #: src/extract/xtr_avi.cpp:62
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
-#: src/extract/xtr_wav.cpp:134
+#: src/extract/xtr_wav.cpp:194
 #: src/merge/output_control.cpp:1291
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
@@ -11227,6 +11227,11 @@ msgstr ""
 #, fuzzy, no-c-format
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "Fișierul „{0}” nu a putut fi atașat deoarece nu există sau nu poate fi citit.\n"
+
+#: src/extract/xtr_wav.cpp:134
+#, no-c-format
+msgid "The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"
+msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
@@ -12722,7 +12727,7 @@ msgstr ""
 msgid "Track {0} with the CodecID '{1}' does not contain valid headers.\n"
 msgstr ""
 
-#: src/extract/xtr_wav.cpp:49
+#: src/extract/xtr_wav.cpp:48
 #, no-c-format
 msgid "Track {0} with the CodecID '{1}' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr ""
@@ -12739,7 +12744,7 @@ msgstr ""
 #: src/extract/xtr_textsubs.cpp:100
 #: src/extract/xtr_textsubs.cpp:276
 #: src/extract/xtr_vobsub.cpp:66
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:176
 #: src/extract/xtr_webvtt.cpp:36
 #, no-c-format
 msgid "Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"
