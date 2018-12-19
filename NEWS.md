@@ -4,6 +4,9 @@
 
 * MKVToolNix GUI: multiplexer: the predefined split sizes and durations can
   now be customized in the preferences.
+* mkvextract: WAV extractor: mkvextract will now write W64 files instead of
+  WAV files if the file name extension is `.w64` or if the final file size is
+  bigger than 4 GB, the file size limit for WAV files. Implements #2458.
 
 ## Bug fixes
 

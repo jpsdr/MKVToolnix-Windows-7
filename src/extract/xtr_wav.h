@@ -18,8 +18,10 @@
 
 class xtr_wav_c: public xtr_base_c {
 private:
-  wave_header m_wh;
   std::function<void(unsigned char const *, unsigned char *, std::size_t)> m_byte_swapper;
+  uint64_t m_channels{}, m_sfreq{}, m_w64_header_size{};
+  int m_bps{-1};
+  bool m_w64_requested{};
 
 public:
   xtr_wav_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
@@ -28,9 +30,11 @@ public:
   virtual void finish_file() override;
   virtual void handle_frame(xtr_frame_t &f) override;
 
-  virtual const char *get_container_name() override {
-    return "WAV";
-  };
+  virtual char const *get_container_name() override;
+
+private:
+  virtual void write_w64_header();
+  virtual void write_wav_header();
 };
 
 class xtr_wavpack4_c: public xtr_base_c {

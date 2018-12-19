@@ -24,6 +24,7 @@
 #include "common/mm_io_x.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
+#include "common/w64.h"
 #include "extract/xtr_wav.h"
 
 xtr_wav_c::xtr_wav_c(const std::string &codec_id,
@@ -31,7 +32,6 @@ xtr_wav_c::xtr_wav_c(const std::string &codec_id,
                      track_spec_t &tspec)
   : xtr_base_c(codec_id, tid, tspec)
 {
-  memset(&m_wh, 0, sizeof(wave_header));
 }
 
 void
@@ -39,46 +39,101 @@ xtr_wav_c::create_file(xtr_base_c *master,
                        libmatroska::KaxTrackEntry &track) {
   init_content_decoder(track);
 
-  auto channels    = kt_get_a_channels(track);
-  auto sfreq       = static_cast<int>(kt_get_a_sfreq(track));
-  auto bps         = kt_get_a_bps(track);
-  auto block_align = bps * channels / boost::gcd(8, bps);
+  m_w64_requested = boost::regex_search(get_file_name().string(), boost::regex{"\\.[wW]64$", boost::regex::perl});
+  m_channels      = kt_get_a_channels(track);
+  m_sfreq         = kt_get_a_sfreq(track);
+  m_bps           = kt_get_a_bps(track);
 
-
-  if (-1 == bps)
+  if (-1 == m_bps)
     mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+
+  if (m_codec_id == MKV_A_PCM_BE)
+    m_byte_swapper = [this](unsigned char const *src, unsigned char *dst, std::size_t num_bytes) {
+      mtx::bytes::swap_buffer(src, dst, num_bytes, m_bps / 8);
+    };
 
   xtr_base_c::create_file(master, track);
 
-  memcpy(&m_wh.riff.id,      "RIFF", 4);
-  memcpy(&m_wh.riff.wave_id, "WAVE", 4);
-  memcpy(&m_wh.format.id,    "fmt ", 4);
-  memcpy(&m_wh.data.id,      "data", 4);
+  write_w64_header();
+}
 
-  put_uint32_le(&m_wh.format.len,              16);
-  put_uint16_le(&m_wh.common.wFormatTag,        1);
-  put_uint16_le(&m_wh.common.wChannels,        channels);
-  put_uint32_le(&m_wh.common.dwSamplesPerSec,  sfreq);
-  put_uint32_le(&m_wh.common.dwAvgBytesPerSec, channels * sfreq * bps / 8);
-  put_uint16_le(&m_wh.common.wBlockAlign,      block_align);
-  put_uint16_le(&m_wh.common.wBitsPerSample,   bps);
+void
+xtr_wav_c::write_wav_header() {
+  auto junk_size   = m_w64_header_size - sizeof(wave_header);
+  auto junk_chunk  = memory_c::alloc(junk_size);
+  auto junk_buffer = junk_chunk->get_buffer();
 
-  m_out->write(&m_wh, sizeof(wave_header));
+  std::memcpy(  &junk_buffer[0], "JUNK", 4);
+  put_uint32_le(&junk_buffer[4], junk_size - 8);
+  std::memset(  &junk_buffer[8], 0, junk_size - 8);
 
-  if (m_codec_id == MKV_A_PCM_BE)
-    m_byte_swapper = [bps](unsigned char const *src, unsigned char *dst, std::size_t num_bytes) {
-      mtx::bytes::swap_buffer(src, dst, num_bytes, bps / 8);
-    };
+  wave_header wh;
+
+  std::memset(&wh, 0, sizeof(wh));
+
+  memcpy(&wh.riff.id,      "RIFF", 4);
+  memcpy(&wh.riff.wave_id, "WAVE", 4);
+  memcpy(&wh.format.id,    "fmt ", 4);
+  memcpy(&wh.data.id,      "data", 4);
+
+  put_uint32_le(&wh.riff.len,                m_bytes_written + m_w64_header_size - 8);
+  put_uint32_le(&wh.data.len,                m_bytes_written);
+  put_uint32_le(&wh.format.len,              16);
+  put_uint16_le(&wh.common.wFormatTag,        1);
+  put_uint16_le(&wh.common.wChannels,        m_channels);
+  put_uint32_le(&wh.common.dwSamplesPerSec,  m_sfreq);
+  put_uint32_le(&wh.common.dwAvgBytesPerSec, m_channels * m_sfreq * m_bps / 8);
+  put_uint16_le(&wh.common.wBlockAlign,      m_bps * m_channels / boost::gcd(8, m_bps));
+  put_uint16_le(&wh.common.wBitsPerSample,   m_bps);
+
+  m_out->setFilePointer(0);
+  m_out->write(&wh.riff,   sizeof(wh.riff));
+  m_out->write(junk_chunk);
+  m_out->write(&wh.format, sizeof(wh.format));
+  m_out->write(&wh.common, sizeof(wh.common));
+  m_out->write(&wh.data,   sizeof(wh.data));
+}
+
+void
+xtr_wav_c::write_w64_header() {
+  wave_header wh;
+
+  std::memset(&wh, 0, sizeof(wh));
+
+  put_uint16_le(&wh.common.wFormatTag,       1);
+  put_uint16_le(&wh.common.wChannels,        m_channels);
+  put_uint32_le(&wh.common.dwSamplesPerSec,  m_sfreq);
+  put_uint32_le(&wh.common.dwAvgBytesPerSec, m_channels * m_sfreq * m_bps / 8);
+  put_uint16_le(&wh.common.wBlockAlign,      m_bps * m_channels / boost::gcd(8, m_bps));
+  put_uint16_le(&wh.common.wBitsPerSample,   m_bps);
+
+  m_out->setFilePointer(0);
+
+  m_out->write(mtx::w64::g_guid_riff, 16);
+  m_out->write_uint64_le(m_bytes_written ? m_bytes_written + m_w64_header_size : 0); // TODO
+  m_out->write(mtx::w64::g_guid_wave, 16);
+  m_out->write(mtx::w64::g_guid_fmt,  16);
+  m_out->write_uint64_le(sizeof(wh.common) + 16 + 8);
+  m_out->write(&wh.common, sizeof(wh.common));
+  m_out->write(mtx::w64::g_guid_data, 16);
+  m_out->write_uint64_le(m_bytes_written ? m_bytes_written + 16 + 8 : 0);
+
+  m_w64_header_size = m_out->getFilePointer();
 }
 
 void
 xtr_wav_c::finish_file() {
-  m_out->setFilePointer(0);
+  auto too_big = (m_bytes_written + m_w64_header_size) > static_cast<uint64_t>(std::numeric_limits<uint32_t>::max());
 
-  put_uint32_le(&m_wh.riff.len, m_bytes_written + 36);
-  put_uint32_le(&m_wh.data.len, m_bytes_written);
+  if (!too_big && !m_w64_requested) {
+    write_wav_header();
+    return;
+  }
 
-  m_out->write(&m_wh, sizeof(wave_header));
+  if (!m_w64_requested)
+    mxinfo(fmt::format(Y("The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"), get_file_name().string()));
+
+  write_w64_header();
 }
 
 void
@@ -88,6 +143,11 @@ xtr_wav_c::handle_frame(xtr_frame_t &f) {
 
   m_out->write(f.frame);
   m_bytes_written += f.frame->get_size();
+}
+
+char const *
+xtr_wav_c::get_container_name() {
+  return m_w64_requested ? "W64" : "WAV";
 }
 
 // ------------------------------------------------------------------------
