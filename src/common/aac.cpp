@@ -34,7 +34,7 @@ static unsigned int const s_sampling_freq[16] = {
 };
 
 // See ISO/IEC 14496-3, table 1.17 — Channel Configuration
-static unsigned int const s_adts_channels[8] = {
+static unsigned int const s_aac_channel_configuration[8] = {
   0, 1, 2, 3, 4, 5, 6, 8,
 };
 
@@ -578,7 +578,7 @@ parser_c::decode_adts_header(unsigned char const *buffer,
     frame.m_header.config.profile  = bc.get_bits(2);
     int sfreq_index                = bc.get_bits(4);
     bc.skip_bits(1);                               // private
-    frame.m_header.config.channels = s_adts_channels[bc.get_bits(3)];
+    frame.m_header.config.channels = s_aac_channel_configuration[bc.get_bits(3)];
     bc.skip_bits(1 + 1);                           // original/copy & home
     bc.skip_bits(1 + 1);                           // copyright_id_bit & copyright_id_start
 
@@ -1061,10 +1061,12 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
     if (!object_type)
       return;
 
-    config.sbr         = false;
-    config.profile     = object_type - 1;
-    config.sample_rate = read_sample_rate();
-    config.channels    = m_bc->get_bits(4);
+    config.sbr          = false;
+    config.profile      = object_type - 1;
+    config.sample_rate  = read_sample_rate();
+    auto channel_config = m_bc->get_bits(4);
+    if (channel_config < 8)
+      config.channels = s_aac_channel_configuration[channel_config];
 
     if (   (MP4AOT_SBR == object_type)
         || (    (MP4AOT_PS == object_type)

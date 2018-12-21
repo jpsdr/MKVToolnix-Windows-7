@@ -14,6 +14,8 @@
   to the `boost::tribool` class. Fixes #2460.
 * MKVToolNix GUI: multiplexer: removing a file added as an "additional part"
   will no longer cause a crash. Fixes #2461.
+* mkvmerge: AAC: under certain conditions 8 channel audio files were taken for
+  7 channel ones.
 
 
 # Version 29.0.0 "Like It Or Not" 2018-12-01
