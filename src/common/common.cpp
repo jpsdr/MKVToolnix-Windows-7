@@ -54,20 +54,10 @@ extern "C" {
 #  define THREAD_MODE_BACKGROUND_BEGIN 0x00010000
 # endif
 
-using p_get_error_mode = UINT (WINAPI *)(void);
 static void
 fix_windows_errormode() {
-  UINT mode      = SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX;
-  HMODULE h_kern = ::LoadLibrary("kernel32");
-
-  if (h_kern) {
-    // Vista+ only, but one can do without
-    p_get_error_mode get_error_mode = reinterpret_cast<p_get_error_mode>(::GetProcAddress(h_kern, "GetErrorMode"));
-    if (get_error_mode)
-      mode |= get_error_mode();
-
-    ::FreeLibrary(h_kern);
-  }
+  UINT mode  = SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX;
+  mode      |= GetErrorMode();
 
   ::SetErrorMode(mode);
 }
