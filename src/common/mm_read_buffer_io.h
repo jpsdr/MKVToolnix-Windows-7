@@ -18,26 +18,22 @@
 
 #include "common/mm_io.h"
 
+class mm_read_buffer_io_private_c;
 class mm_read_buffer_io_c: public mm_proxy_io_c {
 protected:
-  memory_cptr m_af_buffer;
-  unsigned char *m_buffer;
-  size_t m_cursor;
-  bool m_eof;
-  size_t m_fill;
-  int64_t m_offset;
-  bool m_buffering;
-  debugging_option_c m_debug_seek, m_debug_read;
+  MTX_DECLARE_PRIVATE(mm_read_buffer_io_private_c);
+
+  explicit mm_read_buffer_io_c(mm_read_buffer_io_private_c &p);
 
 public:
-  mm_read_buffer_io_c(mm_io_cptr const &in, size_t buffer_size = 1 << 17);
+  mm_read_buffer_io_c(mm_io_cptr const &in, std::size_t buffer_size = 1 << 17);
   virtual ~mm_read_buffer_io_c();
 
   virtual uint64 getFilePointer();
   virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
   virtual int64_t get_size();
-  inline virtual bool eof() { return m_eof; }
-  virtual void clear_eof() { m_eof = false; }
+  virtual bool eof();
+  virtual void clear_eof();
   virtual void enable_buffering(bool enable);
   virtual void set_buffer_size(std::size_t new_buffer_size = 1 << 17);
 

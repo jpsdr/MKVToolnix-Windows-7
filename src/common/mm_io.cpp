@@ -18,6 +18,7 @@
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
 #include "common/mm_io.h"
+#include "common/mm_io_p.h"
 #include "common/mm_io_x.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
@@ -30,6 +31,19 @@ union double_to_uint64_t {
 /*
    Abstract base class.
 */
+
+mm_io_c::mm_io_c()
+  : p_ptr{new mm_io_private_c}
+{
+}
+
+mm_io_c::mm_io_c(mm_io_private_c &p)
+  : p_ptr{&p}
+{
+}
+
+mm_io_c::~mm_io_c() {
+}
 
 std::string
 mm_io_c::getline(boost::optional<std::size_t> max_chars) {
@@ -339,9 +353,11 @@ mm_io_c::write_double(double value) {
 
 size_t
 mm_io_c::write(std::string const &buffer) {
-  if (!m_string_output_converter)
+  auto p = p_func();
+
+  if (!p->string_output_converter)
     return write(buffer.c_str(), buffer.length());
-  auto native = m_string_output_converter->native(buffer);
+  auto native = p->string_output_converter->native(buffer);
   return write(native.c_str(), native.length());
 }
 
@@ -372,7 +388,7 @@ mm_io_c::skip(int64 num_bytes) {
 
 void
 mm_io_c::save_pos(int64_t new_pos) {
-  m_positions.push(getFilePointer());
+  p_func()->positions.push(getFilePointer());
 
   if (-1 != new_pos)
     setFilePointer(new_pos);
@@ -380,17 +396,21 @@ mm_io_c::save_pos(int64_t new_pos) {
 
 bool
 mm_io_c::restore_pos() {
-  if (m_positions.empty())
+  auto p = p_func();
+
+  if (p->positions.empty())
     return false;
 
-  setFilePointer(m_positions.top());
-  m_positions.pop();
+  setFilePointer(p->positions.top());
+  p->positions.pop();
 
   return true;
 }
 
 bool
 mm_io_c::write_bom(const std::string &charset_) {
+  auto p = p_func();
+
   static const unsigned char utf8_bom[3]    = {0xef, 0xbb, 0xbf};
   static const unsigned char utf16le_bom[2] = {0xff, 0xfe};
   static const unsigned char utf16be_bom[2] = {0xfe, 0xff};
@@ -399,10 +419,10 @@ mm_io_c::write_bom(const std::string &charset_) {
   const unsigned char *bom;
   unsigned int bom_len;
 
-  if (m_bom_written || charset_.empty())
+  if (p->bom_written || charset_.empty())
     return false;
 
-  if (m_string_output_converter && !charset_converter_c::is_utf8_charset_name(m_string_output_converter->get_charset()))
+  if (p->string_output_converter && !charset_converter_c::is_utf8_charset_name(p->string_output_converter->get_charset()))
     return false;
 
   auto charset = boost::regex_replace(balg::to_lower_copy(charset_), boost::regex("[^a-z0-9]+", boost::regex::perl), "");
@@ -426,27 +446,29 @@ mm_io_c::write_bom(const std::string &charset_) {
 
   setFilePointer(0);
 
-  m_bom_written = write(bom, bom_len) == bom_len;
+  p->bom_written = write(bom, bom_len) == bom_len;
 
-  return m_bom_written;
+  return p->bom_written;
 }
 
 bool
 mm_io_c::bom_written()
   const {
-  return m_bom_written;
+  return p_func()->bom_written;
 }
 
 int64_t
 mm_io_c::get_size() {
-  if (-1 == m_cached_size) {
+  auto p = p_func();
+
+  if (-1 == p->cached_size) {
     save_pos();
     setFilePointer(0, libebml::seek_end);
-    m_cached_size = getFilePointer();
+    p->cached_size = getFilePointer();
     restore_pos();
   }
 
-  return m_cached_size;
+  return p->cached_size;
 }
 
 int
@@ -457,4 +479,14 @@ mm_io_c::getch() {
     return -1;
 
   return c;
+}
+
+void
+mm_io_c::set_string_output_converter(charset_converter_cptr const &converter) {
+  p_func()->string_output_converter = converter;
+}
+
+void
+mm_io_c::use_dos_style_newlines(bool yes) {
+  p_func()->dos_style_newlines = yes;
 }

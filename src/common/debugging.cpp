@@ -292,7 +292,7 @@ ebml_dumper_c::dump_impl(EbmlElement const *element,
 std::string
 ebml_dumper_c::dump_to_string(libebml::EbmlElement const *element,
                               dump_style_e style) {
-  auto mem = mm_mem_io_c{nullptr, 0ull, 1000};
+  mm_mem_io_c mem{nullptr, 0ull, 1000};
   ebml_dumper_c dumper{};
 
   dumper.target(MM_IO, &mem)

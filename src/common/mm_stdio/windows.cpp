@@ -17,6 +17,7 @@
 #include <io.h>
 #include <windows.h>
 
+#include "common/mm_io_p.h"
 #include "common/mm_stdio.h"
 #include "common/strings/utf8.h"
 
@@ -53,7 +54,7 @@ mm_stdio_c::_write(const void *buffer,
   size_t bytes_written = fwrite(buffer, 1, size, stdout);
   fflush(stdout);
 
-  m_cached_size = -1;
+  p_func()->cached_size = -1;
 
   return bytes_written;
 }

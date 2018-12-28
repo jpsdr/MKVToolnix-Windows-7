@@ -21,24 +21,15 @@ namespace mtx { namespace id {
 class info_c;
 }}
 
+class mm_multi_file_io_private_c;
 class mm_multi_file_io_c: public mm_io_c {
 protected:
-  struct file_t {
-    bfs::path m_file_name;
-    uint64_t m_size, m_global_start;
-    mm_file_io_cptr m_file;
+  MTX_DECLARE_PRIVATE(mm_multi_file_io_private_c);
 
-    file_t(const bfs::path &file_name, uint64_t global_start, mm_file_io_cptr file);
-  };
-
-protected:
-  std::string m_display_file_name;
-  uint64_t m_total_size, m_current_pos, m_current_local_pos;
-  unsigned int m_current_file;
-  std::vector<mm_multi_file_io_c::file_t> m_files;
+  explicit mm_multi_file_io_c(mm_multi_file_io_private_c &p);
 
 public:
-  mm_multi_file_io_c(const std::vector<bfs::path> &file_names, const std::string &display_file_name);
+  mm_multi_file_io_c(std::vector<bfs::path> const &file_names, std::string const &display_file_name);
   virtual ~mm_multi_file_io_c();
 
   virtual uint64 getFilePointer();
@@ -46,9 +37,7 @@ public:
   virtual void close();
   virtual bool eof();
 
-  virtual std::string get_file_name() const {
-    return m_display_file_name;
-  }
+  virtual std::string get_file_name() const;
   virtual std::vector<bfs::path> get_file_names();
   virtual void create_verbose_identification_info(mtx::id::info_c &info);
   virtual void display_other_file_info();

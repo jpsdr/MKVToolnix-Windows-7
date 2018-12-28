@@ -15,31 +15,24 @@
 
 #include "common/common_pch.h"
 
-#include <stack>
-
 #include <ebml/IOCallback.h>
 
 #include "common/mm_io_fwd.h"
 
 class charset_converter_c;
-using charset_converter_cptr = std::shared_ptr<charset_converter_c>;
+class mm_io_private_c;
 
 class mm_io_c: public libebml::IOCallback {
 protected:
-  bool m_dos_style_newlines, m_bom_written;
-  std::stack<int64_t> m_positions;
-  int64_t m_current_position, m_cached_size;
-  charset_converter_cptr m_string_output_converter;
+  MTX_DECLARE_PRIVATE(mm_io_private_c);
+
+  std::unique_ptr<mm_io_private_c> const p_ptr;
+
+  explicit mm_io_c(mm_io_private_c &p);
 
 public:
-  mm_io_c()
-    : m_dos_style_newlines(false)
-    , m_bom_written{}
-    , m_current_position(0)
-    , m_cached_size(-1)
-  {
-  }
-  virtual ~mm_io_c() { }
+  mm_io_c();
+  virtual ~mm_io_c();
 
   virtual uint64 getFilePointer() = 0;
   virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning) = 0;
@@ -96,13 +89,8 @@ public:
 
   virtual void close() = 0;
 
-  virtual void set_string_output_converter(charset_converter_cptr const &converter) {
-    m_string_output_converter = converter;
-  }
-
-  virtual void use_dos_style_newlines(bool yes) {
-    m_dos_style_newlines = yes;
-  }
+  virtual void set_string_output_converter(std::shared_ptr<charset_converter_c> const &converter);
+  virtual void use_dos_style_newlines(bool yes);
 
   virtual void enable_buffering(bool /* enable */) {
   }

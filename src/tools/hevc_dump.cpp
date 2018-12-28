@@ -58,7 +58,7 @@ parse_args(std::vector<std::string> &args) {
 
 static void
 parse_file(const std::string &file_name) {
-  auto in   = mm_file_io_c{file_name};
+  mm_file_io_c in{file_name};
   auto size = static_cast<uint64_t>(in.get_size());
   if (4 > size)
     return;

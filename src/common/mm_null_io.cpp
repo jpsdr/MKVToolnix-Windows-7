@@ -15,35 +15,42 @@
 #include "common/common_pch.h"
 
 #include "common/mm_null_io.h"
+#include "common/mm_null_io_p.h"
 
 /*
    Dummy class for output to /dev/null. Needed for two pass stuff.
 */
 
 mm_null_io_c::mm_null_io_c(std::string const &file_name)
-  : m_pos(0)
-  , m_file_name(file_name)
+  : mm_io_c{*new mm_null_io_private_c{file_name}}
+{
+}
+
+mm_null_io_c::mm_null_io_c(mm_null_io_private_c &p)
+  : mm_io_c{p}
 {
 }
 
 uint64
 mm_null_io_c::getFilePointer() {
-  return m_pos;
+  return p_func()->pos;
 }
 
 void
 mm_null_io_c::setFilePointer(int64 offset,
                              libebml::seek_mode mode) {
-  m_pos = libebml::seek_beginning == mode ? offset
-        : libebml::seek_end       == mode ? 0
-        :                                   m_pos + offset;
+  auto p = p_func();
+
+  p->pos = libebml::seek_beginning == mode ? offset
+         : libebml::seek_end       == mode ? 0
+         :                                   p->pos + offset;
 }
 
 uint32
 mm_null_io_c::_read(void *buffer,
                     size_t size) {
-  memset(buffer, 0, size);
-  m_pos += size;
+  std::memset(buffer, 0, size);
+  p_func()->pos += size;
 
   return size;
 }
@@ -51,8 +58,9 @@ mm_null_io_c::_read(void *buffer,
 size_t
 mm_null_io_c::_write(const void *,
                      size_t size) {
-  m_pos         += size;
-  m_cached_size  = -1;
+  auto p          = p_func();
+  p->pos         += size;
+  p->cached_size  = -1;
 
   return size;
 }
@@ -69,5 +77,5 @@ mm_null_io_c::eof() {
 std::string
 mm_null_io_c::get_file_name()
   const {
-  return m_file_name;
+  return p_func()->file_name;
 }

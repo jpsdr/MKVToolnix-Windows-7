@@ -26,17 +26,18 @@
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
+#include "common/mm_io_p.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/mm_file_io_p.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 
-mm_file_io_c::mm_file_io_c(const std::string &path,
-                           const open_mode mode)
-  : m_file_name(path)
-  , m_file(nullptr)
-  , m_eof(false)
+mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
+                                           open_mode const p_mode)
+  : file_name{p_file_name}
+  , mode{p_mode}
 {
   DWORD access_mode, share_mode, disposition;
 
@@ -66,29 +67,32 @@ mm_file_io_c::mm_file_io_c(const std::string &path,
   }
 
   if ((MODE_WRITE == mode) || (MODE_CREATE == mode))
-    prepare_path(path);
+    mm_file_io_c::prepare_path(file_name);
 
-  auto w_path = to_wide(path);
-  m_file      = static_cast<void *>(CreateFileW(w_path.c_str(), access_mode, share_mode, nullptr, disposition, 0, nullptr));
-  if (static_cast<HANDLE>(m_file) == INVALID_HANDLE_VALUE)
+  auto w_file_name = to_wide(file_name);
+  file             = static_cast<void *>(CreateFileW(w_file_name.c_str(), access_mode, share_mode, nullptr, disposition, 0, nullptr));
+  if (static_cast<HANDLE>(file) == INVALID_HANDLE_VALUE)
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
 
-  m_dos_style_newlines = true;
+  dos_style_newlines = true;
 }
 
 void
 mm_file_io_c::close() {
-  if (m_file) {
-    CloseHandle((HANDLE)m_file);
-    m_file = nullptr;
+  auto p = p_func();
+
+  if (p->file) {
+    CloseHandle((HANDLE)p->file);
+    p->file = nullptr;
   }
-  m_file_name.clear();
+  p->file_name.clear();
 }
 
 uint64
 mm_file_io_c::get_real_file_pointer() {
+  auto p    = p_func();
   LONG high = 0;
-  DWORD low = SetFilePointer((HANDLE)m_file, 0, &high, FILE_CURRENT);
+  DWORD low = SetFilePointer((HANDLE)p->file, 0, &high, FILE_CURRENT);
 
   if ((low == INVALID_SET_FILE_POINTER) && (GetLastError() != NO_ERROR))
     return (uint64)-1;
@@ -99,34 +103,37 @@ mm_file_io_c::get_real_file_pointer() {
 void
 mm_file_io_c::setFilePointer(int64 offset,
                              libebml::seek_mode mode) {
+  auto p       = p_func();
   DWORD method = libebml::seek_beginning == mode ? FILE_BEGIN
                : libebml::seek_current   == mode ? FILE_CURRENT
                : libebml::seek_end       == mode ? FILE_END
                :                                   FILE_BEGIN;
   LONG high    = (LONG)(offset >> 32);
-  DWORD low    = SetFilePointer((HANDLE)m_file, (LONG)(offset & 0xffffffff), &high, method);
+  DWORD low    = SetFilePointer((HANDLE)p->file, (LONG)(offset & 0xffffffff), &high, method);
 
   if ((INVALID_SET_FILE_POINTER == low) && (GetLastError() != NO_ERROR))
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};
 
-  m_eof              = false;
-  m_current_position = (int64_t)low + ((int64_t)high << 32);
+  p->eof              = false;
+  p->current_position = (int64_t)low + ((int64_t)high << 32);
 }
 
 uint32
 mm_file_io_c::_read(void *buffer,
                     size_t size) {
+  auto p = p_func();
+
   DWORD bytes_read;
 
-  if (!ReadFile((HANDLE)m_file, buffer, size, &bytes_read, nullptr)) {
-    m_eof              = true;
-    m_current_position = get_real_file_pointer();
+  if (!ReadFile((HANDLE)p->file, buffer, size, &bytes_read, nullptr)) {
+    p->eof              = true;
+    p->current_position = get_real_file_pointer();
 
     return 0;
   }
 
-  m_eof               = size != bytes_read;
-  m_current_position += bytes_read;
+  p->eof               = size != bytes_read;
+  p->current_position += bytes_read;
 
   return bytes_read;
 }
@@ -134,9 +141,11 @@ mm_file_io_c::_read(void *buffer,
 size_t
 mm_file_io_c::_write(const void *buffer,
                      size_t size) {
+  auto p = p_func();
+
   DWORD bytes_written;
 
-  if (!WriteFile((HANDLE)m_file, buffer, size, &bytes_written, nullptr))
+  if (!WriteFile((HANDLE)p->file, buffer, size, &bytes_written, nullptr))
     bytes_written = 0;
 
   if (bytes_written != size) {
@@ -145,30 +154,32 @@ mm_file_io_c::_write(const void *buffer,
     mxerror(fmt::format(Y("Could not write to the destination file: {0} ({1})\n"), error, error_msg_utf8));
   }
 
-  m_current_position += bytes_written;
-  m_cached_size       = -1;
-  m_eof               = false;
+  p->current_position += bytes_written;
+  p->cached_size       = -1;
+  p->eof               = false;
 
   return bytes_written;
 }
 
 bool
 mm_file_io_c::eof() {
-  return m_eof;
+  return p_func()->eof;
 }
 
 void
 mm_file_io_c::clear_eof() {
-  m_eof = false;
+  p_func()->eof = false;
 }
 
 int
 mm_file_io_c::truncate(int64_t pos) {
-  m_cached_size = -1;
+  auto p = p_func();
+
+  p->cached_size = -1;
 
   save_pos();
   if (setFilePointer2(pos)) {
-    bool result = SetEndOfFile((HANDLE)m_file);
+    bool result = SetEndOfFile((HANDLE)p->file);
     restore_pos();
 
     return result ? 0 : -1;

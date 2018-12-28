@@ -19,34 +19,20 @@
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mm_multi_file_io.h"
+#include "common/mm_multi_file_io_p.h"
 #include "common/output.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
-mm_multi_file_io_c::file_t::file_t(const bfs::path &file_name,
-                                   uint64_t global_start,
-                                   mm_file_io_cptr file)
-  : m_file_name(file_name)
-  , m_size(file->get_size())
-  , m_global_start(global_start)
-  , m_file(file)
+mm_multi_file_io_c::mm_multi_file_io_c(std::vector<bfs::path> const &file_names,
+                                       std::string const &display_file_name)
+  : mm_io_c{*new mm_multi_file_io_private_c{file_names, display_file_name}}
 {
 }
 
-mm_multi_file_io_c::mm_multi_file_io_c(const std::vector<bfs::path> &file_names,
-                                       const std::string &display_file_name)
-  : m_display_file_name(display_file_name)
-  , m_total_size(0)
-  , m_current_pos(0)
-  , m_current_local_pos(0)
-  , m_current_file(0)
+mm_multi_file_io_c::mm_multi_file_io_c(mm_multi_file_io_private_c &p)
+  : mm_io_c{p}
 {
-  for (auto &file_name : file_names) {
-    mm_file_io_cptr file(new mm_file_io_c(file_name.string()));
-    m_files.push_back(mm_multi_file_io_c::file_t(file_name, m_total_size, file));
-
-    m_total_size += file->get_size();
-  }
 }
 
 mm_multi_file_io_c::~mm_multi_file_io_c() {
@@ -55,30 +41,32 @@ mm_multi_file_io_c::~mm_multi_file_io_c() {
 
 uint64
 mm_multi_file_io_c::getFilePointer() {
-  return m_current_pos;
+  return p_func()->current_pos;
 }
 
 void
 mm_multi_file_io_c::setFilePointer(int64 offset,
                                    libebml::seek_mode mode) {
+  auto p = p_func();
+
   int64_t new_pos
     = libebml::seek_beginning == mode ? offset
-    : libebml::seek_end       == mode ? m_total_size  + offset // offsets from the end are negative already
-    :                                   m_current_pos + offset;
+    : libebml::seek_end       == mode ? p->total_size  + offset // offsets from the end are negative already
+    :                                   p->current_pos + offset;
 
-  if ((0 > new_pos) || (static_cast<int64_t>(m_total_size) < new_pos))
+  if ((0 > new_pos) || (static_cast<int64_t>(p->total_size) < new_pos))
     throw mtx::mm_io::seek_x();
 
-  m_current_file = 0;
-  for (auto &file : m_files) {
-    if ((file.m_global_start + file.m_size) < static_cast<uint64_t>(new_pos)) {
-      ++m_current_file;
+  p->current_file = 0;
+  for (auto &file : p->files) {
+    if ((file.global_start + file.size) < static_cast<uint64_t>(new_pos)) {
+      ++p->current_file;
       continue;
     }
 
-    m_current_pos       = new_pos;
-    m_current_local_pos = new_pos - file.m_global_start;
-    file.m_file->setFilePointer(m_current_local_pos);
+    p->current_pos       = new_pos;
+    p->current_local_pos = new_pos - file.global_start;
+    file.file->setFilePointer(p->current_local_pos);
     break;
   }
 }
@@ -86,28 +74,30 @@ mm_multi_file_io_c::setFilePointer(int64 offset,
 uint32
 mm_multi_file_io_c::_read(void *buffer,
                           size_t size) {
+  auto p                    = p_func();
+
   size_t num_read_total     = 0;
   unsigned char *buffer_ptr = static_cast<unsigned char *>(buffer);
 
   while (!eof() && (num_read_total < size)) {
-    mm_multi_file_io_c::file_t &file = m_files[m_current_file];
-    size_t num_to_read = static_cast<size_t>(std::min(static_cast<uint64_t>(size) - static_cast<uint64_t>(num_read_total), file.m_size - m_current_local_pos));
+    auto &file       = p->files[p->current_file];
+    auto num_to_read = static_cast<uint64_t>(std::min(static_cast<uint64_t>(size) - static_cast<uint64_t>(num_read_total), file.size - p->current_local_pos));
 
     if (0 != num_to_read) {
-      size_t num_read      = file.m_file->read(buffer_ptr, num_to_read);
-      num_read_total      += num_read;
-      buffer_ptr          += num_read;
-      m_current_local_pos += num_read;
-      m_current_pos       += num_read;
+      size_t num_read       = file.file->read(buffer_ptr, num_to_read);
+      num_read_total       += num_read;
+      buffer_ptr           += num_read;
+      p->current_local_pos += num_read;
+      p->current_pos       += num_read;
 
       if (num_read != num_to_read)
         break;
     }
 
-    if ((m_current_local_pos >= file.m_size) && (m_files.size() > (m_current_file + 1))) {
-      ++m_current_file;
-      m_current_local_pos = 0;
-      m_files[m_current_file].m_file->setFilePointer(0);
+    if ((p->current_local_pos >= file.size) && (p->files.size() > (p->current_file + 1))) {
+      ++p->current_file;
+      p->current_local_pos = 0;
+      p->files[p->current_file].file->setFilePointer(0);
     }
   }
 
@@ -122,74 +112,76 @@ mm_multi_file_io_c::_write(const void *,
 
 void
 mm_multi_file_io_c::close() {
-  for (auto &file : m_files)
-    file.m_file->close();
+  auto p = p_func();
 
-  m_files.clear();
-  m_total_size        = 0;
-  m_current_pos       = 0;
-  m_current_local_pos = 0;
+  for (auto &file : p->files)
+    file.file->close();
+
+  p->files.clear();
+  p->total_size        = 0;
+  p->current_pos       = 0;
+  p->current_local_pos = 0;
 }
 
 bool
 mm_multi_file_io_c::eof() {
-  return m_files.empty() || ((m_current_file == (m_files.size() - 1)) && (m_current_local_pos >= m_files[m_current_file].m_size));
+  auto p = p_func();
+
+  return p->files.empty() || ((p->current_file == (p->files.size() - 1)) && (p->current_local_pos >= p->files[p->current_file].size));
 }
 
 std::vector<bfs::path>
 mm_multi_file_io_c::get_file_names() {
+  auto p = p_func();
+
   std::vector<bfs::path> file_names;
-  for (auto &file : m_files)
-    file_names.push_back(file.m_file_name);
+  for (auto &file : p->files)
+    file_names.push_back(file.file_name);
 
   return file_names;
 }
 
 void
 mm_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &info) {
+  auto p          = p_func();
   auto file_names = nlohmann::json::array();
-  for (auto &file : m_files)
-    if (file.m_file_name != m_files.front().m_file_name)
-    file_names.push_back(file.m_file_name.string());
+  for (auto &file : p->files)
+    if (file.file_name != p->files.front().file_name)
+    file_names.push_back(file.file_name.string());
 
   info.add(mtx::id::other_file, file_names);
 }
 
 void
 mm_multi_file_io_c::display_other_file_info() {
+  auto p = p_func();
+
   std::stringstream out;
 
-  for (auto &file : m_files)
-    if (file.m_file_name != m_files.front().m_file_name) {
+  for (auto &file : p->files)
+    if (file.file_name != p->files.front().file_name) {
       if (!out.str().empty())
         out << ", ";
-      out << file.m_file_name.filename();
+      out << file.file_name.filename();
     }
 
   if (!out.str().empty())
-    mxinfo(fmt::format(Y("'{0}': Processing the following files as well: {1}\n"), m_display_file_name, out.str()));
+    mxinfo(fmt::format(Y("'{0}': Processing the following files as well: {1}\n"), p->display_file_name, out.str()));
 }
 
 void
 mm_multi_file_io_c::enable_buffering(bool enable) {
-  for (auto &file : m_files)
-    file.m_file->enable_buffering(enable);
+  auto p = p_func();
+
+  for (auto &file : p->files)
+    file.file->enable_buffering(enable);
 }
 
-struct path_sorter_t {
-  bfs::path m_path;
-  int m_number;
-
-  path_sorter_t(const bfs::path &path, int number)
-    : m_path(path)
-    , m_number(number)
-  {
-  }
-
-  bool operator <(const path_sorter_t &cmp) const {
-    return m_number < cmp.m_number;
-  }
-};
+std::string
+mm_multi_file_io_c::get_file_name()
+  const {
+  return p_func()->display_file_name;
+}
 
 mm_io_cptr
 mm_multi_file_io_c::open_multi(const std::string &display_file_name,
@@ -211,8 +203,8 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
 
   base_name = balg::to_lower_copy(matches[1].str());
 
-  std::vector<path_sorter_t> paths;
-  paths.push_back(path_sorter_t(first_file_name, start_number));
+  std::vector<std::pair<int, bfs::path>> paths;
+  paths.emplace_back(start_number, first_file_name);
 
   bfs::directory_iterator end_itr;
   for (bfs::directory_iterator itr(first_file_name.branch_path()); itr != end_itr; ++itr) {
@@ -229,14 +221,14 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
         || (current_number <= start_number))
       continue;
 
-    paths.push_back(path_sorter_t(itr->path(), current_number));
+    paths.emplace_back(current_number, itr->path());
   }
 
-  std::sort(paths.begin(), paths.end());
+  brng::sort(paths);
 
   std::vector<bfs::path> file_names;
   for (auto &path : paths)
-    file_names.push_back(path.m_path);
+    file_names.emplace_back(std::get<1>(path));
 
   return mm_io_cptr(new mm_multi_file_io_c(file_names, display_file_name));
 }

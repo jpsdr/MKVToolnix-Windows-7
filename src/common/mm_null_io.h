@@ -15,10 +15,12 @@
 
 #include "common/common_pch.h"
 
+class mm_null_io_private_c;
 class mm_null_io_c: public mm_io_c {
 protected:
-  int64_t m_pos;
-  std::string m_file_name;
+  MTX_DECLARE_PRIVATE(mm_null_io_private_c);
+
+  explicit mm_null_io_c(mm_null_io_private_c &p);
 
 public:
   mm_null_io_c(std::string const &file_name);

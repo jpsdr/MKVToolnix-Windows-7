@@ -23,11 +23,12 @@
 
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/mm_file_io_p.h"
 
-mm_file_io_c::mm_file_io_c(const std::string &path,
-                           const open_mode mode)
-  : m_file_name(path)
-  , m_file(nullptr)
+mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
+                                           open_mode const p_mode)
+  : file_name{p_file_name}
+  , mode{p_mode}
 {
   const char *cmode;
 
@@ -49,41 +50,43 @@ mm_file_io_c::mm_file_io_c(const std::string &path,
   }
 
   if ((MODE_WRITE == mode) || (MODE_CREATE == mode))
-    prepare_path(path);
-  std::string local_path = g_cc_local_utf8->native(path);
+    mm_file_io_c::prepare_path(file_name);
+  std::string local_path = g_cc_local_utf8->native(file_name);
 
   struct stat st;
   if ((0 == stat(local_path.c_str(), &st)) && S_ISDIR(st.st_mode))
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
 
-  m_file = (FILE *)fopen(local_path.c_str(), cmode);
+  file = (FILE *)fopen(local_path.c_str(), cmode);
 
-  if (!m_file)
+  if (!file)
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
 }
 
 void
 mm_file_io_c::setFilePointer(int64 offset,
                              libebml::seek_mode mode) {
+  auto p     = p_func();
   int whence = mode == libebml::seek_beginning ? SEEK_SET
              : mode == libebml::seek_end       ? SEEK_END
              :                                   SEEK_CUR;
 
-  if (fseeko((FILE *)m_file, offset, whence) != 0)
+  if (fseeko((FILE *)p->file, offset, whence) != 0)
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};
 
-  m_current_position = ftello((FILE *)m_file);
+  p->current_position = ftello((FILE *)p->file);
 }
 
 size_t
 mm_file_io_c::_write(const void *buffer,
                      size_t size) {
-  size_t bwritten = fwrite(buffer, 1, size, (FILE *)m_file);
-  if (ferror((FILE *)m_file) != 0)
+  auto p          = p_func();
+  size_t bwritten = fwrite(buffer, 1, size, (FILE *)p->file);
+  if (ferror((FILE *)p->file) != 0)
     throw mtx::mm_io::read_write_x{mtx::mm_io::make_error_code()};
 
-  m_current_position += bwritten;
-  m_cached_size       = -1;
+  p->current_position += bwritten;
+  p->cached_size       = -1;
 
   return bwritten;
 }
@@ -91,35 +94,39 @@ mm_file_io_c::_write(const void *buffer,
 uint32
 mm_file_io_c::_read(void *buffer,
                     size_t size) {
-  int64_t bread = fread(buffer, 1, size, (FILE *)m_file);
+  auto p        = p_func();
+  int64_t bread = fread(buffer, 1, size, (FILE *)p->file);
 
-  m_current_position += bread;
+  p->current_position += bread;
 
   return bread;
 }
 
 void
 mm_file_io_c::close() {
-  if (m_file) {
-    fclose((FILE *)m_file);
-    m_file = nullptr;
+  auto p = p_func();
+
+  if (p->file) {
+    fclose((FILE *)p->file);
+    p->file = nullptr;
   }
 }
 
 bool
 mm_file_io_c::eof() {
-  return feof((FILE *)m_file) != 0;
+  return feof((FILE *)p_func()->file) != 0;
 }
 
 void
 mm_file_io_c::clear_eof() {
-  clearerr(static_cast<FILE *>(m_file));
+  clearerr(static_cast<FILE *>(p_func()->file));
 }
 
 int
 mm_file_io_c::truncate(int64_t pos) {
-  m_cached_size = -1;
-  return ftruncate(fileno((FILE *)m_file), pos);
+  auto p         = p_func();
+  p->cached_size = -1;
+  return ftruncate(fileno((FILE *)p->file), pos);
 }
 
 /** \brief OS and kernel dependant setup

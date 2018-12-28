@@ -15,6 +15,18 @@
 
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/mm_file_io_p.h"
+
+mm_file_io_c::mm_file_io_c(std::string const &path,
+                           open_mode const mode)
+  : mm_io_c{*new mm_file_io_private_c{path, mode}}
+{
+}
+
+mm_file_io_c::mm_file_io_c(mm_file_io_private_c &p)
+  : mm_io_c{p}
+{
+}
 
 void
 mm_file_io_c::prepare_path(const std::string &path) {
@@ -55,16 +67,22 @@ mm_file_io_c::slurp(std::string const &file_name) {
 
 uint64
 mm_file_io_c::getFilePointer() {
-  return m_current_position;
+  return p_func()->current_position;
 }
 
 mm_file_io_c::~mm_file_io_c() {
   close();
-  m_file_name = "";
+  p_func()->file_name.clear();
 }
 
 void
 mm_file_io_c::cleanup() {
+}
+
+std::string
+mm_file_io_c::get_file_name()
+  const {
+  return p_func()->file_name;
 }
 
 mm_io_cptr

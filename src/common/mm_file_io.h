@@ -15,14 +15,12 @@
 
 #include "common/common_pch.h"
 
+class mm_file_io_private_c;
 class mm_file_io_c: public mm_io_c {
 protected:
-  std::string m_file_name;
-  void *m_file;
+  MTX_DECLARE_PRIVATE(mm_file_io_private_c);
 
-#if defined(SYS_WINDOWS)
-  bool m_eof;
-#endif
+  explicit mm_file_io_c(mm_file_io_private_c &p);
 
 public:
   mm_file_io_c(const std::string &path, const open_mode mode = MODE_READ);
@@ -39,12 +37,9 @@ public:
   virtual void close();
   virtual bool eof();
   virtual void clear_eof();
-
-  virtual std::string get_file_name() const {
-    return m_file_name;
-  }
-
   virtual int truncate(int64_t pos);
+
+  virtual std::string get_file_name() const;
 
   static void setup();
   static void cleanup();

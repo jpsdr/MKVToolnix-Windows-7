@@ -88,12 +88,6 @@ using namespace std::string_literals;
 #define Y(s)                            gettext(u8##s)
 #define NY(s_singular, s_plural, count) ngettext(u8##s_singular, u8##s_plural, count)
 
-#include "common/debugging.h"
-#include "common/error.h"
-#include "common/memory.h"
-#include "common/mm_io.h"
-#include "common/output.h"
-
 #define BUGMSG Y("This should not have happened. Please contact the author " \
                  "Moritz Bunkus <moritz@bunkus.org> with this error/warning " \
                  "message, a description of what you were trying to do, " \
@@ -134,3 +128,9 @@ std::string const &get_program_name();
   inline Class* q_func() { return static_cast<Class *>(q_ptr); } \
   inline const Class* q_func() const { return static_cast<const Class *>(q_ptr); } \
   friend class Class;
+
+#include "common/debugging.h"
+#include "common/error.h"
+#include "common/memory.h"
+#include "common/mm_io.h"
+#include "common/output.h"

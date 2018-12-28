@@ -16,62 +16,32 @@
 
 #include "common/mm_io_x.h"
 #include "common/mm_mem_io.h"
+#include "common/mm_mem_io_p.h"
 
 /*
    IO callback class working on memory
 */
 mm_mem_io_c::mm_mem_io_c(unsigned char *mem,
                          uint64_t mem_size,
-                         int increase)
-  : m_pos(0)
-  , m_mem_size(mem_size)
-  , m_allocated(mem_size)
-  , m_increase(increase)
-  , m_mem(mem)
-  , m_ro_mem(nullptr)
-  , m_read_only(false)
+                         std::size_t increase)
+  : mm_io_c{*new mm_mem_io_private_c{mem, mem_size, increase}}
 {
-  if (0 >= m_increase)
-    throw mtx::invalid_parameter_x();
-
-  if (!m_mem && (0 < m_increase)) {
-    if (0 == mem_size)
-      m_allocated = increase;
-
-    m_mem      = safemalloc(m_allocated);
-    m_free_mem = true;
-
-  } else
-    m_free_mem = false;
 }
 
 mm_mem_io_c::mm_mem_io_c(const unsigned char *mem,
                          uint64_t mem_size)
-  : m_pos(0)
-  , m_mem_size(mem_size)
-  , m_allocated(mem_size)
-  , m_increase(0)
-  , m_mem(nullptr)
-  , m_ro_mem(mem)
-  , m_free_mem(false)
-  , m_read_only(true)
+  : mm_io_c{*new mm_mem_io_private_c{mem, mem_size}}
 {
-  if (!m_ro_mem)
-    throw mtx::invalid_parameter_x();
 }
 
 mm_mem_io_c::mm_mem_io_c(memory_c const &mem)
-  : m_pos{}
-  , m_mem_size{mem.get_size()}
-  , m_allocated{mem.get_size()}
-  , m_increase{}
-  , m_mem{}
-  , m_ro_mem{mem.get_buffer()}
-  , m_free_mem{}
-  , m_read_only{true}
+  : mm_io_c{*new mm_mem_io_private_c{mem}}
 {
-  if (!m_ro_mem)
-    throw mtx::invalid_parameter_x{};
+}
+
+mm_mem_io_c::mm_mem_io_c(mm_mem_io_private_c &p)
+  : mm_io_c{p}
+{
 }
 
 mm_mem_io_c::~mm_mem_io_c() {
@@ -80,22 +50,24 @@ mm_mem_io_c::~mm_mem_io_c() {
 
 uint64
 mm_mem_io_c::getFilePointer() {
-  return m_pos;
+  return p_func()->pos;
 }
 
 void
 mm_mem_io_c::setFilePointer(int64 offset,
                             libebml::seek_mode mode) {
-  if (!m_mem && !m_ro_mem && (0 == m_mem_size))
+  auto p = p_func();
+
+  if (!p->mem && !p->ro_mem && (0 == p->mem_size))
     throw mtx::invalid_parameter_x();
 
   int64_t new_pos
     = libebml::seek_beginning == mode ? offset
-    : libebml::seek_end       == mode ? m_mem_size + offset // offsets from the end are negative already
-    :                                   m_pos      + offset;
+    : libebml::seek_end       == mode ? p->mem_size + offset // offsets from the end are negative already
+    :                                   p->pos      + offset;
 
-  if ((0 <= new_pos) && (static_cast<int64_t>(m_mem_size) >= new_pos))
-    m_pos = new_pos;
+  if ((0 <= new_pos) && (static_cast<int64_t>(p->mem_size) >= new_pos))
+    p->pos = new_pos;
   else
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};
 }
@@ -103,12 +75,13 @@ mm_mem_io_c::setFilePointer(int64 offset,
 uint32
 mm_mem_io_c::_read(void *buffer,
                    size_t size) {
-  size_t rbytes = std::min(size, m_mem_size - m_pos);
-  if (m_read_only)
-    memcpy(buffer, &m_ro_mem[m_pos], rbytes);
+  auto p        = p_func();
+  size_t rbytes = std::min(size, p->mem_size - p->pos);
+  if (p->read_only)
+    memcpy(buffer, &p->ro_mem[p->pos], rbytes);
   else
-    memcpy(buffer, &m_mem[m_pos], rbytes);
-  m_pos += rbytes;
+    memcpy(buffer, &p->mem[p->pos], rbytes);
+  p->pos += rbytes;
 
   return rbytes;
 }
@@ -116,80 +89,104 @@ mm_mem_io_c::_read(void *buffer,
 size_t
 mm_mem_io_c::_write(const void *buffer,
                     size_t size) {
-  if (m_read_only)
+  auto p = p_func();
+
+  if (p->read_only)
     throw mtx::mm_io::wrong_read_write_access_x();
 
   int64_t wbytes;
-  if ((m_pos + size) >= m_allocated) {
-    if (m_increase) {
-      int64_t new_allocated  = m_pos + size - m_allocated;
-      new_allocated          = ((new_allocated / m_increase) + 1 ) * m_increase;
-      m_allocated           += new_allocated;
-      m_mem                  = (unsigned char *)saferealloc(m_mem, m_allocated);
+  if ((p->pos + size) >= p->allocated) {
+    if (p->increase) {
+      int64_t new_allocated  = p->pos + size - p->allocated;
+      new_allocated          = ((new_allocated / p->increase) + 1 ) * p->increase;
+      p->allocated           += new_allocated;
+      p->mem                  = (unsigned char *)saferealloc(p->mem, p->allocated);
       wbytes                 = size;
     } else
-      wbytes                 = m_allocated - m_pos;
+      wbytes                 = p->allocated - p->pos;
 
   } else
     wbytes = size;
 
-  if ((m_pos + size) > m_mem_size)
-    m_mem_size = m_pos + size;
+  if ((p->pos + size) > p->mem_size)
+    p->mem_size = p->pos + size;
 
-  memcpy(&m_mem[m_pos], buffer, wbytes);
-  m_pos         += wbytes;
-  m_cached_size  = -1;
+  memcpy(&p->mem[p->pos], buffer, wbytes);
+  p->pos         += wbytes;
+  p->cached_size  = -1;
 
   return wbytes;
 }
 
 void
 mm_mem_io_c::close() {
-  if (m_free_mem)
-    safefree(m_mem);
-  m_mem       = nullptr;
-  m_ro_mem    = nullptr;
-  m_read_only = true;
-  m_free_mem  = false;
-  m_mem_size  = 0;
-  m_increase  = 0;
-  m_pos       = 0;
+  auto p = p_func();
+
+  if (p->free_mem)
+    safefree(p->mem);
+  p->mem       = nullptr;
+  p->ro_mem    = nullptr;
+  p->read_only = true;
+  p->free_mem  = false;
+  p->mem_size  = 0;
+  p->increase  = 0;
+  p->pos       = 0;
 }
 
 bool
 mm_mem_io_c::eof() {
-  return m_pos >= m_mem_size;
+  auto p = p_func();
+
+  return p->pos >= p->mem_size;
 }
 
 unsigned char *
 mm_mem_io_c::get_buffer()
   const {
-  if (m_read_only)
+  auto p = p_func();
+
+  if (p->read_only)
     throw mtx::invalid_parameter_x();
-  return m_mem;
+  return p->mem;
 }
 
 unsigned char const *
 mm_mem_io_c::get_ro_buffer()
   const {
-  if (!m_read_only)
+  auto p = p_func();
+
+  if (!p->read_only)
     throw mtx::invalid_parameter_x();
-  return m_ro_mem;
+  return p->ro_mem;
 }
 
 memory_cptr
 mm_mem_io_c::get_and_lock_buffer() {
-  m_free_mem = false;
-  return memory_c::take_ownership(m_mem, getFilePointer());
+  auto p      = p_func();
+  p->free_mem = false;
+
+  return memory_c::take_ownership(p->mem, getFilePointer());
 }
 
 std::string
 mm_mem_io_c::get_content()
   const {
-  char const *source = m_read_only ? reinterpret_cast<char const *>(m_ro_mem) : reinterpret_cast<char const *>(m_mem);
+  auto p      = p_func();
+  auto source = p->read_only ? reinterpret_cast<char const *>(p->ro_mem) : reinterpret_cast<char const *>(p->mem);
 
-  if (!source || !m_mem_size)
+  if (!source || !p->mem_size)
     return std::string{};
 
-  return std::string(source, m_mem_size);
+  return std::string(source, p->mem_size);
+}
+
+std::string
+mm_mem_io_c::get_file_name()
+  const {
+  return p_func()->file_name;
+}
+
+void
+mm_mem_io_c::set_file_name(const std::string &file_name) {
+  p_func()->file_name = file_name;
 }

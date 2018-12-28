@@ -17,20 +17,16 @@
 #include "common/mm_io_x.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/mm_text_io_p.h"
 
 /*
    Class for handling UTF-8/UTF-16/UTF-32 text files.
 */
 
-mm_text_io_c::mm_text_io_c(mm_io_cptr const &in)
-  : mm_proxy_io_c{in}
-  , m_byte_order(BO_NONE)
-  , m_bom_len(0)
-  , m_uses_carriage_returns(false)
-  , m_uses_newlines(false)
-  , m_eol_style_detected(false)
+mm_text_io_private_c::mm_text_io_private_c(mm_io_cptr const &in)
+  : mm_proxy_io_private_c{in}
 {
-  in->setFilePointer(0);
+  proxy_io->setFilePointer(0);
 
   unsigned char buffer[4];
   int num_read = in->read(buffer, 4);
@@ -39,17 +35,29 @@ mm_text_io_c::mm_text_io_c(mm_io_cptr const &in)
     return;
   }
 
-  detect_byte_order_marker(buffer, num_read, m_byte_order, m_bom_len);
+  mm_text_io_c::detect_byte_order_marker(buffer, num_read, byte_order, bom_len);
 
-  in->setFilePointer(m_bom_len);
+  in->setFilePointer(bom_len);
+}
+
+mm_text_io_c::mm_text_io_c(mm_io_cptr const &in)
+  : mm_proxy_io_c{*new mm_text_io_private_c{in}}
+{
+}
+
+mm_text_io_c::mm_text_io_c(mm_text_io_private_c &p)
+  : mm_proxy_io_c{p}
+{
 }
 
 void
 mm_text_io_c::detect_eol_style() {
-  if (m_eol_style_detected)
+  auto p = p_func();
+
+  if (p->eol_style_detected)
     return;
 
-  m_eol_style_detected = true;
+  p->eol_style_detected = true;
   bool found_cr_or_nl  = false;
 
   save_pos();
@@ -67,18 +75,18 @@ mm_text_io_c::detect_eol_style() {
 
     if ((1 == len) && ('\r' == utf8char[0])) {
       found_cr_or_nl          = true;
-      m_uses_carriage_returns = true;
+      p->uses_carriage_returns = true;
 
     } else if ((1 == len) && ('\n' == utf8char[0])) {
       found_cr_or_nl  = true;
-      m_uses_newlines = true;
+      p->uses_newlines = true;
 
     } else if (found_cr_or_nl)
       break;
 
     else if (num_chars_read > 1000) {
-      m_uses_carriage_returns = false;
-      m_uses_newlines         = true;
+      p->uses_carriage_returns = false;
+      p->uses_newlines         = true;
       break;
     }
   }
@@ -139,15 +147,17 @@ mm_text_io_c::get_encoding(byte_order_e byte_order) {
 
 std::string
 mm_text_io_c::read_next_codepoint() {
+  auto p = p_func();
+
   unsigned char buffer[9];
 
-  if (BO_NONE == m_byte_order) {
+  if (BO_NONE == p->byte_order) {
     std::string::size_type length = read(buffer, 1);
     return std::string{reinterpret_cast<char *>(buffer), length};
   }
 
   std::string::size_type size;
-  if (BO_UTF8 == m_byte_order) {
+  if (BO_UTF8 == p->byte_order) {
     if (read(buffer, 1) != 1)
       return {};
 
@@ -168,13 +178,13 @@ mm_text_io_c::read_next_codepoint() {
     return std::string{reinterpret_cast<char *>(buffer), size};
   }
 
-  size = ((BO_UTF16_LE == m_byte_order) || (BO_UTF16_BE == m_byte_order)) ? 2 : 4;
+  size = ((BO_UTF16_LE == p->byte_order) || (BO_UTF16_BE == p->byte_order)) ? 2 : 4;
 
   if (read(buffer, size) != size)
     return {};
 
   unsigned long data = 0;
-  auto little_endian = ((BO_UTF16_LE == m_byte_order) || (BO_UTF32_LE == m_byte_order));
+  auto little_endian = ((BO_UTF16_LE == p->byte_order) || (BO_UTF32_LE == p->byte_order));
   auto shift         = little_endian ? 0 : 8 * (size - 1);
   for (auto i = 0u; i < size; i++) {
     data  |= static_cast<unsigned long>(buffer[i]) << shift;
@@ -206,10 +216,12 @@ mm_text_io_c::read_next_codepoint() {
 
 std::string
 mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
+  auto p = p_func();
+
   if (eof())
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
 
-  if (!m_eol_style_detected)
+  if (!p->eol_style_detected)
     detect_eol_style();
 
   std::string s;
@@ -225,7 +237,7 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
       return s;
 
     if ((1 == len) && (utf8char[0] == '\r')) {
-      if (previous_was_carriage_return && !m_uses_newlines) {
+      if (previous_was_carriage_return && !p->uses_newlines) {
         setFilePointer(previous_pos);
         return s;
       }
@@ -234,7 +246,7 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
       continue;
     }
 
-    if ((1 == len) && (utf8char[0] == '\n') && (!m_uses_carriage_returns || previous_was_carriage_return))
+    if ((1 == len) && (utf8char[0] == '\n') && (!p->uses_carriage_returns || previous_was_carriage_return))
       return s;
 
     if (previous_was_carriage_return) {
@@ -254,5 +266,28 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
 void
 mm_text_io_c::setFilePointer(int64 offset,
                              libebml::seek_mode mode) {
-  mm_proxy_io_c::setFilePointer(((0 == offset) && (libebml::seek_beginning == mode)) ? m_bom_len : offset, mode);
+  mm_proxy_io_c::setFilePointer(((0 == offset) && (libebml::seek_beginning == mode)) ? p_func()->bom_len : offset, mode);
+}
+
+byte_order_e
+mm_text_io_c::get_byte_order()
+  const {
+  return p_func()->byte_order;
+}
+
+unsigned int
+mm_text_io_c::get_byte_order_length()
+  const {
+  return p_func()->bom_len;
+}
+
+void
+mm_text_io_c::set_byte_order(byte_order_e byte_order) {
+  p_func()->byte_order = byte_order;
+}
+
+boost::optional<std::string>
+mm_text_io_c::get_encoding()
+  const {
+  return get_encoding(p_func()->byte_order);
 }

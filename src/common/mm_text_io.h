@@ -15,11 +15,12 @@
 
 #include "common/common_pch.h"
 
+class mm_text_io_private_c;
 class mm_text_io_c: public mm_proxy_io_c {
 protected:
-  byte_order_e m_byte_order;
-  unsigned int m_bom_len;
-  bool m_uses_carriage_returns, m_uses_newlines, m_eol_style_detected;
+  MTX_DECLARE_PRIVATE(mm_text_io_private_c);
+
+  explicit mm_text_io_c(mm_text_io_private_c &p);
 
 public:
   mm_text_io_c(mm_io_cptr const &in);
@@ -27,18 +28,10 @@ public:
   virtual void setFilePointer(int64 offset, libebml::seek_mode mode=libebml::seek_beginning);
   virtual std::string getline(boost::optional<std::size_t> max_chars = boost::none);
   virtual std::string read_next_codepoint();
-  virtual byte_order_e get_byte_order() const {
-    return m_byte_order;
-  }
-  virtual unsigned int get_byte_order_length() const {
-    return m_bom_len;
-  }
-  virtual void set_byte_order(byte_order_e byte_order) {
-    m_byte_order = byte_order;
-  }
-  virtual boost::optional<std::string> get_encoding() const {
-    return get_encoding(m_byte_order);
-  }
+  virtual byte_order_e get_byte_order() const;
+  virtual unsigned int get_byte_order_length() const;
+  virtual void set_byte_order(byte_order_e byte_order);
+  virtual boost::optional<std::string> get_encoding() const;
 
 protected:
   virtual void detect_eol_style();

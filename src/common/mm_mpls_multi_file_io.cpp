@@ -7,18 +7,22 @@
 #include "common/id_info.h"
 #include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"
+#include "common/mm_mpls_multi_file_io_p.h"
 #include "common/strings/formatting.h"
 
-debugging_option_c mm_mpls_multi_file_io_c::ms_debug{"mpls|mpls_multi_io"};
+namespace {
+debugging_option_c s_debug{"mpls|mpls_multi_io"};
+}
 
 mm_mpls_multi_file_io_c::mm_mpls_multi_file_io_c(std::vector<bfs::path> const &file_names,
                                                  std::string const &display_file_name,
                                                  mtx::bluray::mpls::parser_cptr const &mpls_parser)
-  : mm_file_io_c{file_names[0].string()}
-  , m_files{file_names}
-  , m_display_file_name{display_file_name}
-  , m_mpls_parser{mpls_parser}
-  , m_total_size{ boost::accumulate(m_files, 0ull, [](uint64_t accu, bfs::path const &file) { return accu + bfs::file_size(file); }) }
+  : mm_file_io_c{*new mm_mpls_multi_file_io_private_c{file_names, display_file_name, mpls_parser}}
+{
+}
+
+mm_mpls_multi_file_io_c::mm_mpls_multi_file_io_c(mm_mpls_multi_file_io_private_c &p)
+  : mm_file_io_c{p}
 {
 }
 
@@ -28,7 +32,7 @@ mm_mpls_multi_file_io_c::~mm_mpls_multi_file_io_c() {
 std::vector<timestamp_c> const &
 mm_mpls_multi_file_io_c::get_chapters()
   const {
-  return m_mpls_parser->get_chapters();
+  return p_func()->mpls_parser->get_chapters();
 }
 
 mm_io_cptr
@@ -46,7 +50,7 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
   auto mpls_parser = std::make_shared<mtx::bluray::mpls::parser_c>();
 
   if (!mpls_parser->parse(in) || mpls_parser->get_playlist().items.empty()) {
-    mxdebug_if(ms_debug, fmt::format("Not handling because {0}\n", mpls_parser->is_ok() ? "playlist is empty" : "parser not OK"));
+    mxdebug_if(s_debug, fmt::format("Not handling because {0}\n", mpls_parser->is_ok() ? "playlist is empty" : "parser not OK"));
     return mm_io_cptr{};
   }
 
@@ -65,12 +69,12 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
         mpls_dir / ".." / "stream" / basename_upper, mpls_dir / ".." / ".." / "stream" / basename_upper,
       });
 
-    mxdebug_if(ms_debug, fmt::format("Item clip ID: {0} codec ID: {1}: have file? {2} file: {3}\n", item.clip_id, item.codec_id, !file.empty(), file.string()));
+    mxdebug_if(s_debug, fmt::format("Item clip ID: {0} codec ID: {1}: have file? {2} file: {3}\n", item.clip_id, item.codec_id, !file.empty(), file.string()));
     if (!file.empty())
       file_names.push_back(file);
   }
 
-  mxdebug_if(ms_debug, fmt::format("Number of files left: {0}\n", file_names.size()));
+  mxdebug_if(s_debug, fmt::format("Number of files left: {0}\n", file_names.size()));
 
   if (file_names.empty())
     return mm_io_cptr{};
@@ -80,14 +84,34 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
 
 void
 mm_mpls_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &info) {
+  auto p = p_func();
+
   info.add(mtx::id::playlist,          true);
-  info.add(mtx::id::playlist_duration, m_mpls_parser->get_playlist().duration.to_ns());
-  info.add(mtx::id::playlist_size,     m_total_size);
-  info.add(mtx::id::playlist_chapters, m_mpls_parser->get_chapters().size());
+  info.add(mtx::id::playlist_duration, p->mpls_parser->get_playlist().duration.to_ns());
+  info.add(mtx::id::playlist_size,     p->total_size);
+  info.add(mtx::id::playlist_chapters, p->mpls_parser->get_chapters().size());
 
   auto file_names = nlohmann::json::array();
-  for (auto &file : m_files)
+  for (auto &file : p->files)
     file_names.push_back(file.string());
 
   info.add(mtx::id::playlist_file, file_names);
+}
+
+std::string
+mm_mpls_multi_file_io_c::get_file_name()
+  const {
+  return p_func()->display_file_name;
+}
+
+std::vector<bfs::path> const &
+mm_mpls_multi_file_io_c::get_file_names()
+  const {
+  return p_func()->files;
+}
+
+mtx::bluray::mpls::parser_c const &
+mm_mpls_multi_file_io_c::get_mpls_parser()
+  const {
+  return *p_func()->mpls_parser;
 }

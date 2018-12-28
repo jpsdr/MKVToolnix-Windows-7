@@ -148,7 +148,7 @@ parse_args(std::vector<std::string> &args) {
 
 static void
 parse_file(cli_options_c const &options) {
-  auto in         = mm_file_io_c{options.m_file_name};
+  mm_file_io_c in{options.m_file_name};
   auto file_size  = in.get_size();
   auto chunk_size = !options.m_chunk_size ? file_size : std::min<int64_t>(file_size, options.m_chunk_size);
   auto total_read = 0ll;

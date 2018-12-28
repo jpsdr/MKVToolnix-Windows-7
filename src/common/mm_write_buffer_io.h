@@ -18,16 +18,15 @@
 
 #include "common/mm_io.h"
 
+class mm_write_buffer_io_private_c;
 class mm_write_buffer_io_c: public mm_proxy_io_c {
 protected:
-  memory_cptr m_af_buffer;
-  unsigned char *m_buffer;
-  size_t m_fill;
-  const size_t m_size;
-  debugging_option_c m_debug_seek, m_debug_write;
+  MTX_DECLARE_PRIVATE(mm_write_buffer_io_private_c);
+
+  explicit mm_write_buffer_io_c(mm_write_buffer_io_private_c &p);
 
 public:
-  mm_write_buffer_io_c(mm_io_cptr const &out, size_t buffer_size);
+  mm_write_buffer_io_c(mm_io_cptr const &out, std::size_t buffer_size);
   virtual ~mm_write_buffer_io_c();
 
   virtual uint64 getFilePointer();

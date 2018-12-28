@@ -14,6 +14,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/mm_io_p.h"
 #include "common/mm_stdio.h"
 
 /*
@@ -43,7 +44,7 @@ mm_stdio_c::_read(void *buffer,
 size_t
 mm_stdio_c::_write(const void *buffer,
                    size_t size) {
-  m_cached_size = -1;
+  p_func()->cached_size = -1;
 
   return fwrite(buffer, 1, size, stdout);
 }

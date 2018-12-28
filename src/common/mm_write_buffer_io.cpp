@@ -18,16 +18,20 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
+#include "common/mm_write_buffer_io_p.h"
+
+namespace {
+debugging_option_c s_debug_seek{"write_buffer_io|write_buffer_io_seek"}, s_debug_write{"write_buffer_io|write_buffer_io_write"};
+}
 
 mm_write_buffer_io_c::mm_write_buffer_io_c(mm_io_cptr const &out,
-                                           size_t buffer_size)
-  : mm_proxy_io_c{out}
-  , m_af_buffer(memory_c::alloc(buffer_size))
-  , m_buffer(m_af_buffer->get_buffer())
-  , m_fill(0)
-  , m_size(buffer_size)
-  , m_debug_seek{ "write_buffer_io|write_buffer_io_read"}
-  , m_debug_write{"write_buffer_io|write_buffer_io_write"}
+                                           std::size_t buffer_size)
+  : mm_proxy_io_c{*new mm_write_buffer_io_private_c{out, buffer_size}}
+{
+}
+
+mm_write_buffer_io_c::mm_write_buffer_io_c(mm_write_buffer_io_private_c &p)
+  : mm_proxy_io_c{p}
 {
 }
 
@@ -43,7 +47,7 @@ mm_write_buffer_io_c::open(const std::string &file_name,
 
 uint64
 mm_write_buffer_io_c::getFilePointer() {
-  return mm_proxy_io_c::getFilePointer() + m_fill;
+  return mm_proxy_io_c::getFilePointer() + p_func()->fill;
 }
 
 void
@@ -51,15 +55,15 @@ mm_write_buffer_io_c::setFilePointer(int64 offset,
                                      libebml::seek_mode mode) {
   int64_t new_pos
     = libebml::seek_beginning == mode ? offset
-    : libebml::seek_end       == mode ? m_proxy_io->get_size() + offset // offsets from the end are negative already
-    :                                   getFilePointer()       + offset;
+    : libebml::seek_end       == mode ? p_func()->proxy_io->get_size() + offset // offsets from the end are negative already
+    :                                   getFilePointer()               + offset;
 
   if (new_pos == static_cast<int64_t>(getFilePointer()))
     return;
 
   flush_buffer();
 
-  if (m_debug_seek) {
+  if (s_debug_seek) {
     int64_t previous_pos = mm_proxy_io_c::getFilePointer();
     mxdebug(fmt::format("seek from {0} to {1} diff {2}\n", previous_pos, new_pos, new_pos - previous_pos));
   }
@@ -89,25 +93,27 @@ mm_write_buffer_io_c::_read(void *buffer,
 size_t
 mm_write_buffer_io_c::_write(const void *buffer,
                              size_t size) {
+  auto p = p_func();
+
   size_t avail;
   const char *buf = static_cast<const char *>(buffer);
   size_t remain   = size;
 
   // whole blocks
-  while (remain >= (avail = m_size - m_fill)) {
-    if (m_fill) {
+  while (remain >= (avail = p->size - p->fill)) {
+    if (p->fill) {
       // Fill the buffer in an attempt to defeat potentially
       // lousy OS I/O scheduling
-      memcpy(m_buffer + m_fill, buf, avail);
-      m_fill = m_size;
+      memcpy(p->buffer + p->fill, buf, avail);
+      p->fill = p->size;
       flush_buffer();
       remain -= avail;
       buf    += avail;
 
     } else {
       // write whole blocks, skipping the buffer
-      avail = mm_proxy_io_c::_write(buf, m_size);
-      if (avail != m_size)
+      avail = mm_proxy_io_c::_write(buf, p->size);
+      if (avail != p->size)
         throw mtx::mm_io::insufficient_space_x();
 
       remain -= avail;
@@ -116,25 +122,27 @@ mm_write_buffer_io_c::_write(const void *buffer,
   }
 
   if (remain) {
-    memcpy(m_buffer + m_fill, buf, remain);
-    m_fill += remain;
+    memcpy(p->buffer + p->fill, buf, remain);
+    p->fill += remain;
   }
 
-  m_cached_size = -1;
+  p->cached_size = -1;
 
   return size;
 }
 
 void
 mm_write_buffer_io_c::flush_buffer() {
-  if (!m_fill)
+  auto p = p_func();
+
+  if (!p->fill)
     return;
 
-  size_t written = mm_proxy_io_c::_write(m_buffer, m_fill);
-  size_t fill    = m_fill;
-  m_fill         = 0;
+  size_t written = mm_proxy_io_c::_write(p->buffer, p->fill);
+  size_t fill    = p->fill;
+  p->fill         = 0;
 
-  mxdebug_if(m_debug_write, fmt::format("flush_buffer() at {0} for {1} written {2}\n", mm_proxy_io_c::getFilePointer() - written, fill, written));
+  mxdebug_if(s_debug_write, fmt::format("flush_buffer() at {0} for {1} written {2}\n", mm_proxy_io_c::getFilePointer() - written, fill, written));
 
   if (written != fill)
     throw mtx::mm_io::insufficient_space_x();
@@ -142,5 +150,5 @@ mm_write_buffer_io_c::flush_buffer() {
 
 void
 mm_write_buffer_io_c::discard_buffer() {
-  m_fill = 0;
+  p_func()->fill = 0;
 }

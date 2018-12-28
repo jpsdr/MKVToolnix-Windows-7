@@ -509,7 +509,7 @@ Tab::loadFromMplsFile() {
   auto error    = QString{};
 
   try {
-    auto in     = mm_file_io_c{to_utf8(p->fileName)};
+    mm_file_io_c in{to_utf8(p->fileName)};
     auto parser = ::mtx::bluray::mpls::parser_c{};
 
     parser.enable_dropping_last_entry_if_at_end(Util::Settings::get().m_dropLastChapterFromBlurayPlaylist);
@@ -646,7 +646,7 @@ Tab::saveAsXmlImpl(bool requireNewFileName) {
 
     try {
       auto chapters = p->chapterModel->allChapters();
-      auto out      = mm_file_io_c{to_utf8(newFileName), MODE_CREATE};
+      mm_file_io_c out{to_utf8(newFileName), MODE_CREATE};
       mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, out);
 
     } catch (mtx::mm_io::exception &) {
