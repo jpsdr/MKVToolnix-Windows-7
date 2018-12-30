@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QMenu>
+
 #include "common/bitvalue.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
@@ -64,6 +66,7 @@ Tab::setupOutputControls() {
   connect(ui->linkFiles,                     &QPushButton::clicked,                                                                            this, &Tab::onLinkFilesClicked);
   connect(ui->nextSegmentUID,                &QLineEdit::textChanged,                                                                          this, &Tab::onNextSegmentUIDChanged);
   connect(ui->output,                        &QLineEdit::textChanged,                                                                          this, &Tab::setDestination);
+  connect(ui->outputRecentlyUsed,            &QPushButton::clicked,                                                                            this, &Tab::showRecentlyUsedOutputDirs);
   connect(ui->previousSegmentUID,            &QLineEdit::textChanged,                                                                          this, &Tab::onPreviousSegmentUIDChanged);
   connect(ui->segmentInfo,                   &QLineEdit::textChanged,                                                                          this, &Tab::onSegmentInfoChanged);
   connect(ui->segmentUIDs,                   &QLineEdit::textChanged,                                                                          this, &Tab::onSegmentUIDsChanged);
@@ -90,13 +93,12 @@ Tab::moveOutputFileNameToGlobal() {
   if (!ui->hlOutput)
     return;
 
-  ui->outputLabel->setParent(ui->gbOutputFile);
-  ui->output->setParent(ui->gbOutputFile);
-  ui->browseOutput->setParent(ui->gbOutputFile);
+  auto widgets = QList<QWidget *>{} << ui->outputLabel << ui->output << ui->browseOutput << ui->outputRecentlyUsed;
 
-  ui->outputLabel->show();
-  ui->output->show();
-  ui->browseOutput->show();
+  for (auto const &widget : widgets) {
+    widget->setParent(ui->gbOutputFile);
+    widget->show();
+  }
 
   delete ui->hlOutput;
   ui->hlOutput = nullptr;
@@ -106,9 +108,8 @@ Tab::moveOutputFileNameToGlobal() {
   layout->setSpacing(6);
   layout->setContentsMargins(6, 6, 6, 6);
 
-  layout->addWidget(ui->outputLabel);
-  layout->addWidget(ui->output);
-  layout->addWidget(ui->browseOutput);
+  for (auto const &widget : widgets)
+    layout->addWidget(widget);
 
   ui->gbOutputFile->show();
 }
@@ -122,18 +123,18 @@ Tab::moveOutputFileNameToOutputTab() {
 
   ui->gbOutputFile->hide();
 
-  ui->outputLabel->setParent(ui->generalBox);
-  ui->output->setParent(ui->generalBox);
-  ui->browseOutput->setParent(ui->generalBox);
+  auto widgets = QList<QWidget *>{} << ui->outputLabel << ui->output << ui->browseOutput << ui->outputRecentlyUsed;
 
-  ui->outputLabel->show();
-  ui->output->show();
-  ui->browseOutput->show();
+  for (auto const &widget : widgets) {
+    widget->setParent(ui->generalBox);
+    widget->show();
+  }
 
   ui->hlOutput = new QHBoxLayout{ui->gbOutputFile};
   ui->hlOutput->setSpacing(6);
   ui->hlOutput->addWidget(ui->output);
   ui->hlOutput->addWidget(ui->browseOutput);
+  ui->hlOutput->addWidget(ui->outputRecentlyUsed);
 
   ui->generalGridLayout->addWidget(ui->outputLabel, 1, 0, 1, 1);
   ui->generalGridLayout->addLayout(ui->hlOutput,    1, 1, 1, 1);
@@ -668,6 +669,42 @@ Tab::onChapterGenerationNameTemplateChanged() {
 void
 Tab::onChapterGenerationIntervalChanged() {
   m_config.m_chapterGenerationInterval = ui->chapterGenerationInterval->text();
+}
+
+void
+Tab::showRecentlyUsedOutputDirs() {
+  auto &reg   = Util::Settings::get();
+  auto &items = reg.m_mergeLastOutputDirs;
+  auto path   = QFileInfo{ m_config.m_destination }.path();
+
+  if (!path.isEmpty())
+    items.add(QDir::toNativeSeparators(path));
+
+  if (items.isEmpty())
+    return;
+
+  QMenu menu{this};
+
+  for (auto const &dir : Util::Settings::get().m_mergeLastOutputDirs.items()) {
+    auto action = new QAction{&menu};
+    action->setText(dir);
+
+    connect(action, &QAction::triggered, [this, dir]() { changeOutputDirectoryTo(dir); });
+
+    menu.addAction(action);
+  }
+
+  menu.exec(QCursor::pos());
+
+}
+
+void
+Tab::changeOutputDirectoryTo(QString const &directory) {
+  auto oldFileName = QFileInfo{ m_config.m_destination }.fileName();
+  auto newFileName = !oldFileName.isEmpty() ? oldFileName : Q("%1.%2").arg(QY("unnamed")).arg(suggestOutputFileNameExtension());
+  auto newFilePath = Q("%1/%2").arg(directory).arg(newFileName);
+
+  ui->output->setText(QDir::toNativeSeparators(newFilePath));
 }
 
 }}}

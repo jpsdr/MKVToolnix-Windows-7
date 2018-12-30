@@ -19,6 +19,8 @@ public:
   RecentlyUsedStrings(int numEntries);
   virtual ~RecentlyUsedStrings();
 
+  bool isEmpty() const;
+
   QStringList items() const;
   void setItems(QStringList const &newItems);
 

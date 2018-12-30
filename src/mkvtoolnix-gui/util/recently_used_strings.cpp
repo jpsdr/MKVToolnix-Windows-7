@@ -59,4 +59,10 @@ RecentlyUsedStrings::clamp() {
     p->m_items.erase(p->m_items.begin() + p->m_numItems, p->m_items.end());
 }
 
+bool
+RecentlyUsedStrings::isEmpty()
+  const {
+  return p_func()->m_items.isEmpty();
+}
+
 }}}

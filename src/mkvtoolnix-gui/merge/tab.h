@@ -203,6 +203,8 @@ public slots:
 
   virtual void onTitleChanged(QString newValue);
   virtual void onBrowseOutput();
+  virtual void showRecentlyUsedOutputDirs();
+  virtual void changeOutputDirectoryTo(QString const &directory);
   virtual void onGlobalTagsChanged(QString newValue);
   virtual void onBrowseGlobalTags();
   virtual void onSegmentInfoChanged(QString newValue);

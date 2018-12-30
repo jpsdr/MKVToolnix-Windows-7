@@ -11,6 +11,10 @@
   "relative output directory" and "fixed output directory" settings are now
   saved. The corresponding settings have been changed into combo boxes
   allowing quick access to those recent values.
+* MKVToolNix GUI: multiplexer: a new button was added next to the "destination
+  file" controls. Clicking it shows a menu with the ten most recently used
+  output directories. Selecting one of them will change the destination file
+  to the selected directory keeping the file name. Implements #2468.
 
 ## Bug fixes
 

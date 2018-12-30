@@ -453,6 +453,9 @@ Tab::addToJobQueue(bool startNow,
 
   m_savedState = currentState();
 
+  cfg.m_mergeLastOutputDirs.add(QDir::toNativeSeparators(QFileInfo{ m_config.m_destination }.path()));
+  cfg.save();
+
   auto action = clearSettings ? *clearSettings : Util::Settings::get().m_clearMergeSettings;
   handleClearingMergeSettings(action);
 }
