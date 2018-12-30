@@ -107,9 +107,14 @@ mm_file_io_c::close() {
   auto p = p_func();
 
   if (p->file) {
+    if (p->mode != MODE_READ)
+      fflush(p->file);
+
     fclose(p->file);
     p->file = nullptr;
   }
+
+  p->file_name.clear();
 }
 
 bool
