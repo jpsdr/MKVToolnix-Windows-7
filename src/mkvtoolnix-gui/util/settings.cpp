@@ -19,6 +19,7 @@
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/settings_names.h"
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -187,33 +188,33 @@ Settings::convertOldSettings() {
   auto reg = registry();
 
   // mergeAlwaysAddDroppedFiles → mergeAddingAppendingFilesPolicy
-  reg->beginGroup("settings");
-  auto mergeAlwaysAddDroppedFiles = reg->value("mergeAlwaysAddDroppedFiles");
+  reg->beginGroup(s_grpSettings);
+  auto mergeAlwaysAddDroppedFiles = reg->value(s_valMergeAlwaysAddDroppedFiles);
 
   if (mergeAlwaysAddDroppedFiles.isValid())
-    reg->setValue("mergeAddingAppendingFilesPolicy", static_cast<int>(MergeAddingAppendingFilesPolicy::Add));
+    reg->setValue(s_valMergeAddingAppendingFilesPolicy, static_cast<int>(MergeAddingAppendingFilesPolicy::Add));
 
-  reg->remove("mergeAlwaysAddDroppedFiles");
+  reg->remove(s_valMergeAlwaysAddDroppedFiles);
   reg->endGroup();
 
   // defaultTrackLanguage → defaultAudioTrackLanguage, defaultVideoTrackLanguage, defaultSubtitleTrackLanguage;
-  reg->beginGroup("settings");
+  reg->beginGroup(s_grpSettings);
 
-  auto defaultTrackLanguage = reg->value("defaultTrackLanguage");
-  reg->remove("defaultTrackLanguage");
+  auto defaultTrackLanguage = reg->value(s_valDefaultTrackLanguage);
+  reg->remove(s_valDefaultTrackLanguage);
 
   if (defaultTrackLanguage.isValid()) {
-    reg->setValue("defaultAudioTrackLanguage",    defaultTrackLanguage.toString());
-    reg->setValue("defaultVideoTrackLanguage",    defaultTrackLanguage.toString());
-    reg->setValue("defaultSubtitleTrackLanguage", defaultTrackLanguage.toString());
+    reg->setValue(s_valDefaultAudioTrackLanguage,    defaultTrackLanguage.toString());
+    reg->setValue(s_valDefaultVideoTrackLanguage,    defaultTrackLanguage.toString());
+    reg->setValue(s_valDefaultSubtitleTrackLanguage, defaultTrackLanguage.toString());
   }
 
   // mergeUseVerticalInputLayout → mergeTrackPropertiesLayout
-  auto mergeUseVerticalInputLayout = reg->value("mergeUseVerticalInputLayout");
-  reg->remove("mergeUseVerticalInputLayout");
+  auto mergeUseVerticalInputLayout = reg->value(s_valMergeUseVerticalInputLayout);
+  reg->remove(s_valMergeUseVerticalInputLayout);
 
   if (mergeUseVerticalInputLayout.isValid())
-    reg->setValue("mergeTrackPropertiesLayout", static_cast<int>(mergeUseVerticalInputLayout.toBool() ? TrackPropertiesLayout::VerticalTabWidget : TrackPropertiesLayout::HorizontalScrollArea));
+    reg->setValue(s_valMergeTrackPropertiesLayout, static_cast<int>(mergeUseVerticalInputLayout.toBool() ? TrackPropertiesLayout::VerticalTabWidget : TrackPropertiesLayout::HorizontalScrollArea));
 
   reg->endGroup();
 }
@@ -227,92 +228,92 @@ Settings::load() {
   auto defaultFont = defaultUiFont();
   boost::optional<QVariant> enableMuxingTracksByTheseTypes;
 
-  reg.beginGroup("info");
-  auto guiVersion                      = reg.value("guiVersion").toString();
+  reg.beginGroup(s_grpInfo);
+  auto guiVersion                      = reg.value(s_valGuiVersion).toString();
   reg.endGroup();
 
-  reg.beginGroup("settings");
-  m_priority                           = static_cast<ProcessPriority>(reg.value("priority", static_cast<int>(NormalPriority)).toInt());
-  m_probeRangePercentage               = reg.value("probeRangePercentage", 0.3).toDouble();
-  m_tabPosition                        = static_cast<QTabWidget::TabPosition>(reg.value("tabPosition", static_cast<int>(QTabWidget::North)).toInt());
-  m_lastOpenDir                        = QDir{reg.value("lastOpenDir").toString()};
-  m_lastOutputDir                      = QDir{reg.value("lastOutputDir").toString()};
-  m_lastConfigDir                      = QDir{reg.value("lastConfigDir").toString()};
+  reg.beginGroup(s_grpSettings);
+  m_priority                           = static_cast<ProcessPriority>(reg.value(s_valPriority, static_cast<int>(NormalPriority)).toInt());
+  m_probeRangePercentage               = reg.value(s_valProbeRangePercentage, 0.3).toDouble();
+  m_tabPosition                        = static_cast<QTabWidget::TabPosition>(reg.value(s_valTabPosition, static_cast<int>(QTabWidget::North)).toInt());
+  m_lastOpenDir                        = QDir{reg.value(s_valLastOpenDir).toString()};
+  m_lastOutputDir                      = QDir{reg.value(s_valLastOutputDir).toString()};
+  m_lastConfigDir                      = QDir{reg.value(s_valLastConfigDir).toString()};
 
-  m_oftenUsedLanguages                 = reg.value("oftenUsedLanguages").toStringList();
-  m_oftenUsedCountries                 = reg.value("oftenUsedCountries").toStringList();
-  m_oftenUsedCharacterSets             = reg.value("oftenUsedCharacterSets").toStringList();
+  m_oftenUsedLanguages                 = reg.value(s_valOftenUsedLanguages).toStringList();
+  m_oftenUsedCountries                 = reg.value(s_valOftenUsedCountries).toStringList();
+  m_oftenUsedCharacterSets             = reg.value(s_valOftenUsedCharacterSets).toStringList();
 
-  m_oftenUsedLanguagesOnly             = reg.value("oftenUsedLanguagesOnly",     false).toBool();;
-  m_oftenUsedCountriesOnly             = reg.value("oftenUsedCountriesOnly",     false).toBool();;
-  m_oftenUsedCharacterSetsOnly         = reg.value("oftenUsedCharacterSetsOnly", false).toBool();;
+  m_oftenUsedLanguagesOnly             = reg.value(s_valOftenUsedLanguagesOnly,     false).toBool();;
+  m_oftenUsedCountriesOnly             = reg.value(s_valOftenUsedCountriesOnly,     false).toBool();;
+  m_oftenUsedCharacterSetsOnly         = reg.value(s_valOftenUsedCharacterSetsOnly, false).toBool();;
 
-  m_scanForPlaylistsPolicy             = static_cast<ScanForPlaylistsPolicy>(reg.value("scanForPlaylistsPolicy", static_cast<int>(AskBeforeScanning)).toInt());
-  m_minimumPlaylistDuration            = reg.value("minimumPlaylistDuration", 120).toUInt();
+  m_scanForPlaylistsPolicy             = static_cast<ScanForPlaylistsPolicy>(reg.value(s_valScanForPlaylistsPolicy, static_cast<int>(AskBeforeScanning)).toInt());
+  m_minimumPlaylistDuration            = reg.value(s_valMinimumPlaylistDuration, 120).toUInt();
 
-  m_setAudioDelayFromFileName          = reg.value("setAudioDelayFromFileName", true).toBool();
-  m_autoSetFileTitle                   = reg.value("autoSetFileTitle",          true).toBool();
-  m_autoClearFileTitle                 = reg.value("autoClearFileTitle",        m_autoSetFileTitle).toBool();
-  m_clearMergeSettings                 = static_cast<ClearMergeSettingsAction>(reg.value("clearMergeSettings", static_cast<int>(ClearMergeSettingsAction::None)).toInt());
-  m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
-  m_disableDefaultTrackForSubtitles    = reg.value("disableDefaultTrackForSubtitles",    false).toBool();
-  m_mergeEnableDialogNormGainRemoval   = reg.value("mergeEnableDialogNormGainRemoval",   false).toBool();
-  m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls",  true).toBool();
-  m_mergePredefinedTrackNames          = reg.value("mergePredefinedTrackNames").toStringList();
-  m_mergePredefinedSplitSizes          = reg.value("mergePredefinedSplitSizes").toStringList();
-  m_mergePredefinedSplitDurations      = reg.value("mergePredefinedSplitDurations").toStringList();
-  m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value("mergeTrackPropertiesLayout", static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
-  m_mergeAddingAppendingFilesPolicy    = static_cast<MergeAddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
-  m_mergeLastAddingAppendingDecision   = static_cast<MergeAddingAppendingFilesPolicy>(reg.value("mergeLastAddingAppendingDecision", static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
-  m_mergeWarnMissingAudioTrack         = static_cast<MergeMissingAudioTrackPolicy>(reg.value("mergeWarnMissingAudioTrack", static_cast<int>(MergeMissingAudioTrackPolicy::IfAudioTrackPresent)).toInt());
-  m_headerEditorDroppedFilesPolicy     = static_cast<HeaderEditorDroppedFilesPolicy>(reg.value("headerEditorDroppedFilesPolicy", static_cast<int>(HeaderEditorDroppedFilesPolicy::Ask)).toInt());
+  m_setAudioDelayFromFileName          = reg.value(s_valSetAudioDelayFromFileName, true).toBool();
+  m_autoSetFileTitle                   = reg.value(s_valAutoSetFileTitle,          true).toBool();
+  m_autoClearFileTitle                 = reg.value(s_valAutoClearFileTitle,        m_autoSetFileTitle).toBool();
+  m_clearMergeSettings                 = static_cast<ClearMergeSettingsAction>(reg.value(s_valClearMergeSettings, static_cast<int>(ClearMergeSettingsAction::None)).toInt());
+  m_disableCompressionForAllTrackTypes = reg.value(s_valDisableCompressionForAllTrackTypes, false).toBool();
+  m_disableDefaultTrackForSubtitles    = reg.value(s_valDisableDefaultTrackForSubtitles,    false).toBool();
+  m_mergeEnableDialogNormGainRemoval   = reg.value(s_valMergeEnableDialogNormGainRemoval,   false).toBool();
+  m_mergeAlwaysShowOutputFileControls  = reg.value(s_valMergeAlwaysShowOutputFileControls,  true).toBool();
+  m_mergePredefinedTrackNames          = reg.value(s_valMergePredefinedTrackNames).toStringList();
+  m_mergePredefinedSplitSizes          = reg.value(s_valMergePredefinedSplitSizes).toStringList();
+  m_mergePredefinedSplitDurations      = reg.value(s_valMergePredefinedSplitDurations).toStringList();
+  m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value(s_valMergeTrackPropertiesLayout, static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
+  m_mergeAddingAppendingFilesPolicy    = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeAddingAppendingFilesPolicy, static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
+  m_mergeLastAddingAppendingDecision   = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeLastAddingAppendingDecision, static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
+  m_mergeWarnMissingAudioTrack         = static_cast<MergeMissingAudioTrackPolicy>(reg.value(s_valMergeWarnMissingAudioTrack, static_cast<int>(MergeMissingAudioTrackPolicy::IfAudioTrackPresent)).toInt());
+  m_headerEditorDroppedFilesPolicy     = static_cast<HeaderEditorDroppedFilesPolicy>(reg.value(s_valHeaderEditorDroppedFilesPolicy, static_cast<int>(HeaderEditorDroppedFilesPolicy::Ask)).toInt());
 
-  m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
-  m_autoDestinationOnlyForVideoFiles   = reg.value("autoDestinationOnlyForVideoFiles", false).toBool();
-  m_relativeOutputDir                  = QDir{reg.value("relativeOutputDir").toString()};
-  m_fixedOutputDir                     = QDir{reg.value("fixedOutputDir").toString()};
-  m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",   true).toBool();
-  m_autoClearOutputFileName            = reg.value("autoClearOutputFileName", m_outputFileNamePolicy != DontSetOutputFileName).toBool();
+  m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value(s_valOutputFileNamePolicy, static_cast<int>(ToSameAsFirstInputFile)).toInt());
+  m_autoDestinationOnlyForVideoFiles   = reg.value(s_valAutoDestinationOnlyForVideoFiles, false).toBool();
+  m_relativeOutputDir                  = QDir{reg.value(s_valRelativeOutputDir).toString()};
+  m_fixedOutputDir                     = QDir{reg.value(s_valFixedOutputDir).toString()};
+  m_uniqueOutputFileNames              = reg.value(s_valUniqueOutputFileNames,   true).toBool();
+  m_autoClearOutputFileName            = reg.value(s_valAutoClearOutputFileName, m_outputFileNamePolicy != DontSetOutputFileName).toBool();
 
-  m_enableMuxingTracksByLanguage       = reg.value("enableMuxingTracksByLanguage", false).toBool();
-  m_enableMuxingAllVideoTracks         = reg.value("enableMuxingAllVideoTracks", true).toBool();
-  m_enableMuxingAllAudioTracks         = reg.value("enableMuxingAllAudioTracks", false).toBool();
-  m_enableMuxingAllSubtitleTracks      = reg.value("enableMuxingAllSubtitleTracks", false).toBool();
-  m_enableMuxingTracksByTheseLanguages = reg.value("enableMuxingTracksByTheseLanguages").toStringList();
+  m_enableMuxingTracksByLanguage       = reg.value(s_valEnableMuxingTracksByLanguage, false).toBool();
+  m_enableMuxingAllVideoTracks         = reg.value(s_valEnableMuxingAllVideoTracks, true).toBool();
+  m_enableMuxingAllAudioTracks         = reg.value(s_valEnableMuxingAllAudioTracks, false).toBool();
+  m_enableMuxingAllSubtitleTracks      = reg.value(s_valEnableMuxingAllSubtitleTracks, false).toBool();
+  m_enableMuxingTracksByTheseLanguages = reg.value(s_valEnableMuxingTracksByTheseLanguages).toStringList();
 
   if (reg.contains("enableMuxingTracksByTheseTypes"))
-    enableMuxingTracksByTheseTypes     = reg.value("enableMuxingTracksByTheseTypes");
+    enableMuxingTracksByTheseTypes     = reg.value(s_valEnableMuxingTracksByTheseTypes);
 
-  m_useDefaultJobDescription           = reg.value("useDefaultJobDescription",       false).toBool();
-  m_showOutputOfAllJobs                = reg.value("showOutputOfAllJobs",            true).toBool();
-  m_switchToJobOutputAfterStarting     = reg.value("switchToJobOutputAfterStarting", false).toBool();
-  m_resetJobWarningErrorCountersOnExit = reg.value("resetJobWarningErrorCountersOnExit", false).toBool();
-  m_jobRemovalPolicy                   = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
-  m_removeOldJobs                      = reg.value("removeOldJobs",                                  true).toBool();
-  m_removeOldJobsDays                  = reg.value("removeOldJobsDays",                              14).toInt();
+  m_useDefaultJobDescription           = reg.value(s_valUseDefaultJobDescription,       false).toBool();
+  m_showOutputOfAllJobs                = reg.value(s_valShowOutputOfAllJobs,            true).toBool();
+  m_switchToJobOutputAfterStarting     = reg.value(s_valSwitchToJobOutputAfterStarting, false).toBool();
+  m_resetJobWarningErrorCountersOnExit = reg.value(s_valResetJobWarningErrorCountersOnExit, false).toBool();
+  m_jobRemovalPolicy                   = static_cast<JobRemovalPolicy>(reg.value(s_valJobRemovalPolicy, static_cast<int>(JobRemovalPolicy::Never)).toInt());
+  m_removeOldJobs                      = reg.value(s_valRemoveOldJobs,                                  true).toBool();
+  m_removeOldJobsDays                  = reg.value(s_valRemoveOldJobsDays,                              14).toInt();
 
-  m_showToolSelector                   = reg.value("showToolSelector", true).toBool();
-  m_warnBeforeClosingModifiedTabs      = reg.value("warnBeforeClosingModifiedTabs", true).toBool();
-  m_warnBeforeAbortingJobs             = reg.value("warnBeforeAbortingJobs", true).toBool();
-  m_warnBeforeOverwriting              = reg.value("warnBeforeOverwriting",  true).toBool();
-  m_showMoveUpDownButtons              = reg.value("showMoveUpDownButtons", false).toBool();
+  m_showToolSelector                   = reg.value(s_valShowToolSelector, true).toBool();
+  m_warnBeforeClosingModifiedTabs      = reg.value(s_valWarnBeforeClosingModifiedTabs, true).toBool();
+  m_warnBeforeAbortingJobs             = reg.value(s_valWarnBeforeAbortingJobs, true).toBool();
+  m_warnBeforeOverwriting              = reg.value(s_valWarnBeforeOverwriting,  true).toBool();
+  m_showMoveUpDownButtons              = reg.value(s_valShowMoveUpDownButtons, false).toBool();
 
-  m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM:2>")).toString();
-  m_dropLastChapterFromBlurayPlaylist  = reg.value("dropLastChapterFromBlurayPlaylist", true).toBool();
-  m_ceTextFileCharacterSet             = reg.value("ceTextFileCharacterSet").toString();
+  m_chapterNameTemplate                = reg.value(s_valChapterNameTemplate, QY("Chapter <NUM:2>")).toString();
+  m_dropLastChapterFromBlurayPlaylist  = reg.value(s_valDropLastChapterFromBlurayPlaylist, true).toBool();
+  m_ceTextFileCharacterSet             = reg.value(s_valCeTextFileCharacterSet).toString();
 
-  m_mediaInfoExe                       = reg.value("mediaInfoExe", Q("mediainfo-gui")).toString();
+  m_mediaInfoExe                       = reg.value(s_valMediaInfoExe, Q("mediainfo-gui")).toString();
 
 #if defined(HAVE_LIBINTL_H)
-  m_uiLocale                           = reg.value("uiLocale").toString();
+  m_uiLocale                           = reg.value(s_valUiLocale).toString();
 #endif
-  m_uiDisableHighDPIScaling            = reg.value("uiDisableHighDPIScaling").toBool();
-  m_uiFontFamily                       = reg.value("uiFontFamily",    defaultFont.family()).toString();
-  m_uiFontPointSize                    = reg.value("uiFontPointSize", defaultFont.pointSize()).toInt();
+  m_uiDisableHighDPIScaling            = reg.value(s_valUiDisableHighDPIScaling).toBool();
+  m_uiFontFamily                       = reg.value(s_valUiFontFamily,    defaultFont.family()).toString();
+  m_uiFontPointSize                    = reg.value(s_valUiFontPointSize, defaultFont.pointSize()).toInt();
 
-  reg.beginGroup("updates");
-  m_checkForUpdates                    = reg.value("checkForUpdates", true).toBool();
-  m_lastUpdateCheck                    = reg.value("lastUpdateCheck", QDateTime{}).toDateTime();
+  reg.beginGroup(s_grpUpdates);
+  m_checkForUpdates                    = reg.value(s_valCheckForUpdates, true).toBool();
+  m_lastUpdateCheck                    = reg.value(s_valLastUpdateCheck, QDateTime{}).toDateTime();
   reg.endGroup();               // settings.updates
   reg.endGroup();               // settings
 
@@ -382,29 +383,29 @@ Settings::setDefaults(boost::optional<QVariant> enableMuxingTracksByTheseTypes) 
 void
 Settings::loadDefaults(QSettings &reg,
                        QString const &guiVersion) {
-  reg.beginGroup("defaults");
-  m_defaultAudioTrackLanguage          = reg.value("defaultAudioTrackLanguage",    Q("und")).toString();
-  m_defaultVideoTrackLanguage          = reg.value("defaultVideoTrackLanguage",    Q("und")).toString();
-  m_defaultSubtitleTrackLanguage       = reg.value("defaultSubtitleTrackLanguage", Q("und")).toString();
-  m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value("whenToSetDefaultLanguage",     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
-  m_defaultChapterLanguage             = reg.value("defaultChapterLanguage", Q("und")).toString();
-  m_defaultChapterCountry              = Util::mapToTopLevelCountryCode(reg.value("defaultChapterCountry").toString());
-  auto subtitleCharset                 = reg.value("defaultSubtitleCharset").toString();
+  reg.beginGroup(s_grpDefaults);
+  m_defaultAudioTrackLanguage          = reg.value(s_valDefaultAudioTrackLanguage,    Q("und")).toString();
+  m_defaultVideoTrackLanguage          = reg.value(s_valDefaultVideoTrackLanguage,    Q("und")).toString();
+  m_defaultSubtitleTrackLanguage       = reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString();
+  m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
+  m_defaultChapterLanguage             = reg.value(s_valDefaultChapterLanguage, Q("und")).toString();
+  m_defaultChapterCountry              = Util::mapToTopLevelCountryCode(reg.value(s_valDefaultChapterCountry).toString());
+  auto subtitleCharset                 = reg.value(s_valDefaultSubtitleCharset).toString();
   m_defaultSubtitleCharset             = guiVersion.isEmpty() && (subtitleCharset == Q("ISO-8859-15")) ? Q("") : subtitleCharset; // Fix for a bug in versions prior to 8.2.0.
-  m_defaultAdditionalMergeOptions      = reg.value("defaultAdditionalMergeOptions").toString();
+  m_defaultAdditionalMergeOptions      = reg.value(s_valDefaultAdditionalMergeOptions).toString();
   reg.endGroup();               // defaults
 }
 
 void
 Settings::loadDerivingTrackLanguagesSettings(QSettings &reg) {
-  reg.beginGroup("settings");
-  reg.beginGroup("derivingTrackLanguagesFromFileNames");
+  reg.beginGroup(s_grpSettings);
+  reg.beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
 
-  m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("audioPolicy",    static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
-  m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("videoPolicy",    static_cast<int>(DeriveLanguageFromFileNamePolicy::Never)).toInt());
-  m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value("subtitlePolicy", static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
-  m_regexForDerivingTrackLanguagesFromFileNames   = reg.value("customRegex").toString();
-  m_recognizedTrackLanguagesInFileNames           = reg.value("recognizedTrackLanguagesInFileNames").toStringList();
+  m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valAudioPolicy,    static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
+  m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valVideoPolicy,    static_cast<int>(DeriveLanguageFromFileNamePolicy::Never)).toInt());
+  m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valSubtitlePolicy, static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
+  m_regexForDerivingTrackLanguagesFromFileNames   = reg.value(s_valCustomRegex).toString();
+  m_recognizedTrackLanguagesInFileNames           = reg.value(s_valRecognizedTrackLanguagesInFileNames).toStringList();
 
   reg.endGroup();
   reg.endGroup();
@@ -412,7 +413,7 @@ Settings::loadDerivingTrackLanguagesSettings(QSettings &reg) {
 
 void
 Settings::loadSplitterSizes(QSettings &reg) {
-  reg.beginGroup("splitterSizes");
+  reg.beginGroup(s_grpSplitterSizes);
 
   m_splitterSizes.clear();
   for (auto const &name : reg.childKeys()) {
@@ -426,17 +427,17 @@ Settings::loadSplitterSizes(QSettings &reg) {
 
 void
 Settings::loadDefaultInfoJobSettings(QSettings &reg) {
-  reg.beginGroup("settings");
-  reg.beginGroup("info");
-  reg.beginGroup("defaultJobSettings");
+  reg.beginGroup(s_grpSettings);
+  reg.beginGroup(s_grpInfo);
+  reg.beginGroup(s_grpDefaultJobSettings);
 
   auto &s          = m_defaultInfoJobSettings;
-  s.m_mode         = static_cast<Info::JobSettings::Mode>(     reg.value("mode",      static_cast<int>(Info::JobSettings::Mode::Tree))                   .toInt());
-  s.m_verbosity    = static_cast<Info::JobSettings::Verbosity>(reg.value("verbosity", static_cast<int>(Info::JobSettings::Verbosity::StopAtFirstCluster)).toInt());
-  s.m_hexDumps     = static_cast<Info::JobSettings::HexDumps>( reg.value("hexDumps",  static_cast<int>(Info::JobSettings::HexDumps::None))               .toInt());
-  s.m_checksums    = reg.value("checksums").toBool();
-  s.m_trackInfo    = reg.value("trackInfo").toBool();
-  s.m_hexPositions = reg.value("hexPositions").toBool();
+  s.m_mode         = static_cast<Info::JobSettings::Mode>(     reg.value(s_valMode,      static_cast<int>(Info::JobSettings::Mode::Tree))                   .toInt());
+  s.m_verbosity    = static_cast<Info::JobSettings::Verbosity>(reg.value(s_valVerbosity, static_cast<int>(Info::JobSettings::Verbosity::StopAtFirstCluster)).toInt());
+  s.m_hexDumps     = static_cast<Info::JobSettings::HexDumps>( reg.value(s_valHexDumps,  static_cast<int>(Info::JobSettings::HexDumps::None))               .toInt());
+  s.m_checksums    = reg.value(s_valChecksums).toBool();
+  s.m_trackInfo    = reg.value(s_valTrackInfo).toBool();
+  s.m_hexPositions = reg.value(s_valHexPositions).toBool();
 
   reg.endGroup();
   reg.endGroup();
@@ -447,7 +448,7 @@ void
 Settings::loadRunProgramConfigurations(QSettings &reg) {
   m_runProgramConfigurations.clear();
 
-  reg.beginGroup("runProgramConfigurations");
+  reg.beginGroup(s_grpRunProgramConfigurations);
 
   auto groups = reg.childGroups();
   groups.sort();
@@ -456,14 +457,14 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
     auto cfg = std::make_shared<RunProgramConfig>();
 
     reg.beginGroup(group);
-    cfg->m_active      = reg.value("active", true).toBool();
-    cfg->m_name        = reg.value("name").toString();
-    auto type          = reg.value("type", static_cast<int>(RunProgramType::ExecuteProgram)).toInt();
+    cfg->m_active      = reg.value(s_valActive, true).toBool();
+    cfg->m_name        = reg.value(s_valName).toString();
+    auto type          = reg.value(s_valType, static_cast<int>(RunProgramType::ExecuteProgram)).toInt();
     cfg->m_type        = (type > static_cast<int>(RunProgramType::Min)) && (type < static_cast<int>(RunProgramType::Max)) ? static_cast<RunProgramType>(type) : RunProgramType::Default;
-    cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value("forEvents").toInt());
-    cfg->m_commandLine = reg.value("commandLine").toStringList();
-    cfg->m_audioFile   = reg.value("audioFile").toString();
-    cfg->m_volume      = std::min(reg.value("volume", 50).toUInt(), 100u);
+    cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value(s_valForEvents).toInt());
+    cfg->m_commandLine = reg.value(s_valCommandLine).toStringList();
+    cfg->m_audioFile   = reg.value(s_valAudioFile).toString();
+    cfg->m_volume      = std::min(reg.value(s_valVolume, 50).toUInt(), 100u);
     reg.endGroup();
 
     if (!cfg->m_active || cfg->isValid())
@@ -498,7 +499,7 @@ Settings::addDefaultRunProgramConfigurationForType(QSettings &reg,
 
 void
 Settings::addDefaultRunProgramConfigurations(QSettings &reg) {
-  reg.beginGroup("runProgramConfigurations");
+  reg.beginGroup(s_grpRunProgramConfigurations);
 
   auto numConfigurationsBefore = m_runProgramConfigurations.count();
 
@@ -558,88 +559,88 @@ Settings::save()
   for (auto type : m_enableMuxingTracksByTheseTypes)
     enableMuxingTracksByTheseTypes << static_cast<int>(type);
 
-  reg.beginGroup("info");
-  reg.setValue("guiVersion",                         Q(get_current_version().to_string()));
+  reg.beginGroup(s_grpInfo);
+  reg.setValue(s_valGuiVersion,                         Q(get_current_version().to_string()));
   reg.endGroup();
 
-  reg.beginGroup("settings");
-  reg.setValue("priority",                           static_cast<int>(m_priority));
-  reg.setValue("probeRangePercentage",               m_probeRangePercentage);
-  reg.setValue("tabPosition",                        static_cast<int>(m_tabPosition));
-  reg.setValue("lastOpenDir",                        m_lastOpenDir.path());
-  reg.setValue("lastOutputDir",                      m_lastOutputDir.path());
-  reg.setValue("lastConfigDir",                      m_lastConfigDir.path());
+  reg.beginGroup(s_grpSettings);
+  reg.setValue(s_valPriority,                           static_cast<int>(m_priority));
+  reg.setValue(s_valProbeRangePercentage,               m_probeRangePercentage);
+  reg.setValue(s_valTabPosition,                        static_cast<int>(m_tabPosition));
+  reg.setValue(s_valLastOpenDir,                        m_lastOpenDir.path());
+  reg.setValue(s_valLastOutputDir,                      m_lastOutputDir.path());
+  reg.setValue(s_valLastConfigDir,                      m_lastConfigDir.path());
 
-  reg.setValue("oftenUsedLanguages",                 m_oftenUsedLanguages);
-  reg.setValue("oftenUsedCountries",                 m_oftenUsedCountries);
-  reg.setValue("oftenUsedCharacterSets",             m_oftenUsedCharacterSets);
+  reg.setValue(s_valOftenUsedLanguages,                 m_oftenUsedLanguages);
+  reg.setValue(s_valOftenUsedCountries,                 m_oftenUsedCountries);
+  reg.setValue(s_valOftenUsedCharacterSets,             m_oftenUsedCharacterSets);
 
-  reg.setValue("oftenUsedLanguagesOnly",             m_oftenUsedLanguagesOnly);
-  reg.setValue("oftenUsedCountriesOnly",             m_oftenUsedCountriesOnly);
-  reg.setValue("oftenUsedCharacterSetsOnly",         m_oftenUsedCharacterSetsOnly);
+  reg.setValue(s_valOftenUsedLanguagesOnly,             m_oftenUsedLanguagesOnly);
+  reg.setValue(s_valOftenUsedCountriesOnly,             m_oftenUsedCountriesOnly);
+  reg.setValue(s_valOftenUsedCharacterSetsOnly,         m_oftenUsedCharacterSetsOnly);
 
-  reg.setValue("scanForPlaylistsPolicy",             static_cast<int>(m_scanForPlaylistsPolicy));
-  reg.setValue("minimumPlaylistDuration",            m_minimumPlaylistDuration);
+  reg.setValue(s_valScanForPlaylistsPolicy,             static_cast<int>(m_scanForPlaylistsPolicy));
+  reg.setValue(s_valMinimumPlaylistDuration,            m_minimumPlaylistDuration);
 
-  reg.setValue("setAudioDelayFromFileName",          m_setAudioDelayFromFileName);
-  reg.setValue("autoSetFileTitle",                   m_autoSetFileTitle);
-  reg.setValue("autoClearFileTitle",                 m_autoClearFileTitle);
-  reg.setValue("clearMergeSettings",                 static_cast<int>(m_clearMergeSettings));
-  reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
-  reg.setValue("disableDefaultTrackForSubtitles",    m_disableDefaultTrackForSubtitles);
-  reg.setValue("mergeEnableDialogNormGainRemoval",   m_mergeEnableDialogNormGainRemoval);
-  reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
-  reg.setValue("mergePredefinedTrackNames",          m_mergePredefinedTrackNames);
-  reg.setValue("mergePredefinedSplitSizes",          m_mergePredefinedSplitSizes);
-  reg.setValue("mergePredefinedSplitDurations",      m_mergePredefinedSplitDurations);
-  reg.setValue("mergeTrackPropertiesLayout",         static_cast<int>(m_mergeTrackPropertiesLayout));
-  reg.setValue("mergeAddingAppendingFilesPolicy",    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
-  reg.setValue("mergeLastAddingAppendingDecision",   static_cast<int>(m_mergeLastAddingAppendingDecision));
-  reg.setValue("mergeWarnMissingAudioTrack",         static_cast<int>(m_mergeWarnMissingAudioTrack));
-  reg.setValue("headerEditorDroppedFilesPolicy",     static_cast<int>(m_headerEditorDroppedFilesPolicy));
+  reg.setValue(s_valSetAudioDelayFromFileName,          m_setAudioDelayFromFileName);
+  reg.setValue(s_valAutoSetFileTitle,                   m_autoSetFileTitle);
+  reg.setValue(s_valAutoClearFileTitle,                 m_autoClearFileTitle);
+  reg.setValue(s_valClearMergeSettings,                 static_cast<int>(m_clearMergeSettings));
+  reg.setValue(s_valDisableCompressionForAllTrackTypes, m_disableCompressionForAllTrackTypes);
+  reg.setValue(s_valDisableDefaultTrackForSubtitles,    m_disableDefaultTrackForSubtitles);
+  reg.setValue(s_valMergeEnableDialogNormGainRemoval,   m_mergeEnableDialogNormGainRemoval);
+  reg.setValue(s_valMergeAlwaysShowOutputFileControls,  m_mergeAlwaysShowOutputFileControls);
+  reg.setValue(s_valMergePredefinedTrackNames,          m_mergePredefinedTrackNames);
+  reg.setValue(s_valMergePredefinedSplitSizes,          m_mergePredefinedSplitSizes);
+  reg.setValue(s_valMergePredefinedSplitDurations,      m_mergePredefinedSplitDurations);
+  reg.setValue(s_valMergeTrackPropertiesLayout,         static_cast<int>(m_mergeTrackPropertiesLayout));
+  reg.setValue(s_valMergeAddingAppendingFilesPolicy,    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
+  reg.setValue(s_valMergeLastAddingAppendingDecision,   static_cast<int>(m_mergeLastAddingAppendingDecision));
+  reg.setValue(s_valMergeWarnMissingAudioTrack,         static_cast<int>(m_mergeWarnMissingAudioTrack));
+  reg.setValue(s_valHeaderEditorDroppedFilesPolicy,     static_cast<int>(m_headerEditorDroppedFilesPolicy));
 
-  reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
-  reg.setValue("autoDestinationOnlyForVideoFiles",   m_autoDestinationOnlyForVideoFiles);
-  reg.setValue("relativeOutputDir",                  m_relativeOutputDir.path());
-  reg.setValue("fixedOutputDir",                     m_fixedOutputDir.path());
-  reg.setValue("uniqueOutputFileNames",              m_uniqueOutputFileNames);
-  reg.setValue("autoClearOutputFileName",            m_autoClearOutputFileName);
+  reg.setValue(s_valOutputFileNamePolicy,               static_cast<int>(m_outputFileNamePolicy));
+  reg.setValue(s_valAutoDestinationOnlyForVideoFiles,   m_autoDestinationOnlyForVideoFiles);
+  reg.setValue(s_valRelativeOutputDir,                  m_relativeOutputDir.path());
+  reg.setValue(s_valFixedOutputDir,                     m_fixedOutputDir.path());
+  reg.setValue(s_valUniqueOutputFileNames,              m_uniqueOutputFileNames);
+  reg.setValue(s_valAutoClearOutputFileName,            m_autoClearOutputFileName);
 
-  reg.setValue("enableMuxingTracksByLanguage",       m_enableMuxingTracksByLanguage);
-  reg.setValue("enableMuxingAllVideoTracks",         m_enableMuxingAllVideoTracks);
-  reg.setValue("enableMuxingAllAudioTracks",         m_enableMuxingAllAudioTracks);
-  reg.setValue("enableMuxingAllSubtitleTracks",      m_enableMuxingAllSubtitleTracks);
-  reg.setValue("enableMuxingTracksByTheseLanguages", m_enableMuxingTracksByTheseLanguages);
-  reg.setValue("enableMuxingTracksByTheseTypes",     enableMuxingTracksByTheseTypes);
+  reg.setValue(s_valEnableMuxingTracksByLanguage,       m_enableMuxingTracksByLanguage);
+  reg.setValue(s_valEnableMuxingAllVideoTracks,         m_enableMuxingAllVideoTracks);
+  reg.setValue(s_valEnableMuxingAllAudioTracks,         m_enableMuxingAllAudioTracks);
+  reg.setValue(s_valEnableMuxingAllSubtitleTracks,      m_enableMuxingAllSubtitleTracks);
+  reg.setValue(s_valEnableMuxingTracksByTheseLanguages, m_enableMuxingTracksByTheseLanguages);
+  reg.setValue(s_valEnableMuxingTracksByTheseTypes,     enableMuxingTracksByTheseTypes);
 
-  reg.setValue("useDefaultJobDescription",           m_useDefaultJobDescription);
-  reg.setValue("showOutputOfAllJobs",                m_showOutputOfAllJobs);
-  reg.setValue("switchToJobOutputAfterStarting",     m_switchToJobOutputAfterStarting);
-  reg.setValue("resetJobWarningErrorCountersOnExit", m_resetJobWarningErrorCountersOnExit);
-  reg.setValue("jobRemovalPolicy",                   static_cast<int>(m_jobRemovalPolicy));
-  reg.setValue("removeOldJobs",                      m_removeOldJobs);
-  reg.setValue("removeOldJobsDays",                  m_removeOldJobsDays);
+  reg.setValue(s_valUseDefaultJobDescription,           m_useDefaultJobDescription);
+  reg.setValue(s_valShowOutputOfAllJobs,                m_showOutputOfAllJobs);
+  reg.setValue(s_valSwitchToJobOutputAfterStarting,     m_switchToJobOutputAfterStarting);
+  reg.setValue(s_valResetJobWarningErrorCountersOnExit, m_resetJobWarningErrorCountersOnExit);
+  reg.setValue(s_valJobRemovalPolicy,                   static_cast<int>(m_jobRemovalPolicy));
+  reg.setValue(s_valRemoveOldJobs,                      m_removeOldJobs);
+  reg.setValue(s_valRemoveOldJobsDays,                  m_removeOldJobsDays);
 
-  reg.setValue("showToolSelector",                   m_showToolSelector);
-  reg.setValue("warnBeforeClosingModifiedTabs",      m_warnBeforeClosingModifiedTabs);
-  reg.setValue("warnBeforeAbortingJobs",             m_warnBeforeAbortingJobs);
-  reg.setValue("warnBeforeOverwriting",              m_warnBeforeOverwriting);
-  reg.setValue("showMoveUpDownButtons",              m_showMoveUpDownButtons);
+  reg.setValue(s_valShowToolSelector,                   m_showToolSelector);
+  reg.setValue(s_valWarnBeforeClosingModifiedTabs,      m_warnBeforeClosingModifiedTabs);
+  reg.setValue(s_valWarnBeforeAbortingJobs,             m_warnBeforeAbortingJobs);
+  reg.setValue(s_valWarnBeforeOverwriting,              m_warnBeforeOverwriting);
+  reg.setValue(s_valShowMoveUpDownButtons,              m_showMoveUpDownButtons);
 
-  reg.setValue("chapterNameTemplate",                m_chapterNameTemplate);
-  reg.setValue("dropLastChapterFromBlurayPlaylist",  m_dropLastChapterFromBlurayPlaylist);
-  reg.setValue("ceTextFileCharacterSet",             m_ceTextFileCharacterSet);
+  reg.setValue(s_valChapterNameTemplate,                m_chapterNameTemplate);
+  reg.setValue(s_valDropLastChapterFromBlurayPlaylist,  m_dropLastChapterFromBlurayPlaylist);
+  reg.setValue(s_valCeTextFileCharacterSet,             m_ceTextFileCharacterSet);
 
-  reg.setValue("uiLocale",                           m_uiLocale);
-  reg.setValue("uiDisableHighDPIScaling",            m_uiDisableHighDPIScaling);
-  reg.setValue("uiFontFamily",                       m_uiFontFamily);
-  reg.setValue("uiFontPointSize",                    m_uiFontPointSize);
+  reg.setValue(s_valUiLocale,                           m_uiLocale);
+  reg.setValue(s_valUiDisableHighDPIScaling,            m_uiDisableHighDPIScaling);
+  reg.setValue(s_valUiFontFamily,                       m_uiFontFamily);
+  reg.setValue(s_valUiFontPointSize,                    m_uiFontPointSize);
 
-  reg.setValue("mediaInfoExe",                       m_mediaInfoExe);
+  reg.setValue(s_valMediaInfoExe,                       m_mediaInfoExe);
 
-  reg.beginGroup("updates");
-  reg.setValue("checkForUpdates",                    m_checkForUpdates);
-  reg.setValue("lastUpdateCheck",                    m_lastUpdateCheck);
+  reg.beginGroup(s_grpUpdates);
+  reg.setValue(s_valCheckForUpdates,                    m_checkForUpdates);
+  reg.setValue(s_valLastUpdateCheck,                    m_lastUpdateCheck);
   reg.endGroup();               // settings.updates
   reg.endGroup();               // settings
 
@@ -653,29 +654,29 @@ Settings::save()
 void
 Settings::saveDefaults(QSettings &reg)
   const {
-  reg.beginGroup("defaults");
-  reg.setValue("defaultAudioTrackLanguage",          m_defaultAudioTrackLanguage);
-  reg.setValue("defaultVideoTrackLanguage",          m_defaultVideoTrackLanguage);
-  reg.setValue("defaultSubtitleTrackLanguage",       m_defaultSubtitleTrackLanguage);
-  reg.setValue("whenToSetDefaultLanguage",           static_cast<int>(m_whenToSetDefaultLanguage));
-  reg.setValue("defaultChapterLanguage",             m_defaultChapterLanguage);
-  reg.setValue("defaultChapterCountry",              m_defaultChapterCountry);
-  reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);
-  reg.setValue("defaultAdditionalMergeOptions",      m_defaultAdditionalMergeOptions);
+  reg.beginGroup(s_grpDefaults);
+  reg.setValue(s_valDefaultAudioTrackLanguage,          m_defaultAudioTrackLanguage);
+  reg.setValue(s_valDefaultVideoTrackLanguage,          m_defaultVideoTrackLanguage);
+  reg.setValue(s_valDefaultSubtitleTrackLanguage,       m_defaultSubtitleTrackLanguage);
+  reg.setValue(s_valWhenToSetDefaultLanguage,           static_cast<int>(m_whenToSetDefaultLanguage));
+  reg.setValue(s_valDefaultChapterLanguage,             m_defaultChapterLanguage);
+  reg.setValue(s_valDefaultChapterCountry,              m_defaultChapterCountry);
+  reg.setValue(s_valDefaultSubtitleCharset,             m_defaultSubtitleCharset);
+  reg.setValue(s_valDefaultAdditionalMergeOptions,      m_defaultAdditionalMergeOptions);
   reg.endGroup();               // defaults
 }
 
 void
 Settings::saveDerivingTrackLanguagesSettings(QSettings &reg)
   const {
-  reg.beginGroup("settings");
-  reg.beginGroup("derivingTrackLanguagesFromFileNames");
+  reg.beginGroup(s_grpSettings);
+  reg.beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
 
-  reg.setValue("audioPolicy",                         static_cast<int>(m_deriveAudioTrackLanguageFromFileNamePolicy));
-  reg.setValue("videoPolicy",                         static_cast<int>(m_deriveVideoTrackLanguageFromFileNamePolicy));
-  reg.setValue("subtitlePolicy",                      static_cast<int>(m_deriveSubtitleTrackLanguageFromFileNamePolicy));
-  reg.setValue("customRegex",                         m_regexForDerivingTrackLanguagesFromFileNames);
-  reg.setValue("recognizedTrackLanguagesInFileNames", m_recognizedTrackLanguagesInFileNames);
+  reg.setValue(s_valAudioPolicy,                         static_cast<int>(m_deriveAudioTrackLanguageFromFileNamePolicy));
+  reg.setValue(s_valVideoPolicy,                         static_cast<int>(m_deriveVideoTrackLanguageFromFileNamePolicy));
+  reg.setValue(s_valSubtitlePolicy,                      static_cast<int>(m_deriveSubtitleTrackLanguageFromFileNamePolicy));
+  reg.setValue(s_valCustomRegex,                         m_regexForDerivingTrackLanguagesFromFileNames);
+  reg.setValue(s_valRecognizedTrackLanguagesInFileNames, m_recognizedTrackLanguagesInFileNames);
 
   reg.endGroup();
   reg.endGroup();
@@ -684,7 +685,7 @@ Settings::saveDerivingTrackLanguagesSettings(QSettings &reg)
 void
 Settings::saveSplitterSizes(QSettings &reg)
   const {
-  reg.beginGroup("splitterSizes");
+  reg.beginGroup(s_grpSplitterSizes);
   for (auto const &name : m_splitterSizes.keys()) {
     auto sizes = QVariantList{};
     for (auto const &size : m_splitterSizes[name])
@@ -699,17 +700,17 @@ Settings::saveSplitterSizes(QSettings &reg)
 void
 Settings::saveDefaultInfoJobSettings(QSettings &reg)
   const {
-  reg.beginGroup("settings");
-  reg.beginGroup("info");
-  reg.beginGroup("defaultJobSettings");
+  reg.beginGroup(s_grpSettings);
+  reg.beginGroup(s_grpInfo);
+  reg.beginGroup(s_grpDefaultJobSettings);
 
   auto &s = m_defaultInfoJobSettings;
-  reg.setValue("mode",         static_cast<int>(s.m_mode));
-  reg.setValue("verbosity",    static_cast<int>(s.m_verbosity));
-  reg.setValue("hexDumps",     static_cast<int>(s.m_hexDumps));
-  reg.setValue("checksums",    s.m_checksums);
-  reg.setValue("trackInfo",    s.m_trackInfo);
-  reg.setValue("hexPositions", s.m_hexPositions);
+  reg.setValue(s_valMode,         static_cast<int>(s.m_mode));
+  reg.setValue(s_valVerbosity,    static_cast<int>(s.m_verbosity));
+  reg.setValue(s_valHexDumps,     static_cast<int>(s.m_hexDumps));
+  reg.setValue(s_valChecksums,    s.m_checksums);
+  reg.setValue(s_valTrackInfo,    s.m_trackInfo);
+  reg.setValue(s_valHexPositions, s.m_hexPositions);
 
   reg.endGroup();
   reg.endGroup();
@@ -719,7 +720,7 @@ Settings::saveDefaultInfoJobSettings(QSettings &reg)
 void
 Settings::saveRunProgramConfigurations(QSettings &reg)
   const {
-  reg.beginGroup("runProgramConfigurations");
+  reg.beginGroup(s_grpRunProgramConfigurations);
 
   auto groups = reg.childGroups();
   groups.sort();
@@ -730,13 +731,13 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
   auto idx = 0;
   for (auto const &cfg : m_runProgramConfigurations) {
     reg.beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
-    reg.setValue("active",      cfg->m_active);
-    reg.setValue("name",        cfg->m_name);
-    reg.setValue("type",        static_cast<int>(cfg->m_type));
-    reg.setValue("forEvents",   static_cast<int>(cfg->m_forEvents));
-    reg.setValue("commandLine", cfg->m_commandLine);
-    reg.setValue("audioFile",   cfg->m_audioFile);
-    reg.setValue("volume",      cfg->m_volume);
+    reg.setValue(s_valActive,      cfg->m_active);
+    reg.setValue(s_valName,        cfg->m_name);
+    reg.setValue(s_valType,        static_cast<int>(cfg->m_type));
+    reg.setValue(s_valForEvents,   static_cast<int>(cfg->m_forEvents));
+    reg.setValue(s_valCommandLine, cfg->m_commandLine);
+    reg.setValue(s_valAudioFile,   cfg->m_audioFile);
+    reg.setValue(s_valVolume,      cfg->m_volume);
     reg.endGroup();
   }
 

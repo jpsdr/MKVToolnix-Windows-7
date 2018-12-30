@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/settings_names.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -111,7 +112,7 @@ void
 saveWidgetGeometry(QWidget *widget) {
   auto reg = Util::Settings::registry();
 
-  reg->beginGroup("windowGeometry");
+  reg->beginGroup(s_grpWindowGeometry);
   reg->setValue(widget->objectName(), widget->saveGeometry());
   reg->endGroup();
 }
@@ -120,7 +121,7 @@ void
 restoreWidgetGeometry(QWidget *widget) {
   auto reg = Util::Settings::registry();
 
-  reg->beginGroup("windowGeometry");
+  reg->beginGroup(s_grpWindowGeometry);
   widget->restoreGeometry(reg->value(widget->objectName()).toByteArray());
   reg->endGroup();
 }

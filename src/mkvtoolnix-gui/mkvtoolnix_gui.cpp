@@ -14,6 +14,7 @@
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/settings_names.h"
 
 using namespace mtx::gui;
 
@@ -27,8 +28,8 @@ enableOrDisableHighDPIScaling() {
   // Application to be instantiated — which in turn requires that the
   // DPI setting's been set.
   auto reg = Util::Settings::registry();
-  reg->beginGroup("settings");
-  if (!reg->value(Q("uiDisableHighDPIScaling")).toBool())
+  reg->beginGroup(s_grpSettings);
+  if (!reg->value(s_valUiDisableHighDPIScaling).toBool())
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 }

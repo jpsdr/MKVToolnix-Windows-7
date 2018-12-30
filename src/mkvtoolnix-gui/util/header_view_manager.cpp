@@ -15,6 +15,7 @@
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/settings_names.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -85,12 +86,12 @@ HeaderViewManager::saveState() {
 
   auto reg = Settings::registry();
 
-  reg->beginGroup("headerViewManager");
+  reg->beginGroup(s_grpHeaderViewManager);
   reg->beginGroup(p->name);
 
-  reg->setValue("columnOrder",   columnOrder);
-  reg->setValue("columnSizes",   columnSizes);
-  reg->setValue("hiddenColumns", hiddenColumns);
+  reg->setValue(s_valColumnOrder,   columnOrder);
+  reg->setValue(s_valColumnSizes,   columnSizes);
+  reg->setValue(s_valHiddenColumns, hiddenColumns);
 
   reg->endGroup();
   reg->endGroup();
@@ -101,12 +102,12 @@ HeaderViewManager::restoreState() {
   auto p   = p_func();
   auto reg = Settings::registry();
 
-  reg->beginGroup("headerViewManager");
+  reg->beginGroup(s_grpHeaderViewManager);
   reg->beginGroup(p->name);
 
-  restoreVisualIndexes(reg->value("columnOrder").toStringList());
-  restoreHidden(reg->value("hiddenColumns").toStringList());
-  restoreSizes(reg->value("columnSizes").toStringList());
+  restoreVisualIndexes(reg->value(s_valColumnOrder).toStringList());
+  restoreHidden(reg->value(s_valHiddenColumns).toStringList());
+  restoreSizes(reg->value(s_valColumnSizes).toStringList());
 
   reg->endGroup();
   reg->endGroup();
