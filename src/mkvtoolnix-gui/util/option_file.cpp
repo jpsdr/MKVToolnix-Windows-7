@@ -19,6 +19,7 @@ OptionFile::create(QString const &fileName,
   QFile file{fileName};
   file.open(QIODevice::WriteOnly | QIODevice::Truncate);
   write(file, options);
+  file.flush();
   file.close();
 }
 

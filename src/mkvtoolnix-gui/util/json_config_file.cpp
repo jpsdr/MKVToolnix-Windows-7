@@ -115,6 +115,7 @@ JsonConfigFile::save() {
   auto json = groupToJson(*m_rootGroup);
   auto dump = mtx::json::dump(json, jsonIndentation());
   out.write(QByteArray::fromRawData(dump.data(), dump.size()));
+  out.flush();
   out.close();
 }
 

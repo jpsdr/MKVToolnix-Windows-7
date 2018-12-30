@@ -398,6 +398,7 @@ Tab::onSaveOutput() {
   QFile out{fileName};
   if (out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
     out.write(Q("%1\n").arg(p->m_fullOutput.join(Q("\n"))).toUtf8());
+    out.flush();
     out.close();
   }
 
