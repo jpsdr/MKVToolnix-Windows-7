@@ -13,6 +13,10 @@
 
 #include "common/common_pch.h"
 
+#if defined(SYS_WINDOWS)
+# include <windows.h>
+#endif
+
 #include "common/mm_io_p.h"
 
 class mm_file_io_c;
@@ -21,10 +25,12 @@ class mm_file_io_private_c : public mm_io_private_c {
 public:
   std::string file_name;
   open_mode mode{MODE_READ};
-  void *file{};
 
 #if defined(SYS_WINDOWS)
   bool eof{};
+  HANDLE file{};
+#else
+  FILE *file{};
 #endif
 
   explicit mm_file_io_private_c(std::string const &p_file_name, open_mode const p_mode);

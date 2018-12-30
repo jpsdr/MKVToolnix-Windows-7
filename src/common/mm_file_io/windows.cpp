@@ -70,8 +70,8 @@ mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
     mm_file_io_c::prepare_path(file_name);
 
   auto w_file_name = to_wide(file_name);
-  file             = static_cast<void *>(CreateFileW(w_file_name.c_str(), access_mode, share_mode, nullptr, disposition, 0, nullptr));
-  if (static_cast<HANDLE>(file) == INVALID_HANDLE_VALUE)
+  file             = CreateFileW(w_file_name.c_str(), access_mode, share_mode, nullptr, disposition, 0, nullptr);
+  if (file == INVALID_HANDLE_VALUE)
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
 
   dos_style_newlines = true;
@@ -82,8 +82,8 @@ mm_file_io_c::close() {
   auto p = p_func();
 
   if (p->file) {
-    CloseHandle((HANDLE)p->file);
-    p->file = nullptr;
+    CloseHandle(p->file);
+    p->file = INVALID_HANDLE_VALUE;
   }
   p->file_name.clear();
 }
@@ -92,7 +92,7 @@ uint64
 mm_file_io_c::get_real_file_pointer() {
   auto p    = p_func();
   LONG high = 0;
-  DWORD low = SetFilePointer((HANDLE)p->file, 0, &high, FILE_CURRENT);
+  DWORD low = SetFilePointer(p->file, 0, &high, FILE_CURRENT);
 
   if ((low == INVALID_SET_FILE_POINTER) && (GetLastError() != NO_ERROR))
     return (uint64)-1;
@@ -109,7 +109,7 @@ mm_file_io_c::setFilePointer(int64 offset,
                : libebml::seek_end       == mode ? FILE_END
                :                                   FILE_BEGIN;
   LONG high    = (LONG)(offset >> 32);
-  DWORD low    = SetFilePointer((HANDLE)p->file, (LONG)(offset & 0xffffffff), &high, method);
+  DWORD low    = SetFilePointer(p->file, (LONG)(offset & 0xffffffff), &high, method);
 
   if ((INVALID_SET_FILE_POINTER == low) && (GetLastError() != NO_ERROR))
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};
@@ -125,7 +125,7 @@ mm_file_io_c::_read(void *buffer,
 
   DWORD bytes_read;
 
-  if (!ReadFile((HANDLE)p->file, buffer, size, &bytes_read, nullptr)) {
+  if (!ReadFile(p->file, buffer, size, &bytes_read, nullptr)) {
     p->eof              = true;
     p->current_position = get_real_file_pointer();
 
@@ -145,7 +145,7 @@ mm_file_io_c::_write(const void *buffer,
 
   DWORD bytes_written;
 
-  if (!WriteFile((HANDLE)p->file, buffer, size, &bytes_written, nullptr))
+  if (!WriteFile(p->file, buffer, size, &bytes_written, nullptr))
     bytes_written = 0;
 
   if (bytes_written != size) {
@@ -179,7 +179,7 @@ mm_file_io_c::truncate(int64_t pos) {
 
   save_pos();
   if (setFilePointer2(pos)) {
-    bool result = SetEndOfFile((HANDLE)p->file);
+    bool result = SetEndOfFile(p->file);
     restore_pos();
 
     return result ? 0 : -1;

@@ -57,7 +57,7 @@ mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
   if ((0 == stat(local_path.c_str(), &st)) && S_ISDIR(st.st_mode))
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
 
-  file = (FILE *)fopen(local_path.c_str(), cmode);
+  file = fopen(local_path.c_str(), cmode);
 
   if (!file)
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
@@ -71,18 +71,18 @@ mm_file_io_c::setFilePointer(int64 offset,
              : mode == libebml::seek_end       ? SEEK_END
              :                                   SEEK_CUR;
 
-  if (fseeko((FILE *)p->file, offset, whence) != 0)
+  if (fseeko(p->file, offset, whence) != 0)
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};
 
-  p->current_position = ftello((FILE *)p->file);
+  p->current_position = ftello(p->file);
 }
 
 size_t
 mm_file_io_c::_write(const void *buffer,
                      size_t size) {
   auto p          = p_func();
-  size_t bwritten = fwrite(buffer, 1, size, (FILE *)p->file);
-  if (ferror((FILE *)p->file) != 0)
+  size_t bwritten = fwrite(buffer, 1, size, p->file);
+  if (ferror(p->file) != 0)
     throw mtx::mm_io::read_write_x{mtx::mm_io::make_error_code()};
 
   p->current_position += bwritten;
@@ -95,7 +95,7 @@ uint32
 mm_file_io_c::_read(void *buffer,
                     size_t size) {
   auto p        = p_func();
-  int64_t bread = fread(buffer, 1, size, (FILE *)p->file);
+  int64_t bread = fread(buffer, 1, size, p->file);
 
   p->current_position += bread;
 
@@ -107,26 +107,26 @@ mm_file_io_c::close() {
   auto p = p_func();
 
   if (p->file) {
-    fclose((FILE *)p->file);
+    fclose(p->file);
     p->file = nullptr;
   }
 }
 
 bool
 mm_file_io_c::eof() {
-  return feof((FILE *)p_func()->file) != 0;
+  return feof(p_func()->file) != 0;
 }
 
 void
 mm_file_io_c::clear_eof() {
-  clearerr(static_cast<FILE *>(p_func()->file));
+  clearerr(p_func()->file);
 }
 
 int
 mm_file_io_c::truncate(int64_t pos) {
   auto p         = p_func();
   p->cached_size = -1;
-  return ftruncate(fileno((FILE *)p->file), pos);
+  return ftruncate(fileno(p->file), pos);
 }
 
 /** \brief OS and kernel dependant setup
