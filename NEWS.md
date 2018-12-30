@@ -7,6 +7,10 @@
 * mkvextract: WAV extractor: mkvextract will now write W64 files instead of
   WAV files if the file name extension is `.w64` or if the final file size is
   bigger than 4 GB, the file size limit for WAV files. Implements #2458.
+* MKVToolNix GUI: preferences: the ten most recently used values for the
+  "relative output directory" and "fixed output directory" settings are now
+  saved. The corresponding settings have been changed into combo boxes
+  allowing quick access to those recent values.
 
 ## Bug fixes
 

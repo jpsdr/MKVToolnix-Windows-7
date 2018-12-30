@@ -1010,7 +1010,11 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="leMAutoSetRelativeDirectory"/>
+                 <widget class="QComboBox" name="cbMAutoSetRelativeDirectory">
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -1040,7 +1044,17 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="leMAutoSetFixedDirectory"/>
+                 <widget class="QComboBox" name="cbMAutoSetFixedDirectory">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="pbMBrowseAutoSetFixedDirectory">
@@ -1994,9 +2008,9 @@
   <tabstop>rbMAutoSetSameDirectory</tabstop>
   <tabstop>rbMAutoSetPreviousDirectory</tabstop>
   <tabstop>rbMAutoSetRelativeDirectory</tabstop>
-  <tabstop>leMAutoSetRelativeDirectory</tabstop>
+  <tabstop>cbMAutoSetRelativeDirectory</tabstop>
   <tabstop>rbMAutoSetFixedDirectory</tabstop>
-  <tabstop>leMAutoSetFixedDirectory</tabstop>
+  <tabstop>cbMAutoSetFixedDirectory</tabstop>
   <tabstop>pbMBrowseAutoSetFixedDirectory</tabstop>
   <tabstop>cbMUniqueOutputFileNames</tabstop>
   <tabstop>cbMAutoClearOutputFileName</tabstop>

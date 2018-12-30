@@ -314,7 +314,13 @@ Settings::load() {
   reg.beginGroup(s_grpUpdates);
   m_checkForUpdates                    = reg.value(s_valCheckForUpdates, true).toBool();
   m_lastUpdateCheck                    = reg.value(s_valLastUpdateCheck, QDateTime{}).toDateTime();
+
   reg.endGroup();               // settings.updates
+
+  m_mergeLastFixedOutputDirs   .setItems(reg.value(s_valMergeLastFixedOutputDirs).toStringList());
+  m_mergeLastOutputDirs        .setItems(reg.value(s_valMergeLastOutputDirs).toStringList());
+  m_mergeLastRelativeOutputDirs.setItems(reg.value(s_valMergeLastRelativeOutputDirs).toStringList());
+
   reg.endGroup();               // settings
 
   loadDefaults(reg, guiVersion);
@@ -593,6 +599,9 @@ Settings::save()
   reg.setValue(s_valMergePredefinedTrackNames,          m_mergePredefinedTrackNames);
   reg.setValue(s_valMergePredefinedSplitSizes,          m_mergePredefinedSplitSizes);
   reg.setValue(s_valMergePredefinedSplitDurations,      m_mergePredefinedSplitDurations);
+  reg.setValue(s_valMergeLastFixedOutputDirs,           m_mergeLastFixedOutputDirs.items());
+  reg.setValue(s_valMergeLastOutputDirs,                m_mergeLastOutputDirs.items());
+  reg.setValue(s_valMergeLastRelativeOutputDirs,        m_mergeLastRelativeOutputDirs.items());
   reg.setValue(s_valMergeTrackPropertiesLayout,         static_cast<int>(m_mergeTrackPropertiesLayout));
   reg.setValue(s_valMergeAddingAppendingFilesPolicy,    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
   reg.setValue(s_valMergeLastAddingAppendingDecision,   static_cast<int>(m_mergeLastAddingAppendingDecision));

@@ -585,11 +585,19 @@ PreferencesDialog::setupOutputFileNamePolicy() {
                  : Util::Settings::ToRelativeOfFirstInputFile == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetRelativeDirectory
                  :                                                                              ui->rbMAutoSetSameDirectory;
 
+  auto dFixed    = QDir::toNativeSeparators(m_cfg.m_fixedOutputDir.path());
+  auto dRelative = QDir::toNativeSeparators(m_cfg.m_relativeOutputDir.path());
+
+  m_cfg.m_mergeLastFixedOutputDirs.add(dFixed);
+  m_cfg.m_mergeLastRelativeOutputDirs.add(dRelative);
+
   ui->cbMAutoSetOutputFileName->setChecked(isChecked);
   ui->cbMAutoDestinationOnlyForVideoFiles->setChecked(m_cfg.m_autoDestinationOnlyForVideoFiles);
   rbToCheck->setChecked(true);
-  ui->leMAutoSetRelativeDirectory->setText(QDir::toNativeSeparators(m_cfg.m_relativeOutputDir.path()));
-  ui->leMAutoSetFixedDirectory->setText(QDir::toNativeSeparators(m_cfg.m_fixedOutputDir.path()));
+  ui->cbMAutoSetRelativeDirectory->addItems(m_cfg.m_mergeLastRelativeOutputDirs.items());
+  ui->cbMAutoSetRelativeDirectory->setCurrentText(dRelative);
+  ui->cbMAutoSetFixedDirectory->addItems(m_cfg.m_mergeLastFixedOutputDirs.items());
+  ui->cbMAutoSetFixedDirectory->setCurrentText(dFixed);
   ui->cbMUniqueOutputFileNames->setChecked(m_cfg.m_uniqueOutputFileNames);
   ui->cbMAutoClearOutputFileName->setChecked(m_cfg.m_autoClearOutputFileName);
 
@@ -829,10 +837,13 @@ PreferencesDialog::save() {
                                                         : ui->rbMAutoSetPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
                                                         :                                                Util::Settings::ToSameAsFirstInputFile;
   m_cfg.m_autoDestinationOnlyForVideoFiles              = ui->cbMAutoDestinationOnlyForVideoFiles->isChecked();
-  m_cfg.m_relativeOutputDir                             = ui->leMAutoSetRelativeDirectory->text();
-  m_cfg.m_fixedOutputDir                                = ui->leMAutoSetFixedDirectory->text();
+  m_cfg.m_relativeOutputDir                             = ui->cbMAutoSetRelativeDirectory->currentText();
+  m_cfg.m_fixedOutputDir                                = ui->cbMAutoSetFixedDirectory->currentText();
   m_cfg.m_uniqueOutputFileNames                         = ui->cbMUniqueOutputFileNames->isChecked();
   m_cfg.m_autoClearOutputFileName                       = ui->cbMAutoClearOutputFileName->isChecked();
+
+  m_cfg.m_mergeLastFixedOutputDirs.add(QDir::toNativeSeparators(m_cfg.m_fixedOutputDir.path()));
+  m_cfg.m_mergeLastRelativeOutputDirs.add(QDir::toNativeSeparators(m_cfg.m_relativeOutputDir.path()));
 
   m_cfg.m_enableMuxingTracksByLanguage                  = ui->cbMEnableMuxingTracksByLanguage->isChecked();
   m_cfg.m_enableMuxingAllVideoTracks                    = ui->cbMEnableMuxingAllVideoTracks->isChecked();
@@ -900,15 +911,15 @@ PreferencesDialog::enableOutputFileNameControls() {
   bool fixedSelected    = ui->rbMAutoSetFixedDirectory->isChecked();
 
   Util::enableWidgets(QList<QWidget *>{} << ui->gbDestinationDirectory   << ui->cbMUniqueOutputFileNames << ui->cbMAutoDestinationOnlyForVideoFiles, isChecked);
-  Util::enableWidgets(QList<QWidget *>{} << ui->leMAutoSetFixedDirectory << ui->pbMBrowseAutoSetFixedDirectory, isChecked && fixedSelected);
-  ui->leMAutoSetRelativeDirectory->setEnabled(isChecked && relativeSelected);
+  Util::enableWidgets(QList<QWidget *>{} << ui->cbMAutoSetFixedDirectory << ui->pbMBrowseAutoSetFixedDirectory, isChecked && fixedSelected);
+  ui->cbMAutoSetRelativeDirectory->setEnabled(isChecked && relativeSelected);
 }
 
 void
 PreferencesDialog::browseFixedOutputDirectory() {
-  auto dir = Util::getExistingDirectory(this, QY("Select destination directory"), ui->leMAutoSetFixedDirectory->text());
+  auto dir = Util::getExistingDirectory(this, QY("Select destination directory"), ui->cbMAutoSetFixedDirectory->currentText());
   if (!dir.isEmpty())
-    ui->leMAutoSetFixedDirectory->setText(dir);
+    ui->cbMAutoSetFixedDirectory->setCurrentText(dir);
 }
 
 void

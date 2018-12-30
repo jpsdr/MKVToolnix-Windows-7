@@ -11,6 +11,7 @@
 #include "common/translation.h"
 #include "mkvtoolnix-gui/info/job_settings.h"
 #include "mkvtoolnix-gui/merge/enums.h"
+#include "mkvtoolnix-gui/util/recently_used_strings.h"
 
 class QSettings;
 class QSplitter;
@@ -158,6 +159,7 @@ public:
   HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;
   MergeMissingAudioTrackPolicy m_mergeWarnMissingAudioTrack;
+  RecentlyUsedStrings m_mergeLastRelativeOutputDirs{10}, m_mergeLastFixedOutputDirs{10}, m_mergeLastOutputDirs{10};
 
   OutputFileNamePolicy m_outputFileNamePolicy;
   bool m_autoDestinationOnlyForVideoFiles;
