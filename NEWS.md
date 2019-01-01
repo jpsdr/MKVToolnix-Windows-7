@@ -24,6 +24,11 @@
   will no longer cause a crash. Fixes #2461.
 * mkvmerge: AAC: under certain conditions 8 channel audio files were taken for
   7 channel ones.
+* mkvmerge: all files opened for writing will now be flushed once before
+  they're closed. This ensures the operating system actually writes all cached
+  data to disk preventing data loss in certain situations such as power
+  outages or buggy drivers in combination with suspending the computer. Fixes
+  #2469.
 
 
 # Version 29.0.0 "Like It Or Not" 2018-12-01
