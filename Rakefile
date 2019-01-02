@@ -1,5 +1,7 @@
 # coding: utf-8
 
+$build_start = Time.now
+
 if Signal.list.key?('ALRM')
   Signal.trap('ALRM') { |signo| }
 end
@@ -248,7 +250,10 @@ def define_default_task
   targets << "src/benchmark/benchmark" if c?(:GOOGLE_BENCHMARK) && !$benchmark_sources.empty?
 
   task :default => targets do
-    puts "Done. Enjoy :)"
+    build_duration = Time.now - $build_start
+    build_duration = sprintf("%02d:%02d.%03d", (build_duration / 60).to_i, build_duration.to_i % 60, (build_duration * 1000).to_i % 1000)
+
+    puts "Done after #{build_duration}. Enjoy :)"
   end
 end
 
