@@ -111,6 +111,7 @@ using namespace std::string_literals;
 #define TIMESTAMP_SCALE 1000000
 
 void mxrun_before_exit(std::function<void()> function);
+[[noreturn]]
 void mxexit(int code = -1);
 void set_process_priority(int priority);
 
