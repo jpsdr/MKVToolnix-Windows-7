@@ -24,10 +24,6 @@
 
 #define VERSIONNAME "Like It Or Not"
 
-version_number_t::version_number_t()
-{
-}
-
 version_number_t::version_number_t(const std::string &s)
   : valid{}
 {
@@ -114,10 +110,10 @@ version_number_t::to_string()
 
   std::string v;
 
-  for (auto idx = 0u; idx < parts.size(); ++idx) {
+  for (auto const &part : parts) {
     if (!v.empty())
       v += ".";
-    v += ::to_string(parts[idx]);
+    v += ::to_string(part);
   }
 
   if (0 != build)

@@ -29,7 +29,7 @@ struct version_number_t {
   unsigned int build{};
   bool valid{};
 
-  version_number_t();
+  version_number_t() = default;
   version_number_t(const std::string &s);
 
   bool operator <(const version_number_t &cmp) const;

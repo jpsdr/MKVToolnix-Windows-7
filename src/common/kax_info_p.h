@@ -63,7 +63,7 @@ public:
 
 public:
   private_c() = default;
-  ~private_c();
+  ~private_c() = default;
 };
 
 }}

@@ -204,8 +204,7 @@ find_consecutive_headers(unsigned char const *buf,
       return base;
 
     ++base;
-    offset = 0;
-    pos    = find_header(&buf[base], size - base, header, false);
+    pos = find_header(&buf[base], size - base, header, false);
 
     if (-1 == pos)
       return -1;

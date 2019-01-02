@@ -185,9 +185,6 @@ parser_c::parser_c()
 {
 }
 
-parser_c::~parser_c() {
-}
-
 void
 parser_c::enable_dropping_last_entry_if_at_end(bool enable) {
   m_drop_last_entry_if_at_end = enable;

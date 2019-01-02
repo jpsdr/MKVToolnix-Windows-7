@@ -53,10 +53,10 @@ public:
 public:
   hevcc_c();
   hevcc_c(unsigned int nalu_size_len,
-          std::vector<memory_cptr> const &vps_list,
-          std::vector<memory_cptr> const &sps_list,
-          std::vector<memory_cptr> const &pps_list,
-          user_data_t const &user_data,
+          std::vector<memory_cptr> vps_list,
+          std::vector<memory_cptr> sps_list,
+          std::vector<memory_cptr> pps_list,
+          user_data_t user_data,
           codec_private_t const &codec_private);
 
   explicit operator bool() const;

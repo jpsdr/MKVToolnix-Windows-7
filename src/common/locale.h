@@ -23,12 +23,12 @@ using charset_converter_cptr = std::shared_ptr<charset_converter_c>;
 class charset_converter_c {
 protected:
   std::string m_charset;
-  bool m_detect_byte_order_marker;
+  bool m_detect_byte_order_marker{};
 
 public:
-  charset_converter_c();
-  charset_converter_c(const std::string &charset);
-  virtual ~charset_converter_c();
+  charset_converter_c() = default;
+  charset_converter_c(std::string charset);
+  virtual ~charset_converter_c() = default;
 
   virtual std::string utf8(const std::string &source);
   virtual std::string native(const std::string &source);

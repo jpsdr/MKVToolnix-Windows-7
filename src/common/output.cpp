@@ -35,7 +35,7 @@ bool g_warning_issued             = false;
 std::string g_stdio_charset;
 static bool s_mm_stdio_redirected = false;
 
-charset_converter_cptr g_cc_stdio = charset_converter_cptr(new charset_converter_c);
+charset_converter_cptr g_cc_stdio = std::make_shared<charset_converter_c>();
 std::shared_ptr<mm_io_c> g_mm_stdio   = std::shared_ptr<mm_io_c>(new mm_stdio_c);
 
 static mxmsg_handler_t s_mxmsg_info_handler, s_mxmsg_warning_handler, s_mxmsg_error_handler;

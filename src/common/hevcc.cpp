@@ -46,10 +46,10 @@ hevcc_c::hevcc_c()
 }
 
 hevcc_c::hevcc_c(unsigned int nalu_size_length,
-                 std::vector<memory_cptr> const &vps_list,
-                 std::vector<memory_cptr> const &sps_list,
-                 std::vector<memory_cptr> const &pps_list,
-                 user_data_t const &user_data,
+                 std::vector<memory_cptr> vps_list,
+                 std::vector<memory_cptr> sps_list,
+                 std::vector<memory_cptr> pps_list,
+                 user_data_t user_data,
                  codec_private_t const &codec_private)
   : m_configuration_version{}
   , m_general_profile_space{}
@@ -70,10 +70,10 @@ hevcc_c::hevcc_c(unsigned int nalu_size_length,
   , m_temporal_id_nesting_flag{}
   , m_size_nalu_minus_one{}
   , m_nalu_size_length{nalu_size_length}
-  , m_vps_list{vps_list}
-  , m_sps_list{sps_list}
-  , m_pps_list{pps_list}
-  , m_user_data{user_data}
+  , m_vps_list{std::move(vps_list)}
+  , m_sps_list{std::move(sps_list)}
+  , m_pps_list{std::move(pps_list)}
+  , m_user_data{std::move(user_data)}
   , m_codec_private{codec_private}
 {
 }

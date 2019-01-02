@@ -129,7 +129,7 @@ es_parser_c::add_bytes(unsigned char *buffer,
                     | (unsigned int)cursor.get_char() <<  8
                     | (unsigned int)cursor.get_char();
 
-    while (1) {
+    while (true) {
       if (NALU_START_CODE == marker)
         marker_size = 4;
       else if (NALU_START_CODE == (marker & 0x00ffffff))

@@ -64,7 +64,7 @@ mm_text_io_c::detect_eol_style() {
 
   auto num_chars_read = 0u;
 
-  while (1) {
+  while (true) {
     auto utf8char = read_next_codepoint();
     auto len      = utf8char.length();
 
@@ -228,7 +228,7 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
   bool previous_was_carriage_return = false;
   std::size_t num_chars_read{};
 
-  while (1) {
+  while (true) {
     auto previous_pos = getFilePointer();
     auto utf8char     = read_next_codepoint();
     auto len          = utf8char.length();

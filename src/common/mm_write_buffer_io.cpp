@@ -36,7 +36,7 @@ mm_write_buffer_io_c::mm_write_buffer_io_c(mm_write_buffer_io_private_c &p)
 }
 
 mm_write_buffer_io_c::~mm_write_buffer_io_c() {
-  close();
+  close_write_buffer_io();
 }
 
 mm_io_cptr
@@ -79,6 +79,11 @@ mm_write_buffer_io_c::flush() {
 
 void
 mm_write_buffer_io_c::close() {
+  close_write_buffer_io();
+}
+
+void
+mm_write_buffer_io_c::close_write_buffer_io() {
   flush_buffer();
   mm_proxy_io_c::close();
 }

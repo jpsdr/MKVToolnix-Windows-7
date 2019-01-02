@@ -45,7 +45,7 @@ mm_mem_io_c::mm_mem_io_c(mm_mem_io_private_c &p)
 }
 
 mm_mem_io_c::~mm_mem_io_c() {
-  close();
+  close_mem_io();
 }
 
 uint64
@@ -120,6 +120,11 @@ mm_mem_io_c::_write(const void *buffer,
 
 void
 mm_mem_io_c::close() {
+  close_mem_io();
+}
+
+void
+mm_mem_io_c::close_mem_io() {
   auto p = p_func();
 
   if (p->free_mem)

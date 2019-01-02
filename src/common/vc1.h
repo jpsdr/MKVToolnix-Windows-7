@@ -175,7 +175,7 @@ protected:
 
 public:
   es_parser_c();
-  virtual ~es_parser_c();
+  virtual ~es_parser_c() = default;
 
   virtual void add_bytes(unsigned char *buf, int size);
   virtual void add_bytes(memory_cptr &buf) {

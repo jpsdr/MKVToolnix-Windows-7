@@ -43,4 +43,5 @@ public:
 protected:
   virtual uint32 _read(void *buffer, size_t size);
   virtual size_t _write(const void *buffer, size_t size);
+  void close_mem_io();
 };

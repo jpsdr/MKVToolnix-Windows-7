@@ -32,7 +32,7 @@ public:
   {
   }
 
-  virtual const char *what() const throw() {
+  virtual const char *what() const noexcept {
     return "unspecified I/O error";
   }
 
@@ -40,14 +40,14 @@ public:
     return m_error_code;
   }
 
-  virtual std::string error() const throw();
+  virtual std::string error() const noexcept;
 };
 
 class end_of_file_x: public exception {
 public:
   end_of_file_x(std::error_code const &error_code = std::error_code()) : exception(error_code) {}
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "end of file error";
   }
 };
@@ -56,7 +56,7 @@ class seek_x: public exception {
 public:
   seek_x(std::error_code const &error_code = std::error_code()) : exception(error_code) {}
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "seek in file error";
   }
 };
@@ -65,7 +65,7 @@ class read_write_x: public exception {
 public:
   read_write_x(std::error_code const &error_code = std::error_code()) : exception(error_code) {}
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "reading from/writing to the file error";
   }
 };
@@ -74,7 +74,7 @@ class open_x: public exception {
 public:
   open_x(std::error_code const &error_code = std::error_code()) : exception(error_code) {}
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "open file error";
   }
 };
@@ -83,7 +83,7 @@ class wrong_read_write_access_x: public exception {
 public:
   wrong_read_write_access_x(std::error_code const &error_code = std::error_code()) : exception(error_code) {}
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "write operation to read-only file or vice versa";
   }
 };
@@ -92,7 +92,7 @@ class insufficient_space_x: public exception {
 public:
   insufficient_space_x(std::error_code const &error_code = std::error_code()) : exception(error_code) {}
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "insufficient space for write operation";
   }
 };
@@ -108,12 +108,12 @@ public:
   {
   }
 
-  virtual ~create_directory_x() throw() { }
+  virtual ~create_directory_x() noexcept { }
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "create_directory() failed";
   }
-  virtual std::string error() const throw() {
+  virtual std::string error() const noexcept {
     return fmt::format(Y("Creating directory '{0}' failed: {1}"), m_path, code().message());
   }
 };
@@ -123,7 +123,7 @@ class exception: public mtx::mm_io::exception {
 public:
   exception(std::error_code const &error_code = std::error_code()) : mtx::mm_io::exception(error_code) {}
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "unspecified text I/O error";
   }
 };
@@ -138,11 +138,11 @@ public:
   {
   }
 
-  virtual char const *what() const throw() {
+  virtual char const *what() const noexcept {
     return "invalid UTF-8 char";
   }
 
-  virtual std::string error() const throw() {
+  virtual std::string error() const noexcept {
     return fmt::format(Y("Invalid UTF-8 char. First byte: 0x{0:02x}"), static_cast<unsigned int>(m_first_char));
   }
 };

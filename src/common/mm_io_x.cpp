@@ -26,15 +26,15 @@ namespace mtx { namespace mm_io {
 std::error_code
 make_error_code() {
 #ifdef SYS_WINDOWS
-  return std::error_code(::GetLastError(), std::system_category());
+  return { static_cast<int>(::GetLastError()), std::system_category() };
 #else
-  return std::error_code(errno, std::generic_category());
+  return { errno, std::generic_category() };
 #endif
 }
 
 std::string
 exception::error()
-  const throw() {
+  const noexcept {
   return std::errc::no_such_file_or_directory == code() ? Y("The file or directory was not found")
        : std::errc::no_space_on_device        == code() ? Y("No space left to write to")
        : std::errc::permission_denied         == code() ? Y("No permission to read from, to write to or to create")

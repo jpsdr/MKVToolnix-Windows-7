@@ -24,21 +24,21 @@ std::vector<translatable_string_c> stereo_mode_c::s_translations;
 
 void
 stereo_mode_c::init() {
-  s_modes.push_back("mono");
-  s_modes.push_back("side_by_side_left_first");
-  s_modes.push_back("top_bottom_right_first");
-  s_modes.push_back("top_bottom_left_first");
-  s_modes.push_back("checkerboard_right_first");
-  s_modes.push_back("checkerboard_left_first");
-  s_modes.push_back("row_interleaved_right_first");
-  s_modes.push_back("row_interleaved_left_first");
-  s_modes.push_back("column_interleaved_right_first");
-  s_modes.push_back("column_interleaved_left_first");
-  s_modes.push_back("anaglyph_cyan_red");
-  s_modes.push_back("side_by_side_right_first");
-  s_modes.push_back("anaglyph_green_magenta");
-  s_modes.push_back("both_eyes_laced_left_first");
-  s_modes.push_back("both_eyes_laced_right_first");
+  s_modes.emplace_back("mono");
+  s_modes.emplace_back("side_by_side_left_first");
+  s_modes.emplace_back("top_bottom_right_first");
+  s_modes.emplace_back("top_bottom_left_first");
+  s_modes.emplace_back("checkerboard_right_first");
+  s_modes.emplace_back("checkerboard_left_first");
+  s_modes.emplace_back("row_interleaved_right_first");
+  s_modes.emplace_back("row_interleaved_left_first");
+  s_modes.emplace_back("column_interleaved_right_first");
+  s_modes.emplace_back("column_interleaved_left_first");
+  s_modes.emplace_back("anaglyph_cyan_red");
+  s_modes.emplace_back("side_by_side_right_first");
+  s_modes.emplace_back("anaglyph_green_magenta");
+  s_modes.emplace_back("both_eyes_laced_left_first");
+  s_modes.emplace_back("both_eyes_laced_right_first");
 }
 
 void
@@ -46,21 +46,21 @@ stereo_mode_c::init_translations() {
   if (!s_translations.empty())
     return;
 
-  s_translations.push_back(YT("mono"));
-  s_translations.push_back(YT("side by side (left first)"));
-  s_translations.push_back(YT("top bottom (right first)"));
-  s_translations.push_back(YT("top bottom (left first)"));
-  s_translations.push_back(YT("checkerboard (right first)"));
-  s_translations.push_back(YT("checkerboard (left first)"));
-  s_translations.push_back(YT("row interleaved (right first)"));
-  s_translations.push_back(YT("row interleaved (left first)"));
-  s_translations.push_back(YT("column interleaved (right first)"));
-  s_translations.push_back(YT("column interleaved (left first)"));
-  s_translations.push_back(YT("anaglyph (cyan/red)"));
-  s_translations.push_back(YT("side by side (right first)"));
-  s_translations.push_back(YT("anaglyph (green/magenta)"));
-  s_translations.push_back(YT("both eyes laced in one block (left first)"));
-  s_translations.push_back(YT("both eyes laced in one block (right first)"));
+  s_translations.emplace_back(YT("mono"));
+  s_translations.emplace_back(YT("side by side (left first)"));
+  s_translations.emplace_back(YT("top bottom (right first)"));
+  s_translations.emplace_back(YT("top bottom (left first)"));
+  s_translations.emplace_back(YT("checkerboard (right first)"));
+  s_translations.emplace_back(YT("checkerboard (left first)"));
+  s_translations.emplace_back(YT("row interleaved (right first)"));
+  s_translations.emplace_back(YT("row interleaved (left first)"));
+  s_translations.emplace_back(YT("column interleaved (right first)"));
+  s_translations.emplace_back(YT("column interleaved (left first)"));
+  s_translations.emplace_back(YT("anaglyph (cyan/red)"));
+  s_translations.emplace_back(YT("side by side (right first)"));
+  s_translations.emplace_back(YT("anaglyph (green/magenta)"));
+  s_translations.emplace_back(YT("both eyes laced in one block (left first)"));
+  s_translations.emplace_back(YT("both eyes laced in one block (right first)"));
 }
 
 const std::string

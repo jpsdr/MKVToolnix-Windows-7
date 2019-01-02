@@ -225,7 +225,7 @@ private:
 
 public:
   console_kax_analyzer_c(std::string file_name);
-  virtual ~console_kax_analyzer_c();
+  virtual ~console_kax_analyzer_c() = default;
 
   virtual void set_show_progress(bool show_progress);
 

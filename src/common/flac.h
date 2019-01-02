@@ -44,8 +44,8 @@ protected:
   stream_decoder_uptr m_flac_decoder;
 
 protected:
-  decoder_c();
-  virtual ~decoder_c();
+  decoder_c() = default;
+  virtual ~decoder_c() = default;
 
 public:
   virtual void flac_metadata_cb(const FLAC__StreamMetadata *metadata);

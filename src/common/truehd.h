@@ -101,15 +101,15 @@ protected:
   enum {
     state_unsynced,
     state_synced,
-  } m_sync_state;
+  } m_sync_state{state_unsynced};
 
   mtx::bytes::buffer_c m_buffer;
   std::deque<frame_cptr> m_frames;
   frame_t::codec_e m_sync_codec{frame_t::truehd};
 
 public:
-  parser_c();
-  virtual ~parser_c();
+  parser_c() = default;
+  virtual ~parser_c() = default;
 
   virtual void add_data(const unsigned char *new_data, unsigned int new_size);
   virtual void parse(bool end_of_stream = false);

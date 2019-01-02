@@ -26,7 +26,7 @@ mm_mpls_multi_file_io_c::mm_mpls_multi_file_io_c(mm_mpls_multi_file_io_private_c
 {
 }
 
-mm_mpls_multi_file_io_c::~mm_mpls_multi_file_io_c() {
+mm_mpls_multi_file_io_c::~mm_mpls_multi_file_io_c() { // NOLINT(modernize-use-equals-default) due to pimpl idiom requiring explicit dtor declaration somewhere
 }
 
 std::vector<timestamp_c> const &

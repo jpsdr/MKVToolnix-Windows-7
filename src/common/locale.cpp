@@ -13,13 +13,13 @@
 
 #include "common/common_pch.h"
 
-#include <errno.h>
+#include <cerrno>
+#include <clocale>
 #if HAVE_NL_LANGINFO
 # include <langinfo.h>
 #elif HAVE_LOCALE_CHARSET
 # include <libcharset.h>
 #endif
-#include <locale.h>
 #if defined(SYS_WINDOWS)
 # include <windows.h>
 #endif
@@ -39,18 +39,9 @@ charset_converter_cptr g_cc_local_utf8;
 
 std::map<std::string, charset_converter_cptr> charset_converter_c::s_converters;
 
-charset_converter_c::charset_converter_c()
-  : m_detect_byte_order_marker(false)
+charset_converter_c::charset_converter_c(std::string charset)
+  : m_charset{std::move(charset)}
 {
-}
-
-charset_converter_c::charset_converter_c(const std::string &charset)
-  : m_charset(charset)
-  , m_detect_byte_order_marker(false)
-{
-}
-
-charset_converter_c::~charset_converter_c() {
 }
 
 std::string
@@ -74,7 +65,7 @@ charset_converter_c::init(const std::string &charset,
                           bool ignore_errors) {
   std::string actual_charset = charset.empty() ? get_local_charset() : charset;
 
-  std::map<std::string, charset_converter_cptr>::iterator converter = s_converters.find(actual_charset);
+  auto converter = s_converters.find(actual_charset);
   if (converter != s_converters.end())
     return (*converter).second;
 
@@ -177,7 +168,7 @@ iconv_charset_converter_c::convert(iconv_t handle,
   char *destination = (char *)safemalloc(length + 1);
   memset(destination, 0, length + 1);
 
-  iconv(handle, nullptr, 0, nullptr, 0); // Reset the iconv state.
+  iconv(handle, nullptr, nullptr, nullptr, nullptr); // Reset the iconv state.
 
   size_t length_source      = length / 4;
   size_t length_destination = length;

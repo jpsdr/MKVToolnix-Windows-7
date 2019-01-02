@@ -296,9 +296,6 @@ es_parser_c::es_parser_c()
 {
 }
 
-es_parser_c::~es_parser_c() {
-}
-
 void
 es_parser_c::add_bytes(unsigned char *buffer,
                        int size) {
@@ -314,7 +311,7 @@ es_parser_c::add_bytes(unsigned char *buffer,
   if (3 <= cursor.get_remaining_size()) {
     uint32_t marker = (1 << 24) | ((unsigned int)cursor.get_char() << 16) | ((unsigned int)cursor.get_char() << 8) | (unsigned int)cursor.get_char();
 
-    while (1) {
+    while (true) {
       if (is_marker(marker)) {
         if (-1 != previous_pos) {
           int new_size = cursor.get_position() - 4 - previous_pos;

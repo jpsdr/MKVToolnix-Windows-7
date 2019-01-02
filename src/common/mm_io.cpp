@@ -42,7 +42,7 @@ mm_io_c::mm_io_c(mm_io_private_c &p)
 {
 }
 
-mm_io_c::~mm_io_c() {
+mm_io_c::~mm_io_c() {           // NOLINT(modernize-use-equals-default) due to pimpl idiom requiring explicit dtor declaration somewhere
 }
 
 std::string

@@ -176,15 +176,6 @@ frame_t::decode_channel_map(int channel_map) {
 
 // ----------------------------------------------------------------------
 
-parser_c::parser_c()
-  : m_sync_state(state_unsynced)
-{
-}
-
-parser_c::~parser_c()
-{
-}
-
 void
 parser_c::add_data(unsigned char const *new_data,
                    unsigned int new_size) {

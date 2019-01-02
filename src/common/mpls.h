@@ -153,7 +153,7 @@ protected:
 
 public:
   parser_c();
-  virtual ~parser_c();
+  virtual ~parser_c() = default;
 
   virtual bool parse(mm_io_c &in);
   virtual bool is_ok() const {

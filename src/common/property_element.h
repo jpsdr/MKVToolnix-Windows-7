@@ -40,7 +40,7 @@ public:
   ebml_type_e m_type;
 
   property_element_c();
-  property_element_c(std::string const &name, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description,
+  property_element_c(std::string name, EbmlCallbacks const &callbacks, translatable_string_c title, translatable_string_c description,
                      EbmlCallbacks const &sub_master_callbacks, EbmlCallbacks const *sub_sub_master_callbacks = nullptr, EbmlCallbacks const *sub_sub_sub_master_callbacks = nullptr);
 
   bool is_valid() const;

@@ -41,9 +41,6 @@ kax_file_c::kax_file_c(mm_io_c &in)
 {
 }
 
-kax_file_c::~kax_file_c() {
-}
-
 std::shared_ptr<EbmlElement>
 kax_file_c::read_next_level1_element(uint32_t wanted_id,
                                      bool report_cluster_timestamp) {

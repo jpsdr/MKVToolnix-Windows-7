@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include <locale.h>
+#include <clocale>
 
 #include "common/at_scope_exit.h"
 #include "common/json.h"

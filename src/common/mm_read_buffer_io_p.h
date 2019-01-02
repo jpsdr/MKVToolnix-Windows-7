@@ -32,6 +32,7 @@ public:
     : mm_proxy_io_private_c{proxy_io}
     , af_buffer{memory_c::alloc(buffer_size)}
     , buffer{af_buffer->get_buffer()}
+    , offset{static_cast<int64_t>(proxy_io->getFilePointer())}
   {
   }
 };

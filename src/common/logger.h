@@ -25,7 +25,7 @@ private:
 
 public:
   target_c();
-  virtual ~target_c();
+  virtual ~target_c() = default;
 
   void log(std::string const &message) {
     log_line(message);
@@ -48,8 +48,8 @@ private:
   bfs::path m_file_name;
 
 public:
-  file_target_c(bfs::path const &file_name);
-  virtual ~file_target_c();
+  file_target_c(bfs::path file_name);
+  virtual ~file_target_c() = default;
 
 protected:
   virtual void log_line(std::string const &message) override;
@@ -58,7 +58,7 @@ protected:
 class stderr_target_c: public target_c {
 public:
   stderr_target_c();
-  virtual ~stderr_target_c();
+  virtual ~stderr_target_c() = default;
 
 protected:
   virtual void log_line(std::string const &message) override;

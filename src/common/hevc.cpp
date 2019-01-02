@@ -408,7 +408,7 @@ vui_parameters_copy(mtx::bits::reader_c &r,
       w.copy_unsigned_golomb(r); // vui_num_ticks_poc_diff_one_minus1
     }
     if (w.copy_bits(1, r) == 1) { // vui_hrd_parameters_present_flag
-      hrd_parameters_copy(r, w, 1, max_sub_layers_minus1); // hrd_parameters
+      hrd_parameters_copy(r, w, true, max_sub_layers_minus1); // hrd_parameters
     }
   }
 

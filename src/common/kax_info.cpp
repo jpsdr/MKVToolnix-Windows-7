@@ -88,9 +88,6 @@ using namespace mtx::kax_info;
 
 namespace mtx {
 
-kax_info::private_c::~private_c() {
-}
-
 kax_info_c::kax_info_c()
   : p_ptr{new kax_info::private_c}
 {
@@ -103,7 +100,7 @@ kax_info_c::kax_info_c(kax_info::private_c &p)
   init();
 }
 
-kax_info_c::~kax_info_c() {
+kax_info_c::~kax_info_c() {     // NOLINT(modernize-use-equals-default) due to pimpl idiom requiring explicit dtor declaration somewhere
 }
 
 void
@@ -360,7 +357,7 @@ kax_info_c::create_codec_dependent_private_info(KaxCodecPrivate &c_priv,
     return fmt::format(Y(" (FourCC: {0})"), fourcc_c{&bih->bi_compression}.description());
 
   } else if ((codec_id == MKV_A_ACM) && ('a' == track_type) && (c_priv.GetSize() >= sizeof(alWAVEFORMATEX))) {
-    alWAVEFORMATEX *wfe     = reinterpret_cast<alWAVEFORMATEX *>(c_priv.GetBuffer());
+    auto wfe = reinterpret_cast<alWAVEFORMATEX *>(c_priv.GetBuffer());
     return fmt::format(Y(" (format tag: 0x{0:04x})"), get_uint16_le(&wfe->w_format_tag));
 
   } else if ((codec_id == MKV_V_MPEG4_AVC) && ('v' == track_type) && (c_priv.GetSize() >= 4)) {
@@ -714,13 +711,13 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     auto ce_scope = static_cast<KaxContentEncodingScope &>(e).GetValue();
 
     if ((ce_scope & 0x01) == 0x01)
-      scope.push_back(Y("1: all frames"));
+      scope.emplace_back(Y("1: all frames"));
     if ((ce_scope & 0x02) == 0x02)
-      scope.push_back(Y("2: codec private data"));
+      scope.emplace_back(Y("2: codec private data"));
     if ((ce_scope & 0xfc) != 0x00)
-      scope.push_back(Y("rest: unknown"));
+      scope.emplace_back(Y("rest: unknown"));
     if (scope.empty())
-      scope.push_back(Y("unknown"));
+      scope.emplace_back(Y("unknown"));
 
     return fmt::format("{0} ({1})", ce_scope, boost::join(scope, ", "));
   });
@@ -1196,7 +1193,7 @@ kax_info_c::process_file() {
   handle_elements_generic(*l0);
   l0->SkipData(*p->m_es, EBML_CONTEXT(l0));
 
-  while (1) {
+  while (true) {
     // NEXT element must be a segment
     l0 = ebml_element_cptr{ p->m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL) };
     if (!l0)

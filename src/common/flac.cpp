@@ -18,7 +18,7 @@
 #include "common/common_pch.h"
 
 #include <FLAC/stream_decoder.h>
-#include <stdarg.h>
+#include <cstdarg>
 
 #include "common/bit_reader.h"
 #include "common/flac.h"
@@ -84,12 +84,6 @@ flac_eof_cb(const FLAC__StreamDecoder *,
 }
 
 // ----------------------------------------------------------------------
-
-decoder_c::decoder_c() {
-}
-
-decoder_c::~decoder_c() {
-}
 
 void
 decoder_c::flac_metadata_cb(const FLAC__StreamMetadata *) {
@@ -341,21 +335,18 @@ decode_headers(unsigned char const *mem,
     int type;
 
     type = va_arg(ap, int);
-    switch (type) {
-      case FLAC_HEADER_STREAM_INFO: {
-        FLAC__StreamMetadata_StreamInfo *stream_info;
+    if (type != FLAC_HEADER_STREAM_INFO)
+      continue;
 
-        stream_info = va_arg(ap, FLAC__StreamMetadata_StreamInfo *);
-        if (result & FLAC_HEADER_STREAM_INFO)
-          memcpy(stream_info, &fhe.stream_info, sizeof(FLAC__StreamMetadata_StreamInfo));
+    FLAC__StreamMetadata_StreamInfo *stream_info;
 
-        break;
-      }
+    stream_info = va_arg(ap, FLAC__StreamMetadata_StreamInfo *);
+    if (result & FLAC_HEADER_STREAM_INFO)
+      memcpy(stream_info, &fhe.stream_info, sizeof(FLAC__StreamMetadata_StreamInfo));
 
-      default:
-        type = va_arg(ap, int);
-    }
+    break;
   }
+  va_end(ap);
 
   FLAC__stream_decoder_delete(decoder);
 

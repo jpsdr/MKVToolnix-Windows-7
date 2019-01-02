@@ -27,12 +27,12 @@ public:
   bool m_line_breaks_anywhere;
   int m_language_id, m_sub_language_id;
 
-  translation_c(std::string const &iso639_2_code,
-                std::string const &unix_locale,
-                std::string const &windows_locale,
-                std::string const &windows_locale_sysname,
-                std::string const &english_name,
-                std::string const &translated_name,
+  translation_c(std::string iso639_2_code,
+                std::string unix_locale,
+                std::string windows_locale,
+                std::string windows_locale_sysname,
+                std::string english_name,
+                std::string translated_name,
                 bool line_breaks_anywhere,
                 int language_id,
                 int sub_language_id);
@@ -54,7 +54,7 @@ protected:
   boost::optional<std::string> m_overridden_by;
 
 public:
-  translatable_string_c();
+  translatable_string_c() = default;
   translatable_string_c(const std::string &untranslated_string);
   translatable_string_c(const char *untranslated_string);
   translatable_string_c(std::vector<translatable_string_c> const &untranslated_strings);

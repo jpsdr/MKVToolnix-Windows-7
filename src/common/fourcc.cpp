@@ -123,8 +123,8 @@ fourcc_c::str()
   const {
   char buffer[4];
   put_uint32_be(buffer, m_value);
-  for (auto idx = 0; 4 > idx; ++idx)
-    buffer[idx] = 32 <= buffer[idx] ? buffer[idx] : '?';
+  for (auto &c : buffer)
+    c = 32 <= c ? c : '?';
 
   return std::string{buffer, 4};
 }

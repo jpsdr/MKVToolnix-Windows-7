@@ -35,7 +35,7 @@ webvtt_parser_c::webvtt_parser_c()
 {
 }
 
-webvtt_parser_c::~webvtt_parser_c() {
+webvtt_parser_c::~webvtt_parser_c() { // NOLINT(modernize-use-equals-default) due to pimpl idiom requiring explicit dtor declaration somewhere
 }
 
 void

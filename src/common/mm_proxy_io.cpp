@@ -33,7 +33,7 @@ mm_proxy_io_c::mm_proxy_io_c(mm_proxy_io_private_c &p)
 }
 
 mm_proxy_io_c::~mm_proxy_io_c() {
-  close();
+  close_proxy_io();
 }
 
 void
@@ -71,6 +71,11 @@ mm_proxy_io_c::get_proxied()
 
 void
 mm_proxy_io_c::close() {
+  close_proxy_io();
+}
+
+void
+mm_proxy_io_c::close_proxy_io() {
   p_func()->proxy_io.reset();
 }
 

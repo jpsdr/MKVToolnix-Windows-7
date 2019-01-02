@@ -200,7 +200,7 @@ kax_analyzer_c::verify_data_structures_against_file(const std::string &hook_name
     bool row_is_identical  = info_this.back() == info_actual.back();
     ok                    &= row_is_identical;
 
-    info_markings.push_back(row_is_identical ? " " : "*");
+    info_markings.emplace_back(row_is_identical ? " " : "*");
   }
 
   if (ok)
@@ -311,7 +311,7 @@ kax_analyzer_c::process_internal() {
     l0 = nullptr;
   }
 
-  while (1) {
+  while (true) {
     // Next element must be a segment
     l0 = m_stream->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL);
     if (!l0)
@@ -502,7 +502,7 @@ kax_analyzer_c::adjust_segment_size() {
   if (!m_segment->IsFiniteSize())
     return;
 
-  std::shared_ptr<KaxSegment> new_segment = std::shared_ptr<KaxSegment>(new KaxSegment);
+  auto new_segment = std::make_shared<KaxSegment>();
   m_file->setFilePointer(m_segment->GetElementPosition());
   new_segment->WriteHead(*m_file, m_segment->HeadSize() - 4);
 
@@ -610,7 +610,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     // the element's head can be moved up and false if we have to
     // shrink it and fill the space with a new EBML void.
 
-    ebml_element_cptr e = read_element(m_data[data_idx + 1]);
+    auto e = read_element(m_data[data_idx + 1]);
 
     if (!e) {
       mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): void_size == 1: could not read following element\n", data_idx));
@@ -796,8 +796,8 @@ kax_analyzer_c::remove_from_meta_seeks(EbmlId id) {
 
     // Read the element from the file. Remember its size so that a new
     // EbmlVoid element can be constructed afterwards.
-    ebml_element_cptr element = read_element(data_idx);
-    KaxSeekHead *seek_head    = dynamic_cast<KaxSeekHead *>(element.get());
+    auto element   = read_element(data_idx);
+    auto seek_head = dynamic_cast<KaxSeekHead *>(element.get());
     if (!seek_head)
       throw uer_error_unknown;
 
@@ -812,7 +812,7 @@ kax_analyzer_c::remove_from_meta_seeks(EbmlId id) {
         continue;
       }
 
-      KaxSeek *seek_entry = dynamic_cast<KaxSeek *>((*seek_head)[sh_idx]);
+      auto seek_entry = dynamic_cast<KaxSeek *>((*seek_head)[sh_idx]);
 
       if (!seek_entry->IsEbmlId(id)) {
         ++sh_idx;
@@ -1125,8 +1125,8 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
       available_space += m_data[data_idx + 1]->m_size;
 
     // Read the seek head, index the element and see how much space it needs.
-    ebml_element_cptr element = read_element(data_idx);
-    KaxSeekHead *seek_head    = dynamic_cast<KaxSeekHead *>(element.get());
+    auto element   = read_element(data_idx);
+    auto seek_head = dynamic_cast<KaxSeekHead *>(element.get());
     if (!seek_head)
       throw uer_error_unknown;
 
@@ -1177,8 +1177,8 @@ void
 kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e,
                                                                   int first_seek_head_idx) {
   // Read the first seek head…
-  ebml_element_cptr element = read_element(first_seek_head_idx);
-  KaxSeekHead *seek_head    = dynamic_cast<KaxSeekHead *>(element.get());
+  auto element   = read_element(first_seek_head_idx);
+  auto seek_head = dynamic_cast<KaxSeekHead *>(element.get());
   if (!seek_head)
     throw uer_error_unknown;
 
@@ -1394,7 +1394,7 @@ kax_analyzer_c::read_all(const EbmlCallbacks &callbacks) {
     if (!master)
       master = ebml_master_cptr(static_cast<EbmlMaster *>(element));
     else {
-      EbmlMaster *src = static_cast<EbmlMaster *>(element);
+      auto src = static_cast<EbmlMaster *>(element);
       while (src->ListSize() > 0) {
         master->PushElement(*(*src)[0]);
         src->Remove(0);
@@ -1447,8 +1447,8 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
     return;
   }
 
-  EbmlElement *l2    = nullptr;
-  EbmlMaster *master = static_cast<EbmlMaster *>(l1);
+  EbmlElement *l2 = nullptr;
+  auto master     = static_cast<EbmlMaster *>(l1);
   master->Read(*m_stream, EBML_CONTEXT(l1), upper_lvl_el, l2, true);
 
   unsigned int i;
@@ -1456,9 +1456,9 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
     if (!Is<KaxSeek>((*master)[i]))
       continue;
 
-    KaxSeek *seek      = static_cast<KaxSeek *>((*master)[i]);
-    KaxSeekID *seek_id = FindChild<KaxSeekID>(seek);
-    int64_t seek_pos   = seek->Location() + m_segment->GetElementPosition() + m_segment->HeadSize();
+    auto seek        = static_cast<KaxSeek *>((*master)[i]);
+    auto seek_id     = FindChild<KaxSeekID>(seek);
+    int64_t seek_pos = seek->Location() + m_segment->GetElementPosition() + m_segment->HeadSize();
 
     if ((0 == pos) || !seek_id)
       continue;
@@ -1617,9 +1617,6 @@ console_kax_analyzer_c::console_kax_analyzer_c(std::string file_name)
   , m_show_progress(false)
   , m_previous_percentage(-1)
 {
-}
-
-console_kax_analyzer_c::~console_kax_analyzer_c() {
 }
 
 void

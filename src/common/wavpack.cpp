@@ -34,7 +34,7 @@ wavpack_meta_t::wavpack_meta_t()
 static void
 little_endian_to_native(void *data,
                         const char *format) {
-  uint8_t *cp = (uint8_t *)data;
+  auto cp = static_cast<uint8_t *>(data);
   uint32_t temp;
 
   while (*format) {
@@ -70,7 +70,7 @@ read_next_header(mm_io_c &in,
   uint32_t bytes_skipped = 0;
   int bleft;
 
-  while (1) {
+  while (true) {
     if (sp < ep) {
       bleft = ep - sp;
       memmove(buffer, sp, bleft);
@@ -165,4 +165,3 @@ wv_parse_frame(mm_io_c &in,
 
   return wphdr.ck_size - sizeof(wavpack_header_t) + 8;
 }
-

@@ -18,7 +18,7 @@
 
 void
 memory_c::resize(size_t new_size)
-  throw()
+  noexcept
 {
   if (new_size == m_size)
     return;
@@ -145,10 +145,10 @@ _safememdup(const void *s,
   if (!s)
     return nullptr;
 
-  unsigned char *copy = reinterpret_cast<unsigned char *>(malloc(size));
+  auto copy = reinterpret_cast<unsigned char *>(malloc(size));
   if (!copy)
     mxerror(fmt::format(Y("memory.cpp/safememdup() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
-  memcpy(copy, s, size);
+  memcpy(copy, s, size);        // NOLINT(clang-analyzer-core.NonNullParamChecker) as mxerror() terminates the program
 
   return copy;
 }
@@ -157,7 +157,7 @@ unsigned char *
 _safemalloc(size_t size,
             const char *file,
             int line) {
-  unsigned char *mem = reinterpret_cast<unsigned char *>(malloc(size));
+  auto mem = reinterpret_cast<unsigned char *>(malloc(size));
   if (!mem)
     mxerror(fmt::format(Y("memory.cpp/safemalloc() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
 

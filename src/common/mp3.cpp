@@ -300,8 +300,7 @@ find_consecutive_mp3_headers(const unsigned char *buf,
       return base;
     }
     base++;
-    offset = 0;
-    pos    = find_mp3_header(&buf[base], size - base);
+    pos = find_mp3_header(&buf[base], size - base);
     if (pos == -1)
       return -1;
     decode_mp3_header(&buf[base + pos], &mp3header);

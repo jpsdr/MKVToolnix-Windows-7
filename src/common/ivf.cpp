@@ -45,7 +45,7 @@ is_keyframe_vp9(memory_c const &buffer) {
 
   auto profile = bc.get_bit() + (bc.get_bit() * 2);
   if (3 == profile)
-    profile += bc.get_bit();
+    bc.get_bit();               // profile += …
 
   if (bc.get_bit())             // show_existing_frame
     return false;

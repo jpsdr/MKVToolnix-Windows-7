@@ -38,16 +38,16 @@ using namespace libmatroska;
 std::map<uint32_t, std::vector<property_element_c> > property_element_c::s_properties;
 std::map<uint32_t, std::vector<property_element_c> > property_element_c::s_composed_properties;
 
-property_element_c::property_element_c(std::string const &name,
+property_element_c::property_element_c(std::string name,
                                        EbmlCallbacks const &callbacks,
-                                       translatable_string_c const &title,
-                                       translatable_string_c const &description,
+                                       translatable_string_c title,
+                                       translatable_string_c description,
                                        EbmlCallbacks const &sub_master_callbacks,
                                        EbmlCallbacks const *sub_sub_master_callbacks,
                                        EbmlCallbacks const *sub_sub_sub_master_callbacks)
-  : m_name{name}
-  , m_title{title}
-  , m_description{description}
+  : m_name{std::move(name)}
+  , m_title{std::move(title)}
+  , m_description{std::move(description)}
   , m_callbacks{&callbacks}
   , m_sub_master_callbacks{&sub_master_callbacks}
   , m_sub_sub_master_callbacks{sub_sub_master_callbacks}
@@ -222,15 +222,15 @@ property_element_c::get_table_for(const EbmlCallbacks &master_callbacks,
   if (s_properties.empty())
     init_tables();
 
-  std::map<uint32_t, std::vector<property_element_c> >::iterator src_map_it = s_properties.find(master_callbacks.GlobalId.Value);
+  auto src_map_it = s_properties.find(master_callbacks.GlobalId.Value);
   if (s_properties.end() == src_map_it)
     mxerror(fmt::format("property_element_c::get_table_for(): programming error: no table found for EBML ID {0:08x}\n", master_callbacks.GlobalId.Value));
 
   if (full_table)
     return src_map_it->second;
 
-  uint32_t element_id = !sub_master_callbacks ? master_callbacks.GlobalId.Value : sub_master_callbacks->GlobalId.Value;
-  std::map<uint32_t, std::vector<property_element_c> >::iterator composed_map_it = s_composed_properties.find(element_id);
+  uint32_t element_id  = !sub_master_callbacks ? master_callbacks.GlobalId.Value : sub_master_callbacks->GlobalId.Value;
+  auto composed_map_it = s_composed_properties.find(element_id);
   if (s_composed_properties.end() != composed_map_it)
     return composed_map_it->second;
 

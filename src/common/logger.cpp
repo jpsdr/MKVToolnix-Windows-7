@@ -36,9 +36,6 @@ target_c::target_c()
 {
 }
 
-target_c::~target_c() {
-}
-
 std::string
 target_c::format_line(std::string const &message) {
   auto now  = std::chrono::system_clock::now();
@@ -102,9 +99,9 @@ target_c::runtime() {
 
 // ----------------------------------------------------------------------
 
-file_target_c::file_target_c(bfs::path const &file_name)
+file_target_c::file_target_c(bfs::path file_name)
   : target_c()                  // Don't use initializer-list syntax due to a bug in gcc < 4.8
-  , m_file_name{file_name}
+  , m_file_name{std::move(file_name)}
 {
   if (!m_file_name.is_absolute())
     m_file_name = bfs::temp_directory_path() / m_file_name;
@@ -113,9 +110,6 @@ file_target_c::file_target_c(bfs::path const &file_name)
     boost::system::error_code ec;
     bfs::remove(m_file_name, ec);
   }
-}
-
-file_target_c::~file_target_c() {
 }
 
 void
@@ -133,9 +127,6 @@ file_target_c::log_line(std::string const &message) {
 stderr_target_c::stderr_target_c()
   : target_c()                  // Don't use initializer-list syntax due to a bug in gcc < 4.8
 {
-}
-
-stderr_target_c::~stderr_target_c() {
 }
 
 void

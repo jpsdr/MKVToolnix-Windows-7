@@ -28,9 +28,6 @@ QtKaxAnalyzer::QtKaxAnalyzer(QWidget *parent,
 {
 }
 
-QtKaxAnalyzer::~QtKaxAnalyzer() {
-}
-
 void
 QtKaxAnalyzer::show_progress_start(int64_t size) {
   m_size           = size;

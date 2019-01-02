@@ -27,13 +27,11 @@ mm_read_buffer_io_c::mm_read_buffer_io_c(mm_io_cptr const &in,
                                          std::size_t buffer_size)
   : mm_proxy_io_c{*new mm_read_buffer_io_private_c{in, buffer_size}}
 {
-  setFilePointer(in->getFilePointer());
 }
 
 mm_read_buffer_io_c::mm_read_buffer_io_c(mm_read_buffer_io_private_c &p)
   : mm_proxy_io_c{p}
 {
-  setFilePointer(p.proxy_io->getFilePointer());
 }
 
 mm_read_buffer_io_c::~mm_read_buffer_io_c() {

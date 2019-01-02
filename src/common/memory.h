@@ -149,7 +149,7 @@ public:
     m_is_owned = false;
   }
 
-  void resize(std::size_t new_size) throw();
+  void resize(std::size_t new_size) noexcept;
   void add(unsigned char const *new_buffer, std::size_t new_size);
   void add(memory_c const &new_buffer) {
     add(new_buffer.get_buffer(), new_buffer.get_size());

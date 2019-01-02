@@ -21,9 +21,6 @@
    Class for reading from stdin & writing to stdout.
 */
 
-mm_stdio_c::mm_stdio_c() {
-}
-
 uint64
 mm_stdio_c::getFilePointer() {
   return 0;

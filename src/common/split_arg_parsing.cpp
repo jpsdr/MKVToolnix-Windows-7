@@ -79,7 +79,7 @@ parse_split_parts(const std::string &arg,
         throw format_x{fmt::format(Y("Invalid start time for '--split' in '--split {0}' (current part: {1}). The start time must be bigger than or equal to the previous part's end time.\n"), arg, part_spec)};
     }
 
-    requested_split_points.push_back(std::make_tuple(start, end, create_new_file));
+    requested_split_points.emplace_back(start, end, create_new_file);
   }
 
   std::vector<split_point_c> split_points;
@@ -88,13 +88,13 @@ parse_split_parts(const std::string &arg,
 
   for (auto &split_point : requested_split_points) {
     if (previous_end < std::get<0>(split_point))
-      split_points.push_back(split_point_c{ previous_end, sp_type, true, true, std::get<2>(split_point) });
-    split_points.push_back(split_point_c{ std::get<0>(split_point), sp_type, true, false, std::get<2>(split_point) });
+      split_points.emplace_back(previous_end, sp_type, true, true, std::get<2>(split_point));
+    split_points.emplace_back(std::get<0>(split_point), sp_type, true, false, std::get<2>(split_point));
     previous_end = std::get<1>(split_point);
   }
 
   if (std::get<1>(requested_split_points.back()) < std::numeric_limits<int64_t>::max())
-    split_points.push_back(split_point_c{ std::get<1>(requested_split_points.back()), sp_type, true, true });
+    split_points.emplace_back(std::get<1>(requested_split_points.back()), sp_type, true, true);
 
   return split_points;
 }

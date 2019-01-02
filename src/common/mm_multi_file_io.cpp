@@ -36,7 +36,7 @@ mm_multi_file_io_c::mm_multi_file_io_c(mm_multi_file_io_private_c &p)
 }
 
 mm_multi_file_io_c::~mm_multi_file_io_c() {
-  close();
+  close_multi_file_io();
 }
 
 uint64
@@ -74,10 +74,10 @@ mm_multi_file_io_c::setFilePointer(int64 offset,
 uint32
 mm_multi_file_io_c::_read(void *buffer,
                           size_t size) {
-  auto p                    = p_func();
+  auto p                = p_func();
 
-  size_t num_read_total     = 0;
-  unsigned char *buffer_ptr = static_cast<unsigned char *>(buffer);
+  size_t num_read_total = 0;
+  auto buffer_ptr       = static_cast<unsigned char *>(buffer);
 
   while (!eof() && (num_read_total < size)) {
     auto &file       = p->files[p->current_file];
@@ -112,6 +112,11 @@ mm_multi_file_io_c::_write(const void *,
 
 void
 mm_multi_file_io_c::close() {
+  close_multi_file_io();
+}
+
+void
+mm_multi_file_io_c::close_multi_file_io() {
   auto p = p_func();
 
   for (auto &file : p->files)

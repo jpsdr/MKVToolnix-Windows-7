@@ -17,7 +17,7 @@
 
 class mm_stdio_c: public mm_io_c {
 public:
-  mm_stdio_c();
+  mm_stdio_c() = default;
 
   virtual uint64 getFilePointer();
   virtual void setFilePointer(int64 offset, libebml::seek_mode mode=libebml::seek_beginning);

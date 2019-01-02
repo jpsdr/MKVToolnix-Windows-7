@@ -13,14 +13,14 @@
 
 #include "common/common_pch.h"
 
+#include <clocale>
+#include <cstdlib>
 #if HAVE_NL_LANGINFO
 # include <langinfo.h>
 #elif HAVE_LOCALE_CHARSET
 # include <libcharset.h>
 #endif
 #include <locale>
-#include <locale.h>
-#include <stdlib.h>
 
 #include "common/fs_sys_helpers.h"
 #include "common/locale_string.h"
@@ -38,21 +38,21 @@
 std::vector<translation_c> translation_c::ms_available_translations;
 int translation_c::ms_active_translation_idx = 0;
 
-translation_c::translation_c(std::string const &iso639_2_code,
-                             std::string const &unix_locale,
-                             std::string const &windows_locale,
-                             std::string const &windows_locale_sysname,
-                             std::string const &english_name,
-                             std::string const &translated_name,
+translation_c::translation_c(std::string iso639_2_code,
+                             std::string unix_locale,
+                             std::string windows_locale,
+                             std::string windows_locale_sysname,
+                             std::string english_name,
+                             std::string translated_name,
                              bool line_breaks_anywhere,
                              int language_id,
                              int sub_language_id)
-  : m_iso639_2_code{iso639_2_code}
-  , m_unix_locale{unix_locale}
-  , m_windows_locale{windows_locale}
-  , m_windows_locale_sysname{windows_locale_sysname}
-  , m_english_name{english_name}
-  , m_translated_name{translated_name}
+  : m_iso639_2_code{std::move(iso639_2_code)}
+  , m_unix_locale{std::move(unix_locale)}
+  , m_windows_locale{std::move(windows_locale)}
+  , m_windows_locale_sysname{std::move(windows_locale_sysname)}
+  , m_english_name{std::move(english_name)}
+  , m_translated_name{std::move(translated_name)}
   , m_line_breaks_anywhere{line_breaks_anywhere}
   , m_language_id{language_id}
   , m_sub_language_id{sub_language_id}
@@ -217,10 +217,6 @@ translation_c::set_active_translation(const std::string &locale) {
 }
 
 // ------------------------------------------------------------
-
-translatable_string_c::translatable_string_c()
-{
-}
 
 translatable_string_c::translatable_string_c(const std::string &untranslated_string)
   : m_untranslated_strings{untranslated_string}

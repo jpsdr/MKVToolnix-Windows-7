@@ -29,7 +29,7 @@ private:
 
 public:
   QtKaxAnalyzer(QWidget *parent, QString const &fileName);
-  virtual ~QtKaxAnalyzer();
+  virtual ~QtKaxAnalyzer() = default;
 
   virtual void show_progress_start(int64_t size) override;
   virtual bool show_progress_running(int percentage) override;
