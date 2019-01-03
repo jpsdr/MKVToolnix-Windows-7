@@ -399,4 +399,14 @@ Tool::nextPreviousWindowActionTexts()
   };
 }
 
+QVector<Tab *>
+Tool::tabs() {
+  QVector<Tab *> t;
+
+  for (auto idx = 0, numTabs = ui->editors->count(); idx < numTabs; ++idx)
+    t << static_cast<Tab *>(ui->editors->widget(idx));
+
+  return t;
+}
+
 }}}

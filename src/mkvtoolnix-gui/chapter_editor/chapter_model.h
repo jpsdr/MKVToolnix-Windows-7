@@ -59,6 +59,8 @@ public:
   virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) const override;
   virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
 
+  ChaptersPtr cloneSubtreeForRetrieval(QModelIndex const &topIdx);
+
 protected:
   void setEditionRowText(QList<QStandardItem *> const &rowItems);
   void setChapterRowText(QList<QStandardItem *> const &rowItems);

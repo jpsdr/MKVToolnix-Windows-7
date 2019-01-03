@@ -18,6 +18,9 @@
 * MKVToolNix GUI: chapter editor: added an option in the "Chapter editor" menu
   for appending chapters from an existing file to the currently open editor
   tab. Part of the implementation of #2439.
+* MKVToolNix GUI: chapter editor: added an action in the context menu for
+  copying the selected entry and all of its children to another open editor
+  tab. Part of the implementation of #2439.
 
 ## Bug fixes
 

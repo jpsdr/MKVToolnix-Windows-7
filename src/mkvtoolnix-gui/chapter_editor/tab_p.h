@@ -19,6 +19,7 @@ class TabPrivate {
 
   QAction *expandAllAction, *collapseAllAction, *addEditionBeforeAction, *addEditionAfterAction, *addChapterBeforeAction, *addChapterAfterAction, *addSubChapterAction, *removeElementAction;
   QAction *duplicateAction, *massModificationAction, *generateSubChaptersAction, *renumberSubChaptersAction;
+  QMenu *copyToOtherTabMenu;
   QList<QWidget *> nameWidgets;
 
   bool ignoreChapterSelectionChanges{};

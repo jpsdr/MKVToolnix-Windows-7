@@ -308,6 +308,26 @@ ChapterModel::cloneElementsForRetrieval(QModelIndex const &parentIdx,
   }
 }
 
+ChaptersPtr
+ChapterModel::cloneSubtreeForRetrieval(QModelIndex const &topIdx) {
+  auto newChapters  = std::make_shared<KaxChapters>();
+  auto topItem      = itemFromIndex(topIdx);
+  auto topIsEdition = !topIdx.parent().isValid();
+  auto newElement   = static_cast<EbmlMaster *>(topIsEdition ? editionFromItem(topItem)->Clone() : chapterFromItem(topItem)->Clone());
+
+  if (topIsEdition)
+    newChapters->PushElement(*newElement);
+
+  else {
+    newChapters->PushElement(*new KaxEditionEntry);
+    static_cast<KaxEditionEntry *>((*newChapters)[0])->PushElement(*newElement);
+  }
+
+  cloneElementsForRetrieval(topIdx, *newElement);
+
+  return newChapters;
+}
+
 void
 ChapterModel::collectUsedEditionAndChapterUIDs(QModelIndex const &parentIdx,
                                                QSet<uint64_t> &usedEditionUIDs,

@@ -66,6 +66,7 @@ TabPrivate::TabPrivate(Tab &tab,
   , massModificationAction{new QAction{&tab}}
   , generateSubChaptersAction{new QAction{&tab}}
   , renumberSubChaptersAction{new QAction{&tab}}
+  , copyToOtherTabMenu{new QMenu{&tab}}
 {
 }
 
@@ -134,6 +135,7 @@ Tab::setupUi() {
   p->removeElementAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
   p->renumberSubChaptersAction->setIcon(QIcon{Q(":/icons/16x16/format-list-ordered.png")});
   p->massModificationAction->setIcon(QIcon{Q(":/icons/16x16/tools-wizard.png")});
+  p->copyToOtherTabMenu->setIcon(QIcon{Q(":/icons/16x16/edit-copy.png")});
 
   auto mw = MainWindow::get();
   connect(p->ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                    &Tab::showChapterContextMenu);
@@ -207,6 +209,7 @@ Tab::retranslateUi() {
   p->massModificationAction->setText(QY("Additional &modifications"));
   p->generateSubChaptersAction->setText(QY("&Generate sub-chapters"));
   p->renumberSubChaptersAction->setText(QY("Re&number sub-chapters"));
+  p->copyToOtherTabMenu->setTitle(QY("Cop&y to other tab"));
 
   setupToolTips();
 
@@ -1628,6 +1631,25 @@ Tab::duplicateElement() {
   emit numberOfEntriesChanged();
 }
 
+void
+Tab::copyElementToOtherTab() {
+  auto p             = p_func();
+  auto selectedIdx   = Util::selectedRowIdx(p->ui->elements);
+  auto tabIdx        = static_cast<QAction *>(sender())->data().toInt();
+  auto otherTabs     = MainWindow::chapterEditorTool()->tabs();
+
+  otherTabs.removeOne(this);
+
+  if (   !selectedIdx.isValid()
+      || (tabIdx < 0)
+      || (tabIdx > otherTabs.size()))
+    return;
+
+  auto newChapters  = p->chapterModel->cloneSubtreeForRetrieval(selectedIdx);
+
+  otherTabs[tabIdx]->appendTheseChapters(newChapters);
+}
+
 QString
 Tab::formatChapterName(QString const &nameTemplate,
                        int chapterNumber,
@@ -1819,6 +1841,30 @@ Tab::formatEbmlBinary(EbmlBinary *binary) {
 }
 
 void
+Tab::setupCopyToOtherTabMenu() {
+  auto p         = p_func();
+  auto idx       = 0;
+  auto otherTabs = MainWindow::chapterEditorTool()->tabs();
+
+  otherTabs.removeOne(this);
+  p->copyToOtherTabMenu->setEnabled(!otherTabs.isEmpty());
+
+  p->copyToOtherTabMenu->clear();
+
+  for (auto const &otherTab : otherTabs) {
+    auto action = new QAction{p->copyToOtherTabMenu};
+    action->setText(otherTab->title());
+    action->setData(idx);
+
+    p->copyToOtherTabMenu->addAction(action);
+
+    connect(action, &QAction::triggered, this, &Tab::copyElementToOtherTab);
+
+    ++idx;
+  }
+}
+
+void
 Tab::showChapterContextMenu(QPoint const &pos) {
   auto p               = p_func();
   auto selectedIdx     = Util::selectedRowIdx(p->ui->elements);
@@ -1837,6 +1883,8 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   p->expandAllAction->setEnabled(hasEntries);
   p->collapseAllAction->setEnabled(hasEntries);
 
+  setupCopyToOtherTabMenu();
+
   QMenu menu{this};
 
   menu.addAction(p->addEditionBeforeAction);
@@ -1848,6 +1896,7 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   menu.addAction(p->generateSubChaptersAction);
   menu.addSeparator();
   menu.addAction(p->duplicateAction);
+  menu.addMenu(p->copyToOtherTabMenu);
   menu.addSeparator();
   menu.addAction(p->removeElementAction);
   menu.addSeparator();

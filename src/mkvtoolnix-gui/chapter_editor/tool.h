@@ -33,6 +33,7 @@ public:
   virtual void setupUi() override;
   virtual void setupActions() override;
   virtual std::pair<QString, QString> nextPreviousWindowActionTexts() const override;
+  virtual QVector<Tab *> tabs();
 
 public slots:
   virtual void retranslateUi();

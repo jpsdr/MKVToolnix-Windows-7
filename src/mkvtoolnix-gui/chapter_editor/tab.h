@@ -98,6 +98,7 @@ public slots:
   virtual void addEditionOrChapterAfter();
   virtual void removeElement();
   virtual void duplicateElement();
+  virtual void copyElementToOtherTab();
   virtual void massModify();
   virtual void generateSubChapters();
   virtual void renumberSubChapters();
@@ -179,6 +180,7 @@ protected:
 
 protected:
   void setupToolTips();
+  void setupCopyToOtherTabMenu();
 
   void chaptersLoaded(ChaptersPtr const &chapters, bool canBeWritten);
   void appendTheseChapters(ChaptersPtr const &chapters);
