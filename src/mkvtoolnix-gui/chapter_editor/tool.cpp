@@ -182,7 +182,7 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 
 void
 Tool::selectFileToOpen(bool append) {
-  auto fileNames = Util::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().lastOpenDirPath(),
+  auto fileNames = Util::getOpenFileNames(this, append ? QY("Append files in chapter editor") : QY("Open files in chapter editor"), Util::Settings::get().lastOpenDirPath(),
                                           QY("Supported file types")           + Q(" (*.cue *.mpls *.mkv *.mka *.mks *.mk3d *.txt *.webm *.xml);;") +
                                           QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
                                           QY("WebM files")                     + Q(" (*.webm);;") +
