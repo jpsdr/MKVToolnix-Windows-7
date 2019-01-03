@@ -15,6 +15,9 @@
   file" controls. Clicking it shows a menu with the ten most recently used
   output directories. Selecting one of them will change the destination file
   to the selected directory keeping the file name. Implements #2468.
+* MKVToolNix GUI: chapter editor: added an option in the "Chapter editor" menu
+  for appending chapters from an existing file to the currently open editor
+  tab. Part of the implementation of #2439.
 
 ## Bug fixes
 

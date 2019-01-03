@@ -274,18 +274,18 @@ Tab::resetData() {
 }
 
 bool
-Tab::readFileEndTimestampForMatroska() {
+Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
   auto p = p_func();
 
   p->fileEndTimestamp.reset();
 
-  auto idx = p->analyzer->find(KaxInfo::ClassInfos.GlobalId);
+  auto idx = analyzer.find(KaxInfo::ClassInfos.GlobalId);
   if (-1 == idx) {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(p->fileName)).exec();
     return false;
   }
 
-  auto info = p->analyzer->read_element(idx);
+  auto info = analyzer.read_element(idx);
   if (!info) {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(p->fileName)).exec();
     return false;
@@ -302,8 +302,8 @@ Tab::readFileEndTimestampForMatroska() {
 
   qDebug() << "readFileEndTimestampForMatroska: duration is" << Q(format_timestamp(duration));
 
-  auto &fileIo = p->analyzer->get_file();
-  fileIo.setFilePointer(p->analyzer->get_segment_data_start_pos());
+  auto &fileIo = analyzer.get_file();
+  fileIo.setFilePointer(analyzer.get_segment_data_start_pos());
 
   kax_file_c fileKax{fileIo};
   fileKax.enable_reporting(false);
@@ -351,44 +351,52 @@ Tab::readFileEndTimestampForMatroska() {
 }
 
 Tab::LoadResult
-Tab::loadFromMatroskaFile() {
-  auto p      = p_func();
-  p->analyzer = std::make_unique<QtKaxAnalyzer>(this, p->fileName);
+Tab::loadFromMatroskaFile(QString const &fileName,
+                          bool append) {
+  auto p        = p_func();
+  auto analyzer = std::make_unique<QtKaxAnalyzer>(this, fileName);
 
-  if (!p->analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).set_open_mode(MODE_READ).process()) {
+  if (!analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).set_open_mode(MODE_READ).process()) {
     auto text = Q("%1 %2")
-      .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(p->fileName))
+      .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName))
       .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
+
+    if (!append)
+      emit removeThisTab();
+    return {};
+  }
+
+  if (!append && !readFileEndTimestampForMatroska(*analyzer)) {
     emit removeThisTab();
     return {};
   }
 
-  if (!readFileEndTimestampForMatroska()) {
-    emit removeThisTab();
-    return {};
-  }
-
-  auto idx = p->analyzer->find(KaxChapters::ClassInfos.GlobalId);
+  auto idx = analyzer->find(KaxChapters::ClassInfos.GlobalId);
   if (-1 == idx)
     return { std::make_shared<KaxChapters>(), true };
 
-  auto chapters = p->analyzer->read_element(idx);
+  auto chapters = analyzer->read_element(idx);
   if (!chapters) {
-    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(p->fileName)).exec();
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
     emit removeThisTab();
     return {};
   }
 
-  p->analyzer->close_file();
+  analyzer->close_file();
+
+  if (!append)
+    p->analyzer = std::move(analyzer);
 
   return { std::static_pointer_cast<KaxChapters>(chapters), true };
 }
 
 Tab::LoadResult
-Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters) {
+Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters,
+                                        QString const &fileName,
+                                        bool append) {
   auto p      = p_func();
-  auto result = Util::checkForBomAndNonAscii(p->fileName);
+  auto result = Util::checkForBomAndNonAscii(fileName);
 
   if (   (BO_NONE != result.byteOrder)
       || !result.containsNonAscii
@@ -397,11 +405,16 @@ Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters) {
 
   Util::enableChildren(this, false);
 
-  p->originalFileName = p->fileName;
-  auto dlg            = new SelectCharacterSetDialog{this, p->originalFileName};
+  p->originalFileName = fileName;
+  auto dlg            = new SelectCharacterSetDialog{this, fileName};
 
-  connect(dlg, &SelectCharacterSetDialog::characterSetSelected, this, &Tab::reloadSimpleChaptersWithCharacterSet);
-  connect(dlg, &SelectCharacterSetDialog::rejected,             this, &Tab::closeTab);
+  if (append)
+    connect(dlg, &SelectCharacterSetDialog::characterSetSelected, this, &Tab::appendSimpleChaptersWithCharacterSet);
+
+  else {
+    connect(dlg, &SelectCharacterSetDialog::characterSetSelected, this, &Tab::reloadSimpleChaptersWithCharacterSet);
+    connect(dlg, &SelectCharacterSetDialog::rejected,             this, &Tab::closeTab);
+  }
 
   dlg->show();
 
@@ -409,14 +422,15 @@ Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters) {
 }
 
 Tab::LoadResult
-Tab::loadFromChapterFile() {
+Tab::loadFromChapterFile(QString const &fileName,
+                         bool append) {
   auto p        = p_func();
   auto format   = mtx::chapters::format_e::xml;
   auto chapters = ChaptersPtr{};
   auto error    = QString{};
 
   try {
-    chapters = mtx::chapters::parse(to_utf8(p->fileName), 0, -1, 0, "", to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &format);
+    chapters = mtx::chapters::parse(to_utf8(fileName), 0, -1, 0, "", to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &format);
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());
@@ -426,18 +440,22 @@ Tab::loadFromChapterFile() {
   }
 
   if (!chapters) {
-    auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(p->fileName);
+    auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(fileName);
     if (!error.isEmpty())
       message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
 
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
-    emit removeThisTab();
+
+    if (!append)
+      emit removeThisTab();
 
   } else if (format != mtx::chapters::format_e::xml) {
-    auto result = checkSimpleFormatForBomAndNonAscii(chapters);
+    auto result = checkSimpleFormatForBomAndNonAscii(chapters, fileName, append);
 
-    p->fileName.clear();
-    emit titleChanged();
+    if (!append) {
+      p->fileName.clear();
+      emit titleChanged();
+    }
 
     return result;
   }
@@ -446,13 +464,28 @@ Tab::loadFromChapterFile() {
 }
 
 void
+Tab::appendSimpleChaptersWithCharacterSet(QString const &characterSet) {
+  reloadOrAppendSimpleChaptersWithCharacterSet(characterSet, true);
+}
+
+void
 Tab::reloadSimpleChaptersWithCharacterSet(QString const &characterSet) {
+  reloadOrAppendSimpleChaptersWithCharacterSet(characterSet, false);
+}
+
+void
+Tab::reloadOrAppendSimpleChaptersWithCharacterSet(QString const &characterSet,
+                                                  bool append) {
   auto p     = p_func();
   auto error = QString{};
 
   try {
     auto chapters = mtx::chapters::parse(to_utf8(p->originalFileName), 0, -1, 0, "", to_utf8(characterSet), true);
-    chaptersLoaded(chapters, false);
+
+    if (!append)
+      chaptersLoaded(chapters, false);
+    else
+      appendTheseChapters(chapters);
 
     Util::enableChildren(this, true);
 
@@ -503,13 +536,14 @@ Tab::timestampsToChapters(std::vector<timestamp_c> const &timestamps)
 }
 
 Tab::LoadResult
-Tab::loadFromMplsFile() {
+Tab::loadFromMplsFile(QString const &fileName,
+                      bool append) {
   auto p        = p_func();
   auto chapters = ChaptersPtr{};
   auto error    = QString{};
 
   try {
-    mm_file_io_c in{to_utf8(p->fileName)};
+    mm_file_io_c in{to_utf8(fileName)};
     auto parser = ::mtx::bluray::mpls::parser_c{};
 
     parser.enable_dropping_last_entry_if_at_end(Util::Settings::get().m_dropLastChapterFromBlurayPlaylist);
@@ -526,14 +560,15 @@ Tab::loadFromMplsFile() {
   }
 
   if (!chapters) {
-    auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(p->fileName);
+    auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(fileName);
     if (!error.isEmpty())
       message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
 
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
-    emit removeThisTab();
+    if (!append)
+      emit removeThisTab();
 
-  } else {
+  } else if (!append) {
     p->fileName.clear();
     emit titleChanged();
   }
@@ -548,12 +583,39 @@ Tab::load() {
   resetData();
 
   p->savedState = currentState();
-  auto result   = kax_analyzer_c::probe(to_utf8(p->fileName)) ? loadFromMatroskaFile()
-                : p->fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile()
-                :                                               loadFromChapterFile();
+  auto result   = kax_analyzer_c::probe(to_utf8(p->fileName)) ? loadFromMatroskaFile(p->fileName, false)
+                : p->fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile(p->fileName, false)
+                :                                               loadFromChapterFile(p->fileName, false);
 
   if (result.first)
     chaptersLoaded(result.first, result.second);
+}
+
+void
+Tab::append(QString const &fileName) {
+  auto result   = kax_analyzer_c::probe(to_utf8(fileName)) ? loadFromMatroskaFile(fileName, true)
+                : fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile(fileName, true)
+                :                                            loadFromChapterFile(fileName, true);
+
+  if (result.first)
+    appendTheseChapters(result.first);
+}
+
+void
+Tab::appendTheseChapters(ChaptersPtr const &chapters) {
+  auto p = p_func();
+
+  mtx::chapters::fix_country_codes(*chapters);
+
+  disconnect(p->chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
+
+  p->chapterModel->populate(*chapters, true);
+
+  expandAll();
+
+  connect(p->chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
+
+  MainWindow::chapterEditorTool()->enableMenuActions();
 }
 
 void
@@ -569,7 +631,7 @@ Tab::chaptersLoaded(ChaptersPtr const &chapters,
   disconnect(p->chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
 
   p->chapterModel->reset();
-  p->chapterModel->populate(*chapters);
+  p->chapterModel->populate(*chapters, false);
 
   if (canBeWritten)
     p->savedState = currentState();

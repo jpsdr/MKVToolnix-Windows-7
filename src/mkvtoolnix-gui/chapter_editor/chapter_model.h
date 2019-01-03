@@ -41,7 +41,7 @@ public:
   void removeTree(QModelIndex const &idx);
 
   void updateRow(QModelIndex const &idx);
-  void populate(libebml::EbmlMaster &master);
+  void populate(libebml::EbmlMaster &master, bool append);
   void reset();
   void retranslateUi();
 
@@ -66,6 +66,10 @@ protected:
   QList<QStandardItem *> itemsForRow(QModelIndex const &idx);
   void cloneElementsForRetrieval(QModelIndex const &parentIdx, libebml::EbmlMaster &target);
   void duplicateTree(QModelIndex const &destParentIdx, int destRow, QModelIndex const &srcIdx);
+
+  void collectUsedEditionAndChapterUIDs(QModelIndex const &parentIdx, QSet<uint64_t> &usedEditionUIDs, QSet<uint64_t> &usedChapterUIDs);
+  void fixEditionAndChapterUIDs(EbmlMaster &master);
+  void fixEditionAndChapterUIDs(EbmlMaster &master, QSet<uint64_t> &usedEditionUIDs, QSet<uint64_t> &usedChapterUIDs);
 
   qulonglong registerElement(std::shared_ptr<libebml::EbmlMaster> const &element);
   qulonglong registryIdFromItem(QStandardItem *item);

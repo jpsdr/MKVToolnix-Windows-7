@@ -7,6 +7,7 @@
 #include "common/logger.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
+#include "common/unique_numbers.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
@@ -214,13 +215,19 @@ ChapterModel::removeTree(QModelIndex const &idx) {
 }
 
 void
-ChapterModel::populate(EbmlMaster &master) {
+ChapterModel::populate(EbmlMaster &master,
+                       bool append) {
   beginResetModel();
 
-  m_elementRegistry.clear();
-  m_nextElementRegistryIdx = 0;
+  if (!append) {
+    m_elementRegistry.clear();
+    m_nextElementRegistryIdx = 0;
 
-  removeRows(0, rowCount());
+    removeRows(0, rowCount());
+
+  } else
+    fixEditionAndChapterUIDs(master);
+
   populate(master, QModelIndex{});
 
   endResetModel();
@@ -299,6 +306,61 @@ ChapterModel::cloneElementsForRetrieval(QModelIndex const &parentIdx,
 
     cloneElementsForRetrieval(elementIdx, *newElement);
   }
+}
+
+void
+ChapterModel::collectUsedEditionAndChapterUIDs(QModelIndex const &parentIdx,
+                                               QSet<uint64_t> &usedEditionUIDs,
+                                               QSet<uint64_t> &usedChapterUIDs) {
+  for (auto row = 0, numRows = rowCount(parentIdx); row < numRows; ++row) {
+    auto elementIdx  = index(row, 0, parentIdx);
+    auto elementItem = itemFromIndex(elementIdx);
+    auto uid         = !parentIdx.isValid() ? FindChildValue<KaxEditionUID>(*editionFromItem(elementItem)) : FindChildValue<KaxChapterUID>(*chapterFromItem(elementItem));
+
+    if (uid) {
+      if (!parentIdx.isValid())
+        usedEditionUIDs << uid;
+      else
+        usedChapterUIDs << uid;
+    }
+
+    collectUsedEditionAndChapterUIDs(elementIdx, usedEditionUIDs, usedChapterUIDs);
+  }
+}
+
+void
+ChapterModel::fixEditionAndChapterUIDs(EbmlMaster &master,
+                                       QSet<uint64_t> &usedEditionUIDs,
+                                       QSet<uint64_t> &usedChapterUIDs) {
+  auto isEdition  = dynamic_cast<KaxEditionEntry *>(&master);
+  auto uidElement = isEdition ? static_cast<EbmlUInteger *>(FindChild<KaxEditionUID>(master)) : static_cast<EbmlUInteger *>(FindChild<KaxChapterUID>(master));
+
+  if (uidElement && uidElement->GetValue()) {
+    auto &set = isEdition ? usedEditionUIDs : usedChapterUIDs;
+
+    if (set.contains(uidElement->GetValue())) {
+      uint64_t newValue;
+      do {
+        newValue = create_unique_number(isEdition ? UNIQUE_EDITION_IDS : UNIQUE_CHAPTER_IDS);
+      } while (set.contains(newValue));
+
+      uidElement->SetValue(newValue);
+    }
+
+    set << uidElement->GetValue();
+  }
+
+  for (auto & child : master)
+    if (dynamic_cast<EbmlMaster *>(child))
+      fixEditionAndChapterUIDs(*dynamic_cast<EbmlMaster *>(child), usedEditionUIDs, usedChapterUIDs);
+}
+
+void
+ChapterModel::fixEditionAndChapterUIDs(EbmlMaster &master) {
+  QSet<uint64_t> usedEditionUIDs, usedChapterUIDs;
+
+  collectUsedEditionAndChapterUIDs({}, usedEditionUIDs, usedChapterUIDs);
+  fixEditionAndChapterUIDs(master, usedEditionUIDs, usedChapterUIDs);
 }
 
 ChaptersPtr

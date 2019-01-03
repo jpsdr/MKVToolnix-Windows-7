@@ -40,7 +40,7 @@ public slots:
   virtual void tabTitleChanged();
   virtual void enableMenuActions();
   virtual void newFile();
-  virtual void selectFileToOpen();
+  virtual void selectFileToOpen(bool append);
   virtual void save();
   virtual void saveAsXml();
   virtual void saveToMatroska();
@@ -61,7 +61,7 @@ protected:
   virtual Tab *currentTab();
   virtual void forEachTab(std::function<void(Tab &)> const &worker);
 
-  virtual void openFile(QString const &fileName);
+  virtual void openFile(QString const &fileName, bool append);
   virtual void showChapterEditorsWidget();
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;

@@ -59,7 +59,8 @@ Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
 
   connect(mwUi->actionChapterEditorNew,                &QAction::triggered,             this, &Tool::newFile);
-  connect(mwUi->actionChapterEditorOpen,               &QAction::triggered,             this, &Tool::selectFileToOpen);
+  connect(mwUi->actionChapterEditorOpen,               &QAction::triggered,             this, [this]() { selectFileToOpen(false); });
+  connect(mwUi->actionChapterEditorAppend,             &QAction::triggered,             this, [this]() { selectFileToOpen(true); });
   connect(mwUi->actionChapterEditorSave,               &QAction::triggered,             this, &Tool::save);
   connect(mwUi->actionChapterEditorSaveAsXml,          &QAction::triggered,             this, &Tool::saveAsXml);
   connect(mwUi->actionChapterEditorSaveToMatroska,     &QAction::triggered,             this, &Tool::saveToMatroska);
@@ -70,7 +71,7 @@ Tool::setupActions() {
   connect(mwUi->actionChapterEditorRemoveFromMatroska, &QAction::triggered,             this, &Tool::removeChaptersFromExistingMatroskaFile);
 
   connect(ui->newFileButton,                           &QPushButton::clicked,           this, &Tool::newFile);
-  connect(ui->openFileButton,                          &QPushButton::clicked,           this, &Tool::selectFileToOpen);
+  connect(ui->openFileButton,                          &QPushButton::clicked,           this, [this]() { selectFileToOpen(false); });
 
   connect(m_chapterEditorMenu,                         &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
   connect(mw,                                          &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
@@ -98,6 +99,7 @@ Tool::enableMenuActions() {
   mwUi->actionChapterEditorSaveAsXml->setEnabled(     tabEnabled && hasElements);
   mwUi->actionChapterEditorSaveToMatroska->setEnabled(tabEnabled);
   mwUi->actionChapterEditorReload->setEnabled(        tabEnabled                                 && hasFileName);
+  mwUi->actionChapterEditorAppend->setEnabled(        !!tab);
   mwUi->actionChapterEditorClose->setEnabled(         !!tab);
   mwUi->menuChapterEditorAll->setEnabled(             !!tab);
   mwUi->actionChapterEditorSaveAll->setEnabled(       !!tab);
@@ -154,19 +156,22 @@ Tool::dropEvent(QDropEvent *event) {
 }
 
 void
-Tool::openFile(QString const &fileName) {
+Tool::openFile(QString const &fileName,
+               bool append) {
   auto &settings = Util::Settings::get();
   settings.m_lastOpenDir = QFileInfo{fileName}.path();
   settings.save();
 
-  appendTab(new Tab{this, fileName})
-   ->load();
+  if (!append)
+    appendTab(new Tab{this, fileName})->load();
+  else if (currentTab())
+    currentTab()->append(fileName);
 }
 
 void
 Tool::openFiles(QStringList const &fileNames) {
   for (auto const &fileName : fileNames)
-    openFile(fileName);
+    openFile(fileName, false);
 }
 
 void
@@ -176,7 +181,7 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 }
 
 void
-Tool::selectFileToOpen() {
+Tool::selectFileToOpen(bool append) {
   auto fileNames = Util::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().lastOpenDirPath(),
                                           QY("Supported file types")           + Q(" (*.cue *.mpls *.mkv *.mka *.mks *.mk3d *.txt *.webm *.xml);;") +
                                           QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
@@ -192,7 +197,7 @@ Tool::selectFileToOpen() {
   MainWindow::get()->setStatusBarMessage(QNY("Opening %1 file in the chapter editor…", "Opening %1 files in the chapter editor…", fileNames.count()).arg(fileNames.count()));
 
   for (auto const &fileName : fileNames)
-    openFile(fileName);
+    openFile(fileName, append);
 }
 
 void

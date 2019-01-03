@@ -82,6 +82,8 @@ signals:
 public slots:
   virtual void newFile();
   virtual void load();
+  virtual void append(QString const &fileName);
+  virtual void appendSimpleChaptersWithCharacterSet(QString const &characterSet);
   virtual void reloadSimpleChaptersWithCharacterSet(QString const &characterSet);
   virtual void save();
   virtual void saveAsXml();
@@ -124,12 +126,13 @@ protected:
   void resetData();
   void expandCollapseAll(bool expand, QModelIndex const &parentIdx = {});
 
-  LoadResult loadFromChapterFile();
-  LoadResult loadFromMatroskaFile();
-  LoadResult loadFromMplsFile();
-  LoadResult checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters);
+  LoadResult loadFromChapterFile(QString const &fileName, bool append);
+  LoadResult loadFromMatroskaFile(QString const &fileName, bool append);
+  LoadResult loadFromMplsFile(QString const &fileName, bool append);
+  LoadResult checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters, QString const &fileName, bool append);
+  void reloadOrAppendSimpleChaptersWithCharacterSet(QString const &characterSet, bool append);
 
-  bool readFileEndTimestampForMatroska();
+  bool readFileEndTimestampForMatroska(kax_analyzer_c &analyzer);
 
   void resizeChapterColumnsToContents() const;
   void resizeNameColumnsToContents() const;
@@ -178,6 +181,7 @@ protected:
   void setupToolTips();
 
   void chaptersLoaded(ChaptersPtr const &chapters, bool canBeWritten);
+  void appendTheseChapters(ChaptersPtr const &chapters);
 
   QString currentState() const;
   QStringList usedNameLanguages(QStandardItem *parentItem = nullptr);
