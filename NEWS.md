@@ -2,19 +2,19 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: multiplexer: the predefined split sizes and durations can
-  now be customized in the preferences.
 * mkvextract: WAV extractor: mkvextract will now write W64 files instead of
   WAV files if the file name extension is `.w64` or if the final file size is
   bigger than 4 GB, the file size limit for WAV files. Implements #2458.
-* MKVToolNix GUI: preferences: the ten most recently used values for the
-  "relative output directory" and "fixed output directory" settings are now
-  saved. The corresponding settings have been changed into combo boxes
-  allowing quick access to those recent values.
 * MKVToolNix GUI: multiplexer: a new button was added next to the "destination
   file" controls. Clicking it shows a menu with the ten most recently used
   output directories. Selecting one of them will change the destination file
   to the selected directory keeping the file name. Implements #2468.
+* MKVToolNix GUI: multiplexer (preferences): the ten most recently used values
+  for the "relative output directory" and "fixed output directory" settings
+  are now saved. The corresponding settings have been changed into combo boxes
+  allowing quick access to those recent values.
+* MKVToolNix GUI: multiplexer (preferences): the predefined split sizes and
+  durations can now be customized in the preferences.
 * MKVToolNix GUI: chapter editor: added an option in the "Chapter editor" menu
   for appending chapters from an existing file to the currently open editor
   tab. Part of the implementation of #2439.
@@ -24,17 +24,17 @@
 
 ## Bug fixes
 
-* source code: fixed compilation with Boost 1.69.0 after API-breaking change
-  to the `boost::tribool` class. Fixes #2460.
-* MKVToolNix GUI: multiplexer: removing a file added as an "additional part"
-  will no longer cause a crash. Fixes #2461.
-* mkvmerge: AAC: under certain conditions 8 channel audio files were taken for
-  7 channel ones.
 * mkvmerge: all files opened for writing will now be flushed once before
   they're closed. This ensures the operating system actually writes all cached
   data to disk preventing data loss in certain situations such as power
   outages or buggy drivers in combination with suspending the computer. Fixes
   #2469.
+* mkvmerge: AAC: under certain conditions 8 channel audio files were taken for
+  7 channel ones.
+* MKVToolNix GUI: multiplexer: removing a file added as an "additional part"
+  will no longer cause a crash. Fixes #2461.
+* source code: fixed compilation with Boost 1.69.0 after API-breaking change
+  to the `boost::tribool` class. Fixes #2460.
 
 
 # Version 29.0.0 "Like It Or Not" 2018-12-01
