@@ -6,6 +6,7 @@
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 class QDragEnterEvent;
+class QDragMoveEvent;
 class QDropEvent;
 class QMenu;
 
@@ -85,6 +86,7 @@ protected:
   virtual void showMergeWidget();
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
+  virtual void dragMoveEvent(QDragMoveEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
 };
 

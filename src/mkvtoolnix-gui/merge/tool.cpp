@@ -345,6 +345,11 @@ Tool::dragEnterEvent(QDragEnterEvent *event) {
 }
 
 void
+Tool::dragMoveEvent(QDragMoveEvent *event) {
+  m_filesDDHandler.handle(event, false);
+}
+
+void
 Tool::dropEvent(QDropEvent *event) {
   if (m_filesDDHandler.handle(event, true))
     filesDropped(m_filesDDHandler.fileNames(), event->mouseButtons());

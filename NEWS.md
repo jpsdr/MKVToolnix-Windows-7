@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: implemented a workaround for drag & drop not
+  working on macOS with Qt 5.12 due to a bug in Qt 5.12. Fixes #2472.
+
+
 # Version 30.0.0 "Interstellar" 2019-01-04
 
 ## New features and enhancements
