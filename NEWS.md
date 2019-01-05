@@ -2,6 +2,7 @@
 
 ## Bug fixes
 
+* build system: fixed building on non-UTF-8 locales. Fixes #2474.
 * MKVToolNix GUI: multiplexer: implemented a workaround for drag & drop not
   working on macOS with Qt 5.12 due to a bug in Qt 5.12. Fixes #2472.
 
