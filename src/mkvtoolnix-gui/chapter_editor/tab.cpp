@@ -388,7 +388,8 @@ Tab::loadFromMatroskaFile(QString const &fileName,
   auto chapters = analyzer->read_element(idx);
   if (!chapters) {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
-    emit removeThisTab();
+    if (!append)
+      emit removeThisTab();
     return {};
   }
 
