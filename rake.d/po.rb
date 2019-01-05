@@ -43,7 +43,7 @@ def read_po file_name
 
   IO.readlines(file_name).each do |line|
     line_no += 1
-    line.chomp!
+    line     = line.force_encoding("UTF-8").chomp
 
     if !line.empty? && !started
       items.last[:line] = line_no
