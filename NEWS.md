@@ -5,6 +5,11 @@
 * build system: fixed building on non-UTF-8 locales. Fixes #2474.
 * MKVToolNix GUI: multiplexer: implemented a workaround for drag & drop not
   working on macOS with Qt 5.12 due to a bug in Qt 5.12. Fixes #2472.
+* MKVToolNix GUI: chapter editor: when opening a Matroska/WebM file that
+  doesn't contain chapters and later saving chapters back to them, the editor
+  was truncating the file down to a couple of KB in size. This was a
+  regression introduced with the implementation of #2439 in v30.0.0 Fixes
+  #2476.
 
 
 # Version 30.0.0 "Interstellar" 2019-01-04

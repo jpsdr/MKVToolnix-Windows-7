@@ -376,8 +376,14 @@ Tab::loadFromMatroskaFile(QString const &fileName,
   }
 
   auto idx = analyzer->find(KaxChapters::ClassInfos.GlobalId);
-  if (-1 == idx)
+  if (-1 == idx) {
+    analyzer->close_file();
+
+    if (!append)
+      p->analyzer = std::move(analyzer);
+
     return { std::make_shared<KaxChapters>(), true };
+  }
 
   auto chapters = analyzer->read_element(idx);
   if (!chapters) {
