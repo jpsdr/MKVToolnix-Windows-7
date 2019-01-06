@@ -1,3 +1,11 @@
+# Version ?
+
+## Build system changes
+
+* Qt 5.4.0 or newer has required (up from 5.3.0) since version 30.0.0; I just
+  forgot to include this entry.
+
+
 # Version 30.1.0 "Forever And More" 2019-01-05
 
 ## Bug fixes

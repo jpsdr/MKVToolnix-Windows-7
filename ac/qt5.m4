@@ -2,7 +2,7 @@ dnl
 dnl Check for Qt 5
 dnl
 
-qt_min_ver=5.3.0
+qt_min_ver=5.4.0
 
 AC_ARG_ENABLE([qt],
   AC_HELP_STRING([--enable-qt],[compile the Qt-based MKVToolNix GUI (yes)]),
