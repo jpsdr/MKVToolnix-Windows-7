@@ -17,6 +17,7 @@
 #include "extract/xtr_base.h"
 
 class xtr_hdmv_pgs_c: public xtr_base_c {
+  debugging_option_c m_debug{"hdmv_pgs|xtr_hdmv_pgs"};
 
 public:
   xtr_hdmv_pgs_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);

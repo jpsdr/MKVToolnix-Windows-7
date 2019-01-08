@@ -31,7 +31,7 @@ void
 xtr_hdmv_pgs_c::handle_frame(xtr_frame_t &f) {
   binary sup_header[10];
   binary *mybuffer = f.frame->get_buffer();
-  int data_size    = f.frame->get_size();
+  int frame_size   = f.frame->get_size();
   int offset       = 0;
   uint64_t pts     = (f.timestamp * 9) / 100000;
 
@@ -39,11 +39,16 @@ xtr_hdmv_pgs_c::handle_frame(xtr_frame_t &f) {
   put_uint32_be(&sup_header[2], (uint32)pts);
   put_uint32_be(&sup_header[6], 0);
 
-  while ((offset + 3) <= data_size) {
-    int packet_size = std::min(static_cast<int>(get_uint16_be(mybuffer + offset + 1) + 3), data_size - offset);
+  mxdebug_if(m_debug, fmt::format("frame size {0}\n", frame_size));
+
+  while ((offset + 3) <= frame_size) {
+    int segment_size = std::min(static_cast<int>(get_uint16_be(mybuffer + offset + 1) + 3), frame_size - offset);
+    auto type        = mybuffer[offset];
+
+    mxdebug_if(m_debug, fmt::format("  segment size {0} at {1} type 0x{2:02x} ({3})\n", segment_size, offset, type, mtx::pgs::name_for_type(type)));
 
     m_out->write(sup_header, 10);
-    m_out->write(mybuffer + offset, packet_size);
-    offset += packet_size;
+    m_out->write(mybuffer + offset, segment_size);
+    offset += segment_size;
   }
 }
