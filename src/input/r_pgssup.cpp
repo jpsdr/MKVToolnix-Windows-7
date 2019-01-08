@@ -30,7 +30,7 @@ pgssup_reader_c::probe_file(mm_io_c &in,
 
   try {
     in.setFilePointer(0);
-    if (PGSSUP_FILE_MAGIC != in.read_uint16_be())
+    if (mtx::pgs::FILE_MAGIC != in.read_uint16_be())
       return 0;
 
     in.skip(4 + 4 + 1);
@@ -40,7 +40,7 @@ pgssup_reader_c::probe_file(mm_io_c &in,
 
     in.setFilePointer(segment_size, seek_current);
 
-    return PGSSUP_FILE_MAGIC != in.read_uint16_be() ? 0 : 1;
+    return mtx::pgs::FILE_MAGIC != in.read_uint16_be() ? 0 : 1;
 
   } catch (mtx::mm_io::exception &) {
   }
@@ -84,7 +84,7 @@ pgssup_reader_c::read(generic_packetizer_c *,
     if (m_debug)
       mxinfo(fmt::format("pgssup_reader_c::read(): ---------- start read at {0}\n", m_in->getFilePointer()));
 
-    if (PGSSUP_FILE_MAGIC != m_in->read_uint16_be())
+    if (mtx::pgs::FILE_MAGIC != m_in->read_uint16_be())
       return flush_packetizers();
 
     uint64_t timestamp = static_cast<uint64_t>(m_in->read_uint32_be()) * 100000Lu / 9;

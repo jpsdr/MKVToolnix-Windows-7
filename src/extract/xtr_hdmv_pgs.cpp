@@ -17,6 +17,7 @@
 
 #include "common/ebml.h"
 #include "common/endian.h"
+#include "common/pgssup.h"
 #include "extract/xtr_hdmv_pgs.h"
 
 xtr_hdmv_pgs_c::xtr_hdmv_pgs_c(const std::string &codec_id,
@@ -34,7 +35,7 @@ xtr_hdmv_pgs_c::handle_frame(xtr_frame_t &f) {
   int offset       = 0;
   uint64_t pts     = (f.timestamp * 9) / 100000;
 
-  memcpy(sup_header, "PG", 2);
+  put_uint16_be(&sup_header[0], mtx::pgs::FILE_MAGIC);
   put_uint32_be(&sup_header[2], (uint32)pts);
   put_uint32_be(&sup_header[6], 0);
 
