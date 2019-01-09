@@ -95,6 +95,6 @@ hdmv_pgs_packetizer_c::dump_packet(memory_c const &data) {
 
 connection_result_e
 hdmv_pgs_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                 std::string &) {
+                                      std::string &) {
   return !dynamic_cast<hdmv_pgs_packetizer_c *>(src) ? CAN_CONNECT_NO_FORMAT : CAN_CONNECT_YES;
 }
