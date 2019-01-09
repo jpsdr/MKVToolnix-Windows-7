@@ -58,7 +58,7 @@ hdmv_pgs_packetizer_c::process(packet_cptr packet) {
   } else
     m_aggregated->data->add(packet->data);
 
-  if (   (0                               != packet->data->get_size())
+  if (   (0                                != packet->data->get_size())
       && (mtx::pgs::END_OF_DISPLAY_SEGMENT == packet->data->get_buffer()[0])) {
     add_packet(m_aggregated);
     m_aggregated.reset();
