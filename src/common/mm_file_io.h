@@ -26,9 +26,6 @@ public:
   mm_file_io_c(const std::string &path, const open_mode mode = MODE_READ);
   virtual ~mm_file_io_c();
 
-  static void prepare_path(const std::string &path);
-  static memory_cptr slurp(std::string const &file_name);
-
   virtual uint64 getFilePointer();
 #if defined(SYS_WINDOWS)
   virtual uint64 get_real_file_pointer();
@@ -41,9 +38,15 @@ public:
 
   virtual std::string get_file_name() const;
 
+public:
+  static void prepare_path(const std::string &path);
+  static memory_cptr slurp(std::string const &file_name);
+
   static void setup();
   static void cleanup();
   static mm_io_cptr open(const std::string &path, const open_mode mode = MODE_READ);
+
+  static void enable_flushing_on_close(bool enable);
 
 protected:
   virtual uint32 _read(void *buffer, size_t size);

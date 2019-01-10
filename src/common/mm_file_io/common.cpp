@@ -17,6 +17,8 @@
 #include "common/mm_file_io.h"
 #include "common/mm_file_io_p.h"
 
+bool mm_file_io_private_c::ms_flush_on_close = false;
+
 mm_file_io_c::mm_file_io_c(std::string const &path,
                            open_mode const mode)
   : mm_io_c{*new mm_file_io_private_c{path, mode}}
@@ -89,4 +91,9 @@ mm_io_cptr
 mm_file_io_c::open(const std::string &path,
                    const open_mode mode) {
   return mm_io_cptr(new mm_file_io_c(path, mode));
+}
+
+void
+mm_file_io_c::enable_flushing_on_close(bool enable) {
+  mm_file_io_private_c::ms_flush_on_close = enable;
 }

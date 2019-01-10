@@ -34,4 +34,7 @@ public:
 #endif
 
   explicit mm_file_io_private_c(std::string const &p_file_name, open_mode const p_mode);
+
+public:
+  static bool ms_flush_on_close;
 };

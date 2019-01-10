@@ -190,6 +190,10 @@ handle_common_args(std::vector<std::string> &args,
       g_gui_mode = true;
       args.erase(args.begin() + i, args.begin() + i + 1);
 
+    } else if (args[i] == "--flush-on-close") {
+      mm_file_io_c::enable_flushing_on_close(true);
+      args.erase(args.begin() + i, args.begin() + i + 1);
+
     } else
       ++i;
   }

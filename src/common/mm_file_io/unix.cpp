@@ -107,7 +107,7 @@ mm_file_io_c::close() {
   auto p = p_func();
 
   if (p->file) {
-    if (p->mode != MODE_READ)
+    if (mm_file_io_private_c::ms_flush_on_close && (p->mode != MODE_READ))
       fflush(p->file);
 
     fclose(p->file);

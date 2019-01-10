@@ -1,5 +1,19 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge, mkvextract: when closing files that were opened for writing,
+  cached data will not be flushed to storage automatically anymore. This
+  reverts the workaround implemented for #2469. A new option was added to both
+  programs (`--flush-on-close`) that re-enables flushing for people who are
+  affected by data loss such as described in #2469.
+
+  The reason is that automatic flushing causes long delays in processing
+  queues when the output by mkvmerge/mkvextract isn't the final product but
+  just an intermediate result to be processed further.
+
+   Implements #2480.
+
 ## Build system changes
 
 * Qt 5.4.0 or newer has required (up from 5.3.0) since version 30.0.0; I just

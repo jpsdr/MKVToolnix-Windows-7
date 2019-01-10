@@ -132,6 +132,18 @@
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvextract.description.flush_on_close">
+     <term><option>--flush-on-close</option></term>
+     <listitem>
+      <para>
+       Tells the program to flush all data cached in memory to storage when closing files opened for writing.
+       This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers.
+       The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting.
+       See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvextract.description.common.ui_language">
      <term><option>--ui-language</option> <parameter>code</parameter></term>
      <listitem>

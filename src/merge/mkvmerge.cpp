@@ -365,6 +365,8 @@ set_usage() {
   usage_text += Y("  --output-charset <cset>  Output messages in this charset\n");
   usage_text += Y("  -r, --redirect-output <file>\n"
                   "                           Redirects all messages into this file.\n");
+  usage_text += Y("  --flush-on-close         Flushes all cached data to storage when closing\n"
+                  "                           a file opened for writing.\n");
   usage_text += Y("  --debug <topic>          Turns on debugging output for 'topic'.\n");
   usage_text += Y("  --engage <feature>       Turns on experimental feature 'feature'.\n");
   usage_text += Y("  @option-file.json        Reads additional command line options from\n"

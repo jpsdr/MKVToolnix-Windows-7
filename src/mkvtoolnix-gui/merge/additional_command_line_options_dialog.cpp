@@ -52,6 +52,12 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
         QY("This causes bigger overhead but allows precise seeking and extraction."),
         QY("If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present.") });
 
+  add(Q("--flush-on-close"), false, global,
+      { QY("Tells mkvmerge to flush all data cached in memory to storage when closing files opened for writing."),
+        QY("This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers."),
+        QY("The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."),
+        QY("See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons.") });
+
   auto hacks  = m_ui->gridDevelopmentHacks;
 
   add(Q("--engage space_after_chapters"),         false, hacks, { QY("Leave additional space (EbmlVoid) in the destination file after the chapters.") });
