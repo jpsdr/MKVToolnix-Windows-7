@@ -13,9 +13,9 @@
 
 #include "common/common_pch.h"
 
-#include "common/pgssup.h"
+#include "common/hdmv_pgs.h"
 
-namespace mtx { namespace pgs {
+namespace mtx { namespace hdmv_pgs {
 
 char const *
 name_for_type(uint8_t type) {

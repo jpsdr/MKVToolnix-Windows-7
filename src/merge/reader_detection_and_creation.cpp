@@ -30,6 +30,7 @@
 #include "input/r_dv.h"
 #include "input/r_flac.h"
 #include "input/r_flv.h"
+#include "input/r_hdmv_pgs.h"
 #include "input/r_hdmv_textst.h"
 #include "input/r_hevc.h"
 #include "input/r_ivf.h"
@@ -41,7 +42,6 @@
 #include "input/r_mpeg_ts.h"
 #include "input/r_obu.h"
 #include "input/r_ogm.h"
-#include "input/r_pgssup.h"
 #include "input/r_qtmp4.h"
 #include "input/r_real.h"
 #include "input/r_srt.h"
@@ -139,7 +139,7 @@ prober_for_type(mtx::file_type_e type) {
     type_probe_map[mtx::file_type_e::mpeg_ts]     = &do_probe<mtx::mpeg_ts::reader_c, mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::obu]         = &do_probe<obu_reader_c,           mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::ogm]         = &do_probe<ogm_reader_c,           mm_io_cptr, int64_t>;
-    type_probe_map[mtx::file_type_e::pgssup]      = &do_probe<pgssup_reader_c,        mm_io_cptr, int64_t>;
+    type_probe_map[mtx::file_type_e::pgssup]      = &do_probe<hdmv_pgs_reader_c,      mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::qtmp4]       = &do_probe<qtmp4_reader_c,         mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::real]        = &do_probe<real_reader_c,          mm_io_cptr, int64_t>;
     type_probe_map[mtx::file_type_e::truehd]      = &do_probe<truehd_reader_c,        mm_io_cptr, int64_t>;
@@ -233,7 +233,7 @@ get_file_type_internal(filelist_t &file) {
     return { mtx::file_type_e::hdmv_textst, size };
   if (do_probe<flac_reader_c>(io, size))
     return { mtx::file_type_e::flac, size };
-  if (do_probe<pgssup_reader_c>(io, size))
+  if (do_probe<hdmv_pgs_reader_c>(io, size))
     return { mtx::file_type_e::pgssup, size };
   if (do_probe<real_reader_c>(io, size))
     return { mtx::file_type_e::real, size };
@@ -424,7 +424,7 @@ create_readers() {
           file->reader.reset(new ogm_reader_c(*file->ti, input_file));
           break;
         case mtx::file_type_e::pgssup:
-          file->reader.reset(new pgssup_reader_c(*file->ti, input_file));
+          file->reader.reset(new hdmv_pgs_reader_c(*file->ti, input_file));
           break;
         case mtx::file_type_e::qtmp4:
           file->reader.reset(new qtmp4_reader_c(*file->ti, input_file));

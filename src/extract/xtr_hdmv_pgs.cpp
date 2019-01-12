@@ -17,7 +17,7 @@
 
 #include "common/ebml.h"
 #include "common/endian.h"
-#include "common/pgssup.h"
+#include "common/hdmv_pgs.h"
 #include "extract/xtr_hdmv_pgs.h"
 
 xtr_hdmv_pgs_c::xtr_hdmv_pgs_c(const std::string &codec_id,
@@ -35,7 +35,7 @@ xtr_hdmv_pgs_c::handle_frame(xtr_frame_t &f) {
   int offset       = 0;
   uint64_t pts     = (f.timestamp * 9) / 100000;
 
-  put_uint16_be(&sup_header[0], mtx::pgs::FILE_MAGIC);
+  put_uint16_be(&sup_header[0], mtx::hdmv_pgs::FILE_MAGIC);
   put_uint32_be(&sup_header[2], (uint32)pts);
   put_uint32_be(&sup_header[6], 0);
 
@@ -45,7 +45,7 @@ xtr_hdmv_pgs_c::handle_frame(xtr_frame_t &f) {
     int segment_size = std::min(static_cast<int>(get_uint16_be(mybuffer + offset + 1) + 3), frame_size - offset);
     auto type        = mybuffer[offset];
 
-    mxdebug_if(m_debug, fmt::format("  segment size {0} at {1} type 0x{2:02x} ({3})\n", segment_size, offset, type, mtx::pgs::name_for_type(type)));
+    mxdebug_if(m_debug, fmt::format("  segment size {0} at {1} type 0x{2:02x} ({3})\n", segment_size, offset, type, mtx::hdmv_pgs::name_for_type(type)));
 
     m_out->write(sup_header, 10);
     m_out->write(mybuffer + offset, segment_size);

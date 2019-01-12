@@ -19,13 +19,13 @@
 #include "common/error.h"
 #include "merge/generic_reader.h"
 
-class pgssup_reader_c: public generic_reader_c {
+class hdmv_pgs_reader_c: public generic_reader_c {
 private:
   debugging_option_c m_debug;
 
 public:
-  pgssup_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~pgssup_reader_c();
+  hdmv_pgs_reader_c(const track_info_c &ti, const mm_io_cptr &in);
+  virtual ~hdmv_pgs_reader_c();
 
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::pgssup;

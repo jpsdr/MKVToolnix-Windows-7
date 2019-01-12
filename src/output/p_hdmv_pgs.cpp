@@ -19,7 +19,7 @@
 #include "common/codec.h"
 #include "common/compression.h"
 #include "common/endian.h"
-#include "common/pgssup.h"
+#include "common/hdmv_pgs.h"
 #include "output/p_hdmv_pgs.h"
 
 using namespace libmatroska;
@@ -59,8 +59,8 @@ hdmv_pgs_packetizer_c::process(packet_cptr packet) {
   } else
     m_aggregated->data->add(packet->data);
 
-  if (   (0                                != packet->data->get_size())
-      && (mtx::pgs::END_OF_DISPLAY_SEGMENT == packet->data->get_buffer()[0])) {
+  if (   (0                                     != packet->data->get_size())
+      && (mtx::hdmv_pgs::END_OF_DISPLAY_SEGMENT == packet->data->get_buffer()[0])) {
     dump_and_add_packet(m_aggregated);
     m_aggregated.reset();
   }
@@ -89,7 +89,7 @@ hdmv_pgs_packetizer_c::dump_packet(memory_c const &data) {
     auto type          = ptr[offset];
     offset            += segment_size;
 
-    mxdebug(fmt::format("  segment size {0} at {1} type 0x{2:02x} ({3})\n", segment_size, offset - segment_size, type, mtx::pgs::name_for_type(type)));
+    mxdebug(fmt::format("  segment size {0} at {1} type 0x{2:02x} ({3})\n", segment_size, offset - segment_size, type, mtx::hdmv_pgs::name_for_type(type)));
   }
 }
 

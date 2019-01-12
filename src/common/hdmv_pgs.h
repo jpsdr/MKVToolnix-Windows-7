@@ -13,7 +13,7 @@
 
 #pragma once
 
-namespace mtx { namespace pgs {
+namespace mtx { namespace hdmv_pgs {
 
 namespace {
 
@@ -30,4 +30,4 @@ uint8_t  constexpr END_OF_DISPLAY_SEGMENT           =   0x80;
 
 char const *name_for_type(uint8_t type);
 
-}} // namespace mtx::pgs
+}} // namespace mtx::hdmv_pgs

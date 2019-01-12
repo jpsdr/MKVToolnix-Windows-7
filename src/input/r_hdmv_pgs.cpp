@@ -16,21 +16,21 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"
-#include "common/pgssup.h"
-#include "input/r_pgssup.h"
+#include "common/hdmv_pgs.h"
+#include "input/r_hdmv_pgs.h"
 #include "output/p_hdmv_pgs.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
 
 int
-pgssup_reader_c::probe_file(mm_io_c &in,
-                            uint64_t size) {
+hdmv_pgs_reader_c::probe_file(mm_io_c &in,
+                              uint64_t size) {
   if (5 > size)
     return 0;
 
   try {
     in.setFilePointer(0);
-    if (mtx::pgs::FILE_MAGIC != in.read_uint16_be())
+    if (mtx::hdmv_pgs::FILE_MAGIC != in.read_uint16_be())
       return 0;
 
     in.skip(4 + 4 + 1);
@@ -40,7 +40,7 @@ pgssup_reader_c::probe_file(mm_io_c &in,
 
     in.setFilePointer(segment_size, seek_current);
 
-    return mtx::pgs::FILE_MAGIC != in.read_uint16_be() ? 0 : 1;
+    return mtx::hdmv_pgs::FILE_MAGIC != in.read_uint16_be() ? 0 : 1;
 
   } catch (mtx::mm_io::exception &) {
   }
@@ -48,25 +48,25 @@ pgssup_reader_c::probe_file(mm_io_c &in,
   return 0;
 }
 
-pgssup_reader_c::pgssup_reader_c(const track_info_c &ti,
-                                 const mm_io_cptr &in)
+hdmv_pgs_reader_c::hdmv_pgs_reader_c(const track_info_c &ti,
+                                     const mm_io_cptr &in)
   : generic_reader_c(ti, in)
-  , m_debug{"pgssup_reader"}
+  , m_debug{"hdmv_pgs_reader"}
 {
 }
 
 void
-pgssup_reader_c::read_headers() {
+hdmv_pgs_reader_c::read_headers() {
   m_ti.m_id = 0;       // ID for this track.
 
   show_demuxer_info();
 }
 
-pgssup_reader_c::~pgssup_reader_c() {
+hdmv_pgs_reader_c::~hdmv_pgs_reader_c() {
 }
 
 void
-pgssup_reader_c::create_packetizer(int64_t) {
+hdmv_pgs_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('s', 0) || (NPTZR() != 0))
     return;
 
@@ -78,13 +78,13 @@ pgssup_reader_c::create_packetizer(int64_t) {
 }
 
 file_status_e
-pgssup_reader_c::read(generic_packetizer_c *,
-                      bool) {
+hdmv_pgs_reader_c::read(generic_packetizer_c *,
+                        bool) {
   try {
     if (m_debug)
-      mxinfo(fmt::format("pgssup_reader_c::read(): ---------- start read at {0}\n", m_in->getFilePointer()));
+      mxinfo(fmt::format("hdmv_pgs_reader_c::read(): ---------- start read at {0}\n", m_in->getFilePointer()));
 
-    if (mtx::pgs::FILE_MAGIC != m_in->read_uint16_be())
+    if (mtx::hdmv_pgs::FILE_MAGIC != m_in->read_uint16_be())
       return flush_packetizers();
 
     uint64_t timestamp = static_cast<uint64_t>(m_in->read_uint32_be()) * 100000Lu / 9;
@@ -101,13 +101,13 @@ pgssup_reader_c::read(generic_packetizer_c *,
       return flush_packetizers();
 
     if (m_debug)
-      mxinfo(fmt::format("pgssup_reader_c::read(): type {0:02x} size {1} at {2}\n", static_cast<unsigned int>(frame->get_buffer()[0]), segment_size, m_in->getFilePointer() - 10 - 3));
+      mxinfo(fmt::format("hdmv_pgs_reader_c::read(): type {0:02x} size {1} at {2}\n", static_cast<unsigned int>(frame->get_buffer()[0]), segment_size, m_in->getFilePointer() - 10 - 3));
 
     PTZR0->process(new packet_t(frame, timestamp));
 
   } catch (...) {
     if (m_debug)
-      mxinfo("pgssup_reader_c::read(): exception\n");
+      mxinfo("hdmv_pgs_reader_c::read(): exception\n");
 
     return flush_packetizers();
   }
@@ -116,7 +116,7 @@ pgssup_reader_c::read(generic_packetizer_c *,
 }
 
 void
-pgssup_reader_c::identify() {
+hdmv_pgs_reader_c::identify() {
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_HDMV_PGS, "HDMV PGS"));
 }
