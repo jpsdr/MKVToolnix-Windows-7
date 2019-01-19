@@ -2445,7 +2445,8 @@ qtmp4_demuxer_c::apply_edit_list() {
     timeline_cts += edit_end_cts - edit_start_cts;
   }
 
-  m_index = std::move(edited_index);
+  if (!edited_index.empty())
+    m_index = std::move(edited_index);
 
   if (m_debug_editlists)
     dump_index_entries("Index after edit list");

@@ -14,6 +14,12 @@
 
    Implements #2480.
 
+## Bug fixes
+
+* mkvmerge: MP4 reader: edit lists consisting solely of elements that mkvmerge
+  doesn't support (such as dwells) are simply ignored. Before no data was read
+  for such tracks at all. Fixes #2487.
+
 ## Build system changes
 
 * Qt 5.4.0 or newer has required (up from 5.3.0) since version 30.0.0; I just
