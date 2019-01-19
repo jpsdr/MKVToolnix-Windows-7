@@ -10,6 +10,7 @@
 #include <matroska/KaxSemantic.h>
 
 #include "common/bitvalue.h"
+#include "common/bluray/mpls.h"
 #include "common/chapters/chapters.h"
 #include "common/construct.h"
 #include "common/ebml.h"
@@ -17,7 +18,6 @@
 #include "common/math.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
-#include "common/mpls.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
 #include "common/strings/formatting.h"

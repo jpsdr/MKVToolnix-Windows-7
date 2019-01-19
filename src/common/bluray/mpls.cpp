@@ -14,10 +14,10 @@
 
 #include <vector>
 
+#include "common/bluray/mpls.h"
 #include "common/debugging.h"
 #include "common/hacks.h"
 #include "common/list_utils.h"
-#include "common/mpls.h"
 #include "common/strings/formatting.h"
 
 namespace mtx { namespace bluray { namespace mpls {

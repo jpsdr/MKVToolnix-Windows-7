@@ -18,10 +18,10 @@
 
 #include "common/at_scope_exit.h"
 #include "common/avc_es_parser.h"
+#include "common/bluray/clpi.h"
 #include "common/bswap.h"
 #include "common/checksums/crc.h"
 #include "common/checksums/base_fwd.h"
-#include "common/clpi.h"
 #include "common/construct.h"
 #include "common/endian.h"
 #include "common/file.h"
