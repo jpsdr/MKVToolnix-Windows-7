@@ -19,12 +19,12 @@
 #include "common/at_scope_exit.h"
 #include "common/avc_es_parser.h"
 #include "common/bluray/clpi.h"
+#include "common/bluray/util.h"
 #include "common/bswap.h"
 #include "common/checksums/crc.h"
 #include "common/checksums/base_fwd.h"
 #include "common/construct.h"
 #include "common/endian.h"
-#include "common/file.h"
 #include "common/hdmv_textst.h"
 #include "common/mp3.h"
 #include "common/mm_file_io.h"
@@ -2470,34 +2470,6 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
   return FILE_STATUS_MOREDATA;
 }
 
-bfs::path
-reader_c::find_file(bfs::path const &source_file,
-                    std::string const &sub_directory,
-                    std::string const &extension)
-  const {
-  auto file_lower          = source_file;
-  auto file_upper          = source_file;
-
-  auto sub_directory_upper = balg::to_upper_copy(sub_directory);
-  auto sub_directory_lower = balg::to_lower_copy(sub_directory);
-
-  file_upper.replace_extension(balg::to_upper_copy(extension));;
-  file_lower.replace_extension(balg::to_lower_copy(extension));;
-
-  auto file_name_lower = file_upper.filename();
-  auto file_name_upper = file_lower.filename();
-  auto path            = source_file.parent_path();
-
-  return mtx::file::first_existing_path({
-      file_lower,
-      file_upper,
-      path / ".." / sub_directory_upper / file_name_lower, path / ".." / ".." / sub_directory_upper / file_name_lower,
-      path / ".." / sub_directory_upper / file_name_upper, path / ".." / ".." / sub_directory_upper / file_name_upper,
-      path / ".." / sub_directory_lower / file_name_lower, path / ".." / ".." / sub_directory_lower / file_name_lower,
-      path / ".." / sub_directory_lower / file_name_upper, path / ".." / ".." / sub_directory_lower / file_name_upper,
-  });
-}
-
 void
 reader_c::parse_clip_info_file(std::size_t file_idx) {
   auto &file         = *m_files[file_idx];
@@ -2506,7 +2478,7 @@ reader_c::parse_clip_info_file(std::size_t file_idx) {
 
   mxdebug_if(m_debug_clpi, fmt::format("find_clip_info_file: Searching for CLPI corresponding to {0}\n", source_file.string()));
 
-  auto clpi_file = find_file(source_file, "clipinf", ".clpi");
+  auto clpi_file = mtx::bluray::find_other_file(source_file, bfs::path{"CLIPINF"} / fmt::format("{0}.clpi", source_file.stem().string()));
 
   mxdebug_if(m_debug_clpi, fmt::format("reader_c::find_clip_info_file: CLPI file: {0}\n", !clpi_file.empty() ? clpi_file.string() : "not found"));
 
@@ -2650,7 +2622,7 @@ reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
       continue;
 
     auto &item = sub_path.items.front();
-    auto m2ts  = find_file(source_file.parent_path() / fmt::format("{0}.m2ts", item.clpi_file_name), "STREAM", ".m2ts");
+    auto m2ts  = mtx::bluray::find_other_file(source_file, bfs::path{"STREAM"} / fmt::format("{0}.m2ts", bfs::path{item.clpi_file_name}.stem().string()));
 
     mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: M2TS for sub_path {0}: {1}\n", sub_path_idx - 1, !m2ts.empty() ? m2ts.string() : "not found"));
 

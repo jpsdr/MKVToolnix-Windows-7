@@ -504,7 +504,6 @@ private:
   void reset_processing_state(processing_state_e new_state);
   void determine_global_timestamp_offset();
 
-  bfs::path find_file(bfs::path const &source_file, std::string const &sub_directory, std::string const &extension) const;
   void parse_clip_info_file(std::size_t file_idx);
 
   void add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in);

@@ -2,8 +2,8 @@
 
 #include <unordered_map>
 
+#include "common/bluray/util.h"
 #include "common/debugging.h"
-#include "common/file.h"
 #include "common/id_info.h"
 #include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"
@@ -54,24 +54,14 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
     return mm_io_cptr{};
   }
 
-  auto mpls_dir = bfs::system_complete(bfs::path(in.get_file_name())).remove_filename();
-
   std::vector<bfs::path> file_names;
 
   for (auto const &item : mpls_parser->get_playlist().items) {
-    auto basename_upper = fmt::format("{0}.{1}", item.clip_id, balg::to_upper_copy(item.codec_id));
-    auto basename_lower = fmt::format("{0}.{1}", item.clip_id, balg::to_lower_copy(item.codec_id));
-
-    auto file = mtx::file::first_existing_path({
-        mpls_dir / ".." / "STREAM" / basename_lower, mpls_dir / ".." / ".." / "STREAM" / basename_lower,
-        mpls_dir / ".." / "STREAM" / basename_upper, mpls_dir / ".." / ".." / "STREAM" / basename_upper,
-        mpls_dir / ".." / "stream" / basename_lower, mpls_dir / ".." / ".." / "stream" / basename_lower,
-        mpls_dir / ".." / "stream" / basename_upper, mpls_dir / ".." / ".." / "stream" / basename_upper,
-      });
-
-    mxdebug_if(s_debug, fmt::format("Item clip ID: {0} codec ID: {1}: have file? {2} file: {3}\n", item.clip_id, item.codec_id, !file.empty(), file.string()));
+    auto file = mtx::bluray::find_other_file(in.get_file_name(), bfs::path{"STREAM"} / fmt::format("{0}.{1}", item.clip_id, balg::to_lower_copy(item.codec_id)));
     if (!file.empty())
       file_names.push_back(file);
+
+    mxdebug_if(s_debug, fmt::format("Item clip ID: {0} codec ID: {1}: have file? {2} file: {3}\n", item.clip_id, item.codec_id, !file.empty(), file.string()));
   }
 
   mxdebug_if(s_debug, fmt::format("Number of files left: {0}\n", file_names.size()));
