@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QScrollBar>
 #include <QVariant>
 
 #include "common/locale.h"
@@ -75,8 +76,18 @@ SelectCharacterSetDialog::updatePreview() {
     return;
 
   auto converter = charset_converter_c::init(to_utf8(selectedCharacterSet()));
-  if (converter)
-    p->m_ui->content->setPlainText(Q(converter->utf8(p->m_content.data())));
+  if (!converter)
+    return;
+
+  auto horizontalScrollBar = p->m_ui->content->horizontalScrollBar();
+  auto verticalScrollBar   = p->m_ui->content->verticalScrollBar();
+  auto horizontalPosition  = horizontalScrollBar->value();
+  auto verticalPosition    = verticalScrollBar->value();
+
+  p->m_ui->content->setPlainText(Q(converter->utf8(p->m_content.data())));
+
+  horizontalScrollBar->setValue(std::min(horizontalPosition, horizontalScrollBar->maximum()));
+  verticalScrollBar  ->setValue(std::min(verticalPosition,   verticalScrollBar->maximum()));
 }
 
 void

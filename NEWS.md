@@ -12,7 +12,10 @@
   queues when the output by mkvmerge/mkvextract isn't the final product but
   just an intermediate result to be processed further.
 
-   Implements #2480.
+  Implements #2480.
+* MKVToolNix GUI: multiplexer: the dialog previewing different character sets
+  for text subtitles will now keep the position of the displayed text when
+  switching between character sets. Implements #2489.
 
 ## Bug fixes
 
