@@ -154,7 +154,7 @@ FileIdentificationWorker::handleFileThatShouldBeSelectedElsewhere(QString const 
 }
 
 boost::optional<FileIdentificationWorker::Result>
-FileIdentificationWorker::handleBluRayMainFile(QString const &fileName) {
+FileIdentificationWorker::handleBlurayMainFile(QString const &fileName) {
   auto info = QFileInfo{fileName};
 
   if (info.completeSuffix().toLower() != Q("bdmv"))
@@ -266,7 +266,7 @@ FileIdentificationWorker::identifyThisFile(QString const &fileName) {
     return Result::Wait;
   }
 
-  auto result = handleBluRayMainFile(fileName);
+  auto result = handleBlurayMainFile(fileName);
   if (result) {
     qDebug() << "FileIdentificationWorker::identifyThisFile: identified as Blu-ray index.bdmv/MovieObject.bdmv";
     return *result;

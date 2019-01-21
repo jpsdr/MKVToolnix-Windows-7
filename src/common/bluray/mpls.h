@@ -6,7 +6,7 @@
   see the file COPYING for details
   or visit http://www.gnu.org/copyleft/gpl.html
 
-  definitions and helper functions for BluRay playlist files (MPLS)
+  definitions and helper functions for Blu-ray playlist files (MPLS)
 
   Written by Moritz Bunkus <moritz@bunkus.org>.
 */

@@ -6,7 +6,7 @@
   see the file COPYING for details
   or visit http://www.gnu.org/copyleft/gpl.html
 
-  BluRay clip info data handling
+  Blu-ray clip info data handling
 
   Written by Moritz Bunkus <moritz@bunkus.org>.
 */
