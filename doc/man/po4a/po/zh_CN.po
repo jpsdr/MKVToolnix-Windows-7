@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2019-01-10 22:14+0100\n"
-"PO-Revision-Date: 2018-10-21 12:26+0000\n"
+"PO-Revision-Date: 2019-01-11 15:56+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -37,7 +37,7 @@ msgstr "30.1.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2019-01-05"
-msgstr ""
+msgstr "2019-01-05"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -334,16 +334,14 @@ msgstr "将所有信息输出至文件 <parameter>文件名</parameter> 而不�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:136
 #: doc/man/mkvmerge.xml:2098
-#, fuzzy
-#| msgid "<option>--no-cues</option>"
 msgid "<option>--flush-on-close</option>"
-msgstr "<option>--no-cues</option>"
+msgstr "<option>--flush-on-close</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:139
 #: doc/man/mkvmerge.xml:2101
 msgid "Tells the program to flush all data cached in memory to storage when closing files opened for writing.  This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers.  The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting.  See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons."
-msgstr ""
+msgstr "让程序在关闭以写入模式打开的文件时，强制将内存中已缓存的所有数据写入到存储设备。可用于在电源中断时避免数据损失，或规避操作系统或驱动程序的特定问题。缺点是混流耗时更长，因为 mkvmerge 在退出前需要等待所有数据写入存储设备。关于优劣的深入讨论，请参见 MKVToolNix bug 跟踪平台中的问题 #2469 与问题 #2480。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:148
@@ -782,10 +780,9 @@ msgstr "同时提取章节与标签，并按其相应的 &xml; 格式保存:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:522
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge movie.mkv chapters movie-chapters.xml tags movie-tags.xml"
+#, no-wrap
 msgid "$ mkvextract movie.mkv chapters movie-chapters.xml tags movie-tags.xml"
-msgstr "$ mkvmerge 影片.mkv chapters 影片章节.xml tags 影片标签.xml"
+msgstr "$ mkvextract 影片.mkv chapters 影片章节.xml tags 影片标签.xml"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:525
@@ -794,10 +791,9 @@ msgstr "同时提取一些轨道及其对应的时间戳:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:528
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:director's comments.aac\" timestamps_v2 \"0:timestamps video.txt\" \"1:timestamps main audio.txt\" \"2:timestamps director's comments.txt\""
+#, no-wrap
 msgid "$ mkvextract \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:director's comments.aac\" timestamps_v2 \"0:timestamps video.txt\" \"1:timestamps main audio.txt\" \"2:timestamps director's comments.txt\""
-msgstr "$ mkvmerge \"另一部影片.mkv\" tracks 0:视频.h265 \"1:主音轨.aac\" \"2:导演评论.aac\" timestamps_v2 \"0:时间戳 视频.txt\" \"1:时间戳 主音轨.txt\" \"2:时间戳 导演评论.txt\""
+msgstr "$ mkvextract \"另一部影片.mkv\" tracks 0:video.h265 \"1:主音轨.aac\" \"2:导演评论.aac\" timestamps_v2 \"0:视频时间戳.txt\" \"1:主音轨时间戳.txt\" \"2:导演评论音轨时间戳.txt\""
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:531
@@ -806,10 +802,9 @@ msgstr "以 Ogg/OGM 格式提取章节，并将一条文本字幕轨道用另一
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:534
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge \"My Movie.mkv\" chapters --simple \"My Chapters.txt\" tracks -c MS-ANSI \"2:My Subtitles.srt\""
+#, no-wrap
 msgid "$ mkvextract \"My Movie.mkv\" chapters --simple \"My Chapters.txt\" tracks -c MS-ANSI \"2:My Subtitles.srt\""
-msgstr "$ mkvmerge \"我的影片.mkv\" chapters --simple \"我的章节.txt\" tracks -c MS-ANSI \"2:我的字幕.srt\""
+msgstr "$ mkvextract \"我的影片.mkv\" chapters --simple \"我的章节.txt\" tracks -c MS-ANSI \"2:我的字幕.srt\""
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:538
