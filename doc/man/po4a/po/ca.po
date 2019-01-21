@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2019-01-10 22:14+0100\n"
-"PO-Revision-Date: 2018-10-22 12:09+0000\n"
+"PO-Revision-Date: 2019-01-11 14:31+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
@@ -39,7 +39,7 @@ msgstr "30.1.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2019-01-05"
-msgstr ""
+msgstr "2019-01-05"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -336,16 +336,14 @@ msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc d
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:136
 #: doc/man/mkvmerge.xml:2098
-#, fuzzy
-#| msgid "<option>--no-cues</option>"
 msgid "<option>--flush-on-close</option>"
-msgstr "<option>--no-cues</option>"
+msgstr "<option>--flush-on-close</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:139
 #: doc/man/mkvmerge.xml:2101
 msgid "Tells the program to flush all data cached in memory to storage when closing files opened for writing.  This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers.  The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting.  See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons."
-msgstr ""
+msgstr "Li indica al programa que buidi totes les dades emmagatzemades a la memòria cau de l'emmagatzematge en tancar els fitxers oberts per escriure. Això es pot usar per evitar la pèrdua de dades en interrupcions d'electricitat o per evitar certs problemes en el sistema operatiu o els controladors. L'inconvenient és que la multiplexació trigarà més, ja que el «mkvmerge» esperarà fins que totes les dades s'hagin escrit a l'emmagatzematge abans de sortir. Vegeu els problemes número 2469 i 2480 en el seguiment d'errors del MKVToolNix per a un debat en profunditat sobre els pros i els contres."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:148
@@ -784,10 +782,9 @@ msgstr "Extreure alhora els capítols i les etiquetes en els seus respectius for
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:522
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge movie.mkv chapters movie-chapters.xml tags movie-tags.xml"
+#, no-wrap
 msgid "$ mkvextract movie.mkv chapters movie-chapters.xml tags movie-tags.xml"
-msgstr "$ mkvmerge peli.mkv chapters capítols-peli.xml tags etiquetes-peli.xml"
+msgstr "$ mkvextract peli.mkv chapters capítols_peli.xml tags etiquetes_peli.xml"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:525
@@ -796,10 +793,9 @@ msgstr "Extreure alhora un parell de pistes i els seus respectius codis de temps
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:528
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:director's comments.aac\" timestamps_v2 \"0:timestamps video.txt\" \"1:timestamps main audio.txt\" \"2:timestamps director's comments.txt\""
+#, no-wrap
 msgid "$ mkvextract \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:director's comments.aac\" timestamps_v2 \"0:timestamps video.txt\" \"1:timestamps main audio.txt\" \"2:timestamps director's comments.txt\""
-msgstr "$ mkvmerge \"Una altra peli.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:comentaris_del_director.aac\" timestamps_v2 \"0:codis_de_temps_vídeo.txt\" \"1:codis_de_temps_àudio_principal.txt\" \"2:codis_de_temps_comentaris_del_director.txt\""
+msgstr "$ mkvextract \"Una altra peli.mkv\" tracks 0:video.h265 \"1:àudio principal.aac\" \"2:comentaris del director.aac\" timestamps_v2 \"0:marques de temps del vídeo.txt\" \"1:marques de temps de l'àudio principal.txt\" \"2:marques de temps per als comentaris del director.txt\""
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:531
@@ -808,10 +804,9 @@ msgstr "Extreure capítols en el format Ogg/OGM i tornar a codificar una pista a
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:534
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge \"My Movie.mkv\" chapters --simple \"My Chapters.txt\" tracks -c MS-ANSI \"2:My Subtitles.srt\""
+#, no-wrap
 msgid "$ mkvextract \"My Movie.mkv\" chapters --simple \"My Chapters.txt\" tracks -c MS-ANSI \"2:My Subtitles.srt\""
-msgstr "$ mkvmerge \"Una altra peli.mkv\" chapters --simple \"Capítols meus.txt\" tracks -c MS-ANSI \"2:Subtítols meus.srt\""
+msgstr "$ mkvextract \"La meva peli.mkv\" chapters --simple \"Els meus capítols.txt\" tracks -c MS-ANSI \"2:Els meus subtítols.srt\""
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:538
