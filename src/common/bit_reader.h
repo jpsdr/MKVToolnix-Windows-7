@@ -180,6 +180,14 @@ public:
       buf[idx] = get_bits(8);
   }
 
+  std::string get_string(unsigned int byte_length) {
+    std::string str(byte_length, ' ');
+    for (auto idx = 0u; idx < byte_length; ++idx)
+      str[idx] = static_cast<char>(get_bits(8));
+
+    return str;
+  }
+
   void byte_align() {
     if (8 != m_bits_valid)
       skip_bits(m_bits_valid);

@@ -82,6 +82,17 @@ TEST(BitReader, GetBits) {
   EXPECT_FALSE(b.eof());
 }
 
+TEST(BitReader, GetString) {
+  char const *value = "47110815";
+
+  auto b = mtx::bits::reader_c{reinterpret_cast<unsigned char const *>(value), 8};
+
+  b.skip_bits(8);
+
+  EXPECT_EQ(std::string{"711"}, b.get_string(3));
+  EXPECT_THROW(b.get_string(5), mtx::mm_io::end_of_file_x);
+}
+
 TEST(BitReader, GetUnsignedGolomb) {
   unsigned char value[4];
   put_uint32_be(value, 0xf7234a81);
