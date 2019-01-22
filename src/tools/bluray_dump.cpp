@@ -11,6 +11,7 @@
 #include "common/common_pch.h"
 
 #include "common/bluray/clpi.h"
+#include "common/bluray/index.h"
 #include "common/bluray/mpls.h"
 #include "common/command_line.h"
 #include "common/mm_file_io.h"
@@ -60,6 +61,16 @@ parse_clpi_file(std::string const &file_name) {
 }
 
 static void
+parse_index_file(std::string const &file_name) {
+  mtx::bluray::index::parser_c parser{file_name};
+
+  if (!parser.parse())
+    mxerror("index.bdmv file could not be parsed.\n");
+
+  parser.dump();
+}
+
+static void
 parse_mpls_file(std::string const &file_name) {
   mm_file_io_c in{file_name};
   auto parser = mtx::bluray::mpls::parser_c{};
@@ -77,6 +88,9 @@ parse_file(std::string const &file_name) {
 
   else if (boost::regex_search(file_name, boost::regex{"\\.mpls$", boost::regex::perl}))
     parse_mpls_file(file_name);
+
+  else if (boost::regex_search(file_name, boost::regex{"index\\.bdmv", boost::regex::perl}))
+    parse_index_file(file_name);
 
   else
     mxerror("Unknown/unsupported file format\n");
