@@ -1,5 +1,5 @@
 /*
-   mpls_dump - A tool for dumping MPLS structures
+   bluray_dump - A tool for dumping various files found on Blu-rays
 
    Distributed under the GPL v2
    see the file COPYING for details
@@ -14,21 +14,20 @@
 #include "common/command_line.h"
 #include "common/mm_file_io.h"
 
-static void
-show_help() {
-  mxinfo("mpls_dump [options] input_file_name\n"
-         "\n"
-         "General options:\n"
-         "\n"
-         "  -h, --help             This help text\n"
-         "  -V, --version          Print version information\n");
-  mxexit();
-}
+static char const * const s_program_name = "bluray_dump";
 
 static void
-show_version() {
-  mxinfo("mpls_dump v" PACKAGE_VERSION "\n");
-  mxexit();
+setup(char const *argv0) {
+  mtx_common_init(s_program_name, argv0);
+
+  mtx::cli::g_version_info = fmt::format("{0} v{1}", s_program_name, PACKAGE_VERSION);
+  mtx::cli::g_usage_text   = fmt::format("{0} [options] input_file_name\n"
+                                         "\n"
+                                         "General options:\n"
+                                         "\n"
+                                         "  -h, --help             This help text\n"
+                                         "  -V, --version          Print version information",
+                                         s_program_name);
 }
 
 static std::string
@@ -36,13 +35,7 @@ parse_args(std::vector<std::string> &args) {
   std::string file_name;
 
   for (auto & arg: args) {
-    if ((arg == "-h") || (arg == "--help"))
-      show_help();
-
-    else if ((arg == "-V") || (arg == "--version"))
-      show_version();
-
-    else if (!file_name.empty())
+    if (!file_name.empty())
       mxerror(Y("More than one source file given.\n"));
 
     else
@@ -56,7 +49,7 @@ parse_args(std::vector<std::string> &args) {
 }
 
 static void
-parse_file(const std::string &file_name) {
+parse_mpls_file(std::string const &file_name) {
   mm_file_io_c in{file_name};
   auto parser = mtx::bluray::mpls::parser_c{};
 
@@ -66,10 +59,19 @@ parse_file(const std::string &file_name) {
   parser.dump();
 }
 
+static void
+parse_file(std::string const &file_name) {
+  if (boost::regex_search(file_name, boost::regex{"\\.mpls$", boost::regex::perl}))
+    parse_mpls_file(file_name);
+
+  else
+    mxerror("Unknown/unsupported file format\n");
+}
+
 int
 main(int argc,
      char **argv) {
-  mtx_common_init("mpls_dump", argv[0]);
+  setup(argv[0]);
 
   auto args = mtx::cli::args_in_utf8(argc, argv);
   while (mtx::cli::handle_common_args(args, "-r"))
