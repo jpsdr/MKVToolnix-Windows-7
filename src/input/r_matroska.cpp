@@ -2449,7 +2449,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
                       : block_track->v_frate ? static_cast<int64_t>(1000000000.0 / block_track->v_frate)
                       :                        int64_t{-1};
   auto frame_duration = -1 == block_duration ? int64_t{0} : block_duration;
-  m_last_timestamp     = block_timestamp;
+  m_last_timestamp    = block_timestamp;
 
   if (0 < block->NumberFrames())
     m_in_file->set_last_timestamp(m_last_timestamp + (block->NumberFrames() - 1) * frame_duration);
