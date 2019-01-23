@@ -342,6 +342,9 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
 
   block_duration += new_packet->get_duration();
 
+  mxdebug_if(m->debug_duration, fmt::format("must_duration_be_set: rg 0x{0} block_duration {1} group_size {2} rg->duration_mandatory {3} new_packet->duration_mandatory {4}\n",
+                                            static_cast<void *>(rg), block_duration, group_size, !rg ? "—" : rg->m_duration_mandatory ? "1" : "0", new_packet->duration_mandatory));
+
   if ((rg && rg->m_duration_mandatory) || new_packet->duration_mandatory) {
     if (   (   (0 == block_duration)
             && (0 != group_size))
