@@ -347,7 +347,7 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
 
   if ((rg && rg->m_duration_mandatory) || new_packet->duration_mandatory) {
     if (   (   (0 == block_duration)
-            && (0 != group_size))
+            && ((0 != group_size) || (new_packet->duration_mandatory && new_packet->has_duration())))
         || (   (0 < block_duration)
             && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration)))) {
       // if (!rg)
@@ -499,7 +499,8 @@ cluster_helper_c::render() {
     if (!pack->is_key_frame() || !track_entry.LacingEnabled())
       render_group->m_more_data = false;
 
-    render_group->m_durations.push_back(pack->get_unmodified_duration());
+    if (pack->has_duration())
+      render_group->m_durations.push_back(pack->get_unmodified_duration());
     render_group->m_duration_mandatory |= pack->duration_mandatory;
     render_group->m_expected_next_timestamp = pack->assigned_timestamp + pack->get_duration();
 

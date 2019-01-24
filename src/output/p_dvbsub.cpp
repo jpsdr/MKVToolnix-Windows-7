@@ -45,7 +45,7 @@ dvbsub_packetizer_c::set_headers() {
 
 int
 dvbsub_packetizer_c::process(packet_cptr packet) {
-  packet->duration_mandatory = true;
+  packet->duration_mandatory = packet->duration >= 0;
   add_packet(packet);
 
   return FILE_STATUS_MOREDATA;

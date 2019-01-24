@@ -22,6 +22,9 @@
 * mkvmerge: MP4 reader: edit lists consisting solely of elements that mkvmerge
   doesn't support (such as dwells) are simply ignored. Before no data was read
   for such tracks at all. Fixes #2487.
+* mkvmerge: text subtitles: entries with an explicit duration of 0ms will now
+  be handled correctly: the 0ms duration will be stored in Matroska instead of
+  the difference between the current and the following entry. Fixes #2490.
 
 ## Build system changes
 

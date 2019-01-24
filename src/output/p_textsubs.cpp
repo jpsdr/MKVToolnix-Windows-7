@@ -95,7 +95,7 @@ textsubs_packetizer_c::process(packet_cptr packet) {
 
   packet->data = memory_c::clone(subs);
 
-  if (packet->duration)
+  if (0 <= packet->duration)
     process_one_packet(packet);
 
   else {

@@ -61,7 +61,7 @@ kate_packetizer_c::process(packet_cptr packet) {
     /* end packet is 1 byte long and has type 0x7f */
     if ((packet->data->get_size() == 1) && (packet->data->get_buffer()[0] == 0x7f)) {
       packet->timestamp          = m_previous_timestamp;
-      packet->duration           = 1;
+      packet->duration           = 0;
       packet->duration_mandatory = true;
       add_packet(packet);
 

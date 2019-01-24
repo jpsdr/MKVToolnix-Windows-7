@@ -2337,9 +2337,6 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
     block_duration = 1000000000.0 / block_track->v_frate;
   int64_t frame_duration = (block_duration == -1) ? 0 : block_duration;
 
-  if (('s' == block_track->type) && (-1 == block_duration))
-    block_duration = 0;
-
   if (block_track->ignore_duration_hack) {
     frame_duration = 0;
     if (0 < block_duration)
@@ -2474,9 +2471,6 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
     ref_block = FindNextChild(*block_group, *ref_block);
   }
-
-  if (('s' == block_track->type) && (-1 == block_duration))
-    block_duration = 0;
 
   if (block_track->ignore_duration_hack) {
     frame_duration = 0;
