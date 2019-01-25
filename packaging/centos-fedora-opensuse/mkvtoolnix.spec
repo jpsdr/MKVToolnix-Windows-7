@@ -10,10 +10,12 @@ Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
 Requires: hicolor-icon-theme
 
-BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, boost-devel >= 1.46.0, cmark-devel, po4a
+BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, cmark-devel, po4a
 
 %if 0%{?centos}
 BuildRequires: devtoolset-7-gcc-c++, rubygem-drake
+%else
+BuildRequires: boost-devel >= 1.46.0
 %endif
 
 %if 0%{?suse_version}
@@ -53,10 +55,12 @@ Authors:
 
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
+unset CONFIGURE_ARGS
 
 %if 0%{?centos}
 export CC=/opt/rh/devtoolset-7/root/bin/gcc
 export CXX=/opt/rh/devtoolset-7/root/bin/g++
+export CONFIGURE_ARGS="--with-boost=/opt/boost/boost_1_69_0"
 %endif
 
 %if 0%{?suse_version}
@@ -67,6 +71,7 @@ export CXX=/usr/bin/g++-7
 %configure \
   --enable-optimization \
   --enable-debug \
+  "$CONFIGURE_ARGS"
 
 %build
 %if 0%{?suse_version}
