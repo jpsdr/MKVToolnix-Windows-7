@@ -442,7 +442,6 @@ function build_configured_mkvtoolnix {
 
   local -a args
   args=(
-    --cache-file=config.cache
     --prefix=$dmgmac
     --bindir=$dmgmac
     --datarootdir=$dmgmac
