@@ -454,10 +454,7 @@ function build_configured_mkvtoolnix {
 
   if [[ -z $SHARED_QT ]] args+=(--enable-static-qt)
 
-  ./configure \
-    LDFLAGS="$LDFLAGS -framework CoreFoundation -headerpad_max_install_names" \
-    CXXFLAGS="-fvisibility=hidden -fvisibility-inlines-hidden" \
-    ${args}
+  ./configure ${args}
 
   grep -q 'USE_QT.*yes' build-config
 }
