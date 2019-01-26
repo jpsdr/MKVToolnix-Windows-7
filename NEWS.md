@@ -25,6 +25,9 @@
 * mkvmerge: text subtitles: entries with an explicit duration of 0ms will now
   be handled correctly: the 0ms duration will be stored in Matroska instead of
   the difference between the current and the following entry. Fixes #2490.
+* mkvmerge: HEVC: the height of interlaced streams will now be set correctly
+  to the height of the full frame instead of the height of a single interlaced
+  field. Fixes #2446.
 
 ## Build system changes
 

@@ -389,7 +389,9 @@ vui_parameters_copy(mtx::bits::reader_c &r,
     w.copy_unsigned_golomb(r);               // chroma_sample_loc_type_top_field
     w.copy_unsigned_golomb(r);               // chroma_sample_loc_type_bottom_field
   }
-  w.copy_bits(3, r);            // neutral_chroma_indication_flag, field_seq_flag, frame_field_info_present_flag
+  w.copy_bits(1, r);            // neutral_chroma_indication_flag
+  sps.field_seq_flag = w.copy_bits(1, r);
+  w.copy_bits(1, r);            // frame_field_info_present_flag
 
   if (   (r.get_remaining_bits() >= 68)
       && (r.peek_bits(21) == 0x100000))

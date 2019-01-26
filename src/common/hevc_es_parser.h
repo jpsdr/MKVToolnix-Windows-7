@@ -142,12 +142,12 @@ public:
 
   int get_width() const {
     assert(!m_sps_info_list.empty());
-    return m_sps_info_list.begin()->width;
+    return m_sps_info_list.front().get_width();
   }
 
   int get_height() const {
     assert(!m_sps_info_list.empty());
-    return m_sps_info_list.begin()->height;
+    return m_sps_info_list.front().get_height();
   }
 
   void handle_nalu(memory_cptr const &nalu, uint64_t nalu_pos);

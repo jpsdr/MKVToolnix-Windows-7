@@ -259,7 +259,7 @@ struct sps_info_t {
   unsigned int conf_win_left_offset{}, conf_win_right_offset{}, conf_win_top_offset{}, conf_win_bottom_offset{};
 
   // vui:
-  bool vui_present{}, ar_found{};
+  bool vui_present{}, ar_found{}, field_seq_flag{};
   unsigned int par_num{}, par_den{};
   unsigned int min_spatial_segmentation_idc{};
 
@@ -279,6 +279,14 @@ struct sps_info_t {
   int64_t default_duration() const;
 
   void clear();
+
+  unsigned int get_width() const {
+    return width;
+  }
+
+  unsigned int get_height() const {
+    return height * (field_seq_flag ? 2 : 1);
+  }
 };
 
 struct pps_info_t {

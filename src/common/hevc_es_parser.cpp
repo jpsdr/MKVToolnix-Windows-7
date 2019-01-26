@@ -101,8 +101,8 @@ es_parser_c::headers_parsed()
   const {
   return m_hevcc_ready
       && !m_sps_info_list.empty()
-      && (m_sps_info_list.front().width  > 0)
-      && (m_sps_info_list.front().height > 0);
+      && (m_sps_info_list.front().get_width()  > 0)
+      && (m_sps_info_list.front().get_height() > 0);
 }
 
 void
