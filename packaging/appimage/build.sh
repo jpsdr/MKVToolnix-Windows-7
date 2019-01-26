@@ -3,7 +3,6 @@
 # This only works on CentOS 7 so far. At least the following packages
 # must be installed:
 
-#   boost-devel
 #   cmark-devel
 #   desktop-file-utils
 #   devtoolset-7-gcc-c++
@@ -29,6 +28,17 @@
 #   rubygem-drake
 #   wget
 #   zlib-devel
+
+# Note that you also need Boost. While CentOS 7 includes Boost, the
+# included version is too old.  Instead compile Boost yourself (as
+# static libraries) and adjust the path to it down below where
+# configure is executed, e.g. like this:
+
+#   echo "using gcc : : /opt/rh/devtoolset-7/root/usr/bin/g++ ; " > tools/build/src/user-config.jam
+#   ./bootstrap.sh --prefix=/opt/boost/${PWD:t} \
+#     --without-libraries=python,mpi,wave,graph_parallel
+#    ./b2 -j$(( $(nproc) + 2 )) variant=release link=static install
+
 
 # This must be run from inside an unpacked MKVToolNix source
 # directory. You can run it from inside a git checkout, but make sure
@@ -111,6 +121,7 @@ fi
 if [[ -f /etc/centos-release ]]; then
   export CC=/opt/rh/devtoolset-7/root/bin/gcc
   export CXX=/opt/rh/devtoolset-7/root/bin/g++
+  export CONFIGURE_ARGS="--with-boost=/opt/boost/boost_1_69_0"
 fi
 
 export PKG_CONFIG_PATH="${QTDIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
@@ -125,7 +136,8 @@ if [[ ( ! -f build-config ) && ( "$NO_BUILD" != 1 ) ]]; then
     --with-moc="${QTDIR}/bin/moc" \
     --with-uic="${QTDIR}/bin/uic" \
     --with-rcc="${QTDIR}/bin/rcc" \
-    --with-qmake="${QTDIR}/bin/qmake"
+    --with-qmake="${QTDIR}/bin/qmake" \
+    "$CONFIGURE_ARGS"
 
   drake clean
 fi
