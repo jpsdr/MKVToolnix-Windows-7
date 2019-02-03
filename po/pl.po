@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-01-10 22:08+0100\n"
-"PO-Revision-Date: 2019-01-03 16:22+0100\n"
+"PO-Revision-Date: 2019-01-31 17:56+0100\n"
 "Last-Translator: Jan Mazurczyk <remuxer32@protonmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -63,7 +63,7 @@ msgid ""
 msgstr ""
 "  --append-mode <file|track>\n"
 "                           Określa, jak mkvmerge ma obliczyć znaczniki czasu podczas\n"
-"                           scalania plików.\n"
+"                           dołączania plików.\n"
 
 #: src/merge/mkvmerge.cpp:163
 #, no-c-format
@@ -177,7 +177,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:95
 #, no-c-format
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
-msgstr "  --chapter-charset <znaki> Zestaw znaków dla prostego pliku rozdziału.\n"
+msgstr "  --chapter-charset <znaki> Zestaw znaków dla prostego pliku rozdziałów.\n"
 
 #: src/merge/mkvmerge.cpp:94
 #, no-c-format
@@ -451,6 +451,8 @@ msgid ""
 "  --flush-on-close         Flushes all cached data to storage when closing\n"
 "                           a file opened for writing.\n"
 msgstr ""
+"  --flush-on-close         Czyści wszystkie dane z pamięci podręcznej do schowka podczas zamykania\n"
+"                           pliku otwartego do zapisu.\n"
 
 #: src/merge/mkvmerge.cpp:231
 #, no-c-format
@@ -1041,7 +1043,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:171
 #, no-c-format
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
-msgstr "  <plik1> + <plik2>        Scala plik2 z plik1.\n"
+msgstr "  <plik1> + <plik2>        Dołącza plik2 do plik1.\n"
 
 #: src/merge/mkvmerge.cpp:172
 #, no-c-format
@@ -1192,7 +1194,7 @@ msgstr "Opcje rozdziałów:\n"
 #: src/merge/mkvmerge.cpp:139
 #, no-c-format
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
-msgstr "Dzielenie plików, scalanie i powiązanie (więcej opcji globalnych):\n"
+msgstr " Dzielenie plików, łączenie, dołączanie i powiązanie (więcej opcji globalnych):\n"
 
 #: src/merge/mkvmerge.cpp:120
 #, no-c-format
@@ -1853,7 +1855,7 @@ msgstr "&Otwórz plik Matroska lub WebM"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
 #, no-c-format
 msgid "&Open Matroska, WebM or chapter file"
-msgstr "&Otwórz plik Matroska, WebM lub plik rozdziału"
+msgstr "&Otwórz plik Matroska, WebM lub plik rozdziałów"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:116
 #, no-c-format
@@ -2386,7 +2388,7 @@ msgstr "\"{0}\" nie jest prawidłowym kodem językowym ISO639-2."
 #: src/merge/mkvmerge.cpp:1565
 #, no-c-format
 msgid "'{0}' is not a valid append mode in '--append-mode {0}'.\n"
-msgstr "\"{0}\" nie jest prawidłowym trybem scalania w \"--append-mode {0}\".\n"
+msgstr "\"{0}\" nie jest prawidłowym trybem dołączania w \"--append-mode {0}\".\n"
 
 #: src/merge/mkvmerge.cpp:1691
 #, no-c-format
@@ -2877,15 +2879,15 @@ msgid "A&cknowledge warnings/errors"
 msgstr "Zat&wierdź ostrzeżenia/błędy"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:645
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "A&ppend chapters from Matroska, WebM or chapter file"
-msgstr "&Otwórz plik Matroska, WebM lub plik rozdziału"
+msgstr "&Dołącz rozdziały z pliku Matroska, WebM lub pliku rozdziałów"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1408
 #: src/mkvtoolnix-gui/merge/input.cpp:1409
 #, no-c-format
 msgid "A&ppend files"
-msgstr "&Scal pliki"
+msgstr "Dołącz pli&ki"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
 #, no-c-format
@@ -3168,7 +3170,7 @@ msgstr "Dodawanie plików rozdziałów"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:149
 #, no-c-format
 msgid "Adding or appending files"
-msgstr "Dodawanie lub scalanie plików"
+msgstr "Dodawanie lub dołączanie plików"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1148
 #, no-c-format
@@ -3183,7 +3185,7 @@ msgstr "Dodawanie plików tagów"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:150
 #, no-c-format
 msgid "Adding, appending or adding as additional parts"
-msgstr "Dodawanie, scalanie lub dodawanie jako kolejnych części"
+msgstr "Dodawanie, dołączanie lub dodawanie jako kolejnych części"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:209
 #, no-c-format
@@ -3543,24 +3545,24 @@ msgid "Apart from asking the GUI can always open the dropped files as new tabs o
 msgstr "Oprócz zapytania, GUI może zawsze otworzyć upuszczone pliki jako nowe karty lub też zawsze je dodać jako nowe załączniki do bieżącej karty."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:185
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Append files in chapter editor"
-msgstr "Otwórz pliki w edytorze rozdziałów"
+msgstr "Dołącz pliki w edytorze rozdziałów"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1117
 #, no-c-format
 msgid "Append media files"
-msgstr "Scal pliki multimedialne"
+msgstr "Dołącz pliki multimedialne"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:155
 #, no-c-format
 msgid "Append to an e&xisting source file"
-msgstr "&Scal z istniejącym plikiem źródłowym"
+msgstr "Dołącz do i&stniejącego pliku źródłowego"
 
 #: src/merge/output_control.cpp:1732
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
-msgstr "Scalanie ścieżki {0} z pliku nr {1} (\"{2}\") ze ścieżką {3} z pliku nr {4} (\"{5}\").\n"
+msgstr "Dołączanie ścieżki {0} z pliku nr {1} (\"{2}\") do ścieżki {3} z pliku nr {4} (\"{5}\").\n"
 
 #: src/merge/mkvmerge.cpp:648
 #, no-c-format
@@ -4550,7 +4552,7 @@ msgstr "Kopi&uj ten element:"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:212
 #, no-c-format
 msgid "Cop&y to other tab"
-msgstr ""
+msgstr "&Kopiuj do innej karty"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
 #, no-c-format
@@ -4601,7 +4603,7 @@ msgstr "Nie można odnaleźć indeksu dla ścieżki {0} (błąd avilib: {1}). Po
 #: src/merge/output_control.cpp:1658
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
-msgstr "Nie można było odnaleźć gptzr podczas scalania. {0}\n"
+msgstr "Nie można było odnaleźć gptzr podczas dołączania. {0}\n"
 
 #: src/output/p_mpeg4_p2.cpp:174
 #, no-c-format
@@ -6224,7 +6226,7 @@ msgstr "Liczba zmiennoprzecinkowa"
 #: src/common/cli_parser.cpp:184
 #, no-c-format
 msgid "Flushes all cached data to storage when closing a file opened for writing."
-msgstr ""
+msgstr "Czyści wszystkie dane z pamięci podręcznej do schowka podczas zamykania pliku otwartego do zapisu."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1450
 #, no-c-format
@@ -6553,7 +6555,7 @@ msgstr "Wysokość obrazu, jaka ma zostać wyświetlona."
 #: src/mkvtoolnix-gui/util/settings.cpp:51
 #, no-c-format
 msgid "Hibernate the computer"
-msgstr "Hibernacja komputera"
+msgstr "Hibernuj komputer"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:112
@@ -6631,12 +6633,12 @@ msgstr "Zaznaczenie tutaj zestawu znaków spowoduje automatyczne ustawienie taki
 #: src/mkvtoolnix-gui/merge/output.cpp:290
 #, no-c-format
 msgid "If a range's start number is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
-msgstr "Jeśli odcinek jest poprzedzony plusem (+), wtedy nowy plik będzie scalony z poprzedzającym. W innym przypadku nowy odcinek czasu zapisany zostanie do nowego pliku."
+msgstr "Jeśli numer początkowy zakresu jest poprzedzony znakiem \"+\", jego zawartość zostanie zapisana w tym samym pliku, co poprzedni zakres. W przeciwnym razie dla tego zakresu zostanie utworzony nowy plik."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:273
 #, no-c-format
 msgid "If a range's start timestamp is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
-msgstr "Jeśli odcinek czasu jest poprzedzony plusem (+), wtedy nowy plik będzie scalony z poprzedzającym. W innym przypadku nowy odcinek czasu zapisany zostanie do nowego pliku."
+msgstr "Jeśli czas początkowy zakresu zostanie poprzedzony znakiem \"+\", jego zawartość zostanie zapisana w tym samym pliku, co poprzedni zakres. W przeciwnym razie dla tego zakresu zostanie utworzony nowy plik."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:289
 #, no-c-format
@@ -6923,7 +6925,7 @@ msgstr "Jeśli często używasz tych samych wartości podczas dzielenia plików 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:157
 #, no-c-format
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
-msgstr "Jeśli chcesz scalić lub dodać je jako kolejne części, musisz wybrać odpowiedni plik źródłowy, z którym tego dokonasz:"
+msgstr "Jeśli chcesz dołączyć lub dodać je jako kolejne części, musisz wybrać odpowiedni plik źródłowy, z którym tego dokonasz:"
 
 #: src/output/p_textsubs.cpp:115
 #, no-c-format
@@ -8040,7 +8042,7 @@ msgstr "Więcej niż jedna nazwa została podana dla jednego załącznika. Nazwa
 #: src/merge/output_control.cpp:986
 #, no-c-format
 msgid "More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"
-msgstr "Więcej niż jedna ścieżka została wybrana do scalenia ze ścieżką {0} z pliku o numerze {1} (\"{2}\"). Parametr dla \"--append-to\" jest nieprawidłowy.\n"
+msgstr "Więcej niż jedna ścieżka została wybrana do dołączenia ze ścieżką {0} z pliku o numerze {1} (\"{2}\"). Parametr dla \"--append-to\" jest nieprawidłowy.\n"
 
 #: src/extract/tracks.cpp:106
 #, no-c-format
@@ -8249,7 +8251,7 @@ msgstr "Nie dodano jeszcze żadnych czynności."
 #: src/merge/output_control.cpp:945
 #, no-c-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
-msgstr "Nie został podany sposób mapowania ścieżek, aby scalić plik o numerze {0} (\"{1}\"). W zamian zostanie użyte domyślne mapowanie {2}. Proszę mieć to na uwadze, gdy mkvmerge zatrzyma proces z błędem odnośnie nieprawidłowej opcji \"--append-to\".\n"
+msgstr "Nie został podany sposób mapowania ścieżek, aby dołączyć plik o numerze {0} (\"{1}\"). W zamian zostanie użyte domyślne mapowanie {2}. Proszę mieć to na uwadze, gdy mkvmerge zatrzyma proces z błędem odnośnie nieprawidłowej opcji \"--append-to\".\n"
 
 #: src/propedit/attachment_target.cpp:204
 #: src/propedit/attachment_target.cpp:215
@@ -8608,7 +8610,7 @@ msgstr "Ogg/OGM - pliki audio/wideo"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1791
 #, no-c-format
 msgid "One chapter for each appended file"
-msgstr "Jeden rozdział dla każdego scalonego pliku"
+msgstr "Jeden rozdział dla każdego dołączonego pliku"
 
 #: src/propedit/propedit_cli_parser.cpp:274
 #, no-c-format
@@ -8701,7 +8703,7 @@ msgstr "Dozwolony jest tylko jeden plik źródłowy.\n"
 #: src/merge/output_control.cpp:926
 #, no-c-format
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
-msgstr "Sposób mapowania ścieżek, aby scalić plik o numerze {0} (\"{1}\"), został podany tylko częściowo. Albo nie podawaj żadnego mapowania (w którym to przypadku domyślne mapowanie ścieżek zostanie użyte), albo podaj mapowanie dla wszystkich ścieżek, które mają być skopiowane.\n"
+msgstr "Sposób mapowania ścieżek, aby dołączyć plik o numerze {0} (\"{1}\"), został podany tylko częściowo. Albo nie podawaj żadnego mapowania (w którym to przypadku domyślne mapowanie ścieżek zostanie użyte), albo podaj mapowanie dla wszystkich ścieżek, które mają być skopiowane.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:406
 #, no-c-format
@@ -9756,7 +9758,7 @@ msgstr "Użyj PPM, aby dodać, zaznaczyć lub usunąć załączniki"
 #: src/mkvtoolnix-gui/merge/input.cpp:435
 #, no-c-format
 msgid "Right-click to add, append and remove files"
-msgstr "Użyj PPM, aby dodać, scalić lub usunąć pliki"
+msgstr "Użyj PPM, aby dodać, dołączyć lub usunąć pliki"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:266
 #, no-c-format
@@ -9963,7 +9965,7 @@ msgstr "Zobacz poniższe przykłady."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
 #, no-c-format
 msgid "See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons."
-msgstr ""
+msgstr "Zobacz zagadnienia o numerze #2469 i #2480 na oficjalnym trackerze MKVToolNix do zgłaszania błędów, aby prześledzić szczegółową dyskusję na temat zalet i wad."
 
 #: src/common/kax_element_names.cpp:208
 #, no-c-format
@@ -10840,7 +10842,7 @@ msgstr "Ta opcja mówi mkvmerge, aby utworzyć element indeksu wyszukiwania na k
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:56
 #, no-c-format
 msgid "Tells mkvmerge to flush all data cached in memory to storage when closing files opened for writing."
-msgstr ""
+msgstr "Mówi mkvmerge, aby wyczyścić wszystkie dane z pamięci podręcznej do schowka podczas zamykania plików otwartych do zapisu."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
 #, no-c-format
@@ -10897,7 +10899,7 @@ msgstr "Kod FourCC musi zawierać dokładnie cztery znaki w \"{0} {1}\".\n"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:344
 #, no-c-format
 msgid "The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those."
-msgstr "GUI może również pytać użytkownika, co robić z plikami za każdym razem, np.: czy scalać je zamiast dodawać lub czy tworzyć nowe ustawienia multipleksowania i dodawać je do nich."
+msgstr "GUI może również pytać użytkownika, co robić z plikami za każdym razem, np.: czy dołączać je zamiast dodawać lub czy tworzyć nowe ustawienia multipleksowania i dodawać je do nich."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:346
 #, no-c-format
@@ -11016,7 +11018,7 @@ msgstr "Plik rozdziałów XML \"{0}\" zawiera błąd w pozycji {2}: {1}\n"
 #: src/common/xml/ebml_chapters_converter.cpp:229
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
-msgstr "Plik rozdziału XML \"{0}\" zawiera błąd: {1}\n"
+msgstr "Plik rozdziałów XML \"{0}\" zawiera błąd: {1}\n"
 
 #: src/common/chapters/chapters.cpp:371
 #: src/common/xml/ebml_chapters_converter.cpp:223
@@ -11338,7 +11340,7 @@ msgstr "Ścieżki różnią się szerokością wyświetlania: {0} oraz {1}"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
-msgstr ""
+msgstr "Minusem jest to, że multipleksowanie potrwa dłużej, ponieważ mkvmerge będzie czekał, aż wszystkie dane zostaną zapisane do schowka przed wyjściem."
 
 #: src/merge/mkvmerge.cpp:3157
 #, no-c-format
@@ -11631,12 +11633,12 @@ msgstr "Plik nr {0} (\"{1}\") nie zawiera ścieżki z ID {2}, lub ścieżka ma n
 #: src/merge/output_control.cpp:965
 #, no-c-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
-msgstr "Plik nr {0} (\"{1}\") nie zawiera ścieżki z ID {2}, lub ścieżka ma nie być kopiowana. W związku z tym żadne ścieżki nie mogą być scalone.  Wartość dla \"--append-to\" jest nieprawidłowa.\n"
+msgstr "Plik nr {0} (\"{1}\") nie zawiera ścieżki z ID {2}, lub ścieżka ma nie być kopiowana. W związku z tym nie można do niego dołączyć żadnej ścieżki. Wartość dla \"--append-to\" jest nieprawidłowa.\n"
 
 #: src/merge/output_control.cpp:905
 #, no-c-format
 msgid "The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"
-msgstr "Plik nr {0} (\"{1}\") nie może być scalony. Wartość dla \"--append-to\" jest nieprawidłowa.\n"
+msgstr "Plik nr {0} (\"{1}\") nie może być dołączony. Wartość dla \"--append-to\" jest nieprawidłowa.\n"
 
 #: src/common/mm_io_x.cpp:38
 #, no-c-format
@@ -11684,7 +11686,7 @@ msgstr "Plik, który próbujesz otworzyć (%1), nie jest rozpoznawany jako prawi
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:573
 #, no-c-format
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
-msgstr "Plik, który próbujesz otworzyć (%1), nie jest rozpoznawany ani jako plik Matroska, ani jako plik rozdziału."
+msgstr "Plik, który próbujesz otworzyć (%1), nie jest rozpoznawany ani jako plik Matroska, ani jako plik rozdziałów."
 
 #: src/extract/extract_cli_parser.cpp:63
 #, no-c-format
@@ -11704,7 +11706,7 @@ msgstr "Tylko do pierwszego pliku docelowego"
 #: src/merge/mkvmerge.cpp:2099
 #, no-c-format
 msgid "The first file cannot be appended because there are no files to append to.\n"
-msgstr "Pierwszy plik nie może zostać scalony, ponieważ nie ma plików do scalenia.\n"
+msgstr "Pierwszy plik nie może zostać dołączony, ponieważ nie ma plików do dołączenia.\n"
 
 #: src/extract/extract_cli_parser.cpp:74
 #, no-c-format
@@ -12246,7 +12248,7 @@ msgstr "Wyrażenie \"track:n\" z \"n\" będącym numerem, wybiera n-tą ścieżk
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:326
 #, no-c-format
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
-msgstr "Parametry \"<FILE_NAME>\" i \"<FILE_NAME_WITH_EXT>\", które działają wyłącznie podczas tworzenia rozdziałów dla scalonych plików, zostaną zastąpione przez nazwę scalonego pliku (pierwszy parametr opuszcza rozszerzenie, podczas gdy drugi je zawiera)."
+msgstr "Parametry \"<FILE_NAME>\" i \"<FILE_NAME_WITH_EXT>\", które działają wyłącznie podczas tworzenia rozdziałów dla dołączonych plików, zostaną zastąpione przez nazwę dołączonego pliku (pierwszy parametr opuszcza rozszerzenie, podczas gdy drugi je zawiera)."
 
 #: src/propedit/propedit_cli_parser.cpp:246
 #, no-c-format
@@ -12577,7 +12579,7 @@ msgstr[2] "Te ścieżki audio zawierają {0} bajtów błędnych danych, które z
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
 msgid "This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers."
-msgstr ""
+msgstr "Może to służyć do zapobiegania utracie danych w przypadku zaniku zasilania lub do ominięcia pewnych problemów w systemie operacyjnym lub sterownikach."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:52
 #, no-c-format
@@ -13166,7 +13168,7 @@ msgstr "USF - napisy tekstowe"
 #: src/mkvtoolnix-gui/merge/input.cpp:1304
 #, no-c-format
 msgid "Unable to append files"
-msgstr "Nie można scalić plików"
+msgstr "Nie można dołączyć plików"
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13866,7 +13868,7 @@ msgstr "Podczas dodawania plików źródłowych wszystkie ścieżki są standard
 #: src/mkvtoolnix-gui/merge/output.cpp:210
 #, no-c-format
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
-msgstr "Podczas scalania: jeden rozdział jest tworzony na początku, a jeden zawsze, gdy plik jest scalany."
+msgstr "Podczas dołączania: jeden rozdział jest tworzony na początku, a jeden zawsze po dołączeniu pliku."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:274
 #, no-c-format
