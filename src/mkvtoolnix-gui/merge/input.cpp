@@ -208,6 +208,9 @@ Tab::setupInputControls() {
   ui->tracks->setModel(m_tracksModel);
   ui->tracks->enterActivatesAllSelected(true);
 
+  ui->files->acceptDroppedFiles(true);
+  ui->tracks->acceptDroppedFiles(true);
+
   cfg.handleSplitterSizes(ui->mergeInputSplitter);
   cfg.handleSplitterSizes(ui->mergeFilesTracksSplitter);
 
@@ -376,6 +379,7 @@ Tab::setupInputControls() {
   connect(ui->tracks,                        &Util::BasicTreeView::ctrlDownPressed,                                                            this,                     &Tab::onMoveTracksDown);
   connect(ui->tracks,                        &Util::BasicTreeView::ctrlUpPressed,                                                              this,                     &Tab::onMoveTracksUp);
   connect(ui->tracks,                        &Util::BasicTreeView::customContextMenuRequested,                                                 this,                     &Tab::showTracksContextMenu);
+  connect(ui->tracks,                        &Util::BasicTreeView::filesDropped,                                                               this,                     &Tab::addOrAppendDroppedFiles);
   connect(ui->tracks->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           m_tracksModel,            &TrackModel::updateSelectionStatus);
   connect(ui->tracks->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::onTrackSelectionChanged);
 
