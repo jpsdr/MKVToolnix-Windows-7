@@ -334,6 +334,7 @@ typedef struct
 #define AVI_ERR_NO_IDX      13     /* The file has been opened with
                                       getIndex==0, but an operation has been
                                       performed that needs an index */
+#define AVI_ERR_UNSUPPORTED_DV_TYPE1 14 /* AVI DV type 1 files are unsupported. */
 
 /* Possible Audio formats */
 

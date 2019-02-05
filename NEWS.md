@@ -33,6 +33,9 @@
   field. Fixes #2446.
 * MKVToolNix GUI: multiplexer, chapter editor: fixed drag & drop handling with
   Qt 5.12.0 and newer. Fixes #2472.
+* mkvmerge: AVI reader: using DV type 1 AVIs will now result in an unsupported
+  file type being reported (as the underlying AVI library doesn't support
+  them) instead of crashing mkvmerge. Fixes #2491.
 
 ## Build system changes
 

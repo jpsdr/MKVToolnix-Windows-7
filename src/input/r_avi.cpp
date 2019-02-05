@@ -49,6 +49,10 @@
 #include "output/p_vorbis.h"
 #include "output/p_vpx.h"
 
+extern "C" {
+extern long AVI_errno;
+}
+
 #define AVI_MAX_AUDIO_CHUNK_SIZE (10 * 1024 * 1024)
 
 #define GAB2_TAG                 FOURCC('G', 'A', 'B', '2')
@@ -73,7 +77,21 @@ avi_reader_c::probe_file(mm_io_c &in,
   }
 
   balg::to_lower(data);
-  return (data.substr(0, 4) == "riff") && (data.substr(8, 4) == "avi ");
+  if ((data.substr(0, 4) != "riff") || (data.substr(8, 4) != "avi "))
+    return false;
+
+  auto avi       = AVI_open_input_file(&in, 1);
+  auto const err = AVI_errno;
+
+  if (avi)
+    AVI_close(avi);
+
+  else if (err == AVI_ERR_UNSUPPORTED_DV_TYPE1)
+    id_result_container_unsupported(in.get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::avi_dv_1));
+
+  in.setFilePointer(0);
+
+  return true;
 }
 
 avi_reader_c::avi_reader_c(const track_info_c &ti,

@@ -69,7 +69,8 @@ enum class file_type_e {
   webvtt,
   hdmv_textst,
   obu,
-  max = obu
+  avi_dv_1,
+  max = avi_dv_1
 };
 
 struct file_type_t {

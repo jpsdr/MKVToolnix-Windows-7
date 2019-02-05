@@ -75,6 +75,7 @@ file_type_t::get_name(file_type_e type) {
        : file_type_e::asf         == type ? YT("Windows Media (ASF/WMV)")
        : file_type_e::avc_es      == type ? YT("AVC/h.264")
        : file_type_e::avi         == type ? YT("AVI")
+       : file_type_e::avi_dv_1    == type ? YT("AVI DV type 1")
        : file_type_e::cdxa        == type ? YT("RIFF CDXA")
        : file_type_e::chapters    == type ? translatable_string_c{} // currently intentionally left blank
        : file_type_e::coreaudio   == type ? YT("CoreAudio")

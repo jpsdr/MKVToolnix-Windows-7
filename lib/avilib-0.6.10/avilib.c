@@ -2446,8 +2446,7 @@ int avi_parse_input_file(avi_t *AVI, int getIndex)
 	 }
 
          else if (strncasecmp ((char *)(hdrl_data+i),"iavs",4) ==0 && ! auds_strh_seen) {
-	     fprintf(stderr, "AVILIB: error - DV AVI Type 1 no supported\n");
-	     return (-1);
+            ERR_EXIT(AVI_ERR_UNSUPPORTED_DV_TYPE1)
 	 }
          else
             lasttag = 0;
