@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-01-10 22:08+0100\n"
+"POT-Creation-Date: 2019-02-05 14:51+0100\n"
 "PO-Revision-Date: 2019-01-18 15:59+0000\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/cs/)\n"
@@ -51,6 +51,13 @@ msgid ""
 msgstr ""
 "  --aac-is-sbr <TID[:0|1]> Stopa s ID je buď HE-AAC/AAC+/SBR-AAC\n"
 "                           nebo ne. Hodnota ':1' může být vynechána.\n"
+
+#: src/merge/mkvmerge.cpp:370
+#, no-c-format
+msgid ""
+"  --abort-on-warnings      Aborts the program after the first warning is\n"
+"                           emitted."
+msgstr ""
 
 #: src/merge/mkvmerge.cpp:168
 #, no-c-format
@@ -356,7 +363,7 @@ msgstr ""
 "                           Vytvořít položky indexu pro tuto stopu:\n"
 "                           Žádné, pouze pro I snímky, pro všechny.\n"
 
-#: src/merge/mkvmerge.cpp:370
+#: src/merge/mkvmerge.cpp:372
 #, no-c-format
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
 msgstr "  --debug <topic>          Zapíná výstup ladění pro 'téma'.\n"
@@ -420,7 +427,7 @@ msgstr ""
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       Povolit délky bloku pro všechny bloky.\n"
 
-#: src/merge/mkvmerge.cpp:371
+#: src/merge/mkvmerge.cpp:373
 #, no-c-format
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <feature>       Zapíná experimentální funkci 'feature'.\n"
@@ -912,7 +919,7 @@ msgstr "  -S, --no-subtitles       Nekopírovat žádnou stopu titulků z tohoto
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
 msgstr "  -T, --no-track-tags      Nekopírovat štítky stop ze zdrojového souboru.\n"
 
-#: src/merge/mkvmerge.cpp:375
+#: src/merge/mkvmerge.cpp:377
 #, no-c-format
 msgid "  -V, --version            Show version information.\n"
 msgstr "  -V, --version            Zobrazit informace o verzi.\n"
@@ -959,7 +966,7 @@ msgstr ""
 "  -f, --fourcc <FOURCC>    Vynutí FourCC na uvedenou hodnotu.\n"
 "                           Funguje pouze pro stopy videa.\n"
 
-#: src/merge/mkvmerge.cpp:374
+#: src/merge/mkvmerge.cpp:376
 #, no-c-format
 msgid "  -h, --help               Show this help.\n"
 msgstr "  -h, --help               Zobrazit tuto nápovědu.\n"
@@ -1065,7 +1072,7 @@ msgstr ""
 msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<file>                  Stejné jako \"= <file>\".\n"
 
-#: src/merge/mkvmerge.cpp:372
+#: src/merge/mkvmerge.cpp:374
 #, fuzzy, no-c-format
 msgid ""
 "  @option-file.json        Reads additional command line options from\n"
@@ -1285,19 +1292,19 @@ msgid " size {0}"
 msgstr " velikost {0}"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1723
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1722
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:76
 #, no-c-format
 msgid "\"Default track\" flag:"
 msgstr "Příznak \"Výchozí stopa\":"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:535
+#: src/mkvtoolnix-gui/merge/input.cpp:539
 #, fuzzy, no-c-format
 msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "\"výchozí\" je dobrá volba pro téměř všechny situace."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1724
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1723
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
 #, no-c-format
 msgid "\"Forced track\" flag:"
@@ -1464,19 +1471,19 @@ msgstr "Přidat přílohy"
 msgid "&Add attachments"
 msgstr "Přidat přílohy"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1406
-#: src/mkvtoolnix-gui/merge/input.cpp:1407
+#: src/mkvtoolnix-gui/merge/input.cpp:1410
+#: src/mkvtoolnix-gui/merge/input.cpp:1411
 #, no-c-format
 msgid "&Add files"
 msgstr "&Přidat soubory"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1812
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1811
 #, no-c-format
 msgid "&Add source files"
 msgstr "&Přidat zdrojové soubory"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1651
-#: src/mkvtoolnix-gui/merge/input.cpp:1423
+#: src/mkvtoolnix-gui/merge/input.cpp:1427
 #, no-c-format
 msgid "&Audio"
 msgstr "&Audio"
@@ -1598,7 +1605,7 @@ msgid "&Default"
 msgstr "&Výchozí"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:171
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1804
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1803
 #, no-c-format
 msgid "&Description:"
 msgstr "&Popis:"
@@ -1608,7 +1615,7 @@ msgstr "&Popis:"
 msgid "&Detach window"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1420
+#: src/mkvtoolnix-gui/merge/input.cpp:1424
 #, no-c-format
 msgid "&Disable all items"
 msgstr "&Zakázat všechny položky"
@@ -1641,7 +1648,7 @@ msgstr "&Délka každé položky v sekundách:"
 msgid "&Edit available actions to execute"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1419
+#: src/mkvtoolnix-gui/merge/input.cpp:1423
 #, no-c-format
 msgid "&Enable all items"
 msgstr "&Povolit všechny položky"
@@ -1728,7 +1735,7 @@ msgstr "&Skryto"
 msgid "&Info tool"
 msgstr "&Nástroj informací"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1755
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1754
 #, no-c-format
 msgid "&Input"
 msgstr "&Vstup"
@@ -1752,7 +1759,7 @@ msgstr "&Jazyk názvů kapitol k nahrazení:"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:192
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1668
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1722
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1721
 #, no-c-format
 msgid "&Language:"
 msgstr "&Jazyk:"
@@ -1763,7 +1770,7 @@ msgid "&Languages"
 msgstr "&Jazyky"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:173
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1805
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1804
 #, no-c-format
 msgid "&MIME type:"
 msgstr "&Typ MIME:"
@@ -1791,7 +1798,7 @@ msgstr "Vynásobí časová razítka této stopy koeficientem."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:527
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:323
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1803
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1802
 #, no-c-format
 msgid "&Name:"
 msgstr "&Název:"
@@ -1887,7 +1894,7 @@ msgstr "&Otevřít nastavení"
 msgid "&Ordered"
 msgstr "&Seřazeno"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1797
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1796
 #, no-c-format
 msgid "&Output"
 msgstr "Vý&stup"
@@ -1959,7 +1966,7 @@ msgstr[2] "Odebrat prvek"
 msgid "&Remove end timestamps"
 msgstr "&Stlačit nebo roztáhnout časové kódy"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1377
+#: src/mkvtoolnix-gui/merge/input.cpp:1381
 #, fuzzy, no-c-format
 msgid "&Remove file"
 msgid_plural "&Remove files"
@@ -2032,7 +2039,7 @@ msgstr "&Vyhledat další seznamy stop"
 msgid "&Select all attachments"
 msgstr "&Vybrat všechny stopy"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1417
+#: src/mkvtoolnix-gui/merge/input.cpp:1421
 #, fuzzy, no-c-format
 msgid "&Select all items"
 msgstr "&Vybrat všechny stopy"
@@ -2077,7 +2084,7 @@ msgid "&Subtitle tracks:"
 msgstr "Stopy titulků:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1652
-#: src/mkvtoolnix-gui/merge/input.cpp:1424
+#: src/mkvtoolnix-gui/merge/input.cpp:1428
 #, no-c-format
 msgid "&Subtitles"
 msgstr "&Titulky"
@@ -2087,7 +2094,7 @@ msgstr "&Titulky"
 msgid "&Tag editor"
 msgstr "&Editor štítků"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1710
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1709
 #, fuzzy, no-c-format
 msgid "&Tracks, chapters and tags:"
 msgstr "&Stopy, kapitoly, štítky a přílohy:"
@@ -2115,7 +2122,7 @@ msgid "&Verbosity:"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1650
-#: src/mkvtoolnix-gui/merge/input.cpp:1422
+#: src/mkvtoolnix-gui/merge/input.cpp:1426
 #, no-c-format
 msgid "&Video"
 msgstr "&Video"
@@ -2146,182 +2153,182 @@ msgstr "Úlohy k provedení:"
 msgid "&Window"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2613
+#: src/merge/mkvmerge.cpp:2615
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' postrádá poměr stran.\n"
 
-#: src/merge/mkvmerge.cpp:2620
+#: src/merge/mkvmerge.cpp:2622
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor' postrádá koeficient poměru stran.\n"
 
-#: src/merge/mkvmerge.cpp:2423
+#: src/merge/mkvmerge.cpp:2425
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' postrádá popis.\n"
 
-#: src/merge/mkvmerge.cpp:2432
+#: src/merge/mkvmerge.cpp:2434
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' postrádá typ MIME.\n"
 
-#: src/merge/mkvmerge.cpp:2442
+#: src/merge/mkvmerge.cpp:2444
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' postrádá název.\n"
 
-#: src/merge/mkvmerge.cpp:2478
+#: src/merge/mkvmerge.cpp:2480
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' postrádá znakovou sadu.\n"
 
-#: src/merge/mkvmerge.cpp:1868
+#: src/merge/mkvmerge.cpp:1870
 #, no-c-format
 msgid "'--chapter-charset' may only be given once in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset' může být zadána pouze jednou v '--chapter-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1871
+#: src/merge/mkvmerge.cpp:1873
 #, no-c-format
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset' musí být zadána před '--chapters' v '--chapter-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:2471
+#: src/merge/mkvmerge.cpp:2473
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' postrádá jazyk.\n"
 
-#: src/merge/mkvmerge.cpp:1850
+#: src/merge/mkvmerge.cpp:1852
 #, no-c-format
 msgid "'--chapter-language' may only be given once in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language' může být zadán pouze jednou v '--chapter-language {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1853
+#: src/merge/mkvmerge.cpp:1855
 #, no-c-format
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language' musí být zadán před '--chapters' v '--chapter-language {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:2502
+#: src/merge/mkvmerge.cpp:2504
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' postrádá název souboru.\n"
 
-#: src/merge/mkvmerge.cpp:2398
+#: src/merge/mkvmerge.cpp:2400
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' postrádá délku.\n"
 
-#: src/common/command_line.cpp:111
+#: src/common/command_line.cpp:112
 #, no-c-format
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' postrádá svůj parametr.\n"
 
-#: src/merge/mkvmerge.cpp:2634
+#: src/merge/mkvmerge.cpp:2636
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' postrádá parametery oříznutí.\n"
 
-#: src/merge/mkvmerge.cpp:2492
+#: src/merge/mkvmerge.cpp:2494
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' postrádá formát.\n"
 
-#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2497
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' musí být zadán před '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2627
+#: src/merge/mkvmerge.cpp:2629
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' postrádá rozměry.\n"
 
-#: src/common/command_line.cpp:184
+#: src/common/command_line.cpp:185
 #, no-c-format
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' postrádá svůj parametr.\n"
 
-#: src/merge/mkvmerge.cpp:2511
+#: src/merge/mkvmerge.cpp:2513
 #, fuzzy, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--chapters' postrádá název souboru.\n"
 
-#: src/merge/mkvmerge.cpp:2294
+#: src/merge/mkvmerge.cpp:2296
 #, fuzzy, no-c-format
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--cue-chapter-name-format' postrádá formát.\n"
 
-#: src/merge/mkvmerge.cpp:2462
+#: src/merge/mkvmerge.cpp:2464
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' postrádá název souboru.\n"
 
-#: src/merge/mkvmerge.cpp:2950
+#: src/merge/mkvmerge.cpp:2952
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' je použitelný pouze v kombinaci s '--split'.\n"
 
-#: src/merge/mkvmerge.cpp:2384
+#: src/merge/mkvmerge.cpp:2386
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next' postrádá další UID.\n"
 
-#: src/merge/mkvmerge.cpp:2377
+#: src/merge/mkvmerge.cpp:2379
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' postrádá předchozí UID.\n"
 
-#: src/merge/mkvmerge.cpp:2391
+#: src/merge/mkvmerge.cpp:2393
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid' postrádá UID úseku.\n"
 
-#: src/merge/mkvmerge.cpp:2518
+#: src/merge/mkvmerge.cpp:2520
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' postrádá název souboru.\n"
 
-#: src/merge/mkvmerge.cpp:2358
+#: src/merge/mkvmerge.cpp:2360
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' postrádá velikost.\n"
 
-#: src/merge/mkvmerge.cpp:2365
+#: src/merge/mkvmerge.cpp:2367
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' postrádá počet souborů.\n"
 
-#: src/merge/mkvmerge.cpp:1948
+#: src/merge/mkvmerge.cpp:1950
 #, no-c-format
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale' byl použit více než jednou.\n"
 
-#: src/merge/mkvmerge.cpp:2350
+#: src/merge/mkvmerge.cpp:2352
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' postrádá název.\n"
 
-#: src/merge/mkvmerge.cpp:2882
+#: src/merge/mkvmerge.cpp:2884
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' může být zadáno pouze jednou.\n"
 
-#: src/merge/mkvmerge.cpp:2069
+#: src/merge/mkvmerge.cpp:2071
 #, no-c-format
 msgid "'-A' and '-a' used on the same source file.\n"
 msgstr "'-A' a '-a' použity na stejný zdrojový soubor.\n"
 
-#: src/merge/mkvmerge.cpp:2078
+#: src/merge/mkvmerge.cpp:2080
 #, no-c-format
 msgid "'-B' and '-b' used on the same source file.\n"
 msgstr "'-B' a '-b' použity na stejný zdrojový soubor.\n"
 
-#: src/merge/mkvmerge.cpp:2072
+#: src/merge/mkvmerge.cpp:2074
 #, no-c-format
 msgid "'-D' and '-d' used on the same source file.\n"
 msgstr "'-D' a '-d' použity na stejný zdrojový soubor.\n"
 
-#: src/merge/mkvmerge.cpp:2075
+#: src/merge/mkvmerge.cpp:2077
 #, no-c-format
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S' a '-s' použity na stejný zdrojový soubor.\n"
@@ -2341,38 +2348,38 @@ msgstr "Příznak 'Vynucené zobrazení'"
 msgid "'Track enabled' flag"
 msgstr "Příznak 'Povolená stopa'"
 
-#: src/merge/mkvmerge.cpp:2263
+#: src/merge/mkvmerge.cpp:2265
 #, no-c-format
 msgid "'{0}' can only be used with a file name. No further options are allowed if this option is used.\n"
 msgstr "'{0}' může být použito pouze s názvem souboru. Žádné další volby nejsou povoleny, pokud je použita tato volba.\n"
 
-#: src/merge/mkvmerge.cpp:1372
+#: src/merge/mkvmerge.cpp:1374
 #, no-c-format
 msgid "'{0}' is an unsupported argument for --compression. Available compression methods are: {1}\n"
 msgstr "'{0}' je nepodporovaný parametr pro '--compression'. Dostupné metody komprese jsou: {1}\n"
 
-#: src/merge/mkvmerge.cpp:1327
+#: src/merge/mkvmerge.cpp:1329
 #, no-c-format
 msgid "'{0}' is an unsupported argument for --cues.\n"
 msgstr "'{0}' je nepodporovaný parametr pro '--cues'.\n"
 
-#: src/common/command_line.cpp:220
+#: src/common/command_line.cpp:225
 #, no-c-format
 msgid "'{0}' is missing the file name.\n"
 msgstr "'{0}' chybí název souboru.\n"
 
-#: src/merge/mkvmerge.cpp:1857
+#: src/merge/mkvmerge.cpp:1859
 #, no-c-format
 msgid "'{0}' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--chapter-language {0}'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'{0}' není platný ISO639-2 ani ISO639-1 kód v '--chapter-language {0}'. Viz 'mkvmerge --list-languages' pro seznam všech jazyků a jejich příslušných ISO639-2 kódů.\n"
 
-#: src/merge/mkvmerge.cpp:1969
+#: src/merge/mkvmerge.cpp:1971
 #, no-c-format
 msgid "'{0}' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--default-language {0}'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'{0}' není platný ISO639-2 ani ISO639-1 kód v '--default-language {0}'. Viz 'mkvmerge --list-languages' pro seznam všech jazyků a jejich příslušných ISO639-2 kódů.\n"
 
 #: src/extract/extract_cli_parser.cpp:207
-#: src/merge/mkvmerge.cpp:1408
+#: src/merge/mkvmerge.cpp:1410
 #, no-c-format
 msgid "'{0}' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'{0}' není platný ISO639-2 ani ISO639-1 kód. Viz 'mkvmerge --list-languages' pro seznam všech jazyků a jejich příslušných ISO639-2 kódů.\n"
@@ -2393,12 +2400,12 @@ msgstr "'{0}' není řádek 'CHAPTERxxNAME=...'."
 msgid "'{0}' is not a valid ISO639-2 language code."
 msgstr "'{0}' není platný kód jazyka ISO639-2."
 
-#: src/merge/mkvmerge.cpp:1565
+#: src/merge/mkvmerge.cpp:1567
 #, no-c-format
 msgid "'{0}' is not a valid append mode in '--append-mode {0}'.\n"
 msgstr "'{0}' není platný režim připojení v '--append-mode {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1691
+#: src/merge/mkvmerge.cpp:1693
 #, no-c-format
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
 msgstr "'{0}' není platný maximální dodatečný blok v '--blockadd {1}'.\n"
@@ -2408,13 +2415,13 @@ msgstr "'{0}' není platný maximální dodatečný blok v '--blockadd {1}'.\n"
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "'{0}' není platný ccTLD kód země."
 
-#: src/merge/mkvmerge.cpp:999
+#: src/merge/mkvmerge.cpp:1001
 #, fuzzy, no-c-format
 msgid "'{0}' is not a valid field order."
 msgstr "'{0}' není platný ccTLD kód země."
 
-#: src/merge/mkvmerge.cpp:1507
-#: src/merge/mkvmerge.cpp:1510
+#: src/merge/mkvmerge.cpp:1509
+#: src/merge/mkvmerge.cpp:1512
 #, no-c-format
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "'{0}' není platné ID souboru v '--track-order {1}'.\n"
@@ -2424,57 +2431,57 @@ msgstr "'{0}' není platné ID souboru v '--track-order {1}'.\n"
 msgid "'{0}' is not a valid hack.\n"
 msgstr "'{0}' není platný hack.\n"
 
-#: src/merge/mkvmerge.cpp:1550
+#: src/merge/mkvmerge.cpp:1552
 #, no-c-format
 msgid "'{0}' is not a valid mapping of file and track IDs in '--append-to {1}'.\n"
 msgstr "'{0}' není platné přiřazení souboru ID stop v '--append-to {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1504
+#: src/merge/mkvmerge.cpp:1506
 #, no-c-format
 msgid "'{0}' is not a valid pair of file ID and track ID in '--track-order {1}'.\n"
 msgstr "'{0}' není platný pár ID souboru a ID stopy v '--track-order {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1607
+#: src/merge/mkvmerge.cpp:1609
 #, no-c-format
 msgid "'{0}' is not a valid pair of track ID and NALU size length in '--nalu-size-length {0}'.\n"
 msgstr "'{0}' není platný pár ID stopy a velikost NALU v '--nalu-size-length {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1683
+#: src/merge/mkvmerge.cpp:1685
 #, no-c-format
 msgid "'{0}' is not a valid pair of track ID and block additional in '--blockadd {0}'.\n"
 msgstr "'{0}' není platný pár ID stopy a dodatečného bloku v '--blockadd {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1579
+#: src/merge/mkvmerge.cpp:1581
 #, no-c-format
 msgid "'{0}' is not a valid pair of track ID and default duration in '--default-duration {0}'.\n"
 msgstr "'{0}' není platný pár ID stopy a výchozí délky v '--default-duration {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1728
+#: src/merge/mkvmerge.cpp:1730
 #, no-c-format
 msgid "'{0}' is not a valid priority class.\n"
 msgstr "'{0}' není platná třída priority.\n"
 
-#: src/merge/mkvmerge.cpp:1687
+#: src/merge/mkvmerge.cpp:1689
 #, no-c-format
 msgid "'{0}' is not a valid track ID in '--blockadd {1}'.\n"
 msgstr "'{0}' není platné ID stopy v '--blockadd {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1583
+#: src/merge/mkvmerge.cpp:1585
 #, no-c-format
 msgid "'{0}' is not a valid track ID in '--default-duration {1}'.\n"
 msgstr "'{0}' není platné ID stopy v '--default-duration {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1611
+#: src/merge/mkvmerge.cpp:1613
 #, no-c-format
 msgid "'{0}' is not a valid track ID in '--nalu-size-length {1}'.\n"
 msgstr "'{0}' není platné ID stopy v '--nalu-size-length {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:993
+#: src/merge/mkvmerge.cpp:995
 #, fuzzy, no-c-format
 msgid "'{0}' is not a valid track ID."
 msgstr "'{0}' není platný hack.\n"
 
-#: src/merge/mkvmerge.cpp:1587
+#: src/merge/mkvmerge.cpp:1589
 #, fuzzy, no-c-format
 msgid "'{0}' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '{1}'.\n"
 msgstr "'{0}' neobsahuje platnou jednotku ('s', 'ms', 'us', 'ns', 'fps', 'p' nebo 'i') v '{1}'.\n"
@@ -2489,99 +2496,99 @@ msgstr "'{0}' je povoleno pouze při extrahování kapitol.\n"
 msgid "'{0}' is only allowed when extracting tracks.\n"
 msgstr "'{0}' je povoleno pouze při extrahování stop.\n"
 
-#: src/merge/mkvmerge.cpp:2284
+#: src/merge/mkvmerge.cpp:2286
 #, no-c-format
 msgid "'{0}' lacks a file name.\n"
 msgstr "'{0}' postrádá název souboru.\n"
 
-#: src/merge/mkvmerge.cpp:2153
-#: src/merge/mkvmerge.cpp:2173
-#: src/merge/mkvmerge.cpp:2238
-#: src/merge/mkvmerge.cpp:2337
-#: src/merge/mkvmerge.cpp:2533
-#: src/merge/mkvmerge.cpp:2547
-#: src/merge/mkvmerge.cpp:2781
-#: src/merge/mkvmerge.cpp:2795
-#: src/merge/mkvmerge.cpp:2802
-#: src/merge/mkvmerge.cpp:2809
-#: src/merge/mkvmerge.cpp:2816
-#: src/merge/mkvmerge.cpp:2823
-#: src/merge/mkvmerge.cpp:2830
-#: src/merge/mkvmerge.cpp:2837
-#: src/merge/mkvmerge.cpp:2851
-#: src/merge/mkvmerge.cpp:2858
-#: src/merge/mkvmerge.cpp:2865
-#: src/merge/mkvmerge.cpp:2872
-#: src/merge/mkvmerge.cpp:2879
-#: src/merge/mkvmerge.cpp:2889
-#: src/merge/mkvmerge.cpp:2896
-#: src/merge/mkvmerge.cpp:2903
-#: src/merge/mkvmerge.cpp:2910
-#: src/merge/mkvmerge.cpp:2917
-#: src/merge/mkvmerge.cpp:2924
-#: src/merge/mkvmerge.cpp:2931
+#: src/merge/mkvmerge.cpp:2155
+#: src/merge/mkvmerge.cpp:2175
+#: src/merge/mkvmerge.cpp:2240
+#: src/merge/mkvmerge.cpp:2339
+#: src/merge/mkvmerge.cpp:2535
+#: src/merge/mkvmerge.cpp:2549
+#: src/merge/mkvmerge.cpp:2783
+#: src/merge/mkvmerge.cpp:2797
+#: src/merge/mkvmerge.cpp:2804
+#: src/merge/mkvmerge.cpp:2811
+#: src/merge/mkvmerge.cpp:2818
+#: src/merge/mkvmerge.cpp:2825
+#: src/merge/mkvmerge.cpp:2832
+#: src/merge/mkvmerge.cpp:2839
+#: src/merge/mkvmerge.cpp:2853
+#: src/merge/mkvmerge.cpp:2860
+#: src/merge/mkvmerge.cpp:2867
+#: src/merge/mkvmerge.cpp:2874
+#: src/merge/mkvmerge.cpp:2881
+#: src/merge/mkvmerge.cpp:2891
+#: src/merge/mkvmerge.cpp:2898
+#: src/merge/mkvmerge.cpp:2905
+#: src/merge/mkvmerge.cpp:2912
+#: src/merge/mkvmerge.cpp:2919
+#: src/merge/mkvmerge.cpp:2926
+#: src/merge/mkvmerge.cpp:2933
 #, no-c-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "'{0}' postrádá jeho parametr.\n"
 
-#: src/merge/mkvmerge.cpp:2606
+#: src/merge/mkvmerge.cpp:2608
 #, no-c-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "'{0}' postrádá kód FourCC.\n"
 
-#: src/merge/mkvmerge.cpp:2485
-#: src/merge/mkvmerge.cpp:2788
+#: src/merge/mkvmerge.cpp:2487
+#: src/merge/mkvmerge.cpp:2790
 #, no-c-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "'{0}' postrádá zpoždění.\n"
 
-#: src/merge/mkvmerge.cpp:2452
+#: src/merge/mkvmerge.cpp:2454
 #, no-c-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "'{0}' postrádá název souboru.\n"
 
-#: src/merge/mkvmerge.cpp:2641
-#: src/merge/mkvmerge.cpp:2648
-#: src/merge/mkvmerge.cpp:2655
-#: src/merge/mkvmerge.cpp:2662
-#: src/merge/mkvmerge.cpp:2669
-#: src/merge/mkvmerge.cpp:2676
-#: src/merge/mkvmerge.cpp:2683
-#: src/merge/mkvmerge.cpp:2690
-#: src/merge/mkvmerge.cpp:2697
-#: src/merge/mkvmerge.cpp:2704
-#: src/merge/mkvmerge.cpp:2711
-#: src/merge/mkvmerge.cpp:2718
-#: src/merge/mkvmerge.cpp:2725
-#: src/merge/mkvmerge.cpp:2732
-#: src/merge/mkvmerge.cpp:2739
-#: src/merge/mkvmerge.cpp:2746
-#: src/merge/mkvmerge.cpp:2753
-#: src/merge/mkvmerge.cpp:2760
-#: src/merge/mkvmerge.cpp:2767
-#: src/merge/mkvmerge.cpp:2774
+#: src/merge/mkvmerge.cpp:2643
+#: src/merge/mkvmerge.cpp:2650
+#: src/merge/mkvmerge.cpp:2657
+#: src/merge/mkvmerge.cpp:2664
+#: src/merge/mkvmerge.cpp:2671
+#: src/merge/mkvmerge.cpp:2678
+#: src/merge/mkvmerge.cpp:2685
+#: src/merge/mkvmerge.cpp:2692
+#: src/merge/mkvmerge.cpp:2699
+#: src/merge/mkvmerge.cpp:2706
+#: src/merge/mkvmerge.cpp:2713
+#: src/merge/mkvmerge.cpp:2720
+#: src/merge/mkvmerge.cpp:2727
+#: src/merge/mkvmerge.cpp:2734
+#: src/merge/mkvmerge.cpp:2741
+#: src/merge/mkvmerge.cpp:2748
+#: src/merge/mkvmerge.cpp:2755
+#: src/merge/mkvmerge.cpp:2762
+#: src/merge/mkvmerge.cpp:2769
+#: src/merge/mkvmerge.cpp:2776
 #, fuzzy, no-c-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "'{0}' postrádá čísla stopy.\n"
 
-#: src/merge/mkvmerge.cpp:2844
+#: src/merge/mkvmerge.cpp:2846
 #, no-c-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "'{0}' postrádá ID stopy.\n"
 
-#: src/merge/mkvmerge.cpp:2571
-#: src/merge/mkvmerge.cpp:2578
-#: src/merge/mkvmerge.cpp:2585
-#: src/merge/mkvmerge.cpp:2592
-#: src/merge/mkvmerge.cpp:2599
+#: src/merge/mkvmerge.cpp:2573
+#: src/merge/mkvmerge.cpp:2580
+#: src/merge/mkvmerge.cpp:2587
+#: src/merge/mkvmerge.cpp:2594
+#: src/merge/mkvmerge.cpp:2601
 #, no-c-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "'{0}' postrádá čísla stopy.\n"
 
-#: src/common/output.cpp:208
-#: src/common/output.cpp:221
-#: src/common/output.cpp:234
-#: src/common/output.cpp:255
+#: src/common/output.cpp:216
+#: src/common/output.cpp:229
+#: src/common/output.cpp:242
+#: src/common/output.cpp:263
 #, no-c-format
 msgid "'{0}' track {1}: {2}"
 msgstr "'{0}' stopa {1}: {2}"
@@ -2596,10 +2603,10 @@ msgstr "'{0}': Zpracovat také následující soubory: {1}\n"
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': Znovu zpracováváte stopu Opus, která byla zpracována v experimentálním režimu. Výsledná stopa bude zapsána v konečném režimu, ale jedna drobnost nemůže být obnovena ze stopy zpracované v experimentálním režimu: oříznutí konce. To znamená, že dekodér může vytvořit o pár vzorků více, než bylo původně zamýšleno. Měli byste znovu zpracovat z původní souboru Opus, pokud je to možné.\n"
 
-#: src/common/output.cpp:201
-#: src/common/output.cpp:214
-#: src/common/output.cpp:227
-#: src/common/output.cpp:244
+#: src/common/output.cpp:209
+#: src/common/output.cpp:222
+#: src/common/output.cpp:235
+#: src/common/output.cpp:252
 #, no-c-format
 msgid "'{0}': {1}"
 msgstr "'{0}': {1}"
@@ -2712,8 +2719,8 @@ msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> postrádá podřízený prvek <ChapterTrackNumber>."
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:362
-#: src/mkvtoolnix-gui/merge/input.cpp:662
-#: src/mkvtoolnix-gui/merge/input.cpp:1443
+#: src/mkvtoolnix-gui/merge/input.cpp:666
+#: src/mkvtoolnix-gui/merge/input.cpp:1447
 #, fuzzy, no-c-format
 msgid "<Do not change>"
 msgstr "<neměnit>"
@@ -2757,7 +2764,7 @@ msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> není platný podřízený prvek <{1}> na pozici {2}."
 
 #: src/input/r_matroska.cpp:2331
-#: src/input/r_matroska.cpp:2442
+#: src/input/r_matroska.cpp:2439
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Na časové značce {1} byl nalezen blok pro stopu číslo {0}. Nebyly však nalezeny žádné hlavičky pro toto číslo stopy. Blok bude přeskočen.\n"
@@ -2809,7 +2816,7 @@ msgstr "Název stopy čitelný pro člověka."
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "Úloha vytvářející soubor '%1' již je ve frontě úloh."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:439
+#: src/mkvtoolnix-gui/merge/input.cpp:443
 #, no-c-format
 msgid "A name for this track that players can display helping the user chose the right track to play, e.g. \"director's comments\"."
 msgstr "Název pro tuto stopu, který přehrávače mohou zobrazit, aby pomohly uživateli zvolit správnou stopu pro přehrání, např. \"Komentář režiséra\"."
@@ -2891,8 +2898,8 @@ msgstr "Potvrzení upozornění nebo chyb"
 msgid "A&ppend chapters from Matroska, WebM or chapter file"
 msgstr "&Otevřít soubor Matroska nebo soubor kapitol"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1408
-#: src/mkvtoolnix-gui/merge/input.cpp:1409
+#: src/mkvtoolnix-gui/merge/input.cpp:1412
+#: src/mkvtoolnix-gui/merge/input.cpp:1413
 #, no-c-format
 msgid "A&ppend files"
 msgstr "Př&ipojit soubory"
@@ -2918,7 +2925,7 @@ msgstr "AAC"
 msgid "AAC (Advanced Audio Coding)"
 msgstr "AAC (Advanced Audio Coding)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1746
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1745
 #, no-c-format
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC je SBR/HE-AAC/AAC+:"
@@ -3010,6 +3017,11 @@ msgstr "Přerušit spuštěné úlohy"
 #, fuzzy, no-c-format
 msgid "Aborted by user"
 msgstr "přerušeno uživatelem"
+
+#: src/common/cli_parser.cpp:185
+#, no-c-format
+msgid "Aborts the program after the first warning is emitted."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:691
 #, no-c-format
@@ -3107,18 +3119,18 @@ msgstr "Přidat přílohy"
 msgid "Add element"
 msgstr "Přidat prvek"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1410
-#: src/mkvtoolnix-gui/merge/input.cpp:1411
+#: src/mkvtoolnix-gui/merge/input.cpp:1414
+#: src/mkvtoolnix-gui/merge/input.cpp:1415
 #, no-c-format
 msgid "Add files as a&dditional parts"
 msgstr "Přidat soubory jako &dodatečné části"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1117
+#: src/mkvtoolnix-gui/merge/input.cpp:1121
 #, no-c-format
 msgid "Add media files"
 msgstr "Přidat soubory médií"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1308
+#: src/mkvtoolnix-gui/merge/input.cpp:1312
 #, no-c-format
 msgid "Add media files as additional parts"
 msgstr "Přidat soubory médií jako dodatečné části"
@@ -3165,12 +3177,12 @@ msgstr "Přidat soubor 'filename' jako novou přílohu"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:616
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:722
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1814
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1813
 #, no-c-format
 msgid "Add to job &queue"
 msgstr "Přidat do &fronty úloh"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1130
+#: src/mkvtoolnix-gui/merge/input.cpp:1134
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "Přidávání souborů kapitol"
@@ -3180,12 +3192,12 @@ msgstr "Přidávání souborů kapitol"
 msgid "Adding or appending files"
 msgstr "Přidávání nebo připojování souborů"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1148
+#: src/mkvtoolnix-gui/merge/input.cpp:1152
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "Přidávání souborů informací o úsecích"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1166
+#: src/mkvtoolnix-gui/merge/input.cpp:1170
 #, no-c-format
 msgid "Adding tag files"
 msgstr "Přidávání souborů štítků"
@@ -3205,8 +3217,8 @@ msgstr "Dodatečné &změny"
 msgid "Additional command line options"
 msgstr "Dodatečné volby příkazového řádku"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1754
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1772
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1753
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1771
 #, no-c-format
 msgid "Additional options:"
 msgstr "Dodatečné volby:"
@@ -3266,26 +3278,26 @@ msgstr "po konkrétních časových kódech"
 msgid "After the job &queue has stopped"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1428
-#: src/mkvtoolnix-gui/merge/input.cpp:1433
+#: src/mkvtoolnix-gui/merge/input.cpp:1432
+#: src/mkvtoolnix-gui/merge/input.cpp:1437
 #, fuzzy, no-c-format
 msgid "Afterwards &close the current multiplex settings."
 msgstr "přidat všechny soubory do aktuálního nastavení sloučení"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1426
-#: src/mkvtoolnix-gui/merge/input.cpp:1431
+#: src/mkvtoolnix-gui/merge/input.cpp:1430
+#: src/mkvtoolnix-gui/merge/input.cpp:1435
 #, no-c-format
 msgid "Afterwards &leave the settings as they are."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1429
-#: src/mkvtoolnix-gui/merge/input.cpp:1434
+#: src/mkvtoolnix-gui/merge/input.cpp:1433
+#: src/mkvtoolnix-gui/merge/input.cpp:1438
 #, fuzzy, no-c-format
 msgid "Afterwards &remove all source files."
 msgstr "odebrat vstupní soubory"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1427
-#: src/mkvtoolnix-gui/merge/input.cpp:1432
+#: src/mkvtoolnix-gui/merge/input.cpp:1431
+#: src/mkvtoolnix-gui/merge/input.cpp:1436
 #, fuzzy, no-c-format
 msgid "Afterwards create &new multiplex settings and close the current ones."
 msgstr "Vytvořit nové nastavení &sloučení a přidat k těmto"
@@ -3300,7 +3312,7 @@ msgstr "Algoritmus: {0} ({1})"
 msgid "All chapters have been removed from the file '%1'."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1807
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1806
 #, fuzzy, no-c-format
 msgid "All destination files"
 msgstr "ke všem výstupním souborům"
@@ -3370,7 +3382,7 @@ msgstr "Všechny hodnoty hlavičky jsou v pořádku."
 msgid "All known property names and their meaning\n"
 msgstr "Všechny známé názvy vlastností a jejich význam\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:540
+#: src/mkvtoolnix-gui/merge/input.cpp:544
 #, no-c-format
 msgid "All occurences of the string \"<TID>\" will be replaced by the track's track ID."
 msgstr "Všechny výskyty řetězce \"<TID>\" budou nahrazeny ID stopy příslušné stopy."
@@ -3395,7 +3407,7 @@ msgstr "Všechny podporované soubory médií"
 msgid "All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 msgstr "Všechny jednotky jsou založené na 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
 #, no-c-format
 msgid "Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
 msgstr "Umožňuje ukládání AVC/h.264 videa v režimu kompatibility Video pro Windows, např. když je načteno z AVI."
@@ -3487,7 +3499,7 @@ msgstr "Příloha s ID {0} nebyla nalezena.\n"
 msgid "An attachment with the name '%1' is already present."
 msgstr "Příloha s ID {0} nebyla nalezena.\n"
 
-#: src/merge/mkvmerge.cpp:2060
+#: src/merge/mkvmerge.cpp:2062
 #, no-c-format
 msgid "An empty file name is not valid.\n"
 msgstr "Prázdný název souboru není platný.\n"
@@ -3510,7 +3522,7 @@ msgstr ""
 "Uvozovací název souboru odpovídající\n"
 "předchozímu úseku."
 
-#: src/merge/mkvmerge.cpp:3157
+#: src/merge/mkvmerge.cpp:3159
 #, fuzzy, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Během zapisování výstupního souboru se objevila výjimka."
@@ -3526,7 +3538,7 @@ msgstr "Došlo k neznámé chybě. Soubor byl změněn."
 msgid "An unsigned integer was expected."
 msgstr "Bylo očekáváno celé číslo bez znaménka."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
 #, no-c-format
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "Analyzovat bitové toky MPEG4, vložit každý snímek do jednoho bloku Matroska, použít vhodné opatření dat časovým razítkem (I P B B = 0 120 40 80), použít V_MPEG4/ISO/... ID kodeku."
@@ -3557,7 +3569,7 @@ msgstr ""
 msgid "Append files in chapter editor"
 msgstr "Otevřít soubory v editoru kapitol"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1117
+#: src/mkvtoolnix-gui/merge/input.cpp:1121
 #, no-c-format
 msgid "Append media files"
 msgstr "Připojit soubory médií"
@@ -3572,12 +3584,12 @@ msgstr "Připojit k &existujícímu vstupnímu souboru"
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Připojení stopy {0} ze souboru č. {1} ('{2}') ke stopě {3} ze souboru č. {4} ('{5}').\n"
 
-#: src/merge/mkvmerge.cpp:648
+#: src/merge/mkvmerge.cpp:650
 #, no-c-format
 msgid "Aspect ratio"
 msgstr "Poměr stran"
 
-#: src/merge/mkvmerge.cpp:648
+#: src/merge/mkvmerge.cpp:650
 #, no-c-format
 msgid "Aspect ratio factor"
 msgstr "Činitel poměru stran"
@@ -3592,17 +3604,17 @@ msgstr "Poměr stran"
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "Je potřeba alespoň jeden prvek <ChapterAtom>."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1810
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1809
 #, no-c-format
 msgid "Atta&chments"
 msgstr "&Přílohy"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1799
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1798
 #, fuzzy, no-c-format
 msgid "Atta&chments to add:"
 msgstr "&Přílohy:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1806
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1805
 #, no-c-format
 msgid "Attach &to:"
 msgstr "Připojit &k:"
@@ -3656,7 +3668,7 @@ msgstr "Nahradit přílohu souborem 'filename'"
 msgid "Attachments"
 msgstr "Přílohy"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1798
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1797
 #, fuzzy, no-c-format
 msgid "Attachments from &source files:"
 msgstr "Přepínač příloh"
@@ -3687,7 +3699,7 @@ msgstr "&Přidat soubory"
 msgid "Audio output sampling frequency"
 msgstr "Vzorkovací frekvence výstupního audia"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1745
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1744
 #, no-c-format
 msgid "Audio properties"
 msgstr "Vlastnosti audia"
@@ -3707,12 +3719,12 @@ msgstr "Stopy audia:"
 msgid "Audio track %1"
 msgstr "Stopa audia %1"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1716
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1715
 #, no-c-format
 msgid "Audio, subtitle, chapter properties"
 msgstr "Vlastnosti audia, titulků, kapitol"
 
-#: src/merge/mkvmerge.cpp:400
+#: src/merge/mkvmerge.cpp:402
 #, no-c-format
 msgid "Automatic MIME type recognition for '{0}': {1}\n"
 msgstr "Automatické rozpoznání typu MIME pro '{0}': {1}\n"
@@ -3727,7 +3739,7 @@ msgstr "&Automaticky nastavit název výstupního souboru"
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Automaticky nastavit &název souboru ze zdrojových souborů"
 
-#: src/merge/mkvmerge.cpp:2310
+#: src/merge/mkvmerge.cpp:2312
 #, fuzzy, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "Automatické povolení režimu kompatibility WebM kvůli příponě názvu výstupního souboru.\n"
@@ -3742,7 +3754,7 @@ msgstr "Automaticky nastavit &název souboru ze zdrojových souborů"
 msgid "Automatically set track &delays from source file name"
 msgstr "Automaticky nastavit &zpoždění stop z názvu výstupního souboru"
 
-#: src/common/command_line.cpp:243
+#: src/common/command_line.cpp:248
 #, no-c-format
 msgid "Available translations:\n"
 msgstr "Dostupné překlady:\n"
@@ -3819,7 +3831,7 @@ msgid "Block virtual"
 msgstr "Virtuální blok: {0}"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:262
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:90
 #, no-c-format
 msgid "Blu-ray discs often contain a chapter entry very close to the end of the movie."
 msgstr "Disky Blu-ray často obsahují položku kapitoly velice blízko konce filmu."
@@ -3965,7 +3977,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/jobs/tool.cpp:586
 #: src/mkvtoolnix-gui/jobs/tool.cpp:611
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:428
-#: src/mkvtoolnix-gui/merge/input.cpp:1250
+#: src/mkvtoolnix-gui/merge/input.cpp:1254
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
 #: src/mkvtoolnix-gui/merge/tool.cpp:219
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:197
@@ -4015,17 +4027,17 @@ msgstr "Kategorie je ukončena nenulovým znakem"
 msgid "Caught exception"
 msgstr "Zachycena výjimka"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:81
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:83
 #, fuzzy, no-c-format
 msgid "Causes mkvmerge not to write 'CueDuration' elements in the cues."
 msgstr "Způsobí, že mkvmerge nezapíše prvky 'CueDuration' do indexů."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:82
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:84
 #, fuzzy, no-c-format
 msgid "Causes mkvmerge not to write 'CueRelativePosition' elements in the cues."
 msgstr "Způsobí, že mkvmerge nezapíše prvky 'CueRelativePosition' do indexů."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:80
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:82
 #, no-c-format
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
 msgstr "Způsobí, že mkvmerge přidá příkaz 'zastavit zobrazení' do paketů VobSub titulků, které neobsahují pole délka."
@@ -4130,7 +4142,7 @@ msgstr "Editor kapitol"
 msgid "Chapter extraction"
 msgstr "Extrahování kapitoly"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1783
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1782
 #, no-c-format
 msgid "Chapter file:"
 msgstr "Soubor kapitol:"
@@ -4145,7 +4157,7 @@ msgstr "Soubor kapitol:"
 msgid "Chapter flag hidden"
 msgstr "&Přeskočit kapitoly s příznakem \"skryté\""
 
-#: src/merge/cluster_helper.cpp:739
+#: src/merge/cluster_helper.cpp:743
 #, no-c-format
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr ""
@@ -4272,14 +4284,14 @@ msgstr "UID edice překladu kapitoly: {0}"
 
 #: src/common/kax_element_names.cpp:265
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:237
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1781
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1780
 #: src/mkvtoolnix-gui/merge/track.cpp:433
 #: src/propedit/options.cpp:215
 #, no-c-format
 msgid "Chapters"
 msgstr "Kapitoly"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1792
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1791
 #, fuzzy, no-c-format
 msgid "Chapters in fixed intervals"
 msgstr "Editor kapitol"
@@ -4298,8 +4310,8 @@ msgstr[3] "Kapitoly: {0} položek"
 msgid "Character set"
 msgstr "Znaková sada:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1750
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1786
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1749
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1785
 #, no-c-format
 msgid "Character set:"
 msgstr "Znaková sada:"
@@ -4361,12 +4373,12 @@ msgstr "Zavřít změněný soubor"
 msgid "Cluster"
 msgstr "Cluster"
 
-#: src/merge/mkvmerge.cpp:1801
+#: src/merge/mkvmerge.cpp:1803
 #, no-c-format
 msgid "Cluster length '{0}' out of range (0..65535).\n"
 msgstr "Délka clusteru '{0}' je mimo rozsah (0..65535).\n"
 
-#: src/merge/mkvmerge.cpp:1794
+#: src/merge/mkvmerge.cpp:1796
 #, no-c-format
 msgid "Cluster length '{0}' out of range (100..32000).\n"
 msgstr "Délka clusteru '{0}' je mimo rozsah (100..32000).\n"
@@ -4501,7 +4513,7 @@ msgstr "dokončeno s upozorněními"
 msgid "Compression failed: {0}\n"
 msgstr "Komprese selhala: {0}\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1725
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1724
 #, no-c-format
 msgid "Compression:"
 msgstr "Komprese:"
@@ -4553,7 +4565,7 @@ msgstr "Převést textové titulky na tuto znakovou sadu (výchozí: UTF-8)."
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Převádění kapitol na XML selhalo: %1"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1720
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1719
 #, no-c-format
 msgid "Cop&y this item:"
 msgstr ""
@@ -4650,7 +4662,7 @@ msgstr "Nelze otevřít '{0}' pro čtení.\n"
 msgid "Could not open the corresponding correction file '{0}c'.\n"
 msgstr "Nelze otevřít odpovídající soubor oprav '{0}c'.\n"
 
-#: src/common/command_line.cpp:229
+#: src/common/command_line.cpp:234
 #, no-c-format
 msgid "Could not open the file '{0}' for directing the output.\n"
 msgstr "Nelze otevřít soubor '{0}' pro směrování výstupu.\n"
@@ -4685,7 +4697,7 @@ msgstr "Nelze zapisovat do výstupního souboru: {0} ({1})\n"
 msgid "Country"
 msgstr "Země"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1771
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1770
 #, no-c-format
 msgid "Create WebM compliant file"
 msgstr "Vytvořit odpovídající soubor WebM"
@@ -4741,12 +4753,12 @@ msgstr "Vytváření adresáře '{0}' selhalo: {1}"
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
 msgstr "Vytvoření souboru selhalo. Zkontrolujte, abyste se ujistili, zda máte oprávnění k zápisu do tohoto adresáře, a že disk není plný."
 
-#: src/merge/mkvmerge.cpp:725
+#: src/merge/mkvmerge.cpp:727
 #, no-c-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '{0}').\n"
 msgstr "Parametry ořezání: nezadány ve formuláři <TID>:<left>,<top>,<right>,<bottom> (např. 0:10,5,10,5) (parametr byl '{0}').\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1743
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1742
 #, no-c-format
 msgid "Cropping:"
 msgstr "Oříznutí:"
@@ -4859,7 +4871,7 @@ msgstr "Délka indexu: {0}"
 msgid "Cue extraction"
 msgstr "Extrahování indexu"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1789
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1788
 #, no-c-format
 msgid "Cue name format:"
 msgstr "Formát názvu:"
@@ -4980,7 +4992,7 @@ msgstr "Aktuální verze:"
 msgid "Currently no newer version is available online."
 msgstr "Aktuálně není dostupná žádná nová verze online."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:457
+#: src/mkvtoolnix-gui/merge/input.cpp:461
 #, no-c-format
 msgid "Currently only certain subtitle formats are compressed with the zlib algorithm."
 msgstr "Aktuálně jsou pomocí algoritmu zlib komprimovány pouze některé formáty titulků."
@@ -5058,7 +5070,7 @@ msgstr "Výchozí dodat&ečné volby příkazového řádku:"
 msgid "Default duration"
 msgstr "Výchozí délka"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1731
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1730
 #, no-c-format
 msgid "Default duration/FPS:"
 msgstr "Výchozí délka nebo snímky za sekundu:"
@@ -5123,8 +5135,8 @@ msgstr "Výchozí pro nové položky kapitol:"
 msgid "Delay"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1729
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1795
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1728
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1794
 #, no-c-format
 msgid "Delay (in ms):"
 msgstr "Zpoždění (v ms):"
@@ -5139,7 +5151,7 @@ msgstr ""
 msgid "Delay the chapters' timestamps by a couple of ms."
 msgstr "Zpozdit časové kódy této stopy o několik milisekund."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:460
+#: src/mkvtoolnix-gui/merge/input.cpp:464
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
 msgstr "Zpozdit časové kódy této stopy o několik milisekund."
@@ -5213,7 +5225,7 @@ msgstr "Popis:"
 msgid "Destination directory"
 msgstr "Název výstupního souboru"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1811
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1810
 #, fuzzy, no-c-format
 msgid "Destination file"
 msgstr "Název výstupního souboru"
@@ -5239,7 +5251,7 @@ msgstr "Název výstupního souboru"
 msgid "Destination file's name"
 msgstr "Název výstupního souboru"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1758
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1757
 #, fuzzy, no-c-format
 msgid "Destination file:"
 msgstr "Název výstupního souboru"
@@ -5249,10 +5261,10 @@ msgstr "Název výstupního souboru"
 msgid "Details"
 msgstr "Podrobnosti"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1447
-#: src/mkvtoolnix-gui/merge/input.cpp:1449
-#: src/mkvtoolnix-gui/merge/input.cpp:1450
 #: src/mkvtoolnix-gui/merge/input.cpp:1451
+#: src/mkvtoolnix-gui/merge/input.cpp:1453
+#: src/mkvtoolnix-gui/merge/input.cpp:1454
+#: src/mkvtoolnix-gui/merge/input.cpp:1455
 #, fuzzy, no-c-format
 msgid "Determine automatically"
 msgstr "určit automaticky"
@@ -5309,7 +5321,7 @@ msgstr "Zakázat dod&atečnou bezztrátovou kompresi pro všechny typy stop"
 msgid "Disable scaling for &high DPI displays"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:74
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:76
 #, no-c-format
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Zakázat použití SimpleBlocks namísto BlockGroups."
@@ -5335,8 +5347,8 @@ msgstr "Zrušit odsazení: {0:.3f}ms ({1}ns)"
 msgid "Discardable"
 msgstr "zrušitelné,"
 
-#: src/merge/mkvmerge.cpp:700
-#: src/merge/mkvmerge.cpp:706
+#: src/merge/mkvmerge.cpp:702
+#: src/merge/mkvmerge.cpp:708
 #, no-c-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '{0}').\n"
 msgstr "Rozměry zobrazení: neurčené ve formuláři <TID>:<width>x<height>, např. 1:640x480 (parametr byl '{0}').\n"
@@ -5356,12 +5368,12 @@ msgstr "Jednotka zobrazení: {0}{1}"
 msgid "Display width"
 msgstr "Šířka zobrazení: {0}"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1742
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1741
 #, no-c-format
 msgid "Display width/height:"
 msgstr "Šířka a výška zobrazení:"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "Nepřídávat položku pro kapitoly v prvku metahledání."
@@ -5376,7 +5388,7 @@ msgstr ""
 msgid "Do not split"
 msgstr "Nerozdělovat"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
 #, no-c-format
 msgid "Do not write meta seek elements at all."
 msgstr "Vůbec nezapisovat prvky metahledání."
@@ -5428,7 +5440,7 @@ msgstr "Verze typu dokumentu: {0}"
 msgid "Dolby TrueHD"
 msgstr "Dolby TrueHD"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1446
+#: src/mkvtoolnix-gui/merge/input.cpp:1450
 #, fuzzy, no-c-format
 msgid "Don't change"
 msgstr "neměnit"
@@ -5438,7 +5450,7 @@ msgstr "neměnit"
 msgid "Don't escape"
 msgstr "Neuvozovat"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1790
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1789
 #, fuzzy, no-c-format
 msgid "Don't generate chapters"
 msgstr "Generovat podkapitoly"
@@ -5448,7 +5460,7 @@ msgstr "Generovat podkapitoly"
 msgid "Don't show this message again."
 msgstr "Tuto zprávu znovu nezobrazovat."
 
-#: src/merge/mkvmerge.cpp:3065
+#: src/merge/mkvmerge.cpp:3067
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr "Dokončeno vyhledávání seznamů stop.\n"
@@ -5473,7 +5485,7 @@ msgstr "Stahování informací o vydání"
 msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:520
+#: src/mkvtoolnix-gui/merge/input.cpp:524
 #, fuzzy, no-c-format
 msgid "Drops all HD extensions from an audio track and keeps only its lossy core."
 msgstr "Vynechá bezztrátová rozšíření ze stopy audia a ponechá pouze jeho ztrátové jádro."
@@ -5680,7 +5692,7 @@ msgstr "Povolí rozdělení výstupu na více než jeden soubor."
 msgid "Enabling items"
 msgstr "&Povolit všechny stopy"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:90
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:92
 #, no-c-format
 msgid "Enabling this option causes mkvmerge to keep that last entry."
 msgstr "Povolení této volby způsobí, že mkvmerge ponechá tuto poslední položku."
@@ -5795,7 +5807,7 @@ msgstr "Cyba analýzy paketu MPEG PS během fáze čtení hlavičky. Tato stopa 
 msgid "Error parsing the chapters in '{0}': some mandatory elements are missing.\n"
 msgstr "Chyba analýzy kapitol v '{0}': schází některé povinné prvky.\n"
 
-#: src/merge/mkvmerge.cpp:527
+#: src/merge/mkvmerge.cpp:529
 #: src/propedit/tag_target.cpp:171
 #, no-c-format
 msgid "Error parsing the tags in '{0}': some mandatory elements are missing.\n"
@@ -5827,9 +5839,9 @@ msgstr "Chyba zapisování souboru Matroska"
 msgid "Error {0}\n"
 msgstr "Chyba {0}\n"
 
-#: src/common/output.cpp:133
-#: src/common/output.cpp:134
-#: src/common/output.cpp:135
+#: src/common/output.cpp:138
+#: src/common/output.cpp:139
+#: src/common/output.cpp:140
 #: src/mkvtoolnix-gui/jobs/job.cpp:251
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:318
 #, no-c-format
@@ -5846,7 +5858,7 @@ msgstr "Chyba: Nelze otevřít vstupní soubor {0} ({1})."
 msgid "Error: No EBML head found."
 msgstr "Chyba: Nenalezena žádná hlavička EBML."
 
-#: src/merge/mkvmerge.cpp:2304
+#: src/merge/mkvmerge.cpp:2306
 #, fuzzy, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -5907,7 +5919,7 @@ msgstr "Příklady: 01:00:00 (po jedné hodině) nebo 1800s (po 1800 sekundách)
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Příklady: 01:00:00,01:30:00 (po jedné hodině a po jedné hodině a třiceti minutách) nebo 180s,300s,00:10:00 (po třech, pěti a deseti minutách)."
 
-#: src/merge/mkvmerge.cpp:3157
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Exception details:"
 msgstr "Podrobnosti výjimky:"
@@ -5918,7 +5930,7 @@ msgstr "Podrobnosti výjimky:"
 msgid "Executable files"
 msgstr "Spustitelné soubory"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1898
+#: src/mkvtoolnix-gui/merge/input.cpp:1902
 #, no-c-format
 msgid "Executable not found"
 msgstr "Spustitelné nebyly nalezeny"
@@ -6083,7 +6095,7 @@ msgstr "UID rodiny: {0}"
 msgid "Fi&le name:"
 msgstr "Název souboru:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1757
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1756
 #, no-c-format
 msgid "Fi&le title:"
 msgstr "&Název souboru:"
@@ -6150,7 +6162,7 @@ msgstr "Název souboru"
 msgid "File name:"
 msgstr "Název souboru:"
 
-#: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:45
+#: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:46
 #, fuzzy, no-c-format
 msgid "File not found"
 msgstr "soubor nebyl nalezen"
@@ -6185,7 +6197,7 @@ msgstr "Upozornění na strukturu souboru"
 msgid "File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1774
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1773
 #, no-c-format
 msgid "File/Segment linking"
 msgstr "Propojování souborů nebo úseků"
@@ -6200,7 +6212,7 @@ msgstr "Soubory nemůžou být připojeny k sobě samým. Parametr pro '--append
 msgid "Finished at:"
 msgstr "Dokončeno:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1735
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1734
 #, no-c-format
 msgid "Fix bitstream timing info"
 msgstr "Opravit informaci o časování bitového toku"
@@ -6237,7 +6249,7 @@ msgstr "Desetinné číslo"
 msgid "Flushes all cached data to storage when closing a file opened for writing."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1450
+#: src/mkvtoolnix-gui/merge/input.cpp:1454
 #, fuzzy, no-c-format
 msgid "For all frames"
 msgstr "pro všechny snímky"
@@ -6259,27 +6271,27 @@ msgstr "Pro soubory, které nebudou obsahovat stopu videa, ale alespoň jednu st
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:511
+#: src/mkvtoolnix-gui/merge/input.cpp:515
 #, no-c-format
 msgid "For such files you can use this parameter and decrease the size to 2."
 msgstr "Pro takové soubory můžete použít tento parametr a snížit velikost na 2."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1446
+#: src/mkvtoolnix-gui/merge/input.cpp:1450
 #, fuzzy, no-c-format
 msgid "Force 2 bytes"
 msgstr "vynutit 2 bajty"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1446
+#: src/mkvtoolnix-gui/merge/input.cpp:1450
 #, fuzzy, no-c-format
 msgid "Force 4 bytes"
 msgstr "vynutit 4 bajty"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
 msgid "Force EBML style lacing."
 msgstr "Vynutit svazování stylu EBML."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
 #, no-c-format
 msgid "Force Xiph style lacing."
 msgstr "Vynutit svazování stylu Xiph."
@@ -6300,17 +6312,17 @@ msgstr "Vynucená stopa"
 msgid "Forced track flag"
 msgstr "Příznak \"Vynucená stopa\":"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:74
 #, no-c-format
 msgid "Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types."
 msgstr "Vynutí, aby čtečka Matroska používala obecnou průchozí tvorbu paketů i pro známé a podporované typy stop."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:509
+#: src/mkvtoolnix-gui/merge/input.cpp:513
 #, no-c-format
 msgid "Forces the NALU size length to a certain number of bytes."
 msgstr "Vynutí velikost NALU na určitý počet bajtů."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:470
+#: src/mkvtoolnix-gui/merge/input.cpp:474
 #, no-c-format
 msgid "Forces the default duration or number of frames per second for a track."
 msgstr "Vynutí výchozí délku nebo počet snímků za sekundu pro stopu."
@@ -6325,12 +6337,12 @@ msgstr "Vynutí měřítko časového kódu na zadanou hodnotu."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1480
+#: src/merge/mkvmerge.cpp:1482
 #, no-c-format
 msgid "FourCC: Invalid track ID in '{0} {1}'.\n"
 msgstr "FourCC: Neplatné ID stopy v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1476
+#: src/merge/mkvmerge.cpp:1478
 #, no-c-format
 msgid "FourCC: Missing track ID in '{0} {1}'.\n"
 msgstr "FourCC: Chybějící ID stopy v '{0} {1}'.\n"
@@ -6380,7 +6392,7 @@ msgstr "Snímky nebo pole:"
 msgid "Frame{0}{1}"
 msgstr "Snímek s velikostí {0}{1}{2}"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:538
+#: src/mkvtoolnix-gui/merge/input.cpp:542
 #, no-c-format
 msgid "Free-form edit field for user defined options for this track."
 msgstr "Volně upravitelné pole pro uživatelem definované volby pro tuto stopu."
@@ -6395,20 +6407,20 @@ msgstr "&GUI"
 msgid "Gamma"
 msgstr "Gamma: {0}"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:84
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:86
 #, no-c-format
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
 msgstr "Bezvýznamná data na začátku stop audia v souborech AVI se normálně používají pro zpoždění této stopy."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1756
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1755
 #, no-c-format
 msgid "General"
 msgstr "Obecné"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1574
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1593
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1713
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1719
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1712
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 #, no-c-format
 msgid "General options"
 msgstr "Obecné volby"
@@ -6428,7 +6440,7 @@ msgstr "Generovat podkapitoly"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1787
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1786
 #, fuzzy, no-c-format
 msgid "Generating chapters:"
 msgstr "Generovat podkapitoly"
@@ -6449,7 +6461,7 @@ msgstr "Všeobecné ovládání výstupu"
 msgid "Global tags"
 msgstr "Všeobecné štítky:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1760
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1759
 #, no-c-format
 msgid "Global tags:"
 msgstr "Všeobecné štítky:"
@@ -6786,7 +6798,7 @@ msgstr "Pokud je zadáno, můžete použít až devět číslic za desetinnou č
 msgid "If it contains the word 'DELAY' followed by a number, this number is automatically put into the 'delay' input field for any audio track found in the file."
 msgstr "Pokud obsahuje slovo 'DELAY' následované číslem, pak je toto číslo automaticky vloženo do vstupního pole 'zpoždění' pro všechny stopy audia nalezené v souboru."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:506
+#: src/mkvtoolnix-gui/merge/input.cpp:510
 #, no-c-format
 msgid "If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all."
 msgstr "Pokud je ponecháno prázdné, pak bude  zachován původní stereo režim stopy, nebo pokud žádný neměla, nebude nastaven vůbec žádný."
@@ -6796,7 +6808,7 @@ msgstr "Pokud je ponecháno prázdné, pak bude  zachován původní stereo rež
 msgid "If more segment UIDs are specified than segments are created then the surplus UIDs are ignored."
 msgstr "Pokud je zadáno více UID úseků, než je vytvořeno úseků, pak jsou přebytečná UID ignorována."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:473
+#: src/mkvtoolnix-gui/merge/input.cpp:477
 #, fuzzy, no-c-format
 msgid "If no unit is given, 'fps' will be used."
 msgstr "Pokud není nic zadáno, bude použito '%p - %t'."
@@ -6817,17 +6829,17 @@ msgstr "Pokud není nic zadáno, bude použito '%p - %t'."
 msgid "If nothing is entered, chapters will be generated but no name will be set."
 msgstr "Pokud není nic zadáno, bude použito '%p - %t'."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:448
+#: src/mkvtoolnix-gui/merge/input.cpp:452
 #, no-c-format
 msgid "If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks."
 msgstr "Pokud je nastaveno na 'určit automaticky', pak mkvmerge zvolí jednu stopu každého typu, aby měla nastaven tento příznak na základě informací ve zdrojových souborech a pořadí stop."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:456
+#: src/mkvtoolnix-gui/merge/input.cpp:460
 #, no-c-format
 msgid "If set to 'determine automatically' then mkvmerge will decide whether or not to compress and which algorithm to use based on the track type."
 msgstr "Pokud je nastaveno na 'určit automaticky', pak mkvmerge určí, zda komprimovat nebo nekomprimovat, a který algoritmus použít na základě typu stopy."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:438
+#: src/mkvtoolnix-gui/merge/input.cpp:442
 #, fuzzy, no-c-format
 msgid "If set to 'no' then the selected tracks will not be copied to the destination file."
 msgstr "Pokud je nastaveno na 'ne', pak vybrané stopy nebudou zkopírovány do výstupního souboru."
@@ -6993,7 +7005,7 @@ msgstr "Zvýšit úroveň podrobnosti."
 msgid "Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1753
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1752
 #, no-c-format
 msgid "Indexing (cues):"
 msgstr "Indexování (indexy):"
@@ -7020,17 +7032,17 @@ msgstr "Zobrazit informace o verzi."
 msgid "Input too long: {0} > {1}"
 msgstr "Vstup je příliš dlouhý: {0} > {1}"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1134
+#: src/mkvtoolnix-gui/merge/input.cpp:1138
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "Namísto toho musí být takový soubor nastaven prostřednictvím volby 'soubor kapitol' na kartě 'výstup'."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1170
+#: src/mkvtoolnix-gui/merge/input.cpp:1174
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "Namísto toho musí být takový soubor nastaven prostřednictvím volby 'všeobecné štítky' na kartě 'výstup'."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1152
+#: src/mkvtoolnix-gui/merge/input.cpp:1156
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "Namísto toho musí být takový soubor nastaven prostřednictvím volby 'informace o úsecích' na kartě 'výstup'."
@@ -7055,7 +7067,7 @@ msgstr "Vnitřní chyba: tracks.cpp SSA #1. {0}"
 msgid "Internal program error"
 msgstr "Vnitřní chyba programu"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1794
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1793
 #, no-c-format
 msgid "Interval:"
 msgstr ""
@@ -7097,22 +7109,22 @@ msgstr "Neplatný identifikátor přílohy nebo specifikace názvu souboru v par
 msgid "Invalid attribute '{0}' in node '{1}' at position {2}"
 msgstr "Neplatný atribut '{0}' v uzlu '{1}' na pozici {2}"
 
-#: src/merge/mkvmerge.cpp:1267
+#: src/merge/mkvmerge.cpp:1269
 #, no-c-format
 msgid "Invalid boolean option specified in '--default-track {0}'.\n"
 msgstr "Neplatná logická hodnota uvedená v '--default-track {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1645
+#: src/merge/mkvmerge.cpp:1647
 #, no-c-format
 msgid "Invalid boolean option specified in '--fix-bitstream-timing-information {0}'.\n"
 msgstr "Neplatná logická hodnota uvedená v '--fix-bitstream-timing-information {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1293
+#: src/merge/mkvmerge.cpp:1295
 #, no-c-format
 msgid "Invalid boolean option specified in '--forced-track {0}'.\n"
 msgstr "Neplatná logická hodnota uvedená v '--forced-track {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1712
+#: src/merge/mkvmerge.cpp:1714
 #, no-c-format
 msgid "Invalid boolean specified in '--aac-is-sbr {0}'.\n"
 msgstr "Neplatná logická hodnota uvedená v '--aac-is-sbr {0}'.\n"
@@ -7122,28 +7134,28 @@ msgstr "Neplatná logická hodnota uvedená v '--aac-is-sbr {0}'.\n"
 msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
 msgstr "Neplatná specifikace změny ({2}) v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1080
-#: src/merge/mkvmerge.cpp:1119
+#: src/merge/mkvmerge.cpp:1082
+#: src/merge/mkvmerge.cpp:1121
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "Neplatné číslo kapitoly '{0}' pro '--split' v '--split {1}': {2}\n"
 
-#: src/merge/mkvmerge.cpp:1348
+#: src/merge/mkvmerge.cpp:1350
 #, no-c-format
 msgid "Invalid compression option specified in '--compression {0}'.\n"
 msgstr "Neplatná uvedená volba komprese v '--compression {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1341
+#: src/merge/mkvmerge.cpp:1343
 #, no-c-format
 msgid "Invalid compression option. No track ID specified in '--compression {0}'.\n"
 msgstr "Neplatná volba komprese. Není uveden identifikátor stopy v '--compression {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1318
+#: src/merge/mkvmerge.cpp:1320
 #, no-c-format
 msgid "Invalid cues option specified in '--cues {0}'.\n"
 msgstr "Neplatná volba indexů zadaná v '--cues {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1311
+#: src/merge/mkvmerge.cpp:1313
 #, no-c-format
 msgid "Invalid cues option. No track ID specified in '--cues {0}'.\n"
 msgstr "Neplatná volba indexů. Nezadáno žádné ID stopy v '--cues {0}'.\n"
@@ -7173,7 +7185,7 @@ msgstr "Neplatný koncový čas pro '--split' v '--split {0}' (aktuální část
 msgid "Invalid end time for '--split' in '--split {0}' (current part: {1}). The end time must be bigger than the start time.\n"
 msgstr "Neplatný koncový čas pro '--split' v '--split {0}' (aktuální část: {1}). Koncový čas musí být větší než počáteční.\n"
 
-#: src/merge/mkvmerge.cpp:1196
+#: src/merge/mkvmerge.cpp:1198
 #, no-c-format
 msgid "Invalid format for '--split' in '--split {0}'.\n"
 msgstr "Neplatný formát pro '--split' v '--split {0}'.\n"
@@ -7233,7 +7245,7 @@ msgstr "Neplatný formát: řetězec je prázdný"
 msgid "Invalid format: unknown character '{0}' found"
 msgstr "Neplatný formát: nalezen neplatný znak '{0}'"
 
-#: src/merge/mkvmerge.cpp:1060
+#: src/merge/mkvmerge.cpp:1062
 #, no-c-format
 msgid "Invalid frame for '--split' in '--split {0}'.\n"
 msgstr "Neplatný snímek pro '--split' v '--split {0}'.\n"
@@ -7243,7 +7255,7 @@ msgstr "Neplatný snímek pro '--split' v '--split {0}'.\n"
 msgid "Invalid header length: {0} (total length: {1}, idx: {2}, dataidx: {3})\n"
 msgstr "Neplatná délka hlavičky: {0} (celková délka: {1}, idx: {2}, dataidx: {3})\n"
 
-#: src/merge/mkvmerge.cpp:2165
+#: src/merge/mkvmerge.cpp:2167
 #, fuzzy, no-c-format
 msgid "Invalid identification format in '{0} {1}'.\n"
 msgstr "Neplatný přepínač v '{0} {1}'.\n"
@@ -7290,7 +7302,7 @@ msgstr "Neplatný přepínač v '{0} {1}'.\n"
 msgid "Invalid settings"
 msgstr "&Otevřít nastavení"
 
-#: src/merge/mkvmerge.cpp:1150
+#: src/merge/mkvmerge.cpp:1152
 #, no-c-format
 msgid "Invalid split size in '--split {0}'.\n"
 msgstr "Neplatná velikost rozdělení v '--split {0}'.\n"
@@ -7325,106 +7337,106 @@ msgstr "Neplatný počáteční čas pro '--split' v '--split {0}' (aktuální �
 msgid "Invalid start/end specification for '--split' in '--split {0}' (current part: {1}).\n"
 msgstr "Neplatná specifikace začátku nebo konce pro '--split' v '--split {0}' (aktuální část: {1}).\n"
 
-#: src/merge/mkvmerge.cpp:1428
+#: src/merge/mkvmerge.cpp:1430
 #, no-c-format
 msgid "Invalid sub charset option. No track ID specified in '--sub-charset {0}'.\n"
 msgstr "Neplatná volba dílčí znakové sady. Nezadáno žádné ID stopy v '--sub-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1435
+#: src/merge/mkvmerge.cpp:1437
 #, no-c-format
 msgid "Invalid sub charset specified in '--sub-charset {0}'.\n"
 msgstr "Neplatná volba dílčí znakové sady zadána v '--sub-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:594
-#: src/merge/mkvmerge.cpp:631
+#: src/merge/mkvmerge.cpp:596
+#: src/merge/mkvmerge.cpp:633
 #, no-c-format
 msgid "Invalid sync option specified in '{0} {1}'.\n"
 msgstr "Neplatná volba synchronizace zadaná v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:620
+#: src/merge/mkvmerge.cpp:622
 #, no-c-format
 msgid "Invalid sync option specified in '{0} {1}'. The divisor is zero.\n"
 msgstr "Neplatná volba synchronizace zadaná v '{0} {1}'. Dělitel je nula.\n"
 
-#: src/merge/mkvmerge.cpp:626
+#: src/merge/mkvmerge.cpp:628
 #, no-c-format
 msgid "Invalid sync option specified in '{0} {1}'. The linear sync value may not be equal to or smaller than zero.\n"
 msgstr "Neplatná volba synchronizace zadaná v '{0} {1}'. Hodnota lineární synchronizace nemůže být rovna nebo menší než nula.\n"
 
-#: src/merge/mkvmerge.cpp:586
+#: src/merge/mkvmerge.cpp:588
 #, no-c-format
 msgid "Invalid sync option. No track ID specified in '{0} {1}'.\n"
 msgstr "Neplatná volba synchronizace. Nezadáno žádné ID stopy v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1459
+#: src/merge/mkvmerge.cpp:1461
 #, no-c-format
 msgid "Invalid tags file name specified in '{0} {1}'.\n"
 msgstr "Neplatný název souboru štítků zadaný v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1452
+#: src/merge/mkvmerge.cpp:1454
 #, no-c-format
 msgid "Invalid tags option. No track ID specified in '{0} {1}'.\n"
 msgstr "Neplatná volba štítků. Nezadáno žádné ID stopy v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1018
+#: src/merge/mkvmerge.cpp:1020
 #, no-c-format
 msgid "Invalid time for '--split' in '--split {0}'. Additional error message: {1}\n"
 msgstr "Neplatný čas pro '--split' v '--split {0}'. Dodatečná chybová zpráva: {1}\n"
 
-#: src/merge/mkvmerge.cpp:1039
+#: src/merge/mkvmerge.cpp:1041
 #, no-c-format
 msgid "Invalid time for '--split' in '--split {0}'. Additional error message: {1}.\n"
 msgstr "Neplatný čas pro '--split' v '--split {0}'. Dodatečná chybová zpráva: {1}.\n"
 
-#: src/merge/mkvmerge.cpp:560
+#: src/merge/mkvmerge.cpp:562
 #, no-c-format
 msgid "Invalid track ID or language code in '{0} {1}'.\n"
 msgstr "Neplatné ID stopy nebo kód jazyka v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1709
+#: src/merge/mkvmerge.cpp:1711
 #, no-c-format
 msgid "Invalid track ID specified in '--aac-is-sbr {0}'.\n"
 msgstr "Neplatné ID stopy uvedené v '--aac-is-sbr {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1345
+#: src/merge/mkvmerge.cpp:1347
 #, no-c-format
 msgid "Invalid track ID specified in '--compression {0}'.\n"
 msgstr "Neplatné ID stopy uvedené v '--compression {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1315
+#: src/merge/mkvmerge.cpp:1317
 #, no-c-format
 msgid "Invalid track ID specified in '--cues {0}'.\n"
 msgstr "Neplatné ID stopy uvedené v '--cues {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1261
+#: src/merge/mkvmerge.cpp:1263
 #, no-c-format
 msgid "Invalid track ID specified in '--default-track {0}'.\n"
 msgstr "Neplatné ID stopy uvedené v '--default-track {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1639
+#: src/merge/mkvmerge.cpp:1641
 #, no-c-format
 msgid "Invalid track ID specified in '--fix-bitstream-timing-information {0}'.\n"
 msgstr "Neplatné ID stopy uvedené v '--fix-bitstream-timing-information {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1287
+#: src/merge/mkvmerge.cpp:1289
 #, no-c-format
 msgid "Invalid track ID specified in '--forced-track {0}'.\n"
 msgstr "Neplatné ID stopy uvedené v '--forced-track {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1432
+#: src/merge/mkvmerge.cpp:1434
 #, no-c-format
 msgid "Invalid track ID specified in '--sub-charset {0}'.\n"
 msgstr "Neplatné ID stopy uvedené v '--sub-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1400
+#: src/merge/mkvmerge.cpp:1402
 #, no-c-format
 msgid "Invalid track ID specified in '--{0} {1}'.\n"
 msgstr "Neplatné ID stopy uvedené v '--{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:589
-#: src/merge/mkvmerge.cpp:1456
-#: src/merge/mkvmerge.cpp:1657
-#: src/merge/mkvmerge.cpp:1668
+#: src/merge/mkvmerge.cpp:591
+#: src/merge/mkvmerge.cpp:1458
+#: src/merge/mkvmerge.cpp:1659
+#: src/merge/mkvmerge.cpp:1670
 #, no-c-format
 msgid "Invalid track ID specified in '{0} {1}'.\n"
 msgstr "Neplatné ID stopy uvedené v '{0} {1}'.\n"
@@ -7439,7 +7451,7 @@ msgstr "Neplatné ID stopy nebo specifikace názvu souboru v parametru '{0}'.\n"
 msgid "Invalid track type {0}."
 msgstr "Neplatný typ stopy {0}."
 
-#: src/merge/mkvmerge.cpp:1404
+#: src/merge/mkvmerge.cpp:1406
 #, no-c-format
 msgid "Invalid {0} specified in '--{1} {2}'.\n"
 msgstr "Neplatný {0} uvedený v '--{1} {2}'.\n"
@@ -7454,12 +7466,12 @@ msgstr ""
 msgid "It cannot be removed because it is a mandatory header field."
 msgstr "Nemůže být odebráno, protože je to povinné pole hlavičky."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:510
+#: src/mkvtoolnix-gui/merge/input.cpp:514
 #, no-c-format
 msgid "It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."
 msgstr "Výchozí hodnota je 4 bajty, ale existují soubory, které neobsahují snímek nebo výseč větší než 65535 bajtů."
 
-#: src/merge/mkvmerge.cpp:987
+#: src/merge/mkvmerge.cpp:989
 #, no-c-format
 msgid "It does not consist of a track ID and a value separated by a colon."
 msgstr ""
@@ -7470,13 +7482,13 @@ msgstr ""
 msgid "It is ignored for XML chapter files."
 msgstr "Je ignorována pro soubory kapitol XML."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1901
+#: src/mkvtoolnix-gui/merge/input.cpp:1905
 #, no-c-format
 msgid "Its installation location could not be determined automatically."
 msgstr ""
 
-#: src/common/command_line.cpp:57
-#: src/common/command_line.cpp:61
+#: src/common/command_line.cpp:58
+#: src/common/command_line.cpp:62
 #, no-c-format
 msgid "JSON option files must contain a JSON array consisting solely of JSON strings"
 msgstr ""
@@ -7585,7 +7597,7 @@ msgid "Language is not NUL terminated"
 msgstr "Jazyk je ukončen nenulovým znakem"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1785
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1784
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:70
 #, no-c-format
 msgid "Language:"
@@ -7597,7 +7609,7 @@ msgstr "Jazyk:"
 msgid "Layout"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
 #, fuzzy, no-c-format
 msgid "Leave additional space (EbmlVoid) in the destination file after the chapters."
 msgstr "Ponechat ve výstupním souboru dodatečnou mezeru (EbmlVoid) za kapitolami."
@@ -7657,7 +7669,7 @@ msgstr "Řádek {0}: Řádek se zdá být položkou titulků, ale formát nemohl
 msgid "Line {0}: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
 msgstr "Řádek {0}: Řádek se zdá být položkou titulků, ale časové razítko bylo záporné i po přidání zpoždění stopy. Záporná časová razítka nejsou v Matroska podporována. Tato položka bude přeskočena.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1768
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1767
 #, no-c-format
 msgid "Link files"
 msgstr "Propojit soubory"
@@ -7811,7 +7823,7 @@ msgstr "MPEG-4"
 msgid "MPLS Blu-ray playlist"
 msgstr "Seznam stop MPLS Blu-ray"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:446
+#: src/mkvtoolnix-gui/merge/input.cpp:450
 #, no-c-format
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Nastaví tuto stopu jako výchozí stopu pro její typ (audio, video, titulky)."
@@ -7827,7 +7839,7 @@ msgstr "Nalezena poškozená inicializační data kodeku AAC.\n"
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Poškozené ID kodeku '{0}'.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:451
+#: src/mkvtoolnix-gui/merge/input.cpp:455
 #, no-c-format
 msgid "Mark this track as 'forced'."
 msgstr "Označí tuto stopu jako 'vynuceno'."
@@ -7931,7 +7943,7 @@ msgstr "Max. paměť: {0}"
 msgid "Maximum luminance in candelas per square meter (cd/m²)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1766
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1765
 #, no-c-format
 msgid "Maximum number of files:"
 msgstr "Maximální počet souborů:"
@@ -7979,19 +7991,19 @@ msgstr "Min. paměť: {0}"
 msgid "Minimum luminance in candelas per square meter (cd/m²)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1717
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1752
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1770
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1716
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1751
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1769
 #, no-c-format
 msgid "Miscellaneous"
 msgstr "Různé"
 
-#: src/common/command_line.cpp:206
+#: src/common/command_line.cpp:211
 #, no-c-format
 msgid "Missing argument for '--output-charset'.\n"
 msgstr "Chybějící parametr pro '--output-charset'.\n"
 
-#: src/common/command_line.cpp:240
+#: src/common/command_line.cpp:245
 #, no-c-format
 msgid "Missing argument for '--ui-language'.\n"
 msgstr "Chybějící parametr pro '--ui-language'.\n"
@@ -8032,12 +8044,12 @@ msgstr ""
 msgid "More"
 msgstr "Více"
 
-#: src/merge/mkvmerge.cpp:2435
+#: src/merge/mkvmerge.cpp:2437
 #, no-c-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Byl zadán více než jeden typ MIME pro jednu přílohu. '{0}' bude zahozen a '{1}' namísto toho použit.\n"
 
-#: src/merge/mkvmerge.cpp:2426
+#: src/merge/mkvmerge.cpp:2428
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Byl zadán více než jeden popis pro jednu přílohu.\n"
@@ -8047,7 +8059,7 @@ msgstr "Byl zadán více než jeden popis pro jednu přílohu.\n"
 msgid "More than one file name has been given ('{0}' and '{1}').\n"
 msgstr "Byl zadán více než jeden název souboru ('{0}' a '{1}').\n"
 
-#: src/merge/mkvmerge.cpp:2445
+#: src/merge/mkvmerge.cpp:2447
 #, no-c-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Byl zadán více než jeden název pro jednu přílohu. '{0}' bude zahozen a '{1}' namísto toho použit.\n"
@@ -8103,7 +8115,7 @@ msgstr "Aplikace zpracování: {0}"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "slučování do souboru \"%1\" v adresáři \"%2\""
 
-#: src/merge/mkvmerge.cpp:3161
+#: src/merge/mkvmerge.cpp:3163
 #, fuzzy, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Zpracování trvalo {0}.\n"
@@ -8113,12 +8125,12 @@ msgstr "Zpracování trvalo {0}.\n"
 msgid "Multiply the chapters' timestamps with a factor."
 msgstr "Vynásobí časová razítka této stopy koeficientem."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:465
+#: src/mkvtoolnix-gui/merge/input.cpp:469
 #, no-c-format
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Vynásobí časová razítka této stopy koeficientem."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1738
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 #, no-c-format
 msgid "NALU size length:"
 msgstr "Velikost NALU:"
@@ -8145,7 +8157,7 @@ msgstr "Název"
 msgid "Name tem&plate:"
 msgstr "Ša&blona názvu:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1782
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1781
 #, fuzzy, no-c-format
 msgid "Name template:"
 msgstr "Ša&blona názvu:"
@@ -8200,7 +8212,7 @@ msgstr "Další název souboru"
 msgid "Next segment UID"
 msgstr "UID dalšího úseku:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1779
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1778
 #, no-c-format
 msgid "Next segment UID:"
 msgstr "UID dalšího úseku:"
@@ -8219,10 +8231,10 @@ msgstr "Jedinečné ID dalšího úseku"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:98
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:54
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:64
-#: src/mkvtoolnix-gui/merge/input.cpp:1445
-#: src/mkvtoolnix-gui/merge/input.cpp:1447
-#: src/mkvtoolnix-gui/merge/input.cpp:1448
+#: src/mkvtoolnix-gui/merge/input.cpp:1449
 #: src/mkvtoolnix-gui/merge/input.cpp:1451
+#: src/mkvtoolnix-gui/merge/input.cpp:1452
+#: src/mkvtoolnix-gui/merge/input.cpp:1455
 #: src/mkvtoolnix-gui/merge/track_model.cpp:109
 #: src/mkvtoolnix-gui/merge/track_model.cpp:113
 #: src/mkvtoolnix-gui/merge/track_model.cpp:114
@@ -8243,7 +8255,7 @@ msgstr "Nenalezena žádná hlavička EBML."
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Nenalezena žádná hlavička AC-3 v prvním snímku; stopa bude přeskočena.\n"
 
-#: src/input/r_qtmp4.cpp:3313
+#: src/input/r_qtmp4.cpp:3314
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nenalezena žádná hlavička DTS v prvních snímcích; stopa bude přeskočena.\n"
@@ -8253,7 +8265,7 @@ msgstr "Nenalezena žádná hlavička DTS v prvních snímcích; stopa bude pře
 msgid "No EBML head found."
 msgstr "Nenalezena žádná hlavička EBML."
 
-#: src/merge/mkvmerge.cpp:404
+#: src/merge/mkvmerge.cpp:406
 #, no-c-format
 msgid "No MIME type has been set for the attachment '{0}', and it could not be guessed.\n"
 msgstr "Nebyl nastaven žádný typ MIME pro přílohu '{0}' a nemohl být odhadnut.\n"
@@ -8279,18 +8291,18 @@ msgstr "Žádná příloha neodpovídá '{0}'.\n"
 msgid "No changes were made.\n"
 msgstr "Nebyly nalezeny žádné indexy.\n"
 
-#: src/merge/mkvmerge.cpp:1085
+#: src/merge/mkvmerge.cpp:1087
 #, no-c-format
 msgid "No chapter numbers listed after '--split {0}'.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1089
-#: src/merge/mkvmerge.cpp:1115
+#: src/merge/mkvmerge.cpp:1091
+#: src/merge/mkvmerge.cpp:1117
 #, no-c-format
 msgid "No chapters in source files or chapter files found to split by.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1450
+#: src/mkvtoolnix-gui/merge/input.cpp:1454
 #, fuzzy, no-c-format
 msgid "No cues"
 msgstr "žádné indexy"
@@ -8310,7 +8322,7 @@ msgstr "Není uveden žádný název souboru, bude použit název přílohy.\n"
 msgid "No errors yet"
 msgstr "zatím žádné chyby"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1449
+#: src/mkvtoolnix-gui/merge/input.cpp:1453
 #, fuzzy, no-c-format
 msgid "No extra compression"
 msgstr "žádná další komprese"
@@ -8328,7 +8340,7 @@ msgstr "Zatím nebyl otevřen žádný soubor."
 msgid "No file name given.\n"
 msgstr "Nebyl zadán žádný název souboru.\n"
 
-#: src/merge/mkvmerge.cpp:2038
+#: src/merge/mkvmerge.cpp:2040
 #, fuzzy, no-c-format
 msgid "No file names were listed between '{0}' and '{1}'.\n"
 msgstr "Byl zadán více než jeden název souboru ('{0}' a '{1}').\n"
@@ -8338,7 +8350,7 @@ msgstr "Byl zadán více než jeden název souboru ('{0}' a '{1}').\n"
 msgid "No filename found after the '@'."
 msgstr "Nebyl nalezen žádný název souboru po '@'."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:96
 #, no-c-format
 msgid "No help available."
 msgstr "Není dostupná žádná nápověda."
@@ -8395,7 +8407,7 @@ msgstr ""
 msgid "No segment/level 0 element found."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2953
+#: src/merge/mkvmerge.cpp:2955
 #, fuzzy, no-c-format
 msgid "No source files were given.\n"
 msgstr "Nebyl zadán žádný název souboru.\n"
@@ -8405,7 +8417,7 @@ msgstr "Nebyl zadán žádný název souboru.\n"
 msgid "No space left to write to"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1391
+#: src/merge/mkvmerge.cpp:1393
 #, no-c-format
 msgid "No track ID specified in '--{0} {1}'.\n"
 msgstr "Není uvedeno žádné ID stopy v '--{0} {1}'.\n"
@@ -8435,7 +8447,7 @@ msgstr "Nebylo nalezeno žádné číslo verze.\n"
 msgid "No warnings yet"
 msgstr "zatím žádná upozornění"
 
-#: src/merge/mkvmerge.cpp:1394
+#: src/merge/mkvmerge.cpp:1396
 #, no-c-format
 msgid "No {0} specified in '--{1} {2}'.\n"
 msgstr "Žádný {0} uvedený v '--{1} {2}'.\n"
@@ -8460,12 +8472,12 @@ msgstr "&Priorita procesu:"
 msgid "Normally completed jobs stay in the queue even over restarts until the user clears them out manually."
 msgstr "Normálně dokončené úlohy zůstávají ve frontě i přes restarty, dokud je uživatel nevymaže ručně."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:476
+#: src/mkvtoolnix-gui/merge/input.cpp:480
 #, no-c-format
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
 msgstr "Normálně mkvmerge nemění informace o časování (poměr snímek/pole) uložené v bitovém toku videa."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:80
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
 msgstr "Normálně mkvmerge ponechá informaci o poměru stran v bitových tocích videa MPEG4 a vloží informaci do kontejneru."
@@ -8505,7 +8517,7 @@ msgstr "Není platný soubor Matroska (nenalezena žádná hlavička EBML)"
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "Není platný soubor Matroska (nenalezen žádný úsek nebo prvek úrovně 0)"
 
-#: src/merge/mkvmerge.cpp:1080
+#: src/merge/mkvmerge.cpp:1082
 #, no-c-format
 msgid "Not a valid number or not positive."
 msgstr "Není platné číslo nebo není kladné."
@@ -8522,7 +8534,7 @@ msgstr "zrušitelné,"
 msgid "Not finished yet"
 msgstr "zatím nedokončeno"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:517
+#: src/mkvtoolnix-gui/merge/input.cpp:521
 #, no-c-format
 msgid "Not needed for AAC tracks read from other container formats like MP4 or Matroska files."
 msgstr "Není vyžadováno pro stopy AAC načtené z jiných kontejnerů, jako jsou soubory MP4 nebo Matroska."
@@ -8534,7 +8546,7 @@ msgstr "Není vyžadováno pro stopy AAC načtené z jiných kontejnerů, jako j
 msgid "Not started yet"
 msgstr "zatím nespuštěno"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:502
+#: src/mkvtoolnix-gui/merge/input.cpp:506
 #, no-c-format
 msgid "Note also that there are not a lot of players that support the cropping parameters."
 msgstr "Také vezměte na vědomí, že není mnoho přehrávačů, které podporují parametry oříznutí."
@@ -8544,9 +8556,9 @@ msgstr "Také vezměte na vědomí, že není mnoho přehrávačů, které podpo
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
 msgstr "Vezměte na vědomí, že i když je tato volba zakázána, mkvmerge zkopíruje vlastnost název zdrojového souboru, pokud není název nastaven ručně uživatelem."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:484
-#: src/mkvtoolnix-gui/merge/input.cpp:490
-#: src/mkvtoolnix-gui/merge/input.cpp:495
+#: src/mkvtoolnix-gui/merge/input.cpp:488
+#: src/mkvtoolnix-gui/merge/input.cpp:494
+#: src/mkvtoolnix-gui/merge/input.cpp:499
 #, no-c-format
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
 msgstr "Vezměte na vědomí, že mnoho přehrávačů nepoužívá přímo hodnoty šířky a výšky zobrazení, ale používá pouze poměr daný těmito hodnotami při nastavování počáteční velikosti okna."
@@ -8571,7 +8583,7 @@ msgstr ""
 msgid "Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:500
+#: src/mkvtoolnix-gui/merge/input.cpp:504
 #, no-c-format
 msgid "Note that the video content is not modified by this option."
 msgstr "Vezměte na vědomí, že obsah videa není touto volbou změněn."
@@ -8622,7 +8634,7 @@ msgstr "Ogg/OGM"
 msgid "Ogg/OGM audio/video files"
 msgstr "Audio/video soubory Ogg/OGM"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1791
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1790
 #, fuzzy, no-c-format
 msgid "One chapter for each appended file"
 msgstr "Nelze připojit soubory"
@@ -8647,14 +8659,14 @@ msgstr "Kontrola aktualizací online"
 msgid "Only English language names are supported."
 msgstr "Anglický název jazyka"
 
-#: src/merge/mkvmerge.cpp:1818
+#: src/merge/mkvmerge.cpp:1820
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:714
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 #, fuzzy, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
 msgstr "Soubor, který jste se pokusili otevřít (%1), není rozpoznán jako platný soubor Matroska nebo WebM."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1450
+#: src/mkvtoolnix-gui/merge/input.cpp:1454
 #, fuzzy, no-c-format
 msgid "Only for I frames"
 msgstr "pouze pro I snímky"
@@ -8675,22 +8687,22 @@ msgstr ""
 msgid "Only items whose type is in the 'selected' list on the right will be set to be copied by default."
 msgstr "Pouze stopy s jazykem v tomto seznamu budou nastaveny ve výchozím nastavení, aby byly zpracovány."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:516
+#: src/mkvtoolnix-gui/merge/input.cpp:520
 #, fuzzy, no-c-format
 msgid "Only needed for AAC source files as SBR AAC cannot be detected automatically for these files."
 msgstr "Vyžadováno pouze pro vstupní soubory AAC, protože SBR AAC nemůže být automaticky rozpoznáno pro tyto soubory."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:529
+#: src/mkvtoolnix-gui/merge/input.cpp:533
 #, no-c-format
 msgid "Only needed in certain situations:"
 msgstr "Vyžadováno pouze v určitých situacích:"
 
-#: src/merge/mkvmerge.cpp:1882
+#: src/merge/mkvmerge.cpp:1884
 #, no-c-format
 msgid "Only one chapter file allowed in '{0} {1}'.\n"
 msgstr "Je povolen pouze jeden soubor kapitol v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:2287
+#: src/merge/mkvmerge.cpp:2289
 #, fuzzy, no-c-format
 msgid "Only one destination file allowed.\n"
 msgstr "Je povolen pouze jeden vstupní soubor.\n"
@@ -8705,7 +8717,7 @@ msgstr "Je povolen pouze jeden výskyt <{0}> pod <{1}> na pozici {2}."
 msgid "Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1937
+#: src/merge/mkvmerge.cpp:1939
 #, no-c-format
 msgid "Only one segment info file allowed in '{0} {1}'.\n"
 msgstr "Je povolen pouze jeden soubor informací o úsecích v '{0} {1}'.\n"
@@ -8755,7 +8767,7 @@ msgstr "Pouze stopy s jazykem v tomto seznamu budou nastaveny ve výchozím nast
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1121
+#: src/merge/mkvmerge.cpp:1123
 #, fuzzy, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -8794,7 +8806,7 @@ msgstr ""
 msgid "Open all files as tabs in the header editor"
 msgstr "Otevřít soubory v editoru hlaviček"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1398
+#: src/mkvtoolnix-gui/merge/input.cpp:1402
 #, fuzzy, no-c-format
 msgid "Open corresponding file in &MediaInfo"
 msgid_plural "Open corresponding files in &MediaInfo"
@@ -8802,7 +8814,7 @@ msgstr[0] "Otevřít v &MediaInfo"
 msgstr[1] "Otevřít v &MediaInfo"
 msgstr[2] "Otevřít v &MediaInfo"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1378
+#: src/mkvtoolnix-gui/merge/input.cpp:1382
 #, fuzzy, no-c-format
 msgid "Open file in &MediaInfo"
 msgid_plural "Open files in &MediaInfo"
@@ -8862,7 +8874,7 @@ msgstr "Volba"
 msgid "Options"
 msgstr "Volby"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1769
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1768
 #: src/mkvtoolnix-gui/merge/output.cpp:316
 #, no-c-format
 msgid "Options:"
@@ -9041,12 +9053,12 @@ msgstr "Přehrát zvukový soubor"
 msgid "Play audio file '%1'"
 msgstr "Přehrát zvukový soubor '%1'"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:452
+#: src/mkvtoolnix-gui/merge/input.cpp:456
 #, no-c-format
 msgid "Players must play this track."
 msgstr "Přehrávače tuto stopu musí přehrát."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:447
+#: src/mkvtoolnix-gui/merge/input.cpp:451
 #, no-c-format
 msgid "Players should prefer tracks with the default track flag set."
 msgstr "Přehrávače by měly upřednostňovat stopy s nastaveným příznakem výchozí stopy."
@@ -9098,7 +9110,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/merge/mkvmerge.cpp:377
+#: src/merge/mkvmerge.cpp:379
 #, no-c-format
 msgid ""
 "Please read the man page/the HTML documentation to mkvmerge. It\n"
@@ -9106,7 +9118,7 @@ msgid ""
 "this listing.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1902
+#: src/mkvtoolnix-gui/merge/input.cpp:1906
 #, no-c-format
 msgid "Please select its location below."
 msgstr ""
@@ -9195,7 +9207,7 @@ msgstr "Název předchozího souboru"
 msgid "Previous segment UID"
 msgstr "UID předchozího úseku:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1777
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1776
 #, no-c-format
 msgid "Previous segment UID:"
 msgstr "UID předchozího úseku:"
@@ -9266,7 +9278,7 @@ msgstr "Průběh: [{0}{1}] {2}%"
 
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
-#: src/merge/mkvmerge.cpp:2969
+#: src/merge/mkvmerge.cpp:2971
 #: src/merge/output_control.cpp:348
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
@@ -9307,7 +9319,7 @@ msgid "Properties"
 msgstr "Vlastnosti"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:282
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1718
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1717
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:84
 #, no-c-format
 msgid "Properties:"
@@ -9343,13 +9355,13 @@ msgstr ""
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:2726
-#: src/input/r_qtmp4.cpp:2740
+#: src/input/r_qtmp4.cpp:2727
+#: src/input/r_qtmp4.cpp:2741
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:2692
+#: src/input/r_qtmp4.cpp:2693
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr ""
@@ -9359,7 +9371,7 @@ msgstr ""
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:2774
+#: src/input/r_qtmp4.cpp:2775
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr ""
@@ -9379,17 +9391,17 @@ msgstr ""
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3363
+#: src/input/r_qtmp4.cpp:3364
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3389
+#: src/input/r_qtmp4.cpp:3390
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3373
+#: src/input/r_qtmp4.cpp:3374
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr ""
@@ -9409,17 +9421,17 @@ msgstr ""
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3331
+#: src/input/r_qtmp4.cpp:3332
 #, no-c-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3326
+#: src/input/r_qtmp4.cpp:3327
 #, no-c-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3383
+#: src/input/r_qtmp4.cpp:3384
 #, no-c-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr ""
@@ -9444,16 +9456,16 @@ msgstr ""
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:2700
-#: src/input/r_qtmp4.cpp:2781
+#: src/input/r_qtmp4.cpp:2701
+#: src/input/r_qtmp4.cpp:2782
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3282
-#: src/input/r_qtmp4.cpp:3301
-#: src/input/r_qtmp4.cpp:3344
-#: src/input/r_qtmp4.cpp:3407
+#: src/input/r_qtmp4.cpp:3283
+#: src/input/r_qtmp4.cpp:3302
+#: src/input/r_qtmp4.cpp:3345
+#: src/input/r_qtmp4.cpp:3408
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr ""
@@ -9506,7 +9518,7 @@ msgstr "Ukládání selhalo"
 msgid "Reading the segment UID failed"
 msgstr "Čtení UID úseku selhalo"
 
-#: src/common/cli_parser.cpp:185
+#: src/common/cli_parser.cpp:186
 #, fuzzy, no-c-format
 msgid "Reads additional command line options from the specified JSON file (see man page)."
 msgstr "Čte dodatečné volby příkazového řádku z uvedeného souboru (viz manuál)."
@@ -9561,7 +9573,7 @@ msgstr "Referenční stav kodeku indexu: {0}"
 msgid "Redirects all messages into this file."
 msgstr "Přesměruje všechny zprávy do tohoto souboru."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1747
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1746
 #, no-c-format
 msgid "Reduce to core"
 msgstr "Zmenšit na jádro"
@@ -9627,7 +9639,7 @@ msgstr "Odebrat úspěšně do&končené úlohy"
 msgid "Remove a&ll attachments"
 msgstr "Odebrat prvek"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1413
+#: src/mkvtoolnix-gui/merge/input.cpp:1417
 #, no-c-format
 msgid "Remove a&ll files"
 msgstr "Odebrat &všechny soubory"
@@ -9642,7 +9654,7 @@ msgstr "Odebrat &všechny úlohy"
 msgid "Remove com&pleted jobs older than x days:"
 msgstr "Odebrat &dokončené úlohy"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1748
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1747
 #, fuzzy, no-c-format
 msgid "Remove dialog normalization gain"
 msgstr "Informace o úsecích"
@@ -9657,7 +9669,7 @@ msgstr "Odebrat prvek"
 msgid "Remove source files"
 msgstr "&Přidat zdrojové soubory"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:524
+#: src/mkvtoolnix-gui/merge/input.cpp:528
 #, no-c-format
 msgid "Removes or at least minimizes the dialog normalization gain by modifying audio headers."
 msgstr ""
@@ -9744,7 +9756,7 @@ msgstr ""
 msgid "Right"
 msgstr "vpravo"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:436
+#: src/mkvtoolnix-gui/merge/input.cpp:440
 #, fuzzy, no-c-format
 msgid "Right-click for actions for all items"
 msgstr "Klikněte pravým tlačítkem myši pro akce pro všechny stopy"
@@ -9769,7 +9781,7 @@ msgstr "Klikněte pravým tlačítkem myši pro akce pro úlohy"
 msgid "Right-click for attachment actions"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:435
+#: src/mkvtoolnix-gui/merge/input.cpp:439
 #, no-c-format
 msgid "Right-click to add, append and remove files"
 msgstr "Klikněte pravým tlačítkem myši pro přidání, připojení a odebrání souborů"
@@ -9947,7 +9959,7 @@ msgstr "Vyhledat v adresáři další seznamy stop"
 msgid "Scanned Files"
 msgstr "Prohledané soubory"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1250
+#: src/mkvtoolnix-gui/merge/input.cpp:1254
 #, no-c-format
 msgid "Scanning directory"
 msgstr "Prohledávání adresáře"
@@ -9957,7 +9969,7 @@ msgstr "Prohledávání adresáře"
 msgid "Scanning playlists"
 msgstr "Vyhledávání seznamů stop"
 
-#: src/merge/mkvmerge.cpp:3025
+#: src/merge/mkvmerge.cpp:3027
 #, no-c-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
@@ -10027,7 +10039,7 @@ msgstr "Úsek"
 msgid "Segment UID"
 msgstr "UID úseků:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1775
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1774
 #, no-c-format
 msgid "Segment UIDs:"
 msgstr "UID úseků:"
@@ -10043,7 +10055,7 @@ msgstr "UID &střihu úseku:"
 msgid "Segment filename"
 msgstr "Název souboru úseku"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1762
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1761
 #, no-c-format
 msgid "Segment info:"
 msgstr "Informace o úsecích:"
@@ -10067,7 +10079,7 @@ msgstr "Jedinečné ID úseku"
 msgid "Select Matroska file to read segment UID from"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1379
+#: src/mkvtoolnix-gui/merge/input.cpp:1383
 #, fuzzy, no-c-format
 msgid "Select all &items from selected file"
 msgid_plural "Select all &items from selected files"
@@ -10075,7 +10087,7 @@ msgstr[0] "&Vybrat všechny stopy konkrétního &typu"
 msgstr[1] "&Vybrat všechny stopy konkrétního &typu"
 msgstr[2] "&Vybrat všechny stopy konkrétního &typu"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1418
+#: src/mkvtoolnix-gui/merge/input.cpp:1422
 #, no-c-format
 msgid "Select all tracks of specific &type"
 msgstr "&Vybrat všechny stopy konkrétního &typu"
@@ -10126,7 +10138,7 @@ msgstr "Vybrat spustitelný"
 msgid "Select file to add"
 msgstr "Vyberte soubor pro přidání"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:443
+#: src/mkvtoolnix-gui/merge/input.cpp:447
 #, no-c-format
 msgid "Select one of the ISO639-2 language codes."
 msgstr "Vyberte jeden z jazykových kódů ISO639-2."
@@ -10136,13 +10148,13 @@ msgstr "Vyberte jeden z jazykových kódů ISO639-2."
 msgid "Select segment info file"
 msgstr "Vyberte soubor informací o úsecích"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:997
+#: src/mkvtoolnix-gui/merge/input.cpp:1001
 #: src/mkvtoolnix-gui/merge/output.cpp:412
 #, no-c-format
 msgid "Select tags file"
 msgstr "Vyberte soubor štítků"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:985
+#: src/mkvtoolnix-gui/merge/input.cpp:989
 #, no-c-format
 msgid "Select timestamp file"
 msgstr "Vyberte soubor s časovými kódy"
@@ -10152,22 +10164,22 @@ msgstr "Vyberte soubor s časovými kódy"
 msgid "Selected:"
 msgstr "Vybrané:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:534
+#: src/mkvtoolnix-gui/merge/input.cpp:538
 #, no-c-format
 msgid "Selects for which blocks mkvmerge will produce index entries ( = cue entries)."
 msgstr "Vybere, pro které bloky mkvmerge vytvoří položky indexu."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:528
+#: src/mkvtoolnix-gui/merge/input.cpp:532
 #, no-c-format
 msgid "Selects the character set a subtitle file or chapter information was written with."
 msgstr "Vybere znakovou sadu souboru titulků nebo informací o kapitolách, ve které byl zapsány."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1739
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1738
 #, no-c-format
 msgid "Set aspect ratio:"
 msgstr "Nastavit poměr stran:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1415
+#: src/mkvtoolnix-gui/merge/input.cpp:1419
 #, fuzzy, no-c-format
 msgid "Set destination &file name from selected file's name"
 msgstr "&Vybrat všechny stopy konkrétního &typu"
@@ -10245,12 +10257,12 @@ msgstr ""
 msgid "Sets the Matroska parser mode to 'fast' (default) or 'full'"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:498
+#: src/mkvtoolnix-gui/merge/input.cpp:502
 #, no-c-format
 msgid "Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."
 msgstr "Nastaví parametry oříznutí, které řeknou přehrávači, aby během přehrávání vynechal určitý počet pixelů na čtyřech stranách."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:455
+#: src/mkvtoolnix-gui/merge/input.cpp:459
 #, no-c-format
 msgid "Sets the lossless compression algorithm to be used for this track."
 msgstr "Nastaví, aby byl pro tuto stopu použit bezztrátový kompresní  algoritmus."
@@ -10270,13 +10282,13 @@ msgstr ""
 msgid "Sets the segment UIDs to use."
 msgstr "Nastaví použitá UID úseků."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:505
+#: src/mkvtoolnix-gui/merge/input.cpp:509
 #, no-c-format
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "Nastaví stereo režim stopy videa na tuto hodnotu."
 
 #: src/common/kax_element_names.cpp:169
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1802
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1801
 #, no-c-format
 msgid "Settings"
 msgstr "Nastavení"
@@ -10371,13 +10383,13 @@ msgstr "Zobrazit velikost každého prvku včetně jeho hlavičky."
 msgid "Show the tool &selector"
 msgstr "Přepínač příloh"
 
-#: src/common/cli_parser.cpp:186
+#: src/common/cli_parser.cpp:187
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:63
 #, no-c-format
 msgid "Show this help."
 msgstr "Zobrazit tuto nápovědu."
 
-#: src/common/cli_parser.cpp:187
+#: src/common/cli_parser.cpp:188
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:64
 #, no-c-format
 msgid "Show version information."
@@ -10492,7 +10504,7 @@ msgstr ""
 msgid "Slices"
 msgstr "Výseče"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:92
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
 #, no-c-format
 msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
@@ -10502,7 +10514,7 @@ msgstr ""
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). {0}\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1707
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1706
 #, fuzzy, no-c-format
 msgid "Source &files:"
 msgstr "Zdrojový soubor"
@@ -10562,12 +10574,12 @@ msgid ""
 "(0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1765
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 #, no-c-format
 msgid "Split mode:"
 msgstr "Režim rozdělení:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1764
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1763
 #, no-c-format
 msgid "Splitting"
 msgstr "Rozdělení"
@@ -10582,7 +10594,7 @@ msgstr ""
 msgid "Sta&rt all pending jobs"
 msgstr "&Spustit všechny čekající úlohy"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1813
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1812
 #, fuzzy, no-c-format
 msgid "Sta&rt multiplexing"
 msgstr "Spustit &zpracování"
@@ -10652,7 +10664,7 @@ msgstr "Stav:"
 msgid "Stereo mode"
 msgstr "Stereo režim: {0} ({1})"
 
-#: src/merge/mkvmerge.cpp:956
+#: src/merge/mkvmerge.cpp:958
 #, no-c-format
 msgid "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and {0} or one of these keywords: {1} (argument was '{2}').\n"
 msgstr ""
@@ -10662,7 +10674,7 @@ msgstr ""
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "Režim videa Stereo-3D (0 - 11, viz dokumentace)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1744
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1743
 #, no-c-format
 msgid "Stereoscopy:"
 msgstr "Stereoskopie:"
@@ -10677,13 +10689,13 @@ msgstr "Zastavit &po dokončení všech spuštěných úloh"
 msgid "Stop at the first cluster"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:77
 #, no-c-format
 msgid "Store changes in CodecPrivate data in CodecState elements instead of the frames."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1730
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1796
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1729
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1795
 #, no-c-format
 msgid "Stretch by:"
 msgstr "Roztáhnout:"
@@ -10694,7 +10706,7 @@ msgstr "Roztáhnout:"
 msgid "String"
 msgstr "Řetězec"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1749
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1748
 #, no-c-format
 msgid "Subtitle and chapter properties"
 msgstr "Vlastnosti titulků a kapitol"
@@ -10722,7 +10734,7 @@ msgstr "Titulky"
 msgid "Supported file types"
 msgstr "Podporované typy souborů"
 
-#: src/merge/mkvmerge.cpp:446
+#: src/merge/mkvmerge.cpp:448
 #, no-c-format
 msgid "Supported file types:\n"
 msgstr "Podporované typy souborů:\n"
@@ -10805,7 +10817,7 @@ msgstr[1] "Štítky pro stopu s ID {0}: {1} položky"
 msgstr[2] "Štítky pro stopu s ID {0}: {1} položek"
 msgstr[3] "Štítky pro stopu s ID {0}: {1} položek"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1726
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1725
 #, no-c-format
 msgid "Tags:"
 msgstr "Štítky:"
@@ -10840,6 +10852,11 @@ msgstr "Říká mkvmerge, aby nezapisovalo štítky se statistikami pro každou 
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
 msgstr "Způsobí, že mkvmerge nezapíše prvky 'CueDuration' do indexů."
 
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:61
+#, no-c-format
+msgid "Tells mkvmerge to abort after the first warning is emitted."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
@@ -10856,7 +10873,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr "Říká mkvmerge, aby vložilo nanejvýše 'n' bloků dat do každého clusteru."
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:93
-#: src/mkvtoolnix-gui/merge/input.cpp:985
+#: src/mkvtoolnix-gui/merge/input.cpp:989
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:393
 #, no-c-format
 msgid "Text files"
@@ -10897,7 +10914,7 @@ msgstr ""
 msgid "The FPS is 0.0 but the reader did not provide a timestamp for a packet. {0}\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1483
+#: src/merge/mkvmerge.cpp:1485
 #, no-c-format
 msgid "The FourCC must be exactly four characters long in '{0} {1}'.\n"
 msgstr ""
@@ -10922,9 +10939,9 @@ msgstr "GUI vám může pomoci začít s nastavením dalšího sloučení poté,
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1135
-#: src/mkvtoolnix-gui/merge/input.cpp:1153
-#: src/mkvtoolnix-gui/merge/input.cpp:1171
+#: src/mkvtoolnix-gui/merge/input.cpp:1139
+#: src/mkvtoolnix-gui/merge/input.cpp:1157
+#: src/mkvtoolnix-gui/merge/input.cpp:1175
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "GUI zadá název přetaženého souboru do tohoto ovládacího prvku a nahradí jakýkoliv název souboru, který mohl být dříve nastaven."
@@ -10964,9 +10981,9 @@ msgstr ""
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:482
-#: src/mkvtoolnix-gui/merge/input.cpp:488
-#: src/mkvtoolnix-gui/merge/input.cpp:493
+#: src/mkvtoolnix-gui/merge/input.cpp:486
+#: src/mkvtoolnix-gui/merge/input.cpp:492
+#: src/mkvtoolnix-gui/merge/input.cpp:497
 #, no-c-format
 msgid "The Matroska container format can store the display width/height for a video track."
 msgstr "Formát kontejneru Matroska může ukládat šířku a výšku zobrazení pro stopu videa."
@@ -10987,7 +11004,7 @@ msgstr ""
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1615
+#: src/merge/mkvmerge.cpp:1617
 #, no-c-format
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length {0}'.\n"
 msgstr "Velikost NALU musí být číslo mezi 2 a 4 včetně v '--nalu-size-length {0}'.\n"
@@ -11098,34 +11115,34 @@ msgstr ""
 msgid "The application will terminate now."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2231
+#: src/merge/mkvmerge.cpp:2233
 #, no-c-format
 msgid "The argument '{0}' is not allowed in identification mode.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:986
-#: src/merge/mkvmerge.cpp:992
-#: src/merge/mkvmerge.cpp:998
+#: src/merge/mkvmerge.cpp:988
+#: src/merge/mkvmerge.cpp:994
+#: src/merge/mkvmerge.cpp:1000
 #, no-c-format
 msgid "The argument '{0}' to '{1}' is invalid."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1998
+#: src/merge/mkvmerge.cpp:2000
 #, no-c-format
 msgid "The argument '{0}' to '{1}' is invalid: '{2}' is not a valid track ID.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2007
+#: src/merge/mkvmerge.cpp:2009
 #, no-c-format
 msgid "The argument '{0}' to '{1}' is invalid: '{2}' must be either 'all' or 'first'.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1994
+#: src/merge/mkvmerge.cpp:1996
 #, no-c-format
 msgid "The argument '{0}' to '{1}' is invalid: too many colons in element '{2}'.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1952
+#: src/merge/mkvmerge.cpp:1954
 #, no-c-format
 msgid "The argument to '--timestamp-scale' must be a number.\n"
 msgstr ""
@@ -11135,12 +11152,12 @@ msgstr ""
 msgid "The attachment #{0}, ID {1}, MIME type {2}, size {3}, is written to '{4}'.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1840
+#: src/merge/mkvmerge.cpp:1842
 #, no-c-format
 msgid "The attachment '{0}' could not be read.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1817
+#: src/merge/mkvmerge.cpp:1819
 #, fuzzy, no-c-format
 msgid "The attachment ({0}) is too big ({1})."
 msgstr "Soubor '%1' obsahuje štítky."
@@ -11182,7 +11199,7 @@ msgstr "Zde vybrané znakové sady budou zobrazeny v horní části všech rozev
 msgid "The chosen NALU size length of {0} is too small. Try using '4'.\n"
 msgstr "Zvolená velikost NALU {0} je příliš malá. Zkuste použít '4'.\n"
 
-#: src/merge/mkvmerge.cpp:2035
+#: src/merge/mkvmerge.cpp:2037
 #, no-c-format
 msgid "The closing character '{0}' is missing.\n"
 msgstr ""
@@ -11346,7 +11363,7 @@ msgstr ""
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3157
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Jednotka může být plná."
@@ -11410,17 +11427,17 @@ msgstr "Soubor \"%1\" byl změněn. Opravdu ho chcete zavřít? Všechny změny 
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "Soubor \"%1\" byl změněn. Opravdu ho chcete znovu načíst? Všechny změny budou ztraceny."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1132
+#: src/mkvtoolnix-gui/merge/input.cpp:1136
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "Soubor '%1' obsahuje kapitoly."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1150
+#: src/mkvtoolnix-gui/merge/input.cpp:1154
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "Soubor '%1' obsahuje informace o úsecích."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1168
+#: src/mkvtoolnix-gui/merge/input.cpp:1172
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "Soubor '%1' obsahuje štítky."
@@ -11445,7 +11462,7 @@ msgstr "Soubor '{0}' byl otevřen pro zápis.\n"
 msgid "The file '%1' you've added is a playlist."
 msgstr "Soubor '%1', který jste přidali, je seznam stop."
 
-#: src/merge/mkvmerge.cpp:1821
+#: src/merge/mkvmerge.cpp:1823
 #, no-c-format
 msgid "The file '{0}' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "Soubor '{0}' nemůže být připojen, protože neexistuje nebo nemůže být přečten.\n"
@@ -11466,7 +11483,7 @@ msgstr "Soubor '{0}' nemohl být otevřen pro čtení: {1}.\n"
 msgid "The file '{0}' could not be opened for reading: {1}."
 msgstr "Soubor '{0}' nemohl být otevřen pro čtení ({1}).\n"
 
-#: src/common/command_line.cpp:49
+#: src/common/command_line.cpp:50
 #: src/extract/mkvextract.cpp:59
 #: src/extract/mkvextract.cpp:63
 #: src/merge/reader_detection_and_creation.cpp:84
@@ -11702,12 +11719,12 @@ msgstr ""
 msgid "The first cluster timestamp after the resync is {0}.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1808
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1807
 #, fuzzy, no-c-format
 msgid "The first destination file only"
 msgstr "pouze k prvnímu výstupnímu souboru"
 
-#: src/merge/mkvmerge.cpp:2099
+#: src/merge/mkvmerge.cpp:2101
 #, no-c-format
 msgid "The first file cannot be appended because there are no files to append to.\n"
 msgstr ""
@@ -11777,7 +11794,7 @@ msgstr ""
 msgid "The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file."
 msgstr "Vygenerovaný název výstupního souboru má stejný základní název jako název vstupního souboru, ale s příponou založenou na typech stop přítomných v souboru."
 
-#: src/merge/mkvmerge.cpp:1958
+#: src/merge/mkvmerge.cpp:1960
 #, no-c-format
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr ""
@@ -11812,7 +11829,7 @@ msgstr ""
 msgid "The language for the newly created chapters is set via the chapter language control above."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:442
+#: src/mkvtoolnix-gui/merge/input.cpp:446
 #, no-c-format
 msgid "The language for this track that players can use for automatic track selection and display for the user."
 msgstr "Jazyk pro tuto stopu, který přehrávače mohou použít pro automatický výběr stopy a její zobrazení uživateli."
@@ -11938,7 +11955,7 @@ msgstr ""
 msgid "The name of the application or library used for writing the file."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2064
+#: src/merge/mkvmerge.cpp:2066
 #, no-c-format
 msgid "The name of the destination file '{0}' and of one of the source files is the same."
 msgstr ""
@@ -11948,7 +11965,7 @@ msgstr ""
 msgid "The names will be available for easy selection in both the multiplexer and the header editor."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1765
+#: src/merge/mkvmerge.cpp:1767
 #, no-c-format
 msgid "The next UID was already given in '{0} {1}'.\n"
 msgstr ""
@@ -12019,7 +12036,7 @@ msgstr ""
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "Jediné povolené kodeky jsou VP8 nebo VP9 pro video a Vorbis nebo Opus pro audio stopy."
 
-#: src/merge/mkvmerge.cpp:2542
+#: src/merge/mkvmerge.cpp:2544
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr ""
@@ -12044,12 +12061,12 @@ msgstr ""
 msgid "The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1752
+#: src/merge/mkvmerge.cpp:1754
 #, no-c-format
 msgid "The previous UID was already given in '{0} {1}'.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2180
+#: src/merge/mkvmerge.cpp:2182
 #, no-c-format
 msgid "The probe range percentage '{0}' is invalid.\n"
 msgstr ""
@@ -12180,7 +12197,7 @@ msgstr ""
 msgid "The size after which a new destination file is started."
 msgstr "Délka, po které je zahájen nový výstupní soubor."
 
-#: src/merge/mkvmerge.cpp:1834
+#: src/merge/mkvmerge.cpp:1836
 #, no-c-format
 msgid "The size of attachment '{0}' is 0.\n"
 msgstr ""
@@ -12191,7 +12208,7 @@ msgstr ""
 msgid "The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:478
+#: src/mkvtoolnix-gui/merge/input.cpp:482
 #, no-c-format
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
 msgstr "Zdrojem pro informace o časování kontejneru mohou být různé věci: hodnota zadaná do příkazového řádku pomocí volby --default-duration, zdrojový kontejner nebo bitový tok videa."
@@ -12378,13 +12395,13 @@ msgstr ""
 msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2110
-#: src/merge/mkvmerge.cpp:2992
+#: src/merge/mkvmerge.cpp:2112
+#: src/merge/mkvmerge.cpp:2994
 #, fuzzy, no-c-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr "Soubor štítků XML '{0}' nemohl být přečten.\n"
 
-#: src/merge/mkvmerge.cpp:473
+#: src/merge/mkvmerge.cpp:475
 #, fuzzy, no-c-format
 msgid "The type of file '{0}' is not supported.\n"
 msgstr "Soubor '{0}' je nepodporovaného typu ({1}).\n"
@@ -12399,20 +12416,20 @@ msgstr "Uživatel pak může vybrat, ke kterému seznamu stop skutečně přidat
 msgid "The value '{0}' is not a number.\n"
 msgstr "Soubor štítků XML '{0}' nemohl být přečten.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:466
-#: src/mkvtoolnix-gui/merge/input.cpp:471
-#: src/mkvtoolnix-gui/merge/input.cpp:485
+#: src/mkvtoolnix-gui/merge/input.cpp:470
+#: src/mkvtoolnix-gui/merge/input.cpp:475
+#: src/mkvtoolnix-gui/merge/input.cpp:489
 #: src/mkvtoolnix-gui/merge/output.cpp:205
 #, no-c-format
 msgid "The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."
 msgstr "Hodnota může být zadána buď jako desetinné číslo (např. 12,345), nebo jako zlomek celočíselných hodnot (např. 123/456)."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:461
+#: src/mkvtoolnix-gui/merge/input.cpp:465
 #, no-c-format
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Hodnota může být záporná, ale mějte na paměti, že jakýkoliv snímek, jehož časové razítko je po tomto výpočtu záporné, bude vynechán."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:501
+#: src/mkvtoolnix-gui/merge/input.cpp:505
 #, no-c-format
 msgid "The values are only stored in the track headers."
 msgstr "Tyto hodnoty jsou uloženy pouze v hlavičkách stop."
@@ -12464,7 +12481,7 @@ msgstr ""
 msgid "There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"
 msgstr ""
 
-#: src/common/command_line.cpp:253
+#: src/common/command_line.cpp:258
 #, no-c-format
 msgid "There is no translation available for '{0}'.\n"
 msgstr ""
@@ -12497,9 +12514,9 @@ msgstr "Toto jsou méně často používané volby, které řídí výstupní st
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "Toto jsou volby zamýšlené pro vývoj. Nejsou oficiálně podporované a mohou se měnit vydání od vydání."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1133
-#: src/mkvtoolnix-gui/merge/input.cpp:1151
-#: src/mkvtoolnix-gui/merge/input.cpp:1169
+#: src/mkvtoolnix-gui/merge/input.cpp:1137
+#: src/mkvtoolnix-gui/merge/input.cpp:1155
+#: src/mkvtoolnix-gui/merge/input.cpp:1173
 #, fuzzy, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "S těmi není zacházeno jako s ostatními vstupními soubory v MKVToolNix."
@@ -12616,7 +12633,7 @@ msgstr ""
 msgid "This file is probably not a Matroska file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1900
+#: src/mkvtoolnix-gui/merge/input.cpp:1904
 #, no-c-format
 msgid "This function requires the application %1."
 msgstr ""
@@ -12676,7 +12693,7 @@ msgstr "Toto je jazyk, který nově přidané názvy kapitol dostanou automatick
 msgid "This is the title that players may show as the 'main title' for this movie."
 msgstr "Toto je název, který přehrávač může zobrazovat jako 'hlavní název' tohoto filmu."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:76
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
 #, no-c-format
 msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers."
 msgstr "To se používá například pro stopy videa MPEG-1/-2 pro uložení hlaviček posloupností."
@@ -12712,22 +12729,22 @@ msgstr ""
 msgid "This mode only considers the top-most level of chapters across all edition entries."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:499
+#: src/mkvtoolnix-gui/merge/input.cpp:503
 #, no-c-format
 msgid "This must be comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."
 msgstr "Musí to být čárkami oddělený seznam čtyř čísel použitých pro oříznut vlevo, nahoře, vpravo a dole, např. '0,20,0,20'."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:525
+#: src/mkvtoolnix-gui/merge/input.cpp:529
 #, fuzzy, no-c-format
 msgid "This only works with AC-3, DTS & TrueHD audio tracks."
 msgstr "Toto funguje pouze pro stopy DTS."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:521
+#: src/mkvtoolnix-gui/merge/input.cpp:525
 #, no-c-format
 msgid "This only works with DTS audio tracks."
 msgstr "Toto funguje pouze pro stopy DTS."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:79
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:81
 #, no-c-format
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
 msgstr "Tato volba způsobí, že mkvmerge odebere informaci o poměru stran z bitového toku."
@@ -12737,7 +12754,7 @@ msgstr "Tato volba způsobí, že mkvmerge odebere informaci o poměru stran z b
 msgid "This option controls how the chapter names are created."
 msgstr "Tato volba určuje, jak jsou vytvářeny názvy kapitol."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:93
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:95
 #, fuzzy, no-c-format
 msgid "This option forces mkvmerge to treat all of those I slices as key frames."
 msgstr "Tato volba způsobí, že mkvmerge odebere informaci o poměru stran z bitového toku."
@@ -12747,7 +12764,7 @@ msgstr "Tato volba způsobí, že mkvmerge odebere informaci o poměru stran z b
 msgid "This option needs an additional argument 'n'."
 msgstr "Tato volba potřebuje dodatečný parametr 'n'."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:86
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
 #, no-c-format
 msgid "This option prevents that behavior."
 msgstr "Tato volba zabraňuje tomuto chování."
@@ -12757,22 +12774,22 @@ msgstr "Tato volba zabraňuje tomuto chování."
 msgid "This option specifies the language to be associated with chapters if the OGM chapter format is used."
 msgstr "Tato volba určuje jazyk přidružený ke kapitolám, pokud je použit formát kapitol OGM."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:483
+#: src/mkvtoolnix-gui/merge/input.cpp:487
 #, no-c-format
 msgid "This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."
 msgstr "Tato volba říká mkvmerge, který poměr stran zobrazení použít, když vypočítává šířku a výšku zobrazení."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:512
+#: src/mkvtoolnix-gui/merge/input.cpp:516
 #, no-c-format
 msgid "This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
 msgstr "Tento parametr je platný pouze pro základní datové proudy AVC/h.264 a HEVC/h.265 přečtených ze souborů AVC/h.264 ES nebo HEVC/h.265 ES, souborů AVI nebo Matroska vytvořených pomocí '--engage allow_avc_in_vwf_mode'."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:494
+#: src/mkvtoolnix-gui/merge/input.cpp:498
 #, no-c-format
 msgid "This parameter is the display height in pixels."
 msgstr "Tento parametr je výška zobrazení v pixelech."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:489
+#: src/mkvtoolnix-gui/merge/input.cpp:493
 #, no-c-format
 msgid "This parameter is the display width in pixels."
 msgstr "Tento parametr je šířka zobrazení v pixelech."
@@ -12813,7 +12830,7 @@ msgstr "Tato šablona bude použita pro nové položky kapitol"
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:515
+#: src/mkvtoolnix-gui/merge/input.cpp:519
 #, no-c-format
 msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
 msgstr "Tato stopa obsahuje data SBR AAC/HE-AAC/AAC+."
@@ -12837,17 +12854,17 @@ msgstr "Tím se zvýší velikost souboru a v tuto chvíli to nenabízí žádno
 msgid "This will increase the file's size, especially if there are many audio tracks."
 msgstr "Tím se zvýší velikost souboru, zvláště když je hodně stop audia."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:467
+#: src/mkvtoolnix-gui/merge/input.cpp:471
 #, no-c-format
 msgid "This works well for video and subtitle tracks but should not be used with audio tracks."
 msgstr "Toto funguje dobře pro stopy videa a titulků, ale nemělo by to být používáno pro stopy audia."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:462
+#: src/mkvtoolnix-gui/merge/input.cpp:466
 #, no-c-format
 msgid "This works with all track types."
 msgstr "Toto funguje pro všechny typy stop."
 
-#: src/merge/mkvmerge.cpp:2065
+#: src/merge/mkvmerge.cpp:2067
 #, no-c-format
 msgid "This would cause mkvmerge to overwrite one of your source files."
 msgstr ""
@@ -12862,7 +12879,7 @@ msgstr ""
 msgid "Timestamp extraction"
 msgstr "Extrahování časového kódu"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1733
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1732
 #, no-c-format
 msgid "Timestamp file:"
 msgstr "Soubor s časovými kódy:"
@@ -12873,8 +12890,8 @@ msgstr "Soubor s časovými kódy:"
 msgid "Timestamp scale"
 msgstr "Soubor s časovými kódy:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1714
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1728
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1713
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1727
 #, no-c-format
 msgid "Timestamps and default duration"
 msgstr "Časové kódy a výchozí délka"
@@ -12900,7 +12917,7 @@ msgstr "ke všem výstupním souborům"
 msgid "Top"
 msgstr "nahoře"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1721
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 #, no-c-format
 msgid "Trac&k name:"
 msgstr "&Název stopy:"
@@ -13055,7 +13072,7 @@ msgstr ""
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:2863
+#: src/input/r_qtmp4.cpp:2864
 #, no-c-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr ""
@@ -13101,7 +13118,7 @@ msgstr "TrueHD"
 msgid "Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. This is not the case for the tracks {0} and {1}.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
 #, fuzzy, no-c-format
 msgid "Two files multiplexed with the same settings and this switch activated will be identical."
 msgstr "Dva soubory zpracované se stejným nastavením a tímto aktivovaným přepínačem budou totožné."
@@ -13156,7 +13173,7 @@ msgstr "Titulky USF"
 msgid "USF text subtitles"
 msgstr "Textové titulky USF"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1304
+#: src/mkvtoolnix-gui/merge/input.cpp:1308
 #, no-c-format
 msgid "Unable to append files"
 msgstr "Nelze připojit soubory"
@@ -13200,22 +13217,22 @@ msgstr "Neznámý prvek"
 msgid "Unknown element (ID: 0x{0})"
 msgstr "Neznámý režim '{0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1770
+#: src/merge/mkvmerge.cpp:1772
 #, no-c-format
 msgid "Unknown format for the next UID in '{0} {1}'.\n"
 msgstr "Neznámý formát pro další UID v  in '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1757
+#: src/merge/mkvmerge.cpp:1759
 #, no-c-format
 msgid "Unknown format for the previous UID in '{0} {1}'.\n"
 msgstr "Neznámý formát pro předchozí UID in '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1782
+#: src/merge/mkvmerge.cpp:1784
 #, no-c-format
 msgid "Unknown format for the segment UID '{2}' in '{0} {1}'.\n"
 msgstr "Neznámý formát pro UID úseku '{2}' v '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:923
+#: src/merge/mkvmerge.cpp:925
 #, fuzzy, no-c-format
 msgid "Unknown format in '{0} {1}'.\n"
 msgstr "Neznámý režim analýzy v '{0} {1}'.\n"
@@ -13245,7 +13262,7 @@ msgstr "Neznámý režim analýzy v '{0} {1}'.\n"
 msgid "Unknown/unsupported audio format 0x{0:04x} for this audio track.\n"
 msgstr "Neznámý nebo nepodporovaný formát audia 0x{0:04x} pro tuto stopu audia.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1767
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1766
 #, fuzzy, no-c-format
 msgid "Unlimited"
 msgstr "neomezeno"
@@ -13317,7 +13334,7 @@ msgstr "Použít 'propojování úseků' pro výsledné soubory."
 msgid "Use fi&xed directory:"
 msgstr "Používat p&evný adresář:"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
 #, fuzzy, no-c-format
 msgid "Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."
 msgstr "Použít pevné hodnoty pro prvky, které se jinak mění s každým souborem (datum zpracování, UID segmentu, UID stop atd.)."
@@ -13347,7 +13364,7 @@ msgstr ""
 msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:1619
+#: src/merge/mkvmerge.cpp:1621
 #, no-c-format
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
 msgstr "Použití délky NALU 3 bajty by mohlo mít za následek stopy, které nebudou dekódovatelné určitými kodeky AVC/h.264.\n"
@@ -13367,7 +13384,7 @@ msgstr "Použit všeobecný výstupní modul pro stopu typu '{0}'.\n"
 msgid "Using the output module for the format '{0}'.\n"
 msgstr "Použit výstupní modul pro formát '{0}'.\n"
 
-#: src/merge/cluster_helper.cpp:741
+#: src/merge/cluster_helper.cpp:745
 #, no-c-format
 msgid "Using the track with the ID {0} from the file '{1}' as the reference for chapter generation.\n"
 msgstr ""
@@ -13544,8 +13561,8 @@ msgstr "Vlastnosti videa"
 msgid "Video projection information"
 msgstr "Zobrazit informace o verzi."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1715
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1736
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1714
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1735
 #, no-c-format
 msgid "Video properties"
 msgstr "Vlastnosti videa"
@@ -13775,7 +13792,7 @@ msgstr "Upozornit před přepsáním &existujících položek (soubory, úlohy a
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr ""
 
-#: src/common/output.cpp:138
+#: src/common/output.cpp:143
 #: src/mkvtoolnix-gui/jobs/job.cpp:250
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:317
 #, no-c-format
@@ -13828,7 +13845,7 @@ msgstr ""
 msgid "What to do in the future:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:539
+#: src/mkvtoolnix-gui/merge/input.cpp:543
 #, no-c-format
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
 msgstr "To, co sem zadáte, je přidáno až po všech ostatních volbách, které GUI přidává, abyste tak mohli přepsat jakoukoliv z voleb GUI pro tuto stopu."
@@ -13959,7 +13976,7 @@ msgstr ""
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:477
+#: src/mkvtoolnix-gui/merge/input.cpp:481
 #, no-c-format
 msgid "With this option that information is adjusted to match the container's timing information."
 msgstr "Pomocí této volby je tato informace upravena tak, aby odpovídala informaci o časování kontejneru."
@@ -14000,7 +14017,7 @@ msgstr "Špatná verze Kate: {0}.{1} > {2}.x"
 msgid "Wrong Theora version: {0}.{1}.{2} != 3.2.x"
 msgstr "Špatná verze Theory: {0}.{1}.{2} != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2368
+#: src/merge/mkvmerge.cpp:2370
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Špatný parametr k '--split-max-files'.\n"
@@ -14033,7 +14050,7 @@ msgstr "Soubory kapitol XML"
 msgid "XML segment info files"
 msgstr "Soubor informací o úsecích XML"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:997
+#: src/mkvtoolnix-gui/merge/input.cpp:1001
 #: src/mkvtoolnix-gui/merge/output.cpp:412
 #, no-c-format
 msgid "XML tag files"
@@ -14052,10 +14069,10 @@ msgstr "Vynutit svazování stylu Xiph."
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:98
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:54
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:64
-#: src/mkvtoolnix-gui/merge/input.cpp:1445
-#: src/mkvtoolnix-gui/merge/input.cpp:1447
-#: src/mkvtoolnix-gui/merge/input.cpp:1448
+#: src/mkvtoolnix-gui/merge/input.cpp:1449
 #: src/mkvtoolnix-gui/merge/input.cpp:1451
+#: src/mkvtoolnix-gui/merge/input.cpp:1452
+#: src/mkvtoolnix-gui/merge/input.cpp:1455
 #: src/mkvtoolnix-gui/merge/track_model.cpp:109
 #: src/mkvtoolnix-gui/merge/track_model.cpp:113
 #: src/mkvtoolnix-gui/merge/track_model.cpp:114
@@ -14084,7 +14101,7 @@ msgstr ""
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1903
+#: src/mkvtoolnix-gui/merge/input.cpp:1907
 #, no-c-format
 msgid "You can download the application from the following URL:"
 msgstr ""
@@ -14114,7 +14131,7 @@ msgstr "Můžete se rozhodnout nechat je odebírat automaticky za určitých pod
 msgid "You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:472
+#: src/mkvtoolnix-gui/merge/input.cpp:476
 #, no-c-format
 msgid "You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."
 msgstr ""
@@ -14140,7 +14157,7 @@ msgstr ""
 msgid "You can still enter values not present in this list manually in the multiplexer."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1304
+#: src/mkvtoolnix-gui/merge/input.cpp:1308
 #, no-c-format
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "Nemůžete přidat dodatečné části k souborům, které neobsahují stopy."
@@ -14386,12 +14403,12 @@ msgstr "flac_reader: Chyba analýzy souboru: {0}\n"
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: Nelze inicializovat tvorbu paketů FLAC.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:531
+#: src/mkvtoolnix-gui/merge/input.cpp:535
 #, no-c-format
 msgid "for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly"
 msgstr "pro soubory s informacemi o kapitolách (např. OGM, MP4), pro které mkvmerge správně nerozpoznává kódování"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:530
+#: src/mkvtoolnix-gui/merge/input.cpp:534
 #, no-c-format
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "pro soubory titulků, které nepoužívají označení pořadí bajtů (BOM) a které nejsou kódovány v aktuální znakové sadě systému (%1)"
@@ -14708,12 +14725,12 @@ msgstr ""
 msgid "mkvmerge has not been compiled with FLAC support but handling of this stream has been requested.\n"
 msgstr "mkvmerge nebylo kompilováno s podporou FLAC, ale byla požádána manipulace s tímto datovým proudem.\n"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:85
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:87
 #, no-c-format
 msgid "mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."
 msgstr "mkvmerge normálně vypočítává zpoždění implikované svou přítomností a posouvá o něj všechny časové kódy stopy."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:89
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:91
 #, no-c-format
 msgid "mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."
 msgstr "mkvmerge normálně odebírá tuto poslední položku, pokud je její časový kód v rozmezí pěti sekund od celkové délky."
@@ -14945,7 +14962,7 @@ msgstr ""
 msgid "text subtitles"
 msgstr "textové titulky"
 
-#: src/merge/mkvmerge.cpp:2874
+#: src/merge/mkvmerge.cpp:2876
 #, no-c-format
 msgid "timestamps"
 msgstr "časové kódy"
@@ -14975,7 +14992,7 @@ msgstr ""
 msgid "top field displayed first, top field stored first"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2867
+#: src/merge/mkvmerge.cpp:2869
 #, no-c-format
 msgid "track name"
 msgstr "název stopy"
@@ -15009,7 +15026,7 @@ msgstr ""
 #: src/common/kax_info.cpp:785
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:114
-#: src/input/r_matroska.cpp:2769
+#: src/input/r_matroska.cpp:2763
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:181
@@ -15018,7 +15035,7 @@ msgstr ""
 msgid "unknown"
 msgstr "neznámý"
 
-#: src/input/r_matroska.cpp:2753
+#: src/input/r_matroska.cpp:2747
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr ""
@@ -15055,7 +15072,7 @@ msgstr "wavpack_reader: nalezen blok, který není audio\n"
 msgid "wavpack_reader: unknown sample rate!\n"
 msgstr "wavpack_reader: neznámá vzorkovací frekvence!\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1737
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1736
 #, no-c-format
 msgid "x"
 msgstr "x"
@@ -15150,27 +15167,27 @@ msgstr "{0}: došlo k výjimce (zpráva: {1}; typ: {2})."
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: došlo k neznámé výjimce."
 
-#: src/merge/mkvmerge.cpp:682
+#: src/merge/mkvmerge.cpp:684
 #, no-c-format
 msgid "{0}: divisor is 0 in '{1} {2}'.\n"
 msgstr "{0}: dělitel je 0 v '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:657
+#: src/merge/mkvmerge.cpp:659
 #, no-c-format
 msgid "{0}: invalid track ID in '{1} {2}'.\n"
 msgstr "{0}: neplatné ID stopy v '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:674
+#: src/merge/mkvmerge.cpp:676
 #, no-c-format
 msgid "{0}: missing dividend in '{1} {2}'.\n"
 msgstr "{0}: chybějící dělenec v '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:677
+#: src/merge/mkvmerge.cpp:679
 #, no-c-format
 msgid "{0}: missing divisor in '{1} {2}'.\n"
 msgstr "{0}: chybějící dělitel v '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:653
+#: src/merge/mkvmerge.cpp:655
 #, no-c-format
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: chybějící ID stopy v '{1} {2}'.\n"
