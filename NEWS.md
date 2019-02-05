@@ -31,8 +31,8 @@
 * mkvmerge: HEVC: the height of interlaced streams will now be set correctly
   to the height of the full frame instead of the height of a single interlaced
   field. Fixes #2446.
-* MKVToolNix GUI: multiplexer: fixed drag & drop handling with Qt 5.12.0 and
-  newer. Fixes #2472.
+* MKVToolNix GUI: multiplexer, chapter editor: fixed drag & drop handling with
+  Qt 5.12.0 and newer. Fixes #2472.
 
 ## Build system changes
 

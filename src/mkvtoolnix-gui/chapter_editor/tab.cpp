@@ -110,6 +110,8 @@ Tab::setupUi() {
   p->ui->elements->setModel(p->chapterModel);
   p->ui->tvChNames->setModel(p->nameModel);
 
+  p->ui->elements->acceptDroppedFiles(true);
+
   p->ui->cbChNameCountry->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   p->ui->cbChNameLanguage->setup();
@@ -137,10 +139,12 @@ Tab::setupUi() {
   p->massModificationAction->setIcon(QIcon{Q(":/icons/16x16/tools-wizard.png")});
   p->copyToOtherTabMenu->setIcon(QIcon{Q(":/icons/16x16/edit-copy.png")});
 
-  auto mw = MainWindow::get();
+  auto mw   = MainWindow::get();
+  auto tool = MainWindow::chapterEditorTool();
   connect(p->ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                    &Tab::showChapterContextMenu);
   connect(p->ui->elements,                    &Util::BasicTreeView::deletePressed,                                    this,                    &Tab::removeElement);
   connect(p->ui->elements,                    &Util::BasicTreeView::insertPressed,                                    this,                    &Tab::addEditionOrChapterAfter);
+  connect(p->ui->elements,                    &Util::BasicTreeView::filesDropped,                                     tool,                    &Tool::openFiles);
   connect(p->ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this,                    &Tab::chapterSelectionChanged);
   connect(p->ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this,                    &Tab::nameSelectionChanged);
   connect(p->ui->leChName,                    &QLineEdit::textEdited,                                                 this,                    &Tab::chapterNameEdited);
