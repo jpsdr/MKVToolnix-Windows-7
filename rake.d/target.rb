@@ -1,5 +1,3 @@
-require_relative 'pch'
-
 class Target
   public
 

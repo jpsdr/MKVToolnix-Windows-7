@@ -1,5 +1,3 @@
-require "digest"
-
 $digest_mutex = Mutex.new
 
 def sha1_hexdigest data

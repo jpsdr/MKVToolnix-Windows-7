@@ -13,13 +13,6 @@
 #   Authors: KonaBlend <kona8lend@gmail.com>
 #
 
-require_relative 'helpers'
-
-require 'erb'
-require 'json'
-require 'pathname'
-require 'pty'
-
 module PCH
   extend Rake::DSL
 

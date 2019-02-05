@@ -1,7 +1,5 @@
 # coding: utf-8
 $use_tempfile_for_run = defined?(RUBY_PLATFORM) && /mingw/i.match(RUBY_PLATFORM)
-require "tempfile"
-require "fileutils"
 
 $git_mutex     = Mutex.new
 $message_mutex = Mutex.new

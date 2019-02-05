@@ -1,0 +1,8 @@
+require "digest"
+require "erb"
+require "fileutils"
+require "json"
+require "pathname"
+require "pty"
+require "tempfile"
+require "tmpdir"

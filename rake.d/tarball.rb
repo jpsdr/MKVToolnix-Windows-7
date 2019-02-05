@@ -1,6 +1,4 @@
 def create_source_tarball suffix = ""
-  require "tmpdir"
-
   tarball = "#{Dir.pwd}/../mkvtoolnix-#{c(:PACKAGE_VERSION)}#{suffix}.tar.xz"
   fail "#{tarball} does already exist" if FileTest.exists?(tarball)
 

@@ -34,11 +34,10 @@ if (version[0] > 10) || ((version[0] == 10) && (version[1] >= 3))
   Rake.application.options.always_multitask = true
 end
 
-require "pp"
-
 module Mtx
 end
 
+require_relative "rake.d/requirements"
 require_relative "rake.d/extensions"
 require_relative "rake.d/config"
 
