@@ -16,6 +16,9 @@
 * MKVToolNix GUI: multiplexer: the dialog previewing different character sets
   for text subtitles will now keep the position of the displayed text when
   switching between character sets. Implements #2489.
+* all programs: added a new option `--abort-on-warnings` that will cause the
+  program to abort after it has emitted the first warning, similar to how it
+  aborts after the first error. Implements #2493.
 
 ## Bug fixes
 

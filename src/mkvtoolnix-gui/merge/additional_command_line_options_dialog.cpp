@@ -58,6 +58,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
         QY("The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."),
         QY("See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons.") });
 
+  add(Q("--abort-on-warnings"), false, global, { QY("Tells mkvmerge to abort after the first warning is emitted.") });
+
   auto hacks  = m_ui->gridDevelopmentHacks;
 
   add(Q("--engage space_after_chapters"),         false, hacks, { QY("Leave additional space (EbmlVoid) in the destination file after the chapters.") });

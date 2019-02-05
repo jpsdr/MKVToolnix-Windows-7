@@ -34,7 +34,8 @@
 
 namespace mtx { namespace cli {
 
-bool g_gui_mode = false;
+bool g_gui_mode          = false;
+bool g_abort_on_warnings = false;
 
 static void
 read_args_from_json_file(std::vector<std::string> &args,
@@ -192,6 +193,10 @@ handle_common_args(std::vector<std::string> &args,
 
     } else if (args[i] == "--flush-on-close") {
       mm_file_io_c::enable_flushing_on_close(true);
+      args.erase(args.begin() + i, args.begin() + i + 1);
+
+    } else if (args[i] == "--abort-on-warnings") {
+      g_abort_on_warnings = true;
       args.erase(args.begin() + i, args.begin() + i + 1);
 
     } else

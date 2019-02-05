@@ -367,6 +367,8 @@ set_usage() {
                   "                           Redirects all messages into this file.\n");
   usage_text += Y("  --flush-on-close         Flushes all cached data to storage when closing\n"
                   "                           a file opened for writing.\n");
+  usage_text += Y("  --abort-on-warnings      Aborts the program after the first warning is\n"
+                  "                           emitted.");
   usage_text += Y("  --debug <topic>          Turns on debugging output for 'topic'.\n");
   usage_text += Y("  --engage <feature>       Turns on experimental feature 'feature'.\n");
   usage_text += Y("  @option-file.json        Reads additional command line options from\n"

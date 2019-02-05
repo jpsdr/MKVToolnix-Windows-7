@@ -182,6 +182,7 @@ parser_c::add_common_options() {
   OPT("output-charset=<cset>",          YT("Output messages in this charset"));
   OPT("r|redirect-output=<file>",       YT("Redirects all messages into this file."));
   OPT("flush-on-close",                 YT("Flushes all cached data to storage when closing a file opened for writing."));
+  OPT("abort-on-warnings",              YT("Aborts the program after the first warning is emitted."));
   OPT("@option-file.json",              YT("Reads additional command line options from the specified JSON file (see man page)."));
   OPT("h|help",                         YT("Show this help."));
   OPT("V|version",                      YT("Show version information."));

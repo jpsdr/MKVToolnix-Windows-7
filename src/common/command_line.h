@@ -18,7 +18,7 @@
 namespace mtx { namespace cli {
 
 extern std::string g_usage_text, g_version_info;
-extern bool g_gui_mode;
+extern bool g_gui_mode, g_abort_on_warnings;
 
 void display_usage(int exit_code = 0);
 std::vector<std::string> args_in_utf8(int argc, char **argv);

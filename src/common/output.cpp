@@ -62,10 +62,15 @@ display_json_output(nlohmann::json json) {
 static void
 json_warning_error_handler(unsigned int level,
                            std::string const &message) {
-  if (MXMSG_WARNING == level)
+  if (MXMSG_WARNING == level) {
     s_warnings_emitted.push_back(message);
 
-  else {
+    if (mtx::cli::g_abort_on_warnings) {
+      display_json_output(nlohmann::json{});
+      mxexit(1);
+    }
+
+  } else {
     s_errors_emitted.push_back(message);
     display_json_output(nlohmann::json{});
     mxexit(2);
@@ -172,6 +177,9 @@ default_mxwarn(unsigned int,
     return;
 
   mxmsg(MXMSG_WARNING, warning);
+
+  if (mtx::cli::g_abort_on_warnings)
+    mxexit(1);
 
   g_warning_issued = true;
 }
