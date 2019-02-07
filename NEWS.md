@@ -37,7 +37,7 @@
   file type being reported (as the underlying AVI library doesn't support
   them) instead of crashing mkvmerge. Fixes #2491.
 * MKVToolNix GUI: multiplexer: the GUI did not clean up temporary files
-  created when running `mkmverge`. Fixes #2499.
+  created when running `mkvmerge`. Fixes #2499.
 
 ## Build system changes
 
