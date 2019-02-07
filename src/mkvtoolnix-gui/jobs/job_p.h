@@ -20,6 +20,7 @@ public:
 
 public:
   explicit JobPrivate(Job::Status pStatus);
+  virtual ~JobPrivate() = default;
 };
 
 }}}

@@ -24,4 +24,6 @@ public:
   std::stack<int64_t> positions;
   int64_t current_position{}, cached_size{-1};
   std::shared_ptr<charset_converter_c> string_output_converter;
+
+  virtual ~mm_io_private_c() = default;
 };
