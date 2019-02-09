@@ -3,8 +3,8 @@
 require 'rubygems'
 require 'pp'
 require 'builder'
+require 'optimist'
 require 'rexml/document'
-require 'trollop'
 
 require_relative 'modules/news'
 
@@ -50,14 +50,14 @@ def create_all_releases_xml news
 end
 
 def parse_opts
-  opts = Trollop::options do
+  opts = Optimist::options do
     opt :news,     "News source file",         :type => String, :default => 'NEWS.md'
     opt :releases, "releases.xml source file", :type => String, :default => 'releases.xml'
     opt :noindent, "do not indent the XML"
   end
 
-  Trollop::die :news,     "must be given and exist" if !opts[:news]      || !File.exist?(opts[:news])
-  Trollop::die :releases, "must be given and exist" if !opts[:releases]  || !File.exist?(opts[:releases])
+  Optimist::die :news,     "must be given and exist" if !opts[:news]      || !File.exist?(opts[:news])
+  Optimist::die :releases, "must be given and exist" if !opts[:releases]  || !File.exist?(opts[:releases])
 
   opts
 end
