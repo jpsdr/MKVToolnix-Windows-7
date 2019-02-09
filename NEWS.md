@@ -2,6 +2,9 @@
 
 ## New features and enhancements
 
+* all programs: added a new option `--abort-on-warnings` that will cause the
+  program to abort after it has emitted the first warning, similar to how it
+  aborts after the first error. Implements #2493.
 * mkvmerge, mkvextract: when closing files that were opened for writing,
   cached data will not be flushed to storage automatically anymore. This
   reverts the workaround implemented for #2469. A new option was added to both
@@ -16,26 +19,23 @@
 * MKVToolNix GUI: multiplexer: the dialog previewing different character sets
   for text subtitles will now keep the position of the displayed text when
   switching between character sets. Implements #2489.
-* all programs: added a new option `--abort-on-warnings` that will cause the
-  program to abort after it has emitted the first warning, similar to how it
-  aborts after the first error. Implements #2493.
 
 ## Bug fixes
 
+* mkvmerge: AVI reader: using DV type 1 AVIs will now result in an unsupported
+  file type being reported (as the underlying AVI library doesn't support
+  them) instead of crashing mkvmerge. Fixes #2491.
+* mkvmerge: HEVC: the height of interlaced streams will now be set correctly
+  to the height of the full frame instead of the height of a single interlaced
+  field. Fixes #2446.
 * mkvmerge: MP4 reader: edit lists consisting solely of elements that mkvmerge
   doesn't support (such as dwells) are simply ignored. Before no data was read
   for such tracks at all. Fixes #2487.
 * mkvmerge: text subtitles: entries with an explicit duration of 0ms will now
   be handled correctly: the 0ms duration will be stored in Matroska instead of
   the difference between the current and the following entry. Fixes #2490.
-* mkvmerge: HEVC: the height of interlaced streams will now be set correctly
-  to the height of the full frame instead of the height of a single interlaced
-  field. Fixes #2446.
 * MKVToolNix GUI: multiplexer, chapter editor: fixed drag & drop handling with
   Qt 5.12.0 and newer. Fixes #2472.
-* mkvmerge: AVI reader: using DV type 1 AVIs will now result in an unsupported
-  file type being reported (as the underlying AVI library doesn't support
-  them) instead of crashing mkvmerge. Fixes #2491.
 * MKVToolNix GUI: multiplexer: the GUI did not clean up temporary files
   created when running `mkvmerge`. Fixes #2499.
 
