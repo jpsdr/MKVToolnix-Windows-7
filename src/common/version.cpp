@@ -22,7 +22,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Forever And More"
+#define VERSIONNAME "Dolores In A Shoestand"
 
 version_number_t::version_number_t(const std::string &s)
   : valid{}
