@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <Qt>
+#include <QDir>
 #if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
 # include <QOperatingSystemVersion>
 #endif
@@ -13,6 +14,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/system_information.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -31,7 +33,11 @@ gatherGeneralInfo(QStringList &info) {
 
   info << Q("* MKVToolNix GUI version: %1").arg(Q(get_current_version().to_string()));
   info << Q("* mkvmerge version: %1").arg(checker.mkvmergeVersion().isEmpty() ? Q("unknown") : checker.mkvmergeVersion());
-  info << Q("* Installation path: %1").arg(App::applicationDirPath());
+#if defined(SYS_WINDOWS)
+  info << Q("* Installation type: %1").arg(App::isInstalled() ? Q("installed") : Q("portable"));
+#endif
+  info << Q("* Installation path: %1").arg(QDir::toNativeSeparators(App::applicationDirPath()));
+  info << Q("* INI file location: %1").arg(QDir::toNativeSeparators(Util::Settings::iniFileName()));
 
   info << Q("") << Q("## Installation problems") << Q("");
 
