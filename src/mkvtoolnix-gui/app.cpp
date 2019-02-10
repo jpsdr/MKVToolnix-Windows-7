@@ -58,7 +58,6 @@ App::App(int &argc,
   : QApplication{argc, argv}
   , p_ptr{new AppPrivate{}}
 {
-  mtx_common_init("mkvtoolnix-gui", argv[0]);
   mtx::cli::g_version_info = get_version_info("mkvtoolnix-gui", vif_full);
 
   qsrand(random_c::generate_64bits());

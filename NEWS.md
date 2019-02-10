@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: the portable mode wasn't detected correctly when the current
+  working directory the GUI was started from wasn't the directory the GUI's
+  executable file was located it. Examples for when this is the case are
+  Windows' "send to" or "open with" functions. Fixes #2501.
+
+
 # Version 31.0.0 "Dolores In A Shoestand" 2019-02-09
 
 ## New features and enhancements

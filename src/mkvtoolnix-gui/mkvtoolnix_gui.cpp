@@ -69,6 +69,8 @@ registerMetaTypes() {
 int
 main(int argc,
      char **argv) {
+  mtx_common_init("mkvtoolnix-gui", argv[0]);
+
   initiateSettings();
 
   enableOrDisableHighDPIScaling();
