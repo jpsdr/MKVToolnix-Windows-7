@@ -240,11 +240,6 @@ function build_gettext {
     --disable-shared
 }
 
-function build_ruby {
-  build_package ruby-2.1.6.tar.bz2 --prefix=${TARGET} \
-    --enable-static --disable-shared
-}
-
 function build_boost {
   local -a args properties
 
@@ -650,7 +645,6 @@ if [[ -z $@ ]]; then
   build_cmark
   build_boost
   build_qt
-  build_ruby
   build_configured_mkvtoolnix
 
 else
