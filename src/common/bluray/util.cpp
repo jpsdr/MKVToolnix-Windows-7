@@ -17,8 +17,10 @@
 
 namespace mtx { namespace bluray {
 
+namespace {
+
 bfs::path
-find_base_dir(bfs::path const &file_name) {
+find_base_dir_impl(bfs::path const &file_name) {
   auto dir = bfs::canonical(bfs::absolute(file_name));
   if (!bfs::is_directory(dir))
     dir = dir.parent_path();
@@ -36,8 +38,8 @@ find_base_dir(bfs::path const &file_name) {
 }
 
 bfs::path
-find_other_file(bfs::path const &reference_file_name,
-                bfs::path const &other_file_name) {
+find_other_file_impl(bfs::path const &reference_file_name,
+                     bfs::path const &other_file_name) {
   auto base_dir = find_base_dir(reference_file_name);
   if (base_dir.empty())
     return {};
@@ -47,6 +49,27 @@ find_other_file(bfs::path const &reference_file_name,
     return file_name;
 
   return {};
+}
+
+} // anonymous namespace
+
+bfs::path
+find_base_dir(bfs::path const &file_name) {
+  try {
+    return find_base_dir_impl(file_name);
+  } catch (boost::filesystem::filesystem_error &) {
+    return {};
+  }
+}
+
+bfs::path
+find_other_file(bfs::path const &reference_file_name,
+                bfs::path const &other_file_name) {
+  try {
+    return find_other_file_impl(reference_file_name, other_file_name);
+  } catch (boost::filesystem::filesystem_error &) {
+    return {};
+  }
 }
 
 }}

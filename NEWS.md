@@ -6,6 +6,12 @@
   working directory the GUI was started from wasn't the directory the GUI's
   executable file was located it. Examples for when this is the case are
   Windows' "send to" or "open with" functions. Fixes #2501.
+* mkvmerge: Windows: mkvmerge was crashing with an exception when trying to
+  identify certain files that can be used on Blu-rays (such as MPEG transport
+  streams of MPLS play list files) and when the file name was given as a UNC
+  path (e.g. `\\servername\sharename\path\to\file.m2ts`). The GUI emitted
+  errors such as "the JSON output could not be parsed" in that case. Fixes
+  #2507.
 
 
 # Version 31.0.0 "Dolores In A Shoestand" 2019-02-09
