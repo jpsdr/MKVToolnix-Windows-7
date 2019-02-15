@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: added column "Delay" to the track list
+  containing the additional delay to apply during multiplexing. Implements
+  #2506.
+
 ## Bug fixes
 
 * MKVToolNix GUI: the portable mode wasn't detected correctly when the current

@@ -56,6 +56,7 @@ TrackModel::retranslateUi() {
     { QY("Source file"),             Q("sourceFile")       },
     { QY("Source file's directory"), Q("sourceFileDir")    },
     { QY("Program"),                 Q("program")          },
+    { QY("Delay"),                   Q("delay")            },
   });
 
   horizontalHeaderItem(IDColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -117,6 +118,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[SourceFileColumn]      ->setText(fileInfo.fileName());
   items[SourceFileDirColumn]   ->setText(QDir::toNativeSeparators(fileInfo.path()));
   items[ProgramColumn]         ->setText(programInfoFor(*track));
+  items[DelayColumn]           ->setText(track->m_delay);
 
   items[CodecColumn]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
   items[CodecColumn]->setCheckable(true);
@@ -134,7 +136,8 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[DefaultTrackFlagColumn]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
   items[ForcedTrackFlagColumn] ->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? MainWindow::yesIcon() : MainWindow::noIcon());
 
-  items[IDColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  items[IDColumn]   ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  items[DelayColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   Util::setItemForegroundColorDisabled(items, !track->m_muxThis);
 }

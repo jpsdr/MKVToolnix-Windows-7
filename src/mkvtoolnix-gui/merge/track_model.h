@@ -33,6 +33,7 @@ protected:
   static int const SourceFileColumn       = 10;
   static int const SourceFileDirColumn    = 11;
   static int const ProgramColumn          = 12;
+  static int const DelayColumn            = 13;
 
 protected:
   QList<Track *> *m_tracks;
