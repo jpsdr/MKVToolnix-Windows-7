@@ -9,7 +9,7 @@ namespace mtx { namespace gui { namespace Util {
 class WindowsSleepInhibitorPrivate;
 class WindowsSleepInhibitor : public BasicSleepInhibitor {
 protected:
-  MTX_DECLARE_PRIVATE(WindowsSleepInhibitorPrivate);
+  MTX_DECLARE_PRIVATE(WindowsSleepInhibitorPrivate)
 
   explicit WindowsSleepInhibitor(WindowsSleepInhibitorPrivate &p);
 

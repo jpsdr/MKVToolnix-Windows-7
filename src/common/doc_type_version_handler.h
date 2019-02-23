@@ -24,7 +24,7 @@ namespace mtx {
 class doc_type_version_handler_private_c;
 class doc_type_version_handler_c {
 protected:
-  MTX_DECLARE_PRIVATE(doc_type_version_handler_private_c);
+  MTX_DECLARE_PRIVATE(doc_type_version_handler_private_c)
 
   std::unique_ptr<doc_type_version_handler_private_c> const p_ptr;
 

@@ -13,7 +13,7 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 class Tab;
 
 class ValuePage: public PageBase {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   enum class ValueType {

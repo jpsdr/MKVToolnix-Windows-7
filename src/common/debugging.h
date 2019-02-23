@@ -105,7 +105,7 @@ public:
 
 namespace libebml {
 class EbmlElement;
-};
+}
 
 class ebml_dumper_c {
 public:

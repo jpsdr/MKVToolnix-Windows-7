@@ -24,12 +24,12 @@ namespace libmatroska {
   class KaxTag;
   class KaxTagSimple;
   class KaxChapters;
-};
+}
 
 namespace libebml {
   class EbmlElement;
   class EbmlMaster;
-};
+}
 
 namespace mtx { namespace tags {
 

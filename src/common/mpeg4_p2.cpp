@@ -27,8 +27,8 @@ namespace mpeg4 {
     static bool parse_vol_header(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
     static bool extract_par_internal(const unsigned char *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
     static void parse_frame(video_frame_t &frame, const unsigned char *buffer, const mpeg4::p2::config_data_t &config_data);
-  };
-};
+  }
+}
 
 mpeg4::p2::config_data_t::config_data_t()
   : m_time_increment_bits(0)

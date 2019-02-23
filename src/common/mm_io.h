@@ -24,7 +24,7 @@ class mm_io_private_c;
 
 class mm_io_c: public libebml::IOCallback {
 protected:
-  MTX_DECLARE_PRIVATE(mm_io_private_c);
+  MTX_DECLARE_PRIVATE(mm_io_private_c)
 
   std::unique_ptr<mm_io_private_c> const p_ptr;
 

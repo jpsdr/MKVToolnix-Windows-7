@@ -17,7 +17,7 @@ class TrackModel;
 using TrackModelPtr = std::shared_ptr<TrackModel>;
 
 class TrackModel : public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   static int const CodecColumn            =  0;

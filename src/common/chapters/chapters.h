@@ -22,14 +22,14 @@
 
 namespace libebml {
   class EbmlMaster;
-};
+}
 
 namespace libmatroska {
   class KaxChapters;
   class KaxTags;
   class KaxEditionEntry;
   class KaxChapterAtom;
-};
+}
 
 namespace mtx { namespace chapters {
 

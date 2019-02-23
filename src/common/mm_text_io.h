@@ -18,7 +18,7 @@
 class mm_text_io_private_c;
 class mm_text_io_c: public mm_proxy_io_c {
 protected:
-  MTX_DECLARE_PRIVATE(mm_text_io_private_c);
+  MTX_DECLARE_PRIVATE(mm_text_io_private_c)
 
   explicit mm_text_io_c(mm_text_io_private_c &p);
 

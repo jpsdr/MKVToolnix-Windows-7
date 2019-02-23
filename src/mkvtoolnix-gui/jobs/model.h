@@ -19,7 +19,7 @@ enum class QueueStatus {
 };
 
 class Model: public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
   QHash<uint64_t, JobPtr> m_jobsById;
   QSet<Job const *> m_toBeProcessed;

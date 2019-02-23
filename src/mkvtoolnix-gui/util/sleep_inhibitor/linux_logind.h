@@ -9,7 +9,7 @@ namespace mtx { namespace gui { namespace Util {
 class LogindSleepInhibitorPrivate;
 class LogindSleepInhibitor : public BasicSleepInhibitor {
 protected:
-  MTX_DECLARE_PRIVATE(LogindSleepInhibitorPrivate);
+  MTX_DECLARE_PRIVATE(LogindSleepInhibitorPrivate)
 
   explicit LogindSleepInhibitor(LogindSleepInhibitorPrivate &p);
 

@@ -33,7 +33,7 @@ public:
   };
 
 private:
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   // UI stuff:

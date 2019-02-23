@@ -7,7 +7,7 @@
 namespace mtx { namespace gui { namespace Util {
 
 class CharacterSetComboBox: public ComboBoxBase {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   explicit CharacterSetComboBox(ComboBoxBasePrivate &d, QWidget *parent);

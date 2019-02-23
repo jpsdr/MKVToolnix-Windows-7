@@ -7,7 +7,7 @@ namespace mtx { namespace gui { namespace Util {
 class BasicSleepInhibitorPrivate;
 class BasicSleepInhibitor {
 protected:
-  MTX_DECLARE_PRIVATE(BasicSleepInhibitorPrivate);
+  MTX_DECLARE_PRIVATE(BasicSleepInhibitorPrivate)
 
   std::unique_ptr<BasicSleepInhibitorPrivate> const p_ptr;
 

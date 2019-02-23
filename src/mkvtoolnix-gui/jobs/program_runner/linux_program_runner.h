@@ -11,7 +11,7 @@ namespace mtx { namespace gui {
 namespace Jobs {
 
 class LinuxProgramRunner: public ProgramRunner {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   explicit LinuxProgramRunner();

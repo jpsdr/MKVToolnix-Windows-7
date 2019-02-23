@@ -18,7 +18,7 @@ class Tool;
 class Tab;
 
 class Tool : public ToolBase {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   // UI stuff:

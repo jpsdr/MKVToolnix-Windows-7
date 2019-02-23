@@ -37,10 +37,10 @@ uint32_t constexpr Frame   = 0xff000001u;
 
 class ModelPrivate;
 class Model: public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(ModelPrivate);
+  MTX_DECLARE_PRIVATE(ModelPrivate)
 
   std::unique_ptr<ModelPrivate> const p_ptr;
 

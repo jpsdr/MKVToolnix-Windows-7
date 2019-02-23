@@ -54,7 +54,7 @@ struct index_t {
 class parser_private_c;
 class parser_c {
 protected:
-  MTX_DECLARE_PRIVATE(parser_private_c);
+  MTX_DECLARE_PRIVATE(parser_private_c)
 
   std::unique_ptr<parser_private_c> const p_ptr;
 

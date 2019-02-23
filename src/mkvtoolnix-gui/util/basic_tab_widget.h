@@ -14,10 +14,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class BasicTabWidgetPrivate;
 class BasicTabWidget : public QTabWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(BasicTabWidgetPrivate);
+  MTX_DECLARE_PRIVATE(BasicTabWidgetPrivate)
 
   std::unique_ptr<BasicTabWidgetPrivate> const p_ptr;
 

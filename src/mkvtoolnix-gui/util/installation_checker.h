@@ -10,7 +10,7 @@ class QString;
 namespace mtx { namespace gui { namespace Util {
 
 class InstallationChecker: public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   enum class ProblemType {

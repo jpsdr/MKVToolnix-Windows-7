@@ -9,7 +9,7 @@
 namespace mtx { namespace gui { namespace HeaderEditor {
 
 class EmptyPage: public PageBase {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   translatable_string_c m_content;

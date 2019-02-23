@@ -16,7 +16,7 @@ class Tool;
 }
 
 class TaskbarProgress : public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   QWinTaskbarButton *m_button;

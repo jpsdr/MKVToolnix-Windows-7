@@ -7,7 +7,7 @@
 namespace mtx { namespace gui {
 
 class ToolBase : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   explicit ToolBase(QWidget *parent) : QWidget{parent} {}

@@ -15,7 +15,7 @@ class AdditionalCommandLineOptionsDialog;
 }
 
 class AdditionalCommandLineOptionsDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
   struct Option {
     QString title;

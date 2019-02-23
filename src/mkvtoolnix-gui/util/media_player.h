@@ -10,10 +10,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class MediaPlayerPrivate;
 class MediaPlayer : public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(MediaPlayerPrivate);
+  MTX_DECLARE_PRIVATE(MediaPlayerPrivate)
 
   std::unique_ptr<MediaPlayerPrivate> const p_ptr;
 

@@ -14,10 +14,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class NetworkAccessManagerPrivate;
 class NetworkAccessManager : public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(NetworkAccessManagerPrivate);
+  MTX_DECLARE_PRIVATE(NetworkAccessManagerPrivate)
 
   std::unique_ptr<NetworkAccessManagerPrivate> const p_ptr;
 

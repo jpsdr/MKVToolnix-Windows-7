@@ -23,10 +23,10 @@ namespace Jobs {
 
 class MuxJobPrivate;
 class MuxJob: public Job {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(MuxJobPrivate);
+  MTX_DECLARE_PRIVATE(MuxJobPrivate)
 
   explicit MuxJob(MuxJobPrivate &p);
 

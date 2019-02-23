@@ -20,10 +20,10 @@ enum class UpdateCheckStatus {
 
 class UpdateCheckerPrivate;
 class UpdateChecker : public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(UpdateCheckerPrivate);
+  MTX_DECLARE_PRIVATE(UpdateCheckerPrivate)
 
   std::unique_ptr<UpdateCheckerPrivate> const p_ptr;
 
@@ -50,8 +50,8 @@ protected:
 
 }}
 
-Q_DECLARE_METATYPE(mtx::gui::UpdateCheckStatus);
-Q_DECLARE_METATYPE(mtx_release_version_t);
-Q_DECLARE_METATYPE(std::shared_ptr<pugi::xml_document>);
+Q_DECLARE_METATYPE(mtx::gui::UpdateCheckStatus)
+Q_DECLARE_METATYPE(mtx_release_version_t)
+Q_DECLARE_METATYPE(std::shared_ptr<pugi::xml_document>)
 
 #endif  // HAVE_UPDATE_CHECK

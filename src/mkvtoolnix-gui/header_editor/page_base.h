@@ -15,7 +15,7 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 class Tab;
 
 class PageBase: public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   QList<PageBase *> m_children;

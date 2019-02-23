@@ -13,7 +13,7 @@ class ActionForDroppedFilesDialog;
 }
 
 class ActionForDroppedFilesDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
   std::unique_ptr<Ui::ActionForDroppedFilesDialog> ui;
 

@@ -7,7 +7,7 @@
 
 namespace libmatroska {
 class KaxAttached;
-};
+}
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -18,7 +18,7 @@ class AttachedFilePage;
 using KaxAttachedPtr = std::shared_ptr<libmatroska::KaxAttached>;
 
 class AttachedFilePage: public PageBase {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   std::unique_ptr<Ui::AttachedFilePage> ui;

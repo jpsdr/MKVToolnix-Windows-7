@@ -14,7 +14,7 @@
 #if HAVE_MAGIC_H
 extern "C" {
 #include <magic.h>
-};
+}
 #endif
 
 #include "common/fs_sys_helpers.h"

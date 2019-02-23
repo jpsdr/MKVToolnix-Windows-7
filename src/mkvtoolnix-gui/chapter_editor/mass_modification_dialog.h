@@ -12,7 +12,7 @@ class MassModificationDialog;
 }
 
 class MassModificationDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 public:
   enum Action {
     Shift               = 0x0001,
@@ -26,7 +26,7 @@ public:
     RemoveEndTimestamps = 0x0100,
     RemoveNames         = 0x0200,
   };
-  Q_DECLARE_FLAGS(Actions, Action);
+  Q_DECLARE_FLAGS(Actions, Action)
 
 private:
   std::unique_ptr<Ui::MassModificationDialog> m_ui;
@@ -55,4 +55,4 @@ protected:
 
 }}}
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::ChapterEditor::MassModificationDialog::Actions);
+Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::ChapterEditor::MassModificationDialog::Actions)

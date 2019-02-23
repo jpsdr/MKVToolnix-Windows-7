@@ -14,7 +14,7 @@ class AttachmentModel;
 using AttachmentModelPtr = std::shared_ptr<AttachmentModel>;
 
 class AttachmentModel : public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   QHash<quint64, AttachmentPtr> m_attachmentMap;

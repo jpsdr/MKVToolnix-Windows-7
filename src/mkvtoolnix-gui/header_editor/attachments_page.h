@@ -7,7 +7,7 @@
 
 namespace libmatroska {
 class KaxAttached;
-};
+}
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -19,7 +19,7 @@ using KaxAttachedPtr  = std::shared_ptr<libmatroska::KaxAttached>;
 using KaxAttachedList = QList<KaxAttachedPtr>;
 
 class AttachmentsPage: public TopLevelPage {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   std::unique_ptr<Ui::AttachmentsPage> ui;

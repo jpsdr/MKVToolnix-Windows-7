@@ -8,10 +8,6 @@
 
 namespace mtx { namespace gui { namespace Util {
 
-namespace Config {
-
-};
-
 class JsonConfigFile: public ConfigFile {
 public:
   class Group;

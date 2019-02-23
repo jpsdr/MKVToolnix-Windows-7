@@ -12,10 +12,10 @@ class Runnable;
 
 class SerialWorkerQueuePrivate;
 class SerialWorkerQueue : public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(SerialWorkerQueuePrivate);
+  MTX_DECLARE_PRIVATE(SerialWorkerQueuePrivate)
 
   std::unique_ptr<SerialWorkerQueuePrivate> const p_ptr;
 

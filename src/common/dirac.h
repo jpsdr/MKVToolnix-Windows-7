@@ -171,4 +171,4 @@ namespace dirac {
 
     virtual void flush_frame();
   };
-};
+}

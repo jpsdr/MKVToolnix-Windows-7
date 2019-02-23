@@ -43,8 +43,8 @@ initiateSettings() {
 
 }
 
-Q_DECLARE_METATYPE(std::shared_ptr<Merge::SourceFile>);
-Q_DECLARE_METATYPE(QList<std::shared_ptr<Merge::SourceFile>>);
+Q_DECLARE_METATYPE(std::shared_ptr<Merge::SourceFile>)
+Q_DECLARE_METATYPE(QList<std::shared_ptr<Merge::SourceFile>>)
 
 static void
 registerMetaTypes() {

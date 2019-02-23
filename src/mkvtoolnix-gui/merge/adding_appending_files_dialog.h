@@ -14,7 +14,7 @@ class AddingAppendingFilesDialog;
 }
 
 class AddingAppendingFilesDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
   std::unique_ptr<Ui::AddingAppendingFilesDialog> ui;
 

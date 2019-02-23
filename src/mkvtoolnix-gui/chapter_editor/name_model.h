@@ -9,12 +9,12 @@
 
 // class QAbstractItemView;
 
-Q_DECLARE_METATYPE(libmatroska::KaxChapterDisplay *);
+Q_DECLARE_METATYPE(libmatroska::KaxChapterDisplay *)
 
 namespace mtx { namespace gui { namespace ChapterEditor {
 
 class NameModel: public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   libmatroska::KaxChapterAtom *m_chapter{};

@@ -21,10 +21,10 @@ namespace Jobs {
 
 class InfoJobPrivate;
 class InfoJob: public Job {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(InfoJobPrivate);
+  MTX_DECLARE_PRIVATE(InfoJobPrivate)
 
   explicit InfoJob(InfoJobPrivate &p);
 

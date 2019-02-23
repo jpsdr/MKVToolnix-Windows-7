@@ -9,7 +9,7 @@
 namespace mtx { namespace gui { namespace Jobs {
 
 class WindowsProgramRunner: public ProgramRunner {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   explicit WindowsProgramRunner();

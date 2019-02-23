@@ -14,7 +14,7 @@ class ExecutableLocationDialog;
 }
 
 class ExecutableLocationDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
   std::unique_ptr<Ui::ExecutableLocationDialog> m_ui;
 

@@ -9,7 +9,7 @@ namespace mtx { namespace gui { namespace Util {
 class RecentlyUsedStringsPrivate;
 class RecentlyUsedStrings {
 protected:
-  MTX_DECLARE_PRIVATE(RecentlyUsedStringsPrivate);
+  MTX_DECLARE_PRIVATE(RecentlyUsedStringsPrivate)
 
   std::unique_ptr<RecentlyUsedStringsPrivate> const p_ptr;
 

@@ -31,7 +31,7 @@ enum class InitialDirMode {
 class FileIdentificationThread;
 
 class Tab : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   // non-UI stuff:

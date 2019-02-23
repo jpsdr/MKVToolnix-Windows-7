@@ -26,9 +26,9 @@ namespace mtx { namespace gui { namespace Util {
 
 class KaxInfoPrivate;
 class KaxInfo: public QObject, public ::mtx::kax_info_c {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
-  MTX_DECLARE_PRIVATE(KaxInfoPrivate);
+  MTX_DECLARE_PRIVATE(KaxInfoPrivate)
 
 public:
   enum class ScanType {
@@ -77,4 +77,4 @@ protected:
 
 }}}
 
-Q_DECLARE_METATYPE(::mtx::kax_info_c::result_e);
+Q_DECLARE_METATYPE(::mtx::kax_info_c::result_e)

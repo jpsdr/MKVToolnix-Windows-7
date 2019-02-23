@@ -18,7 +18,7 @@
 class mm_null_io_private_c;
 class mm_null_io_c: public mm_io_c {
 protected:
-  MTX_DECLARE_PRIVATE(mm_null_io_private_c);
+  MTX_DECLARE_PRIVATE(mm_null_io_private_c)
 
   explicit mm_null_io_c(mm_null_io_private_c &p);
 

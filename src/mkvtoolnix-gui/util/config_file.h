@@ -10,7 +10,7 @@ class ConfigFile;
 using ConfigFilePtr = std::shared_ptr<ConfigFile>;
 
 class ConfigFile: public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 public:
   enum Type {
     UnknownType,

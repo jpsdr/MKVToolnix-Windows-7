@@ -11,7 +11,7 @@
 namespace mtx { namespace gui { namespace Info {
 
 class ElementReader : public QObject, public Util::Runnable {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   mm_io_c &m_in;

@@ -11,7 +11,7 @@ class TrackTypePage;
 }
 
 class TrackTypePage: public TopLevelPage {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   std::unique_ptr<Ui::TrackTypePage> ui;

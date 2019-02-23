@@ -10,10 +10,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class ComboBoxBasePrivate;
 class ComboBoxBase: public QComboBox {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(ComboBoxBasePrivate);
+  MTX_DECLARE_PRIVATE(ComboBoxBasePrivate)
 
   std::unique_ptr<ComboBoxBasePrivate> const p_ptr;
 

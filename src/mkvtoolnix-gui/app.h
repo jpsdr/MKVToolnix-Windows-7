@@ -30,10 +30,10 @@ using CharacterSetList              = std::vector<QString>;
 
 class AppPrivate;
 class App : public QApplication {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(AppPrivate);
+  MTX_DECLARE_PRIVATE(AppPrivate)
 
   std::unique_ptr<AppPrivate> const p_ptr;
 

@@ -17,10 +17,10 @@ class StringListConfigurationWidget;
 
 class StringListConfigurationWidgetPrivate;
 class StringListConfigurationWidget : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(StringListConfigurationWidgetPrivate);
+  MTX_DECLARE_PRIVATE(StringListConfigurationWidgetPrivate)
 
   std::unique_ptr<StringListConfigurationWidgetPrivate> const p_ptr;
 

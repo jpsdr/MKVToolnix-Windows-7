@@ -25,16 +25,16 @@ using JobPtr = std::shared_ptr<Job>;
 
 class JobPrivate;
 class Job: public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(JobPrivate);
+  MTX_DECLARE_PRIVATE(JobPrivate)
 
   std::unique_ptr<JobPrivate> const p_ptr;
 
   explicit Job(JobPrivate &p);
 
-  Q_ENUMS(Status);
+  Q_ENUMS(Status)
 
 public:
   enum Status {
@@ -138,5 +138,5 @@ public:                         // static
 
 }}}
 
-Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::LineType);
-Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::Status);
+Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::LineType)
+Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::Status)

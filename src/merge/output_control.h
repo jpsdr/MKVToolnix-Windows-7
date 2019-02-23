@@ -36,7 +36,7 @@ namespace libmatroska {
   class KaxTracks;
   class KaxSegmentFamily;
   class KaxInfo;
-};
+}
 
 namespace mtx {
 class doc_type_version_handler_c;

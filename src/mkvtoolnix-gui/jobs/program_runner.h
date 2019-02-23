@@ -12,7 +12,7 @@ class Job;
 enum class QueueStatus;
 
 class ProgramRunner: public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   using VariableMap = QMap<QString, QStringList>;

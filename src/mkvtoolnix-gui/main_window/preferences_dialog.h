@@ -16,7 +16,7 @@ class PreferencesDialog;
 }
 
 class PreferencesDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   enum class Page {

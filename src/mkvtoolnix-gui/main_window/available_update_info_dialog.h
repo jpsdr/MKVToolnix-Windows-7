@@ -17,7 +17,7 @@ class AvailableUpdateInfoDialog;
 }
 
 class AvailableUpdateInfoDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   // UI stuff:

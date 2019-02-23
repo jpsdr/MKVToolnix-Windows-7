@@ -14,10 +14,10 @@ namespace mtx { namespace gui {
 
 class SelectCharacterSetDialogPrivate;
 class SelectCharacterSetDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(SelectCharacterSetDialogPrivate);
+  MTX_DECLARE_PRIVATE(SelectCharacterSetDialogPrivate)
 
   std::unique_ptr<SelectCharacterSetDialogPrivate> const p_ptr;
 

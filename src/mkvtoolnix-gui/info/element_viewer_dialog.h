@@ -15,13 +15,13 @@ class ElementViewerDialog;
 
 class ElementViewerDialogPrivate;
 class ElementViewerDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   static int constexpr DetachWindow = 42;
 
 protected:
-  MTX_DECLARE_PRIVATE(ElementViewerDialogPrivate);
+  MTX_DECLARE_PRIVATE(ElementViewerDialogPrivate)
 
   std::unique_ptr<ElementViewerDialogPrivate> const p_ptr;
 

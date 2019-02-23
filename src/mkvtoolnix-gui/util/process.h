@@ -23,7 +23,7 @@ class Process;
 using ProcessPtr = std::shared_ptr<Process>;
 
 class Process: public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 private:
   QProcess m_process;
   QString m_command, m_output;

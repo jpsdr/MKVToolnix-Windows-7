@@ -13,7 +13,7 @@ class RenumberSubChaptersParametersDialog;
 }
 
 class RenumberSubChaptersParametersDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 private:
   std::unique_ptr<Ui::RenumberSubChaptersParametersDialog> m_ui;
 

@@ -74,4 +74,4 @@ is_keyframe(memory_cptr const &buffer,
   }
 }
 
-};
+}

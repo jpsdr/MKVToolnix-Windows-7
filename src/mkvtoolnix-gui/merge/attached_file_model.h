@@ -13,7 +13,7 @@ class AttachedFileModel;
 using AttachedFileModelPtr = std::shared_ptr<AttachedFileModel>;
 
 class AttachedFileModel : public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   QHash<quint64, TrackPtr> m_attachedFilesMap;

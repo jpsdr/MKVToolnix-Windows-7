@@ -21,7 +21,7 @@
 class mm_mpls_multi_file_io_private_c;
 class mm_mpls_multi_file_io_c: public mm_file_io_c {
 protected:
-  MTX_DECLARE_PRIVATE(mm_mpls_multi_file_io_private_c);
+  MTX_DECLARE_PRIVATE(mm_mpls_multi_file_io_private_c)
 
   explicit mm_mpls_multi_file_io_c(mm_mpls_multi_file_io_private_c &p);
 

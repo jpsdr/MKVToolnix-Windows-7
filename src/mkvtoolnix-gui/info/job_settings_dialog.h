@@ -14,10 +14,10 @@ class JobSettingsDialog;
 class JobSettings;
 class JobSettingsDialogPrivate;
 class JobSettingsDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(JobSettingsDialogPrivate);
+  MTX_DECLARE_PRIVATE(JobSettingsDialogPrivate)
 
   std::unique_ptr<JobSettingsDialogPrivate> const p_ptr;
 

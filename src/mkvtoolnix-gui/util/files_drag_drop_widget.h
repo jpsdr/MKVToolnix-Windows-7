@@ -10,10 +10,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class FilesDragDropWidgetPrivate;
 class FilesDragDropWidget : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(FilesDragDropWidgetPrivate);
+  MTX_DECLARE_PRIVATE(FilesDragDropWidgetPrivate)
 
   std::unique_ptr<FilesDragDropWidgetPrivate> const p_ptr;
 

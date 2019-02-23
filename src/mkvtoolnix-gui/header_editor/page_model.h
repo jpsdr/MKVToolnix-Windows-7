@@ -12,7 +12,7 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 class PageBase;
 
 class PageModel: public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
   QHash<int, PageBase *> m_pages;
   QList<PageBase *> m_topLevelPages;

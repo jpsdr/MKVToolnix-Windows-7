@@ -19,8 +19,8 @@ class QSplitter;
 namespace mtx { namespace gui { namespace Util {
 
 class Settings: public QObject {
-  Q_OBJECT;
-  Q_ENUMS(RunProgramForEvent);
+  Q_OBJECT
+  Q_ENUMS(RunProgramForEvent)
 
 public:
   enum RunProgramType {
@@ -41,7 +41,7 @@ public:
     RunAfterJobCompletesWithErrors   = 0x04,
   };
 
-  Q_DECLARE_FLAGS(RunProgramForEvents, RunProgramForEvent);
+  Q_DECLARE_FLAGS(RunProgramForEvents, RunProgramForEvent)
 
   enum ProcessPriority {
     LowestPriority = 0,
@@ -262,4 +262,4 @@ public:
 
 }}}
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::Util::Settings::RunProgramForEvents);
+Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::Util::Settings::RunProgramForEvents)

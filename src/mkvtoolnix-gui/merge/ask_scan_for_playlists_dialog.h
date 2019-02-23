@@ -13,7 +13,7 @@ class AskScanForPlaylistsDialog;
 }
 
 class AskScanForPlaylistsDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
   std::unique_ptr<Ui::AskScanForPlaylistsDialog> ui;
 

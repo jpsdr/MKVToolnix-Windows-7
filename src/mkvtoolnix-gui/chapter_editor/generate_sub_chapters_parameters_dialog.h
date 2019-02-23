@@ -13,7 +13,7 @@ class GenerateSubChaptersParametersDialog;
 }
 
 class GenerateSubChaptersParametersDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 private:
   std::unique_ptr<Ui::GenerateSubChaptersParametersDialog> m_ui;
 

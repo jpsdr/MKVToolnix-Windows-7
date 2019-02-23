@@ -15,10 +15,10 @@ class SourceFile;
 
 class FileIdentificationWorkerPrivate;
 class FileIdentificationWorker : public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(FileIdentificationWorkerPrivate);
+  MTX_DECLARE_PRIVATE(FileIdentificationWorkerPrivate)
 
   std::unique_ptr<FileIdentificationWorkerPrivate> const p_ptr;
 
@@ -73,7 +73,7 @@ protected:
 };
 
 class FileIdentificationThread : public QThread {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   std::unique_ptr<FileIdentificationWorker> m_worker;

@@ -865,7 +865,7 @@ es_parser_c::update_frame_stats() {
     if (frame.m_si.field_pic_flag)
       ++m_stats.num_field_slices;
     else
-      ++m_stats.num_field_slices;
+      ++m_stats.num_frame_slices;
   }
 }
 

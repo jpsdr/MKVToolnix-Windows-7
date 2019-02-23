@@ -18,7 +18,7 @@ class TrackModel;
 class AttachedFileModel;
 
 class SourceFileModel : public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   QList<SourceFilePtr> *m_sourceFiles;

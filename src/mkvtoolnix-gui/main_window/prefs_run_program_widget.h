@@ -11,10 +11,10 @@ namespace mtx { namespace gui {
 
 class PrefsRunProgramWidgetPrivate;
 class PrefsRunProgramWidget : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(PrefsRunProgramWidgetPrivate);
+  MTX_DECLARE_PRIVATE(PrefsRunProgramWidgetPrivate)
 
   std::unique_ptr<PrefsRunProgramWidgetPrivate> const p_ptr;
 

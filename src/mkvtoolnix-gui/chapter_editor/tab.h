@@ -16,7 +16,7 @@ class QItemSelection;
 
 namespace libebml {
 class EbmlBinary;
-};
+}
 
 namespace mtx { namespace gui { namespace ChapterEditor {
 
@@ -44,7 +44,7 @@ struct ChapterAtomData {
 using ChapterAtomDataPtr = std::shared_ptr<ChapterAtomData>;
 
 class Tab : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   enum FocusElementType {
@@ -56,7 +56,7 @@ protected:
   using LoadResult       = std::pair<ChaptersPtr, bool>;
 
 protected:
-  MTX_DECLARE_PRIVATE(TabPrivate);
+  MTX_DECLARE_PRIVATE(TabPrivate)
 
   std::unique_ptr<TabPrivate> const p_ptr;
 

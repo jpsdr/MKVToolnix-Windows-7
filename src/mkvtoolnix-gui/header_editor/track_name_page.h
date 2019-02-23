@@ -11,7 +11,7 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 class Tab;
 
 class TrackNamePage: public ValuePage {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
   QComboBox *m_cbTrackName{};

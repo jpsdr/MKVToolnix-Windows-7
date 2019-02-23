@@ -43,10 +43,10 @@ class Tool;
 
 class MainWindowPrivate;
 class MainWindow : public QMainWindow {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(MainWindowPrivate);
+  MTX_DECLARE_PRIVATE(MainWindowPrivate)
 
   std::unique_ptr<MainWindowPrivate> const p_ptr;
 

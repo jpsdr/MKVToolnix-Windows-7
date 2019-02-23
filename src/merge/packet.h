@@ -21,7 +21,7 @@ namespace libmatroska {
   class KaxBlock;
   class KaxBlockBlob;
   class KaxCluster;
-};
+}
 
 class generic_packetizer_c;
 class track_statistics_c;

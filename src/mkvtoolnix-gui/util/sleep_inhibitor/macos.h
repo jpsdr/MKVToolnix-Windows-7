@@ -9,7 +9,7 @@ namespace mtx { namespace gui { namespace Util {
 class MacOSSleepInhibitorPrivate;
 class MacOSSleepInhibitor : public BasicSleepInhibitor {
 protected:
-  MTX_DECLARE_PRIVATE(MacOSSleepInhibitorPrivate);
+  MTX_DECLARE_PRIVATE(MacOSSleepInhibitorPrivate)
 
   explicit MacOSSleepInhibitor(MacOSSleepInhibitorPrivate &p);
 

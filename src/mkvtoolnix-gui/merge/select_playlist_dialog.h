@@ -18,7 +18,7 @@ class SelectPlaylistDialog;
 }
 
 class SelectPlaylistDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 protected:
   std::unique_ptr<Ui::SelectPlaylistDialog> ui;
   QList<SourceFilePtr> m_scannedFiles;

@@ -14,13 +14,13 @@ using ChaptersPtr = std::shared_ptr<libmatroska::KaxChapters>;
 using EditionPtr  = std::shared_ptr<libmatroska::KaxEditionEntry>;
 using ChapterPtr  = std::shared_ptr<libmatroska::KaxChapterAtom>;
 
-Q_DECLARE_METATYPE(EditionPtr);
-Q_DECLARE_METATYPE(ChapterPtr);
+Q_DECLARE_METATYPE(EditionPtr)
+Q_DECLARE_METATYPE(ChapterPtr)
 
 namespace mtx { namespace gui { namespace ChapterEditor {
 
 class ChapterModel: public QStandardItemModel {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   QHash<qulonglong, std::shared_ptr<libebml::EbmlMaster>> m_elementRegistry;

@@ -12,10 +12,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class FileIdentifierPrivate;
 class FileIdentifier: public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(FileIdentifierPrivate);
+  MTX_DECLARE_PRIVATE(FileIdentifierPrivate)
 
   std::unique_ptr<FileIdentifierPrivate> const p_ptr;
 

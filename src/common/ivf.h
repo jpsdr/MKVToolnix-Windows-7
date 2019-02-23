@@ -52,4 +52,4 @@ bool is_keyframe(const memory_cptr &buffer, codec_c::type_e codec);
 #if defined(COMP_MSC)
 #pragma pack(pop)
 #endif
-};
+}

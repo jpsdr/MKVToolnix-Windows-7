@@ -65,4 +65,4 @@ double get_fps(int idx);
 bool extract_ar(const unsigned char *buffer, int buffer_size, double &ar);
 bool is_fourcc(uint32_t fourcc);
 
-};
+}

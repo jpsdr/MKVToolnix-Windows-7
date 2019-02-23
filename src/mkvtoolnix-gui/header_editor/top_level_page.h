@@ -7,7 +7,7 @@
 namespace mtx { namespace gui { namespace HeaderEditor {
 
 class TopLevelPage: public EmptyPage {
-  Q_OBJECT;
+  Q_OBJECT
   QString m_internalIdentifier;
   QModelIndex m_parentPageIdx;
 

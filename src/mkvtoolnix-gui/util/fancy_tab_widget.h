@@ -39,7 +39,7 @@ namespace mtx { namespace gui { namespace Util {
 class FancyTabBar;
 
 class FancyTab : public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
   Q_PROPERTY(double fader READ fader WRITE setFader)
 
@@ -66,7 +66,7 @@ public:
 };
 
 class FancyTabBar : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 private:
   static int const m_rounding;
@@ -122,7 +122,7 @@ private:
 };
 
 class FancyTabWidget : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 private:
   FancyTabBar *m_tabBar{};

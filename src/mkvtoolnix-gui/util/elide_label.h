@@ -15,10 +15,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class ElideLabelPrivate;
 class ElideLabel: public QFrame {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(ElideLabelPrivate);
+  MTX_DECLARE_PRIVATE(ElideLabelPrivate)
 
   std::unique_ptr<ElideLabelPrivate> const p_ptr;
 

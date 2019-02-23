@@ -16,10 +16,10 @@ class SideBySideMultiSelect;
 
 class SideBySideMultiSelectPrivate;
 class SideBySideMultiSelect : public QWidget {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(SideBySideMultiSelectPrivate);
+  MTX_DECLARE_PRIVATE(SideBySideMultiSelectPrivate)
 
   std::unique_ptr<SideBySideMultiSelectPrivate> const p_ptr;
 

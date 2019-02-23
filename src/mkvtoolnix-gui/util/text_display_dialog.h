@@ -8,10 +8,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class TextDisplayDialogPrivate;
 class TextDisplayDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(TextDisplayDialogPrivate);
+  MTX_DECLARE_PRIVATE(TextDisplayDialogPrivate)
 
   std::unique_ptr<TextDisplayDialogPrivate> const p_ptr;
 

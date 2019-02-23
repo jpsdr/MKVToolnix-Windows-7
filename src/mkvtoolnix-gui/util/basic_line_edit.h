@@ -15,10 +15,10 @@ namespace mtx { namespace gui { namespace Util {
 
 class BasicLineEditPrivate;
 class BasicLineEdit : public QLineEdit {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
-  MTX_DECLARE_PRIVATE(BasicLineEditPrivate);
+  MTX_DECLARE_PRIVATE(BasicLineEditPrivate)
 
   std::unique_ptr<BasicLineEditPrivate> const p_ptr;
 

@@ -12,7 +12,7 @@ class CommandLineDialog;
 }
 
 class CommandLineDialog : public QDialog {
-  Q_OBJECT;
+  Q_OBJECT
 
 protected:
   // UI stuff:

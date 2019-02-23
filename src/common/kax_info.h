@@ -36,7 +36,7 @@ class private_c;
 
 class kax_info_c {
 protected:
-  MTX_DECLARE_PRIVATE(kax_info::private_c);
+  MTX_DECLARE_PRIVATE(kax_info::private_c)
 
   std::unique_ptr<kax_info::private_c> const p_ptr;
 
