@@ -185,7 +185,7 @@ real_reader_c::parse_headers() {
       dmx->width        = get_uint16_be(&dmx->rvp->width);
       dmx->height       = get_uint16_be(&dmx->rvp->height);
       uint32_t i        = get_uint32_be(&dmx->rvp->fps);
-      dmx->fps          = (float)((i & 0xffff0000) >> 16) + ((float)(i & 0x0000ffff)) / 65536.0;
+      dmx->fps          = static_cast<double>((i & 0xffff0000) >> 16) + (i & 0x0000ffff) / 65536.0;
       dmx->private_data = memory_c::clone(ts_data, ts_size);
 
       demuxers.push_back(dmx);
@@ -717,7 +717,7 @@ real_reader_c::set_dimensions(real_demuxer_cptr dmx,
       dmx->width  = width;
       dmx->height = height;
 
-      if (((float)width / (float)height) < m_ti.m_aspect_ratio) {
+      if ((static_cast<double>(width) / height) < m_ti.m_aspect_ratio) {
         disp_width  = (uint32_t)(height * m_ti.m_aspect_ratio);
         disp_height = height;
 

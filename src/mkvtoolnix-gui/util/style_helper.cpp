@@ -43,19 +43,10 @@ namespace mtx { namespace gui { namespace Util {
 
 // Clamps float color values within (0, 255)
 static
-int clamp(float x) {
+int clamp(double x) {
   const int val = x > 255 ? 255 : static_cast<int>(x);
   return val < 0 ? 0 : val;
 }
-
-// Clamps float color values within (0, 255)
-/*
-  static int range(float x, int min, int max)
-  {
-  int val = x > max ? max : x;
-  return val < min ? min : val;
-  }
-*/
 
 QColor
 StyleHelper::mergedColors(QColor const &colorA,

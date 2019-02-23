@@ -77,19 +77,6 @@ parse_number(StrT const &string,
   return true;
 }
 
-template<typename StrT>
-bool
-parse_number(StrT const &string,
-             float &value) {
-  int64_rational_c rational_value;
-  if (!parse_number(string, rational_value))
-    return false;
-
-  value = boost::rational_cast<float>(rational_value);
-
-  return true;
-}
-
 template <typename StructType, typename DataType>
 bool
 parse_property_to_struct(std::string const &s,

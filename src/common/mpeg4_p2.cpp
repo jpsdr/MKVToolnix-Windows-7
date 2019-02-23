@@ -197,7 +197,7 @@ mpeg4::p2::extract_par_internal(const unsigned char *buffer,
   mxverb(2, fmt::format("mpeg4 AR: {0} den: {1}\n", num, den));
 
   if ((num != 0) && (den != 0) && ((num != 1) || (den != 1)) &&
-      (((float)num / (float)den) != 1.0)) {
+      ((static_cast<double>(num) / den) != 1.0)) {
     par_num = num;
     par_den = den;
     return true;

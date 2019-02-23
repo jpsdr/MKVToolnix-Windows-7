@@ -43,7 +43,7 @@ tta_packetizer_c::~tta_packetizer_c() {
 void
 tta_packetizer_c::set_headers() {
   set_codec_id(MKV_A_TTA);
-  set_audio_sampling_freq((float)m_sample_rate);
+  set_audio_sampling_freq(m_sample_rate);
   set_audio_channels(m_channels);
   set_audio_bit_depth(m_bits_per_sample);
 

@@ -47,8 +47,8 @@ enum MPEG2BufferState_e {
 struct MPEG2SequenceHeader {
   uint32_t width;
   uint32_t height;
-  float aspectRatio;
-  float frameOrFieldRate;
+  double aspectRatio;
+  double frameOrFieldRate;
   uint8_t profileLevelIndication;
   uint8_t progressiveSequence;
 

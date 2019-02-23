@@ -100,7 +100,7 @@ ac3_packetizer_c::set_headers() {
     id += "/BSID10";
 
   set_codec_id(id.c_str());
-  set_audio_sampling_freq((float)m_first_ac3_header.m_sample_rate);
+  set_audio_sampling_freq(m_first_ac3_header.m_sample_rate);
   set_audio_channels(m_first_ac3_header.m_channels);
 
   generic_packetizer_c::set_headers();
@@ -182,7 +182,7 @@ ac3_packetizer_c::adjust_header_values(mtx::ac3::frame_c const &ac3_header) {
     return;
 
   if (m_first_ac3_header.m_sample_rate != ac3_header.m_sample_rate)
-    set_audio_sampling_freq((float)ac3_header.m_sample_rate);
+    set_audio_sampling_freq(ac3_header.m_sample_rate);
 
   if (m_first_ac3_header.m_channels != ac3_header.m_channels)
     set_audio_channels(ac3_header.m_channels);

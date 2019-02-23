@@ -292,15 +292,15 @@ xtr_oggkate_c::handle_frame(xtr_frame_t &f) {
   op.bytes    = f.frame->get_size();
 
   /* we encode the backlink in the granulepos */
-  float f_timestamp  = f.timestamp / 1000000000.0;
+  auto f_timestamp   = f.timestamp / 1000000000.0;
   int64_t g_backlink = 0;
 
   if (op.bytes >= static_cast<long>(1 + 3 * sizeof(int64_t)))
     g_backlink = get_uint64_le(op.packet + 1 + 2 * sizeof(int64_t));
 
-  float f_backlink = g_backlink * (float)m_kate_id_header.gden / m_kate_id_header.gnum;
-  float f_base     = f_timestamp - f_backlink;
-  float f_offset   = f_timestamp - f_base;
+  auto f_backlink  = g_backlink * static_cast<double>(m_kate_id_header.gden) / m_kate_id_header.gnum;
+  auto f_base      = f_timestamp - f_backlink;
+  auto f_offset    = f_timestamp - f_base;
   int64_t g_base   = (int64_t)(f_base   * m_kate_id_header.gnum / m_kate_id_header.gden);
   int64_t g_offset = (int64_t)(f_offset * m_kate_id_header.gnum / m_kate_id_header.gden);
   op.granulepos    = (g_base << m_kate_id_header.kfgshift) | g_offset;

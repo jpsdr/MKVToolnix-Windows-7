@@ -71,7 +71,7 @@ mpeg1_2::extract_fps_idx(const unsigned char *buffer,
 bool
 mpeg1_2::extract_ar(const unsigned char *buffer,
                     int buffer_size,
-                    float &ar) {
+                    double &ar) {
   uint32_t marker;
   int idx;
 
@@ -101,19 +101,19 @@ mpeg1_2::extract_ar(const unsigned char *buffer,
 
   switch (buffer[idx] & 0xf0) {
     case MPEGVIDEO_AR_1_1:
-      ar = 1.0f;
+      ar = 1.0;
       break;
     case MPEGVIDEO_AR_4_3:
-      ar = 4.0f / 3.0f;
+      ar = 4.0 / 3.0;
       break;
     case MPEGVIDEO_AR_16_9:
-      ar = 16.0f / 9.0f;
+      ar = 16.0 / 9.0;
       break;
     case MPEGVIDEO_AR_2_21:
-      ar = 2.21f;
+      ar = 2.21;
       break;
     default:
-      ar = -1.0f;
+      ar = -1.0;
   }
   return true;
 }

@@ -121,7 +121,7 @@ vobsub_reader_c::~vobsub_reader_c() {
     mxverb(2,
            fmt::format("r_vobsub track {0} SPU size: {1}, overall size: {2}, overhead: {3} ({4:.3f}%)\n",
                        i, tracks[i]->spu_size, tracks[i]->spu_size + tracks[i]->overhead, tracks[i]->overhead,
-                       float(100.0 * tracks[i]->overhead / (tracks[i]->overhead + tracks[i]->spu_size))));
+                       100.0 * tracks[i]->overhead / (tracks[i]->overhead + tracks[i]->spu_size)));
     delete tracks[i];
   }
 }

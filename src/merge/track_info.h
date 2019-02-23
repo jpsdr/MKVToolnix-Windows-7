@@ -64,7 +64,7 @@ enum default_track_priority_e {
 };
 
 struct display_properties_t {
-  float aspect_ratio;
+  double aspect_ratio;
   bool ar_factor;
   int width, height;
 
@@ -162,7 +162,7 @@ struct chroma_siting_t {
 };
 
 struct chroma_coordinates_t {
-  float red_x, red_y, green_x, green_y, blue_x, blue_y;
+  double red_x, red_y, green_x, green_y, blue_x, blue_y;
 
   chroma_coordinates_t()
   : red_x{-1.0}
@@ -173,9 +173,9 @@ struct chroma_coordinates_t {
   , blue_y{-1.0}
   {
   }
-  chroma_coordinates_t(float p_red_x,   float p_red_y,
-                       float p_green_x, float p_green_y,
-                       float p_blue_x,  float p_blue_y)
+  chroma_coordinates_t(double p_red_x,   double p_red_y,
+                       double p_green_x, double p_green_y,
+                       double p_blue_x,  double p_blue_y)
   : red_x{p_red_x}
   , red_y{p_red_y}
   , green_x{p_green_x}
@@ -184,7 +184,7 @@ struct chroma_coordinates_t {
   , blue_y{p_blue_y}
   {
   }
-  chroma_coordinates_t(std::vector<float> data)
+  chroma_coordinates_t(std::vector<double> data)
   : red_x{data[0]}
   , red_y{data[1]}
   , green_x{data[2]}
@@ -197,19 +197,19 @@ struct chroma_coordinates_t {
 };
 
 struct white_colour_coordinates_t {
-  float x, y;
+  double x, y;
 
   white_colour_coordinates_t()
   : x{-1.0}
   , y{-1.0}
   {
   }
-  white_colour_coordinates_t(float p_x, float p_y)
+  white_colour_coordinates_t(double p_x, double p_y)
   : x{p_x}
   , y{p_y}
   {
   }
-  white_colour_coordinates_t(std::vector<float> data)
+  white_colour_coordinates_t(std::vector<double> data)
   : x{data[0]}
   , y{data[1]}
   {
@@ -247,7 +247,7 @@ public:
   std::map<int64_t, std::string> m_all_fourccs;
   std::string m_fourcc;
   std::map<int64_t, display_properties_t> m_display_properties;
-  float m_aspect_ratio;
+  double m_aspect_ratio;
   int m_display_width, m_display_height, m_display_unit;
   bool m_aspect_ratio_given, m_aspect_ratio_is_factor, m_display_dimensions_given;
   option_source_e m_display_dimensions_source;
@@ -339,11 +339,11 @@ public:
   std::map<int64_t, white_colour_coordinates_t> m_white_coordinates_list; // As given on the command line
   option_with_source_c<white_colour_coordinates_t> m_white_coordinates; // For this very track
 
-  std::map<int64_t, float> m_max_luminance_list; // As given on the command line
-  option_with_source_c<float> m_max_luminance; // For this very track
+  std::map<int64_t, double> m_max_luminance_list; // As given on the command line
+  option_with_source_c<double> m_max_luminance; // For this very track
 
-  std::map<int64_t, float> m_min_luminance_list; // As given on the command line
-  option_with_source_c<float> m_min_luminance; // For this very track
+  std::map<int64_t, double> m_min_luminance_list; // As given on the command line
+  option_with_source_c<double> m_min_luminance; // For this very track
 
   std::map<int64_t, uint64_t> m_projection_type_list; // As given on the command line
   option_with_source_c<uint64_t> m_projection_type; // For this very track

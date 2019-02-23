@@ -1415,7 +1415,7 @@ ogm_v_mscomp_demuxer_c::initialize() {
   codec              = codec_c::look_up(get_codec());
 
   if (0 > g_video_fps)
-    g_video_fps = 10000000.0 / (float)get_uint64_le(&sth->time_unit);
+    g_video_fps = 10000000.0 / get_uint64_le(&sth->time_unit);
 
   default_duration = 100 * get_uint64_le(&sth->time_unit);
 }

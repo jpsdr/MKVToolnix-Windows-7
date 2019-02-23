@@ -58,7 +58,7 @@ vobbtn_packetizer_c::process(packet_cptr packet) {
   uint32_t vobu_start = get_uint32_be(packet->data->get_buffer() + 0x0d);
   uint32_t vobu_end   = get_uint32_be(packet->data->get_buffer() + 0x11);
 
-  packet->duration = (int64_t)(100000.0 * (float)(vobu_end - vobu_start) / 9);
+  packet->duration = (int64_t)(100000.0 * (vobu_end - vobu_start) / 9);
   if (-1 == packet->timestamp) {
     packet->timestamp     = m_previous_timestamp;
     m_previous_timestamp += packet->duration;

@@ -66,13 +66,13 @@ FancyTab::fadeOut() {
   m_animator.start();
 }
 
-float
+double
 FancyTab::fader() {
   return m_fader;
 }
 
 void
-FancyTab::setFader(float value) {
+FancyTab::setFader(double value) {
   m_fader = value;
   m_tabbar->update();
 }

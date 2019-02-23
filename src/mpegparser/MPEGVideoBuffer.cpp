@@ -136,47 +136,47 @@ void ParseSequenceHeader(MPEGChunk* chunk, MPEG2SequenceHeader & hdr){
   pos+=2;
   switch(pos[0] & 0xF0){
     case 0x10:
-      hdr.aspectRatio = 1.0f;
+      hdr.aspectRatio = 1.0;
       break;
     case 0x20:
-      hdr.aspectRatio = (4.0f / 3.0f);
+      hdr.aspectRatio = (4.0 / 3.0);
       break;
     case 0x30:
-      hdr.aspectRatio = (16.0f / 9.0f);
+      hdr.aspectRatio = (16.0 / 9.0);
       break;
     case 0x40:
-      hdr.aspectRatio = 2.21f;
+      hdr.aspectRatio = 2.21;
       break;
     default:
-      hdr.aspectRatio = -1.0f;
+      hdr.aspectRatio = -1.0;
   }
   switch(pos[0] & 0x0F){
     case 0x01:
-      hdr.frameOrFieldRate = 24000.0f/1001.0f;//23.976
+      hdr.frameOrFieldRate = 24000.0/1001.0;//23.976
       break;
     case 0x02:
-      hdr.frameOrFieldRate = 24.0f;//24
+      hdr.frameOrFieldRate = 24.0;//24
       break;
     case 0x03:
-      hdr.frameOrFieldRate = 25.0f;//25
+      hdr.frameOrFieldRate = 25.0;//25
       break;
     case 0x04:
-      hdr.frameOrFieldRate = 30000.0f/1001.0f;//29.97
+      hdr.frameOrFieldRate = 30000.0/1001.0;//29.97
       break;
     case 0x05:
-      hdr.frameOrFieldRate = 30.0f;//30
+      hdr.frameOrFieldRate = 30.0;//30
       break;
     case 0x06:
-      hdr.frameOrFieldRate = 50.0f;//50
+      hdr.frameOrFieldRate = 50.0;//50
       break;
     case 0x07:
-      hdr.frameOrFieldRate = 60000.0f / 1001.0f;//59.94
+      hdr.frameOrFieldRate = 60000.0 / 1001.0;//59.94
       break;
     case 0x08:
-      hdr.frameOrFieldRate = 60.0f;//60
+      hdr.frameOrFieldRate = 60.0;//60
       break;
     default:
-      hdr.frameOrFieldRate = 0.0f;
+      hdr.frameOrFieldRate = 0.0;
   }
 
   //Seek to picturecoding extension

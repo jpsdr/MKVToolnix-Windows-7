@@ -865,7 +865,7 @@ parse_arg_max_frame_light(std::string const &s,
 static void
 parse_arg_chroma_coordinates(std::string const &s,
                              track_info_c &ti) {
-  if (!parse_property_to_struct<chroma_coordinates_t, float>(s, ti.m_chroma_coordinates_list))
+  if (!parse_property_to_struct<chroma_coordinates_t, double>(s, ti.m_chroma_coordinates_list))
     mxerror(fmt::format("chromaticity coordinates parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -875,7 +875,7 @@ parse_arg_chroma_coordinates(std::string const &s,
 static void
 parse_arg_white_coordinates(std::string const &s,
                             track_info_c &ti) {
-  if (!parse_property_to_struct<white_colour_coordinates_t, float>(s, ti.m_white_coordinates_list))
+  if (!parse_property_to_struct<white_colour_coordinates_t, double>(s, ti.m_white_coordinates_list))
     mxerror(fmt::format("white colour coordinates parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -885,7 +885,7 @@ parse_arg_white_coordinates(std::string const &s,
 static void
 parse_arg_max_luminance(std::string const &s,
                         track_info_c &ti) {
-  if (!parse_property_to_value<float>(s, ti.m_max_luminance_list))
+  if (!parse_property_to_value<double>(s, ti.m_max_luminance_list))
     mxerror(fmt::format("Max luminance parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -895,7 +895,7 @@ parse_arg_max_luminance(std::string const &s,
 static void
 parse_arg_min_luminance(std::string const &s,
                         track_info_c &ti) {
-  if (!parse_property_to_value<float>(s, ti.m_min_luminance_list))
+  if (!parse_property_to_value<double>(s, ti.m_min_luminance_list))
     mxerror(fmt::format("Min luminance parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 

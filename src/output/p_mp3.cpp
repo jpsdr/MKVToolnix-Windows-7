@@ -170,7 +170,7 @@ mp3_packetizer_c::set_headers() {
     set_codec_id(MKV_A_MP3);
     m_codec_id_set = true;
   }
-  set_audio_sampling_freq((float)m_samples_per_sec);
+  set_audio_sampling_freq(m_samples_per_sec);
   set_audio_channels(m_channels);
 
   generic_packetizer_c::set_headers();

@@ -266,7 +266,7 @@ mpeg1_2_video_packetizer_c::extract_fps(const unsigned char *buffer,
 void
 mpeg1_2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
                                                  int size) {
-  float ar;
+  double ar;
 
   if (display_dimensions_or_aspect_ratio_set())
     return;

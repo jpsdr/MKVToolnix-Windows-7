@@ -44,7 +44,7 @@ ra_packetizer_c::set_headers() {
   std::string codec_id = fmt::format("A_REAL/{0}{1}{2}{3}",
                                       char(m_fourcc >> 24), char((m_fourcc >> 16) & 0xff), char((m_fourcc >> 8) & 0xff), char(m_fourcc & 0xff));
   set_codec_id(balg::to_upper_copy(codec_id));
-  set_audio_sampling_freq((float)m_samples_per_sec);
+  set_audio_sampling_freq(m_samples_per_sec);
   set_audio_channels(m_channels);
   set_audio_bit_depth(m_bits_per_sample);
   set_codec_private(m_ti.m_private_data);

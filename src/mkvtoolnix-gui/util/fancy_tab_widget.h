@@ -41,14 +41,14 @@ class FancyTabBar;
 class FancyTab : public QObject {
   Q_OBJECT;
 
-  Q_PROPERTY(float fader READ fader WRITE setFader)
+  Q_PROPERTY(double fader READ fader WRITE setFader)
 
   friend class FancyTabBar;
 
 private:
   QPropertyAnimation m_animator;
   QWidget *m_tabbar{};
-  float m_fader{};
+  double m_fader{};
 
   QIcon m_icon;
   QString m_text;
@@ -58,8 +58,8 @@ private:
 public:
   FancyTab(QWidget *tabbar);
 
-  float fader();
-  void setFader(float value);
+  double fader();
+  void setFader(double value);
 
   void fadeIn();
   void fadeOut();

@@ -39,7 +39,7 @@ struct real_demuxer_t {
   bool rv_dimensions;
   bool force_keyframe_flag;
   bool cook_audio_fix;
-  float fps;
+  double fps;
 
   real_video_props_t *rvp;
   real_audio_v4_props_t *ra4p;

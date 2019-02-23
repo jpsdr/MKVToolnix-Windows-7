@@ -75,7 +75,7 @@ protected:
   std::string m_hcodec_id;
   memory_cptr m_hcodec_private;
 
-  float m_haudio_sampling_freq, m_haudio_output_sampling_freq;
+  double m_haudio_sampling_freq, m_haudio_output_sampling_freq;
   int m_haudio_channels, m_haudio_bit_depth;
 
   int m_hvideo_interlaced_flag, m_hvideo_pixel_width, m_hvideo_pixel_height, m_hvideo_display_width, m_hvideo_display_height, m_hvideo_display_unit;
@@ -200,11 +200,11 @@ public:
   virtual void set_track_seek_pre_roll(timestamp_c const &seek_pre_roll);
   virtual void set_codec_delay(timestamp_c const &codec_delay);
 
-  virtual void set_audio_sampling_freq(float freq);
-  virtual float get_audio_sampling_freq() const {
+  virtual void set_audio_sampling_freq(double freq);
+  virtual double get_audio_sampling_freq() const {
     return m_haudio_sampling_freq;
   }
-  virtual void set_audio_output_sampling_freq(float freq);
+  virtual void set_audio_output_sampling_freq(double freq);
   virtual void set_audio_channels(int channels);
   virtual void set_audio_bit_depth(int bit_depth);
 
@@ -231,8 +231,8 @@ public:
   virtual void set_video_max_fall(int max_fall, option_source_e source);
   virtual void set_video_chroma_coordinates(chroma_coordinates_t const &coordinates, option_source_e source);
   virtual void set_video_white_colour_coordinates(white_colour_coordinates_t const &coordinates, option_source_e source);
-  virtual void set_video_max_luminance(float max, option_source_e source);
-  virtual void set_video_min_luminance(float min, option_source_e source);
+  virtual void set_video_max_luminance(double max, option_source_e source);
+  virtual void set_video_min_luminance(double min, option_source_e source);
   virtual void set_video_projection_type(uint64_t value, option_source_e source);
   virtual void set_video_projection_private(memory_cptr const &value, option_source_e source);
   virtual void set_video_projection_pose_yaw(double value, option_source_e source);

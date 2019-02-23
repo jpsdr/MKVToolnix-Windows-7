@@ -48,7 +48,7 @@ truehd_packetizer_c::~truehd_packetizer_c() {
 void
 truehd_packetizer_c::set_headers() {
   set_codec_id(m_first_truehd_header.is_truehd() ? MKV_A_TRUEHD : MKV_A_MLP);
-  set_audio_sampling_freq((float)m_first_truehd_header.m_sampling_rate);
+  set_audio_sampling_freq(m_first_truehd_header.m_sampling_rate);
   set_audio_channels(m_first_truehd_header.m_channels);
 
   generic_packetizer_c::set_headers();

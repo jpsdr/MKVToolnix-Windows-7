@@ -118,7 +118,7 @@ bool g_write_date                                             = true;
 double g_timestamp_scale                                      = TIMESTAMP_SCALE;
 timestamp_scale_mode_e g_timestamp_scale_mode                 = timestamp_scale_mode_e{TIMESTAMP_SCALE_MODE_NORMAL};
 
-float g_video_fps                                             = -1.0;
+double g_video_fps                                            = -1.0;
 int g_default_tracks[3]                                       = { 0, 0, 0, };
 int g_default_tracks_priority[3]                              = { 0, 0, 0, };
 

@@ -164,7 +164,7 @@ extern bool g_segment_title_set;
 extern std::string g_segment_filename, g_previous_segment_filename, g_next_segment_filename;
 extern std::string g_default_language;
 
-extern float g_video_fps;
+extern double g_video_fps;
 extern generic_packetizer_c *g_video_packetizer;
 
 extern bool g_write_cues, g_cue_writing_requested, g_write_date;

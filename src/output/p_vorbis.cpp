@@ -79,7 +79,7 @@ vorbis_packetizer_c::set_headers() {
 
   set_codec_private(lace_memory_xiph(m_headers));
 
-  set_audio_sampling_freq((float)m_vi.rate);
+  set_audio_sampling_freq(m_vi.rate);
   set_audio_channels(m_vi.channels);
 
   generic_packetizer_c::set_headers();

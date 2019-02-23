@@ -63,7 +63,7 @@ theora_parse_identification_header(unsigned char *buffer,
   header.pf = bc.get_bits(2);
 
   if ((0 != header.parn) && (0 != header.pard)) {
-    if (((float)header.fmbw / (float)header.fmbh) < ((float)header.parn / (float)header.pard)) {
+    if ((static_cast<double>(header.fmbw) / header.fmbh) < (static_cast<double>(header.parn) / header.pard)) {
       header.display_width  = std::llround(static_cast<double>(header.fmbw) * header.parn / header.pard);
       header.display_height = header.fmbh;
     } else {

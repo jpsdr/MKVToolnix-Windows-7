@@ -42,7 +42,7 @@ void
 wavpack_packetizer_c::set_headers() {
   set_codec_id(MKV_A_WAVPACK4);
   set_codec_private(m_ti.m_private_data);
-  set_audio_sampling_freq((float)m_sample_rate);
+  set_audio_sampling_freq(m_sample_rate);
   set_audio_channels(m_channels);
   set_audio_bit_depth(m_bits_per_sample);
   set_track_default_duration(m_samples_per_block * 1000000000 / m_sample_rate);

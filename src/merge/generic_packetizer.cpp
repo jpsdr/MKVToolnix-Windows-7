@@ -515,14 +515,14 @@ generic_packetizer_c::set_codec_delay(timestamp_c const &codec_delay) {
 }
 
 void
-generic_packetizer_c::set_audio_sampling_freq(float freq) {
+generic_packetizer_c::set_audio_sampling_freq(double freq) {
   m_haudio_sampling_freq = freq;
   if (m_track_entry)
     GetChild<KaxAudioSamplingFreq>(GetChild<KaxTrackAudio>(m_track_entry)).SetValue(m_haudio_sampling_freq);
 }
 
 void
-generic_packetizer_c::set_audio_output_sampling_freq(float freq) {
+generic_packetizer_c::set_audio_output_sampling_freq(double freq) {
   m_haudio_output_sampling_freq = freq;
   if (m_track_entry)
     GetChild<KaxAudioOutputSamplingFreq>(GetChild<KaxTrackAudio>(m_track_entry)).SetValue(m_haudio_output_sampling_freq);
@@ -844,7 +844,7 @@ generic_packetizer_c::set_video_white_colour_coordinates(white_colour_coordinate
 }
 
 void
-generic_packetizer_c::set_video_max_luminance(float luminance,
+generic_packetizer_c::set_video_max_luminance(double luminance,
                                               option_source_e source) {
   m_ti.m_max_luminance.set(luminance, source);
   if (   m_track_entry
@@ -857,7 +857,7 @@ generic_packetizer_c::set_video_max_luminance(float luminance,
 }
 
 void
-generic_packetizer_c::set_video_min_luminance(float luminance,
+generic_packetizer_c::set_video_min_luminance(double luminance,
                                               option_source_e source) {
   m_ti.m_min_luminance.set(luminance, source);
   if (m_track_entry && (luminance >= 0) && (luminance <= 999.9999)) {
@@ -1050,12 +1050,12 @@ generic_packetizer_c::set_headers() {
 
         } else {
           if (!m_ti.m_aspect_ratio_given)
-            m_ti.m_aspect_ratio = (float)m_hvideo_pixel_width                       / (float)m_hvideo_pixel_height;
+            m_ti.m_aspect_ratio = static_cast<double>(m_hvideo_pixel_width)                       / m_hvideo_pixel_height;
 
           else if (m_ti.m_aspect_ratio_is_factor)
-            m_ti.m_aspect_ratio = (float)m_hvideo_pixel_width * m_ti.m_aspect_ratio / (float)m_hvideo_pixel_height;
+            m_ti.m_aspect_ratio = static_cast<double>(m_hvideo_pixel_width) * m_ti.m_aspect_ratio / m_hvideo_pixel_height;
 
-          if (m_ti.m_aspect_ratio > ((float)m_hvideo_pixel_width / (float)m_hvideo_pixel_height)) {
+          if (m_ti.m_aspect_ratio > (static_cast<double>(m_hvideo_pixel_width) / m_hvideo_pixel_height)) {
             m_hvideo_display_width  = std::llround(m_hvideo_pixel_height * m_ti.m_aspect_ratio);
             m_hvideo_display_height = m_hvideo_pixel_height;
 
