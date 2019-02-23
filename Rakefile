@@ -149,7 +149,6 @@ def setup_globals
   cxxflags                += " -Wno-maybe-uninitialized -Wlogical-op"                                    if is_gcc?
   cxxflags                += " -Wshadow -Qunused-arguments -Wno-self-assign -Wno-mismatched-tags"        if is_clang?
   cxxflags                += " -Wno-inconsistent-missing-override -Wno-potentially-evaluated-expression" if is_clang?
-  cxxflags                += " -Wdouble-promotion"                                                       if check_compiler_version("gcc", "4.6.0") || check_compiler_version("clang", "3.8")
   cxxflags                += " -Wmisleading-indentation -Wduplicated-cond"                               if check_compiler_version("gcc", "6.0.0")
   cxxflags                += " -Wshadow-compatible-local -Wduplicated-branches"                          if check_compiler_version("gcc", "7.0.0")
   cxxflags                += " -fstack-protector"                                                        if is_gcc? && !check_compiler_version("gcc", "4.9.0")
