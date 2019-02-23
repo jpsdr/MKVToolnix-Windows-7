@@ -1618,9 +1618,9 @@ qtmp4_reader_c::create_bitmap_info_header(qtmp4_demuxer_c &dmx,
                                           const char *fourcc,
                                           size_t extra_size,
                                           const void *extra_data) {
-  int full_size           = sizeof(alBITMAPINFOHEADER) + extra_size;
-  memory_cptr bih_p       = memory_c::alloc(full_size);
-  alBITMAPINFOHEADER *bih = (alBITMAPINFOHEADER *)bih_p->get_buffer();
+  int full_size = sizeof(alBITMAPINFOHEADER) + extra_size;
+  auto bih_p    = memory_c::alloc(full_size);
+  auto bih      = reinterpret_cast<alBITMAPINFOHEADER *>(bih_p->get_buffer());
 
   memset(bih, 0, full_size);
   put_uint32_le(&bih->bi_size,       full_size);
@@ -2138,8 +2138,8 @@ qtmp4_demuxer_c::calculate_timestamps_constant_sample_size() {
   for (auto const &chunk : chunk_table) {
     auto frame_offset = chunk_index < num_frame_offsets ? frame_offset_table[chunk_index] : 0;
 
-    timestamps.push_back(to_nsecs(static_cast<uint64_t>(chunk.samples) * duration + frame_offset));
-    durations.push_back(to_nsecs(static_cast<uint64_t>(chunk.size)    * duration));
+    timestamps.push_back(to_nsecs(static_cast<uint64_t>(chunk.samples) * track_duration + frame_offset));
+    durations.push_back(to_nsecs(static_cast<uint64_t>(chunk.size)     * track_duration));
     frame_indices.push_back(chunk_index);
 
     ++chunk_index;
@@ -2288,7 +2288,7 @@ qtmp4_demuxer_c::update_tables() {
   if (sample_table.empty()) {
     // constant sample size
     if ((1 == durmap_table.size()) || ((2 == durmap_table.size()) && (1 == durmap_table[1].number)))
-      duration = durmap_table[0].duration;
+      track_duration = durmap_table[0].duration;
     else
       mxerror(Y("Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"));
 
@@ -3199,7 +3199,7 @@ qtmp4_demuxer_c::derive_track_params_from_vorbis_private_data() {
   ogg_headers[0].b_o_s    = 1;
   ogg_headers[1].packetno = 1;
   ogg_headers[2].packetno = 2;
-  auto ok                 = false;
+  auto derived            = false;
 
   vorbis_info vi;
   vorbis_comment vc;
@@ -3215,7 +3215,7 @@ qtmp4_demuxer_c::derive_track_params_from_vorbis_private_data() {
     a_channels   = vi.channels;
     a_samplerate = vi.rate;
     a_bitdepth   = 0;
-    ok           = true;
+    derived      = true;
 
   } catch (bool) {
   }
@@ -3223,7 +3223,7 @@ qtmp4_demuxer_c::derive_track_params_from_vorbis_private_data() {
   vorbis_info_clear(&vi);
   vorbis_comment_clear(&vc);
 
-  return ok;
+  return derived;
 }
 
 void

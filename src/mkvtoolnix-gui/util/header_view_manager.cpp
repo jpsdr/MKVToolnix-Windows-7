@@ -253,8 +253,8 @@ HeaderViewManager::showContextMenu(QPoint const &pos) {
   connect(action, &QAction::triggered, this, &HeaderViewManager::resetColumns);
 
   for (int column = 1, columnCount = headerView->count(); column < columnCount; ++column) {
-    auto action = new QAction{menu};
-    auto text   = headerView->model()->headerData(column, Qt::Horizontal, Util::HiddenDescriptionRole).toString();
+    action    = new QAction{menu};
+    auto text = headerView->model()->headerData(column, Qt::Horizontal, Util::HiddenDescriptionRole).toString();
 
     if (text.isEmpty())
       text = headerView->model()->headerData(column, Qt::Horizontal, Qt::DisplayRole).toString();

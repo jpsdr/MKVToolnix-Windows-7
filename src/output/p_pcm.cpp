@@ -97,6 +97,13 @@ pcm_packetizer_c::process(packet_cptr packet) {
 
   m_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
+  flush_packets();
+
+  return FILE_STATUS_MOREDATA;
+}
+
+void
+pcm_packetizer_c::flush_packets() {
   while (m_buffer.get_size() >= m_packet_size) {
     auto packet = std::make_shared<packet_t>(memory_c::clone(m_buffer.get_buffer(), m_packet_size), m_samples_output * m_s2ts, m_samples_per_packet * m_s2ts);
 
@@ -107,8 +114,6 @@ pcm_packetizer_c::process(packet_cptr packet) {
     m_buffer.remove(m_packet_size);
     m_samples_output += m_samples_per_packet;
   }
-
-  return FILE_STATUS_MOREDATA;
 }
 
 int

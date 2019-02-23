@@ -145,6 +145,7 @@ def setup_globals
   cxxflags                 = "#{cflags_common} #{c(:STD_CXX)}"
   cxxflags                += " -Woverloaded-virtual" if c(:COMPILER_TYPE) != "gcc" # too many false positives in EbmlElement.h on g++ 8
   cxxflags                += " -Wnon-virtual-dtor -Wextra -Wno-missing-field-initializers"
+  cxxflags                += " -Wshadow -Wunused -Wpedantic -Wno-extra-semi"
   cxxflags                += " -Wno-maybe-uninitialized -Wlogical-op"                                    if is_gcc?
   cxxflags                += " -Qunused-arguments -Wno-self-assign -Wno-mismatched-tags"                 if is_clang?
   cxxflags                += " -Wno-inconsistent-missing-override -Wno-potentially-evaluated-expression" if is_clang?

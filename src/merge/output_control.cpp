@@ -889,8 +889,6 @@ render_attachments(mm_io_c &out) {
 */
 void
 check_append_mapping() {
-  std::vector<filelist_cptr>::iterator src_file, dst_file;
-
   for (auto &amap : g_append_mapping) {
     // Check each mapping entry for validity.
 
@@ -900,7 +898,7 @@ check_append_mapping() {
 
     // 2. Is the "source" file in "append mode", meaning does its file name
     // start with a '+'?
-    src_file = g_files.begin() + amap.src_file_id;
+    auto src_file = g_files.begin() + amap.src_file_id;
     if (!(*src_file)->appending)
       mxerror(fmt::format(Y("The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"), amap.src_file_id, (*src_file)->name));
 
@@ -950,8 +948,8 @@ check_append_mapping() {
 
   // Some more checks.
   for (auto &amap : g_append_mapping) {
-    src_file = g_files.begin() + amap.src_file_id;
-    dst_file = g_files.begin() + amap.dst_file_id;
+    auto src_file = g_files.begin() + amap.src_file_id;
+    auto dst_file = g_files.begin() + amap.dst_file_id;
 
     // 5. Does the "source" file have a track with the src_track_id, and is
     // that track selected for copying?
@@ -991,8 +989,8 @@ check_append_mapping() {
   // Finally see if the packetizers can be connected and connect them if they
   // can.
   for (auto &amap : g_append_mapping) {
-    src_file      = g_files.begin() + amap.src_file_id;
-    dst_file      = g_files.begin() + amap.dst_file_id;
+    auto src_file = g_files.begin() + amap.src_file_id;
+    auto dst_file = g_files.begin() + amap.dst_file_id;
 
     auto src_ptzr = (*src_file)->reader->find_packetizer_by_id(amap.src_track_id);
     auto dst_ptzr = (*dst_file)->reader->find_packetizer_by_id(amap.dst_track_id);
@@ -1785,9 +1783,9 @@ append_track(packetizer_t &ptzr,
       });
 
       if (g_append_mapping.end() != cmp_amap) {
-        auto gptzr = dst_file.reader->find_packetizer_by_id(cmp_amap->dst_track_id);
-        if (gptzr)
-          timestamp_adjustment = gptzr->m_max_timestamp_seen;
+        auto gptzr_adjustment = dst_file.reader->find_packetizer_by_id(cmp_amap->dst_track_id);
+        if (gptzr_adjustment)
+          timestamp_adjustment = gptzr_adjustment->m_max_timestamp_seen;
       }
     }
   }

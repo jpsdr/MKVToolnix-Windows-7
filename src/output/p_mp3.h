@@ -49,4 +49,5 @@ private:
   virtual memory_cptr get_mp3_packet(mp3_header_t *mp3header);
 
   virtual void handle_garbage(int64_t bytes);
+  virtual void flush_packets();
 };

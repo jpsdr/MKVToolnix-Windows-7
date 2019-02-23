@@ -868,8 +868,8 @@ PreferencesDialog::save() {
 
   // Run programs page:
   m_cfg.m_runProgramConfigurations.clear();
-  for (auto idx = 0, numTabs = ui->twJobsPrograms->count(); idx < numTabs; ++idx) {
-    auto widget = static_cast<PrefsRunProgramWidget *>(ui->twJobsPrograms->widget(idx));
+  for (auto tabIdx = 0, numTabs = ui->twJobsPrograms->count(); tabIdx < numTabs; ++tabIdx) {
+    auto widget = static_cast<PrefsRunProgramWidget *>(ui->twJobsPrograms->widget(tabIdx));
     auto cfg    = widget->config();
 
     if (!cfg->m_active || cfg->isValid())

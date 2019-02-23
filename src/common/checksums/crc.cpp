@@ -87,11 +87,11 @@ crc_base_c::get_result()
            : result_length == 2 ? mtx::bytes::swap_16(result)
            :                      result;
 
-  unsigned char buffer[result_length];
+  auto buffer = memory_c::alloc(result_length);
 
-  put_uint_be(buffer, result, result_length);
+  put_uint_be(buffer->get_buffer(), result, result_length);
 
-  return memory_c::clone(buffer, result_length);
+  return buffer;
 }
 
 uint64_t

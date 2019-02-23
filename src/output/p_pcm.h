@@ -50,6 +50,7 @@ public:
 protected:
   virtual int process_packaged(packet_cptr const &packet);
   virtual void flush_impl();
+  virtual void flush_packets();
   virtual int64_t size_to_samples(int64_t size) const;
   virtual int64_t samples_to_size(int64_t size) const;
   virtual void byte_swap_data(memory_c &data) const;

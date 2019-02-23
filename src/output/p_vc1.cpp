@@ -42,9 +42,9 @@ vc1_video_packetizer_c::vc1_video_packetizer_c(generic_reader_c *n_reader, track
 
 void
 vc1_video_packetizer_c::set_headers() {
-  int priv_size           = sizeof(alBITMAPINFOHEADER) + (m_raw_headers ? m_raw_headers->get_size() + 1 : 0);
-  memory_cptr buf         = memory_c::alloc(priv_size);
-  alBITMAPINFOHEADER *bih = (alBITMAPINFOHEADER *)buf->get_buffer();
+  int priv_size = sizeof(alBITMAPINFOHEADER) + (m_raw_headers ? m_raw_headers->get_size() + 1 : 0);
+  auto buf      = memory_c::alloc(priv_size);
+  auto bih      = reinterpret_cast<alBITMAPINFOHEADER *>(buf->get_buffer());
 
   memset(bih, 0, priv_size);
   memcpy(&bih->bi_compression, "WVC1", 4);

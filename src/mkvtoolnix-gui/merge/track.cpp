@@ -189,8 +189,8 @@ Track::setDefaults(QString const &languageDerivedFromFileName) {
     m_muxThis = true;
 
   else {
-    auto language = m_language.isEmpty() ? Q("und") : m_language;
-    m_muxThis     = settings.m_enableMuxingTracksByTheseLanguages.contains(language);
+    language  = m_language.isEmpty() ? Q("und") : m_language;
+    m_muxThis = settings.m_enableMuxingTracksByTheseLanguages.contains(language);
   }
 }
 

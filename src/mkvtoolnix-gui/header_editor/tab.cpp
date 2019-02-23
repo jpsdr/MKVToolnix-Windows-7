@@ -549,15 +549,15 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       parentPagesByCallback[&KaxTrackAudio::ClassInfos]              = page;
     }
 
-    for (auto const &element : propertyElements) {
-      auto parentMasterCallbacks = element.m_sub_sub_sub_master_callbacks ? element.m_sub_sub_sub_master_callbacks
-                                 : element.m_sub_sub_master_callbacks     ? element.m_sub_sub_master_callbacks
-                                 :                                          element.m_sub_master_callbacks;
+    for (auto const &propElement : propertyElements) {
+      auto parentMasterCallbacks = propElement.m_sub_sub_sub_master_callbacks ? propElement.m_sub_sub_sub_master_callbacks
+                                 : propElement.m_sub_sub_master_callbacks     ? propElement.m_sub_sub_master_callbacks
+                                 :                                              propElement.m_sub_master_callbacks;
       auto parentPage            = parentPagesByCallback[parentMasterCallbacks];
       auto parentMaster          = parentMastersByCallback[parentMasterCallbacks];
 
       if (parentPage && parentMaster)
-        createValuePage(*parentPage, *parentMaster, element);
+        createValuePage(*parentPage, *parentMaster, propElement);
     }
   }
 }

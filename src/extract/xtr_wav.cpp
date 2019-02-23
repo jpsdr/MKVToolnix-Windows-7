@@ -226,7 +226,7 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
 
     put_uint32_le(&wv_header[4], block_size + 24);  // ck_size
     m_out->write(wv_header, 32);
-    flags.push_back(*(uint32_t *)&mybuffer[4]);
+    flags.push_back(get_uint32_le(&mybuffer[4]));
     mybuffer += 16;
     m_out->write(mybuffer, block_size);
     mybuffer  += block_size;
@@ -237,7 +237,7 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
       put_uint32_le(&wv_header[4], block_size + 24);
       m_out->write(wv_header, 32);
 
-      flags.push_back(*(uint32_t *)mybuffer);
+      flags.push_back(get_uint32_le(mybuffer));
       mybuffer += 12;
       m_out->write(mybuffer, block_size);
 

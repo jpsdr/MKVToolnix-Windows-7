@@ -180,11 +180,17 @@ int
 mp3_packetizer_c::process(packet_cptr packet) {
   m_timestamp_calculator.add_timestamp(packet);
   m_discard_padding.add_maybe(packet->discard_padding);
+  m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
+  flush_packets();
+
+  return FILE_STATUS_MOREDATA;
+}
+
+void
+mp3_packetizer_c::flush_packets() {
   mp3_header_t mp3header;
   memory_cptr mp3_packet;
-
-  m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   while ((mp3_packet = get_mp3_packet(&mp3header))) {
     auto new_timestamp = m_timestamp_calculator.get_next_timestamp(m_samples_per_frame);
@@ -198,8 +204,6 @@ mp3_packetizer_c::process(packet_cptr packet) {
     m_first_packet = false;
     m_packet_extensions.clear();
   }
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

@@ -693,9 +693,9 @@ Tab::setInputControlValues(Track *track) {
   auto additionalCharacterSets = QSet<QString>{};
 
   for (auto const &sourceFile : m_config.m_files)
-    for (auto const &track : sourceFile->m_tracks) {
-      additionalLanguages     << track->m_language;
-      additionalCharacterSets << track->m_characterSet;
+    for (auto const &sourceTrack : sourceFile->m_tracks) {
+      additionalLanguages     << sourceTrack->m_language;
+      additionalCharacterSets << sourceTrack->m_characterSet;
     }
 
   ui->trackLanguage->setAdditionalItems(additionalLanguages.toList()).reInitializeIfNecessary();
@@ -1941,8 +1941,8 @@ Tab::onPreviewSubtitleCharacterSet() {
   auto additionalCharacterSets = QSet<QString>{};
 
   for (auto const &sourceFile : m_config.m_files)
-    for (auto const &track : sourceFile->m_tracks)
-      additionalCharacterSets << track->m_characterSet;
+    for (auto const &sourceTrack : sourceFile->m_tracks)
+      additionalCharacterSets << sourceTrack->m_characterSet;
 
   auto dlg = new SelectCharacterSetDialog{this, track->m_file->m_fileName, track->m_characterSet, additionalCharacterSets.toList()};
   dlg->setUserData(reinterpret_cast<qulonglong>(track));

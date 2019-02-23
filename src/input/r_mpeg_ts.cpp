@@ -1842,9 +1842,9 @@ reader_c::parse_pes(track_c &track) {
       return;
     }
 
-    has_pts      = (pes_header->get_pts_dts_flags() & 0x02) == 0x02; // 10 and 11 mean PTS is present
-    has_dts      = (pes_header->get_pts_dts_flags() & 0x01) == 0x01; // 01 and 11 mean DTS is present
-    auto to_skip = offsetof(pes_header_t, pes_header_data_length) + pes_header->pes_header_data_length + 1;
+    has_pts = (pes_header->get_pts_dts_flags() & 0x02) == 0x02; // 10 and 11 mean PTS is present
+    has_dts = (pes_header->get_pts_dts_flags() & 0x01) == 0x01; // 01 and 11 mean DTS is present
+    to_skip = offsetof(pes_header_t, pes_header_data_length) + pes_header->pes_header_data_length + 1;
 
     if (pes_size < to_skip) {
       mxdebug_if(m_debug_packet, fmt::format("parse_pes: error: PES payload ({0}) too small for PES header + header data including PTS/DTS ({1})\n", pes_size, to_skip));

@@ -917,8 +917,8 @@ header_c::to_string()
 
 int
 header_c::read_object_type() {
-  int object_type = m_bc->get_bits(5);
-  return 31 == object_type ? 32 + m_bc->get_bits(6) : object_type;
+  auto ot = m_bc->get_bits(5);
+  return 31 == ot ? 32 + m_bc->get_bits(6) : ot;
 }
 
 int
