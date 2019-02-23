@@ -144,11 +144,17 @@ def setup_globals
 
   cxxflags                 = "#{cflags_common} #{c(:STD_CXX)}"
   cxxflags                += " -Woverloaded-virtual" if c(:COMPILER_TYPE) != "gcc" # too many false positives in EbmlElement.h on g++ 8
-  cxxflags                += " -Wnon-virtual-dtor -Wextra -Wno-missing-field-initializers #{c(:WSHADOW_COMPATIBLE_LOCAL)} #{c(:WNO_MAYBE_UNINITIALIZED)}"
+  cxxflags                += " -Wnon-virtual-dtor -Wextra -Wno-missing-field-initializers"
+  cxxflags                += " -Wno-maybe-uninitialized -Wlogical-op"                                    if is_gcc?
+  cxxflags                += " -Qunused-arguments -Wno-self-assign -Wno-mismatched-tags"                 if is_clang?
+  cxxflags                += " -Wno-inconsistent-missing-override -Wno-potentially-evaluated-expression" if is_clang?
+  cxxflags                += " -Wshadow-compatible-local"                                                if check_compiler_version("gcc", "7.0.0")
+  cxxflags                += " -fstack-protector"                                                        if is_gcc? && !check_compiler_version("gcc", "4.9.0")
+  cxxflags                += " -fstack-protector-strong"                                                 if check_compiler_version("gcc", "4.9.0") && check_compiler_version("clang", "3.5.0")
   cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:USER_CXXFLAGS)}"
 
   ldflags                  = ""
-  ldflags                 += " -fuse-ld=lld"                            if (c(:COMPILER_TYPE) == "clang") && !c(:LLVM_LLD).empty?
+  ldflags                 += " -fuse-ld=lld"                            if is_clang? && !c(:LLVM_LLD).empty?
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
   ldflags                 += " -Llib/fmt/src"                           if c?(:FMT_INTERNAL)
   ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"

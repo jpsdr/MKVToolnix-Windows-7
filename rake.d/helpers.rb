@@ -226,6 +226,23 @@ def process_erb t
   File.open(t.name, 'w') { |file| file.puts(ERB.new(template).result) }
 end
 
+def is_clang?
+  c(:COMPILER_TYPE) == "clang"
+end
+
+def is_gcc?
+  c(:COMPILER_TYPE) == "gcc"
+end
+
+def check_compiler_version compiler, required_version
+  return false if (c(:COMPILER_TYPE) != compiler)
+  return check_version(required_version, c(:COMPILER_VERSION))
+end
+
+def check_version required, actual
+  return Gem::Version.new(required) <= Gem::Version.new(actual)
+end
+
 class Rake::Task
   def mo_all_prerequisites
     todo   = [name]
