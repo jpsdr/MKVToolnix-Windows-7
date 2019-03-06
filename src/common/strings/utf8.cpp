@@ -49,7 +49,10 @@ std::wstring
 to_wide(const std::string &source) {
   std::wstring destination;
 
-  ::utf8::utf8to32(source.begin(), source.end(), back_inserter(destination));
+  if (4 == sizeof(wchar_t))
+    ::utf8::utf8to32(source.begin(), source.end(), back_inserter(destination));
+  else
+    ::utf8::utf8to16(source.begin(), source.end(), back_inserter(destination));
 
   return destination;
 }
@@ -58,7 +61,10 @@ std::string
 to_utf8(const std::wstring &source) {
   std::string destination;
 
-  ::utf8::utf32to8(source.begin(), source.end(), back_inserter(destination));
+  if (4 == sizeof(wchar_t))
+    ::utf8::utf32to8(source.begin(), source.end(), back_inserter(destination));
+  else
+    ::utf8::utf16to8(source.begin(), source.end(), back_inserter(destination));
 
   return destination;
 }

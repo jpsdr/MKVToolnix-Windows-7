@@ -12,6 +12,7 @@
 
 ## Bug fixes
 
+* all: fixed handling of Unicode code points > U+FFFF. Fixes #2516.
 * MKVToolNix GUI: the portable mode wasn't detected correctly when the current
   working directory the GUI was started from wasn't the directory the GUI's
   executable file was located it. Examples for when this is the case are
