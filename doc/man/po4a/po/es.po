@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2019-02-05 15:03+0100\n"
-"PO-Revision-Date: 2018-09-24 19:54+0000\n"
+"PO-Revision-Date: 2019-02-09 17:12+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
@@ -38,7 +38,7 @@ msgstr "31.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2019-01-05"
-msgstr ""
+msgstr "2019-01-05"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -338,16 +338,14 @@ msgstr "Escribe todos los mensajes al archivo <parameter>nombre-archivo</paramet
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:136
 #: doc/man/mkvmerge.xml:2098
-#, fuzzy
-#| msgid "<option>--no-cues</option>"
 msgid "<option>--flush-on-close</option>"
-msgstr "<option>--no-cues</option>"
+msgstr "<option>--flush-on-close</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:139
 #: doc/man/mkvmerge.xml:2101
 msgid "Tells the program to flush all data cached in memory to storage when closing files opened for writing.  This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers.  The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting.  See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons."
-msgstr ""
+msgstr "Le dice al programa que libere de datos la memoria cache cuando se cierren los archivos para su escritura. Esto se puede usar para evitar la pérdida de datos en cortes de energía o para evitar ciertos problemas en el sistema operativo o los controladores.  La desventaja es que el multiplexado tardará más, ya que mkvmerge deberá esperar hasta que todos los datos se hayan escrito en el almacenamiento antes de salir. Ver falos #2469 y #2480 en el servidor de MKVToolNix para analizar los pros y los contras en profundidad. "
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:148
@@ -370,10 +368,8 @@ msgstr "Fuerza la traducción al <parameter>código</parameter> de idioma que se
 #: doc/man/mkvinfo.xml:163
 #: doc/man/mkvmerge.xml:2121
 #: doc/man/mkvpropedit.xml:409
-#, fuzzy
-#| msgid "<option>--no-global-tags</option>"
 msgid "<option>--abort-on-warnings</option>"
-msgstr "<option>--no-global-tags</option>"
+msgstr "<option>--abort-on-warnings</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:162
@@ -381,7 +377,7 @@ msgstr "<option>--no-global-tags</option>"
 #: doc/man/mkvmerge.xml:2124
 #: doc/man/mkvpropedit.xml:412
 msgid "Tells the program to abort after the first warning is emitted. The program's exit code will be 1."
-msgstr ""
+msgstr "Le dice al programa que cancele después de emitir la primera advertencia. El código de salida del programa será 1."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:168
@@ -804,10 +800,9 @@ msgstr "Extrayendo tanto capítulos como etiquetas en sus respectivos formatos &
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:531
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge movie.mkv chapters movie-chapters.xml tags movie-tags.xml"
+#, no-wrap
 msgid "$ mkvextract movie.mkv chapters movie-chapters.xml tags movie-tags.xml"
-msgstr "$ mkvmerge pelicula.mkv chapters capítulos-película.xml tags etiquetas-película.xml"
+msgstr "$ mkvextract pelicula.mkv chapters capitulos-pelicula.xml tags etiquetas-pelicula.xml"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:534
@@ -816,10 +811,9 @@ msgstr "Extrayendo un par de pistas y sus respectivos códigos de tiempo a la ve
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:537
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:director's comments.aac\" timestamps_v2 \"0:timestamps video.txt\" \"1:timestamps main audio.txt\" \"2:timestamps director's comments.txt\""
+#, no-wrap
 msgid "$ mkvextract \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:director's comments.aac\" timestamps_v2 \"0:timestamps video.txt\" \"1:timestamps main audio.txt\" \"2:timestamps director's comments.txt\""
-msgstr "$ mkvmerge \"Otra película.mkv\" tracks 0:video.h265 \"1:audio principal.aac\" \"2:comentarios del director.aac\" timestamps_v2 \"0:códigos tiempo video.txt\" \"1:códigos tiempo audio principal.txt\" \"2:códigos tiempo comentarios del director.txt\""
+msgstr "$ mkvextract \"Otra pelicula.mkv\" tracks 0:video.h265 \"1:audio principal.aac\" \"2:comentarios del director.aac\" timestamps_v2 \"0:marcas tiempo del video.txt\" \"1:marcas de tiempo del audio principal.txt\" \"2:marcas de tiempo de los comentarios del director.txt\""
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:540
@@ -828,10 +822,9 @@ msgstr "Extrayendo capítulos en el formato Ogg/OGM y recodificando el texto de 
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:543
-#, fuzzy, no-wrap
-#| msgid "$ mkvmerge \"My Movie.mkv\" chapters --simple \"My Chapters.txt\" tracks -c MS-ANSI \"2:My Subtitles.srt\""
+#, no-wrap
 msgid "$ mkvextract \"My Movie.mkv\" chapters --simple \"My Chapters.txt\" tracks -c MS-ANSI \"2:My Subtitles.srt\""
-msgstr "$ mkvmerge \"Mi película.mkv\" chapters --simple \"Mis capítulos.txt\" tracks -c MS-ANSI \"2:Mis subtítulos.srt\""
+msgstr "$ mkvextract \"Mi pelicula.mkv\" chapters --simple \"Mis capitulos.txt\" tracks -c MS-ANSI \"2:Mis subtitulos.srt\""
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:547
