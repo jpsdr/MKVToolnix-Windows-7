@@ -73,7 +73,7 @@ public:
   virtual result_e process_file();
   void abort();
 
-  std::string create_element_text(std::string const &text, boost::optional<int64_t> position, boost::optional<int64_t> size);
+  std::string create_element_text(std::string const &text, boost::optional<int64_t> position, boost::optional<int64_t> size, boost::optional<int64_t> data_size);
   std::string create_unknown_element_text(libebml::EbmlElement &e);
   std::string create_known_element_but_not_allowed_here_text(libebml::EbmlElement &e);
   std::string create_hexdump(unsigned char const *buf, int size);
@@ -103,7 +103,7 @@ public:
   void run_generic_post_processors(libebml::EbmlElement &e);
 
   virtual void ui_show_error(std::string const &error);
-  virtual void ui_show_element_info(int level, std::string const &text, boost::optional<int64_t> position, boost::optional<int64_t> size);
+  virtual void ui_show_element_info(int level, std::string const &text, boost::optional<int64_t> position, boost::optional<int64_t> size, boost::optional<int64_t> data_size);
   virtual void ui_show_element(libebml::EbmlElement &e);
   virtual void ui_show_progress(int percentage, std::string const &text);
 

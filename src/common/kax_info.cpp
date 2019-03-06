@@ -177,11 +177,12 @@ void
 kax_info_c::ui_show_element_info(int level,
                                  std::string const &text,
                                  boost::optional<int64_t> position,
-                                 boost::optional<int64_t> size) {
+                                 boost::optional<int64_t> size,
+                                 boost::optional<int64_t> data_size) {
   std::string level_buffer(level, ' ');
   level_buffer[0] = '|';
 
-  p_func()->m_out->puts(fmt::format("{0}+ {1}\n", level_buffer, create_element_text(text, position, size)));
+  p_func()->m_out->puts(fmt::format("{0}+ {1}\n", level_buffer, create_element_text(text, position, size, data_size)));
 }
 
 void
@@ -223,7 +224,10 @@ kax_info_c::show_element(EbmlElement *l,
                          size               ? *size
                        : !l                 ? boost::optional<int64_t>{}
                        : !l->IsFiniteSize() ? -2
-                       :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()));
+                       :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()),
+                         !l                 ? boost::optional<int64_t>{}
+                       : !l->IsFiniteSize() ? boost::optional<int64_t>{}
+                       :                      l->GetSize());
 }
 
 std::string
@@ -254,7 +258,8 @@ kax_info_c::create_known_element_but_not_allowed_here_text(EbmlElement &e) {
 std::string
 kax_info_c::create_element_text(const std::string &text,
                                 boost::optional<int64_t> position,
-                                boost::optional<int64_t> size) {
+                                boost::optional<int64_t> size,
+                                boost::optional<int64_t> data_size) {
   auto p = p_func();
 
   std::string additional_text;
@@ -268,6 +273,9 @@ kax_info_c::create_element_text(const std::string &text,
     else
       additional_text += Y(" size is unknown");
   }
+
+  if (p->m_show_size && data_size)
+    additional_text += fmt::format(Y(" data size {0}"), *data_size);
 
   return text + additional_text;
 }
@@ -288,7 +296,7 @@ kax_info_c::create_text_representation(EbmlElement &e) {
       text += ": "s + value;
   }
 
-  return create_element_text(text, e.GetElementPosition(), e.HeadSize() + e.GetSize());
+  return create_element_text(text, e.GetElementPosition(), e.HeadSize() + e.GetSize(), e.GetSize());
 }
 
 std::string

@@ -5,6 +5,8 @@
 * MKVToolNix GUI: multiplexer: added column "Delay" to the track list
   containing the additional delay to apply during multiplexing. Implements
   #2506.
+* mkvinfo: when sizes are output the size of the element's data portion is
+  output in addition to the element's total size.
 
 ## Bug fixes
 
