@@ -23,6 +23,11 @@
   errors such as "the JSON output could not be parsed" in that case. Fixes
   #2507.
 
+## Build system changes
+
+* libEBML v1.3.7 is now required as it fixes its handling of Unicode code
+  points > U+FFFF (see #2516).
+
 
 # Version 31.0.0 "Dolores In A Shoestand" 2019-02-09
 
