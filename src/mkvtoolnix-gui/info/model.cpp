@@ -65,7 +65,7 @@ Model::elementFromItem(QStandardItem &item)
 QList<QStandardItem *>
 Model::newItems()
   const {
-  return { new QStandardItem{}, new QStandardItem{}, new QStandardItem{}, new QStandardItem{} };
+  return { new QStandardItem{}, new QStandardItem{}, new QStandardItem{}, new QStandardItem{}, new QStandardItem{} };
 }
 
 QList<QStandardItem *>
@@ -83,14 +83,16 @@ Model::retranslateUi() {
   auto p = p_func();
 
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Elements"), Q("elements") },
-    { QY("Content"),  Q("content")  },
-    { QY("Position"), Q("position") },
-    { QY("Size"),     Q("size")     },
+    { QY("Elements"),  Q("elements") },
+    { QY("Content"),   Q("content")  },
+    { QY("Position"),  Q("position") },
+    { QY("Size"),      Q("size")     },
+    { QY("Data size"), Q("dataSize") },
   });
 
   horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   horizontalHeaderItem(3)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  horizontalHeaderItem(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   if (!p->m_info)
     return;
@@ -116,9 +118,11 @@ Model::setItemsFromElement(QList<QStandardItem *> &items,
   items[1]->setText(Q(content));
   items[2]->setText(locale.toString(static_cast<quint64>(element.GetElementPosition())));
   items[3]->setText(element.IsFiniteSize() ? locale.toString(static_cast<quint64>(element.HeadSize() + element.GetSize())) : QY("unknown"));
+  items[4]->setText(element.IsFiniteSize() ? locale.toString(static_cast<quint64>(                     element.GetSize())) : QY("unknown"));
 
   items[2]->setTextAlignment(Qt::AlignRight);
   items[3]->setTextAlignment(Qt::AlignRight);
+  items[4]->setTextAlignment(Qt::AlignRight);
 
   items[0]->setData(reinterpret_cast<qulonglong>(&element),          Roles::Element);
   items[0]->setData(static_cast<qint64>(EbmlId(element).GetValue()), Roles::EbmlId);
@@ -166,7 +170,8 @@ void
 Model::addElementInfo(int level,
                       QString const &text,
                       boost::optional<int64_t> position,
-                      boost::optional<int64_t> size) {
+                      boost::optional<int64_t> size,
+                      boost::optional<int64_t> dataSize) {
   auto p = p_func();
 
   if (p->m_treeInsertionPosition.isEmpty()) {
@@ -178,11 +183,13 @@ Model::addElementInfo(int level,
   auto locale = QLocale::system();
 
   items[0]->setText(text);
-  items[2]->setText(position             ? locale.toString(static_cast<quint64>(*position)) : QY("unknown"));
-  items[3]->setText(size && (*size >= 0) ? locale.toString(static_cast<quint64>(*size))     : QY("unknown"));
+  items[2]->setText(position                     ? locale.toString(static_cast<quint64>(*position)) : QY("unknown"));
+  items[3]->setText(size && (*size >= 0)         ? locale.toString(static_cast<quint64>(*size))     : QY("unknown"));
+  items[4]->setText(dataSize && (*dataSize >= 0) ? locale.toString(static_cast<quint64>(*dataSize)) : QY("unknown"));
 
   items[2]->setTextAlignment(Qt::AlignRight);
   items[3]->setTextAlignment(Qt::AlignRight);
+  items[4]->setTextAlignment(Qt::AlignRight);
 
   if (position)
     items[0]->setData(static_cast<qint64>(*position), Roles::Position);

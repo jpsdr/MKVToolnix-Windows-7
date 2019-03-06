@@ -7,6 +7,8 @@
   #2506.
 * mkvinfo: when sizes are output the size of the element's data portion is
   output in addition to the element's total size.
+* MKVToolNix GUI: info tool: the element's data portion is
+  shown as an extra column.
 
 ## Bug fixes
 

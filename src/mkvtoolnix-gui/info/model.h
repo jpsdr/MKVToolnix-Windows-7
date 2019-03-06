@@ -67,7 +67,7 @@ public:
 
 public slots:
   void addElement(int level, libebml::EbmlElement *element, bool readFully);
-  void addElementInfo(int level, QString const &text, boost::optional<int64_t> position, boost::optional<int64_t> size);
+  void addElementInfo(int level, QString const &text, boost::optional<int64_t> position, boost::optional<int64_t> size, boost::optional<int64_t> dataSize);
   void addElementStructure(QStandardItem &parent, libebml::EbmlElement &element);
 
   void addChildrenOfLevel1Element(QModelIndex const &idx);
