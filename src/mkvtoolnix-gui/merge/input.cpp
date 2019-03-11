@@ -1553,23 +1553,31 @@ Tab::setOutputFileNameMaybe(bool force) {
   else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested destination file name policy");
 
-  auto baseName = QFileInfo{ m_config.m_firstInputFileName }.completeBaseName();
-  auto idx      = 0;
+  auto baseName              = QFileInfo{ m_config.m_firstInputFileName }.completeBaseName();
+  m_config.m_destinationAuto = generateUniqueOutputFileName(baseName, outputDir);
+
+  ui->output->setText(m_config.m_destinationAuto);
+  setDestination(m_config.m_destinationAuto);
+}
+
+QString
+Tab::generateUniqueOutputFileName(QString const &baseName,
+                                  QDir const &outputDir) {
+  auto &settings       = Util::Settings::get();
+  auto cleanedBaseName = baseName;
+  auto suffix          = suggestOutputFileNameExtension();
+
+  cleanedBaseName.replace(QRegularExpression{Q("\\s*\\(\\d+\\)$")}, {});
+
+  auto idx = 0;
 
   while (true) {
-    auto suffix          = suggestOutputFileNameExtension();
-    auto currentBaseName = QString{"%1%2.%3"}.arg(baseName).arg(idx ? QString{" (%1)"}.arg(idx) : "").arg(suffix);
+    auto currentBaseName = QString{"%1%2.%3"}.arg(cleanedBaseName).arg(idx ? QString{" (%1)"}.arg(idx) : "").arg(suffix);
     currentBaseName      = Util::removeInvalidPathCharacters(currentBaseName);
     auto outputFileName  = QFileInfo{outputDir, currentBaseName};
 
-    if (!settings.m_uniqueOutputFileNames || !outputFileName.exists()) {
-      m_config.m_destinationAuto = outputFileName.absoluteFilePath();
-
-      ui->output->setText(m_config.m_destinationAuto);
-      setDestination(m_config.m_destinationAuto);
-
-      break;
-    }
+    if (!settings.m_uniqueOutputFileNames || !outputFileName.exists())
+      return outputFileName.absoluteFilePath();
 
     ++idx;
   }

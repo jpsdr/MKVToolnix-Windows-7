@@ -23,6 +23,9 @@
   path (e.g. `\\servername\sharename\path\to\file.m2ts`). The GUI emitted
   errors such as "the JSON output could not be parsed" in that case. Fixes
   #2507.
+* MKVToolNix GUI: multiplexer: using button to change the current destination
+  directory to one of the recently used ones did not update the file name
+  according to the "make file name unique" setting. Part of the fix of #2519.
 
 ## Build system changes
 
