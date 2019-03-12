@@ -1589,8 +1589,20 @@ Tab::setDestinationFileNameFromSelectedFile() {
   if (selectedFiles.isEmpty())
     return;
 
+  auto selectedFileName = selectedFiles[0]->m_fileName;
+
+  if (!m_config.m_destination.isEmpty()) {
+    auto baseName       = QFileInfo{selectedFileName}.completeBaseName();
+    auto destinationDir = QDir{ QFileInfo{ m_config.m_destination }.path() };
+    auto newFileName    = generateUniqueOutputFileName(baseName, destinationDir);
+
+    ui->output->setText(QDir::toNativeSeparators(newFileName));
+
+    return;
+  }
+
   m_config.m_destinationAuto.clear();
-  m_config.m_firstInputFileName = QDir::toNativeSeparators(selectedFiles[0]->m_fileName);
+  m_config.m_firstInputFileName = QDir::toNativeSeparators(selectedFileName);
 
   setOutputFileNameMaybe(true);
 }

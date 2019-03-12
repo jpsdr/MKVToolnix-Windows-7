@@ -26,6 +26,9 @@
 * MKVToolNix GUI: multiplexer: using button to change the current destination
   directory to one of the recently used ones did not update the file name
   according to the "make file name unique" setting. Part of the fix of #2519.
+* MKVToolNix GUI: multiplexer: the function "set destination file name from
+  selected file's name" will now only change the destination file's name but
+  not its path. Part of the fix of #2519.
 
 ## Build system changes
 
