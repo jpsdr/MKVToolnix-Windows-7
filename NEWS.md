@@ -26,8 +26,8 @@
 
 ## Build system changes
 
-* libEBML v1.3.7 is now required as it fixes its handling of Unicode code
-  points > U+FFFF (see #2516).
+* libEBML v1.3.7 and libMatroska 1.5.0 are now required as they fix their
+  handling of Unicode code points > U+FFFF (see #2516).
 
 
 # Version 31.0.0 "Dolores In A Shoestand" 2019-02-09
