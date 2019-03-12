@@ -2,20 +2,17 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: multiplexer: added column "Delay" to the track list
-  containing the additional delay to apply during multiplexing. Implements
-  #2506.
 * mkvinfo: when sizes are output the size of the element's data portion is
   output in addition to the element's total size.
 * MKVToolNix GUI: info tool: the element's data portion is
   shown as an extra column.
+* MKVToolNix GUI: multiplexer: added column "Delay" to the track list
+  containing the additional delay to apply during multiplexing. Implements
+  #2506.
 
 ## Bug fixes
 
 * all: fixed handling of Unicode code points > U+FFFF. Fixes #2516.
-* MKVToolNix GUI: the portable mode wasn't detected correctly when the current
-  working directory the GUI was started from wasn't the directory the GUI's
-  executable file was located it. Examples for when this is the case are
   Windows' "send to" or "open with" functions. Fixes #2501.
 * mkvmerge: Windows: mkvmerge was crashing with an exception when trying to
   identify certain files that can be used on Blu-rays (such as MPEG transport
@@ -23,6 +20,9 @@
   path (e.g. `\\servername\sharename\path\to\file.m2ts`). The GUI emitted
   errors such as "the JSON output could not be parsed" in that case. Fixes
   #2507.
+* MKVToolNix GUI: the portable mode wasn't detected correctly when the current
+  working directory the GUI was started from wasn't the directory the GUI's
+  executable file was located it. Examples for when this is the case are
 * MKVToolNix GUI: multiplexer: using button to change the current destination
   directory to one of the recently used ones did not update the file name
   according to the "make file name unique" setting. Part of the fix of #2519.
