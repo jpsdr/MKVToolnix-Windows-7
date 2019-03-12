@@ -13,7 +13,6 @@
 ## Bug fixes
 
 * all: fixed handling of Unicode code points > U+FFFF. Fixes #2516.
-  Windows' "send to" or "open with" functions. Fixes #2501.
 * mkvmerge: Windows: mkvmerge was crashing with an exception when trying to
   identify certain files that can be used on Blu-rays (such as MPEG transport
   streams of MPLS play list files) and when the file name was given as a UNC
@@ -23,6 +22,7 @@
 * MKVToolNix GUI: the portable mode wasn't detected correctly when the current
   working directory the GUI was started from wasn't the directory the GUI's
   executable file was located it. Examples for when this is the case are
+  Windows' "send to" or "open with" functions. Fixes #2501.
 * MKVToolNix GUI: multiplexer: using button to change the current destination
   directory to one of the recently used ones did not update the file name
   according to the "make file name unique" setting. Part of the fix of #2519.
