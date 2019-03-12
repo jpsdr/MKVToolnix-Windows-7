@@ -1,4 +1,4 @@
-MKVToolNix 31.0.0
+MKVToolNix 32.0.0
 =================
 
 # Table of contents
