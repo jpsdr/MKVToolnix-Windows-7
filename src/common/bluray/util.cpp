@@ -21,7 +21,7 @@ namespace {
 
 bfs::path
 find_base_dir_impl(bfs::path const &file_name) {
-  auto dir = bfs::canonical(bfs::absolute(file_name));
+  auto dir = bfs::absolute(file_name);
   if (!bfs::is_directory(dir))
     dir = dir.parent_path();
 

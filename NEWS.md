@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: Windows: trying to open Blu-ray index or
+  playlist files failed when the path to the files contained symbolic links
+  (e.g. when mounting a drive in a sub-folder via Windows' disk management
+  utility). Fixes #2522.
+
+
 # Version 32.0.0 "Astral Progressions" 2019-03-12
 
 ## New features and enhancements
