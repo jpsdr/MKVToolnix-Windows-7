@@ -1567,17 +1567,22 @@ Tab::generateUniqueOutputFileName(QString const &baseName,
   auto cleanedBaseName = baseName;
   auto suffix          = suggestOutputFileNameExtension();
 
-  cleanedBaseName.replace(QRegularExpression{Q("\\s*\\(\\d+\\)$")}, {});
+  if (   !m_config.m_destinationUniquenessSuffix.isEmpty()
+      && cleanedBaseName.endsWith(m_config.m_destinationUniquenessSuffix))
+    cleanedBaseName.remove(cleanedBaseName.length() - m_config.m_destinationUniquenessSuffix.length(), m_config.m_destinationUniquenessSuffix.length());
 
   auto idx = 0;
 
   while (true) {
-    auto currentBaseName = QString{"%1%2.%3"}.arg(cleanedBaseName).arg(idx ? QString{" (%1)"}.arg(idx) : "").arg(suffix);
-    currentBaseName      = Util::removeInvalidPathCharacters(currentBaseName);
-    auto outputFileName  = QFileInfo{outputDir, currentBaseName};
+    auto uniquenessSuffix = idx ? QString{" (%1)"}.arg(idx) : QString{};
+    auto currentBaseName  = QString{"%1%2.%3"}.arg(cleanedBaseName).arg(uniquenessSuffix).arg(suffix);
+    currentBaseName       = Util::removeInvalidPathCharacters(currentBaseName);
+    auto outputFileName   = QFileInfo{outputDir, currentBaseName};
 
-    if (!settings.m_uniqueOutputFileNames || !outputFileName.exists())
+    if (!settings.m_uniqueOutputFileNames || !outputFileName.exists()) {
+      m_config.m_destinationUniquenessSuffix = uniquenessSuffix;
       return outputFileName.absoluteFilePath();
+    }
 
     ++idx;
   }
@@ -1592,6 +1597,8 @@ Tab::setDestinationFileNameFromSelectedFile() {
   auto selectedFileName = selectedFiles[0]->m_fileName;
 
   if (!m_config.m_destination.isEmpty()) {
+    m_config.m_destinationUniquenessSuffix.clear();
+
     auto baseName       = QFileInfo{selectedFileName}.completeBaseName();
     auto destinationDir = QDir{ QFileInfo{ m_config.m_destination }.path() };
     auto newFileName    = generateUniqueOutputFileName(baseName, destinationDir);

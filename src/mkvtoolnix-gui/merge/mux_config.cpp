@@ -107,6 +107,7 @@ MuxConfig::operator =(MuxConfig const &other) {
   m_title                         = other.m_title;
   m_destination                   = other.m_destination;
   m_destinationAuto               = other.m_destinationAuto;
+  m_destinationUniquenessSuffix   = other.m_destinationUniquenessSuffix;
   m_globalTags                    = other.m_globalTags;
   m_segmentInfo                   = other.m_segmentInfo;
   m_splitOptions                  = other.m_splitOptions;
@@ -422,6 +423,7 @@ MuxConfig::load(Util::ConfigFile &settings) {
   m_title                         = settings.value("title").toString();
   m_destination                   = QDir::toNativeSeparators(settings.value("destination").toString());
   m_destinationAuto               = QDir::toNativeSeparators(settings.value("destinationAuto").toString());
+  m_destinationUniquenessSuffix   = settings.value("destinationUniquenessSuffix").toString();
   m_globalTags                    = QDir::toNativeSeparators(settings.value("globalTags").toString());
   m_segmentInfo                   = QDir::toNativeSeparators(settings.value("segmentInfo").toString());
   m_splitOptions                  = settings.value("splitOptions").toString();
@@ -473,6 +475,7 @@ MuxConfig::save(Util::ConfigFile &settings)
   settings.setValue("title",                         m_title);
   settings.setValue("destination",                   m_destination);
   settings.setValue("destinationAuto",               m_destinationAuto);
+  settings.setValue("destinationUniquenessSuffix",   m_destinationUniquenessSuffix);
   settings.setValue("globalTags",                    m_globalTags);
   settings.setValue("segmentInfo",                   m_segmentInfo);
   settings.setValue("splitOptions",                  m_splitOptions);

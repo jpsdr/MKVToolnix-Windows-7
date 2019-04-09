@@ -369,6 +369,7 @@ Tab::clearDestination() {
   ui->output->setText(Q(""));
   setDestination(Q(""));
   m_config.m_destinationAuto.clear();
+  m_config.m_destinationUniquenessSuffix.clear();
 }
 
 void
@@ -627,18 +628,28 @@ Tab::onCopyTitleToOutputFileName() {
   if (!hasTitle())
     return;
 
-  auto info        = QFileInfo{ m_config.m_destination };
-  auto suffix      = info.suffix();
-  auto path        = info.path();
-  auto newFileName = m_config.m_title;
+  m_config.m_destinationUniquenessSuffix.clear();
 
-  if (!path.isEmpty())
-    newFileName = Q("%1/%2").arg(path).arg(newFileName);
+  auto info = QFileInfo{ m_config.m_destination };
+  auto path = info.path();
 
-  if (suffix.isEmpty())
-    suffix = "mkv";
+  QString newFileName;
 
-  ui->output->setText(QDir::toNativeSeparators(Q("%1.%2").arg(newFileName).arg(suffix)));
+  if (Util::Settings::get().m_uniqueOutputFileNames)
+    newFileName = generateUniqueOutputFileName(m_config.m_title, QDir{path});
+
+  else {
+    if (!path.isEmpty())
+      newFileName = Q("%1/%2").arg(path).arg(newFileName);
+
+    auto suffix = info.suffix();
+    if (suffix.isEmpty())
+      suffix = "mkv";
+
+    newFileName = Q("%1.%2").arg(newFileName).arg(suffix);
+  }
+
+  ui->output->setText(QDir::toNativeSeparators(newFileName));
 }
 
 bool

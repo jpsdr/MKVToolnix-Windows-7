@@ -6,6 +6,11 @@
   playlist files failed when the path to the files contained symbolic links
   (e.g. when mounting a drive in a sub-folder via Windows' disk management
   utility). Fixes #2522.
+* MKVToolNix GUI: multiplexer: if a destination file names ends with a number
+  in parenthesis (e.g. a year such as "(2017)"), that number will not be
+  stripped anymore during the process of ensuring the destination file name is
+  unique. Only those suffixes added automatically in prior attempts to make
+  the file name unique will be removed. Fixes #2521.
 
 
 # Version 32.0.0 "Astral Progressions" 2019-03-12
