@@ -11,6 +11,11 @@
   stripped anymore during the process of ensuring the destination file name is
   unique. Only those suffixes added automatically in prior attempts to make
   the file name unique will be removed. Fixes #2521.
+* MKVToolNix GUI: multiplexer: Windows: the GUI will let the user change the
+  drive letter part of the destination file name freely again and only verify
+  its validity right before starting to mux/adding to the job queue. Before it
+  tried to force that into something valid, often resulting in unintentional
+  paths (such as "C:\users\…\DC\files\…"). Fixes #2527.
 
 
 # Version 32.0.0 "Astral Progressions" 2019-03-12

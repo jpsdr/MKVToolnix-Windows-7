@@ -335,12 +335,21 @@ Tab::retranslateUi() {
 
 bool
 Tab::isReadyForMerging() {
-  if (m_config.m_destination.isEmpty()) {
+  auto destination = QDir::toNativeSeparators(ui->output->text());
+
+  if (destination.isEmpty()) {
     Util::MessageBox::critical(this)->title(QY("Cannot start multiplexing")).text(QY("You have to set the destination file name before you can start multiplexing or add a job to the job queue.")).exec();
     return false;
   }
 
-  if (m_config.m_destination != Util::removeInvalidPathCharacters(m_config.m_destination)) {
+  auto destinationValid = destination == Util::removeInvalidPathCharacters(destination);
+
+#if defined(SYS_WINDOWS)
+  if (destinationValid)
+    destinationValid = destination.contains(QRegularExpression{Q("^[a-zA-Z]:[\\\\/]|^\\\\\\\\.+\\.+")});
+#endif  // SYS_WINDOWS
+
+  if (!destinationValid) {
     Util::MessageBox::critical(this)->title(QY("Cannot start multiplexing")).text(QY("The destination file name is invalid and must be fixed before you can start multiplexing or add a job to the job queue.")).exec();
     return false;
   }

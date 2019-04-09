@@ -342,13 +342,12 @@ Tab::onTitleChanged(QString newValue) {
 
 void
 Tab::setDestination(QString const &newValue) {
-  QString prefix;
 #if defined(SYS_WINDOWS)
-  if (newValue.startsWith(Q(":")))
-    prefix = Q(":");
+  if (!newValue.contains(QRegularExpression{Q("^[a-zA-Z]:[\\\\/]|^\\\\\\\\.+\\.+")}))
+    return;
 #endif
 
-  m_config.m_destination = QDir::toNativeSeparators(prefix + Util::removeInvalidPathCharacters(newValue));
+  m_config.m_destination = QDir::toNativeSeparators(Util::removeInvalidPathCharacters(newValue));
   if (!m_config.m_destination.isEmpty()) {
     auto &settings           = Util::Settings::get();
     settings.m_lastOutputDir = QFileInfo{ newValue }.absoluteDir();
@@ -359,7 +358,7 @@ Tab::setDestination(QString const &newValue) {
   if (m_config.m_destination == newValue)
     return;
 
-  auto newPosition = std::max(ui->output->cursorPosition(), 1) - 1;
+  auto newPosition = ui->output->cursorPosition();
   ui->output->setText(m_config.m_destination);
   ui->output->setCursorPosition(newPosition);
 }
