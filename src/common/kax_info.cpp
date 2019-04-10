@@ -296,7 +296,7 @@ kax_info_c::create_text_representation(EbmlElement &e) {
       text += ": "s + value;
   }
 
-  return create_element_text(text, e.GetElementPosition(), e.HeadSize() + e.GetSize(), e.GetSize());
+  return create_element_text(text, e.GetElementPosition(), e.IsFiniteSize() ? e.HeadSize() + e.GetSize() : -2, e.IsFiniteSize() ? boost::optional<int64_t>{e.GetSize()} : boost::optional<int64_t>{});
 }
 
 std::string

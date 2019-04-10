@@ -16,6 +16,8 @@
   its validity right before starting to mux/adding to the job queue. Before it
   tried to force that into something valid, often resulting in unintentional
   paths (such as "C:\users\…\DC\files\…"). Fixes #2527.
+* mkvinfo: when using the `--size` option, mkvinfo will now report the
+  correctly if an element has an unknown size. Part of the fix of #2530.
 
 
 # Version 32.0.0 "Astral Progressions" 2019-03-12
