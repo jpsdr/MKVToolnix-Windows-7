@@ -165,6 +165,11 @@ KaxInfo::doScanLevel1Elements() {
         cache_io->set_buffer_size();
     });
 
+    auto kax_file = std::make_shared<kax_file_c>(*p->m_in);
+
+    // Prevent reporting "first timestamp after resync":
+    kax_file->set_timestamp_scale(-1);
+
     p->m_in->setFilePointer(*p->m_firstLevel1ElementPosition);
 
     while (!p->m_abort) {
@@ -174,13 +179,30 @@ KaxInfo::doScanLevel1Elements() {
       if (!l1)
         break;
 
+      int64_t end_position;
+
+      if (!l1->IsFiniteSize()) {
+        p->m_in->setFilePointer(l1->GetElementPosition());
+
+        l1 = kax_file->read_next_level1_element();
+
+        if (!dynamic_cast<EbmlMaster *>(l1.get()))
+          break;
+
+        empty_ebml_master(l1.get());
+
+        end_position = p->m_in->getFilePointer();
+
+      } else
+        end_position = l1->GetElementPosition() + kax_file_c::get_element_size(*l1);
+
       retain_element(l1);
       ui_show_element(*l1);
 
       if (upper_lvl_el && !kax_file_c::is_global_element_id(EbmlId(*l1)))
         break;
 
-      p->m_in->setFilePointer(l1->GetElementPosition() + kax_file_c::get_element_size(*l1));
+      p->m_in->setFilePointer(end_position);
     }
 
   } catch (mtx::mm_io::exception &ex) {

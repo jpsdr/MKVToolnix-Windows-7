@@ -18,6 +18,8 @@
   paths (such as "C:\users\…\DC\files\…"). Fixes #2527.
 * mkvinfo: when using the `--size` option, mkvinfo will now report the
   correctly if an element has an unknown size. Part of the fix of #2530.
+* MKVToolNix GUI: info tool: clusters with an unknown size will now be read
+  and displayed correctly. Part of the fix of #2530.
 
 
 # Version 32.0.0 "Astral Progressions" 2019-03-12
