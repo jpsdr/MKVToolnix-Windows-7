@@ -2,6 +2,10 @@
 
 ## Bug fixes
 
+* mkvinfo: when using the `--size` option, mkvinfo will now report the
+  correctly if an element has an unknown size. Part of the fix of #2530.
+* MKVToolNix GUI: info tool: clusters with an unknown size will now be read
+  and displayed correctly. Part of the fix of #2530.
 * MKVToolNix GUI: multiplexer: Windows: trying to open Blu-ray index or
   playlist files failed when the path to the files contained symbolic links
   (e.g. when mounting a drive in a sub-folder via Windows' disk management
@@ -16,10 +20,6 @@
   its validity right before starting to mux/adding to the job queue. Before it
   tried to force that into something valid, often resulting in unintentional
   paths (such as "C:\users\…\DC\files\…"). Fixes #2527.
-* mkvinfo: when using the `--size` option, mkvinfo will now report the
-  correctly if an element has an unknown size. Part of the fix of #2530.
-* MKVToolNix GUI: info tool: clusters with an unknown size will now be read
-  and displayed correctly. Part of the fix of #2530.
 
 
 # Version 32.0.0 "Astral Progressions" 2019-03-12
