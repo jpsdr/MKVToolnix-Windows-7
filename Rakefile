@@ -122,11 +122,15 @@ def setup_globals
 
   $libmtxcommon_as_dll     = $building_for[:windows] && %r{shared}i.match(c(:host))
 
+  stack_protector          = ""
+  stack_protector          = " -fstack-protector"        if is_gcc? && !check_compiler_version("gcc", "4.9.0")
+  stack_protector          = " -fstack-protector-strong" if check_compiler_version("gcc", "4.9.0") || check_compiler_version("clang", "3.5.0")
+
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
   cflags_common           += " #{c(:WNO_INCONSISTENT_MISSING_OVERRIDE)} #{c(:WNO_POTENTIALLY_EVALUATED_EXPRESSION)}"
   cflags_common           += " #{c(:OPTIMIZATION_CFLAGS)} -D_FILE_OFFSET_BITS=64"
   cflags_common           += " -DMTX_LOCALE_DIR=\\\"#{c(:localedir)}\\\" -DMTX_PKG_DATA_DIR=\\\"#{c(:pkgdatadir)}\\\" -DMTX_DOC_DIR=\\\"#{c(:docdir)}\\\""
-  cflags_common           += " #{c(:FSTACK_PROTECTOR)}"
+  cflags_common           += stack_protector
   cflags_common           += " -fsanitize=undefined"                                     if c?(:UBSAN)
   cflags_common           += " -fsanitize=address -fno-omit-frame-pointer"               if c?(:ADDRSAN)
   cflags_common           += " -Ilib/libebml -Ilib/libmatroska"                          if c?(:EBML_MATROSKA_INTERNAL)
@@ -152,11 +156,10 @@ def setup_globals
   cxxflags                += " -Wno-extra-semi"                                                          if is_clang? || check_compiler_version("gcc", "8.0.0")
   cxxflags                += " -Wmisleading-indentation -Wduplicated-cond"                               if check_compiler_version("gcc", "6.0.0")
   cxxflags                += " -Wshadow-compatible-local -Wduplicated-branches"                          if check_compiler_version("gcc", "7.0.0")
-  cxxflags                += " -fstack-protector"                                                        if is_gcc? && !check_compiler_version("gcc", "4.9.0")
-  cxxflags                += " -fstack-protector-strong"                                                 if check_compiler_version("gcc", "4.9.0") && check_compiler_version("clang", "3.5.0")
   cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:USER_CXXFLAGS)}"
 
   ldflags                  = ""
+  ldflags                 += stack_protector
   ldflags                 += " -fuse-ld=lld"                            if is_clang? && !c(:LLVM_LLD).empty?
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
   ldflags                 += " -Llib/fmt/src"                           if c?(:FMT_INTERNAL)
@@ -166,7 +169,6 @@ def setup_globals
   ldflags                 += " -fsanitize=undefined"                       if c?(:UBSAN)
   ldflags                 += " -fsanitize=address -fno-omit-frame-pointer" if c?(:ADDRSAN)
   ldflags                 += " -headerpad_max_install_names"               if $building_for[:macos]
-  ldflags                 += " #{c(:FSTACK_PROTECTOR)}"
 
   windres                  = ""
   windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH) == 'amd64'
