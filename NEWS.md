@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: Windows: when a UNC path
+  (e.g. `\\server\Videos`) was set as the fixed output directory in the
+  settings, the GUI would create a destination file name with forward slashes
+  (e.g. `//server/Videos/outputfile.mkv`), a syntax not supported by
+  `mkvmerge`. Fixes #2533.
+
+
 # Version 33.0.0 "A Little Bit of Madness" 2019-04-12
 
 ## Bug fixes

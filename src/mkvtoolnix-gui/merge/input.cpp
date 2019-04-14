@@ -1581,7 +1581,7 @@ Tab::generateUniqueOutputFileName(QString const &baseName,
 
     if (!settings.m_uniqueOutputFileNames || !outputFileName.exists()) {
       m_config.m_destinationUniquenessSuffix = uniquenessSuffix;
-      return outputFileName.absoluteFilePath();
+      return QDir::toNativeSeparators(outputFileName.absoluteFilePath());
     }
 
     ++idx;
