@@ -7,6 +7,8 @@
   file name" was set in the preferences, the GUI would create a destination
   file name with forward slashes (e.g. `//server/Videos/outputfile.mkv`), a
   syntax not supported by `mkvmerge`. Fixes #2533 & #2534.
+* build system: the programs were accidentally built without stack protection
+  (`-fstack-protector-strong`) on recent versions of gcc and clang.
 
 
 # Version 33.0.0 "A Little Bit of Madness" 2019-04-12
