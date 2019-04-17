@@ -189,6 +189,13 @@ struct packet_t {
     return has_duration() ? unmodified_duration : 0;
   }
 
+  void
+  force_key_frame() {
+    bref     = -1;
+    fref     = -1;
+    key_flag = true;
+  }
+
   bool
   is_key_frame()
     const {

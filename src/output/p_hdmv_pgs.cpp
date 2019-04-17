@@ -47,6 +47,8 @@ hdmv_pgs_packetizer_c::set_headers() {
 
 int
 hdmv_pgs_packetizer_c::process(packet_cptr packet) {
+  packet->force_key_frame();
+
   if (!m_aggregate_packets) {
     dump_and_add_packet(packet);
     return FILE_STATUS_MOREDATA;

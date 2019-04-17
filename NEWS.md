@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: all subtitle frames are now treated as key frames in order to fix
+  wrong data in source files. Fixes #2541.
+
+
 # Version 33.1.0 "Primrose" 2019-04-15
 
 ## Bug fixes

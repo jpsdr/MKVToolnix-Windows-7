@@ -65,6 +65,8 @@ hdmv_textst_packetizer_c::process(packet_cptr packet) {
 
   packet->duration_mandatory = true;
 
+  packet->force_key_frame();
+
   add_packet(packet);
 
   return FILE_STATUS_MOREDATA;

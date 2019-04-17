@@ -87,6 +87,8 @@ kate_packetizer_c::process(packet_cptr packet) {
   if (end > m_previous_timestamp)
     m_previous_timestamp = end;
 
+  packet->force_key_frame();
+
   add_packet(packet);
 
   return FILE_STATUS_MOREDATA;
