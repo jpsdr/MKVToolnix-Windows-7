@@ -34,7 +34,7 @@ public:
   virtual int process(packet_cptr packet);
 
   virtual translatable_string_c get_format_name() const {
-    return YT("MPEG-1/2");
+    return YT("MPEG-1/2 video");
   }
 
 protected:

@@ -41,7 +41,7 @@ public:
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
-    return YT("MP3");
+    return YT("MPEG-1/2 Audio Layer II/III");
   }
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 

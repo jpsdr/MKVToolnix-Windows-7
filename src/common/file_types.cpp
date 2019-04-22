@@ -41,10 +41,10 @@ file_type_t::get_supported() {
   s_supported_file_types.emplace_back(file_type_e::hevc_es,     Y("HEVC/h.265 elementary streams"),       "265 hevc h265 x265");
   s_supported_file_types.emplace_back(file_type_e::ivf,         Y("IVF (AV1, VP8, VP9)"),                 "ivf");
   s_supported_file_types.emplace_back(file_type_e::qtmp4,       Y("MP4 audio/video files"),               "mp4 m4v");
-  s_supported_file_types.emplace_back(file_type_e::mp3,         Y("MPEG audio files"),                    "mp2 mp3");
+  s_supported_file_types.emplace_back(file_type_e::mp3,         Y("MPEG-1/2 Audio Layer II/III elementary streams"), "mp2 mp3");
   s_supported_file_types.emplace_back(file_type_e::mpeg_ps,     Y("MPEG program streams"),                "mpg mpeg m2v mpv evo evob vob");
   s_supported_file_types.emplace_back(file_type_e::mpeg_ts,     Y("MPEG transport streams"),              "ts m2ts mts");
-  s_supported_file_types.emplace_back(file_type_e::mpeg_es,     Y("MPEG video elementary streams"),       "m1v m2v mpv");
+  s_supported_file_types.emplace_back(file_type_e::mpeg_es,     Y("MPEG-1/2 video elementary streams"),   "m1v m2v mpv");
   s_supported_file_types.emplace_back(file_type_e::is_unknown,  Y("MPLS Blu-ray playlist"),               "mpls");
   s_supported_file_types.emplace_back(file_type_e::matroska,    Y("Matroska audio/video files"),          "mka mks mkv mk3d webm webmv webma");
   s_supported_file_types.emplace_back(file_type_e::pgssup,      Y("PGS/SUP subtitles"),                   "sup");
@@ -90,8 +90,8 @@ file_type_t::get_name(file_type_e type) {
        : file_type_e::ivf         == type ? YT("IVF (AV1, VP8, VP9)")
        : file_type_e::matroska    == type ? YT("Matroska")
        : file_type_e::microdvd    == type ? YT("MicroDVD")
-       : file_type_e::mp3         == type ? YT("MP2/MP3")
-       : file_type_e::mpeg_es     == type ? YT("MPEG video elementary stream")
+       : file_type_e::mp3         == type ? YT("MPEG-1/2 Audio Layer II/III")
+       : file_type_e::mpeg_es     == type ? YT("MPEG-1/2 video elementary stream")
        : file_type_e::mpeg_ps     == type ? YT("MPEG program stream")
        : file_type_e::mpeg_ts     == type ? YT("MPEG transport stream")
        : file_type_e::obu         == type ? YT("Open Bitstream Units stream")
