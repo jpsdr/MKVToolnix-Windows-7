@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-04-11 09:10+0200\n"
+"POT-Creation-Date: 2019-04-27 14:30+0200\n"
 "PO-Revision-Date: 2019-04-12 12:04+0200\n"
 "Last-Translator: René Maassen <bmom43@hotmail.com>\n"
 "Language-Team: \n"
@@ -6950,7 +6950,7 @@ msgstr "Als u vaak dezelfde waarden gebruikt bij het splitsen op grootte, kan je
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "Als u deze als extra onderdelen wilt bijvoegen of toevoegen, moet u selecteren welk bronbestand moet worden bijgevoegd of toegevoegd aan:"
 
-#: src/output/p_textsubs.cpp:115
+#: src/output/p_textsubs.cpp:117
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "Negeer een ingang dat begint voordat het eindigt ({0}).\n"
@@ -7758,25 +7758,10 @@ msgstr "MKVToolNix GUI's installatie map"
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "MKVToolNix optie bestand (JSON-ingedeeld)"
 
-#: src/common/file_types.cpp:93
-#, no-c-format
-msgid "MP2/MP3"
-msgstr "MP2/MP3"
-
-#: src/output/p_mp3.h:44
-#, no-c-format
-msgid "MP3"
-msgstr "MP3"
-
 #: src/common/file_types.cpp:43
 #, no-c-format
 msgid "MP4 audio/video files"
 msgstr "MP4 audio/video bestanden"
-
-#: src/common/file_types.cpp:44
-#, no-c-format
-msgid "MPEG audio files"
-msgstr "MPEG audio bestanden"
 
 #: src/common/file_types.cpp:95
 #, no-c-format
@@ -7798,20 +7783,31 @@ msgstr "MPEG transportstroom"
 msgid "MPEG transport streams"
 msgstr "MPEG transportstromen"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:93
+#: src/output/p_mp3.h:44
 #, no-c-format
-msgid "MPEG video elementary stream"
-msgstr "MPEG video basisstromen"
+msgid "MPEG-1/2 Audio Layer II/III"
+msgstr ""
 
-#: src/common/file_types.cpp:47
-#, no-c-format
-msgid "MPEG video elementary streams"
+#: src/common/file_types.cpp:44
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "MPEG video basisstromen"
 
 #: src/output/p_mpeg1_2.h:37
-#, no-c-format
-msgid "MPEG-1/2"
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
+
+#: src/common/file_types.cpp:94
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary stream"
+msgstr "MPEG video basisstromen"
+
+#: src/common/file_types.cpp:47
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary streams"
+msgstr "MPEG video basisstromen"
 
 #: src/output/p_mpeg4_p2.h:64
 #, no-c-format
@@ -12823,7 +12819,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "Dit sjabloon wordt gebruikt voor nieuwe hoofdstuk ingangen."
 
 #: src/input/subtitles.cpp:512
-#: src/output/p_textsubs.cpp:138
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr "Dit ondertitelspoor bevat ongeldige 8-bits tekens buiten geldige UTF-8-reeksen met meerdere bytes. Geef de juiste codering op voor dit spoor.\n"
@@ -15583,6 +15579,15 @@ msgstr "– Zet naar niets –"
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "MKVToolNix optie bestand (oude format)"
+
+#~ msgid "MP2/MP3"
+#~ msgstr "MP2/MP3"
+
+#~ msgid "MP3"
+#~ msgstr "MP3"
+
+#~ msgid "MPEG audio files"
+#~ msgstr "MPEG audio bestanden"
 
 #~ msgid "Malformed line? (%1%)\n"
 #~ msgstr "Misvormde regel? (%1%)\n"

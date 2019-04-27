@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-04-11 09:10+0200\n"
+"POT-Creation-Date: 2019-04-27 14:30+0200\n"
 "PO-Revision-Date: 2018-12-04 16:49+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -6965,7 +6965,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "Якщо ви хочете додати чи приєднати їх як додаткову частину, вам необхідно обрати до якого саме вхідного файла додавати:"
 
-#: src/output/p_textsubs.cpp:115
+#: src/output/p_textsubs.cpp:117
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "Ігнорування запису, який починається після свого закінчення ({0}).\n"
@@ -7777,25 +7777,10 @@ msgstr "Директорія, куди інстальовано MKVToolNix GUI"
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "MKVToolNix файл конфігурації (у форматі JSON)"
 
-#: src/common/file_types.cpp:93
-#, no-c-format
-msgid "MP2/MP3"
-msgstr "MP2/MP3"
-
-#: src/output/p_mp3.h:44
-#, no-c-format
-msgid "MP3"
-msgstr "MP3"
-
 #: src/common/file_types.cpp:43
 #, no-c-format
 msgid "MP4 audio/video files"
 msgstr "MP4 аудіо/відео файли"
-
-#: src/common/file_types.cpp:44
-#, no-c-format
-msgid "MPEG audio files"
-msgstr "MPEG аудіо файли"
 
 #: src/common/file_types.cpp:95
 #, no-c-format
@@ -7817,20 +7802,31 @@ msgstr "транспортний потік MPEG"
 msgid "MPEG transport streams"
 msgstr "MPEG транспортні потоки"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:93
+#: src/output/p_mp3.h:44
 #, no-c-format
-msgid "MPEG video elementary stream"
-msgstr "елементарний потік MPEG відео"
+msgid "MPEG-1/2 Audio Layer II/III"
+msgstr ""
 
-#: src/common/file_types.cpp:47
-#, no-c-format
-msgid "MPEG video elementary streams"
+#: src/common/file_types.cpp:44
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "MPEG відео елементарний потік"
 
 #: src/output/p_mpeg1_2.h:37
-#, no-c-format
-msgid "MPEG-1/2"
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
+
+#: src/common/file_types.cpp:94
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary stream"
+msgstr "елементарний потік MPEG відео"
+
+#: src/common/file_types.cpp:47
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary streams"
+msgstr "MPEG відео елементарний потік"
 
 #: src/output/p_mpeg4_p2.h:64
 #, no-c-format
@@ -12872,7 +12868,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "Цей шаблон буде використовуватися для нових розділів."
 
 #: src/input/subtitles.cpp:512
-#: src/output/p_textsubs.cpp:138
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -15655,6 +15651,15 @@ msgstr "– Нічого не обрано –"
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "MKVToolNix файл конфігурації (у старому форматі)"
+
+#~ msgid "MP2/MP3"
+#~ msgstr "MP2/MP3"
+
+#~ msgid "MP3"
+#~ msgstr "MP3"
+
+#~ msgid "MPEG audio files"
+#~ msgstr "MPEG аудіо файли"
 
 #~ msgid "Malformed line? (%1%)\n"
 #~ msgstr "Неправильно сформований рядок? (%1%)\n"

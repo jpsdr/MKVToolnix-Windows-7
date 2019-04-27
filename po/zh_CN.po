@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-04-11 09:10+0200\n"
+"POT-Creation-Date: 2019-04-27 14:30+0200\n"
 "PO-Revision-Date: 2019-03-07 11:23+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -6873,7 +6873,7 @@ msgstr "若您按文件大小切割时经常使用相同的数值，可以在这
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "如果想要追加（作为其余部分添加），请选择追加到哪个输入文件之后:"
 
-#: src/output/p_textsubs.cpp:115
+#: src/output/p_textsubs.cpp:117
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "忽略了一个起始时间在终止时间之后的条目 ({0})。\n"
@@ -7680,25 +7680,10 @@ msgstr "MKVToolNix GUI 安装目录"
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "MKVToolNix 选项文件 (JSON 格式)"
 
-#: src/common/file_types.cpp:93
-#, no-c-format
-msgid "MP2/MP3"
-msgstr "MP2/MP3"
-
-#: src/output/p_mp3.h:44
-#, no-c-format
-msgid "MP3"
-msgstr "MP3"
-
 #: src/common/file_types.cpp:43
 #, no-c-format
 msgid "MP4 audio/video files"
 msgstr "MP4 音频/视频文件"
-
-#: src/common/file_types.cpp:44
-#, no-c-format
-msgid "MPEG audio files"
-msgstr "MPEG 音频文件"
 
 #: src/common/file_types.cpp:95
 #, no-c-format
@@ -7720,20 +7705,31 @@ msgstr "MPEG 传输流"
 msgid "MPEG transport streams"
 msgstr "MPEG 传输流"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:93
+#: src/output/p_mp3.h:44
 #, no-c-format
-msgid "MPEG video elementary stream"
-msgstr "MPEG 视频基本流"
+msgid "MPEG-1/2 Audio Layer II/III"
+msgstr ""
 
-#: src/common/file_types.cpp:47
-#, no-c-format
-msgid "MPEG video elementary streams"
+#: src/common/file_types.cpp:44
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "MPEG 视频基本流"
 
 #: src/output/p_mpeg1_2.h:37
-#, no-c-format
-msgid "MPEG-1/2"
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
+
+#: src/common/file_types.cpp:94
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary stream"
+msgstr "MPEG 视频基本流"
+
+#: src/common/file_types.cpp:47
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary streams"
+msgstr "MPEG 视频基本流"
 
 #: src/output/p_mpeg4_p2.h:64
 #, no-c-format
@@ -12705,7 +12701,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "该模板会使用在新建的章节条目中。"
 
 #: src/input/subtitles.cpp:512
-#: src/output/p_textsubs.cpp:138
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr "此文本字幕轨道包含无效的 8 位字符，超出多字节 UTF-8 序列的有效范围。请为该轨道指定正确的编码。\n"
@@ -15423,6 +15419,15 @@ msgstr "– 设为空 –"
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "MKVToolNix 选项文件 (旧版)"
+
+#~ msgid "MP2/MP3"
+#~ msgstr "MP2/MP3"
+
+#~ msgid "MP3"
+#~ msgstr "MP3"
+
+#~ msgid "MPEG audio files"
+#~ msgstr "MPEG 音频文件"
 
 #~ msgid "Malformed line? (%1%)\n"
 #~ msgstr "畸形行？ (%1%)\n"

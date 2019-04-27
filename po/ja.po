@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-04-11 09:10+0200\n"
+"POT-Creation-Date: 2019-04-27 14:30+0200\n"
 "PO-Revision-Date: 2018-12-04 16:48+0100\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -6918,7 +6918,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "追加結合を行う場合や新しい部分を追加する場合は、どのファイルに対して追加結合や追加を行うのかを選択する必要があります："
 
-#: src/output/p_textsubs.cpp:115
+#: src/output/p_textsubs.cpp:117
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "終端以降に始まるエントリ（{0}）を無視します。\n"
@@ -7725,25 +7725,10 @@ msgstr "MKVToolNix GUI 設定ファイル"
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "MKVToolNixオプションファイル"
 
-#: src/common/file_types.cpp:93
-#, no-c-format
-msgid "MP2/MP3"
-msgstr "MP2/MP3"
-
-#: src/output/p_mp3.h:44
-#, no-c-format
-msgid "MP3"
-msgstr "MP3"
-
 #: src/common/file_types.cpp:43
 #, no-c-format
 msgid "MP4 audio/video files"
 msgstr "MP4 オーディオ/ビデオファイル"
-
-#: src/common/file_types.cpp:44
-#, no-c-format
-msgid "MPEG audio files"
-msgstr "MPEGオーディオファイル"
 
 #: src/common/file_types.cpp:95
 #, no-c-format
@@ -7765,20 +7750,31 @@ msgstr "MPEGトランスポートストリーム"
 msgid "MPEG transport streams"
 msgstr "MPEGトランスポートストリーム"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:93
+#: src/output/p_mp3.h:44
 #, no-c-format
-msgid "MPEG video elementary stream"
-msgstr "MPEGビデオエレメンタリストリーム"
+msgid "MPEG-1/2 Audio Layer II/III"
+msgstr ""
 
-#: src/common/file_types.cpp:47
-#, no-c-format
-msgid "MPEG video elementary streams"
+#: src/common/file_types.cpp:44
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "MPEGビデオエレメンタリストリーム"
 
 #: src/output/p_mpeg1_2.h:37
-#, no-c-format
-msgid "MPEG-1/2"
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
+
+#: src/common/file_types.cpp:94
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary stream"
+msgstr "MPEGビデオエレメンタリストリーム"
+
+#: src/common/file_types.cpp:47
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary streams"
+msgstr "MPEGビデオエレメンタリストリーム"
 
 #: src/output/p_mpeg4_p2.h:64
 #, no-c-format
@@ -12773,7 +12769,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "このテンプレートは新しいチャプタエントリに使用されます。"
 
 #: src/input/subtitles.cpp:512
-#: src/output/p_textsubs.cpp:138
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -15492,6 +15488,15 @@ msgstr "無しに設定"
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "MKVToolNixオプションファイル"
+
+#~ msgid "MP2/MP3"
+#~ msgstr "MP2/MP3"
+
+#~ msgid "MP3"
+#~ msgstr "MP3"
+
+#~ msgid "MPEG audio files"
+#~ msgstr "MPEGオーディオファイル"
 
 #~ msgid "Malformed line? (%1%)\n"
 #~ msgstr "無効な形式の行？（%1%）\n"

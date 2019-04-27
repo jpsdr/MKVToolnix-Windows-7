@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-04-11 09:10+0200\n"
+"POT-Creation-Date: 2019-04-27 14:30+0200\n"
 "PO-Revision-Date: 2018-05-02 15:51+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/lt/)\n"
@@ -6798,7 +6798,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr ""
 
-#: src/output/p_textsubs.cpp:115
+#: src/output/p_textsubs.cpp:117
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr ""
@@ -7607,25 +7607,10 @@ msgstr ""
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "Sukurti &nuostatų rinkmeną"
 
-#: src/common/file_types.cpp:93
-#, no-c-format
-msgid "MP2/MP3"
-msgstr "MP2/MP3"
-
-#: src/output/p_mp3.h:44
-#, no-c-format
-msgid "MP3"
-msgstr "MP3"
-
 #: src/common/file_types.cpp:43
 #, no-c-format
 msgid "MP4 audio/video files"
 msgstr "MP4 garso/vaizdo rinkmenos"
-
-#: src/common/file_types.cpp:44
-#, no-c-format
-msgid "MPEG audio files"
-msgstr "MPEG garso rinkmenos"
 
 #: src/common/file_types.cpp:95
 #, no-c-format
@@ -7647,20 +7632,31 @@ msgstr ""
 msgid "MPEG transport streams"
 msgstr ""
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:93
+#: src/output/p_mp3.h:44
 #, no-c-format
-msgid "MPEG video elementary stream"
+msgid "MPEG-1/2 Audio Layer II/III"
 msgstr ""
 
-#: src/common/file_types.cpp:47
-#, no-c-format
-msgid "MPEG video elementary streams"
-msgstr ""
+#: src/common/file_types.cpp:44
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 Audio Layer II/III elementary streams"
+msgstr "VC-1 pradiniai srautai"
 
 #: src/output/p_mpeg1_2.h:37
-#, no-c-format
-msgid "MPEG-1/2"
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
+
+#: src/common/file_types.cpp:94
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary stream"
+msgstr "VC-1 pradiniai srautai"
+
+#: src/common/file_types.cpp:47
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary streams"
+msgstr "VC-1 pradiniai srautai"
 
 #: src/output/p_mpeg4_p2.h:64
 #, no-c-format
@@ -12677,7 +12673,7 @@ msgid "This template will be used for new chapter entries."
 msgstr ""
 
 #: src/input/subtitles.cpp:512
-#: src/output/p_textsubs.cpp:138
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -15242,6 +15238,15 @@ msgstr ""
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "Sukurti &nuostatų rinkmeną"
+
+#~ msgid "MP2/MP3"
+#~ msgstr "MP2/MP3"
+
+#~ msgid "MP3"
+#~ msgstr "MP3"
+
+#~ msgid "MPEG audio files"
+#~ msgstr "MPEG garso rinkmenos"
 
 #~ msgid "Max content light: %1%"
 #~ msgstr "vaizdtaškių kirpimas dešinėje: %1%"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-04-11 09:10+0200\n"
+"POT-Creation-Date: 2019-04-27 14:30+0200\n"
 "PO-Revision-Date: 2018-03-28 23:04+0200\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -6977,7 +6977,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "Да бисте их придружили или додали као прилепке, одаберите којој улазној датотеци желите да их придружите или прилепите:"
 
-#: src/output/p_textsubs.cpp:115
+#: src/output/p_textsubs.cpp:117
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "Занемарујем унос чији је почетак после њ. краја ({0}).\n"
@@ -7786,25 +7786,10 @@ msgstr "Датотеке графичких поставки Мкв-алатни
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "Датотеке поставки Мкв-алатнице"
 
-#: src/common/file_types.cpp:93
-#, no-c-format
-msgid "MP2/MP3"
-msgstr "Мп2/Мп3"
-
-#: src/output/p_mp3.h:44
-#, no-c-format
-msgid "MP3"
-msgstr "Мп3"
-
 #: src/common/file_types.cpp:43
 #, no-c-format
 msgid "MP4 audio/video files"
 msgstr "Мп4 зв./видео датотеке"
-
-#: src/common/file_types.cpp:44
-#, no-c-format
-msgid "MPEG audio files"
-msgstr "Мпег звучне датотеке"
 
 #: src/common/file_types.cpp:95
 #, no-c-format
@@ -7826,20 +7811,31 @@ msgstr "Мпег-ток за пренос"
 msgid "MPEG transport streams"
 msgstr "Мпег-ток за пренос"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:93
+#: src/output/p_mp3.h:44
 #, no-c-format
-msgid "MPEG video elementary stream"
-msgstr "Основни мпег-видео ток"
+msgid "MPEG-1/2 Audio Layer II/III"
+msgstr ""
 
-#: src/common/file_types.cpp:47
-#, no-c-format
-msgid "MPEG video elementary streams"
+#: src/common/file_types.cpp:44
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "Основни мпег-видео токови"
 
 #: src/output/p_mpeg1_2.h:37
-#, no-c-format
-msgid "MPEG-1/2"
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video"
 msgstr "Мпег-1/2"
+
+#: src/common/file_types.cpp:94
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary stream"
+msgstr "Основни мпег-видео ток"
+
+#: src/common/file_types.cpp:47
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary streams"
+msgstr "Основни мпег-видео токови"
 
 #: src/output/p_mpeg4_p2.h:64
 #, no-c-format
@@ -12883,7 +12879,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "Ова мустра ће да се употребљава у новоствараним уносима поглавља."
 
 #: src/input/subtitles.cpp:512
-#: src/output/p_textsubs.cpp:138
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -15660,6 +15656,15 @@ msgstr "— не постављај —"
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "Датотеке поставки Мкв-алатнице"
+
+#~ msgid "MP2/MP3"
+#~ msgstr "Мп2/Мп3"
+
+#~ msgid "MP3"
+#~ msgstr "Мп3"
+
+#~ msgid "MPEG audio files"
+#~ msgstr "Мпег звучне датотеке"
 
 #~ msgid "Malformed line? (%1%)\n"
 #~ msgstr "Неправилна линија? (%1%)\n"

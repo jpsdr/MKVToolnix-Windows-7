@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-04-11 09:10+0200\n"
+"POT-Creation-Date: 2019-04-27 14:30+0200\n"
 "PO-Revision-Date: 2018-04-11 00:40+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -6908,7 +6908,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "그것을 추가적인 부분으로 결합하거나 추가하고 싶으면 결합하거나 추가할 소스 파일을 선택해야 합니다:"
 
-#: src/output/p_textsubs.cpp:115
+#: src/output/p_textsubs.cpp:117
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "종료 이후에 시작하는 항목({0})을 무시합니다.\n"
@@ -7715,25 +7715,10 @@ msgstr "MKVToolNix GUI 설치 폴더"
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "MKVToolNix 옵션 파일 (JSON 형식)"
 
-#: src/common/file_types.cpp:93
-#, no-c-format
-msgid "MP2/MP3"
-msgstr "MP2/MP3"
-
-#: src/output/p_mp3.h:44
-#, no-c-format
-msgid "MP3"
-msgstr "MP3"
-
 #: src/common/file_types.cpp:43
 #, no-c-format
 msgid "MP4 audio/video files"
 msgstr "MP4 오디오/비디오 파일"
-
-#: src/common/file_types.cpp:44
-#, no-c-format
-msgid "MPEG audio files"
-msgstr "MPEG 오디오 파일"
 
 #: src/common/file_types.cpp:95
 #, no-c-format
@@ -7755,20 +7740,31 @@ msgstr "MPEG 전송 스트림"
 msgid "MPEG transport streams"
 msgstr "MPEG 전송 스트림"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:93
+#: src/output/p_mp3.h:44
 #, no-c-format
-msgid "MPEG video elementary stream"
-msgstr "MPEG 비디오 엘러멘터리 스트림"
+msgid "MPEG-1/2 Audio Layer II/III"
+msgstr ""
 
-#: src/common/file_types.cpp:47
-#, no-c-format
-msgid "MPEG video elementary streams"
+#: src/common/file_types.cpp:44
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "MPEG 비디오 엘러멘터리 스트림"
 
 #: src/output/p_mpeg1_2.h:37
-#, no-c-format
-msgid "MPEG-1/2"
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
+
+#: src/common/file_types.cpp:94
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary stream"
+msgstr "MPEG 비디오 엘러멘터리 스트림"
+
+#: src/common/file_types.cpp:47
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary streams"
+msgstr "MPEG 비디오 엘러멘터리 스트림"
 
 #: src/output/p_mpeg4_p2.h:64
 #, no-c-format
@@ -12750,7 +12746,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "이 템플릿은 새 챕터 항목에 사용합니다."
 
 #: src/input/subtitles.cpp:512
-#: src/output/p_textsubs.cpp:138
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -15452,6 +15448,15 @@ msgstr "– 없음으로 설정 –"
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "MKVToolNix 옵션 파일 (이전 형식)"
+
+#~ msgid "MP2/MP3"
+#~ msgstr "MP2/MP3"
+
+#~ msgid "MP3"
+#~ msgstr "MP3"
+
+#~ msgid "MPEG audio files"
+#~ msgstr "MPEG 오디오 파일"
 
 #~ msgid "Malformed line? (%1%)\n"
 #~ msgstr "잘못된 형식의 행일까요? (%1%)\n"

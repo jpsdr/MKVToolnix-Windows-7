@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-04-11 09:10+0200\n"
+"POT-Creation-Date: 2019-04-27 14:30+0200\n"
 "PO-Revision-Date: 2019-03-12 21:36+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -7022,7 +7022,7 @@ msgstr "Si empreu sovint els mateixos valors quan es divideix per la mida, podeu
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "Si els voleu annexar o afegir com a parts addicionals, haureu de seleccionar el fitxer d'origen:"
 
-#: src/output/p_textsubs.cpp:115
+#: src/output/p_textsubs.cpp:117
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "S'ignora una entrada que comença després del final ({0}).\n"
@@ -7830,25 +7830,10 @@ msgstr "Directori d'instal·lació de la IGU del MKVToolNix"
 msgid "MKVToolNix option files (JSON-formatted)"
 msgstr "Fitxer d'opcions del MKVToolNix (format JSON)"
 
-#: src/common/file_types.cpp:93
-#, no-c-format
-msgid "MP2/MP3"
-msgstr "MP2/MP3"
-
-#: src/output/p_mp3.h:44
-#, no-c-format
-msgid "MP3"
-msgstr "MP3"
-
 #: src/common/file_types.cpp:43
 #, no-c-format
 msgid "MP4 audio/video files"
 msgstr "Fitxers d'àudio/vídeo MP4"
-
-#: src/common/file_types.cpp:44
-#, no-c-format
-msgid "MPEG audio files"
-msgstr "Fitxers d'àudio MPEG"
 
 #: src/common/file_types.cpp:95
 #, no-c-format
@@ -7870,20 +7855,31 @@ msgstr "Flux del transport MPEG"
 msgid "MPEG transport streams"
 msgstr "Fluxos del transport MPEG"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:93
+#: src/output/p_mp3.h:44
 #, no-c-format
-msgid "MPEG video elementary stream"
-msgstr "Flux elemental del vídeo MPEG"
+msgid "MPEG-1/2 Audio Layer II/III"
+msgstr ""
 
-#: src/common/file_types.cpp:47
-#, no-c-format
-msgid "MPEG video elementary streams"
+#: src/common/file_types.cpp:44
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "Fluxos elementals del vídeo MPEG"
 
 #: src/output/p_mpeg1_2.h:37
-#, no-c-format
-msgid "MPEG-1/2"
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
+
+#: src/common/file_types.cpp:94
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary stream"
+msgstr "Flux elemental del vídeo MPEG"
+
+#: src/common/file_types.cpp:47
+#, fuzzy, no-c-format
+msgid "MPEG-1/2 video elementary streams"
+msgstr "Fluxos elementals del vídeo MPEG"
 
 #: src/output/p_mpeg4_p2.h:64
 #, no-c-format
@@ -12897,7 +12893,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "Aquesta plantilla s'usarà per a les noves entrades de capítols."
 
 #: src/input/subtitles.cpp:512
-#: src/output/p_textsubs.cpp:138
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr "Aquesta pista de subtítols de text conté caràcters de 8 bits no vàlids fora de les seqüències UTF-8 de múltiples bytes vàlides. Especifiqueu la codificació correcta per a aquesta pista.\n"
@@ -15669,6 +15665,15 @@ msgstr "– Establert a «no» –"
 
 #~ msgid "MKVToolNix option files (old format)"
 #~ msgstr "Fitxer d'opcions del MKVToolNix (format antic)"
+
+#~ msgid "MP2/MP3"
+#~ msgstr "MP2/MP3"
+
+#~ msgid "MP3"
+#~ msgstr "MP3"
+
+#~ msgid "MPEG audio files"
+#~ msgstr "Fitxers d'àudio MPEG"
 
 #~ msgid "Malformed line? (%1%)\n"
 #~ msgstr "Línia amb format incorrecte? (%1%)\n"
