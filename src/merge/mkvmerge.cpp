@@ -369,6 +369,7 @@ set_usage() {
                   "                           a file opened for writing.\n");
   usage_text += Y("  --abort-on-warnings      Aborts the program after the first warning is\n"
                   "                           emitted.");
+  usage_text += "\n";
   usage_text += Y("  --debug <topic>          Turns on debugging output for 'topic'.\n");
   usage_text += Y("  --engage <feature>       Turns on experimental feature 'feature'.\n");
   usage_text += Y("  @option-file.json        Reads additional command line options from\n"
