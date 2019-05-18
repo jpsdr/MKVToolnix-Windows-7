@@ -1,10 +1,10 @@
 AC_DEFUN([AX_CXX_STD_CXX_FLAG],[
-  AC_CACHE_CHECK([for support for the "-std=c++14" flag], [ax_cv_std_cxx_flag],[
+  AC_CACHE_CHECK([for support for the "-std=c++17" flag], [ax_cv_std_cxx_flag],[
 
     AC_LANG_PUSH(C++)
     CXXFLAGS_SAVED="$CXXFLAGS"
 
-    for flag in gnu++14 c++14 gnu++11 c++11 c++0x; do
+    for flag in c++17 gnu++14 c++14 gnu++11 c++11 c++0x; do
       CXXFLAGS="$CXXFLAGS_SAVED -std=$flag"
       AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=$flag"], [ax_cv_std_cxx_flag="undecided"])
 
