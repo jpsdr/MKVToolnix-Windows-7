@@ -4,6 +4,8 @@
 
 * mkvmerge: all subtitle frames are now treated as key frames in order to fix
   wrong data in source files. Fixes #2541.
+* mkvmerge: AV1: fixed frame timestamp calculation when reading bitstreams
+  that lack timing information from IVF files. Fixes #2553.
 
 
 # Version 33.1.0 "Primrose" 2019-04-15
