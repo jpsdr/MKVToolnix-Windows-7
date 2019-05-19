@@ -111,34 +111,34 @@ property_element_c::init_tables() {
   ELE("title",                KaxTitle::ClassInfos,           YT("Title"),                        YT("The title for the whole movie."));
   ELE("date",                 KaxDateUTC::ClassInfos,         YT("Date"),                         YT("The date the file was created."));
   ELE("segment-filename",     KaxSegmentFilename::ClassInfos, YT("Segment filename"),             YT("The file name for this segment."));
-  ELE("prev-filename",        KaxPrevFilename::ClassInfos,    YT("Previous filename"),            YT("An escaped filename corresponding to\nthe previous segment."));
-  ELE("next-filename",        KaxNextFilename::ClassInfos,    YT("Next filename"),                YT("An escaped filename corresponding to\nthe next segment."));
-  ELE("segment-uid",          KaxSegmentUID::ClassInfos,      YT("Segment unique ID"),            YT("A randomly generated unique ID to identify the current\n"
+  ELE("prev-filename",        KaxPrevFilename::ClassInfos,    YT("Previous filename"),            YT("An escaped filename corresponding to the previous segment."));
+  ELE("next-filename",        KaxNextFilename::ClassInfos,    YT("Next filename"),                YT("An escaped filename corresponding to the next segment."));
+  ELE("segment-uid",          KaxSegmentUID::ClassInfos,      YT("Segment unique ID"),            YT("A randomly generated unique ID to identify the current "
                                                                                                      "segment between many others (128 bits)."));
-  ELE("prev-uid",             KaxPrevUID::ClassInfos,         YT("Previous segment's unique ID"), YT("A unique ID to identify the previous chained\nsegment (128 bits)."));
-  ELE("next-uid",             KaxNextUID::ClassInfos,         YT("Next segment's unique ID"),     YT("A unique ID to identify the next chained\nsegment (128 bits)."));
+  ELE("prev-uid",             KaxPrevUID::ClassInfos,         YT("Previous segment's unique ID"), YT("A unique ID to identify the previous chained segment (128 bits)."));
+  ELE("next-uid",             KaxNextUID::ClassInfos,         YT("Next segment's unique ID"),     YT("A unique ID to identify the next chained segment (128 bits)."));
   ELE("muxing-application",   KaxMuxingApp::ClassInfos,       YT("Multiplexing application"),     YT("The name of the application or library used for multiplexing the file."));
   ELE("writing-application",  KaxWritingApp::ClassInfos,      YT("Writing application"),          YT("The name of the application or library used for writing the file."));
 
   current_index = KaxTracks::ClassInfos.GlobalId.Value;
 
   ELE("track-number",         KaxTrackNumber::ClassInfos,          YT("Track number"),          YT("The track number as used in the Block Header."));
-  ELE("track-uid",            KaxTrackUID::ClassInfos,             YT("Track UID"),             YT("A unique ID to identify the Track. This should be\nkept the same when making a "
-                                                                                                   "direct stream copy\nof the Track to another file."));
-  ELE("flag-default",         KaxTrackFlagDefault::ClassInfos,     YT("'Default track' flag"),  YT("Set if that track (audio, video or subs) SHOULD\nbe used if no language found matches the\n"
+  ELE("track-uid",            KaxTrackUID::ClassInfos,             YT("Track UID"),             YT("A unique ID to identify the Track. This should be kept the same when making a "
+                                                                                                   "direct stream copy of the Track to another file."));
+  ELE("flag-default",         KaxTrackFlagDefault::ClassInfos,     YT("'Default track' flag"),  YT("Set if that track (audio, video or subs) SHOULD be used if no language found matches the "
                                                                                                    "user preference."));
   ELE("flag-enabled",         KaxTrackFlagEnabled::ClassInfos,     YT("'Track enabled' flag"),  YT("Set if the track is used."));
-  ELE("flag-forced",          KaxTrackFlagForced::ClassInfos,      YT("'Forced display' flag"), YT("Set if that track MUST be used during playback.\n"
-                                                                                                   "There can be many forced track for a kind (audio,\nvideo or subs). "
-                                                                                                   "The player should select the one\nwhose language matches the user preference or the\n"
+  ELE("flag-forced",          KaxTrackFlagForced::ClassInfos,      YT("'Forced display' flag"), YT("Set if that track MUST be used during playback. "
+                                                                                                   "There can be many forced track for a kind (audio, video or subs). "
+                                                                                                   "The player should select the one whose language matches the user preference or the "
                                                                                                    "default + forced track."));
-  ELE("min-cache",            KaxTrackMinCache::ClassInfos,        YT("Minimum cache"),         YT("The minimum number of frames a player\nshould be able to cache during playback.\n"
-                                                                                                   "If set to 0, the reference pseudo-cache system\nis not used."));
-  ELE("max-cache",            KaxTrackMaxCache::ClassInfos,        YT("Maximum cache"),         YT("The maximum number of frames a player\nshould be able to cache during playback.\n"
-                                                                                                   "If set to 0, the reference pseudo-cache system\nis not used."));
+  ELE("min-cache",            KaxTrackMinCache::ClassInfos,        YT("Minimum cache"),         YT("The minimum number of frames a player should be able to cache during playback. "
+                                                                                                   "If set to 0, the reference pseudo-cache system is not used."));
+  ELE("max-cache",            KaxTrackMaxCache::ClassInfos,        YT("Maximum cache"),         YT("The maximum number of frames a player should be able to cache during playback. "
+                                                                                                   "If set to 0, the reference pseudo-cache system is not used."));
   ELE("default-duration",     KaxTrackDefaultDuration::ClassInfos, YT("Default duration"),      YT("Number of nanoseconds (not scaled) per frame."));
   ELE("name",                 KaxTrackName::ClassInfos,            YT("Name"),                  YT("A human-readable track name."));
-  ELE("language",             KaxTrackLanguage::ClassInfos,        YT("Language"),              YT("Specifies the language of the track in the\nMatroska languages form."));
+  ELE("language",             KaxTrackLanguage::ClassInfos,        YT("Language"),              YT("Specifies the language of the track in the Matroska languages form."));
   ELE("codec-id",             KaxCodecID::ClassInfos,              YT("Codec ID"),              YT("An ID corresponding to the codec."));
   ELE("codec-name",           KaxCodecName::ClassInfos,            YT("Codec name"),            YT("A human-readable string specifying the codec."));
   ELE("codec-delay",          KaxCodecDelay::ClassInfos,           YT("Codec-inherent delay"),  YT("Delay built into the codec during decoding in ns."));
@@ -151,10 +151,10 @@ property_element_c::init_tables() {
   ELE("display-width",     KaxVideoDisplayWidth::ClassInfos,    YT("Video display width"),     YT("Width of the video frames to display."));
   ELE("display-height",    KaxVideoDisplayHeight::ClassInfos,   YT("Video display height"),    YT("Height of the video frames to display."));
   ELE("display-unit",      KaxVideoDisplayUnit::ClassInfos,     YT("Video display unit"),      YT("Type of the unit for DisplayWidth/Height\n(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."));
-  ELE("pixel-crop-left",   KaxVideoPixelCropLeft::ClassInfos,   YT("Video crop left"),         YT("The number of video pixels to remove\non the left of the image."));
-  ELE("pixel-crop-top",    KaxVideoPixelCropTop::ClassInfos,    YT("Video crop top"),          YT("The number of video pixels to remove\non the top of the image."));
-  ELE("pixel-crop-right",  KaxVideoPixelCropRight::ClassInfos,  YT("Video crop right"),        YT("The number of video pixels to remove\non the right of the image."));
-  ELE("pixel-crop-bottom", KaxVideoPixelCropBottom::ClassInfos, YT("Video crop bottom"),       YT("The number of video pixels to remove\non the bottom of the image."));
+  ELE("pixel-crop-left",   KaxVideoPixelCropLeft::ClassInfos,   YT("Video crop left"),         YT("The number of video pixels to remove on the left of the image."));
+  ELE("pixel-crop-top",    KaxVideoPixelCropTop::ClassInfos,    YT("Video crop top"),          YT("The number of video pixels to remove on the top of the image."));
+  ELE("pixel-crop-right",  KaxVideoPixelCropRight::ClassInfos,  YT("Video crop right"),        YT("The number of video pixels to remove on the right of the image."));
+  ELE("pixel-crop-bottom", KaxVideoPixelCropBottom::ClassInfos, YT("Video crop bottom"),       YT("The number of video pixels to remove on the bottom of the image."));
   ELE("aspect-ratio-type", KaxVideoAspectRatio::ClassInfos,     YT("Video aspect ratio type"), YT("Specify the possible modifications to the aspect ratio\n"
                                                                                                   "(0: free resizing, 1: keep aspect ratio, 2: fixed)."));
   ELE("field-order",       KaxVideoFieldOrder::ClassInfos,      YT("Video field order"),       YT("Field order (0, 1, 2, 6, 9 or 14, see documentation)."));
