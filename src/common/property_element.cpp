@@ -173,8 +173,8 @@ property_element_c::init_tables() {
                                                                                                                                     "This is additive with chroma-subsample-horizontal."));
   ELE2("cb-subsample-vertical",            KaxVideoCbSubsampVert::ClassInfos,           YT("Video: pixels to remove in Cb"),     YT("The amount of pixels to remove in the Cb channel for every pixel not removed vertically. "
                                                                                                                                     "This is additive with chroma-subsample-vertical."));
-  ELE2("chroma-siting-horizontal",         KaxVideoChromaSitHorz::ClassInfos,           YT("Video: chroma siting"),              YT("How chroma is sited horizontally."));
-  ELE2("chroma-siting-vertical",           KaxVideoChromaSitVert::ClassInfos,           YT("Video: chroma siting"),              YT("How chroma is sited vertically."));
+  ELE2("chroma-siting-horizontal",         KaxVideoChromaSitHorz::ClassInfos,           YT("Video: horizontal chroma siting"),   YT("How chroma is sited horizontally."));
+  ELE2("chroma-siting-vertical",           KaxVideoChromaSitVert::ClassInfos,           YT("Video: vertical chroma siting"),     YT("How chroma is sited vertically."));
   ELE2("colour-range",                     KaxVideoColourRange::ClassInfos,             YT("Video: colour range"),               YT("Clipping of the color ranges."));
   ELE2("colour-transfer-characteristics",  KaxVideoColourTransferCharacter::ClassInfos, YT("Video: transfer characteristics"),   YT("The colour transfer characteristics of the video."));
   ELE2("colour-primaries",                 KaxVideoColourPrimaries::ClassInfos,         YT("Video: colour primaries"),           YT("The colour primaries of the video."));
