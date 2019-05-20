@@ -150,12 +150,12 @@ property_element_c::init_tables() {
   ELE("pixel-height",      KaxVideoPixelHeight::ClassInfos,     YT("Video pixel height"),      YT("Height of the encoded video frames in pixels."));
   ELE("display-width",     KaxVideoDisplayWidth::ClassInfos,    YT("Video display width"),     YT("Width of the video frames to display."));
   ELE("display-height",    KaxVideoDisplayHeight::ClassInfos,   YT("Video display height"),    YT("Height of the video frames to display."));
-  ELE("display-unit",      KaxVideoDisplayUnit::ClassInfos,     YT("Video display unit"),      YT("Type of the unit for DisplayWidth/Height\n(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."));
+  ELE("display-unit",      KaxVideoDisplayUnit::ClassInfos,     YT("Video display unit"),      YT("Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."));
   ELE("pixel-crop-left",   KaxVideoPixelCropLeft::ClassInfos,   YT("Video crop left"),         YT("The number of video pixels to remove on the left of the image."));
   ELE("pixel-crop-top",    KaxVideoPixelCropTop::ClassInfos,    YT("Video crop top"),          YT("The number of video pixels to remove on the top of the image."));
   ELE("pixel-crop-right",  KaxVideoPixelCropRight::ClassInfos,  YT("Video crop right"),        YT("The number of video pixels to remove on the right of the image."));
   ELE("pixel-crop-bottom", KaxVideoPixelCropBottom::ClassInfos, YT("Video crop bottom"),       YT("The number of video pixels to remove on the bottom of the image."));
-  ELE("aspect-ratio-type", KaxVideoAspectRatio::ClassInfos,     YT("Video aspect ratio type"), YT("Specify the possible modifications to the aspect ratio\n"
+  ELE("aspect-ratio-type", KaxVideoAspectRatio::ClassInfos,     YT("Video aspect ratio type"), YT("Specify the possible modifications to the aspect ratio "
                                                                                                   "(0: free resizing, 1: keep aspect ratio, 2: fixed)."));
   ELE("field-order",       KaxVideoFieldOrder::ClassInfos,      YT("Video field order"),       YT("Field order (0, 1, 2, 6, 9 or 14, see documentation)."));
   ELE("stereo-mode",       KaxVideoStereoMode::ClassInfos,      YT("Video stereo mode"),       YT("Stereo-3D video mode (0 - 11, see documentation)."));
