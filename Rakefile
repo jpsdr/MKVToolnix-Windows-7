@@ -215,6 +215,13 @@ def setup_compiler_specifics
   end
 end
 
+def generate_helper_files
+  return unless c?(:EBML_MATROSKA_INTERNAL)
+
+  content = $building_for[:windows] ? "#define EBML_DLL_API\n" : ""
+  ensure_file("lib/libebml/ebml/ebml_export.h", content)
+end
+
 def define_default_task
   if !c(:DEFAULT_TARGET).empty?
     desc "Build target '#{c(:DEFAULT_TARGET)}' by default"
@@ -271,6 +278,7 @@ end
 setup_globals
 setup_overrides
 import_dependencies
+generate_helper_files
 
 # Default task
 define_default_task
@@ -953,6 +961,7 @@ task :clean do
     doc/man/*/*.1
     doc/man/*/*.html
     doc/man/*/*.xml
+    lib/libebml/ebml/ebml_export.h
     src/*/qt_resources.cpp
     src/info/ui/*.h
     src/mkvtoolnix-gui/forms/**/*.h

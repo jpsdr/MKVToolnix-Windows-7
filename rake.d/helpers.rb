@@ -243,6 +243,15 @@ def check_version required, actual
   return Gem::Version.new(required) <= Gem::Version.new(actual)
 end
 
+def ensure_file file_name, content = ""
+  if FileTest.exists?(file_name)
+    current_content = IO.readlines(file_name).join("\n")
+    return if current_content == content
+  end
+
+  File.open(file_name, 'w') { |file| file.write(content) }
+end
+
 class Rake::Task
   def mo_all_prerequisites
     todo   = [name]
