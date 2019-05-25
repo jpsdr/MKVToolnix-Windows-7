@@ -32,34 +32,33 @@ fi
 
 AC_DEFUN([AX_EBML_FINDNEXTCHILD],[
   AC_CACHE_CHECK([if libEBML contains FindNextChild], [ax_cv_ebml_findnextchild],[
-    CXXFLAGS_SAVED=$CXXFLAGS
-
     if test x"$EBML_MATROSKA_INTERNAL" = xyes; then
-      CXXFLAGS="-Ilib/libebml -Ilib/libmatroska"
+      ax_cv_ebml_findnextchild=yes
     else
+      CXXFLAGS_SAVED=$CXXFLAGS
       CXXFLAGS="$EBML_CFLAGS $MATROSKA_CFLAGS"
-    fi
-    export CXXFLAGS
+      export CXXFLAGS
 
-    AC_LANG_PUSH(C++)
-    AC_TRY_COMPILE(
-      [
+      AC_LANG_PUSH(C++)
+      AC_TRY_COMPILE(
+        [
 #include <matroska/KaxInfo.h>
 #include <matroska/KaxSegment.h>
 
 using namespace libebml;
 using namespace libmatroska;
-      ],
-      [
+        ],
+        [
   EbmlMaster *m = new KaxSegment;
   EbmlElement *e = new KaxTitle;
   FindNextChild(*m, *e);
-  ],
-      [ax_cv_ebml_findnextchild="yes"],
-      [ax_cv_ebml_findnextchild="no"])
-    AC_LANG_POP
+    ],
+        [ax_cv_ebml_findnextchild="yes"],
+        [ax_cv_ebml_findnextchild="no"])
+      AC_LANG_POP
 
-    CXXFLAGS="$CXXFLAGS_SAVED"
+      CXXFLAGS="$CXXFLAGS_SAVED"
+    fi
   ])
 
   if test x"$ax_cv_ebml_findnextchild" = xyes; then
