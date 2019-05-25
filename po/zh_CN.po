@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-05-20 08:07+0200\n"
-"PO-Revision-Date: 2019-04-27 18:30+0000\n"
+"PO-Revision-Date: 2019-05-21 04:22+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -1846,7 +1846,7 @@ msgstr "覆盖文件(&O)"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:617
 #, no-c-format
 msgid "&Preferences"
-msgstr "首选项(&P)"
+msgstr "偏好设置(&P)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:398
 #, no-c-format
@@ -2760,7 +2760,7 @@ msgstr[0] "检测到您安装的 MKVToolNix 存在问题:"
 #: src/common/property_element.cpp:116
 #, no-c-format
 msgid "A randomly generated unique ID to identify the current segment between many others (128 bits)."
-msgstr "随机生成的唯一 ID (128 位)，用来在众多剪辑中识别当前剪辑。"
+msgstr "随机生成的唯一 ID (128 位)，用于在诸多剪辑中识别当前剪辑。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:368
 #, no-c-format
@@ -2781,17 +2781,17 @@ msgstr "请求了 ID 为 {0} 的轨道但在文件中没有找到。相应的选
 #: src/common/property_element.cpp:126
 #, no-c-format
 msgid "A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file."
-msgstr "用以识别该轨道的唯一 ID。当将该轨道数据流直接复制到其他文件时应保持其不变。"
+msgstr "用于识别「轨道」的唯一 ID。在将轨道数据流直接复制到其他文件时应保持其不变。"
 
 #: src/common/property_element.cpp:119
 #, no-c-format
 msgid "A unique ID to identify the next chained segment (128 bits)."
-msgstr "用来识别下一个链接剪辑的唯一 ID (128 位)。"
+msgstr "用于识别链接的下一个剪辑的唯一 ID (128 位)。"
 
 #: src/common/property_element.cpp:118
 #, no-c-format
 msgid "A unique ID to identify the previous chained segment (128 bits)."
-msgstr "用来识别上一个链接剪辑的唯一 ID (128 位)。"
+msgstr "用于识别链接的上一个剪辑的唯一 ID (128 位)。"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:53
 #, no-c-format
@@ -3420,14 +3420,14 @@ msgid "An empty file name is not valid.\n"
 msgstr "文件名不能为空。\n"
 
 #: src/common/property_element.cpp:115
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "An escaped filename corresponding to the next segment."
-msgstr "下一剪辑对应的转义后的文件名。"
+msgstr "下一剪辑对应的已转义文件名。"
 
 #: src/common/property_element.cpp:114
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "An escaped filename corresponding to the previous segment."
-msgstr "上一剪辑对应的转义后的文件名。"
+msgstr "上一剪辑对应的已转义文件名。"
 
 #: src/merge/mkvmerge.cpp:3160
 #, no-c-format
@@ -7652,7 +7652,7 @@ msgstr "MKVToolNix GUI 设置文件"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1573
 #, no-c-format
 msgid "MKVToolNix GUI preferences"
-msgstr "MKVToolNix GUI 首选项"
+msgstr "MKVToolNix GUI 偏好设置"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
 #, no-c-format
@@ -10060,12 +10060,12 @@ msgstr "根据选中文件的名称设置输出文件名称(&F)"
 #: src/common/property_element.cpp:128
 #, no-c-format
 msgid "Set if that track (audio, video or subs) SHOULD be used if no language found matches the user preference."
-msgstr "设置当未找到符合用户首选项的语言时，该轨道 (音频、视频或字幕) 是否 *应该* 被使用。"
+msgstr "当轨道 (音频、视频或字幕) 的语言与用户的偏好设置不匹配时，是否 *应该* 使用该轨道。"
 
 #: src/common/property_element.cpp:131
 #, no-c-format
 msgid "Set if that track MUST be used during playback. There can be many forced track for a kind (audio, video or subs). The player should select the one whose language matches the user preference or the default + forced track."
-msgstr "设置播放时是否 *必须* 使用该轨道。每类轨道 (音频、视频或字幕) 可以有多个强制轨道。播放器应该选择语言符合用户首选项的或默认且强制的轨道。"
+msgstr "设置播放时是否 *必须* 使用该轨道。每个类别 (音频、视频或字幕) 可以有多个强制轨道。播放器应选择语言符合用户偏好设置的轨道，或默认且强制的轨道。"
 
 #: src/common/property_element.cpp:130
 #, no-c-format
@@ -10428,12 +10428,12 @@ msgstr "设置投影的水平平面旋转（yaw，上下轴不动）。"
 #: src/common/property_element.cpp:141
 #, no-c-format
 msgid "Specifies the language of the track in the Matroska languages form."
-msgstr "以 Matroska 的语言形式指定轨道的语言。"
+msgstr "以 Matroska 的语言格式指定轨道的语言。"
 
 #: src/common/property_element.cpp:158
 #, no-c-format
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
-msgstr "指定对宽高比允许的调整方式 (0: 自由缩放，1: 保持宽高比，2: 固定尺寸)。"
+msgstr "指定允许对宽高比作出的调整 (0: 自由缩放，1: 保持宽高比，2: 固定)。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 #, no-c-format
@@ -11746,7 +11746,7 @@ msgstr "最多生成指定数量的文件。最后一个文件的大小或时长
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
-msgstr "播放过程中播放器应缓存的最大帧数。如果设为 0，将不使用参考伪缓存系统。"
+msgstr "播放器在播放时应缓存的最大帧数。如果设为 0，将不使用参考伪缓存系统。"
 
 #: src/common/qt_kax_analyzer.cpp:70
 #: src/propedit/propedit.cpp:42
@@ -11757,7 +11757,7 @@ msgstr "元定位元素已被写至文件尾部，但剪辑大小无法更新。
 #: src/common/property_element.cpp:135
 #, no-c-format
 msgid "The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
-msgstr "播放过程中播放器应缓存的最小帧数。如果设为 0，将不使用参考伪缓存系统。"
+msgstr "播放器在播放时应缓存的最小帧数。如果设为 0，将不使用参考伪缓存系统。"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:695
 #, no-c-format
@@ -11829,22 +11829,22 @@ msgstr "外部时间戳数量 {0} 小于此轨道的帧数。轨道中其余的�
 #: src/common/property_element.cpp:157
 #, no-c-format
 msgid "The number of video pixels to remove on the bottom of the image."
-msgstr "视频画面下边要移除的像素数。"
+msgstr "视频画面下方要移除的像素数。"
 
 #: src/common/property_element.cpp:154
 #, no-c-format
 msgid "The number of video pixels to remove on the left of the image."
-msgstr "视频画面左边要移除的像素数。"
+msgstr "视频画面左侧要移除的像素数。"
 
 #: src/common/property_element.cpp:156
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The number of video pixels to remove on the right of the image."
-msgstr "视频画面右边要移除的像素数。"
+msgstr "视频画面右侧要移除的像素数。"
 
 #: src/common/property_element.cpp:155
 #, no-c-format
 msgid "The number of video pixels to remove on the top of the image."
-msgstr "视频画面上边要移除的像素数。"
+msgstr "视频画面上方要移除的像素数。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:281
 #: src/mkvtoolnix-gui/merge/output.cpp:297
@@ -13460,9 +13460,9 @@ msgid "Video: colour range"
 msgstr "视频: 色域"
 
 #: src/common/property_element.cpp:176
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: horizontal chroma siting"
-msgstr "水平色度分布"
+msgstr "视频: 水平色度分布"
 
 #: src/common/property_element.cpp:181
 #, no-c-format
@@ -13527,9 +13527,9 @@ msgid "Video: transfer characteristics"
 msgstr "视频: 传输特征"
 
 #: src/common/property_element.cpp:177
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: vertical chroma siting"
-msgstr "垂直色度分布"
+msgstr "视频: 垂直色度分布"
 
 #: src/common/property_element.cpp:190
 #, no-c-format
@@ -13925,7 +13925,7 @@ msgstr "还可以拖放媒体文件到这里。"
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:61
 #, no-c-format
 msgid "You can change this value in the preferences."
-msgstr "可以在首选项中更改该数值。"
+msgstr "可以在偏好设置中更改该数值。"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:332
 #, no-c-format
