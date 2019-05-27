@@ -218,8 +218,7 @@ end
 def generate_helper_files
   return unless c?(:EBML_MATROSKA_INTERNAL)
 
-  content = $building_for[:windows] ? "#define EBML_DLL_API\n" : ""
-  ensure_file("lib/libebml/ebml/ebml_export.h", content)
+  ensure_file("lib/libebml/ebml/ebml_export.h", "#define EBML_DLL_API\n")
 end
 
 def define_default_task
