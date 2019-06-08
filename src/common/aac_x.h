@@ -24,6 +24,11 @@ private:
   std::string const m_error;
 
 public:
+  unsupported_feature_x(std::string const &feature)
+    : m_error{fmt::format("unsupported feature \"{0}\"", feature)}
+  {
+  }
+
   unsupported_feature_x(char const *feature)
     : m_error{fmt::format("unsupported feature \"{0}\"", feature)}
   {

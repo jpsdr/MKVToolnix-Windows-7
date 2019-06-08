@@ -1087,7 +1087,7 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
       read_eld_specific_config();
 
     else
-      throw "aac_object_type_not_ga_specific. {0}\n";
+      throw unsupported_feature_x{fmt::format("AAC object type {0} in audio-specific config", object_type)};
 
     if ((MP4AOT_ER_AAC_LC == object_type) || ((MP4AOT_ER_AAC_LTP <= object_type) && (MP4AOT_ER_PARAM >= object_type))) {
       int ep_config = m_bc->get_bits(2);
