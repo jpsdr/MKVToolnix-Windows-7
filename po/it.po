@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 17.12.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-05-20 08:07+0200\n"
-"PO-Revision-Date: 2019-05-04 07:11+0000\n"
+"PO-Revision-Date: 2019-06-05 10:03+0000\n"
 "Last-Translator: bovirus <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/it/)\n"
@@ -2834,7 +2834,7 @@ msgstr[1] "In questa installazione di MKVToolNix sono stati rilevati diversi pro
 #: src/common/property_element.cpp:116
 #, no-c-format
 msgid "A randomly generated unique ID to identify the current segment between many others (128 bits)."
-msgstr "Una ID univoca generata casualmente per identificare il segmento attuale tra molti altri (128 bit)."
+msgstr "Un ID univoco generato in modo casuale per identificare il segmento attuale tra molti altri (128 bit)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:368
 #, no-c-format
@@ -2855,7 +2855,9 @@ msgstr "È stata richiesta una traccia con ID {0} ma non è stata trovata nel fi
 #: src/common/property_element.cpp:126
 #, no-c-format
 msgid "A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file."
-msgstr "Un ID univoco per identificare la traccia. Questo potrebbe mantenere lo stesso quando si esegue una copia diretta della traccia in un altro file."
+msgstr ""
+"Un ID univoco per identificare la traccia. \n"
+"Questo dovrebbe essere mantenuto lo stesso quando si effettua una copia diretta della traccia in un altro file."
 
 #: src/common/property_element.cpp:119
 #, no-c-format
@@ -3494,14 +3496,14 @@ msgid "An empty file name is not valid.\n"
 msgstr "Un file vuoto non è valido.\n"
 
 #: src/common/property_element.cpp:115
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "An escaped filename corresponding to the next segment."
-msgstr "Un nome file corrispondente al segmento successivo."
+msgstr "Un nome file di escape corrispondente al segmento successivo."
 
 #: src/common/property_element.cpp:114
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "An escaped filename corresponding to the previous segment."
-msgstr "Un nome file corrispondente al segmento precedente."
+msgstr "Un nome file di escape corrispondente al segmento precedente."
 
 #: src/merge/mkvmerge.cpp:3160
 #, no-c-format
@@ -10146,12 +10148,15 @@ msgstr "Imposta il nome &file destinazione dal nome file selezionato"
 #: src/common/property_element.cpp:128
 #, no-c-format
 msgid "Set if that track (audio, video or subs) SHOULD be used if no language found matches the user preference."
-msgstr "Imposta se questa traccia (audio, video o sottotitoli) DOVREBBE essere usata se non viene trovato nessuna lingua che soddisfa le impostazioni utente."
+msgstr "Imposta se quella traccia (audio, video o sottotitoli) DOVREBBE essere usata se nessuna lingua corrisponde alle preferenze utente."
 
 #: src/common/property_element.cpp:131
 #, no-c-format
 msgid "Set if that track MUST be used during playback. There can be many forced track for a kind (audio, video or subs). The player should select the one whose language matches the user preference or the default + forced track."
-msgstr "Imposta se questa traccia DEVE essere usata in riproduzione. Ci potrebbero essere diverse tracce forzate per un tipo (audio video o sottotitoli). Il riproduttore deve selezionare una la cui lingua corrisponda alle preferenze utente o la traccia predefinita + forzata."
+msgstr ""
+"Imposta se quella traccia DEVE essere usata durante la riproduzione. \n"
+"Ci possono essere diverse tracce obbligatorie per un certo tipo (audio, video o sottotitoli). \n"
+"Il riproduttore deve selezionare quella la cui lingua corrisponde alla preferenza utente o alla traccia predefinita + forzata."
 
 #: src/common/property_element.cpp:130
 #, no-c-format
@@ -10514,12 +10519,12 @@ msgstr "Specifica lo spostamento della rotazione della proiezione."
 #: src/common/property_element.cpp:141
 #, no-c-format
 msgid "Specifies the language of the track in the Matroska languages form."
-msgstr "Specifica la lingua della traccia nel modullo lingua lingua Matroska."
+msgstr "Specifica la lingua della traccia nel modulo lingua Matroska."
 
 #: src/common/property_element.cpp:158
 #, no-c-format
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
-msgstr "Specifica le possibili modifiche del rapporto di aspetto (0: modifica libera, 1: mantieni rapporto: 2: fisso)."
+msgstr "Specifica le possibili modifiche al rapporto aspetto (0: ridmensionamento libero, 1: mantieni rapporto, 2: fisso)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 #, no-c-format
@@ -11836,7 +11841,9 @@ msgstr "Numero massimo di file che verranno creati anche se l'ultimo file potreb
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
-msgstr "Numero massimo di frame che un riproduttore deve essere capace di mettere in cache durante la riproduzione. Se impostato a 0. il sistema di pseudo cache non verrà usato."
+msgstr ""
+"Numero massimo di frame che un riproduttore deve poter mettere in cache durante la riproduzione.\n"
+"Se impostato a 0, il sistema pseudo cache non verrà usato."
 
 #: src/common/qt_kax_analyzer.cpp:70
 #: src/propedit/propedit.cpp:42
@@ -11847,7 +11854,9 @@ msgstr "L'elemento meta seek è stato scritto alla fine del file, ma la dimensio
 #: src/common/property_element.cpp:135
 #, no-c-format
 msgid "The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
-msgstr "Numero minimo di frame che un riproduttore potrà mettere in cache durante la riproduzione. Se impostato a 0, il sistema di pseudo cache non verrà usato."
+msgstr ""
+"Numero minimo di frame che un riproduttore deve poter mettere in cache durante la riproduzione.\n"
+"Se impostato a 0, il sistema pseudo cache non verrà usato."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:695
 #, no-c-format
@@ -11919,24 +11928,22 @@ msgstr "Il numero dei timestamp esterni {0} è più piccolo del numero dei frame
 #: src/common/property_element.cpp:157
 #, no-c-format
 msgid "The number of video pixels to remove on the bottom of the image."
-msgstr "Numero dei pixel video da rimuovere in fondo all'immagine."
+msgstr "Numero pixel video da rimuove in basso nell'immagine."
 
 #: src/common/property_element.cpp:154
 #, no-c-format
 msgid "The number of video pixels to remove on the left of the image."
-msgstr "Numero dei pixel video da rimuovere sulla sinistra dell'immagine."
+msgstr "Numero pixel video da rimuove sulla sinistra dell'immagine."
 
 #: src/common/property_element.cpp:156
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The number of video pixels to remove on the right of the image."
-msgstr ""
-"Il numero di pixel video da rimuovere\n"
-"sulla destra dell'immagine."
+msgstr "Numero pixel video da rimuove sulla destra dell'immagine."
 
 #: src/common/property_element.cpp:155
 #, no-c-format
 msgid "The number of video pixels to remove on the top of the image."
-msgstr "Numero di pixel video da rimuovere nella parte alta dell'immagine."
+msgstr "Numero pixel video da rimuove in alto nell'immagine."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:281
 #: src/mkvtoolnix-gui/merge/output.cpp:297
@@ -13057,7 +13064,7 @@ msgstr "Tipo"
 #: src/common/property_element.cpp:153
 #, no-c-format
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
-msgstr "Unità per altezza/larghezza display (0: pixel, 1: centimetri, 2: pollici, 3: rapporto aspetto)."
+msgstr "Tipo unità visualizzazione largehzza/altezza (0: pixel, 1: centimetri, 2: pollici, 3: rapporto aspetto)."
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:324
 #, no-c-format
@@ -13553,9 +13560,9 @@ msgid "Video: colour range"
 msgstr "Video: intervallo colore"
 
 #: src/common/property_element.cpp:176
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: horizontal chroma siting"
-msgstr "Posizione orizzontale croma"
+msgstr "Video: posizione croma orizzontale"
 
 #: src/common/property_element.cpp:181
 #, no-c-format
@@ -13620,9 +13627,9 @@ msgid "Video: transfer characteristics"
 msgstr "Video: caratteristiche trasferimento"
 
 #: src/common/property_element.cpp:177
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: vertical chroma siting"
-msgstr "Posizione croma verticale"
+msgstr "Video: posizione croma verticale"
 
 #: src/common/property_element.cpp:190
 #, no-c-format
