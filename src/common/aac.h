@@ -90,6 +90,7 @@ protected:
   int read_object_type();
   int read_sample_rate();
   void read_eld_specific_config();
+  void read_er_celp_specific_config();
   void read_ga_specific_config();
   void read_program_config_element();
   void read_error_protection_specific_config();

@@ -691,7 +691,7 @@ parser_c::decode_loas_latm_header(unsigned char const *buffer,
   } catch (bool) {
   }
 
-  return { failure, 1 };
+  return { failure, 2 };
 }
 
 std::pair<parser_c::parse_result_e, size_t>
@@ -762,9 +762,9 @@ parser_c::parse() {
     m_parsed_stream_position += num_bytes;
 
     mxdebug_if(m_debug,
-               fmt::format("result_status {0} remainig_bytes {1} result_bytes {2} num_bytes {3} position before {4} after {5}\n",
+               fmt::format("result_status @stream {6} {0} remainig_bytes {1} result_bytes {2} num_bytes {3} position before {4} after {5}\n",
                            result.first == success ? "success" : result.first == failure ? "failure" : "need-more-data",
-                           remaining_bytes, result.second, num_bytes, position - num_bytes, position));
+                           remaining_bytes, result.second, num_bytes, position - num_bytes, position, m_parsed_stream_position - num_bytes));
 
     if (result.first == failure) {
       m_garbage_size += num_bytes;
@@ -1010,8 +1010,69 @@ header_c::read_ga_specific_config() {
 }
 
 void
+header_c::read_er_celp_specific_config() {
+  if (m_bc->get_bit()) {        // is_base_layer
+    auto excitation_mode = m_bc->get_bits(1);
+    m_bc->skip_bits(3);         // sample_rate_mode, fine_rate_control, silence_compression
+
+    if (excitation_mode == 1)   // RPE
+      m_bc->skip_bits(3);       // rpe_configuration
+
+    else                        // MPE
+      m_bc->skip_bits(5 + 2 + 1); // mpe_configuration, num_enh_layers, bandwidth_scalability_mode
+
+  } else if (m_bc->get_bit())   // is_bws_layer
+    m_bc->skip_bits(2);         // celp_bw_senh_header.bws_configuration
+
+  else
+    m_bc->skip_bits(2);         // celp_brs_id
+}
+
+void
 header_c::read_error_protection_specific_config() {
-  throw unsupported_feature_x{"AAC error specific configuration"};
+  auto number_of_predefined_set = m_bc->get_bits(8);
+  auto interleave_type           = m_bc->get_bits(2);
+  m_bc->skip_bits(3);   // , bit_stuffing
+  auto number_of_concatenated_frame = m_bc->get_bits(3);
+
+  for (auto i = 0; i < static_cast<int>(number_of_predefined_set); ++i) {
+    auto number_of_class_i = m_bc->get_bits(6);
+
+    for (auto j = 0; j < static_cast<int>(number_of_class_i); ++j) {
+      auto length_escape_i_j = m_bc->get_bit();
+      auto rate_escape_i_j   = m_bc->get_bit();
+      auto crclen_escape_i_j = m_bc->get_bit();
+
+      if (number_of_concatenated_frame != 1)
+        m_bc->skip_bit();       // concatenate_flag_i_j
+
+      auto fec_type_i_j = m_bc->get_bits(2);
+      if (fec_type_i_j == 0)
+        m_bc->skip_bit();       // termination_flag_i_j
+
+      if (interleave_type == 2)
+        m_bc->skip_bits(2);     // interleave_switch_i_j
+
+      m_bc->skip_bit();         // class_optional
+
+      if (length_escape_i_j == 1)
+        m_bc->skip_bits(4);     // number_of_bits_for_length_i_j
+      else
+        m_bc->skip_bits(16);    // class_length_i_j
+
+      if (rate_escape_i_j == 1)
+        m_bc->skip_bits(fec_type_i_j ? 7 : 5); // class_rate_i_j
+
+      if (crclen_escape_i_j != 1)
+        m_bc->skip_bits(5);     // class_crclen_i_j
+    }
+
+    if (m_bc->get_bit())        // class_reordered_output
+      m_bc->skip_bits(number_of_class_i * 6); // class_output_order_i_j
+  }
+
+  if (m_bc->get_bit())          // header_protection
+    m_bc->skip_bits(5 + 5);     // header_rate, header_crclen
 }
 
 void
@@ -1085,6 +1146,9 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
 
     else if (MP4AOT_ER_AAC_ELD == object_type)
       read_eld_specific_config();
+
+    else if (MP4AOT_ER_CELP)
+      read_er_celp_specific_config();
 
     else
       throw unsupported_feature_x{fmt::format("AAC object type {0} in audio-specific config", object_type)};
