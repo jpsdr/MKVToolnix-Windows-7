@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-06-17 21:15+0200\n"
+"POT-Creation-Date: 2019-06-17 22:20+0200\n"
 "PO-Revision-Date: 2019-06-17 21:15+0200\n"
 "Last-Translator: Chun-Kai Mao <chunkai.mao@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -3263,8 +3263,8 @@ msgstr "所有項目"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:663
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:312
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:390
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:315
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:393
 #: src/mkvtoolnix-gui/merge/attachments.cpp:257
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:200
@@ -3608,7 +3608,7 @@ msgstr "音訊位元深度"
 msgid "Audio channels"
 msgstr "音訊聲道數"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:389
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:392
 #, no-c-format
 msgid "Audio files"
 msgstr "音訊檔案"
@@ -4022,7 +4022,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "第一個新增項目的章節編號(&N)："
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:301
+#: src/mkvtoolnix-gui/util/settings.cpp:302
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "第 <NUM:2> 章"
@@ -4882,7 +4882,7 @@ msgstr "Cue 表單 (子項目將被跳過)"
 msgid "Current command line"
 msgstr "目前命令列"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:250
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
 msgstr "目前日期與時間 (ISO 8601 格式)"
@@ -4970,7 +4970,7 @@ msgstr "完成的日期"
 msgid "Date started"
 msgstr "開始的日期"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:225
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
 msgstr "取消選擇本核取方塊，可以臨時停用一項設定，而無需變更其參數。"
@@ -5093,6 +5093,12 @@ msgstr "刪除所有出現的屬性"
 msgid "Delete one or more attachments"
 msgstr "刪除一個或多個附件"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
+#: src/mkvtoolnix-gui/util/settings.cpp:53
+#, fuzzy, no-c-format
+msgid "Delete source files for multiplexer jobs"
+msgstr "用於合併作業的變數"
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:381
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:387
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:393
@@ -5163,12 +5169,12 @@ msgstr "輸出檔案的名稱"
 msgid "Destination file name: %1"
 msgstr "輸出檔案的名稱: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
 #, no-c-format
 msgid "Destination file's directory"
 msgstr "輸出檔案的目錄"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
 #, no-c-format
 msgid "Destination file's name"
 msgstr "輸出檔案的名稱"
@@ -5846,7 +5852,7 @@ msgstr "例如: 01:00:00,01:30:00 (一小時之後和一小時三十分之後) �
 msgid "Exception details:"
 msgstr "異常狀況詳細資訊:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:310
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:313
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
@@ -5858,7 +5864,7 @@ msgid "Executable not found"
 msgstr "找不到可執行檔案"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:193
-#: src/mkvtoolnix-gui/util/settings.cpp:60
+#: src/mkvtoolnix-gui/util/settings.cpp:61
 #, no-c-format
 msgid "Execute a program"
 msgstr "執行程式"
@@ -5873,12 +5879,12 @@ msgstr "在下次作業完成後執行動作(&J)"
 msgid "Execute action when the &queue completes"
 msgstr "佇列完成時執行動作(&Q)"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:65
+#: src/mkvtoolnix-gui/util/settings.cpp:66
 #, no-c-format
 msgid "Execute program '%1'"
 msgstr "執行程式 '%1'"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
 #, no-c-format
 msgid "Executes the action immediately."
 msgstr "立即執行動作。"
@@ -5893,7 +5899,7 @@ msgstr "執行動作"
 msgid "Executing actions after certain events"
 msgstr "在特定事件後執行動作"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
 #, no-c-format
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr "退出代碼 (0：正常，1：發生警告，2：發生錯誤)"
@@ -6347,7 +6353,7 @@ msgstr "一般"
 msgid "General options"
 msgstr "一般選項"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
 #, no-c-format
 msgid "General variables"
 msgstr "一般變數"
@@ -6591,7 +6597,7 @@ msgstr "若起始數字小於上個範圍的結束數字或檔案的起始 (若�
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
 msgstr "若起始時間戳記小於上個範圍的結束時間戳記或檔案的起始時間 (若沒有上個範圍)。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:219
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:221
 #, no-c-format
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr ""
@@ -6919,7 +6925,7 @@ msgstr "不相容的 AAC 音訊套件 (長度: {0} != {1})\n"
 msgid "Increase verbosity."
 msgstr "增強詳細程度。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:220
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:222
 #, no-c-format
 msgid "Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."
 msgstr ""
@@ -7417,12 +7423,12 @@ msgstr ""
 msgid "Job &output"
 msgstr "作業輸出(&O)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:236
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
 #, no-c-format
 msgid "Job description"
 msgstr "作業描述"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:238
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
 #, no-c-format
 msgid "Job end date && time in ISO 8601 format"
 msgstr "作業完成日期與時間 (ISO 8601 格式)"
@@ -7440,10 +7446,15 @@ msgstr "作業輸出"
 msgid "Job queue"
 msgstr "作業佇列"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:237
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
 #, no-c-format
 msgid "Job start date && time in ISO 8601 format"
 msgstr "作業開始日期與時間 (ISO 8601 格式)"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:238
+#, no-c-format
+msgid "Job type ('multiplexer' or 'info')"
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:202
 #, no-c-format
@@ -7664,7 +7675,7 @@ msgstr "MKVToolNix 圖形介面設定檔"
 msgid "MKVToolNix GUI preferences"
 msgstr "MKVToolNix 圖形介面喜好設定"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:251
 #, fuzzy, no-c-format
 msgid "MKVToolNix GUI's installation directory"
 msgstr "MKVToolNix 圖形介面設定檔"
@@ -8474,7 +8485,7 @@ msgstr "即使停用此選項 mkvmerge 仍然會複製來源檔案的標題屬�
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
 msgstr "注意想多播放程式不直接使用顯示寬度/高度數值，但使用根據設定初始視窗大小時給定的比例。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
 #, fuzzy, no-c-format
 msgid "Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments."
 msgstr "注意，大多 <MTX_…> 變數為空，在本次試跑中將移除這些變數。"
@@ -8942,12 +8953,12 @@ msgid "Play a WAV file with the default application:"
 msgstr "用預設應用程式播放 WAV 檔案:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:194
-#: src/mkvtoolnix-gui/util/settings.cpp:72
+#: src/mkvtoolnix-gui/util/settings.cpp:73
 #, fuzzy, no-c-format
 msgid "Play an audio file"
 msgstr "MPEG 音訊檔"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:77
+#: src/mkvtoolnix-gui/util/settings.cpp:78
 #, no-c-format
 msgid "Play audio file '%1'"
 msgstr "播放音訊檔案 '%1'"
@@ -9989,7 +10000,7 @@ msgstr "選擇所有同類型軌道(&T)"
 msgid "Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."
 msgstr "選擇一個現有的 Matroska 或 WebM 檔案，GUI 會自動將其剪輯 UID 加入到左側的輸入框中。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:393
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:396
 #, fuzzy, no-c-format
 msgid "Select audio file"
 msgstr "選擇標籤檔案"
@@ -10016,7 +10027,7 @@ msgstr "選擇輸出目錄"
 msgid "Select destination file name"
 msgstr "選擇輸出檔案名稱"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:315
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:318
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
@@ -10416,7 +10427,7 @@ msgstr "來源檔案名稱"
 msgid "Source file name: %1"
 msgstr "來源檔案名稱: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
 #, no-c-format
 msgid "Source file names"
 msgstr "來源檔案名稱"
@@ -12509,7 +12520,7 @@ msgstr "這是一份用逗號分隔開且以普通 UID 形式顯示的 128 位�
 msgid "This is also done when quitting the application."
 msgstr "退出程式時同樣也會詢問。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:222
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
 msgstr ""
@@ -13279,12 +13290,12 @@ msgstr "數值"
 msgid "Value: %1"
 msgstr "數值"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:235
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:237
 #, no-c-format
 msgid "Variables for all job types"
 msgstr "用於所有作業類型的變數"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, fuzzy, no-c-format
 msgid "Variables for multiplex jobs"
 msgstr "用於合併作業的變數"
