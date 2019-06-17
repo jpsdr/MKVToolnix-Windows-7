@@ -95,8 +95,14 @@ ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
     if (!(runConfig->m_active && (runConfig->m_forEvents & forEvent)) && !forceRunThis)
       continue;
 
+    auto variables = generalVariables;
+    setupVariables(variables);
+
     if (runConfig->m_type == Util::Settings::RunProgramType::ExecuteProgram)
-      executeProgram(*runConfig, setupVariables, generalVariables);
+      executeProgram(*runConfig, variables);
+
+    else if (runConfig->m_type == Util::Settings::RunProgramType::DeleteSourceFiles)
+      deleteSourceFiles(variables);
 
     else if (runConfig->m_type == Util::Settings::RunProgramType::PlayAudioFile)
       playAudioFile(*runConfig);
@@ -170,20 +176,14 @@ ProgramRunner::create() {
 
 bool
 ProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType type) {
-  return mtx::included_in(type, Util::Settings::RunProgramType::ExecuteProgram, Util::Settings::RunProgramType::PlayAudioFile);
+  return mtx::included_in(type, Util::Settings::RunProgramType::ExecuteProgram, Util::Settings::RunProgramType::PlayAudioFile, Util::Settings::RunProgramType::DeleteSourceFiles);
 }
 
 void
 ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
-                              std::function<void(VariableMap &)> const &setupVariables,
-                              VariableMap const &generalVariables) {
-  auto commandLine = config.m_commandLine;
-  auto variables   = generalVariables;
-
-  setupVariables(variables);
-
-  commandLine = replaceVariables(commandLine, variables);
-  auto exe    = commandLine.value(0);
+                              VariableMap const &variables) {
+  auto commandLine = replaceVariables(config.m_commandLine, variables);
+  auto exe         = commandLine.value(0);
 
   if (exe.isEmpty())
     return;
@@ -199,6 +199,17 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
           .arg(QY("The following program could not be executed: %1").arg(exe))
           .arg(QY("Possible causes are that the program does not exist or that you're not allowed to access it or its directory.")))
     .exec();
+}
+
+void
+ProgramRunner::deleteSourceFiles(VariableMap const &variables) {
+  if (!variables.contains(Q("JOB_TYPE")) || (variables[Q("JOB_TYPE")][0] != Q("multiplexer")))
+    return;
+
+  for (auto const &sourceFileName : variables[Q("SOURCE_FILE_NAMES")]) {
+    auto succeeded = QFile::remove(sourceFileName);
+    qDebug() << Q("deleteSourceFiles: file removal %1 (%2)").arg(succeeded ? "succeeded" : "failed").arg(sourceFileName);
+  }
 }
 
 void

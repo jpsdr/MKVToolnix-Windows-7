@@ -30,6 +30,7 @@ public:
     ShutDownComputer,
     HibernateComputer,
     SleepComputer,
+    DeleteSourceFiles,
     Max,
     Default = ExecuteProgram,
   };

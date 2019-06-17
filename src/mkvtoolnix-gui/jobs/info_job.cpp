@@ -191,4 +191,12 @@ InfoJob::abort() {
     p->info->abort();
 }
 
+void
+InfoJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
+  const{
+  Job::runProgramSetupVariables(variables);
+
+  variables[Q("JOB_TYPE")] << Q("info");
+}
+
 }}}

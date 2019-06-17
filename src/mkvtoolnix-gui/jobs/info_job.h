@@ -41,6 +41,8 @@ public:
 
   virtual Info::InfoConfig const &config() const;
 
+  virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables) const override;
+
 public slots:
   virtual void abort() override;
   virtual void showError(const QString &message);

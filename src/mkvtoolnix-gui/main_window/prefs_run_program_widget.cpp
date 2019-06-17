@@ -190,17 +190,19 @@ PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &
     }
   };
 
-  addItemIfSupported(QY("Execute a program"),      Util::Settings::RunProgramType::ExecuteProgram);
-  addItemIfSupported(QY("Play an audio file"),     Util::Settings::RunProgramType::PlayAudioFile);
-  addItemIfSupported(QY("Shut down the computer"), Util::Settings::RunProgramType::ShutDownComputer);
-  addItemIfSupported(QY("Hibernate the computer"), Util::Settings::RunProgramType::HibernateComputer);
-  addItemIfSupported(QY("Sleep the computer"),     Util::Settings::RunProgramType::SleepComputer);
+  addItemIfSupported(QY("Execute a program"),                        Util::Settings::RunProgramType::ExecuteProgram);
+  addItemIfSupported(QY("Play an audio file"),                       Util::Settings::RunProgramType::PlayAudioFile);
+  addItemIfSupported(QY("Shut down the computer"),                   Util::Settings::RunProgramType::ShutDownComputer);
+  addItemIfSupported(QY("Hibernate the computer"),                   Util::Settings::RunProgramType::HibernateComputer);
+  addItemIfSupported(QY("Sleep the computer"),                       Util::Settings::RunProgramType::SleepComputer);
+  addItemIfSupported(QY("Delete source files for multiplexer jobs"), Util::Settings::RunProgramType::DeleteSourceFiles);
 
   p->pagesByType[Util::Settings::RunProgramType::ExecuteProgram]    = p->ui->executeProgramTypePage;
   p->pagesByType[Util::Settings::RunProgramType::PlayAudioFile]     = p->ui->playAudioFileTypePage;
   p->pagesByType[Util::Settings::RunProgramType::ShutDownComputer]  = p->ui->emptyTypePage;
   p->pagesByType[Util::Settings::RunProgramType::HibernateComputer] = p->ui->emptyTypePage;
   p->pagesByType[Util::Settings::RunProgramType::SleepComputer]     = p->ui->emptyTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::DeleteSourceFiles] = p->ui->emptyTypePage;
 
   showPageForType(cfg.m_type);
 
@@ -233,6 +235,7 @@ PrefsRunProgramWidget::setupMenu() {
 
   QList<std::pair<QString, QString> > entries{
     { QY("Variables for all job types"),                                 Q("")                           },
+    { QY("Job type ('multiplexer' or 'info')"),                          Q("JOB_TYPE")                   },
     { QY("Job description"),                                             Q("JOB_DESCRIPTION")            },
     { QY("Job start date && time in ISO 8601 format"),                   Q("JOB_START_TIME")             },
     { QY("Job end date && time in ISO 8601 format"),                     Q("JOB_END_TIME")               },

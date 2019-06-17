@@ -240,6 +240,7 @@ MuxJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
   Job::runProgramSetupVariables(variables);
 
   // OUTPUT_… are kept for backwards compatibility.
+  variables[Q("JOB_TYPE")]                   << Q("multiplexer");
   variables[Q("OUTPUT_FILE_NAME")]           << QDir::toNativeSeparators(config().m_destination);
   variables[Q("OUTPUT_FILE_DIRECTORY")]      << QDir::toNativeSeparators(QFileInfo{ config().m_destination }.path());
   variables[Q("DESTINATION_FILE_NAME")]      << QDir::toNativeSeparators(config().m_destination);

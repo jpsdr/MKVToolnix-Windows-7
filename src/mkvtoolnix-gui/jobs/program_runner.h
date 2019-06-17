@@ -45,7 +45,8 @@ public slots:
 
 protected:
   virtual void executeActions(ExecuteActionCondition condition, Job const *job = nullptr);
-  virtual void executeProgram(Util::Settings::RunProgramConfig &config, std::function<void(VariableMap &)> const &setupVariables, VariableMap const &generalVariables);
+  virtual void executeProgram(Util::Settings::RunProgramConfig &config, VariableMap const &variables);
+  virtual void deleteSourceFiles(VariableMap const &variables);
   virtual void playAudioFile(Util::Settings::RunProgramConfig &config);
   virtual void shutDownComputer(Util::Settings::RunProgramConfig &config);
   virtual void hibernateComputer(Util::Settings::RunProgramConfig &config);

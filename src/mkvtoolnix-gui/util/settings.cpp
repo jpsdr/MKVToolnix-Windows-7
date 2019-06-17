@@ -50,6 +50,7 @@ Settings::RunProgramConfig::name()
        : m_type == RunProgramType::ShutDownComputer  ? QY("Shut down the computer")
        : m_type == RunProgramType::HibernateComputer ? QY("Hibernate the computer")
        : m_type == RunProgramType::SleepComputer     ? QY("Sleep the computer")
+       : m_type == RunProgramType::DeleteSourceFiles ? QY("Delete source files for multiplexer jobs")
        :                                               Q("unknown");
 }
 
@@ -513,6 +514,7 @@ Settings::addDefaultRunProgramConfigurations(QSettings &reg) {
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::SleepComputer);
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::HibernateComputer);
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::ShutDownComputer);
+  addDefaultRunProgramConfigurationForType(reg, RunProgramType::DeleteSourceFiles, [](RunProgramConfig &cfg) { cfg.m_active = false; });
 
   auto changed = fixDefaultAudioFileNameBug();
 

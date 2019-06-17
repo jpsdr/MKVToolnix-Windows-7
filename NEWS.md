@@ -5,6 +5,10 @@
 * mkvmerge: JSON identification: the "codec name" track property will be
   output as `codec_name`. The JSON schema has been bumped to v12 for this
   change.
+* MKVToolNix GUI: job queue: added a new type of action to execute after job
+  completion: deleting source files for of multiplexer jobs. As this is a
+  destructive operation, the action is disabled by default. Implements #869
+  and #2570.
 
 ## Bug fixes
 
