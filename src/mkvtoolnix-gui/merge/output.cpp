@@ -342,6 +342,12 @@ Tab::onTitleChanged(QString newValue) {
 
 void
 Tab::setDestination(QString const &newValue) {
+  if (newValue.isEmpty()) {
+    m_config.m_destination.clear();
+    emit titleChanged();
+    return;
+  }
+
 #if defined(SYS_WINDOWS)
   if (!newValue.contains(QRegularExpression{Q("^[a-zA-Z]:[\\\\/]|^\\\\\\\\.+\\.+")}))
     return;
