@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: JSON identification: the "codec name" track property will be
+  output as `codec_name`. The JSON schema has been bumped to v12 for this
+  change.
+
 ## Bug fixes
 
 * mkvmerge: the "codec name" track property wasn't copied from Matroska

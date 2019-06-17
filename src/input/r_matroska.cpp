@@ -2693,6 +2693,7 @@ kax_reader_c::identify() {
     info.add(mtx::id::codec_id,             track->codec_id);
     info.set(mtx::id::codec_private_length, track->private_data ? track->private_data->get_size() : 0u);
     info.add(mtx::id::codec_delay,          track->codec_delay.to_ns(0));
+    info.add(mtx::id::codec_name,           track->codec_name);
     info.add(mtx::id::language,             track->language);
     info.add(mtx::id::track_name,           track->track_name);
     info.add(mtx::id::stereo_mode,          static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));

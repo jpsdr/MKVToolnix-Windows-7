@@ -25,6 +25,7 @@ char const * const audio_output_sampling_frequency = "audio_output_sampling_freq
 char const * const audio_sampling_frequency        = "audio_sampling_frequency";        // track unsigned-integer
 char const * const codec_delay                     = "codec_delay";                     // track unsigned-integer
 char const * const codec_id                        = "codec_id";                        // track unicoode-string
+char const * const codec_name                      = "codec_name";                      // track unicoode-string
 char const * const codec_private_data              = "codec_private_data";              // track binary
 char const * const codec_private_length            = "codec_private_length";            // track unsigned-integer
 char const * const content_encoding_algorithms     = "content_encoding_algorithms";     // track ascii-string
