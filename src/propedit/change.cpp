@@ -217,7 +217,7 @@ change_c::parse_date_time() {
 
   mxerror(fmt::format("{0} {1} {2} {3}\n",
                       fmt::format(Y("The property value is not a valid date & time string in '{0}'."), get_spec()),
-                      Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28-02:00."),
+                      Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."),
                       Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."),
                       FILE_NOT_MODIFIED));
 }
