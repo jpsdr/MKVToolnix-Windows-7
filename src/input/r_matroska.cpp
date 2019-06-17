@@ -1313,6 +1313,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     }
 
     track->codec_id         = FindChildValue<KaxCodecID>(ktentry);
+    track->codec_name       = to_utf8(FindChildValue<KaxCodecName>(ktentry));
     track->track_name       = to_utf8(FindChildValue<KaxTrackName>(ktentry));
     track->language         = FindChildValue<KaxTrackLanguage, std::string>(ktentry, "eng");
     track->default_duration = FindChildValue<KaxTrackDefaultDuration>(ktentry, track->default_duration);
@@ -1636,6 +1637,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
   ptzr->set_track_type(MAP_TRACK_TYPE(t->type));
   ptzr->set_codec_id(t->codec_id);
   ptzr->set_codec_private(t->private_data);
+  ptzr->set_codec_name(t->codec_name);
 
   if (0.0 < t->v_frate)
     ptzr->set_track_default_duration(1000000000.0 / t->v_frate);
@@ -1688,6 +1690,8 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
 
   if ((0 != t->track_uid) && !PTZR(t->ptzr)->set_uid(t->track_uid))
     mxwarn(fmt::format(Y("matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"), t->track_uid));
+
+  PTZR(t->ptzr)->set_codec_name(t->codec_name);
 }
 
 void

@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: the "codec name" track property wasn't copied from Matroska
+  files. Fixes #2566.
+
+
 # Version 34.0.0 "Sight and Seen" 2019-05-18
 
 ## Bug fixes

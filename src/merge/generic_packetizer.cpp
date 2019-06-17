@@ -458,6 +458,13 @@ generic_packetizer_c::set_codec_private(memory_cptr const &buffer) {
 }
 
 void
+generic_packetizer_c::set_codec_name(std::string const &name) {
+  m_hcodec_name = name;
+  if (m_track_entry && !name.empty())
+    GetChild<KaxCodecName>(m_track_entry).SetValueUTF8(m_hcodec_name);
+}
+
+void
 generic_packetizer_c::set_track_default_duration(int64_t def_dur,
                                                  bool force) {
   if (!force && m_default_duration_forced)
@@ -999,6 +1006,9 @@ generic_packetizer_c::set_headers() {
 
   if (m_hcodec_private)
     GetChild<KaxCodecPrivate>(*m_track_entry).CopyBuffer(static_cast<binary *>(m_hcodec_private->get_buffer()), m_hcodec_private->get_size());
+
+  if (!m_hcodec_name.empty())
+    GetChild<KaxCodecName>(m_track_entry).SetValueUTF8(m_hcodec_name);
 
   if (!outputting_webm()) {
     if (-1 != m_htrack_max_add_block_ids)

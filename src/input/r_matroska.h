@@ -40,7 +40,7 @@ class info_c;
 struct kax_track_t {
   uint64_t tnum, track_number, track_uid;
 
-  std::string codec_id;
+  std::string codec_id, codec_name;
   codec_c codec;
   bool ms_compat;
 

@@ -72,7 +72,7 @@ protected:
   int m_htrack_max_add_block_ids;
   timestamp_c m_seek_pre_roll, m_codec_delay;
 
-  std::string m_hcodec_id;
+  std::string m_hcodec_id, m_hcodec_name;
   memory_cptr m_hcodec_private;
 
   double m_haudio_sampling_freq, m_haudio_output_sampling_freq;
@@ -191,6 +191,7 @@ public:
 
   virtual void set_codec_id(const std::string &id);
   virtual void set_codec_private(memory_cptr const &buffer);
+  virtual void set_codec_name(std::string const &name);
 
   virtual void set_track_default_duration(int64_t default_duration, bool force = false);
   virtual void set_track_max_additionals(int max_add_block_ids);
