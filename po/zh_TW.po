@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-05-20 08:07+0200\n"
-"PO-Revision-Date: 2019-06-17 21:10+0200\n"
+"POT-Creation-Date: 2019-06-17 21:15+0200\n"
+"PO-Revision-Date: 2019-06-17 21:15+0200\n"
 "Last-Translator: Chun-Kai Mao <chunkai.mao@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
 "Language: zh_TW\n"
@@ -70,7 +70,7 @@ msgid ""
 msgstr ""
 "  --append-mode <file|track>\n"
 "                           在追加檔案時\n"
-"\v                           選擇如何計算 mkvmerge 時間戳記。\n"
+"                           選擇如何計算 mkvmerge 時間戳記。\n"
 
 #: src/merge/mkvmerge.cpp:163
 #, no-c-format
@@ -1742,9 +1742,9 @@ msgid "&Multiplexer"
 msgstr "合併工具(&M)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:220
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Multiply start and end timestamps by the following factor:"
-msgstr "依下列因素將合併開始和結束時間戳記排序(&M):\v"
+msgstr "依下列因素將合併開始和結束時間戳記排序(&M):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:527
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:323
@@ -2540,7 +2540,7 @@ msgstr " '{0}' 軌道 {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr " '{0}' : 正在處理下列檔案: {1}\n"
 
-#: src/input/r_matroska.cpp:1895
+#: src/input/r_matroska.cpp:1899
 #, fuzzy, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr " '{0}' : 您正在重新合成於實驗模式中合成的 Opus 軌道。最後結果會用最終模式寫入，但是有一項詳細資訊無法從實驗模式合成的軌道中還原：末端裁剪。這表示解碼器可能會輸出比原本預期還少的取樣數。如果可以的話，您應該用原始的 Opus 檔案重新合成。\n"
@@ -2705,8 +2705,8 @@ msgstr "<尚未儲存的檔案>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> 不是於位置 {2} 上 <{1}> 的有效子元件。"
 
-#: src/input/r_matroska.cpp:2331
-#: src/input/r_matroska.cpp:2439
+#: src/input/r_matroska.cpp:2335
+#: src/input/r_matroska.cpp:2443
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "在時間戳記 {0} 處找到了軌道編號為 {1} 的區塊。然而，沒有找到符合該軌道編號的表頭資訊。此區塊將被跳過。\n"
@@ -3462,7 +3462,7 @@ msgstr "期待不帶正負號的整數。"
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "分析 MPEG4 位流，將每一影格置於單獨的 Matroska 塊中，使用固有的時間戳記 (I P B B = 0 120 40 80)，使用形如 V_MPEG4/ISO/... 的 CodecID。"
 
-#: src/merge/generic_packetizer.cpp:641
+#: src/merge/generic_packetizer.cpp:648
 #, no-c-format
 msgid "Another default track for {0} tracks has already been set. The 'default' flag for track {1} of '{2}' will not be set.\n"
 msgstr "軌道 {0} 的另一個預設軌已設定。 '{2}' 的 {1} 軌道的 '預設軌' 標記將不被設定。\n"
@@ -4424,7 +4424,7 @@ msgstr "完成，正常"
 msgid "Completed with warnings"
 msgstr "完成，警告"
 
-#: src/merge/generic_packetizer.cpp:1289
+#: src/merge/generic_packetizer.cpp:1299
 #, no-c-format
 msgid "Compression failed: {0}\n"
 msgstr "壓縮失敗: {0}\n"
@@ -7741,13 +7741,13 @@ msgstr "MPLS 藍光播放清單"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "將此軌道作為本身類型 (音訊、視訊、字幕) 的預設軌。"
 
-#: src/input/r_matroska.cpp:1767
-#: src/input/r_matroska.cpp:1784
+#: src/input/r_matroska.cpp:1771
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "發現不正常的 AAC 編碼器初始化資料。\n"
 
-#: src/input/r_matroska.cpp:1777
+#: src/input/r_matroska.cpp:1781
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "不正常的編碼器 id '{0}' 。\n"
@@ -7777,7 +7777,7 @@ msgstr "Matroska 音訊/視訊檔"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:758
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:187
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:400
 #, no-c-format
 msgid "Matroska files"
 msgstr "Matroska 檔案"
@@ -8484,7 +8484,7 @@ msgstr "注意，大多 <MTX_…> 變數為空，在本次試跑中將移除這�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "注意，在 Windows 平台，路徑名稱中的反斜線 (\\) 也可以用正斜線 (/) 代替。"
 
-#: src/merge/generic_packetizer.cpp:1645
+#: src/merge/generic_packetizer.cpp:1655
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "注意 Matroska 規範有關 '{0}' 的儲存方面尚未完成。mkvmerge 支援是因為改變主題且使用 CodecID '{1}/EXPERIMENTAL' 替代 '{1}' 。一旦規範完成會移除這個警告而 mkvmerge 也會相應地更新。\n"
@@ -9994,7 +9994,7 @@ msgstr "選擇一個現有的 Matroska 或 WebM 檔案，GUI 會自動將其剪�
 msgid "Select audio file"
 msgstr "選擇標籤檔案"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:477
+#: src/mkvtoolnix-gui/merge/output.cpp:483
 #, no-c-format
 msgid "Select chapter file"
 msgstr "選擇章節檔案"
@@ -10011,7 +10011,7 @@ msgid "Select destination directory"
 msgstr "選擇輸出目錄"
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:93
-#: src/mkvtoolnix-gui/merge/output.cpp:395
+#: src/mkvtoolnix-gui/merge/output.cpp:401
 #, no-c-format
 msgid "Select destination file name"
 msgstr "選擇輸出檔案名稱"
@@ -10032,13 +10032,13 @@ msgstr "選擇要加入的檔案"
 msgid "Select one of the ISO639-2 language codes."
 msgstr "選擇一種 ISO639-2 語言碼。"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:425
+#: src/mkvtoolnix-gui/merge/output.cpp:431
 #, no-c-format
 msgid "Select segment info file"
 msgstr "選擇剪輯資訊檔"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1001
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:419
 #, no-c-format
 msgid "Select tags file"
 msgstr "選擇標籤檔案"
@@ -10323,7 +10323,7 @@ msgid "Simple"
 msgstr "樣本"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:191
-#: src/mkvtoolnix-gui/merge/output.cpp:480
+#: src/mkvtoolnix-gui/merge/output.cpp:486
 #, no-c-format
 msgid "Simple OGM-style chapter files"
 msgstr "OGM 樣本模式章節檔"
@@ -10602,7 +10602,7 @@ msgstr "字幕"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:757
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
-#: src/mkvtoolnix-gui/merge/output.cpp:478
+#: src/mkvtoolnix-gui/merge/output.cpp:484
 #, no-c-format
 msgid "Supported file types"
 msgstr "支援的檔案類型"
@@ -11150,7 +11150,7 @@ msgstr "目前模式可以使用 --merge、--edit-chapters 或 --edit-headers �
 msgid "The current multiplex settings will be closed."
 msgstr "目前合併設定將會被關閉。"
 
-#: src/merge/generic_packetizer.cpp:1363
+#: src/merge/generic_packetizer.cpp:1373
 #, no-c-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "目前套件的時間戳記比前一個套件的小。這通常表明來源檔未正常 100% 建立的 Matroska 檔案。所有套件的時間戳記將以 {0}ms 調整以避免丟失任何資料。這可能導致音/視訊不同步，但可以透過 mkvmerge 的 \"--sync\" 選項修正。如果您已經使用了 \"--sync\" 但仍然收到本警告，請 *不要* 著急 -- 這是正常的。如果對於一個特定軌超過一次出現本錯誤且您超過一次收到本訊息，既可能是因為來源檔嚴重錯誤，也可能是因為 mkvmerge 包含了某個 bug。如果是這樣，請聯繫作者 Moritz Bunkus <moritz@bunkus.org>。\n"
@@ -11540,8 +11540,8 @@ msgstr "此檔案無法辨識為支援的格式 (離開碼: %1)。"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1599
-#: src/input/r_matroska.cpp:2301
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:2305
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "無法更進一步處理檔案。"
@@ -12689,8 +12689,8 @@ msgstr "此軌道包含 SBR AAC/HE-AAC/AAC+ 資料。"
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1599
-#: src/input/r_matroska.cpp:2301
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:2305
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "這通常用以表示損壞的檔案結構。"
@@ -13141,7 +13141,7 @@ msgstr "不支援 MPEG mpeg_version: 0x{0:02x} 於資料套件 {1} 時間戳記 
 msgid "Unsupported file format"
 msgstr "不支援的檔案格式"
 
-#: src/input/r_matroska.cpp:2124
+#: src/input/r_matroska.cpp:2128
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "不支援此軌道的軌道類型。\n"
@@ -13223,7 +13223,7 @@ msgstr "使用 3 位元組的 NALU 長可能會導致某些 AVC/h.264 編碼器�
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "此格式 '{0}' 使用多工解訊器。\n"
 
-#: src/input/r_matroska.cpp:1628
+#: src/input/r_matroska.cpp:1629
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "軌道類型 '{0}' 使用一般輸出模組。\n"
@@ -13674,7 +13674,7 @@ msgstr "WebM 音訊/視訊檔"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:759
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:400
 #, no-c-format
 msgid "WebM files"
 msgstr "WebM 檔案"
@@ -13893,18 +13893,18 @@ msgstr "錯誤的識別字串: '{0:7s}' != 'kate\\0\\0\\0' "
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:190
-#: src/mkvtoolnix-gui/merge/output.cpp:479
+#: src/mkvtoolnix-gui/merge/output.cpp:485
 #, no-c-format
 msgid "XML chapter files"
 msgstr "XML 章節檔"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:425
+#: src/mkvtoolnix-gui/merge/output.cpp:431
 #, no-c-format
 msgid "XML segment info files"
 msgstr "XML 剪輯資訊檔 "
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1001
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:419
 #, no-c-format
 msgid "XML tag files"
 msgstr "XML 標籤檔案"
@@ -14141,7 +14141,7 @@ msgstr "直欄交錯 (從右邊開始)"
 msgid "compression"
 msgstr "壓縮"
 
-#: src/merge/generic_packetizer.cpp:1664
+#: src/merge/generic_packetizer.cpp:1674
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num 未找到。 {0}\n"
@@ -14337,13 +14337,13 @@ msgstr "matroska_reader: (微軟相容模式, 軌道 {0}) Matrosa 視訊寬度�
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: 有一個軌道缺少軌道編號。\n"
 
-#: src/input/r_matroska.cpp:1690
+#: src/input/r_matroska.cpp:1692
 #, no-c-format
 msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
 msgstr "matroska_reader: 無法保留軌道 UID {0}，因為它已被指派給了新檔案。\n"
 
-#: src/input/r_matroska.cpp:1538
-#: src/input/r_matroska.cpp:1543
+#: src/input/r_matroska.cpp:1539
+#: src/input/r_matroska.cpp:1544
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: 未發現剪輯。\n"
@@ -14393,7 +14393,7 @@ msgstr "matroska_reader: 軌 {0} 的 CodecID 為 '{1}' ，但沒有編碼器專�
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: 軌 {0} 的 CodecID 為 '{1}' ，但沒發現專有資料。\n"
 
-#: src/input/r_matroska.cpp:1334
+#: src/input/r_matroska.cpp:1335
 #, no-c-format
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: 遺失 CodecID。\n"
@@ -14423,7 +14423,7 @@ msgstr "matroska_reader: 軌道 {0} 應該是正常的。\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge 編譯時沒有附加 FLAC 支援。已忽略軌道 {0}。\n"
 
-#: src/input/r_matroska.cpp:1527
+#: src/input/r_matroska.cpp:1528
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: 未發現 EBML 表頭。\n"
@@ -14883,7 +14883,7 @@ msgstr "tta_reader: c'tor 中 tag_size < 0。 {0}\n"
 #: src/common/kax_info.cpp:793
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:114
-#: src/input/r_matroska.cpp:2763
+#: src/input/r_matroska.cpp:2768
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -14894,12 +14894,12 @@ msgstr "tta_reader: c'tor 中 tag_size < 0。 {0}\n"
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2747
+#: src/input/r_matroska.cpp:2752
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "不明的格式標識 0x{0:04x}"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:716
+#: src/mkvtoolnix-gui/merge/output.cpp:722
 #, fuzzy, no-c-format
 msgid "unnamed"
 msgstr "<未命名>"
@@ -15011,8 +15011,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: 異常狀況發生 (message: {1}; type: {2})。"
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1598
-#: src/input/r_matroska.cpp:2300
+#: src/input/r_matroska.cpp:1599
+#: src/input/r_matroska.cpp:2304
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: 不明的異常狀況發生。"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-05-20 08:07+0200\n"
+"POT-Creation-Date: 2019-06-17 21:15+0200\n"
 "PO-Revision-Date: 2019-05-20 20:55+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2590,7 +2590,7 @@ msgstr "'{0}' iz {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': Aşağıdaki dosyalar dahi işleniyor: {1}\n"
 
-#: src/input/r_matroska.cpp:1895
+#: src/input/r_matroska.cpp:1899
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr ""
@@ -2755,8 +2755,8 @@ msgstr "<Kaydedilmemiş dosya>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}>, {2} konumunda geçerli bir <{1}> alt öğesi değil."
 
-#: src/input/r_matroska.cpp:2331
-#: src/input/r_matroska.cpp:2439
+#: src/input/r_matroska.cpp:2335
+#: src/input/r_matroska.cpp:2443
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "İz numarası {1} için {0} zaman damgasında bir blok bulundu. Ancak, bu iz numarası için bulunan başlıklar yok. Blok atlanacaktır.\n"
@@ -3513,7 +3513,7 @@ msgstr "İşaretsiz tamsayı beklendi."
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "MPEG4 bit akışlarını çözümler, her kareyi bir Matroska bloğu içine koyun, uygun zaman damgalaması (I P B B = 0 120 40 80) kullanın, V_MPEG4/ISO/... KodekID'leri kullanın."
 
-#: src/merge/generic_packetizer.cpp:641
+#: src/merge/generic_packetizer.cpp:648
 #, no-c-format
 msgid "Another default track for {0} tracks has already been set. The 'default' flag for track {1} of '{2}' will not be set.\n"
 msgstr "{0} iz için başka bir varsayılan iz zaten ayarlandı. İz {1} / '{2}' için 'varsayılan' işareti ayarlanmayacaktır.\n"
@@ -4476,7 +4476,7 @@ msgstr "Sorunsuz tamamlandı"
 msgid "Completed with warnings"
 msgstr "Uyarılarla tamamlandı"
 
-#: src/merge/generic_packetizer.cpp:1289
+#: src/merge/generic_packetizer.cpp:1299
 #, no-c-format
 msgid "Compression failed: {0}\n"
 msgstr "Sıkıştırma başarısız oldu: {0}\n"
@@ -7795,13 +7795,13 @@ msgstr "MPLS Blu-ray oynatma listesi"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Türleri (ses, görüntü, altyazılar) için bu izi varsayılan iz yapın."
 
-#: src/input/r_matroska.cpp:1767
-#: src/input/r_matroska.cpp:1784
+#: src/input/r_matroska.cpp:1771
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Arızalanmış AAC kodek başlatma verisi bulundu.\n"
 
-#: src/input/r_matroska.cpp:1777
+#: src/input/r_matroska.cpp:1781
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Arızalanmış kodek id '{0}'.\n"
@@ -7831,7 +7831,7 @@ msgstr "Matroska ses/görüntü dosyaları"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:758
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:187
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:400
 #, no-c-format
 msgid "Matroska files"
 msgstr "Matroska dosyaları"
@@ -8532,7 +8532,7 @@ msgstr "Çoğu <MTX_…> değişkenlerinin, boş olduğunu ve değişkenleri ba�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Dosya adlarında ters eğik çizgilerin yerine Windows öne eğik çizgilerinin de kullanılabildiğini unutmayın."
 
-#: src/merge/generic_packetizer.cpp:1645
+#: src/merge/generic_packetizer.cpp:1655
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr ""
@@ -10052,7 +10052,7 @@ msgstr "Varolan bir Matroska veya WebM dosyasını seçin ve GKA, soldaki girdi 
 msgid "Select audio file"
 msgstr "Ses dosyası seç"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:477
+#: src/mkvtoolnix-gui/merge/output.cpp:483
 #, no-c-format
 msgid "Select chapter file"
 msgstr "Bölüm dosyası seç"
@@ -10069,7 +10069,7 @@ msgid "Select destination directory"
 msgstr "Hedef dizini seç"
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:93
-#: src/mkvtoolnix-gui/merge/output.cpp:395
+#: src/mkvtoolnix-gui/merge/output.cpp:401
 #, no-c-format
 msgid "Select destination file name"
 msgstr "Hedef dosya adını seç"
@@ -10090,13 +10090,13 @@ msgstr "Eklemek için dosya seçin"
 msgid "Select one of the ISO639-2 language codes."
 msgstr "ISO639-2 dil kodlarından birini seçin."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:425
+#: src/mkvtoolnix-gui/merge/output.cpp:431
 #, no-c-format
 msgid "Select segment info file"
 msgstr "Parça bilgisi dosyası seç"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1001
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:419
 #, no-c-format
 msgid "Select tags file"
 msgstr "Etiketler dosyası seç"
@@ -10381,7 +10381,7 @@ msgid "Simple"
 msgstr "Basit"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:191
-#: src/mkvtoolnix-gui/merge/output.cpp:480
+#: src/mkvtoolnix-gui/merge/output.cpp:486
 #, no-c-format
 msgid "Simple OGM-style chapter files"
 msgstr "Basit OGM-stili bölüm dosyaları"
@@ -10662,7 +10662,7 @@ msgstr "Altyazılar"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:757
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
-#: src/mkvtoolnix-gui/merge/output.cpp:478
+#: src/mkvtoolnix-gui/merge/output.cpp:484
 #, no-c-format
 msgid "Supported file types"
 msgstr "Desteklenen dosya türleri"
@@ -11205,7 +11205,7 @@ msgstr "Şu anki kip --multiplex, --edit-chapters veya --edit-headers ile deği�
 msgid "The current multiplex settings will be closed."
 msgstr "Şu anki çoklama ayarları kapatılacaktır."
 
-#: src/merge/generic_packetizer.cpp:1363
+#: src/merge/generic_packetizer.cpp:1373
 #, no-c-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr ""
@@ -11596,8 +11596,8 @@ msgstr "Dosya desteklenen bir biçim olarak tanınmadı (çıkış kodu: %1)."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1599
-#: src/input/r_matroska.cpp:2301
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:2305
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Dosya daha fazla işlenmeyecektir."
@@ -12743,8 +12743,8 @@ msgstr "Bu iz SBR AAC/HE-AAC/AAC+ verisi içeriyor."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1599
-#: src/input/r_matroska.cpp:2301
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:2305
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Bu genellikle hasarlı bir dosya yapısını gösterir."
@@ -13197,7 +13197,7 @@ msgstr "Desteklenmeyen MPEG mpeg_sürümü: {2} zaman damgası için {1} paketin
 msgid "Unsupported file format"
 msgstr "Desteklenmeyen dosya biçimi"
 
-#: src/input/r_matroska.cpp:2124
+#: src/input/r_matroska.cpp:2128
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Bu iz için desteklenmeyen biçim.\n"
@@ -13279,7 +13279,7 @@ msgstr ""
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "'{0}' biçimi için demultiplexer kullanılıyor.\n"
 
-#: src/input/r_matroska.cpp:1628
+#: src/input/r_matroska.cpp:1629
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "'{0}' iz türü için genel çıktı modülü kullanılıyor.\n"
@@ -13730,7 +13730,7 @@ msgstr "WebM ses/görüntü dosyaları"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:759
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:400
 #, no-c-format
 msgid "WebM files"
 msgstr "WebM dosyaları"
@@ -13949,18 +13949,18 @@ msgstr "Yanlış tanımlama dizgisi: '{0:7s}' != 'kate\\0\\0\\0'"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:190
-#: src/mkvtoolnix-gui/merge/output.cpp:479
+#: src/mkvtoolnix-gui/merge/output.cpp:485
 #, no-c-format
 msgid "XML chapter files"
 msgstr "XML bölüm dosyaları"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:425
+#: src/mkvtoolnix-gui/merge/output.cpp:431
 #, no-c-format
 msgid "XML segment info files"
 msgstr "XML parça bilgisi dosyaları"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1001
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:419
 #, no-c-format
 msgid "XML tag files"
 msgstr "XML etiket dosyaları"
@@ -14197,7 +14197,7 @@ msgstr "araya ekli sütun (önce sağ)"
 msgid "compression"
 msgstr "sıkıştırma"
 
-#: src/merge/generic_packetizer.cpp:1664
+#: src/merge/generic_packetizer.cpp:1674
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num bulunamadı. {0}\n"
@@ -14393,13 +14393,13 @@ msgstr "matroska_okuyucusu: (MS uyumluluk kipi, iz {0}) Matroska görüntü geni
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_okuyucusu: İz eksik olan iz numarası.\n"
 
-#: src/input/r_matroska.cpp:1690
+#: src/input/r_matroska.cpp:1692
 #, no-c-format
 msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
 msgstr "matroska_okuyucusu: İz UID {0} tutulmadı çünkü zaten yeni dosya için ayrıldı.\n"
 
-#: src/input/r_matroska.cpp:1538
-#: src/input/r_matroska.cpp:1543
+#: src/input/r_matroska.cpp:1539
+#: src/input/r_matroska.cpp:1544
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_okuyucusu: Bulunan parça yok.\n"
@@ -14449,7 +14449,7 @@ msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ama kodek özel başlı
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ama bulunan özel veri yoktur.\n"
 
-#: src/input/r_matroska.cpp:1334
+#: src/input/r_matroska.cpp:1335
 #, no-c-format
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_okuyucusu: Kodek ID eksik.\n"
@@ -14479,7 +14479,7 @@ msgstr "matroska_okuyucusu: İz {0} tamam görünüyor.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_okuyucusu: mkvmerge FLAC desteği ile derlenmedi. İz {0} yoksayılıyor.\n"
 
-#: src/input/r_matroska.cpp:1527
+#: src/input/r_matroska.cpp:1528
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_okuyucusu: Bulunan EBML başı yok.\n"
@@ -14939,7 +14939,7 @@ msgstr "tta_reader: c'tor içinde tag_size < 0. {0}\n"
 #: src/common/kax_info.cpp:793
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:114
-#: src/input/r_matroska.cpp:2763
+#: src/input/r_matroska.cpp:2768
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -14950,12 +14950,12 @@ msgstr "tta_reader: c'tor içinde tag_size < 0. {0}\n"
 msgid "unknown"
 msgstr "bilinmiyor"
 
-#: src/input/r_matroska.cpp:2747
+#: src/input/r_matroska.cpp:2752
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "bilinmiyor, biçim etiketi: 0x{0:04x}"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:716
+#: src/mkvtoolnix-gui/merge/output.cpp:722
 #, no-c-format
 msgid "unnamed"
 msgstr "adlandırılmamış"
@@ -15074,8 +15074,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: beklenmedik bir olay meydana geldi (ileti: {1}; türü: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1598
-#: src/input/r_matroska.cpp:2300
+#: src/input/r_matroska.cpp:1599
+#: src/input/r_matroska.cpp:2304
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: bilinmeyen bir istisna meydana geldi."

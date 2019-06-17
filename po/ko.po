@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-05-20 08:07+0200\n"
+"POT-Creation-Date: 2019-06-17 21:15+0200\n"
 "PO-Revision-Date: 2018-04-11 00:40+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -2562,7 +2562,7 @@ msgstr "'{0}' 트랙 {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': 후속 파일을 마찬가지로 처리: {1}\n"
 
-#: src/input/r_matroska.cpp:1895
+#: src/input/r_matroska.cpp:1899
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': 실험적 모드에서 기록되었던 Opus 트랙을 복사 중입니다. 그 결과로 나오는 트랙은 최종 모드로 기록이 될 것이지만 하나의 세부 항목(끝부분 잘라내기)은 실험적 모드에서 기록된 트랙에서 복원할 수 없습니다. 다시 말해서 디코더가 원래 의도한 것보다 몇 개의 샘플을 더 출력하게 됩니다. 그래서 가능하면 원래의 Opus에서 다시 합치기를 하세요.\n"
@@ -2727,8 +2727,8 @@ msgstr "<미저장 파일>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "위치 {2}에서 <{0}>은 <{1}>의 유효한 자식 요소가 아닙니다."
 
-#: src/input/r_matroska.cpp:2331
-#: src/input/r_matroska.cpp:2439
+#: src/input/r_matroska.cpp:2335
+#: src/input/r_matroska.cpp:2443
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "트랙 번호 {1}에 대한 타임스탬프 {0}의 블록을 찾았지만, 그 트랙 번호의 헤더는 찾지 못했습니다. 이 블록은 건너 뜁니다.\n"
@@ -3484,7 +3484,7 @@ msgstr "무부호 정수로 예측됩니다."
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "MPEG4 비트스트림을 분석하고, 각 프레임을 하나의 Matroska 블록에 저장하고, 적절한 타임스탬프(I P B B = 0 120 40 80)를 사용하고, V_MPEG4/ISO/... 코덱ID를 사용합니다."
 
-#: src/merge/generic_packetizer.cpp:641
+#: src/merge/generic_packetizer.cpp:648
 #, no-c-format
 msgid "Another default track for {0} tracks has already been set. The 'default' flag for track {1} of '{2}' will not be set.\n"
 msgstr "{0} 트랙에는 이미 기본 트랙이 설정되어 있습니다. '{2}'의 트랙 {1}의 'default'플래그는 설정되지 않습니다.\n"
@@ -4446,7 +4446,7 @@ msgstr "완료 확인"
 msgid "Completed with warnings"
 msgstr "완료했으나 경고 있음"
 
-#: src/merge/generic_packetizer.cpp:1289
+#: src/merge/generic_packetizer.cpp:1299
 #, no-c-format
 msgid "Compression failed: {0}\n"
 msgstr "압축 실패: {0}\n"
@@ -7763,13 +7763,13 @@ msgstr "MPLS Blu-ray 재생목록"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "이 트랙을 그 유형(오디오, 비디오, 자막)의 기본 트랙으로 만듭니다."
 
-#: src/input/r_matroska.cpp:1767
-#: src/input/r_matroska.cpp:1784
+#: src/input/r_matroska.cpp:1771
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "잘못된 형식의 AAC 코덱 초기화 데이터를 찾았습니다.\n"
 
-#: src/input/r_matroska.cpp:1777
+#: src/input/r_matroska.cpp:1781
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "잘못된 형식의 코덱 ID '{0}'입니다.\n"
@@ -7799,7 +7799,7 @@ msgstr "Matroska 오디오/비디오 파일"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:758
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:187
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:400
 #, no-c-format
 msgid "Matroska files"
 msgstr "Matroska 파일"
@@ -8500,7 +8500,7 @@ msgstr "주의: 대부분의 <MTX_…> 변수는 비어 있고 변수를 인수�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "주의: 윈도우상의 경로명에 슬래시는 역슬래시 대신으로도 사용할 수 있습니다."
 
-#: src/merge/generic_packetizer.cpp:1645
+#: src/merge/generic_packetizer.cpp:1655
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "'{0}' 저장에 대한 Matroska 사양은 아직 최종 결정되지 않았음에 유의하십시오. 따라서 mkvmerge 지원은 변경 될 수 있으며, '{1}'대신 '{1}/EXPERIMENTAL' 코덱ID를 사용합니다. 사양이 최종 결정되는대로 이 경고는 삭제되고 mkvmerge도 그에 따라 업데이트됩니다.\n"
@@ -10011,7 +10011,7 @@ msgstr "기존의 Matroska나 WebM파일을 선택하면 GUI에서 그 세그먼
 msgid "Select audio file"
 msgstr "오디오 파일 선택"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:477
+#: src/mkvtoolnix-gui/merge/output.cpp:483
 #, no-c-format
 msgid "Select chapter file"
 msgstr "챕터 파일 선택"
@@ -10028,7 +10028,7 @@ msgid "Select destination directory"
 msgstr "대상 폴더 선택"
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:93
-#: src/mkvtoolnix-gui/merge/output.cpp:395
+#: src/mkvtoolnix-gui/merge/output.cpp:401
 #, no-c-format
 msgid "Select destination file name"
 msgstr "대상 파일명 선택"
@@ -10049,13 +10049,13 @@ msgstr "추가할 파일 선택"
 msgid "Select one of the ISO639-2 language codes."
 msgstr "ISO639-2 언어 코드 중 하나를 선택하세요."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:425
+#: src/mkvtoolnix-gui/merge/output.cpp:431
 #, no-c-format
 msgid "Select segment info file"
 msgstr "세그먼트 정보 파일 선택"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1001
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:419
 #, no-c-format
 msgid "Select tags file"
 msgstr "태그 파일 선택"
@@ -10340,7 +10340,7 @@ msgid "Simple"
 msgstr "단순"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:191
-#: src/mkvtoolnix-gui/merge/output.cpp:480
+#: src/mkvtoolnix-gui/merge/output.cpp:486
 #, no-c-format
 msgid "Simple OGM-style chapter files"
 msgstr "단순 OGM 스타일 챕터 파일"
@@ -10619,7 +10619,7 @@ msgstr "자막"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:757
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:186
-#: src/mkvtoolnix-gui/merge/output.cpp:478
+#: src/mkvtoolnix-gui/merge/output.cpp:484
 #, no-c-format
 msgid "Supported file types"
 msgstr "지원 파일 유형"
@@ -11161,7 +11161,7 @@ msgstr "현재 모드는 --multiplex, --edit-chapters 나 --edit-headers로 바�
 msgid "The current multiplex settings will be closed."
 msgstr "현재 합치기 설정을 닫습니다."
 
-#: src/merge/generic_packetizer.cpp:1363
+#: src/merge/generic_packetizer.cpp:1373
 #, no-c-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "현재 패킷의 타임코드는 이전 패킷의 타임코드보다 작습니다. 이것은 보통 소스 파일이 100%정확하게 작성되지 않은 Matroska 파일임을 의미합니다. 데이터 손실을 피하기 위해 타임코드는 {0}밀리초 조정됩니다. 이 때문에 오디오/비디오 동기화에 영향을 미칠 수 있지만, mkvmerge의 \"--sync\"옵션으로 보정할 수 있습니다. 만약 이미 \"--sync\"옵션을 사용하고 있지만 여전히 이 경고가 표시되는 경우는 걱정할 필요가 없습니다 -- 이것은 정상입니다. 이 오류가 여러번 발생하고, 특정 트랙에서 이 메시지가 여러번 표시되는 경우, 원본 파일 자체에 문제가 있거나 mkvmerge의 자체 버그일 수 있습니다. 이런 경우, 제작자 Moritz Bunkus <moritz@bunkus.org>에게 문의하십시오.\n"
@@ -11551,8 +11551,8 @@ msgstr "이 파일을 지원하는 형식으로 인식하지 못했습니다 (�
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1599
-#: src/input/r_matroska.cpp:2301
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:2305
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "이 파일은 더 이상 처리하지 않습니다."
@@ -12700,8 +12700,8 @@ msgstr "이 트랙에는 SBR AAC/HE-AAC/AAC+ 데이터가 포함되어 있습니
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1599
-#: src/input/r_matroska.cpp:2301
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:2305
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "이것은 대게 손상된 파일 구조를 나타냅니다."
@@ -13152,7 +13152,7 @@ msgstr "지원되지 않는 MPEG_버전: 0x{0:02x}(패킷 {1}, 타임코드 {2})
 msgid "Unsupported file format"
 msgstr "미지원 파일 형식"
 
-#: src/input/r_matroska.cpp:2124
+#: src/input/r_matroska.cpp:2128
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "이 트랙은 지원되지 않는 트랙 유형입니다.\n"
@@ -13234,7 +13234,7 @@ msgstr "NALU 크기가 3바이트면 특정 AVC/h.264 코덱의 트랙을 디코
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr " '{0}'용 디멀티플렉서를 사용 중입니다.\n"
 
-#: src/input/r_matroska.cpp:1628
+#: src/input/r_matroska.cpp:1629
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "트랙 형식 '{0}'용 일반 출력 모듈을 사용 중입니다.\n"
@@ -13685,7 +13685,7 @@ msgstr "WebM 오디오/비디오 파일"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:759
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/output.cpp:394
+#: src/mkvtoolnix-gui/merge/output.cpp:400
 #, no-c-format
 msgid "WebM files"
 msgstr "WebM 파일"
@@ -13904,18 +13904,18 @@ msgstr "잘못된 식별 문자열: '{0:7s}' != 'kate\\0\\0\\0'"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:190
-#: src/mkvtoolnix-gui/merge/output.cpp:479
+#: src/mkvtoolnix-gui/merge/output.cpp:485
 #, no-c-format
 msgid "XML chapter files"
 msgstr "XML 챕터 파일"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:425
+#: src/mkvtoolnix-gui/merge/output.cpp:431
 #, no-c-format
 msgid "XML segment info files"
 msgstr "XML 세그먼트 정보 파일"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1001
-#: src/mkvtoolnix-gui/merge/output.cpp:413
+#: src/mkvtoolnix-gui/merge/output.cpp:419
 #, no-c-format
 msgid "XML tag files"
 msgstr "XML 태그 파일"
@@ -14152,7 +14152,7 @@ msgstr "수직 인터리브 방식 (우안 먼저)"
 msgid "compression"
 msgstr "압축"
 
-#: src/merge/generic_packetizer.cpp:1664
+#: src/merge/generic_packetizer.cpp:1674
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "트랙_번호_만들기: file_num를 찾지 못했습니다. {0}\n"
@@ -14348,13 +14348,13 @@ msgstr "matroska_리더: (트랙 {0}, MS 호환 모드) Matroska에 따르면 �
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_리더: 트랙에 트랙 번호가 누락되어 있습니다.\n"
 
-#: src/input/r_matroska.cpp:1690
+#: src/input/r_matroska.cpp:1692
 #, no-c-format
 msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
 msgstr "matroska_리더: 새 파일에 이미 할당되었기 때문에, 트랙UID {0}를 유지할 수 없습니다.\n"
 
-#: src/input/r_matroska.cpp:1538
-#: src/input/r_matroska.cpp:1543
+#: src/input/r_matroska.cpp:1539
+#: src/input/r_matroska.cpp:1544
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_리더: 세그먼트를 찾지 못했습니다.\n"
@@ -14404,7 +14404,7 @@ msgstr "matroska_리더: 트랙 {0}코덱ID는 '{1}'이지만, 코덱 개인 헤
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_리더: 트랙 {0}코덱ID는 '{1}'이지만, 개인 데이터를 찾지 못했습니다.\n"
 
-#: src/input/r_matroska.cpp:1334
+#: src/input/r_matroska.cpp:1335
 #, no-c-format
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_리더: 코덱ID가 누락되어 있습니다.\n"
@@ -14434,7 +14434,7 @@ msgstr "matroska_리더: 트랙 {0}는 OK 인것 같습니다.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_리더: mkvmerge는 FLAC 지원 없이 컴파일되었습니다.  {0} 트랙을 무시합니다.\n"
 
-#: src/input/r_matroska.cpp:1527
+#: src/input/r_matroska.cpp:1528
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_리더: EBML 헤드를 찾지 못했습니다.\n"
@@ -14894,7 +14894,7 @@ msgstr "tta_리더: c'tor에서 tag_size가 0보다 작습니다. {0}\n"
 #: src/common/kax_info.cpp:793
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:114
-#: src/input/r_matroska.cpp:2763
+#: src/input/r_matroska.cpp:2768
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -14905,12 +14905,12 @@ msgstr "tta_리더: c'tor에서 tag_size가 0보다 작습니다. {0}\n"
 msgid "unknown"
 msgstr "알 수 없음"
 
-#: src/input/r_matroska.cpp:2747
+#: src/input/r_matroska.cpp:2752
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "알 수 없는 형식 태그 0x{0:04x}"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:716
+#: src/mkvtoolnix-gui/merge/output.cpp:722
 #, fuzzy, no-c-format
 msgid "unnamed"
 msgstr "<이름 없음>"
@@ -15022,8 +15022,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: 예외 사항 발생 (메시지: {1}; 형식: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1598
-#: src/input/r_matroska.cpp:2300
+#: src/input/r_matroska.cpp:1599
+#: src/input/r_matroska.cpp:2304
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: 알 수 없는 예외 사항 발생."
