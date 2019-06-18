@@ -87,6 +87,7 @@ struct file_type_t {
   static std::set<file_type_e> by_extension(const std::string &ext);
   static std::vector<file_type_t> &get_supported();
   static translatable_string_c get_name(file_type_e type);
+  static void reset();
 };
 
 }

@@ -126,4 +126,9 @@ file_type_t::by_extension(const std::string& p_ext) {
   return res;
 }
 
+void
+file_type_t::reset() {
+  s_supported_file_types.clear();
+}
+
 }

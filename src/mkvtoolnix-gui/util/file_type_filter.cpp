@@ -56,6 +56,7 @@ FileTypeFilter::get() {
 void
 FileTypeFilter::reset() {
   s_filter.clear();
+  mtx::file_type_t::reset();
 }
 
 }}}
