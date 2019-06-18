@@ -22,6 +22,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/container.h"
+#include "mkvtoolnix-gui/util/file_type_filter.h"
 #include "mkvtoolnix-gui/util/media_player.h"
 #include "mkvtoolnix-gui/util/network_access_manager.h"
 #include "mkvtoolnix-gui/util/process.h"
@@ -193,6 +194,8 @@ void
 App::retranslateUi() {
   if (MainWindow::get())
     MainWindow::get()->retranslateUi();
+
+  mtx::gui::Util::FileTypeFilter::reset();
 }
 
 void

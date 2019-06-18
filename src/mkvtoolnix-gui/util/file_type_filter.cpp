@@ -53,4 +53,9 @@ FileTypeFilter::get() {
   return s_filter;
 }
 
+void
+FileTypeFilter::reset() {
+  s_filter.clear();
+}
+
 }}}

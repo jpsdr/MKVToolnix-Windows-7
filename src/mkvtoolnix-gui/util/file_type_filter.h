@@ -8,7 +8,8 @@ namespace mtx { namespace gui { namespace Util {
 
 class FileTypeFilter {
 public:
-  static QStringList const & get();
+  static QStringList const &get();
+  static void reset();
 
 public:
   static QStringList s_filter;

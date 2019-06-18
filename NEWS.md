@@ -16,6 +16,8 @@
   files. Fixes #2566.
 * MKVToolNix GUI: multiplexer: Windows: clearing the destination file name
   will reset the tab name to "<No destination file>" again. Fixes #2571.
+* MKVToolNix GUI: multiplexer: the file types were not re-translated if the UI
+  language was changed. Fixes #2572.
 
 
 # Version 34.0.0 "Sight and Seen" 2019-05-18
