@@ -50,10 +50,11 @@ PrefsRunProgramWidget::enableControls() {
   auto p        = p_func();
   auto active   = p->ui->cbConfigurationActive->isChecked();
   auto controls = findChildren<QWidget *>();
+  auto type     = static_cast<Util::Settings::RunProgramType>(p->ui->cbType->currentData().value<int>());
 
   for (auto const &control : controls)
     if (control == p->ui->pbExecuteNow)
-      p->ui->pbExecuteNow->setEnabled(active && isValid());
+      p->ui->pbExecuteNow->setEnabled(active && isValid() && (type != Util::Settings::RunProgramType::DeleteSourceFiles));
 
     else if (control != p->ui->cbConfigurationActive)
       control->setEnabled(active);
