@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-06-17 22:20+0200\n"
-"PO-Revision-Date: 2019-06-06 17:48+0200\n"
+"PO-Revision-Date: 2019-06-19 14:56+0200\n"
 "Last-Translator: Jan Mazurczyk <remuxer32@protonmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -1532,7 +1532,7 @@ msgstr "&Zestawy znaków"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:145
 #, no-c-format
 msgid "&Clear output and reset progress"
-msgstr "Wy&czyść dziennik zdarzeń i zresetuj wskaźnik(-i) postępu"
+msgstr "Wy&czyść dziennik zdarzeń i zresetuj wskaźniki postępu"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:627
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:646
@@ -5137,7 +5137,7 @@ msgstr "Dostosuj opóźnienie znaczników czasu rozdziałów o wartość w ms (m
 #: src/mkvtoolnix-gui/merge/input.cpp:464
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
-msgstr "Dostosuj opóźnienie ścieżki o wartość w ms (milisekundach)."
+msgstr "Opóźnia znaczniki czasu tej ścieżki o wartość w ms (milisekundach)."
 
 #: src/propedit/propedit_cli_parser.cpp:226
 #, no-c-format
@@ -5156,9 +5156,9 @@ msgstr "Usuń jeden lub więcej załączników"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
 #: src/mkvtoolnix-gui/util/settings.cpp:53
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Delete source files for multiplexer jobs"
-msgstr "Zmienne dla zadań multipleksowania"
+msgstr "Trwale usuń pliki źródłowe (dla zadań z multipleksera)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:381
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:387
@@ -6258,7 +6258,7 @@ msgstr "Dla plików, które nie będą zawierały ścieżki wideo, ale przynajmn
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:84
 #, no-c-format
 msgid "For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."
-msgstr "Dla większości pozycji najmniejszy czas początkowy ze wszystkich rozdziałów na tym samym poziomie, wyższym niż czas początkowy bieżącego rozdziału, zostanie użyty jako jego czas końcowy."
+msgstr "Dla większości pozycji najmniejszy czas początkowy ze wszystkich rozdziałów na tym samym poziomie, wyższy od czasu początkowego bieżącego rozdziału, zostanie użyty jako jego czas końcowy."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:515
 #, no-c-format
@@ -7517,7 +7517,7 @@ msgstr "Data i czas rozpoczęcia zadania w formacie ISO 8601"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:238
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
-msgstr ""
+msgstr "Typ zadania (\"multiplekser\" lub \"info\")"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:202
 #, no-c-format
@@ -8109,7 +8109,7 @@ msgstr "Mnoży znaczniki czasu rozdziałów o dany współczynnik."
 #: src/mkvtoolnix-gui/merge/input.cpp:469
 #, no-c-format
 msgid "Multiply this track's timestamps with a factor."
-msgstr "Mnoży czas trwania ścieżki o dany współczynnik."
+msgstr "Mnoży znaczniki czasu tej ścieżki o dany współczynnik."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 #, no-c-format
@@ -11963,9 +11963,9 @@ msgid "The number of video pixels to remove on the left of the image."
 msgstr "Liczba pikseli, które zostaną ucięte z lewej strony."
 
 #: src/common/property_element.cpp:156
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The number of video pixels to remove on the right of the image."
-msgstr "Liczba pikseli, które zostaną ucięte z prawej strony."
+msgstr "Liczba pikseli wideo do usunięcia po prawej stronie obrazu."
 
 #: src/common/property_element.cpp:155
 #, no-c-format
@@ -12384,7 +12384,7 @@ msgstr "Wartość może być podana zarówno jako liczba zmiennoprzecinkowa (np.
 #: src/mkvtoolnix-gui/merge/input.cpp:465
 #, no-c-format
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
-msgstr "Wartość może być ujemna, ale miej na uwadze, że każda klatka, której czas rozpocznie się przed normalnym czasem filmu, zostanie odrzucona."
+msgstr "Wartość może być ujemna, ale miej na uwadze, że każda klatka, której znacznik czasu jest ujemny po tym obliczeniu, zostanie odrzucona."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:505
 #, no-c-format
@@ -13799,7 +13799,7 @@ msgstr "WebVTT - napisy"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:151
 #, no-c-format
 msgid "What do you want to do with the files you've dragged & dropped here?"
-msgstr "Co chcesz zrobić z plikami, które przeciągnąłeś i upuściłeś tutaj?"
+msgstr "Co chcesz zrobić z przeciągniętymi i upuszczonymi plikami?"
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
