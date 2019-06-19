@@ -15,7 +15,7 @@
 * mkvmerge: the "codec name" track property wasn't copied from Matroska
   files. Fixes #2566.
 * MKVToolNix GUI: multiplexer: Windows: clearing the destination file name
-  will reset the tab name to "<No destination file>" again. Fixes #2571.
+  will reset the tab name to "\<No destination file\>" again. Fixes #2571.
 * MKVToolNix GUI: multiplexer: the file types were not re-translated if the UI
   language was changed. Fixes #2572.
 
@@ -84,7 +84,7 @@
 
 ## Bug fixes
 
-* all: fixed handling of Unicode code points > U+FFFF. Fixes #2516.
+* all: fixed handling of Unicode code points \> U+FFFF. Fixes #2516.
 * mkvmerge: Windows: mkvmerge was crashing with an exception when trying to
   identify certain files that can be used on Blu-rays (such as MPEG transport
   streams of MPLS play list files) and when the file name was given as a UNC
@@ -105,7 +105,7 @@
 ## Build system changes
 
 * libEBML v1.3.7 and libMatroska 1.5.0 are now required as they fix their
-  handling of Unicode code points > U+FFFF (see #2516).
+  handling of Unicode code points \> U+FFFF (see #2516).
 
 
 # Version 31.0.0 "Dolores In A Shoestand" 2019-02-09
@@ -1486,7 +1486,7 @@
   treating all I slices of an h.264/AVC stream as key frames in pathological
   streams that lack real key frames. Implements #1876.
 * GUI: running programs after jobs: added a new variable
-  <MTX_INSTALLATION_DIRECTORY> for the directory the MKVToolNix GUI executable
+  \<MTX_INSTALLATION_DIRECTORY\> for the directory the MKVToolNix GUI executable
   is located in.
 * mkvmerge: DVB subtitle tracks whose CodecPrivate data is only four bytes
   long will now be fixed up to the proper five bytes by adding the subtitling
@@ -1925,8 +1925,8 @@
 ## New features and enhancements
 
 * mkvmerge, MKVToolNix GUI: new chapter generation feature: two new placeholders
-  have been introduced when generating chapters for appended files, <FILE_NAME> and
-  <FILE_NAME_WITH_EXT>. The former will be replaced by the appended file's name
+  have been introduced when generating chapters for appended files, \<FILE_NAME\> and
+  \<FILE_NAME_WITH_EXT\>. The former will be replaced by the appended file's name
   without its extension; the latter with its extension. Implements #1737.
 * MKVToolNix GUI: merge tool enhancement: when opening a saved configuration (via
   the menu as well as via drag & drop) the current tab will be replaced if it is empty ( = in
@@ -2614,8 +2614,8 @@
   select a Matroska file. The GUI reads that file's segment UID and enters its value
   into the corresponding control. Part of the implementation of #1363.
 * MKVToolNix GUI: chapter editor enhancement: Added another variable to the chapter
-  name templates called <START> which is replaced by the chapter's start timestamp.
-  An optional format can be specified, e.g. <START:%H:%M:%S.%3n> resulting in
+  name templates called \<START\> which is replaced by the chapter's start timestamp.
+  An optional format can be specified, e.g. \<START:%H:%M:%S.%3n\> resulting in
   something like 01:35:27.734. This can be used in the 'generate sub-chapters' or the
   'renumber sub-chapters' functionality. Implements #1445.
 * MKVToolNix GUI: merge tool enhancement: implemented the optional warning before
@@ -2789,7 +2789,7 @@
   dwStart, dwScale and dwSampleSize from the AVI stream header structure instead of
   values derived from the audio packet headers. Fixes #1382 and still works correctly
   for #1137.
-* all: the environment variable <TOOLNAME>_OPTIONS is now parsed for options for
+* all: the environment variable \<TOOLNAME\>_OPTIONS is now parsed for options for
   TOOL (e.g. MKVMERGE_OPTIONS for mkvmerge). MKVTOOLNIX_OPTIONS is still used for
   all programs. Fixes #1403.
 * MKVToolNix GUI: bug fix: fixed the escaping of the command line for cmd.exe
@@ -2915,7 +2915,7 @@
 ## New features and enhancements
 
 * MKVToolNix GUI: chapter editor enhancement: the template for chapter names can now
-  contain a number of places for the chapter number, e.g. '<NUM:3>'. The number will be
+  contain a number of places for the chapter number, e.g. '\<NUM:3\>'. The number will be
   zero-padded if there are less places than specified.
 * MKVToolNix GUI: new chapter editor feature: implemented a function for
   renumbering chapters. This allows the user to automatically assign new chapter
@@ -3747,8 +3747,8 @@
 * mkvmerge: new feature: Added a global option for disabling writing the tags with
   statistics for each track: --disable-track-specific-tags.
 * mkvmerge: new feature: When identifying a Matroska file in verbose identification
-  mode track-specific tags will be output as well. The format is "tag_<tag name in
-  lower case>:<tag value>", e.g. for a tag named "BPS" with the value "224000" the
+  mode track-specific tags will be output as well. The format is "tag_\<tag name in
+  lower case\>:\<tag value\>", e.g. for a tag named "BPS" with the value "224000" the
   output would be "tag_bps:224000". Enhancement for #1021.
 * mkvmerge: new feature: mkvmerge will write track-specific tags with statistics
   ("BPS" for the average number of bits per second, "DURATION" for the duration,
@@ -3858,7 +3858,7 @@
   #985.
 * all: Windows 64bit: fixed return value checks for opening files. Fixes #972.
 * all: Windows: when redirecting the program's output with cmd.exe (e.g. "mkvinfo
-  file.mkv > info.txt") the programs will no longer write two line feed characters
+  file.mkv \> info.txt") the programs will no longer write two line feed characters
   (\r) per carriage return character (\n). Fixes #970.
 * all: bug fix: Windows: messages written to the console (cmd.exe) are not re-encoded
   to the local charset and back to UTF-16 before they're handed over to
@@ -4318,7 +4318,7 @@
   streams that are used to keep the bit rate above certain levels (the 0 bytes between
   slices and the following start code). Implements #734.
 * mkvmerge: enhancement: SRT files can have spaces in their timecode line's arrow
-  (e.g. "-- >").
+  (e.g. "-- \>").
 * all: new feature: Added a Basque translation by Xabier Aramendi (see AUTHORS).
 
 ## Bug fixes
@@ -4408,8 +4408,8 @@
 
 * mkvmerge: bug fix: SRT subtitle entries with colons as the decimal separator are
   accepted. Fix for issue 754.
-* mkvmerge: bug fix: XML tag files with <Simple> tags that only contained a name and
-  nested <Simple> were wrongfully rejected as invalid. Fixes issue 752.
+* mkvmerge: bug fix: XML tag files with \<Simple\> tags that only contained a name and
+  nested \<Simple\> were wrongfully rejected as invalid. Fixes issue 752.
 * mkvextract: bug fix: Extraction of AVC/h.264 was completely broken after
   2012-04-09 resulting in files with a length of 0 bytes.
 * mkvextract: bug fix: mkvextract will no longer abort extracting h.264 tracks if it
@@ -4992,7 +4992,7 @@
   files or command line arguments then those strings will simply be cut short. Before
   mkvmerge was exiting with an error ("Invalid UTF-8 sequence encountered").
 * all: new feature: Added online update checks. The command line tools know a new
-  parameter "--check-for-updates". mmg has a new menu entry ("Help" -> "Check for
+  parameter "--check-for-updates". mmg has a new menu entry ("Help" -\> "Check for
   updates") and checks automatically when it starts, but at most once in 24 hours. Can
   be turned off in the preferences. This function requires libcurl and is not built if
   libcurl is not available.
@@ -5636,7 +5636,7 @@
   either.
 * mkvmerge: bug fix: Appending MPEG4 part 2 video tracks from Matroska files which
   contain aspect ratio information will not result in an error message "connected_to
-  > 0" anymore. Fix for bug 427.
+  \> 0" anymore. Fix for bug 427.
 * mkvmerge: bug fix: Fixed the audio sync for tracks read from AVI files containing
   garbage at the beginning. Fix for bug 421.
 * mmg: bug fix: Trying to save chapters that contain editions without a single chapter
@@ -5973,12 +5973,12 @@
 * installer: bug fix: If the installer is run in silent mode (switch "/S") then it will
   not ask the user whether or not to place a shortcut on the desktop, and that shortcut
   will not be created. Fix for bug 345.
-* mmg: bug fix: The action "File" -> "New" did not clear the internal list of attached
+* mmg: bug fix: The action "File" -\> "New" did not clear the internal list of attached
   files resulting in unexpected behaviour if files with attachments where added
   afterwards.
 * mmg: bug fix: The button "remove all files" did not clear the list of attached files.
 * mmg: On Linux wxWidgets 2.8.0 and newer uses the GTK combo boxes which suck. A lot.
-  Therefore mmg uses wxBitmapComboBoxes for wxWidgets >= 2.8.0 on Linux and normal
+  Therefore mmg uses wxBitmapComboBoxes for wxWidgets \>= 2.8.0 on Linux and normal
   wxComboBoxes in all other cases. wxBitmapComboBoxes are still drawn by wxWidgets
   itself (just like wxComboBoxes before 2.8.0) and offer much better functionality.
   Fix for bug 339.
@@ -6330,7 +6330,7 @@
 * mmg: Moved the command line to a separate dialog and reduced the main window's
   height.
 * mkvmerge: The MPEG program stream reader will now sort the tracks it finds first by
-  their type (video > audio > subs) and then by their stream ID.
+  their type (video \> audio \> subs) and then by their stream ID.
 * mkvmerge: Disabled the support for DTS tracks in MPEG program streams because DTS HD
   is not supported yet.
 
@@ -6393,7 +6393,7 @@
 * mmg: enhancements to the job management dialog: There's a minimum width for the
   columns. The "up" and "down" buttons are disabled if all entries are selected.
   Pressing "Ctrl-A" selects all entries.
-* mmg: enhancements: "File -> New" will also focus the "input" tab.
+* mmg: enhancements: "File -\> New" will also focus the "input" tab.
 * mmg: enhancements: The job manager can be opened with "Ctrl-J". The last directory
   from which a file is added is saved even if the file identification failed. The
   automatically generated output file name uses the extension ".mka" if no video
@@ -6409,7 +6409,7 @@
   files.
 * mkvmerge: new feature: Added support for reading AVC/h.264 elementary streams.
 * mmg: enhancement: All inputs and controls are cleared and deactivated if the user
-  select "File -> New".
+  select "File -\> New".
 * mmg: enhancement: The user can switch between the "generic" and "format specific
   options" pages even if no track is selected.
 
@@ -6441,8 +6441,8 @@
 * mmg: bug fix: Fixed a segfault that occured if the user had a track selected and its the
   file the track was read from is removed.
 * mmg: bug fix: Fixed the behaviour of a couple of ComboBoxes on Windows after
-  selecting "File -> New". E.g. if the user selected "700M" in the "split after this
-  size" ComboBox, selected "File -> New" and selected "700M" again, then it would not
+  selecting "File -\> New". E.g. if the user selected "700M" in the "split after this
+  size" ComboBox, selected "File -\> New" and selected "700M" again, then it would not
   show up in the command line window until he selected another option and returned to
   the "700M" afterwards.
 
@@ -6458,7 +6458,7 @@
 * configure: new feature: Allow the user to tell configure which "wx-config"
   executable to use ("--with-wx-config=...").
 * mkvmerge/mmg: new feature: If ATDS AAC tracks are added to mmg and the AAC track's
-  sample rate is <= 24000 Hz then mkvmerge and mmg assume that the AAC is a SBR track and
+  sample rate is \<= 24000 Hz then mkvmerge and mmg assume that the AAC is a SBR track and
   mmg will check the "AAC is SBR" checkbox automatically.
 * mmg: new feature: Made the "set the delay input field from the file name" feature
   disengageable.
@@ -6688,7 +6688,7 @@
 ## Bug fixes
 
 * mmg: bug fix: If the user selected an aspect ratio for a video track, then chose "File
-  -> new", added a file, selected another video track and chose the same aspect ratio as
+  -\> new", added a file, selected another video track and chose the same aspect ratio as
   before then it wasn't added to the command line. Fixes Anthill bugs 132 and 146.
 * mkvmerge: bug fix: Support Qt/MP4 files with 64bit offset tables ('co64' atom
   instead of 'stco' atom).
@@ -6777,7 +6777,7 @@
   set to "und" if it was not written although the specs say that "eng" is the default
   value.
 * mkvmerge: bug fix: USF subtitles: If identical tags were nested (e.g. "font") and
-  both were closed right after each other then the result looked like "</font/>".
+  both were closed right after each other then the result looked like "\</font/\>".
 * mkvmerge: bug fix: Native MPEG-4 was not working if read from OGM files.
 * mkvmerge: bug fixes: Improved the native MPEG-4 generation a lot (thanks to Haali
   for testing and pushing me). The codec version string inside the MPEG-4
@@ -7077,13 +7077,13 @@
   line arguments.
 * mkvmerge: new feature: The CUE sheet parser now accepts INDEX lines with indices
   from 00 up to 99 and implements the Red Book specification for audio CDs that way.
-  Patch by Vegard Pettersen <vegard_p at broadpark adot no>.
+  Patch by Vegard Pettersen \<vegard_p at broadpark adot no\>.
 * mkvmerge: new feature: Added a new parameter --aspect-ratio-factor.
 * mkvmerge: new feature: Added support for MP2 (and maybe MP3) audio in MP4
   containers.
 * mkvmerge: new feature: The chapter and tag parsers accept XML element attributes
   instead of sub-elements for those sub-elements that only contain data. Example for
-  a "simple tag": <Simple Name="ARTIST" String="Tori Amos"/>
+  a "simple tag": \<Simple Name="ARTIST" String="Tori Amos"/\>
 * mkvmerge, mkvinfo: new feature: Added the four new PixelCrop elements.
 * mkvmerge, mkvextract, mkvinfo: new feature: Added 'TargetTypeValue' as a
   supported tagging element.
@@ -7108,7 +7108,7 @@
   empty tag list.
 * mkvmerge: bug fix: Some Matroska files that e.g. have had their time codes offset
   with the Matroska Stream Editor or other means may contain time codes that caused
-  mkvmerge to print a warning about "time code < last_time code". A new fix implements a
+  mkvmerge to print a warning about "time code \< last_time code". A new fix implements a
   workaround and a warning message with a proper explanation for this case.
 * mkvmerge: bug fix: Older Matroska files containing chapters caused mkvmerge to
   abort muxing.
@@ -7116,7 +7116,7 @@
   a track from a Matroska file.
 * mkvmerge: bug fix: mkvmerge will show a nice warning if the entries in a SRT have
   non-continuous timestamps. It'll also sort the entries by their start timestamp
-  instead of throwing the generic "time code < previous time code" warning.
+  instead of throwing the generic "time code \< previous time code" warning.
 * mmg: bug fix: The 'Matroska file analysis' window that occurs when reading chapters
   from a Matroska file did not disappear if it was minimized when the process finished.
 * mkvinfo: bug fix: Strings from chapters and tags were shown in UTF-8 instead of the
@@ -7178,7 +7178,7 @@
 * mkvmerge: bug fix: SSA/ASS subs with the old codec ID 'S_SSA' and 'S_ASS' were
   accepted, but their codec ID was kept. It is now correctly changed to 'S_TEXT/SSA'
   and 'S_TEXT/ASS'.
-* mkvmerge: Added 'EditionUID' to valid elements below '<Targets>' in XML tags.
+* mkvmerge: Added 'EditionUID' to valid elements below '\<Targets\>' in XML tags.
   Fixed the creation of the 'Targets' with --global-tags and --tags.
 * mmg: bug fix: The 'down' button on the 'input' tab was not working correctly in all
   cases.
@@ -7273,7 +7273,7 @@
 
 * mmg: new feature: Added 'minimize' buttons to the two 'mkvmerge is running'
   dialogs.
-* mmg: new feature: Added an option for automatically calling 'File -> new' after a job
+* mmg: new feature: Added an option for automatically calling 'File -\> new' after a job
   has been added to the job queue.
 * mkvmerge, mmg: new feature: --track-order now controls the track creation order
   globally, meaning that it isn't used for each file but only once. This allows the
@@ -7365,7 +7365,7 @@
 * mmg: bug fix: The chapter editor did not honor the values selected for 'country' and
   'language'.
 * mkvmerge: bug fix: Audio sync for Vorbis was partially broken for positive offsets.
-* mmg: Fix for compilation with wxWindows < 2.4.2.
+* mmg: Fix for compilation with wxWindows \< 2.4.2.
 
 ## Other changes
 
@@ -7381,7 +7381,7 @@
   be turned off on the settings tab.
 * mmg: new feature: Implement drag'n'drop of files onto the input, attachment and
   chapter tabs. For the input and attachment tabs it works like pressing the 'add'
-  button. On the chapters tab it works like calling 'Chapter Editor -> Open'.
+  button. On the chapters tab it works like calling 'Chapter Editor -\> Open'.
 
 ## Bug fixes
 
@@ -7632,7 +7632,7 @@
 * mmg: bug fix: If one added a Matroska file and the track name or language of a track
   consisted of only blanks then mmg would segfault.
 * mmg: bug fix: The chapter editor did not properly escape the chapter names resulting
-  in invalid XML files if the special characters &, < or > were used.
+  in invalid XML files if the special characters &, \< or \> were used.
 * mkvmerge: bug fix: If splitting was active then a wrong CodecID was written to the
   second and all following files for MP2 tracks.
 
@@ -7642,7 +7642,7 @@
   the second and all following files if they don't expect them not to start at 0.
 * mkvmerge: There are MP4 files that actually contain HE-AAC but don't have the 5 byte
   identifier. mkvmerge will also assume SBR if there's only the 2 byte identifier with
-  a sampling frequency < 44100Hz.
+  a sampling frequency \< 44100Hz.
 * mmg: The input box will automatically select the first track when a file is selected.
   Upon track selection the input focus is set to the track name input box.
 * mmg: The chapter editor automatically focuses the chapter name input box whenever a
@@ -7694,7 +7694,7 @@
   chapter and all its children with the push of one button (the new "Set values"
   button).
 * mmg: new feature: You can set default values for the language and the country codes in
-  the chapter editor (Chapter menu -> Set default values).
+  the chapter editor (Chapter menu -\> Set default values).
 * mkvmerge: new feature: Added an option '--display-dimensions' which allows the
   direct setting of the display dimensions. It is mutually exclusive with
   '--aspect-ratio', of course.
@@ -7765,7 +7765,7 @@
 
 * mkvmerge: new feature: Added the ability to read time codes from text files which
   override the time codes mkvmerge calculates normally.
-* mmg: new feature: Added a new menu entry "File -> new" which will clear all the current
+* mmg: new feature: Added a new menu entry "File -\> new" which will clear all the current
   muxing settings.
 * mmg: Added support for VobSub subtitles including their compression options.
   Added the .m4a extension to the 'add file' dialog.
@@ -7975,7 +7975,7 @@
 * mkvmerge: Improved all command line parsing error messages.
 * mkvmerge: Improved the error message for the XML tag file parser if an invalid
   &-sequence is found.
-* mkvextract: Strings are postprocessed so that the special characters &, <, >, " are
+* mkvextract: Strings are postprocessed so that the special characters &, \<, \>, " are
   replaced by their HTML equivalents &amp;, &lt, &gt; and &quot;.
 * mkvmerge: Disabled lacing by default and renamed --no-lacing to --enable-lacing.
   With all the proper info about the laced frames lacing is actually producing larger
@@ -8111,7 +8111,7 @@
   new line cases correctly.
 * mkvmerge: Fixed some infinite-reading-from-a-file bug that occured on Windows
   when reading SSA/ASS files.
-* mkvmerge: Fixed a bug which would mostly appear with subtitles that have very long ( >
+* mkvmerge: Fixed a bug which would mostly appear with subtitles that have very long ( \>
   60s) gaps between entries. Here the cluster would not been rendered properly
   leaving mkvmerge either comatose ( = endless loop) or just plain dead ( = crashing).
 
@@ -8239,7 +8239,7 @@
 * ADTS headers are stripped from the AAC streams. This is what I'd call 'proper AAC
   support'.
 * Better support for DTS streams in general and for DTS-in-WAV in particular (patch by
-  Peter Niemayer <niemayer AT isg.de>).
+  Peter Niemayer \<niemayer AT isg.de\>).
 * Renamed '--no-utf8-subs' to '--sub-type utf8'. Polished the man page regarding
   subtitle handling.
 
@@ -8248,8 +8248,8 @@
 
 ## Bug fixes
 
-* Fixed a bug with the AC-3 time code calculation (patch by Peter Niemayer <niemayer AT
-  isg.de>).
+* Fixed a bug with the AC-3 time code calculation (patch by Peter Niemayer \<niemayer AT
+  isg.de\>).
 
 ## Other changes
 
@@ -8258,7 +8258,7 @@
 * The OGM reader reported I frames as P frames and vice versa round making seeking not
   really nice ;)
 * Support for reading DTS files & putting them into Matroska (main patch by Peter
-  Niemayer <niemayer AT isg.de>, a few things by me).
+  Niemayer \<niemayer AT isg.de\>, a few things by me).
 
 
 # Version 0.3.2 2003-05-11
