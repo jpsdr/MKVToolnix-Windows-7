@@ -26,7 +26,7 @@ function update_debian_changelog {
   export LC_TIME=en_US.UTF-8
   tmp=$(mktemp)
   date=$(date '+%a, %d %b %Y %H:%M:%S %z')
-  ubuntu=$(awk "-F'" '/define_debian_ubuntu.*ubuntu/ { ubuntu=$4 } END { print ubuntu }' /home/mosu/prog/video/support/rake.d/debian_ubuntu.rb)
+  ubuntu=$(awk "-F'" '/define_debian_ubuntu.*ubuntu/ { ubuntu=$4 } END { print ubuntu }' /home/mosu/prog/video/support/rake.d/debian_ubuntu_linuxmint.rb)
   cat > ${tmp} <<EOF
 mkvtoolnix (${TO}-0~bunkus01) ${ubuntu}; urgency=low
 
