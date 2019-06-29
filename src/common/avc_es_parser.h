@@ -35,9 +35,8 @@ struct frame_t {
     clear();
   }
 
-  frame_t(const frame_t &f) {
-    *this = f;
-  }
+  frame_t(frame_t const &) = default;
+  frame_t &operator =(frame_t const &) = default;
 
   void clear() {
     m_start                  = 0;
