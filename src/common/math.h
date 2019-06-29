@@ -55,7 +55,7 @@ typename std::enable_if<
 to_signed(Tunsigned const &u) {
   using Tsigned = typename std::make_signed<Tunsigned>::type;
 
-  if (u <= std::numeric_limits<Tsigned>::max())
+  if (u <= static_cast<Tunsigned>(std::numeric_limits<Tsigned>::max()))
     return static_cast<Tsigned>(u);
 
   return static_cast<Tsigned>(u - std::numeric_limits<Tsigned>::min()) + std::numeric_limits<Tsigned>::min();
