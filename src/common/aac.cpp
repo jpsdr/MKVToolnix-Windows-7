@@ -1021,11 +1021,10 @@ header_c::read_er_celp_specific_config() {
     else                        // MPE
       m_bc->skip_bits(5 + 2 + 1); // mpe_configuration, num_enh_layers, bandwidth_scalability_mode
 
-  } else if (m_bc->get_bit())   // is_bws_layer
-    m_bc->skip_bits(2);         // celp_bw_senh_header.bws_configuration
-
-  else
-    m_bc->skip_bits(2);         // celp_brs_id
+  } else {
+    m_bc->get_bit();            // is_bws_layer
+    m_bc->skip_bits(2);         // celp_bw_senh_header.bws_configuration or celp_brs_Id
+  }
 }
 
 void
