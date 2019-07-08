@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: mkvmerge now allows appending AV1, VP8, VP9, h.264/AVC and
+  h.265/HEVC tracks whose pixel dimensions differ. Implements #2582.
+
+
 # Version 35.0.0 "All The Love In The World" 2019-06-22
 
 ## New features and enhancements

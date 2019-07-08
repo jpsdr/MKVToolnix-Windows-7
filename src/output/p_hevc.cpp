@@ -96,10 +96,6 @@ hevc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
 
-  auto result = generic_video_packetizer_c::can_connect_to(src, error_message);
-  if (CAN_CONNECT_YES != result)
-    return result;
-
   if (m_ti.m_private_data && vsrc->m_ti.m_private_data && memcmp(m_ti.m_private_data->get_buffer(), vsrc->m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size())) {
     error_message = fmt::format(Y("The codec's private data does not match. Both have the same length ({0}) but different content."), m_ti.m_private_data->get_size());
     return CAN_CONNECT_MAYBE_CODECPRIVATE;

@@ -212,9 +212,6 @@ hevc_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
 
-  connect_check_v_width( m_hvideo_pixel_width,  vsrc->m_hvideo_pixel_width);
-  connect_check_v_height(m_hvideo_pixel_height, vsrc->m_hvideo_pixel_height);
-  connect_check_codec_id(m_hcodec_id,           vsrc->m_hcodec_id);
   connect_check_codec_private(src);
 
   return CAN_CONNECT_YES;

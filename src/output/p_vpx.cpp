@@ -121,9 +121,6 @@ vpx_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
 
   connect_check_codec_id(m_hcodec_id, psrc->m_hcodec_id);
 
-  connect_check_v_width(m_hvideo_pixel_width,      psrc->m_hvideo_pixel_width);
-  connect_check_v_height(m_hvideo_pixel_height,    psrc->m_hvideo_pixel_height);
-
   return CAN_CONNECT_YES;
 }
 

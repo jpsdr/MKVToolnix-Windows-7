@@ -142,13 +142,10 @@ av1_video_packetizer_c::set_is_unframed() {
 
 connection_result_e
 av1_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                       std::string &error_message) {
+                                       std::string &) {
   auto psrc = dynamic_cast<av1_video_packetizer_c *>(src);
   if (!psrc)
     return CAN_CONNECT_NO_FORMAT;
-
-  connect_check_v_width( m_hvideo_pixel_width,  psrc->m_hvideo_pixel_width);
-  connect_check_v_height(m_hvideo_pixel_height, psrc->m_hvideo_pixel_height);
 
   return CAN_CONNECT_YES;
 }
