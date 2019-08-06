@@ -87,7 +87,7 @@ translation_c::initialize_available_translations() {
   ms_available_translations.emplace_back("tur", "tr_TR",       "tr",          "turkish",    "Turkish",              "Türkçe",              false, 0x001f, 0x00);
   ms_available_translations.emplace_back("ukr", "uk_UA",       "uk",          "ukrainian",  "Ukrainian",            "Українська",          false, 0x0022, 0x00);
   ms_available_translations.emplace_back("chi", "zh_CN",       "zh_CN",       "chinese",    "Chinese Simplified",   "简体中文",            true,  0x0004, 0x02);
-  ms_available_translations.emplace_back("chi", "zh_TW",       "zh_TW",       "chinese",    "Chinese Traditional",  "繁體中文",            true,  0x0004, 0x01);
+  ms_available_translations.emplace_back("chi", "zh_TW",       "zh_TW",       "chinese",    "Chinese Traditional",  "正體中文",            true,  0x0004, 0x01);
 #endif
 
   ms_active_translation_idx = 0;
