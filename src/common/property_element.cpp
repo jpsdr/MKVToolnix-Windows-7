@@ -158,7 +158,7 @@ property_element_c::init_tables() {
   ELE("aspect-ratio-type", KaxVideoAspectRatio::ClassInfos,     YT("Video aspect ratio type"), YT("Specify the possible modifications to the aspect ratio "
                                                                                                   "(0: free resizing, 1: keep aspect ratio, 2: fixed)."));
   ELE("field-order",       KaxVideoFieldOrder::ClassInfos,      YT("Video field order"),       YT("Field order (0, 1, 2, 6, 9 or 14, see documentation)."));
-  ELE("stereo-mode",       KaxVideoStereoMode::ClassInfos,      YT("Video stereo mode"),       YT("Stereo-3D video mode (0 - 11, see documentation)."));
+  ELE("stereo-mode",       KaxVideoStereoMode::ClassInfos,      YT("Video stereo mode"),       YT("Stereo-3D video mode (0 - 14, see documentation)."));
 
   sub_master_callbacks         = &KaxTrackVideo::ClassInfos;
   sub_sub_master_callbacks     = &KaxVideoColour::ClassInfos;
