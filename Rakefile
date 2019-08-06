@@ -737,7 +737,7 @@ namespace :man2html do
       html = xml.map { |name| name.ext(".html") }
 
       xml.each do |name|
-        file name.ext('html') => %w{manpages translations:manpages} do
+        file name.ext('html') => name do
           runq "saxon-he", name, "java -classpath lib/saxon-he/saxon9he.jar net.sf.saxon.Transform -o:#{name.ext('html')} -xsl:doc/stylesheets/docbook-to-html.xsl #{name}"
         end
 
