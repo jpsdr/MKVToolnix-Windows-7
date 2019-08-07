@@ -19,7 +19,12 @@ BuildRequires: boost-devel >= 1.46.0
 %endif
 
 %if 0%{?suse_version}
-BuildRequires: gettext-tools libqt5-qtbase-devel, libqt5-qtmultimedia-devel, rubygem-rake, libxslt-tools, docbook-xsl-stylesheets, googletest-devel
+BuildRequires: gettext-tools libqt5-qtbase-devel, libqt5-qtmultimedia-devel, libxslt-tools, docbook-xsl-stylesheets, googletest-devel
+%if %{suse_version} >= 1500
+BuildRequires: ruby2.5-rubygem-rake-12_0
+%else
+BuildRequires: ruby2.4-rubygem-rake
+%endif
 %else
 BuildRequires: gettext-devel, qt5-qtbase-devel, qt5-qtmultimedia-devel, libxslt, docbook-style-xsl, gtest-devel, fmt-devel
 %endif
