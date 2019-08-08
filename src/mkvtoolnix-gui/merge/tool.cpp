@@ -179,7 +179,7 @@ Tool::openConfig() {
 void
 Tool::openConfigFile(QString const &fileName) {
   Util::Settings::change([&fileName](Util::Settings &cfg) {
-    cfg.m_lastConfigDir = QFileInfo{fileName}.path();
+    cfg.m_lastConfigDir.setPath(QFileInfo{fileName}.path());
   });
 
   if (MainWindow::jobTool()->addJobFile(fileName)) {

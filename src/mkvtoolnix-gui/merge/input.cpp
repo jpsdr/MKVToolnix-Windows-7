@@ -1194,7 +1194,7 @@ Tab::addOrAppendFiles(bool append,
                       QStringList const &fileNames,
                       QModelIndex const &sourceFileIdx) {
   if (!fileNames.isEmpty())
-    Util::Settings::get().m_lastOpenDir = QFileInfo{fileNames.last()}.path();
+    Util::Settings::get().m_lastOpenDir.setPath(QFileInfo{fileNames.last()}.path());
 
   qDebug() << "Tab::addOrAppendFiles: TID" << QThread::currentThreadId();
 

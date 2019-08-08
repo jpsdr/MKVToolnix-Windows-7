@@ -689,10 +689,10 @@ Tab::saveAsImpl(bool requireNewFileName,
   p->savedState = currentState();
 
   if (newFileName != p->fileName) {
-    p->fileName            = newFileName;
+    p->fileName    = newFileName;
 
-    auto &settings         = Util::Settings::get();
-    settings.m_lastOpenDir = QFileInfo{newFileName}.path();
+    auto &settings = Util::Settings::get();
+    settings.m_lastOpenDir.setPath(QFileInfo{newFileName}.path());
     settings.save();
 
     updateFileNameDisplay();

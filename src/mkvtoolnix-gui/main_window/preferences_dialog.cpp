@@ -837,8 +837,8 @@ PreferencesDialog::save() {
                                                         : ui->rbMAutoSetPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
                                                         :                                                Util::Settings::ToSameAsFirstInputFile;
   m_cfg.m_autoDestinationOnlyForVideoFiles              = ui->cbMAutoDestinationOnlyForVideoFiles->isChecked();
-  m_cfg.m_relativeOutputDir                             = ui->cbMAutoSetRelativeDirectory->currentText();
-  m_cfg.m_fixedOutputDir                                = ui->cbMAutoSetFixedDirectory->currentText();
+  m_cfg.m_relativeOutputDir.setPath(ui->cbMAutoSetRelativeDirectory->currentText());
+  m_cfg.m_fixedOutputDir.setPath(ui->cbMAutoSetFixedDirectory->currentText());
   m_cfg.m_uniqueOutputFileNames                         = ui->cbMUniqueOutputFileNames->isChecked();
   m_cfg.m_autoClearOutputFileName                       = ui->cbMAutoClearOutputFileName->isChecked();
 

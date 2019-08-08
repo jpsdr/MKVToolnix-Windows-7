@@ -402,7 +402,7 @@ Tab::onSaveOutput() {
     out.close();
   }
 
-  cfg.m_lastOpenDir = QFileInfo{fileName}.path();
+  cfg.m_lastOpenDir.setPath(QFileInfo{fileName}.path());
   cfg.save();
 }
 

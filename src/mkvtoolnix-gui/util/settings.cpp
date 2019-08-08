@@ -358,7 +358,7 @@ Settings::setDefaults(boost::optional<QVariant> enableMuxingTracksByTheseTypes) 
 
   if (ToParentOfFirstInputFile == m_outputFileNamePolicy) {
     m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
-    m_relativeOutputDir    = Q("..");
+    m_relativeOutputDir.setPath(Q(".."));
   }
 
   m_enableMuxingTracksByTheseTypes.clear();

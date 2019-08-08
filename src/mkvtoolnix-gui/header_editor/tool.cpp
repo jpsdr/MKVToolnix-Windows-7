@@ -141,8 +141,8 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 
 void
 Tool::openFile(QString const &fileName) {
-  auto &settings         = Util::Settings::get();
-  settings.m_lastOpenDir = QFileInfo{fileName}.path();
+  auto &settings = Util::Settings::get();
+  settings.m_lastOpenDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 
   auto tab = new Tab{this, fileName};

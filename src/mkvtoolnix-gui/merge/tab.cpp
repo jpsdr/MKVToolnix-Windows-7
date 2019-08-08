@@ -202,7 +202,7 @@ Tab::onSaveOptionFile() {
     return;
 
   Util::OptionFile::create(fileName, updateConfigFromControlValues().buildMkvmergeOptions());
-  settings.m_lastConfigDir = QFileInfo{fileName}.path();
+  settings.m_lastConfigDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 
   MainWindow::get()->setStatusBarMessage(QY("The option file has been created."));
@@ -217,7 +217,7 @@ Tab::onSaveConfigAs() {
 
   updateConfigFromControlValues();
   m_config.save(fileName);
-  settings.m_lastConfigDir = QFileInfo{fileName}.path();
+  settings.m_lastConfigDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 
   m_savedState = currentState();
@@ -258,7 +258,7 @@ Tab::getOpenFileName(QString const &title,
   if (fileName.isEmpty())
     return fileName;
 
-  settings.m_lastOpenDir = QFileInfo{fileName}.path();
+  settings.m_lastOpenDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 
   if (lineEdit)
@@ -285,7 +285,7 @@ Tab::getSaveFileName(QString const &title,
   if (fileName.isEmpty())
     return fileName;
 
-  settings.m_lastOutputDir = QFileInfo{fileName}.path();
+  settings.m_lastOutputDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 
   lineEdit->setText(fileName);

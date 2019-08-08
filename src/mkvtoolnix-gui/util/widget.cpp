@@ -178,7 +178,7 @@ addSegmentUIDFromFileToLineEdit(QWidget &parent,
   if (fileName.isEmpty())
     return;
 
-  settings.m_lastOpenDir = QFileInfo{fileName}.path();
+  settings.m_lastOpenDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 
   try {

@@ -159,7 +159,7 @@ void
 Tool::openFile(QString const &fileName,
                bool append) {
   auto &settings = Util::Settings::get();
-  settings.m_lastOpenDir = QFileInfo{fileName}.path();
+  settings.m_lastOpenDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 
   if (!append)

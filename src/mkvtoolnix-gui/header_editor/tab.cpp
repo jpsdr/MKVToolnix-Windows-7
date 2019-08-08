@@ -665,7 +665,7 @@ Tab::selectAttachmentsAndAdd() {
   if (fileNames.isEmpty())
     return;
 
-  settings.m_lastOpenDir = QFileInfo{fileNames[0]}.path();
+  settings.m_lastOpenDir.setPath(QFileInfo{fileNames[0]}.path());
   settings.save();
 
   addAttachments(fileNames);

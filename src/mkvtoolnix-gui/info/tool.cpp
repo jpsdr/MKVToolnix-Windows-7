@@ -132,7 +132,7 @@ Tool::selectAndOpenFile() {
 void
 Tool::openFile(QString const &fileName) {
   Util::Settings::change([&fileName](Util::Settings &settings) {
-    settings.m_lastOpenDir = QFileInfo{fileName}.path();
+    settings.m_lastOpenDir.setPath(QFileInfo{fileName}.path());
   });
 
   appendTab(new Tab{this})
