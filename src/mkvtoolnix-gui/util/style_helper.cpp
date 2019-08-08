@@ -184,7 +184,7 @@ StyleHelper::verticalGradient(QPainter *painter,
                 clipRect.height(), keyColor.rgb());;
 
     QPixmap pixmap;
-    if (!QPixmapCache::find(key, pixmap)) {
+    if (!QPixmapCache::find(key, &pixmap)) {
       pixmap = QPixmap(clipRect.size());
       QPainter p(&pixmap);
       QRect rect(0, 0, clipRect.width(), clipRect.height());
@@ -247,7 +247,7 @@ StyleHelper::horizontalGradient(QPainter *painter,
                 clipRect.height(), keyColor.rgb(), spanRect.x());
 
     QPixmap pixmap;
-    if (!QPixmapCache::find(key, pixmap)) {
+    if (!QPixmapCache::find(key, &pixmap)) {
       pixmap = QPixmap(clipRect.size());
       QPainter p(&pixmap);
       QRect rect = QRect(0, 0, clipRect.width(), clipRect.height());
@@ -290,7 +290,7 @@ StyleHelper::drawArrow(QStyle::PrimitiveElement element,
                      "$qt_ia",
                      uint(option->state), element,
                      size, option->palette.cacheKey());
-  if (!QPixmapCache::find(pixmapName, pixmap)) {
+  if (!QPixmapCache::find(pixmapName, &pixmap)) {
     int border = size/5;
     int sqsize = 2*(size/2);
     QImage image(sqsize, sqsize, QImage::Format_ARGB32);
@@ -365,7 +365,7 @@ StyleHelper::menuGradient(QPainter *painter,
                 clipRect.height(), StyleHelper::baseColor().rgb());
 
     QPixmap pixmap;
-    if (!QPixmapCache::find(key, pixmap)) {
+    if (!QPixmapCache::find(key, &pixmap)) {
       pixmap = QPixmap(clipRect.size());
       QPainter p(&pixmap);
       QRect rect = QRect(0, 0, clipRect.width(), clipRect.height());
@@ -392,7 +392,7 @@ StyleHelper::drawIconWithShadow(QIcon const &icon,
   QPixmap cache;
   QString pixmapName = QString("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
 
-  if (!QPixmapCache::find(pixmapName, cache)) {
+  if (!QPixmapCache::find(pixmapName, &cache)) {
     QPixmap px = icon.pixmap(rect.size());
     cache = QPixmap(px.size() + QSize(radius * 2, radius * 2));
     cache.fill(Qt::transparent);
