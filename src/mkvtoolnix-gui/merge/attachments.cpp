@@ -77,7 +77,7 @@ Tab::setupAttachmentsControls() {
   connect(m_disableSelectedAttachedFilesAction, &QAction::triggered,                                                                this, [=]() { enableDisableSelectedAttachedFiles(false); });
 
   connect(ui->attachmentDescription,            &QLineEdit::textChanged,                                                            this, &Tab::onAttachmentDescriptionChanged);
-  connect(ui->attachmentMIMEType,               static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged), this, &Tab::onAttachmentMIMETypeChanged);
+  connect(ui->attachmentMIMEType,               &QComboBox::currentTextChanged,                                                     this, &Tab::onAttachmentMIMETypeChanged);
   connect(ui->attachmentMIMEType,               &QComboBox::editTextChanged,                                                        this, &Tab::onAttachmentMIMETypeChanged);
   connect(ui->attachmentName,                   &QLineEdit::textChanged,                                                            this, &Tab::onAttachmentNameChanged);
   connect(ui->attachmentStyle,                  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),             this, &Tab::onAttachmentStyleChanged);

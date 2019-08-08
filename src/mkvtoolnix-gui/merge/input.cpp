@@ -331,14 +331,14 @@ Tab::setupInputControls() {
   connect(ui->addFiles,                      &QToolButton::clicked,                                                                            this,                     &Tab::onAddFiles);
   connect(ui->addToJobQueue,                 &QPushButton::clicked,                                                                            this,                     [=]() { addToJobQueue(false); });
   connect(ui->additionalTrackOptions,        &QLineEdit::textChanged,                                                                          this,                     &Tab::onAdditionalTrackOptionsChanged);
-  connect(ui->aspectRatio,                   static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this,                     &Tab::onAspectRatioChanged);
+  connect(ui->aspectRatio,                   &QComboBox::currentTextChanged,                                                                   this,                     &Tab::onAspectRatioChanged);
   connect(ui->aspectRatio,                   &QComboBox::editTextChanged,                                                                      this,                     &Tab::onAspectRatioChanged);
   connect(ui->browseTimestamps,              &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTimestamps);
   connect(ui->browseTrackTags,               &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTrackTags);
   connect(ui->compression,                   static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onCompressionChanged);
   connect(ui->cropping,                      &QLineEdit::textChanged,                                                                          this,                     &Tab::onCroppingChanged);
   connect(ui->cues,                          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onCuesChanged);
-  connect(ui->defaultDuration,               static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this,                     &Tab::onDefaultDurationChanged);
+  connect(ui->defaultDuration,               &QComboBox::currentTextChanged,                                                                   this,                     &Tab::onDefaultDurationChanged);
   connect(ui->defaultDuration,               &QComboBox::editTextChanged,                                                                      this,                     &Tab::onDefaultDurationChanged);
   connect(ui->defaultTrackFlag,              static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onDefaultTrackFlagChanged);
   connect(ui->delay,                         &QLineEdit::textChanged,                                                                          this,                     &Tab::onDelayChanged);

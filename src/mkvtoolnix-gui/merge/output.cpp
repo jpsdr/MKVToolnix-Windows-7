@@ -56,7 +56,7 @@ Tab::setupOutputControls() {
   connect(ui->browsePreviousSegmentUID,      &QPushButton::clicked,                                                                            this, &Tab::onBrowsePreviousSegmentUID);
   connect(ui->browseSegmentInfo,             &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentInfo);
   connect(ui->browseSegmentUID,              &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentUID);
-  connect(ui->chapterCharacterSet,           static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this, &Tab::onChapterCharacterSetChanged);
+  connect(ui->chapterCharacterSet,           &QComboBox::currentTextChanged,                                                                   this, &Tab::onChapterCharacterSetChanged);
   connect(ui->chapterCharacterSetPreview,    &QPushButton::clicked,                                                                            this, &Tab::onPreviewChapterCharacterSet);
   connect(ui->chapterDelay,                  &QLineEdit::textChanged,                                                                          this, &Tab::onChapterDelayChanged);
   connect(ui->chapterStretchBy,              &QLineEdit::textChanged,                                                                          this, &Tab::onChapterStretchByChanged);
