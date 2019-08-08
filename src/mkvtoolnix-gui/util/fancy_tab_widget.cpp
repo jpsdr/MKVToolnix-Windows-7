@@ -107,7 +107,7 @@ FancyTabBar::tabSizeHint(bool minimum)
   int width         = 60 + spacing + 2;
   int maxLabelwidth = 0;
   for (int tab=0 ; tab<count() ;++tab)
-    maxLabelwidth = std::max(maxLabelwidth, fm.width(tabText(tab)));
+    maxLabelwidth = std::max(maxLabelwidth, fm.horizontalAdvance(tabText(tab)));
   int iconHeight = minimum ? 0 : 32;
   return QSize(qMax(width, maxLabelwidth + 4), iconHeight + spacing + fm.height());
 }

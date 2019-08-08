@@ -86,7 +86,7 @@ QSize
 ElideLabel::sizeHint()
   const {
   auto metrics = fontMetrics();
-  return QSize{ metrics.width(Q("…")), metrics.height() };
+  return QSize{ metrics.horizontalAdvance(Q("…")), metrics.height() };
 }
 
 QSize
@@ -96,7 +96,7 @@ ElideLabel::minimumSizeHint()
     return sizeHint();
 
   auto metrics = fontMetrics();
-  return QSize{ metrics.width(Q("…")), metrics.height() };
+  return QSize{ metrics.horizontalAdvance(Q("…")), metrics.height() };
 }
 
 void
