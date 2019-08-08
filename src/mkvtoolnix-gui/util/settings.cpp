@@ -18,6 +18,7 @@
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/font.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/settings_names.h"
 #include "mkvtoolnix-gui/util/string.h"

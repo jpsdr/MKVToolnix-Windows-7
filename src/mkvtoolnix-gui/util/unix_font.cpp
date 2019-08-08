@@ -3,7 +3,7 @@
 #include <QFont>
 
 #include "mkvtoolnix-gui/app.h"
-#include "mkvtoolnix-gui/util/widget.h"
+#include "mkvtoolnix-gui/util/font.h"
 
 namespace mtx { namespace gui { namespace Util {
 

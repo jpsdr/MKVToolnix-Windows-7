@@ -29,8 +29,8 @@
 #include <QtWidgets/QStyleOption>
 #include <QtWidgets/QWidget>
 
+#include "mkvtoolnix-gui/util/font.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/widget.h"
 
 // libintl.h #defines sprintf to libintl_sprintf on mingw.
 #undef sprintf
