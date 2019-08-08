@@ -164,7 +164,7 @@ TrackModel::indexFromTrack(Track *track) {
       continue;
 
     for (auto childRow = 0, numChildRows = topItem->rowCount(); childRow < numChildRows; ++childRow) {
-      auto childIdx = topIdx.child(childRow, 0);
+      auto childIdx = index(childRow, 0, topIdx);
       if (fromIndex(childIdx) == track)
         return childIdx;
     }

@@ -1995,14 +1995,14 @@ Tab::focusNextChapterAtom(FocusElementType toFocus) {
   auto selectedItem = p->chapterModel->itemFromIndex(selectedIdx);
 
   if (selectedItem->rowCount())
-    return doSelect(selectedIdx.child(0, 0));
+    return doSelect(p->chapterModel->index(0, 0, selectedIdx));
 
   auto parentIdx  = selectedIdx.parent();
   auto parentItem = p->chapterModel->itemFromIndex(parentIdx);
   auto nextRow    = selectedIdx.row() + 1;
 
   if (nextRow < parentItem->rowCount())
-    return doSelect(parentIdx.child(nextRow, 0));
+    return doSelect(p->chapterModel->index(nextRow, 0, parentIdx));
 
   while (parentIdx.parent().isValid()) {
     nextRow    = parentIdx.row() + 1;
@@ -2010,7 +2010,7 @@ Tab::focusNextChapterAtom(FocusElementType toFocus) {
     parentItem = p->chapterModel->itemFromIndex(parentIdx);
 
     if (nextRow < parentItem->rowCount())
-      return doSelect(parentIdx.child(nextRow, 0));
+      return doSelect(p->chapterModel->index(nextRow, 0, parentIdx));
   }
 
   auto numEditions = p->chapterModel->rowCount();
@@ -2018,7 +2018,7 @@ Tab::focusNextChapterAtom(FocusElementType toFocus) {
 
   while (numEditions) {
     if (p->chapterModel->itemFromIndex(editionIdx)->rowCount())
-      return doSelect(editionIdx.child(0, 0));
+      return doSelect(p->chapterModel->index(0, 0, editionIdx));
 
     editionIdx = editionIdx.sibling((editionIdx.row() + 1) % numEditions, 0);
   }
