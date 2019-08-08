@@ -10,6 +10,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/elide_label.h"
+#include "mkvtoolnix-gui/util/font.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -86,7 +87,7 @@ QSize
 ElideLabel::sizeHint()
   const {
   auto metrics = fontMetrics();
-  return QSize{ metrics.horizontalAdvance(Q("…")), metrics.height() };
+  return QSize{ Util::horizontalAdvance(metrics, Q("…")), metrics.height() };
 }
 
 QSize
@@ -96,7 +97,7 @@ ElideLabel::minimumSizeHint()
     return sizeHint();
 
   auto metrics = fontMetrics();
-  return QSize{ metrics.horizontalAdvance(Q("…")), metrics.height() };
+  return QSize{ Util::horizontalAdvance(metrics, Q("…")), metrics.height() };
 }
 
 void

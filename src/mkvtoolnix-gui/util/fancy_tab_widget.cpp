@@ -21,6 +21,7 @@
 #include "common/common_pch.h"
 
 #include "mkvtoolnix-gui/util/fancy_tab_widget.h"
+#include "mkvtoolnix-gui/util/font.h"
 #include "mkvtoolnix-gui/util/style_helper.h"
 
 #include <QtCore/QDebug>
@@ -107,7 +108,7 @@ FancyTabBar::tabSizeHint(bool minimum)
   int width         = 60 + spacing + 2;
   int maxLabelwidth = 0;
   for (int tab=0 ; tab<count() ;++tab)
-    maxLabelwidth = std::max(maxLabelwidth, fm.horizontalAdvance(tabText(tab)));
+    maxLabelwidth = std::max(maxLabelwidth, Util::horizontalAdvance(fm, tabText(tab)));
   int iconHeight = minimum ? 0 : 32;
   return QSize(qMax(width, maxLabelwidth + 4), iconHeight + spacing + fm.height());
 }
