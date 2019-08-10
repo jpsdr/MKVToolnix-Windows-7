@@ -12,6 +12,9 @@
   files even if the `clip_codec_identifier` playlist item field is not set to
   `M2TS` in the MPLS file. Fixes #2601.
 * all: fixed the spelling of the H.264 & H.265 codec names.
+* mkvmerge: fixed handling of text files that use both DOS-style and
+  Unix-style line endings resulting in problems such as text subtitle files
+  not being parsed correctly. Fixes #2594.
 
 
 # Version 35.0.0 "All The Love In The World" 2019-06-22

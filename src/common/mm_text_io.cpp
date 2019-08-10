@@ -246,7 +246,7 @@ mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
       continue;
     }
 
-    if ((1 == len) && (utf8char[0] == '\n') && (!p->uses_carriage_returns || previous_was_carriage_return))
+    if ((1 == len) && (utf8char[0] == '\n'))
       return s;
 
     if (previous_was_carriage_return) {
