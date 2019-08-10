@@ -111,6 +111,8 @@ srt_parser_c::parse() {
     line_number++;
     strip_back(s);
 
+    mxdebug_if(m_debug, fmt::format("line {0} state {1} content »{2}«\n", line_number, state == STATE_INITIAL ? "initial" : state == STATE_TIME ? "time" : state == STATE_SUBS ? "subs" : "subs-or-number", s));
+
     if (s.empty()) {
       if ((STATE_INITIAL == state) || (STATE_TIME == state))
         continue;

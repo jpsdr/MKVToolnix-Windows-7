@@ -88,6 +88,7 @@ protected:
   const std::string &m_file_name;
   int64_t m_tid;
   bool m_coordinates_warning_shown;
+  debugging_option_c m_debug{"srt_parser"};
 
 public:
   srt_parser_c(mm_text_io_cptr const &io, const std::string &file_name, int64_t tid);
