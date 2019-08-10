@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-06-17 22:20+0200\n"
+"POT-Creation-Date: 2019-08-10 14:36+0200\n"
 "PO-Revision-Date: 2018-10-11 00:17+0000\n"
 "Last-Translator: Ricardo Perdigão <ricardofonseca1977@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt/)\n"
@@ -1049,6 +1049,11 @@ msgstr "  <file1> +<file2>         O mesmo que \"<file1> + <file2>\".\n"
 msgid " (FourCC: {0})"
 msgstr " (FourCC: {0})"
 
+#: src/common/kax_info.cpp:374
+#, no-c-format
+msgid " (H.264 profile: {0} @L{1}.{2})"
+msgstr "(h. 264 perfil: {0} @L{1}.{2})"
+
 #: src/common/kax_info.cpp:393
 #, no-c-format
 msgid " (HEVC profile: {0} @L{1}.{2})"
@@ -1086,11 +1091,6 @@ msgstr " (formato tag: 0x{0:04x})"
 #, no-c-format
 msgid " (free resizing)"
 msgstr ""
-
-#: src/common/kax_info.cpp:374
-#, no-c-format
-msgid " (H.264 profile: {0} @L{1}.{2})"
-msgstr "(h. 264 perfil: {0} @L{1}.{2})"
 
 #: src/common/kax_info.cpp:684
 #, no-c-format
@@ -3224,8 +3224,8 @@ msgstr "Todas as entradas"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:663
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/info/tool.cpp:126
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:315
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:393
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:316
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:394
 #: src/mkvtoolnix-gui/merge/attachments.cpp:257
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:200
@@ -3357,7 +3357,7 @@ msgstr "Mostrar sempre os controlos do \"Ficheiro de saída\" abaixo dos separad
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "Utilizar sempre uma &descrição predefinida ao adicionar uma tarefa à lista de tarefas"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:105
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:106
 #, no-c-format
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
 msgstr "Mesmo que não haja pistas de áudio presentes"
@@ -3569,7 +3569,7 @@ msgstr "Profundidade de bits do áudio"
 msgid "Audio channels"
 msgstr "Canais de áudio"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:392
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:393
 #, no-c-format
 msgid "Audio files"
 msgstr "Ficheiros de áudio"
@@ -3983,7 +3983,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "Número do capítulo da primeira entrada a criar:"
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:302
+#: src/mkvtoolnix-gui/util/settings.cpp:303
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Capítulo <NUM:2>"
@@ -4844,7 +4844,7 @@ msgstr ""
 msgid "Current command line"
 msgstr "Linha de comando actual"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:250
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:251
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
 msgstr "Data e hora actual no formato ISO 8601"
@@ -4932,7 +4932,7 @@ msgstr "Terminada em"
 msgid "Date started"
 msgstr "Iniciada em"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:225
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
 msgstr ""
@@ -5055,8 +5055,8 @@ msgstr ""
 msgid "Delete one or more attachments"
 msgstr "Eliminar um ou mais anexos"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:53
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
+#: src/mkvtoolnix-gui/util/settings.cpp:54
 #, fuzzy, no-c-format
 msgid "Delete source files for multiplexer jobs"
 msgstr "Utilizar como defeito para novas tarefas"
@@ -5131,12 +5131,12 @@ msgstr "Nome do ficheiro de destino"
 msgid "Destination file name: %1"
 msgstr "Nome do ficheiro de destino: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
 #, no-c-format
 msgid "Destination file's directory"
 msgstr "Pasta de destino dos ficheiros"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
 #, no-c-format
 msgid "Destination file's name"
 msgstr "Nome do ficheiro de destino"
@@ -5794,7 +5794,7 @@ msgstr "Mesmo que existam avisos"
 msgid "Example"
 msgstr "Exemplo"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:118
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:119
 #, fuzzy, no-c-format
 msgid "Examples"
 msgstr "Exemplo"
@@ -5814,7 +5814,7 @@ msgstr ""
 msgid "Exception details:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:313
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:314
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
@@ -5825,8 +5825,8 @@ msgstr "Ficheiros executáveis"
 msgid "Executable not found"
 msgstr "Executável não encontrado."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:193
-#: src/mkvtoolnix-gui/util/settings.cpp:61
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:194
+#: src/mkvtoolnix-gui/util/settings.cpp:62
 #, no-c-format
 msgid "Execute a program"
 msgstr "Executar um programa"
@@ -5841,12 +5841,12 @@ msgstr ""
 msgid "Execute action when the &queue completes"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:66
+#: src/mkvtoolnix-gui/util/settings.cpp:67
 #, no-c-format
 msgid "Execute program '%1'"
 msgstr "Executar programa '%1'"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #, no-c-format
 msgid "Executes the action immediately."
 msgstr "Executar a acção imediatamente."
@@ -5861,7 +5861,7 @@ msgstr "Executar acções"
 msgid "Executing actions after certain events"
 msgstr "Executar acções após certos eventos"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
 #, no-c-format
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr "Código de saída (0: ok, 1: ocorreram avisos, 2: ocorreram erros)"
@@ -6315,7 +6315,7 @@ msgstr "Geral"
 msgid "General options"
 msgstr "Opções gerais"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:250
 #, no-c-format
 msgid "General variables"
 msgstr "Variáveis gerais"
@@ -6461,8 +6461,8 @@ msgstr "Altura dos frames do vídeo codificados em frames."
 msgid "Height of the video frames to display."
 msgstr "Altura de exibição do vídeo."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:51
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
+#: src/mkvtoolnix-gui/util/settings.cpp:52
 #, no-c-format
 msgid "Hibernate the computer"
 msgstr "Hibernar o computador"
@@ -6560,7 +6560,7 @@ msgstr ""
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:221
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:222
 #, no-c-format
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr ""
@@ -6888,7 +6888,7 @@ msgstr ""
 msgid "Increase verbosity."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:222
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
 #, no-c-format
 msgid "Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."
 msgstr ""
@@ -7386,12 +7386,12 @@ msgstr ""
 msgid "Job &output"
 msgstr "Saída de tarefas"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
 #, no-c-format
 msgid "Job description"
 msgstr "Descrição da tarefa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
 #, no-c-format
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Data e hora do fim da tarefa no formato ISO 8601"
@@ -7409,12 +7409,12 @@ msgstr "Saída de tarefas"
 msgid "Job queue"
 msgstr "Lista de tarefas"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
 #, no-c-format
 msgid "Job start date && time in ISO 8601 format"
 msgstr "Data e hora de inicio da tarefa no formato ISO 8601"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:238
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
 msgstr ""
@@ -7639,7 +7639,7 @@ msgstr "Ficheiros de configuração do MKVToolNix GUI"
 msgid "MKVToolNix GUI preferences"
 msgstr "Preferências do MKVToolNix"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:251
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
 #, no-c-format
 msgid "MKVToolNix GUI's installation directory"
 msgstr "Pasta de instalação do MKVToolNix GUI's"
@@ -8449,12 +8449,12 @@ msgstr ""
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #, no-c-format
 msgid "Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:100
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:101
 #, no-c-format
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr ""
@@ -8715,7 +8715,7 @@ msgstr "Abrir ficheiros no editor de capítulos"
 msgid "Open settings file"
 msgstr "Abrir ficheiro de definições"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:159
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:160
 #, no-c-format
 msgid "Open the multiplexed file with a player:"
 msgstr ""
@@ -8916,18 +8916,18 @@ msgstr "Altura da janela"
 msgid "Pixel width"
 msgstr "Largura do aro"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:121
 #, no-c-format
 msgid "Play a WAV file with the default application:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:194
-#: src/mkvtoolnix-gui/util/settings.cpp:73
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
+#: src/mkvtoolnix-gui/util/settings.cpp:74
 #, no-c-format
 msgid "Play an audio file"
 msgstr "Tocar um ficheiro de áudio"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:78
+#: src/mkvtoolnix-gui/util/settings.cpp:79
 #, no-c-format
 msgid "Play audio file '%1'"
 msgstr "Tocar ficheiro de áudio '%1?"
@@ -9856,8 +9856,8 @@ msgstr[1] ""
 msgid "Scope"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:102
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:103
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:115
 #, no-c-format
 msgid "See below for examples."
 msgstr ""
@@ -9972,7 +9972,7 @@ msgstr "Seleccionar todas as pistas de..."
 msgid "Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:396
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:397
 #, no-c-format
 msgid "Select audio file"
 msgstr "Seleccione um ficheiro de áudio"
@@ -9999,7 +9999,7 @@ msgstr "Seleccione a pasta de destino"
 msgid "Select destination file name"
 msgstr "Seleccione o ficheiro de destino"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:318
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:319
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
@@ -10259,13 +10259,13 @@ msgstr "Mostrar ajuda."
 msgid "Show version information."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:50
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
+#: src/mkvtoolnix-gui/util/settings.cpp:51
 #, no-c-format
 msgid "Shut down the computer"
 msgstr "Desligar o computador"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:143
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:144
 #, no-c-format
 msgid "Shut down the system in one minute:"
 msgstr "Desligar o sistema em 1 minuto:"
@@ -10357,8 +10357,8 @@ msgstr "Ignorando {0} bytes no início (Foi encontrado um cabeçalho DTS inváli
 msgid "Skipping {0} bytes at the beginning (no valid MP3 header found).\n"
 msgstr "Ignorando {0} bytes no início (Foi encontrado um cabeçalho MP3 inválido).\n"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:52
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
+#: src/mkvtoolnix-gui/util/settings.cpp:53
 #, no-c-format
 msgid "Sleep the computer"
 msgstr "Adormecer o computador"
@@ -10399,7 +10399,7 @@ msgstr "Nome do ficheiro de origem"
 msgid "Source file name: %1"
 msgstr "Nome do ficheiro de origem"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
 #, no-c-format
 msgid "Source file names"
 msgstr "Nome dos ficheiros de origem"
@@ -10470,12 +10470,12 @@ msgstr "Iniciar"
 msgid "Start &multiplexing"
 msgstr "Iniciar Multiplexing"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:110
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:111
 #, no-c-format
 msgid "Start file types other than executable files via cmd.exe."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:112
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:113
 #, no-c-format
 msgid "Start file types other than executable files via xdg-open."
 msgstr ""
@@ -11020,7 +11020,7 @@ msgstr ""
 msgid "The attachment ({0}) is too big ({1})."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:32
+#: src/mkvtoolnix-gui/util/settings.cpp:33
 #, no-c-format
 msgid "The audio file to play hasn't been set yet."
 msgstr "O ficheiro de áudio não foi definido."
@@ -11051,8 +11051,8 @@ msgstr ""
 msgid "The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."
 msgstr "Os países seleccionados aqui serão mostrados na parte superior de todas drop boxes de países no programa."
 
-#: src/output/p_avc.cpp:185
-#: src/output/p_hevc.cpp:158
+#: src/output/p_avc.cpp:181
+#: src/output/p_hevc.cpp:154
 #, no-c-format
 msgid "The chosen NALU size length of {0} is too small. Try using '4'.\n"
 msgstr ""
@@ -11073,8 +11073,8 @@ msgstr ""
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr ""
 
-#: src/output/p_avc.cpp:136
-#: src/output/p_hevc.cpp:104
+#: src/output/p_avc.cpp:132
+#: src/output/p_hevc.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match. Both have the same length ({0}) but different content."
 msgstr ""
@@ -11089,7 +11089,7 @@ msgstr ""
 msgid "The colour transfer characteristics of the video."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:97
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:98
 #, no-c-format
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
 msgstr ""
@@ -11921,7 +11921,7 @@ msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
 msgid "The process will be aborted."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:31
+#: src/mkvtoolnix-gui/util/settings.cpp:32
 #, fuzzy, no-c-format
 msgid "The program to execute hasn't been set yet."
 msgstr "A configuração foi guardada."
@@ -12501,7 +12501,7 @@ msgstr ""
 msgid "This is also done when quitting the application."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:225
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
 msgstr ""
@@ -12546,7 +12546,7 @@ msgstr ""
 msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "Isso é útil para situações como discos Blu-ray onde existem uma infinidade de Listas de reprodução no mesmo diretório e onde não é claro a que recurso (por exemplo, filme principal, extras, etc.) uma Lista de reprodução pertence."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:98
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
 #, no-c-format
 msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
 msgstr ""
@@ -13160,7 +13160,7 @@ msgstr ""
 msgid "Usage"
 msgstr "Utilização"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:95
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:96
 #, no-c-format
 msgid "Usage and examples"
 msgstr "Utilização e exemplos"
@@ -13271,12 +13271,12 @@ msgstr "Valor"
 msgid "Value: %1"
 msgstr "Valor: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:237
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:238
 #, no-c-format
 msgid "Variables for all job types"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
 #, fuzzy, no-c-format
 msgid "Variables for multiplex jobs"
 msgstr "Utilizar como defeito para novas tarefas"
@@ -14669,8 +14669,8 @@ msgstr ""
 msgid "ogg_sync_buffer failed\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:129
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:126
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:130
 #, no-c-format
 msgid "or"
 msgstr "ou"
