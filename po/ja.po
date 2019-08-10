@@ -1174,8 +1174,8 @@ msgstr " (可変アスペクト比)"
 
 #: src/common/kax_info.cpp:374
 #, no-c-format
-msgid " (h.264 profile: {0} @L{1}.{2})"
-msgstr " (h.264プロファイル：{0} @L{1}.{2})"
+msgid " (H.264 profile: {0} @L{1}.{2})"
+msgstr " (H.264プロファイル：{0} @L{1}.{2})"
 
 #: src/common/kax_info.cpp:684
 #, no-c-format
@@ -2927,18 +2927,18 @@ msgstr ""
 #: src/common/file_types.cpp:76
 #: src/output/p_avc.h:34
 #, no-c-format
-msgid "AVC/h.264"
-msgstr "AVC/h.264"
+msgid "AVC/H.264"
+msgstr "AVC/H.264"
 
 #: src/output/p_avc_es.h:40
 #, no-c-format
-msgid "AVC/h.264 (unframed)"
-msgstr "AVC/h.264 (unframed)"
+msgid "AVC/H.264 (unframed)"
+msgstr "AVC/H.264 (unframed)"
 
 #: src/common/file_types.cpp:30
 #, no-c-format
-msgid "AVC/h.264 elementary streams"
-msgstr "AVC/h.264エレメンタリストリーム"
+msgid "AVC/H.264 elementary streams"
+msgstr "AVC/H.264エレメンタリストリーム"
 
 #: src/common/file_types.cpp:77
 #, no-c-format
@@ -3367,8 +3367,8 @@ msgstr "全ての単位は1024を単位としています（G = 1024^3, M = 1024
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
 #, no-c-format
-msgid "Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
-msgstr "AVC/h.264ビデオがAVIから読み込まれたときなどに、Video-for-Windows互換モードで格納することを許可します"
+msgid "Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
+msgstr "AVC/H.264ビデオがAVIから読み込まれたときなどに、Video-for-Windows互換モードで格納することを許可します"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:713
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:734
@@ -4554,8 +4554,8 @@ msgstr "CoreAudio"
 
 #: src/input/r_avi.cpp:347
 #, no-c-format
-msgid "Could not extract the decoder specific config data (AVCC) from this AVC/h.264 track.\n"
-msgstr "このAVC/h.264トラックからデコーダ詳細設定データ（AVCC）を抽出することができませんでした。\n"
+msgid "Could not extract the decoder specific config data (AVCC) from this AVC/H.264 track.\n"
+msgstr "このAVC/H.264トラックからデコーダ詳細設定データ（AVCC）を抽出することができませんでした。\n"
 
 #: src/input/r_avi.cpp:297
 #: src/input/r_avi.cpp:302
@@ -10431,7 +10431,7 @@ msgstr "スライス"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
 #, no-c-format
-msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
+msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
 
 #: src/merge/output_control.cpp:1263
@@ -12433,18 +12433,18 @@ msgstr "このAC-3トラックは{0}バイトのAC-3ではないデータを含�
 
 #: src/output/p_avc_es.cpp:100
 #, no-c-format
-msgid "This AVC/h.264 contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to {0} for this track (command line parameter '--nalu-size-length {1}:{0}').\n"
-msgstr "このAVC/h.264は現在のNALUサイズの最大値には大きすぎるフレームを含んでいます。mkvmergeを再実行し、このトラックのNALUサイズを{0}に設定する必要があります（コマンドラインパラメータ '--nalu-size-length {1}:{0}'）。\n"
+msgid "This AVC/H.264 contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to {0} for this track (command line parameter '--nalu-size-length {1}:{0}').\n"
+msgstr "このAVC/H.264は現在のNALUサイズの最大値には大きすぎるフレームを含んでいます。mkvmergeを再実行し、このトラックのNALUサイズを{0}に設定する必要があります（コマンドラインパラメータ '--nalu-size-length {1}:{0}'）。\n"
 
 #: src/output/p_avc_es.cpp:118
 #, no-c-format
-msgid "This AVC/h.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
-msgstr "このAVC/h.264トラックはキーフレームで始まっていません。最初の{0}フレームはスキップされました。\n"
+msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
+msgstr "このAVC/H.264トラックはキーフレームで始まっていません。最初の{0}フレームはスキップされました。\n"
 
 #: src/output/p_avc_es.cpp:128
 #, no-c-format
-msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
-msgstr "このAVC・h.264トラックのタイミング情報は、可変フレームレートを使用していることを示しています。しかし、そのためのデフォルトの継続時間や外部んぼタイムコードファイルが提供されておらず、ソースコンテナもタイムコードを提供していません。その結果生成されるタイムコードは役に立たない可能性があります。\n"
+msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
+msgstr "このAVC・H.264トラックのタイミング情報は、可変フレームレートを使用していることを示しています。しかし、そのためのデフォルトの継続時間や外部んぼタイムコードファイルが提供されておらず、ソースコンテナもタイムコードを提供していません。その結果生成されるタイムコードは役に立たない可能性があります。\n"
 
 #: src/output/p_hevc_es.cpp:96
 #, no-c-format
@@ -12678,8 +12678,8 @@ msgstr "このオプションはmkvemergeに表示する幅・高さを計算す
 
 #: src/mkvtoolnix-gui/merge/input.cpp:516
 #, no-c-format
-msgid "This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
-msgstr "このパラメータはAVC/h.264 ESファイル、HEVC/h.265 ESファイル、AVIファイル、そして「--engage allow_avc_in_vwf_mode」を使用して作成されたMatroskaファイルから読み込まれたAVC/h.264やHEVC/h.265のエレメンタリストリームにのみ有効です。"
+msgid "This parameter is only effective for AVC/H.264 and HEVC/h.265 elementary streams read from AVC/H.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
+msgstr "このパラメータはAVC/H.264 ESファイル、HEVC/h.265 ESファイル、AVIファイル、そして「--engage allow_avc_in_vwf_mode」を使用して作成されたMatroskaファイルから読み込まれたAVC/H.264やHEVC/h.265のエレメンタリストリームにのみ有効です。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:498
 #, no-c-format
@@ -13261,8 +13261,8 @@ msgstr "最初に見つかったチャプタ名ではなく、指定した言語
 
 #: src/merge/mkvmerge.cpp:1622
 #, no-c-format
-msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
-msgstr "NALUサイズを3バイトにすると、特定のAVC/h.264コーデックでトラックがデコードできなくなるかもしれません。\n"
+msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/H.264 codecs.\n"
+msgstr "NALUサイズを3バイトにすると、特定のAVC/H.264コーデックでトラックがデコードできなくなるかもしれません。\n"
 
 #: src/merge/generic_reader.h:41
 #, no-c-format
@@ -14610,10 +14610,10 @@ msgstr "mkvmergeはその2つを区別せず、ただ単にブロックの数を
 #: src/output/p_avc_es.cpp:107
 #, no-c-format
 msgid ""
-"mkvmerge encountered broken or unparsable data in this AVC/h.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
+"mkvmerge encountered broken or unparsable data in this AVC/H.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
 "{0}\n"
 msgstr ""
-"このAVC/h.264ビデオトラックでmkvmergeは解析できないデータに遭遇しました。ファイルが壊れている（その場合mkvmergeはまだ対処できません）か、mkvmerge自身のバグです。エラーメッセージは次の通りです：\n"
+"このAVC/H.264ビデオトラックでmkvmergeは解析できないデータに遭遇しました。ファイルが壊れている（その場合mkvmergeはまだ対処できません）か、mkvmerge自身のバグです。エラーメッセージは次の通りです：\n"
 "{0}\n"
 
 #: src/output/p_hevc_es.cpp:103
@@ -15676,8 +15676,8 @@ msgstr "無しに設定"
 #~ msgid "Stereo mode: %1% (%2%)"
 #~ msgstr "ステレオモード：%1%（%2%）"
 
-#~ msgid "The AVC video track is missing the 'CTTS' atom for frame timestamp offsets. However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timestamps for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timestamps right. As it is missing the timestamps for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
-#~ msgstr "このAVCビデオトラックにはフレームタイムコードを補正する'CTTS' atomがありません。しかし、AVC/h.264では伝統的な1つ（Pフレームの場合）もしくは2つ（Bフレームの場合）より多く他のフレームを参照することが許されています。そのようなフレームのタイムコードは順番通りでないことがあり、'CTTS' atomはタイムコードを補正するために必要です。それが無いため、このトラックのタイムコードは正しくないかもしれません。出力されたファイルを見て期待通りに見えることを確認してください。\n"
+#~ msgid "The AVC video track is missing the 'CTTS' atom for frame timestamp offsets. However, AVC/H.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timestamps for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timestamps right. As it is missing the timestamps for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
+#~ msgstr "このAVCビデオトラックにはフレームタイムコードを補正する'CTTS' atomがありません。しかし、AVC/H.264では伝統的な1つ（Pフレームの場合）もしくは2つ（Bフレームの場合）より多く他のフレームを参照することが許されています。そのようなフレームのタイムコードは順番通りでないことがあり、'CTTS' atomはタイムコードを補正するために必要です。それが無いため、このトラックのタイムコードは正しくないかもしれません。出力されたファイルを見て期待通りに見えることを確認してください。\n"
 
 #~ msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 #~ msgstr "ファイル%1%は未知のファイルタイプです。サポートされているファイルタイプ一覧（'mkvmerge --list-types'）を参照し、もしそのファイルタイプがサポートされているのに正しく認識されない場合は、作者のMoritz Bunkus <moritz@bunkus.org>に連絡してください。\n"

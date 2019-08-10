@@ -37,7 +37,7 @@ public:
   virtual bool write_nal(binary *data, size_t &pos, size_t data_size, size_t nal_size_size);
 
   virtual const char *get_container_name() override {
-    return "AVC/h.264 elementary stream";
+    return "AVC/H.264 elementary stream";
   };
 
   virtual nal_unit_list_t find_nal_units(binary *buf, std::size_t frame_size) const;

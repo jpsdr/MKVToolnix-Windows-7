@@ -513,7 +513,7 @@ Tab::setupInputToolTips() {
                    .arg(QYH("Forces the NALU size length to a certain number of bytes."))
                    .arg(QYH("It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."))
                    .arg(QYH("For such files you can use this parameter and decrease the size to 2."))
-                   .arg(QYH("This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
+                   .arg(QYH("This parameter is only effective for AVC/H.264 and HEVC/h.265 elementary streams read from AVC/H.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
   Util::setToolTip(ui->aacIsSBR,
                    Q("%1 %2 %3")
                    .arg(QY("This track contains SBR AAC/HE-AAC/AAC+ data."))

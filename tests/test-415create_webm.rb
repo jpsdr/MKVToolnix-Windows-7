@@ -15,7 +15,7 @@ end
   [ 'AC-3',      'ac3/v.ac3'                            ],
   [ 'ALAC',      'alac/test-alacconvert.caf'            ],
   [ 'DivX',      'avi/divxFaac51.avi'                   ],
-  [ 'h.264/AVC', 'h254/opengop.h264'                    ],
+  [ 'H.264/AVC', 'h254/opengop.h264'                    ],
   [ 'Dirac',     'dirac/v.drc'                          ],
   [ 'DTS',       'dts/dts-hd.dts'                       ],
   [ 'FLV',       'flv/flv1-video-no-dimensions.flv'     ],

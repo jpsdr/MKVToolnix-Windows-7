@@ -27,7 +27,7 @@ file_type_t::get_supported() {
 
   s_supported_file_types.emplace_back(file_type_e::ac3,         Y("A/52 (aka AC-3)"),                     "ac3 eac3");
   s_supported_file_types.emplace_back(file_type_e::aac,         Y("AAC (Advanced Audio Coding)"),         "aac m4a mp4");
-  s_supported_file_types.emplace_back(file_type_e::avc_es,      Y("AVC/h.264 elementary streams"),        "264 avc h264 x264");
+  s_supported_file_types.emplace_back(file_type_e::avc_es,      Y("AVC/H.264 elementary streams"),        "264 avc h264 x264");
   s_supported_file_types.emplace_back(file_type_e::avi,         Y("AVI (Audio/Video Interleaved)"),       "avi");
   s_supported_file_types.emplace_back(file_type_e::is_unknown,  Y("ALAC (Apple Lossless Audio Codec)"),   "caf m4a mp4");
   s_supported_file_types.emplace_back(file_type_e::dirac,       Y("Dirac"),                               "drc");
@@ -73,7 +73,7 @@ file_type_t::get_name(file_type_e type) {
   return file_type_e::aac         == type ? YT("AAC")
        : file_type_e::ac3         == type ? YT("AC-3")
        : file_type_e::asf         == type ? YT("Windows Media (ASF/WMV)")
-       : file_type_e::avc_es      == type ? YT("AVC/h.264")
+       : file_type_e::avc_es      == type ? YT("AVC/H.264")
        : file_type_e::avi         == type ? YT("AVI")
        : file_type_e::avi_dv_1    == type ? YT("AVI DV type 1")
        : file_type_e::cdxa        == type ? YT("RIFF CDXA")

@@ -97,14 +97,14 @@ avc_es_video_packetizer_c::process(packet_cptr packet) {
 
   } catch (mtx::mpeg::nalu_size_length_x &error) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id,
-                fmt::format(Y("This AVC/h.264 contains frames that are too big for the current maximum NALU size. "
+                fmt::format(Y("This AVC/H.264 contains frames that are too big for the current maximum NALU size. "
                               "You have to re-run mkvmerge and set the maximum NALU size to {0} for this track "
                               "(command line parameter '--nalu-size-length {1}:{0}').\n"),
                             error.get_required_length(), m_ti.m_id));
 
   } catch (mtx::exception &error) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id,
-                fmt::format(Y("mkvmerge encountered broken or unparsable data in this AVC/h.264 video track. "
+                fmt::format(Y("mkvmerge encountered broken or unparsable data in this AVC/H.264 video track. "
                               "Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. "
                               "The error message was:\n{0}\n"), error.error()));
   }
@@ -115,7 +115,7 @@ avc_es_video_packetizer_c::process(packet_cptr packet) {
 void
 avc_es_video_packetizer_c::handle_delayed_headers() {
   if (0 < m_parser.get_num_skipped_frames())
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("This AVC/h.264 track does not start with a key frame. The first {0} frames have been skipped.\n"), m_parser.get_num_skipped_frames()));
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"), m_parser.get_num_skipped_frames()));
 
   set_codec_private(m_parser.get_avcc());
 
@@ -125,7 +125,7 @@ avc_es_video_packetizer_c::handle_delayed_headers() {
       && (   !m_parser.has_timing_info()
           || (   !m_parser.get_timing_info().fixed_frame_rate
               && (m_parser.get_timing_info().default_duration() < 5000000)))) // 200 fields/s
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, Y("This AVC/h.264 track's timing information indicates that it uses a variable frame rate. "
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, Y("This AVC/H.264 track's timing information indicates that it uses a variable frame rate. "
                                           "However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. "
                                           "The resulting timestamps may not be useful.\n"));
 

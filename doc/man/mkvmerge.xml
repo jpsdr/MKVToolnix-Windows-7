@@ -1529,7 +1529,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
 
       <para>
        If the default duration is not forced then mkvmerge will try to derive the track's default duration from the container and/or the
-       encoded bitstream for certain track types, e.g. AVC/h.264 or MPEG-2.
+       encoded bitstream for certain track types, e.g. AVC/H.264 or MPEG-2.
       </para>
 
       <para>
@@ -1549,7 +1549,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
       </para>
 
       <note>
-       <para>This has only been implemented for AVC/h.264 video tracks so far.</para>
+       <para>This has only been implemented for AVC/H.264 video tracks so far.</para>
       </note>
      </listitem>
     </varlistentry>
@@ -1559,7 +1559,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <listitem>
       <para>
        Forces the <abbrev>NALU</abbrev> size length to <parameter>n</parameter> bytes.  This parameter is only used if the
-       <foreignphrase>AVC/h.264</foreignphrase> elementary stream packetizer is used.  If left out it defaults to 4 bytes, but there are
+       <foreignphrase>AVC/H.264</foreignphrase> elementary stream packetizer is used.  If left out it defaults to 4 bytes, but there are
        files that contain frames or slices that are all smaller than 65536 bytes.  For such files you can use this parameter and decrease
        the size to 2.
       </para>

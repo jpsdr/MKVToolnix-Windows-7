@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definitions for the AVC/h.264 ES demultiplexer module
+   class definitions for the AVC/H.264 ES demultiplexer module
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */

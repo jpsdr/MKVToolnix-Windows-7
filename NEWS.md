@@ -2,7 +2,7 @@
 
 ## New features and enhancements
 
-* mkvmerge: mkvmerge now allows appending AV1, VP8, VP9, h.264/AVC and
+* mkvmerge: mkvmerge now allows appending AV1, VP8, VP9, H.264/AVC and
   h.265/HEVC tracks whose pixel dimensions differ. Implements #2582.
 
 ## Bug fixes
@@ -463,7 +463,7 @@
 
 ## Bug fixes
 
-* mkvmerge: AVC/h.264: fixed file identification failing for certain
+* mkvmerge: AVC/H.264: fixed file identification failing for certain
   elementary streams due to internal buffers not being cleared properly. Fixes
   #2325.
 * mkvmerge: HEVC/h.265: fixed file identification failing for certain
@@ -530,7 +530,7 @@
 * mkvmerge: JSON identification: the "display unit" video track property is
   now reported as `display_unit`. The JSON schema has been bumped to v11 for
   this change.
-* mkvmerge, mkvextract: AVC/h.264: empty NALUs will now be removed.
+* mkvmerge, mkvextract: AVC/H.264: empty NALUs will now be removed.
 * mkvextract: VobSub extraction: empty SPU packets will now be dropped during
   extraction as other tools such as MP4Box cannot handle them
   correctly. Implements #2293.
@@ -810,20 +810,20 @@
 
 ## New features and enhancements
 
-* mkvmerge: AVC/h.264 packetizer (framed): access unit delimiter NALUs will
+* mkvmerge: AVC/H.264 packetizer (framed): access unit delimiter NALUs will
   now be removed. Implements #2173.
 
 ## Bug fixes
 
-* mkvmerge: AVC/h.264 parser: when fixing the bitstream timing information
+* mkvmerge: AVC/H.264 parser: when fixing the bitstream timing information
   mkvmerge will now use exact representations of the desired field duration if
   possible. For example, when indicating 50 fields/second `num_units_in_tick`
   is set to 1 and `time_scale` to 50 instead of 5368709 and 268435456. Part of
   the fix for #1673.
-* mkvmerge: AVC/h.264 parser: mkvmerge no longer assumes that encountering
+* mkvmerge: AVC/H.264 parser: mkvmerge no longer assumes that encountering
   sequence parameter set or picture parameter set NALUs signal the start of a
   new frame. Fixes #2179.
-* mkvmerge: AVC/h.264 packetizer (framed): when mkvmerge is told to fix the
+* mkvmerge: AVC/H.264 packetizer (framed): when mkvmerge is told to fix the
   bitstream timing information, it will now update all SPS NALUs, not just the
   ones in the AVCC. Part of the fix for #1673.
 * mkvmerge: MPEG TS reader: TS packet payloads will only be treated as PES
@@ -851,7 +851,7 @@
   the fix the frame after the gap was often stored in the previous block group
   causing the gap to be in the wrong place: at the end of that block
   group. Fixes #1700.
-* mkvextract: AVC/h.264: if two consecutive IDR frames with the same
+* mkvextract: AVC/H.264: if two consecutive IDR frames with the same
   `idr_pic_id` parameter and no access unit delimiters are found between them,
   mkvextract will insert an access unit delimiter in order to signal the start
   of a new access unit. Fixes #1704.
@@ -933,7 +933,7 @@
   optimization levels).
 * build system: stack protection is enabled when building with clang 3.5.0 or
   newer on all platforms.
-* mkvmerge: AVC/h.264 & HEVC/h.265 ES parsers: performance improvements by
+* mkvmerge: AVC/H.264 & HEVC/h.265 ES parsers: performance improvements by
   copying much less memory around.
 * mkvmerge: tags: reintroduced a workaround for non-compliant files with tags
   that do not contain the mandatory `SimpleTag` element. This workaround was
@@ -1046,10 +1046,10 @@
 * mkvmerge: AAC reader: mkvmerge will now emit an error message for AAC files
   whose header fields imply a sampling frequency or number of channels
   of 0. See #2107.
-* mkvmerge: AVC/h.264 ES parser: fixed the calculation of reference
+* mkvmerge: AVC/H.264 ES parser: fixed the calculation of reference
   information for P and B frames. This also fixes some P frames being marked
   as B frames and vice versa.
-* mkvmerge: AVC/h.264 ES parser: only non-key frames that have the NALU header
+* mkvmerge: AVC/H.264 ES parser: only non-key frames that have the NALU header
   field `nal_ref_idc` set to 0 will be marked as "discardable" in
   `SimpleBlock` elements. Other half of the fix for #2047.
 * mkvmerge: HEVC/h.265: the generation of the HEVCC structure stored in
@@ -1209,7 +1209,7 @@
 
 ## Bug fixes
 
-* mkvmerge: AVC/h.264 parser: fixed wrong frame order & timestamp calculation
+* mkvmerge: AVC/H.264 parser: fixed wrong frame order & timestamp calculation
   in certain situations when SPS (sequence parameter sets) or PPS (picture
   parameter sets) change mid-stream. Fixes #2028.
 * mkvmerge: HEVC/h.265 parser: fixed wrong frame order & timestamp calculation
@@ -1353,7 +1353,7 @@
   (e.g. LOAS/LATM). This prevents the AAC packetizer from mis-detecting it in
   its own attempt to identify the mode. Fixes #1957.
 * mkvmerge: MPEG TS reader: valid MPEG transport streams that start with an
-  h.264/h.265 start code (e.g. a file created by cutting at an arbitrary
+  H.264/h.265 start code (e.g. a file created by cutting at an arbitrary
   position) were not recognized as a supported file type.
 * mkvmerge: MPEG TS reader: fixed a potential read access from invalid memory
   addresses in the code parsing the program map table (PMT).
@@ -1395,10 +1395,10 @@
 
 * mkvmerge: AAC parser: fixed mis-detection of certain data as valid ADTS AAC
   headers resulting in memory allocation failures. Fixes #1941.
-* mkvmerge: AVC/h.264 parser: mkvmerge will now ignore bogus timing
+* mkvmerge: AVC/H.264 parser: mkvmerge will now ignore bogus timing
   information in the sequence parameter sets (values indicating more than
   100000 progressive frames per second). Fixes #1946.
-* mkvmerge: AVC/h.264 & HEVC/h.265 parsers: all trailing zero bytes will now
+* mkvmerge: AVC/H.264 & HEVC/h.265 parsers: all trailing zero bytes will now
   be removed from NALUs. Fixes #1952.
 * mkvmerge: HEVC/h.265 parser: fixed copying the `bitstream_restriction_flag`
   and all dependent fields in the VUI parameters of the sequence parameter
@@ -1415,7 +1415,7 @@
   only the arrays actually present are parsed, and they can be in any order.
   This fixes mkvinfo's output for Matroska files created from files such as
   the one from #1938.
-* mkvmerge: AVC/h.264 packetizer: when reading a framed track (e.g. from
+* mkvmerge: AVC/H.264 packetizer: when reading a framed track (e.g. from
   Matroska or MP4 files), specifying a default duration as fields (e.g. `50i`)
   would result in double the actual duration for each frame and the track's
   default duration header field. Fixes #1916.
@@ -1454,7 +1454,7 @@
 
 ## New features and enhancements
 
-* mkvmerge: AVC/h.264 parser: mkvmerge will now drop all frames before the
+* mkvmerge: AVC/H.264 parser: mkvmerge will now drop all frames before the
   first key frame as they cannot be decoded properly anyway. See #1908.
 * mkvmerge: HEVC/h.265 parser: mkvmerge will now drop all frames before the
   first key frame as they cannot be decoded properly anyway. See #1908.
@@ -1477,7 +1477,7 @@
   from source containers if they go backwards. This keeps A/V in sync for
   files where the source was in sync even though their timestamps aren't
   monotonic increasing. Fixes #1909.
-* mkvmerge: AVC/h.264 parser: mkvmerge will now drop timestamps from the
+* mkvmerge: AVC/H.264 parser: mkvmerge will now drop timestamps from the
   source container if no frame is emitted for that timestamp. Fixes #1908.
 * mkvmerge: HEVC/h.265 parser: mkvmerge will now drop timestamps from the
   source container if no frame is emitted for that timestamp. Fixes the HEVC
@@ -1498,7 +1498,7 @@
   and tags" list view showing the currently selected character set for that
   track. Implements #1873.
 * mkvmerge: added an --engage option "all_i_slices_are_key_frames" for
-  treating all I slices of an h.264/AVC stream as key frames in pathological
+  treating all I slices of an H.264/AVC stream as key frames in pathological
   streams that lack real key frames. Implements #1876.
 * GUI: running programs after jobs: added a new variable
   \<MTX_INSTALLATION_DIRECTORY\> for the directory the MKVToolNix GUI executable
@@ -1558,7 +1558,7 @@
 * mkvmerge: MP4 reader: the timestamps of all multiplexed tracks will now be
   0-based properly.
 * mkvmerge: MP4 reader: the DTS-to-PTS offsets given by the "ctts" atoms are
-  now applied for all tracks containing a "ctts" atom, not just h.264 & h.265
+  now applied for all tracks containing a "ctts" atom, not just H.264 & h.265
   tracks.
 
 ## Build system changes
@@ -1809,16 +1809,16 @@
 * mkvmerge, mkvextract: VobSub handling bug fix: mkvmerge and mkvextract will now
   update the duration stored in the SPU bitsream with the duration from the container
   level if it differs at least 1ms. Fixes #1771.
-* mkvmerge: h.264 elementary stream handling bug fix: if mkvmerge ever encounters
+* mkvmerge: H.264 elementary stream handling bug fix: if mkvmerge ever encounters
   changing SPS or PPS NALUs (ones where their ID has been encountered before with
-  different settings) in the h.264 then it will prepend all following key frames with
+  different settings) in the H.264 then it will prepend all following key frames with
   all currently active SPS and PPS NALUs. This enables playback from arbitrary key
   frames even if they require other SPS or PPS settings than the ones stored in the AVCC
   in CodecPrivate. Fixes #1711.
 * mkvmerge: MPEG transport stream reader bug fix: fixed the handling of Blu-ray PCM
   audio with an odd number of channels by removing their alignment bytes.
 * mkvmerge: MPEG transport stream reader bug fix: fixed mis-detection of certain
-  h.264 files as MPEG transport streams.
+  H.264 files as MPEG transport streams.
 * mkvmerge: WAV reader bug fix: the track properties (channels, sample rate) for DTS
   and AC-3 in WAV will now be derived from the decoded bitstream headers instead of the
   WAV file header as the latter is often incorrect.
@@ -2120,7 +2120,7 @@
   structural error right before the first cluster. Fixes #1654.
 * MKVToolNix: merge tool bug fix: when adding playlists the GUI won't ask the user
   whether or not to scan if there's only a single playlist in that directory.
-* mkvmerge: bug fix: AVC/h.264: fixed handling of interlaced frames with bottom
+* mkvmerge: bug fix: AVC/H.264: fixed handling of interlaced frames with bottom
   field first.
 * MKVToolNix GUI: bug fix: fixed huge memory consumption (e.g. allocation of 2 GB for a
   JSON file of 650 KB) in the JSON library by updating said JSON library. Fixes #1631.
@@ -2439,7 +2439,7 @@
 * mkvmerge: bug fix: the h.265/HEVC code wasn't converting slice NALUs to RBSP form
   before parsing it resulting in wrongly timestamped frames under certain
   conditions. This is a similar fix to the issues reported in #918 and #1548.
-* mkvmerge: bug fix: the h.264/AVC code wasn't converting slice NALUs to RBSP form
+* mkvmerge: bug fix: the H.264/AVC code wasn't converting slice NALUs to RBSP form
   before parsing it resulting in wrongly timestamped frames under certain
   conditions. Fixes #918 and #1548.
 * mkvmerge: bug fix: the MP4 reader can now understand the 'random access point'
@@ -3821,7 +3821,7 @@
   Thiago Kühn (see AUTHORS).
 * mkvmerge: enhancement: improved file type detection speed for text subtitle
   formats.
-* mkvmerge: enhancements: trailing zero bytes will be removed from AVC/h.264 NALUs.
+* mkvmerge: enhancements: trailing zero bytes will be removed from AVC/H.264 NALUs.
   Implements #997.
 
 ## Bug fixes
@@ -3838,7 +3838,7 @@
   twice.
 * mkvmerge: bug fix: MPEG TS: timestamp outliers are ignored if they differ at least
   five minutes from the last valid timestamp. Fixes #998.
-* mkvmerge: bug fix: fixed timestamp assignment for AVC/h.264 videos in which
+* mkvmerge: bug fix: fixed timestamp assignment for AVC/H.264 videos in which
   recovery point SEIs occur in front of the second field of two interlaced fields.
 
 
@@ -3927,7 +3927,7 @@
   correct processor architecture via separate Windows manifest files. Fixes mmg and
   mkvinfo not starting due to "error 0x0000007b".
 * mkvmerge: bug fix: Fixed a potential endless loop due to an integer overflow in the
-  code removing AVC/h.264 filler NALUs.
+  code removing AVC/H.264 filler NALUs.
 * mkvmerge: bug fix: Fixed reading uncompressed PCM audio tracks from QuickTime/MP4
   files in certain situations. Fixes #950.
 * mmg: enhancement: Made the "scanned files" list box sortable by all columns. Fixes
@@ -3956,7 +3956,7 @@
   "pre-skip" to the Matroska elements "track seek pre-roll" and "codec delay".
   Remuxing Matroska files with Opus created with earlier versions of MKVToolNix is
   enough to fix such a file.
-* mkvmerge: bug fix: fixing the bitstream timing information of h.264/AVC writes
+* mkvmerge: bug fix: fixing the bitstream timing information of H.264/AVC writes
   clean values for 25000/1001 frames per second video (e.g. de-telecined PAL @
   29.97).
 * mmg: bug fix: fixed a crash in during drag & drop operations in mmg's chapter editor.
@@ -3999,7 +3999,7 @@
 
 ## New features and enhancements
 
-* mkvmerge: enhancement: filler NALUs will now be removed from framed h.264/AVC
+* mkvmerge: enhancement: filler NALUs will now be removed from framed H.264/AVC
   tracks (such as the ones read from Matroska/MP4 files) just like they have already
   been when handling unframed tracks.
 * mkvextract: new feature: implemented support for extracting VP9 tracks into IVF
@@ -4087,10 +4087,10 @@
 
 ## Bug fixes
 
-* mkvmerge: bug fix: When appending unframed AVC/h.264 tracks and setting the
+* mkvmerge: bug fix: When appending unframed AVC/H.264 tracks and setting the
   default duration the second and all following source parts will use the same default
   duration as set for the first part. Fixes #889.
-* mkvmerge: bug fix: AVC/h.264 output module: fixed writing the wrong values if
+* mkvmerge: bug fix: AVC/H.264 output module: fixed writing the wrong values if
   --fix-bitstream-timing-information is used. Fixes #888.
 * mkvmerge: bug fix: FLV reader: Implemented deriving the video dimensions for FLV1
   type tracks from the frame content if they're not given within a script tag. Fixes
@@ -4125,7 +4125,7 @@
 ## Bug fixes
 
 * mkvmerge: bug fix: The option "--engage remove_bitstream_ar_info" will now work
-  on AVC/h.264 tracks read from Matroska/MP4 files as well. Fixes #868.
+  on AVC/H.264 tracks read from Matroska/MP4 files as well. Fixes #868.
 * mmg: bug fix: mmg will now handle all file names given on the command line instead of
   only the first one. This allows things like opening several selected files with mmg
   in Windows, and mmg will add all of them. Fixes #867.
@@ -4134,7 +4134,7 @@
   tracks are muxed. Fixes #871.
 * mkvmerge: bug fix: If splitting had been active then the elements "cue duration" and
   "cue relative position" were only written to the first output file.
-* mkvmerge: bug fix: The "CTS offset" field of FLV files with AVC/h.264 video tracks is
+* mkvmerge: bug fix: The "CTS offset" field of FLV files with AVC/H.264 video tracks is
   now read as a signed-integer field in accordance with the FLV specifications.
 * mkvmerge: bug fix: DTS parsing: no more warnings about incompatible encoder
   revision numbers will be printed. Fixes #866.
@@ -4192,7 +4192,7 @@
 ## Bug fixes
 
 * mkvmerge: bug fix: Fixed mkvmerge sometimes mistakenly detecting MPEG-1 video in
-  MPEG program streams as AVC/h.264. Fixes #845.
+  MPEG program streams as AVC/H.264. Fixes #845.
 * mkvinfo, mkvpropedit, mmg's header editor: bug fix: Fixed the description for the
   DisplayUnit element to include value 3 ("aspect ratio").
 * mkvmerge: bug fix: Fixed handling chapters when splitting by parts (both
@@ -4275,7 +4275,7 @@
   instead of bzip2 from now on. The file name's extension will therefore change from
   ".tar.bz2" to ".tar.xz". The download URL changes accordingly.
 * mkvmerge, mmg: removal: The 'header removal compression' method is not turned on by
-  default anymore. This affects the following track types: AC-3, AVC/h.264, Dirac,
+  default anymore. This affects the following track types: AC-3, AVC/H.264, Dirac,
   DTS, MP3. The setting in mmg that turned it off by default has been removed.
 
 
@@ -4425,9 +4425,9 @@
   accepted. Fix for issue 754.
 * mkvmerge: bug fix: XML tag files with \<Simple\> tags that only contained a name and
   nested \<Simple\> were wrongfully rejected as invalid. Fixes issue 752.
-* mkvextract: bug fix: Extraction of AVC/h.264 was completely broken after
+* mkvextract: bug fix: Extraction of AVC/H.264 was completely broken after
   2012-04-09 resulting in files with a length of 0 bytes.
-* mkvextract: bug fix: mkvextract will no longer abort extracting h.264 tracks if it
+* mkvextract: bug fix: mkvextract will no longer abort extracting H.264 tracks if it
   encounters a NAL smaller than its size field. Instead it will warn about it and drop
   the NAL.
 * mkvmerge: bug fix: Writing more than two parts into the same file with "--split
@@ -4480,7 +4480,7 @@
 * mkvextract: bug fix: mkvextract sometimes wrote undefined values to a single
   reserved header field when extracting into AVI files. Patch by buguser128k. Fix for
   ticket 727.
-* mkvmerge: bug fix: AVC/h.264 mkvmerge was wrongfully writing a default duration of
+* mkvmerge: bug fix: AVC/H.264 mkvmerge was wrongfully writing a default duration of
   60 frames/fields even if the source was signalling 60000/1001 frames/fields. The
   frame time codes have been correct already.
 * mkvmerge: bug fix: Fixed time code calculation for (E)AC-3 tracks if the source
@@ -4530,9 +4530,9 @@
 * mkvmerge: bug fix: Fixed wrong calculation of the maximum number of ns per cluster in
   certain fringe cases if time code scale was set to "auto" mode ("--time code-scale
   -1"). Fix for bug 707.
-* mkvmerge: bug fix: When using an external time code file with AVC/h.264 video the
+* mkvmerge: bug fix: When using an external time code file with AVC/H.264 video the
   default duration will be set to the most-often used duration in the time code file.
-* mkvmerge: bug fix: AVC/h.264 packetizer: The value given with
+* mkvmerge: bug fix: AVC/H.264 packetizer: The value given with
   "--default-duration" (after internal conversion from the unit given by the user to
   duration in nanoseconds) is now again interpreted as the duration of a frame and not
   of a field.
@@ -4541,14 +4541,14 @@
 * mkvmerge: bug fix: Sometimes non-AC-3 files were mistakenly for AC-3 after the
   re-write of the AC-3 handling code on 2012-02-26. This has been rectified. Fix for
   bug 723.
-* mkvmerge: bug fix: Complete re-write of the time code handling code for AVC/h.264
+* mkvmerge: bug fix: Complete re-write of the time code handling code for AVC/H.264
   tracks. Now handles several cases correctly: interlaced video, video with
   multiple or changing SPS with different timing information. The timing
   information is extracted from the bitstream. Therefore the user doesn't have to
   specify the default duration/FPS himself anymore. Fix for bugs 434 and 688.
 * mkvmerge: bug fix: Complete re-write of the (E)AC-3 parsing and handling code.
   Dependent E-AC-3 frames are now handled correctly. Fix for bug 704.
-* mkvmerge: bug fix: The width and height of h.264 video tracks with a pixel format
+* mkvmerge: bug fix: The width and height of H.264 video tracks with a pixel format
   other than 4:2:0 are now calculated correctly. Fix for bug 649. Patch by Nicholai
   Main (see AUTHORS).
 * mkvmerge: bug fix: Fixed file type recognition and frame drops for VC-1 elementary
@@ -4565,7 +4565,7 @@
 
 ## Other changes
 
-* mmg: The warning that no default duration/FPS has been given for AVC/h.264 tracks
+* mmg: The warning that no default duration/FPS has been given for AVC/H.264 tracks
   has been removed.
 
 
@@ -4714,7 +4714,7 @@
   transport streams whose PES packets sometimes don't have a time code.
 * mkvmerge: bug fix: mkvmerge will no longer create folders on drives it shouldn't
   create them on on Windows.
-* mkvmerge: bug fix: Fixed bogus huge time codes sometimes occurring for AVC/h.264
+* mkvmerge: bug fix: Fixed bogus huge time codes sometimes occurring for AVC/H.264
   video tracks read from MPEG transport streams.
 * mmg: bug fix: mmg will append ".xml" to the file name entered when saving from the
   chapter editor if no extension was given.
@@ -5098,7 +5098,7 @@
 
 * mkvmerge: enhancement: Attachments will be rendered at the beginning of the file
   again. Fix for bug 516.
-* mkvinfo: new feature: mkvinfo will show the h.264 profile and level for AVC/h.264
+* mkvinfo: new feature: mkvinfo will show the H.264 profile and level for AVC/H.264
   tracks along with the CodecPrivate element.
 * mkvextract, mkvinfo, mkvpropedit: new feature: Added the option "-q" and its long
   version "--quiet". With "--quiet" active only warnings and errors are output. Fix
@@ -5112,7 +5112,7 @@
   second and all following appended tracks to be compressed all the same.
 * mkvextract: bug fix: Errors such as 'file does not exist' did not cause mkvextract to
   quit. Instead it continued and exited with the result code 0.
-* mkvmerge: bug fix: Certain frames in certain h.264/AVC raw tracks were handled
+* mkvmerge: bug fix: Certain frames in certain H.264/AVC raw tracks were handled
   wrong, e.g. files created by x264 versions starting with revision 1665. The
   situation occured if an IDR slice comes immedtiately after a non-IDR slice and the
   IDR slice has its frame_num and pic_order_count_lsb fields set to 0.
@@ -5162,7 +5162,7 @@
   of at the beginning. The attachments will be placed after the cues but before the
   chapters. Fix for bug 516.
 * mkvmerge: enhancement: Header removal compression has been enabled by default for
-  MPEG-4 part 10 (AVC/h.264) video tracks with a NALU size field length of four bytes.
+  MPEG-4 part 10 (AVC/H.264) video tracks with a NALU size field length of four bytes.
 * mmg: enhancement: The taskbar progress is reset as soon as mkvmerge finishes/as
   soon as all jobs are done (Windows 7).
 * mkvmerge: enhancement: Improved reading text files that use mixed end-of-line
@@ -5179,12 +5179,12 @@
   greatly improved.
 * mkvmerge: bug fix: Header removal compression has been deactivated for MPEG-4 part
   2 (aka DivX/Xvid) video tracks due to incompatibility with packed bitstreams.
-* mkvmerge: bug fix: Fixed reading AVC/h.264 tracks from AVI files if they're stored
-  without NALUs inside the AVI. Was broken by a fix for handling AVC/h.264 in NALUs
+* mkvmerge: bug fix: Fixed reading AVC/H.264 tracks from AVI files if they're stored
+  without NALUs inside the AVI. Was broken by a fix for handling AVC/H.264 in NALUs
   inside AVI.
 * mkvmerge: bug fix: All readers that only handled file formats which do not contain
   more than one track did not respect the "--no-audio / --no-video / --no-subtitles"
-  options. This applied to the following readers: AAC, AC-3, AVC/h.264,
+  options. This applied to the following readers: AAC, AC-3, AVC/H.264,
   CorePicture, Dirac, DTS, FLAC, IVF, MP3, MPEG ES, PGS/SUP, SRT, SSA, TrueHD, TTA,
   VC-1, WAV and WavPack.
 * mkvmerge: bug fix: Fixed invalid memory access in the PCM packetizer. Fix for bug
@@ -5230,7 +5230,7 @@
 
 ## Bug fixes
 
-* mkvmerge: bug fix: Fixed reading AVC/h.264 tracks from AVI files if they're stored
+* mkvmerge: bug fix: Fixed reading AVC/H.264 tracks from AVI files if they're stored
   in NALUs inside the AVI.
 * mmg: bug fix: Matroska files read from/written to by the header and chapter editors
   will no longer be kept opened and locked. Fix for bug 498.
@@ -5355,10 +5355,10 @@
 
 ## Bug fixes
 
-* mkvmerge: bug fix: Fixed the handling of non-spec compliant AVC/h.264 elementary
+* mkvmerge: bug fix: Fixed the handling of non-spec compliant AVC/H.264 elementary
   streams in Matroska files with the CodecID V_ISO/MPEG4/AVC. Fix for bug 486.
 * mkvmerge: bug fix: mkvmerge will not output a message that it has extracted the
-  display dimensions from AVC/h.264 bitstream if the source container (e.g.
+  display dimensions from AVC/H.264 bitstream if the source container (e.g.
   Matroska) overrides that setting. Fix for bug 485.
 * mmg's header editor, mkvpropedit: Fixed crashes with files created by Haali's GS
   Muxer containing "content encoding" header elements.
@@ -5389,7 +5389,7 @@
 * mkvmerge, mkvextract: enhancement: Improved the error resilience when dealing
   with damaged Matroska files. When a damaged part is encountered reading will
   continue at the next cluster.
-* mkvmerge: enhancement: Some Matroska files contain h.264/AVC tracks lacking
+* mkvmerge: enhancement: Some Matroska files contain H.264/AVC tracks lacking
   their CodecPrivate element (e.g. files created by gstreamer's muxer). For such
   tracks the CodecPrivate element (the AVCC) is re-created from the bitstream. Fix
   for bug 470.
@@ -5588,7 +5588,7 @@
 
 ## Bug fixes
 
-* mmg: bug fix: The warning that no FPS has been entered for AVC/h.264 elementary
+* mmg: bug fix: The warning that no FPS has been entered for AVC/H.264 elementary
   streams is not shown anymore for appended tracks (only once for the first track that
   they're appended to).
 * mkvmerge: bug fix: The pixel cropping parameters were not kept when muxing from
@@ -5658,7 +5658,7 @@
   entry does no longer result in a crash but a descriptive error message instead.
   Saving empty chapters to a Matroska file will remove all chapters contained in the
   file instead of not doing anything. Fixes for bug 422.
-* mkvmerge: bug fix: Fixed reading AVC/h.264 video tracks from OGM files. Fix for bug
+* mkvmerge: bug fix: Fixed reading AVC/H.264 video tracks from OGM files. Fix for bug
   418.
 * mmg: bug fix: The chapter language for chapters copied from source files (e.g.
   Matroska, MP4 or OGM files) is only changed if the user has selected any language
@@ -5689,7 +5689,7 @@
 * mkvmerge: bug fix: The handling of NVOPs in native MPEG4 part 2 video storage has been
   improved. NVOPs are dropped again both from packed and non-packed bitstreams, and
   time codes are adjusted to match the number of dropped frames.
-* mkvmerge: bug fix: The I frame detection for AVC/h.264 video has been fixed.
+* mkvmerge: bug fix: The I frame detection for AVC/H.264 video has been fixed.
   Sometimes a single I frame was recognized as two or more consecutive I frames
   resulting in garbled display and wrong timestamps. Fix for bug 415.
 * all: bug fix: The programs do not try to close iconv handles -1 anymore which resulted
@@ -5698,7 +5698,7 @@
 * mkvmerge: bug fix: Complete rewrite of the code for the native storage mode for MPEG4
   part 2 video tracks. Fix for bug 298.
 * mkvmerge: bug fix: Made the detection rules for raw MP3, AC-3 and AAC audio files more
-  strict. This avoids a mis-detection of certain files, e.g. AVC/h.264 ES files being
+  strict. This avoids a mis-detection of certain files, e.g. AVC/H.264 ES files being
   misdetected as MP3 files. Fix for bug 414.
 * mkvmerge: bug fix: Appending MP4 or OGM files with chapters will merge the chapters
   from all appended files and not just take the chapters from the first file and discard
@@ -5886,7 +5886,7 @@
 * mmg: bug fix: The header editor and chapter editor will not write zero bytes anymore
   if there's not enough space to write an EbmlVoid element when saving to Matroska
   files.
-* mkvmerge: bug fix: Fixed the aspect ratio extraction for AVC/h.264 video by adding
+* mkvmerge: bug fix: Fixed the aspect ratio extraction for AVC/H.264 video by adding
   three more pre-defined sample aspect ratios. Mkvmerge also only assumes "free
   aspect ratio" if the aspect ratio type information indicates it and not if the type
   information is unknown.
@@ -5913,7 +5913,7 @@
 
 * mkvmerge: mkvmerge will now use SimpleBlock elements instead of normal BlockGroup
   elements by default.
-* mkvmerge: By default mkvmerge keeps the aspect ratio information in AVC/h.264
+* mkvmerge: By default mkvmerge keeps the aspect ratio information in AVC/H.264
   video bitstreams now (equivalent to specifying "--engage
   keep_bitstream_ar_info" in earlier versions). A new option "--engage
   remove_bitstream_ar_info" is available that restores the previous behaviour.
@@ -6146,7 +6146,7 @@
 * mkvmerge: bug fix: Reading EVOBs with multiple VC-1 video tracks was broken (all
   packets where put into a single video track).
 * mkvmerge: bug fix: Reading raw (E)AC-3 files bigger than 2 GB was broken.
-* mkvmerge: bug fix: Improved the detection of MPEG-1/-2 and AVC/h.264 video tracks
+* mkvmerge: bug fix: Improved the detection of MPEG-1/-2 and AVC/H.264 video tracks
   in MPEG program streams (VOBs/EVOBs).
 * mkvmerge: bug fix: Fixed reading DTS audio tracks from MPEG program streams
   (VOBs/EVOBs).
@@ -6291,21 +6291,21 @@
 * mmg: enhancement: mmg can now be called with any file name as an argument. If it ends
   with 'mmg' then the file will be loaded as a 'mmg settings file'. Otherwise mmg will
   'add' it. Fix for bug 243.
-* mkvmerge: enhancement: The OGM reader now uses the AVC/h.264 video packetizer for
-  AVC/h.264 tracks so that the aspect ratio can be extracted from it.
+* mkvmerge: enhancement: The OGM reader now uses the AVC/H.264 video packetizer for
+  AVC/H.264 tracks so that the aspect ratio can be extracted from it.
 * mkvmerge: new feature: Added better checks if two tracks can be appended to the
   passthrough packetizer so that tracks that are otherwise not known to mkvmerge can
   still be appended (e.g. V_VC1). Fix for bug 244.
 * mkvextract: new feature: Added support for the 'header removal' encoding scheme.
-* mkvmerge: new feature: The NALU size length of an AVC/h.264 track can now be changed
+* mkvmerge: new feature: The NALU size length of an AVC/H.264 track can now be changed
   even if the source is not an elementary stream (e.g. for MP4 and Matroska files).
 * mkvmerge: enhancement: Added support for RealAudio v3 in RealMedia files. Patch by
   Aurelian Jacobs. Fix for bug 246.
 * mkvmerge: enhancement: The SRT reader allows "." as the decimal separator as well as
   ",".
 * mkvmerge: enhancement: Implemented a major speed-up for reading MPEG-1/2 and
-  AVC/h.264 tracks from MPEG program streams.
-* mkvmerge: new feature: Added support for handling AVC/h.264 tracks in MPEG program
+  AVC/H.264 tracks from MPEG program streams.
+* mkvmerge: new feature: Added support for handling AVC/H.264 tracks in MPEG program
   streams.
 * mkvmerge: new feature: Added support for E-AC-3 tracks in MPEG program streams.
 * mkvmerge: new feature: Added support for E-AC-3/DD+ (Dolby Digital Plus) files and
@@ -6313,7 +6313,7 @@
 
 ## Bug fixes
 
-* mkvmerge: bug fix: SPS and PPS NALUs are no longer removed from AVC/h.264 streams.
+* mkvmerge: bug fix: SPS and PPS NALUs are no longer removed from AVC/H.264 streams.
   Hopefully a fix for bug 231.
 * mkvmerge: enhancement: Fixed SSA/ASS detection for files produced by Aegis Sub
   which doesn't include a line with '[script info]' in the file.
@@ -6324,7 +6324,7 @@
   Matroska files even if 'no' was specified on the command line.
 * mkvmerge: bug fix: Another bug fix for handling various AC-3 and E-AC-3 files in MPEG
   program streams.
-* mkvmerge: bug fix: Added support for handling SEI NALUs in AVC/h.264 elementary
+* mkvmerge: bug fix: Added support for handling SEI NALUs in AVC/H.264 elementary
   streams so that "key frames" can be detected even if no IDR slices are present.
 * mkvmerge: bug fix: Fixed the VobSub reader so that "delay:" lines with negative time
   codes are accepted. Fix for bug 241.
@@ -6333,7 +6333,7 @@
 * mkvmerge: bug fix: Fixed a problem reading normal AC-3 tracks from MPEG program
   streams.
 * mkvmerge: bug fix: Fixed an issue with negative/huge time codes after splitting
-  AVC/h.264 video.
+  AVC/H.264 video.
 * mkvmerge: bug fix: Fixed a problem with concatenating more than two subtitle files.
 * mkvmerge: enhancement: Fixed the MPEG PS reader so that it will just skip blocks
   whose headers it cannot parse instead of aborting.
@@ -6369,18 +6369,18 @@
   bits per word.
 * mkvmerge: bug fix: File type detection for Qt/MP4 files which start with a "wide"
   atom has been fixed.
-* mmg: bug fix: The "NALU size length" drop down box is now also enabled for h.264 tracks
-  read from AVIs and for h.264 tracks stored in "VfW compatibility mode" in Matroska
+* mmg: bug fix: The "NALU size length" drop down box is now also enabled for H.264 tracks
+  read from AVIs and for H.264 tracks stored in "VfW compatibility mode" in Matroska
   files.
 * mkvmerge: bug fix: Fixed the wrong "default duration" if the user used
   "--default-duration ...23.976fps".
-* mkvmerge: bug fix: The AVC/h.264 ES reader was losing frames if the file size was an
+* mkvmerge: bug fix: The AVC/H.264 ES reader was losing frames if the file size was an
   exact multiple of 1048576 bytes.
-* mkvmerge: bug fix: The AVC/h.264 ES packetizer produced invalid CodecPrivate data
+* mkvmerge: bug fix: The AVC/H.264 ES packetizer produced invalid CodecPrivate data
   if the AVCC did not contain the aspect ratio information. Fix for Bugzilla bug #225.
 * mkvmerge: bug fix: The Matroska reader passes the correct track number down to the
-  AVC/h.264 ES packetizer in the case of "AVC in Matroska stored in VfW mode".
-* mkvmerge: bug fix: Fixed a crash (segmentation fault) in the AVC/h.264 ES handling
+  AVC/H.264 ES packetizer in the case of "AVC in Matroska stored in VfW mode".
+* mkvmerge: bug fix: Fixed a crash (segmentation fault) in the AVC/H.264 ES handling
   code.
 
 ## Other changes
@@ -6400,10 +6400,10 @@
   uses for each track.
 * mkvextract: new feature: Added support for extracting MPEG-1/2 video to MPEG-1/2
   program streams.
-* mkvmerge: enhancement: mkvmerge now handles the first frames in AVC/h.264 ES
+* mkvmerge: enhancement: mkvmerge now handles the first frames in AVC/H.264 ES
   streams properly, especially for files for which it did not find a key frame at the
   beginning in earlier versions.
-* mkvmerge: enhancement: Improved the detection of AVC/h.264 ES streams with
+* mkvmerge: enhancement: Improved the detection of AVC/H.264 ES streams with
   garbage at the beginning.
 * mmg: enhancements to the job management dialog: There's a minimum width for the
   columns. The "up" and "down" buttons are disabled if all entries are selected.
@@ -6416,13 +6416,13 @@
   file.
 * mmg: enhancement: Added an input for the new "NALU size length" parameter.
 * mkvmerge: enhancement: Added "x264" to the list of recognized FourCCs for
-  AVC/h.264 video in AVI and Matroska files.
-* mkvmerge: new feature: Added support for proper muxing of AVC/h.264 tracks in
+  AVC/H.264 video in AVI and Matroska files.
+* mkvmerge: new feature: Added support for proper muxing of AVC/H.264 tracks in
   Matroska files that were stored in the MS compatibility mode (CodecID
   V_MS/VFW/FOURCC instead of V_MPEG4/ISO/AVC).
-* mkvmerge: new feature: Added support for proper muxing of AVC/h.264 tracks in AVI
+* mkvmerge: new feature: Added support for proper muxing of AVC/H.264 tracks in AVI
   files.
-* mkvmerge: new feature: Added support for reading AVC/h.264 elementary streams.
+* mkvmerge: new feature: Added support for reading AVC/H.264 elementary streams.
 * mmg: enhancement: All inputs and controls are cleared and deactivated if the user
   select "File -\> New".
 * mmg: enhancement: The user can switch between the "generic" and "format specific
@@ -6435,17 +6435,17 @@
 * mkvmerge: bug fix: MPEG-1/2 video: The sequence and GOP headers are not removed from
   the bitstream anymore. This should fix the blockiness if the sequence headers
   change mid-stream. Fix for Bugzilla bug #167.
-* mkvmerge: bug fix: Fixed the aspect ratio extraction for raw AVC/h.264 ES tracks.
-* mkvmerge: bug fix: If a raw AVC/h.264 ES file does not start with a key frame then all
+* mkvmerge: bug fix: Fixed the aspect ratio extraction for raw AVC/H.264 ES tracks.
+* mkvmerge: bug fix: If a raw AVC/H.264 ES file does not start with a key frame then all
   the frames before the first key frame are skipped, and mkvmerge does not abort
   anymore.
-* mkvmerge: bug fix: AVC/h.264 ES parser: Fixed wrong NALU size length information in
+* mkvmerge: bug fix: AVC/H.264 ES parser: Fixed wrong NALU size length information in
   the AVCC.
-* mkvmerge: bug fix: AVC/h.264 ES parser: Fixed the decision if a NALU belongs to a
+* mkvmerge: bug fix: AVC/H.264 ES parser: Fixed the decision if a NALU belongs to a
   previous frame or starts a new one.
-* mkvmerge: bug fix: The NALU size length can be overridden for AVC/h.264 elementary
+* mkvmerge: bug fix: The NALU size length can be overridden for AVC/H.264 elementary
   streams. It defaults to 2 which might not be enough for larger frames/slices.
-* mkvmerge: bug fix: Support for AVC/h.264 elementary streams with short markers
+* mkvmerge: bug fix: Support for AVC/H.264 elementary streams with short markers
   (0x00 0x00 0x01 instead of 0x00 0x00 0x00 0x01).
 * mkvmerge: bug fix: Fixed invalid memory access in the AVC ES parser.
 * mkvmerge: bug fix: mkvmerge would not write frame durations if "--engage
@@ -6633,7 +6633,7 @@
   files. Fixes Anthill bug #151.
 * mkvmerge: bug fix: MP4/QuickTime files which contain another atom before the
   'avcC' atom in the video track headers weren't correctly remuxed.
-* mkvmerge: bug fix: mkvmerge will now refuse to append AVC/h.264 video tracks whose
+* mkvmerge: bug fix: mkvmerge will now refuse to append AVC/H.264 video tracks whose
   codec initialization data blocks do not match. Invalidates Anthill bug #163.
 * mkvmerge: bug fix: Fixed a crash If the granulepos (the time codes) reset in the
   middle of an Ogg/OGM file. Fixes Anthill bug #166.
@@ -6642,7 +6642,7 @@
 * mkvmerge: bug fix: Fixed a couple of potential (and actual) segmentation faults by
   accessing invalid memory addresses. Initial patch for the VobSub reader by Issa on
   Doom9's forum.
-* mkvmerge: bug fix: Fixed another bug when appending AVC/h.264 tracks that would
+* mkvmerge: bug fix: Fixed another bug when appending AVC/H.264 tracks that would
   mkvmerge cause to die with "bref_packet == NULL". Fixes Anthill bug #160.
 * mmg: bug fix: When the user saved the muxing output in a log file that file didn't use
   Windows line endings (CR LF) on Windows.
@@ -6695,7 +6695,7 @@
 ## New features and enhancements
 
 * mkvmerge: new feature: mkvmerge will remove the aspect ratio information from a
-  AVC/h.264 video track bitstream and put it into the display dimensions (until now
+  AVC/H.264 video track bitstream and put it into the display dimensions (until now
   the AR information was kept on the bitstream level). The reason is that in Matroska
   the container AR is supposed to take precedence over bitstream AR, but some decoder
   programmers ignore the container AR in favour of bitstream AR.
@@ -6743,8 +6743,8 @@
   output in UTF-8 and not your system's local charset).
 * mkvinfo: new feature: Added a command line switch "-o" for redirecting the output to
   a file (for systems which re-interpret stdout).
-* mkvextract: new feature: Added support for extracting h.264 / AVC tracks into
-  proper h.264 ES streams supported by e.g. MP4Box. Patch by Matt Rice (see AUTHORS).
+* mkvextract: new feature: Added support for extracting H.264 / AVC tracks into
+  proper H.264 ES streams supported by e.g. MP4Box. Patch by Matt Rice (see AUTHORS).
 
 ## Bug fixes
 
@@ -6772,7 +6772,7 @@
 
 ## Other changes
 
-* mkvtoolnix: Disabled storing AVC/h.264 video tracks in VfW mode.
+* mkvtoolnix: Disabled storing AVC/H.264 video tracks in VfW mode.
 
 
 # Version 1.5.0 "It's alright, Baby" 2005-07-01
@@ -6900,7 +6900,7 @@
 * mmg: bug fix: It was possible to select a file for appending even though no file was
   added first.
 * mkvmerge: bug fix: mkvmerge was wrongly outputting large numbers of warnings when
-  Remuxing AVC/h.264 video from a Matroska file.
+  Remuxing AVC/H.264 video from a Matroska file.
 * mmg: bug fix: The job queue was not loaded on startup on Windows Unicode builds
   (another wxWidgets 2.5.3 problem).
 * mmg: bug fix: The job status in the job runner dialog was broken on Unicode builds on
@@ -6987,7 +6987,7 @@
 
 ## Other changes
 
-* mkvmerge: Changed the AVC/h.264 time code handling to include the time code offsets
+* mkvmerge: Changed the AVC/H.264 time code handling to include the time code offsets
   from the CTTS atom.
 * mmg: Reformatted the HTML guide and updated the screenshots. It should be more
   readable for those whose desktop is not 1200 pixels wide.

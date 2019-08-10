@@ -300,7 +300,7 @@ get_file_type_internal(filelist_t &file) {
     return { mtx::file_type_e::vobbtn, size };
 
   // Try some more of the raw audio formats before trying elementary
-  // stream video formats (MPEG 1/2, AVC/h.264, HEVC/h.265; those
+  // stream video formats (MPEG 1/2, AVC/H.264, HEVC/h.265; those
   // often enough simply work). However, require that the first frame
   // starts at the beginning of the file.
   if (do_probe<mp3_reader_c>(io, size, 32 * 1024, 1, true))

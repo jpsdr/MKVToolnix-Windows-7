@@ -1180,8 +1180,8 @@ msgstr " (вільна зміна розміру)"
 
 #: src/common/kax_info.cpp:374
 #, no-c-format
-msgid " (h.264 profile: {0} @L{1}.{2})"
-msgstr " (профіль h.264: {0} @L{1}.{2})"
+msgid " (H.264 profile: {0} @L{1}.{2})"
+msgstr " (профіль H.264: {0} @L{1}.{2})"
 
 #: src/common/kax_info.cpp:684
 #, no-c-format
@@ -2963,17 +2963,17 @@ msgstr ""
 #: src/common/file_types.cpp:76
 #: src/output/p_avc.h:34
 #, no-c-format
-msgid "AVC/h.264"
-msgstr "AVC/h.264"
+msgid "AVC/H.264"
+msgstr "AVC/H.264"
 
 #: src/output/p_avc_es.h:40
 #, no-c-format
-msgid "AVC/h.264 (unframed)"
-msgstr "AVC/h.264 (для некадрован. вмісту)"
+msgid "AVC/H.264 (unframed)"
+msgstr "AVC/H.264 (для некадрован. вмісту)"
 
 #: src/common/file_types.cpp:30
 #, no-c-format
-msgid "AVC/h.264 elementary streams"
+msgid "AVC/H.264 elementary streams"
 msgstr "AVC/H.264 елементарні потоки"
 
 #: src/common/file_types.cpp:77
@@ -3403,8 +3403,8 @@ msgstr "Всі блоки мають за основу 1024 (G = 1024^3, M = 102
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
 #, no-c-format
-msgid "Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
-msgstr "Дозволяє зберігати AVC/h.264 відео в режимі сумісності Video-for-Windows, наприклад, коли зчитується з AVI."
+msgid "Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
+msgstr "Дозволяє зберігати AVC/H.264 відео в режимі сумісності Video-for-Windows, наприклад, коли зчитується з AVI."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:713
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:734
@@ -4596,7 +4596,7 @@ msgstr "CoreAudio"
 
 #: src/input/r_avi.cpp:347
 #, no-c-format
-msgid "Could not extract the decoder specific config data (AVCC) from this AVC/h.264 track.\n"
+msgid "Could not extract the decoder specific config data (AVCC) from this AVC/H.264 track.\n"
 msgstr "Неможливо отримати специфічні дані налаштувань декодера (AVCC) з цієї доріжки AVC/H.264.\n"
 
 #: src/input/r_avi.cpp:297
@@ -10506,8 +10506,8 @@ msgstr "Шари (Сектори)"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
 #, no-c-format
-msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
-msgstr "Деякі доріжки h.264/AVC містять шари I, але не містять справжніх ключових кадрів."
+msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
+msgstr "Деякі доріжки H.264/AVC містять шари I, але не містять справжніх ключових кадрів."
 
 #: src/merge/output_control.cpp:1263
 #, no-c-format
@@ -12530,18 +12530,18 @@ msgstr "Дана доріжка AC-3 містить {0} байт не-AC-3 да�
 
 #: src/output/p_avc_es.cpp:100
 #, no-c-format
-msgid "This AVC/h.264 contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to {0} for this track (command line parameter '--nalu-size-length {1}:{0}').\n"
-msgstr "Цей AVC/h.264 містить кадри, які є занадто великими для поточного максимального розміру NALU. Ви повинні повторно запустити mkvmerge і встановити максимальний розмір NALU як {0} для цієї доріжки (параметр командного рядка '--nalu-size-length {1}:{0}').\n"
+msgid "This AVC/H.264 contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to {0} for this track (command line parameter '--nalu-size-length {1}:{0}').\n"
+msgstr "Цей AVC/H.264 містить кадри, які є занадто великими для поточного максимального розміру NALU. Ви повинні повторно запустити mkvmerge і встановити максимальний розмір NALU як {0} для цієї доріжки (параметр командного рядка '--nalu-size-length {1}:{0}').\n"
 
 #: src/output/p_avc_es.cpp:118
 #, no-c-format
-msgid "This AVC/h.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
-msgstr "Ця доріжка AVC/h.264 не починається з ключового кадру. Перших {0} кадрів було пропущено.\n"
+msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
+msgstr "Ця доріжка AVC/H.264 не починається з ключового кадру. Перших {0} кадрів було пропущено.\n"
 
 #: src/output/p_avc_es.cpp:128
 #, no-c-format
-msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
-msgstr "Ця інформація синхронізації доріжки AVC/h.264 свідчить про те, що використовується змінна швидкість відтворення. Проте, не було надано ні типової тривалості, ні зовнішнього файлу тайм-кодів, і вхідний контейнер не містить тайм-кодів. Результуючі тайм-коди можуть бути не придатні до використання.\n"
+msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
+msgstr "Ця інформація синхронізації доріжки AVC/H.264 свідчить про те, що використовується змінна швидкість відтворення. Проте, не було надано ні типової тривалості, ні зовнішнього файлу тайм-кодів, і вхідний контейнер не містить тайм-кодів. Результуючі тайм-коди можуть бути не придатні до використання.\n"
 
 #: src/output/p_hevc_es.cpp:96
 #, no-c-format
@@ -12777,8 +12777,8 @@ msgstr "Ця опція повідомляє mkvmerge яке співвідно�
 
 #: src/mkvtoolnix-gui/merge/input.cpp:516
 #, no-c-format
-msgid "This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
-msgstr "Цей параметр є ефективним тільки для AVC/h.264 і HEVC/h.265 елементарних потоків, що зчитуються з AVC/h.264 ES або HEVC/h.265 ES файлів, файлів AVI або Matroska, створених з використанням \"--engage allow_avc_in_vwf_mode\"."
+msgid "This parameter is only effective for AVC/H.264 and HEVC/h.265 elementary streams read from AVC/H.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
+msgstr "Цей параметр є ефективним тільки для AVC/H.264 і HEVC/h.265 елементарних потоків, що зчитуються з AVC/H.264 ES або HEVC/h.265 ES файлів, файлів AVI або Matroska, створених з використанням \"--engage allow_avc_in_vwf_mode\"."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:498
 #, no-c-format
@@ -13362,7 +13362,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:1622
 #, no-c-format
-msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
+msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/H.264 codecs.\n"
 msgstr "Використання довжини поля розміру NALU у 3 байти може призвести до того, що отримані доріжки не будуть призначені для декодування деякими AVC/H.264 кодеками.\n"
 
 #: src/merge/generic_reader.h:41
@@ -14709,7 +14709,7 @@ msgstr "mkvmerge не знаходить різниці між цими двом
 #: src/output/p_avc_es.cpp:107
 #, no-c-format
 msgid ""
-"mkvmerge encountered broken or unparsable data in this AVC/h.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
+"mkvmerge encountered broken or unparsable data in this AVC/H.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
 "{0}\n"
 msgstr ""
 "mkvmerge було натраплено на пошкоджені або дані з неможливістю аналізу для доріжки AVC/H.264 відео. Або у вас пошкоджений файл (з яким mkvmerge поки не може впоратися) або це помилка в mkvmerge. Повідомлення про помилку:\n"
@@ -15877,7 +15877,7 @@ msgstr "– Нічого не обрано –"
 
 #~ msgid ""
 #~ "The AVC video track is missing the 'CTTS' atom for frame timestamp "
-#~ "offsets. However, AVC/h.264 allows frames to have more than the "
+#~ "offsets. However, AVC/H.264 allows frames to have more than the "
 #~ "traditional one (for P frames) or two (for B frames) references to other "
 #~ "frames. The timestamps for such frames will be out-of-order, and the "
 #~ "'CTTS' atom is needed for getting the timestamps right. As it is missing "
@@ -15885,7 +15885,7 @@ msgstr "– Нічого не обрано –"
 #~ "resulting file and make sure that it looks like you expected it to.\n"
 #~ msgstr ""
 #~ "Для доріжки AVC відео відсутній елемент 'CTTS' для зміщень тайм-коду "
-#~ "кадру. Тим не менше, стандарт AVC/h.264 допускає для кадрів мати більше "
+#~ "кадру. Тим не менше, стандарт AVC/H.264 допускає для кадрів мати більше "
 #~ "ніж традиційне одне (для кадрів P) або два (для кадрів B) посилання на "
 #~ "інші кадри. Тайм-коди для таких кадрів будуть нестандартними, і тому "
 #~ "елемент 'CTTS' необхідний для отримання вірних тайм-кодів. Так як данний "

@@ -72,7 +72,7 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
       { QY("Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."),
         QY("Two files multiplexed with the same settings and this switch activated will be identical.") });
   add(Q("--engage force_passthrough_packetizer"), false, hacks, { QY("Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types.") });
-  add(Q("--engage allow_avc_in_vfw_mode"),        false, hacks, { QY("Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI.") });
+  add(Q("--engage allow_avc_in_vfw_mode"),        false, hacks, { QY("Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI.") });
   add(Q("--engage no_simpleblocks"),              false, hacks, { QY("Disable the use of SimpleBlocks instead of BlockGroups.") });
   add(Q("--engage use_codec_state_only"),         false, hacks, { QY("Store changes in CodecPrivate data in CodecState elements instead of the frames."),
                                                                   QY("This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers.") });
@@ -91,7 +91,7 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
         QY("mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."),
         QY("Enabling this option causes mkvmerge to keep that last entry.") });
   add(Q("--engage all_i_slices_are_key_frames"),  false, hacks,
-      { QY("Some h.264/AVC tracks contain I slices but lack real key frames."),
+      { QY("Some H.264/AVC tracks contain I slices but lack real key frames."),
         QY("This option forces mkvmerge to treat all of those I slices as key frames.") });
   add(Q("--engage cow"),                          false, hacks, { QY("No help available.") });
 

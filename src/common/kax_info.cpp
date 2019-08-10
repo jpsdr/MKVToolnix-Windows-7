@@ -371,7 +371,7 @@ kax_info_c::create_codec_dependent_private_info(KaxCodecPrivate &c_priv,
   } else if ((codec_id == MKV_V_MPEG4_AVC) && ('v' == track_type) && (c_priv.GetSize() >= 4)) {
     auto avcc = mtx::avc::avcc_c::unpack(memory_c::borrow(c_priv.GetBuffer(), c_priv.GetSize()));
 
-    return fmt::format(Y(" (h.264 profile: {0} @L{1}.{2})"),
+    return fmt::format(Y(" (H.264 profile: {0} @L{1}.{2})"),
                           avcc.m_profile_idc ==  44 ? "CAVLC 4:4:4 Intra"
                         : avcc.m_profile_idc ==  66 ? "Baseline"
                         : avcc.m_profile_idc ==  77 ? "Main"

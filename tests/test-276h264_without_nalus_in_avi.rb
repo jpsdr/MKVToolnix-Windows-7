@@ -2,7 +2,7 @@
 
 class T_276h264_without_nalus_in_avi < Test
   def description
-    return "mkvmerge / h.264 without NALUs in AVI"
+    return "mkvmerge / H.264 without NALUs in AVI"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_276h264_without_nalus_in_avi < Test
     return hash_tmp
   end
 end
-

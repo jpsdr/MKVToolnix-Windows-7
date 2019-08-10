@@ -343,7 +343,7 @@ flv_reader_c::identify() {
     }
 
     id_result_track(idx, track->is_audio() ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO,
-                      track->m_fourcc.equiv("AVC1") ? "AVC/h.264"
+                      track->m_fourcc.equiv("AVC1") ? "AVC/H.264"
                     : track->m_fourcc.equiv("FLV1") ? "Sorenson h.263 (Flash version)"
                     : track->m_fourcc.equiv("VP6F") ? "On2 VP6 (Flash version)"
                     : track->m_fourcc.equiv("VP6A") ? "On2 VP6 (Flash version with alpha channel)"

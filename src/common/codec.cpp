@@ -28,7 +28,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("Cinepak",                 type_e::V_CINEPAK,      track_video,    "cvid");
   ms_codecs.emplace_back("Dirac",                   type_e::V_DIRAC,        track_video,    "drac|V_DIRAC");
   ms_codecs.emplace_back("MPEG-1/2",                type_e::V_MPEG12,       track_video,    "mpeg|mpg[12]|m[12]v.|mpgv|mp[12]v|h262|V_MPEG[12]");
-  ms_codecs.emplace_back("MPEG-4p10/AVC/h.264",     type_e::V_MPEG4_P10,    track_video,    "avc.|[hx]264|V_MPEG4/ISO/AVC");
+  ms_codecs.emplace_back("MPEG-4p10/AVC/H.264",     type_e::V_MPEG4_P10,    track_video,    "avc.|[hx]264|V_MPEG4/ISO/AVC");
   ms_codecs.emplace_back("MPEG-4p2",                type_e::V_MPEG4_P2,     track_video,    "3iv2|xvi[dx]|divx|dx50|fmp4|mp4v|V_MPEG4/ISO/(?:SP|AP|ASP)");
   ms_codecs.emplace_back("MPEG-H/HEVC/h.265",       type_e::V_MPEGH_P2,     track_video,    "hevc|hvc1|hev1|[hx]265|V_MPEGH/ISO/HEVC");
   ms_codecs.emplace_back("ProRes",                  type_e::V_PRORES,       track_video,    "apch|apcn|apcs|apco|ap4h|V_PRORES");

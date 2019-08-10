@@ -1191,7 +1191,7 @@ msgstr " (redimensionnement libre)"
 
 #: src/common/kax_info.cpp:374
 #, no-c-format
-msgid " (h.264 profile: {0} @L{1}.{2})"
+msgid " (H.264 profile: {0} @L{1}.{2})"
 msgstr " (profil AVC/H.264 : {0} @L{1}.{2})"
 
 #: src/common/kax_info.cpp:684
@@ -2959,17 +2959,17 @@ msgstr "Flux AV1 Open Bitstream Units"
 #: src/common/file_types.cpp:76
 #: src/output/p_avc.h:34
 #, no-c-format
-msgid "AVC/h.264"
+msgid "AVC/H.264"
 msgstr "AVC/H.264"
 
 #: src/output/p_avc_es.h:40
 #, no-c-format
-msgid "AVC/h.264 (unframed)"
+msgid "AVC/H.264 (unframed)"
 msgstr "AVC/H.264 (sans trame)"
 
 #: src/common/file_types.cpp:30
 #, no-c-format
-msgid "AVC/h.264 elementary streams"
+msgid "AVC/H.264 elementary streams"
 msgstr "Flux élémentaires AVC/H.264"
 
 #: src/common/file_types.cpp:77
@@ -3399,7 +3399,7 @@ msgstr "Toutes les unités ont pour base 1024 (G = 1024^3, M = 1024^2, k = 1024)
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
 #, no-c-format
-msgid "Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
+msgid "Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
 msgstr "Autorise l'enregistrement d'une vidéo AVC/H.264 en mode de compatibilité Video-for-Windows, par ex. quand elle provient d'un AVI."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:713
@@ -4587,7 +4587,7 @@ msgstr "CoreAudio"
 
 #: src/input/r_avi.cpp:347
 #, no-c-format
-msgid "Could not extract the decoder specific config data (AVCC) from this AVC/h.264 track.\n"
+msgid "Could not extract the decoder specific config data (AVCC) from this AVC/H.264 track.\n"
 msgstr "Impossible d'extraire les données de configuration spécifiques du décodeur (AVCC) de cette piste AVC/H.264.\n"
 
 #: src/input/r_avi.cpp:297
@@ -10468,7 +10468,7 @@ msgstr "Tranches"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
 #, no-c-format
-msgid "Some h.264/AVC tracks contain I slices but lack real key frames."
+msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Quelques pistes AVC/H.264 contiennent des tranches I mais pas de trames clés réelles."
 
 #: src/merge/output_control.cpp:1263
@@ -12472,17 +12472,17 @@ msgstr "Cette piste AC-3 contient {0} octets de données non AC-3 au début. Cel
 
 #: src/output/p_avc_es.cpp:100
 #, no-c-format
-msgid "This AVC/h.264 contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to {0} for this track (command line parameter '--nalu-size-length {1}:{0}').\n"
+msgid "This AVC/H.264 contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to {0} for this track (command line parameter '--nalu-size-length {1}:{0}').\n"
 msgstr "Cette piste AVC/H.264 contient des trames trop grandes pour la taille de NALU maximale actuelle. Il faut exécuter à nouveau mkvmerge et définir la taille de NALU maximale à {0} pour cette piste (paramètre de ligne de commande « --nalu-size-length {1}:{0} »).\n"
 
 #: src/output/p_avc_es.cpp:118
 #, no-c-format
-msgid "This AVC/h.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
+msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "Cette piste AVC/H.264 ne débute pas par une trame-clé. Les {0} premières trames ont été ignorées.\n"
 
 #: src/output/p_avc_es.cpp:128
 #, no-c-format
-msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
+msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
 msgstr "L'information de temps de cette piste AVC/H.264 indique l'utilisation d'une fréquence de trame variable. Toutefois, aucune durée par défaut ni aucun horodatage externe n'est donné, et le conteneur source ne fournit aucun horodatage. Il se pourrait que les horodatages résultants ne soient pas pertinents.\n"
 
 #: src/output/p_hevc_es.cpp:96
@@ -12718,7 +12718,7 @@ msgstr "Cette option indique à mkvmerge le ratio d'aspect à utiliser pour calc
 
 #: src/mkvtoolnix-gui/merge/input.cpp:516
 #, no-c-format
-msgid "This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
+msgid "This parameter is only effective for AVC/H.264 and HEVC/h.265 elementary streams read from AVC/H.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
 msgstr "Ce paramètre n'est opérant que sur les flux élémentaires AVC/H.264 et HEVC/H.265 lus dans les fichiers ES AVC/H.264 ou HEVC/H.265, les fichiers AVI ou Matroska créés avec l'option « --engage allow_avc_in_vwf_mode ». "
 
 #: src/mkvtoolnix-gui/merge/input.cpp:498
@@ -13301,7 +13301,7 @@ msgstr "Utilise les noms de chapitres des langues spécifiées pour l'extraction
 
 #: src/merge/mkvmerge.cpp:1622
 #, no-c-format
-msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
+msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/H.264 codecs.\n"
 msgstr "L'utilisation d'une taille de NALU de 3 octets peut conduire à des pistes illisibles avec certains codecs AVC/H.264.\n"
 
 #: src/merge/generic_reader.h:41
@@ -14648,7 +14648,7 @@ msgstr "mkvmerge ne distingue pas les deux et compte simplement le nombre de blo
 #: src/output/p_avc_es.cpp:107
 #, no-c-format
 msgid ""
-"mkvmerge encountered broken or unparsable data in this AVC/h.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
+"mkvmerge encountered broken or unparsable data in this AVC/H.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
 "{0}\n"
 msgstr ""
 "mkvmerge a rencontré des données défectueuses ou non analysables dans cette piste vidéo AVC/H.264. Soit ce fichier est endommagé (mkvmerge n'y peut rien pour le moment), soit c'est un bogue de mkvmerge. Le message d'erreur est :\n"
@@ -15747,7 +15747,7 @@ msgstr "– Défini à aucun –"
 #~ msgid "TextLabel"
 #~ msgstr "TextLabel"
 
-#~ msgid "The AVC video track is missing the 'CTTS' atom for frame timestamp offsets. However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timestamps for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timestamps right. As it is missing the timestamps for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
+#~ msgid "The AVC video track is missing the 'CTTS' atom for frame timestamp offsets. However, AVC/H.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timestamps for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timestamps right. As it is missing the timestamps for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
 #~ msgstr "La piste vidéo AVC ne comprend pas l'atome « CTTS » pour les décalages de code temporel de trame. Toutefois le codec AVC/H.264 autorise les trames avec plus que le nombre habituel de références des autres trames (une pour les trames P et deux pour les trames B). Les codes temporels de telles trames seront désordonnés, et l'atome « CTTS » est nécessaire pour obtenir des codes corrects. Comme il est manquant les codes temporels pour cette piste pourraient être faux. Il faudrait examiner le fichier obtenu pour voir s'il est conforme à ce qui est attendu.\n"
 
 #~ msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"

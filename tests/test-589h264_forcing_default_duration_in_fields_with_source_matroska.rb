@@ -1,7 +1,7 @@
 #!/usr/bin/ruby -w
 
 # T_589h264_forcing_default_duration_in_fields_with_source_matroska
-describe "mkvmerge / AVC/h.264 forcing the default duration to a number for fields when the source is in Matroska"
+describe "mkvmerge / AVC/H.264 forcing the default duration to a number for fields when the source is in Matroska"
 
 def test_this default_duration_arg, expected_default_duration
   file = "data/mkv/issue1916.mkv"

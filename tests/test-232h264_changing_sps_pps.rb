@@ -2,7 +2,7 @@
 
 class T_232h264_changing_sps_pps < Test
   def description
-    return "mkvmerge / h.264 with changing SPS/PPS NALUs / in(h264)"
+    return "mkvmerge / H.264 with changing SPS/PPS NALUs / in(h264)"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_232h264_changing_sps_pps < Test
     return hash_tmp
   end
 end
-

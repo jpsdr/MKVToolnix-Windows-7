@@ -1619,7 +1619,7 @@ parse_arg_nalu_size_length(const std::string &s,
 
   if ((3 == nalu_size_length) && !s_nalu_size_length_3_warning_printed) {
     s_nalu_size_length_3_warning_printed = true;
-    mxwarn(Y("Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"));
+    mxwarn(Y("Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/H.264 codecs.\n"));
   }
 
   ti.m_nalu_size_lengths[id] = nalu_size_length;

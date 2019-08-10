@@ -344,7 +344,7 @@ avi_reader_c::create_mpeg4_p10_packetizer() {
     show_packetizer_info(0, ptzr);
 
   } catch (...) {
-    mxerror_tid(m_ti.m_fname, 0, Y("Could not extract the decoder specific config data (AVCC) from this AVC/h.264 track.\n"));
+    mxerror_tid(m_ti.m_fname, 0, Y("Could not extract the decoder specific config data (AVCC) from this AVC/H.264 track.\n"));
   }
 }
 
