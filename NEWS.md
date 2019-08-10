@@ -8,6 +8,9 @@
 ## Bug fixes
 
 * source code: fixed building with Boost 1.71.0. Fixes #2599.
+* mkvmerge: Blu-ray MPLS handling: mkvmerge will now find corresponding M2TS
+  files even if the `clip_codec_identifier` playlist item field is not set to
+  `M2TS` in the MPLS file. Fixes #2601.
 
 
 # Version 35.0.0 "All The Love In The World" 2019-06-22
