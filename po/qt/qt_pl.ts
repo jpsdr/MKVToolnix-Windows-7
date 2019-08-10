@@ -1331,7 +1331,7 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+9"/>
         <source>Alias</source>
-        <comment>Mac OS X Finder</comment>
+        <comment>macOS X Finder</comment>
         <translation>Alias</translation>
     </message>
     <message>

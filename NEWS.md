@@ -2050,7 +2050,7 @@
 
 ## Other changes
 
-* mkvinfo: the change to start the GUI by default on Windows and Mac OS has been
+* mkvinfo: the change to start the GUI by default on Windows and macOS has been
   reverted. Instead a separate executable (mkvinfo-gui) will be included for those
   platforms which starts the GUI by default. The newly introduced option "--no-gui"
   will remain valid but won't have any effect when used with mkvinfo.
@@ -2159,7 +2159,7 @@
 * MKVToolNix GUI: chapter editor enhancement: added a button next to the 'segment
   UID' controls that enable the user to select a Matroska file. The GUI reads that
   file's segment UID and enters its value into the input field.
-* mkvinfo: change: on Windows and Mac OS mkvinfo will now launch the GUI by default
+* mkvinfo: change: on Windows and macOS mkvinfo will now launch the GUI by default
   unless the option »--no-gui« (or »-G«) has been given. This is due to the fact that on
   both OS users often use portable versions respectively disk images and launch the
   executable directly and not via start menu entries. In those situations adding
@@ -2239,7 +2239,7 @@
 ## Build system changes
 
 * build system: implemented support for explicit pre-compiled headers for Linux and
-  Mac OS.
+  macOS.
 * build system: added an option to configure »--without-qt-pkg-config«. Normally
   configure uses pkg-config for detecting Qt and setting QT_CFLAGS and QT_LIBS. With
   this option configure won't use pkg-config and rely on the user having set both
@@ -3354,9 +3354,9 @@
 
 * mkvinfo: bug fix: mkvinfo would exit with the wrong return code (0 instead of 2) if a
   non-existing file name had been given. Fixes #1182.
-* all: fix compilation on Mac OS in common/command_line.cpp due to
+* all: fix compilation on macOS in common/command_line.cpp due to
   boost::range::filtered requiring a copyable functor. Fixes #1175.
-* all: fix compilation on Mac OS in common/version.cpp due to wrong usage of
+* all: fix compilation on macOS in common/version.cpp due to wrong usage of
   std::stringstream and ostream operators. Fixes #1176.
 * all: bug fix: fixed compilation with Boost 1.58.0. Fixes #1172.
 * mkvmerge: bug fix: Fixed a segmentation fault during cleanup after Ctrl+C was
@@ -5035,7 +5035,7 @@
 * build system: Fixed building the Qt version of mkvinfo's GUI. Fix for bug 576.
 * mkvmerge, mmg: bug fix: Option files could not contain options that started with '#'
   as they were interpreted as comment lines.
-* mmg: bug fix: On Mac OS X the application type is set to a foreground application
+* mmg: bug fix: On macOS X the application type is set to a foreground application
   preventing issues like the GUI never getting focus.
 
 ## Build system changes
@@ -5426,7 +5426,7 @@
   span the entire file are processed properly. Such files are created by current x264
   builds. Fix for bug 469.
 * Build system: Fixed configure for systems on which 'echo' does not support the '-n'
-  parameter (e.g. Mac OS).
+  parameter (e.g. macOS).
 
 ## Build system changes
 
@@ -5634,7 +5634,7 @@
   contain all mandatory header fields. The missing ones are added or assumed to be
   default values.
 * all: bug fix: Selecting the translations with the "--ui-language" option did not
-  work on Mac OS X.
+  work on macOS X.
 * mkvmerge: bug fix: Fixed an invalid memory access in the VobSub reader module. Fix
   for bug 426.
 * mmg: bug fix: Tracks added from Matroska files did not get their 'default track' drop
@@ -5694,7 +5694,7 @@
   Sometimes a single I frame was recognized as two or more consecutive I frames
   resulting in garbled display and wrong timestamps. Fix for bug 415.
 * all: bug fix: The programs do not try to close iconv handles -1 anymore which resulted
-  in segfault during uninitialization on some platforms (e.g. FreeBSD, Mac OS X). Fix
+  in segfault during uninitialization on some platforms (e.g. FreeBSD, macOS X). Fix
   for bug 412.
 * mkvmerge: bug fix: Complete rewrite of the code for the native storage mode for MPEG4
   part 2 video tracks. Fix for bug 298.
