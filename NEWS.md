@@ -8,10 +8,10 @@
 ## Bug fixes
 
 * source code: fixed building with Boost 1.71.0. Fixes #2599.
+* all: fixed the spelling of the H.264 & H.265 codec names.
 * mkvmerge: Blu-ray MPLS handling: mkvmerge will now find corresponding M2TS
   files even if the `clip_codec_identifier` playlist item field is not set to
   `M2TS` in the MPLS file. Fixes #2601.
-* all: fixed the spelling of the H.264 & H.265 codec names.
 * mkvmerge: fixed handling of text files that use both DOS-style and
   Unix-style line endings resulting in problems such as text subtitle files
   not being parsed correctly. Fixes #2594.
