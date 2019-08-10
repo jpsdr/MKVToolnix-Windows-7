@@ -91,13 +91,13 @@ srt_parser_c::parse() {
   boost::regex number_re("^\\d+$", boost::regex::perl);
   boost::regex coordinates_re(SRT_RE_COORDINATES, boost::regex::perl);
 
-  int64_t start                 = 0;
-  int64_t end                   = 0;
-  int64_t previous_start        = 0;
+  int64_t start                  = 0;
+  int64_t end                    = 0;
+  int64_t previous_start         = 0;
   bool timestamp_warning_printed = false;
-  parser_state_e state          = STATE_INITIAL;
-  int line_number               = 0;
-  unsigned int subtitle_number  = 0;
+  parser_state_e state           = STATE_INITIAL;
+  int line_number                = 0;
+  unsigned int subtitle_number   = 0;
   unsigned int timestamp_number  = 0;
   std::string subtitles;
 
