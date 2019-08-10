@@ -30,7 +30,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("MPEG-1/2",                type_e::V_MPEG12,       track_video,    "mpeg|mpg[12]|m[12]v.|mpgv|mp[12]v|h262|V_MPEG[12]");
   ms_codecs.emplace_back("MPEG-4p10/AVC/H.264",     type_e::V_MPEG4_P10,    track_video,    "avc.|[hx]264|V_MPEG4/ISO/AVC");
   ms_codecs.emplace_back("MPEG-4p2",                type_e::V_MPEG4_P2,     track_video,    "3iv2|xvi[dx]|divx|dx50|fmp4|mp4v|V_MPEG4/ISO/(?:SP|AP|ASP)");
-  ms_codecs.emplace_back("MPEG-H/HEVC/h.265",       type_e::V_MPEGH_P2,     track_video,    "hevc|hvc1|hev1|[hx]265|V_MPEGH/ISO/HEVC");
+  ms_codecs.emplace_back("MPEG-H/HEVC/H.265",       type_e::V_MPEGH_P2,     track_video,    "hevc|hvc1|hev1|[hx]265|V_MPEGH/ISO/HEVC");
   ms_codecs.emplace_back("ProRes",                  type_e::V_PRORES,       track_video,    "apch|apcn|apcs|apco|ap4h|V_PRORES");
   ms_codecs.emplace_back("RLE4",                    type_e::V_RLE4,         track_video,    "", fourcc_c{0x02000000u});
   ms_codecs.emplace_back("RLE8",                    type_e::V_RLE8,         track_video,    "", fourcc_c{0x01000000u});

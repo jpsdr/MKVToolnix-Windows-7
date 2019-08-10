@@ -25,7 +25,7 @@ public:
   xtr_hevc_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec) : xtr_avc_c(codec_id, tid, tspec) { }
 
   virtual const char *get_container_name() override {
-    return "HEVC/h.265 elementary stream";
+    return "HEVC/H.265 elementary stream";
   };
 
   virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track) override;

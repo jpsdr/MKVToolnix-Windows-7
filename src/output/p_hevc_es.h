@@ -35,7 +35,7 @@ public:
   virtual void flush_frames();
 
   virtual translatable_string_c get_format_name() const {
-    return YT("HEVC/h.265 (unframed)");
+    return YT("HEVC/H.265 (unframed)");
   };
 
   virtual void connect(generic_packetizer_c *src, int64_t p_append_timestamp_offset = -1);

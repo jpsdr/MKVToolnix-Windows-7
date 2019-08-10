@@ -38,7 +38,7 @@ file_type_t::get_supported() {
 #endif
   s_supported_file_types.emplace_back(file_type_e::flv,         Y("FLV (Flash Video)"),                   "flv");
   s_supported_file_types.emplace_back(file_type_e::hdmv_textst, Y("HDMV TextST"),                         "textst");
-  s_supported_file_types.emplace_back(file_type_e::hevc_es,     Y("HEVC/h.265 elementary streams"),       "265 hevc h265 x265");
+  s_supported_file_types.emplace_back(file_type_e::hevc_es,     Y("HEVC/H.265 elementary streams"),       "265 hevc h265 x265");
   s_supported_file_types.emplace_back(file_type_e::ivf,         Y("IVF (AV1, VP8, VP9)"),                 "ivf");
   s_supported_file_types.emplace_back(file_type_e::qtmp4,       Y("MP4 audio/video files"),               "mp4 m4v");
   s_supported_file_types.emplace_back(file_type_e::mp3,         Y("MPEG-1/2 Audio Layer II/III elementary streams"), "mp2 mp3");
@@ -85,7 +85,7 @@ file_type_t::get_name(file_type_e type) {
        : file_type_e::flac        == type ? YT("FLAC")
        : file_type_e::flv         == type ? YT("Flash Video")
        : file_type_e::hdmv_textst == type ? YT("HDMV TextST subtitles")
-       : file_type_e::hevc_es     == type ? YT("HEVC/h.265")
+       : file_type_e::hevc_es     == type ? YT("HEVC/H.265")
        : file_type_e::hdsub       == type ? YT("HD-DVD subtitles")
        : file_type_e::ivf         == type ? YT("IVF (AV1, VP8, VP9)")
        : file_type_e::matroska    == type ? YT("Matroska")

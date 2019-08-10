@@ -1,7 +1,7 @@
 #!/usr/bin/ruby -w
 
 # T_670h265_interlaced
-describe "mkvmerge / HEVC/h.265 with interlaced fields, video height"
+describe "mkvmerge / HEVC/H.265 with interlaced fields, video height"
 
 test "get dimensions" do
   (identify_json("data/h265/interlaced1.265")["tracks"] +

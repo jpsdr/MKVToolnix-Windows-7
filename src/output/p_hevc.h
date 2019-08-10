@@ -29,7 +29,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
   virtual translatable_string_c get_format_name() const {
-    return YT("HEVC/h.265");
+    return YT("HEVC/H.265");
   }
 
 protected:

@@ -3,7 +3,7 @@
 ## New features and enhancements
 
 * mkvmerge: mkvmerge now allows appending AV1, VP8, VP9, H.264/AVC and
-  h.265/HEVC tracks whose pixel dimensions differ. Implements #2582.
+  H.265/HEVC tracks whose pixel dimensions differ. Implements #2582.
 
 ## Bug fixes
 
@@ -466,7 +466,7 @@
 * mkvmerge: AVC/H.264: fixed file identification failing for certain
   elementary streams due to internal buffers not being cleared properly. Fixes
   #2325.
-* mkvmerge: HEVC/h.265: fixed file identification failing for certain
+* mkvmerge: HEVC/H.265: fixed file identification failing for certain
   elementary streams due to internal buffers not being cleared properly. This
   is the HEVC analog to what was fixed for AVC in #2325.
 * mkvmerge: MLP code: fixed various issues preventing MLP from being parsed
@@ -744,7 +744,7 @@
   decoder configuration in the ESDS portion, then a default decoder
   configuration will be generated based on the track's header data instead of
   skipping the track. Fixes #2221.
-* mkvmerge: MP4 reader: fixed reading HEVC/h.265 video tracks if they're
+* mkvmerge: MP4 reader: fixed reading HEVC/H.265 video tracks if they're
   stored as Annex B byte streams inside MP4. Fixes #2215.
 * mkvmerge: Ogg Opus reader: mkvmerge will now emit a warning instead of
   aborting when it encounters an Ogg Opus page with no data in the
@@ -933,7 +933,7 @@
   optimization levels).
 * build system: stack protection is enabled when building with clang 3.5.0 or
   newer on all platforms.
-* mkvmerge: AVC/H.264 & HEVC/h.265 ES parsers: performance improvements by
+* mkvmerge: AVC/H.264 & HEVC/H.265 ES parsers: performance improvements by
   copying much less memory around.
 * mkvmerge: tags: reintroduced a workaround for non-compliant files with tags
   that do not contain the mandatory `SimpleTag` element. This workaround was
@@ -1052,7 +1052,7 @@
 * mkvmerge: AVC/H.264 ES parser: only non-key frames that have the NALU header
   field `nal_ref_idc` set to 0 will be marked as "discardable" in
   `SimpleBlock` elements. Other half of the fix for #2047.
-* mkvmerge: HEVC/h.265: the generation of the HEVCC structure stored in
+* mkvmerge: HEVC/H.265: the generation of the HEVCC structure stored in
   `CodecPrivate` was wrong in two places: 1. the position of the number of
   sub-layers was swapped with reserved bits and 2. the VPS/SPS/PPS/SEI lists
   did not start with a reserved 1 bit.
@@ -1212,9 +1212,9 @@
 * mkvmerge: AVC/H.264 parser: fixed wrong frame order & timestamp calculation
   in certain situations when SPS (sequence parameter sets) or PPS (picture
   parameter sets) change mid-stream. Fixes #2028.
-* mkvmerge: HEVC/h.265 parser: fixed wrong frame order & timestamp calculation
+* mkvmerge: HEVC/H.265 parser: fixed wrong frame order & timestamp calculation
   in certain situations when SPS (sequence parameter sets) or PPS (picture
-  parameter sets) change mid-stream. This is the HEVC/h.265 equivalent of
+  parameter sets) change mid-stream. This is the HEVC/H.265 equivalent of
   #2028.
 * mkvmerge: MPEG-1/-2 video: the "remove stuffing bytes" feature introduced in
   v5.8.0 (feature request #734) was broken. In a lot of situations it did not
@@ -1344,7 +1344,7 @@
   Windows: the default "play audio" action was pointing to the wrong
   directory. Existing configurations with such a wrong path will be fixed
   automatically upon starting the GUI. Fixes #1956.
-* mkvmerge: HEVC/h.265 parser: fixed the superfluous copying of the
+* mkvmerge: HEVC/H.265 parser: fixed the superfluous copying of the
   `bitstream_restriction_flag` and its dependent flags in the VUI parameters
   of the sequence parameter sets if the timing information is present,
   too. This fixes #1924 properly, and it also fixes #1958.
@@ -1353,7 +1353,7 @@
   (e.g. LOAS/LATM). This prevents the AAC packetizer from mis-detecting it in
   its own attempt to identify the mode. Fixes #1957.
 * mkvmerge: MPEG TS reader: valid MPEG transport streams that start with an
-  H.264/h.265 start code (e.g. a file created by cutting at an arbitrary
+  H.264/H.265 start code (e.g. a file created by cutting at an arbitrary
   position) were not recognized as a supported file type.
 * mkvmerge: MPEG TS reader: fixed a potential read access from invalid memory
   addresses in the code parsing the program map table (PMT).
@@ -1398,18 +1398,18 @@
 * mkvmerge: AVC/H.264 parser: mkvmerge will now ignore bogus timing
   information in the sequence parameter sets (values indicating more than
   100000 progressive frames per second). Fixes #1946.
-* mkvmerge: AVC/H.264 & HEVC/h.265 parsers: all trailing zero bytes will now
+* mkvmerge: AVC/H.264 & HEVC/H.265 parsers: all trailing zero bytes will now
   be removed from NALUs. Fixes #1952.
-* mkvmerge: HEVC/h.265 parser: fixed copying the `bitstream_restriction_flag`
+* mkvmerge: HEVC/H.265 parser: fixed copying the `bitstream_restriction_flag`
   and all dependent fields in the VUI parameters of the sequence parameter
   sets. Fixes #1924.
-* mkvmerge: HEVC/h.265 parser: fixed the calculation of the number of
+* mkvmerge: HEVC/H.265 parser: fixed the calculation of the number of
   parameter set arrays in the HEVCC data structure stored in
   CodecPrivate. Fixes the video-related part of #1938.
-* mkvmerge: HEVC/h.265 parser: fixed writing superfluous and uninitialized
+* mkvmerge: HEVC/H.265 parser: fixed writing superfluous and uninitialized
   bytes at the end of the HEVCC data structure stored in CodecPrivate. Another
   fix for the video-related part of #1938.
-* mkvmerge: HEVC/h.265 parser: fixed the assumption that the HEVCC data
+* mkvmerge: HEVC/H.265 parser: fixed the assumption that the HEVCC data
   structure always includes arrays for all parameter set types (VPS, SPS, PPS
   and SEI), and that the order is always VPS → SPS → PPS → SEI. Instead now
   only the arrays actually present are parsed, and they can be in any order.
@@ -1456,9 +1456,9 @@
 
 * mkvmerge: AVC/H.264 parser: mkvmerge will now drop all frames before the
   first key frame as they cannot be decoded properly anyway. See #1908.
-* mkvmerge: HEVC/h.265 parser: mkvmerge will now drop all frames before the
+* mkvmerge: HEVC/H.265 parser: mkvmerge will now drop all frames before the
   first key frame as they cannot be decoded properly anyway. See #1908.
-* mkvmerge: HEVC/h.265 parser: added a workaround for invalid values for the
+* mkvmerge: HEVC/H.265 parser: added a workaround for invalid values for the
   "default display window" in the VUI parameters of sequence parameter
   sets. Fixes #1907.
 
@@ -1479,7 +1479,7 @@
   monotonic increasing. Fixes #1909.
 * mkvmerge: AVC/H.264 parser: mkvmerge will now drop timestamps from the
   source container if no frame is emitted for that timestamp. Fixes #1908.
-* mkvmerge: HEVC/h.265 parser: mkvmerge will now drop timestamps from the
+* mkvmerge: HEVC/H.265 parser: mkvmerge will now drop timestamps from the
   source container if no frame is emitted for that timestamp. Fixes the HEVC
   equivalent of the problem with AVC described in #1908.
 * mkvextract: SSA/ASS: fixed extraction when the "Format" line in the
@@ -1558,7 +1558,7 @@
 * mkvmerge: MP4 reader: the timestamps of all multiplexed tracks will now be
   0-based properly.
 * mkvmerge: MP4 reader: the DTS-to-PTS offsets given by the "ctts" atoms are
-  now applied for all tracks containing a "ctts" atom, not just H.264 & h.265
+  now applied for all tracks containing a "ctts" atom, not just H.264 & H.265
   tracks.
 
 ## Build system changes
@@ -2209,8 +2209,8 @@
   into a single entry instead of resulting in multiple entries. 2. The calculation of a
   packet's duration was wrong in certain situations. Part of the fix for #1623.
 * mkvextract: bug fix: fixed the duplication of VPS, SPS, PPS and SEI NALUs when
-  extracting h.265/HEVC tracks. See #1076 and #1621.
-* mkvmerge: bug fix: reverted the patch by Vladimír Pilný that made the h.265/HEVC not
+  extracting H.265/HEVC tracks. See #1076 and #1621.
+* mkvmerge: bug fix: reverted the patch by Vladimír Pilný that made the H.265/HEVC not
   store SEI NALUs with the frames during muxing. It was supposed to prevent having the
   SEI NALUs present twice when extracting HEVC due to some SEI information also being
   stored in the codec private data, but it dropped a lot of other SEI NALUs irrevocably.
@@ -2434,9 +2434,9 @@
   media_time is -1, second entry's segment_duration is != 0) weren't handled
   properly resulting in key frame flags being assigned to the wrong frames. Fixes
   #1547.
-* mkvmerge: bug fix: the h.265/HEVC code was writing SEI NALUs twice. This had already
+* mkvmerge: bug fix: the H.265/HEVC code was writing SEI NALUs twice. This had already
   been mentioned in #1076 but never fixed. Patch by Vladimír Pilný.
-* mkvmerge: bug fix: the h.265/HEVC code wasn't converting slice NALUs to RBSP form
+* mkvmerge: bug fix: the H.265/HEVC code wasn't converting slice NALUs to RBSP form
   before parsing it resulting in wrongly timestamped frames under certain
   conditions. This is a similar fix to the issues reported in #918 and #1548.
 * mkvmerge: bug fix: the H.264/AVC code wasn't converting slice NALUs to RBSP form
@@ -3374,7 +3374,7 @@
   probably others like #1145 or #1099.
 * MKVToolNix GUI: merge tool bug fix: fixed the column headers on the "attachments"
   tab.
-* mkvmerge: bug fix: The calculation of the width and height of h.265/HEVC video
+* mkvmerge: bug fix: The calculation of the width and height of H.265/HEVC video
   tracks did not take the conformance window (cropping) into account. Fixes #1152.
 * mkvmerge: bug fix: Fixed the value of the DocTypeVersion header field if any of the
   Matroska elements CodecDelay, DiscardPadding or SeekPreRoll is used. This is the
@@ -3432,7 +3432,7 @@
   now recognized correctly by parsing the DTS HD extensions, too. Fixes #1139.
 * mkvmerge: bug fix: Fixed handling of the BITIMAPINFOHEADER extra data size
   handling during merging and extraction for codecs like HuffYUV.
-* mkvmerge: bug fix: When appending unframed HEVC/h.265 tracks and setting the
+* mkvmerge: bug fix: When appending unframed HEVC/H.265 tracks and setting the
   default duration the second and all following source parts will use the same default
   duration as set for the first part. Fixes #1147.
 * mkvmerge: bug fix: enabled the use of tags in WebM files. Tagging elements not
@@ -3582,7 +3582,7 @@
   files. Implements #996.
 * all: enhancement: improved exception messages that can occur when reading damaged
   Matroska files to make it clearer for the user what's happening. See #1089.
-* mkvmerge: new feature: Added support for reading h.265/HEVC video tracks from MPEG
+* mkvmerge: new feature: Added support for reading H.265/HEVC video tracks from MPEG
   transport streams. Implements #995.
 
 ## Bug fixes
@@ -3594,7 +3594,7 @@
 * all: bug fix: Re-wrote the whole checksum calculation code. This lead to a fix for the
   Adler-32 checksum algorithm that was triggered under certain circumstances.
   Adler-32 is used in mkvinfo's output (e.g. in summary mode or if checksums are
-  activated), in the h.265/HEVC bitstream and TrueAudio (TTA) file headers.
+  activated), in the H.265/HEVC bitstream and TrueAudio (TTA) file headers.
 * mkvmerge: bug fix: fixed handling of HE-AACv2 with object type "parametric
   stereo".
 * mkvinfo: bug fix: track statistics: the duration (and therefore the estimated
@@ -3851,7 +3851,7 @@
 
 ## New features and enhancements
 
-* mkvmerge, mkvextract: new feature: added support for h.265/HEVC by merging the
+* mkvmerge, mkvextract: new feature: added support for H.265/HEVC by merging the
   patches from DivX/Rovi Corp. So far HEVC is only supported as elementary streams and
   read from other Matroska files.
 * mkvmerge: enhancements: AVI reader: audio chunks with obvious wrong size

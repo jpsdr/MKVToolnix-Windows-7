@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definitions for the HEVC/h.265 ES demultiplexer module
+   class definitions for the HEVC/H.265 ES demultiplexer module
 
 */
 
