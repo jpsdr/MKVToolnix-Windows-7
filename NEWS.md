@@ -11,6 +11,7 @@
 * mkvmerge: Blu-ray MPLS handling: mkvmerge will now find corresponding M2TS
   files even if the `clip_codec_identifier` playlist item field is not set to
   `M2TS` in the MPLS file. Fixes #2601.
+* all: fixed the spelling of the H.264 & H.265 codec names.
 
 
 # Version 35.0.0 "All The Love In The World" 2019-06-22
