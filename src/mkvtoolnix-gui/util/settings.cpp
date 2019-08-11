@@ -234,6 +234,20 @@ Settings::convertOldSettings() {
     reg->setValue(s_valMergeTrackPropertiesLayout, static_cast<int>(mergeUseVerticalInputLayout.toBool() ? TrackPropertiesLayout::VerticalTabWidget : TrackPropertiesLayout::HorizontalScrollArea));
 
   reg->endGroup();
+
+  // Replace default track name recognition regex valid up to 36.0.0
+  // with new default one. Empty value will be replaced with actual
+  // new default later.
+  reg->beginGroup(s_grpSettings);
+  reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
+  auto val = reg->value(s_valCustomRegex).toString();
+
+  // writtenByVersion ≤ 36.0.0  →  !(writtenByVersion > 36.0.0)
+  if (   !(version_number_t{"36"} < writtenByVersion)
+      && (val == Q("[[({.+=#-](<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]")))
+    reg->remove(s_valCustomRegex);
+  reg->endGroup();
+  reg->endGroup();
 }
 
 void

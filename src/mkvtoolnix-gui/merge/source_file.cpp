@@ -395,7 +395,7 @@ SourceFile::setupProgramMapFromProperties() {
 
 QString
 SourceFile::defaultRegexForDerivingLanguageFromFileName() {
-  return Q("[[({.+=#-](<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]");
+  return Q("(?:^|[[({.+=#-])(<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]");
 }
 
 QRegularExpression
