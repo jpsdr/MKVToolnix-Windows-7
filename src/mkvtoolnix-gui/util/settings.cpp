@@ -189,6 +189,21 @@ void
 Settings::convertOldSettings() {
   auto reg = registry();
 
+  // Read the version number used for writing the settings.
+  reg->beginGroup(s_grpInfo);
+  auto writtenByVersion = version_number_t{to_utf8(reg->value(s_valGuiVersion).toString())};
+  if (!writtenByVersion.valid)
+    writtenByVersion = version_number_t{"8.1.0"}; // 8.1.0 was the last version not writing the version number field.
+  reg->endGroup();
+
+  reg->beginGroup(s_grpDefaults);
+  if (   (writtenByVersion.compare(version_number_t{"8.1.0"}) == 0)
+      && (reg->value(s_valDefaultSubtitleCharset).toString() == Q("ISO-8859-15"))) {
+    // Fix for a bug in versions prior to 8.2.0.
+    reg->remove(s_valDefaultSubtitleCharset);
+  }
+  reg->endGroup();
+
   // mergeAlwaysAddDroppedFiles → mergeAddingAppendingFilesPolicy
   reg->beginGroup(s_grpSettings);
   auto mergeAlwaysAddDroppedFiles = reg->value(s_valMergeAlwaysAddDroppedFiles);
@@ -229,10 +244,6 @@ Settings::load() {
   auto &reg        = *regPtr;
   auto defaultFont = defaultUiFont();
   boost::optional<QVariant> enableMuxingTracksByTheseTypes;
-
-  reg.beginGroup(s_grpInfo);
-  auto guiVersion                      = reg.value(s_valGuiVersion).toString();
-  reg.endGroup();
 
   reg.beginGroup(s_grpSettings);
   m_priority                           = static_cast<ProcessPriority>(reg.value(s_valPriority, static_cast<int>(NormalPriority)).toInt());
@@ -325,7 +336,7 @@ Settings::load() {
 
   reg.endGroup();               // settings
 
-  loadDefaults(reg, guiVersion);
+  loadDefaults(reg);
   loadDerivingTrackLanguagesSettings(reg);
   loadSplitterSizes(reg);
   loadDefaultInfoJobSettings(reg);
@@ -389,8 +400,7 @@ Settings::setDefaults(boost::optional<QVariant> enableMuxingTracksByTheseTypes) 
 }
 
 void
-Settings::loadDefaults(QSettings &reg,
-                       QString const &guiVersion) {
+Settings::loadDefaults(QSettings &reg) {
   reg.beginGroup(s_grpDefaults);
   m_defaultAudioTrackLanguage          = reg.value(s_valDefaultAudioTrackLanguage,    Q("und")).toString();
   m_defaultVideoTrackLanguage          = reg.value(s_valDefaultVideoTrackLanguage,    Q("und")).toString();
@@ -398,8 +408,7 @@ Settings::loadDefaults(QSettings &reg,
   m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
   m_defaultChapterLanguage             = reg.value(s_valDefaultChapterLanguage, Q("und")).toString();
   m_defaultChapterCountry              = Util::mapToTopLevelCountryCode(reg.value(s_valDefaultChapterCountry).toString());
-  auto subtitleCharset                 = reg.value(s_valDefaultSubtitleCharset).toString();
-  m_defaultSubtitleCharset             = guiVersion.isEmpty() && (subtitleCharset == Q("ISO-8859-15")) ? Q("") : subtitleCharset; // Fix for a bug in versions prior to 8.2.0.
+  m_defaultSubtitleCharset             = reg.value(s_valDefaultSubtitleCharset).toString();
   m_defaultAdditionalMergeOptions      = reg.value(s_valDefaultAdditionalMergeOptions).toString();
   reg.endGroup();               // defaults
 }

@@ -217,7 +217,7 @@ public slots:
   void storeSplitterSizes();
 
 protected:
-  void loadDefaults(QSettings &reg, QString const &guiVersion);
+  void loadDefaults(QSettings &reg);
   void loadDerivingTrackLanguagesSettings(QSettings &reg);
   void loadSplitterSizes(QSettings &reg);
   void loadDefaultInfoJobSettings(QSettings &reg);
