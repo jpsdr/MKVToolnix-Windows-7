@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-08-10 14:36+0200\n"
+"POT-Creation-Date: 2019-08-11 22:27+0200\n"
 "PO-Revision-Date: 2018-04-11 00:40+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -4044,7 +4044,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "최초 만든 항목의 챕터 번호(&N):"
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:303
+#: src/mkvtoolnix-gui/util/settings.cpp:328
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "챕터 <NUM:2>"
@@ -5724,12 +5724,12 @@ msgstr "오류 세부 사항: %1."
 msgid "Error executing mkvmerge"
 msgstr "mkvmerge 실행 오류"
 
-#: src/input/subtitles.cpp:137
+#: src/input/subtitles.cpp:139
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
 msgstr "{0}번째 행에서 오류: SRT 타임코드 행으로 예측되지만, 또 다른 무언가를 찾았습니다. 이 파일을 중단합니다.\n"
 
-#: src/input/subtitles.cpp:128
+#: src/input/subtitles.cpp:130
 #, no-c-format
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr "{0}번째 행에서 오류: 자막 번호로 예측되는 일부 텍스트를 찾았습니다.\n"
@@ -6901,12 +6901,12 @@ msgstr "그것을 추가적인 부분으로 결합하거나 추가하고 싶으�
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "종료 이후에 시작하는 항목({0})을 무시합니다.\n"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported font from {0}"
 msgstr "{0}에서 글꼴을 가져왔습니다."
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported picture from {0}"
 msgstr "{0}에서 이미지를 가져왔습니다."
@@ -7598,7 +7598,7 @@ msgstr "타임코드 파일 '{1}'의 {0}번째 행은 모순된 데이터가 포
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "타임코드 파일 '{1}'의 {0}번째 행을 분석할 수 없습니다.\n"
 
-#: src/input/subtitles.cpp:199
+#: src/input/subtitles.cpp:201
 #, no-c-format
 msgid "Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "{0}번째 행: 음수의 타임 스탬프가 발생했습니다. 이 항목은 00:00:00.000에서 시작하도록 조정됩니다.\n"
@@ -8314,6 +8314,11 @@ msgstr "아직 시작한 작업이 없습니다"
 #, no-c-format
 msgid "No lacing"
 msgstr "묶기 없음"
+
+#: src/common/iso639.cpp:645
+#, no-c-format
+msgid "No linguistic content; Not applicable"
+msgstr ""
 
 #: src/input/r_flac.cpp:128
 #, no-c-format
@@ -9769,7 +9774,7 @@ msgstr "SSA/ASS 자막"
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS 텍스트 자막"
 
-#: src/input/subtitles.cpp:394
+#: src/input/subtitles.cpp:396
 #, no-c-format
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr ""
@@ -12490,7 +12495,7 @@ msgstr "이 요소는 현재 파일에 없습니다."
 msgid "This field is normally set to the date the file is created."
 msgstr "이 필드는 보통 파일이 만들어진 날짜로 설정됩니다."
 
-#: src/input/subtitles.cpp:168
+#: src/input/subtitles.cpp:170
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr "이 파일은 타임코드 행에 좌표가 포함되어 있습니다. 이러한 좌표는 Matroska SRT 자막 형식은 지원하지 않습니다. 좌표는 자동으로 제거됩니다.\n"
@@ -12697,7 +12702,7 @@ msgstr "이것은 발생해서는 안 됩니다. 제작자 Moritz Bunkus <moritz
 msgid "This template will be used for new chapter entries."
 msgstr "이 템플릿은 새 챕터 항목에 사용합니다."
 
-#: src/input/subtitles.cpp:512
+#: src/input/subtitles.cpp:514
 #: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
@@ -13048,6 +13053,11 @@ msgstr "USF 텍스트 자막"
 #, no-c-format
 msgid "Unable to append files"
 msgstr "파일을 결합할 수 없음"
+
+#: src/common/iso639.cpp:644
+#, no-c-format
+msgid "Undetermined"
+msgstr ""
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13662,7 +13672,7 @@ msgstr "변경된 탭 닫기 전 경고하기(&C)"
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "파일, 작업 등 기존 항목 덮어쓰기 전 경고하기(&O)"
 
-#: src/input/subtitles.cpp:211
+#: src/input/subtitles.cpp:213
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr "{0}번째 경고: 시작 시간 타임코드가 이전 항목의 타임코드보다 작습니다. 파일의 모든 항목은 시작 시간으로 정렬됩니다.\n"
@@ -14815,7 +14825,7 @@ msgstr "크기 알 수 없음"
 msgid "size {0}"
 msgstr "크기 {0}"
 
-#: src/input/subtitles.cpp:374
+#: src/input/subtitles.cpp:376
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_리더: 잘못된 형식입니다. \"[Events]\"섹션에서 \"Format\" 행을 찾을 수 없습니다."

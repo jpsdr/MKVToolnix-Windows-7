@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-08-10 14:36+0200\n"
+"POT-Creation-Date: 2019-08-11 22:27+0200\n"
 "PO-Revision-Date: 2019-06-20 11:28+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -4145,7 +4145,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "El &número del capítol de la primera entrada creada:"
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:303
+#: src/mkvtoolnix-gui/util/settings.cpp:328
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Capítol <NUM:2>"
@@ -5829,12 +5829,12 @@ msgstr "Detalls de l'error: %1."
 msgid "Error executing mkvmerge"
 msgstr "S'ha produït un error quan s'executava el «mkvmerge»"
 
-#: src/input/subtitles.cpp:137
+#: src/input/subtitles.cpp:139
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
 msgstr "Error a la línia {0}: s'esperava una línia de codi de temps SRT, però s'ha trobat quelcom més. S'està interrompent aquest fitxer.\n"
 
-#: src/input/subtitles.cpp:128
+#: src/input/subtitles.cpp:130
 #, no-c-format
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr "Error a la línia {0}: s'esperava un número de subtítol i s'ha trobat algun text.\n"
@@ -7007,12 +7007,12 @@ msgstr "Si els voleu annexar o afegir com a parts addicionals, haureu de selecci
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "S'ignora una entrada que comença després del final ({0}).\n"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported font from {0}"
 msgstr "Tipus de lletra importat des de {0}"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported picture from {0}"
 msgstr "Imatge importada des de {0}"
@@ -7705,7 +7705,7 @@ msgstr "La línia {0} del fitxer «{1}» pel codi de temps conté dades inconsis
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "No es pot analitzar la línia {0} del fitxer «{1}» pel codi de temps.\n"
 
-#: src/input/subtitles.cpp:199
+#: src/input/subtitles.cpp:201
 #, no-c-format
 msgid "Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "Línia {0}: S'ha trobat una marca de temps negativa. L'entrada serà ajustada a començar des de «00:00:00.000».\n"
@@ -8421,6 +8421,11 @@ msgstr "Encara no s'ha iniciat la tasca"
 #, no-c-format
 msgid "No lacing"
 msgstr "Sense lligam"
+
+#: src/common/iso639.cpp:645
+#, no-c-format
+msgid "No linguistic content; Not applicable"
+msgstr ""
 
 #: src/input/r_flac.cpp:128
 #, no-c-format
@@ -9886,7 +9891,7 @@ msgstr "Subtítols SSA/ASS"
 msgid "SSA/ASS text subtitles"
 msgstr "Subtítols de text SSA/ASS"
 
-#: src/input/subtitles.cpp:394
+#: src/input/subtitles.cpp:396
 #, no-c-format
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr "SSA/ASS: Se saltarà la següent línia quan una de les marques de temps sigui inferior que 0, o la marca de temps final sigui menor que la marca de temps d'inici: {0}\n"
@@ -12614,7 +12619,7 @@ msgstr "Aquest element no està present al fitxer."
 msgid "This field is normally set to the date the file is created."
 msgstr "Aquest camp s'estableix normalment a la data en què es va crear el fitxer."
 
-#: src/input/subtitles.cpp:168
+#: src/input/subtitles.cpp:170
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr "Aquest fitxer conté les coordenades a les línies del codi de temps. Algunes coordenades no són admeses pel format de subtítols SRT al Matroska. Les coordenades seran suprimides automàticament.\n"
@@ -12821,7 +12826,7 @@ msgstr "Això no hauria d'haver succeït. Si us plau, contacteu amb l'autor, Mor
 msgid "This template will be used for new chapter entries."
 msgstr "Aquesta plantilla s'usarà per a les noves entrades de capítols."
 
-#: src/input/subtitles.cpp:512
+#: src/input/subtitles.cpp:514
 #: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
@@ -13172,6 +13177,11 @@ msgstr "Subtítols de text USF"
 #, no-c-format
 msgid "Unable to append files"
 msgstr "No s'han pogut annexar els fitxers"
+
+#: src/common/iso639.cpp:644
+#, no-c-format
+msgid "Undetermined"
+msgstr ""
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13786,7 +13796,7 @@ msgstr "Avisa abans de &tancar pestanyes amb modificacions"
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Demana abans de s&obreescriure quelcom (fitxers, tasques, etc.)"
 
-#: src/input/subtitles.cpp:211
+#: src/input/subtitles.cpp:213
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr "Avís a la línia {0}: El codi de temps inicial és més petit que el de l'entrada anterior. Totes les entrades d'aquest fitxer seran ordenades pel seu temps d'inici.\n"
@@ -14940,7 +14950,7 @@ msgstr "mida desconeguda"
 msgid "size {0}"
 msgstr "mida {0}"
 
-#: src/input/subtitles.cpp:374
+#: src/input/subtitles.cpp:376
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Format no vàlid. No es troba la línia «Format» a la secció «[Events]»."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-08-10 14:36+0200\n"
+"POT-Creation-Date: 2019-08-11 22:27+0200\n"
 "PO-Revision-Date: 2018-12-04 16:49+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -4093,7 +4093,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "Розділ &номер першого створеного запису:"
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:303
+#: src/mkvtoolnix-gui/util/settings.cpp:328
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Розділ <NUM:2>"
@@ -5775,12 +5775,12 @@ msgstr "Деталі обробки винятку: %1."
 msgid "Error executing mkvmerge"
 msgstr "Помилка виконання mkvmerge"
 
-#: src/input/subtitles.cpp:137
+#: src/input/subtitles.cpp:139
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
 msgstr "Помилка в рядку {0}: очікувався тайм-код в SRT, але знайдено було щось інше. Переривання обробки даного файлу.\n"
 
-#: src/input/subtitles.cpp:128
+#: src/input/subtitles.cpp:130
 #, no-c-format
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr "Помилка в рядку {0}: очікувався номер рядка субтитрів, а знайдено деякий текст.\n"
@@ -6954,12 +6954,12 @@ msgstr "Якщо ви хочете додати чи приєднати їх я�
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "Ігнорування запису, який починається після свого закінчення ({0}).\n"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported font from {0}"
 msgstr "Імпортовано шрифтів з {0}"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported picture from {0}"
 msgstr "Імпортовано зображення з {0}"
@@ -7656,7 +7656,7 @@ msgstr "Рядок {0} тайм-код файлу '{1}' містить несу�
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "Рядок {0} тайм-код файлу '{1}' не може бути оброблений.\n"
 
-#: src/input/subtitles.cpp:199
+#: src/input/subtitles.cpp:201
 #, no-c-format
 msgid "Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "Рядок {0}: Зафіксовано від'ємну мітку часу. Значення буде скориговано так, щоб починатися з 00:00:00.000.\n"
@@ -8377,6 +8377,11 @@ msgstr "Жодне завдання не було ще розпочате"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:174
 #, no-c-format
 msgid "No lacing"
+msgstr ""
+
+#: src/common/iso639.cpp:645
+#, no-c-format
+msgid "No linguistic content; Not applicable"
 msgstr ""
 
 #: src/input/r_flac.cpp:128
@@ -9849,7 +9854,7 @@ msgstr "субтитри SSA/ASS"
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS текстові субтитри"
 
-#: src/input/subtitles.cpp:394
+#: src/input/subtitles.cpp:396
 #, no-c-format
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr ""
@@ -12613,7 +12618,7 @@ msgstr "Цей елемент поки не присутній у файлі."
 msgid "This field is normally set to the date the file is created."
 msgstr ""
 
-#: src/input/subtitles.cpp:168
+#: src/input/subtitles.cpp:170
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr "Цей файл містить координати в рядках тайм-кодів. Такі координати не підтримуються Matroska SRT форматом субтитрів. Координати будуть автоматично видалені.\n"
@@ -12820,7 +12825,7 @@ msgstr "Цього не повинно було статися. Будь лас�
 msgid "This template will be used for new chapter entries."
 msgstr "Цей шаблон буде використовуватися для нових розділів."
 
-#: src/input/subtitles.cpp:512
+#: src/input/subtitles.cpp:514
 #: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
@@ -13173,6 +13178,11 @@ msgstr "USF текстові субтитри"
 #, no-c-format
 msgid "Unable to append files"
 msgstr "Неможливо об'єднати файли"
+
+#: src/common/iso639.cpp:644
+#, no-c-format
+msgid "Undetermined"
+msgstr ""
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13787,7 +13797,7 @@ msgstr "Попереджати перед з&акриттям про зміне�
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Питати перед &перезаписом існуючих елементів (файлів, завдань і т.д.)"
 
-#: src/input/subtitles.cpp:211
+#: src/input/subtitles.cpp:213
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr "Попередження для рядку {0}: початковий тайм-код менше, ніж для попереднього запису. Усі записи цього файлу будуть відсортовані за часом їх початку.\n"
@@ -14940,7 +14950,7 @@ msgstr "розмір невідомий"
 msgid "size {0}"
 msgstr "розмір {0}"
 
-#: src/input/subtitles.cpp:374
+#: src/input/subtitles.cpp:376
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Невірний формат. Не знайдено рядок \"Format\" у секції \"[Events]\"."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-08-10 14:36+0200\n"
+"POT-Creation-Date: 2019-08-11 22:27+0200\n"
 "PO-Revision-Date: 2018-12-04 16:47+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -4080,7 +4080,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "&Lehenik sortutako sarreraren atal zenbakia:"
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:303
+#: src/mkvtoolnix-gui/util/settings.cpp:328
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Atala <ZBK:2>"
@@ -5761,12 +5761,12 @@ msgstr "Akatsaren xehetasunak: %1."
 msgid "Error executing mkvmerge"
 msgstr "Akatsa mkvmerge exekutatzerakoan"
 
-#: src/input/subtitles.cpp:137
+#: src/input/subtitles.cpp:139
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
 msgstr "Akatsa {0} lerroan: SRT denbora-kode lerro bat itxaroten zen baina beste zerbait gehiago aurkitu da. Agiria uzten.\n"
 
-#: src/input/subtitles.cpp:128
+#: src/input/subtitles.cpp:130
 #, no-c-format
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr "Akatsa {0} lerroan: azpidatzi zenbaki bat itxaroten zen eta idazki zati bat aurkitu da.\n"
@@ -6939,12 +6939,12 @@ msgstr "Eranstea edo zati gehigarri bezala gehitzea nahi badituzu zein iturburu 
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "Ezikusten amaiera ondoren hasten den sarrera bat ({0}).\n"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported font from {0}"
 msgstr "Hizkia hemendik inportaturik: {0}"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported picture from {0}"
 msgstr "Irudia hemendik inportaturik: {0}"
@@ -7637,7 +7637,7 @@ msgstr "'{1}' denbora-kode agiriko {0} lerroak datu bateraezinak ditu (adib. has
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "'{1}' denbora-kode agiriko {0} lerroa ezin da aztertu.\n"
 
-#: src/input/subtitles.cpp:199
+#: src/input/subtitles.cpp:201
 #, no-c-format
 msgid "Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "{0} lerroa: denbora-irarketa negatiboa aurkitu da. Sarrera 00:00:00.000 hasteko zehaztuko da.\n"
@@ -8353,6 +8353,11 @@ msgstr "Ez da lanik hasi oraindik"
 #, no-c-format
 msgid "No lacing"
 msgstr "Lotzerik gabe"
+
+#: src/common/iso639.cpp:645
+#, no-c-format
+msgid "No linguistic content; Not applicable"
+msgstr ""
 
 #: src/input/r_flac.cpp:128
 #, no-c-format
@@ -9816,7 +9821,7 @@ msgstr "SSA/ASS azpidatziak"
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS idazki azpidatziak"
 
-#: src/input/subtitles.cpp:394
+#: src/input/subtitles.cpp:396
 #, no-c-format
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr ""
@@ -12558,7 +12563,7 @@ msgstr "Elementu hau orain ez dago agirian."
 msgid "This field is normally set to the date the file is created."
 msgstr "Eremu hau arrunt agiria sortutako eguna ezartzeko erabiltzen da."
 
-#: src/input/subtitles.cpp:168
+#: src/input/subtitles.cpp:170
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr "Agiri honek koordenadak ditu denbora-kodeetan. Koordenada batzuk ez daude sostengaturik Matroska SRT azpidatzi heuskarrian. Koordenadak berezgaitasunez kenduko dira.\n"
@@ -12765,7 +12770,7 @@ msgstr "Hau ez litzake gertatu behar. Mesedez jarri harremanetan egilearekin, Mo
 msgid "This template will be used for new chapter entries."
 msgstr "Eredu hau atal sarrera berrientzat erabiliko da."
 
-#: src/input/subtitles.cpp:512
+#: src/input/subtitles.cpp:514
 #: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
@@ -13116,6 +13121,11 @@ msgstr "USF idazki azpidatziak"
 #, no-c-format
 msgid "Unable to append files"
 msgstr "Ezinezkoa agiriak eranstea"
+
+#: src/common/iso639.cpp:644
+#, fuzzy, no-c-format
+msgid "Undetermined"
+msgstr "und (Zehaztugabea)"
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13730,7 +13740,7 @@ msgstr "Ohartarazi aldatutako hegatsak it&xi aurretik"
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Ohartarazi dauden gaiak gaini&datzi aurretik (agiriak, lanak, etab.)"
 
-#: src/input/subtitles.cpp:211
+#: src/input/subtitles.cpp:213
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr "Kontuz {0} lerroan: Hasiera denbora-kodea aurreko sarrera baino txikiagoa da. Agiri honetatiko sarrera guztiak beren hasiera denboraren arabera antolatuko dira.\n"
@@ -14883,7 +14893,7 @@ msgstr "neurri ezezaguna"
 msgid "size {0}"
 msgstr "neurria {0}"
 
-#: src/input/subtitles.cpp:374
+#: src/input/subtitles.cpp:376
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Heuskarri baliogabea. Ezinezkoa aurkitzea \"Format\" lerroa \"[Events]\" atalean."
@@ -19399,9 +19409,6 @@ msgstr "– Ezarri ezer ez bezala –"
 
 #~ msgid "uncompressed"
 #~ msgstr "konprimitugabea"
-
-#~ msgid "und (Undetermined)"
-#~ msgstr "und (Zehaztugabea)"
 
 #~ msgid "up"
 #~ msgstr "igo"

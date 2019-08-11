@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-08-10 14:36+0200\n"
+"POT-Creation-Date: 2019-08-11 22:27+0200\n"
 "PO-Revision-Date: 2019-03-18 17:53+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -4078,7 +4078,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "B&roj prve napravljene stavke:"
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:303
+#: src/mkvtoolnix-gui/util/settings.cpp:328
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Chapter <NUM:2>"
@@ -5760,12 +5760,12 @@ msgstr "Detalji greške: %1."
 msgid "Error executing mkvmerge"
 msgstr "Greška prilikom izvršavanja mkvmerge programa"
 
-#: src/input/subtitles.cpp:137
+#: src/input/subtitles.cpp:139
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
 msgstr "Greška u liniji {0}: očekivao SRT vremensku oznaku ali pronašao nešto drugo. Obrada fajla prekinuta.\n"
 
-#: src/input/subtitles.cpp:128
+#: src/input/subtitles.cpp:130
 #, no-c-format
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr "Greška u liniji {0}: očekivao broj titla a pronašao neki tekst.\n"
@@ -6939,12 +6939,12 @@ msgstr "Ako želite da ih pripojite ili dodate kao dodatne delove morate da izab
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "Ignorišem unos koji počinje nakon što se završi ({0}).\n"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported font from {0}"
 msgstr "Uvezen font iz {0}"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported picture from {0}"
 msgstr "Uvezena slika iz {0}"
@@ -7638,7 +7638,7 @@ msgstr "Linija {0} iz fajla sa vremenskom oznakom '{1}' sadrži nedosledan podat
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "Linija {0} iz fajla sa vremenskom oznakom '{1}' ne može biti raščlanjena.\n"
 
-#: src/input/subtitles.cpp:199
+#: src/input/subtitles.cpp:201
 #, no-c-format
 msgid "Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "Linija {0}: Naišao na negativnu vremensku oznaku. Unos će biti doteran tako da počne od 00:00:00.000.\n"
@@ -8360,6 +8360,11 @@ msgstr "Nijedan zadatak još nije započet"
 #, no-c-format
 msgid "No lacing"
 msgstr "Bez uvezivanja"
+
+#: src/common/iso639.cpp:645
+#, no-c-format
+msgid "No linguistic content; Not applicable"
+msgstr ""
 
 #: src/input/r_flac.cpp:128
 #, no-c-format
@@ -9831,7 +9836,7 @@ msgstr "SSA/ASS titlovi"
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS tekstualni titlovi"
 
-#: src/input/subtitles.cpp:394
+#: src/input/subtitles.cpp:396
 #, no-c-format
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr ""
@@ -12578,7 +12583,7 @@ msgstr "Ovaj element trenutno nije prisutan u fajlu."
 msgid "This field is normally set to the date the file is created."
 msgstr "U ovom polju se obično postavlja datum kada je fajl napravljen."
 
-#: src/input/subtitles.cpp:168
+#: src/input/subtitles.cpp:170
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr "Ovaj fajl sadrži koordinate u linijama vremenskih oznaka. Takve koordinate nisu podržane u Matroska SRT formatu titlova. Koordinate će biti automatski uklonjene.\n"
@@ -12785,7 +12790,7 @@ msgstr "Ovo nije trebalo da se desi. Molim vas da kontaktirate autora Morica Bun
 msgid "This template will be used for new chapter entries."
 msgstr "Ovaj obrazac će biti korišćen za nove stavke poglavlja."
 
-#: src/input/subtitles.cpp:512
+#: src/input/subtitles.cpp:514
 #: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
@@ -13136,6 +13141,11 @@ msgstr "USF tekstualni titlovi"
 #, no-c-format
 msgid "Unable to append files"
 msgstr "Ne mogu da spojim fajlove"
+
+#: src/common/iso639.cpp:644
+#, no-c-format
+msgid "Undetermined"
+msgstr ""
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13750,7 +13760,7 @@ msgstr "Upozori pre &zatvaranja izmenjenih tabova"
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Upozori pre p&repisivanja preko postojećih stvari (fajlovi, zadaci itd.)"
 
-#: src/input/subtitles.cpp:211
+#: src/input/subtitles.cpp:213
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr "Upozorenje u liniji {0}: Početna vremenska oznaka je manja od one iz prethodnog zapisa. Svi zapisi iz ovog fajla će biti sortirani po njihovom početnom vremenu.\n"
@@ -14903,7 +14913,7 @@ msgstr "veličina je nepoznata"
 msgid "size {0}"
 msgstr "veličina {0}"
 
-#: src/input/subtitles.cpp:374
+#: src/input/subtitles.cpp:376
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Nevažeći format. Ne mogu naći \"Format\" liniju u \"[Events]\" sekciji."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-08-10 14:36+0200\n"
+"POT-Creation-Date: 2019-08-11 22:27+0200\n"
 "PO-Revision-Date: 2018-02-07 15:24+0000\n"
 "Last-Translator: Daniel <danny3@tutanota.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ro/)\n"
@@ -3878,7 +3878,7 @@ msgid "Chapter &number of first created entry:"
 msgstr ""
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:303
+#: src/mkvtoolnix-gui/util/settings.cpp:328
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Capitol <NUM:2>"
@@ -5560,12 +5560,12 @@ msgstr "Detalii eroare: %1."
 msgid "Error executing mkvmerge"
 msgstr "Eroare la executarea mkvmerge"
 
-#: src/input/subtitles.cpp:137
+#: src/input/subtitles.cpp:139
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
 msgstr ""
 
-#: src/input/subtitles.cpp:128
+#: src/input/subtitles.cpp:130
 #, no-c-format
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr ""
@@ -6739,12 +6739,12 @@ msgstr ""
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr ""
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported font from {0}"
 msgstr "Font importat din {0}"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported picture from {0}"
 msgstr "Imagine importată din {0}"
@@ -7438,7 +7438,7 @@ msgstr ""
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr ""
 
-#: src/input/subtitles.cpp:199
+#: src/input/subtitles.cpp:201
 #, no-c-format
 msgid "Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr ""
@@ -8153,6 +8153,11 @@ msgstr "Nicio activitate deocamdată"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:174
 #, no-c-format
 msgid "No lacing"
+msgstr ""
+
+#: src/common/iso639.cpp:645
+#, no-c-format
+msgid "No linguistic content; Not applicable"
 msgstr ""
 
 #: src/input/r_flac.cpp:128
@@ -9622,7 +9627,7 @@ msgstr "Subtitluri SSA/ASS"
 msgid "SSA/ASS text subtitles"
 msgstr "Subtitluri text SSA/ASS"
 
-#: src/input/subtitles.cpp:394
+#: src/input/subtitles.cpp:396
 #, no-c-format
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr ""
@@ -12356,7 +12361,7 @@ msgstr "Acest element nu este momentan prezent în fișier."
 msgid "This field is normally set to the date the file is created."
 msgstr ""
 
-#: src/input/subtitles.cpp:168
+#: src/input/subtitles.cpp:170
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr ""
@@ -12563,7 +12568,7 @@ msgstr ""
 msgid "This template will be used for new chapter entries."
 msgstr "Acest șablon va fi folosit pentru intrări capitole noi."
 
-#: src/input/subtitles.cpp:512
+#: src/input/subtitles.cpp:514
 #: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
@@ -12914,6 +12919,11 @@ msgstr "Subtitluri text USF"
 #, no-c-format
 msgid "Unable to append files"
 msgstr "Imposibil de anexat fișierele"
+
+#: src/common/iso639.cpp:644
+#, no-c-format
+msgid "Undetermined"
+msgstr ""
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13528,7 +13538,7 @@ msgstr "Avertizează înainte de în&chiderea etichetelor cu modificări"
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Avertizează înainte de &suprascrierea elementelor existente (fișiere, activități etc.)"
 
-#: src/input/subtitles.cpp:211
+#: src/input/subtitles.cpp:213
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr "Avertizare pe linia {0}: Codul de timp de început este mai mic decât al intrării precedente. Toate intrările din acest fișier vor fi sortate după timpul lor de început.\n"
@@ -14677,7 +14687,7 @@ msgstr "dimensiune necunoscută"
 msgid "size {0}"
 msgstr "dimensiune {0}"
 
-#: src/input/subtitles.cpp:374
+#: src/input/subtitles.cpp:376
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Format nevalid. Nu s-a putut găsi linia „Format” în secțiunea „[Evenimente]”."

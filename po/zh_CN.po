@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-08-10 14:36+0200\n"
+"POT-Creation-Date: 2019-08-11 22:27+0200\n"
 "PO-Revision-Date: 2019-06-20 18:11+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -4012,7 +4012,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "首个条目的章节编号(&N):"
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:303
+#: src/mkvtoolnix-gui/util/settings.cpp:328
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "第 <NUM:2> 章"
@@ -5692,12 +5692,12 @@ msgstr "错误细节: %1。"
 msgid "Error executing mkvmerge"
 msgstr "执行 mkvmerge 出错"
 
-#: src/input/subtitles.cpp:137
+#: src/input/subtitles.cpp:139
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
 msgstr "第 {0} 行出错: 应为 SRT 时间戳，但该行内容不符合。中止处理该文件。\n"
 
-#: src/input/subtitles.cpp:128
+#: src/input/subtitles.cpp:130
 #, no-c-format
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr "第 {0} 行出错: 应为字幕编号，但该行含有文本。\n"
@@ -6869,12 +6869,12 @@ msgstr "如果想要追加（作为其余部分添加），请选择追加到哪
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "忽略了一个起始时间在终止时间之后的条目 ({0})。\n"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported font from {0}"
 msgstr "从 {0} 导入的字体"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported picture from {0}"
 msgstr "从 {0} 导入的图片"
@@ -7566,7 +7566,7 @@ msgstr "时间戳文件 '{1}' 的第 {0} 行包含不相容的数据 (如起始�
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "无法解析时间戳文件 '{1}' 的第 {0} 行。\n"
 
-#: src/input/subtitles.cpp:199
+#: src/input/subtitles.cpp:201
 #, no-c-format
 msgid "Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "第 {0} 行: 遇到负的时间戳。此条将被调整为从 00:00:00.000 起始。\n"
@@ -8282,6 +8282,11 @@ msgstr "尚未启动任务"
 #, no-c-format
 msgid "No lacing"
 msgstr "无紧缩"
+
+#: src/common/iso639.cpp:645
+#, no-c-format
+msgid "No linguistic content; Not applicable"
+msgstr ""
 
 #: src/input/r_flac.cpp:128
 #, no-c-format
@@ -9736,7 +9741,7 @@ msgstr "SSA/ASS 字幕"
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS 文本字幕"
 
-#: src/input/subtitles.cpp:394
+#: src/input/subtitles.cpp:396
 #, no-c-format
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr "SSA/ASS: 将跳过以下行，因为时间戳小于 0，或终止时间戳早于起始时间戳: {0}\n"
@@ -12457,7 +12462,7 @@ msgstr "文件中目前不存在此元素。"
 msgid "This field is normally set to the date the file is created."
 msgstr "该字段通常会设为文件创建的日期。"
 
-#: src/input/subtitles.cpp:168
+#: src/input/subtitles.cpp:170
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr "此文件的时间戳行中含有坐标信息。Matroska SRT 字幕格式不支持此类坐标。这些信息将被自动移除。\n"
@@ -12664,7 +12669,7 @@ msgstr "这不该发生。请联系作者 Moritz Bunkus <moritz@bunkus.org>，�
 msgid "This template will be used for new chapter entries."
 msgstr "该模板会使用在新建的章节条目中。"
 
-#: src/input/subtitles.cpp:512
+#: src/input/subtitles.cpp:514
 #: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
@@ -13015,6 +13020,11 @@ msgstr "USF 文本字幕"
 #, no-c-format
 msgid "Unable to append files"
 msgstr "无法追加文件"
+
+#: src/common/iso639.cpp:644
+#, no-c-format
+msgid "Undetermined"
+msgstr ""
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13629,7 +13639,7 @@ msgstr "关闭已修改的标签页前警告(&C)"
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "覆盖已有项目 (文件、任务等) 前警告(&O)"
 
-#: src/input/subtitles.cpp:211
+#: src/input/subtitles.cpp:213
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr "第 {0} 行: 起始时间早于前一条的起始时间。此文件中的所有条目都将按起始时间重新排列。\n"
@@ -14782,7 +14792,7 @@ msgstr "大小未知"
 msgid "size {0}"
 msgstr "大小 {0}"
 
-#: src/input/subtitles.cpp:374
+#: src/input/subtitles.cpp:376
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: 无效格式。“[Events]”段中未找到“Format”行。"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-08-10 14:36+0200\n"
+"POT-Creation-Date: 2019-08-11 22:27+0200\n"
 "PO-Revision-Date: 2019-04-12 12:04+0200\n"
 "Last-Translator: René Maassen <bmom43@hotmail.com>\n"
 "Language-Team: \n"
@@ -4076,7 +4076,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "Hoofdstukken aa&ntallen van eerst gecreëerde ingang:"
 
 #: src/common/chapters/chapters.cpp:46
-#: src/mkvtoolnix-gui/util/settings.cpp:303
+#: src/mkvtoolnix-gui/util/settings.cpp:328
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Hoofdstuk <NUM:2>"
@@ -5757,12 +5757,12 @@ msgstr "Fout details: %1."
 msgid "Error executing mkvmerge"
 msgstr "Fout bij uitvoeren mkvmerge"
 
-#: src/input/subtitles.cpp:137
+#: src/input/subtitles.cpp:139
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
 msgstr "Fout in regel {0}: verwachtte een SRT tijd code maar vond iets anders. Breek dat bestand af.\n"
 
-#: src/input/subtitles.cpp:128
+#: src/input/subtitles.cpp:130
 #, no-c-format
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr "Fout in regel {0}: verwachtte een ondertitel nummer maar vond een tekst.\n"
@@ -6935,12 +6935,12 @@ msgstr "Als u deze als extra onderdelen wilt bijvoegen of toevoegen, moet u sele
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "Negeer een ingang dat begint voordat het eindigt ({0}).\n"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported font from {0}"
 msgstr "Geïmporteerde letter van {0}"
 
-#: src/input/subtitles.cpp:550
+#: src/input/subtitles.cpp:552
 #, no-c-format
 msgid "Imported picture from {0}"
 msgstr "Geïmporteerd plaatje van {0}"
@@ -7633,7 +7633,7 @@ msgstr "Regel {0} van het tijd code bestand '{1}' bevat onsamenhangende data (b.
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "Regel {0} van het tijd code bestand '{1}' kon niet ontleed worden.\n"
 
-#: src/input/subtitles.cpp:199
+#: src/input/subtitles.cpp:201
 #, no-c-format
 msgid "Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"
 msgstr "Regel {0}: Negatieve tijdwaarde tegengekomen. De ingang wordt bijgesteld naar start vanaf 00:00:00.000.\n"
@@ -8349,6 +8349,11 @@ msgstr "Nog géén taak gestart"
 #, no-c-format
 msgid "No lacing"
 msgstr "Niet rijgen"
+
+#: src/common/iso639.cpp:645
+#, no-c-format
+msgid "No linguistic content; Not applicable"
+msgstr ""
 
 #: src/input/r_flac.cpp:128
 #, no-c-format
@@ -9812,7 +9817,7 @@ msgstr "SSA/ASS ondertiteling"
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS tekst ondertiteling"
 
-#: src/input/subtitles.cpp:394
+#: src/input/subtitles.cpp:396
 #, no-c-format
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr "SSA/ASS: De volgende regel wordt overgeslagen omdat een van de tijdstempels kleiner is dan 0, of het eindtijdstempel kleiner is dan het starttijdstempel: {0}\n"
@@ -12542,7 +12547,7 @@ msgstr "Dit element is niet aanwezig in het bestand."
 msgid "This field is normally set to the date the file is created."
 msgstr "Dit veld is normaal ingesteld op de datum waarop het bestand is aangemaakt."
 
-#: src/input/subtitles.cpp:168
+#: src/input/subtitles.cpp:170
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr "Dit bestand bevat coördinaten in de tijd code regels. Zulke coördinaten worden niet ondersteund door het Matroska SRT ondertitel formaat. De coördinaten worden automatisch verwijderd.\n"
@@ -12749,7 +12754,7 @@ msgstr "Dit zou niet mogen gebeuren. Neem a.u.b. contact op met de auteur Moritz
 msgid "This template will be used for new chapter entries."
 msgstr "Dit sjabloon wordt gebruikt voor nieuwe hoofdstuk ingangen."
 
-#: src/input/subtitles.cpp:512
+#: src/input/subtitles.cpp:514
 #: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
@@ -13100,6 +13105,11 @@ msgstr "USF tekst ondertiteling"
 #, no-c-format
 msgid "Unable to append files"
 msgstr "Onmogelijk bestanden bij te voegen"
+
+#: src/common/iso639.cpp:644
+#, no-c-format
+msgid "Undetermined"
+msgstr ""
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13714,7 +13724,7 @@ msgstr "Waars&chuw voor het afbreken van gewijzigde tabs"
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Waarschuwen voordat er bestaande items overschreven worden (bestanden, taken etc.)"
 
-#: src/input/subtitles.cpp:211
+#: src/input/subtitles.cpp:213
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
 msgstr "Waarschuwing in regel {0}: De start tijd code is kleiner dan de vorige ingaven. Alle ingangen van dit bestand worden gesorteerd op hun start tijd.\n"
@@ -14867,7 +14877,7 @@ msgstr "grootte onbekend"
 msgid "size {0}"
 msgstr "grootte {0}"
 
-#: src/input/subtitles.cpp:374
+#: src/input/subtitles.cpp:376
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Ongeldig formaat. Kon niet vinden \"Format\" regel in de \"[Events]\" sectie."
