@@ -233,7 +233,7 @@ App::initializeIso639Languages() {
 
   for (auto const &language : g_iso639_languages) {
     auto languageCode = Q(language.iso639_2_code);
-    auto description  = Q("%1 (%2)").arg(Q(language.english_name)).arg(languageCode);
+    auto description  = Q("%1 (%2)").arg(Q(gettext(language.english_name.c_str()))).arg(languageCode);
     auto isCommon     = cfg.m_oftenUsedLanguages.indexOf(languageCode) != -1;
 
     s_iso639Languages.emplace_back(description, languageCode);

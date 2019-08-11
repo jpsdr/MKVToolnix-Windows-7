@@ -538,7 +538,7 @@ list_iso639_languages() {
   size_t longest[3]   = { get_width_in_em(w_col1), get_width_in_em(w_col2), get_width_in_em(w_col3) };
 
   for (auto &lang : g_iso639_languages) {
-    longest[0] = std::max(longest[0], get_width_in_em(to_wide(lang.english_name)));
+    longest[0] = std::max(longest[0], get_width_in_em(to_wide(gettext(lang.english_name.c_str()))));
     longest[1] = std::max(longest[1], get_width_in_em(to_wide(lang.iso639_2_code)));
     longest[2] = std::max(longest[2], get_width_in_em(to_wide(lang.iso639_1_code)));
   }
@@ -547,7 +547,7 @@ list_iso639_languages() {
   mxinfo(std::wstring(longest[0] + 1, L'-') + L'+' + std::wstring(longest[1] + 2, L'-') + L'+' + std::wstring(longest[2] + 1, L'-') + L"\n");
 
   for (auto &lang : g_iso639_languages) {
-    std::wstring english = to_wide(lang.english_name);
+    std::wstring english = to_wide(gettext(lang.english_name.c_str()));
     std::wstring code2   = to_wide(lang.iso639_2_code);
     std::wstring code1   = to_wide(lang.iso639_1_code);
     mxinfo(FILL(english, 0) + L" | " + FILL(code2, 1) + L" | " + FILL(code1, 2) + L"\n");
@@ -637,3 +637,9 @@ map_to_iso639_2_code(std::string const &s,
 
   return -1;
 }
+
+// Make the following two strings translatable:
+#undef Y
+#define Y(x)
+Y("Undetermined")
+Y("No linguistic content; Not applicable")
