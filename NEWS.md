@@ -1,3 +1,12 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: the list of often used languages now contains those from
+  Wikipedia's "List of languages by native speakers" by default. Also by
+  default only those languages will be shown in the language drop-down boxes.
+
+
 # Version 36.0.0 "Is That Jazz?" 2019-08-10
 
 ## New features and enhancements

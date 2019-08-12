@@ -271,7 +271,7 @@ Settings::load() {
   m_oftenUsedCountries                 = reg.value(s_valOftenUsedCountries).toStringList();
   m_oftenUsedCharacterSets             = reg.value(s_valOftenUsedCharacterSets).toStringList();
 
-  m_oftenUsedLanguagesOnly             = reg.value(s_valOftenUsedLanguagesOnly,     false).toBool();;
+  m_oftenUsedLanguagesOnly             = reg.value(s_valOftenUsedLanguagesOnly,     true).toBool();;
   m_oftenUsedCountriesOnly             = reg.value(s_valOftenUsedCountriesOnly,     false).toBool();;
   m_oftenUsedCharacterSetsOnly         = reg.value(s_valOftenUsedCharacterSetsOnly, false).toBool();;
 
