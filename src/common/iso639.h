@@ -26,5 +26,3 @@ int map_to_iso639_2_code(std::string const &s, bool allow_short_english_names = 
 bool is_valid_iso639_2_code(std::string const &s);
 std::string const &map_iso639_2_to_iso639_1(std::string const &iso639_2_code);
 void list_iso639_languages();
-bool is_popular_language(std::string const &lang);
-bool is_popular_language_code(std::string const &code);

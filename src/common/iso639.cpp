@@ -560,17 +560,6 @@ map_iso639_2_to_iso639_1(std::string const &iso639_2_code) {
   return (lang != g_iso639_languages.end()) ? lang->iso639_1_code : empty_string;
 }
 
-bool
-is_popular_language(std::string const &language) {
-  static std::vector<std::string> s_popular_languages = { "Chinese", "Dutch", "English", "Finnish", "French", "German", "Italian", "Japanese", "Norwegian", "Portuguese", "Russian", "Spanish", "Spanish; Castilian", "Swedish" };
-  return brng::find(s_popular_languages, language) != s_popular_languages.end();
-}
-
-bool
-is_popular_language_code(std::string const &code) {
-  return brng::find(g_popular_language_codes, code) != g_popular_language_codes.end();
-}
-
 /** \brief Map a string to a ISO 639-2 language code
 
    Searches the array of ISO 639 codes. If \c s is a valid ISO 639-2
