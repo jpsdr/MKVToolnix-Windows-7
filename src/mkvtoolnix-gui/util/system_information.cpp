@@ -9,6 +9,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QSysInfo>
 
 #include "common/fs_sys_helpers.h"
 #include "common/version.h"
@@ -95,6 +96,7 @@ gatherOperatingSystemInfo(QStringList &info) {
 
   info << Q("* Name: %1").arg(osName);
   info << Q("* Version: %1").arg(osVersion.isEmpty() ? Q("unknown") : osVersion);
+  info << Q("* Pretty name: %1").arg(QSysInfo::prettyProductName());
 }
 
 void
@@ -128,6 +130,7 @@ gatherQtInfo(QStringList &info) {
   info << Q("") << Q("# Qt") << Q("");
 
   info << Q("* Version: %1.%2.%3").arg((QT_VERSION >> 16) & 0xff).arg((QT_VERSION >> 8) & 0xff).arg(QT_VERSION & 0xff);
+  info << Q("* Build ABI: %1").arg(QSysInfo::buildAbi());
 
   info << Q("") << Q("## Environment variables") << Q("");
 
