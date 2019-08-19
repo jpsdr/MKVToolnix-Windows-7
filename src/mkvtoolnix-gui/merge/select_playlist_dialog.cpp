@@ -126,7 +126,7 @@ public:
 
 PlaylistItem::PlaylistItem(unsigned int order,
                            QFileInfo const &fileInfo)
-  : QTreeWidgetItem{ QStringList{} << QString::number(order) << fileInfo.fileName() << fileInfo.path() }
+  : QTreeWidgetItem{ QStringList{} << QString::number(order) << fileInfo.fileName() << QDir::toNativeSeparators(fileInfo.path()) }
   , m_order{order}
   , m_fileName{fileInfo.fileName()}
   , m_path{fileInfo.path()}
