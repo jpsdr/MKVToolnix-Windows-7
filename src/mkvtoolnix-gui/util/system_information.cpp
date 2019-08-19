@@ -132,6 +132,14 @@ gatherQtInfo(QStringList &info) {
   info << Q("* Version: %1.%2.%3").arg((QT_VERSION >> 16) & 0xff).arg((QT_VERSION >> 8) & 0xff).arg(QT_VERSION & 0xff);
   info << Q("* Build ABI: %1").arg(QSysInfo::buildAbi());
 
+#if defined(__clang__)
+  info << Q("* Compiler: clang++ %1.%2.%3").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__);
+#elif defined(__GNUC__)
+  info << Q("* Compiler: g++ %1.%2.%3").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
+#else
+  info << Q("* Compiler: unknown");
+#endif
+
   info << Q("") << Q("## Environment variables") << Q("");
 
   auto keys = QStringList{} << Q("QT_AUTO_SCREEN_SCALE_FACTOR") << Q("QT_SCALE_FACTOR") << Q("QT_SCREEN_SCALE_FACTORS") << Q("QT_DEVICE_PIXEL_RATIO");
