@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.0.1\n"
 "POT-Creation-Date: 2019-08-10 14:36+0200\n"
-"PO-Revision-Date: 2016-07-30 12:23+0200\n"
-"Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2019-08-19 13:37+0200\n"
+"Last-Translator: YOSHIDUMI, Rentaro\n"
+"Language-Team: Japanese (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ja/)\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr "34.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2019-06-22"
-msgstr ""
+msgstr "2019-06-22"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -223,7 +223,7 @@ msgstr "MKVToolNix"
 #: doc/man/mkvpropedit.xml:40
 #: doc/man/mkvtoolnix-gui.xml:40
 msgid "User Commands"
-msgstr " "
+msgstr "ユーザーコマンド"
 
 #. type: Content of: <refentry><refnamediv><refpurpose>
 #: doc/man/mkvextract.xml:45
@@ -241,10 +241,8 @@ msgstr "書式"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvextract.xml:51
-#, fuzzy
-#| msgid "<command>mkvextract</command> <arg choice=\"req\">mode</arg> <arg choice=\"req\">source-filename</arg> <arg>options</arg> <arg>extraction-spec</arg>"
 msgid "<command>mkvextract</command> <arg choice=\"req\">source-filename</arg> <arg choice=\"req\">mode1</arg> <arg>options</arg> <arg>extraction-spec1</arg> <arg>mode2</arg> <arg>options</arg> <arg>extraction-spec2</arg> <arg>…</arg>"
-msgstr "<command>mkvextract</command> <arg choice=\"req\">mode</arg> <arg choice=\"req\">source-filename</arg> <arg>options</arg> <arg>extraction-spec</arg>"
+msgstr "<command>mkvextract</command> <arg choice=\"req\">対象ファイル名</arg> <arg choice=\"req\">モード1</arg> <arg>オプション</arg> <arg>抽出仕様1</arg> <arg>モード2</arg> <arg>オプション</arg> <arg>抽出仕様2</arg> <arg>…</arg>"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:64
@@ -258,19 +256,17 @@ msgstr "説明"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:66
 msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument is the name of the source file which must be a &matroska; file."
-msgstr ""
+msgstr "このプログラムは&matroska;ファイルから特定部分を抽出して他の利便な形式に書き出します。第1引数は抽出する対象のファイル名であり、&matroska;ファイルでなくてはなりません。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:71
 msgid "All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file.  Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass.  Most options can only be used in certain modes with a few options applying to all modes."
-msgstr ""
+msgstr "他の全ての引数はそれぞれ、定められた抽出モードに切り替える、現行で有効モードのオプションを変更する、又はどのファイルに何を抽出して書き出すかを指定します。一度のmkvextract呼出しで複数のモードが使え、単一のコマンドラインで複数種類の抽出が可能です。ほとんどのオプションは特定のモードでのみ利用でき、いくつかのオプションは全てのモードに適用できます。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:77
-#, fuzzy
-#| msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells &mkvextract; what to extract. Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link> and <link linkend=\"mkvextract.description.timestamps_v2\">timestamps</link>.  The second argument is the name of the source file. It must be a &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode."
 msgid "Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link>, <link linkend=\"mkvextract.description.timestamps_v2\">timestamps</link> and <link linkend=\"mkvextract.description.cues\">cues</link>."
-msgstr "&matroska; ファイルの特定の部分を、他の有用なフォーマットで抽出します。最初の<option>mode</option>引数は、&mkvextract; に何を抽出すべきかを指示します。現在サポートされているのは、<link linkend=\"mkvextract.description.tracks\">トラック</link>、<link linkend=\"mkvextract.description.tags\">タグ</link>、<link linkend=\"mkvextract.description.attachments\">添付ファイル</link>、<link linkend=\"mkvextract.description.chapters\">チャプタ</link>、<link linkend=\"mkvextract.description.cuesheets\">CUEシート</link> 及び <link linkend=\"mkvextract.description.timestamps_v2\">タイムコード</link>の抽出です。二個目の引数はソースファイルの名前です。これは&matroska;ファイルでなければなりません。続く全ての引数は、オプションと抽出設定です。これらは指定されたmodeに依存します。"
+msgstr "現在次の抽出に対応しています。<link linkend=\"mkvextract.description.tracks\">トラック</link>・<link linkend=\"mkvextract.description.tags\">タグ</link>・<link linkend=\"mkvextract.description.attachments\">添付ファイル</link>・<link linkend=\"mkvextract.description.chapters\">チャプター</link>・<link linkend=\"mkvextract.description.cuesheets\">CUEシート</link>・<link linkend=\"mkvextract.description.timestamps_v2\">タイムスタンプ</link>及び<link linkend=\"mkvextract.description.cues\">キュー</link>。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:84
@@ -298,7 +294,7 @@ msgstr "解析モードを'full'に設定します。デフォルトのモード
 #: doc/man/mkvmerge.xml:2064
 #: doc/man/mkvpropedit.xml:366
 msgid "<option>--command-line-charset</option> <parameter>character-set</parameter>"
-msgstr "<option>--command-line-charset</option> <parameter>character-set</parameter>"
+msgstr "<option>--command-line-charset</option> <parameter>文字コード</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:107
@@ -313,7 +309,7 @@ msgstr "コマンドライン文字列の文字コードを指定します。デ
 #: doc/man/mkvmerge.xml:2077
 #: doc/man/mkvpropedit.xml:376
 msgid "<option>--output-charset</option> <parameter>character-set</parameter>"
-msgstr "<option>--output-charset</option> <parameter>character-set</parameter>"
+msgstr "<option>--output-charset</option> <parameter>文字コード</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:117
@@ -339,16 +335,14 @@ msgstr "全てのメッセージを、コンソールではなく<parameter>file
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:136
 #: doc/man/mkvmerge.xml:2098
-#, fuzzy
-#| msgid "<option>--no-cues</option>"
 msgid "<option>--flush-on-close</option>"
-msgstr "<option>--no-cues</option>"
+msgstr "<option>--flush-on-close</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:139
 #: doc/man/mkvmerge.xml:2101
 msgid "Tells the program to flush all data cached in memory to storage when closing files opened for writing.  This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers.  The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting.  See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons."
-msgstr ""
+msgstr "プログラムが、書き込み用に開かれたファイルを保存する際に、RAM上にある全データをストレージに書き出すようにします。停電時のデータ損失を防いだり、OSやデバイスに固有の問題を避けるのに用います。欠点として、mkvmergeが終了する前に全データをストレージに書き出し終わるまで待機する為に、多重化に長い時間が掛かります。MKVToolNixバグ追跡システムの第2469号及び第2480号に長所・短所に関する詳細な議論があります。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:148
@@ -356,27 +350,23 @@ msgstr ""
 #: doc/man/mkvmerge.xml:2110
 #: doc/man/mkvpropedit.xml:398
 msgid "<option>--ui-language</option> <parameter>code</parameter>"
-msgstr "<option>--ui-language</option> <parameter>code</parameter>"
+msgstr "<option>--ui-language</option> <parameter>コード</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:151
 #: doc/man/mkvinfo.xml:155
 #: doc/man/mkvmerge.xml:2113
 #: doc/man/mkvpropedit.xml:401
-#, fuzzy
-#| msgid "Forces the translations for the language <parameter>code</parameter> to be used (e.g.  '<literal>de_DE</literal>' for the German translations). It is preferable to use the environment variables <varname>LANG</varname>, <varname>LC_MESSAGES</varname> and <varname>LC_ALL</varname> though. Entering '<literal>list</literal>' as the <parameter>code</parameter> will cause &mkvmerge; to output a list of available translations."
 msgid "Forces the translations for the language <parameter>code</parameter> to be used (e.g.  '<literal>de_DE</literal>' for the German translations). Entering '<literal>list</literal>' as the <parameter>code</parameter> will cause the program to output a list of available translations."
-msgstr "指定した<parameter>code</parameter>を強制的に言語コード(例: 日本語ならば'<literal>ja_JP</literal>')として使用します。しかし、環境変数<varname>LANG</varname>や<varname>LC_MESSAGES</varname>、<varname>LC_ALL</varname>を使用したほうが好ましいでしょう。<parameter>code</parameter>に<literal>list</literal>と指定すると、指定できる言語コードの一覧を出力します。"
+msgstr "指定した<parameter>コード</parameter>言語（例 日本語なら「<literal>ja_JP</literal>」）での翻訳を強制します。<parameter>code</parameter>に「<literal>list</literal>」を指定すると、利用可能な翻訳の一覧を出力します。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:159
 #: doc/man/mkvinfo.xml:163
 #: doc/man/mkvmerge.xml:2121
 #: doc/man/mkvpropedit.xml:409
-#, fuzzy
-#| msgid "<option>--no-global-tags</option>"
 msgid "<option>--abort-on-warnings</option>"
-msgstr "<option>--no-global-tags</option>"
+msgstr "<option>--abort-on-warnings</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:162
@@ -384,7 +374,7 @@ msgstr "<option>--no-global-tags</option>"
 #: doc/man/mkvmerge.xml:2124
 #: doc/man/mkvpropedit.xml:412
 msgid "Tells the program to abort after the first warning is emitted. The program's exit code will be 1."
-msgstr ""
+msgstr "最初の警告が発された後プログラムを停止するよう伝えます。プログラムの終了コードは1になります。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:168
@@ -392,7 +382,7 @@ msgstr ""
 #: doc/man/mkvmerge.xml:2130
 #: doc/man/mkvpropedit.xml:418
 msgid "<option>--debug</option> <parameter>topic</parameter>"
-msgstr "<option>--debug</option> <parameter>topic</parameter>"
+msgstr "<option>--debug</option> <parameter>項目</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:171
@@ -408,7 +398,7 @@ msgstr "特定の機能のデバッグをオンにします。このオプショ
 #: doc/man/mkvmerge.xml:2139
 #: doc/man/mkvpropedit.xml:427
 msgid "<option>--engage</option> <parameter>feature</parameter>"
-msgstr "<option>--engage</option> <parameter>feature</parameter>"
+msgstr "<option>--engage</option> <parameter>機能</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:180
@@ -420,10 +410,8 @@ msgstr "実験的機能をオンにします。利用可能な機能のリスト
 #: doc/man/mkvinfo.xml:191
 #: doc/man/mkvmerge.xml:2149
 #: doc/man/mkvpropedit.xml:437
-#, fuzzy
-#| msgid "<option>--link</option>"
 msgid "<option>--gui-mode</option>"
-msgstr "<option>--link</option>"
+msgstr "<option>--gui-mode</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:190
@@ -431,7 +419,7 @@ msgstr "<option>--link</option>"
 #: doc/man/mkvmerge.xml:2152
 #: doc/man/mkvpropedit.xml:440
 msgid "Turns on GUI mode. In this mode specially-formatted lines may be output that can tell a controlling GUI what's happening. These messages follow the format '<literal>#GUI#message</literal>'. The message may be followed by key/value pairs as in '<literal>#GUI#message#key1=value1#key2=value2…</literal>'. Neither the messages nor the keys are ever translated and always output in English."
-msgstr ""
+msgstr "GUIモードに切り替えます。このモードではGUI操作の状況を伝える特殊な形式の行が出力されます。これらの通知は「<literal>#GUI#通知内容</literal>」という形式に従います。「<literal>#GUI#通知内容#キー1=値1#キー2=値2...</literal>」のようにキー・値の組が通知内容に続くことがあります。通知内容やキーは翻訳されることなく、常に英語で出力されます。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:199
@@ -488,19 +476,15 @@ msgstr "バージョン情報を出力して終了します。"
 #: doc/man/mkvinfo.xml:231
 #: doc/man/mkvmerge.xml:2161
 #: doc/man/mkvpropedit.xml:476
-#, fuzzy
-#| msgid "<option>@</option><parameter>options-file</parameter>"
 msgid "<option>@</option><parameter>options-file.json</parameter>"
-msgstr "<option>@</option><parameter>options-file</parameter>"
+msgstr "<option>@</option><parameter>オプションファイル.json</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:229
 #: doc/man/mkvinfo.xml:234
 #: doc/man/mkvpropedit.xml:479
-#, fuzzy
-#| msgid "Reads additional command line arguments from the file <parameter>options-file</parameter>. See the section about <link linkend=\"mkvmerge.option_files\">option files</link> for further information."
 msgid "Reads additional command line arguments from the file <parameter>options-file</parameter>. For a full explanation on the supported formats for such files see the section called \"Option files\" in the &mkvmerge; man page."
-msgstr "ファイル<parameter>options-file</parameter>から追加のコマンドライン引数を読み込みます。詳細は<link linkend=\"mkvmerge.option_files\">オプションファイル</link>のセクションを参照してください。"
+msgstr "<parameter>オプションファイル</parameter>から追加のコマンドライン引数を読み込みます。このようなファイルに対応している形式の詳細については&mkvmerge;のマニュアルページ「オプションファイル」節をご覧ください。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:238
@@ -509,10 +493,8 @@ msgstr "トラック抽出モード"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:241
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>tracks</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
-msgstr "書式: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
+msgstr "書式: <command>mkvextract <parameter>対象ファイル名</parameter> <option>tracks</option> <optional><parameter>オプション</parameter></optional> <parameter>TID1:出力ファイル名1</parameter> <optional><parameter>TID2:出力ファイル名2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:245
@@ -522,7 +504,7 @@ msgstr "以下のコマンドラインオプションは、トラック抽出モ
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:251
 msgid "<option>-c</option> <parameter>character-set</parameter>"
-msgstr "<option>-c</option> <parameter>character-set</parameter>"
+msgstr "<option>-c</option> <parameter>文字コード</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:254
@@ -587,10 +569,9 @@ msgstr "各出力ファイル名は一回しか使用されません。RealAudio
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvextract.xml:319
-#, fuzzy, no-wrap
-#| msgid "$ mkvextract tracks input.mkv 1:output-two-tracks.rm 2:output-two-tracks.rm"
+#, no-wrap
 msgid "$ mkvextract input.mkv tracks 0:video.h264 2:output-two-vobsub-tracks.idx 3:output-two-vobsub-tracks.idx"
-msgstr "$ mkvextract tracks input.mkv 1:output-two-tracks.rm 2:output-two-tracks.rm      "
+msgstr "$ mkvextract input.mkv tracks 0:video.h264 2:output-two-vobsub-tracks.idx 3:output-two-vobsub-tracks.idx"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:326
@@ -599,20 +580,18 @@ msgstr "添付ファイル抽出モード"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:329
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract</command> <option>attachments</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>attachments</option> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional></command>"
-msgstr "書式: <command>mkvextract</command> <option>attachments</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional>"
+msgstr "書式: <command>mkvextract <parameter>対象ファイル名</parameter> <option>attachments</option> <optional><parameter>オプション</parameter></optional> <parameter>AID1:出力名1</parameter> <optional><parameter>AID2:出力名2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:334
 msgid "<parameter>AID</parameter>:<parameter>outname</parameter>"
-msgstr "<parameter>AID</parameter>:<parameter>outname</parameter>"
+msgstr "<parameter>AID</parameter>:<parameter>出力名</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:337
 msgid "Causes extraction of the attachment with the ID <parameter>AID</parameter> into the file <parameter>outname</parameter> if such an attachment exists in the source file.  If the <parameter>outname</parameter> is left empty then the name of the attachment inside the source &matroska; file is used instead.  This option can be given multiple times.  The attachment IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
-msgstr "IDが<parameter>AID</parameter>である添付ファイルがもしソースファイルに存在すれば抽出します。<parameter>outname</parameter>が指定されない場合、&matroska;に格納された添付ファイルの名前が使用されます。このオプションは複数回指定できます。添付ファイルIDは、&mkvmerge;に<option>--identify</option>オプションを指定したときに出力されるものと同じです。"
+msgstr "IDが<parameter>AID</parameter>である添付ファイルがもしソースファイルに存在すれば抽出します。<parameter>出力名</parameter>が指定されない場合、&matroska;に格納された添付ファイルの名前が使用されます。このオプションは複数回指定できます。添付ファイルIDは、&mkvmerge;に<option>--identify</option>オプションを指定したときに出力されるものと同じです。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:348
@@ -621,10 +600,8 @@ msgstr "チャプタ抽出モード"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:351
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>chapters</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.xml</parameter></command>"
-msgstr "書式: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
+msgstr "書式: <command>mkvextract <parameter>対象ファイル名</parameter> <option>chapters</option> <optional><parameter>オプション</parameter></optional> <parameter>出力ファイル名.xml</parameter></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:356
@@ -638,25 +615,23 @@ msgstr "チャプタ情報を<abbrev>OGM</abbrev> toolsで使用される、シ�
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:367
-#, fuzzy
-#| msgid "<option>--language</option> <parameter>TID:language</parameter>"
 msgid "<option>--simple-language</option> <parameter>language</parameter>"
-msgstr "<option>--language</option> <parameter>TID:language</parameter>"
+msgstr "<option>--simple-language</option> <parameter>言語</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:370
 msgid "If the simple format is enabled then &mkvextract; will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name.  By default &mkvextract; will use the first chapter name found for each atom regardless of its language."
-msgstr ""
+msgstr "単純形式が有効の場合、&mkvextract;はたとえチャプタ素片が複数のチャプタ名を含んでいる場合でも検出したチャプタ素片毎に一項目のみを出力します。既定では&mkvextract;は言語に関係なく各素片に見付かった最初のチャプタ名を使用します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:375
 msgid "Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name.  The <parameter>language</parameter> parameter must be an ISO 639-1 or ISO 639-2 code."
-msgstr ""
+msgstr "このオプションを用いて素片が複数のチャプタ名を含んでいた場合に出力されるチャプタ名を定められます。<parameter>言語</parameter>はJIS X 0412-1又はJIS X 0412-2の言語名コードでなくてはなりません。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:383
 msgid "The chapters are written to specified output file. By default the &xml; format understood by &mkvmerge; is used. If no chapters are found in the file, the output file is not created."
-msgstr ""
+msgstr "チャプタは指定された出力ファイルに書き込まれます。既定では&mkvmerge;が解釈できる&xml;形式が用いられます。ファイル中にチャプタが見付からなかった場合、ファイルは出力されません。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:388
@@ -665,15 +640,13 @@ msgstr "タグ抽出モード"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:391
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>tags</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.xml</parameter></command>"
-msgstr "書式: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
+msgstr "書式: <command>mkvextract <parameter>対象ファイル名</parameter> <option>tags</option> <optional><parameter>オプション</parameter></optional> <parameter>出力ファイル名.xml</parameter></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:395
 msgid "The tags are written to specified output file in the &xml; format understood by &mkvmerge;. If no tags are found in the file, the output file is not created."
-msgstr ""
+msgstr "タグは指定された出力ファイルに既定では&mkvmerge;が解釈できる&xml;形式で書き込まれます。ファイル中にタグが見付からなかった場合、ファイルは出力されません。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:400
@@ -682,15 +655,13 @@ msgstr "CUEシート抽出モード"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:403
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>cuesheet</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.cue</parameter></command>"
-msgstr "書式: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
+msgstr "書式: <command>mkvextract <parameter>対象ファイル名</parameter> <option>cuesheet</option> <optional><parameter>オプション</parameter></optional> <parameter>出力ファイル名.cue</parameter></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:407
 msgid "The cue sheet is written to specified output file. If no chapters or tags are found in the file, the output file is not created."
-msgstr ""
+msgstr "キューシートは指定された出力ファイルに書き込まれます。ファイル中にキューシートが見付からなかった場合、ファイルは出力されません。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:412
@@ -699,10 +670,8 @@ msgstr "タイムコード抽出モード"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:415
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>timestamps_v2</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
-msgstr "書式: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
+msgstr "書式: <command>mkvextract <parameter>対象ファイル名</parameter> <option>timestamps_v2</option> <optional><parameter>オプション</parameter></optional> <parameter>TID1:出力ファイル名1</parameter> <optional><parameter>TID2:出力ファイル名2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:423
@@ -718,90 +687,75 @@ msgstr "例:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvextract.xml:432
-#, fuzzy, no-wrap
-#| msgid "$ mkvextract timestamps_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
+#, no-wrap
 msgid "$ mkvextract input.mkv timestamps_v2 1:ts-track1.txt 2:ts-track2.txt"
-msgstr "$ mkvextract timestamps_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
+msgstr "$ mkvextract input.mkv timestamps_v2 1:ts-track1.txt 2:ts-track2.txt"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:439
-#, fuzzy
-#| msgid "Cue sheet extraction mode"
 msgid "Cues extraction mode"
-msgstr "CUEシート抽出モード"
+msgstr "キュー抽出モード"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:442
-#, fuzzy
-#| msgid "Syntax: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>cues</option> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
-msgstr "書式: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
+msgstr "書式: <command>mkvextract <parameter>対象ファイル名</parameter> <option>cues</option> <optional><parameter>オプション</parameter></optional> <parameter>TID1:出力ファイル名1</parameter> <optional><parameter>TID2:出力ファイル名2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:447
-#, fuzzy
-#| msgid "<parameter>TID:outname</parameter>"
 msgid "<parameter>TID:dest-filename</parameter>"
-msgstr "<parameter>TID:outname</parameter>"
+msgstr "<parameter>TID:出力ファイル名</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:450
-#, fuzzy
-#| msgid "Causes extraction of the timestamps for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
 msgid "Causes extraction of the cues for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option and not the numbers contained in the <classname>CueTrack</classname> element."
-msgstr "IDが<parameter>TID</parameter>であるトラックがソースファイルに存在すれば、タイムコードを<parameter>outname</parameter>に抽出します。このオプションは複数回指定できます。トラックIDは、&mkvmerge;に<option>--identify</option>を指定して実行した際の出力に表示されるものと同じです。"
+msgstr "識別子が<parameter>TID</parameter>のトラックのキューを、そのようなトラックが対象ファイルに存在していれば、<parameter>出力名</parameter>ファイルに抽出します。このオプションは複数回与えることができます。トラック識別子は&mkvmerge;の<option>--identify</option>オプションで出力されたものと同じであり、<classname>CueTrack</classname>要素に含まれる数値ではありません。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:459
 msgid "The format output is a simple text format: one line per <classname>CuePoint</classname> element with <literal>key=value</literal> pairs. If an optional element is not present in a <classname>CuePoint</classname> (e.g. <classname>CueDuration</classname>) then a dash will be output as the value."
-msgstr ""
+msgstr "形式オプションは単純なテキスト形式です。<classname>CuePoint</classname>要素と<literal>キー=値</literal>の組毎に一行です。追加の要素（例: <classname>CueDuration</classname>）が<classname>CuePoint</classname>中に表われなかった場合、値としてダッシュが出力されます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:468
 #, no-wrap
 msgid "timestamp=00:00:13.305000000 duration=- cluster_position=757741 relative_position=11"
-msgstr ""
+msgstr "timestamp=00:00:13.305000000 duration=- cluster_position=757741 relative_position=11"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:470
-#, fuzzy
-#| msgid "The basics are:"
 msgid "The possible keys are:"
-msgstr "基本的には、以下の様な構成です。"
+msgstr "指定できるキーは次の通りです。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:474
-#, fuzzy
-#| msgid "Timestamps"
 msgid "timestamp"
-msgstr "タイムコード"
+msgstr "timestamp"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:476
 msgid "The cue point's timestamp with nanosecond precision. The format is <literal>HH:MM:SS.nnnnnnnnn</literal>. This element is always set."
-msgstr ""
+msgstr "キューポイントのナノ秒精度のタイムスタンプ。<literal>HH:MM:SS.nnnnnnnnn</literal>形式。この要素は常に設定されています。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:481
-#, fuzzy
-#| msgid "Introduction"
 msgid "duration"
-msgstr "はじめに"
+msgstr "duration"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:483
 msgid "The cue point's duration with nanosecond precision. The format is <literal>HH:MM:SS.nnnnnnnnn</literal>."
-msgstr ""
+msgstr "キューポイントのナノ秒精度のタイムスタンプ。<literal>HH:MM:SS.nnnnnnnnn</literal>形式。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:488
 msgid "cluster_position"
-msgstr ""
+msgstr "cluster_position"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:490
 msgid "The absolute position in bytes inside the &matroska; file where the cluster containing the referenced element starts."
-msgstr ""
+msgstr "被参照要素を含んだクラスタが始まる&matroska;ファイル内部の絶対バイト位置。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><note><para>
 #: doc/man/mkvextract.xml:493
@@ -863,7 +817,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:540
 msgid "Extracting chapters in the Ogg/OGM format and re-encoding a text subtitle track to another character set:"
-msgstr ""
+msgstr "チャプターをOgg/OGM形式で展開し、テキスト字幕を別の文字コードに再符号化します。"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:543
@@ -884,7 +838,7 @@ msgstr "テキストファイルと文字コード変換"
 #: doc/man/mkvinfo.xml:277
 #: doc/man/mkvpropedit.xml:731
 msgid "For an in-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically-named section in the &mkvmerge; man page."
-msgstr ""
+msgstr "MKVToolNixスイートの全てのツールが文字コード変換・入出力に係る文字コード・コマンドライン及びコンソール上の文字コードをどのように処理するかについての詳細な議論については、&mkvmerge; man ページの同名の節を参照して下さい。"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:556
@@ -1338,10 +1292,8 @@ msgstr "その内容は、あたかも<link linkend=\"mkvextract.description.deb
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:921
-#, fuzzy
-#| msgid "<varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgid "<varname>MKVEXTRACT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
-msgstr "<varname>MKVTOOLNIX_ENGAGE</varname>とその短縮形<varname>MTX_ENGAGE</varname>"
+msgstr "<varname>MKVEXTRACT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname>とその短縮形<varname>MTX_ENGAGE</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:923
@@ -1532,10 +1484,8 @@ msgstr "&mkvinfo;はシステムのロケールを決めるデフォルトの変
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:322
-#, fuzzy
-#| msgid "<varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgid "<varname>MKVINFO_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
-msgstr "<varname>MKVTOOLNIX_DEBUG</varname>とその短縮形<varname>MTX_DEBUG</varname>"
+msgstr "<varname>MKVINFO_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname>とその短縮形<varname>MTX_DEBUG</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:324
@@ -1544,10 +1494,8 @@ msgstr "その内容は、あたかも<link linkend=\"mkvinfo.description.debug\
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:330
-#, fuzzy
-#| msgid "<varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgid "<varname>MKVINFO_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
-msgstr "<varname>MKVTOOLNIX_ENGAGE</varname>とその短縮形<varname>MTX_ENGAGE</varname>"
+msgstr "<varname>MKVINFO_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname>とその短縮形<varname>MTX_ENGAGE</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:332
@@ -1571,10 +1519,8 @@ msgstr "マルチメディアストリームを&matroska;ファイルに格納�
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvmerge.xml:51
-#, fuzzy
-#| msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@optionsfile</arg>"
 msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@options-file.json</arg>"
-msgstr "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@optionsfile</arg>"
+msgstr "<command>mkvmerge</command> <arg>広域オプション</arg> <arg choice=\"req\">-o 出力</arg> <arg>オプション1</arg> <arg choice=\"req\">ファイル1</arg> <arg> <arg>オプション2</arg> <arg choice=\"req\">ファイル2</arg> </arg> <arg>@オプションファイル.json</arg>"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:67
@@ -1624,20 +1570,18 @@ msgstr "<option>-w</option>, <option>--webm</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:107
-#, fuzzy
-#| msgid "Create a WebM compliant file. This is also turned on if the output file name's extension is &quot;webm&quot;. This mode enforces several restrictions. The only allowed codecs are VP8 video and Vorbis audio tracks. Neither chapters nor tags are allowed. The DocType header item is changed to &quot;webm&quot;."
 msgid "Create a WebM compliant file. This is also turned on if the output file name's extension is &quot;webm&quot;. This mode enforces several restrictions. The only allowed codecs are VP8, VP9 video and Opus, Vorbis audio tracks. The DocType header item is changed to &quot;webm&quot;."
-msgstr "WebMの規格に準拠したファイルを作成します。mkvmergeは出力ファイル名の拡張子が&quot;webm&quot;であった場合にもこれをオンにします。このモードではいくつかの制限が実施されます。使用できるコーデックはVP8ビデオとVorbisオーディオのトラックのみです。チャプタとタグは使用することができません。DocTypeヘッダアイテムは&quot;webm&quot;へと変更されます。"
+msgstr "WebMに準じたファイルを生成します。出力ファイル名の拡張子が「webm」の場合も有効になります。このモードでは幾つかの制限があります。VP8・VP9の動画及びOpus・Vorbis音声トラックのみがコーデックとして許容されます。DocTypeヘッダー項目は「webm」に変更されます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:113
 msgid "For chapters and tags only a subset of elements are allowed. &mkvmerge; will automatically remove all elements not allowed by the specification."
-msgstr ""
+msgstr "チャプター及びタグに対しては、要素の部分集合のみが許容されます。&mkvmerge;は仕様が許可していない項目を全て消去します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:120
 msgid "<option>--title</option> <parameter>title</parameter>"
-msgstr "<option>--title</option> <parameter>title</parameter>"
+msgstr "<option>--title</option> <parameter>タイトル</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:122
@@ -1647,19 +1591,17 @@ msgstr "出力ファイル全体のタイトルを指定します(例:映画の�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:127
 msgid "<option>--default-language</option> <parameter>language-code</parameter>"
-msgstr "<option>--default-language</option> <parameter>language-code</parameter>"
+msgstr "<option>--default-language</option> <parameter>言語コード</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:129
-#, fuzzy
-#| msgid "Sets the default language code that will be used for all tracks unless overwritten with the <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> option. The default language code is '<literal>und</literal>' for 'undefined'."
 msgid "Sets the default language code that will be used for tracks for which no language is set with the <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> option and for which the source container doesn't provide a language."
-msgstr "デフォルトの言語コードを指定します。<link linkend=\"mkvmerge.description.language\"><option>--language</option></link>オプションで指定しなかったトラックはすべてここで指定した言語コードになります。デフォルトは'<literal>und</literal>'、つまり'未定義'です。"
+msgstr "<link linkend=\"mkvmerge.description.language\"><option>--language</option></link>オプションで言語が設定されていなかったり、ソースコンテナによって言語が提供されていないトラックで用いられる、既定の言語コードを設定します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:133
 msgid "The default language code is '<literal>und</literal>' for 'undefined'."
-msgstr ""
+msgstr "既定の言語コードは「<literal>und</literal>」つまり「未定義」です。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:140
@@ -1696,7 +1638,7 @@ msgstr "使用するセグメントUIDを設定します。これはコンマで
 #: doc/man/mkvmerge.xml:879
 #: doc/man/mkvmerge.xml:893
 msgid "If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used."
-msgstr ""
+msgstr "SIDが=で始まる場合、それ以降は、セグメントUIDが読み取られ使用されたMatroskaファイルの名前として解釈されます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:171
@@ -1717,7 +1659,7 @@ msgstr "<option>--chapter-language</option> <parameter>language-code</parameter>
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:188
 msgid "Sets the ISO639-2 language code that is written for each chapter entry.  Defaults to '<literal>eng</literal>'.  See the section about <link linkend=\"mkvmerge.chapters\">chapters</link> below for details."
-msgstr "各チャプタのエントリに書き込むISO639-2言語コードを指定します。デフォルトは'<literal>eng</literal>'です。詳細は<link linkend=\"mkvmerge.chapters\">チャプタ</link>のセクションを参照してください。"
+msgstr "各チャプタのエントリに書き込むJIS X 0412-2言語コードを指定します。デフォルトは'<literal>eng</literal>'です。詳細は<link linkend=\"mkvmerge.chapters\">チャプタ</link>のセクションを参照してください。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:193
@@ -1726,21 +1668,19 @@ msgstr "このオプションはシンプルチャプタファイルを読み込
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:198
-#, fuzzy
-#| msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgid "The language set with this option is also used when chapters are generated with the <link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option> option</link>."
-msgstr "その内容は、あたかも<link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link>オプション経由で渡されたかのように扱われます。"
+msgstr "このオプションで指定された言語は<link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option>オプション</link>で生成されたチャプターにも使用されます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:205
 #: doc/man/mkvmerge.xml:1307
 msgid "<option>--chapter-charset</option> <parameter>character-set</parameter>"
-msgstr "<option>--chapter-charset</option> <parameter>character-set</parameter>"
+msgstr "<option>--chapter-charset</option> <parameter>文字集合</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:208
 msgid "Sets the character set that is used for the conversion to UTF-8 for simple chapter files. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\"> text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr "シンプルチャプタファイルをUTF-8に変換する際の文字コードを指定します。&mkvmerge;の文字コード変換については、<link linkend=\"mkvmerge.text_files_and_charsets\">テキストファイルと文字コード</link>のセクションを参照してください。"
+msgstr "シンプルチャプタファイルをUTF-8に変換する際の文字集合を指定します。&mkvmerge;の文字集合変換については、<link linkend=\"mkvmerge.text_files_and_charsets\">テキストファイルと文字集合</link>のセクションを参照してください。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:214
@@ -2368,50 +2308,38 @@ msgstr "パラメータ<parameter>A</parameter>、<parameter>B</parameter>、<pa
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:794
-#, fuzzy
-#| msgid "The '<literal>timestamps:</literal>' prefix must not be omitted."
 msgid "The '<literal>frames:</literal>' prefix must not be omitted."
-msgstr "'<literal>timestamps:</literal>'という接頭辞は、互換性のために省略できるようになっています。"
+msgstr "接頭辞「<literal>frames:</literal>」は省略できません。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:813
-#, fuzzy
-#| msgid "Splitting after specific timestamps."
 msgid "Splitting before specific chapters."
-msgstr "指定した各タイムコードで分割します。"
+msgstr "指定した各チャプタで分割します。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:817
-#, fuzzy
-#| msgid "Syntax: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 msgid "Syntax: <option>--split</option> <literal>chapters:all</literal> or <option>--split</option> <literal>chapters:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
-msgstr "書式: <option>--split</option> <literal>timestamps:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgstr "書式: <option>--split</option> <literal>chapters:all</literal>又は<option>--split</option> <literal>chapters:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:822
-#, fuzzy
-#| msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 msgid "Example: <code>--split chapters:5,8</code>"
-msgstr "例: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "例: <code>--split chapters:5,8</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:826
-#, fuzzy
-#| msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all have the same format as the ones used for the duration (see above). The list of timestamps is separated by commas.  After the input stream has reached the current split point's timestamp a new file is created. Then the next split point given in this list is used."
 msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all be positive integers.  Numbering starts at 1.  The list of chapter numbers is separated by commas.  Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed.  A chapter starting at 0s is never considered for splitting and discarded silently."
-msgstr "パラメータ<parameter>A</parameter>、<parameter>B</parameter>、<parameter>C</parameter>…は、durationで使用されるものと同じフォーマットで指定しなければなりません(上記参照)。タイムコードのリストはコンマで区切られます。入力ストリームが現在の分割点に達すると次のファイルが作成され、このリストから次の分割点が使用されます。"
+msgstr "<parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter>等のパラメータは正整数でなくてはなりません。番号は1始まりです。複数のチャプタ番号はコンマで区切られます。分割が行なわれるのは、指定された番号の各チャプタが開始するタイムスタンプと等しい又はより大きいタイムスタンプである最初のキーフレームの直前です。0秒から開始するチャプタは分割されることなく、通知なしに破棄されます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:833
 msgid "The keyword <literal>all</literal> can be used instead of listing all chapter numbers manually."
-msgstr ""
+msgstr "全てのチャプタ番号を手で入力する代わりに、<literal>all</literal>キーワードが使えます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:837
-#, fuzzy
-#| msgid "The '<literal>timestamps:</literal>' prefix must not be omitted."
 msgid "The '<literal>chapters:</literal>' prefix must not be omitted."
-msgstr "'<literal>timestamps:</literal>'という接頭辞は、互換性のために省略できるようになっています。"
+msgstr "接頭辞「<literal>chapters:</literal>」は省略できません。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:842
@@ -5211,12 +5139,12 @@ msgstr "実験的機能をオンにします。利用可能な機能のリスト
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvpropedit.xml:488
 msgid "Edit selectors"
-msgstr "エディットセレクタ"
+msgstr "エディット選択子"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:490
 msgid "The <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option sets the &matroska; file section (segment information or a certain track's headers) that all following <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> and <link linkend=\"mkvpropedit.description.delete\">delete</link> actions operate on. This stays valid until the next <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option is found. The argument to this option is called the edit selector."
-msgstr "<link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>オプションは、以降の<link linkend=\"mkvpropedit.description.add\">add</link>、<link linkend=\"mkvpropedit.description.set\">set</link>及び<link linkend=\"mkvpropedit.description.delete\">delete</link>アクションが適用される&matroska;ファイルセクション(セグメント情報または特定のトラックヘッダ)を設定します。これは次の<link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>オプションが見付かるまでずっと有効です。このオプションへの引数はエディットセレクタと呼ばれます。"
+msgstr "<link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>オプションは、以降の<link linkend=\"mkvpropedit.description.add\">add</link>、<link linkend=\"mkvpropedit.description.set\">set</link>及び<link linkend=\"mkvpropedit.description.delete\">delete</link>アクションが適用される&matroska;ファイルセクション(セグメント情報または特定のトラックヘッダ)を設定します。これは次の<link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>オプションが見付かるまでずっと有効です。このオプションへの引数はエディット選択子と呼ばれます。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvpropedit.xml:502
@@ -5296,10 +5224,8 @@ msgstr "トラックエディットセレクタの性質から、いくつかの
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvpropedit.xml:580
-#, fuzzy
-#| msgid "Attachments"
 msgid "Attachment selectors"
-msgstr "添付ファイル"
+msgstr "添付ファイル選択子"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:583
@@ -5397,59 +5323,57 @@ msgstr "$ mkvpropedit movie.mkv --chapters ''"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:666
 msgid "Adding a font file (<literal>Arial.ttf</literal>) as an attachment:"
-msgstr ""
+msgstr "フォントファイル（<literal>VL-PGothic-Regular.ttf</literal>）を添付ファイルとして追加する。"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:669
-#, fuzzy, no-wrap
-#| msgid "$ mkvpropedit movie.mkv --tags all:"
+#, no-wrap
 msgid "$ mkvpropedit movie.mkv --add-attachment Arial.ttf"
-msgstr "$ mkvpropedit movie.mkv --tags all:"
+msgstr "$ mkvpropedit movie.mkv --add-attachment VL-PGothic-Regular.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:672
 msgid "Adding a font file (<literal>89719823.ttf</literal>) as an attachment and providing some information as it really is just Arial:"
-msgstr ""
+msgstr "フォントファイル（<literal>89719823.ttf</literal>）を添付ファイルとして追加し、それがVL Pゴシックであるという情報を提供する。"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:675
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --attachment-name Arial.ttf --attachment-description 'The Arial font as a TrueType font' --attachment-mime-type application/x-truetype-font --add-attachment 89719823.ttf"
-msgstr ""
+msgstr "$ mkvpropedit movie.mkv --attachment-name VL-PGothic-Regular.ttf --attachment-description 'VL PゴシックのTrueTypeフォント' --attachment-mime-type application/x-truetype-font --add-attachment 89719823.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:678
 msgid "Replacing one attached font (<literal>Comic.ttf</literal>) file with another one (<literal>Arial.ttf</literal>):"
-msgstr ""
+msgstr "附属のフォントファイル（<literal>ipagp.ttf</literal>）を別のもの（<literal>VL-PGothic-Regular.ttf</literal>）に置き換える。"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:681
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --attachment-name Arial.ttf --attachment-description 'The Arial font as a TrueType font' --replace-attachment name:Comic.ttf:Arial.ttf"
-msgstr ""
+msgstr "$ mkvpropedit movie.mkv --attachment-name VL-PGothic-Regular.ttf --attachment-description 'VL PゴシックのTrueTypeフォント' --replace-attachment name:ipagp.ttf:VL-PGothic-Regular.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:684
 msgid "Deleting the second attached file, whatever it may be:"
-msgstr ""
+msgstr "2番目の添付ファイルを、それが何であれ削除する。"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:687
-#, fuzzy, no-wrap
-#| msgid "$ mkvpropedit movie.mkv --chapters ''"
+#, no-wrap
 msgid "$ mkvpropedit movie.mkv --delete-attachment 2"
-msgstr "$ mkvpropedit movie.mkv --chapters ''"
+msgstr "$ mkvpropedit movie.mkv --delete-attachment 2"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:690
 msgid "Deleting all attached fonts by MIME type:"
-msgstr ""
+msgstr "MIMEタイプによって全ての附属フォントを削除する。"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:693
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --delete-attachment mime-type:application/x-truetype-font"
-msgstr ""
+msgstr "$ mkvpropedit movie.mkv --delete-attachment mime-type:application/x-truetype-font"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:700
@@ -5478,10 +5402,8 @@ msgstr "&mkvpropedit;はシステムのロケールを決めるデフォルト�
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:746
-#, fuzzy
-#| msgid "<varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgid "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
-msgstr "<varname>MKVTOOLNIX_DEBUG</varname>とその短縮形<varname>MTX_DEBUG</varname>"
+msgstr "<varname>MKVPROPEDIT_DEBUG</varname>，<varname>MKVTOOLNIX_DEBUG</varname>とその短縮形<varname>MTX_DEBUG</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:748
@@ -5490,10 +5412,8 @@ msgstr "その内容は、あたかも<link linkend=\"mkvpropedit.description.de
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:754
-#, fuzzy
-#| msgid "<varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgid "<varname>MKVPROPEDIT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
-msgstr "<varname>MKVTOOLNIX_ENGAGE</varname>とその短縮形<varname>MTX_ENGAGE</varname>"
+msgstr "<varname>MKVPROPEDIT_ENGAGE</varname>，<varname>MKVTOOLNIX_ENGAGE</varname>とその短縮形<varname>MTX_ENGAGE</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:756
@@ -5508,7 +5428,7 @@ msgstr "&mkvmerge;, &mkvinfo;, &mkvextract;, &mtxgui;"
 #. type: Content of the product entity
 #: doc/man/mkvtoolnix-gui.xml:5
 msgid "mkvtoolnix-gui"
-msgstr ""
+msgstr "mkvtoolnix-gui"
 
 #. type: Content of: <refentry><refnamediv><refpurpose>
 #: doc/man/mkvtoolnix-gui.xml:45
@@ -5518,12 +5438,12 @@ msgstr "&mkvmerge; のチャプタ、ヘッダ編集機能付きGUI"
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvtoolnix-gui.xml:51
 msgid "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">configuration-file-name.mtxcfg</arg> <arg choice=\"opt\">source-file.ext</arg> <arg choice=\"opt\">--info <arg>matroska-file.mkv</arg></arg> <arg choice=\"opt\">--edit-chapters <arg>chapter-file.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>matroska-file.mkv</arg></arg> </group>"
-msgstr ""
+msgstr "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">設定ファイル名.mtxcfg</arg> <arg choice=\"opt\">対象ファイル.ext</arg> <arg choice=\"opt\">--info <arg>Matroskaファイル.mkv</arg></arg> <arg choice=\"opt\">--edit-chapters <arg>チャプタファイル.ext</arg></arg> <arg choice=\"opt\">--edit-headers <arg>Matroskaファイル.mkv</arg></arg> </group>"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:65
 msgid "&mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge;. It also implements &mkvinfo;'s and &mkvpropedit;'s functionality and will evolve to cover &mkvextract; as well. All settings (e.g. source files, track options etc) can be saved and restored."
-msgstr ""
+msgstr "&mkvtoolnix-gui;は<productname>Qt</productname>に基づいた&mkvmerge;コマンドの<abbrev>GUI</abbrev>です。&mkvinfo;及び&mkvpropedit;の機能も実装しており、&mkvextract;への対応も予定しています。全設定（例: 対象ファイル・トラック設定 等）は保存・復元できます。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:71
@@ -5537,51 +5457,43 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:84
-#, fuzzy
-#| msgid "<option>--raw</option>"
 msgid "<option>--merge</option>"
-msgstr "<option>--raw</option>"
+msgstr "<option>--merge</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:86
 msgid "All following file names will be added as source files to the current multiplex job. This is the default mode."
-msgstr ""
+msgstr "以降に続く全てのファイル名が現在のマルチプレックスジョブに入力ファイルとして追加されます。これは既定のモードです。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:91
-#, fuzzy
-#| msgid "<option>--link</option>"
 msgid "<option>--info</option>"
-msgstr "<option>--link</option>"
+msgstr "<option>--info</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:93
 msgid "All following file names will be opened in the info tool."
-msgstr ""
+msgstr "以降に続く全てのファイル名が情報ツールで開かれます。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:98
-#, fuzzy
-#| msgid "<option>--no-chapters</option>"
 msgid "<option>--edit-chapters</option>"
-msgstr "<option>--no-chapters</option>"
+msgstr "<option>--edit-chapters</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:100
 msgid "All following file names will be opened in the chapter editor."
-msgstr ""
+msgstr "以降に続く全てのファイル名がチャプタエディタで開かれます。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:105
-#, fuzzy
-#| msgid "<option>--no-chapters</option>"
 msgid "<option>--edit-headers</option>"
-msgstr "<option>--no-chapters</option>"
+msgstr "<option>--edit-headers</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:107
 msgid "All following file names will be opened in the header editor."
-msgstr ""
+msgstr "以降に続く全てのファイル名がヘッダエディタで開かれます。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:134
