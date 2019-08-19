@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-08-11 22:27+0200\n"
-"PO-Revision-Date: 2019-06-20 15:49+0000\n"
+"PO-Revision-Date: 2019-08-16 17:57+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -270,17 +270,17 @@ msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
 msgstr "  --clusters-in-meta-seek  Kümeler için üst arama verisini yaz.\n"
 
 #: src/merge/mkvmerge.cpp:286
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --colour-bits-per-channel <TID:n>\n"
 "                           Sets the number of coded bits for a colour \n"
 "                           channel. A value of 0 indicates that the number is\n"
 "                           unspecified.\n"
 msgstr ""
-"  --stereo-mode <TID:n|anahtarkelime>\n"
-"                           Stereo kipi parametrelerini ayarlar. Bu ya\n"
-"                           bir numara 0 - 14 ya da anahtar kelime olabilir\n"
-"                           (tam liste için belgelere bakın).\n"
+"  --colour-bits-per-channel <TID:n>\n"
+"                           Bir renk kanalı için kodlanmış bit sayısını \n"
+"                           ayarlar. 0 değeri, sayının belirtilmemiş olduğunu\n"
+"                           gösterir.\n"
 
 #: src/merge/mkvmerge.cpp:282
 #, no-c-format
@@ -2491,7 +2491,7 @@ msgstr "'{0}' sadece izler çıkartıldığında izin verilir.\n"
 #: src/merge/mkvmerge.cpp:2287
 #, no-c-format
 msgid "'{0}' lacks a file name.\n"
-msgstr "'{0}', bir dosya adına ihtiyacı var.\n"
+msgstr "'{0}', bir dosya adına ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2156
 #: src/merge/mkvmerge.cpp:2176
@@ -2521,23 +2521,23 @@ msgstr "'{0}', bir dosya adına ihtiyacı var.\n"
 #: src/merge/mkvmerge.cpp:2934
 #, no-c-format
 msgid "'{0}' lacks its argument.\n"
-msgstr "'{0}', bağımsız değişkene ihtiyacı var.\n"
+msgstr "'{0}', bağımsız değişkene ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2609
 #, no-c-format
 msgid "'{0}' lacks the FourCC.\n"
-msgstr "'{0}', FourCC'ye ihtiyacı var.\n"
+msgstr "'{0}', FourCC'ye ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2488
 #: src/merge/mkvmerge.cpp:2791
 #, no-c-format
 msgid "'{0}' lacks the delay.\n"
-msgstr "'{0}', gecikmeye ihtiyacı var.\n"
+msgstr "'{0}', gecikmeye ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2455
 #, no-c-format
 msgid "'{0}' lacks the file name.\n"
-msgstr "'{0}', dosya adına ihtiyacı var.\n"
+msgstr "'{0}', dosya adına ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2644
 #: src/merge/mkvmerge.cpp:2651
@@ -2561,12 +2561,12 @@ msgstr "'{0}', dosya adına ihtiyacı var.\n"
 #: src/merge/mkvmerge.cpp:2777
 #, no-c-format
 msgid "'{0}' lacks the parameter.\n"
-msgstr "'{0}', parametreye ihtiyacı var.\n"
+msgstr "'{0}', parametreye ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2847
 #, no-c-format
 msgid "'{0}' lacks the track ID.\n"
-msgstr "'{0}', iz ID'sine ihtiyacı var.\n"
+msgstr "'{0}', iz ID'sine ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2574
 #: src/merge/mkvmerge.cpp:2581
@@ -2575,7 +2575,7 @@ msgstr "'{0}', iz ID'sine ihtiyacı var.\n"
 #: src/merge/mkvmerge.cpp:2602
 #, no-c-format
 msgid "'{0}' lacks the track numbers.\n"
-msgstr "'{0}', iz numaralarına ihtiyacı var.\n"
+msgstr "'{0}', iz numaralarına ihtiyacı olur.\n"
 
 #: src/common/output.cpp:216
 #: src/common/output.cpp:229
@@ -4292,17 +4292,17 @@ msgstr "Komut satırındaki dizgiler için karakter kümesi"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:621
 #, no-c-format
 msgid "Check for &updates"
-msgstr "&Güncellemeleri kontrol et"
+msgstr "&Güncellemeleri denetle"
 
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
 #, no-c-format
 msgid "Check for available updates"
-msgstr "Mevcut güncellemeleri kontrol edin"
+msgstr "Mevcut güncellemeleri denetle"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1578
 #, no-c-format
 msgid "Check online for available &updates"
-msgstr "Mevcut &güncellemeleri çevrimiçi kontrol et"
+msgstr "Mevcut &güncellemeleri çevrimiçi denetle"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:307
 #, no-c-format
@@ -4719,7 +4719,7 @@ msgstr "'{0}' dizinini oluşturma başarısız oldu: {1}"
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:199
 #, no-c-format
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
-msgstr "Dosyayı oluşturma başarısız oldu. Bu dizine yazma iznine sahip olduğunuzdan ve bu sürücünün dolu olmadığından emin olmak için kontrol edin."
+msgstr "Dosyayı oluşturma başarısız oldu. Bu dizine yazma iznine sahip olduğunuzdan ve bu sürücünün dolu olmadığından emin olmak için gözden geçirin."
 
 #: src/merge/mkvmerge.cpp:728
 #, no-c-format
@@ -5318,9 +5318,9 @@ msgid "Disables lacing for all tracks."
 msgstr "Tüm izler için bağlamayı etkisizleştirir."
 
 #: src/common/kax_element_names.cpp:253
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Discard padding"
-msgstr "Çıkarılacak fazlalık: {0:.3f}s ({1})"
+msgstr "Doldurmaktan vazgeç"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
 #, no-c-format
@@ -6747,7 +6747,7 @@ msgstr "Eğer etkinleştirildiyse, program işlerin ve dosyaların üzerine yazm
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:225
 #, no-c-format
 msgid "If enabled, the program will check online whether or not a new release of MKVToolNix is available on the home page."
-msgstr "Eğer etkinleştirildiyse, program MKVToolNix'in yeni bir yayınının ana sayfada mevcut olup olmadığını çevrimiçi kontrol edecek."
+msgstr "Eğer etkinleştirildiyse, program MKVToolNix'in yeni bir yayınının ana sayfada mevcut olup olmadığını çevrimiçi denetleyecek."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:248
 #, no-c-format
@@ -7542,7 +7542,7 @@ msgstr "Sadece Blok İlavelerini bu seviyeye kadar tut (varsayılan: tüm seviye
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
 #, no-c-format
 msgid "Key frame"
-msgstr "Ana kare"
+msgstr "Anahtar kare"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:680
 #, no-c-format
@@ -8350,7 +8350,7 @@ msgstr "Bağlama yok"
 #: src/common/iso639.cpp:645
 #, no-c-format
 msgid "No linguistic content; Not applicable"
-msgstr ""
+msgstr "Dilsel içerik yok; Uygulanamaz"
 
 #: src/input/r_flac.cpp:128
 #, no-c-format
@@ -8480,7 +8480,7 @@ msgstr "{0} konumundaki bir onaltılık rakam değil"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
 #, no-c-format
 msgid "Not a key frame"
-msgstr "Ana kare değil"
+msgstr "Anahtar kare değil"
 
 #: src/common/kax_analyzer.cpp:299
 #, no-c-format
@@ -8627,7 +8627,7 @@ msgstr "Her iz ve kare için tek satır özetler"
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:25
 #, no-c-format
 msgid "Online check for updates"
-msgstr "Güncellemeleri çevrimiçi kontrol et"
+msgstr "Güncellemeleri çevrimiçi denetle"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:372
 #, no-c-format
@@ -10462,7 +10462,7 @@ msgstr "Dilimler"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
 #, no-c-format
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
-msgstr ""
+msgstr "Bazı H.264/AVC izleri I dilimleri içerir ancak gerçek anahtar karelere ihtiyacı olur."
 
 #: src/merge/output_control.cpp:1263
 #, no-c-format
@@ -10668,7 +10668,7 @@ msgstr "Altyazı izi %1"
 #: src/extract/xtr_textsubs.cpp:176
 #, no-c-format
 msgid "Subtitle track {0} is missing some duration elements. Please check the resulting SSA/ASS file for entries that have the same start and end time.\n"
-msgstr "Bazı süre öğelerinde altyazı izi {0} eksik. Lütfen aynı başlama ve bitiş zamanına sahip olan girişler için sonuçta oluşan SSA/ASS dosyasını kontrol edin.\n"
+msgstr "Bazı süre öğelerinde altyazı izi {0} eksik. Lütfen aynı başlama ve bitiş zamanına sahip olan girişler için sonuçta oluşan SSA/ASS dosyasını gözden geçirin.\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
 #: src/mkvtoolnix-gui/merge/track.cpp:430
@@ -10938,12 +10938,12 @@ msgstr "Matroska kalıbı biçimi bir görüntü izi için görüntüleme geniş
 #: src/common/qt_kax_analyzer.cpp:76
 #, no-c-format
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
-msgstr "Matroska dosyası değiştirildi, ancak üst arama girişi güncellenemedi. Bu, oynatıcıların bu öğeyi bulmada zorlanabileceği anlamına gelir. Lütfen dosyayı kontrol etmek için sık kullandığınız oynatıcınızı kullanın."
+msgstr "Matroska dosyası değiştirildi, ancak üst arama girişi güncellenemedi. Bu, oynatıcıların bu öğeyi bulmada zorlanabileceği anlamına gelir. Lütfen dosyayı denetlemek için sık kullandığınız oynatıcınızı kullanın."
 
 #: src/propedit/propedit.cpp:46
 #, no-c-format
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
-msgstr "Matroska dosyası değiştirildi, ancak üst arama girişi güncellenemedi. Bu, oynatıcıların bu öğeyi bulmada zorlanabileceği anlamına gelir. Lütfen dosyayı kontrol etmek için sık kullandığınız oynatıcınızı kullanın."
+msgstr "Matroska dosyası değiştirildi, ancak üst arama girişi güncellenemedi. Bu, oynatıcıların bu öğeyi bulmada zorlanabileceği anlamına gelir. Lütfen dosyayı denetlemek için sık kullandığınız oynatıcınızı kullanın."
 
 #: src/common/qt_kax_analyzer.cpp:100
 #: src/propedit/propedit.cpp:63
@@ -11825,7 +11825,7 @@ msgstr "Dosya adlarındaki tanınan iz dillerinin listesi boş olmamak zorundad�
 #: src/common/translation.cpp:364
 #, no-c-format
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
-msgstr "Yerel dil düzgün olarak ayarlanamadı. LANG, LC_ALL ve LC_MESSAGES ortam değişkenlerini kontrol edin.\n"
+msgstr "Yerel dil düzgün olarak ayarlanamadı. LANG, LC_ALL ve LC_MESSAGES ortam değişkenlerini gözden geçirin.\n"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
@@ -12676,9 +12676,9 @@ msgid "This option controls how the chapter names are created."
 msgstr "Bu seçenek, bölüm adlarının nasıl oluşturulduğunu denetler."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:95
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "This option forces mkvmerge to treat all of those I slices as key frames."
-msgstr "Bu seçenek mkvmerge'ün en-boy oranı bilgisini bitakışından kaldırmasına neden olur."
+msgstr "Bu seçenek, mkvmerge'ü tüm bu I dilimlerini anahtar kareler olarak davranmaya zorlar."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:30
 #, no-c-format
@@ -13102,7 +13102,7 @@ msgstr "Dosyalar ilave edilemiyor"
 #: src/common/iso639.cpp:644
 #, no-c-format
 msgid "Undetermined"
-msgstr ""
+msgstr "Belirsiz"
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
