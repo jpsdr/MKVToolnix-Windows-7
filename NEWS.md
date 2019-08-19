@@ -6,6 +6,15 @@
   Wikipedia's "List of languages by native speakers" by default. Also by
   default only those languages will be shown in the language drop-down boxes.
 
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: fixed a bug in the "make destination file names
+  unique" logic that caused an existing number-in-parenthesis at the end of
+  the file base name to be removed in certain situations (e.g. when the first
+  added file was named `m (3).mkv` and both `m (3) (1).mkv` and `m (3)
+  (2).mkv` existed already, the GUI was suddenly use `m.mkv` instead of `m (3)
+  (3).mkv`).
+
 
 # Version 36.0.0 "Is That Jazz?" 2019-08-10
 

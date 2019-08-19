@@ -332,7 +332,7 @@ protected:
 
   virtual void setOutputFileNameMaybe(bool force = false);
   virtual QString suggestOutputFileNameExtension() const;
-  virtual QString generateUniqueOutputFileName(QString const &baseName, QDir const &outputDir);
+  virtual QString generateUniqueOutputFileName(QString const &baseName, QDir const &outputDir, bool removeUniquenessSuffix = false);
 
   virtual void enableDisableAllTracks(bool enable);
 

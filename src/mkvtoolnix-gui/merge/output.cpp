@@ -720,7 +720,7 @@ Tab::changeOutputDirectoryTo(QString const &directory) {
   auto makeUnique  = Util::Settings::get().m_uniqueOutputFileNames;
   auto oldFileName = QFileInfo{ m_config.m_destination }.fileName();
   auto newFileName = !oldFileName.isEmpty() ? oldFileName : Q("%1.%2").arg(QY("unnamed")).arg(suggestOutputFileNameExtension());
-  auto newFilePath = makeUnique ? generateUniqueOutputFileName(QFileInfo{newFileName}.completeBaseName(), QDir{directory}) : Q("%1/%2").arg(directory).arg(newFileName);
+  auto newFilePath = makeUnique ? generateUniqueOutputFileName(QFileInfo{newFileName}.completeBaseName(), QDir{directory}, true) : Q("%1/%2").arg(directory).arg(newFileName);
 
   ui->output->setText(QDir::toNativeSeparators(newFilePath));
 }

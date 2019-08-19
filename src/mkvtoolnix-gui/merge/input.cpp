@@ -1562,13 +1562,19 @@ Tab::setOutputFileNameMaybe(bool force) {
 
 QString
 Tab::generateUniqueOutputFileName(QString const &baseName,
-                                  QDir const &outputDir) {
+                                  QDir const &outputDir,
+                                  bool removeUniquenessSuffix) {
   auto &settings       = Util::Settings::get();
   auto cleanedBaseName = baseName;
   auto suffix          = suggestOutputFileNameExtension();
+  auto needToRemove    =    removeUniquenessSuffix
+                         && !m_config.m_destinationUniquenessSuffix.isEmpty()
+                         && cleanedBaseName.endsWith(m_config.m_destinationUniquenessSuffix);
 
-  if (   !m_config.m_destinationUniquenessSuffix.isEmpty()
-      && cleanedBaseName.endsWith(m_config.m_destinationUniquenessSuffix))
+  qDebug() << "generateUniqueOutputFileName: baseName" << baseName << "suffix" << suffix << "destinationUniquenessSuffix" << m_config.m_destinationUniquenessSuffix
+           << "removeUniquenessSuffix" << removeUniquenessSuffix << "needToRemove" << needToRemove;
+
+  if (needToRemove)
     cleanedBaseName.remove(cleanedBaseName.length() - m_config.m_destinationUniquenessSuffix.length(), m_config.m_destinationUniquenessSuffix.length());
 
   auto idx = 0;
