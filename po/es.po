@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-08-11 22:27+0200\n"
-"PO-Revision-Date: 2019-06-22 15:19+0000\n"
+"PO-Revision-Date: 2019-08-13 14:22+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -27,7 +27,7 @@ msgid ""
 "The temporary TTA file for track ID {0} is being copied into the final TTA file. This may take some time.\n"
 msgstr ""
 "\n"
-"El archivo temporal de la TTA para track ID {0}se está copiando en el archivo final de TTA. Esto puede tomar algún tiempo.\n"
+"El archivo temporal de la TTA para track ID {0} se está copiando en el archivo final de TTA. Esto puede tomar algún tiempo.\n"
 
 #: src/merge/output_control.cpp:252
 #, no-c-format
@@ -36,7 +36,7 @@ msgid ""
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
 msgstr ""
 "\n"
-"mkvmerge ha recibido un SIGINT (probablemente porque el usuario ha presionado Ctrl+C). Intentando sanear el archivo. Si mkvmerge no responde durante el proceso, tendrá que finalizarlo manualmente.\n"
+"mkvmerge recibió un SIGINT (probablemente porque el usuario ha presionado Ctrl+C). Intentando sanear el archivo. Si mkvmerge se cuelga durante el proceso, tendrá que finalizarlo manualmente.\n"
 
 #: src/merge/mkvmerge.cpp:177
 #, no-c-format
@@ -44,10 +44,9 @@ msgid ""
 "  ( <file1> <file2> )      Treat file1 and file2 as if they were concatenated\n"
 "                           into a single big file.\n"
 msgstr ""
-"  ( <archivo1> <archivo2> )\n"
-"                           Tratar a archivo1 y archivo2 como si \n"
-"                           estuvieran concatenados en un único archivo de\n"
-"                           gran tamaño.\n"
+"  ( <file1> <file2> )       Tratar a archivo1 y archivo2 como si \n"
+"                            estuvieran concatenados en un único archivo de\n"
+"                            gran tamaño.\n"
 
 #: src/merge/mkvmerge.cpp:242
 #, no-c-format
@@ -627,8 +626,8 @@ msgid ""
 "                           2 <= n <= 4 with 4 being the default.\n"
 msgstr ""
 "  --nalu-size-length <TID:n>\n"
-"                           Fuerza la extensión de tamaño NALU a n bytes con\n"
-"                           2 <= n <= 4 con 4 siendo es establecido.\n"
+"                           Fuerza un tamaño NALU con extensión de n bytes \n"
+"                           conforme a 2 <= n <= 4, siendo 4 el predeterminado.\n"
 
 #: src/merge/mkvmerge.cpp:220
 #, no-c-format
@@ -2521,7 +2520,7 @@ msgstr "'{0}' no es un par válido de ID para el archivo y pista en '--track-ord
 #: src/merge/mkvmerge.cpp:1610
 #, no-c-format
 msgid "'{0}' is not a valid pair of track ID and NALU size length in '--nalu-size-length {0}'.\n"
-msgstr "'{0}' no es un par válido de ID para la pista y extensión de tamaño NALU en '--nalu-size-length {0}'.\n"
+msgstr "'{0}' no es un par válido de ID de pista y tamaño NALU con extensión de '--nalu-size-length {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1686
 #, no-c-format
@@ -2934,12 +2933,12 @@ msgstr "Un único ID para identificar la pista. Éste debe ser el mismo cuando r
 #: src/common/property_element.cpp:119
 #, no-c-format
 msgid "A unique ID to identify the next chained segment (128 bits)."
-msgstr "Un UID (IDentificador Único) para identificar el siguiente segmento concatenado (128 bits)."
+msgstr "Un único ID para identificar el siguiente segmento concatenado (128 bits)."
 
 #: src/common/property_element.cpp:118
 #, no-c-format
 msgid "A unique ID to identify the previous chained segment (128 bits)."
-msgstr "Un UID (IDentificador Único) para identificar el anterior segmento concatenado (128 bits)."
+msgstr "Un único ID para identificar el anterior segmento concatenado (128 bits)."
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:53
 #, no-c-format
@@ -3473,7 +3472,7 @@ msgstr "Todas las unidades se basan en 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
 #, no-c-format
 msgid "Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
-msgstr "Permite almacenar un vídeo AVC/H.264 en modo compatible con Video-for-Windows -Vfw-, p.e. cuando se lee desde un AVI."
+msgstr "Permite almacenar un vídeo AVC/H.264 en modo compatible con Video-for-Windows, p.e. cuando se lee desde un AVI."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:713
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:734
@@ -3570,12 +3569,12 @@ msgstr "Un nombre de archivo vacío no es válido.\n"
 #: src/common/property_element.cpp:115
 #, no-c-format
 msgid "An escaped filename corresponding to the next segment."
-msgstr "Un nombre de archivo de escape correspondiente al siguiente segmento."
+msgstr "Un nombre de archivo a evitar relativo al siguiente segmento."
 
 #: src/common/property_element.cpp:114
 #, no-c-format
 msgid "An escaped filename corresponding to the previous segment."
-msgstr "Un nombre de archivo de escape correspondiente al anterior segmento."
+msgstr "Un nombre de archivo a evitar relativo al segmento anterior."
 
 #: src/merge/mkvmerge.cpp:3160
 #, no-c-format
@@ -4661,7 +4660,7 @@ msgstr "CoreAudio"
 #: src/input/r_avi.cpp:347
 #, no-c-format
 msgid "Could not extract the decoder specific config data (AVCC) from this AVC/H.264 track.\n"
-msgstr "No se pudo extraer los datos de configuración específicos del decodificador (AVCC) de esta pista AVC/H.264.\n"
+msgstr "No se pudieron extraer los datos de configuración específicos del decodificador (AVCC) de esta pista AVC/H.264.\n"
 
 #: src/input/r_avi.cpp:297
 #: src/input/r_avi.cpp:302
@@ -5234,7 +5233,7 @@ msgstr "Eliminar uno o más adjuntos"
 #: src/mkvtoolnix-gui/util/settings.cpp:54
 #, no-c-format
 msgid "Delete source files for multiplexer jobs"
-msgstr "Eliminar archivos de origen de las tareas de multiplexado"
+msgstr "Eliminar archivos de origen para tareas de multiplexado"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:381
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:387
@@ -6385,7 +6384,7 @@ msgstr "Establecer el lector de Matroska para utilizar el empaquetado genérico 
 #: src/mkvtoolnix-gui/merge/input.cpp:513
 #, no-c-format
 msgid "Forces the NALU size length to a certain number of bytes."
-msgstr "Fuerza el tamaño de la longitud NALU a un cierto número de bytes."
+msgstr "Fuerza el tamaño NALU con una extensión de un cierto número de bytes."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:474
 #, no-c-format
@@ -8190,7 +8189,7 @@ msgstr "Multiplicar los códigos de tiempo de esta pista por un factor."
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 #, no-c-format
 msgid "NALU size length:"
-msgstr "Extensión de tamaño NALU:"
+msgstr "Tamaño NALU de extensión:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:170
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1667
@@ -8437,7 +8436,7 @@ msgstr "Sin ataduras"
 #: src/common/iso639.cpp:645
 #, no-c-format
 msgid "No linguistic content; Not applicable"
-msgstr ""
+msgstr "Ningún contenido lingüístico; No aplicable"
 
 #: src/input/r_flac.cpp:128
 #, no-c-format
@@ -10238,12 +10237,12 @@ msgstr "Establecer el nombre del &archivo de salida a partir del nombre del arch
 #: src/common/property_element.cpp:128
 #, no-c-format
 msgid "Set if that track (audio, video or subs) SHOULD be used if no language found matches the user preference."
-msgstr "Establecer si esta pista (audio, video o subtítulos) DEBE utilizarse si no encuentra ningún idioma que coincida con la preferencia del usuario."
+msgstr "Establecer si esta pista (audio, video o subtítulos) DEBE utilizarse si no encuentra ningún idioma que coincida con las preferencias del usuario."
 
 #: src/common/property_element.cpp:131
 #, no-c-format
 msgid "Set if that track MUST be used during playback. There can be many forced track for a kind (audio, video or subs). The player should select the one whose language matches the user preference or the default + forced track."
-msgstr "Establecer si esta pista DEBE ser usada durante la reproducción. Puede haber múltiples pistas forzadas para cada tipo (audio, video o subtítulos). El reproductor debería seleccionar la única cuyo idioma coincida con la preferencia del usuario o la pista predefinida más la forzada."
+msgstr "Establecer si esta pista DEBE ser usada durante la reproducción. Puede haber múltiples pistas forzadas para cada tipo (audio, video o subtítulos). El reproductor debería seleccionar la única cuyo idioma coincida con las preferencias del usuario o la pista predefinida más la forzada."
 
 #: src/common/property_element.cpp:130
 #, no-c-format
@@ -10550,7 +10549,7 @@ msgstr "Cortes"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
 #, no-c-format
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
-msgstr "Algunas pistas H.264/AVC continen segmentos I pero carecen de verdaderos fotogramas claves."
+msgstr "Algunas pistas H.264/AVC contienen fragmentos I pero carecen de auténticos fotogramas claves."
 
 #: src/merge/output_control.cpp:1263
 #, no-c-format
@@ -10611,7 +10610,7 @@ msgstr "Especificar el idioma de la pista en el formulario de idiomas de Matrosk
 #: src/common/property_element.cpp:158
 #, no-c-format
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
-msgstr "Especificar las posibles modificaciones de relación de aspecto (0: libre redimensionado, 1: mantener relación de aspecto, 2: fijado)."
+msgstr "Especificar las posibles modificaciones de relación de aspecto (0: Transformación libre, 1: Mantener relación de aspecto, 2: Fija)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 #, no-c-format
@@ -11042,7 +11041,7 @@ msgstr "El último elemento de los archivos matroska se establece a un tamaño d
 #: src/merge/mkvmerge.cpp:1618
 #, no-c-format
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length {0}'.\n"
-msgstr "La extensión de tamaño NALU debe ser un número entre el 2 y el 4 incluido en '--nalu-size-length {0}'.\n"
+msgstr "La extensión para el tamaño NALU debe ser un número entre el 2 y el 4 incluido en '--nalu-size-length {0}'.\n"
 
 #: src/input/r_ogm.cpp:1528
 #, no-c-format
@@ -11224,7 +11223,7 @@ msgstr "Los conjuntos de caracteres seleccionados aquí se mostrarán en la part
 #: src/output/p_hevc.cpp:154
 #, no-c-format
 msgid "The chosen NALU size length of {0} is too small. Try using '4'.\n"
-msgstr "La extensión de tamaño NALU elegida de {0} es demasiado pequeña. Prueba a utilizar '4'.\n"
+msgstr "La extensión para el tamaño NALU elegida de {0} es demasiado pequeña. Prueba a utilizar '4'.\n"
 
 #: src/merge/mkvmerge.cpp:2038
 #, no-c-format
@@ -11928,7 +11927,7 @@ msgstr "El máximo número archivos que serán creados incluso si el último arc
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
-msgstr "El número máximo de fotogramas que un reproductor debería ser capaz de almacenar en la memoria caché durante la reproducción. Si lo estableces a 0, el sistema de referencia pseudo-cache no es utilizada."
+msgstr "El número máximo de fotogramas que un reproductor debería ser capaz de almacenar en caché durante la reproducción. Si lo establece a 0, el sistema de referencia pseudo-cache no se utiliza."
 
 #: src/common/qt_kax_analyzer.cpp:70
 #: src/propedit/propedit.cpp:42
@@ -11939,7 +11938,7 @@ msgstr "El elemento meta seek fue escrito al final del archivo, pero el tamaño 
 #: src/common/property_element.cpp:135
 #, no-c-format
 msgid "The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
-msgstr "El número mínimo de fotogramas que un reproductor debería ser capaz de almacenar en la memoria caché durante la reproducción. Si lo estableces a 0, el sistema de referencia pseudo-caché no es utilizada."
+msgstr "El número mínimo de fotogramas que un reproductor debería ser capaz de almacenar en caché durante la reproducción. Si lo establece a 0, el sistema de referencia pseudo-caché no se utiliza."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:695
 #, no-c-format
@@ -12011,12 +12010,12 @@ msgstr "El número de los códigos de tiempos externos {0} es más pequeño que 
 #: src/common/property_element.cpp:157
 #, no-c-format
 msgid "The number of video pixels to remove on the bottom of the image."
-msgstr "El número de píxeles del video a eliminar en la parte inferior de la imagen."
+msgstr "El número de píxeles del video a eliminar de la parte inferior de la imagen."
 
 #: src/common/property_element.cpp:154
 #, no-c-format
 msgid "The number of video pixels to remove on the left of the image."
-msgstr "El número de píxeles del video a eliminar en la parte izquierda de la imagen."
+msgstr "El número de píxeles del video a eliminar a la izquierda de la imagen."
 
 #: src/common/property_element.cpp:156
 #, no-c-format
@@ -12548,17 +12547,17 @@ msgstr "Esta pista AC-3 contiene {0} bytes de información que no son datos AC-3
 #: src/output/p_avc_es.cpp:100
 #, no-c-format
 msgid "This AVC/H.264 contains frames that are too big for the current maximum NALU size. You have to re-run mkvmerge and set the maximum NALU size to {0} for this track (command line parameter '--nalu-size-length {1}:{0}').\n"
-msgstr "Esta pista AVC/H.264 contiene fotogramas que son demasiado grandes para el tamaño máximo de NALU. Tienes que volver a ejecutar mkvmerge y establecer el tamaño máximo de NALU to {0} para la pista (parametro de línea de comandos '--nalu-size-length {1}:{0}').\n"
+msgstr "Esta pista AVC/H.264 contiene fotogramas que son demasiado grandes para el tamaño máximo de NALU. Tiene que volver a ejecutar mkvmerge y establecer para esa pista el tamaño máximo de NALU to {0} (parámetro de línea de comandos '--nalu-size-length {1}:{0}').\n"
 
 #: src/output/p_avc_es.cpp:118
 #, no-c-format
 msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
-msgstr "Esta pista AVC/H.264 no comienza con un fotograma clave (keyframe). Los primeros fotogramas {0} han sido omitidos.\n"
+msgstr "Esta pista AVC/H.264 no comienza con un fotograma clave (keyframe). Los primeros {0} fotogramas se han omitido.\n"
 
 #: src/output/p_avc_es.cpp:128
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
-msgstr "La información de sincronización de la pista AVC/H.264 indica que usa una tasa de fotogramas variable (variable framerate). Sin embargo, ni la duración por defecto ni un archivo de timestamps externo ha sido proporcionado para esto, y tampoco el contenedor proporciona los timestamps. Los timestamps resultantes puede que no sean útiles.\n"
+msgstr "La información de temporización de la pista AVC/H.264 indica que usa una tasa de fotogramas variable. Sin embargo, ni la duración por defecto ni un archivo externo de códigos de tiempo fue proporcionado a tal efecto, y el contenedor tampoco proporciona dichos códigos. Los códigos de tiempo resultantes puede que no sean válidos.\n"
 
 #: src/output/p_hevc_es.cpp:96
 #, no-c-format
@@ -12794,7 +12793,7 @@ msgstr "Esta opción le indica a mkvmerge qué relación de aspecto debe usar cu
 #: src/mkvtoolnix-gui/merge/input.cpp:516
 #, no-c-format
 msgid "This parameter is only effective for AVC/H.264 and HEVC/H.265 elementary streams read from AVC/H.264 ES or HEVC/H.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
-msgstr "Este parámetro sólo es eficaz para leer secuencias básicas AVC/H.264 y HEVC/H.265 desde archivos AVC/H.264 ES o HEVC/H.265 ES, AVIs o archivos Matroska creados con '--engage allow_avc_in_vwf_mode'."
+msgstr "Este parámetro sólo es eficaz para leer secuencias básicas AVC/H.264 y HEVC/H.265 a partir de archivos AVC/H.264 ES o HEVC/H.265 ES, AVIs o archivos Matroska creados con '--engage allow_avc_in_vwf_mode'."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:498
 #, no-c-format
@@ -13147,7 +13146,7 @@ msgstr "Tipo"
 #: src/common/property_element.cpp:153
 #, no-c-format
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
-msgstr "Tipo de unidad para mostrar la anchura/altura (0: píxeles, 1: centímetros, 2: pulgadas, 3: relación de aspecto)."
+msgstr "Tipo de unidad para el ancho/alto de pantalla (0: píxeles, 1: centímetros, 2: pulgadas, 3: relación de aspecto)."
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:324
 #, no-c-format
@@ -13191,7 +13190,7 @@ msgstr "Imposible unir archivos"
 #: src/common/iso639.cpp:644
 #, no-c-format
 msgid "Undetermined"
-msgstr ""
+msgstr "Indeterminado"
 
 #: src/mpegparser/M2VParser.cpp:254
 #, no-c-format
@@ -13382,7 +13381,7 @@ msgstr "Utiliza los nombres de los capítulos del idioma especificado para la ex
 #: src/merge/mkvmerge.cpp:1622
 #, no-c-format
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/H.264 codecs.\n"
-msgstr "Usando un tamaño de extensión NALU de 3 bytes debería dar lugar a pistas que no podrán ser decodificables con ciertos códecs AVC/H.264.\n"
+msgstr "Usar un tamaño NALU con extensión de 3 bytes podría generar pistas que no se pudiesen decodificar con ciertos códecs AVC/H.264.\n"
 
 #: src/merge/generic_reader.h:41
 #, no-c-format
@@ -13650,7 +13649,7 @@ msgstr "Video: rango de color"
 #: src/common/property_element.cpp:176
 #, no-c-format
 msgid "Video: horizontal chroma siting"
-msgstr "Video: posición croma horizontal"
+msgstr "Video: posición crominancia horizontal"
 
 #: src/common/property_element.cpp:181
 #, no-c-format
@@ -13717,7 +13716,7 @@ msgstr "Video: características de transferencia"
 #: src/common/property_element.cpp:177
 #, no-c-format
 msgid "Video: vertical chroma siting"
-msgstr "Video: posición croma vertical"
+msgstr "Video: posición crominancia vertical"
 
 #: src/common/property_element.cpp:190
 #, no-c-format
@@ -14730,9 +14729,7 @@ msgstr "mkvmerge no distingue entre los dos y simplemente cuenta el número de b
 msgid ""
 "mkvmerge encountered broken or unparsable data in this AVC/H.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
 "{0}\n"
-msgstr ""
-"mkvmerge ha encontrado datos corruptos o no aptos para su procesamiento en esta pista de vídeo AVC/H.264. Puede ser que tu archivo esté corrupto (al que mkvmerge todavía no puede hacer frente)\n"
-"o se trata de un error del propio mkvmerge. El mensaje de error fue: {0}\n"
+msgstr "mkvmerge ha encontrado datos corruptos o imposibles de analizar en esta pista de vídeo AVC/H.264. Puede que su archivo esté dañado (y mkvmerge aún no pueda afrontarlo) o que sea un error del propio mkvmerge. El mensaje de error fue: {0}\n"
 
 #: src/output/p_hevc_es.cpp:103
 #, no-c-format
