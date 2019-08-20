@@ -4,6 +4,8 @@
 
 #include <QDialog>
 
+class QEvent;
+
 namespace mtx { namespace gui { namespace Util {
 
 class TextDisplayDialogPrivate;
@@ -28,6 +30,8 @@ public:
 
   TextDisplayDialog &setTitle(QString const &title);
   TextDisplayDialog &setText(QString const &text, Format format);
+
+  virtual bool eventFilter(QObject *o, QEvent *e) override;
 
 public slots:
   virtual void copyToClipboard();

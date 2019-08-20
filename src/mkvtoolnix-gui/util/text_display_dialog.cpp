@@ -1,6 +1,9 @@
 #include "common/common_pch.h"
 
 #include <QClipboard>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QKeySequence>
 
 #include "common/markdown.h"
 #include "common/qt.h"
@@ -14,6 +17,7 @@ class TextDisplayDialogPrivate {
 
   std::unique_ptr<Ui::TextDisplayDialog> ui;
   QString m_text;
+  TextDisplayDialog::Format m_format{TextDisplayDialog::Format::Plain};
 
   TextDisplayDialogPrivate()
     : ui{new Ui::TextDisplayDialog}
@@ -29,6 +33,8 @@ TextDisplayDialog::TextDisplayDialog(QWidget *parent)
 
   // Setup UI controls.
   p->ui->setupUi(this);
+
+  p->ui->text->installEventFilter(this);
 
   connect(p->ui->pbClose,           &QPushButton::clicked, this, &TextDisplayDialog::accept);
   connect(p->ui->pbCopyToClipboard, &QPushButton::clicked, this, &TextDisplayDialog::copyToClipboard);
@@ -62,7 +68,8 @@ TextDisplayDialog::setText(QString const &text,
       break;
   }
 
-  p->m_text = text;
+  p->m_text   = text;
+  p->m_format = format;
 
   return *this;
 }
@@ -70,6 +77,22 @@ TextDisplayDialog::setText(QString const &text,
 void
 TextDisplayDialog::copyToClipboard() {
   QApplication::clipboard()->setText(p_func()->m_text);
+}
+
+bool
+TextDisplayDialog::eventFilter(QObject *o,
+                               QEvent *e) {
+  auto p = p_func();
+
+  if (   (p->m_format == Format::Markdown)
+      && (o           == p->ui->text)
+      && (e->type()   == QEvent::KeyPress)
+      && (static_cast<QKeyEvent *>(e)->matches(QKeySequence::Copy))) {
+    copyToClipboard();
+    return true;
+  }
+
+  return QDialog::eventFilter(o, e);
 }
 
 }}}
