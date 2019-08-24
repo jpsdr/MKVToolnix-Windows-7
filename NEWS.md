@@ -14,6 +14,10 @@
   added file was named `m (3).mkv` and both `m (3) (1).mkv` and `m (3)
   (2).mkv` existed already, the GUI was suddenly use `m.mkv` instead of `m (3)
   (3).mkv`).
+* MKVToolNix GUI: on Windows the GUI is built with a slightly older version of
+  the Qt library again (5.12.4). The Qt version used in release v36.0.0,
+  v5.13.0, lead to crashes when doing certain things such as selecting
+  multiple tracks in the multiplexer. Fixes #2605 and #26008.
 
 
 # Version 36.0.0 "Is That Jazz?" 2019-08-10
