@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-08-11 22:27+0200\n"
-"PO-Revision-Date: 2019-08-25 11:58+0200\n"
-"Last-Translator: René Maassen <bmom43@hotmail.com>\n"
+"PO-Revision-Date: 2019-08-26 21:31+0200\n"
+"Last-Translator: Theo Gommans <gommysan@home.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -93,8 +93,8 @@ msgid ""
 "                           width and height for this aspect ratio.\n"
 msgstr ""
 "  --aspect-ratio <TID:f|a/b>\n"
-"                           Stelt scherm instellingen in door te berekenen de\n"
-"                           breedte en hoogte voor de verwachtte verhouding.\n"
+"                           Stelt scherm instellingen in door\n"
+"                           de breedte en hoogte voor de beeldverhouding.\n"
 
 #: src/merge/mkvmerge.cpp:267
 #, no-c-format
@@ -1163,7 +1163,7 @@ msgstr " (adler: 0x{0:08x})"
 #: src/common/kax_info.cpp:685
 #, no-c-format
 msgid " (aspect ratio)"
-msgstr " (verwachtte verhouding)"
+msgstr " (beeldverhouding)"
 
 #: src/common/kax_info.cpp:683
 #, no-c-format
@@ -1193,7 +1193,7 @@ msgstr " (inch)"
 #: src/common/kax_info.cpp:712
 #, no-c-format
 msgid " (keep aspect ratio)"
-msgstr " (hou huidige verhouding)"
+msgstr " (houd beeldverhouding)"
 
 #: src/common/kax_info.cpp:682
 #, no-c-format
@@ -2151,12 +2151,12 @@ msgstr "&Window"
 #: src/merge/mkvmerge.cpp:2616
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
-msgstr "'--aspect-ratio' verwachtte verhouding, mist zijn verwachtte verhouding.\n"
+msgstr "'--aspect-ratio' beeldverhouding ontbreekt.\n"
 
 #: src/merge/mkvmerge.cpp:2623
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
-msgstr "'--aspect-ratio-factor' verwachtte verhouding factor, mist zijn verwachtte verhouding factor.\n"
+msgstr "'--aspect-ratio-factor' beeldverhouding factor ontbreekt.\n"
 
 #: src/merge/mkvmerge.cpp:2426
 #, no-c-format
@@ -3560,17 +3560,17 @@ msgstr "Bijvoegen {0} van bestand nr. {1} ('{2}') naar spoor {3} van bestand nr.
 #: src/merge/mkvmerge.cpp:651
 #, no-c-format
 msgid "Aspect ratio"
-msgstr "Verwachte ratio"
+msgstr "Beeldverhouding"
 
 #: src/merge/mkvmerge.cpp:651
 #, no-c-format
 msgid "Aspect ratio factor"
-msgstr "Verwachtte verhouding factor"
+msgstr "Beeldverhouding factor"
 
 #: src/common/kax_element_names.cpp:158
 #, no-c-format
 msgid "Aspect ratio type"
-msgstr "Verwachte ratio type"
+msgstr "Beeldverhouding type"
 
 #: src/common/xml/ebml_chapters_converter.cpp:109
 #, no-c-format
@@ -3852,12 +3852,12 @@ msgstr "Variabel (ja/nee, aan/uit etc.)"
 #: src/merge/generic_packetizer.cpp:200
 #, no-c-format
 msgid "Both the aspect ratio and '--display-dimensions' were given.\n"
-msgstr "Zowel verwachtte verhouding en '--scherm-verhouding' werden gegeven.\n"
+msgstr "Zowel beeldverhouding als '--scherm-verhouding' werden gegeven.\n"
 
 #: src/merge/generic_packetizer.cpp:198
 #, no-c-format
 msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
-msgstr "Zowel verwachtte verhouding factor en '--scherm-verhouding' werden gegeven.\n"
+msgstr "Zowel beeldverhouding factor als '--scherm-afmetingen' werden gegeven.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:698
 #, no-c-format
@@ -5983,23 +5983,23 @@ msgstr "Extract de data naar een raw bestand."
 #: src/output/p_hevc_es.cpp:135
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
-msgstr "Haal de verwachtte verhouding informatie uit de HEVC video data en zet scherm verhouding naar {0}/{1}.\n"
+msgstr "Haal de beeldverhouding informatie uit de HEVC video data en zet scherm afmetingen naar {0}/{1}.\n"
 
 #: src/output/p_avc.cpp:101
 #: src/output/p_avc_es.cpp:149
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"
-msgstr "Haal de verwachtte verhouding informatie uit de MPEG-4 layer 10 (AVC) video data en zet het naar scherm verhouding {0}/{1}.\n"
+msgstr "Haal de beeldverhouding informatie uit de MPEG-4 layer 10 (AVC) video data en zet de scherm afmetingen naar {0}/{1}.\n"
 
 #: src/output/p_mpeg4_p2.cpp:326
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to {0}/{1}.\n"
-msgstr "Haal de verwachtte verhouding informatie uit de MPEG4 layer 2 video data en zet scherm verhouding naar {0}/{1}.\n"
+msgstr "Haal de beeldverhouding informatie uit de MPEG4 layer 2 video data en zet de scherm afmetingen naar {0}/{1}.\n"
 
 #: src/output/p_theora.cpp:72
 #, no-c-format
 msgid "Extracted the aspect ratio information from the Theora video headers and set the display dimensions to {0}/{1}.\n"
-msgstr "Haal de verwachtte verhouding informatie uit de Theora video beginblokken en zet het scherm verhouding naar {0}/{1}.\n"
+msgstr "Haal de beeldverhouding informatie uit de Theora video beginblokken en zet de scherm afmetingen naar {0}/{1}.\n"
 
 #: src/extract/extract_cli_parser.cpp:136
 #, no-c-format
@@ -8458,7 +8458,7 @@ msgstr "Normaal zal mkvmerge de tijd informatie niet veranderen van het (beeld/v
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:80
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
-msgstr "Normaal gesproken behoud mkvmerge de verwachtte verhouding info van een MPEG4 video bit stroom en plaatst de informatie in de inhoud. "
+msgstr "Normaal gesproken behoudt mkvmerge de beeldverhouding info van een MPEG4 video bit stroom en plaatst de informatie in de inhoud. "
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:306
 #, no-c-format
@@ -10144,7 +10144,7 @@ msgstr "Stelt de karakterset in voor een ondertitel bestand of waarin het hoofds
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1738
 #, no-c-format
 msgid "Set aspect ratio:"
-msgstr "Verwachte ratio:"
+msgstr "Ingestelde beeldverhouding:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1419
 #, no-c-format
@@ -10527,7 +10527,7 @@ msgstr "Specificeert de taal van een spoor in het Matroska talen formulier."
 #: src/common/property_element.cpp:158
 #, no-c-format
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
-msgstr "Geef de mogelijke veranderingen op voor de verwachtte verhouding (0: vrij vergroten/verkleinen, 1: houd huidige verhouding, 2: vast)."
+msgstr "Geef de mogelijke veranderingen op voor de beeldverhouding (0: vrij vergroten/verkleinen, 1: houd beeldverhouding, 2: vast)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 #, no-c-format
@@ -12677,7 +12677,7 @@ msgstr "Dit werkt alléén met DTS audio sporen."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:81
 #, no-c-format
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
-msgstr "Deze optie zorgt ervoor, dat mkvmerge de beeldverhouding informatie uit de bitstream verwijderd."
+msgstr "Deze optie zorgt ervoor, dat mkvmerge de beeldverhouding informatie uit de bitstream verwijdert."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:198
 #, no-c-format
@@ -12707,7 +12707,7 @@ msgstr "Deze optie specificeert de taal om te worden geassocieerd met hoofdstukk
 #: src/mkvtoolnix-gui/merge/input.cpp:487
 #, no-c-format
 msgid "This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."
-msgstr "Deze optie vertelt mkvmerge de verwachtte beeldscherm ratio te gebruiken wanneer het de scherm breedte / hoogte berekent."
+msgstr "Deze optie vertelt mkvmerge de scherm beeldverhouding te gebruiken wanneer het de scherm breedte / hoogte berekent."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:516
 #, no-c-format
@@ -13065,7 +13065,7 @@ msgstr "Type"
 #: src/common/property_element.cpp:153
 #, no-c-format
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
-msgstr "Type van de unit voor Scherm Breedte/Hoogte (0: pixels, 1: centimeters, 2: inches, 3: verwachtte verhouding)."
+msgstr "Type van de unit voor Scherm Breedte/Hoogte (0: pixels, 1: centimeters, 2: inches, 3: beeldverhouding)."
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:324
 #, no-c-format
@@ -13412,7 +13412,7 @@ msgstr "Video"
 #: src/common/property_element.cpp:158
 #, no-c-format
 msgid "Video aspect ratio type"
-msgstr "Verwachtte video verhouding type"
+msgstr "Video beeldverhouding type"
 
 #: src/common/kax_element_names.cpp:122
 #, no-c-format
