@@ -540,6 +540,7 @@ std::vector<std::string> const g_popular_language_codes{
   "gre",
   "guj",
   "hau",
+  "heb",
   "hin",
   "hun",
   "ibo",

@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: Hebrew was added to the list of often-used languages so that
+  it can be selected by default again. Fixes #2610.
+
+
 # Version 37.0.0 "Leave It" 2019-08-24
 
 ## New features and enhancements
