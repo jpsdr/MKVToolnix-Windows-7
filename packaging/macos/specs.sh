@@ -8,7 +8,6 @@ spec_flac=(flac-1.3.2.tar.xz http://downloads.xiph.org/releases/flac/flac-1.3.2.
 spec_gettext=(gettext-0.19.8.1.tar.gz https://ftp.gnu.org/gnu/gettext/gettext-0.19.8.1.tar.xz ff942af0e438ced4a8b0ea4b0b6e0d6d657157c5e2364de57baa279c1c125c43)
 spec_libiconv=(libiconv-1.15.tar.gz https://ftp.gnu.org/gnu/libiconv/libiconv-1.15.tar.gz ccf536620a45458d26ba83887a983b96827001e92a13847b45e4925cc8913178)
 spec_ogg=(libogg-1.3.3.tar.xz http://downloads.xiph.org/releases/ogg/libogg-1.3.3.tar.xz 4f3fc6178a533d392064f14776b23c397ed4b9f48f5de297aba73b643f955c08)
-spec_openssl=(openssl-1.0.2o.tar.gz  https://www.openssl.org/source/openssl-1.0.2o.tar.gz ec3f5c9714ba0fd45cb4e087301eb1336c317e0d20b575a125050470e8089e4d)
 spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz 6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591)
 spec_vorbis=(libvorbis-1.3.6.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.6.tar.xz af00bb5a784e7c9e69f56823de4637c350643deedaf333d0fa86ecdba6fcb415)
 spec_zlib=(zlib-1.2.11.tar.xz https://www.zlib.net/zlib-1.2.11.tar.gz c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1)

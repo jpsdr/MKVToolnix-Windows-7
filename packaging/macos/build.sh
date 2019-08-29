@@ -261,22 +261,6 @@ function build_cmark {
     -DCMARK_SHARED=OFF
 }
 
-function build_openssl {
-  NO_CONFIGURE=1 build_package openssl
-
-  ./Configure \
-    --prefix=${TARGET} \
-    -L${TARGET}/lib \
-    no-krb5 \
-    --openssldir=${TARGET}/etc/openssl \
-    shared \
-    zlib \
-    darwin64-x86_64-cc
-
-  make
-  $DEBUG build_tarball command "make INSTALL_PREFIX=TMPDIR install"
-}
-
 function build_curl {
   build_package curl \
     --prefix=${TARGET} \
