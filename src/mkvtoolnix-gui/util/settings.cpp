@@ -327,6 +327,7 @@ Settings::load() {
   m_showOutputOfAllJobs                = reg.value(s_valShowOutputOfAllJobs,            true).toBool();
   m_switchToJobOutputAfterStarting     = reg.value(s_valSwitchToJobOutputAfterStarting, false).toBool();
   m_resetJobWarningErrorCountersOnExit = reg.value(s_valResetJobWarningErrorCountersOnExit, false).toBool();
+  m_removeOutputFileOnJobFailure       = reg.value(s_valRemoveOutputFileOnJobFailure,       false).toBool();
   m_jobRemovalPolicy                   = static_cast<JobRemovalPolicy>(reg.value(s_valJobRemovalPolicy, static_cast<int>(JobRemovalPolicy::Never)).toInt());
   m_removeOldJobs                      = reg.value(s_valRemoveOldJobs,                                  true).toBool();
   m_removeOldJobsDays                  = reg.value(s_valRemoveOldJobsDays,                              14).toInt();
@@ -664,6 +665,7 @@ Settings::save()
   reg.setValue(s_valShowOutputOfAllJobs,                m_showOutputOfAllJobs);
   reg.setValue(s_valSwitchToJobOutputAfterStarting,     m_switchToJobOutputAfterStarting);
   reg.setValue(s_valResetJobWarningErrorCountersOnExit, m_resetJobWarningErrorCountersOnExit);
+  reg.setValue(s_valRemoveOutputFileOnJobFailure,       m_removeOutputFileOnJobFailure);
   reg.setValue(s_valJobRemovalPolicy,                   static_cast<int>(m_jobRemovalPolicy));
   reg.setValue(s_valRemoveOldJobs,                      m_removeOldJobs);
   reg.setValue(s_valRemoveOldJobsDays,                  m_removeOldJobsDays);

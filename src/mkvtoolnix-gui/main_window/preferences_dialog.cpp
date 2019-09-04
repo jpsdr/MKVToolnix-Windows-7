@@ -63,6 +63,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbGuiShowOutputOfAllJobs->setChecked(m_cfg.m_showOutputOfAllJobs);
   ui->cbGuiSwitchToJobOutputAfterStarting->setChecked(m_cfg.m_switchToJobOutputAfterStarting);
   ui->cbGuiResetJobWarningErrorCountersOnExit->setChecked(m_cfg.m_resetJobWarningErrorCountersOnExit);
+  ui->cbGuiRemoveOutputFileOnJobFailure->setChecked(m_cfg.m_removeOutputFileOnJobFailure);
   ui->cbGuiRemoveOldJobs->setChecked(m_cfg.m_removeOldJobs);
   ui->sbGuiRemoveOldJobsDays->setValue(m_cfg.m_removeOldJobsDays);
   adjustRemoveOldJobsControls();
@@ -246,6 +247,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled, the first tab in the \"job output\" tool will not be cleared when a new job starts."));
   Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting,     QY("If enabled, the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."));
   Util::setToolTip(ui->cbGuiResetJobWarningErrorCountersOnExit, QY("If enabled, the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."));
+  Util::setToolTip(ui->cbGuiRemoveOutputFileOnJobFailure,       QY("If enabled, the GUI will remove the output file created by a job if that job ends with an error or if the user aborts the job."));
   Util::setToolTip(ui->cbGuiRemoveOldJobs,                      QY("If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
   Util::setToolTip(ui->sbGuiRemoveOldJobsDays,                  QY("If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
 
@@ -788,6 +790,7 @@ PreferencesDialog::save() {
   m_cfg.m_showOutputOfAllJobs                           = ui->cbGuiShowOutputOfAllJobs->isChecked();
   m_cfg.m_switchToJobOutputAfterStarting                = ui->cbGuiSwitchToJobOutputAfterStarting->isChecked();
   m_cfg.m_resetJobWarningErrorCountersOnExit            = ui->cbGuiResetJobWarningErrorCountersOnExit->isChecked();
+  m_cfg.m_removeOutputFileOnJobFailure                  = ui->cbGuiRemoveOutputFileOnJobFailure->isChecked();
   auto idx                                              = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy                              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
   m_cfg.m_removeOldJobs                                 = ui->cbGuiRemoveOldJobs->isChecked();

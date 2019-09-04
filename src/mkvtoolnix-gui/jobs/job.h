@@ -112,6 +112,7 @@ protected:
   virtual void loadJobBasis(Util::ConfigFile &settings);
   virtual void runProgramsAfterCompletion();
   void setupJobConnections();
+  virtual void maybeRemoveOutputFile();
 
 public slots:
   virtual void setStatus(Job::Status status);

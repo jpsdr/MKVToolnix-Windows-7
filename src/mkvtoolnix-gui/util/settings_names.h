@@ -89,6 +89,7 @@ char const * const s_valRecognizedTrackLanguagesInFileNames = "recognizedTrackLa
 char const * const s_valRelativeOutputDir                   = "relativeOutputDir";
 char const * const s_valRemoveOldJobs                       = "removeOldJobs";
 char const * const s_valRemoveOldJobsDays                   = "removeOldJobsDays";
+char const * const s_valRemoveOutputFileOnJobFailure        = "removeOutputFileOnJobFailure";
 char const * const s_valResetJobWarningErrorCountersOnExit  = "resetJobWarningErrorCountersOnExit";
 char const * const s_valScanForPlaylistsPolicy              = "scanForPlaylistsPolicy";
 char const * const s_valSetAudioDelayFromFileName           = "setAudioDelayFromFileName";

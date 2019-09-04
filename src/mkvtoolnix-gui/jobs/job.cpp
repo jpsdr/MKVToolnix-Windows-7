@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QDesktopServices>
+#include <QFile>
 #include <QFileInfo>
 #include <QSettings>
 #include <QUrl>
@@ -9,6 +11,7 @@
 #include "common/logger.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/info/job_settings.h"
 #include "mkvtoolnix-gui/jobs/info_job.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/job_p.h"
@@ -457,6 +460,11 @@ void
 Job::runProgramsAfterCompletion() {
   auto p = p_func();
 
+  if (p->status == Aborted) {
+    maybeRemoveOutputFile();
+    return;
+  }
+
   if (!mtx::included_in(p->status, DoneOk, DoneWarnings, Failed))
     return;
 
@@ -467,6 +475,8 @@ Job::runProgramsAfterCompletion() {
   });
 
   App::programRunner().executeActionsAfterJobFinishes(*this);
+
+  maybeRemoveOutputFile();
 }
 
 void
@@ -478,6 +488,22 @@ Job::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
   variables[Q("JOB_END_TIME")]    << p->dateFinished.toString(Qt::ISODate);
   variables[Q("JOB_DESCRIPTION")] << p->description;
   variables[Q("JOB_EXIT_CODE")]   << QString::number(p->exitCode);
+}
+
+void
+Job::maybeRemoveOutputFile() {
+  auto p = p_func();
+
+  if (   !Util::Settings::get().m_removeOutputFileOnJobFailure
+      || !mtx::included_in(p->status, Aborted, Failed))
+    return;
+
+  auto fileName = destinationFileName();
+
+  qDebug() << "maybeRemoveOutputFile:" << fileName;
+
+  if (!fileName.isEmpty())
+    QFile::remove(fileName);
 }
 
 }}}
