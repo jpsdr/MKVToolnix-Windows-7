@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: job queue: added a new setting in the preferences' "job
+  queue & job status" section that, when enabled, will cause the GUI to remove
+  all output files created by jobs that are either aborted by the user or that
+  end in an error. Implements #2614.
+
 ## Bug fixes
 
 * MKVToolNix GUI: Hebrew was added to the list of often-used languages so that
