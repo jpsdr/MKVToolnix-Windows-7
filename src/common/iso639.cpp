@@ -572,6 +572,7 @@ std::vector<std::string> const g_popular_language_codes{
   "sin",
   "som",
   "spa",
+  "srp",
   "sun",
   "tam",
   "tel",
