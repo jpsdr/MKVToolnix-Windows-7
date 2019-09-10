@@ -7147,8 +7147,8 @@
 * mkvmerge, mkvinfo: new feature: Added the four new PixelCrop elements.
 * mkvmerge, mkvextract, mkvinfo: new feature: Added 'TargetTypeValue' as a
   supported tagging element.
-* mkvmerge: new feature: Allow the use of two-letter ISO639-1 country codes in for the
-  '--language' parameter. Those will be converted to the corresponding ISO639-2
+* mkvmerge: new feature: Allow the use of two-letter ISO 639-1 country codes in for the
+  '--language' parameter. Those will be converted to the corresponding ISO 639-2
   language code automatically.
 * mkvmerge, mkvinfo, mkvextract: new feature: Added support for the 'TargetType'
   tag element (which I meant to add before the 0.9.5 release...).
@@ -8358,7 +8358,7 @@
 
 * Tracks read from a Matroska file will keep their UID if it hasn't been used yet.
 * Support for reading text subtitle streams from OGM files.
-* Support for KaxTrackLanguage and ISO639 languages.
+* Support for KaxTrackLanguage and ISO 639 languages.
 
 
 <!-- Local Variables: -->

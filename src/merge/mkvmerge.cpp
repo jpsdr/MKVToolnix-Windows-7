@@ -237,7 +237,7 @@ set_usage() {
   usage_text += Y("  --cues <TID:none|iframes|all>\n"
                   "                           Create cue (index) entries for this track:\n"
                   "                           None at all, only for I frames, for all.\n");
-  usage_text += Y("  --language <TID:lang>    Sets the language for the track (ISO639-2\n"
+  usage_text += Y("  --language <TID:lang>    Sets the language for the track (ISO 639-2\n"
                   "                           code, see --list-languages).\n");
   usage_text += Y("  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
                   "                           or not. The value ':1' can be omitted.\n");
@@ -355,8 +355,8 @@ set_usage() {
                   "                           of the total file size for certain file types\n"
                   "                           (default: 0.3).\n");
   usage_text += Y("  -l, --list-types         Lists supported source file types.\n");
-  usage_text += Y("  --list-languages         Lists all ISO639 languages and their\n"
-                  "                           ISO639-2 codes.\n");
+  usage_text += Y("  --list-languages         Lists all ISO 639 languages and their\n"
+                  "                           ISO 639-2 codes.\n");
   usage_text += Y("  --capabilities           Lists optional features mkvmerge was compiled with.\n");
   usage_text += Y("  --priority <priority>    Set the priority mkvmerge runs with.\n");
   usage_text += Y("  --ui-language <code>     Force the translations for 'code' to be used.\n");
@@ -1408,8 +1408,8 @@ parse_arg_language(const std::string &s,
 
     int index = map_to_iso639_2_code(parts[1].c_str());
     if (-1 == index)
-      mxerror(fmt::format(Y("'{0}' is neither a valid ISO639-2 nor a valid ISO639-1 code. "
-                            "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"), parts[1]));
+      mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. "
+                            "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), parts[1]));
 
     parts[1] = g_iso639_languages[index].iso639_2_code;
   }
@@ -1857,8 +1857,8 @@ parse_arg_chapter_language(const std::string &arg,
 
   int i = map_to_iso639_2_code(arg.c_str());
   if (-1 == i)
-    mxerror(fmt::format(Y("'{0}' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--chapter-language {0}'. "
-                          "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"), arg));
+    mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code in '--chapter-language {0}'. "
+                          "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), arg));
 
   g_chapter_language    = g_iso639_languages[i].iso639_2_code;
   ti.m_chapter_language = g_iso639_languages[i].iso639_2_code;
@@ -1969,8 +1969,8 @@ static void
 parse_arg_default_language(const std::string &arg) {
   int i = map_to_iso639_2_code(arg.c_str());
   if (-1 == i)
-    mxerror(fmt::format(Y("'{0}' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--default-language {0}'. "
-                          "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"), arg));
+    mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code in '--default-language {0}'. "
+                          "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), arg));
 
   g_default_language = g_iso639_languages[i].iso639_2_code;
 }

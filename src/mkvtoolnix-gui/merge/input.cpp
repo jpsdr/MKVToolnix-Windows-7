@@ -444,7 +444,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->trackLanguage,
                    Q("%1 %2")
                    .arg(QY("The language for this track that players can use for automatic track selection and display for the user."))
-                   .arg(QY("Select one of the ISO639-2 language codes.")));
+                   .arg(QY("Select one of the ISO 639-2 language codes.")));
   Util::setToolTip(ui->defaultTrackFlag,
                    Q("%1 %2 %3")
                    .arg(QY("Make this track the default track for its type (audio, video, subtitles)."))

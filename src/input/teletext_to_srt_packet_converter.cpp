@@ -172,7 +172,7 @@ teletext_to_srt_packet_converter_c::override_encoding(int page,
   else if (mtx::included_in(iso639_2_code, "tur"))
     itr->second->m_forced_char_map_idx.reset(12);
 
-  mxdebug_if(m_debug, fmt::format("Overriding encoding for ISO639-2 code {0}; result: {1}\n", iso639_2_code, itr->second->m_forced_char_map_idx ? *itr->second->m_forced_char_map_idx : -1));
+  mxdebug_if(m_debug, fmt::format("Overriding encoding for ISO 639-2 code {0}; result: {1}\n", iso639_2_code, itr->second->m_forced_char_map_idx ? *itr->second->m_forced_char_map_idx : -1));
 }
 
 void

@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   ISO639 language definitions, lookup functions
+   ISO 639 language definitions, lookup functions
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -599,8 +599,8 @@ is_valid_iso639_2_code(std::string const &iso639_2_code) {
 void
 list_iso639_languages() {
   std::wstring w_col1 = to_wide(Y("English language name"));
-  std::wstring w_col2 = to_wide(Y("ISO639-2 code"));
-  std::wstring w_col3 = to_wide(Y("ISO639-1 code"));
+  std::wstring w_col2 = to_wide(Y("ISO 639-2 code"));
+  std::wstring w_col3 = to_wide(Y("ISO 639-1 code"));
 
   size_t longest[3]   = { get_width_in_em(w_col1), get_width_in_em(w_col2), get_width_in_em(w_col3) };
 

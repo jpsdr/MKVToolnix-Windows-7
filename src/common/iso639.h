@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   ISO639 language definitions, lookup functions
+   ISO 639 language definitions, lookup functions
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
