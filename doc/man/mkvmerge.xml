@@ -1558,10 +1558,9 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <term><option>--nalu-size-length</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
-       Forces the <abbrev>NALU</abbrev> size length to <parameter>n</parameter> bytes.  This parameter is only used if the
-       <foreignphrase>AVC/H.264</foreignphrase> elementary stream packetizer is used.  If left out it defaults to 4 bytes, but there are
-       files that contain frames or slices that are all smaller than 65536 bytes.  For such files you can use this parameter and decrease
-       the size to 2.
+       Forces the <abbrev>NALU</abbrev> size length to <parameter>n</parameter> bytes.  This parameter is only used if the AVC/H.264
+       elementary stream packetizer is used.  If left out it defaults to 4 bytes, but there are files that contain frames or slices that are
+       all smaller than 65536 bytes.  For such files you can use this parameter and decrease the size to 2.
       </para>
      </listitem>
     </varlistentry>
@@ -1574,8 +1573,8 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
        '<literal>none</literal>', '<literal>zlib</literal>' and '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>'.
       </para>
       <para>
-       The compression method '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>' is a special compression method called
-       '<foreignphrase>header removal</foreignphrase>' that is only available for <abbrev>MPEG4</abbrev> part 2 video tracks.
+       The compression method '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>' is a special compression method called 'header
+       removal' that is only available for <abbrev>MPEG4</abbrev> part 2 video tracks.
       </para>
       <para>
        The default for some subtitle types is '<literal>zlib</literal>' compression. This compression method is also the one that most if
@@ -1594,8 +1593,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <term><option>-f</option>, <option>--fourcc</option> <parameter>TID:FourCC</parameter></term>
      <listitem>
       <para>
-       Forces the <classname>FourCC</classname> to the specified value. Works only for video tracks in the '<foreignphrase>MS compatibility
-       mode</foreignphrase>'.
+       Forces the <classname>FourCC</classname> to the specified value. Works only for video tracks in the 'MS compatibility mode'.
       </para>
      </listitem>
     </varlistentry>
@@ -2512,9 +2510,8 @@ Track ID 1: audio (A_MPEG/L3)</screen>
    </para>
 
    <para>
-    &mkvmerge; does this conversion automatically based on the presence of a <foreignphrase>byte order marker</foreignphrase> (short:
-    <abbrev>BOM</abbrev>) or the system's current locale. How the character set is inferred from the locale depends on the operating system
-    that &mkvmerge; is run on.
+    &mkvmerge; does this conversion automatically based on the presence of a byte order marker (short: <abbrev>BOM</abbrev>) or the system's
+    current locale. How the character set is inferred from the locale depends on the operating system that &mkvmerge; is run on.
    </para>
   </refsect2>
 
@@ -2633,9 +2630,8 @@ Track ID 1: audio (A_MPEG/L3)</screen>
   </para>
 
   <para>
-   An option file contains JSON-formatted data. Its content must be a valid JSON array consisting solely of JSON
-   strings. The file's encoding must be UTF-8. The file should not start with a <foreignphrase>byte order marker</foreignphrase>
-   (<abbrev>BOM</abbrev>), but if one exists, it will be skipped.
+   An option file contains JSON-formatted data. Its content must be a valid JSON array consisting solely of JSON strings. The file's
+   encoding must be UTF-8. The file should not start with a byte order marker (<abbrev>BOM</abbrev>), but if one exists, it will be skipped.
   </para>
 
   <para>
@@ -2797,9 +2793,9 @@ Track ID 1: audio (A_MPEG/L3)</screen>
   </para>
 
   <para>
-   &mkvmerge; supports two kinds of chapter files as its input. The first format, called '<foreignphrase>simple chapter
-   format</foreignphrase>', is the same format that the <abbrev>OGM</abbrev> tools expect. The second format is a &xml; based
-   chapter format which supports all of &matroska;'s chapter functionality.
+   &mkvmerge; supports two kinds of chapter files as its input. The first format, called 'simple chapter format', is the same format that
+   the <abbrev>OGM</abbrev> tools expect. The second format is a &xml; based chapter format which supports all of &matroska;'s chapter
+   functionality.
   </para>
 
   <refsect2 id="mkvmerge.chapters.simple">
@@ -3014,9 +3010,8 @@ CHAPTER03NAME=Baby rocks the house</screen>
    </para>
 
    <para>
-    Otherwise the data is expected to be <foreignphrase>Base64</foreignphrase> encoded. This is an encoding that transforms binary data into
-    a limited set of <abbrev>ASCII</abbrev> characters and is used e.g. in email programs. &mkvextract; will output
-    <foreignphrase>Base64</foreignphrase> encoded data for binary elements.
+    Otherwise the data is expected to be Base64 encoded. This is an encoding that transforms binary data into a limited set of
+    <abbrev>ASCII</abbrev> characters and is used e.g. in email programs. &mkvextract; will output Base64 encoded data for binary elements.
    </para>
 
    <para>
