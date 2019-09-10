@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
-"POT-Creation-Date: 2019-09-10 22:02+0200\n"
+"POT-Creation-Date: 2019-09-10 22:36+0200\n"
 "PO-Revision-Date: 2019-08-12 05:58+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -789,7 +789,7 @@ msgstr "$ mkvextract 输入.mkv cues 1:cues-轨1.txt 2:cues-轨2.txt"
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:525
 #: doc/man/mkvmerge.xml:2267
-#: doc/man/mkvpropedit.xml:623
+#: doc/man/mkvpropedit.xml:624
 msgid "Examples"
 msgstr "示例"
 
@@ -830,14 +830,14 @@ msgstr "$ mkvextract \"我的影片.mkv\" chapters --simple \"我的章节.txt\"
 #: doc/man/mkvextract.xml:547
 #: doc/man/mkvinfo.xml:274
 #: doc/man/mkvmerge.xml:2496
-#: doc/man/mkvpropedit.xml:728
+#: doc/man/mkvpropedit.xml:729
 msgid "Text files and character set conversions"
 msgstr "文本文件与字符集转换"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:550
 #: doc/man/mkvinfo.xml:277
-#: doc/man/mkvpropedit.xml:731
+#: doc/man/mkvpropedit.xml:732
 msgid "For an in-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically-named section in the &mkvmerge; man page."
 msgstr "关于 MKVToolNix 套件中所有工具如何处理字符集转换、输入/输出编码、命令行编码及控制台编码的深入讨论，请参见 &mkvmerge; 手册中相对应名称的段落。"
 
@@ -1188,7 +1188,7 @@ msgstr "时间戳会先被排序，然后以 timestamp v2 格式文件输出，�
 #: doc/man/mkvextract.xml:873
 #: doc/man/mkvinfo.xml:283
 #: doc/man/mkvmerge.xml:3208
-#: doc/man/mkvpropedit.xml:697
+#: doc/man/mkvpropedit.xml:698
 msgid "Exit codes"
 msgstr "退出代码"
 
@@ -1216,7 +1216,7 @@ msgstr "<constant>2</constant> -- 此退出代码用于错误发生之后。 &mk
 #: doc/man/mkvextract.xml:904
 #: doc/man/mkvinfo.xml:313
 #: doc/man/mkvmerge.xml:3239
-#: doc/man/mkvpropedit.xml:737
+#: doc/man/mkvpropedit.xml:738
 msgid "Environment variables"
 msgstr "环境变量"
 
@@ -1249,7 +1249,7 @@ msgstr "内容将被当作通过 <link linkend=\"mkvextract.description.engage\"
 #: doc/man/mkvextract.xml:931
 #: doc/man/mkvinfo.xml:340
 #: doc/man/mkvmerge.xml:3266
-#: doc/man/mkvpropedit.xml:764
+#: doc/man/mkvpropedit.xml:765
 #: doc/man/mkvtoolnix-gui.xml:132
 msgid "See also"
 msgstr "参阅"
@@ -1263,7 +1263,7 @@ msgstr "&mkvmerge;, &mkvinfo;, &mkvpropedit;, &mtxgui;"
 #: doc/man/mkvextract.xml:938
 #: doc/man/mkvinfo.xml:347
 #: doc/man/mkvmerge.xml:3273
-#: doc/man/mkvpropedit.xml:771
+#: doc/man/mkvpropedit.xml:772
 #: doc/man/mkvtoolnix-gui.xml:139
 msgid "WWW"
 msgstr "网络"
@@ -1272,7 +1272,7 @@ msgstr "网络"
 #: doc/man/mkvextract.xml:940
 #: doc/man/mkvinfo.xml:349
 #: doc/man/mkvmerge.xml:3275
-#: doc/man/mkvpropedit.xml:773
+#: doc/man/mkvpropedit.xml:774
 #: doc/man/mkvtoolnix-gui.xml:141
 msgid "The latest version can always be found at <ulink url=\"https://mkvtoolnix.download/\">the MKVToolNix homepage</ulink>."
 msgstr "最新版本总可以在 <ulink url=\"https://mkvtoolnix.download/\">MKVToolNix 主页</ulink> 找到。"
@@ -4989,227 +4989,231 @@ msgstr "<option>track:</option>=<parameter>uid</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:552
-msgid "If the parameter starts with a '<literal>=</literal>' followed by a number <parameter>uid</parameter> then the track whose track <abbrev>UID</abbrev> element equals this <parameter>uid</parameter>. Track <abbrev>UIDs</abbrev> can be obtained with &mkvinfo;."
+#, fuzzy
+#| msgid "If the parameter starts with a '<literal>=</literal>' followed by a number <parameter>uid</parameter> then the track whose track <abbrev>UID</abbrev> element equals this <parameter>uid</parameter>. Track <abbrev>UIDs</abbrev> can be obtained with &mkvinfo;."
+msgid "If the parameter starts with a '<literal>=</literal>' followed by a number <parameter>uid</parameter>, the track whose track <abbrev>UID</abbrev> element equals the given <parameter>uid</parameter> will be selected. Track <abbrev>UIDs</abbrev> can be obtained with &mkvinfo;."
 msgstr "如果参数以 '<literal>=</literal>' 后接 <parameter>uid</parameter> 开头，则将选择轨道 <abbrev>UID</abbrev> 元素等于此 <parameter>uid</parameter> 的轨道。轨道 <abbrev>UID</abbrev> 可通过 &mkvinfo; 获取。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
-#: doc/man/mkvpropedit.xml:559
+#: doc/man/mkvpropedit.xml:560
 msgid "<option>track:</option>@<parameter>number</parameter>"
 msgstr "<option>track:</option>@<parameter>数字</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvpropedit.xml:562
-msgid "If the parameter starts with a '<literal>@</literal>' followed by a number <parameter>number</parameter> then the track whose track number element equals this <parameter>number</parameter>. Track number can be obtained with &mkvinfo;."
+#: doc/man/mkvpropedit.xml:563
+#, fuzzy
+#| msgid "If the parameter starts with a '<literal>@</literal>' followed by a number <parameter>number</parameter> then the track whose track number element equals this <parameter>number</parameter>. Track number can be obtained with &mkvinfo;."
+msgid "If the parameter starts with a '<literal>@</literal>' followed by a number <parameter>number</parameter>, the track whose track number element equals this <parameter>number</parameter> will be selected. Track numbers can be obtained with &mkvinfo;."
 msgstr "如果参数以 '<literal>@</literal>' 后接 <parameter>数字</parameter> 开头，则选择轨道号元素等于 <parameter>数字</parameter> 的轨道。轨道号可以通过 &mkvinfo; 获取。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvpropedit.xml:571
+#: doc/man/mkvpropedit.xml:572
 msgid "Notes"
 msgstr "注"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvpropedit.xml:573
+#: doc/man/mkvpropedit.xml:574
 msgid "Due to the nature of the track edit selectors it is possible that several selectors actually match the same track headers. In such cases all actions for those edit selectors will be combined and executed in the order in which they're given on the command line."
 msgstr "由于轨道编辑选择器的特性，一些选择器所匹配的轨道头部可能是相同的。在此情况下，这些编辑选择器的所有操作将被按照在命令行给出的顺序合并运行。"
 
 #. type: Content of: <refentry><refsect1><title>
-#: doc/man/mkvpropedit.xml:580
+#: doc/man/mkvpropedit.xml:581
 msgid "Attachment selectors"
 msgstr "附件选择器"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:583
+#: doc/man/mkvpropedit.xml:584
 msgid "An attachment selector is used with the two actions <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> and <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link>. It can have one of the following four forms:"
 msgstr "附件选择器可与两项操作 <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> 及 <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link> 一起使用。它可以有以下四种格式:"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:592
+#: doc/man/mkvpropedit.xml:593
 msgid "Selection by attachment ID. In this form the selector is simply a number, the attachment's ID as output by &mkvmerge;'s identification command."
 msgstr "按附件 ID 选择。本格式的选择器仅仅是数字，&mkvmerge; 的识别命令所输出的附件 ID。"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:599
+#: doc/man/mkvpropedit.xml:600
 msgid "Selection by attachment UID (unique ID). In this form the selector is the equal sign <literal>=</literal> followed by a number, the attachment's unique ID as output by &mkvmerge;'s verbose identification command."
 msgstr "按附件 UID (唯一 ID) 选择。本格式的选择器为等号 <literal>=</literal> 后接数字，&mkvmerge; 的详尽识别命令所输出的附件的唯一 ID。"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:606
+#: doc/man/mkvpropedit.xml:607
 msgid "Selection by attachment name. In this form the selector is the literal word <literal>name:</literal> followed by the existing attachment's name. If this selector is used with <option>--replace-attachment</option> then colons within the name to match must be escaped as <literal>\\c</literal>."
 msgstr "按附件名称选择。本格式的选择器为文字 <literal>name:</literal> 后接现有附件名称。若本选择器与 <option>--replace-attachment</option> 一同使用，则名称中的冒号必须用 <literal>\\c</literal> 转义。"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:614
+#: doc/man/mkvpropedit.xml:615
 msgid "Selection by MIME type. In this form the selector is the literal word <literal>mime-type:</literal> followed by the existing attachment's MIME type. If this selector is used with <option>--replace-attachment</option> then colons within the MIME type to match must be escaped as <literal>\\c</literal>."
 msgstr "按 MIME 类型选择。本格式的选择器为文字 <literal>mime-type:</literal> 后接现有附件的 MIME 类型。若本选择器与 <option>--replace-attachment</option> 一同使用，则 MIME 类型中的冒号必须用 <literal>\\c</literal> 转义。"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:625
+#: doc/man/mkvpropedit.xml:626
 msgid "The following example edits a file called '<literal>movie.mkv</literal>'. It sets the segment title and modifies the language code of an audio and a subtitle track. Note that this example can be shortened by leaving out the first <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option because editing the segment information element is the default for all options found before the first <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option anyway."
 msgstr "下面的示例将编辑一个名为 '<literal>电影.mkv</literal>' 的文件。示例中将设置剪辑标题并修改一条音频轨和一条字幕轨的语言代码。附注，本示例可以简写，即省去 <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> 选项，因为在第一个 <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> 选项之前的所有选项默认编辑的就是剪辑信息元素。"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:631
+#: doc/man/mkvpropedit.xml:632
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --edit info --set \"title=The movie\" --edit track:a1 --set language=fre --edit track:a2 --set language=ita"
 msgstr "$ mkvpropedit 影片.mkv --edit info --set \"title=一部影片\" --edit track:a1 --set language=fre --edit track:a2 --set language=ita"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:634
+#: doc/man/mkvpropedit.xml:635
 msgid "The second example removes the 'default track flag' from the first subtitle track and sets it for the second one. Note that &mkvpropedit;, unlike &mkvmerge;, does not set the 'default track flag' of other tracks to '0' if it is set to '1' for a different track automatically."
 msgstr "第二个示例，将 '默认轨标记' 从第一条字幕轨移除并设置到第二条字幕轨上。注意 &mkvpropedit; 与 &mkvmerge; 不同，不会在将另一个轨道的 '默认轨标记'设为 '1' 的时候自动将其他轨道的标记设为 '0'。"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:639
+#: doc/man/mkvpropedit.xml:640
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --edit track:s1 --set flag-default=0 --edit track:s2 --set flag-default=1"
 msgstr "$ mkvpropedit 影片.mkv --edit track:s1 --set flag-default=0 --edit track:s2 --set flag-default=1"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:642
+#: doc/man/mkvpropedit.xml:643
 msgid "Replacing the tags for the second subtitle track in a file looks like this:"
 msgstr "像这样替换文件中第二个字幕轨的标签:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:645
+#: doc/man/mkvpropedit.xml:646
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --tags track:s2:new-subtitle-tags.xml"
 msgstr "$ mkvpropedit 影片.mkv --tags track:s2:新字幕标签.xml"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:648
+#: doc/man/mkvpropedit.xml:649
 msgid "Removing all tags requires leaving out the file name:"
 msgstr "移除所有标签需要将文件名留空:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:651
+#: doc/man/mkvpropedit.xml:652
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --tags all:"
 msgstr "$ mkvpropedit 影片.mkv --tags all:"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:654
+#: doc/man/mkvpropedit.xml:655
 msgid "Replacing the chapters in a file looks like this:"
 msgstr "像这样替换文件中的章节:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:657
+#: doc/man/mkvpropedit.xml:658
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --chapters new-chapters.xml"
 msgstr "$ mkvpropedit 影片.mkv --chapters 新章节.xml"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:660
+#: doc/man/mkvpropedit.xml:661
 msgid "Removing all chapters requires leaving out the file name:"
 msgstr "移除所有章节需要将文件名留空:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:663
+#: doc/man/mkvpropedit.xml:664
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --chapters ''"
 msgstr "$ mkvpropedit 影片.mkv --chapters ''"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:666
+#: doc/man/mkvpropedit.xml:667
 msgid "Adding a font file (<literal>Arial.ttf</literal>) as an attachment:"
 msgstr "将字体文件 (<literal>Arial.ttf</literal>) 作为附件添加:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:669
+#: doc/man/mkvpropedit.xml:670
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --add-attachment Arial.ttf"
 msgstr "$ mkvpropedit 影片.mkv --add-attachment Arial.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:672
+#: doc/man/mkvpropedit.xml:673
 msgid "Adding a font file (<literal>89719823.ttf</literal>) as an attachment and providing some information as it really is just Arial:"
 msgstr "将字体文件 (<literal>89719823.ttf</literal>) 作为附件添加，并提供信息，因为它真的就是 Arial:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:675
+#: doc/man/mkvpropedit.xml:676
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --attachment-name Arial.ttf --attachment-description 'The Arial font as a TrueType font' --attachment-mime-type application/x-truetype-font --add-attachment 89719823.ttf"
 msgstr "$ mkvpropedit 影片.mkv --attachment-name Arial.ttf --attachment-description 'Arial 字体，TrueType 类型' --attachment-mime-type application/x-truetype-font --add-attachment 89719823.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:678
+#: doc/man/mkvpropedit.xml:679
 msgid "Replacing one attached font (<literal>Comic.ttf</literal>) file with another one (<literal>Arial.ttf</literal>):"
 msgstr "将已经附加的字体 (<literal>Comic.ttf</literal>) 替换为另一个 (<literal>Arial.ttf</literal>):"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:681
+#: doc/man/mkvpropedit.xml:682
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --attachment-name Arial.ttf --attachment-description 'The Arial font as a TrueType font' --replace-attachment name:Comic.ttf:Arial.ttf"
 msgstr "$ mkvpropedit 影片.mkv --attachment-name Arial.ttf --attachment-description 'Arial 字体，TrueType 类型' --replace-attachment name:Comic.ttf:Arial.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:684
+#: doc/man/mkvpropedit.xml:685
 msgid "Deleting the second attached file, whatever it may be:"
 msgstr "删除附加的第二个文件，不论它是什么:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:687
+#: doc/man/mkvpropedit.xml:688
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --delete-attachment 2"
 msgstr "$ mkvpropedit 影片.mkv --delete-attachment 2"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:690
+#: doc/man/mkvpropedit.xml:691
 msgid "Deleting all attached fonts by MIME type:"
 msgstr "按 MIME 类型删除所有附加字体:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:693
+#: doc/man/mkvpropedit.xml:694
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --delete-attachment mime-type:application/x-truetype-font"
 msgstr "$ mkvpropedit 影片.mkv --delete-attachment mime-type:application/x-truetype-font"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:700
+#: doc/man/mkvpropedit.xml:701
 msgid "&mkvpropedit; exits with one of three exit codes:"
 msgstr "&mkvpropedit; 退出时会返回以下三个退出代码中的一个："
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:706
+#: doc/man/mkvpropedit.xml:707
 msgid "<constant>0</constant> -- This exit codes means that the modification has completed successfully."
 msgstr "<constant>0</constant> -- 此退出代码说明已成功完成修改。"
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:712
+#: doc/man/mkvpropedit.xml:713
 msgid "<constant>1</constant> -- In this case &mkvpropedit; has output at least one warning, but the modification did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting files might be ok or not.  The user is urged to check both the warning and the resulting files."
 msgstr "<constant>1</constant> -- 这种情况下 &mkvpropedit; 至少输出了一条警告信息，但修改并未因之中止。 警告信息以文字 '<literal>警告:</literal>' 为前缀。根据问题的不同，生成的文件可能是好的，也可能不是。 强烈建议用户检查警告信息以及生成的文件。"
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:720
+#: doc/man/mkvpropedit.xml:721
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvpropedit; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
 msgstr "<constant>2</constant> -- 此退出代码用于错误发生之后。 &mkvpropedit; 在输出错误信息后即中断处理。错误信息可能是错误的命令行参数，也可能是损坏文件的读取/写入错误。"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:740
+#: doc/man/mkvpropedit.xml:741
 msgid "&mkvpropedit; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
 msgstr "&mkvpropedit; 会使用决定系统区域设置的默认变量 (如 <varname>LANG</varname> 与 <varname>LC_*</varname> 族)。其他变量包括:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvpropedit.xml:746
+#: doc/man/mkvpropedit.xml:747
 msgid "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgstr "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> 及其缩略形式 <varname>MTX_DEBUG</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvpropedit.xml:748
+#: doc/man/mkvpropedit.xml:749
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvpropedit.description.debug\"><option>--debug</option></link> option."
 msgstr "内容将被当作通过 <link linkend=\"mkvpropedit.description.debug\"><option>--debug</option></link> 选项传递的参数对待。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvpropedit.xml:754
+#: doc/man/mkvpropedit.xml:755
 msgid "<varname>MKVPROPEDIT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgstr "<varname>MKVPROPEDIT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> 及其缩略形式 <varname>MTX_ENGAGE</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvpropedit.xml:756
+#: doc/man/mkvpropedit.xml:757
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvpropedit.description.engage\"><option>--engage</option></link> option."
 msgstr "内容将被当作通过 <link linkend=\"mkvpropedit.description.engage\"><option>--engage</option></link> 选项传递的参数对待。"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:766
+#: doc/man/mkvpropedit.xml:767
 msgid "&mkvmerge;, &mkvinfo;, &mkvextract;, &mtxgui;"
 msgstr "&mkvmerge;, &mkvinfo;, &mkvextract;, &mtxgui;"
 

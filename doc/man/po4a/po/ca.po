@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
-"POT-Creation-Date: 2019-09-10 22:02+0200\n"
+"POT-Creation-Date: 2019-09-10 22:36+0200\n"
 "PO-Revision-Date: 2019-08-11 14:43+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
@@ -791,7 +791,7 @@ msgstr "$ mkvextract entrada.mkv cues 1:índexs-pista1.txt 2:índexs-pista2.txt"
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:525
 #: doc/man/mkvmerge.xml:2267
-#: doc/man/mkvpropedit.xml:623
+#: doc/man/mkvpropedit.xml:624
 msgid "Examples"
 msgstr "Exemples"
 
@@ -832,14 +832,14 @@ msgstr "$ mkvextract \"La meva peli.mkv\" chapters --simple \"Els meus capítols
 #: doc/man/mkvextract.xml:547
 #: doc/man/mkvinfo.xml:274
 #: doc/man/mkvmerge.xml:2496
-#: doc/man/mkvpropedit.xml:728
+#: doc/man/mkvpropedit.xml:729
 msgid "Text files and character set conversions"
 msgstr "Conversió per a fitxers de text i jocs de caràcters"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:550
 #: doc/man/mkvinfo.xml:277
-#: doc/man/mkvpropedit.xml:731
+#: doc/man/mkvpropedit.xml:732
 msgid "For an in-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically-named section in the &mkvmerge; man page."
 msgstr "Per a un debat en profunditat sobre com manipula la suite MKVToolNix les conversions entre els jocs de caràcters, codifica l'entrada/sortida, codifica la línia d'ordres i codifica a la consola, si us plau, vegeu la secció anomenada de la mateixa manera a la pàgina man del &mkvmerge;."
 
@@ -1190,7 +1190,7 @@ msgstr "Els codis de temps primer estan ordenats i després la sortida genera un
 #: doc/man/mkvextract.xml:873
 #: doc/man/mkvinfo.xml:283
 #: doc/man/mkvmerge.xml:3208
-#: doc/man/mkvpropedit.xml:697
+#: doc/man/mkvpropedit.xml:698
 msgid "Exit codes"
 msgstr "Codis de sortida"
 
@@ -1218,7 +1218,7 @@ msgstr "<constant>2</constant> -- Aquest codi de sortida s'empra després de pro
 #: doc/man/mkvextract.xml:904
 #: doc/man/mkvinfo.xml:313
 #: doc/man/mkvmerge.xml:3239
-#: doc/man/mkvpropedit.xml:737
+#: doc/man/mkvpropedit.xml:738
 msgid "Environment variables"
 msgstr "Variables d'entorn"
 
@@ -1251,7 +1251,7 @@ msgstr "El contingut es tractarà com si s'hagués passat l'opció <link linkend
 #: doc/man/mkvextract.xml:931
 #: doc/man/mkvinfo.xml:340
 #: doc/man/mkvmerge.xml:3266
-#: doc/man/mkvpropedit.xml:764
+#: doc/man/mkvpropedit.xml:765
 #: doc/man/mkvtoolnix-gui.xml:132
 msgid "See also"
 msgstr "Vegeu també"
@@ -1265,7 +1265,7 @@ msgstr "&mkvmerge;, &mkvinfo;, &mkvpropedit;, &mtxgui;"
 #: doc/man/mkvextract.xml:938
 #: doc/man/mkvinfo.xml:347
 #: doc/man/mkvmerge.xml:3273
-#: doc/man/mkvpropedit.xml:771
+#: doc/man/mkvpropedit.xml:772
 #: doc/man/mkvtoolnix-gui.xml:139
 msgid "WWW"
 msgstr "WWW"
@@ -1274,7 +1274,7 @@ msgstr "WWW"
 #: doc/man/mkvextract.xml:940
 #: doc/man/mkvinfo.xml:349
 #: doc/man/mkvmerge.xml:3275
-#: doc/man/mkvpropedit.xml:773
+#: doc/man/mkvpropedit.xml:774
 #: doc/man/mkvtoolnix-gui.xml:141
 msgid "The latest version can always be found at <ulink url=\"https://mkvtoolnix.download/\">the MKVToolNix homepage</ulink>."
 msgstr "Sempre trobareu l'última versió a <ulink url=\"https://mkvtoolnix.download/\">la pàgina de les MKVToolNix</ulink>."
@@ -4991,227 +4991,231 @@ msgstr "<option>track:</option>=<parameter>UID</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:552
-msgid "If the parameter starts with a '<literal>=</literal>' followed by a number <parameter>uid</parameter> then the track whose track <abbrev>UID</abbrev> element equals this <parameter>uid</parameter>. Track <abbrev>UIDs</abbrev> can be obtained with &mkvinfo;."
+#, fuzzy
+#| msgid "If the parameter starts with a '<literal>=</literal>' followed by a number <parameter>uid</parameter> then the track whose track <abbrev>UID</abbrev> element equals this <parameter>uid</parameter>. Track <abbrev>UIDs</abbrev> can be obtained with &mkvinfo;."
+msgid "If the parameter starts with a '<literal>=</literal>' followed by a number <parameter>uid</parameter>, the track whose track <abbrev>UID</abbrev> element equals the given <parameter>uid</parameter> will be selected. Track <abbrev>UIDs</abbrev> can be obtained with &mkvinfo;."
 msgstr "Si el paràmetre comença amb un signe «<literal>=</literal>» seguit per un número <parameter>UID</parameter>, llavors se seleccionarà la pista on l'element <abbrev>UID</abbrev> de la pista sigui igual que aquest <parameter>UID</parameter>. L'<abbrev>UID</abbrev> de la pista es pot obtenir amb el &mkvinfo;."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
-#: doc/man/mkvpropedit.xml:559
+#: doc/man/mkvpropedit.xml:560
 msgid "<option>track:</option>@<parameter>number</parameter>"
 msgstr "<option>track:</option>@<parameter>número</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvpropedit.xml:562
-msgid "If the parameter starts with a '<literal>@</literal>' followed by a number <parameter>number</parameter> then the track whose track number element equals this <parameter>number</parameter>. Track number can be obtained with &mkvinfo;."
+#: doc/man/mkvpropedit.xml:563
+#, fuzzy
+#| msgid "If the parameter starts with a '<literal>@</literal>' followed by a number <parameter>number</parameter> then the track whose track number element equals this <parameter>number</parameter>. Track number can be obtained with &mkvinfo;."
+msgid "If the parameter starts with a '<literal>@</literal>' followed by a number <parameter>number</parameter>, the track whose track number element equals this <parameter>number</parameter> will be selected. Track numbers can be obtained with &mkvinfo;."
 msgstr "Si el paràmetre comença amb un signe «<literal>@</literal>» seguit per un <parameter>número</parameter>, llavors se seleccionarà la pista on l'element número de la pista sigui igual que aquest <parameter>número</parameter>. El número de la pista es pot obtenir amb el &mkvinfo;."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvpropedit.xml:571
+#: doc/man/mkvpropedit.xml:572
 msgid "Notes"
 msgstr "Notes"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
-#: doc/man/mkvpropedit.xml:573
+#: doc/man/mkvpropedit.xml:574
 msgid "Due to the nature of the track edit selectors it is possible that several selectors actually match the same track headers. In such cases all actions for those edit selectors will be combined and executed in the order in which they're given on the command line."
 msgstr "A causa de la naturalesa dels selectors per a l'edició de la pista, és possible que realment alguns selectors coincideixin amb les mateixes capçaleres de les pistes. En molts casos, totes les accions d'aquests selectors per a l'edició seran combinades i executades en l'ordre en el qual es van indicar a la línia d'ordres."
 
 #. type: Content of: <refentry><refsect1><title>
-#: doc/man/mkvpropedit.xml:580
+#: doc/man/mkvpropedit.xml:581
 msgid "Attachment selectors"
 msgstr "Selectors per a l'adjunt"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:583
+#: doc/man/mkvpropedit.xml:584
 msgid "An attachment selector is used with the two actions <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> and <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link>. It can have one of the following four forms:"
 msgstr "Un selector per a l'adjunt s'empra amb les dues accions <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> i <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link>. Aquest pot tenir una de les quatre formes següents:"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:592
+#: doc/man/mkvpropedit.xml:593
 msgid "Selection by attachment ID. In this form the selector is simply a number, the attachment's ID as output by &mkvmerge;'s identification command."
 msgstr "Selecció mitjançant l'ID de l'adjunt. D'aquesta forma, el selector és un senzill número, l'ID de l'adjunt tal com surt amb l'ordre d'identificació del &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:599
+#: doc/man/mkvpropedit.xml:600
 msgid "Selection by attachment UID (unique ID). In this form the selector is the equal sign <literal>=</literal> followed by a number, the attachment's unique ID as output by &mkvmerge;'s verbose identification command."
 msgstr "Selecció mitjançant l'UID de l'adjunt (ID únic). D'aquesta forma, el selector és el signe <literal>=</literal> seguit per un número, l'ID únic de l'adjunt tal com surt amb l'ordre d'identificació del &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:606
+#: doc/man/mkvpropedit.xml:607
 msgid "Selection by attachment name. In this form the selector is the literal word <literal>name:</literal> followed by the existing attachment's name. If this selector is used with <option>--replace-attachment</option> then colons within the name to match must be escaped as <literal>\\c</literal>."
 msgstr "Selecció mitjançant el nom de l'adjunt. D'aquesta forma el selector és la paraula literal <literal>name:</literal> seguida pel nom de l'adjunt existent. Si aquest selector és emprat amb <option>--replace-attachment</option>, llavors per a que pugui coincidir s'haurà d'escapar el signe dels dos punts amb <literal>\\c</literal>."
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:614
+#: doc/man/mkvpropedit.xml:615
 msgid "Selection by MIME type. In this form the selector is the literal word <literal>mime-type:</literal> followed by the existing attachment's MIME type. If this selector is used with <option>--replace-attachment</option> then colons within the MIME type to match must be escaped as <literal>\\c</literal>."
 msgstr "Selecció mitjançant el tipus MIME de l'adjunt. D'aquesta forma el selector és la paraula literal <literal>mime-type:</literal> seguida pel tipus MIME de l'adjunt existent. Si aquest selector és emprat amb <option>--replace-attachment</option>, llavors per a que pugui coincidir s'haurà d'escapar el signe dels dos punts amb <literal>\\c</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:625
+#: doc/man/mkvpropedit.xml:626
 msgid "The following example edits a file called '<literal>movie.mkv</literal>'. It sets the segment title and modifies the language code of an audio and a subtitle track. Note that this example can be shortened by leaving out the first <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option because editing the segment information element is the default for all options found before the first <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option anyway."
 msgstr "El següent exemple edita un fitxer anomenat «<literal>peli.mkv</literal>». Estableix el títol del segment i modifica el codi d'idioma d'una pista d'àudio i d'una pista de subtítols. Tingueu en compte que aquest exemple es pot escurçar llevant la primera opció <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>, ja que editar l'element d'informació del segment està inclòs per omissió per a totes les opcions trobades abans de la primera opció <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>."
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:631
+#: doc/man/mkvpropedit.xml:632
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --edit info --set \"title=The movie\" --edit track:a1 --set language=fre --edit track:a2 --set language=ita"
 msgstr "$ mkvpropedit peli.mkv --edit info --set \"title=La pel·lícula\" --edit track:a1 --set language=cat --edit track:a2 --set language=ita"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:634
+#: doc/man/mkvpropedit.xml:635
 msgid "The second example removes the 'default track flag' from the first subtitle track and sets it for the second one. Note that &mkvpropedit;, unlike &mkvmerge;, does not set the 'default track flag' of other tracks to '0' if it is set to '1' for a different track automatically."
 msgstr "El segon exemple elimina l'«etiqueta de pista per omissió» de la primera pista de subtítols i l'estableix per a la segona. Tingueu present que el &mkvpropedit;, a diferència del &mkvmerge;, no estableix automàticament a «0» el valor de l'«etiqueta de pista per omissió» quan una pista diferent s'ha establert a «1»."
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:639
+#: doc/man/mkvpropedit.xml:640
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --edit track:s1 --set flag-default=0 --edit track:s2 --set flag-default=1"
 msgstr "$ mkvpropedit peli.mkv --edit track:s1 --set flag-default=0 --edit track:s2 --set flag-default=1"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:642
+#: doc/man/mkvpropedit.xml:643
 msgid "Replacing the tags for the second subtitle track in a file looks like this:"
 msgstr "Substituir les etiquetes per a la segona pista de subtítols en un fitxer es veu així:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:645
+#: doc/man/mkvpropedit.xml:646
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --tags track:s2:new-subtitle-tags.xml"
 msgstr "$ mkvpropedit peli.mkv --tags track:s2:etiquetes_subtítols_noves.xml"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:648
+#: doc/man/mkvpropedit.xml:649
 msgid "Removing all tags requires leaving out the file name:"
 msgstr "Eliminar totes les etiquetes requereix ometre el nom del fitxer d'etiquetes:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:651
+#: doc/man/mkvpropedit.xml:652
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --tags all:"
 msgstr "$ mkvpropedit peli.mkv --tags all:"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:654
+#: doc/man/mkvpropedit.xml:655
 msgid "Replacing the chapters in a file looks like this:"
 msgstr "Substituir els capítols en un fitxer es veu així:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:657
+#: doc/man/mkvpropedit.xml:658
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --chapters new-chapters.xml"
 msgstr "$ mkvpropedit peli.mkv --chapters capítols_nous.xml"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:660
+#: doc/man/mkvpropedit.xml:661
 msgid "Removing all chapters requires leaving out the file name:"
 msgstr "Eliminar tots els capítols requereix ometre el nom del fitxer:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:663
+#: doc/man/mkvpropedit.xml:664
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --chapters ''"
 msgstr "$ mkvpropedit peli.mkv --chapters ''"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:666
+#: doc/man/mkvpropedit.xml:667
 msgid "Adding a font file (<literal>Arial.ttf</literal>) as an attachment:"
 msgstr "Afegir un fitxer de tipus de lletra (<literal>Arial.ttf</literal>) com un adjunt:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:669
+#: doc/man/mkvpropedit.xml:670
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --add-attachment Arial.ttf"
 msgstr "$ mkvpropedit peli.mkv --add-attachment Arial.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:672
+#: doc/man/mkvpropedit.xml:673
 msgid "Adding a font file (<literal>89719823.ttf</literal>) as an attachment and providing some information as it really is just Arial:"
 msgstr "Afegir un fitxer de tipus de lletra (<literal>89719823.ttf</literal>) com un adjunt i proporcionar alguna informació de com és aquest tipus de lletra:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:675
+#: doc/man/mkvpropedit.xml:676
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --attachment-name Arial.ttf --attachment-description 'The Arial font as a TrueType font' --attachment-mime-type application/x-truetype-font --add-attachment 89719823.ttf"
 msgstr "$ mkvpropedit peli.mkv --attachment-name Arial.ttf --attachment-description 'El tipus de lletra Arial com a tipus de lletra TrueType' --attachment-mime-type application/x-truetype-font --add-attachment 89719823.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:678
+#: doc/man/mkvpropedit.xml:679
 msgid "Replacing one attached font (<literal>Comic.ttf</literal>) file with another one (<literal>Arial.ttf</literal>):"
 msgstr "Substituir un fitxer de tipus de lletra adjuntat (<literal>Comic.ttf</literal>) per un altre (<literal>Arial.ttf</literal>):"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:681
+#: doc/man/mkvpropedit.xml:682
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --attachment-name Arial.ttf --attachment-description 'The Arial font as a TrueType font' --replace-attachment name:Comic.ttf:Arial.ttf"
 msgstr "$ mkvpropedit peli.mkv --attachment-name Arial.ttf --attachment-description 'El tipus de lletra Arial com a tipus de lletra TrueType' --replace-attachment name:Comic.ttf:Arial.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:684
+#: doc/man/mkvpropedit.xml:685
 msgid "Deleting the second attached file, whatever it may be:"
 msgstr "Suprimir el segon fitxer adjuntat, sigui el que sigui:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:687
+#: doc/man/mkvpropedit.xml:688
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --delete-attachment 2"
 msgstr "$ mkvpropedit peli.mkv --delete-attachment 2"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:690
+#: doc/man/mkvpropedit.xml:691
 msgid "Deleting all attached fonts by MIME type:"
 msgstr "Suprimir tots els tipus de lletra adjuntats segons el tipus MIME:"
 
 #. type: Content of: <refentry><refsect1><screen>
-#: doc/man/mkvpropedit.xml:693
+#: doc/man/mkvpropedit.xml:694
 #, no-wrap
 msgid "$ mkvpropedit movie.mkv --delete-attachment mime-type:application/x-truetype-font"
 msgstr "$ mkvpropedit peli.mkv --delete-attachment mime-type:application/x-truetype-font"
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:700
+#: doc/man/mkvpropedit.xml:701
 msgid "&mkvpropedit; exits with one of three exit codes:"
 msgstr "El &mkvpropedit; sortirà amb un d'aquests tres codis de sortida:"
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:706
+#: doc/man/mkvpropedit.xml:707
 msgid "<constant>0</constant> -- This exit codes means that the modification has completed successfully."
 msgstr "<constant>0</constant> -- Aquest codi de sortida significa que la modificació s'ha realitzat correctament."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:712
+#: doc/man/mkvpropedit.xml:713
 msgid "<constant>1</constant> -- In this case &mkvpropedit; has output at least one warning, but the modification did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting files might be ok or not.  The user is urged to check both the warning and the resulting files."
 msgstr "<constant>1</constant> -- En aquest cas, el &mkvpropedit; ha generat una sortida amb almenys un avís, però la modificació ha continuat. Un avís és prefixat amb el text «<literal>Avís:</literal>». Depenent de les qüestions involucrades, els fitxers resultants seran o no correctes. L'usuari serà instat a revisar tant els avisos com els fitxers."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
-#: doc/man/mkvpropedit.xml:720
+#: doc/man/mkvpropedit.xml:721
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvpropedit; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
 msgstr "<constant>2</constant> -- Aquest codi de sortida s'empra després de produir-se un error. El &mkvpropedit; interromprà el procés just després de mostrar el missatge d'error. L'interval dels missatges d'error va des d'arguments incorrectes a la línia d'ordres fins a errors de lectura/escriptura en fitxers malmesos."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:740
+#: doc/man/mkvpropedit.xml:741
 msgid "&mkvpropedit; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
 msgstr "El &mkvpropedit; empra les variables per omissió que es determinen a la configuració regional del sistema (p. ex., <varname>LANG</varname> i la família <varname>LC_*</varname>). Variables addicionals:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvpropedit.xml:746
+#: doc/man/mkvpropedit.xml:747
 msgid "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgstr "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> i la seva forma abreujada <varname>MTX_DEBUG</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvpropedit.xml:748
+#: doc/man/mkvpropedit.xml:749
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvpropedit.description.debug\"><option>--debug</option></link> option."
 msgstr "El contingut es tractarà com si s'hagués passat l'opció <link linkend=\"mkvpropedit.description.debug\"><option>--debug</option></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
-#: doc/man/mkvpropedit.xml:754
+#: doc/man/mkvpropedit.xml:755
 msgid "<varname>MKVPROPEDIT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgstr "<varname>MKVPROPEDIT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> i la seva forma abreujada <varname>MTX_ENGAGE</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: doc/man/mkvpropedit.xml:756
+#: doc/man/mkvpropedit.xml:757
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvpropedit.description.engage\"><option>--engage</option></link> option."
 msgstr "El contingut es tractarà com si s'hagués passat l'opció <link linkend=\"mkvpropedit.description.engage\"><option>--engage</option></link>."
 
 #. type: Content of: <refentry><refsect1><para>
-#: doc/man/mkvpropedit.xml:766
+#: doc/man/mkvpropedit.xml:767
 msgid "&mkvmerge;, &mkvinfo;, &mkvextract;, &mtxgui;"
 msgstr "&mkvmerge;, &mkvinfo;, &mkvextract;, &mtxgui;"
 
