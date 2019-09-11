@@ -249,16 +249,15 @@ Settings::convertOldSettings() {
   reg->endGroup();
 
   // Update list of often-used language codes when updating from v37
-  // or earlier & the list wasn't modified.
-  reg->beginGroup(s_grpSettings);
-  auto oftenUsedLanguages = reg->value(s_valOftenUsedLanguages).toStringList();
-  oftenUsedLanguages.sort();
-
-  if (   (writtenByVersion <= version_number_t{"37"})
-      && (oftenUsedLanguages == (QStringList{} <<  "chi" << "dut" << "eng" << "fin" << "fre" << "ger" << "ita" << "jpn" << "mul" << "nor" << "por" << "rus" << "spa" << "swe" << "und" << "zxx")))
+  // or earlier due to the change that only often used languages are
+  // shown by default. Unfortunately that list was rather short in
+  // earlier releases, leading to confused users missing their
+  // language.
+  if (writtenByVersion <= version_number_t{"37"}) {
+    reg->beginGroup(s_grpSettings);
     reg->remove(s_valOftenUsedLanguages);
-
-  reg->endGroup();
+    reg->endGroup();
+  }
 }
 
 void
