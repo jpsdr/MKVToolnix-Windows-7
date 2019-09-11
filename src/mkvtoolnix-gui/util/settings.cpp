@@ -197,7 +197,7 @@ Settings::convertOldSettings() {
   reg->endGroup();
 
   reg->beginGroup(s_grpDefaults);
-  if (   (writtenByVersion.compare(version_number_t{"8.1.0"}) == 0)
+  if (   (writtenByVersion == version_number_t{"8.1.0"})
       && (reg->value(s_valDefaultSubtitleCharset).toString() == Q("ISO-8859-15"))) {
     // Fix for a bug in versions prior to 8.2.0.
     reg->remove(s_valDefaultSubtitleCharset);
@@ -242,8 +242,7 @@ Settings::convertOldSettings() {
   reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
   auto val = reg->value(s_valCustomRegex).toString();
 
-  // writtenByVersion ≤ 36.0.0  →  !(writtenByVersion > 36.0.0)
-  if (   !(version_number_t{"36"} < writtenByVersion)
+  if (   (writtenByVersion <= version_number_t{"36"})
       && (val == Q("[[({.+=#-](<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]")))
     reg->remove(s_valCustomRegex);
   reg->endGroup();
@@ -255,7 +254,7 @@ Settings::convertOldSettings() {
   auto oftenUsedLanguages = reg->value(s_valOftenUsedLanguages).toStringList();
   oftenUsedLanguages.sort();
 
-  if (   !(version_number_t{"37"} < writtenByVersion)
+  if (   (writtenByVersion <= version_number_t{"37"})
       && (oftenUsedLanguages == (QStringList{} <<  "chi" << "dut" << "eng" << "fin" << "fre" << "ger" << "ita" << "jpn" << "mul" << "nor" << "por" << "rus" << "spa" << "swe" << "und" << "zxx")))
     reg->remove(s_valOftenUsedLanguages);
 
