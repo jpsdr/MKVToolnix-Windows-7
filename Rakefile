@@ -100,6 +100,8 @@ def setup_globals
   $dependency_dir          = "#{$source_dir}/rake.d/dependency.d"
   $dependency_tmp_dir      = "#{$dependency_dir}/tmp"
 
+  $version_header_name     = "#{$build_dir}/src/common/mkvtoolnix_version.h"
+
   $languages               =  {
     :programs              => c(:TRANSLATIONS).split(/\s+/),
     :manpages              => c(:MANPAGES_TRANSLATIONS).split(/\s+/),
@@ -279,6 +281,7 @@ setup_globals
 setup_overrides
 import_dependencies
 generate_helper_files
+update_version_number_include
 
 # Default task
 define_default_task
@@ -977,6 +980,7 @@ task :clean do
   }
   patterns += $applications + $tools.collect { |name| "src/tools/#{name}" }
   patterns += PCH.clean_patterns
+  patterns << $version_header_name
 
   remove_files_by_patterns patterns
 

@@ -1,4 +1,7 @@
 # coding: utf-8
+
+require "shellwords"
+
 $use_tempfile_for_run = defined?(RUBY_PLATFORM) && /mingw/i.match(RUBY_PLATFORM)
 
 $git_mutex     = Mutex.new
@@ -250,6 +253,38 @@ def ensure_file file_name, content = ""
   end
 
   File.open(file_name, 'w') { |file| file.write(content) }
+end
+
+def update_version_number_include
+  git_dir         = $source_dir + '/.git'
+  current_version = nil
+  wanted_version  = c(:PACKAGE_VERSION)
+
+  if FileTest.exists?($version_header_name)
+    lines = IO.readlines($version_header_name)
+
+    if !lines.empty? && %r{#define.*?"([0-9.]+)"}.match(lines[0])
+      current_version = $1
+    end
+  end
+
+  if FileTest.directory?(git_dir)
+    command = ["git", "--git-dir=#{$source_dir}/.git", "describe", "HEAD"].
+      map { |e| Shellwords.escape(e) }.
+      join(' ')
+
+    description = `#{command} 2> /dev/null`.chomp
+
+    if %r{^release-#{Regexp.escape(c(:PACKAGE_VERSION))}-(\d+)}.match(description) && ($1.to_i != 0)
+      wanted_version += ".#{$1}"
+    end
+  end
+
+  return if current_version == wanted_version
+
+  File.open($version_header_name, "w") do |file|
+    file.puts("#define MKVTOOLNIX_VERSION \"#{wanted_version}\"")
+  end
 end
 
 class Rake::Task
