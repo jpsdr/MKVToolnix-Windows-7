@@ -22,6 +22,7 @@
 #include "common/mm_file_io.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
+#include "common/version.h"
 
 #include "element_info.h"
 
@@ -81,7 +82,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("ebml_validator v" PACKAGE_VERSION "\n");
+  mxinfo(get_version_info("ebml_validator") + "\n");
   mxexit();
 }
 

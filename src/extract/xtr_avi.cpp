@@ -19,6 +19,7 @@
 #include "common/hacks.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/version.h"
 #include "extract/xtr_avi.h"
 
 xtr_avi_c::xtr_avi_c(const std::string &codec_id,
@@ -63,7 +64,7 @@ xtr_avi_c::create_file(xtr_base_c *master,
 
   std::string writing_app = "mkvextract";
   if (!mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA))
-    writing_app += fmt::format(" {0}", PACKAGE_VERSION);
+    writing_app += fmt::format(" {0}", get_current_version().to_string());
   m_avi->writing_app = safestrdup(writing_app.c_str());
 
   char ccodec[5];

@@ -16,6 +16,7 @@
 #include "common/mm_file_io.h"
 #include "common/translation.h"
 #include "common/vc1.h"
+#include "common/version.h"
 
 static bool g_opt_checksum         = false;
 static bool g_opt_entrypoints      = false;
@@ -275,7 +276,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("vc1parser v" PACKAGE_VERSION "\n");
+  mxinfo(get_version_info("vc1parser") + "\n");
   mxexit();
 }
 

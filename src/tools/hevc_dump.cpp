@@ -14,6 +14,7 @@
 #include "common/hevc_es_parser.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/version.h"
 
 static void
 show_help() {
@@ -28,7 +29,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("hevc_dump v" PACKAGE_VERSION "\n");
+  mxinfo(get_version_info("hevc_dump") + "\n");
   mxexit();
 }
 

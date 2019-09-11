@@ -15,6 +15,7 @@
 #include "common/bluray/mpls.h"
 #include "common/command_line.h"
 #include "common/mm_file_io.h"
+#include "common/version.h"
 
 static char const * const s_program_name = "bluray_dump";
 
@@ -22,7 +23,7 @@ static void
 setup(char const *argv0) {
   mtx_common_init(s_program_name, argv0);
 
-  mtx::cli::g_version_info = fmt::format("{0} v{1}", s_program_name, PACKAGE_VERSION);
+  mtx::cli::g_version_info = get_version_info("bluray_dump");
   mtx::cli::g_usage_text   = fmt::format("{0} [options] input_file_name\n"
                                          "\n"
                                          "General options:\n"

@@ -16,6 +16,7 @@
 #include "common/dirac.h"
 #include "common/mm_file_io.h"
 #include "common/translation.h"
+#include "common/version.h"
 
 static bool g_opt_checksum         = false;
 static bool g_opt_sequence_headers = false;
@@ -154,7 +155,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("diracparser v" PACKAGE_VERSION "\n");
+  mxinfo(get_version_info("diracparser") + "\n");
   mxexit();
 }
 

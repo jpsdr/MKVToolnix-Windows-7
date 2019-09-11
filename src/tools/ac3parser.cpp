@@ -18,6 +18,7 @@
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/translation.h"
+#include "common/version.h"
 
 static bool g_opt_checksum      = false;
 static bool g_opt_frame_headers = false;
@@ -40,7 +41,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("ac3parser v" PACKAGE_VERSION "\n");
+  mxinfo(get_version_info("ac3parser") + "\n");
   mxexit();
 }
 
