@@ -48,6 +48,10 @@ if test x"$ac_cv_header_boost_integer_common_factor_hpp" != xyes; then
   ])
 fi
 
+AX_BOOST_CHECK_HEADERS([boost/operators.hpp],,[
+  AC_MSG_ERROR([Boost's Operators library is required but wasn't found])
+])
+
 AX_BOOST_CHECK_HEADERS([boost/range.hpp],,[
   AC_MSG_ERROR([Boost's Range library is required but wasn't found])
 ])

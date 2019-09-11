@@ -102,6 +102,13 @@ version_number_t::operator <(const version_number_t &cmp)
   return compare(cmp) == -1;
 }
 
+bool
+version_number_t::operator ==(const version_number_t &cmp)
+  const
+{
+  return compare(cmp) == 0;
+}
+
 std::string
 version_number_t::to_string()
   const

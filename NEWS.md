@@ -16,6 +16,10 @@
   v36.0.0. If it does, it will be updated to the built-in list changed in
   v37.0.0. Fixes #2611.
 
+## Build system changes
+
+* Boost's Operators header library is now required.
+
 
 # Version 37.0.0 "Leave It" 2019-08-24
 

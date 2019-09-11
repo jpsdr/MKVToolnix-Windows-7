@@ -16,6 +16,7 @@
 #include "common/common_pch.h"
 
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/operators.hpp>
 
 #include "common/xml/xml.h"
 
@@ -24,7 +25,7 @@
 #define MTX_DOWNLOAD_URL      "https://mkvtoolnix.download/downloads.html"
 #define MTX_NEWS_URL          "https://mkvtoolnix.download/doc/NEWS.md"
 
-struct version_number_t {
+struct version_number_t: boost::totally_ordered<version_number_t> {
   std::vector<unsigned int> parts;
   unsigned int build{};
   bool valid{};
@@ -33,6 +34,7 @@ struct version_number_t {
   version_number_t(const std::string &s);
 
   bool operator <(const version_number_t &cmp) const;
+  bool operator ==(const version_number_t &cmp) const;
   int compare(const version_number_t &cmp) const;
 
   std::string to_string() const;
