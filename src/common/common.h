@@ -40,6 +40,10 @@
 # include <inttypes.h>
 #endif // HAVE_INTTYPES_H
 
+// Don't support user-defined literals in fmt as they aren't used by
+// MKVToolNix and produce a compiler warning in -Wpedantic
+#define FMT_USE_USER_DEFINED_LITERALS 0
+
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 
