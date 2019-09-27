@@ -12,8 +12,11 @@ Requires: hicolor-icon-theme
 
 BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, cmark-devel, po4a
 
-%if 0%{?centos}
-BuildRequires: devtoolset-7-gcc-c++, rubygem-drake
+%if 0%{?rhel}
+BuildRequires: rubygem-drake
+%if 0%{?rhel} <= 7
+BuildRequires: devtoolset-7-gcc-c++
+%endif
 %else
 BuildRequires: boost-devel >= 1.46.0
 %endif
@@ -62,7 +65,7 @@ export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 unset CONFIGURE_ARGS
 
-%if 0%{?centos}
+%if 0%{?rhel} && 0%{?rhel} <= 7
 export CC=/opt/rh/devtoolset-7/root/bin/gcc
 export CXX=/opt/rh/devtoolset-7/root/bin/g++
 export CONFIGURE_ARGS="--with-boost=/opt/boost/boost_1_69_0"
