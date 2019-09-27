@@ -287,13 +287,6 @@ def update_version_number_include
   end
 end
 
-def verify_current_host_is_same_as_configured
-  current_host = `#{$source_dir}/config.guess 2> /dev/null`.chomp
-  return if !current_host || (current_host == c(:host))
-
-  fail "Error: The source tree was configured on a different host system type (#{c(:host)}) than the current one (#{current_host}). This is not supported."
-end
-
 class Rake::Task
   def mo_all_prerequisites
     todo   = [name]

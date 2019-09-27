@@ -277,7 +277,6 @@ def define_default_task
 end
 
 # main
-verify_current_host_is_same_as_configured
 setup_globals
 setup_overrides
 import_dependencies
