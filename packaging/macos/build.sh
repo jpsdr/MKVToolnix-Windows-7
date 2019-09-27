@@ -243,7 +243,7 @@ function build_gettext {
 function build_boost {
   local -a args properties
 
-  args=(--reconfigure -sICONV_PATH=/usr -j$DRAKETHREADS --prefix=TMPDIR/${TARGET} --libdir=TMPDIR/${TARGET}/lib)
+  args=(--reconfigure -sICONV_PATH=${TARGET} -j$DRAKETHREADS --prefix=TMPDIR/${TARGET} --libdir=TMPDIR/${TARGET}/lib)
   properties=(toolset=clang link=static variant=release)
   if [[ -n $CXXFLAGS ]] properties+=(cxxflags="${(q)CXXFLAGS}")
   if [[ -n $LDFLAGS  ]] properties+=(linkflags="${(q)LDFLAGS}")
