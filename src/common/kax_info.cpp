@@ -86,6 +86,17 @@ using namespace mtx::kax_info;
   (   !parent->IsFiniteSize() \
    || (p->m_in->getFilePointer() < (parent->GetElementPosition() + parent->HeadSize() + parent->GetSize())))
 
+namespace {
+
+std::string
+normalize_fmt_double_output(double value) {
+  // Some fmt library versions output a trailing ".0" even if the
+  // decimal part is zero, others don't. Normalize to not include it.
+  return boost::regex_replace(fmt::format("{}", value), boost::regex{"\\.0*$", boost::regex::perl}, "");
+}
+
+}
+
 namespace mtx {
 
 kax_info_c::kax_info_c()
@@ -577,8 +588,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   }));
 
-  POST(KaxAudioSamplingFreq,       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), static_cast<KaxAudioSamplingFreq &>(e).GetValue())); });
-  POST(KaxAudioOutputSamplingFreq, [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue())); });
+  POST(KaxAudioSamplingFreq,       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), normalize_fmt_double_output(static_cast<KaxAudioSamplingFreq &>(e).GetValue()))); });
+  POST(KaxAudioOutputSamplingFreq, [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), normalize_fmt_double_output(static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
   POST(KaxAudioChannels,           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("channels: {0}"), static_cast<KaxAudioChannels &>(e).GetValue())); });
   POST(KaxAudioBitDepth,           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("bits per sample: {0}"), static_cast<KaxAudioBitDepth &>(e).GetValue())); });
 
@@ -1160,7 +1171,7 @@ kax_info_c::display_track_info() {
                                track->tnum,
                                tinfo.m_blocks,
                                tinfo.m_size,
-                               duration / 1000000000.0,
+                               normalize_fmt_double_output(duration / 1000000000.0),
                                static_cast<uint64_t>(duration == 0 ? 0 : tinfo.m_size * 8000000000.0 / duration)));
   }
 }
