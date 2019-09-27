@@ -47,6 +47,15 @@ void set_environment_variable(const std::string &key, const std::string &value);
 unsigned int get_windows_version();
 std::string format_windows_message(uint64_t message_id);
 
-#endif
+#endif  // SYS_WINDOWS
+
+#if defined(SYS_APPLE)
+enum class unicode_normalization_form_e {
+  c,
+  d,
+};
+
+std::string normalize_unicode_string(std::string const &src, unicode_normalization_form_e form);
+#endif  // SYS_APPLE
 
 }}

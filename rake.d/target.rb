@@ -179,6 +179,7 @@ class Target
       when :mtxunittest      then [ '-Ltests/unit',     '-lmtxunittest' ]
       when :ebml             then c(:EBML_LIBS,     '-lebml')
       when :matroska         then c(:MATROSKA_LIBS, '-lmatroska')
+      when :CoreFoundation   then '-framework CoreFoundation'
       when String            then entry
       else                        "-l#{entry}"
       end

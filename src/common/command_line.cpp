@@ -20,6 +20,9 @@
 #endif
 
 #include "common/command_line.h"
+#if defined(SYS_APPLE)
+# include "common/fs_sys_helpers.h"
+#endif
 #include "common/hacks.h"
 #include "common/json.h"
 #include "common/mm_io_x.h"
@@ -115,6 +118,13 @@ args_in_utf8(int argc,
       } else
         args.push_back(cc_command_line->utf8(argv[i]));
     }
+
+#if defined(SYS_APPLE)
+  // Always use NFD on macOS, no matter which normalization form the
+  // command-line arguments used.
+  for (auto &arg : args)
+    arg = mtx::sys::normalize_unicode_string(arg, mtx::sys::unicode_normalization_form_e::d);
+#endif  // SYS_APPLE
 
   return args;
 }
