@@ -15,6 +15,10 @@
   GUI checks if the list of often-used languages equals the built-in list from
   v36.0.0. If it does, it will be updated to the built-in list changed in
   v37.0.0. Fixes #2611.
+* all programs: macOS: fixed file access if the file name (including all path
+  components) contains any Unicode character where NFC (Normalization Form
+  Canonical Composed) and NFD (Normalization Form Canonical Decomposed)
+  differ, e.g. German Umlauts. Fixes #2620.
 
 ## Build system changes
 

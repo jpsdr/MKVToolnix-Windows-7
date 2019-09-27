@@ -1056,6 +1056,7 @@ if !$libmtxcommon_as_dll
     :ebml,
   ]
 end
+$common_libs += [ :CoreFoundation ] if $building_for[:macos]
 
 [ { :name => 'avi',         :dir => 'lib/avilib-0.6.10'                                                              },
   { :name => 'fmt',         :dir => 'lib/fmt/src'                                                                    },

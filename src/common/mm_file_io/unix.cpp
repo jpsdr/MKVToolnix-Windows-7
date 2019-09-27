@@ -24,12 +24,19 @@
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mm_file_io_p.h"
+#if defined(SYS_APPLE)
+# include "common/fs_sys_helpers.h"
+#endif
 
 mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
                                            open_mode const p_mode)
   : file_name{p_file_name}
   , mode{p_mode}
 {
+#if defined(SYS_APPLE)
+  file_name = mtx::sys::normalize_unicode_string(file_name, mtx::sys::unicode_normalization_form_e::d);
+#endif  // SYS_APPLE
+
   const char *cmode;
 
   switch (mode) {
@@ -58,6 +65,16 @@ mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
 
   file = fopen(local_path.c_str(), cmode);
+
+#if defined(SYS_APPLE)
+  if (!file && (MODE_CREATE != mode)) {
+    // When reading files on macOS retry with names in NFC as they
+    // might come from other sources, e.g. via NFS mounts from NFC
+    // systems such as Linux.
+    local_path = g_cc_local_utf8->native(mtx::sys::normalize_unicode_string(file_name, mtx::sys::unicode_normalization_form_e::c));
+    file = fopen(local_path.c_str(), cmode);
+  }
+#endif  // SYS_APPLE
 
   if (!file)
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
