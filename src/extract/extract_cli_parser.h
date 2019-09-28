@@ -66,7 +66,6 @@ protected:
   void handle_unknown_arg();
   void handle_unknown_arg_single_mode();
   void handle_unknown_arg_multiple_mode();
-  void verify_options_multiple_mode();
 
 protected:
   static boost::optional<options_c::extraction_mode_e> extraction_mode_from_string(std::string const &mode_string);

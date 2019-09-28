@@ -378,21 +378,6 @@ extract_cli_parser_c::add_extraction_spec() {
   set_default_values();
 }
 
-void
-extract_cli_parser_c::verify_options_multiple_mode() {
-  for (auto const &mode_options : m_options.m_modes) {
-    if (!mtx::included_in(mode_options.m_extraction_mode, options_c::em_chapters, options_c::em_cuesheet, options_c::em_tags))
-      continue;
-
-    auto mode_name = mode_options.m_extraction_mode == options_c::em_chapters ? "chapters"
-                   : mode_options.m_extraction_mode == options_c::em_tags     ? "tags"
-                   :                                                            "cuesheet";
-
-    if (mode_options.m_output_file_name.empty())
-      mxerror(fmt::format(Y("Missing destination file name in argument '{0}'.\n"), mode_name));
-  }
-}
-
 options_c
 extract_cli_parser_c::run() {
   init_parser();
@@ -403,9 +388,6 @@ extract_cli_parser_c::run() {
 
   if (m_debug)
     m_options.dump();
-
-  if (m_cli_type == cli_type_e::multiple)
-    verify_options_multiple_mode();
 
   return m_options;
 }
