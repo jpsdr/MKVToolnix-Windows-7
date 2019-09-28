@@ -156,17 +156,18 @@ cluster_helper_c::render_after_adding_if_necessary(packet_cptr &packet) {
 void
 cluster_helper_c::split_if_necessary(packet_cptr &packet) {
   if (   !splitting()
-      || (m->split_points.end() == m->current_split_point)
+      || (m->current_split_point_idx >= m->split_points.size())
       || (g_file_num > g_split_max_num_files)
       || !packet->is_key_frame()
       || (   (packet->source->get_track_type() != track_video)
           && g_video_packetizer))
     return;
 
+  auto &current_split_point = m->split_points[m->current_split_point_idx];
   bool split_now = false;
 
   // Maybe we want to start a new file now.
-  if (split_point_c::size == m->current_split_point->m_type) {
+  if (split_point_c::size == current_split_point.m_type) {
     int64_t additional_size = 0;
 
     if (!m->packets.empty())
@@ -178,22 +179,22 @@ cluster_helper_c::split_if_necessary(packet_cptr &packet) {
     mxdebug_if(m->debug_splitting,
                fmt::format("cluster_helper split decision: header_overhead: {0}, additional_size: {1}, bytes_in_file: {2}, sum: {3}\n",
                            m->header_overhead, additional_size, m->bytes_in_file, m->header_overhead + additional_size + m->bytes_in_file));
-    if ((m->header_overhead + additional_size + m->bytes_in_file) >= m->current_split_point->m_point)
+    if ((m->header_overhead + additional_size + m->bytes_in_file) >= current_split_point.m_point)
       split_now = true;
 
-  } else if (   (split_point_c::duration == m->current_split_point->m_type)
+  } else if (   (split_point_c::duration == current_split_point.m_type)
              && (0 <= m->first_timestamp_in_file)
-                && (timestamp_c::ns(packet->assigned_timestamp - m->first_timestamp_in_file - m->current_split_point->m_point) > timestamp_c::ms(-1)))
+                && (timestamp_c::ns(packet->assigned_timestamp - m->first_timestamp_in_file - current_split_point.m_point) > timestamp_c::ms(-1)))
     split_now = true;
 
-  else if (   (   (split_point_c::timestamp == m->current_split_point->m_type)
-               || (split_point_c::parts     == m->current_split_point->m_type))
-           && (timestamp_c::ns(packet->assigned_timestamp - m->current_split_point->m_point) > timestamp_c::ms(-1)))
+  else if (   (   (split_point_c::timestamp == current_split_point.m_type)
+               || (split_point_c::parts     == current_split_point.m_type))
+           && (timestamp_c::ns(packet->assigned_timestamp - current_split_point.m_point) > timestamp_c::ms(-1)))
     split_now = true;
 
-  else if (   (   (split_point_c::frame_field       == m->current_split_point->m_type)
-               || (split_point_c::parts_frame_field == m->current_split_point->m_type))
-           && (m->frame_field_number >= m->current_split_point->m_point))
+  else if (   (   (split_point_c::frame_field       == current_split_point.m_type)
+               || (split_point_c::parts_frame_field == current_split_point.m_type))
+           && (m->frame_field_number >= current_split_point.m_point))
     split_now = true;
 
   if (!split_now)
@@ -208,24 +209,25 @@ cluster_helper_c::split(packet_cptr &packet) {
 
   m->num_cue_elements = 0;
 
-  bool create_new_file       = m->current_split_point->m_create_new_file;
+  auto &current_split_point  = m->split_points[m->current_split_point_idx];
+  bool create_new_file       = current_split_point.m_create_new_file;
   bool previously_discarding = m->discarding;
 
-  mxdebug_if(m->debug_splitting, fmt::format("Splitting: splitpoint {0} reached before timestamp {1}, create new? {2}.\n", m->current_split_point->str(), format_timestamp(packet->assigned_timestamp), create_new_file));
+  mxdebug_if(m->debug_splitting, fmt::format("Splitting: splitpoint {0} reached before timestamp {1}, create new? {2}.\n", current_split_point.str(), format_timestamp(packet->assigned_timestamp), create_new_file));
 
   finish_file(false, create_new_file, previously_discarding);
 
-  if (m->current_split_point->m_use_once) {
-    if (   m->current_split_point->m_discard
-        && (   (split_point_c::parts             == m->current_split_point->m_type)
-            || (split_point_c::parts_frame_field == m->current_split_point->m_type))
-        && (m->split_points.end() == (m->current_split_point + 1))) {
+  if (current_split_point.m_use_once) {
+    if (   current_split_point.m_discard
+        && (   (split_point_c::parts             == current_split_point.m_type)
+            || (split_point_c::parts_frame_field == current_split_point.m_type))
+        && ((m->current_split_point_idx + 1) >= m->split_points.size())) {
       mxdebug_if(m->debug_splitting, fmt::format("Splitting: Last part in 'parts:' splitting mode finished\n"));
       m->splitting_and_processed_fully = true;
     }
 
-    m->discarding = m->current_split_point->m_discard;
-    ++m->current_split_point;
+    m->discarding = current_split_point.m_discard;
+    ++m->current_split_point_idx;
   }
 
   if (create_new_file) {
@@ -659,11 +661,14 @@ cluster_helper_c::handle_discarded_duration(bool create_new_file,
 void
 cluster_helper_c::add_split_point(const split_point_c &split_point) {
   m->split_points.push_back(split_point);
-  m->current_split_point = m->split_points.begin();
-  m->discarding          = m->current_split_point->m_discard;
 
-  if (0 == m->current_split_point->m_point)
-    ++m->current_split_point;
+  if (m->split_points.size() != 1)
+    return;
+
+  m->discarding = m->split_points[0].m_discard;
+
+  if (0 == m->split_points[0].m_point)
+    ++m->current_split_point_idx;
 }
 
 bool

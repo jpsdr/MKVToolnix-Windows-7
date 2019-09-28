@@ -65,7 +65,7 @@ public:
   mm_io_c *out{};
 
   std::vector<split_point_c> split_points;
-  std::vector<split_point_c>::iterator current_split_point{split_points.begin()};
+  unsigned int current_split_point_idx{};
 
   bool discarding{}, splitting_and_processed_fully{};
 
