@@ -21,6 +21,8 @@
   components) contains any Unicode character where NFC (Normalization Form
   Canonical Composed) and NFD (Normalization Form Canonical Decomposed)
   differ, e.g. German Umlauts. Fixes #2620.
+* mkvmerge: when splitting by chapters the user can now split by chapters
+  coming from one of the appended files, too. Fixes #2625.
 
 ## Build system changes
 

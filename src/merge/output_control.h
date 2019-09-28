@@ -181,7 +181,8 @@ extern int g_max_blocks_per_cluster;
 extern int g_default_tracks[3], g_default_tracks_priority[3];
 
 extern int g_split_max_num_files;
-extern std::string g_splitting_by_chapters_arg;
+extern std::unordered_map<unsigned int, int> g_splitting_by_chapter_numbers;
+extern bool g_splitting_by_all_chapters;
 
 extern append_mode_e g_append_mode;
 
@@ -208,6 +209,8 @@ void rerender_track_headers();
 std::string create_output_name();
 
 void add_to_progress(int64_t num_bytes_processed);
+
+void add_split_points_from_remainig_chapter_numbers();
 
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
 void sighandler(int signum);

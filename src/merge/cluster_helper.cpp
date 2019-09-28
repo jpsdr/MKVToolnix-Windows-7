@@ -86,6 +86,9 @@ cluster_helper_c::get_packet_count()
 bool
 cluster_helper_c::splitting()
   const {
+  if (g_splitting_by_all_chapters || !g_splitting_by_chapter_numbers.empty())
+    return true;
+
   return !m->split_points.empty();
 }
 
@@ -674,6 +677,9 @@ cluster_helper_c::add_split_point(const split_point_c &split_point) {
 bool
 cluster_helper_c::split_mode_produces_many_files()
   const {
+  if (g_splitting_by_all_chapters || !g_splitting_by_chapter_numbers.empty())
+    return true;
+
   if (!splitting())
     return false;
 

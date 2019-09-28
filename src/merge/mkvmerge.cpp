@@ -70,6 +70,8 @@
 
 using namespace libmatroska;
 
+static std::string s_split_by_chapters_arg;
+
 /** \brief Outputs usage information
 */
 #define S(x) std::string{x}
@@ -1067,66 +1069,27 @@ parse_arg_split_frames(std::string const &arg) {
 
 void
 parse_arg_split_chapters(std::string const &arg) {
-  std::string s = arg;
+  s_split_by_chapters_arg = arg;
+  auto s                  = arg;
 
   if (balg::istarts_with(s, "chapters:"))
     s.erase(0, 9);
 
-  bool use_all = s == "all";
-  std::unordered_map<unsigned int, bool> chapter_numbers;
-
-  if (!use_all) {
-    std::vector<std::string> numbers = split(s, ",");
-    for (auto &number_str : numbers) {
-      auto number = 0u;
-      if (!parse_number(number_str, number) || !number)
-        mxerror(fmt::format(Y("Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"), number_str, arg, Y("Not a valid number or not positive.")));
-      chapter_numbers[number] = true;
-    }
-
-    if (chapter_numbers.empty())
-      mxerror(fmt::format(Y("No chapter numbers listed after '--split {0}'.\n"), arg));
+  if (s == "all") {
+    g_splitting_by_all_chapters = true;
+    return;
   }
 
-  if (!g_kax_chapters)
-    mxerror(fmt::format(Y("No chapters in source files or chapter files found to split by.\n")));
+  for (auto &number_str : split(s, ",")) {
+    auto number = 0u;
+    if (!parse_number(number_str, number) || !number)
+      mxerror(fmt::format(Y("Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"), number_str, arg, Y("Not a valid number or not positive.")));
 
-  std::vector<split_point_c> new_split_points;
-  auto current_number = 0u;
-  for (auto element : *g_kax_chapters) {
-    auto edition = dynamic_cast<KaxEditionEntry *>(element);
-    if (!edition)
-      continue;
-
-    for (auto sub_element : *edition) {
-      auto atom = dynamic_cast<KaxChapterAtom *>(sub_element);
-      if (!atom)
-        continue;
-
-
-      ++current_number;
-      if (!use_all && !chapter_numbers[current_number])
-        continue;
-
-      int64_t split_after = FindChildValue<KaxChapterTimeStart, uint64_t>(atom, 0);
-      if (split_after)
-        new_split_points.push_back(split_point_c{split_after, split_point_c::timestamp, true});
-    }
+    g_splitting_by_chapter_numbers[number] = 1;
   }
 
-  if (!current_number)
-    mxerror(fmt::format(Y("No chapters in source files or chapter files found to split by.\n")));
-
-  for (auto &number : chapter_numbers)
-    if (number.first > current_number)
-      mxerror(fmt::format(Y("Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"),
-                          number.first, arg,
-                          fmt::format(NY("Only {0} chapter found in source files & chapter files.", "Only {0} chapters found in source files & chapter files.", current_number), current_number)));
-
-  brng::sort(new_split_points);
-
-  for (auto &split_point : new_split_points)
-    g_cluster_helper->add_split_point(split_point);
+  if (g_splitting_by_chapter_numbers.empty())
+    mxerror(fmt::format(Y("No chapter numbers listed after '--split {0}'.\n"), arg));
 }
 
 static void
@@ -1223,7 +1186,7 @@ parse_arg_split(const std::string &arg) {
     parse_arg_split_frames(arg);
 
   else if (balg::istarts_with(s, "chapters:"))
-    g_splitting_by_chapters_arg = arg;
+    parse_arg_split_chapters(arg);
 
   else if ((   (s.size() == 8)
             || (s.size() == 12))
@@ -3088,6 +3051,22 @@ create_append_mappings_for_playlists() {
   }
 }
 
+static void
+check_for_unused_chapter_numbers_while_spliting_by_chapters() {
+  boost::optional<unsigned int> smallest_unused_chapter_number;
+
+  for (auto &item : g_splitting_by_chapter_numbers)
+    if (   (item.second == 1)
+        && (   !smallest_unused_chapter_number
+            || (item.first < *smallest_unused_chapter_number)))
+      smallest_unused_chapter_number = item.first;
+
+  if (smallest_unused_chapter_number)
+    mxwarn(fmt::format(Y("Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"),
+                       *smallest_unused_chapter_number, s_split_by_chapters_arg,
+                       fmt::format(NY("Only {0} chapter found in source files & chapter files.", "Only {0} chapters found in source files & chapter files.", *smallest_unused_chapter_number), *smallest_unused_chapter_number)));
+}
+
 /** \brief Global program initialization
 
    Both platform dependant and independant initialization is done here.
@@ -3144,9 +3123,7 @@ main(int argc,
     calc_max_chapter_size();
   }
 
-  // Finally parse the chapter splitting argument.
-  if (!g_splitting_by_chapters_arg.empty())
-    parse_arg_split_chapters(g_splitting_by_chapters_arg);
+  add_split_points_from_remainig_chapter_numbers();
 
   g_cluster_helper->dump_split_points();
 
@@ -3160,6 +3137,8 @@ main(int argc,
                         Y("An exception occurred when writing the destination file."), Y("The drive may be full."), Y("Exception details:"),
                         ex.what(), ex.error()));
   }
+
+  check_for_unused_chapter_numbers_while_spliting_by_chapters();
 
   mxinfo(fmt::format(Y("Multiplexing took {0}.\n"), create_minutes_seconds_time_string((mtx::sys::get_current_time_millis() - start + 500) / 1000, true)));
 

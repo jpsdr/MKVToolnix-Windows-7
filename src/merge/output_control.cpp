@@ -150,12 +150,14 @@ int64_t g_tags_size                         = 0;
 int g_file_num = 1;
 
 int g_split_max_num_files                   = 65535;
-std::string g_splitting_by_chapters_arg;
+bool g_splitting_by_all_chapters            = false;
+std::unordered_map<unsigned int, int> g_splitting_by_chapter_numbers;
 
 append_mode_e g_append_mode                 = APPEND_MODE_FILE_BASED;
 bool s_appending_files                      = false;
 auto s_debug_appending                      = debugging_option_c{"append|appending"};
 auto s_debug_rerender_track_headers         = debugging_option_c{"rerender|rerender_track_headers"};
+auto s_debug_splitting_chapters             = debugging_option_c{"splitting_chapters"};
 
 std::string g_default_language              = "und";
 
@@ -1310,11 +1312,53 @@ create_next_output_file() {
   ++g_file_num;
 }
 
+void
+add_split_points_from_remainig_chapter_numbers() {
+  if (g_splitting_by_chapter_numbers.empty() && !g_splitting_by_all_chapters)
+    return;
+
+  std::vector<int64_t> chapter_start_timestamps;
+  for (auto element : *g_kax_chapters) {
+    auto edition = dynamic_cast<KaxEditionEntry *>(element);
+    if (!edition)
+      continue;
+
+    for (auto sub_element : *edition) {
+      auto atom = dynamic_cast<KaxChapterAtom *>(sub_element);
+      if (!atom)
+        continue;
+
+      chapter_start_timestamps.push_back(FindChildValue<KaxChapterTimeStart, uint64_t>(atom, 0));
+    }
+  }
+
+  brng::sort(chapter_start_timestamps);
+
+  std::vector<std::pair<split_point_c, unsigned int>> new_split_points;
+
+  for (auto current_number = 1u; current_number <= chapter_start_timestamps.size(); ++current_number) {
+    auto use_chapter = g_splitting_by_all_chapters || (g_splitting_by_chapter_numbers[current_number] == 1);
+    if (!use_chapter)
+      continue;
+
+    if (g_splitting_by_chapter_numbers[current_number] != 2) {
+      auto split_after = chapter_start_timestamps[current_number - 1];
+      if (split_after)
+        new_split_points.emplace_back(std::make_pair(split_point_c{split_after, split_point_c::timestamp, true}, current_number));
+    }
+
+    g_splitting_by_chapter_numbers[current_number] = 2;
+  }
+
+  for (auto &split_point : new_split_points) {
+    mxdebug_if(s_debug_splitting_chapters, fmt::format("Adding split point for chapter number {} at {}\n", split_point.second, split_point.first.m_point));
+    g_cluster_helper->add_split_point(split_point.first);
+  }
+}
+
 static void
 add_chapters_for_current_part() {
-  auto s_debug = debugging_option_c{"splitting_chapters"};
-
-  mxdebug_if(s_debug, fmt::format("Adding chapters. have_global? {0} splitting? {1}\n", !!g_kax_chapters, g_cluster_helper->splitting()));
+  mxdebug_if(s_debug_splitting_chapters, fmt::format("Adding chapters. have_global? {0} splitting? {1}\n", !!g_kax_chapters, g_cluster_helper->splitting()));
 
   if (!g_cluster_helper->splitting()) {
     s_chapters_in_this_file = clone(g_kax_chapters);
@@ -1330,7 +1374,7 @@ add_chapters_for_current_part() {
   auto chapters_here              = clone(g_kax_chapters);
   bool have_chapters_in_timeframe = mtx::chapters::select_in_timeframe(chapters_here.get(), start, end, offset);
 
-  mxdebug_if(s_debug, fmt::format("offset {0} start {1} end {2} have chapters in timeframe? {3} chapters in this file? {4}\n", offset, start, end, have_chapters_in_timeframe, !!s_chapters_in_this_file));
+  mxdebug_if(s_debug_splitting_chapters, fmt::format("offset {0} start {1} end {2} have chapters in timeframe? {3} chapters in this file? {4}\n", offset, start, end, have_chapters_in_timeframe, !!s_chapters_in_this_file));
 
   if (!have_chapters_in_timeframe)
     return;
@@ -2005,6 +2049,8 @@ main_loop() {
       g_cluster_helper->add_packet(pack);
 
       winner->pack.reset();
+
+      add_split_points_from_remainig_chapter_numbers();
 
       // If splitting by parts is active and the last part has been
       // processed fully then we can finish up.
