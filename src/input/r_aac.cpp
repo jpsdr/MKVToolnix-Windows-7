@@ -47,6 +47,7 @@ aac_reader_c::aac_reader_c(const track_info_c &ti,
 void
 aac_reader_c::read_headers() {
   try {
+    int offset         = find_valid_headers(*m_in, m_probe_range_info.probe_size, m_probe_range_info.num_headers);
     int tag_size_start = mtx::id3::skip_v2_tag(*m_in);
     int tag_size_end   = mtx::id3::tag_present_at_end(*m_in);
 
@@ -55,7 +56,10 @@ aac_reader_c::read_headers() {
     if (0 < tag_size_end)
       m_size -= tag_size_end;
 
-    size_t init_read_len = std::min(m_size - tag_size_start, static_cast<uint64_t>(INITCHUNKSIZE));
+    size_t init_read_len = std::min(m_size - tag_size_start - std::max(offset, 0), static_cast<uint64_t>(INITCHUNKSIZE));
+
+    if (offset >= 0)
+      m_in->setFilePointer(offset);
 
     if (m_in->read(m_chunk, init_read_len) != init_read_len)
       throw mtx::input::header_parsing_x();

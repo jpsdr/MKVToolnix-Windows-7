@@ -23,6 +23,9 @@
   differ, e.g. German Umlauts. Fixes #2620.
 * mkvmerge: when splitting by chapters the user can now split by chapters
   coming from one of the appended files, too. Fixes #2625.
+* mkvmerge: AAC reader: fixed reading codec parameters (channels, sample rate)
+  if a file starts with garbage that includes valid-but-bogus AAC
+  headers. Fixes #2622.
 
 ## Build system changes
 
