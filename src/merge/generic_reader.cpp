@@ -488,3 +488,8 @@ generic_reader_c::calculate_probe_range(int64_t file_size,
 
   return to_use;
 }
+
+void
+generic_reader_c::set_probe_range_info(probe_range_info_t const &info) {
+  m_probe_range_info = info;
+}

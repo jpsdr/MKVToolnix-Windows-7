@@ -17,6 +17,7 @@
 
 #include "common/file_types.h"
 #include "merge/output_control.h"
+#include "merge/probe_range_info.h"
 
 class generic_reader_c;
 class track_info_c;
@@ -51,6 +52,8 @@ struct filelist_t {
   mm_mpls_multi_file_io_cptr playlist_mpls_in;
 
   timestamp_c restricted_timestamp_min, restricted_timestamp_max;
+
+  probe_range_info_t probe_range_info{};
 
   filelist_t()
   {

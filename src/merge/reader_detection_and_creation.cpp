@@ -58,6 +58,7 @@
 #include "input/unsupported_types_signature_prober.h"
 #include "merge/filelist.h"
 #include "merge/input_x.h"
+#include "merge/probe_range_info.h"
 #include "merge/reader_detection_and_creation.h"
 
 static std::vector<bfs::path>
@@ -189,12 +190,18 @@ detect_text_file_formats(filelist_t const &file) {
   return mtx::file_type_e::is_unknown;
 }
 
+struct file_type_result_t {
+  mtx::file_type_e file_type{};
+  int64_t file_size{};
+  probe_range_info_t probe_range_info{};
+};
+
 /** \brief Probe the file type
 
    Opens the input file and calls the \c probe_file function for each known
    file reader class. Uses \c mm_text_io_c for subtitle probing.
 */
-static std::pair<mtx::file_type_e, int64_t>
+static file_type_result_t
 get_file_type_internal(filelist_t &file) {
   auto io          = open_input_file(file);
   auto size        = io->get_size();
@@ -261,11 +268,11 @@ get_file_type_internal(filelist_t &file) {
   // Try raw audio formats and require eight consecutive frames at the
   // start of the file.
   if (do_probe<mp3_reader_c>(io, size, 128 * 1024, 8, true))
-    return { mtx::file_type_e::mp3, size };
+    return { mtx::file_type_e::mp3, size, { 128 * 1024, 8, true } };
   if (do_probe<ac3_reader_c>(io, size, 128 * 1024, 8, true))
-    return { mtx::file_type_e::ac3, size };
+    return { mtx::file_type_e::ac3, size, { 128 * 1024, 8, true } };
   if (do_probe<aac_reader_c>(io, size, 128 * 1024, 8, true))
-    return { mtx::file_type_e::aac, size };
+    return { mtx::file_type_e::aac, size, { 128 * 1024, 8, true } };
 
   // File types that are mis-detected sometimes
   if (do_probe<dts_reader_c>(io, size, true))
@@ -284,11 +291,11 @@ get_file_type_internal(filelist_t &file) {
 
   for (auto probe_size : s_probe_sizes1) {
     if (do_probe<mp3_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets1))
-      return { mtx::file_type_e::mp3, size };
+      return { mtx::file_type_e::mp3, size, { probe_size, s_probe_num_required_consecutive_packets1 } };
     if (do_probe<ac3_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets1))
-      return { mtx::file_type_e::ac3, size };
+      return { mtx::file_type_e::ac3, size, { probe_size, s_probe_num_required_consecutive_packets1 } };
     if (do_probe<aac_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets1))
-      return { mtx::file_type_e::aac, size };
+      return { mtx::file_type_e::aac, size, { probe_size, s_probe_num_required_consecutive_packets1 } };
   }
 
   // More file types with detection issues.
@@ -304,11 +311,11 @@ get_file_type_internal(filelist_t &file) {
   // often enough simply work). However, require that the first frame
   // starts at the beginning of the file.
   if (do_probe<mp3_reader_c>(io, size, 32 * 1024, 1, true))
-    return { mtx::file_type_e::mp3, size };
+    return { mtx::file_type_e::mp3, size, { 32 * 1024, 1, true } };
   if (do_probe<ac3_reader_c>(io, size, 32 * 1024, 1, true))
-    return { mtx::file_type_e::ac3, size };
+    return { mtx::file_type_e::ac3, size, { 32 * 1024, 1, true } };
   if (do_probe<aac_reader_c>(io, size, 32 * 1024, 1, true))
-    return { mtx::file_type_e::aac, size };
+    return { mtx::file_type_e::aac, size, { 32 * 1024, 1, true } };
 
   if (do_probe<mpeg_es_reader_c>(io, size))
     return { mtx::file_type_e::mpeg_es, size };
@@ -324,11 +331,11 @@ get_file_type_internal(filelist_t &file) {
 
   for (auto probe_size : s_probe_sizes2) {
     if (do_probe<mp3_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets2))
-      return { mtx::file_type_e::mp3, size };
+      return { mtx::file_type_e::mp3, size, { probe_size, s_probe_num_required_consecutive_packets2 } };
     else if (do_probe<ac3_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets2))
-      return { mtx::file_type_e::ac3, size };
+      return { mtx::file_type_e::ac3, size, { probe_size, s_probe_num_required_consecutive_packets2 } };
     else if (do_probe<aac_reader_c>(io, size, probe_size, s_probe_num_required_consecutive_packets2))
-      return { mtx::file_type_e::aac, size };
+      return { mtx::file_type_e::aac, size, { probe_size, s_probe_num_required_consecutive_packets2 } };
   }
 
   // File types that are mis-detected sometimes and that aren't supported
@@ -340,12 +347,13 @@ get_file_type_internal(filelist_t &file) {
 
 void
 get_file_type(filelist_t &file) {
-  auto result = get_file_type_internal(file);
+  auto result            = get_file_type_internal(file);
 
-  g_file_sizes += result.second;
+  g_file_sizes          += result.file_size;
 
-  file.size     = result.second;
-  file.type     = result.first;
+  file.size              = result.file_size;
+  file.type              = result.file_type;
+  file.probe_range_info  = result.probe_range_info;
 }
 
 /** \brief Creates the file readers
@@ -471,6 +479,7 @@ create_readers() {
       }
 
       file->reader->m_appending = file->appending;
+      file->reader->set_probe_range_info(file->probe_range_info);
       file->reader->read_headers();
       file->reader->set_timestamp_restrictions(file->restricted_timestamp_min, file->restricted_timestamp_max);
 

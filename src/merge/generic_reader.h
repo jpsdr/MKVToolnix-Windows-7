@@ -22,6 +22,7 @@
 #include "merge/file_status.h"
 #include "merge/id_result.h"
 #include "merge/packet.h"
+#include "merge/probe_range_info.h"
 #include "merge/timestamp_factory.h"
 #include "merge/track_info.h"
 #include "merge/webm.h"
@@ -58,6 +59,8 @@ public:
 
   int64_t m_reference_timestamp_tolerance;
 
+  probe_range_info_t m_probe_range_info{};
+
 protected:
   id_result_t m_id_results_container;
   std::vector<id_result_t> m_id_results_tracks, m_id_results_attachments, m_id_results_chapters, m_id_results_tags;
@@ -78,6 +81,7 @@ public:
   virtual timestamp_c const &get_timestamp_restriction_min() const;
   virtual timestamp_c const &get_timestamp_restriction_max() const;
 
+  virtual void set_probe_range_info(probe_range_info_t const &info);
   virtual void read_headers() = 0;
   virtual file_status_e read_next(generic_packetizer_c *ptzr, bool force = false);
   virtual void read_all();
