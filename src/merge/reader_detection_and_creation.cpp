@@ -197,7 +197,7 @@ detect_text_file_formats(filelist_t const &file) {
 static std::pair<mtx::file_type_e, int64_t>
 get_file_type_internal(filelist_t &file) {
   auto io          = open_input_file(file);
-  auto size        = std::min(io->get_size(), static_cast<int64_t>(1 << 25));
+  auto size        = io->get_size();
   auto is_playlist = !file.is_playlist && open_playlist_file(file, *io);
 
   if (is_playlist)
