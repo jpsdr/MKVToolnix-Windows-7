@@ -1,4 +1,4 @@
-# Version ?
+# Version 38.0.0 "The Silent Type" 2019-10-06
 
 ## New features and enhancements
 
