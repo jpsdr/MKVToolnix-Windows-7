@@ -2,21 +2,15 @@
 
 ## New features and enhancements
 
+* mkvextract: chapters, tags & cue sheets will now be written to standard
+  output if no file name is given, same as if `-` is given as the file name.
 * MKVToolNix GUI: job queue: added a new setting in the preferences' "job
   queue & job status" section that, when enabled, will cause the GUI to remove
   all output files created by jobs that are either aborted by the user or that
   end in an error. Implements #2614.
-* mkvextract: chapters, tags & cue sheets will now be written to standard
-  output if no file name is given, same as if `-` is given as the file name.
 
 ## Bug fixes
 
-* MKVToolNix GUI: Hebrew was added to the list of often-used languages so that
-  it can be selected by default again. Fixes #2610.
-* MKVToolNix GUI: when updating the GUI's settings from v37.0.0 or older, the
-  GUI checks if the list of often-used languages equals the built-in list from
-  v36.0.0. If it does, it will be updated to the built-in list changed in
-  v37.0.0. Fixes #2611.
 * all programs: macOS: fixed file access if the file name (including all path
   components) contains any Unicode character where NFC (Normalization Form
   Canonical Composed) and NFD (Normalization Form Canonical Decomposed)
@@ -26,6 +20,12 @@
 * mkvmerge: AAC reader: fixed reading codec parameters (channels, sample rate)
   if a file starts with garbage that includes valid-but-bogus AAC
   headers. Fixes #2622.
+* MKVToolNix GUI: Hebrew was added to the list of often-used languages so that
+  it can be selected by default again. Fixes #2610.
+* MKVToolNix GUI: when updating the GUI's settings from v37.0.0 or older, the
+  GUI checks if the list of often-used languages equals the built-in list from
+  v36.0.0. If it does, it will be updated to the built-in list changed in
+  v37.0.0. Fixes #2611.
 
 ## Build system changes
 
