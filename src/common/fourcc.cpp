@@ -20,8 +20,8 @@
 
 static uint32_t
 val(uint32_t value,
-    fourcc_c::byte_order_t byte_order) {
-  return fourcc_c::big_endian == byte_order ? value : mtx::bytes::swap_32(value);
+    fourcc_c::byte_order_e byte_order) {
+  return fourcc_c::byte_order_e::big_endian == byte_order ? value : mtx::bytes::swap_32(value);
 }
 
 fourcc_c::fourcc_c()
@@ -30,90 +30,90 @@ fourcc_c::fourcc_c()
 }
 
 fourcc_c::fourcc_c(uint32_t value,
-                   fourcc_c::byte_order_t byte_order)
+                   fourcc_c::byte_order_e byte_order)
   : m_value{val(value, byte_order)}
 {
 }
 
 fourcc_c::fourcc_c(std::string const &value)
-  : m_value{read(value.c_str(), big_endian)}
+  : m_value{read(value.c_str(), byte_order_e::big_endian)}
 {
 }
 
 fourcc_c::fourcc_c(char const *value)
-  : m_value{read(value, big_endian)}
+  : m_value{read(value, byte_order_e::big_endian)}
 {
 }
 
 fourcc_c::fourcc_c(memory_cptr const &mem,
-                   fourcc_c::byte_order_t byte_order)
+                   fourcc_c::byte_order_e byte_order)
   : m_value{read(mem->get_buffer(), byte_order)}
 {
 }
 
 fourcc_c::fourcc_c(unsigned char const *mem,
-                   fourcc_c::byte_order_t byte_order)
+                   fourcc_c::byte_order_e byte_order)
   : m_value{read(mem, byte_order)}
 {
 }
 
 fourcc_c::fourcc_c(uint32_t const *mem,
-                   fourcc_c::byte_order_t byte_order)
+                   fourcc_c::byte_order_e byte_order)
   : m_value{read(mem, byte_order)}
 {
 }
 
 fourcc_c::fourcc_c(mm_io_cptr const &io,
-                   fourcc_c::byte_order_t byte_order)
+                   fourcc_c::byte_order_e byte_order)
   : m_value{read(*io, byte_order)}
 {
 }
 
 fourcc_c::fourcc_c(mm_io_c &io,
-                   fourcc_c::byte_order_t byte_order)
+                   fourcc_c::byte_order_e byte_order)
   : m_value{read(io, byte_order)}
 {
 }
 
 fourcc_c::fourcc_c(mm_io_c *io,
-                   fourcc_c::byte_order_t byte_order)
+                   fourcc_c::byte_order_e byte_order)
   : m_value{read(*io, byte_order)}
 {
 }
 
 size_t
 fourcc_c::write(memory_cptr const &mem,
-                fourcc_c::byte_order_t byte_order) {
+                fourcc_c::byte_order_e byte_order) {
   return write(mem->get_buffer(), byte_order);
 }
 
 size_t
 fourcc_c::write(unsigned char *mem,
-                fourcc_c::byte_order_t byte_order) {
+                fourcc_c::byte_order_e byte_order) {
   put_uint32_be(mem, val(m_value, byte_order));
   return 4;
 }
 
 size_t
 fourcc_c::write(mm_io_cptr const &io,
-                fourcc_c::byte_order_t byte_order) {
+                fourcc_c::byte_order_e byte_order) {
   return write(io.get(), byte_order);
 }
 
 size_t
 fourcc_c::write(mm_io_c &io,
-                fourcc_c::byte_order_t byte_order) {
+                fourcc_c::byte_order_e byte_order) {
   return write(&io, byte_order);
 }
 
 size_t
 fourcc_c::write(mm_io_c *io,
-                fourcc_c::byte_order_t byte_order) {
+                fourcc_c::byte_order_e byte_order) {
   return io->write_uint32_be(val(m_value, byte_order));
 }
 
 uint32_t
-fourcc_c::value(fourcc_c::byte_order_t byte_order)
+fourcc_c::value(fourcc_c::byte_order_e byte_order)
   const {
   return val(m_value, byte_order);
 }
@@ -198,31 +198,31 @@ fourcc_c::human_readable(size_t min_num)
 
 uint32_t
 fourcc_c::read(void const *mem,
-               fourcc_c::byte_order_t byte_order) {
+               fourcc_c::byte_order_e byte_order) {
   return val(get_uint32_be(mem), byte_order);
 }
 
 uint32_t
 fourcc_c::read(mm_io_c &io,
-               fourcc_c::byte_order_t byte_order) {
+               fourcc_c::byte_order_e byte_order) {
   return val(io.read_uint32_be(), byte_order);
 }
 
 fourcc_c &
 fourcc_c::shift_read(mm_io_cptr const &io,
-                     byte_order_t byte_order) {
+                     byte_order_e byte_order) {
   return shift_read(*io, byte_order);
 }
 
 fourcc_c &
 fourcc_c::shift_read(mm_io_c &io,
-                     byte_order_t byte_order) {
-  m_value = big_endian == byte_order ? (m_value << 8) | io.read_uint8() : (m_value >> 8) | (io.read_uint8() << 24);
+                     byte_order_e byte_order) {
+  m_value = byte_order_e::big_endian == byte_order ? (m_value << 8) | io.read_uint8() : (m_value >> 8) | (io.read_uint8() << 24);
   return *this;
 }
 
 fourcc_c &
 fourcc_c::shift_read(mm_io_c *io,
-                     byte_order_t byte_order) {
+                     byte_order_e byte_order) {
   return shift_read(*io, byte_order);
 }

@@ -21,7 +21,7 @@
 
 class fourcc_c {
 public:
-  enum byte_order_t { big_endian, little_endian };
+  enum class byte_order_e { big_endian, little_endian };
 
 private:
   uint32_t m_value;
@@ -30,35 +30,35 @@ public:
   fourcc_c();
 
   // From an integer value:
-  fourcc_c(uint32_t value, byte_order_t byte_order = big_endian);
+  fourcc_c(uint32_t value, byte_order_e byte_order = byte_order_e::big_endian);
 
   // From strings:
   fourcc_c(std::string const &value);
   fourcc_c(char const *value);
 
   // From memory:
-  fourcc_c(memory_cptr const &mem, byte_order_t byte_order = big_endian);
-  fourcc_c(unsigned char const *mem, byte_order_t byte_order = big_endian);
-  fourcc_c(uint32_t const *mem, byte_order_t byte_order = big_endian);
+  fourcc_c(memory_cptr const &mem, byte_order_e byte_order = byte_order_e::big_endian);
+  fourcc_c(unsigned char const *mem, byte_order_e byte_order = byte_order_e::big_endian);
+  fourcc_c(uint32_t const *mem, byte_order_e byte_order = byte_order_e::big_endian);
 
   // From mm_io_c instances:
-  fourcc_c(mm_io_cptr const &io, byte_order_t byte_order = big_endian);
-  fourcc_c(mm_io_c &io, byte_order_t byte_order = big_endian);
-  fourcc_c(mm_io_c *io, byte_order_t byte_order = big_endian);
+  fourcc_c(mm_io_cptr const &io, byte_order_e byte_order = byte_order_e::big_endian);
+  fourcc_c(mm_io_c &io, byte_order_e byte_order = byte_order_e::big_endian);
+  fourcc_c(mm_io_c *io, byte_order_e byte_order = byte_order_e::big_endian);
 
-  fourcc_c &shift_read(mm_io_cptr const &io, byte_order_t byte_order = big_endian);
-  fourcc_c &shift_read(mm_io_c &io, byte_order_t byte_order = big_endian);
-  fourcc_c &shift_read(mm_io_c *io, byte_order_t byte_order = big_endian);
+  fourcc_c &shift_read(mm_io_cptr const &io, byte_order_e byte_order = byte_order_e::big_endian);
+  fourcc_c &shift_read(mm_io_c &io, byte_order_e byte_order = byte_order_e::big_endian);
+  fourcc_c &shift_read(mm_io_c *io, byte_order_e byte_order = byte_order_e::big_endian);
 
-  size_t write(memory_cptr const &mem, byte_order_t byte_order = big_endian);
-  size_t write(unsigned char *mem, byte_order_t byte_order = big_endian);
-  size_t write(mm_io_cptr const &io, byte_order_t byte_order = big_endian);
-  size_t write(mm_io_c &io, byte_order_t byte_order = big_endian);
-  size_t write(mm_io_c *io, byte_order_t byte_order = big_endian);
+  size_t write(memory_cptr const &mem, byte_order_e byte_order = byte_order_e::big_endian);
+  size_t write(unsigned char *mem, byte_order_e byte_order = byte_order_e::big_endian);
+  size_t write(mm_io_cptr const &io, byte_order_e byte_order = byte_order_e::big_endian);
+  size_t write(mm_io_c &io, byte_order_e byte_order = byte_order_e::big_endian);
+  size_t write(mm_io_c *io, byte_order_e byte_order = byte_order_e::big_endian);
 
   fourcc_c &reset();
 
-  uint32_t value(byte_order_t byte_order = big_endian) const;
+  uint32_t value(byte_order_e byte_order = byte_order_e::big_endian) const;
   std::string str() const;
   std::string description() const;
 
@@ -72,9 +72,9 @@ public:
 
 protected:
   // From memory & strings:
-  static uint32_t read(void const *mem, byte_order_t byte_order);
+  static uint32_t read(void const *mem, byte_order_e byte_order);
   // From mm_io_c instances:
-  static uint32_t read(mm_io_c &io, byte_order_t byte_order);
+  static uint32_t read(mm_io_c &io, byte_order_e byte_order);
 };
 
 inline std::ostream &
