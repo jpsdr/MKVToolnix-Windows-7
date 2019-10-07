@@ -25,9 +25,6 @@ private:
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 
 public:
-  ssa_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~ssa_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::ssa;
   }
@@ -41,7 +38,7 @@ public:
     return true;
   }
 
-  static int probe_file(mm_text_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

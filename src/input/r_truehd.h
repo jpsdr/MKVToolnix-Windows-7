@@ -23,16 +23,13 @@
 
 class truehd_reader_c: public generic_reader_c {
 private:
-  memory_cptr m_chunk;
+  memory_cptr m_chunk{memory_c::alloc(128 * 1024)};
   mtx::truehd::frame_cptr m_header;
-  int m_truehd_ptzr, m_ac3_ptzr;
+  int m_truehd_ptzr{-1}, m_ac3_ptzr{-1};
   mtx::ac3::frame_c m_ac3_header;
   truehd_ac3_splitting_packet_converter_c m_converter;
 
 public:
-  truehd_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~truehd_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::truehd;
   }
@@ -46,7 +43,7 @@ public:
     return false;
   }
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

@@ -36,62 +36,43 @@
 #include "output/p_truehd.h"
 #include "output/p_vc1.h"
 
-int
-mpeg_ps_reader_c::probe_file(mm_io_c &in,
-                             uint64_t) {
-  try {
-    unsigned char buf[4];
+bool
+mpeg_ps_reader_c::probe_file() {
+  unsigned char buf[4];
 
-    in.setFilePointer(0);
-    if (in.read(buf, 4) != 4)
-      return 0;
+  if (m_in->read(buf, 4) != 4)
+    return false;
 
-    if (get_uint32_be(buf) == MPEGVIDEO_PACKET_START_CODE)
-      return 1;
+  if (get_uint32_be(buf) == MPEGVIDEO_PACKET_START_CODE)
+    return true;
 
-    in.setFilePointer(0);
+  m_in->setFilePointer(0);
 
-    auto mem      = memory_c::alloc(32 * 1024);
-    auto num_read = in.read(mem, mem->get_size());
+  auto mem      = memory_c::alloc(32 * 1024);
+  auto num_read = m_in->read(mem, mem->get_size());
 
-    if (num_read < 4)
-      return 0;
+  if (num_read < 4)
+    return false;
 
-    auto base                           = mem->get_buffer();
-    auto code                           = get_uint32_be(base);
-    auto offset                         = 2u;
-    auto system_header_start_code_found = false;
-    auto packet_start_code_found        = false;
+  auto base                           = mem->get_buffer();
+  auto code                           = get_uint32_be(base);
+  auto offset                         = 2u;
+  auto system_header_start_code_found = false;
+  auto packet_start_code_found        = false;
 
-    while(   ((offset + 4) < num_read)
-          && (!system_header_start_code_found || !packet_start_code_found)) {
-      ++offset;
-      code = (code << 8) | base[offset];
+  while(   ((offset + 4) < num_read)
+        && (!system_header_start_code_found || !packet_start_code_found)) {
+    ++offset;
+    code = (code << 8) | base[offset];
 
-      if (code == MPEGVIDEO_SYSTEM_HEADER_START_CODE)
-        system_header_start_code_found = true;
+    if (code == MPEGVIDEO_SYSTEM_HEADER_START_CODE)
+      system_header_start_code_found = true;
 
-      else if (code == MPEGVIDEO_PACKET_START_CODE)
-        packet_start_code_found = true;
-    }
-
-    return system_header_start_code_found && packet_start_code_found;
-
-  } catch (...) {
-    return 0;
+    else if (code == MPEGVIDEO_PACKET_START_CODE)
+      packet_start_code_found = true;
   }
-}
 
-mpeg_ps_reader_c::mpeg_ps_reader_c(const track_info_c &ti,
-                                   const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , file_done(false)
-  , m_probe_range{}
-  , m_debug_timestamps{"mpeg_ps|mpeg_ps_timestamps"}
-  , m_debug_headers{   "mpeg_ps|mpeg_ps_headers"}
-  , m_debug_packets{   "mpeg_ps|mpeg_ps_packets"}
-  , m_debug_resync{    "mpeg_ps|mpeg_ps_resync"}
-{
+  return system_header_start_code_found && packet_start_code_found;
 }
 
 void
@@ -197,9 +178,6 @@ mpeg_ps_reader_c::read_headers() {
     if (multi_in)
       multi_in->display_other_file_info();
   }
-}
-
-mpeg_ps_reader_c::~mpeg_ps_reader_c() {
 }
 
 void

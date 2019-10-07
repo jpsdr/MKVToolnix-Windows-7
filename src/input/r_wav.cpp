@@ -42,34 +42,21 @@ wav_demuxer_c::wav_demuxer_c(wav_reader_c *reader,
 
 // ----------------------------------------------------------
 
-wav_reader_c::wav_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c{ti, in}
-  , m_type{type_e::unknown}
-  , m_bytes_in_data_chunks{}
-  , m_remaining_bytes_in_current_data_chunk{}
-{
-}
-
-wav_reader_c::~wav_reader_c() {
-}
-
 wav_reader_c::type_e
-wav_reader_c::determine_type(mm_io_c &in,
-                             uint64_t size) {
-  if (sizeof(mtx::w64::header_t) > size)
+wav_reader_c::determine_type() {
+  if (static_cast<int64_t>(sizeof(mtx::w64::header_t)) > m_in->get_size())
     return type_e::unknown;
 
   try {
     wave_header wheader;
     mtx::w64::header_t w64_header;
 
-    in.setFilePointer(0);
+    m_in->setFilePointer(0);
 
-    if (in.read(&w64_header, sizeof(w64_header)) != sizeof(w64_header))
+    if (m_in->read(&w64_header, sizeof(w64_header)) != sizeof(w64_header))
       return type_e::unknown;
 
-    in.setFilePointer(0);
+    m_in->setFilePointer(0);
 
     std::memcpy(&wheader.riff, &w64_header, sizeof(wheader.riff));
 
@@ -88,18 +75,14 @@ wav_reader_c::determine_type(mm_io_c &in,
   return type_e::unknown;
 }
 
-int
-wav_reader_c::probe_file(mm_io_c &in,
-                         uint64_t size) {
-  return determine_type(in, size) != type_e::unknown;
+bool
+wav_reader_c::probe_file() {
+  m_type = determine_type();
+  return m_type != type_e::unknown;
 }
 
 void
 wav_reader_c::read_headers() {
-  m_type = determine_type(*m_in, m_size);
-  if (m_type == type_e::unknown)
-    throw mtx::input::invalid_format_x();
-
   parse_file();
   create_demuxer();
 }
@@ -185,8 +168,6 @@ wav_reader_c::dump_headers() {
 
 void
 wav_reader_c::create_demuxer() {
-  m_ti.m_id = 0;                    // ID for this track.
-
   if (0x2000 == m_format_tag) {
     m_demuxer = wav_demuxer_cptr(new wav_ac3acm_demuxer_c(this, &m_wheader));
     if (!m_demuxer->probe(m_in))

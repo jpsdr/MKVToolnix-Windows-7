@@ -48,39 +48,15 @@ vobsub_entry_c::operator < (const vobsub_entry_c &cmp) const {
   return timestamp < cmp.timestamp;
 }
 
-int
-vobsub_reader_c::probe_file(mm_io_c &in,
-                            uint64_t) {
-  char chunk[80];
-
-  try {
-    in.setFilePointer(0);
-    if (in.read(chunk, 80) != 80)
-      return 0;
-    if (strncasecmp(chunk, id_string.c_str(), id_string.length()))
-      return 0;
-    in.setFilePointer(0);
-  } catch (...) {
-    return 0;
-  }
-  return 1;
-}
-
-vobsub_reader_c::vobsub_reader_c(const track_info_c &ti,
-                                 const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , delay(0)
-{
+bool
+vobsub_reader_c::probe_file() {
+  std::string chunk;
+  return (m_in->read(chunk, id_string.size()) == id_string.size())
+      && boost::istarts_with(chunk, id_string);
 }
 
 void
 vobsub_reader_c::read_headers() {
-  try {
-    m_idx_file = std::make_shared<mm_text_io_c>(m_in);
-  } catch (...) {
-    throw mtx::input::open_x();
-  }
-
   std::string sub_name = m_ti.m_fname;
   size_t len           = sub_name.rfind(".");
   if (std::string::npos != len)
@@ -97,7 +73,7 @@ vobsub_reader_c::read_headers() {
   len      = id_string.length();
 
   std::string line;
-  if (!m_idx_file->getline2(line) || !balg::istarts_with(line, id_string) || (line.length() < (len + 1)))
+  if (!m_in->getline2(line) || !balg::istarts_with(line, id_string) || (line.length() < (len + 1)))
     mxerror_fn(m_ti.m_fname, Y("No version number found.\n"));
 
   version = line[len] - '0';
@@ -178,10 +154,10 @@ vobsub_reader_c::parse_headers() {
   int64_t last_timestamp = 0;
   bool sort_required     = false;
 
-  m_idx_file->setFilePointer(0);
+  m_in->setFilePointer(0);
 
   while (1) {
-    if (!m_idx_file->getline2(line))
+    if (!m_in->getline2(line))
       break;
     line_no++;
 

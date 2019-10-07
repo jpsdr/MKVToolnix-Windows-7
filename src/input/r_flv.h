@@ -128,21 +128,19 @@ using flv_track_cptr = std::shared_ptr<flv_track_c>;
 
 class flv_reader_c: public generic_reader_c {
 private:
-  int m_audio_track_idx, m_video_track_idx, m_selected_track_idx;
+  int m_audio_track_idx{-1}, m_video_track_idx{-1}, m_selected_track_idx{-1};
   boost::optional<uint64_t> m_min_timestamp;
 
+  flv_header_t m_header;
   flv_tag_c m_tag;
 
-  bool m_file_done;
+  bool m_file_done{};
 
   std::vector<flv_track_cptr> m_tracks;
 
-  debugging_option_c m_debug;
+  debugging_option_c m_debug{"flv|flv_full"};
 
 public:
-  flv_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~flv_reader_c();
-
   virtual bool new_stream_v_avc(flv_track_cptr &track, memory_cptr const &data);
 
   virtual void read_headers();
@@ -151,7 +149,7 @@ public:
   virtual void create_packetizers();
   virtual void add_available_track_ids();
 
-  static int probe_file(mm_io_c &io, uint64_t size);
+  virtual bool probe_file() override;
 
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::flv;

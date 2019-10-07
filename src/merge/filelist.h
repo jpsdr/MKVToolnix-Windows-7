@@ -33,8 +33,6 @@ struct filelist_t {
   int64_t size{};
   size_t id{};
 
-  mtx::file_type_e type{mtx::file_type_e::is_unknown};
-
   packet_cptr pack;
 
   std::unique_ptr<generic_reader_c> reader;

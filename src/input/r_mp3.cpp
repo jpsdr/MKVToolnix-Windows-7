@@ -23,30 +23,13 @@
 #include "merge/input_x.h"
 #include "output/p_mp3.h"
 
-#define CHUNK_SIZE 16384
+bool
+mp3_reader_c::probe_file() {
+  mtx::id3::skip_v2_tag(*m_in);
 
-int
-mp3_reader_c::probe_file(mm_io_c &in,
-                         uint64_t,
-                         int64_t probe_range,
-                         int num_headers,
-                         bool require_zero_offset) {
-  try {
-    mtx::id3::skip_v2_tag(in);
-
-    auto offset = find_valid_headers(in, probe_range, num_headers);
-    return (require_zero_offset && (0 == offset)) || (!require_zero_offset && (0 <= offset));
-
-  } catch (...) {
-    return 0;
-  }
-}
-
-mp3_reader_c::mp3_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_chunk(memory_c::alloc(CHUNK_SIZE))
-{
+  m_first_header_offset = find_valid_headers(*m_in, m_probe_range_info.probe_size, m_probe_range_info.num_headers);
+  return ( m_probe_range_info.require_headers_at_start && (0 == m_first_header_offset))
+      || (!m_probe_range_info.require_headers_at_start && (0 <= m_first_header_offset));
 }
 
 void
@@ -60,7 +43,7 @@ mp3_reader_c::read_headers() {
     if (0 < tag_size_end)
       m_size -= tag_size_end;
 
-    auto init_read_len = std::min(m_size - tag_size_start, static_cast<uint64_t>(CHUNK_SIZE));
+    auto init_read_len = std::min(m_size - tag_size_start, static_cast<uint64_t>(m_chunk->get_size()));
 
     int pos = find_valid_headers(*m_in, init_read_len, 5);
     if (0 > pos)
@@ -78,14 +61,9 @@ mp3_reader_c::read_headers() {
     if ((0 < pos) && verbose)
       mxwarn_fn(m_ti.m_fname, fmt::format(Y("Skipping {0} bytes at the beginning (no valid MP3 header found).\n"), pos));
 
-    m_ti.m_id = 0;        // ID for this track.
-
   } catch (mtx::mm_io::exception &) {
     throw mtx::input::open_x();
   }
-}
-
-mp3_reader_c::~mp3_reader_c() {
 }
 
 void
@@ -100,7 +78,7 @@ mp3_reader_c::create_packetizer(int64_t) {
 file_status_e
 mp3_reader_c::read(generic_packetizer_c *,
                    bool) {
-  int nread = m_in->read(m_chunk->get_buffer(), CHUNK_SIZE);
+  int nread = m_in->read(m_chunk->get_buffer(), m_chunk->get_size());
   if (0 >= nread)
     return flush_packetizers();
 

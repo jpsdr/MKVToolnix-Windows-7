@@ -44,19 +44,19 @@ private:
 
   codec_c m_codec;
   std::string m_codec_name;
-  bool m_supported;
+  bool m_supported{};
 
-  double m_sample_rate;
-  unsigned int m_flags, m_bytes_per_packet, m_frames_per_packet, m_channels, m_bits_per_sample;
+  double m_sample_rate{};
+  unsigned int m_flags{}, m_bytes_per_packet{}, m_frames_per_packet{}, m_channels{}, m_bits_per_sample{};
 
   samples_to_timestamp_converter_c m_frames_to_timestamp;
 
-  debugging_option_c m_debug_headers, m_debug_chunks, m_debug_packets;
+  debugging_option_c
+      m_debug_headers{"coreaudio_reader|coreaudio_reader_headers"}
+    , m_debug_chunks{ "coreaudio_reader|coreaudio_reader_chunks"}
+    , m_debug_packets{"coreaudio_reader|coreaudio_reader_packets"};
 
 public:
-  coreaudio_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~coreaudio_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::coreaudio;
   }
@@ -65,7 +65,7 @@ public:
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

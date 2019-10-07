@@ -47,17 +47,17 @@ class generic_reader_c {
 public:
   track_info_c m_ti;
   mm_io_cptr m_in;
-  uint64_t m_size;
+  uint64_t m_size{};
 
   std::vector<std::shared_ptr<generic_packetizer_c>> m_reader_packetizers;
-  generic_packetizer_c *m_ptzr_first_packet;
+  generic_packetizer_c *m_ptzr_first_packet{};
   std::vector<int64_t> m_requested_track_ids, m_available_track_ids, m_used_track_ids;
-  int64_t m_max_timestamp_seen;
+  int64_t m_max_timestamp_seen{};
   mtx::chapters::kax_cptr m_chapters;
-  bool m_appending;
-  int m_num_video_tracks, m_num_audio_tracks, m_num_subtitle_tracks;
+  bool m_appending{};
+  int m_num_video_tracks{}, m_num_audio_tracks{}, m_num_subtitle_tracks{};
 
-  int64_t m_reference_timestamp_tolerance;
+  int64_t m_reference_timestamp_tolerance{};
 
   probe_range_info_t m_probe_range_info{};
 
@@ -68,7 +68,6 @@ protected:
   timestamp_c m_restricted_timestamps_min, m_restricted_timestamps_max;
 
 public:
-  generic_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~generic_reader_c() = default;
 
   virtual mtx::file_type_e get_format_type() const = 0;
@@ -81,9 +80,12 @@ public:
   virtual timestamp_c const &get_timestamp_restriction_min() const;
   virtual timestamp_c const &get_timestamp_restriction_max() const;
 
+  virtual void set_file_to_read(mm_io_cptr const &io);
   virtual void set_probe_range_info(probe_range_info_t const &info);
+  virtual void set_track_info(track_info_c const &info);
   virtual void read_headers() = 0;
   virtual file_status_e read_next(generic_packetizer_c *ptzr, bool force = false);
+  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) = 0;
   virtual void read_all();
   virtual int64_t get_progress();
   virtual int64_t get_maximum_progress();
@@ -126,11 +128,10 @@ public:
   virtual void display_identification_results();
 
   virtual int64_t calculate_probe_range(int64_t file_size, int64_t fixed_minimum) const;
+  virtual bool probe_file() = 0;
 
 public:
   static void set_probe_range_percentage(int64_rational_c const &probe_range_percentage);
-
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) = 0;
 
 protected:
   virtual bool demuxing_requested(char type, int64_t id, boost::optional<std::string> const &language = boost::none) const;

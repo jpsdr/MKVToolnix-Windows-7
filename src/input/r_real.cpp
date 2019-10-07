@@ -98,34 +98,10 @@ mb_file_io_t mm_io_file_io = {
   mm_io_file_seek
 };
 
-int
-real_reader_c::probe_file(mm_io_c &in,
-                          uint64_t size) {
+bool
+real_reader_c::probe_file() {
   unsigned char data[4];
-
-  if (4 > size)
-    return 0;
-
-  try {
-    in.setFilePointer(0);
-    if (in.read(data, 4) != 4)
-      return 0;
-    in.setFilePointer(0);
-
-  } catch (...) {
-    return 0;
-  }
-
-  if(strncasecmp((char *)data, ".RMF", 4))
-    return 0;
-
-  return 1;
-}
-
-real_reader_c::real_reader_c(const track_info_c &ti,
-                             const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
+  return (m_in->read(data, 4) == 4) && (memcmp(data, ".RMF", 4) == 0);
 }
 
 void

@@ -21,48 +21,20 @@
 #include "output/p_webvtt.h"
 #include "merge/input_x.h"
 
-int
-webvtt_reader_c::probe_file(mm_text_io_c &in,
-                            uint64_t) {
-  try {
-    in.setFilePointer(0);
-    auto line = in.getline(100);
-
-    return line.find("WEBVTT") == 0;
-
-  } catch (...) {
-    return -1;
-  }
-}
-
-webvtt_reader_c::webvtt_reader_c(const track_info_c &ti,
-                                 const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
-}
-
-webvtt_reader_c::~webvtt_reader_c() {
+bool
+webvtt_reader_c::probe_file() {
+  return m_in->getline(100).find("WEBVTT") == 0;
 }
 
 void
 webvtt_reader_c::read_headers() {
-  try {
-    m_text_in = std::make_shared<mm_text_io_c>(m_in);
-    m_ti.m_id = 0;                 // ID for this track.
-
-  } catch (...) {
-    throw mtx::input::open_x();
-  }
-
   show_demuxer_info();
 }
 
 void
 webvtt_reader_c::parse_file() {
-  m_text_in->setFilePointer(0);
-
-  auto size    = m_text_in->get_size() - m_text_in->getFilePointer();
-  auto content = m_text_in->read(size);
+  auto size    = m_in->get_size() - m_in->getFilePointer();
+  auto content = m_in->read(size);
 
   m_parser     = std::make_shared<webvtt_parser_c>();
 

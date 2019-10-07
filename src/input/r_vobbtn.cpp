@@ -24,32 +24,17 @@
 #include "output/p_vobbtn.h"
 
 
-int
-vobbtn_reader_c::probe_file(mm_io_c &in,
-                            uint64_t) {
-  unsigned char chunk[23];
-
-  try {
-    in.setFilePointer(0);
-    if (in.read(chunk, 23) != 23)
-      return 0;
-    if (strncasecmp((char*)chunk, "butonDVD", 8))
-      return 0;
-    if ((0x00 != chunk[0x10]) || (0x00 != chunk[0x11]) || (0x01 != chunk[0x12]) || (0xBF != chunk[0x13]))
-      return 0;
-    if ((0x03 != chunk[0x14]) || (0xD4 != chunk[0x15]) || (0x00 != chunk[0x16]))
-      return 0;
-    in.setFilePointer(0);
-  } catch (...) {
-    return 0;
-  }
-  return 1;
-}
-
-vobbtn_reader_c::vobbtn_reader_c(const track_info_c &ti,
-                                 const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
+bool
+vobbtn_reader_c::probe_file() {
+  if (m_in->read(chunk, 23) != 23)
+    return false;;
+  if (strncasecmp(reinterpret_cast<char *>(chunk), "butonDVD", 8))
+    return false;;
+  if ((0x00 != chunk[0x10]) || (0x00 != chunk[0x11]) || (0x01 != chunk[0x12]) || (0xBF != chunk[0x13]))
+    return false;;
+  if ((0x03 != chunk[0x14]) || (0xD4 != chunk[0x15]) || (0x00 != chunk[0x16]))
+    return false;;
+  return true;
 }
 
 void
@@ -62,9 +47,6 @@ vobbtn_reader_c::read_headers() {
   m_in->setFilePointer(16);
 
   show_demuxer_info();
-}
-
-vobbtn_reader_c::~vobbtn_reader_c() {
 }
 
 void

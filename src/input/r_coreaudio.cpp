@@ -25,41 +25,10 @@
 #include "merge/input_x.h"
 #include "output/p_alac.h"
 
-int
-coreaudio_reader_c::probe_file(mm_io_c &in,
-                               uint64_t size) {
-  try {
-    if (8 > size)
-      return false;
-
-    in.setFilePointer(0);
-
-    std::string magic;
-    return (4 == in.read(magic, 4)) && (balg::to_lower_copy(magic) == "caff") ? 1 : 0;
-
-  } catch (...) {
-  }
-
-  return 0;
-}
-
-coreaudio_reader_c::coreaudio_reader_c(const track_info_c &ti,
-                                       const mm_io_cptr &in)
-  : generic_reader_c{ti, in}
-  , m_supported{}
-  , m_sample_rate{}
-  , m_flags{}
-  , m_bytes_per_packet{}
-  , m_frames_per_packet{}
-  , m_channels{}
-  , m_bits_per_sample{}
-  , m_debug_headers{"coreaudio_reader|coreaudio_reader_headers"}
-  , m_debug_chunks{ "coreaudio_reader|coreaudio_reader_chunks"}
-  , m_debug_packets{"coreaudio_reader|coreaudio_reader_packets"}
-{
-}
-
-coreaudio_reader_c::~coreaudio_reader_c() {
+bool
+coreaudio_reader_c::probe_file() {
+  std::string magic;
+  return (4 == m_in->read(magic, 4)) && (balg::to_lower_copy(magic) == "caff");
 }
 
 void
@@ -80,9 +49,6 @@ coreaudio_reader_c::identify() {
 
 void
 coreaudio_reader_c::read_headers() {
-  if (!coreaudio_reader_c::probe_file(*m_in, m_size))
-    throw mtx::input::invalid_format_x();
-
   // Skip "caff" magic, version and flags
   m_in->setFilePointer(8);
 

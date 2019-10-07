@@ -197,20 +197,21 @@ private:
   std::map<int, bool> blacklisted_ids;
 
   std::map<int, int> es_map;
-  int version;
-  bool file_done;
+  int version{};
+  bool file_done{};
 
   std::vector<mpeg_ps_track_ptr> tracks;
   std::map<generic_packetizer_c *, mpeg_ps_track_ptr> m_ptzr_to_track_map;
 
-  uint64_t m_probe_range;
+  uint64_t m_probe_range{};
 
-  debugging_option_c m_debug_timestamps, m_debug_headers, m_debug_packets, m_debug_resync;
+  debugging_option_c
+      m_debug_timestamps{"mpeg_ps|mpeg_ps_timestamps"}
+    , m_debug_headers{   "mpeg_ps|mpeg_ps_headers"}
+    , m_debug_packets{   "mpeg_ps|mpeg_ps_packets"}
+    , m_debug_resync{    "mpeg_ps|mpeg_ps_resync"};
 
 public:
-  mpeg_ps_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~mpeg_ps_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::mpeg_ps;
   }
@@ -231,7 +232,7 @@ public:
 
   virtual void parse_program_stream_map();
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 private:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

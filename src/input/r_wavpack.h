@@ -26,9 +26,6 @@ private:
   wavpack_meta_t meta, meta_correc;
 
 public:
-  wavpack_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~wavpack_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::wavpack4;
   }
@@ -40,7 +37,7 @@ public:
     return false;
   }
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

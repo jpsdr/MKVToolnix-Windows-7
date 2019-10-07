@@ -19,5 +19,5 @@
 
 class microdvd_reader_c {
 public:
-  static int probe_file(mm_text_io_c &in, uint64_t size);
+  static void probe_file(mm_io_c &in);
 };

@@ -148,67 +148,34 @@ displayable_esds_tag_name(uint8_t tag) {
        :                                  "unknown";
 }
 
-int
-qtmp4_reader_c::probe_file(mm_io_c &in,
-                           uint64_t) {
-  try {
-    in.setFilePointer(0);
+bool
+qtmp4_reader_c::probe_file() {
+  while (true) {
+    uint64_t atom_pos  = m_in->getFilePointer();
+    uint64_t atom_size = m_in->read_uint32_be();
+    fourcc_c atom(*m_in);
 
-    while (1) {
-      uint64_t atom_pos  = in.getFilePointer();
-      uint64_t atom_size = in.read_uint32_be();
-      fourcc_c atom(in);
+    if (1 == atom_size)
+      atom_size = m_in->read_uint64_be();
 
-      if (1 == atom_size)
-        atom_size = in.read_uint64_be();
+    mxverb(3, fmt::format("Quicktime/MP4 reader: Atom: '{0}': {1}\n", atom, atom_size));
 
-      mxverb(3, fmt::format("Quicktime/MP4 reader: Atom: '{0}': {1}\n", atom, atom_size));
+    if (   (atom == "moov")
+        || (atom == "ftyp")
+        || (atom == "mdat")
+        || (atom == "pnot"))
+      return true;
 
-      if (   (atom == "moov")
-          || (atom == "ftyp")
-          || (atom == "mdat")
-          || (atom == "pnot"))
-        return 1;
+    if ((atom != "wide") && (atom != "skip"))
+      return false;
 
-      if ((atom != "wide") && (atom != "skip"))
-        return 0;
-
-      in.setFilePointer(atom_pos + atom_size);
-    }
-
-  } catch (...) {
+    m_in->setFilePointer(atom_pos + atom_size);
   }
-
-  return 0;
-}
-
-qtmp4_reader_c::qtmp4_reader_c(const track_info_c &ti,
-                               const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_time_scale(1)
-  , m_compression_algorithm{}
-  , m_main_dmx(-1)
-  , m_audio_encoder_delay_samples(0)
-  , m_moof_offset{}
-  , m_fragment_implicit_offset{}
-  , m_fragment{}
-  , m_track_for_fragment{}
-  , m_timestamps_calculated{}
-  , m_debug_chapters{    "qtmp4|qtmp4_full|qtmp4_chapters"}
-  , m_debug_headers{     "qtmp4|qtmp4_full|qtmp4_headers"}
-  , m_debug_tables{            "qtmp4_full|qtmp4_tables|qtmp4_tables_full"}
-  , m_debug_tables_full{                               "qtmp4_tables_full"}
-  , m_debug_interleaving{"qtmp4|qtmp4_full|qtmp4_interleaving"}
-  , m_debug_resync{      "qtmp4|qtmp4_full|qtmp4_resync"}
-{
 }
 
 void
 qtmp4_reader_c::read_headers() {
   try {
-    if (!qtmp4_reader_c::probe_file(*m_in, m_size))
-      throw mtx::input::invalid_format_x();
-
     show_demuxer_info();
 
     parse_headers();
@@ -216,9 +183,6 @@ qtmp4_reader_c::read_headers() {
   } catch (mtx::mm_io::exception &) {
     throw mtx::input::open_x();
   }
-}
-
-qtmp4_reader_c::~qtmp4_reader_c() {
 }
 
 void

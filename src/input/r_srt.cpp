@@ -21,31 +21,17 @@
 #include "input/subtitles.h"
 #include "merge/input_x.h"
 
-int
-srt_reader_c::probe_file(mm_text_io_c &in,
-                         uint64_t) {
-  return srt_parser_c::probe(in);
-}
-
-srt_reader_c::srt_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
+bool
+srt_reader_c::probe_file() {
+  return srt_parser_c::probe(static_cast<mm_text_io_c &>(*m_in));
 }
 
 void
 srt_reader_c::read_headers() {
-  try {
-    m_text_in = std::make_shared<mm_text_io_c>(m_in);
-    if (!srt_parser_c::probe(*m_text_in))
-      throw mtx::input::invalid_format_x();
-
-    m_ti.m_id = 0;                 // ID for this track.
-    m_subs    = std::make_shared<srt_parser_c>(m_text_in, m_ti.m_fname, 0);
-
-  } catch (...) {
-    throw mtx::input::open_x();
-  }
+  auto text_in    = std::static_pointer_cast<mm_text_io_c>(m_in);
+  m_need_recoding = text_in->get_byte_order() == BO_NONE;
+  m_encoding      = text_in->get_encoding();
+  m_subs          = std::make_shared<srt_parser_c>(text_in, m_ti.m_fname, 0);
 
   show_demuxer_info();
 
@@ -54,16 +40,12 @@ srt_reader_c::read_headers() {
   m_bytes_to_process = m_subs->get_total_byte_size();
 }
 
-srt_reader_c::~srt_reader_c() {
-}
-
 void
 srt_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('s', 0) || (NPTZR() != 0))
     return;
 
-  auto need_recoding = m_text_in->get_byte_order() == BO_NONE;
-  add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, need_recoding));
+  add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, m_need_recoding));
 
   show_packetizer_info(0, PTZR0);
 }
@@ -91,12 +73,11 @@ srt_reader_c::get_maximum_progress() {
 
 void
 srt_reader_c::identify() {
-  auto info     = mtx::id::info_c{};
-  auto encoding = m_text_in->get_encoding();
+  auto info = mtx::id::info_c{};
 
   info.add(mtx::id::text_subtitles, true);
-  if (encoding)
-    info.add(mtx::id::encoding, *encoding);
+  if (m_encoding)
+    info.add(mtx::id::encoding, *m_encoding);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_SRT, "SRT"), info.get());

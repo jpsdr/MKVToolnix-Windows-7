@@ -27,105 +27,86 @@
 #include "mpegparser/M2VParser.h"
 #include "output/p_mpeg1_2.h"
 
-#define PROBESIZE 4
 #define READ_SIZE 1024 * 1024
 
-int
-mpeg_es_reader_c::probe_file(mm_io_c &in,
-                             uint64_t size) {
+bool
+mpeg_es_reader_c::probe_file() {
   auto debug = debugging_option_c{"mpeg_es_detection|mpeg_es_probe"};
 
-  if (PROBESIZE > size)
+  memory_cptr af_buf = memory_c::alloc(READ_SIZE);
+  unsigned char *buf = af_buf->get_buffer();
+  int num_read       = m_in->read(buf, READ_SIZE);
+
+  if (4 > num_read)
     return 0;
 
-  try {
-    memory_cptr af_buf = memory_c::alloc(READ_SIZE);
-    unsigned char *buf = af_buf->get_buffer();
-    in.setFilePointer(0);
-    int num_read = in.read(buf, READ_SIZE);
+  m_in->setFilePointer(0);
 
-    if (4 > num_read)
-      return 0;
+  // MPEG TS starts with 0x47.
+  if (0x47 == buf[0])
+    return 0;
 
-    in.setFilePointer(0);
+  // MPEG PS starts with 0x000001ba.
+  uint32_t value = get_uint32_be(buf);
+  if (MPEGVIDEO_PACKET_START_CODE == value)
+    return 0;
 
-    // MPEG TS starts with 0x47.
-    if (0x47 == buf[0])
-      return 0;
+  auto num_slice_start_codes_found = 0u;
+  auto start_code_at_beginning     = mpeg_is_start_code(value);
+  auto gop_start_code_found        = false;
+  auto sequence_start_code_found   = false;
+  auto ext_start_code_found        = false;
+  auto picture_start_code_found    = false;
 
-    // MPEG PS starts with 0x000001ba.
-    uint32_t value = get_uint32_be(buf);
-    if (MPEGVIDEO_PACKET_START_CODE == value)
-      return 0;
+  auto ok                          = false;
 
-    auto num_slice_start_codes_found = 0u;
-    auto start_code_at_beginning     = mpeg_is_start_code(value);
-    auto gop_start_code_found        = false;
-    auto sequence_start_code_found   = false;
-    auto ext_start_code_found        = false;
-    auto picture_start_code_found    = false;
+  // Let's look for a MPEG ES start code inside the first 1 MB.
+  int i;
+  for (i = 4; i < num_read - 1; i++) {
+    if (mpeg_is_start_code(value)) {
+      mxdebug_if(debug, fmt::format("mpeg_es_detection: start code found; fourth byte: 0x{0:02x}\n", value & 0xff));
 
-    auto ok                          = false;
+      if (MPEGVIDEO_SEQUENCE_HEADER_START_CODE == value)
+        sequence_start_code_found = true;
 
-    // Let's look for a MPEG ES start code inside the first 1 MB.
-    int i;
-    for (i = 4; i < num_read - 1; i++) {
-      if (mpeg_is_start_code(value)) {
-        mxdebug_if(debug, fmt::format("mpeg_es_detection: start code found; fourth byte: 0x{0:02x}\n", value & 0xff));
+      else if (MPEGVIDEO_PICTURE_START_CODE == value)
+        picture_start_code_found = true;
 
-        if (MPEGVIDEO_SEQUENCE_HEADER_START_CODE == value)
-          sequence_start_code_found = true;
+      else if (MPEGVIDEO_GROUP_OF_PICTURES_START_CODE == value)
+        gop_start_code_found = true;
 
-        else if (MPEGVIDEO_PICTURE_START_CODE == value)
-          picture_start_code_found = true;
+      else if (MPEGVIDEO_EXT_START_CODE == value)
+        gop_start_code_found = true;
 
-        else if (MPEGVIDEO_GROUP_OF_PICTURES_START_CODE == value)
-          gop_start_code_found = true;
+      else if ((MPEGVIDEO_FIRST_SLICE_START_CODE <= value) && (MPEGVIDEO_LAST_SLICE_START_CODE >= value))
+        ++num_slice_start_codes_found;
 
-        else if (MPEGVIDEO_EXT_START_CODE == value)
-          gop_start_code_found = true;
+      ok = sequence_start_code_found
+        && picture_start_code_found
+        && (   ((num_slice_start_codes_found > 0) && start_code_at_beginning)
+            || ((num_slice_start_codes_found > 0) && gop_start_code_found && ext_start_code_found)
+            || (num_slice_start_codes_found >= 25));
 
-        else if ((MPEGVIDEO_FIRST_SLICE_START_CODE <= value) && (MPEGVIDEO_LAST_SLICE_START_CODE >= value))
-          ++num_slice_start_codes_found;
-
-        ok = sequence_start_code_found
-          && picture_start_code_found
-          && (   ((num_slice_start_codes_found > 0) && start_code_at_beginning)
-              || ((num_slice_start_codes_found > 0) && gop_start_code_found && ext_start_code_found)
-              || (num_slice_start_codes_found >= 25));
-
-        if (ok)
-          break;
-      }
-
-      value <<= 8;
-      value  |= buf[i];
+      if (ok)
+        break;
     }
 
-    mxdebug_if(debug,
-               fmt::format("mpeg_es_detection: sequence {0} picture {1} gop {2} ext {3} #slice {4} start code at beginning {5}; examined {6} bytes\n",
-                           sequence_start_code_found, picture_start_code_found, gop_start_code_found, ext_start_code_found, num_slice_start_codes_found, start_code_at_beginning, i));
-
-    if (!ok)
-      return 0;
-
-    // Let's try to read one frame.
-    M2VParser parser;
-    parser.SetProbeMode();
-    if (!read_frame(parser, in, READ_SIZE))
-      return 0;
-
-  } catch (...) {
-    return 0;
+    value <<= 8;
+    value  |= buf[i];
   }
 
-  return 1;
-}
+  mxdebug_if(debug,
+             fmt::format("mpeg_es_detection: sequence {0} picture {1} gop {2} ext {3} #slice {4} start code at beginning {5}; examined {6} bytes\n",
+                         sequence_start_code_found, picture_start_code_found, gop_start_code_found, ext_start_code_found, num_slice_start_codes_found, start_code_at_beginning, i));
 
-mpeg_es_reader_c::mpeg_es_reader_c(const track_info_c &ti,
-                                   const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
+  if (!ok)
+    return 0;
+
+  // Let's try to read one frame.
+  M2VParser parser;
+  parser.SetProbeMode();
+
+  return read_frame(parser, *m_in, READ_SIZE);
 }
 
 void
@@ -167,9 +148,6 @@ mpeg_es_reader_c::read_headers() {
     throw mtx::input::open_x();
   }
   show_demuxer_info();
-}
-
-mpeg_es_reader_c::~mpeg_es_reader_c() {
 }
 
 void

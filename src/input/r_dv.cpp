@@ -22,19 +22,14 @@
 #include "input/r_dv.h"
 #include "merge/id_result.h"
 
-int
-dv_reader_c::probe_file(mm_io_c &in,
-                        uint64_t size) {
+void
+dv_reader_c::probe_file(mm_io_c &in) {
   try {
-    if (5 > size)
-      return 0;
-
-    uint64_t probe_size = std::min(size, static_cast<uint64_t>(20 * 1024 * 1024));
+    uint64_t probe_size = std::min<uint64_t>(in.get_size(), 20 * 1024 * 1024);
     memory_cptr mem     = memory_c::alloc(probe_size);
 
-    in.setFilePointer(0);
     if (in.read(mem, probe_size) != probe_size)
-      return 0;
+      return;
 
     mm_mem_io_c mem_io(mem->get_buffer(), probe_size);
     uint32_t state             = mem_io.read_uint32_be();
@@ -67,12 +62,8 @@ dv_reader_c::probe_file(mm_io_c &in,
             || (   (secondary_matches                >= 10)
                 && ((probe_size / secondary_matches) <  24000)))) {
       id_result_container_unsupported(in.get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::dv));
-      // Never reached:
-      return 1;
     }
 
   } catch (...) {
   }
-
-  return 0;
 }

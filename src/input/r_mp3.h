@@ -22,13 +22,11 @@
 
 class mp3_reader_c: public generic_reader_c {
 private:
-  memory_cptr m_chunk;
+  memory_cptr m_chunk{memory_c::alloc(128 * 1024)};
   mp3_header_t m_mp3header;
+  int m_first_header_offset{};
 
 public:
-  mp3_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~mp3_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::mp3;
   }
@@ -40,7 +38,7 @@ public:
     return false;
   }
 
-  static int probe_file(mm_io_c &in, uint64_t size, int64_t probe_range, int num_headers = 5, bool require_zero_offset = false);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

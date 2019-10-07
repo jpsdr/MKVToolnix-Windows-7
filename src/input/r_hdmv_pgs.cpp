@@ -22,47 +22,22 @@
 #include "merge/file_status.h"
 #include "merge/input_x.h"
 
-int
-hdmv_pgs_reader_c::probe_file(mm_io_c &in,
-                              uint64_t size) {
-  if (5 > size)
-    return 0;
+bool
+hdmv_pgs_reader_c::probe_file() {
+  if (mtx::hdmv_pgs::FILE_MAGIC != m_in->read_uint16_be())
+    return false;
 
-  try {
-    in.setFilePointer(0);
-    if (mtx::hdmv_pgs::FILE_MAGIC != in.read_uint16_be())
-      return 0;
+  m_in->skip(4 + 4 + 1);
+  auto segment_size = m_in->read_uint16_be();
 
-    in.skip(4 + 4 + 1);
-    uint16_t segment_size = in.read_uint16_be();
-    if ((in.getFilePointer() + segment_size + 2) >= size)
-      return 0;
+  m_in->setFilePointer(segment_size, seek_current);
 
-    in.setFilePointer(segment_size, seek_current);
-
-    return mtx::hdmv_pgs::FILE_MAGIC != in.read_uint16_be() ? 0 : 1;
-
-  } catch (mtx::mm_io::exception &) {
-  }
-
-  return 0;
-}
-
-hdmv_pgs_reader_c::hdmv_pgs_reader_c(const track_info_c &ti,
-                                     const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_debug{"hdmv_pgs_reader"}
-{
+  return mtx::hdmv_pgs::FILE_MAGIC == m_in->read_uint16_be();
 }
 
 void
 hdmv_pgs_reader_c::read_headers() {
-  m_ti.m_id = 0;       // ID for this track.
-
   show_demuxer_info();
-}
-
-hdmv_pgs_reader_c::~hdmv_pgs_reader_c() {
 }
 
 void

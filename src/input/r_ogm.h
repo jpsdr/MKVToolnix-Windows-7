@@ -83,7 +83,6 @@ private:
   int bos_pages_read;
 
 public:
-  ogm_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~ogm_reader_c();
 
   virtual mtx::file_type_e get_format_type() const {
@@ -96,7 +95,7 @@ public:
   virtual void create_packetizer(int64_t tid);
   virtual void add_available_track_ids();
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 private:
   virtual ogm_demuxer_cptr find_demuxer(int serialno);

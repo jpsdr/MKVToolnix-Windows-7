@@ -448,29 +448,32 @@ private:
   std::unordered_map<unsigned int, bool> m_chapter_track_ids;
   std::unordered_map<unsigned int, qt_track_defaults_t> m_track_defaults;
 
-  int64_t m_time_scale;
+  int64_t m_time_scale{1};
   fourcc_c m_compression_algorithm;
-  int m_main_dmx;
+  int m_main_dmx{-1};
 
-  unsigned int m_audio_encoder_delay_samples;
+  unsigned int m_audio_encoder_delay_samples{};
 
-  uint64_t m_moof_offset, m_fragment_implicit_offset;
-  qt_fragment_t *m_fragment;
-  qtmp4_demuxer_c *m_track_for_fragment;
+  uint64_t m_moof_offset{}, m_fragment_implicit_offset{};
+  qt_fragment_t *m_fragment{};
+  qtmp4_demuxer_c *m_track_for_fragment{};
 
-  bool m_timestamps_calculated;
+  bool m_timestamps_calculated{};
   boost::optional<uint64_t> m_duration;
 
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 
-  debugging_option_c m_debug_chapters, m_debug_headers, m_debug_tables, m_debug_tables_full, m_debug_interleaving, m_debug_resync;
+  debugging_option_c
+      m_debug_chapters{    "qtmp4|qtmp4_full|qtmp4_chapters"}
+    , m_debug_headers{     "qtmp4|qtmp4_full|qtmp4_headers"}
+    , m_debug_tables{            "qtmp4_full|qtmp4_tables|qtmp4_tables_full"}
+    , m_debug_tables_full{                               "qtmp4_tables_full"}
+    , m_debug_interleaving{"qtmp4|qtmp4_full|qtmp4_interleaving"}
+    , m_debug_resync{      "qtmp4|qtmp4_full|qtmp4_resync"};
 
   friend class qtmp4_demuxer_c;
 
 public:
-  qtmp4_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~qtmp4_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::qtmp4;
   }
@@ -483,7 +486,7 @@ public:
   virtual void create_packetizer(int64_t tid);
   virtual void add_available_track_ids();
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

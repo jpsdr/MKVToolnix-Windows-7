@@ -20,14 +20,12 @@
 
 class srt_reader_c: public generic_reader_c {
 private:
-  mm_text_io_cptr m_text_in;
   srt_parser_cptr m_subs;
   int64_t m_bytes_to_process{}, m_bytes_processed{};
+  bool m_need_recoding{};
+  boost::optional<std::string> m_encoding;
 
 public:
-  srt_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~srt_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::srt;
   }
@@ -41,7 +39,7 @@ public:
     return true;
   }
 
-  static int probe_file(mm_text_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

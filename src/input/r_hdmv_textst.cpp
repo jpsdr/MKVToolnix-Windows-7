@@ -29,15 +29,6 @@
 // 2 bytes number of frames
 // remaining: dialog presentation segments including their descriptors
 
-hdmv_textst_reader_c::hdmv_textst_reader_c(const track_info_c &ti,
-                                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
-}
-
-hdmv_textst_reader_c::~hdmv_textst_reader_c() {
-}
-
 memory_cptr
 hdmv_textst_reader_c::read_segment(mm_io_c &in) {
   auto descriptor = in.read(3);
@@ -55,29 +46,16 @@ hdmv_textst_reader_c::read_segment(mm_io_c &in) {
   return segment;
 }
 
-int
-hdmv_textst_reader_c::probe_file(mm_io_c &in,
-                                 uint64_t size) {
-  if (10 > size)
-    return 0;
+bool
+hdmv_textst_reader_c::probe_file() {
+  auto magic = std::string{};
+  if ((m_in->read(magic, 6) != 6) || (magic != "TextST"))
+    return false;
 
-  try {
-    auto magic = std::string{};
+  auto segment = read_segment(*m_in);
+  m_in->skip(2);
 
-    in.setFilePointer(0);
-    in.read(magic, 6);
-    if (magic != "TextST")
-      return 0;
-
-    auto segment = read_segment(in);
-    in.skip(2);
-
-    return segment && (mtx::hdmv_textst::dialog_style_segment == segment->get_buffer()[0]) ? 1 : 0;
-
-  } catch (mtx::mm_io::exception &) {
-  }
-
-  return 0;
+  return segment && (mtx::hdmv_textst::dialog_style_segment == segment->get_buffer()[0]) ? 1 : 0;
 }
 
 void
@@ -85,7 +63,6 @@ hdmv_textst_reader_c::read_headers() {
   m_in->setFilePointer(6);
 
   m_dialog_style_segment = read_segment(*m_in);
-  m_ti.m_id              = 0;
 
   m_in->skip(2);
 

@@ -21,12 +21,9 @@
 
 class hdmv_pgs_reader_c: public generic_reader_c {
 private:
-  debugging_option_c m_debug;
+  debugging_option_c m_debug{"hdmv_pgs_reader"};
 
 public:
-  hdmv_pgs_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~hdmv_pgs_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::pgssup;
   }
@@ -38,7 +35,7 @@ public:
     return true;
   }
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

@@ -33,41 +33,6 @@ add_all_requested_track_ids(generic_reader_c &reader,
     reader.add_requested_track_id(pair.first);
 }
 
-generic_reader_c::generic_reader_c(const track_info_c &ti,
-                                   const mm_io_cptr &in)
-  : m_ti{ti}
-  , m_in{in}
-  , m_size{static_cast<uint64_t>(in->get_size())}
-  , m_ptzr_first_packet{}
-  , m_max_timestamp_seen{}
-  , m_appending{}
-  , m_num_video_tracks{}
-  , m_num_audio_tracks{}
-  , m_num_subtitle_tracks{}
-  , m_reference_timestamp_tolerance{}
-{
-  add_all_requested_track_ids(*this, m_ti.m_atracks.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_vtracks.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_stracks.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_btracks.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_track_tags.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_all_fourccs);
-  add_all_requested_track_ids(*this, m_ti.m_display_properties);
-  add_all_requested_track_ids(*this, m_ti.m_timestamp_syncs);
-  add_all_requested_track_ids(*this, m_ti.m_cue_creations);
-  add_all_requested_track_ids(*this, m_ti.m_default_track_flags);
-  add_all_requested_track_ids(*this, m_ti.m_fix_bitstream_frame_rate_flags);
-  add_all_requested_track_ids(*this, m_ti.m_languages);
-  add_all_requested_track_ids(*this, m_ti.m_sub_charsets);
-  add_all_requested_track_ids(*this, m_ti.m_all_tags);
-  add_all_requested_track_ids(*this, m_ti.m_all_aac_is_sbr);
-  add_all_requested_track_ids(*this, m_ti.m_compression_list);
-  add_all_requested_track_ids(*this, m_ti.m_track_names);
-  add_all_requested_track_ids(*this, m_ti.m_all_ext_timestamps);
-  add_all_requested_track_ids(*this, m_ti.m_pixel_crop_list);
-  add_all_requested_track_ids(*this, m_ti.m_reduce_to_core);
-}
-
 void
 generic_reader_c::set_timestamp_restrictions(timestamp_c const &min,
                                              timestamp_c const &max) {
@@ -483,6 +448,38 @@ generic_reader_c::calculate_probe_range(int64_t file_size,
 }
 
 void
+generic_reader_c::set_file_to_read(mm_io_cptr const &in) {
+  m_in   = in;
+  m_size = in->get_size();
+}
+
+void
 generic_reader_c::set_probe_range_info(probe_range_info_t const &info) {
   m_probe_range_info = info;
+}
+
+void
+generic_reader_c::set_track_info(track_info_c const &info) {
+  m_ti = info;
+
+  add_all_requested_track_ids(*this, m_ti.m_atracks.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_vtracks.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_stracks.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_btracks.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_track_tags.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_all_fourccs);
+  add_all_requested_track_ids(*this, m_ti.m_display_properties);
+  add_all_requested_track_ids(*this, m_ti.m_timestamp_syncs);
+  add_all_requested_track_ids(*this, m_ti.m_cue_creations);
+  add_all_requested_track_ids(*this, m_ti.m_default_track_flags);
+  add_all_requested_track_ids(*this, m_ti.m_fix_bitstream_frame_rate_flags);
+  add_all_requested_track_ids(*this, m_ti.m_languages);
+  add_all_requested_track_ids(*this, m_ti.m_sub_charsets);
+  add_all_requested_track_ids(*this, m_ti.m_all_tags);
+  add_all_requested_track_ids(*this, m_ti.m_all_aac_is_sbr);
+  add_all_requested_track_ids(*this, m_ti.m_compression_list);
+  add_all_requested_track_ids(*this, m_ti.m_track_names);
+  add_all_requested_track_ids(*this, m_ti.m_all_ext_timestamps);
+  add_all_requested_track_ids(*this, m_ti.m_pixel_crop_list);
+  add_all_requested_track_ids(*this, m_ti.m_reduce_to_core);
 }

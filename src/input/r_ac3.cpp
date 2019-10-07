@@ -24,31 +24,13 @@
 #include "merge/input_x.h"
 #include "output/p_ac3.h"
 
-#define AC3_READ_SIZE 16384
+bool
+ac3_reader_c::probe_file() {
+  mtx::id3::skip_v2_tag(*m_in);
 
-int
-ac3_reader_c::probe_file(mm_io_c &in,
-                         uint64_t,
-                         int64_t probe_size,
-                         int num_headers,
-                         bool require_zero_offset) {
-  try {
-    in.setFilePointer(0);
-    mtx::id3::skip_v2_tag(in);
-    int offset = find_valid_headers(in, probe_size, num_headers);
-
-    return (require_zero_offset && (0 == offset)) || (!require_zero_offset && (0 <= offset));
-
-  } catch (...) {
-    return 0;
-  }
-}
-
-ac3_reader_c::ac3_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_chunk(memory_c::alloc(AC3_READ_SIZE))
-{
+  m_first_header_offset = find_valid_headers(*m_in, m_probe_range_info.probe_size, m_probe_range_info.num_headers);
+  return ( m_probe_range_info.require_headers_at_start && (0 == m_first_header_offset))
+      || (!m_probe_range_info.require_headers_at_start && (0 <= m_first_header_offset));
 }
 
 void
@@ -62,7 +44,7 @@ ac3_reader_c::read_headers() {
     if (0 < tag_size_end)
       m_size -= tag_size_end;
 
-    size_t init_read_len = std::min(m_size - tag_size_start, static_cast<uint64_t>(AC3_READ_SIZE));
+    size_t init_read_len = std::min(m_size - tag_size_start, static_cast<uint64_t>(m_chunk->get_size()));
 
     if (m_in->read(m_chunk->get_buffer(), init_read_len) != init_read_len)
       throw mtx::input::header_parsing_x();
@@ -79,12 +61,7 @@ ac3_reader_c::read_headers() {
     throw mtx::input::open_x();
   }
 
-  m_ti.m_id       = 0;          // ID for this track.
-
   show_demuxer_info();
-}
-
-ac3_reader_c::~ac3_reader_c() {
 }
 
 void
@@ -100,7 +77,7 @@ file_status_e
 ac3_reader_c::read(generic_packetizer_c *,
                    bool) {
   uint64_t remaining_bytes = m_size - m_in->getFilePointer();
-  uint64_t read_len        = std::min(static_cast<uint64_t>(AC3_READ_SIZE), remaining_bytes);
+  uint64_t read_len        = std::min(static_cast<uint64_t>(m_chunk->get_size()), remaining_bytes);
   int num_read             = m_in->read(m_chunk->get_buffer(), read_len);
 
   if (0 < num_read)

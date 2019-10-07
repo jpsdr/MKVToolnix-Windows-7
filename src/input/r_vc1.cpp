@@ -24,44 +24,27 @@
 #include "output/p_vc1.h"
 
 
-#define PROBESIZE 4
 #define READ_SIZE 20 * 1024 * 1024
 
-int
-vc1_es_reader_c::probe_file(mm_io_c &in,
-                            uint64_t size) {
-  try {
-    if (PROBESIZE > size)
-      return 0;
+bool
+vc1_es_reader_c::probe_file() {
+  auto num_read = m_in->read(m_buffer->get_buffer(), READ_SIZE);
 
-    in.setFilePointer(0);
+  if (4 > num_read)
+    return false;
 
-    memory_cptr buf = memory_c::alloc(READ_SIZE);
-    int num_read    = in.read(buf->get_buffer(), READ_SIZE);
+  uint32_t marker = get_uint32_be(m_buffer->get_buffer());
+  if ((VC1_MARKER_SEQHDR != marker) && (VC1_MARKER_ENTRYPOINT != marker) && (VC1_MARKER_FRAME != marker))
+    return false;
 
-    if (4 > num_read)
-      return 0;
+  mtx::vc1::es_parser_c parser;
+  parser.add_bytes(m_buffer->get_buffer(), num_read);
 
-    uint32_t marker = get_uint32_be(buf->get_buffer());
-    if ((VC1_MARKER_SEQHDR != marker) && (VC1_MARKER_ENTRYPOINT != marker) && (VC1_MARKER_FRAME != marker))
-      return 0;
-
-    mtx::vc1::es_parser_c parser;
-    parser.add_bytes(buf->get_buffer(), num_read);
-
-    return parser.is_sequence_header_available();
-
-  } catch (...) {
-    mxinfo(Y("have an xcptn\n"));
-  }
-
-  return 0;
+  return parser.is_sequence_header_available();
 }
 
-vc1_es_reader_c::vc1_es_reader_c(const track_info_c &ti,
-                                 const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_buffer(memory_c::alloc(READ_SIZE))
+vc1_es_reader_c::vc1_es_reader_c()
+  : m_buffer(memory_c::alloc(READ_SIZE))
 {
 }
 

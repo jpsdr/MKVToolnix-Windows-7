@@ -27,33 +27,15 @@
 #include "merge/output_control.h"
 #include "output/p_tta.h"
 
-int
-tta_reader_c::probe_file(mm_io_c &in,
-                         uint64_t size) {
+bool
+tta_reader_c::probe_file() {
   unsigned char buf[4];
 
-  if (26 > size)
-    return 0;
-  try {
-    in.setFilePointer(0);
-    int tag_size = mtx::id3::skip_v2_tag(in);
-    if (-1 == tag_size)
-      return 0;
-    if (in.read(buf, 4) != 4)
-      return 0;
-    in.setFilePointer(0);
-  } catch (...) {
-    return 0;
-  }
-  if (!strncmp((char *)buf, "TTA1", 4))
-    return 1;
-  return 0;
-}
+  int tag_size = mtx::id3::skip_v2_tag(*m_in);
+  if (-1 == tag_size)
+    return false;
 
-tta_reader_c::tta_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
+  return (m_in->read(buf, 4) == 4) && (memcmp(buf, "TTA1", 4) == 0);
 }
 
 void
@@ -93,16 +75,12 @@ tta_reader_c::read_headers() {
 
     m_in->skip(4);
 
-    pos             = 0;
-    m_ti.m_id       = 0;        // ID for this track.
+    pos = 0;
 
   } catch (...) {
     throw mtx::input::open_x();
   }
   show_demuxer_info();
-}
-
-tta_reader_c::~tta_reader_c() {
 }
 
 void

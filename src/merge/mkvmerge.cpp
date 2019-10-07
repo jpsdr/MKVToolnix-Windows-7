@@ -502,12 +502,12 @@ identify(std::string &filename) {
   file.name           = filename;
   file.all_names.push_back(filename);
 
-  get_file_type(file);
+  file.reader = probe_file_format(file);
 
-  if (mtx::file_type_e::is_unknown == file.type)
+  if (!file.reader)
     display_unsupported_file_type(file);
 
-  create_readers();
+  read_file_headers();
 
   file.reader->identify();
   file.reader->display_identification_results();
@@ -2070,9 +2070,9 @@ handle_file_name_arg(const std::string &this_arg,
 
   ti->m_fname = file.name;
 
-  get_file_type(file);
+  file.reader = probe_file_format(file);
 
-  if (mtx::file_type_e::is_unknown == file.type)
+  if (!file.reader)
     mxerror(fmt::format(Y("The type of file '{0}' could not be recognized.\n"), file.name));
 
   if (file.is_playlist) {
@@ -2080,11 +2080,9 @@ handle_file_name_arg(const std::string &this_arg,
     ti->m_fname = file.name;
   }
 
-  if (mtx::file_type_e::chapters != file.type) {
-    file.ti.swap(ti);
+  file.ti.swap(ti);
 
-    g_files.push_back(file_p);
-  }
+  g_files.push_back(file_p);
 
   g_chapter_charset.clear();
   g_chapter_language.clear();
@@ -2952,9 +2950,9 @@ create_filelist_for_playlist(bfs::path const &file_name,
   new_filelist.playlist_index                = idx;
   new_filelist.playlist_previous_filelist_id = previous_filelist_id;
 
-  get_file_type(new_filelist);
+  new_filelist.reader                        = probe_file_format(new_filelist);
 
-  if (mtx::file_type_e::is_unknown == new_filelist.type)
+  if (!new_filelist.reader)
     mxerror(fmt::format(Y("The type of file '{0}' could not be recognized.\n"), new_filelist.name));
 
   new_filelist.ti                       = std::make_unique<track_info_c>();
@@ -3111,7 +3109,7 @@ main(int argc,
   int64_t start = mtx::sys::get_current_time_millis();
 
   add_filelists_for_playlists();
-  create_readers();
+  read_file_headers();
 
   if (!g_identifying) {
     create_packetizers();

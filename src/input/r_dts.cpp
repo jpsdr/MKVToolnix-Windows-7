@@ -25,63 +25,43 @@
 #include "merge/input_x.h"
 #include "output/p_dts.h"
 
-#define READ_SIZE 16384
+bool
+dts_reader_c::probe_file() {
+  m_chunks        = scan_chunks(*m_in);
+  m_current_chunk = brng::find_if(m_chunks, [](chunk_t const &chunk) { return chunk.type == chunk_type_e::strmdata; });
 
-int
-dts_reader_c::probe_file(mm_io_c &in,
-                         uint64_t size,
-                         bool strict_mode) {
-  if (size < READ_SIZE)
-    return 0;
+  if (m_current_chunk == m_chunks.end())
+    return false;
 
-  try {
-    auto chunks         = scan_chunks(in);
-    auto strmdata_chunk = brng::find_if(chunks, [](chunk_t const &chunk) { return chunk.type == chunk_type_e::strmdata; });
-    if (strmdata_chunk == chunks.end())
-      return 0;
+  auto bytes_to_read = std::min<uint64_t>(m_current_chunk->data_size, m_af_buf[0]->get_size());
 
-    unsigned char buf[READ_SIZE];
-    auto bytes_to_read = std::min<uint64_t>(strmdata_chunk->data_size, READ_SIZE);
+  m_in->setFilePointer(m_current_chunk->data_start);
+  if (m_in->read(m_af_buf[0], bytes_to_read) != bytes_to_read)
+    return false;
 
-    in.setFilePointer(strmdata_chunk->data_start);
-    if (in.read(buf, bytes_to_read) != bytes_to_read)
-      return 0;
+  bool convert_14_to_16 = false, swap_bytes = false;
+  if (!m_probe_range_info.require_headers_at_start && mtx::dts::detect(m_af_buf[0]->get_buffer(), m_af_buf[0]->get_size(), convert_14_to_16, swap_bytes))
+    return true;
 
-    bool convert_14_to_16 = false, swap_bytes = false;
-    if (!strict_mode && mtx::dts::detect(buf, READ_SIZE, convert_14_to_16, swap_bytes))
-      return 1;
-
-    int pos = mtx::dts::find_consecutive_headers(buf, READ_SIZE, 5);
-    if ((!strict_mode && (0 <= pos)) || (strict_mode && (0 == pos)))
-      return 1;
-
-  } catch (...) {
-  }
-
-  return 0;
+  int pos = mtx::dts::find_consecutive_headers(m_af_buf[0]->get_buffer(), m_af_buf[0]->get_size(), 5);
+  return ( m_probe_range_info.require_headers_at_start && (0 == pos))
+      || (!m_probe_range_info.require_headers_at_start && (0 <= pos));
 }
 
-dts_reader_c::dts_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_af_buf(memory_c::alloc(2 * READ_SIZE))
-  , m_cur_buf(0)
-  , m_dts14_to_16(false)
-  , m_swap_bytes(false)
-  , m_debug{"dts|dts_reader"}
-  , m_codec{codec_c::look_up(codec_c::type_e::A_DTS)}
-  , m_chunks{scan_chunks(*in)}
-  , m_current_chunk{brng::find_if(m_chunks, [](chunk_t const &chunk) { return chunk.type == chunk_type_e::strmdata; })}
-{
-  m_buf[0] = reinterpret_cast<unsigned short *>(m_af_buf->get_buffer());
-  m_buf[1] = reinterpret_cast<unsigned short *>(m_af_buf->get_buffer() + READ_SIZE);
+dts_reader_c::dts_reader_c() {
+  m_af_buf[0] = memory_c::alloc(128 * 1024);
+  m_af_buf[1] = memory_c::alloc(128 * 1024);
+  m_buf[0]    = reinterpret_cast<unsigned short *>(m_af_buf[0]->get_buffer());
+  m_buf[1]    = reinterpret_cast<unsigned short *>(m_af_buf[1]->get_buffer());
+
+  m_codec     = codec_c::look_up(codec_c::type_e::A_DTS);
 }
 
 void
 dts_reader_c::read_headers() {
   try {
     m_in->setFilePointer(m_current_chunk->data_start);
-    auto bytes_to_read = std::min<int64_t>(m_current_chunk->data_size, READ_SIZE);
+    auto bytes_to_read = std::min<int64_t>(m_current_chunk->data_size, m_af_buf[0]->get_size());
     if (m_in->read(m_buf[m_cur_buf], bytes_to_read) != bytes_to_read)
       throw mtx::input::header_parsing_x();
     m_in->setFilePointer(m_current_chunk->data_start);
@@ -90,24 +70,19 @@ dts_reader_c::read_headers() {
     throw mtx::input::open_x();
   }
 
-  mtx::dts::detect(m_buf[m_cur_buf], READ_SIZE, m_dts14_to_16, m_swap_bytes);
+  mtx::dts::detect(m_buf[m_cur_buf], m_af_buf[0]->get_size(), m_dts14_to_16, m_swap_bytes);
 
   mxdebug_if(m_debug, fmt::format("DTS: 14->16 {0} swap {1}\n", m_dts14_to_16, m_swap_bytes));
 
-  decode_buffer(READ_SIZE);
-  int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), READ_SIZE, m_dtsheader);
+  decode_buffer(m_af_buf[0]->get_size());
+  int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), m_af_buf[0]->get_size(), m_dtsheader);
 
   if (0 > pos)
     throw mtx::input::header_parsing_x();
 
-  m_ti.m_id = 0;          // ID for this track.
-
   m_codec.set_specialization(m_dtsheader.get_codec_specialization());
 
   show_demuxer_info();
-}
-
-dts_reader_c::~dts_reader_c() {
 }
 
 int
@@ -146,7 +121,7 @@ dts_reader_c::read(generic_packetizer_c *,
   if (m_current_chunk == chunks_end)
     return flush_packetizers();
 
-  auto bytes_to_read = std::min<int64_t>(m_current_chunk->data_end - std::min(m_in->getFilePointer(), m_current_chunk->data_end), READ_SIZE);
+  auto bytes_to_read = std::min<int64_t>(m_current_chunk->data_end - std::min(m_in->getFilePointer(), m_current_chunk->data_end), m_af_buf[0]->get_size());
   if (m_dts14_to_16)
     bytes_to_read &= ~0xf;
 

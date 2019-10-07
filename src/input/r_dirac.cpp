@@ -24,44 +24,27 @@
 #include "output/p_dirac.h"
 
 
-#define PROBESIZE 4
 #define READ_SIZE 1024 * 1024
 
-int
-dirac_es_reader_c::probe_file(mm_io_c &in,
-                              uint64_t size) {
-  try {
-    if (PROBESIZE > size)
-      return 0;
+bool
+dirac_es_reader_c::probe_file() {
+  int num_read = m_in->read(m_buffer->get_buffer(), READ_SIZE);
 
-    in.setFilePointer(0);
+  if (4 > num_read)
+    return false;
 
-    memory_cptr buf = memory_c::alloc(READ_SIZE);
-    int num_read    = in.read(buf->get_buffer(), READ_SIZE);
+  uint32_t marker = get_uint32_be(m_buffer->get_buffer());
+  if (DIRAC_SYNC_WORD != marker)
+    return 0;
 
-    if (4 > num_read)
-      return 0;
+  dirac::es_parser_c parser;
+  parser.add_bytes(m_buffer->get_buffer(), num_read);
 
-    uint32_t marker = get_uint32_be(buf->get_buffer());
-    if (DIRAC_SYNC_WORD != marker)
-      return 0;
-
-    dirac::es_parser_c parser;
-    parser.add_bytes(buf->get_buffer(), num_read);
-
-    return parser.is_sequence_header_available();
-
-  } catch (...) {
-    mxinfo("have an xcptn\n");
-  }
-
-  return 0;
+  return parser.is_sequence_header_available();
 }
 
-dirac_es_reader_c::dirac_es_reader_c(const track_info_c &ti,
-                                     const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_buffer(memory_c::alloc(READ_SIZE))
+dirac_es_reader_c::dirac_es_reader_c()
+  : m_buffer(memory_c::alloc(READ_SIZE))
 {
 }
 

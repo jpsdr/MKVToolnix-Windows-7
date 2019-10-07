@@ -19,5 +19,5 @@
 
 class unsupported_types_signature_prober_c {
 public:
-  static int probe_file(mm_io_c &io);
+  static void probe_file(mm_io_c &io);
 };

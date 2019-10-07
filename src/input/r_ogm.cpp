@@ -298,44 +298,25 @@ extract_vorbis_comments(const memory_cptr &mem) {
   return comments;
 }
 
+ogm_reader_c::~ogm_reader_c() {
+  ogg_sync_clear(&oy);
+}
+
 /*
    Probes a file by simply comparing the first four bytes to 'OggS'.
 */
-int
-ogm_reader_c::probe_file(mm_io_c &in,
-                         uint64_t size) {
+bool
+ogm_reader_c::probe_file() {
   unsigned char data[4];
-
-  if (4 > size)
-    return 0;
-  try {
-    in.setFilePointer(0);
-    if (in.read(data, 4) != 4)
-      return 0;
-    in.setFilePointer(0);
-  } catch (...) {
-    return 0;
-  }
-  if (strncmp((char *)data, "OggS", 4))
-    return 0;
-  return 1;
+  return (m_in->read(data, 4) == 4) && (memcmp(data, "OggS", 4) == 0);
 }
 
 /*
    Opens the file for processing, initializes an ogg_sync_state used for
    reading from an OGG stream.
 */
-ogm_reader_c::ogm_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
-}
-
 void
 ogm_reader_c::read_headers() {
-  if (!ogm_reader_c::probe_file(*m_in, m_size))
-    throw mtx::input::invalid_format_x();
-
   ogg_sync_init(&oy);
 
   show_demuxer_info();
@@ -343,10 +324,6 @@ ogm_reader_c::read_headers() {
   if (read_headers_internal() <= 0)
     throw mtx::input::header_parsing_x();
   handle_stream_comments();
-}
-
-ogm_reader_c::~ogm_reader_c() {
-  ogg_sync_clear(&oy);
 }
 
 ogm_demuxer_cptr

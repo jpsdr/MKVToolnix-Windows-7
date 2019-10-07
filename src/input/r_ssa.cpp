@@ -24,39 +24,21 @@
 #include "merge/input_x.h"
 #include "merge/file_status.h"
 
-int
-ssa_reader_c::probe_file(mm_text_io_c &in,
-                         uint64_t) {
-  return ssa_parser_c::probe(in);
-}
-
-ssa_reader_c::ssa_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
+bool
+ssa_reader_c::probe_file() {
+  return ssa_parser_c::probe(static_cast<mm_text_io_c &>(*m_in));
 }
 
 void
 ssa_reader_c::read_headers() {
-  mm_text_io_cptr text_in;
+  auto text_in = std::static_pointer_cast<mm_text_io_c>(m_in);
+  auto cc_utf8 = text_in->get_byte_order() != BO_NONE   ? charset_converter_c::init("UTF-8")
+               : mtx::includes(m_ti.m_sub_charsets,  0) ? charset_converter_c::init(m_ti.m_sub_charsets[ 0])
+               : mtx::includes(m_ti.m_sub_charsets, -1) ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
+               :                                          charset_converter_cptr{};
 
-  try {
-    text_in = std::make_shared<mm_text_io_c>(m_in);
-  } catch (...) {
-    throw mtx::input::open_x();
-  }
-
-  if (!ssa_reader_c::probe_file(*text_in, 0))
-    throw mtx::input::invalid_format_x();
-
-  auto  cc_utf8 = text_in->get_byte_order() != BO_NONE   ? charset_converter_c::init("UTF-8")
-                : mtx::includes(m_ti.m_sub_charsets,  0) ? charset_converter_c::init(m_ti.m_sub_charsets[ 0])
-                : mtx::includes(m_ti.m_sub_charsets, -1) ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
-                :                                          charset_converter_cptr{};
-
-  m_ti.m_id  = 0;
-  m_subs     = std::make_shared<ssa_parser_c>(*this, text_in, m_ti.m_fname, 0);
-  m_encoding = text_in->get_encoding();
+  m_subs       = std::make_shared<ssa_parser_c>(*this, text_in, m_ti.m_fname, 0);
+  m_encoding   = text_in->get_encoding();
 
   m_subs->set_charset_converter(cc_utf8);
   m_subs->parse();
@@ -64,9 +46,6 @@ ssa_reader_c::read_headers() {
   m_bytes_to_process = m_subs->get_total_byte_size();
 
   show_demuxer_info();
-}
-
-ssa_reader_c::~ssa_reader_c() {
 }
 
 void

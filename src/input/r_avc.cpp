@@ -23,90 +23,43 @@
 #include "merge/file_status.h"
 #include "output/p_avc_es.h"
 
-
-#define PROBESIZE 4
-#define READ_SIZE 1024 * 1024
-#define MAX_PROBE_BUFFERS 50
-
 debugging_option_c avc_es_reader_c::ms_debug{"avc_reader"};
 
-int
-avc_es_reader_c::probe_file(mm_io_c &in,
-                            uint64_t size) {
-  try {
-    if (PROBESIZE > size)
+bool
+avc_es_reader_c::probe_file() {
+  int num_read, i;
+  bool first = true;
+
+  mtx::avc::es_parser_c parser;
+  parser.ignore_nalu_size_length_errors();
+  parser.set_nalu_size_length(4);
+
+  for (i = 0; 50 > i; ++i) {
+    num_read = m_in->read(m_buffer->get_buffer(), m_buffer->get_size());
+    if (4 > num_read)
       return 0;
 
-    memory_cptr buf = memory_c::alloc(READ_SIZE);
-    int num_read, i;
-    bool first = true;
+    // MPEG TS starts with 0x47.
+    if (first && (0x47 == m_buffer->get_buffer()[0]))
+      return 0;
+    first = false;
 
-    mtx::avc::es_parser_c parser;
-    parser.ignore_nalu_size_length_errors();
-    parser.set_nalu_size_length(4);
+    parser.add_bytes(m_buffer->get_buffer(), num_read);
 
-    in.setFilePointer(0);
-    for (i = 0; MAX_PROBE_BUFFERS > i; ++i) {
-      num_read = in.read(buf->get_buffer(), READ_SIZE);
-      if (4 > num_read)
-        return 0;
-
-      // MPEG TS starts with 0x47.
-      if (first && (0x47 == buf->get_buffer()[0]))
-        return 0;
-      first = false;
-
-      parser.add_bytes(buf->get_buffer(), num_read);
-
-      if (parser.headers_parsed())
-        return 1;
-    }
-
-  } catch (mtx::exception &e) {
-    mxdebug_if(ms_debug, fmt::format(Y("Error {0}\n"), e.error()));
-
-  } catch (...) {
-    mxdebug_if(ms_debug, Y("have an xcptn\n"));
-  }
-
-  return 0;
-}
-
-avc_es_reader_c::avc_es_reader_c(const track_info_c &ti,
-                                 const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_buffer(memory_c::alloc(READ_SIZE))
-{
-}
-
-void
-avc_es_reader_c::read_headers() {
-  try {
-    mtx::avc::es_parser_c parser;
-    parser.ignore_nalu_size_length_errors();
-
-    int num_read, i;
-
-    for (i = 0; MAX_PROBE_BUFFERS > i; ++i) {
-      num_read = m_in->read(m_buffer->get_buffer(), READ_SIZE);
-      if (0 == num_read)
-        throw mtx::exception();
-      parser.add_bytes(m_buffer->get_buffer(), num_read);
-      if (parser.headers_parsed())
-        break;
-    }
+    if (!parser.headers_parsed())
+      continue;
 
     m_width  = parser.get_width();
     m_height = parser.get_height();
 
-    m_in->setFilePointer(0);
-
-    parser.clear();
-
-  } catch (...) {
-    throw mtx::input::open_x();
+    return true;
   }
 
+  return false;
+}
+
+void
+avc_es_reader_c::read_headers() {
   show_demuxer_info();
 }
 
@@ -127,7 +80,7 @@ avc_es_reader_c::read(generic_packetizer_c *,
   if (m_in->getFilePointer() >= m_size)
     return FILE_STATUS_DONE;
 
-  int num_read = m_in->read(m_buffer->get_buffer(), READ_SIZE);
+  int num_read = m_in->read(m_buffer->get_buffer(), m_buffer->get_size());
   if (0 < num_read)
     PTZR0->process(new packet_t(memory_c::borrow(m_buffer->get_buffer(), num_read)));
 

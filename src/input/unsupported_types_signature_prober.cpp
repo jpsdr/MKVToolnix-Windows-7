@@ -60,7 +60,7 @@ signature_t::match(mm_io_c &in)
 
 }
 
-int
+void
 unsupported_types_signature_prober_c::probe_file(mm_io_c &in) {
   std::vector<signature_t> signatures{
     { { { 0u, { 0x41, 0x44, 0x49, 0x46                          } } }, YT("AAC with ADIF headers") },
@@ -74,6 +74,4 @@ unsupported_types_signature_prober_c::probe_file(mm_io_c &in) {
 
   for (auto const &signature : signatures)
     signature.match(in);
-
-  return 0;
 }

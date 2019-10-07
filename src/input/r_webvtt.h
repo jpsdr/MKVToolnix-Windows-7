@@ -20,14 +20,10 @@
 
 class webvtt_reader_c: public generic_reader_c {
 private:
-  mm_text_io_cptr m_text_in;
   webvtt_parser_cptr m_parser;
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 
 public:
-  webvtt_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~webvtt_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::webvtt;
   }
@@ -41,7 +37,7 @@ public:
     return true;
   }
 
-  static int probe_file(mm_text_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

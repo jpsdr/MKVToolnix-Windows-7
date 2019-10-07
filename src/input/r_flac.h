@@ -49,9 +49,6 @@ private:
   int64_t tag_size_start{}, tag_size_end{};
 
 public:
-  flac_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~flac_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::flac;
   }
@@ -63,7 +60,7 @@ public:
     return false;
   }
 
-  static bool probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
   virtual FLAC__StreamDecoderReadStatus flac_read_cb(FLAC__byte buffer[], size_t *bytes);
   virtual void flac_metadata_cb(const FLAC__StreamMetadata *metadata);
@@ -81,12 +78,11 @@ protected:
   virtual void handle_stream_info_metadata(FLAC__StreamMetadata const *metadata);
   virtual std::string attachment_name_from_metadata(FLAC__StreamMetadata_Picture const &picture) const;
 };
-
 #else  // HAVE_FLAC_FORMAT_H
 
 class flac_reader_c {
 public:
-  static bool probe_file(mm_io_c &in, uint64_t size);
+  static void probe_file(mm_io_c &in);
 };
 
 #endif // HAVE_FLAC_FORMAT_H

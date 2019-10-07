@@ -25,9 +25,6 @@ private:
   unsigned char chunk[0x400];
 
 public:
-  vobbtn_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~vobbtn_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::vobbtn;
   }
@@ -36,7 +33,7 @@ public:
   virtual void identify();
   virtual void create_packetizer(int64_t tid);
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

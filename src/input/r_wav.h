@@ -65,9 +65,9 @@ public:
   };
 
 private:
-  type_e m_type;
+  type_e m_type{type_e::unknown};
   struct wave_header m_wheader;
-  int64_t m_bytes_in_data_chunks, m_remaining_bytes_in_current_data_chunk;
+  int64_t m_bytes_in_data_chunks{}, m_remaining_bytes_in_current_data_chunk{};
 
   std::vector<wav_chunk_t> m_chunks;
   boost::optional<std::size_t> m_cur_data_chunk_idx;
@@ -77,9 +77,6 @@ private:
   uint32_t m_format_tag;
 
 public:
-  wav_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~wav_reader_c();
-
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::wav;
   }
@@ -91,10 +88,10 @@ public:
     return false;
   }
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
-  static type_e determine_type(mm_io_c &in, uint64_t size);
+  type_e determine_type();
 
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
 

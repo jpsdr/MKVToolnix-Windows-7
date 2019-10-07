@@ -61,20 +61,12 @@ extern long AVI_errno;
 #define GAB2_ID_SUBTITLES        0x0004
 
 bool
-avi_reader_c::probe_file(mm_io_c &in,
-                         uint64_t size) {
-  if (12 > size)
-    return false;
+avi_reader_c::probe_file() {
+  auto &in  = *m_in;
 
   std::string data;
-  try {
-    in.setFilePointer(0);
-    if (in.read(data, 12) != 12)
-      return false;
-    in.setFilePointer(0);
-  } catch (...) {
+  if (in.read(data, 12) != 12)
     return false;
-  }
 
   balg::to_lower(data);
   if ((data.substr(0, 4) != "riff") || (data.substr(8, 4) != "avi "))
@@ -89,27 +81,11 @@ avi_reader_c::probe_file(mm_io_c &in,
   else if (err == AVI_ERR_UNSUPPORTED_DV_TYPE1)
     id_result_container_unsupported(in.get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::avi_dv_1));
 
-  in.setFilePointer(0);
-
   return true;
-}
-
-avi_reader_c::avi_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
 }
 
 void
 avi_reader_c::read_headers() {
-  try {
-    if (!avi_reader_c::probe_file(*m_in, m_size))
-      throw mtx::input::invalid_format_x();
-
-  } catch (mtx::mm_io::exception &) {
-    throw mtx::input::open_x();
-  }
-
   show_demuxer_info();
 
   if (!(m_avi = AVI_open_input_file(m_in.get(), 1)))

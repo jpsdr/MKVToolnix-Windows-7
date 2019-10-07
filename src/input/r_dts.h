@@ -45,19 +45,18 @@ private:
 
   using chunks_t = std::vector<chunk_t>;
 
-  memory_cptr m_af_buf;
+  memory_cptr m_af_buf[2];
   unsigned short *m_buf[2];
-  unsigned int m_cur_buf;
+  unsigned int m_cur_buf{};
   mtx::dts::header_t m_dtsheader;
-  bool m_dts14_to_16, m_swap_bytes;
-  debugging_option_c m_debug;
+  bool m_dts14_to_16{}, m_swap_bytes{};
+  debugging_option_c m_debug{"dts|dts_reader"};
   codec_c m_codec;
   chunks_t m_chunks;
   chunks_t::const_iterator m_current_chunk;
 
 public:
-  dts_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~dts_reader_c();
+  dts_reader_c();
 
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::dts;
@@ -70,7 +69,7 @@ public:
     return false;
   }
 
-  static int probe_file(mm_io_c &in, uint64_t size, bool strict_mode = false);
+  virtual bool probe_file() override;
   static chunks_t scan_chunks(mm_io_c &in);
 
 protected:

@@ -20,11 +20,9 @@
 class obu_reader_c: public generic_reader_c {
 protected:
   unsigned int m_width{}, m_height{};
-  memory_cptr m_buffer;
+  memory_cptr m_buffer{memory_c::alloc(1024 * 1024)};
 
 public:
-  obu_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-
   virtual mtx::file_type_e get_format_type() const override {
     return mtx::file_type_e::obu;
   }
@@ -36,7 +34,7 @@ public:
     return false;
   }
 
-  static bool probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

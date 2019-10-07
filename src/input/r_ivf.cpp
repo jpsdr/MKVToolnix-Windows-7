@@ -24,53 +24,29 @@
 #include "merge/input_x.h"
 #include "merge/file_status.h"
 
-int
-ivf_reader_c::probe_file(mm_io_c &in,
-                         uint64_t size) {
-  if (sizeof(ivf::file_header_t) > size)
-    return 0;
+bool
+ivf_reader_c::probe_file() {
+  if (m_in->read(&m_header, sizeof(ivf::file_header_t)) < sizeof(ivf::file_header_t))
+    return false;
 
-  ivf::file_header_t header;
-  in.setFilePointer(0);
-  if (in.read(&header, sizeof(ivf::file_header_t)) < sizeof(ivf::file_header_t))
-    return 0;
+  if (memcmp(m_header.file_magic, "DKIF", 4))
+    return false;
 
-  if (memcmp(header.file_magic, "DKIF", 4))
-    return 0;
+  m_codec = m_header.get_codec();
 
-  auto codec = header.get_codec();
-  return codec.is(codec_c::type_e::V_AV1) || codec.is(codec_c::type_e::V_VP8) || codec.is(codec_c::type_e::V_VP9);
-}
-
-ivf_reader_c::ivf_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_debug{"ivf_reader"}
-{
+  return m_codec.is(codec_c::type_e::V_AV1) || m_codec.is(codec_c::type_e::V_VP8) || m_codec.is(codec_c::type_e::V_VP9);
 }
 
 void
 ivf_reader_c::read_headers() {
-  try {
-    ivf::file_header_t header;
-    m_in->read(&header, sizeof(ivf::file_header_t));
+  m_in->setFilePointer(sizeof(ivf::file_header_t));
 
-    m_width          = get_uint16_le(&header.width);
-    m_height         = get_uint16_le(&header.height);
-    m_frame_rate_num = get_uint32_le(&header.frame_rate_num);
-    m_frame_rate_den = get_uint32_le(&header.frame_rate_den);
-    m_codec          = header.get_codec();
-
-    m_ti.m_id        = 0;       // ID for this track.
-
-  } catch (...) {
-    throw mtx::input::open_x();
-  }
+  m_width          = get_uint16_le(&m_header.width);
+  m_height         = get_uint16_le(&m_header.height);
+  m_frame_rate_num = get_uint32_le(&m_header.frame_rate_num);
+  m_frame_rate_den = get_uint32_le(&m_header.frame_rate_den);
 
   show_demuxer_info();
-}
-
-ivf_reader_c::~ivf_reader_c() {
 }
 
 void

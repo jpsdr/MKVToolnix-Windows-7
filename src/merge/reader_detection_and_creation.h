@@ -18,5 +18,5 @@
 
 struct filelist_t;
 
-void get_file_type(filelist_t &file);
-void create_readers();
+std::unique_ptr<generic_reader_c> probe_file_format(filelist_t &file);
+void read_file_headers();

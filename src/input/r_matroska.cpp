@@ -295,44 +295,15 @@ kax_track_t::discard_track_statistics_tags() {
    Probes a file by simply comparing the first four bytes to the EBML
    head signature.
 */
-int
-kax_reader_c::probe_file(mm_io_c &in,
-                         uint64_t size) {
+bool
+kax_reader_c::probe_file() {
   unsigned char data[4];
-
-  if (4 > size)
-    return 0;
-  try {
-    in.setFilePointer(0);
-    if (in.read(data, 4) != 4)
-      return 0;
-    in.setFilePointer(0);
-  } catch (...) {
-    return 0;
-  }
-  if (get_uint32_be(data) != MAGIC_MKV)
-    return 0;
-  return 1;
+  return (m_in->read(data, 4) == 4) && (get_uint32_be(data) == MAGIC_MKV);
 }
 
-kax_reader_c::kax_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_segment_duration(0)
-  , m_last_timestamp(0)
-  , m_global_timestamp_offset{}
-  , m_writing_app_ver(-1)
-  , m_attachment_id(0)
-  , m_file_status(FILE_STATUS_MOREDATA)
-  , m_opus_experimental_warning_shown{}
-  , m_regenerate_chapter_uids{}
-  , m_debug_minimum_timestamp{"kax_reader|kax_reader_minimum_timestamp"}
-{
+kax_reader_c::kax_reader_c() {
   init_l1_position_storage(m_deferred_l1_positions);
   init_l1_position_storage(m_handled_l1_positions);
-}
-
-kax_reader_c::~kax_reader_c() {
 }
 
 void

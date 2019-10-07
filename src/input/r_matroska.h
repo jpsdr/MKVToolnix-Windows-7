@@ -208,31 +208,30 @@ private:
 
   std::shared_ptr<libebml::EbmlStream> m_es;
 
-  int64_t m_segment_duration, m_last_timestamp, m_global_timestamp_offset;
+  int64_t m_segment_duration{}, m_last_timestamp{}, m_global_timestamp_offset{};
   std::string m_title;
 
   using deferred_positions_t = std::map<deferred_l1_type_e, std::vector<int64_t> >;
   deferred_positions_t m_deferred_l1_positions, m_handled_l1_positions;
 
   std::string m_writing_app, m_raw_writing_app, m_muxing_app;
-  int64_t m_writing_app_ver;
+  int64_t m_writing_app_ver{-1};
   boost::optional<std::time_t> m_muxing_date_epoch;
 
   memory_cptr m_segment_uid, m_next_segment_uid, m_previous_segment_uid;
 
-  int64_t m_attachment_id;
+  int64_t m_attachment_id{};
 
   std::shared_ptr<libmatroska::KaxTags> m_tags;
 
-  file_status_e m_file_status;
+  file_status_e m_file_status{FILE_STATUS_MOREDATA};
 
-  bool m_opus_experimental_warning_shown, m_regenerate_chapter_uids;
+  bool m_opus_experimental_warning_shown{}, m_regenerate_chapter_uids{};
 
-  debugging_option_c m_debug_minimum_timestamp;
+  debugging_option_c m_debug_minimum_timestamp{"kax_reader|kax_reader_minimum_timestamp"};
 
 public:
-  kax_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~kax_reader_c();
+  kax_reader_c();
 
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::matroska;
@@ -246,7 +245,7 @@ public:
   virtual void create_packetizer(int64_t tid);
   virtual void add_available_track_ids();
 
-  static int probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
 protected:
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;

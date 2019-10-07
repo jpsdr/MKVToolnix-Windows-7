@@ -31,34 +31,19 @@
 #include "merge/output_control.h"
 #include "output/p_textsubs.h"
 
-int
-usf_reader_c::probe_file(mm_text_io_c &in,
-                         uint64_t) {
-  try {
-    std::string line, content;
+bool
+usf_reader_c::probe_file() {
+  std::string line, content;
 
-    in.setFilePointer(0);
+  while ((content.length() < 1000) && m_in->getline2(line, 1000))
+    content += line;
 
-    while ((content.length() < 1000) && in.getline2(line, 1000))
-      content += line;
+  if (   (content.find("<?xml") == std::string::npos)
+      && (content.find("<!--")  == std::string::npos))
+    return false;
 
-    if (   (content.find("<?xml") == std::string::npos)
-        && (content.find("<!--")  == std::string::npos))
-      return 0;
-
-    auto doc = mtx::xml::load_file(in.get_file_name(), pugi::parse_default | pugi::parse_declaration | pugi::parse_doctype | pugi::parse_pi | pugi::parse_comments, 10 * 1024 * 1024);
-    return doc && std::string{ doc->document_element().name() } == "USFSubtitles" ? 1 : 0;
-
-  } catch(...) {
-  }
-
-  return 0;
-}
-
-usf_reader_c::usf_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
+  auto doc = mtx::xml::load_file(m_in->get_file_name(), pugi::parse_default | pugi::parse_declaration | pugi::parse_doctype | pugi::parse_pi | pugi::parse_comments, 10 * 1024 * 1024);
+  return doc && (std::string{ doc->document_element().name() } == "USFSubtitles");
 }
 
 void
@@ -88,9 +73,6 @@ usf_reader_c::read_headers() {
   }
 
   show_demuxer_info();
-}
-
-usf_reader_c::~usf_reader_c() {
 }
 
 void

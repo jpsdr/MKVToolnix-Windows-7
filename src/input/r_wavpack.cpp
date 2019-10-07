@@ -24,32 +24,16 @@
 #include "merge/file_status.h"
 #include "output/p_wavpack.h"
 
-int
-wavpack_reader_c::probe_file(mm_io_c &in,
-                             uint64_t) {
-  wavpack_header_t header;
+bool
+wavpack_reader_c::probe_file() {
+  if (m_in->read(&header, sizeof(wavpack_header_t)) != sizeof(wavpack_header_t))
+    return false;
 
-  try {
-    in.setFilePointer(0);
-    if (in.read(&header, sizeof(wavpack_header_t)) != sizeof(wavpack_header_t))
-      return 0;
-    in.setFilePointer(0);
-  } catch (...) {
-    return 0;
-  }
+  if (memcmp(header.ck_id, "wvpk", 4) != 0)
+    return false;
 
-  if (!strncmp(header.ck_id, "wvpk", 4)) {
-    header.version = get_uint16_le(&header.version);
-    if ((header.version >> 8) == 4)
-      return 1;
-  }
-  return 0;
-}
-
-wavpack_reader_c::wavpack_reader_c(const track_info_c &ti,
-                                   const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-{
+  auto version = get_uint16_le(&header.version);
+  return (version >> 8) == 4;
 }
 
 void
@@ -88,9 +72,6 @@ wavpack_reader_c::read_headers() {
   show_demuxer_info();
   if (meta.has_correction)
     mxinfo_fn(m_ti.m_fname, fmt::format(Y("Also using the correction file '{0}c'.\n"), m_ti.m_fname));
-}
-
-wavpack_reader_c::~wavpack_reader_c() {
 }
 
 void

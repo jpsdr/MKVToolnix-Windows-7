@@ -31,30 +31,10 @@
 #if defined(HAVE_FLAC_FORMAT_H)
 
 bool
-flac_reader_c::probe_file(mm_io_c &in,
-                          uint64_t size) {
-  if (4 > size)
-    return false;
-
+flac_reader_c::probe_file() {
   std::string data;
-  try {
-    in.setFilePointer(0);
-    mtx::id3::skip_v2_tag(in);
-    if (in.read(data, 4) != 4)
-      return false;
-    in.setFilePointer(0);
-
-    return data == "fLaC";
-  } catch (...) {
-    return false;
-  }
-}
-
-flac_reader_c::flac_reader_c(const track_info_c &ti,
-                             const mm_io_cptr &in)
-  : generic_reader_c{ti, in}
-  , decoder_c()                 // Don't use initializer-list syntax due to a bug in gcc < 4.8
-{
+  mtx::id3::skip_v2_tag(*m_in);
+  return (m_in->read(data, 4) == 4) && (data == "fLaC");
 }
 
 void
@@ -86,9 +66,6 @@ flac_reader_c::read_headers() {
   } catch (mtx::exception &) {
     mxerror(Y("flac_reader: could not initialize the FLAC packetizer.\n"));
   }
-}
-
-flac_reader_c::~flac_reader_c() {
 }
 
 void
@@ -375,24 +352,11 @@ flac_reader_c::identify() {
 
 #else  // HAVE_FLAC_FORMAT_H
 
-bool
-flac_reader_c::probe_file(mm_io_c &in,
-                          uint64_t size) {
-  if (4 > size)
-    return false;
-
+void
+flac_reader_c::probe_file(mm_io_c &in) {
   std::string data;
-  try {
-    in.setFilePointer(0);
-    if (in.read(data, 4) != 4)
-      return false;
-    in.setFilePointer(0);
-
-    if (data == "fLaC")
-      id_result_container_unsupported(in.get_file_name(), "FLAC");
-  } catch (...) {
-  }
-  return false;
+  if ((in.read(data, 4) == 4) && (data == "fLaC"))
+    id_result_container_unsupported(in.get_file_name(), "FLAC");
 }
 
 #endif // HAVE_FLAC_FORMAT_H

@@ -998,14 +998,8 @@ file_t::all_pmts_found()
 // ------------------------------------------------------------
 
 bool
-reader_c::probe_file(mm_io_c &in,
-                     uint64_t) {
-  if (in.get_size() < 4)
-    return false;
-
-  auto packet_size = detect_packet_size(in, in.get_size());
-
-  return packet_size > 0;
+reader_c::probe_file() {
+  return detect_packet_size(*m_in, m_in->get_size()) > 0;
 }
 
 int
@@ -1052,32 +1046,6 @@ reader_c::detect_packet_size(mm_io_c &in,
   mxdebug_if(debug, "detect_packet_size: packet size could not be determined\n");
 
   return -1;
-}
-
-reader_c::reader_c(const track_info_c &ti,
-                   const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_current_file{}
-  , m_dont_use_audio_pts{      "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
-  , m_debug_resync{            "mpeg_ts|mpeg_ts_resync"}
-  , m_debug_pat_pmt{           "mpeg_ts|mpeg_ts_pat|mpeg_ts_headers|mpeg_ts_pmt"}
-  , m_debug_sdt{               "mpeg_ts|mpeg_ts_sdt|mpeg_ts_headers"}
-  , m_debug_headers{           "mpeg_ts|mpeg_ts_headers"}
-  , m_debug_pes_headers{       "mpeg_ts|mpeg_ts_headers|mpeg_ts_pes_headers"}
-  , m_debug_packet{            "mpeg_ts|mpeg_ts_packet"}
-  , m_debug_aac{               "mpeg_ts|mpeg_ts_aac"}
-  , m_debug_timestamp_wrapping{"mpeg_ts|mpeg_ts_timestamp_wrapping"}
-  , m_debug_clpi{              "mpeg_ts|mpeg_ts_clpi|clpi"}
-  , m_debug_mpls{              "mpeg_ts|mpeg_ts_mpls|mpls"}
-{
-  m_files.emplace_back(std::make_shared<file_t>(in));
-
-  auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
-  if (!mpls_in)
-    return;
-
-  m_chapter_timestamps = mpls_in->get_chapters();
-  add_external_files_from_mpls(*mpls_in);
 }
 
 void
@@ -1180,6 +1148,14 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
 void
 reader_c::read_headers() {
+  m_files.emplace_back(std::make_shared<file_t>(m_in));
+
+  auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
+  if (mpls_in) {
+    m_chapter_timestamps = mpls_in->get_chapters();
+    add_external_files_from_mpls(*mpls_in);
+  }
+
   for (int idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
     read_headers_for_file(idx);
 
@@ -1313,9 +1289,6 @@ reader_c::process_chapter_entries() {
                    : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
                    :                                                                         timestamp_sync_t{};
   mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.numerator, sync.denominator);
-}
-
-reader_c::~reader_c() {
 }
 
 uint32_t

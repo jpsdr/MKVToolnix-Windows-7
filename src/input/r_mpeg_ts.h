@@ -422,7 +422,7 @@ using file_cptr = std::shared_ptr<file_t>;
 class reader_c: public generic_reader_c {
 protected:
   std::vector<file_cptr> m_files;
-  std::size_t m_current_file, m_packet_num{};
+  std::size_t m_current_file{}, m_packet_num{};
 
   std::vector<track_ptr> m_tracks, m_all_probed_tracks;
   std::map<generic_packetizer_c *, track_ptr> m_ptzr_to_track_map;
@@ -431,16 +431,24 @@ protected:
 
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 
-  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_sdt, m_debug_headers, m_debug_pes_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi, m_debug_mpls;
+  debugging_option_c
+      m_dont_use_audio_pts{      "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
+    , m_debug_resync{            "mpeg_ts|mpeg_ts_resync"}
+    , m_debug_pat_pmt{           "mpeg_ts|mpeg_ts_pat|mpeg_ts_headers|mpeg_ts_pmt"}
+    , m_debug_sdt{               "mpeg_ts|mpeg_ts_sdt|mpeg_ts_headers"}
+    , m_debug_headers{           "mpeg_ts|mpeg_ts_headers"}
+    , m_debug_pes_headers{       "mpeg_ts|mpeg_ts_headers|mpeg_ts_pes_headers"}
+    , m_debug_packet{            "mpeg_ts|mpeg_ts_packet"}
+    , m_debug_aac{               "mpeg_ts|mpeg_ts_aac"}
+    , m_debug_timestamp_wrapping{"mpeg_ts|mpeg_ts_timestamp_wrapping"}
+    , m_debug_clpi{              "mpeg_ts|mpeg_ts_clpi|clpi"}
+    , m_debug_mpls{              "mpeg_ts|mpeg_ts_mpls|mpls"};
 
 protected:
   static int potential_packet_sizes[];
 
 public:
-  reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~reader_c();
-
-  static bool probe_file(mm_io_c &in, uint64_t size);
+  virtual bool probe_file() override;
 
   virtual mtx::file_type_e get_format_type() const {
     return mtx::file_type_e::mpeg_ts;

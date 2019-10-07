@@ -23,27 +23,10 @@
 #include "output/p_ac3.h"
 #include "output/p_truehd.h"
 
-#define TRUEHD_READ_SIZE (1024 * 1024)
-
-int
-truehd_reader_c::probe_file(mm_io_c &in,
-                            uint64_t /* size */) {
-  try {
-    in.setFilePointer(0);
-    mtx::id3::skip_v2_tag(in);
-    return find_valid_headers(in, TRUEHD_READ_SIZE, 2) ? 1 : 0;
-
-  } catch (...) {
-    return 0;
-  }
-}
-
-truehd_reader_c::truehd_reader_c(const track_info_c &ti,
-                                 const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_chunk(memory_c::alloc(TRUEHD_READ_SIZE))
-  , m_ac3_ptzr{-1}
-{
+bool
+truehd_reader_c::probe_file() {
+  mtx::id3::skip_v2_tag(*m_in);
+  return find_valid_headers(*m_in, m_chunk->get_size(), 2);
 }
 
 void
@@ -57,7 +40,7 @@ truehd_reader_c::read_headers() {
     if (0 < tag_size_end)
       m_size -= tag_size_end;
 
-    size_t init_read_len = std::min(m_size - tag_size_start, static_cast<uint64_t>(TRUEHD_READ_SIZE));
+    size_t init_read_len = std::min(m_size - tag_size_start, static_cast<uint64_t>(m_chunk->get_size()));
 
     if (m_in->read(m_chunk->get_buffer(), init_read_len) != init_read_len)
       throw mtx::input::header_parsing_x();
@@ -90,16 +73,11 @@ truehd_reader_c::read_headers() {
       found_truehd = true;
     }
 
-    m_ti.m_id = 0;                  // ID for this track.
-
     show_demuxer_info();
 
   } catch (mtx::mm_io::exception &) {
     throw mtx::input::open_x();
   }
-}
-
-truehd_reader_c::~truehd_reader_c() {
 }
 
 void
@@ -139,7 +117,7 @@ file_status_e
 truehd_reader_c::read(generic_packetizer_c *,
                       bool) {
   auto remaining_bytes = m_size - m_in->getFilePointer();
-  auto read_len        = std::min<int64_t>(TRUEHD_READ_SIZE, remaining_bytes);
+  auto read_len        = std::min<int64_t>(m_chunk->get_size(), remaining_bytes);
 
   if (0 >= read_len) {
     m_converter.flush();

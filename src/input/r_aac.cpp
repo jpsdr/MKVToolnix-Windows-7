@@ -25,29 +25,17 @@
 #include "merge/output_control.h"
 #include "output/p_aac.h"
 
-int
-aac_reader_c::probe_file(mm_io_c &in,
-                         uint64_t,
-                         int64_t probe_range,
-                         int num_headers,
-                         bool require_zero_offset) {
-  int offset = find_valid_headers(in, probe_range, num_headers);
-  return (require_zero_offset && (0 == offset)) || (!require_zero_offset && (0 <= offset));
-}
+bool
+aac_reader_c::probe_file() {
+  m_first_header_offset = find_valid_headers(*m_in, m_probe_range_info.probe_size, m_probe_range_info.num_headers);
 
-#define INITCHUNKSIZE 16384
-
-aac_reader_c::aac_reader_c(const track_info_c &ti,
-                           const mm_io_cptr &in)
-  : generic_reader_c{ti, in}
-  , m_chunk{memory_c::alloc(INITCHUNKSIZE)}
-{
+  return ( m_probe_range_info.require_headers_at_start && (0 == m_first_header_offset))
+      || (!m_probe_range_info.require_headers_at_start && (0 <= m_first_header_offset));
 }
 
 void
 aac_reader_c::read_headers() {
   try {
-    int offset         = find_valid_headers(*m_in, m_probe_range_info.probe_size, m_probe_range_info.num_headers);
     int tag_size_start = mtx::id3::skip_v2_tag(*m_in);
     int tag_size_end   = mtx::id3::tag_present_at_end(*m_in);
 
@@ -56,10 +44,10 @@ aac_reader_c::read_headers() {
     if (0 < tag_size_end)
       m_size -= tag_size_end;
 
-    size_t init_read_len = std::min(m_size - tag_size_start - std::max(offset, 0), static_cast<uint64_t>(INITCHUNKSIZE));
+    size_t init_read_len = std::min(m_size - tag_size_start - std::max(m_first_header_offset, 0), static_cast<uint64_t>(m_chunk->get_size()));
 
-    if (offset >= 0)
-      m_in->setFilePointer(offset);
+    if (m_first_header_offset >= 0)
+      m_in->setFilePointer(m_first_header_offset);
 
     if (m_in->read(m_chunk, init_read_len) != init_read_len)
       throw mtx::input::header_parsing_x();
@@ -83,7 +71,6 @@ aac_reader_c::read_headers() {
 
     m_parser             = mtx::aac::parser_c{};
 
-    m_ti.m_id            = 0;       // ID for this track.
     int detected_profile = m_aacheader.config.profile;
 
     if (24000 >= m_aacheader.config.sample_rate)
@@ -104,9 +91,6 @@ aac_reader_c::read_headers() {
   show_demuxer_info();
 }
 
-aac_reader_c::~aac_reader_c() {
-}
-
 void
 aac_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('a', 0) || (NPTZR() != 0))
@@ -122,7 +106,7 @@ file_status_e
 aac_reader_c::read(generic_packetizer_c *,
                    bool) {
   int remaining_bytes = m_size - m_in->getFilePointer();
-  int read_len        = std::min(INITCHUNKSIZE, remaining_bytes);
+  auto read_len       = std::min<int64_t>(m_chunk->get_size(), remaining_bytes);
   int num_read        = m_in->read(m_chunk, read_len);
 
   if (0 < num_read) {

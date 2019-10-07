@@ -235,32 +235,9 @@ flv_track_c::extract_flv1_width_and_height() {
 
 // --------------------------------------------------
 
-int
-flv_reader_c::probe_file(mm_io_c &in,
-                         uint64_t) {
-  try {
-    flv_header_t header;
-
-    in.setFilePointer(0);
-    return header.read(in) && header.is_valid() ? 1 : 0;
-
-  } catch (...) {
-    return 0;
-  }
-}
-
-flv_reader_c::flv_reader_c(track_info_c const &ti,
-                           mm_io_cptr const &in)
-  : generic_reader_c{ti, in}
-  , m_audio_track_idx{-1}
-  , m_video_track_idx{-1}
-  , m_selected_track_idx{-1}
-  , m_file_done{}
-  , m_debug{"flv|flv_full"}
-{
-}
-
-flv_reader_c::~flv_reader_c() {
+bool
+flv_reader_c::probe_file() {
+  return m_header.read(*m_in) && m_header.is_valid();
 }
 
 unsigned int
@@ -271,10 +248,9 @@ flv_reader_c::add_track(char type) {
 
 void
 flv_reader_c::read_headers() {
-  flv_header_t header;
-  header.read(m_in);
+  mxdebug_if(m_debug, fmt::format("Header dump: {0}\n", m_header));
 
-  mxdebug_if(m_debug, fmt::format("Header dump: {0}\n", header));
+  m_in->setFilePointer(sizeof(m_header));
 
   auto audio_track_valid = false;
   auto video_track_valid = false;
