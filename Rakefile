@@ -124,21 +124,20 @@ def setup_globals
 
   $libmtxcommon_as_dll     = $building_for[:windows] && %r{shared}i.match(c(:host))
 
-  stack_protector          = ""
-  stack_protector          = " -fstack-protector"        if is_gcc? && !check_compiler_version("gcc", "4.9.0")
-  stack_protector          = " -fstack-protector-strong" if check_compiler_version("gcc", "4.9.0") || check_compiler_version("clang", "3.5.0")
-
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
   cflags_common           += " #{c(:WNO_INCONSISTENT_MISSING_OVERRIDE)} #{c(:WNO_POTENTIALLY_EVALUATED_EXPRESSION)}"
   cflags_common           += " #{c(:OPTIMIZATION_CFLAGS)} -D_FILE_OFFSET_BITS=64"
   cflags_common           += " -DMTX_LOCALE_DIR=\\\"#{c(:localedir)}\\\" -DMTX_PKG_DATA_DIR=\\\"#{c(:pkgdatadir)}\\\" -DMTX_DOC_DIR=\\\"#{c(:docdir)}\\\""
-  cflags_common           += stack_protector
-  cflags_common           += " -fsanitize=undefined"                                     if c?(:UBSAN)
-  cflags_common           += " -fsanitize=address -fno-omit-frame-pointer"               if c?(:ADDRSAN)
+  cflags_common           += determine_stack_protector_flags
+  cflags_common           += determine_optimization_cflags
+  cflags_common           += " -g3 -DDEBUG"                                              if c?(:USE_DEBUG)
+  cflags_common           += " -pg"                                                      if c?(:USE_PROFILING)
+  cflags_common           += " -fsanitize=undefined"                                     if c?(:USE_UBSAN)
+  cflags_common           += " -fsanitize=address -fno-omit-frame-pointer"               if c?(:USE_ADDRSAN)
   cflags_common           += " -Ilib/libebml -Ilib/libmatroska"                          if c?(:EBML_MATROSKA_INTERNAL)
   cflags_common           += " -Ilib/nlohmann-json/include"                              if c?(:NLOHMANN_JSON_INTERNAL)
   cflags_common           += " -Ilib/fmt/include"                                        if c?(:FMT_INTERNAL)
-  cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:CMARK_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:DEBUG_CFLAGS)} #{c(:PROFILING_CFLAGS)} #{c(:USER_CPPFLAGS)}"
+  cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:CMARK_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0601 -D_WIN32_WINNT=0x0601 " if $building_for[:windows] # 0x0601 = Windows 7/Server 2008 R2
   cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
   cflags_common           += " -fPIC "                                                   if c?(:USE_QT) && !$building_for[:windows]
@@ -161,15 +160,16 @@ def setup_globals
   cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:USER_CXXFLAGS)}"
 
   ldflags                  = ""
-  ldflags                 += stack_protector
+  ldflags                 += determine_stack_protector_flags
+  ldflags                 += " -pg"                                     if c?(:USE_PROFILING)
   ldflags                 += " -fuse-ld=lld"                            if is_clang? && !c(:LLVM_LLD).empty?
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
   ldflags                 += " -Llib/fmt/src"                           if c?(:FMT_INTERNAL)
-  ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
+  ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
   ldflags                 += " -Wl,--dynamicbase,--nxcompat"               if $building_for[:windows]
   ldflags                 += " -L#{c(:DRMINGW_PATH)}/lib"                  if c?(:USE_DRMINGW) &&  $building_for[:windows]
-  ldflags                 += " -fsanitize=undefined"                       if c?(:UBSAN)
-  ldflags                 += " -fsanitize=address -fno-omit-frame-pointer" if c?(:ADDRSAN)
+  ldflags                 += " -fsanitize=undefined"                       if c?(:USE_UBSAN)
+  ldflags                 += " -fsanitize=address -fno-omit-frame-pointer" if c?(:USE_ADDRSAN)
   ldflags                 += " -headerpad_max_install_names"               if $building_for[:macos]
 
   windres                  = ""
@@ -216,6 +216,19 @@ def setup_compiler_specifics
     # zapcc doesn't support pre-compiled headers.
     ENV['USE_PRECOMPILED_HEADERS'] = "0"
   end
+end
+
+def determine_optimization_cflags
+  return ""                   if !c?(:USE_OPTIMIZATION)
+  return " -O1"               if is_clang? && !check_compiler_version("clang", "3.8.0") # LLVM bug 11962
+  return " -O2 -fno-ipa-icf"  if $building_for[:windows] && check_compiler_version("gcc", "5.1.0") && !check_compiler_version("gcc", "7.2.0")
+  return " -O3"
+end
+
+def determine_stack_protector_flags
+  return " -fstack-protector"        if is_gcc? && !check_compiler_version("gcc", "4.9.0")
+  return " -fstack-protector-strong" if check_compiler_version("gcc", "4.9.0") || check_compiler_version("clang", "3.5.0")
+  return ""
 end
 
 def generate_helper_files
