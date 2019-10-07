@@ -35,7 +35,7 @@ mm_text_io_private_c::mm_text_io_private_c(mm_io_cptr const &in)
     return;
   }
 
-  mm_text_io_c::detect_byte_order_marker(buffer, num_read, byte_order, bom_len);
+  mm_text_io_c::detect_byte_order_marker(buffer, num_read, byte_order_mark, bom_len);
 
   in->setFilePointer(bom_len);
 }
@@ -97,47 +97,47 @@ mm_text_io_c::detect_eol_style() {
 bool
 mm_text_io_c::detect_byte_order_marker(const unsigned char *buffer,
                                        unsigned int size,
-                                       byte_order_e &byte_order,
+                                       byte_order_mark_e &byte_order_mark,
                                        unsigned int &bom_length) {
   if ((3 <= size) && (buffer[0] == 0xef) && (buffer[1] == 0xbb) && (buffer[2] == 0xbf)) {
-    byte_order = BO_UTF8;
+    byte_order_mark = byte_order_mark_e::utf8;
     bom_length = 3;
   } else if ((4 <= size) && (buffer[0] == 0xff) && (buffer[1] == 0xfe) && (buffer[2] == 0x00) && (buffer[3] == 0x00)) {
-    byte_order = BO_UTF32_LE;
+    byte_order_mark = byte_order_mark_e::utf32_le;
     bom_length = 4;
   } else if ((4 <= size) && (buffer[0] == 0x00) && (buffer[1] == 0x00) && (buffer[2] == 0xfe) && (buffer[3] == 0xff)) {
-    byte_order = BO_UTF32_BE;
+    byte_order_mark = byte_order_mark_e::utf32_be;
     bom_length = 4;
   } else if ((2 <= size) && (buffer[0] == 0xff) && (buffer[1] == 0xfe)) {
-    byte_order = BO_UTF16_LE;
+    byte_order_mark = byte_order_mark_e::utf16_le;
     bom_length = 2;
   } else if ((2 <= size) && (buffer[0] == 0xfe) && (buffer[1] == 0xff)) {
-    byte_order = BO_UTF16_BE;
+    byte_order_mark = byte_order_mark_e::utf16_be;
     bom_length = 2;
   } else {
-    byte_order = BO_NONE;
+    byte_order_mark = byte_order_mark_e::none;
     bom_length = 0;
   }
 
-  return BO_NONE != byte_order;
+  return byte_order_mark_e::none != byte_order_mark;
 }
 
 bool
 mm_text_io_c::has_byte_order_marker(const std::string &string) {
-  byte_order_e byte_order;
+  byte_order_mark_e byte_order_mark;
   unsigned int bom_length;
-  return detect_byte_order_marker(reinterpret_cast<const unsigned char *>(string.c_str()), string.length(), byte_order, bom_length);
+  return detect_byte_order_marker(reinterpret_cast<const unsigned char *>(string.c_str()), string.length(), byte_order_mark, bom_length);
 }
 
 boost::optional<std::string>
-mm_text_io_c::get_encoding(byte_order_e byte_order) {
-  if (BO_NONE == byte_order)
+mm_text_io_c::get_encoding(byte_order_mark_e byte_order_mark) {
+  if (byte_order_mark_e::none == byte_order_mark)
     return {};
 
-  return BO_UTF8     == byte_order ? "UTF-8"s
-       : BO_UTF16_LE == byte_order ? "UTF-16LE"s
-       : BO_UTF16_BE == byte_order ? "UTF-16BE"s
-       : BO_UTF32_LE == byte_order ? "UTF-32LE"s
+  return byte_order_mark_e::utf8     == byte_order_mark ? "UTF-8"s
+       : byte_order_mark_e::utf16_le == byte_order_mark ? "UTF-16LE"s
+       : byte_order_mark_e::utf16_be == byte_order_mark ? "UTF-16BE"s
+       : byte_order_mark_e::utf32_le == byte_order_mark ? "UTF-32LE"s
        :                             "UTF-32BE"s;
 }
 
@@ -151,13 +151,13 @@ mm_text_io_c::read_next_codepoint() {
 
   unsigned char buffer[9];
 
-  if (BO_NONE == p->byte_order) {
+  if (byte_order_mark_e::none == p->byte_order_mark) {
     std::string::size_type length = read(buffer, 1);
     return std::string{reinterpret_cast<char *>(buffer), length};
   }
 
   std::string::size_type size;
-  if (BO_UTF8 == p->byte_order) {
+  if (byte_order_mark_e::utf8 == p->byte_order_mark) {
     if (read(buffer, 1) != 1)
       return {};
 
@@ -178,13 +178,13 @@ mm_text_io_c::read_next_codepoint() {
     return std::string{reinterpret_cast<char *>(buffer), size};
   }
 
-  size = ((BO_UTF16_LE == p->byte_order) || (BO_UTF16_BE == p->byte_order)) ? 2 : 4;
+  size = ((byte_order_mark_e::utf16_le == p->byte_order_mark) || (byte_order_mark_e::utf16_be == p->byte_order_mark)) ? 2 : 4;
 
   if (read(buffer, size) != size)
     return {};
 
   unsigned long data = 0;
-  auto little_endian = ((BO_UTF16_LE == p->byte_order) || (BO_UTF32_LE == p->byte_order));
+  auto little_endian = ((byte_order_mark_e::utf16_le == p->byte_order_mark) || (byte_order_mark_e::utf32_le == p->byte_order_mark));
   auto shift         = little_endian ? 0 : 8 * (size - 1);
   for (auto i = 0u; i < size; i++) {
     data  |= static_cast<unsigned long>(buffer[i]) << shift;
@@ -269,10 +269,10 @@ mm_text_io_c::setFilePointer(int64 offset,
   mm_proxy_io_c::setFilePointer(((0 == offset) && (libebml::seek_beginning == mode)) ? p_func()->bom_len : offset, mode);
 }
 
-byte_order_e
-mm_text_io_c::get_byte_order()
+byte_order_mark_e
+mm_text_io_c::get_byte_order_mark()
   const {
-  return p_func()->byte_order;
+  return p_func()->byte_order_mark;
 }
 
 unsigned int
@@ -282,12 +282,12 @@ mm_text_io_c::get_byte_order_length()
 }
 
 void
-mm_text_io_c::set_byte_order(byte_order_e byte_order) {
-  p_func()->byte_order = byte_order;
+mm_text_io_c::set_byte_order_mark(byte_order_mark_e byte_order_mark) {
+  p_func()->byte_order_mark = byte_order_mark;
 }
 
 boost::optional<std::string>
 mm_text_io_c::get_encoding()
   const {
-  return get_encoding(p_func()->byte_order);
+  return get_encoding(p_func()->byte_order_mark);
 }

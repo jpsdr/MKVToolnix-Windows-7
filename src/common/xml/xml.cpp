@@ -70,7 +70,7 @@ load_file(std::string const &file_name,
   if (in.read(content, bytes_to_read) != bytes_to_read)
     throw mtx::mm_io::end_of_file_x{};
 
-  if (BO_NONE == in.get_byte_order()) {
+  if (byte_order_mark_e::none == in.get_byte_order_mark()) {
     boost::regex encoding_re("^ \\s* "              // ignore leading whitespace
                              "<\\?xml"              // XML declaration start
                              "[^\\?]+"              // skip to encoding, but don't go beyond XML declaration

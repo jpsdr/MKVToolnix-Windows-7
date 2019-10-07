@@ -161,7 +161,7 @@ parse_simple(mm_text_io_c *in,
   if (0 < offset)
     offset /= 1000000;
 
-  bool do_convert = in->get_byte_order() == BO_NONE;
+  bool do_convert = in->get_byte_order_mark() == byte_order_mark_e::none;
   if (do_convert)
     cc_utf8 = charset_converter_c::init(charset);
 

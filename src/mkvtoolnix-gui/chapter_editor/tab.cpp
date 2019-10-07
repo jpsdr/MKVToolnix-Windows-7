@@ -412,7 +412,7 @@ Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters,
   auto p      = p_func();
   auto result = Util::checkForBomAndNonAscii(fileName);
 
-  if (   (BO_NONE != result.byteOrder)
+  if (   (byte_order_mark_e::none != result.byteOrderMark)
       || !result.containsNonAscii
       || !Util::Settings::get().m_ceTextFileCharacterSet.isEmpty())
     return { chapters, false };

@@ -29,7 +29,7 @@ srt_reader_c::probe_file() {
 void
 srt_reader_c::read_headers() {
   auto text_in    = std::static_pointer_cast<mm_text_io_c>(m_in);
-  m_need_recoding = text_in->get_byte_order() == BO_NONE;
+  m_need_recoding = text_in->get_byte_order_mark() == byte_order_mark_e::none;
   m_encoding      = text_in->get_encoding();
   m_subs          = std::make_shared<srt_parser_c>(text_in, m_ti.m_fname, 0);
 

@@ -28,9 +28,9 @@ public:
   virtual void setFilePointer(int64 offset, libebml::seek_mode mode=libebml::seek_beginning);
   virtual std::string getline(boost::optional<std::size_t> max_chars = boost::none);
   virtual std::string read_next_codepoint();
-  virtual byte_order_e get_byte_order() const;
+  virtual byte_order_mark_e get_byte_order_mark() const;
   virtual unsigned int get_byte_order_length() const;
-  virtual void set_byte_order(byte_order_e byte_order);
+  virtual void set_byte_order_mark(byte_order_mark_e byte_order_mark);
   virtual boost::optional<std::string> get_encoding() const;
 
 protected:
@@ -38,6 +38,6 @@ protected:
 
 public:
   static bool has_byte_order_marker(const std::string &string);
-  static bool detect_byte_order_marker(const unsigned char *buffer, unsigned int size, byte_order_e &byte_order, unsigned int &bom_length);
-  static boost::optional<std::string> get_encoding(byte_order_e byte_order);
+  static bool detect_byte_order_marker(const unsigned char *buffer, unsigned int size, byte_order_mark_e &byte_order_mark, unsigned int &bom_length);
+  static boost::optional<std::string> get_encoding(byte_order_mark_e byte_order_mark);
 };

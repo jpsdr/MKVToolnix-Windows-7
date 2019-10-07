@@ -384,7 +384,7 @@ avi_reader_c::create_srt_packetizer(int idx) {
 
   parser->parse();
 
-  auto need_recoding = demuxer.m_text_io->get_byte_order() == BO_NONE;
+  auto need_recoding = demuxer.m_text_io->get_byte_order_mark() == byte_order_mark_e::none;
   demuxer.m_ptzr     = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, need_recoding));
 
   show_packetizer_info(id, PTZR(demuxer.m_ptzr));
@@ -398,10 +398,10 @@ avi_reader_c::create_ssa_packetizer(int idx) {
   auto parser    = std::make_shared<ssa_parser_c>(*this, demuxer.m_text_io, m_ti.m_fname, id);
   demuxer.m_subs = parser;
 
-  auto cc_utf8   = mtx::includes(m_ti.m_sub_charsets, id)         ? charset_converter_c::init(m_ti.m_sub_charsets[id])
-                 : mtx::includes(m_ti.m_sub_charsets, -1)         ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
-                 : demuxer.m_text_io->get_byte_order() != BO_NONE ? charset_converter_c::init("UTF-8")
-                 :                                                  g_cc_local_utf8;
+  auto cc_utf8   = mtx::includes(m_ti.m_sub_charsets, id)                              ? charset_converter_c::init(m_ti.m_sub_charsets[id])
+                 : mtx::includes(m_ti.m_sub_charsets, -1)                              ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
+                 : demuxer.m_text_io->get_byte_order_mark() != byte_order_mark_e::none ? charset_converter_c::init("UTF-8")
+                 :                                                                       g_cc_local_utf8;
 
   parser->set_charset_converter(cc_utf8);
   parser->set_attachment_id_base(g_attachments.size());

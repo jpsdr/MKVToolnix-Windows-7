@@ -107,10 +107,10 @@ xtr_ssa_c::create_file(xtr_base_c *master,
   const unsigned char *pd = mpriv->get_buffer();
   int priv_size           = mpriv->get_size();
   unsigned int bom_len    = 0;
-  byte_order_e byte_order = BO_NONE;
+  byte_order_mark_e byte_order_mark = byte_order_mark_e::none;
 
   // Skip any BOM that might be present.
-  mm_text_io_c::detect_byte_order_marker(pd, priv_size, byte_order, bom_len);
+  mm_text_io_c::detect_byte_order_marker(pd, priv_size, byte_order_mark, bom_len);
 
   pd                += bom_len;
   priv_size         -= bom_len;

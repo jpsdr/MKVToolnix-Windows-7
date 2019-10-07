@@ -338,7 +338,7 @@ parse_cue(mm_text_io_c *in,
   auto chapters = std::make_shared<KaxChapters>();
   a.chapters    = chapters.get();
 
-  if (in->get_byte_order() == BO_NONE) {
+  if (in->get_byte_order_mark() == byte_order_mark_e::none) {
     a.do_convert = true;
     a.cc_utf8    = charset_converter_c::init(charset);
   }

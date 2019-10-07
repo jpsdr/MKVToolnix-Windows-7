@@ -13,7 +13,7 @@
 
 #pragma once
 
-enum byte_order_e {BO_UTF8, BO_UTF16_LE, BO_UTF16_BE, BO_UTF32_LE, BO_UTF32_BE, BO_NONE};
+enum class byte_order_mark_e {utf8, utf16_le, utf16_be, utf32_le, utf32_be, none};
 
 class mm_io_c;
 using mm_io_cptr = std::shared_ptr<mm_io_c>;

@@ -41,7 +41,7 @@ strip_comments(nlohmann::json::string_t const &data)  {
 
   auto state = parser_state_e::normal;
 
-  in.set_byte_order(BO_UTF8);
+  in.set_byte_order_mark(byte_order_mark_e::utf8);
 
   try {
     while (!in.eof()) {

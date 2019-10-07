@@ -8,7 +8,7 @@ class QUrl;
 namespace mtx { namespace gui { namespace Util {
 
 struct BomAsciiCheckResult {
-  byte_order_e byteOrder{BO_NONE};
+  byte_order_mark_e byteOrderMark{byte_order_mark_e::none};
   unsigned int bomLength{};
   bool containsNonAscii{};
 };

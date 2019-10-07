@@ -19,7 +19,7 @@ class mm_text_io_c;
 
 class mm_text_io_private_c : public mm_proxy_io_private_c {
 public:
-  byte_order_e byte_order{BO_NONE};
+  byte_order_mark_e byte_order_mark{byte_order_mark_e::none};
   unsigned int bom_len{};
   bool uses_carriage_returns{}, uses_newlines{}, eol_style_detected{};
 
