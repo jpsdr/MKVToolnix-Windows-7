@@ -188,7 +188,7 @@ coreaudio_chunk_itr
 coreaudio_reader_c::find_chunk(std::string const &type,
                                bool throw_on_error,
                                coreaudio_chunk_itr start) {
-  auto chunk = std::find_if(start, m_chunks.end(), [&type](auto const &chunk) { return chunk.m_type == type; });
+  auto chunk = std::find_if(start, m_chunks.end(), [&type](auto const &candidate) { return candidate.m_type == type; });
 
   if (throw_on_error && (chunk == m_chunks.end()))
     debug_error_and_throw(fmt::format("Chunk type '{0}' not found", type));
