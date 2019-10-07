@@ -68,13 +68,6 @@ generic_reader_c::generic_reader_c(const track_info_c &ti,
   add_all_requested_track_ids(*this, m_ti.m_reduce_to_core);
 }
 
-generic_reader_c::~generic_reader_c() {
-  size_t i;
-
-  for (i = 0; i < m_reader_packetizers.size(); i++)
-    delete m_reader_packetizers[i];
-}
-
 void
 generic_reader_c::set_timestamp_restrictions(timestamp_c const &min,
                                              timestamp_c const &max) {
@@ -97,7 +90,7 @@ generic_reader_c::get_timestamp_restriction_max()
 void
 generic_reader_c::read_all() {
   for (auto &packetizer : m_reader_packetizers)
-    while (read(packetizer, true) != FILE_STATUS_DONE)
+    while (read(packetizer.get(), true) != FILE_STATUS_DONE)
       ;
 }
 
@@ -153,7 +146,7 @@ generic_reader_c::add_packetizer(generic_packetizer_c *ptzr) {
   if (outputting_webm() && !ptzr->is_compatible_with(OC_WEBM))
     mxerror(fmt::format(Y("The codec type '{0}' cannot be used in a WebM compliant file.\n"), ptzr->get_format_name()));
 
-  m_reader_packetizers.push_back(ptzr);
+  m_reader_packetizers.emplace_back(ptzr);
   m_used_track_ids.push_back(ptzr->m_ti.m_id);
   if (!m_appending)
     add_packetizer_globally(ptzr);
@@ -171,9 +164,9 @@ generic_reader_c::get_num_packetizers()
 generic_packetizer_c *
 generic_reader_c::find_packetizer_by_id(int64_t id)
   const {
-  auto itr = brng::find_if(m_reader_packetizers, [id](generic_packetizer_c *p) { return p->m_ti.m_id == id; });
+  auto itr = brng::find_if(m_reader_packetizers, [id](auto p) { return p->m_ti.m_id == id; });
 
-  return itr != m_reader_packetizers.end() ? *itr : nullptr;
+  return itr != m_reader_packetizers.end() ? (*itr).get() : nullptr;
 }
 
 void

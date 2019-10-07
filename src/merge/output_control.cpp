@@ -1692,7 +1692,7 @@ append_track(packetizer_t &ptzr,
 
   // Find the generic_packetizer_c that we will be appending to the one
   // stored in ptzr.
-  auto gptzr = brng::find_if(src_file.reader->m_reader_packetizers, [&amap](generic_packetizer_c *p) -> bool {
+  auto gptzr = brng::find_if(src_file.reader->m_reader_packetizers, [&amap](auto p) -> bool {
     return amap.src_track_id == static_cast<size_t>(p->m_ti.m_id);
   });
 
@@ -1723,7 +1723,7 @@ append_track(packetizer_t &ptzr,
       if (file->done)
         continue;
 
-      auto vptzr = brng::find_if(file->reader->m_reader_packetizers, [](generic_packetizer_c *p) { return p->get_track_type() == track_video; });
+      auto vptzr = brng::find_if(file->reader->m_reader_packetizers, [](auto p) { return p->get_track_type() == track_video; });
       if (vptzr == file->reader->m_reader_packetizers.end())
         continue;
 
@@ -1740,9 +1740,9 @@ append_track(packetizer_t &ptzr,
 
   if (s_debug_appending) {
     mxdebug(fmt::format("appending: reader m_max_timestamp_seen {0} and ptzr to append is {1} ptzr appended to is {2} src_file.appending {3} src_file.appended_to {4} dst_file.appending {5} dst_file.appended_to {6}\n",
-                        dst_file.reader->m_max_timestamp_seen, static_cast<void *>(*gptzr), static_cast<void *>(ptzr.packetizer), src_file.appending, src_file.appended_to, dst_file.appending, dst_file.appended_to));
+                        dst_file.reader->m_max_timestamp_seen, static_cast<void *>(gptzr->get()), static_cast<void *>(ptzr.packetizer), src_file.appending, src_file.appended_to, dst_file.appending, dst_file.appended_to));
     for (auto &rep_ptzr : dst_file.reader->m_reader_packetizers)
-      mxdebug(fmt::format("  ptzr @ {0} connected_to {1} max_timestamp_seen {2}\n", static_cast<void *>(rep_ptzr), rep_ptzr->m_connected_to, rep_ptzr->m_max_timestamp_seen));
+      mxdebug(fmt::format("  ptzr @ {0} connected_to {1} max_timestamp_seen {2}\n", static_cast<void *>(rep_ptzr.get()), rep_ptzr->m_connected_to, rep_ptzr->m_max_timestamp_seen));
   }
 
   // In rare cases (e.g. empty tracks) a whole file could be skipped
@@ -1756,8 +1756,8 @@ append_track(packetizer_t &ptzr,
   if (dst_file.appending) {
     std::list<generic_packetizer_c *> not_connected_ptzrs;
     for (auto &check_ptzr : dst_file.reader->m_reader_packetizers)
-      if ((check_ptzr != ptzr.packetizer) && (2 != check_ptzr->m_connected_to))
-        not_connected_ptzrs.push_back(check_ptzr);
+      if ((check_ptzr.get() != ptzr.packetizer) && (2 != check_ptzr->m_connected_to))
+        not_connected_ptzrs.push_back(check_ptzr.get());
 
     if (s_debug_appending) {
       std::string result;
@@ -1776,7 +1776,7 @@ append_track(packetizer_t &ptzr,
 
   // Also fix the ptzr structure and reset the ptzr's state to "I want more".
   generic_packetizer_c *old_packetizer = ptzr.packetizer;
-  ptzr.packetizer                      = *gptzr;
+  ptzr.packetizer                      = (*gptzr).get();
   ptzr.file                            = amap.src_file_id;
   ptzr.status                          = FILE_STATUS_MOREDATA;
 

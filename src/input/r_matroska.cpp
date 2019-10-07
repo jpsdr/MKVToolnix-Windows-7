@@ -2130,7 +2130,7 @@ kax_reader_c::create_packetizer(int64_t tid) {
   }
 
   set_packetizer_headers(t);
-  m_ptzr_to_track_map[ m_reader_packetizers[t->ptzr] ] = t;
+  m_ptzr_to_track_map[ PTZR(t->ptzr) ] = t;
 }
 
 void

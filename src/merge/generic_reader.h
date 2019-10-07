@@ -33,7 +33,7 @@ class generic_packetizer_c;
 #define DEFTRACK_TYPE_VIDEO 1
 #define DEFTRACK_TYPE_SUBS  2
 
-#define PTZR(i) m_reader_packetizers[i]
+#define PTZR(i) m_reader_packetizers[i].get()
 #define PTZR0   PTZR(0)
 #define NPTZR() m_reader_packetizers.size()
 
@@ -49,7 +49,7 @@ public:
   mm_io_cptr m_in;
   uint64_t m_size;
 
-  std::vector<generic_packetizer_c *> m_reader_packetizers;
+  std::vector<std::shared_ptr<generic_packetizer_c>> m_reader_packetizers;
   generic_packetizer_c *m_ptzr_first_packet;
   std::vector<int64_t> m_requested_track_ids, m_available_track_ids, m_used_track_ids;
   int64_t m_max_timestamp_seen;
@@ -69,7 +69,7 @@ protected:
 
 public:
   generic_reader_c(const track_info_c &ti, const mm_io_cptr &in);
-  virtual ~generic_reader_c();
+  virtual ~generic_reader_c() = default;
 
   virtual mtx::file_type_e get_format_type() const = 0;
   virtual translatable_string_c get_format_name() const;
