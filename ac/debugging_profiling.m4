@@ -92,7 +92,7 @@ dnl
 
 AC_ARG_ENABLE([ubsan],
   AC_HELP_STRING([--enable-ubsan],[compile with sanitization for undefined behavior turned on (no)]),
-  [USE_UBSAN=$enable_ubsan],[USE_UBSAN=no])
+  [],[enable_ubsan=no])
 
 if test x"$USE_UBSAN" = xyes ; then
   opt_features_yes="$opt_features_yes\n   * development technique 'undefined behavior sanitizer'"
