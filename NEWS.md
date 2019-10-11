@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* Linux AppImage: the AppImage will no longer change directories before
+  running the desired executable allow the use of relative file names. Fixes
+  #2632.
+
+
 # Version 38.0.0 "The Silent Type" 2019-10-06
 
 ## New features and enhancements

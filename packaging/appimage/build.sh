@@ -148,7 +148,12 @@ drake -j${JOBS} apps:mkvtoolnix-gui
 drake -j${JOBS}
 drake install DESTDIR="${APP_DIR}"
 
-cd appimage/${APP}.AppDir/usr
+cd appimage/${APP}.AppDir
+
+cp "${TOP_DIR}/packaging/appimage/select-binary.sh" AppRun
+chmod 0755 AppRun
+
+cd usr
 
 # Qt plugins
 mkdir -p bin/{audio,mediaservice,platforms}
@@ -157,9 +162,6 @@ cp ${QTDIR}/plugins/mediaservice/libgst{audiodecoder,mediaplayer}*.so bin/medias
 cp ${QTDIR}/plugins/platforms/libq{minimal,offscreen,wayland,xcb}*.so bin/platforms/
 
 find bin -type f -exec strip {} \+
-
-cp "${TOP_DIR}/packaging/appimage/select-binary.sh" bin/
-chmod 0755 bin/select-binary.sh
 
 mkdir -p lib lib64
 chmod u+rwx lib lib64
@@ -200,8 +202,6 @@ cp ./usr/share/icons/hicolor/256x256/apps/mkvtoolnix-gui.png .
 cp ./usr/share/applications/org.bunkus.mkvtoolnix-gui.desktop mkvtoolnix-gui.desktop
 
 fix_desktop mkvtoolnix-gui.desktop
-sed -i -e 's/^Exec=.*/Exec=select-binary.sh %F/' mkvtoolnix-gui.desktop
 
-get_apprun
 cd ..
 generate_type2_appimage
