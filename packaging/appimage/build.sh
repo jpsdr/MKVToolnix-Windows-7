@@ -105,7 +105,7 @@ if [[ ( -d .git ) && ( $RELEASE_VERSION == 0 ) ]]; then
   fi
   NUM=${VERSION%-*}
   NUM=${NUM##*-}
-  VERSION="${VERSION%%-*}-revision-$(printf '%03d' ${NUM})-${VERSION##*-}"
+  VERSION="${VERSION%%-*}-z$(printf '%03d' ${NUM})-${VERSION##*-}"
 else
   VERSION="$(perl -ne 'next unless m/^AC_INIT/; s{.*?,\[}{}; s{\].*}{}; print; exit' ${TOP_DIR}/configure.ac)"
 fi
