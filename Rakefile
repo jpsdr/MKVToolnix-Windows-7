@@ -358,6 +358,13 @@ cxx_compiler = lambda do |*args|
   handle_deps t.name, last_exit_code, true
 end
 
+qrc_compiler = lambda do |*args|
+  t       = args[0]
+  sources = t.prerequisites
+
+  runq "rcc", sources[0], "#{c(:RCC)} -o #{t.name} #{sources.join(" ")}"
+end
+
 # Pattern rules
 rule '.o' => '.cpp', &cxx_compiler
 rule '.o' => '.cc',  &cxx_compiler
@@ -444,10 +451,6 @@ end
 # Qt files
 rule '.h' => '.ui' do |t|
   runq "uic", t.source, "#{c(:UIC)} --translate QTR #{t.sources.join(" ")} > #{t.name}"
-end
-
-rule '.cpp' => '.qrc' do |t|
-  runq "rcc", t.source, "#{c(:RCC)} #{t.sources.join(" ")} > #{t.name}"
 end
 
 rule '.moc' => '.h' do |t|
@@ -1157,10 +1160,16 @@ Application.new("src/mkvpropedit").
 #
 
 if $build_mkvtoolnix_gui
+  qrc = [ "src/mkvtoolnix-gui/qt_resources.qrc" ]
+  qrc << "lib/QDarkStyleSheet/qdarkstyle/style.qrc" if $building_for[:windows]
+
+  file "src/mkvtoolnix-gui/qt_resources.cpp" => qrc, &qrc_compiler
+
   Application.new("src/mkvtoolnix-gui/mkvtoolnix-gui").
     description("Build the mkvtoolnix-gui executable").
     aliases("mkvtoolnix-gui").
     qt_dependencies_and_sources("mkvtoolnix-gui").
+    sources("src/mkvtoolnix-gui/qt_resources.cpp").
     sources("src/mkvtoolnix-gui/resources.o", :if => $building_for[:windows]).
     libraries($common_libs, :qt).
     libraries("-mwindows", :powrprof, :if => $building_for[:windows]).

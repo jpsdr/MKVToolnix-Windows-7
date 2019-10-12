@@ -114,8 +114,6 @@ class Target
     dep_builder.call(cpp_files).      each { |cpp, ui_hs| file cpp.ext('o')   => ui_hs }
     dep_builder.call(qobject_h_files).each { |h,   ui_hs| file h.  ext('moc') => ui_hs }
 
-    cpp_files << "src/#{subdir}/qt_resources.cpp" if FileTest.exists?("src/#{subdir}/qt_resources.qrc")
-
     self.
       sources(ui_files).
       sources(qobject_h_files.collect { |h| h.ext 'moc' }).

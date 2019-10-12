@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: Windows: added a dark mode that's enabled when Windows 10's
+  dark mode is turned on.
+
 ## Bug fixes
 
 * Linux AppImage: the AppImage will no longer change directories before

@@ -32,6 +32,7 @@ MKVToolNix 38.0.0
     11. [QtWaitingSpinner](#611-qtwaitingspinner)
     12. [Fancy tab widget](#612-fancy-tab-widget)
     13. [fmt](#613-fmt)
+    13. [QDarkStyleSheet](#614-qdarkstylesheet)
 
 -----------------
 
@@ -461,3 +462,18 @@ Small, safe and fast formatting library
   * License: BSD (see `doc/licenses/fmt-BSD.txt`)
   * URL: http://fmtlib.net/latest/
   * Corresponding files: `lib/fmt/*`
+
+## 6.14. QDarkStyleSheet
+
+A dark stylesheet for Qt applications (Qt4, Qt5, PySide, PySide2,
+PyQt4, PyQt5, QtPy, PyQtGraph).
+
+  * Copyright: 2013–2018 by Colin Duquesnoy
+  * License for the code: MIT (see `doc/licenses/QDarkStyleSheet-MIT-CC-BY-4.txt`)
+  * License for the images: Creative Commons Attribution International
+    4.0 (see `doc/licenses/QDarkStyleSheet-MIT-CC-BY-4.txt`)
+  * URL: http://fmtlib.net/latest/
+  * Corresponding files: `lib/QDarkStyleSheet/*`
+
+Note: only the files necessary for building the C++ version of the
+stylesheet are included.

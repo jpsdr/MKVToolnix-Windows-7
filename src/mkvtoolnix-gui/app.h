@@ -67,6 +67,8 @@ public:
   void sendArgumentsToRunningInstance(QStringList const &args);
   void raiseAndActivateRunningInstance();
 
+  void maybeEnableDarkStyleSheet();
+
   void run();
 
   Util::NetworkAccessManager &networkAccessManager();

@@ -1,9 +1,12 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QFile>
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
+#include <QSettings>
+#include <QTextStream>
 #include <QThread>
 #include <QTranslator>
 
@@ -526,6 +529,28 @@ App::settingsBaseGroupName() {
 }
 
 void
+App::maybeEnableDarkStyleSheet() {
+#if defined(SYS_WINDOWS)
+  QSettings regKey{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat};
+
+  auto useLightTheme = regKey.value(Q("AppsUseLightTheme"));
+
+  if (useLightTheme.isValid() && useLightTheme.toBool())
+    return;
+
+  QFile f{Q(":qdarkstyle/style.qss")};
+
+  if (!f.exists()) {
+    qDebug() << "could not load dark style sheet from resources";
+    return;
+  }
+
+  f.open(QFile::ReadOnly | QFile::Text);
+  setStyleSheet(QTextStream{&f}.readAll());
+#endif  // SYS_WINDOWS
+}
+
+void
 App::run() {
   if (!parseCommandLineArguments(App::arguments()))
     return;
@@ -533,6 +558,8 @@ App::run() {
   // Change directory after processing the command line arguments so
   // that relative file names are resolved correctly.
   QDir::setCurrent(QDir::homePath());
+
+  maybeEnableDarkStyleSheet();
 
   auto mainWindow = std::make_unique<MainWindow>();
   mainWindow->show();
