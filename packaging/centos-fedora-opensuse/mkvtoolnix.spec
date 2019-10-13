@@ -22,22 +22,13 @@ BuildRequires: boost-devel >= 1.46.0
 %endif
 
 %if 0%{?suse_version}
-BuildRequires: gettext-tools libqt5-qtbase-devel, libqt5-qtmultimedia-devel, libxslt-tools, docbook-xsl-stylesheets, googletest-devel
-%if %{suse_version} >= 1500
-BuildRequires: ruby2.5-rubygem-rake-12_0
-%else
-BuildRequires: ruby2.4-rubygem-rake
-%endif
+BuildRequires: gettext-tools libqt5-qtbase-devel, libqt5-qtmultimedia-devel, libxslt-tools, docbook-xsl-stylesheets, googletest-devel, ruby2.5-rubygem-rake-12_0, gcc7-c++
 %else
 BuildRequires: gettext-devel, qt5-qtbase-devel, qt5-qtmultimedia-devel, libxslt, docbook-style-xsl, gtest-devel, fmt-devel
 %endif
 
-%if 0%{?suse_version}
-BuildRequires: gcc7-c++
-%endif
-
 %if 0%{?fedora}
-BuildRequires: gcc-c++ >= 4.9.0, rubypick, pugixml-devel, rubygem-drake, json-devel >= 2
+BuildRequires: gcc-c++ >= 7, rubypick, pugixml-devel, rubygem-drake, json-devel >= 2
 %endif
 
 %if 0%{?suse_version}
