@@ -76,7 +76,7 @@ system(std::string const &command) {
 }
 
 bfs::path
-get_current_exe_path(std::string const &argv0) {
+get_current_exe_path([[maybe_unused]] std::string const &argv0) {
 #if defined(SYS_APPLE)
   std::string file_name;
   file_name.resize(4000);
