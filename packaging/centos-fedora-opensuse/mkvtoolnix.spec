@@ -15,7 +15,7 @@ BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-d
 %if 0%{?rhel}
 BuildRequires: rubygem-drake
 %if 0%{?rhel} <= 7
-BuildRequires: devtoolset-7-gcc-c++
+BuildRequires: devtoolset-8-gcc-c++
 %endif
 %else
 BuildRequires: boost-devel >= 1.46.0
@@ -66,8 +66,8 @@ export CXXFLAGS="%{optflags}"
 unset CONFIGURE_ARGS
 
 %if 0%{?rhel} && 0%{?rhel} <= 7
-export CC=/opt/rh/devtoolset-7/root/bin/gcc
-export CXX=/opt/rh/devtoolset-7/root/bin/g++
+export CC=/opt/rh/devtoolset-8/root/bin/gcc
+export CXX=/opt/rh/devtoolset-8/root/bin/g++
 export CONFIGURE_ARGS="--with-boost=/opt/boost/boost_1_69_0"
 %endif
 
