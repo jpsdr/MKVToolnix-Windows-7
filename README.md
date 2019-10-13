@@ -80,13 +80,14 @@ In order to compile MKVToolNix, you need a couple of libraries. Most of
 them should be available pre-compiled for your distribution. The
 programs and libraries you absolutely need are:
 
-- A C++ compiler that supports several features of the C++11 and C++14
-  standards: initializer lists, range-based `for` loops, right angle
-  brackets, the `auto` keyword, lambda functions, the `nullptr`
-  keyword, tuples, alias declarations, `std::make_unique()`, digit
-  separators, binary literals, generic lambdas, user-defined literals
-  for `std::string`. Others may be needed, too. For GCC this means at
-  least v5.x; for clang v3.4 or later.
+- A C++ compiler that supports several features of the C++11, C++14
+  and C++17 standards: initializer lists, range-based `for` loops,
+  right angle brackets, the `auto` keyword, lambda functions, the
+  `nullptr` keyword, tuples, alias declarations, `std::make_unique()`,
+  digit separators, binary literals, generic lambdas, user-defined
+  literals for `std::string`, `[[maybe_unused]]` attribute, structured
+  bindings. Others may be needed, too. For GCC this means at least
+  v7; for clang v4 or later.
 
 - [libOgg](http://downloads.xiph.org/releases/ogg/) and
   [libVorbis](http://downloads.xiph.org/releases/vorbis/) for access to Ogg/OGM

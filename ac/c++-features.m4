@@ -375,8 +375,66 @@ using namespace std::string_literals;
   fi
 ])
 
-dnl AC_DEFUN([AX_CXX14_DEF_NAME],[
-dnl   AC_CACHE_CHECK([for support for C++14 feature "human"], [ax_cv_cxx14_def_name],[
+AC_DEFUN([AX_CXX17_ATTRIBUTE_MAYBE_UNUSED],[
+  AC_CACHE_CHECK([for support for C++17 feature "attribute 'maybe_unused'"], [ax_cv_cxx17_attribute_maybe_unused],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [
+int testme([[maybe_unused]] int the_var) {
+  return 42;
+}
+      ],
+      [return testme(54);],
+      [ax_cv_cxx17_attribute_maybe_unused="yes"],
+      [ax_cv_cxx17_attribute_maybe_unused="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx17_attribute_maybe_unused" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * attribute 'maybe_unused' (C++17)"
+  fi
+])
+
+AC_DEFUN([AX_CXX17_STRUCTURED_BINDINGS],[
+  AC_CACHE_CHECK([for support for C++17 feature "structured bindings"], [ax_cv_cxx17_structured_bindings],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [
+#include <utility>
+std::pair<int, char> testme() {
+  return std::make_pair(42, '!');
+}
+      ],
+      [
+auto const &[the_int, the_char] = testme();
+return the_int;
+      ],
+      [ax_cv_cxx17_structured_bindings="yes"],
+      [ax_cv_cxx17_structured_bindings="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx17_structured_bindings" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * structured bindings (C++17)"
+  fi
+])
+
+dnl AC_DEFUN([AX_CXX17_DEF_NAME],[
+dnl   AC_CACHE_CHECK([for support for C++17 feature "human"], [ax_cv_cxx17_def_name],[
 dnl
 dnl     CXXFLAGS_SAVED=$CXXFLAGS
 dnl     CXXFLAGS="$CXXFLAGS $STD_CXX"
@@ -386,15 +444,15 @@ dnl     AC_LANG_PUSH(C++)
 dnl     AC_TRY_COMPILE(
 dnl       [],
 dnl       [],
-dnl       [ax_cv_cxx14_def_name="yes"],
-dnl       [ax_cv_cxx14_def_name="no"])
+dnl       [ax_cv_cxx17_def_name="yes"],
+dnl       [ax_cv_cxx17_def_name="no"])
 dnl     AC_LANG_POP
 dnl
 dnl     CXXFLAGS="$CXXFLAGS_SAVED"
 dnl   ])
 dnl
-dnl   if ! test x"$ax_cv_cxx14_def_name" = xyes ; then
-dnl     missing_cxx_features="$missing_cxx_features\n  * human (C++14)"
+dnl   if ! test x"$ax_cv_cxx17_def_name" = xyes ; then
+dnl     missing_cxx_features="$missing_cxx_features\n  * human (C++17)"
 dnl   fi
 dnl ])
 
@@ -412,6 +470,8 @@ AX_CXX14_DIGIT_SEPARATORS
 AX_CXX14_BINARY_LITERALS
 AX_CXX14_GENERIC_LAMBDAS
 AX_CXX14_USER_DEFINED_LITERALS_FOR_STD_STRING
+AX_CXX17_ATTRIBUTE_MAYBE_UNUSED
+AX_CXX17_STRUCTURED_BINDINGS
 
 if test x"$missing_cxx_features" != x ; then
   printf "The following features of the C++11/C++14 standards are not supported by $CXX:$missing_cxx_features\n"

@@ -11,6 +11,14 @@
   running the desired executable allow the use of relative file names. Fixes
   #2632.
 
+## Build system changes
+
+* A C++ compiler supporting the C++17 standard is now required (gcc 7 or newer, clang
+* build system: MKVToolNix now requires a C++ compiler that supports the
+  following features of the C++17 standard: "`[[maybe_unused]]` attribute",
+  "structured bindings". For the GNU Compiler Collection (gcc) this means v7
+  or newer; for clang it means v4 or newer.
+
 
 # Version 38.0.0 "The Silent Type" 2019-10-06
 
