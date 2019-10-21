@@ -535,7 +535,7 @@ App::maybeEnableDarkStyleSheet() {
 
   auto useLightTheme = regKey.value(Q("AppsUseLightTheme"));
 
-  if (useLightTheme.isValid() && useLightTheme.toBool())
+  if (!useLightTheme.isValid() || useLightTheme.toBool())
     return;
 
   QFile f{Q(":qdarkstyle/style.qss")};
