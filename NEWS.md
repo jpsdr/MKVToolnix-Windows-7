@@ -10,6 +10,8 @@
 * Linux AppImage: the AppImage will no longer change directories before
   running the desired executable allow the use of relative file names. Fixes
   #2632.
+* mkvmerge: attachments without a file name won't be ignored anymore. Part of
+  the fix of #2642.
 
 ## Build system changes
 

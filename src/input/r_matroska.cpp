@@ -864,7 +864,6 @@ kax_reader_c::handle_attachments(mm_io_c *io,
 
     if (   !matt->data->get_size()
         || matt->mime_type.empty()
-        || matt->name.empty()
         || (ATTACH_MODE_SKIP == attach_mode))
       continue;
 
