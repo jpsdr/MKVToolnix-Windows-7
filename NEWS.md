@@ -12,6 +12,8 @@
   #2632.
 * mkvmerge: attachments without a file name won't be ignored anymore. Part of
   the fix of #2642.
+* MKVToolNix GUI: header editor: attachments with an empty name element will
+  be shown as `<unnamed>` as originally intended. Part of the fix of #2642.
 
 ## Build system changes
 
