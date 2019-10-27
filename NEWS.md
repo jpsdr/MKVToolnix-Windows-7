@@ -17,7 +17,6 @@
 
 ## Build system changes
 
-* A C++ compiler supporting the C++17 standard is now required (gcc 7 or newer, clang
 * build system: MKVToolNix now requires a C++ compiler that supports the
   following features of the C++17 standard: "`[[maybe_unused]]` attribute",
   "structured bindings". For the GNU Compiler Collection (gcc) this means v7
