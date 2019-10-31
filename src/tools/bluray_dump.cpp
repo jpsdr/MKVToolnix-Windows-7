@@ -11,6 +11,7 @@
 #include "common/common_pch.h"
 
 #include "common/bluray/clpi.h"
+#include "common/bluray/disc_library.h"
 #include "common/bluray/index.h"
 #include "common/bluray/mpls.h"
 #include "common/command_line.h"
@@ -83,6 +84,15 @@ parse_mpls_file(std::string const &file_name) {
 }
 
 static void
+parse_disc_library_file(std::string const &file_name) {
+  auto disc_library = mtx::bluray::disc_library::locate_and_parse(file_name);
+  if (!disc_library)
+    mxerror("Disc library could no be parsed.\n");
+
+  disc_library->dump();
+}
+
+static void
 parse_file(std::string const &file_name) {
   if (boost::regex_search(file_name, boost::regex{"\\.clpi$", boost::regex::perl}))
     parse_clpi_file(file_name);
@@ -92,6 +102,9 @@ parse_file(std::string const &file_name) {
 
   else if (boost::regex_search(file_name, boost::regex{"index\\.bdmv", boost::regex::perl}))
     parse_index_file(file_name);
+
+  else if (boost::regex_search(file_name, boost::regex{"bdmt_[a-z]{3}\\.xml$", boost::regex::perl}))
+    parse_disc_library_file(file_name);
 
   else
     mxerror("Unknown/unsupported file format\n");
