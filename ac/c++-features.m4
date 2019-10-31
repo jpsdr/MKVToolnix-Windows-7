@@ -433,6 +433,29 @@ return the_int;
   fi
 ])
 
+AC_DEFUN([AX_CXX17_NESTED_NAMESPACE_DEFINITION],[
+  AC_CACHE_CHECK([for support for C++17 feature "nested namespace definition"], [ax_cv_cxx17_nested_namespace_definition],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [namespace A::B::C { int d; }],
+      [A::B::C::d = 1; return A::B::C::d;],
+      [ax_cv_cxx17_nested_namespace_definition="yes"],
+      [ax_cv_cxx17_nested_namespace_definition="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx17_nested_namespace_definition" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * nested namespace definition (C++17)"
+  fi
+])
+
 dnl AC_DEFUN([AX_CXX17_DEF_NAME],[
 dnl   AC_CACHE_CHECK([for support for C++17 feature "human"], [ax_cv_cxx17_def_name],[
 dnl
@@ -471,6 +494,7 @@ AX_CXX14_BINARY_LITERALS
 AX_CXX14_GENERIC_LAMBDAS
 AX_CXX14_USER_DEFINED_LITERALS_FOR_STD_STRING
 AX_CXX17_ATTRIBUTE_MAYBE_UNUSED
+AX_CXX17_NESTED_NAMESPACE_DEFINITION
 AX_CXX17_STRUCTURED_BINDINGS
 
 if test x"$missing_cxx_features" != x ; then

@@ -19,8 +19,8 @@
 
 * build system: MKVToolNix now requires a C++ compiler that supports the
   following features of the C++17 standard: "`[[maybe_unused]]` attribute",
-  "structured bindings". For the GNU Compiler Collection (gcc) this means v7
-  or newer; for clang it means v4 or newer.
+  "nested namespace definition", "structured bindings". For the GNU Compiler
+  Collection (gcc) this means v7 or newer; for clang it means v4 or newer.
 
 
 # Version 38.0.0 "The Silent Type" 2019-10-06

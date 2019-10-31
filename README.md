@@ -85,9 +85,9 @@ programs and libraries you absolutely need are:
   right angle brackets, the `auto` keyword, lambda functions, the
   `nullptr` keyword, tuples, alias declarations, `std::make_unique()`,
   digit separators, binary literals, generic lambdas, user-defined
-  literals for `std::string`, `[[maybe_unused]]` attribute, structured
-  bindings. Others may be needed, too. For GCC this means at least
-  v7; for clang v4 or later.
+  literals for `std::string`, `[[maybe_unused]]` attribute, nested
+  namespace definition, structured bindings. Others may be needed,
+  too. For GCC this means at least v7; for clang v4 or later.
 
 - [libOgg](http://downloads.xiph.org/releases/ogg/) and
   [libVorbis](http://downloads.xiph.org/releases/vorbis/) for access to Ogg/OGM
