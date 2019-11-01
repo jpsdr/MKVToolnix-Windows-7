@@ -11,6 +11,10 @@
 * MKVToolNix GUI: multiplexer: when adding a playlist from a Blu-ray disc, the
   title from the disc library meta data will be set as the new file title if
   the disc library meta data contains one & no title has been set yet.
+* MKVToolNix GUI: multiplexer: the automatically generated destination file
+  name will now be based on the file title if one is set at that point. This
+  works in conjunction with the title being said from the Blu-ray disc library
+  meta data.
 
 ## Bug fixes
 

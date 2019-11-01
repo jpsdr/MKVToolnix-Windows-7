@@ -1572,7 +1572,7 @@ Tab::setOutputFileNameMaybe(bool force) {
   else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested destination file name policy");
 
-  auto baseName              = QFileInfo{ m_config.m_firstInputFileName }.completeBaseName();
+  auto baseName              = m_config.m_title.isEmpty() ? QFileInfo{ m_config.m_firstInputFileName }.completeBaseName() : m_config.m_title;
   m_config.m_destinationAuto = generateUniqueOutputFileName(baseName, outputDir);
 
   ui->output->setText(m_config.m_destinationAuto);
