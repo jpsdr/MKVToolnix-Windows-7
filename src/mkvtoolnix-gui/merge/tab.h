@@ -17,6 +17,10 @@ class QLineEdit;
 class QMenu;
 class QTreeView;
 
+namespace mtx::bluray::disc_library {
+struct info_t;
+}
+
 namespace mtx { namespace gui { namespace Merge {
 
 namespace Ui {
@@ -321,6 +325,8 @@ protected:
   virtual QList<Attachment *> selectedAttachments() const;
   virtual void selectAttachments(QList<Attachment *> const &attachments);
   virtual boost::optional<QString> findExistingAttachmentFileName(QString const &fileName);
+  virtual AttachmentPtr prepareFileForAttaching(QString const &fileName, bool alwaysAdd);
+  virtual void addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const &info);
 
   virtual bool isReadyForMerging();
   virtual bool checkIfOverwritingIsOK();
@@ -344,6 +350,7 @@ protected:
   virtual void openFilesInMediaInfo(QStringList const &fileNames);
 
   virtual void addSegmentUIDFromFile(QLineEdit &lineEdit, bool append);
+  virtual void addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files);
 };
 
 }}}

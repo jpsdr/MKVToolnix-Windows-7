@@ -4,6 +4,10 @@
 
 * MKVToolNix GUI: Windows: added a dark mode that's enabled when Windows 10's
   dark mode is turned on.
+* MKVToolNix GUI: multiplexer: when adding a playlist from a Blu-ray disc, the
+  disc library meta data will be parsed, and the biggest thumbnail, if
+  present, will be added as a new attachment with name `cover.jpg` (extension
+  depends on thumbnail's extension). Implements #2644.
 
 ## Bug fixes
 

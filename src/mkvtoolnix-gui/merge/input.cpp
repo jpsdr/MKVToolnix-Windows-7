@@ -16,6 +16,7 @@
 #include <QThread>
 #include <QTimer>
 
+#include "common/bluray/disc_library.h"
 #include "common/extern_data.h"
 #include "common/iso639.h"
 #include "common/logger.h"
@@ -1230,9 +1231,24 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
     m_config.m_firstInputFileName = m_config.determineFirstInputFileName(identifiedFiles);
 
   setTitleMaybe(identifiedFiles);
+  addDataFromIdentifiedBlurayFiles(identifiedFiles);
   setOutputFileNameMaybe();
 
   m_config.verifyStructure();
+}
+
+void
+Tab::addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files) {
+  for (auto const &file : files) {
+    if (!file->m_isPlaylist)
+      continue;
+
+    auto info = mtx::bluray::disc_library::locate_and_parse_for_language(to_utf8(file->m_fileName), "eng");
+    if (!info)
+      continue;
+
+    addAttachmentsFromIdentifiedBluray(*info);
+  }
 }
 
 void

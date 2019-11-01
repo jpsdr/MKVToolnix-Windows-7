@@ -2,6 +2,7 @@
 
 #include <QMenu>
 
+#include "common/bluray/disc_library.h"
 #include "common/mime.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
@@ -207,21 +208,21 @@ Tab::onAttachmentStyleChanged(int newValue) {
   withSelectedAttachments([style](auto &attachment) { attachment.m_style = style; });
 }
 
-void
-Tab::addAttachments(QStringList const &fileNames) {
-  QList<AttachmentPtr> attachmentsToAdd;
-  for (auto &fileName : fileNames) {
-    auto info = QFileInfo{fileName};
-    if (info.size() > 0x7fffffff) {
-      Util::MessageBox::critical(this)
-        ->title(QY("Reading failed"))
-        .text(Q("%1 %2")
-              .arg(QY("The file (%1) is too big (%2).").arg(fileName).arg(Q(format_file_size(info.size()))))
-              .arg(QY("Only files smaller than 2 GiB are supported.")))
-        .exec();
-      continue;
-    }
+AttachmentPtr
+Tab::prepareFileForAttaching(QString const &fileName,
+                             bool alwaysAdd) {
+  auto info = QFileInfo{fileName};
+  if (info.size() > 0x7fffffff) {
+    Util::MessageBox::critical(this)
+      ->title(QY("Reading failed"))
+      .text(Q("%1 %2")
+            .arg(QY("The file (%1) is too big (%2).").arg(fileName).arg(Q(format_file_size(info.size()))))
+            .arg(QY("Only files smaller than 2 GiB are supported.")))
+      .exec();
+    return {};
+  }
 
+  if (!alwaysAdd) {
     auto existingFileName = findExistingAttachmentFileName(info.fileName());
     if (existingFileName) {
       auto const answer = Util::MessageBox::question(this)
@@ -235,11 +236,23 @@ Tab::addAttachments(QStringList const &fileNames) {
         .exec();
 
       if (answer == QMessageBox::No)
-        continue;
+        return {};
     }
+  }
 
-    attachmentsToAdd << std::make_shared<Attachment>(fileName);
-    attachmentsToAdd.back()->guessMIMEType();
+  auto attachment = std::make_shared<Attachment>(fileName);
+  attachment->guessMIMEType();
+
+  return attachment;
+}
+
+void
+Tab::addAttachments(QStringList const &fileNames) {
+  QList<AttachmentPtr> attachmentsToAdd;
+  for (auto &fileName : fileNames) {
+    auto attachment = prepareFileForAttaching(fileName, false);
+    if (attachment)
+      attachmentsToAdd << attachment;
   }
 
   m_attachmentsModel->addAttachments(attachmentsToAdd);
@@ -504,6 +517,31 @@ Tab::findExistingAttachmentFileName(QString const &fileName) {
   }
 
   return {};
+}
+
+void
+Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const &info) {
+  unsigned int maxWidth = 0;
+  bfs::path fileName;
+
+  for (auto const &thumbnail : info.m_thumbnails) {
+    if (thumbnail.m_width < maxWidth)
+      continue;
+
+    maxWidth = thumbnail.m_width;
+    fileName = thumbnail.m_file_name;
+  }
+
+  if (fileName.empty() || !bfs::exists(fileName))
+    return;
+
+  auto attachment = prepareFileForAttaching(Q(fileName.string()), true);
+  if (!attachment)
+    return;
+
+  attachment->m_name = Q("cover%2").arg(Q(fileName.extension().string()).toLower());
+
+  m_attachmentsModel->addAttachments(QList<AttachmentPtr>{} << attachment);
 }
 
 }}}
