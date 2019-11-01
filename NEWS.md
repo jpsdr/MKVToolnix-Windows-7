@@ -8,6 +8,9 @@
   disc library meta data will be parsed, and the biggest thumbnail, if
   present, will be added as a new attachment with name `cover.jpg` (extension
   depends on thumbnail's extension). Implements #2644.
+* MKVToolNix GUI: multiplexer: when adding a playlist from a Blu-ray disc, the
+  title from the disc library meta data will be set as the new file title if
+  the disc library meta data contains one & no title has been set yet.
 
 ## Bug fixes
 

@@ -1247,6 +1247,9 @@ Tab::addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files) {
     if (!info)
       continue;
 
+    if (!info->m_title.empty())
+      setTitleMaybe(Q(info->m_title));
+
     addAttachmentsFromIdentifiedBluray(*info);
   }
 }
