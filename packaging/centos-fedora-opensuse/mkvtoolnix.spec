@@ -127,6 +127,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %{_datadir}/icons/hicolor/*/*/*.png
 %{_datadir}/metainfo/*.xml
 %{_datadir}/mime/packages/*.xml
+%lang(bg) %{_datadir}/locale/bg/*/*.mo
 %lang(ca) %{_datadir}/locale/ca/*/*.mo
 %lang(cs) %{_datadir}/locale/cs/*/*.mo
 %lang(de) %{_datadir}/locale/de/*/*.mo
@@ -151,6 +152,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %lang(zh_CN) %{_datadir}/locale/zh_CN/*/*.mo
 %lang(zh_TW) %{_datadir}/locale/zh_TW/*/*.mo
 %{_datadir}/man/man1/*
+%{_datadir}/man/bg
 %{_datadir}/man/ca
 %{_datadir}/man/de
 %{_datadir}/man/es

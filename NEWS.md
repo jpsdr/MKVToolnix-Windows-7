@@ -15,6 +15,8 @@
   name will now be based on the file title if one is set at that point. This
   works in conjunction with the title being said from the Blu-ray disc library
   meta data.
+* translations: added a Bulgarian translation of the programs & the man pages
+  by Симеон Цветков (see `AUTHORS`).
 
 ## Bug fixes
 
