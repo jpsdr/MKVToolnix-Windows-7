@@ -1030,7 +1030,7 @@ qtmp4_reader_c::handle_4dashes_atom(qt_atom_t parent,
       data = read_string_atom(atom, 8);
   });
 
-  mxdebug_if(m_debug_headers, fmt::format("'----' content: name={0} mean={1} data={2}\n", name, mean, data));
+  mxdebug_if(m_debug_headers, fmt::format("{0}'----' content: name={1} mean={2} data={3}\n", space(2 * level + 1), name, mean, data));
 
   if (name == "iTunSMPB")
     parse_itunsmpb(data);
