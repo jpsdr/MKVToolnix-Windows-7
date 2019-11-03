@@ -79,3 +79,7 @@
 #define MP4AOT_SAOC            0x2b // Spatial Audio Object Coding
 #define MP4AOT_LD_SURROUND     0x2c // Low Delay MPEG Surround
 #define MP4AOT_USAC            0x2d // Unified Speech and Audio Coding
+
+// Atom data types for free-form data
+#define MP4ADT_JPEG 0x0d        // JPEG image
+#define MP4ADT_PNG  0x0e        // PNG image

@@ -17,6 +17,8 @@
   meta data.
 * translations: added a Bulgarian translation of the programs & the man pages
   by Симеон Цветков (see `AUTHORS`).
+* mkvmerge: MP4 reader: if present, cover art images (the
+  `meta.udta.ilist.covr` atom) will be converted into attachments.
 
 ## Bug fixes
 

@@ -461,6 +461,8 @@ private:
   bool m_timestamps_calculated{};
   boost::optional<uint64_t> m_duration;
 
+  uint64_t m_attachment_id{};
+
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 
   debugging_option_c
@@ -518,6 +520,7 @@ protected:
   virtual void handle_meta_atom(qt_atom_t parent, int level);
   virtual void handle_ilst_atom(qt_atom_t parent, int level);
   virtual void handle_4dashes_atom(qt_atom_t parent, int level);
+  virtual void handle_covr_atom(qt_atom_t parent, int level);
   virtual void handle_mvex_atom(qt_atom_t parent, int level);
   virtual void handle_trex_atom(qt_atom_t parent, int level);
   virtual void handle_moof_atom(qt_atom_t parent, int level, qt_atom_t const &moof_atom);

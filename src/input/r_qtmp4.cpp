@@ -996,6 +996,9 @@ qtmp4_reader_c::handle_ilst_atom(qt_atom_t parent,
   process_atom(parent, level, [&](qt_atom_t const &atom) {
     if (atom.fourcc == "----")
       handle_4dashes_atom(atom.to_parent(), level + 1);
+
+    else if (atom.fourcc == "covr")
+      handle_covr_atom(atom.to_parent(), level + 1);
   });
 }
 
@@ -1034,6 +1037,36 @@ qtmp4_reader_c::handle_4dashes_atom(qt_atom_t parent,
 
   if (name == "iTunSMPB")
     parse_itunsmpb(data);
+}
+
+void
+qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
+                                 int level) {
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
+    if (atom.fourcc != "data")
+      return;
+
+    size_t data_size = atom.size - atom.hsize;
+    if (data_size < 8)
+      return;
+
+    auto type = m_in->read_uint32_be();
+    m_in->skip(4);
+
+    auto attach_mode         = attachment_requested(m_attachment_id);
+
+    auto attachment          = std::make_shared<attachment_t>();
+
+    attachment->name         = fmt::format("cover.{}", type == MP4ADT_PNG ? "png" : "jpg");
+    attachment->mime_type    = fmt::format("image/{}", type == MP4ADT_PNG ? "png" : "jpeg");
+    attachment->data         = m_in->read(data_size);
+    attachment->ui_id        = m_attachment_id++;
+    attachment->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+    attachment->source_file  = m_ti.m_fname;
+
+    if (ATTACH_MODE_SKIP != attach_mode)
+      add_attachment(attachment);
+  });
 }
 
 void
@@ -1934,6 +1967,9 @@ qtmp4_reader_c::identify() {
                     dmx.codec.get_name(dmx.fourcc.description()),
                     info.get());
   }
+
+  for (auto &attachment : g_attachments)
+    id_result_attachment(attachment->ui_id, attachment->mime_type, attachment->data->get_size(), attachment->name, attachment->description, attachment->id);
 
   if (m_chapters)
     id_result_chapters(mtx::chapters::count_atoms(*m_chapters));
