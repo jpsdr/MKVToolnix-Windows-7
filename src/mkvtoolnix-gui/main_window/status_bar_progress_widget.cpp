@@ -140,7 +140,7 @@ StatusBarProgressWidget::mouseReleaseEvent(QMouseEvent *event) {
 
   acknowledgeWarnings->setText(QY("Acknowledge all &warnings"));
   acknowledgeErrors->setText(QY("Acknowledge all &errors"));
-  showJobQueue->setText(QY("Show job queue"));
+  showJobQueue->setText(QY("Show job queue && access job logs"));
   showJobOutput->setText(QY("Show job output"));
 
   acknowledgeWarnings->setEnabled(!!p->m_numWarnings);
