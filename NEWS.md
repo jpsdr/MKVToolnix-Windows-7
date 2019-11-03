@@ -36,6 +36,7 @@
   following features of the C++17 standard: "`[[maybe_unused]]` attribute",
   "nested namespace definition", "structured bindings". For the GNU Compiler
   Collection (gcc) this means v7 or newer; for clang it means v4 or newer.
+* Boost 1.60.0 or newer is now required.
 
 
 # Version 38.0.0 "The Silent Type" 2019-10-06

@@ -97,7 +97,7 @@ programs and libraries you absolutely need are:
 
 - [Boost](http://www.boost.org/) — Several of Boost's libraries are
   used: `RegEx`, `filesystem`, `system`, `math`, `operators`, `Range`,
-  `rational`, `variant`. At least v1.49.0 is required.
+  `rational`, `variant`. At least v1.60.0 is required.
 
 - [libxslt's xsltproc binary](http://xmlsoft.org/libxslt/) and
   [DocBook XSL stylesheets](https://sourceforge.net/projects/docbook/files/docbook-xsl/)
