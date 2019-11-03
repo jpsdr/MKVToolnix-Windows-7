@@ -13,7 +13,7 @@
 
 #include <QDir>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 namespace {
 
@@ -462,4 +462,4 @@ SourceFile::setupFromPreferences() {
   s_languageNamesPattern.clear();
 }
 
-}}}
+}

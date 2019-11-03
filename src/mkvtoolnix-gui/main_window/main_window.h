@@ -13,7 +13,7 @@ class QEvent;
 class QResizeEvent;
 class QShowEvent;
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class ToolBase;
 
@@ -139,4 +139,4 @@ protected:
   virtual std::pair<ToolBase *, QTabWidget *> currentSubWindowWidget();
 };
 
-}}
+}

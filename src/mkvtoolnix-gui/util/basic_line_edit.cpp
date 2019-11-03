@@ -6,7 +6,7 @@
 #include "common/list_utils.h"
 #include "mkvtoolnix-gui/util/basic_line_edit.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 using namespace mtx::gui;
 
@@ -87,4 +87,4 @@ BasicLineEdit::keyPressEvent(QKeyEvent *event) {
     QLineEdit::keyPressEvent(event);
 }
 
-}}}
+}

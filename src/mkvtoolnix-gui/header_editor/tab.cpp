@@ -53,7 +53,7 @@
 using namespace libmatroska;
 using namespace mtx::gui;
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 Tab::Tab(QWidget *parent,
          QString const &fileName)
@@ -839,4 +839,4 @@ Tab::isClosingOrReloadingOkIfModified(ModifiedConfirmationMode mode) {
   return answer == QMessageBox::Yes;
 }
 
-}}}
+}

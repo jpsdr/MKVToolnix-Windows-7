@@ -21,7 +21,7 @@ extern "C" {
 #include "common/mime.h"
 #include "common/mm_file_io.h"
 
-namespace mtx { namespace mime {
+namespace mtx::mime {
 
 namespace {
 
@@ -150,4 +150,4 @@ guess_type(std::string ext,
   return type;
 }
 
-}}                              // namespace mtx::mime
+}                              // namespace mtx::mime

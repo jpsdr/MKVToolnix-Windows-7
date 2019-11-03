@@ -11,7 +11,7 @@ class QDragEnterEvent;
 class QDragMoveEvent;
 class QDropEvent;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class BasicTreeViewPrivate;
 class BasicTreeView : public QTreeView {
@@ -49,4 +49,4 @@ protected:
   virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
-}}}
+}

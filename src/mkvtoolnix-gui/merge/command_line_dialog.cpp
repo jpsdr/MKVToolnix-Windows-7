@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 CommandLineDialog::CommandLineDialog(QWidget *parent,
                                      QStringList const &options,
@@ -67,4 +67,4 @@ CommandLineDialog::copyToClipboard() {
   QApplication::clipboard()->setText(ui->commandLine->toPlainText());
 }
 
-}}}
+}

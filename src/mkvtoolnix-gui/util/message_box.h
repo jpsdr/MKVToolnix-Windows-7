@@ -4,7 +4,7 @@
 
 #include <QMessageBox>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class MessageBox;
 class MessageBoxPrivate;
@@ -42,4 +42,4 @@ public:
   static MessageBoxPtr critical(QWidget *parent);
 };
 
-}}}
+}

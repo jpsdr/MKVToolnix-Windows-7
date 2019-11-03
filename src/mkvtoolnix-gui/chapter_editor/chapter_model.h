@@ -17,7 +17,7 @@ using ChapterPtr  = std::shared_ptr<libmatroska::KaxChapterAtom>;
 Q_DECLARE_METATYPE(EditionPtr)
 Q_DECLARE_METATYPE(ChapterPtr)
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 class ChapterModel: public QStandardItemModel {
   Q_OBJECT
@@ -84,4 +84,4 @@ public:
   static QString chapterNameForLanguage(libmatroska::KaxChapterAtom &chapter, std::string const &language);
 };
 
-}}}
+}

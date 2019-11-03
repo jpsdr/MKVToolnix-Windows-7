@@ -4,7 +4,7 @@
 
 class QStringList;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 // Container stuff
 template<typename Tstored, typename Tcontainer>
@@ -18,4 +18,4 @@ findPtr(Tstored *needle,
 std::vector<std::string> toStdStringVector(QStringList const &strings, int offset = 0);
 QStringList toStringList(std::vector<std::string> const &stdStrings, int offset = 0);
 
-}}}
+}

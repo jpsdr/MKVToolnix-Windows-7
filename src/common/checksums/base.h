@@ -17,7 +17,7 @@
 
 #include "common/checksums/base_fwd.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 class base_c {
 public:
@@ -52,4 +52,4 @@ public:
   virtual uint64_t get_result_as_uint() const = 0;
 };
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx::checksum

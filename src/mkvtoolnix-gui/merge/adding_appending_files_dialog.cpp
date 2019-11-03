@@ -7,7 +7,7 @@
 #include "mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -93,4 +93,4 @@ AddingAppendingFilesDialog::alwaysUseThisDecision()
   return ui->cbAlwaysUseThisDecision->isEnabled() && ui->cbAlwaysUseThisDecision->isChecked();
 }
 
-}}}
+}

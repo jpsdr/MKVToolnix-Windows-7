@@ -14,7 +14,7 @@ class QTabWidget;
 class QVariant;
 class QWidget;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 void setToolTip(QWidget *widget, QString const &toolTip);
 
@@ -38,4 +38,4 @@ void enableChildren(QObject *parent, bool enable);
 
 void addSegmentUIDFromFileToLineEdit(QWidget &parent, QLineEdit &lineEdit, bool append);
 
-}}}
+}

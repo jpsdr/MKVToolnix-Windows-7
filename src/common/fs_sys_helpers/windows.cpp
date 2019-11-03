@@ -25,7 +25,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/utf8.h"
 
-namespace mtx { namespace sys {
+namespace mtx::sys {
 
 int64_t
 get_current_time_millis() {
@@ -172,4 +172,4 @@ format_windows_message(uint64_t message_id) {
   return chomp(message);
 }
 
-}}
+}

@@ -17,7 +17,7 @@
 
 #include "common/hevc_types.h"
 
-namespace mtx { namespace hevc {
+namespace mtx::hevc {
 
 struct par_extraction_t {
   memory_cptr new_hevcc;
@@ -37,4 +37,4 @@ par_extraction_t extract_par(memory_cptr const &buffer);
 bool is_fourcc(const char *fourcc);
 memory_cptr hevcc_to_nalus(const unsigned char *buffer, size_t size);
 
-}}                              // namespace mtx::hevc
+}                              // namespace mtx::hevc

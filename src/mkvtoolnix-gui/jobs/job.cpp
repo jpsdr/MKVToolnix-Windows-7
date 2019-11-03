@@ -21,7 +21,7 @@
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 static uint64_t s_next_id = 0;
 
@@ -506,4 +506,4 @@ Job::maybeRemoveOutputFile() {
     QFile::remove(fileName);
 }
 
-}}}
+}

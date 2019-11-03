@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace bluray { namespace index {
+namespace mtx::bluray::index {
 
 struct first_playback_t {
   unsigned int object_type{};
@@ -79,4 +79,4 @@ protected:
   virtual void parse_title();
 };
 
-}}}                             // namespace mtx::bluray::index
+}                             // namespace mtx::bluray::index

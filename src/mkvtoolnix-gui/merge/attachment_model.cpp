@@ -8,7 +8,7 @@
 #include "mkvtoolnix-gui/merge/attachment_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 AttachmentModel::AttachmentModel(QObject *parent)
   : QStandardItemModel{parent}
@@ -247,4 +247,4 @@ AttachmentModel::moveAttachmentsUpOrDown(QList<Attachment *> attachments,
   }
 }
 
-}}}
+}

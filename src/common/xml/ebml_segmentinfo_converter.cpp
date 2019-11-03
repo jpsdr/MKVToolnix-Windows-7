@@ -21,7 +21,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace xml {
+namespace mtx::xml {
 
 ebml_segmentinfo_converter_c::ebml_segmentinfo_converter_c()
 {
@@ -101,4 +101,4 @@ ebml_segmentinfo_converter_c::parse_file(std::string const &file_name,
   return kax_info_cptr{};
 }
 
-}}
+}

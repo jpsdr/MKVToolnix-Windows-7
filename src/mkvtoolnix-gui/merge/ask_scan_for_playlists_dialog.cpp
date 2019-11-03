@@ -10,7 +10,7 @@
 #include <QAbstractButton>
 #include <QPushButton>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -72,4 +72,4 @@ AskScanForPlaylistsDialog::ask(SourceFile const &file,
   return result == QDialog::Accepted;
 }
 
-}}}
+}

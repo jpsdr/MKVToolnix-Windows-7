@@ -5,7 +5,7 @@
 #include <QString>
 #include <QDialog>
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 namespace Ui {
 class JobSettingsDialog;
@@ -34,4 +34,4 @@ public slots:
   void enableOkButton(QString const &fileName);
 };
 
-}}}
+}

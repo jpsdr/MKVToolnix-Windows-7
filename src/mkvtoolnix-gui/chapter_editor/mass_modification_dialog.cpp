@@ -14,7 +14,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 using namespace mtx::gui;
 
@@ -163,4 +163,4 @@ MassModificationDialog::verifyOptions() {
   Util::buttonForRole(m_ui->buttonBox)->setEnabled(isMultiplyByValid() && isShiftByValid());
 }
 
-}}}
+}

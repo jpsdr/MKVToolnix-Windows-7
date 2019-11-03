@@ -32,7 +32,7 @@
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace avc {
+namespace mtx::avc {
 
 static auto s_debug_fix_bitstream_timing_info = debugging_option_c{"avc_parser|fix_bitstream_timing_info"};
 static auto s_debug_remove_bistream_ar_info   = debugging_option_c{"avc_parser|remove_bitstream_ar_info"};
@@ -688,4 +688,4 @@ avcc_to_nalus(const unsigned char *buffer,
   return memory_cptr{};
 }
 
-}}
+}

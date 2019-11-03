@@ -46,7 +46,7 @@
 // 232 | 00         | 3:? 5:summary_info
 // 240 | f6b3       | header_checksum
 
-namespace mtx { namespace truehd {
+namespace mtx::truehd {
 
 int const frame_t::ms_sampling_rates[16]   = { 48000, 96000, 192000, 0, 0, 0, 0, 0, 44100, 88200, 176400, 0, 0, 0, 0, 0 };
 uint8_t const frame_t::ms_mlp_channels[32] = {     1,     2,      3, 4, 3, 4, 5, 3,     4,     5,      4, 5, 6, 4, 5, 4,
@@ -337,4 +337,4 @@ remove_dialog_normalization_gain(unsigned char *buf,
 }
 
 
-}}
+}

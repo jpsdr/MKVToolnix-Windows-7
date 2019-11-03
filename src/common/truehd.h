@@ -21,7 +21,7 @@
 #include "common/byte_buffer.h"
 #include "common/codec.h"
 
-namespace mtx { namespace truehd {
+namespace mtx::truehd {
 
 static constexpr uint32_t TRUEHD_SYNC_WORD = 0xf8726fba;
 static constexpr uint32_t MLP_SYNC_WORD    = 0xf8726fbb;
@@ -123,4 +123,4 @@ using parser_cptr = std::shared_ptr<parser_c>;
 
 void remove_dialog_normalization_gain(unsigned char *buf, std::size_t size);
 
-}}
+}

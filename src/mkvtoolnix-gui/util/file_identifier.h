@@ -8,7 +8,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class FileIdentifierPrivate;
 class FileIdentifier: public QObject {
@@ -64,4 +64,4 @@ protected:
   static QString cacheCategory();
 };
 
-}}}
+}

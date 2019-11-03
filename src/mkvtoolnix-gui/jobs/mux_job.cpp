@@ -18,7 +18,7 @@
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 using namespace mtx::gui;
 
@@ -250,4 +250,4 @@ MuxJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
     variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(sourceFile->m_fileName);
 }
 
-}}}
+}

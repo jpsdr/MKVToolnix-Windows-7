@@ -6,7 +6,7 @@
 #include "mkvtoolnix-gui/util/combo_box_base_p.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 ComboBoxBasePrivate::~ComboBoxBasePrivate() {
 }
@@ -155,4 +155,4 @@ ComboBoxBase::mergeCommonAndAdditionalItems(StringPairVector const &commonItems,
   return items;
 }
 
-}}}
+}

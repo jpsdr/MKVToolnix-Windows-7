@@ -9,7 +9,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 LanguageComboBox::LanguageComboBox(QWidget *parent)
   : ComboBoxBase{parent}
@@ -79,4 +79,4 @@ LanguageComboBox::setup(bool withEmpty,
   return *this;
 }
 
-}}}
+}

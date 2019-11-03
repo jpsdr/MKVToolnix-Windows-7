@@ -9,7 +9,7 @@
 class QString;
 class QTreeView;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class HeaderViewManagerPrivate;
 class HeaderViewManager : public QObject {
@@ -48,4 +48,4 @@ protected:
   QString symbolicColumnName(int logicalIndex);
 };
 
-}}}
+}

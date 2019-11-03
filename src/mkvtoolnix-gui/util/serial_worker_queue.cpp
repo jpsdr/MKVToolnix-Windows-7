@@ -9,7 +9,7 @@
 #include "mkvtoolnix-gui/util/runnable.h"
 #include "mkvtoolnix-gui/util/serial_worker_queue.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 using namespace mtx::gui;
 
@@ -118,4 +118,4 @@ SerialWorkerQueue::create() {
   return { thread, worker };
 }
 
-}}}
+}

@@ -31,7 +31,7 @@ namespace libmatroska {
   class KaxChapterAtom;
 }
 
-namespace mtx { namespace chapters {
+namespace mtx::chapters {
 
 using kax_cptr = std::shared_ptr<libmatroska::KaxChapters>;
 
@@ -97,4 +97,4 @@ std::string format_name_template(std::string const &name_template, int chapter_n
 
 void fix_country_codes(libebml::EbmlMaster &chapters);
 
-}}
+}

@@ -11,7 +11,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/info/element_highlighter.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 using namespace mtx::gui;
 
@@ -244,4 +244,4 @@ ElementHighlighter::highlightsForElement(memory_c const &mem) {
   return highlights;
 }
 
-}}}
+}

@@ -19,7 +19,7 @@
 #include "common/list_utils.h"
 #include "common/mm_file_io.h"
 
-namespace mtx { namespace bluray { namespace index {
+namespace mtx::bluray::index {
 
 void
 first_playback_t::dump()
@@ -289,4 +289,4 @@ parser_c::get_index()
   return p_ptr->m_index;
 }
 
-}}}
+}

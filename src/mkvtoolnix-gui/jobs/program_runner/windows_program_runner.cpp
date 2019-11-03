@@ -13,7 +13,7 @@
 #include "mkvtoolnix-gui/jobs/program_runner/windows_program_runner.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 WindowsProgramRunner::WindowsProgramRunner()
   : ProgramRunner{}
@@ -97,6 +97,6 @@ WindowsProgramRunner::defaultAudioFileName()
   return Q("<MTX_INSTALLATION_DIRECTORY>\\data\\sounds\\finished-1.ogg");
 }
 
-}}}
+}
 
 #endif  // SYS_WINDOWS

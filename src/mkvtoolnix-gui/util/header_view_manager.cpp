@@ -17,7 +17,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/settings_names.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class HeaderViewManagerPrivate {
   friend class HeaderViewManager;
@@ -278,4 +278,4 @@ HeaderViewManager::symbolicColumnName(int logicalIndex) {
   return p_func()->treeView->model()->headerData(logicalIndex, Qt::Horizontal, Util::SymbolicNameRole).toString();
 }
 
-}}}
+}

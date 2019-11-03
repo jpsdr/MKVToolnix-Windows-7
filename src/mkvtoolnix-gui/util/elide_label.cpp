@@ -12,7 +12,7 @@
 #include "mkvtoolnix-gui/util/elide_label.h"
 #include "mkvtoolnix-gui/util/font.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class ElideLabelPrivate {
 private:
@@ -128,4 +128,4 @@ ElideLabel::updateLabel() {
   update();
 }
 
-}}}
+}

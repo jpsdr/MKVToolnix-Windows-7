@@ -22,7 +22,7 @@
 #define INDENT_COLUMN_OPTION_DESCRIPTION 30
 #define INDENT_COLUMN_SECTION_HEADER      1
 
-namespace mtx { namespace cli {
+namespace mtx::cli {
 
 parser_c::option_t::option_t()
   : m_needs_arg{}
@@ -219,4 +219,4 @@ parser_c::run_hooks(parser_c::hook_type_e hook_type) {
   return true;
 }
 
-}}
+}

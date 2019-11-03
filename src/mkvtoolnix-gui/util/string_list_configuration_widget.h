@@ -9,7 +9,7 @@
 class QListWidget;
 class QListWidgetItem;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 namespace Ui {
 class StringListConfigurationWidget;
@@ -51,4 +51,4 @@ protected:
   void setupConnections();
 };
 
-}}}
+}

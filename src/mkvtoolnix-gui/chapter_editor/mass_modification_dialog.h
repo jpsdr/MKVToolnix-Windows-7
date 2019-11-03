@@ -5,7 +5,7 @@
 #include <QDialog>
 #include <QFlags>
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
 class MassModificationDialog;
@@ -53,6 +53,6 @@ protected:
   bool isMultiplyByValid() const;
 };
 
-}}}
+}
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::ChapterEditor::MassModificationDialog::Actions)

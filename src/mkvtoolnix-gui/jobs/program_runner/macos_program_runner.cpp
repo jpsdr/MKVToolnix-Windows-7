@@ -5,7 +5,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/program_runner/macos_program_runner.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 MacOSProgramRunner::MacOSProgramRunner()
   : ProgramRunner{}
@@ -21,6 +21,6 @@ MacOSProgramRunner::defaultAudioFileName()
   return Q("<MTX_INSTALLATION_DIRECTORY>/sounds/finished-1.ogg");
 }
 
-}}}
+}
 
 #endif  // SYS_APPLE

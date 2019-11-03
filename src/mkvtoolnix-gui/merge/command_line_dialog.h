@@ -5,7 +5,7 @@
 #include <QAction>
 #include <QDialog>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 namespace Ui {
 class CommandLineDialog;
@@ -28,4 +28,4 @@ public slots:
   void copyToClipboard();
 };
 
-}}}
+}

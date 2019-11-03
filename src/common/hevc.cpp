@@ -28,7 +28,7 @@
 #include "common/hevc.h"
 #include "common/hevcc.h"
 
-namespace mtx { namespace hevc {
+namespace mtx::hevc {
 
 static const struct {
   int numerator, denominator;
@@ -933,4 +933,4 @@ hevcc_to_nalus(const unsigned char *buffer,
   return memory_cptr{};
 }
 
-}}                              // namespace mtx::hevc
+}                              // namespace mtx::hevc

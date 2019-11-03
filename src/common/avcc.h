@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace avc {
+namespace mtx::avc {
 
 struct sps_info_t;
 struct pps_info_t;
@@ -42,4 +42,4 @@ public:
   static avcc_c unpack(memory_cptr const &mem);
 };
 
-}}
+}

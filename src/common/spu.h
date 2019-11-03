@@ -17,9 +17,9 @@
 
 #include "common/timestamp.h"
 
-namespace mtx { namespace spu {
+namespace mtx::spu {
 
 timestamp_c get_duration(unsigned char const *data, std::size_t const buf_size);
 void set_duration(unsigned char *data, std::size_t const buf_size, timestamp_c const &duration);
 
-}}
+}

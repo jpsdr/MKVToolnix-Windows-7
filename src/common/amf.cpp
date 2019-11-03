@@ -17,7 +17,7 @@
 #include "common/math.h"
 #include "common/mm_io_x.h"
 
-namespace mtx { namespace amf {
+namespace mtx::amf {
 
 script_parser_c::script_parser_c(memory_cptr const &mem)
   : m_data_mem{mem}
@@ -143,4 +143,4 @@ script_parser_c::parse() {
   return true;
 }
 
-}}
+}

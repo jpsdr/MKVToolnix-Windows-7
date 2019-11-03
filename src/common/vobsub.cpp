@@ -13,7 +13,7 @@
 
 #include "common/vobsub.h"
 
-namespace mtx { namespace vobsub {
+namespace mtx::vobsub {
 
 std::string
 create_default_index(unsigned int width,
@@ -78,4 +78,4 @@ create_default_index(unsigned int width,
                      width, height, palette_to_use);
 }
 
-}}
+}

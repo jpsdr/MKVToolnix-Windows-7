@@ -14,7 +14,7 @@
 
 #include "common/logger/windows.h"
 
-namespace mtx { namespace log {
+namespace mtx::log {
 
 windows_debug_target_c::windows_debug_target_c()
   : target_c{}
@@ -35,4 +35,4 @@ windows_debug_target_c::activate() {
   s_default_logger = std::static_pointer_cast<target_c>(std::make_shared<windows_debug_target_c>());
 }
 
-}}
+}

@@ -7,7 +7,7 @@
 
 #include "mkvtoolnix-gui/merge/enums.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 struct MkvmergeOptionBuilder {
   QStringList options;
@@ -17,4 +17,4 @@ struct MkvmergeOptionBuilder {
   MkvmergeOptionBuilder() {}
 };
 
-}}}
+}

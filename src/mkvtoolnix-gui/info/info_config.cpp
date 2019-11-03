@@ -5,7 +5,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/info/info_config.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 using namespace mtx::gui;
 
@@ -137,4 +137,4 @@ InfoConfig::settingsType() {
   return Q("InfoConfig");
 }
 
-}}}
+}

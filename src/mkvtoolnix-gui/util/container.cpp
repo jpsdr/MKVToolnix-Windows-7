@@ -5,7 +5,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/container.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 std::vector<std::string>
 toStdStringVector(QStringList const &strings,
@@ -41,4 +41,4 @@ toStringList(std::vector<std::string> const &stdStrings,
   return strings;
 }
 
-}}}
+}

@@ -10,7 +10,7 @@
 using namespace libmatroska;
 using namespace mtx::gui;
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 NameModel::NameModel(QObject *parent)
   : QStandardItemModel{parent}
@@ -189,4 +189,4 @@ NameModel::dropMimeData(QMimeData const *data,
   return result;
 }
 
-}}}
+}

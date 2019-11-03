@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace sys {
+namespace mtx::sys {
 
 int64_t get_current_time_millis();
 
@@ -58,4 +58,4 @@ enum class unicode_normalization_form_e {
 std::string normalize_unicode_string(std::string const &src, unicode_normalization_form_e form);
 #endif  // SYS_APPLE
 
-}}
+}

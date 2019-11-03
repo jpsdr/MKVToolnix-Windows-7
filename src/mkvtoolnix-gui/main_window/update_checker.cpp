@@ -13,7 +13,7 @@
 #include "mkvtoolnix-gui/main_window/update_checker.h"
 #include "mkvtoolnix-gui/util/network_access_manager.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class UpdateCheckerPrivate {
   friend class UpdateChecker;
@@ -141,6 +141,6 @@ UpdateChecker::parseXml(QByteArray const &content) {
   return {};
 }
 
-}}
+}
 
 #endif  // HAVE_UPDATE_CHECK

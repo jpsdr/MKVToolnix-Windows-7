@@ -6,7 +6,7 @@
 
 class QEvent;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class TextDisplayDialogPrivate;
 class TextDisplayDialog : public QDialog {
@@ -37,4 +37,4 @@ public slots:
   virtual void copyToClipboard();
 };
 
-}}}
+}

@@ -15,7 +15,7 @@
 
 #include "common/bit_reader.h"
 
-namespace mtx { namespace bits {
+namespace mtx::bits {
 
 class writer_c {
 private:
@@ -159,4 +159,4 @@ protected:
 };
 using writer_cptr = std::shared_ptr<writer_c>;
 
-}}
+}

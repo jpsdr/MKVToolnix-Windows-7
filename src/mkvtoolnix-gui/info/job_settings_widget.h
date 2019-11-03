@@ -5,7 +5,7 @@
 #include <QString>
 #include <QWidget>
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 namespace Ui {
 class JobSettingsWidget;
@@ -40,4 +40,4 @@ public slots:
   void emitFileNameChangeSignal(QString const &fileName);
 };
 
-}}}
+}

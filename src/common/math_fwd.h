@@ -15,8 +15,8 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace math {
+namespace mtx::math {
 
-}}
+}
 
 using int64_rational_c = boost::rational<int64_t>;

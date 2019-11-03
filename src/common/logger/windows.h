@@ -14,7 +14,7 @@
 
 #include "common/logger.h"
 
-namespace mtx { namespace log {
+namespace mtx::log {
 
 class windows_debug_target_c: public target_c {
 public:
@@ -28,4 +28,4 @@ public:
   static void activate();
 };
 
-}}
+}

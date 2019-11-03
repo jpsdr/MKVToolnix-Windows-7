@@ -15,7 +15,7 @@
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class FileIdentificationWorkerPrivate {
   friend class FileIdentificationWorker;
@@ -322,4 +322,4 @@ FileIdentificationThread::continueByScanningPlaylists(QFileInfoList const &fileN
   QMetaObject::invokeMethod(&worker(), "continueByScanningPlaylists", Q_ARG(QFileInfoList, fileNames));
 }
 
-}}}
+}

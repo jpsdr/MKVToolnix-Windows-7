@@ -12,7 +12,7 @@
 #include "mkvtoolnix-gui/util/json.h"
 #include "mkvtoolnix-gui/util/json_config_file.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 namespace {
 
@@ -162,4 +162,4 @@ JsonConfigFile::childKeys() {
   return m_currentGroup.top()->m_data.keys();
 }
 
-}}}
+}

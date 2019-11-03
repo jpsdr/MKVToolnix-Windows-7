@@ -15,7 +15,7 @@
 
 #include "common/fs_sys_helpers.h"
 
-namespace mtx { namespace sys {
+namespace mtx::sys {
 
 static bfs::path s_current_executable_path;
 
@@ -29,4 +29,4 @@ determine_path_to_current_executable(std::string const &argv0) {
   s_current_executable_path = get_current_exe_path(argv0);
 }
 
-}}
+}

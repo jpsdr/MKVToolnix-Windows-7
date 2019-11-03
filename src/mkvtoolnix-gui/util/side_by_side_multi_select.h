@@ -8,7 +8,7 @@
 
 class QListWidget;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 namespace Ui {
 class SideBySideMultiSelect;
@@ -58,4 +58,4 @@ protected:
   void moveSelectedListWidgetItems(QListWidget &from, QListWidget &to);
 };
 
-}}}
+}

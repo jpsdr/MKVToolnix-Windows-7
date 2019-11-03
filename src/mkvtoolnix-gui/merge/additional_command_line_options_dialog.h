@@ -8,7 +8,7 @@ class QCheckBox;
 class QGridLayout;
 class QLineEdit;
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 namespace Ui {
 class AdditionalCommandLineOptionsDialog;
@@ -50,4 +50,4 @@ private:
   void add(QString const &title, bool requiresValue, QGridLayout *layout, QStringList const &description);
 };
 
-}}}
+}

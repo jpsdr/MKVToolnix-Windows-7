@@ -16,7 +16,7 @@
 #include "mkvtoolnix-gui/util/json.h"
 #include "mkvtoolnix-gui/util/string.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 DeferredRegularExpression::DeferredRegularExpression(QString const &pattern,
                                                      QRegularExpression::PatternOptions options)
@@ -284,4 +284,4 @@ replaceMtxVariableWithApplicationDirectory(QString string) {
   return string.replace(Q("<MTX_INSTALLATION_DIRECTORY>"), applicationDirectory);
 }
 
-}}}
+}

@@ -14,7 +14,7 @@
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class PrefsRunProgramWidgetPrivate {
   friend class PrefsRunProgramWidget;
@@ -441,4 +441,4 @@ PrefsRunProgramWidget::validate()
   return cfg->m_active ? cfg->validate() : QString{};
 }
 
-}}
+}

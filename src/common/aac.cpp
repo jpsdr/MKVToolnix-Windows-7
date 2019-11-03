@@ -24,7 +24,7 @@
 #include "common/mp4.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace aac {
+namespace mtx::aac {
 
 // See ISO/IEC 14496-3, table 1.16 — Sampling Frequency Index
 static unsigned int const s_sampling_freq[16] = {
@@ -1230,4 +1230,4 @@ operator ==(const header_c &h1,
       && (h1.config.profile     == h2.config.profile);
 }
 
-}} // namespace mtx::aac
+} // namespace mtx::aac

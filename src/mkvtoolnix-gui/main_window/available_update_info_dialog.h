@@ -10,7 +10,7 @@
 #include "common/xml/xml.h"
 #include "mkvtoolnix-gui/main_window/update_checker.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Ui {
 class AvailableUpdateInfoDialog;
@@ -48,6 +48,6 @@ protected:
   static QString formattedCodename(QString const &codename, QString const &artist);
 };
 
-}}
+}
 
 #endif  // HAVE_UPDATE_CHECK

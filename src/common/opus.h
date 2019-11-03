@@ -18,7 +18,7 @@
 #include "common/strings/formatting.h"
 #include "common/timestamp.h"
 
-namespace mtx { namespace opus {
+namespace mtx::opus {
 
 class exception: public mtx::exception {
 public:
@@ -90,4 +90,4 @@ operator <<(std::ostream &out,
   return out;
 }
 
-}}
+}

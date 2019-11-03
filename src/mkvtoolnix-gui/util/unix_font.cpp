@@ -5,11 +5,11 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/font.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 QFont
 defaultUiFont() {
   return App::font();
 }
 
-}}}
+}

@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/gui_cli_parser.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class GuiCliParserPrivate {
   friend class GuiCliParser;
@@ -202,4 +202,4 @@ GuiCliParser::editHeaders()
   return p_func()->editHeaders;
 }
 
-}}
+}

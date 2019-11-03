@@ -20,7 +20,7 @@
 
 #include "common/date_time.h"
 
-namespace mtx { namespace date_time {
+namespace mtx::date_time {
 
 int64_t
 to_time_t(boost::posix_time::ptime const &pt) {
@@ -94,4 +94,4 @@ format_epoch_time_iso_8601(std::time_t const epoch_time,
   return result;
 }
 
-}}
+}

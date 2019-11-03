@@ -33,7 +33,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <QPainter>
 #include <QTimer>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 WaitingSpinnerWidget::WaitingSpinnerWidget(QWidget *parent,
                                            bool centerOnParent,
@@ -285,4 +285,4 @@ QColor WaitingSpinnerWidget::currentLineColor(int countDistance, int totalNrOfLi
     return color;
 }
 
-}}}
+}

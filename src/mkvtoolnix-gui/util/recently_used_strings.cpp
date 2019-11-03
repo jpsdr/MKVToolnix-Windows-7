@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/recently_used_strings.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class RecentlyUsedStringsPrivate {
   friend class RecentlyUsedStrings;
@@ -65,4 +65,4 @@ RecentlyUsedStrings::isEmpty()
   return p_func()->m_items.isEmpty();
 }
 
-}}}
+}

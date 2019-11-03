@@ -9,7 +9,7 @@
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/string.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 Process::Process(QString const &command,
                  QStringList const &args)
@@ -89,4 +89,4 @@ currentUserName() {
   return userName;
 }
 
-}}}
+}

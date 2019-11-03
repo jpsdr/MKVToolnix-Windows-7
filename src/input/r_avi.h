@@ -21,9 +21,9 @@
 #include "common/error.h"
 #include "input/subtitles.h"
 
-namespace mtx { namespace id {
+namespace mtx::id {
 class info_c;
-}}
+}
 
 class avc_es_video_packetizer_c;
 

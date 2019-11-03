@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/combo_box_base.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class CharacterSetComboBox: public ComboBoxBase {
   Q_OBJECT
@@ -21,4 +21,4 @@ public:
   virtual bool onlyShowOftenUsed() const override;
 };
 
-}}}
+}

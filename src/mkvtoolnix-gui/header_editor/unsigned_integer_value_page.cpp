@@ -5,7 +5,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -66,4 +66,4 @@ UnsignedIntegerValuePage::copyValueToElement() {
   static_cast<EbmlUInteger *>(m_element)->SetValue(m_leValue->text().toULongLong());
 }
 
-}}}
+}

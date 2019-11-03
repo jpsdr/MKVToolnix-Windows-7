@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/ini_config_file.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 IniConfigFile::IniConfigFile(QString const &fileName)
   : ConfigFile{fileName}
@@ -67,4 +67,4 @@ IniConfigFile::childKeys() {
   return m_settings->childKeys();
 }
 
-}}}
+}

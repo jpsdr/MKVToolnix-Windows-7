@@ -6,7 +6,7 @@
 
 #include <QDialog>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 namespace Ui {
 class AskScanForPlaylistsDialog;
@@ -24,4 +24,4 @@ public:
   bool ask(SourceFile const &file, unsigned int otherFiles);
 };
 
-}}}
+}

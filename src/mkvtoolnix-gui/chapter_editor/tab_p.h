@@ -2,7 +2,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 class TabPrivate {
   friend class Tab;
@@ -31,4 +31,4 @@ class TabPrivate {
   explicit TabPrivate(Tab &tab, QString const &pFileName);
 };
 
-}}}
+}

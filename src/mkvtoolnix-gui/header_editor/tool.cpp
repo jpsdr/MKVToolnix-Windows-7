@@ -20,7 +20,7 @@
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -276,4 +276,4 @@ Tool::nextPreviousWindowActionTexts()
   };
 }
 
-}}}
+}

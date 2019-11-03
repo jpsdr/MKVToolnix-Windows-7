@@ -27,7 +27,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace xml {
+namespace mtx::xml {
 
 ebml_chapters_converter_c::ebml_chapters_converter_c()
 {
@@ -232,4 +232,4 @@ ebml_chapters_converter_c::parse_file(std::string const &file_name,
   return mtx::chapters::kax_cptr{};
 }
 
-}}
+}

@@ -7,7 +7,7 @@
 
 // See https://docs.microsoft.com/en-us/windows/desktop/api/winbase/nf-winbase-setthreadexecutionstate
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class WindowsSleepInhibitorPrivate: public BasicSleepInhibitorPrivate {
 public:
@@ -68,4 +68,4 @@ WindowsSleepInhibitor::isInhibited()
   return !!p_func()->m_previousState;
 }
 
-}}}
+}

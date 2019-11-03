@@ -7,7 +7,7 @@
 #include <QList>
 #include <QStandardItemModel>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class AttachedFileModel;
 using AttachedFileModelPtr = std::shared_ptr<AttachedFileModel>;
@@ -51,4 +51,4 @@ protected:
   void setRowData(QList<QStandardItem *> const &items, Track const &attachedFiles);
 };
 
-}}}
+}

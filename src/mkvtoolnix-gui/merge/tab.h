@@ -21,7 +21,7 @@ namespace mtx::bluray::disc_library {
 struct info_t;
 }
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 namespace Ui {
 class Tab;
@@ -353,4 +353,4 @@ protected:
   virtual void addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files);
 };
 
-}}}
+}

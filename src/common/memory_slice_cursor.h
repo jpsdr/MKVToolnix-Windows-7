@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace mem {
+namespace mtx::mem {
 
 class slice_cursor_c {
 protected:
@@ -138,4 +138,4 @@ public:
   }
 };
 
-}}
+}

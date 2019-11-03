@@ -31,7 +31,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class KaxInfoPrivate: public mtx::kax_info::private_c {
 public:
@@ -246,4 +246,4 @@ KaxInfo::disableFrameInfo() {
   p->m_custom_element_post_processors.erase(KaxSimpleBlock::ClassInfos.GlobalId.GetValue());
 }
 
-}}}
+}

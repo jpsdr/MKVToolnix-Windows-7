@@ -7,7 +7,7 @@
 
 #include "mkvtoolnix-gui/info/element_highlighter.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 namespace Ui {
 class ElementViewerDialog;
@@ -50,4 +50,4 @@ protected:
   QString elementName() const;
 };
 
-}}}
+}

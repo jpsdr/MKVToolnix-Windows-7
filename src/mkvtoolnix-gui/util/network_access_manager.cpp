@@ -9,7 +9,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/network_access_manager.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 using namespace mtx::gui;
 
@@ -93,4 +93,4 @@ NetworkAccessManager::httpFinished() {
   reply->deleteLater();
 }
 
-}}}
+}

@@ -48,7 +48,7 @@
 #include "common/base64.h"
 #include "common/error.h"
 
-namespace mtx { namespace base64 {
+namespace mtx::base64 {
 
 static const char base64_encoding[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
@@ -161,4 +161,4 @@ decode(std::string const &src) {
   return dst;
 }
 
-}}
+}

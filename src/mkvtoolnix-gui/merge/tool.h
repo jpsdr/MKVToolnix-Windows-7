@@ -10,7 +10,7 @@ class QDragMoveEvent;
 class QDropEvent;
 class QMenu;
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 namespace Ui {
 class Tool;
@@ -90,4 +90,4 @@ protected:
   virtual void dropEvent(QDropEvent *event) override;
 };
 
-}}}
+}

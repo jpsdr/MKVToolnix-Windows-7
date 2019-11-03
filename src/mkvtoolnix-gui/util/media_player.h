@@ -6,7 +6,7 @@
 
 #include "common/qt.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class MediaPlayerPrivate;
 class MediaPlayer : public QObject {
@@ -30,4 +30,4 @@ public slots:
   void stopPlayback();
 };
 
-}}}
+}

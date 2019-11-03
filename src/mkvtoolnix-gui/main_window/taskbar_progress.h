@@ -8,7 +8,7 @@
 
 class QWinTaskbarButton;
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Jobs {
 enum class QueueStatus;
@@ -31,6 +31,6 @@ public slots:
   void updateTaskbarStatus(Jobs::QueueStatus status);
 };
 
-}}
+}
 
 #endif  // SYS_WINDOWS

@@ -31,7 +31,7 @@
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 static Iso639LanguageList s_iso639Languages, s_commonIso639Languages;
 static TopLevelDomainCountryCodeList s_topLevelDomainCountryCodes, s_commonTopLevelDomainCountryCodes;
@@ -571,4 +571,4 @@ App::run() {
   exec();
 }
 
-}}
+}

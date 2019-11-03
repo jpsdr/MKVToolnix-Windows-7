@@ -20,7 +20,7 @@
 #include "common/strings/formatting.h"
 #include "common/vc1.h"
 
-namespace mtx { namespace vc1 {
+namespace mtx::vc1 {
 
 sequence_header_t::sequence_header_t() {
   memset(this, 0, sizeof(sequence_header_t));
@@ -616,4 +616,4 @@ es_parser_c::is_timestamp_available()
   return !m_timestamps.empty() && (m_timestamp_positions.front() <= m_stream_pos);
 }
 
-}}
+}

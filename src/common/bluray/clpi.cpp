@@ -17,7 +17,7 @@
 #include "common/bluray/clpi.h"
 #include "common/mm_file_io.h"
 
-namespace mtx { namespace bluray { namespace clpi {
+namespace mtx::bluray::clpi {
 
 program_t::program_t()
   : spn_program_sequence_start(0)
@@ -231,4 +231,4 @@ parser_c::parse_program_stream(mtx::bits::reader_c &bc,
   bc.set_bit_position(position_in_bits + length_in_bytes * 8);
 }
 
-}}}
+}

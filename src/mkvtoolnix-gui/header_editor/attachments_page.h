@@ -9,7 +9,7 @@ namespace libmatroska {
 class KaxAttached;
 }
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 namespace Ui {
 class AttachmentsPage;
@@ -45,4 +45,4 @@ protected:
   virtual void dropEvent(QDropEvent *event) override;
 };
 
-}}}
+}

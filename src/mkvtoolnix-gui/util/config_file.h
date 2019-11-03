@@ -4,7 +4,7 @@
 
 #include <QVariant>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class ConfigFile;
 using ConfigFilePtr = std::shared_ptr<ConfigFile>;
@@ -53,4 +53,4 @@ private:
   static ConfigFilePtr openInternal(QString const &fileName);
 };
 
-}}}
+}

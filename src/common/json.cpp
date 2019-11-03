@@ -23,7 +23,7 @@
 #include "common/mm_text_io.h"
 #include "common/strings/utf8.h"
 
-namespace mtx { namespace json {
+namespace mtx::json {
 
 namespace {
 
@@ -138,4 +138,4 @@ dump(nlohmann::json const &json,
   return json_fixed.dump(indentation);
 }
 
-}} // namespace mtx::json
+} // namespace mtx::json

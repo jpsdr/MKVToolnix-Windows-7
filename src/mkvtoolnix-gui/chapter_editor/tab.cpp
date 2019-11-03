@@ -46,7 +46,7 @@
 using namespace libmatroska;
 using namespace mtx::gui;
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 TabPrivate::TabPrivate(Tab &tab,
                        QString const &pFileName)
@@ -2236,4 +2236,4 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
   return allAtoms;
 }
 
-}}}
+}

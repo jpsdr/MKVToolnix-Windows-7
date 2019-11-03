@@ -5,7 +5,7 @@
 #include <QProcess>
 #include <QString>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class ProcessX : public mtx::exception {
 protected:
@@ -49,4 +49,4 @@ public:
 
 QString currentUserName();
 
-}}}
+}

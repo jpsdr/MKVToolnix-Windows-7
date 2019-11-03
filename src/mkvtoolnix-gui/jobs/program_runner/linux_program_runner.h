@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Jobs {
 
@@ -26,6 +26,6 @@ protected:
   virtual void hibernateOrSleepComputer(bool hibernate);
 };
 
-}}}
+}}
 
 #endif  // SYS_LINUX

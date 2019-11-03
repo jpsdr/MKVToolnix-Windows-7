@@ -6,7 +6,7 @@
 
 class QString;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 QString dirPath(QDir const &dir);
 QString dirPath(QString const &dir);
@@ -20,4 +20,4 @@ QString getSaveFileName(QWidget *parent = nullptr, QString const &caption = QStr
                         QString *selectedFilter = nullptr, QFileDialog::Options options = QFileDialog::Options{});
 QString getExistingDirectory(QWidget *parent = nullptr, QString const &caption = QString{}, QString const &dir = QString{}, QFileDialog::Options options = QFileDialog::ShowDirsOnly);
 
-}}}
+}

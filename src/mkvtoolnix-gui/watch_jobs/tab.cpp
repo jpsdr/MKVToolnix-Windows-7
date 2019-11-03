@@ -28,7 +28,7 @@
 
 using namespace mtx::gui;
 
-namespace mtx { namespace gui { namespace WatchJobs {
+namespace mtx::gui::WatchJobs {
 
 class TabPrivate {
   friend class Tab;
@@ -532,4 +532,4 @@ Tab::toggleActionToExecute() {
   App::programRunner().enableActionToExecute(*config, condition, enable);
 }
 
-}}}
+}

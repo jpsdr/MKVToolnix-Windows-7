@@ -20,7 +20,7 @@
 
 #include "common/mm_mem_io.h"
 
-namespace mtx { namespace amf {
+namespace mtx::amf {
 
 using value_type_t = boost::variant<double, bool, std::string>;
 using meta_data_t  = std::unordered_map<std::string, value_type_t>;
@@ -90,7 +90,7 @@ protected:
   std::string level_spacer() const;
 };
 
-}}
+}
 
 namespace std {
 template <>

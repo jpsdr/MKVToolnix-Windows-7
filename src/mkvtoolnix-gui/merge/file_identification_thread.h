@@ -9,7 +9,7 @@
 
 #include "mkvtoolnix-gui/merge/source_file.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class SourceFile;
 
@@ -91,4 +91,4 @@ public slots:
   void abortPlaylistScan();
 };
 
-}}}
+}

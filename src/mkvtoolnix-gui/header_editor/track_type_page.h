@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 namespace Ui {
 class TrackTypePage;
@@ -36,4 +36,4 @@ public slots:
   virtual void retranslateUi() override;
 };
 
-}}}
+}

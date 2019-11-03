@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 enum class algorithm_e {
     adler32
@@ -40,4 +40,4 @@ memory_cptr calculate(algorithm_e algorithm, void const *buffer, size_t size, ui
 uint64_t calculate_as_uint(algorithm_e algorithm, memory_c const &buffer, uint64_t initial_value = 0);
 uint64_t calculate_as_uint(algorithm_e algorithm, void const *buffer, size_t size, uint64_t initial_value = 0);
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx::checksum

@@ -5,7 +5,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/ascii_string_value_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -66,4 +66,4 @@ AsciiStringValuePage::copyValueToElement() {
   static_cast<EbmlString *>(m_element)->SetValue(to_utf8(m_leValue->text()));
 }
 
-}}}
+}

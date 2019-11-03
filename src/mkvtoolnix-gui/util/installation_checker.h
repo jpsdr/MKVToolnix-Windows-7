@@ -7,7 +7,7 @@
 
 class QString;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class InstallationChecker: public QObject {
   Q_OBJECT
@@ -46,4 +46,4 @@ public:
   static void checkInstallation();
 };
 
-}}}
+}

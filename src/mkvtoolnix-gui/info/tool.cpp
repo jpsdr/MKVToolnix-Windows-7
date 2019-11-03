@@ -18,7 +18,7 @@
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 using namespace mtx::gui;
 
@@ -231,4 +231,4 @@ Tool::nextPreviousWindowActionTexts()
   };
 }
 
-}}}
+}

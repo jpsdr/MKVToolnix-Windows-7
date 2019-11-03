@@ -26,7 +26,7 @@
 #include <QString>
 #include <QTreeView>
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 Tool::Tool(QWidget *parent,
            QMenu *jobQueueMenu)
@@ -617,4 +617,4 @@ Tool::checkIfOverwritingIsOK(QString const &newDestination,
   return true;
 }
 
-}}}
+}

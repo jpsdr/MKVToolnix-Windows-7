@@ -14,7 +14,7 @@
 using namespace libmatroska;
 using namespace mtx::gui;
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 static auto const s_numColumns = 4;
 
@@ -492,4 +492,4 @@ ChapterModel::flags(QModelIndex const &idx)
   return effectiveFlags;
 }
 
-}}}
+}

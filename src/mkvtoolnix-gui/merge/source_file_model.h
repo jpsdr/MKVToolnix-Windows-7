@@ -9,7 +9,7 @@
 #include <QList>
 #include <QSet>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class SourceFileModel;
 using SourceFileModelPtr = std::shared_ptr<SourceFileModel>;
@@ -81,4 +81,4 @@ protected:
   std::pair<int, int> countAppendedAndAdditionalParts(QStandardItem *parentItem);
 };
 
-}}}
+}

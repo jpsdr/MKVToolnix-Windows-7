@@ -4,7 +4,7 @@
 
 #include <QStringList>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class FileTypeFilter {
 public:
@@ -15,4 +15,4 @@ public:
   static QStringList s_filter;
 };
 
-}}}
+}

@@ -7,7 +7,7 @@
 
 class QLineEdit;
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 class Tab;
 
@@ -31,4 +31,4 @@ public:
   virtual mtx::bits::value_c valueToBitvalue() const;
 };
 
-}}}
+}

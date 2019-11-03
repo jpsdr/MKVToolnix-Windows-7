@@ -7,7 +7,7 @@
 #include "mkvtoolnix-gui/header_editor/page_base.h"
 #include "mkvtoolnix-gui/header_editor/value_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -78,4 +78,4 @@ PageBase::setItems(QList<QStandardItem *> const &items)
   items.at(0)->setText(title());
 }
 
-}}}
+}

@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/util/language_combo_box.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -75,4 +75,4 @@ LanguageValuePage::copyValueToElement() {
   static_cast<EbmlString *>(m_element)->SetValue(to_utf8(currentValueAsString()));
 }
 
-}}}
+}

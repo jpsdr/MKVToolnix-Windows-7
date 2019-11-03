@@ -4,11 +4,11 @@
 
 #include <QString>
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class MimeTypes {
 public:
   static QString const MergeSourceFileModelItem;
 };
 
-}}
+}

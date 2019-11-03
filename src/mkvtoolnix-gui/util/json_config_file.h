@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/util/config_file.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class JsonConfigFile: public ConfigFile {
 public:
@@ -42,4 +42,4 @@ protected:
   void reset(GroupPtr const &newGroup = GroupPtr{});
 };
 
-}}}
+}

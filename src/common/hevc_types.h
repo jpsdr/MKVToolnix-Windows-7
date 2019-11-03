@@ -116,7 +116,7 @@
 #define HEVC_EXTENDED_SAR        0xff
 #define HEVC_NUM_PREDEFINED_PARS   17
 
-namespace mtx { namespace hevc {
+namespace mtx::hevc {
 
 struct frame_t;
 struct par_extraction_t;
@@ -308,4 +308,4 @@ class es_parser_c;
 using user_data_t = std::map< std::vector<unsigned char>, std::vector<unsigned char> >;
 using es_parser_cptr = std::shared_ptr<es_parser_c>;
 
-}}                              // namespace mtx::hevc
+}                              // namespace mtx::hevc

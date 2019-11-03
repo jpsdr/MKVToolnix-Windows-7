@@ -18,7 +18,7 @@
 #include "common/segmentinfo.h"
 #include "common/xml/ebml_converter.h"
 
-namespace mtx { namespace xml {
+namespace mtx::xml {
 
 class ebml_segmentinfo_converter_c: public ebml_converter_c {
 public:
@@ -33,4 +33,4 @@ public:
   static kax_info_cptr parse_file(std::string const &file_name, bool throw_on_error = true);
 };
 
-}}
+}

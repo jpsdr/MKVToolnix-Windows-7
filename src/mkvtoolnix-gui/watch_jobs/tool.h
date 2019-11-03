@@ -6,7 +6,7 @@
 
 class QMenu;
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Jobs {
 class Job;
@@ -59,4 +59,4 @@ protected:
   virtual void forEachTab(std::function<void(Tab &)> const &worker);
 };
 
-}}}
+}}

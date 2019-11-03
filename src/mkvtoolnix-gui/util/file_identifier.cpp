@@ -20,7 +20,7 @@
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class FileIdentifierPrivate {
   friend class FileIdentifier;
@@ -439,4 +439,4 @@ FileIdentifier::setDefaults() {
   p->m_file->setupProgramMapFromProperties();
 }
 
-}}}
+}

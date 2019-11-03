@@ -2,7 +2,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 class JobPrivate {
 public:
@@ -23,4 +23,4 @@ public:
   virtual ~JobPrivate() = default;
 };
 
-}}}
+}

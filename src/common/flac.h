@@ -20,7 +20,7 @@
 #include <FLAC/format.h>
 #include <FLAC/stream_decoder.h>
 
-namespace mtx { namespace flac {
+namespace mtx::flac {
 
 #define FLAC_HEADER_STREAM_INFO      1
 #define FLAC_HEADER_VORBIS_COMMENTS  2
@@ -62,6 +62,6 @@ public:
 int get_num_samples(unsigned char const *buf, int size, FLAC__StreamMetadata_StreamInfo const &stream_info);
 int decode_headers(unsigned char const *mem, int size, int num_elements, ...);
 
-}}                              // namespace mtx::flac
+}                              // namespace mtx::flac
 
 #endif // HAVE_FLAC_FORMAT_H

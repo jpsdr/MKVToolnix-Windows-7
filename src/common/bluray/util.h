@@ -15,9 +15,9 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace bluray {
+namespace mtx::bluray {
 
 bfs::path find_base_dir(bfs::path const &file_name);
 bfs::path find_other_file(bfs::path const &reference_file_name, bfs::path const &other_file_name);
 
-}}
+}

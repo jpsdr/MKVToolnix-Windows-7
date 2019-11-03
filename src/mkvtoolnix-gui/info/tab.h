@@ -7,7 +7,7 @@
 
 class QStandardItem;
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 namespace Ui {
 class Tab;
@@ -49,4 +49,4 @@ protected:
   void setItemsFromElement(QList<QStandardItem *> &items, libebml::EbmlElement &element);
 };
 
-}}}
+}

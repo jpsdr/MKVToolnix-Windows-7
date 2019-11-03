@@ -27,7 +27,7 @@
 #include "mkvtoolnix-gui/util/string_list_configuration_widget.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 PreferencesDialog::PreferencesDialog(QWidget *parent,
                                      Page pageToShow)
@@ -1081,4 +1081,4 @@ PreferencesDialog::accept() {
     QDialog::accept();
 }
 
-}}
+}

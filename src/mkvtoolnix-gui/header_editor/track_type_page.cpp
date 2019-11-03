@@ -10,7 +10,7 @@
 using namespace libmatroska;
 using namespace mtx::gui;
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 TrackTypePage::TrackTypePage(Tab &parent,
                              EbmlMaster &master,
@@ -142,4 +142,4 @@ TrackTypePage::internalIdentifier()
   return Q("track %1").arg(m_trackIdxMkvmerge);
 }
 
-}}}
+}

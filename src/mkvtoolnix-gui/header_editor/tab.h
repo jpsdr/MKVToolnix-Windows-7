@@ -12,7 +12,7 @@ class QMenu;
 
 class property_element_c;
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 namespace Ui {
 class Tab;
@@ -108,4 +108,4 @@ public:
   static memory_cptr readFileData(QWidget *parent, QString const &fileName);
 };
 
-}}}
+}

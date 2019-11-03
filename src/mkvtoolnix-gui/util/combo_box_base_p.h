@@ -4,7 +4,7 @@
 
 #include <QString>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class ComboBoxBase;
 class ComboBoxBasePrivate {
@@ -18,4 +18,4 @@ public:
   virtual ~ComboBoxBasePrivate();
 };
 
-}}}
+}

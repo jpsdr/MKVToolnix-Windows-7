@@ -15,11 +15,11 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace id3 {
+namespace mtx::id3 {
 
 int skip_v2_tag(mm_io_c &io);
 int v1_tag_present_at_end(mm_io_c &io);
 int v2_tag_present_at_end(mm_io_c &io);
 int tag_present_at_end(mm_io_c &io);
 
-}}
+}

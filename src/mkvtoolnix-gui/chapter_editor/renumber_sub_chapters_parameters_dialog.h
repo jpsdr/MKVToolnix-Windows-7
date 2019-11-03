@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/types.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
 class RenumberSubChaptersParametersDialog;
@@ -40,4 +40,4 @@ protected:
   void setupUi(int firstChapterNumber, QStringList const &existingSubChapters, QStringList const &additionalLanguages);
 };
 
-}}}
+}

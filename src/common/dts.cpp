@@ -25,7 +25,7 @@
 
 // ---------------------------------------------------------------------------
 
-namespace mtx { namespace dts {
+namespace mtx::dts {
 
 namespace {
 
@@ -1119,4 +1119,4 @@ operator!=(header_t const &h1,
   return false;
 }
 
-}}
+}

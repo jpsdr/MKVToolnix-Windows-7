@@ -5,7 +5,7 @@
 #include "mkvtoolnix-gui/header_editor/track_name_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -76,4 +76,4 @@ TrackNamePage::setupPredefinedTrackNames() {
 
 }
 
-}}}
+}

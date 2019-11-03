@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Jobs {
 
@@ -60,4 +60,4 @@ protected:
   static QStringList replaceVariables(QStringList const &commandLine, VariableMap const &variables);
 };
 
-}}}
+}}

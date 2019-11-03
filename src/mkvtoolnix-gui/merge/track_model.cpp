@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 TrackModel::TrackModel(QObject *parent)
   : QStandardItemModel{parent}
@@ -744,4 +744,4 @@ TrackModel::programInfoFor(Track const &track) {
   return QString::number(programNumber);
 }
 
-}}}
+}

@@ -22,7 +22,7 @@
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
@@ -758,4 +758,4 @@ Model::moveJobsUpOrDown(QList<Job *> jobs,
   }
 }
 
-}}}
+}

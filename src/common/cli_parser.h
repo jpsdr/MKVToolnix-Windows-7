@@ -16,7 +16,7 @@
 
 #define INDENT_DEFAULT -1
 
-namespace mtx { namespace cli {
+namespace mtx::cli {
 
 using parser_cb_t = std::function<void(void)>;
 
@@ -79,4 +79,4 @@ protected:
   bool run_hooks(hook_type_e hook_type);
 };
 
-}}
+}

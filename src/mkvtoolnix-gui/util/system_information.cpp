@@ -18,7 +18,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/system_information.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 using namespace mtx::gui;
 
@@ -164,4 +164,4 @@ gatherSystemInformation() {
   return info.join(Q("\n"));
 }
 
-}}}
+}

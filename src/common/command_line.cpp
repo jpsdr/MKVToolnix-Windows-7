@@ -35,7 +35,7 @@
 #include "common/translation.h"
 #include "common/version.h"
 
-namespace mtx { namespace cli {
+namespace mtx::cli {
 
 bool g_gui_mode          = false;
 bool g_abort_on_warnings = false;
@@ -308,4 +308,4 @@ display_usage(int exit_code) {
   mxexit(exit_code);
 }
 
-}}
+}

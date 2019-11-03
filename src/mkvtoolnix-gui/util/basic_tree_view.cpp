@@ -7,7 +7,7 @@
 #include "mkvtoolnix-gui/util/basic_tree_view.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 using namespace mtx::gui;
 
@@ -121,4 +121,4 @@ BasicTreeView::keyPressEvent(QKeyEvent *event) {
     QTreeView::keyPressEvent(event);
 }
 
-}}}
+}

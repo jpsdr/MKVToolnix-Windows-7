@@ -27,7 +27,7 @@
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace avc {
+namespace mtx::avc {
 
 std::map<int, std::string> es_parser_c::ms_nalu_names_by_type;
 
@@ -1004,4 +1004,4 @@ es_parser_c::init_nalu_names() {
   ms_nalu_names_by_type[NALU_TYPE_FILLER_DATA]   = "filler";
 }
 
-}}
+}

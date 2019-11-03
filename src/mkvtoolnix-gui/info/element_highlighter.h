@@ -2,7 +2,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 class ElementHighlighter {
 public:
@@ -18,4 +18,4 @@ public:
   static Highlights highlightsForElement(memory_c const &mem);
 };
 
-}}}
+}

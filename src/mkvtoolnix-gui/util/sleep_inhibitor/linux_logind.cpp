@@ -14,7 +14,7 @@
 
 // See https://www.freedesktop.org/wiki/Software/systemd/inhibit/ for the semantics.
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class LogindSleepInhibitorPrivate: public BasicSleepInhibitorPrivate {
 public:
@@ -86,6 +86,6 @@ LogindSleepInhibitor::isInhibited()
   return !!p_func()->m_fd;
 }
 
-}}}
+}
 
 #endif  // defined(HAVE_QTDBUS)

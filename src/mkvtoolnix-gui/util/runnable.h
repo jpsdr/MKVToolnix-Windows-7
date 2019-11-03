@@ -4,11 +4,11 @@
 
 #include <QRunnable>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class Runnable : public QRunnable {
 public:
   virtual void abort() = 0;
 };
 
-}}}
+}

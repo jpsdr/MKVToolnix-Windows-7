@@ -6,7 +6,7 @@
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Info {
 class InfoConfig;
@@ -58,4 +58,4 @@ public:
   static JobPtr loadInfoJob(Util::ConfigFile &settings);
 };
 
-}}}
+}}

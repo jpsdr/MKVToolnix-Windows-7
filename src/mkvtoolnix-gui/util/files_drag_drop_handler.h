@@ -9,7 +9,7 @@
 
 class QDropEvent;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class FilesDragDropHandlerPrivate;
 class FilesDragDropHandler: public QObject {
@@ -36,4 +36,4 @@ public:
   QStringList const & fileNames() const;
 };
 
-}}}
+}

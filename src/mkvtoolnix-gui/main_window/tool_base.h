@@ -4,7 +4,7 @@
 
 #include <QWidget>
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class ToolBase : public QWidget {
   Q_OBJECT
@@ -21,4 +21,4 @@ public slots:
   virtual void toolShown() = 0;
 };
 
-}}
+}

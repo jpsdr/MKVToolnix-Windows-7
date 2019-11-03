@@ -5,7 +5,7 @@
 
 #include "mkvtoolnix-gui/util/font.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 int
 horizontalAdvance(QFontMetrics const &metrics,
@@ -17,4 +17,4 @@ horizontalAdvance(QFontMetrics const &metrics,
 #endif
 }
 
-}}}
+}

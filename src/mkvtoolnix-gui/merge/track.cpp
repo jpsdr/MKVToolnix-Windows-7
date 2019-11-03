@@ -15,7 +15,7 @@
 
 #include <QVariant>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -480,4 +480,4 @@ Track::canSetAacToSbr()
       && mtx::included_in(m_file->m_type, mtx::file_type_e::aac, mtx::file_type_e::matroska, mtx::file_type_e::real);
 }
 
-}}}
+}

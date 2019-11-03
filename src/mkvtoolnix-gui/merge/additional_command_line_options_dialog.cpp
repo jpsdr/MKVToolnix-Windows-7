@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -203,4 +203,4 @@ AdditionalCommandLineOptionsDialog::saveAsDefault()
   return m_ui->cbSaveAsDefault->isChecked();
 }
 
-}}}
+}

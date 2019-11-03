@@ -10,7 +10,7 @@ class QByteArray;
 class QNetworkAccessManager;
 class QUrl;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class NetworkAccessManagerPrivate;
 class NetworkAccessManager : public QObject {
@@ -42,4 +42,4 @@ protected:
   QNetworkAccessManager &manager();
 };
 
-}}}
+}

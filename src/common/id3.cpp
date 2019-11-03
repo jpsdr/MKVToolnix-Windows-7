@@ -15,7 +15,7 @@
 
 #include "common/mm_io.h"
 
-namespace mtx { namespace id3 {
+namespace mtx::id3 {
 
 int
 skip_v2_tag(mm_io_c &io) {
@@ -103,4 +103,4 @@ tag_present_at_end(mm_io_c &io) {
   return v2_tag_present_at_end(io);
 }
 
-}}
+}

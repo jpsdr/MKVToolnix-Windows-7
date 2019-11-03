@@ -17,7 +17,7 @@
 
 // See http://developer.apple.com/documentation/MusicAudio/Reference/CAFSpec/
 
-namespace mtx { namespace caf {
+namespace mtx::caf {
 
 struct defs {
   static unsigned int const channel_atom_size             =   12;
@@ -104,4 +104,4 @@ struct PACKED_STRUCTURE channel_layout_info_t {
 #pragma pack(pop)
 #endif
 
-}}
+}

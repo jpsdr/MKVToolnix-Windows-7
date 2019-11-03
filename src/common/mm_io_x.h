@@ -17,7 +17,7 @@
 
 #include <system_error>
 
-namespace mtx { namespace mm_io {
+namespace mtx::mm_io {
 
 std::error_code make_error_code();
 
@@ -154,4 +154,4 @@ operator <<(std::ostream &out,
   return out;
 }
 
-}}}
+}}

@@ -14,7 +14,7 @@
 #include "common/debugging.h"
 #include "common/frame_timing.h"
 
-namespace mtx { namespace frame_timing {
+namespace mtx::frame_timing {
 
 std::vector<common_frame_rate_t> g_common_frame_rates{
   { 1000000000ll / 120,          {   120,    1 } }, // 120 fps
@@ -63,4 +63,4 @@ determine_frame_rate(int64_t duration,
   return potentials[0].second.frame_rate;
 }
 
-}}
+}

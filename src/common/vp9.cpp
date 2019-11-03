@@ -13,7 +13,7 @@
 #include "common/mm_io_x.h"
 #include "common/vp9.h"
 
-namespace mtx { namespace vp9 {
+namespace mtx::vp9 {
 
 namespace {
 bool
@@ -89,4 +89,4 @@ parse_header_data(memory_c const &mem) {
   return h;
 }
 
-}}
+}

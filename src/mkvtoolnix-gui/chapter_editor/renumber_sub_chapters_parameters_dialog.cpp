@@ -16,7 +16,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 using namespace mtx::gui;
 
@@ -111,4 +111,4 @@ RenumberSubChaptersParametersDialog::skipHidden()
   return m_ui->cbSkipHidden->isChecked();
 }
 
-}}}
+}

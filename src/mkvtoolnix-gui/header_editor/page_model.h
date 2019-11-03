@@ -7,7 +7,7 @@
 
 class QAbstractItemView;
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 class PageBase;
 
@@ -41,4 +41,4 @@ public:
   QModelIndex indexFromPage(PageBase *page) const;
 };
 
-}}}
+}

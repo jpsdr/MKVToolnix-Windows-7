@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/config_file.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class IniConfigFile: public ConfigFile {
 protected:
@@ -29,4 +29,4 @@ public:
   virtual QStringList childKeys() override;
 };
 
-}}}
+}

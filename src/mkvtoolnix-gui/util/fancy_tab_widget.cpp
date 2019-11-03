@@ -39,7 +39,7 @@
 #include <QtWidgets/QToolTip>
 #include <QtWidgets/QVBoxLayout>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 int const FancyTabBar::m_rounding    = 22;
 int const FancyTabBar::m_textPadding = 4;
@@ -606,4 +606,4 @@ FancyTabWidget::tabBar() {
   return m_tabBar;
 }
 
-}}}
+}

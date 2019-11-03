@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/media_player.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 using namespace mtx::gui;
 
@@ -54,4 +54,4 @@ MediaPlayer::stopPlayback() {
   p->player->setMedia({});
 }
 
-}}}
+}

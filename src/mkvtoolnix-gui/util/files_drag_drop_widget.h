@@ -6,7 +6,7 @@
 
 #include <QWidget>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class FilesDragDropWidgetPrivate;
 class FilesDragDropWidget : public QWidget {
@@ -30,4 +30,4 @@ signals:
   void filesDropped(QStringList const &files);
 };
 
-}}}
+}

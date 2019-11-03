@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/taskbar_progress.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 TaskbarProgress::TaskbarProgress(QWidget *parent)
   : QObject{parent}
@@ -54,6 +54,6 @@ TaskbarProgress::updateTaskbarStatus(Jobs::QueueStatus status) {
   progress->setVisible(!nowStopped);
 }
 
-}}
+}
 
 #endif  // SYS_WINDOWS

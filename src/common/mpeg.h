@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace mpeg {
+namespace mtx::mpeg {
 
 class nalu_size_length_x: public mtx::exception {
 protected:
@@ -48,4 +48,4 @@ memory_cptr create_nalu_with_size(memory_cptr const &src, std::size_t nalu_size_
 
 void remove_trailing_zero_bytes(memory_c &buffer);
 
-}}
+}

@@ -8,7 +8,7 @@
 
 class QMouseEvent;
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Ui {
 class StatusBarProgressWidget;
@@ -45,4 +45,4 @@ protected:
   virtual void mouseReleaseEvent(QMouseEvent *event) override;
 };
 
-}}
+}

@@ -9,7 +9,7 @@ class QDragEnterEvent;
 class QDropEvent;
 class QMenu;
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
 class Tool;
@@ -72,4 +72,4 @@ public:
   static QString chapterNameTemplateToolTip();
 };
 
-}}}
+}

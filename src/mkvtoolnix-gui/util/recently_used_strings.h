@@ -4,7 +4,7 @@
 
 #include <QStringList>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class RecentlyUsedStringsPrivate;
 class RecentlyUsedStrings {
@@ -31,4 +31,4 @@ protected:
   void clamp();
 };
 
-}}}
+}

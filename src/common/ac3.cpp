@@ -28,7 +28,7 @@
 #include "common/math.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace ac3 {
+namespace mtx::ac3 {
 
 namespace {
 uint64_t s_acmod_to_channel_layout[8] = {
@@ -663,4 +663,4 @@ remove_dialog_normalization_gain(unsigned char *buf,
   }
 }
 
-}}                              // namespace mtx::ac3
+}                              // namespace mtx::ac3

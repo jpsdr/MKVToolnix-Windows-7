@@ -8,7 +8,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Merge {
 class MuxConfig;
@@ -65,4 +65,4 @@ public:
   static JobPtr loadMuxJob(Util::ConfigFile &settings);
 };
 
-}}}
+}}

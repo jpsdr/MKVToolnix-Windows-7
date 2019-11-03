@@ -11,7 +11,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace vp9 {
+namespace mtx::vp9 {
 
 namespace {
 
@@ -28,4 +28,4 @@ struct header_data_t {
 
 boost::optional<header_data_t> parse_header_data(memory_c const &mem);
 
-}}
+}

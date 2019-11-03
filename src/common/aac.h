@@ -42,12 +42,12 @@
 
 #define AAC_ID_PCE               0x05 // Table 4.71 "Syntactic elements"
 
-namespace mtx { namespace bits {
+namespace mtx::bits {
 class reader_c;
 class writer_c;
-}}
+}
 
-namespace mtx { namespace aac {
+namespace mtx::aac {
 
 struct audio_config_t {
   unsigned int profile{}, sample_rate{}, output_sample_rate{}, channels{}, samples_per_frame{1024};
@@ -220,4 +220,4 @@ protected:
 };
 using parser_cptr = std::shared_ptr<parser_c>;
 
-}} // namespace mtx::aac
+} // namespace mtx::aac

@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace channels {
+namespace mtx::channels {
 
 static uint64_t const front_left             = 0b0000'0000'00000'0000'0000'0000'0000'0000'0000'0000'0000'0000'0000'0000'0001ull;
 static uint64_t const front_right            = 0b0000'0000'00000'0000'0000'0000'0000'0000'0000'0000'0000'0000'0000'0000'0010ull;
@@ -43,4 +43,4 @@ static uint64_t const surround_direct_left   = 0b0000'0000'00000'0000'0000'0000'
 static uint64_t const surround_direct_right  = 0b0000'0000'00000'0000'0000'0000'0000'0000'0000'1000'0000'0000'0000'0000'0000ull;
 static uint64_t const low_frequency_2        = 0b0000'0000'00000'0000'0000'0000'0000'0000'0001'0000'0000'0000'0000'0000'0000ull;
 
-}} // namespace mtx::channels
+} // namespace mtx::channels

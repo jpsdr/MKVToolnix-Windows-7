@@ -19,9 +19,9 @@
 # include <json.hpp>
 #endif // HAVE_NLOHMANN_JSONCPP
 
-namespace mtx { namespace json {
+namespace mtx::json {
 
 nlohmann::json parse(nlohmann::json::string_t const &data, nlohmann::json::parser_callback_t callback = nullptr);
 nlohmann::json::string_t dump(nlohmann::json const &json, int indentation = 0);
 
-}} // namespace mtx::json
+} // namespace mtx::json

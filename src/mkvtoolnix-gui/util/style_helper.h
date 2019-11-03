@@ -27,7 +27,7 @@ class QPalette;
 class QPainter;
 class QRect;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 // Helper class holding all custom color values
 
@@ -75,4 +75,4 @@ public:
   static void tintImage(QImage &img, QColor const &tintColor);
 };
 
-}}}
+}

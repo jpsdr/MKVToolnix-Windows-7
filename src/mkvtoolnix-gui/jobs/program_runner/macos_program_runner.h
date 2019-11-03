@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 class MacOSProgramRunner: public ProgramRunner {
   Q_OBJECT
@@ -18,6 +18,6 @@ public:
   virtual QString defaultAudioFileName() const override;
 };
 
-}}}
+}
 
 #endif  // SYS_APPLE

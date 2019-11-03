@@ -9,7 +9,7 @@
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class SourceFile;
 class MkvmergeOptionBuilder;
@@ -78,6 +78,6 @@ public:
   static QString nameForType(TrackType type);
 };
 
-}}}
+}
 
 Q_DECLARE_METATYPE(mtx::gui::Merge::Track *)

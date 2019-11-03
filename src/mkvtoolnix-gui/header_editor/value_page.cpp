@@ -14,7 +14,7 @@
 #include "mkvtoolnix-gui/header_editor/value_page.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -257,4 +257,4 @@ ValuePage::modifyThis() {
   copyValueToElement();
 }
 
-}}}
+}

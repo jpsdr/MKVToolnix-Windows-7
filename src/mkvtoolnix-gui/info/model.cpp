@@ -15,7 +15,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 class ModelPrivate {
 public:
@@ -353,4 +353,4 @@ Model::elementName(EbmlElement &element) {
   return { Q(name), true };
 }
 
-}}}
+}

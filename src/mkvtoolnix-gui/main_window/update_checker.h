@@ -10,7 +10,7 @@
 #include "common/qt.h"
 #include "common/version.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 enum class UpdateCheckStatus {
   Failed,
@@ -48,7 +48,7 @@ protected:
   mtx::xml::document_cptr parseXml(QByteArray const &content);
 };
 
-}}
+}
 
 Q_DECLARE_METATYPE(mtx::gui::UpdateCheckStatus)
 Q_DECLARE_METATYPE(mtx_release_version_t)

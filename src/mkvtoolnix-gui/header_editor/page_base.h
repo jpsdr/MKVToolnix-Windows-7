@@ -10,7 +10,7 @@
 #include "common/translation.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 class Tab;
 
@@ -38,4 +38,4 @@ public:
   virtual void setItems(QList<QStandardItem *> const &items) const;
 };
 
-}}}
+}

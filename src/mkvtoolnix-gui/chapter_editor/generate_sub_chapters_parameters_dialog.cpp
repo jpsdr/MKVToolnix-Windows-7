@@ -16,7 +16,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 using namespace mtx::gui;
 
@@ -121,4 +121,4 @@ GenerateSubChaptersParametersDialog::verifyStartTimestamp() {
   Util::buttonForRole(m_ui->buttonBox)->setEnabled(parse_timestamp(to_utf8(m_ui->leStartTimestamp->text()), dummy));
 }
 
-}}}
+}

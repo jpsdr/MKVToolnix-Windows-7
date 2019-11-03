@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/header_editor/page_base.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 class EmptyPage: public PageBase {
   Q_OBJECT
@@ -28,4 +28,4 @@ public:
 protected:
   virtual void setupUi();
 };
-}}}
+}

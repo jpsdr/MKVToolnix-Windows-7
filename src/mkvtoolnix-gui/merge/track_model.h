@@ -11,7 +11,7 @@
 
 class QItemSelectionModel;
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class TrackModel;
 using TrackModelPtr = std::shared_ptr<TrackModel>;
@@ -89,4 +89,4 @@ protected:
   static QString programInfoFor(Track const &track);
 };
 
-}}}
+}

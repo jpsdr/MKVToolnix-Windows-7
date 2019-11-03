@@ -12,7 +12,7 @@ class KaxBlock;
 class KaxSimpleBlock;
 }
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Util {
 class KaxInfo;
@@ -79,4 +79,4 @@ protected:
   void addFrameInfo(libmatroska::DataBuffer &buffer, int64_t position);
 };
 
-}}}
+}}

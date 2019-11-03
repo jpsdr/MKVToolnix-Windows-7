@@ -25,7 +25,7 @@
 #include "common/mm_text_io.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace log {
+namespace mtx::log {
 
 target_cptr target_c::s_default_logger;
 
@@ -134,4 +134,4 @@ stderr_target_c::log_line(std::string const &message) {
   std::cerr << message;
 }
 
-}}
+}

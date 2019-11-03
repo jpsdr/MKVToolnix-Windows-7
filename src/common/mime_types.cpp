@@ -13,7 +13,7 @@
 
 #include "common/mime.h"
 
-namespace mtx { namespace mime {
+namespace mtx::mime {
 
 std::vector<type_t> const g_types = {
   { "application/activemessage",                              {}                                                       },
@@ -648,4 +648,4 @@ std::vector<type_t> const g_types = {
   { "x-world/x-vrml",                                         { "vrm", "vrml", "wrl" }                                 },
 };
 
-}}                              // namespace mtx::mime
+}                              // namespace mtx::mime

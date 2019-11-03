@@ -4,7 +4,7 @@
 
 #include <QString>
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 struct JobSettings {
   enum class Mode {
@@ -30,4 +30,4 @@ struct JobSettings {
   bool m_checksums{}, m_trackInfo{}, m_hexPositions{};
 };
 
-}}}
+}

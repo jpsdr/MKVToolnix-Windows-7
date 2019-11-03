@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class SelectCharacterSetDialogPrivate {
   friend class SelectCharacterSetDialog;
@@ -112,4 +112,4 @@ SelectCharacterSetDialog::userData()
   return p_func()->m_userData;
 }
 
-}}
+}

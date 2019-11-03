@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/string.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 void
 OptionFile::create(QString const &fileName,
@@ -46,4 +46,4 @@ OptionFile::write(QFile &file,
   file.write(serialized.c_str());
 }
 
-}}}
+}

@@ -33,9 +33,9 @@
 #include <matroska/KaxCluster.h>
 #include <matroska/KaxContentEncoding.h>
 
-namespace mtx { namespace id {
+namespace mtx::id {
 class info_c;
-}}
+}
 
 struct kax_track_t {
   uint64_t tnum, track_number, track_uid;

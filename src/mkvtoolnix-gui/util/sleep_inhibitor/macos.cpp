@@ -7,7 +7,7 @@
 
 // See https://developer.apple.com/library/archive/qa/qa1340/_index.html
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class MacOSSleepInhibitorPrivate: public BasicSleepInhibitorPrivate {
 public:
@@ -67,4 +67,4 @@ MacOSSleepInhibitor::isInhibited()
   return !!p_func()->m_assertionID;
 }
 
-}}}
+}

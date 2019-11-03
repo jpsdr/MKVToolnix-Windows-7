@@ -20,7 +20,7 @@
 #include "common/tags/tags.h"
 #include "common/xml/ebml_converter.h"
 
-namespace mtx { namespace xml {
+namespace mtx::xml {
 
 class ebml_tags_converter_c: public ebml_converter_c {
 public:
@@ -38,4 +38,4 @@ public:
   static std::shared_ptr<libmatroska::KaxTags> parse_file(std::string const &file_name, bool throw_on_error);
 };
 
-}}
+}

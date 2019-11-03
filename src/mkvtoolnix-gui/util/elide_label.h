@@ -11,7 +11,7 @@ class QString;
 class QEvent;
 class QPaintEvent;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class ElideLabelPrivate;
 class ElideLabel: public QFrame {
@@ -50,4 +50,4 @@ protected:
   void updateLabel();
 };
 
-}}}
+}

@@ -17,7 +17,7 @@
 
 #include "common/hevc_types.h"
 
-namespace mtx { namespace hevc {
+namespace mtx::hevc {
 
 class hevcc_c {
 public:
@@ -70,4 +70,4 @@ public:
   static hevcc_c unpack(memory_cptr const &mem);
 };
 
-}}                              // namespace mtx::hevc
+}                              // namespace mtx::hevc

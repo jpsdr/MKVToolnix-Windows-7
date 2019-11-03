@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 class WindowsProgramRunner: public ProgramRunner {
   Q_OBJECT
@@ -27,6 +27,6 @@ protected:
   virtual void addShutdownNamePrivilege();
 };
 
-}}}
+}
 
 #endif  // SYS_WINDOWS

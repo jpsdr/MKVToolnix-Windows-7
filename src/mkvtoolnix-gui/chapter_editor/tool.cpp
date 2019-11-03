@@ -22,7 +22,7 @@
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 using namespace mtx::gui;
 
@@ -409,4 +409,4 @@ Tool::tabs() {
   return t;
 }
 
-}}}
+}

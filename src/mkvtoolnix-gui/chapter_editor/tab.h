@@ -18,7 +18,7 @@ namespace libebml {
 class EbmlBinary;
 }
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
 class Tab;
@@ -201,4 +201,4 @@ protected:
   static QString formatEbmlBinary(EbmlBinary *binary);
 };
 
-}}}
+}

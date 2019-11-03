@@ -14,7 +14,7 @@
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 QString
 Cache::cacheDirLocation(QString const &category) {
@@ -179,4 +179,4 @@ Cache::cleanAllCacheFiles() {
     cleanAllCacheFilesForCategory(category);
 }
 
-}}}
+}

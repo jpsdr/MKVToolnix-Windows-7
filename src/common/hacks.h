@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace hacks {
+namespace mtx::hacks {
 
 // Some hacks that are configurable via command line but which should ONLY!
 // be used by the author.
@@ -51,4 +51,4 @@ void engage(unsigned int id);
 bool is_engaged(unsigned int id);
 void init();
 
-}}
+}

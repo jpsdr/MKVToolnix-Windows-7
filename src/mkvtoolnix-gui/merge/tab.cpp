@@ -29,7 +29,7 @@
 #include <QString>
 #include <QTimer>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -515,4 +515,4 @@ Tab::setupTabPositions() {
   ui->tabs->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
-}}}
+}

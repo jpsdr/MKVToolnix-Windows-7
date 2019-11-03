@@ -18,7 +18,7 @@
 #include "common/at_scope_exit.h"
 #include "common/fs_sys_helpers.h"
 
-namespace mtx { namespace sys {
+namespace mtx::sys {
 
 std::string
 normalize_unicode_string(std::string const &src,
@@ -54,4 +54,4 @@ normalize_unicode_string(std::string const &src,
   return { &buffer[0], static_cast<std::string::size_type>(byte_length) };
 }
 
-}}
+}

@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace mime {
+namespace mtx::mime {
 
 struct type_t {
   std::string const name;
@@ -25,4 +25,4 @@ extern std::vector<type_t> const g_types;
 std::string guess_type(std::string ext, bool is_file);
 std::string primary_file_extension_for_type(std::string const &type);
 
-}}
+}

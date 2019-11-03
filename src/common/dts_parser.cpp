@@ -16,7 +16,7 @@
 #include "common/bswap.h"
 #include "common/private/dts_parser.h"
 
-namespace mtx { namespace dts {
+namespace mtx::dts {
 
 parser_c::impl_t::~impl_t() {   // NOLINT(modernize-use-equals-default) Need to tell compiler where to put code for this function.
 }
@@ -150,4 +150,4 @@ parser_c::decode(memory_c &buffer) {
   return decode(buffer.get_buffer(), buffer.get_size());
 }
 
-}}
+}

@@ -19,7 +19,7 @@
 
 #include "common/strings/utf8.h"
 
-namespace mtx { namespace sort {
+namespace mtx::sort {
 
 // --------------- sort by
 
@@ -136,4 +136,4 @@ naturally(IterT first,
   by(first, last, [](StrT const &string) { return natural_string_c<StrT>{string}; });
 }
 
-}}
+}

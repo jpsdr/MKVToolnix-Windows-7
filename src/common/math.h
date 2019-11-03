@@ -27,7 +27,7 @@
 
 #include "common/math_fwd.h"
 
-namespace mtx { namespace math {
+namespace mtx::math {
 
 inline std::size_t
 count_1_bits(uint64_t value) {
@@ -70,4 +70,4 @@ to_signed(Tsigned const &s) {
   return s;
 }
 
-}}
+}

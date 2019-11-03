@@ -8,7 +8,7 @@
 #include "mkvtoolnix-gui/merge/executable_location_dialog.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -69,4 +69,4 @@ ExecutableLocationDialog::browse() {
     m_ui->leExecutable->setText(fileName);
 }
 
-}}}
+}

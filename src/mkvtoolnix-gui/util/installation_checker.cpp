@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 InstallationChecker::InstallationChecker(QObject *parent)
   : QObject{parent}
@@ -93,4 +93,4 @@ InstallationChecker::problems()
   return m_problems;
 }
 
-}}}
+}

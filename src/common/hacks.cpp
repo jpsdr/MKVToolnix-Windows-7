@@ -17,7 +17,7 @@
 #include "common/hacks.h"
 #include "common/strings/editing.h"
 
-namespace mtx { namespace hacks {
+namespace mtx::hacks {
 
 namespace {
 std::vector<std::string> const &
@@ -114,4 +114,4 @@ init() {
   }
 }
 
-}}
+}

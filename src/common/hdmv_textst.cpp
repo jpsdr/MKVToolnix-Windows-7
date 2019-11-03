@@ -16,7 +16,7 @@
 #include "common/endian.h"
 #include "common/hdmv_textst.h"
 
-namespace mtx { namespace hdmv_textst {
+namespace mtx::hdmv_textst {
 
 ::timestamp_c
 get_timestamp(unsigned char const *buf) {
@@ -34,4 +34,4 @@ put_timestamp(unsigned char *buf,
 }
 
 
-}}
+}

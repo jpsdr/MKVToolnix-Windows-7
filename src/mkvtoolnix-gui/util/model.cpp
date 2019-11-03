@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 void
 resizeViewColumnsToContents(QTreeView *view) {
@@ -167,4 +167,4 @@ setItemForegroundColorDisabled(QList<QStandardItem *> const &items,
     item->setForeground(brush);
 }
 
-}}}
+}

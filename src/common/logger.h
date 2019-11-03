@@ -14,7 +14,7 @@
 
 #include "common/strings/utf8.h"
 
-namespace mtx { namespace log {
+namespace mtx::log {
 
 class target_c;
 using target_cptr = std::shared_ptr<target_c>;
@@ -72,7 +72,7 @@ operator <<(target_c &logger,
   return logger;
 }
 
-}}
+}
 
 #define log_current_location() mtx::log::target_c::get_default_logger() << fmt::format("Current file, line, function: {0}:{1} in {2}", __FILE__, __LINE__, __PRETTY_FUNCTION__)
 #define log_it(arg)            mtx::log::target_c::get_default_logger() << (arg)

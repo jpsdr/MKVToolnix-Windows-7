@@ -17,7 +17,7 @@
 #include "common/dts.h"
 #include "common/dts_parser.h"
 
-namespace mtx { namespace dts {
+namespace mtx::dts {
 
 struct parser_c::impl_t {
 public:
@@ -33,4 +33,4 @@ public:
   void reset();
 };
 
-}}
+}

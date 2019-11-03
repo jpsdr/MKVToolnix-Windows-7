@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace w64 {
+namespace mtx::w64 {
 
 struct chunk_t {
   unsigned char guid[16];
@@ -29,4 +29,4 @@ struct header_t {
 
 extern unsigned char const g_guid_riff[16], g_guid_wave[16], g_guid_fmt[16], g_guid_data[16];
 
-}}
+}

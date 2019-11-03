@@ -27,7 +27,7 @@
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 
-namespace mtx { namespace sys {
+namespace mtx::sys {
 
 int64_t
 get_current_time_millis() {
@@ -138,4 +138,4 @@ get_memory_usage() {
   }
 }
 
-}}
+}

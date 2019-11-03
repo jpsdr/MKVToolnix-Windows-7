@@ -11,7 +11,7 @@ class QDragEnterEvent;
 class QDragMoveEvent;
 class QDropEvent;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class BasicLineEditPrivate;
 class BasicLineEdit : public QLineEdit {
@@ -42,4 +42,4 @@ protected:
   virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
-}}}
+}

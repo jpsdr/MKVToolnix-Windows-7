@@ -17,7 +17,7 @@
 #include "common/mm_mem_io.h"
 #include "common/mpeg.h"
 
-namespace mtx { namespace mpeg {
+namespace mtx::mpeg {
 
 memory_cptr
 nalu_to_rbsp(memory_cptr const &buffer) {
@@ -134,4 +134,4 @@ remove_trailing_zero_bytes(memory_c &buffer) {
   mxdebug_if(s_debug_trailing_zero_byte_removal, fmt::format("Removing trailing zero bytes from old size {0} down to new size {1}, removed {2}\n", size, new_size, idx));
 }
 
-}}
+}

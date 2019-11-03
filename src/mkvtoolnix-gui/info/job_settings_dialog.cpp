@@ -12,7 +12,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 using namespace mtx::gui;
 
@@ -73,4 +73,4 @@ JobSettingsDialog::enableOkButton(QString const &fileName) {
   Util::buttonForRole(p_func()->m_ui->buttons)->setEnabled(!fileName.isEmpty());
 }
 
-}}}
+}

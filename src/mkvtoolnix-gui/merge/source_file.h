@@ -12,7 +12,7 @@
 #include <QString>
 #include <QVariant>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class SourceFile;
 using SourceFilePtr = std::shared_ptr<SourceFile>;
@@ -75,4 +75,4 @@ public:
   static void setupFromPreferences();
 };
 
-}}}
+}

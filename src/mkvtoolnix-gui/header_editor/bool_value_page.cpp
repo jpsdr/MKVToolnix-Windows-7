@@ -5,7 +5,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/bool_value_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -64,4 +64,4 @@ BoolValuePage::copyValueToElement() {
   static_cast<EbmlUInteger *>(m_element)->SetValue(m_cbValue->currentIndex());
 }
 
-}}}
+}

@@ -16,7 +16,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
-namespace mtx { namespace args {
+namespace mtx::args {
 
 std::vector<split_point_c>
 parse_split_parts(const std::string &arg,
@@ -99,4 +99,4 @@ parse_split_parts(const std::string &arg,
   return split_points;
 }
 
-}}
+}

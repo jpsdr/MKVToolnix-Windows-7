@@ -17,7 +17,7 @@
 
 #include "common/checksums/base.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 class adler32_c: public base_c, public uint_result_c {
 protected:
@@ -35,4 +35,4 @@ protected:
   virtual void add_impl(unsigned char const *buffer, size_t size);
 };
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx::checksum

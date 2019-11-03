@@ -9,7 +9,7 @@ class QDragEnterEvent;
 class QDropEvent;
 class QMenu;
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 namespace Ui {
 class Tool;
@@ -63,4 +63,4 @@ protected:
   virtual void forEachTab(std::function<void(Tab &)> const &worker);
 };
 
-}}}
+}

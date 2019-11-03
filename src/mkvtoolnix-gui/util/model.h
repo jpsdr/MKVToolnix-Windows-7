@@ -10,7 +10,7 @@ class QStandardItem;
 class QStandardItemModel;
 class QTreeView;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 // Model stuff
 enum MtxGuiRoles {
@@ -41,4 +41,4 @@ void requestAllItems(QStandardItemModel &model, QModelIndex const &parent = QMod
 QModelIndex findIndex(QAbstractItemModel const &model, std::function<bool(QModelIndex const &)> const &predicate, QModelIndex const &idx = QModelIndex{});
 void setItemForegroundColorDisabled(QList<QStandardItem *> const &items, bool disabled);
 
-}}}
+}

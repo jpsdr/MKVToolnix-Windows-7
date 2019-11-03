@@ -29,7 +29,7 @@
 #include "common/strings/formatting.h"
 #include "common/timestamp.h"
 
-namespace mtx { namespace hevc {
+namespace mtx::hevc {
 
 std::unordered_map<int, std::string> es_parser_c::ms_nalu_names_by_type;
 
@@ -1014,4 +1014,4 @@ es_parser_c::init_nalu_names() {
   };
 }
 
-}}                              // namespace mtx::hevc
+}                              // namespace mtx::hevc

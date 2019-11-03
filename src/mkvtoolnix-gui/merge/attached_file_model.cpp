@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 AttachedFileModel::AttachedFileModel(QObject *parent)
   : QStandardItemModel{parent}
@@ -152,4 +152,4 @@ AttachedFileModel::itemsForRow(int row) {
   return list;
 }
 
-}}}
+}

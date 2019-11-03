@@ -29,7 +29,7 @@
 #include "merge/generic_reader.h"
 #include "mpegparser/M2VParser.h"
 
-namespace mtx { namespace mpeg_ts {
+namespace mtx::mpeg_ts {
 
 enum class processing_state_e {
   probing,
@@ -534,4 +534,4 @@ private:
   friend class track_c;
 };
 
-}}
+}

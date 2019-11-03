@@ -22,7 +22,7 @@
 
 #include "common/strings/utf8.h"
 
-namespace mtx { namespace utf8 {
+namespace mtx::utf8 {
 
 std::string
 fix_invalid(std::string const &str,
@@ -43,7 +43,7 @@ is_valid(std::string const &str) {
   return ::utf8::is_valid(str.begin(), str.end());
 }
 
-}}
+}
 
 std::wstring
 to_wide(const std::string &source) {

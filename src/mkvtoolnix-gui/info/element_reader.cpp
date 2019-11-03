@@ -13,7 +13,7 @@
 using namespace libebml;
 using namespace libmatroska;
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 ElementReader::ElementReader(mm_io_c &in,
                              EbmlElement &element,
@@ -55,4 +55,4 @@ ElementReader::run() {
   emit elementRead(m_idx);
 }
 
-}}}
+}

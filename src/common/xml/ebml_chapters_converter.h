@@ -18,7 +18,7 @@
 #include "common/chapters/chapters.h"
 #include "common/xml/ebml_converter.h"
 
-namespace mtx { namespace xml {
+namespace mtx::xml {
 
 class ebml_chapters_converter_c: public ebml_converter_c {
 public:
@@ -40,4 +40,4 @@ public:
   static mtx::chapters::kax_cptr parse_file(std::string const &file_name, bool throw_on_error);
 };
 
-}}
+}

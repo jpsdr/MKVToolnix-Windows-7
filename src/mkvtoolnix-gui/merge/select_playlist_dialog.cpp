@@ -12,7 +12,7 @@
 
 #include <QPushButton>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class ScannedFileItem: public QTreeWidgetItem {
 public:
@@ -256,4 +256,4 @@ SelectPlaylistDialog::select() {
   return idx >= 0 ? m_scannedFiles[idx] : SourceFilePtr{};
 }
 
-}}}
+}

@@ -19,7 +19,7 @@
 #include "common/random.h"
 #include "common/strings/editing.h"
 
-namespace mtx { namespace bits {
+namespace mtx::bits {
 
 value_c::value_c(int bitsize) {
   assert((0 < bitsize) && (0 == (bitsize % 8)));
@@ -121,4 +121,4 @@ value_c::zero_content() {
   std::memset(m_value->get_buffer(), 0, m_value->get_size());
 }
 
-}}
+}

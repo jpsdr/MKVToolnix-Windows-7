@@ -22,7 +22,7 @@
 
 class QMutex;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class KaxInfoPrivate;
 class KaxInfo: public QObject, public ::mtx::kax_info_c {
@@ -75,6 +75,6 @@ protected:
   virtual mtx::kax_info_c::result_e doScanLevel1Elements();
 };
 
-}}}
+}
 
 Q_DECLARE_METATYPE(::mtx::kax_info_c::result_e)

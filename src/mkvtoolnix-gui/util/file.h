@@ -5,7 +5,7 @@
 class QString;
 class QUrl;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 struct BomAsciiCheckResult {
   byte_order_mark_e byteOrderMark{byte_order_mark_e::none};
@@ -21,4 +21,4 @@ QString removeInvalidPathCharacters(QString fileName);
 
 QStringList replaceDirectoriesByContainedFiles(QStringList const &namesToCheck);
 
-}}}
+}

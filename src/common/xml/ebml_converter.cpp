@@ -28,7 +28,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace xml {
+namespace mtx::xml {
 
 ebml_converter_c::limits_t::limits_t()
   : has_min{false}
@@ -533,4 +533,4 @@ ebml_converter_c::dump_semantics_recursively(int level,
   }
 }
 
-}}
+}

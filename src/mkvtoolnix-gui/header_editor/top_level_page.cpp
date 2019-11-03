@@ -2,7 +2,7 @@
 
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -38,4 +38,4 @@ TopLevelPage::setInternalIdentifier(QString const &identifier) {
   m_internalIdentifier = identifier;
 }
 
-}}}
+}

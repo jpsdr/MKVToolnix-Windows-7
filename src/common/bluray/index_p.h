@@ -16,7 +16,7 @@
 #include "common/bit_reader.h"
 #include "common/debugging.h"
 
-namespace mtx { namespace bluray { namespace index {
+namespace mtx::bluray::index {
 
 class parser_private_c {
 public:
@@ -35,4 +35,4 @@ public:
   }
 };
 
-}}}
+}

@@ -13,7 +13,7 @@
 
 #pragma once
 
-namespace mtx { namespace tags {
+namespace mtx::tags {
 
 enum target_type_e {
 // see http://www.matroska.org/technical/specs/tagging/index.html#targettypes
@@ -48,4 +48,4 @@ enum target_type_e {
   Unknown    =  0,
 };
 
-}}
+}

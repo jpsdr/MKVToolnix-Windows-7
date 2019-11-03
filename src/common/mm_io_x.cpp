@@ -21,7 +21,7 @@
 
 #include "common/mm_io_x.h"
 
-namespace mtx { namespace mm_io {
+namespace mtx::mm_io {
 
 std::error_code
 make_error_code() {
@@ -41,4 +41,4 @@ exception::error()
        :                                                  code().message();
 }
 
-}}
+}

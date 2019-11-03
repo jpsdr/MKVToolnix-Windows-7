@@ -16,7 +16,7 @@
 class QSettings;
 class QSplitter;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class Settings: public QObject {
   Q_OBJECT
@@ -262,6 +262,6 @@ public:
 
 // extern Settings g_settings;
 
-}}}
+}
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::Util::Settings::RunProgramForEvents)

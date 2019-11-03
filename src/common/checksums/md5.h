@@ -17,7 +17,7 @@
 
 #include "common/checksums/base.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 class md5_c: public base_c {
 protected:
@@ -38,4 +38,4 @@ protected:
   unsigned char const *work(unsigned char const *data, size_t size);
 };
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx::checksum

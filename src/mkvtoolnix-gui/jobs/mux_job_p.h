@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/jobs/job_p.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 class MuxJobPrivate: public JobPrivate {
 public:
@@ -18,4 +18,4 @@ public:
   explicit MuxJobPrivate(Job::Status pStatus, mtx::gui::Merge::MuxConfigPtr const &pConfig);
 };
 
-}}}
+}

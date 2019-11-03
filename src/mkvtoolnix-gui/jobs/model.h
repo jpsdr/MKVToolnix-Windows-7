@@ -11,7 +11,7 @@
 
 class QAbstractItemView;
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 enum class QueueStatus {
   Stopped,
@@ -127,4 +127,4 @@ public:
   static void convertJobQueueToSeparateIniFiles();
 };
 
-}}}
+}

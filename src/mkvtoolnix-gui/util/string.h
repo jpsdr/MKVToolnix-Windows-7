@@ -7,7 +7,7 @@
 class QString;
 class QStringList;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 enum EscapeMode {
   EscapeJSON,
@@ -52,4 +52,4 @@ public:
   QRegularExpression &operator *();
 };
 
-}}}
+}

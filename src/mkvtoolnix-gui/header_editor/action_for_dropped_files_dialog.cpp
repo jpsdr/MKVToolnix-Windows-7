@@ -4,7 +4,7 @@
 #include "mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h"
 #include "mkvtoolnix-gui/header_editor/action_for_dropped_files_dialog.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -39,4 +39,4 @@ ActionForDroppedFilesDialog::alwaysUseThisDecision()
   return ui->cbAlwaysUseThisDecision->isChecked();
 }
 
-}}}
+}

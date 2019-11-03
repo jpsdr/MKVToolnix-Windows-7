@@ -16,7 +16,7 @@
 #include "common/json.h"
 #include "common/strings/editing.h"
 
-namespace mtx { namespace id {
+namespace mtx::id {
 
 char const * const aac_is_sbr                      = "aac_is_sbr";                      // track ascii-string format:^(true|unknown)$
 char const * const audio_bits_per_sample           = "audio_bits_per_sample";           // track unsigned-integer
@@ -111,4 +111,4 @@ public:
   }
 };
 
-}}
+}

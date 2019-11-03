@@ -15,7 +15,7 @@
 
 #include "common/hdmv_pgs.h"
 
-namespace mtx { namespace hdmv_pgs {
+namespace mtx::hdmv_pgs {
 
 char const *
 name_for_type(uint8_t type) {
@@ -28,4 +28,4 @@ name_for_type(uint8_t type) {
        :                                            "reserved";
 }
 
-}}
+}

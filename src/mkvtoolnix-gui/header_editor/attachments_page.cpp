@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/header_editor/attached_file_page.h"
 #include "mkvtoolnix-gui/header_editor/attachments_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -76,4 +76,4 @@ AttachmentsPage::internalIdentifier()
   return Q("attachments");
 }
 
-}}}
+}

@@ -6,7 +6,7 @@
 
 #include "common/qt.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class ComboBoxBasePrivate;
 class ComboBoxBase: public QComboBox {
@@ -44,4 +44,4 @@ protected:
   static StringPairVector mergeCommonAndAdditionalItems(StringPairVector const &commonItems, StringPairVector const &allItems, QStringList const &additionalItems);
 };
 
-}}}
+}

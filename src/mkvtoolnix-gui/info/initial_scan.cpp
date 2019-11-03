@@ -6,7 +6,7 @@
 #include "mkvtoolnix-gui/info/initial_scan.h"
 #include "mkvtoolnix-gui/util/runnable.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 InitialScan::InitialScan(Util::KaxInfo &info,
                          Util::KaxInfo::ScanType type)
@@ -28,4 +28,4 @@ InitialScan::abort() {
   m_info.abort();
 }
 
-}}}
+}

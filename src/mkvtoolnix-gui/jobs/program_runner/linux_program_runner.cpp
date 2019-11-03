@@ -9,7 +9,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/program_runner/linux_program_runner.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 LinuxProgramRunner::LinuxProgramRunner()
   : ProgramRunner{}
@@ -60,6 +60,6 @@ LinuxProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &) {
   hibernateOrSleepComputer(false);
 }
 
-}}}
+}
 
 #endif  // SYS_LINUX

@@ -15,7 +15,7 @@
 
 #include "common/w64.h"
 
-namespace mtx { namespace w64 {
+namespace mtx::w64 {
 
 unsigned char const g_guid_riff[16] = {
   'r', 'i', 'f', 'f',
@@ -47,4 +47,4 @@ unsigned char const g_guid_data[16] = {
 //   0x5a, 0x52, 0xd2, 0x11, 0x86, 0xdc, 0x00, 0xc0, 0x4f, 0x8e, 0xdb, 0x8a
 // };
 
-}}
+}

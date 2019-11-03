@@ -17,7 +17,7 @@
 #include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 SourceFileModel::SourceFileModel(QObject *parent)
   : QStandardItemModel{parent}
@@ -774,4 +774,4 @@ SourceFileModel::moveSourceFilesUpOrDown(QList<SourceFile *> files,
   updateSourceFileLists();
 }
 
-}}}
+}

@@ -18,7 +18,7 @@
 #include "common/ebml.h"
 #include "common/xml/xml.h"
 
-namespace mtx { namespace xml {
+namespace mtx::xml {
 
 class ebml_converter_c {
 public:
@@ -92,4 +92,4 @@ protected:
   void dump_semantics_recursively(int level, EbmlElement &element, std::map<std::string, bool> &visited_masters) const;
 };
 
-}}
+}

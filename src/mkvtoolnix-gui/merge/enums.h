@@ -8,7 +8,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 enum class TrackType {
   Audio = 0,
@@ -36,4 +36,4 @@ qHash(TrackType const &type) {
   return static_cast<uint>(type);
 }
 
-}}}
+}

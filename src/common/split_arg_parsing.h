@@ -16,7 +16,7 @@
 
 #include "common/split_point.h"
 
-namespace mtx { namespace args {
+namespace mtx::args {
 
 class format_x: public exception {
 protected:
@@ -32,4 +32,4 @@ public:
 
 std::vector<split_point_c> parse_split_parts(const std::string &arg, bool frames_fields);
 
-}}
+}

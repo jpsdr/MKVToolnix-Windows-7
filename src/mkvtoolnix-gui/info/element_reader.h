@@ -8,7 +8,7 @@
 #include "mkvtoolnix-gui/util/kax_info.h"
 #include "mkvtoolnix-gui/util/runnable.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 class ElementReader : public QObject, public Util::Runnable {
   Q_OBJECT
@@ -29,4 +29,4 @@ signals:
   void elementRead(const QModelIndex &idx);
 };
 
-}}}
+}

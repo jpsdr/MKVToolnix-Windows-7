@@ -11,7 +11,7 @@
 class QLocalServer;
 class QThread;
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Util {
 class MediaPlayer;
@@ -119,4 +119,4 @@ public:
   static void setupUiFont();
 };
 
-}}
+}

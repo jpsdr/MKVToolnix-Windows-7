@@ -11,7 +11,7 @@ class QFileInfo;
 class QTreeWidgetItem;
 class Track;
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 namespace Ui {
 class SelectPlaylistDialog;
@@ -36,4 +36,4 @@ protected:
   void setupUi();
 };
 
-}}}
+}

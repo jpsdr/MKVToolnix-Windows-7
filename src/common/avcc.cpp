@@ -19,7 +19,7 @@
 #include "common/mm_mem_io.h"
 #include "common/mpeg.h"
 
-namespace mtx { namespace avc {
+namespace mtx::avc {
 
 avcc_c::avcc_c()
   : m_profile_idc{}
@@ -183,4 +183,4 @@ avcc_c::unpack(memory_cptr const &mem) {
   }
 }
 
-}}
+}

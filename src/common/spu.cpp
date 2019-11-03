@@ -17,7 +17,7 @@
 #include "common/spu.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace spu {
+namespace mtx::spu {
 
 static boost::optional<std::size_t>
 find_stop_display_position(unsigned char const *data,
@@ -115,4 +115,4 @@ set_duration(unsigned char *data,
     put_uint16_be(&data[*position], duration.to_mpeg() / 1024);
 }
 
-}}
+}

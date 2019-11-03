@@ -9,7 +9,7 @@
 
 class QStringList;
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Util {
 class ConfigFile;
@@ -43,4 +43,4 @@ public:
   void buildMkvmergeOptions(QStringList &options) const;
 };
 
-}}}
+}}

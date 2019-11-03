@@ -9,7 +9,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/font.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 namespace {
 bool s_logFontDebugLogged = false;
@@ -71,4 +71,4 @@ defaultUiFont() {
   return *s_font;
 }
 
-}}}
+}

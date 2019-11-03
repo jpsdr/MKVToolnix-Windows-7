@@ -20,7 +20,7 @@
 #include "common/checksums/crc.h"
 #include "common/endian.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 crc_base_c::table_parameters_t const crc_base_c::ms_table_parameters[6] = {
   { 0,  8,       0x07 },
@@ -186,4 +186,4 @@ crc32_ieee_le_c::crc32_ieee_le_c(uint32_t initial_value)
 {
 }
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx::checksum

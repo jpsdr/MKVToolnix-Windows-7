@@ -45,7 +45,7 @@
 #define AVC_EXTENDED_SAR        0xff
 #define AVC_NUM_PREDEFINED_PARS   17
 
-namespace mtx { namespace avc {
+namespace mtx::avc {
 
 struct timing_info_t {
   unsigned int num_units_in_tick, time_scale;
@@ -133,4 +133,4 @@ struct frame_t;
 class es_parser_c;
 using es_parser_cptr = std::shared_ptr<es_parser_c>;
 
-}}
+}

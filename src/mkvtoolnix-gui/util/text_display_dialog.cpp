@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/forms/util/text_display_dialog.h"
 #include "mkvtoolnix-gui/util/text_display_dialog.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class TextDisplayDialogPrivate {
   friend class TextDisplayDialog;
@@ -95,4 +95,4 @@ TextDisplayDialog::eventFilter(QObject *o,
   return QDialog::eventFilter(o, e);
 }
 
-}}}
+}

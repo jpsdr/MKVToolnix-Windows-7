@@ -2,7 +2,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class BasicSleepInhibitorPrivate;
 class BasicSleepInhibitor {
@@ -28,4 +28,4 @@ public:
   static std::unique_ptr<BasicSleepInhibitor> create();
 };
 
-}}}
+}

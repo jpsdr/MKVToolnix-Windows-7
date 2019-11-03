@@ -9,7 +9,7 @@
 class QListWidget;
 class QModelIndex;
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Ui {
 class PreferencesDialog;
@@ -108,4 +108,4 @@ protected:
   bool verifyRunProgramConfigurations();
 };
 
-}}
+}

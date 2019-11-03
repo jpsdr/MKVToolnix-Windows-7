@@ -36,7 +36,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace chapters {
+namespace mtx::chapters {
 
 /** The default language for all chapter entries that don't have their own. */
 std::string g_default_language;
@@ -1141,4 +1141,4 @@ fix_country_codes(EbmlMaster &chapters) {
   }
 }
 
-}}
+}

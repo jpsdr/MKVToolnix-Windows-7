@@ -10,7 +10,7 @@
 
 class QEvent;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class BasicTabWidgetPrivate;
 class BasicTabWidget : public QTabWidget {
@@ -34,4 +34,4 @@ protected:
   virtual bool eventFilter(QObject *o, QEvent *e) override;
 };
 
-}}}
+}

@@ -16,7 +16,7 @@
 #include "common/endian.h"
 #include "common/opus.h"
 
-namespace mtx { namespace opus {
+namespace mtx::opus {
 
 id_header_t
 id_header_t::decode(memory_cptr const &mem) {
@@ -80,4 +80,4 @@ toc_t::decode(memory_cptr const &mem) {
   return toc;
 }
 
-}}
+}

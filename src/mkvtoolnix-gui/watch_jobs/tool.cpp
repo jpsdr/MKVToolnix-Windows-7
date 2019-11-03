@@ -15,7 +15,7 @@
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 
-namespace mtx { namespace gui { namespace WatchJobs {
+namespace mtx::gui::WatchJobs {
 
 Tool::Tool(QWidget *parent,
            QMenu *jobOutputMenu)
@@ -206,4 +206,4 @@ Tool::nextPreviousWindowActionTexts()
   };
 }
 
-}}}
+}

@@ -17,7 +17,7 @@
 
 #include "common/memory.h"
 
-namespace mtx { namespace bytes {
+namespace mtx::bytes {
 
 class buffer_c {
 private:
@@ -133,4 +133,4 @@ private:
 
 using buffer_cptr = std::shared_ptr<buffer_c>;
 
-}}
+}

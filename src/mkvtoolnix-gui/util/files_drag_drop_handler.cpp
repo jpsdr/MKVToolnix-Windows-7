@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class FilesDragDropHandlerPrivate {
 private:
@@ -67,4 +67,4 @@ FilesDragDropHandler::fileNames()
   return p_func()->m_fileNames;
 }
 
-}}}
+}

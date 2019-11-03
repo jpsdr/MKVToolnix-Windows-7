@@ -16,7 +16,7 @@
 #include "common/checksums/adler32.h"
 #include "common/endian.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 adler32_c::adler32_c()
   : m_a{1}
@@ -50,4 +50,4 @@ adler32_c::add_impl(unsigned char const *buffer,
   }
 }
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx::checksum

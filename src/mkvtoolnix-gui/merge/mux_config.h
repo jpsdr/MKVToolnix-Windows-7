@@ -11,7 +11,7 @@
 
 class QTemporaryFile;
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class InvalidSettingsX: public exception {
 public:
@@ -163,4 +163,4 @@ saveSettingsGroup(char const *group,
   settings.endGroup();
 }
 
-}}}
+}

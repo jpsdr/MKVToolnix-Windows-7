@@ -11,7 +11,7 @@
 
 Q_DECLARE_METATYPE(libmatroska::KaxChapterDisplay *)
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 class NameModel: public QStandardItemModel {
   Q_OBJECT
@@ -53,4 +53,4 @@ protected:
   static QList<QStandardItem *> newRowItems();
 };
 
-}}}
+}

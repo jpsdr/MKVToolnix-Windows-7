@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/header_editor/empty_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 class TopLevelPage: public EmptyPage {
   Q_OBJECT
@@ -21,4 +21,4 @@ public:
   virtual void setInternalIdentifier(QString const &identifier);
 };
 
-}}}
+}

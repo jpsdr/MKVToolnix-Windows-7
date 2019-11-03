@@ -9,7 +9,7 @@
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 using namespace mtx::gui;
 
@@ -107,4 +107,4 @@ JobSettingsWidget::emitFileNameChangeSignal(QString const &fileName) {
   emit fileNameChanged(fileName);
 }
 
-}}}
+}

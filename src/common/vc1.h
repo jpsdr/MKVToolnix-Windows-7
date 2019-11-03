@@ -32,7 +32,7 @@
 #define VC1_MARKER_ENTRYPOINT 0x0000010e
 #define VC1_MARKER_SEQHDR     0x0000010f
 
-namespace mtx { namespace vc1 {
+namespace mtx::vc1 {
 
 enum frame_type_e {
   FRAME_TYPE_I,
@@ -264,4 +264,4 @@ protected:
   static void add_extra_data_if_not_present(std::deque<memory_cptr> &extra_data, memory_cptr const &packet);
 };
 
-}}
+}

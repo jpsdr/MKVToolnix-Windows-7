@@ -21,7 +21,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace xml {
+namespace mtx::xml {
 
 ebml_tags_converter_c::ebml_tags_converter_c()
 {
@@ -130,4 +130,4 @@ ebml_tags_converter_c::parse_file(std::string const &file_name,
   return {};
 }
 
-}}
+}

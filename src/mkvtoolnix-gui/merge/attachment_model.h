@@ -8,7 +8,7 @@
 #include <QList>
 #include <QStandardItemModel>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 class AttachmentModel;
 using AttachmentModelPtr = std::shared_ptr<AttachmentModel>;
@@ -61,4 +61,4 @@ protected:
 
 };
 
-}}}
+}

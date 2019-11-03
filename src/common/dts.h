@@ -17,11 +17,11 @@
 #include "common/codec.h"
 #include "common/timestamp.h"
 
-namespace mtx { namespace bits {
+namespace mtx::bits {
 class reader_c;
-}}
+}
 
-namespace mtx { namespace dts {
+namespace mtx::dts {
 
 enum class sync_word_e {
     core = 0x7ffe8001
@@ -270,4 +270,4 @@ bool detect(const void *src_buf, int len, bool &convert_14_to_16, bool &swap_byt
 void remove_dialog_normalization_gain(unsigned char *buf, std::size_t size);
 
 
-}}
+}

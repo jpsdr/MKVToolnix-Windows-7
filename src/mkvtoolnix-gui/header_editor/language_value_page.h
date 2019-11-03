@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/header_editor/value_page.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Util {
 class LanguageComboBox;
@@ -31,4 +31,4 @@ public:
   virtual void copyValueToElement() override;
 };
 
-}}}
+}}

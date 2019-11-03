@@ -10,7 +10,7 @@
 # include "mkvtoolnix-gui/util/sleep_inhibitor/linux_logind.h"
 #endif
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 debugging_option_c BasicSleepInhibitorPrivate::ms_debug{"sleep_inhibitor"};
 
@@ -73,4 +73,4 @@ BasicSleepInhibitor::create() {
  return inhibitor;
 }
 
-}}}
+}

@@ -19,7 +19,7 @@
 
 #include <ebml/EbmlBinary.h>
 
-namespace mtx { namespace bits {
+namespace mtx::bits {
 
 class value_parser_x: public exception {
 protected:
@@ -64,4 +64,4 @@ public:
 };
 using value_cptr = std::shared_ptr<value_c>;
 
-}}
+}

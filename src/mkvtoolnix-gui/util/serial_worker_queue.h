@@ -6,7 +6,7 @@
 
 class QThread;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class Runnable;
 
@@ -33,4 +33,4 @@ public:
   static std::pair<QThread *, SerialWorkerQueue *> create();
 };
 
-}}}
+}

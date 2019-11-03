@@ -15,7 +15,7 @@
 
 #include "common/bluray/util.h"
 
-namespace mtx { namespace bluray {
+namespace mtx::bluray {
 
 namespace {
 
@@ -72,4 +72,4 @@ find_other_file(bfs::path const &reference_file_name,
   }
 }
 
-}}
+}

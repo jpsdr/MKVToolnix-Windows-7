@@ -22,7 +22,7 @@
 using namespace libmatroska;
 using namespace mtx::gui;
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 AttachedFilePage::AttachedFilePage(Tab &parent,
                                    PageBase &topLevelPage,
@@ -230,4 +230,4 @@ AttachedFilePage::replaceContent(bool deriveNameAndMimeType) {
   Util::setComboBoxTextByData(ui->mimeType, mimeType);
 }
 
-}}}
+}

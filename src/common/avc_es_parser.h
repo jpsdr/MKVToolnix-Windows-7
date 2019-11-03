@@ -19,7 +19,7 @@
 #include "common/avc.h"
 #include "common/math_fwd.h"
 
-namespace mtx { namespace avc {
+namespace mtx::avc {
 
 struct frame_t {
   memory_cptr m_data;
@@ -257,4 +257,4 @@ public:
   void update_frame_stats();
 };
 
-}}
+}

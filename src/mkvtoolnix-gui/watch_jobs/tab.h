@@ -10,7 +10,7 @@
 class QDateTime;
 class QLabel;
 
-namespace mtx { namespace gui { namespace WatchJobs {
+namespace mtx::gui::WatchJobs {
 
 namespace Ui {
 class Tab;
@@ -76,4 +76,4 @@ protected:
   static void updateOneRemainingTimeLabel(QLabel *label, QDateTime const &startTime, uint64_t progress);
 };
 
-}}}
+}

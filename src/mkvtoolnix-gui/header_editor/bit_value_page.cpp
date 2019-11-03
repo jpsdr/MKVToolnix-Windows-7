@@ -6,7 +6,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/bit_value_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -88,4 +88,4 @@ BitValuePage::valueToBitvalue()
   return { to_utf8(cleanedText), bitLength };
 }
 
-}}}
+}

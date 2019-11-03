@@ -23,7 +23,7 @@
 #include "common/strings/editing.h"
 #include "common/timestamp.h"
 
-namespace mtx { namespace conversion {
+namespace mtx::conversion {
 
 template <bool is_unsigned>
 struct unsigned_checker {
@@ -40,7 +40,7 @@ struct unsigned_checker<true> {
   }
 };
 
-}}
+}
 
 bool parse_number_as_rational(std::string const &string, int64_rational_c &value);
 

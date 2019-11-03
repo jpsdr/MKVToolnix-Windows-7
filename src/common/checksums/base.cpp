@@ -18,7 +18,7 @@
 #include "common/checksums/crc.h"
 #include "common/checksums/md5.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 base_uptr
 for_algorithm(algorithm_e algorithm,
@@ -129,4 +129,4 @@ set_initial_value_c::set_initial_value(unsigned char const *buffer,
   set_initial_value_impl(buffer, size);
 }
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx:: checksum

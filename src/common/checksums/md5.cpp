@@ -18,7 +18,7 @@
 #include "common/checksums/md5.h"
 #include "common/endian.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 #define F(x,  y, z) ((z)  ^ ((x) & ((y) ^ (z))))
 #define G(x,  y, z) ((y)  ^ ((z) & ((x) ^ (y))))
@@ -216,4 +216,4 @@ md5_c::get_result()
   return memory_c::clone(m_result, 16);
 }
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx::checksum

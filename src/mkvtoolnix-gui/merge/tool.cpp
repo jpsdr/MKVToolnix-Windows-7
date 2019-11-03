@@ -20,7 +20,7 @@
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -453,4 +453,4 @@ Tool::nextPreviousWindowActionTexts()
   };
 }
 
-}}}
+}

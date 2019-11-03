@@ -8,7 +8,7 @@
 #include "mkvtoolnix-gui/util/side_by_side_multi_select.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class SideBySideMultiSelectPrivate {
   friend class SideBySideMultiSelect;
@@ -178,4 +178,4 @@ SideBySideMultiSelect::revertLists() {
   setItems(p->initiallyAvailableItems, p->initiallySelectedItems);
 }
 
-}}}
+}

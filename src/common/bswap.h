@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace bytes {
+namespace mtx::bytes {
 
 inline uint16_t
 swap_16(uint16_t x) {
@@ -47,4 +47,4 @@ swap_64(uint64_t x) {
 
 void swap_buffer(unsigned char const *src, unsigned char *dst, std::size_t num_bytes, std::size_t word_length);
 
-}}
+}

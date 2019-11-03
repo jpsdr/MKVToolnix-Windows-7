@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/tree.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 void
 expandCollapseAll(QTreeView *view,
                   bool expand,
@@ -16,4 +16,4 @@ expandCollapseAll(QTreeView *view,
     expandCollapseAll(view, expand, view->model()->index(row, 0, parentIdx));
 }
 
-}}}
+}

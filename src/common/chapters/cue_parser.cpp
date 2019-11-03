@@ -34,7 +34,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace chapters {
+namespace mtx::chapters {
 
 // PERFORMER "Blackmore's Night"
 // TITLE "Fires At Midnight"
@@ -462,4 +462,4 @@ parse_cue(mm_text_io_c *in,
   return 0 == a.num ? nullptr : chapters;
 }
 
-}}
+}

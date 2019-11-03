@@ -16,7 +16,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -725,4 +725,4 @@ Tab::changeOutputDirectoryTo(QString const &directory) {
   ui->output->setText(QDir::toNativeSeparators(newFilePath));
 }
 
-}}}
+}

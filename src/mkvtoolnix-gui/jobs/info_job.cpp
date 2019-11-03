@@ -15,7 +15,7 @@
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 using namespace mtx::gui;
 
@@ -199,4 +199,4 @@ InfoJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
   variables[Q("JOB_TYPE")] << Q("info");
 }
 
-}}}
+}

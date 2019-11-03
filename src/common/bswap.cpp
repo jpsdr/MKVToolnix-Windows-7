@@ -16,7 +16,7 @@
 #include "common/bswap.h"
 #include "common/endian.h"
 
-namespace mtx { namespace bytes {
+namespace mtx::bytes {
 
 void
 swap_buffer(unsigned char const *src,
@@ -30,4 +30,4 @@ swap_buffer(unsigned char const *src,
     put_uint_le(&dst[idx], get_uint_be(&src[idx], word_length), word_length);
 }
 
-}}
+}

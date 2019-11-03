@@ -23,7 +23,7 @@
 #include "common/list_utils.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace av1 {
+namespace mtx::av1 {
 
 class parser_private_c {
   friend class parser_c;
@@ -690,4 +690,4 @@ parser_c::debug_obu_types(unsigned char const *buffer,
   }
 }
 
-}}
+}

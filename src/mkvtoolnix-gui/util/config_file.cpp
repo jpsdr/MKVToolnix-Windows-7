@@ -8,7 +8,7 @@
 #include "mkvtoolnix-gui/util/ini_config_file.h"
 #include "mkvtoolnix-gui/util/json_config_file.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 ConfigFile::ConfigFile(QString const &fileName)
   : m_fileName{fileName}
@@ -73,4 +73,4 @@ ConfigFile::create(QString const &fileName) {
   return ConfigFilePtr{new JsonConfigFile{fileName}};
 }
 
-}}}
+}

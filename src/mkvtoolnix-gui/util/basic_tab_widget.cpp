@@ -7,7 +7,7 @@
 #include "common/list_utils.h"
 #include "mkvtoolnix-gui/util/basic_tab_widget.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 using namespace mtx::gui;
 
@@ -61,4 +61,4 @@ BasicTabWidget::eventFilter(QObject *o,
   return QTabWidget::eventFilter(o, e);
 }
 
-}}}
+}

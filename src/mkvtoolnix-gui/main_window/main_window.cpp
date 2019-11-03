@@ -43,7 +43,7 @@
 
 #define GET_P static_cast<MainWindowPrivate *>(get()->p_ptr.get())
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 MainWindow *s_mainWindow = nullptr;
 
@@ -855,4 +855,4 @@ MainWindow::stopQueueSpinner() {
   startStopQueueSpinner(false);
 }
 
-}}
+}

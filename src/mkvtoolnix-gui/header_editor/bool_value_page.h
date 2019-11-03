@@ -6,7 +6,7 @@
 
 class QComboBox;
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 class Tab;
 
@@ -27,4 +27,4 @@ public:
   virtual void copyValueToElement() override;
 };
 
-}}}
+}

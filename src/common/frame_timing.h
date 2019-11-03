@@ -15,7 +15,7 @@
 
 #include "common/math_fwd.h"
 
-namespace mtx { namespace frame_timing {
+namespace mtx::frame_timing {
 
 struct common_frame_rate_t {
   int64_t duration;
@@ -26,4 +26,4 @@ extern std::vector<common_frame_rate_t> g_common_frame_rates;
 
 int64_rational_c determine_frame_rate(int64_t duration, int64_t max_difference = 20'000);
 
-}}
+}

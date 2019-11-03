@@ -7,7 +7,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 QString
 dirPath(QDir const &dir) {
@@ -93,4 +93,4 @@ getExistingDirectory(QWidget *parent,
   return QDir::toNativeSeparators(QFileDialog::getExistingDirectory(parent, caption, sanitizeDirectory(dir, false), options & QFileDialog::DontUseCustomDirectoryIcons));
 }
 
-}}}
+}

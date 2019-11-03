@@ -22,7 +22,7 @@
 
 using namespace libmatroska;
 
-namespace mtx { namespace chapters {
+namespace mtx::chapters {
 
 using chapter_entry_c         = std::pair<timestamp_c, std::string>;
 using chapter_entry_storage_c = std::vector<chapter_entry_c>;
@@ -91,4 +91,4 @@ write_simple(KaxChapters &chapters,
   return chapter_num;
 }
 
-}}
+}

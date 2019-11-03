@@ -5,7 +5,7 @@
 
 #include "mkvtoolnix-gui/util/files_drag_drop_widget.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class FilesDragDropWidgetPrivate {
 private:
@@ -43,4 +43,4 @@ FilesDragDropWidget::dropEvent(QDropEvent *event) {
     emit filesDropped(p->m_filesDDHandler.fileNames());
 }
 
-}}}
+}

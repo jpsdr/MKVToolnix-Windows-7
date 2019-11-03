@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/util/string_list_configuration_widget.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 namespace {
 
@@ -183,4 +183,4 @@ StringListConfigurationWidget::sortAfterItemChanged(QListWidgetItem *item) {
   p_func()->ui->lwItems->sortItems();
 }
 
-}}}
+}

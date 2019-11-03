@@ -21,7 +21,7 @@
 #include "common/fourcc.h"
 #include "common/timestamp.h"
 
-namespace mtx { namespace bluray { namespace mpls {
+namespace mtx::bluray::mpls {
 
 // Blu-ray specs 5.3.4.5.2.1 table 5-8
 enum class stream_type_e {
@@ -186,4 +186,4 @@ protected:
 };
 using parser_cptr = std::shared_ptr<parser_c>;
 
-}}}
+}

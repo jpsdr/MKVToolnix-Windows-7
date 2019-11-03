@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/sleep_inhibitor.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class MacOSSleepInhibitorPrivate;
 class MacOSSleepInhibitor : public BasicSleepInhibitor {
@@ -23,4 +23,4 @@ public:
   virtual bool isInhibited() const override;
 };
 
-}}}
+}

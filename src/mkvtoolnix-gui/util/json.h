@@ -6,9 +6,9 @@
 
 class QVariant;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 QVariant nlohmannJsonToVariant(nlohmann::json const &json);
 nlohmann::json variantToNlohmannJson(QVariant const &variant);
 
-}}}
+}

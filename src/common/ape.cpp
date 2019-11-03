@@ -18,7 +18,7 @@
 #include "common/endian.h"
 #include "common/mm_io.h"
 
-namespace mtx { namespace ape {
+namespace mtx::ape {
 
 int
 tag_present_at_end(mm_io_c &io) {
@@ -45,4 +45,4 @@ tag_present_at_end(mm_io_c &io) {
   return tag_size;
 }
 
-}}
+}

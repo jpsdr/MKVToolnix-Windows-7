@@ -11,7 +11,7 @@
 class QAction;
 class QMenu;
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 namespace Ui {
 class Tool;
@@ -91,4 +91,4 @@ protected:
   virtual void selectJobs(QList<Job *> const &jobs);
 };
 
-}}}
+}

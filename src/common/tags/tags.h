@@ -31,7 +31,7 @@ namespace libebml {
   class EbmlMaster;
 }
 
-namespace mtx { namespace tags {
+namespace mtx::tags {
 
 void remove_track_uid_targets(libebml::EbmlMaster *tag);
 void remove_elements_unsupported_by_webm(libebml::EbmlMaster &master);
@@ -147,4 +147,4 @@ remove_simple_tags_for(libmatroska::KaxTags &tags,
   return removed_something;
 }
 
-}}
+}

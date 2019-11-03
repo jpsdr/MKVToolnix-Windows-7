@@ -12,7 +12,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class StatusBarProgressWidgetPrivate {
   friend class StatusBarProgressWidget;
@@ -164,4 +164,4 @@ StatusBarProgressWidget::mouseReleaseEvent(QMouseEvent *event) {
   menu.exec(mapToGlobal(event->pos()));
 }
 
-}}
+}

@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace base64 {
+namespace mtx::base64 {
 class exception: public mtx::exception {
 public:
   virtual const char *what() const throw() {
@@ -32,4 +32,4 @@ public:
 std::string encode(const unsigned char *src, int src_len, bool line_breaks = false, int max_line_len = 72);
 std::string decode(std::string const &src);
 
-}}
+}

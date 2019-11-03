@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace kax_info {
+namespace mtx::kax_info {
 
 struct track_t {
   uint64_t tnum{}, tuid{};
@@ -66,4 +66,4 @@ public:
   virtual ~private_c() = default;
 };
 
-}}
+}

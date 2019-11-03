@@ -17,7 +17,7 @@
 #include <QStringList>
 #include <QTemporaryFile>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -788,4 +788,4 @@ MuxConfig::formatDelayAndStretchBy(QString const &delay,
   return arg;
 }
 
-}}}
+}

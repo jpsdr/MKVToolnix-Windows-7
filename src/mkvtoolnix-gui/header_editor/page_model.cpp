@@ -6,7 +6,7 @@
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -164,4 +164,4 @@ PageModel::retranslateUi() {
   });
 }
 
-}}}
+}

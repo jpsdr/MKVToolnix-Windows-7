@@ -7,7 +7,7 @@
 #include "mkvtoolnix-gui/jobs/job_p.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 class InfoJobPrivate: public JobPrivate {
 public:
@@ -19,4 +19,4 @@ public:
   explicit InfoJobPrivate(Job::Status pStatus, mtx::gui::Info::InfoConfigPtr const &pConfig);
 };
 
-}}}
+}

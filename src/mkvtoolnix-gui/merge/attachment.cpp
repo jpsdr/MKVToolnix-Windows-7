@@ -9,7 +9,7 @@
 
 #include <QFileInfo>
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 Attachment::Attachment(QString const &fileName)
   : m_fileName(fileName)
@@ -58,4 +58,4 @@ Attachment::buildMkvmergeOptions(QStringList &opt)
   opt << (ToAllFiles == m_style ? Q("--attach-file") : Q("--attach-file-once")) << m_fileName;
 }
 
-}}}
+}

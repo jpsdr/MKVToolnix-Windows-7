@@ -17,7 +17,7 @@
 
 #include "common/timestamp.h"
 
-namespace mtx { namespace hdmv_textst {
+namespace mtx::hdmv_textst {
 
 // Blu-ray Disc Read-Only Format: table 9-70 Segment types
 enum segment_type_e {
@@ -39,4 +39,4 @@ enum character_code_e {         // corresponding iconv charset names
 ::timestamp_c get_timestamp(unsigned char const *buf);
 void put_timestamp(unsigned char *buf, ::timestamp_c const &timestamp);
 
-}}
+}

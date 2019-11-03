@@ -18,7 +18,7 @@
 
 #include "common/avc_types.h"
 
-namespace mtx { namespace avc {
+namespace mtx::avc {
 
 memory_cptr parse_sps(memory_cptr const &buffer, sps_info_t &sps, bool keep_ar_info = false, bool fix_bitstream_frame_rate = false, int64_t duration = -1);
 bool parse_pps(memory_cptr const &buffer, pps_info_t &pps);
@@ -28,4 +28,4 @@ memory_cptr fix_sps_fps(memory_cptr const &buffer, int64_t duration);
 bool is_avc_fourcc(const char *fourcc);
 memory_cptr avcc_to_nalus(const unsigned char *buffer, size_t size);
 
-}}
+}

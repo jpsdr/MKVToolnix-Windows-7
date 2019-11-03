@@ -42,7 +42,7 @@
 using namespace libmatroska;
 using namespace mtx::gui;
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 class TabPrivate {
 public:
@@ -331,4 +331,4 @@ Tab::showElementHexDumpInViewer() {
     delete dlg;
 }
 
-}}}
+}

@@ -7,7 +7,7 @@
 #include "mkvtoolnix-gui/header_editor/time_value_page.h"
 #include "mkvtoolnix-gui/util/string.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -65,4 +65,4 @@ TimeValuePage::copyValueToElement() {
   static_cast<EbmlDate *>(m_element)->SetEpochDate(m_dteValue->dateTime().toUTC().toMSecsSinceEpoch() / 1000);
 }
 
-}}}
+}

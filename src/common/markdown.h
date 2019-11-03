@@ -15,10 +15,10 @@
 
 #if defined(HAVE_CMARK)
 
-namespace mtx { namespace markdown {
+namespace mtx::markdown {
 
 std::string to_html(std::string const &markdown_text, int options = 0);
 
-}}
+}
 
 #endif  // defined(HAVE_CMARK)

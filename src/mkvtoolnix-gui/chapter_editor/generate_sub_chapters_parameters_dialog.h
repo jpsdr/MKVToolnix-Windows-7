@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/types.h"
 
-namespace mtx { namespace gui { namespace ChapterEditor {
+namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
 class GenerateSubChaptersParametersDialog;
@@ -37,4 +37,4 @@ protected:
   void retranslateUi();
 };
 
-}}}
+}

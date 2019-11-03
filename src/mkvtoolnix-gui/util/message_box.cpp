@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class MessageBoxPrivate {
   friend class MessageBox;
@@ -179,4 +179,4 @@ MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
   return msgBox.standardButton(msgBox.clickedButton());
 }
 
-}}}
+}

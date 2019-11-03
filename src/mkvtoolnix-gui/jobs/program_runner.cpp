@@ -23,7 +23,7 @@
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/string.h"
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace mtx::gui::Jobs {
 
 ProgramRunner::ProgramRunner()
   : QObject{}
@@ -238,4 +238,4 @@ ProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &/* config */) {
   // Not supported in an OS-agnostic way.
 }
 
-}}}
+}

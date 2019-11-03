@@ -15,7 +15,7 @@
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/string.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 BomAsciiCheckResult
 checkForBomAndNonAscii(QString const &fileName) {
@@ -110,4 +110,4 @@ replaceDirectoriesByContainedFiles(QStringList const &namesToCheck) {
   return fileNames;
 }
 
-}}}
+}

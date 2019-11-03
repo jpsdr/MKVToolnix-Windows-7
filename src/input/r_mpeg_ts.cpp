@@ -73,7 +73,7 @@
 
 #define TS_SDT_TID         0x42
 
-namespace mtx { namespace mpeg_ts {
+namespace mtx::mpeg_ts {
 
 int reader_c::potential_packet_sizes[] = { 188, 192, 204, 0 };
 
@@ -2628,4 +2628,4 @@ reader_c::get_maximum_progress() {
   return m_bytes_to_process;
 }
 
-}}
+}

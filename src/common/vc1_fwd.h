@@ -14,7 +14,7 @@
 
 #pragma once
 
-namespace mtx { namespace vc1 {
+namespace mtx::vc1 {
 
 struct frame_t;
 using frame_cptr = std::shared_ptr<frame_t>;
@@ -22,4 +22,4 @@ using frame_cptr = std::shared_ptr<frame_t>;
 class es_parser_c;
 using es_parser_cptr = std::shared_ptr<es_parser_c>;
 
-}}
+}

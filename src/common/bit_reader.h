@@ -18,7 +18,7 @@
 
 #include "common/mm_io_x.h"
 
-namespace mtx { namespace bits {
+namespace mtx::bits {
 
 class reader_c {
 private:
@@ -248,4 +248,4 @@ protected:
 };
 using reader_cptr = std::shared_ptr<reader_c>;
 
-}}
+}

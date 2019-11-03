@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/util/config_file.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 class InvalidSettingsX: public exception {
 public:
@@ -41,4 +41,4 @@ public:
   static QString settingsType();
 };
 
-}}}
+}

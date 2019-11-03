@@ -6,7 +6,7 @@
 
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 namespace Ui {
 class ActionForDroppedFilesDialog;
@@ -25,4 +25,4 @@ public:
   bool alwaysUseThisDecision() const;
 };
 
-}}}
+}

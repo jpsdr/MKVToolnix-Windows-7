@@ -15,7 +15,7 @@
 
 #include "common/math.h"
 
-namespace mtx { namespace math {
+namespace mtx::math {
 
 uint64_t
 round_to_nearest_pow2(uint64_t value) {
@@ -64,4 +64,4 @@ clamp_values_to(int64_rational_c const &r,
 
   return { boost::rational_cast<int64_t>(num * mult), den ? den : 1 };
 }
-}}
+}

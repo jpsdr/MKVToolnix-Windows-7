@@ -26,7 +26,7 @@
 using namespace libebml;
 using namespace libmatroska;
 
-namespace mtx { namespace tags {
+namespace mtx::tags {
 
 KaxTags *
 select_for_chapters(KaxTags &tags,
@@ -381,4 +381,4 @@ remove_track_statistics(KaxTags *tags,
   return removed_something;
 }
 
-}}
+}

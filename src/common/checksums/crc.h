@@ -17,7 +17,7 @@
 
 #include "common/checksums/base.h"
 
-namespace mtx { namespace checksum {
+namespace mtx::checksum {
 
 class crc_base_c: public base_c, public uint_result_c, public set_initial_value_c {
 protected:
@@ -122,4 +122,4 @@ public:
   virtual ~crc32_ieee_le_c() = default;
 };
 
-}} // namespace mtx { namespace checksum {
+} // namespace mtx::checksum

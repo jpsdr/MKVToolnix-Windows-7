@@ -24,7 +24,7 @@
 #include "mkvtoolnix-gui/util/settings_names.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 QIcon
 loadIcon(QString const &name,
@@ -203,4 +203,4 @@ addSegmentUIDFromFileToLineEdit(QWidget &parent,
   }
 }
 
-}}}
+}

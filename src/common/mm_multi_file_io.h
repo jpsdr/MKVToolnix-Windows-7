@@ -17,9 +17,9 @@
 
 #include "common/mm_io.h"
 
-namespace mtx { namespace id {
+namespace mtx::id {
 class info_c;
-}}
+}
 
 class mm_multi_file_io_private_c;
 class mm_multi_file_io_c: public mm_io_c {

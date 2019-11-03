@@ -26,7 +26,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <QTimer>
 #include <QColor>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class WaitingSpinnerWidget : public QWidget {
     Q_OBJECT
@@ -118,4 +118,4 @@ private:
     bool    _isSpinning;
 };
 
-}}}
+}

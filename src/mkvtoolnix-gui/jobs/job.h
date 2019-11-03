@@ -12,7 +12,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 namespace Util {
 class ConfigFile;
@@ -137,7 +137,7 @@ public:                         // static
   static QString queueLocation();
 };
 
-}}}
+}}
 
 Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::LineType)
 Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::Status)

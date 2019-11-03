@@ -13,8 +13,8 @@
 
 #include "common/common_pch.h"
 
-namespace mtx { namespace vobsub {
+namespace mtx::vobsub {
 
 std::string create_default_index(unsigned int width, unsigned int height, std::string const &palette);
 
-}}
+}

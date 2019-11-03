@@ -20,7 +20,7 @@
 #include "common/hevc.h"
 #include "common/hevcc.h"
 
-namespace mtx { namespace hevc {
+namespace mtx::hevc {
 
 hevcc_c::hevcc_c()
   : m_configuration_version{}
@@ -458,4 +458,4 @@ hevcc_c::unpack(memory_cptr const &mem) {
   }
 }
 
-}}                              // namespace mtx::hevc
+}                              // namespace mtx::hevc

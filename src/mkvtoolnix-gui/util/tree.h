@@ -6,8 +6,8 @@
 
 class QTreeView;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 void expandCollapseAll(QTreeView *view, bool expand, QModelIndex const &parentIdx = {});
 
-}}}
+}

@@ -9,7 +9,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 CharacterSetComboBox::CharacterSetComboBox(QWidget *parent)
   : ComboBoxBase{parent}
@@ -72,4 +72,4 @@ CharacterSetComboBox::setup(bool withEmpty,
   return *this;
 }
 
-}}}
+}

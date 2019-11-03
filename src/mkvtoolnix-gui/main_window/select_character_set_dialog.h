@@ -10,7 +10,7 @@
 class QListWidget;
 class QVariant;
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class SelectCharacterSetDialogPrivate;
 class SelectCharacterSetDialog : public QDialog {
@@ -42,4 +42,4 @@ protected:
   QString selectedCharacterSet() const;
 };
 
-}}
+}

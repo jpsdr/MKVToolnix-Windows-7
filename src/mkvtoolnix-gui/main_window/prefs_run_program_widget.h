@@ -7,7 +7,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class PrefsRunProgramWidgetPrivate;
 class PrefsRunProgramWidget : public QWidget {
@@ -57,4 +57,4 @@ protected:
   void showPageForType(Util::Settings::RunProgramType type);
 };
 
-}}
+}

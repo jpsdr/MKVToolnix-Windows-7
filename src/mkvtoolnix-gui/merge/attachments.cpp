@@ -16,7 +16,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
@@ -544,4 +544,4 @@ Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const 
   m_attachmentsModel->addAttachments(QList<AttachmentPtr>{} << attachment);
 }
 
-}}}
+}

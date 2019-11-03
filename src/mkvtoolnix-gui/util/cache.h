@@ -7,7 +7,7 @@
 
 class QMutex;
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 class ConfigFile;
 
@@ -32,4 +32,4 @@ private:
   static QString currentVersionString();
 };
 
-}}}
+}

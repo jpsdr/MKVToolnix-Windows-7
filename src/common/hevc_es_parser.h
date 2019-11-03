@@ -18,7 +18,7 @@
 #include "common/hevc_types.h"
 #include "common/math_fwd.h"
 
-namespace mtx { namespace hevc {
+namespace mtx::hevc {
 
 struct slice_info_t {
   unsigned char nalu_type{};
@@ -214,4 +214,4 @@ protected:
   static void init_nalu_names();
 };
 
-}}                              // namespace mtx::hevc
+}                              // namespace mtx::hevc

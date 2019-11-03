@@ -5,7 +5,7 @@
 #include "common/cli_parser.h"
 #include "common/qt.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 class GuiCliParserPrivate;
 class GuiCliParser: public mtx::cli::parser_c {
@@ -46,4 +46,4 @@ protected:
   void enableHack();
 };
 
-}}
+}

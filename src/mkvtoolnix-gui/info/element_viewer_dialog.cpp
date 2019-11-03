@@ -15,7 +15,7 @@
 #include "mkvtoolnix-gui/info/model.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 
-namespace mtx { namespace gui { namespace Info {
+namespace mtx::gui::Info {
 
 namespace {
 
@@ -291,4 +291,4 @@ ElementViewerDialog::setSize(boost::optional<uint64_t> signaledSize,
   return *this;
 }
 
-}}}
+}

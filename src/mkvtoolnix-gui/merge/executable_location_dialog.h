@@ -7,7 +7,7 @@
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx::gui::Merge {
 
 namespace Ui {
 class ExecutableLocationDialog;
@@ -31,4 +31,4 @@ public slots:
   void browse();
 };
 
-}}}
+}

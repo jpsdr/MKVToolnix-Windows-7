@@ -20,7 +20,7 @@
 #include "common/list_utils.h"
 #include "common/strings/formatting.h"
 
-namespace mtx { namespace bluray { namespace mpls {
+namespace mtx::bluray::mpls {
 
 static timestamp_c
 mpls_time_to_timestamp(uint64_t value) {
@@ -496,4 +496,4 @@ parser_c::dump()
   m_playlist.dump();
 }
 
-}}}
+}

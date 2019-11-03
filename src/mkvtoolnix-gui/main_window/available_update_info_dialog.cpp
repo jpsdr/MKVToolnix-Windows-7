@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 
-namespace mtx { namespace gui {
+namespace mtx::gui {
 
 AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
@@ -200,6 +200,6 @@ AvailableUpdateInfoDialog::visitDownloadLocation() {
   QDesktopServices::openUrl(m_downloadURL);
 }
 
-}}
+}
 
 #endif  // HAVE_UPDATE_CHECK

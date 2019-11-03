@@ -7,7 +7,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/empty_page.h"
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 using namespace mtx::gui;
 
@@ -73,4 +73,4 @@ EmptyPage::retranslateUi() {
   m_lContent->setText(Q(m_content.get_translated()));
 }
 
-}}}
+}

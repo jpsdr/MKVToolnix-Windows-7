@@ -6,7 +6,7 @@
 
 #include <QStringList>
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 QStringList FileTypeFilter::s_filter;
 
@@ -59,4 +59,4 @@ FileTypeFilter::reset() {
   mtx::file_type_t::reset();
 }
 
-}}}
+}

@@ -17,7 +17,7 @@
 
 # include "common/markdown.h"
 
-namespace mtx { namespace markdown {
+namespace mtx::markdown {
 
 std::string
 to_html(std::string const &markdown_text,
@@ -32,6 +32,6 @@ to_html(std::string const &markdown_text,
   return html_str;
 }
 
-}}
+}
 
 #endif  // defined(HAVE_CMARK)

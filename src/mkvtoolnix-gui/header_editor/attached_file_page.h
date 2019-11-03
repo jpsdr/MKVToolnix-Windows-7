@@ -9,7 +9,7 @@ namespace libmatroska {
 class KaxAttached;
 }
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace mtx::gui::HeaderEditor {
 
 namespace Ui {
 class AttachedFilePage;
@@ -56,4 +56,4 @@ protected:
   virtual QString formatSize() const;
 };
 
-}}}
+}

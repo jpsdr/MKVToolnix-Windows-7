@@ -24,7 +24,7 @@
 #include "common/flac.h"
 #include "common/mm_io_x.h"
 
-namespace mtx { namespace flac {
+namespace mtx::flac {
 
 static FLAC__StreamDecoderReadStatus
 flac_read_cb(const FLAC__StreamDecoder *,
@@ -353,6 +353,6 @@ decode_headers(unsigned char const *mem,
   return result;
 }
 
-}}                              // namespace mtx::flac
+}                              // namespace mtx::flac
 
 #endif

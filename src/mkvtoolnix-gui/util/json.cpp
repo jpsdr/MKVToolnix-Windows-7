@@ -7,7 +7,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/json.h"
 
-namespace mtx { namespace gui { namespace Util {
+namespace mtx::gui::Util {
 
 QVariant
 nlohmannJsonToVariant(nlohmann::json const &json) {
@@ -77,4 +77,4 @@ variantToNlohmannJson(QVariant const &variant) {
        :                                                               logUnsupportedVariantType(variant);
 }
 
-}}}
+}
