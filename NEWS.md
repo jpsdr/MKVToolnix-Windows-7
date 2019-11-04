@@ -2,8 +2,11 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: Windows: added a dark mode that's enabled when Windows 10's
-  dark mode is turned on.
+* mkvmerge: Blu-ray: when reading an MPLS playlist mkvmerge will look up and
+  use chapter names from the Blu-ray's "track/chapter names" meta data if it
+  exists. Part of the implementation of 2486.
+* mkvmerge: MP4 reader: if present, cover art images (the
+  `meta.udta.ilist.covr` atom) will be converted into attachments.
 * MKVToolNix GUI: multiplexer: when adding a playlist from a Blu-ray disc, the
   disc library meta data will be parsed, and the biggest thumbnail, if
   present, will be added as a new attachment with name `cover.jpg` (extension
@@ -15,33 +18,30 @@
   name will now be based on the file title if one is set at that point. This
   works in conjunction with the title being said from the Blu-ray disc library
   meta data.
-* translations: added a Bulgarian translation of the programs & the man pages
-  by Симеон Цветков (see `AUTHORS`).
-* mkvmerge: MP4 reader: if present, cover art images (the
-  `meta.udta.ilist.covr` atom) will be converted into attachments.
-* mkvmerge: Blu-ray: when reading an MPLS playlist mkvmerge will look up and
-  use chapter names from the Blu-ray's "track/chapter names" meta data if it
-  exists. Part of the implementation of 2486.
 * MKVToolNix GUI: chapter editor: when reading chapters from an MPLS playlist
   the GUI will look up and use chapter names from the Blu-ray's "track/chapter
   names" meta data if it exists. Part of the implementation of 2486.
+* MKVToolNix GUI: Windows: added a dark mode that's enabled when Windows 10's
+  dark mode is turned on.
+* translations: added a Bulgarian translation of the programs & the man pages
+  by Симеон Цветков (see `AUTHORS`).
 
 ## Bug fixes
 
-* Linux AppImage: the AppImage will no longer change directories before
-  running the desired executable allow the use of relative file names. Fixes
-  #2632.
 * mkvmerge: attachments without a file name won't be ignored anymore. Part of
   the fix of #2642.
 * MKVToolNix GUI: header editor: attachments with an empty name element will
   be shown as `<unnamed>` as originally intended. Part of the fix of #2642.
+* Linux AppImage: the AppImage will no longer change directories before
+  running the desired executable allow the use of relative file names. Fixes
+  #2632.
 
 ## Build system changes
 
-* build system: MKVToolNix now requires a C++ compiler that supports the
-  following features of the C++17 standard: "`[[maybe_unused]]` attribute",
-  "nested namespace definition", "structured bindings". For the GNU Compiler
-  Collection (gcc) this means v7 or newer; for clang it means v4 or newer.
+* MKVToolNix now requires a C++ compiler that supports the following features
+  of the C++17 standard: "`[[maybe_unused]]` attribute", "nested namespace
+  definition", "structured bindings". For the GNU Compiler Collection (gcc)
+  this means v7 or newer; for clang it means v4 or newer.
 * Boost 1.60.0 or newer is now required.
 
 
