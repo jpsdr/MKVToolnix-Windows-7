@@ -140,6 +140,17 @@ struct playlist_t {
   void dump() const;
 };
 
+struct chapter_t {
+  struct name_t {
+    std::string language, name;
+  };
+
+  timestamp_c timestamp;
+  std::vector<name_t> names;
+};
+
+using chapters_t = std::vector<chapter_t>;
+
 class parser_c {
 protected:
   bool m_ok, m_drop_last_entry_if_at_end;
@@ -147,7 +158,7 @@ protected:
 
   header_t m_header;
   playlist_t m_playlist;
-  std::vector<timestamp_c> m_chapters;
+  chapters_t m_chapters;
 
   mtx::bits::reader_cptr m_bc;
 
@@ -166,7 +177,7 @@ public:
     return m_playlist;
   }
 
-  std::vector<timestamp_c> const &get_chapters() const {
+  chapters_t const &get_chapters() const {
     return m_chapters;
   }
 
@@ -183,6 +194,7 @@ protected:
   virtual stream_t parse_stream();
   virtual void parse_chapters();
   virtual std::string read_string(unsigned int length);
+  virtual void read_chapter_names(std::string const &base_file_name);
 };
 using parser_cptr = std::shared_ptr<parser_c>;
 

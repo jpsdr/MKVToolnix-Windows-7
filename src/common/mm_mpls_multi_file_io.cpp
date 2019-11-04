@@ -29,7 +29,7 @@ mm_mpls_multi_file_io_c::mm_mpls_multi_file_io_c(mm_mpls_multi_file_io_private_c
 mm_mpls_multi_file_io_c::~mm_mpls_multi_file_io_c() { // NOLINT(modernize-use-equals-default) due to pimpl idiom requiring explicit dtor declaration somewhere
 }
 
-std::vector<timestamp_c> const &
+std::vector<mtx::bluray::mpls::chapter_t> const &
 mm_mpls_multi_file_io_c::get_chapters()
   const {
   return p_func()->mpls_parser->get_chapters();

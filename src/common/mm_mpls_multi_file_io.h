@@ -33,7 +33,7 @@ public:
   std::vector<bfs::path> const &get_file_names() const;
   mtx::bluray::mpls::parser_c const &get_mpls_parser() const;
 
-  std::vector<timestamp_c> const &get_chapters() const;
+  std::vector<mtx::bluray::mpls::chapter_t> const &get_chapters() const;
   virtual void create_verbose_identification_info(mtx::id::info_c &info);
 
   static mm_io_cptr open_multi(std::string const &display_file_name);

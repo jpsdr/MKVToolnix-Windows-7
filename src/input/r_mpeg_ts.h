@@ -427,7 +427,7 @@ protected:
   std::vector<track_ptr> m_tracks, m_all_probed_tracks;
   std::map<generic_packetizer_c *, track_ptr> m_ptzr_to_track_map;
 
-  std::vector<timestamp_c> m_chapter_timestamps;
+  mtx::bluray::mpls::chapters_t m_mpls_chapters;
 
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 

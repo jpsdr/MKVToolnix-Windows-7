@@ -21,9 +21,9 @@
 #include "common/bluray/clpi.h"
 #include "common/bluray/util.h"
 #include "common/bswap.h"
+#include "common/chapters/bluray.h"
 #include "common/checksums/crc.h"
 #include "common/checksums/base_fwd.h"
-#include "common/construct.h"
 #include "common/endian.h"
 #include "common/hdmv_textst.h"
 #include "common/mp3.h"
@@ -39,7 +39,6 @@
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
 #include "common/strings/formatting.h"
-#include "common/unique_numbers.h"
 #include "input/aac_framing_packet_converter.h"
 #include "input/bluray_pcm_channel_removal_packet_converter.h"
 #include "input/dvbsub_pes_framing_removal_packet_converter.h"
@@ -1152,7 +1151,7 @@ reader_c::read_headers() {
 
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
   if (mpls_in) {
-    m_chapter_timestamps = mpls_in->get_chapters();
+    m_mpls_chapters = mpls_in->get_chapters();
     add_external_files_from_mpls(*mpls_in);
   }
 
@@ -1254,36 +1253,14 @@ reader_c::determine_global_timestamp_offset() {
 
 void
 reader_c::process_chapter_entries() {
-  if (m_chapter_timestamps.empty() || m_ti.m_no_chapters)
+  if (m_mpls_chapters.empty() || m_ti.m_no_chapters)
     return;
 
-  std::stable_sort(m_chapter_timestamps.begin(), m_chapter_timestamps.end());
+  auto language    = !m_ti.m_chapter_language.empty() ? m_ti.m_chapter_language
+                   : !g_default_language.empty()      ? g_default_language
+                   :                                    std::string{"eng"};
 
-  m_chapters.reset(new libmatroska::KaxChapters);
-  auto name_template  = mtx::chapters::g_chapter_generation_name_template.get_translated();
-  auto chapter_number = 0;
-  auto &edition       = GetChild<libmatroska::KaxEditionEntry>(*m_chapters);
-  auto language       = !m_ti.m_chapter_language.empty() ? m_ti.m_chapter_language
-                      : !g_default_language.empty()      ? g_default_language
-                      :                                    std::string{"eng"};
-
-  GetChild<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
-
-  for (auto const &timestamp : m_chapter_timestamps) {
-    ++chapter_number;
-
-    auto name = mtx::chapters::format_name_template(name_template, chapter_number, timestamp);
-    auto atom = mtx::construct::cons<libmatroska::KaxChapterAtom>(new libmatroska::KaxChapterUID,       create_unique_number(UNIQUE_CHAPTER_IDS),
-                                                                  new libmatroska::KaxChapterTimeStart, timestamp.to_ns());
-
-    if (!name.empty())
-      atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   name,
-                                                                              new libmatroska::KaxChapterLanguage, language));
-
-    edition.PushElement(*atom);
-  }
-
-  mtx::chapters::align_uids(m_chapters.get());
+  m_chapters       = mtx::chapters::convert_mpls_chapters_kax_chapters(m_mpls_chapters, language);
 
   auto const &sync = mtx::includes(m_ti.m_timestamp_syncs, track_info_c::chapter_track_id) ? m_ti.m_timestamp_syncs[track_info_c::chapter_track_id]
                    : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
@@ -1382,8 +1359,8 @@ reader_c::identify() {
     id_result_track(track->m_id, type, track->codec.get_name(), info.get());
   }
 
-  if (!m_chapter_timestamps.empty())
-    id_result_chapters(m_chapter_timestamps.size());
+  if (!m_mpls_chapters.empty())
+    id_result_chapters(m_mpls_chapters.size());
 }
 
 bool

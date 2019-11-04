@@ -11,8 +11,8 @@
 
 #include "common/bitvalue.h"
 #include "common/bluray/mpls.h"
+#include "common/chapters/bluray.h"
 #include "common/chapters/chapters.h"
-#include "common/construct.h"
 #include "common/ebml.h"
 #include "common/kax_file.h"
 #include "common/math.h"
@@ -527,26 +527,10 @@ Tab::areWidgetsEnabled()
 }
 
 ChaptersPtr
-Tab::timestampsToChapters(std::vector<timestamp_c> const &timestamps)
+Tab::mplsChaptersToMatroskaChapters(std::vector<mtx::bluray::mpls::chapter_t> const &mplsChapters)
   const {
-  auto &cfg     = Util::Settings::get();
-  auto chapters = ChaptersPtr{ static_cast<KaxChapters *>(mtx::construct::cons<KaxChapters>(mtx::construct::cons<KaxEditionEntry>())) };
-  auto &edition = GetChild<KaxEditionEntry>(*chapters);
-  auto idx      = 0;
-
-  for (auto const &timestamp : timestamps) {
-    auto nameTemplate = QString{ cfg.m_chapterNameTemplate };
-    auto name         = formatChapterName(nameTemplate, ++idx, timestamp);
-    auto atom         = mtx::construct::cons<KaxChapterAtom>(new KaxChapterTimeStart, timestamp.to_ns(),
-                                                             mtx::construct::cons<KaxChapterDisplay>(new KaxChapterString,   name,
-                                                                                                     new KaxChapterLanguage, to_utf8(cfg.m_defaultChapterLanguage)));
-    if (!cfg.m_defaultChapterCountry.isEmpty())
-      GetChild<KaxChapterCountry>(GetChild<KaxChapterDisplay>(atom)).SetValue(to_utf8(cfg.m_defaultChapterCountry));
-
-    edition.PushElement(*atom);
-  }
-
-  return chapters;
+  auto &cfg = Util::Settings::get();
+  return mtx::chapters::convert_mpls_chapters_kax_chapters(mplsChapters, to_utf8(cfg.m_defaultChapterLanguage), to_utf8(cfg.m_chapterNameTemplate));
 }
 
 Tab::LoadResult
@@ -563,7 +547,7 @@ Tab::loadFromMplsFile(QString const &fileName,
     parser.enable_dropping_last_entry_if_at_end(Util::Settings::get().m_dropLastChapterFromBlurayPlaylist);
 
     if (parser.parse(in))
-      chapters = timestampsToChapters(parser.get_chapters());
+      chapters = mplsChaptersToMatroskaChapters(parser.get_chapters());
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());

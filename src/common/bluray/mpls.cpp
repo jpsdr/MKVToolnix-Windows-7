@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "common/bluray/mpls.h"
+#include "common/bluray/track_chapter_names.h"
 #include "common/debugging.h"
 #include "common/hacks.h"
 #include "common/list_utils.h"
@@ -210,6 +211,7 @@ parser_c::parse(mm_io_c &file) {
 
     parse_playlist();
     parse_chapters();
+    read_chapter_names(file.get_file_name());
 
     m_bc.reset();
 
@@ -462,16 +464,19 @@ parser_c::parse_chapters() {
     if (play_item_idx >= m_playlist.items.size())
       continue;
 
-    auto &play_item = m_playlist.items[play_item_idx];
-    auto timestamp   = mpls_time_to_timestamp(m_bc->get_bits(32));
-    m_chapters.push_back(timestamp - play_item.in_time + play_item.relative_in_time);
+    m_chapters.emplace_back();
+
+    auto &play_item             = m_playlist.items[play_item_idx];
+    m_chapters.back().timestamp = mpls_time_to_timestamp(m_bc->get_bits(32)) - play_item.in_time + play_item.relative_in_time;
   }
 
   if (   !mtx::hacks::is_engaged(mtx::hacks::KEEP_LAST_CHAPTER_IN_MPLS)
       && m_drop_last_entry_if_at_end
       && (0 < num_chapters)
-      && (timestamp_c::s(5) >= (m_playlist.duration - m_chapters.back())))
+      && (timestamp_c::s(5) >= (m_playlist.duration - m_chapters.back().timestamp)))
     m_chapters.pop_back();
+
+  std::stable_sort(m_chapters.begin(), m_chapters.end(), [](auto const &a, auto const &b) { return a.timestamp < b.timestamp; });
 }
 
 std::string
@@ -483,14 +488,35 @@ parser_c::read_string(unsigned int length) {
 }
 
 void
+parser_c::read_chapter_names(std::string const &base_file_name) {
+  boost::smatch matches;
+  if (!boost::regex_search(base_file_name, matches, boost::regex{"(.{5})\\.mpls$", boost::regex::perl}))
+    return;
+
+  auto all_names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(base_file_name, matches[1].str());
+
+  for (auto chapter_idx = 0, num_chapters = static_cast<int>(m_chapters.size()); chapter_idx < num_chapters; ++chapter_idx)
+    for (auto const &[language, names] : all_names)
+      if (chapter_idx < static_cast<int>(names.size()))
+        m_chapters[chapter_idx].names.push_back({ language, names[chapter_idx] });
+}
+
+void
 parser_c::dump()
   const {
   mxinfo(fmt::format("MPLS class dump\n"
                      "  ok:           {0}\n"
                      "  num_chapters: {1}\n",
                      m_ok, m_chapters.size()));
-  for (auto &timestamp : m_chapters)
-    mxinfo(fmt::format("    {0}\n", timestamp));
+  for (auto &entry : m_chapters) {
+    std::vector<std::string> names;
+    for (auto const &name : entry.names)
+      names.push_back(fmt::format("{}:{}", name.language, name.name));
+
+    auto names_str = names.empty() ? ""s : fmt::format(" {}", boost::join(names, " "));
+
+    mxinfo(fmt::format("    {0}{1}\n", entry.timestamp, names_str));
+  }
 
   m_header.dump();
   m_playlist.dump();

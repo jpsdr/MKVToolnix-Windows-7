@@ -19,6 +19,12 @@
   by Симеон Цветков (see `AUTHORS`).
 * mkvmerge: MP4 reader: if present, cover art images (the
   `meta.udta.ilist.covr` atom) will be converted into attachments.
+* mkvmerge: Blu-ray: when reading an MPLS playlist mkvmerge will look up and
+  use chapter names from the Blu-ray's "track/chapter names" meta data if it
+  exists. Part of the implementation of 2486.
+* MKVToolNix GUI: chapter editor: when reading chapters from an MPLS playlist
+  the GUI will look up and use chapter names from the Blu-ray's "track/chapter
+  names" meta data if it exists. Part of the implementation of 2486.
 
 ## Bug fixes
 

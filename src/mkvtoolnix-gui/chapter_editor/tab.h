@@ -18,6 +18,10 @@ namespace libebml {
 class EbmlBinary;
 }
 
+namespace mtx::bluray::mpls {
+struct chapter_t;
+}
+
 namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
@@ -188,7 +192,7 @@ protected:
   QString currentState() const;
   QStringList usedNameLanguages(QStandardItem *parentItem = nullptr);
   QStringList usedNameCountryCodes(QStandardItem *parentItem = nullptr);
-  ChaptersPtr timestampsToChapters(std::vector<timestamp_c> const &timestamps) const;
+  ChaptersPtr mplsChaptersToMatroskaChapters(std::vector<mtx::bluray::mpls::chapter_t> const &mplsChapters) const;
   QHash<libmatroska::KaxChapterAtom *, ChapterAtomDataPtr> collectChapterAtomDataForEdition(QStandardItem *item);
   QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimestamp) const;
   bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace,
