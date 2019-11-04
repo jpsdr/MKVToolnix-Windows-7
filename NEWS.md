@@ -1,4 +1,4 @@
-# Version ?
+# Version 39.0.0 "In The Waiting Line" 2019-11-04
 
 ## New features and enhancements
 
