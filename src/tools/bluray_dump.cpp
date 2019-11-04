@@ -14,6 +14,7 @@
 #include "common/bluray/disc_library.h"
 #include "common/bluray/index.h"
 #include "common/bluray/mpls.h"
+#include "common/bluray/track_chapter_names.h"
 #include "common/command_line.h"
 #include "common/mm_file_io.h"
 #include "common/version.h"
@@ -93,6 +94,19 @@ parse_disc_library_file(std::string const &file_name) {
 }
 
 static void
+parse_track_chapter_names_file(std::string const &file_name) {
+  boost::smatch matches;
+  if (!boost::regex_search(file_name, matches, boost::regex{"tnmt_[a-z]{3}_(.{5})\\.xml$", boost::regex::perl}))
+    mxerror("Could not parse tnmt file name.\n");
+
+  auto names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(file_name, matches[1].str());
+  if (names.empty())
+    mxerror("Track/chapter names could no be parsed.\n");
+
+  mtx::bluray::track_chapter_names::dump(names);
+}
+
+static void
 parse_file(std::string const &file_name) {
   if (boost::regex_search(file_name, boost::regex{"\\.clpi$", boost::regex::perl}))
     parse_clpi_file(file_name);
@@ -105,6 +119,9 @@ parse_file(std::string const &file_name) {
 
   else if (boost::regex_search(file_name, boost::regex{"bdmt_[a-z]{3}\\.xml$", boost::regex::perl}))
     parse_disc_library_file(file_name);
+
+  else if (boost::regex_search(file_name, boost::regex{"tnmt_[a-z]{3}_.{5}\\.xml$", boost::regex::perl}))
+    parse_track_chapter_names_file(file_name);
 
   else
     mxerror("Unknown/unsupported file format\n");
