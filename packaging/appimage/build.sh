@@ -5,7 +5,7 @@
 
 #   cmark-devel
 #   desktop-file-utils
-#   devtoolset-7-gcc-c++
+#   devtoolset-8-gcc-c++
 #   docbook-style-xsl
 #   fdupes
 #   file-devel
@@ -34,7 +34,7 @@
 # static libraries) and adjust the path to it down below where
 # configure is executed, e.g. like this:
 
-#   echo "using gcc : : /opt/rh/devtoolset-7/root/usr/bin/g++ ; " > tools/build/src/user-config.jam
+#   echo "using gcc : : /opt/rh/devtoolset-8/root/usr/bin/g++ ; " > tools/build/src/user-config.jam
 #   ./bootstrap.sh --prefix=/opt/boost/${PWD:t} \
 #     --without-libraries=python,mpi,wave,graph_parallel
 #    ./b2 -j$(( $(nproc) + 2 )) variant=release link=static install
@@ -119,9 +119,11 @@ if [[ ! -f configure ]]; then
 fi
 
 if [[ -f /etc/centos-release ]]; then
-  export CC=/opt/rh/devtoolset-7/root/bin/gcc
-  export CXX=/opt/rh/devtoolset-7/root/bin/g++
-  export CONFIGURE_ARGS="--with-boost=/opt/boost/boost_1_69_0"
+  devtoolset=$(ls -1d /opt/rh/devtoolset-* | tail -n 1)
+  boost=$(ls -1d /opt/boost/boost* | tail -n 1)
+  export CC=${devtoolset}/root/bin/gcc
+  export CXX=${devtoolset}/root/bin/g++
+  export CONFIGURE_ARGS="--with-boost=${boost}"
 fi
 
 export PKG_CONFIG_PATH="${QTDIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
