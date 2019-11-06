@@ -6,7 +6,7 @@
   use chapter names from the Blu-ray's "track/chapter names" meta data if it
   exists. Part of the implementation of 2486.
 * mkvmerge: MP4 reader: if present, cover art images (the
-  `meta.udta.ilist.covr` atom) will be converted into attachments.
+  `udta.meta.list.covr` atom) will be converted into attachments.
 * MKVToolNix GUI: multiplexer: when adding a playlist from a Blu-ray disc, the
   disc library meta data will be parsed, and the biggest thumbnail, if
   present, will be added as a new attachment with name `cover.jpg` (extension
