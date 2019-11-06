@@ -22,7 +22,7 @@ BuildRequires: boost-devel >= 1.46.0
 %endif
 
 %if 0%{?suse_version}
-BuildRequires: gettext-tools libqt5-qtbase-devel, libqt5-qtmultimedia-devel, libxslt-tools, docbook-xsl-stylesheets, googletest-devel, ruby2.5-rubygem-rake-12_0, gcc7-c++
+BuildRequires: gettext-tools libqt5-qtbase-devel, libqt5-qtmultimedia-devel, libxslt-tools, docbook-xsl-stylesheets, googletest-devel, ruby2.5-rubygem-rake-12_0, gcc-c++
 %else
 BuildRequires: gettext-devel, qt5-qtbase-devel, qt5-qtmultimedia-devel, libxslt, docbook-style-xsl, gtest-devel, fmt-devel
 %endif
