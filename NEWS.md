@@ -5,6 +5,8 @@
 * MKVToolNix GUI: Windows: added a setting in the preferences to disable the
   GUI's dark color mode even if Windows's app color mode is set to
   dark. Implements #2646.
+* MKVToolNix GUI: multiplexer: added an option to disable deriving the
+  destination file name from the file title. Implements #2648.
 
 ## Build system changes
 

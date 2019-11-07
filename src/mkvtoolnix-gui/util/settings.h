@@ -163,7 +163,7 @@ public:
   RecentlyUsedStrings m_mergeLastRelativeOutputDirs{10}, m_mergeLastFixedOutputDirs{10}, m_mergeLastOutputDirs{10};
 
   OutputFileNamePolicy m_outputFileNamePolicy;
-  bool m_autoDestinationOnlyForVideoFiles;
+  bool m_autoDestinationOnlyForVideoFiles, m_mergeSetDestinationFromTitle;
   QDir m_relativeOutputDir, m_fixedOutputDir;
   bool m_uniqueOutputFileNames, m_autoClearOutputFileName;
 
