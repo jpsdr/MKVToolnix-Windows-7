@@ -51,6 +51,7 @@ class AppPrivate {
   Util::NetworkAccessManager *m_networkAccessManager{new Util::NetworkAccessManager{}};
   QThread m_networkAccessManagerThread;
   bool m_otherInstanceRunning{};
+  QString m_defaultStyleSheet;
 
   explicit AppPrivate()
   {
@@ -531,6 +532,13 @@ App::settingsBaseGroupName() {
 void
 App::maybeEnableDarkStyleSheet() {
 #if defined(SYS_WINDOWS)
+  auto p = p_func();
+
+  if (Util::Settings::get().m_uiDisableDarkStyleSheet) {
+    setStyleSheet(p->m_defaultStyleSheet);
+    return;
+  }
+
   QSettings regKey{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat};
 
   auto useLightTheme = regKey.value(Q("AppsUseLightTheme"));
@@ -552,6 +560,8 @@ App::maybeEnableDarkStyleSheet() {
 
 void
 App::run() {
+  auto p = p_func();
+
   if (!parseCommandLineArguments(App::arguments()))
     return;
 
@@ -559,6 +569,7 @@ App::run() {
   // that relative file names are resolved correctly.
   QDir::setCurrent(QDir::homePath());
 
+  p->m_defaultStyleSheet = styleSheet();
   maybeEnableDarkStyleSheet();
 
   auto mainWindow = std::make_unique<MainWindow>();

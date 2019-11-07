@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: Windows: added a setting in the preferences to disable the
+  GUI's dark color mode even if Windows's app color mode is set to
+  dark. Implements #2646.
+
 ## Build system changes
 
 * Qt 5.9.0 or newer is now required for building MKVToolNix GUI.

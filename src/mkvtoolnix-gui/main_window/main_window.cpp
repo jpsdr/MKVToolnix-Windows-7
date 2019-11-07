@@ -180,6 +180,7 @@ MainWindow::setupConnections() {
   auto p             = p_func();
   auto currentJobTab = p->watchJobTool->currentJobTab();
   auto jobModel      = p->toolJobs->model();
+  auto app           = App::instance();
 
   // Menu actions:
   connect(p->ui->actionGUIExit,                   &QAction::triggered,                                    this,                 &MainWindow::close);
@@ -222,6 +223,8 @@ MainWindow::setupConnections() {
 
   // Auxiliary actions:
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setToolSelectorVisibility);
+  connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::reinitializeLanguageLists);
+  connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::maybeEnableDarkStyleSheet);
 }
 
 void
@@ -483,7 +486,6 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
   if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
     QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
 
-  App::instance()->reinitializeLanguageLists();
   App::setupUiFont();
 
   emit preferencesChanged();

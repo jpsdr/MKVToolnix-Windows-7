@@ -67,8 +67,6 @@ public:
   void sendArgumentsToRunningInstance(QStringList const &args);
   void raiseAndActivateRunningInstance();
 
-  void maybeEnableDarkStyleSheet();
-
   void run();
 
   Util::NetworkAccessManager &networkAccessManager();
@@ -83,6 +81,7 @@ signals:
 public slots:
   void saveSettings() const;
   void receiveInstanceCommunication();
+  void maybeEnableDarkStyleSheet();
 
 protected:
   void setupInstanceCommunicator();

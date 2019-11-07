@@ -102,6 +102,7 @@ char const * const s_valTabPosition                         = "tabPosition";
 char const * const s_valTrackInfo                           = "trackInfo";
 char const * const s_valType                                = "type";
 char const * const s_valUiDisableHighDPIScaling             = "uiDisableHighDPIScaling";
+char const * const s_valUiDisableDarkStyleSheet             = "uiDisableDarkStyleSheet";
 char const * const s_valUiFontFamily                        = "uiFontFamily";
 char const * const s_valUiFontPointSize                     = "uiFontPointSize";
 char const * const s_valUiLocale                            = "uiLocale";
