@@ -2,9 +2,7 @@
 
 #include <Qt>
 #include <QDir>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
-# include <QOperatingSystemVersion>
-#endif
+#include <QOperatingSystemVersion>
 #include <QScreen>
 #include <QSettings>
 #include <QString>
@@ -63,7 +61,6 @@ void
 gatherOperatingSystemInfo(QStringList &info) {
   info << Q("") << Q("## Operating system");
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
   auto versionInfo = QOperatingSystemVersion::current();
   auto versionNum  = QStringList{};
 
@@ -76,23 +73,6 @@ gatherOperatingSystemInfo(QStringList &info) {
 
   auto osName    = versionInfo.name();
   auto osVersion = versionNum.join(Q("."));
-
-#elif defined(SYS_WINDOWS)
-  auto osName    = Q("Windows");
-  auto osVersion = QString{};
-
-#elif defined(SYS_LINUX)
-  auto osName    = Q("Linux");
-  auto osVersion = QString{};
-
-#elif defined(SYS_APPLE)
-  auto osName    = Q("macOS");
-  auto osVersion = QString{};
-
-#else
-  auto osName    = Q("unknown");
-  auto osVersion = QString{};
-#endif
 
   info << Q("* Name: %1").arg(osName);
   info << Q("* Version: %1").arg(osVersion.isEmpty() ? Q("unknown") : osVersion);

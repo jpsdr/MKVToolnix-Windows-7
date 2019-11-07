@@ -22,7 +22,6 @@ namespace {
 
 void
 enableOrDisableHighDPIScaling() {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
   // Get this one setting from the ini file directly without
   // instantiating & loading Util::Settings as that requires
   // Application to be instantiated — which in turn requires that the
@@ -31,7 +30,6 @@ enableOrDisableHighDPIScaling() {
   reg->beginGroup(s_grpSettings);
   if (!reg->value(s_valUiDisableHighDPIScaling).toBool())
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
 }
 
 void

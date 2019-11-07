@@ -1,3 +1,10 @@
+# Version ?
+
+## Build system changes
+
+* Qt 5.9.0 or newer is now required for building MKVToolNix GUI.
+
+
 # Version 39.0.0 "In The Waiting Line" 2019-11-04
 
 ## New features and enhancements
