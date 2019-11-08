@@ -287,6 +287,19 @@ def update_version_number_include
   end
 end
 
+def add_qrc_dependencies *qrcs
+  qrc_content = read_files(*qrcs)
+  qrc_content.each do |file_name, content|
+    dir          = file_name.gsub(%r{[^/]+$}, '')
+    dependencies = content.
+      join('').
+      scan(%r{<file[^>]*>([^<]+)}).
+      map { |matches| dir + matches[0] }
+
+    file file_name => dependencies
+  end
+end
+
 class Rake::Task
   def mo_all_prerequisites
     todo   = [name]

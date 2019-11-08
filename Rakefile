@@ -1163,6 +1163,8 @@ if $build_mkvtoolnix_gui
   qrc = [ "src/mkvtoolnix-gui/qt_resources.qrc" ]
   qrc << "lib/QDarkStyleSheet/qdarkstyle/style.qrc" if $building_for[:windows]
 
+  add_qrc_dependencies(*qrc)
+
   file "src/mkvtoolnix-gui/qt_resources.cpp" => qrc, &qrc_compiler
 
   Application.new("src/mkvtoolnix-gui/mkvtoolnix-gui").
