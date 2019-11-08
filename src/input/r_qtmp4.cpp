@@ -1050,24 +1050,29 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
     if (data_size <= 8)
       return;
 
-    auto type = m_in->read_uint32_be();
-    m_in->skip(4);
+    try {
+      auto type = m_in->read_uint32_be();
+      m_in->skip(4);
 
-    data_size -= 8;
+      data_size -= 8;
 
-    auto attach_mode         = attachment_requested(m_attachment_id);
+      auto attach_mode         = attachment_requested(m_attachment_id);
 
-    auto attachment          = std::make_shared<attachment_t>();
+      auto attachment          = std::make_shared<attachment_t>();
 
-    attachment->name         = fmt::format("cover.{}", type == MP4ADT_PNG ? "png" : "jpg");
-    attachment->mime_type    = fmt::format("image/{}", type == MP4ADT_PNG ? "png" : "jpeg");
-    attachment->data         = m_in->read(data_size);
-    attachment->ui_id        = m_attachment_id++;
-    attachment->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
-    attachment->source_file  = m_ti.m_fname;
+      attachment->name         = fmt::format("cover.{}", type == MP4ADT_PNG ? "png" : "jpg");
+      attachment->mime_type    = fmt::format("image/{}", type == MP4ADT_PNG ? "png" : "jpeg");
+      attachment->data         = m_in->read(data_size);
+      attachment->ui_id        = m_attachment_id++;
+      attachment->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+      attachment->source_file  = m_ti.m_fname;
 
-    if (ATTACH_MODE_SKIP != attach_mode)
-      add_attachment(attachment);
+      if (ATTACH_MODE_SKIP != attach_mode)
+        add_attachment(attachment);
+
+    } catch (mtx::exception const &ex) {
+      mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading cover art: {}\n", ex.what()));
+    }
   });
 }
 
