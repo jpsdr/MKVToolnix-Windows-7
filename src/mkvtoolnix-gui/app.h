@@ -69,6 +69,9 @@ public:
 
   void run();
 
+  void disableDarkMode();
+  void enableDarkMode();
+
   Util::NetworkAccessManager &networkAccessManager();
 
 signals:
@@ -81,7 +84,7 @@ signals:
 public slots:
   void saveSettings() const;
   void receiveInstanceCommunication();
-  void maybeEnableDarkStyleSheet();
+  void setupColorMode();
 
 protected:
   void setupInstanceCommunicator();

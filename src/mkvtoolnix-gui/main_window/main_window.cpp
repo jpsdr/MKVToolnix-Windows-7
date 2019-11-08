@@ -224,7 +224,7 @@ MainWindow::setupConnections() {
   // Auxiliary actions:
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setToolSelectorVisibility);
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::reinitializeLanguageLists);
-  connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::maybeEnableDarkStyleSheet);
+  connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::setupColorMode);
 }
 
 void

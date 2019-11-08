@@ -8,6 +8,8 @@
 * MKVToolNix GUI: multiplexer: added an option to disable deriving the
   destination file name from the file title. Implements #2648.
 * mkvmerge: MP4 reader: added support for BMP covert art images.
+* MKVToolNix GUI: Windows: replaced the dark mode introduced in v39 with
+  another dark mode that's less wasteful with space between widgets.
 
 ## Bug fixes
 

@@ -1,11 +1,14 @@
 #include "common/common_pch.h"
 
+#include <QColor>
 #include <QDebug>
 #include <QFile>
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
+#include <QPalette>
 #include <QSettings>
+#include <QStyleFactory>
 #include <QTextStream>
 #include <QThread>
 #include <QTranslator>
@@ -52,6 +55,7 @@ class AppPrivate {
   QThread m_networkAccessManagerThread;
   bool m_otherInstanceRunning{};
   QString m_defaultStyleSheet;
+  QPalette m_defaultPalette;
 
   explicit AppPrivate()
   {
@@ -87,6 +91,9 @@ App::App(int &argc,
 
   initializeLocale();
   App::setupUiFont();
+
+  p_ptr->m_defaultStyleSheet = styleSheet();
+  p_ptr->m_defaultPalette    = palette();
 }
 
 App::~App() {
@@ -530,12 +537,10 @@ App::settingsBaseGroupName() {
 }
 
 void
-App::maybeEnableDarkStyleSheet() {
+App::setupColorMode() {
 #if defined(SYS_WINDOWS)
-  auto p = p_func();
-
   if (Util::Settings::get().m_uiDisableDarkStyleSheet) {
-    setStyleSheet(p->m_defaultStyleSheet);
+    disableDarkMode();
     return;
   }
 
@@ -543,25 +548,57 @@ App::maybeEnableDarkStyleSheet() {
 
   auto useLightTheme = regKey.value(Q("AppsUseLightTheme"));
 
-  if (!useLightTheme.isValid() || useLightTheme.toBool())
-    return;
-
-  QFile f{Q(":qdarkstyle/style.qss")};
-
-  if (!f.exists()) {
-    qDebug() << "could not load dark style sheet from resources";
-    return;
-  }
-
-  f.open(QFile::ReadOnly | QFile::Text);
-  setStyleSheet(QTextStream{&f}.readAll());
+  if (useLightTheme.isValid() && !useLightTheme.toBool())
+    enableDarkMode();
+  else
+    disableDarkMode();
 #endif  // SYS_WINDOWS
 }
 
 void
-App::run() {
+App::disableDarkMode() {
+#if defined(SYS_WINDOWS)
   auto p = p_func();
 
+  setStyle(QStyleFactory::create("windowsvista"));
+  setStyleSheet(p->m_defaultStyleSheet);
+  setPalette(p->m_defaultPalette);
+#endif
+}
+
+void
+App::enableDarkMode() {
+#if defined(SYS_WINDOWS)
+  QPalette darkPalette;
+  auto darkColor     = QColor{45, 45, 45};
+  auto disabledColor = QColor{127, 127, 127};
+
+  darkPalette.setColor(QPalette::AlternateBase,   darkColor);
+  darkPalette.setColor(QPalette::Base,            QColor{18, 18, 18});
+  darkPalette.setColor(QPalette::BrightText,      Qt::red);
+  darkPalette.setColor(QPalette::Button,          darkColor);
+  darkPalette.setColor(QPalette::ButtonText,      Qt::white);
+  darkPalette.setColor(QPalette::Disabled,        QPalette::ButtonText,      disabledColor);
+  darkPalette.setColor(QPalette::Disabled,        QPalette::HighlightedText, disabledColor);
+  darkPalette.setColor(QPalette::Disabled,        QPalette::Text,            disabledColor);
+  darkPalette.setColor(QPalette::Disabled,        QPalette::WindowText,      disabledColor);
+  darkPalette.setColor(QPalette::Highlight,       QColor{42, 130, 218});
+  darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+  darkPalette.setColor(QPalette::Link,            QColor{42, 130, 218});
+  darkPalette.setColor(QPalette::Text,            Qt::white);
+  darkPalette.setColor(QPalette::ToolTipBase,     Qt::white);
+  darkPalette.setColor(QPalette::ToolTipText,     Qt::white);
+  darkPalette.setColor(QPalette::Window,          darkColor);
+  darkPalette.setColor(QPalette::WindowText,      Qt::white);
+
+  setStyle(QStyleFactory::create("Fusion"));
+  setPalette(darkPalette);
+  setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+#endif
+}
+
+void
+App::run() {
   if (!parseCommandLineArguments(App::arguments()))
     return;
 
@@ -569,8 +606,7 @@ App::run() {
   // that relative file names are resolved correctly.
   QDir::setCurrent(QDir::homePath());
 
-  p->m_defaultStyleSheet = styleSheet();
-  maybeEnableDarkStyleSheet();
+  setupColorMode();
 
   auto mainWindow = std::make_unique<MainWindow>();
   mainWindow->show();

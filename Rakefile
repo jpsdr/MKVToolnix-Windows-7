@@ -1161,7 +1161,6 @@ Application.new("src/mkvpropedit").
 
 if $build_mkvtoolnix_gui
   qrc = [ "src/mkvtoolnix-gui/qt_resources.qrc" ]
-  qrc << "lib/QDarkStyleSheet/qdarkstyle/style.qrc" if $building_for[:windows]
 
   add_qrc_dependencies(*qrc)
 
