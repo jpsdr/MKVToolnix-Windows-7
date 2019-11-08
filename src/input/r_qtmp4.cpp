@@ -1052,6 +1052,9 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
     try {
       auto type = m_in->read_uint32_be();
+      if (!mtx::included_in<int>(type, MP4ADT_BMP, MP4ADT_JPEG, MP4ADT_PNG))
+        return;
+
       m_in->skip(4);
 
       data_size -= 8;

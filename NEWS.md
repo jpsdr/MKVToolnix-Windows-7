@@ -15,6 +15,8 @@
   art images. This could cause file identification to fail when the cover art
   was located at the end of the MP4 file. Even if it succeeded, this meant too
   much data present in the attachment. Fixes #2650.
+* mkvmerge: MP4 reader: covert art images with unknown image types will be
+  skipped instead of treated as JPEG images.
 
 ## Build system changes
 
