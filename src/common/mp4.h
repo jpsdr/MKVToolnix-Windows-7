@@ -83,3 +83,4 @@
 // Atom data types for free-form data
 #define MP4ADT_JPEG 0x0d        // JPEG image
 #define MP4ADT_PNG  0x0e        // PNG image
+#define MP4ADT_BMP  0x1b        // BMP image

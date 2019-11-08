@@ -7,6 +7,7 @@
   dark. Implements #2646.
 * MKVToolNix GUI: multiplexer: added an option to disable deriving the
   destination file name from the file title. Implements #2648.
+* mkvmerge: MP4 reader: added support for BMP covert art images.
 
 ## Bug fixes
 

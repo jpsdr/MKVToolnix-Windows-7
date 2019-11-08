@@ -12,3 +12,5 @@ test "checksum" do
 
   [ expected_md5, actual_md5, expected_md5 == actual_md5 ? "true" : "false" ].join("+")
 end
+
+test_merge "data/mp4/3covers.mp4"
