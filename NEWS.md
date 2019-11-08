@@ -8,6 +8,13 @@
 * MKVToolNix GUI: multiplexer: added an option to disable deriving the
   destination file name from the file title. Implements #2648.
 
+## Bug fixes
+
+* mkvmerge: MP4 reader: mkvmerge was reading eight bytes too many for cover
+  art images. This could cause file identification to fail when the cover art
+  was located at the end of the MP4 file. Even if it succeeded, this meant too
+  much data present in the attachment. Fixes #2650.
+
 ## Build system changes
 
 * Qt 5.9.0 or newer is now required for building MKVToolNix GUI.

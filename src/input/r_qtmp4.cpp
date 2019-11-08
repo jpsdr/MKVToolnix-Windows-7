@@ -1047,11 +1047,13 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
       return;
 
     size_t data_size = atom.size - atom.hsize;
-    if (data_size < 8)
+    if (data_size <= 8)
       return;
 
     auto type = m_in->read_uint32_be();
     m_in->skip(4);
+
+    data_size -= 8;
 
     auto attach_mode         = attachment_requested(m_attachment_id);
 
