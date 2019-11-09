@@ -62,6 +62,8 @@ public:
 int get_num_samples(unsigned char const *buf, int size, FLAC__StreamMetadata_StreamInfo const &stream_info);
 int decode_headers(unsigned char const *mem, int size, int num_elements, ...);
 
+std::string file_base_name_for_picture_type(unsigned int type);
+
 }                              // namespace mtx::flac
 
 #endif // HAVE_FLAC_FORMAT_H

@@ -210,30 +210,8 @@ flac_reader_c::handle_stream_info_metadata(FLAC__StreamMetadata const *metadata)
 std::string
 flac_reader_c::attachment_name_from_metadata(FLAC__StreamMetadata_Picture const &picture)
   const {
-  std::string mime_type = picture.mime_type;
-  std::string name      = picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_OTHER                ? "other"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_FILE_ICON_STANDARD   ? "icon"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_FILE_ICON            ? "other icon"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_FRONT_COVER          ? "cover"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_BACK_COVER           ? "cover (back)"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_LEAFLET_PAGE         ? "leaflet page"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_MEDIA                ? "media"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_LEAD_ARTIST          ? "lead artist - lead performer - soloist"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_ARTIST               ? "artist - performer"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_CONDUCTOR            ? "conductor"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_BAND                 ? "band - orchestra"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_COMPOSER             ? "composer"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_LYRICIST             ? "lyricist - text writer"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_RECORDING_LOCATION   ? "recording location"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_DURING_RECORDING     ? "during recording"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_DURING_PERFORMANCE   ? "during performance"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_VIDEO_SCREEN_CAPTURE ? "movie - video screen capture"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_FISH                 ? "a bright coloured fish"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_ILLUSTRATION         ? "illustration"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_BAND_LOGOTYPE        ? "band - artist logotype"
-                        : picture.type == FLAC__STREAM_METADATA_PICTURE_TYPE_PUBLISHER_LOGOTYPE   ? "publisher - Studio logotype"
-                        :                                                                           "unknown";
-
+  auto mime_type = picture.mime_type;
+  auto name      = mtx::flac::file_base_name_for_picture_type(picture.type);
   auto extension = mtx::mime::primary_file_extension_for_type(mime_type);
 
   if (!extension.empty())

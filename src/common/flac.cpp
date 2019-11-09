@@ -353,6 +353,32 @@ decode_headers(unsigned char const *mem,
   return result;
 }
 
+std::string
+file_base_name_for_picture_type(unsigned int type) {
+  return type == FLAC__STREAM_METADATA_PICTURE_TYPE_OTHER                ? "other"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_FILE_ICON_STANDARD   ? "icon"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_FILE_ICON            ? "other icon"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_FRONT_COVER          ? "cover"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_BACK_COVER           ? "cover (back)"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_LEAFLET_PAGE         ? "leaflet page"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_MEDIA                ? "media"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_LEAD_ARTIST          ? "lead artist - lead performer - soloist"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_ARTIST               ? "artist - performer"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_CONDUCTOR            ? "conductor"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_BAND                 ? "band - orchestra"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_COMPOSER             ? "composer"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_LYRICIST             ? "lyricist - text writer"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_RECORDING_LOCATION   ? "recording location"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_DURING_RECORDING     ? "during recording"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_DURING_PERFORMANCE   ? "during performance"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_VIDEO_SCREEN_CAPTURE ? "movie - video screen capture"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_FISH                 ? "a bright coloured fish"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_ILLUSTRATION         ? "illustration"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_BAND_LOGOTYPE        ? "band - artist logotype"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_PUBLISHER_LOGOTYPE   ? "publisher - Studio logotype"
+       :                                                                   "unknown";
+}
+
 }                              // namespace mtx::flac
 
 #endif
