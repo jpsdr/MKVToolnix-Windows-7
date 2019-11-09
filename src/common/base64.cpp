@@ -98,17 +98,18 @@ encode(const unsigned char *src,
   return out;
 }
 
-std::string
+memory_cptr
 decode(std::string const &src) {
-  auto pos = 0u;
-  auto pad = 0u;
-  auto dst = std::string{};
+  auto pos      = 0u;
+  auto pad      = 0u;
+  auto dst      = memory_c::alloc(0);
+  auto src_size = src.size();
 
-  while (pos < src.size()) {
+  while (pos < src_size) {
     unsigned char in[4];
     unsigned int in_pos = 0;
 
-    while ((src.size() > pos) && (4 > in_pos)) {
+    while ((src_size > pos) && (4 > in_pos)) {
       auto c = static_cast<unsigned char>(src[pos]);
       ++pos;
 
@@ -147,11 +148,15 @@ decode(std::string const &src) {
     mid[4] = values[2] << 6;
     mid[5] = values[3];
 
-    dst += mid[0] | mid[1];
+    auto dst_prev_size = dst->get_size();
+    dst->resize(dst_prev_size + (0 == pad ? 3 : 1 == pad ? 2 : 1));
+    auto dst_ptr = dst->get_buffer() + dst_prev_size;
+
+    dst_ptr[0] = mid[0] | mid[1];
     if (1 >= pad) {
-      dst += mid[2] | mid[3];
+      dst_ptr[1] = mid[2] | mid[3];
       if (0 == pad)
-        dst += mid[4] | mid[5];
+        dst_ptr[2] = mid[4] | mid[5];
     }
 
     if (0 != pad)

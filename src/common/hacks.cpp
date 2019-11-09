@@ -89,7 +89,7 @@ engage(const std::string &hacks) {
         "jb3Vyc2UgSSdsbCBtYXJyeSB5b3UhCiAgLyB8ICAgICB8fAogKiAgfHwtLS0tfH"
         "wKICAgIF5eICAgIF5eCg==";
       auto correction = mtx::base64::decode(initial);
-      mxinfo(correction);
+      mxinfo(correction->to_string());
       mxexit();
     }
 

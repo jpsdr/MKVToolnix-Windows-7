@@ -30,6 +30,6 @@ public:
 };
 
 std::string encode(const unsigned char *src, int src_len, bool line_breaks = false, int max_line_len = 72);
-std::string decode(std::string const &src);
+memory_cptr decode(std::string const &src);
 
 }

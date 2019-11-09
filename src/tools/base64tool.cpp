@@ -108,13 +108,12 @@ main(int argc,
       s += line;
     }
 
-    auto decoded = std::string{};
     try {
-      decoded = mtx::base64::decode(s);
+      auto decoded = mtx::base64::decode(s);
+      out->write(decoded);
     } catch(...) {
       mxerror(Y("The Base64 encoded data could not be decoded.\n"));
     }
-    out->write(decoded);
   }
 
   mxinfo(Y("Done.\n"));
