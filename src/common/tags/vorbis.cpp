@@ -16,6 +16,7 @@
 #include "common/base64.h"
 #include "common/debugging.h"
 #include "common/iso639.h"
+#include "common/mm_mem_io.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/tags/target_type.h"
@@ -139,26 +140,21 @@ parse_metadata_block_picture(std::string const &value) {
 } // anonymous namespace
 
 converted_vorbis_comments_t
-from_vorbis_comments(std::vector<std::string> const &vorbis_comments) {
+from_vorbis_comments(std::vector<std::pair<std::string, std::string>> const &vorbis_comments) {
   init_vorbis_to_matroska();
 
   converted_vorbis_comments_t converted;
   converted.m_tags = std::make_shared<libmatroska::KaxTags>();
 
-  for (auto const &line : vorbis_comments) {
-    mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}\n", elide_string(line)));
+  for (auto const &[vorbis_full_key, value] : vorbis_comments) {
+    mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}={}\n", vorbis_full_key, elide_string(value, 40)));
 
-    auto key_value = split(line, "=", 2);
-    if (key_value.size() != 2)
-      continue;
-
-    auto key_name_language                  = split(key_value[0], "-", 2);
+    auto key_name_language                  = split(vorbis_full_key, "-", 2);
     auto vorbis_key                         = balg::to_upper_copy(key_name_language[0]);
     auto const &[matroska_key, target_type] = s_vorbis_to_matroska[vorbis_key];
-    auto &value                             = key_value[1];
 
     if (vorbis_key == "TITLE") {
-      converted.m_title = key_value[1];
+      converted.m_title = value;
       continue;
     }
 
@@ -183,6 +179,64 @@ from_vorbis_comments(std::vector<std::string> const &vorbis_comments) {
   }
 
   return converted;
+}
+
+converted_vorbis_comments_t
+from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
+  return from_vorbis_comments(vorbis_comments.m_comments);
+}
+
+vorbis_comments_t
+parse_vorbis_comments_from_packet(memory_cptr const &packet) {
+  try {
+    mm_mem_io_c in{*packet};
+    vorbis_comments_t comments;
+
+    auto header = in.read(8)->to_string();
+    unsigned int offset{};
+
+    if (header == "OpusTags") {
+      comments.m_type = vorbis_comments_t::type_e::Opus;
+      offset          = 8;
+
+    } else if (boost::regex_search(header, boost::regex{"^.vorbis", boost::regex::perl})) {
+      comments.m_type = vorbis_comments_t::type_e::Vorbis;
+      offset          = 7;
+
+    } else if (boost::regex_search(header, boost::regex{"^OVP\\d{2}", boost::regex::perl})) {
+      comments.m_type = vorbis_comments_t::type_e::VP_8_9;
+      offset          = 7;
+
+    } else
+      return {};
+
+    in.setFilePointer(offset);
+    auto vendor_length = in.read_uint32_le();
+    comments.m_vendor  = in.read(vendor_length)->to_string();
+
+    auto num_comments  = in.read_uint32_le();
+
+    comments.m_comments.reserve(num_comments);
+
+    while (num_comments > 0) {
+      --num_comments;
+
+      auto comment_length = in.read_uint32_le();
+      std::string line;
+
+      in.read(line, comment_length);
+
+      auto parts = split(line, "=", 2);
+      if (parts.size() == 2)
+        comments.m_comments.emplace_back(parts[0], parts[1]);
+    }
+
+    return comments;
+
+  } catch(...) {
+  }
+
+  return {};
 }
 
 }

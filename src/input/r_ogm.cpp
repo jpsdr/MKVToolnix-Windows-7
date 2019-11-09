@@ -272,33 +272,6 @@ public:
 
 // ---------------------------------------------------------------------------------
 
-static std::shared_ptr<std::vector<std::string> >
-extract_vorbis_comments(const memory_cptr &mem) {
-  std::shared_ptr<std::vector<std::string> > comments(new std::vector<std::string>);
-  mm_mem_io_c in(mem->get_buffer(), mem->get_size());
-  uint32_t i, n, len;
-
-  try {
-    in.skip(7);                 // 0x03 "vorbis"
-    n = in.read_uint32_le();    // vendor_length
-    in.skip(n);                 // vendor_string
-    n = in.read_uint32_le();    // user_comment_list_length
-
-    comments->reserve(n);
-
-    for (i = 0; i < n; i++) {
-      len = in.read_uint32_le();
-      comments->emplace_back(' ', len);
-
-      if (in.read(comments->back(), len) != len)
-        throw false;
-    }
-  } catch(...) {
-  }
-
-  return comments;
-}
-
 ogm_reader_c::~ogm_reader_c() {
   ogg_sync_clear(&oy);
 }
@@ -734,7 +707,6 @@ ogm_reader_c::identify() {
 
 void
 ogm_reader_c::handle_stream_comments() {
-  std::shared_ptr<std::vector<std::string> > comments;
   std::string title;
 
   bool charset_warning_printed = false;
@@ -746,29 +718,20 @@ ogm_reader_c::handle_stream_comments() {
     if (dmx->codec.is(codec_c::type_e::A_FLAC) || (2 > dmx->packet_data.size()))
       continue;
 
-    comments = extract_vorbis_comments(dmx->packet_data[1]);
-    if (comments->empty())
+    auto comments = mtx::tags::parse_vorbis_comments_from_packet(dmx->packet_data[1]);
+    if (!comments.valid() || comments.m_comments.empty())
       continue;
 
     std::vector<std::string> chapter_strings, comment_lines;
 
-    for (auto comment_idx = 0u; comments->size() > comment_idx; ++comment_idx)
-      comment_lines.push_back((*comments)[comment_idx]);
-
-    auto converted = mtx::tags::from_vorbis_comments(comment_lines);
+    auto converted = mtx::tags::from_vorbis_comments(comments);
     if (!converted.m_language.empty())
       dmx->language = converted.m_language;
 
 
-
-    for (auto const &line : comment_lines) {
-      auto comment = split(line, "=", 2);
-      if (comment.size() != 2)
-        continue;
-
-      if (balg::istarts_with(comment[0], "CHAPTER"))
-        chapter_strings.push_back(line);
-    }
+    for (auto const &[key, value] : comments.m_comments)
+      if (balg::istarts_with(key, "CHAPTER"))
+        chapter_strings.push_back(fmt::format("{}={}", key, value));
 
     bool segment_title_set = false;
     if (!converted.m_title.empty()) {
