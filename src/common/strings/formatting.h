@@ -121,3 +121,4 @@ to_hex(libebml::EbmlBinary &bin,
 }
 
 std::string create_minutes_seconds_time_string(unsigned int seconds, bool omit_minutes_if_zero = false);
+std::string elide_string(std::string s, unsigned int max_length = 60);

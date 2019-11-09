@@ -335,3 +335,15 @@ format_number(int64_t n) {
   auto sign = std::string{ n < 0 ? "-" : "" };
   return sign + format_number(static_cast<uint64_t>(std::abs(n)));
 }
+
+std::string
+elide_string(std::string s,
+             unsigned int max_length) {
+  if ((s.size() < max_length) || !max_length)
+    return s;
+
+  s.resize(max_length - 1);
+  s += u8"…";
+
+  return s;
+}
