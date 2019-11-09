@@ -2,20 +2,20 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: Windows: added a setting in the preferences to disable the
-  GUI's dark color mode even if Windows's app color mode is set to
-  dark. Implements #2646.
+* mkvmerge: MP4 reader: added support for BMP covert art images.
 * MKVToolNix GUI: multiplexer: added an option to disable deriving the
   destination file name from the file title. Implements #2648.
-* mkvmerge: MP4 reader: added support for BMP covert art images.
-* MKVToolNix GUI: Windows: replaced the dark mode introduced in v39 with
-  another dark mode that's less wasteful with space between widgets.
 * MKVToolNix GUI: multiplexer: the content of the "stereoscopy" combo box has
   been simplified making the box's minimum width much smaller, allowing the
   user to resize the GUI's whole window to a much smaller width.
 * MKVToolNix GUI: multiplexer: whenever the user changes the "aspect ratio" or
   "display dimensions" controls, the corresponding radio button will be
   activated automatically. Implements #2651.
+* MKVToolNix GUI: Windows: added a setting in the preferences to disable the
+  GUI's dark color mode even if Windows's app color mode is set to
+  dark. Implements #2646.
+* MKVToolNix GUI: Windows: replaced the dark mode introduced in v39 with
+  another dark mode that's less wasteful with space between widgets.
 
 ## Bug fixes
 
