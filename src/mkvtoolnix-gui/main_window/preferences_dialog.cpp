@@ -609,8 +609,10 @@ PreferencesDialog::setupOutputFileNamePolicy() {
   rbToCheck->setChecked(true);
   ui->cbMAutoSetRelativeDirectory->addItems(m_cfg.m_mergeLastRelativeOutputDirs.items());
   ui->cbMAutoSetRelativeDirectory->setCurrentText(dRelative);
+  ui->cbMAutoSetRelativeDirectory->lineEdit()->setClearButtonEnabled(true);
   ui->cbMAutoSetFixedDirectory->addItems(m_cfg.m_mergeLastFixedOutputDirs.items());
   ui->cbMAutoSetFixedDirectory->setCurrentText(dFixed);
+  ui->cbMAutoSetFixedDirectory->lineEdit()->setClearButtonEnabled(true);
   ui->cbMUniqueOutputFileNames->setChecked(m_cfg.m_uniqueOutputFileNames);
   ui->cbMAutoClearOutputFileName->setChecked(m_cfg.m_autoClearOutputFileName);
 

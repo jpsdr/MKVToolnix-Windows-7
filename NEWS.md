@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: line edits & combo boxes will now have a "clear text" button
+  appear whenever they're not empty. Part of the implementation of #2654.
+
+
 # Version 40.0.0 "Old Town Road + Pony" 2019-11-09
 
 ## New features and enhancements

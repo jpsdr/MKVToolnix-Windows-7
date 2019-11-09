@@ -52,6 +52,8 @@ Tab::setupAttachmentsControls() {
   Util::fixComboBoxViewWidth(*ui->attachmentMIMEType);
   Util::fixComboBoxViewWidth(*ui->attachmentStyle);
 
+  ui->attachmentMIMEType->lineEdit()->setClearButtonEnabled(true);
+
   auto &cfg = Util::Settings::get();
   cfg.handleSplitterSizes(ui->mergeAttachmentsSplitter);
 

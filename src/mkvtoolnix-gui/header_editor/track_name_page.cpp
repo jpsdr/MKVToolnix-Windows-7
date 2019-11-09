@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QComboBox>
+#include <QLineEdit>
 
 #include "mkvtoolnix-gui/header_editor/track_name_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -30,6 +31,7 @@ TrackNamePage::createInputControl() {
   m_cbTrackName = new QComboBox{this};
   m_cbTrackName->setEditable(true);
   m_cbTrackName->setCurrentText(m_originalValue);
+  m_cbTrackName->lineEdit()->setClearButtonEnabled(true);
 
   connect(MainWindow::get(), &MainWindow::preferencesChanged, this, &TrackNamePage::setupPredefinedTrackNames);
 

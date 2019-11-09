@@ -29,6 +29,7 @@ StringValuePage::createInputControl() {
 
   m_leValue = new QLineEdit{this};
   m_leValue->setText(m_originalValue);
+  m_leValue->setClearButtonEnabled(true);
 
   return m_leValue;
 }

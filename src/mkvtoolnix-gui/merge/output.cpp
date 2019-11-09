@@ -41,6 +41,7 @@ Tab::setupOutputControls() {
     Util::fixComboBoxViewWidth(*control);
   }
 
+  ui->splitOptions->lineEdit()->setClearButtonEnabled(true);
   ui->splitMaxFiles->setMaximum(std::numeric_limits<int>::max());
 
   onSplitModeChanged(MuxConfig::DoNotSplit);

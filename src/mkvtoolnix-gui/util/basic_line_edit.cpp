@@ -21,6 +21,7 @@ BasicLineEdit::BasicLineEdit(QWidget *parent)
   : QLineEdit{parent}
   , p_ptr{new BasicLineEditPrivate}
 {
+  setClearButtonEnabled(true);
 }
 
 BasicLineEdit::~BasicLineEdit() {

@@ -59,6 +59,8 @@ AttachedFilePage::init() {
   for (auto &mimeType : mtx::mime::g_types)
     ui->mimeType->addItem(Q(mimeType.name), Q(mimeType.name));
 
+  ui->mimeType->lineEdit()->setClearButtonEnabled(true);
+
   retranslateUi();
 
   setControlsFromAttachment();

@@ -29,6 +29,7 @@ AsciiStringValuePage::createInputControl() {
 
   m_leValue = new QLineEdit{this};
   m_leValue->setText(Q(m_originalValue));
+  m_leValue->setClearButtonEnabled(true);
 
   return m_leValue;
 }

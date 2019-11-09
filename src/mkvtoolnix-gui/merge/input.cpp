@@ -215,6 +215,10 @@ Tab::setupInputControls() {
   cfg.handleSplitterSizes(ui->mergeInputSplitter);
   cfg.handleSplitterSizes(ui->mergeFilesTracksSplitter);
 
+  ui->trackName->lineEdit()->setClearButtonEnabled(true);
+  ui->defaultDuration->lineEdit()->setClearButtonEnabled(true);
+  ui->aspectRatio->lineEdit()->setClearButtonEnabled(true);
+
   // Track & chapter language
   ui->trackLanguage->setup();
   ui->chapterLanguage->setup(true);
