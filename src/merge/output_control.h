@@ -19,6 +19,7 @@
 #include <deque>
 #include <unordered_map>
 
+#include "common/attachment.h"
 #include "common/bitvalue.h"
 #include "common/chapters/chapters.h"
 #include "common/segmentinfo.h"
@@ -90,15 +91,6 @@ struct packetizer_t {
   {
   }
 };
-
-struct attachment_t {
-  std::string name, stored_name, mime_type, description, source_file;
-  uint64_t id{};
-  bool to_all_files{};
-  memory_cptr data;
-  int64_t ui_id{};
-};
-using attachment_cptr = std::shared_ptr<attachment_t>;
 
 struct track_order_t {
   int64_t file_id;
