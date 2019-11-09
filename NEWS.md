@@ -10,6 +10,9 @@
 * mkvmerge: MP4 reader: added support for BMP covert art images.
 * MKVToolNix GUI: Windows: replaced the dark mode introduced in v39 with
   another dark mode that's less wasteful with space between widgets.
+* MKVToolNix GUI: multiplexer: the content of the "stereoscopy" combo box has
+  been simplified making the box's minimum width much smaller, allowing the
+  user to resize the GUI's whole window to a much smaller width.
 
 ## Bug fixes
 

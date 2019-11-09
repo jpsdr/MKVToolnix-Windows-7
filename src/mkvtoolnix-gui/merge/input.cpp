@@ -1457,7 +1457,7 @@ Tab::retranslateInputUI() {
   m_addToJobQueueRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
 
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
-    ui->stereoscopy->setItemText(idx + 1, QString{"%1 (%2; %3)"}.arg(to_qs(stereo_mode_c::translate(idx))).arg(idx).arg(to_qs(stereo_mode_c::s_modes[idx])));
+    ui->stereoscopy->setItemText(idx + 1, to_qs(stereo_mode_c::translate(idx)));
 
   Util::fixComboBoxViewWidth(*ui->stereoscopy);
 
