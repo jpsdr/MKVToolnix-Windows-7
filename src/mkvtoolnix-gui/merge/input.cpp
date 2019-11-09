@@ -1016,16 +1016,19 @@ Tab::onSetDisplayDimensions() {
 
 void
 Tab::onAspectRatioChanged(QString newValue) {
+  ui->setAspectRatio->setChecked(true);
   withSelectedTracks([&newValue](auto &track) { track.m_aspectRatio = newValue; }, true);
 }
 
 void
 Tab::onDisplayWidthChanged(QString newValue) {
+  ui->setDisplayWidthHeight->setChecked(true);
   withSelectedTracks([&newValue](auto &track) { track.m_displayWidth = newValue; }, true);
 }
 
 void
 Tab::onDisplayHeightChanged(QString newValue) {
+  ui->setDisplayWidthHeight->setChecked(true);
   withSelectedTracks([&newValue](auto &track) { track.m_displayHeight = newValue; }, true);
 }
 
