@@ -1,0 +1,34 @@
+/*
+   mkvmerge -- utility for splicing together matroska files
+   from component media subtypes
+
+   Distributed under the GPL v2
+   see the file COPYING for details
+   or visit http://www.gnu.org/copyleft/gpl.html
+
+   definition of functions for converting between Vorbis comments and Matroska tags
+
+   Written by Moritz Bunkus <moritz@bunkus.org>.
+*/
+
+#pragma once
+
+#include "common/common_pch.h"
+
+#include "common/attachment.h"
+
+namespace libmatroska {
+class KaxTags;
+}
+
+namespace mtx::tags {
+
+struct converted_vorbis_comments_t {
+  std::string m_title, m_language;
+  std::shared_ptr<libmatroska::KaxTags> m_tags;
+  std::vector<std::shared_ptr<attachment_t>> m_pictures;
+};
+
+converted_vorbis_comments_t from_vorbis_comments(std::vector<std::string> const &vorbis_comments);
+
+}

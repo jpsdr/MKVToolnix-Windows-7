@@ -33,6 +33,7 @@
 #include "common/mm_text_io.h"
 #include "common/mpeg4_p2.h"
 #include "common/ogmstreams.h"
+#include "common/tags/vorbis.h"
 #include "input/r_ogm.h"
 #include "input/r_ogm_flac.h"
 #include "merge/file_status.h"
@@ -749,64 +750,34 @@ ogm_reader_c::handle_stream_comments() {
     if (comments->empty())
       continue;
 
-    std::vector<std::string> chapter_strings;
+    std::vector<std::string> chapter_strings, comment_lines;
 
-    size_t j;
-    for (j = 0; comments->size() > j; j++) {
-      mxverb(2, fmt::format("ogm_reader: commment for #{0} for {1}: {2}\n", j, i, (*comments)[j]));
-      std::vector<std::string> comment = split((*comments)[j], "=", 2);
+    for (auto comment_idx = 0u; comments->size() > comment_idx; ++comment_idx)
+      comment_lines.push_back((*comments)[comment_idx]);
+
+    auto converted = mtx::tags::from_vorbis_comments(comment_lines);
+    if (!converted.m_language.empty())
+      dmx->language = converted.m_language;
+
+
+
+    for (auto const &line : comment_lines) {
+      auto comment = split(line, "=", 2);
       if (comment.size() != 2)
         continue;
 
-      if (comment[0] == "LANGUAGE") {
-        int index;
-
-        index = map_to_iso639_2_code(comment[1].c_str());
-        if (-1 != index)
-          dmx->language = g_iso639_languages[index].iso639_2_code;
-        else {
-
-          std::string lang = comment[1];
-          int pos1         = lang.find("[");
-          while (0 <= pos1) {
-            int pos2 = lang.find("]", pos1);
-            if (-1 == pos2)
-              pos2 = lang.length() - 1;
-            lang.erase(pos1, pos2 - pos1 + 1);
-            pos1 = lang.find("[");
-          }
-
-          pos1 = lang.find("(");
-          while (0 <= pos1) {
-            int pos2 = lang.find(")", pos1);
-            if (-1 == pos2)
-              pos2 = lang.length() - 1;
-            lang.erase(pos1, pos2 - pos1 + 1);
-            pos1 = lang.find("(");
-          }
-
-          index = map_to_iso639_2_code(lang.c_str());
-          if (-1 != index)
-            dmx->language = g_iso639_languages[index].iso639_2_code;
-        }
-
-      } else if (comment[0] == "TITLE")
-        title = comment[1];
-
-      else if (balg::starts_with(comment[0], "CHAPTER"))
-        chapter_strings.push_back((*comments)[j]);
+      if (balg::istarts_with(comment[0], "CHAPTER"))
+        chapter_strings.push_back(line);
     }
 
     bool segment_title_set = false;
-    if (title != "") {
-      title = cch->utf8(title);
+    if (!converted.m_title.empty()) {
       if (!g_segment_title_set && g_segment_title.empty() && dmx->ms_compat) {
-        g_segment_title     = title;
+        g_segment_title     = cch->utf8(converted.m_title);
         g_segment_title_set = true;
         segment_title_set   = true;
       }
-      dmx->title = title.c_str();
-      title      = "";
+      dmx->title = cch->utf8(converted.m_title);
     }
 
     auto chapters_set               = false;
