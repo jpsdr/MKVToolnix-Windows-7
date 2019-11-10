@@ -543,20 +543,58 @@
           </layout>
          </widget>
         </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pMergePredefinedValues">
+       <layout class="QVBoxLayout" name="verticalLayout_39">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <layout class="QHBoxLayout" name="horizontalLayout_15">
           <item>
-           <widget class="QGroupBox" name="gpMPredefinedTrackNames">
+           <widget class="QGroupBox" name="gpMPredefinedVideoTrackNames">
             <property name="title">
-             <string>Predefined track names</string>
+             <string>Predefined video track names</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_21">
+            <layout class="QVBoxLayout" name="verticalLayout_50">
              <item>
-              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedTrackNames" native="true"/>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedVideoTrackNames" native="true"/>
              </item>
             </layout>
            </widget>
           </item>
+          <item>
+           <widget class="QGroupBox" name="gpMPredefinedAudioTrackNames">
+            <property name="title">
+             <string>Predefined audio track names</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_51">
+             <item>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedAudioTrackNames" native="true"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="gpMPredefinedSubtitleTrackNames">
+            <property name="title">
+             <string>Predefined subtitle track names</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_21">
+             <item>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedSubtitleTrackNames" native="true"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
           <item>
            <widget class="QGroupBox" name="gbMPredefinedSplitSizes">
             <property name="title">
@@ -618,7 +656,11 @@
            <item row="0" column="1">
             <layout class="QHBoxLayout" name="horizontalLayout_9">
              <item>
-              <widget class="QLineEdit" name="leMDefaultAdditionalCommandLineOptions"/>
+              <widget class="QLineEdit" name="leMDefaultAdditionalCommandLineOptions">
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pbMEditDefaultAdditionalCommandLineOptions">
@@ -901,7 +943,11 @@
            <item row="3" column="1">
             <layout class="QHBoxLayout" name="horizontalLayout_13">
              <item>
-              <widget class="QLineEdit" name="leMDeriveTrackLanguageCustomRegex"/>
+              <widget class="QLineEdit" name="leMDeriveTrackLanguageCustomRegex">
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pbMDeriveTrackLanguageRevertCustomRegex">
@@ -1584,7 +1630,11 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="leCENameTemplate"/>
+            <widget class="QLineEdit" name="leCENameTemplate">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_10">

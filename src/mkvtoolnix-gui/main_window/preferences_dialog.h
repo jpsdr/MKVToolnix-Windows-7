@@ -23,6 +23,7 @@ public:
     Gui,
     OftenUsedSelections,
     Merge,
+    PredefinedValues,
     DefaultValues,
     DeriveTrackLanguage,
     Output,

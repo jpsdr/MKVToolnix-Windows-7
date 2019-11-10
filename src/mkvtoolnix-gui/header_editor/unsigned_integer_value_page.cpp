@@ -25,6 +25,7 @@ UnsignedIntegerValuePage::~UnsignedIntegerValuePage() {
 QWidget *
 UnsignedIntegerValuePage::createInputControl() {
   m_leValue = new QLineEdit{this};
+  m_leValue->setClearButtonEnabled(true);
 
   if (m_element) {
     m_originalValue = static_cast<EbmlUInteger *>(m_element)->GetValue();

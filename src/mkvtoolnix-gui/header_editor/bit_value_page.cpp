@@ -33,6 +33,7 @@ BitValuePage::createInputControl() {
 
   m_leValue = new QLineEdit{this};
   m_leValue->setText(originalValueAsString());
+  m_leValue->setClearButtonEnabled(true);
 
   return m_leValue;
 }

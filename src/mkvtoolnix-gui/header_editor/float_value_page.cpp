@@ -25,6 +25,7 @@ FloatValuePage::~FloatValuePage() {
 QWidget *
 FloatValuePage::createInputControl() {
   m_leValue = new QLineEdit{this};
+  m_leValue->setClearButtonEnabled(true);
 
   if (m_element) {
     m_originalValue = static_cast<EbmlFloat *>(m_element)->GetValue();

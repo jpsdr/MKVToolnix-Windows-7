@@ -258,6 +258,18 @@ Settings::convertOldSettings() {
     reg->remove(s_valOftenUsedLanguages);
     reg->endGroup();
   }
+
+  // Predefined track names have been split up into lists for each
+  // track type after v40.
+  reg->beginGroup(s_grpSettings);
+  auto value = reg->value(s_valMergePredefinedTrackNames);
+  if (value.isValid()) {
+    reg->remove(s_valMergePredefinedTrackNames);
+    reg->setValue(s_valMergePredefinedVideoTrackNames,    value.toStringList());
+    reg->setValue(s_valMergePredefinedAudioTrackNames,    value.toStringList());
+    reg->setValue(s_valMergePredefinedSubtitleTrackNames, value.toStringList());
+  }
+  reg->endGroup();
 }
 
 void
@@ -296,7 +308,9 @@ Settings::load() {
   m_disableDefaultTrackForSubtitles    = reg.value(s_valDisableDefaultTrackForSubtitles,    false).toBool();
   m_mergeEnableDialogNormGainRemoval   = reg.value(s_valMergeEnableDialogNormGainRemoval,   false).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value(s_valMergeAlwaysShowOutputFileControls,  true).toBool();
-  m_mergePredefinedTrackNames          = reg.value(s_valMergePredefinedTrackNames).toStringList();
+  m_mergePredefinedVideoTrackNames     = reg.value(s_valMergePredefinedVideoTrackNames).toStringList();
+  m_mergePredefinedAudioTrackNames     = reg.value(s_valMergePredefinedAudioTrackNames).toStringList();
+  m_mergePredefinedSubtitleTrackNames  = reg.value(s_valMergePredefinedSubtitleTrackNames).toStringList();
   m_mergePredefinedSplitSizes          = reg.value(s_valMergePredefinedSplitSizes).toStringList();
   m_mergePredefinedSplitDurations      = reg.value(s_valMergePredefinedSplitDurations).toStringList();
   m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value(s_valMergeTrackPropertiesLayout, static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
@@ -635,7 +649,9 @@ Settings::save()
   reg.setValue(s_valDisableDefaultTrackForSubtitles,    m_disableDefaultTrackForSubtitles);
   reg.setValue(s_valMergeEnableDialogNormGainRemoval,   m_mergeEnableDialogNormGainRemoval);
   reg.setValue(s_valMergeAlwaysShowOutputFileControls,  m_mergeAlwaysShowOutputFileControls);
-  reg.setValue(s_valMergePredefinedTrackNames,          m_mergePredefinedTrackNames);
+  reg.setValue(s_valMergePredefinedVideoTrackNames,     m_mergePredefinedVideoTrackNames);
+  reg.setValue(s_valMergePredefinedAudioTrackNames,     m_mergePredefinedAudioTrackNames);
+  reg.setValue(s_valMergePredefinedSubtitleTrackNames,  m_mergePredefinedSubtitleTrackNames);
   reg.setValue(s_valMergePredefinedSplitSizes,          m_mergePredefinedSplitSizes);
   reg.setValue(s_valMergePredefinedSplitDurations,      m_mergePredefinedSplitDurations);
   reg.setValue(s_valMergeLastFixedOutputDirs,           m_mergeLastFixedOutputDirs.items());
