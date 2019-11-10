@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: Ogg reader: if present in the tags of Vorbis and Opus tracks,
+  cover art will be converted into attachments.
+
+
 # Version 40.0.0 "Old Town Road + Pony" 2019-11-09
 
 ## New features and enhancements

@@ -701,6 +701,9 @@ ogm_reader_c::identify() {
     id_result_track(i, sdemuxers[i]->get_type(), sdemuxers[i]->get_codec(), info.get());
   }
 
+  for (auto &attachment : g_attachments)
+    id_result_attachment(attachment->ui_id, attachment->mime_type, attachment->data->get_size(), attachment->name, attachment->description, attachment->id);
+
   if (m_chapters.get())
     id_result_chapters(mtx::chapters::count_atoms(*m_chapters));
 }
@@ -728,6 +731,15 @@ ogm_reader_c::handle_stream_comments() {
     if (!converted.m_language.empty())
       dmx->language = converted.m_language;
 
+    for (auto const &picture : converted.m_pictures) {
+      picture->id           = m_attachment_id++;
+      picture->source_file  = m_ti.m_fname;
+      auto attach_mode      = attachment_requested(picture->id);
+      picture->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+
+      if (ATTACH_MODE_SKIP != attach_mode)
+        add_attachment(picture);
+    }
 
     for (auto const &[key, value] : comments.m_comments)
       if (balg::istarts_with(key, "CHAPTER"))

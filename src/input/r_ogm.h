@@ -81,6 +81,7 @@ private:
   ogg_sync_state oy;
   std::vector<ogm_demuxer_cptr> sdemuxers;
   int bos_pages_read;
+  int64_t m_attachment_id{};
 
 public:
   virtual ~ogm_reader_c();

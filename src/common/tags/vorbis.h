@@ -46,7 +46,6 @@ struct converted_vorbis_comments_t {
   std::vector<std::shared_ptr<attachment_t>> m_pictures;
 };
 
-converted_vorbis_comments_t from_vorbis_comments(std::vector<std::pair<std::string, std::string>> const &vorbis_comments);
 converted_vorbis_comments_t from_vorbis_comments(vorbis_comments_t const &vorbis_comments);
 
 vorbis_comments_t parse_vorbis_comments_from_packet(memory_cptr const &packet);

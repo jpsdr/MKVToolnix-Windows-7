@@ -15,10 +15,14 @@
 
 #include "common/base64.h"
 #include "common/debugging.h"
+#include "common/flac.h"
 #include "common/iso639.h"
+#include "common/mime.h"
+#include "common/mm_io_x.h"
 #include "common/mm_mem_io.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
+#include "common/strings/parsing.h"
 #include "common/tags/target_type.h"
 #include "common/tags/vorbis.h"
 
@@ -105,25 +109,36 @@ parse_language(std::string key_language) {
   return {};
 }
 
+std::string
+file_base_name_for_picture_type([[maybe_unused]] unsigned int type) {
+#if defined(HAVE_FLAC_FORMAT_H)
+  return mtx::flac::file_base_name_for_picture_type(type);
+#else
+  return "cover"s;
+#endif
+}
+
 std::shared_ptr<attachment_t>
-parse_metadata_block_picture(std::string const &value) {
-  // 3|image/jpeg||600x600x24|<36510 bytes of image data>
-  auto parts = split(value, "|", 5);
-
-  mxdebug_if(s_debug, fmt::format("parse_metadata_block_picture: num parts {}\n", parts.size()));
-
-  if (parts.size() != 5)
+parse_metadata_block_picture(vorbis_comments_t::type_e comments_type,
+                             std::string const &value) {
+  if (vorbis_comments_t::type_e::Unknown == comments_type)
     return {};
 
   try {
-    auto picture       = std::make_shared<attachment_t>();
-    picture->mime_type = parts[1];
-    auto extension     = picture->mime_type == "image/jpeg"     ? "jpg"
-                       : picture->mime_type == "image/png"      ? "png"
-                       : picture->mime_type == "image/x-ms-bmp" ? "bmp"
-                       :                                         ""s;
-    picture->name      = fmt::format("cover.{}", extension);
-    picture->data      = mtx::base64::decode(parts[4]);
+    auto data = mtx::base64::decode(value);
+    mm_mem_io_c in{*data};
+
+    auto picture      = std::make_shared<attachment_t>();
+    auto picture_type = in.read_uint32_be();
+
+    in.read(picture->mime_type,   in.read_uint32_be());
+    in.read(picture->description, in.read_uint32_be());
+
+    in.skip(4 * 4);             // width, height, color depth, number of colors used
+
+    picture->data  = in.read(in.read_uint32_be());
+    auto extension = mtx::mime::primary_file_extension_for_type(picture->mime_type);
+    picture->name  = fmt::format("{}.{}", file_base_name_for_picture_type(picture_type), extension);
 
     mxdebug_if(s_debug, fmt::format("parse_metadata_block_picture: MIME type: {} name: {} data size: {}\n", picture->mime_type, picture->name, picture->data ? picture->data->get_size() : 0));
 
@@ -132,6 +147,9 @@ parse_metadata_block_picture(std::string const &value) {
 
   } catch (mtx::base64::exception const &ex) {
     mxdebug_if(s_debug, fmt::format("parse_metadata_block_picture: Base64 exception: {}\n", ex.what()));
+
+  } catch (mtx::mm_io::exception const &ex) {
+    mxdebug_if(s_debug, fmt::format("parse_metadata_block_picture: I/O exception: {}\n", ex.what()));
   }
 
   return {};
@@ -140,13 +158,13 @@ parse_metadata_block_picture(std::string const &value) {
 } // anonymous namespace
 
 converted_vorbis_comments_t
-from_vorbis_comments(std::vector<std::pair<std::string, std::string>> const &vorbis_comments) {
+from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
   init_vorbis_to_matroska();
 
   converted_vorbis_comments_t converted;
   converted.m_tags = std::make_shared<libmatroska::KaxTags>();
 
-  for (auto const &[vorbis_full_key, value] : vorbis_comments) {
+  for (auto const &[vorbis_full_key, value] : vorbis_comments.m_comments) {
     mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}={}\n", vorbis_full_key, elide_string(value, 40)));
 
     auto key_name_language                  = split(vorbis_full_key, "-", 2);
@@ -166,7 +184,7 @@ from_vorbis_comments(std::vector<std::pair<std::string, std::string>> const &vor
     }
 
     if (vorbis_key == "METADATA_BLOCK_PICTURE") {
-      auto picture = parse_metadata_block_picture(value);
+      auto picture = parse_metadata_block_picture(vorbis_comments.m_type, value);
       if (picture)
         converted.m_pictures.push_back(picture);
       continue;
@@ -179,11 +197,6 @@ from_vorbis_comments(std::vector<std::pair<std::string, std::string>> const &vor
   }
 
   return converted;
-}
-
-converted_vorbis_comments_t
-from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
-  return from_vorbis_comments(vorbis_comments.m_comments);
 }
 
 vorbis_comments_t
