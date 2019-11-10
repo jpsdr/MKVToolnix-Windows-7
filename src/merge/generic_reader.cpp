@@ -16,6 +16,7 @@
 #include "common/list_utils.h"
 #include "common/mm_proxy_io.h"
 #include "common/strings/formatting.h"
+#include "common/tags/tags.h"
 #include "merge/generic_packetizer.h"
 #include "merge/generic_reader.h"
 #include "merge/input_x.h"
@@ -482,4 +483,26 @@ generic_reader_c::set_track_info(track_info_c const &info) {
   add_all_requested_track_ids(*this, m_ti.m_all_ext_timestamps);
   add_all_requested_track_ids(*this, m_ti.m_pixel_crop_list);
   add_all_requested_track_ids(*this, m_ti.m_reduce_to_core);
+}
+
+void
+generic_reader_c::add_track_tags_to_identification(libmatroska::KaxTags const &tags,
+                                                   mtx::id::info_c &info) {
+  for (auto const &tag_elt : tags) {
+    auto tag = dynamic_cast<libmatroska::KaxTag *>(tag_elt);
+    if (!tag)
+      continue;
+
+    for (auto const &simple_tag_elt : *tag) {
+      auto simple_tag = dynamic_cast<libmatroska::KaxTagSimple *>(simple_tag_elt);
+      if (!simple_tag)
+        continue;
+      auto name  = mtx::tags::get_simple_name(*simple_tag);
+      auto value = mtx::tags::get_simple_value(*simple_tag);
+
+      if (!name.empty()) {
+        info.add(fmt::format("tag_{0}", balg::to_lower_copy(name)), value);
+      }
+    }
+  }
 }

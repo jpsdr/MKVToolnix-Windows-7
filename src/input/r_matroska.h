@@ -181,7 +181,6 @@ struct kax_track_t {
   void handle_packetizer_output_sampling_freq();
   void handle_packetizer_codec_delay();
   void fix_display_dimension_parameters();
-  void add_track_tags_to_identification(mtx::id::info_c &info);
   void discard_track_statistics_tags();
 };
 using kax_track_cptr = std::shared_ptr<kax_track_t>;

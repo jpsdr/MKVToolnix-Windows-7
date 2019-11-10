@@ -147,4 +147,6 @@ protected:
 
   virtual void display_identification_results_as_json();
   virtual void display_identification_results_as_text();
+
+  virtual void add_track_tags_to_identification(libmatroska::KaxTags const &tags, mtx::id::info_c &info);
 };
