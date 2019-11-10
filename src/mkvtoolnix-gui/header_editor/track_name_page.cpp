@@ -17,6 +17,7 @@ TrackNamePage::TrackNamePage(Tab &parent,
                              translatable_string_c const &title,
                              translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::String, title, description}
+  , m_trackType{FindChildValue<libmatroska::KaxTrackType>(m_master)}
 {
 }
 
@@ -70,12 +71,15 @@ TrackNamePage::copyValueToElement() {
 
 void
 TrackNamePage::setupPredefinedTrackNames() {
-  auto name = m_cbTrackName->currentText();
+  auto name      = m_cbTrackName->currentText();
+  auto &settings = Util::Settings::get();
+  auto &list     = track_audio == m_trackType ? settings.m_mergePredefinedAudioTrackNames
+                 : track_video == m_trackType ? settings.m_mergePredefinedVideoTrackNames
+                 :                              settings.m_mergePredefinedSubtitleTrackNames;
 
   m_cbTrackName->clear();
-  m_cbTrackName->addItems(Util::Settings::get().m_mergePredefinedTrackNames);
+  m_cbTrackName->addItems(list);
   m_cbTrackName->setCurrentText(name);
-
 }
 
 }

@@ -4,6 +4,9 @@
 
 * MKVToolNix GUI: line edits & combo boxes will now have a "clear text" button
   appear whenever they're not empty. Part of the implementation of #2654.
+* MKVToolNix GUI: the list of predefined track names is now split up into
+  three lists, one for each track type (audio, video & subtitles). Part of the
+  implementation of #2654.
 
 
 # Version 40.0.0 "Old Town Road + Pony" 2019-11-09

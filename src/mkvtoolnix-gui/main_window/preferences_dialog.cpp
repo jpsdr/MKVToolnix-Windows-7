@@ -192,6 +192,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
   auto pGui      = addItem(Page::Gui,                 nullptr, QY("GUI"),                   "mkvtoolnix-gui");
                    addItem(Page::OftenUsedSelections, pGui,    QY("Often used selections"));
   auto pMerge    = addItem(Page::Merge,               nullptr, QY("Multiplexer"),           "merge");
+                   addItem(Page::PredefinedValues,    pMerge,  QY("Predefined values"));
                    addItem(Page::DefaultValues,       pMerge,  QY("Default values"));
                    addItem(Page::DeriveTrackLanguage, pMerge,  QY("Deriving track languages"));
                    addItem(Page::Output,              pMerge,  QY("Destination file name"));
@@ -282,12 +283,14 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
   Util::setToolTip(ui->cbMAutoClearFileTitle, QY("If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."));
 
-
-  ui->lwMPredefinedTrackNames->setToolTips(Q("%1 %2 %3")
-                                           .arg(QY("If you often use the same names for tracks, you can enter them here."))
-                                           .arg(QY("The names will be available for easy selection in both the multiplexer and the header editor."))
-                                           .arg(QY("You can still enter track names not present in this list manually in both tools.")));
-  ui->lwMPredefinedTrackNames->setAddItemDialogTexts(QY("Enter predefined track name"), QY("Please enter the new predefined track name."));
+  auto widgets = QList<mtx::gui::Util::StringListConfigurationWidget *>{} << ui->lwMPredefinedVideoTrackNames << ui->lwMPredefinedAudioTrackNames << ui->lwMPredefinedSubtitleTrackNames;
+  for (auto const &widget : widgets) {
+    widget->setToolTips(Q("%1 %2 %3")
+                        .arg(QY("If you often use the same names for tracks, you can enter them here."))
+                        .arg(QY("The names will be available for easy selection in both the multiplexer and the header editor."))
+                        .arg(QY("You can still enter track names not present in this list manually in both tools.")));
+    widget->setAddItemDialogTexts(QY("Enter predefined track name"), QY("Please enter the new predefined track name."));
+  }
 
   ui->lwMPredefinedSplitSizes->setToolTips(Q("%1 %2 %3")
                                            .arg(QY("If you often use the same values when splitting by size, you can enter them here."))
@@ -679,7 +682,9 @@ void
 PreferencesDialog::setupMergePredefinedItems() {
   auto &cfg = Util::Settings::get();
 
-  ui->lwMPredefinedTrackNames->setItems(cfg.m_mergePredefinedTrackNames);
+  ui->lwMPredefinedVideoTrackNames->setItems(cfg.m_mergePredefinedVideoTrackNames);
+  ui->lwMPredefinedAudioTrackNames->setItems(cfg.m_mergePredefinedAudioTrackNames);
+  ui->lwMPredefinedSubtitleTrackNames->setItems(cfg.m_mergePredefinedSubtitleTrackNames);
   ui->lwMPredefinedSplitSizes->setItems(cfg.m_mergePredefinedSplitSizes);
   ui->lwMPredefinedSplitDurations->setItems(cfg.m_mergePredefinedSplitDurations);
 }
@@ -899,9 +904,11 @@ PreferencesDialog::save() {
   for (auto const &type : ui->tbMEnableMuxingTracksByType->selectedItemValues())
     m_cfg.m_enableMuxingTracksByTheseTypes << static_cast<Merge::TrackType>(type.toInt());
 
-  m_cfg.m_mergePredefinedTrackNames     = ui->lwMPredefinedTrackNames->items();
-  m_cfg.m_mergePredefinedSplitSizes     = ui->lwMPredefinedSplitSizes->items();
-  m_cfg.m_mergePredefinedSplitDurations = ui->lwMPredefinedSplitDurations->items();
+  m_cfg.m_mergePredefinedVideoTrackNames    = ui->lwMPredefinedVideoTrackNames->items();
+  m_cfg.m_mergePredefinedAudioTrackNames    = ui->lwMPredefinedAudioTrackNames->items();
+  m_cfg.m_mergePredefinedSubtitleTrackNames = ui->lwMPredefinedSubtitleTrackNames->items();
+  m_cfg.m_mergePredefinedSplitSizes         = ui->lwMPredefinedSplitSizes->items();
+  m_cfg.m_mergePredefinedSplitDurations     = ui->lwMPredefinedSplitDurations->items();
 
   m_cfg.save();
 

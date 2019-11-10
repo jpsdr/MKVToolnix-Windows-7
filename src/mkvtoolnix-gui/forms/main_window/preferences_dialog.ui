@@ -543,20 +543,58 @@
           </layout>
          </widget>
         </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pMergePredefinedValues">
+       <layout class="QVBoxLayout" name="verticalLayout_39">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <layout class="QHBoxLayout" name="horizontalLayout_15">
           <item>
-           <widget class="QGroupBox" name="gpMPredefinedTrackNames">
+           <widget class="QGroupBox" name="gpMPredefinedVideoTrackNames">
             <property name="title">
-             <string>Predefined track names</string>
+             <string>Predefined video track names</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_21">
+            <layout class="QVBoxLayout" name="verticalLayout_50">
              <item>
-              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedTrackNames" native="true"/>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedVideoTrackNames" native="true"/>
              </item>
             </layout>
            </widget>
           </item>
+          <item>
+           <widget class="QGroupBox" name="gpMPredefinedAudioTrackNames">
+            <property name="title">
+             <string>Predefined audio track names</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_51">
+             <item>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedAudioTrackNames" native="true"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="gpMPredefinedSubtitleTrackNames">
+            <property name="title">
+             <string>Predefined subtitle track names</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_21">
+             <item>
+              <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMPredefinedSubtitleTrackNames" native="true"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
           <item>
            <widget class="QGroupBox" name="gbMPredefinedSplitSizes">
             <property name="title">

@@ -16,6 +16,7 @@ class TrackNamePage: public ValuePage {
 public:
   QComboBox *m_cbTrackName{};
   QString m_originalValue;
+  uint64_t m_trackType{};
 
 public:
   TrackNamePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);

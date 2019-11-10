@@ -203,7 +203,6 @@ Tab::setupInputControls() {
   setupControlLists();
   setupMoveUpDownButtons();
   setupInputLayout();
-  setupPredefinedTrackNames();
 
   ui->files->setModel(m_filesModel);
   ui->tracks->setModel(m_tracksModel);
@@ -552,9 +551,29 @@ Tab::setupInputToolTips() {
 void
 Tab::setupPredefinedTrackNames() {
   auto name = ui->trackName->currentText();
+  QMap<TrackType, bool> haveType;
+
+  Util::withSelectedIndexes(ui->tracks, [&](QModelIndex const &idx) {
+    auto track = m_tracksModel->fromIndex(idx);
+    if (track)
+      haveType[track->m_type] = true;
+  });
+
+  QStringList items;
+  auto &settings = Util::Settings::get();
+
+  if (haveType[TrackType::Audio])
+    items += settings.m_mergePredefinedAudioTrackNames;
+  if (haveType[TrackType::Video])
+    items += settings.m_mergePredefinedVideoTrackNames;
+  if (haveType[TrackType::Subtitles])
+    items += settings.m_mergePredefinedSubtitleTrackNames;
+
+  items.sort(Qt::CaseInsensitive);
+  items.erase(std::unique(items.begin(), items.end()), items.end());
 
   ui->trackName->clear();
-  ui->trackName->addItems(Util::Settings::get().m_mergePredefinedTrackNames);
+  ui->trackName->addItems(items);
   ui->trackName->setCurrentText(name);
 
 }
@@ -617,6 +636,8 @@ Tab::onTrackSelectionChanged() {
 
   ui->moveTracksUp->setEnabled(true);
   ui->moveTracksDown->setEnabled(true);
+
+  setupPredefinedTrackNames();
 
   if (1 < numRows) {
     setInputControlValues(nullptr);
