@@ -35,7 +35,7 @@ namespace {
 debugging_option_c s_debug{"vorbis_comments|vorbis_tags"};
 
 std::unordered_map<std::string, std::pair<std::string, int>> s_vorbis_to_matroska;
-std::unordered_map<int, std::unordered_map<std::string, std::string>> s_matroska_to_vorbis;
+// std::unordered_map<int, std::unordered_map<std::string, std::string>> s_matroska_to_vorbis;
 
 void
 init_vorbis_to_matroska() {
@@ -80,16 +80,16 @@ init_vorbis_to_matroska() {
   // COVERARTMIME
 }
 
-void
-init_matroska_to_vorbis() {
-  if (!s_matroska_to_vorbis.empty())
-    return;
+// void
+// init_matroska_to_vorbis() {
+//   if (!s_matroska_to_vorbis.empty())
+//     return;
 
-  init_vorbis_to_matroska();
+//   init_vorbis_to_matroska();
 
-  for (auto const &[vorbis, matroska] : s_vorbis_to_matroska)
-    s_matroska_to_vorbis[matroska.second][matroska.first] = vorbis;
-}
+//   for (auto const &[vorbis, matroska] : s_vorbis_to_matroska)
+//     s_matroska_to_vorbis[matroska.second][matroska.first] = vorbis;
+// }
 
 std::string
 parse_language(std::string key_language) {
