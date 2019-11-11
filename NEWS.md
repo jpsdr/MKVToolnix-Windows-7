@@ -10,6 +10,13 @@
 * mkvmerge: Ogg reader: if present in the tags of Vorbis and Opus tracks,
   cover art will be converted into attachments.
 
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: the automatic switch between aspect ratio &
+  display width/height wasn't reflected in the configuration generated for
+  `mkvmerge`. The user had to change between the two settings manually. Fixes
+  #2660.
+
 
 # Version 40.0.0 "Old Town Road + Pony" 2019-11-09
 
