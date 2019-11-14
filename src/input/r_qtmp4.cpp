@@ -1063,8 +1063,8 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
       auto attachment          = std::make_shared<attachment_t>();
 
-      attachment->name         = fmt::format("cover.{}", type == MP4ADT_PNG ? "png" : type == MP4ADT_BMP ? "bmp"      : "jpg");
-      attachment->mime_type    = fmt::format("image/{}", type == MP4ADT_PNG ? "png" : type == MP4ADT_BMP ? "x-ms-bmp" : "jpeg");
+      attachment->name         = fmt::format("cover.{}", type == MP4ADT_PNG ? "png" : type == MP4ADT_BMP ? "bmp" : "jpg");
+      attachment->mime_type    = fmt::format("image/{}", type == MP4ADT_PNG ? "png" : type == MP4ADT_BMP ? "bmp" : "jpeg");
       attachment->data         = m_in->read(data_size);
       attachment->ui_id        = m_attachment_id++;
       attachment->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
