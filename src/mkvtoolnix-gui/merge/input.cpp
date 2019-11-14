@@ -12,6 +12,7 @@
 #include <QProgressDialog>
 #include <QRegularExpression>
 #include <QSettings>
+#include <QSignalBlocker>
 #include <QString>
 #include <QThread>
 #include <QTimer>
@@ -550,6 +551,8 @@ Tab::setupInputToolTips() {
 
 void
 Tab::setupPredefinedTrackNames() {
+  QSignalBlocker const blocker{ui->trackName};
+
   auto name = ui->trackName->currentText();
   QMap<TrackType, bool> haveType;
 
@@ -575,7 +578,6 @@ Tab::setupPredefinedTrackNames() {
   ui->trackName->clear();
   ui->trackName->addItems(items);
   ui->trackName->setCurrentText(name);
-
 }
 
 void
@@ -637,10 +639,9 @@ Tab::onTrackSelectionChanged() {
   ui->moveTracksUp->setEnabled(true);
   ui->moveTracksDown->setEnabled(true);
 
-  setupPredefinedTrackNames();
-
   if (1 < numRows) {
     setInputControlValues(nullptr);
+    setupPredefinedTrackNames();
     Util::enableWidgets(m_allInputControls, true);
     return;
   }
@@ -656,6 +657,7 @@ Tab::onTrackSelectionChanged() {
     return;
 
   setInputControlValues(track);
+  setupPredefinedTrackNames();
 
   if (track->isAudio()) {
     Util::enableWidgets(m_audioControls, true);
