@@ -239,7 +239,7 @@ probe_file_format(filelist_t &file) {
   std::unique_ptr<generic_reader_c> reader;
 
   if (is_playlist)
-    io = file.playlist_mpls_in;
+    io = std::make_shared<mm_read_buffer_io_c>(file.playlist_mpls_in);
 
   // Prefer types hinted by extension
   auto extension = boost::filesystem::extension(file.name);

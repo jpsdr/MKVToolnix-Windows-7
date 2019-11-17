@@ -16,6 +16,8 @@
   display width/height wasn't reflected in the configuration generated for
   `mkvmerge`. The user had to change between the two settings manually. Fixes
   #2660.
+* mkvmerge: MPLS handling: re-added caching when using MPLS playlists as input
+  files. Fixes #2666.
 
 
 # Version 40.0.0 "Old Town Road + Pony" 2019-11-09
