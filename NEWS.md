@@ -18,6 +18,10 @@
   #2660.
 * mkvmerge: MPLS handling: re-added caching when using MPLS playlists as input
   files. Fixes #2666.
+* MKVToolNix GUI: the configured font was not applied to a lot of controls
+  (e.g. the file & track lists or the menu entries) on application
+  startup. Instead the user had to open & close the preferences in order for
+  the font to be applied to all controls. Fixes #2671.
 
 
 # Version 40.0.0 "Old Town Road + Pony" 2019-11-09

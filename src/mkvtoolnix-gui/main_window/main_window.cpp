@@ -224,7 +224,7 @@ MainWindow::setupConnections() {
   // Auxiliary actions:
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setToolSelectorVisibility);
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::reinitializeLanguageLists);
-  connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::setupColorMode);
+  connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::setupAppearance);
 }
 
 void
@@ -485,8 +485,6 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
 
   if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
     QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
-
-  App::setupUiFont();
 
   emit preferencesChanged();
 }

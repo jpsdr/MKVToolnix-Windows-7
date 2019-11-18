@@ -84,13 +84,15 @@ signals:
 public slots:
   void saveSettings() const;
   void receiveInstanceCommunication();
-  void setupColorMode();
+  void setupAppearance();
 
 protected:
   void setupInstanceCommunicator();
   void setupNetworkAccessManager();
   Util::MediaPlayer &setupMediaPlayer();
   Jobs::ProgramRunner &setupProgramRunner();
+  void setupColorMode();
+  void setupUiFont();
 
 public:
   static App *instance();
@@ -118,7 +120,6 @@ public:
   static QString settingsBaseGroupName();
 
   static void fixLockFileHostName(QString const &lockFilePath);
-  static void setupUiFont();
 };
 
 }

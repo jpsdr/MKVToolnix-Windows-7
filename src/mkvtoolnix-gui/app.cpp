@@ -90,7 +90,6 @@ App::App(int &argc,
   QObject::connect(this, &App::aboutToQuit, this, &App::saveSettings);
 
   initializeLocale();
-  App::setupUiFont();
 
   p_ptr->m_defaultStyleSheet = styleSheet();
   p_ptr->m_defaultPalette    = palette();
@@ -537,6 +536,12 @@ App::settingsBaseGroupName() {
 }
 
 void
+App::setupAppearance() {
+  setupColorMode();
+  setupUiFont();
+}
+
+void
 App::setupColorMode() {
 #if defined(SYS_WINDOWS)
   if (Util::Settings::get().m_uiDisableDarkStyleSheet) {
@@ -606,7 +611,7 @@ App::run() {
   // that relative file names are resolved correctly.
   QDir::setCurrent(QDir::homePath());
 
-  setupColorMode();
+  setupAppearance();
 
   auto mainWindow = std::make_unique<MainWindow>();
   mainWindow->show();
