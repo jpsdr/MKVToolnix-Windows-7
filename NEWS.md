@@ -9,6 +9,8 @@
   implementation of #2654.
 * mkvmerge: Ogg reader: if present in the tags of Vorbis and Opus tracks,
   cover art will be converted into attachments.
+* mkvmerge: MP4 reader: added support for reading VP9 video from MP4
+  files. Part of the implementation of #2673.
 
 ## Bug fixes
 

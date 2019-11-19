@@ -62,6 +62,7 @@
 #include "output/p_video_for_windows.h"
 #include "output/p_vobsub.h"
 #include "output/p_vorbis.h"
+#include "output/p_vpx.h"
 
 using namespace libmatroska;
 
@@ -1763,6 +1764,21 @@ qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_c &dmx) {
 }
 
 void
+qtmp4_reader_c::create_video_packetizer_vpx(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
+  dmx.ptzr            = add_packetizer(new vpx_video_packetizer_c{this, m_ti, dmx.codec.get_type()});
+
+  PTZR(dmx.ptzr)->set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
+
+  if (dmx.frame_rate.numerator()) {
+    auto duration = boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator(), dmx.frame_rate.numerator()} * 1'000'000'000ll);
+    PTZR(dmx.ptzr)->set_track_default_duration(duration);
+  }
+
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+}
+
+void
 qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.esds.decoder_config;
   dmx.ptzr            = add_packetizer(new aac_packetizer_c(this, m_ti, *dmx.a_aac_audio_config, aac_packetizer_c::headerless));
@@ -1880,6 +1896,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
     else if (dmx.codec.is(codec_c::type_e::V_PRORES))
       create_video_packetizer_prores(dmx);
+
+    else if (dmx.codec.is(codec_c::type_e::V_VP8) || dmx.codec.is(codec_c::type_e::V_VP9))
+      create_video_packetizer_vpx(dmx);
 
     else
       create_video_packetizer_standard(dmx);

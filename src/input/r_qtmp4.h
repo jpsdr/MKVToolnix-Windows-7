@@ -562,6 +562,7 @@ protected:
   virtual void create_video_packetizer_standard(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_svq1(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_prores(qtmp4_demuxer_c &dmx);
+  virtual void create_video_packetizer_vpx(qtmp4_demuxer_c &dmx);
 
   virtual void create_subtitles_packetizer_vobsub(qtmp4_demuxer_c &dmx);
 
