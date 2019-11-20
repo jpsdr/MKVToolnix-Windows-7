@@ -347,6 +347,7 @@ struct qtmp4_demuxer_c {
   void parse_subtitles_header_priv_atoms(uint64_t atom_size, int level);
 
   void parse_esds_audio_header_priv_atom(mm_io_c &io, int level);
+  void parse_dops_audio_header_priv_atom(mm_io_c &io, int level);
   void parse_aac_esds_decoder_config();
   void parse_vorbis_esds_decoder_config();
 
@@ -366,6 +367,7 @@ struct qtmp4_demuxer_c {
   void derive_track_params_from_ac3_audio_bitstream();
   void derive_track_params_from_dts_audio_bitstream();
   void derive_track_params_from_mp3_audio_bitstream();
+  bool derive_track_params_from_opus_private_data();
   bool derive_track_params_from_vorbis_private_data();
   void check_for_hevc_video_annex_b_bitstream();
 
@@ -549,6 +551,7 @@ protected:
   virtual bool create_audio_packetizer_alac(qtmp4_demuxer_c &dmx);
   virtual bool create_audio_packetizer_dts(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx);
+  virtual void create_audio_packetizer_opus(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_vorbis(qtmp4_demuxer_c &dmx);

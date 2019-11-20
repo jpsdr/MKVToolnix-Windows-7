@@ -56,6 +56,7 @@
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
 #include "output/p_mpeg4_p2.h"
+#include "output/p_opus.h"
 #include "output/p_passthrough.h"
 #include "output/p_pcm.h"
 #include "output/p_quicktime.h"
@@ -1793,6 +1794,13 @@ qtmp4_reader_c::create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx) {
 }
 
 void
+qtmp4_reader_c::create_audio_packetizer_opus(qtmp4_demuxer_c &dmx) {
+  m_ti.m_private_data = dmx.priv[0];
+  dmx.ptzr            = add_packetizer(new opus_packetizer_c{this, m_ti});
+  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+}
+
+void
 qtmp4_reader_c::create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx) {
   dmx.ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, static_cast<int32_t>(dmx.a_samplerate), dmx.a_channels, dmx.a_bitdepth, dmx.m_pcm_format));
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
@@ -1924,6 +1932,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
     else if (dmx.codec.is(codec_c::type_e::A_DTS))
       packetizer_ok = create_audio_packetizer_dts(dmx);
+
+    else if (dmx.codec.is(codec_c::type_e::A_OPUS))
+      create_audio_packetizer_opus(dmx);
 
     else if (dmx.codec.is(codec_c::type_e::A_VORBIS))
       create_audio_packetizer_vorbis(dmx);
@@ -2919,7 +2930,7 @@ qtmp4_demuxer_c::parse_vorbis_esds_decoder_config() {
 void
 qtmp4_demuxer_c::parse_esds_audio_header_priv_atom(mm_io_c &io,
                                                    int level) {
-  esds_parsed = parse_esds_atom(io, level + 1);
+  esds_parsed = parse_esds_atom(io, level);
 
   if (!esds_parsed)
     return;
@@ -2929,6 +2940,33 @@ qtmp4_demuxer_c::parse_esds_audio_header_priv_atom(mm_io_c &io,
 
   else if (codec_c::look_up_object_type_id(esds.object_type_id).is(codec_c::type_e::A_VORBIS))
     parse_vorbis_esds_decoder_config();
+}
+
+void
+qtmp4_demuxer_c::parse_dops_audio_header_priv_atom(mm_io_c &io,
+                                                   int level) {
+  mxdebug_if(m_debug_headers, fmt::format("{0}Opus box size: {1}\n", space((level + 1) * 2 + 1), io.get_size()));
+
+  if (io.get_size() < 11)
+    return;
+
+  auto opus_priv     = memory_c::alloc(io.get_size() + 8);
+  auto opus_priv_ptr = opus_priv->get_buffer();
+
+  std::memcpy(opus_priv_ptr, "OpusHead", 8);
+
+  if (io.read(&opus_priv_ptr[8], io.get_size()) != io.get_size()) {
+    mxdebug_if(m_debug_headers, fmt::format("{0}Opus box read failure", space((level + 1) * 2 + 1)));
+    return;
+  }
+
+  // Data in MP4 is stored in Big Endian while Opus-in-Ogg and
+  // therefore Opus-in-Matroska uses Little Endian in its ID header.
+  put_uint16_le(&opus_priv_ptr[10], get_uint16_be(&opus_priv_ptr[10])); // pre-skip
+  put_uint32_le(&opus_priv_ptr[12], get_uint32_be(&opus_priv_ptr[12])); // input sample rate
+  put_uint16_le(&opus_priv_ptr[16], get_uint16_be(&opus_priv_ptr[16])); // output gain
+
+  priv.push_back(opus_priv);
 }
 
 void
@@ -2961,14 +2999,16 @@ qtmp4_demuxer_c::parse_audio_header_priv_atoms(mm_mem_io_c &mio,
 
       mxdebug_if(m_debug_headers, fmt::format("{0}Audio private data size: {1}, type: '{2}'\n", space((level + 1) * 2 + 1), atom.size, atom.fourcc));
 
-      if ((atom.fourcc == "esds") && !esds_parsed) {
-        mm_mem_io_c sub_io{mio.get_ro_buffer() + atom.pos + atom.hsize, std::min<uint64_t>(atom.size - atom.hsize, size - atom.pos - atom.hsize)};
-        parse_esds_audio_header_priv_atom(sub_io, level);
+      mm_mem_io_c sub_io{mio.get_ro_buffer() + atom.pos + atom.hsize, std::min<uint64_t>(atom.size - atom.hsize, size - atom.pos - atom.hsize)};
 
-      } else if (atom.fourcc == "wave") {
-        mm_mem_io_c sub_io{mio.get_ro_buffer() + atom.pos + atom.hsize, std::min<uint64_t>(atom.size - atom.hsize, size - atom.pos - atom.hsize)};
+      if ((atom.fourcc == "esds") && !esds_parsed)
+        parse_esds_audio_header_priv_atom(sub_io, level + 1);
+
+      else if (atom.fourcc == "wave")
         parse_audio_header_priv_atoms(sub_io, sub_io.get_size(), level + 1);
-      }
+
+      else if (atom.fourcc == "dOps")
+        parse_dops_audio_header_priv_atom(sub_io, level + 1);
 
       mio.setFilePointer(atom.pos + atom.size);
     }
@@ -3213,6 +3253,23 @@ qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
 }
 
 bool
+qtmp4_demuxer_c::derive_track_params_from_opus_private_data() {
+  if (priv.empty() || !priv[0]) {
+    mxdebug_if(m_debug_headers, "derive_opus: no private data\n");
+    return false;
+  }
+
+  if (priv[0]->get_size() < 19) {
+    mxdebug_if(m_debug_headers, fmt::format("derive_opus: private data too small: {} < 19\n", priv[0]->get_size()));
+    return false;
+  }
+
+  mxdebug_if(m_debug_headers, fmt::format("derive_opus: OK\n"));
+
+  return true;
+}
+
+bool
 qtmp4_demuxer_c::derive_track_params_from_vorbis_private_data() {
   if (priv.size() != 3)
     return false;
@@ -3302,6 +3359,9 @@ qtmp4_demuxer_c::verify_audio_parameters() {
 
   else if (codec.is(codec_c::type_e::A_VORBIS))
     return derive_track_params_from_vorbis_private_data();
+
+  else if (codec.is(codec_c::type_e::A_OPUS))
+    return derive_track_params_from_opus_private_data();
 
   else if (codec.is(codec_c::type_e::A_PCM)) {
     if (fourcc == "in24")
