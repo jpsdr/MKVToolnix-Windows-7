@@ -13,6 +13,10 @@
   files. Part of the implementation of #2673.
 * mkvmerge: MP4 reader: added support for reading VP9 video from MP4
   files. Part of the implementation of #2673.
+* MKVToolNix GUI: multiplexer: when trying to add thumbnails for a Blu-ray the
+  GUI will determine the thumbnail's pixel size from the thumbnail files if
+  the XML file doesn't contain that information. This works for JPEG and PNG
+  files. Implements #2674.
 
 ## Bug fixes
 

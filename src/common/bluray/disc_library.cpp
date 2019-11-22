@@ -16,6 +16,7 @@
 #include "common/bluray/util.h"
 #include "common/bluray/disc_library.h"
 #include "common/debugging.h"
+#include "common/image.h"
 #include "common/strings/parsing.h"
 #include "common/xml/xml.h"
 
@@ -51,16 +52,28 @@ parse_bdmt_xml(bfs::path const &file_name) {
 
       thumbnail.m_file_name = bfs::path{node.attribute("href").value()};
       auto size             = std::string{node.attribute("size").value()};
+      auto ok               = false;
+
+      if (thumbnail.m_file_name.is_relative())
+        thumbnail.m_file_name = (bfs::absolute(file_name).parent_path() / thumbnail.m_file_name).lexically_normal();
 
       boost::smatch matches;
 
-      if (   !thumbnail.m_file_name.empty()
-          && boost::regex_match(size, matches, size_re)
+      if (   boost::regex_match(size, matches, size_re)
           && parse_number(matches[1].str(), thumbnail.m_width)
-          && parse_number(matches[2].str(), thumbnail.m_height)) {
-        if (thumbnail.m_file_name.is_relative())
-          thumbnail.m_file_name = (bfs::absolute(file_name).parent_path() / thumbnail.m_file_name).lexically_normal();
+          && parse_number(matches[2].str(), thumbnail.m_height))
+        ok = true;
 
+      if (!ok) {
+        auto dimensions = mtx::image::get_size(thumbnail.m_file_name);
+        if (dimensions) {
+          thumbnail.m_width  = dimensions->first;
+          thumbnail.m_height = dimensions->second;
+          ok                 = true;
+        }
+      }
+
+      if (ok) {
         info.m_thumbnails.push_back(thumbnail);
         mxdebug_if(debug, fmt::format("{}: file name: {} width: {} height: {}\n", file_name, thumbnail.m_file_name.string(), thumbnail.m_width, thumbnail.m_height));
       }
