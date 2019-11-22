@@ -214,7 +214,7 @@ propedit_cli_parser_c::init_parser() {
   OPT("a|add=<name=value>",         add_change,          YT("Adds a property with the value even if such a property already "
                                                             "exists"));
   OPT("s|set=<name=value>",         add_change,          YT("Sets a property to the value if it exists and add it otherwise"));
-  OPT("d|delete=<name>",            add_change,          YT("Delete all occurences of a property"));
+  OPT("d|delete=<name>",            add_change,          YT("Delete all occurrences of a property"));
 
   add_section_header(YT("Actions for handling tags and chapters"));
   OPT("t|tags=<selector:filename>", add_tags,            YT("Add or replace tags in the file with the ones from 'filename' "

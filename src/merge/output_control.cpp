@@ -1262,7 +1262,7 @@ prepare_tags_for_rendering() {
   fix_mandatory_elements(s_kax_tags.get());
   sort_ebml_master(s_kax_tags.get());
   if (!s_kax_tags->CheckMandatory())
-    mxerror(fmt::format(Y("Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). {0}\n"), BUGMSG));
+    mxerror(fmt::format(Y("Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"), BUGMSG));
 
   s_kax_tags->UpdateSize();
   g_tags_size = s_kax_tags->ElementSize();

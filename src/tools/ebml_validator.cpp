@@ -340,7 +340,7 @@ parse_content(int level,
       return;
 
     } catch (...) {
-      mxerror(Y("Unknown error occured\n"));
+      mxerror(Y("Unknown error occurred\n"));
     }
   }
 }

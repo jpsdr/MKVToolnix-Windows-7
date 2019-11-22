@@ -5284,7 +5284,7 @@
   quit. Instead it continued and exited with the result code 0.
 * mkvmerge: bug fix: Certain frames in certain H.264/AVC raw tracks were handled
   wrong, e.g. files created by x264 versions starting with revision 1665. The
-  situation occured if an IDR slice comes immedtiately after a non-IDR slice and the
+  situation occurred if an IDR slice comes immedtiately after a non-IDR slice and the
   IDR slice has its frame_num and pic_order_count_lsb fields set to 0.
 * mkvpropedit, mmg's header editor: Fixed a crash corrupting files in certain
   situations. If the updated header fields required filling exactly one byte with an
@@ -5905,7 +5905,7 @@
 
 * mkvmerge: bug fix: The handling of TrueHD/MLP audio in MPEG program streams was
   broken resulting in many dropped packets.
-* all: bug fix: There was the possibility that invalid memory access occured and e.g.
+* all: bug fix: There was the possibility that invalid memory access occurred and e.g.
   mkvmerge crashed on systems with the posix_fadvise() function (mainly Linux) if
   mkvmerge was opening several files from certain file systems (e.g. VFAT). Apart
   from obvious crashes the only other side effect was that the posix_fadvise()
@@ -6623,7 +6623,7 @@
   tracks.
 * mkvmerge: bug fix: Added a workaround for RealAudio tracks for which the key frame
   flag is never set.
-* mmg: bug fix: Fixed a segfault that occured if the user had a track selected and its the
+* mmg: bug fix: Fixed a segfault that occurred if the user had a track selected and its the
   file the track was read from is removed.
 * mmg: bug fix: Fixed the behaviour of a couple of ComboBoxes on Windows after
   selecting "File -\> New". E.g. if the user selected "700M" in the "split after this
@@ -6743,7 +6743,7 @@
 * mkvmerge: bug fix: Muxing wasn't working Windows 9x/ME because mkvmerge was trying
   to use Unicode file access functions when determining which directories to create.
   Fixes Anthill bug #177.
-* mmg: bug fix: Fixed a crash that occured if the user removed an attachment and clicked
+* mmg: bug fix: Fixed a crash that occurred if the user removed an attachment and clicked
   somewhere in the empty space in the attachment list. Occured only on Windows.
 * mmg: bug fix: Re-added Chinese to the list of popular languages (those are listed
   first in the language drop down boxes).
@@ -7055,7 +7055,7 @@
   mkvmerge when adding files failed.
 * mkvmerge: bug fix: Extracting the FPS from some AVC MP4 files did not work.
 * mkvmerge: bug fix: Appending + splitting was segfaulting if used together and at
-  least one split occured after a track has been appended.
+  least one split occurred after a track has been appended.
 * mkvmerge: bug fix: A failing call to posix_fadvise will only turn its usage off for
   that one file and not abort mkvmerge completely.
 * mmg: bug fix: When "appending" a file all tracks where added to the end of the track
@@ -8294,7 +8294,7 @@
 
 * mkvmerge: Fixed a bug in the SRT reader which would not always handle Unix/DOS style
   new line cases correctly.
-* mkvmerge: Fixed some infinite-reading-from-a-file bug that occured on Windows
+* mkvmerge: Fixed some infinite-reading-from-a-file bug that occurred on Windows
   when reading SSA/ASS files.
 * mkvmerge: Fixed a bug which would mostly appear with subtitles that have very long ( \>
   60s) gaps between entries. Here the cluster would not been rendered properly

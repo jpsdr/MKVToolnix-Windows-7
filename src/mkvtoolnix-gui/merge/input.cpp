@@ -546,7 +546,7 @@ Tab::setupInputToolTips() {
                    Q("%1 %2 %3")
                    .arg(QY("Free-form edit field for user defined options for this track."))
                    .arg(QY("What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."))
-                   .arg(QY("All occurences of the string \"<TID>\" will be replaced by the track's track ID.")));
+                   .arg(QY("All occurrences of the string \"<TID>\" will be replaced by the track's track ID.")));
 }
 
 void

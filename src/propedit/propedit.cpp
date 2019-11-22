@@ -68,7 +68,7 @@ display_update_element_result(const EbmlCallbacks &callbacks,
       break;
 
     default:
-      message += Y("An unknown error occured. The file has been modified.");
+      message += Y("An unknown error occurred. The file has been modified.");
   }
 
   mxerror(message + "\n");

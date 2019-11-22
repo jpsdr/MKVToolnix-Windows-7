@@ -105,7 +105,7 @@ QtKaxAnalyzer::displayUpdateElementResult(QWidget *parent,
       return;
 
     default:
-      QMessageBox::critical(parent, QY("Internal program error"), Q("%1 %2").arg(message).arg(QY("An unknown error occured. The file has been modified.")));
+      QMessageBox::critical(parent, QY("Internal program error"), Q("%1 %2").arg(message).arg(QY("An unknown error occurred. The file has been modified.")));
   }
 }
 

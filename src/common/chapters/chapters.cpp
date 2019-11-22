@@ -132,7 +132,7 @@ probe_simple(mm_text_io_c *in) {
    \param exception_on_error If set to \c true then an exception is thrown
      if an error occurs. Otherwise \c nullptr will be returned.
 
-   \return The chapters parsed from the file or \c nullptr if an error occured.
+   \return The chapters parsed from the file or \c nullptr if an error occurred.
 */
 kax_cptr
 parse_simple(mm_text_io_c *in,
@@ -265,7 +265,7 @@ parse_simple(mm_text_io_c *in,
    \param tags When parsing a cue sheet tags will be created along with the
      chapter entries. These tags will be stored in this parameter.
 
-   \return The chapters parsed from the file or \c nullptr if an error occured.
+   \return The chapters parsed from the file or \c nullptr if an error occurred.
 
    \see ::parse_chapters(mm_text_io_c *in,int64_t min_ts,int64_t max_ts, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,KaxTags **tags)
 */
@@ -327,7 +327,7 @@ parse(const std::string &file_name,
    \param tags When parsing a cue sheet tags will be created along with the
      chapter entries. These tags will be stored in this parameter.
 
-   \return The chapters parsed from the file or \c nullptr if an error occured.
+   \return The chapters parsed from the file or \c nullptr if an error occurred.
 
    \see ::parse_chapters(const std::string &file_name,int64_t min_ts,int64_t max_ts, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,std::unique_ptr<KaxTags> *tags)
 */
