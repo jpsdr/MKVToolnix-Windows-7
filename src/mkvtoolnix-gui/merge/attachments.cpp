@@ -523,14 +523,15 @@ Tab::findExistingAttachmentFileName(QString const &fileName) {
 
 void
 Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const &info) {
-  unsigned int maxWidth = 0;
+  unsigned int maxSize = 0;
   bfs::path fileName;
 
   for (auto const &thumbnail : info.m_thumbnails) {
-    if (thumbnail.m_width < maxWidth)
+    auto size = thumbnail.m_width * thumbnail.m_height;
+    if (size < maxSize)
       continue;
 
-    maxWidth = thumbnail.m_width;
+    maxSize  = size;
     fileName = thumbnail.m_file_name;
   }
 
