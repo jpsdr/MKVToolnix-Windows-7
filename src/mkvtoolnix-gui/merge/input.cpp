@@ -505,7 +505,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->cropping,
                    Q("<p>%1 %2</p><p>%3 %4</p><p>%5</p>")
                    .arg(QYH("Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."))
-                   .arg(QYH("This must be comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."))
+                   .arg(QYH("This must be a comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."))
                    .arg(QYH("Note that the video content is not modified by this option."))
                    .arg(QYH("The values are only stored in the track headers."))
                    .arg(QYH("Note also that there are not a lot of players that support the cropping parameters.")));
