@@ -445,7 +445,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->tracks,    QY("Right-click for actions for all items"));
 
   Util::setToolTip(ui->muxThis,   QY("If set to 'no' then the selected tracks will not be copied to the destination file."));
-  Util::setToolTip(ui->trackName, QY("A name for this track that players can display helping the user chose the right track to play, e.g. \"director's comments\"."));
+  Util::setToolTip(ui->trackName, QY("A name for this track that players can display helping the user choose the right track to play, e.g. \"director's comments\"."));
   Util::setToolTip(ui->trackLanguage,
                    Q("%1 %2")
                    .arg(QY("The language for this track that players can use for automatic track selection and display for the user."))
