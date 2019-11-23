@@ -45,7 +45,7 @@ protected:
   void updateStatusDisplay();
   void updateReleasesInfoDisplay();
 
-  static QString formattedCodename(QString const &codename, QString const &artist);
+  static QString formattedVersionHeading(pugi::xpath_node const &release);
 };
 
 }

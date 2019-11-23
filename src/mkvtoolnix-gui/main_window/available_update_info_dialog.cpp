@@ -56,7 +56,10 @@ AvailableUpdateInfoDialog::setChangeLogContent(QString const &content) {
             "</style>"
             "</head><body>");
 
-  html << Q("<h1><a href=\"%1\">MKVToolNix news &amp; changes</a></h1>").arg(to_qs(MTX_NEWS_URL).toHtmlEscaped());
+  html << Q("<h1>%1 [<a href=\"%2\">%3</a>]</h1>")
+    .arg(QY("MKVToolNix news & changes").toHtmlEscaped())
+    .arg(to_qs(MTX_NEWS_URL).toHtmlEscaped())
+    .arg(QY("Read full NEWS.md file online").toHtmlEscaped());
 
   html << content;
 
@@ -105,20 +108,25 @@ AvailableUpdateInfoDialog::updateStatusDisplay() {
 }
 
 QString
-AvailableUpdateInfoDialog::formattedCodename(QString const &codename,
-                                             QString const &artist) {
-  auto codenameQ = codename.toHtmlEscaped();
+AvailableUpdateInfoDialog::formattedVersionHeading(pugi::xpath_node const &release) {
+  auto versionStrQ = Q(std::string{release.node().attribute("version").value()}).toHtmlEscaped();
+  auto artist      = Q(release.node().attribute("codename-artist").value());
+  auto codename    = Q(release.node().attribute("codename").value());
 
   if (codename.isEmpty() || artist.isEmpty())
-    return codenameQ;
+    return QY("Version %1").arg(versionStrQ);
 
-  auto url   = QUrl{Q("https://www.youtube.com/results")};
-  auto query = QUrlQuery{};
+  auto codenameQ = codename.toHtmlEscaped();
+  auto url       = QUrl{Q("https://www.youtube.com/results")};
+  auto query     = QUrlQuery{};
 
   query.addQueryItem(Q("search_query"), Q("%1 %2").arg(artist).arg(codename));
   url.setQuery(query);
 
-  return Q("<a href=\"%1\">%2</a>").arg(url.toString(QUrl::FullyEncoded)).arg(codenameQ);
+  return Q("%1 [<a href=\"%2\">%3</a>]")
+    .arg(QY("Version %1 \"%2\"").arg(versionStrQ).arg(codenameQ))
+    .arg(url.toString(QUrl::FullyEncoded))
+    .arg(QY("Listen on YouTube").toHtmlEscaped());
 }
 
 void
@@ -145,16 +153,12 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   releases.sort();
 
   for (auto &release : releases) {
-    auto versionStr    = std::string{release.node().attribute("version").value()};
-    auto versionStrQ   = Q(versionStr).toHtmlEscaped();
-    auto artist        = Q(release.node().attribute("codename-artist").value());
-    auto codename      = Q(release.node().attribute("codename").value());
-    auto codenameQ     = formattedCodename(codename, artist);
-    auto heading       = !codename.isEmpty() ? QY("Version %1 \"%2\"").arg(versionStrQ).arg(codenameQ) : QY("Version %1").arg(versionStrQ);
-    auto currentTypeQ  = QString{};
-    auto inList        = false;
+    auto versionStr  = std::string{release.node().attribute("version").value()};
+    auto headingQ     = formattedVersionHeading(release);
+    auto currentTypeQ = QString{};
+    auto inList       = false;
 
-    html << Q("<h2>%1</h2>").arg(heading);
+    html << Q("<h2>%1</h2>").arg(headingQ);
 
     for (auto change = release.node().child("changes").first_child() ; change ; change = change.next_sibling()) {
       if (   (std::string{change.name()} != "change")

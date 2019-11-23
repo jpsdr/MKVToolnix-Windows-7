@@ -17,6 +17,9 @@
   GUI will determine the thumbnail's pixel size from the thumbnail files if
   the XML file doesn't contain that information. This works for JPEG and PNG
   files. Implements #2674.
+* MKVToolNix GUI: update check: the dialog showing the latest news & version
+  information states explicitly where the links take the user (the MKVToolNix
+  `NEWS.md` file and YouTube respectively).
 
 ## Bug fixes
 
