@@ -662,43 +662,45 @@ ogm_reader_c::read(generic_packetizer_c *,
 void
 ogm_reader_c::identify() {
   auto info = mtx::id::info_c{};
-  size_t i;
 
   // Check if a video track has a TITLE comment. If yes we use this as the
   // new segment title / global file title.
-  for (i = 0; i < sdemuxers.size(); i++)
-    if ((sdemuxers[i]->title != "") && sdemuxers[i]->ms_compat) {
-      info.add(mtx::id::title, sdemuxers[i]->title);
+  for (auto const &dmx : sdemuxers)
+    if (!dmx->title.empty() && dmx->ms_compat) {
+      info.add(mtx::id::title, dmx->title);
       break;
     }
 
   id_result_container(info.get());
 
-  for (i = 0; i < sdemuxers.size(); i++) {
+  auto track_id = 0;
+  for (auto const &dmx : sdemuxers) {
     info = mtx::id::info_c{};
 
-    info.set(mtx::id::number,   sdemuxers[i]->serialno);
-    info.add(mtx::id::language, sdemuxers[i]->language);
+    info.set(mtx::id::number,   dmx->serialno);
+    info.add(mtx::id::language, dmx->language);
 
-    if (!sdemuxers[i]->title.empty() && !sdemuxers[i]->ms_compat)
-      info.add(mtx::id::track_name, sdemuxers[i]->title);
+    if (!dmx->title.empty() && !dmx->ms_compat)
+      info.add(mtx::id::track_name, dmx->title);
 
-    if ((0 != sdemuxers[i]->display_width) && (0 != sdemuxers[i]->display_height))
-      info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", sdemuxers[i]->display_width, sdemuxers[i]->display_height));
+    if ((0 != dmx->display_width) && (0 != dmx->display_height))
+      info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", dmx->display_width, dmx->display_height));
 
-    if (dynamic_cast<ogm_s_text_demuxer_c *>(sdemuxers[i].get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(sdemuxers[i].get())) {
+    if (dynamic_cast<ogm_s_text_demuxer_c *>(dmx.get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(dmx.get())) {
       info.add(mtx::id::text_subtitles, true);
       info.add(mtx::id::encoding,       "UTF-8");
     }
 
-    auto pixel_dimensions = sdemuxers[i]->get_pixel_dimensions();
+    auto pixel_dimensions = dmx->get_pixel_dimensions();
     if (pixel_dimensions.first && pixel_dimensions.second)
       info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", pixel_dimensions.first, pixel_dimensions.second));
 
-    info.add(mtx::id::audio_channels,           sdemuxers[i]->channels);
-    info.add(mtx::id::audio_sampling_frequency, sdemuxers[i]->sample_rate);
+    info.add(mtx::id::audio_channels,           dmx->channels);
+    info.add(mtx::id::audio_sampling_frequency, dmx->sample_rate);
 
-    id_result_track(i, sdemuxers[i]->get_type(), sdemuxers[i]->get_codec(), info.get());
+    id_result_track(track_id, dmx->get_type(), dmx->get_codec(), info.get());
+
+    ++track_id;
   }
 
   for (auto &attachment : g_attachments)
