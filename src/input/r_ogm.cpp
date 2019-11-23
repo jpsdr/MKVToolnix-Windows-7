@@ -709,15 +709,97 @@ ogm_reader_c::identify() {
 }
 
 void
+ogm_reader_c::handle_cover_art(mtx::tags::converted_vorbis_comments_t const &converted) {
+  for (auto const &picture : converted.m_pictures) {
+    picture->id           = m_attachment_id++;
+    picture->source_file  = m_ti.m_fname;
+    auto attach_mode      = attachment_requested(picture->id);
+    picture->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+
+    if (ATTACH_MODE_SKIP != attach_mode)
+      add_attachment(picture);
+  }
+}
+
+void
+ogm_reader_c::handle_chapters(mtx::tags::vorbis_comments_t const &comments) {
+  if (m_ti.m_no_chapters)
+    return;
+
+  std::vector<std::string> chapter_strings;
+
+  for (auto const &[key, value] : comments.m_comments)
+    if (balg::istarts_with(key, "CHAPTER"))
+      chapter_strings.push_back(fmt::format("{}={}", key, value));
+
+  if (chapter_strings.empty())
+    return;
+
+  try {
+    auto out = std::make_shared<mm_mem_io_c>(nullptr, 0, 1000);
+
+    if (g_identifying) {
+      // OGM comments might be written in a charset other than
+      // UTF-8. During identification we simply want to know how
+      // many chapter entries there are. As the GUI's users have no
+      // way to specify the chapter charset when adding a file
+      // such charset issues may cause mkvmerge to abort or not to
+      // show any chapters at all (if "parse_chapters()"
+      // fails). So just remove all chars > 127.
+      for (auto chapter_string : chapter_strings) {
+        brng::remove_erase_if(chapter_string, [](char c) { return c < 0; });
+        out->puts(chapter_string + "\n"s);
+      }
+
+    } else {
+      out->write_bom("UTF-8");
+      for (auto &chapter_string : chapter_strings)
+        out->puts(m_chapter_charset_converter->utf8(chapter_string) + "\n"s);
+    }
+
+    out->set_file_name(m_ti.m_fname);
+
+    auto text_out  = std::make_shared<mm_text_io_c>(out);
+    m_chapters     = mtx::chapters::parse(text_out.get(), 0, -1, 0, m_ti.m_chapter_language, "", true);
+    m_chapters_set = true;
+
+    mtx::chapters::align_uids(m_chapters.get());
+
+    auto const &sync = mtx::includes(m_ti.m_timestamp_syncs, track_info_c::chapter_track_id) ? m_ti.m_timestamp_syncs[track_info_c::chapter_track_id]
+                     : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
+                     :                                                                         timestamp_sync_t{};
+    mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.numerator, sync.denominator);
+
+  } catch (...) {
+    m_exception_parsing_chapters = true;
+  }
+}
+
+void
+ogm_reader_c::handle_language_and_title(mtx::tags::converted_vorbis_comments_t const &converted,
+                                        ogm_demuxer_cptr const &dmx) {
+  if (!converted.m_language.empty())
+    dmx->language = converted.m_language;
+
+  if (converted.m_title.empty())
+    return;
+
+  if (!g_segment_title_set && g_segment_title.empty() && dmx->ms_compat) {
+    g_segment_title     = m_chapter_charset_converter->utf8(converted.m_title);
+    g_segment_title_set = true;
+    m_segment_title_set = true;
+  }
+
+  dmx->title = m_chapter_charset_converter->utf8(converted.m_title);
+}
+
+void
 ogm_reader_c::handle_stream_comments() {
   std::string title;
 
-  bool charset_warning_printed = false;
-  charset_converter_cptr cch   = charset_converter_c::init(m_ti.m_chapter_charset);
-  size_t i;
+  m_chapter_charset_converter = charset_converter_c::init(m_ti.m_chapter_charset);
 
-  for (i = 0; i < sdemuxers.size(); i++) {
-    ogm_demuxer_cptr &dmx = sdemuxers[i];
+  for (auto const &dmx : sdemuxers) {
     if (dmx->codec.is(codec_c::type_e::A_FLAC) || (2 > dmx->packet_data.size()))
       continue;
 
@@ -725,92 +807,23 @@ ogm_reader_c::handle_stream_comments() {
     if (!comments.valid() || comments.m_comments.empty())
       continue;
 
-    std::vector<std::string> chapter_strings, comment_lines;
-
     auto converted = mtx::tags::from_vorbis_comments(comments);
-    if (!converted.m_language.empty())
-      dmx->language = converted.m_language;
 
-    for (auto const &picture : converted.m_pictures) {
-      picture->id           = m_attachment_id++;
-      picture->source_file  = m_ti.m_fname;
-      auto attach_mode      = attachment_requested(picture->id);
-      picture->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+    handle_cover_art(converted);
+    handle_chapters(comments);
+    handle_language_and_title(converted, dmx);
 
-      if (ATTACH_MODE_SKIP != attach_mode)
-        add_attachment(picture);
-    }
-
-    for (auto const &[key, value] : comments.m_comments)
-      if (balg::istarts_with(key, "CHAPTER"))
-        chapter_strings.push_back(fmt::format("{}={}", key, value));
-
-    bool segment_title_set = false;
-    if (!converted.m_title.empty()) {
-      if (!g_segment_title_set && g_segment_title.empty() && dmx->ms_compat) {
-        g_segment_title     = cch->utf8(converted.m_title);
-        g_segment_title_set = true;
-        segment_title_set   = true;
-      }
-      dmx->title = cch->utf8(converted.m_title);
-    }
-
-    auto chapters_set               = false;
-    auto exception_parsing_chapters = false;
-
-    if (!chapter_strings.empty() && !m_ti.m_no_chapters) {
-      try {
-        std::shared_ptr<mm_mem_io_c> out(new mm_mem_io_c(nullptr, 0, 1000));
-
-        if (g_identifying) {
-          // OGM comments might be written in a charset other than
-          // UTF-8. During identification we simply want to know how
-          // many chapter entries there are. As the GUI's users have no
-          // way to specify the chapter charset when adding a file
-          // such charset issues may cause mkvmerge to abort or not to
-          // show any chapters at all (if "parse_chapters()"
-          // fails). So just remove all chars > 127.
-          for (auto chapter_string : chapter_strings) {
-            // auto cleaned = std::string{};
-            // balg::copy_if(chapter_string, [](char c) { return c >= 0; }, std::back_inserter(cleaned));
-            brng::remove_erase_if(chapter_string, [](char c) { return c < 0; });
-            out->puts(chapter_string + "\n"s);
-          }
-
-        } else {
-          out->write_bom("UTF-8");
-          for (auto &chapter_string : chapter_strings)
-            out->puts(cch->utf8(chapter_string) + "\n"s);
-        }
-
-        out->set_file_name(m_ti.m_fname);
-
-        auto text_out = std::make_shared<mm_text_io_c>(out);
-        m_chapters    = mtx::chapters::parse(text_out.get(), 0, -1, 0, m_ti.m_chapter_language, "", true);
-        chapters_set  = true;
-
-        mtx::chapters::align_uids(m_chapters.get());
-
-        auto const &sync = mtx::includes(m_ti.m_timestamp_syncs, track_info_c::chapter_track_id) ? m_ti.m_timestamp_syncs[track_info_c::chapter_track_id]
-                         : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
-                         :                                                                         timestamp_sync_t{};
-        mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.numerator, sync.denominator);
-      } catch (...) {
-        exception_parsing_chapters = true;
-      }
-    }
-
-    if (   exception_parsing_chapters
-        || (   (segment_title_set || chapters_set)
-            && !charset_warning_printed
+    if (   m_exception_parsing_chapters
+        || (   (m_segment_title_set || m_chapters_set)
+            && !m_charset_warning_printed
             && (m_ti.m_chapter_charset.empty()))) {
       mxwarn_fn(m_ti.m_fname,
                 Y("This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in "
                   "the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can "
                   "be overridden with the '--chapter-charset <charset>' switch.\n"));
-      charset_warning_printed = true;
+      m_charset_warning_printed = true;
 
-      if (exception_parsing_chapters)
+      if (m_exception_parsing_chapters)
         mxwarn_fn(m_ti.m_fname,
                   Y("This Ogg/OGM file contains chapters but they could not be parsed. "
                     "This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"));

@@ -22,6 +22,11 @@
 #include "common/theora.h"
 #include "common/kate.h"
 
+namespace mtx::tags {
+struct converted_vorbis_comments_t;
+struct vorbis_comments_t;
+}
+
 class ogm_reader_c;
 
 class ogm_demuxer_c {
@@ -82,6 +87,8 @@ private:
   std::vector<ogm_demuxer_cptr> sdemuxers;
   int bos_pages_read;
   int64_t m_attachment_id{};
+  bool m_charset_warning_printed{}, m_chapters_set{}, m_exception_parsing_chapters{}, m_segment_title_set{};
+  charset_converter_cptr m_chapter_charset_converter;
 
 public:
   virtual ~ogm_reader_c();
@@ -110,4 +117,7 @@ private:
   virtual void process_header_page(ogg_page *pg);
   virtual void process_header_packets(ogm_demuxer_cptr dmx);
   virtual void handle_stream_comments();
+  virtual void handle_cover_art(mtx::tags::converted_vorbis_comments_t const &converted);
+  virtual void handle_chapters(mtx::tags::vorbis_comments_t const &comments);
+  virtual void handle_language_and_title(mtx::tags::converted_vorbis_comments_t const &converted, ogm_demuxer_cptr const &dmx);
 };
