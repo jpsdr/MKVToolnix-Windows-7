@@ -62,8 +62,9 @@ template<typename T>
 libmatroska::KaxTag *
 find_tag_for(libmatroska::KaxTags &tags,
              uint64_t id,
-             target_type_e target_type,
-             bool create_if_not_found) {
+             target_type_e target_type_value,
+             bool create_if_not_found,
+             std::string const &new_target_type = ""s) {
   for (auto &element : tags) {
     auto tag = dynamic_cast<libmatroska::KaxTag *>(element);
     if (!tag)
@@ -73,15 +74,23 @@ find_tag_for(libmatroska::KaxTags &tags,
     if (!targets)
       continue;
 
-    if (Unknown != target_type) {
-      auto actual_target_type = static_cast<target_type_e>(FindChildValue<libmatroska::KaxTagTargetTypeValue>(*targets, 0ull));
-      if (actual_target_type != target_type)
+    if (Unknown != target_type_value) {
+      auto actual_target_type_value = static_cast<target_type_e>(FindChildValue<libmatroska::KaxTagTargetTypeValue>(*targets, 0ull));
+      if (actual_target_type_value != target_type_value)
         continue;
     }
 
     auto actual_id = FindChildValue<T>(*targets, 0ull);
-    if (actual_id == id)
-      return tag;
+    if (actual_id != id)
+      continue;
+
+    if (!new_target_type.empty()) {
+      auto actual_target_type = FindChild<libmatroska::KaxTagTargetType>(*targets);
+      if (!actual_target_type)
+        GetChild<libmatroska::KaxTagTargetType>(targets).SetValue(new_target_type);
+    }
+
+    return tag;
   }
 
   if (!create_if_not_found)
@@ -91,8 +100,11 @@ find_tag_for(libmatroska::KaxTags &tags,
   tags.PushElement(*tag);
 
   auto &targets = GetChild<libmatroska::KaxTagTargets>(tag);
-  GetChild<libmatroska::KaxTagTargetTypeValue>(targets).SetValue(target_type);
+  GetChild<libmatroska::KaxTagTargetTypeValue>(targets).SetValue(target_type_value);
   GetChild<T>(targets).SetValue(id);
+
+  if (!new_target_type.empty())
+    GetChild<libmatroska::KaxTagTargetType>(targets).SetValue(new_target_type);
 
   return tag;
 }

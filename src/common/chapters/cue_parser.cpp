@@ -213,7 +213,7 @@ add_tag_for_global_cue_settings(cue_parser_args_t &a,
   auto &targets = GetChild<KaxTagTargets>(*tag);
 
   GetChild<KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Album);
-  GetChild<KaxTagTargetType>(targets).SetValue("album");
+  GetChild<KaxTagTargetType>(targets).SetValue("ALBUM");
 
   create_tag1(a.global_performer, "ARTIST");
   create_tag1(a.global_title,     "TITLE");
