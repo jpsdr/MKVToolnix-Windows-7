@@ -1808,7 +1808,7 @@ qtmp4_reader_c::create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx) {
 
 void
 qtmp4_reader_c::create_audio_packetizer_vorbis(qtmp4_demuxer_c &dmx) {
-  dmx.ptzr = add_packetizer(new vorbis_packetizer_c(this, m_ti, dmx.priv[0]->get_buffer(), dmx.priv[0]->get_size(), dmx.priv[1]->get_buffer(), dmx.priv[1]->get_size(), dmx.priv[2]->get_buffer(), dmx.priv[2]->get_size()));
+  dmx.ptzr = add_packetizer(new vorbis_packetizer_c(this, m_ti, dmx.priv));
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
 }
 

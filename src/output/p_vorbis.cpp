@@ -23,33 +23,23 @@
 
 using namespace libmatroska;
 
-vorbis_packetizer_c::vorbis_packetizer_c(generic_reader_c *p_reader,
-                                         track_info_c &p_ti,
-                                         unsigned char *d_header,
-                                         int l_header,
-                                         unsigned char *d_comments,
-                                         int l_comments,
-                                         unsigned char *d_codecsetup,
-                                         int l_codecsetup)
-  : generic_packetizer_c(p_reader, p_ti)
-  , m_previous_bs(0)
-  , m_samples(0)
-  , m_previous_samples_sum(0)
-  , m_previous_timestamp(0)
-  , m_timestamp_offset(0)
+vorbis_packetizer_c::vorbis_packetizer_c(generic_reader_c *reader,
+                                         track_info_c &ti,
+                                         std::vector<memory_cptr> const &headers)
+  : generic_packetizer_c{reader, ti}
+  , m_headers{headers}
 {
-  m_headers.push_back(memory_c::clone(d_header,     l_header));
-  m_headers.push_back(memory_c::clone(d_comments,   l_comments));
-  m_headers.push_back(memory_c::clone(d_codecsetup, l_codecsetup));
+  for (auto const &header : m_headers)
+    header->take_ownership();
 
   ogg_packet ogg_headers[3];
   memset(ogg_headers, 0, 3 * sizeof(ogg_packet));
-  ogg_headers[0].packet   = m_headers[0]->get_buffer();
-  ogg_headers[1].packet   = m_headers[1]->get_buffer();
-  ogg_headers[2].packet   = m_headers[2]->get_buffer();
-  ogg_headers[0].bytes    = l_header;
-  ogg_headers[1].bytes    = l_comments;
-  ogg_headers[2].bytes    = l_codecsetup;
+
+  for (auto idx = 0; idx < 3; ++idx) {
+    ogg_headers[idx].packet   = m_headers[idx]->get_buffer();
+    ogg_headers[idx].bytes    = m_headers[idx]->get_size();
+  }
+
   ogg_headers[0].b_o_s    = 1;
   ogg_headers[1].packetno = 1;
   ogg_headers[2].packetno = 2;

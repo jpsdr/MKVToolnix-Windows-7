@@ -39,16 +39,13 @@ namespace mtx {
 
 class vorbis_packetizer_c: public generic_packetizer_c {
 private:
-  int64_t m_previous_bs, m_samples, m_previous_samples_sum, m_previous_timestamp, m_timestamp_offset;
+  int64_t m_previous_bs{}, m_samples{}, m_previous_samples_sum{}, m_previous_timestamp{}, m_timestamp_offset{};
   std::vector<memory_cptr> m_headers;
   vorbis_info m_vi;
   vorbis_comment m_vc;
 
 public:
-  vorbis_packetizer_c(generic_reader_c *p_reader,  track_info_c &p_ti,
-                      unsigned char *d_header,     int l_header,
-                      unsigned char *d_comments,   int l_comments,
-                      unsigned char *d_codecsetup, int l_codecsetup);
+  vorbis_packetizer_c(generic_reader_c *reader, track_info_c &ti, std::vector<memory_cptr> const &headers);
   virtual ~vorbis_packetizer_c();
 
   virtual int process(packet_cptr packet);

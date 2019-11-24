@@ -80,8 +80,7 @@ struct kax_track_t {
 
   memory_cptr private_data;
 
-  unsigned char *headers[3];
-  uint32_t header_sizes[3];
+  std::vector<memory_cptr> headers;
 
   boost::logic::tribool default_track, forced_track, enabled_track;
   std::string language;
@@ -167,8 +166,6 @@ struct kax_track_t {
     , v_colour_space(0)
   {
     memset(v_fourcc, 0, 5);
-    memset(headers, 0, 3 * sizeof(unsigned char *));
-    memset(header_sizes, 0, 3 * sizeof(uint32_t));
   }
 
   void handle_packetizer_display_dimensions();

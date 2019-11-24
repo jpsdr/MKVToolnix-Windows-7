@@ -319,15 +319,9 @@ kax_reader_c::unlace_vorbis_private_data(kax_track_t *t,
                                          unsigned char *buffer,
                                          int size) {
   try {
-    auto temp = memory_c::borrow(buffer, size);
-    std::vector<memory_cptr> blocks = unlace_memory_xiph(temp);
-    if (blocks.size() != 3)
-      return false;
-
-    for (int i = 0; 3 > i; ++i) {
-      t->headers[i]      = blocks[i]->get_buffer();
-      t->header_sizes[i] = blocks[i]->get_size();
-    }
+    t->headers = unlace_memory_xiph(memory_c::borrow(buffer, size));
+    for (auto const &header : t->headers)
+      header->take_ownership();
 
   } catch (...) {
     return false;
@@ -1879,7 +1873,7 @@ kax_reader_c::create_tta_audio_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_vorbis_audio_packetizer(kax_track_t *t,
                                              track_info_c &nti) {
-  set_track_packetizer(t, new vorbis_packetizer_c(this, nti, t->headers[0], t->header_sizes[0], t->headers[1], t->header_sizes[1], t->headers[2], t->header_sizes[2]));
+  set_track_packetizer(t, new vorbis_packetizer_c(this, nti, t->headers));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 

@@ -594,8 +594,7 @@ avi_reader_c::create_vorbis_packetizer(int aid) {
     const int laced_size = m_ti.m_private_data->get_size();
     int i;
 
-    int header_sizes[3];
-    unsigned char *headers[3];
+    std::vector<unsigned int> header_sizes;
 
     for (i = 0; 2 > i; ++i) {
       int size = 0;
@@ -612,14 +611,16 @@ avi_reader_c::create_vorbis_packetizer(int aid) {
       ++offset;
     }
 
-    headers[0]        = &c[offset];
-    headers[1]        = &c[offset + header_sizes[0]];
-    headers[2]        = &c[offset + header_sizes[0] + header_sizes[1]];
-    header_sizes[2]   = laced_size - offset - header_sizes[0] - header_sizes[1];
+    header_sizes.push_back(laced_size - offset - header_sizes[0] - header_sizes[1]);
+
+    std::vector<memory_cptr> headers;
+    headers.emplace_back(memory_c::borrow(&c[offset],                                     header_sizes[0]));
+    headers.emplace_back(memory_c::borrow(&c[offset] + header_sizes[0],                   header_sizes[1]));
+    headers.emplace_back(memory_c::borrow(&c[offset] + header_sizes[0] + header_sizes[1], header_sizes[2]));
 
     m_ti.m_private_data.reset();
 
-    return new vorbis_packetizer_c(this, m_ti, headers[0], header_sizes[0], headers[1], header_sizes[1], headers[2], header_sizes[2]);
+    return new vorbis_packetizer_c(this, m_ti, headers);
 
   } catch (mtx::exception &e) {
     mxerror_tid(m_ti.m_fname, aid + 1, fmt::format("{0}\n", e.error()));

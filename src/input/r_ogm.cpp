@@ -1090,10 +1090,7 @@ ogm_a_vorbis_demuxer_c::initialize() {
 
 generic_packetizer_c *
 ogm_a_vorbis_demuxer_c::create_packetizer() {
-  generic_packetizer_c *ptzr_obj = new vorbis_packetizer_c(reader, m_ti,
-                                                           packet_data[0]->get_buffer(), packet_data[0]->get_size(),
-                                                           packet_data[1]->get_buffer(), packet_data[1]->get_size(),
-                                                           packet_data[2]->get_buffer(), packet_data[2]->get_size());
+  auto ptzr_obj = new vorbis_packetizer_c(reader, m_ti, packet_data);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 
