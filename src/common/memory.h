@@ -240,5 +240,5 @@ operator !=(memory_c const &a,
   return !(a == b);
 }
 
-memory_cptr lace_memory_xiph(const std::vector<memory_cptr> &blocks);
-std::vector<memory_cptr> unlace_memory_xiph(memory_cptr &buffer);
+memory_cptr lace_memory_xiph(std::vector<memory_cptr> const &blocks);
+std::vector<memory_cptr> unlace_memory_xiph(memory_cptr const &buffer);

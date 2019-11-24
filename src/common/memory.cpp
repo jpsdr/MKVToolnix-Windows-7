@@ -63,7 +63,7 @@ memory_c::prepend(unsigned char const *new_buffer,
 }
 
 memory_cptr
-lace_memory_xiph(const std::vector<memory_cptr> &blocks) {
+lace_memory_xiph(std::vector<memory_cptr> const &blocks) {
   size_t i, size = 1;
   for (i = 0; (blocks.size() - 1) > i; ++i)
     size += blocks[i]->get_size() / 255 + 1 + blocks[i]->get_size();
@@ -93,7 +93,7 @@ lace_memory_xiph(const std::vector<memory_cptr> &blocks) {
 }
 
 std::vector<memory_cptr>
-unlace_memory_xiph(memory_cptr &buffer) {
+unlace_memory_xiph(memory_cptr const &buffer) {
   if (1 > buffer->get_size())
     throw mtx::mem::lacing_x("Buffer too small");
 
