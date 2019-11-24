@@ -51,6 +51,8 @@ public:
   int display_width, display_height;
   int channels, sample_rate, bits_per_sample;
 
+  std::shared_ptr<libmatroska::KaxTags> m_tags;
+
 public:
   ogm_demuxer_c(ogm_reader_c *p_reader);
 
@@ -89,6 +91,7 @@ private:
   int64_t m_attachment_id{};
   bool m_charset_warning_printed{}, m_chapters_set{}, m_exception_parsing_chapters{}, m_segment_title_set{};
   charset_converter_cptr m_chapter_charset_converter;
+  debugging_option_c m_debug_tags{"ogg_tags"};
 
 public:
   virtual ~ogm_reader_c();
@@ -120,4 +123,5 @@ private:
   virtual void handle_cover_art(mtx::tags::converted_vorbis_comments_t const &converted);
   virtual void handle_chapters(mtx::tags::vorbis_comments_t const &comments);
   virtual void handle_language_and_title(mtx::tags::converted_vorbis_comments_t const &converted, ogm_demuxer_cptr const &dmx);
+  virtual void handle_tags(mtx::tags::converted_vorbis_comments_t const &converted, ogm_demuxer_cptr const &dmx);
 };

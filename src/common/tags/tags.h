@@ -159,4 +159,6 @@ remove_simple_tags_for(libmatroska::KaxTags &tags,
   return removed_something;
 }
 
+std::shared_ptr<libmatroska::KaxTags> merge(std::shared_ptr<libmatroska::KaxTags> const &t1, std::shared_ptr<libmatroska::KaxTags> const &t2);
+
 }

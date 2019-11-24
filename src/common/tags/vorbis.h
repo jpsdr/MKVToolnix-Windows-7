@@ -27,7 +27,8 @@ struct vorbis_comments_t {
   enum type_e {
     Unknown,
     Vorbis,
-    VP_8_9,
+    VP8,
+    VP9,
     Opus,
   };
 
@@ -42,12 +43,13 @@ struct vorbis_comments_t {
 
 struct converted_vorbis_comments_t {
   std::string m_title, m_language;
-  std::shared_ptr<libmatroska::KaxTags> m_tags;
+  std::shared_ptr<libmatroska::KaxTags> m_track_tags, m_album_tags;
   std::vector<std::shared_ptr<attachment_t>> m_pictures;
 };
 
 converted_vorbis_comments_t from_vorbis_comments(vorbis_comments_t const &vorbis_comments);
 
-vorbis_comments_t parse_vorbis_comments_from_packet(memory_cptr const &packet);
+vorbis_comments_t parse_vorbis_comments_from_packet(memory_c const &packet);
+memory_cptr assemble_vorbis_comments_into_packet(vorbis_comments_t const &comments);
 
 }

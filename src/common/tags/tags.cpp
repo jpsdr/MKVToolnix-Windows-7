@@ -381,4 +381,69 @@ remove_track_statistics(KaxTags *tags,
   return removed_something;
 }
 
+namespace {
+std::string
+convert_tagets_to_index(KaxTagTargets const &targets) {
+  std::vector<std::string> properties;
+
+  properties.emplace_back(fmt::format("TargetTypeValue:{}", FindChildValue<KaxTagTargetTypeValue>(targets, 50)));
+  properties.emplace_back(fmt::format("TargetType:{}",      FindChildValue<KaxTagTargetType>(     targets, ""s)));
+
+  for (auto const &child : targets)
+    if (dynamic_cast<EbmlUInteger *>(child) && !dynamic_cast<KaxTagTargetTypeValue *>(child))
+      properties.emplace_back(fmt::format("{}:{}", EBML_NAME(child), static_cast<EbmlUInteger *>(child)->GetValue()));
+
+  brng::sort(properties);
+
+  return boost::join(properties, " ");
+}
+
+}
+
+std::shared_ptr<libmatroska::KaxTags>
+merge(std::shared_ptr<libmatroska::KaxTags> const &t1,
+      std::shared_ptr<libmatroska::KaxTags> const &t2) {
+  if (!t1 && !t2)
+    return {};
+
+  std::map<std::string, KaxTag *> tag_by_target_type;
+  auto dest = std::make_shared<libmatroska::KaxTags>();
+
+  for (auto const &src : std::vector<std::shared_ptr<libmatroska::KaxTags>>{t1, t2}) {
+    if (!src)
+      continue;
+
+    for (auto src_child : *src) {
+      if (!dynamic_cast<KaxTag *>(src_child)) {
+        delete src_child;
+        continue;
+      }
+
+      auto tag              = static_cast<KaxTag *>(src_child);
+      auto &targets         = GetChild<KaxTagTargets>(*tag);
+      auto idx              = convert_tagets_to_index(targets);
+      auto existing_tag_itr = tag_by_target_type.find(idx);
+
+      if (existing_tag_itr == tag_by_target_type.end()) {
+        dest->PushElement(*tag);
+        tag_by_target_type[idx] = tag;
+        continue;
+      }
+
+      for (auto const &tag_child : *tag) {
+        if (dynamic_cast<KaxTagTargets *>(tag_child))
+          delete tag_child;
+        else
+          existing_tag_itr->second->PushElement(*tag_child);
+      }
+
+      tag->RemoveAll();
+    }
+
+    src->RemoveAll();
+  }
+
+  return dest;
+}
+
 }

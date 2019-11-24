@@ -20,6 +20,9 @@
 * MKVToolNix GUI: update check: the dialog showing the latest news & version
   information states explicitly where the links take the user (the MKVToolNix
   `NEWS.md` file and YouTube respectively).
+* mkvmerge: when reading Vorbis, Opus or VP8 tracks from Ogg containers
+  mkvmerge will convert any stream comments present to Matroska track tags &
+  remove the stream comments from the bitstream.
 
 ## Bug fixes
 

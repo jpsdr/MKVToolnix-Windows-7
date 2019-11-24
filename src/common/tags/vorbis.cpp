@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/base64.h"
+#include "common/construct.h"
 #include "common/debugging.h"
 #include "common/flac.h"
 #include "common/iso639.h"
@@ -67,6 +68,7 @@ init_vorbis_to_matroska() {
   s_vorbis_to_matroska["COMMENT"s]               = { "COMMENT"s,            Track };
   s_vorbis_to_matroska["COMPOSER"s]              = { "COMPOSER"s,           Track };
   s_vorbis_to_matroska["DIRECTOR"s]              = { "DIRECTOR"s,           Track };
+  s_vorbis_to_matroska["DISCNUMBER"s]            = { "PART_NUMBER"s,        Album };
   s_vorbis_to_matroska["ENCODED_BY"s]            = { "ENCODED_BY"s,         Track };
   s_vorbis_to_matroska["ENCODED_USING"s]         = { "ENCODED_USING"s,      Track };
   s_vorbis_to_matroska["ENCODER"s]               = { "ENCODER"s,            Track };
@@ -159,16 +161,20 @@ parse_metadata_block_picture(vorbis_comments_t::type_e comments_type,
 
 converted_vorbis_comments_t
 from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
+  using namespace mtx::construct;
+
+  if (!vorbis_comments.valid())
+    return {};
+
   init_vorbis_to_matroska();
 
   converted_vorbis_comments_t converted;
-  converted.m_tags = std::make_shared<libmatroska::KaxTags>();
 
   for (auto const &[vorbis_full_key, value] : vorbis_comments.m_comments) {
     mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}={}\n", vorbis_full_key, elide_string(value, 40)));
 
     auto key_name_language                  = split(vorbis_full_key, "-", 2);
-    auto vorbis_key                         = balg::to_upper_copy(key_name_language[0]);
+    auto vorbis_key                         = boost::regex_replace(balg::to_upper_copy(key_name_language[0]), boost::regex{" +", boost::regex::perl}, "");
     auto const &[matroska_key, target_type] = s_vorbis_to_matroska[vorbis_key];
 
     if (vorbis_key == "TITLE") {
@@ -193,16 +199,22 @@ from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
     if (matroska_key.empty())
       continue;
 
+    auto &tags = target_type == Track ? converted.m_track_tags : converted.m_album_tags;
+    if (!tags)
+      tags.reset(cons<libmatroska::KaxTags>(cons<libmatroska::KaxTag>(cons<libmatroska::KaxTagTargets>(new libmatroska::KaxTagTargetTypeValue, target_type,
+                                                                                                       new libmatroska::KaxTagTargetType,      target_type == Track ? "TRACK" : "ALBUM"))));
 
+    static_cast<EbmlMaster *>((*tags)[0])->PushElement(*cons<libmatroska::KaxTagSimple>(new libmatroska::KaxTagName,   matroska_key,
+                                                                                        new libmatroska::KaxTagString, value));
   }
 
   return converted;
 }
 
 vorbis_comments_t
-parse_vorbis_comments_from_packet(memory_cptr const &packet) {
+parse_vorbis_comments_from_packet(memory_c const &packet) {
   try {
-    mm_mem_io_c in{*packet};
+    mm_mem_io_c in{packet};
     vorbis_comments_t comments;
 
     auto header = in.read(8)->to_string();
@@ -216,9 +228,13 @@ parse_vorbis_comments_from_packet(memory_cptr const &packet) {
       comments.m_type = vorbis_comments_t::type_e::Vorbis;
       offset          = 7;
 
-    } else if (boost::regex_search(header, boost::regex{"^OVP\\d{2}", boost::regex::perl})) {
-      comments.m_type = vorbis_comments_t::type_e::VP_8_9;
+    } else if (boost::regex_search(header, boost::regex{"^OVP80", boost::regex::perl})) {
+      comments.m_type = vorbis_comments_t::type_e::VP8;
       offset          = 7;
+
+    // } else if (boost::regex_search(header, boost::regex{"^OVP90", boost::regex::perl})) {
+    //   comments.m_type = vorbis_comments_t::type_e::VP9;
+    //   offset          = 7;
 
     } else
       return {};
@@ -250,6 +266,40 @@ parse_vorbis_comments_from_packet(memory_cptr const &packet) {
   }
 
   return {};
+}
+
+memory_cptr
+assemble_vorbis_comments_into_packet(vorbis_comments_t const &comments) {
+  mm_mem_io_c out{nullptr, 1024, 1024};
+
+  if (vorbis_comments_t::type_e::Vorbis == comments.m_type)
+    out.write("\x03vorbis", 7);
+
+  else if (vorbis_comments_t::type_e::Opus == comments.m_type)
+    out.write("OpusTags", 8);
+
+  else if (vorbis_comments_t::type_e::VP8 == comments.m_type)
+    out.write("OVP80\x02 ", 7);
+
+  else
+    throw std::invalid_argument{fmt::format("assemble_vorbis_comments_into_packet: only Vorbis and Opus comment style supported at the moment, not {}", static_cast<int>(comments.m_type))};
+
+  out.write_uint32_le(comments.m_vendor.size());
+  out.write(comments.m_vendor);
+
+  out.write_uint32_le(comments.m_comments.size());
+
+  for (auto const &[key, value] : comments.m_comments) {
+    auto comment = fmt::format("{}={}", key, value);
+
+    out.write_uint32_le(comment.size());
+    out.write(comment);
+  }
+
+  if (vorbis_comments_t::type_e::Vorbis == comments.m_type)
+    out.write_uint8(0b0000'0001); // framing bit
+
+  return out.get_and_lock_buffer();
 }
 
 }

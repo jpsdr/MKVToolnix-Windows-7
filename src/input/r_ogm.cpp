@@ -33,6 +33,7 @@
 #include "common/mm_text_io.h"
 #include "common/mpeg4_p2.h"
 #include "common/ogmstreams.h"
+#include "common/tags/tags.h"
 #include "common/tags/vorbis.h"
 #include "input/r_ogm.h"
 #include "input/r_ogm_flac.h"
@@ -363,9 +364,13 @@ ogm_reader_c::create_packetizer(int64_t tid) {
     return;
 
   m_ti.m_private_data.reset();
+  m_ti.m_tags.reset();
   m_ti.m_id           = tid;
   m_ti.m_language     = dmx->language;
   m_ti.m_track_name   = dmx->title;
+
+  if (dmx->m_tags && demuxing_requested('T', tid))
+    m_ti.m_tags       = clone(dmx->m_tags);
 
   ptzr                = dmx->create_packetizer();
 
@@ -698,6 +703,9 @@ ogm_reader_c::identify() {
     info.add(mtx::id::audio_channels,           dmx->channels);
     info.add(mtx::id::audio_sampling_frequency, dmx->sample_rate);
 
+    if (dmx->m_tags)
+      add_track_tags_to_identification(*dmx->m_tags, info);
+
     id_result_track(track_id, dmx->get_type(), dmx->get_codec(), info.get());
 
     ++track_id;
@@ -713,7 +721,7 @@ ogm_reader_c::identify() {
 void
 ogm_reader_c::handle_cover_art(mtx::tags::converted_vorbis_comments_t const &converted) {
   for (auto const &picture : converted.m_pictures) {
-    picture->id           = m_attachment_id++;
+    picture->ui_id        = m_attachment_id++;
     picture->source_file  = m_ti.m_fname;
     auto attach_mode      = attachment_requested(picture->id);
     picture->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
@@ -796,6 +804,16 @@ ogm_reader_c::handle_language_and_title(mtx::tags::converted_vorbis_comments_t c
 }
 
 void
+ogm_reader_c::handle_tags(mtx::tags::converted_vorbis_comments_t const &converted,
+                          ogm_demuxer_cptr const &dmx) {
+  mxdebug_if(m_debug_tags, fmt::format("handle_tags; num track tags: {} num album tags: {}\n",
+                                       converted.m_track_tags ? static_cast<EbmlMaster *>((*converted.m_track_tags)[0])->ListSize() - 1 : 0,
+                                       converted.m_album_tags ? static_cast<EbmlMaster *>((*converted.m_album_tags)[0])->ListSize() - 1 : 0));
+
+  dmx->m_tags = mtx::tags::merge(converted.m_track_tags, converted.m_album_tags);
+}
+
+void
 ogm_reader_c::handle_stream_comments() {
   std::string title;
 
@@ -805,15 +823,13 @@ ogm_reader_c::handle_stream_comments() {
     if (dmx->codec.is(codec_c::type_e::A_FLAC) || (2 > dmx->packet_data.size()))
       continue;
 
-    auto comments = mtx::tags::parse_vorbis_comments_from_packet(dmx->packet_data[1]);
-    if (!comments.valid() || comments.m_comments.empty())
-      continue;
-
+    auto comments  = mtx::tags::parse_vorbis_comments_from_packet(*dmx->packet_data[1]);
     auto converted = mtx::tags::from_vorbis_comments(comments);
 
     handle_cover_art(converted);
     handle_chapters(comments);
     handle_language_and_title(converted, dmx);
+    handle_tags(converted, dmx);
 
     if (   m_exception_parsing_chapters
         || (   (m_segment_title_set || m_chapters_set)
@@ -830,6 +846,12 @@ ogm_reader_c::handle_stream_comments() {
                   Y("This Ogg/OGM file contains chapters but they could not be parsed. "
                     "This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"));
     }
+
+    if (!comments.valid())
+      continue;
+
+    comments.m_comments.clear();
+    dmx->packet_data[1] = mtx::tags::assemble_vorbis_comments_into_packet(comments);
   }
 }
 
