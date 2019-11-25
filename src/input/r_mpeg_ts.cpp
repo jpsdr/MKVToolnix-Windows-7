@@ -146,7 +146,7 @@ track_c::send_to_packetizer() {
     timestamp_to_use -= std::min(timestamp_to_use, f.m_global_timestamp_offset);
 
   mxdebug_if(m_debug_delivery, fmt::format("send_to_packetizer: PID {0} expected {1} actual {2} timestamp_to_use {3} m_previous_timestamp {4} stream_timestamp {5} restriction {6}/{7} use? {8}\n",
-                         pid, pes_payload_size_to_read, pes_payload_read->get_size(), timestamp_to_use, m_previous_timestamp, f.m_stream_timestamp, min, max, use_packet));
+                                           pid, pes_payload_size_to_read, pes_payload_read->get_size(), timestamp_to_use, m_previous_timestamp, f.m_stream_timestamp, min, max, use_packet));
 
   if (use_packet) {
     auto bytes_to_skip = std::min<size_t>(pes_payload_read->get_size(), skip_packet_data_bytes);
