@@ -33,6 +33,13 @@
   (e.g. the file & track lists or the menu entries) on application
   startup. Instead the user had to open & close the preferences in order for
   the font to be applied to all controls. Fixes #2671.
+* mkvmerge: MPEG TS reader: when reading an MPLS playlist, the calculation of
+  the minimum timestamp to use for shifting all output timestamps to zero was
+  wrong. It was wrongfully considering timestamps from packets it would not
+  copy due to the MPLS's timestamp restrictions. This could lead to the first
+  timestamps in the output file being quite large, e.g. more than a couple of
+  minutes, causing sync problems when multiplexing together with other
+  files. Fixes #2670.
 
 
 # Version 40.0.0 "Old Town Road + Pony" 2019-11-09

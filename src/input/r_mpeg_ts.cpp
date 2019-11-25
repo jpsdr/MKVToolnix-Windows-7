@@ -1828,7 +1828,8 @@ reader_c::parse_pes(track_c &track) {
   auto set_global_timestamp_offset_from_pts
      = pts.valid()
     && (mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video))
-    && (!f.m_global_timestamp_offset.valid() || (pts < f.m_global_timestamp_offset));
+    && (!f.m_global_timestamp_offset.valid()   || (pts <  f.m_global_timestamp_offset))
+    && (!f.m_timestamp_restriction_min.valid() || (pts >= f.m_timestamp_restriction_min));
 
   if (set_global_timestamp_offset_from_pts) {
     mxdebug_if(m_debug_headers,
