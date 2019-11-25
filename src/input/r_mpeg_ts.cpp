@@ -1825,14 +1825,20 @@ reader_c::parse_pes(track_c &track) {
 
   track.handle_timestamp_wrap(pts, dts);
 
-  if (processing_state_e::determining_timestamp_offset == f.m_state) {
-    if (   dts.valid()
-        && (mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video))
-        && (   !f.m_global_timestamp_offset.valid()
-            || (dts < f.m_global_timestamp_offset)))
-      f.m_global_timestamp_offset = dts;
-    return;
+  auto set_global_timestamp_offset_from_dts
+     = dts.valid()
+    && (mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video))
+    && (!f.m_global_timestamp_offset.valid() || (dts < f.m_global_timestamp_offset));
+
+  if (set_global_timestamp_offset_from_dts) {
+    mxdebug_if(m_debug_headers,
+               fmt::format("determining_timestamp_offset: new global timestamp offset {0} prior {1} file position afterwards {2} min_restriction {3} PTS {4}\n",
+                           dts, f.m_global_timestamp_offset, f.m_in->getFilePointer(), f.m_timestamp_restriction_min, pts));
+    f.m_global_timestamp_offset = dts;
   }
+
+  if (processing_state_e::determining_timestamp_offset == f.m_state)
+    return;
 
   if (m_debug_packet) {
     mxdebug(fmt::format("parse_pes: PES info at file position {0} (file num {1}):\n", f.m_position, track.m_file_num));
@@ -1848,15 +1854,7 @@ reader_c::parse_pes(track_c &track) {
   if (pts.valid()) {
     track.m_previous_valid_timestamp = pts;
     f.m_stream_timestamp             = pts;
-
-    if (   mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video)
-        && (   !f.m_global_timestamp_offset.valid()
-            || (dts < f.m_global_timestamp_offset))) {
-      mxdebug_if(m_debug_headers, fmt::format("new global timestamp offset {0} prior {1} file position afterwards {2}\n", dts, f.m_global_timestamp_offset, f.m_in->getFilePointer()));
-      f.m_global_timestamp_offset = dts;
-    }
-
-    track.m_timestamp = dts;
+    track.m_timestamp                = dts;
 
     mxdebug_if(m_debug_packet, fmt::format("parse_pes: PID {0} PTS found: {1} DTS: {2}\n", track.pid, pts, dts));
   }
