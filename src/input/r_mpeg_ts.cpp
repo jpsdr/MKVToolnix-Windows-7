@@ -1825,16 +1825,16 @@ reader_c::parse_pes(track_c &track) {
 
   track.handle_timestamp_wrap(pts, dts);
 
-  auto set_global_timestamp_offset_from_dts
-     = dts.valid()
+  auto set_global_timestamp_offset_from_pts
+     = pts.valid()
     && (mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video))
-    && (!f.m_global_timestamp_offset.valid() || (dts < f.m_global_timestamp_offset));
+    && (!f.m_global_timestamp_offset.valid() || (pts < f.m_global_timestamp_offset));
 
-  if (set_global_timestamp_offset_from_dts) {
+  if (set_global_timestamp_offset_from_pts) {
     mxdebug_if(m_debug_headers,
-               fmt::format("determining_timestamp_offset: new global timestamp offset {0} prior {1} file position afterwards {2} min_restriction {3} PTS {4}\n",
-                           dts, f.m_global_timestamp_offset, f.m_in->getFilePointer(), f.m_timestamp_restriction_min, pts));
-    f.m_global_timestamp_offset = dts;
+               fmt::format("determining_timestamp_offset: new global timestamp offset {0} prior {1} file position afterwards {2} min_restriction {3} DTS {4}\n",
+                           pts, f.m_global_timestamp_offset, f.m_in->getFilePointer(), f.m_timestamp_restriction_min, dts));
+    f.m_global_timestamp_offset = pts;
   }
 
   if (processing_state_e::determining_timestamp_offset == f.m_state)
