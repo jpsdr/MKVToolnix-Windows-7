@@ -61,6 +61,7 @@
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 #include "common/tags/tags.h"
+#include "common/tags/vorbis.h"
 #include "common/id_info.h"
 #include "common/vobsub.h"
 #include "input/r_matroska.h"
@@ -447,6 +448,8 @@ kax_reader_c::verify_vorbis_audio_track(kax_track_t *t) {
   // Workaround: do not use durations for such m_tracks.
   if ((m_writing_app == "mkvmerge") && (-1 != m_writing_app_ver) && (MTX_WRITING_APP_VER(7, 0, 0, 0) > m_writing_app_ver))
     t->ignore_duration_hack = true;
+
+  handle_vorbis_comments(*t);
 
   return true;
 }
@@ -2738,4 +2741,41 @@ kax_reader_c::set_track_packetizer(kax_track_t *t,
                                    generic_packetizer_c *ptzr) {
   t->ptzr     = add_packetizer(ptzr);
   t->ptzr_ptr = PTZR(t->ptzr);
+}
+
+void
+kax_reader_c::handle_vorbis_comments_cover_art(mtx::tags::converted_vorbis_comments_t const &converted) {
+  for (auto const &picture : converted.m_pictures) {
+    picture->ui_id        = ++m_attachment_id;
+    picture->source_file  = m_ti.m_fname;
+    auto attach_mode      = attachment_requested(picture->ui_id);
+    picture->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+
+    if (ATTACH_MODE_SKIP != attach_mode)
+      add_attachment(picture);
+  }
+}
+
+void
+kax_reader_c::handle_vorbis_comments_tags(mtx::tags::converted_vorbis_comments_t const &converted,
+                                          kax_track_t &t) {
+  if (!converted.m_track_tags && !converted.m_album_tags)
+    return;
+
+  t.tags = mtx::tags::merge(t.tags, mtx::tags::merge(converted.m_track_tags, converted.m_album_tags));
+}
+
+void
+kax_reader_c::handle_vorbis_comments(kax_track_t &t) {
+  auto comments = mtx::tags::parse_vorbis_comments_from_packet(*t.headers[1]);
+  if (!comments.valid())
+    return;
+
+  auto converted = mtx::tags::from_vorbis_comments(comments);
+
+  handle_vorbis_comments_cover_art(converted);
+  handle_vorbis_comments_tags(converted, t);
+
+  comments.m_comments.clear();
+  t.headers[1] = mtx::tags::assemble_vorbis_comments_into_packet(comments);
 }

@@ -37,6 +37,10 @@ namespace mtx::id {
 class info_c;
 }
 
+namespace mtx::tags {
+struct converted_vorbis_comments_t;
+}
+
 struct kax_track_t {
   uint64_t tnum, track_number, track_uid;
 
@@ -332,4 +336,8 @@ protected:
   virtual void determine_minimum_timestamps();
   virtual void determine_global_timestamp_offset_to_apply();
   virtual void adjust_chapter_timestamps();
+
+  virtual void handle_vorbis_comments(kax_track_t &t);
+  virtual void handle_vorbis_comments_cover_art(mtx::tags::converted_vorbis_comments_t const &converted);
+  virtual void handle_vorbis_comments_tags(mtx::tags::converted_vorbis_comments_t const &converted, kax_track_t &t);
 };

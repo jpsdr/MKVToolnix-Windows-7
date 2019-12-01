@@ -7,8 +7,14 @@
 * MKVToolNix GUI: the list of predefined track names is now split up into
   three lists, one for each track type (audio, video & subtitles). Part of the
   implementation of #2654.
-* mkvmerge: Ogg reader: if present in the tags of Vorbis and Opus tracks,
-  cover art will be converted into attachments.
+* mkvmerge: Ogg reader: Vorbis, Opus & VP8 streams: stream comments (aka
+  Vorbis comments) will be converted to Matroska attachments (for cover arts)
+  and Matroska track tags (for other comments). Additionally the stream
+  comments will be removed from Vorbis headers.
+* mkvmerge: Matroska reader: Vorbis tracks: stream comments (aka Vorbis
+  comments) will be converted to Matroska attachments (for cover arts) and
+  Matroska track tags (for other comments). Additionally the stream comments
+  will be removed from Vorbis headers.
 * mkvmerge: MP4 reader: added support for reading Opus audio from MP4
   files. Part of the implementation of #2673.
 * mkvmerge: MP4 reader: added support for reading VP9 video from MP4
@@ -20,9 +26,6 @@
 * MKVToolNix GUI: update check: the dialog showing the latest news & version
   information states explicitly where the links take the user (the MKVToolNix
   `NEWS.md` file and YouTube respectively).
-* mkvmerge: when reading Vorbis, Opus or VP8 tracks from Ogg containers
-  mkvmerge will convert any stream comments present to Matroska track tags &
-  remove the stream comments from the bitstream.
 
 ## Bug fixes
 
