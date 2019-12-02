@@ -26,6 +26,7 @@
 * MKVToolNix GUI: update check: the dialog showing the latest news & version
   information states explicitly where the links take the user (the MKVToolNix
   `NEWS.md` file and YouTube respectively).
+* mkvmerge: WAV reader: added support for reading RF64 files.
 
 ## Bug fixes
 

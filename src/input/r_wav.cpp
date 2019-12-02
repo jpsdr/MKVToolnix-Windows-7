@@ -64,6 +64,10 @@ wav_reader_c::determine_type() {
         && !std::memcmp(&wheader.riff.wave_id, "WAVE", 4))
       return type_e::wave;
 
+    if (   !std::memcmp(&wheader.riff.id,      "RF64", 4)
+        && !std::memcmp(&wheader.riff.wave_id, "WAVE", 4))
+      return type_e::rf64;
+
     if (   !std::memcmp(w64_header.riff.guid, mtx::w64::g_guid_riff, 16)
         && !std::memcmp(w64_header.wave_guid, mtx::w64::g_guid_wave, 16))
       return type_e::wave64;
@@ -138,9 +142,9 @@ wav_reader_c::parse_file() {
 
 void
 wav_reader_c::dump_headers() {
-  mxinfo(fmt::format("File '{0}' header dump (mode: {1})\n", m_ti.m_fname, m_type == type_e::wave ? "WAV" : "Wave64"));
+  mxinfo(fmt::format("File '{0}' header dump (mode: {1})\n", m_ti.m_fname, m_type == type_e::rf64 ? "RF64" : m_type == type_e::wave ? "WAV" : "Wave64"));
 
-  if (m_type == type_e::wave)
+  if ((m_type == type_e::rf64) || (m_type == type_e::wave))
     mxinfo(fmt::format("  riff:\n"
                        "    id:      {0}{1}{2}{3}\n"
                        "    len:     {4}\n"
@@ -148,6 +152,13 @@ wav_reader_c::dump_headers() {
                        char(m_wheader.riff.id[0]), char(m_wheader.riff.id[1]), char(m_wheader.riff.id[2]), char(m_wheader.riff.id[3]),
                        get_uint32_le(&m_wheader.riff.len),
                        char(m_wheader.riff.wave_id[0]), char(m_wheader.riff.wave_id[1]), char(m_wheader.riff.wave_id[2]), char(m_wheader.riff.wave_id[3])));
+
+  if (m_type == type_e::rf64)
+    mxinfo(fmt::format("  ds64:\n"
+                       "    riff_size:    {0}\n"
+                       "    data_size:    {1}\n"
+                       "    sample_count: {2}\n",
+                       m_ds64.riff_size, m_ds64.data_size, m_ds64.sample_count));
 
   mxinfo(fmt::format("  common:\n"
                      "    wFormatTag:       {0:04x}\n"
@@ -235,10 +246,45 @@ wav_reader_c::read(generic_packetizer_c *,
 
 void
 wav_reader_c::scan_chunks() {
-  if (m_type == type_e::wave)
+  if (m_type == type_e::rf64)
+    scan_chunks_rf64();
+  else if (m_type == type_e::wave)
     scan_chunks_wave();
   else
     scan_chunks_wave64();
+}
+
+void
+wav_reader_c::scan_chunks_rf64() {
+  scan_chunks_wave();
+
+  auto chunk_idx    = find_chunk("ds64");
+  auto debug_chunks = debugging_c::requested("wav_reader|wav_reader_chunks");
+
+  if (!chunk_idx) {
+    mxdebug_if(debug_chunks, fmt::format("scan_chunks_rf64() no ds64 chunk found\n"));
+    throw mtx::input::header_parsing_x();
+  }
+
+  auto const &chunk = m_chunks[*chunk_idx];
+
+  mxdebug_if(debug_chunks, fmt::format("scan_chunks_rf64() found ds64 at {0} size {1}\n", chunk.pos, chunk.len));
+
+  if (chunk.len < 24)
+    throw mtx::input::header_parsing_x();
+
+  m_in->setFilePointer(chunk.pos);
+
+  m_ds64.riff_size       = m_in->read_uint64_le();
+  m_ds64.data_size       = m_in->read_uint64_le();
+  m_ds64.sample_count    = m_in->read_uint64_le();
+
+  m_bytes_in_data_chunks = m_ds64.data_size;
+
+  chunk_idx              = find_chunk("data");
+
+  if (chunk_idx)
+    m_chunks[*chunk_idx].len = m_ds64.data_size;
 }
 
 void

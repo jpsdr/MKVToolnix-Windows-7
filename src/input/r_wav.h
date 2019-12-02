@@ -58,8 +58,13 @@ struct wav_chunk_t {
 
 class wav_reader_c: public generic_reader_c {
 public:
+  struct ds64_chunk_t {
+    uint64_t riff_size{}, data_size{}, sample_count{};
+  };
+
   enum class type_e {
     unknown,
+    rf64,
     wave,
     wave64,
   };
@@ -75,6 +80,7 @@ private:
   wav_demuxer_cptr m_demuxer;
 
   uint32_t m_format_tag;
+  ds64_chunk_t m_ds64;
 
 public:
   virtual mtx::file_type_e get_format_type() const {
@@ -98,6 +104,7 @@ protected:
   boost::optional<std::size_t> find_chunk(const char *id, int start_idx = 0, bool allow_empty = true);
 
   void scan_chunks();
+  void scan_chunks_rf64();
   void scan_chunks_wave();
   void scan_chunks_wave64();
 
