@@ -251,7 +251,7 @@ wav_reader_c::scan_chunks_wave() {
   wav_chunk_t new_chunk;
   bool debug_chunks = debugging_c::requested("wav_reader|wav_reader_chunks");
 
-  mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() Starting search at file position {0}\n", m_in->getFilePointer()));
+  mxdebug_if(debug_chunks, fmt::format("scan_chunks_wave() Starting search at file position {0}\n", m_in->getFilePointer()));
 
   try {
     auto file_size = m_in->get_size();
@@ -266,7 +266,7 @@ wav_reader_c::scan_chunks_wave() {
       new_chunk.id  = memory_c::clone(id, 4);
       new_chunk.len = m_in->read_uint32_le();
 
-      mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() new chunk at {0} type {1} length {2}\n", new_chunk.pos - 8, get_displayable_string(id, 4), new_chunk.len));
+      mxdebug_if(debug_chunks, fmt::format("scan_chunks_wave() new chunk at {0} type {1} length {2}\n", new_chunk.pos - 8, get_displayable_string(id, 4), new_chunk.len));
 
       if (!strncasecmp(id, "data", 4))
         m_bytes_in_data_chunks += new_chunk.len;
@@ -280,7 +280,7 @@ wav_reader_c::scan_chunks_wave() {
         m_bytes_in_data_chunks      += this_chunk_len;
         previous_chunk.len           = this_chunk_len;
 
-        mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() hugh data chunk with wrong length at {0}; re-calculated from file size; new length {1}\n", previous_chunk.pos, previous_chunk.len));
+        mxdebug_if(debug_chunks, fmt::format("scan_chunks_wave() huge data chunk with wrong length at {0}; re-calculated from file size; new length {1}\n", previous_chunk.pos, previous_chunk.len));
 
         break;
       }
@@ -300,7 +300,7 @@ wav_reader_c::scan_chunks_wave64() {
 
   m_in->setFilePointer(sizeof(mtx::w64::header_t));
 
-  mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() Starting search at file position {0}\n", m_in->getFilePointer()));
+  mxdebug_if(debug_chunks, fmt::format("scan_chunks_wave64() Starting search at file position {0}\n", m_in->getFilePointer()));
 
   try {
     while (true) {
@@ -313,7 +313,7 @@ wav_reader_c::scan_chunks_wave64() {
 
       new_chunk.len -= sizeof(mtx::w64::chunk_t);
 
-      mxdebug_if(debug_chunks, fmt::format("wav_reader_c::scan_chunks() new chunk at {0} type {1} length {2}\n",
+      mxdebug_if(debug_chunks, fmt::format("scan_chunks_wave64() new chunk at {0} type {1} length {2}\n",
                                            new_chunk.pos - sizeof(mtx::w64::chunk_t), get_displayable_string(reinterpret_cast<char *>(new_chunk.id->get_buffer()), 4), new_chunk.len + sizeof(mtx::w64::chunk_t)));
 
       if (!strncasecmp(reinterpret_cast<char *>(new_chunk.id->get_buffer()), "data", 4))
