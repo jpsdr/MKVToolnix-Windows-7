@@ -15,6 +15,7 @@
 class QComboBox;
 class QLineEdit;
 class QMenu;
+class QProgressDialog;
 class QTreeView;
 
 namespace mtx::bluray::disc_library {
@@ -72,6 +73,7 @@ protected:
   QString m_savedState, m_emptyState;
 
   FileIdentificationThread *m_identifier;
+  QProgressDialog *m_scanningDirectoryDialog{};
 
   debugging_option_c m_debugTrackModel;
 
@@ -196,6 +198,7 @@ public slots:
   virtual void showScanningPlaylistDialog(int numFilesToScan);
   virtual void selectScanPlaylistPolicy(SourceFilePtr const &sourceFile, QFileInfoList const &files);
   virtual void selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists);
+  virtual void hideScanningDirectoryDialog();
 
   // Output tab:
   virtual void setupOutputFileControls();

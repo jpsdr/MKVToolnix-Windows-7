@@ -592,6 +592,7 @@ Tab::setupFileIdentificationThread() {
   connect(&worker, &FileIdentificationWorker::identifiedAsXmlSegmentInfo,      this, &Tab::handleIdentifiedXmlSegmentInfo);
   connect(&worker, &FileIdentificationWorker::identifiedAsXmlTags,             this, &Tab::handleIdentifiedXmlTags);
   connect(&worker, &FileIdentificationWorker::playlistScanStarted,             this, &Tab::showScanningPlaylistDialog);
+  connect(&worker, &FileIdentificationWorker::playlistScanFinished,            this, &Tab::hideScanningDirectoryDialog);
   connect(&worker, &FileIdentificationWorker::playlistScanDecisionNeeded,      this, &Tab::selectScanPlaylistPolicy);
   connect(&worker, &FileIdentificationWorker::playlistSelectionNeeded,         this, &Tab::selectPlaylistToAdd);
 
@@ -1311,15 +1312,26 @@ Tab::selectScanPlaylistPolicy(SourceFilePtr const &sourceFile,
 }
 
 void
+Tab::hideScanningDirectoryDialog() {
+  if (!m_scanningDirectoryDialog)
+    return;
+
+  delete m_scanningDirectoryDialog;
+  m_scanningDirectoryDialog = nullptr;
+}
+
+void
 Tab::showScanningPlaylistDialog(int numFilesToScan) {
-  auto progressDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
-  auto &worker        = m_identifier->worker();
+  auto &worker = m_identifier->worker();
 
-  connect(&worker,        &FileIdentificationWorker::playlistScanProgressChanged, progressDialog, &QProgressDialog::setValue);
-  connect(&worker,        &FileIdentificationWorker::playlistScanFinished,        progressDialog, &QProgressDialog::deleteLater);
-  connect(progressDialog, &QProgressDialog::canceled,                             m_identifier,   &FileIdentificationThread::abortPlaylistScan);
+  if (!m_scanningDirectoryDialog)
+    m_scanningDirectoryDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
 
-  progressDialog->show();
+  connect(&worker,                   &FileIdentificationWorker::playlistScanProgressChanged, m_scanningDirectoryDialog, &QProgressDialog::setValue);
+  connect(m_scanningDirectoryDialog, &QProgressDialog::canceled,                             m_identifier,              &FileIdentificationThread::abortPlaylistScan);
+
+  m_scanningDirectoryDialog->setWindowTitle(QY("Scanning directory"));
+  m_scanningDirectoryDialog->show();
 }
 
 void
