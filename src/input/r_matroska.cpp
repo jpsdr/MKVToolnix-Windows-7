@@ -1883,7 +1883,7 @@ kax_reader_c::create_vorbis_audio_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_wavpack_audio_packetizer(kax_track_t *t,
                                               track_info_c &nti) {
-  nti.m_private_data.reset();
+  nti.m_private_data = t->private_data;
 
   wavpack_meta_t meta;
   meta.bits_per_sample = t->a_bps;
