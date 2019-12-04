@@ -47,6 +47,8 @@
   timestamps in the output file being quite large, e.g. more than a couple of
   minutes, causing sync problems when multiplexing together with other
   files. Fixes #2670.
+* MKVToolNix GUI: multiplexer: the progress dialog shown when scanning a
+  Blu-ray wasn't closed properly in certain situations. Fixes #2678.
 
 
 # Version 40.0.0 "Old Town Road + Pony" 2019-11-09
