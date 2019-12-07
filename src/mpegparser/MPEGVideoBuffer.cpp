@@ -222,6 +222,10 @@ bool ParsePictureHeader(MPEGChunk* chunk, MPEG2PictureHeader & hdr){
     //printf("Don't feed parse_picture_header a chunk that isn't a picture!!!\n");
     return false;
   }
+
+  if (chunk->GetSize() < 7)
+    return false;
+
   binary* pos = chunk->GetPointer();
   int havePicExt = 0;
   uint32_t temp = 0;
