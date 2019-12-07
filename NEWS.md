@@ -7,6 +7,8 @@
   track headers. Fixes #2687.
 * mkvmerge: RealMedia reader: fixed a division by zero when all audio
   timestamps were zero. Fixes #2689.
+* mkvmerge: RealMedia reader: fixed an invalid memory access in the video
+  frame assembly code triggered by invalid data in the file. Fixes #2691.
 
 
 # Version 41.0.0 "Smarra" 2019-12-06

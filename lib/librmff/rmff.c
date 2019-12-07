@@ -1837,6 +1837,9 @@ rmff_assemble_packed_video_frame(rmff_track_t *track,
         vpkg_offset = vpkg_length - vpkg_offset;
     }
 
+    if (vpkg_offset > vpkg_length)
+      return RMFF_ERR_DATA;
+
     if (data_len < (int)(vpkg_length - vpkg_offset))
       len = data_len;
     else
