@@ -5,6 +5,8 @@
 * mkvmerge: fixed a segmentation fault when trying to read a Matroska file
   that uses header removal compression but no removed bytes are present in the
   track headers. Fixes #2687.
+* mkvmerge: RealMedia reader: fixed a division by zero when all audio
+  timestamps were zero. Fixes #2689.
 
 
 # Version 41.0.0 "Smarra" 2019-12-06

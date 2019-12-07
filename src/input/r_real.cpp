@@ -388,7 +388,7 @@ real_reader_c::finish() {
   for (i = 0; i < demuxers.size(); i++) {
     real_demuxer_cptr dmx = demuxers[i];
     if (dmx && dmx->track && (dmx->track->type == RMFF_TRACK_TYPE_AUDIO) && !dmx->segments.empty())
-      deliver_audio_frames(dmx, dmx->last_timestamp / dmx->num_packets);
+      deliver_audio_frames(dmx, dmx->num_packets ? dmx->last_timestamp / dmx->num_packets : 0);
   }
 
   done = true;
