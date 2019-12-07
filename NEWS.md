@@ -9,6 +9,9 @@
   timestamps were zero. Fixes #2689.
 * mkvmerge: RealMedia reader: fixed an invalid memory access in the video
   frame assembly code triggered by invalid data in the file. Fixes #2691.
+* mkvmerge: MPEG elementary stream parser: fixed an invalid memory access and
+  use of uninitialized memory that could happen under certain
+  circumstances. Fixes #2690.
 
 
 # Version 41.0.0 "Smarra" 2019-12-06

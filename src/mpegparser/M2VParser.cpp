@@ -300,7 +300,7 @@ int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2Pict
     uint32_t pos = 0;
     bCopy = false;
     dataLen +=
-      (seqHdrChunk && keepSeqHdrsInBitstream ? seqHdrChunk->GetSize() : 0) +
+      (seqHdrChunk && keepSeqHdrsInBitstream && (MPEG2_I_FRAME == picHdr.frameType) ? seqHdrChunk->GetSize() : 0) +
       (gopChunk ? gopChunk->GetSize() : 0);
     pData = (binary *)safemalloc(dataLen);
     if (seqHdrChunk && keepSeqHdrsInBitstream &&
