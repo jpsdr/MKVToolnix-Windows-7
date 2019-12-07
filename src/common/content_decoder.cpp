@@ -91,26 +91,29 @@ content_decoder_c::initialize(KaxTrackEntry &ktentry) {
       break;
     }
 
-    if (0 == enc.comp_algo)
+    if (0 == enc.comp_algo) {
       enc.compressor = std::shared_ptr<compressor_c>(new zlib_compressor_c());
+      encodings.push_back(enc);
 
-    else if (mtx::included_in(enc.comp_algo, 1u, 2u)) {
+    } else if (mtx::included_in(enc.comp_algo, 1u, 2u)) {
       auto algorithm = 1u == enc.comp_algo ? "bzlib" : "lzo1x";
       mxwarn(fmt::format(Y("Track {0} was compressed with the algorithm '{1}' which is not supported anymore.\n"), tid, algorithm));
       ok = false;
       break;
 
     } else if (3 == enc.comp_algo) {
-      enc.compressor = std::shared_ptr<compressor_c>(new header_removal_compressor_c);
-      std::static_pointer_cast<header_removal_compressor_c>(enc.compressor)->set_bytes(enc.comp_settings);
+      if (enc.comp_settings && enc.comp_settings->get_size()) {
+        enc.compressor = std::shared_ptr<compressor_c>(new header_removal_compressor_c);
+        std::static_pointer_cast<header_removal_compressor_c>(enc.compressor)->set_bytes(enc.comp_settings);
+
+        encodings.push_back(enc);
+      }
 
     } else {
       mxwarn(fmt::format(Y("Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"), tid, enc.comp_algo));
       ok = false;
       break;
     }
-
-    encodings.push_back(enc);
   }
 
   brng::stable_sort(encodings, [](kax_content_encoding_t const &a, kax_content_encoding_t const &b) { return a.order < b.order; });
