@@ -152,4 +152,4 @@ private:
   std::string to_string(libebml::EbmlElement const *element) const;
 };
 
-void dump_ebml_elements(libebml::EbmlElement *element, bool with_values = false);
+void dump_ebml_elements(libebml::EbmlElement *element, bool with_values = true);
