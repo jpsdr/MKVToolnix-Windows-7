@@ -1,19 +1,12 @@
 !define LANG "Bulgarian"
 
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_EXT_LINKS_INTRO "If you need a GUI for mkvextract then give these projects a try:"
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Continue with installation anyway"
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_MFF_MORE_INFORMATION "More information"
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_MFF_NOT_FOUND "Your Windows installation seems to lack Microsoft's 'Media Foundation' framework. This framework is required by MKVToolNix. Please install it and run the MKVToolNix installer again."
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Should job files created by the GUI be deleted as well?"
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "Do you really want to remove $(^Name) and all of its components?"
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_UNINSTALLED_OK "$(^Name) was successfully uninstalled."
+!insertmacro LANG_STRING STRING_EXT_LINKS_INTRO "Ако имаш нужда от графичен интерфейс за mkvextract, хвърли едно око на тези проекти:"
+!insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Продължи с инсталацията въпреки това"
+!insertmacro LANG_STRING STRING_MFF_MORE_INFORMATION "Повече информация"
+!insertmacro LANG_STRING STRING_MFF_NOT_FOUND "Изглежда на Windows инсталацията ти ѝ липсва майкрософтския 'Media Foundation' framework. Този фреймуърк се изисква от MKVToolNix. Моля, инсталирай го и след това отново отвори инсталатора на MKVToolNix."
+!insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Да се изтрият ли и файловете със задачи, създадени от графичния интерфейс?"
+!insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "Наистина ли искаш да премахнеш $(^Name) и всичките ѝ компоненти?"
+!insertmacro LANG_STRING STRING_UNINSTALLED_OK "$(^Name) беше успешно деинсталирана."
 
 # Local Variables:
 # mode: nsis
