@@ -65,7 +65,7 @@ translation_c::initialize_available_translations() {
   ms_available_translations.clear();
   ms_available_translations.emplace_back("eng", "en_US",       "en",          "english",    "English",              "English",             false, 0x0009, 0x00);
 #if defined(HAVE_LIBINTL_H)
-  ms_available_translations.emplace_back("bul", "bg_BG",       "bg",          "bulgarian",  "Bulgarian",            "български",           false, 0x0002, 0x01);
+  ms_available_translations.emplace_back("bul", "bg_BG",       "bg",          "bulgarian",  "Bulgarian",            "Български",           false, 0x0002, 0x01);
   ms_available_translations.emplace_back("cat", "ca_ES",       "ca",          "catalan",    "Catalan",              "Català",              false, 0x0003, 0x00);
   ms_available_translations.emplace_back("cze", "cs_CZ",       "cs",          "czech",      "Czech",                "Čeština",             false, 0x0005, 0x00);
   ms_available_translations.emplace_back("ger", "de_DE",       "de",          "german",     "German",               "Deutsch",             false, 0x0007, 0x00);
