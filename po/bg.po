@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-11-24 12:43+0100\n"
-"PO-Revision-Date: 2019-12-02 19:46+0000\n"
+"PO-Revision-Date: 2019-12-14 18:55+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
 "Language: bg\n"
@@ -265,7 +265,7 @@ msgid ""
 "                           The colour primaries of the video.\n"
 msgstr ""
 "  --colour-primaries <TID:n>\n"
-"                           Цветовите основи на видеото.\n"
+"                           Цветови основи на видеото.\n"
 
 #: src/merge/mkvmerge.cpp:303
 #, no-c-format
@@ -278,6 +278,8 @@ msgid ""
 "  --colour-transfer-characteristics <TID:n>\n"
 "                           The transfer characteristics of the video.\n"
 msgstr ""
+"  --colour-transfer-characteristics <TID:n>\n"
+"                           Характеристики за прехвърляне на видеото.\n"
 
 #: src/merge/mkvmerge.cpp:365
 #, no-c-format
@@ -1079,7 +1081,7 @@ msgstr " Опции, които се прилагат само за видео �
 #: src/merge/mkvmerge.cpp:348
 #, no-c-format
 msgid " Other options:\n"
-msgstr "Други опции:\n"
+msgstr " Други опции:\n"
 
 #: src/merge/mkvmerge.cpp:117
 #, no-c-format
@@ -1390,9 +1392,9 @@ msgid "&Close file"
 msgstr "&Затвори файла"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:218
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Close settings"
-msgstr "Настройки на кодека"
+msgstr "&Затвори настройката"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:228
 #, no-c-format
@@ -1481,7 +1483,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:491
 #, no-c-format
 msgid "&Edit available actions to execute"
-msgstr ""
+msgstr "&Редактирай наличните действия за изпълнение"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1484
 #, no-c-format
@@ -1544,7 +1546,9 @@ msgstr "&Генерирай подепизоди"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
 #, no-c-format
 msgid "&Header editor"
-msgstr "&Метаданни редактор"
+msgstr ""
+"&Редактор\n"
+"на метаданни"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:411
 #, no-c-format
@@ -1991,7 +1995,7 @@ msgstr "при '--aspect-ratio' липсва съотношението на с�
 #: src/merge/mkvmerge.cpp:2584
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
-msgstr "при '--aspect-ratio-factor' липсва коефициента на пропорцията.\n"
+msgstr "при '--aspect-ratio-factor' липсва коефициента на съотношението.\n"
 
 #: src/merge/mkvmerge.cpp:2387
 #, no-c-format
@@ -2558,7 +2562,7 @@ msgstr "<Do not change>"
 #: src/mkvtoolnix-gui/merge/tab.cpp:131
 #, no-c-format
 msgid "<No destination file>"
-msgstr "Не е посочен целеви файл"
+msgstr "<Не е посочен целеви файл>"
 
 #: src/common/xml/ebml_tags_converter.cpp:95
 #, no-c-format
@@ -2580,13 +2584,13 @@ msgstr "На <Tag> му липсва <Simple>."
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:104
 #, no-c-format
 msgid "<Unnamed>"
-msgstr "<Unnamed>"
+msgstr "<Неименуван>"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:190
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:240
 #, no-c-format
 msgid "<Unsaved file>"
-msgstr "<Unsaved file>"
+msgstr "<Незаписан файл>"
 
 #: src/common/xml/xml.h:71
 #, no-c-format
@@ -2959,12 +2963,12 @@ msgstr "Добави нов &подепизод"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:208
 #, no-c-format
 msgid "Add new c&hapter before"
-msgstr "Добави нова г&лава преди"
+msgstr "Добави нов е&пизод преди"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:209
 #, no-c-format
 msgid "Add new ch&apter after"
-msgstr "Добави нова гла&ва след"
+msgstr "Добави нов еп&изод след"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:206
 #, no-c-format
@@ -3176,17 +3180,17 @@ msgstr "Следните файлове ще бъдат добавени кат�
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:57
 #, no-c-format
 msgid "All following file names will be opened in the chapter editor."
-msgstr "Всички тези файлове ще бъдат отворени в редактора на епизоди."
+msgstr "Всички тези файлове ще бъдат отворени в „Редактор на епизоди“."
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:58
 #, no-c-format
 msgid "All following file names will be opened in the header editor."
-msgstr "Всички тези файлове ще бъдат отворени в редактора на метаданни."
+msgstr "Всички тези файлове ще бъдат отворени в „Редактор на метаданни“."
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:56
 #, no-c-format
 msgid "All following file names will be opened in the info tool."
-msgstr "Всички тези файлове ще бъдат отворени в инфо инструмента."
+msgstr "Всички тези файлове ще бъдат отворени в „Инфо инструмент“."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:595
 #, no-c-format
@@ -3253,7 +3257,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1748
 #, no-c-format
 msgid "Always &switch to the job output tool after starting one immediately"
-msgstr "Винаги &преминавай към раздела \"Краен резултат\" веднага след стартиране на задачата"
+msgstr "Винаги &преминавай към раздел „Краен резултат“ веднага след стартиране на задачата"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1732
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
@@ -3692,7 +3696,7 @@ msgstr "Дадено е и съотношението на страните, и 
 #: src/merge/generic_packetizer.cpp:198
 #, no-c-format
 msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
-msgstr "Даден е и коефициента на пропорцията, и '--display-dimensions'.\n"
+msgstr "Даден е и коефициента на съотношението, и '--display-dimensions'.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:718
 #, no-c-format
@@ -4107,7 +4111,7 @@ msgstr "Епизоди"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1809
 #, no-c-format
 msgid "Chapters in fixed intervals"
-msgstr ""
+msgstr "Епизоди с фиксирани интервали"
 
 #: src/merge/generic_reader.cpp:312
 #, no-c-format
@@ -4145,7 +4149,7 @@ msgstr "Провери за налични актуализации"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1652
 #, no-c-format
 msgid "Check online for available &updates"
-msgstr "Проверявай онлайн за налични &ъпдейти "
+msgstr "Проверявай онлайн за налични &ъпдейти"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
 #, no-c-format
@@ -4179,9 +4183,9 @@ msgid "Close modified file"
 msgstr "Затваряне на променен файл"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:216
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Close modified settings"
-msgstr "Затваряне на променен файл"
+msgstr "Затваряне на променени настройки"
 
 #: src/common/kax_element_names.cpp:260
 #, no-c-format
@@ -4311,7 +4315,7 @@ msgstr "Цветово пространство"
 #: src/common/kax_element_names.cpp:132
 #, no-c-format
 msgid "Colour transfer"
-msgstr ""
+msgstr "Прехвърляне на цветове"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:270
 #, no-c-format
@@ -4378,7 +4382,7 @@ msgstr "Конвертира текстови субтитри към тази �
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:717
 #, no-c-format
 msgid "Converting the chapters to XML failed: %1"
-msgstr ""
+msgstr "Конвертирането на епизодите в XML е неуспешно: %1"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 #, no-c-format
@@ -4826,12 +4830,12 @@ msgstr "DTS"
 #: src/output/p_dts.cpp:76
 #, no-c-format
 msgid "DTS header information changed! - New format:\n"
-msgstr ""
+msgstr "Заглавието на DTS е променено! - Нов формат:\n"
 
 #: src/common/file_types.cpp:35
 #, no-c-format
 msgid "DTS/DTS-HD (Digital Theater System)"
-msgstr ""
+msgstr "DTS/DTS-HD (Digital Theater System - цифрова театрална система)"
 
 #: src/common/file_types.cpp:84
 #, no-c-format
@@ -4903,7 +4907,7 @@ msgstr "Език по подразбиране"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1699
 #, no-c-format
 msgid "Default subtitle &charset to set:"
-msgstr "Кодова таблица на су&бтитрите по подразбиране"
+msgstr "Кодова таблица на су&бтитрите по подразбиране:"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:153
 #, no-c-format
@@ -5146,7 +5150,7 @@ msgstr "Изключване на допълнителна к&омпресия �
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1650
 #, no-c-format
 msgid "Disable scaling for &high DPI displays"
-msgstr "Изключи мащабирането за дисплеи с &висока резолюция "
+msgstr "Изключи мащабирането за дисплеи с &висока резолюция"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1651
 #, no-c-format
@@ -5354,7 +5358,7 @@ msgstr "&Включи всички прикачени файлове"
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:323
 #, no-c-format
 msgid "E&xecute now"
-msgstr ""
+msgstr "&Изпълни сега"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:605
 #, no-c-format
@@ -5562,7 +5566,7 @@ msgstr "Въведи описание на задачата"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:305
 #, no-c-format
 msgid "Enter predefined split duration"
-msgstr "Предварително задаване на време за рязане"
+msgstr "Предварително задаване на време за разделяне"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:299
 #, no-c-format
@@ -5582,7 +5586,7 @@ msgstr "Грешка"
 #: src/mkvtoolnix-gui/util/option_file.cpp:32
 #, no-c-format
 msgid "Error creating a temporary file (reason: %1)."
-msgstr ""
+msgstr "Грешка при създаването на временен файл (причина: %1)."
 
 #: src/input/r_ogm.cpp:1173
 #, no-c-format
@@ -5858,7 +5862,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:395
 #, no-c-format
 msgid "Extraction tool"
-msgstr ""
+msgstr "Инструмент за извличане"
 
 #: src/common/file_types.cpp:85
 #: src/output/p_flac.h:38
@@ -6255,7 +6259,7 @@ msgstr "Общи променливи"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:192
 #, no-c-format
 msgid "Generate sub-chapters"
-msgstr "Генерирай подепизоди:"
+msgstr "Генерирай подепизоди"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:193
 #, no-c-format
@@ -6356,7 +6360,7 @@ msgstr "HEVC/H.265 първоначални потоци"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:407
 #, no-c-format
 msgid "Header &editor"
-msgstr "Метаданни &редактор"
+msgstr "&Редактор на метаданни"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1738
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:244
@@ -6364,7 +6368,7 @@ msgstr "Метаданни &редактор"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:202
 #, no-c-format
 msgid "Header editor"
-msgstr "Метаданни редактор"
+msgstr "Редактор на метаданни"
 
 #: src/common/compression/header_removal.cpp:49
 #, no-c-format
@@ -6579,7 +6583,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:253
 #, no-c-format
 msgid "If enabled, the first tab in the \"job output\" tool will not be cleared when a new job starts."
-msgstr ""
+msgstr "Ако тази опция е включена, първият раздел в инструмента „краен резултат“ няма да бъде почистен при стартиране на нова задача."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:271
 #, no-c-format
@@ -6606,7 +6610,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:448
 #, no-c-format
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
-msgstr ""
+msgstr "Ако е включено, пътечки от този тип винаги ще бъдат маркирани за копиране, без значение от езика им."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:177
 #, no-c-format
@@ -7043,12 +7047,12 @@ msgstr ""
 #: src/common/strings/parsing.cpp:109
 #, no-c-format
 msgid "Invalid format: More than nine nano-second digits"
-msgstr ""
+msgstr "Невалиден формат: Повече от девет наносекундни цифри"
 
 #: src/common/strings/parsing.cpp:128
 #, no-c-format
 msgid "Invalid format: More than two colons"
-msgstr ""
+msgstr "Невалиден формат: Повече от две двоеточия"
 
 #: src/common/strings/parsing.cpp:130
 #, no-c-format
@@ -7078,7 +7082,7 @@ msgstr ""
 #: src/common/strings/parsing.cpp:136
 #, no-c-format
 msgid "Invalid format: unknown character '{0}' found"
-msgstr ""
+msgstr "Невалиден формат: символът „{0}“ не бе разпознат"
 
 #: src/merge/mkvmerge.cpp:1065
 #, no-c-format
@@ -7103,22 +7107,22 @@ msgstr ""
 #: src/common/chapters/chapters.cpp:195
 #, no-c-format
 msgid "Invalid minute: {0}"
-msgstr ""
+msgstr "Невалидна минута: {0}"
 
 #: src/common/strings/parsing.cpp:179
 #, no-c-format
 msgid "Invalid number of minutes: {0} > 59"
-msgstr ""
+msgstr "Невалидно число за минути: {0} > 59"
 
 #: src/common/strings/parsing.cpp:181
 #, no-c-format
 msgid "Invalid number of seconds: {0} > 59"
-msgstr ""
+msgstr "Невалидно число за секунди: {0} > 59"
 
 #: src/common/chapters/chapters.cpp:197
 #, no-c-format
 msgid "Invalid second: {0}"
-msgstr ""
+msgstr "Невалидна секунда: {0}"
 
 #: src/propedit/propedit_cli_parser.cpp:43
 #: src/propedit/propedit_cli_parser.cpp:64
@@ -7128,7 +7132,7 @@ msgstr ""
 #: src/propedit/propedit_cli_parser.cpp:126
 #, no-c-format
 msgid "Invalid selector in '{0} {1}'.\n"
-msgstr ""
+msgstr "Невалиден селектор при „{0} {1}“.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1051
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1063
@@ -7526,7 +7530,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:129
 #, no-c-format
 msgid "Listen on YouTube"
-msgstr ""
+msgstr "Слушай песента в YouTube"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:48
 #, no-c-format
@@ -7597,9 +7601,9 @@ msgid "MKVToolNix GUI's installation directory"
 msgstr "Инсталационната директория на MKVToolNix GUI"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:60
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "MKVToolNix news & changes"
-msgstr "MKVToolNix GUI конфигурационни файлове"
+msgstr "MKVToolNix новости и промени"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:122
 #: src/mkvtoolnix-gui/merge/tab.cpp:200
@@ -8220,7 +8224,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/merge/tool.h:215
 #, no-c-format
 msgid "No multiplex job has been opened yet."
-msgstr ""
+msgstr "Засега няма отворена мултиплекс задача."
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:148
 #, no-c-format
@@ -8472,7 +8476,7 @@ msgstr "Ogg/OGM аудио/видео файлове"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1808
 #, no-c-format
 msgid "One chapter for each appended file"
-msgstr ""
+msgstr "По един епизод за всеки разширяващ файл"
 
 #: src/propedit/propedit_cli_parser.cpp:274
 #, no-c-format
@@ -8623,17 +8627,17 @@ msgstr "Отвори Matroska или WebM файлове"
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:180
 #, no-c-format
 msgid "Open a Matroska or WebM file via the \"header editor\" menu, the button below or drag & drop one here."
-msgstr "Отвори Matroska или WebM файл чрез менюто „метаданни редактор“, бутона по-долу или директно довлачи файла тук."
+msgstr "Отвори Matroska или WebM файл чрез менюто „Редактор на метаданни“, бутона по-долу или директно довлачи файла тук."
 
 #: src/mkvtoolnix-gui/forms/info/tool.h:180
 #, no-c-format
 msgid "Open a Matroska or WebM file via the \"info tool\" menu, the button below or drag & drop one here."
-msgstr "Отвори Matroska или WebM файл чрез менюто „инфо инструмент“, бутона по-долу или директно довлачи файла тук."
+msgstr "Отвори Matroska или WebM файл чрез менюто „Инфо инструмент“, бутона по-долу или директно довлачи файла тук."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:194
 #, no-c-format
 msgid "Open a file via the \"chapter editor\" menu, the buttons below or drag & drop one here."
-msgstr "Отвори файл чрез менюто „редактор на епизоди“, бутона по-долу или директно довлачи файла тук."
+msgstr "Отвори файл чрез менюто „Редактор на епизоди“, бутона по-долу или директно довлачи файла тук."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:695
 #, no-c-format
@@ -8657,7 +8661,7 @@ msgstr[1] "Отвори файлове в &MediaInfo"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:185
 #, no-c-format
 msgid "Open files in chapter editor"
-msgstr "Отвори файловете в редактора на глави"
+msgstr "Отвори файловете в „Редактор на епизоди“"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:172
 #, no-c-format
@@ -9032,9 +9036,9 @@ msgid "Predefined subtitle track names"
 msgstr "Имена на пътечки"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:195
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Predefined values"
-msgstr "Разделяне (размери)"
+msgstr "Предварително зададени стойности"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1684
 #, fuzzy, no-c-format
@@ -10200,7 +10204,7 @@ msgstr "Покажи опашката на задачи &и достъп до д
 #: src/info/info_cli_parser.cpp:43
 #, no-c-format
 msgid "Show positions in hexadecimal."
-msgstr ""
+msgstr "Покажи позициите в шестнадесетичен формат."
 
 #: src/info/info_cli_parser.cpp:40
 #, no-c-format
@@ -10459,15 +10463,15 @@ msgstr ""
 #, no-c-format
 msgid "Start job &immediately"
 msgid_plural "Start jobs &immediately"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Започни задачата &веднага"
+msgstr[1] "Започни задачите &веднага"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:214
 #, no-c-format
 msgid "Start job &manually"
 msgid_plural "Start jobs &manually"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Започни задачата &ръчно"
+msgstr[1] "Започни задачите &ръчно"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 #, no-c-format
@@ -10758,7 +10762,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:356
 #, no-c-format
 msgid "The GUI can ask for confirmation when you're about to create a file without audio tracks in it."
-msgstr "Програмата да иска повторно потвърждение, когато тръгнете да създавате файл без аудио пътечка в него."
+msgstr "Програмата може да поиска повторно потвърждение, когато тръгнете да създавате файл без аудио пътечка в него."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
 #, no-c-format
@@ -11047,7 +11051,7 @@ msgstr ""
 #: src/common/property_element.cpp:180
 #, no-c-format
 msgid "The colour primaries of the video."
-msgstr "Цветовите основи на видеото"
+msgstr "Цветови основи на видеото."
 
 #: src/common/property_element.cpp:179
 #, no-c-format
@@ -11673,7 +11677,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:190
 #, no-c-format
 msgid "The language set here is also used when chapters are generated."
-msgstr ""
+msgstr "Зададеният тук език се използва при генериране на епизоди."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:453
 #, no-c-format
@@ -11718,7 +11722,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:164
 #, no-c-format
 msgid "The maximum number of files that will be created even if the last file might contain more bytes/time than wanted."
-msgstr "Максималният брой файлове, който ще бъдат създадени, дори и да се наложи някои от последните да бъдат пропуснати."
+msgstr "Максималният брой файлове, които ще бъдат създадени, дори и да се наложи някои от последните да бъдат пропуснати."
 
 #: src/common/property_element.cpp:137
 #, no-c-format
@@ -11749,9 +11753,9 @@ msgid "The mkvmerge executable was not found."
 msgstr "Изпълнимият mkvmerge файл не бе намерен."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:217
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
-msgstr "Файлът „%1“ е бил променен. Наистина ли искаш да затвориш прозореца? Всички направени промени ще бъдат загубени."
+msgstr "Мултиплекс настройката създаваща „%1“ е била модифицирана. Наистина ли искаш да я затвориш? Всички промени ще бъдат загубени."
 
 #: src/propedit/change.cpp:53
 #, no-c-format
@@ -12495,12 +12499,12 @@ msgstr "Това е режимът по подразбиране."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:266
 #, no-c-format
 msgid "This is the language that newly added chapter names get assigned automatically."
-msgstr ""
+msgstr "Това е езикът, който новодобавените имена на епизоди получават автоматично."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:157
 #, no-c-format
 msgid "This is the title that players may show as the 'main title' for this movie."
-msgstr ""
+msgstr "Това е заглавието, което някои плеъри (например VLC) ще покажат като „основно“ за видеофайла."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
 #, no-c-format
@@ -12729,7 +12733,7 @@ msgstr "Горе"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1738
 #, no-c-format
 msgid "Trac&k name:"
-msgstr "Име на п&ътечката"
+msgstr "Име на п&ътечката:"
 
 #: src/common/kax_element_names.cpp:179
 #, no-c-format
@@ -12949,7 +12953,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
 #, no-c-format
 msgid "Type-specific settings"
-msgstr ""
+msgstr "Специфични за типа настройки"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:274
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:205
@@ -13920,12 +13924,12 @@ msgstr "Можеш да промениш тази стойност от наст
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:332
 #, no-c-format
 msgid "You can control the format used by the start timestamp with <START:format>."
-msgstr "Можете да контролирате формата, използван от началното времево клеймо, с <START:format>."
+msgstr "Може да контролирате формата, използван от началното времево клеймо, с <START:format>."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:2004
 #, no-c-format
 msgid "You can download the application from the following URL:"
-msgstr "Можеш да изтеглиш приложението от следния URL адрес:"
+msgstr "Може да изтеглиш приложението от следния URL адрес:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:444
 #, no-c-format
