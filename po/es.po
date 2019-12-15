@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2019-11-24 12:43+0100\n"
+"POT-Creation-Date: 2019-12-15 15:39+0100\n"
 "PO-Revision-Date: 2019-11-25 17:47+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1553,8 +1553,8 @@ msgstr "&Añadir adjunto"
 msgid "&Add attachments"
 msgstr "&Añadir adjuntos"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1471
-#: src/mkvtoolnix-gui/merge/input.cpp:1472
+#: src/mkvtoolnix-gui/merge/input.cpp:1483
+#: src/mkvtoolnix-gui/merge/input.cpp:1484
 #, no-c-format
 msgid "&Add files"
 msgstr "&Añadir archivos"
@@ -1565,7 +1565,7 @@ msgid "&Add source files"
 msgstr "&Añadir archivos"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1728
-#: src/mkvtoolnix-gui/merge/input.cpp:1488
+#: src/mkvtoolnix-gui/merge/input.cpp:1500
 #, no-c-format
 msgid "&Audio"
 msgstr "&Audio"
@@ -1701,7 +1701,7 @@ msgstr "&Descripción:"
 msgid "&Detach window"
 msgstr "&Despegar ventana"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1485
+#: src/mkvtoolnix-gui/merge/input.cpp:1497
 #, no-c-format
 msgid "&Disable all items"
 msgstr "&Deshabilitar todo ítem"
@@ -1733,7 +1733,7 @@ msgstr "&Duración de cada registro en segundos:"
 msgid "&Edit available actions to execute"
 msgstr "Acciones de &edición disponibles a ejecutar"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1484
+#: src/mkvtoolnix-gui/merge/input.cpp:1496
 #, no-c-format
 msgid "&Enable all items"
 msgstr "&Habilitar todo ítem"
@@ -2049,7 +2049,7 @@ msgstr[1] "&Eliminar adjuntos"
 msgid "&Remove end timestamps"
 msgstr "&Eliminar códigos de tiempo finales"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1442
+#: src/mkvtoolnix-gui/merge/input.cpp:1454
 #, no-c-format
 msgid "&Remove file"
 msgid_plural "&Remove files"
@@ -2120,7 +2120,7 @@ msgstr "&Buscar otros playlists"
 msgid "&Select all attachments"
 msgstr "&Seleccionar todos los adjuntos"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1482
+#: src/mkvtoolnix-gui/merge/input.cpp:1494
 #, no-c-format
 msgid "&Select all items"
 msgstr "&Seleccionar todo ítem"
@@ -2164,7 +2164,7 @@ msgid "&Subtitle tracks:"
 msgstr "Pistas de &subtítulos:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1729
-#: src/mkvtoolnix-gui/merge/input.cpp:1489
+#: src/mkvtoolnix-gui/merge/input.cpp:1501
 #, no-c-format
 msgid "&Subtitles"
 msgstr "&Subtítulos"
@@ -2202,7 +2202,7 @@ msgid "&Verbosity:"
 msgstr "&Verbosidad:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1727
-#: src/mkvtoolnix-gui/merge/input.cpp:1487
+#: src/mkvtoolnix-gui/merge/input.cpp:1499
 #, no-c-format
 msgid "&Video"
 msgstr "&Video"
@@ -2678,7 +2678,7 @@ msgstr "'{0}' pista {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': procesando los siguientes archivos como buenos: {1}\n"
 
-#: src/input/r_matroska.cpp:1845
+#: src/input/r_matroska.cpp:1846
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': Está copiando una pista Opus escrita en modo experimental. La pista generada será escrita en su modo final, pero un detalle no puede ser recuperado al estar escrita en modo experimental: el recorte final. Esto significa que un decodificador podría generar más muestras de las previstas inicialmente. Debería re-multiplexar a partir del archivo Opus original.\n"
@@ -2799,8 +2799,8 @@ msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> está ausente el <ChapterTrackNumber> secundario."
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:377
-#: src/mkvtoolnix-gui/merge/input.cpp:694
-#: src/mkvtoolnix-gui/merge/input.cpp:1508
+#: src/mkvtoolnix-gui/merge/input.cpp:695
+#: src/mkvtoolnix-gui/merge/input.cpp:1520
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<No cambiar>"
@@ -2843,8 +2843,8 @@ msgstr "<Archivo sin guardar>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> no es un elemento secundario válido de <{1}> en la posición {2}.."
 
-#: src/input/r_matroska.cpp:2281
-#: src/input/r_matroska.cpp:2389
+#: src/input/r_matroska.cpp:2289
+#: src/input/r_matroska.cpp:2397
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Un bloque fue encontrado en la marca de tiempo {0} para la pista número {1}. Sin embargo, no se encontró ninguna cabecera para este número de pista. El bloque será omitido.\n"
@@ -2869,7 +2869,7 @@ msgstr "Una lista separada por comas de fotogramas/campos, después de los cuale
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "Una lista separada por comas, de códigos de tiempo, del contenido a mantener."
 
-#: src/input/r_matroska.cpp:710
+#: src/input/r_matroska.cpp:708
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "En su lugar, se usará un índice predeterminado y los ajustes por defecto para el ancho, alto y paleta de color."
@@ -2959,8 +2959,8 @@ msgstr "&Ignorar advertencias/errores"
 msgid "A&ppend chapters from Matroska, WebM or chapter file"
 msgstr "Uni&r capítulos desde un archivo Matroska, WebM o de capítulo"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1473
-#: src/mkvtoolnix-gui/merge/input.cpp:1474
+#: src/mkvtoolnix-gui/merge/input.cpp:1485
+#: src/mkvtoolnix-gui/merge/input.cpp:1486
 #, no-c-format
 msgid "A&ppend files"
 msgstr "Uni&r archivos"
@@ -3185,18 +3185,18 @@ msgstr "Añadir adjuntos"
 msgid "Add element"
 msgstr "Añadir elemento"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1475
-#: src/mkvtoolnix-gui/merge/input.cpp:1476
+#: src/mkvtoolnix-gui/merge/input.cpp:1487
+#: src/mkvtoolnix-gui/merge/input.cpp:1488
 #, no-c-format
 msgid "Add files as a&dditional parts"
 msgstr "Añadir archivos como partes a&dicionales"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1164
+#: src/mkvtoolnix-gui/merge/input.cpp:1165
 #, no-c-format
 msgid "Add media files"
 msgstr "Añadir archivos multimedia"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1373
+#: src/mkvtoolnix-gui/merge/input.cpp:1385
 #, no-c-format
 msgid "Add media files as additional parts"
 msgstr "Añadir archivos multimedia como partes adicionales"
@@ -3248,7 +3248,7 @@ msgstr "Añadir el 'filename' del archivo como un nuevo adjunto"
 msgid "Add to job &queue"
 msgstr "Añadir a la lista de &tareas"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1177
+#: src/mkvtoolnix-gui/merge/input.cpp:1178
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "Añadiendo archivos de capítulos"
@@ -3258,12 +3258,12 @@ msgstr "Añadiendo archivos de capítulos"
 msgid "Adding or appending files"
 msgstr "Añadir o unir archivos"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1195
+#: src/mkvtoolnix-gui/merge/input.cpp:1196
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "Añadiendo segmento en archivos"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1213
+#: src/mkvtoolnix-gui/merge/input.cpp:1214
 #, no-c-format
 msgid "Adding tag files"
 msgstr "Añadiendo archivos de etiquetas"
@@ -3344,26 +3344,26 @@ msgstr "Después de códigos de tiempo específicos"
 msgid "After the job &queue has stopped"
 msgstr "Al finalizar la &lista de tareas"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1493
-#: src/mkvtoolnix-gui/merge/input.cpp:1498
+#: src/mkvtoolnix-gui/merge/input.cpp:1505
+#: src/mkvtoolnix-gui/merge/input.cpp:1510
 #, no-c-format
 msgid "Afterwards &close the current multiplex settings."
 msgstr "Posteriormente, &cerrar los actuales ajustes de multiplexado."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1491
-#: src/mkvtoolnix-gui/merge/input.cpp:1496
+#: src/mkvtoolnix-gui/merge/input.cpp:1503
+#: src/mkvtoolnix-gui/merge/input.cpp:1508
 #, no-c-format
 msgid "Afterwards &leave the settings as they are."
 msgstr "Al finalizar, &deja los ajustes tal y como están."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1494
-#: src/mkvtoolnix-gui/merge/input.cpp:1499
+#: src/mkvtoolnix-gui/merge/input.cpp:1506
+#: src/mkvtoolnix-gui/merge/input.cpp:1511
 #, no-c-format
 msgid "Afterwards &remove all source files."
 msgstr "Al finalizar, &elimina todos los archivos de origen."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1492
-#: src/mkvtoolnix-gui/merge/input.cpp:1497
+#: src/mkvtoolnix-gui/merge/input.cpp:1504
+#: src/mkvtoolnix-gui/merge/input.cpp:1509
 #, no-c-format
 msgid "Afterwards create &new multiplex settings and close the current ones."
 msgstr "Al finalizar, crea nuevo ajuste de multiplexado y cierra la actual."
@@ -3627,7 +3627,7 @@ msgstr "Además de solicitar que la GUI siempre abra los archivos soltados como 
 msgid "Append files in chapter editor"
 msgstr "Unir archivos en el editor de capítulos"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1164
+#: src/mkvtoolnix-gui/merge/input.cpp:1165
 #, no-c-format
 msgid "Append media files"
 msgstr "Unir archivos multimedia"
@@ -4040,7 +4040,7 @@ msgstr "Calcular las estadísticas para todas las pistas y añadir nuevas o actu
 #: src/mkvtoolnix-gui/jobs/tool.cpp:586
 #: src/mkvtoolnix-gui/jobs/tool.cpp:611
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:431
-#: src/mkvtoolnix-gui/merge/input.cpp:1315
+#: src/mkvtoolnix-gui/merge/input.cpp:1328
 #: src/mkvtoolnix-gui/merge/tab.cpp:420
 #: src/mkvtoolnix-gui/merge/tool.cpp:219
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:197
@@ -4696,7 +4696,7 @@ msgstr "No se pudo encontrar gptz al unir. {0}\n"
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
 msgstr "No se pudo encontrar los datos de configuración del códec MPEG4 part 2 en el primer fotograma del vídeo. Esta pista no puede ser almacenada en el modo original.\n"
 
-#: src/input/r_ogm.cpp:334
+#: src/input/r_ogm.cpp:335
 #, no-c-format
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
 msgstr "No se pudo encontrar la siguiente página Ogg. Esto indica que el archivo Ogg/Ogm está dañado. Se intentará continuar.\n"
@@ -5338,10 +5338,10 @@ msgstr "Archivo de salida:"
 msgid "Details"
 msgstr "Detalles"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1512
-#: src/mkvtoolnix-gui/merge/input.cpp:1514
-#: src/mkvtoolnix-gui/merge/input.cpp:1515
-#: src/mkvtoolnix-gui/merge/input.cpp:1516
+#: src/mkvtoolnix-gui/merge/input.cpp:1524
+#: src/mkvtoolnix-gui/merge/input.cpp:1526
+#: src/mkvtoolnix-gui/merge/input.cpp:1527
+#: src/mkvtoolnix-gui/merge/input.cpp:1528
 #, no-c-format
 msgid "Determine automatically"
 msgstr "Determinar automáticamente"
@@ -5522,7 +5522,7 @@ msgstr "Versión de tipo de documento"
 msgid "Dolby TrueHD"
 msgstr "Dolby TrueHD"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1511
+#: src/mkvtoolnix-gui/merge/input.cpp:1523
 #, no-c-format
 msgid "Don't change"
 msgstr "No cambiar"
@@ -5834,7 +5834,7 @@ msgstr "Error"
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "Error al crear un archivo temporal (motivo: %1)."
 
-#: src/input/r_ogm.cpp:1173
+#: src/input/r_ogm.cpp:1192
 #, no-c-format
 msgid "Error decoding an Ogg Opus page at source timestamp {0}; page will be skipped: {1}\n"
 msgstr "Error al decodificar una página de Ogg Opus en el código de tiempo {0} de la fuente; la página será omitida: {1}\n"
@@ -5939,7 +5939,7 @@ msgstr ""
 "Error: no fue asignado ningún nombre al archivo de salida.\n"
 "\n"
 
-#: src/output/p_vorbis.cpp:63
+#: src/output/p_vorbis.cpp:53
 #, no-c-format
 msgid "Error: vorbis_packetizer: Could not extract the stream's parameters from the first packets.\n"
 msgstr "Error: vorbis_empaquetado: No se pudo extraer los parámetros del archivo desde los paquetes iniciales.\n"
@@ -6002,7 +6002,7 @@ msgstr "Detalles de la excepción:"
 msgid "Executable files"
 msgstr "Archivos ejecutables"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1999
+#: src/mkvtoolnix-gui/merge/input.cpp:2011
 #, no-c-format
 msgid "Executable not found"
 msgstr "Ejecutable no encontrado"
@@ -6321,7 +6321,7 @@ msgstr "Número decimal"
 msgid "Flushes all cached data to storage when closing a file opened for writing."
 msgstr "Libera toda la memoria cache cuando se cierre un archivo abierto para su escritura."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1515
+#: src/mkvtoolnix-gui/merge/input.cpp:1527
 #, no-c-format
 msgid "For all frames"
 msgstr "Para todos los fotogramas"
@@ -6348,12 +6348,12 @@ msgstr "Para la mayoría de entradas, la marca de tiempo inicial más pequeña d
 msgid "For such files you can use this parameter and decrease the size to 2."
 msgstr "Para estos archivos puede usar este parámetro y disminuirlo hasta 2."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1511
+#: src/mkvtoolnix-gui/merge/input.cpp:1523
 #, no-c-format
 msgid "Force 2 bytes"
 msgstr "Fuerza 2 bytes"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1511
+#: src/mkvtoolnix-gui/merge/input.cpp:1523
 #, no-c-format
 msgid "Force 4 bytes"
 msgstr "Fuerza 4 bytes"
@@ -7119,17 +7119,17 @@ msgstr "Información"
 msgid "Input too long: {0} > {1}"
 msgstr "Entrada demasiado larga: {0} > {1}"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1181
+#: src/mkvtoolnix-gui/merge/input.cpp:1182
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "En lugar de un archivo de este tipo, se debe establecer usando la opción 'archivo de capítulos' en la pestaña 'salida'."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1217
+#: src/mkvtoolnix-gui/merge/input.cpp:1218
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "En lugar de un archivo de este tipo, se debe establecer usando la opción 'etiquetas globales' en la pestaña 'salida'."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1199
+#: src/mkvtoolnix-gui/merge/input.cpp:1200
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "En lugar de un archivo de este tipo, se debe establecer usando la opción 'información del segmento' en la pestaña 'salida'."
@@ -7153,6 +7153,11 @@ msgstr "Fallo interno: pistas.cpp SSA #1. {0}"
 #, no-c-format
 msgid "Internal program error"
 msgstr "Error interno del programa"
+
+#: src/input/unsupported_types_signature_prober.cpp:71
+#, no-c-format
+msgid "Internet Video Recording (IVR)"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1811
 #, no-c-format
@@ -7181,7 +7186,7 @@ msgstr "Codificación de caracteres UTF-8 no válida. Primer byte: 0x{0:02x}"
 
 #: src/input/r_avi.cpp:586
 #: src/input/r_avi.cpp:591
-#: src/input/r_avi.cpp:608
+#: src/input/r_avi.cpp:607
 #, no-c-format
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "No es válida la cabecera Vorbis en la pista de audio AVI."
@@ -7569,7 +7574,7 @@ msgstr "No consiste en un ID de pista y un valor separados por dos puntos."
 msgid "It is ignored for XML chapter files."
 msgstr "Es ignorado para archivos de capítulos XML."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2002
+#: src/mkvtoolnix-gui/merge/input.cpp:2014
 #, no-c-format
 msgid "Its installation location could not be determined automatically."
 msgstr "Su lugar de instalación no se pudo determinar automáticamente."
@@ -7925,13 +7930,13 @@ msgstr "MPLS Blu-ray playlist"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Convertir esta pista en la predefinida para cada de sus tipos (audio, vídeo o subtítulos)."
 
-#: src/input/r_matroska.cpp:1717
-#: src/input/r_matroska.cpp:1734
+#: src/input/r_matroska.cpp:1718
+#: src/input/r_matroska.cpp:1735
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Se encontraron datos de inicialización del códec AAC erróneos.\n"
 
-#: src/input/r_matroska.cpp:1727
+#: src/input/r_matroska.cpp:1728
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "ID del codec erróneo '{0}'.\n"
@@ -8319,10 +8324,10 @@ msgstr "UID del siguiente segmento"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:98
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:54
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:64
-#: src/mkvtoolnix-gui/merge/input.cpp:1510
-#: src/mkvtoolnix-gui/merge/input.cpp:1512
-#: src/mkvtoolnix-gui/merge/input.cpp:1513
-#: src/mkvtoolnix-gui/merge/input.cpp:1516
+#: src/mkvtoolnix-gui/merge/input.cpp:1522
+#: src/mkvtoolnix-gui/merge/input.cpp:1524
+#: src/mkvtoolnix-gui/merge/input.cpp:1525
+#: src/mkvtoolnix-gui/merge/input.cpp:1528
 #: src/mkvtoolnix-gui/merge/track_model.cpp:110
 #: src/mkvtoolnix-gui/merge/track_model.cpp:114
 #: src/mkvtoolnix-gui/merge/track_model.cpp:115
@@ -8338,12 +8343,12 @@ msgstr "No"
 msgid "No 'EBML head' element was found."
 msgstr "No se encontró ningún elemento 'EBML head'."
 
-#: src/input/r_qtmp4.cpp:1654
+#: src/input/r_qtmp4.cpp:1648
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "No se encontró ninguna cabecera AC-3 en el primero fotograma (frame): la pista se omitirá.\n"
 
-#: src/input/r_qtmp4.cpp:3403
+#: src/input/r_qtmp4.cpp:3397
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "No se encontró ninguna cabecera DTS en el primer fotograma: la pista se omitirá.\n"
@@ -8384,7 +8389,7 @@ msgstr "No se realizó ningún cambio.\n"
 msgid "No chapter numbers listed after '--split {0}'.\n"
 msgstr "No hay números de capítulo listados después '--split {0}'.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1515
+#: src/mkvtoolnix-gui/merge/input.cpp:1527
 #, no-c-format
 msgid "No cues"
 msgstr "Sin índices"
@@ -8404,7 +8409,7 @@ msgstr "No se especificó ningún nombre para el archivo de salida, por lo que s
 msgid "No errors yet"
 msgstr "No hay errores"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1514
+#: src/mkvtoolnix-gui/merge/input.cpp:1526
 #, no-c-format
 msgid "No extra compression"
 msgstr "Ninguna compresión extra"
@@ -8753,7 +8758,7 @@ msgstr "Sólo los nombres en inglés son admitidos."
 msgid "Only files smaller than 2 GiB are supported."
 msgstr "Sólo se permiten archivos inferiores a 2 GiB."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1515
+#: src/mkvtoolnix-gui/merge/input.cpp:1527
 #, no-c-format
 msgid "Only for I frames"
 msgstr "Sólo para fotogramas I"
@@ -8892,14 +8897,14 @@ msgstr "Puede abrir un archivo desde el menú »Editor de capítulo«, o usando 
 msgid "Open all files as tabs in the header editor"
 msgstr "Abrir los archivos en pestañas del editor de cabecera"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1463
+#: src/mkvtoolnix-gui/merge/input.cpp:1475
 #, no-c-format
 msgid "Open corresponding file in &MediaInfo"
 msgid_plural "Open corresponding files in &MediaInfo"
 msgstr[0] "Abrir el archivo correspondiente en &Mediainfo"
 msgstr[1] "Abrir los archivos correspondientes en &Mediainfo"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1443
+#: src/mkvtoolnix-gui/merge/input.cpp:1455
 #, no-c-format
 msgid "Open file in &MediaInfo"
 msgid_plural "Open files in &MediaInfo"
@@ -9203,7 +9208,7 @@ msgstr ""
 "mkvmerge. En ella, se explican ciertos aspectos de una manera\n"
 "más detallada que no son tan obvias desde este listado.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2003
+#: src/mkvtoolnix-gui/merge/input.cpp:2015
 #, no-c-format
 msgid "Please select its location below."
 msgstr "Por favor, seleccione su ubicación de abajo."
@@ -9322,6 +9327,11 @@ msgstr "UID del anterior segmento"
 msgid "Private data that only applies to a specific projection."
 msgstr "Los datos privatos que únicamente se aplican a una proyección concreta."
 
+#: src/output/p_prores.h:28
+#, no-c-format
+msgid "ProRes video"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1675
 #, no-c-format
 msgid "Probe &range percentage:"
@@ -9439,132 +9449,132 @@ msgstr "Video compatible QuickTime"
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
-#: src/input/r_qtmp4.cpp:404
+#: src/input/r_qtmp4.cpp:405
 #, no-c-format
 msgid "Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"
 msgstr "Lector de Quicktime/MP4: '{0}' la partícula es demasiado pequeña. Tamaño esperado: >= {1}. Tamaño actual: {2}.\n"
 
-#: src/input/r_qtmp4.cpp:2333
+#: src/input/r_qtmp4.cpp:2327
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Lector de Quicktime/MP4: El tamaño de muestra constante y de duración variable todavía no son compatibles. Contacta con el autor si tienes algún archivo de muestra.\n"
 
-#: src/input/r_qtmp4.cpp:1608
+#: src/input/r_qtmp4.cpp:1602
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: No puede ser leído el fragmento de información (chunk) número {0}/{1} con tamaño {2} desde la posición {3}. Cancelando.\n"
 
-#: src/input/r_qtmp4.cpp:2767
-#: src/input/r_qtmp4.cpp:2781
+#: src/input/r_qtmp4.cpp:2761
+#: src/input/r_qtmp4.cpp:2775
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: No puede ser leída la partícula de amplia descripción del sonido para el ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2733
+#: src/input/r_qtmp4.cpp:2727
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: No puede ser leída la partícula de descripción del sonido para el ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1316
+#: src/input/r_qtmp4.cpp:1317
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: No puede ser leída la partícula de descripción del archivo para el ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2815
+#: src/input/r_qtmp4.cpp:2809
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: No puede ser leída la partícula de descripción del vídeo para el ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:301
+#: src/input/r_qtmp4.cpp:302
 #, no-c-format
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
 msgstr "Lector de Quicktime/MP4: No se encontró ninguna partícula de cabecera.\n"
 
-#: src/input/r_qtmp4.cpp:304
+#: src/input/r_qtmp4.cpp:305
 #, no-c-format
 msgid "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
 msgstr "Lector de Quicktime/MP4: No se encontró la partícula 'mdat'. No se encontró información de la película.\n"
 
-#: src/input/r_qtmp4.cpp:121
+#: src/input/r_qtmp4.cpp:122
 #, no-c-format
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Lector de Quicktime/MP4: Tamaño del fragmento de información (chunk) no válido {0} at {1}.\n"
 
-#: src/input/r_qtmp4.cpp:3453
+#: src/input/r_qtmp4.cpp:3447
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista MPEG4 part 10/AVC {0} le falta su configuración del decodificador. Omitiendo esta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3479
+#: src/input/r_qtmp4.cpp:3473
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: La pista MPEG4 {0} está ausente de la configuración de el/la decodificador/partícula esds. Omitiendo esta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3463
+#: src/input/r_qtmp4.cpp:3457
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista MPEGH part 2/HEVC {0} le falta su configuración del decodificador. Omitiendo esta pista.\n"
 
-#: src/input/r_qtmp4.cpp:672
+#: src/input/r_qtmp4.cpp:673
 #, no-c-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version {0}.\n"
 msgstr "Lector de Quicktime/MP4: La partícula 'cabecera multimedia' (\"mdhd\") utiliza una versión no compatible {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1309
+#: src/input/r_qtmp4.cpp:1310
 #, no-c-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: El campo 'tamaño' es demasiado pequeño en la partícula de descripción del archivo para el ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:677
+#: src/input/r_qtmp4.cpp:678
 #, no-c-format
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Lector de Quicktime/MP4: El parámetro 'extensión de tiempo' fue 0. Esto no es compatible.\n"
 
-#: src/input/r_qtmp4.cpp:3421
+#: src/input/r_qtmp4.cpp:3415
 #, no-c-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: La pista AAC {0} está ausente de la configuración de el/la decodificador/partícula esds. Omitiendo esta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3416
+#: src/input/r_qtmp4.cpp:3410
 #, no-c-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: La pista de audio {0} esta usando 'una id de tipo de objeto' no compatible de {1} en la partícula 'esds'. Omitiendo esta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3473
+#: src/input/r_qtmp4.cpp:3467
 #, no-c-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: La pista de vídeo {0} está ausente de la partícula ESDS. Omitiendo esta pista.\n"
 
-#: src/input/r_qtmp4.cpp:448
+#: src/input/r_qtmp4.cpp:449
 #, no-c-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '{0}'. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: Este archivo usa cabeceras comprimidas con un algoritmo de compresión desconocido o no compatible '{0}'. Cancelando.\n"
 
-#: src/input/r_qtmp4.cpp:481
+#: src/input/r_qtmp4.cpp:482
 #, no-c-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size ({0}) was not what is available after uncompressing ({1}).\n"
 msgstr "Lector de Quicktime/MP4: Este archivo utiliza cabeceras comprimidas, pero el tamaño esperado sin comprimir ({0}) no fue el que esta disponible tras descomprimir ({1}).\n"
 
-#: src/input/r_qtmp4.cpp:472
+#: src/input/r_qtmp4.cpp:473
 #, no-c-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: {0}. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: Este archivo utiliza cabeceras comprimidas, pero la librería zlib no puede ser inicializada. El código de error de zlib: {0}. Cancelando.\n"
 
-#: src/input/r_qtmp4.cpp:477
+#: src/input/r_qtmp4.cpp:478
 #, no-c-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: Este archivo utiliza cabeceras comprimidas, pero no pueden ser descomprimidos. Código de error de zlib: {0}. Cancelando.\n"
 
-#: src/input/r_qtmp4.cpp:2741
-#: src/input/r_qtmp4.cpp:2822
+#: src/input/r_qtmp4.cpp:2735
+#: src/input/r_qtmp4.cpp:2816
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Lector de Quicktime/MP4: El ID de la pista {0} tiene más de un FourCC. Sólo utilizará el primero ({1}) y no este otro ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:3372
-#: src/input/r_qtmp4.cpp:3391
-#: src/input/r_qtmp4.cpp:3434
-#: src/input/r_qtmp4.cpp:3497
+#: src/input/r_qtmp4.cpp:3366
+#: src/input/r_qtmp4.cpp:3385
+#: src/input/r_qtmp4.cpp:3428
+#: src/input/r_qtmp4.cpp:3491
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Lector de Quicktime/MP4: La pista {0} tiene ausente alguna información. ¿Están corruptas las partículas de la cabecera?\n"
@@ -9739,7 +9749,7 @@ msgstr "Eliminar las tareas completadas &satisfactoriamente"
 msgid "Remove a&ll attachments"
 msgstr "Eliminar &todos los adjuntos"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1478
+#: src/mkvtoolnix-gui/merge/input.cpp:1490
 #, no-c-format
 msgid "Remove a&ll files"
 msgstr "Eliminar &todos los archivos"
@@ -10064,7 +10074,8 @@ msgstr "Buscar en el directorio otros playlists"
 msgid "Scanned Files"
 msgstr "Archivos analizados"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1315
+#: src/mkvtoolnix-gui/merge/input.cpp:1328
+#: src/mkvtoolnix-gui/merge/input.cpp:1333
 #, no-c-format
 msgid "Scanning directory"
 msgstr "Analizando directorio"
@@ -10182,14 +10193,14 @@ msgstr "UID del segmento"
 msgid "Select Matroska file to read segment UID from"
 msgstr "Seleccionar el archivo Mastroska de donde leer el segmento UID"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1444
+#: src/mkvtoolnix-gui/merge/input.cpp:1456
 #, no-c-format
 msgid "Select all &items from selected file"
 msgid_plural "Select all &items from selected files"
 msgstr[0] "Seleccionar todos los ob&jetos del archivo escogido"
 msgstr[1] "Seleccionar todos los ob&jetos de los archivos escogidos"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1483
+#: src/mkvtoolnix-gui/merge/input.cpp:1495
 #, no-c-format
 msgid "Select all tracks of specific &type"
 msgstr "&Seleccionar todas las pistas de un tipo en concreto"
@@ -10250,13 +10261,13 @@ msgstr "Seleccionar uno de los códigos de idiomas ISO 639-2."
 msgid "Select segment info file"
 msgstr "Seleccionar el archivo de información del segmento"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1029
+#: src/mkvtoolnix-gui/merge/input.cpp:1030
 #: src/mkvtoolnix-gui/merge/output.cpp:420
 #, no-c-format
 msgid "Select tags file"
 msgstr "Seleccionar el archivo de etiquetas"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1017
+#: src/mkvtoolnix-gui/merge/input.cpp:1018
 #, no-c-format
 msgid "Select timestamp file"
 msgstr "Seleccionar el archivo de códigos de tiempo"
@@ -10281,7 +10292,7 @@ msgstr "Seleccionar el conjunto de caracteres de un archivos de subtitulo o la i
 msgid "Set aspect ratio:"
 msgstr "Establecer relación de aspecto:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1480
+#: src/mkvtoolnix-gui/merge/input.cpp:1492
 #, no-c-format
 msgid "Set destination &file name from selected file's name"
 msgstr "Establecer el nombre del &archivo de salida a partir del nombre del archivo seleccionado"
@@ -10959,7 +10970,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr "Le dice a mkvmerge que no escriba más de 'n' bloques de información por cada clúster."
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:93
-#: src/mkvtoolnix-gui/merge/input.cpp:1017
+#: src/mkvtoolnix-gui/merge/input.cpp:1018
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:393
 #, no-c-format
 msgid "Text files"
@@ -11025,9 +11036,9 @@ msgstr "La GUI te puede ayudar, creando tu siguiente configuración de multiplex
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
 msgstr "La GUI puede analizar estos archivos, y mostrar los resultados incluyendo la duración y el número de pistas de cada playlist encontrado, y así permitirle elegir cuál añadir."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1182
-#: src/mkvtoolnix-gui/merge/input.cpp:1200
-#: src/mkvtoolnix-gui/merge/input.cpp:1218
+#: src/mkvtoolnix-gui/merge/input.cpp:1183
+#: src/mkvtoolnix-gui/merge/input.cpp:1201
+#: src/mkvtoolnix-gui/merge/input.cpp:1219
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "La GUI insertará el nombre del archivo que se dejó caer en ese control, sustituyendo cualquier nombre de archivo que se pudiera haber establecido con anterioridad."
@@ -11042,7 +11053,7 @@ msgstr "El ID {0} ya se está usando para otro archivo de salida.\n"
 msgid "The JSON output generated by mkvmerge could not be parsed (parser's error message: %1)."
 msgstr "No se pudo analizar la salida JSON generada por mkvmerge (mensaje de error de análisis: %1)."
 
-#: src/input/r_ogm.cpp:1656
+#: src/input/r_ogm.cpp:1675
 #, no-c-format
 msgid "The Kate identification header could not be parsed ({0}).\n"
 msgstr "La cabecera de identificación Kate no se puede analizar ({0}).\n"
@@ -11062,7 +11073,7 @@ msgstr "El tipo MIME no se puede dejar vacío."
 msgid "The MKVToolNix Code of Conduct"
 msgstr "El Código de conducta de MKVToolNix"
 
-#: src/input/r_qtmp4.cpp:1179
+#: src/input/r_qtmp4.cpp:1180
 #, no-c-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "El archivo MP4 '{0}' contiene capítulos cuyo formato no se reconoce. A veces esto ocurre cuando los capítulos no están codificados en UTF-8. Usa la opción '--chapter-charset' para especificar el código de caracteres a usar.\n"
@@ -11095,7 +11106,7 @@ msgstr "El último elemento de los archivos matroska se establece a un tamaño d
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length {0}'.\n"
 msgstr "La extensión para el tamaño NALU debe ser un número entre el 2 y el 4 incluido en '--nalu-size-length {0}'.\n"
 
-#: src/input/r_ogm.cpp:1466
+#: src/input/r_ogm.cpp:1485
 #, no-c-format
 msgid "The Theora identification header could not be parsed ({0}).\n"
 msgstr "La cabecera de identificación Theora no se puede analizar ({0}).\n"
@@ -11105,12 +11116,12 @@ msgstr "La cabecera de identificación Theora no se puede analizar ({0}).\n"
 msgid "The UID must not be left empty."
 msgstr "El UID no se puede dejar vacío."
 
-#: src/input/r_matroska.cpp:709
+#: src/input/r_matroska.cpp:707
 #, no-c-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "La pista de subtítulo VobSub {0} no contiene su índice en el elemento CodecPrivate."
 
-#: src/output/p_vorbis.cpp:141
+#: src/output/p_vorbis.cpp:131
 #, no-c-format
 msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding."
 msgstr "Los libros de códigos Vorbis son diferentes. Tales pistas no pueden ser concatenadas sin recodificar."
@@ -11503,17 +11514,17 @@ msgstr "El archivo \"%1\" ha sido modificado. ¿Seguro que quiere cerrar? Todos 
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "El archivo \"%1\" ha sido modificado. ¿Seguro que quiere recargar? Todos los cambios se perderán."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1179
+#: src/mkvtoolnix-gui/merge/input.cpp:1180
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "El archivo '%1' contiene capítulos."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1197
+#: src/mkvtoolnix-gui/merge/input.cpp:1198
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "El archivo '%1' contiene información del segmento."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1215
+#: src/mkvtoolnix-gui/merge/input.cpp:1216
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "El archivo '%1' contiene etiquetas."
@@ -11750,8 +11761,8 @@ msgstr "El archivo no se reconoció como formato compatible (código de salida: 
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1546
-#: src/input/r_matroska.cpp:2251
+#: src/input/r_matroska.cpp:1544
+#: src/input/r_matroska.cpp:2259
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "El archivo no volverá a ser procesado."
@@ -12408,7 +12419,7 @@ msgstr ""
 msgid "The timestamps after which a new destination file is started."
 msgstr "Los códigos de tiempo después de que se inicie un nuevo archivo de salida."
 
-#: src/input/r_ogm.cpp:554
+#: src/input/r_ogm.cpp:559
 #, no-c-format
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
 msgstr "Los códigos de tiempo han sido reestablecidos a la mitad del archivo. Esto no es compatible. El paquete actual será descartado.\n"
@@ -12582,9 +12593,9 @@ msgstr "Estas son las opciones menos utilizadas que controlan la estructura de s
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "Estas son opciones destinadas para su desarrollo. No están soportados oficialmente y pueden cambiar de versión a versión."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1180
-#: src/mkvtoolnix-gui/merge/input.cpp:1198
-#: src/mkvtoolnix-gui/merge/input.cpp:1216
+#: src/mkvtoolnix-gui/merge/input.cpp:1181
+#: src/mkvtoolnix-gui/merge/input.cpp:1199
+#: src/mkvtoolnix-gui/merge/input.cpp:1217
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "No se tratan como otros archivos de origen en MKVToolNix."
@@ -12630,12 +12641,12 @@ msgstr "Esta pista HEVC no comienza con un fotograma clave (keyframe). Los prime
 msgid "This MPEG audio track contains {0} bytes of non-MP3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the garbage data.\n"
 msgstr "Esta pista de audio MPEG contiene {0} bytes de información de datos no MP3 en el inicio. Esto corresponde a un desfase (delay) de {1}ms. Este desfase (delay) será utilizado en lugar de los datos inservibles.\n"
 
-#: src/input/r_ogm.cpp:823
+#: src/input/r_ogm.cpp:839
 #, no-c-format
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
 msgstr "Este archivo Ogg/OGM contiene un capítulo o título de información. Lamentablemente, la codificación de caracteres utilizada para almacenar esta información en el archivo no se puede identificar sin ambigüedad. El programa asumirá que la actual codfiicación de caracteres del sistema es el apropiado. Esto puede ser anulado aplicando el código '--chapter-charset <charset>'\n"
 
-#: src/input/r_ogm.cpp:830
+#: src/input/r_ogm.cpp:846
 #, no-c-format
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
 msgstr "Este archivo Ogg/OGM contiene chapters pero no pueden ser analizados. Puede ser debido a que el juego de caracteres (charset) no ha sido bien configurado para ellos o que los registros no coinciden con el formato de estilo SRT.\n"
@@ -12700,7 +12711,7 @@ msgstr "Este archivo no fue posible abrir o analizado.\n"
 msgid "This file is probably not a Matroska file."
 msgstr "Este archivo probablemente no es un archivo Mastroska."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2001
+#: src/mkvtoolnix-gui/merge/input.cpp:2013
 #, no-c-format
 msgid "This function requires the application %1."
 msgstr "Esta función requiere la aplicación %1."
@@ -12905,8 +12916,8 @@ msgstr "Esta pista contiene información SBR AAC/HE-AAC/AAC+."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1546
-#: src/input/r_matroska.cpp:2251
+#: src/input/r_matroska.cpp:1544
+#: src/input/r_matroska.cpp:2259
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Esto normalmente indica que la estructura del archivo está dañada."
@@ -13070,17 +13081,17 @@ msgstr "Tipo de pista"
 msgid "Track {0} CodecPrivate is too small.\n"
 msgstr "Las pista {0} de códec particular es demasiado pequeña.\n"
 
-#: src/common/content_decoder.cpp:108
+#: src/common/content_decoder.cpp:113
 #, no-c-format
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "Las pista {0} ha sido comprimida con un algoritmo de compresión desconocido/incompatible ({1}).\n"
 
-#: src/input/r_matroska.cpp:1234
+#: src/input/r_matroska.cpp:1232
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "A la pista {0} le falta el elemento UID que es necesario según la especificación de Matroska. Si el archivo contiene etiquetas entonces éstas podrían quedar inservibles.\n"
 
-#: src/common/content_decoder.cpp:99
+#: src/common/content_decoder.cpp:100
 #, no-c-format
 msgid "Track {0} was compressed with the algorithm '{1}' which is not supported anymore.\n"
 msgstr "La pista {0} fue comprimida con el algoritmo '{1}' que ya no será compatible.\n"
@@ -13139,7 +13150,7 @@ msgstr "Pista {0}: NAL demasiado grande. Tamaño según el campo de la cabecera:
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Pista {0}: Subtítulo con número de registro {1} carece de duración. Asumiendo una duración de 1 s.\n"
 
-#: src/input/r_qtmp4.cpp:2904
+#: src/input/r_qtmp4.cpp:2898
 #, no-c-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Pista {0}: La información AAC no ha podido ser analizada.\n"
@@ -13238,7 +13249,7 @@ msgstr "Subtítulos USF"
 msgid "USF text subtitles"
 msgstr "Subtítulos de texto USF"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1369
+#: src/mkvtoolnix-gui/merge/input.cpp:1381
 #, no-c-format
 msgid "Unable to append files"
 msgstr "Imposible unir archivos"
@@ -13261,7 +13272,7 @@ msgstr "Fotograma de imagen inesperado después de un fotograma de un único cam
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: src/input/r_ogm.cpp:504
+#: src/input/r_ogm.cpp:509
 #, no-c-format
 msgid "Unknown audio stream type 0x{0:04x}. Stream ID {1} will be ignored.\n"
 msgstr "Tipo de pista de audio desconocida 0x{0:04x}. El ID del archivo {1} será ignorado.\n"
@@ -13362,7 +13373,7 @@ msgstr "MPEG no compatible mpeg_version: 0x{0:02x} en el paquete {1} para el có
 msgid "Unsupported file format"
 msgstr "Formato de archivo no compatible"
 
-#: src/input/r_matroska.cpp:2074
+#: src/input/r_matroska.cpp:2075
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipo de pista no compatible para esta pista.\n"
@@ -13449,7 +13460,7 @@ msgstr "Usar un tamaño NALU con extensión de 3 bytes podría generar pistas qu
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Usando el desmultiplexador para el formato '{0}'.\n"
 
-#: src/input/r_matroska.cpp:1575
+#: src/input/r_matroska.cpp:1573
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Usando el módulo de salida genérico, para el tipo de pista '{0}'.\n"
@@ -13816,7 +13827,7 @@ msgstr "VobSub"
 msgid "VobSub subtitles"
 msgstr "Subtítulos VobSub"
 
-#: src/output/p_vorbis.h:58
+#: src/output/p_vorbis.h:55
 #, no-c-format
 msgid "Vorbis"
 msgstr "Vorbis"
@@ -14030,7 +14041,7 @@ msgstr "Windows (cmd.exe)"
 msgid "Windows Media (ASF/WMV)"
 msgstr "Windows Media (ASF/WMV)"
 
-#: src/input/unsupported_types_signature_prober.cpp:72
+#: src/input/unsupported_types_signature_prober.cpp:73
 #, no-c-format
 msgid "Windows Television DVR"
 msgstr "Ventana de Televisión DVR"
@@ -14129,7 +14140,7 @@ msgstr "Archivo de capítulos XML"
 msgid "XML segment info files"
 msgstr "Archivos XML de información del segmento"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1029
+#: src/mkvtoolnix-gui/merge/input.cpp:1030
 #: src/mkvtoolnix-gui/merge/output.cpp:420
 #, no-c-format
 msgid "XML tag files"
@@ -14148,10 +14159,10 @@ msgstr "Ataduras Xiph"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:98
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:54
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:64
-#: src/mkvtoolnix-gui/merge/input.cpp:1510
-#: src/mkvtoolnix-gui/merge/input.cpp:1512
-#: src/mkvtoolnix-gui/merge/input.cpp:1513
-#: src/mkvtoolnix-gui/merge/input.cpp:1516
+#: src/mkvtoolnix-gui/merge/input.cpp:1522
+#: src/mkvtoolnix-gui/merge/input.cpp:1524
+#: src/mkvtoolnix-gui/merge/input.cpp:1525
+#: src/mkvtoolnix-gui/merge/input.cpp:1528
 #: src/mkvtoolnix-gui/merge/track_model.cpp:110
 #: src/mkvtoolnix-gui/merge/track_model.cpp:114
 #: src/mkvtoolnix-gui/merge/track_model.cpp:115
@@ -14180,7 +14191,7 @@ msgstr "Puede cambiar este valor en las preferencias."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Puede controlar el formato usado mediante la marca de tiempo inicial con <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2004
+#: src/mkvtoolnix-gui/merge/input.cpp:2016
 #, no-c-format
 msgid "You can download the application from the following URL:"
 msgstr "Puede descargar la aplicación desde la siguiente URL:"
@@ -14236,7 +14247,7 @@ msgstr "También puede introducir de forma manual, en ambas herramientas, los no
 msgid "You can still enter values not present in this list manually in the multiplexer."
 msgstr "Aún puede insertar manualmente valores no incluidos en esta lista del multiplexador."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1369
+#: src/mkvtoolnix-gui/merge/input.cpp:1381
 #, no-c-format
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "No puede añadir partes adicionales a los archivos que no contengan pistas."
@@ -14295,7 +14306,7 @@ msgstr "attachments [opciones] [AID1:salida1 [AID2:salida2 ...]]"
 
 #: src/common/kax_info.cpp:624
 #: src/common/kax_info.cpp:800
-#: src/input/r_matroska.cpp:115
+#: src/input/r_matroska.cpp:117
 #, no-c-format
 msgid "audio"
 msgstr "Audio"
@@ -14327,7 +14338,7 @@ msgstr "campo inferior mostrado primero, campo superior almacenado primero"
 
 #: src/common/kax_info.cpp:627
 #: src/common/kax_info.cpp:803
-#: src/input/r_matroska.cpp:116
+#: src/input/r_matroska.cpp:118
 #, no-c-format
 msgid "buttons"
 msgstr "botones"
@@ -14527,128 +14538,128 @@ msgstr "Extensión {0}, datos: {1}"
 msgid "line {0}: The 'delay' timestamp could not be parsed.\n"
 msgstr "línea {0}: el 'delay' de la marca de tiempo no fue posible analizar.\n"
 
-#: src/input/r_matroska.cpp:383
+#: src/input/r_matroska.cpp:379
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (modo de compatibilidad MS para la pista {0}) Matroska dice que hay {1} bits por muestra, pero el WAVEFORMATEX dice que hay {2}.\n"
 
-#: src/input/r_matroska.cpp:374
+#: src/input/r_matroska.cpp:370
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (modo de compatibilidad MS para la pista {0}) Matroska dice que hay {1} canales, pero el WAVEFORMATEX dice que hay {2}.\n"
 
-#: src/input/r_matroska.cpp:365
+#: src/input/r_matroska.cpp:361
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (modo de compatibilidad MS para la pista {0}) Matroska dice que hay {1} muestras por segundo, pero el WAVEFORMATEX dice que hay {2}.\n"
 
-#: src/input/r_matroska.cpp:583
+#: src/input/r_matroska.cpp:581
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (modo de compatibilidad MS, pista {0}) la altura del vídeo Matroska es {1}, pero el BITMAPINFOHEADER dice {2}.\n"
 
-#: src/input/r_matroska.cpp:574
+#: src/input/r_matroska.cpp:572
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (modo de compatibilidad MS, pista {0}) la anchura del vídeo Matroska es {1}, pero el BITMAPINFOHEADER dice {2}.\n"
 
-#: src/input/r_matroska.cpp:1223
+#: src/input/r_matroska.cpp:1221
 #, no-c-format
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: A una pista le falta su número de pista.\n"
 
-#: src/input/r_matroska.cpp:1638
+#: src/input/r_matroska.cpp:1636
 #, no-c-format
 msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
 msgstr "matroska_reader: No se pudo mantener el UID de la pista {0} porque ya está asignada al nuevo archivo.\n"
 
-#: src/input/r_matroska.cpp:1485
-#: src/input/r_matroska.cpp:1490
+#: src/input/r_matroska.cpp:1483
+#: src/input/r_matroska.cpp:1488
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Ningún segmento encontrado.\n"
 
-#: src/input/r_matroska.cpp:1185
+#: src/input/r_matroska.cpp:1183
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Falta la altura en píxeles.\n"
 
-#: src/input/r_matroska.cpp:1183
+#: src/input/r_matroska.cpp:1181
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Falta la anchura en píxeles.\n"
 
-#: src/input/r_matroska.cpp:743
+#: src/input/r_matroska.cpp:741
 #, no-c-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader:El ID del códec para la pista {0} es '{1}' es desconocido.\n"
 
-#: src/input/r_matroska.cpp:398
-#: src/input/r_matroska.cpp:443
-#: src/input/r_matroska.cpp:464
-#: src/input/r_matroska.cpp:647
-#: src/input/r_matroska.cpp:657
-#: src/input/r_matroska.cpp:678
+#: src/input/r_matroska.cpp:394
+#: src/input/r_matroska.cpp:439
+#: src/input/r_matroska.cpp:462
+#: src/input/r_matroska.cpp:645
+#: src/input/r_matroska.cpp:655
+#: src/input/r_matroska.cpp:676
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: El ID del códec para la pista {0} es '{1}', pero la información particular del códec no contiene cabeceras válidas.\n"
 
-#: src/input/r_matroska.cpp:562
+#: src/input/r_matroska.cpp:560
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: El ID del códec para la pista {0} es '{1}', pero no había presente estructura BITMAPINFOHEADER. Por lo tanto, no tenemos un FourCC para identificar el códec de vídeo usado.\n"
 
-#: src/input/r_matroska.cpp:343
+#: src/input/r_matroska.cpp:339
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: El ID del códec para la pista {0} es '{1}', pero no había presente estructura WAVEFORMATEX. Por lo tanto, no tenemos una ID del formato para identificar el códec de audio usado.\n"
 
-#: src/input/r_matroska.cpp:602
+#: src/input/r_matroska.cpp:600
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: El ID del códec para la pista {0} es '{1}', pero no había cabeceras particulares del códec.\n"
 
-#: src/input/r_matroska.cpp:696
+#: src/input/r_matroska.cpp:694
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: El ID del códec para la pista {0} es '{1}', pero no se ha encontrado ningún dato particular.\n"
 
-#: src/input/r_matroska.cpp:1281
+#: src/input/r_matroska.cpp:1279
 #, no-c-format
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: El ID del códec está ausente.\n"
 
-#: src/input/r_matroska.cpp:634
+#: src/input/r_matroska.cpp:632
 #, no-c-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader:  La altura para la pista {0} no ha sido establecida.\n"
 
-#: src/input/r_matroska.cpp:628
+#: src/input/r_matroska.cpp:626
 #, no-c-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: La anchura para la pista {0} no ha sido establecida.\n"
 
-#: src/input/r_matroska.cpp:1241
+#: src/input/r_matroska.cpp:1239
 #, no-c-format
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: No se encuentra el tipo de pista.\n"
 
-#: src/input/r_matroska.cpp:781
+#: src/input/r_matroska.cpp:779
 #, no-c-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: La pista {0} parece estar bien.\n"
 
-#: src/input/r_matroska.cpp:434
+#: src/input/r_matroska.cpp:430
 #, no-c-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge no fue compilado con compatibiliad para archivos FLAC. Ignorando pista {0}.\n"
 
-#: src/input/r_matroska.cpp:1474
+#: src/input/r_matroska.cpp:1472
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: no se encontró la cabecera EBML.\n"
 
-#: src/input/r_matroska.cpp:776
+#: src/input/r_matroska.cpp:774
 #, no-c-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: desconocido tipo de multiplexador para la pista {0}: '{1}'\n"
@@ -14795,7 +14806,7 @@ msgstr ""
 "mkvmerge ha encontrado datos corruptos o no aptos para su procesamiento en esta pista de vídeo HEVC. Puede ser que tu archivo esté corrupto (al que mkvmerge todavía no puede hacer frente)\n"
 "o se trata de un error del propio mkvmerge. El mensaje de error fue: {0}\n"
 
-#: src/input/r_ogm.cpp:456
+#: src/input/r_ogm.cpp:461
 #, no-c-format
 msgid "mkvmerge has not been compiled with FLAC support but handling of this stream has been requested.\n"
 msgstr "mkvmerge no ha sido compilado con compatibilidad para archivos FLAC, pero la manipulación de estos archivos ha sido solicitado.\n"
@@ -14889,12 +14900,12 @@ msgstr "ninguna firma algorítmica"
 msgid "no signature hash algorithm"
 msgstr "ninguna firma con algoritmo hash"
 
-#: src/input/r_ogm.cpp:425
+#: src/input/r_ogm.cpp:430
 #, no-c-format
 msgid "ogg_stream_init for stream number {0} failed. Will try to continue and ignore this stream.\n"
 msgstr "ogg_stream_init para el archivo número {0} ha fallado. Continuará e ignorará este archivo.\n"
 
-#: src/input/r_ogm.cpp:338
+#: src/input/r_ogm.cpp:339
 #, no-c-format
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer ha fallado\n"
@@ -15016,7 +15027,7 @@ msgstr "tamaño {0}"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Formato no válido. No se encuentra la línea \"Format\" en la sección \"[Events]\"."
 
-#: src/input/r_matroska.cpp:118
+#: src/input/r_matroska.cpp:120
 #, no-c-format
 msgid "subtitle"
 msgstr "subtítulo"
@@ -15100,8 +15111,8 @@ msgstr "tta_reader: tamaño_etiqueta < 0 en el c'tor. {0}\n"
 #: src/common/kax_info.cpp:793
 #: src/common/kax_info.cpp:804
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:114
-#: src/input/r_matroska.cpp:2715
+#: src/input/r_matroska.cpp:116
+#: src/input/r_matroska.cpp:2723
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15112,7 +15123,7 @@ msgstr "tta_reader: tamaño_etiqueta < 0 en el c'tor. {0}\n"
 msgid "unknown"
 msgstr "Desconocido"
 
-#: src/input/r_matroska.cpp:2698
+#: src/input/r_matroska.cpp:2706
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "Desconocido, formato de la etiqueta 0x{0:04x}"
@@ -15129,7 +15140,7 @@ msgstr "indeterminado"
 
 #: src/common/kax_info.cpp:625
 #: src/common/kax_info.cpp:801
-#: src/input/r_matroska.cpp:117
+#: src/input/r_matroska.cpp:119
 #, no-c-format
 msgid "video"
 msgstr "Video"
@@ -15232,8 +15243,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: ha ocurrido una excepción (mensaje: {1}; tipo: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1545
-#: src/input/r_matroska.cpp:2250
+#: src/input/r_matroska.cpp:1543
+#: src/input/r_matroska.cpp:2258
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: ha ocurrido una excepción desconocida."
