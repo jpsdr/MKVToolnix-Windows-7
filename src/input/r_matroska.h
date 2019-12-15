@@ -313,6 +313,7 @@ protected:
   virtual void create_avc_es_video_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_hevc_video_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_hevc_es_video_packetizer(kax_track_t *t, track_info_c &nti);
+  virtual void create_prores_video_packetizer(kax_track_t &t, track_info_c &nti);
   virtual void create_vc1_video_packetizer(kax_track_t *t, track_info_c &nti);
 
   virtual void create_dvbsub_subtitle_packetizer(kax_track_t &t, track_info_c &nti);

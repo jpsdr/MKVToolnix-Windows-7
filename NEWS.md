@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: Matroska reader: mkvmerge will remove the `icpf` atom headers if
+  they're present in frames read from Matroska files. Implements #2692.
+
 ## Bug fixes
 
 * mkvmerge: fixed a segmentation fault when trying to read a Matroska file

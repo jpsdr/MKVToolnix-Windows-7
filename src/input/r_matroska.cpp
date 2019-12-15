@@ -91,6 +91,7 @@
 #include "output/p_opus.h"
 #include "output/p_passthrough.h"
 #include "output/p_pcm.h"
+#include "output/p_prores.h"
 #include "output/p_textsubs.h"
 #include "output/p_theora.h"
 #include "output/p_truehd.h"
@@ -1670,6 +1671,9 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
   } else if (t->codec.is(codec_c::type_e::V_AV1))
     create_av1_video_packetizer(t, nti);
 
+  else if (t->codec.is(codec_c::type_e::V_PRORES))
+    create_prores_video_packetizer(*t, nti);
+
   else if (t->codec.is(codec_c::type_e::V_VP8) || t->codec.is(codec_c::type_e::V_VP9)) {
     set_track_packetizer(t, new vpx_video_packetizer_c(this, nti, t->codec.get_type()));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
@@ -2112,6 +2116,13 @@ kax_reader_c::create_avc_video_packetizer(kax_track_t *t,
 
   set_track_packetizer(t, new avc_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
+}
+
+void
+kax_reader_c::create_prores_video_packetizer(kax_track_t &t,
+                                             track_info_c &nti) {
+  set_track_packetizer(&t, new prores_video_packetizer_c{this, nti, t.v_frate, static_cast<int>(t.v_width), static_cast<int>(t.v_height)});
+  show_packetizer_info(t.tnum, t.ptzr_ptr);
 }
 
 void
