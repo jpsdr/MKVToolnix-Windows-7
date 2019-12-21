@@ -346,12 +346,8 @@ Function showExternalLinks
   ${NSD_CreateLink} 0 48u 100% 16u "MKVcleaver"
   Pop $Link2
 
-  ${NSD_CreateLink} 0 64u 100% 16u "Inviska MKV Extract"
-  Pop $Link3
-
   ${NSD_OnClick} $Link1 onClickExternalLinkgMKVExtractGUI
   ${NSD_OnClick} $Link2 onClickExternalLinkMKVcleaver
-  ${NSD_OnClick} $Link3 onClickExternalLinkInviskaMKVExtract
 
   nsDialogs::Show
 FunctionEnd
@@ -364,11 +360,6 @@ FunctionEnd
 Function onClickExternalLinkMKVcleaver
   Pop $0
   ExecShell "open" "https://blogs.sapib.ca/apps/mkvcleaver/"
-FunctionEnd
-
-Function onClickExternalLinkInviskaMKVExtract
-  Pop $0
-  ExecShell "open" "https://www.inviska.com/mkvextract/"
 FunctionEnd
 
 var unRemoveJobs
