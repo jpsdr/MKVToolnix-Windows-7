@@ -17,6 +17,9 @@
 * mkvmerge: MPEG elementary stream parser: fixed an invalid memory access and
   use of uninitialized memory that could happen under certain
   circumstances. Fixes #2690.
+* mkvmerge: HEVC ES parser: fixed a bug in the slice parser calculating the
+  size of a field which in turn could have led to the slice's type being read
+  wrong. Patch by Torsten Hauska. Fixes #2710.
 
 
 # Version 41.0.0 "Smarra" 2019-12-06

@@ -575,10 +575,10 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
       auto log2_min_cb_size_y   = sps.log2_min_luma_coding_block_size_minus3 + 3;
       auto log2_ctb_size_y      = log2_min_cb_size_y + sps.log2_diff_max_min_luma_coding_block_size;
       auto ctb_size_y           = 1 << log2_ctb_size_y;
-      auto pic_width_in_ctbs_y  = ceil(static_cast<double>(sps.width  / ctb_size_y));
-      auto pic_height_in_ctbs_y = ceil(static_cast<double>(sps.height / ctb_size_y));
+      auto pic_width_in_ctbs_y  = ceil(static_cast<double>(sps.width)  / ctb_size_y);
+      auto pic_height_in_ctbs_y = ceil(static_cast<double>(sps.height) / ctb_size_y);
       auto pic_size_in_ctbs_y   = pic_width_in_ctbs_y * pic_height_in_ctbs_y;
-      auto v                    = mtx::math::int_log2(pic_size_in_ctbs_y);
+      auto v                    = mtx::math::int_log2((pic_size_in_ctbs_y - 1) * 2);
 
       r.get_bits(v);  // slice_segment_address
     }
