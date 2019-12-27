@@ -307,6 +307,7 @@ Settings::load() {
   m_disableCompressionForAllTrackTypes = reg.value(s_valDisableCompressionForAllTrackTypes, false).toBool();
   m_disableDefaultTrackForSubtitles    = reg.value(s_valDisableDefaultTrackForSubtitles,    false).toBool();
   m_mergeEnableDialogNormGainRemoval   = reg.value(s_valMergeEnableDialogNormGainRemoval,   false).toBool();
+  m_mergeAddBlurayCovers               = reg.value(s_valMergeAddBlurayCovers,               true).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value(s_valMergeAlwaysShowOutputFileControls,  true).toBool();
   m_mergePredefinedVideoTrackNames     = reg.value(s_valMergePredefinedVideoTrackNames).toStringList();
   m_mergePredefinedAudioTrackNames     = reg.value(s_valMergePredefinedAudioTrackNames).toStringList();
@@ -648,6 +649,7 @@ Settings::save()
   reg.setValue(s_valDisableCompressionForAllTrackTypes, m_disableCompressionForAllTrackTypes);
   reg.setValue(s_valDisableDefaultTrackForSubtitles,    m_disableDefaultTrackForSubtitles);
   reg.setValue(s_valMergeEnableDialogNormGainRemoval,   m_mergeEnableDialogNormGainRemoval);
+  reg.setValue(s_valMergeAddBlurayCovers,               m_mergeAddBlurayCovers);
   reg.setValue(s_valMergeAlwaysShowOutputFileControls,  m_mergeAlwaysShowOutputFileControls);
   reg.setValue(s_valMergePredefinedVideoTrackNames,     m_mergePredefinedVideoTrackNames);
   reg.setValue(s_valMergePredefinedAudioTrackNames,     m_mergePredefinedAudioTrackNames);

@@ -88,6 +88,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbMDefaultSubtitleCharset->setAdditionalItems(m_cfg.m_defaultSubtitleCharset).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
+  ui->cbMAddBlurayCovers->setChecked(m_cfg.m_mergeAddBlurayCovers);
 
   setupProcessPriority();
   setupPlaylistScanningPolicy();
@@ -197,7 +198,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
                    addItem(Page::DeriveTrackLanguage, pMerge,  QY("Deriving track languages"));
                    addItem(Page::Output,              pMerge,  QY("Destination file name"));
                    addItem(Page::EnablingTracks,      pMerge,  QY("Enabling items"));
-                   addItem(Page::Playlists,           pMerge,  QY("Playlists"));
+                   addItem(Page::Playlists,           pMerge,  QY("Playlists & Blu-rays"));
                    addItem(Page::Info,                nullptr, QY("Info tool"),             "document-preview-archive");
                    addItem(Page::HeaderEditor,        nullptr, QY("Header editor"),         "document-edit");
                    addItem(Page::ChapterEditor,       nullptr, QY("Chapter editor"),        "story-editor");
@@ -414,6 +415,7 @@ PreferencesDialog::setupToolTips() {
                             "a playlist belongs to.")));
 
   Util::setToolTip(ui->sbMMinPlaylistDuration, QY("Only playlists whose duration are at least this long are considered and offered to the user for selection."));
+  Util::setToolTip(ui->cbMAddBlurayCovers, QY("If enabled, the largest cover image of a Blu-ray will be added as an attachment when adding a Blu-ray playlist."));
 
   Util::setToolTip(ui->cbMAutoSetOutputFileName,
                    Q("%1 %2")
@@ -853,6 +855,7 @@ PreferencesDialog::save() {
 
   m_cfg.m_scanForPlaylistsPolicy                        = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
   m_cfg.m_minimumPlaylistDuration                       = ui->sbMMinPlaylistDuration->value();
+  m_cfg.m_mergeAddBlurayCovers                          = ui->cbMAddBlurayCovers->isChecked();
 
   m_cfg.m_outputFileNamePolicy                          = !ui->cbMAutoSetOutputFileName->isChecked()   ? Util::Settings::DontSetOutputFileName
                                                         : ui->rbMAutoSetRelativeDirectory->isChecked() ? Util::Settings::ToRelativeOfFirstInputFile

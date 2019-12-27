@@ -4,6 +4,8 @@
 
 * mkvmerge: Matroska reader: mkvmerge will remove the `icpf` atom headers if
   they're present in frames read from Matroska files. Implements #2692.
+* MKVToolNix GUI: multiplexer: added an option in the preferences for
+  disabling adding cover images from Blu-ray discs. Implements #2693.
 
 ## Bug fixes
 
