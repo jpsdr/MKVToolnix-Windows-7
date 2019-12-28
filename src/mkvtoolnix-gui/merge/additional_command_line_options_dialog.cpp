@@ -60,6 +60,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
 
   add(Q("--abort-on-warnings"), false, global, { QY("Tells mkvmerge to abort after the first warning is emitted.") });
 
+  add(Q("--deterministic"), true, global, { QY("Enables the creation of byte-identical files if the same source files with the same options and the same seed are used.") });
+
   auto hacks  = m_ui->gridDevelopmentHacks;
 
   add(Q("--engage space_after_chapters"),         false, hacks, { QY("Leave additional space (EbmlVoid) in the destination file after the chapters.") });

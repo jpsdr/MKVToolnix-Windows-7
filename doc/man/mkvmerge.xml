@@ -2134,6 +2134,40 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvmerge.description.deterministic">
+     <term><option>--deterministic</option> <parameter>seed</parameter></term>
+     <listitem>
+      <para>
+       Enables the creation of byte-identical files if the same version of &mkvmerge; is used with the same source files, the same set of
+       options and the same seed.  Note that the "date" segment information field is not written in this mode.
+      </para>
+
+      <para>The seed can be an arbitrary string and does not have to be a number.</para>
+
+      <para>
+       The result of byte-identical files is only guaranteed under the following conditions:
+      </para>
+
+      <orderedlist>
+       <listitem>
+        <para>The same version of &mkvmerge; built with the same versions of libEBML and libMatroska is used.</para>
+       </listitem>
+
+       <listitem>
+        <para>The source files used are byte-identical.</para>
+       </listitem>
+
+       <listitem>
+        <para>The same command line options are used in the same order (with the notable exception of <parameter>--output …</parameter>).</para>
+       </listitem>
+      </orderedlist>
+
+      <para>
+       Using other versions of &mkvmerge; or other command-line options may result in the same byte-identical file but is not guaranteed to do so.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.debug">
      <term><option>--debug</option> <parameter>topic</parameter></term>
      <listitem>

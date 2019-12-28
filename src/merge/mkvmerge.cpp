@@ -41,6 +41,7 @@
 #include <matroska/KaxTags.h>
 
 #include "common/chapters/chapters.h"
+#include "common/checksums/base.h"
 #include "common/command_line.h"
 #include "common/ebml.h"
 #include "common/extern_data.h"
@@ -52,6 +53,7 @@
 #include "common/mime.h"
 #include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"
+#include "common/random.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"
 #include "common/strings/formatting.h"
@@ -371,6 +373,9 @@ set_usage() {
                   "                           a file opened for writing.\n");
   usage_text += Y("  --abort-on-warnings      Aborts the program after the first warning is\n"
                   "                           emitted.");
+  usage_text += Y("  --deterministic <seed>   Enables the creation of byte-identical files\n"
+                  "                           if the same source files with the same options\n"
+                  "                           and the same seed are used.\n");
   usage_text += "\n";
   usage_text += Y("  --debug <topic>          Turns on debugging output for 'topic'.\n");
   usage_text += Y("  --engage <feature>       Turns on experimental feature 'feature'.\n");
@@ -2262,6 +2267,18 @@ parse_args(std::vector<std::string> args) {
 
     } else if ((this_arg == "-w") || (this_arg == "--webm"))
       set_output_compatibility(OC_WEBM);
+
+    else if (this_arg == "--deterministic") {
+      if (no_next_arg)
+        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
+
+      g_deterministic = true;
+      g_write_date    = false;
+      auto seed       = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, next_arg.c_str(), next_arg.size());
+      random_c::init(seed);
+
+      ++sit;
+    }
   }
 
   if (g_outfile.empty()) {
@@ -2286,7 +2303,7 @@ parse_args(std::vector<std::string> args) {
     auto next_arg        = !no_next_arg ? *sit_next : "";
 
     // Ignore the options we took care of in the first step.
-    if (mtx::included_in(this_arg, "-o", "--output", "--command-line-charset", "--engage", "--generate-chapters-name-template")) {
+    if (mtx::included_in(this_arg, "-o", "--output", "--command-line-charset", "--engage", "--generate-chapters-name-template", "--deterministic")) {
       sit++;
       continue;
     }

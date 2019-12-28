@@ -194,6 +194,8 @@ int64_t s_current_progress{};
 
 std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
 
+bool g_deterministic{};
+
 /** \brief Add a segment family UID to the list if it doesn't exist already.
 
   \param family This segment family element is converted to a 128 bit

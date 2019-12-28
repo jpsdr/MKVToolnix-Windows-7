@@ -29,23 +29,22 @@ std::uniform_int_distribution<uint64_t> s_uint64_distribution;
 }
 
 void
-random_c::init() {
-  if (s_generator)
-    return;
-
+random_c::init(boost::optional<uint64_t> seed) {
   s_generator = std::make_unique<std::mt19937_64>();
 
+  if (!seed) {
 #if defined(SYS_WINDOWS)
-  // mingw's implementation of std::random_device yields deterministic
-  // sequences, unfortunately.
-  auto seed = mtx::sys::get_current_time_millis();
+    // mingw's implementation of std::random_device yields deterministic
+    // sequences, unfortunately.
+    seed = mtx::sys::get_current_time_millis();
 
 #else
-  auto seed = std::random_device()();
+    seed = std::random_device()();
 #endif
+  }
 
-  std::srand(seed);
-  s_generator->seed(seed);
+  std::srand(*seed);
+  s_generator->seed(*seed);
 }
 
 void

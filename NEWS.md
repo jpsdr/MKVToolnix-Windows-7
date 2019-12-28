@@ -6,6 +6,11 @@
   they're present in frames read from Matroska files. Implements #2692.
 * MKVToolNix GUI: multiplexer: added an option in the preferences for
   disabling adding cover images from Blu-ray discs. Implements #2693.
+* mkvmerge: added an option for creating byte-identical files:
+  `--deterministic <seed>`. Part of the implementation of #2698.
+* MKVToolNix GUI: multiplexer: added mkvmerge's new `--deterministic` option
+  in the "additional command-line options" dialog. Part of the implementation
+  of #2698.
 
 ## Bug fixes
 

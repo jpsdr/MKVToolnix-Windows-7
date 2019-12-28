@@ -113,15 +113,16 @@ class SimpleTest
   end
 
   def test_merge file, *args
-    options                 = args.extract_options!
-    full_command_line       = [ options[:args], file ].flatten.join(' ')
-    options[:name]        ||= full_command_line
-    options[:result_type] ||= :hash
+    options                      = args.extract_options!
+    full_command_line            = [ options[:args], file ].flatten.join(' ')
+    options[:name]             ||= full_command_line
+    options[:result_type]      ||= :hash
+    options[:no_variable_data]   = true unless options.key?(:no_variable_data)
     @blocks[:tests] << {
       :name  => full_command_line,
       :block => lambda {
         output       = options[:output] || tmp
-        _, exit_code = *merge(full_command_line, :exit_code => options[:exit_code], :output => output)
+        _, exit_code = *merge(full_command_line, :exit_code => options[:exit_code], :output => output, :no_variable_data => options[:no_variable_data])
         result       = options[:exit_code]   == :error ? 'error'           \
                      : options[:result_type] == :hash  ? hash_file(output) \
                      :                                   exit_code_string(exit_code)
@@ -234,8 +235,11 @@ class SimpleTest
     options = args.extract_options!
     fail ArgumentError if args.empty?
 
+    options[:no_variable_data] = true unless options.key?(:no_variable_data)
+    no_variable_data           = options[:no_variable_data] ? "--engage no_variable_data" : ""
+
     output  = options[:output] || self.tmp
-    command = "../src/mkvmerge --engage no_variable_data -o #{output} #{args.first}"
+    command = "../src/mkvmerge #{no_variable_data} -o #{output} #{args.first}"
     self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
   end
 

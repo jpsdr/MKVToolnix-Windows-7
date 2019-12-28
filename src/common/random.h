@@ -17,7 +17,7 @@
 
 class random_c {
 public:
-  static void init();
+  static void init(boost::optional<uint64_t> seed = boost::none);
 
   static void generate_bytes(void *destination, size_t num_bytes);
   static uint8_t generate_8bits();

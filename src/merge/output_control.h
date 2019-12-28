@@ -178,6 +178,8 @@ extern bool g_splitting_by_all_chapters;
 
 extern append_mode_e g_append_mode;
 
+extern bool g_deterministic;
+
 extern std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
 
 void create_packetizers();
