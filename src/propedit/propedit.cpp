@@ -26,6 +26,7 @@
 using namespace libmatroska;
 
 std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
+std::unordered_map<uint64_t, uint64_t> g_track_uid_changes;
 
 static void
 display_update_element_result(const EbmlCallbacks &callbacks,
@@ -173,6 +174,11 @@ run(options_cptr &options) {
     mxinfo(Y("The changes are written to the file.\n"));
 
     write_changes(options, analyzer.get());
+
+    auto result = analyzer->update_uid_referrals(g_track_uid_changes);
+    if (kax_analyzer_c::uer_success != result)
+      display_update_element_result(KaxTracks::ClassInfos, result);
+
     update_ebml_head(analyzer->get_file());
 
     mxinfo(Y("Done.\n"));

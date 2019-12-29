@@ -131,6 +131,8 @@ public:
 
   virtual update_element_result_e remove_elements(libebml::EbmlId const &id);
 
+  virtual update_element_result_e update_uid_referrals(std::unordered_map<uint64_t, uint64_t> const &track_uid_changes);
+
   virtual ebml_master_cptr read_all(const libebml::EbmlCallbacks &callbacks);
   virtual ebml_element_cptr read_element(kax_analyzer_data_c const &element_data);
   virtual ebml_element_cptr read_element(kax_analyzer_data_cptr const &element_data);

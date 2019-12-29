@@ -74,4 +74,6 @@ protected:
   void validate_deletion_of_mandatory();
 
   const EbmlSemantic *get_semantic();
+
+  void record_track_uid_changes(std::size_t idx);
 };

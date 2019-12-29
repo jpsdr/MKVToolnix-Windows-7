@@ -47,6 +47,24 @@ using namespace libmatroska;
 
 #define CONSOLE_PERCENTAGE_WIDTH 25
 
+namespace {
+
+template<typename Tmaster,
+         typename Telement>
+kax_analyzer_c::update_element_result_e
+update_uid_referrals(kax_analyzer_c &analyzer,
+                     std::unordered_map<uint64_t, uint64_t> const &changes) {
+  auto master = analyzer.read_all(Tmaster::ClassInfos);
+  if (!master)
+    return kax_analyzer_c::uer_success;
+
+  auto modified = change_values<Telement>(static_cast<EbmlMaster &>(*master), changes);
+
+  return modified ? analyzer.update_element(master) : kax_analyzer_c::uer_success;
+}
+
+}
+
 bool
 operator <(const kax_analyzer_data_cptr &d1,
            const kax_analyzer_data_cptr &d2) {
@@ -487,6 +505,26 @@ kax_analyzer_c::remove_elements(EbmlId const &id) {
     debug_dump_elements_maybe("update_element_exception");
     return result;
   }
+
+  return uer_success;
+}
+
+kax_analyzer_c::update_element_result_e
+kax_analyzer_c::update_uid_referrals(std::unordered_map<uint64_t, uint64_t> const &track_uid_changes) {
+  mxdebug_if(m_debug, fmt::format("kax_analyzer: update_track_uid_referrals: number of changes: {0}\n", track_uid_changes.size()));
+
+  if (track_uid_changes.empty())
+    return uer_success;
+
+  mxdebug_if(m_debug, fmt::format("kax_analyzer: update_track_uid_referrals: number of changes: {0}\n", track_uid_changes.size()));
+
+  auto result = ::update_uid_referrals<KaxChapters, KaxChapterTrackNumber>(*this, track_uid_changes);
+  if (result != uer_success)
+    return result;
+
+  result = ::update_uid_referrals<KaxTags, KaxTagTrackUID>(*this, track_uid_changes);
+  if (result != uer_success)
+    return result;
 
   return uer_success;
 }

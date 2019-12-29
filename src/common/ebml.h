@@ -444,4 +444,34 @@ clone(std::unique_ptr<T> const &e) {
   return clone(*e);
 }
 
+template<typename Telement,
+         typename Tvalue = decltype(Telement().GetValue())>
+bool
+change_values(EbmlMaster &master,
+              std::unordered_map<Tvalue, Tvalue> const &changes) {
+  auto modified = false;
+
+  for (auto const &child : master) {
+    if (dynamic_cast<EbmlMaster *>(child)) {
+      if (change_values<Telement>(static_cast<EbmlMaster &>(*child), changes))
+        modified = true;
+
+    } else if (dynamic_cast<Telement *>(child)) {
+      auto &child_elt    = static_cast<Telement &>(*child);
+      auto current_value = child_elt.GetValue();
+
+      for (auto const &change : changes) {
+        if (current_value != change.first)
+          continue;
+
+        child_elt.SetValue(change.second);
+        modified = true;
+        break;
+      }
+    }
+  }
+
+  return modified;
+}
+
 bool found_in(libebml::EbmlElement &haystack, libebml::EbmlElement const *needle);

@@ -11,6 +11,9 @@
 * MKVToolNix GUI: multiplexer: added mkvmerge's new `--deterministic` option
   in the "additional command-line options" dialog. Part of the implementation
   of #2698.
+* mkvpropedit: when changing track UIDs the referring elements in existing
+  chapters & tags will be updated automatically, too. Part of the
+  implementation of #2700.
 
 ## Bug fixes
 

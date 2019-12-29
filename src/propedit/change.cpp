@@ -257,6 +257,16 @@ change_c::execute_delete() {
 }
 
 void
+change_c::record_track_uid_changes(std::size_t idx) {
+  if (m_property.m_callbacks->GlobalId != EBML_ID(libmatroska::KaxTrackUID))
+    return;
+
+  auto current_uid = static_cast<EbmlUInteger *>((*m_master)[idx])->GetValue();
+  if (current_uid != m_ui_value)
+    g_track_uid_changes[current_uid] = m_ui_value;
+}
+
+void
 change_c::execute_add_or_set() {
   size_t idx;
   unsigned int num_found = 0;
@@ -264,8 +274,10 @@ change_c::execute_add_or_set() {
     if (m_property.m_callbacks->GlobalId != (*m_master)[idx]->Generic().GlobalId)
       continue;
 
-    if (change_c::ct_set == m_type)
+    if (change_c::ct_set == m_type) {
+      record_track_uid_changes(idx);
       set_element_at(idx);
+    }
 
     ++num_found;
   }
