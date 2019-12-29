@@ -14,6 +14,9 @@
 * mkvpropedit: when changing track UIDs the referring elements in existing
   chapters & tags will be updated automatically, too. Part of the
   implementation of #2700.
+* MKVToolNix GUI: header editor:: when changing track UIDs the referring
+  elements in existing chapters & tags will be updated automatically,
+  too. Part of the implementation of #2700.
 
 ## Bug fixes
 

@@ -1,7 +1,9 @@
 #include "common/common_pch.h"
 
+#include <QCheckBox>
 #include <QDir>
 #include <QFileInfo>
+#include <QLineEdit>
 #include <QMenu>
 #include <QMessageBox>
 
@@ -202,6 +204,8 @@ Tab::save() {
     return;
   }
 
+  auto trackUIDChanges = determineTrackUIDChanges();
+
   doModifications();
 
   bool ok = true;
@@ -237,6 +241,15 @@ Tab::save() {
                   :                           m_analyzer->remove_elements(KaxAttachments::ClassInfos.GlobalId);
 
       attachments->RemoveAll();
+
+      if (kax_analyzer_c::uer_success != result) {
+        QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
+        ok = false;
+      }
+    }
+
+    if (ok && !trackUIDChanges.empty()) {
+      auto result = m_analyzer->update_uid_referrals(trackUIDChanges);
 
       if (kax_analyzer_c::uer_success != result) {
         QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
@@ -426,6 +439,31 @@ Tab::pruneEmptyMastersForAllTracks() {
   for (auto const &page : m_model->topLevelPages())
     if (dynamic_cast<TrackTypePage *>(page))
       pruneEmptyMastersForTrack(static_cast<TrackTypePage &>(*page));
+}
+
+std::unordered_map<uint64_t, uint64_t>
+Tab::determineTrackUIDChanges() {
+  std::unordered_map<uint64_t, uint64_t> changes;
+
+  for (auto const &topLevelPage : m_model->topLevelPages()) {
+    for (auto const &childPage : topLevelPage->m_children) {
+      auto uiValuePage = dynamic_cast<UnsignedIntegerValuePage *>(childPage);
+      if (!uiValuePage)
+        continue;
+
+      if (uiValuePage->m_callbacks.GlobalId != KaxTrackUID::ClassInfos.GlobalId)
+        continue;
+
+      if (uiValuePage->m_cbAddOrRemove->isChecked())
+        continue;
+
+      auto currentValue = uiValuePage->m_leValue->text().toULongLong();
+      if (uiValuePage->m_originalValue != currentValue)
+        changes[uiValuePage->m_originalValue] = currentValue;
+    }
+  }
+
+  return changes;
 }
 
 void

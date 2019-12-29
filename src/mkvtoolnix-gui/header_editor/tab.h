@@ -95,6 +95,7 @@ protected:
   void resetData();
   void doModifications();
   void reportValidationFailure(bool isCritical, QModelIndex const &pageIdx);
+  std::unordered_map<uint64_t, uint64_t> determineTrackUIDChanges();
 
   ValuePage *createValuePage(TopLevelPage &parentPage, EbmlMaster &parentMaster, property_element_c const &element);
   PageBase *currentlySelectedPage() const;
