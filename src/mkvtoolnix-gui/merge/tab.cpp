@@ -425,7 +425,7 @@ Tab::checkIfMissingAudioTrackIsOK() {
 
 void
 Tab::addToJobQueue(bool startNow,
-                   boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings) {
+                   std::optional<Util::Settings::ClearMergeSettingsAction> clearSettings) {
   updateConfigFromControlValues();
   setOutputFileNameMaybe();
 

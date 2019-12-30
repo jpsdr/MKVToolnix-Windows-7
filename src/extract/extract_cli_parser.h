@@ -68,6 +68,6 @@ protected:
   void handle_unknown_arg_multiple_mode();
 
 protected:
-  static boost::optional<options_c::extraction_mode_e> extraction_mode_from_string(std::string const &mode_string);
-  static std::string extraction_mode_to_string(boost::optional<options_c::extraction_mode_e> mode);
+  static std::optional<options_c::extraction_mode_e> extraction_mode_from_string(std::string const &mode_string);
+  static std::string extraction_mode_to_string(std::optional<options_c::extraction_mode_e> mode);
 };

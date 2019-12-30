@@ -608,7 +608,7 @@ header_t::decode_xll_header(mtx::bits::reader_c &bc,
     if (!has_core)
       core_sampling_frequency = substream_assets[0].max_sample_rate;
     else
-      extension_sampling_frequency.reset(substream_assets[0].max_sample_rate);
+      extension_sampling_frequency = substream_assets[0].max_sample_rate;
   }
 
   return true;

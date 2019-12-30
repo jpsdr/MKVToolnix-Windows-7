@@ -76,17 +76,17 @@ propedit_cli_parser_c::add_chapters() {
 
 void
 propedit_cli_parser_c::set_attachment_name() {
-  m_attachment.m_name.reset(m_next_arg);
+  m_attachment.m_name = m_next_arg;
 }
 
 void
 propedit_cli_parser_c::set_attachment_description() {
-  m_attachment.m_description.reset(m_next_arg);
+  m_attachment.m_description = m_next_arg;
 }
 
 void
 propedit_cli_parser_c::set_attachment_mime_type() {
-  m_attachment.m_mime_type.reset(m_next_arg);
+  m_attachment.m_mime_type = m_next_arg;
 }
 
 void
@@ -95,7 +95,7 @@ propedit_cli_parser_c::set_attachment_uid() {
   if (!parse_number(m_next_arg, uid))
     mxerror(fmt::format(Y("The value '{0}' is not a number.\n"), m_next_arg));
 
-  m_attachment.m_uid.reset(uid);
+  m_attachment.m_uid = uid;
 }
 
 void

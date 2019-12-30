@@ -47,7 +47,7 @@ logFontToQFont(LOGFONTW const &logFont) {
 
 QFont
 defaultUiFont() {
-  static boost::optional<QFont> s_font;
+  static std::optional<QFont> s_font;
   if (s_font)
     return *s_font;
 

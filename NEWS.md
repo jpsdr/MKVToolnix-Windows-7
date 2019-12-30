@@ -34,6 +34,10 @@
   size of a field which in turn could have led to the slice's type being read
   wrong. Patch by Torsten Hauska. Fixes #2710.
 
+## Build system changes
+
+* `std::optional` (C++17 feature) is now used instead of `boost::optional`.
+
 
 # Version 41.0.0 "Smarra" 2019-12-06
 

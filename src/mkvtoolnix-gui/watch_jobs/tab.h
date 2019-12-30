@@ -39,7 +39,7 @@ public:
 
   virtual uint64_t queueProgress() const;
 
-  boost::optional<uint64_t> id() const;
+  std::optional<uint64_t> id() const;
 
   bool isSaveOutputEnabled() const;
   bool isCurrentJobTab() const;

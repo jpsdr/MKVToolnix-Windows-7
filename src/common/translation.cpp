@@ -259,7 +259,7 @@ translatable_string_c::get_untranslated()
 
 translatable_string_c &
 translatable_string_c::override(std::string const &by) {
-  m_overridden_by.reset(by);
+  m_overridden_by = by;
   return *this;
 }
 

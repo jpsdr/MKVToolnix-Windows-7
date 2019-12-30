@@ -116,7 +116,7 @@ MessageBox::critical(QWidget *parent) {
 }
 
 QMessageBox::StandardButton
-MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
+MessageBox::exec(std::optional<QMessageBox::StandardButton> pDefaultButton) {
   auto p = p_func();
 
   if (pDefaultButton)

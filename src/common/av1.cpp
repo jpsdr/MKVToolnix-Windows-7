@@ -35,7 +35,7 @@ class parser_private_c {
   unsigned int obu_type{};
   bool obu_extension_flag{}, obu_has_size_field{}, seen_frame_header{}, frame_id_numbers_present_flag{}, equal_picture_interval{}, high_bitdepth{}, twelve_bit{}, mono_chrome{}, seq_tier_0{};
   bool chroma_subsampling_x{}, chroma_subsampling_y{}, current_frame_contains_sequence_header{};
-  boost::optional<unsigned int> temporal_id, spatial_id;
+  std::optional<unsigned int> temporal_id, spatial_id;
   unsigned int operating_point_idc{}, seq_profile{}, seq_level_idx_0{}, max_frame_width{}, max_frame_height{}, buffer_delay_length{1}, chroma_sample_position{};
   unsigned int color_primaries{}, transfer_characteristics{}, matrix_coefficients{};
 
@@ -124,19 +124,19 @@ parser_c::read_uvlc(mtx::bits::reader_c &r) {
   return value + (1llu << leading_zeros) - 1;
 }
 
-boost::optional<uint64_t>
+std::optional<uint64_t>
 parser_c::parse_obu_common_data(memory_c const &buffer) {
   return parse_obu_common_data(buffer.get_buffer(), buffer.get_size());
 }
 
-boost::optional<uint64_t>
+std::optional<uint64_t>
 parser_c::parse_obu_common_data(unsigned char const *buffer,
                                 uint64_t buffer_size) {
   p->r.init(buffer, buffer_size);
   return parse_obu_common_data();
 }
 
-boost::optional<uint64_t>
+std::optional<uint64_t>
 parser_c::parse_obu_common_data() {
   auto &r = p->r;
 
@@ -156,8 +156,8 @@ parser_c::parse_obu_common_data() {
     r.skip_bits(3);             // extension_header_reserved_3bits
 
   } else {
-    p->temporal_id = boost::none;
-    p->spatial_id  = boost::none;
+    p->temporal_id = std::nullopt;
+    p->spatial_id  = std::nullopt;
   }
 
   if (p->obu_has_size_field)

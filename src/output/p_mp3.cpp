@@ -197,7 +197,7 @@ mp3_packetizer_c::flush_packets() {
     auto packet        = std::make_shared<packet_t>(mp3_packet, new_timestamp.to_ns(), m_packet_duration);
 
     packet->add_extensions(m_packet_extensions);
-    packet->discard_padding = m_discard_padding.get_next().get_value_or({});
+    packet->discard_padding = m_discard_padding.get_next().value_or(timestamp_c{});
 
     add_packet(packet);
 

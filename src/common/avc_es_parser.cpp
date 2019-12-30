@@ -343,10 +343,10 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     }
 
     if (!si.field_pic_flag)
-      m_current_key_frame_bottom_field = boost::none;
+      m_current_key_frame_bottom_field = std::nullopt;
 
     else if (m_current_key_frame_bottom_field && (*m_current_key_frame_bottom_field != si.bottom_field_flag))
-      m_current_key_frame_bottom_field = boost::none;
+      m_current_key_frame_bottom_field = std::nullopt;
 
     else
       m_current_key_frame_bottom_field = si.bottom_field_flag;

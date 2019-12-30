@@ -41,7 +41,7 @@ static TopLevelDomainCountryCodeList s_topLevelDomainCountryCodes, s_commonTopLe
 static CharacterSetList s_characterSets, s_commonCharacterSets;
 static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_topLevelDomainCountryCodeToDescription;
 
-static boost::optional<bool> s_is_installed;
+static std::optional<bool> s_is_installed;
 
 class AppPrivate {
   friend class App;
@@ -350,8 +350,8 @@ App::descriptionFromTopLevelDomainCountryCode(QString const &code) {
 bool
 App::isInstalled() {
   if (!s_is_installed)
-    s_is_installed.reset(mtx::sys::is_installed());
-  return *s_is_installed;
+    s_is_installed = mtx::sys::is_installed();
+  return s_is_installed.value();
 }
 
 void

@@ -23,30 +23,30 @@ using attachment_id_manager_cptr = std::shared_ptr<attachment_id_manager_c>;
 class attachment_target_c: public target_c {
 public:
   struct options_t {
-    boost::optional<std::string> m_name, m_description, m_mime_type;
-    boost::optional<uint64_t> m_uid;
+    std::optional<std::string> m_name, m_description, m_mime_type;
+    std::optional<uint64_t> m_uid;
 
     options_t &
     name(std::string const &p_name) {
-      m_name.reset(p_name);
+      m_name = p_name;
       return *this;
     }
 
     options_t &
     description(std::string const &p_description) {
-      m_description.reset(p_description);
+      m_description = p_description;
       return *this;
     }
 
     options_t &
     mime_type(std::string const &p_mime_type) {
-      m_mime_type.reset(p_mime_type);
+      m_mime_type = p_mime_type;
       return *this;
     }
 
     options_t &
     uid(uint64_t p_uid) {
-      m_uid.reset(p_uid);
+      m_uid = p_uid;
       return *this;
     }
   };
@@ -122,7 +122,7 @@ operator ==(attachment_target_c::options_t const &a,
 inline std::ostream &
 operator <<(std::ostream &out,
             attachment_target_c::options_t const &opt) {
-  auto format = [](std::string const &name, boost::optional<std::string> const &value) -> std::string {
+  auto format = [](std::string const &name, std::optional<std::string> const &value) -> std::string {
     return value ? name + ":yes(" + *value + ")" : name + ":no";
   };
 

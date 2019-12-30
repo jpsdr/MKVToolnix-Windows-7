@@ -189,7 +189,7 @@ static std::unique_ptr<EbmlHead> s_head;
 static std::string s_muxing_app, s_writing_app;
 static boost::posix_time::ptime s_writing_date;
 
-static boost::optional<int64_t> s_maximum_progress;
+static std::optional<int64_t> s_maximum_progress;
 int64_t s_current_progress{};
 
 std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;

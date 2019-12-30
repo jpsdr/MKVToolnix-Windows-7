@@ -72,7 +72,7 @@ public:
   }
 
   bool add_frame_auto(const libmatroska::KaxTrackEntry &track, uint64 timestamp, libmatroska::DataBuffer &buffer, libmatroska::LacingType lacing,
-                      int64_t past_block, int64_t forw_block, boost::optional<bool> key_flag, boost::optional<bool> discardable_flag);
+                      int64_t past_block, int64_t forw_block, std::optional<bool> key_flag, std::optional<bool> discardable_flag);
   void set_block_duration(uint64_t time_length);
   bool replace_simple_by_group();
 };

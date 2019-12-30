@@ -16,24 +16,24 @@
 template<typename T>
 class stream_property_preserver_c {
 private:
-  std::deque<std::pair<T, boost::optional<uint64_t>>> m_available_properties;
+  std::deque<std::pair<T, std::optional<uint64_t>>> m_available_properties;
 
 public:
   void
   add(T const &property,
-      boost::optional<uint64_t> position = boost::none) {
+      std::optional<uint64_t> position = std::nullopt) {
     m_available_properties.emplace_back(property, position);
   }
 
   void
   add_maybe(T const &property,
-            boost::optional<uint64_t> position = boost::none) {
+            std::optional<uint64_t> position = std::nullopt) {
     if (property != T{})
       add(property, position);
   }
 
-  boost::optional<T>
-  get_next(boost::optional<uint64_t> position = boost::none) {
+  std::optional<T>
+  get_next(std::optional<uint64_t> position = std::nullopt) {
     while (   !m_available_properties.empty()
            && position
            && m_available_properties.front().second

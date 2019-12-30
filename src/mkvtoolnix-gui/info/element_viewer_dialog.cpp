@@ -33,7 +33,7 @@ public:
   std::unique_ptr<Ui::ElementViewerDialog> m_ui;
   memory_cptr m_mem;
   bool m_isElement{};
-  boost::optional<uint64_t> m_signaledSize;
+  std::optional<uint64_t> m_signaledSize;
   uint64_t m_effectiveSize{};
   uint32_t m_elementId{};
 
@@ -282,7 +282,7 @@ ElementViewerDialog::setPosition(uint64_t position) {
 }
 
 ElementViewerDialog &
-ElementViewerDialog::setSize(boost::optional<uint64_t> signaledSize,
+ElementViewerDialog::setSize(std::optional<uint64_t> signaledSize,
                              uint64_t effectiveSize) {
   auto p             = p_func();
   p->m_effectiveSize = effectiveSize;

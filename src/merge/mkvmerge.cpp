@@ -583,7 +583,7 @@ static void
 parse_arg_sync(std::string s,
                std::string const &opt,
                track_info_c &ti,
-               boost::optional<int64_t> force_track_id) {
+               std::optional<int64_t> force_track_id) {
   timestamp_sync_t tcsync;
 
   // Extract the track number.
@@ -2137,7 +2137,7 @@ parse_arg_identification_format(std::vector<std::string>::const_iterator &sit,
 }
 
 static void
-parse_arg_probe_range(boost::optional<std::string> next_arg) {
+parse_arg_probe_range(std::optional<std::string> next_arg) {
   if (!next_arg)
     mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), "--probe-range-percentage"));
 
@@ -2153,16 +2153,16 @@ parse_arg_probe_range(boost::optional<std::string> next_arg) {
 
 static void
 handle_identification_args(std::vector<std::string> &args) {
-  auto identification_command = boost::optional<std::string>{};
-  auto file_to_identify       = boost::optional<std::string>{};
+  auto identification_command = std::optional<std::string>{};
+  auto file_to_identify       = std::optional<std::string>{};
   auto this_arg_itr           = args.begin();
 
   while (this_arg_itr != args.end()) {
     auto next_arg_itr = this_arg_itr + 1;
 
-    boost::optional<std::string> next_arg;
+    std::optional<std::string> next_arg;
     if (next_arg_itr != args.end())
-      next_arg.reset(*next_arg_itr);
+      next_arg = *next_arg_itr;
 
     if (*this_arg_itr == "--probe-range-percentage") {
       parse_arg_probe_range(next_arg);
@@ -2768,7 +2768,7 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the delay.\n"), this_arg));
 
-      parse_arg_sync(next_arg, this_arg, *ti, boost::none);
+      parse_arg_sync(next_arg, this_arg, *ti, std::nullopt);
       sit++;
 
     } else if (this_arg == "--cues") {
@@ -3068,7 +3068,7 @@ create_append_mappings_for_playlists() {
 
 static void
 check_for_unused_chapter_numbers_while_spliting_by_chapters() {
-  boost::optional<unsigned int> smallest_unused_chapter_number;
+  std::optional<unsigned int> smallest_unused_chapter_number;
 
   for (auto &item : g_splitting_by_chapter_numbers)
     if (   (item.second == 1)

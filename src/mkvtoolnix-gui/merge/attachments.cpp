@@ -492,7 +492,7 @@ Tab::attachedFileItemChanged(QStandardItem *item) {
   m_attachedFilesModel->attachedFileUpdated(*attachedFile);
 }
 
-boost::optional<QString>
+std::optional<QString>
 Tab::findExistingAttachmentFileName(QString const &fileName) {
   auto lowerFileName = fileName.toLower();
 

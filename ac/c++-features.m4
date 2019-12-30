@@ -456,7 +456,34 @@ AC_DEFUN([AX_CXX17_NESTED_NAMESPACE_DEFINITION],[
   fi
 ])
 
-dnl AC_DEFUN([AX_CXX17_DEF_NAME],[
+AC_DEFUN([AX_CXX17_STD_OPTIONAL],[
+  AC_CACHE_CHECK([for support for C++17 feature "std::optional"], [ax_cv_cxx17_std_optional],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [#include <optional>],
+      [
+  std::optional<int> moo;
+  moo = 42;
+  return moo.value_or(54);
+],
+      [ax_cv_cxx17_std_optional="yes"],
+      [ax_cv_cxx17_std_optional="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx17_std_optional" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * std::optional (C++17)"
+  fi
+])
+
+AC_DEFUN([AX_CXX17_DEF_NAME],[
 dnl   AC_CACHE_CHECK([for support for C++17 feature "human"], [ax_cv_cxx17_def_name],[
 dnl
 dnl     CXXFLAGS_SAVED=$CXXFLAGS
@@ -496,10 +523,11 @@ AX_CXX14_USER_DEFINED_LITERALS_FOR_STD_STRING
 AX_CXX17_ATTRIBUTE_MAYBE_UNUSED
 AX_CXX17_NESTED_NAMESPACE_DEFINITION
 AX_CXX17_STRUCTURED_BINDINGS
+AX_CXX17_STD_OPTIONAL
 
 if test x"$missing_cxx_features" != x ; then
-  printf "The following features of the C++11/C++14 standards are not supported by $CXX:$missing_cxx_features\n"
+  printf "The following features of the C++11/C++14/C++17 standards are not supported by $CXX:$missing_cxx_features\n"
   printf "If you are using the GNU C compiler collection (gcc), you need\n"
-  printf "at least v5.x; for clang the 3.4 and newer should work.\n"
-  AC_MSG_ERROR([support for required C++11/C++14 features incomplete])
+  printf "at least v7; for clang v4 and newer should work.\n"
+  AC_MSG_ERROR([support for required C++11/C++14/C++17 features incomplete])
 fi

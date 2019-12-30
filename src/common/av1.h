@@ -119,9 +119,9 @@ protected:
   static uint64_t read_leb128(mtx::bits::reader_c &r);
   static uint64_t read_uvlc(mtx::bits::reader_c &r);
 
-  boost::optional<uint64_t> parse_obu_common_data(unsigned char const *buffer, uint64_t buffer_size);
-  boost::optional<uint64_t> parse_obu_common_data(memory_c const &buffer);
-  boost::optional<uint64_t> parse_obu_common_data();
+  std::optional<uint64_t> parse_obu_common_data(unsigned char const *buffer, uint64_t buffer_size);
+  std::optional<uint64_t> parse_obu_common_data(memory_c const &buffer);
+  std::optional<uint64_t> parse_obu_common_data();
   void parse_sequence_header_obu(mtx::bits::reader_c &r);
   void parse_color_config(mtx::bits::reader_c &r);
   void parse_timing_info(mtx::bits::reader_c &r);

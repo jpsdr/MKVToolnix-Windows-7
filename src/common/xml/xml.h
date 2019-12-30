@@ -154,6 +154,6 @@ std::string create_node_name(const char *name, const char **atts);
 
 using document_cptr = std::shared_ptr<pugi::xml_document>;
 
-document_cptr load_file(std::string const &file_name, unsigned int options = pugi::parse_default, boost::optional<int64_t> max_read_size = boost::optional<int64_t>{});
+document_cptr load_file(std::string const &file_name, unsigned int options = pugi::parse_default, std::optional<int64_t> max_read_size = std::optional<int64_t>{});
 
 }}

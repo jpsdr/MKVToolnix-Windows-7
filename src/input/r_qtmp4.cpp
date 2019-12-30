@@ -345,10 +345,10 @@ qtmp4_reader_c::verify_track_parameters_and_update_indexes() {
   }
 }
 
-boost::optional<int64_t>
+std::optional<int64_t>
 qtmp4_reader_c::calculate_global_min_timestamp()
   const {
-  boost::optional<int64_t> global_min_timestamp;
+  std::optional<int64_t> global_min_timestamp;
 
   for (auto const &dmx : m_demuxers) {
     if (!demuxing_requested(dmx->type, dmx->id, dmx->language)) {
@@ -357,7 +357,7 @@ qtmp4_reader_c::calculate_global_min_timestamp()
 
     auto dmx_min_timestamp = dmx->min_timestamp();
     if (dmx_min_timestamp && (!global_min_timestamp || (dmx_min_timestamp < *global_min_timestamp))) {
-      global_min_timestamp.reset(*dmx_min_timestamp);
+      global_min_timestamp = *dmx_min_timestamp;
     }
 
     mxdebug_if(m_debug_headers, fmt::format("Minimum timestamp of track {0}: {1}\n", dmx->id, dmx_min_timestamp ? format_timestamp(*dmx_min_timestamp) : "none"));
@@ -2123,7 +2123,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
 
   if (frame_rate) {
     if ('v' == type)
-      m_use_frame_rate_for_duration.reset(boost::rational_cast<int64_t>(int64_rational_c{1'000'000'000ll} / frame_rate));
+      m_use_frame_rate_for_duration = boost::rational_cast<int64_t>(int64_rational_c{1'000'000'000ll} / frame_rate);
 
     mxdebug_if(m_debug_frame_rate,
                fmt::format("calculate_frame_rate: case 3: duration {0} num_frames {1} frame_duration {2} frame_rate {3}/{4} use_frame_rate_for_duration {5}\n",
@@ -2152,7 +2152,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
 
 int64_t
 qtmp4_demuxer_c::to_nsecs(int64_t value,
-                          boost::optional<int64_t> time_scale_to_use) {
+                          std::optional<int64_t> time_scale_to_use) {
   auto actual_time_scale = time_scale_to_use ? *time_scale_to_use : time_scale;
   if (!actual_time_scale)
     return 0;
@@ -2257,7 +2257,7 @@ qtmp4_demuxer_c::adjust_timestamps(int64_t delta) {
     index.timestamp += delta;
 }
 
-boost::optional<int64_t>
+std::optional<int64_t>
 qtmp4_demuxer_c::min_timestamp()
   const {
   if (m_index.empty()) {

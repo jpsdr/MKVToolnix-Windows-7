@@ -35,7 +35,7 @@ struct disc_library_t {
   void dump() const;
 };
 
-boost::optional<disc_library_t> locate_and_parse(bfs::path const &location);
-boost::optional<info_t> locate_and_parse_for_language(bfs::path const &location, std::string const &language);
+std::optional<disc_library_t> locate_and_parse(bfs::path const &location);
+std::optional<info_t> locate_and_parse_for_language(bfs::path const &location, std::string const &language);
 
 } // namespace mtx::bluray::disc_library

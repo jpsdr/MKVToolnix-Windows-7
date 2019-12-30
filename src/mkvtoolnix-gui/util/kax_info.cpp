@@ -36,7 +36,7 @@ namespace mtx::gui::Util {
 class KaxInfoPrivate: public mtx::kax_info::private_c {
 public:
   KaxInfo::ScanType m_scanType{KaxInfo::ScanType::StartOfFile};
-  boost::optional<uint64_t> m_firstLevel1ElementPosition;
+  std::optional<uint64_t> m_firstLevel1ElementPosition;
   QMutex m_mutex;
 
   explicit KaxInfoPrivate()
@@ -67,9 +67,9 @@ KaxInfo::ui_show_error(std::string const &error) {
 void
 KaxInfo::ui_show_element_info(int level,
                               std::string const &text,
-                              boost::optional<int64_t> position,
-                              boost::optional<int64_t> size,
-                              boost::optional<int64_t> dataSize) {
+                              std::optional<int64_t> position,
+                              std::optional<int64_t> size,
+                              std::optional<int64_t> dataSize) {
   if (p_func()->m_use_gui)
     emit elementInfoFound(level, Q(text), position, size, dataSize);
 

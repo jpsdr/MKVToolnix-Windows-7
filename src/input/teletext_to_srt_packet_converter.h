@@ -42,7 +42,7 @@ protected:
 
     timestamp_c m_queued_timestamp, m_page_timestamp;
     packet_cptr m_queued_packet;
-    boost::optional<int> m_forced_char_map_idx;
+    std::optional<int> m_forced_char_map_idx;
     bool m_page_changed{};
     generic_packetizer_c *m_ptzr{};
     int m_magazine;

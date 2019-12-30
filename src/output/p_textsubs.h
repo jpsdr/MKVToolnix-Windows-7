@@ -21,7 +21,7 @@
 class textsubs_packetizer_c: public generic_packetizer_c {
 protected:
   unsigned int m_packetno{};
-  boost::optional<unsigned int> m_force_rerender_track_headers_on_packetno;
+  std::optional<unsigned int> m_force_rerender_track_headers_on_packetno;
   charset_converter_cptr m_cc_utf8;
   bool m_try_utf8{}, m_invalid_utf8_warned{}, m_converter_is_utf8{};
   std::string m_codec_id;

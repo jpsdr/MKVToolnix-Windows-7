@@ -11,7 +11,7 @@ namespace mtx::gui::Util {
 
 class WindowsSleepInhibitorPrivate: public BasicSleepInhibitorPrivate {
 public:
-  boost::optional<EXECUTION_STATE> m_previousState;
+  std::optional<EXECUTION_STATE> m_previousState;
 };
 
 WindowsSleepInhibitor::WindowsSleepInhibitor()

@@ -23,7 +23,7 @@ private:
   srt_parser_cptr m_subs;
   int64_t m_bytes_to_process{}, m_bytes_processed{};
   bool m_need_recoding{};
-  boost::optional<std::string> m_encoding;
+  std::optional<std::string> m_encoding;
 
 public:
   virtual mtx::file_type_e get_format_type() const {

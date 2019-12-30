@@ -291,11 +291,11 @@ flv_reader_c::read_headers() {
   }
 
   mxdebug_if(m_debug, fmt::format("Detection finished at {0}; audio valid? {1}; video valid? {2}; number valid tracks: {3}; min timestamp: {4}\n",
-                                  m_in->getFilePointer(), audio_track_valid, video_track_valid, m_tracks.size(), format_timestamp(m_min_timestamp.get_value_or(0) * 1'000'000ll)));
+                                  m_in->getFilePointer(), audio_track_valid, video_track_valid, m_tracks.size(), format_timestamp(m_min_timestamp.value_or(0) * 1'000'000ll)));
 
   m_in->setFilePointer(9); // rewind file for later remux
   m_file_done     = false;
-  m_min_timestamp = m_min_timestamp.get_value_or(0);
+  m_min_timestamp = m_min_timestamp.value_or(0);
 }
 
 void

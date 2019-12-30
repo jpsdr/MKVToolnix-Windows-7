@@ -267,7 +267,7 @@ kax_analyzer_c::set_throw_on_error(bool throw_on_error) {
 
 kax_analyzer_c &
 kax_analyzer_c::set_parser_start_position(uint64_t position) {
-  m_parser_start_position.reset(position);
+  m_parser_start_position = position;
   return *this;
 }
 
@@ -1058,7 +1058,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
 
   mxdebug_if(m_debug, fmt::format("ensure_front_seek_head_links_to start\n"));
 
-  boost::optional<unsigned int> first_seek_head_idx;
+  std::optional<unsigned int> first_seek_head_idx;
 
   for (int data_idx = 0, end = m_data.size(); end > data_idx; ++data_idx) {
     auto const &data = *m_data[data_idx];
@@ -1067,7 +1067,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
       if (static_cast<unsigned int>(data_idx) == seek_head_idx)
         return seek_head_idx;
 
-      first_seek_head_idx.reset(data_idx);
+      first_seek_head_idx = data_idx;
 
     } else if (Is<KaxCluster>(data.m_id))
       break;

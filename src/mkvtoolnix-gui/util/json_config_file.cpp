@@ -18,12 +18,12 @@ namespace {
 
 int
 jsonIndentation() {
-  static boost::optional<int> s_jsonIndentation;
+  static std::optional<int> s_jsonIndentation;
 
   if (!s_jsonIndentation)
-    s_jsonIndentation.reset( QString::fromUtf8(qgetenv("MTX_JSON_FORMAT")).toLower() == Q("indented") ? 2 : -1 );
+    s_jsonIndentation = QString::fromUtf8(qgetenv("MTX_JSON_FORMAT")).toLower() == Q("indented") ? 2 : -1;
 
-  return s_jsonIndentation.get();
+  return s_jsonIndentation.value();
 }
 
 nlohmann::json

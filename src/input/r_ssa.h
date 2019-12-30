@@ -21,7 +21,7 @@
 class ssa_reader_c: public generic_reader_c {
 private:
   ssa_parser_cptr m_subs;
-  boost::optional<std::string> m_encoding;
+  std::optional<std::string> m_encoding;
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 
 public:

@@ -35,7 +35,7 @@ namespace mtx::tags {
 
 void remove_track_uid_targets(libebml::EbmlMaster *tag);
 void remove_elements_unsupported_by_webm(libebml::EbmlMaster &master);
-bool remove_track_statistics(libmatroska::KaxTags *tags, boost::optional<uint64_t> track_uid);
+bool remove_track_statistics(libmatroska::KaxTags *tags, std::optional<uint64_t> track_uid);
 
 libmatroska::KaxTags *select_for_chapters(libmatroska::KaxTags &tags, libmatroska::KaxChapters &chapters);
 
@@ -112,7 +112,7 @@ find_tag_for(libmatroska::KaxTags &tags,
 template<typename T>
 bool
 remove_simple_tags_for(libmatroska::KaxTags &tags,
-                       boost::optional<uint64_t> id,
+                       std::optional<uint64_t> id,
                        std::string const &name_to_remove) {
   auto removed_something = false;
   auto tag_idx = 0u;
@@ -125,7 +125,7 @@ remove_simple_tags_for(libmatroska::KaxTags &tags,
 
     if (id) {
       auto targets   = FindChild<libmatroska::KaxTagTargets>(*tag);
-      auto actual_id = targets ? boost::optional<uint64_t>{ FindChildValue<T>(*targets, 0llu) } : boost::optional<uint64_t>{ boost::none };
+      auto actual_id = targets ? std::optional<uint64_t>{ FindChildValue<T>(*targets, 0llu) } : std::optional<uint64_t>{ std::nullopt };
 
       if (!targets || !actual_id || (*actual_id != *id)) {
         ++tag_idx;

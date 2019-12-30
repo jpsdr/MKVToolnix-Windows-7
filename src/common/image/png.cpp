@@ -27,7 +27,7 @@ constexpr uint32_t PCT_IHDR = 0x4948'4452;
 debugging_option_c s_debug{"png"};
 }
 
-boost::optional<std::pair<unsigned int, unsigned int>>
+std::optional<std::pair<unsigned int, unsigned int>>
 get_size(bfs::path const &file_name) {
   try {
     mm_file_io_c file{file_name.string(), MODE_READ};
@@ -38,7 +38,7 @@ get_size(bfs::path const &file_name) {
   return {};
 }
 
-boost::optional<std::pair<unsigned int, unsigned int>>
+std::optional<std::pair<unsigned int, unsigned int>>
 get_size(mm_io_c &file) {
   try {
     file.setFilePointer(8);

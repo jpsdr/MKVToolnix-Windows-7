@@ -1248,9 +1248,9 @@ Tab::addEditionOrChapterAfter() {
 ChapterPtr
 Tab::createEmptyChapter(int64_t startTime,
                         int chapterNumber,
-                        boost::optional<QString> const &nameTemplate,
-                        boost::optional<QString> const &language,
-                        boost::optional<QString> const &country) {
+                        std::optional<QString> const &nameTemplate,
+                        std::optional<QString> const &language,
+                        std::optional<QString> const &country) {
   auto &cfg    = Util::Settings::get();
   auto chapter = std::make_shared<KaxChapterAtom>();
   auto name    = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber, timestamp_c::ns(startTime));
@@ -1365,8 +1365,8 @@ Tab::shiftTimestamps(QStandardItem *item,
 
 void
 Tab::constrictTimestamps(QStandardItem *item,
-                         boost::optional<uint64_t> const &constrictStart,
-                         boost::optional<uint64_t> const &constrictEnd) {
+                         std::optional<uint64_t> const &constrictStart,
+                         std::optional<uint64_t> const &constrictEnd) {
   auto p = p_func();
 
   if (!item)
@@ -1384,7 +1384,7 @@ Tab::constrictTimestamps(QStandardItem *item,
   auto newStart = !constrictStart ? kStart->GetValue()
                 : !constrictEnd   ? std::max(*constrictStart, kStart->GetValue())
                 :                   std::min(*constrictEnd, std::max(*constrictStart, kStart->GetValue()));
-  auto newEnd   = !kEnd           ? boost::optional<uint64_t>{}
+  auto newEnd   = !kEnd           ? std::optional<uint64_t>{}
                 : !constrictEnd   ? std::max(newStart, kEnd->GetValue())
                 :                   std::max(newStart, std::min(*constrictEnd, kEnd->GetValue()));
 
@@ -1398,7 +1398,7 @@ Tab::constrictTimestamps(QStandardItem *item,
     constrictTimestamps(item->child(row), newStart, newEnd);
 }
 
-std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>>
+std::pair<std::optional<uint64_t>, std::optional<uint64_t>>
 Tab::expandTimestamps(QStandardItem *item) {
   auto p = p_func();
 
@@ -1412,10 +1412,10 @@ Tab::expandTimestamps(QStandardItem *item) {
     return {};
   }
 
-  auto kStart   = chapter ? FindChild<KaxChapterTimeStart>(*chapter)      : nullptr;
-  auto kEnd     = chapter ? FindChild<KaxChapterTimeEnd>(*chapter)        : nullptr;
-  auto newStart = kStart  ? boost::optional<uint64_t>{kStart->GetValue()} : boost::optional<uint64_t>{};
-  auto newEnd   = kEnd    ? boost::optional<uint64_t>{kEnd->GetValue()}   : boost::optional<uint64_t>{};
+  auto kStart   = chapter ? FindChild<KaxChapterTimeStart>(*chapter)    : nullptr;
+  auto kEnd     = chapter ? FindChild<KaxChapterTimeEnd>(*chapter)      : nullptr;
+  auto newStart = kStart  ? std::optional<uint64_t>{kStart->GetValue()} : std::optional<uint64_t>{};
+  auto newEnd   = kEnd    ? std::optional<uint64_t>{kEnd->GetValue()}   : std::optional<uint64_t>{};
   auto modified = false;
 
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row) {

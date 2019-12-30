@@ -335,7 +335,7 @@ remove_elements_unsupported_by_webm(EbmlMaster &master) {
 
 bool
 remove_track_statistics(KaxTags *tags,
-                        boost::optional<uint64_t> track_uid) {
+                        std::optional<uint64_t> track_uid) {
   if (!tags)
     return false;
 

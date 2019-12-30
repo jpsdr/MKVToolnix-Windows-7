@@ -27,7 +27,7 @@ struct track_t {
 
 struct track_info_t {
   int64_t m_size{}, m_blocks{}, m_blocks_by_ref_num[3]{0, 0, 0}, m_add_duration_for_n_packets{};
-  boost::optional<int64_t> m_min_timestamp, m_max_timestamp;
+  std::optional<int64_t> m_min_timestamp, m_max_timestamp;
 };
 
 class private_c {
@@ -50,7 +50,7 @@ public:
   std::vector<uint32_t> m_frame_adlers;
   std::vector<std::string> m_frame_hexdumps;
   int64_t m_num_references{}, m_lf_timestamp{}, m_lf_tnum{};
-  boost::optional<int64_t> m_block_duration;
+  std::optional<int64_t> m_block_duration;
 
   bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_track_info{}, m_hex_positions{}, m_retain_elements{};
   int m_hexdump_max_size{}, m_verbose{};

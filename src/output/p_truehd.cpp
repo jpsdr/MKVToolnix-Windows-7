@@ -56,7 +56,7 @@ truehd_packetizer_c::set_headers() {
 
 void
 truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
-                                    boost::optional<int64_t> provided_timestamp) {
+                                    std::optional<int64_t> provided_timestamp) {
   m_timestamp_calculator.add_timestamp(provided_timestamp);
 
   if (frame->is_ac3())
@@ -71,7 +71,7 @@ truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
   auto timestamp          = m_timestamp_calculator.get_next_timestamp(samples).to_ns();
   auto duration           = m_timestamp_calculator.get_duration(samples).to_ns();
   auto packet             = std::make_shared<packet_t>(frame->m_data, timestamp, duration, frame->is_sync() ? -1 : m_ref_timestamp);
-  packet->discard_padding = m_discard_padding.get_next().get_value_or({});
+  packet->discard_padding = m_discard_padding.get_next().value_or(timestamp_c{});
 
   if (frame->is_sync() && frame->is_truehd() && m_remove_dialog_normalization_gain)
     mtx::truehd::remove_dialog_normalization_gain(frame->m_data->get_buffer(), frame->m_data->get_size());

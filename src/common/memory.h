@@ -204,7 +204,7 @@ public:
     return clone(buffer.c_str(), buffer.length());
   }
 
-  static memory_c & splice(memory_c &buffer, std::size_t offset, std::size_t to_remove, boost::optional<memory_c const &> to_insert = boost::none);
+  static memory_c & splice(memory_c &buffer, std::size_t offset, std::size_t to_remove, std::optional<std::reference_wrapper<memory_c>> to_insert = std::nullopt);
 };
 
 inline bool

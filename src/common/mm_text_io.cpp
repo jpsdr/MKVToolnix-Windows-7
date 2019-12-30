@@ -129,7 +129,7 @@ mm_text_io_c::has_byte_order_marker(const std::string &string) {
   return detect_byte_order_marker(reinterpret_cast<const unsigned char *>(string.c_str()), string.length(), byte_order_mark, bom_length);
 }
 
-boost::optional<std::string>
+std::optional<std::string>
 mm_text_io_c::get_encoding(byte_order_mark_e byte_order_mark) {
   if (byte_order_mark_e::none == byte_order_mark)
     return {};
@@ -215,7 +215,7 @@ mm_text_io_c::read_next_codepoint() {
 }
 
 std::string
-mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
+mm_text_io_c::getline(std::optional<std::size_t> max_chars) {
   auto p = p_func();
 
   if (eof())
@@ -286,7 +286,7 @@ mm_text_io_c::set_byte_order_mark(byte_order_mark_e byte_order_mark) {
   p_func()->byte_order_mark = byte_order_mark;
 }
 
-boost::optional<std::string>
+std::optional<std::string>
 mm_text_io_c::get_encoding()
   const {
   return get_encoding(p_func()->byte_order_mark);

@@ -75,7 +75,7 @@ generic_reader_c::read_next(generic_packetizer_c *ptzr,
 bool
 generic_reader_c::demuxing_requested(char type,
                                      int64_t id,
-                                     boost::optional<std::string> const &language)
+                                     std::optional<std::string> const &language)
   const {
   auto const *tracks = 'v' == type ? &m_ti.m_vtracks
                      : 'a' == type ? &m_ti.m_atracks
@@ -258,7 +258,7 @@ generic_reader_c::id_result_attachment(int64_t attachment_id,
                                        int size,
                                        const std::string &file_name,
                                        const std::string &description,
-                                       boost::optional<uint64_t> id) {
+                                       std::optional<uint64_t> id) {
   id_result_t result(attachment_id, type, file_name, description, size);
   if (id)
     result.verbose_info.emplace_back("uid", *id);

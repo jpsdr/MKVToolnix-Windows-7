@@ -286,7 +286,7 @@ Tab::showElementHexDumpInViewer() {
     return;
 
   memory_cptr mem;
-  boost::optional<uint64_t> signaledElementSize;
+  std::optional<uint64_t> signaledElementSize;
   uint64_t effectiveElementSize{}, effectiveElementPosition{};
 
   {

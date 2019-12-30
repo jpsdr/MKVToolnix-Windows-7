@@ -70,7 +70,7 @@ extern translatable_string_c g_chapter_generation_name_template;
 bool probe_cue(mm_text_io_c *in);
 mtx::chapters::kax_cptr parse_cue(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, const std::string &language, const std::string &charset, std::unique_ptr<libmatroska::KaxTags> *tags = nullptr);
 
-std::size_t write_simple(libmatroska::KaxChapters &chapters, mm_io_c &out, boost::optional<std::string> const &language_to_extract);
+std::size_t write_simple(libmatroska::KaxChapters &chapters, mm_io_c &out, std::optional<std::string> const &language_to_extract);
 
 bool select_in_timeframe(libmatroska::KaxChapters *chapters, int64_t min_ts, int64_t max_ts, int64_t offset);
 

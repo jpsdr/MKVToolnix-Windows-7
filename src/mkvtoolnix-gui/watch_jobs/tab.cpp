@@ -36,7 +36,7 @@ class TabPrivate {
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
   QStringList m_fullOutput;
-  boost::optional<uint64_t> m_id;
+  std::optional<uint64_t> m_id;
   uint64_t m_currentJobProgress, m_queueProgress;
   QHash<Jobs::Job::LineType, bool> m_currentJobLineTypeSeen;
   Jobs::Job::Status m_currentJobStatus;
@@ -406,7 +406,7 @@ Tab::onSaveOutput() {
   cfg.save();
 }
 
-boost::optional<uint64_t>
+std::optional<uint64_t>
 Tab::id()
   const {
   return p_func()->m_id;

@@ -54,7 +54,7 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
 
   unsigned int packetno{};
   parse_number(tid_and_packetno[1], packetno);
-  m_force_rerender_track_headers_on_packetno.reset(packetno);
+  m_force_rerender_track_headers_on_packetno = packetno;
 
   mxdebug(fmt::format("textsubs_packetizer_c: track {0}: forcing rerendering of track headers after packet {1}\n", tid, packetno));
 }

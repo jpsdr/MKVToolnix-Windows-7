@@ -33,7 +33,7 @@ public:
   MessageBox &buttonLabel(QMessageBox::StandardButton button, QString const &label);
   MessageBox &onlyOnce(QString const &id);
 
-  QMessageBox::StandardButton exec(boost::optional<QMessageBox::StandardButton> pDefaultButton = boost::optional<QMessageBox::StandardButton>{});
+  QMessageBox::StandardButton exec(std::optional<QMessageBox::StandardButton> pDefaultButton = std::optional<QMessageBox::StandardButton>{});
 
 public:
   static MessageBoxPtr question(QWidget *parent);

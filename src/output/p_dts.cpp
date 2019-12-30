@@ -172,7 +172,7 @@ dts_packetizer_c::process_available_packets() {
     auto samples_in_packet  = header.get_packet_length_in_core_samples();
     auto new_timestamp      = m_timestamp_calculator.get_next_timestamp(samples_in_packet, packet_position);
     auto packet             = std::make_shared<packet_t>(data, new_timestamp.to_ns(), header.get_packet_length_in_nanoseconds().to_ns());
-    packet->discard_padding = m_discard_padding.get_next(packet_position).get_value_or({});
+    packet->discard_padding = m_discard_padding.get_next(packet_position).value_or(timestamp_c{});
 
     if (m_remove_dialog_normalization_gain)
       mtx::dts::remove_dialog_normalization_gain(data->get_buffer(), data->get_size());

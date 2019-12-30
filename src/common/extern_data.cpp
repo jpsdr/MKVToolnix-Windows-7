@@ -1987,7 +1987,7 @@ static std::map<std::string, std::string> const s_deprecated_cctlds{
   { "tp", "tl" },
 };
 
-boost::optional<std::string>
+std::optional<std::string>
 map_to_cctld(std::string const &s) {
   auto deprecated = brng::find_if(s_deprecated_cctlds, [&s](std::pair<std::string, std::string> const &entry) { return entry.first == s; });
   if (deprecated != s_deprecated_cctlds.end())
@@ -1997,5 +1997,5 @@ map_to_cctld(std::string const &s) {
   if (current != g_cctlds.end())
     return s;
 
-  return boost::none;
+  return std::nullopt;
 }

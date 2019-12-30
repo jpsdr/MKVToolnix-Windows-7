@@ -17,6 +17,6 @@
 
 namespace mtx::image {
 
-boost::optional<std::pair<unsigned int, unsigned int>> get_size(bfs::path const &file_name);
+std::optional<std::pair<unsigned int, unsigned int>> get_size(bfs::path const &file_name);
 
 }

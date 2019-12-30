@@ -21,7 +21,7 @@ using namespace libmatroska;
 void
 track_statistics_c::create_tags(KaxTags &tags,
                                 std::string const &writing_app,
-                                boost::optional<boost::posix_time::ptime> writing_date)
+                                std::optional<boost::posix_time::ptime> writing_date)
   const {
   auto bps      = get_bits_per_second();
   auto duration = get_duration();

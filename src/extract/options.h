@@ -30,7 +30,7 @@ public:
   class mode_options_c {
   public:
     bool m_simple_chapter_format;
-    boost::optional<std::string> m_simple_chapter_language;
+    std::optional<std::string> m_simple_chapter_language;
     extraction_mode_e m_extraction_mode;
 
     std::vector<track_spec_t> m_tracks;

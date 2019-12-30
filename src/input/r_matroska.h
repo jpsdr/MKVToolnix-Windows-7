@@ -59,7 +59,7 @@ struct kax_track_t {
 
   // Parameters for video tracks
   uint64_t v_width, v_height, v_dwidth, v_dheight;
-  boost::optional<uint64_t> v_dunit;
+  std::optional<uint64_t> v_dunit;
   unsigned int v_display_unit;
   uint64_t v_pcleft, v_pctop, v_pcright, v_pcbottom;
   int64_t v_colour_matrix, v_bits_per_channel;
@@ -74,9 +74,9 @@ struct kax_track_t {
   stereo_mode_c::mode v_stereo_mode;
   double v_frate;
   char v_fourcc[5];
-  boost::optional<uint64_t> v_projection_type;
+  std::optional<uint64_t> v_projection_type;
   memory_cptr v_projection_private;
-  boost::optional<double> v_projection_pose_yaw, v_projection_pose_pitch, v_projection_pose_roll;
+  std::optional<double> v_projection_pose_yaw, v_projection_pose_pitch, v_projection_pose_roll;
 
   // Parameters for audio tracks
   uint64_t a_channels, a_bps, a_formattag;
@@ -216,7 +216,7 @@ private:
 
   std::string m_writing_app, m_raw_writing_app, m_muxing_app;
   int64_t m_writing_app_ver{-1};
-  boost::optional<std::time_t> m_muxing_date_epoch;
+  std::optional<std::time_t> m_muxing_date_epoch;
 
   memory_cptr m_segment_uid, m_next_segment_uid, m_previous_segment_uid;
 

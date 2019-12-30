@@ -133,7 +133,7 @@ kax_track_t::handle_packetizer_display_dimensions() {
   // these and signal the packetizer not to extract the dimensions
   // from the bitstream.
   if ((0 != v_dwidth) && (0 != v_dheight))
-    ptzr_ptr->set_video_display_dimensions(v_dwidth, v_dheight, v_dunit.get_value_or(generic_packetizer_c::ddu_pixels), OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_display_dimensions(v_dwidth, v_dheight, v_dunit.value_or(generic_packetizer_c::ddu_pixels), OPTION_SOURCE_CONTAINER);
 }
 
 void
@@ -2630,8 +2630,8 @@ kax_reader_c::identify() {
   info.set(mtx::id::muxing_application,  m_muxing_app);
   info.set(mtx::id::writing_application, m_raw_writing_app);
   if (m_muxing_date_epoch) {
-    info.add(mtx::id::date_utc,   mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch.get(), mtx::date_time::epoch_timezone_e::UTC));
-    info.add(mtx::id::date_local, mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch.get(), mtx::date_time::epoch_timezone_e::local));
+    info.add(mtx::id::date_utc,   mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch.value(), mtx::date_time::epoch_timezone_e::UTC));
+    info.add(mtx::id::date_local, mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch.value(), mtx::date_time::epoch_timezone_e::local));
   }
 
   id_result_container(info.get());

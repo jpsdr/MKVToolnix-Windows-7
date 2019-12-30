@@ -134,12 +134,12 @@ public:
   static void set_probe_range_percentage(int64_rational_c const &probe_range_percentage);
 
 protected:
-  virtual bool demuxing_requested(char type, int64_t id, boost::optional<std::string> const &language = boost::none) const;
+  virtual bool demuxing_requested(char type, int64_t id, std::optional<std::string> const &language = std::nullopt) const;
 
   virtual void id_result_container(mtx::id::verbose_info_t const &verbose_info = mtx::id::verbose_info_t{});
   virtual void id_result_track(int64_t track_id, const std::string &type, const std::string &info, mtx::id::verbose_info_t const &verbose_info = mtx::id::verbose_info_t{});
   virtual void id_result_attachment(int64_t attachment_id, const std::string &type, int size, const std::string &file_name = empty_string, const std::string &description = empty_string,
-                                    boost::optional<uint64_t> id = boost::optional<uint64_t>{});
+                                    std::optional<uint64_t> id = std::optional<uint64_t>{});
   virtual void id_result_chapters(int num_entries);
   virtual void id_result_tags(int64_t track_id, int num_entries);
 

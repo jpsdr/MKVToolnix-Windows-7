@@ -971,7 +971,7 @@ ogm_a_aac_demuxer_c::ogm_a_aac_demuxer_c(ogm_reader_c *p_reader)
 
 void
 ogm_a_aac_demuxer_c::initialize() {
-  boost::optional<mtx::aac::audio_config_t> parsed_audio_config;
+  std::optional<mtx::aac::audio_config_t> parsed_audio_config;
 
   if (packet_data[0]->get_size() >= (sizeof(stream_header) + 5))
     parsed_audio_config = mtx::aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,

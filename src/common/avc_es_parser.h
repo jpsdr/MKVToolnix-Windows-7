@@ -82,7 +82,7 @@ protected:
   int64_t m_stream_default_duration, m_forced_default_duration, m_container_default_duration;
   int m_frame_number, m_num_skipped_frames;
   bool m_first_keyframe_found, m_recovery_point_valid, m_b_frames_since_keyframe;
-  boost::optional<bool> m_current_key_frame_bottom_field;
+  std::optional<bool> m_current_key_frame_bottom_field;
 
   bool m_par_found;
   int64_rational_c m_par;

@@ -652,7 +652,7 @@ TrackModel::updateEffectiveDefaultTrackFlags() {
   // not just for regular & enabled ones.
   for (auto &track : *m_tracks)
     if (track->m_muxThis)
-      track->m_effectiveDefaultTrackFlag = boost::none;
+      track->m_effectiveDefaultTrackFlag = std::nullopt;
     else
       track->m_effectiveDefaultTrackFlag = false;
 

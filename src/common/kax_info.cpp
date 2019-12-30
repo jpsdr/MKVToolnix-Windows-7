@@ -187,9 +187,9 @@ kax_info_c::set_source_file(mm_io_cptr const &file) {
 void
 kax_info_c::ui_show_element_info(int level,
                                  std::string const &text,
-                                 boost::optional<int64_t> position,
-                                 boost::optional<int64_t> size,
-                                 boost::optional<int64_t> data_size) {
+                                 std::optional<int64_t> position,
+                                 std::optional<int64_t> size,
+                                 std::optional<int64_t> data_size) {
   std::string level_buffer(level, ' ');
   level_buffer[0] = '|';
 
@@ -223,21 +223,21 @@ void
 kax_info_c::show_element(EbmlElement *l,
                          int level,
                          const std::string &info,
-                         boost::optional<int64_t> position,
-                         boost::optional<int64_t> size) {
+                         std::optional<int64_t> position,
+                         std::optional<int64_t> size) {
   if (p_func()->m_show_summary)
     return;
 
   ui_show_element_info(level, info,
                          position           ? *position
-                       : !l                 ? boost::optional<int64_t>{}
+                       : !l                 ? std::optional<int64_t>{}
                        :                      static_cast<int64_t>(l->GetElementPosition()),
                          size               ? *size
-                       : !l                 ? boost::optional<int64_t>{}
+                       : !l                 ? std::optional<int64_t>{}
                        : !l->IsFiniteSize() ? -2
                        :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()),
-                         !l                 ? boost::optional<int64_t>{}
-                       : !l->IsFiniteSize() ? boost::optional<int64_t>{}
+                         !l                 ? std::optional<int64_t>{}
+                       : !l->IsFiniteSize() ? std::optional<int64_t>{}
                        :                      l->GetSize());
 }
 
@@ -268,9 +268,9 @@ kax_info_c::create_known_element_but_not_allowed_here_text(EbmlElement &e) {
 
 std::string
 kax_info_c::create_element_text(const std::string &text,
-                                boost::optional<int64_t> position,
-                                boost::optional<int64_t> size,
-                                boost::optional<int64_t> data_size) {
+                                std::optional<int64_t> position,
+                                std::optional<int64_t> size,
+                                std::optional<int64_t> data_size) {
   auto p = p_func();
 
   std::string additional_text;
@@ -307,7 +307,10 @@ kax_info_c::create_text_representation(EbmlElement &e) {
       text += ": "s + value;
   }
 
-  return create_element_text(text, e.GetElementPosition(), e.IsFiniteSize() ? e.HeadSize() + e.GetSize() : -2, e.IsFiniteSize() ? boost::optional<int64_t>{e.GetSize()} : boost::optional<int64_t>{});
+  auto size      = e.IsFiniteSize() ? e.HeadSize() + e.GetSize()          : -2ll;
+  auto data_size = e.IsFiniteSize() ? std::optional<int64_t>{e.GetSize()} : std::optional<int64_t>{};
+
+  return create_element_text(text, e.GetElementPosition(), size, data_size);
 }
 
 std::string
@@ -833,7 +836,7 @@ kax_info_c::pre_block(EbmlElement &e) {
 
   p->m_lf_timestamp   = block.GlobalTimecode();
   p->m_lf_tnum        = block.TrackNum();
-  p->m_block_duration = boost::none;
+  p->m_block_duration = std::nullopt;
 
   return true;
 }

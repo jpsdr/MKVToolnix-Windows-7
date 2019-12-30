@@ -65,8 +65,8 @@ signals:
 
 protected:
   bool handleFileThatShouldBeSelectedElsewhere(QString const &fileName);
-  boost::optional<FileIdentificationWorker::Result> handleBlurayMainFile(QString const &fileName);
-  boost::optional<FileIdentificationWorker::Result> handleIdentifiedPlaylist(SourceFilePtr const &sourceFile);
+  std::optional<FileIdentificationWorker::Result> handleBlurayMainFile(QString const &fileName);
+  std::optional<FileIdentificationWorker::Result> handleIdentifiedPlaylist(SourceFilePtr const &sourceFile);
   Result identifyThisFile(QString const &fileName);
 
   Result scanPlaylists(QFileInfoList const &fileNames);

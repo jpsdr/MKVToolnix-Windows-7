@@ -20,7 +20,7 @@
 
 namespace mtx::image {
 
-boost::optional<std::pair<unsigned int, unsigned int>>
+std::optional<std::pair<unsigned int, unsigned int>>
 get_size(bfs::path const &file_name) {
   try {
     mm_file_io_c file{file_name.string(), MODE_READ};

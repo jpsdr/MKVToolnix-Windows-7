@@ -25,7 +25,7 @@ namespace mtx::bluray::disc_library {
 namespace {
 debugging_option_c debug{"disc_library|bdmt"};
 
-boost::optional<info_t>
+std::optional<info_t>
 parse_bdmt_xml(bfs::path const &file_name) {
   try {
     auto doc = mtx::xml::load_file(file_name.string());
@@ -123,7 +123,7 @@ disc_library_t::dump()
 
 // ------------------------------------------------------------
 
-boost::optional<disc_library_t>
+std::optional<disc_library_t>
 locate_and_parse(bfs::path const &location) {
   auto base_dir = mtx::bluray::find_base_dir(location);
   if (base_dir.empty())
@@ -159,7 +159,7 @@ locate_and_parse(bfs::path const &location) {
   return lib;
 }
 
-boost::optional<info_t>
+std::optional<info_t>
 locate_and_parse_for_language(bfs::path const &location,
                               std::string const &language) {
   auto base_dir = mtx::bluray::find_base_dir(location);

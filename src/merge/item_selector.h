@@ -33,7 +33,7 @@ public:
 
   bool
   selected(int64_t item,
-           boost::optional<std::string> const &string_item = boost::none)
+           std::optional<std::string> const &string_item = std::nullopt)
     const {
     if (m_none)
       return false;
@@ -48,7 +48,7 @@ public:
 
   T
   get(int64_t item,
-      boost::optional<std::string> const &string_item = boost::none)
+      std::optional<std::string> const &string_item = std::nullopt)
     const {
     if (!selected(item, string_item))
       return m_default_value;

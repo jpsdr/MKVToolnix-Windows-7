@@ -279,7 +279,7 @@ Settings::load() {
   auto regPtr      = registry();
   auto &reg        = *regPtr;
   auto defaultFont = defaultUiFont();
-  boost::optional<QVariant> enableMuxingTracksByTheseTypes;
+  std::optional<QVariant> enableMuxingTracksByTheseTypes;
 
   reg.beginGroup(s_grpSettings);
   m_priority                           = static_cast<ProcessPriority>(reg.value(s_valPriority, static_cast<int>(NormalPriority)).toInt());
@@ -390,7 +390,7 @@ Settings::load() {
 }
 
 void
-Settings::setDefaults(boost::optional<QVariant> enableMuxingTracksByTheseTypes) {
+Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
   if (m_oftenUsedLanguages.isEmpty())
     for (auto const &languageCode : g_popular_language_codes)
       m_oftenUsedLanguages << Q(languageCode);

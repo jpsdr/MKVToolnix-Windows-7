@@ -206,10 +206,10 @@ extract_cli_parser_c::set_simple_language() {
   if (0 > language_idx)
     mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), m_next_arg));
 
-  m_current_mode->m_simple_chapter_language.reset(g_iso639_languages[language_idx].iso639_2_code);
+  m_current_mode->m_simple_chapter_language = g_iso639_languages[language_idx].iso639_2_code;
 }
 
-boost::optional<options_c::extraction_mode_e>
+std::optional<options_c::extraction_mode_e>
 extract_cli_parser_c::extraction_mode_from_string(std::string const &mode_string) {
   static std::unordered_map<std::string, options_c::extraction_mode_e> s_mode_map{
     { "tracks",        options_c::em_tracks        },
@@ -226,11 +226,11 @@ extract_cli_parser_c::extraction_mode_from_string(std::string const &mode_string
   if (itr != s_mode_map.end())
     return itr->second;
 
-  return boost::none;
+  return std::nullopt;
 }
 
 std::string
-extract_cli_parser_c::extraction_mode_to_string(boost::optional<options_c::extraction_mode_e> mode) {
+extract_cli_parser_c::extraction_mode_to_string(std::optional<options_c::extraction_mode_e> mode) {
   static std::unordered_map<options_c::extraction_mode_e, std::string, mtx::hash<options_c::extraction_mode_e>> s_mode_map{
     { options_c::em_unknown,       "unknown"       },
     { options_c::em_tracks,        "tracks"        },

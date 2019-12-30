@@ -75,8 +75,8 @@ public:
 
   virtual std::string get_file_name() const = 0;
 
-  virtual std::string getline(boost::optional<std::size_t> max_chars = boost::none);
-  virtual bool getline2(std::string &s, boost::optional<std::size_t> max_chars = boost::none);
+  virtual std::string getline(std::optional<std::size_t> max_chars = std::nullopt);
+  virtual bool getline2(std::string &s, std::optional<std::size_t> max_chars = std::nullopt);
   virtual size_t puts(const std::string &s);
   virtual bool write_bom(const std::string &charset);
   virtual bool bom_written() const;

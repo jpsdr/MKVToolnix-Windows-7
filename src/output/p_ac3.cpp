@@ -168,7 +168,7 @@ ac3_packetizer_c::flush_packets() {
 
     auto packet = std::make_shared<packet_t>(frame.m_data);
     packet->add_extensions(m_packet_extensions);
-    packet->discard_padding = m_discard_padding.get_next(frame.m_stream_position).get_value_or({});
+    packet->discard_padding = m_discard_padding.get_next(frame.m_stream_position).value_or(timestamp_c{});
 
     set_timestamp_and_add_packet(packet, frame.m_stream_position);
 

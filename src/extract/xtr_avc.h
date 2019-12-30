@@ -24,7 +24,7 @@ class xtr_avc_c: public xtr_base_c {
 protected:
   int m_nal_size_size{};
   mtx::avc::es_parser_c m_parser;
-  boost::optional<unsigned int> m_previous_idr_pic_id;
+  std::optional<unsigned int> m_previous_idr_pic_id;
   debugging_option_c m_debug_access_unit_delimiters{"access_unit_delimiters"};
 
   static binary const ms_start_code[4], ms_aud_nalu[2];

@@ -235,7 +235,7 @@ protected:
   void addDefaultRunProgramConfigurationForType(QSettings &reg, RunProgramType type, std::function<void(RunProgramConfig &)> const &modifier = nullptr);
   bool fixDefaultAudioFileNameBug();
 
-  void setDefaults(boost::optional<QVariant> enableMuxingTracksByTheseTypes);
+  void setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes);
 
 protected:
   static Settings s_settings;

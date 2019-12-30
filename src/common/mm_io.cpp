@@ -46,7 +46,7 @@ mm_io_c::~mm_io_c() {           // NOLINT(modernize-use-equals-default) due to p
 }
 
 std::string
-mm_io_c::getline(boost::optional<std::size_t> max_chars) {
+mm_io_c::getline(std::optional<std::size_t> max_chars) {
   char c;
   std::string s;
 
@@ -69,7 +69,7 @@ mm_io_c::getline(boost::optional<std::size_t> max_chars) {
 
 bool
 mm_io_c::getline2(std::string &s,
-                  boost::optional<std::size_t> max_chars) {
+                  std::optional<std::size_t> max_chars) {
   try {
     s = getline(max_chars);
   } catch(...) {

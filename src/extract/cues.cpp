@@ -30,7 +30,7 @@ using namespace libmatroska;
 
 struct cue_point_t {
   uint64_t timestamp;
-  boost::optional<uint64_t> cluster_position, relative_position, duration;
+  std::optional<uint64_t> cluster_position, relative_position, duration;
 
   cue_point_t(uint64_t p_timestamp)
     : timestamp{p_timestamp}
@@ -63,9 +63,9 @@ write_cues(std::vector<track_spec_t> const &tracks,
       for (auto const &p : track_cue_points) {
         auto line = fmt::format("timestamp={0} duration={1} cluster_position={2} relative_position={3}\n",
                                 format_timestamp(p.timestamp * timestamp_scale, 9),
-                                p.duration          ? format_timestamp(p.duration.get() * timestamp_scale, 9)      : "-",
-                                p.cluster_position  ? to_string(p.cluster_position.get() + segment_data_start_pos) : "-",
-                                p.relative_position ? to_string(p.relative_position.get())                         : "-");
+                                p.duration          ? format_timestamp(p.duration.value() * timestamp_scale, 9)      : "-",
+                                p.cluster_position  ? to_string(p.cluster_position.value() + segment_data_start_pos) : "-",
+                                p.relative_position ? to_string(p.relative_position.value())                         : "-");
         out.puts(line);
       }
 
@@ -133,13 +133,13 @@ parse_cue_points(kax_analyzer_c &analyzer) {
 
     for (auto const &pos_elt : *ktrack_pos) {
       if (Is<KaxCueClusterPosition>(pos_elt))
-        p.cluster_position.reset(static_cast<KaxCueClusterPosition *>(pos_elt)->GetValue());
+        p.cluster_position = static_cast<KaxCueClusterPosition *>(pos_elt)->GetValue();
 
       else if (Is<KaxCueRelativePosition>(pos_elt))
-        p.relative_position.reset(static_cast<KaxCueRelativePosition *>(pos_elt)->GetValue());
+        p.relative_position = static_cast<KaxCueRelativePosition *>(pos_elt)->GetValue();
 
       else if (Is<KaxCueDuration>(pos_elt))
-        p.duration.reset(static_cast<KaxCueDuration *>(pos_elt)->GetValue());
+        p.duration = static_cast<KaxCueDuration *>(pos_elt)->GetValue();
     }
 
     for (auto const &pos_elt : *ktrack_pos)
@@ -163,11 +163,11 @@ determine_cluster_data_start_positions(mm_io_c &file,
         continue;
 
       try {
-        file.setFilePointer(segment_data_start_pos + cue_point.cluster_position.get());
+        file.setFilePointer(segment_data_start_pos + cue_point.cluster_position.value());
         auto elt = std::shared_ptr<EbmlElement>(es->FindNextElement(EBML_CLASS_CONTEXT(KaxSegment), upper_lvl_el, std::numeric_limits<int64_t>::max(), true));
 
         if (elt && Is<KaxCluster>(*elt))
-          cue_point.relative_position = cue_point.relative_position.get() + elt->HeadSize();
+          cue_point.relative_position = cue_point.relative_position.value() + elt->HeadSize();
 
       } catch (mtx::mm_io::exception &) {
       }

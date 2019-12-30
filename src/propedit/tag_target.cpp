@@ -405,7 +405,7 @@ tag_target_c::add_or_replace_track_statistics_tags() {
 
 void
 tag_target_c::delete_track_statistics_tags() {
-  m_tags_modified = mtx::tags::remove_track_statistics(static_cast<KaxTags *>(m_level1_element), boost::none);
+  m_tags_modified = mtx::tags::remove_track_statistics(static_cast<KaxTags *>(m_level1_element), std::nullopt);
 }
 
 bool

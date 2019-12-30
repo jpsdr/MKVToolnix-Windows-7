@@ -371,17 +371,17 @@ FindChildValue(libebml::EbmlMaster const *master,
 
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
-boost::optional<Tvalue>
+std::optional<Tvalue>
 FindOptionalChildValue(libebml::EbmlMaster const &master) {
   auto child = FindChild<Telement>(master);
   if (child)
     return static_cast<Tvalue>(child->GetValue());
-  return boost::none;
+  return std::nullopt;
 }
 
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
-boost::optional<Tvalue>
+std::optional<Tvalue>
 FindOptionalChildValue(libebml::EbmlMaster const *master) {
   return FindOptionalChildValue<Telement>(*master);
 }

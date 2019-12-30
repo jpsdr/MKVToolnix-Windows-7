@@ -626,7 +626,7 @@ MainWindow::setToolSelectorVisibility() {
   p->ui->tool->tabBar()->setVisible(Util::Settings::get().m_showToolSelector);
 }
 
-boost::optional<bool>
+std::optional<bool>
 MainWindow::filterWheelEventForStrongFocus(QObject *watched,
                                            QEvent *event) {
   if (event->type() != QEvent::Wheel)

@@ -173,7 +173,7 @@ public slots:
   virtual void onCopyTitleToOutputFileName();
   virtual void setDestinationFileNameFromSelectedFile();
 
-  virtual void addToJobQueue(bool startNow, boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings = boost::none);
+  virtual void addToJobQueue(bool startNow, std::optional<Util::Settings::ClearMergeSettingsAction> clearSettings = std::nullopt);
 
   virtual void reinitFilesTracksControls();
 
@@ -322,12 +322,12 @@ protected:
 
   virtual QList<Track *> selectedTracks() const;
   virtual void selectTracks(QList<Track *> const &tracks);
-  virtual void selectAllTracksOfType(boost::optional<TrackType> type);
+  virtual void selectAllTracksOfType(std::optional<TrackType> type);
 
   virtual QList<Track *> selectedAttachedFiles() const;
   virtual QList<Attachment *> selectedAttachments() const;
   virtual void selectAttachments(QList<Attachment *> const &attachments);
-  virtual boost::optional<QString> findExistingAttachmentFileName(QString const &fileName);
+  virtual std::optional<QString> findExistingAttachmentFileName(QString const &fileName);
   virtual AttachmentPtr prepareFileForAttaching(QString const &fileName, bool alwaysAdd);
   virtual void addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const &info);
 

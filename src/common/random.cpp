@@ -29,7 +29,7 @@ std::uniform_int_distribution<uint64_t> s_uint64_distribution;
 }
 
 void
-random_c::init(boost::optional<uint64_t> seed) {
+random_c::init(std::optional<uint64_t> seed) {
   s_generator = std::make_unique<std::mt19937_64>();
 
   if (!seed) {

@@ -31,7 +31,7 @@ constexpr uint16_t JM_EOI  = 0xffd9;
 debugging_option_c s_debug{"jpeg"};
 }
 
-boost::optional<std::pair<unsigned int, unsigned int>>
+std::optional<std::pair<unsigned int, unsigned int>>
 get_size(bfs::path const &file_name) {
   try {
     mm_file_io_c file{file_name.string(), MODE_READ};
@@ -42,7 +42,7 @@ get_size(bfs::path const &file_name) {
   return {};
 }
 
-boost::optional<std::pair<unsigned int, unsigned int>>
+std::optional<std::pair<unsigned int, unsigned int>>
 get_size(mm_io_c &file) {
   try {
     file.setFilePointer(0);

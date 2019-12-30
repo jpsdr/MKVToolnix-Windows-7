@@ -129,7 +129,7 @@ using flv_track_cptr = std::shared_ptr<flv_track_c>;
 class flv_reader_c: public generic_reader_c {
 private:
   int m_audio_track_idx{-1}, m_video_track_idx{-1}, m_selected_track_idx{-1};
-  boost::optional<uint64_t> m_min_timestamp;
+  std::optional<uint64_t> m_min_timestamp;
 
   flv_header_t m_header;
   flv_tag_c m_tag;

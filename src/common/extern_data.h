@@ -23,4 +23,4 @@ extern std::vector<std::string> const sub_charsets, g_popular_character_sets;
 extern std::vector<cctld_t> const g_cctlds;
 extern std::vector<std::string> const g_popular_country_codes;
 
-boost::optional<std::string> map_to_cctld(std::string const &s);
+std::optional<std::string> map_to_cctld(std::string const &s);

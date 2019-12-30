@@ -48,7 +48,7 @@ struct avi_subs_demuxer_t {
 
   mm_text_io_cptr m_text_io;
   subtitles_cptr m_subs;
-  boost::optional<std::string> m_encoding;
+  std::optional<std::string> m_encoding;
 };
 
 class avi_reader_c: public generic_reader_c {

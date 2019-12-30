@@ -137,40 +137,40 @@ teletext_to_srt_packet_converter_c::override_encoding(int page,
     return;
 
   if (mtx::included_in(iso639_2_code, "fre"))
-    itr->second->m_forced_char_map_idx.reset(1);
+    itr->second->m_forced_char_map_idx = 1;
 
   else if (mtx::included_in(iso639_2_code, "swe", "fin", "hun"))
-    itr->second->m_forced_char_map_idx.reset(2);
+    itr->second->m_forced_char_map_idx = 2;
 
   else if (mtx::included_in(iso639_2_code, "cze", "slo"))
-    itr->second->m_forced_char_map_idx.reset(3);
+    itr->second->m_forced_char_map_idx = 3;
 
   else if (mtx::included_in(iso639_2_code, "ger"))
-    itr->second->m_forced_char_map_idx.reset(4);
+    itr->second->m_forced_char_map_idx = 4;
 
   else if (mtx::included_in(iso639_2_code, "por", "spa"))
-    itr->second->m_forced_char_map_idx.reset(5);
+    itr->second->m_forced_char_map_idx = 5;
 
   else if (mtx::included_in(iso639_2_code, "ita"))
-    itr->second->m_forced_char_map_idx.reset(6);
+    itr->second->m_forced_char_map_idx = 6;
 
   else if (mtx::included_in(iso639_2_code, "rum"))
-    itr->second->m_forced_char_map_idx.reset(7);
+    itr->second->m_forced_char_map_idx = 7;
 
   else if (mtx::included_in(iso639_2_code, "lav", "lit"))
-    itr->second->m_forced_char_map_idx.reset(8);
+    itr->second->m_forced_char_map_idx = 8;
 
   else if (mtx::included_in(iso639_2_code, "pol"))
-    itr->second->m_forced_char_map_idx.reset(9);
+    itr->second->m_forced_char_map_idx = 9;
 
   else if (mtx::included_in(iso639_2_code, "srp", "hrv", "slv"))
-    itr->second->m_forced_char_map_idx.reset(10);
+    itr->second->m_forced_char_map_idx = 10;
 
   else if (mtx::included_in(iso639_2_code, "est"))
-    itr->second->m_forced_char_map_idx.reset(11);
+    itr->second->m_forced_char_map_idx = 11;
 
   else if (mtx::included_in(iso639_2_code, "tur"))
-    itr->second->m_forced_char_map_idx.reset(12);
+    itr->second->m_forced_char_map_idx = 12;
 
   mxdebug_if(m_debug, fmt::format("Overriding encoding for ISO 639-2 code {0}; result: {1}\n", iso639_2_code, itr->second->m_forced_char_map_idx ? *itr->second->m_forced_char_map_idx : -1));
 }

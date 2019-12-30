@@ -169,9 +169,9 @@ Model::addElement(int level,
 void
 Model::addElementInfo(int level,
                       QString const &text,
-                      boost::optional<int64_t> position,
-                      boost::optional<int64_t> size,
-                      boost::optional<int64_t> dataSize) {
+                      std::optional<int64_t> position,
+                      std::optional<int64_t> size,
+                      std::optional<int64_t> dataSize) {
   auto p = p_func();
 
   if (p->m_treeInsertionPosition.isEmpty()) {

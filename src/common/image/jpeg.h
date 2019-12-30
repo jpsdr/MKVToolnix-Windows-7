@@ -19,7 +19,7 @@ class mm_io_c;
 
 namespace mtx::image::jpeg {
 
-boost::optional<std::pair<unsigned int, unsigned int>> get_size(bfs::path const &file_name);
-boost::optional<std::pair<unsigned int, unsigned int>> get_size(mm_io_c &file);
+std::optional<std::pair<unsigned int, unsigned int>> get_size(bfs::path const &file_name);
+std::optional<std::pair<unsigned int, unsigned int>> get_size(mm_io_c &file);
 
 } // namespace mtx::image::jpeg

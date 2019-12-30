@@ -252,7 +252,7 @@ struct qtmp4_demuxer_c {
   std::vector<qt_fragment_t> m_fragments;
 
   int64_rational_c frame_rate;
-  boost::optional<int64_t> m_use_frame_rate_for_duration;
+  std::optional<int64_t> m_use_frame_rate_for_duration;
 
   esds_t esds;
   bool esds_parsed;
@@ -265,7 +265,7 @@ struct qtmp4_demuxer_c {
   std::deque<int64_t> references;
   uint32_t a_channels, a_bitdepth;
   double a_samplerate;
-  boost::optional<mtx::aac::audio_config_t> a_aac_audio_config;
+  std::optional<mtx::aac::audio_config_t> a_aac_audio_config;
   mtx::ac3::frame_c m_ac3_header;
   mtx::dts::header_t m_dts_header;
 
@@ -318,7 +318,7 @@ struct qtmp4_demuxer_c {
   }
 
   void calculate_frame_rate();
-  int64_t to_nsecs(int64_t value, boost::optional<int64_t> time_scale_to_use = boost::none);
+  int64_t to_nsecs(int64_t value, std::optional<int64_t> time_scale_to_use = std::nullopt);
   void calculate_timestamps();
   void adjust_timestamps(int64_t delta);
 
@@ -374,7 +374,7 @@ struct qtmp4_demuxer_c {
   void set_packetizer_display_dimensions();
   void set_packetizer_colour_properties();
 
-  boost::optional<int64_t> min_timestamp() const;
+  std::optional<int64_t> min_timestamp() const;
 
   void determine_codec();
 
@@ -461,7 +461,7 @@ private:
   qtmp4_demuxer_c *m_track_for_fragment{};
 
   bool m_timestamps_calculated{};
-  boost::optional<uint64_t> m_duration;
+  std::optional<uint64_t> m_duration;
 
   uint64_t m_attachment_id{};
 
@@ -498,7 +498,7 @@ protected:
   virtual void parse_headers();
   virtual void verify_track_parameters_and_update_indexes();
   virtual void calculate_timestamps();
-  virtual boost::optional<int64_t> calculate_global_min_timestamp() const;
+  virtual std::optional<int64_t> calculate_global_min_timestamp() const;
   virtual void calculate_num_bytes_to_process();
 
   virtual qt_atom_t read_atom(mm_io_c *read_from = nullptr, bool exit_on_error = true);

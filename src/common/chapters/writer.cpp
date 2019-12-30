@@ -30,7 +30,7 @@ using chapter_entry_storage_c = std::vector<chapter_entry_c>;
 static void
 handle_atom(KaxChapterAtom const &atom,
             chapter_entry_storage_c &chapter_entries,
-            boost::optional<std::string> const &language_to_extract) {
+            std::optional<std::string> const &language_to_extract) {
   if (FindChildValue<KaxChapterFlagHidden>(atom) != 0)
     return;
 
@@ -62,7 +62,7 @@ handle_atom(KaxChapterAtom const &atom,
 std::size_t
 write_simple(KaxChapters &chapters,
              mm_io_c &out,
-             boost::optional<std::string> const &language_to_extract) {
+             std::optional<std::string> const &language_to_extract) {
   auto chapter_entries = chapter_entry_storage_c{};
 
   for (auto const &chapters_child : chapters) {

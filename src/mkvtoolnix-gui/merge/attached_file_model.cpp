@@ -133,14 +133,14 @@ AttachedFileModel::attachedFileForRow(int row)
   return m_attachedFilesMap.value(item(row)->data(Util::AttachmentRole).value<quint64>(), TrackPtr{});
 }
 
-boost::optional<int>
+std::optional<int>
 AttachedFileModel::rowForAttachedFile(Track const &attachedFile)
   const {
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
     if (attachedFileForRow(row).get() == &attachedFile)
       return row;
 
-  return boost::none;
+  return std::nullopt;
 }
 
 QList<QStandardItem *>

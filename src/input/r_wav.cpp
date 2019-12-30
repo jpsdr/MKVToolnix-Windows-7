@@ -373,7 +373,7 @@ wav_reader_c::scan_chunks_wave64() {
   }
 }
 
-boost::optional<std::size_t>
+std::optional<std::size_t>
 wav_reader_c::find_chunk(const char *id,
                          int start_idx,
                          bool allow_empty) {

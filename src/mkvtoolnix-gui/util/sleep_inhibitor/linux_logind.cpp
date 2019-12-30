@@ -18,7 +18,7 @@ namespace mtx::gui::Util {
 
 class LogindSleepInhibitorPrivate: public BasicSleepInhibitorPrivate {
 public:
-  boost::optional<int> m_fd;
+  std::optional<int> m_fd;
 };
 
 LogindSleepInhibitor::LogindSleepInhibitor()

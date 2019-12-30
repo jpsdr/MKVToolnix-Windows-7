@@ -51,7 +51,7 @@ public:
 class translatable_string_c {
 protected:
   std::vector<std::string> m_untranslated_strings;
-  boost::optional<std::string> m_overridden_by;
+  std::optional<std::string> m_overridden_by;
 
 public:
   translatable_string_c() = default;

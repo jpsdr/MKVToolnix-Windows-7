@@ -41,7 +41,7 @@ public:
   virtual void attachedFileUpdated(Track const &attachedFile);
 
   virtual TrackPtr attachedFileForRow(int row) const;
-  virtual boost::optional<int> rowForAttachedFile(Track const &attachedFile) const;
+  virtual std::optional<int> rowForAttachedFile(Track const &attachedFile) const;
   virtual QList<QStandardItem *> itemsForRow(int row);
 
   virtual void retranslateUi();

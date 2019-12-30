@@ -131,7 +131,8 @@ tabWidgetCloseTabButton(QTabWidget &tabWidget,
                         int tabIdx) {
   auto tabBar = tabWidget.tabBar();
   auto result = mtx::first_of<QWidget *>([](QWidget *button) { return !!button; }, tabBar->tabButton(tabIdx, QTabBar::LeftSide), tabBar->tabButton(tabIdx, QTabBar::RightSide));
-  return result ? result.get() : nullptr;
+
+  return result.value_or(nullptr);
 }
 
 void

@@ -129,7 +129,7 @@ protected:
   virtual void closeEvent(QCloseEvent *event);
   virtual bool beforeCloseCheckRunningJobs();
 
-  virtual boost::optional<bool> filterWheelEventForStrongFocus(QObject *watched, QEvent *event);
+  virtual std::optional<bool> filterWheelEventForStrongFocus(QObject *watched, QEvent *event);
 
 #if defined(HAVE_UPDATE_CHECK)
   virtual void silentlyCheckForUpdates();

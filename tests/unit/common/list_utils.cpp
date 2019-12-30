@@ -1,7 +1,5 @@
 #include "common/common_pch.h"
 
-#include <boost/optional/optional_io.hpp>
-
 #include "common/list_utils.h"
 
 #include "gtest/gtest.h"
@@ -16,8 +14,8 @@ TEST(ListUtils, first_of) {
   EXPECT_TRUE(!!mtx::first_of<int>([](int val) { return val > 43; }, 42, 41, 40, 39, 38, 12345));
 
   EXPECT_EQ(48,    mtx::first_of<int>([](int val) { return val > 43; }, 48));
-  EXPECT_EQ(54,    mtx::first_of<int>([](int val) { return val > 43; }, 42, 54).get());
-  EXPECT_EQ(12345, mtx::first_of<int>([](int val) { return val > 43; }, 42, 41, 40, 39, 38, 12345).get());
+  EXPECT_EQ(54,    mtx::first_of<int>([](int val) { return val > 43; }, 42, 54).value());
+  EXPECT_EQ(12345, mtx::first_of<int>([](int val) { return val > 43; }, 42, 41, 40, 39, 38, 12345).value());
 
   EXPECT_TRUE(!!mtx::first_of<void *>([](void *p) { return !!p; }, static_cast<void *>(nullptr), reinterpret_cast<void *>(0x12345)));
   EXPECT_EQ(reinterpret_cast<void *>(0x12345), mtx::first_of<void *>([](void *p) { return !!p; }, static_cast<void *>(nullptr), reinterpret_cast<void *>(0x12345)));

@@ -29,7 +29,7 @@ timestamp_calculator_c::timestamp_calculator_c(int64_t samples_per_second)
 
 void
 timestamp_calculator_c::add_timestamp(timestamp_c const &timestamp,
-                                      boost::optional<uint64_t> stream_position) {
+                                      std::optional<uint64_t> stream_position) {
   if (!timestamp.valid())
     return;
 
@@ -44,21 +44,21 @@ timestamp_calculator_c::add_timestamp(timestamp_c const &timestamp,
 
 void
 timestamp_calculator_c::add_timestamp(int64_t timestamp,
-                                      boost::optional<uint64_t> stream_position) {
+                                      std::optional<uint64_t> stream_position) {
   if (0 <= timestamp)
     add_timestamp(timestamp_c::ns(timestamp), stream_position);
 }
 
 void
-timestamp_calculator_c::add_timestamp(boost::optional<int64_t> const &timestamp,
-                                      boost::optional<uint64_t> stream_position) {
+timestamp_calculator_c::add_timestamp(std::optional<int64_t> const &timestamp,
+                                      std::optional<uint64_t> stream_position) {
   if (timestamp && (0 <= *timestamp))
     add_timestamp(timestamp_c::ns(*timestamp), stream_position);
 }
 
 void
 timestamp_calculator_c::add_timestamp(packet_cptr const &packet,
-                                      boost::optional<uint64_t> stream_position) {
+                                      std::optional<uint64_t> stream_position) {
   if (packet->has_timestamp())
     add_timestamp(timestamp_c::ns(packet->timestamp), stream_position);
 }
@@ -78,7 +78,7 @@ timestamp_calculator_c::drop_timestamps_before_position(uint64_t stream_position
 
 timestamp_c
 timestamp_calculator_c::get_next_timestamp(int64_t samples_in_frame,
-                                           boost::optional<uint64_t> stream_position) {
+                                           std::optional<uint64_t> stream_position) {
   if (   !m_available_timestamps.empty()
       && (   !stream_position
           || !m_available_timestamps.front().second

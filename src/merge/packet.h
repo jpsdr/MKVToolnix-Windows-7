@@ -57,10 +57,10 @@ struct packet_t {
   int64_t timestamp, bref, fref, duration, assigned_timestamp;
   int64_t timestamp_before_factory;
   int64_t unmodified_assigned_timestamp, unmodified_duration;
-  boost::optional<uint64_t> uncompressed_size;
+  std::optional<uint64_t> uncompressed_size;
   timestamp_c discard_padding, output_order_timestamp;
   bool duration_mandatory, superseeded, gap_following, factory_applied;
-  boost::optional<bool> key_flag, discardable_flag;
+  std::optional<bool> key_flag, discardable_flag;
   generic_packetizer_c *source;
 
   std::vector<packet_extension_cptr> extensions;

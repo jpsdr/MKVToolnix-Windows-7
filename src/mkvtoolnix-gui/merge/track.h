@@ -33,7 +33,7 @@ public:
   QString m_name, m_codec, m_language, m_tags, m_delay, m_stretchBy, m_defaultDuration, m_timestamps, m_aspectRatio, m_displayWidth, m_displayHeight, m_cropping, m_characterSet, m_additionalOptions;
   unsigned int m_defaultTrackFlag{}, m_forcedTrackFlag{}, m_stereoscopy{}, m_naluSizeLength{}, m_cues{}, m_aacIsSBR{};
   TrackCompression m_compression{TrackCompression::Default};
-  boost::optional<bool> m_effectiveDefaultTrackFlag;
+  std::optional<bool> m_effectiveDefaultTrackFlag;
 
   int64_t m_size{};
   QString m_attachmentDescription;

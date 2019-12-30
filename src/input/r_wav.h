@@ -75,7 +75,7 @@ private:
   int64_t m_bytes_in_data_chunks{}, m_remaining_bytes_in_current_data_chunk{};
 
   std::vector<wav_chunk_t> m_chunks;
-  boost::optional<std::size_t> m_cur_data_chunk_idx;
+  std::optional<std::size_t> m_cur_data_chunk_idx;
 
   wav_demuxer_cptr m_demuxer;
 
@@ -101,7 +101,7 @@ protected:
 
   virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
 
-  boost::optional<std::size_t> find_chunk(const char *id, int start_idx = 0, bool allow_empty = true);
+  std::optional<std::size_t> find_chunk(const char *id, int start_idx = 0, bool allow_empty = true);
 
   void scan_chunks();
   void scan_chunks_rf64();

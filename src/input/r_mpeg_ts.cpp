@@ -725,7 +725,7 @@ track_c::parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
     }
 
     to_set_up->parse_iso639_language_from(buffer);
-    to_set_up->m_ttx_wanted_page.reset(ttx_page);
+    to_set_up->m_ttx_wanted_page = ttx_page;
 
     to_set_up->type      = pid_type_e::subtitles;
     to_set_up->codec     = codec_c::look_up(codec_c::type_e::S_SRT);
@@ -944,7 +944,7 @@ track_c::transport_error_detected(packet_header_t &ts_header)
   if (!m_expected_next_continuity_counter)
     return false;
 
-  return ts_header.continuity_counter() != m_expected_next_continuity_counter.get();
+  return ts_header.continuity_counter() != m_expected_next_continuity_counter.value();
 }
 
 // ------------------------------------------------------------
@@ -1324,7 +1324,7 @@ reader_c::identify() {
     info.set(mtx::id::number,    track->pid);
 
     if (track->program_number)
-      info.set(mtx::id::program_number, track->program_number.get());
+      info.set(mtx::id::program_number, track->program_number.value());
 
     if (pid_type_e::audio == track->type) {
       info.add(mtx::id::audio_channels,           track->a_channels);
@@ -1981,7 +1981,7 @@ reader_c::handle_transport_errors(track_c &track,
                            track.pid,
                            file().m_position,
                            ts_header.has_transport_error() ? "transport_error flag" : "wrong continuity_counter",
-                           track.m_expected_next_continuity_counter ? to_string(static_cast<unsigned int>(track.m_expected_next_continuity_counter.get())) : "—"s,
+                           track.m_expected_next_continuity_counter ? to_string(static_cast<unsigned int>(track.m_expected_next_continuity_counter.value())) : "—"s,
                            static_cast<unsigned int>(ts_header.continuity_counter()),
                            track.pes_payload_size_to_read,
                            track.pes_payload_read->get_size(),

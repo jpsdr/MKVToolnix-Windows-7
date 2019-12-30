@@ -80,8 +80,8 @@ kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
                                  LacingType lacing,
                                  int64_t past_block,
                                  int64_t forw_block,
-                                 boost::optional<bool> key_flag,
-                                 boost::optional<bool> discardable_flag) {
+                                 std::optional<bool> key_flag,
+                                 std::optional<bool> discardable_flag) {
   bool result = false;
 
   if (   (BLOCK_BLOB_ALWAYS_SIMPLE == SimpleBlockMode)

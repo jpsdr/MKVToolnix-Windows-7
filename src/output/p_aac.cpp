@@ -104,7 +104,7 @@ aac_packetizer_c::process_headerless(packet_cptr packet) {
 
   packet->timestamp       = m_timestamp_calculator.get_next_timestamp(m_config.samples_per_frame).to_ns();
   packet->duration        = m_packet_duration;
-  packet->discard_padding = m_discard_padding.get_next().get_value_or({});
+  packet->discard_padding = m_discard_padding.get_next().value_or(timestamp_c{});
 
   add_packet(packet);
 

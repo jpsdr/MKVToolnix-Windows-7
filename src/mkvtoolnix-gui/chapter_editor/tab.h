@@ -174,8 +174,8 @@ protected:
   void applyModificationToTimestamps(QStandardItem *item, std::function<int64_t(int64_t)> const &unaryOp);
   void multiplyTimestamps(QStandardItem *item, double factor);
   void shiftTimestamps(QStandardItem *item, int64_t delta);
-  void constrictTimestamps(QStandardItem *item, boost::optional<uint64_t> const &constrictStart, boost::optional<uint64_t> const &constrictEnd);
-  std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>> expandTimestamps(QStandardItem *item);
+  void constrictTimestamps(QStandardItem *item, std::optional<uint64_t> const &constrictStart, std::optional<uint64_t> const &constrictEnd);
+  std::pair<std::optional<uint64_t>, std::optional<uint64_t>> expandTimestamps(QStandardItem *item);
   void setLanguages(QStandardItem *item, QString const &language);
   void setCountries(QStandardItem *item, QString const &country);
   void setEndTimestamps(QStandardItem *startItem);

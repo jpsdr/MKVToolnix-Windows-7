@@ -11,7 +11,7 @@ namespace mtx::gui::Util {
 
 class MacOSSleepInhibitorPrivate: public BasicSleepInhibitorPrivate {
 public:
-  boost::optional<IOPMAssertionID> m_assertionID;
+  std::optional<IOPMAssertionID> m_assertionID;
 };
 
 MacOSSleepInhibitor::MacOSSleepInhibitor()

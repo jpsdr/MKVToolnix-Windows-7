@@ -72,7 +72,7 @@ parse_uncompressed_header(mtx::bits::reader_c &r,
 }
 }
 
-boost::optional<header_data_t>
+std::optional<header_data_t>
 parse_header_data(memory_c const &mem) {
   header_data_t h;
 
@@ -80,10 +80,10 @@ parse_header_data(memory_c const &mem) {
     mtx::bits::reader_c r{mem.get_buffer(), mem.get_size()};
 
     if (!parse_uncompressed_header(r, h))
-      return boost::none;
+      return std::nullopt;
 
   } catch (mtx::mm_io::end_of_file_x &) {
-    return boost::none;
+    return std::nullopt;
   }
 
   return h;

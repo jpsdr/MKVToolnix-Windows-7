@@ -27,7 +27,7 @@ class option_with_source_c {
 public:
 protected:
   option_source_e m_source;
-  boost::optional<T> m_value;
+  std::optional<T> m_value;
 
 public:
   option_with_source_c()
@@ -52,7 +52,7 @@ public:
     const {
     if (!*this)
       throw std::logic_error{"not set yet"};
-    return m_value.get();
+    return m_value.value();
   }
 
   option_source_e

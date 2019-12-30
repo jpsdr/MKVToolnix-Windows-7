@@ -294,9 +294,9 @@ public:
   pid_type_e type;
   codec_c codec;
   uint16_t pid;
-  boost::optional<uint16_t> program_number;
-  boost::optional<int> m_ttx_wanted_page;
-  boost::optional<uint8_t> m_expected_next_continuity_counter;
+  std::optional<uint16_t> program_number;
+  std::optional<int> m_ttx_wanted_page;
+  std::optional<uint8_t> m_expected_next_continuity_counter;
   std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
   mtx::bytes::buffer_cptr pes_payload_read;    // buffer with the current PID payload
 

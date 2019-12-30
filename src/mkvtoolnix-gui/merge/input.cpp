@@ -1772,7 +1772,7 @@ Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames,
 }
 
 void
-Tab::selectAllTracksOfType(boost::optional<TrackType> type) {
+Tab::selectAllTracksOfType(std::optional<TrackType> type) {
   auto numRows = m_tracksModel->rowCount();
   if (!numRows)
     return;

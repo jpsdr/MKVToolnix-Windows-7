@@ -153,7 +153,7 @@ FileIdentificationWorker::handleFileThatShouldBeSelectedElsewhere(QString const 
   return true;
 }
 
-boost::optional<FileIdentificationWorker::Result>
+std::optional<FileIdentificationWorker::Result>
 FileIdentificationWorker::handleBlurayMainFile(QString const &fileName) {
   auto info = QFileInfo{fileName};
 
@@ -167,7 +167,7 @@ FileIdentificationWorker::handleBlurayMainFile(QString const &fileName) {
   return scanPlaylists(dir.entryInfoList(QStringList{QString{"*.mpls"}, QString{"*.MPLS"}}, QDir::Files, QDir::Name));
 }
 
-boost::optional<FileIdentificationWorker::Result>
+std::optional<FileIdentificationWorker::Result>
 FileIdentificationWorker::handleIdentifiedPlaylist(SourceFilePtr const &sourceFile) {
   if (!sourceFile->isPlaylist())
     return {};

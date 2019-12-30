@@ -82,13 +82,13 @@ parse_codec_id(const std::string &codec_id,
   return true;
 }
 
-boost::optional<audio_config_t>
+std::optional<audio_config_t>
 parse_audio_specific_config(unsigned char const *data,
                             std::size_t size) {
   auto h = header_c::from_audio_specific_config(data, size);
   if (h.is_valid)
     return h.config;
-  return boost::none;
+  return std::nullopt;
 }
 
 memory_cptr

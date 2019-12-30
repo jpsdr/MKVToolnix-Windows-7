@@ -130,7 +130,7 @@ struct header_t {
 
   // -1 for "invalid"
   unsigned int core_sampling_frequency{};
-  boost::optional<unsigned int> extension_sampling_frequency;
+  std::optional<unsigned int> extension_sampling_frequency;
 
   // in bit per second, or -1 == "open", -2 == "variable", -3 == "lossless"
   int transmission_bitrate{};
@@ -192,7 +192,7 @@ struct header_t {
   int dialog_normalization_gain{}, extension_dialog_normalization_gain{};
   unsigned int dialog_normalization_gain_bit_position{}, extension_dialog_normalization_gain_bit_position{};
 
-  boost::optional<unsigned int> crc{};
+  std::optional<unsigned int> crc{};
 
   bool has_core{}, has_exss{};
   unsigned int exss_offset{}, exss_header_size{}, exss_part_size{};
