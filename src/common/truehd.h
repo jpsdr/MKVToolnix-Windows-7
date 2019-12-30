@@ -45,7 +45,7 @@ struct frame_t {
   codec_e m_codec{truehd};
   frame_type_e m_type{invalid};
   int m_size{}, m_sampling_rate{}, m_channels{}, m_samples_per_frame{};
-  unsigned int m_header_size{};
+  unsigned int m_header_size{}, m_input_timing{};
   bool m_contains_atmos{};
 
   mtx::ac3::frame_c m_ac3_header;
