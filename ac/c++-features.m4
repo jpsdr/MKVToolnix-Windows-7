@@ -469,7 +469,7 @@ AC_DEFUN([AX_CXX17_STD_OPTIONAL],[
       [
   std::optional<int> moo;
   moo = 42;
-  return moo.value_or(54);
+  return moo ? moo.value() : moo.value_or(54);
 ],
       [ax_cv_cxx17_std_optional="yes"],
       [ax_cv_cxx17_std_optional="no"])

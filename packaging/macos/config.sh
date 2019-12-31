@@ -11,7 +11,7 @@ export CXXCPP="clang++ -E"
 export CFLAGS=""
 export CXXFLAGS="-std=c++17"
 export QT_CXXFLAGS="-stdlib=libc++"
-export MACOSX_DEPLOYMENT_TARGET="10.9"
+export MACOSX_DEPLOYMENT_TARGET="10.14"
 export DRAKETHREADS=${DRAKETHREADS:-4}
 export MAKEFLAGS="-j ${DRAKETHREADS}"
 export SHARED_QT=1
