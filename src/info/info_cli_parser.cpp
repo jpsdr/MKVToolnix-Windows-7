@@ -34,6 +34,7 @@ info_cli_parser_c::init_parser() {
 
   add_section_header(YT("Options"));
 
+  OPT("a|all",           set_show_all_elements,   YT("Show all sub-elements (including cues & seek heads entries) and don't stop at the first cluster."));
   OPT("c|checksum",      set_checksum,            YT("Calculate and display checksums of frame contents."));
   OPT("C|check-mode",    set_check_mode,          YT("Calculate and display checksums and use verbosity level 4."));
   OPT("o|continue",      set_continue_at_cluster, YT("Don't stop processing at the first cluster."));
@@ -51,6 +52,11 @@ info_cli_parser_c::init_parser() {
 }
 
 #undef OPT
+
+void
+info_cli_parser_c::set_show_all_elements() {
+  m_options.m_show_all_elements = true;
+}
 
 void
 info_cli_parser_c::set_checksum() {

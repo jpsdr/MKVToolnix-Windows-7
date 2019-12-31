@@ -26,6 +26,9 @@
 * mkvinfo: added the option `-o`/`--continue` for continuing processing when
   the first cluster is encountered regardless of the verbosity level
   used. Part of the implementation of #2713.
+* mkvinfo: added the option `-a`/`--all` for outputting all sub-elements (even
+  cues & seek head entries) and not stopping at the first cluster regardless
+  of the verbosity level used. Part of the implementation of #2713.
 
 ## Bug fixes
 

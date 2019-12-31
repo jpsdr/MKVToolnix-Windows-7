@@ -38,4 +38,5 @@ protected:
   void set_track_info();
   void set_dec_positions();
   void set_hex_positions();
+  void set_show_all_elements();
 };

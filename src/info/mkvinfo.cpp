@@ -37,7 +37,10 @@ main(int argc,
 
   mtx::kax_info_c info;
 
-  info.set_verbosity(options.m_verbose);
+  info.set_show_all_elements(  (2 <= options.m_verbose) || options.m_show_all_elements);
+  info.set_show_positions(     (2 <= options.m_verbose) || options.m_hex_positions);
+  info.set_continue_at_cluster((1 <= options.m_verbose) || options.m_continue_at_cluster || options.m_show_all_elements);
+
   info.set_calc_checksums(options.m_calc_checksums);
   info.set_show_summary(options.m_show_summary);
   info.set_show_hexdump(options.m_show_hexdump);
@@ -45,13 +48,8 @@ main(int argc,
   info.set_show_track_info(options.m_show_track_info);
   info.set_hexdump_max_size(options.m_hexdump_max_size);
 
-  if (options.m_continue_at_cluster)
-    info.set_continue_at_cluster(true);
-
-  if (options.m_hex_positions) {
-    info.set_show_positions(true);
+  if (options.m_hex_positions)
     info.set_hex_positions(*options.m_hex_positions);
-  }
 
   try {
     info.open_and_process_file(options.m_file_name);

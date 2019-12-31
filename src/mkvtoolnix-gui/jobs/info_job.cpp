@@ -80,7 +80,6 @@ InfoJob::start() {
   p->info->set_show_track_info(p->config->m_showTrackInfo);
   p->info->set_hex_positions(p->config->m_hexPositions);
   p->info->set_hexdump_max_size(p->config->m_hexdumpMaxSize);
-  p->info->set_verbosity(p->config->m_verbose);
 
   p->info->moveToThread(p->thread);
 

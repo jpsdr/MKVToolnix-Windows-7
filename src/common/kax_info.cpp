@@ -140,6 +140,11 @@ kax_info_c::set_continue_at_cluster(bool enable) {
 }
 
 void
+kax_info_c::set_show_all_elements(bool enable) {
+  p_func()->m_show_all_elements = enable;
+}
+
+void
 kax_info_c::set_show_summary(bool enable) {
   p_func()->m_show_summary = enable;
 }
@@ -172,15 +177,6 @@ kax_info_c::set_hex_positions(bool enable) {
 void
 kax_info_c::set_hexdump_max_size(int max_size) {
   p_func()->m_hexdump_max_size = max_size;
-}
-
-void
-kax_info_c::set_verbosity(int verbosity) {
-  auto p                   = p_func();
-
-  p->m_verbose             = verbosity;
-  p->m_show_positions      = 2 <= verbosity;
-  p->m_continue_at_cluster = 1 <= verbosity;
 }
 
 void
@@ -528,15 +524,15 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
   // More complex processors:
   PRE(KaxSeekHead, ([this, p](EbmlElement &e) -> bool {
-    if ((p->m_verbose < 2) && !p->m_use_gui)
+    if (!p->m_show_all_elements && !p->m_use_gui)
       show_element(&e, p->m_level, Y("Seek head (subentries will be skipped)"));
-    return (p->m_verbose >= 2) || p->m_use_gui;
+    return p->m_show_all_elements || p->m_use_gui;
   }));
 
   PRE(KaxCues, ([this, p](EbmlElement &e) -> bool {
-    if ((p->m_verbose < 2) && !p->m_use_gui)
+    if (!p->m_show_all_elements && !p->m_use_gui)
       show_element(&e, p->m_level, Y("Cues (subentries will be skipped)"));
-    return (p->m_verbose >= 2) || p->m_use_gui;
+    return p->m_show_all_elements || p->m_use_gui;
   }));
 
   PRE(KaxTrackEntry, [p](EbmlElement &e) -> bool {
@@ -950,13 +946,7 @@ kax_info_c::post_block_group(EbmlElement &e) {
                                    p->m_frame_hexdumps[fidx],
                                    position));
     }
-
-  } else if (p->m_verbose > 2)
-    show_element(nullptr, p->m_level + 1,
-                 fmt::format(Y("[{0} frame for track {1}, timestamp {2}]"),
-                             (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
-                             p->m_lf_tnum,
-                             format_timestamp(p->m_lf_timestamp)));
+  }
 
   auto &tinfo = p->m_track_info[p->m_lf_tnum];
 
@@ -1064,13 +1054,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
                                  p->m_frame_adlers[idx],
                                  position));
     }
-
-  } else if (p->m_verbose > 2)
-    show_element(nullptr, p->m_level + 1,
-                 fmt::format(Y("[{0} frame for track {1}, timestamp {2}]"),
-                             (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P'),
-                             block.TrackNum(),
-                             timestamp_ns));
+  }
 
   tinfo.m_blocks                                                                    += block.NumberFrames();
   tinfo.m_blocks_by_ref_num[block.IsKeyframe() ? 0 : block.IsDiscardable() ? 2 : 1] += block.NumberFrames();

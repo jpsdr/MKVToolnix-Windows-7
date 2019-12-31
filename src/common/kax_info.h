@@ -56,6 +56,7 @@ public:
   void set_use_gui(bool enable);
   void set_calc_checksums(bool enable);
   void set_continue_at_cluster(bool enable);
+  void set_show_all_elements(bool enable);
   void set_show_summary(bool enable);
   void set_show_hexdump(bool enable);
   void set_show_positions(bool enable);
@@ -63,7 +64,6 @@ public:
   void set_show_track_info(bool enable);
   void set_hex_positions(bool enable);
   void set_hexdump_max_size(int max_size);
-  void set_verbosity(int verbosity);
   void set_destination_file_name(std::string const &file_name);
   void set_source_file(mm_io_cptr const &file);
   void set_source_file_name(std::string const &file_name);
