@@ -145,6 +145,11 @@ kax_info_c::set_show_hexdump(bool enable) {
 }
 
 void
+kax_info_c::set_show_positions(bool enable) {
+  p_func()->m_show_positions = enable;
+}
+
+void
 kax_info_c::set_show_size(bool enable) {
   p_func()->m_show_size = enable;
 }
@@ -275,7 +280,7 @@ kax_info_c::create_element_text(const std::string &text,
 
   std::string additional_text;
 
-  if ((1 < p->m_verbose) && position)
+  if (position && ((1 < p->m_verbose) || p->m_show_positions))
     additional_text += fmt::format(p->m_hex_positions ? Y(" at 0x{0:x}") : Y(" at {0}"), *position);
 
   if (p->m_show_size && size) {

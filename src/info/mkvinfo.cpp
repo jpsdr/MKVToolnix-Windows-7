@@ -46,6 +46,9 @@ main(int argc,
   info.set_hexdump_max_size(options.m_hexdump_max_size);
   info.set_verbosity(options.m_verbose);
 
+  if (options.m_hex_positions)
+    info.set_show_positions(true);
+
   try {
     info.open_and_process_file(options.m_file_name);
   } catch (mtx::kax_info::exception &ex) {

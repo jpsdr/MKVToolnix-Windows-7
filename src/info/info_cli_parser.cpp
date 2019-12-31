@@ -40,7 +40,7 @@ info_cli_parser_c::init_parser() {
   OPT("t|track-info",    set_track_info,    YT("Show statistics for each track in verbose mode."));
   OPT("x|hexdump",       set_hexdump,       YT("Show the first 16 bytes of each frame as a hex dump."));
   OPT("X|full-hexdump",  set_full_hexdump,  YT("Show all bytes of each frame as a hex dump."));
-  OPT("p|hex-positions", set_hex_positions, YT("Show positions in hexadecimal."));
+  OPT("p|hex-positions", set_hex_positions, YT("Show the position of each element in hexadecimal."));
   OPT("z|size",          set_size,          YT("Show the size of each element including its header."));
 
   add_common_options();

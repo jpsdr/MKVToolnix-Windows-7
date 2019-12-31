@@ -57,6 +57,7 @@ public:
   void set_calc_checksums(bool enable);
   void set_show_summary(bool enable);
   void set_show_hexdump(bool enable);
+  void set_show_positions(bool enable);
   void set_show_size(bool enable);
   void set_show_track_info(bool enable);
   void set_hex_positions(bool enable);

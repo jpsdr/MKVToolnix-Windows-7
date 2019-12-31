@@ -17,6 +17,9 @@
 * MKVToolNix GUI: header editor:: when changing track UIDs the referring
   elements in existing chapters & tags will be updated automatically,
   too. Part of the implementation of #2700.
+* mkvinfo: when the option `-p`/`--hex-positions` is used, element positions
+  will be output regardless of the verbosity level. Part of the implementation
+  of #2713.
 
 ## Bug fixes
 
