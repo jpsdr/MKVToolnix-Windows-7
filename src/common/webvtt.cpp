@@ -15,6 +15,7 @@
 
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
+#include "common/strings/regex.h"
 #include "common/webvtt.h"
 
 #define RE_TIMESTAMP "((?:\\d{2}:)?\\d{2}:\\d{2}\\.\\d{3})"
@@ -27,7 +28,7 @@ public:
   unsigned int current_cue_number{}, total_number_of_cues{}, total_number_of_bytes{};
   debugging_option_c debug{"webvtt_parser"};
 
-  boost::regex timestamp_line_re{"^" RE_TIMESTAMP " --> " RE_TIMESTAMP "(?: ([^\\n]+))?$", boost::regex::perl};
+  std::regex timestamp_line_re{"^" RE_TIMESTAMP " --> " RE_TIMESTAMP "(?: ([^\\n]+))?$"};
 };
 
 webvtt_parser_c::webvtt_parser_c()
@@ -76,14 +77,14 @@ webvtt_parser_c::add_block() {
   if (m->current_block.empty())
     return;
 
-  boost::smatch matches;
+  std::smatch matches;
   std::string label, additional;
   auto timestamp_line = -1;
 
-  if (boost::regex_search(m->current_block[0], matches, m->timestamp_line_re))
+  if (std::regex_search(m->current_block[0], matches, m->timestamp_line_re))
     timestamp_line = 0;
 
-  else if ((m->current_block.size() > 1) && boost::regex_search(m->current_block[1], matches, m->timestamp_line_re)) {
+  else if ((m->current_block.size() > 1) && std::regex_search(m->current_block[1], matches, m->timestamp_line_re)) {
     timestamp_line = 1;
     label          = std::move(m->current_block[0]);
 
@@ -118,8 +119,8 @@ webvtt_parser_c::add_block() {
   mxdebug_if(m->debug,
              fmt::format("label «{0}» start «{1}» end «{2}» settings list «{3}» additional «{4}» content «{5}»\n",
                          label, matches[1].str(), matches[2].str(), matches[3].str(),
-                         boost::regex_replace(additional, boost::regex{"\n+", boost::regex::perl}, "–"),
-                         boost::regex_replace(content,    boost::regex{"\n+", boost::regex::perl}, "–")));
+                         std::regex_replace(additional, std::regex{"\n+"}, "–"),
+                         std::regex_replace(content,    std::regex{"\n+"}, "–")));
 
   m->local_blocks.clear();
   m->current_block.clear();
@@ -175,12 +176,12 @@ webvtt_parser_c::get_total_number_of_bytes()
 std::string
 webvtt_parser_c::adjust_embedded_timestamps(std::string const &text,
                                             timestamp_c const &offset) {
-  static boost::regex s_embedded_timestamp_re;
+  static std::optional<std::regex> s_embedded_timestamp_re;
 
-  if (s_embedded_timestamp_re.empty())
-    s_embedded_timestamp_re = boost::regex{"<" RE_TIMESTAMP ">", boost::regex::perl};
+  if (!s_embedded_timestamp_re)
+    s_embedded_timestamp_re = std::regex{"<" RE_TIMESTAMP ">"};
 
-  return boost::regex_replace(text, s_embedded_timestamp_re, [&offset](boost::smatch const &match) -> std::string {
+  return mtx::regex::replace(text, *s_embedded_timestamp_re, [&offset](std::smatch const &match) -> std::string {
     timestamp_c timestamp;
     parse_timestamp(match[1].str(), timestamp);
     return fmt::format("<{0}>", format_timestamp(timestamp + offset, 3));

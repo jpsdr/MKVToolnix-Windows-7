@@ -162,7 +162,6 @@ class Target
       when :iconv            then c(:ICONV_LIBS)
       when :intl             then c(:LIBINTL_LIBS)
       when :cmark            then c(:CMARK_LIBS)
-      when :boost_regex      then c(:BOOST_REGEX_LIB)
       when :boost_filesystem then c(:BOOST_FILESYSTEM_LIB)
       when :boost_system     then c(:BOOST_SYSTEM_LIB)
       when :pugixml          then c?(:PUGIXML_INTERNAL) ? [ '-Llib/pugixml/src', '-lpugixml' ] : c(:PUGIXML_LIBS)

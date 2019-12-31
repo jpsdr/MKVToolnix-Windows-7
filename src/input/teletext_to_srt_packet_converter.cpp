@@ -23,7 +23,7 @@ auto s_merge_allowed_within = timestamp_c::ms(40);
 
 std::string
 displayable_packet_content(memory_c const &mem) {
-  return boost::regex_replace(mem.to_string(), boost::regex{"\\n", boost::regex::perl}, "\\\\n");
+  return std::regex_replace(mem.to_string(), std::regex{"\\n"}, "\\n");
 }
 }
 
@@ -119,9 +119,9 @@ teletext_to_srt_packet_converter_c::teletext_to_srt_packet_converter_c()
   , m_pos{}
   , m_data_length{}
   , m_buf{}
-  , m_page_re1{" *\\n[ \\n]+",      boost::regex::perl}
-  , m_page_re2{" +",                boost::regex::perl}
-  , m_page_re3{"^[ \\n]+|[ \\n]+$", boost::regex::perl}
+  , m_page_re1{" *\\n[ \\n]+"}
+  , m_page_re2{" +"}
+  , m_page_re3{"^[ \\n]+|[ \\n]+$"}
   , m_debug{           "teletext_to_srt_all|teletext_to_srt"}
   , m_debug_packet{    "teletext_to_srt_all|teletext_to_srt_packet"}
   , m_debug_conversion{"teletext_to_srt_all|teletext_to_srt_conversion"}
@@ -480,7 +480,7 @@ teletext_to_srt_packet_converter_c::page_to_string()
   const {
   auto content = boost::join(m_current_track->m_page_data.page_buffer, "\n");
 
-  return boost::regex_replace(boost::regex_replace(boost::regex_replace(content, m_page_re1, "\\n"), m_page_re2, " "), m_page_re3, "", boost::match_single_line);
+  return std::regex_replace(std::regex_replace(std::regex_replace(content, m_page_re1, "\n"), m_page_re2, " "), m_page_re3, "");
 }
 
 bool

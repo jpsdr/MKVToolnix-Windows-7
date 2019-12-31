@@ -95,8 +95,8 @@ parse_disc_library_file(std::string const &file_name) {
 
 static void
 parse_track_chapter_names_file(std::string const &file_name) {
-  boost::smatch matches;
-  if (!boost::regex_search(file_name, matches, boost::regex{"tnmt_[a-z]{3}_(.{5})\\.xml$", boost::regex::perl}))
+  std::smatch matches;
+  if (!std::regex_search(file_name, matches, std::regex{"tnmt_[a-z]{3}_(.{5})\\.xml$"}))
     mxerror("Could not parse tnmt file name.\n");
 
   auto names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(file_name, matches[1].str());
@@ -108,19 +108,19 @@ parse_track_chapter_names_file(std::string const &file_name) {
 
 static void
 parse_file(std::string const &file_name) {
-  if (boost::regex_search(file_name, boost::regex{"\\.clpi$", boost::regex::perl}))
+  if (std::regex_search(file_name, std::regex{"\\.clpi$"}))
     parse_clpi_file(file_name);
 
-  else if (boost::regex_search(file_name, boost::regex{"\\.mpls$", boost::regex::perl}))
+  else if (std::regex_search(file_name, std::regex{"\\.mpls$"}))
     parse_mpls_file(file_name);
 
-  else if (boost::regex_search(file_name, boost::regex{"index\\.bdmv", boost::regex::perl}))
+  else if (std::regex_search(file_name, std::regex{"index\\.bdmv"}))
     parse_index_file(file_name);
 
-  else if (boost::regex_search(file_name, boost::regex{"bdmt_[a-z]{3}\\.xml$", boost::regex::perl}))
+  else if (std::regex_search(file_name, std::regex{"bdmt_[a-z]{3}\\.xml$"}))
     parse_disc_library_file(file_name);
 
-  else if (boost::regex_search(file_name, boost::regex{"tnmt_[a-z]{3}_.{5}\\.xml$", boost::regex::perl}))
+  else if (std::regex_search(file_name, std::regex{"tnmt_[a-z]{3}_.{5}\\.xml$"}))
     parse_track_chapter_names_file(file_name);
 
   else

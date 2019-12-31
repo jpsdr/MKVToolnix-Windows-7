@@ -194,10 +194,10 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
   bfs::path first_file_name(bfs::system_complete(bfs::path(display_file_name)));
   std::string base_name = bfs::basename(first_file_name);
   std::string extension = balg::to_lower_copy(bfs::extension(first_file_name));
-  boost::regex file_name_re("(.+[_\\-])(\\d+)$", boost::regex::perl);
-  boost::smatch matches;
+  std::regex file_name_re("(.+[_\\-])(\\d+)$");
+  std::smatch matches;
 
-  if (!boost::regex_match(base_name, matches, file_name_re) || single_only) {
+  if (!std::regex_match(base_name, matches, file_name_re) || single_only) {
     std::vector<bfs::path> file_names;
     file_names.push_back(first_file_name);
     return mm_io_cptr(new mm_multi_file_io_c(file_names, display_file_name));
@@ -220,7 +220,7 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
     std::string stem   = bfs::basename(itr->path());
     int current_number = 0;
 
-    if (   !boost::regex_match(stem, matches, file_name_re)
+    if (   !std::regex_match(stem, matches, file_name_re)
         || !balg::iequals(matches[1].str(), base_name)
         || !parse_number(matches[2].str(), current_number)
         || (current_number <= start_number))

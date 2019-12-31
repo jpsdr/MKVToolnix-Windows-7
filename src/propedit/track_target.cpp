@@ -201,10 +201,10 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
 
 void
 track_target_c::parse_spec(std::string const &spec) {
-  static boost::regex track_re("^([absv=@]?)(\\d+)", boost::regex::perl);
-  boost::smatch matches;
+  static std::regex track_re("^([absv=@]?)(\\d+)");
+  std::smatch matches;
 
-  if (!boost::regex_match(spec, matches, track_re))
+  if (!std::regex_match(spec, matches, track_re))
     throw false;
 
   std::string prefix = matches[1].str();

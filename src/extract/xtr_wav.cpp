@@ -39,7 +39,7 @@ xtr_wav_c::create_file(xtr_base_c *master,
                        libmatroska::KaxTrackEntry &track) {
   init_content_decoder(track);
 
-  m_w64_requested = boost::regex_search(get_file_name().string(), boost::regex{"\\.[wW]64$", boost::regex::perl});
+  m_w64_requested = std::regex_search(get_file_name().string(), std::regex{"\\.[wW]64$"});
   m_channels      = kt_get_a_channels(track);
   m_sfreq         = kt_get_a_sfreq(track);
   m_bps           = kt_get_a_bps(track);

@@ -39,10 +39,10 @@ timestamp_factory_c::create(std::string const &file_name,
   int version = -1;
   bool ok     = in->getline2(line);
   if (ok) {
-    auto format_line_re = boost::regex{"^# *time(?:code|stamp) *format v(\\d+).*", boost::regex::perl};
-    boost::smatch matches;
+    auto format_line_re = std::regex{"^# *time(?:code|stamp) *format v(\\d+).*"};
+    std::smatch matches;
 
-    if (boost::regex_search(line, matches, format_line_re))
+    if (std::regex_search(line, matches, format_line_re))
       ok = parse_number(matches[1].str(), version);
     else
       ok = false;

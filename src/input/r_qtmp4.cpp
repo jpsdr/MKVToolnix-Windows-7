@@ -1084,7 +1084,7 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
 void
 qtmp4_reader_c::parse_itunsmpb(std::string data) {
-  data = boost::regex_replace(data, boost::regex("[^\\da-fA-F]+", boost::regex::perl), "");
+  data = std::regex_replace(data, std::regex("[^0-9da-fA-F]+"), "");
 
   if (16 > data.length())
     return;

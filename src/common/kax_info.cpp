@@ -92,7 +92,7 @@ std::string
 normalize_fmt_double_output(double value) {
   // Some fmt library versions output a trailing ".0" even if the
   // decimal part is zero, others don't. Normalize to not include it.
-  return boost::regex_replace(fmt::format("{}", value), boost::regex{"\\.0*$", boost::regex::perl}, "");
+  return std::regex_replace(fmt::format("{}", value), std::regex{"\\.0*$"}, "");
 }
 
 }
@@ -243,7 +243,7 @@ kax_info_c::show_element(EbmlElement *l,
 
 std::string
 kax_info_c::format_ebml_id_as_hex(uint32_t id) {
-  return boost::regex_replace(fmt::format("{0:08x}", id), boost::regex{"^0+", boost::regex::perl}, "");
+  return fmt::format("{0:x}", id);
 }
 
 std::string

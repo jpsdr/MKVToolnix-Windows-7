@@ -80,7 +80,7 @@ mpeg_ps_reader_c::read_headers() {
   try {
     uint8_t byte;
 
-    if (!m_ti.m_disable_multi_file && boost::regex_search(bfs::path{m_ti.m_fname}.filename().string(), boost::regex{"^vts_\\d+_\\d+", boost::regex::icase | boost::regex::perl})) {
+    if (!m_ti.m_disable_multi_file && std::regex_search(bfs::path{m_ti.m_fname}.filename().string(), std::regex{"^vts_\\d+_\\d+", std::regex_constants::icase})) {
       m_in.reset();               // Close the source file first before opening it a second time.
       m_in = mm_multi_file_io_c::open_multi(m_ti.m_fname, false);
     }

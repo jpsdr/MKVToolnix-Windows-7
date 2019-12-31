@@ -41,17 +41,17 @@ version_number_t::version_number_t(const std::string &s)
   // * Optional build number that can have two forms:
   //   - " build nnn"
   //   - "-buildYYYYMMDD-nnn" (date is ignored)
-  static boost::regex s_version_number_re("(?: mkv[a-z]+ \\s+ v)?"    // Optional prefix mkv... v
-                                          "( (?: \\d+\\. )* ) (\\d+)"    // An arbitrary number of digitss separated by dots; $1 & $2
-                                          "(?:"                          // Optional build number including its prefix
-                                          " (?: \\s* build \\s*"         //   Build number prefix: either " build " or...
-                                          "  |  - build \\d{8} - )"      //   ... "-buildYYYYMMDD-"
-                                          " (\\d+)"                      //   The build number itself; $3
-                                          ")?",
-                                          boost::regex::perl | boost::regex::mod_x);
+  static std::regex s_version_number_re("(?:mkv[a-z]+\\s+v)?"  // Optional prefix mkv... v
+                                        "((?:\\d+\\.)*)(\\d+)" // An arbitrary number of digitss separated by dots; $1 & $2
+                                        "(?:"                  // Optional build number including its prefix
+                                          "(?:\\s*build\\s*"   //   Build number prefix: either " build " or...
+                                          "|-build\\d{8}-)"    //   ... "-buildYYYYMMDD-"
+                                          "(\\d+)"             //   The build number itself; $3
+                                        ")?"
+                                        );
 
-  boost::smatch matches;
-  if (!boost::regex_match(s, matches, s_version_number_re))
+  std::smatch matches;
+  if (!std::regex_match(s, matches, s_version_number_re))
     return;
 
   valid          = true;

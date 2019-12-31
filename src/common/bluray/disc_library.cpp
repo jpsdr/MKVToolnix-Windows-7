@@ -45,7 +45,7 @@ parse_bdmt_xml(bfs::path const &file_name) {
 
     info.m_title = root_node.child("di:discinfo").child("di:title").child("di:name").child_value();
 
-    boost::regex size_re{"([0-9]+)x([0-9]+)", boost::regex::perl};
+    std::regex size_re{"([0-9]+)x([0-9]+)"};
 
     for (auto node = root_node.child("di:discinfo").child("di:description").child("di:thumbnail"); node; node = node.next_sibling("di:thumbnail")) {
       thumbnail_t thumbnail;
@@ -57,9 +57,9 @@ parse_bdmt_xml(bfs::path const &file_name) {
       if (thumbnail.m_file_name.is_relative())
         thumbnail.m_file_name = (bfs::absolute(file_name).parent_path() / thumbnail.m_file_name).lexically_normal();
 
-      boost::smatch matches;
+      std::smatch matches;
 
-      if (   boost::regex_match(size, matches, size_re)
+      if (   std::regex_match(size, matches, size_re)
           && parse_number(matches[1].str(), thumbnail.m_width)
           && parse_number(matches[2].str(), thumbnail.m_height))
         ok = true;
@@ -135,13 +135,14 @@ locate_and_parse(bfs::path const &location) {
 
   mxdebug_if(debug, fmt::format("found DL directory at {}\n", disc_library_dir));
 
-  boost::regex bdmt_re{"bdmt_([a-z]{3})\\.xml", boost::regex::perl};
-  boost::smatch matches;
+  std::regex bdmt_re{"bdmt_([a-z]{3})\\.xml"};
+  std::smatch matches;
 
   disc_library_t lib;
 
   for (bfs::directory_iterator dir_itr{disc_library_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
-    if (!boost::regex_match(dir_itr->path().filename().string(), matches, bdmt_re))
+    auto other_file_name = dir_itr->path().filename().string();
+    if (!std::regex_match(other_file_name, matches, bdmt_re))
       continue;
 
     auto language = matches[1].str();

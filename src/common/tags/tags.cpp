@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <set>
+
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/strings/editing.h"
@@ -365,7 +367,7 @@ remove_track_statistics(KaxTags *tags,
       if (simple_tag_name != "_STATISTICS_TAGS")
         continue;
 
-      auto all_to_discard = split(mtx::tags::get_simple_value(*simple_tag), boost::regex{"\\s+", boost::regex::perl});
+      auto all_to_discard = split(mtx::tags::get_simple_value(*simple_tag), std::regex{"\\s+"});
       for (auto const &to_discard : all_to_discard)
         tags_to_discard.insert(to_discard);
     }

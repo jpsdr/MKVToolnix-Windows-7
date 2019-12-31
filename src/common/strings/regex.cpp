@@ -6,17 +6,21 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   helper functions for WebM
+   regular expression helper functions
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
 #include "common/common_pch.h"
 
-#include "common/webm.h"
+#include "common/strings/regex.h"
 
-bool
-is_webm_file_name(const std::string &file_name) {
-  static std::regex s_webm_file_name_re("\\.webm[av]?$");
-  return std::regex_search(file_name, s_webm_file_name_re);
+namespace mtx::regex {
+
+std::string
+escape(std::string const &s) {
+  std::regex re{R"(([\^$\\.*+?(){}\[\]|]))"};
+  return std::regex_replace(s, re, R"(\$1)");
+}
+
 }

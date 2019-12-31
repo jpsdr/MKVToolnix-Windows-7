@@ -1039,8 +1039,8 @@ static void
 parse_arg_split_timestamps(const std::string &arg) {
   std::string s = arg;
 
-  if (boost::regex_search(s, boost::regex{"^time(?:stamps|codes):", boost::regex::icase | boost::regex::perl}))
-    s = boost::regex_replace(s, boost::regex{"^.*?:", boost::regex::perl}, "");
+  if (std::regex_search(s, std::regex{"^time(?:stamps|codes):", std::regex_constants::icase}))
+    s = std::regex_replace(s, std::regex{"^.*?:"}, "");
 
   std::vector<std::string> timestamps = split(s, ",");
   for (auto &timestamp : timestamps) {
@@ -1178,7 +1178,7 @@ parse_arg_split(const std::string &arg) {
   else if (balg::istarts_with(s, "size:"))
     parse_arg_split_size(arg);
 
-  else if (boost::regex_search(s, boost::regex{"^time(?:stamps|codes):", boost::regex::icase | boost::regex::perl}))
+  else if (std::regex_search(s, std::regex{"^time(?:stamps|codes):", std::regex_constants::icase}))
     parse_arg_split_timestamps(arg);
 
   else if (balg::istarts_with(s, "parts:"))
@@ -1559,7 +1559,7 @@ parse_arg_default_duration(const std::string &s,
                         parts[1], fmt::format("--default-duration {0}", s)));
 
   ti.m_default_durations[id].first  = default_duration;
-  ti.m_default_durations[id].second = boost::regex_match(parts[1], boost::regex{".*i$"});
+  ti.m_default_durations[id].second = std::regex_match(parts[1], std::regex{".*i$"});
 }
 
 /** \brief Parse the argument for \c --nalu-size-length

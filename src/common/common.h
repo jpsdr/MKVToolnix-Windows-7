@@ -24,6 +24,7 @@
 #include <functional>
 #include <memory>
 #include <optional>
+#include <regex>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -60,7 +61,6 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/range/numeric.hpp>
 #include <boost/rational.hpp>
-#include <boost/regex.hpp>
 #include <boost/system/error_code.hpp>
 
 namespace balg  = boost::algorithm;

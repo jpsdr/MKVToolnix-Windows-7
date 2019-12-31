@@ -178,7 +178,7 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
 
   auto max_name_len = boost::accumulate(table, 0u, [](size_t a, const property_element_c &e) { return std::max(a, e.m_name.length()); });
 
-  static boost::regex s_newline_re("\\s*\\n\\s*", boost::regex::perl);
+  static std::regex s_newline_re("[ \\t]*\\n[ \\t]*");
   std::string indent_string = std::string(max_name_len, ' ') + " |    | ";
 
   mxinfo("\n");
@@ -188,7 +188,7 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
     auto name        = fmt::format("{0:<{1}} | {2:<2} |", property.m_name, max_name_len, ebml_type_map[property.m_type]);
     auto description = property.m_title.get_translated()
                      + ": "
-                     + boost::regex_replace(property.m_description.get_translated(), s_newline_re, " ",  boost::match_default | boost::match_single_line);
+                     + std::regex_replace(property.m_description.get_translated(), s_newline_re, " ");
     mxinfo(format_paragraph(description, max_name_len + 8, name, indent_string));
   }
 }

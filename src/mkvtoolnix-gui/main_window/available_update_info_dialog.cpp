@@ -8,6 +8,7 @@
 
 #include "common/markdown.h"
 #include "common/qt.h"
+#include "common/strings/regex.h"
 #include "mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 
@@ -142,10 +143,10 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   auto html              = QStringList{};
   auto numReleasesOutput = 0;
   auto releases          = m_releasesInfo->select_nodes("/mkvtoolnix-releases/release[not(@version='HEAD')]");
-  auto reReleased        = boost::regex{"^released\\s+v?[\\d\\.]+", boost::regex::perl | boost::regex::icase};
-  auto reBug             = boost::regex{"(#\\d+)", boost::regex::perl | boost::regex::icase};
-  auto reNewlines        = boost::regex{"\r?\n", boost::regex::perl | boost::regex::icase};
-  auto bugFormatter      = [](boost::smatch const &matches) -> std::string {
+  auto reReleased        = std::regex{"^released\\s+v?[\\d\\.]+", std::regex_constants::icase};
+  auto reBug             = std::regex{"(#\\d+)", std::regex_constants::icase};
+  auto reNewlines        = std::regex{"\r?\n", std::regex_constants::icase};
+  auto bugFormatter      = [](std::smatch const &matches) -> std::string {
     auto number_str = matches[1].str().substr(1);
     return fmt::format("<a href=\"https://gitlab.com/mbunkus/mkvtoolnix/issues/{0}\">#{0}</a>", number_str);
   };
@@ -162,7 +163,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
 
     for (auto change = release.node().child("changes").first_child() ; change ; change = change.next_sibling()) {
       if (   (std::string{change.name()} != "change")
-          || boost::regex_search(change.child_value(), reReleased))
+          || std::regex_search(change.child_value(), reReleased))
         continue;
 
       auto typeQ = Q(change.attribute("type").value()).toHtmlEscaped();
@@ -182,7 +183,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
         html << Q("<p><ul>");
       }
 
-      auto text = boost::regex_replace(boost::regex_replace(mtx::markdown::to_html(change.child_value()), reBug,  bugFormatter), reNewlines, " ");
+      auto text = std::regex_replace(mtx::regex::replace(mtx::markdown::to_html(change.child_value()), reBug,  bugFormatter), reNewlines, " ");
       html     << Q("<li>%1</li>").arg(Q(text));
     }
 

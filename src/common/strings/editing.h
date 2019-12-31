@@ -15,6 +15,12 @@
 
 #include "common/common_pch.h"
 
+namespace mtx {
+
+std::string regex_escape(std::string const &s);
+
+}
+
 enum class line_ending_style_e {
   cr_lf,
   lf,
@@ -23,14 +29,8 @@ enum class line_ending_style_e {
 std::string normalize_line_endings(std::string const &str, line_ending_style_e line_ending_style = line_ending_style_e::lf);
 std::string chomp(std::string const &str);
 
-std::vector<std::string> split(std::string const &text, boost::regex const &pattern, size_t max = 0, boost::match_flag_type match_flags = boost::match_default);
-
-inline std::vector<std::string>
-split(std::string const &text,
-      std::string const &pattern = ",",
-      size_t max = 0) {
-  return ::split(text, boost::regex("\\Q"s + pattern, boost::regex::perl), max);
-}
+std::vector<std::string> split(std::string const &text, std::regex const &pattern, std::size_t max = 0);
+std::vector<std::string> split(std::string const &text, std::string const &pattern = ",", std::size_t max = 0);
 
 void strip(std::string &s, bool newlines = false);
 std::string strip_copy(std::string const &s, bool newlines = false);

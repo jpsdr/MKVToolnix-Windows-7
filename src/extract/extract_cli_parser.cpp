@@ -339,10 +339,10 @@ extract_cli_parser_c::add_extraction_spec() {
       && (options_c::em_attachments   != m_current_mode->m_extraction_mode))
     mxerror(fmt::format(Y("Unrecognized command line option '{0}'.\n"), m_current_arg));
 
-  boost::regex s_track_id_re("^(\\d+)(:(.+))?$", boost::regex::perl);
+  std::regex s_track_id_re("^(\\d+)(:(.+))?$");
 
-  boost::smatch matches;
-  if (!boost::regex_search(m_current_arg, matches, s_track_id_re)) {
+  std::smatch matches;
+  if (!std::regex_search(m_current_arg, matches, s_track_id_re)) {
     if (options_c::em_attachments == m_current_mode->m_extraction_mode)
       mxerror(fmt::format(Y("Invalid attachment ID/file name specification in argument '{0}'.\n"), m_current_arg));
     else

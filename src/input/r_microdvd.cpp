@@ -22,7 +22,7 @@
 
 void
 microdvd_reader_c::probe_file(mm_io_c &in) {
-  boost::regex re("^\\{\\d+?\\}\\{\\d+?\\}.+$", boost::regex::perl);
+  std::regex re("^\\{\\d+?\\}\\{\\d+?\\}.+$");
 
   std::string line;
   auto line_num = 0u;
@@ -37,6 +37,6 @@ microdvd_reader_c::probe_file(mm_io_c &in) {
     ++line_num;
   }
 
-  if (boost::regex_match(line, re))
+  if (std::regex_match(line, re))
     id_result_container_unsupported(in.get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::microdvd));
 }

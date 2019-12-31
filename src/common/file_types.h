@@ -15,6 +15,8 @@
 
 #include "common/common_pch.h"
 
+#include <set>
+
 #include "common/translation.h"
 
 namespace mtx {

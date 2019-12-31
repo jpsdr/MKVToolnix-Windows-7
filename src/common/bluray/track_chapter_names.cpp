@@ -74,14 +74,14 @@ locate_and_parse_for_title(bfs::path const &location,
 
   mxdebug_if(debug, fmt::format("found TN directory at {}\n", track_chapter_names_dir));
 
-  boost::regex tnmt_re{fmt::format("tnmt_([a-z]{{3}})_{}\\.xml", title_number), boost::regex::perl};
+  std::regex tnmt_re{fmt::format("tnmt_([a-z]{{3}})_{}\\.xml", title_number)};
 
   std::vector<chapter_names_t> chapter_names;
 
   for (bfs::directory_iterator dir_itr{track_chapter_names_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
-    boost::smatch matches;
+    std::smatch matches;
     auto entry_name = dir_itr->path().filename().string();
-    if (!boost::regex_match(entry_name, matches, tnmt_re))
+    if (!std::regex_match(entry_name, matches, tnmt_re))
       continue;
 
     auto language = matches[1].str();

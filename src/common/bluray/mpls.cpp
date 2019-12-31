@@ -489,8 +489,8 @@ parser_c::read_string(unsigned int length) {
 
 void
 parser_c::read_chapter_names(std::string const &base_file_name) {
-  boost::smatch matches;
-  if (!boost::regex_search(base_file_name, matches, boost::regex{"(.{5})\\.mpls$", boost::regex::perl}))
+  std::smatch matches;
+  if (!std::regex_search(base_file_name, matches, std::regex{"(.{5})\\.mpls$"}))
     return;
 
   auto all_names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(base_file_name, matches[1].str());

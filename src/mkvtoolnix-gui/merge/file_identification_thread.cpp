@@ -30,7 +30,7 @@ class FileIdentificationWorkerPrivate {
   QList<IdentificationPack> m_toIdentify;
   QMutex m_mutex;
   QAtomicInteger<bool> m_abortPlaylistScan;
-  boost::regex m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
+  std::regex m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
 
   explicit FileIdentificationWorkerPrivate()
   {
@@ -44,10 +44,10 @@ FileIdentificationWorker::FileIdentificationWorker(QObject *parent)
   , p_ptr{new FileIdentificationWorkerPrivate{}}
 {
   auto p                = p_func();
-  p->m_simpleChaptersRE = boost::regex{"^CHAPTER\\d{2}=.*CHAPTER\\d{2}NAME=",   boost::regex::perl | boost::regex::mod_s};
-  p->m_xmlChaptersRE    = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Chapters>", boost::regex::perl | boost::regex::mod_s};
-  p->m_xmlSegmentInfoRE = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Info>",     boost::regex::perl | boost::regex::mod_s};
-  p->m_xmlTagsRE        = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Tags>",     boost::regex::perl | boost::regex::mod_s};
+  p->m_simpleChaptersRE = std::regex{"^CHAPTER\\d{2}=[\\s\\S]*CHAPTER\\d{2}NAME="};
+  p->m_xmlChaptersRE    = std::regex{"<\\?xml[^>]+version[\\s\\S]*\\?>.*<Chapters>"};
+  p->m_xmlSegmentInfoRE = std::regex{"<\\?xml[^>]+version[\\s\\S]*\\?>.*<Info>"};
+  p->m_xmlTagsRE        = std::regex{"<\\?xml[^>]+version[\\s\\S]*\\?>.*<Tags>"};
 }
 
 FileIdentificationWorker::~FileIdentificationWorker() {
@@ -138,13 +138,13 @@ FileIdentificationWorker::handleFileThatShouldBeSelectedElsewhere(QString const 
 
   auto content = std::string{ file.read(1024).data() };
 
-  if (boost::regex_search(content, p->m_simpleChaptersRE) || boost::regex_search(content, p->m_xmlChaptersRE))
+  if (std::regex_search(content, p->m_simpleChaptersRE) || std::regex_search(content, p->m_xmlChaptersRE))
     emit identifiedAsXmlOrSimpleChapters(fileName);
 
-  else if (boost::regex_search(content, p->m_xmlSegmentInfoRE))
+  else if (std::regex_search(content, p->m_xmlSegmentInfoRE))
     emit identifiedAsXmlSegmentInfo(fileName);
 
-  else if (boost::regex_search(content, p->m_xmlTagsRE))
+  else if (std::regex_search(content, p->m_xmlTagsRE))
     emit identifiedAsXmlTags(fileName);
 
   else

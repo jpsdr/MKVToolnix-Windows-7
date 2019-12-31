@@ -71,15 +71,15 @@ load_file(std::string const &file_name,
     throw mtx::mm_io::end_of_file_x{};
 
   if (byte_order_mark_e::none == in.get_byte_order_mark()) {
-    boost::regex encoding_re("^ \\s* "              // ignore leading whitespace
-                             "<\\?xml"              // XML declaration start
-                             "[^\\?]+"              // skip to encoding, but don't go beyond XML declaration
-                             "encoding \\s* = \\s*" // encoding attribute
-                             "\" ( [^\"]+ ) \"",    // attribute value
-                             boost::regex::perl | boost::regex::mod_x | boost::regex::icase);
+    std::regex encoding_re("^\\s*"             // ignore leading whitespace
+                           "<\\?xml"           // XML declaration start
+                           "[^\\?]+?"          // skip to encoding, but don't go beyond XML declaration
+                           "encoding\\s*=\\s*" // encoding attribute
+                           "\"([^\"]+)\"",     // attribute value
+                           std::regex_constants::icase);
 
-    boost::smatch matches;
-    if (boost::regex_search(content, matches, encoding_re)) {
+    std::smatch matches;
+    if (std::regex_search(content, matches, encoding_re)) {
       // Extract the old encoding, replace the string with "UTF-8" so
       // that pugixml doesn't recode, and recode to UTF-8.
       auto encoding = matches[1].str();

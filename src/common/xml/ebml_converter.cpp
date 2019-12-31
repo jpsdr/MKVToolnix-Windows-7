@@ -264,8 +264,8 @@ ebml_converter_c::parse_binary(parser_context_t &ctx) {
     format = "base64";
 
   if (format == "hex") {
-    auto hex_content = boost::regex_replace(content, boost::regex{"(0x|\\s|\\r|\\n)+", boost::regex::perl | boost::regex::icase}, "");
-    if (boost::regex_search(hex_content, boost::regex{"[^\\da-f]", boost::regex::perl | boost::regex::icase}))
+    auto hex_content = std::regex_replace(content, std::regex{"(0x|\\s|\\r|\\n)+", std::regex_constants::icase}, "");
+    if (std::regex_search(hex_content, std::regex{"[^0-9a-f]", std::regex_constants::icase}))
       throw malformed_data_x{ ctx.name, ctx.node.offset_debug(), Y("Non-hex digits encountered.") };
 
     if ((hex_content.size() % 2) == 1)

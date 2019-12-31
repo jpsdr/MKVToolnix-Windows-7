@@ -99,12 +99,12 @@ parse_language(std::string key_language) {
   if (-1 != index)
     return g_iso639_languages[index].iso639_2_code;
 
-  boost::smatch matches;
-  if (   boost::regex_search(key_language, matches, boost::regex{".*\\[(.+?)\\]", boost::regex::perl})
+  std::smatch matches;
+  if (   std::regex_search(key_language, matches, std::regex{".*\\[(.+?)\\]"})
       && ((index = map_to_iso639_2_code(boost::to_lower_copy(matches[1].str()), true)) != -1))
     return g_iso639_languages[index].iso639_2_code;
 
-  if (   boost::regex_search(key_language, matches, boost::regex{".*\\((.+?)\\)", boost::regex::perl})
+  if (   std::regex_search(key_language, matches, std::regex{".*\\((.+?)\\)"})
       && ((index = map_to_iso639_2_code(boost::to_lower_copy(matches[1].str()), true)) != -1))
     return g_iso639_languages[index].iso639_2_code;
 
@@ -174,7 +174,7 @@ from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
     mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}={}\n", vorbis_full_key, elide_string(value, 40)));
 
     auto key_name_language                  = split(vorbis_full_key, "-", 2);
-    auto vorbis_key                         = boost::regex_replace(balg::to_upper_copy(key_name_language[0]), boost::regex{" +", boost::regex::perl}, "");
+    auto vorbis_key                         = std::regex_replace(balg::to_upper_copy(key_name_language[0]), std::regex{" +"}, "");
     auto const &[matroska_key, target_type] = s_vorbis_to_matroska[vorbis_key];
 
     if (vorbis_key == "TITLE") {
@@ -224,15 +224,15 @@ parse_vorbis_comments_from_packet(memory_c const &packet) {
       comments.m_type = vorbis_comments_t::type_e::Opus;
       offset          = 8;
 
-    } else if (boost::regex_search(header, boost::regex{"^.vorbis", boost::regex::perl})) {
+    } else if (std::regex_search(header, std::regex{"^.vorbis"})) {
       comments.m_type = vorbis_comments_t::type_e::Vorbis;
       offset          = 7;
 
-    } else if (boost::regex_search(header, boost::regex{"^OVP80", boost::regex::perl})) {
+    } else if (std::regex_search(header, std::regex{"^OVP80"})) {
       comments.m_type = vorbis_comments_t::type_e::VP8;
       offset          = 7;
 
-    // } else if (boost::regex_search(header, boost::regex{"^OVP90", boost::regex::perl})) {
+    // } else if (std::regex_search(header, std::regex{"^OVP90"})) {
     //   comments.m_type = vorbis_comments_t::type_e::VP9;
     //   offset          = 7;
 

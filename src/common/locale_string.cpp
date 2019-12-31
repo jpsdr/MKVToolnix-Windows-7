@@ -16,10 +16,10 @@
 #include "common/locale_string.h"
 
 locale_string_c::locale_string_c(std::string locale_string) {
-  boost::regex locale_re("^([[:alpha:]]+)?(_[[:alpha:]]+)?(\\.[^@]+)?(@.+)?", boost::regex::perl);
-  boost::smatch matches;
+  std::regex locale_re("^([[:alpha:]]+)?(_[[:alpha:]]+)?(\\.[^@]+)?(@.+)?");
+  std::smatch matches;
 
-  if (!boost::regex_match(locale_string, matches, locale_re))
+  if (!std::regex_match(locale_string, matches, locale_re))
     throw mtx::locale_string_format_x(locale_string);
 
   m_language  = matches[1].str();
@@ -60,4 +60,3 @@ locale_string_c::str(eval_type_e type) {
 
   return locale;
 }
-

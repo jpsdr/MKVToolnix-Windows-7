@@ -61,8 +61,8 @@ srt_parser_c::probe(mm_text_io_c &io) {
       return false;
 
     s = io.getline(100);
-    boost::regex timestamp_re(SRT_RE_TIMESTAMP_LINE, boost::regex::perl);
-    if (!boost::regex_search(s, timestamp_re))
+    std::regex timestamp_re(SRT_RE_TIMESTAMP_LINE);
+    if (!std::regex_search(s, timestamp_re))
       return false;
 
     s = io.getline();
@@ -87,9 +87,9 @@ srt_parser_c::srt_parser_c(mm_text_io_cptr const &io,
 
 void
 srt_parser_c::parse() {
-  boost::regex timestamp_re(SRT_RE_TIMESTAMP_LINE, boost::regex::perl);
-  boost::regex number_re("^\\d+$", boost::regex::perl);
-  boost::regex coordinates_re(SRT_RE_COORDINATES, boost::regex::perl);
+  std::regex timestamp_re(SRT_RE_TIMESTAMP_LINE);
+  std::regex number_re("^\\d+$");
+  std::regex coordinates_re(SRT_RE_COORDINATES);
 
   int64_t start                  = 0;
   int64_t end                    = 0;
@@ -126,7 +126,7 @@ srt_parser_c::parse() {
     }
 
     if (STATE_INITIAL == state) {
-      if (!boost::regex_match(s, number_re)) {
+      if (!std::regex_match(s, number_re)) {
         mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Error in line {0}: expected subtitle number and found some text.\n"), line_number));
         break;
       }
@@ -134,8 +134,8 @@ srt_parser_c::parse() {
       parse_number(s, subtitle_number);
 
     } else if (STATE_TIME == state) {
-      boost::smatch matches;
-      if (!boost::regex_search(s, matches, timestamp_re)) {
+      std::smatch matches;
+      if (!std::regex_search(s, matches, timestamp_re)) {
         mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"), line_number));
         break;
       }
@@ -165,7 +165,7 @@ srt_parser_c::parse() {
       int64_t s_neg = neg_calculator(1);
       int64_t e_neg = neg_calculator(9);
 
-      if (boost::regex_search(s, coordinates_re) && !m_coordinates_warning_shown) {
+      if (std::regex_search(s, coordinates_re) && !m_coordinates_warning_shown) {
         mxwarn_tid(m_file_name, m_tid,
                    Y("This file contains coordinates in the timestamp lines. "
                      "Such coordinates are not supported by the Matroska SRT subtitle format. "
@@ -225,7 +225,7 @@ srt_parser_c::parse() {
         subtitles += "\n";
       subtitles += s;
 
-    } else if (boost::regex_match(s, number_re)) {
+    } else if (std::regex_match(s, number_re)) {
       state = STATE_TIME;
       parse_number(s, subtitle_number);
 
@@ -248,9 +248,9 @@ srt_parser_c::parse() {
 
 bool
 ssa_parser_c::probe(mm_text_io_c &io) {
-  boost::regex script_info_re("^\\s*\\[script\\s+info\\]",   boost::regex::perl | boost::regex::icase);
-  boost::regex styles_re(     "^\\s*\\[V4\\+?\\s+Styles\\]", boost::regex::perl | boost::regex::icase);
-  boost::regex comment_re(    "^\\s*$|^\\s*[!;]",            boost::regex::perl | boost::regex::icase);
+  std::regex script_info_re("^\\s*\\[script\\s+info\\]",   std::regex_constants::icase);
+  std::regex styles_re(     "^\\s*\\[V4\\+?\\s+Styles\\]", std::regex_constants::icase);
+  std::regex comment_re(    "^\\s*$|^\\s*[!;]",            std::regex_constants::icase);
 
   try {
     int line_number = 0;
@@ -265,11 +265,11 @@ ssa_parser_c::probe(mm_text_io_c &io) {
         return false;
 
       // Skip comments and empty lines.
-      if (boost::regex_search(line, comment_re))
+      if (std::regex_search(line, comment_re))
         continue;
 
       // This is the line mkvmerge is looking for: positive match.
-      if (boost::regex_search(line, script_info_re) || boost::regex_search(line, styles_re))
+      if (std::regex_search(line, script_info_re) || std::regex_search(line, styles_re))
         return true;
 
       // Neither a wanted line nor an empty one/a comment: negative result.
@@ -309,12 +309,12 @@ ssa_parser_c::set_charset_converter(charset_converter_cptr const &cc_utf8) {
 
 void
 ssa_parser_c::parse() {
-  boost::regex sec_styles_ass_re("^\\s*\\[V4\\+\\s+Styles\\]", boost::regex::perl | boost::regex::icase);
-  boost::regex sec_styles_re(    "^\\s*\\[V4\\s+Styles\\]",    boost::regex::perl | boost::regex::icase);
-  boost::regex sec_info_re(      "^\\s*\\[Script\\s+Info\\]",  boost::regex::perl | boost::regex::icase);
-  boost::regex sec_events_re(    "^\\s*\\[Events\\]",          boost::regex::perl | boost::regex::icase);
-  boost::regex sec_graphics_re(  "^\\s*\\[Graphics\\]",        boost::regex::perl | boost::regex::icase);
-  boost::regex sec_fonts_re(     "^\\s*\\[Fonts\\]",           boost::regex::perl | boost::regex::icase);
+  std::regex sec_styles_ass_re("^\\s*\\[V4\\+\\s+Styles\\]", std::regex_constants::icase);
+  std::regex sec_styles_re(    "^\\s*\\[V4\\s+Styles\\]",    std::regex_constants::icase);
+  std::regex sec_info_re(      "^\\s*\\[Script\\s+Info\\]",  std::regex_constants::icase);
+  std::regex sec_events_re(    "^\\s*\\[Events\\]",          std::regex_constants::icase);
+  std::regex sec_graphics_re(  "^\\s*\\[Graphics\\]",        std::regex_constants::icase);
+  std::regex sec_fonts_re(     "^\\s*\\[Fonts\\]",           std::regex_constants::icase);
 
   int num                        = 0;
   ssa_section_e section          = SSA_SECTION_NONE;
@@ -336,24 +336,24 @@ ssa_parser_c::parse() {
     if (!strcasecmp(line.c_str(), "ScriptType: v4.00+"))
       m_is_ass = true;
 
-    else if (boost::regex_search(line, sec_styles_ass_re)) {
+    else if (std::regex_search(line, sec_styles_ass_re)) {
       m_is_ass = true;
       section  = SSA_SECTION_V4STYLES;
 
-    } else if (boost::regex_search(line, sec_styles_re))
+    } else if (std::regex_search(line, sec_styles_re))
       section = SSA_SECTION_V4STYLES;
 
-    else if (boost::regex_search(line, sec_info_re))
+    else if (std::regex_search(line, sec_info_re))
       section = SSA_SECTION_INFO;
 
-    else if (boost::regex_search(line, sec_events_re))
+    else if (std::regex_search(line, sec_events_re))
       section = SSA_SECTION_EVENTS;
 
-    else if (boost::regex_search(line, sec_graphics_re)) {
+    else if (std::regex_search(line, sec_graphics_re)) {
       section       = SSA_SECTION_GRAPHICS;
       add_to_global = false;
 
-    } else if (boost::regex_search(line, sec_fonts_re)) {
+    } else if (std::regex_search(line, sec_fonts_re)) {
       section       = SSA_SECTION_FONTS;
       add_to_global = false;
 

@@ -518,7 +518,7 @@ MainWindow::silentlyCheckForUpdates() {
 
 QString
 MainWindow::versionStringForSettings(version_number_t const &version) {
-  return Q("version_%1").arg(to_qs(boost::regex_replace(version.to_string(), boost::regex("[^\\d]+", boost::regex::perl), "_")));
+  return Q("version_%1").arg(to_qs(std::regex_replace(version.to_string(), std::regex{"[^0-9]+"}, "_")));
 }
 
 void

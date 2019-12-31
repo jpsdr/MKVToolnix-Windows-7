@@ -928,7 +928,7 @@ Settings::localeToUse(QString const &requestedLocale)
     locale = "";
 
   if (locale.empty()) {
-    locale = boost::regex_replace(translation_c::get_default_ui_locale(), boost::regex{"\\..*", boost::regex::perl}, "");
+    locale = std::regex_replace(translation_c::get_default_ui_locale(), std::regex{"\\..*"}, "");
     if (-1 == translation_c::look_up_translation(locale))
       locale = "";
   }

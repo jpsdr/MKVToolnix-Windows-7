@@ -229,21 +229,21 @@ parse_bool(std::string value) {
 bool
 parse_duration_number_with_unit(const std::string &s,
                                 int64_t &value) {
-  boost::regex re1("(-?\\d+\\.?\\d*)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
-  boost::regex re2("(-?\\d+)/(-?\\d+)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?", boost::regex::perl | boost::regex::icase);
+  std::regex re1("(-?\\d+\\.?\\d*)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?", std::regex_constants::icase);
+  std::regex re2("(-?\\d+)/(-?\\d+)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?", std::regex_constants::icase);
 
   std::string unit, s_n, s_d;
   int64_rational_c r{0, 1};
 
-  boost::smatch matches;
-  if (boost::regex_match(s, matches, re1)) {
+  std::smatch matches;
+  if (std::regex_match(s, matches, re1)) {
     if (!parse_number(matches[1], r))
       return false;
 
     if (matches.size() > 2)
       unit = matches[2];
 
-  } else if (boost::regex_match(s, matches, re2)) {
+  } else if (std::regex_match(s, matches, re2)) {
     int64_t n, d;
     if (!parse_number(matches[1], n) || !parse_number(matches[2], d))
       return false;

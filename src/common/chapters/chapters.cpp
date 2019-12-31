@@ -31,6 +31,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
+#include "common/strings/regex.h"
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_chapters_converter.h"
 
@@ -73,9 +74,9 @@ chapter_error(const std::string &error) {
 */
 bool
 probe_simple(mm_text_io_c *in) {
-  boost::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE, boost::regex::perl};
-  boost::regex name_line_re{     SIMCHAP_RE_NAME_LINE,      boost::regex::perl};
-  boost::smatch matches;
+  std::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
+  std::regex name_line_re{     SIMCHAP_RE_NAME_LINE};
+  std::smatch matches;
 
   std::string line;
 
@@ -87,7 +88,7 @@ probe_simple(mm_text_io_c *in) {
     if (line.empty())
       continue;
 
-    if (!boost::regex_search(line, timestamp_line_re))
+    if (!std::regex_search(line, timestamp_line_re))
       return false;
 
     while (in->getline2(line)) {
@@ -95,7 +96,7 @@ probe_simple(mm_text_io_c *in) {
       if (line.empty())
         continue;
 
-      return boost::regex_search(line, name_line_re);
+      return std::regex_search(line, name_line_re);
     }
 
     return false;
@@ -169,10 +170,10 @@ parse_simple(mm_text_io_c *in,
                            : !g_default_language.empty() ? g_default_language
                            :                                              "eng";
 
-  boost::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE, boost::regex::perl};
-  boost::regex timestamp_re{     SIMCHAP_RE_TIMESTAMP,      boost::regex::perl};
-  boost::regex name_line_re{     SIMCHAP_RE_NAME_LINE,      boost::regex::perl};
-  boost::smatch matches;
+  std::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
+  std::regex timestamp_re{     SIMCHAP_RE_TIMESTAMP};
+  std::regex name_line_re{     SIMCHAP_RE_NAME_LINE};
+  std::smatch matches;
 
   std::string line;
 
@@ -182,7 +183,7 @@ parse_simple(mm_text_io_c *in,
       continue;
 
     if (0 == mode) {
-      if (!boost::regex_match(line, matches, timestamp_line_re))
+      if (!std::regex_match(line, matches, timestamp_line_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
       int64_t hour = 0, minute = 0, second = 0, msecs = 0;
@@ -199,11 +200,11 @@ parse_simple(mm_text_io_c *in,
       start = msecs + second * 1000 + minute * 1000 * 60 + hour * 1000 * 60 * 60;
       mode  = 1;
 
-      if (!boost::regex_match(line, matches, timestamp_re))
+      if (!std::regex_match(line, matches, timestamp_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
     } else {
-      if (!boost::regex_match(line, matches, name_line_re))
+      if (!std::regex_match(line, matches, name_line_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxxNAME=... line."), line));
 
       std::string name = matches[1].str();
@@ -1092,13 +1093,13 @@ format_name_template(std::string const &name_template,
                      timestamp_c const &start_timestamp,
                      std::string const &appended_file_name) {
   auto name                 = name_template;
-  auto number_re            = boost::regex{"<NUM(?::(\\d+))?>"};
-  auto timestamp_re         = boost::regex{"<START(?::([^>]+))?>"};
-  auto file_name_re         = boost::regex{"<FILE_NAME>"};
-  auto file_name_ext_re     = boost::regex{"<FILE_NAME_WITH_EXT>"};
+  auto number_re            = std::regex{"<NUM(?::(\\d+))?>"};
+  auto timestamp_re         = std::regex{"<START(?::([^>]+))?>"};
+  auto file_name_re         = std::regex{"<FILE_NAME>"};
+  auto file_name_ext_re     = std::regex{"<FILE_NAME_WITH_EXT>"};
   auto appended_file_name_p = bfs::path{appended_file_name};
 
-  name = boost::regex_replace(name, number_re, [=](boost::smatch const &match) {
+  name = mtx::regex::replace(name, number_re, [=](std::smatch const &match) {
     auto number_str    = fmt::format("{0}", chapter_number);
     auto wanted_length = 1u;
 
@@ -1111,13 +1112,13 @@ format_name_template(std::string const &name_template,
     return number_str;
   });
 
-  name = boost::regex_replace(name, timestamp_re, [=](boost::smatch const &match) {
+  name = mtx::regex::replace(name, timestamp_re, [=](std::smatch const &match) {
     auto format = match[1].length() ? match[1] : "%H:%M:%S"s;
     return format_timestamp(start_timestamp.to_ns(), format);
   });
 
-  name = boost::regex_replace(name, file_name_re,     appended_file_name_p.stem().string());
-  name = boost::regex_replace(name, file_name_ext_re, appended_file_name_p.filename().string());
+  name = std::regex_replace(name, file_name_re,     appended_file_name_p.stem().string());
+  name = std::regex_replace(name, file_name_ext_re, appended_file_name_p.filename().string());
 
   return name;
 }

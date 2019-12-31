@@ -425,7 +425,7 @@ mm_io_c::write_bom(const std::string &charset_) {
   if (p->string_output_converter && !charset_converter_c::is_utf8_charset_name(p->string_output_converter->get_charset()))
     return false;
 
-  auto charset = boost::regex_replace(balg::to_lower_copy(charset_), boost::regex("[^a-z0-9]+", boost::regex::perl), "");
+  auto charset = std::regex_replace(balg::to_lower_copy(charset_), std::regex("[^a-z0-9]+"), "");
   if (charset == "utf8") {
     bom_len = 3;
     bom     = utf8_bom;

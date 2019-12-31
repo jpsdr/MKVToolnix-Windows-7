@@ -121,23 +121,23 @@ attachment_target_c::parse_spec(command_e command,
     return;
   }
 
-  boost::regex s_spec_re;
-  boost::smatch matches;
+  std::regex s_spec_re;
+  std::smatch matches;
   auto offset = 0u;
 
   if (ac_replace == m_command) {
-    // captures:                    1    2        3            4                    5         6
-    s_spec_re = boost::regex{"^ (?: (=)? (\\d+) : (.+) ) | (?: (name | mime-type) : ([^:]+) : (.+) ) $", boost::regex::perl | boost::regex::icase | boost::regex::mod_x};
+    // captures:                1   2      3        4                5       6
+    s_spec_re = std::regex{"^(?:(=)?(\\d+):(.+))|(?:(name|mime-type):([^:]+):(.+))$", std::regex_constants::icase};
     offset    = 1;
 
   } else if (mtx::included_in(m_command, ac_delete, ac_update))
-    // captures:                    1    2                     3                    4
-    s_spec_re = boost::regex{"^ (?: (=)? (\\d+)        ) | (?: (name | mime-type) : (.+) ) $",           boost::regex::perl | boost::regex::icase | boost::regex::mod_x};
+    // captures:                1   2          3                4
+    s_spec_re = std::regex{"^(?:(=)?(\\d+))|(?:(name|mime-type):(.+))$", std::regex_constants::icase};
 
   else
     assert(false);
 
-  if (!boost::regex_match(spec, matches, s_spec_re))
+  if (!std::regex_match(spec, matches, s_spec_re))
     throw std::invalid_argument{"generic format error"};
 
   if (matches[3 + offset].str().empty()) {

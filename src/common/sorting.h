@@ -94,19 +94,20 @@ template<typename StrT>
 class natural_string_c {
 private:
   StrT m_original;
-  std::vector<natural_element_c<std::wstring> > m_parts;
+  std::vector<natural_element_c<std::string> > m_parts;
 
 public:
   natural_string_c(StrT const &original)
     : m_original{original}
   {
-    static boost::wregex re(L"\\d+", boost::regex::icase | boost::regex::perl);
+    static std::regex re("\\d+");
 
-    std::wstring wide = to_wide(m_original);
-    boost::wsregex_token_iterator it(wide.begin(), wide.end(), re, std::vector<int>{ -1, 0 });
-    boost::wsregex_token_iterator end;
+    auto utf8 = to_utf8(m_original);
+
+    std::sregex_token_iterator it(utf8.begin(), utf8.end(), re, std::vector<int>{ -1, 0 });
+    std::sregex_token_iterator end;
     while (it != end)
-      m_parts.push_back(natural_element_c<std::wstring>{*it++});
+      m_parts.push_back(natural_element_c<std::string>{*it++});
   }
 
   StrT const &

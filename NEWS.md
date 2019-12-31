@@ -37,6 +37,7 @@
 ## Build system changes
 
 * `std::optional` (C++17 feature) is now used instead of `boost::optional`.
+* `std::regex` is now used instead of `boost::regex`.
 
 
 # Version 41.0.0 "Smarra" 2019-12-06

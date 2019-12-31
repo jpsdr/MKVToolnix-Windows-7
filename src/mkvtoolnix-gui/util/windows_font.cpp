@@ -61,11 +61,11 @@ defaultUiFont() {
     if (!SystemParametersInfoW(SPI_GETNONCLIENTMETRICS, size, &nonClientMetrics, 0))
       throw false;
 
-    s_font.reset(logFontToQFont(nonClientMetrics.lfMessageFont));
+    s_font = logFontToQFont(nonClientMetrics.lfMessageFont);
 
   } catch (bool) {
     qDebug() << "Windows default font query failed; returning application font";
-    s_font.reset(App::font());
+    s_font = App::font();
   }
 
   return *s_font;

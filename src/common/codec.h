@@ -175,7 +175,7 @@ private:
   static specialization_map_t ms_specialization_descriptions;
 
 protected:
-  boost::regex m_match_re;
+  std::regex m_match_re;
   std::string m_name;
   type_e m_type{type_e::UNKNOWN};
   specialization_e m_specialization{specialization_e::none};
@@ -189,7 +189,7 @@ public:
   }
 
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, uint16_t audio_format = 0u)
-    : m_match_re{fmt::format("(?:{0})", match_re), boost::regex::perl | boost::regex::icase}
+    : m_match_re{fmt::format("(?:{0})", match_re), std::regex_constants::icase}
     , m_name{name}
     , m_type{type}
     , m_track_type{p_track_type}
@@ -199,7 +199,7 @@ public:
   }
 
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, fourcc_c const &fourcc)
-    : m_match_re{fmt::format("(?:{0})", match_re), boost::regex::perl | boost::regex::icase}
+    : m_match_re{fmt::format("(?:{0})", match_re), std::regex_constants::icase}
     , m_name{name}
     , m_type{type}
     , m_track_type{p_track_type}
@@ -208,7 +208,7 @@ public:
   }
 
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<uint16_t> audio_formats)
-    : m_match_re{fmt::format("(?:{0})", match_re), boost::regex::perl | boost::regex::icase}
+    : m_match_re{fmt::format("(?:{0})", match_re), std::regex_constants::icase}
     , m_name{name}
     , m_type{type}
     , m_track_type{p_track_type}
@@ -217,7 +217,7 @@ public:
   }
 
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<fourcc_c> fourccs)
-    : m_match_re{fmt::format("(?:{0})", match_re), boost::regex::perl | boost::regex::icase}
+    : m_match_re{fmt::format("(?:{0})", match_re), std::regex_constants::icase}
     , m_name{name}
     , m_type{type}
     , m_track_type{p_track_type}

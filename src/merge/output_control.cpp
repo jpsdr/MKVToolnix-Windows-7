@@ -1168,7 +1168,7 @@ create_output_name() {
   }
 
   // Now search for something like %02d
-  auto converted = boost::regex_replace(s, boost::regex{"%(\\d+)d", boost::regex::perl}, "{0:\\1}");
+  auto converted = std::regex_replace(s, std::regex{"%(\\d+)d"}, "{0:$1}");
   if (converted != s)
     return fmt::format(converted, g_file_num);
 

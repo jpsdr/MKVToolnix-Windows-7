@@ -159,7 +159,7 @@ codec_c::look_up_object_type_id(unsigned int object_type_id) {
 bool
 codec_c::matches(std::string const &fourcc_or_codec_id)
   const {
-  if (boost::regex_match(fourcc_or_codec_id, m_match_re))
+  if (std::regex_match(fourcc_or_codec_id, m_match_re))
     return true;
 
   if (fourcc_or_codec_id.length() == 4)

@@ -1024,7 +1024,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
     // as both files contain chapters with the same UIDs and mkvmerge
     // thinks those should be merged. So ignore the chapter UIDs for
     // files that aren't created by known-good applications.
-    if (!boost::regex_search(m_writing_app, boost::regex{"^(?:mkvmerge|no_variable_data)", boost::regex::perl | boost::regex::icase}))
+    if (!std::regex_search(m_writing_app, std::regex{"^(?:mkvmerge|no_variable_data)", std::regex_constants::icase}))
       m_regenerate_chapter_uids = true;
   }
 

@@ -52,7 +52,7 @@ xtr_srt_c::handle_frame(xtr_frame_t &f) {
   m_entry.m_timestamp = f.timestamp;
   m_entry.m_duration  = f.duration;
   m_entry.m_text      = m_conv->native(f.frame->to_string());
-  m_entry.m_text      = strip_copy(boost::regex_replace(m_entry.m_text, boost::regex{"\r+", boost::regex::perl}, ""), true);
+  m_entry.m_text      = strip_copy(std::regex_replace(m_entry.m_text, std::regex{"\r+"}, ""), true);
 
   if (m_entry.m_duration && !m_entry.m_text.empty())
     flush_entry();
@@ -265,7 +265,7 @@ xtr_usf_c::xtr_usf_c(const std::string &codec_id,
   if (m_sub_charset.empty())
     m_sub_charset = "UTF-8";
 
-  m_simplified_sub_charset = boost::regex_replace(balg::to_lower_copy(m_sub_charset), boost::regex("[^a-z0-9]+", boost::regex::perl), "");
+  m_simplified_sub_charset = std::regex_replace(balg::to_lower_copy(m_sub_charset), std::regex("[^a-z0-9]+"), "");
 }
 
 void

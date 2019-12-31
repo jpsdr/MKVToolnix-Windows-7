@@ -11,13 +11,6 @@ if test x"$ax_cv_boost_filesystem" != "xyes"; then
   AC_MSG_ERROR(The Boost Filesystem Library was not found.)
 fi
 
-# boost::regex must be present.
-AX_BOOST_REGEX()
-
-if test x"$ax_cv_boost_regex" != "xyes"; then
-  AC_MSG_ERROR(The Boost Regex Library was not found.)
-fi
-
 if test x"$ax_cv_boost_system" != "xyes"; then
   AC_MSG_ERROR(The Boost System Library was not found.)
 fi

@@ -158,13 +158,13 @@ change_c::parse_binary() {
 
 void
 change_c::parse_date_time() {
-  //                 1          2          3                     4          5          6             7     8      9          10
-  boost::regex re{"^ (\\d{4}) - (\\d{2}) - (\\d{2}) (?: T | \\h) (\\d{2}) : (\\d{2}) : (\\d{2}) \\h* ( Z | ([+-]) (\\d{2}) : (\\d{2}) ) $", boost::regex::perl | boost::regex::mod_x};
-  boost::smatch matches;
+  //              1        2        3                4        5        6           7  8     9        10
+  std::regex re{"^(\\d{4})-(\\d{2})-(\\d{2})(?:T|\\s)(\\d{2}):(\\d{2}):(\\d{2})\\s*(Z|([+-])(\\d{2}):(\\d{2}))$", std::regex_constants::icase};
+  std::smatch matches;
   int64_t year, month, day, hours, minutes, seconds;
   int64_t offset_hours = 0, offset_minutes = 0, offset_mult = 1;
 
-  auto valid = boost::regex_match(m_value, matches, re);
+  auto valid = std::regex_match(m_value, matches, re);
 
   if (valid)
     valid = parse_number(matches[1].str(), year)
