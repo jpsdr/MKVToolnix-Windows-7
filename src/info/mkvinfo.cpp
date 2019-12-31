@@ -42,12 +42,13 @@ main(int argc,
   info.set_show_hexdump(options.m_show_hexdump);
   info.set_show_size(options.m_show_size);
   info.set_show_track_info(options.m_show_track_info);
-  info.set_hex_positions(options.m_hex_positions);
   info.set_hexdump_max_size(options.m_hexdump_max_size);
   info.set_verbosity(options.m_verbose);
 
-  if (options.m_hex_positions)
+  if (options.m_hex_positions) {
     info.set_show_positions(true);
+    info.set_hex_positions(*options.m_hex_positions);
+  }
 
   try {
     info.open_and_process_file(options.m_file_name);

@@ -20,6 +20,9 @@
 * mkvinfo: when the option `-p`/`--hex-positions` is used, element positions
   will be output regardless of the verbosity level. Part of the implementation
   of #2713.
+* mkvinfo: added the option `-P`/`--positions` for showing the position of
+  each element in decimal regardless of the verbosity level used. Part of the
+  implementation of #2713.
 
 ## Bug fixes
 

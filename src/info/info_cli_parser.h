@@ -35,5 +35,6 @@ protected:
   void set_size();
   void set_file_name();
   void set_track_info();
+  void set_dec_positions();
   void set_hex_positions();
 };
