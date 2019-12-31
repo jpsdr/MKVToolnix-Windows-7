@@ -37,13 +37,16 @@ main(int argc,
 
   mtx::kax_info_c info;
 
+  info.set_verbosity(options.m_verbose);
   info.set_calc_checksums(options.m_calc_checksums);
   info.set_show_summary(options.m_show_summary);
   info.set_show_hexdump(options.m_show_hexdump);
   info.set_show_size(options.m_show_size);
   info.set_show_track_info(options.m_show_track_info);
   info.set_hexdump_max_size(options.m_hexdump_max_size);
-  info.set_verbosity(options.m_verbose);
+
+  if (options.m_continue_at_cluster)
+    info.set_continue_at_cluster(true);
 
   if (options.m_hex_positions) {
     info.set_show_positions(true);

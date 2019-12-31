@@ -23,6 +23,9 @@
 * mkvinfo: added the option `-P`/`--positions` for showing the position of
   each element in decimal regardless of the verbosity level used. Part of the
   implementation of #2713.
+* mkvinfo: added the option `-o`/`--continue` for continuing processing when
+  the first cluster is encountered regardless of the verbosity level
+  used. Part of the implementation of #2713.
 
 ## Bug fixes
 

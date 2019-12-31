@@ -135,6 +135,11 @@ kax_info_c::set_calc_checksums(bool enable) {
 }
 
 void
+kax_info_c::set_continue_at_cluster(bool enable) {
+  p_func()->m_continue_at_cluster = enable;
+}
+
+void
 kax_info_c::set_show_summary(bool enable) {
   p_func()->m_show_summary = enable;
 }
@@ -171,7 +176,11 @@ kax_info_c::set_hexdump_max_size(int max_size) {
 
 void
 kax_info_c::set_verbosity(int verbosity) {
-  p_func()->m_verbose = verbosity;
+  auto p                   = p_func();
+
+  p->m_verbose             = verbosity;
+  p->m_show_positions      = 2 <= verbosity;
+  p->m_continue_at_cluster = 1 <= verbosity;
 }
 
 void
@@ -280,7 +289,7 @@ kax_info_c::create_element_text(const std::string &text,
 
   std::string additional_text;
 
-  if (position && ((1 < p->m_verbose) || p->m_show_positions))
+  if (position && p->m_show_positions)
     additional_text += fmt::format(p->m_hex_positions ? Y(" at 0x{0:x}") : Y(" at {0}"), *position);
 
   if (p->m_show_size && size) {
@@ -916,7 +925,7 @@ kax_info_c::post_block_group(EbmlElement &e) {
       frame_pos -= size;
 
     for (fidx = 0; fidx < p->m_frame_sizes.size(); fidx++) {
-      if (1 <= p->m_verbose) {
+      if (p->m_show_positions) {
         position   = fmt::format(p->m_hex_positions ? Y(", position 0x{0:x}") : Y(", position {0}"), frame_pos);
         frame_pos += p->m_frame_sizes[fidx];
       }
@@ -1042,7 +1051,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
     frame_pos = frames_start;
 
     for (int idx = 0; idx < num_frames; idx++) {
-      if (1 <= p->m_verbose) {
+      if (p->m_show_positions) {
         position   = fmt::format(p->m_hex_positions ? Y(", position 0x{0:x}") : Y(", position {0}"), frame_pos);
         frame_pos += p->m_frame_sizes[idx];
       }
@@ -1088,7 +1097,7 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   while ((l1 = kax_file->read_next_level1_element())) {
     retain_element(l1);
 
-    if (Is<KaxCluster>(*l1) && (p->m_verbose == 0) && !p->m_show_summary) {
+    if (Is<KaxCluster>(*l1) && !p->m_continue_at_cluster && !p->m_show_summary) {
       ui_show_element(*l1);
       return result_e::succeeded;
 
@@ -1241,7 +1250,7 @@ kax_info_c::process_file() {
 
     l0->SkipData(*p->m_es, EBML_CONTEXT(l0));
 
-    if ((p->m_verbose == 0) && !p->m_show_summary)
+    if (!p->m_continue_at_cluster && !p->m_show_summary)
       break;
   }
 

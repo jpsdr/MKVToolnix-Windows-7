@@ -52,7 +52,7 @@ public:
   int64_t m_num_references{}, m_lf_timestamp{}, m_lf_tnum{};
   std::optional<int64_t> m_block_duration;
 
-  bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_positions{}, m_show_track_info{}, m_hex_positions{}, m_retain_elements{};
+  bool m_use_gui{}, m_calc_checksums{}, m_show_summary{}, m_show_hexdump{}, m_show_size{}, m_show_positions{}, m_show_track_info{}, m_hex_positions{}, m_retain_elements{}, m_continue_at_cluster{};
   int m_hexdump_max_size{}, m_verbose{};
 
   bool m_abort{};

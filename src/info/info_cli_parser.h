@@ -29,6 +29,7 @@ protected:
 
   void set_checksum();
   void set_check_mode();
+  void set_continue_at_cluster();
   void set_summary();
   void set_hexdump();
   void set_full_hexdump();

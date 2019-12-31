@@ -55,6 +55,7 @@ public:
 
   void set_use_gui(bool enable);
   void set_calc_checksums(bool enable);
+  void set_continue_at_cluster(bool enable);
   void set_show_summary(bool enable);
   void set_show_hexdump(bool enable);
   void set_show_positions(bool enable);

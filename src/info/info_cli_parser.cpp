@@ -34,15 +34,16 @@ info_cli_parser_c::init_parser() {
 
   add_section_header(YT("Options"));
 
-  OPT("c|checksum",      set_checksum,      YT("Calculate and display checksums of frame contents."));
-  OPT("C|check-mode",    set_check_mode,    YT("Calculate and display checksums and use verbosity level 4."));
-  OPT("s|summary",       set_summary,       YT("Only show summaries of the contents, not each element."));
-  OPT("t|track-info",    set_track_info,    YT("Show statistics for each track in verbose mode."));
-  OPT("x|hexdump",       set_hexdump,       YT("Show the first 16 bytes of each frame as a hex dump."));
-  OPT("X|full-hexdump",  set_full_hexdump,  YT("Show all bytes of each frame as a hex dump."));
-  OPT("P|positions",     set_dec_positions, YT("Show the position of each element in decimal."));
-  OPT("p|hex-positions", set_hex_positions, YT("Show the position of each element in hexadecimal."));
-  OPT("z|size",          set_size,          YT("Show the size of each element including its header."));
+  OPT("c|checksum",      set_checksum,            YT("Calculate and display checksums of frame contents."));
+  OPT("C|check-mode",    set_check_mode,          YT("Calculate and display checksums and use verbosity level 4."));
+  OPT("o|continue",      set_continue_at_cluster, YT("Don't stop processing at the first cluster."));
+  OPT("P|positions",     set_dec_positions,       YT("Show the position of each element in decimal."));
+  OPT("p|hex-positions", set_hex_positions,       YT("Show the position of each element in hexadecimal."));
+  OPT("s|summary",       set_summary,             YT("Only show summaries of the contents, not each element."));
+  OPT("t|track-info",    set_track_info,          YT("Show statistics for each track in verbose mode."));
+  OPT("x|hexdump",       set_hexdump,             YT("Show the first 16 bytes of each frame as a hex dump."));
+  OPT("X|full-hexdump",  set_full_hexdump,        YT("Show all bytes of each frame as a hex dump."));
+  OPT("z|size",          set_size,                YT("Show the size of each element including its header."));
 
   add_common_options();
 
@@ -60,6 +61,11 @@ void
 info_cli_parser_c::set_check_mode() {
   m_options.m_calc_checksums = true;
   verbose                    = 4;
+}
+
+void
+info_cli_parser_c::set_continue_at_cluster() {
+  m_options.m_continue_at_cluster = true;
 }
 
 void
@@ -87,9 +93,8 @@ info_cli_parser_c::set_size() {
 
 void
 info_cli_parser_c::set_track_info() {
-  m_options.m_show_track_info = true;
-  if (0 == verbose)
-    verbose = 1;
+  m_options.m_show_track_info     = true;
+  m_options.m_continue_at_cluster = true;
 }
 
 void
