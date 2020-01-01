@@ -56,6 +56,11 @@
 * `std::optional` (C++17 feature) is now used instead of `boost::optional`.
 * `std::regex` is now used instead of `boost::regex`.
 
+## Other changes
+
+* New man page translations into French, Italian, Russian and Chinese
+  Traditional have been added.
+
 
 # Version 41.0.0 "Smarra" 2019-12-06
 
