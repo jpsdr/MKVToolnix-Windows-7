@@ -17,13 +17,6 @@
   <xsl:value-of select="if (not(@id)) then generate-id(title) else @id"/>
  </xsl:template>
 
- <!-- Enable this for marking elements that match the default rules -->
- <xsl:template match="*">
-  <xsl:text>(DEFAULT[</xsl:text><xsl:value-of select="name()"/><xsl:text>]::</xsl:text>
-  <xsl:apply-templates/>
-  <xsl:text>::DEFAULT)</xsl:text>
- </xsl:template>
-
  <xsl:template match="/">
   <xsl:apply-templates select="refentry"/>
  </xsl:template>
