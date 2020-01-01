@@ -502,6 +502,12 @@ end
 
 task :manpages => $manpages
 
+$po4a_output_filter = lambda do |code, lines|
+  lines = lines.reject { |l| %r{seems outdated.*differ between|please consider running po4a-updatepo|^$}i.match(l) }
+  puts lines.join('') unless lines.empty?
+  code
+end
+
 # Translations for the programs
 namespace :translations do
   desc "Create a template for translating the programs"
@@ -603,18 +609,12 @@ EOT
   task :qt => FileList[ "#{$source_dir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
   if c?(:PO4A_WORKS)
-    filter = lambda do |code, lines|
-      lines = lines.reject { |l| %r{seems outdated.*differ between|please consider running po4a-updatepo|^$}i.match(l) }
-      puts lines.join('') unless lines.empty?
-      code
-    end
-
     $available_languages[:manpages].each do |language|
       $manpages.each do |manpage|
         name = manpage.gsub(/man\//, "man/#{language}/")
         file name            => [ name.ext('xml'),     "doc/man/po4a/po/#{language}.po" ]
         file name.ext('xml') => [ manpage.ext('.xml'), "doc/man/po4a/po/#{language}.po" ] do |t|
-          runq "po4a", "#{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}", :filter_output => filter
+          runq "po4a", "#{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}", :filter_output => $po4a_output_filter
         end
       end
     end
@@ -750,15 +750,31 @@ end.flatten
 end
 
 namespace :man2html do
+  xsl_source_dir   = "doc/stylesheets"
+  docbook_html_xsl = FileList[ "#{xsl_source_dir}/*.xsl" ].map { |f| f.gsub(%r{.*/}, '') }
+
   ([ 'en' ] + $languages[:manpages]).collect do |language|
     namespace language do
       dir  = language == 'en' ? '' : "/#{language}"
       xml  = FileList[ "doc/man#{dir}/*.xml" ].to_a
       html = xml.map { |name| name.ext(".html") }
 
+      translated_xsls = docbook_html_xsl.map { |xsl| "doc/man#{dir}/#{xsl}" }
+      po_file         = language == 'en' ? nil : "doc/man/po4a/po/#{language}.po"
+
+      docbook_html_xsl.each do |xsl|
+        file "doc/man#{dir}/#{xsl}" => [ "#{xsl_source_dir}/#{xsl}", po_file ].compact do |t|
+          if language == 'en'
+            FileUtils.copy(t.prerequisites.first, t.name)
+          else
+            runq "po4a", "#{t.prerequisites.first} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{t.prerequisites.first} -p doc/man/po4a/po/#{language}.po -l #{t.name}", :filter_output => $po4a_output_filter
+          end
+        end
+      end
+
       xml.each do |name|
-        file name.ext('html') => name do
-          runq "saxon-he", name, "java -classpath lib/saxon-he/saxon9he.jar net.sf.saxon.Transform -o:#{name.ext('html')} -xsl:doc/stylesheets/docbook-to-html.xsl #{name}"
+        file name.ext('html') => ([ name ] + translated_xsls) do
+          runq "saxon-he", name, "java -classpath lib/saxon-he/saxon9he.jar net.sf.saxon.Transform -o:#{name.ext('html')} '-xsl:doc/man#{dir}/docbook-to-html.xsl' '#{name}'"
         end
 
         task File.basename(name, '.xml') => name.ext('html')
@@ -982,9 +998,11 @@ task :clean do
     **/manifest.xml
     doc/man/*.1
     doc/man/*.html
+    doc/man/*.xsl
     doc/man/*/*.1
     doc/man/*/*.html
     doc/man/*/*.xml
+    doc/man/*/*.xsl
     lib/libebml/ebml/ebml_export.h
     src/*/qt_resources.cpp
     src/info/ui/*.h
