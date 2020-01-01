@@ -3386,6 +3386,11 @@ qtmp4_demuxer_c::verify_alac_audio_parameters() {
     return false;
   }
 
+  auto codec_config = reinterpret_cast<mtx::alac::codec_config_t *>(stsd->get_buffer() + stsd_non_priv_struct_size + 12);
+  a_channels        = codec_config->num_channels;
+  a_bitdepth        = codec_config->bit_depth;
+  a_samplerate      = get_uint32_be(&codec_config->sample_rate);
+
   return true;
 }
 

@@ -31,6 +31,9 @@
   of the verbosity level used. Part of the implementation of #2713.
 * documentation: added (unfinished) translations of the man pages into French,
   Italian, Russian and Chinese (Traditional).
+* mkvmerge: MP4 reader: ALAC tracks: the number of channels, sampling
+  frequency and bit depth are now taken from the bitstream in order to fix
+  bogus values on the container level. Implements #2714.
 
 ## Bug fixes
 
