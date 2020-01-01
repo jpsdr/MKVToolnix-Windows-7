@@ -159,12 +159,16 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %{_datadir}/man/ca
 %{_datadir}/man/de
 %{_datadir}/man/es
+%{_datadir}/man/fr
+%{_datadir}/man/it
 %{_datadir}/man/ja
 %{_datadir}/man/ko
 %{_datadir}/man/nl
 %{_datadir}/man/pl
+%{_datadir}/man/ru
 %{_datadir}/man/uk
 %{_datadir}/man/zh_CN
+%{_datadir}/man/zh_TW
 %{_datadir}/mkvtoolnix
 
 %changelog -n mkvtoolnix

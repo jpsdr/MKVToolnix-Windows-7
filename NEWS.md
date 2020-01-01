@@ -29,6 +29,8 @@
 * mkvinfo: added the option `-a`/`--all` for outputting all sub-elements (even
   cues & seek head entries) and not stopping at the first cluster regardless
   of the verbosity level used. Part of the implementation of #2713.
+* documentation: added (unfinished) translations of the man pages into French,
+  Italian, Russian and Chinese (Traditional).
 
 ## Bug fixes
 
