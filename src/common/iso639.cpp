@@ -523,13 +523,17 @@ static std::unordered_map<std::string, std::string> s_deprecated_1_and_2_codes{
 std::vector<std::string> const g_popular_language_codes{
   // Derived from the list of spoken languages sorted by native speakers available at
   // https://en.wikipedia.org/wiki/List_of_languages_by_number_of_native_speakers
+  // A couple of languages not on that list have been added due to user request.
   "amh",
   "ara",
   "aze",
   "ben",
   "bho",
+  "bul",
   "bur",
   "ceb",
+  "dan",
+  "fin",
   "khm",
   "chi",
   "cze",
@@ -574,6 +578,7 @@ std::vector<std::string> const g_popular_language_codes{
   "spa",
   "srp",
   "sun",
+  "swe",
   "tam",
   "tel",
   "tha",
