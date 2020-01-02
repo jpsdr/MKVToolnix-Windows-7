@@ -2,21 +2,16 @@
 
 ## New features and enhancements
 
-* mkvmerge: Matroska reader: mkvmerge will remove the `icpf` atom headers if
-  they're present in frames read from Matroska files. Implements #2692.
-* MKVToolNix GUI: multiplexer: added an option in the preferences for
-  disabling adding cover images from Blu-ray discs. Implements #2693.
 * mkvmerge: added an option for creating byte-identical files:
   `--deterministic <seed>`. Part of the implementation of #2698.
-* MKVToolNix GUI: multiplexer: added mkvmerge's new `--deterministic` option
-  in the "additional command-line options" dialog. Part of the implementation
-  of #2698.
+* mkvmerge: Matroska reader: mkvmerge will remove the `icpf` atom headers if
+  they're present in frames read from Matroska files. Implements #2692.
+* mkvmerge: MP4 reader: ALAC tracks: the number of channels, sampling
+  frequency and bit depth are now taken from the bitstream in order to fix
+  bogus values on the container level. Implements #2714.
 * mkvpropedit: when changing track UIDs the referring elements in existing
   chapters & tags will be updated automatically, too. Part of the
   implementation of #2700.
-* MKVToolNix GUI: header editor:: when changing track UIDs the referring
-  elements in existing chapters & tags will be updated automatically,
-  too. Part of the implementation of #2700.
 * mkvinfo: when the option `-p`/`--hex-positions` is used, element positions
   will be output regardless of the verbosity level. Part of the implementation
   of #2713.
@@ -29,27 +24,30 @@
 * mkvinfo: added the option `-a`/`--all` for outputting all sub-elements (even
   cues & seek head entries) and not stopping at the first cluster regardless
   of the verbosity level used. Part of the implementation of #2713.
-* documentation: added (unfinished) translations of the man pages into French,
-  Italian, Russian and Chinese (Traditional).
-* mkvmerge: MP4 reader: ALAC tracks: the number of channels, sampling
-  frequency and bit depth are now taken from the bitstream in order to fix
-  bogus values on the container level. Implements #2714.
+* MKVToolNix GUI: multiplexer: added an option in the preferences for
+  disabling adding cover images from Blu-ray discs. Implements #2693.
+* MKVToolNix GUI: multiplexer: added mkvmerge's new `--deterministic` option
+  in the "additional command-line options" dialog. Part of the implementation
+  of #2698.
+* MKVToolNix GUI: header editor:: when changing track UIDs the referring
+  elements in existing chapters & tags will be updated automatically,
+  too. Part of the implementation of #2700.
 
 ## Bug fixes
 
-* mkvmerge: fixed a segmentation fault when trying to read a Matroska file
-  that uses header removal compression but no removed bytes are present in the
-  track headers. Fixes #2687.
+* mkvmerge: HEVC ES parser: fixed a bug in the slice parser calculating the
+  size of a field which in turn could have led to the slice's type being read
+  wrong. Patch by Torsten Hauska. Fixes #2710.
+* mkvmerge: Matroska reader: fixed a segmentation fault when trying to read a
+  file that uses header removal compression but no removed bytes are present
+  in the track headers. Fixes #2687.
+* mkvmerge: MPEG elementary stream parser: fixed an invalid memory access and
+  use of uninitialized memory that could happen under certain
+  circumstances. Fixes #2690.
 * mkvmerge: RealMedia reader: fixed a division by zero when all audio
   timestamps were zero. Fixes #2689.
 * mkvmerge: RealMedia reader: fixed an invalid memory access in the video
   frame assembly code triggered by invalid data in the file. Fixes #2691.
-* mkvmerge: MPEG elementary stream parser: fixed an invalid memory access and
-  use of uninitialized memory that could happen under certain
-  circumstances. Fixes #2690.
-* mkvmerge: HEVC ES parser: fixed a bug in the slice parser calculating the
-  size of a field which in turn could have led to the slice's type being read
-  wrong. Patch by Torsten Hauska. Fixes #2710.
 
 ## Build system changes
 
