@@ -270,8 +270,14 @@ es_parser_c::add_sps_and_pps_to_extra_data() {
     return (type == NALU_TYPE_SEQ_PARAM) || (type == NALU_TYPE_PIC_PARAM);
   });
 
-  brng::transform(m_sps_list, std::back_inserter(m_extra_data), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
-  brng::transform(m_pps_list, std::back_inserter(m_extra_data), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+  std::vector<memory_cptr> tmp;
+  tmp.reserve(m_extra_data.size() + m_sps_list.size() + m_pps_list.size());
+
+  brng::transform(m_sps_list, std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+  brng::transform(m_pps_list, std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+  tmp.insert(tmp.end(), m_extra_data.begin(), m_extra_data.end());
+
+  m_extra_data = std::move(tmp);
 }
 
 void

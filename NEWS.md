@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: AVC/h.264 parser: the order of the NALUs before each key frame was
+  sometimes wrong: mkvmerge wrote SPS & PPS after SEI NALUs. Now SPS & PPS
+  NALUs are always written before the other NALUs. Patch by Torsten
+  Hauska. Part of the implementation of #2709.
+
+
 # Version 42.0.0 "Overtime" 2020-01-02
 
 ## New features and enhancements
