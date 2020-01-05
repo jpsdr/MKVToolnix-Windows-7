@@ -344,7 +344,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     if (!si.field_pic_flag || !m_current_key_frame_bottom_field || (*m_current_key_frame_bottom_field == si.bottom_field_flag)) {
       cleanup();
 
-      if (m_sps_or_sps_overwritten)
+      if (m_avcc_changed)
         add_sps_and_pps_to_extra_data();
     }
 
@@ -385,17 +385,20 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   if (m_sps_info_list.size() == i) {
     m_sps_list.push_back(parsed_nalu);
     m_sps_info_list.push_back(sps_info);
-    m_avcc_changed = true;
+
+    if (m_avcc_ready)
+      m_avcc_changed = true;
 
   } else if (m_sps_info_list[i].checksum != sps_info.checksum) {
     mxdebug_if(m_debug_sps_pps_changes, fmt::format("mpeg4::p10: SPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", sps_info.id, m_sps_info_list[i].checksum, sps_info.checksum));
 
     cleanup();
 
-    m_sps_info_list[i]       = sps_info;
-    m_sps_list[i]            = parsed_nalu;
-    m_avcc_changed           = true;
-    m_sps_or_sps_overwritten = true;
+    m_sps_info_list[i] = sps_info;
+    m_sps_list[i]      = parsed_nalu;
+
+    if (m_avcc_ready)
+      m_avcc_changed = true;
 
   } else
     use_sps_info = false;
@@ -437,7 +440,9 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
   if (m_pps_info_list.size() == i) {
     m_pps_list.push_back(nalu);
     m_pps_info_list.push_back(pps_info);
-    m_avcc_changed = true;
+
+    if (m_avcc_ready)
+      m_avcc_changed = true;
 
   } else if (m_pps_info_list[i].checksum != pps_info.checksum) {
     mxdebug_if(m_debug_sps_pps_changes, fmt::format("mpeg4::p10: PPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", pps_info.id, m_pps_info_list[i].checksum, pps_info.checksum));
@@ -445,10 +450,11 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
     if (m_pps_info_list[i].sps_id != pps_info.sps_id)
       cleanup();
 
-    m_pps_info_list[i]       = pps_info;
-    m_pps_list[i]            = nalu;
-    m_avcc_changed           = true;
-    m_sps_or_sps_overwritten = true;
+    m_pps_info_list[i] = pps_info;
+    m_pps_list[i]      = nalu;
+
+    if (m_avcc_ready)
+      m_avcc_changed = true;
   }
 
   m_extra_data.push_back(create_nalu_with_size(nalu));

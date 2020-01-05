@@ -77,7 +77,7 @@ protected:
   int m_nalu_size_length;
 
   bool m_keep_ar_info, m_fix_bitstream_frame_rate;
-  bool m_avcc_ready, m_avcc_changed, m_sps_or_sps_overwritten{};
+  bool m_avcc_ready, m_avcc_changed;
 
   int64_t m_stream_default_duration, m_forced_default_duration, m_container_default_duration;
   int m_frame_number, m_num_skipped_frames;
