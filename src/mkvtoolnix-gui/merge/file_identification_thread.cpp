@@ -44,10 +44,10 @@ FileIdentificationWorker::FileIdentificationWorker(QObject *parent)
   , p_ptr{new FileIdentificationWorkerPrivate{}}
 {
   auto p                = p_func();
-  p->m_simpleChaptersRE = std::regex{"^CHAPTER\\d{2}=[\\s\\S]*CHAPTER\\d{2}NAME="};
-  p->m_xmlChaptersRE    = std::regex{"<\\?xml[^>]+version[\\s\\S]*\\?>.*<Chapters>"};
-  p->m_xmlSegmentInfoRE = std::regex{"<\\?xml[^>]+version[\\s\\S]*\\?>.*<Info>"};
-  p->m_xmlTagsRE        = std::regex{"<\\?xml[^>]+version[\\s\\S]*\\?>.*<Tags>"};
+  p->m_simpleChaptersRE = std::regex{R"(^CHAPTER\d{2}=[\s\S]*CHAPTER\d{2}NAME=)"};
+  p->m_xmlChaptersRE    = std::regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Chapters>)"};
+  p->m_xmlSegmentInfoRE = std::regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Info>)"};
+  p->m_xmlTagsRE        = std::regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Tags>)"};
 }
 
 FileIdentificationWorker::~FileIdentificationWorker() {

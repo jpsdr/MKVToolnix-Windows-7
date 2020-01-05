@@ -6,6 +6,10 @@
   sometimes wrong: mkvmerge wrote SPS & PPS after SEI NALUs. Now SPS & PPS
   NALUs are always written before the other NALUs. Patch by Torsten
   Hauska. Part of the implementation of #2709.
+* MKVToolNix GUI: multiplexer: dragging & dropping XML files with chapters or
+  tags to the GUI's window was broken in v42. Instead of adding the file names
+  to the appropriate input boxes the GUI was running mkvmerge for file
+  identification purposes which then failed. Fixes #2718.
 
 
 # Version 42.0.0 "Overtime" 2020-01-02
