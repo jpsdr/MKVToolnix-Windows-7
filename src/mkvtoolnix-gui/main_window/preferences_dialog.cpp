@@ -20,6 +20,7 @@
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
+#include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
@@ -544,7 +545,7 @@ void
 PreferencesDialog::setupCommonLanguages() {
   auto &allLanguages = App::iso639Languages();
 
-  ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), m_cfg.m_oftenUsedLanguages);
+  ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allLanguages)), m_cfg.m_oftenUsedLanguages);
   ui->cbOftenUsedLanguagesOnly->setChecked(m_cfg.m_oftenUsedLanguagesOnly && !m_cfg.m_oftenUsedLanguages.isEmpty());
   enableOftendUsedLanguagesOnly();
 }
@@ -553,14 +554,14 @@ void
 PreferencesDialog::setupCommonCountries() {
   auto &allCountries = App::topLevelDomainCountryCodes();
 
-  ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allCountries)), m_cfg.m_oftenUsedCountries);
+  ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allCountries)), m_cfg.m_oftenUsedCountries);
   ui->cbOftenUsedCountriesOnly->setChecked(m_cfg.m_oftenUsedCountriesOnly && !m_cfg.m_oftenUsedCountries.isEmpty());
   enableOftendUsedCountriesOnly();
 }
 
 void
 PreferencesDialog::setupCommonCharacterSets() {
-  ui->tbOftenUsedCharacterSets->setItems(QList<QString>::fromVector(QVector<QString>::fromStdVector(App::characterSets())), m_cfg.m_oftenUsedCharacterSets);
+  ui->tbOftenUsedCharacterSets->setItems(QList<QString>::fromVector(Util::stdVectorToQVector<QString>(App::characterSets())), m_cfg.m_oftenUsedCharacterSets);
   ui->cbOftenUsedCharacterSetsOnly->setChecked(m_cfg.m_oftenUsedCharacterSetsOnly && !m_cfg.m_oftenUsedCharacterSets.isEmpty());
   enableOftendUsedCharacterSetsOnly();
 }
@@ -650,7 +651,7 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
   ui->cbMEnableMuxingAllSubtitleTracks->setChecked(m_cfg.m_enableMuxingAllSubtitleTracks);
 
   auto &allLanguages = App::iso639Languages();
-  ui->tbMEnableMuxingTracksByLanguage->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), m_cfg.m_enableMuxingTracksByTheseLanguages);
+  ui->tbMEnableMuxingTracksByLanguage->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allLanguages)), m_cfg.m_enableMuxingTracksByTheseLanguages);
 }
 
 void
@@ -745,7 +746,7 @@ PreferencesDialog::setupDerivingTrackLanguagesFromFileName() {
 
   ui->leMDeriveTrackLanguageCustomRegex->setText(m_cfg.m_regexForDerivingTrackLanguagesFromFileNames);
 
-  ui->tbMDeriveTrackLanguageRecognizedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(App::iso639Languages())),
+  ui->tbMDeriveTrackLanguageRecognizedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(App::iso639Languages())),
                                                           m_cfg.m_recognizedTrackLanguagesInFileNames);
 }
 

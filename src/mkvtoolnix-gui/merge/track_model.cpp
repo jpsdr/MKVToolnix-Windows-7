@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
+#include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx::gui::Merge {
@@ -517,7 +518,7 @@ TrackModel::reDistributeAppendedTracksForFileRemoval(QSet<SourceFile *> const &f
   if (tracksToRedistribute.isEmpty())
     return;
 
-  removeTracks(tracksToRedistribute.toSet());
+  removeTracks(Util::qListToSet(tracksToRedistribute));
 
   Q_ASSERT(!m_tracks->isEmpty());
 

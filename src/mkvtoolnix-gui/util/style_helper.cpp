@@ -177,11 +177,8 @@ StyleHelper::verticalGradient(QPainter *painter,
                               QRect const &clipRect,
                               bool lightColored) {
   if (StyleHelper::usePixmapCache()) {
-    QString key;
     QColor keyColor = baseColor(lightColored);
-    key.sprintf("mh_vertical %d %d %d %d %d",
-                spanRect.width(), spanRect.height(), clipRect.width(),
-                clipRect.height(), keyColor.rgb());;
+    auto key = QString::fromUtf8("mh_vertical %1 %2 %3 %4 %5").arg(spanRect.width()).arg(spanRect.height()).arg(clipRect.width()).arg(clipRect.height()).arg(keyColor.rgb());
 
     QPixmap pixmap;
     if (!QPixmapCache::find(key, &pixmap)) {
@@ -240,11 +237,8 @@ StyleHelper::horizontalGradient(QPainter *painter,
                                 QRect const &clipRect,
                                 bool lightColored) {
   if (StyleHelper::usePixmapCache()) {
-    QString key;
     QColor keyColor = baseColor(lightColored);
-    key.sprintf("mh_horizontal %d %d %d %d %d %d",
-                spanRect.width(), spanRect.height(), clipRect.width(),
-                clipRect.height(), keyColor.rgb(), spanRect.x());
+    auto key = QString::fromUtf8("mh_horizontal %1 %2 %3 %4 %5 %6").arg(spanRect.width()).arg(spanRect.height()).arg(clipRect.width()).arg(clipRect.height()).arg(keyColor.rgb()).arg(spanRect.x());
 
     QPixmap pixmap;
     if (!QPixmapCache::find(key, &pixmap)) {
@@ -285,11 +279,7 @@ StyleHelper::drawArrow(QStyle::PrimitiveElement element,
   QRect r = option->rect;
   int size = qMin(r.height(), r.width());
   QPixmap pixmap;
-  QString pixmapName;
-  pixmapName.sprintf("arrow-%s-%d-%d-%d-%lld",
-                     "$qt_ia",
-                     uint(option->state), element,
-                     size, option->palette.cacheKey());
+  auto pixmapName = QString::fromUtf8("arrow-%1-%2-%3-%4-%5").arg("$qt_ia").arg(uint(option->state)).arg(element).arg(size).arg(option->palette.cacheKey());
   if (!QPixmapCache::find(pixmapName, &pixmap)) {
     int border = size/5;
     int sqsize = 2*(size/2);
@@ -359,11 +349,7 @@ StyleHelper::menuGradient(QPainter *painter,
                           QRect const &spanRect,
                           QRect const &clipRect) {
   if (StyleHelper::usePixmapCache()) {
-    QString key;
-    key.sprintf("mh_menu %d %d %d %d %d",
-                spanRect.width(), spanRect.height(), clipRect.width(),
-                clipRect.height(), StyleHelper::baseColor().rgb());
-
+    auto key = QString::fromUtf8("mh_menu %1 %2 %3 %4 %5").arg(spanRect.width()).arg(spanRect.height()).arg(clipRect.width()).arg(clipRect.height()).arg(StyleHelper::baseColor().rgb());
     QPixmap pixmap;
     if (!QPixmapCache::find(key, &pixmap)) {
       pixmap = QPixmap(clipRect.size());

@@ -17,8 +17,8 @@ Process::Process(QString const &command,
   , m_args{args}
   , m_hasError{}
 {
-  connect(&m_process, &QProcess::readyReadStandardOutput,                                        this, &Process::dataAvailable);
-  connect(&m_process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), this, &Process::onError);
+  connect(&m_process, &QProcess::readyReadStandardOutput, this, &Process::dataAvailable);
+  connect(&m_process, &QProcess::errorOccurred,           this, &Process::onError);
 }
 
 Process::~Process() {

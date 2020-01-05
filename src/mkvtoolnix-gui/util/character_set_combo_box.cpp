@@ -6,6 +6,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/character_set_combo_box.h"
+#include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -42,15 +43,15 @@ CharacterSetComboBox::setup(bool withEmpty,
   if (withEmpty)
     addItem(emptyTitle, Q(""));
 
-  auto commonCharacterSets = QStringList{ QStringList::fromVector(QVector<QString>::fromStdVector(App::commonCharacterSets())) };
+  auto commonCharacterSets = QStringList{ QStringList::fromVector(Util::stdVectorToQVector<QString>(App::commonCharacterSets())) };
 
   if (onlyOftenUsed) {
-    auto merged  = QSet<QString>::fromList(commonCharacterSets);
-    merged      += QSet<QString>::fromList(additionalItems());
+    auto merged  = Util::qListToSet(commonCharacterSets);
+    merged      += Util::qListToSet(additionalItems());
 
     merged.remove(QString{});
 
-    commonCharacterSets = QStringList{ merged.toList() };
+    commonCharacterSets = QStringList{ merged.values() };
     commonCharacterSets.sort();
   }
 

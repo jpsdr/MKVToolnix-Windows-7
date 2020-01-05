@@ -51,7 +51,7 @@ MuxJob::setupMuxJobConnections() {
 
   connect(&p->process, &QProcess::readyReadStandardOutput,                                              this, &MuxJob::readAvailable);
   connect(&p->process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &MuxJob::processFinished);
-  connect(&p->process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error),       this, &MuxJob::processError);
+  connect(&p->process, &QProcess::errorOccurred,                                                        this, &MuxJob::processError);
 }
 
 void

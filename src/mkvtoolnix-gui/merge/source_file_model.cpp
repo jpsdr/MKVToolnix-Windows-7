@@ -312,7 +312,7 @@ SourceFileModel::removeFile(SourceFile *fileToBeRemoved) {
 
 void
 SourceFileModel::removeFiles(QList<SourceFile *> const &files) {
-  auto filesToRemove  = files.toSet();
+  auto filesToRemove  = Util::qListToSet(files);
   auto tracksToRemove = QSet<Track *>{};
   auto attachedFiles  = QList<TrackPtr>{};
 

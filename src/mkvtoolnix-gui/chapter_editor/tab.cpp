@@ -2086,7 +2086,7 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
 
   collector(rootItem);
 
-  return names.toList();
+  return names.values();
 }
 
 QStringList
@@ -2120,7 +2120,7 @@ Tab::usedNameCountryCodes(QStandardItem *rootItem) {
 
   collector(rootItem);
 
-  return countryCodes.toList();
+  return countryCodes.values();
 }
 
 QHash<KaxChapterAtom *, ChapterAtomDataPtr>
