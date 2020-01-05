@@ -431,7 +431,7 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
 
     m_pps_info_list[i] = pps_info;
     m_pps_list[i]      = nalu;
-    m_hevcc_changed     = true;
+    m_hevcc_changed    = true;
   }
 
   m_extra_data.push_back(create_nalu_with_size(nalu));
